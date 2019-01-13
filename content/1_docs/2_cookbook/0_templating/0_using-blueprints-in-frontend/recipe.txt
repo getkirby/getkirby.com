@@ -127,7 +127,7 @@ return [
     }
   ]
 ```
-$occupation = isset($_GET['occupation']) ? $_GET['occupation'] : 'bricklayer';
+
 <info>
 Instead of adding a new option to the options array, you can use custom attributes anywhere in your blueprint. Just make sure they don't interfere with Kirby's default blueprint settings. To be on the safe side, you can prefix your custom options.
 </info>
