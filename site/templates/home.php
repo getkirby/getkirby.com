@@ -8,11 +8,15 @@
         <div class="home-hero-banner">
           <h1>Kirby is the content&nbsp;management system that adapts to your projects like no other</h1>
           <figure>
-            <?= $page->image('chameleon.jpg') ?>
+            <span class="intrinsic" style="padding-bottom: 96.82%">
+              <?= $page->image('chameleon.jpg') ?>
+            </span>
           </figure>
         </div>
         <figure class="home-hero-screenshot">
-          <?= $page->image('hero.jpg')->html(['alt' => 'Screenshot of Kirby\'s control panel']) ?>
+          <span class="intrinsic" style="padding-bottom: 45.39%">
+            <?= $page->image('hero.jpg')->html(['alt' => 'Screenshot of Kirby\'s control panel']) ?>
+          </span>
         </figure>
       </div>
     </header>
@@ -25,12 +29,12 @@
           and more into an amazing editing experience.
         </p>
         <figure>
-          <?= $page->image('components.jpg', ['alt' => 'Interface elements for Kirby\'s control panel']) ?>
+          <span class="intrinsic" style="padding-bottom: 59.12%">
+            <?= $page->image('components.jpg', ['alt' => 'Interface elements for Kirby\'s control panel']) ?>
+          </span>
         </figure>
       </div>
     </section>
-
-
 
     <!-- # Panel -->
     <section class="home-panel -background:light">
@@ -38,17 +42,19 @@
         <div class="home-panel-container">
           <div class="home-panel-gallery">
             <figure class="screenshot">
-              <img src="<?= $page->images()->filterBy('name', '*=', 'interface')->first()->crop(1400, 900, 'top')->url() ?>">
+              <span class="intrinsic" style="padding-bottom: 67%">
+                <?= $page->images()->filterBy('name', '*=', 'interface')->first() ?>
+              </span>
             </figure>
           </div>
 
           <ul class="home-panel-gallery-links">
             <?php $n = 0; foreach ($page->images()->filterBy('name', '*=', 'interface') as $image): $n++; ?>
             <li>
-              <a href="<?= $image->crop(1400, 900, 'top')->url() ?>"<?php e($n === 1, ' aria-current="item"') ?>>
+              <a href="<?= $image->url() ?>"<?php e($n === 1, ' aria-current="item"') ?>>
                 <figure>
-                  <span>
-                    <?= $image->crop(1400, 900, 'top') ?>
+                  <span class="intrinsic" style="padding-bottom: 67%">
+                    <?= $image ?>
                   </span>
                   <figcaption>
                     <h4 class="h6 -color:white"><?= $image->caption() ?></h4>
@@ -72,7 +78,7 @@
           <p class="description">…like this fantastic <a href="https://github.com/sylvainjule/kirby-matomo">Matomo plugin</a><br> by <a href="https://sylvain-jule.fr">Sylvain Julé</a> &rsaquo;</p>
         </header>
         <figure>
-          <a href="https://github.com/sylvainjule/kirby-matomo">
+          <a href="https://github.com/sylvainjule/kirby-matomo" class="intrinsic" style="padding-bottom: 126.89%">
             <?= $page->image('matomo.jpg')->html(['alt' => 'Screenshot of the Matomo plugin by Sylvain Julé']) ?>
           </a>
         </figure>
