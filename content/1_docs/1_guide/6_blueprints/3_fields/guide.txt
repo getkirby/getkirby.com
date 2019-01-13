@@ -15,3 +15,10 @@ Text:
 ## Custom fields
 
 You can extend this list with your own field types by creating a (link: docs/reference/extensions/fields text: field plugin).
+
+## Naming fields
+
+You can choose the names for your fields freely, but there are two limitations:
+
+1. You can only use alphanumeric characters and underscores in field names.
+2. If you use field names that are reserved by native Kirby methods, your field names will conflict. For example, if you give your field the name "image", it will conflict with Kirby's `$page->image()` method. You can still use this field name, but you will have to call such a field via the `$page->content()->image()` method. We recommend prefixing your field names instead.
