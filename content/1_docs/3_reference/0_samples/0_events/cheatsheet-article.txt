@@ -9,15 +9,39 @@ Excerpt: Announce your next get-togethers
 
 Text:
 
-<warning>This page is still in construction.</warning>
 
 ## Events overview
 
 ```yaml "/site/blueprints/pages/events.yml"
 title: Events
-icon: 🗓
+preset: pages
+icon: 📅
 
-…
+options:
+  url: false
+  status: false
+  delete: false
+
+drafts:
+  extends: sections/events
+  headline: Unpublished events
+
+unlisted:
+  extends: sections/events
+  headline: Unlisted events
+
+listed:
+  extends: sections/events
+  headline: Published events
+```
+
+### Predefined section for reusage
+
+```yaml "/site/blueprints/sections/events.yml"
+headline: Events
+sortBy: from asc
+template: event
+info: "{{ page.from.toDate('d.m.Y') }} - {{ page.to.toDate('d.m.Y') }} / {{ page.location }}"
 ```
 
 ### Result
@@ -29,9 +53,33 @@ icon: 🗓
 
 ```yaml "/site/blueprints/pages/event.yml"
 title: Event
-icon: 🎟
+preset: page
+pages: false
+icon: 📅
+num: "{{ page.from.toDate('Ymd') }}"
 
-…
+fields:
+  from:
+    label: Start
+    type: date
+    width: 1/2
+    default: today
+  to:
+    label: End
+    type: date
+    width: 1/2
+    default: today + 1day
+  location:
+    label: Location
+    type: text
+    width: 1/2
+  link:
+    label: Link
+    type: url
+    width: 1/2
+  text:
+    label: Description
+    type: textarea
 ```
 
 ### Result
