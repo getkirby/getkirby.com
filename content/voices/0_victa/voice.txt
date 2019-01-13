@@ -1,0 +1,7 @@
+Title: Victor Coulon
+----
+Username: _victa
+----
+Tweet: http://twitter.com/_victa/status/194006380921888768
+----
+Text: If you're looking for a powerful, easy to use and well documented CMS which works without DB (and efforts) : simply @getkirby

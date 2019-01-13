@@ -1,0 +1,7 @@
+Text:
+
+## Example
+
+```php
+<h1><?= $page->title()->lower() ?></h1>
+```

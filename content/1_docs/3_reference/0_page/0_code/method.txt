@@ -1,0 +1,40 @@
+Title: {{class.instance}}->code()
+
+----
+
+Excerpt:
+
+Returns a $files collection with all code files (css, js, html, etc.) in the page's directory
+
+----
+
+Return:
+
+type: $files
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php foreach($page->code()->filterBy('extension', 'css') as $css): ?>
+<?= css($css->url()) ?>
+<?php endforeach ?>
+```
+
+## What is a code file?
+
+Kirby considers the following file types as code: 
+
+- js
+- css
+- scss
+- rb
+- xml
+- json
+- java
+
+Any html or php files cannot be uploaded to pages for security reasons. 

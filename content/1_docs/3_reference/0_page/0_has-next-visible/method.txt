@@ -1,0 +1,47 @@
+Title:
+
+{{class.instance}}->hasNextVisible([$sort, $direction])
+
+----
+
+Excerpt:
+
+Checks if the page has a next visible sibling
+
+----
+
+Params: -
+  name: $sort
+  type: string
+  text: An optional sort field for the siblings
+-
+   name: $direction
+   type: string
+   text: An optional sort direction
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+echo $page->hasNextVisible(); //will echo 1 if true, nothing if false.
+?>
+```
+
+### Using sort field
+
+```php
+<?php
+echo $page->hasNextVisible('date', 'desc'); //will echo 1 if true, nothing if false.
+?>
+```

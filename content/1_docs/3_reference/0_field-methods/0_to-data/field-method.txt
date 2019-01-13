@@ -1,0 +1,12 @@
+Text:
+
+## Available methods
+
+split (`','`):
+: pass any separator to split the value by the given character (default)
+
+yaml:
+: parses the value as yaml
+
+json:
+: parses the value as json

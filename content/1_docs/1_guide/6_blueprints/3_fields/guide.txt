@@ -1,0 +1,17 @@
+Title: Fields
+
+----
+
+Intro: No matter if you use presets or create your own layouts, form fields are an essential part of the configuration and have very powerful options.
+
+----
+
+Text:
+
+## Available form fields
+
+(reference: fields)
+
+## Custom fields
+
+You can extend this list with your own field types by creating a (link: docs/reference/extensions/fields text: field plugin).

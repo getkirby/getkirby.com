@@ -1,0 +1,20 @@
+Title:
+
+{{class.instance}}->isVisible()
+
+----
+
+Excerpt:
+
+Checks if the page is visible
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:

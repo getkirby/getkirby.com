@@ -1,0 +1,15 @@
+Title: Roles
+
+----
+
+Text:
+
+## Role fields
+
+The following fields are available in the role model and can be fetched with the `select` parameter.
+
+(api-fields: role)
+
+## Available Endpoints
+
+(reference: api/roles)

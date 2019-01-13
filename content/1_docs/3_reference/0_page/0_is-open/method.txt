@@ -1,0 +1,36 @@
+Title:
+
+{{class.instance}}->isOpen()
+
+----
+
+Excerpt:
+
+Checks if the page is open. This means that it is either active or it is a direct or indirect parent of the currently active page.
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<nav role="navigation">
+  <ul>
+    <?php foreach($pages as $subpage): ?>
+    <li<?php e($subpage->isOpen(), ' class="active"') ?>>
+      <a href="<?= $subpage->url() ?>">
+        <?= html($subpage->title()) ?>
+      </a>
+    </li>
+    <?php endforeach ?>
+  </ul>
+</nav>
+```

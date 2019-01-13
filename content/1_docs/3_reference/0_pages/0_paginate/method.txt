@@ -1,0 +1,67 @@
+Title:
+
+{{class.instance}}->paginate($limit, $options = [])
+
+----
+
+Excerpt:
+
+Adds a $pagination object to the collection, that allows you to page through items
+
+----
+
+Params: -
+  name: $limit
+  type: int
+  text: Number of items per page
+-
+  name: $options
+  type: array
+  text: See below
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+
+## Example
+
+
+Show 10 items per page:
+
+```php
+$articles = $page->children()->paginate(10);
+```
+
+
+## Options:
+
+**variable**: default: "page".
+
+Change the name of the parameter variable, e.g. in a multi-lingual site. The following example will result in `/seite:n` for the German site and `/page:n` for the rest.
+
+```php
+$articles = $page->children()->paginate(20, [ 'variable' => $site->language()->code() == 'de' ? 'seite' : 'page' ]);
+```
+
+**method**: default: "param"
+
+**omitFirstPage**: default: true
+
+**page**: default: false
+
+**url**: default: null
+
+
+
+
+## Related
+
+Check out the (link: docs/reference#pagination text: docs for the $pagination object)

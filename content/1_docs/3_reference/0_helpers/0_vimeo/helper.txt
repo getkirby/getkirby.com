@@ -1,0 +1,41 @@
+Title: vimeo($url, $width = null, $height = null, $class = null)
+
+----
+
+Excerpt: Embeds a Vimeo video by URL in an iframe
+
+----
+
+Params: - 
+  name: $url
+  type: string
+  text:
+- 
+  name: $width
+  type: mixed
+  text:
+- 
+  name: $height
+  type: mixed
+  text:
+- 
+  name: $class
+  type: string
+  text:
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= vimeo('http://vimeo.com/106181453') ?>
+```

@@ -1,0 +1,20 @@
+Title:
+
+{{class.instance}}->isSite()
+
+----
+
+Excerpt:
+
+Checks if this site object is the main site
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:

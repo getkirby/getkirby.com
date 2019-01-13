@@ -1,0 +1,26 @@
+Title: Url
+
+----
+
+Excerpt: A URL input field with validation
+
+----
+
+Text:
+
+The url field is a standard text field with the type `url` and a custom URL icon. It comes with built-in validation for URLs.
+
+(screenshot: url.png)
+
+## Example
+
+```yaml
+fields:
+  url:
+    label: URL
+    type: url
+```
+
+## Options
+
+(field-options: url)

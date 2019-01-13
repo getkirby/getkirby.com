@@ -1,0 +1,13 @@
+
+Title: File blueprints
+
+----
+
+Excerpt: Common file blueprints
+
+----
+
+Text:
+
+<warning>This page is still in construction.</warning>
+

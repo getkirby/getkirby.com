@@ -1,0 +1,30 @@
+Title:
+
+$files->findBy($field, $value)
+
+----
+
+Excerpt:
+
+Finds a single file by key and value
+
+----
+
+Return:
+
+type: $file
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+
+<?php
+if($file = $page->files()->findBy('filename', 'myfile.jpg')) {
+  echo $file->url();
+?>
+```

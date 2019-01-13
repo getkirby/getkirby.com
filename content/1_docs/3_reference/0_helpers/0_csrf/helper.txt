@@ -1,0 +1,20 @@
+Text:
+
+## Examples
+
+### Token generation
+
+```php
+<input type="hidden" name="csrf" value="<?= csrf() ?>">
+```
+
+### Checking the token
+
+```php
+$token = get('csrf');
+if(csrf($token) === true) {
+  // Success
+} else {
+  // Token doesn't match
+}
+```

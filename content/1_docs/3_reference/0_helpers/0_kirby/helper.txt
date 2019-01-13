@@ -1,0 +1,22 @@
+Title: kirby()
+
+----
+
+Excerpt: Returns the Kirby object in any situation
+
+----
+
+Return:
+
+type: $kirby
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= kirby()->roots()->content() ?>
+```

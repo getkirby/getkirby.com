@@ -1,0 +1,45 @@
+Title: Introduction
+
+----
+
+Intro: Blueprints are configuration files written in YAML that help you to customize the Panel.
+
+----
+
+Text:
+
+## TL;DR
+
+- Blueprints are stored in `/site/blueprints`.
+- Blueprints configure the Panel layout of the site, pages, files and users.
+- Start simple with presets.
+- Create your own layouts with tabs, columns and sections.
+
+## Blueprint types
+
+The Panel layouts for  `site`, `pages`, `files` and `users` all get their own blueprints. The blueprint folder is structured accordingly:
+
+```filesystem
+/site/blueprints/site.yml
+/site/blueprints/files/
+/site/blueprints/pages/
+/site/blueprints/users/
+```
+
+(reference: blueprints)
+
+
+## Presets
+
+We added three useful presets (`page`, `pages` and `files`) to our blueprints that you can use to create single pages, blogs, galleries and more with almost zero configuration.
+
+(link: docs/guide/blueprints/presets text: Learn more about presets…)
+
+## Layout
+
+When presets are not enough, you can be the interface designer. You decide which features are needed for each type of page, file or user and how to arrange them in tabs, columns and sections.
+
+(image: tabs.png)
+
+(link: docs/guide/blueprints/layout text: Learn more about layouts…)
+

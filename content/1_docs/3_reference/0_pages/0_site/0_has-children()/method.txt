@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->hasChildren()
+
+----
+
+Excerpt:
+
+Checks if there are any children placed directly in /content
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```
+<?php if($site->hasChildren()): ?>
+There are children in /content.
+<?php endif ?>
+```

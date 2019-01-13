@@ -1,0 +1,12 @@
+Title: /users/:id/email
+----
+Info: PATCH
+----
+Excerpt: Change the email
+----
+Text:
+
+## Patch parameters
+
+(docs: api/user-email-data)
+

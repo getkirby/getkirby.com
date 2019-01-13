@@ -1,0 +1,66 @@
+Class: Kirby\Data\Data
+
+----
+Excerpt:
+
+The Data class provides readers and writers for data. The class comes with three handlers for `json`, `yaml` and `txt` encoded data, but can be extended and customized.
+
+----
+Text:
+
+
+## Example
+
+
+### Reading a `json` file
+
+```php
+dump($kirby->root('index') . '/composer.json'));
+
+/* result
+Array
+(
+    [name] => getkirby/starterkit
+    [description] => Kirby Starterkit
+    [type] => project
+    [keywords] => Array
+        (
+            [0] => kirby
+            [1] => cms
+            [2] => starterkit
+        )
+
+    [homepage] => https://getkirby.com
+    [authors] => Array
+        (
+            [0] => Array
+                (
+                    [name] => Bastian Allgeier
+                    [email] => bastian@getkirby.com
+                    [homepage] => https://getkirby.com
+                )
+
+        )
+
+    [support] => Array
+        (
+            [email] => support@getkirby.com
+            [issues] => https://github.com/getkirby/starterkit/issues
+            [forum] => https://forum.getkirby.com
+            [source] => https://github.com/getkirby/starterkit
+        )
+
+    [require] => Array
+        (
+            [php] => >=7.1.0
+            [getkirby/cms] => ^3.0
+        )
+
+    [config] => Array
+        (
+            [optimize-autoloader] => 1
+        )
+
+)
+*/
+```

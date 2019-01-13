@@ -1,0 +1,20 @@
+Title:
+
+$users->keys()
+
+----
+
+Excerpt:
+
+Returns all usernames/keys in the collection
+
+----
+
+Return:
+
+type: array
+text:
+
+----
+
+Text:

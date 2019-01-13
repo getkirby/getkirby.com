@@ -1,0 +1,29 @@
+Title:
+
+{{class.instance}}->equals($other)
+
+----
+
+Excerpt:
+
+Compares the page with another $page object and checks if they are the same
+
+----
+
+Params: -
+  name: $other
+  type: string | Page
+  text:
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+Alternative to  `$page->is()`.

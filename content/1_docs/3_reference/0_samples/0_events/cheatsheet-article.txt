@@ -1,0 +1,39 @@
+
+Title: Events
+
+----
+
+Excerpt: Announce your next get-togethers
+
+----
+
+Text:
+
+<warning>This page is still in construction.</warning>
+
+## Events overview
+
+```yaml "/site/blueprints/pages/events.yml"
+title: Events
+icon: 🗓
+
+…
+```
+
+### Result
+
+(screenshot: events.png)
+
+
+## Single event
+
+```yaml "/site/blueprints/pages/event.yml"
+title: Event
+icon: 🎟
+
+…
+```
+
+### Result
+
+(screenshot: event.png)

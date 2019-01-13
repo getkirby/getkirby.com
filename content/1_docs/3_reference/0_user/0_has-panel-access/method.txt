@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->hasPanelAccess()
+
+----
+
+Excerpt:
+
+Checks if the user is allowed to access the Panel based on the role.
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php if($user = $kirby->user() and $user->hasPanelAccess()): ?>
+This super secret content is only visible for users with Panel access
+<?php endif ?>
+```

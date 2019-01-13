@@ -1,0 +1,28 @@
+Title:
+
+$files->first()
+
+----
+
+Excerpt:
+
+Returns the first file in the collection
+
+----
+
+Return:
+
+type: $file
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php if($file = $page->files()->first()) {
+  echo $file->filename();
+} ?>
+```

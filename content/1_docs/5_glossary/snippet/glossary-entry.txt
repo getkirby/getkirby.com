@@ -1,0 +1,9 @@
+Title: Snippet
+
+----
+Entry:
+
+Snippets are blocks of code that can be reused anywhere in your code base. Snippets are stored in `/site/snippets`.
+
+----
+Link: docs/guide/templates/snippets

@@ -1,0 +1,10 @@
+Text:
+
+## Example
+
+```php
+<?php if ($page->address()->isNotEmpty()): ?>
+<h2>Address</h2>
+<?= $page->address()->kirbytext() ?>
+<?php endif ?>
+```

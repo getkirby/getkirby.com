@@ -1,0 +1,35 @@
+Title:
+
+$pagination->lastPageUrl()
+
+----
+
+Excerpt:
+
+Returns the absolute URL for the last page
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+$subpages   = $page->children()->paginate(10);
+$pagination = $subpages->pagination();
+?>
+
+<!-- foreach loop with subpages -->
+
+<a href="<?= $pagination->lastPageUrl() ?>">
+  Go to last page
+</a>
+```

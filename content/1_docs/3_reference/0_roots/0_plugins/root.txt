@@ -1,0 +1,5 @@
+Title: plugins
+
+----
+
+Excerpt: Returns the root of the plugins folder.

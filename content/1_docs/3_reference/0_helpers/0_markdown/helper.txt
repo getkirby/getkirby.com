@@ -1,0 +1,29 @@
+Title: markdown($text)
+
+----
+
+Excerpt: Parses the text as Markdown
+
+----
+
+Params: - 
+  name: $text
+  type: string
+  text:
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= markdown($page->text()) ?>
+```

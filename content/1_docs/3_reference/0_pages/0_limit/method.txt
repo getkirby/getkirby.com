@@ -1,0 +1,41 @@
+Title:
+
+{{class.instance}}->limit($limit)
+
+----
+
+Excerpt:
+
+Returns the collection with a limited amount of pages
+
+----
+Params: -
+  name: $limit
+  type: int
+  text: The number of items to be returned
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<h2>Latest subpages</h2>
+<ul>
+  <?php foreach($page->children()->limit(3) as $subpage): ?>
+  <li>
+    <a href="<?= $subpage->url() ?>">
+      <?= html($subpage->title()) ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

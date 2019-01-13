@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->hasCode()
+
+----
+
+Excerpt:
+
+Checks if there are any code files placed directly in /content
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```
+<?php if($site->hasCode()): ?>
+The /content folder contains code files.
+<?php endif ?>
+```

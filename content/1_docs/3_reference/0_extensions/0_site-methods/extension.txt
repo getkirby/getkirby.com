@@ -1,0 +1,54 @@
+Title: Site methods
+
+----
+
+Guide: templates/php-api#site
+
+----
+
+Text:
+
+Site methods are registered with the `siteMethods` extension.
+
+## Default site methods
+
+**For a full (link: docs/reference/#site text: list of default site methods), please check out the (link: docs/reference/#site text: Reference).**
+
+<info>Be aware that you cannot override these default site methods with any custom site method.</info>
+
+## Getting started
+
+You can extend the set of defined site methods very easily in a plugin file.
+
+```php "/site/plugins/site-methods/index.php"
+Kirby::plugin('my/plugin', [
+  'siteMethods' => [
+      'getSeoTitle' => function () {
+          return $this->seoTitle()->isNotEmpty()? $this->seoTitle() : $this->title();
+      }
+  ]
+]);
+```
+
+This example shows the basic architecture of a site method. You define the method name with the key for the `siteMethods` array. `$this` in the callback function is the `$site` object.
+
+## Working with method arguments
+
+In some cases it might be helpful to be able to pass arguments to the method:
+
+```php
+<?php dump($site->contact('Bastian Allgeier')) ?>
+```
+
+The definition for such a method with arguments is very straightforward:
+
+```php
+Kirby::plugin('my/plugin', [
+    'siteMethods' => [
+        'contact' => function ($name = '') {
+          $contact = $this->contacts()->toStructure()->findBy('name',$name);
+            return $contact;
+        }
+    ]
+]);
+```

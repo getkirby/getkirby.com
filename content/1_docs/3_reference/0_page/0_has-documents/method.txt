@@ -1,0 +1,55 @@
+Title:
+
+{{class.instance}}->hasDocuments()
+
+----
+
+Excerpt:
+
+Checks if there are any documents (pdf, doc, xls, etc.) in the page's directory
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+echo $page->hasDocuments(); //returns the number of documents in the folder
+
+if($page->hasDocuments()) {
+  $documents = $page->documents();
+}
+?>
+```
+
+## What is a document file?
+
+Kirby considers the following file types as document:
+
+- text
+- mdown
+- md
+- markdown
+- pdf
+- doc
+- docx
+- dotx
+- word
+- xl
+- xls
+- xlsx
+- xltx
+- ppt
+- pptx
+- csv
+- rtf
+- rtx

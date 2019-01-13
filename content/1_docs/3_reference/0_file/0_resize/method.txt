@@ -1,0 +1,19 @@
+Text:
+
+## Example
+
+```php
+if($image = $page->image()):
+    // resize by width and height and echo the url
+    echo $image->resize(300, 200);
+
+    // adjust the quality
+    echo $image->resize(300, 200, 80);
+
+    // resize by height
+    echo $image->resize(null, 200);
+
+    // resize by width
+    echo $image->resize(300);
+endif;
+```

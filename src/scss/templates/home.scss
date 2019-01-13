@@ -1,0 +1,47 @@
+@import "../includes";
+
+html {
+  background: #000;
+}
+
+main {
+  background: #fff;
+}
+
+.header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.home-page .h2 {
+  font-weight: 800;
+  line-height: 1.25em;
+  max-width: 20rem;
+}
+.home-page .h2 a {
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+
+@import "home/hero";
+@import "home/blueprints";
+@import "home/panel";
+@import "home/plugins";
+@import "home/highlights";
+@import "home/features";
+@import "home/voices";
+@import "home/actions";
+@import "home/kosmos";
+
+
+/* -----  Newsletter  ------------------------------------------------------------- */
+.footer {
+  background: #000 !important;
+}
+
+.footer-layout {
+  padding-top: 6rem;
+}

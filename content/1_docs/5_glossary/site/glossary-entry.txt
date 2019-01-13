@@ -1,0 +1,10 @@
+Title: Site
+
+----
+
+Entry:
+
+The `$site` object represents the root of your site with all the information stored in `/content/site.txt`. It is also the access point for registered users, available languages on multi-language sites and more.
+
+----
+Link: cheatsheet/site

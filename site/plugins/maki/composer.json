@@ -1,0 +1,9 @@
+{
+    "name": "kirby/maki",
+    "autoload": {
+        "psr-4": {
+            "Kirby\\Maki\\": "src/"
+        }
+    },
+    "require": {}
+}

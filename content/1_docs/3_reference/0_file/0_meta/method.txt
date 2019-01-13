@@ -1,0 +1,35 @@
+Title:
+
+{{class.instance}}->meta([$language])
+
+----
+
+Excerpt:
+
+Returns the file's $content object with data from the meta file
+
+----
+
+Params: -
+  name: $language
+  type: string
+  text: Language code
+
+----
+
+Return:
+
+type: $content
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($file = $page->file()) {
+    dump($file->meta());
+}
+```

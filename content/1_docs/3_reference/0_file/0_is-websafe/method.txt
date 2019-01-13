@@ -1,0 +1,32 @@
+Title:
+
+{{class.instance}}->isWebsafe()
+
+----
+
+Since:
+
+----
+
+Excerpt:
+
+Checks if the file is a jpg, png or gif
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php if($file = $page->file() && $file->isWebsafe()): ?>
+The file is either a jpg, png or gif
+<?php endif ?>
+```

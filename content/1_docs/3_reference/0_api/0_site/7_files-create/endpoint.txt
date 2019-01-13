@@ -1,0 +1,5 @@
+Title: /site/files
+----
+Info: POST
+----
+Excerpt: Upload a new file

@@ -1,0 +1,24 @@
+Title: {{class.instance}}->num()
+
+----
+
+Excerpt:
+
+Returns the sorting number
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $page->num() ?>
+```

@@ -1,0 +1,34 @@
+Title:
+
+{{class.instance}}->page($uri = null)
+
+----
+
+Excerpt:
+
+Returns a specific $page object by URI. If no URI is specified the currently active page will be returned.
+
+----
+
+Return:
+
+type: $page
+text:
+
+----
+
+Text:
+
+## Example
+
+### Fetching the current page
+
+```php
+<?= $site->page()->title() ?>
+```
+
+### Fetching any subpage
+
+```php
+<?= $site->page('some/sub/page/deep/down')->title() ?>
+```

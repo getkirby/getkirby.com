@@ -1,0 +1,17 @@
+Title: Pages
+
+----
+
+Text:
+
+(docs: api/page-ids)
+
+## Page fields
+
+The following fields are available in page models and can be fetched with the `select` parameter in most page API requests.
+
+(api-fields: page)
+
+## Available Endpoints
+
+(reference: api/pages)

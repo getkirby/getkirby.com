@@ -1,0 +1,68 @@
+.docs-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 6rem;
+  margin-left: -3rem;
+}
+
+.docs-grid > * {
+  flex-grow: 1;
+  flex-shrink: 0;
+  padding-left: 3rem;
+  width: 100%;
+}
+
+.docs-sidebar {
+  order: 2;
+}
+
+.docs-sidebar .h1 {
+  color: $color-border;
+}
+
+.docs-sidebar .h1 a {
+ transition: color .3s;
+}
+
+.docs-sidebar .h1 a:hover {
+  color: $color-black;
+}
+
+.docs-content {
+  order: 1;
+  min-width: 0;
+  margin-bottom: 6rem;
+}
+
+@include mq(from m) {
+  .docs-sidebar {
+    order: 1;
+    width: 33.33%;
+  }
+
+  .docs-content {
+    width: 66.66%;
+    order: 2;
+    margin-bottom: 0;
+  }
+}
+
+.docs-footer {
+  border-top: 4px solid $color-background;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 6rem;
+  padding-top: 1rem;
+}
+
+.docs-footer a {
+  align-items: center;
+  display: flex;
+  margin-top: .5rem;
+  text-decoration: underline;
+}
+
+.docs-footer svg {
+  margin-right: .5rem;
+}

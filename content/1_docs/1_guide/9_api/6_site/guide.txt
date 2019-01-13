@@ -1,0 +1,15 @@
+Title: Site
+
+----
+
+Text:
+
+## Site fields
+
+The following fields are available in the site model and can be fetched with the `select` parameter.
+
+(api-fields: site)
+
+## Available Endpoints
+
+(reference: api/site)

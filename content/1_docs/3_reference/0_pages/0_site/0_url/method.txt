@@ -1,0 +1,43 @@
+Title:
+
+{{class.instance}}->url([$lang=false])
+
+----
+
+Excerpt:
+
+Returns the base URL for the site
+
+----
+
+Params: -
+  name: $lang
+  type: string
+  text: Optional, only multi-language sites
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+If a $lang parameter is specified (multi-language site only), the specific language URL is returned.
+
+## Example
+
+### Fetching the base URL for the site
+
+```php
+<?= $site->url() ?>
+```
+
+### Fetching the base URL for a language
+
+```php
+<?= $site->url('en') ?>
+```

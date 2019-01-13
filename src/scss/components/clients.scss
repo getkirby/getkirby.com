@@ -1,0 +1,31 @@
+.clients {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.clients li {
+  align-self: center;
+  opacity: .5;
+  text-align: center;
+  margin: .75rem;
+}
+.clients img {
+  max-width: 10rem;
+}
+
+@supports (display: grid) {
+  .clients {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1.5rem;
+
+    @include mq(from m) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+  .clients li {
+    margin: 0;
+  }
+}

@@ -1,0 +1,32 @@
+Title: {{class.instance}}->languages()
+
+----
+
+Excerpt:
+
+Returns the collection of available languages for multi-language sites
+
+----
+
+Return:
+
+type: $languages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<ul>
+  <?php foreach($site->languages() as $language): ?>
+  <li>
+    <a href="<?= $language->url() ?>">
+      <?= html($language->name()) ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->prev()
+
+----
+
+Excerpt:
+
+Returns the previous sibling
+
+----
+
+Return:
+
+type: $file
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if(($file = $page->file('my-file.pdf')) && $prev = $file->prev()):
+    echo 'Previous file: ' . $prev->filename();
+endif;
+```

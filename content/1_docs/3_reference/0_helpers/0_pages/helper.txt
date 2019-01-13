@@ -1,0 +1,30 @@
+Title: pages($data = [])
+
+----
+
+Excerpt: Helper to build page collections
+
+----
+
+Params: -
+  name: $data
+  type: array
+  text: Array of page URIs or page objects
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php $collection = pages(['home', 'blog']) ?>
+<?php $collection = pages([$page, $page->children()->first()]) ?>
+```

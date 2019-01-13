@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->next()
+
+----
+
+Excerpt:
+
+Returns the next sibling
+
+----
+
+Return:
+
+type: $file
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if(($file = $page->file('my-file.pdf')) && $next = $file->next()):
+    echo 'Next file: ' . $next->filename();
+endif;
+```

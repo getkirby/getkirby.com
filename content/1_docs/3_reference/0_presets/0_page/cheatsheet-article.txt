@@ -1,0 +1,97 @@
+Title: Page
+
+----
+
+Excerpt: The Page preset simplifies the setup for standard pages with form fields, optional subpages and files.
+
+----
+
+Text:
+
+This allows you to create a very basic blueprint like this:
+
+```yaml
+title: Test
+preset: page
+```
+
+This simple blueprint creates an empty main section and a sidebar with a files and a pages section.
+
+(screenshot: page-preset.jpg)
+
+You can now extend this basic preset by adding as many fields as you like:
+
+```yaml
+title: Default
+preset: page
+
+fields:
+  intro:
+    type: textarea
+    size: medium
+  text:
+    type: textarea
+    size: large
+```
+
+(screenshot: page-preset-with-fields.jpg)
+
+And you can of course extend this basic setup in many ways.
+
+## No files or pages section
+
+If you don't want a files or pages section, set either option to false in the page options:
+
+No pages section:
+
+```yaml
+pages: false
+```
+
+No files section:
+
+```yaml
+files: false
+```
+
+## Overwrite the sidebar
+
+You can also overwrite the sidebar column:
+
+```yaml
+#  Only an image section
+sidebar:
+  images:
+    extends: sections/images
+```
+<info>
+In this example, we extend an existing files section which we have defined in `/site/blueprints/sections/images.yml`. You might as well define the a new (link: docs/guide/blueprints/layout text: files section) here.
+</info>
+
+
+```yaml
+# Image section and additional fields
+sidebar:
+  meta:
+    type: fields
+    fields:
+      date:
+        type: date
+        time: true
+        default: now
+      author:
+        type: user
+      tags:
+        type: tags
+        options: query
+        query:
+          fetch: site.tags.toStructure.sortBy("name", "asc")
+          text: "{{ structureItem.name }}"
+          value: "{{ structureItem.value }}"
+  images:
+    extends: sections/images
+```
+
+<info>
+The main column can only take fields, the sidebar can have multiple sections of different types. Completely custom layouts are possible with layout blueprints.
+</info>

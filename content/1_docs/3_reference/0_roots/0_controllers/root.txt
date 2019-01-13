@@ -1,0 +1,5 @@
+Title: controllers
+
+----
+
+Excerpt: Returns the root of the controllers folder.

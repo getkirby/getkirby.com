@@ -1,0 +1,7 @@
+Title: /users/:id
+----
+Info: DELETE
+----
+Excerpt: Delete a user
+----
+Text:

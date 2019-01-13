@@ -1,0 +1,5 @@
+Title: /pages/:id/files
+----
+Info: POST
+----
+Excerpt: Upload a new file

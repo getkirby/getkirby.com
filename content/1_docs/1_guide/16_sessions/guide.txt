@@ -1,0 +1,138 @@
+Title: Sessions
+
+----
+
+Description: Configuring Kirby's session and using it for your own data
+
+----
+
+Text:
+
+## Using the session for your own data
+
+Kirby now has a global session object that you can access with `$kirby->session()`.
+
+```php
+$session = $kirby->session();
+```
+
+You can do all sorts of cool stuff with it:
+
+### Getting and setting
+
+```php
+$session->get('myplugin.mykey', 'my default value');
+$session->set('myplugin.mykey', 'my new value');
+```
+
+### Incrementing
+
+```php
+$session->set('myplugin.counter', 10);
+$session->increment('myplugin.counter', 2, 50);
+$session->get('myplugin.counter') // 12
+```
+
+The third param to `$session->increment()` is the maximum value; the value won't be incremented beyond that value.
+
+<info>
+It is recommended to always use the `increment()` and `decrement()` methods if you want to increment or decrement to ensure that the new value is saved correctly and not overwritten by another overlapping request that is trying to do the same.
+</info>
+
+### Decrementing
+
+```php
+$session->set('myplugin.counter', 10);
+$session->decrement('myplugin.counter', 2, 0);
+$session->get('myplugin.counter') // 8
+```
+
+
+The third param to `$session->decrement()` is the minimum value; the value won't be decremented beyond that value.
+
+### Pulling data out of the session
+
+```php
+$session->pull('myplugin.message', 'my default value');
+```
+
+`$session->pull()` removes the value from the session after getting it.
+
+### Removing data
+
+```php
+$session->remove('myplugin.mykey');
+```
+
+### Clearing all session data
+
+```php
+$session->clear();
+```
+<warning>
+As we also store the user ID in the session, this will log users out of the Panel, so use it with care.
+</warning>
+
+### Destroying the session completely
+
+```php
+$session->destroy();
+```
+
+### Interesting stats
+```php
+$session->startTime();
+$session->expiryTime();
+
+// total duration between start and expiry time in seconds
+$session->duration();
+
+// seconds of inactivity after which the session will expire
+$session->timeout();
+```
+
+## Requesting a long session
+
+If you want to use a "long" session (a session with a long duration and without timeout) in your controllers and templates, you can request it like this:
+
+```php
+$session = $kirby->session(['long' => true]);
+```
+
+If a session already exists, it is automatically extended appropriately, so you don't have to deal with any edgecases.
+
+## Manually collecting garbage
+
+Kirby periodically deletes expired sessions (so-called "garbage collection").
+
+If your site has lots of users or if you create sessions for your site visitors, it might make sense to clean up expired sessions in the background to increase performance.
+
+First you need to disable the automatic garbage collector in your Kirby config:
+
+```php
+<?php
+
+return [
+    'session' => [
+        'gcInterval' => false
+    ]
+];
+```
+
+Now you can write a script with the following contents and periodically run it with a Cronjob (depending on the amount of sessions every few minutes to every few hours):
+
+```php
+<?php
+
+require 'path/to/kirby/bootstrap.php';
+
+$kirby = new Kirby();
+$kirby->component('session')->collectGarbage();
+```
+
+## Configuration
+
+You can change the session settings with the `session` option in your `/site/config/config.php`.
+
+(link: docs/reference/options/session text: All session options…)
+

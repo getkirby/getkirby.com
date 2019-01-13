@@ -1,0 +1,2 @@
+.cases-grid{display:flex;flex-wrap:wrap;margin-left:-3rem}.cases-grid>*{padding-left:3rem;margin-bottom:4.5rem}@media (min-width:38em){.cases-grid>*{width:50%}}@media (min-width:56em){.cases-grid>*{width:33.33%}}.cases-grid .h5:after{content:"\203A";color:#cca000;margin-left:.25rem}.cases-grid .h6{text-transform:none;letter-spacing:0}.cases-grid .screenshot img{padding:4px;border:1px solid #efefef}
+/*# sourceMappingURL=cases.css.map*/

@@ -1,0 +1,78 @@
+Title: Number Field
+----
+Text:
+
+## Basic example
+
+```html
+<k-number-field v-model="number" name="number" label="Number" />
+```
+
+## Advanced example
+
+```html
+<k-number-field
+	v-model="value"
+	:max="10000"
+	:min="1000"
+	:step="100"
+	:required="true"
+	before="$"
+	after="budget"
+	label="Number"
+	help="This is a number field"
+	@input="input"
+/>
+```
+
+## Props
+
+(docs: fields/props/after)
+
+(docs: fields/props/autofocus)
+
+(docs: fields/props/before)
+
+(docs: fields/props/disabled)
+
+(docs: fields/props/help)
+
+(docs: fields/props/icon)
+
+(docs: fields/props/label)
+
+(docs: fields/props/max)
+
+The highest accepted number
+
+(docs: fields/props/min)
+
+The lowest required number
+
+(docs: fields/props/name)
+
+(docs: fields/props/placeholder)
+
+(docs: fields/props/required)
+
+### step
+
+`Number (default: 1)`
+
+The amount to increment with each input step. This can be a decimal.
+
+### value / v-model
+
+`Number (default: null)`
+
+## Methods
+
+(docs: fields/methods/focus)
+
+## Events
+
+(docs: fields/events/input)
+
+## CSS class
+
+`.k-number-field`

@@ -1,0 +1,10 @@
+Title: Component
+
+----
+
+Entry:
+
+Kirby is built on a flexible component system: the template engine, Markdown parser, thumbnail generator and more can be overridden by a component plugin.
+
+----
+Link: docs/reference/extensions/core-components

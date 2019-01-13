@@ -1,0 +1,31 @@
+Excerpt: Set how Kirby handles content
+
+----
+
+Text:
+
+## Content file extension
+
+Set the extension you want to use for your content files.
+
+Possible values: `txt`| `md` (default: `txt`)
+
+```php
+return [
+  'content' => [
+    'extension' => 'md'
+  ]
+];
+```
+
+##  Ignore
+
+Set an array of file/folder names that are not scanned by Kirby's core.
+
+```php
+return [
+  'content' => [
+    'ignore' => []
+  ]
+];
+```

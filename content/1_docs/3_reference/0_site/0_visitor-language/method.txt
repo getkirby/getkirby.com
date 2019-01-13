@@ -1,0 +1,20 @@
+Title:
+
+{{class.instance}}->visitorLanguage()
+
+----
+
+Excerpt:
+
+Tries to find the language for the current visitor
+
+----
+
+Return:
+
+type: language
+text:
+
+----
+
+Text:

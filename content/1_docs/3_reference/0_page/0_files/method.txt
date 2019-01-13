@@ -1,0 +1,36 @@
+Title:
+
+{{class.instance}}->files()
+
+----
+
+Excerpt:
+
+Returns a $files collection with all files in the page's directory
+
+----
+
+Return:
+
+type: $files
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<h2>Files</h2>
+<ul>
+  <?php foreach($page->files() as $file): ?>
+  <li>
+    <a href="<?= $file->url() ?>">
+      <?= $file->filename() ?>
+      (<?= $file->niceSize() ?>)
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

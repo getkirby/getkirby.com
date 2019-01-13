@@ -1,0 +1,59 @@
+Title:
+
+{{class.instance}}->sortBy($field, $direction = 'asc', $method = SORT_REGULAR)
+
+----
+
+Excerpt:
+
+Returns a sorted version of the collection
+
+----
+
+Params: -
+  name: $field
+  type: string
+  text: The field from the content file
+-
+  name: $direction
+  type: string
+  text: "The sort direction: ascending (asc) or descending (desc)"
+-
+  name: $method
+  type: int
+  text: The sort flag, e.g. SORT_REGULAR, SORT_NUMERIC etc.
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<ul>
+  <?php foreach($page->children()->sortBy('title', 'desc') as $subpage): ?>
+  <li>
+    <a href="<?= $subpage->url() ?>">
+      <?= html($subpage->title()) ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```
+
+It's also possible to sort by more than one field like this:
+
+```php
+<?php
+$articles = page('blog')->children()->sortBy(function($page) {
+    return $page->date()->toDate();
+}, 'desc', 'time', 'asc');
+?>
+```

@@ -1,0 +1,9 @@
+Title: Grand Public
+
+----
+
+Text: We choose Kirby because it’s easy to use and possible to customize it to our clients needs. Our clients love the simplicity of the Panel.
+
+----
+
+Url: http://grandpublic.se

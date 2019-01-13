@@ -1,0 +1,106 @@
+.menu-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+.menu-search-input {
+  font: inherit;
+  font-size: .875rem;
+  color: $color-syntax-yellow;
+  font-weight: 400;
+  outline: 0;
+  padding: 0 1rem;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  background: transparent url(../images/icons/search.svg) no-repeat center right;
+  border: 0;
+  cursor: pointer;
+}
+.menu-search-input:focus {
+  box-shadow: $shadow;
+  background: #000;
+  width: 14rem;
+}
+.menu-search .awesomplete {
+  position: relative;
+  color: #fff;
+  font-size: .875rem;
+}
+.menu-search .awesomplete strong {
+  display: block;
+  font-weight: 400;
+  font-size: .875rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.menu-search .awesomplete small {
+  font-size: .75rem;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: $color-syntax-comment;
+  font-weight: 400;
+  white-space: nowrap;
+  width: 100%;
+}
+.menu-search .awesomplete ul {
+  position: absolute;
+  top: 100%;
+  background: #000;
+  left: 0;
+  right: 0;
+}
+.menu-search .awesomplete li {
+  padding: .75rem 1rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 1.25em;
+  overflow: hidden;
+  margin: 0;
+  cursor: pointer;
+}
+.menu-search .awesomplete li[aria-selected="true"],
+.menu-search .awesomplete li:hover {
+  background: $color-dark-gray;
+
+  & small {
+    color: #fff;
+  }
+}
+.menu-search-view-all,
+.menu-search-error {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+
+  svg {
+    fill: currentColor;
+  }
+}
+
+.menu-search.background\:dark {
+  .menu-search-input {
+    background: transparent url(../images/icons/search-white.svg) no-repeat center right;
+  }
+  .menu-search-input:focus {
+    background: #fff;
+    color: $color-black;
+  }
+  .awesomplete {
+    color: $color-black;
+  }
+  .awesomplete ul {
+    background: #fff;
+  }
+  .awesomplete li[aria-selected="true"],
+  .awesomplete li:hover {
+    background: $color-background;
+
+    & small {
+      color: $color-black;
+    }
+  }
+}

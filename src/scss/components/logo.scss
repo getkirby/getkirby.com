@@ -1,0 +1,47 @@
+.logo,
+.logo a,
+.logo svg {
+  display: block;
+  height: 54px;
+  width: 46px;
+}
+
+.logo {
+  margin-left: -.25rem;
+  flex-grow: 1;
+}
+
+.logo-hexagon-outline {
+  fill: transparent;
+  stroke: currentColor;
+  stroke-width: 2px;
+  transition: fill .3s;
+}
+
+.logo-k {
+  fill: currentColor;
+  transition: fill .3s;
+}
+
+.logo-hexagon-k {
+  transition: fill .3s;
+}
+
+.logo a:hover .logo-k {
+  fill: transparent;
+}
+
+.logo a:hover .logo-hexagon-k {
+  fill: currentColor;
+}
+
+/* Fancy hexagon focus outline for logo */
+
+.logo a {
+  outline: none;
+}
+
+body:not(.js-focus-visible) .logo a:focus .logo-focus-outline,
+.logo a.focus-visible .logo-focus-outline {
+  stroke: $color-focus-outline;
+}

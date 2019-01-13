@@ -1,0 +1,46 @@
+Title:
+
+{{class.instance}}->hasCode()
+
+----
+
+Excerpt:
+
+Checks if there are any code files in the page's directory
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+echo $page->hasCode(); //returns the number of code files in the folder
+
+if($page->hasCode()) {
+  $codeFiles = $page->code();
+}
+?>
+```
+
+## What is a code file?
+
+Kirby considers the following file types as code: 
+
+- js
+- css
+- scss
+- rb
+- xml
+- json
+- java
+
+Any html or php files cannot be uploaded to pages for security reasons. 

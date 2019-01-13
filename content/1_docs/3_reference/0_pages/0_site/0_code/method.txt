@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->code()
+
+----
+
+Excerpt:
+
+Returns a $files collection with all code files (css, js, html) placed directly in /content
+
+----
+
+Return:
+
+type: $files
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php foreach($site->code()->filterBy('extension', 'css') as $css): ?>
+<?= css($css->url()) ?>
+<?php endforeach ?>
+```

@@ -1,0 +1,25 @@
+Excerpt: Set options for Kirby's REST API
+
+----
+
+Text:
+
+You can completely disable the API for the frontend or set a custom slug. The default slug is `api`.
+
+## Disable the API
+
+```php
+return [
+  'api' => false
+];
+```
+
+## Change the API slug
+
+```php
+return [
+  'api' => [
+    'slug' => 'rest'
+  ]
+];
+```

@@ -1,0 +1,42 @@
+Title:
+
+{{class.instance}}->file($filename)
+
+----
+
+Excerpt:
+
+Searches for a specific file placed directly in /content by filename
+
+----
+
+Return:
+
+type: $file
+text:
+
+----
+
+Text:
+
+## Example
+
+### Fetching the first file
+
+```php
+<?php if($file = $site->file()): ?>
+<a href="<?= $file->url() ?>">
+  <?= html($file->filename()) ?>
+</a>
+<?php endif ?>
+```
+
+### Fetching a specific file
+
+```php
+<?php if($file = $site->file('myfile.pdf')): ?>
+<a href="<?= $file->url() ?>">
+  <?= html($file->filename()) ?>
+</a>
+<?php endif ?>
+```

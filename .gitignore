@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+config.js
+/www/assets/dev
+/www/media
+/site/accounts
+/site/cache
+/site/config/keys
+/site/config/.license
+/site/sessions

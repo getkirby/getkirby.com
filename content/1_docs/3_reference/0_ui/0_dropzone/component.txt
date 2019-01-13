@@ -1,0 +1,43 @@
+Title: Dropzone
+----
+Text:
+
+The dropzone component helps to simplify creating areas, where files can be dropped and uploaded or displayed. You simply wrap it around any other element to create the zone. The dropzone will also create a focus ring around the area when the user drags files over it.
+
+```html
+<template>
+  <k-dropzone @drop="upload">
+    <k-empty icon="image">Drop some files here</k-empty>
+    <k-upload ref="uploader" />
+  </k-dropzone>
+</template>
+
+<script>
+export default {
+  methods: {
+    drop(files) {
+      // start the uploader
+      this.$refs.uploader.drop(files);
+    }
+  }
+};
+</script>
+```
+
+## Props
+
+### disabled
+
+`Boolean (default: false)`
+
+You can deactivate the dropzone with this property
+
+## Events
+
+### @drop
+
+The drop event is triggered when files are being dropped into the dropzone. The event receives the files list as argument, which can then be used to start an upload for example.
+
+## CSS class
+
+`.k-dropzone`

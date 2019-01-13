@@ -1,0 +1,37 @@
+.cta {
+  align-items: flex-start;
+  background: $color-black;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  display: inline-flex;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: $font-mono;
+  line-height: 1.25;
+  outline-offset: -5px;
+  outline-color: $color-focus-outline-alt;
+  padding: .75rem 1rem;
+  text-decoration: none;
+}
+
+.cta:hover {
+  background: $color-black;
+}
+
+/**
+ * 1. Fixes a bug in Firefox (61.0.2) which prevents the
+ *    text color from being inherited in the ways it is
+ *    supposed in some cases.
+ */
+.cta,
+.cta * {
+  color: $color-white !important; /* 1 */
+}
+
+.cta .icon {
+  flex-shrink: 0;
+  margin-left: -.125rem;
+  margin-right: .75rem;
+  position: relative;
+  top: .125rem; // 2px
+}

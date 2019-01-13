@@ -1,0 +1,32 @@
+Title:
+
+{{class.instance}}->has($page)
+
+----
+
+Excerpt:
+
+Checks if a $page object is included in the collection
+
+----
+Params: -
+  name: $page
+  type: Page | string
+  text: Accepts an ID or a page object
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+```php
+<?php if(page('projects')->children()->has('projects/project-a')): ?>
+There exists a subpage with the uid `some-page`
+<?php endif ?>
+```

@@ -1,0 +1,56 @@
+@import "../includes";
+
+html {
+  background: #000 url('../../images/components/kosmos/galaxy.jpg');
+  background-position: top center;
+  background-size: 650px;
+  background-repeat: no-repeat;
+}
+
+/* Kosmos */
+.kosmos {
+  color: #fff;
+  background: none;
+  padding-bottom: 3rem;
+}
+.kosmos-form {
+  margin-bottom: 3rem;
+}
+.kosmos-issues-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/* Updates */
+.updates {
+  color: #fff;
+  display: flex;
+  margin-left: -3rem;
+  flex-wrap: wrap;
+}
+
+.updates li {
+  margin-bottom: 3rem;
+  padding-left: 3rem;
+  width: 100%;
+
+  @include mq(from m) {
+    width: 33.33%;
+  }
+}
+.updates p {
+  color: $color-syntax-white;
+  font-size: .875rem;
+}
+.updates .icon {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+/* Black Footer */
+.footer {
+  background: none !important;
+}

@@ -1,0 +1,20 @@
+Title:
+
+{{class.instance}}->templateData()
+
+----
+
+Excerpt:
+
+Additional data, which will be passed to the template
+
+----
+
+Return:
+
+type: array
+text:
+
+----
+
+Text:

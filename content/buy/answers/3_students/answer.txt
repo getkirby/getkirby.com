@@ -1,0 +1,5 @@
+Title: Do you offer student discounts?
+----
+Text:
+
+Yes, students, educational projects, open-source projects or non-profit organizations can apply for a discount. Please (email: support@getkirby.com text: get in contact) to apply.

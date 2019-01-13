@@ -1,0 +1,32 @@
+Title:
+
+{{class.instance}}->users()
+
+----
+
+Excerpt:
+
+Returns a $users collection with all registered users.
+
+----
+
+Return:
+
+type: $users
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<h2>Registered users</h2>
+<ul>
+  <?php foreach($site->users() as $user): ?>
+  <li><?= $user->username() ?></li>
+  <?php endforeach ?>
+</ul>
+
+```

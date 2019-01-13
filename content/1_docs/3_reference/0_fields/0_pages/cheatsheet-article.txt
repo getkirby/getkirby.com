@@ -1,0 +1,77 @@
+Title: Pages
+
+----
+
+Excerpt:
+
+A pages select field that allows to select one or multiple related pages
+
+----
+
+Text:
+
+The pages field allows you to select one or more related pages. It has a handy navigator to go through the entire site tree and select the pages you want
+
+(screenshot: pages.png)
+
+## Example
+
+```yaml
+fields:
+  related:
+    label: Related Pages
+    type: pages
+```
+
+## Options
+
+(field-options: pages)
+
+### Maximum number of pages
+
+You can set the maximum number of pages that can be selected:
+
+```yaml
+fields:
+  related:
+    label: Related Pages
+    type: pages
+    max: 3
+```
+
+### Multiple or single mode
+
+If you only want to select a single page, set multiple mode to `false` (default is `true`)
+
+```yaml
+fields:
+  related:
+    label: Related Pages
+    type: pages
+    multiple: false
+```
+
+
+## Accessing selected pages in templates
+
+### Single page
+
+To convert a single page to a page object, use the `toPage()` method:
+
+```php
+<?php if($relatedPage = $page->related()->toPage()): ?>
+  <?= $relatedPage->title() ?>
+<?php endif ?>
+```
+
+### Multiple pages
+
+To convert multiple pages to a pages collection, use the `toPages()` method:
+
+```php
+<?php
+$relatedPages =  $page->related()->toPages();
+foreach($relatedPages as $relatedPage): ?>
+  <?= $relatedPage->title() ?>
+<?php endforeach ?>
+```

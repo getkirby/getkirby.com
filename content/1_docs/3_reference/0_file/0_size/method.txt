@@ -1,0 +1,29 @@
+Title:
+
+{{class.instance}}->size()
+
+----
+
+Excerpt:
+
+Returns the raw file size
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($file = $page->file()):
+    echo $file->size();
+    // i.e. 123293829
+endif;    
+```

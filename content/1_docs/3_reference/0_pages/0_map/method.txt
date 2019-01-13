@@ -1,0 +1,39 @@
+Title:
+
+{{class.instance}}->map($callback)
+
+----
+
+Excerpt:
+
+Returns a new collection and applies the mapping callback to all pages
+
+----
+Params: -
+  name: $callback
+  type: function
+  text: The function to be applied to all pages in the collection
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+function changeDate($page)  {
+  if($page->year() == '2015') {
+    $page->update([
+    'year' => '2016',
+  ]);
+  }
+}
+page('projects')->children()->map('changeDate');
+```

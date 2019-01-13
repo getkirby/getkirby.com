@@ -1,0 +1,28 @@
+Title: Date
+
+----
+
+Excerpt:
+
+A date picker field
+
+----
+
+Text:
+
+The date field generates a simple input with a nice date picker. It can be setup to display and store dates.
+
+(screenshot: date.png)
+
+## Example
+
+```yaml
+fields:
+  date:
+    label: Date
+    type: date
+```
+
+## Options
+
+(field-options: date)

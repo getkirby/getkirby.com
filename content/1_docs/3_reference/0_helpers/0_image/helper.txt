@@ -1,0 +1,41 @@
+Title: image($filename = null)
+
+----
+
+Since:
+
+----
+
+Excerpt: Fetches any image by filename for the current page, or by path for any other page
+
+----
+
+Params: -
+  name: $filename
+  type: string
+  text:
+
+----
+
+Return:
+
+type: $file
+text:
+
+----
+
+Text:
+
+## Example
+
+### Fetching an image of the current page
+
+```php
+<?= image('forrest.jpg')->url() ?>
+```
+
+### Fetching an image from any other page
+
+```php
+<?= image('projects/project-a/forrest.jpg')->url() ?>
+```

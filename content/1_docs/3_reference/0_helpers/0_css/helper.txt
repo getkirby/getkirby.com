@@ -1,0 +1,66 @@
+Excerpt: Creates one or multiple CSS link tags
+
+----
+
+Params:
+-
+  name: $path
+  type: string
+  text: Relative or absolute URL
+-
+  name: $media
+  type: string|array
+  text: CSS media value or an array of attributes
+
+----
+
+Text:
+
+## Example
+
+### Creating a single link tag
+
+```php
+<?= css('assets/css/site.css') ?>
+```
+
+### Creating multiple link tags
+
+```php
+<?= css([
+  'assets/css/site.css',
+  'assets/css/form.css',
+  'assets/css/grid.css'
+]) ?>
+```
+
+
+### Autoloading template specific css files
+
+```php
+<?= css('@auto') ?>
+```
+
+Template specific css files must be located in `/assets/css/templates` and named like the template.
+
+Template                    | CSS file
+-                           | -
+/site/templates/project.php | /assets/css/templates/project.css
+/site/templates/home.php    | /assets/css/templates/home.css
+/site/templates/blog.php    | /assets/css/templates/blog.css
+
+### Media attribute
+
+You can also specify a media attribute for the link tags:
+
+```php
+<?= css('assets/css/print.css', 'print') ?>
+```
+
+### Other attributes
+
+You can also pass an array of completely custom attributes:
+
+```php
+<?= css('assets/css/print.css', ['media' => 'print', 'data-something' => 'my-value']) ?>
+```

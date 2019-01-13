@@ -1,0 +1,11 @@
+Title: /pages/:id/title
+----
+Info: PATCH
+----
+Excerpt: Change the page title
+----
+Text:
+
+## Patch parameters
+
+(docs: api/page-title-data)

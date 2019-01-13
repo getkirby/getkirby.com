@@ -1,0 +1,97 @@
+Title: Files
+
+----
+
+Excerpt:
+
+A files select field that allows to select one or multiple related files
+
+----
+
+Text:
+
+The files field allows you to select one or more files.
+
+(screenshot: files.png)
+
+## Example
+
+```yaml
+fields:
+  gallery:
+    label: Related Pages
+    type: files
+```
+
+## Options
+
+(field-options: files)
+
+### Limits for the number of files
+
+You can set the minimum/maximum number of files that can be selected:
+
+```yaml
+fields:
+  gallery:
+    label: Select files...
+    type: files
+    min: 1
+    max: 3
+```
+
+### Multiple or single mode
+
+If you only want to select a single file, set multiple mode to `false` (default is `true`)
+
+```yaml
+fields:
+  gallery:
+    label: Select files...
+    type: files
+    multiple: false
+```
+
+### Layout
+
+You can switch between list and card layout. Default is list layout.
+
+```yaml
+fields:
+  gallery:
+    label: Select files...
+    type: files
+    layout: cards
+```
+
+### Parent page
+
+```
+gallery:
+  type: files
+  parent: site.find('imagefolder')
+```
+
+## Accessing selected files in templates
+
+### Single file
+
+To convert a single file to a file object, use the `toFile()` method:
+
+```php
+<?php if($image = $page->cover()->toFile()): ?>
+  <img src="<?= $image->url() ?>" alt="">
+<?php endif ?>
+```
+
+### Multiple files
+
+To convert multiple files to a files collection, use the `toFiles()` method:
+
+```php
+<?php
+$images =  $page->gallery()->toFiles();
+foreach($images as $image): ?>
+  <img src="<?= $image->url() ?>" alt="">
+<?php endforeach ?>
+```

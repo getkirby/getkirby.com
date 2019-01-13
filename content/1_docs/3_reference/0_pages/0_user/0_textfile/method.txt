@@ -1,0 +1,30 @@
+Title:
+
+{{class.instance}}->textfile()
+
+----
+
+Since:
+
+----
+
+Excerpt:
+
+Returns the root for the account file
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $kirby->user('bastian@example.com')->textfile() ?>
+```

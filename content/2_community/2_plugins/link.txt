@@ -1,0 +1,9 @@
+Title: Plugins
+
+----
+
+Intro: Our plugin developers created more than 500 plugins for Kirby. You can find them all in our official plugin repository.
+
+----
+
+Link: http://getkirby-plugins.com

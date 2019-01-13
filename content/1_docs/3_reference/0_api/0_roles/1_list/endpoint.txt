@@ -1,0 +1,38 @@
+Title: /roles
+----
+Info: GET
+----
+Excerpt: List roles
+----
+Text:
+
+## Query parameters
+
+(docs: api/roles-parameters)
+
+----
+Response:
+
+{
+    "code": 200,
+    "data": [
+        {
+            "description": "The admin has all rights",
+            "name": "admin",
+            "title": "Admin"
+        },
+        {
+            "description": "Editors edit stuff",
+            "name": "editor",
+            "title": "Editor"
+        }
+    ],
+    "pagination": {
+        "page": 1,
+        "total": 2,
+        "offset": 0,
+        "limit": 100
+    },
+    "status": "ok",
+    "type": "collection"
+}

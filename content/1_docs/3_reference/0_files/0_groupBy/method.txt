@@ -1,0 +1,20 @@
+Title:
+
+$files->groupBy($field, $caseInsensitive = true)
+
+----
+
+Excerpt:
+
+Groups all files in the collection by a given field.
+
+----
+
+Return:
+
+type: $files
+text:
+
+----
+
+Text:

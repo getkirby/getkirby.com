@@ -1,0 +1,32 @@
+Title: Translations
+
+----
+
+Text:
+
+Translations are registered with the `translations` extension. It takes an array of languages, where each language consists of an array of key/value pairs.
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('your/plugin', [
+	'translations' => [
+		'en' => [
+			'export' => 'Export',
+		],
+		'de' => [
+			'export' => 'Exportieren',
+		]
+	]
+]);
+```
+
+You can now use these translations in your plugin, for example in a (link: docs/reference/extensions/fields text: panel field):
+
+```js "/site/plugins/your-plugin/index.js"
+panel.plugin('your/plugin', {
+	fields: {
+		export: {
+			template: "<k-button>{{ $t('export') }}</k-button>"
+		}
+	}
+});
+```

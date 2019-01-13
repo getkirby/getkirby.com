@@ -1,0 +1,20 @@
+Title:
+
+$users->shuffle()
+
+----
+
+Excerpt:
+
+Returns the collection in shuffled order
+
+----
+
+Return:
+
+type: $users
+text:
+
+----
+
+Text:

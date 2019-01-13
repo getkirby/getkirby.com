@@ -1,0 +1,26 @@
+Title:
+
+{{class.instance}}->flip()
+
+----
+
+Excerpt:
+
+Returns the collection in reverse order
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php $articles = $page->children()->flip() ?>
+```

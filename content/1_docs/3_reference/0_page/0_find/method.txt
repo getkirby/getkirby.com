@@ -1,0 +1,47 @@
+Title: {{class.instance}}->find($uri)
+
+----
+
+Excerpt:
+
+Returns the $page object of a specific subpage by URI. If multiple URIs are given, the method will return a $pages collection with all matches.
+
+----
+
+Params: -
+  name: $uri
+  type: args
+  text: The URI(s) of a subpage or multiple subpages
+
+----
+
+Return:
+
+type: $page | $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+### Fetch a single subpage
+
+```php
+<?= $page->find('subpage-a')->title() ?>
+```
+
+### Fetch multiple subpages
+
+```php
+<ul>
+  <?php foreach($page->find('subpage-a', 'subpage-c', 'subpage-i') as $subpage): ?>
+  <li>
+    <a href="<?= $subpage->url() ?>">
+      <?= html($subpage->title()) ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

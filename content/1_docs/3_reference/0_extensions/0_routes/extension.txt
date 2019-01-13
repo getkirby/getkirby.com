@@ -1,0 +1,45 @@
+Title: Routes
+
+----
+
+Guide: routing
+
+----
+
+Text:
+
+Routes are registered with the `routes` extension.
+
+The extension accepts an array of routes, where each route is defined as an array of key/value pairs. You have to define at least a pattern and an action.
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('your/plugin', [
+  'routes' => [
+    [
+      'pattern' => 'my/awesome/url',
+      'action'  => function () {
+        // do something here when the URL matches the pattern above
+      }
+    ]
+  ]
+]);
+```
+
+Routes can also be registered as callbacks. Within the callback they have full access to the current Kirby instance.
+
+```php
+Kirby::plugin('demo/plugin', [
+  'routes' => function ($kirby) {
+    return [
+      [
+        'pattern' => '...',
+        'action' => function () {
+
+        }
+      ]
+    ];
+  }
+]);
+```
+
+For more information on routing see (link: docs/guide/routing text: the routing docs)

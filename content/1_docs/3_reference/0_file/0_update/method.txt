@@ -1,0 +1,73 @@
+Title:
+
+{{class.instance}}->update($data = [][, $language])
+
+----
+
+Excerpt:
+
+Updates the meta information for a file
+
+----
+
+Params: -
+  name: $data
+  type: array
+  text:
+-
+  name: $language
+  type: string
+  text: Language code
+
+----
+
+Return:
+
+type: $file
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($file = $page->file('myimage.jpg')) {
+
+  try {
+
+    $file->update([
+      'caption' => 'This is a really nice image',
+      'year'    => 2014
+    ]);
+
+    echo 'The meta info has been updated';
+
+  } catch(Exception $e) {
+
+    echo 'The meta info could not be updated';
+    // optional reason: echo $e->getMessage();
+
+  }
+
+}
+```
+
+## Multi-language installation
+
+In a multi-language installation, you can pass the language of the meta data you want to update as a second argument:
+
+```php
+if($file = $page->file('some-file.jpg')) {
+  $file->update([
+    'some_field' => 'new value'
+  ], 'en');
+}
+
+if($file = $page->file('some-file.jpg')) {
+  $file->update([
+    'some_field' => 'new value'
+  ], site()->language()->code());
+}
+```

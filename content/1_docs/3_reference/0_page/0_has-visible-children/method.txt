@@ -1,0 +1,32 @@
+Title:
+
+{{class.instance}}->hasVisibleChildren()
+
+----
+
+Excerpt:
+
+Checks if the page has any visible children
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+echo $page->hasVisibleChildren(); //returns the number of visible children in the folder
+
+if($page->hasVisibleChildren()) {
+  $children = $page->children()->listed();
+}
+?>
+```

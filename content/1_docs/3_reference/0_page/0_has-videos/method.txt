@@ -1,0 +1,49 @@
+Title:
+
+{{class.instance}}->hasVideos()
+
+----
+
+Excerpt:
+
+Checks if there are any video files in the page directory
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+echo $page->hasVideos(); //returns the number of videos in the folder
+
+if($page->hasImages()) {
+  $videos = $page->videos();
+}
+?>
+```
+
+## What is a video file?
+
+Kirby considers the following file types as video:
+
+- mov
+- movie
+- avi
+- ogg
+- ogv
+- webm
+- flv
+- swf
+- mp4
+- m4v
+- mpg
+- mpe

@@ -1,0 +1,44 @@
+Title:
+
+$files->find()
+
+----
+
+Excerpt:
+
+Finds a single file or multiple files by one or many filenames.
+
+----
+
+Return:
+
+type: $file | $files
+text:
+
+----
+
+Text:
+
+## Example
+
+### Fetch a single file
+
+```php
+if($file = $page->files()->find('myfile.pdf')):
+  echo $file->url();
+endif;
+```
+
+### Fetch multiple files
+
+```php
+<ul>
+  <?php foreach($page->files()->find('document-a.pdf', 'document-b.pdf', 'document-c.pdf') as $file): ?>
+  <li>
+    <a href="<?= $file->url() ?>">
+      <?= $file->filename()->html() ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

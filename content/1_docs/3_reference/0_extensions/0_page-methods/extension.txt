@@ -1,0 +1,104 @@
+Title: Page methods
+
+----
+
+Guide: templates/php-api#page
+
+----
+
+Text:
+
+Page methods are registered with the `pageMethods` extension.
+
+## Default page methods
+
+**For a full (link: docs/reference/#page text: list of default page methods), please check out the Reference.**
+
+<info>Be aware that - contrary to (link: docs/guide/templates/page-models text: page models) - custom page methods cannot override default page methods.</info>
+
+## Custom page methods vs. page models
+
+(link: docs/guide/templates/page-models text: Page models) are a great way to create an extended version of the default page object with additional methods and functionalities. But a page model is tied to a specific template, while custom page methods apply to all page objects. If your use case is based on one specific template, a page model might be the better solution. If you have methods that should be available for all page objects in all templates, a custom page method is the way to go.
+
+## Getting started
+
+You can extend the set of defined page methods very easily in a plugin file.
+
+```php "/site/plugins/page-methods/index.php"
+Kirby::plugin('my/page-methods', [
+    'pageMethods' => [
+        'linktag' => function () {
+            return '<a href="' . $this->url() . '">' . $this->title()->html() . '</a>';
+        }
+    ]
+]);
+```
+
+This example shows the basic architecture of a page method. You define the method name with the key for the `pageMethods` extension array. `$this` in the callback function is the `$page` object.
+
+## Return options
+
+There are two common scenarios, what page methods can do:
+
+### 1. Modifying the page
+
+```php
+Kirby::plugin('my/page-methods', [
+    'pageMethods' => [
+        'likeIt' => function () {
+            $this->increment('like');
+            return $this;
+        }
+    ]
+]);
+```
+
+If you want to make it possible to chain page methods and that the page can be further modified by other page methods, you must modify the page and then return the page object (`$this`).
+
+#### Example
+
+```php
+<?= $page->likeIt()->hide() ?>
+```
+
+### 2. Returning info about the page
+
+```php
+Kirby::plugin('my/page-methods', [
+    'pageMethods' => [
+        'has5Siblings' => function () {
+            return $this->siblings()->count() === 5;
+        }
+    ]
+]);
+```
+
+Page methods can also be used to make if clauses easier.
+
+#### Example
+
+```php
+<?php if($page->has5Siblings()) : ?>
+The page has 5 siblings.
+<?php endif ?>
+```
+
+## Working with method arguments
+
+In some cases it might be helpful to be able to pass arguments to the method:
+
+```php
+<?= $page->isSiblingOf($otherPage) ?>
+```
+
+The definition for such a method with arguments is very simple:
+
+```php
+Kirby::plugin('my/page-methods', [
+    'pageMethods' => [
+        'isSiblingsOf' => function ($otherPage) {
+            return $otherPage->siblings()->has($this);
+        }
+    ]
+]);
+```

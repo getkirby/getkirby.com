@@ -1,0 +1,36 @@
+Title:
+
+{{class.instance}}->nth($n)
+
+----
+
+Excerpt:
+
+Returns the nth page in the collection
+
+----
+
+Params: -
+  name: $n
+  type: int
+  text: The number of the item to be returned
+
+----
+
+
+Return:
+
+type: $page
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+// echo the title of the 4th subpage
+// (the index starts at 0)
+echo $page->children()->nth(3)->title();
+```

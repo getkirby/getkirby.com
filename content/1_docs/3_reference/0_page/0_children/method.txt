@@ -1,0 +1,33 @@
+Title: {{class.instance}}->children()
+
+----
+
+Excerpt:
+
+Returns a $pages collection with all children of the page
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<h2>Subpages</h2>
+<ul>
+  <?php foreach($page->children() as $subpage): ?>
+  <li>
+    <a href="<?= $subpage->url() ?>">
+      <?= html($subpage->title()) ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

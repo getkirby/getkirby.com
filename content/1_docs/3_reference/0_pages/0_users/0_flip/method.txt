@@ -1,0 +1,20 @@
+Title:
+
+$users->flip()
+
+----
+
+Excerpt:
+
+Returns the $users collection in reversed order
+
+----
+
+Return:
+
+type: $users
+text:
+
+----
+
+Text:

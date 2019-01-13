@@ -1,0 +1,24 @@
+Text:
+
+## In your code
+
+```php
+if(v::notIn('A', ['B', 'C', 'D'])) {
+  echo 'Yay, valid!';
+}
+
+```
+
+## In fields
+
+```
+fields:
+  example:
+    label: Example field
+    type: text
+    validate:
+      notIn:
+        - B
+        - C
+        - D
+```

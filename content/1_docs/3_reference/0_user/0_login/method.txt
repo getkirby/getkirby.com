@@ -1,0 +1,49 @@
+Title:
+
+{{class.instance}}->login($password)
+
+----
+
+Excerpt:
+
+Login the user with the given password if the password matches the user's password.
+
+----
+Params:-
+  name: $password
+  type: string
+  text:
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+// simple login form submission example
+if($username = get('username') and $password = get('password')) {
+
+  $user = $kirby->user($username);
+
+  if($user and $user->login($password)) {
+    // redirect to the homepage
+    // or any other page
+    go();
+  } else {
+    echo 'invalid username or password';
+  }
+
+}
+
+// put the login form with username and
+// password field down here.
+
+```

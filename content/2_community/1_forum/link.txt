@@ -1,0 +1,9 @@
+Title: Forum
+
+----
+
+Intro: Our forum is the best place to find help. Either from our core team, who's constantly hanging out there, or from other Kirby users.
+
+----
+
+Link: https://forum.getkirby.com

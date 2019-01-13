@@ -1,0 +1,11 @@
+Title: /pages/:id/children
+----
+Info: GET
+----
+Excerpt: List all subpages
+----
+Text:
+
+## Query parameters
+
+(docs: api/pages-parameters)

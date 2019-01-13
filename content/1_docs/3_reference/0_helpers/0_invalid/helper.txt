@@ -1,0 +1,45 @@
+Text:
+
+## Examples
+
+```php
+$data = [
+  'username' => 'Homer',
+  'fname'    => 'Homer',
+  'lname'    => 'Simpson',
+  'email'    => 'home@simpsonscom'
+];
+
+$rules = [
+  'username' => array('required'),
+  'fname'    => array('required', 'max' => 2),
+  'lname'    => array('required', 'min' => 20),
+  'email'    => array('required', 'email')
+];
+
+$messages = [
+  'fname' => 'Please enter a valid first name',
+  'lname' => 'Please enter a valid last name',
+  'email' => 'Please enter a valid email address'
+];
+
+if($invalid = invalid($data, $rules, $messages)) {
+  dump($invalid);
+} else {
+  dump('Nice data!');
+}
+```
+
+
+You can also separately define a message for each validation rule:
+
+```php
+$messages = [
+  'fname' => 'Please enter a valid first name',
+  'lname' => 'Please enter a valid last name',
+  'email' => [
+    'Please enter an email address',
+    'The email address is invalid'
+  ]
+];
+```

@@ -1,0 +1,20 @@
+Title:
+
+$pagination->rangeStart()
+
+----
+
+Excerpt:
+
+Returns the page number at the beginning of the range
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:

@@ -1,0 +1,10 @@
+Title: SmartyPants
+
+----
+Entry:
+
+SmartyPants is a Kirby fork of Michel Fortin's/John Gruber's typography prettyfier. It converts ASCII punctuation characters into “smart” typographic punctuation HTML entities.
+
+----
+
+Link: docs/guide/content/text-formatting#smartypants

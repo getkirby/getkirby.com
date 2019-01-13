@@ -1,0 +1,57 @@
+Title: {{class.instance}}->grandChildren()
+
+----
+
+Excerpt:
+
+Returns a $pages collection with all grandChildren in the /content directory
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example structure
+
+- content
+    - home
+    - about
+        - company
+        - team
+        - philosophy
+    - projects
+        - project-a
+        - project-b
+        - project-c
+
+
+## Example code
+
+```php
+<ul>
+  <?php foreach($site->grandChildren() as $item): ?>
+  <li>
+    <a href="<?= $item->url() ?>">
+      <?= $item->title()->html() ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```
+
+## Result
+
+The code above will give you a list like this:
+
+- Company
+- Team
+- Philosophy
+- Project A
+- Project B
+- Project C

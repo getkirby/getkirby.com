@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->isWritable()
+
+----
+
+Excerpt:
+
+Checks if the file is writable
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php if($file = $page->file() && $file->isWritable()): ?>
+The file is writable
+<?php endif ?>
+```

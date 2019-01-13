@@ -1,0 +1,47 @@
+Title:
+
+{{class.instance}}->prevVisible([$sort, $direction])
+
+----
+
+Excerpt:
+
+Returns the previous visible sibling
+
+----
+
+Params: -
+  name: $sort
+  type: string
+  text: An optional sort field for the siblings
+-
+   name: $direction
+   type: string
+   text: An optional sort direction
+
+----
+
+Return:
+
+type: $page
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php if($prev = $page->prevVisible()): ?>
+<a href="<?= $prev->url() ?>">previous visible page</a>
+<?php endif ?>
+```
+
+### Using sort field
+
+```php
+<?php if($prev = $page->prevVisible('date', 'desc')): ?>
+<a href="<?= $prev->url() ?>">previous visible page</a>
+<?php endif ?>
+```

@@ -1,0 +1,254 @@
+.menu {
+  line-height: 1;
+  display: flex;
+  height: 6rem;
+  align-items: center;
+}
+.menu.background\:dark {
+  color: #fff;
+}
+.menu-button {
+  display: none;
+}
+.menu-container {
+  display: flex;
+}
+.menu-items {
+  display: flex;
+  align-items: center;
+}
+.menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.menu-item > a {
+  position: relative;
+  display: flex;
+  padding: 0 .75rem;
+  height: 2rem;
+  align-items: center;
+}
+
+.menu-item a[aria-current] {
+  text-decoration: underline;
+}
+
+.menu-item.has-dropdown > a {
+  padding-right: 1.75rem;
+}
+
+.menu-item.has-dropdown > a:after {
+  position: absolute;
+  content: "›";
+  transform: rotate(90deg);
+  top: 50%;
+  margin-top: -.4rem;
+  right: .75rem;
+}
+
+@include mq(from m) {
+
+  .menu-dropdown {
+    position: absolute;
+    top: 100%;
+    left: -.25rem;
+    background: #000;
+    color: #fff;
+    padding: .5rem 0;
+    display: none;
+    box-shadow: $shadow;
+  }
+  .menu-item:hover .menu-dropdown,
+  .menu-item:focus-within .menu-dropdown {
+    display: block;
+  }
+  .menu-dropdown:before {
+    position: absolute;
+    top: -5px;
+    left: 2.125rem;
+    margin-left: -5px;
+    content: "";
+    border-bottom: 5px solid $color-black;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+  }
+  .menu-dropdown a {
+    white-space: nowrap;
+    padding: .5rem 1rem;
+    display: block;
+    font-size: .875rem;
+  }
+  .menu-dropdown a:hover {
+    background: $color-dark-gray;
+  }
+
+  .menu.background\:dark {
+    .menu-dropdown {
+      background: #fff;
+      color: #000;
+    }
+    .menu-dropdown:before {
+      border-bottom-color: #fff;
+    }
+    .menu-dropdown a:hover {
+      background: $color-background;
+    }
+  }
+
+
+}
+
+
+.menu-trylovebuy {
+  margin-left: 1rem;
+}
+.menu-trylovebuy .menu-item:after {
+  content: "›"
+}
+.menu-trylovebuy .menu-item:last-child:after {
+  content: "";
+}
+.menu-trylovebuy .menu-item a {
+  padding: 0 .5rem;
+  font-weight: 700;
+}
+.menu-trylovebuy svg * {
+  fill: currentColor;
+}
+
+@keyframes menu-pulsing-heart {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.menu-trylovebuy a:hover svg {
+  animation: menu-pulsing-heart .6s linear 1 forwards;
+}
+
+@include mq(to m) {
+
+  .menu-button {
+    position: relative;
+    height: 14px;
+    width: 16px;
+  }
+  .menu-button i {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: currentColor;
+  }
+  .menu-open-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .menu-close-button i {
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    left: 0;
+  }
+  .menu-close-button i:first-child {
+    transform: rotate(45deg);
+  }
+  .menu-close-button i:last-child {
+    transform: rotate(-45deg);
+  }
+
+  .menu:target .menu-open-button {
+    display: none;
+  }
+  .menu:target .menu-close-button {
+    display: block;
+  }
+  .menu-container {
+    display: none;
+    position: absolute;
+    top: 6rem;
+    right: 0;
+    left: 0;
+    background: #000;
+    z-index: 1000;
+    flex-direction: column;
+    color: #fff;
+    box-shadow: $shadow;
+  }
+  .menu-container:before {
+    position: absolute;
+    top: -5px;
+    right: 3.25rem;
+    content: "";
+    border-bottom: 5px solid $color-black;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    content: "";
+  }
+  .menu:target .menu-container {
+    display: block;
+  }
+  .menu-main {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: .5rem 0;
+  }
+  .menu-main .menu-item {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: .875rem;
+  }
+  .menu-main .menu-item.has-dropdown a:after {
+    display: none;
+  }
+  .menu-main .menu-item > a {
+    padding: 0 1.5rem;
+  }
+  .menu-dropdown {
+    display: flex;
+    flex-direction: column;
+    font-size: .875rem;
+    padding: 0 1.5rem;
+  }
+  .menu-dropdown a {
+    padding: .5rem 1rem;
+    display: block;
+    color: $color-syntax-white;
+  }
+  .menu-trylovebuy {
+    margin-left: 0;
+    border-top: 1px solid rgba(#fff, .15);
+    padding: .25rem 1rem;
+    font-size: .875rem;
+  }
+  .menu-trylovebuy .menu-item a {
+    font-weight: 500;
+  }
+
+  .menu.background\:dark {
+    .menu-container {
+      background: #fff;
+      color: #000;
+    }
+    .menu-container:before {
+      border-bottom-color: #fff;
+    }
+    .menu-dropdown a {
+      color: #777;
+    }
+    .menu-trylovebuy {
+      border-top: 1px solid rgba(#000, .15);
+    }
+  }
+
+}

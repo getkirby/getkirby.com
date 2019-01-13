@@ -1,0 +1,72 @@
+Title:
+
+{{class.instance}}->type()
+
+----
+
+Excerpt:
+
+Returns the file type (image, document, video, archive, code, audio, unkown)
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($file = $page->file('myimage.jpg')):
+    echo $file->type();
+    // image
+endif;
+
+
+if($file = $page->file('terms.pdf')):
+    echo $file->type();
+    // document
+endif;
+
+if($file = $page->file('numbers.xls')):
+    echo $file->type();
+    // document
+endif;
+
+
+if($file = $page->file('software-1.0.0.zip')):
+    echo $file->type();
+    // archive
+endif;
+
+
+if($file = $page->file('some-movie.mov')):
+    echo $file->type();
+    // video
+endif;
+
+
+if($file = $page->file('styles.css')):
+    echo $file->type();
+    // code
+endif;
+
+
+
+```
+
+## All file types
+
+Type      | Extensions
+-         | -
+image     | jpg, gif, png, svg, ico, tiff, bmp, psd, ai
+document  | md, pdf, doc, docx, xls, xlsx, ppt, csv, rtf
+archive   | zip, tar, gz, gzip, tgz
+code      | js, css, html, xml, json
+video     | mov, avi, ogg, ogv, webm, flv, swf, mp4, mv4
+audio     | mp3, m4a, wav, aiff, midi

@@ -1,0 +1,65 @@
+Title:
+
+{{class.instance}}->search($query, $params = [])
+
+----
+
+Excerpt:
+
+Searches all pages in the collection and all descendants
+
+----
+
+Params: -
+  name: $query
+  type: string
+  text: The search term
+-
+  name: $params
+  type: string | array
+  text: See examples below
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Parameter options and defaults
+
+```
+$defaults = [
+  'minlength' => 2,
+  'fields'    => [],
+  'words'     => false,
+  'score'     => []
+];
+```  
+
+## Examples
+
+```php
+// search all pages and descendants
+$results = $pages->search('my awesome search');
+
+// filter the search results
+$results = $pages->search('my awesome search')->listed()->filterBy('template', 'article');
+
+// add pagination to the search results
+$results = $pages->search('my awesome search')->paginate(20);
+
+// search in certain fields only
+$results = $pages->search('my awesome search', 'title|text');
+
+// search for full words only
+$results = $pages->search('my awesome->search', ['words' => true, 'minlength' => 4]);
+
+// feed the search with a get parameter -> http://yourdomain.com/?q=awesome
+$results = $pages->search(get('q'));
+
+```

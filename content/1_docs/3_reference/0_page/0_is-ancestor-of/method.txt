@@ -1,0 +1,34 @@
+Title:
+
+{{class.instance}}->isAncestorOf($child)
+
+----
+
+Excerpt:
+
+Checks if the page is a direct or indirect ancestor of the given $page object
+
+----
+
+Params: -
+  name: $child
+  type: Page | string
+  text:
+
+----  
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php if($page->isAncestorOf('some-child-page')): ?>
+This page is an ancestor of the given page.
+<?php endif ?>

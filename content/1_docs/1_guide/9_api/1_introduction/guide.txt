@@ -1,0 +1,158 @@
+Title: Introduction
+
+----
+
+Intro: Kirby's REST API is used by the Panel to connect between the (glossary: vue) frontend and the PHP backend. It offers full access to your site, pages, files, users and more. You can use it for your own SPA or mobile applications built on top of Kirby.
+
+----
+
+Text:
+
+## Authentication
+
+Every API request requires authentication. We offer session-based authentication or HTTP Basic auth. (link: docs/guide/api/authentication text: Read more…)
+
+## Language
+In a (link: docs/guide/languages/introduction text: multi-language site) it is necessary to specify the language for which you want to use the API. This is done by sending along a `X-Language` header containing the desired language code with your request.
+
+## Errors
+
+### Example error
+
+```json
+{
+    "status": "error",
+    "message": "The page \"example\" cannot be found",
+    "code": 404
+}
+```
+
+### In debug mode
+
+When debug mode is activated in your config, you will get a more detailed error response with the exception type, file and line.
+
+```json
+{
+    "status": "error",
+    "exception": "Exception",
+    "message": "The page \"example\" cannot be found",
+    "file": "config/api/data.php",
+    "line": 46,
+    "code": 500
+}
+```
+
+To activate the debug mode, add the following to your config:
+
+```php "/site/config/config.php"
+return [
+  'debug' => true
+];
+```
+<info>
+Make sure to disable debug mode in production. The additional information about errors should never be public as that can be a security risk.
+</info>
+
+## Custom API location
+
+Kirby can be configured to host the API at a different location. This can be setup in your config.
+
+```php "/site/config/config.php"
+return [
+  'api' => [
+    'slug' => 'rest'
+  ]
+];
+```
+
+All API endpoints are now available at `https://yourdomain.com/rest`. The Panel will automatically switch to the new API location.
+
+## Custom API routes
+
+If you want to provide your own API endpoints and make use of our authentication and other API features, you can define your own API routes in your config or plugins.
+
+```php "/site/config/config.php"
+return [
+  'api' => [
+    'routes' => [
+      [
+        'pattern' => 'my-endpoint',
+        'action'  => function () {
+          return [
+            'hello' => 'world'
+          ];
+        }
+      ]
+    ]
+  ]
+];
+```
+
+…or in a plugin:
+
+```php "/site/plugins/api/index.php"
+Kirby::plugin('my/api', [
+  'api' => [
+    'routes' => [
+      [
+        'pattern' => 'my-endpoint',
+        'action'  => function () {
+          return [
+            'hello' => 'world'
+          ];
+        }
+      ]
+    ]
+  ]
+]);
+```
+
+
+Your new endpoint is now available at `https://yourdomain.com/api/my-endpoint` and will return a json encoded version of the returned array.
+
+The endpoint is automatically protected with the same authentication layer as our own endpoints. It will also move when you change the API slug as described above.
+
+## Custom API data functions
+
+You can register your own API data provider functions. They are pretty handy if you need to fetch the same kind of data in multiple routes.
+
+```php
+return [
+  'api' => [
+    'data' => [
+      'message' => function () {
+        return 'world';
+      },
+    ]
+    'routes' => [
+      [
+        'pattern' => 'my-endpoint',
+        'action'  => function () {
+          return [
+            'hello' => $this->message()
+          ];
+        }
+      ]
+    ]
+  ]
+];
+```
+
+Of course they can also be registered in plugins. They also have access to all of our native data functions. Here's a list:
+
+```php
+$this->kirby();
+$this->site();
+$this->page($pageId);
+$this->file($pageId, $filename);
+$this->user($userId = null);
+$this->users();
+```
+
+## Custom models
+
+Docs are coming soon…
+
+## Custom collections
+
+Docs are coming soon…

@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->textfile([$language])
+
+----
+
+Excerpt:
+
+Returns the root for the meta file of the file
+
+----
+
+Params: - 
+  name: $language
+  type: string
+  text: Language code
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+

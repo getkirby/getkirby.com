@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th>Option</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Default</th>
+    <th style="width: 33.33%">Description</th>
+  </tr>
+  <?php foreach ($rows as $row): ?>
+  <tr>
+    <td><code><?= $row['prop'] ?></code></td>
+    <td><code><?= $row['type'] ?? 'mixed' ?></code></td>
+    <td><?= $row['required'] ? '✓' : '×' ?></td>
+    <td><code><?= $row['default'] ?? '' ?></code></td>
+    <td style="width: 33.33%"><?= $row['comment'] ?></td>
+  </tr>
+  <?php endforeach ?>
+</table>

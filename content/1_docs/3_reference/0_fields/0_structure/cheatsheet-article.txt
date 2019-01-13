@@ -1,0 +1,109 @@
+Title: Structure
+
+----
+
+Excerpt:
+
+Structured data input, which stores data in a field as YAML.
+
+----
+
+Text:
+
+The structure field makes it possible to add multiple complex entries to a field, which will be stored as (glossary: YAML). A typical use case would be a list of addresses, team members or a restaurant menu.
+
+(screenshot: structure.png)
+
+## Example
+
+```yaml
+fields:
+  addresses:
+    label: Addresses
+    type: structure
+    fields:
+      street:
+        label: Street
+        type: text
+      zip:
+        label: ZIP
+        type: text
+      city:
+        label: City
+        type: text
+```
+
+Such a structure will be stored in the content file like this:
+
+```yaml
+addresses:
+-
+  street: Rue de WTF 17
+  zip:    1112
+  city:   Monaco
+-
+  street: 1212 Broadway
+  zip:    4321
+  city:   New York
+-
+  street: At the beach
+  zip:    9999
+  city:   The capitol of the Bahamas
+```
+
+## Options
+
+(field-options: structure)
+
+## Fields
+
+You can define any number of fields and use the same (link: docs/reference/fields text: field types listed).
+
+## Default values
+
+You can set default values for structure fields which will prepopulate the field:
+
+```yaml
+  emails:
+    label: Emails
+    type: structure
+    default:
+      - email: bastian@getkirby.com
+      - email: lukas@getkirby.com
+      - email: nico@getkirby.com
+      - email: sonja@getkirby.com
+    fields:
+      email:
+        label: Email
+        type: email
+```
+
+## Table columns
+
+You can define the columns that are shown in the table. This is especially useful if you have a lot of fields in your structure and you don't want to show them all on first sight, but still keep them editable. Columns can also change the text alignment, set a custom width and define a before and after text that will be prepended or appended to the value.
+
+```yaml
+fields: 
+	holidays:
+		type: structure
+		columns: 
+			title: 
+				width: 1/4
+			images: 
+				width: 3/4
+		fields: 
+			title: 
+				type: text
+			images: 
+				type: files
+			description: 
+				type: textarea
+```
+
+## Accessing structure fields in your templates
+
+To access a structure field in your templates, you can use the [`$field->yaml()`](../field-methods/yaml) and [`$field->toStructure()`](../field-methods/to-structure) methods.
+
+## Preview of fields in the table
+
+The structure field tries to create the best possible preview for the field in its table view. If you are using fields provided by a plugin in the structure field, the preview of these can be customized with a (link: docs/reference/extensions/field-previews text: field preview extension).

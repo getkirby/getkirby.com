@@ -1,0 +1,11 @@
+Text:
+
+## Example
+
+```php
+<?php if ($page->hasHeader()->toBool()): ?>
+<header>
+  <!-- Your code here -->
+</header>
+<?php endif ?>
+```

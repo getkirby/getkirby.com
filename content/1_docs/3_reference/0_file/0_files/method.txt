@@ -1,0 +1,29 @@
+Title:
+
+{{class.instance}}->files()
+
+----
+
+Excerpt:
+
+Returns the collection of sibling files including the current object
+
+----
+
+Return:
+
+type: $files
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($file = $page->files()->first()) {
+    echo 'The first file in the collection is: ' . $file->title();
+}
+
+```

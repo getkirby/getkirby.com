@@ -1,0 +1,41 @@
+Title:
+
+$pagination->hasPages()
+
+----
+
+Excerpt:
+
+Checks if there are any pages at all. This is useful if you want to show/hide the pagination.
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+
+## Example
+
+```php
+<?php
+
+$subpages   = $page->children()->paginate(10);
+$pagination = $subpages->pagination();
+
+?>
+
+<!-- foreach loop with subpages -->
+
+<?php if($pagination->hasPages()): ?>
+
+<!-- put pagination here -->
+
+<?php endif ?>
+
+```

@@ -1,0 +1,30 @@
+Title:
+
+{{class.instance}}->children()
+
+----
+
+Excerpt:
+
+Returns a $pages collection with all children of each page in the collection
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+```php
+// fetch the children of all pages in the collection
+<?php
+
+foreach($pages->children()->listed() as $child) {
+  echo $child->title()->html();
+
+?>
+```

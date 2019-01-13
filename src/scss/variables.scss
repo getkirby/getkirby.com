@@ -1,0 +1,88 @@
+// =====  Typography  ======================================================= //
+
+$font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+
+$font-size-mono:   16px;
+$line-height-mono: 24px;
+$font-size-code:   14px;
+$line-height-code: 24px;
+
+$font-weight-regular:      400;
+$font-weight-medium:       700;
+$font-weight-bold:         700;
+$font-weight-black:        700;
+
+// =====  Colors  =========================================================== //
+
+// -----  Primary Palette  -------------------------------------------------- //
+
+$color-white:              #ffffff;
+$color-background:         #efefef;
+$color-muted:              #777;
+$color-light-gray:         #ced2d7;
+$color-anthracite:         #3c4350;
+$color-dark-gray:          #232529;
+$color-black:              #000;
+
+$color-inset: #ebebeb;
+$color-border: #ccc;
+
+$color-kirby-blue:         #4271ae;
+$color-kirby-blue-alt:     #5890d8;
+$color-focus-outline:        rgba($color-kirby-blue, .6);
+$color-focus-outline-alt:    rgba($color-kirby-blue-alt, .8);
+
+// -----  Colors for light backgrounds  ------------------------------------- //
+
+$color-red:                hsl(0, 71%, 55%);
+$color-orange:             hsl(29, 91%, 54%);
+$color-yellow:             hsl(47, 100%, 40%);
+$color-green:              hsl(65, 71%, 36%);
+$color-aqua:               hsl(183, 44%, 40%);
+$color-blue:               hsl(214, 45%, 47%);
+$color-purple:             hsl(285, 44%, 50%);
+
+// -----  Colors for dark backgrounds  -------------------------------------- //
+
+$color-syntax:             $color-background;
+$color-syntax-comment:     #a9aaad;
+$color-syntax-light-gray:  #cacbd1;
+$color-syntax-white:       #c5c9c6;
+
+$color-syntax-red:         #d16464;
+$color-syntax-orange:      #de935f;
+$color-syntax-yellow:      #f0c674;
+$color-syntax-green:       #a7bd68;
+$color-syntax-aqua:        #8abeb7;
+$color-syntax-blue:        #7e9abf;
+$color-syntax-purple:      #b294bb;
+
+// =====  Style  ============================================================ //
+
+$border-radius: 1px;
+$border-radius-link-backplane: 4px;
+$shadow: 0 2px 10px rgba(0,0,0,.2);
+$element-spacing: 1.5em; // should be equal to line-height
+
+// =====  Breakpoints  ====================================================== //
+
+$mq-breakpoints: (
+  ('' 0px 4)
+  (s 608px 12)
+  (m 896px 12)
+  (l 1200px 12)
+);
+
+$mq-debug: false;
+$mq-print-pseudo-rules: false;
+
+// =====  Layout  =========================================================== //
+
+$grid-gutter-mobile:  24px;
+$grid-gutter-desktop: 32px;
+
+
+// =====  Helpers  ========================================================== //
+
+$ease-in-out-sine: cubic-bezier(0.445, 0.05, 0.55, 0.95);

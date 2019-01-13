@@ -1,0 +1,11 @@
+Title: /site/children
+----
+Info: POST
+----
+Excerpt: Create a new subpage
+----
+Text:
+
+## Post parameters
+
+(docs: api/page-create-data)

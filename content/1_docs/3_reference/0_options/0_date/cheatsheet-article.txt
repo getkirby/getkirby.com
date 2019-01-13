@@ -1,0 +1,21 @@
+Excerpt: Setup date handling
+
+----
+
+Text:
+
+## Date handler
+
+Determine which PHP function is used to formate dates for pages and files.
+
+Possible values: `date` | `strtime` (default: `date`)
+
+```php
+return [
+    'date'  => [
+        'handler' => 'strftime'
+    ]
+];
+```
+
+

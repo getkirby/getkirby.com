@@ -1,0 +1,30 @@
+Title:
+
+{{class.instance}}->isErrorPage()
+
+----
+
+Excerpt:
+
+Checks if the page is the error page
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+### A custom css file for the error page
+
+```php
+<?php if($page->isErrorPage()): ?>
+<?= css('assets/css/error.css') ?>
+<?php endif ?>
+```

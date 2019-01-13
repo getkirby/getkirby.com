@@ -1,0 +1,20 @@
+Title:
+
+{{class.instance}}->sessionLanguage()
+
+----
+
+Excerpt:
+
+Returns the language which will be remembered for the next visit
+
+----
+
+Return:
+
+type: language
+text:
+
+----
+
+Text:

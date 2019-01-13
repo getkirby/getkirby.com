@@ -1,0 +1,15 @@
+Title: Users
+
+----
+
+Text:
+
+## User fields
+
+The following fields are available in the user model and can be fetched with the `select` parameter.
+
+(api-fields: user)
+
+## Available Endpoints
+
+(reference: api/users)

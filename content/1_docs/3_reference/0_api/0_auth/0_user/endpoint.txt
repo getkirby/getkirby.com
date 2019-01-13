@@ -1,0 +1,25 @@
+Title: /auth
+----
+Info: GET
+----
+Excerpt: Retrieve info about the logged in user
+----
+Text:
+
+### Query parameters
+
+(docs: api/role-parameters)
+
+----
+Response:
+
+{
+    "code": 200,
+    "data": {
+        "description": "The admin has all rights",
+        "name": "admin",
+        "title": "Admin"
+    },
+    "status": "ok",
+    "type": "model"
+}

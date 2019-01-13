@@ -1,0 +1,9 @@
+Title: L. David Swakman
+
+----
+
+Text: More and more a CMS needs to be headless and flexible to configure. I just <3 @getkirby’s clean & simple panel UI and native JSON support!
+
+----
+
+Url: https://www.ldaniel.eu/

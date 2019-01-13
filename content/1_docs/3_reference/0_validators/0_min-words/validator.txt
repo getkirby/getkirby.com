@@ -1,0 +1,21 @@
+Text:
+
+## In your code
+
+```php
+if(v::minWords('Lorem ipsum dolor sit amet.', 5)) {
+  echo 'Yay, valid!';
+}
+
+```
+
+## In fields
+
+```
+fields:
+  example:
+    label: Example field
+    type: text
+    validate:
+      minWords: 5
+```

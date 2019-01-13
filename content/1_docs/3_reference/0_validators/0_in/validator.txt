@@ -1,0 +1,24 @@
+Text:
+
+## In your code
+
+```php
+if(v::in('A', ['A', 'B', 'C'])) {
+  echo 'Yay, valid!';
+}
+
+```
+
+## In fields
+
+```
+fields:
+  example:
+    label: Example field
+    type: text
+    validate:
+      in:
+        - A
+        - B
+        - C
+```

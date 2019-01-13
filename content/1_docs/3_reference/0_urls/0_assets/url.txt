@@ -1,0 +1,5 @@
+Title: Assets
+
+----
+
+Excerpt: Returns the url of the assets folder

@@ -1,0 +1,17 @@
+Title: Empty
+----
+Text:
+
+Whenever you have to deal with an "empty" state, such as an empty list or a search without results, you can use the `k-empty` component to make it a bit nicer. The component combines an icon with text in a wrapper box.
+
+```html
+<k-empty icon="image">No images yet</k-empty>
+```
+
+## Events
+
+You can bind any events to the component
+
+```html
+<k-empty icon="image" @click="addFirst">No images yet</k-empty>
+```

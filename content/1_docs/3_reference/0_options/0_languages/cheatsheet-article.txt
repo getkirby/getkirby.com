@@ -1,0 +1,13 @@
+Excerpt: Enables language definitions via the Panel
+
+----
+
+Text:
+
+## Example
+
+```php
+return [
+    'languages' => true
+];
+```

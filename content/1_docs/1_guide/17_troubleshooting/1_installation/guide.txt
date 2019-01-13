@@ -1,0 +1,44 @@
+Title: Installation issues
+
+----
+
+Intro: We try our best to make the installation of Kirby as effortless as possible, but with multiple server setups and PHP versions, there's unfortunately always space for problems.
+
+----
+
+Text:
+
+## Broken subpages
+
+Your homepage is working great, but subpages won't open or lead to a server error?
+
+1. Make sure that the `.htaccess` file that ships with Kirby is present in your Kirby folder.
+2. Check if `mod_rewrite` is enabled on your server (Apache).
+3. Check if the `.htaccess` file gets loaded. You can test this by putting some nonsense characters into your `.htaccess`. If this triggers an "Internal Server Error", the file gets loaded. Otherwise, you need to enable `AllowOverride all` in your Apache configuration.
+4. Please try setting the `RewriteBase` in the `.htaccess` file:
+
+```
+RewriteBase /
+```
+
+If you run Kirby in a subfolder, make sure to set the RewriteBase according to the name of your subfolder:
+
+```
+RewriteBase /my-subfolder
+```
+
+## Weird PHP syntax errors
+
+Please make sure that you use the minimum required version of PHP, which is 7.1+ since Kirby 3.0.0. We recommend using the most recent stable PHP version that is available to you.
+
+## Broken data after saving
+
+Your content files seem to be corrupted after you tried to save a page in the Panel? Make sure the PHP `mb_string` extension is installed on your server. A missing extension leads to broken data in text files.
+
+## Error 500 when trying to access Panel
+
+Make sure that the PHP `mb_string` extension is installed/enabled.
+
+## More problems?
+
+Don't hesitate to ask questions in the (link: http://forum.getkirby.com text: forum) or send us an email: <support@getkirby.com>

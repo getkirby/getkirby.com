@@ -1,0 +1,32 @@
+Title:
+
+$pagination->isFirstPage()
+
+----
+
+Excerpt:
+
+Checks if the current page is the first page
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+$subpages   = $page->children()->paginate(10);
+$pagination = $subpages->pagination();
+
+if($pagination->isFirstPage()) {
+  echo 'This is the first page';
+}
+
+```

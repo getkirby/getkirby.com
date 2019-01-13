@@ -1,0 +1,9 @@
+Title: Page Model
+
+----
+Entry:
+
+Page models extend Kirby's default Page object. Methods that you define in a Page model are available everywhere in Kirby where you call a page of the extended type.
+
+----
+Link: docs/guide/templates/page-models

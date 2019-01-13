@@ -1,0 +1,45 @@
+Title:
+
+{{class.instance}}->append($key, $object)
+
+----
+
+Excerpt:
+
+Appends an element to the data array
+
+----
+
+Params: -
+  name: $key
+  type: string
+  text:
+-
+  name: $object
+  type: mixed
+  text:
+
+----
+
+Return:
+
+type: collection
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+    $collection = page('projects')->children()->limit(1);
+    foreach(page('projects')->children()->offset(1) as $key => $child) {
+      $collection->append($key, $child);
+    }
+    foreach($collection as $item) {
+      echo $item->title() ;
+    }
+?>
+```

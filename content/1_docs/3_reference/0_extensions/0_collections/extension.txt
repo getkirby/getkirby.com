@@ -1,0 +1,48 @@
+Title: Collections
+
+----
+
+Guide: templates/collections
+
+----
+
+Text:
+
+Collections are registered with the `collections` extension.
+
+## Callback definition
+
+ The `collections` extension accepts an array of collections where the key is the name of the collection and the value a callback function that returns the collection.
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('your/plugin', [
+  'collections' => [
+    'projects' => function ($site) {
+      return $site->find('projects')->children()->listed();
+    }
+  ]
+]);
+```
+
+## File definition
+
+Alternatively, you can require a file. The required file would be a (link: docs/guide/templates/collections text: collection) with a return function.
+
+```php
+Kirby::plugin('your/plugin', [
+  'collections' => [
+    'articles' => require 'some/file.php'
+  ]
+]);
+```
+
+## Usage in templates
+
+Once defined, you can use the collection in your templates using the [`collection()` helper](../helpers/collection).
+
+```php "/site/templates/blog.php"
+<?php foreach (collection('articles') as $article) : ?>
+  Author: <?= $article->author() ?>
+  ...
+<?php endforeach ?>
+```

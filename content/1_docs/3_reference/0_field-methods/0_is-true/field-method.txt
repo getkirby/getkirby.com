@@ -1,0 +1,11 @@
+Text:
+
+## Example
+
+```php
+<?php if ($page->cover()->isTrue()): ?>
+<figure class="cover">
+  <!-- Your code here -->
+</figure>
+<?php endif ?>
+```

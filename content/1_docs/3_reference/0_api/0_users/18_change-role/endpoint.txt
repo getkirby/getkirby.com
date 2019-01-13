@@ -1,0 +1,12 @@
+Title: /users/:id/role
+----
+Info: PATCH
+----
+Excerpt: Change the role
+----
+Text:
+
+## Patch parameters
+
+(docs: api/user-role-data)
+

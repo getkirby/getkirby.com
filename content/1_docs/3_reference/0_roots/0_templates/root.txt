@@ -1,0 +1,5 @@
+Title: templates
+
+----
+
+Excerpt: Returns the root of the templates folder.

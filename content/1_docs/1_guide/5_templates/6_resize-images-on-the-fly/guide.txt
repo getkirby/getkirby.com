@@ -1,0 +1,99 @@
+Title: Resizing & cropping images
+
+----
+
+Intro: Kirby's built-in thumbs creator lets you resize and crop any image on the fly in your templates. You can not only resize and crop images from the content folder, but also from the assets folder directly.
+
+----
+
+Text:
+
+With Kirby's new Thumbnail API, thumbs are generated asynchronously. This makes thumb creation feel at lot faster and creates less memory issues, which could easily become an issue with many images or when creating many different images sizes to serve responsive images.
+
+A new set of plugin points can be used to hook into the thumbnail API or the thumbnail URLs, see (link: docs/reference/extensions/core-components text: core components).
+
+In a default setup, thumbnails are stored in the `/media` folder.
+
+## Resizing images
+
+```php
+$image->resize(300);
+
+$image->resize(300, 200);
+```
+
+## Cropping images
+
+### Square
+
+```php
+$image->crop(100);
+```
+
+### Crop by width and height
+
+```php
+$image->crop(100, 200);
+```
+
+## Crop positions
+
+You can set from which position a file should be cropped. The following crop options are available:
+
+- `top left`
+- `top`
+- `top right`
+- `left`
+- `center`
+- `right`
+- `bottom left`
+- `bottom`
+- `bottom right`
+
+This is how to use the crop positions in your code:
+
+```php
+// quick and simple
+$image->crop(100, 200, 'top right');
+
+// more fine grained control
+$image->crop(100, 200, [
+  'quality' => 70,
+  'crop' => 'left'
+]);
+```
+
+
+## Blur
+
+The `blur` method applies a blur filter to an image. You can modify the intensity of the blur effect by passing an integer. The default value is 10.
+
+```php
+$image->blur();
+$image->blur(30);
+```
+
+## Greyscale
+
+The grayscale methods converts an image to grayscale.
+
+```php
+$image->greyscale();
+```
+
+## Configuring your thumbnails
+
+Options for thumbnails are set with the `thumbs` key in Kirby's configuration:
+
+```php "/site/config/config.php"
+return [
+  'thumbs' => [
+    'driver'    => 'im',
+    'quality'   => 90,
+    'bin'       => '/usr/local/bin/convert',
+    'interlace' => true
+  ]
+];
+```
+
+(link: docs/reference/options/thumbs text: All thumbs options)

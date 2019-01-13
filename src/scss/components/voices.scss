@@ -1,0 +1,54 @@
+/* -----  Voices Grid  ------------------------------------------------------------- */
+
+.voices {
+  column-gap: 3rem;
+
+  @include mq(from s) {
+    columns: 2;
+  }
+
+  @include mq(from m) {
+    columns: 3;
+  }
+}
+
+.voices li {
+  display: inline-block;
+  break-inside: avoid;
+  margin-bottom: 3rem;
+}
+
+/* -----  Single Voice  ------------------------------------------------------------- */
+
+.voice-source a {
+  align-items: center;
+  display: inline-flex;
+  outline-offset: .2rem;
+  margin-bottom: .5rem;
+}
+
+.voice-source img {
+  flex-grow: 0;
+  height: 2rem;
+  margin-right: 1rem;
+  width: 2rem;
+}
+
+.voice-author {
+  font-weight: 400;
+  font-size: .75rem;
+  font-family: $font-mono;
+  color: rgba($color-anthracite, .75);
+  margin: 0;
+}
+
+.voice-text {
+  font-size: .875rem;
+  line-height: 1.625;
+  padding: .75rem;
+  background: $color-white;
+}
+
+.voice-text a {
+  text-decoration: none !important;
+}

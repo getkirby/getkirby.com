@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->isDescendantOfActive()
+
+----
+
+Excerpt:
+
+Checks if the page is a descendant of the currently active page
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php if($page->isDescendantOfActive()): ?>
+This page is a descendant of the currently active page.
+<?php endif ?>
+```

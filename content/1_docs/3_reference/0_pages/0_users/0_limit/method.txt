@@ -1,0 +1,20 @@
+Title:
+
+$users->limit($limit)
+
+----
+
+Excerpt:
+
+Returns a limited subset of the collection
+
+----
+
+Return:
+
+type: $users
+text:
+
+----
+
+Text:

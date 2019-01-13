@@ -1,0 +1,14 @@
+Text:
+
+## Example
+
+```php
+echo kirbytag([
+  'link'  => 'blog/my-article',
+  'text'  => 'Go to my blog article'
+]);
+
+// will manually do the same as
+// (\link: blog/my-article text: Go to my blog article)
+// in KirbyText
+```

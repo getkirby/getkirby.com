@@ -1,0 +1,22 @@
+Title: {{class.instance}}->defaultLanguage()
+
+----
+
+Excerpt: Returns the $language object for the default language
+
+----
+
+Return:
+
+type: $language
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $site->defaultLanguage()->name() ?>
+```

@@ -1,0 +1,48 @@
+@import "../includes";
+
+.home-highlights-grid {
+  padding: 3rem 0;
+  border-bottom: 4px solid $color-background;
+
+  @include mq(from m) {
+    padding: 4.5rem 0;
+  }
+
+}
+
+.home-highlights-grid > * {
+  min-width: 0;
+}
+.home-highlights-grid > * + * {
+  margin-top: 3rem;
+}
+
+@supports (display: grid) {
+  .home-highlights-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 3rem;
+    @include mq(from m) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .home-highlights-grid > * + * {
+    margin-top: 0;
+  }
+}
+
+.home-highlights-features li {
+  display: flex;
+  align-items: baseline;
+  font-size: .875rem;
+  line-height: 1.5;
+  color: rgba($color-anthracite, 0.75);
+}
+.home-highlights-features svg {
+  position: relative;
+  margin-right: .5rem;
+  top: .175rem;
+}
+.home-highlights-features svg * {
+  fill: $color-yellow;
+}

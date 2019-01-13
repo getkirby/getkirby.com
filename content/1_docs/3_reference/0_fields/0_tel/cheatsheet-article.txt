@@ -1,0 +1,28 @@
+Title: Tel
+
+----
+
+Excerpt:
+
+A phone number input field
+
+----
+
+Text:
+
+The phone field creates a text input with the type `tel` and a custom phone icon.
+
+(screenshot: tel.png)
+
+## Example
+
+```yaml
+fields:
+  phone:
+    label: Phone
+    type: tel
+```
+
+## Options
+
+(field-options: tel)

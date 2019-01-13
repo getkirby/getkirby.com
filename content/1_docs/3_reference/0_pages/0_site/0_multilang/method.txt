@@ -1,0 +1,29 @@
+Title:
+
+{{class.instance}}->multilang()
+
+----
+
+Excerpt:
+
+Checks if there are one or more languages configured in the config.php
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php if($site->multilang()): ?>
+This is a multi-language website
+<?php endif ?>
+
+```

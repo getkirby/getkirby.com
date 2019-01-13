@@ -1,0 +1,113 @@
+Title: User blueprint
+
+----
+
+Excerpt: User blueprints are located in `/site/blueprints/users` and control the Panel setup, form fields and permissions for a user role.
+
+----
+
+Text:
+
+## Blueprint location
+
+```filesystem
+/site/blueprints/users/
+```
+
+## Default user blueprint
+
+To create the same set of fields for all roles, you can setup a `default.yml` that is used whenever no custom role blueprint is configured.
+
+```filesystem
+/site/blueprints/users/default.yml
+```
+
+## Title
+
+The title is required and will appear in the list of selectable roles when a new user is created.
+
+### Translated titles
+
+The title can be translated by passing an array of translations with the matching language code as key:
+
+```yaml
+title:
+	en: Client
+	de: Kunde
+```
+
+## Permissions
+
+The `permissions` option can be used to restrict access to certain actions for the particular role. By default, all actions are allowed and you can deny them by passing `false`.
+
+### `acccess`
+
+| Option | Value |
+|----    | ---- |
+| `panel` | `true`/`false` |
+| `users` | `true`/`false`|
+| `site` | `true`/`false` |
+
+### `file`
+
+| Option | Value |
+|----    | ---- |
+| `changeName` | `true`/`false` |
+| `create` | `true`/`false` |
+| `delete` | `true`/`false` |
+| `replace` | `true`/`false` |
+| `update` | `true`/`false` |
+
+### `page`
+
+| Option | Value |
+|----    | ---- |
+| `changeSlug` | `true`/`false` |
+| `changeStatus` | `true`/`false` |
+| `changeTemplate` | `true`/`false` |
+| `changeTitle` | `true`/`false` |
+| `create` | `true`/`false` |
+| `delete` | `true`/`false` |
+| `preview` | `true`/`false` |
+| `update` | `true`/`false` |
+
+### `site`
+
+| Option | Value |
+|----    | ---- |
+| `update` | `true`/`false` |
+
+### `user`
+
+| Option | Value |
+|----    | ---- |
+| `changeEmail` | `true`/`false` |
+| `changeLanguage` | `true`/`false` |
+| `changeName` | `true`/`false` |
+| `changePassword` | `true`/`false` |
+| `create` | `true`/`false` |
+| `delete` | `true`/`false` |
+| `update` | `true`/`false` |
+
+
+It's also possible to restrict access to entire blocks by just passing `false` to the block:
+
+```yaml
+permissions:
+	page: false
+```
+
+### Options
+
+With options, you can control all the user actions that should or should not be available for this particular user type. The option dropdown for users will adjust accordingly.
+
+| Option | Value |
+|----    | ---- |
+| `changeEmail` | `true`/`false` |
+| `changeLanguage` | `true`/`false` |
+| `changeName` | `true`/`false` |
+| `changePassword` | `true`/`false` |
+| `changeRole` | `true`/`false` |
+| `delete` | `true`/`false` |
+| `update` | `true`/`false` |
+

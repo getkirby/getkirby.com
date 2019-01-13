@@ -1,0 +1,32 @@
+Title:
+
+{{class.instance}}->has($file)
+
+----
+
+Excerpt:
+
+Checks if a $file object is included in the collection
+
+----
+Params: -
+  name: $file
+  type: File | string
+  text: Accepts a filename or a file object
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+```php
+<?php if($page->files()->has('myimage.jpg')): ?>
+There exists a file with the filename `myimage.jpg`
+<?php endif ?>
+```

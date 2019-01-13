@@ -1,0 +1,20 @@
+Title:
+
+$users->pagination()
+
+----
+
+Excerpt:
+
+Returns the pagination object after using $users->paginate()
+
+----
+
+Return:
+
+type: $pagination
+text:
+
+----
+
+Text:

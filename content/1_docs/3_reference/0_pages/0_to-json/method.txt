@@ -1,0 +1,20 @@
+Title:
+
+{{class.instance}}->toJson()
+
+----
+
+Excerpt:
+
+Converts the collection to a JSON string
+
+----
+
+Return:
+
+type: string
+text: 
+
+----
+
+Text:

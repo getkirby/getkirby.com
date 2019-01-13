@@ -1,0 +1,11 @@
+Title: /users/
+----
+Info: POST
+----
+Excerpt: Create a user
+----
+Text:
+
+## Post parameters
+
+(docs: api/user-create-data)

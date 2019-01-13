@@ -1,0 +1,32 @@
+Title:
+
+{{class.instance}}->hasChildren()
+
+----
+
+Excerpt:
+
+Checks if the page has children
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+echo $page->hasChildren(); //returns the number of children in the folder
+
+if($page->hasChildren()) {
+  $children = $page->children();
+}
+?>
+```

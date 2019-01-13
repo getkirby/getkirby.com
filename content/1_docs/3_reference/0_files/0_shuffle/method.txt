@@ -1,0 +1,34 @@
+Title:
+
+$files->shuffle()
+
+----
+
+Excerpt:
+
+Returns the collection in shuffled order.
+
+----
+
+Return:
+
+type: $files
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<ul>
+  <?php foreach($page->files()->shuffle() as $file): ?>
+  <li>
+    <a href="<?= $file->url() ?>">
+      <?= html($file->filename()) ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

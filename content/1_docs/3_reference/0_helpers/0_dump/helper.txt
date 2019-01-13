@@ -1,0 +1,19 @@
+Text:
+
+## Example
+
+
+```php
+dump($kirby->users());
+
+$tags = $page->tags()->pluck(',');
+dump($tags);
+```
+
+If you want to return only the value, you can set the second parameter to false:
+
+```php
+$fruitSalad = ['🍎', '🥝', '🍒', '🍇', '🍐'];
+
+$dump = dump($fruitSalad, false);
+```

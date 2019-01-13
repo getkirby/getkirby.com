@@ -1,0 +1,42 @@
+Title:
+
+{{class.instance}}->update($data = [])
+
+----
+
+Excerpt:
+
+Updates the user account information.
+
+----
+
+Return:
+
+type: $user
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+try {
+
+  $kirby->user('bastian@example.com')->update([
+    'email'     => 'bastian@getkirby.com',
+    'firstName' => 'Bastian',
+    'lastName'  => 'Allgeier'
+  ]);
+
+  echo 'The user has been updated';
+
+} catch(Exception $e) {
+
+  echo 'The user could not be updated';
+  // optional reason: echo $e->getMessage();
+
+}
+
+```

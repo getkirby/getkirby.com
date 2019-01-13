@@ -1,0 +1,62 @@
+Title: Time
+
+----
+
+Excerpt: A time picker field
+
+----
+
+Text:
+
+The time field is perfect for events or any other kind of time-based field content. It creates a selectbox with all available times of the date defined by certain interval.
+
+(screenshot: time.png)
+
+## Example
+
+```yaml
+fields:
+  time:
+    label: Time
+    type: time
+```
+
+## Options
+
+(field-options: time)
+
+## Notation
+
+You can choose between the 12 hour (AM/PM) and the 24 hour format. The default is the 24 hour format.
+
+```yaml
+fields:
+  time:
+    label: Time
+    type: time
+    notation: 12
+```
+
+## Step
+
+Intervals between selectable options are defined in minutes. The default is 60 minutes.
+
+```yaml
+fields:
+  time:
+    label: Time
+    type: time
+    step: 30
+```
+
+## Default value
+
+The default value can either be set to a specific time (e.g. `17:00`) – and will be matched with the closest interval option – or as `now`.
+
+```yaml
+fields:
+  time:
+    label: Time
+    type: time
+    default: now
+```

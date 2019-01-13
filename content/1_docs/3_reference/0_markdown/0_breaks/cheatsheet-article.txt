@@ -1,0 +1,18 @@
+Title: Line breaks & paragraphs
+
+----
+
+Excerpt:
+
+----
+
+Text:
+
+Markdown automatically converts single line breaks and paragraphs.
+
+```markdown
+My first line
+My second line
+
+Another paragraph
+```

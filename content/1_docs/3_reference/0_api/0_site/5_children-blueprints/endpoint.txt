@@ -1,0 +1,5 @@
+Title: /site/children/blueprints
+----
+Info: GET
+----
+Excerpt: List all allowed blueprints for children

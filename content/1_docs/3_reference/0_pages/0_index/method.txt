@@ -1,0 +1,30 @@
+Title:
+
+{{class.instance}}->index()
+
+----
+
+Excerpt:
+
+Recursively creates a full index from all pages and subpages in the collection and returns it as a new flat $pages collection
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+// goes through any subpage, subsubpage, etc. below $page and returns them by template
+$articles = $page->children()->index()->filterBy('template', 'article');
+
+// the index method is also perfect for searching
+$results = $page->children()->index()->search('mysearchword');
+```

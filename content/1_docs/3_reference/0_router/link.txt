@@ -1,0 +1,3 @@
+Title: Router
+----
+Link: docs/reference/router/patterns

@@ -1,0 +1,48 @@
+Title:
+
+{{class.instance}}->modified($format = false, $handler = null)
+
+----
+
+Excerpt:
+
+Returns the unix timestamp or a formatted date for when the file has been modified
+
+----
+
+Params: -
+  name: $format
+  type: string
+  text: Date format
+-
+  name: $handler
+  type: string
+  text: Formatting function (date or strftime)
+
+----
+
+Return:
+
+type: integer | string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+
+if($file = $page->file()) {
+    // unix timestamp
+    echo $file->mmodified();
+
+    // formatted date
+    echo $file->modified('d/m/Y');
+
+    // formatted date using strftime
+    echo $file->modified('%d/%m/%Y', 'strftime');
+
+}
+```

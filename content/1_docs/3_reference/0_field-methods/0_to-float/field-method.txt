@@ -1,0 +1,8 @@
+Text:
+
+## Example
+
+```php
+<?= $page->mynumber()->float() ?>
+```
+

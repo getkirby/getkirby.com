@@ -1,0 +1,38 @@
+Title: Multiselect
+
+----
+
+Excerpt:
+
+A select field that allows you to select multiple options
+
+----
+
+Text:
+
+The multiselect field displays any number of options in a dropdown selectbox with a search box that helps narrowing down the options. This is perfect if you have lots of options, from which the user can just choose one or more.
+
+(screenshot: multiselect.png)
+
+## Example
+
+```yaml
+fields:
+  categories:
+    label: Categories
+    type: multiselect
+    min: 2
+    max: 4
+    options:
+      design: Design
+      architecture: Architecture
+      photography: Photography
+      3d: 3D
+      web: Web
+```
+
+## Options
+
+(field-options: multiselect)
+
+(docs: panel-field-options field: multiselect)

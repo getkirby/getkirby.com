@@ -1,0 +1,60 @@
+Class: Kirby\Cms\Page
+
+----
+Text:
+
+## How to fetch the `$page` object
+
+The `$page` class is available in Kirby's templates/snippets etc. through the `$page` variable that -  unless otherwise defined – always refers to the current page.
+
+However, you can also define a `$page` object by calling a specific page using the `page()` helper:
+
+```php
+$page = page('somepage');
+```
+
+Or getting it from a collection of pages
+
+```php
+$page = $pages->first();
+```
+
+<info>
+When getting a specific page via the `page()` helper or when trying to create a page object from field values stored in content, always verify that you have a page object before you call any of the Page methods.
+</info>
+
+## Examples
+
+With the `$page` object defined, you can start using the methods of the class:
+
+### Get a field of the page
+
+```php
+<?= $page->title() ?>
+```
+
+### Get the children of the page
+
+```php
+<?php $children = $page->children() ?>
+```
+
+### Get all images of the page
+
+```php
+<?php $images = $page->images() ?>
+```
+
+### Check if the page is active
+
+```php
+<?php e($page->isActive(), 'active') ?>
+```
+
+### Check if the page has draft children
+
+```php
+if ($page->hasDrafts()) {
+  echo "This page still has some children that haven't been published yet";
+}
+```

@@ -1,0 +1,36 @@
+Title:
+
+{{class.instance}}->width()
+
+----
+
+Excerpt:
+
+Returns the width of image files in pixels
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($image = $page->image('myimage.jpg')) {
+   echo $image->width();
+}
+```
+
+## Resizing the width
+
+By passing a value, you can also use the `$file->width()` method to resize the image by width:
+
+```php
+echo $image->width(300);
+```

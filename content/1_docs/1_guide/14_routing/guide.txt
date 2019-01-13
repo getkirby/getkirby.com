@@ -1,0 +1,207 @@
+Title: Routing
+
+----
+
+Description: Use Kirby's router to modify URLs or provide extra functionality when the user calls an given URI pattern.
+
+----
+Text:
+
+When you create a new page in Kirby's content folder, this folder creates a new URL, for example, the page `/content/projects/project-a` will be available at `https://yourdomain.com/projects/project-a`. So when the user types that URL into the browser's address bar, the project page will be rendered.
+
+Sometimes however, you may want to provide content under URLs that do not exist as pages in your content folder, for example:
+
+- to create virtual utility pages like a sitemap or an RSS feed,
+- to redirect to other parts of your installation or to remove parts of a page URL to make pages available at a shorter URL (for example, leave out the blog folder when accessing posts that would otherwise be available at `https://yourdomain.com/blog/my-super-post`),
+- to create custom API endpoints,
+- to return a response object,
+- to filter by URL rather than using parameters,
+- ...
+
+That is where routes come into play. Routes react on an URL pattern. They can either return something to users when they visit an URL with that pattern, or they can have functional purposes, e.g. some function is executed when a script calls a particular URL.
+
+
+## Defining your own routes
+
+Kirby has a built-in router, which can be extended with your own routes.
+
+Routes can be setup with the `routes` option in your `/site/config/config.php` or in plugins.
+
+Routes are simple associative arrays with two required fields: pattern and action.
+
+In your route patterns, you can use static strings, but also (link: docs/reference/router/patterns text: dynamic placeholders).
+
+### In your config
+
+```php "/site/config/config.php"
+return [
+  'routes' => [
+    [
+      'pattern' => 'my/awesome/url',
+      'action'  => function () {
+        // do something here when the URL matches the pattern above
+      }
+    ]
+  ]
+];
+```
+### In a plugin
+
+```php
+Kirby::plugin('your/plugin', [
+  'routes' => [
+    [
+      'pattern' => 'my/awesome/url',
+      'action'  => function () {
+        // do something here when the URL matches the pattern above
+      }
+    ]
+  ]
+]);
+```
+
+You can also define your route definition as a callback, which gives you more control, e.g. to access information from inside Kirby in your patterns (in this example to use a Kirby option as part of the pattern):
+
+```php
+Kirby::plugin('your/plugin', [
+  'routes' => function ($kirby) {
+      return [
+          [
+              'pattern' => 'something/' . $kirby->option('something'),
+              'action' => function () {
+
+              }
+          ]
+      ];
+  }
+]);
+```
+
+## Response types
+
+
+Depending on your use case, routes can return various response types, which will be handled accordingly by Kirby:
+
+### Page object
+
+
+```php
+[
+  'pattern' => 'projects/(:any)',
+  'action'  => function ($filter) {
+    return page('projects');
+  }
+]
+```
+
+### String
+
+```php
+[
+  'pattern' => 'boring.html',
+  'action'  => function () {
+    return '<html><body>Boring!</body></html>';
+  }
+]
+```
+
+### False | Null | ''
+
+```php
+[
+  'pattern' => 'not/found',
+  'action'  => function () {
+    return false;
+  }
+]
+ ```
+
+### Array
+
+```php
+[
+  'pattern' => 'fancy.json',
+  'action'  => function () {
+    return [
+      'status' => 'ok',
+      'data'   => ['foo' => 'bar']
+    ];
+  }
+]
+```
+
+### Response Object
+
+```php
+[
+  'pattern' => 'custom/response',
+  'action'  => function () {
+    return new Response('<foo>bar</foo>', 'text/html');
+  }
+]
+```
+### Exception
+
+```php
+[
+  'pattern' => 'custom/response',
+  'action'  => function () {
+    throw new Exception('Something went horribly wrong');
+  }
+]
+```
+
+
+## Before and after hooks
+
+
+You can register hooks for the event when a route has been found, but has not been executed yet, and when the route has just been executed. Those hooks are very useful to intercept certain routes based on your own rules, or to manipulate the result of a particular route.
+
+### route:before
+
+```php "/site/config/config.php"
+return [
+  'hooks' => [
+    'route:before' => function ($route, $path, $method) {
+      if ($path === 'super/secret' && !kirby()->user()) {
+        die('Nope');
+      }
+    }
+  ]
+];
+```
+
+### route:after
+
+```php "/site/config/config.php"
+return [
+  'hooks' => [
+    'route:after' => function ($route, $path, $method, $result) {
+      return myHtmlCompressor($result);
+    }
+  ]
+];
+```
+## Virtual Pages
+
+A route can return a virtual page that doesn't really exist in the file system. This is very useful to mock pages with custom data from other data sources.
+
+```php "/site/config/config.php"
+return [
+  'routes' => [
+    [
+      'pattern' => 'virtual-reality',
+      'action'  => function () {
+        return new Page([
+          'slug' => 'virtual-reality',
+          'template' => 'virtual-page',
+          'content' => [
+            'title' => 'This is not a real page',
+            'text'  => 'Believe it or not, this page is not in the file system'
+          ]
+        ]);
+      }
+    ]
+  ]
+];
+```

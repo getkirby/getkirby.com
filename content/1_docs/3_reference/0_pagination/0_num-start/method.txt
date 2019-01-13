@@ -1,0 +1,22 @@
+Title:
+
+$pagination->numStart()
+
+----
+
+Excerpt:
+
+Returns the index number of the first item on the current page
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:
+
+Can be used to display something like "Currently showing 1 - 10 of 123 items"

@@ -1,0 +1,56 @@
+Title: Pages methods
+
+----
+
+Guide: templates/php-api#pages
+
+----
+
+Text:
+
+Pages methods are registered with the `pagesMethods` extension.
+
+## Default pages methods
+
+**For a full (link: docs/reference/#pages text: list of default pages methods), please check out the Reference.**
+
+<info>Be aware that you cannot override these default pages methods with any custom pages method.</info>
+
+## Getting started
+
+You can extend the set of defined pages methods very easily in a plugin file.
+
+```php "/site/plugins/pages-methods/index.php"
+Kirby::plugin('my/pagesMethods', [
+    'pagesMethods' => [
+        'listAll' => function () {
+            foreach($this as $page) {
+                echo '- ' . $page->title() . '<br>';
+            }
+        }
+    ]
+]);
+```
+
+This example shows the basic architecture of a pages method. You define the method name with the key for the `pagesMethods` array. `$this` in the callback function is the `$pages` collection.
+
+## Working with method arguments
+
+In some cases it might be helpful to be able to pass arguments to the method:
+
+```php
+<?= $pages->withGame('Mario Kart 64') ?>
+```
+
+The definition for such a method with arguments is very simple:
+
+```php
+Kirby::plugin('my/plugin', [
+    'pagesMethods' => [
+        'withGame' => function ($game) {
+            return $this->filterBy('game', $game);
+        }
+    ]
+]);
+```
+

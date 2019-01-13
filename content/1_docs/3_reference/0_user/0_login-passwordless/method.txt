@@ -1,0 +1,48 @@
+Title:
+
+{{class.instance}}->loginPasswordless()
+
+----
+
+Since:
+
+----
+
+Excerpt:
+
+Login the user without a password.
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+// simple login form submission example
+if($username = get('username') and $password = get('password')) {
+
+  $user = $kirby->user($username);
+
+  // verify access with a different method like
+  // OAuth, IndieAuth, email or SMS token etc.
+  myCustomAuthProvider();
+
+  if($user and $user->loginPasswordless()) {
+    // redirect to the homepage
+    // or any other page
+    go();
+  } else {
+    echo 'login process failed';
+  }
+
+}
+
+```

@@ -1,0 +1,19 @@
+Title: Bar
+----
+Text:
+
+The `k-bar` can be used to create all sorts of toolbars with the option to have three different slots for buttons or other elements: left, center and right.
+
+```html
+<k-bar>
+  <slot name="left">...</slot>
+  <slot name="center">...</slot>
+  <slot name="right">...</slot>
+</k-bar>
+```
+
+All slots are optional.
+
+## CSS class
+
+`.k-bar`

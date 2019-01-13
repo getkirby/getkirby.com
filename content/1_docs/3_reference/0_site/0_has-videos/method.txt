@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->hasVideos()
+
+----
+
+Excerpt:
+
+Checks if there are any videos placed directly in /content
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```
+<?php if($site->hasVideos()): ?>
+The /content folder contains video files.
+<?php endif ?>
+```

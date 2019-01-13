@@ -1,0 +1,30 @@
+Title: Text
+
+----
+
+Excerpt:
+
+A standard, single-line input field
+
+----
+
+Text:
+
+The text field creates a standard text input
+
+(screenshot: text.png)
+
+## Example
+
+```yaml
+fields:
+  name:
+    label: Name
+    type: text
+```
+
+## Options
+
+(field-options: text)
+
+(docs: panel-field-max-and-min field: text)

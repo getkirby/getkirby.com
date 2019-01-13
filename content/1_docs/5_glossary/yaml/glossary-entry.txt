@@ -1,0 +1,11 @@
+Title: YAML
+
+----
+
+Entry:
+
+YAML is a human friendly data serialization standard. In Kirby, this markup language is used to write (glossary: blueprint text: blueprints).
+
+
+----
+Link: https://yaml.org

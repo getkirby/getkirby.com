@@ -1,0 +1,43 @@
+Title:
+
+{{class.instance}}->hasAudio()
+
+----
+
+Excerpt:
+
+Checks if there are any audio files in the page's directory
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+echo $page->hasAudio(); //returns the number of audio files in the folder
+
+if($page->hasAudio()) {
+  $audio = $page->audio();
+}
+?>
+```
+
+## What is an audio file?
+
+Kirby considers the following file types as audio files: 
+
+- mp3
+- m4a
+- wav
+- aif
+- aiff
+- midi

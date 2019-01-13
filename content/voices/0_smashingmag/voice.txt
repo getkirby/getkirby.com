@@ -1,0 +1,7 @@
+Title: Smashing Magazine
+----
+Username: smashingmag
+----
+Tweet: https://twitter.com/smashingmag/status/157481606758674433
+----
+Text: Looks interesting: Kirby, a file-based PHP-based CMS with NoDB and a jQuery inspired API

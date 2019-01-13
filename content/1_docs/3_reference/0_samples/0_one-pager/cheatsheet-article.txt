@@ -1,0 +1,144 @@
+
+Title: One pager
+
+----
+
+Excerpt: Just keep scrolling
+
+----
+
+Text:
+
+<warning>This page is still in construction.</warning>
+
+## Main page
+
+### Blueprint
+
+```yaml "/site/blueprints/pages/home.yml"
+title: Home
+icon: 🏠
+
+sections:
+  parts:
+    type: pages
+    template:
+      - pager-hero
+      - pager-text
+```
+
+(screenshot: home.png)
+
+### Template
+
+```php "/site/templates/home.php"
+<main>
+  <?php foreach ($page->children()->listed() as $section) : ?>
+    <section class="<?= $section->intendedTemplate() ?>">
+      <?php snippet($section->intendedTemplate(), compact('section')) ?>
+    </section>
+  <?php endforeach ?>
+</main>
+```
+
+## Part: Hero slider
+
+### Blueprints
+
+```yaml "/site/blueprints/pages/pager-hero.yml"
+title: Hero slider
+icon: 🏙
+
+sections:
+  images:
+    type: files
+    template: pager-hero
+    min: 1
+    max: 5
+```
+
+(screenshot: hero.png)
+
+```yaml "/site/blueprints/files/pager-hero.yml"
+title: Hero slider
+icon: 🏙
+
+fields:
+  caption:
+    type: text
+  cta:
+    type: text
+  link:
+    type: url
+…
+```
+
+(screenshot: hero-files.png)
+
+### Snippet
+
+```php "/site/snippets/pager-hero.php"
+<?php foreach ($section->images() as $slide) : ?>
+  <figure><img src="<?= $slider->url() ?>" /></figure>
+<?php endforeach ?>
+```
+
+
+## Part: Text
+
+### Blueprint
+
+```yaml "/site/blueprints/pages/pager-text.yml"
+title: Text
+icon: 📝
+
+fields:
+  headline:
+    type: text
+  text:
+    type: textarea
+    required: true
+```
+
+(screenshot: text.png)
+
+### Snippet
+
+```php "/site/snippets/pager-text.php"
+<?php if ($section->headline()->isNotEmpty()) : ?>
+  <h3><?= $section->headline()->kt() ?></h3>
+<?php endif ?>
+
+<?php $section->text()->kt() ?>
+```
+
+## Part: Video
+
+### Blueprint
+
+```yaml "/site/blueprints/pages/pager-video.yml"
+title: Video
+icon: 🎥
+
+fields:
+  link:
+    type: url
+    required: true
+  caption:
+    type: text
+```
+
+(screenshot: video.png)
+
+### Snippet
+
+```php "/site/snippets/pager-video.php"
+<figure>
+  <?php if ($section->caption()->isNotEmpty()) : ?>
+    <figcaption><?= $section->caption()->kt() ?></figcaption>
+  <?php endif ?>
+
+  <?= kt("(video: " . $section->link() . ")") ?>
+</figure>
+```
+

@@ -1,0 +1,38 @@
+Title: /translations
+----
+Info: GET
+----
+Excerpt: List all translations
+----
+Text:
+
+## Query parameters
+
+(docs: api/translations-parameters)
+
+----
+Response:
+
+{
+    "code": 200,
+    "data": [
+        {
+            "direction": "ltr",
+            "id": "de",
+            "name": "Deutsch"
+        },
+        {
+            "direction": "ltr",
+            "id": "en",
+            "name": "English"
+        }
+    ],
+    "pagination": {
+        "page": 1,
+        "total": 2,
+        "offset": 0,
+        "limit": 100
+    },
+    "status": "ok",
+    "type": "collection"
+}

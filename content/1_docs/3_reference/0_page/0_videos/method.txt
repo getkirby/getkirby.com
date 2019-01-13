@@ -1,0 +1,49 @@
+Title:
+
+{{class.instance}}->videos()
+
+----
+
+Excerpt:
+
+Returns a $files collection with all videos in the page directory.
+
+----
+
+Return:
+
+type: $files
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<h2>Videos</h2>
+<?php foreach($page->videos() as $video): ?>
+<video width="300" height="200" controls>
+  <source src="<?= $video->url() ?>" type="<?= $video->mime() ?>">
+</video>
+<?php endforeach ?>
+```
+
+
+## What is a video file?
+
+Kirby considers the following file types as video:
+
+- mov
+- movie
+- avi
+- ogg
+- ogv
+- webm
+- flv
+- swf
+- mp4
+- m4v
+- mpg
+- mpe

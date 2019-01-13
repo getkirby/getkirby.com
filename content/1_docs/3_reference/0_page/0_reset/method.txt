@@ -1,0 +1,27 @@
+Title:
+
+{{class.instance}}->reset()
+
+----
+
+Excerpt:
+
+Cleans the temporary page cache and the cache of all parent pages
+
+----
+
+Return:
+
+type:
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+$page->reset();
+?>

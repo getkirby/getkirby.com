@@ -1,0 +1,40 @@
+Title:
+
+{{class.instance}}->update($data = [])
+
+----
+
+Excerpt:
+
+Updates all given site variables, which are stored in site.txt
+
+----
+
+Return:
+
+type: $site
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+try {
+
+  $site->update([
+    'title'       => 'My Site',
+    'description' => 'it is really nice',
+  ]);
+
+  echo 'The site info has been updated';
+
+} catch(Exception $e) {
+
+  echo $e->getMessage();
+
+}
+
+```

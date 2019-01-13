@@ -1,0 +1,8 @@
+Text:
+
+## Examples
+
+```php
+$customCollection = collection('projects');
+dump($customCollection);
+```

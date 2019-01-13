@@ -1,0 +1,10 @@
+Title: Blueprint
+
+----
+Entry:
+
+A YAML file that defines the form fields and several settings for the Panel. Blueprints are stored in `/site/blueprints`.
+
+----
+
+Link: docs/guide/blueprints

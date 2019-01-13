@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->extension()
+
+----
+
+Excerpt:
+
+Returns the file extension
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($file = $page->file()) {
+    echo $file->extension();
+}
+```

@@ -1,0 +1,20 @@
+Title:
+
+$users->pluck($field, $split = null, $unique = false)
+
+----
+
+Excerpt:
+
+Plucks all values for a specific field from the collection and returns those as array.
+
+----
+
+Return:
+
+type: array
+text:
+
+----
+
+Text:

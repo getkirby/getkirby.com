@@ -1,0 +1,11 @@
+Title: /pages/:id/status
+----
+Info: PATCH
+----
+Excerpt: Change the page status
+----
+Text:
+
+## Patch parameters
+
+(docs: api/page-status-data)

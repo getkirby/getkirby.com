@@ -1,0 +1,23 @@
+Text:
+
+This validator works like (sheet: validators/min) but it always checks for string length, even if a numeric value is given. The `min` validator will check for the value of the number in that case.
+
+## In your code
+
+```php
+if(v::minLength('Lorem ipsum dolor sit amet.', 10)) {
+  echo 'Yay, valid!';
+}
+
+```
+
+## In fields
+
+```
+fields:
+  example:
+    label: Example field
+    type: text
+    validate:
+      minLength: 10
+```

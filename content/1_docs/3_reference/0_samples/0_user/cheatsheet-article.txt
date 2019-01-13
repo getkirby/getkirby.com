@@ -1,0 +1,13 @@
+
+Title: User blueprints
+
+----
+
+Excerpt: Common user blueprints
+
+----
+
+Text:
+
+<warning>This page is still in construction.</warning>
+

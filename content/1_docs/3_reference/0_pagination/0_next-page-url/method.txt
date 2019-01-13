@@ -1,0 +1,46 @@
+Title:
+
+$pagination->nextPageUrl()
+
+----
+
+Excerpt:
+
+Returns the absolute URL for the next page
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+
+$subpages   = $page->children()->paginate(10);
+$pagination = $subpages->pagination();
+
+?>
+
+<!-- foreach loop with subpages -->
+
+<?php if($pagination->hasPrevPage()): ?>
+<a href="<?= $pagination->prevPageUrl() ?>">
+  prev (<?= $pagination->prevPage() ?>)
+</a>
+<?php endif ?>
+
+<?php if($pagination->hasNextPage()): ?>
+<a href="<?= $pagination->nextPageUrl() ?>">
+  next (<?= $pagination->nextPage() ?>)
+</a>
+<?php endif ?>
+
+```

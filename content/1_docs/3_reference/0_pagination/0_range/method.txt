@@ -1,0 +1,20 @@
+Title:
+
+$pagination->range($range=5)
+
+----
+
+Excerpt:
+
+Returns an array of page numbers in a range of the given value.
+
+----
+
+Return:
+
+type: array
+text:
+
+----
+
+Text:

@@ -1,0 +1,142 @@
+Title: Field methods
+
+----
+
+Guide: content/fields#accessing-fields-in-templates
+
+----
+
+Text:
+
+Field methods are registered with the `fieldMethods` extension.
+
+## Default field methods
+
+**For a full (link: docs/reference/#file-methods text: list of default field methods), please check out the Reference.**
+
+<info>Be aware that you cannot override these default field methods with any custom field method.</info>
+
+
+## Getting started
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('your/plugin', [
+	'fieldMethods' => [
+		'quote' => function ($field) {
+			return '“' . $field->value . '”';
+		}
+	]
+]);
+```
+
+This example shows the basic architecture of creating a new field method. You define the method name with the array key for the `fieldsMethod` array. The callback function receives the `$field` object as first argument.
+
+## How to use your new field method
+
+```php
+<?= $page->title()->quote() ?>
+```
+
+## The `$field` object
+
+The object passed to the callback function gives you access to three important attributes.
+
+Attribute | Description
+-         | -
+`$field->key`   | Name of the field
+`$field->value` | Raw content of the field
+`$field->model` | Parent object: `$page`, `$site`, `$file` or `$user`
+
+
+## Return options
+
+There are three common scenarios, what field methods can do:
+
+### 1. Modifying the field for further chaining
+
+```php
+Kirby::plugin('your/plugin', [
+	'fieldMethods' => [
+		'quote' => function ($field) {
+			$field->value = '“' . $field->value . '”';
+			return $field;
+		}
+	]
+]);
+```
+
+If you want to make it possible that the field value can be further modified by other field methods, you must modify the field value by overwriting/modifying `$field->value` and returning the `$field` object.
+
+
+**Example**
+
+```php
+<?= $page->title()->quote()->lower() ?>
+```
+
+### 2. Directly returning a modified value
+
+```php
+Kirby::plugin('your/plugin', [
+	'fieldMethods' => [
+		'quote' => function ($field) {
+			return '“' . $field->value . '”';
+		}
+	]
+]);
+```
+
+When you directly return the modified value, further chaining is not possible.
+
+**Example**
+
+```php
+<?= $page->title()->quotes()->lower() ?>
+<!-- will throw an error -->
+
+<?= $page->title()->quotes() ?>
+<!-- will work fine -->
+```
+
+### 3. Returning info about the field
+
+```php
+Kirby::plugin('your/plugin', [
+	'fieldMethods' => [
+		'hasQuotes' => function ($field) {
+			return preg_match('^“.*”$', $field->value);
+		}
+	]
+]);
+```
+
+Field methods can also be used to make if clauses easier or return info about a value, such as the length or the readingtime.
+
+### **Example**
+
+```php
+<?php if ($page->title()->hasQuotes()) : ?>
+The title is wrapped in quotes.
+<?php endif ?>
+```
+
+## Working with method arguments
+
+In some cases it might be helpful to be able to pass arguments to the method:
+
+```php
+<?= $page->title()->quote('«', '»') ?>
+```
+
+The definition for such a method with arguments is very simple:
+
+```php
+Kirby::plugin('your/plugin', [
+	'fieldMethods' => [
+		'quote' => function ($field, $start = '“', $end = '”') {
+			$field->value = $start . $field->value . $end;
+			return $field;
+		}
+	]
+]);
+```

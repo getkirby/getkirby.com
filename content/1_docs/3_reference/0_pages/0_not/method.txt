@@ -1,0 +1,60 @@
+Title:
+
+{{class.instance}}->not($args)
+
+----
+
+Excerpt:
+
+Returns the collection without any given pages.
+
+----
+
+Params: -
+  name: $args
+  type: Page | string
+  text: Excluded pages can be specified by passing the entire $page object, the UID or full URI
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<h2>All pages except project-b</h2>
+<ul>
+  <?php foreach($page->children()->not('project-b') as $subpage): ?>
+  <li>
+    <a href="<?= $subpage->url() ?>">
+      <?= $subpage->title()->html() ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```
+
+## Pass collection as argument
+(since 2.3.0+)
+You can now pass a collection as argument as well:
+
+```
+<ul>
+  <?php
+  $excluded = $page->children()->filterBy('template', 'some_template');
+  foreach($page->children()->not($excluded) as $subpage): ?>
+  <li>
+    <a href="<?= $subpage->url() ?>">
+      <?= $subpage->title()->html() ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

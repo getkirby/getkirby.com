@@ -1,0 +1,36 @@
+Title:
+
+{{class.instance}}->textfile($template = null [, $lang = null])
+
+----
+
+Excerpt:
+
+Returns the root for the content file
+
+----
+Params: -
+  name: $template
+  type: string
+  text:
+-
+  name: $lang
+  type: string
+  text: Optional, language code in case of a multi-language site only  
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $page->textfile() ?>
+```

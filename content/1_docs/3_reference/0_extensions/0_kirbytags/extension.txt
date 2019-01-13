@@ -1,0 +1,149 @@
+Title: KirbyTags
+
+----
+
+ Guide: content/text-formatting#kirbytext
+
+----
+
+Text:
+
+## Default KirbyTags
+
+Kirby comes with a set of default KirbyTags for things like including images, links, dates or videos. **See (link: docs/reference/#kirbytags text: the full list of included KirbyTags)**.
+
+
+## How to create your own KirbyTag
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('your/plugin', [
+	'tags' => [
+		'wikipedia' => [
+			'html' => function($tag) {
+				return '<a href="http://wikipedia.org">Wikipedia</a>';
+			}
+		]
+	]
+]);
+```
+
+## Adding attributes
+
+If you want to add attributes, you can add them as an `attr` array like this:
+
+```php
+Kirby::plugin('your/plugin', [
+  'tags' => [
+    'wikipedia' => [
+      'attr' => [
+        'class'
+      ],
+      'html' => function($tag) {
+
+        return '<a class="' . $tag->class . '" href="http://wikipedia.org">Wikipedia</a>';
+
+      }
+    ]
+  ]
+]);
+```
+
+## Accessing attributes and Kirby objects
+
+The properties of the `$tag` object can be accessed like this:
+
+### The tag's value
+
+```php
+$tag->value
+// return the value of the tag
+```
+
+### Attributes
+
+
+```php
+// the class attribute
+$tag->class
+
+// the width attribute
+$tag->width
+```
+
+### Array of all used attributes
+
+```
+$tag->attrs
+```
+
+### The parent page object
+
+```php
+$tag->parent()
+```
+
+### Files
+
+```php
+// all files of the page
+$tag->parent()->files()
+
+// a single file by name
+$tag->parent()->file('content.jpg')
+```
+
+### Options
+
+```php
+$tag->option('some.option')
+```
+
+### The KirbyTag type
+
+```php
+$tag->type()
+// returns the name of the KirbyTag
+```
+
+
+## KirbyTag hooks
+
+In addition to your own KirbyTag plugins, you can also hook into the KirbyTags parser. This is very useful if you want to parse the text before or after the KirbyTags parser kicks in with additional regular expressions for example.
+
+### `kirbytags:before`
+
+```php
+Kirby::plugin('your/plugin', [
+	'hooks' => [
+		'kirbytags:before' => function ($text, array $data = [], array $options = []) {
+
+			// KirbyTags have not been parsed
+
+			$text = preg_replace_callback('/some-regex/', function () {
+				// whatever you want to replace
+			}, $text);
+
+			return $text;
+		}
+	]
+]);
+```
+
+### `kirbytags:after`
+
+```php
+Kirby::plugin('your/plugin', [
+	'hooks' => [
+		'kirbytags:after' => function ($text, array $data = [], array $options = []) {
+
+			// KirbyTags have already been parsed
+
+			$text = preg_replace_callback('/some-regex/', function () {
+				// whatever you want to replace
+			}, $text);
+
+			return $text;
+		}
+	]
+]);
+```

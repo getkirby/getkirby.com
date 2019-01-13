@@ -1,0 +1,73 @@
+Title: Textarea
+
+----
+
+Excerpt:
+
+A textarea field, which auto-resizes and has built-in format buttons.
+
+----
+
+Text:
+
+The textarea field creates a textarea for longer texts with automatic resizing and optional format buttons.
+
+(screenshot: textarea.png)
+
+## Example
+
+```yaml
+fields:
+  text:
+    label: Text
+    type: textarea
+```
+
+## Options
+
+(field-options: textarea)
+
+## Initial sizes
+
+In some section layouts, a small textarea looks lost. The `size` option sets a default height for empty textareas before auto-sizing kicks in. Available sizes:
+
+- `small`
+- `medium`
+- `large`
+- `huge`
+
+```yaml
+fields:
+  text:
+    label: Text
+    type: textarea
+    size: large
+```
+
+## Disabling the toolbar
+
+If the formatting toolbar should not be available, you can switch it off entirely:
+
+```yaml
+fields:
+  text:
+    label: Text
+    type: textarea
+    buttons: false
+```
+
+## Customizing the toolbar
+
+You can also specify which buttons to show in the toolbar.
+
+```yaml
+fields:
+  text:
+    label: Text
+    type: textarea
+    buttons:
+      - link
+      - email
+```
+
+(docs: panel-field-max-and-min field: textarea)

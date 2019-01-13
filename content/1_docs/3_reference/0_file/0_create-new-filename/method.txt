@@ -1,0 +1,46 @@
+Title:
+
+{{class.instance}}->createNewFilename($name, $safeName = true)
+
+----
+
+Excerpt:
+
+Generates a new filename for a given name and makes sure to handle badly given extensions correctly
+
+----
+
+Params: -
+  name: $name
+  type: string
+  text: New filename
+-
+  name: $safeName
+  type: boolean
+  text: Whether to also convert to a URL safe filename
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+// this is an unvalidated filename coming from the user
+$newName = 'something.exe';
+
+// generate new filename for the existing file that is supposed to be renamed
+if($file = $page->file()):
+    $safeName = $file->createNewFilename($newName);
+endif;
+// $safeName is 'something.jpg' because the current file is a JPG
+```
+
+**Note**: This method is automatically applied when renaming a file using `$file->rename()`.

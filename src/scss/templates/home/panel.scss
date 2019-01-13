@@ -1,0 +1,76 @@
+@import "../includes";
+
+.home-panel {
+  overflow: hidden;
+}
+.home-panel-container {
+  position: relative;
+  padding: 1.5rem 1.5rem 0;
+  background: darken($color-anthracite, 5%);
+  @include mq(from m) {
+    padding: 3rem 3rem 1.5rem;
+  }
+  @include mq(from l) {
+    margin: 0 -3rem;
+  }
+}
+.home-panel-container > * {
+  position: relative;
+  z-index: 1;
+}
+.home-panel-gallery {
+  margin-bottom: 3rem;
+  display: none;
+  @include mq(from s) {
+    display: block;
+  }
+}
+.home-panel-gallery figure {
+  background: #000;
+  line-height: 0;
+  border-radius: 6px;
+}
+.home-panel-gallery figure:not(:first-child) {
+  display: none;
+}
+.home-panel-gallery-links {
+  color: $color-syntax-white;
+  display: flex;
+  margin-left: -1.5rem;
+  flex-wrap: wrap;
+}
+.home-panel-gallery-links > * {
+  flex-grow: 0;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  @include mq(from s) {
+    width: 33.33%;
+  }
+  @include mq(from m) {
+    width: 20%;
+  }
+}
+.home-panel-gallery-links span {
+  background: darken($color-anthracite, 10%);
+  line-height: 0;
+  display: block;
+  margin: 0 auto 1rem;
+  overflow: hidden;
+}
+.home-panel-gallery-links a[aria-current] span {
+  outline: 2px solid $color-syntax-yellow;
+  outline-offset: 2px;
+}
+.home-panel-gallery-links a:not([aria-current]) img {
+  filter: blur(2px);
+  opacity: .3;
+  transition: all .3s;
+}
+.home-panel-gallery-links figure:hover img {
+  filter: blur(0);
+  opacity: 1;
+}
+.home-panel-gallery-links figcaption p {
+  font-size: .875rem;
+  color: rgba(#fff, .75);
+}

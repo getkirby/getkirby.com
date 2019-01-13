@@ -1,0 +1,20 @@
+Title:
+
+{{class.instance}}->isAdmin()
+
+----
+
+Excerpt:
+
+Checks if the user is an admin
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:

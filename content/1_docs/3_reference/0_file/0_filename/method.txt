@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->filename()
+
+----
+
+Excerpt:
+
+Returns the full filename including extension
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($file = $page->file()) {
+    echo $file->filename();
+}
+```

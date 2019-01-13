@@ -1,0 +1,63 @@
+Title: Quickstart
+
+----
+
+Description: Long guides are boring. Get Kirby up and running in 1 minute.
+
+----
+
+Todos:
+
+- Fix the link to the troubleshooting guide
+- Add a nice screenshot of the Panel
+- Add a nice screenshot of the starterkit
+- Add a glossary entry for document root and link it in the installation step
+
+----
+
+Text:
+
+## Installation
+
+1. [**Download Kirby's Starterkit**](https://github.com/k-next/starterkit/archive/master.zip)
+2. Extract the ZIP file in your server's web root
+3. Visit your new Kirby site in your browser at `yourdomain.com`
+4. Visit the Panel at `yourdomain.com/panel`
+
+<info>
+If you want learn more about other ways to install Kirby, check out the (link: docs/guide/installation text: Installation guide).
+</info>
+
+****
+
+## Where to go from here
+
+Now that you have successfully installed Kirby on your server, it's time to explore your new Kirby installation. So get yourself a cup of coffee or tea (or whatever else you like most) and head over to the sections that interest you most.
+
+### Click around
+
+Let's be honest: who reads the docs? Right? It's totally fine to explore your Kirby installation on your own without our help. If you don't want to miss out on any of the possibilities though, the docs are always here to help.
+
+### (link: docs/guide text: Guide)
+
+Our guide introduces you to every aspect of Kirby. From your first template to complex extensions. It should always be the starting point for your research.
+
+(link: docs/guide text: Read more ›)
+
+### (link: docs/reference text: Reference)
+
+Once you have familiarized yourself with the basics, the Reference is probably the number one resource you will keep getting back to. It's a reference of every method, option, helper, tag, root, url and more.
+
+(link: docs/reference text: Read more ›)
+
+### (link: docs/cookbook text: Cookbook)
+
+While our docs provide a deep dive into every feature and aspect of Kirby, our Cookbook is a collection of all sorts of solutions you can build with Kirby. Starting from simple things like menus to frontend authentication, headless CMS setups and more.
+
+(link: docs/cookbook text: Read more ›)
+
+### (link: https://forum.getkirby.com/ text: Forum)
+
+The community in the [Kirby Forum](https://forum.getkirby.com/) is always there to help out whenever you get stuck. It's likely that someone already had the same problem, so using the search function might uncover a solution to your problem within seconds. If you can't find a helpful topic, drop us your question.
+
+(link: https://forum.getkirby.com/ text: Read more ›)

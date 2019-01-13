@@ -1,0 +1,28 @@
+@import "../includes";
+
+/* -------------------------------------------------------------------------- */
+
+.documentation-page .cardgrid-link svg {
+  display: block;
+}
+
+.documentation-page svg * {
+  stroke: $color-yellow;
+}
+
+.documentation-page .h6 {
+
+  position: relative;
+  padding-bottom: .5rem;
+
+  &:after {
+    position: absolute;
+    bottom: -.125rem;
+    left: 0;
+    content: "";
+    height: 4px;
+    background: $color-border;
+    width: 2rem;
+  }
+
+}

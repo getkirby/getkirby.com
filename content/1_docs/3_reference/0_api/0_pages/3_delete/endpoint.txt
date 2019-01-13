@@ -1,0 +1,11 @@
+Title: /pages/:id
+----
+Info: DELETE
+----
+Excerpt: Delete a page
+----
+Text:
+
+## Delete parameters
+
+(docs: api/page-delete-data)

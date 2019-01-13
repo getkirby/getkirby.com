@@ -1,0 +1,172 @@
+Title: Page blueprint
+
+----
+
+Excerpt: Page blueprints are located in `/site/blueprints/pages` and control the Panel setup and form fields for pages.
+
+----
+
+Text:
+
+## Blueprint location
+
+```filesystem
+/site/blueprints/pages/
+```
+
+## Default page blueprint
+
+To create the same set of fields for all pages, you can setup a `default.yml` that is used whenever no custom page blueprint is configured.
+
+```filesystem
+/site/blueprints/pages/default.yml
+```
+
+## Title
+
+The title is required and will appear in the list of selectable templates when a new page is created and multiple templates are available.
+
+```yaml
+title: Article
+```
+
+### Translated titles
+
+The title can be translated by passing an array of translations with the matching language code as key:
+
+```yaml
+title:
+	en: Article
+	de: Artikel
+```
+
+## Preset
+
+Presets are typical standard setups for page, pages and files, see (link: docs/guide/blueprints/presets text: presets).
+
+```yaml
+preset: page
+```
+
+## Sorting
+
+The `num` option defines which numbering scheme to use when a page is published.
+
+<info>
+Default sorting is numbering (1 to x) and doesn't need any setup.
+</info>
+
+### Alphabetical sorting by uid
+
+```yaml
+num: zero
+```
+
+### Date based sorting
+
+```yaml
+num: date
+```
+
+### Datetime-based sorting
+
+```yaml
+num: datetime
+```
+
+## Status
+
+With the `status` option, you define the page status you want to allow for the page. You can also change their label and description. This option gives you a lot of flexibility how you want to use page status in your website.
+
+### Simple example
+
+```yaml
+status:
+	draft: Draft
+	listed: Published
+```
+
+### Extended example
+
+```yaml
+status:
+  draft:
+    label: Draft
+    text: The article is still in draft mode. It can only be seen by editors with Panel access.
+  unlisted:
+    label: In Review
+    text: The article is online and can be visited with the direct URL. The team must still give the final go to publish it.
+  listed:
+    label: Published
+    text: The article is online and listed in the blog
+```
+
+## Icon
+
+The icon can either be one of our (link: docs/reference/icons text: own icons) or an emoji. Icons appear in page lists when no preview image is available.
+
+```
+icon: page
+```
+
+### Emoji
+
+```
+icon: 📚
+```
+
+## Options
+
+With options, you can control all the page actions that should or should not be available for this particular page type. The option dropdown for pages will adjust accordingly.
+
+
+| Option | Value |
+|----    | ---- |
+| `changeSlug` | `true`/`false` |
+| `changeStatus` | `true`/`false` |
+| `changeTemplate` | `false` or list of allowed template |
+| `changeTitle` | `true`/`false` |
+| `delete` | `true`/`false` |
+| `preview` | `true`/`false`/template string (see below) |
+| `read` | `true`/`false` |
+| `update` | `true`/`false` |
+
+## Preview
+
+You can change the link of the preview button or disable it entirely with the option setting.
+
+### Disabling the preview button
+
+For some pages it makes sense to disable the preview entirely.
+
+```yaml
+options:
+  preview: false
+```
+
+### Custom link
+
+The `preview` option can also take any absolute link or a template string.
+
+#### Absolute URL
+
+```yaml
+options:
+  preview: https://preview.mysite.com
+```
+
+#### Template string
+
+You can use Kirby's powerful (link: docs/guide/blueprints/query-language text: query syntax) to create any link dynamically.
+
+```yaml
+options:
+  preview: "{{ page.parent.url }}/#{{ page.slug }}"
+```
+
+
+
+
+
+
+

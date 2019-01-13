@@ -1,0 +1,117 @@
+Title: Dropdown
+----
+Text:
+
+Dropdowns always consist of a wrapping `k-dropdown` element and the `k-dropdown-content` element. The wrapper is used for positioning, so the dropdown will open relatively to the button or any other element that serves as the toggle. The dropdown content can contain any number of `k-dropdown-item` elements or any other HTML
+
+```html
+<k-dropdown>
+  <k-button @click="$refs.dropdown.toggle()">Menu</k-button>
+  <k-dropdown-content ref="dropdown">
+    <k-dropdown-item>Option A</k-dropdown-item>
+    <k-dropdown-item>Option B</k-dropdown-item>
+    <k-dropdown-item>Option C</k-dropdown-item>
+  </k-dropdown-content>
+</k-dropdown>
+```
+
+## k-dropdown-item
+
+`k-dropdown-item` elements inherit all the attributes from `k-button` elements, like `link`, `icon` or `image`
+
+## Items Array
+
+Instead of adding `k-dropdown-item` elements manually, you can also inject them with an array
+
+```html
+<k-dropdown>
+  <k-button @click="$refs.dropdown.toggle()">Menu</k-button>
+  <k-dropdown-content
+    ref="dropdown"
+    :options="[
+      {icon: 'edit', text: 'Option A', click: clickHandler},
+      {icon: 'cog', text: 'Option B', click: clickHandler},
+      {icon: 'trash', text: 'Option C', click: clickHandler}
+    ]"
+  />
+</k-dropdown>
+```
+
+## Dynamic items
+
+The item array can also be returned in an options handler to dynamically load options
+
+```html
+<template>
+  <k-dropdown>
+    <k-button @click="$refs.dropdown.toggle()">Menu</k-button>
+    <k-dropdown-content ref="dropdown" :options="fetchOptions" />
+  </k-dropdown>
+</template>
+
+<script>
+export default {
+  methods: {
+    fetchOptions() {
+      return (ready) => {
+        this.$api.get("/some/options").then(options => {
+          ready(options);
+        });
+      };
+    }
+  }
+}
+</script>
+```
+
+## Loading items
+
+Dropdown items can also be fetched from a JSON endpoint:
+
+```html
+<k-dropdown>
+  <k-button @click="$refs.dropdown.toggle()">Menu</k-button>
+  <k-dropdown-content ref="dropdown" options="/api/options.json" />
+</k-dropdown>
+```
+
+This will fetch the options only as soon as the dropdown will be opened.
+
+## Alignment
+
+Dropdowns can be aligned left (default) or right.
+
+```html
+<k-dropdown>
+  <k-button @click="$refs.dropdown.toggle()">Menu</k-button>
+  <k-dropdown-content ref="dropdown" align="right">
+    ...
+  </k-dropdown-content>
+</k-dropdown>
+```
+
+## Methods
+
+The `k-dropdown-content` element has three available methods:
+
+- `open`
+- `close`
+- `toggle`
+
+## Events
+
+The `k-dropdown-content` element emits two events, which you can listen to:
+
+- `open`
+- `close`
+
+## CSS classes
+
+### k-dropdown
+`.k-dropdown`
+
+### k-dropdown-content
+`.k-dropdown-content`
+
+### k-dropdown-item
+`.k-dropdown-item`

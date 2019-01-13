@@ -1,0 +1,35 @@
+Title:
+
+{{class.instance}}->url()
+
+----
+
+Excerpt:
+
+Returns the full URL of the page
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $page->url() ?>
+```
+
+
+## Language specific URLs
+
+On multi-language sites you can get the URL of a page for a different language, by passing the language code.
+
+```php
+<?= $page->url('de') ?>
+```

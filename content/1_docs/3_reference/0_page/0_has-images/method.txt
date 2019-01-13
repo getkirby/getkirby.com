@@ -1,0 +1,52 @@
+Title:
+
+{{class.instance}}->hasImages()
+
+----
+
+Excerpt:
+
+Checks if there are image files (jpg, png, gif, etc.) in the page directory
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+echo $page->hasImages(); //returns the number of images in the folder
+
+if($page->hasImages()) {
+  $images = $page->images();
+}
+?>
+```
+
+
+## What is an image file?
+
+Kirby considers the following file types as images:
+
+- jpeg
+- jpg
+- jpe
+- gif
+- png
+- svg
+- ico
+- tif
+- tiff
+- bmp
+- psd
+- ai
+- eps
+- ps

@@ -1,0 +1,15 @@
+Title: Line Field
+----
+Text:
+
+```html
+<k-line-field />
+```
+
+The line field has no events and does not submit any data
+
+## CSS class
+
+`.k-line-field`
+
+

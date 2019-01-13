@@ -1,0 +1,6 @@
+Class: Kirby\Cms\Url
+
+----
+Excerpt:
+
+The Url class extends the Kirby\Http\Url class. In addition to the methods of that class for dealing with Urls, it provides a specific Url::home method that always creates the correct base Url and a template asset Url builder. 

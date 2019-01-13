@@ -1,0 +1,17 @@
+Title: Horizontal Rules
+
+----
+
+Excerpt:
+
+----
+
+Text:
+
+```markdown
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+
+****
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+```

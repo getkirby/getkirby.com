@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->index()
+
+----
+
+Excerpt:
+
+Creates a $pages collection with every page and subpage in /content. This will walk the entire file tree.
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+```php
+// goes through any subpage, subsubpage, etc. below $page and returns them by template
+$articles = $site->index()->filterBy('template', 'article');
+
+// the index method is also perfect for a site-wide search
+$results = $site->index()->search('mysearchword');
+```

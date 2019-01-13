@@ -1,0 +1,53 @@
+.kosmos-issue {
+  border: 2px solid rgba($color-syntax-white, .25);
+  display: block;
+  padding: .5em .75em;
+  color: $color-syntax-white;
+  margin-bottom: 1.5rem;
+}
+
+.kosmos-issue .h3 {
+  color: $color-syntax-yellow;
+}
+
+.kosmos-issue:hover {
+  border-color: #fff;
+  background: #fff;
+  color: $color-black;
+}
+
+.kosmos-issue:hover .h3 {
+  color: $color-yellow !important;
+}
+
+.kosmos-issue-excerpt {
+  font-size: 16px;
+  line-height: 16px;
+  overflow: hidden;
+  word-spacing: 1ch;
+}
+
+.kosmos-issue-excerpt b {
+  background: linear-gradient($color-syntax-white, $color-syntax-white) 0 50% / 100% 6px no-repeat;
+  color: rgba($color-white, 0);
+  font-weight: 400;
+}
+
+.kosmos-issue:hover .kosmos-issue-excerpt b {
+  background-image: linear-gradient($color-black, $color-black);
+}
+
+@supports (display: grid) {
+  .kosmos-issues {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    grid-gap: 1.5rem;
+    grid-auto-rows: 1fr;
+  }
+  .kosmos-issue {
+    margin-bottom: 0;
+  }
+  .kosmos-issue-excerpt {
+    height: 6rem;
+  }
+}

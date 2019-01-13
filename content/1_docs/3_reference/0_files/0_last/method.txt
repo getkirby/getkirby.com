@@ -1,0 +1,26 @@
+Title:
+
+$files->last()
+
+----
+
+Excerpt:
+
+Returns the last file in the collection
+
+----
+
+Return:
+
+type: $file
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $page->files()->last()->filename() ?>
+```

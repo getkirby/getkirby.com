@@ -1,0 +1,7 @@
+Title: Reference
+
+----
+
+Excerpt:
+
+<info>The Reference provides a quick but detailed reference to pretty much any aspect of Kirby.</info>

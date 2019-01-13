@@ -1,0 +1,11 @@
+Title: /users/:id
+----
+Info: PATCH
+----
+Excerpt: Update a user
+----
+Text:
+
+## Post parameters
+
+(docs: api/user-content-data)

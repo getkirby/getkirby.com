@@ -1,0 +1,132 @@
+Title: Query Language
+
+----
+
+Intro: Kirby 3 comes with a blueprint query language that offers basically the same functionality as Kirby's PHP API with a simple dot notation.
+
+----
+
+Text:
+
+## Introduction
+
+The query language adds a lot of flexibility when querying options for select, radio  and checkboxes fields, for querying collections in Panel sections and to manipulate how information is displayed in the Panel.
+
+If you are not familiar with (link: docs/guide/templates/php-api text: Kirby's PHP API) yet, you should learn more about it first. The query language is very close to it and will be confusing without the basics.
+
+### Syntax
+
+#### PHP
+
+```php
+$site->title()
+$page->title()->lower()
+$page->children()
+$page->children()->filterBy('featured', true)
+```
+
+#### Query
+
+```txt
+site.title
+page.title.lower
+page.children
+page.children.filterBy('featured', true)
+```
+
+As you can see, it is very close to the PHP syntax. You don't need to relearn anything this way.
+
+<info>
+The query language is not limited to built-in methods. You can also use (glossary: model text: page models) and custom methods within your queries.
+</info>
+
+### Blueprint example
+
+There are two ways of using the query language in your blueprints.
+
+#### 1. To fetch data
+
+In this example we use the query language to fetch options for a select field. You can fetch any collection of pages, files or users to be used as options.
+
+```yaml
+# select field
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query: site.children.listed
+```
+
+#### 2. To create string templates
+
+Another way to use the language is to create custom information for page or file lists. In this case we use the query language as part of our template syntax.
+
+```yaml
+# pages section
+published:
+  headline: Published Pages
+  type: pages
+  info: "Year: {{ page.year }}"
+```
+
+## Querying options in radio, checkboxes and select fields or tags
+
+```yaml
+tags:
+    label: Tags
+    type: tags
+    options: query
+    query:
+      fetch: page.siblings
+      text: " {{ page.title}}"
+      value: " {{ page.uri}}"
+
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query: site.children.listed
+
+```
+
+Check out the (link: docs/reference/fields text: docs for each of these fields in the Reference).
+
+
+## Querying the parent in pages sections
+
+```yaml
+sections:
+  articles:
+    type: pages
+    headline: Blog Articles
+    parent: site.find("blog")
+```
+## Querying files in files sections
+
+```yaml
+sections:
+  gallery:
+    headline: Images
+    type: files
+    query: page.images
+```
+
+
+## Querying an image in the image option
+
+```yaml
+
+image:
+  query: page.images.template("cover").first
+  ratio: 1/1
+  cover: true
+```
+
+## Querying information to display in the info option of an item
+
+```yaml
+
+info: "{{ page.from.toDate('d.m.Y') }} - {{ page.to.toDate('d.m.Y') }} / {{ page.location }}"
+
+info: "{{ file.dimensions }}"
+```

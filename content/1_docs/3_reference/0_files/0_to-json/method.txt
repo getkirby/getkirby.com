@@ -1,0 +1,20 @@
+Title:
+
+$files->toJson()
+
+----
+
+Excerpt:
+
+Converts the collection to a json string.
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:

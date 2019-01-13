@@ -1,0 +1,12 @@
+Title: /users/:id/language
+----
+Info: PATCH
+----
+Excerpt: Change the language
+----
+Text:
+
+## Patch parameters
+
+(docs: api/user-language-data)
+

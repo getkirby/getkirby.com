@@ -1,0 +1,20 @@
+Title:
+
+{{class.instance}}->headers()
+
+----
+
+Excerpt:
+
+Sends all appropriate headers for this page. Can be configured with the headers config array, which should contain all header definitions for each template
+
+----
+
+Return:
+
+type:
+text:
+
+----
+
+Text:

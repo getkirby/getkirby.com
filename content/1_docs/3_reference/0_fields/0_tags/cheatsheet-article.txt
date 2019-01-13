@@ -1,0 +1,86 @@
+Title: Tags
+
+----
+
+Excerpt:
+
+An interactive tags input field with autocompletion
+
+----
+
+Text:
+
+The tags field is perfect for multiple variable options, which should be stored in a single field. It comes with built-in autocompletion for options and an intuitive interface for adding and removing multiple tags.
+
+(screenshot: tags.png)
+
+## Example
+
+```yaml
+fields:
+  tags:
+    label: Tags
+    type: tags
+```
+
+## Options
+
+(field-options: tags)
+
+## Predefined options
+
+```yaml
+fields:
+  tags:
+    label: Tags
+    type: tags
+    options:
+      - Design
+      - Architecture
+      - Photography
+      - 3D
+      - Web
+```
+
+## Tags field with options for autocomplete
+
+```yaml
+tags:
+    label: Tags
+    type: tags
+    options: query
+    query:
+       fetch: site.tags.toStructure.sortBy("name", "asc")
+       text: "{{ structureItem.name }}"
+       value: "{{ structureItem.value }}"
+```
+
+## Limit input to options
+
+Using the `accept` property, you can limit tag input to the query options:
+
+```yaml
+tags:
+    label: Tags
+    type: tags
+    accept: options
+    options: query
+    query:
+       fetch: site.tags.toStructure.sortBy("name", "asc")
+       text: "{{ structureItem.name }}"
+       value: "{{ structureItem.value }}"
+```
+
+## Tags field layout
+
+Tags can also be shown as a list using the `layout` property:
+
+```yaml
+fields:
+  tags:
+    label: Tags
+    type: tags
+    layout: list
+```
+
+(screenshot: tags-list-layout.png)

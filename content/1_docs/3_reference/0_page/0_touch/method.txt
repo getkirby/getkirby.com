@@ -1,0 +1,20 @@
+Title:
+
+{{class.instance}}->touch()
+
+----
+
+Excerpt:
+
+Marks the page as modified
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:

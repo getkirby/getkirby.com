@@ -1,0 +1,7 @@
+Title: Jon Roobottom
+----
+Username: roobottom
+----
+Tweet: https://twitter.com/roobottom/status/308287052301090816
+----
+Text: Must say, I'm absolutely in love with @getkirby — simply the best php based CMS I've ever used. It's a thing of logical-beauty.

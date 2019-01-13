@@ -1,0 +1,25 @@
+/**
+ * Hide the overflow in IE.
+ * Source: normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css
+ */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+
+.img-responsive {
+  height: auto;
+  max-width: 100%;
+  width: auto;
+}
+
+.img-banner,
+.img-block {
+  display: block;
+}
+
+.img-banner {
+  height: auto;
+  max-width: none;
+  width: 100%;
+}

@@ -1,0 +1,27 @@
+Title:
+
+{{class.instance}}->reset()
+
+----
+
+Excerpt:
+
+Cleans the temporary internal cache
+
+----
+
+Return:
+
+type:
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+$site->reset();
+?>

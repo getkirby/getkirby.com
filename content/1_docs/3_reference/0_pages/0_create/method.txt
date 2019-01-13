@@ -1,0 +1,61 @@
+Title:
+
+{{class.instance}}->create($uid, $template, $data = [])
+
+----
+
+Excerpt:
+
+Creates a new subpage
+
+----
+
+Params: -
+  name: $uid
+  type: string
+  text: The UID of the new page
+-
+  name: $template
+  type: string
+  text: The template name for the new page
+-
+  name: $data
+  type: array
+  text:
+
+
+----
+
+
+Return:
+
+type: $page
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+
+try {
+
+  $newPage = page('blog')->children()->create('my-new-article', 'article', [
+    'title' => 'My new article',
+    'date'  => '2012-12-12 22:33',
+    'text'  => 'This is my new article',
+    'tags'  => 'article, text, readable'
+  ]);
+
+  echo 'The new page has been created';
+
+} catch(Exception $e) {
+
+  echo $e->getMessage();
+
+}
+
+
+```

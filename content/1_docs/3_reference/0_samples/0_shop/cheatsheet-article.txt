@@ -1,0 +1,13 @@
+
+Title: Shop
+
+----
+
+Excerpt: Products for your sales
+
+----
+
+Text:
+
+<warning>This page is still in construction.</warning>
+

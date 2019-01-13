@@ -1,0 +1,23 @@
+Text:
+
+## In your code
+
+```php
+if(v::between($input, 5, 20)) {
+  echo 'Yay, valid!';
+}
+
+```
+
+## In fields
+
+```
+fields:
+  example:
+    label: Example field
+    type: text
+    validate:
+      between:
+        - 5
+        - 20
+```

@@ -1,0 +1,40 @@
+Title: {{class.instance}}->audio()
+
+----
+
+Excerpt:
+
+Returns a $files collection with all audio files in the page's directory
+
+----
+
+Return:
+
+type: $files
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<h2>Songs</h2>
+<?php foreach($page->audio() as $audio): ?>
+<audio controls>
+  <source src="<?= $audio->url() ?>" type="<?= $audio->mime() ?>">
+</audio>
+<?php endforeach ?>
+```
+
+## What is an audio file?
+
+Kirby considers the following file types as audio files: 
+
+- mp3
+- m4a
+- wav
+- aif
+- aiff
+- midi

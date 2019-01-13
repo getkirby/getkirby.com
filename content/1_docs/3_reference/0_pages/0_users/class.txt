@@ -1,0 +1,10 @@
+Class: Kirby\Cms\Users
+
+----
+
+Alias: Users
+
+----
+
+Text:
+

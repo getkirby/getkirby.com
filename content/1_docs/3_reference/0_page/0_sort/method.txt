@@ -1,0 +1,48 @@
+Title:
+
+{{class.instance}}->sort($num = null)
+
+----
+
+Excerpt:
+
+Changes the sorting number of the page.
+
+----
+
+Params: -
+  name: $num
+  type: int
+  text: The sorting number
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+try {
+
+  page('invisible-page')->sort(12);
+  echo 'The page is now visible and has the sorting number 12';
+
+} catch(Exception $e) {
+
+  echo $e->getMessage();
+
+}
+
+```
+
+
+## No parameter
+
+If the parameter `$num` is not specified, the result of $page->num() will be returned instead.

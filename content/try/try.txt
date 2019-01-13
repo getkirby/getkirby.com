@@ -1,0 +1,12 @@
+Title: Try
+
+----
+
+Intro: Kirby's license model is based on a single idea:<br> We want you to be happy before you buy it!
+
+----
+
+Text:
+
+Try Kirby on your **local machine** or on a **private test server**. Once you are sure that Kirby fits your project, (link: buy text: **buy a license**) and publish your site.
+

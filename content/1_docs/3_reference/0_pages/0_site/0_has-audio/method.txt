@@ -1,0 +1,27 @@
+Title:
+
+{{class.instance}}->hasAudio()
+
+----
+
+Excerpt:
+
+Checks if there are any audio files placed directly in /content
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+```
+<?php if($site->hasAudio()): ?>
+The /content folder contains audio files.
+<?php endif ?>
+```

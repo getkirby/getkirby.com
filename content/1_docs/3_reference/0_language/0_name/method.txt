@@ -1,0 +1,32 @@
+Title:
+
+$language->name()
+
+----
+
+Excerpt: Returns the full name of the language
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<ul>
+  <?php foreach($site->languages() as $language): ?>
+  <li>
+    <a href="<?= $language->url() ?>">
+      <?= html($language->name()) ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

@@ -1,0 +1,26 @@
+Title:
+
+{{class.instance}}->toArray($callback = null)
+
+----
+
+Excerpt:
+
+Converts the collection to a good old array. You can pass a callback which will be applied to all items in the collection before conversion
+
+----
+
+Params: -
+  name: $callback
+  type: closure
+  text: Filter callback for each item
+
+----
+Return:
+
+type: array
+text:
+
+----
+
+Text:

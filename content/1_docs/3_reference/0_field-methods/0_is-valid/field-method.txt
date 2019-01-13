@@ -1,0 +1,9 @@
+Text:
+
+## Example
+
+```php
+<?php if ($page->email()->isValid('email')): ?>
+The email address in the email field seems to be valid
+<?php endif ?>
+```

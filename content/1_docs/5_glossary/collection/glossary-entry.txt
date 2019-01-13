@@ -1,0 +1,8 @@
+Title: Collection
+
+----
+
+Entry: A set of pages, files or users is what we refer to as collection. A collection in Kirby can be filtered, sorted, navigated and more. Kirby also has a built-in feature to share collections between your templates, snippets, controllers and plugins.
+
+----
+Link: docs/guide/templates/collections

@@ -1,0 +1,85 @@
+Title: js($path, $async = false)
+
+----
+
+Excerpt: Creates a script tag to load a javascript file
+
+----
+
+Params: -
+  name: $path
+  type: string
+  text: Relative or absolute URL
+-
+  name: $async
+  type: boolean|array
+  text: Either true for the async attribute or an array of attributes
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+### Creating a single script tag
+
+```php
+<?= js('assets/js/site.js') ?>
+```
+
+### Creating multiple script tags
+
+```php
+<?= js([
+  'assets/js/jquery.js',
+  'assets/js/jquery.ui.js',
+  'assets/js/site.js',
+]) ?>
+```
+
+### Autoloading template specific script files
+
+```php
+<?= js('@auto') ?>
+```
+
+Template specific JS files must be located in `/assets/js/templates` and named like the template.
+
+Template                    | JS file
+-                           | -
+/site/templates/project.php | /assets/js/templates/project.js
+/site/templates/home.php    | /assets/js/templates/home.js
+/site/templates/blog.php    | /assets/js/templates/blog.js
+
+### Async
+
+If you want the JS files to be loaded asynchronously (if supported by the browser), you can set a second parameter to `true`:
+
+```php
+<?= js('assets/js/site.js', true) ?>
+```
+
+This also works with an array of paths:
+
+```php
+<?= js([
+  'assets/js/jquery.js',
+  'assets/js/jquery.ui.js',
+  'assets/js/site.js',
+], true) ?>
+```
+
+### Other attributes
+
+You can also pass an array of completely custom attributes like the `defer` attribute:
+
+```php
+<?= js('assets/js/site.js', ['async' => true, 'defer' => true, 'data-something' => 'my-value']) ?>
+```

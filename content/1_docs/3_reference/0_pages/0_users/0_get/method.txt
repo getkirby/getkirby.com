@@ -1,0 +1,20 @@
+Title:
+
+$users->get($username)
+
+----
+
+Excerpt:
+
+Returns a single $user object by username
+
+----
+
+Return:
+
+type: $user
+text:
+
+----
+
+Text:

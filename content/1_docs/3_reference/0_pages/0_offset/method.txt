@@ -1,0 +1,41 @@
+Title:
+
+{{class.instance}}->offset($offset)
+
+----
+
+Excerpt:
+
+Returns the collection starting from the given offset
+
+----
+
+Params: -
+  name: $offset
+  type: int
+  text:
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<ul>
+  <?php foreach($page->children()->offset(10) as $subpage): ?>
+  <li>
+    <a href="<?= $subpage->url() ?>">
+      <?= html($subpage->title()) ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

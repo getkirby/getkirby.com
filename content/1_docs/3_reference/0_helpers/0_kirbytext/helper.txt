@@ -1,0 +1,39 @@
+Title: kirbytext($text, $page = null)
+
+----
+
+Excerpt: Parses any text with Markdown and KirbyText
+
+----
+
+Params: -
+  name: $text
+  type: string or Field
+  text:
+-
+  name: $page
+  type: Page
+  text: Optional page reference if $text is a string
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= kirbytext($page->text()) ?>
+```
+
+### Parse KirbyText for another page
+
+```php
+<?= kirbytext('(\image: road.jpg)', $page->children()->first()) ?>
+```

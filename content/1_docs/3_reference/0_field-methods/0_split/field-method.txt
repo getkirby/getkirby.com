@@ -1,0 +1,13 @@
+Text:
+
+## Example
+
+```php
+<h2>Tags</h2>
+<ul>
+  <?php foreach ($page->tags()->split(',') as $tag): ?>
+  <li><?= $tag ?></li>
+  <?php endforeach ?>
+</ul>
+
+```

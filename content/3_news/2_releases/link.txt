@@ -1,0 +1,5 @@
+Title: Releases
+
+----
+
+Link: https://github.com/k-next/kirby/releases

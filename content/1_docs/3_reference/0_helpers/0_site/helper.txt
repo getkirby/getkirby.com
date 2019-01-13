@@ -1,0 +1,22 @@
+Title: site()
+
+----
+
+Excerpt: Returns the site object in any situation
+
+----
+
+Return:
+
+type: $site
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= site()->title() ?>
+```

@@ -1,0 +1,26 @@
+Title:
+
+{{class.instance}}->firstName()
+
+----
+
+Excerpt:
+
+Returns the user's first name
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $site->user('bastian')->firstName() ?>
+```

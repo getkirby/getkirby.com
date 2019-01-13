@@ -1,0 +1,21 @@
+Text:
+
+## In your code
+
+```php
+if(v::max(5, 10)) {
+  echo 'Yay, valid!';
+}
+
+```
+
+## In fields
+
+```
+fields:
+  example:
+    label: Example field
+    type: text
+    validate:
+      max: 10
+```

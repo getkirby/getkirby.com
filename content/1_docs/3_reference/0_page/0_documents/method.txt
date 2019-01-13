@@ -1,0 +1,60 @@
+Title:
+
+{{class.instance}}->documents()
+
+----
+
+Excerpt:
+
+Returns a $files collection with all documents in the page's directory
+
+----
+
+Return:
+
+type: $files
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<h2>Available PDFs</h2>
+<ul>
+  <?php foreach($page->documents()->filterBy('extension', 'pdf') as $pdf): ?>
+  <li>
+    <a href="<?= $pdf->url() ?>">
+      <?= $pdf->filename() ?>
+      (<?= $pdf->niceSize() ?>)
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```
+
+
+## What is a document file?
+
+Kirby considers the following file types as document:
+
+- text
+- mdown
+- md
+- markdown
+- pdf
+- doc
+- docx
+- dotx
+- word
+- xl
+- xls
+- xlsx
+- xltx
+- ppt
+- pptx
+- csv
+- rtf
+- rtx

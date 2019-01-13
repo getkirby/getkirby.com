@@ -1,0 +1,71 @@
+Title: Toggle
+
+----
+
+Excerpt: Yes/no or on/off toggle
+
+----
+
+Text:
+
+The toggle field is perfect for simple on/off or yes/no states.
+
+(screenshot: toggle.png)
+
+## Example
+
+```yaml
+fields:
+  toggle:
+    label: Toggle
+    type: toggle
+    text: Include in menu?
+```
+
+## Options
+
+(field-options: toggle)
+
+## Simple toogle field translated
+
+```yaml
+fields:
+  toggle:
+    label: Toggle
+    type: toggle
+    text:
+        en: Include in menu?
+        de: Im Menü anzeigen?
+```
+
+## Text toggle
+
+```yaml
+fields:
+  toggle:
+    label: Toggle
+    type: toggle
+    text:
+        - Nope
+        - Yay
+```
+
+## Text toggle translated
+
+```yaml
+fields:
+  toggle:
+    label: Toggle
+    type: toggle
+    text:
+        -
+            en: Nope
+            de: Och nö
+        -
+            en: Yay
+            de: Juhu
+
+```
+
+The field content will either be 'true' or 'false'.
+

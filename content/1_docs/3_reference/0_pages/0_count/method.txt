@@ -1,0 +1,46 @@
+Title:
+
+{{class.instance}}->count()
+
+----
+
+Excerpt:
+
+Returns the number of pages in the collection
+
+----
+
+Return:
+
+type: integer
+text: 
+
+----
+
+Text:
+
+## Example
+
+### Counting first level pages
+
+```php
+The site has
+<?= {{class.instance}}->count() ?>
+main pages
+```
+
+### Counting subpages
+
+```php
+This page has
+<?= $page->children()->count() ?>
+subpages
+```
+
+### Counting all pages
+
+```php
+The site has
+<?= $site->index()->count() ?>
+pages in total
+```

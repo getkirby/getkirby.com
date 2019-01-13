@@ -1,0 +1,5 @@
+Title: Kirby Kosmos
+----
+Intro:
+
+We publish a monthly newsletter with hand-picked news about plugins, themes, new versions and other interesting findings from all over the web.

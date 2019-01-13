@@ -1,0 +1,5 @@
+Text:
+
+```php
+<h1><?= $page->title()->upper() ?></h1>
+```

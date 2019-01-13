@@ -1,0 +1,11 @@
+Title: KirbyTag
+
+----
+
+Entry:
+
+A KirbyText shortcut for adding elements like links, images, specially styled content etc. in fields.
+
+----
+
+Link: docs/reference/kirbytags

@@ -1,0 +1,14 @@
+Text:
+
+## Examples
+
+### To a Unix timestamp
+```php
+<?= $page->createdAt()->toDate() ?>
+```
+
+### To a formatted date string
+```php
+<?= $page->createdAt()->toDate('d.m.Y') ?>
+```
+Check out PHP's date function docs for all available formatting options: http://php.net/manual/de/function.date.php

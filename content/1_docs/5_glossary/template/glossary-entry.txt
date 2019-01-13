@@ -1,0 +1,10 @@
+Title: Template
+
+----
+Entry:
+
+Templates are `.php` files that render the (glossary: content text: content) of your pages. They contain the HTML for the page together with some PHP control structures. They may also contain logic, but we recommend the use of (glossary: controller text: controllers) for more complex logic. Templates are stored in `/site/templates`.
+
+----
+
+Link: docs/guide/templates

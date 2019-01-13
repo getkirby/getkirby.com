@@ -1,0 +1,51 @@
+Title: Controllers
+
+----
+
+Guide: templates/controllers
+
+----
+
+Text:
+
+Controllers are registered with the `controllers` extension.
+
+## Callback definition
+
+The `controllers` extension accepts an array of controllers where the key is the name of the associated template and the value a callback function that returns an array of variables for your template.
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('your/plugin', [
+    'controllers' => [
+        'blog' => function ($page) {
+            return [
+                'articles' => $page->children()->listed()
+            ];
+        }
+    ]
+]);
+```
+
+You can now use the `$articles` variable in your blog template.
+
+
+## File definition
+
+Alternatively, you can require a file. The required file would be a (link: docs/guide/templates/controllers text: controller) with a  function that returns an array of variables for your template.
+
+```php
+Kirby::plugin('your/plugin', [
+    'controllers' => [
+        'blog' => require 'some/file.php'
+    ]
+]);
+```
+
+## Usage in templates
+
+You can directly use the defined variables in the related template.
+
+```php "/site/templates/blog.php"
+Number of articles: <?= $articles->count() ?>
+```
+

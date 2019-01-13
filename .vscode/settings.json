@@ -1,0 +1,6 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "css.validate": false,
+  "html-css-class-completion.includeGlobPattern": "site/**/*.php"
+}

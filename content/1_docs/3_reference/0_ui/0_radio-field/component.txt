@@ -1,0 +1,52 @@
+Title: Radio Field
+----
+Text:
+
+```html
+<k-radio-field
+	v-model="value"
+	:options="[
+		{ value: 'a', text: 'Option A' },
+		{ value: 'b', text: 'Option B' }
+	]"
+	:required="true"
+	label="Radio"
+	name="radio"
+	help="This is a radio field"
+	@input="input"
+/>
+```
+
+## Props
+
+(docs: fields/props/autofocus)
+
+(docs: fields/props/disabled)
+
+(docs: fields/props/help)
+
+(docs: fields/props/icon)
+
+(docs: fields/props/label)
+
+(docs: fields/props/name)
+
+(docs: fields/props/options)
+
+(docs: fields/props/required)
+
+### value / v-model
+
+`String|Number|Boolean (default: null)`
+
+## Methods
+
+(docs: fields/methods/focus)
+
+## Events
+
+(docs: fields/events/input)
+
+## CSS class
+
+`.k-radio-field`

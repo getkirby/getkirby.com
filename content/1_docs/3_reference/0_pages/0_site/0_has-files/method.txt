@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->hasFiles()
+
+----
+
+Excerpt:
+
+Checks if there are any files placed directly in /content
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```
+<?php if($site->hasFiles()): ?>
+The /content folder contains files.
+<?php endif ?>
+```

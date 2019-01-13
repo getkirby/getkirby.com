@@ -1,0 +1,26 @@
+Title:
+
+{{class.instance}}->switchLanguage(Language $language)
+
+----
+
+Excerpt:
+
+Redirects to the given language
+
+----
+
+Params:-
+  name: $language
+  type: $language
+  text:
+
+----
+Return:
+
+type: 
+text:
+
+----
+
+Text:

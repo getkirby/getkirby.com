@@ -1,0 +1,9 @@
+Text:
+
+## Example
+
+```php
+<?php if ($page->address()->isEmpty()): ?>
+No address available
+<?php endif ?>
+```

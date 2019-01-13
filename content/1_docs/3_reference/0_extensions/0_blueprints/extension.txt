@@ -1,0 +1,38 @@
+Title: Blueprints
+
+----
+
+Guide: blueprints/introduction
+
+----
+
+Text:
+
+Blueprints are registered with the `blueprints` extension.
+
+## File definition
+
+The `blueprints` extension accepts  an array of key/value pairs, where the key is the name of the blueprint and the value the path to the file in your plugin folder.
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('your/plugin', [
+	'blueprints' => [
+		'blog' => __DIR__ . '/blueprints/blog.yml'
+	]
+]);
+```
+
+## Array definition
+
+Alternatively, you can also pass the blueprint definition as an array instead of a file:
+
+```php
+Kirby::plugin('your/plugin', [
+	'blueprints' => [
+		'blog' => [
+			'title'    => 'Blog',
+			'sections' => [ ... ]
+		]
+	]
+]);
+```

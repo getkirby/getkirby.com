@@ -1,0 +1,10 @@
+Title: API
+
+----
+
+Entry:
+
+Public methods and properties that are used to interact with Kirby's objects; a set of REST endpoints used for retrieving and manipulating information.
+
+----
+Link: docs/guide/api

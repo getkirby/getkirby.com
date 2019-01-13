@@ -1,0 +1,11 @@
+Title: Vue
+
+----
+
+Entry:
+
+Vue is the JavaScript framework Kirby's admin (glossary: panel text: Panel) is built with.
+
+
+----
+Link: https://vuejs.org

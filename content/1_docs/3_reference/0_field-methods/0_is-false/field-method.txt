@@ -1,0 +1,9 @@
+Text:
+
+## Example
+
+```php
+<?php if ($page->robots()->isFalse()): ?>
+<meta name="robots" content="noindex,nofollow">
+<?php endif ?>
+```

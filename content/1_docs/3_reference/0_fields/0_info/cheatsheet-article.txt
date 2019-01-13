@@ -1,0 +1,54 @@
+Title: Info
+
+----
+
+Excerpt:
+
+A plain HTML field for user instructions
+
+----
+
+Text:
+
+The info field is a great way to provide inline help or information for your users. You can put any kind of text in this field and it will be displayed as plain text. For better formatting you can use (glossary: Markdown) and (glossary: KirbyText).
+
+(screenshot: info.png)
+
+## Example
+
+```yaml
+fields:
+  info:
+    label: Info
+    type: info
+    text: |
+      Dear editor,
+
+      each project should have a **cover.jpg**, which will be displayed in the project overview. You should also make sure to fill in all fields correctly.
+
+      In love,
+      Your admin
+```
+
+### Themes
+
+The info field is displayed as a blue info box. You can switch the theme with the `theme` option, to match the importance or meaning of the information.
+
+#### Available themes:
+
+- `info` (default)
+- `positive`
+- `negative`
+
+
+```yaml
+fields:
+  info:
+    label: Info
+    type: info
+    theme: negative
+    text: This is a very important page type. Please double-check your content before publishing.
+```
+
+(screenshot: info-negative.png)
+

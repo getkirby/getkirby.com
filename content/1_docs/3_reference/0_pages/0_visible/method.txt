@@ -1,0 +1,35 @@
+Title:
+
+{{class.instance}}->visible()
+
+----
+
+Excerpt:
+
+Returns all visible items in the collection
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<h2>Visible subpages</h2>
+<ul>
+  <?php foreach($page->children()->visible() as $subpage): ?>
+  <li>
+    <a href="<?= $subpage->url() ?>">
+      <?= html($subpage->title()) ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

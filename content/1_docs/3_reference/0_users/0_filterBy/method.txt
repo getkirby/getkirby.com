@@ -1,0 +1,20 @@
+Title:
+
+$users->filterBy($field, $value)
+
+----
+
+Excerpt:
+
+Filters the collection of users by field and value
+
+----
+
+Return:
+
+type: $users
+text:
+
+----
+
+Text:

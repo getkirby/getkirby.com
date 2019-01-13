@@ -1,0 +1,42 @@
+Title:
+
+{{class.instance}}->blur()
+
+----
+
+Since:
+
+----
+
+Excerpt:
+
+Applies a blur filter to the image
+
+----
+
+Return:
+
+type: $file
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($image = $page->image()):
+    echo $image->blur();
+endif;
+```
+
+
+
+## Blur Amount
+
+You can modify the strength of the blur effect by passing an integer. The default value is 10.
+
+```php
+echo $image->blur(30);
+```

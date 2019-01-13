@@ -1,0 +1,20 @@
+Title:
+
+$users->paginate($limit, $options = [])
+
+----
+
+Excerpt:
+
+Applies pagination to the collection
+
+----
+
+Return:
+
+type: $users
+text:
+
+----
+
+Text:

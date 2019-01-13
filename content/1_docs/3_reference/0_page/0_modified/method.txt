@@ -1,0 +1,33 @@
+Title:
+
+{{class.instance}}->modified($format = false)
+
+----
+
+Excerpt:
+
+Returns the unix timestamp or a formatted date string of the last modification date of the page
+
+----
+
+Params: -
+  name: $format
+  type: string
+  text: A date format
+
+----
+
+Return:
+
+type: integer | string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+Last update: <?= $page->modified('d/m/Y H:i') ?>
+```

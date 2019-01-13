@@ -1,0 +1,26 @@
+Title:
+
+{{class.instance}}->diruri()
+
+----
+
+Excerpt:
+
+Returns the full directory path of the page starting at /content
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $page->diruri() ?>
+```

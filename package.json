@@ -1,0 +1,45 @@
+{
+  "name": "getkirby.com",
+  "version": "3.0.0",
+  "description": "The entire getkirby.com website.",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "build": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bastianallgeier/v3.getkirby.com.git"
+  },
+  "author": "The Kirby Team <mail@getkirby.com>",
+  "license": "SEE LICENSE IN license.md",
+  "bugs": {
+    "url": "https://github.com/bastianallgeier/v3.getkirby.com/issues"
+  },
+  "homepage": "https://github.com/bastianallgeier/v3.getkirby.com#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "browser-sync": "^2.24.4",
+    "browser-sync-webpack-plugin": "^2.0.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "cross-env": "^5.1.6",
+    "eslint": "^4.19.1",
+    "extend": "^3.0.1",
+    "laravel-mix": "^2.1.11",
+    "postcss-calc": "^6.0.1"
+  },
+  "dependencies": {
+    "algoliasearch": "^3.27.1",
+    "awesomplete": "^1.1.2",
+    "clipboard": "^1.7.1",
+    "es6-promise": "^4.2.4",
+    "focus-visible": "^4.1.4",
+    "respimage": "^1.4.2",
+    "smoothscroll-polyfill": "^0.4.3",
+    "svgo": "^1.0.4",
+    "svgxuse": "^1.2.6",
+    "tippy.js": "^2.5.2"
+  }
+}

@@ -1,0 +1,49 @@
+Title:
+
+{{class.instance}}->find($page)
+
+----
+
+Excerpt:
+
+Finds a $page object in the collection by UID or relative URI
+
+----
+
+Params: -
+  name: $page
+  type: string
+  text: The id of a page, or a comma separated list of ids
+
+----
+
+Return:
+
+type: $pages | $page
+text:
+
+----
+
+Text:
+
+## Example
+
+### Fetch a single subpage
+
+```php
+<?= $page->children()->find('subpage-a')->title() ?>
+```
+
+### Fetch multiple subpages
+
+```php
+<ul>
+  <?php foreach($page->children()->find('subpage-a', 'subpage-c', 'subpage-i') as $subpage): ?>
+  <li>
+    <a href="<?= $subpage->url() ?>">
+      <?= html($subpage->title()) ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

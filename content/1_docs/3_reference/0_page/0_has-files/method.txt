@@ -1,0 +1,32 @@
+Title:
+
+{{class.instance}}->hasFiles()
+
+----
+
+Excerpt:
+
+Checks if there are any files in the page's directory
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+echo $page->hasFiles(); //returns the number of files in the folder
+
+if($page->hasFiles()) {
+  $files = $page->files()
+}
+?>
+```

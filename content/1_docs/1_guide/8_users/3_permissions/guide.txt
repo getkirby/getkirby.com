@@ -1,0 +1,125 @@
+Title: Permissions
+
+----
+
+Text:
+
+## Defining permissions
+
+Permissions in Kirby 3 are defined in two optional steps:
+
+1. In a user blueprints for each role
+2. In the page, file or the site blueprints for more explicit rules
+
+### User blueprint
+
+Each role can get its own blueprint with custom fields for users with that role and an additional setup for user permissions. User blueprints are stored in `/site/blueprints/users` and get the name of each role (i.e `/site/blueprints/users/editor.yml`).
+
+Permissions can only be added for custom roles. The admin role does not obey those settings and can always do anything.
+
+```yaml "/site/blueprints/users/editor.yml"
+title: Editor
+permissions:
+  access:
+    panel: true
+    users: true
+    site: true
+  site:
+    update: false
+  pages:
+    create: true
+    changeTemplate: true
+    changeTitle: true
+    changeURL: true
+    hide: true
+    sort: true
+    update: true
+    delete: false
+  users:
+    create: false
+    createAvatar: true
+    deleteAvatar: false
+    changeName: false
+    changeEmail: false
+    changePassword: false
+    changeRole: false
+    delete: false
+    update: false
+  files:
+    create: true
+    changeName: true
+    delete: true
+    replace: true
+    update: false
+```
+You don't have to set all of those permissions for each role though. Each permission is set to true by default, if not specified otherwise. You can also enable or disable entire sections by passing `true` or `false` instead of an array of definitions for each action. A more simple permission setup for an editor could be something like this:
+
+```yaml "/site/blueprints/users/editor.yml"
+title: Editor
+permissions:
+  site:
+    update: false
+  pages:
+    delete: false
+  users: false
+```
+
+This would prevent the editor from accessing any part of the user management, from deleting pages and from updating the site settings.
+
+## The * wildcard
+
+For parts with many actions that get the same setting, you can use the * wildcard as first argument. Afterwards you can still override specific actions, for example to whitelist actions:
+
+```yaml
+users:
+  *: false
+  changeName: true
+```
+
+## Visitors
+
+Frontend users can also be managed through the Panel, but you most likely don't want them to be able to access the Panel at all. In order to achieve this, set Panel access to false.
+
+```yaml
+title: Visitor
+permissions:
+  access:
+    panel: false
+```
+
+If you use any of Kirby's PHP APIs in the frontend to modify pages, files, the site or users, you should set the permissions like above to control what a visitor can do in your frontend. You can also have multiple frontend user roles without access to the Panel but with different access to the PHP APIs. Our REST API follows the same rules.
+
+## Getting more specific
+
+You can keep all the permissions in the role files, but you can also overwrite them individually per page, file, user or the site in their blueprints. Those specific permission settings will always override the role settings.
+
+### Page options
+
+
+```yaml "/site/pages/project.yml"
+title: Project
+
+options:
+  changeTemplate: false
+  changeTitle: false
+  update: true
+  delete: false
+```
+## Even more control with hooks
+
+If the blueprint-based permission settings are too limiting for your project, you can get more flexibility by creating your own permission checks with `before` hooks for various actions.
+
+```php "/site/config/config.php"
+
+return [
+  'hooks' => [
+    'page.delete:before' => function (Page $page) {
+      if ($this->user()->email() !== 'overlord@ourcompany.com') {
+        throw new Exception('Only our overlord and savior can delete pages');
+      }
+    }
+  ]
+];
+```
+
+Of course this can get way more complex and sophisticated than that, but it's a good first start.

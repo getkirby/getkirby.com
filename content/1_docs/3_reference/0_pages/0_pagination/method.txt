@@ -1,0 +1,24 @@
+Title:
+
+{{class.instance}}->pagination()
+
+----
+
+Excerpt:
+
+Returns the $pagination object if available
+
+----
+
+Return:
+
+type: $pagination
+text:
+
+----
+
+Text:
+
+## Related
+
+Check out the (link: docs/reference#pagination text: docs for the $pagination object)

@@ -1,0 +1,12 @@
+Title: /site/files
+----
+Info: GET
+----
+Excerpt: List files
+----
+Text:
+
+## Query Parameters
+
+(docs: api/files-parameters)
+

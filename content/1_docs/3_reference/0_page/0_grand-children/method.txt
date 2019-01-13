@@ -1,0 +1,63 @@
+Title: {{class.instance}}->grandChildren()
+
+----
+
+Excerpt:
+
+Returns a $pages collection with all children of children in the page's directory
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example structure
+
+- blog
+    - 2012
+        - article-a
+        - article-b
+        - article-c
+    - 2013
+        - article-d
+        - article-e
+        - article-f
+    - 2014
+        - article-g
+        - article-h
+        - article-i
+
+
+## Example code
+
+```php
+<ul>
+  <?php foreach(page('blog')->grandChildren() as $item): ?>
+  <li>
+    <a href="<?= $item->url() ?>">
+      <?= html($item->title()) ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```
+
+## Result
+
+The code above will give you a list like this:
+
+- Article A
+- Article B
+- Article C
+- Article D
+- Article E
+- Article F
+- Article G
+- Article H
+- Article I

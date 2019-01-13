@@ -1,0 +1,26 @@
+Title:
+
+{{class.instance}}->page()
+
+----
+
+Excerpt:
+
+Returns the page object for a file
+
+----
+
+Return:
+
+type: $page
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+echo 'Document of: ' . $file->page()->title();
+```

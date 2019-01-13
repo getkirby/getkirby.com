@@ -1,0 +1,36 @@
+Title:
+
+{{class.instance}}->documents()
+
+----
+
+Excerpt:
+
+Returns a $files collection with all documents (pdf, doc, xls, etc.) placed directly in /content
+
+----
+
+Return:
+
+type: $files
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<h2>Available PDFs</h2>
+<ul>
+  <?php foreach($site->documents()->filterBy('extension', 'pdf') as $pdf): ?>
+  <li>
+    <a href="<?= $pdf->url() ?>">
+      <?= $pdf->filename() ?>
+      (<?= $pdf->niceSize() ?>)
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

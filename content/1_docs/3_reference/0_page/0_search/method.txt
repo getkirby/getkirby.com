@@ -1,0 +1,56 @@
+Title:
+
+{{class.instance}}->search($query, $params = [])
+
+----
+
+Excerpt:
+
+Searches all descendants
+
+----
+Params: -
+  name: $query
+  type: string
+  text: The search term
+-
+  name: $params
+  type: string | array
+  text:
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+// search the entire site
+$results = $site->search('my awesome search');
+
+// search all children, children of children, etc. of the current page
+$results = $page->search('my awesome search');
+
+// filter the search results
+$results = $page->search('my awesome search')->listed()->filterBy('template', 'article');
+
+// add pagination to the search results
+$results = $page->search('my awesome search')->paginate(20);
+
+// search in certain fields only
+$results = $page->search('my awesome search', 'title|text');
+
+// search for full words only
+$results = $page->search('my awesome->search', ['words' => true]);
+
+// feed the search with a get parameter -> http://yourdomain.com/?q=awesome
+$results = $page->search(get('q'));
+
+```

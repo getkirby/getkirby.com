@@ -1,0 +1,35 @@
+Title:
+
+{{class.instance}}->toArray($callback = null)
+
+----
+
+Excerpt:
+
+Converts the entire file object into a plain PHP array
+
+----
+
+Params: -
+  name: $callback
+  type: callable
+  text: Mapping callback
+
+----
+
+Return:
+
+type: array
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($image = $page->image()):
+    var_dump($image->toArray());
+endif;
+```

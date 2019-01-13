@@ -1,0 +1,133 @@
+Title: Installation & Updates
+
+----
+
+Description: Install Kirby the way that fits your needs, start from scratch or from a full blown Starterkit.
+
+----
+
+Intro: Kirby is designed with ease of use and only simple hardware and software requirements in mind. You can run Kirby in many different local development environments, as well as on most shared hosting platforms, VPS or dedicated servers.
+
+----
+
+Text:
+
+## Requirements
+
+<table>
+    <tr>
+        <th>Web server</th>
+        <th>PHP</th>
+    </tr>
+    <tr>
+        <td class="text">
+            Any of the following:
+            <ul>
+                <li>Apache 2</li>
+                <li>Nginx</li>
+                <li>LiteSpeed</li>
+                <li>Caddy</li>
+            </ul>
+        </td>
+        <td class="text">
+            <ul>
+                <li>PHP 7.1+</li>
+                <li>mbstring extension</li>
+                <li>curl extension</li>
+                <li>ctype extension</li>
+                <li>gdlib extension</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+### Browsers for the Panel
+
+Kirby does not modify the output of your site's templates and thus has no effect on its browser requirements. The Panel is built on modern browser features though and has a couple browser requirements which need to be met by your site's editors.
+
+<table>
+    <tr>
+        <th>Desktop</th>
+        <th>Mobile</th>
+    </tr>
+    <tr>
+        <td class="text">
+            <ul>
+                <li>Chrome 57+</li>
+                <li>Firefox 54+</li>
+                <li>Safari 10.1+</li>
+                <li>Edge 16+</li>
+                <li>Opera 44+</li>
+            </ul>
+        </td>
+        <td class="text">
+            <ul>
+                <li>Mobile Safari 10.3+</li>
+                <li>Android Browser 67+</li>
+                <li>Chrome for Android 70+</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+Other browsers will very likely be compatible as soon as they support **CSS&nbsp;Grid** and the **JS fetch API**. The Panel will check for those requirements.
+
+## Installation
+
+Kirby has two downloadable versions to get started with:
+
+(docs: kits)
+
+Unzip the ZIP archive in the web root of your web server (or copy all unzipped files into the web root in case the archive unzipped itself).
+
+<info>
+When copying files to a remote server via (S)FTP, make sure to copy the `.htaccess` file as well. By default, files starting with a dot are invisible in the filesystem, so make sure enable the display of invisible files before copying.
+</info>
+
+### Alternative ways to install Kirby
+
+There are alternative installation methods for advanced users who prefer to install and update Kirby using simple commands on the command line or in their version control tool:
+
+- (link: docs/cookbook/installation/composer text: Installation via Composer)
+- (link: docs/cookbook/installation/git text: Installation as Git submodule)
+
+Check them out and use whichever method you prefer.
+
+## Create your first account
+
+Kirby's control panel (aka. the Panel) comes without any pre-installed accounts. Open `http://yourdomain.com/panel` in the browser to start the installer and create the first account.
+
+## Register your installation
+
+Once you publish your website, you need to (link: buy text: purchase a Kirby license). We will send you a unique license code for your domain. You can register your installation with the following steps.
+
+1. Open the Panel at `http://yourdomain.com/panel` and log in.
+2. Click on "Register" at the top.
+3. Enter your license code and your email address and press "Ok".
+
+## Updates
+
+To update Kirby, download the latest version and replace the `kirby` folder.
+
+That's it! Because Kirby does not use a database by default, you don't have to run any database migrations.
+
+<warning>
+Never update a live website directly on the server. Test updates locally first to see if something breaks.
+</warning>
+
+### Updating Kirby with the advanced methods
+
+If you used one of the advanced installation methods, you can also use them to update Kirby:
+
+- (link: docs/cookbook/installation/composer#updating-kirby text: Update via Composer)
+- (link: docs/cookbook/installation/git#updating-kirby text: Update of the Git submodule)
+
+### How to upgrade from Kirby 2
+
+If you want to upgrade an existing Kirby 2 installation, head over to our (link: docs/cookbook/migration/sites text: upgrade guide).
+
+## Troubleshooting
+
+In an ideal world, everything went well and you don't need this section.
+
+If you run into unexpected issues after an update, first try if deleting the `media` and `/site/cache` folders helps. If you still run into any issues, check out our (link: docs/guide/troubleshooting/installation text: Troubleshooting guide).

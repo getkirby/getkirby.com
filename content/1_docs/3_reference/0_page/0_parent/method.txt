@@ -1,0 +1,28 @@
+Title: {{class.instance}}->parent()
+
+----
+
+Excerpt:
+
+Returns the parent $page object
+
+----
+
+Return:
+
+type: $page
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+This page is a subpage of:
+
+<a href="<?= $page->parent()->url() ?>">
+  <?= html($page->parent()->title()) ?>
+</a>
+```

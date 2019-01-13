@@ -1,0 +1,28 @@
+Title: Param
+
+----
+Text:
+
+## Examples
+
+Besides with URL query variables, you can set parameters via URL in Kirby in a more human-readable way:
+
+```
+http://yourdomain.com/blog/tag:mytag/year:2014
+```
+
+Note that you have to use a semicolon instead of a colon on Windows systems. In your code, you can use the `Url::paramsToString()` method to make sure that the resulting URL is compatible with both Linux and Windows servers.
+
+Those parameters are very handy when you want to build URL-based filters for your content.
+
+Such parameters will be ignored by the router so the URL which will be fetched by Kirby in this case is `http://yourdomain.com/blog`.
+
+The params function returns all detected params:
+
+```php
+// http://yourdomain.com/blog/tag:mytag/year:2014
+$params = params();
+
+// $params is array('tag' => 'mytag', 'year' => '2014')
+// you can also get a single param with the param function.
+```

@@ -1,0 +1,20 @@
+Title:
+
+{{class.instance}}->role()
+
+----
+
+Excerpt:
+
+Returns the user role
+
+----
+
+Return:
+
+type: object
+text:
+
+----
+
+Text:

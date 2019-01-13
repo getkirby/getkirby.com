@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->data()
+
+----
+
+Excerpt:
+
+Returns an array with all user data
+
+----
+
+Return:
+
+type: array
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $kirby->user('bastian@example.com')->data() ?>
+```
+
+**Please note**: This method returns the *raw data* from the user's account file. Some of that data (like the ID of the role) might be parsed differently by the respective user methods.

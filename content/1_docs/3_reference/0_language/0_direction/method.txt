@@ -1,0 +1,20 @@
+Title:
+
+$language->direction()
+
+----
+
+Excerpt: Returns the text direction of the language (rtl or ltr)
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+

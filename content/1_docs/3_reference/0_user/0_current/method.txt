@@ -1,0 +1,25 @@
+Title:
+
+{{class.instance}}->current()
+
+----
+
+Excerpt: Returns the current user
+
+
+----
+
+Return:
+
+type: $user
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $kirby->user()->current() ?>
+```

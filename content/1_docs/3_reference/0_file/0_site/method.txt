@@ -1,0 +1,26 @@
+Title:
+
+{{class.instance}}->site()
+
+----
+
+Excerpt:
+
+Returns the site object
+
+----
+
+Return:
+
+type: $site
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+$site = $file->site();
+```

@@ -1,0 +1,26 @@
+Title: {{class.instance}}->activePage()
+
+----
+
+Excerpt:
+
+Returns the currently active page object
+
+----
+
+Return:
+
+type: $page
+text:
+
+----
+
+Text:
+
+This is the equivalent to the `$page` variable available in templates and snippets and the new `$site->page()` method.
+
+## Example
+
+```php
+<?= $site->activePage()->title() ?>
+```

@@ -1,0 +1,20 @@
+Excerpt: Additional route setup for Kirby's internal router
+
+----
+
+Text:
+
+The routes option accepts an array of routes.
+
+```php
+return [
+ 'routes' => [
+    [
+      'pattern' => 'team/(:any)',
+      'action'  => function ($hash) {
+        return go('team/#' . $hash);
+       }
+    ],
+  ]
+];
+```

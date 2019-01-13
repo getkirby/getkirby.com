@@ -1,0 +1,51 @@
+Title:
+
+{{class.instance}}->cannot($event, $args = [])
+
+----
+
+Since:
+
+----
+
+Excerpt:
+
+Returns true if the user has *no* permission for the specified event
+
+----
+
+Params:-
+  name: $event
+  type: Event/string
+  text: Event object or a string with the event name
+-
+  name: $args
+  type: mixed
+  text: Additional arguments for the permission callbacks
+
+----
+
+Return:
+
+type: boolean
+text: 
+
+----
+
+Text:
+
+There is also (sheet: user/permission) that also returns an error message if the user has no permission.
+If you want to check if the user *has* permission, use (sheet: user/can), which otherwise does the same.
+
+## Example
+
+```php
+$user = site()->user();
+if(!$user) throw new Exception('No user is logged in.');
+
+if($user->cannot('myplugin.permission', ['arg1', 'arg2'])) {
+  // user has no permission
+} else {
+  // user has permission
+}
+```

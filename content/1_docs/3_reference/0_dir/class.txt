@@ -1,0 +1,44 @@
+Class: Kirby\Toolkit\Dir
+
+----
+Excerpt:
+
+The Dir class provides methods for dealing with directories on the file system level, like creating, listing, moving, copying or evaluating directories etc.
+
+----
+
+Text:
+
+## Examples
+
+### Create a new directory
+
+Create a test folder in the document root of the website
+
+```php
+Dir::make($kirby->root('index') . '/test');
+```
+
+### List all directories in the doc root
+
+```php
+dump(Dir::read($kirby->root('index')));
+
+/* result
+Array
+(
+    [0] => .editorconfig
+    [1] => README.md
+    [2] => assets
+    [3] => comments
+    [4] => comments.zip
+    [5] => composer.json
+    [6] => content
+    [7] => index.php
+    [8] => kirby
+    [9] => lab
+    [10] => media
+    [11] => site
+)
+*/
+```

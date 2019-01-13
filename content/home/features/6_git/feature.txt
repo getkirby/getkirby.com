@@ -1,0 +1,5 @@
+Title: Version control
+
+----
+
+Text: As Kirby is a file-based CMS, you can version control all content with Git or any other VCS. Deployments, backups and synchronization of multiple stages are a breeze.

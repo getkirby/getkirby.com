@@ -1,0 +1,34 @@
+Title:
+
+{{class.instance}}->isChildOf($parent)
+
+----
+
+Excerpt:
+
+Checks if the page is a child of the given page
+
+----
+
+Params: -
+  name: $parent
+  type: Page | string
+  text: A page URI or page object.
+
+----
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php if($page->isChildOf('some-parent-page')): ?>
+This page is a child of it's parent!
+<?php endif ?>
+```

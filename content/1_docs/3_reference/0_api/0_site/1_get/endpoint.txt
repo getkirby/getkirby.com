@@ -1,0 +1,31 @@
+Title: /site
+----
+Info: GET
+----
+Excerpt: Retrieve information about the site
+----
+Text:
+
+## Query parameters
+
+(docs: api/site-parameters)
+
+----
+Response:
+
+{
+    "code": 200,
+    "data": {
+        "content": {
+          ...
+        },
+        "options": {
+            "changeTitle": true,
+            "update": true
+        },
+        "title": "Kirby Starterkit",
+        "url": "http://kir.by"
+    },
+    "status": "ok",
+    "type": "model"
+}

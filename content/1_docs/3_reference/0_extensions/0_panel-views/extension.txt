@@ -1,0 +1,64 @@
+Title:  Panel views
+
+----
+
+Text:
+
+While the Panel is very extensible already with fields and sections, you might reach the point where you need your own dedicated space in the Panel.
+
+With a Panel view plugin you can build your own stand-alone view, that is either just accessible via link or is located in the main menu.
+
+Such Panel views can maybe contain just some static documentation for the project, but can also be extended to highly interactive Vue applications. Think about an integrated task management system, a newsletter tool, a form builder, an ERM system or more. It's all up to your imagination and project specs.
+
+## What makes a panel view plugin?
+
+- PHP code for the REST API: `index.php`
+- Vue code for the Panel: `index.js`
+- Optional CSS: `index.css`
+
+## PHP definition
+
+Unless you want to extend other parts of the Panel, a custom view does not require any specific PHP code. But you still have to create an `index.php` for it to be fully registered.
+
+```php "/site/plugins/todos/index.php"
+<?php
+
+Kirby::plugin('yourname/todos', []);
+```
+
+## Vue component
+
+Custom views mainly live in the `index.js` file. Think of them as their own little Vue application.
+
+```js "/site/plugins/todos/index.js"
+panel.plugin("yourname/todos", {
+  views: {
+    todos: {
+      template: `
+        <kirby-view class="k-todos-view">
+          <kirby-header>
+              Todos
+          </kirby-header>
+
+          <!-- your app goes here -->
+
+        </kirby-view>
+      `
+    }
+  }
+});
+```
+
+If you've never worked with Vue before, you should really check out their [docs](https://vuejs.org).
+
+The template code of your custom view can make use of all our components from our (link: docs/reference/ui text: Panel UI Kit). No need to re-invent the wheel for custom elements like buttons, dialogs and so much more.
+
+## CSS styles
+
+If you need additional styling for your view, you can create an `index.css` and add your CSS there.
+
+```css "/site/plugins/todos/index.css"
+.k-todos-view {
+  /* add your css rules */
+}
+```

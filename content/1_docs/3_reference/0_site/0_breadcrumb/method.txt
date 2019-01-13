@@ -1,0 +1,36 @@
+Title:
+
+{{class.instance}}->breadcrumb()
+
+----
+
+Excerpt:
+
+Returns a $pages collection, prepared for a foreach loop to generate a breadcrumb
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<nav class="breadcrumb" role="navigation">
+  <ul>
+    <?php foreach($site->breadcrumb() as $crumb): ?>
+    <li>
+      <a href="<?= $crumb->url() ?>">
+        <?= html($crumb->title()) ?>
+      </a>
+    </li>
+    <?php endforeach ?>
+  </ul>
+</nav>
+```

@@ -1,0 +1,20 @@
+Title:
+
+{{class.instance}}->hasTemplate()
+
+----
+
+Excerpt:
+
+Checks if the page has its own template or if it uses the default template
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:

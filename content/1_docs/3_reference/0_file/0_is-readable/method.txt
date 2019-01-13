@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->isReadable()
+
+----
+
+Excerpt:
+
+Checks if the file is readable
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php if($file = $page->file() && $file->isReadable()): ?>
+The file is readable
+<?php endif ?>
+```

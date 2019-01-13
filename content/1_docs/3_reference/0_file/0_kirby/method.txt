@@ -1,0 +1,26 @@
+Title:
+
+{{class.instance}}->kirby()
+
+----
+
+Excerpt:
+
+Returns the kirby object
+
+----
+
+Return:
+
+type: $kirby
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+$kirby = $file->kirby();
+```

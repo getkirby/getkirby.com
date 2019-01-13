@@ -1,0 +1,37 @@
+Title:
+
+{{class.instance}}->findBy($key, $value)
+
+----
+
+Excerpt:
+
+Finds a single $page object in the collection by $key and $value
+
+----
+Params: -
+  name: $key
+  type: string
+  text:
+-
+    name: $value
+    type: mixed
+    text:
+
+----
+
+Return:
+
+type: $page
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $page->children()->findBy('uid', 'some-page')->title() ?>
+
+```

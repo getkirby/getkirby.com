@@ -1,0 +1,30 @@
+Title:
+
+$pagination->items()
+
+----
+
+Excerpt:
+
+Returns the total number of items
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+$subpages   = $page->children()->paginate(10);
+$pagination = $subpages->pagination();
+
+echo 'There are ' . $pagination->items() . ' in total';
+
+```

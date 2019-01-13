@@ -1,0 +1,155 @@
+
+Title: Blog
+
+----
+
+Excerpt: A simple blog and articles setup
+
+----
+
+Text:
+
+## Blog blueprint
+
+```yaml "/site/blueprints/pages/blog.yml"
+title: Blog
+icon: 📚
+
+columns:
+  - width: 1/2
+    sections:
+      drafts:
+        extends: sections/articles
+        headline: Drafts
+        status: draft
+
+      unlisted:
+        extends: sections/articles
+        headline: In Review
+        status: unlisted
+
+  - width: 1/2
+    sections:
+      listed:
+        extends: sections/articles
+        headline: Published
+        status: listed
+```
+
+### Predefined section for reusage
+
+```yaml "/site/blueprints/sections/articles.yml"
+type: pages
+headline: Articles
+info: "{{ page.date.toDate('d.m.Y') }}"
+template: article
+empty: No articles yet
+sortBy: date desc
+```
+
+### Result
+
+(screenshot: blueprint-blog.png)
+
+## Single article blueprint
+
+```yaml "/site/blueprints/sections/article.yml"
+title: Article
+num: date
+icon: 📖
+
+status:
+  draft:
+    label: Draft
+    text: The article is still in draft mode. It can only be seen by editors with panel access.
+  unlisted:
+    label: In Review
+    text: The article is online and can be visited with the direct URL. The team must still give the final go to publish it.
+  listed:
+    label: Published
+    text: The article is online and listed in the blog
+
+columns:
+  - width: 2/3
+    fields:
+      text:
+        type: textarea
+        size: large
+
+  - width: 1/3
+    sections:
+      meta:
+        type: fields
+        fields:
+          date:
+            type: date
+            time: true
+            default: now
+          author:
+            type: users
+          tags:
+            type: tags
+```
+
+### Result
+
+(screenshot: blueprint-article.png)
+
+## Blog template
+
+```php "/site/templates/blog.php"
+<?php snippet('header') ?>
+
+<main>
+  <header class="intro">
+    <h1><?= $page->title() ?></h1>
+  </header>
+
+  <div class="articles">
+    <?php foreach ($page->children()->listed()->sortBy('date', 'desc') as $article): ?>
+    <article class="article">
+      <header class="header">
+        <a href="<?= $article->url() ?>">
+          <h2><?= $article->title() ?></h2>
+          <time><?= $article->date()->toDate('d F Y') ?></time>
+        </a>
+      </header>
+    </article>
+    <?php endforeach ?>
+  </div>
+
+</main>
+
+<?php snippet('footer') ?>
+```
+
+(screenshot: template-blog.png)
+
+## Single article template
+
+```php "/site/templates/article.php"
+<?php snippet('header') ?>
+
+<main>
+  <article class="article">
+    <header class="intro">
+      <h1><?= $page->title() ?></h1>
+      <time><?= $page->date()->toDate('d F Y') ?></time>
+      <?php if ($page->tags()->isNotEmpty()) : ?>
+        <p class="tags"><?= $page->tags() ?></p>
+      <?php endif ?>
+    </header>
+
+    <div class="text">
+      <?= $page->text()->kt() ?>
+    </div>
+  </article>
+</main>
+
+<?php snippet('footer') ?>
+```
+
+(screenshot: template-article.png)
+
+
+

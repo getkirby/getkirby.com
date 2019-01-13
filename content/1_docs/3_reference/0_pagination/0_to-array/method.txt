@@ -1,0 +1,20 @@
+Title:
+
+$pagination->toArray()
+
+----
+
+Excerpt:
+
+Returns the pagination object as an associative array.
+
+----
+
+Return:
+
+type: array
+text:
+
+----
+
+Text:

@@ -1,0 +1,69 @@
+Title: /pages/:id
+----
+Info: GET
+----
+Excerpt: Retrieve a page
+----
+Text:
+
+## Query parameters
+
+(docs: api/page-parameters)
+
+----
+Example: /api/pages/projects+trees-and-stars-and-stuff
+----
+Response:
+{
+    "code": 200,
+    "data": {
+        "content": {
+            "title": "Trees and stars and stuff",
+            "year": 2018,
+            "text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. …",
+            "headline": null,
+            "tags": [
+                {
+                    "value": "nature",
+                    "text": "nature"
+                },
+                {
+                    "value": "sky",
+                    "text": "sky"
+                },
+                {
+                    "value": "tree",
+                    "text": "tree"
+                }
+            ],
+            "intro": "Isn't that a beautiful tree? The sky doesn't look bad either."
+        },
+        "id": "projects/trees-and-stars-and-stuff",
+        "num": 1,
+        "options": {
+            "changeSlug": true,
+            "changeStatus": true,
+            "changeTemplate": false,
+            "changeTitle": true,
+            "create": true,
+            "delete": true,
+            "read": true,
+            "preview": true,
+            "sort": true,
+            "update": true
+        },
+        "parent": {
+            "id": "projects",
+            "num": 1,
+            "title": "Projects",
+            "url": "http://kir.by/projects"
+        },
+        "slug": "trees-and-stars-and-stuff",
+        "status": "listed",
+        "template": "project",
+        "title": "Trees and stars and stuff",
+        "url": "http://kir.by/projects/trees-and-stars-and-stuff"
+    },
+    "status": "ok",
+    "type": "model"
+}

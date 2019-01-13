@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->isLandscape()
+
+----
+
+Excerpt:
+
+Checks if an image file has been taken in landscape mode
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php if($image = $page->image() && $image->isLandscape()): ?>
+This image has been taken in landscape mode
+<?php endif ?>
+```

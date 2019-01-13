@@ -1,0 +1,44 @@
+Title: Range
+
+----
+
+Excerpt: A handy slider
+
+----
+
+Text:
+
+The range field creates a flexible slider, that can be used to display numbered values in a more visual and intuitive way.
+
+(screenshot: range.png)
+
+## Example
+
+```yaml
+fields:
+  budget:
+    label: Budget
+    type: range
+    step: 100
+    min: 0
+    max: 10000
+    tooltip:
+      before: $
+```
+
+## Options
+
+(field-options: range)
+
+## `before` & `after` values
+
+The range field can show additional text before or after the input. This is great when you need a price field for example:
+
+```yaml
+fields:
+  price:
+    label: Price
+    type: range
+    min: 0
+    after: €
+```

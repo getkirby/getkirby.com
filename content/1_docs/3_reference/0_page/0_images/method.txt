@@ -1,0 +1,34 @@
+Title:
+
+{{class.instance}}->images()
+
+----
+
+Excerpt:
+
+Returns a $files collection with all image files (jpg, png, gif, etc.) in the page directory
+
+----
+
+Return:
+
+type: $files
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<section class="gallery">
+  <?php foreach($page->images() as $image): ?>
+  <figure>
+    <a href="<?= $image->url() ?>">
+      <img src="<?= $image->url() ?>" alt="">
+    </a>
+  </figure>
+  <?php endforeach ?>
+</section>
+```

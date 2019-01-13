@@ -1,0 +1,49 @@
+Title:
+
+{{class.instance}}->file($filename = false)
+
+----
+
+Excerpt:
+
+Returns a specific $file object within the page's directory by filename. If no filename is given, the first file will be returned
+
+----
+
+Params: -
+  name: $filename
+  type: string
+  text: Optional, a filename
+
+----
+
+Return:
+
+type: $file
+text:
+
+----
+
+Text:
+
+## Example
+
+### Fetching the first file
+
+```php
+<?php if($file = $page->file()): ?>
+<a href="<?= $file->url() ?>">
+  <?= html($file->filename()) ?>
+</a>
+<?php endif ?>
+```
+
+### Fetching a specific file
+
+```php
+<?php if($file = $page->file('myfile.pdf')): ?>
+<a href="<?= $file->url() ?>">
+  <?= html($file->filename()) ?>
+</a>
+<?php endif ?>
+```

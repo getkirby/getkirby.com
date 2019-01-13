@@ -1,0 +1,48 @@
+Title: {{class.instance}}->increment($field, $by = 1, $max = null)
+
+----
+
+Since:
+
+----
+
+Excerpt:
+
+Increment a field value by one or a given value
+
+----
+
+Params: -
+  name: $field
+  type: string
+  text: A field name
+-
+  name: $by
+  type: integer
+  text: An integer by which to increment
+-
+  name: $max
+  type: integer
+  text: The max number
+
+----
+
+Return:
+
+type: $page
+text:
+
+----
+
+Text:
+
+## Example
+
+
+```php
+<?php $page->increment('likes') ?>
+```
+
+## Notice
+
+The increment method will only work reliably with field values that PHP can parse into a valid integer. Otherwise the field value will be evaluated as zero and incremented to 1 or whatever $by value you pass. 

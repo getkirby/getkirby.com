@@ -1,0 +1,107 @@
+$debug-grid: #4f99ff;
+$debug-col: rgba($debug-grid, .15);
+$debug-wrap: rgba($debug-grid, .1);
+$debug-col-border: rgba($debug-grid, .5);
+
+/* ·····  Debug Bar  ························································ */
+
+.debug-bar,
+[id="__bs_notify__"] {
+  background: $color-black;
+  bottom: 0;
+  color: $color-white !important;
+  font-family: monospace;
+  font-size: 12px !important;
+  left: 0;
+  line-height: 1;
+  padding: .4em 1em !important;
+  position: fixed;
+  width: 100%;
+  z-index: 3001;
+}
+
+body::after {
+  background: $color-black;
+  color: $color-white !important;
+  font-family: Menlo, Verdana, sans-serif !important;
+  font-size: 10px !important;
+  letter-spacing: 0 !important;
+  padding: .5em 1em !important;
+}
+
+[id="__bs_notify__"] {
+  border-radius: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  opacity: 1 !important;
+  right: auto !important;
+  top: auto !important;
+  width: auto !important;
+}
+
+.debug-bar > ul {
+  display: flex;
+  justify-content: stretch;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.debug-bar > ul > li {
+  
+  &:nth-child(n + 2) {
+    background: red;
+  }  
+}
+
+/* -----  Debug Layout Overlay  --------------------------------------------- */
+
+$grid-gutter-desktop: 32px;
+
+body {
+  position: relative;
+}
+
+.debug-layout {
+  $line: rgba($debug-grid, .25);
+  background: linear-gradient(to bottom, $line 0px, $line 1px, transparent 1px, transparent 100%) 0 -0.125em / 100% 1.5em;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 3000;
+}
+
+.debug-layout .wrap {
+  height: 100%;
+  position: relative;
+}
+
+.debug-layout .row {
+  height: 100%;
+}
+
+.debug-layout .row > * {
+  background-clip: content-box;
+  background-color: $debug-col;
+  height: 100%;
+  position: relative;
+}
+
+@include mq(from s) {
+  // .debug-layout .wrap {
+  //   background:
+  //     linear-gradient(to bottom, $debug-wrap, $debug-wrap) #{$grid-gutter-desktop / 2} 0 / calc(100% - #{$grid-gutter-desktop}) 100% no-repeat;
+  // }
+
+  .debug-layout .row > * {
+    background:
+      linear-gradient(to bottom, $debug-col-border, $debug-col-border) #{$grid-gutter-desktop / 2} 0 / 1px 100% no-repeat,
+      linear-gradient(to bottom, $debug-col-border, $debug-col-border) calc(100% - #{$grid-gutter-desktop / 2}) 0 / 1px 100% no-repeat;
+    background-clip: content-box;
+    background-color: $debug-col;
+  }
+}

@@ -1,0 +1,69 @@
+@import "../includes";
+
+/* -----  Hero Section ------------------------------------------------------ */
+
+html {
+  background: #000 url('../../images/components/kosmos/galaxy.jpg');
+  background-position: top center;
+  background-size: 650px;
+  background-repeat: no-repeat;
+}
+
+.issue-nav {
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.issue-nav > * {
+  display: flex;
+  align-items: center;
+}
+.issue-nav-index {
+  color: $color-syntax-yellow;
+  width: 3rem;
+  justify-content: center;
+}
+.issue-nav-button {
+  padding: 1rem;
+}
+.issue-nav-button svg {
+  width: 1rem;
+  height: 1rem;
+}
+span.issue-nav-button {
+  opacity: .25;
+}
+
+.issue-body {
+  padding: 1.5rem;
+}
+.issue-body .text {
+  max-width: 45rem;
+  margin: 0 auto 6rem;
+  background: $color-white;
+  padding: 1.5rem;
+}
+
+@include mq(from m) {
+  .issue-body .text {
+    padding: 3rem;
+  }
+}
+
+.issue-body img {
+  border-radius: .25rem;
+  box-shadow:
+    0 16px 16px rgba(#000,.05),
+    0 8px 8px rgba(#000,.05),
+    0 4px 4px rgba(#000,.05),
+    0 2px 2px rgba(#000,.05);
+}
+
+.issue-hero {
+  color: $color-white;
+}
+
+.footer {
+  background: none !important;
+}

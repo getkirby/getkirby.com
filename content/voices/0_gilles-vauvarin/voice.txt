@@ -1,0 +1,9 @@
+Title: Gilles Vauvarin
+
+----
+
+Text: I was looking for a CMS easy to deploy and back up, simple, flexible, which allow me to build my own custom panel. I've found it and its name is Kirby.
+
+----
+
+Username: pixenjoy

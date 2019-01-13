@@ -1,0 +1,27 @@
+Title:
+
+{{class.instance}}->hasImages()
+
+----
+
+Excerpt:
+
+Checks if there are any images (jpg, png, gif, etc.) placed directly in /content
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+```
+<?php if($site->hasImages()): ?>
+The /content folder contains images.
+<?php endif ?>
+```

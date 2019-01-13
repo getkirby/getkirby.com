@@ -1,0 +1,20 @@
+Title:
+
+$files->toArray($callback = null)
+
+----
+
+Excerpt:
+
+Converts the collection to a simple array.
+
+----
+
+Return:
+
+type: array
+text:
+
+----
+
+Text:

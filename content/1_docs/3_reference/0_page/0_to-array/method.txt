@@ -1,0 +1,46 @@
+Title:
+
+{{class.instance}}->toArray($callback = null)
+
+----
+
+Excerpt:
+
+Converts the entire page object into a plain PHP array
+
+----
+Params: -
+  name: $callback
+  type: closure
+  text: Filter callback
+
+----
+
+Return:
+
+type: array
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+$array = $page->toArray();
+var_dump($array);
+```
+
+## With a callback
+
+```php
+<?php 
+$array = $page->toArray(function ($page) {
+  return [
+    'id' => $page->id(),
+  ];
+});
+var_dump($array);
+```

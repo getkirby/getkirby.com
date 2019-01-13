@@ -1,0 +1,36 @@
+Title:
+
+{{class.instance}}->thumb($params)
+
+----
+
+Since:
+
+----
+
+Excerpt:
+
+Sets all parameters for the thumb generator at once.
+
+----
+
+Return:
+
+type: $file
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($image = $page->image()):
+    echo $image->thumb([
+      'width'   => 300,
+      'height'  => 200,
+      'quality' => 80
+    ])->html();
+endif;
+```

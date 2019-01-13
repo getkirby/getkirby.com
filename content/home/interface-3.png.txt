@@ -1,0 +1,5 @@
+Caption: Article
+
+----
+
+Description: Set up an enjoyable and distraction-free writing interface for your articles.

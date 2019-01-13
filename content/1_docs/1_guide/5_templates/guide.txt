@@ -1,0 +1,5 @@
+Title: Templates
+
+----
+
+Description: How to use Kirby's template system and API to build any kind of template.

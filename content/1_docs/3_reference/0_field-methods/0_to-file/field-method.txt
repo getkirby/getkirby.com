@@ -1,0 +1,11 @@
+Text:
+
+## Example
+
+```php
+<?php if ($cover = $page->cover()->toFile()): ?>
+<figure class="cover">
+  <img src="<?= $cover->url() ?>" alt="<?= $cover->alt() ?>">
+</figure>
+<?php endif ?>
+```

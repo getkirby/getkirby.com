@@ -1,0 +1,15 @@
+Title: Markdown parser
+
+----
+
+Text:
+
+```php "/site/plugins/markdown-parser/index.php"
+Kirby::plugin('my/markdown', [
+	'components' => [
+		'markdown' => function (Kirby $kirby, string $text = null, array $options = []) {
+			return YourMarkdownParser::parse($text);
+		}
+	]
+]);
+```

@@ -1,0 +1,64 @@
+Title:
+
+{{class.instance}}->image($filename = false)
+
+----
+
+Excerpt:
+
+Returns a specific image $file object by filename. If no filename is given, the first available image will be returned.
+
+----
+
+Params: -
+  name: $filename
+  type: string
+  text: Optional, a filename
+
+----
+
+Return:
+
+type: $file
+text:
+
+----
+
+Text:
+
+## Example
+
+### Fetching the first image
+
+```php
+<?php if($image = $page->image()): ?>
+<img src="<?= $image->url() ?>" alt="">
+<?php endif ?>
+```
+
+### Fetching a specific image
+
+```php
+<?php if($image = $page->image('myimage.jpg')): ?>
+<img src="<?= $image->url() ?>" alt="">
+<?php endif ?>
+```
+
+## What is an image file?
+
+Kirby considers the following file types as images:
+
+- jpeg
+- jpg
+- jpe
+- gif
+- png
+- svg
+- ico
+- tif
+- tiff
+- bmp
+- psd
+- ai
+- eps
+- ps

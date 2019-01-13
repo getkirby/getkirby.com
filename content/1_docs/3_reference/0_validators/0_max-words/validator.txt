@@ -1,0 +1,21 @@
+Text:
+
+## In your code
+
+```php
+if(v::maxWords('Lorem ipsum dolor sit amet.', 10)) {
+  echo 'Yay, valid!';
+}
+
+```
+
+## In fields
+
+```
+fields:
+  example:
+    label: Example field
+    type: text
+    validate:
+      maxWords: 10
+```

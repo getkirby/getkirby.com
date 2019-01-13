@@ -1,0 +1,34 @@
+Title: {{class.instance}}->wasModifiedAfter()
+
+----
+
+Excerpt: Checks if any content of the site has been modified after the given unix timestamp
+
+
+----
+
+Params: -
+  name: $time:
+  type: int
+  text: A UNIX timestamp
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+This is mainly used to auto-update the cache.
+
+## Example
+
+```php
+<?php if($site->wasModifiedAfter(strtotime('2016-01-01' ))): ?>
+The site was modified after 2016/01/01.
+<?php endif ?>
+```

@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->intendedTemplate()
+
+----
+
+Excerpt:
+
+Returns the name of the intended template. This is the name of the content text file.
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php
+echo $page->intendedTemplate();
+?>
+```

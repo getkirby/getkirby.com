@@ -1,0 +1,58 @@
+Title: Checkboxes Input
+----
+Text:
+
+```html
+<k-input
+	type="checkboxes"
+	v-model="value"
+	:options="[
+		{ value: 'a', text: 'Option A' },
+		{ value: 'b', text: 'Option B' }
+	]"
+	:required="true"
+	:min="2"
+	:max="5"
+	@input="input"
+/>
+```
+
+## Props
+
+(docs: inputs/props/autofocus)
+
+(docs: inputs/props/disabled)
+
+(docs: inputs/props/id)
+
+(docs: inputs/props/max)
+The maximum number of allowed selections.
+
+(docs: inputs/props/min)
+The minimum number of required selections
+
+(docs: inputs/props/options)
+
+(docs: inputs/props/required)
+
+(docs: inputs/props/theme)
+
+### value / v-model
+
+`Array | String (default: null)`
+
+The value for the input should be provided as array. Each value in the array corresponds with the value in the options. If you provide a string, the string will be split by comma.
+
+## Methods
+
+(docs: inputs/methods/focus)
+
+## Events
+
+(docs: inputs/events/input)
+
+(docs: inputs/events/invalid)
+
+## CSS class
+
+`.kirby-checkboxes-input`

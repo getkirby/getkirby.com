@@ -1,0 +1,12 @@
+.description {
+  color: rgba($color-anthracite, .75);
+}
+
+.description a {
+  color: $color-black;
+}
+.description strong,
+.description b {
+  color: $color-black;
+  font-weight: 400;
+}

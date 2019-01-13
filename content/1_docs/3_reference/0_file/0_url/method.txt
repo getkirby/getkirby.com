@@ -1,0 +1,28 @@
+Title:
+
+{{class.instance}}->url()
+
+----
+
+Excerpt:
+
+Returns the absolute URL for a file
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($file = $page->file('myimage.jpg')) {
+  echo $file->url();
+}
+```

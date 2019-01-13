@@ -1,0 +1,10 @@
+Text:
+
+## Details
+
+If you want to pass a string of HTML to the tag, you need an wrap it in an array:
+
+```php
+$title = '<a href="#">Text</a>';
+Html::tag('h1', [$title])
+```

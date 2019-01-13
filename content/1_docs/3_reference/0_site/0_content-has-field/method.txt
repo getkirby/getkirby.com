@@ -1,0 +1,33 @@
+Title: {{class.instance}}->content()->has($field)
+
+----
+
+Excerpt:
+
+Checks if the site has a certain field
+
+----
+
+Params: -
+  name: $field
+  type: string
+  text: A field name
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+## Example
+```php
+<?php
+if($site->content()->has('somefield')) {
+  echo $site->somefield()->kirbytext();
+}
+?>
+```

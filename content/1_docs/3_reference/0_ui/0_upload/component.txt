@@ -1,0 +1,80 @@
+Title: Upload
+----
+Text:
+
+The Upload component is a combination of a native file input and a dialog. The native file input is invisible and only serves to open the file selector from the OS. Once files are selected the dialog will open and show the progress and potential upload errors.
+
+```html
+<k-upload ref="upload" />
+<k-button icon="upload" @click="$refs.upload.open()">
+  Upload
+</k-button>
+```
+
+## Props
+
+### accept
+
+`String (default: *)`
+
+### attributes
+
+`Object (default: null)`
+
+### max
+
+`Number (default: null)`
+
+### multiple
+
+`Boolean (default: true)`
+
+### url
+
+`String (default: null)`
+
+## Methods
+
+### drop(files, params)
+
+Instead of opening the file picker first you can also start the uploader directly, by "dropping" a FileList from a drop event for example.
+
+### open(params)
+
+Opens the uploader with the given parameters. If no additional parameters are passed, the properties from the upload element are used.
+
+```html
+<k-upload ref="upload" url="/files/upload" />
+<k-button icon="upload" @click="$refs.upload.open({ accept: 'image/*' })">
+  Upload
+</k-button>
+```
+
+## Events
+
+### @success
+
+Fired when all files have been uploaded successfully
+
+### @error
+
+Fired when something went wrong
+
+```html
+<template>
+  <k-upload ref="upload" success="yay" error="onNo" />
+</template>
+
+<script>
+export default {
+  methods: {
+    yay() {
+      alert("All files have been uploaded!");
+    },
+    ohNo() {
+      alert("The files could not be uploaded");
+    }
+  }
+}
+</script>
+```

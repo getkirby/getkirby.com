@@ -1,0 +1,11 @@
+Title: /users/:id/files/:filename
+----
+Info: PATCH
+----
+Excerpt: Update file content
+----
+Text:
+
+## Patch parameters
+
+(docs: api/file-content-data)

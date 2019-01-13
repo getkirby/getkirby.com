@@ -1,0 +1,24 @@
+Title:
+
+$language->locale()
+
+----
+
+Excerpt: Returns the locale string
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $site->language('en')->locale() ?>
+```

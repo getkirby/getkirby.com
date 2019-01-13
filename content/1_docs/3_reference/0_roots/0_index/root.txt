@@ -1,0 +1,5 @@
+Title: index
+
+----
+
+Excerpt: Returns the document root of the website

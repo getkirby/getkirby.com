@@ -1,0 +1,27 @@
+Title:
+
+{{class.instance}}->isCacheable()
+
+----
+
+Excerpt:
+Checks if the page can be cached
+
+----
+
+Return:
+
+type: boolean
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php if($page->isCacheable()): ?>
+Great, this page can be cached.
+<?php endif ?>
+```

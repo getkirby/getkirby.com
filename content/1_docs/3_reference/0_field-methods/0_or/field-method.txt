@@ -1,0 +1,7 @@
+Text:
+
+## Example
+
+```php
+<meta name="description" content="<?= $page->description()->or($site->description()) ?>">
+```

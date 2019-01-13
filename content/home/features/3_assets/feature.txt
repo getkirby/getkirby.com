@@ -1,0 +1,7 @@
+Title: Asset management
+
+----
+
+Text: Media files are stored in the same folder as the page content and not in a giant media library. Never lose track of pictures and other items.
+
+

@@ -1,0 +1,50 @@
+Title: File methods
+
+----
+
+Text:
+
+File methods are registered with the `fileMethods` extension.
+
+## Default file methods
+
+**For a full (link: docs/reference/#file text: list of default file methods), please check out the Reference.**
+
+<info>Be aware that you cannot override these default file methods with any custom file method.</info>
+
+
+## Getting started
+
+You can extend the set of defined file methods very easily in a plugin file.
+
+```php "/site/plugins/file-methods/index.php"
+Kirby::plugin('my/plugin', [
+    'fileMethods' => [
+        'download' => function () {
+            return '<a download href="' . $this->url() . '">' . $this->filename() . '</a>';
+        }
+    ]
+]);
+```
+
+This example shows the basic architecture of a file method. You define the method name with the key for the `fileMethods` extension array. `$this` in the callback function refers to the `$file` object.
+
+## Working with method arguments
+
+In some cases it might be helpful to be able to pass arguments to the method:
+
+```php
+<?= $file->download('Download me') ?>
+```
+
+The definition for such a method with arguments is very simple:
+
+```php
+Kirby::plugin('my/plugin', [
+    'fileMethods' => [
+        'download' => function ($text = null) {
+            return '<a download href="' . $this->url() . '">' . $text ?? $this->filename() . '</a>';
+        }
+    ]
+]);
+```

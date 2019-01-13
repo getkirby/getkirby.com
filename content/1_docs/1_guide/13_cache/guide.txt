@@ -1,0 +1,139 @@
+Title: Caching
+
+----
+
+Description: Use Kirby's page cache or set up your own cache wherever you need it.
+
+----
+
+Text:
+
+## Caching pages
+
+You can enable Kirby's page cache in your `config.php` file with the `cache.pages` option:
+
+```php "/site/config/config.php"
+return [
+  'cache.pages' => [
+    'active' => true,
+    'ignore' => function ($page) {
+      return $page->title()->value() !== 'Do not cache me';
+    }
+  ]
+];
+```
+<info>
+The page cache files are stored in the `/site/cache` folder.
+</info>
+
+### Options
+
+Option | Value
+--|--
+`active` | `true`/`false`
+`ignore` | A function that returns a list of pages to ignore.
+
+
+## Cache drivers and options
+
+### Using a different cache driver
+
+```php "/site/config.php"
+
+[
+  'cache.pages' => [
+    'type'   => 'memcached',
+    'host'   => 'localhost',
+    'port'   => '11211',
+    'prefix'  => 'pages',
+    'ignore' => function ($page) {
+      return $page->id() === 'something';
+    }
+  ]
+];
+```
+
+
+## Set up your own cache
+
+If you want to create your own cache instance, you can just add it to the config like this:
+
+```php "/site/config.php"
+[
+  'cache.api' => true
+];
+```
+
+That's it! Now you got a new cache up and running with the id `api`.
+
+This will again be a file cache instance and stores the cache files in `/site/cache/api`.
+
+You have the same extended options if needed and you can combine different cache types without hassle.
+
+## Using the cache
+
+As soon as you configured your cache in the config, you can start using it like this (for example in a controller):
+
+```php "/site/controllers/your-api.php"
+return function ($kirby) {
+
+  $apiCache = $kirby->cache('api');
+  $apiData  = $apiCache->get('apiData');
+
+  // there's nothing in the cache, so let's fetch it
+  if ($apiData === null) {
+    $apiData = Remote::get('https://someapi.com');
+    $apiCache->set('apiData', $apiData);
+  }
+
+  return compact('apiData');
+
+};
+```
+
+You can define how long a cache variable is valid by specifying the number of minutes until it expires in the set method:
+
+```php
+$apiCache->set('apiData', $apiData, 30);
+```
+
+The getter will now return `null` after the 30 minutes expired.
+
+## Plugin caches
+
+Plugins can have their own namespaced caches by defining them in their options:
+
+```php
+Kirby::plugin([
+  'name' => 'superwoman/superplugin',
+  'extends' => [
+    'options' => [
+      'cache' => true
+    ]
+  ]
+]);
+```
+This plugin cache instance will be available at:
+
+```php
+$kirby->cache('superwoman.superplugin');
+```
+
+But you can even have multiple cache instances per plugin:
+
+```php
+Kirby::plugin([
+  'name' => 'superwoman/superplugin',
+  'extends' => [
+    'options' => [
+      'cache.api' => true
+    ]
+  ]
+]);
+```
+
+Following the same concept, you can access it like this:
+
+```php
+$kirby->cache('superwoman.superplugin.api');
+```

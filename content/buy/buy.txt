@@ -1,0 +1,9 @@
+Title: Pricing
+----
+
+MenuTitle: Buy
+
+----
+Intro:
+
+Kirby combines the transparency of an open-source project with a friendly community and a fair license model.

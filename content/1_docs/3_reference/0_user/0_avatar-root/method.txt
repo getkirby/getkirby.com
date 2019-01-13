@@ -1,0 +1,25 @@
+Title:
+
+{{class.instance}}->avatarRoot()
+
+----
+
+Excerpt: Returns the full root for the user avatar image
+
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $kirby->user('bastian@example.com')->avatarRoot() ?>
+```

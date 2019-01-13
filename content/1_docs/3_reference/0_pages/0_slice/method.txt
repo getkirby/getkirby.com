@@ -1,0 +1,46 @@
+Title:
+
+{{class.instance}}->slice($offset = null, $limit = null)
+
+----
+
+Excerpt:
+
+Returns a sliced version of the collection defined by offset and limit
+
+----
+
+Params: -
+  name: $offset
+  type: int
+  text: The offset number
+-
+  name: $limit
+  type: int
+  text: The number of items to be returned
+
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<ul>
+  <?php foreach($page->children()->slice(10, 20) as $subpage): ?>
+  <li>
+    <a href="<?= $subpage->url() ?>">
+      <?= html($subpage->title()) ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

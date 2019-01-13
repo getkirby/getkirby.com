@@ -1,0 +1,44 @@
+Title:
+
+{{class.instance}}->groupBy($field, $caseInsensitive = true)
+
+----
+
+Excerpt:
+
+Groups $page objects in the collection by any field and returns them in a new collection
+
+----
+Params: -
+  name: $field
+  type: string
+  text: A field name
+-
+  name: $caseInsensitive
+  type: boolean
+  text: Whether grouping by field should be case sensitive or not
+
+----
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example:
+
+```php
+<?php
+$years = page('projects')->children()->groupBy('year');
+foreach($years as $year => $items): ?>
+    <h2><?= $year ?></h2>
+    <ul>
+      <?php foreach($items as $item) : ?>
+      <li><?= $item->title() ?></li>
+      <?php endforeach; ?>
+    </ul>
+<?php endforeach ?>
+```

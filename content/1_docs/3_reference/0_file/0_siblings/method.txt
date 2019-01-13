@@ -1,0 +1,30 @@
+Title:
+
+{{class.instance}}->siblings()
+
+----
+
+Excerpt:
+
+Returns all siblings of the file
+
+----
+
+Return:
+
+type: $files
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($file = $page->file()) {
+    foreach($file->siblings() as $sibling):
+        echo $sibling->html();
+    endforeach;
+}
+```

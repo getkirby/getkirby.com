@@ -1,0 +1,14 @@
+.hero {
+  padding-top: 6rem;
+  padding-bottom: 3rem;
+}
+
+.hero.-theme\:dark {
+  color: $color-white;
+}
+
+.hero.-align\:center {
+  text-align: center;
+  max-width: 35rem;
+  margin: 0 auto;
+}

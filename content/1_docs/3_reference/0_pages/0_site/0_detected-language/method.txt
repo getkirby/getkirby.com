@@ -1,0 +1,20 @@
+Title:
+
+{{class.instance}}->detectedLanguage()
+
+----
+
+Excerpt:
+
+Returns the detected language
+
+----
+
+Return:
+
+type: $language
+text:
+
+----
+
+Text:

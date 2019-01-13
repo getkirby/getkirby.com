@@ -1,0 +1,417 @@
+/* -----  General Spacing Rules  -------------------------------------------- */
+
+.text {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ul,
+  ol,
+  dl,
+  hr,
+  table,
+  figure,
+  blockquote {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.text {
+  counter-reset: h2;
+}
+
+.text > :first-child {
+  margin-top: 0 !important;
+}
+
+.text > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.text p > a,
+.text li > a {
+  text-decoration: underline;
+}
+
+/* -----  Headings  --------------------------------------------------------- */
+
+.text h1, .text .h1 {
+  color: $color-black;
+}
+
+.text h2, .text .h2 {
+  counter-increment: h2;
+  position: relative;
+  margin-top: 4.5rem;
+
+  & a {
+    display: block;
+    margin-bottom: 4.5rem;
+  }
+}
+.text h2 a:before {
+  position: absolute;
+  font-size: .75rem;
+  border-top: 4px solid $color-syntax-yellow;
+  padding-top: .45rem;
+  bottom: -1.75rem;
+  font-weight: 400;
+  font-family: $font-mono;
+  content: "# " counter(h2, decimal-leading-zero);
+}
+
+.text h3, .text .h3 {
+  margin-top: 3rem;
+  padding-bottom: .5rem;
+}
+
+.text h4, .text .h4 {
+  margin-top: 1.5rem;
+}
+
+/* -----  Icons  ------------------------------------------------- */
+
+.text h2 .icon * {
+  fill: #000;
+}
+
+/* -----  Images & Figures  ------------------------------------------------- */
+
+.text figure {
+  margin-top: 1.5em;
+}
+
+.text figure > a {
+  display: block;
+}
+
+.text img {
+  height: auto;
+  max-width: 100%;
+}
+
+.text .img-wrap {
+  display: block;
+  position: relative;
+  z-index: 0;
+}
+
+/**
+ * 1. Setting the width of the placeholder element and adding
+ *    `overflow: hidden` prevents rendering bugs in IE 11.
+ */
+.text .img-ratio-placeholder {
+  display: block;
+  height: 0;
+  overflow: hidden; /* 1 */
+  width: 100%; /* 1 */
+  z-index: -1;
+}
+
+.text .img-wrap img {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.text .figure figcaption {
+  display: block;
+  font-size: .875rem;
+  padding: .75rem 0 0;
+  font-family: $font-mono;
+  color: rgba($color-anthracite, .8);
+}
+
+/* -----  Lists  ------------------------------------------------------------ */
+
+.text ul:not([class]) > li {
+  padding-left: em(32px, 18px);
+}
+
+/**
+ * 1. Markdown sometimes creates `<p>` tags inside of lists,
+ *    which whould not add additional margins.
+ */
+.text ol:not([class]) > li > *:first-child,
+.text ul:not([class]) > li > *:first-child {
+  margin-top: 0 !important; /* 1 */
+}
+
+.text ol:not([class]) > li > *:last-child,
+.text ul:not([class]) > li > *:last-child {
+  margin-bottom: 0 !important; /* 1 */
+}
+
+/**
+ * 1. Using relative em values for list bullets to make them
+ *    scalable according to text size.
+ */
+.text ul:not([class]) > li {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: #{em(12px, 18px)} #{em(11px, 18px)}; /* 1 */
+  background-repeat: no-repeat;
+  background-size: #{em(7px, 18px)} #{em(7px, 18px)}; /* 1 */
+}
+
+.text ol:not([class]) {
+  counter-reset: ordered-list;
+  list-style: decimal;
+}
+
+/**
+ * 1. To get a decent spacing between the number and list
+ *    item content, a combination of margin and padding is
+ *    needed.
+ */
+.text ol:not([class]) > li {
+  margin-left: em(24px, 18px); /* 1 */
+  padding-left: em(8px, 18px); /* 1 */
+}
+
+/* -----  Inline Code & Code Blocks  ---------------------------------------- */
+
+/* => see code.scss */
+
+/* -----  Tables  ----------------------------------------------------------- */
+
+@include mq(to s) {
+  .text .table-wrap {
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: $element-spacing;
+    overflow: scroll;
+    overflow-y: hidden;
+    position: relative;
+  }
+
+  .text .table-wrap table {
+    margin-bottom: 0;
+  }
+
+  .text .table-wrap th {
+    min-width: 8em;
+    white-space: nowrap;
+  }
+}
+
+.text table {
+  border-radius: $border-radius;
+  border-spacing: 0;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid $color-background;
+  table-layout: fixed;
+}
+
+.text th,
+.text td {
+  line-height: 1.5;
+  padding: .5rem .75rem;
+  text-align: left;
+  vertical-align: top;
+  font-size: .875rem;
+  border-bottom: 1px solid $color-background;
+}
+
+@include mq(from s) {
+  padding: .5rem 1.25rem;
+}
+
+.text th {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.text tr th:last-child,
+.text tr td:last-child {
+  border-right: 0;
+}
+
+.text tr:nth-child(odd) td {
+  background: #fafafa;
+}
+.text tr:last-child td {
+  border-bottom: 0;
+}
+
+.text tr td {
+}
+
+/* -----  Footnotes  -------------------------------------------------------- */
+
+.text .footnote-ref {
+  border-bottom: 0;
+}
+
+.text .footnotes {
+
+  .footnote-backref {
+    border-bottom: 0;
+  }
+}
+
+/* -----  Info & Warning Boxes  --------------------------------------------- */
+
+$color-info-background:    mix($color-blue, $color-background, 12%);
+$color-warning-background: mix($color-yellow, $color-background, 12%);
+
+.text .info,
+.text .warning {
+  border-left: 0.1875rem solid; // 3px
+  border-radius: $border-radius;
+  margin-bottom: 1.5em;
+  padding: 1rem 1rem 1rem 2.5rem;
+  position: relative;
+
+  > :first-child {
+    margin-top: 0 !important;
+  }
+
+  > :last-child {
+    margin-bottom: 0 !important;
+  }
+
+  > .icon {
+    left: .75rem;
+    position: absolute;
+    top: 1.375rem; // 22px
+  }
+}
+
+.text .info {
+  background: $color-info-background;
+  border-left-color: $color-blue;
+
+  > .icon {
+    fill: $color-blue;
+  }
+}
+
+.text .warning {
+  background: $color-warning-background;
+  border-left-color: $color-yellow;
+
+  > .icon {
+    fill: $color-yellow;
+  }
+}
+
+/* ·····  Tables in Info and Warning Boxes  ································· */
+
+.text .info table {
+  background: mix($color-white, $color-info-background, 30%);
+}
+
+.text .info th {
+  background: mix($color-blue, $color-info-background, 20%);
+  color: $color-black;
+}
+
+.text .warning table {
+  background: mix($color-white, $color-warning-background, 50%);
+}
+
+.text .warning th {
+  background: mix($color-yellow, $color-warning-background, 25%);
+  color: $color-black;
+}
+
+
+/* -----  Columns Plugin (columns...)  -------------------------------------- */
+
+.columns {
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
+}
+
+@include mq(to s) {
+  .columns .column:not(:last-child) {
+    margin-bottom: 1em;
+  }
+}
+
+@include mq(from s) {
+
+  .columns {
+    display: flex;
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
+  .columns .column {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .columns .column > *:first-child {
+    margin-top: 0 !important;
+  }
+
+  .columns .column > *:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .columns-1 .column {flex-basis: percentage(1 / 1); }
+  .columns-2 .column { flex-basis: percentage(1 / 2); }
+  .columns-3 .column { flex-basis: percentage(1 / 3); }
+  .columns-4 .column { flex-basis: percentage(1 / 4); }
+}
+
+/* -----  Tabs Plugin (tabs...)  -------------------------------------------- */
+
+.text .tabs {
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+
+/* -----  Video KirbyTag  --------------------------------------------------- */
+
+.text .video {
+  position: relative;
+}
+
+.text .video::before {
+  content: '';
+  display: block;
+  height: 0;
+  padding-top: percentage(9 / 16);
+  width: 100%;
+}
+
+.text .video iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+
+hr {
+  position: relative;
+  height: 4px;
+  border: 0;
+}
+hr:after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  margin-top: -2px;
+  background: $color-background;
+}
+
+.text hr {
+  height: 6rem;
+}
+
+.text .codeblock {
+  margin-bottom: 1.5rem;
+}

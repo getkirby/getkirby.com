@@ -1,0 +1,34 @@
+Title: {{class.instance}}->archives()
+
+----
+
+Excerpt:
+
+Returns a $files collection with all archive files (zip, gzip, tar) in the page's directory
+
+----
+
+Return:
+
+type: $files
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<h2>Downloads</h2>
+<ul>
+  <?php foreach($page->archives() as $archive): ?>
+  <li>
+    <a href="<?= $archive->url() ?>">
+      <?= $archive->filename() ?>
+      (<?= $archive->niceSize() ?>)
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

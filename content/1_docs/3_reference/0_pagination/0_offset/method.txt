@@ -1,0 +1,20 @@
+Title:
+
+$pagination->offset()
+
+----
+
+Excerpt:
+
+Returns the offset, which is being applied to the items collection
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:

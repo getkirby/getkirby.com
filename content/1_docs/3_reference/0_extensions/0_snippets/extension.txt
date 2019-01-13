@@ -1,0 +1,19 @@
+Title: Snippets
+
+----
+
+Guide: templates/snippets
+
+----
+
+Text:
+
+Snippets are registered with the `snippets` extension. The extension accepts an array of key/value pairs, where the key is the name of the snippet and the value the path to the file in your plugin folder.
+
+```php
+Kirby::plugin('your/plugin', [
+	'snippets' => [
+		'header' => __DIR__ . '/snippets/header.php'
+	]
+]);
+```

@@ -1,0 +1,17 @@
+Class: Kirby\Toolkit\Escape
+
+----
+Excerpt:
+
+The Escape class provides methods for escaping common HTML attributes data. This can be used to put untrusted data into typical attribute values like width, name, value, etc.
+
+----
+Text:
+
+The Escape class is a wrapper for the (link: https://github.com/zendframework/zend-escaper text: Zend Escaper).
+<warning>
+The methods of this class should not be used for complex attributes like href, src, style, or any of the event handlers like onmouseover. Use `esc($string, 'js')` for event handler attributes, `esc($string, 'url')` for src attributes and `esc($string, 'css')` for style attributes.
+</info>
+
+
+   

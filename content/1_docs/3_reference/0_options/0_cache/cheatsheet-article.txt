@@ -1,0 +1,29 @@
+Excerpt: Enables/disables Kirby's cache and sets cache options
+
+----
+
+Text:
+
+## Enabling/disabling the cache
+
+```php
+return [
+  'cache' => true
+];
+```
+
+## Cache driver
+
+Set a different cache driver, default is file driver.
+
+```php
+return [
+  'cache' => [
+    'driver' => 'memcached'
+  ]
+];
+```
+
+<info>
+Make sure the selected cache driver is enabled on/supported by your server.
+</info>

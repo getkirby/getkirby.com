@@ -1,0 +1,31 @@
+Title:
+
+{{class.instance}}->avatar()
+
+----
+
+Excerpt: Returns the user avatar object if the avatar exists
+
+----
+
+Return:
+
+type: $avatar
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?php if($avatar = $kirby->user('bastian@example.com')->avatar()): ?>
+<img src="<?= $avatar->url() ?>" alt="Bastian's avatar">
+<?php endif ?>
+```
+
+## Avatar storage
+
+The user avatar is stored in the user account folder in `/site/accounts`..
+Avatars can be jpg, gif or png files and must be called `profile`

@@ -1,0 +1,33 @@
+Title:
+
+{{class.instance}}->depth()
+
+----
+
+Excerpt:
+
+Returns a number, which represents the nesting depth of the page
+
+----
+
+Return:
+
+type: integer
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<select onchange="window.location.href = this.value">
+<?php foreach($site->index() as $p): ?>
+<option value="<?= $p->url() ?>">
+  <?= str_repeat('-', $p->depth()) ?>
+  <?= html($p->title()) ?>
+</option>
+<?php endforeach ?>
+</select>
+```

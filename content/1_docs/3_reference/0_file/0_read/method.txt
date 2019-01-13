@@ -1,0 +1,41 @@
+Title:
+
+{{class.instance}}->read($format = null)
+
+----
+
+Excerpt:
+
+Reads the content of the file and returns it
+
+----
+
+Params: -
+  name: $format
+  type: string
+  text: File format to parse as
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+if($file = $page->file('readme.md'):
+    // returns the content of the file
+    echo $file->read();
+endif;
+
+if($file = $page->file('data.json'):
+    // parses the content as JSON
+    dump($pfile->read('json'));
+endif;
+
+```

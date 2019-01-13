@@ -1,0 +1,31 @@
+Excerpt: Options for (glossary: Markdown)
+
+----
+
+Text:
+
+## Markdown Extra
+
+Enables/disables the Markdown extra parser with additional Markdown features like footnotes and tables.
+
+```php
+return [
+  'markdown' => [
+    'extra' => true
+  ]
+];
+```
+
+## Markdown breaks
+
+Enables/disables automatic line breaks in Markdown like on GitHub. Otherwise line breaks must be confirmed with three spaces at the end of the line.
+
+Default: `true`
+
+```php
+return [
+  'markdown' => [
+    'breaks' => false
+  ]
+];
+```

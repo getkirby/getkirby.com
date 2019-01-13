@@ -1,0 +1,38 @@
+Title: Thumbs
+
+----
+
+Text:
+
+If you are not happy with our built-in thumb generators, you can create your own.
+
+```php "/site/plugins/thumbs/index.php"
+Kirby::plugin('my/thumbs', [
+	'components' => [
+		'thumb' => function (App $kirby, string $src, string $dst, array $options) {
+			$rootToThumb = myThumbGenerator($src, $dst, $options);
+
+			return $rootToThumb;
+		}
+	]
+]);
+```
+
+### Params
+
+`$kirby`
+: Kirby instance
+
+`$src`
+: The root of the original file
+
+`$dst`
+: The root to the desired destination
+
+`$options`
+: All thumb options that should be applied (width, height, crop, blur, grayscale)
+
+### Return
+
+`string`
+: The root to the final thumbnail

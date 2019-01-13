@@ -1,0 +1,24 @@
+Title: {{class.instance}}->roles()
+
+----
+
+Excerpt: Returns a collection of all roles
+
+
+----
+
+Return:
+
+type: $roles
+text:
+
+----
+
+Text:
+
+
+## Example
+
+```php
+<?= $site->roles() ?>
+```

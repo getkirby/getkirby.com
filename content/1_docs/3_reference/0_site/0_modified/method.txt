@@ -1,0 +1,26 @@
+Title:
+
+{{class.instance}}->modified($format = false)
+
+----
+
+Excerpt:
+
+Returns the last modification date for the site. This will walk all pages and subpages and search for the very last modification.
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+Last update: <?= $site->modified('d/m/Y H:i') ?>
+```

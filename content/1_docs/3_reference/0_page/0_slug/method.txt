@@ -1,0 +1,33 @@
+Title:
+
+{{class.instance}}->slug([$lang = null])
+
+----
+
+Excerpt:
+
+Returns the slug. The slug is the last part of the page's URL. It is translatable in multi-language sites while the UID always stays the page's directory name without the sorting number.
+
+----
+
+Params: -
+  name: $lang
+  type: string
+  text: Optional, in case of a multi-language site only
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $page->slug() ?>
+```

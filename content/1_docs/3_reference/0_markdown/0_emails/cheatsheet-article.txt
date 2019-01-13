@@ -1,0 +1,21 @@
+Title: Email Addresses
+
+----
+
+Excerpt:
+
+----
+
+Text:
+
+Without link text:
+
+```markdown
+<support@getkirby.com>
+```
+
+With link text:
+
+```markdown
+[Send me an email](mailto:support@getkirby.com)
+```

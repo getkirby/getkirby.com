@@ -1,0 +1,26 @@
+Title:
+
+{{class.instance}}->root()
+
+----
+
+Excerpt:
+
+Returns the full root of the page directory
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+<?= $page->root() ?>
+```

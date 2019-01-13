@@ -1,0 +1,83 @@
+Title:
+
+{{class.instance}}->update($data = [] [, $lang = null])
+
+----
+
+Excerpt:
+
+Updates the page content with all passed variables.
+
+----
+Params: -
+  name: $data
+  type: array
+  text: The page data to be updated
+-
+  name: $language
+  type: string
+  text: Optional, language code (only in case of a multi-language site)
+
+----
+
+Return:
+
+type: $page
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+try {
+
+  page('mypage')->update([
+    'title'        => 'A new title',
+    'text'         => 'Some text',
+    'anotherfield' => 'Some more data'
+  ]);
+
+  echo 'The page has been updated';
+
+} catch(Exception $e) {
+
+  echo $e->getMessage();
+
+}
+
+```
+
+### Updating a field by callback
+
+```php
+$page->update([
+  'title' => function($title) {
+    return str::lower($title);
+  }
+]);
+```
+
+## Multi-language site
+Use the optional `$lang` parameter to specify the language you want to update.
+
+```php
+try {
+
+  page('mypage')->update([
+    'title'        => 'A new title',
+    'text'         => 'Some text',
+    'anotherfield' => 'Some more data'
+  ], 'en');
+
+  echo 'The page has been updated';
+
+} catch(Exception $e) {
+
+  echo $e->getMessage();
+
+}
+
+```

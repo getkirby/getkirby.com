@@ -1,0 +1,25 @@
+@import "../includes";
+
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -3rem;
+}
+
+.contact-grid > * {
+  padding-left: 3rem;
+  width: 100%;
+}
+
+@include mq(from m) {
+  .contact-grid > *:first-child {
+    width: 33.33%;
+  }
+  .contact-grid > *:last-child {
+    width: 66.66%;
+  }
+}
+
+.contact-page .hero {
+  margin-bottom: 0;
+}

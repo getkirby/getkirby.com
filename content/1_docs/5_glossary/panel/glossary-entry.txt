@@ -1,0 +1,10 @@
+Title: Panel
+
+----
+Entry:
+
+The Panel is Kirby's fast and powerful web interface to manage your website in the browser. The Panel is highly customizable in many ways for different project needs.
+
+----
+
+Link: docs/guide/tour/#the-panel

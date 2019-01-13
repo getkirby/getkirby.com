@@ -1,0 +1,24 @@
+Title: Thumbnail issues
+
+----
+
+Text:
+
+## A writable media folder
+
+In most cases when thumbnails are not being generated, the `/media` directory is not writable. Make sure that the permissions for the media directory are set correctly so that Kirby can create and modify files there.
+
+## Broken thumbs driver
+
+### Invalid path to ImageMagick's convert bin
+
+If you are using the ImageMagick driver for thumbnails, you might need to set the path to the `convert` bin manually if it's not available to PHP yet. Unfortunately thumb generation will fail silently if the path is not correct. You can fix that in your config file by adding:
+
+```php
+return [
+    'thumbs' => [
+        'driver' => 'im',
+        'bin' => '/usr/local/bin/convert'
+    ]
+];
+```

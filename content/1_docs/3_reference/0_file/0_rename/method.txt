@@ -1,0 +1,50 @@
+Title:
+
+{{class.instance}}->rename($name, $safeName = true)
+
+----
+
+Excerpt:
+
+Renames the file and all the meta text files
+
+----
+
+Params: -
+  name: $name
+  type: string
+  text: New filename
+-
+  name: $safeName
+  type: boolean
+  text: Whether to also convert to a URL safe filename
+
+----
+
+Return:
+
+type: string
+text: Returns the new filename.
+
+----
+
+Text:
+
+## Example
+
+```php
+if($file = $page->file('file-with-old-name.pdf')):
+
+    try {
+
+      $file->rename('new-name.pdf');
+      echo 'The file has been renamed';
+
+    } catch(Exception $e) {
+
+      echo 'The file could not be renamed';
+      // optional reason: echo $e->getMessage();
+
+    }
+endif;
+```

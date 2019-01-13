@@ -1,0 +1,20 @@
+Title:
+
+$users->sortBy($field, $direction = 'desc', $method = SORT_REGULAR)
+
+----
+
+Excerpt:
+
+Sort the collection by one or multiple fields
+
+----
+
+Return:
+
+type: $users
+text:
+
+----
+
+Text:

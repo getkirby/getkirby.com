@@ -1,0 +1,7 @@
+Title: Made with Kirby
+
+----
+
+Intro:
+
+Kirby is used by thousands of companies and creators world-wide. This is a small selection of fantastic websites, built with Kirby.

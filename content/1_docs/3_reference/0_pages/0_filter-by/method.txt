@@ -1,0 +1,78 @@
+Title:
+
+{{class.instance}}->filterBy($key [, $operator], $value [, $split])
+
+----
+
+Excerpt:
+
+Filters the collection by any field and value and with a set of filtering operators
+
+----
+
+Params: -
+  name: $key
+  type: string
+  text: A field name or a method of the page, e.g. template
+-
+  name: $operator
+  type: string
+  text: See list of filter methods below; if not a valid filter method the second parameter will be the value
+-
+  name: $value
+  type: mixed
+  text:
+-
+  name: $split
+  type: string
+  text: Character to split by while filtering
+
+----
+
+Return:
+
+type: $pages
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+// fetch children with a field 'draft', which has the value 'yes'
+$items = $page->children()->filterBy('draft', 'yes');
+
+// fetch children with a date in the past
+$items = $page->children()->filterBy('date', '<', time());
+
+// fetch children with a date in the future
+$items = $page->children()->filterBy('date', '>', time());
+
+// fetch any page with a project template
+$items = $site->index()->filterBy('template', 'project');
+
+// fetch any page with either an article or project template
+$items = $site->index()->filterBy('template', 'in', ['article', 'project']);
+
+// fetch children that have the tag 'development'
+$items = $page->children()->filterBy('draft', 'development', ',');
+
+// fetch children that have the tag 'development' from a tags field with separator ';'
+$items = $page->children()->filterBy('draft', 'development', ';');
+```
+
+## Available filter methods
+
+Method   | Function
+-        | -
+==       | all values that match exactly
+in       | takes an array as parameter, matches all values that are included in the array
+!=       | all values that don't match
+not in   | takes an array as parameter, matches all values that are not included in the array
+*=       | all values that contain the given string
+>        | all values that are greater than the given value
+>=       | all values that are greater or equal the given value
+<        | all values that are smaller than the given value
+<=       | all values that are smaller or equal the given value

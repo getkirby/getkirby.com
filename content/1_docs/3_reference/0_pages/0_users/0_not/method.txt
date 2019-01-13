@@ -1,0 +1,20 @@
+Title:
+
+$users->not()
+
+----
+
+Excerpt:
+
+Returns the $users collection without the given usernames or $user objects
+
+----
+
+Return:
+
+type: $users
+text:
+
+----
+
+Text:

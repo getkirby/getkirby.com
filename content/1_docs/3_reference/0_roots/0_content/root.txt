@@ -1,0 +1,5 @@
+Title: content
+
+----
+
+Excerpt: Returns the root of the content folder

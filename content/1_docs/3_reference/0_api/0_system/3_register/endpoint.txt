@@ -1,0 +1,13 @@
+Title: /system/register
+----
+Info: POST
+----
+Excerpt: Register a Kirby license
+----
+Text:
+
+## Post parameters
+
+| Parameter | Type | Required | Description |
+| - | - | - | - |
+| license | string | true | The license key |

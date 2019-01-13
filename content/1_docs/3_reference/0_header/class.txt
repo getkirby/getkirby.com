@@ -1,0 +1,7 @@
+Class: Kirby\Http\Header
+
+
+----
+Excerpt: 
+
+The Header class provides methods for sending HTTP headers.

@@ -1,0 +1,65 @@
+Title:
+
+{{class.instance}}->download($filename = null)
+
+----
+
+Excerpt:
+
+Sends all needed headers and the content to force the browser to download the file
+
+----
+
+Params: -
+  name: $filename
+  type: string
+  text: Filename after download
+
+----
+
+Text:
+
+## Example
+
+The download method makes most sense with a custom route. You could easily build a nice download archive with a beautiful URL that way.
+
+Let's assume you build a software and you want to provide a download link for the latest version at: `http://yoursoftware.com/downloads/latest`
+
+There is a `/content/downloads` folder, which contains the text file for the downloads page together with all releases of your software:
+
+```filesystem
+content/
+  downloads/
+    downloads.txt
+    yoursoftware-1.0.zip
+    yoursoftware-1.1.zip
+    yoursoftware-1.2.zip
+```
+
+There's no `latest` subpage and thus the URL `http://yoursoftware.com/downloads/latest` does not really exist. We will build that with the router:
+
+##### /site/config/config.php
+
+```php
+c::set('routes', [
+  [
+    'pattern' => 'downloads/latest',
+    'action'  => function() {
+
+      page('downloads')
+        ->files()
+        ->filterBy('extension', 'zip')
+        ->last()
+        ->download();
+
+    }
+  ]
+]);
+
+```
+
+Let's look at the code in detail. We are adding a new route for the URL `http://yoursoftware.com/downloads/latest`. Route patterns are always relative to the base URL of your site. In the action callback we simply fetch the `downloads` page, go through all the files and filter out those with the `.zip` extension, take the last one of them and call the download method.
+
+This will take care of sending the appropriate headers and echoing the content of the ZIP file to start the download in the browser.
+
+This could easily be extended with a simple download counter for example to make it even more useful.
