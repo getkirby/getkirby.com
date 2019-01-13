@@ -38,10 +38,13 @@ listed:
 ### Predefined section for reusage
 
 ```yaml "/site/blueprints/sections/events.yml"
+type: pages
 headline: Events
+parent: site.find("events")
 sortBy: from asc
 template: event
-info: "{{ page.from.toDate('d.m.Y') }} - {{ page.to.toDate('d.m.Y') }} / {{ page.location }}"
+empty: No events yet
+sortBy: date desc
 ```
 
 ### Result
