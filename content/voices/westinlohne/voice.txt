@@ -1,7 +1,0 @@
-Title: Westin Lohne
-----
-Username: westinlohne
-----
-Tweet: https://twitter.com/westinlohne/status/169228441286217728
-----
-Text: Nothing can compare to @getkirby CMS. I love it. So much. It's simple, tiny, and text file based. What else could you want?
