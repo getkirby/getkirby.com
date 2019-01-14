@@ -9,4 +9,7 @@ return [
             'type' => 'apcu'
         ]
     ],
+    'cloudinary' => [
+        'domain' => 'https://getkirby.com',
+    ],
 ];
