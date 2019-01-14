@@ -12,4 +12,7 @@ return [
     'cloudinary' => [
         'domain' => 'https://nnnnext.getkirby.com',
     ],
+    'keycdn' => [
+        'domain' => 'https://nnnnext-1653.kxcdn.com',
+    ]
 ];

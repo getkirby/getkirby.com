@@ -1,9 +1,17 @@
 <?php
 
-function cloudinary($url, $params = []) {
-
+function cloudinary($url, $params = [])
+{
     if (is_object($url) === true) {
         $url = $url->url();
+    }
+
+    // always convert urls to absolute urls
+    $url = url($url);
+
+    // return the plain url if cloudinary is deactivated
+    if (option('cloudinary', false) === false) {
+        return $url;
     }
 
     $params  = array_merge(['q' => 'auto'], $params);
@@ -19,15 +27,10 @@ function cloudinary($url, $params = []) {
 
 }
 
-
 Kirby::plugin('getkirby/cloudinary', [
     'components' => [
         'file::url' => function ($kirby, $file) {
-            if (option('cloudinary', false) === false) {
-                return $file->mediaUrl();
-            } else {
-                return cloudinary($file->mediaUrl());
-            }
+            return cloudinary($file->mediaUrl());
         }
     ]
 ]);

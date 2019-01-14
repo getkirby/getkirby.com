@@ -2,23 +2,10 @@
 <html lang="en">
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
+  <?php snippet('meta') ?>
 
-  <title><?= $page->title()->html() . ' | ' . $site->title()->html() ?></title>
-
-  <link rel="preload" href="<?= cachebuster::url('assets/css/index.css') ?>" as="style">
-
-  <link rel="icon" type="image/png" sizes="32x32" href="<?= cachebuster::url('favicon-32x32.png') ?>">
-  <link rel="icon" type="image/png" sizes="16x16" href="<?= cachebuster::url('favicon-16x16.png') ?>">
-  <link rel="shortcut icon" href="<?= cachebuster::url('favicon.ico') ?>">
-
-  <!-- Mask icon for pinned tabs in Apple Safari -->
-  <link rel="mask-icon" href="<?= cachebuster::url('safari-mask-icon.svg') ?>" color="#16171a">
-
-  <?= cachebuster::css('assets/css/index.css') ?>
-  <?= cachebuster::css('assets/css/templates/legacy.css') ?>
+  <?= css('assets/css/index.css') ?>
+  <?= css('assets/css/templates/legacy.css') ?>
 
 </head>
 <body data-template="<?= $page->template() ?>">

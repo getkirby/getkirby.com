@@ -4,12 +4,12 @@
 
   <?php snippet('meta') ?>
 
-  <?= cachebuster::css('assets/css/index.css') ?>
-  <?= cachebuster::css('assets/css/templates/cheatsheet.css') ?>
-  <?= cachebuster::css('@auto') ?>
+  <?= css('assets/css/index.css') ?>
+  <?= css('assets/css/templates/cheatsheet.css') ?>
+  <?= css('@auto') ?>
 
-  <?= cachebuster::js('assets/js/index.js', ['defer' => true]) ?>
-  <?= cachebuster::js('assets/js/templates/cheatsheet.js', ['defer' => true]) ?>
+  <?= js('assets/js/index.js', ['defer' => true]) ?>
+  <?= js('assets/js/templates/cheatsheet.js', ['defer' => true]) ?>
 
 </head>
 <body data-template="<?= $page->template() ?>">

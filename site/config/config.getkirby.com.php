@@ -12,4 +12,7 @@ return [
     'cloudinary' => [
         'domain' => 'https://getkirby.com',
     ],
+    'keycdn' => [
+        'domain' => 'https://assets.getkirby.com',
+    ]
 ];

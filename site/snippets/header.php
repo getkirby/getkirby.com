@@ -4,11 +4,11 @@
 
   <?php snippet('meta') ?>
 
-  <?= cachebuster::css('assets/css/index.css') ?>
-  <?= cachebuster::css('@auto') ?>
+  <?= css('assets/css/index.css') ?>
+  <?= css('@auto') ?>
 
-  <?= cachebuster::js('assets/js/index.js', ['defer' => true]) ?>
-  <?= cachebuster::js('@auto', ['defer' => true]) ?>
+  <?= js('assets/js/index.js', ['defer' => true]) ?>
+  <?= js('@auto', ['defer' => true]) ?>
 
 </head>
 <body data-template="<?= $page->template() ?>">
