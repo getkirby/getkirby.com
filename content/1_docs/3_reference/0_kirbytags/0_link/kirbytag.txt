@@ -30,12 +30,6 @@ Text:
 (\link: #some-section text: Link to some section on the same page)
 ```
 
-### Opening the link in a new window
-
-```kirbytext
-(\link: http://wikipedia.org text: Wikipedia popup: yes)
-```
-
 ### Specifying the target for the link
 
 ```kirbytext

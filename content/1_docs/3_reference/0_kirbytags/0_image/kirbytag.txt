@@ -72,12 +72,6 @@ Text:
 (\image: myawesomepicture.jpg link: some/page/somedocument.pdf)
 ```
 
-### Image with a link that opens in a new window
-
-```kirbytext
-(\image: myawesomepicture.jpg link: http://flickr.com popup: yes)
-```
-
 ### Image with a link and a specified target
 
 ```kirbytext

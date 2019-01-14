@@ -48,12 +48,6 @@ Text:
 (\file: cv.pdf text: My CV rel: me)
 ```
 
-### Download link that opens in a new window
-
-```kirbytext
-(\file: companysecrets.pdf popup: yes)
-```
-
 ### Download link with a specified target
 
 ```kirbytext

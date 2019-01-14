@@ -57,10 +57,10 @@ $items = $site->index()->filterBy('template', 'project');
 $items = $site->index()->filterBy('template', 'in', ['article', 'project']);
 
 // fetch children that have the tag 'development'
-$items = $page->children()->filterBy('draft', 'development', ',');
+$items = $page->children()->filterBy('tag', 'development', ',');
 
 // fetch children that have the tag 'development' from a tags field with separator ';'
-$items = $page->children()->filterBy('draft', 'development', ';');
+$items = $page->children()->filterBy('tag', 'development', ';');
 ```
 
 ## Available filter methods
