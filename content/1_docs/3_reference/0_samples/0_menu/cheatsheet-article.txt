@@ -1,0 +1,61 @@
+
+Title: Restaurant menu
+
+----
+
+Excerpt: Easily list all those bites
+
+----
+
+Text:
+
+## Page blueprint
+
+```yaml "/site/blueprints/pages/menu.yml"
+title: Restaurant Menu
+icon: 🍕
+
+fields:
+  starters:
+    extends: fields/dishes
+    label: Starters
+
+  pasta:
+    extends: fields/dishes
+    label: Pasta
+
+  meat:
+    extends: fields/dishes
+    label: Meat
+
+  desert:
+    extends: fields/dishes
+    label: Desert
+```
+
+## Reusable fields blueprint
+
+```yaml "/site/blueprints/fields/dishes.yml"
+label: Dishes
+type: structure
+fields:
+  dish:
+    label: Dish
+    type: text
+    width: 1/3
+  description:
+    label: Description
+    type: text
+    width: 1/3
+  price:
+    label: Price
+    type: number
+    before: €
+    step: 0.01
+    width: 1/3
+```
+
+## Result
+
+(screenshot: menu.png)
+
