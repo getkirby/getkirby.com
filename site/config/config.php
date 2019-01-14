@@ -3,7 +3,6 @@
 return [
 
     'url' => '/',
-
     'markdown' => [
         'extra' => true,
     ],

@@ -1,14 +1,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Kirby is the content management system that adapts to your projects like no other">
-<meta property="og:image" content="<?= cloudinary('assets/images/opengraph.jpg') ?>" />
+<meta property="og:image" content="<?= page('press')->image('opengraph.jpg')->url() ?>" />
 
 <?php if (option('beta')): ?>
 <meta name="robots" content="noindex, nofollow">
 <?php endif ?>
 
-<link rel="icon" type="image/png" href="<?= url('favicon.png') ?>">
-<link rel="mask-icon" href="<?= url('safari-mask-icon.svg') ?>" color="#000">
+<link rel="icon" type="image/png" href="<?= cloudinary('favicon.png') ?>">
+<link rel="mask-icon" href="<?= cloudinary('safari-mask-icon.svg') ?>" color="#000">
 
 <title><?= $page->isHomePage() ? $site->title() . ' | ' . $site->description() : $page->title() . ' | ' . $site->title() ?></title>
 
