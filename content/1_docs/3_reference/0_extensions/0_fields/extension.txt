@@ -137,7 +137,9 @@ Kirby::plugin('yourname/hello', [
                 }
             ],
             'computed' => [
-                'sentence' => $this->username . ' said ' . $this->message;
+                'sentence' => function () {
+                    return $this->username . ' said ' . $this->message;
+                }
             ]
         ]
     ]
@@ -182,7 +184,7 @@ Though we have added some wrapper code, the field object is just a normal Vue co
 
 ### Field properties
 
-Our Vue component needs to define all the properties it wants to work with as well.
+Our Vue component needs to define all the properties it wants to work with as well. This is not only true for the properties but also for the computed values defined in the (link: #php-definition text: PHP field definition).
 
 ```js
 panel.plugin('your/plugin', {

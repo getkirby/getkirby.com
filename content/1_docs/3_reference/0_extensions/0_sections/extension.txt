@@ -152,7 +152,9 @@ Kirby::plugin('yourname/modified', [
                 },
             ],
             'computed' => [
-                'text' => 'The page has been modified at ' . $this->model()->modified('d.m.Y H:i:s');
+                'text' => function () {
+                    return 'The page has been modified at ' . $this->model()->modified('d.m.Y H:i:s');
+                }
             ]
         ]
     ]
@@ -221,6 +223,8 @@ panel.plugin('yourname/modified', {
   }
 });
 ```
+
+This has to be done for all properties as well as computed values defined in the (link: #php-definition text: PHP field definition).
 
 ### Template
 
