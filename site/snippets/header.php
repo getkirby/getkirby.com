@@ -15,7 +15,7 @@
 
   <a href="#maincontent" class="skip-to-content">Skip to content<span aria-hidden="true"> »</span></a>
 
-  <div class="header<?= r(@$background, ' background:' . @$background) ?>">
+  <div class="header<?= r(@$background, ' background:' . @$background) ?>" role="banner">
     <div class="wrap">
       <div class="header-layout">
         <?php snippet('logo') ?>

@@ -54,11 +54,11 @@
               <li>
                 <span class="h5">Partners</span>
                 <ul class="footer-partners">
-                  <li><a href="https://algolia.com"><?= icon('algolia') ?></a></li>
-                  <li><a href="https://keycdn.com"><?= icon('keycdn') ?></a></li>
+                  <li><a href="https://algolia.com" aria-label="Algolia"><?= icon('algolia') ?></a></li>
+                  <li><a href="https://keycdn.com" aria-label="KeyCDN"><?= icon('keycdn') ?></a></li>
                 </ul>
               </li>
-            <ul>
+            </ul>
           </nav>
         </div>
       </div>

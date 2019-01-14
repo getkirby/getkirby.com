@@ -21,7 +21,8 @@
       </div>
     </header>
 
-    <section class="home-blueprints -background:light">
+    <section id="blueprints" class="home-blueprints -background:light">
+      <h2 class="visually-hidden">You define the interface for your content</h2>
       <div class="wrap">
         <p class="h2">
           With Kirby, you build your own
@@ -37,7 +38,8 @@
     </section>
 
     <!-- # Panel -->
-    <section class="home-panel -background:light">
+    <section id="panel" class="home-panel -background:light">
+      <h2 class="visually-hidden">Kirby’s control panel</h2>
       <div class="wrap">
         <div class="home-panel-container">
           <div class="home-panel-gallery">
@@ -51,13 +53,13 @@
           <ul class="home-panel-gallery-links">
             <?php $n = 0; foreach ($page->images()->filterBy('name', '*=', 'interface') as $image): $n++; ?>
             <li>
-              <a href="<?= $image->url() ?>"<?php e($n === 1, ' aria-current="item"') ?>>
+              <a href="<?= $image->url() ?>"<?php e($n === 1, ' aria-current="true"') ?>>
                 <figure>
                   <span class="intrinsic" style="padding-bottom: 67%">
                     <?= $image ?>
                   </span>
                   <figcaption>
-                    <h4 class="h6 -color:white"><?= $image->caption() ?></h4>
+                    <h3 class="h6 -color:white -mb:small"><?= $image->caption() ?></h3>
                     <p><?= $image->description() ?></p>
                   </figcaption>
                 </figure>
@@ -71,10 +73,11 @@
     </section>
 
     <!-- # Plugins -->
-    <section class="home-plugins | section | -background:light">
+    <section id="plugins" class="home-plugins | section | -background:light">
+      <h2 class="visually-hidden">Plugins</h2>
       <div class="wrap">
         <header>
-          <h2 id="plugins" class="h2">And if you ever run out of ideas or possibilities? <a href="<?= url('community') ?>">Get a plugin</a> or build your own interface elements.</h2>
+          <p class="h2">And if you ever run out of ideas or possibilities? <a href="<?= url('community') ?>">Get a plugin</a> or build your own interface elements.</p>
           <p class="description">…like this fantastic <a href="https://github.com/sylvainjule/kirby-matomo">Matomo plugin</a><br> by <a href="https://sylvain-jule.fr">Sylvain Julé</a> &rsaquo;</p>
         </header>
         <figure>
@@ -86,13 +89,14 @@
     </section>
 
     <!-- # Highlights -->
-    <section class="home-highlights">
+    <section id="highlights" class="home-highlights">
+      <h2 class="visually-hidden">Highlights</h2>
       <div class="wrap">
         <div class="home-highlights-grid">
           <div>
-            <h2 class="h2">
+            <h3 class="h2">
               Just files and folders
-            </h2>
+            </h3>
 
             <?= $page->filesystem()->kt() ?>
 
@@ -105,9 +109,9 @@
             </ul>
           </div>
           <div>
-            <h2 class="h2">
+            <h3 class="h2">
               Your markup on fire
-            </h2>
+            </h3>
 
             <?= $page->templates()->kt() ?>
 
@@ -125,7 +129,8 @@
     </section>
 
     <!-- # Features -->
-    <section class="home-features | section">
+    <section id="features" class="home-features | section">
+      <h2 class="visually-hidden">Features</h2>
       <div class="wrap">
         <ul>
           <?php foreach($page->find('features')->children() as $feature): ?>
@@ -155,20 +160,20 @@
         </div>
       </section>
 
-      <section id="clients">
+      <section id="customers">
         <div class="wrap">
+          <h2 class="visually-hidden">Kirby is trusted by brands world-wide</h2>
           <?php snippet('clients') ?>
         </div>
       </section>
 
       <!-- # Actions -->
       <section id="try" class="home-actions | section">
-
+        <h2 class="visually-hidden">Get started</h2>
         <a href="<?= url('try') ?>">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g class="nc-icon-wrapper" fill="#111111"><path fill="#111111" d="M12.707,22.707L20.414,15L19,13.586l-6,6V2c0-0.553-0.448-1-1-1s-1,0.447-1,1v17.586l-6-6L3.586,15 l7.707,7.707C11.684,23.098,12.316,23.098,12.707,22.707z"></path></g></svg>
           Try Kirby 3 now
         </a>
-
         <a href="<?= url('buy') ?>">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g class="nc-icon-wrapper" fill="#111111"><circle data-color="color-2" cx="6.5" cy="21.5" r="2.5"></circle> <circle data-color="color-2" cx="19.5" cy="21.5" r="2.5"></circle> <path fill="#111111" d="M20,17H6c-0.501,0-0.925-0.371-0.991-0.868L3.125,2H0V0h4c0.501,0,0.925,0.371,0.991,0.868L5.542,5H23 c0.316,0,0.614,0.149,0.802,0.403c0.189,0.254,0.247,0.582,0.156,0.884l-3,10C20.831,16.71,20.441,17,20,17z"></path></g></svg>
           Buy a license
@@ -206,7 +211,7 @@ galleryLinks.forEach(function (galleryLink) {
     e.preventDefault();
     $('.home-panel-gallery-links a[aria-current]').removeAttribute('aria-current');
     galleryImage.src = this.href;
-    galleryLink.setAttribute("aria-current", "item");
+    galleryLink.setAttribute("aria-current", true);
   }, true);
 });
 </script>

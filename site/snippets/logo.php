@@ -1,5 +1,5 @@
 <div class="logo">
-  <a href="<?= url() ?>" rel="home">
+  <a href="<?= url() ?>" rel="home" aria-label="Return to home">
     <svg width="46" height="54" viewBox="0 0 46 54" aria-hidden="true">
       <title>Kirby Logo</title>
       <g fill="none" fill-rule="evenodd">

@@ -1,14 +1,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Kirby is the content management system that adapts to your projects like no other">
 <meta property="og:image" content="<?= cachebuster::url('assets/images/opengraph.jpg') ?>" />
+
+<?php if (option('beta')): ?>
+<meta name="robots" content="noindex, nofollow">
+<?php endif ?>
 
 <link rel="icon" type="image/png" href="<?= cachebuster::url('favicon.png') ?>">
 <link rel="mask-icon" href="<?= cachebuster::url('safari-mask-icon.svg') ?>" color="#16171a">
 
-<title>
-  <?= $page->isHomePage() ? $site->title() . ' | ' . $site->description() : $page->title() . ' | ' . $site->title() ?>
-</title>
+<title><?= $page->isHomePage() ? $site->title() . ' | ' . $site->description() : $page->title() . ' | ' . $site->title() ?></title>
 
 <link rel="preload" href="<?= cachebuster::url('assets/css/index.css') ?>" as="style">
 <link rel="preload" href="<?= cachebuster::url('assets/js/index.js') ?>" as="script">
