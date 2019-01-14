@@ -33,7 +33,7 @@ fields:
     label: Desert
 ```
 
-## Reusable fields blueprint
+### Reusable dishes field
 
 ```yaml "/site/blueprints/fields/dishes.yml"
 label: Dishes
@@ -55,7 +55,7 @@ fields:
     width: 1/3
 ```
 
-## Result
+### Result
 
 (screenshot: menu.png)
 

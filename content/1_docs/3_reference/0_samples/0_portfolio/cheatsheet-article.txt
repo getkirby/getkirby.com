@@ -9,4 +9,85 @@ Excerpt: Highlight your projects
 
 Text:
 
-<warning>This page is still in construction.</warning>
+## Projects overview
+
+```yaml "/site/blueprints/pages/projects.yml"
+title: Projects
+preset: pages
+icon: 🖼
+
+drafts:
+  extends: sections/projects
+  headline: Project Drafts
+
+listed:
+  extends: sections/projects
+  headline: Published Projects
+  layout: cards
+```
+
+### Reusable projects section
+
+```yaml "/site/blueprints/sections/projects.yml"
+headline: Projects
+layout: cards
+template: project
+image:
+  query: page.images.template("cover").first
+  ratio: 3/2
+  cover: true
+info: "{{ page.year }}"
+```
+
+### Result
+
+(screenshot: projects.png)
+
+## Single project
+
+```yaml "/site/blueprints/pages/project.yml"
+title: Project
+preset: page
+
+status:
+  draft: Draft
+  listed: Published
+
+fields:
+  headline:
+    type: text
+    width: 3/4
+    required: true
+  year:
+    type: number
+    min: 2000
+    default: 2018
+    required: true
+    width: 1/4
+  tags:
+    type: tags
+  intro:
+    type: textarea
+    size: small
+  text:
+    type: textarea
+    size: large
+
+sidebar:
+  cover:
+    type: files
+    headline: Cover
+    layout: cards
+    info: "{{ file.dimensions }}"
+    template: cover
+    min: 1
+    max: 3
+  gallery:
+    type: files
+    headline: Gallery
+    template: image
+```
+
+### Result
+
+(screenshot: project.png)
