@@ -2,6 +2,8 @@
 
 return [
 
+    'beta' => true,
+
     'url' => '/',
 
     'markdown' => [
