@@ -45,7 +45,7 @@
           <div class="home-panel-gallery">
             <figure class="screenshot">
               <span class="intrinsic" style="padding-bottom: 67%">
-                <?= $page->images()->filterBy('name', '*=', 'interface')->first() ?>
+                <?= $firstImage = $page->images()->filterBy('name', '*=', 'interface')->nth(2) ?>
               </span>
             </figure>
           </div>
@@ -53,7 +53,7 @@
           <ul class="home-panel-gallery-links">
             <?php $n = 0; foreach ($page->images()->filterBy('name', '*=', 'interface') as $image): $n++; ?>
             <li>
-              <a href="<?= $image->url() ?>"<?php e($n === 1, ' aria-current="true"') ?>>
+              <a href="<?= $image->url() ?>"<?php e($image->is($firstImage), ' aria-current="true"') ?>>
                 <figure>
                   <span class="intrinsic" style="padding-bottom: 67%">
                     <?= $image ?>
