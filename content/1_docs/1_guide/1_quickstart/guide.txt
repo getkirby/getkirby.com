@@ -7,9 +7,6 @@ Description: Long guides are boring. Get Kirby up and running in 1 minute.
 ----
 
 Todos:
-
-- Fix the link to the troubleshooting guide
-- Add a nice screenshot of the Panel
 - Add a nice screenshot of the starterkit
 - Add a glossary entry for document root and link it in the installation step
 
@@ -22,7 +19,9 @@ Text:
 1. [**Download Kirby's Starterkit**](https://github.com/k-next/starterkit/archive/master.zip)
 2. Extract the ZIP file in your server's web root
 3. Visit your new Kirby site in your browser at `yourdomain.com`
-4. Visit the Panel at `yourdomain.com/panel`
+4. Visit the (glossary: Panel) at `yourdomain.com/panel`
+
+(screenshot: panel.png)
 
 <info>
 If you want learn more about other ways to install Kirby, check out the (link: docs/guide/installation text: Installation guide).
@@ -40,7 +39,7 @@ Let's be honest: who reads the docs? Right? It's totally fine to explore your Ki
 
 ### (link: docs/guide text: Guide)
 
-Our guide introduces you to every aspect of Kirby. From your first template to complex extensions. It should always be the starting point for your research.
+Our guide introduces you to every aspect of Kirby. From your first (glossary: template text: template) to complex extensions. It should always be the starting point for your research.
 
 (link: docs/guide text: Read more ›)
 
@@ -55,6 +54,12 @@ Once you have familiarized yourself with the basics, the Reference is probably
 While our docs provide a deep dive into every feature and aspect of Kirby, our Cookbook is a collection of all sorts of solutions you can build with Kirby. Starting from simple things like menus to frontend authentication, headless CMS setups and more.
 
 (link: docs/cookbook text: Read more ›)
+
+### Troubleshooting
+If you encounter any problems, make sure to check our guide on some common pitfalls and how to solve them.
+
+
+(link: docs/guide/troubleshooting text: Read more ›)
 
 ### (link: https://forum.getkirby.com/ text: Forum)
 
