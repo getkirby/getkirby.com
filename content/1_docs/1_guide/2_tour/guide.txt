@@ -22,12 +22,12 @@ We provide two downloadable kits for you to get started with.
 
 | Folder | What's in it? |
 |---- | ---- |
-| /content | The (link: #content text: content) of your website. |
-| /site | Think of this folder as your project folder. It contains your templates, configuration, plugins and setup files (blueprints) for the Panel |
-| /kirby | The Kirby app. Great for studying the source code, but in general you should leave this folder untouched (apart from updating it when a new version is released). |
-| /media | This folder is managed by Kirby and holds public images and thumbnails as well as plugin and Panel assets. Let Kirby do its work and leave this folder as it is. |
+| `/content` | The (link: #content text: content) of your website. |
+| `/site` | Think of this folder as your project folder. It contains your (glossary: template text: templates), configuration, plugins and setup files ((glossary: blueprint text: blueprints)) for the (glossary: Panel). |
+| `/kirby` | The Kirby app. Great for studying the source code, but in general you should leave this folder untouched (apart from (link: docs/guide/installation#updates text: updating) it when a new version is released). |
+| `/media` | This folder is managed by Kirby and holds public images and thumbnails as well as plugin and (glossary: Panel) assets. Let Kirby do its work and leave this folder as it is. |
 
-Our Starterkit has an additional `/assets` folder, we use it to store CSS files. This is just a convention we use. It's not required by Kirby.
+Our (glossary: Starterkit) has an additional `/assets` folder, we use it to store CSS files. This is just a convention we use. It's not required by Kirby.
 
 ## Content
 
@@ -79,7 +79,7 @@ Those fields come for free. You can add as many as you need. We recommend using 
 
 ## Templates
 
-All the data that is stored in your content folder can be pulled into your templates to render the pages of your site. Kirby templates are a combination of plain HTML and bits of our powerful (link: docs/guide/templates/php-api text: PHP API). You don't need to be a PHP expert to get started writing templates. We will guide you through it.
+All the data that is stored in your content folder can be pulled into your (glossary: template text: templates) to render the pages of your site. Kirby templates are a combination of plain HTML and bits of our powerful (link: docs/guide/templates/php-api text: PHP API). You don't need to be a PHP expert to get started writing templates. We will guide you through it.
 
 A typical Kirby template looks like this:
 
@@ -103,7 +103,7 @@ A typical Kirby template looks like this:
 
 ## The Panel
 
-Kirby's web interface is called the Panel. You can find it at `yourdomain.com/panel`.
+Kirby's web interface is called the (glossary: Panel). You can find it at `yourdomain.com/panel`.
 
 (image: panel.jpg)
 
@@ -111,7 +111,7 @@ While you can manage your site 100% in the file system, the Panel makes it a lot
 
 ## Blueprints
 
-The Panel is very versatile and can be customized to fit every project. To set up the Panel, you will use Kirby's so called blueprints to configure layouts, form fields, permissions and more.
+The Panel is very versatile and can be customized to fit every project. To set up the Panel, you will use Kirby's so called (glossary: blueprint text: blueprints) to configure layouts, form fields, permissions and more.
 
 (image: tabs.png)
 

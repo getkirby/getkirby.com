@@ -1,0 +1,10 @@
+Title: Starterkit
+
+----
+
+Entry:
+
+The Starterkit is your perfect companion when you start out with Kirby. It comes packed with content, (glossary: template text: templates) and (glossary: blueprint text: blueprints). Explore the possibilities of Kirby and learn from these examples to build your own site.
+
+----
+Link: try
