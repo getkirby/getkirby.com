@@ -9,7 +9,7 @@ Excerpt: A simple blog and articles setup
 
 Text:
 
-## Blog blueprint
+## Blog
 
 ```yaml "/site/blueprints/pages/blog.yml"
 title: Blog
@@ -51,7 +51,7 @@ sortBy: date desc
 
 (screenshot: blueprint-blog.png)
 
-## Single article blueprint
+## Single article
 
 ```yaml "/site/blueprints/sections/article.yml"
 title: Article
@@ -95,61 +95,9 @@ columns:
 
 (screenshot: blueprint-article.png)
 
-## Blog template
+## Cookbook
 
-```php "/site/templates/blog.php"
-<?php snippet('header') ?>
-
-<main>
-  <header class="intro">
-    <h1><?= $page->title() ?></h1>
-  </header>
-
-  <div class="articles">
-    <?php foreach ($page->children()->listed()->sortBy('date', 'desc') as $article): ?>
-    <article class="article">
-      <header class="header">
-        <a href="<?= $article->url() ?>">
-          <h2><?= $article->title() ?></h2>
-          <time><?= $article->date()->toDate('d F Y') ?></time>
-        </a>
-      </header>
-    </article>
-    <?php endforeach ?>
-  </div>
-
-</main>
-
-<?php snippet('footer') ?>
-```
-
-(screenshot: template-blog.png)
-
-## Single article template
-
-```php "/site/templates/article.php"
-<?php snippet('header') ?>
-
-<main>
-  <article class="article">
-    <header class="intro">
-      <h1><?= $page->title() ?></h1>
-      <time><?= $page->date()->toDate('d F Y') ?></time>
-      <?php if ($page->tags()->isNotEmpty()) : ?>
-        <p class="tags"><?= $page->tags() ?></p>
-      <?php endif ?>
-    </header>
-
-    <div class="text">
-      <?= $page->text()->kt() ?>
-    </div>
-  </article>
-</main>
-
-<?php snippet('footer') ?>
-```
-
-(screenshot: template-article.png)
+If you want to find out more about creating a Kirby-powered blog, read our (link: docs/cookbook/content-structure/create-a-blog text: full cookbook recipe).
 
 
 

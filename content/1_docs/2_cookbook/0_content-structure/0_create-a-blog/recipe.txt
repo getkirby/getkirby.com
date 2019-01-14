@@ -285,6 +285,10 @@ Your article template could then look like this:
 <?php snippet('footer') ?>
 ```
 
+## Use the Panel
+
+To manage your blog and write articles in the (glossary: panel), you will need to create matching (glossary: blueprint text: blueprints) for your templates. Check our **(link: docs/reference/samples/blog text: blueprint samples)** for a simple blog setup.
+
 ## Further reading
 
 - (link: docs/cookbook/content-structure/dates text: How to add a date to your articles)
