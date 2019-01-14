@@ -26,7 +26,13 @@ class Cachebuster
         $root = $kirby->roots()->index() . '/' . $path;
 
         if (file_exists($root)) {
-            $path = $path . '?v=' . dechex(filemtime($root));
+            $modified = dechex(filemtime($root));
+
+            if (option('cachebuster.mode') === 'path') {
+                $path = dirname($path) . '/' . F::name($path) . '.' . $modified . '.' . F::extension($path);
+            } else {
+                $path = $path . '?v=' . dechex(filemtime($root));
+            }
         }
 
         return $path;

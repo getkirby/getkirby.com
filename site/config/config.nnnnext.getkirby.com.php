@@ -9,6 +9,9 @@ return [
             'type' => 'apcu'
         ]
     ],
+    'cachebuster' => [
+        'mode' => 'path'
+    ],
     'cloudinary' => [
         'domain' => 'https://nnnnext.getkirby.com',
     ],
