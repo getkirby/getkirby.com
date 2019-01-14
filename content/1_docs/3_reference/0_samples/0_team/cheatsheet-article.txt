@@ -9,5 +9,118 @@ Excerpt: Portray your team members
 
 Text:
 
-<warning>This page is still in construction.</warning>
+The Team page example consists of an overview with a card layout, and subpages shown in pages section.
 
+## Overview page
+
+```yaml "/site/blueprints/pages/team.yml"
+title: Team
+extends: layouts/default
+
+
+icon: 😺
+
+options:
+  url: false
+  status: false
+  delete: false
+```  
+
+### Reusable layout
+
+
+The Team page extends a default layout that is definded in the `/blueprints/layouts` folder:
+
+```yaml "/site/blueprints/layouts/default.yml"
+tabs:
+
+  team:
+    label: Team
+    preset: pages
+    drafts:
+      headline: New Team Members
+      info: "{{ page.position }}"
+      template: team-member
+    listed:
+      headline: Team
+      layout: cards
+      info: "{{ page.position }}"
+      template: team-member
+      image:
+        ratio: 1/1
+        cover: true
+
+  content:
+    label: Content
+    preset: page
+    pages: false
+    fields:
+      intro:
+        label: Intro
+        type: textarea
+        size: medium
+```
+
+
+
+### Result
+
+(screenshot: team.png)
+
+### Team member subpage
+
+```yaml "/site/blueprints/pages/team-member.yml"
+title: Team
+preset: page
+icon: user
+
+status:
+  draft: true
+  listed: true
+
+fields:
+  position:
+    label: Position
+    type: text
+  phone:
+    label: Phone
+    type: tel
+    width: 1/2
+  email:
+    label: Email
+    type: email
+    width: 1/2
+  account:
+    label: CMS Account
+    type: users
+  about:
+    label: About
+    type: textarea
+    size: medium
+
+sidebar:
+  image:
+    extends: sections/image
+    headline: Team Member
+    min: 1
+    max: 1
+    image:
+      ratio: 1/1
+      cover: true
+```      
+
+### Reusable section blueprint
+
+In the sidebar image section of the team member page, we extend the image section to show/select a single member image:
+
+```yaml "/site/blueprints/sections/image.yml"
+type: files
+headline: Product image
+max: 1
+layout: cards
+info: "{{ file.dimensions }}"
+```
+
+### Result
+
+(screenshot: team-member.png)
