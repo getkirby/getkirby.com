@@ -44,9 +44,11 @@
   flex-grow: 1;
   flex-shrink: 1;
   margin-right: -5rem;
+  width: 66.66%;
 
   @include mq(from m) {
     margin-right: 0;
+    width: auto;
     margin-bottom: -1.5rem;
   }
 }
