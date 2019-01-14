@@ -21,7 +21,6 @@ ready(() => {
     return;
   }
 
-  const baseUrl     = searchForm.getAttribute('data-base-url');
   const searchInput = document.querySelector('.js-menu-search-input');
 
   Promise.all([

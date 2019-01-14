@@ -15,7 +15,7 @@ const path               = require('path');
 const ENV              = process.env.NODE_ENV;
 
 /**
- * When Mix runs in a dev environment 
+ * When Mix runs in a dev environment
  */
 const ASSETS_SUBFOLDER = (ENV === 'development' ? '/dev' : '');
 
@@ -108,7 +108,7 @@ mix.setResourceRoot(`/assets${ASSETS_SUBFOLDER}/`);
 mix.webpackConfig({
   output: {
     publicPath: `/assets${ASSETS_SUBFOLDER}/`,
-    chunkFilename: 'js/[name].bundle.js?v=[chunkhash:8]',
+    chunkFilename: 'js/[name]-bundle.js?v=[chunkhash:8]',
   },
   plugins: [
     // new CleanWebpackPlugin(['www/assets']),
