@@ -6,7 +6,6 @@ return [
     'markdown' => [
         'extra' => true,
     ],
-
     'price' => [
         'eur' => 99,
         'usd' => 115
