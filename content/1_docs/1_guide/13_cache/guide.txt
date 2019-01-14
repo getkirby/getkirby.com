@@ -14,11 +14,13 @@ You can enable Kirby's page cache in your `config.php` file with the `cache.page
 
 ```php "/site/config/config.php"
 return [
-  'cache.pages' => [
-    'active' => true,
-    'ignore' => function ($page) {
-      return $page->title()->value() !== 'Do not cache me';
-    }
+  'cache' => [
+      'pages' => [
+          'active' => true,
+          'ignore' => function ($page) {
+            return $page->title()->value() !== 'Do not cache me';
+          }
+      ]
   ]
 ];
 ```
@@ -41,14 +43,17 @@ Option | Value
 ```php "/site/config.php"
 
 [
-  'cache.pages' => [
-    'type'   => 'memcached',
-    'host'   => 'localhost',
-    'port'   => '11211',
-    'prefix'  => 'pages',
-    'ignore' => function ($page) {
-      return $page->id() === 'something';
-    }
+  'cache' => [
+      'pages' => [
+          'active' => true,
+              'type'   => 'memcached',
+              'host'   => 'localhost',
+              'port'   => '11211',
+              'prefix'  => 'pages',
+              'ignore' => function ($page) {
+                return $page->id() === 'something';
+              }
+      ]
   ]
 ];
 ```
@@ -104,12 +109,9 @@ The getter will now return `null` after the 30 minutes expired.
 Plugins can have their own namespaced caches by defining them in their options:
 
 ```php
-Kirby::plugin([
-  'name' => 'superwoman/superplugin',
-  'extends' => [
-    'options' => [
-      'cache' => true
-    ]
+Kirby::plugin('superwoman/superplugin', [
+  'options' => [
+    'cache' => true
   ]
 ]);
 ```
@@ -122,12 +124,9 @@ $kirby->cache('superwoman.superplugin');
 But you can even have multiple cache instances per plugin:
 
 ```php
-Kirby::plugin([
-  'name' => 'superwoman/superplugin',
-  'extends' => [
-    'options' => [
-      'cache.api' => true
-    ]
+Kirby::plugin('superwoman/superplugin', [
+  'options' => [
+    'cache.api' => true
   ]
 ]);
 ```
