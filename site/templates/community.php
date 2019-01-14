@@ -18,7 +18,7 @@
             </p>
 
             <figure class="screenshot">
-              <a href="<?= $section->link() ?>">
+              <a href="<?= $section->link() ?>" class="intrinsic" style="padding-bottom: 100%">
                 <?= $section->image()->html(['alt' => $section->title()]) ?>
               </a>
             </figure>
@@ -51,7 +51,9 @@
             <li class="community-mate">
 
               <figure class="-mb:small screenshot">
-                <?= $mate->image()->html(['alt' => $mate->title()]) ?>
+                <span class="intrinsic" style="padding-bottom: 100%">
+                  <?= $mate->image()->html(['alt' => $mate->title()]) ?>
+                </span>
               </figure>
 
               <h3 class="h5"><?= $mate->title() ?><br></h3>
@@ -106,7 +108,9 @@
             <?php foreach ($page->find('contributors')->children()->listed()->shuffle() as $contributor): ?>
             <li>
               <a href="<?= $contributor->link() ?>" title="<?= $contributor->title() ?>" class="screenshot">
-                <?= $contributor->image()->html(['alt' => $contributor->title()]) ?>
+                <span class="intrinsic" style="padding-bottom: 100%">
+                  <?= $contributor->image()->html(['alt' => $contributor->title()]) ?>
+                </span>
               </a>
             </li>
             <?php endforeach ?>

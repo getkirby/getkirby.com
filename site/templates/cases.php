@@ -15,7 +15,9 @@
                 <?= Url::short(Url::base($case->link()->value())) ?>
               </p>
               <figure class="screenshot">
-                <?= $case->cover()->toFile() ?? $case->image() ?>
+                <span class="intrinsic" style="padding-bottom: 133.33%">
+                  <?= $case->cover()->toFile() ?? $case->image() ?>
+                </span>
               </figure>
             </a>
           </article>

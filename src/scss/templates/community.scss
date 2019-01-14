@@ -41,8 +41,10 @@
   margin-bottom: 3rem;
   padding: 0 1rem;
 }
-.community-mate figure img {
+.community-mate figure {
+  display: block;
   width: 4rem;
+  margin: 0 auto;
 }
 .community-mate small {
   display: block;

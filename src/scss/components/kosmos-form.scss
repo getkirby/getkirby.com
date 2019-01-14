@@ -42,6 +42,9 @@
   background: $color-anthracite;
   border: 0;
 }
+.kosmos-form input {
+  appearance: none;
+}
 .kosmos-field input[type="text"]:focus {
   outline: 2px solid $color-syntax-yellow;
 }

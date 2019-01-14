@@ -18,8 +18,8 @@ class Cachebuster
     {
         $kirby  = App::instance();
 
-        if (static::environment(static::ENV_DEVELOPMENT) && strpos($path, static::ASSETS_FOLDER . '/') === 0) {
-            $path = substr($path, strlen(self::ASSETS_FOLDER . '/'));
+        if (static::environment(static::ENV_DEVELOPMENT) && Str::contains($path, 'assets')) {
+            $path = ltrim(substr($path, strlen(self::ASSETS_FOLDER . '/')), '/');
             $path = "assets/dev/{$path}";
         }
 

@@ -6,7 +6,7 @@
 }
 .menu-search-input {
   font: inherit;
-  font-size: .875rem;
+  font-size: 1rem;
   color: $color-syntax-yellow;
   font-weight: 400;
   outline: 0;
@@ -17,6 +17,7 @@
   background: transparent url(../images/icons/search.svg) no-repeat center right;
   border: 0;
   cursor: pointer;
+  appearance: none;
 }
 .menu-search-input:focus {
   box-shadow: $shadow;
