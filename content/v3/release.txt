@@ -2,13 +2,13 @@ Title: Introducing Kirby 3
 
 ----
 
-Intro: After over two years of development and seven years after launching Kirby 1 we are back with our biggest release to date…
+Intro: After over two years of development and seven years after launching Kirby 1, we are back with our biggest release to date…
 
 ----
 
 Text:
 
-## A new panel
+## A new Panel
 
 (screenshot: panel.jpg)
 
@@ -16,7 +16,7 @@ Kirby 3 comes with a beautiful new control Panel built on top of (link: https://
 
 ### Sections & Tabs
 
-Our brand new section system lifts blueprints to a completely different level. You become the interface designer and decide for each type of page what features you need and how to arrange them.
+Our brand new section system lifts blueprints to a completely different level. You become the interface designer and decide for each type of page which features you need and how to arrange them.
 
 (image: blueprint.png)
 
@@ -64,7 +64,7 @@ Kirby 3 has a built in REST API. You can comfortably create and edit your conten
 
 ## Virtual pages & external data sources
 
-In Kirby 3 you can mix file-based content with content from pretty much any other data source. Databases, APIs, spreadsheets, or anything else that's somehow parsable by PHP. In fact most parts of our (link: docs/reference text: reference) are generated live from PHP reflections of our source code.
+In Kirby 3, you can mix file-based content with content from pretty much any other data source. Databases, APIs, spreadsheets, or anything else that's somehow parsable by PHP. In fact, most parts of our (link: docs/reference text: reference) are generated live from PHP reflections of our source code.
 
 (link: docs/cookbook/database/pages-from-database text: Learn more…)
 
@@ -97,7 +97,7 @@ return function ($site) {
 		->template('cover');
 };
 ```
-Collections can afterwards be used in your templates and snippets like this…
+Collections can afterwards be used in your templates and snippets like this:
 ```php
 $kirby->collection("articles");
 $kirby->collection("admins");
@@ -114,15 +114,15 @@ Our new email engine built on top of PHPMailer gives you a very comfortable API 
 
 ## Better caching
 
-With Kirby 3 you can make use of our page cache or add custom caching of your own data in a matter of seconds.
+With Kirby 3, you can make use of our page cache or add custom caching of your own data in a matter of seconds.
 
 (link: docs/guide/cache text: Learn more…)
 
-## So much more …
+## So much more…
 
 This introduction could go on forever. We recommend you just give it a try and play around with all the new features yourself.
 
-The best startingpoint is our brand new (link: try text: Starterkit):
+The best starting point is our brand new (link: try text: Starterkit):
 
 (screenshot: starterkit.jpg)
 
@@ -133,5 +133,3 @@ If you need help with the new version, please visit the forum: https://forum.get
 ## How to upgrade Kirby 2
 
 For those of you who want to migrate your Kirby 2 site, we've created an (link: docs/cookbook/migration/sites text: upgrade guide).
-
-
