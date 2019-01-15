@@ -63,9 +63,9 @@ class ClassPage extends Page
         }
 
         $pages = Pages::factory($children, $this)
-                    ->sortBy('slug')
                     ->filterBy('methodExists', true)
-                    ->filterBy('methodHidden', false);
+                    ->filterBy('methodHidden', false)
+                    ->sortBy('slug');
 
         return $this->children = $pages;
     }
