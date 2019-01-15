@@ -67,7 +67,7 @@ Kirby::plugin('kirby/columns', [
         $columns = preg_split('!(\n|\r\n)\+{4}\s+(\n|\r\n)!', $matches[2]);
         $html    = array();
         foreach($columns as $column) {
-            $field = new Field($text->field->page, '', trim($column));
+            $field = new Field(page(), '', trim($column));
             $html[] = '<div class="' . option('kirby.columns.item', 'column') . '">' . kirbytext($field) . '</div>';
         }
         return '<div class="' . option('kirby.columns.container', 'columns') . '">' . implode($html) . '</div>';
@@ -147,7 +147,7 @@ Since arrays start their index at zero, we can get the content between the tags 
 Now that we got the content in between the tags, we can look for our separators and split the content into nice pieces for the columns.
 
 ```php
-$columns = preg_split('!\R\+{4}\s+\R!', $matches[2]);
+$columns = preg_split('!(\n|\r\n)\+{4}\s+(\n|\r\n)!', $matches[2]);
 ```
 
 Since we are regular expression experts now, the expression above isn't that complicated anymore. The only new things are `\R`,  which stands for any line break, and `\s`, which stands for spaces. So the expression above translates to: "Split the content when there's a line break, followed by four plus signs, follwed by one or more spaces, followed by a line break again."
@@ -177,12 +177,12 @@ That's why we need to wrap the string in a new Field object and connect it to th
 
 ```php
 foreach($columns as $column) {
-  $field  = new Field($text->field->page, '', trim($column));
+  $field  = new Field(page(), '', trim($column));
   $html[] = '<div class="column">' . kirbytext($field) . '</div>';
 }
 ```
 
-We pass the `$text` variable to the `preg_replace_callback` callback with `use($text)` (check the code above) so we can use it now to fetch the original Page object and pass it to the new Field object. The second argument is normally used for the field key,but is not needed in this case. As the last parameter we pass the string from the `$columns` array and trim it to remove any leading or trailing spaces.
+We use the `page()` helper to fetch the current page and pass it as the first parameter to the new Field object. The second argument is normally used for the field key,but is not needed in this case. As the last parameter we pass the string from the `$columns` array and trim it to remove any leading or trailing spaces.
 
 ### The final HTML
 
