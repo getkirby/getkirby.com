@@ -14,13 +14,15 @@ Text:
 
 Kirby 3 comes with a beautiful new control Panel built on top of (link: https://vuejs.org text: Vue) that allows you to build unique custom interfaces for any kind of project, small or complex, exactly tailored to your content (if you are more the nerdy type, you can still edit text files with a text editor if you want).
 
-### Sections
+### Sections & Tabs
 
 Our brand new section system lifts blueprints to a completely different level. You become the interface designer and decide for each type of page what features you need and how to arrange them.
 
-### Native tabs
+(image: blueprint.png)
 
 With native tabs you can go even further and create incredibly clean and usable editing environments for your editors.
+
+(link: docs/guide/blueprints text: Learn more…)
 
 ### Better user account management
 
@@ -29,6 +31,8 @@ Users get a huge upgrade and can have their own files, fields and the same flexi
 ### Vue.js UI Kit
 
 The Panel is built on top of our own Vue UI kit that can be used in all Panel plugins to build incredibly feature-rich extensions with just a few lines of code.
+
+(link: docs/reference/ui text: Learn more…)
 
 ### Better fields
 
@@ -102,7 +106,7 @@ $kirby->collection("project-covers");
 
 (link: docs/guide/templates/collections text: Learn more…)
 
-## Better email sending
+## Easy emails
 
 Our new email engine is built on top of PHPMailer and gives you a very comfortable API to send form replies, notifications and more. Add any file in Kirby as attachment and make use of the same template engine that you are already familiar with.
 
@@ -115,3 +119,19 @@ With Kirby 3 you can make use of our page cache or add custom caching of your ow
 (link: docs/guide/cache text: Learn more…)
 
 ## So much more …
+
+This introduction could go on forever. We recommend you just give it a try and play around with all the new features yourself.
+
+The best startingpoint is our brand new (link: try text: starterkit):
+
+(screenshot: starterkit.jpg)
+
+## Support
+
+If you need help with the new version, please visit the forum: https://forum.getkirby.com
+
+## How to upgrade Kirby 2
+
+For those of you who want to migrate your Kirby 2 site, we've created an (link: docs/cookbook/migration/sites text: upgrade guide).
+
+
