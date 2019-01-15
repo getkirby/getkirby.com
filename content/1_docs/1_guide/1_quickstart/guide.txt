@@ -16,7 +16,7 @@ Text:
 
 ## Installation
 
-1. [**Download Kirby's Starterkit**](https://github.com/k-next/starterkit/archive/master.zip)
+1. [**Download Kirby's Starterkit**](https://github.com/getkirby/starterkit/archive/master.zip)
 2. Extract the ZIP file in your server's web root
 3. Visit your new Kirby site in your browser at `yourdomain.com`
 4. Visit the (glossary: Panel) at `yourdomain.com/panel`

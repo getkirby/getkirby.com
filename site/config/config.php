@@ -21,7 +21,7 @@ return [
     'debug'   => true,
     'algolia' => require __DIR__ . '/algolia.php',
     'routes'  => require __DIR__ . '/routes.php',
-    'github'  => 'https://github.com/k-next',
+    'github'  => 'https://github.com/getkirby',
 
     'cheatsheet' => [
         'Text' => [

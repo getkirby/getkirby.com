@@ -2,4 +2,4 @@ Title: Releases
 
 ----
 
-Link: https://github.com/k-next/kirby/releases
+Link: https://github.com/getkirby/kirby/releases

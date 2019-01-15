@@ -217,7 +217,7 @@ These options can be called with `$kirby->option('someSetting')`.
     ]
   ]
 ],
-```   
+```
 Then in your templates, snippets etc.:
 
 ```php
@@ -425,7 +425,7 @@ As a next step, replace old plugins with new ones where available and/or port yo
 
 ## Getting stuck?
 
-If you run into any kind of upgrade issue, please help us by letting us know on Slack in the #Helpdesk channel or by creating a ticket: [https://github.com/k-next/kirby/issues](https://github.com/k-next/kirby/issues)
+If you run into any kind of upgrade issue, please help us by letting us know [in the forum](https://forum.getkirby.com) or by creating a ticket: [https://github.com/getkirby/kirby/issues](https://github.com/getkirby/kirby/issues)
 
 Please only create tickets if you are pretty sure it is a Kirby issue.
 ----

@@ -172,7 +172,7 @@ sidebar:
     max: 3
 ```
 
-Check out the (link: https://github.com/k-next/starterkit text: Starterkit) section and page blueprints for more examples of section reuse.
+Check out the (link: https://github.com/getkirby/starterkit text: Starterkit) section and page blueprints for more examples of section reuse.
 
 ## Extending tabs
 
