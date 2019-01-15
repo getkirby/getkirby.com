@@ -13,7 +13,7 @@
     <input id="name" name="cm-name" type="text">
 
     <div class="kosmos-legal">
-      <p>We use the Australian company CampaignMonitor to collect subscribers and send out newsletters. Find out more in our pricacy policy.</p>
+      <p>We use the Australian company CampaignMonitor to collect subscribers and send out newsletters. Find out more in our privacy policy.</p>
     </div>
 
   </div>
