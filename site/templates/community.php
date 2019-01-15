@@ -101,7 +101,7 @@
           <header class="-mb:large">
             <h2 id="contributors" class="h2">Our contributors</h2>
             <p class="intro">
-              We are very lucky to have a very supportive group of developers and translators, who build plugins and help us test and plan new features for Kirby.
+              We are very lucky to have a really supportive group of developers and translators, who build plugins and help us test and plan new features for Kirby.
             </p>
           </header>
           <ul>
