@@ -6,7 +6,7 @@ return [
     'cache' => [
         'pages' => [
             'active' => true,
-            'type' => 'compressor'
+            'type' => 'apcu'
         ]
     ],
     'cachebuster' => [

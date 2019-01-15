@@ -14,16 +14,26 @@ function cloudinary($url, $params = [])
         return $url;
     }
 
-    $params  = array_merge(['q' => 'auto'], $params);
+    $defaults = [
+        'q' => 'auto',
+        'f' => 'auto'
+    ];
+
+    $params  = array_merge($defaults, $params);
     $options = [];
 
+    $map = [
+        'width'  => 'w',
+        'height' => 'h',
+    ];
+
     foreach ($params as $key => $value) {
-        $options[] = $key . '_' . $value;
+        $options[] = ($map[$key] ?? $key) . '_' . $value;
     }
 
     $options = implode(',', $options);
 
-    return 'https://res.cloudinary.com/getkirby/image/fetch/f_auto,' . $options . '/' . option('cloudinary.domain') . $url;
+    return 'https://res.cloudinary.com/getkirby/image/fetch/' . $options . '/' . option('cloudinary.domain') . $url;
 
 }
 
