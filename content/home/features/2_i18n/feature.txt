@@ -2,4 +2,4 @@ Title: Internationalization
 
 ----
 
-Text: Multi-language support is baked right into the core, so you don’t have to rely on additional plugins or frameworks to translate your site.
+Text: Multi-language support is baked right into the core, so you don’t depend on plugins or frameworks to translate your site.
