@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" href="<?= cloudinary('favicon.png') ?>">
 <link rel="mask-icon" href="<?= cloudinary('safari-mask-icon.svg') ?>" color="#000">
 
-<title><?= $page->isHomePage() ? $site->title() . ' | ' . $site->description() : $page->title() . ' | ' . $site->title() ?></title>
+<title><?= $page->isHomePage() ? $page->title() : $page->title() . ' | ' . $site->title() ?></title>
 
 <link rel="preload" href="<?= url('assets/css/index.css') ?>" as="style">
 <link rel="preload" href="<?= url('assets/js/index.js') ?>" as="script">

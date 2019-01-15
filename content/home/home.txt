@@ -1,4 +1,4 @@
-Title: Kirby
+Title: Kirby - The file-based content management system
 ----
 Filesystem:
 
