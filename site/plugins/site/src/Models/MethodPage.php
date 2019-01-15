@@ -97,6 +97,23 @@ class MethodPage extends HelperPage
         return method_exists($this->className(), $this->methodName());
     }
 
+    public function methodHidden(): bool
+    {
+        if ($this->docBlock() === false) {
+            return false;
+        }
+
+        if (is_null($this->docBlock()->getTag('internal')) === false) {
+            return true;
+        }
+
+        if (is_null($this->docBlock()->getTag('deprecated')) === false) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function methodScope()
     {
 
