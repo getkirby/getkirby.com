@@ -54,13 +54,13 @@ Customizable page states give you maximum control over your workflow, from draft
 
 We've overhaulded our entire plugin system and built a more reliable and consistent environment for lots of new plugin types. Basically any part of Kirby can be extended or modified to fit your project.
 
-(link: docs/guide/plugins text: Learn more …)
+(link: docs/guide/plugins text: Learn more…)
 
 ## REST API & Headless CMS
 
 Kirby 3 has a built in REST API. You can comfortably create and edit your content in the Panel, and then consume your content in SPAs, mobile applications or static site generators.
 
-(link: docs/guide/api/introduction text: Learn more …)
+(link: docs/guide/api/introduction text: Learn more…)
 
 ## Virtual pages & external data sources
 
