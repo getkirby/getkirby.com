@@ -98,8 +98,4 @@ return [
         ],
     ],
 
-    'cloudinary' => [
-        'domain' => 'https://nnnnext.getkirby.com',
-    ],
-
 ];

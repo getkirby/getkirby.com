@@ -1,0 +1,117 @@
+Title: Introducing Kirby 3
+
+----
+
+Intro: After more than two years of development and seven years after launching Kirby 1 we are back with our biggest release so far …
+
+----
+
+Text:
+
+## A new panel
+
+(screenshot: panel.jpg)
+
+Kirby 3 comes with a a beautiful new control Panel built on top of (link: https://vuejs.org text: Vue) that allows you to build unique custom interfaces for any kind of project, small or complex, exactly tailored to your content (if you are more the nerdy type, you can still edit text files with a text editor if you want).
+
+### Sections
+
+Our brand new section system lifts blueprints to a completely different level. You become the interface designer and decide for each type of page what features are needed and how to arrange them.
+
+### Native tabs
+
+With native tabs you can go even further and create incredibly clean and usable editing environments for your editors.
+
+### Better user account management
+
+Users get a huge upgrade and can have their own files, fields and the same flexible section features of pages. This is perfect when you want to build a full-featured authoring network for your platform and you need to collect all sorts of public information about your authors.
+
+### Vue.js UI Kit
+
+The Panel is built on top of our own Vue UI kit that can be used in all Panel plugins to build incredibly feature-rich extensions with just a few lines of code.
+
+### Better fields
+
+With the new power of our Vue application, we are also able to introduce far better fields than before. More powerful structures, related pages, files and more are available and can be combined with the first amazing field plugins from our third-party developers.
+
+(screenshot: fields.png)
+
+(link: docs/reference/fields text: Learn more…)
+
+## Drafts & custom publishing workflows
+
+Customizable page states give you maximum control over your workflow, from drafts over unreviewed to published pages. Choose what you need and start creating.
+
+(screenshot: drafts.png)
+
+(link: docs/guide/content/pages text: Learn more…)
+
+## A new plugin system
+
+We've overhaulded our entire plugin system and built a more reliable and consistent environment for lots of new plugin types. Basically any part of Kirby can be extended or modified to fit your project.
+
+(link: docs/guide/plugins text: Learn more …)
+
+## REST API & Headless CMS
+
+Kirby 3 has a built in REST API. You can comfortably create and edit your content in the Panel, and then consume your content in SPAs, mobile applications or static site generators.
+
+(link: docs/guide/api/introduction text: Learn more …)
+
+## Virtual pages & external data sources
+
+In Kirby 3 you can mix file-based content with content from pretty much any other data source. Databases, APIs, spreadsheets, or anything else that's somehow parseable by PHP. In fact most parts of our (link: docs/reference text: reference) are generated live from PHP reflections of our source code.
+
+(link: docs/cookbook/database/pages-from-database text: Learn more…)
+
+## Asynchronous media API
+
+All images and other media files are loaded dynamically via the new media API. With built-in image manipulations, cache busting and extensible thumbnail generators you get the perfect environment for media-heavy sites.
+
+(link: docs/guide/content/files text: Learn more…)
+
+## Shared collections
+
+It often happens, that you need the same set of pages or files in multiple places across your site. Think of blog articles on your blog and on the home page for example. To keep things DRY, we have a new predefined collection feature, which you can use to make your collections of pages, files or users more accessible.
+
+```php "/site/collections/articles.php"
+return function ($site) {
+	return $site->find('blog')->children()->listed()->flip();
+};
+```
+```php "site/collections/admins.php"
+return function ($users) {
+	return $users->filterBy('role', 'admin');
+};
+```
+```php "site/collections/project-covers.php"
+return function ($site) {
+	return $site
+		->find('projects')
+		->children()
+		->images()
+		->template('cover');
+};
+```
+Collections can afterwards be used in your templates and snippets like this…
+```php
+$kirby->collection("articles");
+$kirby->collection("admins");
+$kirby->collection("project-covers");
+```
+
+(link: docs/guide/templates/collections text: Learn more…)
+
+## Better email sending
+
+Our new email engine is built on top of PHPMailer and gives you a very comfortable API to send form replies, notifications and more. Add any file in Kirby as attachment and make use of the same template engine that you are already familiar with.
+
+(link: docs/guide/emails text: Learn more…)
+
+## Better caching
+
+With Kirby 3 you can make use of our page cache or add custom caching of your own data in a matter of seconds.
+
+(link: docs/guide/cache text: Learn more…)
+
+## So much more …
