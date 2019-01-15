@@ -13,30 +13,52 @@
   display: flex;
   align-items: flex-end;
 }
-.home-hero-banner h1 {
+.home-hero-banner-content {
+  max-width: 27rem;
   position: relative;
   z-index: 1;
-  color: $color-white;
-  font-size: 1.5rem;
-  max-width: 27rem;
-  font-weight: 700;
   padding-top: 9rem;
   padding-bottom: 1.5rem;
-  line-height: 1.25em;
-  flex-shrink: 2;
   margin-right: -3rem;
+  flex-shrink: 2;
 
+  @include mq(from m) {
+    margin-right: 0;
+    padding-bottom: 3rem;
+  }
+}
+.home-hero-cta {
+  font-family: $font-mono;
+  font-size: .875rem;
+  border: 2px solid $color-syntax-yellow;
+  padding: .5rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+.home-hero-cta svg {
+  margin-right: .75rem;
+}
+.home-hero-cta svg * {
+  fill: currentColor;
+}
+.home-hero-cta:hover {
+  background: $color-syntax-yellow;
+  color: #000;
+}
+
+.home-hero-banner h1 {
+  color: $color-white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  max-width: none;
+  line-height: 1.25em;
   @include mq(from s) {
     font-size: 2rem;
     line-height: 1.125em;
   }
-
   @include mq(from m) {
-    margin-right: 0;
     font-size: 2.5rem;
-    padding-bottom: 3rem;
   }
-
 }
 .home-hero-banner figure {
   padding-top: 6rem;

@@ -52,12 +52,13 @@
   background: $color-syntax-yellow;
   border: 0;
   cursor: pointer;
-  font-size: (16em / 18);
+  font-size: .875rem;
   font-weight: 500;
   padding-left: 1rem;
   padding-right: 1rem;
   color: $color-black;
   margin-top: 2rem;
+  font-family: $font-mono;
 }
 .kosmos-field input[type="submit"]:focus {
   background: $color-syntax-purple;

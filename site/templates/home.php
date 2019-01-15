@@ -6,7 +6,15 @@
     <header class="home-hero">
       <div class="wrap">
         <div class="home-hero-banner">
-          <h1>Kirby is the content&nbsp;management system that adapts to your projects like no other</h1>
+          <div class="home-hero-banner-content">
+            <h1>Kirby is the content&nbsp;management system that adapts to your projects like no&nbsp;other</h1>
+            <p>
+              <a class="home-hero-cta" href="<?= url('try') ?>">
+                <?php icon('download') ?>
+                Try for free
+              </a>
+            </p>
+          </div>
           <figure>
             <span class="intrinsic" style="padding-bottom: 96.82%">
               <img
@@ -201,11 +209,11 @@
       <section id="try" class="home-actions | section">
         <h2 class="visually-hidden">Get started</h2>
         <a href="<?= url('try') ?>">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g class="nc-icon-wrapper" fill="#111111"><path fill="#111111" d="M12.707,22.707L20.414,15L19,13.586l-6,6V2c0-0.553-0.448-1-1-1s-1,0.447-1,1v17.586l-6-6L3.586,15 l7.707,7.707C11.684,23.098,12.316,23.098,12.707,22.707z"></path></g></svg>
+          <?php icon('download') ?>
           Try Kirby 3 now
         </a>
         <a href="<?= url('buy') ?>">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g class="nc-icon-wrapper" fill="#111111"><circle data-color="color-2" cx="6.5" cy="21.5" r="2.5"></circle> <circle data-color="color-2" cx="19.5" cy="21.5" r="2.5"></circle> <path fill="#111111" d="M20,17H6c-0.501,0-0.925-0.371-0.991-0.868L3.125,2H0V0h4c0.501,0,0.925,0.371,0.991,0.868L5.542,5H23 c0.316,0,0.614,0.149,0.802,0.403c0.189,0.254,0.247,0.582,0.156,0.884l-3,10C20.831,16.71,20.441,17,20,17z"></path></g></svg>
+          <?php icon('cart') ?>
           Buy a license
         </a>
       </section>

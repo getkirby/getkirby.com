@@ -20,7 +20,7 @@
 
       <figure class="starterkit">
         <a href="https://download.getkirby.com" class="intrinsic" style="padding-bottom: 164.5%">
-          <?= $page->image('starterkit.jpg')->html(['alt' => 'The home page of Kirby\'s starterkit']) ?>
+          <?= $page->image('starterkit.jpg')->resize(800)->html(['alt' => 'The home page of Kirby\'s starterkit']) ?>
         </a>
       </figure>
 
