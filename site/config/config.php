@@ -96,5 +96,10 @@ return [
             'url',
             'xml'
         ],
-    ]
+    ],
+
+    'cloudinary' => [
+        'domain' => 'https://nnnnext.getkirby.com',
+    ],
+
 ];

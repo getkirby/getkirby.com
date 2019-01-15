@@ -9,13 +9,27 @@
           <h1>Kirby is the content&nbsp;management system that adapts to your projects like no other</h1>
           <figure>
             <span class="intrinsic" style="padding-bottom: 96.82%">
-              <?= $page->image('chameleon.jpg') ?>
+              <img
+                srcset="
+                  <?= $chameleon->resize(450)->url() ?>,
+                  <?= $chameleon->resize(800)->url() ?> 2x
+                "
+                src="<?= $chameleon->resize(450)->url() ?>"
+                alt="A cute chameleon on a branch"
+              >
             </span>
           </figure>
         </div>
         <figure class="home-hero-screenshot">
           <span class="intrinsic" style="padding-bottom: 45.39%">
-            <?= $page->image('hero.jpg')->html(['alt' => 'Screenshot of Kirby\'s control panel']) ?>
+            <img
+              srcset="
+                <?= $hero->resize(1024)->url() ?>,
+                <?= $hero->resize(1600)->url() ?> 2x
+              "
+              src="<?= $hero->resize(1024)->url() ?>"
+              alt="Screenshot of Kirby\'s control panel"
+            >
           </span>
         </figure>
       </div>
@@ -31,7 +45,14 @@
         </p>
         <figure>
           <span class="intrinsic" style="padding-bottom: 59.12%">
-            <?= $page->image('components.jpg', ['alt' => 'Interface elements for Kirby\'s control panel']) ?>
+            <img
+              srcset="
+                <?= $components->resize(1200)->url() ?>,
+                <?= $components->resize(2000)->url() ?> 2x
+              "
+              src="<?= $components->resize(1200)->url() ?>"
+              alt="Interface elements for Kirby\'s control panel"
+            >
           </span>
         </figure>
       </div>
@@ -43,20 +64,22 @@
       <div class="wrap">
         <div class="home-panel-container">
           <div class="home-panel-gallery">
+            <?php if ($firstImage = $page->images()->filterBy('name', '*=', 'interface')->nth(2)): ?>
             <figure class="screenshot">
               <span class="intrinsic" style="padding-bottom: 67%">
-                <?= $firstImage = $page->images()->filterBy('name', '*=', 'interface')->nth(2) ?>
+                <img src="<?= $firstImage->resize(1440)->url() ?>" alt="<?= $firstImage->caption() ?>">
               </span>
             </figure>
+            <?php endif ?>
           </div>
 
           <ul class="home-panel-gallery-links">
             <?php $n = 0; foreach ($page->images()->filterBy('name', '*=', 'interface') as $image): $n++; ?>
             <li>
-              <a href="<?= $image->url() ?>"<?php e($image->is($firstImage), ' aria-current="true"') ?>>
+              <a href="<?= $imageUrl = $image->resize(1440)->url() ?>"<?php e($image->is($firstImage), ' aria-current="true"') ?>>
                 <figure>
                   <span class="intrinsic" style="padding-bottom: 67%">
-                    <?= $image ?>
+                    <img src="<?= $imageUrl ?>" alt="">
                   </span>
                   <figcaption>
                     <h3 class="h6 -color:white -mb:small"><?= $image->caption() ?></h3>
@@ -82,7 +105,14 @@
         </header>
         <figure>
           <a href="https://github.com/sylvainjule/kirby-matomo" class="intrinsic" style="padding-bottom: 126.89%">
-            <?= $page->image('matomo.jpg')->html(['alt' => 'Screenshot of the Matomo plugin by Sylvain Julé']) ?>
+            <img
+              srcset="
+                <?= $matomo->resize(600)->url() ?>,
+                <?= $matomo->resize(1200)->url() ?> 2x
+              "
+              src="<?= $matomo->resize(600)->url() ?>"
+              alt="Screenshot of the Matomo plugin by Sylvain Julé"
+            >
           </a>
         </figure>
       </div>

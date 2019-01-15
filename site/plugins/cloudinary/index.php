@@ -1,5 +1,7 @@
 <?php
 
+use Kirby\Cms\FileVersion;
+
 function cloudinary($url, $params = [])
 {
     if (is_object($url) === true) {
@@ -23,12 +25,14 @@ function cloudinary($url, $params = [])
     $options = [];
 
     $map = [
-        'width'  => 'w',
-        'height' => 'h',
+        'width'   => 'w',
+        'height'  => 'h',
     ];
 
     foreach ($params as $key => $value) {
-        $options[] = ($map[$key] ?? $key) . '_' . $value;
+        if (isset($map[$key]) && !empty($value)) {
+            $options[] = $map[$key] . '_' . $value;
+        }
     }
 
     $options = implode(',', $options);
@@ -39,6 +43,16 @@ function cloudinary($url, $params = [])
 
 Kirby::plugin('getkirby/cloudinary', [
     'components' => [
+        'file::version' => function ($kirby, $file, $options = []) {
+            $url = cloudinary($file->mediaUrl(), $options);
+
+            return new FileVersion([
+                'modifications' => $options,
+                'original'      => $file,
+                'root'          => $file->root(),
+                'url'           => $url,
+            ]);
+        },
         'file::url' => function ($kirby, $file) {
             return cloudinary($file->mediaUrl());
         }
