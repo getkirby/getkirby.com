@@ -36,7 +36,7 @@ The Panel is built on top of our own Vue UI kit that can be used in all Panel pl
 
 ### Better fields
 
-With the new power of our Vue application, we are also able to introduce far better fields than before. More powerful structures, related pages, files and more are available and can be combined with the first amazing field plugins from our third-party developers.
+With the new power of our Vue application, we introduce far better fields than before. More powerful structures, related pages, files and more are available and can be combined with the first amazing field plugins from our third-party developers.
 
 (screenshot: fields.png)
 
@@ -52,7 +52,7 @@ Customizable page states give you maximum control over your workflow, from draft
 
 ## A new plugin system
 
-We've overhaulded our entire plugin system and built a more reliable and consistent environment for lots of new plugin types. Basically any part of Kirby can be extended or modified to fit your project.
+We've overhauled our entire plugin system and built a more reliable and consistent environment for lots of new plugin types. Basically any part of Kirby can be extended or modified to fit your project.
 
 (link: docs/guide/plugins text: Learn more…)
 
@@ -64,19 +64,19 @@ Kirby 3 has a built in REST API. You can comfortably create and edit your conten
 
 ## Virtual pages & external data sources
 
-In Kirby 3 you can mix file-based content with content from pretty much any other data source. Databases, APIs, spreadsheets, or anything else that's somehow parseable by PHP. In fact most parts of our (link: docs/reference text: reference) are generated live from PHP reflections of our source code.
+In Kirby 3 you can mix file-based content with content from pretty much any other data source. Databases, APIs, spreadsheets, or anything else that's somehow parsable by PHP. In fact most parts of our (link: docs/reference text: reference) are generated live from PHP reflections of our source code.
 
 (link: docs/cookbook/database/pages-from-database text: Learn more…)
 
 ## Asynchronous media API
 
-All images and other media files are loaded dynamically via the new media API. With built-in image manipulations, cache busting and extensible thumbnail generators you get the perfect environment for media-heavy sites.
+All images and other media files are loaded dynamically via the new media API. With built-in image manipulation, cache busting and extensible thumbnail generators, you get the perfect environment for media-heavy sites.
 
 (link: docs/guide/content/files text: Learn more…)
 
 ## Shared collections
 
-It often happens, that you need the same set of pages or files in multiple places across your site. Think of blog articles on your blog and on the home page for example. To keep things DRY, we have a new predefined collection feature, which you can use to make your collections of pages, files or users more accessible.
+It often happens that you need the same set of pages or files in multiple places across your site. Think of blog articles on your blog and on the home page for example. To keep things DRY, we have a new pre-defined collection feature, which you can use to make your collections of pages, files or users more accessible.
 
 ```php "/site/collections/articles.php"
 return function ($site) {
@@ -108,7 +108,7 @@ $kirby->collection("project-covers");
 
 ## Easy emails
 
-Our new email engine is built on top of PHPMailer and gives you a very comfortable API to send form replies, notifications and more. Add any file in Kirby as attachment and make use of the same template engine that you are already familiar with.
+Our new email engine built on top of PHPMailer gives you a very comfortable API to send form replies, notifications and more. Add any file in Kirby as attachment and use the same template engine that you are already familiar with.
 
 (link: docs/guide/emails text: Learn more…)
 
@@ -122,7 +122,7 @@ With Kirby 3 you can make use of our page cache or add custom caching of your ow
 
 This introduction could go on forever. We recommend you just give it a try and play around with all the new features yourself.
 
-The best startingpoint is our brand new (link: try text: starterkit):
+The best startingpoint is our brand new (link: try text: Starterkit):
 
 (screenshot: starterkit.jpg)
 
