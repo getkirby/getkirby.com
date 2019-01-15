@@ -62,7 +62,12 @@ class ClassPage extends Page
             ];
         }
 
-        return $this->children = Pages::factory($children, $this)->sortBy('slug');
+        $pages = Pages::factory($children, $this)
+                    ->sortBy('slug')
+                    ->filterBy('methodExists', true)
+                    ->filterBy('methodHidden', false);
+
+        return $this->children = $pages;
     }
 
     public function classExists(): bool
@@ -165,11 +170,6 @@ class ClassPage extends Page
         }
 
         return false;
-    }
-
-    public function methods()
-    {
-        return $this->children()->filterBy('methodExists', true);
     }
 
     public function missingMethods()
