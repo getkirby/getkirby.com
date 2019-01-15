@@ -17,6 +17,9 @@
 
 <?php if ($page->template()->name() === 'buy'): ?>
 <link rel="preload" href="https://cdn.paddle.com/paddle/paddle.js" as="script">
+<?php else: ?>
+<link rel="dns-prefetch" href="https://cdn.paddle.com">
+<link rel="preconnect" href="https://cdn.paddle.com">
 <?php endif ?>
 
 <!--  Replace `no-js` class in root element with `js` -->
