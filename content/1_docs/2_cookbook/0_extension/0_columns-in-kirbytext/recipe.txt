@@ -182,7 +182,7 @@ foreach($columns as $column) {
 }
 ```
 
-We use the `page()` helper to fetch the current page and pass it as the first parameter to the new Field object. The second argument is normally used for the field key,but is not needed in this case. As the last parameter we pass the string from the `$columns` array and trim it to remove any leading or trailing spaces.
+We use the `page()` helper to fetch the current page and pass it as the first parameter to the new Field object. The second argument is normally used for the field key, but is not needed in this case. As the last parameter we pass the string from the `$columns` array and trim it to remove any leading or trailing spaces.
 
 ### The final HTML
 
