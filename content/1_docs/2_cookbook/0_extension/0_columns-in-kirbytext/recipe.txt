@@ -21,7 +21,7 @@ Tags: kirbytag, columns
 Text:
 
 
-KirbyTags are really great for use cases like adding images or links, but they come to a limit if you want to nest  KirbyTags or want to add more than just a single line of text.
+(glossary: kirbytag text: KirbyTags) are really great for use cases like adding images or links, but they come to a limit if you want to nest  KirbyTags or want to add more than just a single line of text.
 
 One such use case is adding columns inside a textarea field. In this recipe, we show you how to solve such uses with (link: docs/reference/extensions/kirbytags text: KirbyTag Hooks). When we are ready, you can add columns like this:
 
@@ -57,21 +57,28 @@ KirbyTag Hooks are callbacks, which can be added to the `kirbytags:before` or `k
 
 Our final result looks like this:
 
-```php "/site/plugins/kirby-columns/index.php"
+```php "/site/plugins/columns/index.php"
 <?php
 Kirby::plugin('kirby/columns', [
   'hooks' => [
     'kirbytags:before' => function ($text) {
 
       $text = preg_replace_callback('!\(columns(…|\.{3})\)(.*?)\((…|\.{3})columns\)!is', function($matches) use($text) {
-        $columns = preg_split('!(\n|\r\n)\+{4}\s+(\n|\r\n)!', $matches[2]);
-        $html    = array();
+
+        $columns        = preg_split('!(\\n|\r\n)\+{4}\s+(\\n|\r\n)!', $matches[2]);
+        $html           = [];
+        $classItem      = option('kirby.columns.item', 'column');
+        $classContainer = option('kirby.columns.container', 'columns');
+
         foreach($columns as $column) {
-            $field = new Field(page(), '', trim($column));
-            $html[] = '<div class="' . option('kirby.columns.item', 'column') . '">' . kirbytext($field) . '</div>';
+            $field  = new Field(page(), '', trim($column));
+            $html[] = '<div class="' . $classItem . '">' . kirbytext($field) . '</div>';
         }
-        return '<div class="' . option('kirby.columns.container', 'columns') . '">' . implode($html) . '</div>';
+
+        return '<div class="' . $classContainer . '">' . implode($html) . '</div>';
+
       }, $text);
+
       return $text;
     }
 
@@ -80,14 +87,14 @@ Kirby::plugin('kirby/columns', [
 
 ```
 
-You can simply put this code into `/site/plugins/kirby-columns/index.php` and start using columns in your KirbyText fields. If you want to understand the details, continue reading.
+You can simply put this code into `/site/plugins/columns/index.php` and start using columns in your KirbyText fields. If you want to understand the details, continue reading.
 
 ### The regular expression voodoo
 
 As the first step to achieve the syntax for the columns, we need to fetch the columns tags:
 
 ```php
-$text = preg_replace_callback('!\(columns(…|\.{3})\)(.*)\((…|\.{3})columns\)!is', function($matches) use($text) {
+$text = preg_replace_callback('!\(columns(…|\.{3})\)(.*?)\((…|\.{3})columns\)!is', function($matches) use($text) {
   // do something with the stuff inside the brackets here
 }, $text);
 ```
@@ -147,7 +154,7 @@ Since arrays start their index at zero, we can get the content between the tags 
 Now that we got the content in between the tags, we can look for our separators and split the content into nice pieces for the columns.
 
 ```php
-$columns = preg_split('!(\n|\r\n)\+{4}\s+(\n|\r\n)!', $matches[2]);
+$columns = preg_split('!(\\n|\r\n)\+{4}\s+(\\n|\r\n)!', $matches[2]);
 ```
 
 Since we are regular expression experts now, the expression above isn't that complicated anymore. The only new things are `\R`,  which stands for any line break, and `\s`, which stands for spaces. So the expression above translates to: "Split the content when there's a line break, followed by four plus signs, follwed by one or more spaces, followed by a line break again."
@@ -203,7 +210,6 @@ As a last step, we add configurable class names to the div tags, so that you can
 
 ```php "/site/config.php"
 return [
-
   'kirby.columns.container' => 'grid', // instead of columns
   'kirby.columns.item' => 'grid-item', // instead of column
 ];
