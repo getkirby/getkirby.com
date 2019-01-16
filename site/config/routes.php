@@ -8,6 +8,12 @@ return [
         }
     ],
     [
+        'pattern' => 'blog/kosmos-(:any)',
+        'action'  => function ($path = null) {
+            go('kosmos/' . $path);
+        }
+    ],
+    [
         'pattern' => 'hooks/clean',
         'method'  => 'GET|POST',
         'action'  => function () {
