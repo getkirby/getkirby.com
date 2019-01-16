@@ -185,6 +185,14 @@ image:
 | -   | -   | -   |
 | (screenshot: pattern.png) | (screenshot: black.png) | (screenshot: white.png) |
 
+## Empty state
+
+With the `empty` option you can define the message which is displayed when no pages are listed in the section.
+
+```yaml
+empty: No articles yet
+```
+
 ## Filtering pages
 
 ### Parent
