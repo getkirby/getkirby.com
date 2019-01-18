@@ -23,12 +23,10 @@ For one page type you might need a list of all subpages, files and a few form el
 title: My blueprint
 
 columns:
-  left:
-    width: 2/3
+  - width: 2/3
     sections:
       # sections in the left column
-  right:
-    width: 1/3
+  - width: 1/3
     sections:
       # sections in the right column
 ```
@@ -44,8 +42,7 @@ title: My blueprint
 
 columns:
   # main
-  left:
-    width: 2/3
+  - width: 2/3
     sections:
 
       # a simple form
@@ -60,8 +57,7 @@ columns:
             type: textarea
 
   # sidebar
-  right:
-    width: 1/3
+  - width: 1/3
     sections:
 
       # a list of subpages
@@ -89,15 +85,13 @@ title: My blueprint
 columns:
 
   # sidebar
-  left:
-    width: 1/3
+  - width: 1/3
     sections:
       # a list of subpages …
       # a list of files …
 
   # main
-  right:
-    width: 2/3
+  - width: 2/3
     sections:
       # a simple form …
 ```
@@ -111,20 +105,17 @@ title: My blueprint
 columns:
 
   # sidebar left
-  left:
-    width: 1/4
+  - width: 1/4
     sections:
       # a list of subpages …
 
   # main
-  center:
-    width: 2/4
+  - width: 2/4
     sections:
       # a simple form …
 
   # sidebar right
-  left:
-    width: 1/4
+  - width: 1/4
     sections:
       # a list of files …
 ```
