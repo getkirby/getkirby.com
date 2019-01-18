@@ -23,6 +23,22 @@ text:
 
 Text:
 
+## Options
+
+You can use the following options in the options array (values are the default values):
+
+```php
+$options = [
+  'autoOrient' => true,
+  'crop'       => false,
+  'blur'       => false,
+  'grayscale'  => false,
+  'height'     => null,
+  'quality'    => 90,
+  'width'      => null,
+];    
+```
+        
 ## Example
 
 ```php
@@ -34,3 +50,7 @@ if($image = $page->image()):
     ])->html();
 endif;
 ```
+
+<info>
+Related: (link: docs/guide/templates/resize-images-on-the-fly text: Resizing images on the fly)
+</info>
