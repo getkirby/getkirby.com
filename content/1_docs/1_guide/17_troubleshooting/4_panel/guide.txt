@@ -1,0 +1,13 @@
+Title: Panel
+
+----
+Text:
+## OPcache
+
+When OPcache settings are too aggressive, it can happen that responses are not updated, for example resulting in changes in the Panel not being updated (e.g the user language or the display language).
+
+Adding this line in the `.htaccess` has helped users fixing this issue:
+
+```
+php_value opcache.revalidate_freq 0
+```
