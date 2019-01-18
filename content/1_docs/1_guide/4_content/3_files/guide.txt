@@ -29,7 +29,7 @@ You can access the page's files using handy methods for each common file type:
 | Archives | gz, gzip, tar, tgz, zip | `$page->archives()` |
 | Audio | aif, aiff, m4a, midi, mp3, wav | `$page->audio()` |
 | Code | css, js, json, java, htm, html, php, rb, py, scss, xml, yml | `$page->code()` |
-| Documents | csv, doc, docx, dotx, indd, md, mdown, pdf, ppt, pptx, rtf, xl, xls, xlsx, xltx | `$page->code()` |
+| Documents | csv, doc, docx, dotx, indd, md, mdown, pdf, ppt, pptx, rtf, xl, xls, xlsx, xltx | `$page->documents()` |
 | Images | ai, bmp, gif, eps, ico, jpeg, jpg, jpe, png, ps, psd, svg, tif, tiff, webp | `$page->images()` |
 | Videos | avi, flv, m4v, mov, movie, mpe, mpg, mp4, ogg, ogv, swf, webm | `$page->videos()` |
 
