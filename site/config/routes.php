@@ -1,8 +1,11 @@
 <?php
 
 return [
+    /**
+     * Legacy redirects
+     */
     [
-        'pattern' => 'reference/(:all?)',
+        'pattern' => 'docs/cheatsheet/(:all?)',
         'action'  => function ($path = null) {
             go('docs/reference/' . $path);
         }
@@ -11,6 +14,16 @@ return [
         'pattern' => 'blog/kosmos-(:any)',
         'action'  => function ($path = null) {
             go('kosmos/' . $path);
+        }
+    ],
+
+    /**
+     * New routes
+     */
+    [
+        'pattern' => 'reference/(:all?)',
+        'action'  => function ($path = null) {
+            go('docs/reference/' . $path);
         }
     ],
     [
