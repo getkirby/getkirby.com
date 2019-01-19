@@ -24,6 +24,8 @@ A multi-site setup extends Kirby’s possibility to define your (link: docs/gui
 
 ## Setting up your multisite
 
+To run multiple sites to one Kirby installation, you have to create a special `index.php` at the root:
+
 ```php "/index.php"
 <?php
 require 'kirby/bootstrap.php';
@@ -34,14 +36,14 @@ $sites = [
 ];
 
 $url  = Url::host();
-$site = $sites[$url];
+$root = $sites[$url];
 
 $kirby = new Kirby([
   'roots' => [
     'index'   => __DIR__,
-    'site'    => $site . '/site',
-    'content' => $site . '/content',
-    'media'   => $site . '/media'
+    'site'    => $root . '/site',
+    'content' => $root . '/content',
+    'media'   => $root . '/media'
   ],
   'url' => [
     'index'   => $url
@@ -51,8 +53,42 @@ $kirby = new Kirby([
 echo $kirby->render();
 ```
 
+Let's walk through this step by step: At first we load the `kirby/bootstrap.php` script and define our sites in an array with the domain as key and the file directory root as value:
+
+```php
+$sites = [
+  'my-awesome-site.com' => __DIR__ . '/my-site',
+  'my-awesome-shop.com' => __DIR__ . '/my-shop'
+];
+```
+
+After that we get the `Url::host()` method to retrieve the domain requested by the visitor and select the matching root for this one:
+
+```php
+$url  = Url::host();
+$root = $sites[$url];
+```
+
+At last we use this information to create a `$kirby` object with custom root and a custom url and output `$kirby->render()`:
+
+```php
+$kirby = new Kirby([
+  'roots' => [
+    'index'   => __DIR__,
+    'site'    => $root . '/site',
+    'content' => $root . '/content',
+    'media'   => $root . '/media'
+  ],
+  'url' => [
+    'index'   => $url
+  ]
+]);
+
+echo $kirby->render();
+```
 
 ## In the filesystem
+
 ```filesystem
   kirby/
   my-site/
@@ -67,3 +103,5 @@ echo $kirby->render();
 ```
 
 ## Licenses for your multisite
+
+Even when you are running multiple sites through the same setup and code, you will need a license for each of these sites: A license is valid for a single Kirby installation, running on a single domain. If you plan to add additional installations (i.e. under additional subdomains or subfolders) you need to (link: buy text: purchase licenses) for each of those installations.
