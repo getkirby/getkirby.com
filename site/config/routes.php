@@ -5,7 +5,10 @@ return [
      * Legacy redirects
      */
     [
-        'pattern' => 'docs/cheatsheet/(:all?)',
+        'pattern' => [
+            'docs/cheatsheet/(:all?)',
+            'docs/toolkit/(:all?)'
+        ],
         'action'  => function ($path = null) {
             go('docs/reference/' . $path);
         }
