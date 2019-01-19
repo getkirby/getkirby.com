@@ -36,6 +36,7 @@
     "clipboard": "^1.7.1",
     "es6-promise": "^4.2.4",
     "focus-visible": "^4.1.4",
+    "list.js": "^1.5.0",
     "respimage": "^1.4.2",
     "smoothscroll-polyfill": "^0.4.3",
     "svgo": "^1.0.4",

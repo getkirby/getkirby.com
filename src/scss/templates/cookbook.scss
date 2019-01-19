@@ -1,5 +1,29 @@
 @import "../includes";
 
+.hero {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.cookbook-search {
+  background: #000;
+  border: 0;
+  font: inherit;
+  padding: .25rem 1rem;
+  color: #fff;
+  box-shadow: $shadow;
+  margin-bottom: 1.5rem;
+  flex-basis: 100%;
+
+  @include mq(from m) {
+    flex-basis: calc(66.66% - 1rem);
+  }
+}
+.cookbook-search:focus {
+  color: $color-syntax-yellow;
+}
+
 /* -------------------------------------------------------------------------- */
 .cookbook-articles .h6 {
   position: relative;
