@@ -37,7 +37,7 @@ The default JPEG compression quality for all thumbnails
 ```php
 return [
   'thumbs' => [
-    'quality' => 80'
+    'quality' => '80'
   ]
 ];
 ```
