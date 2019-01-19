@@ -1,51 +1,20 @@
-Title:
-
-{{class.instance}}->filter($callback)
-
-----
-
-Excerpt:
-
-Filters the collection with a custom filter callback
-
-----
-
-Params: -
-  name: $callback
-  type: func
-  text: The callback function
-
-----
-
-Return:
-
-type: $pages
-text:
-
-----
-
 Text:
 
 ## Example
 
 ```php
 // fetch children with a title starting with 'Project'
-$items = $page->children()->filter(function($child) {
+$items = $page->children()->filter(function ($child) {
   return str::startsWith($child->title(), 'Project');
 });
 
 // fetch children with more than 2 images
-$items = $page->children()->filter(function($child) {
+$items = $page->children()->filter(function ($child) {
   return $child->images()->count() > 2;
 });
 
 // fetch visible children which have visible children
-$items = $page->children()->listed()->filter(function($child) {
+$items = $page->children()->listed()->filter(function ($child) {
   return $child->hasListedChildren();
-});
-
-//fetch children in the current language only
-$items = $page->children()->listed()->filter(function($child) {
-  return $child->content(site()->language()->code())->exists();
 });
 ```

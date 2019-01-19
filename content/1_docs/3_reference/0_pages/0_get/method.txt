@@ -1,28 +1,3 @@
-Title:
-
-{{class.instance}}->get($key, $default = null)
-
-----
-
-Excerpt:
-
-Returns a $page object by its full URI
-
-----
-Params: -
-  name: $key
-  type: string
-  text: 
-
-----
-
-Return:
-
-type: $page
-text:
-
-----
-
 Text:
 
 ## Example

@@ -1,33 +1,7 @@
-Title:
-
-{{class.instance}}->findByURI($uri)
-
-----
-
-Excerpt:
-
-Finds a $page object in the collection by its full URI
-
-----
-Params: -
-  name: $uri
-  type: string
-  text: The full URI of a page
-
-----
-
-Return:
-
-type: $page
-text:
-
-----
-
 Text:
 
 ## Example
 
 ```php
 <?= $page->children()->findByURI('some-page')->title() ?>
-
 ```

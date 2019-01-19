@@ -3,9 +3,9 @@ Text:
 ## Example
 
 ```php
-<h2>Latest subpages</h2>
+<h2>Unlisted subpages</h2>
 <ul>
-  <?php foreach($page->children()->limit(3) as $subpage): ?>
+  <?php foreach($page->children()->unlisted() as $subpage): ?>
   <li>
     <a href="<?= $subpage->url() ?>">
       <?= html($subpage->title()) ?>

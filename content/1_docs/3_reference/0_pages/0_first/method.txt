@@ -1,22 +1,3 @@
-Title:
-
-{{class.instance}}->first()
-
-----
-
-Excerpt:
-
-Returns the first $page object from the collection
-
-----
-
-Return:
-
-type: $page
-text: 
-
-----
-
 Text:
 
 ## Example

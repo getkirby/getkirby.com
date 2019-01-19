@@ -1,22 +1,3 @@
-Title:
-
-{{class.instance}}->findOpen()
-
-----
-
-Excerpt:
-
-Finds the open $page object in the collection
-
-----
-
-Return:
-
-type: $page
-text:
-
-----
-
 Text:
 
 ## Example

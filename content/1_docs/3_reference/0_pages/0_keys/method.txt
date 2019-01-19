@@ -1,22 +1,3 @@
-Title:
-
-{{class.instance}}->keys()
-
-----
-
-Excerpt:
-
-Returns all keys/URIs from the collection
-
-----
-
-Return:
-
-type: array
-text:
-
-----
-
 Text:
 
 ## Example

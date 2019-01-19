@@ -1,45 +1,15 @@
-Title:
-
-{{class.instance}}->search($query, $params = [])
-
-----
-
-Excerpt:
-
-Searches all pages in the collection and all descendants
-
-----
-
-Params: -
-  name: $query
-  type: string
-  text: The search term
--
-  name: $params
-  type: string | array
-  text: See examples below
-
-----
-
-Return:
-
-type: $pages
-text:
-
-----
-
 Text:
 
 ## Parameter options and defaults
 
-```
+```php
 $defaults = [
   'minlength' => 2,
   'fields'    => [],
   'words'     => false,
   'score'     => []
 ];
-```  
+```
 
 ## Examples
 

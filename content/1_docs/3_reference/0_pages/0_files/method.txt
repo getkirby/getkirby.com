@@ -1,27 +1,10 @@
-Title:
-
-{{class.instance}}->files()
-
-----
-
-Excerpt:
-
-Returns a $files collection with all files of each page in the collection
-
-----
-
-Return:
-
-type: $files object
-text:
-
-----
-
 Text:
+
+## Examples
 
 ```php
 <?php foreach($pages->files() as $file) : ?>
-<img src="<?= $file->url() ?>">
+  <img src="<?= $file->url() ?>">
 <?php endforeach ?>
 ```
 
@@ -30,5 +13,4 @@ To only get files of a certain type, you can filter by type, e.g.
 ```php
 $pages->files()->filterBy('type', 'image');
 $pages->files()->filterBy('type', 'video');
-//etc.
 ```

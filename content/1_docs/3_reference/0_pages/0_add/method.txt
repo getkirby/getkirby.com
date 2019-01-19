@@ -1,41 +1,25 @@
-Title:
-
-{{class.instance}}->add($page)
-
-----
-
-Excerpt:
-
-Adds a single page object or a collection to a collection
-
-----
-Params: -
-  name: $page
-  type: mixed
-  text: The id of a page, a page object or a $pages object
-
-----
-
-Return:
-
-type: $pages
-text:
-
-----
-
 Text:
 
-## Examples:
-```php
-<?php
-$collection = page('exhibitions')->children()->listed();
-$collection->add('somepage');
-?>
-```
+## Examples
+
+### Add single page by ID
 
 ```php
-<?php
+$collection = page('exhibitions')->children()->listed();
+$collection->add('somepage');
+```
+
+### Add single page by (link: docs/reference/page/create text: `$page` object)
+
+```php
+$collection = page('exhibitions')->children()->listed();
+$page       = Page::create([…]);
+$collection->add($page');
+```
+
+### Add second pages collection
+
+```php
 $collection = page('exhibitions')->children()->listed();
 $collection->add(page('news')->children()->listed());
-?>
 ```
