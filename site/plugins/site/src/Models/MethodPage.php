@@ -40,6 +40,16 @@ class MethodPage extends HelperPage
         return $this->content()->get('excerpt');
     }
 
+    public function githubSource()
+    {
+        if ($reflection = $this->reflection()) {
+            $file = $reflection->getFileName();
+            $path = Str::from($file, 'src/');
+
+            return option('github') . '/kirby/tree/develop/' . $path . '#L' . $this->line();
+        }
+    }
+
     public function inheritedFrom()
     {
         if ($parent = $this->reflection()->getDeclaringClass()) {
@@ -59,16 +69,6 @@ class MethodPage extends HelperPage
     public function isStatic(): bool
     {
         return $this->reflection()->isStatic() === true;
-    }
-
-    public function githubSource()
-    {
-        if ($reflection = $this->reflection()) {
-            $file = $reflection->getFileName();
-            $path = Str::from($file, 'src/');
-
-            return option('github') . '/kirby/tree/develop/' . $path . '#L' . $this->line();
-        }
     }
 
     public function line(): int
@@ -92,26 +92,27 @@ class MethodPage extends HelperPage
         }
     }
 
-    public function methodExists(): bool
-    {
-        return method_exists($this->className(), $this->methodName());
-    }
-
-    public function methodHidden(): bool
+    public function methodDeprecated(): bool
     {
         if ($this->docBlock() === false) {
             return false;
         }
 
-        if (is_null($this->docBlock()->getTag('internal')) === false) {
-            return true;
+        return is_null($this->docBlock()->getTag('deprecated')) === false;
+    }
+
+    public function methodExists(): bool
+    {
+        return method_exists($this->className(), $this->methodName());
+    }
+
+    public function methodInternal(): bool
+    {
+        if ($this->docBlock() === false) {
+            return false;
         }
 
-        if (is_null($this->docBlock()->getTag('deprecated')) === false) {
-            return true;
-        }
-
-        return false;
+        return is_null($this->docBlock()->getTag('internal')) === false;
     }
 
     public function methodScope()
