@@ -1,3 +1,3 @@
 | Parameter | Type | Required | Description |
 | - | - | - | - |
-| `name` | `string` | ✓ | The new name for the user |
+| `name` | `string` | `required` | The new name for the user |

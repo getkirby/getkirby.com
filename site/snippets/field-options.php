@@ -10,7 +10,7 @@
   <tr>
     <td><code><?= $row['prop'] ?></code></td>
     <td><code><?= $row['type'] ?? 'mixed' ?></code></td>
-    <td><?= $row['required'] ? '✓' : '×' ?></td>
+    <td><code><?= $row['required'] ? 'required' : '' ?></code></td>
     <td><code><?= $row['default'] ?? '' ?></code></td>
     <td style="width: 33.33%"><?= $row['comment'] ?></td>
   </tr>

@@ -1,3 +1,3 @@
 | Parameter | Type | Required | Description |
 | - | - | - | - |
-| `title` | `string` | ✓ | The new title for the site |
+| `title` | `string` | `required` | The new title for the site |

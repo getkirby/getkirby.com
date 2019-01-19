@@ -1,4 +1,4 @@
 | Parameter | Type | Required | Description |
 | - | - | - | - |
-| `email`    | `string` | ✓ | The email address of the user |
-| `password` | `string` | ✓ | The password of the user |
+| `email`    | `string` | `required` | The email address of the user |
+| `password` | `string` | `required` | The password of the user |

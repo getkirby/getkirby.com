@@ -1,3 +1,3 @@
 | Parameter | Type | Required | Description |
 | - | - | - | - |
-| `slug` | `string` | ✓ | The new slug for the page |
+| `slug` | `string` | `required` | The new slug for the page |
