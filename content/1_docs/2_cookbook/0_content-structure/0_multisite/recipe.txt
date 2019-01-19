@@ -1,0 +1,69 @@
+Title: Using Kirby for multiple sites
+
+----
+
+Category: content structure
+
+----
+
+Description: How to run multiple sites on the same Kirby setup
+
+----
+
+Tags: blog
+
+----
+
+Text:
+
+It is very easy to run multiple sites via the same Kirby setup. This can help you in maintaining your sites as you only need to keep updated a single setup.
+
+## Custom folder and URL setup
+
+The core of your multisite setup is defined by the possibility in Kirby to define your (link: docs/guide/configuration#custom-folder-setup text: custom folder setup) and (link: docs/guide/configuration#custom-url-setup text: custom URL setup).
+
+## Setting up your multisite
+
+```php "/index.php"
+<?php
+require 'kirby/bootstrap.php';
+
+$sites = [
+  'my-awesome-site.com' => __DIR__ . '/my-site',
+  'my-awesome-shop.com' => __DIR__ . '/my-shop'
+];
+
+$url  = Url::host();
+$site = $sites[$url];
+
+$kirby = new Kirby([
+  'roots' => [
+    'index'   => __DIR__,
+    'site'    => $site . '/site',
+    'content' => $site . '/content',
+    'media'   => $site . '/media'
+  ],
+  'url' => [
+    'index'   => $url
+  ]
+]);
+
+echo $kirby->render();
+```
+
+
+## In the filesystem
+```filesystem
+  kirby/
+  my-site/
+    content/
+    media/
+    site/
+  my-shop/
+    content/
+    media/
+    site/
+  index.php
+```
+
+## Licenses for your multisite
