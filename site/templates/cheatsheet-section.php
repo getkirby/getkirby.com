@@ -1,4 +1,4 @@
-<?php snippet('cheatsheet.header') ?>
+<?php snippet('cheatsheet.header', ['icons' => $page->svg()]) ?>
 
 <article class="cheatsheet-section cheatsheet-main cheatsheet-panel">
 

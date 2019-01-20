@@ -14,13 +14,9 @@
       <?php foreach ($entries as $entry): ?>
       <li>
         <a data-slug="<?= $entry->slug() ?>" data-title="<?= $entry->title() ?>" href="<?= $entry->url() ?>"<?php e($entry->isActive(), ' aria-current="page"' ) ?>>
-          <?php if ($entry->icon()->isNotEmpty()): ?>
-          <figure class="cheatsheet-entry-icon">
-            <svg>
-              <use xlink:href="#<?= $entry->icon() ?>" />
-            </svg>
-          </figure>
-          <?php endif ?>
+
+          <?php snippet('cheatsheet.icon', ['entry' => $entry]) ?>
+
           <span>
             <strong><?= $entry->title() ?> <span><?= $entry->info() ?></span></strong>
             <small><?= $entry->excerpt()->kt() ?></small>

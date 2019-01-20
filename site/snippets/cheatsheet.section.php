@@ -3,6 +3,8 @@
   <li>
     <a href="<?= $entry->url() ?>">
       <?= $entry->title() ?>
+
+      <span><?= $entry->meta() ?></span>
     </a>
   </li>
   <?php endforeach ?>

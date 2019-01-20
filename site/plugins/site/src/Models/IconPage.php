@@ -9,14 +9,19 @@ use Kirby\Cms\Pages;
 class IconPage extends Page
 {
 
+    public function excerpt(): Field
+    {
+        return new Field($this, 'excerpt', html('<k-icon type="' . $this->slug() . '">'));
+    }
+
     public function icon(): Field
     {
         return new Field($this, 'icon', 'icon-' . $this->slug());
     }
 
-    public function excerpt(): Field
+    public function meta()
     {
-        return new Field($this, 'excerpt', html('<k-icon type="' . $this->slug() . '">'));
+        return snippet('cheatsheet.icon', ['entry' => $this]);
     }
 
 }
