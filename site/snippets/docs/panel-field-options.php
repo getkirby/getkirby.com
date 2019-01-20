@@ -41,7 +41,7 @@ category:
     value: "{{ page.slug }}"
 ```
 
-As in the example above, all custom fields of a page can be accessed. You can even combine fields and use (link: docs/reference/field-methods text: field methods):
+As in the example above, all custom fields of a page can be accessed. You can even combine fields and use (link: docs/reference/templates/field-methods text: field methods):
 
 ```yaml
 category:
@@ -66,7 +66,7 @@ category:
   query: site.taxonomy.split
 ```
 
-Of course you get the same flexibility with those array values, to modify the result text and stored value. Each item in the array will automatically be converted into an object with a `key` and `value` property. Those properties are regular Kirby content fields and you can use all (link: docs/reference/field-methods text: field methods) to work with them further. Items in the array need to be referenced as `arrayItem`
+Of course you get the same flexibility with those array values, to modify the result text and stored value. Each item in the array will automatically be converted into an object with a `key` and `value` property. Those properties are regular Kirby content fields and you can use all (link: docs/reference/templates/field-methods text: field methods) to work with them further. Items in the array need to be referenced as `arrayItem`
 
 ```yaml
 category:

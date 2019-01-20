@@ -62,12 +62,12 @@ option('someOtherOption', 'my fallback');
 
 ### All configuration options
 
-(link: docs/reference/options text: All config options)
+(link: docs/reference/system/options text: All config options)
 
 
 ## Hooks and Routes
 
-You can register (link: docs/reference/extensions/hooks text: hooks) or (link: docs/guide/routing text: routes) in your `config.php` if you don't want to create a plugin for them.
+You can register (link: docs/reference/plugins/extensions/hooks text: hooks) or (link: docs/guide/routing text: routes) in your `config.php` if you don't want to create a plugin for them.
 
 ```php "/site/config/config.php"
 <?php
@@ -84,7 +84,7 @@ return [
 
 ### All hooks
 
-(link: docs/reference/hooks text: All hooks)
+(link: docs/reference/plugins/hooks text: All hooks)
 
 ## Multi-environment setup
 
@@ -127,7 +127,7 @@ echo $kirby->render();
 
 ### All configurable roots
 
-(link: docs/reference/roots text: All roots)
+(link: docs/reference/system/roots text: All roots)
 
 ### Public folder setup
 
@@ -190,8 +190,8 @@ echo $kirby->render();
 
 ### All configurable URLs
 
-(link: docs/reference/urls text: All URLs)
+(link: docs/reference/system/urls text: All URLs)
 
 ## Panel configuration
 
-The Panel has **(link: docs/reference/options/panel text: additional configuration options)** to include custom CSS and JS files, to move it to a different subfolder or to switch it off entirely.
+The Panel has **(link: docs/reference/system/options/panel text: additional configuration options)** to include custom CSS and JS files, to move it to a different subfolder or to switch it off entirely.

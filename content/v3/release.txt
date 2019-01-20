@@ -32,7 +32,7 @@ Users get a huge upgrade and can have their own files, fields and the same flexi
 
 The Panel is built on top of our own Vue UI kit that can be used in all Panel plugins to build incredibly feature-rich extensions with just a few lines of code.
 
-(link: docs/reference/ui text: Learn more…)
+(link: docs/reference/plugins/ui text: Learn more…)
 
 ### Better fields
 
@@ -40,7 +40,7 @@ With the new power of our Vue application, we introduce far better fields than b
 
 (screenshot: fields.png)
 
-(link: docs/reference/fields text: Learn more…)
+(link: docs/reference/panel/fields text: Learn more…)
 
 ## Drafts & custom publishing workflows
 

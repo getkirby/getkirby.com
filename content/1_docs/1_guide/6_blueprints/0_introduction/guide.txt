@@ -26,7 +26,7 @@ The Panel layouts for  `site`, `pages`, `files` and `users` all get their own bl
 /site/blueprints/users/
 ```
 
-(reference: blueprints)
+(reference: panel/blueprints)
 
 
 ## Presets

@@ -103,19 +103,19 @@ If you are updating from an early Kirby 2 version and still use `.php` files for
 
 The old subpage and file settings are no longer compatible with Kirby 3. Files are now added via files sections, subpages via pages sections, and files get their own blueprints with meta data:
 
-- (link: docs/reference/sections/pages text: Pages sections)
-- (link: docs/reference/sections/files text: Files sections)
+- (link: docs/reference/panel/sections/pages text: Pages sections)
+- (link: docs/reference/panel/sections/files text: Files sections)
 - (link: docs/guide/content/files text: File meta data)
 
 The fields will work as before but you might want to restructure them to leverage the (link: docs/guide/blueprints/layout text: new layout features) sections, columns and tabs that give you much more control over the look of forms in the Panel.
 
 ### Sort numbering of subpages
 
-The `num` blueprint option to set the numbering scheme for pages is no longer set in the parent page blueprint, but in the page blueprint to which the numbering is actually applied. Details: (link: docs/reference/blueprints/page text: General blueprint options)
+The `num` blueprint option to set the numbering scheme for pages is no longer set in the parent page blueprint, but in the page blueprint to which the numbering is actually applied. Details: (link: docs/reference/panel/blueprints/page text: General blueprint options)
 
 ### Remove blueprint-based subpage builder
 
-The option to auto-create subpages via a blueprint setting no longer exists. You can use a (link: docs/reference/hooks/page-create-after text: `page.create:after` hook) to achieve the same instead. In fact, you can even define a custom blueprint setting that completely recreates this functionality using Kirby's new `$page->blueprint()` method.
+The option to auto-create subpages via a blueprint setting no longer exists. You can use a (link: docs/reference/plugins/hooks/page-create-after text: `page.create:after` hook) to achieve the same instead. In fact, you can even define a custom blueprint setting that completely recreates this functionality using Kirby's new `$page->blueprint()` method.
 
 In your blueprint:
 
@@ -172,18 +172,18 @@ The option to make a field readonly (`readonly: true`)  has been replaced with t
 
 The following field types no longer exist and have to be replaced:
 
-- user field => (link: docs/reference/fields/users text: users field)
-- page field => (link: docs/reference/fields/pages text: pages field)
-- image field => (link: docs/reference/fields/files text: files field)
-- checkbox field => (link: docs/reference/fields/toggle text: toggle field)
-- datetime field => (link: docs/reference/fields/date text: date field) with `time` option
+- user field => (link: docs/reference/panel/fields/users text: users field)
+- page field => (link: docs/reference/panel/fields/pages text: pages field)
+- image field => (link: docs/reference/panel/fields/files text: files field)
+- checkbox field => (link: docs/reference/panel/fields/toggle text: toggle field)
+- datetime field => (link: docs/reference/panel/fields/date text: date field) with `time` option
 
 Also remove or update custom field types, see (link: #plugins-and-extensions text: plugins and extensions)
 
 
 ### Dashbord and widgets
 
-The Kirby 2 Dashboards no longer exists in Kirby 3. With the Dashboard, Panel widgets are gone. Widgets can be replaced with (link: docs/reference/extensions/sections text: custom Panel sections).
+The Kirby 2 Dashboards no longer exists in Kirby 3. With the Dashboard, Panel widgets are gone. Widgets can be replaced with (link: docs/reference/plugins/extensions/sections text: custom Panel sections).
 
 ## Configuration
 
@@ -226,7 +226,7 @@ Then in your templates, snippets etc.:
 
 ### Changed config options
 
-- `panel.session.timeout`/`panel.session.lifetime` are now handled via the (link: docs/reference/options/session text: session options).
+- `panel.session.timeout`/`panel.session.lifetime` are now handled via the (link: docs/reference/system/options/session text: session options).
 
 
 ## Frontend
@@ -274,11 +274,11 @@ return function ($kirby) {
 
 ### Page status
 
-While filter methods like `visible()`, `invisible()` and related Pages methods will still work, these are now deprecated. To make your project future-proof, we recommend that you replace them with (link: docs/reference/pages/listed text: `listed`)/(link: docs/reference/pages/unlisted text: `unlisted`)/(link: docs/reference/pages/published text: `published`) and related methods as required.
+While filter methods like `visible()`, `invisible()` and related Pages methods will still work, these are now deprecated. To make your project future-proof, we recommend that you replace them with (link: docs/reference/objects/pages/listed text: `listed`)/(link: docs/reference/objects/pages/unlisted text: `unlisted`)/(link: docs/reference/objects/pages/published text: `published`) and related methods as required.
 
 ### KirbyText pre/post filters
 
-(link: docs/reference/hooks/kirbytags-before text: KirbyText pre) and (link: docs/reference/hooks/kirbytags-after text: KirbyText post) filters now have to be registered as hooks.
+(link: docs/reference/plugins/hooks/kirbytags-before text: KirbyText pre) and (link: docs/reference/plugins/hooks/kirbytags-after text: KirbyText post) filters now have to be registered as hooks.
 
 
 ### Sending email
@@ -342,7 +342,7 @@ $kirby->page('some/page')->delete();
 
 ### Defining languages
 
-(link: docs/guide/languages/introduction text: Languages) are now defined in the `/site/languages` folder, not in your `/site/config.php`file anymore. Users can now add or remove new languages through the Panel, if the (link: docs/reference/options/languages text: `languages` option) is enabled in the config settings.
+(link: docs/guide/languages/introduction text: Languages) are now defined in the `/site/languages` folder, not in your `/site/config.php`file anymore. Users can now add or remove new languages through the Panel, if the (link: docs/reference/system/options/languages text: `languages` option) is enabled in the config settings.
 
 ### Fetching language variables
 
@@ -371,34 +371,34 @@ The toolkit has been completely rewritten, new methods have been added, others r
 | Toolkit class  |  Replacement |
 |---|---|
 | Bitmask | --  |
-| Brick  | (link: docs/reference/html text: Kirby\Toolkit\Html)  |
+| Brick  | (link: docs/reference/tools/html text: Kirby\Toolkit\Html)  |
 | C | -- |
 | Cache  | Kirby\Cache  |
-| Cookie  | (link: docs/reference/cookie text: Kirby\Http\Cookie)  |
+| Cookie  | (link: docs/reference/tools/cookie text: Kirby\Http\Cookie)  |
 | Crypt  | -- |
-| Data  | (link: docs/reference/data text: Kirby\Data)  |
+| Data  | (link: docs/reference/tools/data text: Kirby\Data)  |
 | Database  | Kirby\Database  |
 | Db  | Kirby\Database\Db   |
 | Detect | Kirby\CMS\System |
 | Dimensions  | Kirby\Image\Dimensions  |
 | Email  | (link: docs/reference/email text: Kirby\Email) |
-| Embed   |  (link: docs/reference/helpers text: YouTube, Vimeo and Gist helpers) |
+| Embed   |  (link: docs/reference/templates/helpers text: YouTube, Vimeo and Gist helpers) |
 | Error  | Kirby\Exception  |
 | ErrorReporting  | Kirby\Exception  |
 | Exif  | Kirby\Image\Exif  |
 | Folder  | -- |
-| Header | (link: docs/reference/header text: Kirby\Http\Header) |
+| Header | (link: docs/reference/tools/header text: Kirby\Http\Header) |
 | I  | Kirby\Toolkit\Iterator |
 | L  | Kirby\Toolkit\I18n  |
 | Media  | Kirby\Image  |
 | Password  | -- |
-| R  | (link: docs/reference/request text: Kirby\Http\Request)  |
+| R  | (link: docs/reference/objects/request text: Kirby\Http\Request)  |
 | Redirect  | Kirby\Http\Response\Redirect  |
 | Remote  | Kirby\Http\Remote  |
 | Response  | Kirby\Http\Response  |
 | Router  | Kirby\Http\Router  |
 | S  | Kirby\Session  |
-| Server  | (link: docs/reference/server text: Kirby\Http\Server)  |
+| Server  | (link: docs/reference/tools/server text: Kirby\Http\Server)  |
 | Sql  | Kirby\Database\Sql  |
 | System  | --  |
 | Thumb  | Kirby\Image  |
@@ -407,7 +407,7 @@ The toolkit has been completely rewritten, new methods have been added, others r
 | Upload  | Kirby\Api  |
 | Url  | Kirby\Http\Url  |
 | Visitor  | Kirby\Http\Visitor  |
-| YAML  | (link: docs/reference/data text: Kirby\Data\Yaml)  |
+| YAML  | (link: docs/reference/tools/data text: Kirby\Data\Yaml)  |
 
 The Toolkit classes are now in the  `Kirby\Toolkit` namespace.
 
@@ -421,7 +421,7 @@ As a next step, replace old plugins with new ones where available and/or port yo
 
 ### KirbyTags
 
-(link: docs/reference/kirbytags text: KirbyTags) are now defined in a plugin file.
+(link: docs/reference/objects/kirbytags text: KirbyTags) are now defined in a plugin file.
 
 
 ## Getting stuck?

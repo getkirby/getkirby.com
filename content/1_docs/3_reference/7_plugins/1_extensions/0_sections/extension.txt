@@ -1,0 +1,264 @@
+Title: Sections
+
+----
+
+Guide: blueprints/layout
+
+----
+
+Text:
+
+In the Panel you can use sections to layout each view. By default, Kirby offers sections for pages, files, fields and info boxes. Those can be arranged in columns and tabs to give you an incredibly powerful setup for each content type.
+
+With section plugins there's hardly any use case or integration that could not be covered by the Panel.
+
+## Fields vs. Sections
+
+As a rule of thumb **field plugins** should be used if content is stored in any way. That can be simple form inputs, but also something like our structure field that stores its content as yaml.
+
+**Section plugins** should be used for anything else that you want to integrate in the Panel interface.
+
+Just like fields, sections can be used in any blueprint — no matter if it's the site.yml, page blueprints, file blueprints or user blueprints.
+
+## What makes a section plugin?
+
+- PHP code for the REST API: `index.php`
+- Vue code for the Panel: `index.js`
+- Optional CSS: `index.css`
+
+## PHP definition
+
+Let's start with a PHP plugin file.
+
+```php "/site/plugins/modified/index.php"
+Kirby::plugin('yourname/modified', [
+    'sections' => [
+        'modified' => [
+            // the section code goes here
+        ]
+    ]
+]);
+```
+
+The array key `hello` sets the section type that can later be used in your blueprints.
+
+### Section properties
+
+Sections can have many options in your blueprint, such as a headline or the layout option for pages and files.
+
+Those property values from the blueprint will be sent to the section via the REST API and the Vue component can work with them to display the section accordingly.
+
+Properties are defined with the `props` array
+
+```php "/site/plugins/modified/index.php"
+Kirby::plugin('yourname/modified', [
+    'fields' => [
+        'modified' => [
+            'props' => [
+                'headline' => function ($headline) {
+                    return $headline;
+                }
+            ]
+        ]
+    ]
+]);
+```
+
+A property is always a combination of a key (the property name) and a function (the property setter).
+
+The property definition above instructs the REST API to process the value from the blueprint:
+
+```yaml "Blueprint"
+modified:
+  type: modified
+  headline: Last modified
+```
+
+```json "API response"
+hello: {
+  headline: "Last updates"
+}
+```
+
+**Required properties**
+
+```php
+'props' => [
+    'headline' => function ($headline) {
+        return $headline;
+    }
+]
+```
+**Optional properties**
+
+```php
+'props' => [
+    'headline' => function ($headline = null) {
+        return $headline;
+    }
+]
+```
+**Default values**
+
+```php
+'props' => [
+    'headline' => function ($headline = 'Last modified') {
+        return $headline;
+    }
+]
+```
+
+**Type hinting**
+
+```php
+'props' => [
+    'headline' => function (string $headline) {
+        return $headline;
+    }
+]
+```
+
+**Translated values**
+
+```php
+'props' => [
+    'headline' => function (string $headline) {
+        return I18n::translate($headline);
+    }
+]
+```
+
+**Modified properities**
+
+```php
+'props' => [
+    'headline' => function (string $headline) {
+        return 'Section: ' . $headline;
+    }
+]
+```
+
+### Computed values
+
+If you need to pass additional values to the field, that are not defined by properties in the blueprint, you can use computed values.
+
+```php "/site/plugins/modified/index.php"
+Kirby::plugin('yourname/modified', [
+    'fields' => [
+        'modified' => [
+            'props' => [
+                'headline' => function (string $headline) {
+                    return $headline;
+                },
+            ],
+            'computed' => [
+                'text' => function () {
+                    return 'The page has been modified at ' . $this->model()->modified('d.m.Y H:i:s');
+                }
+            ]
+        ]
+    ]
+]);
+```
+
+```yaml "Blueprint"
+modified:
+    type: modified
+    headline: Last update
+```
+
+```json "API Response"
+modified: {
+    headline: "Last update",
+    text: "The page has been modified at 12.12.2012 22:33:00",
+  }
+```
+
+## Vue component
+
+After finishing the PHP backend part of the field, we can now start developing the (glossary: vue) component. Although our Vue plugin API is really easy to read, it makes sense to check out the [Vue docs](https://vuejs.org/), if you have never worked with it.
+
+First, we will need an additional `index.js` file for our javascript code:
+
+```js "/site/plugins/modified/index.js"
+panel.plugin('yourname/modified', {
+  sections: {
+    modified: {
+      // your field code goes here.
+      // very similar to the backend!
+    }
+  }
+});
+```
+
+### Just a Vue component
+
+Though we have added some wrapper code, the field object is just a normal Vue component definition. You can check out the [Vue docs](https://vuejs.org/) for all component options and use them all.
+
+### Section data
+
+Unlike field components, all sections are loaded asynchrounously and only receive their data from the backend when they are loaded. This way we can build complex sections without blocking the rest of the interface.
+
+Each section plugin automatically inherits a load method, that can be used to load the data from the backend.
+
+To fetch the options from the backend, you must define the data object first and then populate it, when the section gets loaded. Here's an example:
+
+```js "/site/plugins/modified/index.js"
+panel.plugin('yourname/modified', {
+  sections: {
+    modified: {
+      data: function () {
+        return {
+          headline: null,
+          text: null
+        }
+      },
+      created: function() {
+        this.load().then(function (response) {
+          this.headline = response.headline;
+          this.text     = response.text;
+        });
+      }
+    }
+  }
+});
+```
+
+This has to be done for all properties as well as computed values defined in the (link: #php-definition text: PHP field definition).
+
+### Template
+
+Once the data is loaded, we can work with it in the template.
+
+```js "/site/plugins/modified/index.js"
+panel.plugin('yourname/modified', {
+  sections: {
+    modified: {
+      data: function () {
+        return {
+          headline: null,
+          text: null
+        }
+      },
+      created: function() {
+        this.load().then(function (response) {
+          this.headline = response.headline;
+          this.text     = response.text;
+        });
+      },
+      template: `
+        <section class="k-modified-section">
+          <k-headline>{{ headline }}</k-headline>
+          <k-text>{{ text }}</k-text>
+        </section>
+      `
+    }
+  }
+});
+```
+
+## CSS styles
+
+If you need additional CSS for your section plugin, you can create an optional `index.css`. Kirby will automatically concatenate and load this in combination with the other plugins' CSS files.
+
+Please make sure to check for our (link: docs/reference/plugins/ui text: UI kit components) and available styles before you implement your own CSS rules for something that already exists.

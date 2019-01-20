@@ -56,12 +56,12 @@ if ($related->count() > 0):
 <?php endif ?>
 ```
 
-We use the field method [`->toPages()`](/docs/reference/field-methods/to-pages) to convert the (glossary: yaml text: YAML) list of page ids from the field to a pages collection. After that we can iterate over the pages collection and use the familiar (link: docs/guide/templates/php-api text: Kirby PHP API).
+We use the field method [`->toPages()`](/docs/reference/templates/field-methods/to-pages) to convert the (glossary: yaml text: YAML) list of page ids from the field to a pages collection. After that we can iterate over the pages collection and use the familiar (link: docs/guide/templates/php-api text: Kirby PHP API).
 
 
 ## In the Panel
 
-If you use the (glossary: panel), you have to add the `related` field to your (glossary: blueprint text: blueprint). The **(link: docs/reference/fields/pages text: pages field)** offers a great way to select one or more related articles.
+If you use the (glossary: panel), you have to add the `related` field to your (glossary: blueprint text: blueprint). The **(link: docs/reference/panel/fields/pages text: pages field)** offers a great way to select one or more related articles.
 
 
 ```yaml "/site/blueprints/pages/note.yml"
@@ -71,6 +71,6 @@ If you use the (glossary: panel), you have to add the `related` field to your (g
     query: page.siblings(false)
 ```
 
-We use the `query` option to display all sibling pages of the current page in the list. By passing `false` to the [`siblings()`](/docs/reference/page/siblings) method, we exclude the current page from the list – we don't want the article itself to be a related article. (link: docs/guide/blueprints/query-language text: Learn more) about our query syntax.
+We use the `query` option to display all sibling pages of the current page in the list. By passing `false` to the [`siblings()`](/docs/reference/objects/page/siblings) method, we exclude the current page from the list – we don't want the article itself to be a related article. (link: docs/guide/blueprints/query-language text: Learn more) about our query syntax.
 
 (screenshot: related.png)

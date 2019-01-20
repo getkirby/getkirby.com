@@ -11,7 +11,7 @@ Text:
 
 A blueprint layout is made up of columns, and each column can hold any number of sections. Kirby ships with the following section types:
 
-(reference: sections)
+(reference: panel/sections)
 
 You can combine those section types in any way you like and also use multiple sections with the same type in a single blueprint layout.
 

@@ -35,14 +35,14 @@ Please check out the plugin docs for more information on the plugin definition a
 
 These plugin types just need to be converted to the new wrapper syntax:
 
-- (link: docs/reference/extensions/field-methods text: Field Methods)
-- (link: docs/reference/extensions/hooks text: Hooks)
-- (link: docs/reference/extensions/kirbytags text: KirbyTags)
-- (link: docs/reference/extensions/page-models text: Page Models)
+- (link: docs/reference/plugins/extensions/field-methods text: Field Methods)
+- (link: docs/reference/plugins/extensions/hooks text: Hooks)
+- (link: docs/reference/plugins/extensions/kirbytags text: KirbyTags)
+- (link: docs/reference/plugins/extensions/page-models text: Page Models)
 
 ## Plugin types that are no longer compatible
 
 These plugin types have no chance of being converted without rewriting them from scratch.
 
-- (link: docs/reference/extensions/core-components  text: Components)
-- (link: docs/reference/extensions/fields text: Fields)
+- (link: docs/reference/plugins/extensions/core-components  text: Components)
+- (link: docs/reference/plugins/extensions/fields text: Fields)

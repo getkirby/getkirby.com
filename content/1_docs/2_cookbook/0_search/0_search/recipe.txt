@@ -8,7 +8,7 @@ Description: Learn how to build a simple search for your site or sections of you
 
 Text:
 
-(link: docs/reference/site/search text: Search) is a built-in core feature. You can search all pages of your site or specific sets of pages. In this example you are going to learn how to build a simple search page, how to configure the search and how to display results.
+(link: docs/reference/objects/site/search text: Search) is a built-in core feature. You can search all pages of your site or specific sets of pages. In this example you are going to learn how to build a simple search page, how to configure the search and how to display results.
 
 ## Setting up the search page
 

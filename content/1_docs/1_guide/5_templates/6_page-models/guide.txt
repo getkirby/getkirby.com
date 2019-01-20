@@ -10,7 +10,7 @@ Text:
 
 ## Introduction
 
-Page models can be registered (link: docs/reference/extensions/page-models text: in a plugin) or created in the `/site/models` folder.
+Page models can be registered (link: docs/reference/plugins/extensions/page-models text: in a plugin) or created in the `/site/models` folder.
 
 A page model definition is a PHP file with the same name as the template of the page you want to extend.
 
@@ -94,4 +94,4 @@ By calling `parent::images()` in this example, we can refer to the original imag
 
 ## Page model plugins
 
-You can define page models in plugins to reuse them in other projects or to share them with the community. (link: docs/reference/extensions/page-models text: Learn more about page model plugins).
+You can define page models in plugins to reuse them in other projects or to share them with the community. (link: docs/reference/plugins/extensions/page-models text: Learn more about page model plugins).

@@ -20,7 +20,7 @@ Text:
 
 5, 4, 3, 2, 1…, sorting content is an everyday developer's task when dealing with all sorts of content collections: articles, events, images or similar data needs to be sorted, for example, by date or title, in descending or ascending order, or even by a more complicated sorting algorithm.
 
-Kirby's API comes with a built-in methods for sorting: the [sortBy()](docs/reference/pages/sort-by) method. This method can be used with all sorts of collections (pages, files, users, roles, translations, structure field items etc.).
+Kirby's API comes with a built-in methods for sorting: the [sortBy()](docs/reference/objects/pages/sort-by) method. This method can be used with all sorts of collections (pages, files, users, roles, translations, structure field items etc.).
 
 The `sortBy($field, $direction = 'desc', $method = SORT_REGULAR)` method accepts three parameters:
 

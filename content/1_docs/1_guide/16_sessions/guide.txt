@@ -134,5 +134,5 @@ $kirby->component('session')->collectGarbage();
 
 You can change the session settings with the `session` option in your `/site/config/config.php`.
 
-(link: docs/reference/options/session text: All session options…)
+(link: docs/reference/system/options/session text: All session options…)
 

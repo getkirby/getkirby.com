@@ -89,7 +89,7 @@ mySelect:
 
 ```
 
-Check out the (link: docs/reference/fields text: docs for each of these fields in the Reference).
+Check out the (link: docs/reference/panel/fields text: docs for each of these fields in the Reference).
 
 
 ## Querying the parent in pages sections

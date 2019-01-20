@@ -6,11 +6,10 @@
   </header>
   <div class="cheatsheet-main-scrollarea cheatsheet-panel-scrollarea">
 
-    <?php foreach (option('cheatsheet') as $groupName => $groupPages): ?>
+    <?php foreach ($kirby->collection('cheatsheet') as $group): ?>
+      <h2><?= $group->title() ?></h2>
 
-      <h2><?= $groupName ?></h2>
-
-      <?php foreach ($page->children()->listed()->find(...$groupPages) as $section): ?>
+      <?php foreach ($group->children()->listed() as $section): ?>
       <section class="-mb:large">
         <h3 id="<?= $section->slug() ?>"><a href="#<?= $section->slug() ?>"><?= $section->title() ?></a></h3>
         <?php snippet('cheatsheet.section', ['section' => $section]) ?>

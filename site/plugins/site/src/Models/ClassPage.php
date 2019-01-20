@@ -129,20 +129,6 @@ class ClassPage extends Page
         }
     }
 
-    public function extends()
-    {
-        if ($reflection = $this->reflection()) {
-            if ($extends = $reflection->getParentClass()) {
-                $path = str_replace('Kirby\\', '', $extends->getName());
-                $path = strtolower(str_replace('\\', '/', $path));
-
-                return page('docs/reference/framework/' . $path);
-            }
-        }
-
-        return null;
-    }
-
     public function githubDocs($action = 'tree'): string
     {
         return option('github') . '/getkirby.com/' . $action . '/develop/content/' . $this->diruri();

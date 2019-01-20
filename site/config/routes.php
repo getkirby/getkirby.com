@@ -14,6 +14,20 @@ return [
         }
     ],
     [
+        'pattern' => 'docs/reference/(:any)/(:all?)',
+        'action'  => function ($group, $path = null) {
+            if ($page = page('docs/reference/' . $group . '/' . $path)) {
+                return $page;
+            }
+
+            if ($page = page('docs/reference')->grandChildren()->listed()->findBy('uid', $group)) {
+                go($page->id() . '/'. $path);
+            }
+
+            go('error');
+        }
+    ],
+    [
         'pattern' => 'blog/kosmos-(:any)',
         'action'  => function ($path = null) {
             go('kosmos/' . $path);

@@ -31,7 +31,7 @@ This preset will automatically set up the form fields and a sidebar with subpage
 
 (screenshot: simple-page.png)
 
-Besides defining form fields, you can also control the files and pages settings with this preset. (link: docs/reference/presets/page text: Learn more…)
+Besides defining form fields, you can also control the files and pages settings with this preset. (link: docs/reference/panel/presets/page text: Learn more…)
 
 <info>
 The `page` preset is very close to Kirby 2 blueprints and the perfect starting point if you want to migrate an old project.
@@ -48,7 +48,7 @@ preset: pages
 
 (screenshot: blog.png)
 
-You have a lot of additional options to configure the way subpages are displayed and which templates are allowed. (link: docs/reference/presets/pages text: Learn more…)
+You have a lot of additional options to configure the way subpages are displayed and which templates are allowed. (link: docs/reference/panel/presets/pages text: Learn more…)
 
 ### Files
 
@@ -61,13 +61,13 @@ preset: files
 
 (screenshot: gallery.png)
 
-The `files` preset can do a lot more to set up the ratio, size, image cropping and info of each card. (link: docs/reference/presets/files text: Learn more…)
+The `files` preset can do a lot more to set up the ratio, size, image cropping and info of each card. (link: docs/reference/panel/presets/files text: Learn more…)
 
 ## Preset Docs
 
 For more docs on available preset options, check out our Reference:
 
-(reference: presets)
+(reference: panel/presets)
 
 
 

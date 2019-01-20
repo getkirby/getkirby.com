@@ -1,0 +1,3 @@
+Title: Plugins
+----
+Link: docs/reference/plugins/extensions

@@ -1,0 +1,143 @@
+Title: Info section
+
+----
+
+Excerpt:
+
+Add help text and info boxes to the Panel to help your editors
+
+----
+
+Text:
+
+The info section is perfect for any kind of static text that you want to place in a (glossary: Panel) layout. It can be used for general info, help, warnings and other guides for your editors.
+
+(screenshot: info.png)
+
+## Example
+
+```yaml
+title: Gallery
+
+sections:
+  info:
+    type: info
+    headline: Info
+    text: |
+      Please double-check the licenses and sources
+      of all images before you upload them to the gallery.
+```
+
+## Info section vs. info field
+
+The info section behaves pretty much like the (link: docs/reference/panel/fields/info text: info field). Why do we have both of them? Because both are useful. The info field can be placed in a field grid and is perfect to offer help within a form. The info section can be placed anywhere else, especially in layouts that don't need form fields.
+
+## Options
+
+(section-options: info)
+
+## Headline
+
+The headline will be displayed above the info section. You can pass a simple headline as a string or you can provide translations for multiple languages, if you have an international editing team.
+
+### Single language
+
+```yaml
+headline: This is some very important information
+```
+
+### Multiple languages
+```yaml
+headline:
+  en: Attention
+  de: Achtung
+  es: Attencion
+```
+
+### Placeholders
+
+You can inject information from the current page into the headline with template placeholders using our (link: docs/guide/blueprints/query-language text: query language).
+
+```yaml
+headline: "{{ page.title }} Information"
+```
+
+## Text
+
+The text can be a simple string, Markdown, KirbyText or HTML. Just like the headline, the text can also be translated.
+
+### Single language
+```yaml
+text: Info
+```
+
+### Multiple languages
+```yaml
+text:
+  en: This is some very important information
+  de: Das ist eine wichtige Mitteilung
+```
+
+### Multi-line text
+
+If you want to write multi-line text with paragraphs, you have to use a special YAML syntax for it.
+
+```yaml
+text: |
+  Dear Edith,
+
+  this is some multi line text with paragraphs.
+
+  Cheers,
+  A. Dmin
+```
+
+## Themes
+
+### info
+
+```yaml
+title: Gallery
+
+sections:
+  info:
+    type: info
+    headline: Info
+    theme: info
+    text: |
+      Please double-check the licenses and sources
+      of all images before you upload them to the gallery.
+```
+
+### negative
+
+(screenshot: negative.png)
+
+```yaml
+title: Gallery
+
+sections:
+  info:
+    type: info
+    headline: Attention
+    theme: negative
+    text: |
+      Please double-check the licenses and sources
+      of all images before you upload them to the gallery.
+```
+
+### positive
+
+(screenshot: positive.png)
+
+```yaml
+title: Gallery
+
+sections:
+  info:
+    type: info
+    headline: Wohooww
+    theme: positive
+    text: |
+      Just upload whatever you want. We get sued anyway.
+```

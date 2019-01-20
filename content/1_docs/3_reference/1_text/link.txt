@@ -1,0 +1,3 @@
+Title: Text
+----
+Link: docs/reference/text/kirbytags

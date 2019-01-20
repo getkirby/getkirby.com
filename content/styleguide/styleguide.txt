@@ -48,7 +48,7 @@ In general, you should use text formatting sparingly to prevent the text from be
 
 ### Headlines
 
-Use headlines generously to structure your content, this especially holds true for long pages with long text content. Do not use **H1** headlines, as these are reserved for the page title. You can use anything from **H2** and below. If the page template contains a table of contents at the top, each **H2** will be listed there to provide a quick overview of the page contents. Everything from **H3** and below is not included in the TOC. Use (link: docs/reference/markdown/headlines text: Markdown syntax) to mark up headers.
+Use headlines generously to structure your content, this especially holds true for long pages with long text content. Do not use **H1** headlines, as these are reserved for the page title. You can use anything from **H2** and below. If the page template contains a table of contents at the top, each **H2** will be listed there to provide a quick overview of the page contents. Everything from **H3** and below is not included in the TOC. Use (link: docs/reference/text/markdown/headlines text: Markdown syntax) to mark up headers.
 
 Headlines should never end with a colon:
 

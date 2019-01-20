@@ -1,0 +1,3 @@
+Title: Panel
+----
+Link: docs/reference/panel/blueprints

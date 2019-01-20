@@ -1,10 +1,3 @@
-<?php
-
-$sections = page('docs/reference')
-  ->children()
-  ->listed();
-
-?>
 
 <nav class="cheatsheet-sections cheatsheet-panel">
   <header class="cheatsheet-sections-header cheatsheet-panel-header">
@@ -14,11 +7,11 @@ $sections = page('docs/reference')
     </button>
   </header>
   <div class="cheatsheet-panel-scrollarea">
-    <?php foreach (option('cheatsheet') as $groupName => $groupPages): ?>
+    <?php foreach ($kirby->collection('cheatsheet') as $group): ?>
     <section>
-      <h2><?= $groupName ?></h2>
+      <h2><?= $group->title() ?></h2>
       <ul>
-        <?php foreach ($sections->find(...$groupPages) as $section): ?>
+        <?php foreach ($group->children()->listed() as $section): ?>
         <li>
           <a href="<?= $section->url() ?>"<?php e($section->isOpen(), ' aria-current="section"') ?>>
             <?= $section->title() ?>

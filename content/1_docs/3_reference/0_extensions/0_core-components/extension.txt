@@ -1,9 +1,0 @@
-Title: Core components
-
-----
-
-Text:
-
-With a plugin you can replace selected core components with your own implementation to modify their behaviour:
-
-(reference: components)

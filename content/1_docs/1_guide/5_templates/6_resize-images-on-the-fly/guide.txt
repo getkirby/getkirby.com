@@ -10,7 +10,7 @@ Text:
 
 With Kirby's new Thumbnail API, thumbs are generated asynchronously. This makes thumb creation feel at lot faster and creates less memory issues, which could easily become an issue with many images or when creating many different images sizes to serve responsive images.
 
-A new set of plugin points can be used to hook into the thumbnail API or the thumbnail URLs, see (link: docs/reference/extensions/core-components text: core components).
+A new set of plugin points can be used to hook into the thumbnail API or the thumbnail URLs, see (link: docs/reference/plugins/extensions/core-components text: core components).
 
 In a default setup, thumbnails are stored in the `/media` folder.
 
@@ -96,4 +96,4 @@ return [
 ];
 ```
 
-(link: docs/reference/options/thumbs text: All thumbs options)
+(link: docs/reference/system/options/thumbs text: All thumbs options)

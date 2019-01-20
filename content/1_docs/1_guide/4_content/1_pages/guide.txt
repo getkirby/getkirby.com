@@ -55,7 +55,7 @@ URLs can be modified via (link: docs/guide/routing text: Kirby's router).
 
 ## Creating page sections that allow adding pages
 
-Before a user can add new pages via the Panel, you have to set up a (link: docs/reference/sections/pages text: pages section) that has either the status `draft` or the status `all`.
+Before a user can add new pages via the Panel, you have to set up a (link: docs/reference/panel/sections/pages text: pages section) that has either the status `draft` or the status `all`.
 
 ## Creating Drafts
 

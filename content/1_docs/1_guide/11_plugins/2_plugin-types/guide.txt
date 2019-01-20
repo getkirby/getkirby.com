@@ -8,4 +8,4 @@ Intro: Kirby has an extensive plugin system for almost any system-relevant part.
 
 Text:
 
-(reference: extensions)
+(reference: plugins/extensions)

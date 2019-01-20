@@ -30,9 +30,9 @@ When you add fields manually, there is no way to validate what you enter into ea
 
 ## Fields in the Panel
 
-Before fields are available to be filled by users in the Panel, they need to be defined for each content model. These field definitions are done in blueprints. The Panel comes with many (link: docs/reference/fields text: predefined field types) that help with structuring your content. Field definitions in the Panel give you full control over what sort of content each field can contain.
+Before fields are available to be filled by users in the Panel, they need to be defined for each content model. These field definitions are done in blueprints. The Panel comes with many (link: docs/reference/panel/fields text: predefined field types) that help with structuring your content. Field definitions in the Panel give you full control over what sort of content each field can contain.
 
-A full list of available field types and their options is available in the (link: docs/reference/fields text: Reference). There are several plugins with custom field types available.
+A full list of available field types and their options is available in the (link: docs/reference/panel/fields text: Reference). There are several plugins with custom field types available.
 
 ## Naming fields
 
@@ -50,4 +50,4 @@ Field content is accessible in your templates via the field's name:
 <?= $page->text()->kirbytext() ?>
 <?= $page->date()->toDate('Y-m-d');
 ```
-The methods that are chained to the name of the field are field methods that allow you to modify the field content in multiple ways. You can find a full list of available field methods in the (link: docs/reference/field-methods text: Reference).
+The methods that are chained to the name of the field are field methods that allow you to modify the field content in multiple ways. You can find a full list of available field methods in the (link: docs/reference/templates/field-methods text: Reference).

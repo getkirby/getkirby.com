@@ -105,7 +105,7 @@ Kirby provides many ways to render files in your templates. Here are some exampl
 <?php endforeach ?>
 ```
 
-These are just some basic examples to give you an idea. You can filter and find files by type, template, by their meta data etc. More information on the available file and files methods in the (link: docs/reference/file text: Reference).
+These are just some basic examples to give you an idea. You can filter and find files by type, template, by their meta data etc. More information on the available file and files methods in the (link: docs/reference/objects/file text: Reference).
 
 ## Adding meta data to your files
 
@@ -195,4 +195,4 @@ A meta data blueprint can contain different options to define what sort of files
 
 ### Fields
 
-Finally, a meta data blueprint can have a set of fields. You are free to define any number of fields and the same (link: docs/reference/fields text: field types) as in page blueprints.
+Finally, a meta data blueprint can have a set of fields. You are free to define any number of fields and the same (link: docs/reference/panel/fields text: field types) as in page blueprints.

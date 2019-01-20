@@ -8,4 +8,4 @@ A KirbyText shortcut for adding elements like links, images, specially styled co
 
 ----
 
-Link: docs/reference/kirbytags
+Link: docs/reference/objects/kirbytags

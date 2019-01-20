@@ -185,7 +185,7 @@ In some situtation it is useful to get the index number of an element in the col
   <?php foreach($items as $item): ?>
   <li class="item-<?= $items->indexOf($item) ?>"><?= $item->title() ?></li>
   <?php endforeach ?>
-</ul>  
+</ul>
 ```
 ## Limiting the number of items
 
@@ -216,7 +216,7 @@ The same methods outlined above are not only available for pages, but also for c
 
 More methods in the Reference
 
-- (link: docs/reference/pages text: `$pages` methods)
-- (link: docs/reference/files text: `$files` methods)
-- (link: docs/reference/users text: `$users` methods)
+- (link: docs/reference/objects/pages text: `$pages` methods)
+- (link: docs/reference/objects/files text: `$files` methods)
+- (link: docs/reference/objects/users text: `$users` methods)
 

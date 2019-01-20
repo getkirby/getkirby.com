@@ -10,11 +10,11 @@ Text:
 
 ## Available form fields
 
-(reference: fields)
+(reference: panel/fields)
 
 ## Custom fields
 
-You can extend this list with your own field types by creating a (link: docs/reference/extensions/fields text: field plugin).
+You can extend this list with your own field types by creating a (link: docs/reference/plugins/extensions/fields text: field plugin).
 
 ## Naming fields
 

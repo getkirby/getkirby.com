@@ -21,7 +21,7 @@ If you want to extend Kirby in more meaningful ways such as by **extending Kirby
 
 ## Kirby::plugin() — one ring to rule them all
 
-All plugins are registered with Kirby's static `Kirby::plugin()` method. It doesn't matter if you want to create just a simple (link: docs/reference/extensions/kirbytags text: KirbyTag plugin) or a (link: docs/reference/extensions/fields text: custom field) for the Panel. `Kirby::plugin()` is your way to go.
+All plugins are registered with Kirby's static `Kirby::plugin()` method. It doesn't matter if you want to create just a simple (link: docs/reference/plugins/extensions/kirbytags text: KirbyTag plugin) or a (link: docs/reference/plugins/extensions/fields text: custom field) for the Panel. `Kirby::plugin()` is your way to go.
 
 ```php "/site/plugins/your-plugin/index.php"
 Kirby::plugin('my-name/hello-world', [

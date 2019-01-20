@@ -6,4 +6,4 @@ Entry:
 The smallest content unit in a Kirby content file, comparable to a column header in a database. Fields can have different fields types that are defined in a blueprint file.
 
 ----
-Link: docs/reference/fields
+Link: docs/reference/panel/fields

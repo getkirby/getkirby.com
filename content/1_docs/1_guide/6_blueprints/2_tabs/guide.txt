@@ -21,7 +21,7 @@ A tab definition has three options:
 - columns
 - icon
 
-The icon is optional. Please check out the (link: docs/reference/icons text: list of available icons). You can also use an emoji by pasting it directly into the blueprint.
+The icon is optional. Please check out the (link: docs/reference/panel/icons text: list of available icons). You can also use an emoji by pasting it directly into the blueprint.
 
 ```yaml
 title: My blueprint
