@@ -64,9 +64,13 @@ class ClassPage extends Page
 
         $pages = Pages::factory($children, $this)
                     ->filterBy('methodExists', true)
-                    ->filterBy('methodInternal', false)
-                    ->filterBy('methodDeprecated', false)
                     ->sortBy('slug');
+
+        if (param('advanced') !== 'true') {
+            $pages = $pages->filterBy('methodInternal', false)
+                           ->filterBy('methodDeprecated', false);
+
+        }
 
         return $this->children = $pages;
     }
