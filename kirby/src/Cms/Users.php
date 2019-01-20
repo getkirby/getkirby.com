@@ -6,11 +6,21 @@ use Kirby\Toolkit\Dir;
 use Kirby\Toolkit\Str;
 
 /**
+ * The `$users` class refers to a collection
+ * of users with or without Panel access. Like
+ * all collections, you can filter, modify,
+ * convert or check the users collection.
+ *
  * Extension of the Collection class that
  * provides a Users::factory method to convert
  * an array into a Users collection with User
  * objects and a Users::load method to load
  * user accounts from disk.
+ *
+ * @package   Kirby Cms
+ * @author    Bastian Allgeier <bastian@getkirby.com>
+ * @link      http://getkirby.com
+ * @copyright Bastian Allgeier
  */
 class Users extends Collection
 {

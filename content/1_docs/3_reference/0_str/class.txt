@@ -1,6 +1,1 @@
 Class: Kirby\Toolkit\Str
-
-----
-Excerpt:
-
-The String class provides a set of handy methods for string handling and manipulation.

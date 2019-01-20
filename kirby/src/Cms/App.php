@@ -29,9 +29,19 @@ use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Url;
 
 /**
+ * The `$kirby` object is the app instance of
+ * your Kirby installation. It's the central
+ * starting point to get all the different
+ * aspects of your site, like the options, urls,
+ * roots, languages, roles, etc.
+ *
  * The App object is a big-ass monolith that's
  * in the center between all the other CMS classes.
- * It's the $kirby object in templates and handles
+ *
+ * @package   Kirby Cms
+ * @author    Bastian Allgeier <bastian@getkirby.com>
+ * @link      http://getkirby.com
+ * @copyright Bastian Allgeier
  */
 class App
 {

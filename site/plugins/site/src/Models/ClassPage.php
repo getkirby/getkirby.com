@@ -17,11 +17,6 @@ class ClassPage extends Page
     protected $methodExists;
     protected $reflection;
 
-    public function pathCrumb(): string
-    {
-        return $this->parent()->pathCrumb() . '<span>\\</span>' . Html::a($this->url(), $this->classNameShort(), ['class' => 'link-reset']);
-    }
-
     public function children()
     {
 
@@ -112,12 +107,6 @@ class ClassPage extends Page
     public function excerpt(): Field
     {
 
-        $fromContent = $this->content()->get('excerpt');
-
-        if ($fromContent->isNotEmpty()) {
-            return $fromContent;
-        }
-
         $excerpt = null;
 
         if ($docBlock = $this->docBlock()) {
@@ -133,7 +122,11 @@ class ClassPage extends Page
             return new Field($this, 'excerpt', $excerpt);
         }
 
-        return $fromContent;
+        $fromContent = $this->content()->get('excerpt');
+
+        if ($fromContent->isNotEmpty()) {
+            return $fromContent;
+        }
     }
 
     public function extends()
@@ -189,6 +182,11 @@ class ClassPage extends Page
         }
 
         return $pages;
+    }
+
+    public function pathCrumb(): string
+    {
+        return $this->parent()->pathCrumb() . '<span>\\</span>' . Html::a($this->url(), $this->classNameShort(), ['class' => 'link-reset']);
     }
 
     public function reflection()

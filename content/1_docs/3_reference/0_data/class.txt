@@ -1,16 +1,10 @@
 Class: Kirby\Data\Data
 
 ----
-Excerpt:
 
-The Data class provides readers and writers for data. The class comes with three handlers for `json`, `yaml` and `txt` encoded data, but can be extended and customized.
-
-----
 Text:
 
-
 ## Example
-
 
 ### Reading a `json` file
 

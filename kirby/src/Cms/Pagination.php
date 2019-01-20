@@ -6,6 +6,14 @@ use Kirby\Http\Uri;
 use Kirby\Toolkit\Pagination as BasePagination;
 
 /**
+ * The `$pagination` object divides
+ * a collection of pages, files etc.
+ * into discrete pages consisting of
+ * the number of defined items. The
+ * pagination object can then be used
+ * to navigate between these pages,
+ * create a navigation etc.
+ *
  * The extended Pagination class handles
  * URLs in addition to the pagination features
  * from Kirby\Toolkit\Pagination

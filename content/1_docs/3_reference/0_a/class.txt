@@ -1,11 +1,7 @@
 Class: Kirby\Toolkit\A
 
 ----
-Excerpt:
 
-The A class provides a set of handy methods to simplify array handling and make it more consistent. The class contains methods for fetching elements from arrays, merging and sorting or shuffling arrays.
-
-----
 Text:
 
 The methods of the A class are called statically, i.e. without you having to create an object of the class first.

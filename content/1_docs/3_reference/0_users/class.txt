@@ -2,25 +2,14 @@ Class: Kirby\Cms\Users
 
 ----
 
-Alias: Users
-
-----
-
-Excerpt: 
-
-
-The `$users` class refers to a collection of users with or without Panel access. Like all collections, you can filter, modify, convert or check the users collection.
-
-----
 Text:
-
 
 ## How to get a `$users` object
 
 The users object is available via the `$kirby` object:
 
 ```php
-$users = $kirby->users(); 
+$users = $kirby->users();
 ```
 
 This will return a collection of all users of the site.

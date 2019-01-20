@@ -1,4 +1,1 @@
 Class: Kirby\Toolkit\Mime
-
-----
-Excerpt: The Mime class provides method for mime type detection or guessing from different criteria like extensions etc.

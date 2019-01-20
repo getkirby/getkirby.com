@@ -2,16 +2,6 @@ Class: Kirby\Cms\Files
 
 ----
 
-Alias: Files
-
-----
-
-Excerpt:
-
-The `$files` class extends the general `$collection` class and refers to a collection of files, i.e. images, documents etc. Files can be filtered, searched, converted, modified or evaluated with the following methods:
-
-----
-
 Text:
 
 ## How to get a files object

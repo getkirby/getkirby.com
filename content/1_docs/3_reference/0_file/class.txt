@@ -1,38 +1,33 @@
 Class: Kirby\Cms\File
 
 ----
-Excerpt:
 
-The `$file` class provides a set of methods that can be used when dealing with a single image or other media file, like getting the URL or resizing an image. It also handles file meta data.
-
-
-----
 Text:
 
 ## Details
-You can get a file object to use with these methods by fetching it from the site, a page or a user object.
+
+You can get a `$file` object to use with these methods by fetching it from the `$site`, a `$page` or a `$user` object.
 
 ### Site file
 ```php
-<?php if ($file = $page->images()->first()): ?>
+<?php if ($file = $site->files()->first()): ?>
 <img src="<?= $file->url() ?>" alt="">
 <?php endif ?>
 ```
 
 ### Page file
 ```php
-<?php if ($file = $site->images()->first()): ?>
+<?php if ($file = $page->files()->first()): ?>
 <img src="<?= $file->url() ?>" alt="">
 <?php endif ?>
 ```
 
 ### User file
 ```php
-<?php if ($file = $user->images()->first()): ?>
+<?php if ($file = $user->files()->first()): ?>
 <img src="<?= $file->url() ?>" alt="">
 <?php endif ?>
 ```
-
 
 <info>
 Note how we use an if statement here to check if we have a file object before we call the `url()` method to prevent errors in case the page doesn't have any files. Never forget to do this in your own code.

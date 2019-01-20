@@ -12,10 +12,10 @@ use Kirby\Toolkit\Str;
 use Throwable;
 
 /**
- * The Page class is the heart and soul of
- * Kirby. It is used to construct pages and
- * all their dependencies like children,
- * files, content, etc.
+ * The `$page` object is the heart and
+ * soul of Kirby. It is used to construct
+ * pages and all their dependencies like
+ * children, files, content, etc.
  *
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>

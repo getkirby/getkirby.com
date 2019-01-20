@@ -9,9 +9,10 @@ use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 
 /**
- * The Site class is the root element
+ * The `$site` object is the root element
  * for any site with pages. It represents
- * the main content folder with its site.txt
+ * the main content folder with its
+ * `site.txt`.
  *
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>

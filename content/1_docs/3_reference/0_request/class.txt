@@ -1,6 +1,7 @@
 Class: Kirby\Http\Request
 
 ----
+
 Text:
 
 ## How to get a `$request` object

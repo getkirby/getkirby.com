@@ -59,7 +59,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Low-level getter for items
+     * Low-level getter for elements
      *
      * @param  mixed $key
      * @return mixed
@@ -74,7 +74,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Low-level setter for collection items
+     * Low-level setter for elements
      *
      * @param string  $key    string or array
      * @param mixed   $value
@@ -96,7 +96,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Low-level item remover
+     * Low-level element remover
      *
      * @param mixed $key the name of the key
      */
@@ -106,7 +106,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Appends an element to the data array
+     * Appends an element
      *
      * @param  mixed      $key
      * @param  mixed      $item
@@ -124,17 +124,18 @@ class Collection extends Iterator
     }
 
     /**
-     * Creates chunks of the same size
+     * Creates chunks of the same size.
      * The last chunk may be smaller
+     * @internal
      *
-     * @param  int        $size  Number of items per chunk
-     * @return Collection        A new collection with an item for each chunk and
+     * @param  int        $size  Number of elements per chunk
+     * @return Collection        A new collection with an element for each chunk and
      *                           a sub collection in each chunk
      */
     public function chunk(int $size): self
     {
         // create a multidimensional array that is chunked with the given
-        // chunk size keep keys of the items
+        // chunk size keep keys of the elements
         $chunks = array_chunk($this->data, $size, true);
 
         // convert each chunk to a subcollection
@@ -167,7 +168,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Getter and setter for the collection data
+     * Getter and setter for the data
      *
      * @param  array $data
      * @return array|Collection
@@ -188,7 +189,8 @@ class Collection extends Iterator
     }
 
     /**
-     * Clone and remove all items from the collection
+     * Clone and remove all elements from the collection
+     * @internal
      *
      * @return Collection
      */
@@ -201,7 +203,8 @@ class Collection extends Iterator
     }
 
     /**
-     * Adds all items to the collection
+     * Adds all elements to the collection
+     * @internal
      *
      * @return Collection
      */
@@ -212,7 +215,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Filters the collection by a custom
+     * Filters elements by a custom
      * filter function or an array of filters
      *
      * @param Closure $filter
@@ -239,8 +242,8 @@ class Collection extends Iterator
     }
 
     /**
-     * Filters the collection by one of the predefined
-     * filter methods.
+     * Filters elements by one of the
+     * predefined filter methods.
      *
      * @param string $field
      * @return self
@@ -329,7 +332,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Find one or multiple collection items by id
+     * Find one or multiple elements by id
      *
      * @param string ...$keys
      * @return mixed
@@ -358,7 +361,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Find a single item by an attribute and its value
+     * Find a single element by an attribute and its value
      *
      * @param string $attribute
      * @param mixed $value
@@ -375,7 +378,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Find a single item by key (id)
+     * Find a single element by key (id)
      *
      * @param string $key
      * @return mixed
@@ -386,7 +389,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Returns the first element from the array
+     * Returns the first element
      *
      * @return mixed
      */
@@ -397,7 +400,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Returns the array in reverse order
+     * Returns the elements in reverse order
      *
      * @return Collection
      */
@@ -410,6 +413,7 @@ class Collection extends Iterator
 
     /**
      * Getter
+     * @internal
      *
      * @param  mixed  $key
      * @param  mixed  $default
@@ -421,10 +425,11 @@ class Collection extends Iterator
     }
 
     /**
-     * Extracts an attribute value from the given item
-     * in the collection. This is useful if items in the collection
+     * Extracts an attribute value from the given element
+     * in the collection. This is useful if elements in the collection
      * might be objects, arrays or anything else and you need to
      * get the value independently from that. We use it for filterBy.
+     * @internal
      *
      * @param array|object $item
      * @param string $attribute
@@ -463,10 +468,10 @@ class Collection extends Iterator
     }
 
     /**
-     * Groups the collection by a given callback
+     * Groups the elements by a given callback
      *
      * @param Closure $callback
-     * @return Collection A new collection with an item for each group and a subcollection in each group
+     * @return Collection A new collection with an element for each group and a subcollection in each group
      */
     public function group(Closure $callback): Collection
     {
@@ -497,7 +502,7 @@ class Collection extends Iterator
                 // create a new entry for the group if it does not exist yet
                 $groups[$value] = new static([$key => $item]);
             } else {
-                // add the item to an existing group
+                // add the element to an existing group
                 $groups[$value]->set($key, $item);
             }
         }
@@ -506,11 +511,11 @@ class Collection extends Iterator
     }
 
     /**
-     * Groups the collection by a given field
+     * Groups the elements by a given field
      *
      * @param string $field
      * @param bool $i
-     * @return Collection A new collection with an item for each group and a subcollection in each group
+     * @return Collection A new collection with an element for each group and a subcollection in each group
      */
     public function groupBy(string $field, bool $i = true)
     {
@@ -527,7 +532,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Checks if the collection has no items
+     * Checks if the number of elements is zero
      *
      * @return boolean
      */
@@ -537,7 +542,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Checks if the number of items in the collection is even
+     * Checks if the number of elements is even
      *
      * @return boolean
      */
@@ -547,7 +552,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Checks if the collection has no items
+     * CChecks if the number of elements is more than zero
      *
      * @return boolean
      */
@@ -557,7 +562,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Checks if the number of items in the collection is odd
+     * Checks if the number of elements is odd
      *
      * @return boolean
      */
@@ -567,7 +572,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Returns the last element from the collection
+     * Returns the last element
      *
      * @return mixed
      */
@@ -589,7 +594,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Map a function to each item in the collection
+     * Map a function to each element
      *
      * @param  callable $callback
      * @return Collection
@@ -771,7 +776,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Adds a new item to the collection
+     * Adds a new element to the collection
      *
      * @param  mixed  $key    string or array
      * @param  mixed  $value
@@ -790,7 +795,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Shuffle all elements in the array
+     * Shuffle all elements
      *
      * @return Collection
      */
@@ -829,7 +834,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Sorts the object by any number of fields
+     * Sorts the elements by any number of fields
      *
      * @param   $field      string|callable  Field name or value callback to sort by
      * @param   $direction  string           asc or desc
@@ -918,7 +923,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Converts the current object into an array
+     * Converts the object into an array
      *
      * @return array
      */
@@ -932,7 +937,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Converts the current object into a json string
+     * Converts the object into a JSON string
      *
      * @return string
      */
@@ -942,7 +947,7 @@ class Collection extends Iterator
     }
 
     /**
-     * Convertes the collection to a string
+     * Convertes the object to a string
      *
      * @return string
      */
@@ -954,6 +959,7 @@ class Collection extends Iterator
     /**
      * Returns an non-associative array
      * with all values
+     * @internal
      *
      * @return array
      */

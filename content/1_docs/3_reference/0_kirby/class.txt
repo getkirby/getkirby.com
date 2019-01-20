@@ -1,12 +1,11 @@
 Title: Kirby
+
 ----
+
 Class: Kirby\Cms\App
-----
-Excerpt: The `$kirby` object is the app instance of your Kirby installation. It's the central starting point to get all the different aspects of your site, like the options, urls, roots, languages, roles, etc.
-
 
 ----
-----
+
 Text:
 
 ## How to fetch the `$kirby` object

@@ -1,11 +1,6 @@
 Class: Kirby\Cms\User
 
 ----
-Excerpt:
-
-The `$user` object represents a single Panel or frontend user.
-
-----
 
 Text:
 

@@ -1,6 +1,1 @@
 Class: Kirby\Http\Cookie
-
-----
-Excerpt:
-
-The Cookie class helps you to handle cookies in your projects.

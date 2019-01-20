@@ -12,6 +12,13 @@ use Kirby\Toolkit\Str;
 use Throwable;
 
 /**
+ * The `$file` class provides a set
+ * of methods that can be used when
+ * dealing with a single image or
+ * other media file, like getting the
+ * URL or resizing an image. It also
+ * handles file meta data.
+ *
  * The File class is a wrapper around
  * the Kirby\Image\Image class, which
  * is used to handle all file methods.

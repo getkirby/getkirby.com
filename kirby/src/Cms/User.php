@@ -14,8 +14,8 @@ use Kirby\Toolkit\V;
 use Throwable;
 
 /**
- * The User class represents
- * panel users as well as frontend users.
+ * The `$user` object represents a
+ * single Panel or frontend user.
  *
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>

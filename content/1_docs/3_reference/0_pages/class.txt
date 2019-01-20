@@ -2,15 +2,6 @@ Class: Kirby\Cms\Pages
 
 ----
 
-Alias: Pages
-
-----
-Excerpt:
-
-The `$pages` class refers to a collection of pages. The pages in this collection can have the same or different parents, they can actually exist as subfolders in the content folder or be virtual pages created from a database, an Excel sheet, any API or any other source.
-
-----
-
 Text:
 
 ## How to get a `$pages` object

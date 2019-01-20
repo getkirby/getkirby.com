@@ -1,6 +1,1 @@
 Class: Kirby\Cms\Html
-
-----
-Excerpt: 
-
-The HTML class provides methods for building common HTML tags and also contains some helper methods.

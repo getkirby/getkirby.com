@@ -1,6 +1,1 @@
 Class: Kirby\Toolkit\F
-
-----
-Excerpt: 
-
-The F class provides methods for dealing with files on the file system level, like creating, reading, deleting, copying or validatings files.

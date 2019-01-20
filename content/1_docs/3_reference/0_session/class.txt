@@ -1,9 +1,11 @@
 Title: Session
+
 ----
-Excerpt: The session object can be used to store visitor preferences for your site throughout various requests.
-----
+
 Class: Kirby\Session\SessionData
+
 ----
+
 Text:
 
 ## How to get the `$session` object
