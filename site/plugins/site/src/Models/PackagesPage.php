@@ -22,9 +22,12 @@ class PackagesPage extends Page
 
             $page = [
                 'slug'     => Str::slug($package),
-                'template' => 'package',
+                'template' => 'link',
                 'parent'   => $this,
-                'num'      => 0
+                'num'      => 0,
+                'content'  => [
+                    'link' => 'docs/reference'
+                ]
             ];
 
             $children = [];
