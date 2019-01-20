@@ -7,9 +7,12 @@
   <div class="cheatsheet-main-scrollarea cheatsheet-panel-scrollarea">
 
     <?php foreach (option('cheatsheet') as $groupName => $groupPages): ?>
+
+      <h2><?= $groupName ?></h2>
+
       <?php foreach ($page->children()->listed()->find(...$groupPages) as $section): ?>
       <section class="-mb:large">
-        <h2 id="<?= $section->slug() ?>"><a href="#<?= $section->slug() ?>"><?= $section->title() ?></a></h2>
+        <h3 id="<?= $section->slug() ?>"><a href="#<?= $section->slug() ?>"><?= $section->title() ?></a></h3>
         <?php snippet('cheatsheet.section', ['section' => $section]) ?>
       </section>
       <?php endforeach ?>
