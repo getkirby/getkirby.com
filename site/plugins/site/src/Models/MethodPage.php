@@ -54,10 +54,10 @@ class MethodPage extends HelperPage
     public function inheritedFrom()
     {
         if ($parent = $this->reflection()->getDeclaringClass()) {
-            $page = page('docs/reference')->grandChildren()->listed()->findBy('class', $parent->getName());
-
-            if ($page && $page->is($this->parent()) === false) {
-                return $page;
+            if ($page = $this->referenceLookup($parent->getName())) {
+                if ($page && $page->is($this->parent()) === false) {
+                    return $page;
+                }
             }
         }
 
@@ -160,6 +160,21 @@ class MethodPage extends HelperPage
         return $parameters;
     }
 
+    protected function referenceLookup($class)
+    {
+        $roots = [
+            'docs/reference',
+            'docs/reference/objects/@'
+        ];
+
+        foreach ($roots as $root) {
+            $index = page($root)->grandChildren();
+            if ($page = $index->filterBy('class', $class)->first()) {
+                return $page;
+            }
+        }
+    }
+
     public function returnType()
     {
         return $this->typeDefinition(parent::returnType());
@@ -182,17 +197,10 @@ class MethodPage extends HelperPage
             $type = $this->parent()->class();
         }
 
-        $roots = [
-            'docs/reference',
-            'docs/reference/objects/@'
-        ];
+        $class = str_replace('|null', '', $type);
 
-        foreach ($roots as $root) {
-            $class   = str_replace('|null', '', $type);
-            $classes = page($root)->grandChildren();
-            if ($reference = $classes->filterBy('class', $class)->first()) {
-                return Html::a($reference->url(), $type);
-            }
+        if ($reference = $this->referenceLookup($class)) {
+            return Html::a($reference->url(), $type);
         }
 
         return $type;
