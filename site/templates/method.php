@@ -2,6 +2,8 @@
 
   <?php snippet('method/call', ['call' => $page->methodCall()]) ?>
 
+  <?= $page->isListed() && $page->parent()->isListed() ? 'yes' : 'no' ?>
+
   <div class="text">
 
     <?php snippet('method/parameters',  ['parameters' => $page->parameters()]) ?>

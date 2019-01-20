@@ -28,8 +28,9 @@ return [
                 case 'recipe':
                     return 'cookbook';
                 case 'guide':
-                case 'glossary':
                     return 'guide';
+                case 'glossary-entry':
+                    return 'glossary';
                 case 'issue':
                     return 'kosmos';
             }
@@ -58,7 +59,8 @@ return [
         'kirbytag',
         'method' => [
             'filter' => function ($page) {
-                return $page->isListed() === true;
+                return $page->isListed() === true &&
+                       $page->parent()->isListed() === true;
             }
         ],
         'recipe',
