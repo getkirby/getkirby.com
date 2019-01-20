@@ -24,7 +24,7 @@ class PackagesPage extends Page
                 'slug'     => Str::slug($package),
                 'template' => 'link',
                 'parent'   => $this,
-                'num'      => 0,
+                'num'      => null,
                 'content'  => [
                     'link' => 'docs/reference'
                 ]
@@ -41,7 +41,7 @@ class PackagesPage extends Page
                     'slug'     => Str::slug($class),
                     'model'    => 'class',
                     'template' => 'class',
-                    'num'      => 0,
+                    'num'      => null,
                     'content'  => [
                         'class' => 'Kirby\\' . $package . '\\' . $class
                     ]

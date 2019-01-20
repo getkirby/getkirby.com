@@ -28,6 +28,7 @@ return [
                 case 'recipe':
                     return 'cookbook';
                 case 'guide':
+                case 'glossary':
                     return 'guide';
                 case 'issue':
                     return 'kosmos';
@@ -38,10 +39,15 @@ return [
     'templates' => [
         'cheatsheet-article',
         'cheatsheet-section',
-        'class',
+        'class' => [
+            'filter' => function ($page) {
+                return $page->isListed() === true;
+            }
+        ],
         'component',
         'contact',
         'endpoint',
+        'extension',
         'field-method',
         'glossary-entry',
         'guide',
@@ -56,7 +62,9 @@ return [
             }
         ],
         'recipe',
+        'release',
         'root',
+        'section',
         'text',
         'url',
         'validator',
