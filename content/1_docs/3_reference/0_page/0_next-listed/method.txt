@@ -1,0 +1,17 @@
+Text: 
+
+## Example
+
+```php
+<?php if($next = $page->nextListed()): ?>
+<a href="<?= $next->url() ?>">next listed page</a>
+<?php endif ?>
+```
+
+### Using sort field
+
+```php
+<?php if($next = $page->nextListed('title', 'asc')): ?>
+<a href="<?= $next->url() ?>">next listed page</a>
+<?php endif ?>
+```

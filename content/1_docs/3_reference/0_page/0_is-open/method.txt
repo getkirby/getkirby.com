@@ -1,23 +1,4 @@
-Title:
-
-{{class.instance}}->isOpen()
-
-----
-
-Excerpt:
-
-Checks if the page is open. This means that it is either active or it is a direct or indirect parent of the currently active page.
-
-----
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

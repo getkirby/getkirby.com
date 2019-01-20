@@ -1,21 +1,4 @@
-Title: {{class.instance}}->parents()
-
-----
-
-Excerpt:
-
-Returns a $pages collection of all parents
-
-----
-
-Return:
-
-type: $pages
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

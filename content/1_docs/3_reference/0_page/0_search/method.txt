@@ -1,33 +1,4 @@
-Title:
-
-{{class.instance}}->search($query, $params = [])
-
-----
-
-Excerpt:
-
-Searches all descendants
-
-----
-Params: -
-  name: $query
-  type: string
-  text: The search term
--
-  name: $params
-  type: string | array
-  text:
-
-----
-
-Return:
-
-type: $pages
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

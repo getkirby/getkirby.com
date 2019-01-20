@@ -1,23 +1,4 @@
-Title:
-
-$files->offset($offset)
-
-----
-
-Excerpt:
-
-Returns the collection starting from a given offset
-
-----
-
-Return:
-
-type: $files
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

@@ -1,23 +1,4 @@
-Title:
-
-{{class.instance}}->hasVideos()
-
-----
-
-Excerpt:
-
-Checks if there are any video files in the page directory
-
-----
-
-Return:
-
-type: integer
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

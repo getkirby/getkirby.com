@@ -1,23 +1,4 @@
-Title:
-
-{{class.instance}}->update($data = [])
-
-----
-
-Excerpt:
-
-Updates all given site variables, which are stored in site.txt
-
-----
-
-Return:
-
-type: $site
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

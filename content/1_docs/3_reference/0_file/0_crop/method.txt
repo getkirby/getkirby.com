@@ -1,27 +1,4 @@
-Title:
-
-{{class.instance}}->crop($width, $height = null, $quality = null)
-
-----
-
-Since:
-
-----
-
-Excerpt:
-
-Crops the image by width and optionally by height
-
-----
-
-Return:
-
-type: $file
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

@@ -1,23 +1,4 @@
-Title:
-
-{{class.instance}}->page($uri = null)
-
-----
-
-Excerpt:
-
-Returns a specific $page object by URI. If no URI is specified the currently active page will be returned.
-
-----
-
-Return:
-
-type: $page
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

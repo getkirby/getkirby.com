@@ -1,23 +1,4 @@
-Title:
-
-$pagination->prevPage()
-
-----
-
-Excerpt:
-
-Returns the previous page number
-
-----
-
-Return:
-
-type: integer
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

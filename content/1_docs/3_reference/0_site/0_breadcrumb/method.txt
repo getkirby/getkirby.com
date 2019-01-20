@@ -1,23 +1,4 @@
-Title:
-
-{{class.instance}}->breadcrumb()
-
-----
-
-Excerpt:
-
-Returns a $pages collection, prepared for a foreach loop to generate a breadcrumb
-
-----
-
-Return:
-
-type: $pages
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

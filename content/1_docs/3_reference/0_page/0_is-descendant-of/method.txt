@@ -1,30 +1,4 @@
-Title:
-
-{{class.instance}}->isDescendantOf($parent)
-
-----
-
-Excerpt:
-
-Checks if the page is a descendant of the given page
-
-----
-
-Params: -
-  name: $parent
-  type: Page | string
-  text: A page URI or page object.
-
-----
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

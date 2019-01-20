@@ -1,21 +1,4 @@
-Title:
-
-$language->code()
-
-----
-
-Excerpt: Returns the iso language code
-
-----
-
-Return:
-
-type: string
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

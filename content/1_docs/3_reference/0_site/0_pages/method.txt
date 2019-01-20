@@ -1,23 +1,4 @@
-Title:
-
-{{class.instance}}->pages()
-
-----
-
-Excerpt:
-
-Returns a $pages collection for all direct children in /content. It's an old version of $site->children()
-
-----
-
-Return:
-
-type: $pages
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

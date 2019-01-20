@@ -1,4 +1,4 @@
-Text:
+Text: 
 
 ```php
 <?php if(page('projects')->children()->has('projects/project-a')): ?>

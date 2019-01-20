@@ -1,23 +1,4 @@
-Title:
-
-$pagination->pageUrl($page)
-
-----
-
-Excerpt:
-
-Returns the absolute URL for the given page
-
-----
-
-Return:
-
-type: string
-text:
-
-----
-
-Text:
+Text: 
 
 ```php
 <?php

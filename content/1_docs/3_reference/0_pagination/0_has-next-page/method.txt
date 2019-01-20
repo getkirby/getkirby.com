@@ -1,23 +1,4 @@
-Title:
-
-$pagination->hasNextPage()
-
-----
-
-Excerpt:
-
-Checks if there's a next available page
-
-----
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

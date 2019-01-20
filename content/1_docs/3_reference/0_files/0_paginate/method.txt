@@ -1,23 +1,4 @@
-Title:
-
-$files->paginate($limit, $options = [])
-
-----
-
-Excerpt:
-
-Applies pagination to the collection
-
-----
-
-Return:
-
-type: $files
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

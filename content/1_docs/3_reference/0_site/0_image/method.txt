@@ -1,23 +1,4 @@
-Title:
-
-{{class.instance}}->image($filename = false)
-
-----
-
-Excerpt:
-
-Returns a specific image $file object by filename. If no filename is given, the first image will be returned.
-
-----
-
-Return:
-
-type: $file
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

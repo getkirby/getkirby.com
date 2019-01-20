@@ -1,23 +1,4 @@
-Title:
-
-$pagination->lastPageUrl()
-
-----
-
-Excerpt:
-
-Returns the absolute URL for the last page
-
-----
-
-Return:
-
-type: string
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

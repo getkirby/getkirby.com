@@ -1,0 +1,17 @@
+Text: 
+
+## Example
+
+```php
+<?php
+echo $page->hasNextListed(); //will echo 1 if true, nothing if false.
+?>
+```
+
+### Using sort field
+
+```php
+<?php
+echo $page->hasNextListed('date', 'desc'); //will echo 1 if true, nothing if false.
+?>
+```

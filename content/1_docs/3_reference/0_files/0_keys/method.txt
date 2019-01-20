@@ -1,23 +1,4 @@
-Title:
-
-$files->keys()
-
-----
-
-Excerpt:
-
-Returns an array with all filenames in the collection.
-
-----
-
-Return:
-
-type: array
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

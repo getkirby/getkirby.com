@@ -1,23 +1,4 @@
-Title:
-
-$pagination->lastPage()
-
-----
-
-Excerpt:
-
-Returns the last page number
-
-----
-
-Return:
-
-type: integer
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

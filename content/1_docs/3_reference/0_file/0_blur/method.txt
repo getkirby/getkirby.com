@@ -1,27 +1,4 @@
-Title:
-
-{{class.instance}}->blur()
-
-----
-
-Since:
-
-----
-
-Excerpt:
-
-Applies a blur filter to the image
-
-----
-
-Return:
-
-type: $file
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

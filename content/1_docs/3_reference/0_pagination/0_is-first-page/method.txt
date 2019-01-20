@@ -1,23 +1,4 @@
-Title:
-
-$pagination->isFirstPage()
-
-----
-
-Excerpt:
-
-Checks if the current page is the first page
-
-----
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

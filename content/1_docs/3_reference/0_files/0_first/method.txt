@@ -1,23 +1,4 @@
-Title:
-
-$files->first()
-
-----
-
-Excerpt:
-
-Returns the first file in the collection
-
-----
-
-Return:
-
-type: $file
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

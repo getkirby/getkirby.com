@@ -1,0 +1,17 @@
+Text: 
+
+## Example
+
+```php
+<?php if($prev = $page->prevUnlisted()): ?>
+<a href="<?= $prev->url() ?>">previous unlisted page</a>
+<?php endif ?>
+```
+
+### Using sort field
+
+```php
+<?php if($prev = $page->prevUnlisted('title', 'asc')): ?>
+<a href="<?= $prev->url() ?>">previous unlisted page</a>
+<?php endif ?>
+```

@@ -1,23 +1,4 @@
-Title:
-
-$pagination->firstPage()
-
-----
-
-Excerpt:
-
-Returns the first page number — which is actually always 1.
-
-----
-
-Return:
-
-type: integer
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

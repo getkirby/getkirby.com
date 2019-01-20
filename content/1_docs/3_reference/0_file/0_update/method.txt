@@ -1,34 +1,4 @@
-Title:
-
-{{class.instance}}->update($data = [][, $language])
-
-----
-
-Excerpt:
-
-Updates the meta information for a file
-
-----
-
-Params: -
-  name: $data
-  type: array
-  text:
--
-  name: $language
-  type: string
-  text: Language code
-
-----
-
-Return:
-
-type: $file
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

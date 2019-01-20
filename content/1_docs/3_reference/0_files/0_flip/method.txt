@@ -1,23 +1,4 @@
-Title:
-
-$files->flip()
-
-----
-
-Excerpt:
-
-Returns the collection in reverse order
-
-----
-
-Return:
-
-type: $files
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

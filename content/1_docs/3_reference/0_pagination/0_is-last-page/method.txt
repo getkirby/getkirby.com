@@ -1,23 +1,4 @@
-Title:
-
-$pagination->isLastPage()
-
-----
-
-Excerpt:
-
-Checks if the current page is the last page
-
-----
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

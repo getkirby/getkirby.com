@@ -1,23 +1,4 @@
-Title:
-
-$pagination->nextPage()
-
-----
-
-Excerpt:
-
-Returns the next page number
-
-----
-
-Return:
-
-type: integer
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

@@ -1,23 +1,4 @@
-Title:
-
-{{class.instance}}->errorPage()
-
-----
-
-Excerpt:
-
-Returns the $page object for the error page.
-
-----
-
-Return:
-
-type: $page
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

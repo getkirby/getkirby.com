@@ -1,0 +1,13 @@
+Text: 
+
+## Example
+
+```php
+echo $page->hasPrevListed();
+```
+
+### Using sort field
+
+```php
+echo $page->hasPrevListed('date', 'desc');
+```

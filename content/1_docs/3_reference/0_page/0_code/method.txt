@@ -1,21 +1,4 @@
-Title: {{class.instance}}->code()
-
-----
-
-Excerpt:
-
-Returns a $files collection with all code files (css, js, html, etc.) in the page's directory
-
-----
-
-Return:
-
-type: $files
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 
@@ -37,4 +20,4 @@ Kirby considers the following file types as code:
 - json
 - java
 
-Any html or php files cannot be uploaded to pages for security reasons. 
+Any html or php files cannot be uploaded to pages for security reasons.

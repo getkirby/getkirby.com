@@ -1,0 +1,17 @@
+Text: 
+
+## Example
+
+```php
+<?php if($prev = $page->prevListed()): ?>
+<a href="<?= $prev->url() ?>">previous listed page</a>
+<?php endif ?>
+```
+
+### Using sort field
+
+```php
+<?php if($prev = $page->prevListed('date', 'desc')): ?>
+<a href="<?= $prev->url() ?>">previous listed page</a>
+<?php endif ?>
+```

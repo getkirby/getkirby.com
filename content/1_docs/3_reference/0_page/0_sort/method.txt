@@ -1,30 +1,4 @@
-Title:
-
-{{class.instance}}->sort($num = null)
-
-----
-
-Excerpt:
-
-Changes the sorting number of the page.
-
-----
-
-Params: -
-  name: $num
-  type: int
-  text: The sorting number
-
-----
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

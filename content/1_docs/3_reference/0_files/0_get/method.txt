@@ -1,23 +1,4 @@
-Title:
-
-$files->get($filename)
-
-----
-
-Excerpt:
-
-Returns a single file by filename
-
-----
-
-Return:
-
-type: $file
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

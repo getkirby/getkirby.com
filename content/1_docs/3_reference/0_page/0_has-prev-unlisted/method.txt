@@ -1,0 +1,17 @@
+Text: 
+
+## Example
+
+```php
+<?php
+echo $page->hasPrevUnlisted(); //will echo 1 if true, nothing if false.
+?>
+```
+
+### Using sort field
+
+```php
+<?php
+echo $page->hasPrevUnlisted('date', 'desc'); //will echo 1 if true, nothing if false.
+?>
+```

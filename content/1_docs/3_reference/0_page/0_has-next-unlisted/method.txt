@@ -1,0 +1,13 @@
+Text: 
+
+## Example
+
+```php
+echo $page->hasNextUnlisted();
+```
+
+### Using sort field
+
+```php
+echo $page->hasNextUnlisted('date', 'desc');
+```

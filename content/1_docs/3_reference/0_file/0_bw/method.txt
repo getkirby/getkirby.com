@@ -1,27 +1,4 @@
-Title:
-
-{{class.instance}}->bw($bw)
-
-----
-
-Since:
-
-----
-
-Excerpt:
-
-Converts the image to grayscale
-
-----
-
-Return:
-
-type: $file
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

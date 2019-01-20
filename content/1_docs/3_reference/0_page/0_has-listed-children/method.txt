@@ -1,0 +1,11 @@
+Text: 
+
+## Example
+
+```php
+echo $page->hasListedChildren();
+
+if($page->hasListedChildren()) {
+  $children = $page->children()->listed();
+}
+```

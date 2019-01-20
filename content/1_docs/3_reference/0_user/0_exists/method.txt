@@ -1,23 +1,4 @@
-Title:
-
-{{class.instance}}->exists()
-
-----
-
-Excerpt:
-
-Checks if the user exists
-
-----
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
+Text: 
 
 ##Example
 

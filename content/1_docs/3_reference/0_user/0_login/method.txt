@@ -1,29 +1,4 @@
-Title:
-
-{{class.instance}}->login($password)
-
-----
-
-Excerpt:
-
-Login the user with the given password if the password matches the user's password.
-
-----
-Params:-
-  name: $password
-  type: string
-  text:
-
-----
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

@@ -1,23 +1,4 @@
-Title:
-
-$pagination->hasPrevPage()
-
-----
-
-Excerpt:
-
-Checks if there is a previous page
-
-----
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

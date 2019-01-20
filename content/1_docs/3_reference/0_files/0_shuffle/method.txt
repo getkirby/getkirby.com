@@ -1,23 +1,4 @@
-Title:
-
-$files->shuffle()
-
-----
-
-Excerpt:
-
-Returns the collection in shuffled order.
-
-----
-
-Return:
-
-type: $files
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

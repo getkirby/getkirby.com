@@ -1,23 +1,4 @@
-Title:
-
-$pagination->nextPageUrl()
-
-----
-
-Excerpt:
-
-Returns the absolute URL for the next page
-
-----
-
-Return:
-
-type: string
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

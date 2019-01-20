@@ -1,23 +1,4 @@
-Title:
-
-$users->create($data = [])
-
-----
-
-Excerpt:
-
-Creates a new user account
-
-----
-
-Return:
-
-type: $user
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

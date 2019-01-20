@@ -1,27 +1,4 @@
-Title: {{class.instance}}->wasModifiedAfter()
-
-----
-
-Excerpt: Checks if any content of the site has been modified after the given unix timestamp
-
-
-----
-
-Params: -
-  name: $time:
-  type: int
-  text: A UNIX timestamp
-
-----
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
+Text: 
 
 This is mainly used to auto-update the cache.
 

@@ -1,21 +1,4 @@
-Title:
-
-$language->url()
-
-----
-
-Excerpt: Returns the assigned base URL for the language
-
-----
-
-Return:
-
-type: string
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

@@ -1,0 +1,8 @@
+Text: 
+
+```php
+<?php if($page->isUnlisted()): ?>
+  // redirect to error page
+  <?php go('error') ?>
+<?php endif ?>
+```

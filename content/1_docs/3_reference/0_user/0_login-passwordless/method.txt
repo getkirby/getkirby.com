@@ -1,27 +1,4 @@
-Title:
-
-{{class.instance}}->loginPasswordless()
-
-----
-
-Since:
-
-----
-
-Excerpt:
-
-Login the user without a password.
-
-----
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

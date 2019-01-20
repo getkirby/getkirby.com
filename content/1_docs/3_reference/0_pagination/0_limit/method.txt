@@ -1,23 +1,4 @@
-Title:
-
-$pagination->limit()
-
-----
-
-Excerpt:
-
-Returns the limit of items per page
-
-----
-
-Return:
-
-type: integer
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

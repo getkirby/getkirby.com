@@ -1,23 +1,4 @@
-Title:
-
-$files->pagination()
-
-----
-
-Excerpt:
-
-Returns the $pagination object
-
-----
-
-Return:
-
-type: $pagination
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

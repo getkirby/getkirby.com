@@ -1,29 +1,4 @@
-Title:
-
-{{class.instance}}->siblings($self = true)
-
-----
-
-Excerpt:
-
-Returns all siblings.
-
-----
-Params: -
-  name: $self
-  type: boolean
-  text: Whether or not to include the current page in the collection
-
-----
-
-Return:
-
-type: $pages
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

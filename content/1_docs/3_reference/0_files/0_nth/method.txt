@@ -1,23 +1,4 @@
-Title:
-
-$files->nth($n)
-
-----
-
-Excerpt:
-
-Returns the nth file in the collection.
-
-----
-
-Return:
-
-type: $file
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

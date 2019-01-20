@@ -1,0 +1,13 @@
+Text: 
+
+```php
+<ul>
+  <?php foreach($page->files()->sortBy('modified', 'desc') as $file): ?>
+  <li>
+    <a href="<?= $file->url() ?>">
+      <?= html($file->filename()) ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

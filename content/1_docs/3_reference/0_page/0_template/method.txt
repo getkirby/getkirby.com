@@ -1,23 +1,4 @@
-Title:
-
-{{class.instance}}->template()
-
-----
-
-Excerpt:
-
-Returns the name of the used template for the page. Will return default if the intended template cannot be found.
-
-----
-
-Return:
-
-type: string
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

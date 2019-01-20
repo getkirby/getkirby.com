@@ -1,0 +1,11 @@
+Text: 
+
+## Example
+
+```php
+
+<?php
+if($file = $page->files()->findBy('filename', 'myfile.jpg')) {
+  echo $file->url();
+?>
+```

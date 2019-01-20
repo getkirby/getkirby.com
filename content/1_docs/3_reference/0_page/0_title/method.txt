@@ -1,23 +1,4 @@
-Title:
-
-{{class.instance}}->title()
-
-----
-
-Excerpt:
-
-Returns the page title. The title is fetched from the content unless it does not exist. In this case it will be overwritten by the UID.
-
-----
-
-Return:
-
-type: string
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

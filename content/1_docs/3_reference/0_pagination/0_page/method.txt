@@ -1,23 +1,4 @@
-Title:
-
-$pagination->page()
-
-----
-
-Excerpt:
-
-Returns the current page number
-
-----
-
-Return:
-
-type: integer
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

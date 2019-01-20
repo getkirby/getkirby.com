@@ -1,23 +1,4 @@
-Title:
-
-{{class.instance}}->id()
-
-----
-
-Excerpt:
-
-Returns the page id, which is the untranslated URI
-
-----
-
-Return:
-
-type: string
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

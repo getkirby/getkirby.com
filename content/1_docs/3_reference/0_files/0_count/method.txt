@@ -1,23 +1,4 @@
-Title:
-
-$files->count()
-
-----
-
-Excerpt:
-
-Returns the number of files in the collection
-
-----
-
-Return:
-
-type: integer
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

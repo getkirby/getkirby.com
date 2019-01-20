@@ -1,34 +1,4 @@
-Title: {{class.instance}}->create($uri, $template, $data = [])
-
-----
-
-Excerpt: Creates a new page object
-
-----
-
-Params: -
-  name: $uri
-  type: string
-  text: The URI of the page to create
--
-  name: $template
-  type: string
-  text: The name of the template to use for the new page
--
-  name: $data
-  type: array
-  text: The data for the page as $key => $value pairs
-
-----
-
-Return:
-
-type: $page
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

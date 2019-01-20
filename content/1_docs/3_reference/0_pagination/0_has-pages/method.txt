@@ -1,24 +1,4 @@
-Title:
-
-$pagination->hasPages()
-
-----
-
-Excerpt:
-
-Checks if there are any pages at all. This is useful if you want to show/hide the pagination.
-
-----
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
-
+Text: 
 
 ## Example
 

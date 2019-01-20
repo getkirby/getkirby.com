@@ -1,23 +1,4 @@
-Title:
-
-$pagination->prevPageUrl()
-
-----
-
-Excerpt:
-
-Returns the absolute URL for the previous page
-
-----
-
-Return:
-
-type: string
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

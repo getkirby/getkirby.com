@@ -1,35 +1,4 @@
-Title:
-
-{{class.instance}}->hasNext([$sort, $direction])
-
-----
-
-Excerpt:
-
-Checks if the page has a next sibling
-
-----
-
-Params: -
-  name: $sort
-  type: string
-  text: An optional sort field for the siblings
--
-   name: $direction
-   type: string
-   text: An optional sort direction
-
-----
-
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

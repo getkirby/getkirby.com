@@ -1,28 +1,4 @@
-Title: {{class.instance}}->find($uri)
-
-----
-
-Excerpt:
-
-Returns the $page object of a specific subpage by URI. If multiple URIs are given, the method will return a $pages collection with all matches.
-
-----
-
-Params: -
-  name: $uri
-  type: args
-  text: The URI(s) of a subpage or multiple subpages
-
-----
-
-Return:
-
-type: $page | $pages
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

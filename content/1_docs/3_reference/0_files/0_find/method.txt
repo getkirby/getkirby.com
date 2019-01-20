@@ -1,23 +1,4 @@
-Title:
-
-$files->find()
-
-----
-
-Excerpt:
-
-Finds a single file or multiple files by one or many filenames.
-
-----
-
-Return:
-
-type: $file | $files
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

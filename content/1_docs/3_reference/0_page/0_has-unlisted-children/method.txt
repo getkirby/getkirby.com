@@ -1,0 +1,12 @@
+Text: 
+
+## Example
+
+```php
+// returns the number of unlited children in the folder
+echo $page->hasUnlistedChildren();
+
+if($page->hasUnlistedChildren()) {
+  $unlistedChildren = $page->children()->unlisted();
+}
+```

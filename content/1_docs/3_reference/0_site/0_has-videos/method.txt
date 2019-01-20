@@ -1,23 +1,4 @@
-Title:
-
-{{class.instance}}->hasVideos()
-
-----
-
-Excerpt:
-
-Checks if there are any videos placed directly in /content
-
-----
-
-Return:
-
-type: boolean
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 
