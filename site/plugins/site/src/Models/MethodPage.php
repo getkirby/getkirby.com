@@ -157,7 +157,13 @@ class MethodPage extends HelperPage
             $type = $this->parent()->class();
         }
 
+        // Find manual reference page
         if ($reference = page('docs/reference')->grandChildren()->filterBy('class', $type)->first()) {
+            return Html::a($reference->url(), $type);
+        }
+
+        // Find auto-generated objects reference page
+        if ($reference = page('docs/reference/objects/@')->grandChildren()->filterBy('class', $type)->first()) {
             return Html::a($reference->url(), $type);
         }
 
