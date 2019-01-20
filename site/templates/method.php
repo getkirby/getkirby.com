@@ -4,7 +4,7 @@
 
   <div class="text">
 
-    <?php snippet('method/inherits',  ['inherits' => $inheritedFrom]) ?>
+    <?php snippet('method/inherits',  ['inherits' => $page->inheritedFrom()]) ?>
     <?php snippet('method/parameters',  ['parameters' => $page->parameters()]) ?>
     <?php snippet('method/returns', ['type' => $page->returnType()]) ?>
 

@@ -54,10 +54,7 @@ class MethodPage extends HelperPage
     public function inheritedFrom()
     {
         if ($parent = $this->reflection()->getDeclaringClass()) {
-            $path = str_replace('Kirby\\', '', $parent->getName());
-            $path = strtolower(str_replace('\\', '/', $path));
-
-            $page = page('docs/reference/' . $path);
+            $page = page('docs/reference')->grandChildren()->listed()->findBy('class', $parent->getName());
 
             if ($page && $page->is($this->parent()) === false) {
                 return $page;
