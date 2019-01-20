@@ -163,8 +163,8 @@ class MethodPage extends HelperPage
     protected function referenceLookup($class)
     {
         $roots = [
-            'docs/reference',
-            'docs/reference/objects/@'
+            'docs/reference/objects',
+            'docs/reference/@'
         ];
 
         foreach ($roots as $root) {
