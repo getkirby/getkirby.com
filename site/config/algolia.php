@@ -29,8 +29,6 @@ return [
                     return 'cookbook';
                 case 'guide':
                     return 'guide';
-                case 'glossary-entry':
-                    return 'glossary';
                 case 'issue':
                     return 'kosmos';
             }
@@ -50,7 +48,6 @@ return [
         'endpoint',
         'extension',
         'field-method',
-        'glossary-entry',
         'guide',
         'helper',
         'hook',
