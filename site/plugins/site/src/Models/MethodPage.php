@@ -3,6 +3,7 @@
 namespace Kirby\Site\Models;
 
 use Kirby\Cms\Field;
+use Kirby\Cms\Html;
 use Kirby\Toolkit\Str;
 use ReflectionMethod;
 
@@ -149,6 +150,21 @@ class MethodPage extends HelperPage
         }
 
         return $this->reflection = false;
+    }
+
+    public function returnType()
+    {
+        $type = parent::returnType();
+
+        if ((string)$type === 'self') {
+            $type = $this->parent()->class();
+        }
+
+        if ($reference = page('docs/reference')->grandChildren()->filterBy('class', $type)->first()) {
+            return Html::a($reference->url(), $type);
+        }
+
+        return $type;
     }
 
     public function title(): Field
