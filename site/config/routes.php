@@ -1,38 +1,6 @@
 <?php
 
 return [
-    /**
-     * Legacy redirects
-     */
-    [
-        'pattern' => [
-            'docs/cheatsheet/(:all?)',
-            'docs/toolkit/(:all?)'
-        ],
-        'action'  => function ($path = null) {
-            go('docs/reference/' . $path);
-        }
-    ],
-    [
-        'pattern' => 'docs/reference/(:any)/(:all?)',
-        'action'  => function ($group, $path = null) {
-            if ($page = page('docs/reference/' . $group . '/' . $path)) {
-                return $page;
-            }
-
-            if ($page = page('docs/reference')->grandChildren()->listed()->findBy('uid', $group)) {
-                go($page->id() . '/'. $path);
-            }
-
-            go('error');
-        }
-    ],
-    [
-        'pattern' => 'blog/kosmos-(:any)',
-        'action'  => function ($path = null) {
-            go('kosmos/' . $path);
-        }
-    ],
 
     /**
      * New routes
@@ -72,6 +40,39 @@ return [
                 ->response()
                 ->type('text')
                 ->body($robots);
+        }
+    ],
+
+    /**
+     * Legacy redirects
+     */
+    [
+        'pattern' => 'docs/reference/(:any)/(:all?)',
+        'action'  => function ($group, $path = null) {
+            if ($page = page('docs/reference/' . $group . '/' . $path)) {
+                return $page;
+            }
+
+            if ($page = page('docs/reference')->grandChildren()->listed()->findBy('uid', $group)) {
+                go($page->id() . '/'. $path);
+            }
+
+            go('error');
+        }
+    ],
+    [
+        'pattern' => [
+            'docs/cheatsheet/(:all?)',
+            'docs/toolkit/(:all?)'
+        ],
+        'action'  => function ($path = null) {
+            go('docs/reference/' . $path);
+        }
+    ],
+    [
+        'pattern' => 'blog/kosmos-(:any)',
+        'action'  => function ($path = null) {
+            go('kosmos/' . $path);
         }
     ]
 ];
