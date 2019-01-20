@@ -52,6 +52,7 @@ trait AppTranslations
     /**
      * Load and set the current language if it exists
      * Otherwise fall back to the default language
+     * @internal
      *
      * @param string $languageCode
      * @return Language|null
@@ -77,6 +78,7 @@ trait AppTranslations
 
     /**
      * Set the current translation
+     * @internal
      *
      * @param string $translationCode
      * @return void

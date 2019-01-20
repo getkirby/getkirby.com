@@ -62,5 +62,4 @@ class Url extends BaseUrl
 
         return parent::to($path, $options);
     }
-
 }

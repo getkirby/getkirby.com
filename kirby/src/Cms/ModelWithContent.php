@@ -87,6 +87,7 @@ abstract class ModelWithContent extends Model
 
     /**
      * Returns the absolute path to the content file
+     * @internal
      *
      * @param string|null $languageCode
      * @param bool $force
@@ -122,6 +123,7 @@ abstract class ModelWithContent extends Model
     /**
      * Prepares the content that should be written
      * to the text file
+     * @internal
      *
      * @param array $data
      * @param string $languageCode
@@ -136,6 +138,7 @@ abstract class ModelWithContent extends Model
      * Returns the absolute path to the
      * folder in which the content file is
      * located
+     * @internal
      *
      * @return string|null
      */
@@ -146,6 +149,7 @@ abstract class ModelWithContent extends Model
 
     /**
      * Returns the extension of the content file
+     * @internal
      *
      * @return string
      */
@@ -156,6 +160,7 @@ abstract class ModelWithContent extends Model
 
     /**
      * Needs to be declared by the final model
+     * @internal
      *
      * @return string
      */
@@ -218,7 +223,7 @@ abstract class ModelWithContent extends Model
     }
 
     /**
-     * Checks if the model data has any errors
+     * Checks if the data has any errors
      *
      * @return boolean
      */

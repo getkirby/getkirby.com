@@ -144,6 +144,7 @@ class Language extends Model
 
     /**
      * Creates a new language object
+     * @internal
      *
      * @param array $props
      * @return self
@@ -178,6 +179,7 @@ class Language extends Model
     /**
      * Delete the current language and
      * all its translation files
+     * @internal
      *
      * @return boolean
      */
@@ -320,6 +322,7 @@ class Language extends Model
 
     /**
      * Saves the language settings in the languages folder
+     * @internal
      *
      * @return self
      */
@@ -446,6 +449,7 @@ class Language extends Model
 
     /**
      * Update language properties and save them
+     * @internal
      *
      * @param array $props
      * @return self

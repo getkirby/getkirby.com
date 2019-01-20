@@ -22,6 +22,7 @@ class Languages extends Collection
 
     /**
      * Creates a new language with the given props
+     * @internal
      *
      * @param array $props
      * @return Language
@@ -46,8 +47,7 @@ class Languages extends Collection
     }
 
     /**
-     * Deprecated version of static::default();
-     *
+     * @deprecated 3.0.0  Use `Languages::default()`instead
      * @return Language|null
      */
     public function findDefault(): ?Language
@@ -57,6 +57,7 @@ class Languages extends Collection
 
     /**
      * Convert all defined languages to a collection
+     * @internal
      *
      * @return self
      */

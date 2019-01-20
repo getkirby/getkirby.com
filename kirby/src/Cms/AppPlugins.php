@@ -66,6 +66,7 @@ trait AppPlugins
 
     /**
      * Register all given extensions
+     * @internal
      *
      * @param array $extensions
      * @param Plugin $plugin The plugin which defined those extensions

@@ -200,6 +200,7 @@ class Page extends ModelWithContent
 
     /**
      * Returns the url to the api endpoint
+     * @internal
      *
      * @param bool $relative
      * @return string
@@ -288,6 +289,7 @@ class Page extends ModelWithContent
 
     /**
      * Prepares the content for the write method
+     * @internal
      *
      * @return array
      */
@@ -302,6 +304,7 @@ class Page extends ModelWithContent
     /**
      * Returns the content text file
      * which is found by the inventory method
+     * @internal
      *
      * @param string $languageCode
      * @return string
@@ -313,6 +316,7 @@ class Page extends ModelWithContent
 
     /**
      * Call the page controller
+     * @internal
      *
      * @param array $data
      * @param string $contentType
@@ -390,6 +394,7 @@ class Page extends ModelWithContent
      * tag for the page, which will be
      * used in the panel, when the page
      * gets dragged onto a textarea
+     * @internal
      *
      * @return string
      */
@@ -680,8 +685,7 @@ class Page extends ModelWithContent
     }
 
     /**
-     * Checks if the page is invisible
-     *
+     * @deprecated 3.0.0 Use `Page::isUnlisted()` intead
      * @return bool
      */
     public function isInvisible(): bool
@@ -762,8 +766,7 @@ class Page extends ModelWithContent
     }
 
     /**
-     * Checks if the page is visible
-     *
+     * @deprecated 3.0.0 Use `Page::isListed()` intead
      * @return bool
      */
     public function isVisible(): bool
@@ -773,6 +776,7 @@ class Page extends ModelWithContent
 
     /**
      * Returns the root to the media folder for the page
+     * @internal
      *
      * @return string
      */
@@ -782,7 +786,8 @@ class Page extends ModelWithContent
     }
 
     /**
-     * The page's base url for any files
+     * The page's base URL for any files
+     * @internal
      *
      * @return string
      */
@@ -792,7 +797,8 @@ class Page extends ModelWithContent
     }
 
     /**
-     * Creates a Page model if it has been registered
+     * Creates a page model if it has been registered
+     * @internal
      *
      * @param string $name
      * @param array $props
@@ -836,8 +842,9 @@ class Page extends ModelWithContent
     /**
      * Returns the panel icon definition
      * according to the blueprint settings
+     * @internal
      *
-     * @params array $params
+     * @param array $params
      * @return array
      */
     public function panelIcon(array $params = null): array
@@ -872,6 +879,7 @@ class Page extends ModelWithContent
     /**
      * Returns the escaped Id, which is
      * used in the panel to make routing work properly
+     * @internal
      *
      * @return string
      */
@@ -881,6 +889,8 @@ class Page extends ModelWithContent
     }
 
     /**
+     * @internal
+     *
      * @param string|array|false $settings
      * @param array|null $thumbSettings
      * @return array|null
@@ -915,6 +925,7 @@ class Page extends ModelWithContent
 
     /**
      * Returns the full path without leading slash
+     * @internal
      *
      * @return string
      */
@@ -926,6 +937,7 @@ class Page extends ModelWithContent
     /**
      * Returns the url to the editing view
      * in the panel
+     * @internal
      *
      * @return string
      */
@@ -950,6 +962,7 @@ class Page extends ModelWithContent
 
     /**
      * Returns the parent id, if a parent exists
+     * @internal
      *
      * @return string|null
      */
@@ -966,6 +979,7 @@ class Page extends ModelWithContent
      * Returns the parent model,
      * which can either be another Page
      * or the Site
+     * @internal
      *
      * @return Page|Site
      */
@@ -1004,6 +1018,7 @@ class Page extends ModelWithContent
 
     /**
      * Draft preview Url
+     * @internal
      *
      * @return string|null
      */
@@ -1030,6 +1045,7 @@ class Page extends ModelWithContent
 
     /**
      * Creates a string query, starting from the model
+     * @internal
      *
      * @param string|null $query
      * @param string|null $expect
@@ -1120,6 +1136,8 @@ class Page extends ModelWithContent
     }
 
     /**
+     * @internal
+     *
      * @return Template
      */
     public function representation($type)
