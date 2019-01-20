@@ -165,14 +165,20 @@ class HelperPage extends Page
     {
         if ($reflection = $this->reflection()) {
             if ($reflection->hasReturnType() === true) {
-                return $reflection->getReturnType();
+                $type = $reflection->getReturnType();
+
+                if ($type->allowsNull() === true) {
+                    $type = $type . '|null';
+                }
+
+                return $type;
             }
 
             if ($docBlock = $this->docBlock()) {
-                if ($returnType = $docBlock->getReturnType()) {
-                    $returnType = trim((string)$returnType->getType());
-                    $returnType = substr($returnType, 0, 1) === '\\' ? substr($returnType, 1) : $returnType;
-                    return $returnType;
+                if ($type = $docBlock->getReturnType()) {
+                    $type = trim((string)$type->getType());
+                    $type = substr($type, 0, 1) === '\\' ? substr($type, 1) : $type;
+                    return $type;
                 }
             }
         }

@@ -149,25 +149,20 @@ class MethodPage extends HelperPage
         return $this->reflection = false;
     }
 
+    public function parameters()
+    {
+        $parameters = parent::parameters();
+
+        foreach ($parameters as $key => $parameter) {
+            $parameters[$key]['type'] = $this->typeDefinition($parameter['type']);
+        }
+
+        return $parameters;
+    }
+
     public function returnType()
     {
-        $type = parent::returnType();
-
-        if ((string)$type === 'self') {
-            $type = $this->parent()->class();
-        }
-
-        // Find manual reference page
-        if ($reference = page('docs/reference')->grandChildren()->filterBy('class', $type)->first()) {
-            return Html::a($reference->url(), $type);
-        }
-
-        // Find auto-generated objects reference page
-        if ($reference = page('docs/reference/objects/@')->grandChildren()->filterBy('class', $type)->first()) {
-            return Html::a($reference->url(), $type);
-        }
-
-        return $type;
+        return $this->typeDefinition(parent::returnType());
     }
 
     public function title(): Field
@@ -179,5 +174,27 @@ class MethodPage extends HelperPage
         }
 
         return parent::title()->value($title);
+    }
+
+    protected function typeDefinition($type = null)
+    {
+        if ((string)$type === 'self') {
+            $type = $this->parent()->class();
+        }
+
+        $roots = [
+            'docs/reference',
+            'docs/reference/objects/@'
+        ];
+
+        foreach ($roots as $root) {
+            $class   = str_replace('|null', '', $type);
+            $classes = page($root)->grandChildren();
+            if ($reference = $classes->filterBy('class', $class)->first()) {
+                return Html::a($reference->url(), $type);
+            }
+        }
+
+        return $type;
     }
 }
