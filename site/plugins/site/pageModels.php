@@ -14,6 +14,7 @@ return [
     'icons'           => 'Kirby\\Site\\Models\\IconsPage',
     'kirbytag'        => 'Kirby\\Site\\Models\\KirbyTagPage',
     'method'          => 'Kirby\\Site\\Models\\MethodPage',
+    'packages'        => 'Kirby\\Site\\Models\\PackagesPage',
     'root'            => 'Kirby\\Site\\Models\\RootPage',
     'url'             => 'Kirby\\Site\\Models\\UrlPage',
     'validator'       => 'Kirby\\Site\\Models\\ValidatorPage',

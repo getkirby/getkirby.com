@@ -2,10 +2,10 @@
 
 namespace Kirby\Site\Models;
 
-use Kirby\Cms\Pages;
 use Kirby\Cms\Field;
 use Kirby\Cms\Html;
 use Kirby\Cms\Page;
+use Kirby\Cms\Pages;
 use Kirby\Site\DocBlock;
 use Kirby\Toolkit\Str;
 use ReflectionClass;
@@ -127,6 +127,8 @@ class ClassPage extends Page
         if ($fromContent->isNotEmpty()) {
             return $fromContent;
         }
+
+        return new Field($this, 'excerpt', null);
     }
 
     public function githubDocs($action = 'tree'): string
