@@ -11,11 +11,7 @@
   <tr>
     <td><code>$<?= $param['name'] ?></code></td>
     <td><code><?= $param['type'] ?></code></td>
-    <td>
-      <?php if ($param['default'] !== null): ?>
-      <code><?= $param['default'] ?></code>
-      <?php endif ?>
-    </td>
+    <td><code><?= $param['default'] ?></code></td>
     <td class="text"><?= kirbytext($param['description']) ?></td>
   </tr>
   <?php endforeach ?>
