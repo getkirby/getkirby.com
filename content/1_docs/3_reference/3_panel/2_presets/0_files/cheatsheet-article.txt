@@ -11,18 +11,22 @@ Text:
 A basic blueprint with a files preset creates an empty files upload section:
 
 ```yaml
-Title: Files Preset
+Title: Files preset example
 preset: files
 ```
 
-(screenshot: files-preset.jpg)
+### Empty
+(screenshot: files-empty.png)
+
+### Filled
+(screenshot: files-filled.png)
 
 This basic blueprint can be extended in many ways.
 
 ## Add a headline and a template
 
 ```yaml
-title: Gallery Section
+title: Gallery section
 preset: files
 headline: Images
 template: image
@@ -33,36 +37,19 @@ All presets can also be used within tabs as the following example shows.
 </info>
 
 ```yaml
-title: Team
-icon: 😺
-options:
-  url: false
-  status: false
-  delete: false
+title: Trip
+icon: ✈
+
 tabs:
-  team:
-    label: Team
-    preset: pages
-    drafts:
-      headline: New Team Members
-      info: "{{ page.position }}"
-      template: team-member
-    listed:
-      headline: Team
-      layout: cards
-      info: "{{ page.position }}"
-      template: team-member
-      image:
-        ratio: 1/1
-        cover: true
-  content:
-    label: Content
+  details:
+    label: Details
     preset: page
-    pages: false
     fields:
       intro:
         label: Intro
         type: textarea
-        size: medium
+  gallery:
+    label: Gallery
+    preset: files
 ```
 

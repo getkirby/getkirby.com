@@ -11,13 +11,13 @@ Text:
 This allows you to create a very basic blueprint like this:
 
 ```yaml
-title: Test
+title: Page preset example
 preset: page
 ```
 
 This simple blueprint creates an empty main section and a sidebar with a files and a pages section.
 
-(screenshot: page-preset.jpg)
+(screenshot: page-empty.png)
 
 You can now extend this basic preset by adding as many fields as you like:
 
@@ -28,13 +28,17 @@ preset: page
 fields:
   intro:
     type: textarea
-    size: medium
+    size: small
   text:
     type: textarea
-    size: large
+    size: small
 ```
 
-(screenshot: page-preset-with-fields.jpg)
+### Empty
+(screenshot: page-setup.png)
+
+### Filled
+(screenshot: page-filled.png)
 
 And you can of course extend this basic setup in many ways.
 
