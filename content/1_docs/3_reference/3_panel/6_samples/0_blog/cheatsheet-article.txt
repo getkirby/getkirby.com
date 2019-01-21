@@ -53,7 +53,7 @@ sortBy: date desc
 
 ## Single article
 
-```yaml "/site/blueprints/sections/article.yml"
+```yaml "/site/blueprints/pages/article.yml"
 title: Article
 num: date
 icon: 📖
