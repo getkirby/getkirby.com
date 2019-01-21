@@ -91,7 +91,7 @@ Reuse in your page blueprint:
 **Simple reuse**
 
 ```yaml "/site/blueprints/pages/article.yml"
-sidebar:
+sections:
   meta:
     type: fields
     fields:
@@ -101,7 +101,7 @@ sidebar:
 **Extended reuse**
 
 ```yaml "/site/blueprints/pages/article.yml"
-sidebar:
+sections:
   meta:
     type: fields
     fields:
@@ -164,7 +164,7 @@ info: "{{ file.dimensions }}"
 And reuse it in your blueprint:
 
 ```yaml "/site/blueprints/pages/product.yml"
-sidebar:
+sections:
   cover:
     extends: sections/image
     template: cover
