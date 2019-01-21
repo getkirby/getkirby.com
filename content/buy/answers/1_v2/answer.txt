@@ -1,0 +1,5 @@
+Title: Can I still buy a v2 license?
+----
+Text:
+
+If you started a v2 project and you cannot upgrade right now, you can purchase a (link: https://pay.paddle.com/checkout/550182 text: Kirby 2 Personal License) or (link: https://pay.paddle.com/checkout/550181 text: Kirby 2 Pro License) until **15.03.2019**. Please be aware that there are no upgrade discounts for those licenses. You can upgrade them any time later by paying the difference to a Kirby 3 license though.
