@@ -36,6 +36,21 @@ return [
 ];
 ```
 
+You can also use `tls` or `ssl` explicitly via the `security` key:
+
+```php
+return [
+  'email' => [
+    'transport' => [
+      ...
+      'port' => 587,
+      'security' => 'tls'
+    ]
+  ]
+];
+```
+
+
 ## Email transport with authentication
 
 ```php
