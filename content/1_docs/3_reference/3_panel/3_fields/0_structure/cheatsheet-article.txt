@@ -82,6 +82,16 @@ You can set default values for structure fields which will prepopulate the field
 
 You can define the columns that are shown in the table. This is especially useful if you have a lot of fields in your structure and you don't want to show them all on first sight, but still keep them editable. Columns can also change the text alignment, set a custom width and define a before and after text that will be prepended or appended to the value.
 
+| Option | Value | Description |
+|--------|-------|-------------|
+| `label` | `string` | Set column label
+| `width`| `1/2`, `1/3`, `1/4`, `2/3`, `3/4` | Set width of column
+| `align` | `left`, `center`, `right` | Set text alignment
+| `before`| `string` | Set text to prepend value
+| `after` | `string` | Set text to append value
+
+### Example
+
 ```yaml
 fields:
 	holidays:
@@ -90,7 +100,11 @@ fields:
 			title:
 				width: 1/4
 			images:
-				width: 3/4
+				width: 1/2
+			price:
+				width: 1/4
+				algin: right
+				after: "USD"
 		fields:
 			title:
 				type: text
@@ -98,6 +112,8 @@ fields:
 				type: files
 			description:
 				type: textarea
+			price:
+				type: number
 ```
 
 ## Accessing structure fields in your templates
