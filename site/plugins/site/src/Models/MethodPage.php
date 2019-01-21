@@ -136,19 +136,6 @@ class MethodPage extends HelperPage
 
     }
 
-    public function reflection()
-    {
-        if ($this->reflection !== null) {
-            return $this->reflection;
-        }
-
-        if ($this->methodExists() === true) {
-            return $this->reflection = new ReflectionMethod($this->className(), $this->methodName());
-        }
-
-        return $this->reflection = false;
-    }
-
     public function parameters()
     {
         $parameters = parent::parameters();
@@ -168,11 +155,24 @@ class MethodPage extends HelperPage
         ];
 
         foreach ($roots as $root) {
-            $index = page($root)->grandChildren();
+            $index = page($root)->index();
             if ($page = $index->filterBy('class', $class)->first()) {
                 return $page;
             }
         }
+    }
+
+    public function reflection()
+    {
+        if ($this->reflection !== null) {
+            return $this->reflection;
+        }
+
+        if ($this->methodExists() === true) {
+            return $this->reflection = new ReflectionMethod($this->className(), $this->methodName());
+        }
+
+        return $this->reflection = false;
     }
 
     public function returnType()
