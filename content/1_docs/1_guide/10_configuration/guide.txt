@@ -7,12 +7,11 @@ Description: Almost every aspect of Kirby can be controlled and configured to do
 ----
 Text:
 
-## The config.php
+## The `config.php`
 
 General Kirby configuration settings and configuration settings for plugins go into `/site/config/config.php`. The config file contains a return statement with an array of config options.
 
 ```php "/site/config/config.php"
-
 <?php
 
 return [
@@ -36,7 +35,11 @@ return [
 ];
 ```
 
-### Using options
+<warning>
+Since Kirby is not being fully initialized yet when reading the configuration, you cannot use the `$kirby` object or `kirby()` helper in the `config.php`.
+</warning>
+
+## Using options
 
 Config options can be used anywhere in Kirby with the `$kirby->option()` method:
 
@@ -62,7 +65,7 @@ option('someOtherOption', 'my fallback');
 
 ### All configuration options
 
-(link: docs/reference/system/options text: All config options)
+(reference: system/options)
 
 
 ## Hooks and Routes
@@ -84,7 +87,7 @@ return [
 
 ### All hooks
 
-(link: docs/reference/plugins/hooks text: All hooks)
+(reference: plugins/hooks)
 
 ## Multi-environment setup
 
@@ -105,9 +108,9 @@ Note that the settings in the standard `config.php` file are always used. If you
 
 ## Custom folder setup
 
-With Kirby 3 it is very easy to adjust Kirby's default folder setup. Every path to a system-relevant directory is called root in Kirby. All roots can be configured when Kirby is initialized, which normally happens in your `index.php`.
+Kirby lets you adjust its default folder setup. Every path to a system-relevant directory is called root in Kirby. All roots can be configured when Kirby is initialized, which normally happens in your `index.php`.
 
-Here's a simple example in which the site and content folders are renamed.
+Here is an example in which the site and content folders are renamed.
 
 ```php "/index.php"
 <?php
@@ -127,11 +130,11 @@ echo $kirby->render();
 
 ### All configurable roots
 
-(link: docs/reference/system/roots text: All roots)
+(reference: system/roots)
 
 ### Public folder setup
 
-In our starterkit, we offer a flat setup that installs all folders directly in the document root of your server. This is not always the best solution, but it's the solution that is most compatible with all types of hosting.
+In our Starterkit, we offer a flat setup that installs all folders directly in the document root of your server. This is not always the best solution, but it's the solution that is most compatible with all types of hosting.
 
 A typical setup for secure, modern web applications has every private folder behind the document root and the domain points to a public folder with the `index.php` and additional public assets like CSS files, images, etc.
 
@@ -190,7 +193,7 @@ echo $kirby->render();
 
 ### All configurable URLs
 
-(link: docs/reference/system/urls text: All URLs)
+(reference: system/urls)
 
 ## Panel configuration
 
