@@ -1,0 +1,5 @@
+Text:
+
+## The `$props` parameter
+
+The properties are the same as for (link: docs/reference/objects/page/create#the-props-parameter text: `Page::create`). However, `num`, `parent`, `site` and `url` are  pre-defined by the parent `$page` and cannot be changed.

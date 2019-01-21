@@ -1,19 +1,26 @@
-Text: 
+Text:
+
+## The `$props` parameter
+
+Property | Type |
+--|--|
+`slug` | `string` |
+`url` | `string` |
+`template` | `string` |
+`model` | `string` |
+`num` | `mixed` |
+`draft` | `bool` |
+`content` | `array` |
 
 ## Example
 
 ```php
-<?php
-try {
-  $page->create('projects/project-d', 'project', [
-    'title' => 'A page title',
-    'date' => '2016-02-21',
-    'text' => 'Lorem ipsum dolor set amet ...'
-  ]);
-} catch(Exception $e) {
-
-  echo $e->getMessage();
-
-}
-?>
+$page = Page::create([
+  'slug'     => 'a-new-article',
+  'template' => 'article',
+  'content' => [
+    'title'  => 'A new article'
+    'author' => 'Homer Simpson'
+  ]
+]);
 ```
