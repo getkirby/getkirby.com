@@ -6,31 +6,31 @@ Date: 22.01.2019
 
 ----
 
-Description:
+Description: Learn more about the hidden gems and secrets in our own website
 
 ----
 
 Text:
 
-The Kirby website plays a very special role for us. On one hand it's presenting Kirby and its features to the world and should do a good job there to generate happy customers and hopefully some sales. On the other hand our website is all about Kirby's documentation – the part that has always been way more complex than the rest.
+The Kirby website plays a very special role for us. On one hand, it's presenting Kirby and its features to the world and should do a good job there to generate happy customers and hopefully some sales. On the other hand, our website is all about Kirby's documentation – the part that has always been way more complex than the rest.
 
 (image: home.jpg)
 
-In this article I want to focus on all the hidden gems and secrets that we built into this site to make our lifes easier while maintaining the documentation and finally give you better and more reliable docs.
+In this article, I want to focus on all the hidden gems and secrets that we built into this site to make our lives easier while maintaining the documentation and finally give you better and more reliable docs.
 
 ****
 
-When we set out to create a new site for Kirby 3 we wanted to undo a lot of mistakes that we made with our old documentation. The old docs were mostly built and maintained by hand. That process has always been error prone and time consuming.
+When we set out to create a new site for Kirby 3 we wanted to undo a lot of mistakes that we made with our old documentation. The old docs were mostly built and maintained by hand. That process has always been error-prone and time-consuming.
 
-With the new version and many changes under the hood we knew that it would be too much effort to update everything manually. Fortunately our new version has a very special feature that we used to solve this …
+With the new version and many changes under the hood, we knew that it would be too much effort to update everything manually. Fortunately, our new version has a very special feature that we used to solve this …
 
 ## Virtual pages
 
-While Kirby's main data source is still files and folders, you can now mix regular pages with pages coming from a database, CSV file, API or anything else that is parseable by PHP. In our case a huge part of our reference is generated directly from PHP reflections and other bits of magic.
+While Kirby's main data source is still files and folders, you can now mix regular pages with pages coming from a database, CSV file, API or anything else that is parseable by PHP. In our case, a huge part of our reference is generated directly from PHP reflections and other bits of magic.
 
 ### Pages from PHP reflections
 
-"What are PHP reflections?" you might ask. PHP has a (link: http://php.net/manual/en/book.reflection.php text: built-in set of classes) that you can use to inspect your own code. If you want to know more details about a certain PHP  class for example, you can do the following …
+"What are PHP reflections?" you might ask. PHP has (link: http://php.net/manual/en/book.reflection.php text: a built-in set of classes) that you can use to inspect your own code. If you want to know more details about a certain PHP class, for example, you can do the following …
 
 ```php
 $reflection = new ReflectionClass('MyClass');
@@ -44,7 +44,7 @@ Reflections have a lot of handy little features such as getting the visibility o
 
 To document our main classes (i.e. (link: docs/reference/objects/site text: $site), (link: docs/reference/objects/page  text: $page), (link: docs/reference/objects/file  text: $file)) and their methods we use this feature inside a (link: docs/guide/templates/page-models text: page model) to create automatic subpages for each method.
 
-In our reference we use regular pages to add each documented class …
+In our reference, we use regular pages to add each documented class …
 
 ```filesystem
 docs/
@@ -100,7 +100,7 @@ Children are created as an array, which is finally passed to the `Pages::factory
 
 Those subpages are first class citizens in Kirby and everything around them will work. You can filter them, you can sort them, routing works out of the box, templates will work, etc. (link: docs/reference/objects/page/num text: Here's an example of such a virtual page)
 
-In our case we define that each subpage automatically gets a new `MethodPage` model. This is then used to fetch more information about each class method to inject in the template (arguments, method call, return type, etc.) You could nest this indefinitely if you want and combine it again with real pages in the file system. The possibilities are endless.
+In our case, we define that each subpage automatically gets a new `MethodPage` model. This is then used to fetch more information about each class method to inject in the template (arguments, method call, return type, etc.) You could nest this indefinitely if you want and combine it again with real pages in the file system. The possibilities are endless.
 
 We use the same technique for our (link: docs/reference/templates/helpers text: helpers), (link: docs/reference/system/validators text: validators), (link: docs/reference/templates/field-methods text: field methods) and (link: docs/reference text: more).
 
@@ -169,9 +169,9 @@ As you can see in the example above, the model takes the contents of the SVG dir
 
 ### Automatic FTW
 
-The combination of regular pages and such automated content generators has worked really great for us so far. We can still combine automatic content with hand-written content to make it less technical and give more real-life examples. But at the same time we can be sure that tiny details are always correct.
+The combination of regular pages and such automated content generators has worked really great for us so far. We can still combine automatic content with hand-written content to make it less technical and give more real-life examples. But at the same time, we can be sure that tiny details are always correct.
 
-When things like arguments or return types are not correctly documented, we instantly know that we need to fix this in our source code. That elevates our documentation to a realtime code quality tool.
+When things like arguments or return types are not correctly documented, we instantly know that we need to fix this in our source code. That elevates our documentation to a real-time code quality tool.
 
 ## Syntax Highlighting
 
@@ -195,7 +195,7 @@ Every code block has a copy button and we can inject the filename in a small too
 <?php snippet('footer') ?>
 ```
 
-But my favorite part is our new filesystem block that Fabian created. We used to document structures in the filesystem with screenshots, which was never very user friendly and hard to keep updated and consistent:
+But my favorite part is our new filesystem block that Fabian created. We used to document structures in the filesystem with screenshots, which was never very user-friendly and hard to keep updated and consistent:
 
 ```filesystem
 content/
@@ -275,7 +275,7 @@ To optimize screenshots and other images, we use (link: https://cloudinary.com t
 
 ### Algolia
 
-We still trust in (link: https://algolia.com text: Algolia) for our search. They have been greate over the last years and we get a very powerful search with very little effort. We re-index our content whenever we push updates to the server. This way we can make sure that the search index is always up to date.
+We still trust in (link: https://algolia.com text: Algolia) for our search. They have been great over the last years and we get a very powerful search with very little effort. We re-index our content whenever we push updates to the server. This way we can make sure that the search index is always up to date.
 
 ### Deployment
 
