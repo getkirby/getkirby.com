@@ -35,7 +35,7 @@ permissions:
     sort: true
     update: true
     delete: false
-  users:
+  user:
     create: false
     createAvatar: true
     deleteAvatar: false
@@ -61,7 +61,7 @@ permissions:
     update: false
   pages:
     delete: false
-  users: false
+  user: false
 ```
 
 This would prevent the editor from accessing any part of the user management, from deleting pages and from updating the site settings.
@@ -71,7 +71,7 @@ This would prevent the editor from accessing any part of the user management, fr
 For parts with many actions that get the same setting, you can use the * wildcard as first argument. Afterwards you can still override specific actions, for example to whitelist actions:
 
 ```yaml
-users:
+user:
   *: false
   changeName: true
 ```
