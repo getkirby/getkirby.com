@@ -1,3 +1,19 @@
+## Example with numeric keys
+
+If you want to store numeric keys as values, you have to use the long notation with `value` and `text`:
+
+```yaml
+fields:
+  category:
+    label: Category
+    type: <?= $field . PHP_EOL ?>
+    options: 
+      - value: 100
+        text: Design
+      - value: 200
+        text: Architecture
+```
+
 ## Dynamic options
 
 Our options (link: docs/guide/blueprints/query-language text: query syntax) offers a very powerful way of converting pages, files, users, page values and even items in structure fields into automatically generated option lists.
