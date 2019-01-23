@@ -370,6 +370,10 @@ yMr6qjWF/
 
 The `.htpasswd` is used to store the encrypted passwort. The `index.php` contains system-critical data such as the email address, user name, language and role. Finally, the `user.txt` stores any additional user data.
 
+<info>
+Migrating user accounts between version 2 and 3 is no trivial task and problems can occur. If you only have a few accounts, consider just creating them from scratch. If that is not an option, the following instructions offer a starting point how to move them over.
+</info>
+
 To migrate your Kirby 2 user accounts to Kirby 3, you need to follow these steps:
 
 1. **Create (link: guide/users/roles#creating-your-own-roles text: user blueprints)** for every of your (link: guide/users/roles text: user roles). If you do not create these first, all user account will be assigned the role `nobody`.
