@@ -9,7 +9,7 @@ Description: Learn how to move your Kirby 2 user accounts over
 Text:
 
 <info>
-Migrating user accounts between version 2 and 3 is no trivial task and problems can occur. If you only have a few accounts, **consider creating them from scratch**. If that is not an option, the following instructions offer a starting point how to move them over.
+Migrating user accounts between version 2 and 3 is no trivial task and problems can occur. If you only have a few accounts, **consider creating them from scratch**. If that is not an option, the following instructions are a starting point to moving them over.
 </info>
 
 ## A new approach to user accounts
@@ -28,14 +28,14 @@ The `.htpasswd` is used to store the encrypted passwort. The `index.php` contain
 
 To migrate your Kirby 2 user accounts to Kirby 3, you need to follow these steps:
 
-1. **Backup** all Kirby 2 account files from `/site/accounts`. Things can go wrong. We do not want to lose this important data.
-2. **Create (link: docs/guide/users/roles#creating-your-own-roles text: user blueprints)** for every of your (link: docs/guide/users/roles text: user roles). If you do not create these first, all user account will be assigned the role `nobody`.
-3. Remove all `.logins` and `index.html` files from `/site/accounts`. Only your Kirby 2 account files should be left.
+1. **Backup** all Kirby 2 account files from `/site/accounts`. Things can go wrong. We do not want you to lose this important data.
+2. **Create (link: docs/guide/users/roles#creating-your-own-roles text: user blueprints)** for every (link: docs/guide/users/roles text: user role). If you do not create these first, all user accounts will be assigned the role `nobody`.
+3. Remove the `.logins` and `index.html` files from `/site/accounts`. Only your Kirby 2 account files should be left.
 4. Put the following **`migration.php` script** into your document root next to the `index.php` and run it with `http://yourdomain.com/migrate.php`.
 5. Delete the script.
 
 <warning>
-Kirby 3 requires passwords to be at least 8 characters long. If a password from Kirby 2 is shorter it will not work. In those cases, please generate the hash of a new password with the `User::hashPassword()` method and write it manually to the corresponding `.htpasswd`.
+Kirby 3 requires passwords to be at least 8 characters long. If a password from Kirby 2 is shorter, users will not be able to log in with these old passwords. In those cases, please generate the hash of a new password with the `User::hashPassword()` method and write it manually to the corresponding `.htpasswd`.
 </warning>
 
 ## The `migrate.php` script
