@@ -2,10 +2,6 @@ Title: How to upgrade Kirby 2 plugins
 
 ----
 
-Date: 27.12.2018
-
-----
-
 Description: Learn how to adapt your Kirby 2 plugins to our new plugin system
 
 ----

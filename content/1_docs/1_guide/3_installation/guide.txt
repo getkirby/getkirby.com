@@ -122,9 +122,10 @@ If you used one of the advanced installation methods, you can also use them to u
 - (link: docs/cookbook/installation/composer#updating-kirby text: Update via Composer)
 - (link: docs/cookbook/installation/git#updating-kirby text: Update of the Git submodule)
 
-### How to upgrade from Kirby 2
-
+<info>
+**Upgrade from Kirby 2**
 If you want to upgrade an existing Kirby 2 installation, head over to our (link: docs/cookbook/migration/sites text: upgrade guide).
+</info>
 
 ## Troubleshooting
 

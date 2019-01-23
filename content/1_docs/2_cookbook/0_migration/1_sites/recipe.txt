@@ -2,10 +2,6 @@ Title: How to upgrade from Kirby 2
 
 ----
 
-Date: 27.12.2018
-
-----
-
 Description: Learn how to upgrade an existing Kirby 2 project to Kirby 3
 
 ----
@@ -74,7 +70,7 @@ Kirby\Cms\System::upgradeContent(__DIR__ . '/content');
 
 ### Delete accounts and avatars
 
-The Kirby 2 accounts and avatars are not compatible with Kirby 3. Please delete your `/site/accounts` and `assets/avatars` folders and install accounts from scratch.
+The Kirby 2 accounts and avatars are not compatible with Kirby 3. Please delete your `/site/accounts` and `assets/avatars` folders and install accounts from scratch. If that is not an option, cause you have to many accounts you need to migrate, make sure to read the (link: #users-and-permissions text: users section) below.
 
 ### License
 
@@ -361,6 +357,82 @@ User roles can no longer be defined in the config settings, but solely (link: do
 ### Accessing the `$user` object
 
 The user object is no longer accessed via the `$site` but via the `$kirby` object. All references to `$site->user()` have to be replaced by `$kirby->user()`.
+
+### Migrating user accounts
+The account structure differs significantly from version 2. In Kirby 3, accounts still live in `/site/accounts`. However, each account consists of a folder (named with a hash of its ID) and three files:
+
+```filesystem
+yMr6qjWF/
+  .htpasswd
+  index.php
+  user.txt
+```
+
+The `.htpasswd` is used to store the encrypted passwort. The `index.php` contains system-critical data such as the email address, user name, language and role. Finally, the `user.txt` stores any additional user data.
+
+To migrate your Kirby 2 user accounts to Kirby 3, you need to follow these steps:
+
+1. **Create (link: guide/users/roles#creating-your-own-roles text: user blueprints)** for every of your (link: guide/users/roles text: user roles). If you do not create these first, all user account will be assigned the role `nobody`.
+2. Run the following **migration script** at the root of your installation (that's placing it next to the `index.php`).
+3. Delete the script.
+
+```php "/users.php"
+<?php
+
+require __DIR__ . '/kirby/bootstrap.php';
+
+$kirby = new Kirby;
+$dir   = $kirby->root('accounts');
+
+// authenticate as almighty
+$kirby->impersonate('kirby');
+
+// loop through each K2 account file
+foreach (Dir::files($dir) as $account) {
+
+    // read K2 account file
+    $data  = Data::read($dir . '/' . $account, 'yaml');
+
+    // prepare data to be processed
+    $name        = $data['username'];
+    $email       = $data['email'];
+    $password    = $data['password'];
+    $role        = $data['role'];
+    $language    = $data['language'];
+
+    unset(
+        $data[0],
+        $data['username'],
+        $data['email'],
+        $data['password'],
+        $data['role'],
+        $data['language'],
+        $data['history']
+    );
+
+    // create new K3 user account
+    $user = $kirby->users()->create([
+        'email'    => $email,
+        'name'     => $name,
+        'role'     => $role,
+        'language' => $language,
+        'content'  => $data
+    ]);
+
+    // write K2 password hash to .htpasswd
+    F::write($dir . '/' . $user->id() . '/.htpasswd', $password);
+
+    // delete K2 account file
+    F::remove($dir . '/' . $account);
+
+    echo 'User migrated: ' . $user->email() . '<br>';
+}
+
+```
+
+<warning>
+Kirby 3 requires passwords to be at least 8 characters long. If a password from Kirby 2 is shorter it will not work. In those cases, please generate the hash of a new password with the `User::hashPassword()` method and write it manually to the corresponding `.htpasswd`.
+</warning>
 
 
 ## Toolkit
