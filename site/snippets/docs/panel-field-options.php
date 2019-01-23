@@ -8,9 +8,9 @@ fields:
     label: Category
     type: <?= $field . PHP_EOL ?>
     options: 
-      - value: 100
+      - value: '100'
         text: Design
-      - value: 200
+      - value: '200'
         text: Architecture
 ```
 
