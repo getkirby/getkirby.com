@@ -1,4 +1,4 @@
-Text: 
+Text:
 
 ## Example
 
@@ -6,14 +6,17 @@ Text:
 try {
 
   $user = $kirby->users()->create([
-    'username'  => 'john',
+    'name'      => 'john',
     'email'     => 'john@doe.com',
     'password'  => 'secretpasswordwillbeencrypted',
-    'firstName' => 'John',
-    'lastName'  => 'Doe'
+    'language'  => 'en',
+    'role'      => 'editor',
+    'content'   => [
+      'birthdate' => '1989-01-29'
+    ]
   ]);
 
-  echo 'The user has been created';
+  echo 'The user "' . $user->name() . '" has been created';
 
 } catch(Exception $e) {
 
