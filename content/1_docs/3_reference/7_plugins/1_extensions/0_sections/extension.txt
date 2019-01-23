@@ -214,7 +214,7 @@ panel.plugin('yourname/modified', {
         }
       },
       created: function() {
-        this.load().then(function (response) {
+        this.load().then(response => {
           this.headline = response.headline;
           this.text     = response.text;
         });
@@ -241,7 +241,7 @@ panel.plugin('yourname/modified', {
         }
       },
       created: function() {
-        this.load().then(function (response) {
+        this.load().then(response => {
           this.headline = response.headline;
           this.text     = response.text;
         });
