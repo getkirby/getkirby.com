@@ -159,3 +159,42 @@ fields:
     label: Text
     type: textarea
 ```
+
+## Adapt all to your needs
+
+Kirby gives you the flexibility to set up the (glossary: Panel), so that it adapts to the needs of every single page/template. Use the layout possibilities to create the structure that works best for you:
+
+```yaml
+title: My blueprint
+
+columns:
+  - width: 1/1
+    sections:
+      gallery:
+        type: files
+        layout: card
+        ...
+
+  - width: 1/2
+    sections:
+      drafts:
+        type: pages
+        status: draft
+        ...
+      review:
+        type: pages
+        status: unlisted
+        ...
+
+  - width: 1/2
+    sections:
+      published:
+        type: pages
+        status: listed
+        ...
+```
+
+
+## There is more…
+
+If this isn't yet enough ways and space for you to structure your sections and fields, **move on with (link: docs/guide/blueprints/tabs text: tabs)**.
