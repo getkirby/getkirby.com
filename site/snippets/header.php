@@ -18,7 +18,7 @@
   <?php if ($page->isHomePage()): ?>
   <div class="producthunt">
     <div class="wrap">
-      <a href="https://www.producthunt.com/posts/kirby-3-0">🎉&nbsp;&nbsp;We are currently <strong>#2 product of the day</strong> on <i>Product&nbsp;Hunt</i></a>
+      <a href="https://www.producthunt.com/posts/kirby-3-0">🎉&nbsp;&nbsp;Featured as <strong>#1 product of the day</strong> on <i>Product&nbsp;Hunt</i></a>
     </div>
   </div>
 
