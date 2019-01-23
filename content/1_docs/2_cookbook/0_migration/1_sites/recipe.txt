@@ -10,6 +10,10 @@ Text:
 
 Kirby 3 comes with a wealth of new features and changes under the hood. In this guide we go through the steps necessary to upgrade your existing Kirby 2 site to Kirby 3 step by step.
 
+<warning>
+While we hope upgrading to version 3 will be rather smooth for you, there are always things that can go wrong during such a process. We urge you to **make a backup** of your Kirby 2 site in any case.
+</warning>
+
 <info>
 If you find anything that is not covered by this guide, please create an issue on (link: https://github.com/getkirby/getkirby.com text: GitHub).
 </info>
@@ -27,25 +31,19 @@ The Kirby CLI is no longer compatible with Kirby 3. Kirby and extensions can ins
 
 ## Folder and file structure
 
-### Replace `/kirby` folder
+### Replace core files and folders
 
-Replace the old `/kirby` folder with the new `/kirby`folder.
-
-### Replace `index.php`
-
-The old `index.php` is no longer compatible. Replace it with the new one.
-
-### Replace `.htaccess` file
-
-If you are on an Apache server, replace the old `.htaccess` file with the new one. On other servers, change your server configuration accordingly.
+1. Replace the old `/kirby` folder with the new `/kirby`folder.
+2. The old `index.php` is no longer compatible. Replace it with the new one.
+3. If you are on an Apache server, replace the old `.htaccess` file with the new one. On other servers, change your server configuration accordingly.
 
 ### Delete the `thumbs` folder
 
-Thumbnails and other media files are now located in `/media` and no longer in the `/thumbs` folder. Removing it should be enough. Thumbnails will be recreated in the `media` folder automatically afterwards.
+Thumbnails and other media files are now located in `/media` and no longer in the `/thumbs` folder. Removing it should be enough. Thumbnails will be recreated in the `/media` folder automatically afterwards.
 
-### Underscore as number separator for folders
+### New number separator for folders: underscore
 
-To fix many of the sorting number issues in Kirby 2, we moved from
+To fix many of the sorting number issues in Kirby 2, we changed the ordering number separator of the content folder names from
 
 ```filesystem
 1-projects/
@@ -57,12 +55,12 @@ to
 1_projects/
 ```
 
-To change the sorting numbers of all your content folders, put the following script into your document root next to the index.php and run it with `http://yourdomain.com/upgrade.php`. Delete this file afterwards.
+To change the sorting numbers of all your content folders, put the following script into your document root next to the `index.php` and run it with `http://yourdomain.com/upgrade.php`. Delete this file afterwards.
 
-```php "upgrade.php"
+```php "/upgrade.php"
 <?php
 
-include 'kirby/bootstrap.php';
+require __DIR__ . '/kirby/bootstrap.php';
 
 Kirby\Cms\System::upgradeContent(__DIR__ . '/content');
 ```
@@ -70,11 +68,11 @@ Kirby\Cms\System::upgradeContent(__DIR__ . '/content');
 
 ### Delete accounts and avatars
 
-The Kirby 2 accounts and avatars are not compatible with Kirby 3. Please delete your `/site/accounts` and `assets/avatars` folders and install accounts from scratch. If that is not an option, cause you have to many accounts you need to migrate, make sure to read the (link: #users-and-permissions text: users section) below.
+The Kirby 2 accounts and avatars are not compatible with Kirby 3. Please delete your `/site/accounts` and `assets/avatars` folders and install accounts from scratch. If that is not an option, because you have too many accounts, make sure to read the (link: docs/cookbook/migration/users text: user account migration) guide.
 
 ### License
 
-Kirby 3 requires a license file instead of the K2 config setting.
+Kirby 3 requires a license file instead of the K2 config setting. The license file will be generated when you enter your license information in the (glossary: Panel). You should remove the K2 config setting.
 
 ### Custom folder setup
 
@@ -82,7 +80,7 @@ The (link: docs/guide/configuration#custom-folder-setup text: custom folder setu
 
 ## Panel
 
-### Remove Panel folder
+### Remove `/panel` folder
 
 The Panel folder has been integrated into the Kirby folder to make updates easier. Therefore, the old Panel folder has to be removed.
 
@@ -160,19 +158,19 @@ In your `config.php`:
 ]
 ```
 
-### Rename field readonly option
+### Rename field `readonly` option
 
 The option to make a field readonly (`readonly: true`)  has been replaced with the `disabled` property: `disabled: true`. Change your blueprints accordingly.
 
-### Removed invalid field types
+### Remove invalid field types
 
 The following field types no longer exist and have to be replaced:
 
-- user field => (link: docs/reference/panel/fields/users text: users field)
-- page field => (link: docs/reference/panel/fields/pages text: pages field)
-- image field => (link: docs/reference/panel/fields/files text: files field)
-- checkbox field => (link: docs/reference/panel/fields/toggle text: toggle field)
-- datetime field => (link: docs/reference/panel/fields/date text: date field) with `time` option
+- `user` field &rarr; (link: docs/reference/panel/fields/users text: `users` field)
+- `page` field &rarr; (link: docs/reference/panel/fields/pages text: `pages` field)
+- `image` field &rarr; (link: docs/reference/panel/fields/files text: `files` field)
+- `checkbox` field &rarr; (link: docs/reference/panel/fields/toggle text: `toggle` field)
+- `datetime` field &rarr; (link: docs/reference/panel/fields/date text: `date` field) with `time` option
 
 Also remove or update custom field types, see (link: #plugins-and-extensions text: plugins and extensions)
 
@@ -187,7 +185,7 @@ The Kirby 2 Dashboards no longer exists in Kirby 3. With the Dashboard, Panel wi
 
 In addition to the `c::set()` settings, the standard way of adding options is now to use a `return` statement that returns an array of options:
 
-```php
+```php "/site/config/config.php"
 <?php
 return [
     'debug'  => true,
@@ -203,7 +201,7 @@ These options can be called with `$kirby->option('someSetting')`.
 
 - The `thumbs.presets` option has been removed. If you need this functionality, here's a workaround:
 
-```php "/site/config/config.php
+```php "/site/config/config.php"
 
 'thumbs' => [
   'presets' => [
@@ -358,86 +356,6 @@ User roles can no longer be defined in the config settings, but solely (link: do
 
 The user object is no longer accessed via the `$site` but via the `$kirby` object. All references to `$site->user()` have to be replaced by `$kirby->user()`.
 
-### Migrating user accounts
-The account structure differs significantly from version 2. In Kirby 3, accounts still live in `/site/accounts`. However, each account consists of a folder (named with a hash of its ID) and three files:
-
-```filesystem
-yMr6qjWF/
-  .htpasswd
-  index.php
-  user.txt
-```
-
-The `.htpasswd` is used to store the encrypted passwort. The `index.php` contains system-critical data such as the email address, user name, language and role. Finally, the `user.txt` stores any additional user data.
-
-<info>
-Migrating user accounts between version 2 and 3 is no trivial task and problems can occur. If you only have a few accounts, consider just creating them from scratch. If that is not an option, the following instructions offer a starting point how to move them over.
-</info>
-
-To migrate your Kirby 2 user accounts to Kirby 3, you need to follow these steps:
-
-1. **Create (link: guide/users/roles#creating-your-own-roles text: user blueprints)** for every of your (link: guide/users/roles text: user roles). If you do not create these first, all user account will be assigned the role `nobody`.
-2. Run the following **migration script** at the root of your installation (that's placing it next to the `index.php`).
-3. Delete the script.
-
-```php "/users.php"
-<?php
-
-require __DIR__ . '/kirby/bootstrap.php';
-
-$kirby = new Kirby;
-$dir   = $kirby->root('accounts');
-
-// authenticate as almighty
-$kirby->impersonate('kirby');
-
-// loop through each K2 account file
-foreach (Dir::files($dir) as $account) {
-
-    // read K2 account file
-    $data  = Data::read($dir . '/' . $account, 'yaml');
-
-    // prepare data to be processed
-    $name        = $data['username'];
-    $email       = $data['email'];
-    $password    = $data['password'];
-    $role        = $data['role'];
-    $language    = $data['language'];
-
-    unset(
-        $data[0],
-        $data['username'],
-        $data['email'],
-        $data['password'],
-        $data['role'],
-        $data['language'],
-        $data['history']
-    );
-
-    // create new K3 user account
-    $user = $kirby->users()->create([
-        'email'    => $email,
-        'name'     => $name,
-        'role'     => $role,
-        'language' => $language,
-        'content'  => $data
-    ]);
-
-    // write K2 password hash to .htpasswd
-    F::write($dir . '/' . $user->id() . '/.htpasswd', $password);
-
-    // delete K2 account file
-    F::remove($dir . '/' . $account);
-
-    echo 'User migrated: ' . $user->email() . '<br>';
-}
-
-```
-
-<warning>
-Kirby 3 requires passwords to be at least 8 characters long. If a password from Kirby 2 is shorter it will not work. In those cases, please generate the hash of a new password with the `User::hashPassword()` method and write it manually to the corresponding `.htpasswd`.
-</warning>
-
 
 ## Toolkit
 
@@ -446,44 +364,44 @@ The toolkit has been completely rewritten, new methods have been added, others r
 
 | Toolkit class  |  Replacement |
 |---|---|
-| Bitmask | --  |
-| Brick  | (link: docs/reference/tools/html text: Kirby\Toolkit\Html)  |
-| C | -- |
-| Cache  | Kirby\Cache  |
-| Cookie  | (link: docs/reference/tools/cookie text: Kirby\Http\Cookie)  |
-| Crypt  | -- |
-| Data  | (link: docs/reference/tools/data text: Kirby\Data)  |
-| Database  | Kirby\Database  |
-| Db  | Kirby\Database\Db   |
-| Detect | Kirby\CMS\System |
-| Dimensions  | Kirby\Image\Dimensions  |
-| Email  | (link: docs/reference/email text: Kirby\Email) |
-| Embed   |  (link: docs/reference/templates/helpers text: YouTube, Vimeo and Gist helpers) |
-| Error  | Kirby\Exception  |
-| ErrorReporting  | Kirby\Exception  |
-| Exif  | Kirby\Image\Exif  |
-| Folder  | -- |
-| Header | (link: docs/reference/tools/header text: Kirby\Http\Header) |
-| I  | Kirby\Toolkit\Iterator |
-| L  | Kirby\Toolkit\I18n  |
-| Media  | Kirby\Image  |
-| Password  | -- |
-| R  | (link: docs/reference/objects/request text: Kirby\Http\Request)  |
-| Redirect  | Kirby\Http\Response\Redirect  |
-| Remote  | Kirby\Http\Remote  |
-| Response  | Kirby\Http\Response  |
-| Router  | Kirby\Http\Router  |
-| S  | Kirby\Session  |
-| Server  | (link: docs/reference/tools/server text: Kirby\Http\Server)  |
-| Sql  | Kirby\Database\Sql  |
-| System  | --  |
-| Thumb  | Kirby\Image  |
-| Timer  | -- |
-| Toolkit  | --  |
-| Upload  | Kirby\Api  |
-| Url  | Kirby\Http\Url  |
-| Visitor  | Kirby\Http\Visitor  |
-| YAML  | (link: docs/reference/tools/data text: Kirby\Data\Yaml)  |
+| `Bitmask` | <code></code>  |
+| `Brick`  | (link: docs/reference/tools/html text: `Kirby\Toolkit\Html`)  |
+| `C` | <code></code> |
+| `Cache`  | `Kirby\Cache`  |
+| `Cookie`  | (link: docs/reference/tools/cookie text: `Kirby\Http\Cookie`)  |
+| `Crypt`  | <code></code> |
+| `Data`  | (link: docs/reference/tools/data text: `Kirby\Data`)  |
+| `Database`  | `Kirby\Database`  |
+| `Db`  | `Kirby\Database\Db`  |
+| `Detect` | `Kirby\CMS\System` |
+| `Dimensions`  | `Kirby\Image\Dimensions`  |
+| `Email`  | (link: docs/reference/email text: `Kirby\Email`) |
+| `Embed`   |  (link: docs/reference/templates/helpers text: YouTube, Vimeo and Gist helpers) |
+| `Error`  | `Kirby\Exception`  |
+| `ErrorReporting`  | `Kirby\Exception`  |
+| `Exif`  | `Kirby\Image\Exif`  |
+| `Folder`  | <code></code> |
+| `Header` | (link: docs/reference/tools/header text: `Kirby\Http\Header`) |
+| `I`  | `Kirby\Toolkit\Iterator` |
+| `L`  | `Kirby\Toolkit\I18n`  |
+| `Media`  | `Kirby\Image`  |
+| `Password`  | <code></code> |
+| `R`  | (link: docs/reference/objects/request text: `Kirby\Http\Request`)  |
+| `Redirect`  | `Kirby\Http\Response\Redirect`  |
+| `Remote`  | `Kirby\Http\Remote`  |
+| `Response`  | `Kirby\Http\Response`  |
+| `Router`  | `Kirby\Http\Router`  |
+| `S`  | `Kirby\Session`  |
+| `Server`  | (link: docs/reference/tools/server text: `Kirby\Http\Server`)  |
+| `Sql`  | `Kirby\Database\Sql`  |
+| `System`  | <code></code>  |
+| `Thumb`  | `Kirby\Image`  |
+| `Timer`  | <code></code> |
+| `Toolkit`  | <code></code>  |
+| `Upload`  | `Kirby\Api`  |
+| `Url`  | `Kirby\Http\Url`  |
+| `Visitor`  | `Kirby\Http\Visitor`  |
+| `YAML`  | (link: docs/reference/tools/data text: `Kirby\Data\Yaml`)  |
 
 The Toolkit classes are now in the  `Kirby\Toolkit` namespace.
 
