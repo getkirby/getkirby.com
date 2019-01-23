@@ -1,4 +1,4 @@
-<?php snippet('header', [ 'floating' => true, 'background' => 'dark' ]) ?>
+<?php snippet('header', [ 'background' => 'dark' ]) ?>
 
   <main class="home-page | main" id="maincontent">
 
