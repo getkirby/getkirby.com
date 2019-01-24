@@ -11,7 +11,7 @@ Text:
 
 ## Simple default blueprint
 
-```yaml "/site/blueprint/file/default.yml"
+```yaml "/site/blueprint/files/default.yml"
 title: Default File
 
 fields:
@@ -27,7 +27,7 @@ fields:
 
 ## File blueprint with two column layout
 
-```yaml "site/blueprints/file/image.yml"
+```yaml "site/blueprints/files/image.yml"
 title: Image
 
 columns:
