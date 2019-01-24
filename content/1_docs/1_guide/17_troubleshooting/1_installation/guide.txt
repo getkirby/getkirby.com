@@ -26,6 +26,13 @@ If you run Kirby in a subfolder, make sure to set the RewriteBase according to t
 ```
 RewriteBase /my-subfolder
 ```
+## Thumbs not generated, Panel not working
+
+If you use PHP's built-in server (not recommended), you have to start it up with Kirby's router:
+
+```php
+php -S localhost:8000 kirby/router.php
+```
 
 ## Weird PHP syntax errors
 
