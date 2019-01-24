@@ -170,7 +170,7 @@ Like the `$site` variable, the `$page` variable has many methods that allow us t
 
   <main>
     <h1><?= $page->title()->html() ?></h1>
-    <?= $page->text()->kirtbytext() ?>
+    <?= $page->text()->kirbytext() ?>
   </main>
 
   <footer>
