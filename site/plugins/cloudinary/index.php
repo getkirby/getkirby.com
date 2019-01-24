@@ -54,7 +54,11 @@ Kirby::plugin('getkirby/cloudinary', [
             ]);
         },
         'file::url' => function ($kirby, $file) {
-            return cloudinary($file->mediaUrl());
+            if ($file->type() === 'image') {
+                return cloudinary($file->mediaUrl());
+            } else {
+                return $file->mediaUrl();
+            }
         }
     ]
 ]);
