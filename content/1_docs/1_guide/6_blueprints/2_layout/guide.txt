@@ -162,6 +162,8 @@ fields:
 
 ## Adapt all to your needs
 
+(image: columns-complex.png)
+
 Kirby gives you the flexibility to set up the (glossary: Panel), so that it adapts to the needs of every single page/template. Use the layout possibilities to create the structure that works best for you:
 
 ```yaml
