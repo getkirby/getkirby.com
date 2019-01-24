@@ -8,9 +8,21 @@ Text:
 
 If you don't need the Panel at all and you just want to work in your content folder, you can switch the Panel off in your config file.
 
-```php
+```php "/site/config/config.php"
 return [
   'panel' => false
+];
+```
+
+## Allow the Panel to be installed on a remote server
+
+As a security measure, you cannot install the Panel on a public server by default. To allow this, you can enable the `panel.install` option:
+
+```php "/site/config/config.php"
+return [
+  'panel' =>[
+    'install' => true
+  ]
 ];
 ```
 
@@ -18,7 +30,7 @@ return [
 
 If you want to add a little bit of additional security to your site and hide the Panel behind a different URL, you can set the URL slug in your config.
 
-```php
+```php "/site/config/config.php"
 return [
   'panel' => [
     'slug' => 'super-secret-admin-area'
@@ -33,7 +45,7 @@ Your Panel is now accessible at http://yourdomain.com/super-secret-admin-area
 
 We have made the design of the Panel as usable, beautiful and reduced as possible so that you or your clients can fully concentrate on creating content. However, if you want to spice it up a little or adjust to your or your clients branding, you can do that with your own custom stylesheet file. Add it to your `config.php` file like this:
 
-```php
+```php "/site/config/config.php"
 return [
   'panel' => [
     'css' => 'assets/css/custom-panel.css'
@@ -45,7 +57,7 @@ return [
 
 You can also add your own custom Panel scripts in the config.php, giving you even more power to bend the Panel to your liking.
 
-```php
+```php "/site/config/config.php"
 return [
   'panel' => [
     'js' => 'assets/css/panel.js'
@@ -57,7 +69,7 @@ return [
 
 If false, the Panel formatting buttons and drag and drop for files and links will create regular (glossary: Markdown) instead of (glossary: kirbytag text: KirbyTags).
 
-```php
+```php "/site/config/config.php"
 return [
   'panel' => [
     'kirbytext' => false
