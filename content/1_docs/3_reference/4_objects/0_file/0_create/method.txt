@@ -1,0 +1,26 @@
+Text:
+
+## The `$props` parameter
+
+Property   | Type     |
+--         | --       |
+`source`   | `string` |
+`parent`   | `string` |
+`filename` | `string` |
+`url`      | `string` |
+`template` | `string` |
+`content`  | `array`  |
+
+## Example
+
+```php
+$file = File::create([
+  'source'     => kirby()->root('assets').'/images/some-image.jpg',
+  'parent'     => page('photography')->children()->listed()->first(),
+  'filename'   => 'new-image.jpg',
+  'template' => 'cover',
+  'content'   => [
+    'caption'   => 'A nice view from above',
+  ]
+]);
+```
