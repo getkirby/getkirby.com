@@ -285,7 +285,7 @@ Whenever we push changes to our (link: https://github.com/getkirby/getkirby.com 
 
 We try to keep everything as tidy and complete as possible. If you find anything that's not correct or missing, please let us know: https://github.com/getkirby/getkirby.com/issues
 
-You can even fix issues yourself if you like. **We appreciate all pull request!**
+You can even fix issues yourself if you like. **We appreciate all pull requests!**
 
 ## It's all there
 
