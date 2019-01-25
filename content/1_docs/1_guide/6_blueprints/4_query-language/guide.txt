@@ -101,14 +101,15 @@ sections:
     headline: Blog Articles
     parent: site.find("blog")
 ```
-## Querying files in files sections
+## Querying parent and template in files sections
 
 ```yaml
 sections:
   gallery:
     headline: Images
     type: files
-    query: page.images
+    parent: site.find("galleries").first
+    template: image
 ```
 
 
