@@ -23,7 +23,7 @@ Text:
 $items = $pages->listed();
 
 // only show the menu if items are available
-if($items->isNotEmtpy()):
+if($items->isNotEmpty()):
 
 ?>
 <nav>
@@ -54,7 +54,7 @@ if($root = $pages->findOpen()) {
 }
 
 // only show the menu if items are available
-if($items and $items->isNotEmtpy()):
+if($items and $items->isNotEmpty()):
 
 ?>
 <nav>
@@ -87,7 +87,7 @@ if($root1 = $pages->findBy('isOpen', true)) {
 }
 
 // only show the menu if items are available
-if($items and $items->isNotEmtpy()):
+if($items and $items->isNotEmpty()):
 
 ?>
 <nav>
@@ -128,7 +128,7 @@ Include it in your code using the `snippet()` helper:
 ```php
 <?php snippet('treemenu') ?>
 ```
-    
+
 If you don't want it to start from the first level, pass it a set of pages, where it should start. i.e.:
 
 ```php
@@ -152,7 +152,7 @@ snippet('treemenu', ['subpages' => $subpages]);
 $items = $pages->listed();
 
 // only show the menu if items are available
-if($items->isNotEmtpy()):
+if($items->isNotEmpty()):
 
 ?>
 <nav>
@@ -167,7 +167,7 @@ if($items->isNotEmtpy()):
       $children = $item->children()->listed();
 
       // display the submenu if children are available
-      if($children->isNotEmtpy()):
+      if($children->isNotEmpty()):
 
       ?>
       <ul>
@@ -194,7 +194,7 @@ if($items->isNotEmtpy()):
 
 $items = $pages->find('terms-of-service', 'faq', 'support');
 
-if($items and $items->isNotEmtpy()):
+if($items and $items->isNotEmpty()):
 
 ?>
 <nav>
@@ -217,7 +217,7 @@ if($items and $items->isNotEmtpy()):
 $items = $pages->listed();
 
 // only show the menu if items are available
-if($items->isNotEmtpy()):
+if($items->isNotEmpty()):
 
 ?>
 <select onchange="window.location.href = this.value">
