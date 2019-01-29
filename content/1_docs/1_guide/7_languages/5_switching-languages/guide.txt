@@ -12,7 +12,7 @@ Intro: With multiple available languages, you probably want to provide a way for
 
 Text:
 
-With the `$site->languages()` method we can fetch all information about available languages. Here are two possible ways to implement such a language switch.
+With the `$kirby->languages()` method we can fetch all information about available languages. Here are two possible ways to implement such a language switch.
 
 ## Switch A
 
