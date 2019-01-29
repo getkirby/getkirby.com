@@ -60,10 +60,10 @@ In your `config.php`, create these two new (glossary: route text: routes):
         // if nothing is set, we ignore the error page
         $ignore = kirby()->option('sitemap.ignore', 'error');
 
-        // set the correct header type
-        header::contentType('text/xml', 'UTF-8', true);
-
-        return snippet('sitemap', compact('pages', 'ignore'), true);
+        $content = snippet('sitemap', compact('pages', 'ignore'), true);
+        
+        // return response with correct header type
+        return new Kirby\Cms\Response($content, 'application/xml');
     }
   ],
   [
