@@ -8,7 +8,11 @@ Text:
 
 ```php
 return [
-  'cache' => true
+  'cache' => [
+    'pages' => [
+      'active' => true
+    ]
+  ]
 ];
 ```
 
