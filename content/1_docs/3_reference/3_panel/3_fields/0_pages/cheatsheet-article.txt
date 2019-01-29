@@ -51,6 +51,67 @@ fields:
     multiple: false
 ```
 
+### Preview images
+
+The default (preview) image is the first image in the folder. You can configure the (preview) image for each item using the `image` option:
+
+```yaml
+image: page.image.findBy("name", "cover")
+```
+
+For more fine-grained control you can set further options:
+
+### `query`
+
+An image query, default `page.image`
+
+```yaml
+image:
+  query: page.children.first.image
+```
+
+### `cover`
+
+Whether or not the image will cover the available space.
+Options: `true`, `false (default)`
+
+```yaml
+image:
+  cover: true
+```
+
+### `ratio`
+
+A freely selectable image ratio
+
+```yaml
+image:
+  ratio: 16/9
+```
+
+### `back`
+
+Set an image background.
+Options: `pattern (default)`, `black`, `white`
+```yaml
+
+image:
+  query: page.image.findBy("name", "cover")
+  cover: true
+  ratio: 1/1
+  back: black
+```
+
+### No image
+
+If you don't want to show an image but the icon selected for the page, you can set the `query` option to `false`:
+
+```yml
+image: 
+  query: false
+```
+
+Kirby will then either show a default page icon or the icon defined in the page blueprint.
 
 ## Accessing selected pages in templates
 
