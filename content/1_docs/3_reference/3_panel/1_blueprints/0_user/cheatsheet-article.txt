@@ -89,7 +89,7 @@ The `permissions` option can be used to restrict access to certain actions for t
 | `delete` | `true`/`false` |
 | `update` | `true`/`false` |
 
-
+### Using wildcards
 It's also possible to restrict access to entire blocks by just passing `false` to the block:
 
 ```yaml
@@ -97,17 +97,4 @@ permissions:
 	page: false
 ```
 
-### Options
-
-With options, you can control all the user actions that should or should not be available for this particular user type. The option dropdown for users will adjust accordingly.
-
-| Option | Value |
-|----    | ---- |
-| `changeEmail` | `true`/`false` |
-| `changeLanguage` | `true`/`false` |
-| `changeName` | `true`/`false` |
-| `changePassword` | `true`/`false` |
-| `changeRole` | `true`/`false` |
-| `delete` | `true`/`false` |
-| `update` | `true`/`false` |
 
