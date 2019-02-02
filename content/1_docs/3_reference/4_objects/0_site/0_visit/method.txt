@@ -1,1 +1,5 @@
-Text: This method is usually only useful in the context of routing, especially in a multi-language installation, see (link: http://getkirby.com/docs/advanced/routing#multi-language-setup text: the routing docs)
+Text:
+
+<info>
+This method is usually only useful in the context of routing, especially in a multi-language setup. See (link: docs/guide/routing#multi-language-setup text: the routing docs).
+</info>

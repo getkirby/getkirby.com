@@ -23,13 +23,7 @@ That is where routes come into play. Routes react on an URL pattern. They can ei
 
 ## Defining your own routes
 
-Kirby has a built-in router, which can be extended with your own routes.
-
-Routes can be setup with the `routes` option in your `/site/config/config.php` or in plugins.
-
-Routes are simple associative arrays with two required fields: pattern and action.
-
-In your route patterns, you can use static strings, but also (link: docs/reference/router/patterns text: dynamic placeholders).
+Kirby has a built-in router, which can be extended with your own routes. Routes can be setup with the `routes` option in your config or in plugins. Routes are simple associative arrays with two required fields: `pattern` and `action`.
 
 ### In your config
 
@@ -39,7 +33,14 @@ return [
     [
       'pattern' => 'my/awesome/url',
       'action'  => function () {
-        // do something here when the URL matches the pattern above
+        // do something here
+        // when the URL matches the pattern above
+      }
+    ],
+    [
+      'pattern' => 'my/second/url',
+      'action'  => function () {
+        // ...
       }
     ]
   ]
@@ -53,7 +54,8 @@ Kirby::plugin('your/plugin', [
     [
       'pattern' => 'my/awesome/url',
       'action'  => function () {
-        // do something here when the URL matches the pattern above
+        // do something here
+        // when the URL matches the pattern above
       }
     ]
   ]
@@ -69,13 +71,42 @@ Kirby::plugin('your/plugin', [
           [
               'pattern' => 'something/' . $kirby->option('something'),
               'action' => function () {
-
+                // ...
               }
           ]
       ];
   }
 ]);
 ```
+
+## Patterns
+
+In your route patterns, you can use static, relative URL strings, e.g. `some/static/url`, but also (link: docs/reference/router/patterns text: dynamic placeholders):
+
+(reference: router/patterns)
+
+Placeholders can also contain expressions, e.g. `([a-z]+)`, and will be passed as arguments to the callback function in the order they appear:
+
+```php
+[
+  'pattern' => 'my/awesome/url/(:any)/(:num)/(:all)',
+  'action'  => function($any, $num, $all) {
+    // ...
+  }
+]
+```
+
+If you want to use the same action for multiple patterns, you can either use regex expressions or pass an array of patterns:
+
+```php
+[
+  'pattern' => ['blog/(:any)', 'notes/(:any)'],
+  'action'  => function() {
+    // ...
+  }
+]
+```
+
 
 ## Response types
 
@@ -84,17 +115,27 @@ Depending on your use case, routes can return various response types, which will
 
 ### Page object
 
-
 ```php
 [
-  'pattern' => 'projects/(:any)',
-  'action'  => function ($filter) {
+  'pattern' => 'portfolio',
+  'action'  => function () {
     return page('projects');
   }
 ]
 ```
 
-### String
+### File object
+
+```php
+[
+  'pattern' => 'load/(:any)',
+  'action'  => function ($name) {
+    return page('downloads')->file($name);
+  }
+]
+```
+
+### String: HTML
 
 ```php
 [
@@ -105,7 +146,7 @@ Depending on your use case, routes can return various response types, which will
 ]
 ```
 
-### False | Null | ''
+### Not found: `false`, `null` or `''`
 
 ```php
 [
@@ -116,7 +157,7 @@ Depending on your use case, routes can return various response types, which will
 ]
  ```
 
-### Array
+### JSON from array
 
 ```php
 [
@@ -130,7 +171,7 @@ Depending on your use case, routes can return various response types, which will
 ]
 ```
 
-### Response Object
+### Response object
 
 ```php
 [
@@ -151,6 +192,41 @@ Depending on your use case, routes can return various response types, which will
 ]
 ```
 
+## Methods
+By default routes are only available for `GET` requests. You can define additional request methods for the route:
+
+- `CONNECT`
+- `DELETE`
+- `GET`
+- `HEAD`
+- `OPTIONS`
+- `PATCH`
+- `POST`
+- `PUT`
+- `TRACE`
+
+```php
+[
+  'pattern' => 'my/awesome/url',
+  'action'  => function () {
+    // ..
+  },
+  'method' => 'GET|POST|DELETE'
+]
+```
+
+## Multi-language setup
+
+In case of multi-language sites you must call the `$site->visit()` method in order to activate the selected page and set a language.
+
+```php
+[
+  'pattern' => 'custom/response',
+  'action'  => function () {
+      return site()->visit('some/page', 'en');
+  }
+]
+```
 
 ## Before and after hooks
 
