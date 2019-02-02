@@ -61,6 +61,9 @@ The Composer magic is all contained in the `composer.json` file. The most basic 
 {
   "require": {
     "getkirby/cms": "^3.0"
+  },
+  "config": {
+    "optimize-autoloader": true
   }
 }
 ```
@@ -79,6 +82,9 @@ If you want to use a different location for the `kirby` directory, you can chang
 {
   "require": {
     "getkirby/cms": "^3.0"
+  },
+  "config": {
+    "optimize-autoloader": true
   },
   "extra": {
     "kirby-cms-path": "kirby" // change this to your custom path
