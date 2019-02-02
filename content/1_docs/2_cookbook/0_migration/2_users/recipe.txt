@@ -95,7 +95,7 @@ foreach (Dir::files($dir) as $account) {
 
 ## Update user fields
 
-If you have used user fields in Kirby 2 to store e.g. the author of a blog post, you will need to update these field values if you want to use them with the (link: docs/reference/panel/fields/users text: new `users` field). The following script serves as an example how to update the fields after you have migrated all user accounts.
+If you have used user fields in Kirby 2 to store e.g. the author of a blog post, you will need to update these field values if you want to use them with the (link: docs/reference/panel/fields/users text: new `users` field). The following script helps you to update the fields after you have migrated all user accounts.
 
 ```php "/update-user-fields.php"
 <?php
@@ -104,28 +104,46 @@ require __DIR__ . '/kirby/bootstrap.php';
 
 $kirby = new Kirby;
 
-// CHANGE THESE AS NEEDED:
-// pages with user field
-$pages = page('blog')->children();
-// name of the user field from K2
-$field = 'author';
+// ATTENTION:
+// If running into timeouts, change the following
+// line to a smaller pages collection
+$pages = $kirby->site()->index();
 
 // authenticate as almighty
 $kirby->impersonate('kirby');
 
-// loop through each K2 account file
+// loop through each page
 foreach ($pages as $page) {
 
-    // `author` is the name of the user field from K2
-    $name = $page->{$field}();
-    $user = $kirby->users()->findBy('name', $name);
+    // get all fields for this page
+    $fields = $page->blueprint()->fields();
 
-    if (!$user) {
-        echo 'User "' . $name . '" could not be found.<br>';
+    // loop through each field
+    foreach ($fields as $field) {
+
+        // only deal with user/s fields
+        if (in_array($field['type'], ['users', 'user'])) {
+
+            // get old username
+            $name = $page->{$field['name']}();
+
+            if ($name->isNotEmpty()) {
+
+                // find user by old username
+                if ($user = $kirby->users()->findBy('username', $name)) {
+
+                    // update with email as identifier
+                    $page->update([
+                        $field['name'] => Yaml::encode([
+                            $user->email()
+                        ])
+                    ]);
+
+                } else {
+                    echo 'User "' . $name . '" could not be found.<br>';
+                }
+            }
+        }
     }
-
-    $page->update([
-        $field => $user->email()
-    ]);
 }
 ```
