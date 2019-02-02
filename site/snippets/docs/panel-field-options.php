@@ -1,4 +1,4 @@
-## Example with numeric keys
+### Example with numeric keys
 
 If you want to store numeric keys as values, you have to use the long notation with `value` and `text`:
 
@@ -7,7 +7,7 @@ fields:
   category:
     label: Category
     type: <?= $field . PHP_EOL ?>
-    options: 
+    options:
       - value: '100'
         text: Design
       - value: '200'

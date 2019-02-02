@@ -33,6 +33,20 @@ fields:
 
 (field-options: checkboxes)
 
+## In templates/snippets
+
+A checkboxes field stores all selected categories in a comma separated list (`value1, value2, value3`) You can split this list in your templates and then work with the values like this:
+
+```php
+<ul>
+  <?php foreach ($page->categories()->split() as $category): ?>
+  <li><?= $category ?></li>
+  <?php endforeach ?>
+</ul>
+```
+
+## Default value
+
 ### Example with a single default value
 
 ```yaml
@@ -67,17 +81,6 @@ fields:
       web: Web
 ```
 
-## In templates/snippets
-
-A checkboxes field stores all selected categories in a comma separated list (`value1, value2, value3`) You can split this list in your templates and then work with the values like this:
-
-```php
-<ul>
-  <?php foreach ($page->categories()->split() as $category): ?>
-  <li><?= $category ?></li>
-  <?php endforeach ?>
-</ul>
-```
-
 (docs: panel-field-options field: checkboxes)
+
 

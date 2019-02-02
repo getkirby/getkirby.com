@@ -27,7 +27,7 @@ fields:
 
 (field-options: tags)
 
-## Predefined options
+## Predefined autocomplete options
 
 ```yaml
 fields:
@@ -42,18 +42,8 @@ fields:
       - Web
 ```
 
-## Tags field with options for autocomplete
+(docs: panel-field-options field: tags)
 
-```yaml
-tags:
-    label: Tags
-    type: tags
-    options: query
-    query:
-       fetch: site.tags.toStructure.sortBy("name", "asc")
-       text: "{{ structureItem.name }}"
-       value: "{{ structureItem.value }}"
-```
 
 ## Limit input to options
 
@@ -66,9 +56,7 @@ tags:
     accept: options
     options: query
     query:
-       fetch: site.tags.toStructure.sortBy("name", "asc")
-       text: "{{ structureItem.name }}"
-       value: "{{ structureItem.value }}"
+       fetch: site.tags.split
 ```
 
 ## Tags field layout
