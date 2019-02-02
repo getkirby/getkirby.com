@@ -17,7 +17,7 @@ The `blueprints` extension accepts  an array of key/value pairs, where the key i
 ```php "/site/plugins/your-plugin/index.php"
 Kirby::plugin('your/plugin', [
 	'blueprints' => [
-		'blog' => __DIR__ . '/blueprints/blog.yml'
+		'pages/blog' => __DIR__ . '/blueprints/blog.yml'
 	]
 ]);
 ```
@@ -29,9 +29,11 @@ Alternatively, you can also pass the blueprint definition as an array instead of
 ```php
 Kirby::plugin('your/plugin', [
 	'blueprints' => [
-		'blog' => [
+		'pages/blog' => [
 			'title'    => 'Blog',
-			'sections' => [ ... ]
+			'sections' => [
+				// ...
+			]
 		]
 	]
 ]);
