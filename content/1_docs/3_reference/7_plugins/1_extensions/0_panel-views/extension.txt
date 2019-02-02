@@ -34,6 +34,7 @@ Custom views mainly live in the `index.js` file. Think of them as their own litt
 panel.plugin("yourname/todos", {
   views: {
     todos: {
+      icon: "list-bullet",
       component: {
         template: `
           <k-view class="k-todos-view">
