@@ -1,0 +1,11 @@
+Title: Plugin setup for Panel plugins
+
+----
+
+Intro: 
+
+----
+
+Text:
+
+*Coming soon*

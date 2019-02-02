@@ -87,38 +87,31 @@ To store more information about your plugin, you can add a `composer.json` to yo
 
 ```json "composer.json"
 {
-    "name": "starterkit/demo",
-    "description": "Starterkit Demo Plugin",
+    "name": "superwoman/superplugin",
+    "description": "Superwoman Demo Plugin",
     "version": "1.0.0",
-    "type": "kirby-plugin",
     "license": "MIT",
-    "autoload": {
-        "files": ["config.php"],
-        "psr-4": {
-            "Starterkit\\Demo\\Fields\\": "fields/",
-            "Starterkit\\Demo\\Tags\\": "tags/"
-        }
-    },
     "authors": [
         {
-            "name": "Bastian Allgeier",
-            "email": "bastian@getkirby.com"
+            "name": "Superwoman",
+            "email": "superwoman@example.com"
         }
-    ],
-    "require": {
-        "composer/installers": "~1.0"
-    }
+    ]
 }
 ```
 
 ```php
-// somewhere in kirby
+// somewhere in Kirby
 $kirby->plugin('superwoman/superplugin')->version();
 $kirby->plugin('superwoman/superplugin')->description();
-$kirby->plugin('superwoman/superplugin')->name();
+$kirby->plugin('superwoman/superplugin')->license();
 $kirby->plugin('superwoman/superplugin')->authors();
 // etc.
 ```
+
+The fields in the example `composer.json` above are just the basic metadata fields. Composer is also a tool that's useful to install plugins. How to setup your plugin for that is explained in our (link: #setup-of-published-plugins text: plugin setup articles).
+
+Note that the `name` inside the `composer.json` file is only the name of the Composer package. If needed, it can differ from the name you give your plugin when registering it with `Kirby::plugin()`, which will be used when getting plugin data. We recommend to keep both names consistent to avoid confusion.
 
 ## Recommended plugin folder structure
 
@@ -133,72 +126,6 @@ tags/
 templates/
 ```
 
-## Composer support
-
-<warning>
-We are currently reworking this section of the docs and will replace it with new documentation pages about the recommended plugin setup.
-
-The setup of the following section is no longer recommended.
-</warning>
-
-To make your plugin installable via Composer, it must be able to be autoloaded by composer correctly, but at the same time should still be installable in Kirby's plugin folder if preferred. Follow these steps to create a Composer-compatible plugin:
-
-- Create a `composer.json` with `composer init`.
-- Create a `config.php` in which you use `Kirby::plugin()` to setup your extensions.
-
-```php "/site/plugins/your-plugin/config.php"
-Kirby::plugin('superwoman/superplugin', [
-  ...
-]);
-```
-
-- Add the `config.php` to Composer's autoload setting:
-
-```json "/site/plugins/your-plugin/composer.json"
-{
-  "name": "superwoman/superplugin",
-  "description": "This plugin gives superpowers to your website"
-  "version": "1.0.0",
-  "autoload": {
-    "files": ["config.php"],
-  }
-}
-```
-
-- Run `composer install` to create the initial autoloader.
-- Create the `index.php` to make Kirby happy.
-
-```php "/site/plugins/your-plugin/index.php"
-require_once __DIR__ . '/vendor/autoload.php';
-```
-
-### The complete Composer-compatible folder structure
-
-Base structure:
-```filesystem
-assets/
-blueprints/
-fields/
-snippets/
-tags/
-templates/
-```
-For Kirby:
-```filesystem
-index.php
-```
-For Composer:
-
-```filesystem
-config.php
-composer.json
-```
-
-
-### Publish your plugin on Packagist
-
-Docs coming soon…
-
 ## Plugin assets
 
 Each plugin can have its own `assets` folder with any number of additional assets, such as images or CSS and JS files. Kirby will automatically take care to make those assets publicly available without needing to copy them to a specific folder.
@@ -206,6 +133,8 @@ Each plugin can have its own `assets` folder with any number of additional asset
 ### Asset URLs
 
 Each asset in the `assets` folder of your plugin will be available at `/media/plugins/superwoman/superplugin/`.
+
+The URL path is constructed with the name from your plugin definition and has nothing to do with the folder name of the plugin.
 
 ### Timestamps
 
@@ -218,8 +147,6 @@ Asset folder
 
 Public URL
 : `/media/plugins/superwoman/superplugin/fields/myfield.1520265293.js`
-
-The URL path is constructed with the name from your plugin definition and has nothing to do with the folder name of the plugin.
 
 ## Plugin options
 
@@ -251,10 +178,21 @@ Or with the option helper:
 option('superwoman.superplugin.apiKey');
 ```
 
-Options also need to be prefixed to be set in the config.
+Options also need to be prefixed to be set in the config:
 
 ```php "/site/config/config.php"
 return [
   'superwoman.superplugin.apiKey' => 'my-custom-key'
 ];
 ```
+
+## Setup of published plugins
+
+If you want to publish your plugin, there are a few things you need to take care of to make installation of your plugin as simple as possible for your users.
+
+We have prepared several tutorials for different use-cases:
+
+- (link: docs/guide/plugins/plugin-setup-basic text: Basic plugin setup) **(start here)**
+- (link: docs/guide/plugins/plugin-setup-autoloader text: Plugin setup with an autoloader)
+- (link: docs/guide/plugins/plugin-setup-composer text: Plugin setup with Composer dependencies)
+- (link: docs/guide/plugins/plugin-setup-panel text: Plugin setup for Panel plugins)
