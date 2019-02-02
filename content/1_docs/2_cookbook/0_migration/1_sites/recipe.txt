@@ -338,6 +338,10 @@ $kirby->page('some/page')->delete();
 
 (link: docs/guide/languages/introduction text: Languages) are now defined in the `/site/languages` folder, not in your `/site/config.php`file anymore. Users can now add or remove new languages through the Panel, if the (link: docs/reference/system/options/languages text: `languages` option) is enabled in the config settings.
 
+### Accessing languages
+
+Use `$kirby->languages()` instead of `$site->languages()`.
+
 ### Fetching language variables
 
 (link: docs/guide/languages/custom-language-variables text: Language variables) are no longer fetched via `l()/l::get()` but via the `t()` helper.
