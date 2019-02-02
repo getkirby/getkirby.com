@@ -55,7 +55,7 @@ sortBy: date desc
 
 ```yaml "/site/blueprints/pages/article.yml"
 title: Article
-num: date
+num: '{{ page.date.toDate("Ymd") }}'
 icon: 📖
 
 status:

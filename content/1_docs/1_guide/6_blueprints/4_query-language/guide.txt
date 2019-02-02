@@ -2,7 +2,7 @@ Title: Query Language
 
 ----
 
-Intro: Kirby 3 comes with a blueprint query language that offers basically the same functionality as Kirby's PHP API with a simple dot notation.
+Intro: Kirby comes with a blueprint query language that offers basically the same functionality as Kirby's PHP API with a simple dot notation.
 
 ----
 
@@ -69,7 +69,7 @@ published:
   info: "Year: {{ page.year }}"
 ```
 
-## Querying options in radio, checkboxes and select fields or tags
+## Querying options in fields
 
 ```yaml
 tags:
@@ -92,7 +92,7 @@ mySelect:
 Check out the (link: docs/reference/panel/fields text: docs for each of these fields in the Reference).
 
 
-## Querying the parent in pages sections
+## Querying the parent in pages and files sections
 
 ```yaml
 sections:
@@ -101,33 +101,22 @@ sections:
     headline: Blog Articles
     parent: site.find("blog")
 ```
-## Querying parent and template in files sections
-
-```yaml
-sections:
-  gallery:
-    headline: Images
-    type: files
-    parent: site.find("galleries").first
-    template: image
-```
-
 
 ## Querying an image in the image option
 
 ```yaml
-
 image:
   query: page.images.template("cover").first
   ratio: 1/1
   cover: true
 ```
 
-## Querying information to display in the info option of an item
+## Querying information to display
 
 ```yaml
-
 info: "{{ page.from.toDate('d.m.Y') }} - {{ page.to.toDate('d.m.Y') }} / {{ page.location }}"
+```
 
+```yaml
 info: "{{ file.dimensions }}"
 ```

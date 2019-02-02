@@ -6,6 +6,10 @@ Excerpt: Page blueprints are located in `/site/blueprints/pages` and control the
 
 ----
 
+Guide: blueprints/introduction
+
+----
+
 Text:
 
 ## Blueprint location
@@ -40,7 +44,7 @@ title:
 	de: Artikel
 ```
 
-## Preset
+## Presets
 
 Presets are typical standard setups for page, pages and files, see (link: docs/guide/blueprints/presets text: presets).
 
@@ -56,25 +60,33 @@ The `num` option defines which numbering scheme to use when a page is published.
 Default sorting is numbering (1 to x) and doesn't need any setup.
 </info>
 
-### Alphabetical sorting by uid
+### Alphabetical sorting by page uid
 
 ```yaml
 num: zero
 ```
 
-### Date based sorting
+### Sorting by query result
 
 ```yaml
-num: date
+num: '{{ page.customSortNumberField }}'
 ```
 
-### Datetime-based sorting
+The return value of the query has to be an integer which will be used for sorting. Learn more about Kirby's (link: docs/guide/blueprints/query-language text: query language).
 
+### Chronological sorting
+
+#### By date
 ```yaml
-num: datetime
+num: '{{ page.created.toDate("Ymd") }}'
 ```
 
-## Status
+#### By datetime
+```yaml
+num: '{{ page.created.toDate("YmdHi") }}'
+```
+
+## Statuses
 
 With the `status` option, you define the page status you want to allow for the page. You can also change their label and description. This option gives you a lot of flexibility how you want to use page status in your website.
 
@@ -105,13 +117,13 @@ status:
 
 The icon can either be one of our (link: docs/reference/panel/icons text: own icons) or an emoji. Icons appear in page lists when no preview image is available.
 
-```
+```yaml
 icon: page
 ```
 
 ### Emoji
 
-```
+```yaml
 icon: 📚
 ```
 
@@ -163,10 +175,3 @@ You can use Kirby's powerful (link: docs/guide/blueprints/query-language text: q
 options:
   preview: "{{ page.parent.url }}/#{{ page.slug }}"
 ```
-
-
-
-
-
-
-

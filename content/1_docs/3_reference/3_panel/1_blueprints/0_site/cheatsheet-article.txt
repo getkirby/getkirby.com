@@ -6,6 +6,10 @@ Excerpt: The Site blueprint is located in `/site/blueprints` and controls the Pa
 
 ----
 
+Guide: blueprints/introduction
+
+----
+
 Text:
 
 ## Blueprint location

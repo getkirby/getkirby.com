@@ -6,6 +6,10 @@ Excerpt: User blueprints are located in `/site/blueprints/users` and control the
 
 ----
 
+Guide: blueprints/introduction
+
+----
+
 Text:
 
 ## Blueprint location
@@ -96,5 +100,4 @@ It's also possible to restrict access to entire blocks by just passing `false` t
 permissions:
 	page: false
 ```
-
 

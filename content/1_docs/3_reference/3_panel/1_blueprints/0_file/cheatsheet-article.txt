@@ -6,6 +6,10 @@ Excerpt: File blueprints are located in `/site/blueprints/files` and control the
 
 ----
 
+Guide: blueprints/introduction
+
+----
+
 Text:
 
 ## Blueprint location
