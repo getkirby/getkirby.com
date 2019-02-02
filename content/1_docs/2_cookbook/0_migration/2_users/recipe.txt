@@ -31,7 +31,7 @@ To migrate your Kirby 2 user accounts to Kirby 3, you need to follow these steps
 1. **Backup** all Kirby 2 account files from `/site/accounts`. Things can go wrong. We do not want you to lose this important data.
 2. **Create (link: docs/guide/users/roles#creating-your-own-roles text: user blueprints)** for every (link: docs/guide/users/roles text: user role). If you do not create these first, all user accounts will be assigned the role `nobody`.
 3. Remove the `.logins` and `index.html` files from `/site/accounts`. Only your Kirby 2 account files should be left.
-4. Put the following **`migration.php` script** into your document root next to the `index.php` and run it with `http://yourdomain.com/migrate.php`.
+4. Put the following **`migration.php` script** into your document root next to the `index.php` and run it by visiting `http://yourdomain.com/migrate.php`.
 5. Delete the script.
 
 <warning>
@@ -91,5 +91,41 @@ foreach (Dir::files($dir) as $account) {
 
     echo 'User migrated: ' . $user->email() . '<br>';
 }
+```
 
+## Update user fields
+
+If you have used user fields in Kirby 2 to store e.g. the author of a blog post, you will need to update these field values if you want to use them with the (link: docs/reference/panel/fields/users text: new `users` field). The following script serves as an example how to update the fields after you have migrated all user accounts.
+
+```php "/update-user-fields.php"
+<?php
+
+require __DIR__ . '/kirby/bootstrap.php';
+
+$kirby = new Kirby;
+
+// CHANGE THESE AS NEEDED:
+// pages with user field
+$pages = page('blog')->children();
+// name of the user field from K2
+$field = 'author';
+
+// authenticate as almighty
+$kirby->impersonate('kirby');
+
+// loop through each K2 account file
+foreach ($pages as $page) {
+
+    // `author` is the name of the user field from K2
+    $name = $page->{$field}();
+    $user = $kirby->users()->findBy('name', $name);
+
+    if (!$user) {
+        echo 'User "' . $name . '" could not be found.<br>';
+    }
+
+    $page->update([
+        $field => $user->email()
+    ]);
+}
 ```
