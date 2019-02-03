@@ -96,6 +96,8 @@ We also reserve the right to determine whether **Your use of Kirby qualifies** u
 ## Technical Support
 Technical support is **provided as described on Our website** at <https://getkirby.com>. **No representations or guarantees** are made regarding the response time in which support questions are answered, however We will do Our best to respond quickly.
 
+We reserve the right to **limit technical support for free licenses**.
+
 ## Refund Policy
 We offer a **14-day**, money back refund policy if Kirby didn't work out for Your project.
 
