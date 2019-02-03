@@ -135,6 +135,12 @@ templates/
 
 ## Composer support
 
+<warning>
+We are currently reworking this section of the docs and will replace it with new documentation pages about the recommended plugin setup.
+
+The setup of the following section is no longer recommended.
+</warning>
+
 To make your plugin installable via Composer, it must be able to be autoloaded by composer correctly, but at the same time should still be installable in Kirby's plugin folder if preferred. Follow these steps to create a Composer-compatible plugin:
 
 - Create a `composer.json` with `composer init`.
