@@ -21,7 +21,7 @@ class FileSystem
         'code'       => ['json'],
         'yaml'       => ['yaml'],
         'markdown'   => ['md', 'mdown', 'markdown'],
-        'git'        => ['git', 'gitattributes', 'gitmodules'],
+        'git'        => ['git', 'gitattributes', 'gitignore', 'gitmodules'],
         'php'        => ['php'],
         'yaml'       => ['yml'],
         'text'       => ['txt'],
