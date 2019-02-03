@@ -89,9 +89,12 @@ The Panel folder has been integrated into the Kirby folder to make updates easie
 (glossary: blueprint text: Page blueprints) are no longer located in `/site/blueprints`, but in `/site/blueprints/pages`. Moving them to the subdirectory should be enough as a first step. The `site.yml` blueprint remains in `/site/blueprints`.
 
 <info>
-
 If you are updating from an early Kirby 2 version and still use `.php` files for your blueprints, change the file extension to `.yml`(or `.yaml`, if you prefer) and remove the PHP code from the top of the files.
 </info>
+
+<warning>
+Before you run any page update scripts or update pages via the Panel, make sure to remove the title field from all your blueprints. Otherwise, the title will be removed.
+</warning>
 
 ### Remove subpage and file settings from blueprints
 
