@@ -10,7 +10,7 @@ This End User License Agreement (the **"Agreement"**) is fundamental to the rela
 If you do not agree to this Agreement, please do not download, install or use Kirby. Installation or use of Kirby signifies that you have read, understood, and agreed to be bound by this Agreement.
 
 <info>
-This Agreement was last revised on February 2, 2019.
+This Agreement was last revised on February 3, 2019.
 </info>
 
 ## Definitions
@@ -20,8 +20,8 @@ Before we get started with the conditions of the Agreement, let's define the ter
 - When we refer to **"We"**/**"Us"**/**"Our"**, we mean the Bastian Allgeier GmbH. You can find our company and contact information on our (link: contact text: contact page).
 - A **"Website"** is a single Kirby project that is defined by its domain name and root directory (e.g. `https://sub.example.com` or `https://example.com/example/`). Each (sub)domain and root directory is a separate Website, even if the projects are related in any way. If the same Kirby *multi-language installation* spans multiple domains, these domains count as the same Website.
 - A **"Development Machine"** is a computer that is used to work on a Website (like a desktop PC, notebook or tablet). It can also be a server that is only accessible by a restricted number of users (like in an intranet or when protecting a staging website with a password that only a restricted number of users know).
-- A **"Theme Demo"** is a Website with the single purpose to showcase a free or commercial Kirby theme, as long as that Website only contains demo content exactly as shipped with the theme.
-- A **"Public Site"** is a Website that is installed on a computer/server that does *not* qualify as Development Machine and is *not* a Theme Demo.
+- An **"Extension Demo"** is a Website with the single purpose to showcase a free or commercial Kirby theme or Kirby plugin, as long as that Website only contains demo content. If the showcased extension is a Kirby theme, the demo content must be exactly as shipped with the theme. Demos for Kirby plugins may *not* contain any additional content that is not part of the demo.
+- A **"Public Site"** is a Website that is installed on a computer/server that does *not* qualify as Development Machine and is *not* an Extension Demo.
 - An **"Update"** is defined as a Kirby release which adds smaller new features, minor functionality enhancements or bug fixes. This class of release is identified by the change of the revision to the right of the first decimal point, e.g. 3.1 to 3.2 or 3.X.1 to 3.X.2.
 - An **"Upgrade"** is a major Kirby release which incorporates major new features or enhancements that increase the core functionality of Kirby to a larger extent. This class of release is identified by the change of the revision to the left of the first decimal point, e.g. 3.X to 4.0. Whether a release is an Update or Upgrade is at Our sole discretion.
 - The **"Source Code"** is defined as the contents of all files that are provided with Kirby and that make Kirby work. This includes (but is not limited to) all PHP, JavaScript, HTML and CSS files as well as all related image and other media files.
@@ -53,13 +53,13 @@ Therefore, installing and using Kirby on a Development Machine is **free** for a
 If you want to support our work, you can of course (link: buy text: purchase a voluntary license) for such a use-case. Thank you. <3
 </info>
 
-### Usage for a Theme Demo
-Theme Demos are not real Websites. We want to encourage you to build and showcase your themes.
+### Usage for an Extension Demo
+Extension Demos are not real Websites. We want to encourage you to build and showcase your themes and plugins.
 
-Therefore, You **don't need to register a license** for Theme Demos at all.
+Therefore, You **don't need to register a license** for Extension Demos at all.
 
 <info>
-Please note that this does *not* apply to store fronts or other types of sites used to promote free or commercial themes. If such a site is built with Kirby as well, it is a Public Site and needs a **paid license** (see above).
+Please note that this does *not* apply to store fronts or other types of sites used to promote free or commercial themes or plugins. If such a site is built with Kirby as well, it is a Public Site and needs a **paid license** (see above).
 </info>
 
 ## Restrictions
