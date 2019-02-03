@@ -97,6 +97,10 @@ foreach (Dir::files($dir) as $account) {
 
 If you have used user fields in Kirby 2 to store e.g. the author of a blog post, you will need to update these field values if you want to use them with the (link: docs/reference/panel/fields/users text: new `users` field). The following script helps you to update the fields after you have migrated all user accounts.
 
+<warning>
+Before you run this script, make sure to remove all title fields from your blueprints, otherwise your titles will be deleted.
+</warning>
+
 ```php "/update-user-fields.php"
 <?php
 
