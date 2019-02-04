@@ -111,8 +111,29 @@ Composer will now look for the latest version that matches your version constrai
 
 By changing the Kirby version in your `composer.json`, you can make Composer install a different version of Kirby. Very useful is the special version `dev-develop`, which will install the current development version of Kirby straight from GitHub.
 
-## Using Composer for other dependencies
+## Using Composer for Kirby plugins
 
-Many Kirby 3 plugins also support installation via Composer. As you now have a Composer setup, you only need to add them to your `composer.json` file and run `composer update`. This will automatically install the plugins for you.
+Many Kirby 3 plugins also support installation via Composer. As you now have a Composer setup, you only need to add them to your `composer.json` file and run `composer update`. This will automatically install the plugins to the `site/plugins` directory for you.
+
+Alternatively, you can run `composer require <plugin-name>`, which will install the plugin and add it to your `composer.json` for you.
+
+If your `plugins` directory is in a non-standard location, you can change it like this:
+
+```json "composer.json"
+{
+  "require": {
+    "getkirby/cms": "^3.0",
+    "superwoman/superplugin": "^1.0"
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
+  "extra": {
+    "kirby-plugin-path": "site/plugins" // change this to your custom path
+  }
+}
+```
+
+## Using Composer for other dependencies
 
 Of course, you can also install other dependencies like general PHP libraries this way. The libraries you install will automatically be available from your site's code, e.g. in your templates, controllers and models.
