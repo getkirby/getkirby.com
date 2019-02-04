@@ -46,7 +46,7 @@ Composer will now install the library to your `vendor` directory and add the lib
         }
     ],
     "require": {
-        "getkirby/composer-installer": "~1.1",
+        "getkirby/composer-installer": "^1.1",
         "superwoman/superlibrary": "^5.0"
     },
     "config": {
@@ -115,7 +115,7 @@ First step is to add the classes and files to load to your plugin's `composer.js
         }
     ],
     "require": {
-        "getkirby/composer-installer": "~1.1"
+        "getkirby/composer-installer": "^1.1"
     },
     "autoload": {
         "psr-4": {

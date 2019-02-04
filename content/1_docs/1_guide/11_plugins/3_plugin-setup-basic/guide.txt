@@ -80,7 +80,7 @@ The most basic form for a Kirby plugin looks like this:
         }
     ],
     "require": {
-        "getkirby/composer-installer": "~1.1"
+        "getkirby/composer-installer": "^1.1"
     }
 }
 ```
@@ -104,7 +104,7 @@ The Composer installer will install your plugin to `site/plugins/{{ name }}` by 
     "type": "kirby-plugin",
     ...
     "require": {
-        "getkirby/composer-installer": "~1.1"
+        "getkirby/composer-installer": "^1.1"
     }
     "extra": {
         "installer-name": "superplugin"
