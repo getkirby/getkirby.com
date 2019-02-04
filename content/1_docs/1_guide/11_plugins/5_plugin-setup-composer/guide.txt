@@ -46,7 +46,7 @@ Composer will now install the library to your `vendor` directory and add the lib
         }
     ],
     "require": {
-        "composer/installers": "~1.0",
+        "getkirby/composer-installer": "~1.1",
         "superwoman/superlibrary": "^5.0"
     },
     "config": {
@@ -85,14 +85,16 @@ We have prepared a set of rules that still ignores most files that are not neces
 /vendor/**/test/*
 /vendor/**/tests/*
 /vendor/**/php4/*
-/vendor/composer/installers
+/vendor/getkirby/composer-installer
 ```
 
 The next step is to load the Composer autoloader from your plugin's `index.php` file. This will automatically load the required libraries when needed:
 
 ```php "index.php"
-require_once __DIR__ . '/vendor/autoload.php';
+@include_once __DIR__ . '/vendor/autoload.php';
 ```
+
+Note that you should *not* `require` the autoloader, as it will only be present if the plugin is installed manually or via a Git submodule. Our custom Composer installer will delete the `vendor` directories from plugins to avoid code duplication and autoloading issues. By using `@include_once`, you tell PHP to load the file only if it exists.
 
 ## Using the Composer autoloader for plugin classes
 
@@ -113,7 +115,7 @@ First step is to add the classes and files to load to your plugin's `composer.js
         }
     ],
     "require": {
-        "composer/installers": "~1.0"
+        "getkirby/composer-installer": "~1.1"
     },
     "autoload": {
         "psr-4": {
