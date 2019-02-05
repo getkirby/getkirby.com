@@ -8,7 +8,7 @@ Description: Learn how to use Kirby’s authentication system to build login-pro
 
 Text:
 
-You can use Kirby’s user management system to restrict access to parts of your website that should only be available to certain users, for example, a clients’ area.
+You can use Kirby’s user system to restrict access to parts of your website that should only be available to certain users, for example, a clients’ area.
 
 In this recipe we will guide you through
 
@@ -29,7 +29,7 @@ All users, including front-end users, are managed via the (link: docs/panel/user
 
 ### Creating roles without panel access
 
-By default, Kirby provides a single admin role with access to the Panel and without any restrictions. Front-end users usually shouldn’t have access to the Panel at all so we first create a user role without Panel access.
+By default, Kirby provides a single admin role with access to the Panel and without any restrictions. Front-end users usually shouldn’t have access to the Panel at all so we first need to create a user role without Panel access.
 
 In your `/site/blueprints/users` folder, create a new file called `client.yml` with the following content:
 
@@ -41,14 +41,14 @@ permissions:
     panel: false
 ```
 
-If you add a new user in the Panel and assign the Client role, this user cannot login to the Panel.
+If you add a new user in the Panel and assign the `client` role, this user cannot login to the Panel.
 
 You can create as many roles without Panel access as necessary to determine which part of your front-end should be accessible to which role.
 
 
 ## The login page
 
-For the login page we use an unlisted page with some basic information that gets its own template. Create a `/content/login` folder with a `login.txt` text file inside it. We use the text file to store the information for the form.
+For the login page, we use an unlisted page with some basic information that gets its own template. Create a `/content/login` folder with a `login.txt` text file inside it. We use the text file to store the information for the form.
 
 By creating a content file with these fields, we can make the form more dynamic and translate form labels and error messages in a multi-language installation if required. You could also hard-code this in your template instead.
 
