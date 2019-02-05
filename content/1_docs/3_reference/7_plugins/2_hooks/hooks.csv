@@ -11,6 +11,8 @@ file.replace:before,File,,"$file,$upload",checked
 file.replace:after,File,panel.file.replace,"$newFile,$oldFile",checked
 file.update:before,File,,"$file,$input",checked
 file.update:after,File,panel.file.update,"$newFile,$oldFile",checked
+kirbytags:before,Kirby,,"$text,$data,$options",checked
+kirbytags:after,Kirby,,"$text,$data,$options",checked
 page.changeNum:before,Page,,"$page,$num",checked
 page.changeNum:after,Page,,"$newPage,$oldPage",checked
 page.changeSlug:before,Page,,"$page,$slug",checked
@@ -27,6 +29,8 @@ page.delete:before,Page,,$page,checked
 page.delete:after,Page,panel.page.delete,"$status,$page",checked
 page.update:before,Page,,"$page,$values,$strings",checked
 page.update:after,Page,panel.page.update,"$newPage,$oldPage",checked
+route:before,Kirby,,"$route,$path,$method",checked
+route:after,Kirby,,"$route,$path,$method,$result",checked
 site.update:before,Site,,"$site,$values,$strings",checked
 site.update:after,Site,panel.site.update,"$newSite,$oldSite",checked
 user.changeEmail:before,User,,"$user,$email",checked
@@ -45,7 +49,3 @@ user.delete:before,User,,$user,checked
 user.delete:after,User,panel.user.delete,"$status,$user",checked
 user.update:before,User,,"$user,$values,$strings",checked
 user.update:after,User,panel.user.update,"$newUser,$oldUser",checked
-route:before,Kirby,,"$route,$path,$method",checked
-route:after,Kirby,,"$route,$path,$method,$result",checked
-kirbytags:before,Kirby,,"$text,$data,$options",checked
-kirbytags:after,Kirby,,"$text,$data,$options",checked
