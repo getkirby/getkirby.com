@@ -24,6 +24,12 @@ Text:
 (\link: some/page text: Link to some internal page)
 ```
 
+### Link to page in a specific language
+
+```kirbytext
+(\link: some/page lang: de)
+```
+
 ### Link to an anchor
 
 ```kirbytext
