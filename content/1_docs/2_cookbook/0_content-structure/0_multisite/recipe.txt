@@ -44,9 +44,6 @@ $kirby = new Kirby([
     'site'    => $root . '/site',
     'content' => $root . '/content',
     'media'   => $root . '/media'
-  ],
-  'url' => [
-    'index'   => $url
   ]
 ]);
 
@@ -78,9 +75,6 @@ $kirby = new Kirby([
     'site'    => $root . '/site',
     'content' => $root . '/content',
     'media'   => $root . '/media'
-  ],
-  'url' => [
-    'index'   => $url
   ]
 ]);
 
