@@ -105,6 +105,10 @@ Check them out and use whichever method you prefer.
 
 Kirby's control panel (aka. the Panel) comes without any pre-installed accounts. Open `http://yourdomain.com/panel` in the browser to start the installer and create the first account.
 
+<info>
+For security reasons, you cannot install the Panel on a public server by default. To allow this, you can enable the (link: docs/reference/system/options/panel#allow-the-panel-to-be-installed-on-a-remote-server text: `panel.install` option):
+</info>
+
 ## Register your installation
 
 Once you publish your website, you need to (link: buy text: purchase a Kirby license). We will send you a unique license code for your domain. You can register your installation with the following steps.
