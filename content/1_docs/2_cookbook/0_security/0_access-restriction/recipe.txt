@@ -114,11 +114,11 @@ In the login template, create the login form and a container for the error messa
 <form method="post" action"<?= $page->url() ?>">
   <div>
     <label for="username"><?= $page->username()->html() ?></label>
-    <input type="text" id="username" name="username">
+    <input type="text" id="username" name="username" required>
   </div>
   <div>
     <label for="password"><?= $page->password()->html() ?></label>
-    <input type="password" id="password" name="password">
+    <input type="password" id="password" name="password" required>
   </div>
   <div>
     <input type="submit" name="login" value="<?= $page->button()->html() ?>">
@@ -136,18 +136,21 @@ To handle the form submission we create a login controller to keep the logic out
 ```php "/site/controllers/login.php"
 <?php
 
-return function($kirby) {
+return function ($kirby) {
 
   // don't show the login screen to already logged in users
-  if($kirby->user()) go('/');
+  if ($kirby->user()) {
+    go('/');
+  }
 
   $error = false;
+  
   // handle the form submission
-  if($kirby->request()->is('POST') and get('login')) {
+  if ($kirby->request()->is('POST') && get('login')) {
 
     // fetch the user by username and run the
     // login method with the password
-    if($user = $kirby->user(get('username')) and $user->login(get('password'))) {
+    if ($user = $kirby->user(get('username')) && $user->login(get('password'))) {
       // redirect to the homepage
       // if the login was successful
       go('/');
@@ -159,7 +162,9 @@ return function($kirby) {
 
   }
 
-  return ['error' => $error];
+  return [
+    'error' => $error
+  ];
 
 };
 ```
@@ -179,8 +184,13 @@ return [
     [
       'pattern' => 'logout',
       'action'  => function() {
-        if($user = kirby()->user()) $user->logout();
+
+        if ($user = kirby()->user()) {
+          $user->logout();
+        }
+        
         go('login');
+      
       }
     ]
   ]
@@ -198,9 +208,9 @@ As soon as the user logged in, we display a logout link in the menu or somewhere
   <?php foreach ($site->children()->listed() as $item): ?>
     <?= $item->title()->link() ?>
   <?php endforeach ?>
-  <?php if($user = $kirby->user()): ?>
+  <?php if ($user = $kirby->user()): ?>
     <li>
-      <a href="<?php echo url('logout') ?>">Logout</a>
+      <a href="<?= url('logout') ?>">Logout</a>
     </li>
   <?php endif ?>
 </nav>
@@ -215,7 +225,7 @@ With the login and logout processes in place, we can finally protect our content
 You can protect entire pages from unauthenticated users by adding the following line at the top of a template:
 
 ```php
-<?php if(!$kirby->user()) go('/') ?>
+<?php if (!$kirby->user()) go('/') ?>
 
 // rest of the template
 
@@ -223,7 +233,7 @@ You can protect entire pages from unauthenticated users by adding the following
 
 This will redirect all unauthenticated visitors to the home page.
 
-Instead of adding this code to each template, you can also put your logic into a (link: docs/guide/routing text: route), for example, when  restricting access by other criteria than the template.
+Instead of adding this code to each template, you can also put your logic into a (link: docs/guide/routing text: route), for example, when restricting access by other criteria than the template.
 
 
 ### Protecting parts of a page
@@ -237,7 +247,7 @@ In the same way, you can hide parts of a page from unauthenticated users:
 
 <?= $page->text()->kirbytext() ?>
 
-<?php if($kirby->user()): ?>
+<?php if ($kirby->user()): ?>
 Top Secret: the meaning of life is…
 <?php endif ?>
 
@@ -249,7 +259,7 @@ Top Secret: the meaning of life is…
 The above examples don’t differentiate by user role but grant access to these pages to all logged-in users. If you have multiple front-end user roles and want to restrict access to certain pages or parts of pages to particular roles, you can ask for the current user’s role like this:
 
 ```php
-<?php if(($user = $kirby->user()) and $user->role()->id() === 'client'): ?>
+<?php if (($user = $kirby->user()) && $user->role()->id() === 'client'): ?>
 This part of the page is only visible for
 clients with the role clients
 <?php endif ?>
