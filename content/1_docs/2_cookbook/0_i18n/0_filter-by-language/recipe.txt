@@ -12,7 +12,8 @@ To prevent this, for example when displaying the pages for a menu or a list of a
 
 ```php
 <?php
-$translatedPages = page('somepage')->children()->visible()->filter(function($child) {
+
+$translatedPages = page('somepage')->children()->filter(function ($child) {
   return $child->translation(kirby()->language()->code())->exists();
 });
 ```
