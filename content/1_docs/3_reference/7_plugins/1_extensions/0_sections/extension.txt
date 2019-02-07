@@ -40,7 +40,7 @@ Kirby::plugin('yourname/modified', [
 ]);
 ```
 
-The array key `hello` sets the section type that can later be used in your blueprints.
+The array key `modified` sets the section type that can later be used in your blueprints.
 
 ### Section properties
 
