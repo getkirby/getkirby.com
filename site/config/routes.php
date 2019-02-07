@@ -12,6 +12,12 @@ return [
         }
     ],
     [
+        'pattern' => 'made-with-kirby-and-love',
+        'action'  => function () {
+            go('love');
+        }
+    ],
+    [
         'pattern' => 'hooks/clean',
         'method'  => 'GET|POST',
         'action'  => function () {
@@ -74,5 +80,5 @@ return [
         'action'  => function ($path = null) {
             go('kosmos/' . $path);
         }
-    ]
+    ],
 ];
