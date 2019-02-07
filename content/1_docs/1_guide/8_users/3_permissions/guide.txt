@@ -96,7 +96,7 @@ You can keep all the permissions in the role files, but you can also overwrite t
 ### Page options
 
 
-```yaml "/site/pages/project.yml"
+```yaml "/site/blueprints/pages/project.yml"
 title: Project
 
 options:
