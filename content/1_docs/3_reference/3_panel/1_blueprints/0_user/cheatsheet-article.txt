@@ -51,6 +51,17 @@ The `permissions` option can be used to restrict access to certain actions for t
 | `panel` | `true`/`false` |
 | `users` | `true`/`false`|
 | `site` | `true`/`false` |
+| `settings`| `true`/`false` |
+
+#### Example: Prevent accessing user management and settings
+
+```yaml
+permissions:
+	access:
+		settings: false
+		users: false
+```		
+
 
 ### `file`
 
@@ -61,6 +72,16 @@ The `permissions` option can be used to restrict access to certain actions for t
 | `delete` | `true`/`false` |
 | `replace` | `true`/`false` |
 | `update` | `true`/`false` |
+
+#### Example: Prevent deleting files
+
+```yaml
+permissions:
+	access:
+		...
+	file:
+	  delete: false
+```		
 
 ### `page`
 
@@ -75,13 +96,35 @@ The `permissions` option can be used to restrict access to certain actions for t
 | `preview` | `true`/`false` |
 | `update` | `true`/`false` |
 
+#### Example: Prevent deleting and creating pages and changing their template
+
+```yaml
+permissions:
+	access:
+		...
+	page:
+		delete: false
+		create: false
+		changeTemplate: false
+```
+
 ### `site`
 
 | Option | Value |
 |----    | ---- |
 | `update` | `true`/`false` |
 
-### `user`
+### `users`
+
+The `users` setting can be set generally to `false` to prevent the user from editing, adding or deleting other users.
+
+```yaml
+users: false
+```
+
+It is also possible to set the `users` options individually.
+
+
 
 | Option | Value |
 |----    | ---- |
@@ -92,6 +135,47 @@ The `permissions` option can be used to restrict access to certain actions for t
 | `create` | `true`/`false` |
 | `delete` | `true`/`false` |
 | `update` | `true`/`false` |
+
+#### Example:
+
+```yaml
+permissions:
+	access:
+		users: true
+	users:
+		delete: false
+		create: false
+		changeRole: false
+```
+
+### `user`
+
+This option refers to each user with this role.
+
+| Option | Value |
+|----    | ---- |
+| `changeEmail` | `true`/`false` |
+| `changeLanguage` | `true`/`false` |
+| `changeName` | `true`/`false` |
+| `changePassword` | `true`/`false` |
+| `create` | `true`/`false` |
+| `delete` | `true`/`false` |
+| `update` | `true`/`false` |
+
+
+#### Example
+
+This user can access the user management, but not edit other users. The user cannot change their own role or delete themselves.
+
+```yaml
+permissions:
+	access:
+		users: true
+	users: false	
+	user:
+		delete: false
+		changeRole: false
+```
 
 ### Using wildcards
 It's also possible to restrict access to entire blocks by just passing `false` to the block:

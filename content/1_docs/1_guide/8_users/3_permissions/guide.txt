@@ -22,8 +22,9 @@ title: Editor
 permissions:
   access:
     panel: true
-    users: true
     site: true
+    settings: false
+  users: false  
   site:
     update: false
   page:
@@ -61,10 +62,12 @@ permissions:
     update: false
   page:
     delete: false
-  user: false
+  users: false
+  user:
+    changeRole: false
 ```
 
-This would prevent the editor from accessing any part of the user management, from deleting pages and from updating the site settings.
+This would prevent the editor from editing other users, from changing their own role, from deleting pages and from updating the site settings.
 
 ## The * wildcard
 
