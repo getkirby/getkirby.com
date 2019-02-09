@@ -37,6 +37,8 @@ If you want to follow along, you can [download a ZIP file of that branch](https:
 composer create-project getkirby/pluginkit site/plugins/your-plugin dev-1-basic --remove-vcs
 ```
 
+Please note that using Composer on the command line is *not* required for this tutorial, not even for supporting plugin installation via Composer. For most plugins, you can use the ZIP file of the Pluginkit and never have to touch the command line (unless you want to, which is fine too).
+
 ## General recommended setup
 
 ### Your plugin's Git repo
