@@ -99,6 +99,26 @@ cd your-project
 composer update
 ```
 
+## Disabling the custom path completely
+
+If you prefer to have the CMS installed to the `vendor` directory, you can disable the custom path entirely:
+
+```json "composer.json"
+{
+  "require": {
+    "getkirby/cms": "^3.0"
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
+  "extra": {
+    "kirby-cms-path": false
+  }
+}
+```
+
+Please note that you will need to modify your site's `index.php` to load the `vendor/autoload.php` file instead of Kirby's `bootstrap.php`.
+
 ## Updating Kirby
 
 If you want to update Kirby to the latest version, all you need to do is to run the following command:
