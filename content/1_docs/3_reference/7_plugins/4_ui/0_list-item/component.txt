@@ -7,7 +7,7 @@ The ListItem component is a very flexible tool to display an image together with
 ## Example
 
 ```html
-<kirby-list-item
+<k-list-item
   :image="{
     ratio: '3/2',
     cover: true,
