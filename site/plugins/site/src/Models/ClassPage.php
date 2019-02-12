@@ -133,7 +133,7 @@ class ClassPage extends Page
 
     public function githubDocs($action = 'tree'): string
     {
-        return option('github') . '/getkirby.com/' . $action . '/develop/content/' . $this->diruri();
+        return option('github') . '/getkirby.com/' . $action . '/master/content/' . $this->diruri();
     }
 
     public function githubSource(): string
@@ -141,7 +141,7 @@ class ClassPage extends Page
         $path = str_replace('Kirby\\', '', $this->className());
         $path = str_replace('\\', '/', $path);
 
-        return option('github') . '/kirby/tree/develop/src/' . $path . '.php';
+        return option('github') . '/kirby/tree/master/src/' . $path . '.php';
     }
 
     public function isStatic()

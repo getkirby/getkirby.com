@@ -47,7 +47,7 @@ class MethodPage extends HelperPage
             $file = $reflection->getFileName();
             $path = Str::from($file, 'src/');
 
-            return option('github') . '/kirby/tree/develop/' . $path . '#L' . $this->line();
+            return option('github') . '/kirby/tree/master/' . $path . '#L' . $this->line();
         }
     }
 
