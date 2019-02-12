@@ -64,12 +64,28 @@ fields:
     layout: cards
 ```
 
-### Parent page
+### Querying files
 
-```
+The `query` option let's you limit the set of files to be included. When not set, it defaults to all files of the current page.
+
+#### Limit the set to images
+
+```yaml
 gallery:
   type: files
-  parent: site.find('imagefolder')
+  query: page.images
+```
+
+You can use all file types available in Kirby here (images, documents, video, audio and code).
+
+#### Querying files from other pages
+
+You can get as complex as you like, e.g. get all images of all children of the `photography` page that use the `cover` template:
+
+```yaml
+gallery:
+  type: files
+  query: site.find('photography').children.images.filterBy('template', 'cover')
 ```
 
 ## Accessing selected files in templates
