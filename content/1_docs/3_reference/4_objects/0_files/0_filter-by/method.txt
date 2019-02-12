@@ -1,6 +1,11 @@
 Text: 
 
-## Example
+## Values for `$args`
+
+`$args` can be a string, `true`, `false` or a combination of a filter method and an argument. In case of the `in` or `not in` filters, the third argument must be an array.
+
+
+## Examples
 
 ```php
 // filter by extension
@@ -14,6 +19,9 @@ $files = $page->files()->filterBy('filename', '*=', '-document');
 
 // filter all types except documents
 $files = $page->files()->filterBy('type', '!=', 'document');
+
+// filter all files that have a template assigned
+$files = $page->files()->filterBy('template', true);
 ```
 
 ## Available filter methods
