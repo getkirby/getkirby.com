@@ -72,7 +72,7 @@ return [
 
 And in a plugin, define a function that returns your variables:
 
-```php "/site/plugins/variables/index.php
+```php "/site/plugins/variables/index.php"
 
 function getVariables($lang = null) {
    /* here you can fetch your variables from anywhere:
