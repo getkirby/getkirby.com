@@ -11,7 +11,7 @@ class ValidatorPage extends HelperPage
 
     public function githubSource()
     {
-        return option('github') . '/kirby/tree/develop/src/Toolkit/V.php#L' . $this->line();
+        return option('github') . '/kirby/tree/master/src/Toolkit/V.php#L' . $this->line();
     }
 
     public function methodCall(): string

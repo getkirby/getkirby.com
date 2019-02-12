@@ -56,7 +56,7 @@ class HelperPage extends Page
 
     public function githubSource()
     {
-        return option('github') . '/kirby/tree/develop/config/helpers.php#L' . $this->line();
+        return option('github') . '/kirby/tree/master/config/helpers.php#L' . $this->line();
     }
 
     public function line()

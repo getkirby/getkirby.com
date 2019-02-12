@@ -25,7 +25,7 @@ class KirbyTagPage extends HelperPage
 
     public function githubSource()
     {
-        return option('github') . '/kirby/tree/develop/config/tags.php#L' . $this->line();
+        return option('github') . '/kirby/tree/master/config/tags.php#L' . $this->line();
     }
 
     public function line()
