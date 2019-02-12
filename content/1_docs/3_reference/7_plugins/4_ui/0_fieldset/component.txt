@@ -6,7 +6,7 @@ The Fieldset component is a wrapper around manual field component creation. You 
 
 ```html
 <template>
-  <kirby-fieldset v-model="contact" @input="input" :fields="{
+  <k-fieldset v-model="contact" @input="input" :fields="{
     name: {
       label: 'Your Name',
       type: 'text',
