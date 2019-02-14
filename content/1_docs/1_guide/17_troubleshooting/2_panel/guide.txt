@@ -11,3 +11,9 @@ Adding this line in the `.htaccess` has helped users fixing this issue:
 ```
 php_value opcache.revalidate_freq 0
 ```
+
+## Panel Error Messages
+
+### "The JSON response from the API could not be parsed. Please check your API connection."
+
+When this error occurs, check with your hosting provider if `HTTP PATCH` requests are disabled.
