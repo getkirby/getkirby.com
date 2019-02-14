@@ -52,7 +52,7 @@ Properties are defined with the `props` array
 
 ```php "/site/plugins/modified/index.php"
 Kirby::plugin('yourname/modified', [
-    'fields' => [
+    'sections' => [
         'modified' => [
             'props' => [
                 'headline' => function ($headline) {
@@ -144,7 +144,7 @@ If you need to pass additional values to the field, that are not defined by prop
 
 ```php "/site/plugins/modified/index.php"
 Kirby::plugin('yourname/modified', [
-    'fields' => [
+    'sections' => [
         'modified' => [
             'props' => [
                 'headline' => function (string $headline) {
