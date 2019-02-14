@@ -193,7 +193,7 @@ Kirby can detect the preferred language of the visitor. This has to be enabled i
 
 ```php "/site/config/config.php"
 return [
-  'language.detect' => true
+  'languages.detect' => true
 ]
 ```
 
