@@ -42,18 +42,18 @@ Option | Value
 
 ```php "/site/config.php"
 
-[
+return [
   'cache' => [
-      'pages' => [
-          'active' => true,
-              'type'   => 'memcached',
-              'host'   => 'localhost',
-              'port'   => '11211',
-              'prefix'  => 'pages',
-              'ignore' => function ($page) {
-                return $page->id() === 'something';
-              }
-      ]
+    'pages' => [
+      'active' => true,
+      'type'   => 'memcached',
+      'host'   => 'localhost',
+      'port'   => '11211',
+      'prefix'  => 'pages',
+      'ignore' => function ($page) {
+        return $page->id() === 'something';
+      }
+    ]
   ]
 ];
 ```
@@ -64,7 +64,7 @@ Option | Value
 If you want to create your own cache instance, you can just add it to the config like this:
 
 ```php "/site/config.php"
-[
+return [
   'cache.api' => true
 ];
 ```
