@@ -27,6 +27,29 @@ Kirby::plugin('your/plugin', [
 ]);
 ```
 
+## Outsourcing code to separate file
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('your/plugin', [
+	'tags' => [
+		'wikipedia' => require_once __DIR__ . '/tags/wikipedia.php'
+		]
+	]
+]);
+```
+
+And then in `/tags/wikipedia.php`
+
+```php "/tags/wikipedia.php"
+<?php
+
+return [
+  'html' => function($tag) {
+    return '<a href="http://wikipedia.org">Wikipedia</a>';
+  }
+];
+```
+
 ## Adding attributes
 
 If you want to add attributes, you can add them as an `attr` array like this:
