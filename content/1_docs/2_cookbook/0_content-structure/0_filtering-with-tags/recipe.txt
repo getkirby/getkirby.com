@@ -199,7 +199,7 @@ Once we've done that, the `blog.php` template is free of any logic, which makes 
   <ul class="tags">
     <?php foreach($tags as $tag): ?>
     <li>
-      <a href="<?= url($page->url() . '/' . kirby\http\params::separator(['tag' => $tag])) ?>">
+      <a href="<?= url($page->url(), ['params' => ['tag' => $tag]]) ?>">
         <?= html($tag) ?>
       </a>
     </li>
