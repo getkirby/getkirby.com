@@ -77,11 +77,11 @@ Here's a simple example of a remote request in PHP with our `Remote` class.
 
 $response = Remote::get('https://yoursite.com/api/pages/example', [
   'headers' => [
-    'Authorization' => 'Basic ' . base64_encode($email . ':' . $password)
+    'Authorization: Basic ' . base64_encode($email . ':' . $password)
   ]
 ]);
 
-$page = json_decode($response->content())['data'];
+$page = json_decode($response->content())->data;
 ```
 
 ## Available Endpoints
