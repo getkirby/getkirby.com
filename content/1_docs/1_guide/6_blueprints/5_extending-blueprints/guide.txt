@@ -125,7 +125,7 @@ type: pages
 parent: site.find("blog")
 headline: Blog
 layout: list
-info: "{{ page.date('d.m.Y') }}"
+info: "{{ page.date.toDate('d.m.Y') }}"
 ```
 
 In your `blog.yml` blueprint, you can now create different pages sections based on this section blueprint:

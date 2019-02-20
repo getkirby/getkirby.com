@@ -107,7 +107,7 @@ text: " {{ page.title.upper }}"
 If you want to display additional information for each page, like a date, year, category or any other field value, you can use the template syntax with (link: docs/guide/blueprints/query-language text: query language) in the `info` option.
 
 ```yaml
-info: " {{ page.date('Y-m-d') }}"
+info: " {{ page.date.toDate('Y-m-d') }}"
 ```
 
 ## Preview images

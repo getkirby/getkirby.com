@@ -164,7 +164,7 @@ In this example, we pass the `$article` variable (which is a page object) to the
 ```php "/site/snippets/article.php"
 <article>
   <h1><?= $article->title()->html() ?></h1>
-  <time><?= $article->date('d/m/Y') ?></time>
+  <time><?= $article->date()->toDate('d/m/Y') ?></time>
   <?= $article->intro()->kirbytext() ?>
   <a href="<?= $article->url() ?>">Read more…</a>
 </article>
