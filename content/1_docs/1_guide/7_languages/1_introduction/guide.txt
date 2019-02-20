@@ -81,9 +81,8 @@ To add the first/a new language, click on "Add a new language" and add the langu
 
 Once the default language is defined, you can add more languages as secondary languages. The Panel automatically renames all existing content and file meta data files and includes the language extension.
 
-By default, the URL of your site changes and the language code is added to the URL. If you want to keep the root URL for the default language, you can set the URL manually.
 
-#### Manage languages
+## Manage languages in the Panel
 
 The Panel offers options to delete and edit a language, or to make it the default language. You can access them by clicking on the menu icon (three dots):
 
@@ -96,6 +95,23 @@ The Panel offers options to delete and edit a language, or to make it the defaul
 <warning>
 If you delete a language, all of its content files are deleted. This can even result in all your content being deleted if you delete the wrong language.
 </warning>
+
+## Language specific URLs
+
+By default, the URL of your site changes and the language code is added to the URL. If you want to keep the root URL for the default language, you can set the URL manually using the `url` option:
+
+```php "/site/langugages/en.php"
+<?php
+
+return [
+  'code' => 'en',
+  'default' => true,
+  'direction' => 'ltr',
+  'locale' => 'en_US',
+  'name' => 'English',
+  'url' => '/',
+];
+```
 
 ## Using different domains for each language
 
