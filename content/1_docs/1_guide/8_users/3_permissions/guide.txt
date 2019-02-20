@@ -31,7 +31,7 @@ permissions:
     create: true
     changeTemplate: true
     changeTitle: true
-    changeURL: true
+    changeSlug: true
     hide: true
     sort: true
     update: true
