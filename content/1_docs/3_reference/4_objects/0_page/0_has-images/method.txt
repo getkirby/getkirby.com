@@ -4,7 +4,7 @@ Text:
 
 ```php
 <?php
-echo $page->hasImages(); //returns the number of images in the folder
+echo $page->hasImages(); //will echo 1 if true, nothing if false
 
 if($page->hasImages()) {
   $images = $page->images();

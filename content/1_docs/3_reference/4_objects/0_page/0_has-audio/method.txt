@@ -4,7 +4,7 @@ Text:
 
 ```php
 <?php
-echo $page->hasAudio(); //returns the number of audio files in the folder
+echo $page->hasAudio(); //will echo 1 if true, nothing if false
 
 if($page->hasAudio()) {
   $audio = $page->audio();

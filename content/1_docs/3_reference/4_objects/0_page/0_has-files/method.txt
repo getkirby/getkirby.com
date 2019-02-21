@@ -4,7 +4,7 @@ Text:
 
 ```php
 <?php
-echo $page->hasFiles(); //returns the number of files in the folder
+echo $page->hasFiles(); //will echo 1 if true, nothing if false
 
 if($page->hasFiles()) {
   $files = $page->files()

@@ -3,7 +3,7 @@ Text:
 ## Example
 
 ```php
-echo $page->hasPrevListed();
+echo $page->hasPrevListed(); //will echo 1 if true, nothing if false
 ```
 
 ### Using sort field
