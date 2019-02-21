@@ -3,8 +3,7 @@ Text:
 ## Example
 
 ```php
-// returns the number of unlited children in the folder
-echo $page->hasUnlistedChildren();
+echo $page->hasUnlistedChildren(); //will echo 1 if true, nothing if false
 
 if($page->hasUnlistedChildren()) {
   $unlistedChildren = $page->children()->unlisted();
