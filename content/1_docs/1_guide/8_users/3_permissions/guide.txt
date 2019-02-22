@@ -27,7 +27,7 @@ permissions:
   users: false  
   site:
     update: false
-  page:
+  pages:
     create: true
     changeTemplate: true
     changeTitle: true
@@ -46,7 +46,7 @@ permissions:
     changeRole: false
     delete: false
     update: false
-  file:
+  files:
     create: true
     changeName: true
     delete: true
@@ -60,7 +60,7 @@ title: Editor
 permissions:
   site:
     update: false
-  page:
+  pages:
     delete: false
   users: false
   user:
