@@ -5,6 +5,4 @@
     <?= $page->example()->kt() ?>
   </div>
 
-  <?php snippet('github.edit') ?>
-
 <?php snippet('cheatsheet.article.footer') ?>
