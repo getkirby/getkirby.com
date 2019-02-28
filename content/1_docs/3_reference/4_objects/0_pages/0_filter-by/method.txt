@@ -30,10 +30,22 @@ $items = $page->children()->filterBy('tag', 'development', ';');
 Method   | Function
 -        | -
 ==       | all values that match exactly
-in       | takes an array as parameter, matches all values that are included in the array
 !=       | all values that don't match
+in       | takes an array as parameter, matches all values that are included in the array
 not in   | takes an array as parameter, matches all values that are not included in the array
 *=       | all values that contain the given string
+!*=      | all values that do not contain the given string
+^=       | all values that start with the given string
+!^=      | all values that do not start with the given string
+$=       | all values that end with the given sttring
+!$=      | all values that do not end with a given string
+*        | all values that match the given pattern
+!*       | all values that do not match the given pattern
+between  | all values that match the given range
+maxlength| all values that match the given maxLength
+minlength| all values that match the given minLength
+maxwords | all values that match the given max number of words
+minwords | all values that match the given min number of words
 >        | all values that are greater than the given value
 >=       | all values that are greater or equal the given value
 <        | all values that are smaller than the given value
