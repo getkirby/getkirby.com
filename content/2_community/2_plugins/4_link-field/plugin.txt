@@ -1,0 +1,11 @@
+Title: Link field
+
+----
+
+Text:
+
+A panel field for conveniently entering internal links to other pages, email addresses and external URLs in a single field.
+
+----
+
+Link: https://github.com/medienbaecker/kirby-link-field

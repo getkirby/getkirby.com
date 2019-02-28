@@ -5,10 +5,44 @@
     <div class="wrap">
     <?php snippet('hero') ?>
 
+      <!-- # Plugins Showcase -->
+
+      <section class="community-plugins-section | section">
+
+        <header class="-mb:large">
+          <h2 id="team" class="h2"><?= $pluginsPage->title() ?></h2>
+          <p class="intro">
+            <?= $pluginsPage->intro() ?>
+          </p>
+        </header>
+
+        <div class="community-plugins">
+          <?php foreach($plugins as $item): ?>
+          <article>
+            <figure class="screenshot -mb:small">
+              <?php if ($image = $item->image()): ?>
+                <?= $image->html() ?>
+              <?php endif ?>
+            </figure>
+            
+            <header>
+              <h3 class="-mb:small"><?= $item->title() ?></h3>
+              <div class="text">
+                <?= $item->text()->kt() ?>
+              </div>
+            </header>
+            
+            <!-- <?= $item->link() ?> -->
+          </article>
+          <?php endforeach ?>
+        </div>
+      </section>
+
       <!-- # Community Links -->
+
       <div class="community-links">
 
-        <?php foreach ($page->find('forum', 'plugins', 'themes') as $section): ?>
+        <?php foreach ($page->find('forum', /*'plugins',*/ 'themes') as $section): ?>
         <section id="<?= $section->uid() ?>" class="community-link-section">
 
           <header>
