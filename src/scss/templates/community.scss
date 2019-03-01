@@ -1,5 +1,18 @@
 @import "../includes";
 
+.community-plugins-container {
+  position: relative;
+  padding: 1.5rem 1.5rem 0;
+  background: darken($color-anthracite, 5%);
+  color: $color-syntax-white;
+  @include mq(from m) {
+    padding: 3rem 3rem 1.5rem;
+  }
+  @include mq(from l) {
+    margin: 0 -3rem;
+  }
+}
+
 .community-plugins {
   display: flex;
   margin-left: -3rem;
