@@ -33,7 +33,7 @@ The page cache files are stored in the `/site/cache` folder.
 Option | Value
 --|--
 `active` | `true`/`false`
-`ignore` | A function that returns a list of pages to ignore.
+`ignore` | Either an array of page IDs to ignore, or a callback function that returns a boolean
 
 
 ## Cache drivers and options
