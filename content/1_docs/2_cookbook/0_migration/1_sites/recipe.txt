@@ -338,6 +338,7 @@ $kirby->page('some/page')->delete();
 - `$pagination->items()` was removed, use `$pagination->total()` or `$pagination->pages()`
 - `tpl::load()` doesn't accept a third argument anymore
 - the `excerpt()` helper method has been removed and the parameters for the `$field->excerpt()` method have changed
+- `$page->tinyurl()` was removed
 
 ## Multi-language installation
 
