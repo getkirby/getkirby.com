@@ -27,7 +27,10 @@ fields:
 
 (field-options: tags)
 
+
 ## Predefined autocomplete options
+
+For autocompletion to work, you need to set the options attribute.  Options can be a fixed list or dynamic options using the query option.
 
 ```yaml
 fields:
