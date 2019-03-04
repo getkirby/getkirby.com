@@ -14,6 +14,10 @@ The query language adds a lot of flexibility when querying options for select, r
 
 If you are not familiar with (link: docs/guide/templates/php-api text: Kirby's PHP API) yet, you should learn more about it first. The query language is very close to it and will be confusing without the basics.
 
+<info>
+We recommend using double quotes around strings in the query language, otherwise it can result in the Panel throwing errors in some cases.
+</info>
+
 ### Syntax
 
 #### PHP
@@ -22,7 +26,7 @@ If you are not familiar with (link: docs/guide/templates/php-api text: Kirby's P
 $site->title()
 $page->title()->lower()
 $page->children()
-$page->children()->filterBy('featured', true)
+$page->children()->filterBy("featured", true)
 ```
 
 #### Query
@@ -31,7 +35,7 @@ $page->children()->filterBy('featured', true)
 site.title
 page.title.lower
 page.children
-page.children.filterBy('featured', true)
+page.children.filterBy("featured", true)
 ```
 
 As you can see, it is very close to the PHP syntax. You don't need to relearn anything this way.
