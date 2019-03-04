@@ -88,6 +88,8 @@ gallery:
   query: site.find('photography').children.images.filterBy('template', 'cover')
 ```
 
+You can find more example how you can use the query language in the (link: docs/guide/blueprints/query-language text: guide.
+
 ## Accessing selected files in templates
 
 ### Single file
