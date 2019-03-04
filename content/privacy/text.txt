@@ -167,7 +167,7 @@ Algolia complies with GDRP. You can find their privacy policy here: [https://www
 
 ## Shop
 
-We don't sell licenses directly, but through a third-party seller called Paddle:
+Our order process is conducted by our online reseller (link: https://paddle.com text: Paddle.com). Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.
 
 *Paddle.com
 340 S Lemon Avenue
@@ -176,7 +176,6 @@ California 91789
 USA*
 
 Paddle complies with GDPR. You need to agree to their terms of service and privacy policy whenever you buy a license. We don't store your purchasing data or history anywhere else. You can find Paddle's privacy policy here: https://paddle.com/privacy/
-
 
 ## Support Forum
 
@@ -217,4 +216,4 @@ We try to keep our privacy policy as transparent and easy to understand as possi
 ## Updates
 
 We will constantly check and update this privacy policy if necessary.
-**Last update: 04.01.2018**
+**Last update: 04.03.2019**

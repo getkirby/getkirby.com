@@ -10,7 +10,7 @@ This End User License Agreement (the **"Agreement"**) is fundamental to the rela
 If you do not agree to this Agreement, please do not download, install or use Kirby. Installation or use of Kirby signifies that you have read, understood, and agreed to be bound by this Agreement.
 
 <info>
-This Agreement was last revised on February 3, 2019.
+This Agreement was last revised on March 4, 2019.
 </info>
 
 ## Definitions
@@ -40,6 +40,10 @@ If you need to **transfer** your Kirby license to another individual or company,
 </info>
 
 A license is valid for all Updates of the same major Kirby release. We reserve the right to charge an **upgrade fee for Upgrade releases**.
+
+## Order process
+
+Our order process is conducted by our online reseller (link: https://paddle.com text: Paddle.com). Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.
 
 ## Free licenses
 Kirby can be used **for free in the following cases**.
