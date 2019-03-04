@@ -42,6 +42,14 @@ query: page.links.toStructure
 
 You can start at the `site`, current `page`, `users` collection or the `kirby` instance to run your query. The result must be a collection of `pages`, `files`, `users` or a structure object
 
+### Getting options from all siblings or the index
+
+```yaml
+query: page.siblings.pluck("tags", ",", true)
+query: page.index.pluck("tags", ",", true)
+query: site.index.pluck("tags", ",", true)
+```
+    
 ### Custom text and value
 
 To customize the displayed text or the stored value, you can be more specific when defining the query: The `query` option gets three suboptions, where `fetch` takes over the options query. `text` and `value` can be defined with the help of our string template language to get exactly what you want as the  result.
