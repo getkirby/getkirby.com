@@ -242,6 +242,10 @@ becomes
 ```
 This now works with all date fields, no matter what the date field is called.
 
+### Custom routes
+
+Custom routes starting with the string `api` will not work anymore, because `api` is now reserved by Kirby, unless you change the API slug to something else, see (link: docs/reference/system/options/api text: API configuration).
+
 ### Accessing arguments from the router in controllers
 
 The ways to (link: docs/guide/templates/controllers#arguments-from-the-router text: access arguments from the router) has changed from
