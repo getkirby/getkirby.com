@@ -3,44 +3,20 @@
   <main class="community-page | main" id="maincontent">
 
     <div class="wrap">
-      <?php snippet('hero') ?>
 
-      <!-- # Community Links -->
-      <!--
-      <div class="community-links">
-
-        <?php foreach ($page->find('forum', /*'plugins',*/ 'themes') as $section): ?>
-        <section id="<?= $section->uid() ?>" class="community-link-section">
-
-          <header>
-            <h2 class="h2 -mb:small"><?= $section->title() ?></h2>
-            <p class="h6 -mb:medium">
-              <a href="<?= $section->link() ?>"><?= Url::short((string)$section->link()) ?></a>
-            </p>
-
-            <figure class="screenshot">
-              <a href="<?= $section->link() ?>" class="intrinsic" style="padding-bottom: 100%">
-                <?= $section->image()->html(['alt' => $section->title()]) ?>
-              </a>
-            </figure>
-
-            <div class="description">
-              <p>
-                <?= $section->intro() ?>
-              </p>
-            </div>
-          </header>
-        </section>
-        <?php endforeach ?>
-
-      </div>
-      -->
+      <header class="community-page-hero hero">
+        <h1><?= $page->title() ?></h1>
+        <div class="intro -mb:medium">
+          <?= $page->intro()->kt() ?>
+          <p><a href="https://forum.getkirby.com">forum.getkirby.com</a></p>
+        </div>
+      </header>
 
     </div>
 
     <!-- # Plugins Showcase -->
 
-    <section class="community-plugins-section">
+    <section class="community-plugins-section -mb:huge">
       <div class="wrap">
         <div class="community-plugins-container">
           <header class="-mb:large">
@@ -53,20 +29,20 @@
           <div class="community-plugins">
             <?php foreach($plugins as $item): ?>
             <article>
-              <figure class="screenshot -mb:medium">
-                <?php if ($image = $item->image()): ?>
-                  <?= $image->html() ?>
-                <?php endif ?>
-              </figure>
+              <a href="<?= $item->link() ?>">
+                <figure class="screenshot -mb:medium">
+                  <?php if ($image = $item->image()): ?>
+                    <?= $image->html() ?>
+                  <?php endif ?>
+                </figure>
 
-              <header>
-                <h3 class="h6 -mb:small -color:white"><?= $item->title() ?></h3>
-                <div class="text">
-                  <?= $item->text()->kt() ?>
-                </div>
-              </header>
-
-              <!-- <?= $item->link() ?> -->
+                <header>
+                  <h3 class="h6 -mb:small -color:white"><?= $item->title() ?></h3>
+                  <div class="text">
+                    <?= $item->text()->kt() ?>
+                  </div>
+                </header>
+              </a>
             </article>
             <?php endforeach ?>
           </div>
@@ -75,6 +51,21 @@
     </section>
 
     <div class="wrap">
+
+      <!-- # Themes -->
+      <div class="community-themes">
+
+        <h2 id="themes" class="h2">Themes</h2>
+        <div>
+          <figure>
+            <a href="https://getkirby-themes.com"><?= $themes->image() ?></a>
+          </figure>
+          <div class="intro -mb:medium">
+            <?= $themes->intro()->kt() ?>
+            <p><a href="https://getkirby-themes.com">getkirby-themes.com</a></p>
+          </div>
+        </div>
+      </div>
 
       <!-- # Team Section -->
       <section class="community-team-section | section">

@@ -2,4 +2,8 @@ Title: Community
 
 ----
 
-Intro: Kirby is well-known and loved for its friendly community. We keep tight contact with our customers and contributors to constantly improve our product and everything around it.
+Intro:
+
+Kirby is well-known and loved for its friendly community. We keep tight contact with our customers and contributors to constantly improve our product and everything around it.
+
+Become a part of the community and join our forum. Find help, post your latest Kirby sites and just hang out with us.

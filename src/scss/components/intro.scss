@@ -10,13 +10,14 @@
   font-weight: 500;
   letter-spacing: 0;
 }
+
 .intro a:after {
   content: " ›";
   color: $color-yellow;
 }
 
 .intro p {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.375em;
   font-weight: 400;
 }
 
@@ -37,4 +38,7 @@
 
 .intro.-theme\:dark a {
   color: $color-syntax-yellow;
+}
+.intro.-theme\:dark a:after {
+  color: $color-white;
 }

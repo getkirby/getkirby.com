@@ -1,5 +1,21 @@
 @import "../includes";
 
+/* -----  Hero  ---------------------------------------------------- */
+
+.community-page-hero .intro {
+  max-width: none;
+
+  @include mq(from m) {
+    columns: 2;
+  }
+}
+
+/* -----  Plugins  ---------------------------------------------------- */
+
+.community-plugins-container .intro {
+  max-width: none;
+}
+
 .community-plugins-container {
   position: relative;
   padding: 1.5rem 1.5rem 0;
@@ -21,40 +37,40 @@
 
 .community-plugins article {
   padding-left: 3rem;
-  width: percentage(1 / 3);
   margin-bottom: 3rem;
-}
 
-/* -----  Link Section  ---------------------------------------------------- */
+  @include mq(from s) {
+    width: percentage(1 / 2);
+  }
 
-.community-links {
-  display: flex;
-  margin-left: -3rem;
-  padding-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.community-link-section {
-  padding-left: 3rem;
-  margin-bottom: 3rem;
-  @media screen and (min-width: 45rem) {
-    width: 33.33%;
+  @include mq(from m) {
+    width: percentage(1 / 3);
   }
 }
 
-.community-link-section .h6 {
-  text-transform: none;
-  letter-spacing: 0;
+/* -----  Themes  ----------------------------------------------------- */
+
+.community-themes > div {
+  background: $color-background;
+}
+.community-themes .intro {
+  padding: 1.5rem;
+}
+.community-themes figure {
+  line-height: 0;
+  flex-basis: 50%;
+  flex-shrink: 0;
 }
 
-.community-link-section .screenshot {
-  margin-bottom: 1.5rem;
-}
+@include mq(from m) {
+  .community-themes > div {
+    display: flex;
+    align-items: center;
+  }
+  .community-themes .intro {
+    padding: 3rem;
+  }
 
-.community-link-section .screenshot img {
-  border: 1px solid $color-background;
-  border-bottom: 0;
-  padding: 4px;
 }
 
 /* -----  Team Section  ----------------------------------------------------- */
