@@ -38,6 +38,10 @@ php -S localhost:8000 kirby/router.php
 
 Please make sure that you use the minimum required version of PHP, which is 7.1+ since Kirby 3.0.0. We recommend using the most recent stable PHP version that is available to you.
 
+## Subpages and files not working
+
+Check your file and folder permissions. Files should be 644, folders 755.
+
 ## Broken data after saving
 
 Your content files seem to be corrupted after you tried to save a page in the Panel? Make sure the PHP `mb_string` extension is installed on your server. A missing extension leads to broken data in text files.
