@@ -8,10 +8,13 @@
         <div class="home-hero-banner">
           <div class="home-hero-banner-content">
             <h1>Kirby is the content&nbsp;management system that adapts to your projects like no&nbsp;other</h1>
-            <p>
+            <p class="home-hero-links">
               <a class="home-hero-cta" href="<?= url('try') ?>">
                 <?php icon('download') ?>
                 Try for free
+              </a>
+              <a class="home-hero-v3" href="<?= url('v3') ?>">
+                See what's new in v3 &rsaquo;
               </a>
             </p>
           </div>
@@ -181,6 +184,7 @@
             </li>
           <?php endforeach ?>
         </ul>
+        <p><a class="home-features-more" href="<?= url('features') ?>">Not convinced yet? Find out why Kirby is made for you &rsaquo;</a></p>
       </div>
     </section>
 

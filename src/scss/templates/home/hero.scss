@@ -27,6 +27,11 @@
     padding-bottom: 3rem;
   }
 }
+.home-hero-links {
+  display: flex;
+  align-content: baseline;
+  flex-wrap: wrap;
+}
 .home-hero-cta {
   font-family: $font-mono;
   font-size: .875rem;
@@ -34,6 +39,8 @@
   padding: .5rem 1.5rem;
   display: inline-flex;
   align-items: center;
+  white-space: nowrap;
+  margin-right: 1.5rem;
 }
 .home-hero-cta svg {
   margin-right: .75rem;
@@ -44,6 +51,14 @@
 .home-hero-cta:hover {
   background: $color-syntax-yellow;
   color: #000;
+}
+.home-hero-v3 {
+  display: inline-flex;
+  padding: .75rem 0;
+  font-size: .875rem;
+  white-space: nowrap;
+  color: #999;
+  font-family: $font-mono;
 }
 
 .home-hero-banner h1 {

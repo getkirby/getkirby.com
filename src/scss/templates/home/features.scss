@@ -32,3 +32,13 @@
 .home-features li .description {
   font-size: .875rem;
 }
+
+.home-features-more {
+  display: block;
+  font-family: $font-mono;
+  text-align: left;
+  font-size: .875rem;
+  border-top: 4px solid #efefef;
+  margin-top: 4.5rem;
+  padding-top: 1.5rem;
+}
