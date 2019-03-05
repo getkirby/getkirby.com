@@ -34,6 +34,7 @@ Custom views mainly live in the `index.js` file. Think of them as their own litt
 panel.plugin("yourname/todos", {
   views: {
     todos: {
+      label: "Todos",
       icon: "list-bullet",
       component: {
         template: `
@@ -65,6 +66,7 @@ Your plugin will be available at `https://your-site.com/panel/plugins/todos`.
 | `component` | <code></code> | Vue component definition for the view |
 | `icon` | `page` | Set icon to use in UI. Choose from (link: docs/reference/panel/icons text: these). |
 | `menu` | `true` | Whether to show custom view in Panel menu |
+| `label` | <code></code> | Label for menu item in Panel menu |
 
 ## CSS styles
 
