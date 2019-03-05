@@ -12,6 +12,10 @@ Text:
 
 (reference: panel/fields)
 
+<info>
+If you come from Kirby 2, please note that the title field is automatically added to a page. Please remove all fields called title from your old blueprints.
+</info>
+
 ## Custom fields
 
 You can extend this list with your own field types by creating a (link: docs/reference/plugins/extensions/fields text: field plugin).
