@@ -97,3 +97,25 @@ return [
 ```
 
 (link: docs/reference/system/options/thumbs text: All thumbs options)
+
+## Presets
+
+You can define option presets for thumbs in your `config.php`:
+
+```php "/site/config/config.php"
+return [
+    'thumbs' => [
+        'presets' => [
+            'default' => ['width' => 1024, 'quality' => 80],
+            'blurred' => ['blur' => true]
+        ]
+    ]
+];  
+```
+
+Then you can use them e.g. in your templates:
+
+```php
+$file->thumb(); // for default preset
+$file->thumb('blurred');
+```
