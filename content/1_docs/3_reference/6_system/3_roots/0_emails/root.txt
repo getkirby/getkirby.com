@@ -1,5 +1,0 @@
-Title: emails
-
-----
-
-Excerpt: The directory with all your email templates
