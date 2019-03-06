@@ -218,13 +218,13 @@ Again, each item is being converted to a Kirby object and every property of the 
       ]
     },
     {
-      name: "Intel",
+      "name": "Intel",
       "products": [
         {"name": "Intel Core something"}
       ]
     },
     {
-      name: "Microsoft",
+      "name": "Microsoft",
       "products": [
         {"name": "Windows"},
         {"name": "Hololens"},
