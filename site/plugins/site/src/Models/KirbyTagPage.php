@@ -39,7 +39,15 @@ class KirbyTagPage extends HelperPage
     public function line()
     {
         if ($reflection = $this->reflection()) {
-            return $reflection->getStartLine();
+            $line = $reflection->getStartLine();
+            $line -= 2;
+
+            $attributes = $this->attributes();
+            if (count($attributes) > 0) {
+                $line -= count($attributes) + 1;
+            }
+
+            return $line;
         }
 
         return null;
