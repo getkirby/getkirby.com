@@ -63,7 +63,7 @@ return [
 ```
 
 <info>
-Basic auth is only available over HTTPS to avoid that the credentials are sent over the wire unencrypted with every request.
+Basic auth is only available over HTTPS to avoid that the credentials are sent over the wire unencrypted with every request. This restriction can be disabled via (link: docs/reference/system/options/api#allow-insecure-requests text: an option).
 </info>
 
 When Basic auth is activated, you must send an `Authorization` header with every request.
