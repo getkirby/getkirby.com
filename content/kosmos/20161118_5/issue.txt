@@ -32,19 +32,19 @@ Every month, a lot of great Kirby-powered websites are published. Like every mon
 
 (columns…)
 
-(image: axelscheffler.jpg link: https://axelscheffler.com/)
+(picture: axelscheffler.jpg link: https://axelscheffler.com/)
 (link: https://axelscheffler.com/ text: Axel Scheffler)
 Illustrator
 
 ++++
 
-(image: beatschweizer.jpg link: http://www.beatschweizer.com)
+(picture: beatschweizer.jpg link: http://www.beatschweizer.com)
 (link: http://www.beatschweizer.com text: Beat Schweizer)
 Photographer
 
 ++++
 
-(image: habita.jpg link: http://habita.com.tr/en)
+(picture: habita.jpg link: http://habita.com.tr/en)
 (link: http://habita.com.tr/en text: Habita)
 Coworking Space
 

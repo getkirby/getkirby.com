@@ -29,15 +29,15 @@ In the meantime, we are continuing to improve Kirby 2 and just published [Kirby 
 
 ## Kirby in the Wild
 
-(image: 2pac.jpg)
+(picture: 2pac.jpg)
 [Tupac Amaru Shakur (1971-1996)](http://www.2pac.com)
 Artist
 
-(image: integrated-2017.jpg)
+(picture: integrated-2017.jpg)
 [Integrated 2017](https://integratedconf.org)
 Conference
 
-(image: kueste-gegen-plastik.jpg)
+(picture: kueste-gegen-plastik.jpg)
 [Küste gegen Plastik](https://www.kueste-gegen-plastik.de)
 Nonprofit organization fighting the toxic impact of plastic on oceans
 
@@ -67,14 +67,14 @@ The collection of available themes on (http://getkirby-themes.com) has grown aga
 
 (columns…)
 
-(image: symmetric-theme.jpg)
+(picture: symmetric-theme.jpg)
 
 [Symmetric](https://cj-lab.fr/themes/symmetric/).
 Symmetric is a nice multi-purpose theme by Constantin Holy.
 
 ++++
 
-(image: alpha-theme.jpg)
+(picture: alpha-theme.jpg)
 [Alpha](http://t.starck.io/alpha/)
 Alpha is a minimalistic blog theme created by Christopher Boutillé.
 
@@ -82,14 +82,14 @@ Alpha is a minimalistic blog theme created by Christopher Boutillé.
 
 (columns…)
 
-(image: uime-theme.jpg)
+(picture: uime-theme.jpg)
 
 [UI-ME](https://cj-lab.fr/themes/uime/)
 UI-ME is a customizable multi-purpose theme created by Constantin Joly.
 
 ++++
 
-(image: kollide-theme.jpg)
+(picture: kollide-theme.jpg)
 [Kollide](http://themes.yordanoff.net/kollide/)
 Kollide is a very feature-rich Portfolio Theme created by Joro Yordanov.
 
@@ -102,7 +102,7 @@ Julian Oster shares his new [workflow with Kirby and Git](https://jlnostr.de/blo
 
 ++++
 
-(image: kirby-workflow-with-git.jpg)
+(picture: kirby-workflow-with-git.jpg)
 
 (…columns)
 
@@ -113,7 +113,7 @@ Julian Oster shares his new [workflow with Kirby and Git](https://jlnostr.de/blo
 
 ++++
 
-(image: draggable.jpg)
+(picture: draggable.jpg)
 
 (…columns)
 
@@ -125,7 +125,7 @@ Julian Oster shares his new [workflow with Kirby and Git](https://jlnostr.de/blo
 
 ++++
 
-(image: essential-image-optimization.jpg)
+(picture: essential-image-optimization.jpg)
 
 (…columns)
 

@@ -39,7 +39,7 @@ We added three useful presets (`page`, `pages` and `files`) to our blueprints th
 
 When presets are not enough, you can be the interface designer. You decide which features are needed for each type of page, file or user and how to arrange them in tabs, columns and sections.
 
-(image: tabs.png)
+(picture: tabs.png)
 
 (link: docs/guide/blueprints/layout text: Learn more about layouts…)
 

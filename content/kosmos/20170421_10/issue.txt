@@ -30,19 +30,19 @@ It's always inspiring to see what others are creating with Kirby. This month’s
 
 (columns…)
  
-(image: marika-marte.jpg link: https://marikamarte.at)
+(picture: marika-marte.jpg link: https://marikamarte.at)
 (link: https://marikamarte.at text: Marika Marte)
 Interior Design
 
 ++++
 
-(image: offscreen.jpg link: https://www.offscreenmag.com)
+(picture: offscreen.jpg link: https://www.offscreenmag.com)
 (link: https://www.offscreenmag.com text: Offscreen)
 Tech Magazine
 
 ++++
 
-(image: eduard-warkentin.jpg link: http://www.eduardwarkentin.de/en)
+(picture: eduard-warkentin.jpg link: http://www.eduardwarkentin.de/en)
 (link: http://www.eduardwarkentin.de/en text: Eduard Warkentin)
 Interaction designer
 
@@ -73,7 +73,7 @@ The new cookbook recipe on [Multi-language secrets](https://getkirby.com/docs/co
 
 ++++
 
-(image: multilanguage-secrets.jpg)
+(picture: multilanguage-secrets.jpg)
 
 (…columns)
 
@@ -81,7 +81,7 @@ The new cookbook recipe on [Multi-language secrets](https://getkirby.com/docs/co
 
 (columns…)
 
-(image: snipcart-tutorial.jpg)
+(picture: snipcart-tutorial.jpg)
 
 ++++
 

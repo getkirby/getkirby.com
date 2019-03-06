@@ -36,19 +36,19 @@ It's always inspiring to see what others are creating with Kirby. This month’s
 
 (columns…)
 
-(image: monkey47.jpg)
+(picture: monkey47.jpg)
 [Monkey 47](https://monkey47.com)
 Distillers
 
 ++++
 
-(image: vault.jpg)
+(picture: vault.jpg)
 [Vault](https://getvault.com)
 Investment Advisors
 
 ++++
 
-(image: normannenhaus-jena.jpg)
+(picture: normannenhaus-jena.jpg)
 [Normannenhaus Jena](http://www.normannenhaus-jena.de)
 Event location
 
@@ -68,7 +68,7 @@ Event location
 
 (columns…)
 
-(image: ma-petite-entreprise.jpg)
+(picture: ma-petite-entreprise.jpg)
 
 ++++
 
@@ -83,7 +83,7 @@ As the French name of [this theme created by Constantin Joly](https://cj-lab.fr/
 
 ++++
 
-(image: velox.jpg)
+(picture: velox.jpg)
 
 (…columns)
 

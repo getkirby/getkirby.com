@@ -61,7 +61,7 @@ If you only work in the Panel, you don't have to worry about adding language ext
 
 To translate a page in the Panel, switch from the default language to the target language using the language selector.
 
-(image: translating-content.png)
+(picture: translating-content.png)
 
 By default, the original content of the default language is shown to facilitate translations.
 
