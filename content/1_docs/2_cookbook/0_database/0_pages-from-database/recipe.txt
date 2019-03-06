@@ -12,10 +12,10 @@ This cookbook recipe is a short intro into how to create pages from entries in a
 
 The example assumes a database table called comments with the following columns:
 
-- id
-- text
-- user
-- slug
+- `id`
+- `text`
+- `user`
+- `slug`
 
 
 ## Create a new parent page
@@ -82,7 +82,7 @@ class CommentsPage extends Kirby\Cms\Page
 }
 ```
 
-Here we re-define the `children()` method of the Page class to return the commments from the database as children pages.
+Here we re-define the `children()` method of the `Page` class to return the commments from the database as children pages.
 
 ## Accessing the comments in the template
 With this page model in place, we can now access our comments as children of the `comments` page in our template:
@@ -101,7 +101,7 @@ With this page model in place, we can now access our comments as children of the
 
 ## Create the Panel blueprint
 
-We can now access these database-based pages in Panel. To do this properly, we should create blueprints for the parent and its children first:
+We can now access these database-based pages in the Panel. To do this properly, we should create blueprints for the parent and its children first:
 
 ### The parent's blueprint
 
@@ -117,7 +117,7 @@ sections:
 
 ```
 
-### The childrens' blueprint
+### The children's blueprint
 
 ```yaml "/site/blueprints/pages/comment.yml"
 title: Comment
@@ -142,7 +142,7 @@ fields:
 
 While these comments are now automatically available in the Panel, we cannot yet edit them. To make sure that they can be edited and deleted, we have to create a `CommentPage` model and modify the code of the parent model:
 
-The CommentPage model would need to overwrite the writeContent and readContent methods to get the comment details from the table instead of the text file.
+The `CommentPage` model would need to overwrite the `writeContent()` and `readContent()` methods to get the comment details from the table instead of the text file.
 
 ```php "/site/models/comment.php"
 <?php
