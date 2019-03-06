@@ -26,18 +26,26 @@ To create the same set of fields for all roles, you can setup a `default.yml` th
 /site/blueprints/users/default.yml
 ```
 
-## Title
+## Title and description
 
-The title is required and will appear in the list of selectable roles when a new user is created.
+The title is required and will appear in the list of selectable roles when a new user is created. An optional description can be displayed as well:
+
+```yaml
+title: Client
+description: The client can edit all pages
+```
 
 ### Translated titles
 
-The title can be translated by passing an array of translations with the matching language code as key:
+Title and description can be translated by passing an array of translations with the matching language code as key:
 
 ```yaml
-title:
-	en: Client
-	de: Kunde
+title: 
+  en: Client
+  de: Kunde
+description: 
+  en: The client can edit all pages
+  de: Der Kunde kann alle Seiten bearbeiten
 ```
 
 ## Permissions
@@ -77,8 +85,6 @@ permissions:
 
 ```yaml
 permissions:
-	access:
-		...
 	file:
 	  delete: false
 ```		
@@ -100,8 +106,6 @@ permissions:
 
 ```yaml
 permissions:
-	access:
-		...
 	page:
 		delete: false
 		create: false
