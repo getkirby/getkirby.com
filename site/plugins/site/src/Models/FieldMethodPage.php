@@ -2,6 +2,7 @@
 
 namespace Kirby\Site\Models;
 
+use Kirby\Cms\App;
 use Kirby\Cms\Field;
 use Kirby\Data\Yaml;
 use ReflectionFunction;
@@ -25,9 +26,9 @@ class FieldMethodPage extends HelperPage
     public function githubSource()
     {
         if (is_a($this->reflection(), 'ReflectionMethod') === true) {
-            return option('github') . '/kirby/tree/master/src/Cms/Field.php#L' . $this->line();
+            return option('github') . '/kirby/tree/' . App::version() . '/src/Cms/Field.php#L' . $this->line();
         } else {
-            return option('github') . '/kirby/tree/master/config/methods.php#L' . $this->line();
+            return option('github') . '/kirby/tree/' . App::version() . '/config/methods.php#L' . $this->line();
         }
     }
 

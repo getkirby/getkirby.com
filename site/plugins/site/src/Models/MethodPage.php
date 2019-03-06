@@ -2,6 +2,7 @@
 
 namespace Kirby\Site\Models;
 
+use Kirby\Cms\App;
 use Kirby\Cms\Field;
 use Kirby\Cms\Html;
 use Kirby\Toolkit\Str;
@@ -47,7 +48,7 @@ class MethodPage extends HelperPage
             $file = $reflection->getFileName();
             $path = Str::from($file, 'src/');
 
-            return option('github') . '/kirby/tree/master/' . $path . '#L' . $this->line();
+            return option('github') . '/kirby/tree/' . App::version() . '/' . $path . '#L' . $this->line();
         }
     }
 

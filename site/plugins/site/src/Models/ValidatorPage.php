@@ -2,6 +2,7 @@
 
 namespace Kirby\Site\Models;
 
+use Kirby\Cms\App;
 use Kirby\Cms\Field;
 use Kirby\Toolkit\V;
 use ReflectionFunction;
@@ -11,7 +12,7 @@ class ValidatorPage extends HelperPage
 
     public function githubSource()
     {
-        return option('github') . '/kirby/tree/master/src/Toolkit/V.php#L' . $this->line();
+        return option('github') . '/kirby/tree/' . App::version() . '/src/Toolkit/V.php#L' . $this->line();
     }
 
     public function methodCall(): string

@@ -2,6 +2,7 @@
 
 namespace Kirby\Site\Models;
 
+use Kirby\Cms\App;
 use Kirby\Cms\Field;
 use Kirby\Cms\Page;
 use Kirby\Site\DocBlock;
@@ -56,7 +57,7 @@ class HelperPage extends Page
 
     public function githubSource()
     {
-        return option('github') . '/kirby/tree/master/config/helpers.php#L' . $this->line();
+        return option('github') . '/kirby/tree/' . App::version() . '/config/helpers.php#L' . $this->line();
     }
 
     public function line()
