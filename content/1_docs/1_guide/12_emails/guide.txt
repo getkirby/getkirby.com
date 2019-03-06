@@ -169,6 +169,8 @@ return [
 ];
 ```
 
+You can also use `tls` or `ssl` explicitly via the `security` key.
+
 ### With authentication
 
 ```php "/site/config/config.php"
