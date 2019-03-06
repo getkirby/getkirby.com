@@ -30,11 +30,11 @@ The Kirby year will start off with a new Kirby version with several fixes, Kirby
 
 ## Kirby in the Wild
 
-(image: joseph-kadow.jpg size: banner)
+(picture: joseph-kadow.jpg size: banner)
 [Joseph Kadow](http://josephkadow.com)
 Photographer
 
-(image: bradshaws-guide.jpg size: banner)
+(picture: bradshaws-guide.jpg size: banner)
 [Bradshaw's Guide](https://beta.bradshaws.guide)
 Tourist Train Guide (1866)
 
@@ -50,7 +50,7 @@ Tourist Train Guide (1866)
 
 (columns…)
 
-(image: kirby-image-annotator.jpg)
+(picture: kirby-image-annotator.jpg)
 
 ++++
 
@@ -70,7 +70,7 @@ He also published [Lingonberry](https://twobrain.io/lingonberry/), a Kirby port 
 
 ++++
 
-(image: theme-lingonberry.jpg)
+(picture: theme-lingonberry.jpg)
 
 (…columns)
 

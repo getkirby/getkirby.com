@@ -7,7 +7,7 @@ Intro: With blueprints you can create highly customized layouts that display the
 
 Text:
 
-(image: columns.png)
+(picture: columns.png)
 
 A blueprint layout is made up of columns, and each column can hold any number of sections. Kirby ships with the following section types:
 
@@ -124,7 +124,7 @@ columns:
 
 ## Single-column layouts
 
-(image: sections.png)
+(picture: sections.png)
 
 If you don't need multiple columns, you can keep your blueprint a lot shorter by using the `sections` option instead of defining columns. This will automatically create a single-column layout for you, where all sections are listed below each other.
 
@@ -144,7 +144,7 @@ sections:
 
 ## Just some fields
 
-(image: fields.png)
+(picture: fields.png)
 
 Some blueprint types don't even need sections at all and a simple form is enough. In this case you can make your blueprints even shorter and add the fields definition directly without defining sections or columns.
 
@@ -162,7 +162,7 @@ fields:
 
 ## Adapt all to your needs
 
-(image: columns-complex.png)
+(picture: columns-complex.png)
 
 Kirby gives you the flexibility to set up the (glossary: Panel), so that it adapts to the needs of every single page/template. Use the layout possibilities to create the structure that works best for you:
 

@@ -291,7 +291,7 @@ class File extends ModelWithContent
         switch ($type) {
             case 'kirbytext':
                 if ($this->type() === 'image') {
-                    return '(image: ' . $this->filename() . ')';
+                    return '(picture: ' . $this->filename() . ')';
                 } else {
                     return '(file: ' . $this->filename() . ')';
                 }

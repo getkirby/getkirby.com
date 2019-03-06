@@ -185,8 +185,20 @@ return [
         }
     ],
 
+    // PAGES GRID
+    'pages' => [
+        'html' => function ($tag) {
+            $pages = Str::query($tag->value, [
+                'page' => $tag->parent(),
+                'site' => site(),
+            ]);
+
+            return snippet('pages', ['pages' => $pages], true);
+        }
+    ],
+
     // CUSTOM IMAGES
-    'image' => [
+    'picture' => [
         'attr' => [
             'alt',
             'caption',
@@ -253,18 +265,6 @@ return [
             return Html::figure([ $link($image) ], $tag->caption, [
                 'class' => trim($tag->class . ' figure -size:' . $tag->size)
             ]);
-        }
-    ],
-
-    // PAGES GRID
-    'pages' => [
-        'html' => function ($tag) {
-            $pages = Str::query($tag->value, [
-                'page' => $tag->parent(),
-                'site' => site(),
-            ]);
-
-            return snippet('pages', ['pages' => $pages], true);
         }
     ],
 

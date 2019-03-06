@@ -15,7 +15,7 @@ One-page websites are very popular for small businesses, freelance designers, ph
 
 In this tutorial we are going to build a very basic one-pager. Here’s a rough mock-up to show you what’s coming up:
 
-(image: 01.png)
+(picture: 01.png)
 
 ## The content file structure
 

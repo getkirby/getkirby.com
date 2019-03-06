@@ -73,11 +73,11 @@ If you don't use the Panel, you have to add the language extension to your text 
 
 After enabling languages in your config as described above, you can find the language setup on the Panel in the "Settings" page.
 
-(image: multilang-panel-1.jpg)
+(picture: multilang-panel-1.jpg)
 
 To add the first/a new language, click on "Add a new language" and add the language name, code, direction and PHP locale string.
 
-(image: multilang-panel-2.jpg)
+(picture: multilang-panel-2.jpg)
 
 Once the default language is defined, you can add more languages as secondary languages. The Panel automatically renames all existing content and file meta data files and includes the language extension.
 
@@ -86,7 +86,7 @@ Once the default language is defined, you can add more languages as secondary la
 
 The Panel offers options to delete and edit a language, or to make it the default language. You can access them by clicking on the menu icon (three dots):
 
-(image: delete-language.png)
+(picture: delete-language.png)
 
 *Edit*: Change the name, locale or reading direction of the language.
 *Make default*: Make the language the new default language.

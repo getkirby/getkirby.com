@@ -67,7 +67,7 @@ Drafts are stored in a `_drafts` subfolder for every page. These drafts are not 
 
 Click on the "Add" button in the top right corner of a list of pages. Every new page is automatically added as a draft.
 
-(image: Bildschirmfoto2018-07-05um14.34.45.png)
+(picture: Bildschirmfoto2018-07-05um14.34.45.png)
 
 #### In the content folder
 
@@ -83,13 +83,13 @@ If you want to create a draft manually in the content folder you can create a `_
 
 To publish a draft in the Panel, click on the "Draft" button with the red status icon in the toolbar or go to "Settings" > "Change status".
 
-(image: Bildschirmfoto2018-07-05um14.30.12.png)
+(picture: Bildschirmfoto2018-07-05um14.30.12.png)
 
 #### Validation errors
 
 To publish a draft in the Panel, all required fields must be filled in and all validations must pass. Otherwise publishing the draft will fail.
 
-(image: Bildschirmfoto2018-07-05um14.31.59.png)
+(picture: Bildschirmfoto2018-07-05um14.31.59.png)
 
 #### In the content folder
 

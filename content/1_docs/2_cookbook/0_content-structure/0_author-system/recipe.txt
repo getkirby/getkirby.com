@@ -49,7 +49,7 @@ Since the name is a default field, we don't have to define it here. With this bl
 
 In the Panel, this setup will now look like this:
 
-(image: author-form.jpg)
+(picture: author-form.jpg)
 
 This can be extended to a full database of author contact details and more, depending on your use case.
 

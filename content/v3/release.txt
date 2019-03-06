@@ -18,7 +18,7 @@ Kirby 3 comes with a beautiful new control Panel built on top of (link: https://
 
 Our brand new section system lifts blueprints to a completely different level. You become the interface designer and decide for each type of page which features you need and how to arrange them.
 
-(image: blueprint.png)
+(picture: blueprint.png)
 
 With native tabs you can go even further and create incredibly clean and usable editing environments for your editors.
 

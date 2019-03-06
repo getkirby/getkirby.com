@@ -27,18 +27,18 @@ I always find it inspiring to see what others are creating with Kirby. Here are 
 
 (columns…)
 
-(image: pampatype.jpg link: http://pampatype.com)
+(picture: pampatype.jpg link: http://pampatype.com)
 (link: http://pampatype.com text: Pampatype)
 Font Foundry
 ++++
 
-(image: siroop.jpg link: https://jobs.siroop.ch)
+(picture: siroop.jpg link: https://jobs.siroop.ch)
 (link: https://jobs.siroop.ch text: Siroop Jobs)
 Online Marketplace
 
 ++++
 
-(image: avj.jpg link: http://www.kinder-jugendbuch-verlage.de/en)
+(picture: avj.jpg link: http://www.kinder-jugendbuch-verlage.de/en)
 (link: http://www.kinder-jugendbuch-verlage.de/en text: AvJ e.V)
 Online Catalog
 
@@ -66,7 +66,7 @@ Online Catalog
 
 (columns…)
 
-(image: kirby-courses.jpg)
+(picture: kirby-courses.jpg)
 ++++
 
 Thomas Günther has started [Kirby Courses](https://www.youtube.com/channel/UCcsI8ZSvGDwIaSyLS0fGegg), a YouTube channel with Kirby video tutorials. Check out the [Trello board](https://trello.com/b/dfAmcIrY/kirby-courses) to see what's up the pipeline or post your ideas.
@@ -80,13 +80,13 @@ Thomas Günther has started [Kirby Courses](https://www.youtube.com/channel/UCcs
 
 (columns…)
 
-(image: amoshop.jpg)
+(picture: amoshop.jpg)
 [Amoshop ](http://aristotheme.com/amoshop-kirby/de) is a new minimalist e–commerce Kirby theme developed by Aristotheme based on the popular [Shopkit](http://shopkit.samnabi.com/de) plugin by Sam Nabi.
 
 
 ++++
 
-(image: getkirby-themes.jpg)
+(picture: getkirby-themes.jpg)
 Looking for other themes? Check them out at http://www.getkirby-themes.com, a community project maintained by [Jonathan Baptistella](https://twitter.com/jonabaptistella) & [Mayke Freitas](https://twitter.com/mayke_freitas).
 
 

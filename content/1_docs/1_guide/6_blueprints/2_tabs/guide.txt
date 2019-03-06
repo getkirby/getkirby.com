@@ -7,7 +7,7 @@ Intro: When your blueprints get more complex, tabs help to keep them organized.
 
 Text:
 
-(image: tabs.png)
+(picture: tabs.png)
 
 ## Defining tabs
 

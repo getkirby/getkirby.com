@@ -31,14 +31,14 @@ Save the date: The next hands-on [Kirby Workshop](https://beyondtellerrand.com/e
 
 ## Kirby in the Wild
 
-(image: good-guys-brew.jpg)
+(picture: good-guys-brew.jpg)
 
 [Good Guys Brew](https://www.goodguysbrew.com)
 Brewery
 
 (columns…)
 
-(image: svgeez.jpg)
+(picture: svgeez.jpg)
 
 ++++
 
@@ -53,7 +53,7 @@ Free SVG resources for your projects and at the same time a website made with Ki
 
 ++++
 
-(image: the-whale.jpg)
+(picture: the-whale.jpg)
 
 (…columns)
 
@@ -75,7 +75,7 @@ Sara Soueidan shares an article that sums up [different ways to mark up accordio
 
 (columns…)
 
-(image: picular.jpg)
+(picture: picular.jpg)
 
 ++++
 

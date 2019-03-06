@@ -31,19 +31,19 @@ It's always inspiring to see what others are creating with Kirby. This month’s
 
 (columns…)
 
-(image: ho36-hostel.jpg link: http://www.ho36hostels.com)
+(picture: ho36-hostel.jpg link: http://www.ho36hostels.com)
 (link: http://www.ho36hostels.com text: ho36 Hostel)
 Hostel
 
 ++++
 
-(image: buhrs.jpg link: http://www.buhrs.de)
+(picture: buhrs.jpg link: http://www.buhrs.de)
 (link: http://www.buhrs.de text: Buhrs 3.0)
 Agency
 
 ++++
 
-(image: ramon-marin.jpg link: http://ramonmarin.co.uk)
+(picture: ramon-marin.jpg link: http://ramonmarin.co.uk)
 (link: http://ramonmarin.co.uk text: Ramon Marin)
 Climber & Designer
 
@@ -65,7 +65,7 @@ Sam Nabi's E-Commerce solution [Shopkit](https://shopkit.samnabi.com) is now ava
 
 ++++
 
-(image: shopkit.jpg)
+(picture: shopkit.jpg)
 
 (…columns)
 
@@ -76,7 +76,7 @@ The [Images field](https://github.com/medienbaecker/kirby-images) lets you drag&
 
 ++++
 
-(image: kirby-images.jpg)
+(picture: kirby-images.jpg)
 
 (…columns)
 
@@ -87,7 +87,7 @@ The [Preview](https://github.com/texnixe/kirby-preview) field shows a preview of
 
 ++++
 
-(image: kirby-preview.jpg)
+(picture: kirby-preview.jpg)
 
 (…columns)
 
@@ -97,19 +97,19 @@ The number of ready-to-use themes for Kirby is growing constantly. Constantin Jo
 
 (columns…)
 
-(image: tempo.jpg)
+(picture: tempo.jpg)
 [Tempo](http://kc.konstantin.fr/tempo-theme/)
 Blog
 
 ++++
 
-(image: mima.jpg)
+(picture: mima.jpg)
 [Mima](http://kc.konstantin.fr/mima-kirby-theme/)
 Blog, Project, Personal
 
 ++++
 
-(image: variations.jpg)
+(picture: variations.jpg)
 [Variations](http://kc.konstantin.fr/variations-theme/)
 One-Pager
 
@@ -122,12 +122,12 @@ Sorting and grouping of content collections is an everyday developer's task. Thi
 
 ++++
 
-(image: sorting-and-grouping.jpg)
+(picture: sorting-and-grouping.jpg)
 
 (…columns)
 (columns…)
 
-(image: habita.jpg)
+(picture: habita.jpg)
 ++++
 
 ## Case Study: Habita
