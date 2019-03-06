@@ -2,6 +2,7 @@
 
 namespace Kirby\Site\Models;
 
+use Kirby\Cms\App;
 use Kirby\Cms\Field;
 use Kirby\Text\KirbyTag;
 use ReflectionFunction;
@@ -25,7 +26,7 @@ class KirbyTagPage extends HelperPage
 
     public function githubSource()
     {
-        return option('github') . '/kirby/tree/master/config/tags.php#L' . $this->line();
+        return option('github') . '/kirby/tree/' . App::version() . '/config/tags.php#L' . $this->line();
     }
 
     public function line()

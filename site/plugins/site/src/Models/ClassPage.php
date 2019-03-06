@@ -2,6 +2,7 @@
 
 namespace Kirby\Site\Models;
 
+use Kirby\Cms\App;
 use Kirby\Cms\Field;
 use Kirby\Cms\Html;
 use Kirby\Cms\Page;
@@ -131,17 +132,12 @@ class ClassPage extends Page
         return new Field($this, 'excerpt', null);
     }
 
-    public function githubDocs($action = 'tree'): string
-    {
-        return option('github') . '/getkirby.com/' . $action . '/master/content/' . $this->diruri();
-    }
-
     public function githubSource(): string
     {
         $path = str_replace('Kirby\\', '', $this->className());
         $path = str_replace('\\', '/', $path);
 
-        return option('github') . '/kirby/tree/master/src/' . $path . '.php';
+        return option('github') . '/kirby/tree/' . App::version() . '/src/' . $path . '.php';
     }
 
     public function isStatic()
