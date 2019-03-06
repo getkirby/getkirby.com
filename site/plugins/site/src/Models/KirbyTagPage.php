@@ -12,7 +12,15 @@ class KirbyTagPage extends HelperPage
     public function attributes(): array
     {
         if ($reflection = $this->reflection()) {
-            return KirbyTag::$types[$this->methodName()]['attr'];
+            $attributes = KirbyTag::$types[$this->methodName()]['attr'];
+            if($this->methodName() === 'image') {
+                $key = array_search('size', $attributes) ?? false;
+                if($key) {
+                  unset($attributes[$key]);
+                }
+
+            }
+            return $attributes;
         }
 
         return [];
