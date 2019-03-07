@@ -125,8 +125,22 @@ body {
 
 .cheatsheet-back {
   display: flex;
+  align-items: center;
   margin-left: auto;
   padding: 0 1.5rem;
+
+  > span {
+    padding-left: .5rem;
+    font-size: .875rem;
+    letter-spacing: 0;
+    font-weight: 500;
+    line-height: 1;
+    font-family: $font-mono;
+
+    @include mq(to m) {
+      display: none;
+    }
+  }
 }
 
 .cheatsheet-header h1 {

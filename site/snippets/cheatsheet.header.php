@@ -37,7 +37,8 @@
             type="search">
       </form>
 
-      <a class="cheatsheet-back" href="<?= url() ?>">
+      <?php if ($guide = page('docs/guide')) : ?>
+      <a class="cheatsheet-back" href="<?= $guide->url() ?>">
         <svg height="32" viewBox="0 0 46 54" aria-hidden="true">
           <title>Kirby Logo</title>
           <g fill="none" fill-rule="evenodd">
@@ -47,7 +48,9 @@
             <path class="logo-k" fill="#282C34" fill-rule="nonzero" d="M31 27l-5 2.59V30h5v4H15v-4h5v-.437L15 27v-5l8 4.297L31 22"></path>
           </g>
         </svg>
+        <span>Guide</span>
       </a>
+      <?php endif ?>
 
     </header>
     <main class="cheatsheet-panels">
