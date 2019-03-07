@@ -5,9 +5,7 @@ namespace Kirby\Toolkit;
 use Exception;
 
 /**
- * The String class provides a set
- * of handy methods for string
- * handling and manipulation.
+ * A set of handy string methods
  *
  * @package   Kirby Toolkit
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -336,6 +334,20 @@ class Str
         }
 
         return static::substr($string, 0, strrpos(static::substr($string, 0, $chars), ' ')) . ' ' . $rep;
+    }
+
+    /**
+     * Convert the value to a float with a decimal
+     * point, no matter what the locale setting is
+     *
+     * @param string|int|float $value
+     * @return string
+     */
+    public static function float($value): string
+    {
+        $value   = str_replace(',', '.', $value);
+        $decimal = strlen(substr(strrchr($value, '.'), 1));
+        return number_format((float)$value, $decimal, '.', false);
     }
 
     /**

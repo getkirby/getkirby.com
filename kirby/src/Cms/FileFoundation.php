@@ -65,7 +65,7 @@ trait FileFoundation
     }
 
     /**
-     * Returns the Image object
+     * Returns the Asset object
      *^
      * @return Image
      */
@@ -148,13 +148,25 @@ trait FileFoundation
     }
 
     /**
-     * Returns the app instance
+     * Returns the paren app instance
      *
      * @return App
      */
     public function kirby(): App
     {
         return App::instance();
+    }
+
+    /**
+     * Get the file's last modification time.
+     *
+     * @param  string $format
+     * @param  string|null $handler date or strftime
+     * @return mixed
+     */
+    public function modified(string $format = null, string $handler = null)
+    {
+        return F::modified($this->root(), $format, $handler ?? $this->kirby()->option('date.handler', 'date'));
     }
 
     /**

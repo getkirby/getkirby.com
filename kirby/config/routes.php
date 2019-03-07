@@ -94,6 +94,13 @@ return function ($kirby) {
             'action'  => function ($id, $hash, $filename) use ($kirby) {
                 return Media::link($kirby->user($id), $hash, $filename);
             }
+        ],
+        [
+            'pattern' => 'media/assets/(:all)/(:any)/(:any)',
+            'env'     => 'media',
+            'action'  => function ($path, $hash, $filename) use ($kirby) {
+                return Media::thumb($path, $hash, $filename);
+            }
         ]
     ];
 
@@ -141,7 +148,12 @@ return function ($kirby) {
             'method'  => 'ALL',
             'env'     => 'site',
             'action'  => function (string $path) use ($kirby) {
-                if ($page = $kirby->page($path)) {
+
+                // check for content representations or files
+                $extension = F::extension($path);
+
+                // try to redirect prefixed pages
+                if (empty($extension) === true && $page = $kirby->page($path)) {
                     $url = $kirby->request()->url([
                         'query'    => null,
                         'params'   => null,
@@ -153,9 +165,9 @@ return function ($kirby) {
                             ->response()
                             ->redirect($page->url());
                     }
-
-                    return $kirby->resolve($path, $kirby->defaultLanguage()->code());
                 }
+
+                return $kirby->resolve($path, $kirby->defaultLanguage()->code());
             }
         ];
     } else {

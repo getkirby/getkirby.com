@@ -2,15 +2,14 @@
 
 namespace Kirby\Cms;
 
+use Kirby\Toolkit\F;
+
 /**
- * The `$pages` class refers to a
- * collection of pages. The pages in this
- * collection can have the same or different
- * parents, they can actually exist as
- * subfolders in the content folder or be
- * virtual pages created from a database,
- * an Excel sheet, any API or any other
- * source.
+ * The Pages collection contains
+ * any number and mixture of page objects
+ * They don't necessarily have to belong
+ * to the same parent unless it is passed
+ * as second argument in the constructor.
  *
  * Pages collection can be constructed very
  * easily:
@@ -202,18 +201,33 @@ class Pages extends Collection
      */
     public function findById($id)
     {
-        $id        = trim($id, '/');
-        $page      = $this->get($id);
+        // remove trailing or leading slashes
+        $id = trim($id, '/');
+
+        // strip extensions from the id
+        if (strpos($id, '.') !== false) {
+            $info = pathinfo($id);
+
+            if ($info['dirname'] !== '.') {
+                $id = $info['dirname'] . '/' . $info['filename'];
+            } else {
+                $id = $info['filename'];
+            }
+        }
+
+        // try the obvious way
+        if ($page = $this->get($id)) {
+            return $page;
+        }
+
         $multiLang = App::instance()->multilang();
 
-        if ($multiLang === true) {
-            $page = $this->findBy('slug', $id);
+        if ($multiLang === true && $page = $this->findBy('slug', $id)) {
+            return $page;
         }
 
-        if (!$page) {
-            $start = is_a($this->parent, 'Kirby\Cms\Page') === true ? $this->parent->id() : '';
-            $page  = $this->findByIdRecursive($id, $start, $multiLang);
-        }
+        $start = is_a($this->parent, 'Kirby\Cms\Page') === true ? $this->parent->id() : '';
+        $page  = $this->findByIdRecursive($id, $start, $multiLang);
 
         return $page;
     }

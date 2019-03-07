@@ -166,7 +166,8 @@ trait HasChildren
     }
 
     /**
-     * @deprecated 3.0.0 Use `Page::hasUnlistedChildren` instead
+     * Deprecated! Use Page::hasUnlistedChildren
+     *
      * @return boolean
      */
     public function hasInvisibleChildren(): bool
@@ -195,7 +196,8 @@ trait HasChildren
     }
 
     /**
-     * @deprecated 3.0.0 Use `Page::hasListedChildren` instead
+     * Deprecated! Use Page::hasListedChildren
+     *
      * @return boolean
      */
     public function hasVisibleChildren(): bool

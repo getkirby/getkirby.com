@@ -6,18 +6,10 @@ use Kirby\Http\Url as BaseUrl;
 use Kirby\Toolkit\Str;
 
 /**
- * The `Url` class extends the
- * `Kirby\Http\Url` class. In addition
- * to the methods of that class for dealing
- * with URLs, it provides a specific
- * `Url::home` method that always creates
- * the correct base URL and a template asset
- * URL builder.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      http://getkirby.com
- * @copyright Bastian Allgeier
+ * Extension of the Kirby\Http\Url class
+ * with a specific Url::home method that always
+ * creates the correct base Url and a template asset
+ * Url builder.
  */
 class Url extends BaseUrl
 {
@@ -55,15 +47,33 @@ class Url extends BaseUrl
      * Smart resolver for internal and external urls
      *
      * @param string $path
-     * @param array $options
+     * @param array|string|null $options Either an array of options for the Uri class or a language string
      * @return string
      */
-    public static function to(string $path = null, array $options = null): string
+    public static function to(string $path = null, $options = null): string
     {
-        $kirby = App::instance();
+        $kirby    = App::instance();
+        $language = null;
+
+        // get language from simple string option
+        if (is_string($options) === true) {
+            $language = $options;
+            $options  = null;
+        }
+
+        // get language from array
+        if (is_array($options) === true && isset($options['language']) === true) {
+            $language = $options['language'];
+            unset($options['language']);
+        }
+
+        // get a language url for the linked page, if the page can be found
+        if ($language !== null && $kirby->multilang() === true && $page = page($path)) {
+            $path = $page->url($language);
+        }
 
         if ($handler = $kirby->component('url')) {
-            return $handler($kirby, $path, $options, function (string $path = null, array $options = null) {
+            return $handler($kirby, $path, $options, function (string $path = null, $options = null) {
                 return parent::to($path, $options);
             });
         }

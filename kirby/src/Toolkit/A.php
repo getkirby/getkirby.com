@@ -5,12 +5,6 @@ namespace Kirby\Toolkit;
 use Exception;
 
 /**
- * The `A` class provides a set of handy methods
- * to simplify array handling and make it more
- * consistent. The class contains methods for
- * fetching elements from arrays, merging and
- * sorting or shuffling arrays.
-
  * A set of handy methods to simplify array handling
  * and make it more consistent.
  *
@@ -18,6 +12,7 @@ use Exception;
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      http://getkirby.com
  * @copyright Bastian Allgeier
+ * @license   MIT
  */
 class A
 {

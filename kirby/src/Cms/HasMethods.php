@@ -15,7 +15,6 @@ trait HasMethods
     /**
      * Calls a registered method class with the
      * passed arguments
-     * @internal
      *
      * @param  string $method
      * @param  array  $args
@@ -28,7 +27,6 @@ trait HasMethods
 
     /**
      * Checks if the object has a registered method
-     * @internal
      *
      * @param string $method
      * @return boolean

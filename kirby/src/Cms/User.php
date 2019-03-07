@@ -14,8 +14,8 @@ use Kirby\Toolkit\V;
 use Throwable;
 
 /**
- * The `$user` object represents a
- * single Panel or frontend user.
+ * The User class represents
+ * panel users as well as frontend users.
  *
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -24,6 +24,8 @@ use Throwable;
  */
 class User extends ModelWithContent
 {
+    const CLASS_ALIAS = 'user';
+
     use HasFiles;
     use HasSiblings;
     use UserActions;
@@ -131,7 +133,6 @@ class User extends ModelWithContent
 
     /**
      * Returns the url to the api endpoint
-     * @internal
      *
      * @param bool $relative
      * @return string
@@ -179,7 +180,6 @@ class User extends ModelWithContent
 
     /**
      * Prepares the content for the write method
-     * @internal
      *
      * @param array $data
      * @param string $languageCode Not used so far
@@ -201,7 +201,6 @@ class User extends ModelWithContent
 
     /**
      * Filename for the content file
-     * @internal
      *
      * @return string
      */
@@ -237,7 +236,6 @@ class User extends ModelWithContent
 
     /**
      * Hashes user password
-     * @internal
      *
      * @param string|null $password
      * @return string|null
@@ -417,7 +415,6 @@ class User extends ModelWithContent
 
     /**
      * Returns the root to the media folder for the user
-     * @internal
      *
      * @return string
      */
@@ -428,7 +425,6 @@ class User extends ModelWithContent
 
     /**
      * Returns the media url for the user object
-     * @internal
      *
      * @return string
      */
@@ -474,7 +470,6 @@ class User extends ModelWithContent
 
     /**
      * Create a dummy nobody
-     * @internal
      *
      * @return self
      */
@@ -488,7 +483,6 @@ class User extends ModelWithContent
 
     /**
      * Returns the full path without leading slash
-     * @internal
      *
      * @return string
      */
@@ -500,7 +494,6 @@ class User extends ModelWithContent
     /**
      * Returns the url to the editing view
      * in the panel
-     * @internal
      *
      * @param bool $relative
      * @return string
@@ -538,7 +531,6 @@ class User extends ModelWithContent
 
     /**
      * Creates a string query, starting from the model
-     * @internal
      *
      * @param string|null $query
      * @param string|null $expect

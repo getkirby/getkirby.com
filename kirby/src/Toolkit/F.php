@@ -8,17 +8,7 @@ use Kirby\Http\Header;
 use ZipArchive;
 
 /**
- * The `F` class provides methods for
- * dealing with files on the file system
- * level, like creating, reading,
- * deleting, copying or validatings files.
- *
  * Low level file handling utilities
- *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      http://getkirby.com
- * @copyright Bastian Allgeier
  */
 class F
 {

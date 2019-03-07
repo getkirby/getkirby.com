@@ -29,22 +29,14 @@ use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Url;
 
 /**
- * The `$kirby` object is the app instance of
- * your Kirby installation. It's the central
- * starting point to get all the different
- * aspects of your site, like the options, urls,
- * roots, languages, roles, etc.
- *
  * The App object is a big-ass monolith that's
  * in the center between all the other CMS classes.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      http://getkirby.com
- * @copyright Bastian Allgeier
+ * It's the $kirby object in templates and handles
  */
 class App
 {
+    const CLASS_ALIAS = 'kirby';
+
     use AppCaches;
     use AppErrors;
     use AppPlugins;
@@ -115,6 +107,9 @@ class App
             'users'
         ]);
 
+        // set the singleton
+        Model::$kirby = static::$instance = $this;
+
         // setup the I18n class with the translation loader
         $this->i18n();
 
@@ -127,9 +122,6 @@ class App
 
         // handle those damn errors
         $this->handleErrors();
-
-        // set the singleton
-        Model::$kirby = static::$instance = $this;
 
         // bake config
         Config::$data = $this->options;
@@ -155,7 +147,6 @@ class App
 
     /**
      * Returns the Api instance
-     * @internal
      *
      * @return Api
      */
@@ -180,7 +171,6 @@ class App
 
     /**
      *  Apply a hook to the given value
-     * @internal
      *
      * @param string $name
      * @param mixed $value
@@ -236,15 +226,17 @@ class App
      */
     public function call(string $path = null, string $method = null)
     {
-        $path   = $path   ?? $this->path();
-        $method = $method ?? $this->request()->method();
-        $route  = $this->router()->find($path, $method);
+        $router = $this->router();
 
-        $this->trigger('route:before', $route, $path, $method);
-        $result = $route->action()->call($route, ...$route->arguments());
-        $this->trigger('route:after', $route, $path, $method, $result);
+        $router::$beforeEach = function ($route, $path, $method) {
+            $this->trigger('route:before', $route, $path, $method);
+        };
 
-        return $result;
+        $router::$afterEach = function ($route, $path, $method, $result) {
+            $this->trigger('route:after', $route, $path, $method, $result);
+        };
+
+        return $router->call($path ?? $this->path(), $method ?? $this->request()->method());
     }
 
     /**
@@ -277,7 +269,6 @@ class App
 
     /**
      * Returns a core component
-     * @internal
      *
      * @param string $name
      * @return mixed
@@ -289,7 +280,6 @@ class App
 
     /**
      * Returns the content extension
-     * @internal
      *
      * @return string
      */
@@ -300,7 +290,6 @@ class App
 
     /**
      * Returns files that should be ignored when scanning folders
-     * @internal
      *
      * @return array
      */
@@ -380,7 +369,6 @@ class App
     /**
      * Destroy the instance singleton and
      * purge other static props
-     * @internal
      */
     public static function destroy()
     {
@@ -436,6 +424,10 @@ class App
         $id       = dirname($path);
         $filename = basename($path);
 
+        if (is_a($parent, File::class) === true) {
+            $parent = $parent->parent();
+        }
+
         if ($id === '.') {
             if ($file = $parent->file($filename)) {
                 return $file;
@@ -475,7 +467,6 @@ class App
     /**
      * Takes almost any kind of input and
      * tries to convert it into a valid response
-     * @internal
      *
      * @param mixed $input
      * @return Response
@@ -561,7 +552,6 @@ class App
 
     /**
      * Renders a single KirbyTag with the given attributes
-     * @internal
      *
      * @param string $type
      * @param string $value
@@ -580,7 +570,6 @@ class App
 
     /**
      * KirbyTags Parser
-     * @internal
      *
      * @param string $text
      * @param array $data
@@ -597,7 +586,6 @@ class App
 
     /**
      * Parses KirbyTags first and Markdown afterwards
-     * @internal
      *
      * @param string $text
      * @param array $data
@@ -638,7 +626,6 @@ class App
 
     /**
      * Returns the current language code
-     * @internal
      *
      * @return string|null
      */
@@ -663,7 +650,6 @@ class App
 
     /**
      * Parses Markdown
-     * @internal
      *
      * @param string $text
      * @return string
@@ -675,7 +661,6 @@ class App
 
     /**
      * Check for a multilang setup
-     * @internal
      *
      * @return boolean
      */
@@ -824,33 +809,32 @@ class App
         // the site is needed a couple times here
         $site = $this->site();
 
+        // use the home page
         if ($path === null) {
             return $site->homePage();
         }
 
-        if ($page = $site->find($path)) {
-            return $page;
-        }
+        // search for the page by path
+        $page = $site->find($path);
 
-        if ($draft = $site->draft($path)) {
+        // search for a draft if the page cannot be found
+        if (!$page && $draft = $site->draft($path)) {
             if ($this->user() || $draft->isVerified(get('token'))) {
-                return $draft;
+                $page = $draft;
             }
         }
 
         // try to resolve content representations if the path has an extension
         $extension = F::extension($path);
 
-        // remove the extension from the path
-        $path = Str::rtrim($path, '.' . $extension);
-
-        // stop when there's no extension
+        // no content representation? then return the page
         if (empty($extension) === true) {
-            return null;
+            return $page;
         }
 
-        // try to find the page for the representation
-        if ($page = $site->find($path)) {
+        // only try to return a representation
+        // when the page has been found
+        if ($page) {
             try {
                 return $this
                     ->response()
@@ -862,7 +846,7 @@ class App
         }
 
         $id       = dirname($path);
-        $filename = basename($path) . '.' . $extension;
+        $filename = basename($path);
 
         // try to resolve image urls for pages and drafts
         if ($page = $site->findPageOrDraft($id)) {
@@ -926,7 +910,6 @@ class App
 
     /**
      * Returns the Router singleton
-     * @internal
      *
      * @return Router
      */
@@ -1068,7 +1051,6 @@ class App
 
     /**
      * Applies the smartypants rule on the text
-     * @internal
      *
      * @param string $text
      * @return string
@@ -1081,7 +1063,6 @@ class App
     /**
      * Uses the snippet component to create
      * and return a template snippet
-     * @internal
      *
      * @return Snippet
      */
@@ -1103,7 +1084,6 @@ class App
     /**
      * Uses the template component to initialize
      * and return the Template object
-     * @internal
      *
      * @return Template
      */

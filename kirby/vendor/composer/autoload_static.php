@@ -38,7 +38,6 @@ class ComposerStaticInit12091bebabd81c9aba88b2aeec22c8d7
         ),
         'K' => 
         array (
-            'Kirby\\ComposerInstaller\\' => 24,
             'Kirby\\' => 6,
         ),
     );
@@ -68,13 +67,10 @@ class ComposerStaticInit12091bebabd81c9aba88b2aeec22c8d7
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-        'Kirby\\ComposerInstaller\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
-        ),
         'Kirby\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+            1 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
         ),
     );
 
@@ -129,6 +125,7 @@ class ComposerStaticInit12091bebabd81c9aba88b2aeec22c8d7
         'Kirby\\Cms\\FileActions' => __DIR__ . '/../..' . '/src/Cms/FileActions.php',
         'Kirby\\Cms\\FileBlueprint' => __DIR__ . '/../..' . '/src/Cms/FileBlueprint.php',
         'Kirby\\Cms\\FileFoundation' => __DIR__ . '/../..' . '/src/Cms/FileFoundation.php',
+        'Kirby\\Cms\\FileModifications' => __DIR__ . '/../..' . '/src/Cms/FileModifications.php',
         'Kirby\\Cms\\FilePermissions' => __DIR__ . '/../..' . '/src/Cms/FilePermissions.php',
         'Kirby\\Cms\\FileRules' => __DIR__ . '/../..' . '/src/Cms/FileRules.php',
         'Kirby\\Cms\\FileVersion' => __DIR__ . '/../..' . '/src/Cms/FileVersion.php',
@@ -191,8 +188,10 @@ class ComposerStaticInit12091bebabd81c9aba88b2aeec22c8d7
         'Kirby\\Cms\\UserRules' => __DIR__ . '/../..' . '/src/Cms/UserRules.php',
         'Kirby\\Cms\\Users' => __DIR__ . '/../..' . '/src/Cms/Users.php',
         'Kirby\\Cms\\Visitor' => __DIR__ . '/../..' . '/src/Cms/Visitor.php',
-        'Kirby\\ComposerInstaller\\Installer' => __DIR__ . '/..' . '/getkirby/composer-installer/src/Installer.php',
-        'Kirby\\ComposerInstaller\\Plugin' => __DIR__ . '/..' . '/getkirby/composer-installer/src/Plugin.php',
+        'Kirby\\ComposerInstaller\\CmsInstaller' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/CmsInstaller.php',
+        'Kirby\\ComposerInstaller\\Installer' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Installer.php',
+        'Kirby\\ComposerInstaller\\Plugin' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Plugin.php',
+        'Kirby\\ComposerInstaller\\PluginInstaller' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/PluginInstaller.php',
         'Kirby\\Data\\Data' => __DIR__ . '/../..' . '/src/Data/Data.php',
         'Kirby\\Data\\Handler' => __DIR__ . '/../..' . '/src/Data/Handler.php',
         'Kirby\\Data\\Json' => __DIR__ . '/../..' . '/src/Data/Json.php',
@@ -222,6 +221,7 @@ class ComposerStaticInit12091bebabd81c9aba88b2aeec22c8d7
         'Kirby\\Form\\OptionsQuery' => __DIR__ . '/../..' . '/src/Form/OptionsQuery.php',
         'Kirby\\Form\\Validations' => __DIR__ . '/../..' . '/src/Form/Validations.php',
         'Kirby\\Http\\Cookie' => __DIR__ . '/../..' . '/src/Http/Cookie.php',
+        'Kirby\\Http\\Exceptions\\NextRouteException' => __DIR__ . '/../..' . '/src/Http/Exceptions/NextRouteException.php',
         'Kirby\\Http\\Header' => __DIR__ . '/../..' . '/src/Http/Header.php',
         'Kirby\\Http\\Idn' => __DIR__ . '/../..' . '/src/Http/Idn.php',
         'Kirby\\Http\\Params' => __DIR__ . '/../..' . '/src/Http/Params.php',

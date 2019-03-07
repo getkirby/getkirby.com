@@ -118,7 +118,9 @@ class Html
             if (isset($value['value']) && isset($value['escape'])) {
                 $value = $value['escape'] === true ? htmlspecialchars($value['value'], ENT_QUOTES, 'UTF-8') : $value['value'];
             } else {
-                $value = implode(' ', $value);
+                $value = implode(' ', array_filter($value, function ($value) {
+                    return !empty($value) || is_numeric($value);
+                }));
             }
         } else {
             $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
@@ -334,8 +336,14 @@ class Html
      */
     public static function rel(string $rel = null, string $target = null)
     {
+        $rel = trim($rel);
+
         if ($target === '_blank') {
-            return trim($rel . ' noopener noreferrer');
+            if (empty($rel) === false) {
+                return $rel;
+            }
+
+            return trim($rel . ' noopener noreferrer', ' ');
         }
 
         return $rel;

@@ -5,15 +5,7 @@ namespace Kirby\Toolkit;
 use SimpleXMLElement;
 
 /**
- * The `Mime` class provides method
- * for mime type detection or guessing
- * from different criteria like
- * extensions etc.
- *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      http://getkirby.com
- * @copyright Bastian Allgeier
+ * Mime type detection/guessing
  */
 class Mime
 {
