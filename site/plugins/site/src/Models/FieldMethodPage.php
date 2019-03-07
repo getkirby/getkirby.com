@@ -24,11 +24,10 @@ class FieldMethodPage extends HelperPage
 
     public function githubSource()
     {
-        if(is_a($this->reflection(), 'ReflectionMethod')) {
+        if (is_a($this->reflection(), 'ReflectionMethod') === true) {
             return option('github') . '/kirby/tree/master/src/Cms/Field.php#L' . $this->line();
         } else {
             return option('github') . '/kirby/tree/master/config/methods.php#L' . $this->line();
-
         }
     }
 
