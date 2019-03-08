@@ -33,7 +33,11 @@ class ClassPage extends Page
         $pages    = parent::children();
         $children = [];
 
-        foreach ($methods as $method) {
+        foreach ($methods as $method)
+        {
+            if ($method->isPublic() === false) {
+                continue;
+            }
 
             $slug = Str::kebab($method->getName());
 
@@ -44,29 +48,21 @@ class ClassPage extends Page
                     'undocumented' => true
                 ];
             }
-
-            $listed = $method->isPublic();
-            $listed = substr($slug, 0, 1) === '_' ? false : $listed;
-
+            
             $children[] = [
                 'slug'     => $slug,
                 'model'    => 'method',
                 'template' => 'method',
                 'parent'   => $this,
                 'content'  => $content,
-                'num'      => $listed ? 0 : null,
+                'num'      => substr($slug, 0, 1) === '_' ? null : 0
             ];
         }
 
         $pages = Pages::factory($children, $this)
                     ->filterBy('methodExists', true)
                     ->sortBy('slug');
-
-        if (param('advanced') !== 'true') {
-            $pages = $pages->filterBy('isInternal', false)
-                           ->filterBy('isDeprecated', false);
-        }
-
+        
         return $this->children = $pages;
     }
 
@@ -152,7 +148,7 @@ class ClassPage extends Page
 
         return false;
     }
-
+    
     public function missingMethods()
     {
         $children = $this->children();
