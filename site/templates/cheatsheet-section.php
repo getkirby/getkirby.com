@@ -17,7 +17,13 @@
       </div>
       <?php endif ?>
       
-      <?php snippet('cheatsheet.section.advanced-link') ?>
+      <?php if ($page->children()->hasAdvanced()): ?> 
+      <ul class="cheatsheet-article-meta">
+        <li>
+          <?= cheatsheetAdvanced($page) ?>
+        </li>
+      </ul>
+      <?php endif ?>
     </header>
 
     <div class="-mb:large">

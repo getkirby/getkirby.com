@@ -260,7 +260,13 @@ class HelperPage extends Page
     
     public function url($options = null): string
     {
-        return parent::url($options) . (param('advanced') === 'true' && ($this->isDeprecated() || $this->isInternal()) ? '/advanced:true' : null);
+        if (
+            param('advanced') === 'true' && 
+            ($this->isDeprecated() || $this->isInternal())
+        ) {
+            $param = '/advanced:true';
+        }
+        return parent::url($options) . ($param ?? null);
     }
 
 }
