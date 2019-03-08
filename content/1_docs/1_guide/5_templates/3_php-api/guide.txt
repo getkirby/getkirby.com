@@ -34,7 +34,7 @@ The `$kirby` class is the heart and soul of Kirby. It's the access point for reg
 
 ## Permissions
 
-Some parts of Kirby's PHP API only work if you are logged in (or authenticated in other ways), because they respect the permissions of the currently logged in user, e.g. `$page->update()`.
+Some parts of Kirby's PHP API only work if you are logged in (or authenticated in other ways), because they respect the permissions of the currently logged in user, e.g. `$page->update()`. You can read more about user permissions and which ones exist here: (link: docs/guide/users/permissions text: Users permissions ›)
 
 ### Authentication
 
