@@ -4,7 +4,6 @@ namespace Kirby\Site\Models;
 
 use Kirby\Cms\App;
 use Kirby\Cms\Field;
-use Kirby\Cms\Html;
 use Kirby\Toolkit\Str;
 use ReflectionMethod;
 
@@ -176,11 +175,6 @@ class MethodPage extends HelperPage
         return $this->reflection = false;
     }
 
-    public function returnType()
-    {
-        return $this->typeDefinition(parent::returnType());
-    }
-
     public function title(): Field
     {
         if ($this->isStatic() === true) {
@@ -198,12 +192,6 @@ class MethodPage extends HelperPage
             $type = $this->parent()->class();
         }
 
-        $class = str_replace('|null', '', $type);
-
-        if ($reference = $this->referenceLookup($class)) {
-            return Html::a($reference->url(), $type);
-        }
-
-        return $type;
+        return parent::typeDefinition($type);
     }
 }

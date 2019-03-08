@@ -4,6 +4,7 @@ namespace Kirby\Site\Models;
 
 use Kirby\Cms\App;
 use Kirby\Cms\Field;
+use Kirby\Cms\Html;
 use Kirby\Cms\Page;
 use Kirby\Site\DocBlock;
 use ReflectionFunction;
@@ -179,14 +180,14 @@ class HelperPage extends Page
                     $type = $type . '|null';
                 }
 
-                return $type;
+                return $this->typeDefinition($type);
             }
 
             if ($docBlock = $this->docBlock()) {
                 if ($type = $docBlock->getReturnType()) {
                     $type = trim((string)$type->getType());
                     $type = substr($type, 0, 1) === '\\' ? substr($type, 1) : $type;
-                    return $type;
+                    return $this->typeDefinition($type);
                 }
             }
         }
@@ -197,6 +198,19 @@ class HelperPage extends Page
     public function title(): Field
     {
         return parent::title()->value($this->methodName() . '()');
+    }
+    
+    protected function typeDefinition($type = null)
+    {
+        $classes = array_map(function ($class) {
+            if ($reference = referenceLookup($class)) {
+                return Html::a($reference->url(), $class);
+            }
+            
+            return $class;
+        }, explode('|', $type));
+        
+        return implode('|', $classes);
     }
 
 }
