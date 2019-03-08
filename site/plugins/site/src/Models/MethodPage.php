@@ -54,7 +54,7 @@ class MethodPage extends HelperPage
     public function inheritedFrom()
     {
         if ($parent = $this->reflection()->getDeclaringClass()) {
-            if ($page = $this->referenceLookup($parent->getName())) {
+            if ($page = referenceLookup($parent->getName())) {
                 if ($page && $page->is($this->parent()) === false) {
                     return $page;
                 }
@@ -90,27 +90,9 @@ class MethodPage extends HelperPage
         }
     }
 
-    public function methodDeprecated(): bool
-    {
-        if ($this->docBlock() === false) {
-            return false;
-        }
-
-        return is_null($this->docBlock()->getTag('deprecated')) === false;
-    }
-
     public function methodExists(): bool
     {
         return method_exists($this->className(), $this->methodName());
-    }
-
-    public function methodInternal(): bool
-    {
-        if ($this->docBlock() === false) {
-            return false;
-        }
-
-        return is_null($this->docBlock()->getTag('internal')) === false;
     }
 
     public function methodScope()
@@ -145,21 +127,6 @@ class MethodPage extends HelperPage
         }
 
         return $parameters;
-    }
-
-    protected function referenceLookup($class)
-    {
-        $roots = [
-            'docs/reference/objects',
-            'docs/reference/@'
-        ];
-
-        foreach ($roots as $root) {
-            $index = page($root)->index();
-            if ($page = $index->filterBy('class', $class)->first()) {
-                return $page;
-            }
-        }
     }
 
     public function reflection()

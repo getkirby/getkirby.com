@@ -35,6 +35,15 @@ class HelperPage extends Page
         return $this->docBlock = false;
     }
 
+    public function deprecated(): Field
+    {
+        if ($this->isDeprecated() == false) {
+            return parent::deprecated();
+        }
+
+        return new Field($this, 'deprecated', $this->methodDeprecated()->getVersion() . '|' . $this->methodDeprecated()->getDescription());
+    }
+
     public function excerpt(): Field
     {
 
@@ -61,6 +70,19 @@ class HelperPage extends Page
         return option('github') . '/kirby/tree/' . App::version() . '/config/helpers.php#L' . $this->line();
     }
 
+    public function isDeprecated(): bool
+    {
+        return is_null($this->methodDeprecated()) === false;
+    }
+
+    public function isInternal(): bool
+    {
+        if ($docBlock = $this->docBlock()) {
+            return is_null($docBlock->getTag('internal')) === false;
+        }
+        return false;
+    }
+
     public function line()
     {
         if ($reflection = $this->reflection()) {
@@ -68,19 +90,6 @@ class HelperPage extends Page
         }
 
         return null;
-    }
-
-    public function methodExists(): bool
-    {
-        return function_exists($this->slug());
-
-    }
-
-    public function methodName(): string
-    {
-        return preg_replace_callback('!-([a-z])!', function ($matches) {
-            return strtoupper($matches[1]);
-        }, $this->slug());
     }
 
     public function methodCall(): string
@@ -99,6 +108,33 @@ class HelperPage extends Page
         }
 
         return $this->slug();
+    }
+
+    public function methodDeprecated()
+    {
+        if ($docBlock = $this->docBlock()) {
+            return $docBlock->getTag('deprecated');
+        }
+    }
+
+    public function methodExists(): bool
+    {
+        return function_exists($this->slug());
+
+    }
+
+    public function methodName(): string
+    {
+        return preg_replace_callback('!-([a-z])!', function ($matches) {
+            return strtoupper($matches[1]);
+        }, $this->slug());
+    }
+
+    public function methodSince()
+    {
+        if ($docBlock = $this->docBlock()) {
+            return $docBlock->getTag('since');
+        }
     }
 
     public function parameters()
@@ -193,6 +229,15 @@ class HelperPage extends Page
         }
 
         return null;
+    }
+
+    public function since(): Field
+    {
+        if ($since = $this->methodSince()) {
+            $since = $since->getVersion();
+        }
+
+        return new Field($this, 'since', $since ?? null);
     }
 
     public function title(): Field
