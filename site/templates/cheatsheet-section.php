@@ -16,6 +16,16 @@
         <?= $page->excerpt()->kt() ?>
       </div>
       <?php endif ?>
+      
+      <ul class="cheatsheet-article-meta">
+        <li>
+          <?php if (param('advanced') !== 'true'): ?>
+          <?= Html::a($page->url() . '/advanced:true',  'Advanced view ›') ?>
+          <?php else: ?>
+          <?= Html::a($page->url(),  'Simple view ›') ?>
+          <?php endif ?>
+        </li>
+      </ul>
     </header>
 
     <div class="-mb:large">

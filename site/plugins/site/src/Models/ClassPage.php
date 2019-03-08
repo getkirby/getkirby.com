@@ -65,7 +65,6 @@ class ClassPage extends Page
         if (param('advanced') !== 'true') {
             $pages = $pages->filterBy('isInternal', false)
                            ->filterBy('isDeprecated', false);
-
         }
 
         return $this->children = $pages;
