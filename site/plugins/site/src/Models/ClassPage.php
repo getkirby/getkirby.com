@@ -63,8 +63,8 @@ class ClassPage extends Page
                     ->sortBy('slug');
 
         if (param('advanced') !== 'true') {
-            $pages = $pages->filterBy('methodInternal', false)
-                           ->filterBy('methodDeprecated', false);
+            $pages = $pages->filterBy('isInternal', false)
+                           ->filterBy('isDeprecated', false);
 
         }
 
