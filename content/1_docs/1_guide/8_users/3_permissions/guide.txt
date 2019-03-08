@@ -2,7 +2,13 @@ Title: Permissions
 
 ----
 
+Intro: User permissions help you to restrict access and capabilities for specific user roles – both in the (glossary: Panel) as well as when using (link: docs/guide/templates/php-api#permissions text: Kirby's PHP API).
+
+----
+
 Text:
+
+
 
 ## Defining permissions
 
