@@ -175,21 +175,4 @@ $page->createChild([
 ]);
 ```
 
-The above code only works if you are logged in, because it respects the permissions of the currently logged in user.
-
-One way to go without authentication is to impersonate the special `kirby` super user, which has full permissions:
-
-```php
-<?php
-
-$kirby = kirby();
-$kirby->impersonate('kirby');
-
-page('blog')->createChild([
-  'content'  => ['title' => 'Test'],
-  'slug'     => 'a-great-article',
-  'template' => 'article'
-]);
-```
-
-The impersonation will only last for the current request.
+The above code only works if you are logged in, because it respects the permissions of the currently logged in user. (link: docs/guide/templates/php-api#permissions text: Learn more about permissions and impersonatig users).
