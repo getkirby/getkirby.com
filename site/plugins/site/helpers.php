@@ -130,11 +130,5 @@ function parseObjectReference(string $string, string $parent): string
 
 function version(string $version, string $format): string
 {
-    $id = 'changelog/kirby-' . str_replace('.', '-', $version);
-
-    if ($log = page($id)) {
-        return Html::a($log->url(), sprintf($format, $version));
-    }
-
-    return '<span>' . sprintf($format, $version) . '</span>';
+    return Html::a(option('github') . '/kirby/releases/tag/' . $version, sprintf($format, $version));
 }
