@@ -257,5 +257,10 @@ class HelperPage extends Page
         
         return implode('|', $classes);
     }
+    
+    public function url($options = null): string
+    {
+        return parent::url($options) . (param('advanced') === 'true' ? '/advanced:true' : null);
+    }
 
 }
