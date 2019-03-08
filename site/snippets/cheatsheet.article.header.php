@@ -18,16 +18,17 @@
     <div class="cheatsheet-article-content">
       <header class="-mb:medium">
           <h2 class="h1"><?= $page->title() ?></h2>
-          <?php if ($page->guide()->isNotEmpty()): ?>
-            <a href="<?= url('docs/guide/' . $page->guide()) ?>">
-              <?php icon('guide') ?> Read the guide
-            </a>
-          <?php endif ?>
-
 
           <?php if ($page->excerpt()->isNotEmpty()): ?>
           <div class="intro">
             <?= $page->excerpt()->kt() ?>
           </div>
           <?php endif ?>
+
+          <?php snippet('cheatsheet.article.meta') ?>
         </header>
+        
+        <?php if ($page->deprecated()->isNotEmpty()): ?>
+        <?php snippet('cheatsheet.article.deprecated', ['deprecated' => $page->deprecated()->split('|')]) ?>
+        <?php endif ?>
+        

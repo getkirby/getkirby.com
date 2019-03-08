@@ -401,3 +401,31 @@ body {
   margin: 0 auto;
   max-width: 60rem;
 }
+
+.cheatsheet-article-meta {
+  margin-top: .5rem;
+  color: rgba($color-anthracite, .8);
+  font-size: .9rem;
+
+  svg {
+    width: 13px;
+    height: 13px;
+    margin-right: .2rem;
+  }
+
+  > li {
+    padding: .25rem 0;
+  }
+
+  @include mq(from m) {
+    display: flex;
+
+    > li {
+      padding: 0 .5rem;
+
+      &:first-child {
+        padding-left: 0;
+      }
+    }
+  }
+}

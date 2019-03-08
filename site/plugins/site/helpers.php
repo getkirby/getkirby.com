@@ -1,5 +1,18 @@
 <?php
 
+function availableIcons()
+{
+
+    $icons    = [];
+
+    $icons = glob(__DIR__ . '/icons/*');
+    foreach($icons as $i => $name) {
+        $icons[$i] = pathinfo($name, PATHINFO_FILENAME);
+    }
+
+    return $icons;
+}
+
 function csv(string $file): array
 {
 
@@ -64,17 +77,45 @@ function icon(string $name, bool $return = false, array $attr = null)
 
 }
 
-function availableIcons()
+function referenceLookup(string $class)
 {
+    $roots = [
+        'docs/reference/objects',
+        'docs/reference/@'
+    ];
 
-    $icons    = [];
-
-    $icons = glob(__DIR__ . '/icons/*');
-    foreach($icons as $i => $name) {
-        $icons[$i] = pathinfo($name, PATHINFO_FILENAME);
+    foreach ($roots as $root) {
+        $index = page($root)->index();
+        if ($page = $index->filterBy('class', $class)->first()) {
+            return $page;
+        }
     }
+}
 
-    return $icons;
+function parseObjectReference(string $string, string $parent): string
+{
+    return kirbytext(preg_replace_callback("|\`(.*)\`|", function ($matches) use ($parent) {        
+        $namespace = Str::split($matches[1], '\\');
+
+        if (count($namespace) === 1) {
+            $class    = Str::split($parent, '\\');
+            $class[2] = Str::before($namespace[0], '::');
+            $class    = implode('\\', $class);
+            $method   = Str::after($namespace[0], '::');
+        } else {
+            $class = Str::before($matches[1], '::');
+            $method  = Str::after($matches[1], '::');
+        }
+
+        if ($obj = referenceLookup($class)) {
+            if ($method = $obj->find($method)) {
+                return Html::a($method->url(), $matches[0]);
+            }
+        }
+
+        return $matches[0];
+
+    }, $string));
 }
 
 function version(string $version, string $format): string
