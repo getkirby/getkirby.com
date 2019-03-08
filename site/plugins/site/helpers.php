@@ -104,6 +104,7 @@ function referenceLookup(string $class)
 function parseObjectReference(string $string, string $parent): string
 {
     return kirbytext(preg_replace_callback("|\`(.*)\`|", function ($matches) use ($parent) {        
+        $matches[1] = Str::trim($matches[1], '()');
         $namespace = Str::split($matches[1], '\\');
 
         if (count($namespace) === 1) {
