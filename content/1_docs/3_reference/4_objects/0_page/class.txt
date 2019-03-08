@@ -21,7 +21,7 @@ $page = $pages->first();
 ```
 
 <info>
-When getting a specific page via the `page()` helper or when trying to create a page object from field values stored in content, always verify that you have a page object before you call any of the Page methods.
+When getting a specific page via the [`page()` helper](/docs/reference/templates/helpers/page) or when trying to create a page object from field values stored in content, always verify that you have a page object before you call any of the Page methods.
 </info>
 
 ## Examples
