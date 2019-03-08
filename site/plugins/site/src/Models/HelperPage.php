@@ -87,7 +87,14 @@ class HelperPage extends Page
         if ($reflection = $this->reflection()) {
             $parameters = array_column($this->parameters(), 'export');
             $parameters = empty($parameters) ? '' : implode(', ', $parameters);
-            return $this->methodName() . '(' . $parameters . '): ' . $this->returnType();
+            
+            $call = $this->methodName() . '(' . $parameters . ')';
+            
+            if ($return = $this->returnType()) {
+                $call .= ': ' . $return;
+            }
+            
+            return $call;
         }
 
         return $this->slug();
