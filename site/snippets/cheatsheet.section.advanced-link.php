@@ -1,6 +1,6 @@
 <?php $entries  = $page->children()->listed() ?>
-<?php $filtered = $page->children()->listed()->filter(function ($p) { 
-  return !$p->isInternal() && !$p->isDeprecated();
+<?php $filtered = $page->children()->listed()->filter(function ($p) {
+  return method_exists($p, 'isInternal') ? !$p->isInternal() && !$p->isDeprecated() : true;
 }) ?>
 <?php if ($entries->count() !== $filtered->count()): ?> 
 <ul class="cheatsheet-article-meta">

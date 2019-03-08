@@ -5,7 +5,7 @@
   
   if ($advanced === false) {
     $entries = $entries->filter(function ($p) {
-      return !$p->isInternal() && !$p->isDeprecated();
+      return method_exists($p, 'isInternal') ? !$p->isInternal() && !$p->isDeprecated() : true;
     });
   }
   ?>
