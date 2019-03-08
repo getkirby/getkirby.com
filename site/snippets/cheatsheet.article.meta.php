@@ -6,8 +6,8 @@
   <?php endif ?>
   <?php if ($page->auth()->isNotEmpty()): ?>
   <li>
-    <a href="<?= url('docs/guide/templates/php-api') ?>"> 
-      <?php icon('lock') ?> <code>site.update</code>
+    <a href="<?= url('docs/guide/templates/php-api#permissions') ?>"> 
+      <?php icon('lock') ?> <code><?= $page->auth() ?></code>
     </a>
   </li>
   <?php endif ?>

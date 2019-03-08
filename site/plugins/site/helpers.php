@@ -13,6 +13,15 @@ function availableIcons()
     return $icons;
 }
 
+function cheatsheetAdvanced($page)
+{
+    if (param('advanced') !== 'true') {
+        return Html::a($page->url() . '/advanced:true',  'Advanced view ›');
+    }
+    
+    return Html::a($page->url(),  'Simple view ›');
+}
+
 function csv(string $file): array
 {
 
