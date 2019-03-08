@@ -16,17 +16,12 @@
         <?= $page->excerpt()->kt() ?>
       </div>
       <?php endif ?>
-      
-      <?php if ($page->children()->hasAdvanced()): ?> 
-      <ul class="cheatsheet-article-meta">
-        <li>
-          <?= cheatsheetAdvanced($page) ?>
-        </li>
-      </ul>
-      <?php endif ?>
     </header>
 
     <div class="-mb:large">
+      <?php if ($page->children()->hasAdvanced()): ?>
+      <?php snippet('cheatsheet.section.advanced-link') ?>
+      <?php endif ?>
       <?php snippet('cheatsheet.section', ['section' => $page]) ?>
     </div>
 
