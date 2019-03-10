@@ -38,7 +38,7 @@ Some parts of Kirby's PHP API only work if you are logged in (or authenticated i
 
 ### Authentication
 
-Users can login through the (glossary: Panel) login page or any custom logn form. To learn more about how to login a user progamatically, read the reference for (link: docs/reference/objects/user/login text: $user->login()).
+Users can log in through the (glossary: Panel) login page or any custom login form. To learn more about how to log in a user progamatically, read the reference for (link: docs/reference/objects/user/login text: $user->login()).
 
 ### Impersonate
 
