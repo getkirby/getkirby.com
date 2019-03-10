@@ -46,7 +46,9 @@ With the above example, you only get results that fit a single value. You can fi
 // get all pages with a date after now
 $collection = page('blog')
   ->children()
-  ->filterBy('date', '>', time());
+  ->filter(function ($child) {
+    return $child->date()->toDate() > time();
+  });
 
 // get all pages with a title that starts with "A" or a number
 $collection = page('blog')
