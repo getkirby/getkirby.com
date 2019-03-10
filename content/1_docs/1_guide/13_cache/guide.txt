@@ -18,7 +18,7 @@ return [
       'pages' => [
           'active' => true,
           'ignore' => function ($page) {
-            return $page->title()->value() !== 'Do not cache me';
+            return $page->title()->value() === 'Do not cache me';
           }
       ]
   ]
