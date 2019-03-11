@@ -1,0 +1,25 @@
+Guide: docs/guide/templates/php-api#permissions
+
+----
+
+Text:
+
+## `$who`
+
+There are three options for the `$who` parameter:
+- `kirby` (impersonates the allmighty with full permissions)
+- a username (impersonates the specific user with its permissions)
+- `null` (resets the impersonation)
+
+## Example
+
+```php
+<?php
+
+$kirby = kirby();
+$kirby->impersonate('kirby');
+
+page('notes/a-great-article')->update([
+  'author'  => 'Homer Simpson'
+]);
+```
