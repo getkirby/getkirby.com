@@ -1,4 +1,4 @@
-Guide: docs/guide/templates/php-api#permissions
+Guide: templates/php-api#permissions
 
 ----
 
