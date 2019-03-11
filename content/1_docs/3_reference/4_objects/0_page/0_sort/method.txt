@@ -23,4 +23,4 @@ try {
 
 ## No parameter
 
-If the parameter `$num` is not specified, the result of $page->num() will be returned instead.
+If the parameter `$num` is not specified, the result of `$page->num() will be returned instead.
