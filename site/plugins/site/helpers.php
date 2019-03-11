@@ -90,6 +90,7 @@ function referenceLookup(string $class)
 {
     $roots = [
         'docs/reference/objects',
+        'docs/reference/tools',
         'docs/reference/@'
     ];
 
