@@ -1,7 +1,7 @@
 <?php if (!get('plain')): ?>
 
 <?php snippet('cheatsheet.header', ['icons' => $icons ?? null]) ?>
-<?php snippet('cheatsheet.entries', ['entries' => $page->siblings()->listed()]) ?>
+<?php snippet('cheatsheet.entries', ['entries' => $page->siblings()->forCheatsheet()]) ?>
 
 <article class="cheatsheet-article cheatsheet-main cheatsheet-panel">
 <?php endif ?>
