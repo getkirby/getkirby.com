@@ -82,7 +82,7 @@ The (link: docs/guide/configuration#custom-folder-setup text: custom folder setu
 
 ### Remove `/panel` folder
 
-The Panel folder has been integrated into the Kirby folder to make updates easier. Therefore, the old Panel folder has to be removed.
+The Panel folder has been integrated into the `/kirby` folder to make updates easier. Therefore, the old Panel folder has to be removed.
 
 ### Move and adapt page blueprints
 
@@ -198,30 +198,9 @@ return [
 
 These options can be called with `$kirby->option('someSetting')`.
 
-### Removed config options
+### Removed or changed config options
 
 - The `ssl` config option has been removed. This should be handled in your `.htaccess` file or in your server configuration.
-
-- The `thumbs.presets` option has been removed. If you need this functionality, here's a workaround:
-
-```php "/site/config/config.php"
-
-'thumbs' => [
-  'presets' => [
-    'tiny' => [
-      'width' => 50,
-      'quality' => 50
-    ]
-  ]
-],
-```
-Then in your templates, snippets etc.:
-
-```php
-<?= $image->thumb(option('thumbs.presets.tiny'));
-```
-
-### Changed config options
 
 - `panel.session.timeout`/`panel.session.lifetime` are now handled via the (link: docs/reference/system/options/session text: session options).
 
