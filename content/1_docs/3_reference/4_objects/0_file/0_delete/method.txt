@@ -1,20 +1,20 @@
-Text: 
+Auth: files.delete
+
+----
+
+Text:
 
 ## Example
 
 ```php
-if($file = $page->file('old-file.pdf')):
-
+if($file = $page->file('old-file.pdf')) {
     try {
-
         $file->delete();
         echo 'The file has been deleted';
 
     } catch(Exception $e) {
-
         echo 'The file could not be deleted';
         // optional reason: echo $e->getMessage();
-
     }
-endif;
+}
 ```

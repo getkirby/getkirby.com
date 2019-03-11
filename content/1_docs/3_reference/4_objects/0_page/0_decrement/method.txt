@@ -1,4 +1,8 @@
-Text: 
+Auth: pages.update
+
+----
+
+Text:
 
 ## Example
 
