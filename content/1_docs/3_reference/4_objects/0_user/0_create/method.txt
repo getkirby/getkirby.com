@@ -1,3 +1,7 @@
+Auth: users.create
+
+----
+
 Text:
 
 ## The `$props` parameter

@@ -1,4 +1,8 @@
-Text: 
+Auth: pages.sort
+
+----
+
+Text:
 
 ## Example
 

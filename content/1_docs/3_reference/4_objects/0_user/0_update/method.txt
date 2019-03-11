@@ -1,4 +1,8 @@
-Text: 
+Auth: users.update
+
+----
+
+Text:
 
 ## Example
 

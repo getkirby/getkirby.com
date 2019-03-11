@@ -1,4 +1,8 @@
-Text: 
+Auth: pages.changeStatus
+
+----
+
+Text:
 
 ## Details
 <info>
