@@ -34,15 +34,15 @@ The `$kirby` class is the heart and soul of Kirby. It's the access point for reg
 
 ## Permissions
 
-Some parts of Kirby's PHP API only work if you are logged in (or authenticated in other ways), because they respect the permissions of the currently logged in user. E.g. the page will not be allowed to be updated via `$page->update()`, unless the current user is logged in and has adequate permissions. This helps increase the security of your code, by blocking operations for users that are not authorised to do them. You can read more about user permissions and which ones exist here: (link: docs/guide/users/permissions text: Users permissions ›)
+Some parts of Kirby's PHP API only work if you are logged in (or authenticated in other ways), because they respect the permissions of the currently logged in user. E.g. users cannot update a page via `$page->update()`, unless they are logged in and have adequate permissions. This helps increase the security of your code by blocking operations for unauthorized users. You can read more about available user permissions in the (link: docs/guide/users/permissions text: Users permissions docs ›)
 
 ### Authentication
 
-Users can log in through the (glossary: Panel) login page or any custom login form. To learn more about how to log in a user progamatically, read the reference for (link: docs/reference/objects/user/login text: $user->login()).
+Users can log in through the (glossary: Panel) login page or any custom login form. To learn more about how to log in a user programmatically, read the reference for (link: docs/reference/objects/user/login text: $user->login()).
 
 ### Impersonate
 
-One way to go without authentication is to (link: docs/reference/objects/kirby/impersonate text: impersonate) any user or even the special `kirby` super user, which has full permissions:
+One way to go without authentication is to (link: docs/reference/objects/kirby/impersonate text: impersonate) any user or the special `kirby` super user, which has full permissions:
 
 ```php
 <?php
