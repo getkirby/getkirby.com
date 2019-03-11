@@ -6,9 +6,9 @@
   <?php endif ?>
   <?php if ($page->auth()->isNotEmpty()): ?>
   <li>
-    <a href="<?= url('docs/guide/templates/php-api#permissions') ?>"> 
-      <?php icon('lock') ?> <code><?= $page->auth() ?></code>
-    </a>
+    <?php icon('lock') ?> <code data-tooltip="<strong>Authentication</strong><br>The permission <code><?= $page->auth() ?></code> is required to run this method. <strong><a href='<?= url('docs/guide/templates/php-api#permissions') ?>'>Learn more ›</a></strong>">
+      <?= $page->auth() ?>
+    </code>
   </li>
   <?php endif ?>
   <?php if ($page->guide()->isNotEmpty()): ?>
