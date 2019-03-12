@@ -8,6 +8,10 @@ A pages select field that allows to select one or multiple related pages
 
 ----
 
+Guide: blueprints/fields
+
+----
+
 Text:
 
 The pages field allows you to select one or more related pages. It has a handy navigator to go through the entire site tree and select the pages you want

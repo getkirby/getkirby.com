@@ -8,6 +8,10 @@ A files select field that allows to select one or multiple related files
 
 ----
 
+Guide: blueprints/fields
+
+----
+
 Text:
 
 The files field allows you to select one or more files.
