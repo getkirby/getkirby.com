@@ -23,6 +23,5 @@ fields:
     type: tel
 ```
 
-## Options
 
 (field-options: tel)

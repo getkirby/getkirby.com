@@ -23,13 +23,11 @@ fields:
     type: number
 ```
 
-## Options
-
 (field-options: number)
 
 ## Decimals
 
-Decimals can be used by adding the **step** option.
+Decimals can be used by adding the `step` option.
 
 ```yaml
 fields:

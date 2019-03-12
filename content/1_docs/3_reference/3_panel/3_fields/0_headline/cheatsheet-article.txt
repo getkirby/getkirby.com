@@ -35,8 +35,6 @@ fields:
     type: textarea
 ```
 
-## Options
-
 (field-options: headline)
 
 ## Hiding the headline numbers

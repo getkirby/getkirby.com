@@ -29,13 +29,11 @@ fields:
       web: Web
 ```
 
-## Options
-
 (field-options: checkboxes)
 
-## In templates/snippets
+## How to use in templates/snippets
 
-A checkboxes field stores all selected categories in a comma separated list (`value1, value2, value3`) You can split this list in your templates and then work with the values like this:
+A checkboxes field stores all selected values in a comma separated list (`value1, value2, value3`) You can split this list with the [`split()`](/docs/reference/templates/field-methods/split) method in your templates and then work with the result:
 
 ```php
 <ul>

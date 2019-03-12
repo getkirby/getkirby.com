@@ -23,7 +23,6 @@ fields:
     type: text
 ```
 
-## Options
 
 (field-options: text)
 

@@ -51,13 +51,18 @@ addresses:
   city:   The capitol of the Bahamas
 ```
 
-## Options
 
 (field-options: structure)
 
+## How to use in templates/snippets
+
+To access a structure field in your templates, you can use the [`yaml()`](../../templates/field-methods/yaml) and [`toStructure()`](../../templates/field-methods/to-structure) methods.
+
 ## Fields
 
-You can define any number of fields and use the same (link: docs/reference/panel/fields text: field types listed).
+You can define any number of fields and use the same (link: docs/reference/panel/fields text: field types listed):
+
+(reference: panel/fields)
 
 ## Default values
 
@@ -115,10 +120,6 @@ fields:
 			price:
 				type: number
 ```
-
-## Accessing structure fields in your templates
-
-To access a structure field in your templates, you can use the [`$field->yaml()`](../../templates/field-methods/yaml) and [`$field->toStructure()`](../../templates/field-methods/to-structure) methods.
 
 ## Preview of fields in the table
 

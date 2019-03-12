@@ -23,21 +23,9 @@ fields:
     type: pages
 ```
 
-## Options
-
 (field-options: pages)
 
-### Maximum number of pages
-
-You can set the maximum number of pages that can be selected:
-
-```yaml
-fields:
-  related:
-    label: Related Pages
-    type: pages
-    max: 3
-```
+## Limit the selection
 
 ### Multiple or single mode
 
@@ -50,8 +38,20 @@ fields:
     type: pages
     multiple: false
 ```
+### Maximum number of pages
 
-### Preview images
+You can set the maximum number of pages that can be selected:
+
+```yaml
+fields:
+  related:
+    label: Related Pages
+    type: pages
+    max: 3
+```
+
+
+## Preview images
 
 The default (preview) image is the first image in the folder. You can configure the (preview) image for each item using the `image` option:
 
@@ -107,17 +107,17 @@ image:
 If you don't want to show an image but the icon selected for the page, you can set the `query` option to `false`:
 
 ```yml
-image: 
+image:
   query: false
 ```
 
 Kirby will then either show a default page icon or the icon defined in the page blueprint.
 
-## Accessing selected pages in templates
+## How to use in templates/snippets
 
 ### Single page
 
-To convert a single page to a page object, use the `toPage()` method:
+To convert a single page to a page object, use the [`toPage()`](/docs/reference/templates/field-methods/to-page) method:
 
 ```php
 <?php if($relatedPage = $page->related()->toPage()): ?>
@@ -127,7 +127,7 @@ To convert a single page to a page object, use the `toPage()` method:
 
 ### Multiple pages
 
-To convert multiple pages to a pages collection, use the `toPages()` method:
+To convert multiple pages to a pages collection, use the [`toPages()`](/docs/reference/templates/field-methods/to-pages) method:
 
 ```php
 <?php

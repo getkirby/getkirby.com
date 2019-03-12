@@ -27,11 +27,9 @@ fields:
       web: Web
 ```
 
-## Options
-
 (field-options: radio)
 
-## Example with a single default value
+## Default value
 
 By default, the first item in the list of options is preselected. To change the default value:
 

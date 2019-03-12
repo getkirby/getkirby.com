@@ -1,6 +1,6 @@
-## Max and min length
+## Length restrictions
 
-You can control the max and/or min length of the entered text by using the validate option. By adding the validators, a handy indicator of the current text length will be displayed in the upper right corner.
+You can control the maximal and/or minimal length of the entered text by using the `maxlength` and/or `minlength` option. A handy indicator of the current text length will be displayed in the upper right corner.
 
 ```yaml
 fields:

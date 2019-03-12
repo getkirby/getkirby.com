@@ -23,14 +23,25 @@ fields:
     type: tags
 ```
 
-## Options
-
 (field-options: tags)
 
+## How to use in templates/snippets
 
-## Predefined autocomplete options
+A tags field stores all selected values in a comma separated list (`value1, value2, value3`) You can split this list with the [`split()`](/docs/reference/templates/field-methods/split) method in your templates and then work with the result:
 
-For autocompletion to work, you need to set the options attribute.  Options can be a fixed list or dynamic options using the query option.
+```php
+<ul>
+  <?php foreach ($page->categories()->split() as $category): ?>
+  <li><?= $category ?></li>
+  <?php endforeach ?>
+</ul>
+```
+
+See [`$field->split()`](/docs/reference/templates/field-methods/split) for more information.
+
+## Autocomplete
+
+For autocompletion to work, you need to set the `options` attribute.  Options can be a fixed list (see below) or [dynamic options](#dynamic-options) using the query option.
 
 ```yaml
 fields:
@@ -43,6 +54,20 @@ fields:
       - Photography
       - 3D
       - Web
+```
+
+You can also define different `value` and `text` for options:
+
+```yaml
+fields:
+  tags:
+    label: Tags
+    type: tags
+    options:
+      - value: study/design
+        text: Design
+      - value: study/architecture
+        text: Architecture
 ```
 
 (docs: panel-field-options field: tags)

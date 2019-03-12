@@ -1,19 +1,3 @@
-### Example with numeric keys
-
-If you want to store numeric keys as values, you have to use the long notation with `value` and `text`:
-
-```yaml
-fields:
-  category:
-    label: Category
-    type: <?= $field . PHP_EOL ?>
-    options:
-      - value: '100'
-        text: Design
-      - value: '200'
-        text: Architecture
-```
-
 ## Dynamic options
 
 Our options (link: docs/guide/blueprints/query-language text: query syntax) offers a very powerful way of converting pages, files, users, page values and even items in structure fields into automatically generated option lists.
@@ -49,7 +33,7 @@ query: page.siblings.pluck("tags", ",", true)
 query: page.index.pluck("tags", ",", true)
 query: site.index.pluck("tags", ",", true)
 ```
-    
+
 ### Custom text and value
 
 To customize the displayed text or the stored value, you can be more specific when defining the query: The `query` option gets three suboptions, where `fetch` takes over the options query. `text` and `value` can be defined with the help of our string template language to get exactly what you want as the  result.
@@ -76,6 +60,22 @@ category:
     fetch: site.children.published
     text: "{{ page.year }} - {{ page.title.upper }}"
     value: "{{ page.slug }}"
+```
+
+### Numeric keys
+
+If you want to store numeric keys as values, you have to use the long notation with `value` and `text`:
+
+```yaml
+fields:
+  category:
+    label: Category
+    type: <?= $field . PHP_EOL ?>
+    options:
+      - value: '100'
+        text: Design
+      - value: '200'
+        text: Architecture
 ```
 
 ## Options from other fields

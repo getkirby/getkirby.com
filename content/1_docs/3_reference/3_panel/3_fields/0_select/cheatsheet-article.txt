@@ -29,11 +29,10 @@ fields:
       web: Web
 ```
 
-## Options
 
 (field-options: select)
 
-## Example with a single default value
+## Default value
 
 ```yaml
 fields:

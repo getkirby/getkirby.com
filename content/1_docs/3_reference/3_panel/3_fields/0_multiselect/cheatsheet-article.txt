@@ -31,8 +31,18 @@ fields:
       web: Web
 ```
 
-## Options
-
 (field-options: multiselect)
+
+## How to use in templates/snippets
+
+A multiselect field stores all selected values in a comma separated list (`value1, value2, value3`) You can split this list with the [`split()`](/docs/reference/templates/field-methods/split) method in your templates and then work with the result:
+
+```php
+<ul>
+  <?php foreach ($page->categories()->split() as $category): ?>
+  <li><?= $category ?></li>
+  <?php endforeach ?>
+</ul>
+```
 
 (docs: panel-field-options field: multiselect)

@@ -23,8 +23,6 @@ fields:
     type: users
 ```
 
-## Options
-
 (field-options: users)
 
 ## Default values
@@ -39,19 +37,9 @@ fields:
     default: johndoe@company.com
 ```
 
-## Maximum number of users
+## Limit selection
 
-You can set the maximum number of users that can be selected:
-
-```yaml
-fields:
-  author:
-    label: Author
-    type: users
-    max: 3
-```
-
-## Multiple or single mode
+### Multiple or single mode
 
 If you only want to select a single user, set multiple mode to `false` (default is `true`)
 
@@ -63,12 +51,23 @@ fields:
     multiple: false
 ```
 
+### Maximum number of users
 
-## Accessing selected users in templates
+You can set the maximum number of users that can be selected:
+
+```yaml
+fields:
+  author:
+    label: Author
+    type: users
+    max: 3
+```
+
+## How to use in templates/snippets
 
 ### Single user
 
-To convert a single user to a user object, use the `toUser()` method:
+To convert a single user to a user object, use the [`toUser()`](/docs/reference/templates/field-methods/to-user) method:
 
 ```php
 <?php if($user = $page->author()->toUser()): ?>
@@ -78,7 +77,7 @@ To convert a single user to a user object, use the `toUser()` method:
 
 ### Multiple users
 
-To convert multiple users to a users collection, use the `toUsers()` method:
+To convert multiple users to a users collection, use the [`toUsers()`](/docs/reference/templates/field-methods/to-users) method:
 
 ```php
 <?php

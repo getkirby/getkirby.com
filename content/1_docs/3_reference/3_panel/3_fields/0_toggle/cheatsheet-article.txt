@@ -22,8 +22,6 @@ fields:
     text: Include in menu?
 ```
 
-## Options
-
 (field-options: toggle)
 
 ## Simple toogle field translated

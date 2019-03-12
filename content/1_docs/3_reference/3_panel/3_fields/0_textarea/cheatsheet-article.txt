@@ -23,13 +23,12 @@ fields:
     type: textarea
 ```
 
-## Options
 
 (field-options: textarea)
 
-## Initial sizes
+## Sizes
 
-In some section layouts, a small textarea looks lost. The `size` option sets a default height for empty textareas before auto-sizing kicks in. Available sizes:
+In some section layouts, a small textarea looks lost. The `size` option sets an initial default height for empty textareas before auto-sizing kicks in. Available sizes:
 
 - `small`
 - `medium`
@@ -44,7 +43,9 @@ fields:
     size: large
 ```
 
-## Disabling the toolbar
+## Toolbar
+
+### Disabling the toolbar
 
 If the formatting toolbar should not be available, you can switch it off entirely:
 
@@ -56,7 +57,7 @@ fields:
     buttons: false
 ```
 
-## Customizing the toolbar
+### Customizing the toolbar
 
 You can also specify which buttons to show in the toolbar.
 

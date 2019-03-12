@@ -18,11 +18,17 @@ The date field generates a simple input with a nice date picker. It can be setup
 
 ```yaml
 fields:
-  date:
-    label: Date
+  published:
+    label: Published on
     type: date
 ```
 
-## Options
-
 (field-options: date)
+
+## How to use in templates/snippets
+
+To convert the value to a date object, use the [`toDate()`](/docs/reference/templates/field-methods/to-date) method:
+
+```php
+<?= $page->published()->toDate() ?>
+```

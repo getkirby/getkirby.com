@@ -23,6 +23,4 @@ fields:
     type: email
 ```
 
-## Options
-
 (field-options: email)

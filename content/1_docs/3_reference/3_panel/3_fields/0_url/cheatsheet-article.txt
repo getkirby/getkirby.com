@@ -21,6 +21,5 @@ fields:
     type: url
 ```
 
-## Options
 
 (field-options: url)

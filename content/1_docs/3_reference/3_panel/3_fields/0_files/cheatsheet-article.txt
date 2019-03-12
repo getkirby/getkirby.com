@@ -18,12 +18,10 @@ The files field allows you to select one or more files.
 
 ```yaml
 fields:
-  gallery:
-    label: Related Pages
+  downloads:
+    label: Downloads
     type: files
 ```
-
-## Options
 
 (field-options: files)
 
@@ -33,7 +31,7 @@ You can set the minimum/maximum number of files that can be selected:
 
 ```yaml
 fields:
-  gallery:
+  downloads:
     label: Select files...
     type: files
     min: 1
@@ -42,11 +40,11 @@ fields:
 
 ### Multiple or single mode
 
-If you only want to select a single file, set multiple mode to `false` (default is `true`)
+If you only want to select a single file, set `multiple` mode to `false` (default is `true`).
 
 ```yaml
 fields:
-  gallery:
+  downloads:
     label: Select files...
     type: files
     multiple: false
@@ -54,11 +52,11 @@ fields:
 
 ### Layout
 
-You can switch between list and card layout. Default is list layout.
+You can switch between `list` and `card` layout. Default is `list` layout.
 
 ```yaml
 fields:
-  gallery:
+  downloads:
     label: Select files...
     type: files
     layout: cards
@@ -76,7 +74,7 @@ gallery:
   query: page.images
 ```
 
-You can use all file types available in Kirby here (images, documents, video, audio and code).
+You can use all file types available in Kirby here (i`mages`, `documents`, `video`, `audio` and `code`).
 
 #### Querying files from other pages
 
@@ -88,13 +86,13 @@ gallery:
   query: site.find('photography').children.images.filterBy('template', 'cover')
 ```
 
-You can find more example how you can use the query language in the (link: docs/guide/blueprints/query-language text: guide.
+You can find more example how you can use the query language in the (link: docs/guide/blueprints/query-language text: guide).
 
-## Accessing selected files in templates
+## How to use in templates/snippets
 
 ### Single file
 
-To convert a single file to a file object, use the `toFile()` method:
+To convert a single file to a file object, use the [`toFile()`](/docs/reference/templates/field-methods/to-file) method:
 
 ```php
 <?php if($image = $page->cover()->toFile()): ?>
@@ -104,7 +102,7 @@ To convert a single file to a file object, use the `toFile()` method:
 
 ### Multiple files
 
-To convert multiple files to a files collection, use the `toFiles()` method:
+To convert multiple files to a files collection, use the [`toFiles()`](/docs/reference/templates/field-methods/to-files) method:
 
 ```php
 <?php
