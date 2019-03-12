@@ -6,7 +6,7 @@ Excerpt: List files
 ----
 Text:
 
-## Query Parameters
+## Query parameters
 
 (docs: api/files-parameters)
 

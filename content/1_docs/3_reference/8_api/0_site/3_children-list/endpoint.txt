@@ -9,6 +9,13 @@ Text:
 ## Query parameters
 
 (docs: api/pages-parameters)
+
+## Site fields
+
+The following fields are available in the site model and can be fetched with the `select` parameter:
+
+(api-fields: site)
+
 ----
 Example: /api/site/children
 ----

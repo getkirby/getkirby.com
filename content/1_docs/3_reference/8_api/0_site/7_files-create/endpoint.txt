@@ -3,3 +3,10 @@ Title: /site/files
 Info: POST
 ----
 Excerpt: Upload a new file
+----
+
+Text:
+
+## Post parameters
+
+(docs: api/file-upload-data)
