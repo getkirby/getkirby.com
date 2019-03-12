@@ -10,8 +10,14 @@ Text:
 
 | Parameter | Example | Description |
 | - | - | - |
-| pretty | ?pretty=true | Pretty prints the result. Only useful for debugging. |
-| select | ?select=isInstalled,isOk | Defines the fields that will be returned for the system status. |
+| `pretty` | `?pretty=true` | Pretty prints the result. Only useful for debugging. |
+| `select` | `?select=isInstalled,isOk` | Defines the fields that will be returned for the system status. |
+
+## System fields
+
+The following fields are available in the system model and can be fetched with the `select` parameter:
+
+(api-fields: system)
 
 ----
 Response:
