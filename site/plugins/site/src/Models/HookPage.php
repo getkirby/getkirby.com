@@ -23,6 +23,11 @@ class HookPage extends Page
         $example[] = $tab . "'hooks' => [";
         $example[] = $tab . $tab . "'" . $this->title() . "' => function ($args) {";
         $example[] = $tab . $tab . $tab . '// your code goes here';
+
+        if ($this->type() == 'apply') {
+        $example[] =  $tab . $tab . $tab . 'return ' . $args . ';';
+        }
+
         $example[] = $tab . $tab . '}';
         $example[] = $tab . ']';
         $example[] = ']';

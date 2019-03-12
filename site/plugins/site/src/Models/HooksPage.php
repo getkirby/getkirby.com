@@ -12,15 +12,16 @@ class HooksPage extends Page
 
     public function children()
     {
-        $children = array_map(function ($line) {
+        $children = array_map(function ($hook) {
             return [
-                'slug'     => Str::slug($line['Name']),
+                'slug'     => Str::slug($hook['Name']),
                 'template' => 'hook',
                 'model'    => 'hook',
                 'num'      => 0,
                 'content'  => [
-                    'title' => $line['Name'],
-                    'arguments' => implode(', ', Str::split($line['Arguments']))
+                    'title' => $hook['Name'],
+                    'arguments' => implode(', ', Str::split($hook['Arguments'])),
+                    'type' => $hook['Type']
                 ]
             ];
         }, csv($this->root() . '/hooks.csv'));
