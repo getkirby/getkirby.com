@@ -1,4 +1,4 @@
-Send a key/value object with the new user content as request body.
+Send a key/value object with the new user content as request body:
 
 ```json
 {
