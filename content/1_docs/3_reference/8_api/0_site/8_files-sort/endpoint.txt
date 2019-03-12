@@ -3,3 +3,10 @@ Title: /site/files/sort
 Info: PATCH
 ----
 Excerpt: Sort files
+----
+
+Text:
+
+## Patch parameters
+
+(docs: api/file-sort-data)
