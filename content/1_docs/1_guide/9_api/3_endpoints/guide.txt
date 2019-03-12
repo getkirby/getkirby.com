@@ -1,0 +1,10 @@
+Title: Endpoints
+
+----
+
+Text:
+
+There are a large number of endpoints, split into the following areas:
+
+(reference: api)
+

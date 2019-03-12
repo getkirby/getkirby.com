@@ -1,1 +1,8 @@
-title: Pages
+Title: Pages
+
+----
+
+Text:
+
+(docs: api/page-ids)
+

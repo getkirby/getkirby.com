@@ -10,6 +10,12 @@ Text:
 
 (docs: api/page-parameters)
 
+## Page fields
+
+The following fields are available in page models and can be fetched with the `select` parameter in most page API requests.
+
+(api-fields: page)
+
 ----
 Example: /api/pages/projects+trees-and-stars-and-stuff
 ----

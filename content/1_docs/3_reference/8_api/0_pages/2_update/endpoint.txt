@@ -8,7 +8,7 @@ Text:
 
 ## Patch parameters
 
-Send a key/value object with the new page content as request body.
+Send a key/value object with the new page content as request body:
 
 ```json
 {

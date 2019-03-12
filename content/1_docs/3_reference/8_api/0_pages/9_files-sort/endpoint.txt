@@ -3,3 +3,10 @@ Title: /pages/:id/files/sort
 Info: PATCH
 ----
 Excerpt: Sort files
+----
+
+Text:
+
+## Patch parameters
+
+(docs: api/file-sort-data)
