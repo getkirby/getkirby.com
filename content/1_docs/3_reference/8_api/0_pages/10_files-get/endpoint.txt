@@ -9,3 +9,10 @@ Text:
 ## Query Parameters
 
 (docs: api/file-parameters)
+
+
+## File fields
+
+The following fields are available in file models and can be fetched with the `select` parameter in most file API requests.
+
+(api-fields: file)

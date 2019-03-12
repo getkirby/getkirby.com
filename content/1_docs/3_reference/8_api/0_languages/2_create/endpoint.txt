@@ -6,6 +6,6 @@ Excerpt: Create a language
 ----
 Text:
 
-## Parameters
+## Post parameters
 
 (docs: api/language-create-data)
