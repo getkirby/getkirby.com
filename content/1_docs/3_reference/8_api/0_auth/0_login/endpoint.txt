@@ -7,7 +7,7 @@ Excerpt: Start a new session
 Text:
 
 <info>
-This endpoint is only relevant for session-based authentication. You call it to start a session and it will return the authenticated user.
+This endpoint is **only relevant for session-based authentication**. You call it to start a session and it will return the authenticated user.
 </info>
 
 ## Post parameters
