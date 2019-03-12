@@ -92,6 +92,10 @@ return [
                 return '';
             }
 
+            $fields = array_map(function ($field) {
+                return '`' . $field . '`';
+            }, $fields);
+
             return '- ' . implode(PHP_EOL . '- ', $fields);
         }
     ],

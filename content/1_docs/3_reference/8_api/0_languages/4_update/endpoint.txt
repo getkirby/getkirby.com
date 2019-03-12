@@ -6,6 +6,6 @@ Excerpt: Update a language
 ----
 Text:
 
-## Post parameters
+## Parameters
 
 (docs: api/language-update-data)

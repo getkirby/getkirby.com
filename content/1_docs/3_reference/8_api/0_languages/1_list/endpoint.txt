@@ -10,7 +10,14 @@ Text:
 
 (docs: api/languages-parameters)
 
+## Language fields
+
+The following fields are available in the language model and can be fetched with the `select` parameter.
+
+(api-fields: language)
+
 ----
+
 Response:
 
 {
