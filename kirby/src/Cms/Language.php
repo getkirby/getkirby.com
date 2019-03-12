@@ -11,19 +11,8 @@ use Kirby\Toolkit\F;
 use Kirby\Toolkit\Str;
 
 /**
- * The `$language` object represents
- * a single language in a multi-language
- * Kirby setup. You can, for example,
- * use the methods of this class to get
- * the name or locale of a language,
- * check for the default language,
- * get translation strings and many
- * more things.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      http://getkirby.com
- * @copyright Bastian Allgeier
+ * Represents a content language
+ * in a multi-language setup
  */
 class Language extends Model
 {
@@ -156,7 +145,6 @@ class Language extends Model
     /**
      * Creates a new language object
      *
-     * @internal
      * @param array $props
      * @return self
      */
@@ -191,7 +179,6 @@ class Language extends Model
      * Delete the current language and
      * all its translation files
      *
-     * @internal
      * @return boolean
      */
     public function delete(): bool
@@ -334,7 +321,6 @@ class Language extends Model
     /**
      * Saves the language settings in the languages folder
      *
-     * @internal
      * @return self
      */
     public function save(): self
@@ -461,7 +447,6 @@ class Language extends Model
     /**
      * Update language properties and save them
      *
-     * @internal
      * @param array $props
      * @return self
      */

@@ -6,18 +6,10 @@ use Kirby\Http\Url as BaseUrl;
 use Kirby\Toolkit\Str;
 
 /**
- * The `Url` class extends the
- * `Kirby\Http\Url` class. In addition
- * to the methods of that class for dealing
- * with URLs, it provides a specific
- * `Url::home` method that always creates
- * the correct base URL and a template asset
- * URL builder.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      http://getkirby.com
- * @copyright Bastian Allgeier
+ * Extension of the Kirby\Http\Url class
+ * with a specific Url::home method that always
+ * creates the correct base Url and a template asset
+ * Url builder.
  */
 class Url extends BaseUrl
 {
@@ -76,7 +68,7 @@ class Url extends BaseUrl
         }
 
         // get a language url for the linked page, if the page can be found
-        if ($kirby->multilang() === true && $page = page($path)) {
+        if ($language !== null && $kirby->multilang() === true && $page = page($path)) {
             $path = $page->url($language);
         }
 

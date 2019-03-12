@@ -14,8 +14,8 @@ use Kirby\Toolkit\V;
 use Throwable;
 
 /**
- * The `$user` object represents a
- * single Panel or frontend user.
+ * The User class represents
+ * panel users as well as frontend users.
  *
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -134,7 +134,6 @@ class User extends ModelWithContent
     /**
      * Returns the url to the api endpoint
      *
-     * @internal
      * @param bool $relative
      * @return string
      */
@@ -182,7 +181,6 @@ class User extends ModelWithContent
     /**
      * Prepares the content for the write method
      *
-     * @internal
      * @param array $data
      * @param string $languageCode Not used so far
      * @return array
@@ -204,7 +202,6 @@ class User extends ModelWithContent
     /**
      * Filename for the content file
      *
-     * @internal
      * @return string
      */
     public function contentFileName(): string
@@ -240,7 +237,6 @@ class User extends ModelWithContent
     /**
      * Hashes user password
      *
-     * @internal
      * @param string|null $password
      * @return string|null
      */
@@ -420,7 +416,6 @@ class User extends ModelWithContent
     /**
      * Returns the root to the media folder for the user
      *
-     * @internal
      * @return string
      */
     public function mediaRoot(): string
@@ -431,7 +426,6 @@ class User extends ModelWithContent
     /**
      * Returns the media url for the user object
      *
-     * @internal
      * @return string
      */
     public function mediaUrl(): string
@@ -477,7 +471,6 @@ class User extends ModelWithContent
     /**
      * Create a dummy nobody
      *
-     * @internal
      * @return self
      */
     public static function nobody(): self
@@ -491,7 +484,6 @@ class User extends ModelWithContent
     /**
      * Returns the full path without leading slash
      *
-     * @internal
      * @return string
      */
     public function panelPath(): string
@@ -503,7 +495,6 @@ class User extends ModelWithContent
      * Returns the url to the editing view
      * in the panel
      *
-     * @internal
      * @param bool $relative
      * @return string
      */
@@ -541,7 +532,6 @@ class User extends ModelWithContent
     /**
      * Creates a string query, starting from the model
      *
-     * @internal
      * @param string|null $query
      * @param string|null $expect
      * @return mixed
@@ -786,7 +776,7 @@ class User extends ModelWithContent
             throw new NotFoundException(['key' => 'user.password.undefined']);
         }
 
-        if (Str::length($password) < 8) {
+        if ($password === null) {
             throw new InvalidArgumentException(['key' => 'user.password.invalid']);
         }
 

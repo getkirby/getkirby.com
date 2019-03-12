@@ -62,18 +62,17 @@ return [
     ],
     [
         'pattern' => 'site/search',
-        'method'  => 'GET|POST',
+        'method'  => 'GET',
         'action'  => function () {
-            $pages = $this
-                ->site()
-                ->index(true)
-                ->filterBy('isReadable', true);
-
-            if ($this->requestMethod() === 'GET') {
-                return $pages->search($this->requestQuery('q'));
-            } else {
-                return $pages->query($this->requestBody());
-            }
+            return $this->site()
+                        ->index(true)
+                        ->filterBy('isReadable', true)
+                        ->search($this->requestQuery('q'), [
+                            'score'     => [
+                                'id'    => 64,
+                                'title' => 64,
+                            ]
+                        ]);
         }
     ],
     [

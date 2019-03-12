@@ -53,6 +53,16 @@ class Collections
     }
 
     /**
+     * Creates a new Collections set
+     *
+     * @param array $collections
+     */
+    public function __construct(array $collections = [])
+    {
+        $this->collections = $collections;
+    }
+
+    /**
      * Loads a collection by name if registered
      *
      * @param string $name
@@ -61,23 +71,17 @@ class Collections
      */
     public function get(string $name, array $data = [])
     {
-        // if not yet loaded
+        if (isset($this->cache[$name]) === true) {
+            return $this->cache[$name];
+        }
+
         if (isset($this->collections[$name]) === false) {
-            $this->collections[$name] = $this->load($name);
+            return null;
         }
 
-        // if not yet cached
-        if (isset($this->cache[$name]) === false) {
-            $controller = new Controller($this->collections[$name]);
-            $this->cache[$name] = $controller->call(null, $data);
-        }
+        $controller = new Controller($this->collections[$name]);
 
-        // return cloned object
-        if (is_object($this->cache[$name]) === true) {
-            return clone $this->cache[$name];
-        }
-
-        return $this->cache[$name];
+        return $this->cache[$name] = $controller->call(null, $data);
     }
 
     /**
@@ -88,47 +92,30 @@ class Collections
      */
     public function has(string $name): bool
     {
-        if (isset($this->collections[$name]) === true) {
-            return true;
-        }
-
-        try {
-            $this->load($name);
-            return true;
-        } catch (NotFoundException $e) {
-            return false;
-        }
+        return isset($this->collections[$name]) === true;
     }
 
     /**
-     * Loads collection from php file in a
-     * given directory or from plugin extension.
+     * Loads collections from php files in a
+     * given directory.
      *
-     * @param  string $name
-     * @return mixed
+     * @param  string $root
+     * @return self
      */
-    public function load(string $name)
+    public static function load(App $app): self
     {
-        $kirby = App::instance();
+        $collections = $app->extensions('collections');
+        $root        = $app->root('collections');
 
-        // first check for collection file
-        $file = $kirby->root('collections') . '/' . $name . '.php';
-
-        if (file_exists($file)) {
+        foreach (glob($root . '/*.php') as $file) {
             $collection = require $file;
 
             if (is_a($collection, 'Closure')) {
-                return $collection;
+                $name = pathinfo($file, PATHINFO_FILENAME);
+                $collections[$name] = $collection;
             }
         }
 
-        // fallback to collections from plugins
-        $collections = $kirby->extensions('collections');
-
-        if (isset($collections[$name]) === true) {
-            return $collections[$name];
-        }
-
-        throw new NotFoundException('The collection cannot be found');
+        return new static($collections);
     }
 }
