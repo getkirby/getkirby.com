@@ -40,6 +40,7 @@ return function ($site) {
 		->template('cover');
 };
 ```
+
 ## How to use collections
 
 Collections can be used in templates and snippets like this:
@@ -50,6 +51,23 @@ $kirby->collection("admins");
 $kirby->collection("project-covers");
 ```
 
+### Nested collections
+
+<since v="3.1.0">
+If you have a lot of collections, it might come handy to organize them in subfolders. Kirby can handle this:
+
+```php "/site/collections/articles/latest.php"
+return function ($site) {
+	return $site->find('blog')->children()->listed()->flip();
+};
+```
+
+```php
+$kirby->collection("articles/latest");
+```
+</since>
+
 ## Best practices
 
-It's always a good idea to provide a collection that is not too specific yet. In general, it's better not to apply pagination to collections for example, or to set a limit. You might want to use the same set of pages in different places, but in one template you need three and in the next you need 10.
+- It's always a good idea to provide a collection that is not too specific yet.
+- In general, it's better not to apply pagination to collections for example, or to set a limit. You might want to use the same set of pages in different places, but in one template you need three and in the next you need 10.
