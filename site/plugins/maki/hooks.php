@@ -34,16 +34,9 @@ return [
         // SINCE
         function (string $text = null, array $data = []) {
 
-            return preg_replace_callback('!<since v="([0-9.]+)"\>(.*?)</since>!siU', function($match) use ($data) {
-
-                if (version_compare(Kirby::version(), $match[1], '<')) {
-                    $class = 'upcoming-feature';
-                } else {
-                    $class = '';
-                }
-
-                $block  = '<div class="' . $class . '">';
-                $block .= '<p class="version-badge">' . version($match[1], '%s +') . '</p>';
+            return preg_replace_callback('!<since v="([0-9.]+)">(.*)</since>!siU', function($match) use ($data) {
+                $block  = '<div class="since-version">';
+                $block .= '<span class="version-badge">Since <code>' . version($match[1], '%s') . '</code></span>';
                 $block .= $this->kirbytext($match[2], $data);
                 $block .= '</div>';
 

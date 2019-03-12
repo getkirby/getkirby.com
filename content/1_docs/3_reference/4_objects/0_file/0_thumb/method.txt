@@ -2,7 +2,7 @@ Guide: templates/resize-images-on-the-fly
 
 ----
 
-Text: 
+Text:
 
 ## Options
 
@@ -17,31 +17,11 @@ $options = [
   'height'     => null,
   'quality'    => 90,
   'width'      => null,
-];    
+];
 ```
 
-## Presets
+You can define presets of options in your `config.php`. (link: docs/guide/templates/resize-images-on-the-fly#presets text: Learn more ›)
 
-You can define option presets for thumbs in your `config.php`:
-
-```php "/site/config/config.php"
-return [
-    'thumbs' => [
-        'presets' => [
-            'default' => ['width' => 1024, 'quality' => 80],
-            'blurred' => ['blur' => true]
-        ]
-    ]
-];  
-```
-
-Then you can use them e.g. in your templates:
-
-```php
-$file->thumb(); // for default preset
-$file->thumb('blurred');
-```
-        
 ## Example
 
 ```php
