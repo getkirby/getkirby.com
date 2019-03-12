@@ -110,7 +110,7 @@ return [
             'blurred' => ['blur' => true]
         ]
     ]
-];  
+];
 ```
 
 Then you can use them e.g. in your templates:
@@ -118,4 +118,12 @@ Then you can use them e.g. in your templates:
 ```php
 $file->thumb(); // for default preset
 $file->thumb('blurred');
+```
+
+## Responsive images
+
+You can use Kirby's [`$image->srcset()`](docs/reference/objects/file/srcset) method to easily create the `srcset` attribute for responsive images. (link: docs/reference/objects/file/srcset text: Learn more ›)
+
+```php
+<img srcset="<?= $image->srcset([300, 800, 1024]) ?>">
 ```
