@@ -1,0 +1,39 @@
+Text:
+
+## Example
+
+```php
+<img
+src="<?= $image->url() ?>"
+srcset="<?= $image->srcset([300, 800, 1024]) ?>" />
+```
+
+### Modify width definition
+
+```php
+$image->srcset([
+  800  => '1x',
+  1600 => '1.5x'
+]);
+```
+
+## Define presets
+
+```php "site/config/config.php"
+return [
+  'thumbs' => [
+    'srcsets' => [
+			'default' => [300, 800, 1024],
+			'cover' => [800, 1024, 2048]
+		]
+  ]
+];
+```
+
+```php
+// default preset
+$image->srcset();
+
+// particular preset
+$image->srcset('cover');
+```
