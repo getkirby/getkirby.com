@@ -2,7 +2,7 @@ Title: Introduction
 
 ----
 
-Intro: Kirby's REST API is used by the Panel to connect between the (glossary: vue) frontend and the PHP backend. It offers full access to your site, pages, files, users and more. You can use it for your own SPA or mobile applications built on top of Kirby.
+Intro: Kirby's REST API is used by the (glossary: Panel) to connect between the (glossary: vue) frontend and the PHP backend. It offers full access to your site, pages, files, users and more. You can use it for your own SPA or mobile applications built on top of Kirby.
 
 ----
 

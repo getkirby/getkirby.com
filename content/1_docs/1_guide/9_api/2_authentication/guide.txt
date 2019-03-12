@@ -2,22 +2,31 @@ Title: Authentication
 
 ----
 
+Intro: How to get access to Kirby's REST API
+
+----
+
 Text:
 
+## Permissions
+
+Kirby's REST API is based on its users permissions. This helps increase the security by blocking operations for unauthorized users. You can read more about specific user permissions in the (link: docs/guide/users/permissions text: Users permissions docs ›)
 
 ## Session-based Authentication
 
-The Panel uses session-based authentication, which is not really typical for REST APIs, but works best in combination with frontend authentication and is also the most secure way when you don't have control over the backend environment and you cannot work with trusted private keys.
+The (glossary: Panel) uses session-based authentication, which is not really typical for REST APIs, but works best in combination with frontend authentication and is also the most secure way when you don't have control over the backend environment and you cannot work with trusted private keys.
 
 We use sessions purely for authentication to keep communication with the API stateless.
 
-Session-based authentication requires CSRF token validation. The CSRF token has to be sent in the `X-CSRF` header for every request. A token can be generated with the `csrf()` helper on the backend.
+Session-based authentication requires CSRF token validation. The CSRF token has to be sent in the `X-CSRF` header for every request. A token can be generated with the [`csrf()`](docs/reference/templates/helpers/csrf) helper on the backend.
 
-Sessions also require a correct session cookie for every request to work correctly. Therefore, session-based authentication works best when you make API calls from the frontend of the same site/domain.
+Sessions also require a correct session cookie for every request. Therefore, session-based authentication works best when you make API calls from the frontend of the same site/domain.
 
 ### Example
 
-Here's a JavaScript example using the new fetch API. This setup assumes that it is running on the same server as the API and that you have access to our `csrf()` helper. It could be in a Kirby template for example. This is ideal when you want to build a single page application on top of Kirby or if you need to fetch parts of your site dynamically via JavaScript. This could be combined easily with a React or (glossary: vue) based application.
+Here is a small JavaScript example using the fetch API. This setup assumes that it is running on the same server as the API and that you have access to our `csrf()` helper (e.g. in a template).
+
+This is ideal when you want to build a single page application on top of Kirby or if you need to fetch parts of your site dynamically via JavaScript. It could be combined with a React or (glossary: Vue) based application.
 
 ```php
 <html>
@@ -62,11 +71,12 @@ return [
 ];
 ```
 
+When Basic auth is activated, you must send an `Authorization` header with every request.
+
 <info>
-Basic auth is only available over HTTPS to avoid that the credentials are sent over the wire unencrypted with every request. This restriction can be disabled via (link: docs/reference/system/options/api#allow-insecure-requests text: an option).
+Basic auth is **only available over HTTPS** to avoid that the credentials are sent over the wire unencrypted with every request. This restriction can be disabled via (link: docs/reference/system/options/api#allow-insecure-requests text: an option).
 </info>
 
-When Basic auth is activated, you must send an `Authorization` header with every request.
 
 ### Example
 
@@ -83,8 +93,4 @@ $response = Remote::get('https://yoursite.com/api/pages/example', [
 
 $page = json_decode($response->content())->data;
 ```
-
-## Available Endpoints
-
-(reference: api/auth)
 

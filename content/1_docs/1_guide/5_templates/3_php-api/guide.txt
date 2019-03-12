@@ -34,26 +34,6 @@ The `$kirby` class is the heart and soul of Kirby. It's the access point for reg
 
 ## Permissions
 
-Some parts of Kirby's PHP API only work if you are logged in (or authenticated in other ways), because they respect the permissions of the currently logged in user. E.g. users cannot update a page via `$page->update()`, unless they are logged in and have adequate permissions. This helps increase the security of your code by blocking operations for unauthorized users. You can read more about available user permissions in the (link: docs/guide/users/permissions text: Users permissions docs ›)
+Some parts of Kirby's PHP API only work if you are logged in (or authenticated in other ways), because they respect the permissions of the currently logged in user. E.g. users cannot update a page via `$page->update()`, unless they are logged in and have adequate permissions. This helps increase the security of your code by blocking operations for unauthorized users.
 
-### Authentication
-
-Users can log in through the (glossary: Panel) login page or any custom login form. To learn more about how to log in a user programmatically, read the reference for (link: docs/reference/objects/user/login text: $user->login()).
-
-### Impersonate
-
-One way to go without authentication is to (link: docs/reference/objects/kirby/impersonate text: impersonate) any user or the special `kirby` super user, which has full permissions:
-
-```php
-<?php
-
-$kirby = kirby();
-$kirby->impersonate('kirby');
-
-page('notes/a-great-article')->update([
-  'author'  => 'Homer Simpson'
-]);
-```
-
-The impersonation will only last for the current request.
-
+You can read more about available user permissions as well as how to authenticate or impersonate in the (link: docs/guide/users/permissions text: Users permissions docs ›)

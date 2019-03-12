@@ -2,17 +2,15 @@ Title: Permissions
 
 ----
 
-Intro: User permissions help you to restrict access and capabilities for specific user roles – both in the (glossary: Panel) as well as when using (link: docs/guide/templates/php-api#permissions text: Kirby's PHP API).
+Intro: User permissions help you to restrict access and capabilities for specific user roles – in the (glossary: Panel) as well as when using Kirby's (link: docs/guide/templates/php-api text: PHP API) or (link: docs/guide/api/authentication text: REST API).
 
 ----
 
 Text:
 
-
-
 ## Defining permissions
 
-Permissions in Kirby 3 are defined in two optional steps:
+Permissions in Kirby are defined in two optional steps:
 
 1. In a user blueprints for each role
 2. In the page, file or the site blueprints for more explicit rules
@@ -23,6 +21,8 @@ Each role can get its own blueprint with custom fields for users with that role 
 
 Permissions can only be added for custom roles. The admin role does not obey those settings and can always do anything.
 
+An overview on all available permissions:
+
 ```yaml "/site/blueprints/users/editor.yml"
 title: Editor
 permissions:
@@ -30,7 +30,12 @@ permissions:
     panel: true
     site: true
     settings: false
-  users: false  
+  files:
+    create: true
+    changeName: true
+    delete: true
+    replace: true
+    update: false
   site:
     update: false
   pages:
@@ -52,13 +57,9 @@ permissions:
     changeRole: false
     delete: false
     update: false
-  files:
-    create: true
-    changeName: true
-    delete: true
-    replace: true
-    update: false
+  users: false
 ```
+
 You don't have to set all of those permissions for each role though. Each permission is set to true by default, if not specified otherwise. You can also enable or disable entire sections by passing `true` or `false` instead of an array of definitions for each action. A more simple permission setup for an editor could be something like this:
 
 ```yaml "/site/blueprints/users/editor.yml"
@@ -75,7 +76,7 @@ permissions:
 
 This would prevent the editor from editing other users, from changing their own role, from deleting pages and from updating the site settings.
 
-## The * wildcard
+## The `*` wildcard
 
 For parts with many actions that get the same setting, you can use the * wildcard as first argument. Afterwards you can still override specific actions, for example to whitelist actions:
 
@@ -87,7 +88,7 @@ user:
 
 ## Visitors
 
-Frontend users can also be managed through the Panel, but you most likely don't want them to be able to access the Panel at all. In order to achieve this, set Panel access to false.
+Frontend users can also be managed through the Panel, but you most likely don't want them to be able to access the Panel at all. In order to achieve this, set Panel access to `false`.
 
 ```yaml
 title: Visitor
@@ -96,7 +97,7 @@ permissions:
     panel: false
 ```
 
-If you use any of Kirby's PHP APIs in the frontend to modify pages, files, the site or users, you should set the permissions like above to control what a visitor can do in your frontend. You can also have multiple frontend user roles without access to the Panel but with different access to the PHP APIs. Our REST API follows the same rules.
+If you use any of Kirby's (link: docs/guide/templates/php-api text: PHP APIs) in the frontend to modify pages, files, the site or users, you should set the permissions like above to control what a visitor can do in your frontend. You can also have multiple frontend user roles without access to the Panel but with different access to the PHP APIs. Our (link: docs/guide/api/authentication text: REST API) follows the same rules.
 
 ## Getting more specific
 
@@ -132,3 +133,28 @@ return [
 ```
 
 Of course this can get way more complex and sophisticated than that, but it's a good first start.
+
+## Authenticate or impersonate
+
+To obtain the required permissions for certain actions, you can  authenticate as a user via logging in. If you want to run some actions programmatically without logging in, there is also the option to impersonate.
+
+### Authentication
+
+Users can log in through the (glossary: Panel) login page or any custom login form. To learn more about how to log in a user programmatically, read the reference for (link: docs/reference/objects/user/login text: $user->login()).
+
+### Impersonate
+
+One way to go without authentication is to (link: docs/reference/objects/kirby/impersonate text: impersonate) any user or the special `kirby` super user, which has full permissions:
+
+```php
+<?php
+
+$kirby = kirby();
+$kirby->impersonate('kirby');
+
+page('notes/a-great-article')->update([
+  'author'  => 'Homer Simpson'
+]);
+```
+
+The impersonation will only last for the current request.
