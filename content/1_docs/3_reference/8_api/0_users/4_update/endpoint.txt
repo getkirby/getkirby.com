@@ -6,6 +6,6 @@ Excerpt: Update a user
 ----
 Text:
 
-## Post parameters
+## Patch parameters
 
 (docs: api/user-content-data)

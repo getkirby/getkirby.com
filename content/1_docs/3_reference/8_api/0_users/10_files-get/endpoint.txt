@@ -6,6 +6,6 @@ Excerpt: Retrieve a file
 ----
 Text:
 
-## Query Parameters
+## Query parameters
 
 (docs: api/file-parameters)
