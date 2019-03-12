@@ -60,7 +60,13 @@ permissions:
   users: false
 ```
 
-You don't have to set all of those permissions for each role though. Each permission is set to true by default, if not specified otherwise. You can also enable or disable entire sections by passing `true` or `false` instead of an array of definitions for each action. A more simple permission setup for an editor could be something like this:
+<info>
+The difference between `users` and `user` permissions is that the later only applies to the user itself, while the former grants these permissions over all users.
+</info>
+
+You don't have to set all of those permissions for each role though. Each permission is set to `true` by default, if not specified otherwise.
+
+You can also enable or disable entire sections by passing `true` or `false` instead of an array of definitions for each action. A more simple permission setup for an editor could be something like this:
 
 ```yaml "/site/blueprints/users/editor.yml"
 title: Editor
