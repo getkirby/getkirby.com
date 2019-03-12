@@ -13,6 +13,6 @@ Text:
 
 ## File fields
 
-The following fields are available in file models and can be fetched with the `select` parameter in most file API requests.
+The following fields are available in the file model and can be fetched with the `select` parameter:
 
 (api-fields: file)

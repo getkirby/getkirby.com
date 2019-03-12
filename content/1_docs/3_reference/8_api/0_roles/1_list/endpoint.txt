@@ -10,6 +10,12 @@ Text:
 
 (docs: api/roles-parameters)
 
+## Role fields
+
+The following fields are available in the role model and can be fetched with the `select` parameter:
+
+(api-fields: role)
+
 ----
 Response:
 
