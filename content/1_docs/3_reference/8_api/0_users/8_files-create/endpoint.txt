@@ -4,6 +4,8 @@ Info: POST
 ----
 Excerpt: Upload a new file
 ----
+Auth: files.create
+----
 
 Text:
 

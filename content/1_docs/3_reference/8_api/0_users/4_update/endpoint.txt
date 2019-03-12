@@ -4,6 +4,8 @@ Info: PATCH
 ----
 Excerpt: Update a user
 ----
+Auth: users.update
+----
 Text:
 
 ## Patch parameters

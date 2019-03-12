@@ -4,6 +4,8 @@ Info: PATCH
 ----
 Excerpt: Sort files
 ----
+Auth: files.update
+----
 
 Text:
 

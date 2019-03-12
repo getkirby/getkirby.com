@@ -2,4 +2,6 @@ Title: /pages/:id/files/:filename
 ----
 Info: DELETE
 ----
+Auth: files.delete
+----
 Excerpt: Delete a file

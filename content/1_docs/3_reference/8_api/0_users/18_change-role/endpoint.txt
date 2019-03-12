@@ -4,6 +4,8 @@ Info: PATCH
 ----
 Excerpt: Change the role
 ----
+Auth: users.changeRole
+----
 Text:
 
 ## Patch parameters

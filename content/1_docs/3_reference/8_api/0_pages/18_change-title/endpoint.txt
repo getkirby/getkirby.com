@@ -4,6 +4,8 @@ Info: PATCH
 ----
 Excerpt: Change the page title
 ----
+Auth: pages.changeTitle
+----
 Text:
 
 ## Patch parameters

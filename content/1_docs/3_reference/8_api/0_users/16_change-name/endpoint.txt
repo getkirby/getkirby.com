@@ -4,6 +4,8 @@ Info: PATCH
 ----
 Excerpt: Change the name
 ----
+Auth: users.changeName
+----
 Text:
 
 ## Patch parameters
