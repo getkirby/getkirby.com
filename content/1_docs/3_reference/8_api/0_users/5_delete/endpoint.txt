@@ -2,4 +2,6 @@ Title: /users/:id
 ----
 Info: DELETE
 ----
+Auth: users.delete
+----
 Excerpt: Delete a user

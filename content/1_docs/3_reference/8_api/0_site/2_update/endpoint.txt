@@ -4,6 +4,8 @@ Info: PATCH
 ----
 Excerpt: Update the site content
 ----
+Auth: site.update
+----
 Text:
 
 ## Patch parameters

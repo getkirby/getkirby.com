@@ -4,6 +4,8 @@ Info: PATCH
 ----
 Excerpt: Change the page status
 ----
+Auth: pages.changeStatus
+----
 Text:
 
 ## Patch parameters

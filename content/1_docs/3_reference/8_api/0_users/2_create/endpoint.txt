@@ -4,6 +4,8 @@ Info: POST
 ----
 Excerpt: Create a user
 ----
+Auth: users.create
+----
 Text:
 
 ## Post parameters

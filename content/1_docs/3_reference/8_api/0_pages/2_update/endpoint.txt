@@ -4,6 +4,8 @@ Info: PATCH
 ----
 Excerpt: Update page content
 ----
+Auth: pages.update
+----
 Text:
 
 ## Patch parameters

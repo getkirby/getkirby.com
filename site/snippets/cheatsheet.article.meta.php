@@ -6,7 +6,7 @@
   <?php endif ?>
   <?php if ($page->auth()->isNotEmpty()): ?>
   <li>
-    <?php icon('lock') ?> <code data-tooltip="<strong>Permission <code><?= $page->auth() ?></code></strong><br>is required to run this method.<br> <strong><a href='<?= url('docs/guide/users/permissions') ?>'>Learn more ›</a></strong>">
+    <?php icon('lock') ?> <code data-tooltip="<a href='<?= url('docs/guide/users/permissions') ?>'><strong>Permission <code><?= $page->auth() ?></code></strong><br>is required. Learn more ›</a>">
       <?= $page->auth() ?>
     </code>
   </li>

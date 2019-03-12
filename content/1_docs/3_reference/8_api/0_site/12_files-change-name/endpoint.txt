@@ -4,6 +4,8 @@ Info: PATCH
 ----
 Excerpt: Rename a file
 ----
+Auth: files.changeName
+----
 Text:
 
 ## Patch parameters

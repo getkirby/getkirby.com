@@ -4,6 +4,8 @@ Info: PATCH
 ----
 Excerpt: Change the email
 ----
+Auth: users.changeEmail
+----
 Text:
 
 ## Patch parameters

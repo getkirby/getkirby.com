@@ -4,6 +4,8 @@ Info: DELETE
 ----
 Excerpt: Delete a page
 ----
+Auth: pages.delete
+----
 Text:
 
 ## Delete parameters

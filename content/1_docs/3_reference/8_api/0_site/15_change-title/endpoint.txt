@@ -4,6 +4,8 @@ Info: PATCH
 ----
 Excerpt: Change the site title
 ----
+Auth: site.changeTitle
+----
 Text:
 
 ## Patch parameters

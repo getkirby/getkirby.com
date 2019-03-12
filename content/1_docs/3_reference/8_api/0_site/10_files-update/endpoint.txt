@@ -4,6 +4,8 @@ Info: PATCH
 ----
 Excerpt: Update file content
 ----
+Auth: files.update
+----
 Text:
 
 ## Patch parameters
