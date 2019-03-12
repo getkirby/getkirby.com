@@ -1,7 +1,7 @@
 <ul class="cheatsheet-article-meta">
   <?php if ($page->since()->isNotEmpty()): ?>
   <li>
-    <?= version($page->since(), 'Since <code>%s</code>') ?>
+    Since <code><?= version($page->since(), '%s') ?></code>
   </li>
   <?php endif ?>
   <?php if ($page->auth()->isNotEmpty()): ?>
