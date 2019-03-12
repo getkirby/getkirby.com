@@ -16,6 +16,8 @@
         <?= $page->excerpt()->kt() ?>
       </div>
       <?php endif ?>
+
+      <?php snippet('cheatsheet.article.meta') ?>
     </header>
 
     <div class="-mb:large">

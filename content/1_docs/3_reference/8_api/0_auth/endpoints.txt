@@ -1,1 +1,5 @@
-title: Authentication
+Title: Authentication
+
+----
+
+Guide: api/authentication

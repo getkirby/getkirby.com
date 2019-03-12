@@ -8,6 +8,17 @@ use Kirby\Cms\Page;
 class EndpointPage extends Page
 {
 
+    public function guide()
+    {
+        if (parent::guide()->isEmpty()) {
+            if ($this->parent()->guide()->isNotEmpty()) {
+                return $this->parent()->guide();
+            }
+        }
+
+        return parent::guide();
+    }
+
     public function request()
     {
         return $this->info() . ': ' . $this->title();

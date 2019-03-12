@@ -10,6 +10,12 @@ Text:
 
 (docs: api/role-parameters)
 
+## User fields
+
+The following fields are available in user models and can be fetched with the `select` parameter in most user API requests.
+
+(api-fields: user)
+
 ----
 Response:
 
