@@ -1,26 +1,4 @@
-Title: pages($data = [])
-
-----
-
-Excerpt: Helper to build page collections
-
-----
-
-Params: -
-  name: $data
-  type: array
-  text: Array of page URIs or page objects
-
-----
-
-Return:
-
-type: $pages
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

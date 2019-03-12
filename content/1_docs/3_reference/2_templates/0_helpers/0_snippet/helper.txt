@@ -1,34 +1,4 @@
-Title: snippet($file, $data = [], $return = false)
-
-----
-
-Excerpt: Embeds a snippet from the snippet folder
-
-----
-
-Params: -
-  name: $file
-  type: string
-  text: Filename from the snippets directory
--
-  name: $data
-  type: array or object
-  text: Data to pass to the snippet as variables
--
-  name: $return
-  type: boolean
-  text: Whether to return the result or to output directly
-
-----
-
-Return:
-
-type: string
-text: String value when $return is set to true, otherwise no return value
-
-----
-
-Text:
+Text: 
 
 ## Example
 

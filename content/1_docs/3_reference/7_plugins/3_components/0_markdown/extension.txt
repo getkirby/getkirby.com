@@ -7,7 +7,7 @@ Text:
 ```php "/site/plugins/markdown-parser/index.php"
 Kirby::plugin('my/markdown', [
 	'components' => [
-		'markdown' => function (Kirby $kirby, string $text = null, array $options = []) {
+		'markdown' => function (Kirby $kirby, string $text = null, array $options = [], bool $inline = false) {
 			return YourMarkdownParser::parse($text);
 		}
 	]

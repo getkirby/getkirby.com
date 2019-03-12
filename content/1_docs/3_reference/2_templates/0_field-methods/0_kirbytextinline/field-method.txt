@@ -1,0 +1,7 @@
+Text:
+
+## Example
+
+```php
+<?= $page->subtitle()->kirbytextinline() ?>
+```
