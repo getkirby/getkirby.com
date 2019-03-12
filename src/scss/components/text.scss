@@ -32,7 +32,9 @@
 }
 
 .text p > a,
-.text li > a {
+.text li > a,
+.text p > strong > a,
+.text li > strong > a {
   text-decoration: underline;
 }
 
