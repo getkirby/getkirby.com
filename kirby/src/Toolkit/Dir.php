@@ -3,19 +3,9 @@
 namespace Kirby\Toolkit;
 
 use Exception;
-use Throwable;
 
 /**
- * The `Dir` class provides methods
- * for dealing with directories on the
- * file system level, like creating,
- * listing, moving, copying or
- * evaluating directories etc.
- *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      http://getkirby.com
- * @copyright Bastian Allgeier
+ * Low level directory handling utilities
  */
 class Dir
 {
@@ -184,11 +174,7 @@ class Dir
             throw new Exception(sprintf('The directory "%s" does not exist and cannot be linked', $source));
         }
 
-        try {
-            return symlink($source, $link) === true;
-        } catch (Throwable $e) {
-            return false;
-        }
+        return symlink($source, $link);
     }
 
     /**

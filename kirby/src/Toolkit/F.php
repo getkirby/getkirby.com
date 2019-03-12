@@ -3,20 +3,12 @@
 namespace Kirby\Toolkit;
 
 use Exception;
-use Kirby\Http\Header;
 use Throwable;
+use Kirby\Http\Header;
 use ZipArchive;
 
 /**
- * The `F` class provides methods for
- * dealing with files on the file system
- * level, like creating, reading,
- * deleting, copying or validatings files.
- *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      http://getkirby.com
- * @copyright Bastian Allgeier
+ * Low level file handling utilities
  */
 class F
 {
@@ -332,11 +324,7 @@ class F
             throw new Exception(sprintf('The file "%s" does not exist and cannot be linked', $source));
         }
 
-        try {
-            return $method($source, $link) === true;
-        } catch (Throwable $e) {
-            return false;
-        }
+        return $method($source, $link);
     }
 
     /**

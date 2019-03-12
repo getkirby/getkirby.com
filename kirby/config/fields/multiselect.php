@@ -22,8 +22,7 @@ return [
             return $search;
         },
         /**
-         * If true, selected entries will be sorted
-         * according to their position in the dropdown
+         * If true, entries will be sorted alphabetically on selection
          */
         'sort' => function (bool $sort = false) {
             return $sort;

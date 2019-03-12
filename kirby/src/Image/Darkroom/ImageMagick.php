@@ -75,13 +75,7 @@ class ImageMagick extends Darkroom
         // remove all null values and join the parts
         $command = implode(' ', array_filter($command));
 
-        // try to execute the command
-        exec($command, $output, $return);
-
-        // log broken commands
-        if ($return !== 0) {
-            error_log('The imagemagick convert command could not be executed: ' . $command);
-        }
+        exec($command);
 
         return $options;
     }

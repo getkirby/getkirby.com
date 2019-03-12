@@ -88,7 +88,6 @@ abstract class ModelWithContent extends Model
     /**
      * Returns the absolute path to the content file
      *
-     * @internal
      * @param string|null $languageCode
      * @param bool $force
      * @return string
@@ -124,7 +123,6 @@ abstract class ModelWithContent extends Model
      * Prepares the content that should be written
      * to the text file
      *
-     * @internal
      * @param array $data
      * @param string $languageCode
      * @return array
@@ -139,7 +137,6 @@ abstract class ModelWithContent extends Model
      * folder in which the content file is
      * located
      *
-     * @internal
      * @return string|null
      */
     public function contentFileDirectory(): ?string
@@ -150,7 +147,6 @@ abstract class ModelWithContent extends Model
     /**
      * Returns the extension of the content file
      *
-     * @internal
      * @return string
      */
     public function contentFileExtension(): string
@@ -161,7 +157,6 @@ abstract class ModelWithContent extends Model
     /**
      * Needs to be declared by the final model
      *
-     * @internal
      * @return string
      */
     abstract public function contentFileName(): string;
@@ -223,7 +218,7 @@ abstract class ModelWithContent extends Model
     }
 
     /**
-     * Checks if the data has any errors
+     * Checks if the model data has any errors
      *
      * @return boolean
      */
@@ -235,7 +230,6 @@ abstract class ModelWithContent extends Model
     /**
      * Read the content from the content file
      *
-     * @internal
      * @param string|null $languageCode
      * @return array
      */
@@ -258,7 +252,6 @@ abstract class ModelWithContent extends Model
     /**
      * Stores the content on disk
      *
-     * @internal
      * @param string $languageCode
      * @param array $data
      * @param bool $overwrite
@@ -435,7 +428,6 @@ abstract class ModelWithContent extends Model
      * Low level data writer method
      * to store the given data on disk or anywhere else
      *
-     * @internal
      * @param array $data
      * @param string $languageCode
      * @return boolean

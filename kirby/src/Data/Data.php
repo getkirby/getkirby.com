@@ -6,20 +6,20 @@ use Exception;
 use Kirby\Toolkit\F;
 
 /**
- * The `Data` class provides readers and
- * writers for data. The class comes with
- * three handlers for `json`, `yaml` and
- * `txt` encoded data, but can be extended
- * and customized.
+ * Universal Data writer and reader class.
  *
  * The read and write methods automatically
  * detect, which data handler to use in order
  * to correctly encode and decode passed data.
  *
+ * Data Handlers for the class can be
+ * extended and customized.
+ *
  * @package   Kirby
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      http://getkirby.com
- * @copyright Bastian Allgeier
+ * @copyright 2012 Bastian Allgeier
+ * @license   MIT
  */
 class Data
 {
