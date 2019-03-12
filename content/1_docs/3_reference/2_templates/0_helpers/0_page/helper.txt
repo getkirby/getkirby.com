@@ -1,26 +1,4 @@
-Title: page($uri = null)
-
-----
-
-Excerpt: Fetches any page by URI or the current page when no URI is specified
-
-----
-
-Params: - 
-  name: $uri
-  type: string
-  text:
-
-----
-
-Return:
-
-type: $page
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 

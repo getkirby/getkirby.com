@@ -1,7 +1,4 @@
-Title: Param
-
-----
-Text:
+Text: 
 
 ## Examples
 

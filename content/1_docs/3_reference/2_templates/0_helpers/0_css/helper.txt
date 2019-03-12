@@ -1,20 +1,4 @@
-Excerpt: Creates one or multiple CSS link tags
-
-----
-
-Params:
--
-  name: $path
-  type: string
-  text: Relative or absolute URL
--
-  name: $media
-  type: string|array
-  text: CSS media value or an array of attributes
-
-----
-
-Text:
+Text: 
 
 ## Example
 

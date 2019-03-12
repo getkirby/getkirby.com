@@ -1,0 +1,12 @@
+Text:
+
+## Alias
+
+`kti()`
+
+## Example
+
+```php
+<?= kirbytextinline($page->subtitle()) ?>
+<?= kti($page->subtitle()) ?>
+```

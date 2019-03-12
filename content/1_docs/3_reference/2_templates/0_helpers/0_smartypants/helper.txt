@@ -1,26 +1,4 @@
-Title: smartypants($text)
-
-----
-
-Excerpt: Applies the SmartyPants Typographer on an HTML string
-
-----
-
-Params: - 
-  name: $text
-  type: string
-  text:
-
-----
-
-Return:
-
-type: string
-text:
-
-----
-
-Text:
+Text: 
 
 ## Example
 
