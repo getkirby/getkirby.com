@@ -76,4 +76,45 @@ fields:
       - email
 ```
 
+## File upload and select
+
+<since v="3.1.0">
+
+(screenshot: file-selector.png)
+
+You can configure the file upload and select button via the `files` and `uploads` options:
+
+```yaml
+textarea:
+  type: textarea
+  files: page.images
+  uploads: textarea-upload
+```
+
+The upload template is optional, but is useful if you want to add additional upload validations and check for a type of file or dimensions.
+
+With this, files from the current page are displayed for selection and uploads are saved to the current page. With specifying a `query` in the `files` option and a `parent` in the `uploads` option, you can pull files from other places as well as save them to another page, e.g. a central media storage page:
+
+```yaml
+textarea:
+  type: textarea
+  files:
+    query: site.find("media").files.template("textarea-upload")
+    image:
+      cover: true
+  uploads:
+    parent: site.find("media")
+    template: textarea-upload
+```
+
+You can also deactivate file uploads:
+
+```yaml
+textarea:
+  type: textarea
+  uploads: false
+```
+
+</since>
+
 (docs: panel-field-max-and-min field: textarea)
