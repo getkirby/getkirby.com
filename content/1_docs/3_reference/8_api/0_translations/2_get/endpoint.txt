@@ -10,6 +10,12 @@ Text:
 
 (docs: api/translation-parameters)
 
+## Translation fields
+
+The following fields are available in the translation model and can be fetched with the `select` parameter:
+
+(api-fields: translation)
+
 ----
 Example: /api/translations/de
 ----
