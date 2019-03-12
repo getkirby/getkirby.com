@@ -82,7 +82,9 @@ fields:
 
 (screenshot: file-selector.png)
 
-You can configure the file upload and select button via the `files` and `uploads` options:
+The file upload and select button is super useful if you want to embed images or other files right in your text.
+
+You can define the button behavior with the `files` and `uploads` options:
 
 ```yaml
 textarea:
@@ -91,9 +93,7 @@ textarea:
   uploads: textarea-upload
 ```
 
-The upload template is optional, but is useful if you want to add additional upload validations and check for a type of file or dimensions.
-
-With this, files from the current page are displayed for selection and uploads are saved to the current page. With specifying a `query` in the `files` option and a `parent` in the `uploads` option, you can pull files from other places as well as save them to another page, e.g. a central media storage page:
+By default all files will be uploaded to the current page and without a predefined template. With the additional options you can fetch files from anywhere and upload them to specific pages. You can also control which file template should be assigned by default:
 
 ```yaml
 textarea:
