@@ -10,4 +10,4 @@ Text:
 
 | Parameter | Type | Required | Description |
 | - | - | - | - |
-| license | string | true | The license key |
+| `license` | `string` | `required` | The license key |
