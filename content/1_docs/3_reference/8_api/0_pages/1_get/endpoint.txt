@@ -12,7 +12,7 @@ Text:
 
 ## Page fields
 
-The following fields are available in page models and can be fetched with the `select` parameter in most page API requests.
+The following fields are available in the page model and can be fetched with the `select` parameter:
 
 (api-fields: page)
 
