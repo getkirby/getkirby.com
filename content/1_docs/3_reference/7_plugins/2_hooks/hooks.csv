@@ -13,6 +13,8 @@ file.update:before,File,,"$file,$input",checked
 file.update:after,File,panel.file.update,"$newFile,$oldFile",checked
 kirbytags:before,Kirby,,"$text,$data,$options",checked
 kirbytags:after,Kirby,,"$text,$data,$options",checked
+kirbytext:before,Kirby,,"$text",checked
+kirbytext:after,Kirby,,"$text",checked
 page.changeNum:before,Page,,"$page,$num",checked
 page.changeNum:after,Page,,"$newPage,$oldPage",checked
 page.changeSlug:before,Page,,"$page,$slug",checked
