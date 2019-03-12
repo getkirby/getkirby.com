@@ -8,6 +8,10 @@ Creates a hidden field
 
 ----
 
+Guide: blueprints/fields
+
+----
+
 Text:
 
 The hidden field makes it possible to keep fields in content files without actually making them editable or even visible in Panel forms.

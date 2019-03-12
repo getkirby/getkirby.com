@@ -6,6 +6,10 @@ Excerpt: A URL input field with validation
 
 ----
 
+Guide: blueprints/fields
+
+----
+
 Text:
 
 The url field is a standard text field with the type `url` and a custom URL icon. It comes with built-in validation for URLs.
