@@ -1,0 +1,25 @@
+.since-version {
+  position: relative;
+  padding-top: 2rem;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    border-left: 3px solid $color-syntax-yellow;
+    content: "";
+  }
+}
+
+.version-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: .8rem;
+
+  code {
+    background: $color-syntax-yellow;
+  }
+}
+

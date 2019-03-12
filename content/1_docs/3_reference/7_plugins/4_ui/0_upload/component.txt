@@ -54,11 +54,37 @@ Opens the uploader with the given parameters. If no additional parameters are pa
 
 ### @success
 
-Fired when all files have been uploaded successfully
+Fired when all files have been uploaded successfully.
+
+<since v="3.1.0">
+The API response is returned as second argument in the `@success` event:
+
+```html
+<template>
+	<k-upload @success="onSuccess" />
+</template>
+
+<script>
+export default {
+	methods: {
+		onSuccess (uploads, response) {
+			// i.e.
+			response[0].type;
+			response[0].filename;
+			response[0].niceSize;
+			// etc.
+		}
+	}
+}
+</script>
+```
+
+
+</since>
 
 ### @error
 
-Fired when something went wrong
+Fired when something went wrong.
 
 ```html
 <template>
