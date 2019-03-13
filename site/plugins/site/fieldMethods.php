@@ -2,14 +2,14 @@
 
 return [
 
-    'anchorHeadlines' => function ($field, $headlines = 'h2') {
+    'anchorHeadlines' => function ($field, $headlines = 'h2|h3') {
 
         $headlinesPattern = is_array($headlines) ? implode('|', $headlines) : $headlines;
 
         // add anchors to headlines
         $field->value = preg_replace_callback('!<(' . $headlinesPattern . ')>(.*?)</\\1>!s', function ($match) {
             $id = Str::slug(Str::unhtml($match[2]));
-            return '<h2 id="' . $id . '"><a href="#' . $id . '">' . $match[2] . '</a></h2>';
+            return '<' . $match[1] . ' id="' . $id . '"><a href="#' . $id . '">' . $match[2] . '</a></' . $match[1] . '>';
         }, $field->value);
 
         return $field;
