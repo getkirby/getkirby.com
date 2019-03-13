@@ -2,7 +2,7 @@ Title: Introduction
 
 ----
 
-Intro: Kirby's REST API is used by the (glossary: Panel) to connect between the (glossary: vue) frontend and the PHP backend. It offers full access to your site, pages, files, users and more. You can use it for your own SPA or mobile applications built on top of Kirby.
+Intro: Kirby's REST API is used by the (glossary: Panel) to connect between the (glossary: Vue) frontend and the PHP backend. It offers full access to your site, pages, files, users and more. You can use it for your SPA or mobile applications built on top of Kirby.
 
 ----
 
@@ -13,7 +13,7 @@ Text:
 Every API request requires authentication. We offer session-based authentication or HTTP Basic auth. (link: docs/guide/api/authentication text: Read more…)
 
 ## Language
-In a (link: docs/guide/languages/introduction text: multi-language site) it is necessary to specify the language for which you want to use the API. This is done by sending along a `X-Language` header containing the desired language code with your request.
+In a (link: docs/guide/languages/introduction text: multi-language site) it is necessary to specify the language for which you want to use the API. This is done by sending an `X-Language` header containing the desired language code with your request.
 
 ## Errors
 
@@ -55,7 +55,7 @@ Make sure to disable debug mode in production. The additional information about 
 
 ## Custom API location
 
-Kirby can be configured to host the API at a different location. This can be setup in your config.
+Kirby can be configured to host the API at a different location. This can be set up in your config.
 
 ```php "/site/config/config.php"
 return [
@@ -69,7 +69,7 @@ All API endpoints are now available at `https://yourdomain.com/rest`. The Panel 
 
 ## Custom API routes
 
-If you want to provide your own API endpoints and make use of our authentication and other API features, you can define your own API routes in your config or plugins.
+If you want to provide your own API endpoints and make use of our authentication and other API features, you can define your own API routes in your config or in a plugin.
 
 ```php "/site/config/config.php"
 return [
