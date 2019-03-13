@@ -2,13 +2,22 @@
 
 return [
 
-    'anchorHeadlines' => function ($field, $headlines = 'h2') {
+    'anchorHeadlines' => function ($field, $headlines = 'h2|h3') {
 
         $headlinesPattern = is_array($headlines) ? implode('|', $headlines) : $headlines;
 
+        $lastH2 = null;
+
         // add anchors to headlines
-        $field->value = preg_replace_callback('!<(' . $headlinesPattern . ')>(.*?)</\\1>!s', function ($match) {
+        $field->value = preg_replace_callback('!<(' . $headlinesPattern . ')>(.*?)</\\1>!s', function ($match) use (&$lastH2) {
             $id = Str::slug(Str::unhtml($match[2]));
+
+            if ($match[1] === 'h3') {
+                $id = $lastH2 . '__' . $id;
+            } else {
+                $lastH2 = $id;
+            }
+
             return '<' . $match[1] . ' id="' . $id . '"><a href="#' . $id . '">' . $match[2] . '</a></' . $match[1] . '>';
         }, $field->value);
 

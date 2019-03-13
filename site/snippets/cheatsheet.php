@@ -2,7 +2,7 @@
   <?php foreach ($methods as $method): ?>
   <article class="cheatsheet-grid-item">
     <a href="<?= $method->url() ?>">
-      <h3><?= $method->title() ?></h3>
+      <h4><?= $method->title() ?></h4>
       <?= $method->excerpt()->kt() ?>
     </a>
   </article>

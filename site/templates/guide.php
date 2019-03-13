@@ -29,7 +29,7 @@
           <?php snippet('toc', $page->text()->headlines('h2')) ?>
 
           <div class="text">
-            <?= $page->text()->kt()->anchorHeadlines('h2') ?>
+            <?= $page->text()->kt()->anchorHeadlines() ?>
           </div>
 
           <?php snippet('github.edit') ?>
