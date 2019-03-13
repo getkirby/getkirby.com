@@ -72,7 +72,7 @@ The `user` permission only applies to the user itself, while the `users` permiss
 
 You don't have to set all permissions for each role. Each permission is set to `true` by default, if not specified otherwise.
 
-You can also enable or disable entire sections by passing `true` or `false` instead of an array of definitions for each action. A more simple permission setup for an editor could look like this:
+You can also enable or disable entire permission sections by passing `true` or `false` instead of an array of definitions for each action. A more simple permission setup for an editor, who should not be allowed to edit other users, could look like this:
 
 ```yaml "/site/blueprints/users/editor.yml"
 title: Editor
@@ -86,7 +86,7 @@ permissions:
     changeRole: false
 ```
 
-This would prevent the editor from editing other users, from changing their own role, from deleting pages and from updating the site settings.
+This would prevent the editor from editing other users (`users: false`), from changing their own role, from deleting pages and from updating the site settings.
 
 ## The `*` wildcard
 
