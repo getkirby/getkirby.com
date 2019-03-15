@@ -40,7 +40,7 @@ Our `contact.php` template contains the form and will display error messages if 
                 <div><?= $alert['error'] ?></div>
             <?php endif ?>
         <form method="post" action="<?= $page->url() ?>">
-            <div class="honeypot" style="display:none">
+            <div class="honeypot">
                 <label for="website">Website <abbr title="required">*</abbr></label>
                 <input type="website" id="website" name="website">
             </div>  
@@ -69,6 +69,15 @@ Our `contact.php` template contains the form and will display error messages if 
 ```
 
 The form is displayed by default and hidden once the email was successfully sent. Nothing really special here. We have included a honeypot field to ensure a minimum level of spam bot protection.
+
+The honeypot field needs to be positioned off the screen, so we need some styles for it. Add this in your stylesheet (you can also change the class and styling, of course).
+
+```css
+.honeypot {
+    position: absolute;
+    left: -9999px;
+}
+```
 
 ## The contact form controller
 
