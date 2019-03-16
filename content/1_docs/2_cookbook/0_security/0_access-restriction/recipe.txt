@@ -111,7 +111,7 @@ In the login template, create the login form and a container for the error messa
 <div class="alert"><?= $page->alert()->html() ?></div>
 <?php endif ?>
 
-<form method="post" action"<?= $page->url() ?>">
+<form method="post" action="<?= $page->url() ?>">
   <div>
     <label for="username"><?= $page->username()->html() ?></label>
     <input type="text" id="username" name="username" required>
