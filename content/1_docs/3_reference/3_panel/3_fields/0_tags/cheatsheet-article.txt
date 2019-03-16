@@ -23,6 +23,8 @@ fields:
     type: tags
 ```
 
+## Blueprint
+
 (field-options: tags)
 
 ## How to use in templates/snippets

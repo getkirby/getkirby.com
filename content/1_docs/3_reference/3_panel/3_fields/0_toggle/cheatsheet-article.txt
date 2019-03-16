@@ -22,6 +22,8 @@ fields:
     text: Include in menu?
 ```
 
+## Blueprint
+
 (field-options: toggle)
 
 ## Simple toogle field translated

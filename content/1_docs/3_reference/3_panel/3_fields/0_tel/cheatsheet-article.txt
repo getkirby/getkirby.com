@@ -23,5 +23,6 @@ fields:
     type: tel
 ```
 
+## Blueprint
 
 (field-options: tel)

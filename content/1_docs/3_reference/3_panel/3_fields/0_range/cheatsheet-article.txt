@@ -26,6 +26,8 @@ fields:
       before: $
 ```
 
+## Blueprint
+
 (field-options: range)
 
 ## `before` & `after` values

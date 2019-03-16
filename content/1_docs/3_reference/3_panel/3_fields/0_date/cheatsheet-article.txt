@@ -23,6 +23,8 @@ fields:
     type: date
 ```
 
+## Blueprint
+
 (field-options: date)
 
 ## How to use in templates/snippets

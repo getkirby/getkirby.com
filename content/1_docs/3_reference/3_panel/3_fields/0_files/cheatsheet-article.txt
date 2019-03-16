@@ -23,6 +23,8 @@ fields:
     type: files
 ```
 
+## Blueprint
+
 (field-options: files)
 
 ### Limits for the number of files

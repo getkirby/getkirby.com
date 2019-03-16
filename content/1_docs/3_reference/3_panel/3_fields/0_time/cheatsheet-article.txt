@@ -21,6 +21,8 @@ fields:
     type: time
 ```
 
+## Blueprint
+
 (field-options: time)
 
 ## Notation

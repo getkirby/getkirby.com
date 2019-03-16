@@ -23,4 +23,6 @@ fields:
     type: email
 ```
 
+## Blueprint
+
 (field-options: email)

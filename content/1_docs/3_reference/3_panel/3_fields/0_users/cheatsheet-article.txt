@@ -23,6 +23,8 @@ fields:
     type: users
 ```
 
+## Blueprint
+
 (field-options: users)
 
 ## Default values

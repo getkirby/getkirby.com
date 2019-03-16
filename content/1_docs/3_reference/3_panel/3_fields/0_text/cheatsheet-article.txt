@@ -23,6 +23,7 @@ fields:
     type: text
 ```
 
+## Blueprint
 
 (field-options: text)
 

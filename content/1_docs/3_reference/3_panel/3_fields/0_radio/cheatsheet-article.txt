@@ -27,6 +27,8 @@ fields:
       web: Web
 ```
 
+## Blueprint
+
 (field-options: radio)
 
 ## Default value

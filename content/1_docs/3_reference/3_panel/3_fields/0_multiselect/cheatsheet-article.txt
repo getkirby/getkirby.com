@@ -31,6 +31,8 @@ fields:
       web: Web
 ```
 
+## Blueprint
+
 (field-options: multiselect)
 
 ## How to use in templates/snippets

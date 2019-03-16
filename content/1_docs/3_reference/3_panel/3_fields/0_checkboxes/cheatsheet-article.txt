@@ -29,6 +29,8 @@ fields:
       web: Web
 ```
 
+## Blueprint
+
 (field-options: checkboxes)
 
 ## How to use in templates/snippets

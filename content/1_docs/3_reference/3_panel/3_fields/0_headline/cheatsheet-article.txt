@@ -35,6 +35,8 @@ fields:
     type: textarea
 ```
 
+## Blueprint
+
 (field-options: headline)
 
 ## Hiding the headline numbers

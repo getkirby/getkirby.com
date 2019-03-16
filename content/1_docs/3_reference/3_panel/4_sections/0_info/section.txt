@@ -32,7 +32,7 @@ sections:
 
 The info section behaves pretty much like the (link: docs/reference/panel/fields/info text: info field). Why do we have both of them? Because both are useful. The info field can be placed in a field grid and is perfect to offer help within a form. The info section can be placed anywhere else, especially in layouts that don't need form fields.
 
-## Options
+## Blueprint
 
 (section-options: info)
 
