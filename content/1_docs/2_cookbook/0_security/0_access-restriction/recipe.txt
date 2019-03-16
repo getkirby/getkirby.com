@@ -150,7 +150,7 @@ return function ($kirby) {
 
     // fetch the user by username and run the
     // login method with the password
-    if ($user = $kirby->user(get('username')) && $user->login(get('password'))) {
+    if (($user = $kirby->user(get('username'))) && $user->login(get('password'))) {
       // redirect to the homepage
       // if the login was successful
       go('/');
