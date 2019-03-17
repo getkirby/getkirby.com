@@ -109,7 +109,7 @@ fields:
 				width: 1/2
 			price:
 				width: 1/4
-				algin: right
+				align: right
 				after: "USD"
 		fields:
 			title:
