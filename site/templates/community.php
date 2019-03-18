@@ -37,7 +37,9 @@
                 </figure>
 
                 <header>
-                  <h3 class="h6 -mb:small -color:white"><?= $item->title() ?></h3>
+                  <h3 class="h6 -mb:tiny -color:white"><?= $item->title() ?></h3>
+                  <p class="-mb:small"><?= $item->authors()->h() ?></p>
+
                   <div class="text">
                     <?= $item->text()->kt() ?>
                   </div>

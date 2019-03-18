@@ -1,0 +1,13 @@
+Title: XML Sitemap
+
+----
+
+Text: Generates a sitemap for telling search engines about, what pages to index. Can be configured to include/exclude certain pages and much more.
+
+----
+
+Link: https://github.com/omz13/kirby3-xmlsitemap
+
+----
+
+Authors: David Somers

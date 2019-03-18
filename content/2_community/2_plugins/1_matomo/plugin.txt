@@ -9,3 +9,7 @@ Displays most important metrics of the extensive open-source tracking solution M
 ----
 
 Link: https://github.com/sylvainjule/kirby-matomo
+
+----
+
+Authors: Sylvain Julé

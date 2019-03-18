@@ -1,0 +1,15 @@
+Title: Image Annotator
+
+----
+
+Text:
+
+Add interactive areas to mark people, cooking ingredients, technical details or any other interesting parts of an image.
+
+----
+
+Link: https://github.com/sylvainjule/kirby-annotator
+
+----
+
+Authors: Sylvain Julé

@@ -9,3 +9,7 @@ Create modular layouts made of predefined blocks for complex layouts. Blocks can
 ----
 
 Link: https://github.com/TimOetting/kirby-builder
+
+----
+
+Authors: Tim Ötting

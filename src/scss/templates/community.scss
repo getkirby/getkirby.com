@@ -48,6 +48,18 @@
   }
 }
 
+.community-plugins article > a {
+  display: block;
+}
+
+.community-plugins article h3 + p {
+  flex-grow: 0;
+  font-weight: 400;
+  font-size: .75rem;
+  font-family: $font-mono;
+  color: rgba($color-syntax-white, .7);
+}
+
 /* -----  Themes  ----------------------------------------------------- */
 
 .community-themes > div {

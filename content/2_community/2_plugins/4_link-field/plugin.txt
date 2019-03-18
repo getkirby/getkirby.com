@@ -9,3 +9,7 @@ A panel field for conveniently entering internal links to other pages, email add
 ----
 
 Link: https://github.com/medienbaecker/kirby-link-field
+
+----
+
+Authors: Thomas Günther

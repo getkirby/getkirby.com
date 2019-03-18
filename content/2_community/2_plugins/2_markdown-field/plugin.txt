@@ -9,3 +9,7 @@ A highly customizable text editor with syntax highlighting for both Markdown and
 ----
 
 Link: https://github.com/sylvainjule/kirby-markdown-field
+
+----
+
+Authors: Sylvain Julé & Fabian Michael

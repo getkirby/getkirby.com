@@ -9,3 +9,7 @@ Advanced redirection based on rules, supporting wildcards and HTTP status codes.
 ----
 
 Link: https://github.com/distantnative/retour-for-kirby
+
+----
+
+Authors: Nico Hoffmann
