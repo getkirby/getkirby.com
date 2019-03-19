@@ -18,7 +18,7 @@ function cheatsheetAdvanced($page)
     if (param('advanced') !== 'true') {
         return Html::a($page->url() . '/advanced:true',  'Advanced view ›');
     }
-    
+
     return Html::a($page->url(),  'Simple view ›');
 }
 
@@ -104,9 +104,10 @@ function referenceLookup(string $class)
 
 function parseObjectReference(string $string, string $parent): string
 {
-    return kirbytext(preg_replace_callback("|\`(.*)\`|", function ($matches) use ($parent) {        
+    return kirbytext(preg_replace_callback("|\`(.*)\`|", function ($matches) use ($parent) {
         $matches[1] = Str::trim($matches[1], '()');
         $namespace = Str::split($matches[1], '\\');
+
 
         if (count($namespace) === 1) {
             $class    = Str::split($parent, '\\');
@@ -119,7 +120,7 @@ function parseObjectReference(string $string, string $parent): string
         }
 
         if ($obj = referenceLookup($class)) {
-            if ($method = $obj->find($method)) {
+            if ($method = $obj->find(Str::kebab($method))) {
                 return Html::a($method->url(), $matches[0]);
             }
         }

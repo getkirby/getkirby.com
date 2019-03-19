@@ -2,9 +2,14 @@
   <aside class="warning">
     <?php icon('warning') ?>
     <strong>
-      Deprecated in <code><?= version($deprecated[0], '%s') ?></code>
+      Deprecated
+      <?php if (count($deprecated) > 1) : ?>
+      in <code><?= version($deprecated[0], '%s') ?></code>
+      <?php endif ?>
     </strong>
-    <?php if (isset($deprecated[1]) === true) : ?>
+    <?php if (count($deprecated) === 1) : ?>
+    <?= parseObjectReference($deprecated[0], $page->className()) ?>
+    <?php elseif (isset($deprecated[1]) === true) : ?>
     <?= parseObjectReference($deprecated[1], $page->className()) ?>
     <?php endif ?>
   </aside>
