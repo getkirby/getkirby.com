@@ -3,7 +3,7 @@
 return [
     
     'forCheatsheet' => function () {
-        if (param('advanced') === 'true') {
+        if (get('advanced') === 'true') {
             return $this->listed();
         }
         

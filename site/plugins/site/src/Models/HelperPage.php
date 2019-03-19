@@ -97,13 +97,13 @@ class HelperPage extends Page
         if ($reflection = $this->reflection()) {
             $parameters = array_column($this->parameters(), 'export');
             $parameters = empty($parameters) ? '' : implode(', ', $parameters);
-            
+
             $call = $this->methodName() . '(' . $parameters . ')';
-            
+
             if ($return = $this->returnType()) {
                 $call .= ': ' . $return;
             }
-            
+
             return $call;
         }
 
@@ -244,29 +244,26 @@ class HelperPage extends Page
     {
         return parent::title()->value($this->methodName() . '()');
     }
-    
+
     protected function typeDefinition($type = null)
     {
         $classes = array_map(function ($class) {
             if ($reference = referenceLookup($class)) {
                 return Html::a($reference->url(), $class);
             }
-            
+
             return $class;
         }, explode('|', $type));
-        
+
         return implode('|', $classes);
     }
-    
-    public function url($options = null): string
+
+    public function cheatsheetUrl($options = null): string
     {
-        if (
-            param('advanced') === 'true' && 
-            ($this->isDeprecated() || $this->isInternal())
-        ) {
-            $param = '/advanced:true';
+        if (get('advanced') && ($this->isDeprecated() || $this->isInternal())) {
+            $options['query'] = 'advanced=true';
         }
-        return parent::url($options) . ($param ?? null);
+        return $this->url($options);
     }
 
 }
