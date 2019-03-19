@@ -259,7 +259,7 @@ $color-warning-background: mix($color-yellow, $color-background, 12%);
 
 .text .info,
 .text .warning {
-  border-left: 0.1875rem solid; // 3px
+  border-left: 4px solid;
   border-radius: $border-radius;
   margin-bottom: 1.5em;
   padding: 1rem 1rem 1rem 2.5rem;

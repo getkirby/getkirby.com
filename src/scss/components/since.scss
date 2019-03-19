@@ -1,25 +1,21 @@
 .since-version {
   position: relative;
-  padding-top: 2rem;
-
-  &::after {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    border-left: 3px solid $color-syntax-yellow;
-    content: "";
-  }
+  padding-left: 1.5rem;
+  border-left: 4px solid $color-background;
+  transition: border-left .3s;
 }
 
 .version-badge {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: .8rem;
+  display: flex;
+  font-size: .75rem;
+  margin-bottom: 1.5rem;
+  align-items: baseline;
 
-  code {
+  & > code {
     background: $color-syntax-yellow;
+    margin-left: .5rem;
+    padding: .125rem .5rem;
+    line-height: 1rem;
   }
 }
 
