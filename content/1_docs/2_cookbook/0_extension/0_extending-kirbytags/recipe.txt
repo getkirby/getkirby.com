@@ -1,0 +1,108 @@
+Title: Quicktip: Reusing KirbyTag parts in custom tags
+
+----
+
+Description: Learn how to extend existing KirbyTags in your custom tags without having to copy all the code
+
+----
+
+Text:
+
+Sometimes, you may want to extend an existing KirbyTag in a custom KirbyTag, for example, to add attributes or to modify the HTML output.
+
+To prevent having to copy the complete code, you can reuse parts of the original tag. With…
+
+```php
+Kirby\Text\KirbyTag::$types['image']
+````
+
+…you get access to the original `image` KirbyTag.
+
+With…
+
+```php
+Kirby\Text\KirbyTag::$types['image']['attr'], 
+```
+
+…you have access to the original attributes.
+
+And with…
+
+```php
+Kirby\Text\KirbyTag::$types['image']['html'], 
+```
+
+…to the original HTML.
+
+Using the following code we can thus extend the attributes array and add for example a custom `size` attribute. Additionally, we put a wrapper around the original HTML.
+
+```php "/site/plugins/custom-tags/index.php"
+<?php
+
+Kirby::plugin('your/plugin', [
+    'tags' => [
+        'custom-image' => [
+            'attr' => array_merge(
+                Kirby\Text\KirbyTag::$types['image']['attr'], 
+                [
+                    'size'
+                ]),
+            'html' => function($tag) {
+                
+                $image =  Kirby\Text\KirbyTag::$types['image']['html'];
+                $markup = $image($tag);
+                
+                $html = '<div class="imagewrapper">' . $markup . '</div>';
+                
+                return $html;
+            }
+        ]
+    ]
+]);
+```
+
+We can also replace parts of the original HTML using string replacement:
+
+```php "/site/plugins/custom-tags/index.php"
+<?php
+
+Kirby::plugin('your/plugin', [
+    'tags' => [
+        'imageset' => [
+            'attr' => array_merge(
+                Kirby\Text\KirbyTag::$types['image']['attr'], 
+                [
+                    'srcset'
+                ]),
+           
+            'html' => function($tag) {
+                
+                $file = $tag->file($tag->value());
+                $srcset = $tag->srcset ? explode(',', $tag->srcset): null;
+                $result = Kirby\Text\KirbyTag::$types['image']['html']($tag);
+
+                if (! $file === true || is_null($srcset) === true) {
+                    return $result;
+                }
+               
+                $pattern = '/<img.*>/i';
+
+                // build a new image tag with the srcset
+                $image = Html::img($tag->src, [
+                    'width'  => $tag->width,
+                    'height' => $tag->height,
+                    'class'  => $tag->imgclass,
+                    'title'  => $tag->title,
+                    'alt'    => $tag->alt ?? ' ',
+                    'srcset' => $file->srcset($srcset),
+                ]);
+
+                // replace the old image tag
+                $result = preg_replace($pattern, $image , $result);
+        
+                return $result;
+            }
+        ]
+    ]
+]);
+```
