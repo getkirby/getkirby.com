@@ -1,5 +1,9 @@
 Title: Features
 ----
+MenuTitle: Why Kirby?
+----
+Intro: Find out (link: v3 text: what's new in version 3)
+----
 Clients:
 
 - headline: Keep your costs at a minimum

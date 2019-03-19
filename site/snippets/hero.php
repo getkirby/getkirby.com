@@ -4,7 +4,7 @@
 
   <?php if ($page->intro()->isNotEmpty()): ?>
   <div class="intro | -theme:<?= $theme ?? 'white' ?>">
-    <?= $page->intro()->widont()->kt() ?>
+    <?= $page->intro()->kt()->widont() ?>
   </div>
   <?php endif ?>
 
