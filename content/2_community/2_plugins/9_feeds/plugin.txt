@@ -4,7 +4,7 @@ Title: Feeds
 
 Text:
 
-Provides feeds in the most popular formats (RSS, Atom & JSON), generated from a collection of e.g. blog articles or press releases for consumption in news readers.
+Provides feeds in the most popular formats (RSS, Atom & JSON), generated from a collection of e.g. blog articles or press releases.
 
 ----
 

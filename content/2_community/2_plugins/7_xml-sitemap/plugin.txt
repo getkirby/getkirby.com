@@ -2,7 +2,7 @@ Title: XML Sitemap
 
 ----
 
-Text: Generates a sitemap for telling search engines about, what pages to index. Can be configured to include/exclude certain pages and much more.
+Text: Generates a sitemap for search engines. Can be configured to include/exclude certain pages and more.
 
 ----
 
