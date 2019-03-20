@@ -34,7 +34,7 @@ Kirby\Text\KirbyTag::$types['image']['html'],
 
 …to the original HTML.
 
-Using the following code we can thus extend the attributes array and add for example a custom `size` attribute. Additionally, we put a wrapper around the original HTML.
+Using the following code we can thus reuse the attributes array and put a wrapper around the original HTML.
 
 ```php "/site/plugins/custom-tags/index.php"
 <?php
@@ -42,11 +42,8 @@ Using the following code we can thus extend the attributes array and add for exa
 Kirby::plugin('your/plugin', [
     'tags' => [
         'custom-image' => [
-            'attr' => array_merge(
-                Kirby\Text\KirbyTag::$types['image']['attr'], 
-                [
-                    'size'
-                ]),
+            'attr' => Kirby\Text\KirbyTag::$types['image']['attr'],
+            
             'html' => function($tag) {
                 
                 $image =  Kirby\Text\KirbyTag::$types['image']['html'];
@@ -61,7 +58,7 @@ Kirby::plugin('your/plugin', [
 ]);
 ```
 
-We can also replace parts of the original HTML using string replacement:
+We can also extend the attributes array by merging it with new attributes, and replace parts of the original HTML using string replacement:
 
 ```php "/site/plugins/custom-tags/index.php"
 <?php
