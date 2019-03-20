@@ -1,0 +1,10 @@
+Title: Thumb Presets Usage
+----
+Text:
+
+```php
+<img
+    src="<?= $image->thumb('banner') ?>"
+    alt="<?= $image->alt() ?>"
+    class="banner">
+```

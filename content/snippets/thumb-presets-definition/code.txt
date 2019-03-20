@@ -1,0 +1,26 @@
+Title: Thumb Presets Definition
+----
+Text:
+
+```php
+<?php
+
+return [
+    'thumbs' => [
+        'presets' => [
+            'default' => [
+                'width' => 1024,
+                'quality' => 80
+            ],
+            'banner' => [
+                'width' => 1024,
+                'height' => 342
+                'crop' => true
+            ],
+            'blurred' => [
+                'blur' => true
+            ]
+        ]
+    ]
+];
+```

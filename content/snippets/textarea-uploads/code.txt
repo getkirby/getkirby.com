@@ -1,0 +1,17 @@
+Title: Textarea Uploads
+----
+Text:
+
+```yaml
+fields:
+  text:
+    label: Text
+    type: textarea
+    files:
+      parent: site.find("assets").template("image")
+      image:
+        cover: true
+    uploads:
+      parent: site.find("assets")
+      template: image
+```
