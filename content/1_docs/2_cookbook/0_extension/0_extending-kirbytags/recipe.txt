@@ -2,7 +2,7 @@ Title: Quicktip: Reusing KirbyTag parts in custom tags
 
 ----
 
-Description: Learn how to extend existing KirbyTags in your custom tags without having to copy all the code
+Description: Learn how to extend existing (glossary: KirbyTag text: KirbyTags) in your custom tags without having to copy all the code
 
 ----
 
