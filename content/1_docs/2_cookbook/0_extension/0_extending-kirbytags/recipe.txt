@@ -2,13 +2,13 @@ Title: Quicktip: Reusing KirbyTag parts in custom tags
 
 ----
 
-Description: Learn how to extend existing (glossary: KirbyTag text: KirbyTags) in your custom tags without having to copy all the code
+Description: Learn how to extend existing KirbyTags in your custom tags without having to copy all the code
 
 ----
 
 Text:
 
-Sometimes, you may want to extend an existing KirbyTag in a custom KirbyTag, for example, to add attributes or to modify the HTML output.
+Sometimes, you may want to extend an existing (glossary: KirbyTag) in a custom KirbyTag, for example, to add attributes or to modify the HTML output.
 
 To prevent having to copy the complete code, you can reuse parts of the original tag. With…
 
