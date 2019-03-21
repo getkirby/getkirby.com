@@ -1,48 +1,58 @@
 @import "../includes";
 
 .k-icons {
+  height: 0;
   position: absolute;
   width: 0;
-  height: 0;
 }
+
 .cheatsheet-icons {
   margin-bottom: 3rem;
 }
+
 .cheatsheet-icons ul {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   grid-gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
 }
+
 .cheatsheet-icons li {
   background-image: none !important;
-  padding: 0 !important;
   height: 100%;
+  padding: 0 !important;
 }
+
 .cheatsheet-icons figure {
-  display: flex;
   align-items: center;
-  justify-content: center;
   background: $color-background;
+  display: flex;
   height: 12rem;
+  justify-content: center;
 }
+
 .cheatsheet-icon {
-  width: 1rem;
   height: 1rem;
+  width: 1rem;
 }
+
 .cheatsheet-icon[data-size="32"] {
-  width: 2rem;
   height: 2rem;
+  width: 2rem;
 }
+
 .cheatsheet-icon[data-size="64"] {
-  width: 4rem;
   height: 4rem;
+  width: 4rem;
 }
+
 .cheatsheet-icon * {
   fill: #000;
 }
+
 .cheatsheet-icons[data-color="white"] figure {
   background: #000;
 }
+
 .cheatsheet-icons[data-color="white"] svg * {
   fill: #fff;
 }

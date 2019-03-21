@@ -22,31 +22,31 @@
   text-align: left;
 }
 
-.tippy-popper[x-placement^='top'] .tippy-arrow,
-.tippy-popper[x-placement^='bottom'] .tippy-arrow {
+.tippy-popper[x-placement^="top"] .tippy-arrow,
+.tippy-popper[x-placement^="bottom"] .tippy-arrow {
   border-left-width: .375rem; // 6px
   border-right-width: .375rem; // 6px
 }
 
-.tippy-popper[x-placement^='top'] .tippy-arrow {
+.tippy-popper[x-placement^="top"] .tippy-arrow {
   border-top-color: $color-black;
   border-top-width: .375rem; // 6px
   bottom: -.375rem; // -6px
 }
 
-.tippy-popper[x-placement^='right'] .tippy-arrow {
+.tippy-popper[x-placement^="right"] .tippy-arrow {
   border-right-color: $color-black;
   border-right-width: .375rem; // 6px
   left: -.375rem; // -6px
 }
 
-.tippy-popper[x-placement^='bottom'] .tippy-arrow {
+.tippy-popper[x-placement^="bottom"] .tippy-arrow {
   border-bottom-color: $color-black;
   border-bottom-width: .375rem; // 6px
   top: -.375rem; // -6px
 }
 
-.tippy-popper[x-placement^='left'] .tippy-arrow {
+.tippy-popper[x-placement^="left"] .tippy-arrow {
   border-left-color: $color-black;
   border-left-width: .375rem; // 6px
   right: -.375rem; // -6px

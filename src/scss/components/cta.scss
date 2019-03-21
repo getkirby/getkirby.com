@@ -4,18 +4,14 @@
   border-radius: $border-radius;
   box-shadow: $shadow;
   display: inline-flex;
+  font-family: $font-mono;
   font-size: 1rem;
   font-weight: 500;
-  font-family: $font-mono;
   line-height: 1.25;
-  outline-offset: -5px;
   outline-color: $color-focus-outline-alt;
+  outline-offset: -5px;
   padding: .75rem 1rem;
   text-decoration: none;
-}
-
-.cta:hover {
-  background: $color-black;
 }
 
 /**

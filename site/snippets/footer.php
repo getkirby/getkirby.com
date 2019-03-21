@@ -64,7 +64,5 @@
       </div>
     </footer>
 
-    <?php snippet('debug') ?>
-
   </body>
 </html>

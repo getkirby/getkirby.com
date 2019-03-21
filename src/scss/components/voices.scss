@@ -12,9 +12,13 @@
   }
 }
 
+/**
+ * 1. Setting both properties to avoid browsers without
+ *    support for `break-inside` from ripping entries apart.
+ */
 .voices li {
-  display: inline-block;
-  break-inside: avoid;
+  break-inside: avoid; /* 1 */
+  display: inline-block; /* 1 */
   margin-bottom: 3rem;
 }
 
@@ -23,8 +27,8 @@
 .voice-source a {
   align-items: center;
   display: inline-flex;
-  outline-offset: .2rem;
   margin-bottom: .5rem;
+  outline-offset: .2rem;
 }
 
 .voice-source img {
@@ -35,18 +39,18 @@
 }
 
 .voice-author {
-  font-weight: 400;
-  font-size: .75rem;
-  font-family: $font-mono;
   color: rgba($color-anthracite, .8);
+  font-family: $font-mono;
+  font-size: .75rem;
+  font-weight: 400;
   margin: 0;
 }
 
 .voice-text {
+  background: $color-white;
   font-size: .875rem;
   line-height: 1.625;
   padding: .75rem;
-  background: $color-white;
 }
 
 .voice-text a {

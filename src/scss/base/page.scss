@@ -1,24 +1,15 @@
 /* -----  General Page Setup  ----------------------------------------------- */
 
 /**
- * IE10+ doesn't honor `<meta name="viewport">` in some cases.
- * Taken from https://github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
- */
-@-ms-viewport {
-  width: device-width;
-}
-
-
-/**
  * 1. Roboto renders too bold when subpixel-antialiasing is
  *    enabled, so disable it where possible.
  * 2. Prevent adjustments of font size after orientation changes
  *    in iOS.
  */
 html {
-  -webkit-text-size-adjust: 100%; /* 2 */
-  color: $color-black;
   background: url('../images/patterns/burgerman-white.jpg') 50% 0% repeat-x;
+  color: $color-black;
+  -webkit-text-size-adjust: 100%; /* 2 */
 }
 
 body {
@@ -41,7 +32,6 @@ body {
     width: 100%;
   }
 }
-
 
 body > * {
   flex-grow: 0;

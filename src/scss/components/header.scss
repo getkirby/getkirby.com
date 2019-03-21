@@ -1,9 +1,10 @@
 .header.background\:dark {
   color: #fff;
 }
+
 .header-layout {
-  position: relative;
+  align-items: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  position: relative;
 }

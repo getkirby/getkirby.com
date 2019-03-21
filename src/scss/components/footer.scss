@@ -1,14 +1,14 @@
 .footer {
-  font-size: .875rem;
   color: rgba($color-anthracite, .8);
+  font-size: .875rem;
 }
 
 .footer-layout {
-  padding-bottom: 12rem;
-  padding-top: 7.5rem;
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: 1fr;
+  padding-bottom: 12rem;
+  padding-top: 7.5rem;
 }
 
 .footer-layout > * {
@@ -27,10 +27,10 @@
 
 /* -----  Word Mark  -------------------------------------------------------- */
 .footer-wordmark .h1 {
-  height: 2rem;
-  display: block;
-  line-height: 2rem;
   color: $color-black;
+  display: block;
+  height: 2rem;
+  line-height: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -44,18 +44,18 @@
 
 /* -----  Footer Menu  ------------------------------------------------------ */
 .footer-menu .h5 {
-  display: flex;
   color: $color-black;
-  margin-bottom: 1rem;
+  display: flex;
   height: 2rem;
   line-height: 3.25rem;
+  margin-bottom: 1rem;
 }
 
 .footer-menu > ul {
   display: grid;
+  grid-gap: 1.5rem;
   grid-template-columns: 1fr 1fr;
   line-height: 2em;
-  grid-gap: 1.5rem;
 }
 
 @include mq(from s) {
@@ -75,20 +75,21 @@
  */
 
 .footer-partners svg {
-  width: 6rem;
-  height: auto;
   display: block;
+  height: auto;
+  width: 6rem;
 }
+
 .footer-partners svg * {
   fill: currentColor;
   transition: fill .3s;
 }
 
 .footer-partners a {
-  transition: opacity .2s;
   display: block;
-  padding: .5rem 0;
   margin-bottom: .25rem;
+  padding: .5rem 0;
+  transition: opacity .2s;
 }
 
 /* -----  Dark Them  ------------------------------------------------------ */
@@ -113,4 +114,3 @@
 .footer.-theme\:dark .footer-menu .h5 {
   color: $color-white;
 }
-

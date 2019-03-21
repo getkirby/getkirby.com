@@ -1,16 +1,18 @@
 .clients {
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 0;
+  padding: 0;
 }
+
 .clients li {
   align-self: center;
+  margin: .75rem;
   opacity: .5;
   text-align: center;
-  margin: .75rem;
 }
+
 .clients img {
   max-width: 10rem;
 }
@@ -18,13 +20,14 @@
 @supports (display: grid) {
   .clients {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     grid-gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
 
     @include mq(from m) {
       grid-template-columns: repeat(6, 1fr);
     }
   }
+
   .clients li {
     margin: 0;
   }

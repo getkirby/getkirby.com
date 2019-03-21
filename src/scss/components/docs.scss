@@ -1,8 +1,8 @@
 .docs-grid {
   display: flex;
   flex-wrap: wrap;
-  padding-top: 6rem;
   margin-left: -3rem;
+  padding-top: 6rem;
 }
 
 .docs-grid > * {
@@ -21,7 +21,7 @@
 }
 
 .docs-sidebar .h1 a {
- transition: color .3s;
+  transition: color .3s;
 }
 
 .docs-sidebar .h1 a:hover {
@@ -29,21 +29,21 @@
 }
 
 .docs-content {
-  order: 1;
-  min-width: 0;
   margin-bottom: 6rem;
+  min-width: 0;
+  order: 1;
 }
 
 @include mq(from m) {
   .docs-sidebar {
     order: 1;
-    width: 33.33%;
+    width: percentage(1 / 3);
   }
 
   .docs-content {
-    width: 66.66%;
-    order: 2;
     margin-bottom: 0;
+    order: 2;
+    width: percentage(2 / 3);
   }
 }
 

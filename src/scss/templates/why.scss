@@ -1,8 +1,8 @@
 @import "../includes";
 
 .grid {
-  columns: 1;
   column-gap: 3rem;
+  columns: 1;
 
   @include mq(from s) {
     columns: 2;
@@ -16,33 +16,38 @@
 
 .section h2 {
   position: relative;
-  & a {
-    display: block;
-    margin-bottom: 4.5rem;
-  }
 }
-.section h2 a:before {
-  position: absolute;
-  font-size: .75rem;
+
+.section h2 a {
+  display: block;
+  margin-bottom: 4.5rem;
+}
+
+.section h2 a::before {
   border-top: 4px solid $color-syntax-yellow;
-  padding-top: .45rem;
   bottom: -1.75rem;
-  font-weight: 400;
-  font-family: $font-mono;
   content: " ";
+  font-family: $font-mono;
+  font-size: .75rem;
+  font-weight: 400;
+  padding-top: .45rem;
+  position: absolute;
   width: 2rem;
 }
 
 #developers {
   color: $color-syntax-white;
 }
+
 #developers h2,
 #developers h3 {
   color: #fff;
 }
+
 #developers h2 {
   font-weight: 600;
 }
+
 #developers h3 {
   font-weight: 400;
 }

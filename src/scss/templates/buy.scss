@@ -5,32 +5,32 @@
 }
 
 .pricing section {
+  border: 2px solid $color-yellow;
+  margin: 0 auto 6rem;
+  max-width: 25rem;
   padding: 4.5rem 3rem;
   text-align: center;
-  max-width: 25rem;
-  margin: 0 auto 6rem;
-  border: 2px solid $color-yellow;
 }
-.pricing section .h1 del {
-  position: relative;
-  display: inline-block;
-  color: #999;
-  font-weight: 400;
-  font-size: .75em;
-  text-decoration: none;
-  margin-right: .25rem;
 
-  &:after {
+.pricing section .h1 del {
+  color: #999;
+  display: inline-block;
+  font-size: .75em;
+  font-weight: 400;
+  margin-right: .25rem;
+  position: relative;
+  text-decoration: none;
+
+  &::after {
+    background: #999;
     content: "";
-    position: absolute;
-    top: 50%;
-    margin-top: -1px;
     height: 2px;
     left: -.25rem;
+    margin-top: -1px;
+    position: absolute;
     right: -.25rem;
-    background: #999;
+    top: 50%;
   }
-
 }
 
 .sale {
@@ -38,22 +38,25 @@
 }
 
 .pricing section .h1 small {
-  font-size: 1.5rem;
   display: inline-block;
+  font-size: 1.5rem;
   font-weight: 700;
 }
+
 .pricing section p:not(:last-child) {
   margin-bottom: 1.5rem;
 }
+
 .pricing .vat {
   font-size: .75rem;
 }
+
 .pricing .cta {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
-  max-width: 12rem;
   margin: 0 auto;
+  max-width: 12rem;
 }
 
 .pricing .cta svg {
@@ -65,14 +68,15 @@
 }
 
 .pricing h2 small {
-  font-weight: 400;
   display: block;
+  font-weight: 400;
   letter-spacing: 0;
   padding-top: .25rem;
 }
 
 .addons {
   --columns: 1;
+
   display: grid;
   grid-gap: 3rem;
   grid-template-columns: repeat(var(--columns), 1fr);
@@ -96,18 +100,18 @@
 }
 
 .addons p a {
-  text-decoration: underline;
   color: $color-black;
+  text-decoration: underline;
 }
 
 .addons p strong {
-  font-weight: 500;
   color: $color-black;
+  font-weight: 500;
 }
 
 .faq {
-  columns: 1;
   column-gap: 3rem;
+  columns: 1;
 }
 
 @include mq(from m) {
