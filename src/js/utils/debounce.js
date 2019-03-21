@@ -2,7 +2,7 @@ export default function debounce(func, wait, scope) {
   'use strict';
 
   let timeout = null;
-  
+
   return function () {
     const context = scope || this;
     const args    = arguments; /* eslint-disable-line prefer-rest-params */

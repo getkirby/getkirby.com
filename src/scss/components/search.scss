@@ -7,7 +7,7 @@
 
 .menu-search-input {
   appearance: none;
-  background: transparent url(../images/icons/search.svg) no-repeat center right;
+  background: transparent url("../images/icons/search.svg") no-repeat center right;
   border: 0;
   color: $color-syntax-yellow;
   cursor: pointer;
@@ -94,7 +94,7 @@
 
 .menu-search.background\:dark {
   .menu-search-input {
-    background: transparent url(../images/icons/search-white.svg) no-repeat center right;
+    background: transparent url("../images/icons/search-white.svg") no-repeat center right;
   }
 
   .menu-search-input:focus {
