@@ -352,7 +352,7 @@ body {
   width: 1rem;
 }
 
-.cheatsheet-entries li a[aria-current]:after {
+.cheatsheet-entries li a[aria-current]::after {
   background: $color-syntax-yellow;
   bottom: 0;
   content: "";

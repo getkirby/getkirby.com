@@ -1,10 +1,7 @@
 @import "../includes";
 
 html {
-  background: #000 url('../../images/components/kosmos/galaxy.jpg');
-  background-position: top center;
-  background-size: 650px;
-  background-repeat: no-repeat;
+  background: #000 url("../../images/components/kosmos/galaxy.jpg") top center / 650px no-repeat;
 }
 
 .kosmos-form {

@@ -1,3 +1,5 @@
+/* stylelint-disable at-rule-empty-line-before */
+
 @mixin link-backplane($offset: 5px, $background: light) {
 
   $backplane-color: null;
@@ -6,13 +8,11 @@
   @if $background == light {
     $backplane-color:          $color-black;
     $backplane-hover-opacity:  .04;
-    // $backplane-active-opacity: .07;
   }
 
   @else if $background == dark {
     $backplane-color:          $color-white;
     $backplane-hover-opacity:  .12;
-    // $backplane-active-opacity: .18;
   }
 
   @else {
