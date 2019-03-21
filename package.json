@@ -6,7 +6,11 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "build": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "lint": "./node_modules/.bin/stylelint ./src/scss/**/*.scss && ./node_modules/.bin/eslint ./src/js/"
+    "lint": "./node_modules/.bin/stylelint ./src/scss/**/*.scss && ./node_modules/.bin/eslint ./src/js/",
+    "reference": "backstop reference",
+    "test": "backstop test",
+    "genConfig": "backstop genConfig",
+    "openReport": "backstop openReport"
   },
   "repository": {
     "type": "git",
@@ -21,6 +25,7 @@
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "backstopjs": "^3.8.8",
     "browser-sync": "^2.26.3",
     "browser-sync-webpack-plugin": "^2.0.1",
     "clean-webpack-plugin": "^0.1.19",
