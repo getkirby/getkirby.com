@@ -4,15 +4,15 @@ This repo contains the whole <getkirby.com> website.
 
 ## Requirements
 
-- Local development server running PHP 7.1+ (e.g. Apache, nginx, MAMP)
-- Node.js 8+ + NPM
+- Local development server running PHP 7.1+ (e.g. Apache, nginx, MAMP).
+- Node.js 10+ (LTS release) + NPM
 
 ## Installation and setup
 
 ### Step 1: Clone the repo into an empty folder:
 
 ```
-git clone git@github.com:bastianallgeier/v3.getkirby.com.git
+git clone git@github.com:getkirby/getkirby.com.git
 ```
 
 ### Step 2: Install Dependencies
@@ -44,6 +44,18 @@ This will run BrowserSync and watch your CSS, JS and template files for changes.
 Stop the server by pressing `CRTL+C` or by closing the CLI window.
 
 ## Build for production
+
+Before committing anything back to the repo, make sure to run a production build,
+as our server does not build assets by itself. It’s always a good idea to lint
+your code, before committing anything to the repo. You can do so, by running the
+dedicated lint task:
+
+```
+npm run lint
+```
+
+If the linters do not produce any errors, you can create a production build, as
+follows:
 
 ```
 npm run build
