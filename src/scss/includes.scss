@@ -1,9 +1,8 @@
 // Will be overridden from Webpack and can
 // either be 'development' or 'production'.
-$ENV: development !default; // sass-lint:disable-line variable-name-format
+$ENV: development !default;
 
 @import "variables";
-
 @import "tools/mq";
 @import "tools/functions";
 @import "tools/mixins";

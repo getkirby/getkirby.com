@@ -1,18 +1,18 @@
-//  
+/* stylelint-disable block-closing-brace-empty-line-before, at-rule-empty-line-before */
+
 //  mµ
-//  
+//
 //  A simple library for handling media queries
 //  and breakpoints across SASS/CSS and JavaScript.
-//  
+//
 //  @author Fabian Michael <hallo@fabianmichael.de>
 //  @license MIT
-//  
-
+//
 //  Define your breakpoints here. Must be either in px
 //  or em units. Breakpoints will be converted to em by
 //  the library for best consistency across different
 //  browsers.
-//  
+//
 //  Read [PX, EM or REM Media Queries?](https://zellwk.com/blog/media-query-units/)
 //  by Zell Liew for more information on units in media queries.
 $mq-breakpoints: (
@@ -33,39 +33,38 @@ $mq-print-pseudo-rules: true !default;
 // Debug settings
 $mq-debug: false !default;
 $mq-debug-z-index: 10000 !default;
-$mq-debug-selector: 'body::after' !default;
-
+$mq-debug-selector: "body::after" !default;
 
 //  Mixin for generating gte media queries
-// 
+//
 //  Usage:
-// 
+//
 //  @include mq(from md) {
 //    .nav {
 //      position: fixed;
 //    }
 //  }
-// 
+//
 //  or:
-// 
+//
 //  .nav {
 //    background: blue;
-//    
+//
 //    @include mq(from xs to sm) {
 //      background: red;
 //    }
 //  }
-// 
-// 
+//
+//
 //  Supported queries:
-// 
+//
 //  @include mq(md) { … }
 //  @include mq(from md) { … } // same as "mq(md)"
 //  @include mq(to md) { … }
 //  @include mq(from xs to md) { … }
-// 
+//
 //  With additional custom media queries:
-// 
+//
 //  @include mq(xs, '(orientation: landscape)') { … }
 //  @include mq(from xs to md, '(orientation: landscape)') { … }
 @mixin mq($query: false, $and: false) {
@@ -73,36 +72,39 @@ $mq-debug-selector: 'body::after' !default;
   // Initialize variables
   $min-width: 0;
   $max-width: 0;
-  $media-query: '';
+  $media-query: "";
 
   @if $query {
     // $query is not false
     @if type-of($query) == number {
       $min-width: $query;
     } @else if type-of($query) == list {
+
       @if length($query) == 4 and nth($query, 1) == from and nth($query, 3) == to {
         // from {breakpoint} to {breakpoint}
-        
+
         $min-width: mq-px2em(mq-retrieve-breakpoint-width(nth($query, 2)));
         $max-width: mq-px2em(mq-retrieve-breakpoint-width(nth($query, 4)) - 1px);
 
       } @else if length($query) == 2 {
         // one keyword + breakpoint
-        
+
         $keyword: nth($query, 1);
         $breakpoint: nth($query, 2);
-        
+
         @if $keyword == from {
           // from {breakpoint}
           $min-width: mq-px2em(mq-retrieve-breakpoint-width($breakpoint));
 
-        } @else if $keyword == to {
+        }
+
+        @else if $keyword == to {
           // to {breakpoint}
           $max-width: mq-px2em(mq-retrieve-breakpoint-width($breakpoint) - 1px);
 
         } @else if $keyword == only {
           // only {breakpoint}
-            
+
           $items-length: length($mq-breakpoints);
           $next-breakpoint: false;
 
@@ -126,7 +128,7 @@ $mq-debug-selector: 'body::after' !default;
           }
 
         } @else {
-          @error 'Invalid breakpoint query supplied to mq()';
+          @error "Invalid breakpoint query supplied to mq()";
         }
       }
     } @else {
@@ -138,18 +140,18 @@ $mq-debug-selector: 'body::after' !default;
   // Build Media Query
 
   @if $min-width != 0 {
-    $media-query: '(min-width: #{$min-width})';
+    $media-query: "(min-width: #{$min-width})";
   }
-  
+
   @if $max-width != 0 {
     @if $media-query != "" {
-      $media-query: '#{$media-query} and '; 
+      $media-query: "#{$media-query} and ";
     }
-    $media-query: '#{$media-query} (max-width: #{$max-width})';
+    $media-query: "#{$media-query} (max-width: #{$max-width})";
   }
 
   @if $and {
-    $media-query: '#{$media-query} and #{$and}';
+    $media-query: "#{$media-query} and #{$and}";
   }
 
   $media-query: unquote(#{$media-query});
@@ -164,33 +166,32 @@ $mq-debug-selector: 'body::after' !default;
   }
 }
 
-
 //  Converts a pixel value to it’s em equivalent, based on
 //  the browser’s assumed default font-size of 16px. As media
 //  queries ignore font-sizes set via CSS, this function does
 //  not an additional "base font size" to be set.
-//  
+//
 //  @return The em equivalent of given pixel value.
 @function mq-px2em($px) {
 
   @if type-of($px) != number {
-    @error 'mq-px2em() value must be a number.';
+    @error "mq-px2em() value must be a number.";
     @return 0;
   }
 
   @if (unitless($px)) {
-     @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you"; // sass-lint:disable-line no-warn
-     @return mq-px2em($px + 0px); // That may fail.
+    @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you";
+    /* stylelint-disable-next-line length-zero-no-unit */
+    @return mq-px2em($px + 0px); // That may fail.
   } @else if (unit($px) == em) {
-     @return $px;
+    @return $px;
   }
   @return ($px / 16px) * 1em;
 }
 
-
 // Retrieves the min-width of a breakpoint in px, assuming
 // a font-size of 16px.
-// 
+//
 // @return The min-width of a breakpoint in pixels
 @function mq-retrieve-breakpoint-width($name) {
   @each $breakpoint in $mq-breakpoints {
@@ -206,9 +207,8 @@ $mq-debug-selector: 'body::after' !default;
       @return $breakpoint-width;
     }
   }
-  @return 'Breakpoint #{$name} does not exist';
+  @return "Breakpoint #{$name} does not exist";
 }
-
 
 // Prints the pseudo-rule(s) needed by the JS counterpart
 // of mµ.
@@ -244,7 +244,7 @@ $mq-debug-selector: 'body::after' !default;
 @mixin mq-debug {
   // Print debug rules, if enabled
   #{unquote($mq-debug-selector)} {
-    background: rgba(0,0,0,0.75);
+    background: rgba(black, .75);
     bottom: 0;
     color: #fff;
     display: block;

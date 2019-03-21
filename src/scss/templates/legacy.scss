@@ -11,13 +11,14 @@ body {
 }
 
 /** Header **/
+
 .legacy-header {
-  position: relative;
-  height: 2.5rem;
-  display: flex;
   align-items: center;
   background: #000;
   color: #fff;
+  display: flex;
+  height: 2.5rem;
+  position: relative;
   z-index: 1000000;
 }
 
@@ -28,41 +29,45 @@ body {
 }
 
 .legacy-header h1 {
-  font-size: .875rem;
-  letter-spacing: 0;
-  font-weight: 500;
-  margin: 0;
-  line-height: 1;
   font-family: $font-mono;
+  font-size: .875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  margin: 0;
   padding: .75rem 1.5rem;
 }
 
 .legacy-header nav {
-  display: flex;
   align-items: center;
+  display: flex;
 }
+
 .legacy-header nav a {
   display: block;
-  padding: .75rem 1rem;
   line-height: 1;
+  padding: .75rem 1rem;
 }
+
 .legacy-header nav a:focus,
 .legacy-header nav a[aria-current] {
-  outline: 0;
   background: $color-syntax-yellow;
   color: #000;
+  outline: 0;
 }
 
 /** Frame **/
+
 .legacy-frame {
-  position: fixed;
-  top: 2.5rem;
-  right: 0;
   bottom: 0;
   left: 0;
+  position: fixed;
+  right: 0;
+  top: 2.5rem;
 }
+
 .legacy-frame iframe {
-  width: 100%;
-  height: 100%;
   border: 0;
+  height: 100%;
+  width: 100%;
 }

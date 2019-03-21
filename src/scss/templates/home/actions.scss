@@ -1,45 +1,49 @@
 @import "../includes";
 
 .home-actions {
-  display: flex;
   align-items: center;
-  justify-content: center;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 6rem 1.5rem 9rem;
 
   @include mq(from s) {
     flex-direction: row;
   }
 }
+
 .home-actions a {
+  align-items: center;
+  background: #000;
+  border-radius: 1px;
+  color: #fff;
+  display: flex;
+  font-family: $font-mono;
   font-size: .875rem;
   font-weight: 400;
-  font-family: $font-mono;
-  display: flex;
-  align-items: center;
-  padding: .5rem 1.5rem;
   margin: 0 1.5rem;
-  background: #000;
-  color: #fff;
-  border-radius: 1px;
+  padding: .5rem 1.5rem;
 
   @include mq(to s) {
-    width: 100%;
     margin-bottom: 1.5rem;
+    width: 100%;
   }
+}
 
-}
 .home-actions a svg {
-  width: 1rem;
   margin-right: .75rem;
+  width: 1rem;
 }
+
 .home-actions a svg * {
   fill: $color-syntax-yellow;
 }
+
 .home-actions a:hover {
   background: $color-syntax-yellow;
   color: #000;
 }
+
 .home-actions a:hover svg * {
   fill: $color-black;
 }

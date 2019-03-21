@@ -12,17 +12,19 @@
 
 @include mq(from m) {
   .text-page-sidebar {
-    width: 33.33%;
+    width: percentage(1 / 3);
   }
+
   .text-page-body {
-    width: 66.66%;
+    width: percentage(2 / 3);
   }
 }
 
 .text-page .toc {
-  padding: 0 1.5rem 0 0;
   background: none;
+  padding: 0 1.5rem 0 0;
 }
+
 .text-page .toc h2 {
   display: none;
 }

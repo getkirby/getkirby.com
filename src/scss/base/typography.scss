@@ -1,7 +1,7 @@
 /* -----  Global Text Styles  ----------------------------------------------- */
 
 html {
-  font: normal normal 400 1em/1.5 $font-sans; // sass-lint:disable-line space-around-operator
+  font: normal normal 400 1em/1.5 $font-sans;
   font-variant-ligatures: common-ligatures;
 }
 
@@ -24,7 +24,6 @@ hr, .hr {
  * all browsers.
  * Source: normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css
  */
-
 sub,
 sup {
   font-size: 75%;
@@ -34,15 +33,14 @@ sup {
 }
 
 sub {
-  bottom: -0.25em;
+  bottom: -.25em;
 }
 
 sup {
-  top: -0.5em;
+  top: -.5em;
 }
 
 /* -----  Links  ------------------------------------------------------------ */
-
 
 a {
   color: inherit;
@@ -94,11 +92,11 @@ h5, .h5 {
 }
 
 h6, .h6 {
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-family: $font-mono;
   font-size: .875rem;
   font-weight: 400;
-  font-family: $font-mono;
+  letter-spacing: .05em;
+  text-transform: uppercase;
 }
 
 /* -----  Various Typography-related Elements  ------------------------------ */
@@ -131,14 +129,6 @@ kbd {
   white-space: nowrap;
 }
 
-del {
-
-}
-
-ins {
-
-}
-
 /* -----  Typography Utilities  --------------------------------------------- */
 
 b, strong, th, dt, .bold {
@@ -151,5 +141,5 @@ i, em {
 
 small,
 .small {
-  font-size: 0.875rem;
+  font-size: .875rem;
 }

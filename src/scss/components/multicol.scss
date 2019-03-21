@@ -10,7 +10,7 @@
 /**
  * 1. Prevents browsers from rippung columns apart.
  */
-.multicol  > * {
+.multicol > * {
   display: inline-block; /* 1 */
   width: 100%;
 }

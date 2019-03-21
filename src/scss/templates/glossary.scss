@@ -1,7 +1,7 @@
 @import "../includes";
 
-.glossary-page .h5:after {
-  content: "›";
+.glossary-page .h5::after {
   color: $color-yellow;
+  content: "›";
   margin-left: .25rem;
 }

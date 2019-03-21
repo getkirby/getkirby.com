@@ -9,8 +9,8 @@ main {
 }
 
 .header {
-  position: absolute;
   left: 0;
+  position: absolute;
   right: 0;
   z-index: 2;
 }
@@ -20,11 +20,11 @@ main {
   line-height: 1.25em;
   max-width: 20rem;
 }
+
 .home-page .h2 a {
   text-decoration: underline;
   white-space: nowrap;
 }
-
 
 @import "home/hero";
 @import "home/blueprints";
@@ -35,7 +35,6 @@ main {
 @import "home/voices";
 @import "home/actions";
 @import "home/kosmos";
-
 
 /* -----  Newsletter  ------------------------------------------------------------- */
 .footer {

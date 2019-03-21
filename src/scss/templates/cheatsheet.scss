@@ -11,61 +11,62 @@ body {
 }
 
 /** Global stuff **/
+
 .cheatsheet.is-loading {
   pointer-events: none;
 }
 
-
 /** Layout **/
+
 .cheatsheet-panels {
-  position: absolute;
-  top: 2.5rem;
-  right: 0;
   bottom: 0;
-  left: 0;
-  width: 100%;
   display: flex;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 2.5rem;
+  width: 100%;
 }
 
 .cheatsheet-panel {
-  overflow: hidden;
-  flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
 .cheatsheet-panel-header {
-  height: 2.5rem;
-  flex-shrink: 0;
-  display: flex;
   align-items: center;
-  padding: 0 1.5rem;
   border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-shrink: 0;
+  height: 2.5rem;
   justify-content: space-between;
+  padding: 0 1.5rem;
 
   @include mq(from m) {
     display: none;
   }
-
 }
 
 .cheatsheet-panel-header button {
-  font: inherit;
-  display: flex;
   align-items: center;
-  font-size: .875rem;
   background: none;
   border: 0;
   cursor: pointer;
+  display: flex;
+  font: inherit;
+  font-size: .875rem;
 }
+
 .cheatsheet-panel-header button svg {
   margin-right: .5rem;
 }
 
 .cheatsheet-panel-scrollarea {
   flex-grow: 1;
-  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
 }
 
 .cheatsheet-main {
@@ -77,8 +78,8 @@ body {
     flex-shrink: 1;
     min-width: 20rem;
   }
-
 }
+
 .cheatsheet-main-scrollarea {
   padding: 1.5rem;
 
@@ -98,14 +99,17 @@ body {
     .cheatsheet-panel {
       display: none;
     }
+
     .cheatsheet-sections {
       display: flex;
     }
   }
+
   .cheatsheet[data-show="entries"] {
     .cheatsheet-panel {
       display: none;
     }
+
     .cheatsheet-entries {
       display: flex;
     }
@@ -113,43 +117,44 @@ body {
 }
 
 /** Header **/
+
 .cheatsheet-header {
-  position: relative;
-  height: 2.5rem;
-  display: flex;
   align-items: center;
   background: #000;
   color: #fff;
+  display: flex;
+  height: 2.5rem;
+  position: relative;
   z-index: 1000000;
 }
 
 .cheatsheet-back {
-  display: flex;
   align-items: center;
+  display: flex;
   margin-left: auto;
   padding: 0 1.5rem;
+}
 
-  > span {
-    padding-left: .5rem;
-    font-size: .875rem;
-    letter-spacing: 0;
-    font-weight: 500;
-    line-height: 1;
-    font-family: $font-mono;
+.cheatsheet-back > span {
+  font-family: $font-mono;
+  font-size: .875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  padding-left: .5rem;
 
-    @include mq(to m) {
-      display: none;
-    }
+  @include mq(to m) {
+    display: none;
   }
 }
 
 .cheatsheet-header h1 {
-  font-size: .875rem;
-  letter-spacing: 0;
-  font-weight: 500;
-  margin: 0;
-  line-height: 1;
   font-family: $font-mono;
+  font-size: .875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  margin: 0;
   padding: 0 1.5rem;
 
   @include mq(from m) {
@@ -159,22 +164,22 @@ body {
 
 .cheatsheet-header-left,
 .cheatsheet-header-right {
-  display: flex;
   align-items: center;
+  display: flex;
 }
 
 /** Search Form **/
+
 .cheatsheet-header form {
-  position: relative;
-  margin-left: 0;
-  position: relative;
-  height: 2.5rem;
-  display: flex;
-  flex-basis: 20%;
-  flex-grow: 1;
   align-items: center;
   border-left: 1px solid rgba(#fff, .3);
   border-right: 1px solid rgba(#fff, .3);
+  display: flex;
+  flex-basis: 20%;
+  flex-grow: 1;
+  height: 2.5rem;
+  margin-left: 0;
+  position: relative;
 
   @include mq(from m) {
     flex-grow: 0;
@@ -186,47 +191,68 @@ body {
 .cheatsheet-header form svg {
   margin-left: 1.25rem;
 }
+
 .cheatsheet-header form svg * {
   fill: $color-white;
 }
+
 .cheatsheet-header form:focus-within svg * {
   fill: $color-syntax-yellow;
 }
 
 .cheatsheet-header form input {
-  font: inherit;
-  padding: 0 1rem;
-  height: 2.5rem;
-  font-size: .875rem;
-  border: 0;
   background: none;
-  outline: 0;
-  width: 100%;
+  border: 0;
   color: $color-white;
+  font: inherit;
+  font-size: .875rem;
+  height: 2.5rem;
+  outline: 0;
+  padding: 0 1rem;
+  width: 100%;
 
   &:focus {
     color: $color-syntax-yellow;
   }
 }
+
 .cheatsheet-header .awesomplete ul {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
   background: #000;
+  box-shadow: rgba(#000, .2) 0 2px 20px;
   color: #fff;
-  box-shadow: rgba(#000, 0.2) 0 2px 20px;
   font-size: .875rem;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 100%;
 }
+
 .cheatsheet-header .awesomplete li {
-  padding: .75rem 1rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  line-height: 1.25em;
-  overflow: hidden;
-  margin: 0;
   cursor: pointer;
+  line-height: 1.25em;
+  margin: 0;
+  overflow: hidden;
+  padding: .75rem 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
+.cheatsheet-header .awesomplete strong {
+  display: block;
+  font-size: .875rem;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cheatsheet-header .awesomplete small {
+  display: block;
+  font-size: .75rem;
+  opacity: .5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .cheatsheet-header .awesomplete li[aria-selected="true"],
 .cheatsheet-header .awesomplete li:hover {
   background: lighten($color-dark-gray, 5%);
@@ -234,33 +260,19 @@ body {
   & small {
     color: #fff;
   }
+}
 
-}
-.cheatsheet-header .awesomplete strong {
-  display: block;
-  font-weight: 400;
-  font-size: .875rem;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-.cheatsheet-header .awesomplete small {
-  font-size: .75rem;
-  opacity: .5;
-  display: block;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
 .cheatsheet-header .menu-search-view-all {
-  display: flex;
   align-items: center;
+  display: flex;
 }
-
 
 /** Sections Navigation **/
+
 .cheatsheet-sections {
-  flex-basis: 100%;
   background: $color-background;
   border-right: 1px solid #ddd;
+  flex-basis: 100%;
 
   @include mq(from m) {
     flex-basis: 11rem;
@@ -275,14 +287,14 @@ body {
 .cheatsheet-sections h2 {
   font-family: $font-mono;
   font-size: .875rem;
+  line-height: 1.5;
   margin-bottom: .25rem;
   padding: 0 1.5rem;
-  line-height: 1.5;
 }
 
 .cheatsheet-sections li {
-  font-size: 0.75rem;
   font-family: $font-mono;
+  font-size: .75rem;
 }
 
 .cheatsheet-sections li a {
@@ -294,12 +306,12 @@ body {
   background: #ddd;
 }
 
-
 /** Entries Navigation **/
+
 .cheatsheet-entries {
-  flex-basis: 100%;
   background: $color-white;
   border-right: 1px solid #ddd;
+  flex-basis: 100%;
 
   @include mq(from m) {
     flex-basis: 20%;
@@ -313,56 +325,58 @@ body {
 }
 
 .cheatsheet-entries li {
-  position: relative;
-  font-size: .75rem;
   border-bottom: 1px solid rgba(#000, .1);
+  font-size: .75rem;
+  position: relative;
 }
 
 .cheatsheet-entries li a {
+  align-items: center;
   display: flex;
-  padding: .75rem 0;
   outline: 0;
-  align-items: center;
+  padding: .75rem 0;
 }
+
 .cheatsheet-entry-icon {
-  background: $color-background;
-  width: 2rem;
-  height: 2rem;
-  margin-right: .75rem;
-  display: flex;
   align-items: center;
+  background: $color-background;
+  display: flex;
+  height: 2rem;
   justify-content: center;
+  margin-right: .75rem;
+  width: 2rem;
 }
+
 .cheatsheet-entry-icon svg {
-  width: 1rem;
   height: 1rem;
+  width: 1rem;
 }
 
 .cheatsheet-entries li a[aria-current]:after {
+  background: $color-syntax-yellow;
+  bottom: 0;
   content: "";
-  position: absolute;
   left: -1.5rem;
   margin-left: -1px;
+  position: absolute;
   top: 0;
-  bottom: 0;
   width: 6px;
   z-index: 1000;
-  background: $color-syntax-yellow;
 }
 
 .cheatsheet-entries li a strong {
+  display: block;
   font-family: $font-mono;
   font-weight: 500;
-  display: block;
 }
 
 .cheatsheet-entries li a strong span {
-  position: absolute;
-  top: .75rem;
-  right: 0;
-  color: #999;
   background: #fff;
+  color: #999;
   padding-left: .5rem;
+  position: absolute;
+  right: 0;
+  top: .75rem;
 }
 
 .cheatsheet-entries li a small {
@@ -370,71 +384,75 @@ body {
   font-size: .75rem;
 }
 
-
 /** Section overview **/
+
 .cheatsheet-section .intro {
   max-width: 45rem;
 }
 
 .cheatsheet-section-toolbar {
   display: flex;
-  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
 }
+
 .cheatsheet-section-toolbar > span {
   background: $color-background;
   border-radius: 3px;
   display: flex;
 }
+
 .cheatsheet-section-toolbar a {
+  border-radius: 3px;
   display: inline-block;
+  font-family: $font-mono;
   font-size: .75rem;
-  padding: .5rem 1.5rem;
   line-height: 1;
+  padding: .5rem 1.5rem;
   text-align: center;
   width: 7rem;
-  font-family: $font-mono;
-  border-radius: 3px;
 }
+
 .cheatsheet-section-toolbar a[aria-current] {
   background: $color-syntax-yellow;
 }
 
 .cheatsheet-section-entries {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  grid-column-gap: 1.5rem;
   grid-auto-rows: 1fr;
+  grid-column-gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
 }
 
 .cheatsheet-section-entries a {
-  display: block;
   border-top: 1px solid #ddd;
-  padding: .5rem 0;
-  height: 100%;
+  display: block;
   font-family: $font-mono;
   font-size: .75rem;
-  white-space: nowrap;
+  height: 100%;
   overflow: hidden;
+  padding: .5rem 0;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /** Article **/
+
 .cheatsheet-article-content {
-  overflow: hidden;
   margin: 0 auto;
   max-width: 60rem;
+  overflow: hidden;
 }
 
 .cheatsheet-article-meta {
-  margin-top: .5rem;
   color: rgba($color-anthracite, .8);
   font-size: .9rem;
+  margin-top: .5rem;
 
   svg {
-    width: 13px;
     height: 13px;
     margin-right: .2rem;
+    width: 13px;
   }
 
   > li {

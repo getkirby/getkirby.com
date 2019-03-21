@@ -4,10 +4,10 @@ code {
   background: rgba($color-black, .1);
   border-radius: 3px;
   box-decoration-break: clone;
+  display: inline-block;
   font-family: $font-mono;
   font-size: .875em;
   line-height: inherit;
-  display: inline-block;
   padding: .05em .5em;
 }
 
@@ -18,14 +18,18 @@ code {
  *    700. It looks a bit to fat now, but hey: It's still
  *    better than with the regular cut of Roboto Mono.
  */
-h2 code, .h2 code,
-h3 code, .h3 code,
-h4 code, .h4 code,
-h5 code, .h5 code,
-h6 code, .h6 code {
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code,
+.h2 code,
+.h3 code,
+.h4 code,
+.h5 code,
+.h6 code {
   font-weight: 400; /* 1 */
 }
-
 
 /* -----  Syntax-Highlighting for Code Blocks ------------------------------- */
 
@@ -80,7 +84,6 @@ h6 code, .h6 code {
   padding: 1rem;
 }
 
-
 /**
  * 1. Increase specificity to allow overriding of `<figure>``
  *    element inside of `.text` blocks.
@@ -91,9 +94,9 @@ h6 code, .h6 code {
 }
 
 .codeblock-figure figcaption {
+  border-bottom: 1px solid lighten($color-dark-gray, 5%);
   font-weight: 500;
   padding: .75rem 1rem;
-  border-bottom: 1px solid lighten($color-dark-gray, 5%);
 }
 
 .code > code,
@@ -126,10 +129,6 @@ $color-filesystem-line: mix($color-background, $color-black, 25%);
   position: relative;
 }
 
-.filesystem li li {
-  padding-left: 1.625rem; // 26px
-}
-
 /**
  * 1. Prevents the `<span>` from collapsing, if it does not
  *    have any text-content.
@@ -145,23 +144,15 @@ $color-filesystem-line: mix($color-background, $color-black, 25%);
   top: .25rem; // 4px
 }
 
-.filesystem li.has-no-icon > span {
-  font-family: $font-sans;
-  padding-left: 0.125rem; // 2px
-}
-
 /* Filesystem Lines */
 
 .filesystem li li {
-  background:
-    linear-gradient($color-filesystem-line, $color-filesystem-line) .4375rem 0 / .0625rem 100% no-repeat, // 7px 0 / 1px 100%
-    linear-gradient($color-filesystem-line, $color-filesystem-line) .5rem .625rem / .5rem .0625rem no-repeat; // 8px 10px / 8px 1px
+  background: linear-gradient($color-filesystem-line, $color-filesystem-line) .4375rem 0 / .0625rem 100% no-repeat, linear-gradient($color-filesystem-line, $color-filesystem-line) .5rem .625rem / .5rem .0625rem no-repeat;
+  padding-left: 1.625rem; // 26px
 }
 
 .filesystem li li:last-child {
-  background:
-    linear-gradient($color-filesystem-line, $color-filesystem-line) .4375rem 0 / .0625rem .6875rem no-repeat, // 7px 0 / 1px 11px
-    linear-gradient($color-filesystem-line, $color-filesystem-line) .5rem 10px / .5rem .0625rem no-repeat; // 8px 10px / 8px 1px
+  background: linear-gradient($color-filesystem-line, $color-filesystem-line) .4375rem 0 / .0625rem .6875rem no-repeat, linear-gradient($color-filesystem-line, $color-filesystem-line) .5rem 10px / .5rem .0625rem no-repeat;
 }
 
 /* Filesystem icons */
@@ -213,7 +204,7 @@ $color-filesystem-line: mix($color-background, $color-black, 25%);
 
 .code-token.code-comment,
 .code-token.code-doctype {
-color: $color-syntax-comment;
+  color: $color-syntax-comment;
 }
 
 .code-token.code-tag,
@@ -225,7 +216,7 @@ color: $color-syntax-comment;
 .code-token.code-kirbytag-bracket,
 .code-token.code-prolog,
 .code-token.code-delimiter {
-	color: $color-syntax-red;
+  color: $color-syntax-red;
 }
 
 .code-token.code-constant,
@@ -238,38 +229,37 @@ color: $color-syntax-comment;
 .code-token.code-entity,
 .code-token.code-bold,
 .code-token.code-bold > .code-punctuation {
-	color: $color-syntax-orange;
+  color: $color-syntax-orange;
 }
 
 .code-token.code-keyword,
 .code-token.code-italic,
 .code-token.code-italic > .code-punctuation {
-	color: $color-syntax-purple;
+  color: $color-syntax-purple;
 }
 
 .code-token.code-function {
-	color: $color-syntax-blue;
+  color: $color-syntax-blue;
 }
 
 .code-token.code-operator,
 .code-token.code-title {
-	color: $color-syntax-aqua;
+  color: $color-syntax-aqua;
 }
 
 .code-token.code-string,
 .code-token.code-attr-value,
 .code-token.code-attr-value .code-punctuation,
 .code-token.code-list.code-punctuation {
-	color: $color-syntax-green;
+  color: $color-syntax-green;
 }
 
 .code-token.code-scope,
 .code-token.code-class-name,
 .code-token.code-property,
 .code-token.code-url {
-	color: $color-syntax-yellow;
+  color: $color-syntax-yellow;
 }
-
 
 /**
  * 1. Markdown list bullet.
@@ -309,8 +299,8 @@ color: $color-syntax-comment;
   opacity: 0;
   padding: .75rem .75rem .25rem .25rem; // 12px 12px 4px 4px
   position: absolute;
-	right: 0;
-	top: 0;
+  right: 0;
+  top: 0;
   transition: opacity .2s .1s;
 }
 
@@ -330,16 +320,20 @@ color: $color-syntax-comment;
   line-height: 1.5;
   position: relative;
 
-  svg {
-    fill: $color-white;
-    position: relative;
-    top: .125rem; // 2px
-  }
-
-  span {
-    padding-left: 1ch;
-  }
-
   @include link-backplane($background: dark);
 }
 
+.code-toolbar a svg {
+  fill: $color-white;
+  position: relative;
+  top: .125rem; // 2px
+}
+
+.code-toolbar a span {
+  padding-left: 1ch;
+}
+
+.filesystem li.has-no-icon > span {
+  font-family: $font-sans;
+  padding-left: .125rem; // 2px
+}

@@ -4,23 +4,28 @@
   flex-wrap: wrap;
   margin-left: -1.5rem;
 }
+
 .kosmos-field {
   padding-left: 1.5rem;
   width: 100%;
+
   &:first-child {
     margin-bottom: 1.5rem;
   }
+
   @include mq(from s) {
     flex-grow: 1;
-    width: 33.33%;
+    width: percentage(1 / 3);
   }
 }
+
 .kosmos-button-field {
   @include mq(from s) {
-    width: auto;
     flex-grow: 0;
     flex-shrink: 1;
+    width: auto;
   }
+
   @include mq(from m) {
     width: 25%;
   }
@@ -30,6 +35,7 @@
   display: block;
   height: 2rem;
 }
+
 .kosmos-field input {
   color: #fff;
   font: inherit;
@@ -38,37 +44,44 @@
   padding: .5rem;
   width: 100%;
 }
+
 .kosmos-field input[type="text"] {
   background: $color-anthracite;
   border: 0;
 }
+
 .kosmos-form input {
   appearance: none;
 }
+
 .kosmos-field input[type="text"]:focus {
   outline: 2px solid $color-syntax-yellow;
 }
+
 .kosmos-field input[type="submit"] {
   background: $color-syntax-yellow;
   border: 0;
+  color: $color-black;
   cursor: pointer;
+  font-family: $font-mono;
   font-size: .875rem;
   font-weight: 500;
+  margin-top: 2rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  color: $color-black;
-  margin-top: 2rem;
-  font-family: $font-mono;
 }
+
 .kosmos-field input[type="submit"]:focus {
   background: $color-syntax-purple;
   outline: 0;
 }
+
 .kosmos-legal {
-  padding-top: .75rem;
   color: $color-syntax-white;
   font-size: .875rem;
+  padding-top: .75rem;
 }
+
 .kosmos-issues {
   margin-bottom: 3rem;
 }

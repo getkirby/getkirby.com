@@ -47,61 +47,6 @@ body::after {
   padding: 0;
 }
 
-.debug-bar > ul > li {
-  
-  &:nth-child(n + 2) {
-    background: red;
-  }  
-}
-
-/* -----  Debug Layout Overlay  --------------------------------------------- */
-
-$grid-gutter-desktop: 32px;
-
-body {
-  position: relative;
-}
-
-.debug-layout {
-  $line: rgba($debug-grid, .25);
-  background: linear-gradient(to bottom, $line 0px, $line 1px, transparent 1px, transparent 100%) 0 -0.125em / 100% 1.5em;
-  height: 100%;
-  left: 0;
-  overflow: hidden;
-  pointer-events: none;
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 3000;
-}
-
-.debug-layout .wrap {
-  height: 100%;
-  position: relative;
-}
-
-.debug-layout .row {
-  height: 100%;
-}
-
-.debug-layout .row > * {
-  background-clip: content-box;
-  background-color: $debug-col;
-  height: 100%;
-  position: relative;
-}
-
-@include mq(from s) {
-  // .debug-layout .wrap {
-  //   background:
-  //     linear-gradient(to bottom, $debug-wrap, $debug-wrap) #{$grid-gutter-desktop / 2} 0 / calc(100% - #{$grid-gutter-desktop}) 100% no-repeat;
-  // }
-
-  .debug-layout .row > * {
-    background:
-      linear-gradient(to bottom, $debug-col-border, $debug-col-border) #{$grid-gutter-desktop / 2} 0 / 1px 100% no-repeat,
-      linear-gradient(to bottom, $debug-col-border, $debug-col-border) calc(100% - #{$grid-gutter-desktop / 2}) 0 / 1px 100% no-repeat;
-    background-clip: content-box;
-    background-color: $debug-col;
-  }
+.debug-bar > ul > li:nth-child(n + 2) {
+  background: red;
 }

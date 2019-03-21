@@ -13,10 +13,11 @@
 
 @include mq(from m) {
   .contact-grid > *:first-child {
-    width: 33.33%;
+    width: percentage(1 / 3);
   }
+
   .contact-grid > *:last-child {
-    width: 66.66%;
+    width: percentage(2 / 3);
   }
 }
 

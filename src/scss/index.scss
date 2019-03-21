@@ -21,7 +21,7 @@
 // The $ENV variable is added via Webpack and can be used to print
 // custom CSS for debugging. It can either have a value of
 // `development` or `prodcuction`.
-@if $ENV == development { // sass-lint:disable-line variable-name-format
+@if $ENV == development {
   @include mq-debug;
 }
 
@@ -75,4 +75,3 @@
 // otherwise the dev server will not compile them. You should also
 // stop the server before deleting one of them.
 // @import "templates/home";
-

@@ -10,11 +10,11 @@
 .screen-reader-text,
 .visually-hidden {
   clip: rect(1px, 1px, 1px, 1px);
-	height: 1px;
-	overflow: hidden;
-	position: absolute !important;
-	width: 1px;
-	word-wrap: normal !important; /* 2 */
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important; /* 2 */
 }
 
 /**

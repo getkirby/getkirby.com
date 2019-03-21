@@ -10,11 +10,12 @@ svg:not(:root) {
   display: block;
   position: relative;
 }
+
 .intrinsic img {
-  position: absolute;
-  top: 0;
   left: 0;
+  position: absolute;
   right: 0;
+  top: 0;
   width: 100%;
 }
 

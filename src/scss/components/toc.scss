@@ -1,6 +1,6 @@
 .toc {
-  padding: 1rem;
   background: $color-background;
+  padding: 1rem;
 }
 
 .toc ol {
@@ -39,9 +39,9 @@
 .toc a::before {
   color: #777;
   content: counter(table-of-contents, decimal-leading-zero);
+  font-family: $font-mono;
+  font-size: .75rem;
   margin-left: -4ch;
   padding-right: 2ch;
   text-decoration: none;
-  font-family: $font-mono;
-  font-size: .75rem;
 }

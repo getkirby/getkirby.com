@@ -1,17 +1,16 @@
 /* =====  Sidebar Component  ================================================ */
 
 .sidebar {
-  position: relative;
   height: 100%;
-  padding-right: 1.5rem;
   left: -24px;
-  top: 4px;;
+  padding-right: 1.5rem;
+  position: relative;
+  top: 4px;
 }
 
 .sidebar a[aria-current="page"] {
   text-decoration: underline;
 }
-
 
 /* -----  Top-Level items  -------------------------------------------------- */
 
@@ -61,12 +60,11 @@
 }
 
 .sidebar-item-link.-level-up::after {
-  content: '';
+  content: "";
   left: -14px;
   top: calc(50% + 1px);
   transform: rotate(90deg);
 }
-
 
 .sidebar-toggle[aria-expanded="true"] i {
   transform: rotate(0deg);
@@ -89,15 +87,15 @@
 }
 
 .sidebar-subpages {
-  padding-top: .5rem;
-  padding-bottom: .25rem;
   margin-bottom: 0;
+  padding-bottom: .25rem;
+  padding-top: .5rem;
 }
 
 .sidebar-subpage {
+  color: rgba($color-anthracite, .8);
   font-size: .875rem;
   padding: .125rem 0;
-  color: rgba($color-anthracite, .8);
 }
 
 /* ----- Submenu (Level 3)  ------------------------------------------------- */

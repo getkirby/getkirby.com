@@ -21,14 +21,18 @@
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "browser-sync": "^2.24.4",
+    "browser-sync": "^2.26.3",
     "browser-sync-webpack-plugin": "^2.0.1",
     "clean-webpack-plugin": "^0.1.19",
     "cross-env": "^5.1.6",
     "eslint": "^4.19.1",
     "extend": "^3.0.1",
     "laravel-mix": "^2.1.11",
-    "postcss-calc": "^6.0.1"
+    "postcss-calc": "^6.0.1",
+    "stylelint": "^9.10.1",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-order": "^2.1.0",
+    "stylelint-scss": "^3.5.4"
   },
   "dependencies": {
     "algoliasearch": "^3.27.1",

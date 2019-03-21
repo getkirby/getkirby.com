@@ -1,13 +1,15 @@
 @import "../includes";
 
 .home-blueprints {
-  padding-top: 3rem;
-  padding-bottom: 0;
   overflow: hidden;
+  padding-bottom: 0;
+  padding-top: 3rem;
+
   @include mq(from s) {
     padding-top: 7.5rem;
   }
 }
+
 .home-blueprints .h2 {
   position: relative;
   z-index: 1;
@@ -16,6 +18,7 @@
     position: absolute;
   }
 }
+
 .home-blueprints figure {
   line-height: 0;
   margin: -3rem -6rem 0;

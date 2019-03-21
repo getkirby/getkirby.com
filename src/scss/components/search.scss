@@ -1,68 +1,76 @@
 .menu-search {
-  position: relative;
-  display: flex;
   align-items: center;
+  display: flex;
   margin-left: 1rem;
+  position: relative;
 }
+
 .menu-search-input {
+  appearance: none;
+  background: transparent url(../images/icons/search.svg) no-repeat center right;
+  border: 0;
+  color: $color-syntax-yellow;
+  cursor: pointer;
   font: inherit;
   font-size: 1rem;
-  color: $color-syntax-yellow;
   font-weight: 400;
+  height: 2rem;
+  line-height: 2rem;
   outline: 0;
   padding: 0 1rem;
   width: 2rem;
-  height: 2rem;
-  line-height: 2rem;
-  background: transparent url(../images/icons/search.svg) no-repeat center right;
-  border: 0;
-  cursor: pointer;
-  appearance: none;
 }
+
 .menu-search-input:focus {
-  box-shadow: $shadow;
   background: #000;
+  box-shadow: $shadow;
   width: 14rem;
 }
+
 .menu-search .awesomplete {
-  position: relative;
   color: #fff;
   font-size: .875rem;
+  position: relative;
 }
+
 .menu-search .awesomplete strong {
   display: block;
-  font-weight: 400;
   font-size: .875rem;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-.menu-search .awesomplete small {
-  font-size: .75rem;
-  display: block;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  color: $color-syntax-comment;
   font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu-search .awesomplete small {
+  color: $color-syntax-comment;
+  display: block;
+  font-size: .75rem;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
 }
+
 .menu-search .awesomplete ul {
-  position: absolute;
-  top: 100%;
   background: #000;
   left: 0;
+  position: absolute;
   right: 0;
+  top: 100%;
   z-index: 1000;
 }
+
 .menu-search .awesomplete li {
-  padding: .75rem 1rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  line-height: 1.25em;
-  overflow: hidden;
-  margin: 0;
   cursor: pointer;
+  line-height: 1.25em;
+  margin: 0;
+  overflow: hidden;
+  padding: .75rem 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
 .menu-search .awesomplete li[aria-selected="true"],
 .menu-search .awesomplete li:hover {
   background: $color-dark-gray;
@@ -71,12 +79,13 @@
     color: #fff;
   }
 }
+
 .menu-search-view-all,
 .menu-search-error {
-  display: flex;
   align-items: center;
-  width: 100%;
+  display: flex;
   justify-content: space-between;
+  width: 100%;
 
   svg {
     fill: currentColor;
@@ -87,16 +96,20 @@
   .menu-search-input {
     background: transparent url(../images/icons/search-white.svg) no-repeat center right;
   }
+
   .menu-search-input:focus {
     background: #fff;
     color: $color-black;
   }
+
   .awesomplete {
     color: $color-black;
   }
+
   .awesomplete ul {
     background: #fff;
   }
+
   .awesomplete li[aria-selected="true"],
   .awesomplete li:hover {
     background: $color-background;

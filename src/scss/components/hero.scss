@@ -1,6 +1,6 @@
 .hero {
-  padding-top: 6rem;
   padding-bottom: 3rem;
+  padding-top: 6rem;
 }
 
 .hero.-theme\:dark {
@@ -8,7 +8,7 @@
 }
 
 .hero.-align\:center {
-  text-align: center;
-  max-width: 35rem;
   margin: 0 auto;
+  max-width: 35rem;
+  text-align: center;
 }

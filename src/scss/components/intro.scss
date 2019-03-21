@@ -1,7 +1,7 @@
 .intro {
+  color: rgba($color-anthracite, .8);
   font-size: 1.5rem;
   line-height: 1.375;
-  color: rgba($color-anthracite, .8);
   max-width: 35rem;
 }
 
@@ -11,14 +11,14 @@
   letter-spacing: 0;
 }
 
-.intro a:after {
-  content: " ›";
+.intro a::after {
   color: $color-yellow;
+  content: " ›";
 }
 
 .intro p {
-  margin-bottom: 1.375em;
   font-weight: 400;
+  margin-bottom: 1.375em;
 }
 
 .intro > *:last-child {
@@ -39,6 +39,7 @@
 .intro.-theme\:dark a {
   color: $color-syntax-yellow;
 }
-.intro.-theme\:dark a:after {
+
+.intro.-theme\:dark a::after {
   color: $color-white;
 }
