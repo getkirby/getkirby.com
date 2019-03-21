@@ -1,5 +1,6 @@
+/* global Prism */
 import { $, $$ } from "../utils/selector.js";
-import highlight from "../components/code.js";
+import "../components/code.js";
 
 const cheatsheet = $(".cheatsheet");
 
@@ -7,7 +8,7 @@ const buttons = () => {
 
   $$('.cheatsheet-panel-header button').forEach((button) => {
 
-    button.addEventListener("click", (e) => {
+    button.addEventListener("click", () => {
       const show = button.getAttribute("data-show");
       cheatsheet.setAttribute("data-show", show);
     });
@@ -21,11 +22,11 @@ const load = (link) => {
   // start loading
   cheatsheet.classList.add("is-loading");
 
-  fetch(link.href + "?plain=true")
-    .then((response) => {
+  fetch(link.href + "?plain=true").
+    then((response) => {
       return response.text();
-    })
-    .then((html) => {
+    }).
+    then((html) => {
       $(".cheatsheet-article").innerHTML = html;
       $(".cheatsheet-entries a[aria-current]").removeAttribute("aria-current");
 

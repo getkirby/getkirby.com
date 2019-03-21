@@ -1,3 +1,5 @@
+/* global Prism */
+
 const initPrismLanguages = ([, Clipboard]) => {
 
   Prism.languages.kirbytext = Prism.languages.extend('markdown', {});

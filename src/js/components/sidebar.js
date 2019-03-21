@@ -26,14 +26,13 @@ function toggleSubmenu(item) {
 
   if(!isOpen) {
     // show submenu
-    toggle.setAttribute('aria-expanded', true);
-    // submenu.style.height = submenu.scrollHeight + 'px';
+    toggle.setAttribute('aria-expanded', 'true');
     submenu.hidden = false;
     enableSubmenuLinks(submenu);
   } else {
     // hide submenu
     submenu.hidden = true
-    toggle.setAttribute('aria-expanded', false);
+    toggle.setAttribute('aria-expanded', 'false');
 
     disableSubmenuLinks(submenu);
   }
