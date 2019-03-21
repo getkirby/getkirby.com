@@ -20,7 +20,7 @@ ready().then(() => {
     // stop here if page does not contain any tooltips
     return;
   }
-    
+
   Promise.all([
     import(
       /* webpackChunkName: "tooltip" */
@@ -33,7 +33,7 @@ ready().then(() => {
       const tooltip   = tooltips[i];
       const htmlTitle = tooltip.getAttribute('data-tooltip');
       const htmlContent = `<div class="tippy-inner | text text-small -background:black">${htmlTitle}</div>`;
-  
+
       tooltip.setAttribute('title', htmlContent);
 
       tippy(tooltip, tippyOptions);

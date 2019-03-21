@@ -96,7 +96,7 @@ ready(() => {
 
       delay(250).then(() => {
 
-        let params = {
+        const params = {
           hitsPerPage: 5
         };
 

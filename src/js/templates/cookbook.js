@@ -8,4 +8,4 @@ var options = {
   ]
 };
 
-var recipes = new List('cookbook-recipes', options);
+new List('cookbook-recipes', options);
