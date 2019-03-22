@@ -20,27 +20,6 @@ class MethodPage extends HelperPage
         return $this->parent()->classNameShort();
     }
 
-    public function excerpt(): Field
-    {
-
-        $excerpt = null;
-
-        if ($docBlock = $this->docBlock()) {
-            $excerpt = trim($this->docBlock()->getSummary());
-            $excerpt = str_replace(PHP_EOL, ' ', $excerpt);
-
-            if ($excerpt === '/') {
-                $excerpt = null;
-            }
-        }
-
-        if (empty($excerpt) === false) {
-            return new Field($this, 'excerpt', $excerpt);
-        }
-
-        return $this->content()->get('excerpt');
-    }
-
     public function githubSource()
     {
         if ($reflection = $this->reflection()) {

@@ -46,14 +46,9 @@ class KirbyTagPage extends HelperPage
         return null;
     }
 
-    public function methodCall(): string
-    {
-        return parent::methodCall();
-    }
-
     public function methodExists(): bool
     {
-        return isset(KirbyTag::$types[$this->methodName()]);
+        return isset(KirbyTag::$types[$this->methodName()]) === true;
     }
 
     public function reflection()

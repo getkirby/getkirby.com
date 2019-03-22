@@ -186,7 +186,7 @@ class HelperPage extends Page
                 'export'      => $param,
                 'name'        => $name,
                 'optional'    => $optional,
-                'type'        => $type ?? 'mixed',
+                'type'        => $this->typeDefinition($type) ?? 'mixed',
             ];
         }
 
@@ -222,7 +222,9 @@ class HelperPage extends Page
             if ($docBlock = $this->docBlock()) {
                 if ($type = $docBlock->getReturnType()) {
                     $type = trim((string)$type->getType());
-                    $type = substr($type, 0, 1) === '\\' ? substr($type, 1) : $type;
+                    $type = implode('|', array_map(function ($type) {
+                        return substr($type, 0, 1) === '\\' ? substr($type, 1) : $type;
+                    }, explode('|', $type)));
                     return $this->typeDefinition($type);
                 }
             }

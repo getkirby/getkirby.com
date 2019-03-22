@@ -12,7 +12,7 @@
     <td><code>$<?= $param['name'] ?></code></td>
     <td><code><?= $param['type'] ?></code></td>
     <td><code><?= $param['default'] ?></code></td>
-    <td class="text"><?= kirbytext($param['description']) ?></td>
+    <td class="text"><?= kti($param['description']) ?></td>
   </tr>
   <?php endforeach ?>
 </table>
