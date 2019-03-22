@@ -1,0 +1,15 @@
+Title: CSS URLs
+
+----
+
+Text:
+
+```php "/site/plugins/css-helper/index.php"
+Kirby::plugin('my/css', [
+  'components' => [
+    'css' => function (Kirby $kirby, string $url, $options = null): string {
+			return $url . '?' . $fingerprint;
+    }
+  ]
+]);
+```

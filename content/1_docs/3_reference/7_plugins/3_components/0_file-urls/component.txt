@@ -2,6 +2,10 @@ Title: File URLs
 
 ----
 
+methodName: file::url
+
+----
+
 Text:
 
 You can modify the URLs for file objects with our `file::url` component. This component is also responsible for building thumbnail URLs. This makes it very powerful. It can be used to let thumbnails be generated on different services like Cloudinary or Imgix, but it can also be used to host files in a different locations and load them from there.
@@ -15,20 +19,3 @@ Kirby::plugin('my/fileUrls', [
 	]
 ]);
 ```
-
-### Params
-
-`$kirby`
-: Kirby instance
-
-`$file`
-: The original file object
-
-`$options`
-: All thumb options (width, height, crop, blur, grayscale)
-
-
-### Return:
-
-`string`
-: The Thumbnail URL
