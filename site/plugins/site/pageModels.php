@@ -16,6 +16,7 @@ return [
     'method'          => 'Kirby\\Site\\Models\\MethodPage',
     'packages'        => 'Kirby\\Site\\Models\\PackagesPage',
     'root'            => 'Kirby\\Site\\Models\\RootPage',
+    'ui'              => 'Kirby\\Site\\Models\\UiPage',
     'url'             => 'Kirby\\Site\\Models\\UrlPage',
     'validator'       => 'Kirby\\Site\\Models\\ValidatorPage',
     'validators'      => 'Kirby\\Site\\Models\\ValidatorsPage',

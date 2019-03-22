@@ -127,7 +127,7 @@ Now you can write a script with the following contents and periodically run it w
 require 'path/to/kirby/bootstrap.php';
 
 $kirby = new Kirby();
-$kirby->component('session')->collectGarbage();
+$kirby->session()->collectGarbage();
 ```
 
 ## Configuration
