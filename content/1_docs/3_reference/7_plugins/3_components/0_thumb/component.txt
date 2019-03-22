@@ -17,22 +17,3 @@ Kirby::plugin('my/thumbs', [
 	]
 ]);
 ```
-
-### Params
-
-`$kirby`
-: Kirby instance
-
-`$src`
-: The root of the original file
-
-`$dst`
-: The root to the desired destination
-
-`$options`
-: All thumb options that should be applied (width, height, crop, blur, grayscale)
-
-### Return
-
-`string`
-: The root to the final thumbnail

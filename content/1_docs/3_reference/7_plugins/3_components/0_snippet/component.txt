@@ -1,0 +1,16 @@
+Title: Snippets
+
+----
+
+Text:
+
+```php "/site/plugins/snippet-engine/index.php"
+
+Kirby::plugin('my/snippet', [
+    'components' => [
+        'snippet' => function (Kirby $kirby, string $name, array $data = []) {
+            return YourSnippets::load($name, $data);
+        }
+    ]
+]);
+```

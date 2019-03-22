@@ -1,0 +1,15 @@
+Title: URLs
+
+----
+
+Text:
+
+```php "/site/plugins/urls/index.php"
+Kirby::plugin('my/urls', [
+  'components' => [
+    'url' => function (Kirby $kirby, string $path, array $options = [], Closure $originalHandler): string {
+        return $originalHandler($path, $options);
+    }
+  ]
+]);
+```

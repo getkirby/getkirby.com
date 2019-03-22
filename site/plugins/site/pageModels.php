@@ -24,6 +24,7 @@ return [
     'packages'           => 'Kirby\\Site\\Models\\PackagesPage',
     'root'               => 'Kirby\\Site\\Models\\RootPage',
     'roots'              => 'Kirby\\Site\\Models\\RootsPage',
+    'ui'                 => 'Kirby\\Site\\Models\\UiPage',
     'url'                => 'Kirby\\Site\\Models\\UrlPage',
     'urls'               => 'Kirby\\Site\\Models\\UrlsPage',
     'validator'          => 'Kirby\\Site\\Models\\ValidatorPage',

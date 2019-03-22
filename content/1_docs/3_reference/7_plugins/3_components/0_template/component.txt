@@ -1,4 +1,4 @@
-Title: Template engine
+Title: Templates
 
 ----
 
@@ -11,7 +11,7 @@ class CustomTemplate extends Kirby\Cms\Template {
 
 Kirby::plugin('my/template', [
     'components' => [
-        'template' => function (App $kirby, string $name, string $contentType = null) {
+        'template' => function (Kirby $kirby, string $name, string $contentType = null) {
             return new CustomTemplate($name, $contentType);
         }
     ]
