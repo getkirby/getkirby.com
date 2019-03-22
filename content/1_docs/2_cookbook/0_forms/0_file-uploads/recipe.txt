@@ -1,0 +1,203 @@
+Title: Uploading files from frontend
+
+----
+Description: Learn how to upload files through a frontend form
+
+----
+Text:
+
+In this recipe we will create a basic file upload form where users can upload files from the frontend.
+
+You can also add additional fields to this form or combine it with a user registration form.
+
+For this example we need:
+
+- a page called `uploads` where we put the form
+- a page called `fileuploads` where the files will be uploaded to
+- a (glossary: template text: template) with the form
+- a (glossary: controller text: controller) with the form logic
+
+<warning>
+Allowing file uploads from the frontend is not without risks. If you allow website users to upload files without authentication, you should be super careful what type of file uploads you allow, where you store the files, how you name them, and ideally prevent access to those files from the frontend before the files have been checked to be clean.
+
+In this example, we will upload the files to the content folder, but if can, consider uploading files to a location outside the web root.
+</warning>
+
+## The upload and fileupload pages
+
+(link: docs/guide/content/pages text: Create an upload page) with an `upload.txt` content file. For our means, we only need a title in the content file, the rest is up to you. You could, for example, store an introductory text.
+
+If you want to access the page in the Panel, you can also create a (glossary: blueprint text: blueprint) for the page. We will skip this step here.
+
+Additionally, create a `fileuploads` page. This is the page to which we upload the files.
+
+## The upload template
+
+Our `upload.php` template contains the form and will display error messages if something goes wrong or a success message if the form was successfully submitted.
+
+```php "/site/templates/upload.php"
+<?php snippet('header') ?>
+<?php if($success): ?>
+  <div class="alert success">
+      <p><?= $success ?></p>
+  </div>
+<?php else: ?>        
+  <?php if (empty($alerts) === false):?>
+    <ul>
+      <?php foreach ($alerts as $alert): ?>
+          <li><?= $alert ?></li>
+      <?php endforeach ?>
+    </ul>
+  <?php endif ?>
+  <form action="" method="post" enctype="multipart/form-data">
+
+    <div class="honeypot">
+      <label for="website">Website <abbr title="required">*</abbr></label>
+      <input type="website" id="website" name="website">
+    </div>
+
+    <div class="form-field">
+      <label for="file">Select files</label>
+      <input name="file[]" type="file" multiple>
+      <div class="help">You can upload up to 3 files. Each file may not be larger than 3 MB.</div>
+    </div>
+
+    <input type="submit" name="submit" value="Submit" class="button">
+
+  </form>
+<?php endif ?>  
+
+<?php snippet('footer') ?>
+```
+
+The form is displayed by default and hidden once the email was successfully sent. We also included a honeypot field to ensure a minimum level of spam bot protection.
+
+The honeypot field needs to be positioned off-screen, so we need some styles for it. Add this to your stylesheet (you can also change the class and styling, of course).
+
+```css
+.honeypot {
+  position: absolute;
+  left: -9999px;
+}
+```
+
+## The `upload.yml` file blueprint
+
+To easily validate if the uploaded files conform to what we want to allow, we set up a files blueprint with the `accept` option:
+
+```yml "/site/blueprints/files/upload.yml"
+title: Frontend file uploads
+
+accept:
+  mime:    image/*, application/pdf
+  maxsize: 3000000  # size in byte = 3 MB
+```
+
+## The upload controller
+
+```php "/site/controllers/upload.php"
+<?php
+
+return function ($kirby, $page) {
+
+  $alerts = [];
+  $success = '';
+
+  
+  if ($kirby->request()->is('post') && get('submit')) {
+
+    // check the honeypot
+    if (empty(get('website')) === false) {
+        go($page->url());
+        exit;
+    }
+
+    $uploads = $kirby->request()->files()->get('file');
+    
+    // we only want 3 files
+    if (count($uploads) < 4) {
+        
+      // authenticate as almighty
+      $kirby->impersonate('kirby');
+
+      foreach ($uploads as $upload) {            
+        if (page('fileuploads')->files()->filter(function($file) use($upload) {
+          $pos = strpos($file->filename(), '_');
+          $originalSafename = substr($file->filename(), $pos+1);
+          return  $originalSafename === F::safeName($upload['name']) &&
+                  $file->mime() === $upload['type'] &&
+                  $file->size() === $upload['size'];
+          })->count() > 0) {
+          $alerts[$upload['name']] = "The file already exists";
+            
+        } else {
+          try {
+            $file = page('fileuploads')->createFile([
+              'source'   => $upload['tmp_name'],
+              'filename' => crc32($upload['name'].microtime()). '_' . $upload['name'],
+              'template' => 'upload',
+              'content' => [
+                  'date' => date('Y-m-d h:m'),
+              ]
+            ]);
+          } catch (Exception $e) {
+            $alerts[$upload['name']] = $e->getMessage();
+          }
+          $success = 'Your file upload was successful';
+        }
+      }
+  
+    } else {
+        
+        $alerts['exceedMax'] = 'You may only upload 3 files.';
+    }
+  }
+  return [
+    'alerts'  => $alerts,
+    'success' => $success
+  ];
+};
+```
+
+In our controller, we listen for a `POST` request and if the request came from our form. First, we check if a bot got trapped in our honeypot. In this case, we send him back to the page and stop script execution.
+
+
+Then we loop through the files array and check if the file already exists. To do so, we compare the safe name of the upload filename to the filename of existing files in the folder minus the prefix, the mime types and the size.
+
+```php
+if (page('fileuploads')->files()->filter(function($file) use($upload) {
+  $pos = strpos($file->filename(), '-');
+  $originalSafename = substr($file->filename(), $pos+1);
+  return  $originalSafename === F::safeName($upload['name']) &&
+          $file->mime() === $upload['type'] &&
+          $file->size() === $upload['size'];
+  })->count() > 0) {
+  
+  $alerts[$upload['name']] = "The file already exists";
+}
+```              
+
+If all went well, we try to upload the files in a `try - catch` block using Kirby's `$page->createFile()` method. 
+
+```php
+  $file = page('fileuploads')->createFile([
+    'source'   => $upload['tmp_name'],
+    'filename' => crc32($upload['name'].microtime()). '-' . $upload['name'],
+    'template' => 'upload',
+    'content' => [
+        'date' => date('Y-m-d h:m'),
+    ]
+]);
+```
+The method requires the `source` attribute, all other parameters are optional. However, we use the template option here to assign the file blueprint we created earlier. It does all the checking for the allowed mime types and sizes for us.
+
+To obfuscate the file name, we add a prefix to the original filename. Kirby automatically takes care of converting the filename to a safe name. Prefixing the filename makes it hard for the user to guess the filename and opening the file in the browser after update.
+
+As an additonal security measure, we can prohibit access to the `fileuploads` page using a (link: docs/guide/routing text: route)
+
+We also store the upload date and time as meta data in the `content` array. If you want, you can also store additional information in that array.
+
+
+If everything was successful, we display a success message.
+
+
