@@ -20,7 +20,8 @@ For this example we need:
 <warning>
 Allowing file uploads from the frontend is not without risks. If you allow website users to upload files without authentication, you should be super careful what type of file uploads you allow, where you store the files, how you name them, and ideally prevent access to those files from the frontend before the files have been checked to be clean.
 
-In this example, we will upload the files to the content folder, but if can, consider uploading files to a location outside the web root.
+In this example, we will upload the files to the content folder, but if your use case or hosting allows it, consider uploading files to a location outside the web root.
+
 </warning>
 
 ## The upload and fileupload pages
