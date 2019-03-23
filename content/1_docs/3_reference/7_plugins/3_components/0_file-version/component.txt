@@ -13,6 +13,9 @@ Kirby::plugin('my/fileVersions', [
   'components' => [
     'file::version' => function (Kirby $kirby, FileModifications $file, array $options = []) {
       // …
+      return new FileVersion([
+        // …
+      ]);
     }
   ]
 ]);

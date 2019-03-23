@@ -8,7 +8,9 @@ Text:
 Kirby::plugin('my/js', [
   'components' => [
     'js' => function (Kirby $kirby, string $url, $options = null): string {
-			return $url . '?' . $fingerprint;
+      // create fingerprint for cache busting
+      $fingerprint = md5_file($url);
+      return $url . '?' . $fingerprint;
     }
   ]
 ]);
