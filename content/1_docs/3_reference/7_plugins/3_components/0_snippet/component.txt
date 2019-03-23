@@ -9,7 +9,7 @@ Text:
 Kirby::plugin('my/snippet', [
     'components' => [
         'snippet' => function (Kirby $kirby, string $name, array $data = []) {
-            return YourSnippets::load($name, $data);
+            return YourSnippetLoader::load($name, $data);
         }
     ]
 ]);
