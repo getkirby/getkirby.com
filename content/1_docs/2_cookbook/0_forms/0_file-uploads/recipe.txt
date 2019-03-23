@@ -6,50 +6,48 @@ Description: Learn how to upload files through a frontend form
 ----
 Text:
 
-In this recipe we will create a basic file upload form where users can upload files from the frontend.
+In this recipe we will create a basic file upload form where users can upload files from the frontend. What we need:
 
-You can also add additional fields to this form or combine it with a user registration form.
-
-For this example we need:
-
-- a page called `uploads` where we put the form
-- a page called `fileuploads` where the files will be uploaded to
+- a page called `upload` where we put the form
+- a page called `storage` where the files will be uploaded to
 - a (glossary: template text: template) with the form
+- a file (glossary: blueprint text: blueprint) with rules
 - a (glossary: controller text: controller) with the form logic
 
 <warning>
-Allowing file uploads from the frontend is not without risks. If you allow website users to upload files without authentication, you should be super careful what type of file uploads you allow, where you store the files, how you name them, and ideally prevent access to those files from the frontend before the files have been checked to be clean.
+Allowing users to upload file from the frontend without authentication is **not without risks**. You should be very careful what file types you allow, where you store and how you name them, as well as ideally prevent access to those files before they have been checked to be safe.
 
-In this example, we will upload the files to the content folder, but if your use case or hosting allows it, consider uploading files to a location outside the web root.
-
+In this example, we will upload the files to the `content` folder, but if your use case or hosting allows it, consider uploading files to a location outside the web root.
 </warning>
 
-## The upload and fileupload pages
+## Pages: `upload` and `storage`
 
-(link: docs/guide/content/pages text: Create an upload page) with an `upload.txt` content file. For our means, we only need a title in the content file, the rest is up to you. You could, for example, store an introductory text.
+(link: docs/guide/content/pages text: Create an `upload` page) with an `upload.txt` content file. For our means, we only need a title in the content file, the rest is up to you. You could, for example, store an introductory text.
 
-If you want to access the page in the Panel, you can also create a (glossary: blueprint text: blueprint) for the page. We will skip this step here.
+If you want to access the page in the Panel, you also need to create a (glossary: blueprint text: blueprint) for the page. We will skip this step here.
 
-Additionally, create a `fileuploads` page. This is the page to which we upload the files.
+Additionally, create a `storage` page. This is the page to which we upload the files.
 
-## The upload template
+## Template
 
 Our `upload.php` template contains the form and will display error messages if something goes wrong or a success message if the form was successfully submitted.
 
 ```php "/site/templates/upload.php"
 <?php snippet('header') ?>
-<?php if($success): ?>
+
+<?php if ($success): ?>
   <div class="alert success">
-      <p><?= $success ?></p>
+    <p><?= $success ?></p>
   </div>
-<?php else: ?>        
-  <?php if (empty($alerts) === false):?>
+<?php else: ?>
+  <?php if (empty($alerts) === false): ?>
     <ul>
       <?php foreach ($alerts as $alert): ?>
-          <li><?= $alert ?></li>
+        <li><?= $alert ?></li>
       <?php endforeach ?>
     </ul>
   <?php endif ?>
+
   <form action="" method="post" enctype="multipart/form-data">
 
     <div class="honeypot">
@@ -66,12 +64,12 @@ Our `upload.php` template contains the form and will display error messages if s
     <input type="submit" name="submit" value="Submit" class="button">
 
   </form>
-<?php endif ?>  
+<?php endif ?>
 
 <?php snippet('footer') ?>
 ```
 
-The form is displayed by default and hidden once the email was successfully sent. We also included a honeypot field to ensure a minimum level of spam bot protection.
+The form is displayed by default and hidden once the upload was success. We also included a honeypot field to ensure a minimum level of spam bot protection.
 
 The honeypot field needs to be positioned off-screen, so we need some styles for it. Add this to your stylesheet (you can also change the class and styling, of course).
 
@@ -82,123 +80,190 @@ The honeypot field needs to be positioned off-screen, so we need some styles for
 }
 ```
 
-## The `upload.yml` file blueprint
+## File blueprint
 
 To easily validate if the uploaded files conform to what we want to allow, we set up a files blueprint with the `accept` option:
 
-```yml "/site/blueprints/files/upload.yml"
+```yaml "/site/blueprints/files/upload.yml"
 title: Frontend file uploads
 
 accept:
-  mime:    image/*, application/pdf
-  maxsize: 3000000  # size in byte = 3 MB
+  mime: image/*, application/pdf
+  maxsize: 3000000 # size in byte = 3 MB
 ```
 
-## The upload controller
+## Controller
+
+All the form and upload logic is handled by our (glossary: controller text: controller):
 
 ```php "/site/controllers/upload.php"
 <?php
 
 return function ($kirby, $page) {
 
-  $alerts = [];
+  $alerts  = [];
   $success = '';
 
-  
-  if ($kirby->request()->is('post') && get('submit')) {
+  if ($kirby->request()->is('post') === true && get('submit')) {
 
     // check the honeypot
     if (empty(get('website')) === false) {
-        go($page->url());
-        exit;
+      go($page->url());
+      exit();
     }
 
     $uploads = $kirby->request()->files()->get('file');
-    
-    // we only want 3 files
-    if (count($uploads) < 4) {
-        
-      // authenticate as almighty
-      $kirby->impersonate('kirby');
 
-      foreach ($uploads as $upload) {            
-        if (page('fileuploads')->files()->filter(function($file) use($upload) {
-          $pos = strpos($file->filename(), '_');
-          $originalSafename = substr($file->filename(), $pos+1);
-          return  $originalSafename === F::safeName($upload['name']) &&
-                  $file->mime() === $upload['type'] &&
-                  $file->size() === $upload['size'];
-          })->count() > 0) {
-          $alerts[$upload['name']] = "The file already exists";
-            
-        } else {
-          try {
-            $file = page('fileuploads')->createFile([
-              'source'   => $upload['tmp_name'],
-              'filename' => crc32($upload['name'].microtime()). '_' . $upload['name'],
-              'template' => 'upload',
-              'content' => [
-                  'date' => date('Y-m-d h:m'),
-              ]
-            ]);
-          } catch (Exception $e) {
-            $alerts[$upload['name']] = $e->getMessage();
-          }
-          $success = 'Your file upload was successful';
-        }
+    // we only want 3 files
+    if (count($uploads) > 3) {
+      $alerts['exceedMax'] = 'You may only upload 3 files.';
+      return compact('alerts', 'success');
+    }
+
+    // authenticate as almighty
+    $kirby->impersonate('kirby');
+
+    foreach ($uploads as $upload) {
+
+      // check for duplicate
+      $files      = page('storage')->files();
+      $duplicates = $files->filter(function ($file) use ($upload) {
+        // get original safename without prefix
+        $pos              = strpos($file->filename(), '_');
+        $originalSafename = substr($file->filename(), $pos + 1);
+
+        return $originalSafename === F::safeName($upload['name']) &&
+                $file->mime() === $upload['type'] &&
+                $file->size() === $upload['size'];
+      });
+
+      if ($duplicates->count() > 0) {
+        $alerts[$upload['name']] = "The file already exists";
+        continue;
       }
-  
-    } else {
-        
-        $alerts['exceedMax'] = 'You may only upload 3 files.';
+
+      try {
+        $name = crc32($upload['name'].microtime()). '_' . $upload['name'];
+        $file = page('storage')->createFile([
+          'source'   => $upload['tmp_name'],
+          'filename' => $name,
+          'template' => 'upload',
+          'content' => [
+              'date' => date('Y-m-d h:m')
+          ]
+        ]);
+        $success = 'Your file upload was successful';
+      } catch (Exception $e) {
+        $alerts[$upload['name']] = $e->getMessage();
+      }
     }
   }
-  return [
-    'alerts'  => $alerts,
-    'success' => $success
-  ];
+
+  return compact('alerts', 'success');
 };
 ```
+Let's break this down step by step:
 
-In our controller, we listen for a `POST` request and if the request came from our form. First, we check if a bot got trapped in our honeypot. In this case, we send him back to the page and stop script execution.
-
-
-Then we loop through the files array and check if the file already exists. To do so, we compare the safe name of the upload filename to the filename of existing files in the folder minus the prefix, the mime types and the size.
+First we are setting up our variables `$alerts` and `$success` which we will use to display in our template by returning them from our controller:
 
 ```php
-if (page('fileuploads')->files()->filter(function($file) use($upload) {
-  $pos = strpos($file->filename(), '-');
-  $originalSafename = substr($file->filename(), $pos+1);
-  return  $originalSafename === F::safeName($upload['name']) &&
+$alerts  = [];
+$success = '';
+// ...
+return compact('alerts', 'success');
+```
+
+### Checking for the right request
+
+To make sure we are responding to the right request, we listen for a `POST` request and whether the request came from our form. Then, we check if a bot got trapped in our honeypot. In this case, we send him back to the page and stop script execution.
+
+```php
+if ($kirby->request()->is('post') === true && get('submit')) {
+
+  if (empty(get('website')) === false) {
+    go($page->url());
+    exit();
+  }
+```
+
+### Checking for limits
+
+In our example, we decided that we want to limit uploads to a maximum of three files per upload. If this limit is exceeded we add an error message and return all messages to end the controller:
+
+```php
+if (count($uploads) > 3) {
+  $alerts['exceedMax'] = 'You may only upload 3 files.';
+  return compact('alerts', 'success');
+}
+```
+
+### Checking for duplicates
+
+Then we loop through `$uploads` to check each uploaded file individually. We do not want that the same file gets uploaded again and again. To do so, we compare the safe name of the uploaded file to the filename of existing files in the folder minus the prefix (explained below), the mime type and the size.
+
+```php
+$files      = page('storage')->files();
+$duplicates = $files->filter(function ($file) use ($upload) {
+  $pos              = strpos($file->filename(), '_');
+  $originalSafename = substr($file->filename(), $pos + 1);
+  return $originalSafename === F::safeName($upload['name']) &&
           $file->mime() === $upload['type'] &&
           $file->size() === $upload['size'];
-  })->count() > 0) {
-  
-  $alerts[$upload['name']] = "The file already exists";
-}
-```              
+});
 
-If all went well, we try to upload the files in a `try - catch` block using Kirby's `$page->createFile()` method. 
+if ($duplicates->count() > 0) {
+  $alerts[$upload['name']] = "The file already exists";
+  continue;
+}
+```
+
+If any duplicate is found, we add an error message for the current file and continue in the loop with the next uploaded file.
+
+### Creating the file
+
+If all went well so far, we try to upload and create the file in a `try - catch` block using Kirby's [`$page->createFile()`](/docs/reference/objects/page/create-file) method.
 
 ```php
-  $file = page('fileuploads')->createFile([
+try {
+  $name = crc32($upload['name'].microtime()). '_' . $upload['name'];
+  $file = page('storage')->createFile([
     'source'   => $upload['tmp_name'],
-    'filename' => crc32($upload['name'].microtime()). '-' . $upload['name'],
+    'filename' => $name,
     'template' => 'upload',
     'content' => [
-        'date' => date('Y-m-d h:m'),
+        'date' => date('Y-m-d h:m')
     ]
-]);
+  ]);
+  $success = 'Your file upload was successful';
 ```
-The method requires the `source` attribute, all other parameters are optional. However, we use the template option here to assign the file blueprint we created earlier. It does all the checking for the allowed mime types and sizes for us.
 
-To obfuscate the file name, we add a prefix to the original filename. Kirby automatically takes care of converting the filename to a safe name. Prefixing the filename makes it hard for the user to guess the filename and opening the file in the browser after update.
+The [`$page->createFile()`](/docs/reference/objects/page/create-file) method requires the `source` attribute, all other parameters are optional. However, we use the `template` option here to assign the file blueprint we created earlier. It does all the checking for the allowed mime types and sizes for us.
 
-As an additonal security measure, we can prohibit access to the `fileuploads` page using a (link: docs/guide/routing text: route)
+To obfuscate the file name, we add a prefix to the original filename. Kirby automatically takes care of converting the filename to a safe name. Prefixing the filename makes it hard for the user to guess the filename and opening the file in the browser after update. This makes it much harder for users to upload a malicious file and call it directly afterwards since the exact name will not be known to them.
 
-We also store the upload date and time as meta data in the `content` array. If you want, you can also store additional information in that array.
+We also store the upload date and time as meta data in the `content` array. If you want, you can also store additional information.
+
+If everything was successful, we set the success message.
+
+<info>
+As an additonal security measure, we can prohibit access to the `storage` page using a (link: docs/guide/routing text: route).
+</info>
+
+### Catching additional errors
+
+If the [`$page->createFile()`](/docs/reference/objects/page/create-file) method encounters any errors or rule violation, it will throw an error. By wrapping our code in a `try - catch` block, we make sure to get the error message and add it to our alerts array:
+
+```php
+} catch (Exception $e) {
+  $alerts[$upload['name']] = $e->getMessage();
+}
+```
 
 
-If everything was successful, we display a success message.
+## Next steps
 
+This recipes presented a basic way to implement file uploads from the frontend. Of course, there are more steps that could follow this:
 
+- Add additional fields to the form
+- Combine it with a user registration form
+- Add access restrictions to the `storage` page
