@@ -31,7 +31,7 @@ fields:
       web: Web
 ```
 
-## Blueprint
+## Field properties
 
 (field-options: radio)
 

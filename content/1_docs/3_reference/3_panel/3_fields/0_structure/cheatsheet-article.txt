@@ -55,7 +55,7 @@ addresses:
   city:   The capitol of the Bahamas
 ```
 
-## Blueprint
+## Field properties
 
 (field-options: structure)
 

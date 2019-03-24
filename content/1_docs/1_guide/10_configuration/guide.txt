@@ -47,7 +47,7 @@ Config options can be used anywhere in Kirby with the `$kirby->option()` method:
 $kirby->option('someOtherSetting');
 ```
 
-Or with the option helper:
+Or with the `option` helper:
 
 ```php
   option('someOtherSetting');

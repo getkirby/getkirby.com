@@ -27,6 +27,6 @@ fields:
     type: email
 ```
 
-## Blueprint
+## Field properties
 
 (field-options: email)

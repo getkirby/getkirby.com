@@ -25,6 +25,6 @@ fields:
     type: url
 ```
 
-## Blueprint
+## Field properties
 
 (field-options: url)

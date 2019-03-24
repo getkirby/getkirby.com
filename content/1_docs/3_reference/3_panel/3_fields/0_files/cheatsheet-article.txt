@@ -27,7 +27,7 @@ fields:
     type: files
 ```
 
-## Blueprint
+## Field properties
 
 (field-options: files)
 

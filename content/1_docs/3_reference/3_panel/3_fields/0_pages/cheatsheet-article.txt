@@ -27,7 +27,7 @@ fields:
     type: pages
 ```
 
-## Blueprint
+## Field properties
 
 (field-options: pages)
 

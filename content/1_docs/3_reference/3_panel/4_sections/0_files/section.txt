@@ -26,7 +26,7 @@ sections:
     template: gallery
 ```
 
-## Blueprint
+## Section properties
 
 The files section has multiple options to control what kind of files should be displayed, how they should be displayed and what happens if a new file is uploaded.
 

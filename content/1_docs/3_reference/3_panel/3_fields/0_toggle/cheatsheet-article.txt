@@ -26,7 +26,7 @@ fields:
     text: Include in menu?
 ```
 
-## Blueprint
+## Field properties
 
 (field-options: toggle)
 

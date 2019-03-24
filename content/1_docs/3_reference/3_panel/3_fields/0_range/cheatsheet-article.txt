@@ -30,7 +30,7 @@ fields:
       before: $
 ```
 
-## Blueprint
+## Field properties
 
 (field-options: range)
 

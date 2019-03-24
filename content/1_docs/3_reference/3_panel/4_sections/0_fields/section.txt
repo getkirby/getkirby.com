@@ -34,7 +34,7 @@ sections:
         type: textarea
 ```
 
-## Options
+## Section properties
 
 The fields section has only one option called `fields`. The `fields` option contains a list of field definitions (see example above). Check out the docs for each field type linked below to see what you can do with each field.
 

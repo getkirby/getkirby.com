@@ -1,6 +1,6 @@
 <table>
   <tr>
-    <th>Option</th>
+    <th>Property</th>
     <th>Type</th>
     <th>Required</th>
     <th>Default</th>

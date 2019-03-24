@@ -27,7 +27,7 @@ fields:
     type: date
 ```
 
-## Blueprint
+## Field properties
 
 (field-options: date)
 

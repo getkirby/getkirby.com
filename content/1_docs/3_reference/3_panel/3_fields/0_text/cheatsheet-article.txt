@@ -27,7 +27,7 @@ fields:
     type: text
 ```
 
-## Blueprint
+## Field properties
 
 (field-options: text)
 

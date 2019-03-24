@@ -27,7 +27,7 @@ fields:
     type: textarea
 ```
 
-## Blueprint
+## Field properties
 
 (field-options: textarea)
 

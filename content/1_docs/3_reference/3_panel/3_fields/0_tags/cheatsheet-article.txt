@@ -27,7 +27,7 @@ fields:
     type: tags
 ```
 
-## Blueprint
+## Field properties
 
 (field-options: tags)
 

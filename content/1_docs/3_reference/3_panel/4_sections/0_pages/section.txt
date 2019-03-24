@@ -36,7 +36,7 @@ sections:
 
 The pages section has multiple options to control what kind of pages should be displayed, how they should be displayed and what happens if a new page is added.
 
-## Blueprint
+## Section properties
 
 (section-options: pages)
 
