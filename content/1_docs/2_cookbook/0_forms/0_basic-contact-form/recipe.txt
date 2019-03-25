@@ -184,7 +184,7 @@ Here are the two email templates:
 
 The plain text template gets the extension `.php`.
 
-```php "/site/templates/email.php"
+```php "/site/templates/emails/email.php"
 Hello Company,
 
 <?= $text ?>
@@ -196,7 +196,7 @@ Hello Company,
 
 The HTML template gets the extension `html.php`.
 
-```php "/site/templates/email.html.php"
+```php "/site/templates/emails/email.html.php"
 Hello Company,
 
 <p><?= $text ?></p>
