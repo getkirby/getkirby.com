@@ -12,7 +12,7 @@ Field methods are registered with the `fieldMethods` extension.
 
 ## Default field methods
 
-**For a full (link: docs/reference/#file-methods text: list of default field methods), please check out the Reference.**
+**For a full (link: docs/reference/#field-methods text: list of default field methods), please check out the Reference.**
 
 <info>Be aware that you cannot override these default field methods with any custom field method.</info>
 
