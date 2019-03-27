@@ -1,7 +1,8 @@
 node_modules
 .vscode
 .DS_Store
-config.js
+./config.json
+/backstop_data
 /www/assets/dev
 /www/media
 /site/accounts
@@ -9,3 +10,4 @@ config.js
 /site/config/keys
 /site/config/.license
 /site/sessions
+/backstop.json

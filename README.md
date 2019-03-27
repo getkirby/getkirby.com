@@ -29,8 +29,8 @@ it expects a copy of the site to run at `http://getkirby.test`. The document roo
 of the site is the subfolder `www/`.
 
 You can override the default domain if you prefer to run the site
-at a different domain. To do so, just copy `config.default.js` to a file
-named `config.js`. You can define a custom domain that new file.
+at a different domain. To do so, just copy `config.default.json` to a file
+named `config.json`. You can define a custom domain that new file.
 
 ## Start the build tool for development
 
@@ -60,3 +60,42 @@ follows:
 ```
 npm run build
 ```
+
+## Visual Regression tests
+
+When refactoring and style sheets or for testing how any change will affect the
+site appearance, you are encouraged to use the integrated backstop testing. First
+of all, you have to create a local configuration. To generate the tests, run:
+
+```
+npm run backstop-config
+````
+
+This will create a file called `backstop.json` within your project root. To
+generate reference screenshots of the site, run:
+
+```
+npm run backstop-reference
+```
+
+After your reference has been generated (this will take a while), make your
+changes to to any CSS file, template or anything else that could affect page
+appearance. Now, run:
+
+```
+npm run backstop-test
+```
+
+This will generate a second set of screenshots. Backstop will compare these to
+the reference set of screenshots and open a report in your browser after the
+process has finished, allowing you to revisit every change.
+
+To open the report again, run:
+
+```
+npm run backstop-report
+```
+
+The testing scenarios for Backstop are defined in `site/plugins/backstop/index.php`,
+in case you want to add a new template and add a page where it’s acutally used
+to the scenarios.
