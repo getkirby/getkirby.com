@@ -1,6 +1,6 @@
 /* global Prism */
 
-const initPrismLanguages = ([, Clipboard]) => {
+const initPrismLanguages = ([, ClipboardJS]) => {
 
   Prism.languages.kirbytext = Prism.languages.extend('markdown', {});
 
@@ -44,7 +44,7 @@ const initPrismLanguages = ([, Clipboard]) => {
 
     function registerClipboard() {
 
-      var clip = new Clipboard(linkCopy, {
+      var clip = new ClipboardJS(linkCopy, {
         'text': function () {
           return env.code;
         }

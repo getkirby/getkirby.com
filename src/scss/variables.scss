@@ -73,11 +73,10 @@ $element-spacing: 1.5em; // should be equal to line-height
 // =====  Breakpoints  ====================================================== //
 
 $mq-breakpoints: (
-  ("" 0 4)
-  (s 608px 12)
-  (m 896px 12)
-  (l 1200px 12)
+  ("" 0)
+  (s 608px)
+  (m 896px)
+  (l 1200px)
 );
-
 $mq-debug: false;
 $mq-print-pseudo-rules: false;

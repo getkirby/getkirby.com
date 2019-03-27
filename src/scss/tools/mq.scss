@@ -179,8 +179,10 @@ $mq-debug-selector: "body::after" !default;
     @return 0;
   }
 
-  @if (unitless($px)) {
-    @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you";
+  @if unitless($px) {
+    @if $px != 0 {
+      @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you";
+    }
     /* stylelint-disable-next-line length-zero-no-unit */
     @return mq-px2em($px + 0px); // That may fail.
   } @else if (unit($px) == em) {

@@ -1,18 +1,17 @@
 /* eslint-env node */
 /* eslint-disable no-console, no-sync, array-bracket-newline, no-process-env */
 
-const autoprefixer       = require('autoprefixer');
-const calc               = require('postcss-calc');
-// const CleanWebpackPlugin = require('clean-webpack-plugin');
-const extend             = require('extend');
-const fs                 = require('fs');
-const glob               = require('glob');
-const mix                = require('laravel-mix');
-const path               = require('path');
+const autoprefixer = require('autoprefixer');
+const calc = require('postcss-calc');
+const extend = require('extend');
+const fs = require('fs');
+const glob = require('glob');
+const mix = require('laravel-mix');
+const path = require('path');
 
 /* -------------------------------------------------------------------------- */
 
-const ENV              = process.env.NODE_ENV;
+const ENV = process.env.NODE_ENV;
 
 /**
  * When Mix runs in a dev environment
@@ -21,12 +20,12 @@ const ASSETS_SUBFOLDER = (ENV === 'development' ? '/dev' : '');
 
 /* Load user config if exists */
 
-const defaultConfig = require('./config.default.js');
+const defaultConfig = JSON.parse(fs.readFileSync('./config.default.json'));
 
 let config = {};
 
-if (fs.existsSync(path.resolve(__dirname, './config.js'))) {
-  config = extend(defaultConfig, require('./config.js')); // eslint-disable-line global-require
+if (fs.existsSync(path.resolve(__dirname, './config.json'))) {
+  config = extend(defaultConfig, JSON.parse(fs.readFileSync('./config.json'))); // eslint-disable-line global-require
 } else {
   config = defaultConfig;
 }
@@ -84,7 +83,7 @@ for (let i = 0, l = templateCSS.length; i < l; i++) {
 
 mix.browserSync({
   proxy: {
-    target: config.browserSyncProxy,
+    target: config.host,
     reqHeaders: {
       'X-Environment': ENV,
     }
@@ -111,7 +110,6 @@ mix.webpackConfig({
     chunkFilename: 'js/[name]-bundle.js?v=[chunkhash:8]',
   },
   plugins: [
-    // new CleanWebpackPlugin(['www/assets']),
   ],
   stats: {
     assets: false,
