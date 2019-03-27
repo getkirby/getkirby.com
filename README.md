@@ -61,6 +61,18 @@ follows:
 npm run build
 ```
 
+## Linters
+
+Our site uses `eslint` and `stylelint` for keeping the contents of JS and SCSS
+files consistent. It is highly recommended that you intall the corresponding
+integration plugin for your editor or IDE. If your development tool of choice
+does not offer the corresponding integration, you can alternatively run the
+linters manually before commiting anything back to the repository, by executing:
+
+```
+npm run lint
+```
+
 ## Visual Regression tests
 
 When refactoring and style sheets or for testing how any change will affect the
