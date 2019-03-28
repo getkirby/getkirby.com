@@ -39,13 +39,10 @@
 
       <?php if ($guide = page('docs/guide')) : ?>
       <a class="cheatsheet-back" href="<?= $guide->url() ?>">
-        <svg height="32" viewBox="0 0 46 54" aria-hidden="true">
-          <title>Kirby Logo</title>
-          <g fill="none" fill-rule="evenodd">
-            <path class="logo-hexagon-outline" stroke="#282C34" stroke-width="2" d="M23 7L6 16.66v19.3l17 9.66 17-9.66v-19.3z"></path>
-            <path class="logo-hexagon-k" stroke="transparent" fill="transparent" d="M23,7,6,16.66V36l17,9.66L40,36V16.66Zm8,20-5,2.59V30h5v4H15V30h5v-.44L15,27V22l8,4.3L31,22Z"></path>
-            <path class="logo-focus-outline" stroke="transparent" stroke-width="2" d="M23 1.84L1.5 14.083v24.46L23 50.786l21.5-12.243v-24.46z"></path>
-            <path class="logo-k" fill="#282C34" fill-rule="nonzero" d="M31 27l-5 2.59V30h5v4H15v-4h5v-.437L15 27v-5l8 4.297L31 22"></path>
+        <svg width="23" height="26" aria-hidden="true">
+          <g fill="#FFF" fill-rule="nonzero">
+            <path d="M11.5 1.119L1 7.085v11.938l10.5 5.966L22 19.023V7.085L11.5 1.12zm9.333 17.225L11.5 23.647l-9.333-5.303V7.764L11.5 2.461l9.333 5.303v10.58z"></path>
+            <path d="M6.863 10v2.89l2.889 1.481v.252H6.863v2.312h9.246v-2.312H13.22v-.237l2.889-1.496V10l-4.623 2.483z"></path>
           </g>
         </svg>
         <span>Guide</span>
