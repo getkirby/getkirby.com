@@ -1,13 +1,13 @@
 /* eslint-env node */
 /* eslint-disable no-console, no-sync, array-bracket-newline, no-process-env */
 
-const autoprefixer = require('autoprefixer');
-const calc = require('postcss-calc');
-const extend = require('extend');
-const fs = require('fs');
-const glob = require('glob');
-const mix = require('laravel-mix');
-const path = require('path');
+const autoprefixer = require("autoprefixer");
+const calc = require("postcss-calc");
+const extend = require("extend");
+const fs = require("fs");
+const glob = require("glob");
+const mix = require("laravel-mix");
+const path = require("path");
 
 /* -------------------------------------------------------------------------- */
 
@@ -16,16 +16,16 @@ const ENV = process.env.NODE_ENV;
 /**
  * When Mix runs in a dev environment
  */
-const ASSETS_SUBFOLDER = (ENV === 'development' ? '/dev' : '');
+const ASSETS_SUBFOLDER = (ENV === "development" ? "/dev" : "");
 
 /* Load user config if exists */
 
-const defaultConfig = JSON.parse(fs.readFileSync('./config.default.json'));
+const defaultConfig = JSON.parse(fs.readFileSync("./config.default.json"));
 
 let config = {};
 
-if (fs.existsSync(path.resolve(__dirname, './config.json'))) {
-  config = extend(defaultConfig, JSON.parse(fs.readFileSync('./config.json'))); // eslint-disable-line global-require
+if (fs.existsSync(path.resolve(__dirname, "./config.json"))) {
+  config = extend(defaultConfig, JSON.parse(fs.readFileSync("./config.json"))); // eslint-disable-line global-require
 } else {
   config = defaultConfig;
 }
@@ -49,10 +49,10 @@ mix.options({
     calc({ precision: 10 }),
     autoprefixer({
       browsers: [
-        'last 2 versions',
-        'not IE < 11',
-        'not IE_mob <= 11',
-        'not BB <= 10',
+        "last 2 versions",
+        "not IE < 11",
+        "not IE_mob <= 11",
+        "not BB <= 10",
       ],
       grid: false,
     })
@@ -61,22 +61,22 @@ mix.options({
 
 /* -------------------------------------------------------------------------- */
 
-mix.js('src/js/index.js', 'js');
-mix.js('src/js/polyfills/respimage.js', 'js/polyfills');
-mix.js('src/js/polyfills/promise.js', 'js/polyfills');
+mix.js("src/js/index.js", "js");
+mix.js("src/js/polyfills/respimage.js", "js/polyfills");
+mix.js("src/js/polyfills/promise.js", "js/polyfills");
 
 /* Search for template-specific JavaScript files */
-const templateJS = glob.sync('./src/js/templates/*.js');
+const templateJS = glob.sync("./src/js/templates/*.js");
 for (let i = 0, l = templateJS.length; i < l; i++) {
-  mix.js(templateJS[i], 'js/templates');
+  mix.js(templateJS[i], "js/templates");
 }
 
-mix.sass('src/scss/index.scss', 'css', sassSettings);
+mix.sass("src/scss/index.scss", "css", sassSettings);
 
 /* Search for template-specific CSS files */
-const templateCSS = glob.sync('./src/scss/templates/*.scss');
+const templateCSS = glob.sync("./src/scss/templates/*.scss");
 for (let i = 0, l = templateCSS.length; i < l; i++) {
-  mix.sass(templateCSS[i], 'css/templates', sassSettings);
+  mix.sass(templateCSS[i], "css/templates", sassSettings);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -85,18 +85,19 @@ mix.browserSync({
   proxy: {
     target: config.host,
     reqHeaders: {
-      'X-Environment': ENV,
+      "X-Environment": ENV,
     }
   },
   files: [
     `www/assets${ASSETS_SUBFOLDER}/css/*.css`,
     `www/assets${ASSETS_SUBFOLDER}/css/templates/*.css`,
     `www/assets${ASSETS_SUBFOLDER}/js/*.js`,
-    'site/snippets/**/*.php',
-    'site/templates/**/*.php',
-    'www/content/**/*',
+    "site/snippets/**/*.php",
+    "site/templates/**/*.php",
+    "www/content/**/*",
   ],
   open: false,
+  ghostMode: false,
 });
 
 mix.sourceMaps();
@@ -107,7 +108,7 @@ mix.setResourceRoot(`/assets${ASSETS_SUBFOLDER}/`);
 mix.webpackConfig({
   output: {
     publicPath: `/assets${ASSETS_SUBFOLDER}/`,
-    chunkFilename: 'js/[name]-bundle.js?v=[chunkhash:8]',
+    chunkFilename: "js/[name]-bundle.js?v=[chunkhash:8]",
   },
   plugins: [
   ],
@@ -126,7 +127,7 @@ mix.webpackConfig({
 mix.then(() => {
   fs.unlink(path.join(__dirname, `www/assets${ASSETS_SUBFOLDER}/mix-manifest.json`), (err) => {
     if(err) {
-      console.log('Could not delete mix-manifest.json file.');
+      console.log("Could not delete mix-manifest.json file.");
     }
   });
 })
