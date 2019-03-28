@@ -1,45 +1,44 @@
-import ready from '../utils/ready';
-import delay from '../utils/delay';
+import ready from "../utils/ready";
+import delay from "../utils/delay";
 
-const ALGOLIA_APP   = 'S7OGBIAJTV';
-const ALGOLIA_KEY   = 'd161a2f4cd2d69247c529a3371ad3050';
-const ALGOLIA_INDEX = 'getkirby-3';
+const ALGOLIA_APP   = "S7OGBIAJTV";
+const ALGOLIA_KEY   = "d161a2f4cd2d69247c529a3371ad3050";
+const ALGOLIA_INDEX = "getkirby-3";
 
 // Placeholder string used to distinguish the "view all" preudo-result
 // from regular search results
-const VIEW_ALL_RESULTS_LABEL = 'VIEW_ALL_RESULTS_UXfpeDFlmye9rXkXP5wd';
-const SEARCH_ERROR_LABEL     = 'SEARCH_ERROR_UXfpeDFlmye9rXkXP5wd';
+const VIEW_ALL_RESULTS_LABEL = "VIEW_ALL_RESULTS_UXfpeDFlmye9rXkXP5wd";
+const SEARCH_ERROR_LABEL     = "SEARCH_ERROR_UXfpeDFlmye9rXkXP5wd";
 const CHEVRON_RIGHT_SVG      = '<svg viewBox="0 0 5 11" width="5" height="11" aria-hidden="true"><path d="M2.96153846,5.41538462 L0,9.13846154 L1.35384615,10.1538462 L4.73846154,5.92307692 C4.82307692,5.75384615 4.90769231,5.58461538 4.90769231,5.41538462 C4.90769231,5.24615385 4.82307692,5.07692308 4.73846154,4.90769231 L1.35384615,0.676923077 L0,1.69230769 L2.96153846,5.41538462 Z"/></svg>';
 
 ready(() => {
-  'use strict';
 
-  const searchForm  = document.querySelector('.js-menu-search');
+  const searchForm  = document.querySelector(".js-menu-search");
 
   if(!searchForm) {
     // abort initialization if there’s no search form
     return;
   }
 
-  const searchInput = document.querySelector('.js-menu-search-input');
+  const searchInput = document.querySelector(".js-menu-search-input");
 
   Promise.all([
     import(
       /* webpackChunkName: "search" */
       /* webpackMode: "lazy" */
-      'algoliasearch/lite'
+      "algoliasearch/lite"
     ),
     import(
       /* webpackChunkName: "search" */
       /* webpackMode: "lazy" */
-      'awesomplete'
+      "awesomplete"
     )
   ]).then(([algoliasearch, Awesomeplete]) => {
 
     const client      = algoliasearch(ALGOLIA_APP, ALGOLIA_KEY);
     const index       = client.initIndex(ALGOLIA_INDEX);
 
-    let lastValue   = '';
+    let lastValue   = "";
     let list        = [];
 
     const awesome = new Awesomeplete(searchInput, {
@@ -48,15 +47,15 @@ ready(() => {
       sort: false,
       item: (text /*, input */) => {
 
-        const item = document.createElement('li');
+        const item = document.createElement("li");
 
         if(text.label === VIEW_ALL_RESULTS_LABEL) {
           // view all link
-          item.classList.add('menu-search-view-all');
+          item.classList.add("menu-search-view-all");
           item.innerHTML = `<strong>View all results</strong>${CHEVRON_RIGHT_SVG}`;
         } else if(text.label === SEARCH_ERROR_LABEL) {
           // error message link
-          item.classList.add('menu-search-error');
+          item.classList.add("menu-search-error");
           item.innerHTML = `<strong>Sorry, an error occured. Please try advanced search instead.</strong>${CHEVRON_RIGHT_SVG}`;
         } else {
           // regular result
@@ -67,20 +66,20 @@ ready(() => {
       }
     });
 
-    searchInput.addEventListener('keypress', (e) => {
+    searchInput.addEventListener("keypress", (e) => {
       if((e.key && (e.key === "Enter")) || e.keyCode === 13) {
         searchForm.submit();
       }
     });
 
-    searchInput.addEventListener('keyup', () => {
+    searchInput.addEventListener("keyup", () => {
 
       const value = searchInput.value.trim();
 
       if(value === lastValue) {
         return true;
-      } else if(value === '') {
-        lastValue = '';
+      } else if(value === "") {
+        lastValue = "";
         list      = [];
         awesome.list = list;
         awesome.evaluate();
@@ -114,7 +113,7 @@ ready(() => {
           if(err) {
 
             /* eslint-disable */
-            if('console' in window) {
+            if("console" in window) {
               console.error("Quicksearch error", err);
             }
             /* eslint-enable */
@@ -160,7 +159,7 @@ ready(() => {
 
     });
 
-    searchInput.addEventListener('awesomplete-select', (e /*, item */) => {
+    searchInput.addEventListener("awesomplete-select", (e /*, item */) => {
 
       e.preventDefault();
 

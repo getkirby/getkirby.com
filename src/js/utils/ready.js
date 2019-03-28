@@ -7,11 +7,11 @@
  */
 export default function ready(fn = function() {}) { /* eslint-disable-line no-empty-function */
   return new Promise((resolve) => {
-    if (document.readyState !== 'loading') {
+    if (document.readyState !== "loading") {
       fn();
       resolve();
     } else {
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener("DOMContentLoaded", () => {
         fn();
         resolve();
       });

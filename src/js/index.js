@@ -2,13 +2,13 @@
 
 // Displays focus ring when user tabs, but not when user
 // clicks in sth.
-import 'focus-visible';
+import "focus-visible";
 
 /* -----  Components -------------------------------------------------------- */
 
-import './components/menu-search';
-import './components/sidebar';
-import './components/tooltip';
+import "./components/menu-search";
+import "./components/sidebar";
+import "./components/tooltip";
 
 
 /* ----- Code Highlighting -------------------------------------------------------- */

@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/bastianallgeier/v3.getkirby.com#readme",
   "devDependencies": {
-    "babel-eslint": "^8.2.6",
+    "babel-eslint": "^10.0.1",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "backstopjs": "^3.8.8",
     "browser-sync": "^2.26.3",
@@ -50,5 +50,25 @@
     "svgo": "^1.2.0",
     "svgxuse": "^1.2.6",
     "tippy.js": "^2.6.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "es6": true
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "rules": {
+      "quotes": [
+        "error",
+        "double",
+        {
+          "avoidEscape": true
+        }
+      ]
+    }
   }
 }
