@@ -3,7 +3,6 @@ node_modules
 .DS_Store
 ./config.json
 /backstop_data
-/www/assets/dev
 /www/media
 /site/accounts
 /site/cache
