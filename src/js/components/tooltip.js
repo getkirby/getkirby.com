@@ -1,14 +1,17 @@
 import ready from "../utils/ready";
 
-const tippyOptions = {
-  interactive: true,
-  animation: "shift-away",
-  arrow: true,
-  delay: [150, 300],
-  theme: "kirby",
-  maxWidth: "25rem",
-  performance: true,
-  // trigger: "click", // Useful for layout debugging, as the tooltip will not fade away if this is active.
+function getTippyOptions() {
+  return {
+    animation: "shift-away",
+    arrow: true,
+    delay: [150, 300],
+    distance: 10,
+    duration: [200, 150],
+    interactive: true,
+    maxWidth: "25rem",
+    theme: "kirby",
+    trigger: "click", // Useful for layout debugging, as the tooltip will not fade away if this is active.
+  }
 }
 
 ready().then(() => {
@@ -26,16 +29,20 @@ ready().then(() => {
       /* webpackMode: "lazy" */
       "tippy.js"
     ),
-  ]).then(([tippy]) => {
+  ]).then(([{ default: tippy }]) => {
 
     for(let i = 0, l = tooltips.length; i < l; i++) {
       const tooltip   = tooltips[i];
       const htmlTitle = tooltip.getAttribute("data-tooltip");
       const htmlContent = `<div class="tippy-inner | text text-small -background:black">${htmlTitle}</div>`;
 
-      tooltip.setAttribute("title", htmlContent);
+      // tooltip.setAttribute("title", htmlContent);
 
-      tippy(tooltip, tippyOptions);
+      const options = getTippyOptions();
+
+      options.content = htmlContent;
+
+      tippy(tooltip, options);
 
     }
 

@@ -49,7 +49,7 @@
     "smoothscroll-polyfill": "^0.4.4",
     "svgo": "^1.2.0",
     "svgxuse": "^1.2.6",
-    "tippy.js": "^2.6.0"
+    "tippy.js": "^4.2.1"
   },
   "eslintConfig": {
     "root": true,
