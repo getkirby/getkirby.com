@@ -1,0 +1,13 @@
+Title: Quote Tag
+
+----
+
+Repository: https://github.com/jbeyerstedt/kirby-kirbytag-quote
+
+----
+
+Category: text
+
+----
+
+Description: Kirbytag to create blockquotes

@@ -1,0 +1,16 @@
+Title: Doctor
+
+----
+
+Repository: https://github.com/bnomei/kirby3-doctor
+
+----
+
+Category: security
+
+----
+
+Description: Check the health of your Kirby installation
+
+----
+

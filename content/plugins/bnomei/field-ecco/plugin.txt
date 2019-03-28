@@ -1,0 +1,14 @@
+Title: Field Ecco
+
+----
+
+Repository: https://github.com/bnomei/kirby3-field-ecco
+
+----
+
+Category: templating
+
+----
+
+Description: Field method to echo strings based on the boolean value of a field
+

@@ -1,0 +1,14 @@
+Title: Feed
+
+----
+
+Repository: https://github.com/bnomei/kirby3-feed
+
+----
+
+Category: integrations
+
+----
+
+Description: Generate a RSS or JSON-Feed from a collection of pages
+

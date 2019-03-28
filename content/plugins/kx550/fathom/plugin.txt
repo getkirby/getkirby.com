@@ -1,0 +1,14 @@
+Title: Fathom
+
+----
+
+Repository: https://github.com/kx550/kirby3-fathom
+
+----
+
+Category: analytics
+
+----
+
+Description: Add the Fathom tracking code to your site
+

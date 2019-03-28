@@ -1,0 +1,14 @@
+Title: Illuminate Database
+
+----
+
+Repository: https://github.com/beebmx/kirby-db
+
+----
+
+Category: utilities
+
+----
+
+Description: Use Laravel's illuminate/database package in Kirby
+

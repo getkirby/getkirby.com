@@ -1,0 +1,14 @@
+Title: Twig Templates
+
+----
+
+Repository: https://github.com/mgfagency/kirby-twig
+
+----
+
+Category: templating
+
+----
+
+Description: Add support for Twig templates to your Kirby installation
+

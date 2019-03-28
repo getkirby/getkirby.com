@@ -1,0 +1,17 @@
+Title: DotEnv
+
+----
+
+Repository: https://github.com/bnomei/kirby3-dotenv
+
+----
+
+Category: utilities
+
+----
+
+Description: Store project credentials and environment variables in a .env file and access them in Kirby
+
+----
+
+Similar: beebmx/env

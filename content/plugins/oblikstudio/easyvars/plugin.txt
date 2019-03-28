@@ -1,0 +1,15 @@
+Title: Easyvars
+
+----
+
+Repository: https://github.com/OblikStudio/kirby-easyvars
+
+----
+
+Category: utilities
+
+----
+
+Description: Specify language variables with YAML files and nested keys
+
+

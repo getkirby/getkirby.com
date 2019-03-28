@@ -1,0 +1,14 @@
+Title: Log
+
+----
+
+Repository: https://github.com/bvdputte/kirby-log
+
+----
+
+Category: utilities
+
+----
+
+Description: A little log utility (KLogger wrapper)
+

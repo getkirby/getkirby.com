@@ -1,0 +1,14 @@
+Title: Autoresize
+
+----
+
+Repository: https://github.com/medienbaecker/kirby-autoresize
+
+----
+
+Category: assets
+
+----
+
+Description: Automatically resize images on upload
+

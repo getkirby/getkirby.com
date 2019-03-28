@@ -1,0 +1,14 @@
+Title: Pagetable
+
+----
+
+Repository: https://github.com/sylvainjule/kirby-pagetable
+
+----
+
+Category: panel
+
+----
+
+Description: Display subpages in a flexible, sortable and searchable table.
+

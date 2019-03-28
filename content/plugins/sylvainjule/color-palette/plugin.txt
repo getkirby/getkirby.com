@@ -1,0 +1,14 @@
+Title: Color Palette Field
+
+----
+
+Repository: https://github.com/sylvainjule/kirby-color-palette
+
+----
+
+Category: panel
+
+----
+
+Description: A color palette field, helping you pick predefined colors / palettes
+

@@ -1,0 +1,17 @@
+title: Fingerprint
+
+----
+
+Repository: https://github.com/bvdputte/kirby-fingerprint
+
+----
+
+Category: assets
+
+----
+
+Description: Cache-busting utility to fingerprint assets
+
+----
+
+Recommended: bnomei/fingerprint

@@ -1,0 +1,13 @@
+Title: Instagram
+
+----
+
+Repository: https://github.com/bnomei/kirby3-instagram
+
+----
+
+Category: social
+
+----
+
+Description: Call Instagram API endpoints in Kirby

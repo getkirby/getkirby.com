@@ -1,0 +1,14 @@
+Title: Mobile Detect
+
+----
+
+Repository: https://github.com/bnomei/kirby3-mobile-detect
+
+----
+
+Category: utilities
+
+----
+
+Description: Static class and page methods for using the mobile detect lib
+

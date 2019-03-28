@@ -1,0 +1,13 @@
+Title: Blade Templates
+
+----
+
+Repository: https://github.com/beebmx/kirby-blade
+
+----
+
+Category: templating
+
+----
+
+Description: Use Laravel Blade templates for your Kirby site

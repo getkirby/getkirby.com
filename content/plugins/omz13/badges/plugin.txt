@@ -1,0 +1,16 @@
+Title: Badges
+
+----
+
+Repository: https://github.com/omz13/kirby3-badges
+
+----
+
+Category: integrations
+
+----
+
+Description: Add Github-style badges to your site with the (badge: …) Kirbytag
+
+----
+
