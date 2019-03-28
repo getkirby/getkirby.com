@@ -6,7 +6,7 @@ const cheatsheet = $(".cheatsheet");
 
 const buttons = () => {
 
-  $$('.cheatsheet-panel-header button').forEach((button) => {
+  $$(".cheatsheet-panel-header button").forEach((button) => {
 
     button.addEventListener("click", () => {
       const show = button.getAttribute("data-show");
@@ -64,7 +64,7 @@ window.addEventListener("popstate", (e) => {
   }
 });
 
-$$('.cheatsheet-entries a').forEach((link) => {
+$$(".cheatsheet-entries a").forEach((link) => {
 
   link.addEventListener("click", (e) => {
     e.preventDefault();
@@ -82,8 +82,8 @@ $$('.cheatsheet-entries a').forEach((link) => {
 
 buttons();
 
-const currentSection = $('.cheatsheet-sections a[aria-current]');
-const currentEntry   = $('.cheatsheet-entries a[aria-current]');
+const currentSection = $(".cheatsheet-sections a[aria-current]");
+const currentEntry   = $(".cheatsheet-entries a[aria-current]");
 
 if (currentSection && currentSection.scrollIntoView) {
   currentSection.scrollIntoView();

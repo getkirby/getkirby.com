@@ -1,4 +1,4 @@
-import List from 'list.js';
+import List from "list.js";
 
 var options = {
   valueNames: [
@@ -8,4 +8,4 @@ var options = {
   ]
 };
 
-new List('cookbook-recipes', options);
+new List("cookbook-recipes", options);
