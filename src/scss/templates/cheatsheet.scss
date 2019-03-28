@@ -80,11 +80,25 @@ body {
   }
 }
 
+/**
+ * 1. Workaround for a bug in Firefox (tested with v66.0.1),
+ *    that `padding-bottom` on an element with
+ *    `overflow-y: auto/scroll`.
+ */
+
 .cheatsheet-main-scrollarea {
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 0; /* 1 */
+
+  > *:last-child {
+    margin-bottom: 1.5rem !important; /* 1 */
+  }
 
   @include mq(from m) {
-    padding: 3rem;
+    padding: 3rem 3rem 0; /* 1 */
+
+    > *:last-child {
+      margin-bottom: 3rem !important; /* 1 */
+    }
   }
 }
 
