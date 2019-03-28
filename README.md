@@ -1,4 +1,4 @@
-# Kirby Website
+# Kirby website
 
 This repo contains the whole <getkirby.com> website.
 
@@ -9,13 +9,13 @@ This repo contains the whole <getkirby.com> website.
 
 ## Installation and setup
 
-### Step 1: Clone the repo into an empty folder:
+### Step 1: Clone the repo into an empty folder
 
 ```
 git clone git@github.com:getkirby/getkirby.com.git
 ```
 
-### Step 2: Install Dependencies
+### Step 2: Install dependencies
 
 ```
 npm install
@@ -73,7 +73,7 @@ linters manually before commiting anything back to the repository, by executing:
 npm run lint
 ```
 
-## Visual Regression tests
+## Visual regression tests
 
 When refactoring and style sheets or for testing how any change will affect the
 site appearance, you are encouraged to use the integrated backstop testing. First
