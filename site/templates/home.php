@@ -111,7 +111,7 @@
       <h2 class="visually-hidden">Plugins</h2>
       <div class="wrap">
         <header>
-          <p class="h2">And if you ever run out of ideas or possibilities? <a href="<?= url('community') ?>">Get a plugin</a> or build your own interface elements.</p>
+          <p class="h2">And if you ever run out of ideas or possibilities? <a href="<?= url('plugins') ?>">Get a plugin</a> or build your own interface elements.</p>
           <p class="description">…like this fantastic <a href="https://github.com/sylvainjule/kirby-matomo">Matomo plugin</a><br> by <a href="https://sylvain-jule.fr">Sylvain Julé</a> &rsaquo;</p>
         </header>
         <figure>

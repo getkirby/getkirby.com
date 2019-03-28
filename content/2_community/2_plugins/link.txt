@@ -2,7 +2,7 @@ Title: Plugins
 
 ----
 
-Intro: Our plugin developers created dozens of fantastic plugins for Kirby 3. Below is a small selection of our favorite ones. You can find them all in our official <a href="/plugins">plugin repository</a>.
+Intro: Our plugin developers created dozens of fantastic plugins for Kirby. Below is a small selection of our favorite ones. You can find them all in our official <a href="/plugins">plugin repository</a>.
 
 ----
 
