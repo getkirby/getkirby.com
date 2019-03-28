@@ -13,11 +13,6 @@ const path = require("path");
 
 const ENV = process.env.NODE_ENV;
 
-/**
- * When Mix runs in a dev environment
- */
-const ASSETS_SUBFOLDER = (ENV === "development" ? "/dev" : "");
-
 /* Load user config if exists */
 
 const defaultConfig = JSON.parse(fs.readFileSync("./config.default.json"));
@@ -84,14 +79,11 @@ for (let i = 0, l = templateCSS.length; i < l; i++) {
 mix.browserSync({
   proxy: {
     target: config.host,
-    reqHeaders: {
-      "X-Environment": ENV,
-    }
   },
   files: [
-    `www/assets${ASSETS_SUBFOLDER}/css/*.css`,
-    `www/assets${ASSETS_SUBFOLDER}/css/templates/*.css`,
-    `www/assets${ASSETS_SUBFOLDER}/js/*.js`,
+    "www/assets/css/*.css",
+    "www/assets/css/templates/*.css",
+    "www/assets/js/*.js",
     "site/snippets/**/*.php",
     "site/templates/**/*.php",
     "www/content/**/*",
@@ -102,13 +94,13 @@ mix.browserSync({
 
 mix.sourceMaps();
 mix.disableNotifications();
-mix.setPublicPath(`www/assets${ASSETS_SUBFOLDER}`);
-mix.setResourceRoot(`/assets${ASSETS_SUBFOLDER}/`);
+mix.setPublicPath("www/assets");
+mix.setResourceRoot("/assets/");
 
 mix.webpackConfig({
   output: {
-    publicPath: `/assets${ASSETS_SUBFOLDER}/`,
-    chunkFilename: "js/[name]-bundle.js?v=[chunkhash:8]",
+    publicPath: "/assets/",
+    chunkFilename: "js/bundle-[name].js?id=[chunkhash]",
   },
   plugins: [
   ],
@@ -119,15 +111,4 @@ mix.webpackConfig({
   },
 });
 
-/**
- * Laravel Mix writes a `mix-manifest.json` file into the assets
- * folder by default. As we don’t need it, we delete it after build
- * has finished.
- */
-mix.then(() => {
-  fs.unlink(path.join(__dirname, `www/assets${ASSETS_SUBFOLDER}/mix-manifest.json`), (err) => {
-    if(err) {
-      console.log("Could not delete mix-manifest.json file.");
-    }
-  });
-})
+mix.version();
