@@ -19,7 +19,7 @@
   flex-basis: 100%;
 
   @include mq(from m) {
-    flex-basis: calc(66.66% - .33rem);
+    flex-basis: calc(66.66% - 1rem);
   }
 }
 .plugins-search:focus {
@@ -32,14 +32,14 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  margin-left: -1rem;
+  margin-left: -3rem;
   margin-bottom: 6rem;
 }
 
 .plugins-layout > * {
   flex-grow: 1;
   flex-shrink: 0;
-  padding-left: 1rem;
+  padding-left: 3rem;
   width: 100%;
 }
 

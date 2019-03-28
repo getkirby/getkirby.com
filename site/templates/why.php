@@ -1,6 +1,6 @@
 <?php snippet('header') ?>
 
-  <main class="features-page | main" id="maincontent">
+  <main class="why-page | main" id="maincontent">
     <article>
 
       <div class="wrap">
@@ -9,7 +9,7 @@
 
       <section id="clients" class="section -background:light">
         <div class="wrap">
-          <h2><a href="#clients">For Clients & Agencies</a></h2>
+          <h2><a href="#clients">Made for clients & agencies</a></h2>
 
           <ul class="grid">
             <?php foreach ($page->clients()->toStructure() as $item): ?>
@@ -24,7 +24,7 @@
 
       <section id="editors" class="section">
         <div class="wrap">
-          <h2><a href="#editors">For Content editors</a></h2>
+          <h2><a href="#editors">Made for content creators</a></h2>
 
           <ul class="grid">
             <?php foreach ($page->editors()->toStructure() as $item): ?>
@@ -39,7 +39,7 @@
 
       <section id="developers" class="section -background:dark">
         <div class="wrap">
-          <h2><a href="#developers">For Developers</a></h2>
+          <h2><a href="#developers">Made for developers</a></h2>
 
           <ul class="grid">
             <?php foreach ($page->developers()->toStructure() as $item): ?>
@@ -54,7 +54,7 @@
 
       <section id="designers" class="section -background:light">
         <div class="wrap">
-          <h2><a href="#designers">For Designers</a></h2>
+          <h2><a href="#designers">Made for designers</a></h2>
 
           <ul class="grid">
             <?php foreach ($page->designers()->toStructure() as $item): ?>
