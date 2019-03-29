@@ -230,9 +230,6 @@ class HelperPage extends Page
             if ($docBlock = $this->docBlock()) {
                 if ($type = $docBlock->getReturnType()) {
                     $type = trim((string)$type->getType());
-                    $type = implode('|', array_map(function ($type) {
-                        return substr($type, 0, 1) === '\\' ? substr($type, 1) : $type;
-                    }, explode('|', $type)));
                     return $this->typeDefinition($type);
                 }
             }
@@ -258,6 +255,8 @@ class HelperPage extends Page
     protected function typeDefinition($type = null)
     {
         $classes = array_map(function ($class) {
+           $class = substr($class, 0, 1) === '\\' ? substr($class, 1) : $class;
+
             if ($reference = referenceLookup($class)) {
                 return Html::a($reference->url(), $class);
             }
