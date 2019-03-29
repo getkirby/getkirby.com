@@ -1,0 +1,14 @@
+Title: KirbytextWrap
+
+----
+
+Repository: https://github.com/yoanmalie/kirbytextWrap
+
+----
+
+Category: templating
+
+----
+
+Description: Parse Kirbytext and wrap the result in an HTML element of your choice
+
