@@ -17,3 +17,7 @@ php_value opcache.revalidate_freq 0
 ### "The JSON response from the API could not be parsed. Please check your API connection."
 
 When this error occurs, check with your hosting provider if `HTTP PATCH` requests are disabled.
+
+## Fields not saving
+
+Check your console for a `PATCH` request error. This can appear when `PATCH requests are blocked by a `mod_security` rule on the server.
