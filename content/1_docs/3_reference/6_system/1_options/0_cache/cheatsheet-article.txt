@@ -2,6 +2,10 @@ Excerpt: Enables/disables Kirby's cache and sets cache options
 
 ----
 
+Guide: cache
+
+----
+
 Text:
 
 ## Enabling/disabling the cache
