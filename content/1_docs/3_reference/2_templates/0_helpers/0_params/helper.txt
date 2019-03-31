@@ -8,7 +8,11 @@ Besides with URL query variables, you can set parameters via URL in Kirby in a m
 http://yourdomain.com/blog/tag:mytag/year:2014
 ```
 
-Note that you have to use a semicolon instead of a colon on Windows systems. In your code, you can use the `Url::paramsToString()` method to make sure that the resulting URL is compatible with both Linux and Windows servers.
+Note that you have to use a semicolon instead of a colon on Windows systems. In your code, you can use the `url()` method with the `params` parameter to make sure that the resulting URL is compatible with both Linux and Windows servers, e.g.
+
+```php
+$url = url($path, ['params' => ['tag' => 'myTag']]);
+```
 
 Those parameters are very handy when you want to build URL-based filters for your content.
 
