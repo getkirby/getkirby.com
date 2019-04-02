@@ -39,7 +39,7 @@
                 <?= $hero->resize(1600)->url() ?> 2x
               "
               src="<?= $hero->resize(1024)->url() ?>"
-              alt="Screenshot of Kirby\'s control panel"
+              alt="Screenshot of Kirby’s control panel"
             >
           </span>
         </figure>
