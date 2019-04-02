@@ -7,6 +7,14 @@
   <?= css('assets/css/index.css') ?>
   <?= css('@auto') ?>
 
+  <?php if (option('keycdn', false) !== false): ?>
+    <script>
+    window.kirbyConfig = {
+      assetsPath: "<?= addslashes(option('keycdn.domain')) ?>/assets/",
+    };
+    </script>
+  <?php endif ?>
+
   <?= js('assets/js/index.js', ['defer' => true]) ?>
   <?= js('@auto', ['defer' => true]) ?>
 
