@@ -1,7 +1,6 @@
 node_modules
 .vscode
 .DS_Store
-./config.json
 /backstop_data
 /www/media
 /site/accounts
@@ -10,3 +9,4 @@ node_modules
 /site/config/.license
 /site/sessions
 /backstop.json
+/config.json
