@@ -2,4 +2,16 @@ Title: Kirby
 
 ----
 
-Description: A fast, reliable and flexible file-based CMS.
+Description: Kirby is the content management system that adapts to your projects like no other.
+
+----
+
+Twittersite: @getkirby
+
+----
+
+Twittercreator: @getkirby
+
+----
+
+Ogimage: opengraph.jpg

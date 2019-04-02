@@ -2,6 +2,10 @@ Title: Fields
 
 ----
 
+Description: Content within text files can be structured with fields. Learn how field naming works and how to access page content in your templates.
+
+----
+
 Intro: Content within text files can be structured with fields. You can add as many fields to a content file as your content model requires. Each text file can contain its very own set of fields. Together with the flexible folder structure you get a NoSQL-like data store with literally unlimited possibilities.
 
 ----

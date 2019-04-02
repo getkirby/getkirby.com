@@ -2,6 +2,10 @@ Title: Pages
 
 ----
 
+Description: Learn how Kirby stores content, how pages are sorted and how to use the API to create new pages programmatically.
+
+----
+
 Intro: In Kirby, pages are represented by folders in `/content`. For each page, there is a separate folder that contains the corresponding text and media files.
 
 ----

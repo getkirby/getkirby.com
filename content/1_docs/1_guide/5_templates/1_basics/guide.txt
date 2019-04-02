@@ -2,6 +2,10 @@ Title: Templates
 
 ----
 
+Description: Templates contain the HTML for your pages, spiced up with some PHP to dynamically pull in your content.
+
+----
+
 Subtitle: Define your page layout with HTML and PHP
 
 ----

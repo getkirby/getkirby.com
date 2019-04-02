@@ -2,6 +2,10 @@ Title: Try
 
 ----
 
+Description: Download Kirby and try it out for free, before buying it.
+
+----
+
 Intro: Kirby's license model is based on a single idea:<br> We want you to be happy before you buy it!
 
 ----

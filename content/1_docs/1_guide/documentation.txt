@@ -1,5 +1,11 @@
 Title: Guide
+
 ----
+
+Description: This is the index page of Kirby’s documentation.
+
+----
+
 Structure:
 
 Get started:

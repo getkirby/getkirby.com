@@ -6,6 +6,10 @@ Subtitle: Create reusable code blocks that can be used anywhere
 
 ----
 
+Description: Snippets are smaller blocks of code that you can reuse across templates. They are ideal for keeping your templates clean and maintainable.
+
+----
+
 Intro: Snippets are smaller blocks of code that you can reuse across templates. They are ideal for keeping your templates clean and maintainable.
 
 ----

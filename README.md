@@ -111,3 +111,14 @@ npm run backstop-report
 The testing scenarios for Backstop are defined in `site/plugins/backstop/index.php`,
 in case you want to add a new template and add a page where it’s acutally used
 to the scenarios.
+
+## Social media / OpenGraph integration
+
+OgImage:
+
+OgDescription:
+
+OgTitle:
+
+TwitterCard: "summary" or "summary_large_image"
+

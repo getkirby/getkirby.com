@@ -2,6 +2,10 @@ Title: Reference
 
 ----
 
+Description: The Reference provides a quick but detailed reference to pretty much any aspect of Kirby.
+
+----
+
 Excerpt:
 
 <info>The Reference provides a quick but detailed reference to pretty much any aspect of Kirby.</info>

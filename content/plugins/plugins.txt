@@ -1,1 +1,5 @@
 Title: Plugins
+
+----
+
+Description: Extend the possibilities of you Kirby installation with plugins from our official directory.

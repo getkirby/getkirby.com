@@ -2,6 +2,10 @@ Title: Files
 
 ----
 
+Description: Every page in your Kirby installation has its own set of files. Learn how Kirby handles these and how to add meta data to files. 
+
+----
+
 Intro: Pages can have any number and kind of images, videos, documents or other files. Those files are stored directly in the page's folder.
 
 ----

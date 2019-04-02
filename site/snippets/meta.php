@@ -1,7 +1,5 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Kirby is the content management system that adapts to your projects like no other">
-<meta property="og:image" content="<?= page('press')->image('opengraph.jpg')->url() ?>" />
 
 <?php if (option('beta')): ?>
 <meta name="robots" content="noindex, nofollow">
@@ -31,6 +29,8 @@
 <link rel="dns-prefetch" href="https://cdn.paddle.com">
 <link rel="preconnect" href="https://cdn.paddle.com">
 <?php endif ?>
+
+<?php snippet('meta-social') ?>
 
 <!--  Replace `no-js` class in root element with `js` -->
 <script>(function(cl){cl.remove('no-js');cl.add('js');})(document.documentElement.classList);</script>
