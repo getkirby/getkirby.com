@@ -122,6 +122,15 @@ The default preview image is the first image in the folder.
 
 If you need more fine-grained control you can setup the image for each page with further options.
 
+### Show icon instead of image
+
+To display the icon set in the page blueprint or a default icon instead of a preview image, you can set the `image`option to `false`:
+
+```yaml
+image: false
+```
+
+
 ### `query`
 
 An image query, default `page.image`
