@@ -12,9 +12,7 @@ return [
     'cachebuster' => [
         'mode' => 'path'
     ],
-    'cloudinary' => [
-        'domain' => 'https://getkirby.com',
-    ],
+    'cloudinary' => true,
     'keycdn' => [
         'domain' => 'https://assets.getkirby.com',
     ]

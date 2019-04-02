@@ -37,7 +37,7 @@ function cloudinary($url, $params = [])
 
     $options = implode(',', $options);
 
-    return 'https://res.cloudinary.com/getkirby/image/fetch/' . $options . '/' . option('cloudinary.domain') . $url;
+    return 'https://res.cloudinary.com/getkirby/image/fetch/' . $options . '/' . $url;
 
 }
 

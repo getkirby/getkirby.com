@@ -23,7 +23,7 @@ class Cachebuster
         $key = preg_replace('/^\/?assets(\/.*)$/', '$1', $path);
 
         if (isset(static::$manifest[$key]) && preg_match('/\?id=([a-z0-9]+)$/', static::$manifest[$key], $matches)) {
-            return substr($matches[1], 0, 8);
+            return substr($matches[1], 0, 8); // only use first 8 chars of hash, that should be enough to be somewhat save
         }
 
         // Fallback to modified time of assets file, if it
@@ -34,7 +34,11 @@ class Cachebuster
 
     public static function path(string $path): string
     {
-        $kirby  = App::instance();
+        if (strpos($path, url()) === 0) {
+            $path = ltrim(substr($path, strlen(url())), '/');
+        }
+
+        $kirby = App::instance();
         $root = $kirby->roots()->index() . '/' . $path;
 
         if (file_exists($root)) {
