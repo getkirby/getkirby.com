@@ -128,8 +128,7 @@ To display the icon set in the page blueprint or a default icon instead of a pre
 
 ```yaml
 image: false
-
-
+```
 
 
 ### `query`
