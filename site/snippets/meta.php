@@ -12,6 +12,11 @@
 
 <title><?= $page->isHomePage() ? $page->title() : $page->title() . ' | ' . $site->title() ?></title>
 
+<?php if(option('keycdn', false) !== false): ?>
+<link rel="dns-prefetch" href="<?= option('keycdn.domain') ?>">
+<link rel="preconnect" href="<?= option('keycdn.domain') ?>">
+<?php endif ?>
+
 <link rel="preload" href="<?= url('assets/css/index.css') ?>" as="style">
 <link rel="preload" href="<?= url('assets/js/index.js') ?>" as="script">
 
