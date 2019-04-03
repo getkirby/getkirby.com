@@ -1,0 +1,14 @@
+Title: Cookie Approval
+
+----
+
+Repository: https://github.com/schnti/kirby3-cookie
+
+----
+
+Category: templating
+
+----
+
+Description: Add a cookie approval banner to your templates
+
