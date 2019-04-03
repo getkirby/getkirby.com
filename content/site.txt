@@ -14,4 +14,4 @@ Twittercreator: @getkirby
 
 ----
 
-Ogimage: opengraph.jpg
+Thumbnail: opengraph.jpg

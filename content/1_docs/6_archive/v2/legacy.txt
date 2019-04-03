@@ -1,4 +1,9 @@
 Title: v2
 ----
+
+Description: The documentation for Kirby 2.
+
+----
+
 Src: https://k2.getkirby.com
 

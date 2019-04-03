@@ -2,7 +2,7 @@ Title: Emails
 
 ----
 
-Description: How to use built-in classes and helpers to send emails from within Kirby
+Description: How to use built-in classes and helpers to send emails from within Kirby.
 
 ----
 

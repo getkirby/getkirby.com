@@ -2,7 +2,7 @@ Title: How to migrate Kirby 2 users
 
 ----
 
-Description: Learn how to move your Kirby 2 user accounts over
+Description: Learn how to move your Kirby 2 user accounts over.
 
 ----
 

@@ -2,7 +2,7 @@ Title: Filtering Compendium
 
 ----
 
-Description: Learn how to filter pages, files and users with Kirby's extensive filtering methods
+Description: Learn how to filter pages, files and users with Kirby's extensive filtering methods.
 
 ----
 

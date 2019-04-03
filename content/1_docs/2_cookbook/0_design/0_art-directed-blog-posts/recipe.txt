@@ -2,7 +2,7 @@ Title: Art-directed pages
 
 ----
 
-Description: Add custom CSS and javascript to style individual pages without the need for additional templates
+Description: Add custom CSS and javascript to style individual pages without the need for additional templates.
 
 ----
 

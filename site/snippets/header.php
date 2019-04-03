@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" prefix="og: http://ogp.me/ns#">
 <head>
-
   <?php snippet('meta') ?>
 
   <?= css('assets/css/index.css') ?>
   <?= css('@auto') ?>
+
+  <!--  Replace `no-js` class in root element with `js` -->
+  <script>(function(cl){cl.remove('no-js');cl.add('js');})(document.documentElement.classList);</script>
+
+  <!-- Polyfills -->
+  <script>
+  (function(w, d) {
+    function loadJS(url, async){var r=d.getElementsByTagName("script")[0],s=d.createElement("script");if(async)s.async=true;s.src=url;r.parentNode.insertBefore(s,r);}
+
+    // Promise polyfill for IE 11
+    if(!window.Promise) {
+      loadJS('<?= url('assets/js/polyfills/promise.js') ?>');
+    }
+  })(window, document);
+  </script>
 
   <?php if (option('keycdn', false) !== false): ?>
     <script>

@@ -6,7 +6,7 @@ Date: 08.01.2019
 
 ----
 
-Description: How to install and update Kirby via Git
+Description: How to install and update Kirby via Git.
 
 ----
 

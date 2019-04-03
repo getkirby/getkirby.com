@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'beta'  => false,
     'debug' => false,
     'cache' => [
         'pages' => [

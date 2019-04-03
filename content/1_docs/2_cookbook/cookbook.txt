@@ -2,4 +2,4 @@ Title: Cookbook
 
 ----
 
-Excerpt: <info>Delicious recipes and solutions for common tasks</info>
+Description: Delicious recipes and solutions for common tasks.

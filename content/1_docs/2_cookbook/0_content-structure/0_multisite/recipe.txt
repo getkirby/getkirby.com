@@ -6,7 +6,7 @@ Category: content structure
 
 ----
 
-Description: How to run multiple sites on the same Kirby setup
+Description: How to run multiple sites on the same Kirby setup.
 
 ----
 

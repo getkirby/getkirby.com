@@ -2,7 +2,7 @@ Title: Pagination
 
 ----
 
-Description: Use pagination to divide a list of post or similar content into digestible chunks to prevent endless scrolling
+Description: Use pagination to divide a list of post or similar content into digestible chunks to prevent endless scrolling.
 
 ----
 

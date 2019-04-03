@@ -1,78 +1,48 @@
 <?php
 
-use Kirby\Meta\Meta;
+use Kirby\Meta\PageMeta;
 
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/helpers.php';
 
-Kirby::plugin('getkirby/meta', [
+Kirby::plugin('kirby/meta', [
     'routes' => [
         [
             'pattern' => 'meta-debug',
-            'action' => function () {
-
-                echo '<table border="1">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Template</th>
-                            <th>Description</th>
-                            <th>Image</th>
-                            <th>Twitter card type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                ';
-
-                $blacklist = [
-                    'link',
-                ];
-                
-                foreach (site()->index() as $item) {
-                    
-                    if (in_array($item->template()->name(), $blacklist)) {
-                        continue;
-                    }
-
-
-                    $meta = $item->meta();
-
-                    echo '<tr>';
-                    
-                    
-                    echo '<td>' . $item->id() . '</td>';
-                    echo '<td>' . $item->template()->name() . '</td>';
-                    
-                    
-                    echo '<td>' . ($meta->hasOwnDescription() ? $meta->description() : '❌') . '</td>';
-                    echo '</tr>';
-                }
-
-                echo '</tbody></table>';
-                exit;
+            'action' => function() {
+                return Page::factory([
+                    'slug' => 'meta-debug',
+                    'template' => 'meta-debug',
+                    'model' => 'meta-debug',
+                    'content' => [
+                        'title' => 'Metadata debug',
+                    ]
+                ]);
             },
         ],
+        // [
+        //     'pattern' => 'sitemap.xml',
+        //     'action' => function() {
+        //         return Page::factory([
+        //             'slug' => 'sitemap',
+        //             'template' => 'xml-sitemap',
+        //         ]);
+        //     }
+        // ]
     ],
 
     'pageMethods' => [
         'meta' => function() {
-            return new Meta($this);
+            return new PageMeta($this);
         }
+    ],
+
+    'pageModels' => [
+        'meta-debug' => 'Kirby\\Meta\\Models\\MetaDebugPage',
+    ],
+
+    'templates' => [
+        'meta-debug' => __DIR__ . '/templates/meta-debug.php',
+        // 'xml-sitemap' => __DIR__ . '/templates/xml-sitemap.php',
     ]
 ]);
-
-// class opengraph {
-
-//   static::$image = null;
-//   static
-
-//   public static function image(string $image = null) {
-//     if ($image !== null) {
-
-//     }
-//   }
-// }
-
-// function opengraph() {
-  
-// }

@@ -1,9 +1,6 @@
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<?php if (option('beta')): ?>
-<meta name="robots" content="noindex, nofollow">
-<?php endif ?>
 
 <link rel="icon" type="image/png" href="<?= cloudinary('favicon.png') ?>">
 <link rel="mask-icon" href="<?= cloudinary('safari-mask-icon.svg') ?>" color="#000">
@@ -30,19 +27,6 @@
 <link rel="preconnect" href="https://cdn.paddle.com">
 <?php endif ?>
 
-<?php snippet('meta-social') ?>
+<?= $page->meta()->robots() ?>
 
-<!--  Replace `no-js` class in root element with `js` -->
-<script>(function(cl){cl.remove('no-js');cl.add('js');})(document.documentElement.classList);</script>
-
-<!-- Polyfills -->
-<script>
-(function(w, d) {
-  function loadJS(url, async){var r=d.getElementsByTagName("script")[0],s=d.createElement("script");if(async)s.async=true;s.src=url;r.parentNode.insertBefore(s,r);}
-
-  // Promise polyfill for IE 11
-  if(!window.Promise) {
-    loadJS('<?= url('assets/js/polyfills/promise.js') ?>');
-  }
-})(window, document);
-</script>
+<?= $page->meta()->social() ?>

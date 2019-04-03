@@ -2,6 +2,10 @@ Title: Community
 
 ----
 
+Description: Get to know the team behind Kirby and the awesome community, that has formed around our product.
+
+----
+
 Intro:
 
 Kirby is well-known and loved for its friendly community. We keep tight contact with our customers and contributors to constantly improve our product and everything around it.

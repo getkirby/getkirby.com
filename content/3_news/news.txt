@@ -1,1 +1,5 @@
 Title: News
+
+----
+
+Description: What’s new in the Kirbyverse?

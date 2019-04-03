@@ -2,7 +2,7 @@ Title: Sessions
 
 ----
 
-Description: Configuring Kirby's session and using it for your own data
+Description: Configuring Kirby's session and using it for your own data.
 
 ----
 

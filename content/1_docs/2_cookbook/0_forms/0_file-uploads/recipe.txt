@@ -1,7 +1,7 @@
 Title: Uploading files from frontend
 
 ----
-Description: Learn how to upload files through a frontend form
+Description: Learn how to upload files through a frontend form.
 
 ----
 Text:

@@ -112,13 +112,13 @@ The testing scenarios for Backstop are defined in `site/plugins/backstop/index.p
 in case you want to add a new template and add a page where it’s acutally used
 to the scenarios.
 
-## Social media / OpenGraph integration
+## Metadata for search engines and social media
 
-OgImage:
+Robots:
 
-OgDescription:
+Thumbnail:
 
-OgTitle:
+Description:
 
 TwitterCard: "summary" or "summary_large_image"
 

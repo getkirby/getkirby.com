@@ -7,7 +7,7 @@ Category: content structure
 
 ----
 
-Description: In this cookbook recipe we go through using Kirby's API to group collections like articles, events or files by various criteria
+Description: In this cookbook recipe we go through using Kirby's API to group collections like articles, events or files by various criteria.
 
 ----
 

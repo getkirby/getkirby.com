@@ -2,6 +2,10 @@ Title: Contact
 
 ----
 
+Description: Information about how to reach us, copyright information and disclaimer.
+
+----
+
 Contact:
 
 Bastian Allgeier GmbH

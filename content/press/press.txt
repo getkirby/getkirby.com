@@ -2,9 +2,14 @@ Title: Press
 
 ----
 
+Description: Download logos and screenshots for use in digital and print media.
+
+----
+
 Intro:
 
-Download logos and screenshots for use in web and print media.
+Download logos and screenshots for use in digital and print media.
+
 ----
 
 Text:

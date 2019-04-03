@@ -2,7 +2,7 @@ Title: How to migrate file metadata
 
 ----
 
-Description: Learn how to update your file metadata to make it work with Kirby 3
+Description: Learn how to update your file metadata to make it work with Kirby 3.
 
 ----
 

@@ -2,7 +2,7 @@ Title: How to upgrade from Kirby 2
 
 ----
 
-Description: Learn how to upgrade an existing Kirby 2 project to Kirby 3
+Description: Learn how to upgrade an existing Kirby 2 project to Kirby 3.
 
 ----
 

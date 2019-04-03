@@ -2,7 +2,7 @@ Title: Quicktip: Serving a page on its own domain
 
 ----
 
-Description: This recipe shows you how can can serve a single page on its own domain
+Description: This recipe shows you how can can serve a single page on its own domain.
 
 ----
 

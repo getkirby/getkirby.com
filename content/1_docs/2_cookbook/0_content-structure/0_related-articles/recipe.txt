@@ -6,7 +6,7 @@ Category: content structure
 
 ----
 
-Description: Learn how to build relations between articles using YAML content and the pages field
+Description: Learn how to build relations between articles using YAML content and the pages field.
 
 ----
 Text:

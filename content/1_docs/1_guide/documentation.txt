@@ -2,7 +2,7 @@ Title: Guide
 
 ----
 
-Description: This is the index page of Kirby’s documentation.
+Description: Get an overview of all topics covered by Kirby’s documentation.
 
 ----
 

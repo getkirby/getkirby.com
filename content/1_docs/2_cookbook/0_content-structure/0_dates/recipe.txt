@@ -6,7 +6,7 @@ Category: content structure
 
 ----
 
-Description: Learn how to use date fields in your content files and output different date formats
+Description: Learn how to use date fields in your content files and output different date formats.
 
 ----
 Text:

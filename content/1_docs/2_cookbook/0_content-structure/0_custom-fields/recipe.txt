@@ -2,7 +2,7 @@ Title: Custom fields
 
 ----
 
-Description: Use Kirby's power of custom fields to structure your content in a most flexible way
+Description: Use Kirby's power of custom fields to structure your content in a most flexible way.
 
 ----
 
@@ -93,7 +93,7 @@ content/
 	  project.txt
 ```
 
-#### Availabel template variables in project.php
+#### Available template variables in project.php
 
 ```php
 <?= $page->title() ?>
@@ -153,7 +153,7 @@ content/
 	  product.txt
 ```
 
-#### Availabel template variables in product.php
+#### Available template variables in product.php
 
 ```php
 <?= $page->title() ?>
@@ -210,7 +210,7 @@ content/
 	  speaker.txt
 ```
 
-#### Availabel template variables in speaker.php
+#### Available template variables in speaker.php
 
 ```php
 <?= $page->title() ?>
@@ -270,7 +270,7 @@ content/
       picture.txt
 ```
 
-#### Availabel template variables in picture.php
+#### Available template variables in picture.php
 
 ```php
 <?= $page->title() ?>

@@ -2,6 +2,10 @@ Title: Privacy Policy
 
 ----
 
+Description: Our privacy policy includes information on how your data is stored and processed by Kirby CMS and getkirby.com, according to GDPR.
+
+----
+
 Text:
 
 ## Who we are

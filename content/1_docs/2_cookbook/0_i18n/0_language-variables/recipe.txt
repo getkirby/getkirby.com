@@ -1,7 +1,7 @@
 Title: Quicktip: Flexible language variables
 
 ----
-Description: Learn how to define language variables the way you need them
+Description: Learn how to define language variables the way you need them.
 
 ----
 Text:
