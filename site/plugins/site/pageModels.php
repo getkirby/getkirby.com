@@ -12,6 +12,7 @@ return [
     'hooks'           => 'Kirby\\Site\\Models\\HooksPage',
     'icon'            => 'Kirby\\Site\\Models\\IconPage',
     'icons'           => 'Kirby\\Site\\Models\\IconsPage',
+    'issue'           => 'Kirby\\Site\\Models\\IssuePage',
     'kirbytag'        => 'Kirby\\Site\\Models\\KirbyTagPage',
     'method'          => 'Kirby\\Site\\Models\\MethodPage',
     'packages'        => 'Kirby\\Site\\Models\\PackagesPage',
