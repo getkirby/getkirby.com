@@ -29,7 +29,7 @@
           <div class="community-plugins">
             <?php foreach($plugins as $item): ?>
             <article>
-              <a href="<?= $item->link() ?>">
+              <a href="<?= $item->repository() ?>">
                 <figure class="screenshot -mb:medium">
                   <?php if ($image = $item->image()): ?>
                     <?= $image->html() ?>
