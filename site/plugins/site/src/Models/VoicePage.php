@@ -42,8 +42,7 @@ class VoicePage extends Page
         $text = str_replace('*', '&#42;', $text);
 
         // use KirbyText to convert URLs to links
-        return kirbytext($text);
-
+        return parent::text()->value($text)->kibytext();
     }
 
 }
