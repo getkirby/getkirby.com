@@ -6,6 +6,6 @@ return function ($site, $page) {
     'forum'       => $page->find('forum'),
     'themes'      => $page->find('themes'),
     'pluginsPage' => $page->find('plugins'),
-    'plugins'     => page('plugins')->children()->children()->filterBy('featured', 'true')->shuffle(),
+    'plugins'     => page('plugins')->children()->children()->filterBy('featured', 'true')->shuffle()->limit(9),
   ];
 };
