@@ -1,6 +1,10 @@
 <?php
 
-$key = trim(F::read(__DIR__ . '/keys/algolia.txt') ?? 'd161a2f4cd2d69247c529a3371ad3050');
+$key = trim(F::read(__DIR__ . '/keys/algolia.txt'));
+
+if (empty($key)) {
+    $key = 'd161a2f4cd2d69247c529a3371ad3050';
+}
 
 return [
     'app'    => 'S7OGBIAJTV',
