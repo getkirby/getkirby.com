@@ -114,11 +114,4 @@ to the scenarios.
 
 ## Metadata for search engines and social media
 
-Robots:
-
-Thumbnail:
-
-Description:
-
-TwitterCard: "summary" or "summary_large_image"
-
+See `site/plugins/meta/README.md` for further information.

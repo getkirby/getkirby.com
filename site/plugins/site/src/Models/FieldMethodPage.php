@@ -4,7 +4,6 @@ namespace Kirby\Site\Models;
 
 use Kirby\Cms\App;
 use Kirby\Cms\Field;
-use Kirby\Data\Yaml;
 use ReflectionFunction;
 use ReflectionMethod;
 
@@ -18,7 +17,7 @@ class FieldMethodPage extends HelperPage
         return array_keys(Field::$aliases, $this->title()->value());
     }
 
-    public function classNameShort(): string
+    public function classNameShort(): Field
     {
         return new Field($this, 'classNameShort', 'Field');
     }

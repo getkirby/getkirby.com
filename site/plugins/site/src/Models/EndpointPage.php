@@ -7,6 +7,12 @@ use Kirby\Cms\Page;
 
 class EndpointPage extends Page
 {
+    public function metadata(): array
+    {
+        return [
+            'description' => 'Documentation for the /api' . parent::title(). 'API endpoint.',
+        ];
+    }
 
     public function request()
     {

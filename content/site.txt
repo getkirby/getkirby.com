@@ -14,4 +14,8 @@ Twittercreator: @getkirby
 
 ----
 
+Twittercard: summary_large_image
+
+----
+
 Thumbnail: opengraph.jpg

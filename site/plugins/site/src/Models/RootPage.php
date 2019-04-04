@@ -18,4 +18,12 @@ class RootPage extends Page
         return parent::example()->value('```php' . PHP_EOL . '<?= $kirby->root(\'' . $this->slug() . '\') ?>' . PHP_EOL . '```');
     }
 
+    public function metadata(): array
+    {
+        return [
+            'twittercard' => 'summary',
+            'description' => strip_tags($this->excerpt()->kirbytags()),
+        ];
+    }
+
 }

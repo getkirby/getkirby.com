@@ -1,11 +1,12 @@
 <?php
 
-namespace Kirby\Meta\Models;
+namespace Kirby\Site\Models;
 
 use Kirby\Cms\Page;
 
-class MetaDebugPage extends Page
+class CodePage extends Page
 {
+
     public function metadata(): array
     {
         return [

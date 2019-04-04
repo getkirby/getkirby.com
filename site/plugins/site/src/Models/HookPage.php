@@ -37,4 +37,12 @@ class HookPage extends Page
 
     }
 
+    public function metadata(): array
+    {
+        return [
+            'twittercard' => 'summary',
+            'description' => 'Reference page for the hook ' . $this->title(),
+        ];
+    }
+
 }

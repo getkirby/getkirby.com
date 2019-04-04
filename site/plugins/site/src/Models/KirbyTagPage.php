@@ -9,7 +9,6 @@ use ReflectionFunction;
 
 class KirbyTagPage extends HelperPage
 {
-
     public function attributes(): array
     {
         if ($reflection = $this->reflection()) {
@@ -27,6 +26,13 @@ class KirbyTagPage extends HelperPage
     public function githubSource()
     {
         return option('github') . '/kirby/tree/' . App::version() . '/config/tags.php#L' . $this->line();
+    }
+
+    public function metadata(): array
+    {
+        return array_merge(parent::metadata(), [
+            'ogtitle' => $this->title() . ' KirbyTag',
+        ]);
     }
 
     public function line()

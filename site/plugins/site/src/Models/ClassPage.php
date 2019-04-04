@@ -148,6 +148,14 @@ class ClassPage extends Page
 
         return false;
     }
+
+    public function metadata(): array
+    {
+        return [
+            'description' => strip_tags($this->excerpt()->kirbytags()),
+            'twittercard' => 'summary',
+        ];
+    }
     
     public function missingMethods()
     {

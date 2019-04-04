@@ -92,6 +92,14 @@ class HelperPage extends Page
         return null;
     }
 
+    public function metadata(): array
+    {
+        return [
+            'description' => strip_tags($this->excerpt()->kirbytags()),
+            'twittercard' => 'summary',
+        ];
+    }
+
     public function methodCall(): string
     {
         if ($reflection = $this->reflection()) {

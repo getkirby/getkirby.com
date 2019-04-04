@@ -19,4 +19,12 @@ class IconPage extends Page
         return new Field($this, 'excerpt', html('<k-icon type="' . $this->slug() . '">'));
     }
 
+    public function metadata(): array
+    {
+        return [
+            'twittercard' => 'summary',
+            'ogtitle' => $this->slug() . ' icon',
+            'description' => 'Preview of the ”' . $this->slug() . '“ icon.',
+        ];
+    }
 }

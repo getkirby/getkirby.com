@@ -29,4 +29,12 @@ class HooksPage extends Page
         return Pages::factory($children, $this);
     }
 
+    public function metadata(): array
+    {
+        return [
+            'twittercard' => 'summary',
+            'description' => strip_tags($this->excerpt()->kirbytags()),
+        ];
+    }
+
 }

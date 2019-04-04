@@ -10,6 +10,13 @@ use SimpleXMLElement;
 
 class IconsPage extends Page
 {
+    public function metadata(): array
+    {
+        return [
+            'description' => strip_tags($this->excerpt()->kirbytags()),
+            'twittercard' => 'summary',
+        ];
+    }
 
     public function svg()
     {

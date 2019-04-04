@@ -7,41 +7,47 @@
         <table>
             <thead>
                 <tr>
-                    <th width="30%">ID/Template</th>
-                    <th>Description</th>
-                    <th>Thumbnail</th>
+                    <th style="vertical-align: bottom;" width="100">Template</th>
+                    <th style="vertical-align: bottom;">Opengraph title</th>
+                    <th style="vertical-align: bottom;">Description</th>
+                    <th style="vertical-align: bottom;" width="120">Thumbnail</th>
+                    <th style="writing-mode: vertical-lr;" width="40">Has own description</th>
+                    <th style="writing-mode: vertical-lr;" width="40">Has own thumbnail</th>
+                    <th style="writing-mode: vertical-lr;" width="40">Thumbnail alt text</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 
-                $blacklist = [
-                    'link',
-                ];
-                
                 foreach (site()->index() as $item) {
 
-                    
-                    
-                    if (in_array($item->template()->name(), $blacklist)) {
+                    if ($item->template()->name() === 'link') {
                         continue;
                     }
-
-                    if (preg_match('/(?:^|\/)(reference)(\/|$)/', $item->id())) {
-                        continue;
-                    }
-
 
                     $meta = $item->meta();
 
                     echo '<tr>';
-                    
-                    
-                    echo '<td><code>' . $item->id() . '</code><br>' . $item->template()->name() . '</td>';
-                    
-                    echo '<td>' . ($meta->hasOwnDescription() ? $meta->description() : '❌') . '</td>';
+                        echo '<th colspan="7" style="background: #efefef">' . $item->title()->link() . ' <code>' . $item->id() . '</code></th>';
+                    echo '</tr>';
 
+                    echo '<tr>';
+                    
+                    echo '<td>' . $item->template()->name() . '</td>';
+                    
+                    echo '<td>' . $meta->ogtitle()->html() . '</td>';
+                    
+                    
+                    echo '<td>' . $meta->description()->html() . '</td>';
+                    
+                    
+                    echo '<td>' . $meta->thumbnail() . '</td>';
+                    
+                    echo '<td>' . ($meta->hasOwnDescription() ? '✅' : '❌') . '</td>';
                     echo '<td>' . ($meta->hasOwnThumbnail() ? '✅' : '❌') . '</td>';
+
+                    $thumbnail = $meta->thumbnail();
+                    echo '<td>' . ($thumbnail !== null && $thumbnail->alt()->isNotEmpty() ? '✅' : '❌') . '</td>';
 
                     echo '</tr>';
                 }

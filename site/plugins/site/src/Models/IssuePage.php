@@ -3,12 +3,22 @@
 namespace Kirby\Site\Models;
 
 use Kirby\Cms\Page;
-use Kirby\Cms\Field;
 
 class IssuePage extends Page
 {
-    public function description(): Field
+
+    public function metadata(): array
     {
-        return new Field($this, 'description', 'Read issue No. ' . $this->uid() . ' of our montly newsletter online. Originally published on '  . $this->date() . ' via email.');
+        return [
+            'description' => function () {
+                return 'Read issue no. ' . $this->uid() . ' of our montly newsletter online.';
+            },
+            'thumbnail' => function() {
+                return $this->image();
+            },
+            'ogtitle' => function() {
+              return 'Kirby Kosmos Episode ' . $this->uid();
+            }
+        ];
     }
 }
