@@ -16,7 +16,7 @@ You can choose the names for your fields freely, but there are two limitations:
 2. Do not use names that are **reserved by (link: docs/reference/objects/page text: native page methods)**. For example, if you give your field the name "image", it will conflict with Kirby's `$page->image()` method.
 
 <info>
-You can still use field names that conflig with (link: docs/reference/objects/page text: native page methods). But you will have to call such a field via the `$page->content()->image()` method. We recommend prefixing your field names instead.
+You can still use field names that conflict with (link: docs/reference/objects/page text: native page methods). But you will have to call such a field via the `$page->content()->image()` method. We recommend prefixing your field names instead.
 </info>
 
 ## Available form fields
