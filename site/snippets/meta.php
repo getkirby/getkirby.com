@@ -29,4 +29,6 @@
 
 <?= $page->meta()->robots() ?>
 
+<?= $page->meta()->opensearch() ?>
+
 <?= $page->meta()->social() ?>

@@ -102,6 +102,16 @@ class PageMeta {
         return $this->getFile('thumbnail', false) !== null;
     }
 
+    public function opensearch(): string
+    {
+        return Html::tag('link', null, [
+            'rel' => 'search',
+            'type' => 'application/opensearchdescription+xml',
+            'title' => site()->title(),
+            'href' => url('open-search.xml'),
+        ]) . PHP_EOL;
+    }
+
     public function robots(): string
     {
         $html = [];
