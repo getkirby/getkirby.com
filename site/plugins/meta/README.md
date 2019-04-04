@@ -55,7 +55,6 @@ refer to the current page.
 You can still override values (e.g. `description`) by adding a descriptiokn field to 
 an episode’s `issue.txt` file if you want to customize any of these values.
 
-
 ```php
 class IssuePage extends Page
 {
@@ -74,3 +73,7 @@ class IssuePage extends Page
     }
 }
 ```
+
+## Debug View
+
+You can get an overview of the meta data assigned to pages by visiting <http(s)://[your site’s url]/meta-debug>.
