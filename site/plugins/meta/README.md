@@ -21,7 +21,9 @@ description.
 and additionally added as an OpenGraph meta tag, which is used by social media networks
 like e.g. Facebook or Twitter.
 
-**Thumbnail:** The thumbnail for sharing the page in a social network.
+**Thumbnail:** The thumbnail for sharing the page in a social network. If defining a
+custom thumbnail for a page, you should make sure to also add a text file containing
+an `alt` text for the corresponding image, because it is also used by social networks.
 
 **Twittercard:** Defaults to the value set in `site.txt` and is "summary_large_image"
 by default. Set this to "summary", if you don’t want to display a large preview image.
