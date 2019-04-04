@@ -152,7 +152,8 @@ class PageMeta {
         $description = $this->get('description');
 
         if ($description->isNotEmpty()) {
-            $opengraph['og:description'] = $meta['description'] = $description->value();
+            $opengraph['og:description'] = $description->excerpt(200);
+            $meta['description'] = $description->excerpt(160);
         }
 
         $twitterCard = $this->get('twittercard');
