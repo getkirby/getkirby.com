@@ -31,19 +31,6 @@ fields:
 
 (field-options: tags)
 
-## How to use in templates/snippets
-
-A tags field stores all selected values in a comma separated list (`value1, value2, value3`) You can split this list with the [`split()`](/docs/reference/templates/field-methods/split) method in your templates and then work with the result:
-
-```php
-<ul>
-  <?php foreach ($page->categories()->split() as $category): ?>
-  <li><?= $category ?></li>
-  <?php endforeach ?>
-</ul>
-```
-
-See [`$field->split()`](/docs/reference/templates/field-methods/split) for more information.
 
 ## Autocomplete
 
@@ -106,3 +93,17 @@ fields:
 ```
 
 (screenshot: tags-list-layout.png)
+
+## How to use in templates/snippets
+
+A tags field stores all selected values in a comma separated list (`value1, value2, value3`) You can split this list with the [`split()`](/docs/reference/templates/field-methods/split) method in your templates and then work with the result:
+
+```php
+<ul>
+  <?php foreach ($page->categories()->split() as $category): ?>
+  <li><?= $category ?></li>
+  <?php endforeach ?>
+</ul>
+```
+
+See [`$field->split()`](/docs/reference/templates/field-methods/split) for more information.
