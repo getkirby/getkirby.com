@@ -76,4 +76,4 @@ class IssuePage extends Page
 
 ## Debug View
 
-You can get an overview of the meta data assigned to pages by visiting <http(s)://[your site’s url]/meta-debug>.
+You can get an overview of the meta data assigned to pages by visiting <http(s)://[your site’s url]/meta-debug>. The debug page is only accessible, when Kirby’s `debug` option is set to true.
