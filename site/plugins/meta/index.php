@@ -80,7 +80,7 @@ Kirby::plugin('kirby/meta', [
                         ]
                     ]);
                 }
-                
+
                 $this->next();
             },
         ],
@@ -91,7 +91,7 @@ Kirby::plugin('kirby/meta', [
                 $robots  = 'User-agent: *' . PHP_EOL;
                 $robots .= 'Allow: /' . PHP_EOL;
                 $robots .= 'Sitemap: ' . url('sitemap.xml');
-                
+
                 return kirby()
                     ->response()
                     ->type('text')
@@ -108,39 +108,46 @@ Kirby::plugin('kirby/meta', [
                 $pagesBlacklist = option('kirby.meta.sitemap.pagesBlacklist', []);
 
                 $blacklistPattern = '!^(?:' . implode('|', $pagesBlacklist) . ')$!i';
-                
-                
-                $sitemap[] = '<?xml version="1.0" encoding="UTF-8"?>';
-                $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-                foreach (site()->index() as $item) {
+                $cache   = kirby()->cache('pages');
+                $cacheId = 'sitemap.xml';
 
-                    if (in_array($item->intendedTemplate()->name(), $templatesWhitelist) === false && in_array($item->id(), $pagesWhitelist) === false) {
-                        continue;
+                if (!$sitemap = $cache->get($cacheId)) {
+
+                    $sitemap[] = '<?xml version="1.0" encoding="UTF-8"?>';
+                    $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+                    foreach (site()->index() as $item) {
+
+                        if (in_array($item->intendedTemplate()->name(), $templatesWhitelist) === false && in_array($item->id(), $pagesWhitelist) === false) {
+                            continue;
+                        }
+
+                        if (preg_match($blacklistPattern, $item->id())) {
+                            continue;
+                        }
+
+                        $meta = $item->meta();
+
+                        $sitemap[] = '<url>';
+                        $sitemap[] = '  <loc>' . Xml::encode($item->url()) . '</loc>';
+                        $sitemap[] = '  <priority>' . number_format($meta->priority(), 1, '.', '') . '</priority>';
+
+                        $changefreq = $meta->changefreq();
+                        if ($changefreq->isNotEmpty()) {
+                            $sitemap[] = '  <changefreq>' . $changefreq . '</changefreq>';
+                        }
+
+                        $sitemap[] = '</url>';
                     }
 
-                    if (preg_match($blacklistPattern, $item->id())) {
-                        continue;
-                    }
-                    
-                    $meta = $item->meta();
-                        
-                    $sitemap[] = '<url>';
-                    $sitemap[] = '  <loc>' . Xml::encode($item->url()) . '</loc>';
-                    $sitemap[] = '  <priority>' . number_format($meta->priority(), 1, '.', '') . '</priority>';
+                    $sitemap[] = '</urlset>';
+                    $sitemap   = implode(PHP_EOL, $sitemap);
 
-                    $changefreq = $meta->changefreq();
-                    if ($changefreq->isNotEmpty()) {
-                        $sitemap[] = '  <changefreq>' . $changefreq . '</changefreq>';
-                    }
-
-                    $sitemap[] = '</url>';
+                    $cache->set($cacheId, $sitemap);
                 }
 
-
-                $sitemap[] = '</urlset>';
-
-                return new Response(implode(PHP_EOL, $sitemap), 'application/xml');
+                return new Response($sitemap, 'application/xml');
             }
         ],
         [
