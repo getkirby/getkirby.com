@@ -39,6 +39,14 @@ then be used for OpenGraph metadata instead of the page title.
 
 **Twittercreator:** The twitter account, who created the current page.
 
+**Priority:** The priority for telling search engines about the importance
+of pages of your site. Must be a float value between 0.0 and 1.0. This value will
+not fall back to `site.txt`, but rather use 0.5 as default, if not explicit
+priority was found in the page’s content or returned by its model.
+
+**Changefreq:** Optional parameter, telling search engines how often a page changes.
+Possible values can be found in the (sitemaps protocol specification)[https://www.sitemaps.org/protocol.html].
+
 ## Using page models to automatically generate meta data
 
 You might not want to enter all meta data manually, so page models are your friend. This holds

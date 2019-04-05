@@ -6,6 +6,10 @@ Description: Information about how to reach us, copyright information and discla
 
 ----
 
+Priority: .5
+
+----
+
 Contact:
 
 Bastian Allgeier GmbH

@@ -6,6 +6,10 @@ Description: Download Kirby and try it out for free, before buying it.
 
 ----
 
+Priority: 0.9
+
+----
+
 Intro: Kirby's license model is based on a single idea:<br> We want you to be happy before you buy it!
 
 ----

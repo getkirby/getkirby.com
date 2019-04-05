@@ -6,6 +6,14 @@ Description: Download logos and screenshots for use in digital and print media.
 
 ----
 
+Priority: 0.8
+
+----
+
+Changefreq: monthly
+
+----
+
 Intro:
 
 Download logos and screenshots for use in digital and print media.

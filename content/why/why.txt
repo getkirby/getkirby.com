@@ -1,7 +1,15 @@
 Title: Why Kirby?
+
 ----
+
 Description: Learn more about the benefits and unique features, which Kirby has to offer.
+
 ----
+
+Priority: 0.9
+
+----
+
 Clients:
 
 - headline: Keep your costs at a minimum

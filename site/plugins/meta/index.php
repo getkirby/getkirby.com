@@ -3,16 +3,72 @@
 use Kirby\Meta\PageMeta;
 use Kirby\Toolkit\File;
 use Kirby\Toolkit\Xml;
+use Kirby\Toolkit\Str;
+use Kirby\Http\Response;
 
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/helpers.php';
 
 Kirby::plugin('kirby/meta', [
 
+    'options' => [
+        'sitemap.templatesWhilelist' => [
+            'home',
+            'buy',
+            'news',
+            'community',
+            'documentation',
+            'guide',
+            'coookbook',
+            'recipe',
+            'cheatsheet',
+            'kirbytags',
+            'kirbytag',
+            'cheatsheet-section',
+            'cheatsheet-article',
+            'field-methods',
+            'field-method',
+            'method',
+            'class',
+            'urls',
+            'url',
+            'roots',
+            'root',
+            'validators',
+            'validator',
+            'extensions',
+            'extension',
+            'hooks',
+            'hook',
+            'component',
+            'endpoints',
+            'endpoint',
+            'glossary',
+            'archive',
+            'contact',
+            'kosmos',
+            'issue',
+            'text',
+            'cases',
+            'plugins',
+            'press',
+            'search',
+            'styleguide',
+            'try',
+            'release',
+            'why',
+        ],
+        'sitemap.pagesWhitelist' => [
+        ],
+        'sitemap.pagesBlacklist' => [
+            'docs/reference/@/.*',
+        ]
+    ],
+
     'routes' => [
         [
             'pattern' => 'meta-debug',
-            'action' => function() {
+            'action' => function () {
 
                 if (option('debug') === true) {
                     return Page::factory([
@@ -28,18 +84,68 @@ Kirby::plugin('kirby/meta', [
                 $this->next();
             },
         ],
-        // [
-        //     'pattern' => 'sitemap.xml',
-        //     'action' => function() {
-        //         return Page::factory([
-        //             'slug' => 'sitemap',
-        //             'template' => 'xml-sitemap',
-        //         ]);
-        //     }
-        // ]
+        [
+            'pattern' => 'robots.txt',
+            'method'  => 'ALL',
+            'action'  => function () {
+                $robots  = 'User-agent: *' . PHP_EOL;
+                $robots .= 'Allow: /' . PHP_EOL;
+                $robots .= 'Sitemap: ' . url('sitemap.xml');
+                
+                return kirby()
+                    ->response()
+                    ->type('text')
+                    ->body($robots);
+            }
+        ],
+        [
+            'pattern' => 'sitemap.xml',
+            'action' => function () {
+
+                $sitemap = [];
+                $templatesWhitelist = option('kirby.meta.sitemap.templatesWhilelist', []);
+                $pagesWhitelist = option('kirby.meta.sitemap.pagesWhitelist', []);
+                $pagesBlacklist = option('kirby.meta.sitemap.pagesBlacklist', []);
+
+                $blacklistPattern = '!^(?:' . implode('|', $pagesBlacklist) . ')$!i';
+                
+                
+                $sitemap[] = '<?xml version="1.0" encoding="UTF-8"?>';
+                $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+                foreach (site()->index() as $item) {
+
+                    if (in_array($item->intendedTemplate()->name(), $templatesWhitelist) === false && in_array($item->id(), $pagesWhitelist) === false) {
+                        continue;
+                    }
+
+                    if (preg_match($blacklistPattern, $item->id())) {
+                        continue;
+                    }
+                    
+                    $meta = $item->meta();
+                        
+                    $sitemap[] = '<url>';
+                    $sitemap[] = '  <loc>' . Xml::encode($item->url()) . '</loc>';
+                    $sitemap[] = '  <priority>' . number_format($meta->priority(), 1, '.', '') . '</priority>';
+
+                    $changefreq = $meta->changefreq();
+                    if ($changefreq->isNotEmpty()) {
+                        $sitemap[] = '  <changefreq>' . $changefreq . '</changefreq>';
+                    }
+
+                    $sitemap[] = '</url>';
+                }
+
+
+                $sitemap[] = '</urlset>';
+
+                return new Response(implode(PHP_EOL, $sitemap), 'application/xml');
+            }
+        ],
         [
             'pattern' => 'open-search.xml',
-            'action' => function() {
+            'action' => function () {
                 return new Response('<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL .
                     '<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">' . PHP_EOL .
                     '  <ShortName>' . site()->title()->xml() . '</ShortName>' . PHP_EOL .
@@ -59,7 +165,7 @@ Kirby::plugin('kirby/meta', [
     ],
 
     'pageMethods' => [
-        'meta' => function() {
+        'meta' => function () {
             return new PageMeta($this);
         }
     ],
@@ -70,6 +176,5 @@ Kirby::plugin('kirby/meta', [
 
     'templates' => [
         'meta-debug' => __DIR__ . '/templates/meta-debug.php',
-        // 'xml-sitemap' => __DIR__ . '/templates/xml-sitemap.php',
     ]
 ]);

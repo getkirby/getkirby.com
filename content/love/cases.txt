@@ -6,6 +6,14 @@ Description: Kirby is used by thousands of companies and creators world-wide. Th
 
 ----
 
+Priority: 0.8
+
+----
+
+Changefreq: daily
+
+----
+
 Intro:
 
 Kirby is used by thousands of companies and creators world-wide. This is a small selection of fantastic websites, built with Kirby.

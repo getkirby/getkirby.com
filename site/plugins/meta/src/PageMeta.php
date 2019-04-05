@@ -122,6 +122,17 @@ class PageMeta {
         ]) . PHP_EOL;
     }
 
+    public function priority(): float
+    {
+        $priority = $this->get('priority', false)->value();
+
+        if (empty($priority) === true) {
+            $priority = 0.5;
+        }
+
+        return (float) min(1, max(0, $priority));
+    }
+
     public function robots(): string
     {
         $html = [];

@@ -6,6 +6,10 @@ Description: Our privacy policy includes information on how your data is stored 
 
 ----
 
+Priority: .5
+
+----
+
 Text:
 
 ## Who we are

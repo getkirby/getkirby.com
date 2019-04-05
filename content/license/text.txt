@@ -6,6 +6,10 @@ Description: The terms and conditions for using Kirby CMS.
 
 ----
 
+Priority: 0.5
+
+----
+
 Text:
 
 ## About this Agreement

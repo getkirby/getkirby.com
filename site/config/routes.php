@@ -30,19 +30,6 @@ return [
             go();
         }
     ],
-    [
-        'pattern' => 'robots.txt',
-        'method'  => 'ALL',
-        'action'  => function () {
-            $robots  = 'User-agent: *' . PHP_EOL;
-            $robots .= 'Allow: /';
-            
-            return kirby()
-                ->response()
-                ->type('text')
-                ->body($robots);
-        }
-    ],
 
     /**
      * Legacy redirects

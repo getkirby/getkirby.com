@@ -6,6 +6,10 @@ Description: Information on how to contribute to the Kirby website.
 
 ----
 
+Priority: 0.5
+
+----
+
 Intro:
 
 This page contains our guidelines for writing content and the custom Markdown extensions we use. If you want to make any proposals for updates or submit new Cookbook articles, please read this first.

@@ -9,3 +9,11 @@ Description: The Reference provides a quick but detailed reference to pretty muc
 Excerpt:
 
 <info>The Reference provides a quick but detailed reference to pretty much any aspect of Kirby.</info>
+
+----
+
+Changefreq: daily
+
+----
+
+Priority: 0.9

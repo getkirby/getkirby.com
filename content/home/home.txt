@@ -37,3 +37,11 @@ Templates:
   </ul>
 </article>
 ```
+
+----
+
+Priority: 1.0
+
+----
+
+Changefreq: weekly
