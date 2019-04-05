@@ -12,57 +12,9 @@ require __DIR__ . '/helpers.php';
 Kirby::plugin('kirby/meta', [
 
     'options' => [
-        'sitemap.templatesWhilelist' => [
-            'home',
-            'buy',
-            'news',
-            'community',
-            'documentation',
-            'guide',
-            'coookbook',
-            'recipe',
-            'cheatsheet',
-            'kirbytags',
-            'kirbytag',
-            'cheatsheet-section',
-            'cheatsheet-article',
-            'field-methods',
-            'field-method',
-            'method',
-            'class',
-            'urls',
-            'url',
-            'roots',
-            'root',
-            'validators',
-            'validator',
-            'extensions',
-            'extension',
-            'hooks',
-            'hook',
-            'component',
-            'endpoints',
-            'endpoint',
-            'glossary',
-            'archive',
-            'contact',
-            'kosmos',
-            'issue',
-            'text',
-            'cases',
-            'plugins',
-            'press',
-            'search',
-            'styleguide',
-            'try',
-            'release',
-            'why',
-        ],
-        'sitemap.pagesWhitelist' => [
-        ],
-        'sitemap.pagesBlacklist' => [
-            'docs/reference/@/.*',
-        ]
+        'templatesInclude' => [],
+        'pagesInclude' => [],
+        'pagesExclude' => [],
     ],
 
     'routes' => [
@@ -103,9 +55,9 @@ Kirby::plugin('kirby/meta', [
             'action' => function () {
 
                 $sitemap = [];
-                $templatesWhitelist = option('kirby.meta.sitemap.templatesWhilelist', []);
-                $pagesWhitelist = option('kirby.meta.sitemap.pagesWhitelist', []);
-                $pagesBlacklist = option('kirby.meta.sitemap.pagesBlacklist', []);
+                $templatesWhitelist = option('kirby.meta.templatesInclude', []);
+                $pagesWhitelist = option('kirby.meta.pagesInclude', []);
+                $pagesBlacklist = option('kirby.meta.pagesExclude', []);
 
                 $blacklistPattern = '!^(?:' . implode('|', $pagesBlacklist) . ')$!i';
 
