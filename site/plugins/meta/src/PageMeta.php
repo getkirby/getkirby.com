@@ -11,7 +11,7 @@ class PageMeta {
     protected $metadata = [];
 
     public $defaults = [
-    'robots' => true,
+        'robots' => true,
     ];
 
     public function __construct($page) {
