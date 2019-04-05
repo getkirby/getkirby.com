@@ -1,0 +1,281 @@
+Title: Database
+
+----
+
+Description: Connecting to a database and querying results
+
+----
+
+Text:
+
+Kirby comes with its own `Database` class that allows you to connect to a MySql or Sqlite database. The class also offers some handy shortcuts for querying tables.
+
+## Database connection
+
+You can set your database connection in your `config.php`.
+
+```php
+<?php
+
+return [
+  'db' => [
+    'host'     => '127.0.0',
+    'database' => 'kirby',
+    'user'     => 'root',
+    'password' => 'root',
+  ]
+];
+```
+
+<info>
+Here we connect to a local MySql database, your real database should use a proper database user and secure password.
+</info>
+
+With these settings in place, you can now query the database via some useful shortcuts provided in the `Db` class.
+
+## Select a table
+
+Assuming that your database contains a table called users, you can now query the database table in your code like this. This automatically fetches all rows from the table.
+
+
+### Parameters
+
+| Name      | Type          | Description
+| ----      | ----          | ---- |
+| `$table`  | string        | The name of the table, which should be queried |
+| `$columns`| string\|array | Either a string with columns or an array of column names |
+| `$where`  | mixed         | The where clause. Can be a string or an array |
+| `$order`  | string        | The columns and direction to sort by   |
+| `$offset` | int           | The index to start from|
+| `$limit`  | int           | The number of elements to return|
+
+### Example
+
+```php
+$users = db::select('users');
+
+foreach ($users as $user) {
+  echo $user->username();
+}
+```
+
+## Select columns
+
+```php
+$users = db::select('users', ['id', 'username']);
+
+foreach ($users as $user) {
+  echo $user->id() . ': ' . $user->username();
+}
+```
+
+### Order rows
+
+```php
+$users = db::select('users', '*', null, 'username DESC' );
+
+foreach ($users as $user) {
+  echo $user->id() . ': ' . $user->username();
+}
+```
+
+
+### Offsets and limits
+
+```php
+$users = db::select('users', '*', null, 'username DESC', 2, 2 );
+
+foreach ($users as $user) {
+  echo $user->username();
+}
+```
+
+## `Where` clause
+
+
+```php
+$users = db::select('users', '*', 'username like "%m%"');
+
+foreach ($users as $user) {
+  echo $user->username();
+}
+```
+
+## Fetch first row
+
+The `first` shortcut works similar to the `select` method above, but only selects the first row.
+
+### Parameters
+
+| Name      | Type          | Description
+| ----      | ----          | ---- |
+| `$table`  | string        | The name of the table, which should be queried |
+| `$columns`| string\|array | Either a string with columns or an array of column names |
+| `$where`  | mixed         | The where clause. Can be a string or an array |
+| `$order`  | string        | The columns and direction to sort by |
+| `$offset` | int           | The index to start from |
+| `$limit`  | int           | The number of elements to return |
+
+### Example
+
+```php
+$user = db::first('users');
+
+echo $user->username();
+```
+
+## Values from single column
+
+The `column` shortcut returns values from a single column.
+
+### Parameters
+
+| Name      | Type          | Description
+| ----      | ----          | ---- |
+| `$table`  | string        | The name of the table, which should be queried |
+| `$column` | string        | A string with the column name |
+| `$where`  | mixed         | The where clause. Can be a string or an array |
+| `$order`  | string        | The columns and direction to sort by |
+| `$offset` | int           | The index to start from |
+| `$limit`  | int           | The number of elements to return |
+
+### Example
+
+```php
+$ids = db::column('users', 'id');
+var_dump($users);
+foreach ($ids as $id) {
+  echo $id;
+}
+```
+
+## Insert a row
+
+### Parameters
+
+| Name      | Type          | Description
+| ----      | ----          | ---- |
+| `$table`  | string        | The name of the table, which should be queried |
+| `$values` | string        | An array of values |
+
+### Example
+
+```php
+$id = db::insert('users', [
+  'username' => 'moe',
+  'email'    => 'moe@szyslak.com'
+]);
+dump($id);
+```
+
+If successful, the method returns the last `id`, otherwise `false`.
+
+
+## Update rows
+
+### Parameters
+
+| Name      | Type          | Description
+| ----      | ----          | ---- |
+| `$table`  | string        | The name of the table, which should be queried |
+| `$values` | string        | An array of values |
+| `$where`  | mixed         | An optional where clause. Can be a string or an array |
+
+### Example
+
+```php
+$bool = db::update('users', ['username' => 'zoe'], ['username' => 'moe']);
+dump($bool);
+```
+
+## Delete rows
+
+### Parameters
+
+| Name      | Type          | Description
+| ----      | ----          | ---- |
+| `$table`  | string        | The name of the table, which should be queried |
+| `$where`  | mixed         | An optional where clause. Can be a string or an array |
+
+### Example
+
+```php
+$bool = db::delete('users', ['username' => 'zoe']);
+dump($bool);
+```
+
+## Count rows
+
+### Parameters
+
+| Name      | Type          | Description
+| ----      | ----          | ---- |
+| `$table`  | string        | The name of the table, which should be queried |
+| `$where`  | mixed         | An optional where clause. Can be a string or an array |
+
+### Example
+
+```php
+$count = db::count('users', 'id > 3');
+dump($count);
+
+$count = db::count('users', 'username LIKE "%m%"');
+dump($count);
+```
+
+
+## Minimum value
+
+### Parameters
+
+| Name      | Type          | Description
+| ----      | ----          | ---- |
+| `$table`  | string        | The name of the table, which should be queried |
+| `$columns`| string        | The name of the column of which the minimum should be calculated |
+| `$where`  | mixed         | An optional where clause. Can be a string or an array |
+
+### Example
+
+```php
+$min = db::min('users', 'id');
+dump($min);
+
+```
+
+## Maximum value
+
+### Parameters
+
+| Name      | Type          | Description
+| ----      | ----          | ---- |
+| `$table`  | string        | The name of the table, which should be queried |
+| `$columns`| string        | The name of the column of which the maximum should be calculated |
+| `$where`  | mixed         | An optional where clause. Can be a string or an array |
+
+### Example
+
+```php
+$max = db::max('users', 'id');
+dump($max);
+```
+
+
+
+## Avgerage value
+
+### Parameters
+
+| Name      | Type          | Description
+| ----      | ----          | ---- |
+| `$table`  | string        | The name of the table, which should be queried |
+| `$columns`| string        | The name of the column of which the average should be calculated |
+| `$where`  | mixed         | An optional where clause. Can be a string or an array |
+
+### Example
+
+```php
+$avg = db::avg('users', 'id');
+dump($avg);
+```
+
+(Admittedly, the last example is a bit silly, but we don't really have a useful column in this table to calculate the average).
