@@ -21,4 +21,5 @@ Get advanced:
     - routing
     - sessions
     - security
+    - database
     - troubleshooting
