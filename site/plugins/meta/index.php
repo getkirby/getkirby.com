@@ -110,7 +110,7 @@ Kirby::plugin('kirby/meta', [
                     '  <ShortName>' . site()->title()->xml() . '</ShortName>' . PHP_EOL .
                     '  <Description>Search the Kirby website and documentation.</Description>' . PHP_EOL .
                     '  <InputEncoding>UTF-8</InputEncoding>' . PHP_EOL .
-                    '  <Image width="16" height="16" type="image/x-icon">' . ('favicon.ico') . '</Image>' . PHP_EOL .
+                    '  <Image width="16" height="16" type="image/x-icon">' . url('favicon.ico') . '</Image>' . PHP_EOL .
                     '  <Image width="64" height="64" type="image/png">' . (new File(kirby()->root('index') .'/opensearch.png'))->base64() . '</Image>' . PHP_EOL .
                     '  <Url type="text/html" template="' . url('search') . '">' . PHP_EOL .
                     '    <Param name="q" value="{searchTerms}"/>' . PHP_EOL .
