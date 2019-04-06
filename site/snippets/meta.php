@@ -27,8 +27,12 @@
 <link rel="preconnect" href="https://cdn.paddle.com">
 <?php endif ?>
 
-<?= $page->meta()->robots() ?>
+<?php $meta = $page->meta() ?>
 
-<?= $page->meta()->opensearch() ?>
+<?= $meta->robots() ?>
 
-<?= $page->meta()->social() ?>
+<?= $meta->jsonld() ?>
+
+<?= $meta->opensearch() ?>
+
+<?= $meta->social() ?>

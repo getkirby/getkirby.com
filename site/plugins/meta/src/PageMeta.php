@@ -112,19 +112,23 @@ class PageMeta {
         return $this->getFile('thumbnail', false) !== null;
     }
 
-    public function opensearch(): string
+    public function jsonld(): string
     {
         $html = [];
 
         $json = [
             '@context' => 'https://schema.org',
-            '@type' => 'WebSite',
-            'url' => url(),
-            'potentialAction' => [
+            '@graph' => [
                 [
-                    '@type' => 'SearchAction',
-                    'target' => url('search') . '?q={search_term_string}',
-                    'query-input' => 'required name=search_term_string',
+                    '@type' => 'WebSite',
+                    'url' => url(),
+                    'potentialAction' => [
+                        [
+                            '@type' => 'SearchAction',
+                            'target' => url('search') . '?q={search_term_string}',
+                            'query-input' => 'required name=search_term_string',
+                        ],
+                    ],
                 ],
             ],
         ];
@@ -133,14 +137,17 @@ class PageMeta {
         $html[] = json_encode($json, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
         $html[] = '</script>';
 
-        $html[] = Html::tag('link', null, [
+        return implode(PHP_EOL, $html) . PHP_EOL;
+    }
+
+    public function opensearch(): string
+    {
+        return Html::tag('link', null, [
             'rel' => 'search',
             'type' => 'application/opensearchdescription+xml',
             'title' => site()->title(),
             'href' => url('open-search.xml'),
-        ]);
-
-        return implode(PHP_EOL, $html) . PHP_EOL;
+        ]) . PHP_EOL;
     }
 
     public function priority(): float
