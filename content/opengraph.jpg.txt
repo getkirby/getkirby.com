@@ -1,1 +1,1 @@
-Alt: A screenshot of Kirby’s panel, showing pages a list and thumbnail grid.
+Alt: A screenshot of Kirby’s panel, showing pages as list and thumbnail grid.
