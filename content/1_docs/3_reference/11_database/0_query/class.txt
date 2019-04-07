@@ -18,7 +18,7 @@ Using the static `table` method on a `Database` object:
 
 $params = [
   'host'     => 'localhost',
-  'database' => 'user_db',
+  'database' => 'database_name',
   'user'     => 'root',
   'password' => 'root',
 ];
@@ -35,7 +35,7 @@ Via the class constructor:
 ```php
 $params = [
   'host'     => 'localhost',
-  'database' => 'user_db',
+  'database' => 'database_name',
   'user'     => 'root',
   'password' => 'root',
 ];
