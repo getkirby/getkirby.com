@@ -59,10 +59,6 @@ addresses:
 
 (field-options: structure)
 
-## How to use in templates/snippets
-
-To access a structure field in your templates, you can use the [`yaml()`](../../templates/field-methods/yaml) and [`toStructure()`](../../templates/field-methods/to-structure) methods.
-
 ## Fields
 
 You can define any number of fields and use the same (link: docs/reference/panel/fields text: field types listed):
@@ -128,3 +124,7 @@ fields:
 ## Preview of fields in the table
 
 The structure field tries to create the best possible preview for the field in its table view. If you are using fields provided by a plugin in the structure field, the preview of these can be customized with a (link: docs/reference/plugins/extensions/field-previews text: field preview extension).
+
+## How to use in templates/snippets
+
+To access a structure field in your templates, you can use the [`yaml()`](../../templates/field-methods/yaml) and [`toStructure()`](../../templates/field-methods/to-structure) methods.

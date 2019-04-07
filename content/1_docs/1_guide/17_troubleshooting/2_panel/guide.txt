@@ -21,3 +21,7 @@ When this error occurs, check with your hosting provider if `HTTP PATCH` request
 ## Fields not saving
 
 Check your console for a `PATCH` request error. This can appear when `PATCH requests are blocked by a `mod_security` rule on the server.
+
+## Fields randomly not saving, random logouts…
+
+If you randomly can't save pages, are randomly logged out or cannot log out without refreshing the browser, try disabling your browser's cache.
