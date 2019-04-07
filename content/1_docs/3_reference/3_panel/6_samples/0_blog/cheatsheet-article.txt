@@ -16,7 +16,8 @@ title: Blog
 icon: 📚
 
 columns:
-  - width: 1/2
+  left:
+    width: 1/2
     sections:
       drafts:
         extends: sections/articles
@@ -27,8 +28,9 @@ columns:
         extends: sections/articles
         headline: In Review
         status: unlisted
-
-  - width: 1/2
+  
+  right:
+    width: 1/2
     sections:
       listed:
         extends: sections/articles
@@ -70,13 +72,15 @@ status:
     text: The article is online and listed in the blog
 
 columns:
-  - width: 2/3
+  main:
+    width: 2/3
     fields:
       text:
         type: textarea
         size: large
 
-  - width: 1/3
+  sidebar:
+    width: 1/3
     sections:
       meta:
         type: fields

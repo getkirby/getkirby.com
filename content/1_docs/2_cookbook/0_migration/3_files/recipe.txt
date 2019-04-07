@@ -58,11 +58,13 @@ title: Project
 icon: 🖼
 
 columns:
-  - width: 2/3
+  main:
+    width: 2/3
     fields:
       # some fields here
 
-  - width: 1/3
+  sidebar:
+    width: 1/3
     sections:
       gallery:
         type: files
@@ -92,7 +94,7 @@ fields:
     description:
       label: Description
       type: textarea
-````
+```
 
 We copy our fields from the old blueprint into the new files blueprint. And since we only want user to upload images to this files section, we add an `accept` option.
 
