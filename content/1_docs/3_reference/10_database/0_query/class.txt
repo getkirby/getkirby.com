@@ -1,0 +1,56 @@
+Class: Kirby\Database\Query
+
+----
+Guide: database
+
+----
+Text:
+
+## Details
+
+To use the methods of the `$query` class, you need a `Query` object. You can create it like this:
+
+### Example 1:
+
+Using the static `table` method on a `Database` object:
+
+```php
+
+$params = [
+  'host'     => 'localhost',
+  'database' => 'database_name',
+  'user'     => 'root',
+  'password' => 'root',
+];
+
+db::connect($params);
+$query = db::table('table_name');
+
+```
+
+### Example 2:
+
+Via the class constructor:
+
+```php
+$params = [
+  'host'     => 'localhost',
+  'database' => 'database_name',
+  'user'     => 'root',
+  'password' => 'root',
+];
+
+$database = db::connect($params);
+$query = new Kirby\Database\Query($database, 'table_name');
+```
+
+## Example
+
+```php
+
+$rows = $query->select('*')->all();
+
+foreach ($rows as $row) {
+  echo $row->columnName1();
+}
+```
