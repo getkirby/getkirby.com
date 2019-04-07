@@ -1,1 +1,5 @@
 Class: Kirby\Database\DB
+
+----
+Guide: database
+
