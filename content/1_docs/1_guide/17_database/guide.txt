@@ -8,7 +8,13 @@ Description: Connecting to a database and querying results
 
 Text:
 
-Kirby comes with its own `Database` class that allows you to connect to a MySql or Sqlite database. The class also offers some handy shortcuts for querying tables.
+As Kirby is a file-based CMS with content stored in text files, you don't need a database. However, if you want to integrate data stored in a database into your site or if you want to export data from a database into your Kirby website, we got you covered.
+
+Kirby comes with its own `Db` class that allows you to connect to a MySQL or SQLite database. The class also offers some handy shortcuts for querying tables.
+
+<info>
+This guide only describes the basics using the shortcuts of the `Db` class. If you want to dive deeper, check out the source code of the (link: https://github.com/getkirby/kirby/blob/master/src/Database/Db.php text: `Db`) and the (link: https://github.com/getkirby/kirby/blob/master/src/Database/Query.php text: `Query`) classes on GitHub.
+</info>
 
 ## Database connection
 
@@ -35,7 +41,7 @@ With these settings in place, you can now query the database via some useful sho
 
 ## Select a table
 
-Assuming that your database contains a table called users, you can now query the database table in your code like this. This automatically fetches all rows from the table.
+Assuming your database contains a table called `users`, you can now start querying the database table in your code using the `select` method. This automatically fetches all rows from the table.
 
 
 ### Parameters
