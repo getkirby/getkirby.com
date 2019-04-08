@@ -112,10 +112,8 @@ Kirby::plugin('kirby/meta', [
                     '  <InputEncoding>UTF-8</InputEncoding>' . PHP_EOL .
                     '  <Image width="16" height="16" type="image/x-icon">' . url('favicon.ico') . '</Image>' . PHP_EOL .
                     '  <Image width="64" height="64" type="image/png">' . (new File(kirby()->root('index') .'/opensearch.png'))->base64() . '</Image>' . PHP_EOL .
-                    '  <Url type="text/html" template="' . url('search') . '">' . PHP_EOL .
-                    '    <Param name="q" value="{searchTerms}"/>' . PHP_EOL .
-                    '  </Url>' . PHP_EOL .
-                    '  <Url type="application/opensearchdescription+xml" rel="self" template="' . Xml::encode(url('open-search.xml')) . '" />' . PHP_EOL .
+                    '  <Url type="text/html" method="get" template="' . url('search') . '?q={searchTerms}"/>' . PHP_EOL .
+                    '  <Url type="application/opensearchdescription+xml" rel="self" template="' . Xml::encode(url('open-search.xml')) . '"/>' . PHP_EOL .
                     '  <moz:SearchForm>' . Xml::encode(url('search')) . '</moz:SearchForm>' . PHP_EOL .
                     '</OpenSearchDescription>',
                     'application/opensearchdescription+xml');
