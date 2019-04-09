@@ -120,6 +120,16 @@ class PageMeta {
             '@context' => 'https://schema.org',
             '@graph' => [
                 [
+                    '@type' => 'Organization',
+                    'name' => 'Kirby',
+                    'url' => url(),
+                    'logo' => url('kirby-signet.svg'),
+                    'sameAs' => [
+                        'https://twitter.com/getkirby',
+                        'https://instagram.com/getkirby',
+                    ],
+                ],
+                [
                     '@type' => 'WebSite',
                     'url' => url(),
                     'potentialAction' => [
