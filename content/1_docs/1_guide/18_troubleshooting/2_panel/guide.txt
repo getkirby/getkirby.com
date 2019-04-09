@@ -25,3 +25,7 @@ Check your console for a `PATCH` request error. This can appear when `PATCH requ
 ## Fields randomly not saving, random logouts…
 
 If you randomly can't save pages, are randomly logged out or cannot log out without refreshing the browser, try disabling your browser's cache.
+
+## Field content saving but not updating in Panel
+
+Check if you have are sending Cache-Control headers or have set Expires HTTP headers in the `mod_expires` module in your `.htaccess`/server configuration.
