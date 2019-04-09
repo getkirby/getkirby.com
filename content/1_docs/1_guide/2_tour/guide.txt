@@ -25,7 +25,7 @@ We provide two downloadable kits for you to get started with.
 | `/content` | The (link: #content text: content) of your website. |
 | `/site` | Think of this folder as your project folder. It contains your (glossary: template text: templates), configuration, plugins and setup files ((glossary: blueprint text: blueprints)) for the (glossary: Panel). |
 | `/kirby` | The Kirby app. Great for studying the source code, but in general you should leave this folder untouched (apart from (link: docs/guide/installation#updates text: updating) it when a new version is released). |
-| `/media` | This folder is managed by Kirby and holds public images and thumbnails as well as plugin and (glossary: Panel) assets. Let Kirby do its work and leave this folder as it is. |
+| `/media` | This folder is managed by Kirby and holds public images and thumbnails as well as plugin and (glossary: Panel) assets. Let Kirby do its work and leave this folder as it is. The media folder and the files in it are auto-generated.|
 
 Our (glossary: Starterkit) has an additional `/assets` folder, we use it to store CSS files. This is just a convention we use. It's not required by Kirby.
 
