@@ -42,6 +42,18 @@
   display: block;
 }
 
+.footer-social {
+  align-items: center;
+  display: flex;
+  padding-top: 1.5rem;
+  margin-left: -.5rem;
+}
+
+.footer-social a {
+  display: block;
+  padding: .5rem;
+}
+
 /* -----  Footer Menu  ------------------------------------------------------ */
 .footer-menu .h5 {
   color: $color-black;
