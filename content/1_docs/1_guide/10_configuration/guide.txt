@@ -11,6 +11,10 @@ Text:
 
 General Kirby configuration settings and configuration settings for plugins go into `/site/config/config.php`. The config file contains a return statement with an array of config options.
 
+<warning>
+Make sure to only use a single return statement in your `config.php` file (with all your options defined in that one return array.
+</warning>
+
 ```php "/site/config/config.php"
 <?php
 
