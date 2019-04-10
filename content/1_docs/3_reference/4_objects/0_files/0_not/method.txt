@@ -4,7 +4,7 @@ Text:
 
 ```php
 <ul>
-  <?php foreach($page->files()->not('ignored-file.pdf') as $file): ?>
+  <?php foreach($page->files()->not($page->files()->first()) as $file): ?>
   <li>
     <a href="<?= $file->url() ?>">
       <?= html($file->filename()) ?>
