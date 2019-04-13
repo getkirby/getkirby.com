@@ -52,6 +52,6 @@ Field content is accessible in your templates via the field's name:
 ```php
 <?= $page->title()->html() ?>
 <?= $page->text()->kirbytext() ?>
-<?= $page->date()->toDate('Y-m-d');
+<?= $page->date()->toDate('Y-m-d') ?>
 ```
 The methods that are chained to the name of the field are field methods that allow you to modify the field content in multiple ways. You can find a full list of available field methods in the (link: docs/reference/templates/field-methods text: Reference).
