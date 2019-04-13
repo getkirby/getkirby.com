@@ -69,7 +69,7 @@ Files can be linked or embedded in any field with KirbyTags or used in templates
 
 Kirby provides many ways to render files in your templates. Here are some examples:
 
-### Fetching all images of a page:
+### Fetching all images of a page
 
 ```php
 <?php foreach($page->images() as $file): ?>
@@ -101,7 +101,7 @@ Kirby provides many ways to render files in your templates. Here are some exampl
 <?php endforeach ?>
 ```
 
-### Filter images by template:
+### Filter images by template
 
 ```php
 <?php foreach($page->images()->template('gallery') as $file): ?>
