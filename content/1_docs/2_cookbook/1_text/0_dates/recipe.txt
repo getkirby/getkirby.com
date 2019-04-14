@@ -3,7 +3,7 @@ Title: Working with dates
 ----
 
 
-Description: Use date fields in your content files and output different date formats.
+Description: Use dates in your content files and output different date formats.
 
 ----
 Text:

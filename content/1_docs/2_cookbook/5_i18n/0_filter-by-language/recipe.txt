@@ -1,4 +1,4 @@
-Title: Quicktip: Filter by language
+Title: Quicktip: Filtering by language
 
 ----
 

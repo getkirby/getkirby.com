@@ -2,7 +2,7 @@ Title: Generating JSON with Kirby
 
 ----
 
-Description: Create a JSON representation of your blog cotent in Kirby.
+Description: Create a JSON representation of your blog content in Kirby.
 
 ----
 

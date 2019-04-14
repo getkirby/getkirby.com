@@ -2,7 +2,7 @@ Title: Email contact form
 
 ----
 
-Description: Create a basic contact form that sends an HTML or plain text emails.
+Description: Create a basic contact form that sends HTML or plain text emails.
 
 ----
 
