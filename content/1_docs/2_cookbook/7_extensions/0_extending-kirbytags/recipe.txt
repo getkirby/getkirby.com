@@ -1,4 +1,4 @@
-Title: Quicktip: Reusing KirbyTag in custom tags
+Title: Quicktip: Reusing KirbyTags in custom tags
 
 ----
 

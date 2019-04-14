@@ -2,7 +2,7 @@ Title: Editable redirects
 
 ----
 
-Description: Easily redirect visitors to external resources.
+Description: Redirect visitors to external resources.
 
 ----
 
