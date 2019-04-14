@@ -143,7 +143,7 @@ With the above code, `/site/snippets/mysnippet.php` will receive a title variabl
 
 Let's look at a real life example like a list of blog articles.
 
-**The template:**
+**The template**
 
 ```php
 <?php snippet('header') ?>

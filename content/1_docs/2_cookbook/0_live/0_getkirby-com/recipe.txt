@@ -40,7 +40,7 @@ foreach ($reflection->getMethods() as $method) {
 }
 ```
 
-Reflections have mmany handy little features such as getting the visibility of a method, a list of arguments, the return type and even access to the doc blocks in your code.
+Reflections have many handy little features such as getting the visibility of a method, a list of arguments, the return type and even access to the doc blocks in your code.
 
 To document our main classes (i.e. (link: docs/reference/objects/site text: $site), (link: docs/reference/objects/page  text: $page), (link: docs/reference/objects/file  text: $file)) and their methods, we use this feature inside a (link: docs/guide/templates/page-models text: page model) to create automatic subpages for each method.
 
