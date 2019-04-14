@@ -1,8 +1,8 @@
-Title: Previous / Next
+Title: Previous / Next navigation
 
 ----
 
-Description: Add a previous/next navigation to your pages.
+Description: Create a previous/next navigation for your site.
 
 ----
 

@@ -2,7 +2,7 @@ Title: One-pager site
 
 ----
 
-Description: A perfect solution for many small companies or simple portfolios.
+Description: Create a one-pager for small companies or simple portfolios.
 
 ----
 

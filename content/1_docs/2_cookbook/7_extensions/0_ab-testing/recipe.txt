@@ -2,7 +2,7 @@ Title: A/B testing with Kirby
 
 ----
 
-Description: Split visitors into groups to display different content.
+Description: Split visitors into groups to compare how different versions perform.
 
 ----
 Text:

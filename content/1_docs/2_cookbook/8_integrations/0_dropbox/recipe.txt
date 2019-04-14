@@ -2,7 +2,7 @@ Title: Dropbox sync
 
 ----
 
-Description: Setup Dropbox sync for your site (VPS or dedicated server required).
+Description: Set up Dropbox sync for your site (VPS or dedicated server required).
 
 ----
 

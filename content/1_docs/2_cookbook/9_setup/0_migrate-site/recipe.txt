@@ -1,4 +1,4 @@
-Title: How to upgrade your site
+Title: How to upgrade from Kirby 2
 
 ----
 
