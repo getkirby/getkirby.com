@@ -1,12 +1,18 @@
 <?php
 
-return function ($page) {
+return function($page) {
 
-  $recipes = $page->children()->children()->listed()->sortBy('title', 'asc');
+  $categories = $page->children()->listed();
+  $recipes    = $categories->children()->listed();
+
+  if ($category = $categories->find(get('category'))) {
+    $recipes = $category->children()->listed();
+  }
 
   return [
-    'categories' => $recipes->pluck('category', ',', true),
-    'recipes'    => $recipes
+    'recipes'    => $recipes->sortBy('published', 'desc', 'root', 'asc'),
+    'categories' => $categories,
+    'category'   => $category
   ];
 
 };
