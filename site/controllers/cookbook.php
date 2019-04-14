@@ -10,7 +10,7 @@ return function($page) {
   }
 
   return [
-    'recipes'    => $recipes->sortBy('published', 'desc', 'root', 'asc'),
+    'recipes'    => $recipes->sortBy('title', 'asc'),
     'categories' => $categories,
     'category'   => $categories->find($category)
   ];
