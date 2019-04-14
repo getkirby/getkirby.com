@@ -123,7 +123,7 @@ return [
       'message' => function () {
         return 'world';
       },
-    ]
+    ],
     'routes' => [
       [
         'pattern' => 'my-endpoint',
