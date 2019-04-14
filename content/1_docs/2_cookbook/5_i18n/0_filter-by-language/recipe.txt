@@ -6,6 +6,10 @@ Description: Prevent fallback to default language if no translated content exist
 
 ----
 
+Secondary: content
+
+----
+
 Text:
 
 In a multi-language setup, Kirby falls back to returning the contents of the default language if it can't find a translated content file.

@@ -11,14 +11,15 @@
 
           <nav class="sidebar" >
            <ul class="sidebar-items">
+              <?php foreach ($categories as $category) : ?>
               <li class="sidebar-item">
                 <span class="sidebar-item-link">
-                  More <strong><?= $page->parent()->title() ?></strong> recipes:
+                  More <a href="<?= url('docs/cookbook') ?>?category=<?= $category['slug'] ?>"><strong><?= $category['title'] ?></strong></a> recipes:
                 </span>
 
                 <div class="sidebar-submenu">
                   <ul class="sidebar-subpages">
-                  <?php foreach($page->siblings(false)->shuffle()->limit(10) as $related): ?>
+                  <?php foreach($category['items'] as $related): ?>
                     <li class="sidebar-subpage">
                       <?= $related->title()->link(['class' => 'sidebar-subpage-link']) ?>
                     </li>
@@ -26,6 +27,7 @@
                   </ul>
                 </div>
               </li>
+              <?php endforeach ?>
             </ul>
           </nav>
         </nav>

@@ -15,9 +15,10 @@
       </p>
     </a>
     <footer class="recipe-card-footer">
-      <?php if ($category = $recipe->parent()): ?>
-      <a href="<?= $category->url() ?>"><?= icon($category->icon()) ?> <?= $category->title() ?></a>
-      <?php endif ?>
+      <?php foreach ($recipe->categories() as $category) : ?>
+      <a href="<?= $category->url() ?>"><?= icon($category->icon()) ?>
+      <?= $category->title() ?></a>
+      <?php endforeach ?>
     </footer>
   </li>
   <?php endforeach ?>
