@@ -16,4 +16,9 @@ class RecipePage extends Page
         return array_merge([$this->parent()], $secondary);
     }
 
+    public function isNew(): bool
+    {
+        return $this->published()->toDate('U') > (time() - 4500000);
+    }
+
 }
