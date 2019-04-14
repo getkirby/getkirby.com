@@ -1,0 +1,93 @@
+Title: Using Kirby for multiple sites
+
+----
+
+Description: Run multiple sites from the same Kirby installation.
+
+----
+
+Text:
+
+You can run multiple sites via the same Kirby setup. This can help you maintain your sites as you only need to keep a single setup updated.
+
+## Custom folder and URL setup
+
+A multi-site setup extends Kirby’s possibility to define your (link: docs/guide/configuration#custom-folder-setup text: custom folder setup) and (link: docs/guide/configuration#custom-url-setup text: custom URL setup).
+
+## Setting up your multisite
+
+To run multiple sites on a single Kirby installation, modify the `index.php` at the root of your installation:
+
+```php "/index.php"
+<?php
+require 'kirby/bootstrap.php';
+
+$sites = [
+  'my-awesome-site.com' => __DIR__ . '/my-site',
+  'my-awesome-shop.com' => __DIR__ . '/my-shop'
+];
+
+$url  = Url::host();
+$root = $sites[$url];
+
+$kirby = new Kirby([
+  'roots' => [
+    'index'   => __DIR__,
+    'site'    => $root . '/site',
+    'content' => $root . '/content',
+    'media'   => $root . '/media'
+  ]
+]);
+
+echo $kirby->render();
+```
+
+Let's walk through this step by step: First we load the `kirby/bootstrap.php` script and define our sites in an array with the domain as the key and the file directory root as the value:
+
+```php
+$sites = [
+  'my-awesome-site.com' => __DIR__ . '/my-site',
+  'my-awesome-shop.com' => __DIR__ . '/my-shop'
+];
+```
+
+Then we use the `Url::host()` method to retrieve the domain requested by the visitor and select the matching root for this one:
+
+```php
+$url  = Url::host();
+$root = $sites[$url];
+```
+
+Finally, we use this information to create a `$kirby` object with a custom root and a custom URL and output `$kirby->render()`:
+
+```php
+$kirby = new Kirby([
+  'roots' => [
+    'index'   => __DIR__,
+    'site'    => $root . '/site',
+    'content' => $root . '/content',
+    'media'   => $root . '/media'
+  ]
+]);
+
+echo $kirby->render();
+```
+
+## In the filesystem
+
+```filesystem
+  kirby/
+  my-site/
+    content/
+    media/
+    site/
+  my-shop/
+    content/
+    media/
+    site/
+  index.php
+```
+
+## Licenses for your multi-site
+
+Even when running multiple sites through the same setup and code, you need a license for each of these sites: A single license is valid for a single Kirby installation, running on a single domain. If you add additional installations (i.e. under additional subdomains or subfolders) you need to (link: buy text: purchase licenses) for each of those installations.

@@ -49,6 +49,33 @@ return [
         }
     ],
     [
+        'pattern' => 'docs/cookbook/(:any)/(:all)',
+        'action'  => function ($category, $uid) {
+            $path = $category . '/' . $uid;
+
+            if ($page = page('docs/cookbook/' . $path)) {
+                return $page;
+            }
+
+            $aliases = [
+                'migration/sites' => 'setup/migrate-site',
+                'migration/files' => 'setup/migrate-files',
+                'migration/users' => 'setup/migrate-users',
+                'migration/plugins' => 'setup/migrate-plugins',
+            ];
+
+            if ($page = page('docs/cookbook/' . ($aliases[$path] ?? $path))) {
+                go($page->url());
+            }
+
+            if ($page = page('docs/cookbook')->grandChildren()->listed()->findBy('uid', $uid)) {
+                go($page->url());
+            }
+
+            go('error');
+        }
+    ],
+    [
         'pattern' => [
             'docs/cheatsheet/(:all?)',
             'docs/toolkit/(:all?)'
