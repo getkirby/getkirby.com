@@ -9,6 +9,10 @@ return function($page) {
     $recipes = $page->recipes($category);
   }
 
+  if (get('new')) {
+    $recipes = $page->grandChildren()->filterBy('isNew', true);
+  }
+
   return [
     'recipes'    => $recipes->sortBy('title', 'asc'),
     'categories' => $categories,

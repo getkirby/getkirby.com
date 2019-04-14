@@ -5,7 +5,7 @@
       <h3 class="recipe-card-title">
         <span><?= $recipe->title() ?></span>
 
-        <?php if ($recipe->published()->toDate('U') > (time() - 4500000)): ?>
+        <?php if ($recipe->isNew()): ?>
         <code class="cookbook-new">New</code>
         <?php endif ?>
       </h3>
