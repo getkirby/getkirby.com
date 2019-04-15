@@ -1,11 +1,12 @@
 import List from "list.js";
 
 var options = {
+  listClass: "recipe-cards",
   valueNames: [
-    "cookbook-category",
-    "cookbook-title",
-    "cookbook-description"
+    "recipe-card-title",
+    "recipe-card-description",
+    "recipe-card-footer"
   ]
 };
 
-new List("cookbook-recipes", options);
+new List("cookbook", options);
