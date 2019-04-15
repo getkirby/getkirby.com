@@ -32,12 +32,12 @@ Let's go through this step by step.
 
 First, we need a route that listens to our URL pattern.
 
-```php "/site/config/config.php
+```php "/site/config/config.php"
 return [
     'routes' => [
         [
             'pattern' => 'blog/tag/(:any)',
-            'action' => function($tag) {
+            'action' => function ($tag) {
                 return page('blog')->render([
                     'tag' => $tag
                 ]);
@@ -62,9 +62,10 @@ return function ($page, $tag) {
 
     $articles = $page->children()->listed();
 
-    if(isset($tag)) {
+    if ($tag) {
         $articles = $articles->filterBy('tags', $tag, ',');
     }
+
     return [
         'articles' => $articles
     ];
@@ -77,7 +78,7 @@ By loading the `$tag` variable to our anonymous function, we can fetch the varia
 With…
 
 ```php
-if(isset($tag)) {
+if ($tag) {
   $articles = $articles->filterBy('tags', $tag, ',');
 }
 ```
@@ -94,13 +95,12 @@ In case you use multi-word tags with spaces or special characters, you have to `
 
 If you want to leave out the `tag` bit in the URL, you have to modify the route a bit:
 
-
-```php "/site/config/config.php
+```php "/site/config/config.php"
 return [
     'routes' => [
         [
             'pattern' => 'blog/(:any)',
-            'action' => function($tag) {
+            'action' => function ($tag) {
                 if ($page = page('blog/' . $tag)) {
                     return $page;
                 } else {
