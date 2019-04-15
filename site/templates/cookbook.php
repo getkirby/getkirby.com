@@ -11,13 +11,13 @@
 
     <div class="filter-layout">
       <aside class="filter-sidebar">
-        <ul class="filter-categories">
-          <li>
-            <a href="?new=true"><span class="filter-category-icon"><?= icon('star-outline') ?></span> New recipes</a>
-          </li>
-        </ul>
-
         <div class="filter-filters">
+          <ul class="filter-categories">
+            <li>
+              <a href="?new=true"><span class="filter-category-icon"><?= icon('star-outline') ?></span> New recipes</a>
+            </li>
+          </ul>
+
           <h2 class="h6 -mb:medium">Categories</h2>
           <ul class="filter-categories">
             <?php foreach ($categories as $cat): ?>
