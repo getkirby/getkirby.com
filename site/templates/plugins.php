@@ -12,6 +12,12 @@
     <div class="filter-layout">
       <aside class="filter-sidebar">
         <div class="filter-filters">
+          <ul class="filter-categories">
+            <li>
+              <a href="<?= $page->url() ?>"><span class="filter-category-icon"><?= icon('list') ?></span> All plugins</a>
+            </li>
+          </ul>
+
           <h2 class="h6 -mb:medium">Categories</h2>
           <ul class="filter-categories">
             <?php foreach ($categories as $id => $cat): ?>

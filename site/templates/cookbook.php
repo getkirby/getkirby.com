@@ -14,6 +14,9 @@
         <div class="filter-filters">
           <ul class="filter-categories">
             <li>
+              <a href="<?= $page->url() ?>"><span class="filter-category-icon"><?= icon('list') ?></span> All recipes</a>
+            </li>
+            <li>
               <a href="?new=true"><span class="filter-category-icon"><?= icon('star-outline') ?></span> New recipes</a>
             </li>
           </ul>
