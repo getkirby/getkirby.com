@@ -54,7 +54,7 @@ Each page folder is accessible via its URL, e.g. you can access the projects fol
 
 URLs can be modified using (link: docs/guide/routing text: Kirby's router).
 
-## Creating page sections that allow adding pages
+## Creating pages in the Panel
 
 Before a user can add new pages via the Panel, you have to set up a (link: docs/reference/panel/sections/pages text: pages section) that has either the status `draft` or the status `all`.
 
