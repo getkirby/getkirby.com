@@ -2,11 +2,7 @@ Title: Working with content
 
 ----
 
-Description: Learn how Kirby stores content, how pages are sorted and how to use the API to create new pages programmatically.
-
-----
-
-Intro: In Kirby, pages are represented by folders in `/content`. For each page, there is a separate folder that contains the corresponding text and media files.
+Intro: Files and folders are Kirby's primary data source in which you can organize your content exactly how you need it. If you need to build to scale, you can go beyond and add data from any data source.
 
 ----
 
@@ -16,34 +12,30 @@ Text:
 
 Since Kirby is a flat-file CMS, all content is stored in files and folders within the `content` folder. Each folder you create represents a page that is accessible via its own URL.
 
-<info>
-Content in Kirby can also come from a database, from an external API, Excel sheets or any other data source. We will cover this in other parts of the documentation.
-</info>
-
 If you create a folder called `blog` as direct child of the `content` folder, it will by accessible via `https://yourdomain.com/blog` etc.
 
 Page folders can serve as pages in their own right, i.e. only contain the content from their own folder, or they can serve as data containers for their parents or be used in other parts of the project.
 
-<info>
-If we want to use pages as data containers, we usually don't want them to be accessible via URL and therefore have to reroute them somewhere. This can be achieved with (link: text: Kirby's router).
-</info>
 
-All content you create in the backend can also just serve as a data store, ready to be consumed in your SPA or other applications.
+All content you create in the backend can also just serve as a data store, ready to be consumed in your SPA or other types of media.
 
 
 ## Editing content
 
-You can edit content in three ways in Kirby:
+The flat-file architecture of Kirby makes creating and editing content in Kirby highly flexible. You can create content in three ways in Kirby, in fact, all three ways can be used in parallel.
 
-1. You can create files and folders manually in the file system and edit content files with the text editor of your choice.
+1. You can create files and folders manually in the file system, editing content files with the text editor of your choice.
 
 2. You can use the (glossary: panel text: Panel) to edit content and upload files.
 
-3. You can create and modify content programmatically using Kirby's API
+3. You can create and modify content programmatically using Kirby's API, for example, create pages from `.csv` files or from form content on the front-end.
 
 (link: docs/guide/content/creating-pages text: Read more ›)
 
+
 ## Publishing workflow
+
+Customizable page states give you maximum control over your workflow, from drafts over unreviewed to published pages. Choose what you need and start creating.
 
 In Kirby, pages can have three states:
 
@@ -52,10 +44,31 @@ In Kirby, pages can have three states:
 - unlisted
 
 
-Drafts are only accessible to logged-in users, while listed and unlisted pages are accessible to anyone.
+Drafts are only accessible to logged-in users, while listed and unlisted pages are accessible via their URL.
 
-You can use these states to filter files in the frontend or to implement a nice 3-step publishing workflow for drafts, in-review and published pages in the Panel.
+You can use these states to filter files in the frontend or to implement a multi-step publishing workflow for drafts, in-review and published pages.
 
 
 (link: docs/guide/content/publishing-workflow text: Read more ›)
 
+## Structuring content
+
+Your content is your biggest asset and structuring it in a way that makes it easily accessible and ideally reusable across different types of media ([Single Source Publishing](https://en.wikipedia.org/wiki/Single-source_publishing)) is therefore important.
+
+Organize content your way. Every page type or data entry can have the completely unique data structure that your project demands.
+
+(link: docs/guide/content/fields text: Read more ›)
+
+## Files
+
+Kirby stores media files in the same folder as the page content instead of a huge media library. In addition, you can store media files in the `site` object, i.e. directly in the `content` folder.
+
+Kirby works with all types of media files and allows you to store all kind of structured meta data for each file, in the same flexible way as you can for pages.
+
+(link: docs/guide/content/files text: Read more ›)
+
+## Text formatting
+
+When writing for the web, nobody really wants to wrap HTML tags around text. On the other hand, most WYSIWYG editors produce awful HTML output and have tons of other issues. In Kirby, content is therefore marked up and formatted in Markdown or our extended version of it, which we call KirbyText.
+
+(link: docs/guide/content/text-formatting text: Read more ›)
