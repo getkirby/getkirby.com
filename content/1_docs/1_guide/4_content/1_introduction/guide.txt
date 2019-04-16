@@ -1,0 +1,61 @@
+Title: Working with content
+
+----
+
+Description: Learn how Kirby stores content, how pages are sorted and how to use the API to create new pages programmatically.
+
+----
+
+Intro: In Kirby, pages are represented by folders in `/content`. For each page, there is a separate folder that contains the corresponding text and media files.
+
+----
+
+Text:
+
+## Introduction
+
+Since Kirby is a flat-file CMS, all content is stored in files and folders within the `content` folder. Each folder you create represents a page that is accessible via its own URL.
+
+<info>
+Content in Kirby can also come from a database, from an external API, Excel sheets or any other data source. We will cover this in other parts of the documentation.
+</info>
+
+If you create a folder called `blog` as direct child of the `content` folder, it will by accessible via `https://yourdomain.com/blog` etc.
+
+Page folders can serve as pages in their own right, i.e. only contain the content from their own folder, or they can serve as data containers for their parents or be used in other parts of the project.
+
+<info>
+If we want to use pages as data containers, we usually don't want them to be accessible via URL and therefore have to reroute them somewhere. This can be achieved with (link: text: Kirby's router).
+</info>
+
+All content you create in the backend can also just serve as a data store, ready to be consumed in your SPA or other applications.
+
+
+## Editing content
+
+You can edit content in three ways in Kirby:
+
+1. You can create files and folders manually in the file system and edit content files with the text editor of your choice.
+
+2. You can use the (glossary: panel text: Panel) to edit content and upload files.
+
+3. You can create and modify content programmatically using Kirby's API
+
+(link: docs/guide/content/creating-pages text: Read more ›)
+
+## Publishing workflow
+
+In Kirby, pages can have three states:
+
+- draft
+- listed
+- unlisted
+
+
+Drafts are only accessible to logged-in users, while listed and unlisted pages are accessible to anyone.
+
+You can use these states to filter files in the frontend or to implement a nice 3-step publishing workflow for drafts, in-review and published pages in the Panel.
+
+
+(link: docs/guide/content/publishing-workflow text: Read more ›)
+

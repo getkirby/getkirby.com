@@ -1,0 +1,94 @@
+Title: Creating pages
+
+----
+Intro:
+
+Pages can be created directly in the file system, via the Panel or programmatically. If you create a new page via the Panel, it is always created as a draft. In the file system, you are free to create either drafts or listed/unlisted pages directly.
+
+----
+
+Text:
+
+## Creating pages manually in the content folder
+
+Pages are stored as subfolders of the `/content` folder. To create a new page manually, create a new folder and add a text file with the extension `.txt` (default) or `.md` (optional configuration setting).
+
+A simple folder structure could look like this:
+
+```filesystem
+/content/
+  /home/
+    home.txt
+  /projects/
+    project.txt
+  /blog/
+    blog.txt
+  /contact/
+    contact.txt
+```
+<info>
+If you want to create a site with different languages using Kirby's built-in (link: docs/guide/languages) text: multi-lang feature), you need to add language code extensions for each language, e.g. `home.en.txt`, `home.de.txt` etc.
+</info>
+
+The naming of these content files is important, because it defines which template is used to render the content.
+
+| Content filename | Template filename |
+| -----------------| ------------------|
+| home.txt         | home.php          |
+| projects.txt     | projects.php      |
+| contact.txt      | contact.php       |
+
+<info>
+If there is no corresponding template, the `default.php` template is used to render the page.
+</info>
+
+Each page folder is accessible via its URL, e.g. you can access the projects folder by entering your domain name followed by the UID of the folder into your browser's address bar: `https://example.com/projects`. If your projects folder contains subpages, the subpage project-a would therefore be accessible via `http://example.com/projects/project-a` etc.
+
+URLs can be modified using (link: docs/guide/routing text: Kirby's router).
+
+## Creating page sections that allow adding pages
+
+Before a user can add new pages via the Panel, you have to set up a (link: docs/reference/panel/sections/pages text: pages section) that has either the status `draft` or the status `all`.
+
+## Creating Drafts
+
+Drafts are stored in a `_drafts` subfolder for every page. These drafts are not accessible when you are not logged in. Every new page in the Panel is created as a draft first. This prevents accidental publishing of a page that is not ready yet.
+
+### How to create a draft
+
+#### In the Panel
+
+Click on the "Add" button in the top right corner of a list of pages. Every new page is automatically added as a draft.
+
+(picture: Bildschirmfoto2018-07-05um14.34.45.png)
+
+#### In the content folder
+
+If you want to create a draft manually in the content folder you can create a `_drafts` subfolder in the parent page folder (if it's not there yet) and inside create your draft page folder.
+
+```filesystem
+/content/projects/_drafts/my-project-draft/
+```
+
+## Creating pages programmatically
+
+Pages can also be created via Kirby's API methods in a controller, template, plugin, hook etc. This is useful if you want to create pages from form data, external files (like an Excel or CSV file), or from an external API.
+
+The basic syntax for creating a page with code looks like this:
+
+```php
+<?php
+
+$content = [
+  'title' => 'An interesting title',
+  'text'  => 'Some great content here…'
+];
+
+$page->createChild([
+  'content'  => $content,
+  'slug'     => 'test-article',
+  'template' => 'article'
+]);
+```
+
+The above code only works if you are logged in, because it respects the permissions of the currently logged in user. (link: docs/guide/templates/php-api#permissions text: Learn more about permissions and impersonatig users).
