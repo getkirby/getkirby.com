@@ -1,0 +1,86 @@
+Title: Publishing workflow
+
+----
+
+
+Intro: Pages can have different states in Kirby, allowing you to control who has access to content, to filter by status, or to implement a full publishing workflow from drafts to published in the Panel.
+
+----
+
+Text:
+
+### How to publish a draft
+
+#### In the Panel
+
+To publish a draft in the Panel, click on the "Draft" button with the red status icon in the toolbar or go to "Settings" > "Change status".
+
+(picture: Bildschirmfoto2018-07-05um14.30.12.png)
+
+#### Validation errors
+
+To publish a draft in the Panel, all required fields must be filled in and all validations must pass. Otherwise publishing the draft will fail.
+
+(picture: Bildschirmfoto2018-07-05um14.31.59.png)
+
+#### In the content folder
+
+To publish a draft manually in your content folder, drag it from the `_drafts` folder to the parent directory:
+
+*From*
+
+```filesystem
+/content/projects/_drafts/my-project-draft/
+```
+
+*To*
+
+```filesystem
+/content/projects/my-project-draft/
+```
+You can apply additional sorting by prepending a number if wanted. Delete the `_drafts` folder if it's no longer needed. Otherwise there's no harm in just leaving it there.
+
+## Drafts in your templates
+
+Drafts are not included in `$page->children()` collections. If you have to access them in your templates, you can use the `$page->drafts()` method.
+
+## Listed pages
+
+Listed pages are public pages with a sorting number in your content folder.
+
+### Manual sorting
+
+For a normal menu, a list of projects or any other non-alphabetical list you often need manual sorting. This is done by prepending a number followed by an underscore:
+
+```filesystem
+1_best-project/
+2_okayish-project/
+3_dont-look-at-this-one/
+```
+
+### Date-based sorting
+
+For blogs, events or anything else that is date-based, the date can be prepended as the sorting number, also followed by an underscore:
+
+```filesystem
+20121212_hello-world/
+20181212_really-bad-at-regular-blogging/
+```
+
+### Alphabetical sorting
+
+To sort pages alphabetically, 0 is prepended as the sorting number in the file system:
+
+```filesystem
+0_alpaca/
+0_bear/
+0_camel/
+```
+
+## Unlisted pages
+
+Pages without a sorting number are unlisted pages. Unlisted pages are still accessible by anyone who knows the URL to the page. Unlisted pages are useful if you want to exclude them from menus or any kind of list. A typical example for an unlisted page would be the error page or maybe a new project that still needs to be reviewed by the client via URL, but not yet listed.
+
+```filesystem
+im-only-accessible-via-url/
+```
