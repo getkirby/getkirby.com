@@ -9,15 +9,8 @@ Pages can be created directly in the file system, via the Panel or programmatica
 
 Text:
 
-<info>
-Content in Kirby can also come from a database, from an external API, Excel sheets or any other data source. We will cover this in other parts of the documentation.
-</info>
 
-<info>
-If we want to use pages as data containers, we usually don't want them to be accessible via URL and therefore have to reroute them somewhere. This can be achieved with (link: text: Kirby's router).
-</info>
-
-## Creating pages manually in the content folder
+## Creating published pages manually
 
 Pages are stored as subfolders of the `/content` folder. To create a new page manually, create a new folder and add a text file with the extension `.txt` (default) or `.md` (optional configuration setting).
 
@@ -54,29 +47,28 @@ Each page folder is accessible via its URL, e.g. you can access the projects fol
 
 URLs can be modified using (link: docs/guide/routing text: Kirby's router).
 
-## Creating pages in the Panel
-
-Before a user can add new pages via the Panel, you have to set up a (link: docs/reference/panel/sections/pages text: pages section) that has either the status `draft` or the status `all`.
-
-## Creating Drafts
-
-Drafts are stored in a `_drafts` subfolder for every page. These drafts are not accessible when you are not logged in. Every new page in the Panel is created as a draft first. This prevents accidental publishing of a page that is not ready yet.
-
-### How to create a draft
-
-#### In the Panel
-
-Click on the "Add" button in the top right corner of a list of pages. Every new page is automatically added as a draft.
-
-(picture: Bildschirmfoto2018-07-05um14.34.45.png)
-
-#### In the content folder
+## Creating drafts manually
 
 If you want to create a draft manually in the content folder you can create a `_drafts` subfolder in the parent page folder (if it's not there yet) and inside create your draft page folder.
 
 ```filesystem
 /content/projects/_drafts/my-project-draft/
 ```
+
+## Creating pages in the Panel
+
+Before a user can add new pages via the Panel, you have to set up a (link: docs/reference/panel/sections/pages text: pages section) that has either the status `draft` or the status `all`.
+
+Click on the "Add" button in the top right corner of pages section. Every new page is automatically added as a draft.
+
+(picture: Bildschirmfoto2018-07-05um14.34.45.png)
+
+Drafts are stored in a `_drafts` subfolder for every page. These drafts are not accessible when you are not logged in. Every new page in the Panel is created as a draft first. This prevents accidental publishing of a page that is not ready yet.
+
+
+<info>
+If you want to automatically publish new pages created via the Panel, you can set up a (link: docs/reference/system/options/hooks text: `page.create:after` hook) in your `config.php` file.
+</info>
 
 ## Creating pages programmatically
 
