@@ -19,6 +19,9 @@ Page folders can serve as pages in their own right, i.e. only contain the conten
 
 All content you create in the backend can also just serve as a data store, ready to be consumed in your SPA or other types of media.
 
+<info>
+Content in Kirby can also come from a database, from an external API, Excel sheets or any other data source. We will cover this in other parts of the documentation.
+</info>
 
 ## Editing content
 

@@ -24,7 +24,7 @@ Let's look at what the three states mean again before we go into details:
 
 
 <info>
-In your blueprints for the Panel, you can change the naming for these states or limit the available states on a per template basis.
+In your blueprints for the Panel, you can (link: docs/reference/panel/blueprints/page#statuses text: change the naming for these states or limit the available states) on a per template basis, for example, to implement a draft/in-review/published workflow.
 </info>
 
 ## Publishing drafts
@@ -35,9 +35,9 @@ To publish a draft in the Panel, click on the "Draft" button with the red status
 
 (picture: Bildschirmfoto2018-07-05um14.30.12.png)
 
-#### Validation errors
-
-To publish a draft in the Panel, all required fields must be filled in and all validations must pass. Otherwise publishing the draft will fail.
+<warning>
+You can only publish a draft in the Panel if all required fields are filled in and all validations have passed.
+</warning>
 
 (picture: Bildschirmfoto2018-07-05um14.31.59.png)
 
@@ -56,7 +56,7 @@ To publish a draft manually in your content folder, drag it from the `_drafts` f
 ```filesystem
 /content/projects/my-project-draft/
 ```
-You can apply additional sorting by prepending a number if wanted. Delete the `_drafts` folder if it's no longer needed. Otherwise there's no harm in just leaving it there.
+This will make the page `listed`. You can apply sorting by prepending a number. Optionally, you can then delete the `_drafts` folder if it's no longer needed or just leave it in place.
 
 ### Drafts in your templates
 
@@ -102,3 +102,9 @@ Pages without a sorting number are unlisted pages. Unlisted pages are still acce
 ```filesystem
 im-only-accessible-via-url/
 ```
+
+
+
+<info>
+If you publish pages that are only intended as data containers but should not be accessible via their URL, you can use (link: docs/guide/routing text: Kirby's router) to prevent access to such pages.
+</info>
