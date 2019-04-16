@@ -113,12 +113,12 @@ In the login template, create the login form and a container for the error messa
 
 <form method="post" action="<?= $page->url() ?>">
   <div>
-    <label for="username"><?= $page->username()->html() ?></label>
-    <input type="text" id="username" name="username" required>
+    <label for="email"><?= $page->username()->html() ?></label>
+    <input type="email" id="email" name="email" value="<?= esc(get('email')) ?>">
   </div>
   <div>
     <label for="password"><?= $page->password()->html() ?></label>
-    <input type="password" id="password" name="password" required>
+    <input type="password" id="password" name="password" value="<?= esc(get('password')) ?>">
   </div>
   <div>
     <input type="submit" name="login" value="<?= $page->button()->html() ?>">
@@ -148,12 +148,18 @@ return function ($kirby) {
   // handle the form submission
   if ($kirby->request()->is('POST') && get('login')) {
 
-    // fetch the user by username and run the
-    // login method with the password
-    if (($user = $kirby->user(get('username'))) && $user->login(get('password'))) {
-      // redirect to the homepage
-      // if the login was successful
-      go('/');
+    // fetch the user by username
+    if ($user = $kirby->user(get('email'))) {
+      // if the user exists, try to log them in
+      try {
+        $user->login(get('password'));
+        // redirect to the homepage
+        // if the login was successful
+        go('/');
+      } catch (Exception $e) {
+        $error = true;
+      }
+        
     } else {
       // make sure the alert is
       // displayed in the template
