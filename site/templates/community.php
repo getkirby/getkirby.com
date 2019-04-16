@@ -20,7 +20,7 @@
       <div class="wrap">
         <div class="community-plugins-container">
           <header class="-mb:large">
-            <h2 id="team" class="h2 -color:white"><?= $pluginsPage->title() ?></h2>
+            <h2 id="plugins" class="h2 -color:white"><?= $pluginsPage->title() ?></h2>
             <p class="intro -theme:dark">
               <?= $pluginsPage->intro() ?>
             </p>
