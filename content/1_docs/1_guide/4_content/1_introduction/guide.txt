@@ -1,4 +1,4 @@
-Title: Working with content
+Title: Overview
 
 ----
 
@@ -8,7 +8,7 @@ Intro: Files and folders are Kirby's primary data source in which you can organi
 
 Text:
 
-## Introduction
+## Files and folders
 
 Since Kirby is a flat-file CMS, all content is stored in files and folders within the `content` folder. Each folder you create represents a page that is accessible via its own URL.
 
@@ -59,7 +59,7 @@ Organize content your way. Every page type or data entry can have the completely
 
 (link: docs/guide/content/fields text: Read more ›)
 
-## Files
+## Media files
 
 Kirby stores media files in the same folder as the page content instead of a huge media library. In addition, you can store media files in the `site` object, i.e. directly in the `content` folder.
 
