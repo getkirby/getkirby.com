@@ -3,12 +3,26 @@ Title: Creating pages
 ----
 Intro:
 
-Pages can be created directly in the file system, via the Panel or programmatically. If you create a new page via the Panel, it is always created as a draft. In the file system, you are free to create either drafts or listed/unlisted pages directly.
+Pages can be created via the Panel, directly in the file system, or programmatically. If you create a new page via the Panel, it is always created as a draft. In the file system, you can create pages with any state directly.
 
 ----
 
 Text:
 
+## Creating pages in the Panel
+
+Before a user can add new pages via the Panel, you have to set up a (link: docs/reference/panel/sections/pages text: pages section) with the status set to `draft` or `all`.
+
+Click on the "Add" button in the top right corner of a pages section. Every new page in the Panel is created as a draft first. This prevents accidental publishing of a page that is not ready yet.
+
+(picture: Bildschirmfoto2018-07-05um14.34.45.png)
+
+Drafts are stored in a `_drafts` subfolder for every page. These drafts only accessible when you are logged in. 
+
+
+<info>
+If you want to automatically publish new pages created via the Panel, you can set up a (link: docs/reference/system/options/hooks text: `page.create:after` hook) in your `config.php` file.
+</info>
 
 ## Creating published pages manually
 
@@ -43,7 +57,7 @@ The naming of these content files is important, because it defines which templat
 If there is no corresponding template, the `default.php` template is used to render the page.
 </info>
 
-Each page folder is accessible via its URL, e.g. you can access the projects folder by entering your domain name followed by the UID of the folder into your browser's address bar: `https://example.com/projects`. If your projects folder contains subpages, the subpage project-a would therefore be accessible via `http://example.com/projects/project-a` etc.
+Each page folder is accessible via its URL, e.g. you can access the projects folder by entering the domain name followed by the UID of the folder into your browser's address bar: `https://example.com/projects`. If your projects folder contains subpages, the subpage `project-a` would therefore be accessible via `https://example.com/projects/project-a` etc.
 
 URLs can be modified using (link: docs/guide/routing text: Kirby's router).
 
@@ -55,24 +69,10 @@ If you want to create a draft manually in the content folder you can create a `_
 /content/projects/_drafts/my-project-draft/
 ```
 
-## Creating pages in the Panel
-
-Before a user can add new pages via the Panel, you have to set up a (link: docs/reference/panel/sections/pages text: pages section) that has either the status `draft` or the status `all`.
-
-Click on the "Add" button in the top right corner of pages section. Every new page is automatically added as a draft.
-
-(picture: Bildschirmfoto2018-07-05um14.34.45.png)
-
-Drafts are stored in a `_drafts` subfolder for every page. These drafts are not accessible when you are not logged in. Every new page in the Panel is created as a draft first. This prevents accidental publishing of a page that is not ready yet.
-
-
-<info>
-If you want to automatically publish new pages created via the Panel, you can set up a (link: docs/reference/system/options/hooks text: `page.create:after` hook) in your `config.php` file.
-</info>
 
 ## Creating pages programmatically
 
-Pages can also be created via Kirby's API methods in a controller, template, plugin, hook etc. This is useful if you want to create pages from form data, external files (like an Excel or CSV file), or from an external API.
+Pages can also be created via Kirby's API methods in a controller, template, plugin, hook etc. This is useful if you want to create pages from form data, external files (like an Excel or `.csv` file), or from an external API.
 
 The basic syntax for creating a page with code looks like this:
 
@@ -91,4 +91,4 @@ $page->createChild([
 ]);
 ```
 
-The above code only works if you are logged in, because it respects the permissions of the currently logged in user. (link: docs/guide/templates/php-api#permissions text: Learn more about permissions and impersonatig users).
+The above code only works if you are either logged in and have required permissions for the action or if you authenticate the user programmatically to perform the action (link: docs/guide/templates/php-api#permissions text: Learn more about permissions and impersonatig users).
