@@ -11,13 +11,13 @@ Text:
 
 ## Creating pages in the Panel
 
-Before a user can add new pages via the Panel, you have to set up a (link: docs/reference/panel/sections/pages text: pages section) with the status set to `draft` or `all`.
+Before you can add new pages via the Panel, you have to set up a (link: docs/reference/panel/sections/pages text: pages section) in your page or site blueprint, with the status set to `draft` or `all`.
 
 Click on the "Add" button in the top right corner of a pages section. Every new page in the Panel is created as a draft first. This prevents accidental publishing of a page that is not ready yet.
 
 (picture: Bildschirmfoto2018-07-05um14.34.45.png)
 
-Drafts are stored in a `_drafts` subfolder for every page. These drafts only accessible when you are logged in. 
+Drafts are stored in a `_drafts` subfolder for every page. These drafts are only accessible when you are logged in. 
 
 
 <info>
@@ -42,7 +42,7 @@ A simple folder structure could look like this:
     contact.txt
 ```
 <info>
-If you want to create a site with different languages using Kirby's built-in (link: docs/guide/languages) text: multi-lang feature), you need to add language code extensions for each language, e.g. `home.en.txt`, `home.de.txt` etc.
+If you want to create a site with different languages using Kirby's built-in (link: docs/guide/languages text: multi-lang feature), you need to add language code extensions for each language, e.g. `home.en.txt`, `home.de.txt` etc.
 </info>
 
 The naming of these content files is important, because it defines which template is used to render the content.
@@ -91,4 +91,4 @@ $page->createChild([
 ]);
 ```
 
-The above code only works if you are either logged in and have required permissions for the action or if you authenticate the user programmatically to perform the action (link: docs/guide/templates/php-api#permissions text: Learn more about permissions and impersonatig users).
+The above code only works if you are either logged in and have the necessary permissions for the action, or if you authenticate the user programmatically to perform the action (link: docs/guide/templates/php-api#permissions text: Learn more about permissions and impersonatig users).
