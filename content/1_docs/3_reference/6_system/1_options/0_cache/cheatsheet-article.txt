@@ -32,6 +32,9 @@ return [
 ];
 ```
 
+You can also set a registered custom cache driver here. Check out the plugin reference (link: docs/reference/plugins/extensions/cache-drivers text: how to create a custom cache driver).
+
 <info>
 Make sure the selected cache driver is enabled on/supported by your server.
 </info>
+
