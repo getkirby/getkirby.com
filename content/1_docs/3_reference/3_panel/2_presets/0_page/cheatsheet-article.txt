@@ -84,7 +84,7 @@ sidebar:
         time: true
         default: now
       author:
-        type: user
+        type: users
       tags:
         type: tags
         options: query
