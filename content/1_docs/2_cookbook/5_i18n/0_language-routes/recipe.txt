@@ -1,0 +1,389 @@
+Title: Language routes
+
+----
+
+Published: 2019-04-19
+
+----
+
+Description: Manage routes in multi-language installations with custom slugs.
+
+----
+
+Text:
+
+In a standard Kirby installation, routes are usually rather straightforward unless you handle complex logic. It gets a bit more complicated when we enable Kirby's multi-language feature, use custom language slugs and omit the language code for the default language in the URL.
+
+
+## Use case: Omitting parts of an URL
+For the purposes of this recipe, let's look at a typical use case for routes: ommiting a part of the URL when requesting subpages. If our posts are children of the `notes` folder, we usually access these children via `https://yourdomain.com/notes/post-1`. If we want to remove the `notes` part and access them via `https://yourdomain.com/post-1`, we can use routes.
+
+
+In a standard installation without languages enabled, these two routes do the job:
+
+```php "/site/config/config.php"
+<?php
+return [
+    'routes' => [
+        [
+            'pattern' => '(:any)',
+            'action'  => function($uid) {
+                $page = page($uid);
+                if (!$page) $page = page('notes/' . $uid);
+                if (!$page) $page = site()->errorPage();
+                return $page;
+            }
+        ],
+        [
+            'pattern' => 'notes/(:any)',
+            'action'  => function($uid) {
+                go($uid);
+            }
+        ]
+    ]
+
+];
+```
+
+The first pattern with the `(:any)` placeholder matches any character until the next slash, so it will react to URLs like `https://yourdomain.com/notes` or `https://yourdomain.com/across-the-ocean` etc. 
+
+Within the action, we check if a page with the given UID exists, if not, we look in the `notes` folder, and if there is no matching page in there, we return the `error` page.
+
+The second route, in turn, redirects all requests for the `notes` folder to our desired URL without the `notes` part.
+
+How can we adapt the above code for a multi-language installation?
+
+## Basic multi-language setup
+
+Let's first look at a language setup with language codes in the URL. English is our default language, German our secondary language.
+
+(columns…)
+
+```php "/site/languages/en.php"
+<?php
+
+return [
+    'code' => 'en',
+    'default' => true,
+    'direction' => 'ltr',
+    'locale' => [
+        'en' => 'en_US'
+    ],
+    'name' => 'English',
+    'translations' => [
+
+    ],
+    'url' => NULL
+];
+```
+
+++++
+
+```php "/site/languages/de.php"
+<?php
+
+return [
+    'code' => 'de',
+    'default' => false,
+    'direction' => 'ltr',
+    'locale' => [
+        'de_DE'
+    ],
+    'name' => 'Deutsch',
+    'translations' => [
+
+    ],
+    'url' => NULL
+];
+```
+(…columns)
+
+As long as we use the language code in the URL for all languages, our routes can still be pretty straightforward:
+
+```php "/site/config/config.php"
+<?php
+return [
+    'languages' => true,
+    'routes' => [
+        [
+            'pattern' => ['(en)/(:any)', '(de)/(:any)'],
+            'action'  => function($lang, $uid) {
+                site()->visit(page(), $lang);
+                $page = page($uid);
+                if (!$page) $page = page('notes/' . $uid);
+                if (!$page) $page = site()->errorPage();
+                return $page;
+            }
+        ],
+        [
+            'pattern' => ['(en)/notes/(:any)', '(de)/notizen/(:any)' ],
+            'action'  => function($lang, $uid) {
+                go($lang . '/' . $uid);
+            }
+        ]
+    ]
+
+];
+```
+
+We add an array of patterns with a pattern for each language code…
+
+```php
+['(en)/(:any)', '(de)/(:any)'],
+```
+
+… and pass the placeholder for the language code to the callback function:
+
+```php
+function($lang, $uid)
+```
+
+With…
+
+```php
+site()->visit(page(), $lang);
+```
+
+…we activate the requested language variant of the page, so that Kirby can find the requested page, even if we use custom language slugs.
+
+Finally, we return the page 
+
+```php
+return $page;
+```
+
+While this setup will work fine, our code will stop working once we add additional languages.
+
+
+## Multi-language setup, refined
+
+
+Let's try and refine the above example using a placeholder for all language codes.
+
+
+```php "/site/config/config.php"
+<?php
+return [
+    'languages' => true
+    'routes'    => [
+        [
+            'pattern' => '(:any)/(:any)',
+            'action'  => function($lang, $uid) {
+                $langCodes = a::pluck(kirby()->languages()->toArray(), 'code');              
+                
+                if (!in_array($lang, $langCodes)) {
+                    $this->next();
+                }
+
+                site()->visit(page(), $lang);
+
+                $page = page($uid);
+                if (!$page) $page = page('notes/' . $uid);
+                if (!$page) $page = site()->errorPage();
+                
+                return $page;
+            }
+        ],
+        [
+            'pattern' => '(:any)/(:any)/(:any)',
+            'action'  => function($lang, $parent, $uid) {
+
+                $slugs   = array_filter(page('notes')->translations()->pluck('slug'));
+                $slugs[] = 'notes';
+                
+                if (!in_array($parent, $slugs)) {
+                    $this->next(); 
+                } else {
+                    go($lang . '/' . $uid);
+                }  
+            }
+        ]
+    ]
+
+];
+```
+### Validating the language placeholder
+
+The keep it simple, we use the first `(:any)` placeholder to react to any possible language in both routes. This works, because we are still using the language code for every language.
+
+With this setup, our first route will now react to `https://yourdomain.com/en/a-page` or `https://yourdomain.com/de/a-page` and try to return a page if it finds it. Unfortunately, it would also try and return a page if a URL like  `https://yourdomain.com/fr/a-page` with a non-defined language code is used.
+
+To prevent that, we check if the passed language code is in the array of defined languages inside our `action` closure: 
+
+```php
+$langCodes = a::pluck(kirby()->languages()->toArray(), 'code');              
+
+if (!in_array($lang, $langCodes)) {
+    $this->next();
+}
+```
+
+If not, we use the `next()` method to jump to the next route, which in this case means that Kirby's standard routing kicks in and returns the error page for the non existing language code. The rest of the first route remains the same.
+
+
+### Validating the translation slug
+
+The route pattern of the second route is now very generic:
+
+```php
+'pattern' => '(:any)/(:any)/(:any)',
+```
+
+We can skip checking for a correct language code here, because the first route will take care of that. However, we need some logic for the second `(:any)` placeholder which we use here instead of enumerating all the possible translation slugs of the `notes` page.
+
+Inside the `action` closure, we fetch all translated slugs and add the `notes` slug for the default language to the array:
+
+```php
+$slugs   = array_filter(page('notes')->translations()->pluck('slug'));
+$slugs[] = 'notes';
+```
+
+We then check if the requested parent is in the `$slugs` array:
+
+```php
+if (!in_array($parent, $slugs)) {
+    $this->next(); 
+} else {
+    go($lang . '/' . $uid);
+} 
+```
+
+If not, we use `next()` again to pass the request to the next applicable route, otherwise we reroute the request.
+
+We now have a versatile route no matter how many languages users add to the Kirby installation.
+
+## Multi-language setup, advanced
+
+The example above has a downside, however: it only works when all languages use the language slug in their URL. Many users want to use the language code only for secondary languages and omit it for the default language:
+
+(columns…)
+
+```php "/site/languages/en.php"
+<?php
+
+return [
+    'code' => 'en',
+    'default' => true,
+     // … rest of configuration
+    'url' => '/'
+];
+```
+
+++++
+
+```php "/site/languages/de.php"
+<?php
+
+return [
+    'code' => 'de',
+    'default' => false,
+    // … rest of configuration as above
+    'url' => NULL
+];
+```
+(…columns)
+
+
+This is were things get slightly more complicated, but here are our final routes:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'languages' => true,
+    'routes' => [
+        
+        [
+            'pattern' => '(?:(:any)//?)?(:any)',
+            'action'  => function($lang, $uid) {
+
+                $langCodes = a::pluck(kirby()->languages()->toArray(), 'code');
+                
+                // if the language code is not empty and not in the array of languages
+                // jump to the next route that applies
+                if ($lang !== '' && !in_array($lang, $langCodes)) {
+                    $this->next();
+                }
+
+                // make sure the second rule kicks in for the default language notes page
+                if ($lang === 'notes') {
+                    $this->next();
+                }
+
+                // redirect to the homepage of a non-defalut language if no language code set
+                // and $uid in the language array
+                if (in_array($uid, $langCodes)) {
+                    return site()->visit(page('home'), $uid);
+                }
+
+                // if the $lang string is not a language code
+                // check if it is a page and if so, jump to the next route that applies
+                if (!in_array($lang, $langCodes)) {
+                    if ($page = page($lang . '/' . $uid)) {
+                        $this->next();
+                    }
+                }
+
+                site()->visit(page(), $lang);
+                $page = page($uid);
+                if (!$page) $page = page('notes/' . $uid);
+                if (!$page) $page = site()->errorPage();
+                
+                return $page;
+ 
+            }
+        ],    
+        [
+            'pattern' => '(?:(:any)//?)?(:any)/(:any)',
+            'action'  => function($lang, $parent, $uid) {
+                $slugs   = array_filter(page('notes')->translations()->pluck('slug'));
+                $slugs[] = 'notes';
+                
+                if (!in_array($parent, $slugs)) {
+                    $this->next(); 
+                } else {
+                    go($lang . '/' . $uid);
+                }  
+              
+            }
+        ]
+    ]
+];
+```
+
+In both routes, we make our language code placeholders optional with a bit of regex voodoo:
+
+```php
+// first route
+'pattern' => '(?:(:any)//?)?(:any)',
+
+ // second route
+'pattern' => '(?:(:any)//?)?(:any)/(:any)'
+```
+
+In the first route, we have quite a bit of logic, because the optional language pattern means that our pattern can apply to different requests. We therefore use multiple if statements to react to these scenarios. Since this recipe would get very long if we repeated all the code again, we have annotated the code instead.
+
+Apart from the optional placeholder, the code in the second route remains the same as in our last example.
+
+
+## Page models for the icing
+
+Our routes do not change the URLs of children of `notes` page. While the second route takes care of rerouting the URLs correctly, it would be nicer if the page URLs would reflect our routed URLs. We can achieve that with a (link: text: page model) for the `note` page. So let's create one with the following content:
+
+```php "/site/models/note.php"
+<?php
+class NotePage extends Page {
+
+    public function urlForLanguage($language = null, array $options = null): string
+    {
+        return $this->site()->urlForLanguage($language) . '/' . $this->slug($language);
+    }
+}
+```
+
+Inside our model, we override Kirby's `urlForLanguage()` method, so that it removes the parent UID.
+
+
+<warning>
+Note that the routes will collapse like a house of cards if a user changes the folder name of the `notes` folder. You should therefore prevent this happening with a (link: docs/reference/system/options/hooks text: `page.changeSlug:before` hook) that prohibits changing the slug for the default language only.
+</warning>
