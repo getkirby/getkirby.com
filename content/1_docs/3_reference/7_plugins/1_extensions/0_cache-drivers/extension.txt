@@ -1,0 +1,62 @@
+Title: Cache driver
+
+----
+
+Guide: caching
+
+----
+
+Text:
+
+You can create your own custom cache drivers by extending one of the existing drivers or the base `Cache` class.
+
+## Extending an existing cache driver
+
+To modify only parts of an existing driver like the `FileCache`, you can extend that class and selectively overwrite individual methods, e.g. the `flush()` method in this example:
+
+```php "/site/plugins/your-plugin/index.php"
+class CustomCache extends Kirby\Cache\FileCache
+{
+    public function flush(): bool
+    {
+        // your custom code
+        // ...
+
+        return parent::flush();
+    }
+}
+```
+
+You then have to register the new cache type with Kirby's plugin wrapper:
+
+```php
+
+Kirby::plugin('yourname/custom-cache', [
+    'cacheTypes' => [
+        'custom' => CustomCache::class
+    ]
+]);
+```
+
+## Extending the `Cache` class
+
+Alternatively, you can extend the `Cache` class to implement a new cache driver.
+
+```php "/site/plugins/your-plugin/index.php"
+class SuperCache extends Kirby\Cache\Cache
+{
+    //implement methods here
+}
+```
+
+As before, you have to register the new cache driver:
+
+```php
+
+Kirby::plugin('yourname/super-cache', [
+    'cacheTypes' => [
+        'super' => SuperCache::class
+    ]
+]);
+```
+
