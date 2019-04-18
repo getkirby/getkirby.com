@@ -220,3 +220,25 @@ If you use field names in your text file, which are also used by native Kirby me
 | `Image:`        | `$page->content()->image()`  |
 | `Videos:`       | `$page->content()->videos()` |
 | `Audio:`        | `$page->content()->audio()`  |
+
+## Setting response types
+
+In your templates, you can set different response types depending on content.
+
+For example, to send an `application/json` response:
+
+```php
+<?php
+
+$kirby->response()->json();
+echo json_encode(['your' => 'data']);
+```
+
+You can also send other response types by extension or MIME type:
+
+```php
+<?php
+
+$kirby->response()->type('txt');
+$kirby->response()->type('text/plain');
+```
