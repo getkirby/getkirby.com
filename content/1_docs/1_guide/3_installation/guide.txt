@@ -101,6 +101,10 @@ There are alternative installation methods for advanced users who prefer to inst
 
 Check them out and use whichever method you prefer.
 
+<info>
+If you don't have a local development environment yet and don't know where to start or what tools to install, check out our (link: docs/cookbook/setup/development-environment text: Local development environment) recipe.
+</info>
+
 ## Create your first account
 
 Kirby's control panel (aka. the Panel) comes without any pre-installed accounts. Open `http://yourdomain.com/panel` in the browser to start the installer and create the first account.
