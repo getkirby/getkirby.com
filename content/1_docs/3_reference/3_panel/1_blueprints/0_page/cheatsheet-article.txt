@@ -86,6 +86,9 @@ num: '{{ page.created.toDate("Ymd") }}'
 num: '{{ page.created.toDate("YmdHi") }}'
 ```
 
+<info>
+If you use a sorting scheme other than default sorting by number, i.e. automatic sorting, manual sorting in the Panel will be disabled.
+</info>
 ## Statuses
 
 With the `status` option, you define the page status you want to allow for the page. You can also change their label and description. This option gives you a lot of flexibility how you want to use page status in your website.
