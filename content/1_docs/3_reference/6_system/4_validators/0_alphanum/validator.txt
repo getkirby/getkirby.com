@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(v::alphanum($input)) {
+if(V::alphanum($input)) {
   echo 'Yay, valid!';
 }
 
