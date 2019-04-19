@@ -285,9 +285,9 @@ tabs:
 
 <since v="3.2.0">
 
-When applying the extension and reuse techniques described in the previous sections, it may also be necessary to disable individual fields, sections or tabs.
+When applying the extension and reuse techniques described in the previous sections, it may also be necessary to unset individual fields, sections or tabs.
 
-That's as simply as setting the desired field, section or tab to `false`.
+To do so, set the desired field, section or tab to `false`.
 
 ```yaml "/blueprints/tabs/base.yml"
 title: base
@@ -308,9 +308,9 @@ tabs:
         type: text
 ```
 
-**Removing Tabs**
+**Unset Tabs**
 
-Extent `tabs/base` and remove tab `SEO`
+Extent `tabs/base` and unsett tab `SEO`
 ```yaml
 title: extended
 extends: tabs/base
@@ -318,9 +318,9 @@ tabs:
   seo: false
 ```
 
-**Removing Sections**
+**Unset Sections**
 
-Extent `tabs/base` and remove section `files`
+Extent `tabs/base` and unset section `files`
 ```yaml
 title: extended
 extends: tabs/base
@@ -330,9 +330,9 @@ tabs:
       files: false
 ```
 
-**Removing Fields**
+**Unset Fields**
 
-Extent `tabs/base` and remove field `seoDescription`
+Extent `tabs/base` and unset field `seoDescription`
 ```yaml
 title: extended
 extends: tabs/base
