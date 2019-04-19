@@ -4,7 +4,7 @@ Text:
 ## In your code
 
 ```php
-if(v::alpha($input)) {
+if(V::alpha($input)) {
   echo 'Yay, valid!';
 }
 
