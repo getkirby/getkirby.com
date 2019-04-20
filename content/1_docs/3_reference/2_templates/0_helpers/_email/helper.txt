@@ -45,10 +45,10 @@ if($email->send()) {
 You can set default email options in your config.php
 
 ```
-c::set('email.service', 'mail');
-c::set('email.from', 'Bastian Allgeier <bastian@getkirby.com>');
-c::set('email.replyTo', 'Bastian Allgeier <bastian@getkirby.com>');
-c::set('email.subject', 'Kirby Support');
+Config::set('email.service', 'mail');
+Config::set('email.from', 'Bastian Allgeier <bastian@getkirby.com>');
+Config::set('email.replyTo', 'Bastian Allgeier <bastian@getkirby.com>');
+Config::set('email.subject', 'Kirby Support');
 ```
 
 You can then send emails in your templates, controllers, snippets etc. with those default settings:

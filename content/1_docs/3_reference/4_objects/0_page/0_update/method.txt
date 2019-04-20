@@ -30,7 +30,7 @@ try {
 ```php
 $page->update([
   'title' => function($title) {
-    return str::lower($title);
+    return Str::lower($title);
   }
 ]);
 ```

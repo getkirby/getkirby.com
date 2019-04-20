@@ -58,7 +58,7 @@ Assuming your database contains a table called `users`, you can now start queryi
 ### Example
 
 ```php
-$users = db::select('users');
+$users = Db::select('users');
 
 foreach ($users as $user) {
   echo $user->username();
@@ -68,7 +68,7 @@ foreach ($users as $user) {
 ## Select columns
 
 ```php
-$users = db::select('users', ['id', 'username']);
+$users = Db::select('users', ['id', 'username']);
 
 foreach ($users as $user) {
   echo $user->id() . ': ' . $user->username();
@@ -78,7 +78,7 @@ foreach ($users as $user) {
 ### Order rows
 
 ```php
-$users = db::select('users', '*', null, 'username DESC' );
+$users = Db::select('users', '*', null, 'username DESC' );
 
 foreach ($users as $user) {
   echo $user->id() . ': ' . $user->username();
@@ -89,7 +89,7 @@ foreach ($users as $user) {
 ### Offsets and limits
 
 ```php
-$users = db::select('users', '*', null, 'username DESC', 2, 2 );
+$users = Db::select('users', '*', null, 'username DESC', 2, 2 );
 
 foreach ($users as $user) {
   echo $user->username();
@@ -100,7 +100,7 @@ foreach ($users as $user) {
 
 
 ```php
-$users = db::select('users', '*', 'username like "%m%"');
+$users = Db::select('users', '*', 'username like "%m%"');
 
 foreach ($users as $user) {
   echo $user->username();
@@ -125,7 +125,7 @@ The `first` shortcut works similar to the `select` method above, but only select
 ### Example
 
 ```php
-$user = db::first('users');
+$user = Db::first('users');
 
 echo $user->username();
 ```
@@ -148,7 +148,7 @@ The `column` shortcut returns values from a single column.
 ### Example
 
 ```php
-$ids = db::column('users', 'id');
+$ids = Db::column('users', 'id');
 var_dump($users);
 foreach ($ids as $id) {
   echo $id;
@@ -167,7 +167,7 @@ foreach ($ids as $id) {
 ### Example
 
 ```php
-$id = db::insert('users', [
+$id = Db::insert('users', [
   'username' => 'moe',
   'email'    => 'moe@szyslak.com'
 ]);
@@ -190,7 +190,7 @@ If successful, the method returns the last `id`, otherwise `false`.
 ### Example
 
 ```php
-$bool = db::update('users', ['username' => 'zoe'], ['username' => 'moe']);
+$bool = Db::update('users', ['username' => 'zoe'], ['username' => 'moe']);
 dump($bool);
 ```
 
@@ -206,7 +206,7 @@ dump($bool);
 ### Example
 
 ```php
-$bool = db::delete('users', ['username' => 'zoe']);
+$bool = Db::delete('users', ['username' => 'zoe']);
 dump($bool);
 ```
 
@@ -222,10 +222,10 @@ dump($bool);
 ### Example
 
 ```php
-$count = db::count('users', 'id > 3');
+$count = Db::count('users', 'id > 3');
 dump($count);
 
-$count = db::count('users', 'username LIKE "%m%"');
+$count = Db::count('users', 'username LIKE "%m%"');
 dump($count);
 ```
 
@@ -243,7 +243,7 @@ dump($count);
 ### Example
 
 ```php
-$min = db::min('users', 'id');
+$min = Db::min('users', 'id');
 dump($min);
 
 ```
@@ -261,7 +261,7 @@ dump($min);
 ### Example
 
 ```php
-$max = db::max('users', 'id');
+$max = Db::max('users', 'id');
 dump($max);
 ```
 
@@ -280,7 +280,7 @@ dump($max);
 ### Example
 
 ```php
-$avg = db::avg('users', 'id');
+$avg = Db::avg('users', 'id');
 dump($avg);
 ```
 

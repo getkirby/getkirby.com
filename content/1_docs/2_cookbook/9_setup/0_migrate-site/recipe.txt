@@ -137,7 +137,7 @@ In your `config.php`:
     if(!empty($builder)) {
 
       foreach($builder as $build) {
-        $missing = a::missing($build, array('title', 'template', 'uid'));
+        $missing = A::missing($build, array('title', 'template', 'uid'));
         if(!empty($missing)) continue;
           try {
             $subPage = $page->createChild([
@@ -186,7 +186,7 @@ The Kirby 2 Dashboards no longer exists in Kirby 3. With the Dashboard, Panel wi
 
 ### Syntax changes
 
-In addition to the `c::set()` settings, the standard way of adding options is now to use a `return` statement that returns an array of options:
+In addition to `Config::set()`, the standard way of adding options is now to use a `return` statement that returns an array of options:
 
 ```php "/site/config/config.php"
 <?php
@@ -315,7 +315,7 @@ $kirby->page('some/page')->delete();
 ### Various method changes
 
 - `$pagination->items()` was removed, use `$pagination->total()` or `$pagination->pages()`
-- `tpl::load()` doesn't accept a third argument anymore
+- `Tpl::load()` doesn't accept a third argument anymore
 - the `excerpt()` helper method has been removed and the parameters for the `$field->excerpt()` method have changed
 - `$page->tinyurl()` was removed
 

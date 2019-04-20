@@ -48,7 +48,7 @@ Here we connect to a local database, your real database should - of course - use
 Assuming that your database contains a table called comments, you can now query the database table in your templates like this:
 
 ```php "/site/templates/comments.php"
-$comments = db::select('comments');
+$comments = Db::select('comments');
 ```
 
 ## Convert to child pages
@@ -64,7 +64,7 @@ class CommentsPage extends Kirby\Cms\Page
     {
         $comments = [];
 
-        foreach (db::select('comments') as $comment) {
+        foreach (Db::select('comments') as $comment) {
             $comments[] = [
                 'slug'     => $comment->slug(),
                 'num'      => 0,
@@ -154,18 +154,18 @@ class CommentPage extends Kirby\Cms\Page
     {
         unset($data['title']);
 
-        if ($comment = db::first('comments', '*', ['slug' => $this->slug()])) {
-            return db::update('comments', $data, ['slug' => $this->slug()]);
+        if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
+            return Db::update('comments', $data, ['slug' => $this->slug()]);
         } else {
             $data['slug'] = $this->slug();
-            return db::insert('comments', $data);
+            return Db::insert('comments', $data);
         }
 
     }
 
     public function delete(bool $force = false): bool
     {
-        return db::delete('comments', ['slug' => $this->slug()]);
+        return Db::delete('comments', ['slug' => $this->slug()]);
     }
 
     public function title(): Kirby\Cms\Field
