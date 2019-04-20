@@ -163,7 +163,7 @@ return function($page) {
   }
 
   // fetch all tags
-  $tags = $articles->pluck('tags', ',', false);
+  $tags = $articles->pluck('tags', ',', true);
 
   // apply pagination
   $articles   = $articles->paginate(10);
