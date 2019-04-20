@@ -6,6 +6,6 @@ The inventory array contains a list of all inventory items of the page, like the
 
 ```php
 <?php
-a::show($page->inventory());
+print_r($page->inventory());
 ?>
 ```
