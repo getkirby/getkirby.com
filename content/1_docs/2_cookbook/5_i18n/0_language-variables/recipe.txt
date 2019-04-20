@@ -42,7 +42,7 @@ return [
   'direction' => 'ltr',
   'locale' => 'de_DE',
   'name' => 'Deutsch',
-  'translations' => yaml::decode(F::read(kirby()->root('languages').'/vars/de.yml'))
+  'translations' => Yaml::decode(F::read(kirby()->root('languages').'/vars/de.yml'))
 ];
 ```
 
