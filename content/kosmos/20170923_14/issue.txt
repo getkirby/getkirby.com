@@ -23,7 +23,7 @@ Text:
 
 [Kirby Next](https://getkirby.com/next) now has over 120 supporters. During the first 4 weeks of our experiment, we had 5 live sessions with Bastian, interesting insights and lively discussions on Slack. The first working Kirby 3 website to play around with is also available now. Curious? You can still become a supporter by buying a fellowship package, a Kirby 3 Pro license or a Kirby 3 Pro upgrade.
 
-We will be running our first ever [Kirby Workshop](https://beyondtellerrand.com/events/berlin-2017/workshops/kirby) on November 6, 2017 in Berlin. There are still a few seats left, so if you want to learn how to build great websites with Kirby, r[eserve your seat](https://ti.to/beyondtellerrand/berlin-2017/with/uicmkkwners) now.
+We will be running our first ever [Kirby Workshop](https://beyondtellerrand.com/events/berlin-2017/workshops/kirby) on November 6, 2017 in Berlin. There are still a few seats left, so if you want to learn how to build great websites with Kirby, [reserve your seat](https://ti.to/beyondtellerrand/berlin-2017/with/uicmkkwners) now.
 
 [Kirby 2.5.3](https://getkirby.com/changelog/kirby-2-5-3) and [2.5.4](https://getkirby.com/changelog/kirby-2-5-4) were released this week and come with some nice little feature additions and bug fixes.
 
@@ -104,7 +104,7 @@ Use the [Contrast Ratio online tool](http://leaverou.github.io/contrast-ratio/) 
 (…columns)
 
 ## Accessibility 2
-On I[nclusive Components](https://inclusive-components.design), Heydon Pickering published a new tutorial on creating [inclusive tooltips](https://inclusive-components.design/tooltips-toggletips/).
+On [Inclusive Components](https://inclusive-components.design), Heydon Pickering published a new tutorial on creating [inclusive tooltips](https://inclusive-components.design/tooltips-toggletips/).
 
 ## CSS
 
@@ -124,6 +124,6 @@ On I[nclusive Components](https://inclusive-components.design), Heydon Pickering
 
 ## Developer Tools
 
-- Get alerted to JavaScript errors without having to open dev tools with J[avaScript Errors Notifier](https://chrome.google.com/webstore/detail/javascript-errors-notifie/jafmfknfnkoekkdocjiaipcnmkklaajd) Chrome extension (via Jens Törnell).
+- Get alerted to JavaScript errors without having to open dev tools with [JavaScript Errors Notifier](https://chrome.google.com/webstore/detail/javascript-errors-notifie/jafmfknfnkoekkdocjiaipcnmkklaajd) Chrome extension (via Jens Törnell).
 
 - Let me finish off with a second Chrome extension that [makes minified CSS, JavaScript etc. easily readable](https://chrome.google.com/webstore/detail/javascript-and-css-code-b/iiglodndmmefofehaibmaignglbpdald) (via Jens Törnell).
