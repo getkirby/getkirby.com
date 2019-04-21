@@ -5,5 +5,5 @@ Text:
 The following create a link (a-tag) with the title as link text and the page url as url.
 
 ```php
-<?= $page->title()->link() ?>
+<?= $page->title()->toLink() ?>
 ```
