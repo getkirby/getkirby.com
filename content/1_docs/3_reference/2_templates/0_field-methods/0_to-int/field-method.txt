@@ -3,5 +3,5 @@ Text:
 ## Example
 
 ```php
-<?= $page->mynumber()->int() ?>
+<?= $page->mynumber()->toInt() ?>
 ```
