@@ -55,7 +55,7 @@ Our developers have been busy and created shiny new plugins for the upcoming Kir
 - [Kirby Annotator](https://github.com/sylvainjule/kirby-annotator)
 - And there's also a new one by the same developer: [Kirby Locator](https://github.com/sylvainjule/kirby-locator)
 
-Many more are already available. Check them out in the Kirby plugins repo(https://github.com/texnixe/kirby-plugins/issues) and filter by Kirby 3.
+Many more are already available. Check them out in the [Kirby plugins repo](https://github.com/texnixe/kirby-plugins/issues) and filter by Kirby 3.
 
 <small>Always test third party plugins thoroughly before using them in production.</small>
 
@@ -72,7 +72,7 @@ Many more are already available. Check them out in the Kirby plugins repo(https:
 - Svetlin Nakov is writing a book about practical [cryptography for developers](https://cryptobook.nakov.com). Not quite finished yet, but online and free.
 
 ## Security
-- Uncritically including third party scripts in your projects can be dangerous, as the Event Stream incident recently showed again. [Details about the incident](https://blog.npmjs.org/post/180565383195/details-about-the-event-stream-incident)were posted on the npm blog last week. In his article ["Exploiting Developer Infrastructure Is Ridiculously Easy"](https://medium.com/s/story/exploiting-developer-infrastructure-is-insanely-easy-9849937e81d4), Jarrod Overson sees big problems in an Open Source system where people build software for free and are expected to continue to do so forever.
+- Uncritically including third party scripts in your projects can be dangerous, as the Event Stream incident recently showed again. [Details about the incident](https://blog.npmjs.org/post/180565383195/details-about-the-event-stream-incident) were posted on the npm blog last week. In his article ["Exploiting Developer Infrastructure Is Ridiculously Easy"](https://medium.com/s/story/exploiting-developer-infrastructure-is-insanely-easy-9849937e81d4), Jarrod Overson sees big problems in an Open Source system where people build software for free and are expected to continue to do so forever.
 
 - While there are strong reasons to make websites secure, this also has its downsides by making them less accessible or even inaccessible in regions with limited internet access, as [Eric A. Meyer explores in this article](https://meyerweb.com/eric/thoughts/2018/08/07/securing-sites-made-them-less-accessible/).
 
@@ -84,7 +84,7 @@ Many more are already available. Check them out in the Kirby plugins repo(https:
 
 - With all the talk about new CSS features like CSS Grid, we sometimes forget that there are things like absolute positioning that might be the ideal solution to a specific problem, provided we understand how to use them. [This article](https://medium.freecodecamp.org/how-to-understand-css-position-absolute-once-and-for-all-b71ca10cd3fd) has you covered.
 
-- Heydon Pickering's latest video (definitely worth watching!), is [a guide to making and wrapping shapes in CSS],(https://www.youtube.com/watch?v=eCHt8zsbCT4) using things like border-radius, clip-path, the CSS Shapes spec, and paint worklets.
+- Heydon Pickering's latest video (definitely worth watching!), is [a guide to making and wrapping shapes in CSS](https://www.youtube.com/watch?v=eCHt8zsbCT4) using things like border-radius, clip-path, the CSS Shapes spec, and paint worklets.
 
 ## Images
 
