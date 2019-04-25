@@ -19,29 +19,17 @@
             </p>
           </div>
           <figure>
-            <span class="intrinsic" style="padding-bottom: 96.82%">
-              <img
-                srcset="
-                  <?= $chameleon->resize(450)->url() ?>,
-                  <?= $chameleon->resize(800)->url() ?> 2x
-                "
-                src="<?= $chameleon->resize(450)->url() ?>"
-                alt="A cute chameleon on a branch"
-              >
-            </span>
+            <?php snippet('lazy-image', [
+              'image'  => $chameleon,
+              'srcset' => [450, 800],
+            ]) ?>
           </figure>
         </div>
         <figure class="home-hero-screenshot">
-          <span class="intrinsic" style="padding-bottom: 45.39%">
-            <img
-              srcset="
-                <?= $hero->resize(1024)->url() ?>,
-                <?= $hero->resize(1600)->url() ?> 2x
-              "
-              src="<?= $hero->resize(1024)->url() ?>"
-              alt="Screenshot of Kirby’s control panel"
-            >
-          </span>
+          <?php snippet('lazy-image', [
+            'image'  => $hero,
+            'srcset' => [640, 800, 1024, 1600, 1824],
+          ]) ?>
         </figure>
       </div>
     </header>
@@ -55,16 +43,10 @@
           and more into an amazing editing experience.
         </p>
         <figure>
-          <span class="intrinsic" style="padding-bottom: 59.12%">
-            <img
-              srcset="
-                <?= $components->resize(1200)->url() ?>,
-                <?= $components->resize(2000)->url() ?> 2x
-              "
-              src="<?= $components->resize(1200)->url() ?>"
-              alt="Interface elements for Kirby\'s control panel"
-            >
-          </span>
+          <?php snippet('lazy-image', [
+            'image'  => $components,
+            'srcset' => [1200, 2000],
+          ]) ?>
         </figure>
       </div>
     </section>
@@ -75,23 +57,24 @@
       <div class="wrap">
         <div class="home-panel-container">
           <div class="home-panel-gallery">
-            <?php if ($firstImage = $page->images()->filterBy('name', '*=', 'interface')->nth(2)): ?>
+            <?php if ($firstImage = $panel->nth(2)): ?>
             <figure class="screenshot">
-              <span class="intrinsic" style="padding-bottom: 67%">
-                <img src="<?= $firstImage->resize(1440)->url() ?>" alt="<?= $firstImage->caption() ?>">
-              </span>
+              <?php snippet('lazy-image', [
+                'image' => $firstImage->resize(1440),
+              ]) ?>
             </figure>
             <?php endif ?>
           </div>
 
           <ul class="home-panel-gallery-links">
-            <?php $n = 0; foreach ($page->images()->filterBy('name', '*=', 'interface') as $image): $n++; ?>
+            <?php $n = 0; foreach ($panel as $image): $n++; ?>
+            <?php $thumb = $image->resize(1440); ?>
             <li>
-              <a href="<?= $imageUrl = $image->resize(1440)->url() ?>"<?php e($image->is($firstImage), ' aria-current="true"') ?>>
+              <a href="<?= $thumb->url() ?>"<?php e($image->is($firstImage), ' aria-current="true"') ?>>
                 <figure>
-                  <span class="intrinsic" style="padding-bottom: 67%">
-                    <img src="<?= $imageUrl ?>" alt="">
-                  </span>
+                  <?php snippet('lazy-image', [
+                    'image' => $thumb,
+                  ]) ?>
                   <figcaption>
                     <h3 class="h6 -color:white -mb:small"><?= $image->caption() ?></h3>
                     <p><?= $image->description() ?></p>
@@ -115,16 +98,11 @@
           <p class="description">…like this fantastic <a href="https://github.com/sylvainjule/kirby-matomo">Matomo plugin</a><br> by <a href="https://sylvain-jule.fr">Sylvain Julé</a> &rsaquo;</p>
         </header>
         <figure>
-          <a href="https://github.com/sylvainjule/kirby-matomo" class="intrinsic" style="padding-bottom: 126.89%">
-            <img
-              srcset="
-                <?= $matomo->resize(600)->url() ?>,
-                <?= $matomo->resize(1200)->url() ?> 2x
-              "
-              src="<?= $matomo->resize(600)->url() ?>"
-              alt="Screenshot of the Matomo plugin by Sylvain Julé"
-            >
-          </a>
+          <?php snippet('lazy-image', [
+            'image'  => $matomo,
+            'link'   => 'https://github.com/sylvainjule/kirby-matomo',
+            'srcset' => [600, 1200],
+          ]) ?>
         </figure>
       </div>
     </section>
@@ -235,27 +213,5 @@
     </section>
 
 </main>
-
-<script>
-var $ = function(selector) {
-  return document.querySelector(selector);
-};
-
-var $$ = function(selector) {
-  return [].slice.call(document.querySelectorAll(selector));
-};
-
-var galleryImage = $(".home-panel-gallery img");
-var galleryLinks = $$('.home-panel-gallery-links a');
-
-galleryLinks.forEach(function (galleryLink) {
-  galleryLink.addEventListener("click", function (e) {
-    e.preventDefault();
-    $('.home-panel-gallery-links a[aria-current]').removeAttribute('aria-current');
-    galleryImage.src = this.href;
-    galleryLink.setAttribute("aria-current", true);
-  }, true);
-});
-</script>
 
 <?php snippet('footer', ['theme' => 'dark']) ?>

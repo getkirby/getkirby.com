@@ -19,6 +19,16 @@ svg:not(:root) {
   width: 100%;
 }
 
+.intrinsic img.lazyload,
+.intrinsic img.lazyloading {
+  opacity: 0;
+}
+
+.intrinsic img.lazyloaded {
+  opacity: 1;
+  transition: opacity .35s;
+}
+
 .img-responsive {
   height: auto;
   max-width: 100%;

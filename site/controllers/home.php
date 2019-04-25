@@ -7,6 +7,7 @@ return function ($kirby, $page) {
     'components' => $page->image('components.jpg'),
     'hero'       => $page->image('hero.jpg'),
     'matomo'     => $page->image('matomo.jpg'),
+    'panel'      => $page->images()->filterBy('name', '*=', 'interface'),
   ];
 
 };
