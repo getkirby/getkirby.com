@@ -1,8 +1,7 @@
-if ("kirbyConfig" in window && window.kirbyConfig.assetsPath) {
-  // Overrides the public path for lazy-loaded/dynamic imports,
-  // so they load from the correct CDN location.
-  __webpack_public_path__ = window.kirbyConfig.assetsPath; // eslint-disable-line
-}
+// Load config package first, to set CDN path. The
+// corresponding code has to be in its own package, otherwise
+// it would not execute before any other imports are resolved.
+import './components/config';
 
 /* -----  Polyfills  -------------------------------------------------------- */
 
@@ -18,6 +17,7 @@ import "./components/tooltip";
 
 
 /* ----- Code Highlighting -------------------------------------------------------- */
+
 import highlight from "./components/code";
 
 highlight();
