@@ -1,5 +1,7 @@
 <?php
 
+use Kirby\Cms\App;
+use Kirby\Cms\File;
 use Kirby\Cms\FileVersion;
 
 function cloudinary($url, $params = [])
@@ -43,22 +45,44 @@ function cloudinary($url, $params = [])
 
 Kirby::plugin('getkirby/cloudinary', [
     'components' => [
-        'file::version' => function ($kirby, $file, $options = []) {
-            $url = cloudinary($file->mediaUrl(), $options);
+        'file::version' => function (App $kirby, File $file, array $options = []) {
 
-            return new FileVersion([
-                'modifications' => $options,
-                'original'      => $file,
-                'root'          => $file->root(),
-                'url'           => $url,
-            ]);
+            static $originalComponent;
+
+            if (option('cloudinary', false) !== false) {
+                $url = cloudinary($file->mediaUrl(), $options);
+
+                return new FileVersion([
+                    'modifications' => $options,
+                    'original'      => $file,
+                    'root'          => $file->root(),
+                    'url'           => $url,
+                ]);
+            }
+
+            if ($originalComponent === null) {
+                $originalComponent = (require $kirby->root('kirby') . '/config/components.php')['file::version'];
+            }
+            
+            return $originalComponent($kirby, $file, $options);
         },
-        'file::url' => function ($kirby, $file) {
-            if ($file->type() === 'image') {
-                return cloudinary($file->mediaUrl());
-            } else {
+
+        'file::url' => function (App $kirby, File $file): string {
+
+            static $originalComponent;
+
+            if (option('cloudinary', false) !== false) {
+                if ($file->type() === 'image') {
+                    return cloudinary($file->mediaUrl());
+                }
                 return $file->mediaUrl();
             }
+
+            if ($originalComponent === null) {
+                $originalComponent = (require $kirby->root('kirby') . '/config/components.php')['file::url'];
+            }
+
+            return $originalComponent($kirby, $file);
         }
     ]
 ]);

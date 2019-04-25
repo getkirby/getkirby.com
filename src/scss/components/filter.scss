@@ -1,19 +1,23 @@
 .filter-hero {
-  display: flex;
   align-items: center;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
+/**
+ * 1. Resets the default border-radius in Mobile Safari.+
+ */
 .filter-search {
   background: #000;
   border: 0;
-  font: inherit;
-  padding: .25rem 1rem;
-  color: #fff;
+  border-radius: 0; /* 1 */
   box-shadow: $shadow;
-  margin-bottom: 1.5rem;
+  color: #fff;
   flex-basis: 100%;
+  font: inherit;
+  margin-bottom: 1.5rem;
+  padding: .25rem 1rem;
 
   @include mq(from m) {
     flex-basis: calc(66.66% - 1rem);
@@ -25,11 +29,11 @@
 }
 
 .filter-layout {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
-  margin-left: -3rem;
   margin-bottom: 6rem;
+  margin-left: -3rem;
+  position: relative;
 }
 
 .filter-layout > * {
@@ -40,59 +44,64 @@
 }
 
 .filter-sidebar {
-  order: 1;
   min-width: 0;
+  order: 1;
 }
 
 .filter-overview {
-  order: 2;
-  min-width: 0;
   margin-bottom: 6rem;
+  min-width: 0;
+  order: 2;
 }
 
 @include mq(from m) {
   .filter-sidebar {
     width: 33.33%;
   }
+
   .filter-overview {
-    width: 66.66%;
     margin-bottom: 0;
+    width: 66.66%;
   }
+
   .filter-filters {
-    position: sticky;
-    top: 1.5rem;
     left: 0;
+    position: sticky;
     right: 0;
+    top: 1.5rem;
   }
 }
 
 .filter-sidebar ul {
   margin-bottom: 3rem;
 }
+
 .filter-sidebar li {
-  margin-bottom: .25rem;
   display: block;
+  margin-bottom: .25rem;
 }
+
 .filter-sidebar a {
-  display: flex;
   align-items: center;
-  font-size: .75rem;
   color: $color-anthracite;
+  display: flex;
+  font-size: .75rem;
 }
+
 .filter-sidebar a img {
-  width: 1.875rem;
   height: 1.875rem;
   margin-right: .5rem;
+  width: 1.875rem;
 }
 
 .filter-category-icon {
+  align-items: center;
   background: #000;
+  display: flex;
+  height: 1.875rem;
+  justify-content: center;
   margin-right: .5rem;
   width: 1.875rem;
-  height: 1.875rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   svg * {
     fill: #fff;

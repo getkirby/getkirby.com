@@ -65,6 +65,12 @@
             </figure>
             <?php endif ?>
           </div>
+          
+          <span style="color: white;">
+            <?= $firstImage->resize(300)->url() ?><br>
+            <?= $firstImage->thumb(['width' => 300, 'blur' => true])->url() ?><br>
+            <?= $page->image()->greyscale()->url() ?>
+          </span>
 
           <ul class="home-panel-gallery-links">
             <?php $n = 0; foreach ($panel as $image): $n++; ?>
@@ -77,7 +83,7 @@
                   ]) ?>
                   <figcaption>
                     <h3 class="h6 -color:white -mb:small"><?= $image->caption() ?></h3>
-                    <p><?= $image->description() ?></p>
+                    <p><?= $thumb->description() ?></p>
                   </figcaption>
                 </figure>
               </a>

@@ -36,7 +36,11 @@
   height: 2rem;
 }
 
+/**
+ * 1. Resets the default border-radius in Mobile Safari.+
+ */
 .kosmos-field input {
+  border-radius: 0; /* 1 */
   color: #fff;
   font: inherit;
   line-height: 1.25rem;
