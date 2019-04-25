@@ -10,7 +10,7 @@ function getTippyOptions() {
     interactive: true,
     maxWidth: "25rem",
     theme: "kirby",
-    trigger: "click", // Useful for layout debugging, as the tooltip will not fade away if this is active.
+    // trigger: "click", // Useful for layout debugging, as the tooltip will not fade away if this is active.
   }
 }
 
