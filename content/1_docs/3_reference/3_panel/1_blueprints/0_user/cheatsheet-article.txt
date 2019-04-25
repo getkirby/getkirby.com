@@ -162,6 +162,7 @@ This option refers to each user with this role.
 | `changeLanguage` | `true`/`false` |
 | `changeName` | `true`/`false` |
 | `changePassword` | `true`/`false` |
+| `changeRole` | `true`/`false` |
 | `create` | `true`/`false` |
 | `delete` | `true`/`false` |
 | `update` | `true`/`false` |
