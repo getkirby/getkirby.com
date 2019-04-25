@@ -5,10 +5,14 @@
   position: relative;
 }
 
+/**
+ * 1. Resets the default border-radius in Mobile Safari.+
+ */
 .menu-search-input {
   appearance: none;
   background: transparent url("../images/icons/search.svg") no-repeat center right;
   border: 0;
+  border-radius: 0; /* 1 */
   color: $color-syntax-yellow;
   cursor: pointer;
   font: inherit;
