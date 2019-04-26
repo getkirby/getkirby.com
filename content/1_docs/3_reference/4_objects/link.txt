@@ -1,3 +1,3 @@
 Title: Objects
 ----
-Link: docs/reference/objects/file
+Link: docs/reference/objects/asset

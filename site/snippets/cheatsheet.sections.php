@@ -9,7 +9,7 @@
   <div class="cheatsheet-panel-scrollarea">
     <?php foreach ($kirby->collection('cheatsheet') as $group): ?>
     <section>
-      <h2><?= $group->title() ?></h2>
+      <h2><a href="<?= $group->url() ?>"><?= $group->title() ?></a></h2>
       <ul>
         <?php foreach ($group->children()->listed() as $section): ?>
         <li>
