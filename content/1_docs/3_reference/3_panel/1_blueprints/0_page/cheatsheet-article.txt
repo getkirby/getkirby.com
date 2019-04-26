@@ -66,7 +66,7 @@ Default sorting is numbering (1 to x) and doesn't need any setup.
 num: zero
 ```
 
-### Sorting by query result
+### Sorting by a custom sort number field
 
 ```yaml
 num: '{{ page.customSortNumberField }}'
