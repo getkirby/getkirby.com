@@ -1,4 +1,28 @@
-<?php 
+<?php snippet('cheatsheet.header') ?>
 
-dump($page->children()->find('toolkit')->children());
-?>
+<article class="cheatsheet-overview cheatsheet-main cheatsheet-panel">
+  <header class="cheatsheet-main-header cheatsheet-panel-header">
+    <?php snippet('cheatsheet.menu.button') ?>
+  </header>
+  <div class="cheatsheet-main-scrollarea cheatsheet-panel-scrollarea">
+
+    <?php foreach ($page->children() as $package): ?>
+      <h2 id="<?= $package->slug() ?>"><a href="#<?= $package->slug() ?>">Kirby\<?= $package->title() ?></a></h2>
+
+      <section class="-mb:large">
+      <ul class="cheatsheet-section-entries">
+        <?php foreach ($package->children()->filterBy('isTrait', false) as $class): ?>
+        <li>
+          <a href="<?= referenceLookup($class->class())->url() ?>">
+            <?= Str::after($class->class(), "Kirby\\" . $package->title() . "\\")  ?>
+          </a>
+        </li>
+        <?php endforeach ?>
+      </ul>
+      </section>
+    <?php endforeach ?>
+
+  </div>
+</article>
+
+<?php snippet('cheatsheet.footer') ?>
