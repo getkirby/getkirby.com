@@ -10,11 +10,11 @@ return [
         'eur' => 99,
         'usd' => 115
     ],
-    'sale' => [
-        'text' => 'Save €20 per license<br> with our Kirby 3 spring sale!<br><small class="description" style="font-size: .75rem; font-weight: 400">only until April 26th</small>',
-        'eur' => 79,
-        'usd' => 95
-    ],
+    // 'sale' => [
+    //     'text' => 'Save €20 per license<br> with our Kirby 3 spring sale!<br><small class="description" style="font-size: .75rem; font-weight: 400">only until April 26th</small>',
+    //     'eur' => 79,
+    //     'usd' => 95
+    // ],
 
     'api'     => false,
     'panel'   => false,
