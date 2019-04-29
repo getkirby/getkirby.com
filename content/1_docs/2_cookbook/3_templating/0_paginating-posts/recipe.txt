@@ -14,7 +14,7 @@ Text:
 
 In many online publications, long posts are split across multiple pages with pagination at the bottom. How can we achieve this in Kirby?
 
-In this example, we will insert manual page breaks where we want to split the post.
+In this example, we will insert manual page breaks where we want to split the post. We take the notes section from the (link: https://github.com/getkirby/starterkit text: starterkit) as our example setup.
 
 ## The page break
 
@@ -42,13 +42,15 @@ In a `note` post, add an HTML comment where you want to paginate:
 Add a new `note.php` controller in `/site/controllers/`
 
 ```php "/site/controllers/note.php"
-<?php 
+<?php
 
 return function ($page) {
 
-    $text   = $page->text()->kt();
+    // parse kirbytext/markdown first
+    $text = $page->text()->kt();
+
     // split the text into parts where we have inserted the pagebreak
-    $parts  = explode('<!--nextpage-->', $text);
+    $parts = explode('<!--nextpage-->', $text);
 
     // create a new collection from the parts and paginate
     $parts = (new Collection($parts))->paginate(1);
@@ -70,7 +72,7 @@ First, we loop through the parts we defined in the controller:
 
 ```php
 <?php foreach ($parts as $part): ?>
-<!-- rest of code -->   
+<!-- rest of code -->
 <?php endforeach ?>
 ```
 
