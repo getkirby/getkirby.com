@@ -56,7 +56,7 @@ Customizable page states give you maximum control over your workflow, from draft
 
 (screenshot: drafts.png)
 
-(link: docs/guide/content/pages text: Learn more…)
+(link: docs/guide/content/creating-pages text: Learn more…)
 
 ## A new plugin system
 
