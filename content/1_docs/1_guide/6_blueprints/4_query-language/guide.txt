@@ -27,6 +27,8 @@ $site->title()
 $page->title()->lower()
 $page->children()
 $page->children()->filterBy("featured", true)
+$site->find('notes')->children()->filterby('tags', 'ocean', ',')
+$page->images()->template('image')
 ```
 
 #### Query
@@ -36,9 +38,11 @@ site.title
 page.title.lower
 page.children
 page.children.filterBy("featured", true)
+site.find('notes').children.filterBy("tags", "ocean", ",")
+page.images.template('image')
 ```
 
-As you can see, it is very close to the PHP syntax. You don't need to relearn anything this way.
+These are just a few examples. As you can see, it is very close to the PHP syntax. You don't need to relearn anything this way.
 
 <info>
 The query language is not limited to built-in methods. You can also use (glossary: model text: page models) and custom methods within your queries.
@@ -75,6 +79,8 @@ published:
 
 ## Querying options in fields
 
+In various field types (tags, select, multiselect, checkboxes, radio, files, pages and related custom fields) you can use the `query` option to query possible options, for example:
+
 ```yaml
 tags:
     label: Tags
@@ -89,7 +95,7 @@ mySelect:
   label: My Select Box
   type: select
   options: query
-  query: site.children.listed
+  query: site.children.listed.template('note') # get all children with the note template
 
 ```
 
