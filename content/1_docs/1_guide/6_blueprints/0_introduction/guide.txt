@@ -2,7 +2,7 @@ Title: Introduction
 
 ----
 
-Intro: Blueprints are configuration files written in YAML that lets you customize the (glossary: Panel) to make it truly yours.
+Intro: Blueprints are configuration files written in YAML that let you customize the (glossary: Panel) to make it truly yours.
 
 ----
 
