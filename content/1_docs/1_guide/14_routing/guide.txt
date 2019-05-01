@@ -253,6 +253,30 @@ return [
 This is perfect for the example above when you want to intercept URLs like `https://yourdomain.com/photography-project-name` and create flat URLs. But at the same time you don’t want to break all the other pages. In this case you can search for the photography project in the route and if it doesn’t exist you can jump to the regular route for all the other pages with `$this->next()`.
 </since>
 
+
+## Pass data to controller
+
+You can send additional data to the controller using the `$page->render()` method:
+
+```php "/site/config/config.php"
+<?php
+return [
+    'routes' => [
+        [
+            'pattern' => 'blog/tag/(:any)',
+            'action' => function ($value) {
+                $data = [
+                  'tag' => $value,
+                ];
+                return page('blog')->render($data);
+            }
+        ]
+    ]
+];
+```
+
+You can then (link: docs/guide/templates/controllers#arguments-from-page-render-in-route text: fetch this data in the controller).
+
 ## Before and after hooks
 
 
