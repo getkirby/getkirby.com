@@ -3,5 +3,5 @@ Text:
 ## Example
 
 ```php
-<?= $site->language('en')->locale() ?>
+<?= $kirby->language('en')->locale(LC_ALL) ?>
 ```
