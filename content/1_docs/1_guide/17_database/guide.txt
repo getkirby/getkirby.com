@@ -20,7 +20,9 @@ This guide only describes the basics using the shortcuts of the `Db` class. If y
 
 You can set your database connection in your `config.php`.
 
-```php
+### MySQL
+
+```php "/site/config/config.php"
 <?php
 
 return [
@@ -36,6 +38,19 @@ return [
 <info>
 Here we connect to a local MySql database, your real database should use a proper database user and secure password.
 </info>
+
+### SQLite
+
+```php "/site/config/config.php"
+<?php
+
+return [
+  'db' => [
+    'type'     => 'sqlite',
+    'database' => '/var/data/mydb.sqlite' #full path to file
+  ]
+];
+```
 
 With these settings in place, you can now query the database via some useful shortcuts provided in the `Db` class.
 
