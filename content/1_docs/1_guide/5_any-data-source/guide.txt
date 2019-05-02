@@ -10,7 +10,7 @@ Text:
 
 Since Kirby is a flat-file CMS, pages that make up your website usually exist as files and folders in the filesystem. This has many advantages: your web project can be version controlled, you don't have to deal with a database, it's easy to make backups, you can manually edit your content if you want, and last not least, it's also very fast. At least up to a certain point where it doesn't scale too well any more.
 
-From the early days of Kirby, it was possible to include data from other sources into your Kirby-built website. But with our new architecture, you can really integrate content from any sources–from databases, from external APIs, or Excel sheets–you name them. 
+From the early days of Kirby, it was possible to include data from other sources into your Kirby-built website. But with our new architecture, you can really integrate content from any sources–from databases, from external APIs, or Excel sheets–you name them.
 
 You can swap out Kirby's storage mechanism on a per-model basis, just like you can replace almost any Kirby component, allowing you to flexibly combine all sorts of data sources.
 
@@ -34,9 +34,8 @@ return [
         [
           'pattern' => 'virtual',
           'action'  => function () {
-                $data = [
+                return Page::factory([
                     'slug' => 'virtual',
-                    'parent' => null,
                     'template' => 'virtual',
                     'model' => 'virtual',
                     'content' => [
@@ -44,8 +43,7 @@ return [
                         'date'  => '2019-05-01',
                         'text'  => 'The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.'
                     ]
-                ];
-                return Page::factory($data);
+                ]);
           }
         ]
     ]
@@ -106,13 +104,15 @@ return [
                                 'title' => 'Das ist keine Seite',
                                 'date'  => '2019-05-01',
                                 'text'  => 'Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans.'
+                            ]
                         ]
-                        ]
-                    ],               
+                    ],
                 ];
+
                 $page = Page::factory($data);
+
                 site()->visit($page, $lang);
-                
+
                 return $page;
           }
         ]
@@ -135,7 +135,7 @@ First, create a parent page, e.g. `reviews` in the `/content` folder and inside 
 
    ----
    Intro: This page lists all available movie reviews from the NYT movie review API.
-```   
+```
 This page will serve as the our model for child pages.
 
 ### The page model
@@ -145,37 +145,38 @@ In the `Reviews` page model, we redefine the `children()` method to get the subp
 ```php "/site/models/reviews.php"
 <?php
 
-class ReviewsPage extends Kirby\Cms\Page
+class ReviewsPage extends Page
 {
     public function children()
     {
         $results = [];
-        $request = Remote::request('https://api.nytimes.com/svc/movies/v2/reviews/picks.json?api-key=api-key');
+        $pages   = [];
+        $apiKey  = 'put-your-api-key-here';
+        $request = Remote::get('https://api.nytimes.com/svc/movies/v2/reviews/picks.json?api-key=' . $apiKey);
 
-        if ($request->info['http_code'] === 200) {
-        $content = json_decode($request->content());
-        $results = $content->results;
-        };
+        if ($request->code() === 200) {
+            $results = $request->json(false)->results;
+        }
 
-        $pages = [];
         foreach ($results as $key => $review) {
             $pages[] = [
-                'slug'     => str::slug($review->display_title),
+                'slug'     => Str::slug($review->display_title),
                 'num'      => $key+1,
                 'template' => 'review',
+                'model'    => 'review',
                 'content'  => [
-                    'title'            => $review->display_title,
-                    'headline'         => $review->headline,
-                    'byline'           => $review->byline,
-                    'summary_short'    => $review->summary_short,
-                    'publication_date' => $review->publication_date,
-                    'link_url'         => $review->link->url,
-                    'link_title'       => $review->link->suggested_link_text,
-                    'image_link'       => $review->multimedia->src
-
+                    'title'    => $review->display_title,
+                    'headline' => $review->headline,
+                    'byline'   => $review->byline,
+                    'summary'  => $review->summary_short,
+                    'date'     => $review->publication_date,
+                    'link'     => $review->link->url,
+                    'linkText' => $review->link->suggested_link_text,
+                    'cover'    => $review->multimedia->src
                 ]
             ];
         }
+
         return Pages::factory($pages, $this);
     }
 }
@@ -184,7 +185,7 @@ class ReviewsPage extends Kirby\Cms\Page
 Replace `api-key` with the API key you got for your app.
 </info>
 
-Using the `Remote::request()` method, you connect to the API and fetch the results. Within the foreach loop, you feed the results into the `$pages` array and finally pass it all to the `Pages::factory()` method.
+Using the `Remote::get()` method, you connect to the API and fetch the results. Within the foreach loop, you feed the results into the `$pages` array and finally pass it all to the `Pages::factory()` method.
 
 ### The overview template
 
@@ -198,8 +199,7 @@ The pages are now accessible in the template and you can loop through them like 
   <header class="intro">
     <h1><?= $page->title() ?></h1>
   </header>
-<?php dump($page->children()) ?>
-  <ul class="albums"<?= attr(['data-even' => $page->children()->listed()->isEven()], ' ') ?>>
+  <ul class="album">
     <?php foreach ($page->children() as $review): ?>
     <li>
       <h2><?= $review->title() ?></h2>
@@ -223,15 +223,16 @@ For the children themselves, you can create their own `review.php` template to a
   <article class="note">
     <header class="note-header intro">
       <h1><?= $page->title() ?></h1>
-      <time class="note-date"><?= $page->publication_date()->toDate('d F Y') ?></time>
+      <time class="note-date"><?= $page->date()->toDate('d F Y') ?></time>
     </header>
 
     <div class="note-text text">
-    <h2><?= $page->headline() ?></h2>
-    <p>by <?= $page->byline() ?></p>
-      <?= $page->summary_short() ?>
-      <?php if ($page->image_link()->isNotEmpty()) ?>
-      <img src="<?= $page->image_link() ?>" alt="">
+      <h2><?= $page->headline() ?></h2>
+      <p>by <?= $page->byline() ?></p>
+      <?= $page->summary() ?>
+      <?php if ($page->cover()->isNotEmpty()) ?>
+      <img src="<?= $page->cover() ?>" alt="">
+      <?php endif ?>
     </div>
   </article>
 </main>
@@ -286,7 +287,6 @@ The page model above uses a little `csv()` helper function to read from the file
 ```php "/site/plugins/helpers/index.php"
 function csv(string $file): array
 {
-
     $lines = file($file);
     $lines[0] = str_replace("\xEF\xBB\xBF", '', $lines[0]);
 
