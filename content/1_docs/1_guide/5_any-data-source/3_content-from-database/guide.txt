@@ -1,14 +1,18 @@
-Title: Creating pages from a database
+Title: Content from database
 
 ----
 
-Description: Edit database-based pages in the Panel and access them in templates.
+Intro: Create pages from a database and edit, add or delete entries fromm the Panel
 
 ----
 
 Text:
 
-This cookbook recipe is a short intro into how to create pages from entries in a database table. It is intended as an outline, not a final solution. With lots of entriesm it would also become necessary to work on a custom collection for the result set that would only fetch the rows it really needs, but this would be a lot more complex.
+
+Content can also come from a database. This is particularly useful if you already have a large set of data stored in a MySQL or other relational database, like a huge database of products or articles. In only a few steps you can transform data from those databases into Kirby pages that behave like any Kirby page in the frontend, i.e. you can use Kirby's API to access, filter or search content, and edit it in the Panel together with all your file based content.
+
+
+This guide is a short intro into how to create pages from entries in a database table. It is intended as an outline, not a final solution. With lots of entries it would also become necessary to work on a custom collection for the result set that would only fetch the rows it really needs, but this would be more complex.
 
 The example assumes a database table called comments with the following columns:
 

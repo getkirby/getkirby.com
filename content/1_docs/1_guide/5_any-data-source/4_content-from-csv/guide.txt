@@ -1,0 +1,61 @@
+Title: Content from CSV file
+
+----
+
+Intro: Lorem ipsum dolor set
+
+----
+
+Text:
+
+
+The hooks on the (link: docs/reference/system/options/hooks text: `hooks`) page are read from a `.csv` file using this page model:
+
+```php
+<?php
+
+class HooksPage extends Page
+{
+
+    public function children()
+    {
+        $children = array_map(function ($hook) {
+            return [
+                'slug'     => Str::slug($hook['Name']),
+                'template' => 'hook',
+                'model'    => 'hook',
+                'num'      => 0,
+                'content'  => [
+                    'title' => $hook['Name'],
+                    'arguments' => implode(', ', Str::split($hook['Arguments'])),
+                    'type' => $hook['Type']
+                ]
+            ];
+        }, csv($this->root() . '/hooks.csv'));
+
+        return Pages::factory($children, $this);
+    }
+
+}
+```
+The page model above uses a little `csv()` helper function to read from the file:
+
+```php "/site/plugins/helpers/index.php"
+function csv(string $file): array
+{
+    $lines = file($file);
+    $lines[0] = str_replace("\xEF\xBB\xBF", '', $lines[0]);
+
+    $csv = array_map('str_getcsv', $lines);
+
+    array_walk($csv, function(&$a) use ($csv) {
+        $a = array_combine($csv[0], $a);
+    });
+
+    array_shift($csv);
+
+    return $csv;
+}
+```
+
+You can now add a template for both the parent and the child pages and can render the data in the frontend as decribed in the previous sections.
