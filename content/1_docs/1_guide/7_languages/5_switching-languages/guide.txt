@@ -23,7 +23,7 @@ The first option is to redirect users to the home page when they select another 
   <ul>
     <?php foreach($kirby->languages() as $language): ?>
     <li<?php e($kirby->language() == $language, ' class="active"') ?>>
-      <a href="<?php echo $language->url() ?>">
+      <a href="<?php echo $language->url() ?>" hreflang="<?php echo $language->code() ?>">
         <?php echo html($language->name()) ?>
       </a>
     </li>
@@ -41,7 +41,7 @@ The second option is to redirect users to the same page in the selected language
   <ul>
     <?php foreach($kirby->languages() as $language): ?>
     <li<?php e($kirby->language() == $language, ' class="active"') ?>>
-      <a href="<?= $page->url($language->code()) ?>">
+      <a href="<?= $page->url($language->code()) ?>" hreflang="<?php echo $language->code() ?>">
         <?= html($language->name()) ?>
       </a>
     </li>
