@@ -17,7 +17,7 @@ preset: pages
 
 (screenshot: pages-empty.png)
 
-By default, this adds two sections of type `pages` to your form: A drafts section and a section of listed/published pages.
+By default, this adds two sections of type `pages` to your form: A drafts section (default headline "Drafts") and a section of listed pages (default headline "Published").
 
 (screenshot: pages-filled.png)
 
