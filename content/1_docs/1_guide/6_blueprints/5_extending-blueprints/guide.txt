@@ -310,7 +310,7 @@ tabs:
 
 **Unset Tabs**
 
-Extent `tabs/base` and unsett tab `SEO`
+Extent `tabs/base` and unset tab `SEO`
 ```yaml
 title: extended
 extends: tabs/base
