@@ -80,7 +80,7 @@ gallery:
   query: page.images
 ```
 
-You can use all file types available in Kirby here (i`mages`, `documents`, `video`, `audio` and `code`).
+You can use all file types available in Kirby here (`images`, `documents`, `video`, `audio` and `code`).
 
 #### Querying files from other pages
 
