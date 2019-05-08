@@ -20,6 +20,7 @@ Get productive:
     - languages
     - users
 Get advanced:
+    - virtual-pages
     - api
     - configuration
     - plugins

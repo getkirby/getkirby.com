@@ -32,6 +32,20 @@
             <?= $page->text()->kt()->anchorHeadlines() ?>
           </div>
 
+          <?php if ($page->subpages()->isTrue()): ?>
+          <ul class="docs-subpages cheatsheet-grid">
+            <?php foreach ($page->children()->listed() as $subpage): ?>
+            <li class="cheatsheet-grid-item">
+              <a href="<?= $subpage->url() ?>">
+                <h4><?= $subpage->title() ?></h4>
+                <p><?= $subpage->description() ?></p>
+              </a>
+            </li>
+            <?php endforeach ?>
+          </ul>
+          <?php endif ?>
+
+
           <?php snippet('github.edit') ?>
 
         </article>
