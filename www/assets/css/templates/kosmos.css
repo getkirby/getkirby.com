@@ -1,18 +1,2 @@
-/* stylelint-disable block-closing-brace-empty-line-before, at-rule-empty-line-before */
-
-/* stylelint-disable at-rule-empty-line-before */
-
-/* stylelint-disable at-rule-empty-line-before */
-
-html {
-  background: #000 url(/assets/images/galaxy.jpg?107062445f7385bb0b2be0010c499d96) top center/650px no-repeat;
-}
-
-.kosmos-form {
-  margin-bottom: 3rem;
-}
-
-.footer {
-  background: none !important;
-}
-
+html{background:#000 url(/assets/images/galaxy.jpg?107062445f7385bb0b2be0010c499d96) top/650px no-repeat}.kosmos-form{margin-bottom:3rem}.footer{background:none!important}
+/*# sourceMappingURL=kosmos.css.map*/

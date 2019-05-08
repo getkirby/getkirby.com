@@ -1,17 +1,2 @@
-/* stylelint-disable block-closing-brace-empty-line-before, at-rule-empty-line-before */
-
-/* stylelint-disable at-rule-empty-line-before */
-
-/* stylelint-disable at-rule-empty-line-before */
-
-/* -------------------------------------------------------------------------- */
-
-.default-page .hero {
-  margin: 0 auto;
-  max-width: 40rem;
-}
-
-.default-page .longform {
-  margin-bottom: 6rem;
-}
-
+.default-page .hero{margin:0 auto;max-width:40rem}.default-page .longform{margin-bottom:6rem}
+/*# sourceMappingURL=default.css.map*/
