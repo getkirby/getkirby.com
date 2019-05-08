@@ -1,2 +1,11 @@
-.v3-page .text{margin:0 auto;max-width:35rem}
-/*# sourceMappingURL=release.css.map*/
+/* stylelint-disable block-closing-brace-empty-line-before, at-rule-empty-line-before */
+
+/* stylelint-disable at-rule-empty-line-before */
+
+/* stylelint-disable at-rule-empty-line-before */
+
+.v3-page .text {
+  margin: 0 auto;
+  max-width: 35rem;
+}
+

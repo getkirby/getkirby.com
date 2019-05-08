@@ -1,16 +1,18 @@
-Title: Content from APIs
+Title: Content from an API
 
 ----
 
-Intro: Enrich your own content with content fetched from any open source or commercial API
+Description: Enrich your site with content fetched from any API
+
+----
+
+Intro: Enrich your site with content fetched from any API
 
 ----
 
 Text:
 
-For this example, we use a freely accessible API, in this case the (link: https://developer.nytimes.com/docs/movie-reviews-api/1/overview text: New York Times Movie Review API).
-
-To follow this example, create an account and an example app (link: https://developer.nytimes.com/get-started text: by following the instructions).
+For this example, we use a freely accessible API, in this case the (link: https://developer.nytimes.com/docs/movie-reviews-api/1/overview text: New York Times Movie Review API). To follow this example, create an account and an example app (link: https://developer.nytimes.com/get-started text: by following the instructions).
 
 First, create a parent page, e.g. `reviews` in the `/content` folder and inside it, a `reviews.txt` text file.
 
@@ -80,10 +82,10 @@ The pages are now accessible in the template and you can loop through them like 
 <?php snippet('header') ?>
 
 <main>
-  <header class="intro">
+  <header>
     <h1><?= $page->title() ?></h1>
   </header>
-  <ul class="album">
+  <ul>
     <?php foreach ($page->children() as $review): ?>
     <li>
       <h2><?= $review->title() ?></h2>
@@ -104,20 +106,19 @@ For the children themselves, you can create their own `review.php` template to a
 <?php snippet('header') ?>
 
 <main>
-  <article class="note">
-    <header class="note-header intro">
+  <article class="review">
+    <header>
       <h1><?= $page->title() ?></h1>
-      <time class="note-date"><?= $page->date()->toDate('d F Y') ?></time>
+      <time><?= $page->date()->toDate('d F Y') ?></time>
     </header>
 
-    <div class="note-text text">
-      <h2><?= $page->headline() ?></h2>
-      <p>by <?= $page->byline() ?></p>
-      <?= $page->summary() ?>
-      <?php if ($page->cover()->isNotEmpty()) ?>
-      <img src="<?= $page->cover() ?>" alt="">
-      <?php endif ?>
-    </div>
+    <h2><?= $page->headline() ?></h2>
+    <p>by <?= $page->byline() ?></p>
+    <?= $page->summary() ?>
+
+    <?php if ($page->cover()->isNotEmpty()): ?>
+    <img src="<?= $page->cover() ?>" alt="">
+    <?php endif ?>
   </article>
 </main>
 
@@ -126,6 +127,6 @@ For the children themselves, you can create their own `review.php` template to a
 
 ## The result
 
-The result should then look something like this:
+The result could then look something like this:
 
-(screenshot: review.png)
+(screenshot: review.jpg)

@@ -1,8 +1,12 @@
-Title: Content from database
+Title: Content from a database
 
 ----
 
-Intro: Create pages from a database and edit, add or delete entries fromm the Panel
+Description: Create pages from a database and edit, add or delete entries in the Panel
+
+----
+
+Intro: Create pages from a database and edit, add or delete entries in the Panel
 
 ----
 
@@ -25,6 +29,12 @@ The example assumes a database table called comments with the following columns:
 ## Create a new parent page
 
 Create a parent page called `comments` in the content folder.
+
+```filesystem
+content/
+    comments/
+        comments.txt
+```
 
 ## Connect to the database
 

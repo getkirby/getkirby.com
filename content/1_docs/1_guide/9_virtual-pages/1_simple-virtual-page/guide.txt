@@ -1,4 +1,8 @@
-Title: Most simple virtual page
+Title: Simple virtual page
+
+----
+
+Description: Add an ad-hoc virtual page quickly via a simple route
 
 ----
 

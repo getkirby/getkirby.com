@@ -1,2 +1,67 @@
-html{background:#000 url(/assets/images/galaxy.jpg?107062445f7385bb0b2be0010c499d96) top/650px no-repeat}.kosmos{background:none;color:#fff;padding-bottom:3rem}.kosmos-form{margin-bottom:3rem}.kosmos-issues-heading{align-items:baseline;display:flex;justify-content:space-between}.updates{color:#fff;display:flex;flex-wrap:wrap;margin-left:-3rem}.updates li{margin-bottom:3rem;padding-left:3rem;width:100%}@media (min-width:56em){.updates li{width:33.3333333333%}}.updates p{color:#c5c9c6;font-size:.875rem}.updates .icon{color:#fff;height:3rem;margin-bottom:1.5rem;width:3rem}.footer{background:none!important}
-/*# sourceMappingURL=news.css.map*/
+/* stylelint-disable block-closing-brace-empty-line-before, at-rule-empty-line-before */
+
+/* stylelint-disable at-rule-empty-line-before */
+
+/* stylelint-disable at-rule-empty-line-before */
+
+html {
+  background: #000 url(/assets/images/galaxy.jpg?107062445f7385bb0b2be0010c499d96) top center/650px no-repeat;
+}
+
+/* Kosmos */
+
+.kosmos {
+  background: none;
+  color: #fff;
+  padding-bottom: 3rem;
+}
+
+.kosmos-form {
+  margin-bottom: 3rem;
+}
+
+.kosmos-issues-heading {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Updates */
+
+.updates {
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -3rem;
+}
+
+.updates li {
+  margin-bottom: 3rem;
+  padding-left: 3rem;
+  width: 100%;
+}
+
+@media (min-width: 56em) {
+  .updates li {
+    width: 33.3333333333%;
+  }
+}
+
+.updates p {
+  color: #c5c9c6;
+  font-size: .875rem;
+}
+
+.updates .icon {
+  color: #fff;
+  height: 3rem;
+  margin-bottom: 1.5rem;
+  width: 3rem;
+}
+
+/* Black Footer */
+
+.footer {
+  background: none !important;
+}
+

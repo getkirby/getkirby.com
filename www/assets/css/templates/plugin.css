@@ -1,2 +1,48 @@
-.plugin-layout{display:flex;flex-wrap:wrap;margin-left:-3rem}.plugin-layout>*{flex-grow:1;flex-shrink:0;padding-left:3rem;width:100%}.plugin-sidebar{order:1;min-width:0}.plugin-content{order:2;min-width:0;margin-bottom:6rem}.plugin-content img{width:auto;max-width:100%}@media (min-width:56em){.plugin-sidebar{order:2;width:33.33%}.plugin-content{order:1;width:66.66%;margin-bottom:0}}
-/*# sourceMappingURL=plugin.css.map*/
+/* stylelint-disable block-closing-brace-empty-line-before, at-rule-empty-line-before */
+
+/* stylelint-disable at-rule-empty-line-before */
+
+/* stylelint-disable at-rule-empty-line-before */
+
+.plugin-layout {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -3rem;
+}
+
+.plugin-layout > * {
+  flex-grow: 1;
+  flex-shrink: 0;
+  padding-left: 3rem;
+  width: 100%;
+}
+
+.plugin-sidebar {
+  order: 1;
+  min-width: 0;
+}
+
+.plugin-content {
+  order: 2;
+  min-width: 0;
+  margin-bottom: 6rem;
+}
+
+.plugin-content img {
+  width: auto;
+  max-width: 100%;
+}
+
+@media (min-width: 56em) {
+  .plugin-sidebar {
+    order: 2;
+    width: 33.33%;
+  }
+
+  .plugin-content {
+    order: 1;
+    width: 66.66%;
+    margin-bottom: 0;
+  }
+}
+
