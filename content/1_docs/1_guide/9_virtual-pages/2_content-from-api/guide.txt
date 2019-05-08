@@ -22,7 +22,7 @@ First, create a parent page, e.g. `reviews` in the `/content` folder and inside 
    ----
    Intro: This page lists all available movie reviews from the NYT movie review API.
 ```
-This page will serve as the our model for child pages.
+This page will serve as our model for child pages.
 
 ## The page model
 
