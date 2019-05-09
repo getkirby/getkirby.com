@@ -1,0 +1,14 @@
+Title: Trevor
+
+----
+
+Repository: https://github.com/rasteiner/k3-trevor-view
+
+----
+
+Category: panel
+
+----
+
+Description: Edit your language translation variables from the Panel.
+

@@ -1,0 +1,15 @@
+Title: Variables field
+
+----
+
+Repository: https://github.com/OblikStudio/kirby-variables-field
+
+----
+
+Category: panel
+
+----
+
+Description: The variables field allows you to manage langauge variables via the panel
+
+
