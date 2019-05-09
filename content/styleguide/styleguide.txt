@@ -90,7 +90,7 @@ Code blocks are very useful for developers and other people who look at code or 
 ```
 
 ```javascript "JavaScript"
-const gallery = documnet.querySelector('.js-gallery');
+const gallery = document.querySelector('.js-gallery');
 ```
 
 ```php "PHP"
