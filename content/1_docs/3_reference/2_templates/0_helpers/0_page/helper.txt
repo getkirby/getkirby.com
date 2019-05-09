@@ -13,3 +13,6 @@ Text:
 ```php
 <?= page()->title() ?>
 ```
+<info>
+The `page()` helper fetches published pages only. To fetch a draft, you have to use `$kirby->page('somepage')`.
+</info>
