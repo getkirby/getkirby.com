@@ -1,0 +1,173 @@
+Title: Subpage builder
+
+----
+
+Published: 2019-05-11
+
+----
+
+Description: Auto-generate subpages when you create a new page in the Panel
+
+----
+
+Text:
+
+If you want to auto-create a given set of subpages every time you create a particular page, you can achieve that with a `page.create:after` hook. To make this more versatile, you can define a custom blueprint setting that leverages Kirby's new `$page->blueprint()` method.
+
+Let's say every time you create a new `note` page in the Panel, you want to create two subpages: gallery and info.
+
+Add the `subpage_builder` custom settings to the `note.php` blueprint in a Starterkit:
+
+
+```yaml "/site/blueprints/pages/note.yml"
+title: Note
+num: date
+icon: 📖
+
+
+subpage_builder:
+  - title: Gallery
+    uid: gallery
+    template: gallery
+    num: 1
+  - title: Info
+    uid: info
+    num: 2
+    template: info
+
+columns:
+  - width: 2/3
+    fields:
+      text:
+        type: textarea
+        size: large
+
+  - width: 1/3
+    sections:
+      subpages:
+        type: pages
+        templates:
+          - gallery
+          - info
+      meta:
+        type: fields
+        fields:
+          date:
+            type: date
+            time: true
+            default: now
+          author:
+            type: users
+          tags: true
+          gallery:
+            type: pages
+            query: site.find("photography").children
+            multiple: false
+            info: "{{ page.images.count }} image(s)"
+            empty: "No gallery selected"
+            image:
+              cover: true
+            help: Place the {{ gallery }} tag anywhere in your text to add the selected gallery
+
+```
+We also add a pages section for the subpages.
+
+Now we need a hook that reacts on page creation. We we define it within the `return` array of the `config.php`:
+
+```php "/site/config/config.php"
+    'hooks' => [
+        'page.create:aftter' => function ($page) {
+          $builder = $page->blueprint()->subpage_builder();
+            if (!empty($builder)) {
+      
+                foreach($builder as $build) {
+                $missing = A::missing($build, ['title', 'template', 'uid']);
+                if (!empty($missing)) continue;
+                    try {
+                        // create the subpage as draft
+                        $subPage = $page->createChild([
+                            'content'  => ['title' => $build['title']],
+                            'slug'     => $build['uid'],
+                            'template' => $build['template'],
+                        ]);     
+                    } catch (Exception $error) {
+                        throw new Exception($error);
+                    }
+                    // publish the subpages, so that they are published 
+                    // when the parent is published without further intervention
+                    if ($subPage) {
+                        $subPage->publish();
+                        if(isset($build['num'])) $subPage->sort($build['num']);
+                    }
+        
+                }
+            }
+      
+        }
+    ]  
+```    
+<info>
+This hook-based solution **doesn't work recursively**. If the newly created subpage blueprints contain their own `subpage_builder` settings, those will not be created. 
+</info>
+
+For cases where we need this to work recursively, we can use page models for every page that should have auto-created subpages. To keep our code dry, we create a trait in a plugin that overwrites the `create()` method and implements the hook:
+
+```php "site/plugins/pagebuilder/index.php"
+<?php
+
+trait CustomPageActions
+{
+    public static function create(array $props): Page
+    {
+        kirby()->extend([
+            'hooks' => [
+                'page.create:after' => function ($page) {
+                    $builder = $page->blueprint()->subpage_builder();
+                    if (!empty($builder)) {
+            
+                        foreach($builder as $build) {
+                        $missing = A::missing($build, ['title', 'template', 'uid']);
+                        if (!empty($missing)) continue;
+                            try {
+                                // the parent itself is created as a draft
+                                $subPage = $page->createChild([
+                                    'content'  => ['title' => $build['title']],
+                                    'slug'     => $build['uid'],
+                                    'template' => $build['template'],
+                                ]);
+                                
+                    
+                            } catch (Exception $error) {
+                                throw new Exception($error);
+                            }
+                            // we publish the subpages, so that they are published when the parent is published
+                            if ($subPage) {
+                                $subPage->publish();
+                                if(isset($build['num'])) $subPage->sort($build['num']);
+                            }
+            
+                        }
+                    }
+                
+                  }
+            ]
+        ]);
+        return parent::create($props);
+    }
+
+}
+```
+
+Then for each page in which we we want to use the `subpage_builder`, we create a page model that implements the trait:
+
+```php "/site/models/note.php"
+<?php 
+
+class NotePage extends Page
+{
+    use CustomPageActions;
+ 
+}
+```
+
+Overwriting methods like this in a trait and rsusing them across different models is really powerful and not limited to the current use case.
