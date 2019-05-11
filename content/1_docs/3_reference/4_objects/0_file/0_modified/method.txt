@@ -1,4 +1,4 @@
-Text: 
+Text:
 
 ## Example
 
@@ -16,3 +16,7 @@ if($file = $page->file()) {
 
 }
 ```
+
+<info>
+The modification time reflects the actual file as well as the `.txt` content file(s), whichever was last modified.
+</info>
