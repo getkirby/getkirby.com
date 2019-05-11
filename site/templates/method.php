@@ -6,6 +6,7 @@
 
     <?php snippet('method/parameters',  ['parameters' => $page->parameters()]) ?>
     <?php snippet('method/returns', ['type' => $page->returnType()]) ?>
+    <?php snippet('method/throws', ['throws' => $page->throws()]) ?>
 
     <?= $page->text()->kt()->anchorHeadlines() ?>
 

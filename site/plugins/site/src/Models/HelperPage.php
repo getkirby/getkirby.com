@@ -17,6 +17,7 @@ class HelperPage extends Page
     protected $methodExists;
     protected $parameters;
     protected $reflection;
+    protected $throws;
 
     public function docBlock()
     {
@@ -236,6 +237,30 @@ class HelperPage extends Page
         }
 
         return null;
+    }
+
+    public function throws()
+    {
+        if ($this->throws !== null) {
+            return $this->throws;
+        }
+
+        $reflection = $this->reflection();
+        $docBlock = $this->docBlock();
+        $throws = [];
+
+        if (!$reflection || !$docBlock) {
+            return $this->throws = $throws;
+        }
+
+        foreach ($docBlock->getTagsByName('throws') as $doc) {
+            $throws[] = [
+                'description' => $doc->getDescription(),
+                'type'        => ltrim($doc->getType(), '\\'),
+            ];
+        }
+
+        return $this->throws = $throws;
     }
 
     public function since(): Field
