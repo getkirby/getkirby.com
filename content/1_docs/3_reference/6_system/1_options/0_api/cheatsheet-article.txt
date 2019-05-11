@@ -4,9 +4,9 @@ Excerpt: Set options for Kirby's REST API
 
 Text:
 
-You can completely disable the API for the frontend or set a custom slug. The default slug is `api`.
-
 ## Disable the API
+
+You can completely disable the API for the frontend.
 
 ```php
 return [
@@ -16,6 +16,8 @@ return [
 
 ## Change the API slug
 
+You can set a custom slug. The default slug is `api`.
+
 ```php
 return [
   'api' => [
@@ -23,6 +25,9 @@ return [
   ]
 ];
 ```
+
+All endpoints are now available at `https://yourdomain.com/rest/`.
+
 
 ## Allow insecure requests
 
@@ -39,3 +44,24 @@ return [
 <warning>
 Please keep in mind that this option makes your Kirby installation less secure.
 </warning>
+
+## Custom API elements
+
+Check out the (link: docs/reference/plugins/extensions/api text: API extension reference) to learn more about adding **custom API endpoints, models, collections or more**. Instead of using a plugin, you can add them to your config options in the same manner.
+
+```php "/site/config/config.php"
+return [
+  'api' => [
+    'routes' => [
+      [
+        'pattern' => 'my-endpoint',
+        'action'  => function () {
+          return [
+            'hello' => 'world'
+          ];
+        }
+      ]
+    ]
+  ]
+];
+```
