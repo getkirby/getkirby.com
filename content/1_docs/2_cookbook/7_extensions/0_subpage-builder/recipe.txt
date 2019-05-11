@@ -2,7 +2,7 @@ Title: Subpage builder
 
 ----
 
-Published: 2019-05-11
+Published: 2019-05-13
 
 ----
 
@@ -15,6 +15,8 @@ Text:
 If you want to auto-create a given set of subpages every time you create a particular page, you can achieve that with a `page.create:after` hook. To make this more versatile, you can define a custom blueprint setting that leverages Kirby's new `$page->blueprint()` method.
 
 Let's say every time you create a new `note` page in the Panel, you want to create two subpages: gallery and info.
+
+## Blueprint settings
 
 Add the `subpage_builder` custom settings to the `note.php` blueprint in a Starterkit:
 
@@ -71,40 +73,56 @@ columns:
 ```
 We also add a pages section for the subpages.
 
-Now we need a hook that reacts on page creation. We we define it within the `return` array of the `config.php`:
+## The hook
+Now we need a hook that reacts on page creation. 
+
+We we define it within the `return` array of the `config.php`:
 
 ```php "/site/config/config.php"
     'hooks' => [
-        'page.create:aftter' => function ($page) {
-          $builder = $page->blueprint()->subpage_builder();
-            if (!empty($builder)) {
-      
-                foreach($builder as $build) {
-                $missing = A::missing($build, ['title', 'template', 'uid']);
-                if (!empty($missing)) continue;
-                    try {
-                        // create the subpage as draft
-                        $subPage = $page->createChild([
-                            'content'  => ['title' => $build['title']],
-                            'slug'     => $build['uid'],
-                            'template' => $build['template'],
-                        ]);     
-                    } catch (Exception $error) {
-                        throw new Exception($error);
-                    }
-                    // publish the subpages, so that they are published 
-                    // when the parent is published without further intervention
-                    if ($subPage) {
-                        $subPage->publish();
-                        if(isset($build['num'])) $subPage->sort($build['num']);
-                    }
-        
-                }
-            }
-      
+        'page.create:after' => function ($page) {
+            buildPageTree($page);     
         }
     ]  
-```    
-<info>
-This solution **doesn't work recursively**. If the newly created subpage blueprints contain their own `subpage_builder` settings, those will not be created. 
-</info>
+```
+
+Within the hook's callback function, we call a function defined in a plugin.
+
+## The plugin
+
+The `buildPageTree()` function is a recursive function that builds new subpages as long as the blueprint has a subpage builder setting with valid values.
+
+```php "/site/plugins/treebuilder/index.php"
+<?php
+
+function buildPageTree($p) {
+    $builder = $p->blueprint()->subpage_builder();
+    if (!empty($builder)) {
+        foreach($builder as $build) {
+        $missing = A::missing($build, ['title', 'template', 'uid']);
+        if (!empty($missing)) continue;
+            try {
+                // the parent itself is created as a draft
+                $subPage = $p->createChild([
+                    'content'  => ['title' => $build['title']],
+                    'slug'     => $build['uid'],
+                    'template' => $build['template'],
+                ]);                     
+            } catch (Exception $error) {
+                throw new Exception($error);
+            }
+            // publish the subpages, so that they are published when the parent is published
+            if ($subPage) {
+                // call the function recursively
+                buildPageTree($subPage);
+                // publish subpages and sort
+                $subPage->publish();
+                if(isset($build['num'])) $subPage->sort($build['num']);
+            }
+
+        }
+    }
+}
+```
+
+In this example all subpages in the tree are automatically published to that they are published together with the parent without any further interaction.
