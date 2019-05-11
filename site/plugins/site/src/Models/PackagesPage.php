@@ -24,7 +24,7 @@ class PackagesPage extends Page
                 'slug'     => Str::slug($package),
                 'template' => 'link',
                 'parent'   => $this,
-                'num'      => '0',
+                'num'      => null,
                 'content'  => [
                     'title' => ucfirst($package),
                     'link' => 'docs/reference/@#' . Str::slug($package)
