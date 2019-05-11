@@ -87,9 +87,9 @@ The form snippet is included the `event.php` template because we want to render 
 
 ## The `event.php` template
 
-The template renders the content of each event page and we want to add the registration form snippet below that.
+The template renders the content of each event page. We want to add the registration form snippet below.
 
-Additionally, we will also display alerts if the user has filled in the form incorrectly or the registration has failed.
+Additionally, we will display alerts if the user filled in the form incorrectly or the registration failed.
 
 ```php "/site/templates/event.php"
 <?php snippet('header') ?>
@@ -112,7 +112,7 @@ Additionally, we will also display alerts if the user has filled in the form inc
       <div class="alert">
         <ul>
           <?php foreach ($alert as $message): ?>
-          <li><?= html($message) ?></li>
+          <li><?= kirbytext($message) ?></li>
           <?php endforeach ?>
         </ul>
       </div>
@@ -238,7 +238,7 @@ $messages = [
 You can change these rules based on the type of data you want to obtain and use (link: docs/reference/system/validators text: Kirby's validators) or your own (link: docs/reference/plugins/extensions/validators text: custom validators) to make sure you get the desired data.
 
 <info>
-To prevent **garbage data**, you may want to use validators on the other fields as well, for example by limiting input to a given character set (using regex patterns).
+To prevent garbage data, you may want to use validators on the other fields as well, for example by limiting input to a given character set (using regex patterns).
 </info>
 
 If all went well, we authenticate using the almighty `kirby` user and try to create a new subpage within a `try/catch` block, which allows us to react on possible errors. We store all registrations as subpages of the current `event` page. If the registration was successfully created, two things happen:
@@ -278,7 +278,7 @@ If the registration fails, we add the error message to our alerts variable.
 
 ## The `success` page and a plugin
 
-If the registration is successful, the user is redirected to the `success` page.
+If the registration was successful, the user is redirected to the `success` page.
 
 ```kirbycontent "/content/success/success.txt"
     Title: Success
@@ -294,7 +294,7 @@ If the registration is successful, the user is redirected to the `success` page.
     If you want to register for another event, go back to the (link: events text: Events overview page).
 ```
 
-In the `text` field, we include a placeholder for the event title to customize it a little. To actually display the title, we use a `kirbyTags:after` hook in a template.
+In the `text` field, we include a placeholder for the event title to customize it a little. To actually display the title, we use a `kirbyTags:after` hook in a plugin.
 
 The `success` page is rendered using the `default.php` template.
 
