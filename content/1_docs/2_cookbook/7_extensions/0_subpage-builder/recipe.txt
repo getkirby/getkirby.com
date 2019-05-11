@@ -6,20 +6,19 @@ Published: 2019-05-13
 
 ----
 
-Description: Auto-generate subpages when you create a new page in the Panel
+Description: Auto-generate subpages when you create a new page
 
 ----
 
 Text:
 
-If you want to auto-create a given set of subpages every time you create a particular page, you can achieve that with a `page.create:after` hook. To make this more versatile, you can define a custom blueprint setting that leverages Kirby's new `$page->blueprint()` method.
+If you want to auto-create a given set of subpages every time you create a particular page, you can achieve this with a `page.create:after` hook. To make it more versatile, you can define a custom blueprint setting that leverages Kirby's new `$page->blueprint()` method. We will take you step by step through an example based on the (link: docs/guide/installation#installation text: Starterkit).
 
-Let's say every time you create a new `note` page in the Panel, you want to create two subpages: gallery and info.
+Let's say every time you create a new `note` page (in the Panel or progamatically), you want to create two subpages: `gallery` and `info`.
 
 ## Blueprint settings
 
-Add the `subpage_builder` custom settings to the `note.php` blueprint in a Starterkit:
-
+Add the custom option `subpage_builder` to the `note.yml` blueprint in the Starterkit:
 
 ```yaml "/site/blueprints/pages/note.yml"
 title: Note
@@ -71,22 +70,23 @@ columns:
             help: Place the {{ gallery }} tag anywhere in your text to add the selected gallery
 
 ```
-We also add a pages section for the subpages.
+
+As you can see above, we also added a pages section for the subpages.
 
 ## The hook
-Now we need a hook that reacts on page creation. 
+Now we need a (link: docs/reference/plugins/extensions/hooks text: hook) that is called each time a page is created.
 
-We we define it within the `return` array of the `config.php`:
+We can define it within the `return` array of our `config.php`:
 
 ```php "/site/config/config.php"
     'hooks' => [
         'page.create:after' => function ($page) {
-            buildPageTree($page);     
+            buildPageTree($page);
         }
-    ]  
+    ]
 ```
 
-Within the hook's callback function, we call a function defined in a plugin.
+Within the hook's callback function, we call a function called `buildPageTree()` with the newly created `$page` as first parameter. We will define that function in a plugin.
 
 ## The plugin
 
@@ -95,34 +95,56 @@ The `buildPageTree()` function is a recursive function that builds new subpages 
 ```php "/site/plugins/treebuilder/index.php"
 <?php
 
-function buildPageTree($p) {
-    $builder = $p->blueprint()->subpage_builder();
-    if (!empty($builder)) {
+function buildPageTree($page) {
+
+    // get the subpage_builder definition from the blueprint
+    $builder = $page->blueprint()->subpage_builder();
+
+    // if any is set…
+    if (empty($builder) === false) {
+
+        // …loop through each page to be built
         foreach($builder as $build) {
-        $missing = A::missing($build, ['title', 'template', 'uid']);
-        if (!empty($missing)) continue;
+
+            // check if all necessary fields have been defined
+            // in subpage_builder
+            $missing = A::missing($build, ['title', 'template', 'uid']);
+
+            // if any is missing, skip
+            if (empty($missing) === false) {
+                continue;
+            }
+
             try {
                 // the parent itself is created as a draft
-                $subPage = $p->createChild([
-                    'content'  => ['title' => $build['title']],
+                $subPage = $page->createChild([
+                    'content'  => [
+                        'title' => $build['title']
+                    ],
                     'slug'     => $build['uid'],
                     'template' => $build['template'],
-                ]);                     
+                ]);
             } catch (Exception $error) {
                 throw new Exception($error);
             }
-            // publish the subpages, so that they are published when the parent is published
+
+            // publish the subpages, so that they are published
+            // when the parent is published
             if ($subPage) {
+
                 // call the function recursively
                 buildPageTree($subPage);
+
                 // publish subpages and sort
                 $subPage->publish();
-                if(isset($build['num'])) $subPage->sort($build['num']);
-            }
 
+                if (isset($build['num']) === true) {
+                    $subPage->sort($build['num']);
+                }
+            }
         }
     }
 }
 ```
 
-In this example all subpages in the tree are automatically published to that they are published together with the parent without any further interaction.
+In this example, all subpages in the tree are automatically published. That way, they will be published together with the parent without any further interaction.
