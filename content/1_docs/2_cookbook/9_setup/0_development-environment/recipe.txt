@@ -75,6 +75,10 @@ It provides a virtual development environment where you don't have to install a 
 
 Follow their (link: https://www.vagrantup.com/intro/getting-started/index.html text: Getting Started guide) to get up and running.
 
+## Laragon
+
+(link: https://laragon.org text: Laragon) is a portable, isolated develoment environment for Windows only. It supports different PHP versions, Apache or Nginx, and different types of databases. You can also share your projects with the outside using Ngrok.
+
 ## Laravel Homestead
 
 (link: https://laravel.com/docs/5.8/homestead text: Laravel Homestead) is an official, pre-packaged Vagrant box and provides a full-featured virtual development environment, that doesn't require you to install PHP, a web server, or any other server software on your computer. Homestead runs on Windows, Mac, or Linux systems.
