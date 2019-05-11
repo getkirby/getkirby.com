@@ -62,7 +62,9 @@ class MethodPage extends HelperPage
         $methodCall = parent::methodCall();
         $classTitle = $this->parent()->classTitle();
 
-        if ($this->isStatic() === true) {
+        if ($this->methodName() === '__construct') {
+            return 'new ' . $classTitle . Str::after($methodCall, $this->slug());
+        } else if ($this->isStatic() === true) {
             return  $classTitle . '::' . $methodCall;
         } else {
             return '$' . strtolower($classTitle) . '->' . $methodCall;
@@ -123,7 +125,9 @@ class MethodPage extends HelperPage
 
     public function title(): Field
     {
-        if ($this->isStatic() === true) {
+        if ($this->methodName() === '__construct') {
+            $title = 'new ' . $this->parent()->classTitle() . '()';
+        } else if ($this->isStatic() === true) {
             $title = $this->parent()->classTitle() . '::' . $this->methodName() . '()';
         } else {
             $title = $this->parent()->title() . '->' . $this->methodName() . '()';

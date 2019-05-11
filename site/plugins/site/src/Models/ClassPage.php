@@ -15,7 +15,6 @@ class ClassPage extends Page
 {
 
     protected $docBlock;
-    protected $methodExists;
     protected $reflection;
 
     public function children()
@@ -43,26 +42,29 @@ class ClassPage extends Page
 
             if ($page = $pages->find($slug)) {
                 $content = $page->content()->toArray();
-            } else {
-                $content = [
-                    'undocumented' => true
-                ];
             }
-            
+
+            $num = substr($slug, 0, 1) === '_' ? null : 1;
+
+            if ($slug === '__construct') {
+                $num = 0;
+            }
+
             $children[] = [
                 'slug'     => $slug,
                 'model'    => 'method',
                 'template' => 'method',
                 'parent'   => $this,
-                'content'  => $content,
-                'num'      => substr($slug, 0, 1) === '_' ? null : 0
+                'content'  => $content ?? [],
+                'num'      => $num
             ];
         }
+
 
         $pages = Pages::factory($children, $this)
                     ->filterBy('methodExists', true)
                     ->sortBy('slug');
-        
+
         return $this->children = $pages;
     }
 
@@ -106,7 +108,7 @@ class ClassPage extends Page
         $excerpt = null;
 
         if ($docBlock = $this->docBlock()) {
-            $excerpt = trim($this->docBlock()->getSummary());
+            $excerpt = trim($docBlock->getSummary());
             $excerpt = str_replace(PHP_EOL, ' ', $excerpt);
 
             if ($excerpt === '/') {
@@ -156,20 +158,6 @@ class ClassPage extends Page
             'twittercard' => 'summary',
         ];
     }
-    
-    public function missingMethods()
-    {
-        $children = $this->children();
-        $pages    = parent::children();
-
-        foreach ($children as $child) {
-            if ($page = $pages->find($child->slug())) {
-                $pages = $pages->remove($page->id());
-            }
-        }
-
-        return $pages;
-    }
 
     public function pathCrumb(): string
     {
@@ -206,10 +194,4 @@ class ClassPage extends Page
             return $reflection->getTraits();
         }
     }
-
-    public function undocumentedMethods()
-    {
-        return $this->children()->filterBy('undocumented', true);
-    }
-
 }

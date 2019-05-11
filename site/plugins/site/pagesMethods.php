@@ -1,19 +1,21 @@
 <?php
 
 return [
-    
+
     'forCheatsheet' => function () {
         if (get('advanced') === 'true') {
-            return $this->listed();
+            $pages = $this->listed();
+        } else {
+            $pages = $this->simple();
         }
-        
-        return $this->simple();
+
+        return $pages->sortBy('num', 'asc', 'slug', 'asc');
     },
-    
+
     'hasAdvanced' => function () {
         return $this->listed()->count() !== $this->simple()->count();
     },
-    
+
     'simple' => function () {
         return $this->listed()->filter(function ($p) {
             if (method_exists($p, 'isInternal') && method_exists($p, 'isDeprecated')) {
