@@ -8,6 +8,11 @@ Intro: Kirby's REST API is used by the (glossary: Panel) to connect between the 
 
 Text:
 
+## Endpoints
+There are a large number of endpoints, split into the following areas:
+
+(reference: api)
+
 ## Authentication
 
 Every API request requires authentication. We offer session-based authentication or HTTP Basic auth. (link: docs/guide/api/authentication text: Read more…)
@@ -67,92 +72,6 @@ return [
 
 All API endpoints are now available at `https://yourdomain.com/rest`. The Panel will automatically switch to the new API location.
 
-## Custom API routes
+## Further customize the API
 
-If you want to provide your own API endpoints and make use of our authentication and other API features, you can define your own API routes in your config or in a plugin.
-
-```php "/site/config/config.php"
-return [
-  'api' => [
-    'routes' => [
-      [
-        'pattern' => 'my-endpoint',
-        'action'  => function () {
-          return [
-            'hello' => 'world'
-          ];
-        }
-      ]
-    ]
-  ]
-];
-```
-
-…or in a plugin:
-
-```php "/site/plugins/api/index.php"
-Kirby::plugin('my/api', [
-  'api' => [
-    'routes' => [
-      [
-        'pattern' => 'my-endpoint',
-        'action'  => function () {
-          return [
-            'hello' => 'world'
-          ];
-        }
-      ]
-    ]
-  ]
-]);
-```
-
-
-Your new endpoint is now available at `https://yourdomain.com/api/my-endpoint` and will return a json encoded version of the returned array.
-
-The endpoint is automatically protected with the same authentication layer as our own endpoints. It will also move when you change the API slug as described above.
-
-## Custom API data functions
-
-You can register your own API data provider functions. They are pretty handy if you need to fetch the same kind of data in multiple routes.
-
-```php
-return [
-  'api' => [
-    'data' => [
-      'message' => function () {
-        return 'world';
-      },
-    ],
-    'routes' => [
-      [
-        'pattern' => 'my-endpoint',
-        'action'  => function () {
-          return [
-            'hello' => $this->message()
-          ];
-        }
-      ]
-    ]
-  ]
-];
-```
-
-Of course they can also be registered in plugins. They also have access to all of our native data functions. Here's a list:
-
-```php
-$this->kirby();
-$this->site();
-$this->page($pageId);
-$this->file($pageId, $filename);
-$this->user($userId = null);
-$this->users();
-```
-
-## Custom models
-
-Docs are coming soon…
-
-## Custom collections
-
-Docs are coming soon…
+Find out how you can define custom endpoints, data functions, models etc. either via your (link: docs/reference/system/options/api text: config options ›) or (link: docs/reference/plugins/extensions/api text: in a plugin ›).
