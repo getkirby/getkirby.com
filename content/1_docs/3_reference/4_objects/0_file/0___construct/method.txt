@@ -1,0 +1,3 @@
+Text:
+
+(docs: methods/file/props)

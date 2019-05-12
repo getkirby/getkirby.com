@@ -1,0 +1,7 @@
+Auth: files.create
+
+----
+
+Text:
+
+(docs: methods/file/props)

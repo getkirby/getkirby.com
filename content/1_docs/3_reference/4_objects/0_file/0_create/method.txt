@@ -4,16 +4,7 @@ Auth: files.create
 
 Text:
 
-## The `$props` parameter
-
-Property   | Type     |
---         | --       |
-`source`   | `string` |
-`parent`   | `string` |
-`filename` | `string` |
-`url`      | `string` |
-`template` | `string` |
-`content`  | `array`  |
+(docs: methods/file/props)
 
 ## Example
 
