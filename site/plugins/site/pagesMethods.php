@@ -3,7 +3,7 @@
 return [
 
     'forCheatsheet' => function () {
-        if (get('advanced') === 'true') {
+        if (kirby()->session()->get('advanced', 'no') === 'yes') {
             $pages = $this->listed();
         } else {
             $pages = $this->simple();
