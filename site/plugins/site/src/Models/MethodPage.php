@@ -43,6 +43,11 @@ class MethodPage extends HelperPage
         return null;
     }
 
+    public function isMagic(): bool
+    {
+        return substr($this->slug(), 0, 2) === '__';
+    }
+
     public function isStatic(): bool
     {
         return $this->reflection()->isStatic() === true;

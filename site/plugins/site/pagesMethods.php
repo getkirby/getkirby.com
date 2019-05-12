@@ -9,7 +9,7 @@ return [
             $pages = $this->simple();
         }
 
-        return $pages->sortBy('num', 'asc', 'slug', 'asc');
+        return $pages->sortBy('isMagic', 'desc', 'slug', 'asc');
     },
 
     'hasAdvanced' => function () {

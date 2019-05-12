@@ -38,16 +38,19 @@ class ClassPage extends Page
                 continue;
             }
 
-            $slug = Str::kebab($method->getName());
-
-            if ($page = $pages->find($slug)) {
-                $content = $page->content()->toArray();
-            }
-
-            $num = substr($slug, 0, 1) === '_' ? null : 1;
+            $slug    = Str::kebab($method->getName());
+            $isMagic = substr($slug, 0, 1) === '_';
+            $num     = $isMagic ? null : 0;
 
             if ($slug === '__construct') {
                 $num = 0;
+            }
+
+
+            if ($page = $pages->find($slug)) {
+                $content = $page->content()->toArray();
+            } else {
+                $content = [];
             }
 
             $children[] = [
@@ -55,7 +58,7 @@ class ClassPage extends Page
                 'model'    => 'method',
                 'template' => 'method',
                 'parent'   => $this,
-                'content'  => $content ?? [],
+                'content'  => $content,
                 'num'      => $num
             ];
         }
