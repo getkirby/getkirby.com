@@ -1,9 +1,6 @@
 <div class="cheatsheet-section-toolbar">
   <span>
-  <?php
-  $advanced = $kirby->session()->get('advanced', 'no') === 'yes'
-  ?>
-  <?= Html::a($page->url(['query' => 'advanced=no']),  'basic', ['aria-current' => !$advanced]) ?>
-  <?= Html::a($page->url(['query' => 'advanced=yes']),  'advanced', ['aria-current' => $advanced]) ?>
+  <?= Html::a($page->url(),  'basic', ['aria-current' => get('advanced') ? false : true]) ?>
+  <?= Html::a($page->url(['query' => 'advanced=true']),  'advanced', ['aria-current' => get('advanced') ? true : false]) ?>
   </span>
 </div>
