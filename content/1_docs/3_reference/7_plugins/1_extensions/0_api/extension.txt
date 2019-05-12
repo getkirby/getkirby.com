@@ -44,7 +44,14 @@ API endpoints can also be registered as callbacks. Within the callback they have
 Kirby::plugin('your/plugin', [
   'api' => function ($kirby) {
     return [
-      // ...
+      [
+        'pattern' => 'my-endpoint',
+        'action'  => function () use ($kirby) {
+          return [
+            'users' => $kirby->users()->count()
+          ];
+        }
+      ]
     ];
   }
 ]);
