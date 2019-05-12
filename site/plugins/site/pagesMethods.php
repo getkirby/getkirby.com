@@ -3,7 +3,7 @@
 return [
 
     'forCheatsheet' => function () {
-        if (get('advanced') === 'true') {
+        if (Cookie::get('getkirby_advanced') === 'yes') {
             $pages = $this->listed();
         } else {
             $pages = $this->simple();
