@@ -4,7 +4,9 @@ Class: Kirby\Cms\Files
 
 Text:
 
-## How to get a files object
+You can extend this set of methods with (link: docs/reference/plugins/extensions/files-methods text: custom files methods).
+
+## How to get a `$files` object
 
 Before you can use the methods of the `$files` class, you need a `$files` object. To get a files object, you fetch the files you need from the `$site`, `$page` or `$user` object:
 

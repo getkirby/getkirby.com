@@ -4,7 +4,9 @@ Class: Kirby\Cms\File
 
 Text:
 
-## Details
+You can extend this set of methods with (link: docs/reference/plugins/extensions/file-methods text: custom file methods).
+
+## How to get a `$file` object
 
 You can get a `$file` object to use with these methods by fetching it from the `$site`, a `$page` or a `$user` object.
 
