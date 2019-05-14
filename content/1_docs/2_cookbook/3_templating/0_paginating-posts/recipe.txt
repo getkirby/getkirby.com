@@ -46,11 +46,11 @@ Add a new `note.php` controller in `/site/controllers/`
 
 return function ($page) {
 
-    // parse kirbytext/markdown first
-    $text = $page->text()->kt();
-
     // split the text into parts where we have inserted the pagebreak
-    $parts = explode('<!--nextpage-->', $text);
+    $parts = explode('<!--nextpage-->', $page->text());
+
+    // Apply Kirbytext to every part
+    $parts = array_map('kirbytext', $parts);
 
     // create a new collection from the parts and paginate
     $parts = (new Collection($parts))->paginate(1);
