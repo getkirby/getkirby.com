@@ -34,17 +34,21 @@ We can put the (file: animals.csv) directly inside this folder to make it nice a
 To convert the CSV from the file to a PHP array we are going to use a little `csv()` helper function. This function is stored in a small plugin. It takes the absolute path to the csv file and returns a nice and clean array.
 
 ```php "/site/plugins/helpers/index.php"
-function csv(string $file): array
+<?php
+function csv(string $file, string $delimiter = ','): array
 {
     $lines = file($file);
+
     $lines[0] = str_replace("\xEF\xBB\xBF", '', $lines[0]);
 
-    $csv = array_map('str_getcsv', $lines);
-
+    $csv = array_map(function($d) use($delimiter) {
+        return str_getcsv($d, $delimiter);
+    }, $lines);
+    
     array_walk($csv, function(&$a) use ($csv) {
-        $a = array_combine($csv[0], $a);
+       $a = array_combine($csv[0], $a);
     });
-
+   
     array_shift($csv);
 
     return $csv;
@@ -63,7 +67,7 @@ class AnimalsPage extends Page
 
     public function children()
     {
-        $csv      = csv($this->root() . '/animals.csv');
+        $csv      = csv($this->root() . '/animals.csv', ';');
         $children = array_map(function ($animal) {
             return [
                 'slug'     => Str::slug($animal['Scientific Name']),
