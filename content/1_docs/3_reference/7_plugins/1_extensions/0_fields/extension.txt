@@ -203,7 +203,7 @@ panel.plugin('your/plugin', {
 The `template` options defines the HTML output of your field. (link: docs/reference/plugins/ui text: UI kit components) can help you to create your field.
 
 ```php
-panel.plugin('your/plugin', {
+panel.plugin("your/plugin", {
   fields: {
     hello: {
       props: {
@@ -229,28 +229,28 @@ Please make sure to check for our (link: docs/reference/plugins/ui text: UI kit 
 <?php
 
 Kirby::plugin('your/plugin', [
-  'fields' => [
-    'hello' => [
-      'props' => [
-        'message' => function (string $message) {
-          return $message;
-        }
-      ]
+    'fields' => [
+        'hello' => [
+            'props' => [
+                'message' => function (string $message) {
+                    return $message;
+                }
+            ]
+        ]
     ]
-  ]
 ]);
 ```
 
 ### Vue component
 
 ```js "/site/plugins/your-plugin/index.js"
-panel.plugin('your/plugin', {
-  'fields': {
-    'hello': {
+panel.plugin("your/plugin", {
+  fields: {
+    hello: {
       props: {
         message: String
       },
-      template: '<p>{{ message }}</p>'
+      template: "<p>{{ message }}</p>"
     }
   }
 });
@@ -273,7 +273,73 @@ fields:
 
 It's a good idea as a next step to check out our (link: docs/reference/plugins/ui text: UI component library). All of our components can be used in your field plugin. You should always try that first before implementing your own interface elements.
 
-## Vue single file components
+## Extending existing fields
 
-*Docs coming soon...*
+Instead of creating a new field from scratch, you can reuse existing fields.
+
+### Extending the backend
+
+```php "/site/plugins/your-plugin/index.php"
+<?php
+
+Kirby::plugin('your/plugin', [
+    'fields' => [
+        'hello' => [
+            'extends' => 'text'
+        ]
+    ]
+]);
+```
+
+This custom field will inherit the entire backend code of the text field.
+
+You can now start replacing parts of the field implementation or add your own props and methods.
+
+```php "/site/plugins/your-plugin/index.php"
+<?php
+
+Kirby::plugin('your/plugin', [
+    'fields' => [
+        'hello' => [
+            'extends' => 'text',
+            'props' => [
+                'myNewProp' => function (string $myNewProp = null) {
+                    return $myNewProp;
+                }
+            ]
+        ]
+    ]
+]);
+```
+
+### Extending the frontend
+
+```php "/site/plugins/your-plugin/index.js"
+panel.plugin("your/plugin", {
+  fields: {
+    hello: {
+      extends: "k-text-field"
+    }
+  }
+});
+```
+
+For the frontend you have to specify, which Vue component should be extended. You can find all available field components in our (link: docs/reference/plugins/ui text: UI Kit docs).
+
+This is using Vue's native component extensions. You can now overwrite and add component logic.
+
+```php "/site/plugins/your-plugin/index.js"
+panel.plugin("your/plugin", {
+  fields: {
+    hello: {
+      extends: "k-text-field",
+      methods: {
+        myCustomMethod() {
+          // do something here
+        }
+      }
+    }
+  }
+});
+```
 
