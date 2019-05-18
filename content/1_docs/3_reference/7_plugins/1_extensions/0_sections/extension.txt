@@ -71,11 +71,11 @@ The property definition above instructs the REST API to process the value from t
 ```yaml "Blueprint"
 modified:
   type: modified
-  headline: Last modified
+  headline: Last updates
 ```
 
 ```json "API response"
-hello: {
+modified: {
   headline: "Last updates"
 }
 ```
@@ -171,12 +171,12 @@ modified:
 modified: {
     headline: "Last update",
     text: "The page has been modified at 12.12.2012 22:33:00",
-  }
+}
 ```
 
 ## Vue component
 
-After finishing the PHP backend part of the field, we can now start developing the (glossary: vue) component. Although our Vue plugin API is really easy to read, it makes sense to check out the [Vue docs](https://vuejs.org/), if you have never worked with it.
+After finishing the PHP backend part of the section, we can now start developing the (glossary: vue) component. Although our Vue plugin API is really easy to read, it makes sense to check out the [Vue docs](https://vuejs.org/), if you have never worked with it.
 
 First, we will need an additional `index.js` file for our javascript code:
 
@@ -193,7 +193,7 @@ panel.plugin('yourname/modified', {
 
 ### Just a Vue component
 
-Though we have added some wrapper code, the field object is just a normal Vue component definition. You can check out the [Vue docs](https://vuejs.org/) for all component options and use them all.
+Though we have added some wrapper code, the section object is just a normal Vue component definition. You can check out the [Vue docs](https://vuejs.org/) for all component options and use them all.
 
 ### Section data
 
@@ -224,7 +224,7 @@ panel.plugin('yourname/modified', {
 });
 ```
 
-This has to be done for all properties as well as computed values defined in the (link: #php-definition text: PHP field definition).
+This has to be done for all properties as well as computed values defined in the (link: #php-definition text: PHP section definition).
 
 ### Template
 
