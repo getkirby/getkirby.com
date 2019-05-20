@@ -2,7 +2,7 @@ Title: Email with attachments
 
 ----
 
-Description: Send an email with attachments from form input
+Description: Send an email with attachments from form input.
 
 ----
 
@@ -26,7 +26,7 @@ content/
         3_job-c/
             job.txt
         jobs.txt
-    2_applications
+    2_applications/
         applications.txt    
     success/
         success.txt
