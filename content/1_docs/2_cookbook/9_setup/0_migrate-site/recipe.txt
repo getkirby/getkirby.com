@@ -406,7 +406,7 @@ As a next step, replace old plugins with new ones where available and/or port yo
 
 ### KirbyTags
 
-(link: docs/reference/objects/kirbytags text: KirbyTags) are now defined in a plugin file.
+(link: docs/reference/plugins/extensions/kirbytags text: KirbyTags) are now defined in a plugin file.
 
 
 ## Getting stuck?
