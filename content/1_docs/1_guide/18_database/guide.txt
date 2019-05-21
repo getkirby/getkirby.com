@@ -27,7 +27,7 @@ You can set your database connection in your `config.php`.
 
 return [
   'db' => [
-    'host'     => '127.0.0',
+    'host'     => '127.0.0.1',
     'database' => 'kirby',
     'user'     => 'root',
     'password' => 'root',
