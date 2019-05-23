@@ -82,7 +82,7 @@ Kirby::plugin('your/plugin', [
                     return $result;
                 }
 
-                $pattern = '/<img.*>/i';
+                $pattern = '/<img.*?>/i';
 
                 // build a new image tag with the srcset
                 $image = Html::img($tag->src, [
