@@ -69,3 +69,10 @@ You can provide a fallback if the language variable is not defined:
 ```php
 <input type="submit" value="<?php echo t('change', 'Change') ?>" />
 ```
+
+## More information
+
+Check out the following cookbook recipes to find out how to make language variables more flexible:
+
+- (link: docs/cookbook/i18n/language-variablestext: Flexible language variables)
+- (link: docs/cookbook/i18n/using-variables-in-language-stringstext: Using placeholders in language strings)
