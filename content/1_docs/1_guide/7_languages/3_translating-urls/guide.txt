@@ -24,6 +24,8 @@ http://yourdomain.com/projekte/projekt-a
 
 When multiple languages are configured for your site, you can add an additional `slug` field to translated content files to translate the foldername of a page.
 
+## Non-Panel users
+
 Here's a quick example – English is the default language:
 
 ```kirbycontent "content/projects/projects.en.txt"
@@ -53,3 +55,7 @@ http://yourdomain.com/de/projekte
 ```
 
 You don't have to add the `slug` field to your text files for your default language. Kirby will use the folder name in that case.
+
+## Panel users
+
+To translate the URL of a page in the Panel, select the language for which you want to change the URL, click on `Settings`, select `Change URL` from the dropdown and then enter the new URL in the dialog. This will store a `slug` field with the given value in the content translation.

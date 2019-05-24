@@ -79,3 +79,17 @@ fields:
 ```
 
 This will make the field readonly in all but the default languages.
+
+## Creating new pages
+
+When you create pages via the Panel, a new page is always created in the default language first, even if you add the page while a secondary language is active. This is done because the default language is required.
+
+<info>
+It is therefore highly recommended to enter the `Title` and `Url appendix` in the default language when creating a new page to make sure that the URL for the default language is correct and to avoid having to change it later.
+</info>
+
+## Being more productive
+
+Check out the following cookbook recipe to learn how you can export and import translations for external translators:
+
+- (link: docs/cookbook/i18n/import-export text: Import and export translations)
