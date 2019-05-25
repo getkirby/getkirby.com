@@ -1,4 +1,4 @@
-Title: Collections filters
+Title: Collection filters
 
 ----
 
