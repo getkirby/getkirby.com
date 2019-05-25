@@ -1,0 +1,46 @@
+Title: Collections filters
+
+----
+
+Guide:
+
+----
+
+Text:
+
+Collection filters are registered with the `collectionFilters` extension.
+
+## Callback definition
+
+ The `collectionFilters` extension accepts an array of collection filters where the key is the name of the filter and the value a callback function that returns the filtered collection.
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('your/plugin', [
+    'collectionFilters' => [
+        'datebefore' => function ($collection, $field, $test, $split = false) {
+            foreach ($collection->data as $key => $item ) {
+                $datetime = $collection->getAttribute($item, $field, $split, $test);
+                if (!$datetime || strtotime($datetime) < strtotime($test) ) {
+                    continue;
+                }
+                unset($collection->$key);
+            }
+            
+            return $collection;
+        }
+    ]
+]);
+```
+
+## Usage in templates
+
+In your templates, you can now use the new filter like this:
+
+```php "/site/templates/notes.php"
+<?php 
+$notes = $page->children()->filterBy('date', 'datebefore', '2018-09-07');
+foreach ($notes as $note) {
+    echo $note->title();
+}
+?>
+```
