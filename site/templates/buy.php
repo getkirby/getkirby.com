@@ -54,11 +54,24 @@
       vendor: 1129,
     });
 
+
     document.getElementById("cta").addEventListener("click", function (e) {
       e.preventDefault();
-      Paddle.Checkout.open({
+
+      var params = {
         product: 499826
-      });
+      };
+
+      // try to get affiliate id from session storage
+      var affiliate_id = sessionStorage.getItem("kirby_affiliate_id");
+
+      if (affiliate_id !== null) {
+        params["affiliates"] = [affiliate_id];
+      }
+
+      console.log("params", params);
+
+      Paddle.Checkout.open(params);
     }, false);
   </script>
 
