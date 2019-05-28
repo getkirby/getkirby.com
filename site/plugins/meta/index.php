@@ -95,9 +95,7 @@ Kirby::plugin('kirby/meta', [
                     $doc->loadHTML($html);
                     libxml_clear_errors();
 
-                    $elements = array_merge(
-                        iterator_to_array($doc->getElementsByTagName('a')),
-                    );
+                    $elements = iterator_to_array($doc->getElementsByTagName('a'));
 
                     foreach ($elements as $item) {
                         $href = $item->getAttribute('href');
