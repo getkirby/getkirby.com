@@ -1,6 +1,6 @@
 <?php snippet('header') ?>
 
-<main class="main">
+<main class="main" id="maincontent">
 
   <div id="plugins" class="wrap">
 
