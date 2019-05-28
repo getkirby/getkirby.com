@@ -165,7 +165,7 @@ That's it! Now you have a working import/export workflow that can be used to upd
 
 ## A few final ideas
 
-Exports could be automated whenever the default content has changed or a new page or file is created. This could be achieved with (link: docs/reference/hooks/ text: hooks). The JSON could then be sent to an API of a translation service immediately.
+Exports could be automated whenever the default content has changed or a new page or file is created. This could be achieved with (link: docs/reference/plugins/hooks/ text: hooks). The JSON could then be sent to an API of a translation service immediately.
 
 The import could also be triggered via a webhook, if supported by your translation service. You can create custom webhooks for your site with our (link: docs/guide/routing text: router). The JSON does not necessarily have to come from a file. It could also be sent in the payload of such a hook or be fetched from the translation service API.
 

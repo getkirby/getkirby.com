@@ -22,7 +22,7 @@ In this example, we will upload the files to the `content` folder, but if your u
 
 ## The `upload` and `storage` pages
 
-(link: docs/guide/content/pages text: Create an `upload` page) with an `upload.txt` content file. For our means, we only need a title in the content file, the rest is up to you. You could, for example, store an introductory text.
+(link: docs/guide/content/creating-pages text: Create an `upload` page) with an `upload.txt` content file. For our means, we only need a title in the content file, the rest is up to you. You could, for example, store an introductory text.
 
 If you want to access the page in the Panel, you also need to create a (glossary: blueprint text: blueprint) for the page. We will skip this step here.
 
