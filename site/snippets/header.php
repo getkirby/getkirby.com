@@ -36,7 +36,9 @@
 </head>
 <body data-template="<?= $page->template() ?>">
 
-  <a href="#maincontent" class="skip-to-content">Skip to content<span aria-hidden="true"> »</span></a>
+  <?php if (@$skipLink !== false): ?>
+    <a href="#maincontent" class="skip-to-content">Skip to content<span aria-hidden="true"> »</span></a>
+  <?php endif ?>
 
   <?php if ($page->isHomePage()): ?>
   <div class="producthunt">
