@@ -1,4 +1,4 @@
-<?php snippet('header') ?>
+<?php snippet('header', ['skipLink' => false]) ?>
 
 <style>
 
