@@ -8,7 +8,7 @@ Description: Set up Dropbox sync for your site (VPS or dedicated server required
 
 Text:
 
-It’s possible to connect Kirby with (link: https://www.dropbox.com text: Dropbox) but you need your own server. It’s not possible on shared hosting (scroll down for [an exception](#uberspace-user)). You need to have a dedicated or virtual server with SSH access and the permissions to install things on it.
+It’s possible to connect Kirby with (link: https://www.dropbox.com text: Dropbox) but you need your own server. It’s usually not possible on shared hosting, as you need SSH access and the permissions to install software on it.
 
 ## Disclaimer
 
