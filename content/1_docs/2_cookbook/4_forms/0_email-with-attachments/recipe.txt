@@ -51,7 +51,7 @@ With this setup, we keep the application process away from the job listings and 
 
 ## The job application page
 
-(link: docs/guide/content/creating pages text: Create) an `applications` page with an `applications.txt` content file. For our means, we only need the title in the content file, the rest is up to you.
+(link: docs/guide/content/creating-pages pages text: Create) an `applications` page with an `applications.txt` content file. For our means, we only need the title in the content file, the rest is up to you.
 
 For use in the Panel, you can create a (glossary: blueprint text: blueprint) for the page. We will skip this step here.
 
@@ -271,7 +271,7 @@ Let's go through the most important steps here in detail. The rest is commented 
 
 In our controller, the form evaluation starts once we receive a `POST` request. First, we check if a bot got trapped in our honeypot. In this case, we send him back to the page and stop script execution.
 
-Next, we check if all form fields have been filled in according to our validation rules using the [`invalid()` helper](/docs/reference/helpers/invalid):
+Next, we check if all form fields have been filled in according to our validation rules using the [`invalid()` helper](/docs/reference/templates/helpers/invalid):
 
 ```php
 $rules = [

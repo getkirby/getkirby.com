@@ -24,7 +24,7 @@ Do not use the file cache for pages with protected content, otherwise your conte
 
 ## User management
 
-All users, including front-end users, are managed via the (link: docs/panel/users text: Panel).
+All users, including front-end users, are managed via the (link: docs/guide/users/managing-users text: Panel).
 
 
 ### Creating roles without panel access
