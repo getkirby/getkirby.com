@@ -23,7 +23,7 @@ This example consists of several parts and files:
 
 ## The contact page
 
-(link: docs/guide/content/pages text: Create a contact page) with a `contact.txt` content file. For our means, we only need a title in the content files, the rest is up to you. You could, for example, store an introductory text or some variables – like the recepient email address.
+(link: docs/guide/content/creating-pages text: Create a contact page) with a `contact.txt` content file. For our means, we only need a title in the content files, the rest is up to you. You could, for example, store an introductory text or some variables – like the recepient email address.
 
 For use in the Panel, you can also create a (glossary: blueprint text: blueprint) for the page. We will skip this step here.
 
@@ -167,7 +167,7 @@ return function($kirby, $pages, $page) {
 
 In our controller, the form evaluation starts once we receive a `POST` request. First, we check if a bot was stupid enough to get trapped in our honeypot. In this case, we send him back to the page and stop script execution.
 
-Next, we check if all form fields have been filled in according to our validation rules using the [`invalid()` helper](/docs/reference/helpers/invalid):
+Next, we check if all form fields have been filled in according to our validation rules using the [`invalid()` helper](/docs/reference/templates/helpers/invalid):
 
 - All fields are required and must be filled out.
 - The `email` field must contain a valid email address.
