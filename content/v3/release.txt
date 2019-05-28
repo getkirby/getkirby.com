@@ -74,7 +74,7 @@ Kirby 3 has a built in REST API. You can comfortably create and edit your conten
 
 In Kirby 3, you can mix file-based content with content from pretty much any other data source. Databases, APIs, spreadsheets, or anything else that's somehow parsable by PHP. In fact, most parts of our (link: docs/reference text: reference) are generated live from PHP reflections of our source code.
 
-(link: docs/cookbook/database/pages-from-database text: Learn more…)
+(link: docs/guide/database text: Learn more…)
 
 ## Asynchronous media API
 
@@ -140,4 +140,4 @@ If you need help with the new version, please visit the forum: https://forum.get
 
 ## How to upgrade Kirby 2
 
-For those of you who want to migrate your Kirby 2 site, we've created an (link: docs/cookbook/migration/sites text: upgrade guide).
+For those of you who want to migrate your Kirby 2 site, we've created an (link: docs/cookbook/setup/migrate-site text: upgrade guide).

@@ -51,7 +51,7 @@ With this setup, we keep the application process away from the job listings and 
 
 ## The job application page
 
-(link: docs/guide/content/creating-pages pages text: Create) an `applications` page with an `applications.txt` content file. For our means, we only need the title in the content file, the rest is up to you.
+(link: docs/guide/content/creating-pages text: Create) an `applications` page with an `applications.txt` content file. For our means, we only need the title in the content file, the rest is up to you.
 
 For use in the Panel, you can create a (glossary: blueprint text: blueprint) for the page. We will skip this step here.
 

@@ -6,4 +6,4 @@ Entry:
 A page refers to a folder in the file system that is accessible via an URL. The currently active page can be accessed via the `$page` variable. It gives you access to the page's data, attached files, subpages and more.
 
 ----
-Link: docs/guide/content/pages
+Link: docs/guide/content/creating-pages
