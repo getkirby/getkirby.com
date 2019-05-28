@@ -159,7 +159,9 @@
 
         
 
-        return fetch(url)
+        return fetch(url, {
+            cache: "no-store",
+          })
           .then((response) => response.json())
           .then((result) => {
             linkCheckOutput.innerHTML = `${++alreadyChecked}/${pageIds.length} pages checked.<br>${brokenLinksFound} broken links found so far`;
