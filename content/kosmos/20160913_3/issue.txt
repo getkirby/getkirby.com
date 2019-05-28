@@ -41,7 +41,7 @@ There are also some new recipes in the (link: docs/cookbook text: Cookbook) and 
 
 ## Kirby Tools
 
-- Do you happen to use the (link: https://atom.io text: Atom) editor? If so, your life as a Kirby developer will get a whole lot easier with the (link: https://github.com/medienbaecker/kirby-snippets text: Kirby Atom snippets) by Thomas Günther, which contain all methods from the Kirby (link: docs/cheatsheet text: Cheat Sheet).
+- Do you happen to use the (link: https://atom.io text: Atom) editor? If so, your life as a Kirby developer will get a whole lot easier with the (link: https://github.com/medienbaecker/kirby-snippets text: Kirby Atom snippets) by Thomas Günther, which contain all methods from the Kirby (link: docs/reference text: Cheat Sheet).
 
 ## JS
 

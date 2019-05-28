@@ -26,7 +26,7 @@ When getting a specific page via the [`page()` helper](/docs/reference/templates
 
 ## Content fields
 
-The `$page` class offers a magic caller for your (link: ocs/guide/content/fields text: content fields). Instead of getting them via e.g.
+The `$page` class offers a magic caller for your (link: docs/guide/content/fields text: content fields). Instead of getting them via e.g.
 
 ```php
 $page->content()->get('your_field')

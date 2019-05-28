@@ -26,7 +26,7 @@ Kirby 3 now requires PHP 7.1+. Please check if your server supports this PHP ver
 
 ### No Kirby CLI support
 
-The Kirby CLI is no longer compatible with Kirby 3. Kirby and extensions can instead be installed (link: docs/guide/installation text: manually), with (link: docs/cookbook/installation/git text: Git) or with (link: docs/cookbook/installation/composer text: Composer).
+The Kirby CLI is no longer compatible with Kirby 3. Kirby and extensions can instead be installed (link: docs/guide/installation text: manually), with (link: docs/cookbook/setup/git text: Git) or with (link: docs/cookbook/setup/composer text: Composer).
 
 
 ## Folder and file structure
@@ -68,7 +68,7 @@ Kirby\Cms\System::upgradeContent(__DIR__ . '/content');
 
 ### Delete accounts and avatars
 
-The Kirby 2 accounts and avatars are not compatible with Kirby 3. Please delete your `/site/accounts` and `assets/avatars` folders and install accounts from scratch. If that is not an option, because you have too many accounts, make sure to read the (link: docs/cookbook/migration/users text: user account migration) guide.
+The Kirby 2 accounts and avatars are not compatible with Kirby 3. Please delete your `/site/accounts` and `assets/avatars` folders and install accounts from scratch. If that is not an option, because you have too many accounts, make sure to read the (link: docs/cookbook/setup/migrate-users text: user account migration) guide.
 
 ### License
 
@@ -271,7 +271,6 @@ Email is now sent using PHPMailer. The way to set email presets and to send emai
 Route filters do no longer exist. Instead you can hook into the route event using (link: docs/guide/routing#before-and-after-hooks text: the `route:before` and `route:after` hooks).
 
 
-
 ### Authentication for frontend stuff
 
 In Kirby 3, authentication and permissions are now integrated in every method of the Kirby API. You can no longer just call `$page->delete()` for example without an authenticated user. That means the user must either be logged  in or you need another way to authenticate.
@@ -366,7 +365,7 @@ The toolkit has been completely rewritten, new methods have been added, others r
 | `Db`  | `Kirby\Database\Db`  |
 | `Detect` | `Kirby\CMS\System` |
 | `Dimensions`  | `Kirby\Image\Dimensions`  |
-| `Email`  | (link: docs/reference/email text: `Kirby\Email`) |
+| `Email`  | (link: docs/reference/@#email text: `Kirby\Email`) |
 | `Embed`   |  (link: docs/reference/templates/helpers text: YouTube, Vimeo and Gist helpers) |
 | `Error`  | `Kirby\Exception`  |
 | `ErrorReporting`  | `Kirby\Exception`  |
