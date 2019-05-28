@@ -1,4 +1,4 @@
-Title: How to upgrade Kirb 2 plugins
+Title: How to upgrade Kirby 2 plugins
 
 ----
 
