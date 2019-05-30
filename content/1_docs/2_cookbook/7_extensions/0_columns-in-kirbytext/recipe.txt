@@ -53,20 +53,19 @@ Our final result looks like this:
 <?php
 Kirby::plugin('kirby/columns', [
   'hooks' => [
-    'kirbytags:before' => function ($text) {
+    'kirbytags:before' => function ($text, array $data = []) {
 
-      $text = preg_replace_callback('!\(columns(…|\.{3})\)(.*?)\((…|\.{3})columns\)!is', function($matches) use($text) {
+      $text = preg_replace_callback('!\(columns(…|\.{3})\)(.*?)\((…|\.{3})columns\)!is', function($matches) use($text, $data) {
 
-        $columns        = preg_split('!(\\n|\r\n)\+{4}\s+(\\n|\r\n)!', $matches[2]);
+        $columns        = preg_split('!(\n|\r\n)\+{4}\s+(\n|\r\n)!', $matches[2]);
         $html           = [];
-        $classItem      = option('kirby.columns.item', 'column');
-        $classContainer = option('kirby.columns.container', 'columns');
+        $classItem      = $this->option('kirby.columns.item', 'column');
+        $classContainer = $this->option('kirby.columns.container', 'columns');
 
-        foreach($columns as $column) {
-            $field  = new Field(page(), '', trim($column));
-            $html[] = '<div class="' . $classItem . '">' . kirbytext($field) . '</div>';
+        foreach ($columns as $column) {
+            $html[] = '<div class="' . $classItem . '">' . $this->kirbytext($column, $data) . '</div>';
         }
-
+        
         return '<div class="' . $classContainer . '">' . implode($html) . '</div>';
 
       }, $text);
@@ -157,31 +156,15 @@ With this, we get a `$columns` array with text separated into chunks for our col
 
 The column tags are only useful if an editor can use KirbyText and Markdown inside of them. To achieve this, we have to manually parse the content for each column as KirbyText.
 
-A simplified way to do this would be:
+We can achieve this by passing each column to the `$kirby->kirbytext()` method (`$this` in this context references the Kirby object).
 
 ```php
 $html = [];
 
-foreach($columns as $column) {
-  $html[] = '<div class="column">' . kirbytext($column) . '</div>';
-}
-
-```
-
-But it gets a bit more complex here. KirbyText relies on the related page object in order to get a few things right, such as related images, urls, data, etc. This is why Kirby uses Field objects instead of simple strings for any content that comes from pages and will be parsed with KirbyText. Those Field objects contain the relation to the Page object and make sure that everything is linked correctly.
-
-If we simply call the `kirbytext()` helper on a regular string like in the example above, the relation to the original Page object would be lost and it would no longer be possible to embed images, which are stored in the content folder of the Page, etc.
-
-That's why we need to wrap the string in a new Field object and connect it to the Page object again:
-
-```php
-foreach($columns as $column) {
-  $field  = new Field(page(), '', trim($column));
-  $html[] = '<div class="column">' . kirbytext($field) . '</div>';
+foreach ($columns as $column) {
+    $html[] = '<div class="' . $classItem . '">' . $this->kirbytext($column, $data) . '</div>';
 }
 ```
-
-We use the `page()` helper to fetch the current page and pass it as the first parameter to the new Field object. The second argument is normally used for the field key, but is not needed in this case. As the last parameter we pass the string from the `$columns` array and trim it to remove any leading or trailing spaces.
 
 ### The final HTML
 
