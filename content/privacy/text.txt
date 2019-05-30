@@ -99,7 +99,7 @@ Please tell us first, so we have a chance to address your concerns. If we fail i
 
 ### Cookies
 
-Our website **does not** set any cookies.
+Our website **does not** set any cookies by default. Cookies are only set by the [shop](#shop) when visiting the "Buy" page or when using an affiliate link to visit our website.
 
 ### Analytics and tracking
 
