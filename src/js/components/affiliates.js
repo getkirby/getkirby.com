@@ -1,39 +1,36 @@
-const AFFILIATE_STORAGE_KEY = "kirby_affiliate_id";
+/* global Paddle */
+import loadjs from "loadjs";
 
-function parseQuery(search) {
-  const hashes = search.slice(search.indexOf("?") + 1).split("&");
-  let params = {};
-  hashes.map((hash) => {
-      const [key, val] = hash.split("=");
-      params[key] = decodeURIComponent(val);
-  });
-
-  return params;
-}
+const PADDLE_SCRIPT_URL = "https://cdn.paddle.com/paddle/paddle.js";
+// ?status=accepted&expires=1561800975&seller=1129&affiliate=35732&link=1546&p_tok=81a1ce11-bc60-4e82-a105-b004ec3d2e2d
 
 function setAffiliate() {
 
-  const query = parseQuery(window.location.search);
-
-  if (typeof query.affiliate === "undefined") {
-    // return, if affiliate parameter was not passed to the page
+  if ("Paddle" in window || document.querySelector(`script[src="${PADDLE_SCRIPT_URL}"]`) !== null) {
+    // don’t do anything further, if the current page already contains
+    // the Paddle.js script.
     return;
   }
 
-  if (affiliate === "") {
-    // remove affiliate key, when an empfy `affiliate` parameter was passed to the page
-    sessionStorage.removeItem(AFFILIATE_STORAGE_KEY);
+  const p = new URLSearchParams(window.location.search);
+
+  if (p.has("status") &&
+      p.has("expires") &&
+      p.has("seller") &&
+      p.has("affiliate") &&
+      p.has("link") &&
+      p.has("p_tok")) {
+
+    loadjs(PADDLE_SCRIPT_URL, () => {
+      Paddle.Setup({
+        vendor: 1129
+      });
+    });
   }
-
-  const affiliate = parseInt(query.affiliate, 10);
-
-  if (isNaN(affiliate) || affiliate === 0) {
-    // abort, if passed affiliate value is not a number or zero
-    return;
-  }
-
-  // store affiliate id in session storage
-  sessionStorage.setItem(AFFILIATE_STORAGE_KEY, affiliate);
 }
 
-setAffiliate();
+// Only execute after page was loaded and if browser
+// supports `URLSearchParams` interface (i.e. not in IE 11)
+if ("URLSearchParams" in window) {
+  window.addEventListener("load", setAffiliate);
+}
