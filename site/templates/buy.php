@@ -49,30 +49,19 @@
   </main>
 
   <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
-  <script type="text/javascript">
-   Paddle.Setup({
-      vendor: 1129,
+  <script>
+  
+  Paddle.Setup({
+    vendor: 1129,
+  });
+
+  document.getElementById("cta").addEventListener("click", function (e) {
+    e.preventDefault();
+    Paddle.Checkout.open({
+      product: 499826
     });
+  }, false);
 
-
-    document.getElementById("cta").addEventListener("click", function (e) {
-      e.preventDefault();
-
-      var params = {
-        product: 499826
-      };
-
-      // try to get affiliate id from session storage
-      var affiliate_id = sessionStorage.getItem("kirby_affiliate_id");
-
-      if (affiliate_id !== null) {
-        params["affiliates"] = [affiliate_id];
-      }
-
-      console.log("params", params);
-
-      Paddle.Checkout.open(params);
-    }, false);
   </script>
 
 <?php snippet('footer') ?>
