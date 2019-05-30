@@ -99,7 +99,7 @@ If you delete a language, all of its content files are deleted. This can even re
 
 By default, the URL of your site changes and the language code is added to the URL. If you want to keep the root URL for the default language, you can set the URL manually using the `url` option:
 
-```php "/site/langugages/en.php"
+```php "/site/languages/en.php"
 <?php
 
 return [
