@@ -1,8 +1,8 @@
 /* global Paddle */
 import loadjs from "loadjs";
 
+const PADDLE_VENDOR_ID = 1129;
 const PADDLE_SCRIPT_URL = "https://cdn.paddle.com/paddle/paddle.js";
-// ?status=accepted&expires=1561800975&seller=1129&affiliate=35732&link=1546&p_tok=81a1ce11-bc60-4e82-a105-b004ec3d2e2d
 
 function setAffiliate() {
 
@@ -14,16 +14,15 @@ function setAffiliate() {
 
   const p = new URLSearchParams(window.location.search);
 
-  if (p.has("status") &&
-      p.has("expires") &&
-      p.has("seller") &&
-      p.has("affiliate") &&
-      p.has("link") &&
-      p.has("p_tok")) {
-
+  if (p.has("status") && p.has("expires") &&
+      p.has("seller") && p.has("affiliate") &&
+      p.has("link") && p.has("p_tok")) {
+    // load paddle.js and set vendor id, if coming from an affiliate
+    // link, so the script can store affiliate tracking information
+    // in a cookie.
     loadjs(PADDLE_SCRIPT_URL, () => {
       Paddle.Setup({
-        vendor: 1129
+        vendor: PADDLE_VENDOR_ID,
       });
     });
   }
