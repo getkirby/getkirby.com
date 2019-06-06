@@ -7,15 +7,18 @@
         <div class="pricing">
           <section>
 
-            <?php if (empty($sale) === false): ?>
-            <h2 class="h1 -mb:0"><del>€<?= $price ?></del> €<?= $sale ?> <small>per site</small></h2>
-            <?php else: ?>
-            <h2 class="h1 -mb:0">€<?= $price ?> <small>per site</small></h2>
-            <?php endif ?>
+            <header class="price-header -mb:medium" style="visibility: hidden">
+              <?php if (empty($sale) === false): ?>
+              <h2 class="h1 -mb:0"><del>€<?= $price ?></del> €<?= $sale ?> <small>per site</small></h2>
+              <?php else: ?>
+              <h2 class="h1 -mb:0"><span class="price">€<?= $price ?></span> <small>per site</small></h2>
+              <?php endif ?>
 
-            <p class="vat description">
-              + VAT if applicable
-            </p>
+              <p class="vat description">
+                + VAT if applicable
+              </p>
+            </header>
+
             <p class="text">We like to keep things simple: One price, all features, no fees, no subscription.</p>
             <?php if (empty($saleText) === false): ?>
             <p class="text sale"><?= $saleText ?></p>
@@ -49,19 +52,23 @@
   </main>
 
   <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
-  <script>
-  
-  Paddle.Setup({
-    vendor: 1129,
-  });
-
-  document.getElementById("cta").addEventListener("click", function (e) {
-    e.preventDefault();
-    Paddle.Checkout.open({
-      product: 499826
+  <script type="text/javascript">
+    Paddle.Setup({
+      vendor: 1129,
     });
-  }, false);
 
+    Paddle.Product.Prices(499826, function(prices) {
+      price = prices.price.net.replace(".00", "").replace("US$", "$");
+      document.querySelector(".price").innerText = price;
+      document.querySelector(".price-header").style.visibility = "visible";
+    });
+
+    document.getElementById("cta").addEventListener("click", function (e) {
+      e.preventDefault();
+      Paddle.Checkout.open({
+        product: 499826
+      });
+    }, false);
   </script>
 
 <?php snippet('footer') ?>
