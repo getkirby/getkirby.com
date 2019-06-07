@@ -50,7 +50,7 @@ $kirby->impersonate('kirby');
 
 // Define your collection
 // Don't use `$site->index()` for thousands of pages
-$collection = $kirby->site()->index()->files();
+$collection = $kirby->site()->index();
 
 // set the fields to be ignored
 $ignore = ['title', 'slug', 'template', 'sort'];
@@ -102,6 +102,8 @@ function cleanUp($collection, $ignore = null, string $lang = null) {
             } catch (Exception $e) {
                 echo Html::tag('p', $item->id() . ': ' .$e->getMessage());
             }
+        } else {
+            echo Html::tag('p', 'Nothing to clean up in ' . $item->id());
         }
     }
 }
