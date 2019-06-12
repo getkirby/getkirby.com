@@ -50,6 +50,25 @@ return [
 ];
 ```
 
+## Overriding default KirbyTags
+
+You can override Kirby's default KirbyTags by creating a plugin with the same KirbyTag name as the original.
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('your/plugin', [
+    'tags' => [
+        'image' => [
+            'attr' => [
+                // list of attributes
+            ],
+            'html' => function($tag) {
+                // your code here
+            }
+        ]
+    ]
+]);
+```
+
 ## Adding attributes
 
 If you want to add attributes, you can add them as an `attr` array like this:
@@ -170,3 +189,7 @@ Kirby::plugin('your/plugin', [
 	]
 ]);
 ```
+
+## Reusing parts of existing KirbyTags
+
+You can also (link: docs/cookbook/extensions/extending-kirbytags text: reuse parts of the original KirbyTag) in your custom tags.
