@@ -169,7 +169,7 @@ echo $item->title();
 
 ## Get the index number of an element in the collection
 
-In some situtation it is useful to get the index number of an element in the collection, for example to add the number to a class name for a gallery or something like this. This can be achieved with the `indexOf()` method:
+In some situations it is useful to get the index number of an element in the collection, for example to add the number to a class name for a gallery or something like this. This can be achieved with the `indexOf()` method:
 
 ```php
 <?php $items = $page->children()->listed(); ?>
