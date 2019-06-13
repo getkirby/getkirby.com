@@ -211,7 +211,6 @@ content/
 
 We can create those examples in our text files like this:
 
-```
 ```filesystem
 content/
   projects/
