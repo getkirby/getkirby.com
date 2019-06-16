@@ -91,4 +91,4 @@ $page->createChild([
 ]);
 ```
 
-The above code only works if you are either logged in and have the necessary permissions for the action, or if you authenticate the user programmatically to perform the action (link: docs/guide/templates/php-api#permissions text: Learn more about permissions and impersonatig users).
+The above code only works if you are either logged in and have the necessary permissions for the action, or if you authenticate the user programmatically to perform the action (link: docs/guide/templates/php-api#permissions text: Learn more about permissions and impersonating users).
