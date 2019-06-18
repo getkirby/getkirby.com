@@ -35,6 +35,7 @@ These addresses can be fetched and parsed in your templates with the `yaml()` me
 
 ```php
 <?php foreach ($page->addresses()->yaml() as $address): ?>
+<div>
   <div class="address">
     <?= $address['street'] ?><br />
     <?= $address['zip'] ?> <?= $address['city'] ?>
