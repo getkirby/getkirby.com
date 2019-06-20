@@ -1,4 +1,4 @@
-Title: Publishing workflow
+Title: Editing & publishing workflow
 
 ----
 
@@ -9,9 +9,22 @@ Intro: Pages can have different states in Kirby, allowing you to control who has
 
 Text:
 
-Kirby's page states give you full control over your publishing workflow. They allows you to define access to content, to filter content by status criteria and much more.
+## Content locking
+
+<since v="3.2.0">
+
+Kirby automatically locks pages that are currently being edited by another user, making working in teams a lot safer. If you open a page that is edited by another user, you are informed about the editing user and cannot overwrite their changes.
+
+(picture: content-locking.png)
+
+If the editing user doesn't save their changes within 2 minutes, you can unlock the page. If you do so, the editing user is informed that their changes have been overwritten and can then download them to edit the unsaved changes manually.
+
+</since>
 
 ## Page states
+Kirby's page states give you full control over your publishing workflow. They allows you to define access to content, to filter content by status criteria and much more.
+
+
 
 Let's look at what the three states mean again before we go into details:
 
