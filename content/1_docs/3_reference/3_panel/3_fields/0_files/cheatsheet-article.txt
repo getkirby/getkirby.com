@@ -31,8 +31,9 @@ fields:
 
 (field-options: files)
 
-### Limits for the number of files
+## Limit the number of files
 
+### Min and max files
 You can set the minimum/maximum number of files that can be selected:
 
 ```yaml
@@ -56,7 +57,7 @@ fields:
     multiple: false
 ```
 
-### Layout
+## Layout
 
 You can switch between `list` and `card` layout. Default is `list` layout.
 
@@ -68,11 +69,11 @@ fields:
     layout: cards
 ```
 
-### Querying files
+## Querying files
 
 The `query` option let's you limit the set of files to be included. When not set, it defaults to all files of the current page.
 
-#### Limit the set to images
+### Limit the set to images
 
 ```yaml
 gallery:
@@ -82,7 +83,7 @@ gallery:
 
 You can use all file types available in Kirby here (`images`, `documents`, `videos`, `audio` and `code`).
 
-#### Querying files from other pages
+### Querying files from other pages
 
 You can get as complex as you like, e.g. get all images of all children of the `photography` page that use the `cover` template:
 
@@ -93,6 +94,44 @@ gallery:
 ```
 
 You can find more example how you can use the query language in the (link: docs/guide/blueprints/query-language text: guide).
+
+## Upload options
+
+<since v="3.2.0">
+
+By default, the files field allows you to upload files. You can define the `Add`button behavior with the `uploads` option: When clicking on the `Add` button, you can either select a file and/or upload a file (which is then automatically selected).
+
+### Prevent uploading
+
+You can set the `upload` property to false to prevent file uploads:
+
+```yaml
+gallery:
+  type: files
+  uploads: false
+```
+
+### Destination and template
+
+By default all files will be uploaded to the current page and without a predefined template. With the additional options you can fetch files from anywhere and upload them to specific pages. You can also control which file template should be assigned by default:
+
+```yaml
+gallery:
+  type: files
+  uploads: 
+    parent: site
+    templates: files-upload
+```
+
+If you want to upload to the current page and only assign a template, you can directly assign it to the `uploads` property:
+
+```yaml
+gallery:
+  type: files
+  uploads: files-upload
+```
+
+</since>
 
 ## How to use in templates/snippets
 
