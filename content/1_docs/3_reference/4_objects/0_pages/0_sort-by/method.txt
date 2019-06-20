@@ -1,0 +1,22 @@
+Text: 
+
+## Example
+
+```php
+<ul>
+  <?php foreach($page->children()->sortBy('title', 'desc') as $subpage): ?>
+  <li>
+    <a href="<?= $subpage->url() ?>">
+      <?= $subpage->title()->html() ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```
+It's also possible to sort by more than one field:
+
+```php
+$articles = page('notes')->children()->sortBy('date', 'desc', 'time', 'asc');
+```
+
+For more complex sorting examples, check out our (link: docs/cookbook/content/sorting text: "Sorting" recipe)
