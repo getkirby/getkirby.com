@@ -69,6 +69,23 @@ fields:
     max: 3
 ```
 
+
+
+### Query users
+
+<since v="3.2.0">
+You can use the `query` property to limit the users that can be selected:
+
+```yaml
+fields:
+  author:
+    label: Author
+    type: users
+    query: kirby.users.filterBy("role", "editor")
+```
+
+</since>
+
 ## How to use in templates/snippets
 
 ### Single user
