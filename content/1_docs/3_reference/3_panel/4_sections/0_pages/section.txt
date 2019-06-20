@@ -308,3 +308,4 @@ You can also define the minimum number of pages, that need to be added in order 
 min: 2
 ```
 
+(docs: sections/conditional-sections)
