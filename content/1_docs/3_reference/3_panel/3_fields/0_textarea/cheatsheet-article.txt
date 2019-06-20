@@ -118,3 +118,17 @@ textarea:
 </since>
 
 (docs: panel-field-max-and-min field: textarea)
+
+## Monospace
+
+<since v="3.2.0">
+You can set the `font` option to `monospace`, for example for fields that contain code:
+
+```yaml
+fields: 
+  text: 
+    label: Text
+    type: textarea
+    font: monospace
+```    
+</since>
