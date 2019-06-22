@@ -90,7 +90,7 @@ You can define the columns that are shown in the table. This is especially usefu
 
 | Option | Value | Description |
 |--------|-------|-------------|
-| `width`| `1/2`, `1/3`, `1/4`, `2/3`, `3/4` | Set width of column
+| `width`| `1/2`, `1/3`, `1/4`, `2/3`, `3/4` (any fraction since v3.2.0)| Set width of column
 | `align` | `left`, `center`, `right` | Set text alignment
 | `before`| `string` | Set text to prepend value
 | `after` | `string` | Set text to append value
@@ -120,6 +120,33 @@ fields:
 			price:
 				type: number
 ```
+<since v="3.2.0">
+Structure columns ca be set to any fraction and will be automatically calculated into the right width.
+
+```yaml
+fields: 
+  mystructure: 
+    label: Structure
+    type: structure
+    columns: 
+      title: 
+        width: 3/5		
+      images: 
+        width: 1/5
+      price: 
+        width: 1/10
+    fields: 
+      title: 
+        label: A
+        type: text
+      images: 
+        label: B
+        type: text
+      price: 
+        label: C
+        type: text
+```        
+</since>
 
 ## Preview of fields in the table
 
