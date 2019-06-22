@@ -60,6 +60,16 @@ Text:
 (\file: companysecrets.pdf class: download)
 ```
 
+### Download link with `download` attribute
+
+<since v="3.2.0">
+</since>
+To avoid direct downloads you can set the `download` option to `false`:
+
+```kirbytext
+(\file: companysecrets.pdf class: download)
+```
+
 
 
 
