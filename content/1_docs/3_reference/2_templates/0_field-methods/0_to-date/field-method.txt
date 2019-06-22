@@ -11,4 +11,14 @@ Text:
 ```php
 <?= $page->createdAt()->toDate('d.m.Y') ?>
 ```
+
+### With fallback parameter
+
+<since v="3.2.0">
+
+```php
+<?= $page->createdAt()->toDate('d.m.Y', 'now' ?>
+```
+</since>
+
 Check out PHP's date function docs for all available formatting options: http://php.net/manual/en/function.date.php
