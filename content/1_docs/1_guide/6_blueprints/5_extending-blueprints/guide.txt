@@ -280,3 +280,34 @@ tabs:
     sections:
       # custom sections setup for the content tab
 ```
+
+## Unset parts of extended blueprints
+
+<since v="3.2.0">
+When you reuse mixins for blueprints, such as field definitions or entire tabs, you can unset the parts that you don't want/need.
+
+
+```yaml "/site/blueprints/tabs/seo.yml"
+
+label: SEO
+icon: search
+fields:
+  seoTitle:
+    label: SEO Title
+    type: text
+  seoDescription:
+    label: SEO Description
+    type: text
+```
+
+Then in the extending blueprint …
+
+```yaml
+tabs:
+  seo: 
+    extends: tabs/seo
+    fields:
+      seoDescription: false
+```
+
+</since>
