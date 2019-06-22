@@ -1,0 +1,26 @@
+Excerpt: Set language for slug generator
+
+----
+
+Text:
+
+## Set language for slug generator
+
+<since v="3.0.3">
+You can set a language for Kirby's slug generator, so that it uses the language specific settings:
+
+```php "/site/config/config.php"
+return [
+  'slugs' => 'de'
+];
+
+```
+
+Additionally, you can define custom rules:
+
+```php  "/site/config/config.php"
+Str::$language = [
+  'ß' => 'sz' 
+];
+```
+</since>
