@@ -127,6 +127,26 @@ options:
   update: true
   delete: false
 ```
+<since v="3.2.0">
+You can control each option for pages, files and users in blueprints with fine-grained permissions based on user role:
+
+```yaml
+options: 
+  delete: 
+    admin: true
+    editor: false
+```
+
+You can also use a wildcard to change the default for all roles and then assign exceptions to individual roles:
+
+```yaml
+options:
+  update:
+    *: false
+    editor: true
+```    
+
+</since>
 ## Even more control with hooks
 
 If the blueprint-based permission settings are too limiting for your project, you can get more flexibility by creating your own permission checks with `before` hooks for various actions.

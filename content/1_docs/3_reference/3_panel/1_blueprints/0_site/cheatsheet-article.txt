@@ -41,3 +41,4 @@ With options, you can control all the site actions that should or should not be 
 | `changeTitle` | `true`/`false` |
 | `update` | `true`/`false` |
 
+(docs: permissions/option-permissions)

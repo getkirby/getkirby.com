@@ -146,6 +146,8 @@ With options, you can control all the page actions that should or should not be 
 | `read` | `true`/`false` |
 | `update` | `true`/`false` |
 
+(docs: permissions/option-permissions)
+
 ## Preview
 
 You can change the link of the preview button or disable it entirely with the option setting.
