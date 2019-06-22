@@ -228,6 +228,55 @@ In case of multi-language sites you must call the `$site->visit()` method in ord
 ]
 ```
 
+<since v="3.2.0">
+
+In multi-lang installations, you can set a language scope for the route:
+
+```php
+return [
+    'routes' => [
+        [
+            'pattern' => '(:any)',
+            'language' => 'en',
+            'action' => function ($language, $slug) {
+    
+                if (page($slug)) {
+                    return $this->next();
+                }
+    
+                if ($page = page('notes/' . $slug)) {
+                    return $page;
+                }
+    
+                return false;
+    
+            }
+        ],
+    ]
+];
+```
+
+To make sure that translated slugs are automatically handled by Kirby, you can set a page scope:
+
+```php
+return [
+    'routes' => [
+        [
+            'pattern' => 'tag/(:any)',
+            'language' => '*',
+            'page' => 'notes',
+            'action' => function ($language, $page, $filter) {		
+              return $page->render([
+                'filter' => $filter
+              ]);		
+            }
+        ],
+    ]
+];
+```
+In this example, we return the `notes` page with the filter data. In your controller, you can now (link: docs/guide/templates/controllers#arguments-from-page-render-in-route text: use this filter to return only the children with the given tag).
+
+</since>
 ## `next()`
 
 <since v="3.0.3">
