@@ -13,3 +13,20 @@ Text:
 <?php $header = snippet('header', [], true);
 <?php $header = snippet('header', ['class' => 'blog'], true);
 ```
+
+## Snippet alternatives
+
+<since v="3.2.0">
+You can define an array of snippet alternatives if the first snippet cannot be found:
+
+```php
+<?php snippet(['snippet1', 'snippet2', 'snippet3']) ?>
+```
+
+This is useful if you want to provide fallbacks for a snippet based on page input, in case the snippet does not exist:
+
+```php
+<?php snippet(['articles/' . $page->postType(), 'articles/default']) ?>
+```
+
+</since>
