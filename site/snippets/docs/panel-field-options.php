@@ -26,6 +26,17 @@ query: page.links.toStructure
 
 You can start at the `site`, current `page`, `users` collection or the `kirby` instance to run your query. The result must be a collection of `pages`, `files`, `users` or a structure object
 
+<since v="3.2.0">
+
+You can use array syntax and nested queries in Kirby's query syntax.
+
+```yaml
+query: site.index.filterBy("template", "in", ["note", "album"]);
+query: kirby.collection("some-collection").not(kirby.collection("excluded-collection"))
+```
+
+</since>
+
 ### Getting options from all siblings or the index
 
 ```yaml

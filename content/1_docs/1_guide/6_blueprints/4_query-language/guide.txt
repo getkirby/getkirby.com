@@ -130,3 +130,19 @@ info: "{{ page.from.toDate('d.m.Y') }} - {{ page.to.toDate('d.m.Y') }} / {{ page
 ```yaml
 info: "{{ file.dimensions }}"
 ```
+
+## Extended query syntax
+
+<since v="3.2.0">
+
+You can use array syntax and nested queries in Kirby's query syntax.
+
+```yaml
+# arrays
+query: site.index.filterBy("template", "in", ["note", "album"]);
+
+# nested queries
+query: kirby.collection("some-collection").not(kirby.collection("excluded-collection"))
+```
+
+</since>
