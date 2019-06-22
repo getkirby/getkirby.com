@@ -90,6 +90,8 @@ With options, you can control all the file actions that should or should not be 
 | `replace` | `true`/`false`  |
 | `update` | `true`/`false`  |
 
+(docs: permissions/option-permissions)
+
 ## Examples
 
 You can find examples of file blueprints in the (link: docs/reference/panel/samples/file text: samples section).
