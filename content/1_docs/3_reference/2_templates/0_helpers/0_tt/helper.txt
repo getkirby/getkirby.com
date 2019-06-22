@@ -1,0 +1,22 @@
+Text:
+
+## Example:
+
+```php "/site/languages/en.php"
+return [
+  'code' => 'en',
+  'default' => false,
+  'direction' => 'ltr',
+  'locale' => 'en_US',
+  'name' => 'English',
+  'translations' => [
+    'alert' => 'Attention: { message }'  
+  ]
+];
+```
+
+In your templates…
+
+```php
+<?= tt('alert', ['message' => 'Something is not right']) ?>
+```
