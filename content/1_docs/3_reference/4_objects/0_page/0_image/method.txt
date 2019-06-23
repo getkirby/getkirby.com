@@ -36,3 +36,4 @@ Kirby considers the following file types as images:
 - ai
 - eps
 - ps
+- webp (since v3.2.0)

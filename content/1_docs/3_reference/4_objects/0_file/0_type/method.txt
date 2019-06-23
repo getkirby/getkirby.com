@@ -45,7 +45,7 @@ endif;
 
 Type      | Extensions
 -         | -
-image     | jpg, gif, png, svg, ico, tiff, bmp, psd, ai
+image     | jpg, gif, png, svg, ico, tiff, bmp, psd, ai, webp (since v3.2.0)
 document  | md, pdf, doc, docx, xls, xlsx, ppt, csv, rtf
 archive   | zip, tar, gz, gzip, tgz
 code      | js, css, html, xml, json
