@@ -2,6 +2,10 @@ Title: User models
 
 ----
 
+Since: 3.2.0
+
+----
+
 Text:
 
 User models are registered with the `userModels` extension.

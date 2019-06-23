@@ -2,6 +2,10 @@ Title: User methods
 
 ----
 
+Since: 3.2.0
+
+----
+
 Text:
 
 User methods are registered with the `userMethods` extension.
