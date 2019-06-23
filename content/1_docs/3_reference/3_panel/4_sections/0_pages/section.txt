@@ -122,6 +122,42 @@ The default preview image is the first image in the folder.
 
 If you need more fine-grained control you can setup the image for each page with further options.
 
+### Preview image from assets folder
+
+<since v="3.2.0">
+
+You can also provide an image from the assets folder via a page model or custom page method, for example as a fallback if the page has no images:
+
+```php "/site/models/album.yml"
+<?php
+
+class AlbumPage extends Page
+{
+    public function previewImage()
+    {
+        if ($image = $page->images()->first()) {
+          return $image;
+        }
+        if (file_exists(kirby()->root('assets') . "/assets/images/default.jpg")) {
+            return new Asset("assets/images/default.jpg");
+        }
+        return false;
+        
+    }
+}
+```
+
+And then in your blueprint
+
+```yaml
+image: page.previewImage
+```
+<info>
+Note that a model only works for pages that share the same blueprint. For pages with different blueprints, use a (link: docs/reference/plugins/extensions/page-methods text: custom page method) instead.
+</info>
+
+</since>
+
 ### Show icon instead of image
 
 To display the icon set in the page blueprint or a default icon instead of a preview image, you can set the `image`option to `false`:
