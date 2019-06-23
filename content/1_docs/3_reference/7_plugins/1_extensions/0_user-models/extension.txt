@@ -1,0 +1,26 @@
+Title: User models
+
+----
+
+Text:
+
+User models are registered with the `userModels` extension.
+
+User models extend Kirby's default user object per role. Methods that you define in a user model are available everywhere in Kirby where you call a user of the role for which they were defined.
+
+```php "/site/plugins/user-models/index.php"
+class EditorUser extends User
+{
+    public function profile() {
+        return page('profiles')->find($this->username());
+    }
+}
+
+Kirby::plugin('my/plugin', [
+    'userModels' => [
+        'editor' => 'EditorUser'
+    ],
+]);
+```
+
+In user models you can define your own methods for a user role, or even override standard user methods.
