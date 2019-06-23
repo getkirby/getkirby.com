@@ -32,6 +32,16 @@ return [
 ];
 ```
 
+The following cache drivers are available:
+
+| Cache Driver | Description |
+| ---- | ---- |
+| FileCache | File System Cache Driver |
+| ApcuCache | Driver for Apcu cache |
+| MemCached | Driver for Memcached cache server |
+| MemoryCache | Driver for caching the current request in memory |
+| NullCache | Dummy Cache Driver (does not do any caching) |
+
 You can also set a registered custom cache driver here. Check out the plugin reference (link: docs/reference/plugins/extensions/cache-drivers text: how to create a custom cache driver).
 
 <info>
