@@ -1,0 +1,55 @@
+Title: Users methods
+
+----
+
+Text:
+
+Users methods are registered with the `usersMethods` extension.
+
+## Default users methods
+
+**For a full (link: docs/reference/#users text: list of default users methods), please check out the Reference.**
+
+<info>Be aware that you cannot override these default users methods with any custom users method.</info>
+
+## Getting started
+
+You can extend the set of defined users methods in a plugin file.
+
+```php "/site/plugins/user-methods/index.php"
+Kirby::plugin('my/plugin', [
+    'usersMethods' => [
+         'withArticles' => function () {
+            return $this->articles()->toPages()->isNotEmpty();
+        }
+    ]
+]);
+```
+
+This example shows the basic architecture of a users method. You define the method name with the key for the `usersMethods` extension array. `$this` in the callback function refers to the `$users` object.
+
+The example will return all users where the `articles` field is not empty.
+
+## Working with method arguments
+
+In some cases it might be helpful to be able to pass arguments to the method:
+
+You can define arguments for a method like this:
+
+```php "/site/plugins/user-methods/index.php"
+Kirby::plugin('my/plugin', [
+    'usersMethods' => [
+        'withArticles' => function ($postType = null) {
+            return $this->articles()->toPages()->filterBy('type', $postType)->isNotEmpty();
+        }
+    ]
+]);
+```
+
+And then use it like this:
+
+```php
+<?= $users->withArticles('video') ?>
+```
+
+This example will return all users with video post type articles.
