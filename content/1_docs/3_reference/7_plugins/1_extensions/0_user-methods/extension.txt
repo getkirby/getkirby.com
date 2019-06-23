@@ -1,0 +1,52 @@
+Title: User methods
+
+----
+
+Text:
+
+User methods are registered with the `userMethods` extension.
+
+## Default user methods
+
+**For a full (link: docs/reference/#user text: list of default user methods), please check out the Reference.**
+
+<info>Be aware that you cannot override these default user methods with any custom user method. If you want to override default methods, you can use a (link: docs/reference/plugins/extensions/user-models text: user model) instead.</info>
+
+## Getting started
+
+You can extend the set of defined user methods in a plugin file.
+
+```php "/site/plugins/user-methods/index.php"
+Kirby::plugin('my/plugin', [
+    'userMethods' => [
+        'fullname' => function () {
+            // provided there are firstname and lastname fields in the user blueprints
+            return $this->firstname() . ' ' . $this->lastname();
+        }
+    ]
+]);
+```
+
+This example shows the basic architecture of a user method. You define the method name with the key for the `userMethods` extension array. `$this` in the callback function refers to the `$user` object.
+
+## Working with method arguments
+
+In some cases it might be helpful to be able to pass arguments to the method:
+
+You can define arguments for a method like this:
+
+```php "/site/plugins/user-methods/index.php"
+Kirby::plugin('my/plugin', [
+    'userMethods' => [
+        'greetUser' => function ($text = 'Hello') {
+            return $text . ', ' . $this->username();
+        }
+    ]
+]);
+```
+
+And then use it like this:
+
+```php
+<?= $user->greetUser('Dear') ?>
+```
