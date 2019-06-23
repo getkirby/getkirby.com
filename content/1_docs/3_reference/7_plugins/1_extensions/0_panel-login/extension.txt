@@ -1,0 +1,51 @@
+Title:  Panel login
+
+----
+
+Since: 3.2.0
+
+----
+Text:
+
+With the  `login` plugin type you can  swap Kirby's default login screen and add your own. This is perfect when you want to implement your own authentication methods.
+
+## Example:
+
+```js "index.js"
+
+import LoginScreen from "./components/LoginScreen.vue";
+
+panel.plugin('my/auth', {
+  login: LoginScreen
+});
+```
+
+```js "LoginScreen.vue"
+<template>
+  <form @submit.prevent="login">
+    <k-fieldset :fields="fields" @submit="login"></k-fieldset>
+    <k-button type="submit" icon="check">Authenticate</k-button>
+  </form>
+</template>
+
+<script>
+export default {
+  computed: {
+    fields() {
+      return {
+        phone: {
+          placeholder: "+49 ",
+          label: "Phone",
+          type: "tel"
+        }
+      }
+    }
+  },
+  methods: {
+    login() {
+      /** Send 2FA auth link **/
+    }
+  }
+};
+</script>
+```
