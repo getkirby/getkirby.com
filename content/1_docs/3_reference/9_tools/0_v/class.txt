@@ -1,1 +1,7 @@
 Class: Kirby\Toolkit\V
+
+----
+
+Text:
+
+You can find the set of all available validators in the (link: docs/reference/system/validators text: Validators reference).
