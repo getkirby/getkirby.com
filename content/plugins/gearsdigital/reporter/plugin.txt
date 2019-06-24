@@ -1,0 +1,13 @@
+Title: Reporter
+
+----
+
+Repository: https://github.com/gearsdigital/kirby-reporter/
+
+----
+
+Category: panel
+
+----
+
+Description: Report issues to Github and Gitlab with ease – directly from the panel!
