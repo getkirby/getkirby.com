@@ -67,7 +67,7 @@ Text:
 To avoid direct downloads you can set the `download` option to `false`:
 
 ```kirbytext
-(\file: companysecrets.pdf class: download)
+(\file: companysecrets.pdf download: false)
 ```
 
 
