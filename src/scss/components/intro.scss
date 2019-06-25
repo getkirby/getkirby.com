@@ -11,7 +11,7 @@
   letter-spacing: 0;
 }
 
-.intro a::after {
+.intro :not(code) > a::after {
   color: $color-yellow;
   content: " ›";
 }

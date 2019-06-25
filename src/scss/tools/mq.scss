@@ -1,5 +1,7 @@
 /* stylelint-disable block-closing-brace-empty-line-before, at-rule-empty-line-before */
 
+
+//
 //  mµ
 //
 //  A simple library for handling media queries
@@ -8,6 +10,7 @@
 //  @author Fabian Michael <hallo@fabianmichael.de>
 //  @license MIT
 //
+
 //  Define your breakpoints here. Must be either in px
 //  or em units. Breakpoints will be converted to em by
 //  the library for best consistency across different
@@ -33,7 +36,8 @@ $mq-print-pseudo-rules: true !default;
 // Debug settings
 $mq-debug: false !default;
 $mq-debug-z-index: 10000 !default;
-$mq-debug-selector: "body::after" !default;
+$mq-debug-selector: 'body::after' !default;
+
 
 //  Mixin for generating gte media queries
 //
@@ -72,35 +76,49 @@ $mq-debug-selector: "body::after" !default;
   // Initialize variables
   $min-width: 0;
   $max-width: 0;
-  $media-query: "";
+  $media-query: '';
 
   @if $query {
     // $query is not false
     @if type-of($query) == number {
       $min-width: $query;
     } @else if type-of($query) == list {
-
-      @if length($query) == 4 and nth($query, 1) == from and nth($query, 3) == to {
+      @if length($query) == 4 and nth($query, 1) == from {
+        $min-width: nth($query, 2);
+        $max-width: nth($query, 4);
         // from {breakpoint} to {breakpoint}
 
-        $min-width: mq-px2em(mq-retrieve-breakpoint-width(nth($query, 2)));
-        $max-width: mq-px2em(mq-retrieve-breakpoint-width(nth($query, 4)) - 1px);
+        $min-width: mq-normalize-width($min-width);
 
-      } @else if length($query) == 2 {
-        // one keyword + breakpoint
+        $end: nth($query, 3);
 
-        $keyword: nth($query, 1);
-        $breakpoint: nth($query, 2);
+        $substract: 0;
 
-        @if $keyword == from {
-          // from {breakpoint}
-          $min-width: mq-px2em(mq-retrieve-breakpoint-width($breakpoint));
-
+        @if $end == to {
+          $substract: 1px;
+        } @else if $end != through {
+          @error 'Wrong keyword: Query must be in the form "from [min-width/breakpoint] to/through [max-width/breakpoint]."';
         }
 
-        @else if $keyword == to {
-          // to {breakpoint}
-          $max-width: mq-px2em(mq-retrieve-breakpoint-width($breakpoint) - 1px);
+        $max-width: mq-normalize-width($max-width) - mq-normalize-width($substract);
+
+      } @else if length($query) == 2 {
+        // one keyword + breakpoint or min-/max-width
+
+        $keyword: nth($query, 1);
+        $width: nth($query, 2);
+
+        @if $keyword == from {
+          // from {breakpoint/min-width}
+          $min-width: mq-normalize-width($width);
+
+        } @else if $keyword == to {
+          // to {breakpoint/max-width}
+          $max-width: mq-normalize-width($width) - mq-normalize-width(1px);
+
+        } @else if $keyword == through {
+          // through {beakpoint/max-width}
+          $max-width: mq-normalize-width($width);
 
         } @else if $keyword == only {
           // only {breakpoint}
@@ -115,43 +133,43 @@ $mq-debug-selector: "body::after" !default;
             @if $next-breakpoint == true {
               // breakpoint was found in last iteration
               $next-breakpoint: $item-name;
-            } @else if $breakpoint == $item-name {
+            } @else if $width == $item-name {
               // breakpoint found, will be assigned in next iteration
               $next-breakpoint: true;
             }
           }
 
-          $min-width: mq-px2em(mq-retrieve-breakpoint-width($breakpoint));
+          $min-width: mq-normalize-width($width);
 
           @if type-of($next-breakpoint) != bool {
-            $max-width: mq-px2em(mq-retrieve-breakpoint-width($next-breakpoint) - 1px);
+            $max-width: mq-normalize-width($next-breakpoint) - mq-normalize-width(1px);
           }
 
         } @else {
-          @error "Invalid breakpoint query supplied to mq()";
+          @error 'Invalid breakpoint query supplied to mq()';
         }
       }
     } @else {
       // {breakpoint} => from {breakpoint}
-      $min-width: mq-px2em(mq-retrieve-breakpoint-width($query));
+      $min-width: mq-normalize-width($query);
     }
   }
 
   // Build Media Query
 
   @if $min-width != 0 {
-    $media-query: "(min-width: #{$min-width})";
+    $media-query: '(min-width: #{$min-width})';
   }
 
   @if $max-width != 0 {
     @if $media-query != "" {
-      $media-query: "#{$media-query} and ";
+      $media-query: '#{$media-query} and ';
     }
-    $media-query: "#{$media-query} (max-width: #{$max-width})";
+    $media-query: '#{$media-query} (max-width: #{$max-width})';
   }
 
   @if $and {
-    $media-query: "#{$media-query} and #{$and}";
+    $media-query: '#{$media-query} and #{$and}';
   }
 
   $media-query: unquote(#{$media-query});
@@ -166,6 +184,36 @@ $mq-debug-selector: "body::after" !default;
   }
 }
 
+@function mq-normalize-width($width) {
+
+  $type: type-of($width);
+
+  @if $type == string {
+    // breakpoint name
+    @return mq-normalize-width(mq-retrieve-breakpoint-width($width));
+  } @else if $type == number {
+    // numeric width
+
+    $unit: unquote(unit($width));
+
+    @if mq-strip-unit($width) == 0 {
+      @return 0;
+    }
+
+    @if $unit == px {
+      @return $width / 16px * 1em;
+    } @else if $unit == em {
+      @return $width;
+    } @else if $unit == rem {
+      @return $width / 1rem * 1em;
+    } @else {
+      @error "Unit must be a px or em value";
+    }
+  } @else {
+    @error "Invalid width parameter";
+  }
+}
+
 //  Converts a pixel value to it’s em equivalent, based on
 //  the browser’s assumed default font-size of 16px. As media
 //  queries ignore font-sizes set via CSS, this function does
@@ -175,21 +223,31 @@ $mq-debug-selector: "body::after" !default;
 @function mq-px2em($px) {
 
   @if type-of($px) != number {
-    @error "mq-px2em() value must be a number.";
+    @error 'mq-px2em() value must be a number.';
     @return 0;
   }
 
-  @if unitless($px) {
-    @if $px != 0 {
-      @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you";
-    }
-    /* stylelint-disable-next-line length-zero-no-unit */
-    @return mq-px2em($px + 0px); // That may fail.
+  @if (unitless($px)) {
+     @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you"; // sass-lint:disable-line no-warn
+     @return mq-px2em($px + 0px); // That may fail.
   } @else if (unit($px) == em) {
-    @return $px;
+     @return $px;
   }
   @return ($px / 16px) * 1em;
 }
+
+/// Remove the unit of a length
+/// Source: https://css-tricks.com/snippets/sass/strip-unit-function/
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function mq-strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
 
 // Retrieves the min-width of a breakpoint in px, assuming
 // a font-size of 16px.
@@ -209,8 +267,9 @@ $mq-debug-selector: "body::after" !default;
       @return $breakpoint-width;
     }
   }
-  @return "Breakpoint #{$name} does not exist";
+  @return 'Breakpoint #{$name} does not exist';
 }
+
 
 // Prints the pseudo-rule(s) needed by the JS counterpart
 // of mµ.
@@ -221,7 +280,7 @@ $mq-debug-selector: "body::after" !default;
   @each $breakpoint in $mq-breakpoints {
     $breakpoint-name: nth($breakpoint, 1);
     $breakpoint-width: nth($breakpoint, 2);
-    $add: ' "#{$breakpoint-name}": "(min-width: #{mq-px2em($breakpoint-width)})" ';
+    $add: ' "#{$breakpoint-name}": "(min-width: #{mq-normalize-width($breakpoint-width)})" ';
     @if $breakpoint-names != "" {
       $breakpoint-names: "#{$breakpoint-names},#{$add}";
     } @else {
@@ -246,7 +305,7 @@ $mq-debug-selector: "body::after" !default;
 @mixin mq-debug {
   // Print debug rules, if enabled
   #{unquote($mq-debug-selector)} {
-    background: rgba(black, .75);
+    background: rgba(0,0,0,0.75);
     bottom: 0;
     color: #fff;
     display: block;
@@ -268,5 +327,23 @@ $mq-debug-selector: "body::after" !default;
         content: "Breakpoint: #{$breakpoint-name} (>= #{$breakpoint-width}) | Template: " attr(data-template);
       }
     }
+  }
+
+  @media print {
+    #{unquote($mq-debug-selector)} {
+      content: '' !important;
+      display: none !important;
+    }
+  }
+}
+
+@mixin mq-dpi($dpi: 2) {
+
+  @if ($dpi != 1) {
+    @media (-webkit-min-device-pixel-ratio: #{$dpi}), (min-resolution: #{$dpi * 96dpi}) {
+      @content;
+    }
+  } @else {
+    @content;
   }
 }

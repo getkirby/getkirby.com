@@ -9,8 +9,7 @@
   <div class="cheatsheet-main-header cheatsheet-panel-header">
     <?php snippet('cheatsheet.menu.button') ?>
     <button data-show="entries">
-      <svg viewBox="0 0 12 12" width="12" height="12"><title>layout grid</title><g fill="#111111"><path d="M10,0H2A2,2,0,0,0,0,2v8a2,2,0,0,0,2,2h8a2,2,0,0,0,2-2V2A2,2,0,0,0,10,0ZM7,2V4H2V2ZM7,7H2V5H7ZM2,8H7v2H2Zm6,2V2h2v8Z" fill="#111111"></path></g></svg>
-      Overview
+      <svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M10,0H2A2,2,0,0,0,0,2v8a2,2,0,0,0,2,2h8a2,2,0,0,0,2-2V2A2,2,0,0,0,10,0ZM7,2V4H2V2ZM7,7H2V5H7ZM2,8H7v2H2Zm6,2V2h2v8Z"></path></svg>Overview
     </button>
   </div>
 

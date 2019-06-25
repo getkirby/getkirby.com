@@ -13,6 +13,7 @@ import "focus-visible";
 
 import "./components/affiliates";
 import "./components/lazyloading";
+import "./components/menu";
 import "./components/menu-search";
 import "./components/sidebar";
 import "./components/tooltip";

@@ -1,17 +1,15 @@
-<nav id="menu" class="menu<?= r(!empty($background), ' background:' . $background) ?>">
+<nav class="menu<?= r(!empty($background), ' background:' . $background) ?>">
 
-  <a href="#menu" class="menu-button menu-open-button" aria-label="Open menu">
+  <button class="button-reset menu-toggle"
+          aria-label="Open menu"
+          aria-controls="menu"
+          aria-expanded="false">
     <i></i>
     <i></i>
     <i></i>
-  </a>
+  </button>
 
-  <a href="#" class="menu-button menu-close-button" aria-label="Close menu">
-    <i></i>
-    <i></i>
-  </a>
-
-  <div class="menu-container">
+  <div class="menu-container" id="menu">
     <ul class="menu-items menu-main">
       <?php foreach ($pages->listed() as $item): ?>
       <li class="menu-item<?= r($hasSubmenu = $item->submenu()->isTrue(), ' has-dropdown') ?>">

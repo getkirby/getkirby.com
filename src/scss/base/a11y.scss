@@ -7,8 +7,8 @@
  * 2. Prevents most screen readers from announcing broken words as
  *    they would appear visually and reads them as defined in source.
  */
-.screen-reader-text,
-.visually-hidden {
+.screen-reader-text /* 1 */,
+.visually-hidden /* 1 */ {
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
   overflow: hidden;

@@ -1,16 +1,85 @@
 ## The `$props` parameter
 
-Property | Type | Required | Description |
---|--|--|--|
-`blueprint` | `array` | <code></code> | Blueprint definition |
-`content` | `array` | <code></code> | Field values |
-`dirname` | `string` | <code></code> |  |
-`draft` | `bool` | <code></code> | If `true`, the page will be created as draft |
-`model` | `string` | <code></code> | Page model |
-`num` | `mixed` | <code></code> | Sorting number. `null` for unlisted pages. |
-`parent` | <a href="<?= referenceLookup('Kirby\Cms\Page')->url() ?>">`Kirby\Cms\Page`</a> | <code></code> | Parent page |
-`root` | `string` | <code></code> |  |
-`slug` | `string` | `required` |  |
-`template` | `string` | <code></code> |  |
-`translations` | `array` | <code></code> | Language codes with subarrays of field values |
-`url` | `string` | <code></code> |  |
+<table class="properies">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>blueprint</td>
+      <td><?= formatDatatype('array') ?></td>
+      <td>Blueprint definition</td>
+    </tr>
+
+    <tr>
+      <td>content</td>
+      <td><?= formatDatatype('array') ?></td>
+      <td>Field values</td>
+    </tr>
+
+    <tr>
+      <td>dirname</td>
+      <td><?= formatDatatype('string') ?></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>draft</td>
+      <td><?= formatDatatype('bool') ?></td>
+      <td>If <code>true</code>, the page will be created as draft</td>
+    </tr>
+
+    <tr>
+      <td>model</td>
+      <td><?= formatDatatype('string') ?></td>
+      <td>Page model</td>
+    </tr>
+
+    <tr>
+      <td>num</td>
+      <td><?= formatDatatype('mixed') ?></td>
+      <td>Sorting number, use <code>null</code> for unlisted pages</td>
+    </tr>
+
+    <tr>
+      <td>parent</td>
+      <td><?= formatDatatype('Kirby\Cms\Page') ?></td>
+      <td>Parent page</td>
+    </tr>
+
+    <tr>
+      <td>root</td>
+      <td><?= formatDatatype('string') ?></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>slug<?= formatRequired(true) ?></td>
+      <td><?= formatDatatype('string') ?></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>template</td>
+      <td><?= formatDatatype('string') ?></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>translations</td>
+      <td><?= formatDatatype('array') ?></td>
+      <td>Language codes with subarrays of field values</td>
+    </tr>
+
+    <tr>
+      <td>url</td>
+      <td><?= formatDatatype('string') ?></td>
+      <td></td>
+    </tr>
+
+  </tbody>
+</table>

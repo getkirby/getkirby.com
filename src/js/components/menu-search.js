@@ -66,6 +66,15 @@ ready(() => {
       }
     });
 
+    searchInput.addEventListener("focus", () => {
+      // helper class used by the cheatsheet templates’ CSS
+      document.documentElement.classList.add("is-menu-search-open");
+    });
+
+    searchInput.addEventListener("blur", () => {
+      document.documentElement.classList.remove("is-menu-search-open");
+    });
+
     searchInput.addEventListener("keypress", (e) => {
       if((e.key && (e.key === "Enter")) || e.keyCode === 13) {
         searchForm.submit();
@@ -112,11 +121,11 @@ ready(() => {
 
           if(err) {
 
-            /* eslint-disable */
+            /* eslint-disable no-console */
             if("console" in window) {
               console.error("Quicksearch error", err);
             }
-            /* eslint-enable */
+            /* eslint-enable no-console */
 
             list.push({
               label: SEARCH_ERROR_LABEL,

@@ -1,3 +1,14 @@
+/**
+ * Hide menu button on small screens, when the search input
+ * is in focus to avoid horizontal scrolling.
+ */
+@include mq(to 25em) {
+  :root.is-menu-search-open .menu {
+    overflow: hidden;
+    width: 0;
+  }
+}
+
 .menu-search {
   align-items: center;
   display: flex;
@@ -28,7 +39,13 @@
 .menu-search-input:focus {
   background: #000;
   box-shadow: $shadow;
+  max-width: 100%;
   width: 14rem;
+
+  // @include mq(to 28em) {
+  //   // limit search input width on very small screens
+  //   width: 12rem;
+  // }
 }
 
 .menu-search .awesomplete {

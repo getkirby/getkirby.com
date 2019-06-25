@@ -1,13 +1,58 @@
 ## The `$props` parameter
 
-Property       | Type     | Required      | Description |
---             | --       | --            | --          |
-`blueprint`    | `array`  | <code></code> | Blueprint definition |
-`content`      | `array`  | <code></code> | Field values |
-`email`    | `string`  | <code></code> |  |
-`id`    | `string`  | <code></code> |  |
-`language`    | `string`  | <code></code> |  |
-`name`    | `string`  | <code></code> |  |
-`password`    | `string`  | <code></code> |  |
-`role`    | `string`  | <code></code> |  |
-`translations` | `array`  | <code></code> | Language codes with subarrays of field values   |
+<table class="properties">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>blueprint</td>
+      <td><?= formatDatatype('array') ?></td>
+      <td>Blueprint definition</td>
+    </tr>
+    <tr>
+      <td>content</td>
+      <td><?= formatDatatype('array') ?></td>
+      <td>Field values</td>
+    </tr>
+    <tr>
+      <td>email</td>
+      <td><?= formatDatatype('string') ?></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td><?= formatDatatype('string') ?></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>language</td>
+      <td><?= formatDatatype('string') ?></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td><?= formatDatatype('string') ?></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>password</td>
+      <td><?= formatDatatype('string') ?></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>role</td>
+      <td><?= formatDatatype('string') ?></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>translations</td>
+      <td><?= formatDatatype('array') ?></td>
+      <td>Language codes with subarrays of field values</td>
+    </tr>
+  </tbody>
+</table>

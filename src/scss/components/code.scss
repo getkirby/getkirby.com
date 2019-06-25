@@ -1,7 +1,7 @@
 /* -----  Global Styles for Inline Code ------------------------------------- */
 
 code {
-  background: rgba($color-black, .1);
+  background: rgba($color-black, .07);
   border-radius: 3px;
   box-decoration-break: clone;
   display: inline-block;
@@ -51,6 +51,7 @@ h6 code,
   }
 
   code {
+    background: transparent;
     font-size: inherit;
     line-height: inherit;
   }

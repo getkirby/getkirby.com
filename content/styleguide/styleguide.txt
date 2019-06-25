@@ -54,6 +54,25 @@ In general, you should use text formatting sparingly to prevent the text from be
 
 **TL;DR:** Use formatting only, where it adds any benefit to the reader.
 
+### Datatypes in inline-code
+
+Our custom Markdown extension automatically handles highlighting of atomic datatypes and classes available in PHP. In addition to that, Kirby’s built-in classes will get highlighting applied and linked to their respective entry in the (link: docs/reference text: reference). The latter only works, if the class name contains the fully-qualified name including namespace (i.e. contains at least one backslash `\` character). If the content of the `<code>` element starts with an uppercase letter, and the class exists in the current environment, it is highlighted, but not linked. All class names must be specified case-sensitive. If that also fails, the highlighter assumes given inline code is not a datatype or class name. You can also specify multiple types, by separating them with a pipe `|` character. Any inline code, that does not solely consist of alphanumeric characters, underscores `_` and backslashes `\` is considered to be not a datatype.
+
+```markdown
+Use a string `string` or `int` as parameter.
+
+The `Kirby\Cms\Page` class is the heart of Kirby.
+
+Return value: `Kirby\Cms\Page|null`
+
+```
+
+Available datatypes: `string`, `int`, `float`, `bool`, `object`, `array`, `null`, `mixed`
+
+Class examples: `Kirby\Cms\Page`, `Kirby\Toolkit\Str`
+
+Multiple data types: `Kirby\Cms\Page|null`, `string|bool`
+
 ### Headlines
 
 Use headlines generously to structure your content, this especially holds true for long pages with long text content. Do not use **H1** headlines, as these are reserved for the page title. You can use anything from **H2** and below. If the page template contains a table of contents at the top, each **H2** will be listed there to provide a quick overview of the page contents. Everything from **H3** and below is not included in the TOC. Use (link: docs/reference/text/markdown/headlines text: Markdown syntax) to mark up headers.

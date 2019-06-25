@@ -189,6 +189,8 @@
 
   .text .table-wrap table {
     margin-bottom: 0;
+    min-width: 100%;
+    width: auto;
   }
 
   .text .table-wrap th {
@@ -202,7 +204,7 @@
   border-radius: $border-radius;
   border-spacing: 0;
   overflow: hidden;
-  table-layout: fixed;
+  // table-layout: fixed;
   width: 100%;
 }
 
@@ -232,6 +234,139 @@
 
 .text tr:last-child td {
   border-bottom: 0;
+}
+
+/* -----  Properties Table  ------------------------------------------------- */
+
+/**
+ * Empty property value, e.g. for "required: no" and "–".
+ */
+.text .properties-empty {
+  color: rgba($color-black, .6);
+}
+
+/**
+ * First column is always the property name.
+ */
+.text .properties td:first-child code {
+  background: transparent;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/**
+ * Render property table as list on mobile devices.
+ */
+@include mq(to l) {
+  .text .properties {
+    border: none;
+  }
+
+  .text .properties,
+  .text .properties tbody,
+  .text .properties th,
+  .text .properties td {
+    display: block;
+  }
+
+  /**
+   * Table header is only visually hidden, to stay accessible
+   * for screen readers and robots.
+   *
+   * 1. Prevents most screen readers from announcing broken words as
+   *    they would appear visually and reads them as defined in source.
+   */
+  .text .properties thead {
+    clip: rect(1px, 1px, 1px, 1px);
+    display: block;
+    height: 1px;
+    left: -1000px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal !important; /* 1 */
+  }
+
+  .text .properties tr {
+    background: #fff;
+    border: 1px solid $color-background;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .text .properties tr + tr {
+    margin-top: 1em;
+  }
+
+  .text .properties tr td {
+    background: #fff;
+    border: none;
+  }
+
+  .text .properties td:first-child {
+    flex: 0 0 auto;
+    font-weight: 700;
+    padding-right: 1ch;
+  }
+
+  /**
+   * Seconds property is always treated as type on mobile.
+   */
+  .text .properties td:nth-child(2) {
+    flex: 2 0 0;
+    padding-left: 0;
+  }
+
+  .text .properties td:first-child,
+  .text .properties td:nth-child(2) {
+    background: #fafafa;
+    order: 1;
+  }
+
+  /**
+   * "Hack" to generate a separator between the property header
+   * (property name and type) and all other properties. This
+   * element ensures, that these properties always span the
+   * whole width of their container.
+   */
+  .text .properties tr::before {
+    border-bottom: 1px solid $color-background;
+    content: "";
+    display: block;
+    height: 0;
+    order: 2;
+    width: 100%;
+  }
+
+  .text .properties td:nth-child(n + 3) {
+    order: 3;
+  }
+
+  /**
+   * Last element is always treated as description and thus
+   * should span the whole width of the container.
+   */
+  .text .properties td:last-child {
+    border-bottom: none;
+    width: 100%;
+  }
+
+  /**
+   * Label is only shown on mobile devices. Using a
+   * pseudo-element should be fine, cause a11y is handled
+   * by the table header.
+   */
+  .text .properties td[data-property-label]::before {
+    content: attr(data-property-label) " ";
+    font-weight: 700;
+  }
+}
+
+@include mq(from l) {
+  .text .properties td:last-child {
+    min-width: 8em;
+  }
 }
 
 /* -----  Footnotes  -------------------------------------------------------- */
@@ -399,4 +534,43 @@ hr::after {
 
 .text .codeblock {
   margin-bottom: 1.5rem;
+}
+
+/* -----  Datatypes  -------------------------------------------------------- */
+
+.text .type {
+  white-space: nowrap;
+}
+
+.text .type-separator {
+  padding: 0 .125rem;
+}
+
+.text .type.type-string {
+  background: mix($color-syntax-green, $color-white, 40%);
+}
+
+.text .type.type-int {
+  background: mix($color-syntax-orange, $color-white, 40%);
+}
+
+.text .type.type-float {
+  background: mix($color-syntax-red, $color-white, 40%);
+}
+
+.text .type.type-bool {
+  background: mix($color-syntax-purple, $color-white, 40%);
+}
+
+.text .type.type-array {
+  background: mix($color-syntax-aqua, $color-white, 40%);
+}
+
+.text .type.type-object,
+.text .type.type-class {
+  background: mix($color-syntax-yellow, $color-white, 40%);
+}
+
+.text .type.type-mixed {
+  background: mix($color-syntax-blue, $color-white, 40%);
 }

@@ -65,8 +65,9 @@
     top: 100%;
   }
 
-  .menu-item:hover .menu-dropdown,
-  .menu-item:focus-within .menu-dropdown {
+  .no-js .menu-item:hover .menu-dropdown,
+  .menu-item.is-open .menu-dropdown,
+  .no-js .menu-item:focus-within .menu-dropdown {
     display: block;
   }
 
@@ -152,46 +153,47 @@
 }
 
 @include mq(to m) {
-  .menu-button {
+  .menu-toggle {
+    cursor: pointer;
     height: 14px;
     position: relative;
     width: 16px;
   }
 
-  .menu-button i {
+  .menu-toggle i {
     background: currentColor;
     display: block;
-    height: 2px;
+    height: .125rem;
     width: 100%;
   }
 
-  .menu-open-button {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  /**
+   * 1. Sets spacing between horizontal bars of hamburger icon.
+   *    Could be done easier with flexbox, but that does not
+   *    work in some browsers, see:
+   *    <https://github.com/philipwalton/flexbugs>
+   */
+  .menu-toggle[aria-expanded="false"] i + i {
+    margin-top: .25rem; /* 1 */
   }
 
-  .menu-close-button i {
+  .menu-toggle[aria-expanded="true"] i {
     left: 0;
-    margin-top: -1px;
+    margin-top: -.0625rem;
     position: absolute;
     top: 50%;
   }
 
-  .menu-close-button i:first-child {
+  .menu-toggle[aria-expanded="true"] i:nth-child(1) {
     transform: rotate(45deg);
   }
 
-  .menu-close-button i:last-child {
+  .menu-toggle[aria-expanded="true"] i:nth-child(2) {
     transform: rotate(-45deg);
   }
 
-  .menu:target .menu-open-button {
+  .menu-toggle[aria-expanded="true"] i:nth-child(3) {
     display: none;
-  }
-
-  .menu:target .menu-close-button {
-    display: block;
   }
 
   .menu-container {
@@ -217,7 +219,7 @@
     top: -5px;
   }
 
-  .menu:target .menu-container {
+  .menu-toggle[aria-controls="menu"][aria-expanded="true"] + #menu {
     display: block;
   }
 
