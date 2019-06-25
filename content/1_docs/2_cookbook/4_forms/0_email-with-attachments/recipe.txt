@@ -68,10 +68,10 @@ The template contains the form and will display error messages if something goes
 
         <?php
         // if the form input is not valid, show a list of alerts
-        if ($alert) : ?>
+        if ($alerts) : ?>
         <div class="alert">
             <ul>
-            <?php foreach ($alert as $message): ?>
+            <?php foreach ($alerts as $message): ?>
             <li><?= kirbytext($message) ?></li>
             <?php endforeach ?>
             </ul>
