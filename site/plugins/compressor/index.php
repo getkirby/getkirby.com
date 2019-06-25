@@ -3,7 +3,7 @@
 class CompressorCache extends Kirby\Cache\ApcuCache
 {
 
-    public function set(string $key, $value, int $minutes = 0)
+    public function set(string $key, $value, int $minutes = 0): bool
     {
 
         $html = $value['html'];
