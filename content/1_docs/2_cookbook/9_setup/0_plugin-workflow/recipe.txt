@@ -1,4 +1,8 @@
-Title: Plugin Workflow
+Title: Plugin test workflow with PHPUnit
+
+----
+
+Published: 2019-06-26
 
 ----
 
@@ -176,7 +180,7 @@ final class PluginTest extends TestCase {
 }
 ```
 
-To run the test, we use the `phpunit` command, supply the plugin's `bootstrap.php script, and specify the folder containing the tests:
+To run the test, we use the `phpunit` command, supply the plugin's `bootstrap.php` script, and specify the folder containing the tests:
 
 ```bash
 phpunit --bootstrap ./bootstrap.php --testdox ./suites
