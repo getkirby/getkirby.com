@@ -1,4 +1,4 @@
-<since v=3.2.0">
+<since v="3.2.0">
 
 Each option can be set on a per user role for fine-grained permissions, for example:
 
