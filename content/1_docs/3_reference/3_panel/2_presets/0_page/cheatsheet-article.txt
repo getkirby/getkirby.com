@@ -8,6 +8,8 @@ Excerpt: The Page preset simplifies the setup for standard pages with form field
 
 Text:
 
+## Basic setup
+
 This allows you to create a very basic blueprint like this:
 
 ```yaml
@@ -57,6 +59,28 @@ No files section:
 ```yaml
 files: false
 ```
+
+## Extend files/pages sections
+
+You can extend the pages and files sections with the options available for(link: docs/reference/panel/sections/pages#section-properties text: pages sections) and (link: docs/reference/panel/sections/files#section-properties text: files sections).
+
+### Pages section
+
+```yaml
+pages:
+  template: default
+  max: 10
+  min: 1
+```
+
+### Files section
+
+```yaml 
+files:
+  template: image
+  min: 4
+  max: 8
+```  
 
 ## Overwrite the sidebar
 
