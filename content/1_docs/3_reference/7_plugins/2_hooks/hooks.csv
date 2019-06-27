@@ -29,6 +29,8 @@ page.create:before,"$parent,$input",trigger
 page.create:after,$page,trigger
 page.delete:before,$page,trigger
 page.delete:after,"$status,$page",trigger
+page.duplicate:before,"$originalPage,$input",trigger
+page.duplicate:after,$duplicatePage,trigger
 page.update:before,"$page,$values,$strings",trigger
 page.update:after,"$newPage,$oldPage",trigger
 route:before,"$route,$path,$method",trigger
