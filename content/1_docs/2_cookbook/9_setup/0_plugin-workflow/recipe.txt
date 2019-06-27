@@ -245,7 +245,7 @@ require 'kirby/bootstrap.php';
 echo (require 'site/plugins/link-field/tests/bootstrap.php')->render();
 ```
 
-You might have noticed that `kirby/bootstrap.php` is required both in `index.php` _and_ in our plugin's `bootstrap.php`. That's OK because our own script uses `require_once` so that the file is incluuded only once.
+You might have noticed that `kirby/bootstrap.php` is required both in `index.php` _and_ in our plugin's `bootstrap.php`. That's OK because our own script uses `require_once` so that the file is included only once.
 
 If you open the Panel, you should see your custom plugin content and be able to edit it. Any changes you make will be saved to the plugin's `content` folder.
 
