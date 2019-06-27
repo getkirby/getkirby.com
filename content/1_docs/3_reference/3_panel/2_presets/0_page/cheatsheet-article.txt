@@ -62,7 +62,7 @@ files: false
 
 ## Extend files/pages sections
 
-You can extend the pages and files sections with the options available for(link: docs/reference/panel/sections/pages#section-properties text: pages sections) and (link: docs/reference/panel/sections/files#section-properties text: files sections).
+You can extend the pages and files sections with the options available for (link: docs/reference/panel/sections/pages#section-properties text: pages sections) and (link: docs/reference/panel/sections/files#section-properties text: files sections).
 
 ### Pages section
 
