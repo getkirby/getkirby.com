@@ -12,7 +12,7 @@ Guide: blueprints/introduction
 
 Text:
 
-In each (link: docs/reference/panel/blueprints/file text: files section) you can use the `template` option to determine which template will be used for each file within that section. For example, you can create a files section to which users can only upload images and which have a given set of fields, and another section for PDF files with another set of fields.
+In each (link: docs/reference/panel/sections/files text: files section) you can use the `template` option to determine which template will be used for each file within that section. For example, you can create a files section to which users can only upload images and which have a given set of fields, and another section for PDF files with another set of fields.
 
 ## Blueprint location
 
