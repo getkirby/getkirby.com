@@ -51,18 +51,19 @@ permissions:
     create: false
     changeName: false
     changeEmail: false
+    changeLanguage: true
     changePassword: false
     changeRole: false
     delete: false
     update: false
   users:
-    create: true,
-    changeEmail: false,
-    changeLanguage: true,
-    changeName: false,
-    changePassword: false,
-    changeRole: false,
-    delete: false,
+    create: true
+    changeEmail: false
+    changeLanguage: true
+    changeName: false
+    changePassword: false
+    changeRole: false
+    delete: false
     update: false
 ```
 
