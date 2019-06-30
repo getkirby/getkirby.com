@@ -25,7 +25,7 @@ $asset = new Asset('assets/images/logo.svg');
 With the object defined, you can then start calling the class's methods:
 
 ```php
-if($asset) {
+if ($asset->exists()) {
     echo $asset->width();
 }
 ```
