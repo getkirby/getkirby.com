@@ -64,7 +64,7 @@ headline: "{{ page.title }} Information"
 
 ## Text
 
-The text can be a simple string, Markdown, KirbyText or HTML. Just like the headline, the text can also be translated.
+The text can be a simple string, Markdown, KirbyText or HTML. Just like the headline, the text can also be translated. You can also use Kirby's query language to query text from some field or show some other information.
 
 ### Single language
 ```yaml
@@ -91,7 +91,13 @@ text: |
   Cheers,
   A. Dmin
 ```
+## Text queries
 
+```yaml
+text: "{{ kirby.page('somepage').text()->kt() }}"
+text: "{{ site.index.count }}"
+text: "{{ site.index.images.count }}"
+```
 ## Themes
 
 ### info
