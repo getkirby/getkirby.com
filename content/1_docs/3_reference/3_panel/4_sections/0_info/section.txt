@@ -91,13 +91,14 @@ text: |
   Cheers,
   A. Dmin
 ```
-## Text queries
+### Text queries
 
 ```yaml
 text: "{{ kirby.page('somepage').text()->kt() }}"
 text: "{{ site.index.count }}"
 text: "{{ site.index.images.count }}"
 ```
+
 ## Themes
 
 ### info
