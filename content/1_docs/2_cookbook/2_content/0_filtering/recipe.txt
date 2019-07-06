@@ -8,7 +8,15 @@ Description: Filter pages, files and users with Kirby's extensive filtering meth
 
 Text:
 
-This guide will give you an overview about the many versatile ways of filtering collections of pages, files, users, and languages that are available in Kirby. It is sort of a compendium of many examples taken from solutions in the forum.
+This guide will give you an overview about the many ways you can filter collections of pages, files, users, structures, languages or general collections in Kirby.
+
+<warning>
+Try to avoid filtering the complete site index (`$site->index()`), especially if your site has thousands of pages and files. Always start with the smallest "base" collection possible and use caching.
+</warning>
+
+<info>
+For often used collections, check out (link: docs/guide/templates/collections text: Kirby collections).
+</info>
 
 ## Filtering by listed/unlisted
 
@@ -123,7 +131,6 @@ $files = $page
 $users = $kirby
   ->users()
   ->filterBy('role', 'editor');
-
 ```
 
 ## Filter collections by more than one field/method
@@ -140,7 +147,7 @@ $collection = page('events')
   ->filterBy('template', '!=', 'exhibition');
 ```
 
-You can, of course, achieve the same result with the `not in` filter
+You can achieve the same with the `filter($callback)` method:
 
 ```php
 $collection = page('events')
@@ -150,7 +157,7 @@ $collection = page('events')
   });
 ```
 
-You can also use the new `not in` filter:
+Or you can use the `not in` filter:
 
 ```php
 // fetch all events with a template that is neither "concert" nor "exhibition"
@@ -158,7 +165,6 @@ $collection = page('events')
   ->children()
   ->filterBy('template', 'not in', ['concert', 'exhibition']);
 ```
-
 ### Files
 
 ```php
@@ -181,8 +187,6 @@ $files = $kirby
 
 ## Fun with filtering by date
 
-Since the date field is a bit special, I'll cover this here a bit more extensively.
-
 ### Filtering from - to
 
 For a simple from - to filtering of dates, you can string together two `filterBy()` methods as seen above:
@@ -191,11 +195,11 @@ For a simple from - to filtering of dates, you can string together two `filterBy
 // fetch all blog post of 2018 using beginning and end dates
 $collection = page('blog')
   ->children()
-  ->filterBy('date', '>', strtotime('2018-01-01'))
-  ->filterBy('date', '<', strtotime('2018-12-31'));
+  ->filterBy('date', '>', '2018-01-01')
+  ->filterBy('date', '<', '2018-12-31');
 ```
 
-If you just happen to have the year as a variable, you can use a filter with callback:
+If you have a date field but want to filter by year, you can use a filter with a callback:
 
 ```php
 $year     = date('Y');
@@ -206,9 +210,9 @@ $articles = page('blog')
   });
 ```
 
-### Custom date fields
+### Multiple date fields
 
-Events often use custom `startdate` and `enddate` date fields. The `filterBy()` method currently does not work with custom date fields. To filter events with either their ending or beginning in the future, you can use a filter with a callback:
+Events often have `startdate` and `enddate` date fields. To filter events that either end or begin in the future, you can use a filter with a callback:
 
 ```php
 $events = page('events')
@@ -216,12 +220,9 @@ $events = page('events')
   ->filter(function ($child) {
     return $child->startdate()->toDate() > time() || $child->enddate()->toDate() > time();
   });
-
 ```
 
-Note that the date method here uses two parameters. The first is the format parameter, the second is the name of the custom field.
-
-With just two little changes to the above code, you can fetch all events that are happening right now:
+With two little changes to the above code, you can fetch all current events, that is events that have already started but not ended yet:
 
 ```php
 $events = page('events')
@@ -231,7 +232,6 @@ $events = page('events')
   });
 
 ```
-
 
 ## Filtering using the search method
 
