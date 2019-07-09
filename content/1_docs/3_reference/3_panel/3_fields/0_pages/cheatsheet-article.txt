@@ -179,3 +179,21 @@ foreach($relatedPages as $relatedPage): ?>
   <?= $relatedPage->title() ?>
 <?php endforeach ?>
 ```
+
+## Filtering by pages field
+
+Use the [`filter()`](/docs/reference/objects/pages/filter) method to filter elements that use pages field.
+
+```php
+<?php
+
+// Use pages collection has() method
+$page->children()->filter(function($child) {
+    return $child->related()->toPages()->has(page('project-a'));
+});
+
+// Use in_array() function
+$page->children()->filter(function($child) {
+    return in_array('project-a', $child->related()->toPages()->pluck('id'));
+});
+```
