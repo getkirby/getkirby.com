@@ -7,15 +7,3 @@ Text:
 $array = $page->toArray();
 var_dump($array);
 ```
-
-## With a callback
-
-```php
-<?php 
-$array = $page->toArray(function ($page) {
-  return [
-    'id' => $page->id(),
-  ];
-});
-var_dump($array);
-```
