@@ -120,7 +120,7 @@ gallery:
   type: files
   uploads: 
     parent: site
-    templates: files-upload
+    template: files-upload
 ```
 
 If you want to upload to the current page and only assign a template, you can directly assign it to the `uploads` property:
