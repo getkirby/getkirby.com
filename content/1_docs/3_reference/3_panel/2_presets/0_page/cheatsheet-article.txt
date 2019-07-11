@@ -93,7 +93,7 @@ sidebar:
     extends: sections/images
 ```
 <info>
-In this example, we extend an existing files section which we have defined in `/site/blueprints/sections/images.yml`. You might as well define the a new (link: docs/guide/blueprints/layout text: files section) here.
+In this example, we extend an existing files section which we have defined in `/site/blueprints/sections/images.yml`. You might as well **??define the a new** (link: docs/guide/blueprints/layout text: files section) here.
 </info>
 
 
