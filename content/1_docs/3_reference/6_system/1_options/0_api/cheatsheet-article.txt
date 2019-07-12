@@ -36,7 +36,7 @@ By default authentication via (link: docs/guide/api/authentication#http-basic-au
 ```php
 return [
   'api' => [
-    'allowInsecure' => 'true'
+    'allowInsecure' => true
   ]
 ];
 ```
