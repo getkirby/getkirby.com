@@ -232,6 +232,56 @@ $events = page('events')
   });
 
 ```
+## Filtering by the `pages`, `files` or `users` field
+
+The (link: docs/reference/panel/fields/pages text: `pages`), (link: docs/reference/panel/fields/files text: `files`) and (link: docs/reference/panel/fields/users text: `users`) fields store their content in `yaml` format. Also, these fields can contain one or multiple entries. Using the simple `filterby()` method is therefore not useful to filter a collection by these field types and we have to use the [`filter()`](/../reference/objects/pages/filter) method.
+
+Let's first understand what these fields store in the content files:
+
+- The `pages` field stores a single or multiple (link: docs/reference/objects/page/id text: page ids)
+- The `files` field stores a single or multiple (link: docs/reference/objects/file/id text: file ids)
+- The `users` field stores a single or multiple (link: docs/reference/objects/user/email text: user emails)
+
+Now We can  use this information to filter pages or other collections by content stored in these fields.
+
+### Examples
+
+#### Filter by `pages` field
+
+For example, fetch all pages in a collection that reference the current page (or any other page) in the `related` field:
+
+```php
+$page->children()->filter(function($child) use($page) {
+    return $child->related()->toPages()->has($page);
+});
+```
+
+#### Filter by `files` field
+
+For example, fetch all pages in a collection that reference a given file in the `pictures` field:
+
+```php
+$file = $page->images()->first();
+$page->children()->filter(function($child) use($file){
+    return $child->pictures()->toFiles()->has($file);
+});
+```
+
+#### Filter by `users` field
+
+For example, fetch all pages in a collection that reference the current user in the `authors`field:
+
+```php
+$user = $kirby->user();
+$page->children()->filter(function($child) use($user) {
+    return $child->authors()->toUsers()->has($user);
+});
+```
+
+<info>
+While these examples showcase pages collections, the same syntax can be applied to filtering files or users that contain any of these fields.
+</info>
+
 
 ## Filtering using the search method
 
