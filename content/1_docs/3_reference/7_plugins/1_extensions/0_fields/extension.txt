@@ -105,7 +105,7 @@ hello: {
 
 ```php
 'props' => [
-    'message' => function (string $message) {
+    'message' => function ($message = null) {
         return I18n::translate($message);
     }
 ]
@@ -342,4 +342,3 @@ panel.plugin("your/plugin", {
   }
 });
 ```
-
