@@ -155,3 +155,25 @@ The structure field tries to create the best possible preview for the field in i
 ## How to use in templates/snippets
 
 To access a structure field in your templates, you can use the [`yaml()`](../../templates/field-methods/yaml) and [`toStructure()`](../../templates/field-methods/to-structure) methods.
+
+Let's say we wanted to render the `holidays` structure field example from above in a template:
+
+```php
+<?php 
+// using the `toStructure()` method, we create a structure collection
+$items = $page->holidays()->toStructure();
+// we can then loop through the entries and render the individual fields
+foreach ($items as $item): ?>
+  <h2><?= $item->title()->html() ?></h2>
+  <?php foreach ($item->images()->toFiles() as $image): ?>
+    <img src="<?= $image->crop(400)->url() ?>">
+  <?php endforeach ?>
+  <p><?= $item->price() ?></p>
+<?php endforeach ?>
+```
+
+<info>
+If you nest structure fields inside a structure field, you have to call the `toStructure()` method on the nested fields as well and then loop through the nested items like above.
+</info>
+
+
