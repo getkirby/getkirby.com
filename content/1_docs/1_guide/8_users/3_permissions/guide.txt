@@ -15,7 +15,7 @@ Permissions in Kirby can be defined in two places:
 1. In a user blueprint for each role
 2. In the page, file or the site blueprint for more detailed rules
 
-### User blueprint
+## Role based permissions in user blueprints
 
 Each role can have its own blueprint with custom fields for users with that role and optional user permissions. User blueprints are stored in `/site/blueprints/users` and get the name of each role (i.e `/site/blueprints/users/editor.yml`).
 
@@ -99,7 +99,7 @@ user:
   changeName: true
 ```
 
-## Visitors
+## Visitors without Panel access
 
 Frontend users can also be managed through the Panel, but you most likely don't want them to be able to access the Panel at all. In order to achieve this, set Panel access to `false`.
 
@@ -112,7 +112,7 @@ permissions:
 
 If you use any of Kirby's (link: docs/guide/templates/php-api text: PHP APIs) in the frontend to modify pages, files, the site or users, you should set the permissions like above to control what a visitor can do in your frontend. You can also have multiple frontend user roles without access to the Panel but with different access rights to the PHP APIs. Our (link: docs/guide/api/authentication text: REST API) follows the same rules.
 
-## Getting more specific
+## Specific permissions in page, file, user or site options
 
 You can keep all permissions in the role files, but you can also overwrite them individually per page, file, user or the site in the corresponding blueprints. Those specific permission settings will always override the role settings.
 
@@ -148,7 +148,8 @@ options:
 ```    
 
 </since>
-## Even more control with hooks
+
+## Controlling permissions with hooks
 
 If the blueprint-based permission settings are too limiting for your project, you can get more flexibility by creating your own permission checks with `before` hooks for various actions.
 
