@@ -39,14 +39,15 @@ Using the following code we can thus reuse the attributes array and put a wrappe
 ```php "/site/plugins/custom-tags/index.php"
 <?php
 
+$originalTag = Kirby\Text\KirbyTag::$types['image'];
 Kirby::plugin('your/plugin', [
     'tags' => [
         'custom-image' => [
-            'attr' => Kirby\Text\KirbyTag::$types['image']['attr'],
+            'attr' => $originalTag['attr'],
 
             'html' => function($tag) {
 
-                $image =  Kirby\Text\KirbyTag::$types['image']['html'];
+                $image =  $originalTag['html'];
                 $markup = $image($tag);
 
                 $html = '<div class="imagewrapper">' . $markup . '</div>';
@@ -63,20 +64,21 @@ We can also extend the attributes array by merging it with new attributes, and r
 ```php "/site/plugins/custom-tags/index.php"
 <?php
 
+$originalTag = Kirby\Text\KirbyTag::$types['image'];
 Kirby::plugin('your/plugin', [
     'tags' => [
         'imageset' => [
             'attr' => array_merge(
-                Kirby\Text\KirbyTag::$types['image']['attr'],
+                $originalTag['attr'],
                 [
                     'srcset'
                 ]),
 
-            'html' => function($tag) {
+            'html' => function($tag) use ($originalTag)  {
 
                 $file = $tag->file($tag->value());
                 $srcset = $tag->srcset ? explode(',', $tag->srcset): null;
-                $result = Kirby\Text\KirbyTag::$types['image']['html']($tag);
+                $result = $originalTag['html']($tag);
 
                 if (! $file === true || is_null($srcset) === true) {
                     return $result;
@@ -103,3 +105,6 @@ Kirby::plugin('your/plugin', [
     ]
 ]);
 ```
+<info>
+If you store the original tag in a variable outside the plugin wrapper like in the examples, you can override the original tag by using the same tag name instead of the custom names.
+</info>
