@@ -25,9 +25,6 @@ fields:
     bio:
       label: Bio
       type: textarea
-    email:
-      label: Email
-      type: email
     website:
       label: Website
       type: url
@@ -37,7 +34,7 @@ fields:
 ```
 
 
-Since the name is a default field, we don't have to define it here. With this blueprint, we now have defined a new user role and can start adding authors with this role.
+Since name and email are default fields, we don't have to define them here. With this blueprint, we now have defined a new user role and can start adding authors with this role.
 
 In the Panel, this setup will now look like this:
 
@@ -54,11 +51,11 @@ sidebar:
   meta:
     type: fields
     fields:
-      ...
+      #...
       author:
         type: users
         multiple: false
-      ...
+      #...
 ```
 In this example we have defined a sidebar with some meta data fields and an authors field. The authors field has some default settings and options you can find in the (link: docs/reference/panel/fields/users text: users field docs). Here we have kept it simple and only set the `multiple` option to `false`, because we only want to select a single author.
 
@@ -88,7 +85,7 @@ In the content file `article.txt`, the selected user is stored in `yaml` format
 
 You can now fetch the author data in the article template. This is just a basic example of how the article template could look:
 
-```php
+```php "/site/templates/article.php"
 <?php snippet('header') ?>
 
 <article>
@@ -134,12 +131,11 @@ Create a new folder `authors` with an `authors.txt` file and an `authors.php` te
 
 In that template you can fetch all authors from the articles and build a list out of it.
 
-### authors.php template
+### `authors.php` template
 
-```php
+```php "/site/templates/authors.php"
 <?php snippet('header') ?>
 <?php
-  $articles = $page->children()->listed();
   // fetch all used authors emails from all articles
   $emails = $articles->pluck('author', '-', true);
   // get a list of all authors filtered by the ones with articles
@@ -156,23 +152,30 @@ In that template you can fetch all authors from the articles and build a list ou
         <img src="<?= $avatar->url() ?>">
       </figure>
     <?php endif ?>
-    <ul class="articles">
-    <?php
-      // filter all articles per author
-      $articles = $articles->filter(function($child) use($author){
-        return in_array($author->email(), $child->author()->yaml());
-      });
-      foreach($articles as $article): ?>
-        <li><a href="<?= $article->url() ?>"><?= $article->title() ?></a></li>
-      <?php endforeach ?>
-    </ul>
+    <?php if ($blog = page('blog')): ?>
+      <ul class="articles">
+      <?php
+        // filter all articles per author
+          $articles = $blog->children()->listed()->filter(function($child) use($author){
+          return in_array($author->email(), $child->author()->yaml());
+        });
+        foreach($articles as $article): ?>
+          <li><a href="<?= $article->url() ?>"><?= $article->title() ?></a></li>
+        <?php endforeach ?>
+      </ul>
+    <?php endif ?>
 
   </article>
 <?php endforeach ?>
 
 <?php snippet('footer') ?>
 ```
+<info>
+The above code assumes that your articles are children of the `blog` folder. If your article parent is called differently, adapt the page name accordingly.
 
-Each author will show up on http://yourdomain.com/authors with the user avatar and a list of articles he or she has written. This can be extended with more info about each author or more info about each article.
+As an alternative, you can put this list of authors with their articles into the blog template instead of using a separate authors page. In that case, fetch the articles from the current page instead.
+</info>
+
+Each author will show up on http://yourdomain.com/authors with the user avatar and a list of articles they have written. This can be extended with more info about each author or more info about each article.
 
 
