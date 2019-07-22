@@ -31,29 +31,29 @@ fields:
 
 (field-options: email)
 
-## How to encode email field output
+## Use in templates: Encode email field output
 
-Unlike the (link: docs/reference/text/kirbytags/email text: email KirbyTag), the email field does not encode your email addresses, to prevent misuse by spam bots. If you want to make use of Kirby's built-in email obfuscation, you have several options:
+Unlike the (link: docs/reference/text/kirbytags/email text: email KirbyTag), the email field does not encode your email addresses to prevent misuse by spam bots. If you want to make use of Kirby's built-in email obfuscation, you have several options:
 
-### Using `html::email()`:
+### Using `Html::email()`
 
 ```php
-<?= html::email($page->email()) ?>
+<?= Html::email($page->email()) ?>
 ```
 
-### Using `str::encode()`:
+### Using `Str::encode()`
 
 ```php
-<a href="mailto:<?= str::encode($page->email()) ?>">
-    <?= str::encode($page->email()) ?>
+<a href="mailto:<?= Str::encode($page->email()) ?>">
+    <?= Str::encode($page->email()) ?>
 </a>
 ```
 
-### Using `kirbytag()`:
+### Using `kirbytag()`
 
 ```php
 <?= kirbytag([
-      'email'  => $page->email(),
+      'email' => $page->email(),
       'text'  => 'Contact us'
     ]);
 ?>
