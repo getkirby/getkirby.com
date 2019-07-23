@@ -2,7 +2,7 @@ Title: Troubleshooting
 
 ----
 
-Description: We try to make the installation and configuration as straight forward as possible. But sometimes you just get stuck and we want to help you out of it as fast possible.
+Description: We try to make the installation and configuration as straight forward as possible. But sometimes you just get stuck and we want to help you out of it as fast as possible.
 
 
 ----
