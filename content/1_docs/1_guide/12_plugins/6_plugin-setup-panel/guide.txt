@@ -60,10 +60,6 @@ Your Panel plugin code is located in the `src` folder. Your main plugin file is 
 
 Parcel has a nice built-in feature called hot module reloading. This means that the Panel will automatically apply changes whenever you work on your plugin code without you having to reload the browser. This should be working out of the box as soon as you loaded the plugin for the first time.
 
-<info>
-CSS hot reloading is currently not working due to an issue in our Panel code. We are working on a fix for 3.2
-</info>
-
 ## Building your plugin
 
 Once you are happy with your plugin, you can create minified and optimized versions of the `index.js` and `index.css` with …
