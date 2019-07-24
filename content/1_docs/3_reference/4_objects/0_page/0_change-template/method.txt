@@ -1,1 +1,11 @@
 Auth: pages.changeTemplate
+
+----
+
+Text:
+
+## Details
+
+<warning>
+**Changing the page template can lead to unwanted data loss. Always make sure you have a backup of your data before using this method.**
+</warning>
