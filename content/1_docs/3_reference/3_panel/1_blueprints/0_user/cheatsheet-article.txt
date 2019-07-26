@@ -71,7 +71,7 @@ permissions:
 ```		
 
 
-### `file`
+### `files`
 
 | Option | Value |
 |----    | ---- |
@@ -85,11 +85,11 @@ permissions:
 
 ```yaml
 permissions:
-	file:
+	files:
 	  delete: false
 ```		
 
-### `page`
+### `pages`
 
 | Option | Value |
 |----    | ---- |
@@ -106,7 +106,7 @@ permissions:
 
 ```yaml
 permissions:
-	page:
+	pages:
 		delete: false
 		create: false
 		changeTemplate: false
@@ -187,7 +187,7 @@ It's also possible to restrict access to entire blocks by just passing `false` t
 
 ```yaml
 permissions:
-	page: false
+	pages: false
 ```
 
 ## Examples
