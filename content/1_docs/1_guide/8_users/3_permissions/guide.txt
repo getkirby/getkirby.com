@@ -30,6 +30,7 @@ permissions:
     panel: true
     site: true
     settings: false
+    users: false
   files:
     create: true
     changeName: true
