@@ -65,6 +65,18 @@ return [
 ];
 ```
 
+## Default Panel language
+
+You can set the default Panel language that is used before a user logs in:
+
+```php "/site/config/config.php"
+return [
+  'panel' => [
+    'language' => 'de'
+  ]
+];
+```
+
 ## KirbyText
 
 If false, the Panel formatting buttons and drag and drop for files and links will create regular (glossary: Markdown) instead of (glossary: kirbytag text: KirbyTags).
