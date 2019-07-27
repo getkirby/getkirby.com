@@ -81,3 +81,38 @@ We have put together an extensive collection of example blueprints for typical s
 Our reference has more in-depth documentation about blueprints and their different components.
 
 (link: docs/reference/panel text: Check out the reference…)
+
+## Tips & Tricks
+
+### Using special characters in blueprint labels etc.
+
+To use special characters in labels etc., wrap the text in double quotes:
+
+```yaml
+field1:
+  label: "Fotograf*in"
+  type: text
+field2:
+  label: "Must do: this"
+  type: text
+```  
+
+### Naming fields
+
+Make sure to only use alpha-numerical characters and underscores in field names. You cannot use dashes.
+
+Yes:
+
+```yaml
+field_1:
+  label: Headline
+  type: text
+```  
+
+No:
+
+```yaml
+field-1:
+  label: Headline
+  type: text
+```  
