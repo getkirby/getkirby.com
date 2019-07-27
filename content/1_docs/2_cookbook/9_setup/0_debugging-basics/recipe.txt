@@ -28,9 +28,15 @@ This option configures PHP so that errors are displayed on the screen. PHP error
 
 ## Disable debugging on live server
 
-<info>
-Now that we have turned on debugging, we should always remember to disable displaying errors on our production server as we don't want our website visitors to see any nasty error messages.  Apart from the fact that this leaves a bad impression, it is also a potential security risk, because an error message may give away important information about our server.
-</info>
+<warning>
+Make sure to disable `debug` mode in production! Displaying PHP errors on a public server can be a serious security risk: 
+
+- Error messages are displayed with detailed information about the code structure (e.g. file path, class, method)
+- With Whoops enabled, there will be even more detailed information about the code structure
+- Detailed error messages for login failures could leak information to attackers
+
+In a production environment, always log errors to your PHP error logs.
+</warning>
 
 Usually, production servers should be configured to not display errors on the screen but log them to a log file. However, if we forget to disable our config settings in our production environment, these server settings will be overwritten.
 

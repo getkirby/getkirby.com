@@ -54,9 +54,17 @@ return [
   'debug' => true
 ];
 ```
-<info>
-Make sure to disable debug mode in production. The additional information about errors should never be public as that can be a security risk.
-</info>
+
+<warning>
+Please make sure to disable `debug` mode in production! Displaying PHP errors on a public server can be a serious security risk: 
+
+- Error messages are displayed with detailed information about the code structure (e.g. file path, class, method)
+- With Whoops enabled, there will be even more detailed information about the code structure
+- Detailed error messages for login failures could leak information to attackers
+
+In a production environment, always log errors to your PHP error logs.
+</warning>
+
 
 ## Custom API location
 
