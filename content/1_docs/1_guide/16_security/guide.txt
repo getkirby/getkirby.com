@@ -51,6 +51,10 @@ You can check which PHP versions are still supported on the (link: https://php.n
 
 Use very long passwords for the connection to your server and for your Panel logins! Try to convince your clients to use something more secure than `123456789` as well. Short passwords can be hacked by a brute-force attack within seconds. They are no longer a viable protection. Also make sure to use different passwords for different sites and tools. Never use the same password more than once. The Panel helps you with **long and secure password** suggestions on installation and in the user account management.
 
+<since v="3.2.3">
+The Panel also has a built-in **brute-force protection** for the Panel login. It will delay requests with invalid credentials and also block access to the Panel by IP address and by user after 10 login failures within an hour. You can change these defaults with the (link: docs/reference/system/options/auth text: auth options). Please note that Kirby can't protect your SFTP/SSH accounts, also brute-force attacks are only hindered and not prevented entirely. So it's always important to use strong passwords.
+</since>
+
 ## Blocked folders and files
 
 Kirby's default `.htaccess` file for Apache comes with a set of predefined rules to block external access to certain files and folders in order to secure them. If you run your own `.htaccess` file with your own set of rules, or if you use another server architecture such as Nginx, make sure to block the same files and folders with your setup.
