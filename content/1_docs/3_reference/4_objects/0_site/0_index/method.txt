@@ -7,3 +7,9 @@ $articles = $site->index()->filterBy('template', 'article');
 // the index method is also perfect for a site-wide search
 $results = $site->index()->search('mysearchword');
 ```
+
+## Details
+
+<warning>
+`$site->index()` reads the entire folder structure including all files. Especially on large sites with many files, using `$site->index()` can result in big performance issues, so use with caution.
+</warning>
