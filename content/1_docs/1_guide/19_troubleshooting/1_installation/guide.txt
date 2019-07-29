@@ -26,6 +26,7 @@ If you run Kirby in a subfolder, make sure to set the RewriteBase according to t
 ```
 RewriteBase /my-subfolder
 ```
+
 ## Thumbs not generated, Panel not working
 
 If you use PHP's built-in server (not recommended), you have to start it up with Kirby's router:
@@ -37,6 +38,10 @@ php -S localhost:8000 kirby/router.php
 ## Weird PHP syntax errors
 
 Please make sure that you use the minimum required version of PHP, which is 7.1+ since Kirby 3.0.0. We recommend using the most recent stable PHP version that is available to you.
+
+## Issues with date & time handling
+
+Check if you have set the (link: https://www.php.net/manual/en/timezones.php text: correct timezone) in your `php.ini` file with the `date.timezone` option. If you don't have access to the `php.ini` file, check if your hosting provider allows changing this in their web interface, otherwise contact your hosting provider.
 
 ## Subpages and files not working
 
