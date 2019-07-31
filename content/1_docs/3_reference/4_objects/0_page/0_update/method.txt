@@ -9,26 +9,25 @@ Text:
 ```php
 try {
 
-  page('mypage')->update([
+  $newPage = page('mypage')->update([
     'title'        => 'A new title',
     'text'         => 'Some text',
     'anotherfield' => 'Some more data'
   ]);
 
-  echo 'The page has been updated';
+  echo 'The page has been updated:';
 
 } catch(Exception $e) {
 
   echo $e->getMessage();
 
 }
-
 ```
 
 ### Updating a field by callback
 
 ```php
-$page->update([
+$newPage = $page->update([
   'title' => function($title) {
     return Str::lower($title);
   }
@@ -41,7 +40,7 @@ Use the optional `$lang` parameter to specify the language you want to update.
 ```php
 try {
 
-  page('mypage')->update([
+  $newPage = page('mypage')->update([
     'title'        => 'A new title',
     'text'         => 'Some text',
     'anotherfield' => 'Some more data'
