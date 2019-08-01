@@ -16,7 +16,7 @@ For this example, we use a freely accessible API, in this case the (link: https:
 
 First, create a parent page, e.g. `reviews` in the `/content` folder and inside it, a `reviews.txt` text file.
 
-```kirbycontent "/content/reviews/review.txt"
+```kirbycontent "/content/reviews/reviews.txt"
    Title: Movie reviews
 
    ----
