@@ -6,7 +6,7 @@ Text:
 
 if($file = $page->file()) {
     // unix timestamp
-    echo $file->mmodified();
+    echo $file->modified();
 
     // formatted date
     echo $file->modified('d/m/Y');
