@@ -95,6 +95,51 @@ gallery:
 
 You can find more example how you can use the query language in the (link: docs/guide/blueprints/query-language text: guide).
 
+## Image options
+
+<info>
+Apart from showing no image, all image options only apply in card layout, not in list layout.
+</info>
+
+### `cover`
+
+Whether or not the image will cover the available space.
+Options: `true`, `false (default)`
+
+```yaml
+image:
+  cover: true
+```
+
+### `ratio`
+
+A freely selectable image ratio
+
+```yaml
+image:
+  ratio: 16/9
+```
+
+### `back`
+
+Set an image background.
+Options: `pattern (default)`, `black`, `white`
+```yaml
+
+image:
+  cover: true
+  ratio: 1/1
+  back: black
+```
+
+### No image
+
+Set the image options to false if you don't want to show an image but an icon instead:
+
+```yml
+image: false
+```
+
 ## Upload options
 
 <since v="3.2.0">
