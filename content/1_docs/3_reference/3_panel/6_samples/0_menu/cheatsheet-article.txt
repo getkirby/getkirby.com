@@ -59,3 +59,54 @@ fields:
 
 (screenshot: menu.png)
 
+## Example controller and template
+
+### Controller
+
+```php "site/controllers/menu.php
+<?php
+return function () {
+    $categories = [
+        'Starters',
+        'Pasta',
+        'Meat',
+        'Desert'
+    ];
+    return [
+        'categories' => $categories
+    ];
+};
+```
+
+### Template
+
+```php "site/templates/menu.php
+<?php snippet('header') ?>
+
+<main class="restaurant-menu">
+  <header class="intro">
+    <h1><?= $page->title() ?></h1>
+    <?php if ($page->intro()->isNotEmpty()): ?>
+    <div class="intro-text text">
+      <?= $page->intro()->kt() ?></p>
+    </div>
+    <?php endif ?>
+  </header>
+
+  <?php foreach ($categories as $category): ?>
+  <section class="dishes">
+    <h2><?= $category ?></h2>
+    <?php foreach ($page->$category()->toStructure() as $dish): ?>
+    <article class="dish">
+      <h3 class="dish-name"><?= $dish->dish() ?></h3>
+      <p class="dish-description"><?= $dish->description() ?></p>
+      <p class="dish-price">€ <?= $dish->price() ?></p>
+    </article>
+    <?php endforeach ?>
+  </section>
+  <?php endforeach ?>
+
+</main>
+
+<?php snippet('footer') ?>
+```
