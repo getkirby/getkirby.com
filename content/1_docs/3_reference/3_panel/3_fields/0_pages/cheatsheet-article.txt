@@ -56,7 +56,6 @@ fields:
     max: 3
 ```
 
-
 ## Preview images
 
 The default (preview) image is the first image in the folder. You can configure the (preview) image for each item using the `image` option:
@@ -149,12 +148,39 @@ image:
 
 If you don't want to show an image but the icon selected for the page, you can set the `query` option to `false`:
 
-```yml
+```yaml
 image:
   query: false
 ```
 
 Kirby will then either show a default page icon or the icon defined in the page blueprint.
+
+## Info and text
+
+The `info` and `text` properties allow you to define what information is shown for each selected item (and in the modal). You can use Kirby's (link: docs/guide/blueprints/query-language text: query language) to query any information you need.
+
+### Text
+The `text` property shows the main information for the page, by defauult that is the page title. You can however either modify what is shown and how:
+
+```yaml
+text: "{{ page.title.upper }}"
+```
+
+```yaml
+text: "{{ page.title }} | {{ page.description.excerpt(20) }}"
+```
+
+### Info
+
+With the `info` property, you can show additional information:
+
+```yaml
+info: "{{ page.images.count }}"
+```
+
+```yaml
+info: "{{ page.tags }}"
+```
 
 ## How to use in templates/snippets
 
