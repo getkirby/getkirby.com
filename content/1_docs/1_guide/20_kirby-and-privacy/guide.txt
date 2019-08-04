@@ -12,7 +12,7 @@ Text:
 <info>
 The following information might be incomplete. Your site may collect or process personal data in other ways.
 
-We cannot give any legal advice what this means for you and your sites. If you are unsure what you need to do to comply with GDPR in particular or any other national privacy laws in your country, please consult a lawyer.
+We cannot give any legal advice what the following information means for you and your sites. If you are unsure what you need to do to comply with GDPR in particular or any other national privacy laws in your country, please consult a lawyer.
 </info>
 
 ## Preface
@@ -37,7 +37,11 @@ The Panel sets a session cookie for every visitor who uses the Panel to keep tra
 
 ## Licensing
 
-To register your license, the Panel connects to our licensing server to verify your license. When you do so, the license server stores the domain for which the license is registered on our license server.
+To register your license, the Panel connects to our licensing server **once** to verify your license. When you register your license, the following information is transmitted to the server:
+
+- license key
+- email address
+- domain of the Kirby installation
 
 ## Brute-force protection
 
@@ -49,11 +53,13 @@ If you use the (link: docs/reference/system/options/languages text: `languages.d
 ## `csrf()` helper
 If you use the (link: docs/reference/templates/helpers/csrf text: `csrf()` helper), Kirby will create a session cookie so that the helper can validate the CSRF token in a later request.
 
-## Plugins and custom code
-Your sites may store or process additional personal data depending on the Kirby plugins and custom code you are using. For example, some plugins like contact form plugins also use sessions for technical reasons.
+## Plugins, themes and custom code
+Your sites may store or process additional personal data depending on the Kirby plugins and custom code you are using. For example, some plugins like contact form plugins also use sessions for technical reasons. Themes may include web fonts, external scripts or tracking code.
 
 ## Contact forms
 Your sites also process personal data once a contact form is submitted, a blog comment gets stored or files get uploaded by visitors. The same also applies to similar custom site features. The data you store in your content files may also contain personal data.
+
+****
 
 ## Hosting providers
 Data might also get stored and processed by your hosting provider. What sort of data they store and process depends on your contract with the hosting provider.
