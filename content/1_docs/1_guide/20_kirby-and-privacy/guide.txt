@@ -9,61 +9,68 @@ Description: Things you need to know about Kirby in terms of privacy and GDPR co
 
 Text:
 
+With this guide, we want to give you the necessary technical information to make it easier for you to comply with privacy regulations in your country (like the GDPR in the EU).
+
 <info>
 The following information might be incomplete. Your site may collect or process personal data in other ways.
 
+We are not responsible how you handle data privacy on your own Kirby-powered website(s). You are your own data controller and if you are located in the EU or if you have customers in the EU, you must make sure that your site complies with GDPR. The same applies to any other national privacy laws in your country.
+
 We cannot give any legal advice what the following information means for you and your sites. If you are unsure what you need to do to comply with GDPR in particular or any other national privacy laws in your country, please consult a lawyer.
 </info>
-
-## Preface
-
-We are not responsible how you handle data privacy on your own Kirby-powered website(s). You are your own data controller and if you are located in the EU or if you have customers in the EU, you must make sure that your site is GDPR-compliant. However, we want to give you the necessary technical information to make it easier for you to comply with GDPR or any other privacy regulations.
 
 ## Privacy by design
 
 Kirby and the Panel are designed with privacy in mind, which is why the Kirby core and Panel do not communicate with third-party services or our own servers in any form (exception: licensing, see below). There are no trackers, no analytics and no cookies except those related to sessions and user management. We have no access to your Panel, to your data, to your server or to your users. We also do not use external services to provide web fonts, JavaScript libraries or any other assets for the Panel. Everything runs on your server and stays under your control.
 
+## Features with privacy implications
+
 Kirby sites usually do not store or process any personal data of your site visitors. However, here is a list of Kirby features that process data if you use them and some general information about where personal data might get stored.
 
-## User handling
+### User handling & the Panel
 
-User data gets stored in account files within the `site/accounts` directory. Kirby will create a session cookie to keep track of the currently logged in user if you use a login form in your site’s frontend or if you use the Panel. 
+User data gets stored in account files within the `site/accounts` directory. Kirby will create a session cookie to keep track of the currently logged in user if you use a login form in your site’s frontend or if you use the Panel.
 
 The user credentials are transmitted via HTTP. Therefore, we strongly recommend to use TLS encryption for your sites to protect the passwords and other personal data of your visitors and users.
 
-## Panel
+The Panel also stores unsaved changes in `localStorage` in the user’s browser.
 
-The Panel sets a session cookie for every visitor who uses the Panel to keep track of the currently logged in user. Additionally, the Panel stores unsaved changes in `localStorage`.
-
-## Licensing
-
-To register your license, the Panel connects to our licensing server **once** to verify your license. When you register your license, the following information is transmitted to the server:
-
-- license key
-- email address
-- domain of the Kirby installation
-
-## Brute-force protection
+### Brute-force protection
 
 To protect the Panel login against brute-force attacks, Kirby temporarily stores a shortened SHA256 hash of the IP address on login failures. This hash cannot be converted back to the raw IP address. You can control the number of possible trials before brute-force protections kicks in and the time span for which this data is stored in your (link: docs/reference/system/options/auth text: config settings).
 
-## Language detection
+### Language detection
+
 If you use the (link: docs/reference/system/options/languages text: `languages.detect` option) on a multilang site, Kirby also creates a session cookie to keep track of the visitor’s language. This option is disabled by default.
 
-## `csrf()` helper
-If you use the (link: docs/reference/templates/helpers/csrf text: `csrf()` helper), Kirby will create a session cookie so that the helper can validate the CSRF token in a later request.
+### `csrf()` helper
 
-## Plugins, themes and custom code
+If you use the (link: docs/reference/templates/helpers/csrf text: `csrf` helper), Kirby will create a session cookie so that the helper can validate the CSRF token in a later request.
+
+### Licensing
+
+To register your license, the Panel connects to our licensing server **once** to verify your license. When you register your license, the following information is transmitted to the server:
+
+- the entered license key
+- the email address connected to the license key
+- the domain of the Kirby installation
+
+No other personal or site data is transmitted to our server.
+
+## Other data handlers
+
+### Plugins, themes and custom code
+
 Your sites may store or process additional personal data depending on the Kirby plugins and custom code you are using. For example, some plugins like contact form plugins also use sessions for technical reasons. Themes may include web fonts, external scripts or tracking code.
 
-## Contact forms
-Your sites also process personal data once a contact form is submitted, a blog comment gets stored or files get uploaded by visitors. The same also applies to similar custom site features. The data you store in your content files may also contain personal data.
+### Data submitted by visitors
+
+Your sites also process personal data once a contact form is submitted, a blog comment gets stored or files get uploaded by visitors. The same also applies to similar custom site features. The data you store in your content files or databases may also contain personal data.
+
+### Hosting providers
+
+Data might also get stored and processed by your hosting provider. What sort of data they store and process depends on your contract with the hosting provider.
 
 ****
 
-## Hosting providers
-Data might also get stored and processed by your hosting provider. What sort of data they store and process depends on your contract with the hosting provider.
-
-
 If you have any further technical questions about Kirby and privacy, do not hesitate to contact us via the (link: https://forum.getkirby.com text: Kirby forum).
-
