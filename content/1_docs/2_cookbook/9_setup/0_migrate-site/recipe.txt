@@ -258,7 +258,7 @@ While filter methods like `visible()`, `invisible()` and related Pages methods w
 
 ### KirbyText pre/post filters
 
-(link: docs/reference/plugins/hooks/kirbytags-before text: KirbyText pre) and (link: docs/reference/plugins/hooks/kirbytags-after text: KirbyText post) filters now have to be registered as hooks.
+(link: docs/reference/plugins/hooks/kirbytext-before text: KirbyText pre) and (link: docs/reference/plugins/hooks/kirbytext-after text: KirbyText post) filters now have to be registered as hooks.
 
 
 ### Sending email
