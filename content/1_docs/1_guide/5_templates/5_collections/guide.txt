@@ -19,6 +19,8 @@ return function ($site) {
 };
 ```
 
+(link: docs/reference/objects/pages text: Pages reference ›)
+
 ### A list of users
 
 ```php "/site/collections/admins.php"
@@ -27,6 +29,8 @@ return function ($users) {
 	return $users->filterBy('role', 'admin');
 };
 ```
+
+(link: docs/reference/objects/users text: Users reference ›)
 
 ### A list of images/files
 
@@ -40,6 +44,8 @@ return function ($site) {
 		->template('cover');
 };
 ```
+
+(link: docs/reference/objects/files text: Files reference ›)
 
 ## How to use collections
 
