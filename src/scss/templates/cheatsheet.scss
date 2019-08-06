@@ -360,6 +360,8 @@ body {
   padding: 0 1.5rem;
 }
 
+/* Cheatsheet list entry */
+
 .cheatsheet-entries li {
   border-bottom: 1px solid rgba(#000, .1);
   font-size: .75rem;
@@ -369,8 +371,21 @@ body {
 .cheatsheet-entries li a {
   align-items: center;
   display: flex;
+  justify-content: stretch;
   outline: 0;
   padding: .75rem 0;
+}
+
+.cheatsheet-entries li a[aria-current]::after {
+  background: $color-syntax-yellow;
+  bottom: 0;
+  content: "";
+  left: -1.5rem;
+  margin-left: -1px;
+  position: absolute;
+  top: 0;
+  width: 6px;
+  z-index: 1000;
 }
 
 .cheatsheet-entry-icon {
@@ -388,35 +403,33 @@ body {
   width: 1rem;
 }
 
-.cheatsheet-entries li a[aria-current]::after {
-  background: $color-syntax-yellow;
-  bottom: 0;
-  content: "";
-  left: -1.5rem;
-  margin-left: -1px;
-  position: absolute;
-  top: 0;
-  width: 6px;
-  z-index: 1000;
+.cheatsheet-entries li a div {
+  flex: 0 1 100%;
 }
 
 .cheatsheet-entries li a strong {
-  display: block;
+  display: flex;
   font-family: $font-mono;
   font-weight: 500;
+  width: 100%;
 }
 
-.cheatsheet-entries li a strong span {
+.cheatsheet-entries li a strong span:first-child {
+  flex: 1 1 auto;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.cheatsheet-entries li a strong span + span {
   background: #fff;
   color: #999;
-  padding-left: .5rem;
-  position: absolute;
-  right: 0;
-  top: .75rem;
+  flex: 0 0 auto;
+  margin-left: 1ch;
 }
 
 .cheatsheet-entries li a small {
   color: #777;
+  display: block;
   font-size: .75rem;
 }
 
