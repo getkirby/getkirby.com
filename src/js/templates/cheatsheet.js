@@ -1,13 +1,13 @@
 /* global Prism */
 import { $, $$ } from "../utils/selector.js";
 import "../components/code.js";
-import { enableBodyScroll, disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
+import { /* enableBodyScroll,*/ disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
 const cheatsheet = $(".cheatsheet");
 
 const buttons = () => {
 
-  const menuScrollArea = $(".cheatsheet-panel-scrollarea");
+  // const menuScrollArea = $(".cheatsheet-panel-scrollarea");
 
   $$(".cheatsheet-panel-header button").forEach((button) => {
 
@@ -63,9 +63,6 @@ const load = (link) => {
       const title = link.getAttribute("data-title");
 
       document.title = title + " | Kirby";
-
-      // highlight all code blocks
-      Prism.highlightAll();
 
       // link header buttons
       buttons();
