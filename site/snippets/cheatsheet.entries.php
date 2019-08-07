@@ -9,30 +9,12 @@
   </header>
   <div class="cheatsheet-entries-scrollarea cheatsheet-panel-scrollarea">
     <ul>
-      <?php foreach ($entries as $entry): ?>
+      <?php foreach ($entries as $item): ?>
       <li>
-        <a data-slug="<?= $entry->slug() ?>" data-title="<?= $entry->title() ?>" href="<?= $entry->url() ?>"<?php e($entry->isActive(), ' aria-current="page"' ) ?>>
-          <?php if ($entry->icon()->isNotEmpty()): ?>
-          <figure class="cheatsheet-entry-icon">
-            <svg>
-              <use xlink:href="#<?= $entry->icon() ?>" />
-            </svg>
-          </figure>
-          <?php endif ?>
-          <div>
-            <?php
-            // Add zero-width space characters between the parts of the title.
-            // This is necessary, because Google Chrome (tested with v76) does
-            // not provide a any good way to wrap the single parts of long
-            // titles (e.g. API endpoints) at places, where it makes sense.
-            // Inserting "breakpoints" before any slash allows to control
-            // the wrapping of long titles.
-            $titleSanitized = str_replace('/', '&#8203;/' /* 1 */, $entry->title());
-            ?>
-            <strong><span><?= $titleSanitized ?></span><?php if ($entry->info()->isNotEmpty()): ?> <span><?= $entry->info() ?></span><?php endif ?></strong>
-            <small><?= $entry->excerpt()->kt() ?></small>
-          </div>
-        </a>
+        <?php snippet('cheatsheet.entry', [
+          'item' => $item,
+          'excerpt' => true,
+        ]) ?>
       </li>
       <?php endforeach ?>
     </ul>

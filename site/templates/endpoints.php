@@ -1,1 +1,4 @@
-<?php require 'cheatsheet-section.php' ?>
+<?php
+$excerpt = true;
+require 'cheatsheet-section.php';
+?>

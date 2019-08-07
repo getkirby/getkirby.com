@@ -1,1 +1,4 @@
-<?php require 'cheatsheet-section.php' ?>
+<?php
+$icons = $page->svg();
+require 'cheatsheet-section.php';
+?>

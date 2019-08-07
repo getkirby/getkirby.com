@@ -1,4 +1,4 @@
-<?php snippet('cheatsheet.header') ?>
+<?php snippet('cheatsheet.header', ['icons' => $icons ?? null]) ?>
 
 <article class="cheatsheet-section cheatsheet-main cheatsheet-panel">
 
@@ -24,7 +24,10 @@
       <?php if ($page->children()->hasAdvanced()): ?>
       <?php snippet('cheatsheet.section.advanced-link') ?>
       <?php endif ?>
-      <?php snippet('cheatsheet.section', ['section' => $page]) ?>
+      <?php snippet('cheatsheet.section', [
+        'section' => $page,
+        'excerpt' => $excerpt ?? false,
+      ]) ?>
     </div>
 
     <?php if ($page->text()->isNotEmpty()): ?>
