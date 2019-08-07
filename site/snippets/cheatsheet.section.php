@@ -1,15 +1,10 @@
 <ul class="cheatsheet-section-entries">
-  <?php foreach ($section->children()->forCheatsheet() as $entry): ?>
+  <?php foreach ($section->children()->forCheatsheet() as $item): ?>
   <li>
-    <a href="<?= $entry->url() ?>">
-      <?= $entry->title() ?>
-      <?php if ($entry->intendedTemplate()->name() === 'endpoint'): ?>
-        <div class="-mt:small">
-          <span><?= $entry->info() ?></span>
-          <small><?= $entry->excerpt()->kt() ?></small> 
-        </div>
-      <?php endif ?> 
-    </a>
+    <?php snippet('cheatsheet.entry', [
+      'item' => $item,
+      'excerpt' => $excerpt ?? false,
+    ]) ?>
   </li>
   <?php endforeach ?>
 </ul>
