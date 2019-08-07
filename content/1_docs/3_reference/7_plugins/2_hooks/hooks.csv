@@ -25,7 +25,7 @@ page.changeTemplate:before,"$page,$template",trigger
 page.changeTemplate:after,"$newPage,$oldPage",trigger
 page.changeTitle:before,"$page,$title",trigger
 page.changeTitle:after,"$newPage,$oldPage",trigger
-page.create:before,"$parent,$input",trigger
+page.create:before,"$page,$input",trigger
 page.create:after,$page,trigger
 page.delete:before,$page,trigger
 page.delete:after,"$status,$page",trigger
