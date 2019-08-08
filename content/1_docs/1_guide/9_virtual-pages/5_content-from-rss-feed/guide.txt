@@ -12,9 +12,9 @@ Intro: Fetch your Medium blog into your own site. In this example we will create
 
 Text:
 
-For this example, we use (link: https://help.medium.com/hc/en-us/articles/214874118-RSS-feeds text: Medium's RSS feeds) to fetch articles into your own site.
+For this example, we use (link: https://help.medium.com/hc/en-us/articles/214874118-RSS-feeds text: Medium's RSS feeds) to integrate articles as virtual pages into our own site.
 
-To start, we create a parent page, e.g. `rssfeed` in the `/content` folder and inside it, an `rssfeed.txt` text file.
+To start, we create a parent page, e.g. `rssfeed` in the `/content` folder and inside it an `rssfeed.txt` text file.
 
 Let's give our parent page a title and maybe a short intro.
 
@@ -25,8 +25,6 @@ Let's give our parent page a title and maybe a short intro.
 
    Intro: This page lists articles from an RSS feed.
 ```
-
-This page will serve as our model for the child pages.
 
 
 ## Creating the virtual subpages
@@ -42,13 +40,17 @@ class RssfeedPage extends Page {
     {
         $results = [];
         $pages   = [];
+        
         // use the URL of the feed you want to fetch
         $request = Remote::get('https://open.nytimes.com/feed');
         
+        // if the request was sucessfully, parse feed as $results
         if ($request->code() === 200) {
             $results = Xml::parse($request->content());
         }
-        if (count($results)) {
+        
+        // if we have any results, create the child page props for each result
+        if (count($results) > 0) {
             foreach ($results['channel']['item'] as $item) {
                 $pages[] = [
                     'slug'     => Str::slug($item['title']),
@@ -67,6 +69,7 @@ class RssfeedPage extends Page {
             }
         }
         
+        // create a Pages collection for the child pages
         return Pages::factory($pages, $this);
     }
 
@@ -75,7 +78,7 @@ class RssfeedPage extends Page {
 
 ## The template
 
-With the new page model in place, we can now render all feed articles in our `rssfeed.php` template as if they were regular Kirby pages.
+With this new page model in place, we can now render all feed articles in our `rssfeed.php` template as if they were regular Kirby children pages.
 
 ```php "/site/templates/rssfeed.php"
 <?php snippet('header') ?>
@@ -105,9 +108,9 @@ With the new page model in place, we can now render all feed articles in our `rs
 
 ## Subpages
 
-Each article will automatically get its own subpage. Routing will work out of the box and you can create an `feedarticle.php` template to render each individual article.
+Each article will automatically get its own subpage. Routing will work out of the box and you can create an `feeditem.php` template (as we defined above when setting the child page props) to render each individual article.
 
-```php "/site/templates/feedarticle.php"
+```php "/site/templates/feeditem.php"
 <?php snippet('header') ?>
 
 <main>
