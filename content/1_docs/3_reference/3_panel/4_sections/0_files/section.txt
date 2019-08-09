@@ -195,6 +195,15 @@ You can sort the list of files by a given field in descending or ascending order
 sortBy: filename desc
 ```
 
+<since v="3.2.3">
+You can pass (link: https://www.php.net/manual/en/function.sort.php text: PHP sorting type flags), for example to make sorting work with special language specific characters.
+
+```yaml
+sortBy: filename SORT_LOCALE_STRING
+sortBy: filename asc SORT_LOCALE_STRING
+```
+</since>
+
 <info>
 The `sortBy` option will automatically switch off manual sorting.
 </info>
