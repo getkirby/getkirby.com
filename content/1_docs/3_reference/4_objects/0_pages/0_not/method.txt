@@ -1,11 +1,13 @@
-Text: 
+Text:
 
 ## Example
+
+Note that you have to pass the full [`id`](/docs/reference/objects/page/id) as parameter:
 
 ```php
 <h2>All pages except project-b</h2>
 <ul>
-  <?php foreach($page->children()->not('project-b') as $subpage): ?>
+  <?php foreach($page->children()->not('projects/project-b') as $subpage): ?>
   <li>
     <a href="<?= $subpage->url() ?>">
       <?= $subpage->title()->html() ?>
@@ -15,11 +17,10 @@ Text:
 </ul>
 ```
 
-## Pass collection as argument
-(since 2.3.0+)
-You can now pass a collection as argument as well:
+### Pass collection as argument
+You can pass a collection as argument as well:
 
-```
+```php
 <ul>
   <?php
   $excluded = $page->children()->filterBy('template', 'some_template');
