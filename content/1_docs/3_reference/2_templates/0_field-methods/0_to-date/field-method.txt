@@ -17,7 +17,7 @@ Text:
 <since v="3.2.0">
 
 ```php
-<?= $page->createdAt()->toDate('d.m.Y', 'now' ?>
+<?= $page->createdAt()->toDate('d.m.Y', 'now') ?>
 ```
 </since>
 
