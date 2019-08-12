@@ -230,3 +230,19 @@ $usera = $kirby->users()->sortBy('language', 'desc');
 ```
 
 For files and users (and all the other stuff we can sort) we could also go to extremes, but let's keep it dry and finish here.
+
+## Sorting Panel fields
+
+In blueprints, many Panel fields can also use sortBy with a slight variation on the standard syntax. Add `sortBy:` as a field option, and then list arguments in order without quotes or commas.
+
+For example, this would display a page's children in reverse publishing order: 
+
+```yaml
+fields:
+  posts:
+    label: Blog Posts
+    type: pages
+    sortBy: num desc
+```
+
+You can see more examples of how to use sortBy in the (link: docs/reference/panel/fields/pages text: Pages field).
