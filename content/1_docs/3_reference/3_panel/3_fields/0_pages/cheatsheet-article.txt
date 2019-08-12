@@ -56,6 +56,42 @@ fields:
     max: 3
 ```
 
+## Sort order
+
+By default, the Pages field displays children in ascending publishing order from oldest to newest (`num asc`). In this state, each page has a drag handle to its left, allowing users to re-order pages by clicking and dragging.
+
+If you want to use a custom sort order when viewing in the panel (for example, to list blog posts in reverse post order, or by a 'date' field or any other page field), you can use the (link: docs/reference/objects/pages/sort-by text: sortBy) option. When used as a field option, function arguments should be listed in order, without quotes or commas. Please note this disables drag handles and drag-and-drop reordering in the Panel. You can still change the post order by clicking Change status and selecting a new position.
+
+Please also note this has no effect on Kirby's internal page order, nor in the way they will be displayed in templates. To learn more about using sortBy in templates, please consult the (link: docs/cookbook/content/sorting text: Sorting) Cookbook entry.
+
+### Sort by reverse publishing order
+
+If you want to show pages from most to least recently-published, set sortBy to `num desc`. This means to sort by "number" (the number prepended to published page folders) in "descending" order (default is 'num asc' which means "by number in ascending order").
+
+```yaml
+fields:
+  posts:
+    label: Posts
+    type: pages
+    sortBy: num desc
+```
+
+### Sort alphanumerically by title
+
+You could view all pages by their `title` field sorted alphanumerically with `sortBy: title asc`.
+
+```yaml
+sortBy: title asc
+```
+
+### Sort by date and time
+
+If your pages have date and/or time fields, you can sort by those instead. As in the (link: docs/reference/objects/pages/sort-by text: sortBy template function), you can sort by more than one field by passing fields and options in order. The following would sort first by date descending and then by time descending, showing all pages in reverse chronological order according to page metadata.
+
+```yaml
+sortBy: date desc time desc
+```
+
 ## Preview images
 
 The default (preview) image is the first image in the folder. You can configure the (preview) image for each item using the `image` option:
