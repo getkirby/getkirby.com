@@ -10,7 +10,7 @@ Text:
 
 Templates are registered with the `templates` extension. The extension accepts an array of key/value pairs, where the key is the name of the template and the value the path to the file in your plugin folder.
 
-```php
+```php "/site/plugins/your-plugin/index.php"
 Kirby::plugin('your/plugin', [
 	'templates' => [
 		'blog' => __DIR__ . '/templates/blog.php'
