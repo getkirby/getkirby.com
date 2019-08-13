@@ -40,7 +40,7 @@ Kirby::plugin('your/plugin', [
 
 And then in `/tags/wikipedia.php`
 
-```php "/tags/wikipedia.php"
+```php "/site/plugins/your-plugin/tags/wikipedia.php"
 <?php
 
 return [
@@ -114,7 +114,7 @@ $tag->width
 
 ### Array of all used attributes
 
-```
+```php
 $tag->attrs
 ```
 
@@ -154,7 +154,7 @@ In addition to your own KirbyTag plugins, you can also hook into the KirbyTags p
 
 ### `kirbytags:before`
 
-```php
+```php "/site/plugins/your-plugin/index.php"
 Kirby::plugin('your/plugin', [
 	'hooks' => [
 		'kirbytags:before' => function ($text, array $data = [], array $options = []) {
@@ -173,7 +173,7 @@ Kirby::plugin('your/plugin', [
 
 ### `kirbytags:after`
 
-```php
+```php "/site/plugins/your-plugin/index.php"
 Kirby::plugin('your/plugin', [
 	'hooks' => [
 		'kirbytags:after' => function ($text, array $data = [], array $options = []) {
