@@ -4,6 +4,6 @@ Text:
 
 ```php
 <?php if($related = $page->related()->toPage()): ?>
-<p><a href="<?= $page->url() ?>">Read more…</a></p>
+  <p><a href="<?= $related->url() ?>">Read more…</a></p>
 <?php endif ?>
 ```
