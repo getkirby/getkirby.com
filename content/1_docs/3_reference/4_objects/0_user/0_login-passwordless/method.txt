@@ -12,7 +12,10 @@ if($username = get('username') and $password = get('password')) {
   // OAuth, IndieAuth, email or SMS token etc.
   myCustomAuthProvider();
 
-  if($user and $user->loginPasswordless()) {
+  if($user) {
+    // Logs the user in without checking the password
+    $user->loginPasswordless();
+    
     // redirect to the homepage
     // or any other page
     go();
