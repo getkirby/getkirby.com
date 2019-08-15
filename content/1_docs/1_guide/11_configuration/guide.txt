@@ -108,7 +108,11 @@ You can set different options based on the domain by adding additional config fi
 
 By setting different options in those config files, you get a very flexible system that can be deployed to different servers and react to the current environment accordingly.
 
+<info>
 Note that the settings in the standard `config.php` file are always used. If you need different settings in another environment, you will have to override those settings in the domain specific configuration file (or only set those options in your domain specific config file).
+
+General settings for all environments should be included in the standard `config.php` file to avoid code duplication. 
+</info>
 
 ## Custom folder setup
 
