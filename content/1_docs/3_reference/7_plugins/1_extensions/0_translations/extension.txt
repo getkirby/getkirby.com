@@ -10,10 +10,10 @@ Translations are registered with the `translations` extension. It takes an array
 Kirby::plugin('your/plugin', [
 	'translations' => [
 		'en' => [
-			'export' => 'Export',
+			'your.plugin.export' => 'Export',
 		],
 		'de' => [
-			'export' => 'Exportieren',
+			'your.plugin.export' => 'Exportieren',
 		]
 	]
 ]);
@@ -25,8 +25,14 @@ You can now use these translations in your plugin, for example in a (link: docs/
 panel.plugin('your/plugin', {
 	fields: {
 		export: {
-			template: "<k-button>{{ $t('export') }}</k-button>"
+			template: "<k-button>{{ $t('your.plugin.export') }}</k-button>"
 		}
 	}
 });
 ```
+
+<info>
+The translation variables are global, it is therefore recommended to prefix them with your plugin name to avoid issues when the same name gets used multiple times.
+
+It is however also possible to register "global" translations without prefix from a plugin if that's what you need.
+</info>
