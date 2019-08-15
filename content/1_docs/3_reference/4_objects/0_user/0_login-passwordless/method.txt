@@ -4,16 +4,17 @@ Text:
 
 ```php
 // simple login form submission example
-if($username = get('username') and $password = get('password')) {
+if($username = get('username') && $password = get('password')) {
 
   $user = $kirby->user($username);
 
-  // verify access with a different method like
-  // OAuth, IndieAuth, email or SMS token etc.
-  myCustomAuthProvider();
-
   if($user) {
-    // Logs the user in without checking the password
+    // verify access with a different method like
+    // OAuth, IndieAuth, email or SMS token etc.
+    myCustomAuthProvider();
+  
+    // now that that succeeded, log the user in without checking the provided password
+    // NOTE: Only use this if you have verified access in other ways like in this example!
     $user->loginPasswordless();
     
     // redirect to the homepage
@@ -24,5 +25,4 @@ if($username = get('username') and $password = get('password')) {
   }
 
 }
-
 ```
