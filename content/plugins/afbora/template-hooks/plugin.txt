@@ -1,0 +1,13 @@
+Title: Template Hooks
+
+----
+
+Repository: https://github.com/afbora/kirby-template-hooks
+
+----
+
+Category: templating
+
+----
+
+Description: Kirby template hooks allow you to manage hooks for page and file templates more easily.
