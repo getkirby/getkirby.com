@@ -49,6 +49,12 @@ Once you have familiarized yourself with the basics, the Reference is probably
 
 (link: docs/reference text: Read more ›)
 
+### (link: docs/cookbook/setup/kirby-in-a-nutshell text: Kirby in a nutshell)
+
+Our "Kirby in a nutshell" recipe gives you a concise overview of how Kirby works, what to keep in mind when you start your project with Kirby, what questions you might want to ask yourself and about possible approaches, no matter if you are completely new to web development, or if you come from other systems.
+
+(link: docs/cookbook/setup/kirby-in-a-nutshell text: Read more ›)
+
 ### (link: docs/cookbook text: Cookbook)
 
 While our docs provide a deep dive into every feature and aspect of Kirby, our Cookbook is a collection of all sorts of solutions you can build with Kirby. Starting from simple things like menus to frontend authentication, headless CMS setups and more.
