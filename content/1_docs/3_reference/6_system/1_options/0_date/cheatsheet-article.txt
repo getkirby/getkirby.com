@@ -6,7 +6,7 @@ Text:
 
 ## Date handler
 
-Determine which PHP function is used to formate dates for pages and files.
+Determine which PHP function is used to format dates for pages and files.
 
 Possible values: `date` | `strtime` (default: `date`)
 
