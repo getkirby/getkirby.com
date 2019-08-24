@@ -148,7 +148,7 @@ By default, the files field allows you to upload files. You can define the `Add`
 
 ### Prevent uploading
 
-You can set the `upload` property to false to prevent file uploads:
+You can set the `uploads` property to false to prevent file uploads:
 
 ```yaml
 gallery:
