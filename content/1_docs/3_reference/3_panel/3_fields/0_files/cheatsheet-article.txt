@@ -144,11 +144,11 @@ image: false
 
 <since v="3.2.0">
 
-By default, the files field allows you to upload files. You can define the `Add`button behavior with the `uploads` option: When clicking on the `Add` button, you can either select a file and/or upload a file (which is then automatically selected).
+By default, the files field allows you to upload files. You can define the `Add` button behavior with the `uploads` option: When clicking on the `Add` button, you can either select a file and/or upload a file (which is then automatically selected).
 
 ### Prevent uploading
 
-You can set the `uploads` property to false to prevent file uploads:
+You can set the `uploads` property to `false` to prevent file uploads:
 
 ```yaml
 gallery:
@@ -158,7 +158,7 @@ gallery:
 
 ### Destination and template
 
-By default all files will be uploaded to the current page and without a predefined template. With the additional options you can fetch files from anywhere and upload them to specific pages. You can also control which file template should be assigned by default:
+By default all files will be uploaded to the current page and without a predefined template. With the additional options you can fetch files from anywhere and upload them to a specific page. You can also control which file template should be assigned by default:
 
 ```yaml
 gallery:
