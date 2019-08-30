@@ -211,11 +211,7 @@ CampaignMonitor complies with GDRP. You can find our more about their privacy po
 
 ## Your Kirby installation
 
-We are not responsible how you handle data privacy on your own Kirby-powered website(s). You are your own data controller and if you are located in the EU or if you have customers in the EU, you must make sure that your site is GDPR-compliant.
-
-The Kirby Panel is designed with data privacy in mind though. The Panel does not communicate with third-party services or our own servers in any form. There are no trackers, no analytics and no cookies except those related to sessions and user management. We have no access to your Panel, to your data, to your server or to your users. We also don't use external services to provide webfonts, JavaScript libraries or any other assets for the Panel. Everything runs on your server and stays under your control.
-
-Make sure to always use HTTPS on your site in order to encrypt login credentials for the Panel and for any other data transmission.
+On your own Kirby-powered websites, you or your clients are their own data controllers and fully responsible for complying with applicable privacy legislation. While Kirby is designed with privacy in mind, there are some situations in which user privacy might be affected. Head over to our (link: docs/guide/kirby-and-privacy text: privacy guide) to learn more. 
 
 ## Questions & Feedback
 
