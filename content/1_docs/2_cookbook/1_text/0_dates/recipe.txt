@@ -23,10 +23,10 @@ In your template …
 <?= $page->published()->toDate('d.m.Y') ?>
 ```
 
-As an argument you can pass any valid (link: http://php.net/manual/en/function.date.php text: php date format string). If you don't pass any string the function will return a unix timestamp, which you can use to make some more fancy php date calculation stuff.
+As an argument you can pass any valid (link: http://php.net/manual/en/function.date.php text: PHP date format string). If you don't pass an argument, the function will return a Unix timestamp, which you can use for more fancy PHP date calculation.
 
 <info>
-We suggest to stick to the format `YYYY-MM-DD HH:MM:SS` (i.e. `2018-11-21 11:22:33`). If you want to use another date format in your text files, you should read more about (link: http://php.net/manual/en/function.strtotime.php text: parseable date formats in PHP).
+We suggest that you stick to the format `YYYY-MM-DD HH:MM:SS` (i.e. `2018-11-21 11:22:33`). If you want to use another date format in your text files, read more about (link: http://php.net/manual/en/function.strtotime.php text: parseable date formats in PHP).
 </info>
 
 ## Article example
@@ -46,7 +46,7 @@ We suggest to stick to the format `YYYY-MM-DD HH:MM:SS` (i.e. `2018-11-21 11:22:
 
 ## Custom date handler
 
-PHP's date function is great, but if you are working with multi-language sites and you need to translate dates, the `strftime` function is actually more powerful. You can change the date handler in your config.
+PHP's date function is great, but if you work on multi-language sites and you need to translate dates, the `strftime` function is actually more powerful. You can change the date handler in your config.
 
 ```php "/site/config/config.php"
 return [
