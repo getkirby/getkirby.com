@@ -1,0 +1,7 @@
+Text:
+
+## Details
+
+<info>
+Note that this method does **not** get the currently logged in user, but the current user in the collection. To get the currently logged in user, use `$user = $kirby->user()`.
+</info>
