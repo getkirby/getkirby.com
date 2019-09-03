@@ -1,0 +1,14 @@
+Title: Are.na Tag
+
+----
+
+Repository: https://github.com/kx550/kirby3-arena
+
+----
+
+Category: text
+
+----
+
+Description: Embed Are.na channels in your text with the (arena: …) Kirbytag
+
