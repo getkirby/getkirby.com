@@ -1,8 +1,8 @@
-Title: Easyvars
+Title: Variables
 
 ----
 
-Repository: https://github.com/OblikStudio/kirby-easyvars
+Repository: https://github.com/OblikStudio/kirby-variables
 
 ----
 
