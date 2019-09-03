@@ -1,0 +1,13 @@
+Title: Imgix
+
+----
+
+Repository: https://github.com/diesdasdigital/kirby-3-imgix
+
+----
+
+Category: assets
+
+----
+
+Description: If this plugin gets activated, it will serve all images via imgix.
