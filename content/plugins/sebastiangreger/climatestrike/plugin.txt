@@ -1,0 +1,14 @@
+Title: ClimateStrike
+
+----
+
+Repository: https://github.com/sebastiangreger/kirby3-climatestrike
+
+----
+
+Category: utilities
+
+----
+
+Description: Temporarily disable your website for the Global Climate Strike on 20 September 2019.
+
