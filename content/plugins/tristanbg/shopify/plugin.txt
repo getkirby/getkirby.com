@@ -1,0 +1,14 @@
+Title: Shopify
+
+----
+
+Repository: https://github.com/tristantbg/kirby-shopify
+
+----
+
+Category: integrations
+
+----
+
+Description: Display products on your own site and integrate the checkout process with your Shopify shop.
+
