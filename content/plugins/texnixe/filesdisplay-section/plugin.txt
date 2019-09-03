@@ -1,4 +1,4 @@
-Title: Filesdisplay Section
+Title: FilesDisplay Section
 
 ----
 
