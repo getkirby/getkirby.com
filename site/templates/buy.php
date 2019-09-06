@@ -7,9 +7,13 @@
         <div class="pricing">
           <section>
 
+            <?php if (empty($saleText) === false): ?>
+            <p class="text sale"><?= $saleText ?></p>
+            <?php endif ?>
+
             <header class="price-header -mb:medium" style="visibility: hidden">
               <?php if (empty($sale) === false): ?>
-              <h2 class="h1 -mb:0"><del>€<?= $price ?></del> €<?= $sale ?> <small>per site</small></h2>
+              <h2 class="h1 -mb:0"><del>€<?= $price ?></del> <span class="price">€<?= $sale ?></span> <small>per site</small></h2>
               <?php else: ?>
               <h2 class="h1 -mb:0"><span class="price">€<?= $price ?></span> <small>per site</small></h2>
               <?php endif ?>
@@ -20,9 +24,6 @@
             </header>
 
             <p class="text">We like to keep things simple: One price, all features, no fees, no subscription.</p>
-            <?php if (empty($saleText) === false): ?>
-            <p class="text sale"><?= $saleText ?></p>
-            <?php endif ?>
             <p>
               <a id="cta" href="https://pay.paddle.com/checkout/499826" target="_blank" class="cta">
                 <?php icon('cart') ?>
