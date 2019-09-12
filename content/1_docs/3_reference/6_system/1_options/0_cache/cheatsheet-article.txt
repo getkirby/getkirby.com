@@ -22,12 +22,12 @@ return [
 
 ## Cache driver
 
-Set a different cache driver, default is file driver.
+Set a different cache driver, default is the file driver.
 
 ```php
 return [
   'cache' => [
-    'driver' => 'memcached'
+    'type' => 'memcached'
   ]
 ];
 ```
