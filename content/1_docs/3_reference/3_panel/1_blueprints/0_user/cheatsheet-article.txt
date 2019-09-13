@@ -52,7 +52,7 @@ description:
 
 The `permissions` option can be used to restrict access to certain actions for the particular role. By default, all actions are allowed and you can deny them by passing `false`.
 
-### `acccess`
+### `access`
 
 | Option | Value |
 |----    | ---- |
