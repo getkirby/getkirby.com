@@ -6,9 +6,9 @@ The `k-bar` can be used to create all sorts of toolbars with the option to have 
 
 ```html
 <k-bar>
-  <slot name="left">...</slot>
-  <slot name="center">...</slot>
-  <slot name="right">...</slot>
+  <template slot="left">...</template>
+  <template slot="center">...</template>
+  <template slot="right">...</template>
 </k-bar>
 ```
 
