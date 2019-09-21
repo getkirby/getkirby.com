@@ -32,9 +32,6 @@
 <?= js('assets/js/index.js', ['defer' => true]) ?>
 <?= js('@auto', ['defer' => true]) ?>
 
-<?php if (!$page->isDescendantOf('docs')): ?>
-<script src="https://assets.digitalclimatestrike.net/widget.js" async></script>
-<?php endif ?>
 
 </head>
 <body data-template="<?= $page->template() ?>">
