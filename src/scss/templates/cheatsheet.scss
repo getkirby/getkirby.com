@@ -472,6 +472,15 @@ body {
   white-space: nowrap;
 }
 
+.cheatsheet-section-entries a span {
+  color: #777;
+}
+
+.cheatsheet-section-entries a small {
+  color: #777;
+  font-size: .75rem;
+}
+
 /** Article **/
 
 .cheatsheet-article-content {
