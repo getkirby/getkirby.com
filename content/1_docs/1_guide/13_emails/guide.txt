@@ -129,6 +129,31 @@ $kirby->email([
 ]);
 ```
 
+## Check if email is sent successfully
+
+```php
+$success = kirby()->email([
+    'from'    => 'welcome@supercompany.com',
+    'to'      => 'someone@gmail.com',,
+    'subject' => 'Welcome!',
+    'body'    => 'We will never reply',
+])->isSent();
+```
+
+## Setting plain text and html body
+
+```php
+kirby()->email([
+  'from'    => 'welcome@supercompany.com',
+  'to'      => 'someone@gmail.com',
+  'subject' => 'Welcome!',
+  'body' => [
+      'html' => Html::a('https://getkirby.com'),
+      'text' => 'https://getkirby.com',
+  ],
+]);
+```
+
 ## Email presets
 
 ```php "/site/config/config.php"
