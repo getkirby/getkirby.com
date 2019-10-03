@@ -407,6 +407,13 @@ As a next step, replace old plugins with new ones where available and/or port yo
 
 (link: docs/reference/plugins/extensions/kirbytags text: KirbyTags) are now defined in a plugin file.
 
+## Miscellaneous
+
+The `popup: yes` property in a `link` KirbyTag becomes `target: _blank`: 
+
+```kirbytext
+(\link: http://wikipedia.org text: Wikipedia target: _blank)
+```
 
 ## Getting stuck?
 
