@@ -42,6 +42,10 @@ Text:
 </table>
 
 <info>
+The server OS must be POSIX compatible.
+</info>
+
+<info>
 If you want to use PHP's built-in server (not recommended), you have to start it up with Kirby's router:
 
 ```php
