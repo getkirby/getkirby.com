@@ -10,6 +10,10 @@ You can extend this set of methods with (link: docs/reference/plugins/extensions
 
 Before you can use the methods of the `$files` class, you need a `$files` object. To get a files object, you fetch the files you need from the `$site`, `$page` or `$user` object:
 
+<info>
+Note that the default sorting order of files is according to their order in the file system. To sort files by their manual sorting order, you can use `$files->sortBy('sort')`, where `sort` is the field that stores the sorting number if you manually sort files in the Panel.
+</info>
+
 ### Site files
 
 ```php

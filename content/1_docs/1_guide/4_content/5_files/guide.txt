@@ -69,6 +69,11 @@ Files can be linked or embedded in any field with KirbyTags or used in templates
 
 Kirby provides many ways to render files in your templates. Here are some examples:
 
+<info>
+Note that the default sorting order of files is according to their order in the file system. To sort files by their manual sorting order, you can use `$files->sortBy('sort')`, where `sort` is the field that stores the sorting number if you manually sort files in the Panel.
+</info>
+
+
 ### Fetching all images of a page
 
 ```php
