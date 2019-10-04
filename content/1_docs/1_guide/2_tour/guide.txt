@@ -1,4 +1,4 @@
-Title: Tour
+Title: Exploring the Starterkit
 
 ----
 
@@ -12,13 +12,8 @@ Intro: Kirby is a modern, fast, flexible, file-based CMS with a beautiful contro
 
 Text:
 
-## Download Kits
 
-We provide two downloadable kits for you to get started with.
-
-(docs: kits)
-
-## Kirby's folder structure
+## A peak under the hood: Kirby's folder structure
 
 | Folder | What's in it? |
 |---- | ---- |
@@ -29,9 +24,9 @@ We provide two downloadable kits for you to get started with.
 
 Our (glossary: Starterkit) has an additional `/assets` folder, we use it to store CSS files. This is just a convention we use. It's not required by Kirby.
 
-## Content
+## Where the content lives
 
-Your content is not stored in a database, but directly in your file system. In your `/content` folder to be exact. Each subfolder of your content folder represents a page.
+Your content is stored directly in your file system. In your `/content` folder to be exact. Kirby doesn't need a database.  Each subfolder of your content folder represents a page.
 
 ```filesystem
 content/
@@ -59,7 +54,7 @@ content/
     site.txt
 ```
 
-The content for each page is stored in a text file together with additional resources like images, videos, or other documents. The `site.txt` in the content folder contains general sitewide information.
+The content for each page is stored in a text file together with additional resources like images, videos, or other documents. The `site.txt` in the content folder contains general site-wide information.
 
 (link: docs/guide/content text: Learn more…)
 
@@ -77,7 +72,7 @@ In each text file in the content folder, content is structured in fields. Those 
 
 Those fields come for free. You can add as many as you need. We recommend using them heavily to structure your content. It will help you later if you need to access specific data in your templates and is much cleaner than just one large blob of text.
 
-## Templates
+## Templates to render your content
 
 All the data that is stored in your content folder can be pulled into your (glossary: template text: templates) to render the pages of your site. Kirby templates are a combination of plain HTML and bits of our powerful (link: docs/guide/templates/php-api text: PHP API). You don't need to be a PHP expert to get started writing templates. We will guide you through it.
 
@@ -109,13 +104,21 @@ Kirby's web interface is called the (glossary: Panel). You can find it at `yourd
 
 While you can manage your site 100% in the file system, the Panel makes it a lot more comfortable to add new pages, edit content or upload files. In the background it will do all the hard work of creating folders and files for you.
 
-## Blueprints
+## Blueprints: Forms in style
 
 The Panel is very versatile and can be customized to fit every project. To set up the Panel, you will use Kirby's so called (glossary: blueprint text: blueprints) to configure layouts, form fields, permissions and more.
 
 (picture: tabs.png)
 
 (link: docs/guide/blueprints text: Learn more…)
+
+## How everything fits together
+
+Not that we have explored the parts, you might wonder how it all fits together. If you have explored the folders of the Startkit a bit, you might have noticed that there are a lot of files with the same file name but different extensions, for example `about.txt` and `/site/blueprints/pages/about.yml` and `/site/templates/abouut.php`. 
+
+These files are in fact tied together by there filenames. The content in `about.txt` is rendered with the `abouut.php` template. And if you visit the `about` page in the Panel, the `about.yml` blueprint takes care of displaying the form fields for the fields in the text file.
+
+(screenshot: from-blueprint-to-frontend.png)
 
 ## What else?
 
