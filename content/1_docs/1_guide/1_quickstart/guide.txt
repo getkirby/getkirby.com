@@ -1,8 +1,8 @@
-Title: Quickstart
+Title: Get up and running
 
 ----
 
-Description: Long guides are boring. Get Kirby up and running in 1 minute.
+Description: All you need to know to get Kirby up and running: Installation, requirements and updates.
 
 ----
 
@@ -14,40 +14,159 @@ Todos:
 
 Text:
 
-## Installation
+## Download and installation
 
-1. **(link: https://github.com/getkirby/starterkit/archive/master.zip text: Download Kirby's Starterkit)**
+1. We provide two downloadable kits for you to get started with.
+
+(docs: kits)
+
 2. Extract the ZIP file in your server's web root
 3. Visit your new Kirby site in your browser at `yourdomain.com`
 4. Visit the (glossary: Panel) at `yourdomain.com/panel`
 
 (screenshot: panel.png)
 
-<info>
-If you want learn more about other ways to install Kirby, check out the (link: docs/guide/installation text: Installation guide).
+ <info>
+When copying files to a remote server via (S)FTP, make sure to copy the `.htaccess` file as well. By default, files starting with a dot are invisible in the filesystem, so make sure enable the display of invisible files before copying.
 </info>
 
-****
+## Requirements
+
+<table>
+    <tr>
+        <th>Web server</th>
+        <th>PHP</th>
+    </tr>
+    <tr>
+        <td class="text">
+            Any of the following:
+            <ul>
+                <li>Apache 2</li>
+                <li>Nginx</li>
+                <li>LiteSpeed</li>
+                <li>Caddy</li>
+            </ul>
+        </td>
+        <td class="text">
+            <ul>
+                <li>PHP 7.1+</li>
+                <li>mbstring extension</li>
+                <li>curl extension</li>
+                <li>ctype extension</li>
+                <li>gdlib extension</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<info>
+The server OS must be POSIX compatible.
+</info>
+
+<info>
+If you want to use PHP's built-in server (not recommended), you have to start it up with Kirby's router:
+
+```php
+php -S localhost:8000 kirby/router.php
+```
+</info>
+
+### Browsers for the Panel
+
+Kirby does not modify the output of your site's templates and thus has no effect on its browser requirements. The Panel is built on modern browser features though and has a couple browser requirements which need to be met by your site's editors.
+
+<table>
+    <tr>
+        <th>Desktop</th>
+        <th>Mobile</th>
+    </tr>
+    <tr>
+        <td class="text">
+            <ul>
+                <li>Chrome 57+</li>
+                <li>Firefox 54+</li>
+                <li>Safari 10.1+</li>
+                <li>Edge 16+</li>
+                <li>Opera 44+</li>
+            </ul>
+        </td>
+        <td class="text">
+            <ul>
+                <li>Mobile Safari 10.3+</li>
+                <li>Android Browser 67+</li>
+                <li>Chrome for Android 70+</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+### Alternative ways to install Kirby
+
+There are alternative installation methods for advanced users who prefer to install and update Kirby using commands on the command line or in their version control tool. Check them out and use whichever method you prefer.
+
+- (link: docs/cookbook/setup/composer text: Installation via Composer)
+- (link: docs/cookbook/setup/git text: Installation as Git submodule)
+
+<info>
+If you don't have a local development environment yet and don't know what to use, check out our (link: docs/cookbook/setup/development-environment text: Local development environment) recipe.
+</info>
+
+## Create your first account
+
+Kirby's control panel (aka. the Panel) comes without any pre-installed accounts. Open `http://yourdomain.com/panel` in the browser to start the installer and create the first account.
+
+<info>
+For security reasons, you cannot install the Panel on a public server by default. To allow this, you can enable the (link: docs/reference/system/options/panel#allow-the-panel-to-be-installed-on-a-remote-server text: `panel.install` option):
+</info>
+
+## Register your installation
+
+Once you publish your website, you need to (link: buy text: purchase a Kirby license). We will send you a unique license code for your domain. You can register your installation with the following steps.
+
+1. Open the Panel at `http://yourdomain.com/panel` and log in.
+2. Click on "Register" at the top.
+3. Enter your license code and your email address and press "Ok".
+
+## Updates
+
+To update Kirby, download the latest version and replace the `kirby` folder.
+
+That's it! Because Kirby does not use a database by default, you don't have to run any database migrations.
+
+<warning>
+Never update a live website directly on the server. Test updates locally first to see if something breaks.
+</warning>
+
+### Updating Kirby with the advanced methods
+
+If you used one of the advanced installation methods, you can also use them to update Kirby:
+
+- (link: docs/cookbook/setup/composer#updating-kirby text: Update via Composer)
+- (link: docs/cookbook/setup/git#updating-kirby text: Update of the Git submodule)
+
+<info>
+**Upgrade from Kirby 2**
+If you want to upgrade an existing Kirby 2 installation, head over to our (link: docs/cookbook/setup/migrate-site text: upgrade guide).
+</info>
 
 ## Where to go from here
 
-Now that you have successfully installed Kirby on your server, it's time to explore your new Kirby installation. So get yourself a cup of coffee or tea (or whatever else you like most) and head over to the sections that interest you most.
+### A tour around the house
+Now that you have successfully installed Kirby on your server, it's time to explore your new Kirby installation. So get yourself a cup of coffee or tea (or whatever else you like most) and head over to the sections that interest you most or go on a tour to explore the Starterkit with us.
 
-### Click around
-
-Let's be honest: who reads the docs? Right? It's totally fine to explore your Kirby installation on your own without our help. If you don't want to miss out on any of the possibilities though, the docs are always here to help.
+(link: docs/guide/tour text: Explore the Starterkit ›)
 
 ### (link: docs/guide text: Guide)
 
 Our guide introduces you to every aspect of Kirby. From your first (glossary: template text: template) to complex extensions. It should always be the starting point for your research.
 
-(link: docs/guide text: Read more ›)
+(link: docs/guide text: Read the Guide ›)
 
 ### (link: docs/reference text: Reference)
 
 Once you have familiarized yourself with the basics, the Reference is probably the number one resource you will keep getting back to. It's a reference of every method, option, helper, tag, root, url and more.
 
-(link: docs/reference text: Read more ›)
+(link: docs/reference text: Check out the Reference ›)
 
 ### (link: docs/cookbook/setup/kirby-in-a-nutshell text: Kirby in a nutshell)
 
@@ -59,16 +178,16 @@ Our "Kirby in a nutshell" recipe gives you a concise overview of how Kirby works
 
 While our docs provide a deep dive into every feature and aspect of Kirby, our Cookbook is a collection of all sorts of solutions you can build with Kirby. Starting from simple things like menus to frontend authentication, headless CMS setups and more.
 
-(link: docs/cookbook text: Read more ›)
+(link: docs/cookbook text: Find recipes in the Cookbook ›)
 
 ### Troubleshooting
 If you encounter any problems, make sure to check our guide on some common pitfalls and how to solve them.
 
 
-(link: docs/guide/troubleshooting text: Read more ›)
+(link: docs/guide/troubleshooting text: Go Troubleshooting ›)
 
 ### (link: https://forum.getkirby.com/ text: Forum)
 
 The community in the [Kirby Forum](https://forum.getkirby.com/) is always there to help out whenever you get stuck. It's likely that someone already had the same problem, so using the search function might uncover a solution to your problem within seconds. If you can't find a helpful topic, drop us your question.
 
-(link: https://forum.getkirby.com/ text: Read more ›)
+(link: https://forum.getkirby.com/ text: Ask us anything in the Forum ›)
