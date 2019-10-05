@@ -1,14 +1,15 @@
 .recipe-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   grid-gap: 2rem 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
 }
+
 .recipe-card {
   display: flex;
   flex-direction: column;
+  height: 100%;
   justify-content: space-between;
   line-height: 1.5em;
-  height: 100%;
 }
 
 .recipe-card-header {
@@ -22,46 +23,49 @@
 }
 
 .recipe-card-title {
-  font-weight: 600;
-  font-size: 1rem;
   color: #000;
-  position: relative;
-  padding-bottom: .5rem;
+  font-size: 1rem;
+  font-weight: 600;
   margin-bottom: .5rem;
+  padding-bottom: .5rem;
+  position: relative;
 
   &::after {
-    position: absolute;
+    background: $color-syntax-yellow;
     bottom: -.125rem;
-    left: 0;
     content: "";
     height: 4px;
-    background: $color-syntax-yellow;
+    left: 0;
+    position: absolute;
     width: 2rem;
   }
 }
 
 .recipe-card-description {
+  color: $color-anthracite;
   font-size: .875rem;
   line-height: 1.5em;
-  color: $color-anthracite;
 }
 
 .recipe-card-footer {
-  display: flex;
   align-items: center;
+  display: flex;
   margin-top: .8rem;
 }
+
 .recipe-card-footer a {
-  display: flex;
-  font-size: .75rem;
-  font-family: $font-mono;
   color: rgba($color-anthracite, .7);
+  display: flex;
+  font-family: $font-mono;
+  font-size: .75rem;
   width: 100%;
 }
+
 .recipe-card-footer a svg {
-  margin-top: .2rem;
   margin-right: .5rem;
+  margin-top: .2rem;
 }
+
 .recipe-card-footer a svg * {
   fill: #000;
 }
