@@ -154,11 +154,11 @@
 
 @include mq(to m) {
   .menu-toggle {
+    color: currentColor;
     cursor: pointer;
     height: 14px;
     position: relative;
     width: 16px;
-    color: currentColor;
   }
 
   .menu-toggle i {
