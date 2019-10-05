@@ -33,6 +33,8 @@
 .arrow-link.-disabled {
   background: none;
   cursor: default;
+  opacity: 0.4;
+  text-decoration: none;
 }
 
 /* backplane for hover/active states */
