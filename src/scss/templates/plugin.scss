@@ -1,6 +1,5 @@
 @import "../includes";
 
-
 .plugin-layout {
   display: flex;
   flex-wrap: wrap;
@@ -15,18 +14,19 @@
 }
 
 .plugin-sidebar {
-  order: 1;
   min-width: 0;
+  order: 1;
 }
 
 .plugin-content {
-  order: 2;
-  min-width: 0;
   margin-bottom: 6rem;
+  min-width: 0;
+  order: 2;
 }
+
 .plugin-content img {
-  width: auto;
   max-width: 100%;
+  width: auto;
 }
 
 @include mq(from m) {
@@ -36,8 +36,8 @@
   }
 
   .plugin-content {
+    margin-bottom: 0;
     order: 1;
     width: 66.66%;
-    margin-bottom: 0;
   }
 }
