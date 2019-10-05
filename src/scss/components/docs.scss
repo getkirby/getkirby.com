@@ -67,13 +67,13 @@
   margin-right: .5rem;
 }
 
-
 .docs-subpages {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   grid-gap: 2px;
+  grid-template-columns: 1fr 1fr;
   margin-top: 1.5rem;
 }
+
 .docs-subpages img {
   width: 3rem;
 }
