@@ -1,17 +1,19 @@
 .plugin-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  grid-gap: 1rem;
   grid-auto-rows: 1fr;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
 }
+
 .plugin-card {
+  background: #efefef;
   display: flex;
   flex-direction: column;
+  height: 100%;
   justify-content: space-between;
   line-height: 1.5em;
-  background: #efefef;
-  height: 100%;
 }
+
 .plugin-card-header {
   display: flex;
   overflow: hidden;
@@ -19,62 +21,70 @@
 }
 
 .plugin-card-icon {
-  width: 1.875rem;
-  height: 1.875rem;
-  display: flex;
   align-items: center;
-  justify-content: center;
   background: #000;
-  margin-right: 1rem;
   color: $color-syntax-yellow;
+  display: flex;
   flex-shrink: 0;
+  height: 1.875rem;
+  justify-content: center;
+  margin-right: 1rem;
   margin-top: 2px;
+  width: 1.875rem;
 }
 
 .plugin-card-body {
-  padding: 1rem;
-  margin-bottom: 1.5rem;
   flex-grow: 1;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
 }
+
 .plugin-card-image {
   margin-bottom: .75rem;
 }
+
 .plugin-card-title {
-  margin-bottom: 0;
-  font-weight: 600;
-  font-size: 1rem;
   color: #000;
-  white-space: nowrap;
+  font-size: 1rem;
+  font-weight: 600;
   line-height: 1rem;
+  margin-bottom: 0;
+  white-space: nowrap;
 }
+
 .plugin-card-author {
-  font-size: .75rem;
-  font-family: $font-mono;
   color: rgba($color-anthracite, .7);
+  font-family: $font-mono;
+  font-size: .75rem;
   margin-bottom: .75rem;
 }
+
 .plugin-card-description {
+  color: $color-anthracite;
   font-size: .875rem;
   line-height: 1.5em;
-  color: $color-anthracite;
 }
+
 .plugin-card-footer {
-  display: flex;
   align-items: center;
+  display: flex;
   padding: 1rem;
 }
+
 .plugin-card-footer a {
-  display: flex;
   align-items: center;
-  font-size: .75rem;
-  font-family: $font-mono;
-  margin-right: 1.5rem;
   color: rgba($color-anthracite, .7);
+  display: flex;
+  font-family: $font-mono;
+  font-size: .75rem;
+  margin-right: 1.5rem;
   width: 100%;
 }
+
 .plugin-card-footer a svg {
   margin-right: .5rem;
 }
+
 .plugin-card-footer a svg * {
   fill: #000;
 }
@@ -85,12 +95,12 @@
   .plugin-card-author {
     color: rgba(#000, .7);
   }
+
   .plugin-card-description {
     color: currentColor;
   }
+
   .plugin-card-footer a {
     color: rgba(#000, .7);
   }
-
 }
-
