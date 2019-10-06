@@ -221,6 +221,22 @@ becomes
 ```
 This now works with all date fields, no matter what the date field is called.
 
+### `Kirbytext()` helper
+
+When rendering Kirbytext in your templates, replace occurrences of the `kirbytext()` helper that convert field values from
+
+```php
+<?= kirbytext($page->somefield()) ?>
+```
+
+with
+
+```php
+<?= $page->somefield()->kirbytext() ?>
+```
+
+You can continue to use the `kirbytext()` helper with strings that contain Kirbytext.
+
 ### Custom routes
 
 Custom routes starting with the string `api` will not work anymore, because `api` is now reserved by Kirby, unless you change the API slug to something else, see (link: docs/reference/system/options/api text: API configuration).
