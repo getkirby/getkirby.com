@@ -37,7 +37,7 @@ Create a new snippet with the following content in `/site/snippets`:
 </urlset>
 ```
 
-## Create a new routes
+## Create new routes
 
 In your `config.php`, create these two new (glossary: route text: routes):
 
