@@ -30,7 +30,7 @@ fields:
 
 (field-options: toggle)
 
-## Simple toogle field translated
+## Simple toggle field translated
 
 ```yaml
 fields:
