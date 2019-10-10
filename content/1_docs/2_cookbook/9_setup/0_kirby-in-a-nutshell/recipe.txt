@@ -292,7 +292,7 @@ If you change the default language when your content is already in place and you
 
 ## Performance considerations
 
-The file system is really powerful and fast, and creating web projects with thousands or tens of thousands of pages is no usally no problem. However, thousands of pages shouldn't all reside in the same parent but rather be distributed in a tree-like structure. There is no hard limit as to how many pages should be in a single parent as this also depends on the performance of the server and the number and size of media files.
+The file system is really powerful and fast, and creating web projects with thousands or tens of thousands of pages is not usually a problem. However, thousands of pages shouldn't all reside in the same parent but rather be distributed in a tree-like structure. There is no hard limit as to how many pages should be in a single parent as this also depends on the performance of the server and the number and size of media files.
 
 Beyond a certain size, try to avoid calling the `$site->index()` method because it reads the entire folder structure including all files which can result in big performance issues.
 
