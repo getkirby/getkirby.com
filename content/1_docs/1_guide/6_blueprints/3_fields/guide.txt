@@ -71,3 +71,28 @@ Field names still need to be unique, no matter if they are displayed at the same
 </info>
 
 </since>
+
+## Field shortcuts
+
+For simple fields that are only used **once** per blueprint , you can use a shortcut. Set the field type as key and `true` as the value:
+
+```yaml
+fields:
+  tags: true
+  text: true
+```
+This code will add a `tags` field and a `text` field with their default properties.
+
+These shortcuts can be extended with a label or other field properties, for example:
+
+```yaml
+fields:
+  text:
+    label: Description
+  select:
+    options:
+      - a
+      - b
+      - c
+```      
+
