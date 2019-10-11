@@ -175,7 +175,7 @@ We cannot only use fields that exist in our content files for sorting. In fact, 
 
 Let's assume for a moment that we wanted to sort our project pages by the number of images they have. Kirby doesn't have a native method that counts our images. We could now use the `map()` method as outlined above, but we want to have some more fun and do something different now and create a (glossary: model text: Page Model) with a method that returns the number of images.
 
-**The page mmodel**
+**The page model**
 
 ```php "/site/models/project.php"
 <?php
