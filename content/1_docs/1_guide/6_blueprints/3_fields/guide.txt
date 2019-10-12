@@ -27,10 +27,6 @@ You can still use field names that conflict with (link: docs/reference/objects/p
 If you come from Kirby 2, please note that the title field is automatically added to a page. Please remove all fields called title from your old blueprints.
 </info>
 
-## Custom fields
-
-You can extend this list with your own field types by creating a (link: docs/reference/plugins/extensions/fields text: field plugin).
-
 ## Conditional fields
 
 <since v="3.1.0">
@@ -72,6 +68,52 @@ Field names still need to be unique, no matter if they are displayed at the same
 
 </since>
 
+## Validating fields
+
+Most fields come with validators you can add as options in your blueprints like `min` and `max` etc., or built-in validators like the `url` field that will automatically check if the given value is a URL. But you can also do more sophisticated validation.
+
+### Pattern matches
+
+With the `pattern` property you can check if the input value matches a given pattern:
+
+```yaml
+text:
+  type: text
+   pattern: '/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/'
+```
+
+### Using validators
+
+You can also use Kirby's (link: docs/reference/system/validators text: built-in validators) or (link: docs/reference/plugins/extensions/validators text: custom validators).
+
+Get a valid IP address:
+
+```yaml
+text:
+  type: text
+  validate:
+    ip
+```
+
+Accept only alphanumerical values:
+
+```yaml
+text:
+  type: text
+  validate:
+    alphanum
+```
+
+Make sure the value starts with a given string:
+
+```yaml
+text:
+  type: text
+  validate:
+    startsWith:
+      AB-
+```      
+
 ## Field shortcuts
 
 For simple fields that are only used **once** per blueprint , you can use a shortcut. Set the field type as key and `true` as the value:
@@ -96,3 +138,6 @@ fields:
       - c
 ```      
 
+## Custom fields
+
+You can extend this list with your own field types by creating a (link: docs/reference/plugins/extensions/fields text: field plugin).
