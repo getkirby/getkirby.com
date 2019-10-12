@@ -35,6 +35,12 @@ return [
      * Legacy redirects
      */
     [
+        'pattern' => 'docs/guide/installation',
+        'action'  => function () {
+            go('docs/guide/quickstart');
+        }
+    ],
+    [
         'pattern' => 'docs/reference/(:any)/(:all?)',
         'action'  => function ($group, $path = null) {
             if ($page = page('docs/reference/' . $group . '/' . $path)) {
