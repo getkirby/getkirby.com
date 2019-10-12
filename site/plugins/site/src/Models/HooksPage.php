@@ -10,18 +10,28 @@ use Kirby\Toolkit\Str;
 class HooksPage extends Page
 {
 
+    public function subpages()
+    {
+        return Pages::factory($this->inventory()['children'], $this);
+    }
+
     public function children()
     {
         $children = array_map(function ($hook) {
+
+            $slug = Str::slug($hook['Name']);
+            $page = $this->subpages()->find($slug);
+            
             return [
                 'slug'     => Str::slug($hook['Name']),
                 'template' => 'hook',
                 'model'    => 'hook',
                 'num'      => 0,
                 'content'  => [
-                    'title' => $hook['Name'],
+                    'title'     => $hook['Name'],
                     'arguments' => implode(', ', Str::split($hook['Arguments'])),
-                    'type' => $hook['Type']
+                    'type'      => $hook['Type'],
+                    'details'   => $page ? $page->details()->value() : null
                 ]
             ];
         }, csv($this->root() . '/hooks.csv'));
