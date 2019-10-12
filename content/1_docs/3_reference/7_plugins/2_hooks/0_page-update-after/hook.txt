@@ -1,0 +1,6 @@
+Details:
+
+
+<info>
+Note that the `page.update:after` hook is only called when the content of the page content is updated, not when the slug, title, status etc. are changed. 
+</info>
