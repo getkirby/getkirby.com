@@ -6,6 +6,8 @@ Text:
 
 ## Example
 
+(docs: immutable-objects)
+
 ```php
 try {
 

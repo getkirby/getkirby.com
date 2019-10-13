@@ -6,6 +6,7 @@ Text:
 
 ## Example
 
+(docs: immutable-objects)
 
 ```php
 <?php $page->increment('likes') ?>
