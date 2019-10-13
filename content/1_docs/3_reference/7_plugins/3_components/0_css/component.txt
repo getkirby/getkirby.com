@@ -6,12 +6,17 @@ Text:
 
 ```php "/site/plugins/css-helper/index.php"
 Kirby::plugin('my/css', [
-  'components' => [
-    'css' => function (Kirby $kirby, string $url, $options = null): string {
-      // create fingerprint for cache busting
-      $fingerprint = md5_file($url);
-      return $url . '?' . $fingerprint;
-    }
+   'components' => [
+      'css' => function (App $kirby, string $url, $options = null): string {
+          $relative_url = Url::path($url, false);
+          $file_root = $kirby->root('index') . DS . $relative_url;
+
+          if (F::exists($file_root)) {
+              return url($relative_url . '?' . F::modified($file_root));
+          }
+
+          return $url;
+      }
   ]
 ]);
 ```
