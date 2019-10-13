@@ -1,1 +1,8 @@
 Auth: files.changeName
+
+----
+Text:
+
+## Details
+
+(docs: immutable-objects)

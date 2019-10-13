@@ -2,12 +2,14 @@ Text:
 
 ## Example
 
+(docs: immutable-objects)
+
 ```php
 if($file = $page->file('file-with-old-name.pdf')):
 
     try {
 
-      $file->rename('new-name.pdf');
+      $newFile = $file->rename('new-name.pdf');
       echo 'The file has been renamed';
 
     } catch(Exception $e) {

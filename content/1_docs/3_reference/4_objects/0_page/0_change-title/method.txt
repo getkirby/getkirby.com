@@ -1,1 +1,8 @@
 Auth: pages.changeTitle
+
+----
+Text:
+
+## Details
+
+(docs: immutable-objects)

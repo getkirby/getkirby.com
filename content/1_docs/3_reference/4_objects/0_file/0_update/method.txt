@@ -6,12 +6,14 @@ Text:
 
 ## Example
 
+(docs: immutable-objects)
+
 ```php
 if($file = $page->file('myimage.jpg')) {
 
   try {
 
-    $file->update([
+    $newFile = $file->update([
       'caption' => 'This is a really nice image',
       'year'    => 2014
     ]);
@@ -34,13 +36,13 @@ In a multi-language installation, you can pass the language of the meta data you
 
 ```php
 if($file = $page->file('some-file.jpg')) {
-  $file->update([
+  $newFile = $file->update([
     'some_field' => 'new value'
   ], 'en');
 }
 
 if($file = $page->file('some-file.jpg')) {
-  $file->update([
+  $newFile = $file->update([
     'some_field' => 'new value'
   ], site()->language()->code());
 }
