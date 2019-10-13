@@ -1,6 +1,6 @@
 ## The `$props` parameter
 
-<table class="properies">
+<table class="properties">
   <thead>
     <tr>
       <th>Property</th>
