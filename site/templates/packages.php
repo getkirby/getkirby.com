@@ -13,8 +13,12 @@
       <ul class="cheatsheet-section-entries">
         <?php foreach ($package->children()->filterBy('isTrait', false) as $class): ?>
         <li>
-          <a href="<?= referenceLookup($class->class())->url() ?>">
-            <?= Str::after($class->class(), "Kirby\\" . $package->title() . "\\")  ?>
+          <a class="cheatsheet-entry" href="<?= referenceLookup($class->class())->url() ?>">
+            <div>
+              <strong>
+                <span><?= Str::after($class->class(), "Kirby\\" . $package->title() . "\\")  ?></span>
+              </strong>
+            </div>
           </a>
         </li>
         <?php endforeach ?>
