@@ -41,19 +41,22 @@ API endpoints can also be registered as callbacks. Within the callback they have
 
 
 ```php "/site/plugins/your-plugin/index.php"
-Kirby::plugin('your/plugin', [
-  'api' => function ($kirby) {
-    return [
-      [
-        'pattern' => 'my-endpoint',
-        'action'  => function () use ($kirby) {
-          return [
-            'users' => $kirby->users()->count()
-          ];
-        }
-      ]
-    ];
-  }
+<?php
+Kirby::plugin('my/api', [
+  'api' => [
+    'routes' => function ($kirby) {
+      return [
+        [
+          'pattern' => 'my-endpoint',
+          'action'  => function () use ($kirby) {
+            return [
+              'users' => $kirby->users()->count()
+            ];
+          }
+        ]
+      ];
+    }
+  ]
 ]);
 ```
 
@@ -62,7 +65,7 @@ Kirby::plugin('your/plugin', [
 You can register your own API (link: docs/guide/api/data#data-provider-functions text: data provider functions) as the `data` option of the `api` extension. They are pretty handy if you need to fetch the same kind of data in multiple endpoints.
 
 ```php
-Kirby::plugin('your/plugin', [
+Kirby::plugin('my/api', [
   'api' => [
     'data' => [
       'message' => function () {
