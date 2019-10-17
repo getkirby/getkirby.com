@@ -33,6 +33,23 @@ sections:
         label: Text
         type: textarea
 ```
+<since v="3.3.0">
+## Section shortcuts
+
+For simple sections that are only used once per blueprint, you can use shortcuts. In its most basic form, a `fields` section consists of the section type as name, and a set of fields:
+
+```yaml
+sections:
+
+  fields:
+    fields:
+      tags: true
+      textarea: true
+```
+This will add a `fields` section the given fields.
+
+Keep in mind that the same section name can only be used once per blueprint.
+</since>
 
 ## Section properties
 
