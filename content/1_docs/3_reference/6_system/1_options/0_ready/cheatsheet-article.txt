@@ -1,0 +1,16 @@
+Excerpt: Inject last minute configuration options
+
+----
+
+Text:
+
+The `ready` option accepts a callback and makes it possible to inject last minute configurations, useful if you need to use the `kirby` or `site` objects in your configuration.
+
+```php "/site/config/config.php"
+return [
+    'ready' => function() {
+        'my.option' => kirby()->root('index') . '/resources'
+    }
+]
+```
+
