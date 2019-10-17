@@ -40,6 +40,30 @@ sections:
     templates: article
 ```
 
+<since v="3.3.0">
+## Section shortcuts
+
+For simple sections that are only used once per blueprint, you can use shortcuts. In its most basic form, a `pages` section consists of the section type as name, and  `true` as its value.
+
+```yaml
+sections:
+
+  pages: true
+```
+This will add a `pages` section with all default properties.
+
+These shortcuts can be extended with other section properties as needed, for example:
+
+```yaml
+sections:
+
+  pages: 
+    headline: Main Pages
+    status: all
+```
+Keep in mind that the same section name can only be used once per blueprint.
+</since>
+
 The pages section has multiple options to control what kind of pages should be displayed, how they should be displayed and what happens if a new page is added.
 
 ## Section properties

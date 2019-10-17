@@ -28,6 +28,20 @@ sections:
       of all images before you upload them to the gallery.
 ```
 
+<since v="3.3.0">
+## Section shortcuts
+
+For simple sections that are only used once per blueprint, you can use shortcuts. In its most basic form, an `info` section consists of the section type as name, and the `text` property with the information you want to show.
+
+```yaml
+sections:
+
+  info: 
+    text: Some text
+```
+Keep in mind that the same section name can only be used once per blueprint.
+</since>
+
 ## Info section vs. info field
 
 The info section behaves pretty much like the (link: docs/reference/panel/fields/info text: info field). Why do we have both of them? Because both are useful. The info field can be placed in a field grid and is perfect to offer help within a form. The info section can be placed anywhere else, especially in layouts that don't need form fields.
