@@ -114,9 +114,9 @@ The Panel is very versatile and can be customized to fit every project. To set u
 
 ## How everything fits together
 
-Not that we have explored the parts, you might wonder how it all fits together. If you have explored the folders of the Startkit a bit, you might have noticed that there are a lot of files with the same file name but different extensions, for example `about.txt` and `/site/blueprints/pages/about.yml` and `/site/templates/abouut.php`. 
+Now that we have explored the parts, you might wonder how it all fits together. If you have explored the folders of the Startkit a bit, you might have noticed that there are a lot of files with the same file name but different extensions, for example `about.txt` and `/site/blueprints/pages/about.yml` and `/site/templates/about.php`. 
 
-These files are in fact tied together by there filenames. The content in `about.txt` is rendered with the `abouut.php` template. And if you visit the `about` page in the Panel, the `about.yml` blueprint takes care of displaying the form fields for the fields in the text file.
+These files are in fact tied together by their filenames. The content in `about.txt` is rendered with the `about.php` template. And if you visit the `about` page in the Panel, the `about.yml` blueprint takes care of displaying the form fields for the fields in the text file.
 
 (screenshot: from-blueprint-to-frontend.png)
 
