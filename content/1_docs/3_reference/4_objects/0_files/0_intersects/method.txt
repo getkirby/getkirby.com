@@ -1,0 +1,15 @@
+Since: 3.3.0
+
+----
+Text: 
+
+## Example
+
+```php
+$images1 = $page->files()->template('cover');
+$images2 = $site->files()->template('cover');
+
+if ($images1->intersects($images2) {
+    // do something
+};
+```
