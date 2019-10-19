@@ -56,6 +56,23 @@ fields:
     max: 3
 ```
 
+### Include subpages
+
+<since v="3.3.0">
+
+With the subpages property you can control whether or not you want to navigate the subpages of the given parent. The default is set to `true`:
+
+```yaml
+pages:
+  label: Select a related page.
+  max: 3
+  subpages: false
+```
+This will deactivate the subpage navigation and only show the first level pages (or the children of the page set in the `query` option).
+
+</since>
+
+
 ## Preview images
 
 The default (preview) image is the first image in the folder. You can configure the (preview) image for each item using the `image` option:
