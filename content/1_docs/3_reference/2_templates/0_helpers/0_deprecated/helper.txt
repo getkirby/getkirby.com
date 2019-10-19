@@ -1,0 +1,16 @@
+Text:
+
+This function is used internally by Kirby, but you can also use it in your plugins to trigger deprecation warnings.
+
+## Example:
+
+```php
+function someFunction()
+{
+    deprecated('`somefunction()` is deprecated, use `anotherFunction()` instead. `someFunction()` will be removed in version x.x.x');
+
+    return 'something';
+}
+```
+
+When a user uses the `someFunction()` function and debugging is enabled, the message passed as parameter will be shown.
