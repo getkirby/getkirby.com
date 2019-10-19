@@ -23,20 +23,26 @@ To run multiple sites on a single Kirby installation, modify the `index.php` at 
 require 'kirby/bootstrap.php';
 
 $sites = [
-  'my-awesome-site.com' => __DIR__ . '/my-site',
-  'my-awesome-shop.com' => __DIR__ . '/my-shop'
+  'my-site.com' => 'my-site.com',
+  'my-shop.com' => 'my-shop.com',
 ];
 
-$url  = Url::host();
-$root = $sites[$url];
+$host = Url::host();
+$root = $sites[$host];
+$url  = 'http://' . $host;
 
 $kirby = new Kirby([
   'roots' => [
     'index'   => __DIR__,
     'site'    => $root . '/site',
     'content' => $root . '/content',
-    'media'   => $root . '/media'
-  ]
+    'media'   => $root . '/media',
+    'assets'  => $root . '/assets'
+  ],
+  'urls' => [
+    'media'  => $url . '/' . $root . '/media',
+    'assets' => $url . '/' . $root . '/assets',
+  ],
 ]);
 
 echo $kirby->render();
@@ -46,19 +52,20 @@ Let's walk through this step by step: First we load the `kirby/bootstrap.php` sc
 
 ```php
 $sites = [
-  'my-awesome-site.com' => __DIR__ . '/my-site',
-  'my-awesome-shop.com' => __DIR__ . '/my-shop'
+  'my-site.com' => 'my-site.com',
+  'my-shop.com' => 'my-shop.com',
 ];
 ```
 
 Then we use the `Url::host()` method to retrieve the domain requested by the visitor and select the matching root for this one:
 
 ```php
-$url  = Url::host();
-$root = $sites[$url];
+$host = Url::host();
+$root = $sites[$host];
+$url  = 'http://' . $host;
 ```
 
-Finally, we use this information to create a `$kirby` object with a custom root and a custom URL and output `$kirby->render()`:
+Finally, we use this information to create a `$kirby` object with custom roots and a custom URLs and output `$kirby->render()`:
 
 ```php
 $kirby = new Kirby([
@@ -66,25 +73,30 @@ $kirby = new Kirby([
     'index'   => __DIR__,
     'site'    => $root . '/site',
     'content' => $root . '/content',
-    'media'   => $root . '/media'
-  ]
+    'media'   => $root . '/media',
+    'assets'  => $root . '/assets'
+  ],
+  'urls' => [
+    'media'  => $url . '/' . $root . '/media',
+    'assets' => $url . '/' . $root . '/assets',
+  ],
 ]);
-
-echo $kirby->render();
 ```
 
 ## In the filesystem
 
 ```filesystem
   kirby/
-  my-site/
+  my-site.com/
     content/
     media/
     site/
-  my-shop/
+    assets/
+  my-shop.com/
     content/
     media/
     site/
+    assets/
   index.php
 ```
 
