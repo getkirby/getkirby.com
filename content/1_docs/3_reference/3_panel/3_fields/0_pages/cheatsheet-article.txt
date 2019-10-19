@@ -182,6 +182,8 @@ info: "{{ page.images.count }}"
 info: "{{ page.tags }}"
 ```
 
+(docs: panel-picker-pagination field: pages)
+
 ## How to use in templates/snippets
 
 ### Single page
