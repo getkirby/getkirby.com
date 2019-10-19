@@ -86,6 +86,9 @@ fields:
 
 </since>
 
+
+(docs: panel-picker-pagination field: pages)
+
 ## How to use in templates/snippets
 
 ### Single user
