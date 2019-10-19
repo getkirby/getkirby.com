@@ -1,0 +1,14 @@
+Since: 3.3.0
+
+----
+Text: 
+
+## Example
+
+```php
+$articles1 = $page->children()->filterBy('tags', 'water', ',');
+$articles2 = $page->children()->filterBy('tags', 'nature', ',');
+
+$intersection = $articles1->intersection($articles2);
+dump($intersection);
+```

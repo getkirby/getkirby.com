@@ -1,0 +1,15 @@
+Since: 3.3.0
+
+----
+Text: 
+
+## Example
+
+```php
+$users1 = $kirby->users()->role('admin');
+$users2 = $page->authors()->toUsers();
+
+if ($users1->intersects($users2) {
+    // do something
+};
+```
