@@ -27,6 +27,12 @@ fields:
     type: users
 ```
 
+<since="3.3.0">
+
+Up to version 3.2.5, Kirby stored  users email addresses in the content file. From version 3.3.0, the user ID will be stored instead. Existing entries will be converted automatically the next time a page/file/user with a `users` field is saved. This should not affect your template code or email values set as defaults in your blueprints.
+
+</since>
+
 ## Field properties
 
 (field-options: users)
