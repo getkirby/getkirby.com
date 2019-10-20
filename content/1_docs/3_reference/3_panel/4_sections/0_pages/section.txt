@@ -351,6 +351,19 @@ sortBy: title asc SORT_LOCALE_STRING
 The `sortBy` option will automatically switch off manual sorting.
 </info>
 
+### `flip`
+
+<since v="3.3.0">
+
+Use the `flip` option to enable/disable reverse sorting (default is `false`):
+
+```yaml
+sortBy: title
+flip: true
+```
+
+</since>
+
 ### `sortable`
 
 You can switch off manual sorting entirely with the `sortable` option.

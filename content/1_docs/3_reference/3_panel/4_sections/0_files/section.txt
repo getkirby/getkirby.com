@@ -239,6 +239,19 @@ You can switch off manual sorting entirely with the `sortable` option.
 sortable: false
 ```
 
+### `flip`
+
+<since v="3.3.0">
+
+Use the `flip` option to enable/disable reverse sorting (default is `false`):
+
+```yaml
+sortBy: filename
+flip: true
+```
+
+</since>
+
 ## Limits
 
 ### `limit`
