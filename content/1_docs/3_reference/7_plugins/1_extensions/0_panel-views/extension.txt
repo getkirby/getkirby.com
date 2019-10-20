@@ -4,11 +4,11 @@ Title:  Panel views
 
 Text:
 
-While the (glossary: Panel) is very extensible already with fields and sections, you might reach the point where you need your own dedicated space in the Panel.
+Views are the building blocks of the (glossary: Panel). While the Panel is very extensible already with fields and sections, you might reach the point where you need your own dedicated space in the Panel - or where you might want to replace an existing view.
 
-With a Panel view plugin you can build your own stand-alone view, that is either just accessible via link or is located in the main menu.
+With a Panel view plugin you can build your own stand-alone view, that is just accessible via link, located in the main menu or replaces an existing default view.
 
-Such Panel views can maybe contain just some static documentation for the project, but can also be extended to highly interactive Vue applications. Think about an integrated task management system, a newsletter tool, a form builder, an ERM system or more. It's all up to your imagination and project specs.
+Such Panel views can maybe contain just some static documentation for the project, but can also be extended to highly interactive (link: https://vuejs.org/v2/guide/ text: Vue) applications. Think about an integrated task management system, a newsletter tool, a form builder, an ERM system or more. It's all up to your imagination and project specs.
 
 ## What makes a Panel view plugin?
 
@@ -77,3 +77,33 @@ If you need additional styling for your view, you can create an `index.css` and 
   /* add your css rules */
 }
 ```
+
+## Override default views
+
+<since v="3.2.0">
+You can override Kirby's default panel views by replacing the view components with your own Vue component.
+
+```js "/site/plugins/my-panel-views/index.js"
+panel.plugin("my/view-plugin", {
+  components: {
+    "k-users-view": {
+      // your Vue component code goes here.
+    }
+  }
+});
+```
+
+You can replace the following components:
+
+- `k-browser-view`
+- `k-login-view` (better use the (link: docs/reference/plugins/extensions/panel-login text: Panel login extenstion))
+- `k-installation-view`
+- `k-site-view`
+- `k-file-view`
+- `k-page-view`
+- `k-settings-view`
+- `k-users-view`
+- `k-user-view`
+
+The Panel views are often very complex. If you want to replace them without loosing features, check out the orginal source code for each component. You can find them (link: https://github.com/getkirby/kirby/tree/master/panel/src/components/Views text: on GitHub).
+</since>
