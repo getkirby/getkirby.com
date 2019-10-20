@@ -47,3 +47,47 @@ If your component needs to use a monospaced font, we recommend using the font-st
 font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
 ```
 
+
+## CSS variables
+
+<since v="3.3.0">
+We use CSS variables for the most important parameters in the Panel. This is useful for all plugin developers, because you no longer need to find color values, font sizes or similar stuff in our stylesheets and hope that we won’t change them.
+
+
+```css
+/** Colors **/
+--color-backdrop
+--color-background
+--color-border
+--color-focus
+--color-focus-light
+--color-focus-outline
+--color-negative
+--color-negative-light
+--color-negative-outline
+--color-notice
+--color-notice-light
+--color-positive
+--color-positive-light
+--color-positive-outline
+--color-text
+--color-text-light
+
+/** Font families **/
+--font-family-mono
+--font-family-sans
+
+/** Font sizes **/
+--font-size-tiny
+--font-size-small
+--font-size-medium
+--font-size-large
+--font-size-huge
+--font-size-monster
+
+/** Shadows **/
+--box-shadow-dropdown
+--box-shadow-item
+--box-shadow-focus
+```
+</since>
