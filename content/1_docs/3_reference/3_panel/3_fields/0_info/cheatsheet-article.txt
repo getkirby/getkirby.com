@@ -34,6 +34,21 @@ fields:
       Your admin
 ```
 
+### Using `KirbyText`
+
+<since v="3.3.0">
+In addition to markdown, you can use `KirbyText` in your info text, even including images:
+
+```yaml
+info:
+  text: >
+    Check out the (link: help text: help pages) for details about how this information is used throughout the site.
+    
+    (image: info.jpg)
+```
+
+</since>
+
 ### Themes
 
 The info field is displayed as a blue info box. You can switch the theme with the `theme` option, to match the importance or meaning of the information.
