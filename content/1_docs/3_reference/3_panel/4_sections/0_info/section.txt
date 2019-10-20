@@ -28,18 +28,35 @@ sections:
       of all images before you upload them to the gallery.
 ```
 
+### Using `KirbyText`
+
 <since v="3.3.0">
+In addition to markdown, you can use `KirbyText` in your info text, even including images:
+
+```yaml
+info:
+  text: >
+    Check out the (link: help text: help pages) for details about how this information is used throughout the site.
+    
+    (image: info.jpg)
+```
+
+</since>
+
 ## Section shortcuts
+
+<since v="3.3.0">
 
 For simple sections that are only used once per blueprint, you can use shortcuts. In its most basic form, an `info` section consists of the section type as name, and the `text` property with the information you want to show.
 
 ```yaml
 sections:
-
   info: 
     text: Some text
 ```
+
 Keep in mind that the same section name can only be used once per blueprint.
+
 </since>
 
 ## Info section vs. info field
