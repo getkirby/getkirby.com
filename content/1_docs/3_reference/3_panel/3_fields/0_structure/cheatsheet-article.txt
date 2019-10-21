@@ -121,7 +121,7 @@ fields:
 				type: number
 ```
 <since v="3.2.0">
-Structure columns ca be set to any fraction and will be automatically calculated into the right width.
+Structure columns can be set to any fraction and will be automatically calculated into the right width.
 
 ```yaml
 fields: 
