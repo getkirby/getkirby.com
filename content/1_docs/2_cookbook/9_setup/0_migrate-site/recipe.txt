@@ -36,6 +36,7 @@ The Kirby CLI is no longer compatible with Kirby 3. Kirby and extensions can ins
 1. Replace the old `/kirby` folder with the new `/kirby`folder.
 2. The old `index.php` is no longer compatible. Replace it with the new one.
 3. If you are on an Apache server, replace the old `.htaccess` file with the new one. On other servers, change your server configuration accordingly.
+4. If you downloaded a new copy via Composer, you will need to bring over the `/vendor` folder as well.
 
 ### Delete the `thumbs` folder
 
