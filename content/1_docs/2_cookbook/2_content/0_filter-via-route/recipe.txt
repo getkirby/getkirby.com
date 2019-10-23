@@ -116,3 +116,76 @@ return [
 ```
 
 In this case, tag values and subpages might conflict. First we therefore check if there is a subpage and return it if it exists. If not, we handle the value as tag and render the `blog` page as in the route above.
+
+## Using a different template
+
+In the examples above, we always return the blog page/template, only with a filtered set of subpages. If we want to use a different template for our tags or categories, we have to change our route and we need a new controller and template:
+
+### Route
+
+```php "/site/config/config.php"
+<?php
+return [
+    'routes' => [
+        [
+            'pattern' => 'blog/tag/(:any)',
+            'action'  => function ($tag) {
+
+                return Page::factory([
+                    'slug'     => $tag,
+                    'template' => 'tag',
+                    'model'    => 'tag',
+                    'content'  => [
+                        'title' => 'Results for ' . ucfirst($tag),
+                    ]
+                ]);
+
+            }
+        ]
+     ]
+];
+```
+
+Within our route, this time we return a virtual page using the `Page::factory()` method, because the page doesn't exist in the file system.
+
+### Controller
+
+```php "/site/controllers/tag.php"
+<?php
+
+return function ($page) {
+
+    $tag = urldecode($page->slug());
+    $articles = page('blog')->children()->filterBy('tags', $tag, ',');
+
+    return [
+        'articles' => $articles,
+        'tag'      => $tag
+    ];
+
+};
+```
+
+Here we use the `urldecode()`d page slug as our filter value.
+
+### Template
+
+```php "/site/templates/tag.php"
+<?php snippet('header') ?>
+<?php if ($articles->isNotEmpty()) : ?>
+    <?php foreach ($articles as $article) : ?>
+        <article>
+            <h2><?= $article->title()->html() ?></h2>
+            <?= $article->text()->kt() ?>
+            <ul>
+            <?php foreach ($page->tags()->split(',') as $tag) : ?>
+                <li><a href="<?= page('blog')->url() . '/tag/' . urlencode($tag) ?>"><?= $tag ?></a></li>
+            <?php endforeach ?>
+            </ul>
+        </article>
+    <?php endforeach ?>
+<?php else : ?>    
+    <div>No results for tag <?= $tag ?></div>
+<?php endif ?>
+<?php snippet('footer') ?>
+```
