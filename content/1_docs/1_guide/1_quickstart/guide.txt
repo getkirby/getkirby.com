@@ -128,6 +128,21 @@ Once you publish your website, you need to (link: buy text: purchase a Kirby lic
 2. Click on "Register" at the top.
 3. Enter your license code and your email address and press "Ok".
 
+### Without using the Panel
+
+<since v="3.3.0">
+
+If you don’t want the Panel to connect to our server, registration via the Panel fails, or you are not using the Panel at all, you can download your license files directly from our licenses website:
+
+1. Visit (link: licenses.getkirby.com).
+2. Log in with the email you used when you purchased the license and any order number.
+3. In the list of your licenses, click on the key you want to register.
+4. Use the "Download license file" button to download the license file.
+5. Rename the downloaded file to `.license` (without extensions).
+6. Place it in the `/site/config/` folder of your Kirby installation.
+
+<since>
+
 ## Updates
 
 To update Kirby, download the latest version and replace the `kirby` folder.
