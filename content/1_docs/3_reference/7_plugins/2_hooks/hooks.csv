@@ -51,9 +51,10 @@ user.create:before,$input,trigger
 user.create:after,$user,trigger
 user.delete:before,$user,trigger
 user.delete:after,"$status,$user",trigger
-user.login.before,"$user,$session",trigger
-user.login.after,"$user,$session",trigger
-user.logout.before,"$user,$session",trigger
-user.logout.after,"$user,$session",trigger
+user.login:before,"$user,$session",trigger
+user.login:after,"$user,$session",trigger
+user.logout:before,"$user,$session",trigger
+user.logout:after,"$user,$session",trigger
+system.loadPlugins:after,"",trigger
 user.update:before,"$user,$values,$strings",trigger
 user.update:after,"$newUser,$oldUser",trigger
