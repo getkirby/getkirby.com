@@ -21,6 +21,16 @@ If the editing user doesn't save their changes within 2 minutes, you can unlock 
 
 </since>
 
+## Unsaved changes
+
+<since v="3.3.0">
+
+When you edit pages, files or user accounts in the Panel, you will see an "unsaved changes" icon in the topbar. This overview of unsaved changes makes it a lot easier to keep track of content that is still work-in-progress.
+
+(screenshot: unsaved-changes.png)
+
+</since>
+
 ## Page states
 Kirby's page states give you full control over your publishing workflow. They allows you to define access to content, to filter content by status criteria and much more.
 
