@@ -1,0 +1,19 @@
+Since: 3.3.0
+
+----
+Text:
+
+## Examples
+
+### Using a string parameter to exclude a single template:
+
+```php
+$articles = page('blog')->children()->listed()->notTemplate('video-article');
+```
+
+### Using an array of options to exclude multiple templates:
+
+
+```php
+$articles = page('blog')->children()->listed()->notTemplate(['video-article', 'short-article']);
+```
