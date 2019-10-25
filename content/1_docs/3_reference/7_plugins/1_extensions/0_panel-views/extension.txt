@@ -96,7 +96,7 @@ panel.plugin("my/view-plugin", {
 You can replace the following components:
 
 - `k-browser-view`
-- `k-login-view` (better use the (link: docs/reference/plugins/extensions/panel-login text: Panel login extenstion))
+- `k-login-view` (better use the (link: docs/reference/plugins/extensions/panel-login text: Panel login extension))
 - `k-installation-view`
 - `k-site-view`
 - `k-file-view`
