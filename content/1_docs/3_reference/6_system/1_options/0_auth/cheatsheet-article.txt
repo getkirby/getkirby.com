@@ -15,6 +15,7 @@ You can set the number of wrong trials per timeout period (see below) before log
 return [
   'auth' => [
     'trials' => 10
+  ]
 ];
 ```
 
