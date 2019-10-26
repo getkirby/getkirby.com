@@ -16,6 +16,8 @@ Kirby comes with a set of default KirbyTags for things like including images, li
 ## How to create your own KirbyTag
 
 ```php "/site/plugins/your-plugin/index.php"
+<?php
+
 Kirby::plugin('your/plugin', [
 	'tags' => [
 		'wikipedia' => [
@@ -30,6 +32,8 @@ Kirby::plugin('your/plugin', [
 ## Outsourcing code to separate file
 
 ```php "/site/plugins/your-plugin/index.php"
+<?php
+
 Kirby::plugin('your/plugin', [
 	'tags' => [
 		'wikipedia' => require_once __DIR__ . '/tags/wikipedia.php'
@@ -44,9 +48,9 @@ And then in `/tags/wikipedia.php`
 <?php
 
 return [
-  'html' => function($tag) {
-    return '<a href="http://wikipedia.org">Wikipedia</a>';
-  }
+	'html' => function($tag) {
+		return '<a href="http://wikipedia.org">Wikipedia</a>';
+	}
 ];
 ```
 
@@ -55,6 +59,8 @@ return [
 You can override Kirby's default KirbyTags by creating a plugin with the same KirbyTag name as the original.
 
 ```php "/site/plugins/your-plugin/index.php"
+<?php
+
 Kirby::plugin('your/plugin', [
     'tags' => [
         'image' => [
@@ -74,6 +80,8 @@ Kirby::plugin('your/plugin', [
 If you want to add attributes, you can add them as an `attr` array like this:
 
 ```php
+<?php
+
 Kirby::plugin('your/plugin', [
   'tags' => [
     'wikipedia' => [
@@ -155,6 +163,8 @@ In addition to your own KirbyTag plugins, you can also hook into the KirbyTags p
 ### `kirbytags:before`
 
 ```php "/site/plugins/your-plugin/index.php"
+<?php
+
 Kirby::plugin('your/plugin', [
 	'hooks' => [
 		'kirbytags:before' => function ($text, array $data = [], array $options = []) {
@@ -174,6 +184,8 @@ Kirby::plugin('your/plugin', [
 ### `kirbytags:after`
 
 ```php "/site/plugins/your-plugin/index.php"
+<?php
+
 Kirby::plugin('your/plugin', [
 	'hooks' => [
 		'kirbytags:after' => function ($text, array $data = [], array $options = []) {
