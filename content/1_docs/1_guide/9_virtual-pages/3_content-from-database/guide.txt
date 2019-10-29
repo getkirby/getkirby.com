@@ -24,7 +24,7 @@ The example assumes a database table called comments with the following scheme:
 | ----   | ----          | ----        | ----
 |`id`    | int           | yes         | yes
 |`text`  | VARCHAR (600) | no          | no
-|`user`  | varchar (100) | no          | no
+|`user`  | VARCHAR (100) | no          | no
 |`slug`  | VARCHAR (185) | no          | yes
 
 
@@ -217,10 +217,10 @@ But first, our table needs a new column called `status`, which can have the valu
 | ----   | ----          | ----        | ----
 |`id`    | int           | yes         | yes
 |`text`  | VARCHAR (600) | no          | no
-|`user`  | varchar (100) | no          | no
+|`user`  | VARCHAR (100) | no          | no
 |`slug`  | VARCHAR (185) | no          | yes
 |`title` | VARCHAR (185) | no          | no
-|`status`| VARCHAR (10)  | no          | no
+|`status`| VARCHAR (8)   | no          | no
 
 ### Extended `comment.yml` blueprint
 
