@@ -282,7 +282,7 @@ dump($max);
 
 
 
-## Avgerage value
+## Average value
 
 ### Parameters
 
