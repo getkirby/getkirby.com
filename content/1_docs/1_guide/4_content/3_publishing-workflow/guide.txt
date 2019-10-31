@@ -13,11 +13,17 @@ Text:
 
 <since v="3.2.0">
 
-Kirby automatically locks pages that are currently being edited by another user, making working in teams a lot safer. If you open a page that is edited by another user, you are informed about the editing user and cannot overwrite their changes.
+Kirby automatically locks pages that are currently being edited by another user in the Panel, making working in teams a lot safer. If you open a page that is edited by another user, you are informed about the editing user and cannot overwrite their changes.
 
 (picture: content-locking.png)
 
 If the editing user doesn't save their changes within 2 minutes, you can unlock the page. If you do so, the editing user is informed that their changes have been overwritten and can then download them to edit the unsaved changes manually.
+
+</since>
+
+<since v="3.2.5">
+
+You can deactivate content locking via the `content.locking` config option in your `site/config/config.php`. (link: docs/reference/system/options/content#locking text: Read more ›)
 
 </since>
 
