@@ -140,9 +140,9 @@ title: Comment
 icon: 📢
 
 options:
-  title: false
-  status: false
-  url: false
+  changeTitle: false
+  changeStatus: false
+  changeSlug: false
 
 fields:
   user:
