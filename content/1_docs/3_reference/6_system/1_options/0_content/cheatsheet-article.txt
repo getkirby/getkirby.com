@@ -18,7 +18,7 @@ return [
 ];
 ```
 
-##  Ignore
+##  Ignore files/folders
 
 Set an array of file/folder names that are not scanned by Kirby's core.
 
@@ -29,3 +29,16 @@ return [
   ]
 ];
 ```
+
+## Content locking
+<since v="3.2.5">
+Deactivate the content locking mechanism used by the Panel to prevent concurrent edits to a page, file or user:
+
+```php
+return [
+  'content' => [
+    'locking' => false
+  ]
+];
+```
+</since>
