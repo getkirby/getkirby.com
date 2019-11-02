@@ -112,6 +112,13 @@ There are alternative installation methods for advanced users who prefer to inst
 If you don't have a local development environment yet and don't know what to use, check out our (link: docs/cookbook/setup/development-environment text: Local development environment) recipe.
 </info>
 
+### Installation guides for webhosts
+Some providers have created dedicated guides how to install Kirby on their servers. If you are with one of these providers, keep on reading:
+- (link: https://lab.uberspace.de/guide_kirby.html text: Installation on Uberspace)
+- (link: https://help.fortrabbit.com/install-kirby-3 text: Installation on fortrabbit)
+- (link: https://www.rosehosting.com/blog/how-to-install-kirby-cms-on-ubuntu-18-04/ text: Installation on RoseHosting)
+
+
 ## Create your first account
 
 Kirby's control panel (aka. the Panel) comes without any pre-installed accounts. Open `http://yourdomain.com/panel` in the browser to start the installer and create the first account.
