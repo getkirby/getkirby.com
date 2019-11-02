@@ -137,7 +137,7 @@ With `$page->children()->listed()` we get a set of all listed subpages in our `b
 
 But for our blog we want the latest post to be on top, which is `3_your-third-article`.
 
-So what we do is to add `->flip()`: `$page->children()->visible()->flip`, which will return the set of pages in reverse order.
+So what we do is to add `->flip()`: `$page->children()->listed()->flip`, which will return the set of pages in reverse order.
 
 ```filesystem
 3_your-third-article/
