@@ -1,0 +1,124 @@
+Title: Helpers
+----
+
+Excerpt:
+
+The Panel bundles a few functions that help you with common tasks.
+
+----
+
+Text:
+
+## How to access helpers
+
+The Panel exposes all shared helpers via `this.$helper`:
+
+```js
+// example in the Vue component of a custom field
+
+panel.plugin("your/pad-display-field", {
+  fields: {
+    "pad-display": {
+      // …
+      computed: {
+        paddedValue() {
+          return this.$helper.pad(this.value);
+        }
+      }
+      // …
+    }
+  }
+});
+```
+
+## Available helpers
+
+| Library | Description |
+|--|--|
+|(link: #clone text: `this.$helper.clone`) | |
+|(link: #debounce text: `this.$helper.debounce`) | |
+|(link: #pad text: `this.$helper.pad`) | |
+|(link: #ratio text: `this.$helper.ratio`) | |
+|(link: #slug text: `this.$helper.slug`) | |
+|(link: #sort text: `this.$helper.sort`) | |
+|(link: #string text: `this.$helper.string`) | |
+|(link: #upload text: `this.$helper.upload`) | |
+|(link: #isUploadEvent text: `this.$helper.isUploadEvent`) | |
+
+## `clone`
+Shorthand helper for
+
+```js
+JSON.parse(JSON.stringify(array))
+```
+
+#### Example
+
+```js
+let array = ["homer, "simpson"];
+let cloned = this.$helper.clone(array);
+```
+
+
+## `debounce`
+
+#### Parameters
+
+| Name  | Description
+| ----  | ---- |
+| `fn`  | Function to be debounced |
+| `delay` | Delay in miliseconds |
+
+#### Example
+
+```js
+debounce(function (query) {
+  this.search(query);
+}, 200)
+```
+
+
+## `pad`
+
+Adds <code>0</code> to the left of the value
+
+#### Parameters
+
+| Name  | Description
+| ----  | ---- |
+| `value`  | Value to be padded |
+| `length` | Length of the returned string (default: `2`) |
+
+#### Example
+
+```js
+let money = 9;
+return this.$helper.pad(money, 4);
+// result: "0009"
+```
+
+
+## `ratio`
+
+Receive a padding percentage for a specified image ratio.
+
+#### Parameters
+
+| Name  | Description
+| ----  | ---- |
+| `ratio` | e.g. `1/2` (default: `3/2`) |
+
+#### Example
+
+```js
+return this.$helper.ratio("1/2");
+// result: "50%"
+```
+
+
+
+## `slug`
+## `sort`
+## `string`
+## `upload`
+## `isUploadEvent`
