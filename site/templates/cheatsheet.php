@@ -11,8 +11,17 @@
 
       <?php foreach ($group->children()->listed() as $section): ?>
       <section class="-mb:large">
-        <h3 id="<?= $section->slug() ?>"><a href="#<?= $section->slug() ?>"><?= $section->title() ?></a></h3>
-        <?php snippet('cheatsheet.section', ['section' => $section]) ?>
+        <h3 id="<?= $section->slug() ?>">
+          <a href="#<?= $section->slug() ?>">
+            <?= $section->title() ?>
+          </a>
+        </h3>
+        <?= $section->svg(); ?>
+        <?php
+        snippet('cheatsheet.section', [
+          'section' => $section
+        ]);
+        ?>
       </section>
       <?php endforeach ?>
     <?php endforeach ?>
