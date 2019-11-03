@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bastianallgeier/v3.getkirby.com.git"
+    "url": "git+https://github.com/getkirby/getkirby.com.git"
   },
   "author": "The Kirby Team <mail@getkirby.com>",
-  "license": "SEE LICENSE IN license.md",
+  "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/bastianallgeier/v3.getkirby.com/issues"
+    "url": "https://github.com/getkirby/getkirby.com/issues"
   },
-  "homepage": "https://github.com/bastianallgeier/v3.getkirby.com#readme",
+  "homepage": "https://github.com/getkirby/getkirby.com#readme",
   "devDependencies": {
     "babel-eslint": "^10.0.1",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
