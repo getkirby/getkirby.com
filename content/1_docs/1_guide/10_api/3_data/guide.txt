@@ -23,7 +23,7 @@ $this->user($userId = null);
 $this->users();
 ```
 
-Learn more about creating (link: docs/reference/plugins/extensions/api#custom-data-functions text: custom data functions ›).
+Learn more about creating (link: docs/reference/plugins/extensions/api#custom-data-provider-functions text: custom data functions ›).
 
 ## Models
 Docs are coming soon…
