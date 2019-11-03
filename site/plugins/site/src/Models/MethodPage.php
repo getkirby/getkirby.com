@@ -10,6 +10,15 @@ use ReflectionMethod;
 class MethodPage extends HelperPage
 {
 
+    public function alias()
+    {
+        if ($this->methodName() === '__construct') {
+            return $this->parent()->alias();
+        }
+
+        return new Field($this, 'alias', null);
+    }
+
     public function className(): string
     {
         return $this->parent()->className();
