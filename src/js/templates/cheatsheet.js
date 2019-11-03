@@ -124,7 +124,9 @@ const currentSection = $(".cheatsheet-sections a[aria-current]");
 const currentEntry   = $(".cheatsheet-entries a[aria-current]");
 
 if (currentSection && currentSection.scrollIntoView) {
-  currentSection.scrollIntoView();
+  // Scroll to group instead of section for better orientation
+  let currentGroup = currentSection.parentNode.parentNode.parentNode;
+  currentGroup.scrollIntoView();
 }
 
 if (currentEntry && currentEntry.scrollIntoView) {
