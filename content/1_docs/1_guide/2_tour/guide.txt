@@ -56,7 +56,7 @@ content/
 
 The content for each page is stored in a text file together with additional resources like images, videos, or other documents. The `site.txt` in the content folder contains general site-wide information.
 
-(link: docs/guide/content text: Learn more…)
+(link: docs/guide/content text: Learn more ›)
 
 ## Kirby's text files
 
@@ -94,7 +94,7 @@ A typical Kirby template looks like this:
 ```
 
 
-(link: docs/guide/templates text: Learn more…)
+(link: docs/guide/templates text: Learn more ›)
 
 ## The Panel
 
@@ -110,11 +110,11 @@ The Panel is very versatile and can be customized to fit every project. To set u
 
 (picture: tabs.png)
 
-(link: docs/guide/blueprints text: Learn more…)
+(link: docs/guide/blueprints text: Learn more ›)
 
 ## How everything fits together
 
-Now that we have explored the parts, you might wonder how it all fits together. If you have explored the folders of the Startkit a bit, you might have noticed that there are a lot of files with the same file name but different extensions, for example `about.txt` and `/site/blueprints/pages/about.yml` and `/site/templates/about.php`. 
+Now that we have explored the parts, you might wonder how it all fits together. If you have explored the folders of the Startkit a bit, you might have noticed that there are a lot of files with the same file name but different extensions, for example `about.txt` and `/site/blueprints/pages/about.yml` and `/site/templates/about.php`.
 
 These files are in fact tied together by their filenames. The content in `about.txt` is rendered with the `about.php` template. And if you visit the `about` page in the Panel, the `about.yml` blueprint takes care of displaying the form fields for the fields in the text file.
 
@@ -122,7 +122,7 @@ These files are in fact tied together by their filenames. The content in `about.
 
 ## The `media` folder
 
-Whenever you upload a file to a page via the Panel, the file is uploaded to the content folder. However, as soon as the URL of the file is called in the browser, the file is copied to the media folder. 
+Whenever you upload a file to a page via the Panel, the file is uploaded to the content folder. However, as soon as the URL of the file is called in the browser, the file is copied to the media folder.
 
 Also, all thumbnails are created on the fly and stored in the media folder. Therefore, this folder needs to be publicly accessible within the document root. This setup was chosen because it has some real advantages, like providing consistent image URLs or being able to move the content folder (and most other folders) above the document root for better security (see [custom folder setup](/docs/guide/configuration#custom-folder-setup)).
 
@@ -136,39 +136,39 @@ We also recommend that you delete the `media` folder when you update Kirby.
 ### Multi-Language support
 Any Kirby site can be translated into multiple languages. Languages can be added via the Panel and content can be translated by your editors.
 
-(link: docs/guide/languages text: Learn more…)
+(link: docs/guide/languages text: Learn more ›)
 
 ### User management
 You can add multiple users to your installation and assign roles with permissions to each of them. You can give users Panel or just frontend access and build your own client or member area for your site.
 
-(link: docs/guide/users text: Learn more…)
+(link: docs/guide/users text: Learn more ›)
 
 ### Plugins
 Kirby has a very versatile and extensive plugin system that can extend pretty much any part of the system. There are many fantastic third-party plugins that you should definitely check out. But it's also easy to start building your own plugins.
 
-(link: docs/guide/plugins text: Learn more…)
+(link: docs/guide/plugins text: Learn more ›)
 
 ### REST API
 Kirby has a built-in REST API that you can use for your own single page applications, mobile apps or in combination with a static site generator such as Gatsby.
 
-(link: docs/guide/api text: Learn more…)
+(link: docs/guide/api text: Learn more ›)
 
 ### Routing
 If you want to break out of Kirby's URL structure, you can create your own custom routes and use Kirby more like a framework. Or you could create just a few routes next to the built-in ones in Kirby for special use-cases.
 
-(link: docs/guide/routing text: Learn more…)
+(link: docs/guide/routing text: Learn more ›)
 
 ### Sending emails
 Contact form replies, user notifications, tiny newsletters – it's up to you what you build on top of Kirby's email engine.
 
-(link: docs/guide/emails text: Learn more…)
+(link: docs/guide/emails text: Learn more ›)
 
 ### Caching
 Kirby has a built-in page cache that makes slow pages with a lot of content super fast. But there's much more to discover. You can use our caching system for your own data – and in your plugins. Or maybe you want to cache everything in Redis? Let's create a custom cache driver.
 
-(link: docs/guide/cache text: Learn more…)
+(link: docs/guide/cache text: Learn more ›)
 
 ### Database integration
 Yes, you read that right. Even though Kirby is a file-based CMS, you can connect parts of it to a MySQL or SQLite database.
 
-(link: docs/guide/virtual-pages/content-from-database text: Learn more…)
+(link: docs/guide/virtual-pages/content-from-database text: Learn more ›)

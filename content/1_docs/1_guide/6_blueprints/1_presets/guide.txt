@@ -7,13 +7,14 @@ Intro: Presets help you to set up typical interface layouts in seconds. Single p
 
 Text:
 
-## Available Presets
+## Available presets
 
-Kirby ships with the following presets that you can use to get started. For fully customized layouts check out our (link: docs/guide/blueprints/layout text: layout guide).
+Kirby ships with the following blueprint presets that you can use to get started. They can help you to quickly get started with simple but very common blueprint layouts. For more complex and fully customized layouts check out our (link: docs/guide/blueprints/layout text: layout guide).
 
-### Page
+### Single page: `page`
 
-For a typical single page setup (articles, projects, text pages, etc.), you can use the `page` preset.
+For a typical single page setup (e.g. for articles, projects, text pages, etc.), you can use the `page` preset. It will set up form fields and a sidebar with subpages and files.
+
 
 ```yaml
 title: Simple Page
@@ -27,19 +28,18 @@ fields:
         type: textarea
 ```
 
-This preset will automatically set up the form fields and a sidebar with subpages and files.
 
 (screenshot: simple-page.png)
 
-Besides defining form fields, you can also control the files and pages settings with this preset. (link: docs/reference/panel/presets/page text: Learn more…)
+Besides defining form fields, you can also control the files and pages settings within this preset. (link: docs/reference/panel/presets/page text: Learn more ›)
 
 <info>
 The `page` preset is very close to Kirby 2 blueprints and the perfect starting point if you want to migrate an old project.
 </info>
 
-### Pages
+### Group of pages: `pages`
 
-A collection of pages, such as a blog, projects or a shop, often don't really need form fields or files, but more features to manage subpages. The `pages` preset is perfect for such page types.
+A collection of pages, such as a blog, projects or a shop, often does not really need form fields or files, but more features to manage subpages. The `pages` preset is perfect for such page types.
 
 ```yaml
 title: Blog
@@ -48,11 +48,11 @@ preset: pages
 
 (screenshot: blog.png)
 
-You have a lot of additional options to configure the way subpages are displayed and which templates are allowed. (link: docs/reference/panel/presets/pages text: Learn more…)
+You have a lot of additional options to configure the way subpages are displayed with this preset and which templates are allowed. (link: docs/reference/panel/presets/pages text: Learn more ›)
 
-### Files
+### Group of files: `files`
 
-Some page types, such as photo albums, should focus entirely on the file management. That's what the `files` preset is made for.
+Some page types, such as photo albums or download sections, should focus entirely on the file management. That's what the `files` preset is made for.
 
 ```yaml
 title: Gallery
@@ -61,13 +61,10 @@ preset: files
 
 (screenshot: gallery.png)
 
-The `files` preset can do a lot more to set up the ratio, size, image cropping and info of each card. (link: docs/reference/panel/presets/files text: Learn more…)
+The `files` preset can do a lot more to set up the ratio, size, image cropping and info of each card. (link: docs/reference/panel/presets/files text: Learn more ›)
 
-## Preset Docs
+## Full documentation
 
-For more docs on available preset options, check out our Reference:
+For more docs on available preset options, check out our (link: docs/reference/panel/presets text: Reference):
 
 (reference: panel/presets)
-
-
-

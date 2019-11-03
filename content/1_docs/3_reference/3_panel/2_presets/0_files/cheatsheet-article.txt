@@ -2,6 +2,10 @@ Title: Files
 
 ----
 
+Guide: blueprints/presets#available-presets__group-of-files-files
+
+----
+
 Excerpt: The files preset is intended for pages that only contain files and no additional content.
 
 ----

@@ -30,7 +30,7 @@ Our brand new section system lifts blueprints to a completely different level. Y
 
 With native tabs you can go even further and create incredibly clean and usable editing environments for your editors.
 
-(link: docs/guide/blueprints text: Learn more…)
+(link: docs/guide/blueprints text: Learn more ›)
 
 ### Better user account management
 
@@ -40,7 +40,7 @@ Users get a huge upgrade and can have their own files, fields and the same flexi
 
 The Panel is built on top of our own Vue UI kit that can be used in all Panel plugins to build incredibly feature-rich extensions with just a few lines of code.
 
-(link: docs/reference/plugins/ui text: Learn more…)
+(link: docs/reference/plugins/ui text: Learn more ›)
 
 ### Better fields
 
@@ -48,7 +48,7 @@ With the new power of our Vue application, we introduce far better fields than b
 
 (screenshot: fields.png)
 
-(link: docs/reference/panel/fields text: Learn more…)
+(link: docs/reference/panel/fields text: Learn more ›)
 
 ## Drafts & custom publishing workflows
 
@@ -56,31 +56,31 @@ Customizable page states give you maximum control over your workflow, from draft
 
 (screenshot: drafts.png)
 
-(link: docs/guide/content/creating-pages text: Learn more…)
+(link: docs/guide/content/creating-pages text: Learn more ›)
 
 ## A new plugin system
 
 We've overhauled our entire plugin system and built a more reliable and consistent environment for lots of new plugin types. Basically any part of Kirby can be extended or modified to fit your project.
 
-(link: docs/guide/plugins text: Learn more…)
+(link: docs/guide/plugins text: Learn more ›)
 
 ## REST API & Headless CMS
 
 Kirby 3 has a built in REST API. You can comfortably create and edit your content in the Panel, and then consume your content in SPAs, mobile applications or static site generators.
 
-(link: docs/guide/api/introduction text: Learn more…)
+(link: docs/guide/api/introduction text: Learn more ›)
 
 ## Virtual pages & external data sources
 
 In Kirby 3, you can mix file-based content with content from pretty much any other data source. Databases, APIs, spreadsheets, or anything else that's somehow parsable by PHP. In fact, most parts of our (link: docs/reference text: reference) are generated live from PHP reflections of our source code.
 
-(link: docs/guide/database text: Learn more…)
+(link: docs/guide/database text: Learn more ›)
 
 ## Asynchronous media API
 
 All images and other media files are loaded dynamically via the new media API. With built-in image manipulation, cache busting and extensible thumbnail generators, you get the perfect environment for media-heavy sites.
 
-(link: docs/guide/content/files text: Learn more…)
+(link: docs/guide/content/files text: Learn more ›)
 
 ## Shared collections
 
@@ -112,19 +112,19 @@ $kirby->collection("admins");
 $kirby->collection("project-covers");
 ```
 
-(link: docs/guide/templates/collections text: Learn more…)
+(link: docs/guide/templates/collections text: Learn more ›)
 
 ## Easy emails
 
 Our new email engine built on top of PHPMailer gives you a very comfortable API to send form replies, notifications and more. Add any file in Kirby as attachment and use the same template engine that you are already familiar with.
 
-(link: docs/guide/emails text: Learn more…)
+(link: docs/guide/emails text: Learn more ›)
 
 ## Better caching
 
 With Kirby 3, you can make use of our page cache or add custom caching of your own data in a matter of seconds.
 
-(link: docs/guide/cache text: Learn more…)
+(link: docs/guide/cache text: Learn more ›)
 
 ## So much more…
 

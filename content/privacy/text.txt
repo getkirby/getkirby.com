@@ -40,7 +40,7 @@ We don't collect any personal data on our website except server logs. We use the
 - Cloudinary:
 *To minify our images and increase loading speed for images across the globe*
 
-[Read more…](#website)
+[Read more ›](#website)
 
 ### Shop
 
@@ -48,7 +48,7 @@ https://getkirby.com/buy
 
 Our shop is provided by Paddle. They collect the data about your purchases.
 
-[Read more…](#shop)
+[Read more ›](#shop)
 
 ### Forum
 
@@ -56,7 +56,7 @@ https://forum.getkirby.com
 
 Our support forum is provided by Discourse. Your personal data in the forum is collected on their servers.
 
-[Read more…](#support-forum)
+[Read more ›](#support-forum)
 
 ### Newsletter
 
@@ -64,7 +64,7 @@ https://getkirby.com/#kosmos
 
 If you sign up to our newsletter, your data is being collected by our Australian newsletter service Campaign Monitor.
 
-[Read more…](#newsletter)
+[Read more ›](#newsletter)
 
 
 ## Your rights
@@ -211,7 +211,7 @@ CampaignMonitor complies with GDRP. You can find our more about their privacy po
 
 ## Your Kirby installation
 
-On your own Kirby-powered websites, you or your clients are their own data controllers and fully responsible for complying with applicable privacy legislation. While Kirby is designed with privacy in mind, there are some situations in which user privacy might be affected. Head over to our (link: docs/guide/kirby-and-privacy text: privacy guide) to learn more. 
+On your own Kirby-powered websites, you or your clients are their own data controllers and fully responsible for complying with applicable privacy legislation. While Kirby is designed with privacy in mind, there are some situations in which user privacy might be affected. Head over to our (link: docs/guide/kirby-and-privacy text: privacy guide) to learn more.
 
 ## Questions & Feedback
 

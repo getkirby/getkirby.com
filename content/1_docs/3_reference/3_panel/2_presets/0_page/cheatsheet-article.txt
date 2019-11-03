@@ -2,6 +2,10 @@ Title: Page
 
 ----
 
+Guide: blueprints/presets#available-presets__single-page-page
+
+----
+
 Excerpt: The Page preset simplifies the setup for standard pages with form fields, optional subpages and files.
 
 ----
@@ -75,12 +79,12 @@ pages:
 
 ### Files section
 
-```yaml 
+```yaml
 files:
   template: image
   min: 4
   max: 8
-```  
+```
 
 ## Overwrite the sidebar
 
