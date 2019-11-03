@@ -116,9 +116,107 @@ return this.$helper.ratio("1/2");
 ```
 
 
-
 ## `slug`
+
+Transform a string to a valid slug according to a specified ruleset.
+
+#### Parameters
+
+| Name  | Description
+| ----  | ---- |
+| `string` | String to be transformed |
+| `rules` | Array of transformation rulesets (objects themselves) |
+| `allowed` | String of allowed characters |
+
+#### Example
+
+```js
+return this.$helper.slug("Was für ein Spaß", [
+  {
+    "ü": "ue"
+  },
+  {
+    "ß": "sz"
+  }
+]);
+// result: "was-fuer-ein-spasz"
+```
+
+
 ## `sort`
+
+ Natural sort algorithm with unicode support
+
+#### Example
+
+```js
+return this.$helper.sort(valueA, valueB);
+```
+
 ## `string`
+
+Helper that offers two methods:
+
+#### `ucfirst`
+
+```js
+return this.$helper.string.ucfirst("hello);
+// result: "Hello"
+```
+
+#### `lcfirst`
+
+```js
+return this.$helper.string.lcfirst("Hello);
+// result: "hello"
+```
+
 ## `upload`
+
+Helper to upload a file.
+
+#### Parameters
+
+| Name  | Description
+| ----  | ---- |
+| `file` | File object |
+| `params` | Options object (see defaults below) |
+
+```js
+// available params and their default
+const defaults = {
+  url: "/",
+  field: "file",
+  method: "POST",
+  accept: "text",
+  attributes: {},
+  complete: function() {},
+  error: function() {},
+  success: function() {},
+  progress: function() {}
+};
+```
+
+
 ## `isUploadEvent`
+
+Checks if a javascript event is really an upload event.
+
+#### Example
+
+```javascript "YourVueComponent.vue"
+<template>
+  <div @drop="onDrop" />
+</template>
+
+<script>
+export default {
+  methods: {
+    onDrop(event) {
+      if (this.$helper.isUploadEvent(event) === true) {
+        // …
+      }
+    }
+  }
+}
+```
