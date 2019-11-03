@@ -53,7 +53,7 @@ To register your license, the Panel connects to our licensing server **once** to
 
 - the entered license key
 - the email address connected to the license key
-- the domain of the Kirby installation
+- the index URL (domain & path) of the Kirby installation
 
 No other personal or site data is transmitted to our server.
 
