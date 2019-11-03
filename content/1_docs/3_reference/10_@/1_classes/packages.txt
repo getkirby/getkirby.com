@@ -1,4 +1,4 @@
-Title: Advanced
+Title: All classes
 ----
 Packages:
 - Api

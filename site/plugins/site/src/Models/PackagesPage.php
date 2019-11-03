@@ -16,7 +16,7 @@ class PackagesPage extends Page
             return $this->children;
         }
 
-        $pages = [];
+        $pages = parent::children()->toArray();
 
         foreach ($this->packages()->yaml() as $package) {
 

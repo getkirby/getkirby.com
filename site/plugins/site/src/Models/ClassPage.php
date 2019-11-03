@@ -17,6 +17,13 @@ class ClassPage extends Page
     protected $docBlock;
     protected $reflection;
 
+    public function alias()
+    {
+        $aliases = require $this->kirby()->root('kirby') . '/config/aliases.php';
+        $alias   = array_search($this->className(), $aliases);
+        return new Field($this, 'alias', $alias !== false ? $alias : null);
+    }
+
     public function children()
     {
 
@@ -45,7 +52,6 @@ class ClassPage extends Page
             if ($slug === '__construct') {
                 $num = 0;
             }
-
 
             if ($page = $pages->find($slug)) {
                 $content = $page->content()->toArray();
