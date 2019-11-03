@@ -6,7 +6,7 @@ Description: With Markdown and KirbyText, it is easy to mark up and style your c
 
 ----
 
-Intro: When writing for the web, nobody really wants to wrap HTML tags around text. On the other hand, most WYSIWYG editors produce awful HTML output and have tons of other issues. In Kirby, content is therefore marked up and formatted in Markdown or our extended version of it, which we call KirbyText.
+Intro: When writing for the web, nobody really wants to wrap HTML tags around text. On the other hand, most WYSIWYG editors produce awful HTML output and have tons of other issues. In Kirby, content is therefore marked up and formatted in (glossary: Markdown) or our extended version of it, which we call KirbyText.
 
 ----
 
@@ -14,21 +14,11 @@ Text:
 
 ## Markdown
 
-The following Markdown tags are available to add simple formatting to your text.
+The following (glossary: Markdown) tags are available to add simple formatting to your text.
 
 (reference: text/markdown)
 
-### Markdown Extra
-
-If you need even more options to format text, like footnotes, tables, definition lists, etc. you can activate Markdown Extra in your config file to use those additional formats:
-
-```php "/site/config/config.php"
-return [
-  'markdown' => [
-    'extra' => true
-  ]
-];
-```
+If you need even more options to format text, like footnotes, tables, definition lists, etc. you can (link: docs/reference/system/options/markdown text: activate Markdown Extra in your config file) to use those additional formats.
 
 ## KirbyText
 
