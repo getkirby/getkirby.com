@@ -113,11 +113,11 @@ function setScroll() {
 if (currentSections && currentSections.scrollIntoView) {
   const scroll = localStorage.getItem('getkirby$reference$scroll');
 
-  if (scroll) {
-    currentSections.scroll(0, scroll);
-  }
-
   if (currentSection) {
+    if (scroll) {
+      currentSections.scroll(0, scroll);
+    }
+
     const linkRect    = currentSection.getBoundingClientRect();
     const sidebarRect = currentSections.getBoundingClientRect();
     if (linkRect.top < sidebarRect.top) {
