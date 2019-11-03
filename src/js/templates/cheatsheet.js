@@ -1,39 +1,21 @@
 /* global Prism */
 import { $, $$ } from "../utils/selector.js";
+import throttle from "../utils/throttle";
 import "../components/code.js";
 import { /* enableBodyScroll,*/ disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
 const cheatsheet = $(".cheatsheet");
 
 const buttons = () => {
-
-  // const menuScrollArea = $(".cheatsheet-panel-scrollarea");
-
   $$(".cheatsheet-panel-header button").forEach((button) => {
-
     button.addEventListener("click", () => {
       const show = button.getAttribute("data-show");
       cheatsheet.setAttribute("data-show", show);
-
-      // if (show === "menu") {
-      //   // when mobile menu is shown, disable scrolling of
-      //   // the page and only allow inside of designated
-      //   // scrolling area. Otherwise, the page can easily
-      //   // break on iOS, because Mobile Safari (tested with v12.2)
-      //   // tends to scrolling the whole viewport, even if
-      //   // only the scroll area was flicked.
-      //   disableBodyScroll(menuScrollArea);
-      // } else {
-      //   enableBodyScroll(menuScrollArea);
-      // }
-
     });
-
   });
 };
 
 const load = (link) => {
-
   // start loading
   cheatsheet.classList.add("is-loading");
 
@@ -120,13 +102,36 @@ $$(".cheatsheet-entries a").forEach((link) => {
 
 buttons();
 
-const currentSection = $(".cheatsheet-sections a[aria-current]");
-const currentEntry   = $(".cheatsheet-entries a[aria-current]");
+const currentSections = $(".cheatsheet-panel-scrollarea");
+const currentSection  = $(".cheatsheet-sections a[aria-current]");
+const currentEntry    = $(".cheatsheet-entries a[aria-current]");
 
-if (currentSection && currentSection.scrollIntoView) {
-  // Scroll to group instead of section for better orientation
-  let currentGroup = currentSection.parentNode.parentNode.parentNode;
-  currentGroup.scrollIntoView();
+function setScroll() {
+  localStorage.setItem('getkirby$reference$scroll', currentSections.scrollTop);
+}
+
+if (currentSections && currentSections.scrollIntoView) {
+  const scroll = localStorage.getItem('getkirby$reference$scroll');
+
+  if (scroll) {
+    currentSections.scroll(0, scroll);
+  }
+
+  if (currentSection) {
+    const linkRect    = currentSection.getBoundingClientRect();
+    const sidebarRect = currentSections.getBoundingClientRect();
+    if (linkRect.top < sidebarRect.top) {
+      currentSection.parentNode.parentNode.parentNode.scrollIntoView(true);
+    } else if (linkRect.bottom > sidebarRect.bottom) {
+      currentSection.parentNode.parentNode.parentNode.scrollIntoView(false);
+    }
+  }
+
+  // store current scroll position
+  setScroll();
+
+  // update scroll position dynamically
+  currentSections.addEventListener('scroll', throttle(setScroll, 100));
 }
 
 if (currentEntry && currentEntry.scrollIntoView) {
