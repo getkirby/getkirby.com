@@ -11,13 +11,13 @@ Text:
 
 With this guide, we want to give you the necessary technical information to make it easier for you to comply with privacy regulations in your country (e.g. the GDPR in the European Union).
 
-<info>
+<warning>
 The following information might be incomplete. Your site may collect or process personal data in other ways.
 
 We are not responsible how you handle data privacy on your own Kirby-powered website(s). You are your own data controller and if you are located in the EU or if you have customers in the EU, you must make sure that your site complies with GDPR. The same applies to any other national privacy laws in your country or the countries of your customers.
 
 **We cannot give any legal advice** in regard to the implications the following information has for you and your sites. If you are unsure what you need to do to comply with GDPR in particular or any other national privacy laws in your country, please consult a lawyer.
-</info>
+</warning>
 
 ## Privacy by design
 
@@ -57,6 +57,10 @@ To register your license, the Panel connects to our licensing server **once** to
 
 No other personal or site data is transmitted to our server.
 
+<info>
+If you don't want the Panel to connect with our server, you can register your site manually and download license files directly from (link: https://licenses.getkirby.com text: licenses.getkirby.com).
+</info>
+
 ## Other data handlers
 
 ### Plugins, themes and custom code
@@ -65,7 +69,7 @@ Your sites may store or process additional personal data depending on the Kirby 
 
 ### Usage of external images, embeds or other remote data
 
-When integrating things into your site from other servers, there is always the possibility to reveal information about your visitors (e.g. IP address) to third parties – or even to load third-party cookies or other scripts that e.g. could track visitors across the web. Reflect on this risk when using e.g. external images, the `video` KirbyTag or other embeds and act accordingly.
+When integrating resources from other servers into your site, there is always the risk to revealing information about your visitors to third parties – starting with their IP address. It might even allow third parties to load their own cookies or other scripts into your site, e.g. to track visitors across the web. Reflect on this risk when using external resources such as images, the `video` KirbyTag or other embeds and act accordingly.
 
 ### Data submitted by visitors
 
