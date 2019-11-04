@@ -58,7 +58,7 @@ To register your license, the Panel connects to our licensing server **once** to
 No other personal or site data is transmitted to our server.
 
 <info>
-If you don't want the Panel to connect with our server, you can register your site manually and download license files directly from (link: https://licenses.getkirby.com text: licenses.getkirby.com).
+If you don't want the Panel to connect to our server, you can register your site manually and download license files directly from (link: https://licenses.getkirby.com text: licenses.getkirby.com).
 </info>
 
 ## Other data handlers
@@ -69,7 +69,7 @@ Your sites may store or process additional personal data depending on the Kirby 
 
 ### Usage of external images, embeds or other remote data
 
-When integrating resources from other servers into your site, there is always the risk to revealing information about your visitors to third parties – starting with their IP address. It might even allow third parties to load their own cookies or other scripts into your site, e.g. to track visitors across the web. Reflect on this risk when using external resources such as images, the `video` KirbyTag or other embeds and act accordingly.
+When integrating resources from other servers into your site, there is always the risk of revealing information about your visitors to third parties – starting with their IP address. Embeds might even allow third parties to load their own cookies or other scripts into your site, e.g. to track visitors across the web. Reflect on this risk when using external resources such as images, the `video` KirbyTag or other embeds and act accordingly.
 
 ### Data submitted by visitors
 
