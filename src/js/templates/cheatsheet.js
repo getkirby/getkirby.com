@@ -1,6 +1,5 @@
 /* global Prism */
 import { $, $$ } from "../utils/selector.js";
-import throttle from "../utils/throttle";
 import "../components/code.js";
 import { /* enableBodyScroll,*/ disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
@@ -110,20 +109,25 @@ function setScroll() {
   localStorage.setItem('getkirby$reference$scroll', currentSections.scrollTop);
 }
 
-if (currentSections && currentSections.scrollIntoView) {
+function unsetScroll() {
+  localStorage.removeItem('getkirby$reference$scroll');
+}
+
+if (currentSections) {
   const scroll = localStorage.getItem('getkirby$reference$scroll');
 
-  if (currentSection) {
-    if (scroll) {
-      currentSections.scroll(0, scroll);
-    }
+  if (scroll) {
+    currentSections.scroll(0, scroll);
+    unsetScroll();
+  }
 
-    const linkRect    = currentSection.getBoundingClientRect();
-    const sidebarRect = currentSections.getBoundingClientRect();
-    if (linkRect.top < sidebarRect.top) {
-      currentSection.parentNode.parentNode.parentNode.scrollIntoView(true);
-    } else if (linkRect.bottom > sidebarRect.bottom) {
-      currentSection.parentNode.parentNode.parentNode.scrollIntoView(false);
+  else if(currentSection && currentSections.scrollIntoView) {
+    const group = currentSection.parentNode.parentNode.parentNode;
+
+    if (group.scrollIntoView) {
+      const linkRect    = currentSection.getBoundingClientRect();
+      const sidebarRect = currentSections.getBoundingClientRect();
+      group.scrollIntoView(linkRect.top < sidebarRect.top);
     }
   }
 
@@ -131,7 +135,7 @@ if (currentSections && currentSections.scrollIntoView) {
   setScroll();
 
   // update scroll position dynamically
-  currentSections.addEventListener('scroll', throttle(setScroll, 100));
+  currentSections.addEventListener('click', setScroll);
 }
 
 if (currentEntry && currentEntry.scrollIntoView) {
