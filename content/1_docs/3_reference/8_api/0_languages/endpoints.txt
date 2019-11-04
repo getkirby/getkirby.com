@@ -4,12 +4,4 @@ title: Languages
 
 Text:
 
-<info>The multi-language setup needs to be activated in your config. Otherwise the endpoints above are not available.</info>
-
-To activate multi-language mode, set the following in your config:
-
-```php "/site/config/config.php"
-return [
-    'languages' => true
-];
-```
+<info>The multi-language setup needs to be **(link: docs/reference/system/options/languages text: activated in your config)**. Otherwise the endpoints above are not available.</info>
