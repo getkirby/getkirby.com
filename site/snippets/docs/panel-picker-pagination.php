@@ -11,3 +11,17 @@ fields:
     limit: 10
 ```
 </since>
+
+## Search
+<since v="3.3.0">
+
+The <?= $field ?> picker shows a search field by default. If you want to remove it, you can switch it off with the `search` option:
+
+```yaml
+fields:
+  <?= $field ?>:
+    type: <?= $field . PHP_EOL ?>
+    label: Select an item
+    search: false
+```
+</since>
