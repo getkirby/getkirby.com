@@ -3,5 +3,5 @@ Text:
 ## Example
 
 ```php
-<?= $page->subtitle()->html()->nl2br() ?>
+<?= $page->subtitle()->nl2br() ?>
 ```

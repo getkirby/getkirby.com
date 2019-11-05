@@ -3,13 +3,6 @@ Text:
 ## Example
 
 ```php
-<?php foreach ($page->cards()->toStructure() as $item): ?>
-  <div class="card">
-    <?php if ($icon = $item->icon()->toFile()): ?>
-      <?= $icon->html() ?>
-    <?php endif ?>
-    <h3><?= $item->title()->html() ?></h3>
-    <p><?= $item->text()->kt()->inline() ?></p>
-  </div>
-<?php endforeach ?>
+<h3><?= $page->title() ?></h3>
+<p><?= $page->text()->kt()->inline() ?></p>
 ```
