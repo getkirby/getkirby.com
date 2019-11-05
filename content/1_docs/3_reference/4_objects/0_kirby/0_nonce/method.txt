@@ -8,3 +8,4 @@ The method generates a nonce that you can use in your inline scripts in conjucti
 <script nonce="<?= $kirby->nonce() ?>">…</script>
 ```
 
+You can also use it to configure a custom content security policy for your site and/or the panel.
