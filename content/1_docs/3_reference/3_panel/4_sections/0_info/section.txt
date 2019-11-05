@@ -32,16 +32,11 @@ sections:
 
 <since v="3.3.0">
 In addition to markdown, you can use `KirbyText` in your info text, even including images:
-
+</since>
 ```yaml
 info:
-  text: >
-    Check out the (link: help text: help pages) for details about how this information is used throughout the site.
-    
-    (image: info.jpg)
+  text: Check out the &lpar;link: help text: help pages) for details
 ```
-
-</since>
 
 ## Section shortcuts
 
@@ -51,7 +46,7 @@ For simple sections that are only used once per blueprint, you can use shortcuts
 
 ```yaml
 sections:
-  info: 
+  info:
     text: Some text
 ```
 
