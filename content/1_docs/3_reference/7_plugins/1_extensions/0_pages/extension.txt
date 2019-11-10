@@ -1,0 +1,51 @@
+Title: Pages
+
+----
+
+Since: 3.2.0
+
+----
+
+Text:
+
+With the `Pages` extension you can register pages from a plugin that do not physically exist in the file system.
+
+```php "/site/plugins/pages/index.php"
+<?php
+
+Kirby::plugin('my/plugin', [
+    'pages' => [
+        'new-page' => new Page([
+            'slug'     => 'new-page',
+            'template' => 'virtual',
+            'content'  => [
+                'title' => 'Hello'
+            ]
+       ])
+    ]
+]);
+```
+
+If you want to use a model with your Page, you have to define the model in your plugin and then create an instance of your page model:
+
+```php
+class VirtualPage extends Page
+{
+    // your custom page methods
+}
+
+Kirby::plugin('my/plugin', [
+    'pageModels' => [
+        'virtual' => 'VirtualPage'
+    ],
+    'pages' => [
+        'new-page' => new VirtualPage([
+            'slug'     => 'new-page',
+            'template' => 'virtual',
+            'content'  => [
+                'title' => 'Hello'
+            ]
+       ])
+    ]
+]);
+```
