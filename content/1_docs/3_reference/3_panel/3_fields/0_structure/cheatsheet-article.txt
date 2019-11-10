@@ -148,6 +148,28 @@ fields:
 ```        
 </since>
 
+### Hide toggle field text in preview
+
+<since="3.3.0>
+When using toggle fields within structures, displaying the field's text in the preview can sometimes look cluttered. You can hide the text with the `text` option in the columns' definition.
+
+```yaml
+fields:
+  structure:
+    columns:
+      a:
+        text: false
+      b:
+        text: false
+    fields:
+      a:
+        type: toggle
+      b:
+        type: toggle
+        text: this is some long text
+```        
+</since>
+
 ## Preview of fields in the table
 
 The structure field tries to create the best possible preview for the field in its table view. If you are using fields provided by a plugin in the structure field, the preview of these can be customized with a (link: docs/reference/plugins/extensions/field-previews text: field preview extension).
