@@ -267,9 +267,11 @@ class HelperPage extends Page
     {
         if ($since = $this->methodSince()) {
             $since = $since->getVersion();
+            return new Field($this, 'since', $since ?? null);
         }
 
-        return new Field($this, 'since', $since ?? null);
+        return parent::since();
+        
     }
 
     public function title(): Field
