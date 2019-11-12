@@ -35,7 +35,8 @@ In addition to markdown, you can use `KirbyText` in your info text, even includi
 </since>
 ```yaml
 info:
-  text: Check out the &lpar;link: help text: help pages) for details
+  text: |
+    Check out the &lpar;link: help text: help pages) for details
 ```
 
 ## Section shortcuts
