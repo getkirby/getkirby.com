@@ -32,7 +32,7 @@ You don't have to send a content type header manually, Kirby will do this for yo
 
 ## Accessing the representation
 
-Now that we have a representation template for our `default` template, we can request all `default` pages as a JSON file. To access the representation, add the name of the representation to the end of the the URL. `https://yourdomain.com/about` becomes `https://yourdomain.com/about.json` and so on.
+Now that we have a representation template for our `default` template, we can request all `default` pages as a JSON file. To access the representation, add the name of the representation to the end of the URL. `https://yourdomain.com/about` becomes `https://yourdomain.com/about.json` and so on.
 
 <info>
 If you use content representations on the homepage, the URL will become `https://yourdomain.com/.json` (or whatever extension you use).
