@@ -35,7 +35,7 @@ This setup can be used for a main menu, or for different single-level menus in t
 In the template:
 
 ```php
-<?php $menu = $site->menu()->toPages(); ?>
+<?php $menu = $site->mainMenu()->toPages(); ?>
 <?php if ($menu->isNotEmpty()) : ?>
 <nav>
   <ul>
@@ -60,7 +60,7 @@ menus:
     menuHeadline:
       type: text
       label: Menu headline
-    menuItem:
+    menuItems:
       type: pages
       label: Menu item
 ```
@@ -122,7 +122,7 @@ In the template:
 
 ```php
 <?php $menuItems = $site->mixedMenu()->toStructure(); ?>
-<?php if ($menu->isNotEmpty()) : ?>
+<?php if ($menuItems->isNotEmpty()) : ?>
 <nav>
   <ul>
     <?php foreach ($menuItems as $menuItem) : ?>
@@ -291,7 +291,4 @@ Inside the snippet, we recursively call the snippet for the submenu items:
 As always, this is just a basic collection of ideas that you can extend for your use cases. In the structure field examples, you could, for example, include additional fields for link attributes, like `target: _blank` for those clients who absolutely want to open links in new tabs.
 
 
-Instead of using conditional fields for page links vs. external links, you could also make use of one of these two link field plugins:
-
-- https://github.com/medienbaecker/kirby-link-field
-- https://github.com/OblikStudio/kirby-link-field
+Instead of using conditional fields for page links vs. external links, you could also use the (link: https://github.com/OblikStudio/kirby-link-field text: link field plugin).
