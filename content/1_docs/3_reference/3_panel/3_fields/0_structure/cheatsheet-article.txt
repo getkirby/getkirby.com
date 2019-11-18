@@ -150,7 +150,7 @@ fields:
 
 ### Hide toggle field text in preview
 
-<since="3.3.0">
+<since v="3.3.0">
 When using toggle fields within structures, displaying the field's text in the preview can sometimes look cluttered. You can hide the text with the `text` option in the columns' definition.
 
 ```yaml
