@@ -178,7 +178,7 @@ if ($menu->isNotEmpty()) : ?>
       <li><a href="<?= $mainMenuItem->url() ?>"><?= $mainMenuItem->title() ?></a>
       <?php endif ?>
       <?php $subMenu = $item->subMenu()->toPages(); ?>
-      <?php if ($subMenu->isNotEmpty()) : ?>
+      <?php if ($item->hasSubmenu()->isTrue() && $subMenuItems->isNotempty()) : ?>
         <ul class="submenu-list">
           <?php foreach ($subMenu as $subItem) : ?>
           <li><a href="<?= $subItem->url() ?>"><?= $subItem->title() ?></a></li>
@@ -258,7 +258,7 @@ Let's see how we can handle this field definition in our template. To keep our c
 <?php $items = $site->nestedMenu()->toStructure() ?>
 <?php if ($items->isNotEmpty()) : ?>
 <nav>
-  <?php snippet('menuitem-list', ['items' => $site->nestedMenu()->toStructure()]) ?>
+  <?php snippet('menuitem-list', ['items' => $items)]) ?>
 </nav>
 <?php endif ?>
 ```
@@ -277,7 +277,7 @@ Inside the snippet, we recursively call the snippet for the submenu items:
 
     <?php $subMenuItems = $item->subMenu()->toStructure(); ?>
 
-    <?php if ($subMenuItems->isNotempty()) : ?>
+    <?php if ($item->hasSubmenu()->isTrue && $subMenuItems->isNotempty()) : ?>
     <?php snippet('menuitem-list', ['items' => $subMenuItems]) ?>
     <?php endif ?>
     </li>
