@@ -43,7 +43,7 @@ In this tutorial we are going to build a very basic one-pager. Here’s a rough 
   contact.txt
 error/
   error.txt
-homer/
+home/
   home.txt
 ```
 
