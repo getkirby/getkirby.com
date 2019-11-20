@@ -292,7 +292,7 @@ return [
         'html' => function ($tag) {
 
             if ($tag->file = $tag->file($tag->value)) {
-                $tag->src     = $tag->file->url();
+                $tag->src     = $tag->file->resize(1200)->url();
                 $tag->alt     = $tag->alt     ?? $tag->file->alt()->or(' ')->value();
                 $tag->title   = $tag->title   ?? $tag->file->title()->value();
                 $tag->caption = $tag->caption ?? $tag->file->caption()->value();
