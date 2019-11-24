@@ -124,17 +124,18 @@ npm run dev
 If this went smoothly, we are ready to use the section in a blueprint, e.g. `site.yml`:
 
 ```yaml "/site/blueprints/site.yml"
-sections:
-  startersection:
-    type: startersection
-    headline: Getting started
+Title: Site
+  sections:
+    startersection:
+      type: startersection
+      headline: Getting started
 ```
 
 If we now open the Panel start page, we will not see anything yet in the browser. However, on inspecting the source code, there will be an empty `div` tag with a class of `k-section k-section-name-startersection`. Hurray!
 
 ## Adding the missing pieces
 
-Back to `Startersection.vue`. We now define the same properties that we already defined in `index.php` inside the data function of the `export`object:
+Back to `Startersection.vue`. We now define the same properties that we already defined in `startersection.php` inside the data function of the `export` object:
 
 ```html "/site/plugins/startersection/src/components/Startersection.vue"
 <script>
@@ -323,10 +324,236 @@ startersection/
 
 ## Variation: Fetching the content from a structure field
 
+Let's say we wanted to store this data in a structure field instead, so that it is editable by the admin of the site. For this example, we store both the structure field and the section in the same site object (which is not really that intelligent a use case, but hey, this is an example). And it gives us the chance to introduce some more goodies.
+
+### The `site.yml` blueprint
+
+Let's move our data from the section to a structure field, remove the `data` property from the section, and instead add the `size` and `sortBy` properties to the section to have some more to play with.
+
+```yaml "/site/blueprints/site.yml"
+title: Site
+
+sections:
+  label: Sections
+  sections:
+    fields:
+      type: fields
+      fields:
+        widgetfield:
+          type: structure
+          fields:
+            text:
+              type: text
+            info:
+              type: text
+            url:
+              type: url
+            icon:
+              type: text
+
+    widget:
+      type: startersection
+      headline: Getting started with Kirby
+      layout: cards
+      query: "{{ site.widgetfield.toStructure() }}"
+      sortBy: text
+      size: medium
+```
+
+### The final `startersection.php` file
+
+```php "/site/plugins/startersection/lib/startersection.php"
+<?php 
+use Kirby\Exception\InvalidArgumentException;
+use Kirby\Toolkit\Str;
+use Kirby\Toolkit\Query;
+
+return [
+    'props' => [
+        'headline' => function ($headline = 'Getting started') {
+            return $headline;
+        },
+        'layout' => function ($layout = 'list') {
+            return $layout;
+        },
+        'size' => function ($size = 'small') {
+            return $size;
+        },
+        'query' => function ($query = null) {
+            return $query;
+        },
+        'sortBy' => function ($sortBy = 'sort') {
+            return $sortBy;
+        }
+    ],
+    'computed' => [
+        'data' => function() {
+
+            $q = new Query($this->query, [
+                'site' => site(),
+            ]);
+            // get the query result
+            $result = $q->result();
+
+            // try to convert the result to a structure object
+            $items = $result->toStructure();
+
+            // Check if we have a Structure object
+            if(is_a($items, 'Kirby\\Cms\\Structure')) {
+
+                // sort the items
+                if ($this->sortBy) {
+                    $items = $items->sortBy(...Str::split($this->sortBy, ' '));
+                } elseif ($this->sortable === true) {
+                    $items = $items->sortBy('sort', 'asc');
+                }
+
+                $data = [];
+                
+                // loop through the items and assign each item to the data array
+                foreach ($items as $item) {
+                    $data[] = [
+                        'text'        => $item->text()->value(),
+                        'info'        => $item->info()->value(),
+                        'link'        => $item->url(),
+                        'target'      => $item->target(),
+                        'icon'        => [
+                            'type'    => $item->icon()->value(),
+                            'back'    => 'black'
+                        ]
+                     ];
+                }
+                return $data;
+
+            } else {
+
+                throw new InvalidArgumentException(
+                    'Invalid query result - Result must be of type Kirby\\Cms\\Structure, ' 
+                    . ($items === NULL ? 'NULL' : get_class($items))
+                    . ' given.'
+                );
+            }
+        }
+    ]
+];
+```
+
+Looks like this needs some explanations…
+
+First, we add some `use` statements at the top of the file because we are going to use some of Kirby's classes and don't want to call them by their full names.
+
+Secondly, we add some more properties, i.e. `size`, `sortBy` and `query` with some default values. Nothing new here.
+
+The new stuff is the computed `data` property, in which we evaluate the `query` property from the blueprint and assign the resulting data to the `data` array, provided that the query result returns an object of type `Kirby\Cms\Structure`. If this is not the case, we throw an error. We also sort the items by the given sort parameters.
+
+## The final `Startersection.vue` file
+
+We also have to make some changes to the Vue component.
+
+```html "/site/plugins/startersection/Startersection.vue"
+<template>
+  <k-section class="k-widget-section">
+    <header class="k-section-header">
+      <h2 class="k-headline">{{ headline }}</h2>
+    </header>
+    <k-collection 
+      v-if="data.length"
+      :items="data"
+      :layout="layout"
+      :size="size"/>
+
+</template>
+
+<script>
+export default {
+  data: function() {
+    return {
+      headline: "Getting Started",
+      layout: "cards",
+      data: {},
+      size: null
+    }
+  },
+  created: function() {
+    this.load();
+  },
+  computed: {
+    changeValue() {
+      return this.$store.getters["content/values"]()["widgetfield"];
+    }
+  },
+  watch: {
+    changeValue() {
+      this.reload();
+    }
+  },
+  methods: {
+    items(data) {
+      return data;
+    },
+    load(reload) {
+      this.$api
+        .get(this.parent + "/sections/" + this.name)
+        .then(response => {
+          this.headline = response.headline;
+          this.layout = response.layout;
+          this.data = this.items(response.data);
+          this.size = response.size;
+        });
+    },
+    reload() {
+      this.load(true);
+    }
+  }
+};
+</script>
+```
+
+1. We add the `size` property to the `k-collection` component and a `v-if` statement, so that it is only shown when there is data.
+
+    ```html
+    <k-collection 
+      v-if="data.length"
+      :items="data"
+      :layout="layout"
+      :size="size"/>
+    ```
+
+2. We add a new computed value that gives us access to our structure field: 
+
+    ```js
+    computed: {
+      changeValue() {
+        return this.$store.getters["content/values"]()["widgetfield"];
+      }
+    }
+    ```
+
+3. We listen to changes in this computed value and call the `reload()` method when changes occur:
+
+    ```js
+    watch: {
+      changeValue() {
+        this.reload();
+      }
+    }
+    ```
+
+4. And we finally add the `reload()` method to our methods that calls the `load()` method.
+
+    ```js
+    reload() {
+        this.load(true);
+    }
+    ```
+
+Now every time we update the structure field, our changes are reflected in the section below.
+
+(screenshot: custom-section-2.jpg)
 
 
 ## Where to go from here
 
-This is a very basic example that should still have given you an understanding of how the different parts play together and enable you to set up your first custom sections for your clients. The data to fill this section can come in fact come from anywhere, you can provide it through a route, a database or whatever you see fit. And you probably don't just want to display stuff, but add actions to each item etc. We'll cover that in a future recipe.
+This is a very basic example that should still have given you an understanding of how the different parts play together and enable you to set up your first custom sections for your clients. The data to fill this section can come in fact come from anywhere, you can provide it through a route, a database or whatever you see fit. And you probably don't just want to display stuff, but add actions to each item etc. We'll cover that in future recipes.
 
 You don't have to use the components Kirby provides, either, but can come up with your own markup.
