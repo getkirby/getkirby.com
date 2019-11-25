@@ -1,2 +1,14 @@
-.glossary-page .h5:after{color:#cca000;content:"\203A";margin-left:.25rem}
-/*# sourceMappingURL=glossary.css.map*/
+@charset "UTF-8";
+
+/* stylelint-disable block-closing-brace-empty-line-before, at-rule-empty-line-before */
+
+/* stylelint-disable at-rule-empty-line-before */
+
+/* stylelint-disable at-rule-empty-line-before */
+
+.glossary-page .h5::after {
+  color: #cca000;
+  content: "\203A";
+  margin-left: .25rem;
+}
+

@@ -1,2 +1,74 @@
-.press-page .intro{margin:0 auto;max-width:25rem}.logos{margin-bottom:4.5rem}.logos ul{display:flex;flex-wrap:wrap;margin-left:-1.5rem}.logos li{margin-bottom:1.5rem;padding-left:1.5rem;width:100%}@media (min-width:56em){.logos li{width:50%}}.logos a{display:block;width:100%}.logos figure{align-items:center;background:#efefef;display:flex}.logos figure span{align-items:center;background:#232529 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXR0ZXJuIGlkPSJhIiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGZpbGw9InJnYmEoMCwgMCwgMCwgMC4yKSIgZD0iTTAgMGgxMHYxMEgwem0xMCAxMGgxMHYxMEgxMHoiLz48L3BhdHRlcm4+PHJlY3QgZmlsbD0idXJsKCNhKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==");display:flex;height:9rem;justify-content:center;margin-right:1.5rem;width:12rem}.logos figcaption strong{display:block;font-weight:500}.logos svg{display:flex;flex-shrink:0;height:42px;width:auto}.logos svg *{fill:#fff}.screenshots li{margin-bottom:1.5rem}
-/*# sourceMappingURL=press.css.map*/
+/* stylelint-disable block-closing-brace-empty-line-before, at-rule-empty-line-before */
+
+/* stylelint-disable at-rule-empty-line-before */
+
+/* stylelint-disable at-rule-empty-line-before */
+
+.press-page .intro {
+  margin: 0 auto;
+  max-width: 25rem;
+}
+
+.logos {
+  margin-bottom: 4.5rem;
+}
+
+.logos ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -1.5rem;
+}
+
+.logos li {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  width: 100%;
+}
+
+@media (min-width: 56em) {
+  .logos li {
+    width: 50%;
+  }
+}
+
+.logos a {
+  display: block;
+  width: 100%;
+}
+
+.logos figure {
+  align-items: center;
+  background: #efefef;
+  display: flex;
+}
+
+.logos figure span {
+  align-items: center;
+  background: #232529 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXR0ZXJuIGlkPSJhIiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGZpbGw9InJnYmEoMCwgMCwgMCwgMC4yKSIgZD0iTTAgMGgxMHYxMEgwem0xMCAxMGgxMHYxMEgxMHoiLz48L3BhdHRlcm4+PHJlY3QgZmlsbD0idXJsKCNhKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==");
+  display: flex;
+  height: 9rem;
+  justify-content: center;
+  margin-right: 1.5rem;
+  width: 12rem;
+}
+
+.logos figcaption strong {
+  display: block;
+  font-weight: 500;
+}
+
+.logos svg {
+  display: flex;
+  flex-shrink: 0;
+  height: 42px;
+  width: auto;
+}
+
+.logos svg * {
+  fill: #fff;
+}
+
+.screenshots li {
+  margin-bottom: 1.5rem;
+}
+
