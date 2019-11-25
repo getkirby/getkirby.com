@@ -12,7 +12,7 @@ Published: 2019-11-24
 
 Text:
 
-In this recipe, we will create a custom Panel section that displays a list of Kirby links with an icon, a title and a description. This is what it will look like once we are ready:
+In this recipe, we will create a custom Panel section that displays a list of links with an icon, a title and a description. This is what it will look like once we are ready:
 
 (screenshot: custom-section.jpg)
 
@@ -27,9 +27,9 @@ You can install the (link: https://github.com/getkirby/pluginkit/tree/4-panel te
 
 Please read the (link: docs/reference/plugins/extensions/sections text: chapter about custom sections in the reference) before starting with this example.
 
-Let's get started with the plugin folder, we'll call it `/startersection`. Inside this folder, we create a `package.json` file which is needed so that Parcel knows what to do.
+Let's get started with the plugin folder, we'll call it `/linksection`. Inside this folder, we create a `package.json` file which is needed so that Parcel knows what to do.
 
-```json "/site/plugins/startersection/package.json"
+```yaml "/site/plugins/linksection/package.json"
 {
   "scripts": {
     "dev": "parcel watch src/index.js --no-source-maps -d ./",
@@ -40,36 +40,40 @@ Let's get started with the plugin folder, we'll call it `/startersection`. Insid
   }
 }
 ```
-This will take care of compiling our source files into an `index.js` file in the root of our `startersection` plugin folder.
+This will take care of compiling our source files into an `index.js` file in the root of our `linksection` plugin folder.
 
 ## Register the section: PHP part
 
-We also need an `index.php` file that contains the Kirby plugin wrapper, in which we define the section. The section definition itself goes into a separate file, which we will put into a separate `/lib` folder and require from there. 
+We also need an `index.php` file that contains the Kirby plugin wrapper, in which we define the section. The section definition itself goes into a separate file, which we will put into a separate `/sections` folder and require from there.
 
-```php "/site/plugins/startersection/index.php"
-Kirby::plugin('getkirby/startersection', [
+```php "/site/plugins/linksection/index.php"
+<?php
+
+Kirby::plugin('getkirby/linksection', [
     'sections' => [
-        'startersection' => require_once __DIR__ . '/lib/startersection.php',
+        'links' => require_once __DIR__ . '/sections/links.php',
     ],
 ]);
 ```
 <info>
-Note that while we could put the props array we now outsource to `startersection.php` into our `index.php`, the purpose here is to get an idea how we can structure our files in more complex plugins. 
+Note that while we could put the props array we now outsource to `links.php` into our `index.php`, the purpose here is to get an idea how we can structure our files in more complex plugins.
 </info>
 
-Inside `startersection.php`, we set the section's properties. We keep it simple and only set a headline, a layout and a data property. These are the properties we can later define in the blueprint for the section.
+Inside `links.php`, we set the section's properties. We keep it simple and only set a headline, a layout and a links property. These are the properties we can later define in the blueprint for the section.
 
-```php "/site/plugins/startersection/lib/startersection.php"
+```php "/site/plugins/linksection/sections/links.php"
+<?php
+
 return [
     'props' => [
-        'headline' => function ($headline = 'Getting started') {
+        'headline' => function ($headline = 'Links') {
             return $headline;
         },
         'layout' => function ($layout = 'list') {
             return $layout;
         },
-        'data' => function($data = []) {
-          return $data;
+        'links' => function($links = []) {
+          return $links;
         }
     ]
 ];
@@ -79,32 +83,32 @@ return [
 
 Our new section also needs an `index.js` in which we register the section for the Vue part of the plugin.
 
-```js "/site/plugins/startersection/src/index.js"
-import Startersection from "./components/Startersection.vue";
+```js "/site/plugins/linksection/src/index.js"
+import Links from "./components/sections/Links.vue";
 
-panel.plugin("getkirby/startersection", {
+panel.plugin("getkirby/linksection", {
   sections: {
-    startersection: Startersection
+    links: Links
   }
 });
 ```
 
-Inside this file, we import the `Startersection.vue` component and assign this component to the `startersection` section.
+Inside this file, we import the `Links.vue` component and assign this component to the `links` section. The `Links.vue` is stored inside a sections subfolder. This is not a required folder structure, but it makes sense to start using such subfolders for your components, when you work with different types of components (ie. fields, sections, views, etc.)
 
 ## Set up section component
 
-Finally, we need the `Startersection.vue` component that contains the template and data for the section.
+Finally, we need the `Links.vue` component that contains the template and data for the section.
 
-```html "/site/plugins/startersection/src/components/Startersection.vue"
+```html "/site/plugins/linksection/src/components/sections/Links.vue"
 <template>
 
 </template>
 
 <script>
 export default {
-  data: function() {
+  data() {
     return {
-     
+
     }
   }
 };
@@ -117,7 +121,7 @@ At this point, we are ready to run…
 npm run dev
 ```
 
-…in the `startersection` folder to compile our code into the main `index.js`.
+…in the `linksection` folder to compile our code into the main `index.js`.
 
 ## Set up section in blueprint
 
@@ -126,25 +130,25 @@ If this went smoothly, we are ready to use the section in a blueprint, e.g. `sit
 ```yaml "/site/blueprints/site.yml"
 Title: Site
   sections:
-    startersection:
-      type: startersection
+    links:
+      type: links
       headline: Getting started
 ```
 
-If we now open the Panel start page, we will not see anything yet in the browser. However, on inspecting the source code, there will be an empty `div` tag with a class of `k-section k-section-name-startersection`. Hurray!
+If we now open the Panel start page, we will not see anything yet in the browser. However, on inspecting the source code, there will be an empty `div` tag with a class of `k-section k-section-name-links`. Hurray!
 
 ## Adding the missing pieces
 
-Back to `Startersection.vue`. We now define the same properties that we already defined in `startersection.php` inside the data function of the `export` object:
+Back to `Links.vue`. We now define the same properties that we already defined in `links.php` inside the data function of the component object:
 
-```html "/site/plugins/startersection/src/components/Startersection.vue"
+```html "/site/plugins/linksection/src/components/sections/Links.vue"
 <script>
 export default {
-  data: function() {
+  data() {
     return {
-     headline: null,
-     layout: null,
-     data: []
+      headline: null,
+      layout: null,
+      links: []
     }
   }
 };
@@ -153,21 +157,21 @@ export default {
 
 As a next step, we finalize our template, so it can later display the data:
 
-```html "/site/plugins/startersection/src/components/Startersection.vue"
+```html "/site/plugins/linksection/src/components/sections/Links.vue"
 <template>
-  <k-section class="k-startersection-section">
+  <section class="k-links-section">
     <header class="k-section-header">
       <h2 class="k-headline">{{ headline }}</h2>
     </header>
     <k-collection
-      :items="data"
+      :items="links"
       :layout="layout"
     />
-  </k-section>
+  </section>
 </template>
 ```
 
-Kirby makes this really easy for us by providing default components we can reuse all over the place. Here we use the `k-section` component, a header and the `k-collection` component. The `k-collection` components makes it easy to switch between the cards and list layouts. All we have to do is bind our data to the `:items` property and our `layout` to the `:layout` property.
+Kirby makes this really easy for us by providing default components we can reuse all over the place. Here we use the `k-collection` component. The `k-collection` components makes it easy to switch between the cards and list layouts. All we have to do is bind our data to the `:items` property and our `layout` to the `:layout` property.
 
 Still, nothing to see in the Panel.
 
@@ -175,14 +179,14 @@ Still, nothing to see in the Panel.
 
 We can now quickly add some default data to our properties so that we finally get something to see in the Panel:
 
-```html "/site/plugins/startersection/src/components/Startersection.vue"
+```html "/site/plugins/linksection/src/components/sections/Links.vue"
 <script>
 export default {
-  data: function() {
+  data() {
     return {
-     headline: "Getting started,
-     layout: "list",
-      data: [
+      headline: "Links",
+      layout: "list",
+      links: [
         {
           icon: {
             type: "document",
@@ -191,7 +195,7 @@ export default {
           text: "Guide",
           link: "https://getkirby.com/docs/guide",
           info: "Get an overview of all the cool things you can do with Kirby",
-          target: "blank",
+          target: "_blank",
         }
       ]
     }
@@ -204,16 +208,18 @@ Inside the data array, we use the keywords the `k-collection` component expects,
 
 ## Fetching the data from the backend
 
-The bit that is left to do, is to load the data from the backend and let it replace the default values. We do that within the `created` hook that is triggered when the component is ready, using the `load()` method . When we get a response, we assign the values to our properties.
+The bit that is left to do, is to load the data from the backend and let it replace the default values. We do that within the `created` hook that is triggered when the component is ready, using the `load()` method. The load method is automatically injected into every section component and handles fetching the PHP properties from our `links.php` file.
 
-```html "/site/plugins/startersection/src/components/Startersection.vue"
+When we get a response, we assign the values to our properties.
+
+```html "/site/plugins/linksection/src/components/sections/Links.vue"
 <script>
 export default {
-  data: function() {
+  data() {
     return {
-      headline: "Getting Started",
-      layout: "cards",
-      data: [
+      headline: "Links",
+      layout: "list",
+      links: [
         {
           icon: {
             type: "document",
@@ -222,22 +228,46 @@ export default {
           text: "Guide",
           link: "https://getkirby.com/docs/guide",
           info: "Get an overview of all the cool things you can do with Kirby",
-          target: "blank",
+          target: "_blank",
         }
       ]
     }
   },
-  created: function() {
+  created() {
     this.load().then(response => {
       this.headline = response.headline;
-      this.layout = response.layout;
-      this.data = response.data;
-
+      this.layout   = response.layout;
+      this.links    = response.links;
     });
   }
 };
 </script>
 ```
+
+Once our props are correctly loaded from the backend, we can remove our hard-coded default values:
+
+```html "/site/plugins/linksection/src/components/sections/Links.vue"
+<script>
+export default {
+  data() {
+    return {
+      headline: "",
+      layout: "list",
+      links: []
+    }
+  },
+  created() {
+    this.load().then(response => {
+      this.headline = response.headline;
+      this.layout   = response.layout;
+      this.links    = response.links;
+    });
+  }
+};
+</script>
+```
+
+
 
 ## The blueprint with the final section definition
 
@@ -245,11 +275,11 @@ Finally, let's add the data we want to show in the section to the section defini
 
 ```yaml
 sections:
-  startersection:
-    type: startersection
+  links:
+    type: links
     headline: Getting started
     layout: cards
-    data:
+    links:
       -
         icon:
             type: document
@@ -285,6 +315,7 @@ sections:
         target: _blank
         text: Plugins
         info: Find plugins to extend Kirby's core functionality and make the most of your site
+
       -
         icon:
             type: user
@@ -292,13 +323,10 @@ sections:
         link: 'https://forum.getkirby.com'
         target: _blank
         text: Forum
-        info: Meet Kirby\'s lovely community and get help whenever you get stuck
+        info: Meet Kirby's lovely community and get help whenever you get stuck
 ```
 
-As a last step, we can clean up `Startersection.vue` and remove the default values again, so that they look like in (link: docs/cookbook/extensions/first-panel-section#adding-the-missing-pieces text: step 6) again.
-
 Change the layout to `list` in the blueprint to see how your section is now displayed as a list.
-
 
 ## Building the plugin
 
@@ -311,24 +339,25 @@ npm run build
 ## Final folder structure
 
 ```filesystem
-startersection/
+linksection/
   index.js
   package.json
-  lib/
-    startersection.php
+  sections/
+    links.php
   src/
     index.js
     components/
-      Startersection.vue
+      sections/
+        Links.vue
 ```
 
 ## Variation: Fetching the content from a structure field
 
-Let's say we wanted to store this data in a structure field instead, so that it is editable by the admin of the site. For this example, we store both the structure field and the section in the same site object (which is not really that intelligent a use case, but hey, this is an example). And it gives us the chance to introduce some more goodies.
+Let's say we wanted to store the links in a structure field instead, so that they are editable by the admin of the site. For this example, we store both the structure field and the section in the same site object (which is not really that intelligent a use case, but hey, this is an example). And it gives us the chance to introduce some more goodies.
 
 ### The `site.yml` blueprint
 
-Let's move our data from the section to a structure field, remove the `data` property from the section, and instead add the `size` and `sortBy` properties to the section to have some more to play with.
+Let's move our links from the section to a structure field, remove the `links` property from the section, and instead add the `size` and `sortBy` properties to the section to have some more to play with.
 
 ```yaml "/site/blueprints/site.yml"
 title: Site
@@ -352,7 +381,7 @@ sections:
               type: text
 
     widget:
-      type: startersection
+      type: links
       headline: Getting started with Kirby
       layout: cards
       query: "{{ site.widgetfield.toStructure() }}"
@@ -360,17 +389,17 @@ sections:
       size: medium
 ```
 
-### The final `startersection.php` file
+### The final `links.php` file
 
-```php "/site/plugins/startersection/lib/startersection.php"
-<?php 
+```php "/site/plugins/linksection/sections/links.php"
+<?php
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Query;
 
 return [
     'props' => [
-        'headline' => function ($headline = 'Getting started') {
+        'headline' => function ($headline = 'Links') {
             return $headline;
         },
         'layout' => function ($layout = 'list') {
@@ -392,6 +421,7 @@ return [
             $q = new Query($this->query, [
                 'site' => site(),
             ]);
+
             // get the query result
             $result = $q->result();
 
@@ -409,7 +439,7 @@ return [
                 }
 
                 $data = [];
-                
+
                 // loop through the items and assign each item to the data array
                 foreach ($items as $item) {
                     $data[] = [
@@ -428,7 +458,7 @@ return [
             } else {
 
                 throw new InvalidArgumentException(
-                    'Invalid query result - Result must be of type Kirby\\Cms\\Structure, ' 
+                    'Invalid query result - Result must be of type Kirby\\Cms\\Structure, '
                     . ($items === NULL ? 'NULL' : get_class($items))
                     . ' given.'
                 );
@@ -446,17 +476,17 @@ Secondly, we add some more properties, i.e. `size`, `sortBy` and `query` with so
 
 The new stuff is the computed `data` property, in which we evaluate the `query` property from the blueprint and assign the resulting data to the `data` array, provided that the query result returns an object of type `Kirby\Cms\Structure`. If this is not the case, we throw an error. We also sort the items by the given sort parameters.
 
-## The final `Startersection.vue` file
+## The final `Links.vue` file
 
 We also have to make some changes to the Vue component.
 
-```html "/site/plugins/startersection/Startersection.vue"
+```html "/site/plugins/linksection/components/sections/Links.vue"
 <template>
-  <k-section class="k-widget-section">
+  <section class="k-links-section">
     <header class="k-section-header">
       <h2 class="k-headline">{{ headline }}</h2>
     </header>
-    <k-collection 
+    <k-collection
       v-if="data.length"
       :items="data"
       :layout="layout"
@@ -468,9 +498,9 @@ We also have to make some changes to the Vue component.
 export default {
   data: function() {
     return {
-      headline: "Getting Started",
+      headline: "Links",
       layout: "cards",
-      data: {},
+      links: {},
       size: null
     }
   },
@@ -496,9 +526,9 @@ export default {
         .get(this.parent + "/sections/" + this.name)
         .then(response => {
           this.headline = response.headline;
-          this.layout = response.layout;
-          this.data = this.items(response.data);
-          this.size = response.size;
+          this.layout   = response.layout;
+          this.links    = this.items(response.data);
+          this.size     = response.size;
         });
     },
     reload() {
@@ -512,14 +542,14 @@ export default {
 1. We add the `size` property to the `k-collection` component and a `v-if` statement, so that it is only shown when there is data.
 
     ```html
-    <k-collection 
+    <k-collection
       v-if="data.length"
       :items="data"
       :layout="layout"
       :size="size"/>
     ```
 
-2. We add a new computed value that gives us access to our structure field: 
+2. We add a new computed value that gives us access to our structure field:
 
     ```js
     computed: {
