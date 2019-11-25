@@ -186,7 +186,7 @@ options:
 
 You must define a list of compatible templates with the `changeTemplate` option to allow editors to switch between page templates.
 
-```
+```yaml
 options:
   changeTemplate:
     - video-post
