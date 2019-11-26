@@ -22,6 +22,8 @@ Kirby::plugin('your/plugin', [
 ]);
 ```
 
+<info>The blueprint key must start with 'pages/...' in order to work.</info>
+
 ## Array definition
 
 Alternatively, you can also pass the blueprint definition as an array instead of a file:
