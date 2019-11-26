@@ -16,14 +16,6 @@ $request = $kirby->request();
 
 With the object in place, you have access to all the methods listed above.
 
-### Detect if the request is an Ajax request
-
-```php
-if ($request->ajax()) {
-  // do something
-}
-```
-
 ### Get a specific variable from the query string
 
 ```php

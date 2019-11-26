@@ -107,3 +107,9 @@ You can replace the following components:
 
 The Panel views are often very complex. If you want to replace them without loosing features, check out the orginal source code for each component. You can find them (link: https://github.com/getkirby/kirby/tree/master/panel/src/components/Views text: on GitHub).
 </since>
+
+## More information
+
+Check out the following cookbook recipe to learn more:
+
+- (link: docs/cookbook/extensions/first-panel-view text: My first Panel view)
