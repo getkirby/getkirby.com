@@ -134,19 +134,45 @@ fetch('/blog.json')
 
 ### Securing your JSON
 
-If you want to avoid that someone else is accessing the JSON, you can simply add a check if the page has been requested with an AJAX call. There's a built-in function for this in the Kirby Toolkit
+If you want to avoid that someone else is accessing the JSON, you can add a custom header to your request which may then be validated by the server. In contrast to the superseded `XMLHttpRequest()`, `fetch()` doesn't set a `X-Requested-With` header by default. We simply add it ourself.
 
-Add this at the top of your template code:
+First, modify your JavaScript code to pass along the header with a body of your choice:
 
-```php "/site/templates/blog.json.php"
-if($kirby->request()->ajax() === false) {
-  go(url('error'));
-}
+```javascript
+fetch('/blog.json', {
+  method: 'GET',
+  headers: {
+    'X-Requested-With': 'fetch'
+  })
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(articles) {
+    console.log(JSON.stringify(articles));
+  });
 ```
 
-`$kirby->request()->ajax()` asks for `$_SERVER["HTTP_X_REQUESTED_WITH"]` which will be `xmlhttprequest` in case of an AJAX call. So whenever a regular request is coming in, `go(url('error'))` will be called, which redirects the visitor to the error page.
+Since the custom header alone won't secure anything, we will have to create a route for JSON requests, which validates the header's body.
 
-AJAX calls can only be made from the same domain unless you are using some cross-domain call magic, so it's a fairly good trick to protect your API from unwanted calls.
+```php "/site/config/config.php"
+[
+  'pattern' => '(:any).json',
+  'action'  => function () {
+    $customHeader = $_SERVER['HTTP_X_REQUESTED_WITH'] ?? null;
+
+    // Secure JSON output from direct access in production environment
+    if (option('debug') === false && $customHeader !== 'fetch') {
+      go(url('error'));
+    }
+
+    $this->next();
+  }
+]
+```
+
+Because it is a convenient way to test the generated JSON directly in the browser via the URL, we only validate the requests in production mode.
+
+Now whenever a regular request is coming in and the `X-Requested-With` doesn't match, `go(url('error'))` will be called, which redirects the visitor to the error page.
 
 ## Pagination
 
