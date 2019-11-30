@@ -147,7 +147,7 @@ Make sure that both domains point to your Kirby site.
 
 ## Detailed locale settings
 
-If you need more control over your locale settings for each language, you can pass an array of locales:
+If you need more control over your locale settings for each language, you can pass an array of [locales](https://www.php.net/manual/en/function.setlocale.php#refsect1-function.setlocale-parameters):
 
 ```php "/site/languages/en.php"
 <?php
@@ -159,6 +159,7 @@ return [
   'name' => 'English',
   'url' => '/',
   'locale'  => [
+    LC_ALL      => 'en_US.utf8',
     LC_COLLATE  => 'en_US.utf8',
     LC_MONETARY => 'en_US.utf8',
     LC_NUMERIC  => 'en_US.utf8',
@@ -179,6 +180,7 @@ return [
   'name' => 'Deutsch',
   'url' => 'de',
   'locale'  => [
+    LC_ALL      => 'de_DE.utf8',
     LC_COLLATE  => 'de_DE.utf8',
     LC_MONETARY => 'de_DE.utf8',
     LC_NUMERIC  => 'de_DE.utf8',
@@ -188,6 +190,12 @@ return [
   ]
 ];
 ```
+
+This is useful if specific locales need to be set to a different value.
+
+<info>
+The `LC_ALL` locale should always be set as it is used as a default locale internally in the Kirby core. Other locales can be set to override the default `LC_ALL` locale for specific use-cases.
+</info>
 
 ## Language specific date handlers
 
