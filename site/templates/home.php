@@ -13,8 +13,8 @@
                 <?php icon('download') ?>
                 Try for free
               </a>
-              <a class="home-hero-v3" href="<?= url('v3') ?>">
-                See what's new in v3 &rsaquo;
+              <a class="home-hero-v3" href="<?= url('product/features') ?>">
+                All features &rsaquo;
               </a>
             </p>
           </div>

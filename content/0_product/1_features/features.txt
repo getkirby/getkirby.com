@@ -6,6 +6,9 @@ Intro:
 
 Kirby is packed with features that help you build high-end projects – faster, more efficient, and more enjoyable.
 
+<a class="features-intro-links" href="why">Why Kirby?</a>
+<a class="features-intro-links" href="v3">See what's new in v3</a>
+
 ----
 
 Filesystem:

@@ -1,5 +1,0 @@
-Title: Plugins
-
-----
-
-Link: plugins

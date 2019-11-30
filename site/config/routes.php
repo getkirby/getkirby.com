@@ -6,6 +6,30 @@ return [
      * New routes
      */
     [
+        'pattern' => 'features',
+        'action'  => function () {
+            go('product/features');
+        }
+    ],
+    [
+        'pattern' => 'plugins/(:all?)',
+        'action'  => function ($path = null) {
+            go('product/plugins/' . $path);
+        }
+    ],
+    [
+        'pattern' => 'v3',
+        'action'  => function () {
+            go('product/v3');
+        }
+    ],
+    [
+        'pattern' => 'why',
+        'action'  => function () {
+            go('product/why');
+        }
+    ],
+    [
         'pattern' => 'reference/(:all?)',
         'action'  => function ($path = null) {
             go('docs/reference/' . $path);

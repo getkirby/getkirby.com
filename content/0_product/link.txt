@@ -6,4 +6,4 @@ Submenu: true
 
 ----
 
-Link: why
+Link: features
