@@ -9,7 +9,7 @@
       <section class="features-section">
         <?= snippet('features/header', [
           'heading' => 'The Panel',
-          'subheading' => 'A control room that feels like home'
+          'subheading' => 'A control room where you will instantly feel at home'
         ]) ?>
 
         <div class="features-grid">
@@ -21,23 +21,23 @@
           ]) ?>
 
           <?= snippet('features/text', [
-            'heading' => 'Make it your own',
+            'heading' => 'Make it yours',
             'text' => '
-              Kirby let\'s you create a control panel for yourself and your editors that is tailored to your site. Make the Panel adapt to your users, content and use cases - not the other way around.
+              Kirby lets you create a control panel for yourself and your editors that is tailored to your site. Make the Panel adapt to your users, your content and your use cases—not the other way around.
             '
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Drafts',
             'text' => '
-              Prepare your content - pages, articles, events, products - and only publish them when everything is in place with the click of a button. Send preview links to others so they can review your drafts even before they go live.
+              Prepare your content—pages, articles, events, products—and only publish them when everything is in place with the click of a button. Send preview links to others so they can review your drafts before they go live.
             '
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Drag & Drop sorting',
             'text' => '
-              Sorting shouldn\'t be complicated. Just pick your pages or files up and drop them where you want them to be. Why should it be anymore complicated than that?
+              Sorting pages or files is a breeze. Just pick them up and drop them where you want them to be. It shouldn\'t be more complicated than that?
             '
           ]) ?>
 
@@ -46,7 +46,7 @@
             'rows' => 6,
             'heading' => 'Fields',
             'text' => '
-              Kirby comes with a wide variety of fields that helps you to build intuitive forms for your content editors and  find the right input for all your data.
+              Kirby comes with a wide variety of fields that help you build intuitive forms for your content editors and  find the right input type for your data.
               <ul>
                 <li>Checkboxes</li>
                 <li>Date</li>
@@ -89,7 +89,7 @@
             'fade'    => true,
             'image'   => $page->image('pages.png'),
             'text'    => '
-              Display pages in the way that fits best them: articles, albums, blog posts, events, products, docs etc.
+              Display pages the way that fits them best: articles, albums, blog posts, events, products, docs etc.
             '
           ]) ?>
 
@@ -114,7 +114,7 @@
           <?= snippet('features/text', [
             'heading' => 'Unsaved changes',
             'text'    => '
-              Don\'t worry about unsaved changes. The Panel stores them for you automatically – even when you go offline – and you can save them later.
+              Don\'t worry about unsaved changes. The Panel stores them for you automatically—even when you go offline—and you can save them later.
             ',
           ]) ?>
 
@@ -137,7 +137,7 @@
         <div class="features-grid">
           <?= snippet('features/text', [
             'heading' => 'Writing',
-            'text' => 'Content editors love the flexibility and intuitive features of our new editor. Write without distraction and add formatting that you can trust. Always be sure that the result will be clean, accessible and polished for the web.'
+            'text' => 'Content editors love the flexibility and intuitive features of our new editor. Write without distraction and add formatting you can trust. The result will be clean, accessible and polished for the web.'
           ]) ?>
 
           <?= snippet('features/image', [
@@ -149,7 +149,7 @@
 
           <?= snippet('features/text', [
             'heading' => 'Full control',
-            'text' => 'As a developer, you have full control how each individual block type of the editor is rendered. You control the markup and the design. Nothing happens by accident and all content stays structured.'
+            'text' => 'As a developer, you decide how each individual block type of the editor is rendered. You control the markup and the design. Nothing happens by accident and all content stays structured.'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -162,7 +162,7 @@
       <section class="features-section">
         <?= snippet('features/header', [
           'heading' => 'Files & Folders',
-          'subheading' => 'A rock solid and yet simple foundation'
+          'subheading' => 'A rock solid, yet simple foundation'
         ]) ?>
 
         <div class="features-grid">
@@ -184,7 +184,7 @@
           ]) ?>
           <?= snippet('features/text', [
             'heading' => 'Resilient',
-            'text'    => 'Files and folders are probably the most future-proof way to store your data. Add version controlling via Git, simple backup options and syncing via tools like rsync.'
+            'text'    => 'Files and folders are probably the most future-proof way to store your data. Add version control via Git, simple backup options and syncing via tools like rsync.'
           ]) ?>
 
         </div>
@@ -203,7 +203,7 @@
             'rows'    => 4,
             'heading' => 'Templates',
             'text'    => '
-              Kirby comes with a powerful PHP-based template engine. Optimized for speed and equipped with an ultra flexible and intuitive PHP Api, you can build your perfect frontend in the way you like.
+              Kirby comes with a powerful PHP-based template engine. Optimized for speed and equipped with an ultra flexible and intuitive PHP API, you can build your perfect frontend the way you like.
             '
           ]) ?>
 
@@ -252,7 +252,7 @@
         <div class="features-grid">
           <?= snippet('features/text', [
             'heading' => 'REST-ful by nature',
-            'text' => 'Use Kirby like any other classic CMS or convert it into a powerful, headless content container. Connect it to mobile applications, static site generators or your custom frontend.'
+            'text' => 'Use Kirby like a classic CMS or convert it into a powerful, headless content container. Connect it to mobile applications, static site generators or your custom frontend.'
           ]) ?>
 
           <?= snippet('features/code', [
@@ -263,7 +263,7 @@
 
           <?= snippet('features/text', [
             'heading' => 'Extensible',
-            'text'    => 'Define your own API endpoints and object. Integrate external data from databases, files or other APIs aslongside data from Kirby into one consistent data-source.'
+            'text'    => 'Define your own API endpoints and object. Integrate external data from databases, files or other APIs with data from Kirby into one seamless data-source.'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -287,7 +287,7 @@
             'rows'    => 3,
             'fade'    => true,
             'heading' => 'Language management',
-            'text'    => 'Create new languages right in the Panel and start translating your pages immediately. Start with a single language and move to multiple languages later, or go global immeditately – it\'s up to your project.'
+            'text'    => 'Create new languages right in the Panel and start translating your pages immediately. Start with a single language and move to multiple languages later, or go global immeditately—it\'s up to your project.'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -305,11 +305,11 @@
           ]) ?>
           <?= snippet('features/text', [
             'heading' => 'Language detection',
-            'text'    => 'Switch to automatic language detection and let Kirby figure out, which language works best for your current visitor.'
+            'text'    => 'Switch to automatic language detection and let Kirby figure out which language works best for your current visitor.'
           ]) ?>
           <?= snippet('features/text', [
             'heading' => 'Integrate',
-            'text'    => 'You are using a translation service like Memsource? Use the amazing Memsource plugin to import and export translations for your translators right from the Panel.'
+            'text'    => 'Are you using a translation service like Memsource? Use the amazing Memsource plugin to import and export translations for your translators right from the Panel.'
           ]) ?>
         </div>
       </section>
@@ -350,7 +350,7 @@
           <?= snippet('features/text', [
             'rows'    => 3,
             'heading' => 'Custom fields',
-            'text'    => 'Extend your forms with your own fields or plugins from other developers. Editing data on steroids: locations, colors, annotations etc. '
+            'text'    => 'Extend your forms with your own fields or use plugins from other developers. Editing data on steroids: locations, colors, annotations etc. '
           ]) ?>
 
           <?= snippet('features/image', [
@@ -365,11 +365,11 @@
           ]) ?>
           <?= snippet('features/text', [
             'heading' => 'KirbyTags',
-            'text'    => 'When Markdown just isn\'t enough, add your own KirbyTags to simplify plain text formatting and injection of complex custom components into long-form text.'
+            'text'    => 'When Markdown isn\'t enough, add your own KirbyTags to simplify plain text formatting and to inject complex custom components into long-form text.'
           ]) ?>
           <?= snippet('features/text', [
             'heading' => 'Caching',
-            'text'    => 'Kirby comes with mighty caching on board. Not fitting for your project? Add the cache driver on your choice and reduce page loads to the blink of an eye.'
+            'text'    => 'Kirby comes with mighty caching on board. Not fitting for your project? Add your cache driver of choice and reduce page loads in the blink of an eye.'
           ]) ?>
 
           <?= snippet('features/image', [
@@ -381,7 +381,7 @@
           <?= snippet('features/text', [
             'rows'    => 3,
             'heading' => 'Custom views',
-            'text'    => 'Add new whole new views and menu items to super-charge the Panel as an admin framework for your own integrated applications.'
+            'text'    => 'Add whole new views and menu items to super-charge the Panel as an admin framework for your own integrated applications.'
           ]) ?>
 
         </div>
