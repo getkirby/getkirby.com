@@ -18,7 +18,7 @@ If you want to serve a landing page or your blog on its own domain or a subdomai
 
 require __DIR__ . '/kirby/bootstrap.php';
 
-if ($_SERVER['SERVER_NAME'] === 'blog.domain.com' && $_SERVER['REQUEST_URI'] === '/' )
+if ($_SERVER['SERVER_NAME'] === 'blog.domain.com' && $_SERVER['REQUEST_URI'] === '/' ) {
     echo (new Kirby)->render('blog');
 } else {
     echo (new Kirby)->render();
