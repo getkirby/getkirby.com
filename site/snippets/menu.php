@@ -21,7 +21,7 @@
         <ul class="menu-dropdown">
           <?php foreach ($item->children()->listed() as $subitem): ?>
           <li>
-            <a href="<?= $subitem->url() ?>"<?= r($subitem->isActive(), ' aria-current="page"') ?>>
+            <a href="<?= $subitem->intendedTemplate() == 'link' ? $subitem->link() : $subitem->url() ?>"<?= r($subitem->isActive(), ' aria-current="page"') ?>>
               <?= $subitem->menuTitle()->or($subitem->title()) ?>
             </a>
           </li>
