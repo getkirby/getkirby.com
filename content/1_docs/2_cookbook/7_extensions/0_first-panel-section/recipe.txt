@@ -139,7 +139,7 @@ If we now open the Panel start page, we will not see anything yet in the browser
 
 ## Adding the missing pieces
 
-Back to `Links.vue`. We now define the same properties that we already defined in `links.php` inside the data function of the component object:
+Back to `Links.vue`. We now define the same properties that we already defined in `links.php` inside the data function of the component object. Unlike fields plugins, we cannot use regular Vue's props here. All sections are lazy-loaded individually and we have to fill our component data manually, once the props that we've defined in PHP have been loaded from the API.
 
 ```html "/site/plugins/linksection/src/components/sections/Links.vue"
 <script>
@@ -177,7 +177,7 @@ Still, nothing to see in the Panel.
 
 ## Manually adding some data
 
-We can now quickly add some default data to our properties so that we finally get something to see in the Panel:
+We can now quickly add some placeholder data so that we finally get something to see in the Panel:
 
 ```html "/site/plugins/linksection/src/components/sections/Links.vue"
 <script>
@@ -208,7 +208,7 @@ Inside the data array, we use the keywords the `k-collection` component expects,
 
 ## Fetching the data from the backend
 
-The bit that is left to do, is to load the data from the backend and let it replace the default values. We do that within the `created` hook that is triggered when the component is ready, using the `load()` method. The load method is automatically injected into every section component and handles fetching the PHP properties from our `links.php` file.
+The bit that is left to do, is to load the data from the API and let it replace the placeholder values. We do that within the `created` hook that is triggered when the component is ready, using the `load()` method. The load method is automatically injected into every section component and handles fetching the PHP properties from our `links.php` file.
 
 When we get a response, we assign the values to our properties.
 
@@ -244,7 +244,7 @@ export default {
 </script>
 ```
 
-Once our props are correctly loaded from the backend, we can remove our hard-coded default values:
+Once our props are correctly loaded from the backend, we can remove our hard-coded placeholder values:
 
 ```html "/site/plugins/linksection/src/components/sections/Links.vue"
 <script>
@@ -267,6 +267,7 @@ export default {
 </script>
 ```
 
+We now have a working connection between our section backend and our section frontend and we can freely pass data from blueprints and computed PHP props to our Vue component.
 
 
 ## The blueprint with the final section definition
@@ -351,239 +352,9 @@ linksection/
         Links.vue
 ```
 
-## Variation: Fetching the content from a structure field
-
-Let's say we wanted to store the links in a structure field instead, so that they are editable by the admin of the site. For this example, we store both the structure field and the section in the same site object (which is not really that intelligent a use case, but hey, this is an example). And it gives us the chance to introduce some more goodies.
-
-### The `site.yml` blueprint
-
-Let's move our links from the section to a structure field, remove the `links` property from the section, and instead add the `size` and `sortBy` properties to the section to have some more to play with.
-
-```yaml "/site/blueprints/site.yml"
-title: Site
-
-sections:
-  label: Sections
-  sections:
-    fields:
-      type: fields
-      fields:
-        widgetfield:
-          type: structure
-          fields:
-            text:
-              type: text
-            info:
-              type: text
-            url:
-              type: url
-            icon:
-              type: text
-
-    widget:
-      type: links
-      headline: Getting started with Kirby
-      layout: cards
-      query: "{{ site.widgetfield.toStructure() }}"
-      sortBy: text
-      size: medium
-```
-
-### The final `links.php` file
-
-```php "/site/plugins/linksection/sections/links.php"
-<?php
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\Query;
-
-return [
-    'props' => [
-        'headline' => function ($headline = 'Links') {
-            return $headline;
-        },
-        'layout' => function ($layout = 'list') {
-            return $layout;
-        },
-        'size' => function ($size = 'small') {
-            return $size;
-        },
-        'query' => function ($query = null) {
-            return $query;
-        },
-        'sortBy' => function ($sortBy = 'sort') {
-            return $sortBy;
-        }
-    ],
-    'computed' => [
-        'data' => function() {
-
-            $q = new Query($this->query, [
-                'site' => site(),
-            ]);
-
-            // get the query result
-            $result = $q->result();
-
-            // try to convert the result to a structure object
-            $items = $result->toStructure();
-
-            // Check if we have a Structure object
-            if(is_a($items, 'Kirby\\Cms\\Structure')) {
-
-                // sort the items
-                if ($this->sortBy) {
-                    $items = $items->sortBy(...Str::split($this->sortBy, ' '));
-                } elseif ($this->sortable === true) {
-                    $items = $items->sortBy('sort', 'asc');
-                }
-
-                $data = [];
-
-                // loop through the items and assign each item to the data array
-                foreach ($items as $item) {
-                    $data[] = [
-                        'text'        => $item->text()->value(),
-                        'info'        => $item->info()->value(),
-                        'link'        => $item->url(),
-                        'target'      => $item->target(),
-                        'icon'        => [
-                            'type'    => $item->icon()->value(),
-                            'back'    => 'black'
-                        ]
-                     ];
-                }
-                return $data;
-
-            } else {
-
-                throw new InvalidArgumentException(
-                    'Invalid query result - Result must be of type Kirby\\Cms\\Structure, '
-                    . ($items === NULL ? 'NULL' : get_class($items))
-                    . ' given.'
-                );
-            }
-        }
-    ]
-];
-```
-
-Looks like this needs some explanations…
-
-First, we add some `use` statements at the top of the file because we are going to use some of Kirby's classes and don't want to call them by their full names.
-
-Secondly, we add some more properties, i.e. `size`, `sortBy` and `query` with some default values. Nothing new here.
-
-The new stuff is the computed `data` property, in which we evaluate the `query` property from the blueprint and assign the resulting data to the `data` array, provided that the query result returns an object of type `Kirby\Cms\Structure`. If this is not the case, we throw an error. We also sort the items by the given sort parameters.
-
-## The final `Links.vue` file
-
-We also have to make some changes to the Vue component.
-
-```html "/site/plugins/linksection/components/sections/Links.vue"
-<template>
-  <section class="k-links-section">
-    <header class="k-section-header">
-      <h2 class="k-headline">{{ headline }}</h2>
-    </header>
-    <k-collection
-      v-if="data.length"
-      :items="data"
-      :layout="layout"
-      :size="size"/>
-
-</template>
-
-<script>
-export default {
-  data: function() {
-    return {
-      headline: "Links",
-      layout: "cards",
-      links: {},
-      size: null
-    }
-  },
-  created: function() {
-    this.load();
-  },
-  computed: {
-    changeValue() {
-      return this.$store.getters["content/values"]()["widgetfield"];
-    }
-  },
-  watch: {
-    changeValue() {
-      this.reload();
-    }
-  },
-  methods: {
-    items(data) {
-      return data;
-    },
-    load(reload) {
-      this.$api
-        .get(this.parent + "/sections/" + this.name)
-        .then(response => {
-          this.headline = response.headline;
-          this.layout   = response.layout;
-          this.links    = this.items(response.data);
-          this.size     = response.size;
-        });
-    },
-    reload() {
-      this.load(true);
-    }
-  }
-};
-</script>
-```
-
-1. We add the `size` property to the `k-collection` component and a `v-if` statement, so that it is only shown when there is data.
-
-    ```html
-    <k-collection
-      v-if="data.length"
-      :items="data"
-      :layout="layout"
-      :size="size"/>
-    ```
-
-2. We add a new computed value that gives us access to our structure field:
-
-    ```js
-    computed: {
-      changeValue() {
-        return this.$store.getters["content/values"]()["widgetfield"];
-      }
-    }
-    ```
-
-3. We listen to changes in this computed value and call the `reload()` method when changes occur:
-
-    ```js
-    watch: {
-      changeValue() {
-        this.reload();
-      }
-    }
-    ```
-
-4. And we finally add the `reload()` method to our methods that calls the `load()` method.
-
-    ```js
-    reload() {
-        this.load(true);
-    }
-    ```
-
-Now every time we update the structure field, our changes are reflected in the section below.
-
-(screenshot: custom-section-2.jpg)
-
 
 ## Where to go from here
 
 This is a very basic example that should still have given you an understanding of how the different parts play together and enable you to set up your first custom sections for your clients. The data to fill this section can come in fact come from anywhere, you can provide it through a route, a database or whatever you see fit. And you probably don't just want to display stuff, but add actions to each item etc. We'll cover that in future recipes.
 
-You don't have to use the components Kirby provides, either, but can come up with your own markup.
+You don't have to use the components Kirby provides, either, but can come up with your own markup and design. The possibilities are pretty much endless.
