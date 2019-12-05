@@ -1,0 +1,13 @@
+Title: Form Builder
+
+----
+
+Repository: https://gitlab.com/cre8ivclick/formbuilder
+
+----
+
+Category: panel
+
+----
+
+Description: Create custom forms in the Panel, easily display the forms in your templates, and automatically store and process form submissions.
