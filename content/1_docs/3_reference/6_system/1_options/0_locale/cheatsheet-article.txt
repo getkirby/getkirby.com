@@ -17,6 +17,7 @@ return [
 ```php
 return [
   'locale' => [
+    LC_ALL      => 'tr_TR.utf-8',
     LC_COLLATE  => 'tr_TR.utf-8',
     LC_MONETARY => 'tr_TR.utf-8',
     LC_NUMERIC  => 'tr_TR.utf-8',
@@ -26,3 +27,7 @@ return [
   ]
 ];
 ```
+
+<info>
+The `LC_ALL` locale should always be set as it is used as a default locale internally in the Kirby core. Other locales can be set to override the default `LC_ALL` locale for specific use-cases.
+</info>
