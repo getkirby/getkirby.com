@@ -1,0 +1,14 @@
+Title: FormBuilder
+
+----
+
+Repository: https://gitlab.com/cre8ivclick/formbuilder
+
+----
+
+Category: templating
+
+----
+
+Description: Forms are often a pain to implement. Unfortunately, most sites need them. This plugin makes dealing with forms easier for the developer and for the editors.
+
