@@ -73,6 +73,12 @@ html {
   border-radius: 2px;
   box-shadow: rgba(#000, .35) 0 5px 20px;
 }
+.features-grid .autosize img {
+  width: auto;
+}
+.features-grid .stretch img {
+  width: 125%;
+}
 .footer.-theme\:dark {
   background: #000;
 }
@@ -90,6 +96,7 @@ html {
 }
 .features-image.center {
   justify-content: center;
+  text-align: center;
 }
 
 .features-code {
