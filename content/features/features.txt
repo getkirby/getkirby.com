@@ -121,3 +121,26 @@ Api:
     "status": "ok",
 }
 ```
+
+----
+
+Media:
+
+```php
+$page
+  ->images()
+  ->template('gallery')
+  ->first()
+  ->srcset(
+    '1x' => [
+        'width' => 512,
+        'height' => 512,
+        'crop' => 'center'
+    ],
+    '2x' => [
+        'width' => 1024,
+        'height' => 1024,
+        'crop' => 'center'
+    ]
+  ]);
+```

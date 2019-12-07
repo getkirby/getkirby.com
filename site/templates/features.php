@@ -9,15 +9,15 @@
       <section class="features-section">
         <?= snippet('features/header', [
           'heading' => 'The Panel',
-          'subheading' => 'A control room where you will instantly feel at home'
+          'subheading' => 'Feel like home & take control'
         ]) ?>
 
         <div class="features-grid">
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => $page->image('interface.jpg'),
-            'fade'  => true
+            'image' => $page->image('interface-1.jpg'),
+            'class' => 'fading',
           ]) ?>
 
           <?= snippet('features/text', [
@@ -28,11 +28,47 @@
           ]) ?>
 
           <?= snippet('features/text', [
-            'heading' => 'Drafts',
+            'heading' => null,
+            'text' => null
+          ]) ?>
+
+          <?= snippet('features/text', [
+            'heading' => null,
+            'text' => null
+          ]) ?>
+
+        </div>
+      </section>
+
+      <section class="features-section">
+        <?= snippet('features/header', [
+          'heading' => 'More than just pages',
+          'subheading' => 'Articles, albums, events, products – you name it'
+        ]) ?>
+
+        <div class="features-grid">
+          <?= snippet('features/image', [
+            'cols'  => 6,
+            'rows'  => 4,
+            'image' => $page->image('interface-2.jpg'),
+            'class' => 'fading stretch',
+          ]) ?>
+
+
+          <?= snippet('features/text', [
+            'heading' => 'On display',
             'text' => '
-              Prepare your content—pages, articles, events, products—and only publish them when everything is in place with the click of a button. Send preview links to others so they can review your drafts before they go live.
+              Display pages the way that fits them best: articles, albums, blog posts, events, products, docs etc.
             '
           ]) ?>
+
+          <?= snippet('features/text', [
+            'heading' => 'Drafts',
+            'text' => '
+              Prepare your content and only publish it when everything is in place with the click of a button. Send preview links to others so they can review your drafts before they go live.
+            '
+          ]) ?>
+
 
           <?= snippet('features/text', [
             'heading' => 'Drag & Drop sorting',
@@ -41,85 +77,63 @@
             '
           ]) ?>
 
+          <?= snippet('features/image', [
+            'cols' => 4,
+            'rows' => 3,
+            'image' => $page->image('status.png'),
+            'class' => 'center autosize',
+          ]) ?>
 
           <?= snippet('features/text', [
-            'rows' => 6,
-            'heading' => 'Fields',
-            'text' => '
-              Kirby comes with a wide variety of fields that help you build intuitive forms for your content editors and  find the right input type for your data.
-              <ul>
-                <li>Checkboxes</li>
-                <li>Date</li>
-                <li>Email</li>
-                <li>Files</li>
-                <li>Headline</li>
-                <li>Hidden</li>
-                <li>Info</li>
-                <li>Line</li>
-                <li>Multiselect</li>
-                <li>Number</li>
-                <li>Pages</li>
-                <li>Radio</li>
-                <li>Range</li>
-                <li>Select</li>
-                <li>Structure</li>
-                <li>Tags</li>
-                <li>Tel</li>
-                <li>Text</li>
-                <li>Textarea</li>
-                <li>Time</li>
-                <li>Toggle</li>
-                <li>Url</li>
-                <li>Users</li>
-              </ul>
-            '
+            'heading' => 'Publishing workfows',
+            'rows' => 3
+          ]) ?>
+
+          <?= snippet('features/text', [
+            'heading' => 'Custom layouts',
+            'rows' => 3,
           ]) ?>
 
           <?= snippet('features/image', [
-            'cols'    => 4,
-            'rows'    => 6,
-            'fade'    => true,
-            'image'   => $page->image('fields-2.png')
-          ]) ?>
-
-          <?= snippet('features/text', [
-            'heading' => 'Pages',
-            'cols'    => 3,
-            'rows'    => 3,
-            'fade'    => true,
-            'image'   => $page->image('pages.png'),
-            'text'    => '
+            'heading' => 'Layout',
+            'cols' => 4,
+            'rows' => 3,
+            'text' => '
               Display pages the way that fits them best: articles, albums, blog posts, events, products, docs etc.
-            '
-          ]) ?>
-
-          <?= snippet('features/text', [
-            'heading' => 'Files',
-            'cols'    => 3,
-            'rows'    => 3,
-            'fade'    => true,
-            'image'   => $page->image('gallery.png'),
-            'text'    => '
-              Add galleries, covers, hero images, PDF downloads and more right on your page with files sections.
-            '
-          ]) ?>
-
-          <?= snippet('features/text', [
-            'heading' => 'Search',
-            'text'    => '
-              Quickly access all pages, users and files with the global Panel search and navigate around with ease.
             ',
+            'class' => 'fading stretch',
+            'image' => $page->image('pagetable-2.png'),
+          ]) ?>
+
+        </div>
+      </section>
+
+      <section class="features-section">
+        <?= snippet('features/header', [
+          'heading' => 'Content management',
+          'subheading' => 'Structure your content like never before'
+        ]) ?>
+
+        <div class="features-grid">
+          <?= snippet('features/image', [
+            'cols'  => 6,
+            'rows'  => 4,
+            'image' => $page->image('interface-5.jpg'),
+            'class' => 'fading stretch',
           ]) ?>
 
           <?= snippet('features/text', [
-            'heading' => 'Unsaved changes',
-            'text'    => '
-              Don\'t worry about unsaved changes. The Panel stores them for you automatically—even when you go offline—and you can save them later.
-            ',
+            'heading' => 'Custom Fields',
+            'text'    => 'Kirby comes with a wide variety of fields that help you build intuitive forms for your content editors and  find the right input type for your data.',
           ]) ?>
 
           <?= snippet('features/text', [
-            'heading' => 'Teamwork',
+            'heading' => 'Auto-saving',
+            'text'    => 'Don\'t worry about unsaved changes. The Panel stores them for you automatically—even when you go offline—and you can save them later.',
+          ]) ?>
+
+          <?= snippet('features/text', [
+            'heading' => 'Content-locking',
             'text'    => '
               Collaborate with peace of mind: Kirby\'s advanced content locking features make sure that unsaved changes are never overwritten by your team mates.
             ',
@@ -143,7 +157,7 @@
           <?= snippet('features/image', [
             'cols'  => 4,
             'rows'  => 6,
-            'center' => true,
+            'class' => 'fading stretch',
             'image' => $page->image('editor.png')
           ]) ?>
 
@@ -155,6 +169,60 @@
           <?= snippet('features/text', [
             'heading' => 'Extensible',
             'text' => 'Add new block types to the editor and adjust it to your projects. You need a call to action button, a gallery or a table block? No problem! Our powerful block component API, based on Vue.js, is here for you.'
+          ]) ?>
+        </div>
+      </section>
+
+      <section class="features-section">
+        <?= snippet('features/header', [
+          'heading' => 'Asset managament',
+          'subheading' => 'Images, documents, videos, spreadsheets, etc.'
+        ]) ?>
+
+        <div class="features-grid">
+          <?= snippet('features/image', [
+            'cols'  => 6,
+            'rows'  => 4,
+            'image' => $page->image('interface-3.jpg'),
+            'class' => 'fading',
+          ]) ?>
+
+          <?= snippet('features/text', [
+            'heading' => 'Your files',
+            'text'    => 'Add galleries, covers, hero images, PDF downloads and more right on your page with files sections.',
+          ]) ?>
+          <?= snippet('features/text', [
+            'heading' => 'Drag & Drop uploads',
+            'text'    => null,
+          ]) ?>
+          <?= snippet('features/text', [
+            'heading' => 'Quality assurance',
+            'text'    => null,
+          ]) ?>
+
+          <?= snippet('features/text', [
+            'heading' => 'Metadata',
+            'text'    => null,
+            'rows'    => 4
+          ]) ?>
+
+          <?= snippet('features/image', [
+            'cols'  => 4,
+            'rows'  => 4,
+            'image' => $page->image('metadata.png'),
+            'class' => 'fading center stretch',
+          ]) ?>
+
+          <?= snippet('features/code', [
+            'cols'  => 4,
+            'rows'  => 4,
+            'code'  => $page->media()->kt(),
+          ]) ?>
+
+          <?= snippet('features/text', [
+            'heading' => 'Media API',
+            'text'    => null,
+            'rows'    => 4,
           ]) ?>
         </div>
       </section>
@@ -285,7 +353,7 @@
             'image'   => $page->image('languages.png'),
             'cols'    => 3,
             'rows'    => 3,
-            'fade'    => true,
+            'class' => 'fading',
             'heading' => 'Language management',
             'text'    => 'Create new languages right in the Panel and start translating your pages immediately. Start with a single language and move to multiple languages later, or go global immeditately—it\'s up to your project.'
           ]) ?>
@@ -295,7 +363,7 @@
             'image' => $page->image('translations.png'),
             'cols' => 3,
             'rows' => 3,
-            'fade' => true,
+            'class' => 'fading',
             'text' => 'Internationalization is built into the core of Kirby. Switch intuitively between different language versions and translate your content together with your team or on your own.'
           ]) ?>
 
@@ -324,7 +392,8 @@
           <?= snippet('features/image', [
             'cols' => 4,
             'rows' => 3,
-            'image' => $page->image('matomo.jpg')
+            'image' => $page->image('matomo.jpg'),
+            'class' => 'fading'
           ]) ?>
           <?= snippet('features/text', [
             'rows'    => 3,
@@ -356,7 +425,8 @@
           <?= snippet('features/image', [
             'cols'  => 4,
             'rows'  => 3,
-            'image' => $page->image('locator.png')
+            'image' => $page->image('locator.png'),
+            'class' => 'fading'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -375,7 +445,7 @@
           <?= snippet('features/image', [
             'cols'   => 4,
             'rows'   => 3,
-            'center' => true,
+            'class' => 'center',
             'image'  => $page->image('retour.png')
           ]) ?>
           <?= snippet('features/text', [
