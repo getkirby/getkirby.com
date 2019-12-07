@@ -9,7 +9,7 @@
       <section class="features-section">
         <?= snippet('features/header', [
           'heading' => 'The Panel',
-          'subheading' => 'Feel like home & take control'
+          'subheading' => 'A headquarter that adapts to your needs'
         ]) ?>
 
         <div class="features-grid">
@@ -23,13 +23,15 @@
           <?= snippet('features/text', [
             'heading' => 'Make it yours',
             'text' => '
-              Kirby lets you create a control panel for yourself and your editors that is tailored to your site. Make the Panel adapt to your users, your content and your use cases—not the other way around.
+              Kirby lets you create a control panel for yourself and your editors that is tailored to your site. Make the Panel reflect the unique structure of your content, use cases and users—not the other way around.
             '
           ]) ?>
 
           <?= snippet('features/text', [
-            'heading' => null,
-            'text' => null
+            'heading' => 'Search',
+            'text' => '
+              Quickly access all pages, users and files with the global search and navigate around with ease.
+            '
           ]) ?>
 
           <?= snippet('features/text', [
@@ -56,48 +58,53 @@
 
 
           <?= snippet('features/text', [
-            'heading' => 'On display',
+            'heading' => 'On display, tailor-made',
             'text' => '
-              Display pages the way that fits them best: articles, albums, blog posts, events, products, docs etc.
+              Display pages the way that fits them best: articles, albums, blog posts, events, products, docs etc.<br><br>Create individual layouts and add sections so that your pages reflect their nature right in the Panel.
             '
           ]) ?>
 
           <?= snippet('features/text', [
-            'heading' => 'Drafts',
-            'text' => '
-              Prepare your content and only publish it when everything is in place with the click of a button. Send preview links to others so they can review your drafts before they go live.
-            '
+
           ]) ?>
 
 
           <?= snippet('features/text', [
             'heading' => 'Drag & Drop sorting',
             'text' => '
-              Sorting pages or files is a breeze. Just pick them up and drop them where you want them to be. It shouldn\'t be more complicated than that?
+              Sorting pages or files is a breeze: Pick them up and drop them where you want them to be. It shouldn\'t be more complicated than that.
             '
           ]) ?>
 
           <?= snippet('features/image', [
             'cols' => 4,
-            'rows' => 3,
+            'rows' => 4,
             'image' => $page->image('status.png'),
             'class' => 'center autosize',
           ]) ?>
 
+        <?= snippet('features/text', [
+            'heading' => 'Drafts',
+            'text' => '
+              Prepare your content and only publish it when everything is in place with the click of a button. Send preview links to others so they can review your drafts before they go live.
+            ',
+            'rows' => 2
+          ]) ?>
+
           <?= snippet('features/text', [
             'heading' => 'Publishing workfows',
-            'rows' => 3
+            'rows' => 2
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Custom layouts',
-            'rows' => 3,
+            'rows' => 2,
           ]) ?>
 
           <?= snippet('features/image', [
             'heading' => 'Layout',
             'cols' => 4,
-            'rows' => 3,
+            'rows' => 2,
             'text' => '
               Display pages the way that fits them best: articles, albums, blog posts, events, products, docs etc.
             ',
@@ -229,7 +236,7 @@
 
       <section class="features-section">
         <?= snippet('features/header', [
-          'heading' => 'Files & Folders',
+          'heading' => 'At the core: Files & Folders',
           'subheading' => 'A rock solid, yet simple foundation'
         ]) ?>
 
@@ -384,6 +391,38 @@
 
       <section class="features-section">
         <?= snippet('features/header', [
+          'heading' => 'User management',
+          'subheading' => 'You are not alone in this'
+        ]) ?>
+
+        <div class="features-grid">
+          <?= snippet('features/text', [
+            'heading' => 'From the backend...',
+            'text'    => 'The Panel offers you an easy way to manage your users and set up rights based on different roles. Create different user types and store metadata to your users.'
+          ]) ?>
+
+          <?= snippet('features/image', [
+            'image'   => $page->image('languages.png'),
+            'cols'    => 4,
+            'rows'    => 2,
+            'class' => 'fading'
+          ]) ?>
+
+          <?= snippet('features/code', [
+            'cols' => 4,
+            'rows' => 2,
+            'code' => $page->users(),
+          ]) ?>
+
+          <?= snippet('features/text', [
+            'heading' => '...to the front stage',
+            'text'    => 'Integrate user permissions in your site to create protected sections on your site. Or launch whole communities based on Kirby\'s user system.'
+          ]) ?>
+        </div>
+      </section>
+
+      <section class="features-section">
+        <?= snippet('features/header', [
           'heading' => 'Plugins',
           'subheading' => 'Endless options for projects without roadblocks'
         ]) ?>
@@ -457,6 +496,10 @@
         </div>
       </section>
 
+      <div class="intro | -theme:dark">
+         <?= kt('And so much more...
+Learn about everything in our (link: docs text: Guide)') ?>
+      </div>
 
     </div>
 
