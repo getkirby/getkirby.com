@@ -6,6 +6,13 @@ Description: Learn more about the benefits and unique features, which Kirby has 
 
 ----
 
+Intro:
+
+People told us why their projects were
+(link: love text: made with Kirby).
+
+----
+
 Priority: 0.9
 
 ----
