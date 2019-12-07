@@ -144,3 +144,16 @@ $page
     ]
   ]);
 ```
+
+----
+
+Users:
+
+```php
+if ($user = $kirby->user()) {
+  echo 'Welcome, ' . $user->name();
+
+  snippet('community', ['role' => $user->role()]);
+  snippet('logout');
+}
+```
