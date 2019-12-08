@@ -49,7 +49,7 @@ When copying files to a remote server via (S)FTP, make sure to copy the `.htacce
         </td>
         <td class="text">
             <ul>
-                <li>PHP 7.1+</li>
+                <li>PHP 7.2, 7.3 or 7.4<br>(PHP 7.3 is recommended)</li>
                 <li>mbstring extension</li>
                 <li>curl extension</li>
                 <li>ctype extension</li>
