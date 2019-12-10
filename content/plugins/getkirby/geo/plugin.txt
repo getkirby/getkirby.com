@@ -1,0 +1,13 @@
+Title: GEO
+
+----
+
+Repository: https://github.com/getkirby/geo
+
+----
+
+Category: utility
+
+----
+
+Description: This plugin adds basic geo search and conversion functionalities to Kirby
