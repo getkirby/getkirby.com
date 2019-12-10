@@ -110,7 +110,7 @@ Since these example events link to external events, we only show an events overv
       <a href="<?= $event->link() ?>">
         <header>
           <h3><?= $event->title()->html() ?></h3>
-          <time><?= $event->from()->toDate()('d.m.') ?> - <?= $event->to()->toDate('d.m.Y') ?></time>
+          <time><?= $event->from()->toDate('d.m.Y') ?> - <?= $event->to()->toDate('d.m.Y') ?></time>
         </header>
         <main>
           <?= $event->text()->kirbytext() ?>
