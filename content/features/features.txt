@@ -157,3 +157,16 @@ if ($user = $kirby->user()) {
   snippet('logout');
 }
 ```
+----
+
+Bp:
+
+```yml
+title: Shop
+sections:
+  products:
+    type: pages
+    layout: cards
+    template: product
+    info: "{{ page.price }} €"
+```

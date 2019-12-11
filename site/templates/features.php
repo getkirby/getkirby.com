@@ -22,22 +22,54 @@
 
           <?= snippet('features/text', [
             'heading' => 'Make it yours',
+            'rows'  => 3,
             'text' => '
               Kirby lets you create a control panel for yourself and your editors that is tailored to your site. Make the Panel reflect the unique structure of your content, use cases and users—not the other way around.
             '
           ]) ?>
 
+          <?= snippet('features/image', [
+            'cols'  => 4,
+            'rows'  => 3,
+            'image' => $page->image('tabs.png'),
+            'class' => 'center fading',
+          ]) ?>
+
+
           <?= snippet('features/text', [
-            'heading' => 'Search',
+            'heading' => 'User friendly',
+          ]) ?>
+          <?= snippet('features/text', [
+            'heading' => 'Secure',
+          ]) ?>
+          <?= snippet('features/text', [
+            'heading' => 'Mobile',
+          ]) ?>
+
+          <?= snippet('features/code', [
+            'cols'  => 4,
+            'rows'  => 2,
+            'code'  => $page->bp(),
+            'class' => 'fading'
+          ]) ?>
+          <?= snippet('features/text', [
+            'heading' => 'Blueprints',
+            'text'    => 'Configure the Panel interface with our unique blueprint system. Add sections, fields, tabs and create intuitive interface layouts right from your editor.',
+          ]) ?>
+
+          <?= snippet('features/text', [
+            'heading' => 'Quicksearch',
             'text' => '
               Quickly access all pages, users and files with the global search and navigate around with ease.
             '
           ]) ?>
-
-          <?= snippet('features/text', [
-            'heading' => null,
-            'text' => null
+          <?= snippet('features/image', [
+            'cols'  => 4,
+            'image' => $page->image('search.png'),
+            'class' => 'fading stretch',
           ]) ?>
+
+
 
         </div>
       </section>
@@ -60,16 +92,14 @@
           <?= snippet('features/text', [
             'heading' => 'On display, tailor-made',
             'text' => '
-              Display pages the way that fits them best: articles, albums, blog posts, events, products, docs etc.<br><br>Create individual layouts and add sections so that your pages reflect their nature right in the Panel.
-            '
-          ]) ?>
-
-          <?= snippet('features/text', [
-
+              Display pages the way that fits them best: articles, albums, blogs, events, products, docs etc.<br><br>Create individual layouts and add sections so that your pages reflect their nature right in the Panel.
+            ',
+            'cols' => 3
           ]) ?>
 
 
           <?= snippet('features/text', [
+            'cols' => 3,
             'heading' => 'Drag & Drop sorting',
             'text' => '
               Sorting pages or files is a breeze: Pick them up and drop them where you want them to be. It shouldn\'t be more complicated than that.
@@ -93,12 +123,14 @@
 
           <?= snippet('features/text', [
             'heading' => 'Publishing workfows',
-            'rows' => 2
+            'rows' => 2,
+            'text' => 'Your pages can have three different states: draft, unlisted and listed. Those states can be customized to fit your publishing workflow.'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Custom layouts',
             'rows' => 2,
+            'text' => 'You want more? Create your own plugins to display pages. Complex tables, gallery grids, maybe even a kanban board? Build your own pages section plugins and get creative.'
           ]) ?>
 
           <?= snippet('features/image', [
@@ -209,7 +241,7 @@
 
           <?= snippet('features/text', [
             'heading' => 'Metadata',
-            'text'    => null,
+            'text'    => 'Add custom metadata to your files. Define different file types and customize the metadata fields for each type. An image might need a caption and some alternative text. A PDF catalogue download could have an additional pricing list. You can even use those fields for internal notes in your team.',
             'rows'    => 4
           ]) ?>
 
@@ -228,7 +260,7 @@
 
           <?= snippet('features/text', [
             'heading' => 'Media API',
-            'text'    => null,
+            'text'    => 'Kirby comes with a asychronous media modification API. Resize, crop and convert your images right on the fly in your templates. Start prototyping with different image formats in the browser. Make sure that every visitor gets the perfect file size',
             'rows'    => 4,
           ]) ?>
         </div>
