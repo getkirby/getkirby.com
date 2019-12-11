@@ -22,7 +22,7 @@ By default, such placeholders are wrapped in double curly braces like this:
 ```kirbytext
 Text:
 
-{{ company }} was founded in 2005 with the intention of making a lot of money quickly. 
+{{ company }} was founded in 2005 with the intention of making a lot of money quickly.
 
 Today, {{ company }} rules the world. Contact us at {{ phone }}.
 ```
@@ -46,7 +46,7 @@ This works great if you only need a few placeholders in a few limited places.
 
 However, if you want to use placeholders all over the place, you don't want to repeat each replacement in every template. So how can we make this more versatile?
 
-## Defining the replacements in `config.php``
+## Defining the replacements in `config.php`
 
 If you know in advance what text snippets you need and what they should be replaced with, you can define them in your configuration file:
 
@@ -54,12 +54,10 @@ If you know in advance what text snippets you need and what they should be repla
 <?php
 
 return [
-
-  'getkirby.placeholders.replacements' => [
+  'placeholders' => [
     'company' => 'Great company',
     'phone'   => '+01 123 1234567',
   ],
-
 ];
 ```
 
@@ -67,7 +65,7 @@ With this in place, we can pass this array to the `Str::template()` method:
 
 
 ```php
-<?= Str::template($page->text()->kt(), option('getkirby.placeholders.replacements', [])) ?>
+<?= Str::template($page->text()->kt(), option('placeholders', [])) ?>
 ```
 
 Now, if we want to add additional placeholders, we can do that in the config.
@@ -88,7 +86,7 @@ placeholders:
       type: text
       help: >
         The key is what you use in your textfields, e.g. {{ company }}
-    value:  
+    value:
       label: Replacement text
       type: textarea
       help: >
@@ -99,14 +97,13 @@ To get the array of options from this field, we create a `toOptions()` (link: do
 
 ```php "/site/plugins/placeholders/index.php"
 
-<?php 
+<?php
 
-Kirby::plugin('getkirby/placeholders', [
+Kirby::plugin('yourname/placeholders', [
     'fieldMethods' => [
         'toOptions' => function($field) {
             $result = [];
-            $options = $field->toStructure();
-            foreach ($options as $option) {
+            foreach ($field->toStructure() as $option) {
                 if ($option->key()->isNotEmpty() && $option->value()->isNotEmpty()) {
                    $result[$option->key()->value()] = $option->value()->html();
                 }
@@ -123,15 +120,52 @@ We can now get the replacement array from the field above like this:
 <?= Str::template($page->text()->kt(), $site->placeholders()->toOptions()) ?>
 ```
 
+## Custom field method
+
+Wouldn't it be nice to create our own field method and write it like this?:
+
+```php
+<?= $page->text()->kt()->replace([
+    'company' => 'Great company',
+    'phone'   => '+01 123 1234567',
+]) ?>
+```
+
+… or connected to our structure field:
+
+```php
+<?= $page->text()->kt()->replace($site->placeholders()->toOptions()) ?>
+```
+
+Let's put this in our plugin:
+
+```php "/site/plugins/placeholders/index.php"
+<?php
+
+Kirby::plugin('yourname/placeholders', [
+    'fieldMethods' => [
+        'replace' => function ($field, array $placeholders = []) {
+
+            // replace the field value
+            $field->value = Str::template($field->value, $placeholders);
+
+            return $field;
+        }
+    ]
+]);
+```
+
+
+
 ## Wrapping the replacement code in a hook
 
-We can do better, though. A hook replaces all the placeholders automatically, so that we don't have to call `Str::template()` manually in the templates anymore:
+We can automate it even more, though. A hook replaces all the placeholders automatically, so that we don't even have to call our method in templates anymore:
 
 
 ```php "/site/plugins/placeholders/index.php"
-<?php 
+<?php
 
-Kirby::plugin('getkirby/placeholders', [
+Kirby::plugin('yourname/placeholders', [
     'hooks' => [
         'kirbytext:before' => function ($text) {
             return Str::template($text, site()->placeholders()->toOptions());
@@ -144,24 +178,29 @@ Kirby::plugin('getkirby/placeholders', [
 
 For the final plugin, we want to get rid of some of the hardcoded stuff and leave it to the developer to decide where the replacements are defined, in the config or by the editor in a structure field, or even allow overriding/extending the replacements defined in `config.php`.
 
+Config options for plugins should always follow the naming convention: `yourName.pluginName.optionName`
+
 
 ```php "/site/plugins/placeholders/index.php"
 <?php
 
-use Kirby\Cms\KirbyTags;
-use Kirby\Toolkit\Str;
-
 Kirby::plugin('getkirby/placeholders', [
     'fieldMethods' => [
+        'replace' => function ($field, array $placeholders = []) {
+
+            // replace the field value
+            $field->value = Str::template($field->value, $placeholders);
+
+            return $field;
+        },
         'toOptions' => function($field) {
             $result = [];
-            $options = $field->toStructure();
-            foreach ($options as $option) {
+            foreach ($field->toStructure() as $option) {
                 // use only key/value pairs that are not empty
                 if ($option->key()->isNotEmpty() && $option->value()->isNotEmpty()) {
                     // check if the block field is set to true and parse KirbyTags
                     if ($option->block()->value() === true) {
-                        $result[$option->key()->value()] = kirbyTags::parse($option->value());
+                        $result[$option->key()->value()] = kirbytags($option->value());
                     } else {
                         $result[$option->key()->value()] = $option->value()->html();
                     }
@@ -172,15 +211,17 @@ Kirby::plugin('getkirby/placeholders', [
     ],
     'hooks' => [
         'kirbytags:before' => function ($text) {
-            
+
             // set the options from the config as defaults
-            $defaults = option('getkirby.placeholders.replacements', []);
+            $defaults = option('yourname.placeholders.replacements', []);
             $options  = [];
+
             // if options from fields are set to true, get options from field
-            if (option('getkirby.placeholders.fromField', false) === true) {
-                $field   = option('getkirby.placeholders.field', 'placeholders');
+            if (option('yourname.placeholders.field')) {
+                $field   = option('yourname.placeholders.field', 'placeholders');
                 $options = site()->{$field}()->toOptions();
             }
+
             // merge defaults and options
             $options = array_merge($defaults, $options);
 
@@ -195,12 +236,11 @@ Now, we can control the behavior of the plugin through additional config options
 ```php "/site/config/config.php"
 <?php
 return [
-    'getkirby.placeholders.replacements' => [
+    'yourname.placeholders.replacements' => [
         'company' => 'Great company',
         'phone'   => '+01 123 1234567',
     ],
-    'getkirby.placeholders.fromField'    => true,
-    'getkirby.placeholders.field'        => 'placeholders'
+    'yourname.placeholders.field' => 'placeholders'
 ];
 ```
 
