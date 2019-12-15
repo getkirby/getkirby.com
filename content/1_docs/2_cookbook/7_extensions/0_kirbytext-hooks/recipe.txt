@@ -16,10 +16,10 @@ Text:
 
 When you call the `kirbyText()/kt()` field method, a lot of stuff happens to the raw text until the final result is rendered. During this process, four different hooks are called:
 
-- `kirbytext:before`
-- `kirbytext:after`
-- `kirbytags:before`
-- `kirbytags:after`
+- [`kirbytext:before`](/docs/reference/plugins/hooks/kirbytext-before)
+- [`kirbytext:after`](/docs/reference/plugins/hooks/kirbytext-after)
+- [`kirbytags:before`](/docs/reference/plugins/hooks/kirbytags-before)
+- [`kirbytags:after`](/docs/reference/plugins/hooks/kirbytags-after)
 
 But in which order are these hooks called and what does this mean when we want to do something when these hooks are triggered?
 
