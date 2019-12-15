@@ -1,4 +1,4 @@
-Title: The order of kirbytext/kirbytags hooks
+Title: The order of KirbyText/KirbyTags hooks
 
 ----
 
@@ -6,7 +6,7 @@ Published: 2019-12-15
 
 ----
 
-Description: When to use what type of Kirbytext/Kirbytags hook
+Description: When to use what type of KirbyText/KirbyTags hook
 
 ----
 
@@ -43,11 +43,11 @@ The `kirbytags:before` hook kicks in directly afterwards, i.e. before KirbyTags 
 
 ## `kirbytags:after`
 
-The `kirbyTags:after` hook kicks in after modifications through a `kirbytags:before` hook and after all KirbyTags are parsed, but before Markdown and Smartypants are parsed.
+The `kirbytags:after` hook kicks in after modifications through a `kirbytags:before` hook and after all KirbyTags are parsed, but before Markdown and SmartyPants are parsed.
 
 ## `kirbytext:after`
 
-The final hook is the `kirbytext:after` hook. Changes you make in this hook are applied to the rendered HTML after Markdown and Smartypants are parsed. You could therefore use this hook to replace or modify HTML tags, e.g. replace all headings with anchor headings and stuff like that.
+The final hook is the `kirbytext:after` hook. Changes you make in this hook are applied to the rendered HTML after Markdown and SmartyPants are parsed. You could therefore use this hook to replace or modify HTML tags, e.g. replace all headings with anchor headings and stuff like that.
 
 By choosing the right hook, you have full control over what modifications happen when and what further modifications are applied.
 
