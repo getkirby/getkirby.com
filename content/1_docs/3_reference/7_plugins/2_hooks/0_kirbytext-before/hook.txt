@@ -1,0 +1,5 @@
+Details:
+
+## Further information
+
+See (link: docs/cookbook/extensions/kirbytext-hooks text: The order of kirbytext/kirbytags hooks)
