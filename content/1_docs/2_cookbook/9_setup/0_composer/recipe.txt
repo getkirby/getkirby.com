@@ -51,7 +51,7 @@ It is [generally recommended](https://getcomposer.org/doc/faqs/should-i-commit-t
 ...
 ```
 
-## Adding Composer to an existing project
+## Switching an existing Kirby 3 site to a Composer setup
 
 If you have an existing site and want to use Composer with it, that's possible as well.
 
