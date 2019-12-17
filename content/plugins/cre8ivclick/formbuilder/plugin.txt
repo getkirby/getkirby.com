@@ -6,7 +6,7 @@ Repository: https://gitlab.com/cre8ivclick/formbuilder
 
 ----
 
-Category: templating
+Category: forms
 
 ----
 
