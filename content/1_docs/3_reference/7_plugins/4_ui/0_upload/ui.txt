@@ -5,13 +5,29 @@ Text:
 The Upload component is a combination of a native file input and a dialog. The native file input is invisible and only serves to open the file selector from the OS. Once files are selected the dialog will open and show the progress and potential upload errors.
 
 ```html
-<k-upload ref="upload" />
-<k-button icon="upload" @click="$refs.upload.open()">
-  Upload
-</k-button>
+<template>
+  <div>
+    <k-upload ref="upload" />
+    <k-button icon="upload" @click="upload">Upload</k-button>
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    upload() {
+      this.$refs.upload.open({
+        url: window.panel.api + "/my-plugin/upload"
+      });
+    }
+  }
+};
+</script>
 ```
 
 ## Props
+
+You can use component props to set default params, which will always be used when the `open` or `drop` methods are called.
 
 ### accept
 
@@ -41,13 +57,29 @@ Instead of opening the file picker first you can also start the uploader directl
 
 ### open(params)
 
-Opens the uploader with the given parameters. If no additional parameters are passed, the properties from the upload element are used.
+Opens the uploader with the object of given parameters. **For all available parameters, check out the component props.** If no additional parameters are passed, the properties from the upload element are used.
 
 ```html
-<k-upload ref="upload" url="/files/upload" />
-<k-button icon="upload" @click="$refs.upload.open({ accept: 'image/*' })">
-  Upload
-</k-button>
+<template>
+  <div>
+    <k-upload ref="upload" />
+    <k-button icon="upload" @click="upload">Upload</k-button>
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    upload() {
+      this.$refs.upload.open({
+        url: window.panel.api + "/my-plugin/upload",
+        accept: "image/*",
+        multiple: false
+      });
+    }
+  }
+};
+</script>
 ```
 
 ## Events
@@ -61,20 +93,20 @@ The API response is returned as second argument in the `@success` event:
 
 ```html
 <template>
-	<k-upload @success="onSuccess" />
+  <k-upload @success="onSuccess" />
 </template>
 
 <script>
 export default {
-	methods: {
-		onSuccess (uploads, response) {
-			// i.e.
-			response[0].type;
-			response[0].filename;
-			response[0].niceSize;
-			// etc.
-		}
-	}
+  methods: {
+    onSuccess (uploads, response) {
+      // i.e.
+      response[0].type;
+      response[0].filename;
+      response[0].niceSize;
+      // etc.
+    }
+  }
 }
 </script>
 ```
@@ -88,16 +120,16 @@ Fired when something went wrong.
 
 ```html
 <template>
-  <k-upload ref="upload" success="yay" error="onNo" />
+  <k-upload ref="upload" @success="onSuccess" @error="onError" />
 </template>
 
 <script>
 export default {
   methods: {
-    yay() {
+    onSuccess() {
       alert("All files have been uploaded!");
     },
-    ohNo() {
+    onError() {
       alert("The files could not be uploaded");
     }
   }
