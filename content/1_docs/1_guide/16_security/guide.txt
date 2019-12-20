@@ -14,7 +14,7 @@ Text:
 We constantly improve the code and security of Kirby with every update. Please always make sure to **update to the latest version** in order to fix possible issues and vulnerabilities.
 
 <warning>
-However, *never* update a live website directly on the server. Test updates locally or on your stating server first to make sure none of your code breaks or plugins suddenly stop working. Always make sure to have a backup in place.
+However, *never* update a live website directly on the server. Test updates locally or on your staging server first to make sure none of your code breaks or plugins suddenly stop working. Always make sure to have a backup in place.
 </warning>
 
 Please follow these (link: docs/guide/installation#updates text: instructions on how to update your installation).
