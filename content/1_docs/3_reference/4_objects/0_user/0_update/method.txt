@@ -10,7 +10,6 @@ Text:
 try {
 
   $kirby->user('bastian@example.com')->update([
-    'email'     => 'bastian@getkirby.com',
     'firstName' => 'Bastian',
     'lastName'  => 'Allgeier'
   ]);
@@ -25,3 +24,7 @@ try {
 }
 
 ```
+
+<info>
+This method only updates the content in the `user.txt` file. To update the user email or the user name, use the `$user->changeEmail()` or `$user->changeName()` methods.
+</info>
