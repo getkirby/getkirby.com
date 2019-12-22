@@ -22,7 +22,7 @@ Kirby has only very few (link: text: server requirements), and you have therefor
 
 MAMP Pro allows you to create a host for each project, use Nginx instead of Apache, and some other useful features.
 
-Once MAMP is installed, the default folder to put your Kirby folder into is the `programs/MAMP/htdocs` folder (Mac) or the `C:\MAMP\htdocs` folder (Windows). By default, you can then access the project under `http://localhost:8888/project-folder-namme`.
+Once MAMP is installed, the default folder to put your Kirby folder into is the `programs/MAMP/htdocs` folder (Mac) or the `C:\MAMP\htdocs` folder (Windows). By default, you can then access the project under `http://localhost:8888/project-folder-name`.
 
 We found loading websites on MAMP slow on OS X Mojave. A majority of the Kirby team has therefore switched to Laravel Valet (see below).
 
@@ -77,7 +77,7 @@ Follow their (link: https://www.vagrantup.com/intro/getting-started/index.html t
 
 ## Laragon
 
-(link: https://laragon.org text: Laragon) is a portable, isolated develoment environment for Windows only. It supports different PHP versions, Apache or Nginx, and different types of databases. You can also share your projects with the outside using Ngrok.
+(link: https://laragon.org text: Laragon) is a portable, isolated development environment for Windows only. It supports different PHP versions, Apache or Nginx, and different types of databases. You can also share your projects with the outside using Ngrok.
 
 ## Laravel Homestead
 
