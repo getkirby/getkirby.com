@@ -68,10 +68,10 @@ In your `config.php`, create these two new (glossary: route text: routes):
 
 ```
 
-You can now to visit the sitemap of your Kirby site by browsing `http://yourdomain.com/sitemap` or `http://yourdomain.com/sitemap.xml`. The second route redirects to the first.
+You can now visit the sitemap of your Kirby site by browsing `http://yourdomain.com/sitemap` or `http://yourdomain.com/sitemap.xml`. The second route redirects to the first.
 
 
-## Exclude pages you don't want in the sitemap
+## Excluding pages from your sitemap
 
 You can do that in your config. Here we call the option `sitemap.ignore`.
 
