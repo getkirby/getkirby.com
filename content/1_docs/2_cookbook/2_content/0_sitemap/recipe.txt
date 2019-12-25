@@ -14,7 +14,7 @@ Text:
 
 For basic search engine optimization it's good to have a sitemap.xml file, which contains machine-readable information about all the pages and the structure of your site.
 
-The syntax for such a `sitmap.xml` file is fairly simple. You can find all about it on <http://www.sitemaps.org/>.
+The syntax for such a `sitemap.xml` file is fairly simple. You can find all about it on <http://www.sitemaps.org/>.
 
 Because you probably don't want to generate that file by hand, you can create a snippet that indexes your entire site and generates a `sitemap.xml` for you in a few steps:
 
