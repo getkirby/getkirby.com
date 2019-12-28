@@ -99,6 +99,30 @@ cd your-project
 composer update
 ```
 
+You will also need to modify your site's `index.php` so that it can find the Kirby installation:
+
+```php "index.php"
+<?php
+
+require '<your-path>/bootstrap.php';
+
+echo (new Kirby)->render();
+```
+
+If you moved the `kirby` directory to a different directory level (outside of the webroot or into a subdirectory), you will also need to override the `index` root like so:
+
+```php "index.php"
+<?php
+
+require '<your-path>/bootstrap.php';
+
+echo (new Kirby([
+  'roots' => [
+    'index' => __DIR__
+  ]
+]))->render();
+```
+
 ## Disabling the custom path completely
 
 If you prefer to have the CMS installed to the `vendor` directory, you can disable the custom path entirely:
@@ -117,7 +141,19 @@ If you prefer to have the CMS installed to the `vendor` directory, you can disab
 }
 ```
 
-Please note that you will need to modify your site's `index.php` to load the `vendor/autoload.php` file instead of Kirby's `bootstrap.php`.
+The `index.php` file needs to be changed so that it can find Kirby and so that Kirby can find the site data:
+
+```php "index.php"
+<?php
+
+require 'vendor/autoload.php';
+
+echo (new Kirby([
+  'roots' => [
+    'index' => __DIR__
+  ]
+]))->render();
+````
 
 ## Updating Kirby
 
