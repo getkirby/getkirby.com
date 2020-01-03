@@ -22,7 +22,7 @@ Kirby::plugin('your/plugin', [
 ]);
 ```
 
-<info>The blueprint key must start with 'pages/...', 'user/...', etc. to activate in the designated locations.</info>
+<info>The blueprint key must start with 'pages/...', 'users/...', etc. to activate the designated locations.</info>
 
 ## Array definition
 
