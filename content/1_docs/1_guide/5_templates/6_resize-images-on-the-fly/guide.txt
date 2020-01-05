@@ -73,12 +73,12 @@ $image->blur();
 $image->blur(30);
 ```
 
-## Greyscale
+## Grayscale
 
-The grayscale methods converts an image to grayscale.
+The grayscale method converts an image to grayscale.
 
 ```php
-$image->greyscale();
+$image->grayscale();
 ```
 
 ## Configuring your thumbnails
