@@ -117,8 +117,10 @@
 
 .konf-tickets .tito-wrapper {
   background: #fff;
-  border: none;
+  border: 1px solid #fff;
   border-radius: 3px;
+  margin: 0 !important;
+  max-width: none !important;
 }
 .konf-tickets .tito-ticket-description {
   font-size: .875rem;
