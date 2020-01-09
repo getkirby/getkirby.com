@@ -29,7 +29,9 @@ listed:
 ### Reusable projects section
 
 ```yaml "/site/blueprints/sections/projects.yml"
+type: pages
 headline: Projects
+parent: kirby.page('projects')
 layout: cards
 template: project
 image:
@@ -38,6 +40,10 @@ image:
   cover: true
 info: "{{ page.year }}"
 ```
+
+<info>
+Note that the above section will throw an error in the Panel as long as the given parent page does not exist in the file system.
+</info>
 
 ### Result
 
