@@ -8,7 +8,7 @@ Description: An alternative approach for running multiple sites from the same Ki
 
 Text:
 
-In (link: docs/cookbook/setup/multisite text: this recipe) a scenario for running multiple sites via the same Kirby setup has been presented. The proposed setup makes use of the fact that you need only one `\kirby` folder where the heart of Kirby is beating. However, it is also based on the assumption that you have only one virtual (or even real) webserver host from where your various sites will be served. The `index.php` at the root of your installation in this scenario works like a dispatcher and therefore needs some modification.
+In (link: docs/cookbook/setup/multisite text: this recipe) a scenario for running multiple sites via the same Kirby setup has been presented. The proposed setup makes use of the fact that you need only one `/kirby` folder where the heart of Kirby is beating. However, it is also based on the assumption that you have only one virtual (or even real) webserver host from where your various sites will be served. The `index.php` at the root of your installation in this scenario works like a dispatcher and therefore needs some modification.
 
 Even though the proposed setup is easy to accomplish, some might dislike the fact of running multiple websites from one webserver host - amongst others. Instead, one might prefer one virtual host per site, which has the advantage that - from a webservers perspective - you have clearly seperated installations and configurations for each site. Moreover it provides the ability to extend the capabilities of single hosts while narrowing down others, depending on your needs. Last not least you can enable or disable single hosts without affecting the others.
 
@@ -78,7 +78,7 @@ Let's change that to a setup in which every website is served by a dedicated web
 
 Fellow Kirby administrators will notice nothing new besides two Kirby installations side-by-side.
 
-However, we can move the `\kirby` folder to a location outside of all document roots and replace it with a symbolic link which points to the moved `kirby` folder:
+However, we can move the `/kirby` folder to a location outside of all document roots and replace it with a symbolic link which points to the moved `kirby` folder:
 
 ```filesystem
 /srv/www/
@@ -108,9 +108,9 @@ user@host:/srv/www/my-shop.com $ ln -s /srv/www/kirby kirby
 
 ## In `index.php`
 
-PHP can follow the symlinked `\kirby` directory like any other. However, since the root to `index` in `kirby/config/roots.php`  is set up like this…
+PHP can follow the symlinked `/kirby` directory like any other. However, since the root to `index` in `kirby/config/roots.php`  is set up like this…
 
-```php "\kirby/config/roots.php"
+```php "/kirby/config/roots.php"
 ...
 'index' => function (array $roots) {
   return realpath(__DIR__ . '/../../');
@@ -132,7 +132,7 @@ $kirby = new Kirby([
 
 echo $kirby->render();
 ```
-That's it! Now all our Kirby sites will be served from a common `\kirby` folder.
+That's it! Now all our Kirby sites will be served from a common `/kirby` folder.
 
 ## Further advantages
 
@@ -140,7 +140,7 @@ So far, the new solution provides nothing new compared to the old solution, desp
 
 What's more, we can now switch between different versions of Kirby with a few keystrokes.
 
-Let's suppose that we want to run `my-site.com` with Kirby 3.3.1, but `my-shop.com` with Kirby 3.3.2. All we need to do is put the `\kirby` folder of every version into a folder of its own, and point the `kirby` symlinks to the respective folder:
+Let's suppose that we want to run `my-site.com` with Kirby 3.3.1, but `my-shop.com` with Kirby 3.3.2. All we need to do is put the `/kirby` folder of every version into a folder of its own, and point the `/kirby` symlinks to the respective folder:
 
 ```filesystem
 /srv/www/
