@@ -52,7 +52,7 @@
               <a href="https://3st-digital.de/"><b>3st digital</b></a> invited us to host the first Kirby Konf at their beautiful office and it couldn't be a better match for this concept.
             </p>
             <p>
-              A 15 minute walk from the Mainz train station, the agency is located directly at the river Rhine with a beautiful view. The modernized warehous offers unique, friendly spaces that invite to hang out and work together.
+              A 15 minute walk from the Mainz train station, the agency is located directly at the river Rhine with a beautiful view. The modernized warehouse offers unique, friendly spaces that invite to hang out and work together.
             </p>
           </div>
           <div class="column" style="--cols: 2">
