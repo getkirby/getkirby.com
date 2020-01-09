@@ -1,4 +1,4 @@
-Title: A variant to Using Kirby for multiple sites
+Title: A variant to using Kirby for multiple sites
 
 ----
 
@@ -10,9 +10,9 @@ Text:
 
 In (link: docs/cookbook/setup/multisite text: this recipe) a scenario for running multiple sites via the same Kirby setup has been presented. The proposed setup makes use of the fact that you will need only one `kirby` folder where the heart of Kirby is beating. However, it is also based on the assumption that you have only one virtual (or even real) webserver host from where your various sites will be served. The `index.php` at the root of your installation in this scenario will work like a dispatcher and therefore needs some modification.
 
-Even though the proposed setup is easy to accomplish, I dislike the fact of running multiple websites from one webserver host - amongst others. In general I prefer one virtual host per site, which has the advantage that - from a webservers perspective - you have clearly seperated installations and configurations for each site. Moreover it provides the ability to extend the capabilities of single hosts while narrow down others, depending on your needs. Last not least you can enable or disable single hosts while not affecting the others.
+Even though the proposed setup is easy to accomplish, some might dislike the fact of running multiple websites from one webserver host - amongst others. Instead, one might prefer one virtual host per site, which has the advantage that - from a webservers perspective - you have clearly seperated installations and configurations for each site. Moreover it provides the ability to extend the capabilities of single hosts while narrow down others, depending on your needs. Last not least you can enable or disable single hosts while not affecting the others.
 
-Hence, I would like to show an alternative approach of a multisite Kirby installation, which in my point of view provides several additional advantages.
+Hence, here is an alternative approach of a multisite Kirby installation, which provides several additional advantages.
 
 ## Preconditions
 
@@ -77,7 +77,7 @@ Let's change that to a setup in which every website is served by a dedicated web
 ```
 whereupon the fellow Kirby administrator will notice nothing new beside of two Kirby installations side-by-side.
 
-However, we can move the `kirby`folder to a location outside of all document roots and replace it with a symbolic link which points to the moved `kirby` folder:
+However, we can move the `kirby` folder to a location outside of all document roots and replace it with a symbolic link which points to the moved `kirby` folder:
 
 ```filesystem
 /srv/www/
@@ -107,7 +107,7 @@ user@host:/srv/www/my-shop.com $ ln -s /srv/www/kirby kirby
 
 ## In `index.php`
 
-php can follow the symlinked `kirby` directory like every else. However, since in `kirby/config/roots.php` the root to `index` is set up like this:
+PHP can follow the symlinked `kirby` directory like every else. However, since in `kirby/config/roots.php` the root to `index` is set up like this:
 
 ```php "kirby/config/roots.php"
 ...
@@ -139,7 +139,7 @@ So far, the new solution provides nothing new to the old solution, despite the f
 
 However, we are are now even able to switch between different versions of Kirby with a few keystrokes.
 
-Let's suppose that we want run `my-site.com` with Kirby 3.3.1, but `my-shop.com` with Kirby 3.3.2. All you need to do is putting the `kirby` folder of every version in a folder by its own, and pointing the `kirby` symlinks to the respective folder:
+Let's suppose that we want to run `my-site.com` with Kirby 3.3.1, but `my-shop.com` with Kirby 3.3.2. All you need to do is putting the `kirby` folder of every version in a folder by its own, and pointing the `kirby` symlinks to the respective folder:
 
 ```filesystem
 /srv/www/
@@ -177,7 +177,7 @@ user@host:/srv/www/my-site.com $ ln -s /srv/www/kirby-3.3.2 kirby
 
 And we are done!
 
-Want to switch back `my-site.com` to Kirby 3.3.1? I bet, you know how easy this is by your own now.
+Want to switch back `my-site.com` to Kirby 3.3.1? You know how easy this is by your own now.
 
 ## Licenses for your multi-site
 
