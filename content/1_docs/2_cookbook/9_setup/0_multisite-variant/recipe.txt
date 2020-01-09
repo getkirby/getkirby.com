@@ -8,82 +8,19 @@ Description: An alternative approach for running multiple sites from the same Ki
 
 Text:
 
-You can run multiple sites via the same Kirby setup. This can help you maintain your sites as you only need to keep a single setup updated.
+In (link: docs/cookbook/setup/multisite text: this recipe) a scenario for running multiple sites via the same Kirby setup has been presented. The proposed setup makes use of the fact that you will need only one `kirby` folder where the heart of Kirby is beating. However, it is also based on the assumption that you have only one virtual (or even real) webserver host from where your various sites will be served. The `index.php` at the root of your installation in this scenario will work like a dispatcher and therefore needs some modification.
 
-## Custom folder and URL setup
+Even though the proposed setup is easy to accomplish, I dislike the fact of running multiple websites from one webserver host - amongst others. In general I prefer one virtual host per site, which has the advantage that - from a webservers perspective - you have clearly seperated installations and configurations for each site. Moreover it provides the ability to extend the capabilities of single hosts while narrow down others, depending on your needs. Last not least you can enable or disable single hosts while not affecting the others.
 
-A multi-site setup extends Kirby’s possibility to define your (link: docs/guide/configuration#custom-folder-setup text: custom folder setup) and (link: docs/guide/configuration#custom-url-setup text: custom URL setup).
+Hence, I would like to show an alternative approach of a multisite Kirby installation, which in my point of view provides several additional advantages.
 
-## Setting up your multisite
+## Preconditions
 
-To run multiple sites on a single Kirby installation, modify the `index.php` at the root of your installation:
-
-```php "/index.php"
-<?php
-require 'kirby/bootstrap.php';
-
-$sites = [
-  'my-site.com' => 'my-site.com',
-  'my-shop.com' => 'my-shop.com',
-];
-
-$host = Url::host();
-$root = $sites[$host];
-$url  = 'http://' . $host;
-
-$kirby = new Kirby([
-  'roots' => [
-    'index'   => __DIR__,
-    'site'    => $root . '/site',
-    'content' => $root . '/content',
-    'media'   => $root . '/media',
-    'assets'  => $root . '/assets'
-  ],
-  'urls' => [
-    'media'  => $url . '/' . $root . '/media',
-    'assets' => $url . '/' . $root . '/assets',
-  ],
-]);
-
-echo $kirby->render();
-```
-
-Let's walk through this step by step: First we load the `kirby/bootstrap.php` script and define our sites in an array with the domain as the key and the file directory root as the value:
-
-```php
-$sites = [
-  'my-site.com' => 'my-site.com',
-  'my-shop.com' => 'my-shop.com',
-];
-```
-
-Then we use the `Url::host()` method to retrieve the domain requested by the visitor and select the matching root for this one:
-
-```php
-$host = Url::host();
-$root = $sites[$host];
-$url  = 'http://' . $host;
-```
-
-Finally, we use this information to create a `$kirby` object with custom roots and a custom URLs and output `$kirby->render()`:
-
-```php
-$kirby = new Kirby([
-  'roots' => [
-    'index'   => __DIR__,
-    'site'    => $root . '/site',
-    'content' => $root . '/content',
-    'media'   => $root . '/media',
-    'assets'  => $root . '/assets'
-  ],
-  'urls' => [
-    'media'  => $url . '/' . $root . '/media',
-    'assets' => $url . '/' . $root . '/assets',
-  ],
-]);
-```
+The following setup has been tested on Linux OS (Ubuntu 18.04 and Debian 9) together with Apache HTTP Server 2.4.
 
 ## In the filesystem
+
+The proposed filesystem layout in (link: docs/cookbook/setup/multisite text: the above mentioned recipe) looks like this:
 
 ```filesystem
   kirby/
@@ -99,7 +36,149 @@ $kirby = new Kirby([
     assets/
   index.php
 ```
+Looking to it from a higher directory level, it could be seen as follows:
+
+```filesystem
+/srv/www/
+  docroot/
+    kirby/
+    my-site.com/
+      content/
+      media/
+      site/
+      assets/
+    my-shop.com/
+      content/
+      media/
+      site/
+      assets/
+    index.php
+```
+whereby the webservers virtual or real host document root is pointing to `docroot`, which of course could be anywhere in your filesystem.
+
+Let's change that to a setup in which every website is served by a dedicated webserver host and therefore the filesystem would look like the following:
+
+```filesystem
+/srv/www/
+  my-site.com/
+    kirby/
+    content/
+    media/
+    site/
+    assets/
+    index.php
+  my-shop.com/
+    kirby/
+    content/
+    media/
+    site/
+    assets/
+    index.php
+```
+whereupon the fellow Kirby administrator will notice nothing new beside of two Kirby installations side-by-side.
+
+However, we can move the `kirby`folder to a location outside of all document roots and replace it with a symbolic link which points to the moved `kirby` folder:
+
+```filesystem
+/srv/www/
+  kirby/
+  my-site.com/
+    kirby -> /srv/www/kirby
+    content/
+    media/
+    site/
+    assets/
+    index.php
+  my-shop.com/
+    kirby -> /srv/www/kirby
+    content/
+    media/
+    site/
+    assets/
+    index.php
+```
+
+The symbolic links are created like this:
+
+```bash
+user@host:/srv/www/my-site.com $ ln -s /srv/www/kirby kirby
+user@host:/srv/www/my-shop.com $ ln -s /srv/www/kirby kirby
+```
+
+## In `index.php`
+
+php can follow the symlinked `kirby` directory like every else. However, since in `kirby/config/roots.php` the root to `index` is set up like this:
+
+```php "kirby/config/roots.php"
+...
+'index' => function (array $roots) {
+  return realpath(__DIR__ . '/../../');
+},
+...
+```
+
+we still need to modify the `index.php` in all of our document roots slightly:
+
+```php "/index.php"
+<?php
+require 'kirby/bootstrap.php';
+
+$kirby = new Kirby([
+  'roots' => [
+    'index'   => __DIR__,
+  ],
+]);
+
+echo $kirby->render();
+```
+That's it! Now all of your Kirby sites will be served from a common `kirby` folder.
+
+## Further advantages
+
+So far, the new solution provides nothing new to the old solution, despite the fact that we are running a webserver host for every Kirby site with all the advantages mentioned above. 
+
+However, we are are now even able to switch between different versions of Kirby with a few keystrokes.
+
+Let's suppose that we want run `my-site.com` with Kirby 3.3.1, but `my-shop.com` with Kirby 3.3.2. All you need to do is putting the `kirby` folder of every version in a folder by its own, and pointing the `kirby` symlinks to the respective folder:
+
+```filesystem
+/srv/www/
+  kirby-3.3.1/
+  kirby-3.3.2/
+  my-site.com/
+    kirby -> /srv/www/kirby-3.3.1
+    content/
+    media/
+    site/
+    assets/
+    index.php
+  my-shop.com/
+    kirby -> /srv/www/kirby-3.3.2
+    content/
+    media/
+    site/
+    assets/
+    index.php
+```
+
+These symbolic links are created like this:
+
+```bash
+user@host:/srv/www/my-site.com $ ln -s /srv/www/kirby-3.3.1 kirby
+user@host:/srv/www/my-shop.com $ ln -s /srv/www/kirby-3.3.2 kirby
+```
+
+Now, when we like to upgrade `my-site.com` from Kirby 3.3.1 to Kirby 3.3.2, all we need to do is to change the symlink in `my-site.com` - actually even without stopping and starting the webserver:
+
+```bash
+user@host:/srv/www/my-site.com $ rm kirby
+user@host:/srv/www/my-site.com $ ln -s /srv/www/kirby-3.3.2 kirby
+```
+
+And we are done!
+
+Want to switch back `my-site.com` to Kirby 3.3.1? I bet, you know how easy this is by your own now.
 
 ## Licenses for your multi-site
 
-Even when running multiple sites through the same setup and code, you need a license for each of these sites: A single license is valid for a single Kirby installation, running on a single domain. If you add additional installations (i.e. under additional subdomains or subfolders) you need to (link: buy text: purchase licenses) for each of those installations.
+Of course, what have been said about licenses in (link: docs/cookbook/setup/multisite#licenses-for-your-multi-site text: this recipe) is still valid, and you need a license for each of your sites.
