@@ -20,6 +20,7 @@
             'cols'  => 6,
             'rows'  => 4,
             'image' => page('home')->image('interface-1.jpg')->resize(1200),
+            'alt'   => 'A screenshot of Kirby\'s admin interface'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -34,18 +35,20 @@
             'rows'  => 3,
             'image' => $page->image('blueprints.png'),
             'class' => 'center',
-            'link'  => 'docs/guide/blueprints/introduction'
+            'link'  => 'docs/guide/blueprints/introduction',
+            'alt'   => 'An illustration of Kirby\'s flexible blueprint system'
           ]) ?>
-
 
           <?= snippet('features/text', [
             'heading' => 'User-friendly',
             'text' => 'The Panel is optimized to make editors more happy and productive. There\'s no need for long training sessions and on-boarding new editors is a breeze.'
           ]) ?>
+
           <?= snippet('features/text', [
             'heading' => 'Secure',
             'text' => 'Extensive permissions, brute-force login protection and state of the art session management keeps your panel protected. Customize the panel URL or even switch it off on your production server for even less attack vectors.'
           ]) ?>
+
           <?= snippet('features/text', [
             'heading' => 'Mobile-ready',
             'text' => 'You want to edit your site on the go? The panel works nicely on mobile browsers in iOS and Android.'
@@ -56,6 +59,7 @@
             'rows'  => 2,
             'code'  => $page->bp(),
           ]) ?>
+
           <?= snippet('features/text', [
             'heading' => 'Blueprints',
             'text'    => 'Configure the Panel interface with our unique blueprint system. Add sections, fields, tabs and create intuitive interface layouts right from your editor.',
@@ -64,10 +68,10 @@
 
           <?= snippet('features/text', [
             'heading' => 'Quicksearch',
-            'text' => '
-              Quickly access all pages, users and files with the global search and navigate around with ease.
-            '
+            'text'    => 'Quickly access all pages, users and files with the global search and navigate around with ease.',
+            'alt'     => 'A screenshot of the quicksearch in the panel'
           ]) ?>
+
           <?= snippet('features/image', [
             'cols'  => 4,
             'image' => $page->image('search.jpg'),
@@ -93,65 +97,56 @@
             'rows'  => 4,
             'image' => page('home')->image('interface-2.jpg')->resize(1200),
             'class' => 'stretch',
+            'alt'   => 'A screenshot of a panel setup for blog articles'
           ]) ?>
-
 
           <?= snippet('features/text', [
             'heading' => 'On display, tailor-made',
-            'text' => '
-              Display pages the way that fits them best: articles, albums, blogs, events, products, docs etc.<br><br>Create individual layouts and add sections so that your pages reflect their nature right in the Panel.
-            ',
-            'cols' => 3
+            'text'    => 'Display pages the way that fits them best: articles, albums, blogs, events, products, docs etc.<br><br>Create individual layouts and add sections so that your pages reflect their nature right in the Panel.',
+            'cols'    => 3
           ]) ?>
-
 
           <?= snippet('features/text', [
             'cols' => 3,
             'heading' => 'Drag & Drop sorting',
-            'text' => '
-              Sorting pages or files is a breeze: Pick them up and drop them where you want them to be. It shouldn\'t be more complicated than that.
-            '
+            'text' => 'Sorting pages or files is a breeze: Pick them up and drop them where you want them to be. It shouldn\'t be more complicated than that.'
           ]) ?>
 
           <?= snippet('features/image', [
-            'cols' => 4,
-            'rows' => 4,
+            'cols'  => 4,
+            'rows'  => 4,
             'image' => $page->image('status.png'),
             'class' => 'center autosize',
+            'alt'   => 'A screenshot of Kirby\'s modal window to switch a page status from draft to public'
           ]) ?>
 
         <?= snippet('features/text', [
             'heading' => 'Drafts',
-            'text' => '
-              Prepare your content and only publish it when everything is in place with the click of a button. Send preview links to others so they can review your drafts before they go live.
-            ',
-            'rows' => 2
+            'text'    => 'Prepare your content and only publish it when everything is in place with the click of a button. Send preview links to others so they can review your drafts before they go live.',
+            'rows'    => 2
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Publishing workfows',
-            'rows' => 2,
-            'text' => 'Your pages can have three different states: draft, unlisted and listed. Those states can be customized to fit your publishing workflow.',
-            'link' => 'docs/guide/content/publishing-workflow',
+            'rows'    => 2,
+            'text'    => 'Your pages can have three different states: draft, unlisted and listed. Those states can be customized to fit your publishing workflow.',
+            'link'    => 'docs/guide/content/publishing-workflow',
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Custom layouts',
-            'rows' => 2,
-            'text' => 'You want more? Create your own plugins to display pages. Complex tables, gallery grids, maybe even a kanban board? Build your own pages section plugins and get creative.',
-            'link' => 'docs/reference/plugins/extensions/sections'
+            'rows'    => 2,
+            'text'    => 'You want more? Create your own plugins to display pages. Complex tables, gallery grids, maybe even a kanban board? Build your own pages section plugins and get creative.',
+            'link'    => 'docs/reference/plugins/extensions/sections'
           ]) ?>
 
           <?= snippet('features/image', [
-            'heading' => 'Layout',
-            'cols' => 4,
-            'rows' => 2,
-            'text' => '
-              Display pages the way that fits them best: articles, albums, blog posts, events, products, docs etc.
-            ',
-            'class' => 'stretch',
-            'image' => $page->image('pagetable.jpg'),
-            'link'  => 'https://github.com/sylvainjule/kirby-pagetable'
+            'cols'    => 4,
+            'rows'    => 2,
+            'class'   => 'stretch',
+            'image'   => $page->image('pagetable.jpg'),
+            'link'    => 'https://github.com/sylvainjule/kirby-pagetable',
+            'alt'     => 'A screenshot of the PageTable plugin by Sylvain Julé',
           ]) ?>
 
         </div>
@@ -172,6 +167,7 @@
             'rows'  => 4,
             'image' => page('home')->image('interface-5.jpg')->resize(1200),
             'class' => 'stretch',
+            'alt'   => 'An example of a more complex panel layout with multiple custom fields'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -217,6 +213,7 @@
             'class' => 'stretch',
             'image' => $page->image('editor.jpg'),
             'link'  => 'https://github.com/getkirby/editor',
+            'alt'   => 'A screenshot of Kirby\'s visual editor plugin'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -246,7 +243,8 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => page('home')->image('interface-3.jpg')->resize(1200),
+            'image' => page('home')->image('interface-4.jpg')->resize(1200),
+            'alt'   => 'An example of a photo gallery setup in the panel'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -254,10 +252,12 @@
             'text'    => 'Add galleries, covers, hero images, PDF downloads and more right on your page with files sections.',
             'link'    => 'docs/guide/content/files'
           ]) ?>
+
           <?= snippet('features/text', [
             'heading' => 'Drag & Drop uploads',
             'text'    => 'Editors can upload multiple new files at once with the intuitive drag & drop uploader.',
           ]) ?>
+
           <?= snippet('features/text', [
             'heading' => 'Quality assurance',
             'text'    => 'Add fine-grained upload validators and check for image dimensions, file types, file size and more to avoid unwanted uploads',
@@ -269,6 +269,7 @@
             'text'    => 'Add custom metadata to your files. Define different file types and customize the metadata fields for each type. An image might need a caption and some alternative text. A PDF catalogue download could have an additional pricing list. You can even use those fields for internal notes in your team.',
             'rows'    => 4,
             'link'    => 'docs/reference/panel/blueprints/file',
+            'alt'     => 'The file metadata editor in the panel'
           ]) ?>
 
           <?= snippet('features/image', [
@@ -321,6 +322,7 @@
             'heading' => 'Fast',
             'text'    => 'The file system is much faster than you might think. Most often even way faster than a database. Add SSD drives to your server and you have a system that can fly.'
           ]) ?>
+
           <?= snippet('features/text', [
             'heading' => 'Resilient',
             'text'    => 'Files and folders are probably the most future-proof way to store your data. Add version control via Git, simple backup options and syncing via tools like rsync.'
@@ -440,16 +442,18 @@
             'rows'    => 3,
             'heading' => 'Language management',
             'text'    => 'Create new languages right in the Panel and start translating your pages immediately. Start with a single language and move to multiple languages later, or go global immeditately—it\'s up to your project.',
-            'link'    => 'docs/guide/languages/introduction'
+            'link'    => 'docs/guide/languages/introduction',
+            'alt'     => 'Kirby\'s language manager in the panel'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Create & Translate',
-            'image' => $page->image('translations.jpg'),
-            'cols' => 3,
-            'rows' => 3,
-            'text' => 'Internationalization is built into the core of Kirby. Switch intuitively between different language versions and translate your content together with your team or on your own.',
-            'link' => 'docs/guide/languages/translating-content'
+            'image'   => $page->image('translations.jpg'),
+            'cols'    => 3,
+            'rows'    => 3,
+            'text'    => 'Internationalization is built into the core of Kirby. Switch intuitively between different language versions and translate your content together with your team or on your own.',
+            'link'    => 'docs/guide/languages/translating-content',
+            'alt'     => 'The translation switcher in the panel'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -457,10 +461,12 @@
             'text'    => 'You can customize the main URL for each language, including subdomains. Combine this with translatable paths for pages to make your visitors feel at home.',
             'link'    => 'docs/guide/languages/translating-urls',
           ]) ?>
+
           <?= snippet('features/text', [
             'heading' => 'Language detection',
             'text'    => 'Switch to automatic language detection and let Kirby figure out which language works best for your current visitor.'
           ]) ?>
+
           <?= snippet('features/text', [
             'heading' => 'Integrate',
             'text'    => 'Are you using a translation service like Memsource? Use the amazing Memsource plugin to import and export translations for your translators right from the Panel.',
@@ -486,10 +492,11 @@
           ]) ?>
 
           <?= snippet('features/image', [
-            'image'   => $page->image('users.jpg'),
-            'cols'    => 4,
-            'rows'    => 2,
-            'link'    => 'docs/guide/users/managing-users',
+            'image' => $page->image('users.jpg'),
+            'cols'  => 4,
+            'rows'  => 2,
+            'link'  => 'docs/guide/users/managing-users',
+            'alt'   => 'A screenshot of the user management in the panel'
           ]) ?>
 
           <?= snippet('features/code', [
@@ -520,7 +527,9 @@
             'rows'  => 3,
             'image' => $page->image('matomo.jpg'),
             'link'  => 'https://github.com/sylvainjule/kirby-matomo',
+            'alt'   => 'A screenshot of the Matomo section plugin by Sylvain Julé'
           ]) ?>
+
           <?= snippet('features/text', [
             'rows'    => 3,
             'heading' => 'Custom sections',
@@ -557,7 +566,8 @@
             'cols'  => 4,
             'rows'  => 3,
             'image' => $page->image('locator.jpg'),
-            'link'  => 'https://github.com/sylvainjule/kirby-locator'
+            'link'  => 'https://github.com/sylvainjule/kirby-locator',
+            'alt'   => 'A screenshot of the Locator field plugin by Sylvain Julé'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -584,6 +594,7 @@
             'class'  => 'center',
             'image'  => $page->image('retour.jpg'),
             'link'   => 'https://github.com/distantnative/retour-for-kirby',
+            'alt'    => 'A screenshot of the Retour view plugin by Nico Hoffmann'
           ]) ?>
 
           <?= snippet('features/text', [
