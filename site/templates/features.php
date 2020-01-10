@@ -8,7 +8,8 @@
 
       <section class="features-section">
         <?= snippet('features/header', [
-          'heading' => 'The Panel',
+          'heading'    => 'The Panel',
+          'id'         => 'panel',
           'subheading' => 'A headquarter that adapts to your needs'
         ]) ?>
 
@@ -24,7 +25,7 @@
             'heading' => 'Make it yours',
             'rows'  => 3,
             'text' => '
-              Kirby lets you create a control panel for yourself and your editors that is tailored to your site. Make the Panel reflect the unique structure of your content, use cases and users—not the other way around.
+              Kirby lets you create a control panel for yourself and your editors that is tailored to your site. Make the Panel reflect the unique structure of your content, use&nbsp;cases and users—not the other way around.
             '
           ]) ?>
 
@@ -79,7 +80,8 @@
 
       <section class="features-section">
         <?= snippet('features/header', [
-          'heading' => 'More than just pages',
+          'heading'    => 'More than just pages',
+          'id'         => 'pages',
           'subheading' => 'Articles, albums, events, products – you name it'
         ]) ?>
 
@@ -152,7 +154,8 @@
 
       <section class="features-section">
         <?= snippet('features/header', [
-          'heading' => 'Content management',
+          'heading'    => 'Content management',
+          'id'         => 'content',
           'subheading' => 'Structure your content like never before'
         ]) ?>
 
@@ -186,7 +189,8 @@
 
       <section class="features-section">
         <?= snippet('features/header', [
-          'heading' => 'Next level editing',
+          'heading'    => 'Next level editing',
+          'id'         => 'editor',
           'subheading' => 'Write with style, stay in style'
         ]) ?>
 
@@ -217,7 +221,8 @@
 
       <section class="features-section">
         <?= snippet('features/header', [
-          'heading' => 'Asset managament',
+          'heading'    => 'Asset managament',
+          'id'         => 'assets',
           'subheading' => 'Images, documents, videos, spreadsheets, etc.'
         ]) ?>
 
@@ -271,7 +276,8 @@
 
       <section class="features-section">
         <?= snippet('features/header', [
-          'heading' => 'At the core: Files & Folders',
+          'heading'    => 'At the core: Files & Folders',
+          'id'         => 'no-database',
           'subheading' => 'A rock solid, yet simple foundation'
         ]) ?>
 
@@ -303,7 +309,8 @@
 
       <section class="features-section">
         <?= snippet('features/header', [
-          'heading' => 'Templating',
+          'heading'    => 'Templating',
+          'id'         => 'templating',
           'subheading' => 'Stay in control of your markup. Keep your projects lean.'
         ]) ?>
 
@@ -355,7 +362,8 @@
 
       <section class="features-section">
         <?= snippet('features/header', [
-          'heading' => 'Go headless',
+          'heading'    => 'Go headless',
+          'id'         => 'api',
           'subheading' => 'Modern publishing possibilities at your fingertips'
         ]) ?>
 
@@ -386,7 +394,8 @@
 
       <section class="features-section">
         <?= snippet('features/header', [
-          'heading' => 'Go global',
+          'heading'    => 'Go global',
+          'id'         => 'languages',
           'subheading' => 'Built-in internationalization'
         ]) ?>
 
@@ -426,7 +435,8 @@
 
       <section class="features-section">
         <?= snippet('features/header', [
-          'heading' => 'User management',
+          'heading'    => 'User management',
+          'id'         => 'users',
           'subheading' => 'You are not alone in this'
         ]) ?>
 
@@ -458,7 +468,8 @@
 
       <section class="features-section">
         <?= snippet('features/header', [
-          'heading' => 'Plugins',
+          'heading'    => 'Plugins',
+          'id'         => 'plugins',
           'subheading' => 'Endless options for projects without roadblocks'
         ]) ?>
 
