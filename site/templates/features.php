@@ -127,7 +127,7 @@
           ]) ?>
 
           <?= snippet('features/text', [
-            'heading' => 'Publishing workfows',
+            'heading' => 'Publishing workflows',
             'rows'    => 2,
             'text'    => 'Your pages can have three different states: draft, unlisted and listed. Those states can be customized to fit your publishing workflow.',
             'link'    => 'docs/guide/content/publishing-workflow',
