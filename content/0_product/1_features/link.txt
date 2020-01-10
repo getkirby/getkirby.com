@@ -2,4 +2,4 @@ Title: Features
 
 ----
 
-Link: why
+Link: features

@@ -182,7 +182,7 @@ The following field types no longer exist and have to be replaced:
 Also remove or update custom field types, see (link: #plugins-and-extensions text: plugins and extensions)
 
 
-### Dashbord and widgets
+### Dashboard and widgets
 
 The Kirby 2 Dashboards no longer exists in Kirby 3. With the Dashboard, Panel widgets are gone. Widgets can be replaced with (link: docs/reference/plugins/extensions/sections text: custom Panel sections).
 
