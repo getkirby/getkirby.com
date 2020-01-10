@@ -19,7 +19,7 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => $page->image('interface-1.jpg'),
+            'image' => page('home')->image('interface-1.jpg'),
             'class' => 'fading',
           ]) ?>
 
@@ -71,7 +71,7 @@
           ]) ?>
           <?= snippet('features/image', [
             'cols'  => 4,
-            'image' => $page->image('search.png'),
+            'image' => $page->image('search.jpg'),
             'class' => 'fading stretch',
           ]) ?>
 
@@ -92,7 +92,7 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => $page->image('interface-2.jpg'),
+            'image' => page('home')->image('interface-2.jpg'),
             'class' => 'fading stretch',
           ]) ?>
 
@@ -149,7 +149,7 @@
               Display pages the way that fits them best: articles, albums, blog posts, events, products, docs etc.
             ',
             'class' => 'fading stretch',
-            'image' => $page->image('pagetable-2.png'),
+            'image' => $page->image('pagetable.jpg'),
           ]) ?>
 
         </div>
@@ -168,7 +168,7 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => $page->image('interface-5.jpg'),
+            'image' => page('home')->image('interface-5.jpg'),
             'class' => 'fading stretch',
           ]) ?>
 
@@ -211,7 +211,7 @@
             'cols'  => 4,
             'rows'  => 6,
             'class' => 'fading stretch',
-            'image' => $page->image('editor.png')
+            'image' => $page->image('editor.jpg')
           ]) ?>
 
           <?= snippet('features/text', [
@@ -239,7 +239,7 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => $page->image('interface-3.jpg'),
+            'image' => page('home')->image('interface-3.jpg'),
             'class' => 'fading',
           ]) ?>
 
@@ -265,7 +265,7 @@
           <?= snippet('features/image', [
             'cols'  => 4,
             'rows'  => 4,
-            'image' => $page->image('metadata.png'),
+            'image' => $page->image('metadata.jpg'),
             'class' => 'fading center stretch',
           ]) ?>
 
@@ -427,7 +427,7 @@
 
           <?= snippet('features/text', [
             'heading' => 'Create & Translate',
-            'image' => $page->image('translations.png'),
+            'image' => $page->image('translations.jpg'),
             'cols' => 3,
             'rows' => 3,
             'class' => 'fading',
@@ -465,7 +465,7 @@
           ]) ?>
 
           <?= snippet('features/image', [
-            'image'   => $page->image('users.png'),
+            'image'   => $page->image('users.jpg'),
             'cols'    => 4,
             'rows'    => 2,
             'class' => 'fading'
@@ -530,7 +530,7 @@
           <?= snippet('features/image', [
             'cols'  => 4,
             'rows'  => 3,
-            'image' => $page->image('locator.png'),
+            'image' => $page->image('locator.jpg'),
             'class' => 'fading'
           ]) ?>
 
@@ -551,7 +551,7 @@
             'cols'   => 4,
             'rows'   => 3,
             'class' => 'center',
-            'image'  => $page->image('retour.png')
+            'image'  => $page->image('retour.jpg')
           ]) ?>
           <?= snippet('features/text', [
             'rows'    => 3,
