@@ -64,7 +64,7 @@
           </div>
           <div class="column text">
             <p>
-              Mainz is the capital of Rhineland-Palatinate. Well known for its world-famous vineyards, beautiful landscapes and pittoresque villages, this area in Southern Germany is definitely worth a visit and an extended stay.
+              Mainz is the capital of Rhineland-Palatinate. Well known for its world-famous vineyards, beautiful landscapes and picturesque villages, this area in Southern Germany is definitely worth a visit and an extended stay.
             </p>
               Mainz is well connected via train, Autobahn and close to the Frankfurt Airport (FRA).
             </p>
