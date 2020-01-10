@@ -437,7 +437,7 @@
           ]) ?>
 
           <?= snippet('features/image', [
-            'image'   => $page->image('languages.png'),
+            'image'   => $page->image('users.png'),
             'cols'    => 4,
             'rows'    => 2,
             'class' => 'fading'
