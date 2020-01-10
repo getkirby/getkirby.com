@@ -291,7 +291,7 @@
 
           <?= snippet('features/text', [
             'heading' => 'Simple',
-            'text'    => 'Don\'t give up control over your data. Kirby stores your data in files and folders. Universally accessible in each operating system and editable with any text editor.'
+            'text'    => 'Stay in control over your data. Kirby stores your data in files and folders. Universally accessible in each operating system and editable with any text editor.'
           ]) ?>
 
           <?= snippet('features/text', [
