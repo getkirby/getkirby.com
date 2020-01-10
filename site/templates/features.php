@@ -19,7 +19,7 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => page('home')->image('interface-1.jpg'),
+            'image' => page('home')->image('interface-1.jpg')->resize(1200),
             'class' => 'fading',
           ]) ?>
 
@@ -92,7 +92,7 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => page('home')->image('interface-2.jpg'),
+            'image' => page('home')->image('interface-2.jpg')->resize(1200),
             'class' => 'fading stretch',
           ]) ?>
 
@@ -168,7 +168,7 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => page('home')->image('interface-5.jpg'),
+            'image' => page('home')->image('interface-5.jpg')->resize(1200),
             'class' => 'fading stretch',
           ]) ?>
 
@@ -239,7 +239,7 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => page('home')->image('interface-3.jpg'),
+            'image' => page('home')->image('interface-3.jpg')->resize(1200),
             'class' => 'fading',
           ]) ?>
 
