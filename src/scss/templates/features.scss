@@ -5,13 +5,12 @@ html {
 }
 
 .hero {
-  margin-bottom: 3rem;
-  border-bottom: 1px solid #313740;
+  margin-bottom: 0;
 }
 
 .features-section {
   color: $color-syntax-white;
-  margin-bottom: 6rem;
+  padding: 3rem 0;
 }
 .features-section-header {
   margin-bottom: 1.5rem;
@@ -65,17 +64,6 @@ html {
   padding-top: .5rem;
 }
 
-.features-grid > .fading:after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3rem;
-  z-index: 4;
-  width: 100%;
-  background: -webkit-linear-gradient(bottom, #313740, rgba(#313740, 0));
-}
 .features-grid img {
   border-radius: 2px;
   box-shadow: rgba(#000, .35) 0 5px 20px;

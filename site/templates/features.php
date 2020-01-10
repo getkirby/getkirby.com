@@ -3,10 +3,12 @@
   <main class="features-page | main" id="maincontent">
 
     <div class="wrap">
-
       <?php snippet('hero', ['align' => 'left', 'theme' => 'dark']) ?>
+    </div>
 
-      <section class="features-section">
+    <section class="features-section light">
+
+      <div class="wrap">
         <?= snippet('features/header', [
           'heading'    => 'The Panel',
           'id'         => 'panel',
@@ -73,12 +75,13 @@
             'class' => 'fading stretch',
           ]) ?>
 
-
-
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="features-section">
+    <section class="features-section">
+      <div class="wrap">
+
         <?= snippet('features/header', [
           'heading'    => 'More than just pages',
           'id'         => 'pages',
@@ -150,9 +153,11 @@
           ]) ?>
 
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="features-section">
+    <section class="features-section">
+      <div class="wrap">
         <?= snippet('features/header', [
           'heading'    => 'Content management',
           'id'         => 'content',
@@ -185,9 +190,11 @@
           ]) ?>
 
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="features-section">
+    <section class="features-section">
+      <div class="wrap">
         <?= snippet('features/header', [
           'heading'    => 'Next level editing',
           'id'         => 'editor',
@@ -217,9 +224,11 @@
             'text' => 'Add new block types to the editor and adjust it to your projects. You need a call to action button, a gallery or a table block? No problem! Our powerful block component API, based on Vue.js, is here for you.'
           ]) ?>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="features-section">
+    <section class="features-section">
+      <div class="wrap">
         <?= snippet('features/header', [
           'heading'    => 'Asset managament',
           'id'         => 'assets',
@@ -272,9 +281,11 @@
             'rows'    => 4,
           ]) ?>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="features-section">
+    <section class="features-section">
+      <div class="wrap">
         <?= snippet('features/header', [
           'heading'    => 'At the core: Files & Folders',
           'id'         => 'no-database',
@@ -304,10 +315,11 @@
           ]) ?>
 
         </div>
-      </section>
+      </div>
+    </section>
 
-
-      <section class="features-section">
+    <section class="features-section">
+      <div class="wrap">
         <?= snippet('features/header', [
           'heading'    => 'Templating',
           'id'         => 'templating',
@@ -358,9 +370,11 @@
           ]) ?>
 
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="features-section">
+    <section class="features-section">
+      <div class="wrap">
         <?= snippet('features/header', [
           'heading'    => 'Go headless',
           'id'         => 'api',
@@ -390,9 +404,11 @@
           ]) ?>
 
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="features-section">
+    <section class="features-section">
+      <div class="wrap">
         <?= snippet('features/header', [
           'heading'    => 'Go global',
           'id'         => 'languages',
@@ -431,9 +447,11 @@
             'text'    => 'Are you using a translation service like Memsource? Use the amazing Memsource plugin to import and export translations for your translators right from the Panel.'
           ]) ?>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="features-section">
+    <section class="features-section">
+      <div class="wrap">
         <?= snippet('features/header', [
           'heading'    => 'User management',
           'id'         => 'users',
@@ -464,9 +482,11 @@
             'text'    => 'Integrate user permissions in your site to create protected sections on your site. Or launch whole communities based on Kirby\'s user system.'
           ]) ?>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="features-section">
+    <section class="features-section">
+      <div class="wrap">
         <?= snippet('features/header', [
           'heading'    => 'Plugins',
           'id'         => 'plugins',
@@ -540,13 +560,14 @@
           ]) ?>
 
         </div>
-      </section>
-
-      <div class="intro | -theme:dark">
-         <?= kt('And so much more...
-Learn about everything in our (link: docs text: Guide)') ?>
       </div>
+    </section>
 
+    <div class="wrap">
+      <div class="intro | -theme:dark">
+          <?= kt('And so much more...
+  Learn about everything in our (link: docs text: Guide)') ?>
+      </div>
     </div>
 
   </main>
