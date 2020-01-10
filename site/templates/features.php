@@ -6,7 +6,7 @@
       <?php snippet('hero', ['align' => 'left', 'theme' => 'dark']) ?>
     </div>
 
-    <section class="features-section light">
+    <section class="features-section">
 
       <div class="wrap">
         <?= snippet('features/header', [
@@ -20,22 +20,21 @@
             'cols'  => 6,
             'rows'  => 4,
             'image' => page('home')->image('interface-1.jpg')->resize(1200),
-            'class' => 'fading',
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Make it yours',
             'rows'  => 3,
-            'text' => '
-              Kirby lets you create a control panel for yourself and your editors that is tailored to your site. Make the Panel reflect the unique structure of your content, use&nbsp;cases and users—not the other way around.
-            '
+            'text' => 'Kirby lets you create a control panel for yourself and your editors that is tailored to your site. Make the Panel reflect the unique structure of your content, use&nbsp;cases and users—not the other way around.',
+            'link' => 'docs/guide/blueprints/introduction'
           ]) ?>
 
           <?= snippet('features/image', [
             'cols'  => 4,
             'rows'  => 3,
             'image' => $page->image('blueprints.png'),
-            'class' => 'center fading',
+            'class' => 'center',
+            'link'  => 'docs/guide/blueprints/introduction'
           ]) ?>
 
 
@@ -56,11 +55,11 @@
             'cols'  => 4,
             'rows'  => 2,
             'code'  => $page->bp(),
-            'class' => 'fading'
           ]) ?>
           <?= snippet('features/text', [
             'heading' => 'Blueprints',
             'text'    => 'Configure the Panel interface with our unique blueprint system. Add sections, fields, tabs and create intuitive interface layouts right from your editor.',
+            'link'    => 'docs/guide/blueprints/introduction'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -72,7 +71,7 @@
           <?= snippet('features/image', [
             'cols'  => 4,
             'image' => $page->image('search.jpg'),
-            'class' => 'fading stretch',
+            'class' => 'stretch',
           ]) ?>
 
         </div>
@@ -93,7 +92,7 @@
             'cols'  => 6,
             'rows'  => 4,
             'image' => page('home')->image('interface-2.jpg')->resize(1200),
-            'class' => 'fading stretch',
+            'class' => 'stretch',
           ]) ?>
 
 
@@ -132,13 +131,15 @@
           <?= snippet('features/text', [
             'heading' => 'Publishing workfows',
             'rows' => 2,
-            'text' => 'Your pages can have three different states: draft, unlisted and listed. Those states can be customized to fit your publishing workflow.'
+            'text' => 'Your pages can have three different states: draft, unlisted and listed. Those states can be customized to fit your publishing workflow.',
+            'link' => 'docs/guide/content/publishing-workflow',
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Custom layouts',
             'rows' => 2,
-            'text' => 'You want more? Create your own plugins to display pages. Complex tables, gallery grids, maybe even a kanban board? Build your own pages section plugins and get creative.'
+            'text' => 'You want more? Create your own plugins to display pages. Complex tables, gallery grids, maybe even a kanban board? Build your own pages section plugins and get creative.',
+            'link' => 'docs/reference/plugins/extensions/sections'
           ]) ?>
 
           <?= snippet('features/image', [
@@ -148,8 +149,9 @@
             'text' => '
               Display pages the way that fits them best: articles, albums, blog posts, events, products, docs etc.
             ',
-            'class' => 'fading stretch',
+            'class' => 'stretch',
             'image' => $page->image('pagetable.jpg'),
+            'link'  => 'https://github.com/sylvainjule/kirby-pagetable'
           ]) ?>
 
         </div>
@@ -169,24 +171,25 @@
             'cols'  => 6,
             'rows'  => 4,
             'image' => page('home')->image('interface-5.jpg')->resize(1200),
-            'class' => 'fading stretch',
+            'class' => 'stretch',
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Custom Fields',
             'text'    => 'Kirby comes with a wide variety of fields that help you build intuitive forms for your content editors and  find the right input type for your data.',
+            'link'    => 'docs/reference/panel/fields'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Auto-saving',
             'text'    => 'Don\'t worry about unsaved changes. The Panel stores them for you automatically—even when you go offline—and you can save them later.',
+            'link'    => 'docs/guide/content/publishing-workflow#unsaved-changes',
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Content-locking',
-            'text'    => '
-              Collaborate with peace of mind: Kirby\'s advanced content locking features make sure that unsaved changes are never overwritten by your team mates.
-            ',
+            'text'    => 'Collaborate with peace of mind: Kirby\'s advanced content locking features make sure that unsaved changes are never overwritten by your team mates.',
+            'link'    => 'docs/guide/content/publishing-workflow#content-locking',
           ]) ?>
 
         </div>
@@ -204,24 +207,28 @@
         <div class="features-grid">
           <?= snippet('features/text', [
             'heading' => 'Writing',
-            'text' => 'Content editors love the flexibility and intuitive features of our new editor. Write without distraction and add formatting you can trust. The result will be clean, accessible and polished for the web.'
+            'text'    => 'Content editors love the flexibility and intuitive features of our new editor. Write without distraction and add formatting you can trust. The result will be clean, accessible and polished for the web.',
+            'link'    => 'https://github.com/getkirby/editor',
           ]) ?>
 
           <?= snippet('features/image', [
             'cols'  => 4,
             'rows'  => 6,
-            'class' => 'fading stretch',
-            'image' => $page->image('editor.jpg')
+            'class' => 'stretch',
+            'image' => $page->image('editor.jpg'),
+            'link'  => 'https://github.com/getkirby/editor',
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Full control',
-            'text' => 'As a developer, you decide how each individual block type of the editor is rendered. You control the markup and the design. Nothing happens by accident and all content stays structured.'
+            'text'    => 'As a developer, you decide how each individual block type of the editor is rendered. You control the markup and the design. Nothing happens by accident and all content stays structured.',
+            'link'    => 'https://github.com/getkirby/editor/wiki/Block-snippets'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Extensible',
-            'text' => 'Add new block types to the editor and adjust it to your projects. You need a call to action button, a gallery or a table block? No problem! Our powerful block component API, based on Vue.js, is here for you.'
+            'text'    => 'Add new block types to the editor. You need a call to action button, a gallery or a table block? No problem! Our powerful block component API, based on Vue.js, is here for you.',
+            'link'    => 'https://github.com/getkirby/editor/wiki/Block-extensions'
           ]) ?>
         </div>
       </div>
@@ -240,12 +247,12 @@
             'cols'  => 6,
             'rows'  => 4,
             'image' => page('home')->image('interface-3.jpg')->resize(1200),
-            'class' => 'fading',
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Your files',
             'text'    => 'Add galleries, covers, hero images, PDF downloads and more right on your page with files sections.',
+            'link'    => 'docs/guide/content/files'
           ]) ?>
           <?= snippet('features/text', [
             'heading' => 'Drag & Drop uploads',
@@ -254,19 +261,22 @@
           <?= snippet('features/text', [
             'heading' => 'Quality assurance',
             'text'    => 'Add fine-grained upload validators and check for image dimensions, file types, file size and more to avoid unwanted uploads',
+            'link'    => 'docs/reference/panel/blueprints/file#accept',
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Metadata',
             'text'    => 'Add custom metadata to your files. Define different file types and customize the metadata fields for each type. An image might need a caption and some alternative text. A PDF catalogue download could have an additional pricing list. You can even use those fields for internal notes in your team.',
-            'rows'    => 4
+            'rows'    => 4,
+            'link'    => 'docs/reference/panel/blueprints/file',
           ]) ?>
 
           <?= snippet('features/image', [
             'cols'  => 4,
             'rows'  => 4,
             'image' => $page->image('metadata.jpg'),
-            'class' => 'fading center stretch',
+            'class' => 'center stretch',
+            'link'  => 'docs/reference/panel/blueprints/file',
           ]) ?>
 
           <?= snippet('features/code', [
@@ -279,6 +289,7 @@
             'heading' => 'Media API',
             'text'    => 'Kirby comes with a asychronous media modification API. Resize, crop and convert your images right on the fly in your templates. Start prototyping with different image formats in the browser. Make sure that every visitor gets the perfect file size',
             'rows'    => 4,
+            'link'    => 'docs/guide/templates/resize-images-on-the-fly',
           ]) ?>
         </div>
       </div>
@@ -302,7 +313,8 @@
 
           <?= snippet('features/text', [
             'heading' => 'Simple',
-            'text'    => 'Stay in control over your data. Kirby stores your data in files and folders. Universally accessible in each operating system and editable with any text editor.'
+            'text'    => 'Stay in control over your data. Kirby stores your data in files and folders. Universally accessible in each operating system and editable with any text editor.',
+            'link'    => 'docs/guide/content/introduction'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -331,9 +343,8 @@
           <?= snippet('features/text', [
             'rows'    => 4,
             'heading' => 'Templates',
-            'text'    => '
-              Kirby comes with a powerful PHP-based template engine. Optimized for speed and equipped with an ultra flexible and intuitive PHP API, you can build your perfect frontend the way you like.
-            '
+            'text'    => 'Kirby comes with a powerful PHP-based template engine. Optimized for speed and equipped with an ultra flexible and intuitive PHP API, you can build your perfect frontend the way you like.',
+            'link'    => 'docs/guide/templates/basics'
           ]) ?>
 
           <?= snippet('features/code', [
@@ -344,17 +355,20 @@
 
           <?= snippet('features/text', [
             'heading' => 'Controllers',
-            'text'    => 'Too much logic for your templates? Use Kirby\'s template controllers to handle complex data collections, form handling, URL query-based filters and more without cluttering your templates. Marie Kondo agrees.'
+            'text'    => 'Too much logic for your templates? Use Kirby\'s controllers to handle complex data collections, form handling, URL query-based filters and more without cluttering your templates. Marie Kondo agrees.',
+            'link'    => 'docs/guide/templates/controllers'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Models',
-            'text' => 'Super-charge your pages with additional functionalities. Page models extend our default page class and offer unlimited opportunities to customize what a page represents.'
+            'text'    => 'Super-charge your pages with additional functionalities. Page models extend our default page class and offer unlimited opportunities to customize what a page represents.',
+            'link'    => 'docs/guide/templates/page-models'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Collections',
-            'text' => 'Keep your code DRY with collections. Featured articles, upcoming events, team members – create reusable collections and use them in your templates or plugins.'
+            'text'    => 'Keep your code DRY with collections. Featured articles, upcoming events, team members – create reusable collections and use them in your templates or plugins.',
+            'link'    => 'docs/guide/templates/collections'
           ]) ?>
 
           <?= snippet('features/code', [
@@ -366,7 +380,8 @@
           <?= snippet('features/text', [
             'rows'    => 4,
             'heading' => 'Bring your own engine',
-            'text'    => 'Your team is familiar with Twig, Blade or your own template engine? No problem! Our engine can be swapped out with an existing plugin or you can even create your own.'
+            'text'    => 'Your team is familiar with Twig, Blade or your own template engine? No problem! Our engine can be swapped out with an existing plugin or you can even create your own.',
+            'link'    => 'docs/reference/plugins/components/template'
           ]) ?>
 
         </div>
@@ -384,7 +399,8 @@
         <div class="features-grid">
           <?= snippet('features/text', [
             'heading' => 'REST-ful by nature',
-            'text' => 'Use Kirby like a classic CMS or convert it into a powerful, headless content container. Connect it to mobile applications, static site generators or your custom frontend.'
+            'text'    => 'Use Kirby like a classic CMS or convert it into a powerful, headless content container. Connect it to mobile applications, static site generators or your custom frontend.',
+            'link'    => 'docs/guide/api/introduction'
           ]) ?>
 
           <?= snippet('features/code', [
@@ -395,12 +411,14 @@
 
           <?= snippet('features/text', [
             'heading' => 'Extensible',
-            'text'    => 'Define your own API endpoints and object. Integrate external data from databases, files or other APIs with data from Kirby into one seamless data-source.'
+            'text'    => 'Define your own API endpoints and object. Integrate external data from databases, files or other APIs with data from Kirby into one seamless data-source.',
+            'link'    => 'docs/reference/plugins/extensions/api'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Secure',
-            'text'    => 'Use our built-in authentication methods to connect securely from the same server or a remote application.'
+            'text'    => 'Use our built-in authentication methods to connect securely from the same server or a remote application.',
+            'link'    => 'docs/guide/api/authentication'
           ]) ?>
 
         </div>
@@ -420,9 +438,9 @@
             'image'   => $page->image('languages.png'),
             'cols'    => 3,
             'rows'    => 3,
-            'class' => 'fading',
             'heading' => 'Language management',
-            'text'    => 'Create new languages right in the Panel and start translating your pages immediately. Start with a single language and move to multiple languages later, or go global immeditately—it\'s up to your project.'
+            'text'    => 'Create new languages right in the Panel and start translating your pages immediately. Start with a single language and move to multiple languages later, or go global immeditately—it\'s up to your project.',
+            'link'    => 'docs/guide/languages/introduction'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -430,13 +448,14 @@
             'image' => $page->image('translations.jpg'),
             'cols' => 3,
             'rows' => 3,
-            'class' => 'fading',
-            'text' => 'Internationalization is built into the core of Kirby. Switch intuitively between different language versions and translate your content together with your team or on your own.'
+            'text' => 'Internationalization is built into the core of Kirby. Switch intuitively between different language versions and translate your content together with your team or on your own.',
+            'link' => 'docs/guide/languages/translating-content'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Translatable URLs',
-            'text'    => 'You can customize the main URL for each language, including subdomains. Combine this with translatable paths for pages to make your visitors feel at home.'
+            'text'    => 'You can customize the main URL for each language, including subdomains. Combine this with translatable paths for pages to make your visitors feel at home.',
+            'link'    => 'docs/guide/languages/translating-urls',
           ]) ?>
           <?= snippet('features/text', [
             'heading' => 'Language detection',
@@ -444,7 +463,8 @@
           ]) ?>
           <?= snippet('features/text', [
             'heading' => 'Integrate',
-            'text'    => 'Are you using a translation service like Memsource? Use the amazing Memsource plugin to import and export translations for your translators right from the Panel.'
+            'text'    => 'Are you using a translation service like Memsource? Use the amazing Memsource plugin to import and export translations for your translators right from the Panel.',
+            'link'    => 'https://github.com/OblikStudio/kirby-memsource'
           ]) ?>
         </div>
       </div>
@@ -461,14 +481,15 @@
         <div class="features-grid">
           <?= snippet('features/text', [
             'heading' => 'From the backend...',
-            'text'    => 'The Panel offers you an easy way to manage your users and set up rights based on different roles. Create different user types and store metadata to your users.'
+            'text'    => 'The Panel offers you an easy way to manage your users and set up rights based on different roles. Create different user types and store metadata to your users.',
+            'link'    => 'docs/guide/users/managing-users',
           ]) ?>
 
           <?= snippet('features/image', [
             'image'   => $page->image('users.jpg'),
             'cols'    => 4,
             'rows'    => 2,
-            'class' => 'fading'
+            'link'    => 'docs/guide/users/managing-users',
           ]) ?>
 
           <?= snippet('features/code', [
@@ -495,68 +516,81 @@
 
         <div class="features-grid">
           <?= snippet('features/image', [
-            'cols' => 4,
-            'rows' => 3,
+            'cols'  => 4,
+            'rows'  => 3,
             'image' => $page->image('matomo.jpg'),
-            'class' => 'fading'
+            'link'  => 'https://github.com/sylvainjule/kirby-matomo',
           ]) ?>
           <?= snippet('features/text', [
             'rows'    => 3,
             'heading' => 'Custom sections',
-            'text'    => 'Add entirely new interface elements to the panel with custom sections. Integrate data from analytics tools, your ERM system, third-pary services and more and use them seamlessly alongside your  content.'
+            'text'    => 'Add entirely new interface elements to the panel with custom sections. Integrate data from analytics tools, your ERM system, third-pary services and more and use them seamlessly alongside your content. Use the power of Vue.js to create truly interactive plugins.',
+            'link'    => 'https://getkirby.com/docs/reference/plugins/extensions/sections'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Routes',
-            'text'    => 'Routing has never been easier: Kirby comes with a powerful router that can be extended to adjust the URL scheme, handle form submissions, add webhook endpoints, or create virtual pages.'
+            'text'    => 'Routing has never been easier: Kirby comes with a powerful router that can be extended to adjust the URL scheme, handle form submissions, add webhook endpoints, or create virtual pages.',
+            'link'    => 'docs/guide/routing'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Hooks',
-            'text'    => 'React to specific events with hooks and trigger your own actions. Resize a file on upload, add data to a newly created page, add custom content validations and more.'
+            'text'    => 'React to specific events with hooks and trigger your own actions. Resize a file on upload, add data to a newly created page, add custom content validations and more.',
+            'link'    => 'docs/reference/plugins/extensions/hooks'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Field methods',
-            'text'    => 'Register additional methods to work with content fields. Transform content directly in your templates and clean up your template code along the way.'
+            'text'    => 'Register additional methods to work with content fields. Transform content directly in your templates and clean up your template code along the way.',
+            'link'    => 'docs/reference/plugins/extensions/field-methods'
           ]) ?>
 
           <?= snippet('features/text', [
             'rows'    => 3,
             'heading' => 'Custom fields',
-            'text'    => 'Extend your forms with your own fields or use plugins from other developers. Editing data on steroids: locations, colors, annotations etc. '
+            'text'    => 'Extend your forms with your own fields or use plugins from other developers. Editing data on steroids: locations, colors, annotations etc.',
+            'link'    => 'docs/reference/plugins/extensions/fields'
           ]) ?>
 
           <?= snippet('features/image', [
             'cols'  => 4,
             'rows'  => 3,
             'image' => $page->image('locator.jpg'),
-            'class' => 'fading'
+            'link'  => 'https://github.com/sylvainjule/kirby-locator'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Core components',
-            'text'    => 'You don\'t like our template engine, markdown parser or media API? Simply swap out major parts of the Kirby system with your own plugins.'
+            'text'    => 'You don\'t like our template engine, markdown parser or media API? Simply swap out major parts of the Kirby system with your own plugins.',
+            'link'    => 'docs/reference/plugins/extensions/core-components'
           ]) ?>
+
           <?= snippet('features/text', [
             'heading' => 'KirbyTags',
-            'text'    => 'When Markdown isn\'t enough, add your own KirbyTags to simplify plain text formatting and to inject complex custom components into long-form text.'
+            'text'    => 'When Markdown isn\'t enough, add your own KirbyTags to simplify plain text formatting and to inject complex custom components into long-form text.',
+            'link'    => 'docs/reference/plugins/extensions/kirbytags'
           ]) ?>
+
           <?= snippet('features/text', [
             'heading' => 'Caching',
-            'text'    => 'Kirby comes with mighty caching on board. Not fitting for your project? Add your cache driver of choice and reduce page loads in the blink of an eye.'
+            'text'    => 'Kirby comes with mighty caching on board. Not fitting for your project? Add your cache driver of choice and reduce page loads in the blink of an eye.',
+            'link'    => 'docs/guide/cache'
           ]) ?>
 
           <?= snippet('features/image', [
             'cols'   => 4,
             'rows'   => 3,
-            'class' => 'center',
-            'image'  => $page->image('retour.jpg')
+            'class'  => 'center',
+            'image'  => $page->image('retour.jpg'),
+            'link'   => 'https://github.com/distantnative/retour-for-kirby',
           ]) ?>
+
           <?= snippet('features/text', [
             'rows'    => 3,
             'heading' => 'Custom views',
-            'text'    => 'Add whole new views and menu items to super-charge the Panel as an admin framework for your own integrated applications.'
+            'text'    => 'Add whole new views and menu items. Use Vue.js to super-charge the Panel as an admin framework for your own integrated applications.',
+            'link'    => 'docs/reference/plugins/extensions/panel-views'
           ]) ?>
 
         </div>

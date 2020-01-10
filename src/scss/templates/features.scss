@@ -83,6 +83,13 @@ html {
   padding: 1.5rem;
   line-height: 0;
 }
+.features-text p:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+.features-link {
+  text-decoration: underline;
+}
 
 .features-image figure {
   position: relative;

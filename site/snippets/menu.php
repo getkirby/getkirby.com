@@ -13,7 +13,7 @@
     <ul class="menu-items menu-main">
       <?php foreach ($pages->listed() as $item): ?>
       <li class="menu-item<?= r($hasSubmenu = $item->submenu()->isTrue(), ' has-dropdown') ?>">
-        <a href="<?= $item->url() ?>"<?= r($item->isOpen(), ' aria-current="' . r($item->isActive(), 'page', 'true') . '"') ?>>
+        <a href="<?= $item->intendedTemplate() == 'link' ? $item->link()->toUrl() : $item->url() ?>"<?= r($item->isOpen(), ' aria-current="' . r($item->isActive(), 'page', 'true') . '"') ?>>
           <?= $item->menuTitle()->or($item->title()) ?>
         </a>
 
@@ -21,7 +21,7 @@
         <ul class="menu-dropdown">
           <?php foreach ($item->children()->listed() as $subitem): ?>
           <li>
-            <a href="<?= $subitem->intendedTemplate() == 'link' ? $subitem->link() : $subitem->url() ?>"<?= r($subitem->isActive(), ' aria-current="page"') ?>>
+            <a href="<?= $subitem->intendedTemplate() == 'link' ? $subitem->link()->toUrl() : $subitem->url() ?>"<?= r($subitem->isActive(), ' aria-current="page"') ?>>
               <?= $subitem->menuTitle()->or($subitem->title()) ?>
             </a>
           </li>
