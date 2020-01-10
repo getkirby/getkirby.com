@@ -31,19 +31,22 @@
           <?= snippet('features/image', [
             'cols'  => 4,
             'rows'  => 3,
-            'image' => $page->image('tabs.png'),
+            'image' => $page->image('blueprints.png'),
             'class' => 'center fading',
           ]) ?>
 
 
           <?= snippet('features/text', [
-            'heading' => 'User friendly',
+            'heading' => 'User-friendly',
+            'text' => 'The Panel is optimized to make editors more happy and productive. There\'s no need for long training sessions and on-boarding new editors is a breeze.'
           ]) ?>
           <?= snippet('features/text', [
             'heading' => 'Secure',
+            'text' => 'Extensive permissions, brute-force login protection and state of the art session management keeps your panel protected. Customize the panel URL or even switch it off on your production server for even less attack vectors.'
           ]) ?>
           <?= snippet('features/text', [
-            'heading' => 'Mobile',
+            'heading' => 'Mobile-ready',
+            'text' => 'You want to edit your site on the go? The panel works nicely on mobile browsers in iOS and Android.'
           ]) ?>
 
           <?= snippet('features/code', [
@@ -232,11 +235,11 @@
           ]) ?>
           <?= snippet('features/text', [
             'heading' => 'Drag & Drop uploads',
-            'text'    => null,
+            'text'    => 'Editors can upload multiple new files at once with the intuitive drag & drop uploader.',
           ]) ?>
           <?= snippet('features/text', [
             'heading' => 'Quality assurance',
-            'text'    => null,
+            'text'    => 'Add fine-grained upload validators and check for image dimensions, file types, file size and more to avoid unwanted uploads',
           ]) ?>
 
           <?= snippet('features/text', [

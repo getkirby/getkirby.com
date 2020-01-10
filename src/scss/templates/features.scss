@@ -25,27 +25,34 @@ html {
   font-size: .875rem;
 }
 
-.features-grid {
-  --gutter: 2px;
-
-  display: grid;
-  grid-gap: var(--gutter);
-  grid-template-columns: repeat(6, 1fr);
-  grid-auto-rows: calc((900px - (5 * var(--gutter))) / 6);
-}
 .features-grid > * {
-  --rows: 2;
-  --cols: 2;
   position: relative;
   background: #313740;
-  grid-column: span var(--cols);
-  grid-row: span var(--rows);
   color: $color-syntax-white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
+  margin-bottom: 2px;
 }
+
+@media screen and (min-width: 890px) {
+  .features-grid {
+    --gutter: 2px;
+    display: grid;
+    grid-gap: var(--gutter);
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: calc((900px - (5 * var(--gutter))) / 6);
+  }
+  .features-grid > * {
+    --rows: 2;
+    --cols: 2;
+    grid-column: span var(--cols);
+    grid-row: span var(--rows);
+    margin-bottom: 0;
+  }
+}
+
 .features-grid .h3,
 .features-grid .h6 {
   color: $color-white;
