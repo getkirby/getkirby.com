@@ -533,7 +533,7 @@
           <?= snippet('features/text', [
             'rows'    => 3,
             'heading' => 'Custom sections',
-            'text'    => 'Add entirely new interface elements to the Panel with custom sections. Integrate data from analytics tools, your ERM system, third-pary services and more and use them seamlessly alongside your content. Use the power of Vue.js to create truly interactive plugins.',
+            'text'    => 'Add entirely new interface elements to the Panel with custom sections. Integrate data from analytics tools, your ERM system, third-party services and more and use them seamlessly alongside your content. Use the power of Vue.js to create truly interactive plugins.',
             'link'    => 'https://getkirby.com/docs/reference/plugins/extensions/sections'
           ]) ?>
 
