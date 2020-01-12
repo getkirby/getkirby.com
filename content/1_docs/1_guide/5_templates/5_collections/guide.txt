@@ -13,6 +13,7 @@ Text:
 ### A list of pages
 
 ```php "/site/collections/articles.php"
+<?php
 
 return function ($site) {
 	return $site->find('blog')->children()->listed()->flip();
@@ -24,6 +25,7 @@ return function ($site) {
 ### A list of users
 
 ```php "/site/collections/admins.php"
+<?php
 
 return function ($users) {
 	return $users->filterBy('role', 'admin');
@@ -35,6 +37,7 @@ return function ($users) {
 ### A list of images/files
 
 ```php "/site/collections/project-covers.php"
+<?php
 
 return function ($site) {
 	return $site
@@ -63,6 +66,8 @@ $kirby->collection("project-covers");
 If you have a lot of collections, it might come handy to organize them in subfolders. Kirby can handle this:
 
 ```php "/site/collections/articles/latest.php"
+<?php
+
 return function ($site) {
 	return $site->find('blog')->children()->listed()->flip();
 };
