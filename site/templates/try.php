@@ -10,13 +10,19 @@
         </div>
       </header>
 
-      <p class="-align:center -mb:huge">
-        <?php snippet('cta', [
-          'link' => 'https://download.getkirby.com',
-          'text' => 'Download',
-          'icon' => 'download',
-        ]) ?>
-      </p>
+
+      <div class="downloads -mb:huge -align:center">
+        <?php foreach ($page->downloads()->toStructure() as $download) : ?>
+        <p>
+          <?php snippet('cta', [
+            'link' => $download->link(),
+            'text' => $download->text(),
+            'icon' => 'download',
+          ]) ?>
+          <?= $download->description() ?>
+        </p>
+        <?php endforeach ?>
+      </div>
 
       <figure class="starterkit">
         <a href="https://download.getkirby.com" class="intrinsic" style="padding-bottom: 164.5%">

@@ -10,7 +10,7 @@ Priority: 0.9
 
 ----
 
-Intro: Kirby's license model is based on a single idea:<br> We want you to be happy before you buy it!
+Intro: Kirby's license model is based on a single idea:<br> We want you to be happy before you buy it!<br> (link: docs/guide/quickstart text: Get up and running.)
 
 ----
 
@@ -18,3 +18,15 @@ Text:
 
 Try Kirby on your **local machine** or on a **private test server**. Once you are sure that Kirby fits your project, (link: buy text: **buy a license**) and publish your site.
 
+
+----
+
+Downloads:
+-
+    text: Starterkit
+    link: https://download.getkirby.com
+    description: For new users<br>who want to learn.
+-
+    text: Plainkit
+    link: https://github.com/getkirby/plainkit/archive/master.zip
+    description: For those who want<br>to start from scratch.
