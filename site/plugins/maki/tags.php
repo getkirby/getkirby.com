@@ -115,6 +115,21 @@ return [
         }
     ],
 
+    // CTA
+    'cta' => [
+        'attr' => [
+            'text',
+            'icon'
+        ],
+        'html' => function ($tag) {
+            return snippet('cta', [
+                'link'  => $tag->value,
+                'text'  => $tag->text,
+                'icon'  => $tag->icon
+            ], true);
+        }
+    ],
+
     // CHEATSHEET SECTION IMPORT
     'reference' => [
         'html' => function ($tag) {

@@ -12,3 +12,17 @@
   margin: 0 auto 1.5rem;
   max-width: 30rem;
 }
+
+.try-page .downloads {
+  display: flex;
+  justify-content: center;
+
+  > p:not(:last-child) {
+    margin-right: 5rem;
+  }
+
+  a {
+    display: block;
+    margin-bottom: 1rem;
+  }
+}
