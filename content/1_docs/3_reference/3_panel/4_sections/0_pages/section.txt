@@ -40,9 +40,10 @@ sections:
     templates: article
 ```
 
-<since v="3.3.0">
+
 ## Section shortcuts
 
+<since v="3.3.0">
 For simple sections that are only used once per blueprint, you can use shortcuts. In its most basic form, a `pages` section consists of the section type as name, and  `true` as its value.
 
 ```yaml
@@ -57,16 +58,17 @@ These shortcuts can be extended with other section properties as needed, for exa
 ```yaml
 sections:
 
-  pages: 
+  pages:
     headline: Main Pages
     status: all
 ```
 Keep in mind that the same section name can only be used once per blueprint.
 </since>
 
-The pages section has multiple options to control what kind of pages should be displayed, how they should be displayed and what happens if a new page is added.
 
 ## Section properties
+
+The pages section has multiple options to control what kind of pages should be displayed, how they should be displayed and what happens if a new page is added.
 
 (section-options: pages)
 
@@ -172,7 +174,7 @@ class AlbumPage extends Page
             return new Asset("assets/images/default.jpg");
         }
         return false;
-        
+
     }
 }
 ```
@@ -338,6 +340,10 @@ sortBy: date desc title asc
 sortBy: status desc year desc
 ```
 
+<info>
+The `sortBy` option will automatically switch off manual sorting.
+</info>
+
 <since v="3.2.3">
 You can pass (link: https://www.php.net/manual/en/function.sort.php text: PHP sorting type flags), for example to make sorting work with special language specific characters.
 
@@ -346,10 +352,6 @@ sortBy: title SORT_LOCALE_STRING
 sortBy: title asc SORT_LOCALE_STRING
 ```
 </since>
-
-<info>
-The `sortBy` option will automatically switch off manual sorting.
-</info>
 
 ### `flip`
 

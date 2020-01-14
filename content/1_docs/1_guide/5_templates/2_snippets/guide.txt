@@ -158,7 +158,7 @@ This is useful if you want to provide fallbacks for a snippet based on page inpu
 
 </since>
 
-Let's look at a real life example like a list of blog articles.
+## Real life example: list of blog articles
 
 **The template**
 
