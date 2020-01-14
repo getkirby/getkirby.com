@@ -3,7 +3,7 @@
   color: $color-syntax-white;
   display: block;
   margin-bottom: 1.5rem;
-  padding: .5em .75em;
+  padding: .75em;
 }
 
 .kosmos-issue .h3 {
@@ -18,6 +18,22 @@
 
 .kosmos-issue:hover .h3 {
   color: $color-yellow !important;
+}
+
+.kosmos-issue figure {
+  padding-bottom: 66.66%;
+  position: relative;
+  background: darken($color-anthracite, 15%);
+  margin-bottom: .75rem;
+}
+.kosmos-issue figure img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .kosmos-issue-excerpt {
