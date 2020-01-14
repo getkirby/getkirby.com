@@ -179,43 +179,55 @@ If you want to upgrade an existing Kirby 2 installation, head over to our (link:
 
 ## Where to go from here
 
-### A tour around the house
-Now that you have successfully installed Kirby on your server, it's time to explore your new Kirby installation. So get yourself a cup of coffee or tea (or whatever else you like most) and head over to the sections that interest you most or go on a tour to explore the Starterkit with us.
+(columns…)
 
-(link: docs/guide/tour text: Explore the Starterkit ›)
+### (link: docs/guide/tour text: A tour around the house)
+You have successfully installed Kirby on your server, it's time to explore your new CMS. Get yourself a cup of tea (or whatever else you like most) and go on (link: docs/guide/tour text: a tour to explore the Starterkit) with us.
+
+++++
+
+### (link: docs/cookbook/setup/kirby-in-a-nutshell text: Kirby in a nutshell)
+Let's give you (link: docs/cookbook/setup/kirby-in-a-nutshell text: a concise overview) of how Kirby works and what to keep in mind when you start your project. It's all about what you wish you had known when you started your first Kirby project.
+
+(…columns)
+
+(columns…)
 
 ### (link: docs/guide text: Guide)
 
-Our guide introduces you to every aspect of Kirby. From your first (glossary: template text: template) to complex extensions. It should always be the starting point for your research.
+Our guide introduces you to every aspect of Kirby. From your first (glossary: template text: template) to complex extensions. It should always be the (link: docs/guide text: starting point for your research).
 
-(link: docs/guide text: Read the Guide ›)
+++++
 
 ### (link: docs/reference text: Reference)
 
-Once you have familiarized yourself with the basics, the Reference is probably the number one resource you will keep getting back to. It's a reference of every method, option, helper, tag, root, url and more.
+Once you have familiarized yourself with the basics, the (link: docs/reference text: Reference) is the number one resource you will keep getting back to. It's a collection of every method, option, helper, tag, root, url and more.
 
-(link: docs/reference text: Check out the Reference ›)
+(…columns)
 
-### (link: docs/cookbook/setup/kirby-in-a-nutshell text: Kirby in a nutshell)
-
-Our "Kirby in a nutshell" recipe gives you a concise overview of how Kirby works, what to keep in mind when you start your project with Kirby, what questions you might want to ask yourself and about possible approaches, no matter if you are completely new to web development, or if you come from other systems.
-
-(link: docs/cookbook/setup/kirby-in-a-nutshell text: Read more ›)
+(columns…)
 
 ### (link: docs/cookbook text: Cookbook)
 
-While our docs provide a deep dive into every feature and aspect of Kirby, our Cookbook is a collection of all sorts of solutions you can build with Kirby. Starting from simple things like menus to frontend authentication, headless CMS setups and more.
+The (link: docs/cookbook text: Cookbook) is a hand-picked collection of solutions you can build with Kirby, explainign how to build them step by step. Starting from simple things like menus to frontend authentication, headless CMS setups and more.
 
-(link: docs/cookbook text: Find recipes in the Cookbook ›)
+++++
 
-### Troubleshooting
+### (link: plugins text: Plugins)
+Our plugin developers created dozens of fantastic plugins for Kirby. Check out  our (link: plugins text: official plugin repository) before creating your own solution for common features.
 
-If you encounter any problems, make sure to check our guide on some common pitfalls and how to solve them.
+(…columns)
 
-(link: docs/guide/troubleshooting text: Go Troubleshooting ›)
+(columns…)
+
+### (link: docs/guide/troubleshooting text: Troubleshooting)
+
+If you encounter any problems, make sure to check our (link: docs/guide/troubleshooting text: guide on some common pitfalls) and how to solve them.
+
+++++
 
 ### (link: https://forum.getkirby.com/ text: Forum)
 
-The community in the [Kirby Forum](https://forum.getkirby.com/) is always there to help out whenever you get stuck. It's likely that someone already had the same problem, so using the search function might uncover a solution to your problem within seconds. If you can't find a helpful topic, drop us your question.
+The community in the (link: https://forum.getkirby.com/ text: Kirby Forum) is always there to help out whenever you get stuck. It's likely that someone already had the same problem, so using the search function might uncover a solution within seconds. If you can't find a helpful topic, drop us your question.
 
-(link: https://forum.getkirby.com/ text: Ask us anything in the Forum ›)
+(…columns)
