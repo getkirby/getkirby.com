@@ -46,6 +46,11 @@ When copying files to a remote server via (S)FTP, make sure to copy the `.htacce
                 <li>LiteSpeed</li>
                 <li>Caddy</li>
             </ul>
+
+            Server Features:
+            <ul>
+                <li>URL rewriting</li>
+            </ul>
         </td>
         <td class="text">
             <ul>
