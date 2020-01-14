@@ -8,10 +8,25 @@
       <section class="archive">
         <?php foreach ($page->children() as $version): ?>
         <figure>
-          <a href="<?= $version->url() ?>" class="screenshot">
+          <a href="<?= $version->src() ?>" class="screenshot">
             <?= $version->image()->crop(1100, 800, 'top ') ?>
-            <figcaption>Kirby Docs <?= $version->title() ?></figcaption>
           </a>
+          <figcaption>
+            <a href="<?= $version->src() ?>">
+              <p><strong>Kirby Docs <?= $version->title() ?></strong></p>
+              <p><?= $version->description() ?></p>
+            </a>
+            <dl>
+              <a href="<?= $version->src() ?>">
+                <dt>Docs</dt>
+                <dd><?= $version->src() ?></dd>
+              </a>
+              <a href="<?= $version->github() ?>">
+                <dt>Source:</dt>
+                <dd><?= $version->github() ?></dd>
+              </a>
+            </dl>
+          </figcaption>
         </figure>
         <?php endforeach ?>
       </section>

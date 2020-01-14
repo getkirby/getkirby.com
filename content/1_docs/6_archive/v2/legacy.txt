@@ -1,9 +1,13 @@
 Title: v2
 ----
 
-Description: The documentation for Kirby 2.
+Description: Kirby 2 will be supported by us with security updates until December 31, 2020
 
 ----
 
 Src: https://k2.getkirby.com
+
+----
+
+Github: https://github.com/getkirby-v2
 

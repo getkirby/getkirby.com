@@ -24,5 +24,9 @@
 .archive figcaption {
   font-family: $font-mono;
   padding-top: .5rem;
-  text-align: center;
+}
+
+.archive figcaption a {
+  margin-bottom: .75rem;
+  display: block;
 }
