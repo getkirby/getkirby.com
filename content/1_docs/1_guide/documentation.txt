@@ -11,26 +11,26 @@ Structure:
 Get started:
     - quickstart
     - tour
-    - installation
+    - troubleshooting
 Get productive:
     - content
-    - any-data-source
     - templates
     - blueprints
     - languages
     - users
 Get advanced:
+    - configuration
+    - routing
+    - cache
+    - emails
+    - database
+Get pro:
     - virtual-pages
     - api
-    - configuration
-    - plugins
-    - emails
-    - cache
-    - routing
     - sessions
+    - plugins
+Get secure:
     - security
-    - database
-    - troubleshooting
     - kirby-and-privacy
 
 ----

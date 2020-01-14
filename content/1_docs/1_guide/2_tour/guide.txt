@@ -2,7 +2,7 @@ Title: Exploring the Starterkit
 
 ----
 
-Description: Take a tour around the house and we'll give you a quick look at every part of Kirby.
+Description: Take a tour around the house and we will give you a quick look at every part of Kirby.
 
 ----
 
