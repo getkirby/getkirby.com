@@ -183,3 +183,7 @@ Want to switch `my-site.com` back to Kirby 3.3.1? You know how easy this is by y
 ## Licenses for your multi-site
 
 Of course, like explained in (link: docs/cookbook/setup/multisite#licenses-for-your-multi-site text: this recipe), you need a license for each of your sites.
+
+## Author
+
+This cookbook recipe was written by (link: https://forum.getkirby.com/u/adspectus/ text: Uwe Gehring).
