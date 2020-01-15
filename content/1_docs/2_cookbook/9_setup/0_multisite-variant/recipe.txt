@@ -2,6 +2,10 @@ Title: A variant to using Kirby for multiple sites
 
 ----
 
+Published: 2020-01-15
+
+----
+
 Description: An alternative approach for running multiple sites from the same Kirby installation.
 
 ----
@@ -136,7 +140,7 @@ That's it! Now all our Kirby sites will be served from a common `/kirby` folder.
 
 ## Further advantages
 
-So far, the new solution provides nothing new compared to the old solution, despite the fact that we are running a webserver host for every Kirby site with all the advantages mentioned above. 
+So far, the new solution provides nothing new compared to the old solution, despite the fact that we are running a webserver host for every Kirby site with all the advantages mentioned above.
 
 What's more, we can now switch between different versions of Kirby with a few keystrokes.
 
