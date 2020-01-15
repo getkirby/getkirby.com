@@ -2,9 +2,13 @@ Title: v1
 
 ----
 
-Description: The documentation for Kirby 1.
+Description: Kirby 1 has reached its end of life and is no longer supported by us.
 
 ----
 
 Src: https://k1.getkirby.com
+
+----
+
+Github: https://github.com/getkirby-v1
 

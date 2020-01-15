@@ -37,7 +37,6 @@ class ReviewsPage extends Page
 </since>
 
 
-
 ## Support content locking
 
 To support content locking for your virtual page, Kirby expects a `lock()` method in your (link: docs/guide/templates/page-models text: page model). The method needs to return an object of a custom class that handles the various content locking features:

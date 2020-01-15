@@ -1,20 +1,23 @@
 .since-version {
-  border-left: 4px solid $color-background;
-  padding-left: 1.5rem;
   position: relative;
-  transition: border-left .3s;
 }
 
 .version-badge {
   align-items: baseline;
   display: flex;
   font-size: .75rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  color: $color-muted;
 }
 
 .version-badge > code {
-  background: $color-syntax-yellow;
+  background: $color-light-gray;
+  color: $color-black;
   line-height: 1rem;
   margin-left: .5rem;
   padding: .125rem .5rem;
+}
+
+.version-badge.current > code {
+  background: $color-syntax-yellow;
 }

@@ -37,7 +37,7 @@ php -S localhost:8000 kirby/router.php
 
 ## Weird PHP syntax errors
 
-Please make sure that you use the minimum required version of PHP, which is 7.1+ since Kirby 3.0.0. We recommend using the most recent stable PHP version that is available to you.
+Please make sure that you use the (link: docs/guide/quickstart#requirements text: required PHP version).
 
 ## Issues with date & time handling
 

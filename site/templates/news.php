@@ -13,7 +13,9 @@
         <?php snippet('arrow-link', ['link' => $kosmos->url(), 'text' => 'View all']) ?>
       </div>
 
-      <?php snippet('kosmos-issues', ['issues' => page('kosmos')->children()->listed()->flip()->limit(4)]) ?>
+      <?php snippet('kosmos-issues', [
+        'issues' => page('kosmos')->children()->listed()->flip()->limit(4),
+      ]) ?>
     </section>
 
     <section class="wrap">

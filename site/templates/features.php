@@ -51,7 +51,7 @@
 
           <?= snippet('features/text', [
             'heading' => 'Mobile-ready',
-            'text' => 'You want to edit your site on the go? The panel works nicely on mobile browsers in iOS and Android.'
+            'text' => 'You want to edit your site on the go? The Panel works nicely on mobile browsers in iOS and Android.'
           ]) ?>
 
           <?= snippet('features/code', [
@@ -69,7 +69,7 @@
           <?= snippet('features/text', [
             'heading' => 'Quicksearch',
             'text'    => 'Quickly access all pages, users and files with the global search and navigate around with ease.',
-            'alt'     => 'A screenshot of the quicksearch in the panel'
+            'alt'     => 'A screenshot of the quicksearch in the Panel'
           ]) ?>
 
           <?= snippet('features/image', [
@@ -97,7 +97,7 @@
             'rows'  => 4,
             'image' => page('home')->image('interface-2.jpg')->resize(1200),
             'class' => 'stretch',
-            'alt'   => 'A screenshot of a panel setup for blog articles'
+            'alt'   => 'A screenshot of a Panel setup for blog articles'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -244,7 +244,7 @@
             'cols'  => 6,
             'rows'  => 4,
             'image' => page('home')->image('interface-4.jpg')->resize(1200),
-            'alt'   => 'An example of a photo gallery setup in the panel'
+            'alt'   => 'An example of a photo gallery setup in the Panel'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -260,7 +260,7 @@
 
           <?= snippet('features/text', [
             'heading' => 'Quality assurance',
-            'text'    => 'Add fine-grained upload validators and check for image dimensions, file types, file size and more to avoid unwanted uploads',
+            'text'    => 'Add fine-grained upload validators and check for image dimensions, file types, file size and more to avoid unwanted uploads.',
             'link'    => 'docs/reference/panel/blueprints/file#accept',
           ]) ?>
 
@@ -269,7 +269,7 @@
             'text'    => 'Add custom metadata to your files. Define different file types and customize the metadata fields for each type. An image might need a caption and some alternative text. A PDF catalogue download could have an additional pricing list. You can even use those fields for internal notes in your team.',
             'rows'    => 4,
             'link'    => 'docs/reference/panel/blueprints/file',
-            'alt'     => 'The file metadata editor in the panel'
+            'alt'     => 'The file metadata editor in the Panel'
           ]) ?>
 
           <?= snippet('features/image', [
@@ -288,7 +288,7 @@
 
           <?= snippet('features/text', [
             'heading' => 'Media API',
-            'text'    => 'Kirby comes with a asychronous media modification API. Resize, crop and convert your images right on the fly in your templates. Start prototyping with different image formats in the browser. Make sure that every visitor gets the perfect file size',
+            'text'    => 'Kirby comes with an asynchronous media modification API. Resize, crop and convert your images right on the fly in your templates. Start prototyping with different image formats in the browser. Make sure that every visitor gets the perfect image size.',
             'rows'    => 4,
             'link'    => 'docs/guide/templates/resize-images-on-the-fly',
           ]) ?>
@@ -357,7 +357,7 @@
 
           <?= snippet('features/text', [
             'heading' => 'Controllers',
-            'text'    => 'Too much logic for your templates? Use Kirby\'s controllers to handle complex data collections, form handling, URL query-based filters and more without cluttering your templates. Marie Kondo agrees.',
+            'text'    => 'Too much logic for your templates? Use Kirby\'s controllers to handle complex data collections, form handling, URL query-based filters and more without cluttering your templates. Marie Kondō agrees.',
             'link'    => 'docs/guide/templates/controllers'
           ]) ?>
 
@@ -413,7 +413,7 @@
 
           <?= snippet('features/text', [
             'heading' => 'Extensible',
-            'text'    => 'Define your own API endpoints and object. Integrate external data from databases, files or other APIs with data from Kirby into one seamless data-source.',
+            'text'    => 'Define your own API endpoints and objects. Integrate external data from databases, files or other APIs with data from Kirby into one seamless data-source.',
             'link'    => 'docs/reference/plugins/extensions/api'
           ]) ?>
 
@@ -441,9 +441,9 @@
             'cols'    => 3,
             'rows'    => 3,
             'heading' => 'Language management',
-            'text'    => 'Create new languages right in the Panel and start translating your pages immediately. Start with a single language and move to multiple languages later, or go global immeditately—it\'s up to your project.',
+            'text'    => 'Create new content languages right in the Panel and start translating your pages immediately. Start with a single language and move to multiple languages later, or go global immediately—it\'s up to your project.',
             'link'    => 'docs/guide/languages/introduction',
-            'alt'     => 'Kirby\'s language manager in the panel'
+            'alt'     => 'Kirby\'s language manager in the Panel'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -453,7 +453,7 @@
             'rows'    => 3,
             'text'    => 'Internationalization is built into the core of Kirby. Switch intuitively between different language versions and translate your content together with your team or on your own.',
             'link'    => 'docs/guide/languages/translating-content',
-            'alt'     => 'The translation switcher in the panel'
+            'alt'     => 'The translation switcher in the Panel'
           ]) ?>
 
           <?= snippet('features/text', [
@@ -487,7 +487,7 @@
         <div class="features-grid">
           <?= snippet('features/text', [
             'heading' => 'From the backend...',
-            'text'    => 'The Panel offers you an easy way to manage your users and set up rights based on different roles. Create different user types and store metadata to your users.',
+            'text'    => 'The Panel offers you an easy way to manage your users and set up permissions based on different roles. Create different user types and store metadata to your users.',
             'link'    => 'docs/guide/users/managing-users',
           ]) ?>
 
@@ -496,7 +496,7 @@
             'cols'  => 4,
             'rows'  => 2,
             'link'  => 'docs/guide/users/managing-users',
-            'alt'   => 'A screenshot of the user management in the panel'
+            'alt'   => 'A screenshot of the user management in the Panel'
           ]) ?>
 
           <?= snippet('features/code', [
@@ -533,13 +533,13 @@
           <?= snippet('features/text', [
             'rows'    => 3,
             'heading' => 'Custom sections',
-            'text'    => 'Add entirely new interface elements to the panel with custom sections. Integrate data from analytics tools, your ERM system, third-pary services and more and use them seamlessly alongside your content. Use the power of Vue.js to create truly interactive plugins.',
+            'text'    => 'Add entirely new interface elements to the Panel with custom sections. Integrate data from analytics tools, your ERM system, third-party services and more and use them seamlessly alongside your content. Use the power of Vue.js to create truly interactive plugins.',
             'link'    => 'https://getkirby.com/docs/reference/plugins/extensions/sections'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Routes',
-            'text'    => 'Routing has never been easier: Kirby comes with a powerful router that can be extended to adjust the URL scheme, handle form submissions, add webhook endpoints, or create virtual pages.',
+            'text'    => 'Routing has never been easier: Kirby comes with a powerful router that can be extended to adjust the URL scheme, handle form submissions, add webhook endpoints or create virtual pages.',
             'link'    => 'docs/guide/routing'
           ]) ?>
 
@@ -558,7 +558,7 @@
           <?= snippet('features/text', [
             'rows'    => 3,
             'heading' => 'Custom fields',
-            'text'    => 'Extend your forms with your own fields or use plugins from other developers. Editing data on steroids: locations, colors, annotations etc.',
+            'text'    => 'Extend your forms with your own fields or use plugins from other developers. Data editing on steroids: locations, colors, annotations etc.',
             'link'    => 'docs/reference/plugins/extensions/fields'
           ]) ?>
 
@@ -572,7 +572,7 @@
 
           <?= snippet('features/text', [
             'heading' => 'Core components',
-            'text'    => 'You don\'t like our template engine, markdown parser or media API? Simply swap out major parts of the Kirby system with your own plugins.',
+            'text'    => 'You don\'t like our template engine, Markdown parser or media API? Simply swap out major parts of the Kirby system with your own plugins.',
             'link'    => 'docs/reference/plugins/extensions/core-components'
           ]) ?>
 
@@ -584,7 +584,7 @@
 
           <?= snippet('features/text', [
             'heading' => 'Caching',
-            'text'    => 'Kirby comes with mighty caching on board. Not fitting for your project? Add your cache driver of choice and reduce page loads in the blink of an eye.',
+            'text'    => 'Kirby comes with mighty caching on board. Not fitting for your project? Add your cache driver of choice and reduce page loading times in the blink of an eye.',
             'link'    => 'docs/guide/cache'
           ]) ?>
 
@@ -600,7 +600,7 @@
           <?= snippet('features/text', [
             'rows'    => 3,
             'heading' => 'Custom views',
-            'text'    => 'Add whole new views and menu items. Use Vue.js to super-charge the Panel as an admin framework for your own integrated applications.',
+            'text'    => 'Add whole new views and menu items to the Panel. Use Vue.js to super-charge it as an admin framework for your own integrated applications.',
             'link'    => 'docs/reference/plugins/extensions/panel-views'
           ]) ?>
 
@@ -611,7 +611,7 @@
     <div class="wrap">
       <div class="intro | -theme:dark">
           <?= kt('And so much more...
-  Learn about everything in our (link: docs text: Guide)') ?>
+  Learn more about everything in our (link: docs text: Guide)') ?>
       </div>
     </div>
 
