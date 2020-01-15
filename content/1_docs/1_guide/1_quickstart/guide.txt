@@ -182,12 +182,12 @@ If you want to upgrade an existing Kirby 2 installation, head over to our (link:
 (columns…)
 
 ### (link: docs/guide/tour text: A tour around the house)
-You have successfully installed Kirby on your server, it's time to explore your new CMS. Get yourself a cup of tea (or whatever else you like most) and go on (link: docs/guide/tour text: a tour to explore the Starterkit) with us.
+Now that you have successfully installed Kirby on your server, it's time to explore your new CMS. Get yourself a cup of tea (or whatever you like most) and go on a (link: docs/guide/tour text: tour to explore the Starterkit) with us.
 
 ++++
 
 ### (link: docs/cookbook/setup/kirby-in-a-nutshell text: Kirby in a nutshell)
-Let's give you (link: docs/cookbook/setup/kirby-in-a-nutshell text: a concise overview) of how Kirby works and what to keep in mind when you start your project. It's all about what you wish you had known when you started your first Kirby project.
+Get (link: docs/cookbook/setup/kirby-in-a-nutshell text: a concise overview) of how Kirby works and what to keep in mind when you start your project. It's all about what you wish you had known when you started your first Kirby project.
 
 (…columns)
 
@@ -209,7 +209,7 @@ Once you have familiarized yourself with the basics, the (link: docs/reference 
 
 ### (link: docs/cookbook text: Cookbook)
 
-The (link: docs/cookbook text: Cookbook) is a hand-picked collection of solutions you can build with Kirby, explainign how to build them step by step. Starting from simple things like menus to frontend authentication, headless CMS setups and more.
+The (link: docs/cookbook text: Cookbook) is a collection of solutions you can build with Kirby, explaining how to build them step by step. Starting from simple things like menus to frontend authentication, headless CMS setups and more.
 
 ++++
 
