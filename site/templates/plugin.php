@@ -51,7 +51,7 @@
         <nav class="breadcrumb">
           <span>
             <a href="<?= url('plugins') ?>">Plugins</a>
-            <a href="<?= url('plugins?category=' . $page->category()) ?>">Panel</a>
+            <a href="<?= url('plugins?category=' . $page->category()) ?>"><?= option('plugins.categories.' . $page->category() . '.label') ?></a>
             <a href="<?= $page->url() ?>"><?= $page->title() ?></a>
           </span>
           <p>by <?= $author->title() ?></p>
