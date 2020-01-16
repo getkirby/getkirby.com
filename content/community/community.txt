@@ -2,7 +2,7 @@ Title: Community
 
 ----
 
-Description: Get to know the team behind Kirby and the awesome community, that has formed around our product.
+Description: Get to know the awesome community, that has formed around our product.
 
 ----
 

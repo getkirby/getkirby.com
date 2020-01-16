@@ -4,6 +4,7 @@ return function($page) {
 
   $categories = option('plugins.categories');
   $category   = get('category');
+  $featured   = get('featured');
   $developer  = get('developer');
 
   if ($category && array_key_exists($category, $categories) === false) {
@@ -24,6 +25,10 @@ return function($page) {
     $plugins = $plugins->filterBy('category', $category);
   }
 
+  if ($featured) {
+    $plugins = $plugins->filterBy('featured', true);
+  }
+
   // don't use plugins with a recommended field
   $plugins = $plugins->filterBy('recommended', '');
 
@@ -31,7 +36,8 @@ return function($page) {
     'plugins'    => $plugins->sortBy('title', 'asc'),
     'categories' => $categories,
     'category'   => $category,
-    'developer'  => $developer
+    'developer'  => $developer,
+    'featured'   => $featured
   ];
 
 };

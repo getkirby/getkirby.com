@@ -25,8 +25,7 @@
   <div class="wrap">
     <div class="konf-content">
       <div class="intro">
-        Kirby Konf is the first official conference for Kirby developers.
-        A cosy single-day event, packed with interesting sessions and time to meet the team & community
+        <?= $page->description()->kt() ?>
       </div>
 
       <div class="section">

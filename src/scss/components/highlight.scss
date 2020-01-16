@@ -1,0 +1,24 @@
+.highlight > div {
+  background: $color-background;
+}
+
+.highlight .intro {
+  padding: 1.5rem;
+}
+
+.highlight figure {
+  flex-basis: 50%;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+@include mq(from m) {
+  .highlight > div {
+    align-items: center;
+    display: flex;
+  }
+
+  .highlight .intro {
+    padding: 3rem;
+  }
+}

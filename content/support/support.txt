@@ -1,0 +1,16 @@
+Title: Support
+----
+
+Description: Learn about all channels to reach out for support. And get to know the team behind Kirby.
+
+----
+
+Priority: 0.8
+
+----
+
+Intro:
+
+We built Kirby to be easy to understand right from the start and reliably running. However, you might encounter difficulties when building your project or come up with a feature request.
+
+Learn about the appropriate support channels to make sure that we can support you in the best way.

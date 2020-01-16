@@ -23,30 +23,18 @@
 
           <nav class="footer-menu">
             <ul>
+              <?php foreach(['docs', 'resources', 'news'] as $section) : ?>
+              <?php if ($section = page($section)) : ?>
               <li>
-                <a class="h5" href="<?= url('docs') ?>">Docs</a>
+                <a class="h5" href="<?= $section->url() ?>"><?= $section->title() ?></a>
                 <ul>
-                  <?php foreach (page('docs')->children()->listed() as $item): ?>
+                  <?php foreach ($section->children()->listed() as $item): ?>
                   <li><?= $item->title()->link() ?></li>
                   <?php endforeach ?>
                 </ul>
               </li>
-              <li>
-                <a class="h5" href="<?= url('community') ?>">Community</a>
-                <ul>
-                  <?php foreach (page('community')->children()->listed() as $item): ?>
-                  <li><?= $item->title()->link() ?></li>
-                  <?php endforeach ?>
-                </ul>
-              </li>
-              <li>
-                <a class="h5" href="<?= url('news') ?>">News</a>
-                <ul>
-                  <?php foreach (page('news')->children()->listed() as $item): ?>
-                  <li><?= $item->title()->link() ?></li>
-                  <?php endforeach ?>
-                </ul>
-              </li>
+              <?php endif ?>
+              <?php endforeach ?>
               <li>
                 <a class="h5" href="<?= url('contact') ?>">Misc</a>
                 <ul>

@@ -16,33 +16,35 @@
             <li>
               <a href="<?= $page->url() ?>"><span class="filter-category-icon"><?= icon('list') ?></span> All plugins</a>
             </li>
+            <li>
+              <a href="<?= $page->url() ?>?featured=true"><span class="filter-category-icon"><?= icon('star') ?></span> Featured</a>
+            </li>
           </ul>
 
           <h2 class="h6 -mb:medium">Categories</h2>
           <ul class="filter-categories">
-            <?php foreach ($categories as $id => $cat): ?>
-            <li<?php e($category === $id, ' aria-current') ?>>
-              <a href="?category=<?= $id?>"><span class="filter-category-icon"><?= icon($cat['icon']) ?></span> <?= $cat['label'] ?></a>
-            </li>
-            <?php endforeach ?>
+            <?php foreach ($categories as $id => $cat) : ?>
+              <li<?php e($category === $id, ' aria-current') ?>>
+                <a href="?category=<?= $id ?>"><span class="filter-category-icon"><?= icon($cat['icon']) ?></span> <?= $cat['label'] ?></a>
+                </li>
+              <?php endforeach ?>
           </ul>
         </div>
       </aside>
       <div class="filter-overview">
 
-        <?php if ($category || $developer): ?>
-        <h2 class="h6 -mb:medium">
-          <?php e($category, '<small>Category</small>: ' . $category) ?>
-          <?php e($developer, '<small>by</small>: ' . $developer) ?>
-        </h2>
-        <?php snippet('plugins', ['plugins' => $plugins, 'class' => 'plugins-directory']) ?>
-        <?php else: ?>
-
-        <h2 class="h6 -mb:medium">All plugins</h2>
-        <?php snippet('plugins', ['plugins' => $plugins, 'featured' => false, 'class' => 'plugins-directory']) ?>
-
+        <?php if ($category || $developer) : ?>
+          <h2 class="h6 -mb:medium">
+            <?php e($category, '<small>Category</small>: ' . $category) ?>
+            <?php e($developer, '<small>by</small>: ' . $developer) ?>
+          </h2>
+        <?php elseif ($featured) : ?>
+          <h2 class="h6 -mb:medium">Featured plugins</h2>
+        <?php else : ?>
+          <h2 class="h6 -mb:medium">All plugins</h2>
         <?php endif ?>
 
+        <?php snippet('plugins', ['plugins' => $plugins, 'class' => 'plugins-directory']) ?>
       </div>
     </div>
 

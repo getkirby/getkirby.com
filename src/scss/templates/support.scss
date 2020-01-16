@@ -1,0 +1,89 @@
+@import "../includes";
+
+/* -----  Hero  ---------------------------------------------------- */
+
+.support-page-hero .intro {
+  max-width: none;
+
+  @include mq(from m) {
+    columns: 2;
+  }
+}
+
+/* -----  Channels Section  ---------------------------------------------- */
+
+
+.support-channels {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.support-channels li {
+  margin-bottom: 3rem;
+  padding-left: 3rem;
+  width: 100%;
+  background:$color-light-gray;
+
+  @include mq(from m) {
+    width: percentage(1 / 3);
+  }
+
+  border-right: .5rem solid #fff;
+  border-left: .5rem solid #fff;
+  padding: 1rem;
+}
+
+.support-channels p {
+  font-size: .875rem;
+}
+
+.support-channels .icon {
+  color: $color-muted;
+  height: 3rem;
+  margin-bottom: 1.5rem;
+  width: 3rem;
+}
+
+/* -----  Team Section  ----------------------------------------------------- */
+
+.support-mates {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.support-mate {
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.support-mate figure {
+  display: block;
+  margin: 0 auto;
+  width: 4rem;
+}
+
+.support-mate small {
+  display: block;
+  font-family: $font-mono;
+  line-height: 1.5;
+}
+
+.support-mate-links {
+  white-space: nowrap;
+}
+
+.support-mate-links li {
+  display: inline-block;
+  margin: 0 .5rem;
+}
+
+.support-mate svg * {
+  fill: $color-yellow;
+  transition: fill .3s;
+}
+
+.support-mate svg:hover * {
+  fill: $color-black;
+}
