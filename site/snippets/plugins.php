@@ -1,7 +1,7 @@
 <ul class="list plugin-cards <?php e(@$class, ' ' . @$class) ?>">
   <?php foreach ($plugins as $plugin): ?>
   <li class="plugin-card">
-    <a class="plugin-card-body" href="<?= $plugin->repository() ?>">
+    <a class="plugin-card-body" href="<?= $plugin->url() ?>">
       <h3 class="plugin-card-title"><?= $plugin->title() ?></h3>
       <p class="plugin-card-author">by <?= $plugin->parent()->title() ?></p>
       <p class="plugin-card-description">
