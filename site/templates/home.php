@@ -7,7 +7,7 @@
       <div class="wrap">
         <div class="home-hero-banner">
           <div class="home-hero-banner-content">
-            <h1>Kirby is the content&nbsp;management system that adapts to your projects like no&nbsp;other</h1>
+            <h1>Kirby: the CMS that adapts to any project, loved by developers and editors alike</h1>
             <p class="home-hero-links">
               <a class="home-hero-cta" href="<?= url('try') ?>">
                 <?php icon('download') ?>
