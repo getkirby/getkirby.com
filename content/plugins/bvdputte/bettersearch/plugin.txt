@@ -1,0 +1,16 @@
+title: Better Search
+
+----
+
+Repository: https://github.com/bvdputte/kirby-bettersearch
+
+----
+
+Category: utilities
+
+----
+
+Description: Search for full word combinations rather than just individual words.
+
+
+
