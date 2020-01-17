@@ -90,4 +90,14 @@ return [
     'kirby.meta.pagesExclude' => [
         'docs/reference/@/.*',
     ],
+    'cache' => [
+        'pages' => [
+            'active' => false,
+            'type'   => 'apcu'
+        ],
+        'plugins' => [
+            'active' => true,
+            'type'   => 'file'
+        ]
+    ],
 ];

@@ -29,7 +29,7 @@
         <nav class="ctas">
           <span>
             <a class="cta" href="<?= $download ?>">
-              <?= icon('download') ?>Download
+              <?= icon('download') ?>Download <?= $page->version() ?>
             </a>
           </span>
 

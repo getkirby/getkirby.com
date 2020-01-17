@@ -6,7 +6,7 @@ Repository: https://github.com/getkirby/geo
 
 ----
 
-Category: utility
+Category: utilities
 
 ----
 
