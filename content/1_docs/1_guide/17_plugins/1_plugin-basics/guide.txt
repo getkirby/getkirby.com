@@ -85,7 +85,7 @@ Check out (link: docs/guide/plugins/plugin-types text: the list of all extension
 
 To store more information about your plugin, you can add a `composer.json` to your plugin folder. We recommend to use composer's `composer init` command to simplify this step. All information in the `composer.json` can later be queried from your plugin:
 
-```json "composer.json"
+```js "composer.json"
 {
     "name": "superwoman/superplugin",
     "description": "Superwoman Demo Plugin",

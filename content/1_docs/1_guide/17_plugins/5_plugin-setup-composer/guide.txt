@@ -33,7 +33,7 @@ composer require superwoman/superlibrary
 
 Composer will now install the library to your `vendor` directory and add the library to your `composer.json` file for you:
 
-```json "composer.json"
+```js "composer.json"
 {
     "name": "getkirby/pluginkit",
     "description": "Kirby Example Plugin",
@@ -102,7 +102,7 @@ Now that you are using the Composer autoloader anyway, you might as well use it 
 
 First step is to add the classes and files to load to your plugin's `composer.json`:
 
-```json "composer.json"
+```js "composer.json"
 {
     "name": "getkirby/pluginkit",
     "description": "Kirby Example Plugin",

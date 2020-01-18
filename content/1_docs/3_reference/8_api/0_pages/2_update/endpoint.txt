@@ -12,7 +12,7 @@ Text:
 
 Send a key/value object with the new page content as request body:
 
-```json
+```js
 {
   "intro": "This is a great article",
   "text": "It's very very long"

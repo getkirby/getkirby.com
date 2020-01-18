@@ -24,7 +24,7 @@ In a (link: docs/guide/languages/introduction text: multi-language site) it is n
 
 ### Example error
 
-```json
+```js
 {
     "status": "error",
     "message": "The page \"example\" cannot be found",
@@ -36,7 +36,7 @@ In a (link: docs/guide/languages/introduction text: multi-language site) it is n
 
 When debug mode is activated in your config, you will get a more detailed error response with the exception type, file and line.
 
-```json
+```js
 {
     "status": "error",
     "exception": "Exception",

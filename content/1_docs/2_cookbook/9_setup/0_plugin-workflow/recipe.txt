@@ -213,7 +213,7 @@ If your plugin uses classes, you would normally (link: https://www.php.net/manua
 
 Running the test command manually each time can be tedious. You can take a look at (link: https://getcomposer.org/doc/articles/scripts.md text: Composer scripts) and use them instead. To do that, copy the test command to your plugin's Composer configuration and adjust the paths accordingly:
 
-```json "kirbyplugins/site/plugins/link-field/composer.json"
+```js "kirbyplugins/site/plugins/link-field/composer.json"
 "scripts": {
   "test": "phpunit --bootstrap ./tests/bootstrap.php --testdox ./tests/suites"
 }

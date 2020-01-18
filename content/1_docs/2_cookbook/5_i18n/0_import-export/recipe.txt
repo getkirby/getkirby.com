@@ -80,7 +80,7 @@ The JSON is then written to an export file in the same folder.
 
 ### Example JSON output
 
-```json
+```js
 [
     {
         "id": "photography",

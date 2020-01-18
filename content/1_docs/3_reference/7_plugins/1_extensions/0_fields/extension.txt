@@ -57,7 +57,7 @@ hello:
   message: Hello world
 ```
 
-```json "API response"
+```js "API response"
 hello: {
   message: "Hello world"
 }
@@ -153,7 +153,7 @@ hello:
     username: Peter
 ```
 
-```json "API Response"
+```js "API Response"
 hello: {
     message: "Hello world",
     username: "Peter",

@@ -57,7 +57,7 @@ If you have an existing site and want to use Composer with it, that's possible a
 
 The Composer magic is all contained in the `composer.json` file. The most basic version looks like this:
 
-```json "composer.json"
+```js "composer.json"
 {
   "require": {
     "getkirby/cms": "^3.0"
@@ -78,7 +78,7 @@ composer install
 
 If you want to use a different location for the `kirby` directory, you can change it in your `composer.json`:
 
-```json "composer.json"
+```js "composer.json"
 {
   "require": {
     "getkirby/cms": "^3.0"
@@ -127,7 +127,7 @@ echo (new Kirby([
 
 If you prefer to have the CMS installed to the `vendor` directory, you can disable the custom path entirely:
 
-```json "composer.json"
+```js "composer.json"
 {
   "require": {
     "getkirby/cms": "^3.0"
@@ -181,7 +181,7 @@ If you want, you can add the plugin to your `.gitignore` file. If you prefer, yo
 
 If your `plugins` directory is in a non-standard location, you can change it like this:
 
-```json "composer.json"
+```js "composer.json"
 {
   "require": {
     "getkirby/cms": "^3.0",

@@ -74,7 +74,7 @@ modified:
   headline: Last updates
 ```
 
-```json "API response"
+```js "API response"
 modified: {
   headline: "Last updates"
 }
@@ -167,7 +167,7 @@ modified:
     headline: Last update
 ```
 
-```json "API Response"
+```js "API Response"
 modified: {
     headline: "Last update",
     text: "The page has been modified at 12.12.2012 22:33:00",
