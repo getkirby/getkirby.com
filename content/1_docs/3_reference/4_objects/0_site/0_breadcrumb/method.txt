@@ -3,15 +3,15 @@ Text:
 ## Example
 
 ```php
-<nav class="breadcrumb" role="navigation">
-  <ul>
+<nav class="breadcrumb" role="navigation" aria-label="breadcrumb">
+  <ol>
     <?php foreach($site->breadcrumb() as $crumb): ?>
     <li>
-      <a href="<?= $crumb->url() ?>">
+      <a href="<?= $crumb->blogurl() ?>" <?= e($crumb->isActive(), 'aria-current="page"') ?>>
         <?= html($crumb->title()) ?>
       </a>
     </li>
     <?php endforeach ?>
-  </ul>
+  </ol>
 </nav>
 ```
