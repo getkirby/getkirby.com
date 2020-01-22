@@ -187,7 +187,7 @@ fields:
 ```php
 <?php
 $field = $page->blueprint()->field('category');
-$categories = $page->categories()->split(',');
+$categories = $page->category()->split(',');
 foreach ($categories as $category) {
     echo $field['options'][$category] ?? html($category);
 }
