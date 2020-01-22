@@ -19,7 +19,7 @@ return [
 ];
 ```
 
-## Timout
+## Timeout
 
 You can also set the timeout in seconds for the period of time against which the number of trials is counted. The default is 3600.
 
