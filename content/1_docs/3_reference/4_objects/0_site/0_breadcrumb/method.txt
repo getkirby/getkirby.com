@@ -3,7 +3,7 @@ Text:
 ## Example
 
 ```php
-<nav class="breadcrumb" role="navigation" aria-label="breadcrumb">
+<nav class="breadcrumb" aria-label="breadcrumb">
   <ol>
     <?php foreach($site->breadcrumb() as $crumb): ?>
     <li>
