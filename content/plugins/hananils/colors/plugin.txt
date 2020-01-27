@@ -1,0 +1,13 @@
+Title: Colors
+
+----
+
+Repository: https://github.com/hananils/kirby-colors
+
+----
+
+Category: panel
+
+----
+
+Description: Select HEX, RGB or HSL colors using the native color selector, optionally show the most readable contrast color.
