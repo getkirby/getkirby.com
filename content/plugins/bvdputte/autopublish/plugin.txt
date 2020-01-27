@@ -1,0 +1,16 @@
+title: Autopublish
+
+----
+
+Repository: https://github.com/bvdputte/kirby-autopublish
+
+----
+
+Category: utilities
+
+----
+
+Description: Schedule automatic publishing of pages (drafts) on a certain date & time
+
+
+
