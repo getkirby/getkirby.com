@@ -1,0 +1,14 @@
+Title: Selfauth
+
+----
+
+Repository: https://github.com/sebastiangreger/kirby3-selfauth
+
+----
+
+Category: integrations
+
+----
+
+Description: Provides self-hosted authentication for the IndieAuth protocol
+
