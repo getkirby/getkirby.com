@@ -35,6 +35,8 @@ return [
                     return 'guide';
                 case 'issue':
                     return 'kosmos';
+                case 'plugin':
+                    return 'plugin';
             }
 
         }
