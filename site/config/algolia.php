@@ -64,6 +64,7 @@ return [
                        $page->parent()->isListed() === true;
             }
         ],
+        'plugin',
         'recipe',
         'release',
         'root',
