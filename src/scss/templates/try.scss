@@ -6,23 +6,70 @@
   text-align: center;
 }
 
+.try-page .error {
+  background: $color-error-background;
+  border-radius: $border-radius;
+  margin-bottom: 3rem;
+  padding: 1rem 1rem 1rem 2.5rem;
+  position: relative;
+
+  > .icon {
+    fill: $color-red;
+    left: .75rem;
+    position: absolute;
+    top: 1.375rem; // 22px
+  }
+}
+
+.try-page .links {
+  display: flex;
+  justify-content: center;
+
+  > p:not(:last-child),
+  > form:not(:last-child) {
+    margin-right: 5rem;
+  }
+
+  @media screen and (max-width: 44rem) {
+    flex-wrap: wrap;
+
+    > p:not(:last-child),
+    > form:not(:last-child) {
+      margin-right: 2rem;
+    }
+
+    > .demo {
+      margin-bottom: 2rem;
+      margin-right: 0 !important;
+      order: -1;
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 24rem) {
+    > p:not(:last-child),
+    > form:not(:last-child) {
+      flex-basis: 100%;
+      margin-bottom: 2rem;
+      margin-right: 0;
+    }
+  }
+
+  a, button {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  button {
+    border: none;
+    cursor: pointer;
+    margin: 0 auto 1rem;
+  }
+}
+
 .try-page .starterkit {
   border: 1px solid #000;
   line-height: 0;
   margin: 0 auto 1.5rem;
   max-width: 30rem;
-}
-
-.try-page .downloads {
-  display: flex;
-  justify-content: center;
-
-  > p:not(:last-child) {
-    margin-right: 5rem;
-  }
-
-  a {
-    display: block;
-    margin-bottom: 1rem;
-  }
 }
