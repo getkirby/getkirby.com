@@ -51,7 +51,9 @@ You can set the preview URL for the site in the site.yml with the `preview` prop
 
 ```yaml
 title: Site
-preview: https://mycustomdomain.com
+
+options:
+  preview: https://mycustomdomain.com
 ```
 
 </since>
