@@ -30,7 +30,7 @@ Links:
     text: Instant Demo
     icon: wand
     action: https://demo.getkirby.com
-    description: For those who want to try<br>Kirby without installation.
+    description: For those who want to try<br> but not yet install.
 -
     text: Plainkit
     icon: download

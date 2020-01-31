@@ -33,30 +33,24 @@
   @media screen and (max-width: 44rem) {
     flex-wrap: wrap;
 
-    > p:not(:last-child),
-    > form:not(:last-child) {
-      margin-right: 2rem;
+    > p,
+    > form {
+      flex-basis: 100%;
+
+      &:not(:last-child) {
+        margin-right: 0;
+        margin-bottom: 2rem;
+      }
     }
 
     > .demo {
-      margin-bottom: 2rem;
-      margin-right: 0 !important;
       order: -1;
-      width: 100%;
-    }
-  }
-
-  @media screen and (max-width: 24rem) {
-    > p:not(:last-child),
-    > form:not(:last-child) {
-      flex-basis: 100%;
-      margin-bottom: 2rem;
-      margin-right: 0;
     }
   }
 
   a, button {
     display: block;
+    width: 100%;
     margin-bottom: 1rem;
   }
 

@@ -19,24 +19,24 @@
       <?php endif ?>
 
       <div class="links -mb:huge -align:center">
-        <?php foreach ($page->links()->toStructure() as $download) : ?>
-          <?php if ($download->action()->isNotEmpty()): ?>
-          <form action="<?= $download->action() ?>" method="POST" class="demo">
+        <?php foreach ($page->links()->toStructure() as $link) : ?>
+          <?php if ($link->action()->isNotEmpty()): ?>
+          <form action="<?= $link->action() ?>" method="POST" class="demo">
             <button type="submit" class="cta">
-              <?= icon($download->icon(), true) ?>
-              <span class="cta-text"><?= $download->text() ?></span>
+              <?= icon($link->icon(), true) ?>
+              <span class="cta-text"><?= $link->text() ?></span>
             </button>
 
-            <?= $download->description() ?>
+            <?= $link->description() ?>
           </form>
           <?php else: ?>
           <p>
             <?php snippet('cta', [
-              'link' => $download->link(),
-              'text' => $download->text(),
-              'icon' => $download->icon(),
+              'link' => $link->link(),
+              'text' => $link->text(),
+              'icon' => $link->icon(),
             ]) ?>
-            <?= $download->description() ?>
+            <?= $link->description() ?>
           </p>
           <?php endif ?>
         <?php endforeach ?>
