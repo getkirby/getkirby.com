@@ -19,6 +19,7 @@ The company behind Kirby CMS and the responsible data controller for this websit
 *Bastian Allgeier GmbH
 Böhmer Weg 22
 69151 Neckargemünd
+Germany
 Email: [**support@getkirby.com**](mailto:support@getkirby.com)*
 
 You can contact us any time via email or the postal address above, if you have questions about our privacy policy.
@@ -116,8 +117,9 @@ If TLS encryption is activated, the data you transfer to us cannot be read by th
 The server for our website is provided by
 
 *Linode LLC
-329 East Jimmie Leeds Road
-Galloway, New Jersey 08205*
+249 Arch Street
+Philadelphia, Pennsylvania 19106
+USA*
 
 Linode complies with GDPR. The server is located in their data center in **Frankfurt, Germany**. You can find their privacy policy here: [https://www.linode.com/privacy](https://www.linode.com/privacy)
 
@@ -157,7 +159,8 @@ We use a third-party service to reduce the file size of the images on our site a
 
 *Cloudinary Ltd.
 111 W Evelyn Ave, Suite 206
-Sunnyvale, CA 94086*
+Sunnyvale, CA 94086
+USA*
 
 You can find their privacy policy here: [https://cloudinary.com/privacy](https://cloudinary.com/privacy)
 
