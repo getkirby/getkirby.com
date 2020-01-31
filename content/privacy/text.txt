@@ -43,6 +43,14 @@ We don't collect any personal data on our website except server logs. We use the
 
 [Read more ›](#website)
 
+### Instant Demo
+
+The Instant Demo you can access from the (link: try text: Try page) stores a shortened hash of your IP address to protect against XSS attacks and to prevent the creation of too many demo instances per user.
+
+Other personal data except server logs is not collected by the Instant Demo.
+
+[Read more ›](#instant-demo)
+
 ### Shop
 
 https://getkirby.com/buy
@@ -176,6 +184,57 @@ France*
 Algolia complies with GDRP. You can find their privacy policy here: [https://www.algolia.com/security](https://www.algolia.com/security)
 
 
+## Instant Demo
+
+### Cookies
+
+Like any Kirby website, the demo instances set a session cookie when you log in to the Panel.
+
+You can read more about this in our (link: docs/guide/kirby-and-privacy text: privacy guide).
+
+### IP address
+
+Our demo manager software at https://demo.getkirby.com temporarily stores the IP address of the user who created the demo instance. We need it to protect against XSS attacks and to prevent the creation of too many demo instances per user.
+
+Because the IP address is stored as a shortened hash only, we cannot convert it back to the actual IP address.
+
+### Analytics and tracking
+
+We **do not** use any trackers in the Instant Demo.
+
+### TLS encryption
+
+Like with our website, connections to the Instant Demo are always encrypted with TLS. See the section on our website's TLS encryption for more details.
+
+### Hosting
+
+The server for the Instant Demo is provided by
+
+*Uberspace
+Jonas Pasche
+Kaiserstr. 15
+55116 Mainz
+Germany*
+
+Uberspace complies with GDPR. The server is located in their data center in **Frankfurt, Germany**. You can find their privacy policy here: [https://uberspace.de/en/about/privacy/](https://uberspace.de/en/about/privacy/)
+
+### Server log files
+
+We automatically collect and store information that your browser transmits to us in "server log files" on our Uberspace server. These are:
+
+- Browser type and browser version
+- Operating system used
+- Referrer URL
+- Host name of the accessing computer
+- Time of the server request
+- IP address
+- PHP errors that may occur in the demo
+
+This data will not be combined with data from other sources.
+
+The basis for data processing is Art. 6 (1) (f) DSGVO, which allows the processing of data to fulfill a contract or for measures preliminary to a contract.
+
+
 ## Shop
 
 Our order process is conducted by our online reseller (link: https://paddle.com text: Paddle.com). Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.
@@ -223,4 +282,4 @@ We try to keep our privacy policy as transparent and easy to understand as possi
 ## Updates
 
 We will constantly check and update this privacy policy if necessary.
-**Last update: 04.03.2019**
+**Last update: 31.01.2020**
