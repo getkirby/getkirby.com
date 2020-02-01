@@ -28,11 +28,11 @@ Unlike the native PHP sessions feature, Kirby only creates sessions when there's
 
 Once the first piece of information is stored in the session, the session gets created and a session cookie is transmitted to the visitor's browser.
 
-Sessions last for two hours by default, after which they expire. This value can be configured with the (link: http://getkirby.test/docs/reference/system/options/session#durationnormal text: `session.durationNormal` option). It is *not* possible to create sessions with infinite duration (= sessions that never expire), because that would make it impossible to clean up old session files from the server.
+Sessions last for two hours by default, after which they expire. This value can be configured with the (link: docs/reference/system/options/session#durationnormal text: `session.durationNormal` option). It is *not* possible to create sessions with infinite duration (= sessions that never expire), because that would make it impossible to clean up old session files from the server.
 
-Sessions also have an activity timeout that will expire the session if there wasn't any activity in the last half an hour. It can be configured or disabled with the (link: http://getkirby.test/docs/reference/system/options/session#timeout text: `session.timeout` option).
+Sessions also have an activity timeout that will expire the session if there wasn't any activity in the last half an hour. It can be configured or disabled with the (link: docs/reference/system/options/session#timeout text: `session.timeout` option).
 
-There are also so-called "long sessions". They don't have a timeout and expire after two weeks by default. The expiry time can be changed with the (link: http://getkirby.test/docs/reference/system/options/session#durationlong text: `session.durationLong` option).
+There are also so-called "long sessions". They don't have a timeout and expire after two weeks by default. The expiry time can be changed with the (link: docs/reference/system/options/session#durationlong text: `session.durationLong` option).
 
 Once half of the session duration is over, the session is automatically renewed on the next request. The new session has the same duration again, but a new session ID.
 
