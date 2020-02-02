@@ -205,12 +205,13 @@ Some examples:
 // sort by manual sort field
 $files = $page->files()->sortBy('sort');
 
-// sort by filename
-$files = $page->files()->sortBy('filename');
-
 // sort by caption
 $files = $page->files()->sortBy('caption', 'desc');
 ```
+
+<info>
+Note that the default sorting order of files is according to their order in the file system.
+</info>
 
 ## Sorting users
 
