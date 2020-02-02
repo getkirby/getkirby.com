@@ -196,4 +196,8 @@ return function ($page, $tag) {
 };
 ```
 
+<info>
+The properties defined in the `$data` array are exposed to **templates** as global variables, so in use cases where you **do not** need them in a controller, you can use them directly.
+</info>
+
 </since>
