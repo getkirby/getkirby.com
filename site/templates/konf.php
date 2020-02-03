@@ -158,6 +158,7 @@
 
           <div class="konf-partners">
             <a href="https://3st-digital.de/"><?= $page->image('3st.svg') ?></a>
+            <a href="https://uberspace.de/en/"><?= $page->image('uberspace.svg') ?></a>
             <a href="https://beyondtellerrand.com/"><?= $page->image('beyondtellerrand.svg') ?></a>
           </div>
 

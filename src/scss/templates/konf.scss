@@ -109,9 +109,13 @@
 }
 .konf-partners a {
   margin-right: 3rem;
+  display: flex;
+  align-items: center;
+  line-height: 0;
 }
 .konf-partners img {
-  width: 6rem;
+  height: 6rem;
+  width: auto;
 }
 
 
