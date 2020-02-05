@@ -10,17 +10,35 @@
         </div>
       </header>
 
+      <?php if ($statusType && $statusMessage): ?>
+      <div aria-labelledby="try-status-label" class="status -type:<?= $statusType ?>">
+        <?= icon(r($statusType === 'status', 'info', 'warning'), true) ?>
+        <p class="screen-reader-text" id="try-status-label"><strong><?= r($statusType === 'status', 'Status', 'Error') ?>:</strong></p>
+        <p><?= $statusMessage ?></p>
+      </div>
+      <?php endif ?>
 
-      <div class="downloads -mb:huge -align:center">
-        <?php foreach ($page->downloads()->toStructure() as $download) : ?>
-        <p>
-          <?php snippet('cta', [
-            'link' => $download->link(),
-            'text' => $download->text(),
-            'icon' => 'download',
-          ]) ?>
-          <?= $download->description() ?>
-        </p>
+      <div class="links -mb:huge -align:center">
+        <?php foreach ($page->links()->toStructure() as $link) : ?>
+          <?php if ($link->action()->isNotEmpty()): ?>
+          <form action="<?= $link->action() ?>" method="POST" class="demo">
+            <button type="submit" class="cta">
+              <?= icon($link->icon(), true) ?><!--
+              --><span class="cta-text"><?= $link->text() ?></span>
+            </button>
+
+            <?= $link->description() ?>
+          </form>
+          <?php else: ?>
+          <p>
+            <?php snippet('cta', [
+              'link' => $link->link(),
+              'text' => $link->text(),
+              'icon' => $link->icon(),
+            ]) ?>
+            <?= $link->description() ?>
+          </p>
+          <?php endif ?>
         <?php endforeach ?>
       </div>
 
