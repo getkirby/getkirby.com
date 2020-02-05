@@ -6,23 +6,78 @@
   text-align: center;
 }
 
+.try-page .status {
+  background: $color-success-background;
+  border-radius: $border-radius;
+  margin-bottom: 3rem;
+  padding: 1rem 1rem 1rem 2.5rem;
+  position: relative;
+
+  > .icon {
+    fill: $color-green;
+    left: .75rem;
+    position: absolute;
+    top: 1.375rem; // 22px
+  }
+
+  &.-type\:error {
+    background: $color-error-background;
+
+    > .icon {
+      fill: $color-red;
+    }
+  }
+}
+
+.try-page .links {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 2rem 5rem;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+
+  a, button {
+    display: block;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+
+  button {
+    border: none;
+    cursor: pointer;
+
+    &[disabled] {
+      background: $color-muted;
+      cursor: progress;
+    }
+  }
+
+  @media screen and (max-width: 44rem) {
+    grid-template-columns: repeat(2, auto);
+    grid-gap: 2rem 2rem;
+
+    > .demo {
+      grid-column: 1 / span 2;
+      order: -1;
+    }
+  }
+
+  @media screen and (max-width: 25rem) {
+    grid-template-columns: auto;
+
+    > .demo {
+      grid-column: initial;
+    }
+
+    a, button {
+      width: auto;
+    }
+  }
+}
+
 .try-page .starterkit {
   border: 1px solid #000;
   line-height: 0;
   margin: 0 auto 1.5rem;
   max-width: 30rem;
-}
-
-.try-page .downloads {
-  display: flex;
-  justify-content: center;
-
-  > p:not(:last-child) {
-    margin-right: 5rem;
-  }
-
-  a {
-    display: block;
-    margin-bottom: 1rem;
-  }
 }
