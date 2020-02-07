@@ -12,7 +12,7 @@
 
       <?php if ($statusType && $statusMessage): ?>
       <div aria-labelledby="try-status-label" class="status -type:<?= $statusType ?>">
-        <?= icon(r($statusType === 'status', 'info', 'warning'), true) ?>
+        <?= icon(r($statusType === 'status', 'check', 'warning'), true) ?>
         <p class="screen-reader-text" id="try-status-label"><strong><?= r($statusType === 'status', 'Status', 'Error') ?>:</strong></p>
         <p><?= $statusMessage ?></p>
       </div>
