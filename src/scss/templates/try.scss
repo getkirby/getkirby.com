@@ -9,21 +9,28 @@
 .try-page .status {
   background: $color-success-background;
   border-radius: $border-radius;
-  margin-bottom: 3rem;
-  padding: 1rem 1rem 1rem 2.5rem;
+  margin-top: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -3rem;
+  padding: 1rem;
   position: relative;
+  display: flex;
+  align-items: center;
 
-  > .icon {
+  > svg {
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+
+  > svg * {
     fill: $color-green;
-    left: .75rem;
-    position: absolute;
-    top: 1.375rem; // 22px
   }
 
   &.-type\:error {
     background: $color-error-background;
 
-    > .icon {
+    > svg * {
       fill: $color-red;
     }
   }
