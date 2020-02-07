@@ -3,20 +3,20 @@
   <main class="try-page | main" id="maincontent">
     <article class="wrap">
 
+      <?php if ($statusType && $statusMessage): ?>
+      <div aria-labelledby="try-status-label" class="status -type:<?= $statusType ?>">
+        <?= icon(r($statusType === 'status', 'check', 'warning'), true) ?>
+        <p class="screen-reader-text" id="try-status-label"><strong><?= r($statusType === 'status', 'Status', 'Error') ?>:</strong></p>
+        <p><?= widont($statusMessage) ?></p>
+      </div>
+      <?php endif ?>
+
       <header class="hero -align:center">
         <h1>Try Kirby for free</h1>
         <div class="intro">
           <?= $page->intro()->kt() ?>
         </div>
       </header>
-
-      <?php if ($statusType && $statusMessage): ?>
-      <div aria-labelledby="try-status-label" class="status -type:<?= $statusType ?>">
-        <?= icon(r($statusType === 'status', 'check', 'warning'), true) ?>
-        <p class="screen-reader-text" id="try-status-label"><strong><?= r($statusType === 'status', 'Status', 'Error') ?>:</strong></p>
-        <p><?= $statusMessage ?></p>
-      </div>
-      <?php endif ?>
 
       <div class="links -mb:huge -align:center">
         <?php foreach ($page->links()->toStructure() as $link) : ?>
