@@ -1,4 +1,4 @@
-Title: Language specific slug rules 
+Title: Language specific slug rules
 
 ----
 
@@ -22,8 +22,8 @@ return [
   'direction' => 'ltr',
   'locale' => 'de_DE',
   'name' => 'Deutsch',
-  'slug' => [
-    'ß' => 'sz' 
+  'slugs' => [
+    'ß' => 'sz'
   ]
 ];
 ```
