@@ -159,13 +159,13 @@ return [
   'name' => 'English',
   'url' => '/',
   'locale'  => [
-    LC_ALL      => 'en_US.utf8',
-    LC_COLLATE  => 'en_US.utf8',
-    LC_MONETARY => 'en_US.utf8',
-    LC_NUMERIC  => 'en_US.utf8',
-    LC_TIME     => 'en_US.utf8',
-    LC_MESSAGES => 'en_US.utf8',
-    LC_CTYPE    => 'en_US.utf8'
+    'LC_ALL'      => 'en_US.utf8',
+    'LC_COLLATE'  => 'en_US.utf8',
+    'LC_MONETARY' => 'en_US.utf8',
+    'LC_NUMERIC'  => 'en_US.utf8',
+    'LC_TIME'     => 'en_US.utf8',
+    'LC_MESSAGES' => 'en_US.utf8',
+    'LC_CTYPE'    => 'en_US.utf8'
   ]
 ];
 ```
@@ -180,13 +180,13 @@ return [
   'name' => 'Deutsch',
   'url' => 'de',
   'locale'  => [
-    LC_ALL      => 'de_DE.utf8',
-    LC_COLLATE  => 'de_DE.utf8',
-    LC_MONETARY => 'de_DE.utf8',
-    LC_NUMERIC  => 'de_DE.utf8',
-    LC_TIME     => 'de_DE.utf8',
-    LC_MESSAGES => 'de_DE.utf8',
-    LC_CTYPE    => 'de_DE.utf8'
+    'LC_ALL'      => 'de_DE.utf8',
+    'LC_COLLATE'  => 'de_DE.utf8',
+    'LC_MONETARY' => 'de_DE.utf8',
+    'LC_NUMERIC'  => 'de_DE.utf8',
+    'LC_TIME'     => 'de_DE.utf8',
+    'LC_MESSAGES' => 'de_DE.utf8',
+    'LC_CTYPE'    => 'de_DE.utf8'
   ]
 ];
 ```
