@@ -198,7 +198,6 @@ export default {
     }
 }
 </script>
-</script>
 ```
 A property consists of the key for the property and a value that contains at least the type we expect to have here, in this case we want a string.
 
@@ -358,6 +357,8 @@ export default {
 ```
 
 With this, we now have a fully working input field that looks like a normal text field.
+
+(screenshot: doifield-6.jpg)
 
 We can now add more props, if we want, to make the standard field properties like `help`, `disabled`, `required` work as well.
 
