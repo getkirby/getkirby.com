@@ -14,14 +14,14 @@ Luckily for us, creating a shared controller is an easy task in Kirby 3.
 
 ## A simple example
 
-We'll use the `<title>` and the `<meta name="description">` as an example. The easiest way to add those two tags to our site would be to add them directly into the `header.php` snippet. Something like this:
+We'll use the `<title>` and `<meta name="description">` tags as an example. The easiest way to add those two tags to our site would be to add them directly into the `header.php` snippet. Something like this:
 
 ```php "/site/snippets/header.php"
 <!DOCTYPE html>
 <html>
 <head>
 
-  <!-- The title tag we show the title of our site and the title of the current page -->
+  <!-- The title tag shows the title of our site and the title of the current page -->
   <title><?= $site->title() ?> | <?= $page->title() ?></title>
   
   <!-- The meta description shows an excerpt of the main text -->
@@ -36,7 +36,7 @@ That's a perfectly fine and reasonable solution. But what if we want to show a s
 <html>
 <head>
 
-  <!-- The title tag we show the title of our site and the title of the current page -->
+  <!-- The title tag shows the title of our site and the title of the current page -->
   <title><?php e($page->isHomePage() , $site->title() . "|" . $site->tagline() , $site->title() . "|" . $page->title()) ?></title>
   
   <!-- The meta description shows an excerpt of the main text -->
@@ -45,7 +45,7 @@ That's a perfectly fine and reasonable solution. But what if we want to show a s
 </head>
 ```
 
-This is already starting to look ugly and things could only get messier if we start adding more logic or other tags. It then makes sense to move this simple bit of logic outside of the blueprint and into a controller.
+This is already starting to look ugly and things will only get messier if we start adding more logic or other tags. It then makes sense to move the logic from the snippet into a controller.
 
 Let's do that.
 
@@ -107,11 +107,11 @@ But if we do that and we navigate to our homepage we'll get presented with an er
 Undefined variable: metaDescription
 ```
 
-That's because since there now is a controller for the homepage, Kirby will use that instead of our fallback one. An intuitive solution would be to simply copy and paste the same line of code from the `site.php` controller into the `home.php` controller but that goes against the DRY principle.
+That's because we now have a controller for the homepage, and Kirby will use that instead of our fallback one. An intuitive solution would be to simply copy and paste the same line of code from the `site.php` controller into the `home.php` controller but that goes against the DRY principle.
 
 ## Setting up the shared controller
 
-This is where the concept of the shared controller becomes useful. Rather than copy and pasting the same code, we'll first use the `$kirby->controller()` method to get the data from the `site.php` controller and we'll store it in a variable.
+This is where the concept of the shared controller becomes useful. Rather than copy and pasting the same code, we'll first use the `$kirby->controller()` method to get the data from the `site.php` controller and store it in a variable.
 
 ```php "/site/controllers/home.php"
 # Grab the data from the default controller
@@ -175,7 +175,7 @@ controllers/
 
 ...and you can leverage the method described in this guide to share the content of the `post.php` controller with the other controllers.
 
-To do that you simply need to pass the correct controller name to the `controller()` function and you're done.
+To do that you need to pass the correct controller name to the `controller()` function and you're done.
 
 ```php "/site/controllers/post-video.php"
 <?php
