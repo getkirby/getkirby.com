@@ -358,7 +358,7 @@ export default {
 
 With this, we now have a fully working input field that looks like a normal text field.
 
-(screenshot: doifield-6.jpg)
+(screenshot: doifield-7.jpg)
 
 We can now add more props, if we want, to make the standard field properties like `help`, `disabled`, `required` work as well.
 
@@ -488,4 +488,4 @@ export default {
 
 Voilà, our new doi field is ready for use.
 
-(screenshot: doifield-7.jpg)
+(screenshot: doifield-8.jpg)
