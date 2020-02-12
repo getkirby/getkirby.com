@@ -1,5 +1,35 @@
 @import "../includes";
 
+.try-page .status {
+  background: $color-success-background;
+  border-radius: $border-radius;
+  margin-top: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -3rem;
+  padding: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  > svg {
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+
+  > svg * {
+    fill: $color-green;
+  }
+
+  &.-type\:error {
+    background: $color-error-background;
+
+    > svg * {
+      fill: $color-red;
+    }
+  }
+}
+
 .grid {
   --columns: 12;
   --gutter: 3rem;
