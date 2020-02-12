@@ -71,7 +71,7 @@ Kirby's (link: docs/guide/api/introduction text: REST API) (used by the Panel) u
 </info>
 
 
-If you want to use PHP's built-in server (**not recommended**), you have to start it up with Kirby's router:
+If you want to use PHP's built-in server, you have to start it up with Kirby's router:
 
 ```php
 php -S localhost:8000 kirby/router.php
