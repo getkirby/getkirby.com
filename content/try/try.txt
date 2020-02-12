@@ -10,29 +10,5 @@ Priority: 0.9
 
 ----
 
-Intro: Kirby's license model is based on a single idea:<br> We want you to be happy before you buy it!<br> (link: docs/guide/quickstart text: Get up and running.)
+Intro: Long-term customers are more important to us than quick conversions. That’s why we want you to be happy with Kirby before you (link: buy text: buy your first license)
 
-----
-
-Text:
-
-Try Kirby on your **local machine**, in the **online demo** or on a **private test server**. Once you are sure that Kirby fits your project, (link: buy text: **buy a license**) and publish your site.
-
-----
-
-Links:
--
-    text: Starterkit
-    icon: download
-    link: https://download.getkirby.com
-    description: For new users<br>who want to learn.
--
-    text: Instant Demo
-    icon: wand
-    action: https://demo.getkirby.com
-    description: For those who want to<br>try but not yet install.
--
-    text: Plainkit
-    icon: download
-    link: https://github.com/getkirby/plainkit/archive/master.zip
-    description: For those who want<br>to start from scratch.

@@ -1,90 +1,80 @@
 @import "../includes";
 
-.try-page .description {
-  margin: 0 auto;
-  max-width: 25rem;
-  text-align: center;
-}
-
-.try-page .status {
-  background: $color-success-background;
-  border-radius: $border-radius;
-  margin-top: 3rem;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: -3rem;
-  padding: 1rem;
-  position: relative;
-  display: flex;
-  align-items: center;
-
-  > svg {
-    margin-right: 1rem;
-    flex-shrink: 0;
-  }
-
-  > svg * {
-    fill: $color-green;
-  }
-
-  &.-type\:error {
-    background: $color-error-background;
-
-    > svg * {
-      fill: $color-red;
-    }
-  }
-}
-
-.try-page .links {
+.grid {
+  --columns: 12;
+  --gutter: 3rem;
   display: grid;
-  grid-auto-flow: row;
-  grid-gap: 2rem 5rem;
-  grid-template-columns: repeat(3, auto);
-  justify-content: center;
+  grid-template-columns: 1fr;
+}
+.grid > .column {
+  margin-bottom: 1.5rem;
+}
 
-  a, button {
-    display: block;
-    margin-bottom: 1rem;
-    width: 100%;
+@media screen and (min-width: 55rem) {
+  .grid {
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: var(--gutter);
   }
-
-  button {
-    border: none;
-    cursor: pointer;
-
-    &[disabled] {
-      background: $color-muted;
-      cursor: progress;
-    }
-  }
-
-  @media screen and (max-width: 44rem) {
-    grid-template-columns: repeat(2, auto);
-    grid-gap: 2rem 2rem;
-
-    > .demo {
-      grid-column: 1 / span 2;
-      order: -1;
-    }
-  }
-
-  @media screen and (max-width: 25rem) {
-    grid-template-columns: auto;
-
-    > .demo {
-      grid-column: initial;
-    }
-
-    a, button {
-      width: auto;
-    }
+  .grid > .column {
+    grid-column: span var(--columns);
   }
 }
 
-.try-page .starterkit {
-  border: 1px solid #000;
+.box {
+  background: #313740;
+  color: #fff;
+  padding: 1.5rem;
+}
+.box figure {
   line-height: 0;
-  margin: 0 auto 1.5rem;
-  max-width: 30rem;
+  margin-bottom: 1.5rem;
+}
+.cta {
+  padding: .5rem 1rem;
+  border: 2px solid #000;
+  cursor: pointer;
+}
+.box .cta {
+  background: none;
+  border: 2px solid #f0c674;
+  padding: .5rem 1rem;
+  display: inline-flex;
+  align-items: center;
+}
+.box .cta:hover {
+  background: #f0c674;
+  color: #000;
+}
+.box .cta:hover .cta-text {
+  color: #000 !important;
+}
+.box button {
+  cursor: pointer;
+}
+.box form[disabled] {
+  cursor: progress;
+}
+.box form[disabled] button {
+  pointer-events: none;
+}
+.box form[disabled] .cta {
+  opacity: .5;
+}
+.box .cta svg {
+  margin-right: .75rem;
+  margin-top: -1px;
+}
+.box .cta svg * {
+  fill: #fff;
+}
+.box .cta:hover svg * {
+  fill: #000;
+}
+.kit {
+  background: #efefef;
+  padding: 1.5rem;
+  margin-bottom: .5rem;
+}
+.local {
+  padding-top: 1.5rem;
 }
