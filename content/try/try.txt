@@ -10,5 +10,5 @@ Priority: 0.9
 
 ----
 
-Intro: Happy customers are more important to us than quick conversions. That’s why we want you to be satisfied with Kirby before you (link: buy text: buy your first license)
+Intro: Your happiness is more important to us than a quick sale. That’s why we want you to be satisfied with Kirby before you (link: buy text: buy your first license)
 
