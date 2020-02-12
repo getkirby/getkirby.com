@@ -10,5 +10,5 @@ Priority: 0.9
 
 ----
 
-Intro: Long-term customers are more important to us than quick conversions. That’s why we want you to be happy with Kirby before you (link: buy text: buy your first license)
+Intro: Happy customers are more important to us than quick conversions. That’s why we want you to be satisfied with Kirby before you (link: buy text: buy your first license)
 
