@@ -94,6 +94,6 @@ To let your favorite search engines know about your brand new sitemap, please re
 
 ## Extending the basic example
 
-This is a very basic example. If you need something more complex, you can either use one of the (link: https://github.com/texnixe/kirby-plugins text: plugins provided by the community), or extend it yourself, for example, by fine-tuning the options for pages you want to ignore (e.g. filter by template), or adding images.
+This is a very basic example. If you need something more complex, you can either use one of the (link: https://getkirby.com/plugins text: plugins are provided by the community), or extend it yourself, for example, by fine-tuning the options for pages you want to ignore (e.g. filter by template), or adding images.
 
 
