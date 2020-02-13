@@ -194,7 +194,7 @@ You can read more about this in our (link: docs/guide/kirby-and-privacy text: pr
 
 ### IP address
 
-Our demo manager software at https://demo.getkirby.com temporarily stores the IP address of the user who created the demo instance. We need it to protect against XSS attacks and to prevent the creation of too many demo instances per user.
+Our demo manager software at https://trykirby.com temporarily stores the IP address of the user who created the demo instance. We need it to protect against XSS attacks and to prevent the creation of too many demo instances per user.
 
 Because the IP address is stored as a shortened hash only, we cannot convert it back to the actual IP address.
 
