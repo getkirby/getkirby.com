@@ -10,5 +10,7 @@ Priority: 0.9
 
 ----
 
-Intro: Your happiness is more important to us than a quick sale. That’s why we want you to be satisfied with Kirby before you (link: buy text: buy your first license)
+Intro:
+
+Discover how Kirby helps you build any type of website. Explore our online demo or download the kits to get started<br><small>… and when you’re convinced, (link: buy text: buy your license)</small>
 
