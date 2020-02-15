@@ -2,7 +2,7 @@ Title: Sitemapper
 
 ----
 
-Repository: https://gitlab.com/cre8ivclick/sitemapper
+Repository: https://gitlab.com/kirbyzone/sitemapper
 
 ----
 
