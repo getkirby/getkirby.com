@@ -1,28 +1,5 @@
-Text: 
 
-## Values for `$args`
-
-`$args` can be a string, `true`, `false` or a combination of a filter method and an argument. In case of the `in` or `not in` filters, the third argument must be an array.
-
-
-## Examples
-
-```php
-// filter by extension
-$images = $page->images()->filterBy('extension', 'jpg');
-
-// filter by custom field value
-$images = $page->images()->filterBy('gallery', 'gallery-2');
-
-// filter by filenames containing a string
-$files = $page->files()->filterBy('filename', '*=', '-document');
-
-// filter all types except documents
-$files = $page->files()->filterBy('type', '!=', 'document');
-
-// filter all files that have a template assigned
-$files = $page->files()->filterBy('template', true);
-```
+Text:
 
 ## Available filter methods
 
