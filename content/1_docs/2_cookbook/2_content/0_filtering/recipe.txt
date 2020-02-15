@@ -234,7 +234,7 @@ $events = page('events')
 ```
 ## Filtering by the `pages`, `files` or `users` field
 
-The (link: docs/reference/panel/fields/pages text: `pages`), (link: docs/reference/panel/fields/files text: `files`) and (link: docs/reference/panel/fields/users text: `users`) fields store their content in `yaml` format. Also, these fields can contain one or multiple entries. Using the simple `filterby()` method is therefore not useful to filter a collection by these field types and we have to use the [`filter()`](/../reference/objects/pages/filter) method.
+The (link: docs/reference/panel/fields/pages text: `pages`), (link: docs/reference/panel/fields/files text: `files`) and (link: docs/reference/panel/fields/users text: `users`) fields store their content in `yaml` format. Also, these fields can contain one or multiple entries. Using the simple `filterby()` method is therefore not useful to filter a collection by these field types and we have to use the [`filter()`](/docs/reference/objects/pages/filter) method.
 
 Let's first understand what these fields store in the content files:
 

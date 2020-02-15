@@ -176,7 +176,7 @@ The structure field tries to create the best possible preview for the field in i
 
 ## How to use in templates/snippets
 
-To access a structure field in your templates, you can use the [`yaml()`](../../templates/field-methods/yaml) and [`toStructure()`](../../templates/field-methods/to-structure) methods.
+To access a structure field in your templates, you can use the [`yaml()`](/docs/reference/templates/field-methods/yaml) and [`toStructure()`](/docs/reference/templates/field-methods/to-structure) methods.
 
 Let's say we wanted to render the `holidays` structure field example from above in a template:
 
