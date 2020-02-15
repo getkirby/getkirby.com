@@ -20,7 +20,7 @@
 
     <div class="grid" style="--gutter: 3rem">
       <div class="column box" style="--columns: 8">
-        <form class="demo" action="https://trykirby.com" method="POST">
+        <form class="demo" action="https://<?= r(param('demo') === 'staging', 'staging.') ?>trykirby.com" method="POST">
           <h2 class="h3">Personal Demo</h2>
           <figure>
             <button class="button-reset"><?= $page->image('interface.png')->resize(800) ?></button>
