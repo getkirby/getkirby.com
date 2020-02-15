@@ -158,7 +158,7 @@ return function ($kirby) {
 ## Arguments from `$page->render()` in route
 
 <since v="3.1.3">
-When using the [`$page->render()`](../../reference/objects/page/render) method to return a page in a route, you can send an array of additional data with it:
+When using the [`$page->render()`](/docs/reference/objects/page/render) method to return a page in a route, you can send an array of additional data with it:
 
 ```php "/site/config/config.php"
 return [

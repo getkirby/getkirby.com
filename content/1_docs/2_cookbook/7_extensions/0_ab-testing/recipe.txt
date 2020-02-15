@@ -70,7 +70,7 @@ It looks fairly simple, but let me go through each step for you:
 
 ### Fetching the IP
 
-Kirby has a built-in method called [`$kirby->visitor()`](docs/reference/objects/kirby/visitor), which returns an object that lets you get some useful information about the current visitor such as the ip, the preferred language or the user agent string.
+Kirby has a built-in method called [`$kirby->visitor()`](/docs/reference/objects/kirby/visitor), which returns an object that lets you get some useful information about the current visitor such as the ip, the preferred language or the user agent string.
 
 ```php
 $visitor = kirby()->visitor();

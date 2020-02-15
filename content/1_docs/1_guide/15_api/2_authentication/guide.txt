@@ -18,7 +18,7 @@ The (glossary: Panel) uses session-based authentication, which is not really typ
 
 We use sessions purely for authentication to keep communication with the API stateless.
 
-Session-based authentication requires CSRF token validation. The CSRF token has to be sent in the `X-CSRF` header for every request. A token can be generated with the [`csrf()`](docs/reference/templates/helpers/csrf) helper in the backend.
+Session-based authentication requires CSRF token validation. The CSRF token has to be sent in the `X-CSRF` header for every request. A token can be generated with the [`csrf()`](/docs/reference/templates/helpers/csrf) helper in the backend.
 
 Sessions also require a correct session cookie for every request. Therefore, session-based authentication works best when you make API calls from the frontend of the same site/domain.
 
