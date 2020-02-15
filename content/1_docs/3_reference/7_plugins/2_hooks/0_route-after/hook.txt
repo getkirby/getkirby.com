@@ -1,0 +1,13 @@
+Details:
+
+## When is the hook triggered
+
+
+- Kirby is set up
+- The routes are loaded
+- The router is created
+- The router tries to find a matching route
+- The `route:before` hook is triggered
+- The route action is executed
+- Within the route the route action is executed (a page rendered, deleted, or whatever the script does)
+- The `route:after` hook is triggered with the result of the route action
