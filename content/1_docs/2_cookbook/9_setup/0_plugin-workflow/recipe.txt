@@ -20,7 +20,7 @@ In this guide, we will use (link: https://phpunit.de/ text: PHPUnit) to set up a
 
 ### PHPUnit
 
-If you don't have PHPUnit, follow the instructions on (link: https://phpunit.de/ text: their site) to install it or if you use XAMPP, check (link: https://medium.com/oblik-studio/how-to-set-up-phpunit-on-xampp-and-windows-dad92dc11335 text: this article).
+If you don't have PHPUnit, follow the instructions on (link: https://phpunit.de/ text: their site) to install it.
 
 ### Kirby
 

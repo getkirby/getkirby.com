@@ -29,7 +29,7 @@ We found loading websites on MAMP slow on OS X Mojave. A majority of the Kirby t
 
 ## XAMPP
 
-(link: https://www.apachefriends.org/index.html https://www.apachefriends.org/download.html text: XAMPP) is similar to MAMP, free, and available for Mac, Windows and Linux.
+(link: https://www.apachefriends.org/index.html text: XAMPP) is similar to MAMP, free, and available for Mac, Windows and Linux.
 
 In a default installation, the web root folder is located under `programs/XAMPP/htdocs` on a Mac or `C:\XAMPP\htdocs` on Windows. XAMPP is probably the most popular GUI tool used on Windows/Linux.
 
