@@ -30,7 +30,7 @@ The direction of your sort order, either `desc` for descending, or `asc` for asc
 
 **method**
 
-The method takes an optional third parameter, the sort flag. The default is `SORT_REGULAR`, but if you want to sort by numeric values, you can use `SORT_NUMERIC` or other (link: http://php.net/manual/de/function.sort.php/#refsect1-function.sort-parameters text: sort flags) instead.
+The method takes an optional third parameter, the sort flag. The default is `SORT_REGULAR`, but if you want to sort by numeric values, you can use `SORT_NUMERIC` or other (link: https://www.php.net/manual/en/function.sort.php#refsect1-function.sort-parameters text: sort flags) instead.
 
 
 ## Sorting by a single field
@@ -111,7 +111,7 @@ foreach($sortedEvents as $event): ?>
 <?php endforeach ?>
 ```
 
-If you use `yaml()` to create an array of events instead of a collection, and you want to sort that array, you can use the [`A::sort()`](/docs/framework/toolkit/a/sort) method from the toolkit, or check out the (link: http://php.net/manual/de/array.sorting.php text: different ways to sort arrays ) in the PHP manual.
+If you use `yaml()` to create an array of events instead of a collection, and you want to sort that array, you can use the [`A::sort()`](/docs/reference/tools/a/sort) method from the toolkit, or check out the (link: http://php.net/manual/de/array.sorting.php text: different ways to sort arrays ) in the PHP manual.
 
 ## Custom sorting
 

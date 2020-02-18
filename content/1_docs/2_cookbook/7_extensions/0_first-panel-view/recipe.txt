@@ -42,7 +42,7 @@ This will take care of compiling our source files into an `index.js` file in the
 
 Inside the `moviereviews` folder, we create an `index.php` with the Kirby plugin wrapper. And inside this wrapper, we create a custom API route that serves as our data provider. It requests the data from the selected API with a `Remote::get()` request and returns it, so that we can later use it in our component.
 
-For this example, we reuse the (link: https://developer.nytimes.com/docs/movie-reviews-api/1/overview text: NYT Movie Reviews API) we already used in the (link: docs/guide/virtual-pages/content-from-api Virtual Pages guide). To follow this example, create an account and an example app (link: https://developer.nytimes.com/get-started text: by following their instructions). Then get your API key and add it to the code below.
+For this example, we reuse the (link: https://developer.nytimes.com/docs/movie-reviews-api/1/overview text: NYT Movie Reviews API) we already used in the (link: docs/guide/virtual-pages/content-from-api text: Virtual Pages guide). To follow this example, create an account and an example app (link: https://developer.nytimes.com/get-started text: by following their instructions). Then get your API key and add it to the code below.
 
 ```php
 <?php
