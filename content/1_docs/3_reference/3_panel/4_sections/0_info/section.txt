@@ -176,4 +176,22 @@ sections:
       Just upload whatever you want. We get sued anyway.
 ```
 
+<since v="3.3.4">
+### Disable theming
+
+You can disable the infobox theme entirely to show neutral text.
+
+```yaml
+fields:
+  info:
+    type: info
+    headline: Info
+    theme: none
+    text: |
+      This is a very neutral message
+```
+</since>
+
+
 (docs: sections/conditional-sections)
+

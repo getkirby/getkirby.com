@@ -55,7 +55,6 @@ The info field is displayed as a blue info box. You can switch the theme with th
 - `positive`
 - `negative`
 
-
 ```yaml
 fields:
   info:
@@ -67,3 +66,17 @@ fields:
 
 (screenshot: info-negative.png)
 
+<since v="3.3.4">
+#### Disable theming
+
+You can disable the infobox theme entirely to show neutral text.
+
+```yaml
+fields:
+  info:
+    label: Info
+    type: info
+    theme: none
+    text: This is a very neutral message.
+```
+</since>
