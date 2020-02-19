@@ -111,7 +111,7 @@ foreach($sortedEvents as $event): ?>
 <?php endforeach ?>
 ```
 
-If you use `yaml()` to create an array of events instead of a collection, and you want to sort that array, you can use the [`A::sort()`](/docs/reference/tools/a/sort) method from the toolkit, or check out the (link: http://php.net/manual/de/array.sorting.php text: different ways to sort arrays ) in the PHP manual.
+If you use `yaml()` to create an array of events instead of a collection, and you want to sort that array, you can use the [`A::sort()`](/docs/reference/tools/a/sort) method from the toolkit, or check out the (link: https://www.php.net/manual/en/array.sorting.php text: different ways to sort arrays ) in the PHP manual.
 
 ## Custom sorting
 

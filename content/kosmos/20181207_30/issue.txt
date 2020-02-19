@@ -114,6 +114,6 @@ Many more are already available. Check them out in the [Kirby plugins repo](http
 
 - [Programming CSS](https://adactio.com/journal/14574)
 
-- [PHP 7.3.0 was released](http://php.net/releases/7_3_0.php) (PHP 5.6 will be end of life on Dec, 31)
+- [PHP 7.3.0 was released](https://www.php.net/releases/7_3_0.php) (PHP 5.6 will be end of life on Dec, 31)
 
 

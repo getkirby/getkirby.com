@@ -27,7 +27,7 @@ Over the last month since our first Kirby Kosmos episode the community has been 
 ## News
 
 - Since the last episode of Kirby Kosmos, we published two new Kirby releases, Kirby [2.3.1](https://getkirby.com/changelog/kirby-2-3-1) and [2.3.2](https://getkirby.com/changelog/kirby-2-3-2). Make sure to update for some great improvements and bug fixes.
-- PHP 5.5 is now [end of life](http://php.net/supported-versions.php), which means that there will be no security updates for it in the future. Make sure to use at least PHP 5.6 – or take the opportunity to upgrade to PHP 7 to benefit from its improved performance!
+- PHP 5.5 is now [end of life](https://www.php.net/supported-versions.php), which means that there will be no security updates for it in the future. Make sure to use at least PHP 5.6 – or take the opportunity to upgrade to PHP 7 to benefit from its improved performance!
 
 ## Kirby Plugins
 

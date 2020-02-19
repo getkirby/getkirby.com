@@ -30,7 +30,7 @@ While Kirby's main data source is still files and folders, you can now mix regul
 
 ### Pages from PHP reflections
 
-"What are PHP reflections?" you might ask. PHP has (link: http://php.net/manual/en/book.reflection.php text: a built-in set of classes) that you can use to inspect your own code. If you want to know more details about a certain PHP class, for example, you can do the following:
+"What are PHP reflections?" you might ask. PHP has (link: https://www.php.net/manual/en/book.reflection.php text: a built-in set of classes) that you can use to inspect your own code. If you want to know more details about a certain PHP class, for example, you can do the following:
 
 ```php
 $reflection = new ReflectionClass('MyClass');

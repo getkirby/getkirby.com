@@ -128,7 +128,7 @@ config.mysite.com.php
 
 If you work with forms or any other kind of user-generated content on your site, you have to make sure to properly **filter and sanitize any user input**. Even though Kirby does not use a database system and SQL injections are therefore not possible, an attacker could still add malicious input to your text files in order to try to manipulate your site.
 
-You can find more about (link: docs/reference#validators text: Kirby's input validators) in the Reference. They are a good start to check incoming user data. Additionally you should read more about PHP's (link: http://php.net/manual/en/book.filter.php text: input filtering functions).
+You can find more about (link: docs/reference#validators text: Kirby's input validators) in the Reference. They are a good start to check incoming user data. Additionally you should read more about PHP's (link: https://www.php.net/manual/en/book.filter.php text: input filtering functions).
 
 **Never directly add unfiltered/unvalidated user data to methods such as…**
 

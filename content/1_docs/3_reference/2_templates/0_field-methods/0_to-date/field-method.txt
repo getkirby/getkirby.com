@@ -21,4 +21,4 @@ Text:
 ```
 </since>
 
-Check out PHP's date function docs for all available formatting options: http://php.net/manual/en/function.date.php
+Check out PHP's date function docs for all available formatting options: https://www.php.net/manual/en/function.date.php
