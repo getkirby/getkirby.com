@@ -1,0 +1,5 @@
+Text:
+
+<info>
+The URL validation may lead to incorrect results (= a valid URL being marked as invalid or the other way around) in rare edge-cases.
+</info>
