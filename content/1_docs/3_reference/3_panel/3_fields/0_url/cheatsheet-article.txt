@@ -16,6 +16,10 @@ The url field is a standard text field with the type `url` and a custom URL icon
 
 (screenshot: url.png)
 
+<info>
+The URL validation may lead to incorrect results (= a valid URL being marked as invalid or the other way around) in rare edge-cases. In those edge-cases you can manually input the URL into the content text files or switch to a simple text field.
+</info>
+
 ## Example
 
 ```yaml
