@@ -64,6 +64,22 @@ $collection = page('blog')
   ->filterBy('title', '<', 'B');
 ```
 
+## Simple related pages
+
+To fetch all sibling pages that share one or more tags stored in a comma separated list, you can use the `in` filter operator like this:
+
+```php
+$relatedSiblings = $page->siblings(false)->filterBy('tags', 'in', $page->tags()->split(','), ',');
+```
+
+To fetch related pages that have at least two tags in common, we can use the `filter()` method instead:
+
+```php
+$relatedSiblings = $page->siblings(false)->filter(function($sibling) (use $page) {
+  return count(array_intersect($sibling->tags()->split(','), $page->tags()->split(','))) >= 2;
+});
+```
+
 ### Files
 
 ```php
