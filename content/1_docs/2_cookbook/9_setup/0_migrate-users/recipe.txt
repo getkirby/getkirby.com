@@ -31,7 +31,7 @@ To migrate your Kirby 2 user accounts to Kirby 3, you need to follow these steps
 1. **Backup** all Kirby 2 account files from `/site/accounts`. Things can go wrong. We do not want you to lose this important data.
 2. **Create (link: docs/guide/users/roles#creating-your-own-roles text: user blueprints)** for every (link: docs/guide/users/roles text: user role). If you do not create these first, all user accounts will be assigned the role `nobody`.
 3. Remove the `.logins` and `index.html` files from `/site/accounts`. Only your Kirby 2 account files should be left.
-4. Put the following **`migration.php` script** into your document root next to the `index.php` and run it by visiting `http://yourdomain.com/migrate.php`.
+4. Put the following **`migrate.php` script** into your document root next to the `index.php` and run it by visiting `http://yourdomain.com/migrate.php`.
 5. Delete the script.
 
 <warning>
