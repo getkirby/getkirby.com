@@ -25,9 +25,9 @@ fields:
   pageSettings:
     label: Page Settings
     type: headline
-  title:
-    label: Title
-    type: title
+  kind:
+    label: Page Kind
+    type: text
   draft:
     label: Draft
     type: toggle
@@ -51,9 +51,9 @@ fields:
     label: Page Settings
     type: headline
     numbered: false
-  title:
-    label: Title
-    type: title
+  kind:
+    label: Page Kind
+    type: text
   draft:
     label: Draft
     type: toggle
