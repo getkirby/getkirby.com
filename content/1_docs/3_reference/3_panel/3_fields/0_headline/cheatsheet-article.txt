@@ -25,10 +25,10 @@ fields:
   pageSettings:
     label: Page Settings
     type: headline
-  kind:
-    label: Page Kind
+  type:
+    label: Page type
     type: text
-  draft:
+  state:
     label: Draft
     type: toggle
   content:
@@ -51,10 +51,10 @@ fields:
     label: Page Settings
     type: headline
     numbered: false
-  kind:
-    label: Page Kind
+  type:
+    label: Page type
     type: text
-  draft:
+  state:
     label: Draft
     type: toggle
   content:
