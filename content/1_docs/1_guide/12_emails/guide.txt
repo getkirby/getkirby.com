@@ -134,7 +134,7 @@ $kirby->email([
 ```php
 $success = kirby()->email([
     'from'    => 'welcome@supercompany.com',
-    'to'      => 'someone@gmail.com',,
+    'to'      => 'someone@gmail.com',
     'subject' => 'Welcome!',
     'body'    => 'We will never reply',
 ])->isSent();
