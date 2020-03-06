@@ -32,3 +32,26 @@ fields:
 ## Field properties
 
 (field-options: url)
+
+## How to use in templates/snippets
+
+Output the field value as simple string:
+
+```php
+<?= $page->url() ?>
+```
+
+
+Convert to `a` tag:
+
+```php
+<?= $page->url()->toLink() ?>
+```
+
+See the docs for the [`toLink()`](/docs/reference/templates/field-methods/to-link) method for further options.
+
+For more field manipulations, check out Kirby's (link: docs/reference/templates/field-methods text: field methods).
+
+
+
+

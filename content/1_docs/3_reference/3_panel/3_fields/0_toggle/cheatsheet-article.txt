@@ -73,3 +73,22 @@ fields:
 
 The field content will either be 'true' or 'false'.
 
+## How to use in templates/snippet
+
+Convert to a proper boolean:
+
+```php
+$bool = $page->toggle()->toBool();
+```
+
+Do something depending on field value:
+
+```php
+<?php
+if ($page->toggle()->toBool() === true) {
+  // do this
+} else {
+  // do that
+}
+```
+

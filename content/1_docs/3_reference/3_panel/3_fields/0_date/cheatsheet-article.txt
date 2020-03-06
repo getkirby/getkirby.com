@@ -33,8 +33,24 @@ fields:
 
 ## How to use in templates/snippets
 
-To convert the value to a date object, use the [`toDate()`](/docs/reference/templates/field-methods/to-date) method:
+To convert the value to a date object, use the [`toDate()`](/docs/reference/templates/field-methods/to-date) method.
+
+Without a date format, the `toDate()` field method renders a UNIX timestamp:
 
 ```php
 <?= $page->published()->toDate() ?>
+```
+
+Use a date format to render the date in your desired (link: https://www.php.net/manual/en/function.date.php text: output format):
+
+
+```php
+<?= $page->published()->toDate('Y-m-d') ?>
+```
+
+
+If you have set the (link: docs/reference/system/options/date text: date handler) to `strftime` in your config, use the corresponding (link: https://www.php.net/manual/en/function.strftime.php text: format syntax):
+
+```php
+<?= $page->published()->toDate('%Y-%m-%d') ?>
 ```
