@@ -54,3 +54,25 @@ fields:
 ```
 
 (docs: panel-field-options field: select)
+
+## How to use in templates/snippets
+
+To only render the value stored in the content file, call the field name:
+
+```php
+<?= $page->category() ?>
+```
+
+If your saved values are lowercase versions of the text shown to the user, you might want to uppercase the first letter:
+
+```php
+<?= Str::ucfirst($page->category()) ?>
+```
+
+If you want to render all letters in uppercase:
+
+```php
+<?= $page->category()->toUpper() ?>
+```
+
+If you want to output the text that is shown to the user rather than the value stored in the content file, you have different options, that are explained in our Cookbook recipe (link: docs/cookbook/templating/fetching-field-options text: Fetching field options).

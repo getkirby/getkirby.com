@@ -64,3 +64,29 @@ fields:
     type: time
     default: now
 ```
+
+## How to use in templates/snippets
+
+To output the field value as is:
+
+```php
+<?= $page->time() ?>
+```
+
+Render time in 24 hour format
+
+```php
+<?= $page->time()->toDate('H:i') ?>
+```
+
+With timezone identifier:
+
+```php
+<?= $page->time()->toDate('H:i e') ?>
+```
+
+Render the time in 12 hour format with am/pm:
+
+```php
+<?= $page->time()->toDate('g:i a');
+```

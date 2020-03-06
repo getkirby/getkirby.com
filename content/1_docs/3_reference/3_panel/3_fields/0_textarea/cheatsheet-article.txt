@@ -134,3 +134,22 @@ fields:
     font: monospace
 ```    
 </since>
+
+
+## How to use in templates/snippets
+
+The usual way to render the value of a textarea field is using the `kirbytext()` method (or the shortcut `kt()`).
+
+```php
+<?= $page->text()->kirbytext() ?>
+<?= $page->text()->kt() ?>
+```
+
+However, there might be situations, where you want to parse KirbyTags, but not render block level elements:
+
+```php
+<p><?= $page->text()->kt()->inline() ?></p>
+```
+
+For more field manipulations, check out Kirby's (link: docs/reference/templates/field-methods text: field methods).
+

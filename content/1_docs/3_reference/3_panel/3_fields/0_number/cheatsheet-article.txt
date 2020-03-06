@@ -69,3 +69,16 @@ fields:
     before: €
 ```
 
+## How to use in templates/snippets
+
+If your number field contains only integers, you can convert the value to a proper integer with the `toInt()` field method:
+
+```php
+<?= $page->numberfield()->toInt() ?>
+```
+
+For floating value, use the `toFloat()` method:
+
+```php
+<?= $page->numberfield()->toFloat() ?>
+```
