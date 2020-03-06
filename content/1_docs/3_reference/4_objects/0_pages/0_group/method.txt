@@ -1,0 +1,10 @@
+Text: 
+
+## Example
+
+```php
+// return collection of pages grouped by the first character of their title field
+$groups = $page->children()->sortBy('title', 'asc')->group(function($item) {
+    return Str::substr($item->title()->value(), 0, 1);
+});
+```
