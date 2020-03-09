@@ -1,0 +1,77 @@
+Title: Columns
+
+----
+
+Intro: Columns structure the layout of your form according to the prominence each part of the form should get.
+
+----
+Text:
+
+A blueprint's layout is created with columns of different widths.
+
+(screenshot: columns-screen-1.png)
+
+Columns can have the following widths:
+`1/2`, `1/3`, `1/4`, `2/3`, `2/4`, `3/4`
+
+You can have single or multi-column layouts as required, for example to create typical main column/sidebar layouts, or equal width columns.
+
+(screenshot: columns.png)
+
+Columns can contain one or more sections or just a set of fields.
+
+They can be used as the top level of your blueprint or inside (link: docs/guide/blueprints/tabs text: tabs) to give structure to each individual tab.
+
+
+## Defining columns
+
+Columns can be defined in two ways:
+
+### Named columns
+
+```yaml
+title: My blueprint
+
+columns:
+  left:
+    width: 2/3
+    sections:
+      # sections in the left column
+  right:
+    width: 1/3
+    sections:
+      # sections in the right column
+```
+
+<info>
+If you want to extend columns, you have to use named columns.
+</info>
+
+### Unnamed columns
+
+```yaml
+title: My blueprint
+
+columns:
+  - width: 2/3
+    sections:
+      # sections in the left column
+  - width: 1/3
+    sections:
+      # sections in the right column
+```
+
+
+<since v="3.3.4">
+## Sticky columns
+
+You can make an entire column sticky. This can be handy for a setup with a smaller sidebar that should always be available, even when you scroll.
+
+```yaml
+columns:
+  - width: 1/3
+    sticky: true
+    sections:
+      # sections in the sticky column
+```
+</since>

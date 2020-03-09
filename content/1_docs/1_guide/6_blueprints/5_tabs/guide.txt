@@ -15,13 +15,18 @@ Text:
 Tabs are basically wrappers around regular blueprint layouts. Check out (link: docs/guide/blueprints/layout text: how to create layouts) before you get started with tabs.
 </info>
 
-A tab definition has three options:
+A tab definition has two properties:
 
 - label
-- columns
 - icon
 
 The icon is optional. Please check out the (link: docs/reference/panel/icons text: list of available icons). You can also use an emoji by pasting it directly into the blueprint.
+
+Inside a tab, you can use columns, sections or just fields in the same way as you would in a blueprint without tabs.
+
+## Only fields
+
+
 
 ```yaml
 title: My blueprint

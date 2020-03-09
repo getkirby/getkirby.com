@@ -1,7 +1,7 @@
 Title: Presets
 ----
 
-Intro: Presets help you to set up typical interface layouts in seconds. Single pages, blogs, galleries and more are just a few keystrokes away.
+Intro: Presets help you set up typical interface layouts quickly. Single pages, blogs, galleries and more are just a few keystrokes away.
 
 ----
 
@@ -31,7 +31,7 @@ fields:
 
 (screenshot: simple-page.png)
 
-Besides defining form fields, you can also control the files and pages settings within this preset. (link: docs/reference/panel/presets/page text: Learn more ›)
+A `page` preset can have a set of form fields, and you can also define if the page can have files or subpages. (link: docs/reference/panel/presets/page text: Learn more ›)
 
 <info>
 The `page` preset is very close to Kirby 2 blueprints and the perfect starting point if you want to migrate an old project.
@@ -39,7 +39,7 @@ The `page` preset is very close to Kirby 2 blueprints and the perfect starting p
 
 ### Group of pages: `pages`
 
-A collection of pages, such as a blog, projects or a shop, often does not really need form fields or files, but more features to manage subpages. The `pages` preset is perfect for such page types.
+A page that is mainly a container for subpages, such as a blog, a collection of projects or a shop, often does not really need form fields or files, but options to manage subpages. The `pages` preset is perfect for such page types.
 
 ```yaml
 title: Blog
@@ -52,7 +52,7 @@ You have a lot of additional options to configure the way subpages are displayed
 
 ### Group of files: `files`
 
-Some page types, such as photo albums or download sections, should focus entirely on the file management. That's what the `files` preset is made for.
+Some page types, such as photo albums or download sections, should focus entirely on file management. That's what the `files` preset is made for.
 
 ```yaml
 title: Gallery

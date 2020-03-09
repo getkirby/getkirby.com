@@ -1,0 +1,74 @@
+Title: Sections
+
+----
+
+Intro: Sections help you to organize content in the Panel or provide additional information or functionality. Kirby comes with 4 default section types.
+
+----
+
+Text:
+
+Sections structure your forms with subpages, files, fields or additional information. **As purely structural elements they do not store anything in the content files**. Therefore, sections are not addressed in templates or snippets.  
+
+## Where section can be used
+
+Section can be used in all types of blueprints: (link: docs/reference/panel/blueprints/page text: page blueprints), (link: docs/reference/panel/blueprints/file text: file blueprints), the (link: docs/reference/panel/blueprints/site text: site blueprint) and (link: docs/reference/panel/blueprints/user text: user blueprints). They can be used as the top level of your blueprints or inside (link: docs/guide/blueprints/columns text: columns) and (link: docs/guide/blueprints/tabs text: tabs).
+
+Single sections can also be defined as section blueprints (by convention in `/site/blueprints/sections`) and be (link: docs/guide/blueprints/extending-blueprints text: reused across multiple blueprints).
+
+## Section types
+
+Kirby comes with the following four section types:
+
+(reference: panel/sections)
+
+### Fields section
+
+A fields section consists of any number of (link: docs/guide/blueprints/fields text: form fields).
+
+<info>
+Field names in different sections within the same blueprint must have unique names.
+</info>
+
+(screenshot: fields.png)
+
+(link: docs/reference/panel/sections/fields text: Learn more about fields sections…)
+
+### Files section
+
+The purpose of a files section is to list, upload, delete and replace files. The files in a files section always have a single parent page.
+
+To separate different file types, you can assign a (link: docs/reference/panel/blueprints/file text: file template) to a section.
+
+(screenshot: file-list.png)
+
+
+(link: docs/reference/panel/sections/files text: Learn more about files sections…)
+
+### Info section
+
+An info section can be used to provide helpful information to editors in a blueprint at the section level, while an (link: docs/reference/panel/fields/info text: `info` field) does the same at the field level. Their look and feel is the same, the only difference is where they can be used.
+
+(screenshot:)
+
+(link: docs/reference/panel/sections/info text: Learn more about files sections…)
+
+
+### Pages section
+
+The purpose of a pages section is to list, create, delete and publish/unpublish pages. The pages in a pages section always have a single parent page. They can be filtered by template and status.
+
+(screenshot: page-list.png)
+
+
+(link: docs/reference/panel/sections/pages text: Learn more about files sections…)
+
+## Custom sections
+
+You can create your own custom sections that either extend the functionality of the default sections or provide completely custom functionality.
+
+For more information, check out the following resources:
+
+- (link: docs/reference/plugins/extensions/sections text: Extension type section)
+- (link: docs/cookbook/extensions/first-panel-section text: My first Panel section)
+

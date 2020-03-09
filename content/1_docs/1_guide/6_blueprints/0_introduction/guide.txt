@@ -8,16 +8,18 @@ Intro: Blueprints are configuration files written in YAML that let you customize
 
 Text:
 
-## TL;DR
+Blueprints power the forms in the Panel. They can go from very basic to highly complex depending on the type of project and your content types. If you have pages that require a lot of settings, careful planning is recommended.
 
-- Blueprints are stored in `/site/blueprints`.
-- Blueprints configure the Panel layout of the site, pages, files and users.
-- Start simple with presets.
-- Create your own layouts with tabs, columns and sections.
+Let's start with getting a basic understanding of blueprints.
+
+## Yaml syntax
+
+Blueprints are written in `YAML` syntax. This syntax depends on correct indentation. Use spaces for indentation, not tabs, and 2 spaces per indentation level.
+
 
 ## Blueprint types
 
-The Panel layouts for  `site`, `pages`, `files` and `users` all get their own blueprints. The blueprint folder is structured accordingly:
+Kirby has different blueprint types, which define the Panel views for `site`, `pages`, `files` and `users`. The `/site/blueprints` folder is structured accordingly:
 
 ```filesystem
 /site/blueprints/site.yml
@@ -29,26 +31,36 @@ The Panel layouts for  `site`, `pages`, `files` and `users` all get their own bl
 (reference: panel/blueprints)
 
 <info>
-The start page (Dashboard) of the Panel is defined in the `/site/blueprints/site.yml` blueprint.
+The start page (so called "Dashboard") of the Panel is defined in the `/site/blueprints/site.yml` blueprint.
 </info>
 
 ## Presets
 
-We added three useful presets (`page`, `pages` and `files`) to our blueprints that you can use to create single pages, blogs, galleries and more with almost zero configuration.
+Kirby comes with three types of presets (`page`, `pages` and `files`) for blueprints that you can use to create single pages, blogs, galleries and more with almost zero configuration.
+
+### When to use presets
+
+Presets are great for simple page layouts that do not need a lot of customization. They can also be used inside (link: docs/guide/blueprints/tabs text: tabs).
+
+If you know in advance that you need a highly customized Panel setup or you want to use the full power of blueprint options, don't start with presets.
 
 (link: docs/guide/blueprints/presets text: Learn more about presets…)
 
-## Layout
+## Custom layouts
 
-When presets are not enough, you can be the interface designer. You decide which features are needed for each type of page, file or user and how to arrange them in (link: docs/guide/blueprints/tabs text: tabs), (link: docs/guide/blueprints/layout#defining-columns text: columns) and (link: docs/guide/blueprints/layout#adding-sections text: sections).
+If you want to go beyond the possibilities of Kirby's preseta, you can be the interface designer. You decide which features are needed for each type of page, file or user and how to arrange them.
+
+Kirby comes with the following layout features:
+
+- (link: docs/guide/blueprints/tabs text: tabs)
+- (link: docs/guide/blueprints/columns text: columns)
+- (link: docs/guide/blueprints/sections text: sections)
 
 (picture: tabs.png)
 
-(link: docs/guide/blueprints/layout text: Learn more about layouts…)
-
 ## Fields
 
-With fields you can break up your content into digestable chunks and structure it according to your content model, rather than storing everything in a huge text field. You can add as many fields of different field types as you need.
+With fields you can break your content into digestable chunks and structure it according to your content model, rather than storing everything in a single huge text field. You can add as many fields of different field types as you need.
 
 (link: docs/guide/blueprints/fields text: Learn more about fields…)
 
@@ -56,11 +68,13 @@ With fields you can break up your content into digestable chunks and structure i
 
 Kirby comes with a blueprint query language that offers basically the same functionality as Kirby's PHP API with a simple dot notation.
 
+Use the query language to find parent pages for sections, fetch options for fields, or display and format information.
+
 (link: docs/guide/blueprints/query-language text: Learn more about Kirby's blueprint query language…)
 
 ## Extending blueprints
 
-You can store fields, sections, tabs and entire blueprint layouts in separate files so that they can be reused within your blueprints. If you want, you can even create a complete component system to apply to multiple projects.
+You can store fields, sections, tabs and entire blueprint layouts in separate files so that you can reuse them across blueprints. This helps to keep your blueprints clean, and is particularly useful if you find you use the same elements in different places. If you want, you can even create a complete component system to apply to multiple projects.
 
 (link: docs/guide/blueprints/extending-blueprints text: Learn more about how to extend and reuse blueprints…)
 
@@ -83,6 +97,16 @@ Our reference has more in-depth documentation about blueprints and their differe
 (link: docs/reference/panel text: Check out the reference…)
 
 ## Tips & Tricks
+
+### General tips
+
+- Install an extension for `YAML` support in your code editor. That way, indentation and other errors in your `YAML` code will be highlighted.
+
+- If your blueprints are deeply nested, i.e. if they start at the tab level all the way down to fields, consider putting parts like individual tabs, columns or sections into separate files. This will prevent having to deal with deep indentation levels and keep your blueprints clean.
+
+- Power users: Create snippets for your code editor that you can invoke with a shortcut.
+
+- Power users: Create a library of reusable blueprints parts, see (link: docs/guide/blueprints/extending-blueprints text: extending blueprints).
 
 ### Using special characters in blueprint labels etc.
 
@@ -115,4 +139,4 @@ No:
 field-1:
   label: Headline
   type: text
-```  
+```

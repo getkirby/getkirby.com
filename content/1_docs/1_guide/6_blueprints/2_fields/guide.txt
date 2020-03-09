@@ -12,11 +12,12 @@ Text:
 
 You can choose the names for your fields freely, but there are two limitations:
 
-1. You can only use **alphanumeric characters** and **underscores** in field names.
-2. Do not use names that are **reserved by (link: docs/reference/objects/page text: native page methods)**. For example, if you give your field the name "image", it will conflict with Kirby's `$page->image()` method.
+1. Only **alphanumeric characters** and **underscores** are allowed in field names. Dashes and other characters are invalid.
+2. Field names must be **unique** per blueprint, even if they live in different tabs, columns or sections.
+2. Field names that conflict with **reserved by (link: docs/reference/objects/page text: native page methods)** should be avoided. If you name a field "image", for example, this will conflict with Kirby's `$page->image()` method.
 
 <info>
-You can still use field names that conflict with (link: docs/reference/objects/page text: native page methods). But you will have to call such a field via the `$page->content()->image()` method. We recommend prefixing your field names instead.
+If you use field names that conflict with (link: docs/reference/objects/page text: native page methods), you have to call such a field via the `$page->content()` method, e.g. `$page->content()->image()` when rendering them in templates etc.. We recommend prefixing your field names instead.
 </info>
 
 ## Available form fields
