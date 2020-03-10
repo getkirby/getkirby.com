@@ -14,6 +14,10 @@ return [
 ];
 ```
 
+<info>
+Please note that the Panel also relies on the API – the Panel won't work if you disable the API.
+</info>
+
 ## Change the API slug
 
 You can set a custom slug. The default slug is `api`.
