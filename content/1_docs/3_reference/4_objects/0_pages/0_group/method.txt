@@ -8,3 +8,7 @@ $groups = $page->children()->sortBy('title', 'asc')->group(function($item) {
     return Str::substr($item->title()->value(), 0, 1);
 });
 ```
+
+## More information
+
+(link: docs/cookbook/content/grouping-collections text: Grouping collections)

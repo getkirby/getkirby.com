@@ -1,0 +1,5 @@
+Text:
+
+## More information
+
+(link: docs/cookbook/content/grouping-collections text: Grouping collections)

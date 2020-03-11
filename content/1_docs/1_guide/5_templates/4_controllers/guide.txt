@@ -201,3 +201,8 @@ The properties defined in the `$data` array are exposed to **templates** as glob
 </info>
 
 </since>
+
+
+## More information
+
+(link: docs/cookbook/templating/shared-controllers text: Shared controllers)

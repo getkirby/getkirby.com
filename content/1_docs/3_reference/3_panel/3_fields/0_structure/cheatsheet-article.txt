@@ -199,3 +199,8 @@ If you nest structure fields inside a structure field, you have to call the `toS
 </info>
 
 
+## More information
+
+(link: docs/cookbook/content/structured-field-content text: Structured field content)
+
+

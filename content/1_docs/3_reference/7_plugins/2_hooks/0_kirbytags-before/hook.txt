@@ -1,5 +1,6 @@
 Details:
 
-## Further information
+## More information
 
-See (link: docs/cookbook/extensions/kirbytext-hooks text: The order of kirbytext/kirbytags hooks)
+- (link: docs/cookbook/extensions/kirbytext-hooks text: The order of kirbytext/kirbytags hooks)
+- (link: docs/cookbook/extensions/columns-in-kirbytext text: Columns in KirbyText)

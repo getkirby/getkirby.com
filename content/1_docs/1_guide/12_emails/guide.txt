@@ -214,3 +214,8 @@ return [
   ]
 ];
 ```
+
+## More information
+
+- (link: docs/cookbook/forms/basic-contact-form text: Email contact form)
+- (link: docs/cookbook/forms/email-with-attachments text: Email with attachments)
