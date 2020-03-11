@@ -242,3 +242,10 @@ You can also send other response types by extension or MIME type:
 $kirby->response()->type('txt');
 $kirby->response()->type('text/plain');
 ```
+
+## More information
+
+- (link: docs/cookbook/templating/custom-post-types text: Custom post types)
+- (link: docs/cookbook/templating/php-templates text: Kirby templates 101)
+- (link: docs/cookbook/setup/debugging-basics text: Basic error hunting & prevention)
+- (link: docs/cookbook/templating/one-page text: One-pager site)

@@ -380,3 +380,7 @@ return [
   ]
 ];
 ```
+
+## More information
+
+(link: docs/cookbook/content/filter-via-route text: Filtering via routes)

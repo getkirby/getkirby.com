@@ -14,3 +14,7 @@ Text:
   <?php endforeach ?>
 </ul>
 ```
+
+## More information
+
+(link: docs/cookbook/content/random-content text: Random content)

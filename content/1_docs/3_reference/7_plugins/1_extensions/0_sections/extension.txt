@@ -262,3 +262,9 @@ panel.plugin('yourname/modified', {
 If you need additional CSS for your section plugin, you can create an optional `index.css`. Kirby will automatically concatenate and load this in combination with the other plugins' CSS files.
 
 Please make sure to check for our (link: docs/reference/plugins/ui text: UI kit components) and available styles before you implement your own CSS rules for something that already exists.
+
+## More information
+
+Check out the following cookbook recipe to learn more:
+
+(link: docs/cookbook/extensions/first-panel-section text: My first Panel section)

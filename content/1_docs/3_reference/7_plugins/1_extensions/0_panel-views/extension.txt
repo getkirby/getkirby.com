@@ -112,4 +112,4 @@ The Panel views are often very complex. If you want to replace them without loos
 
 Check out the following cookbook recipe to learn more:
 
-- (link: docs/cookbook/extensions/first-panel-view text: My first Panel view)
+(link: docs/cookbook/extensions/first-panel-view text: My first Panel view)

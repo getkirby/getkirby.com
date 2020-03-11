@@ -342,3 +342,9 @@ panel.plugin("your/plugin", {
   }
 });
 ```
+
+## More information
+
+Check out the following cookbook recipe to learn more:
+
+(link: docs/cookbook/extensions/first-panel-field text: My first Panel field)

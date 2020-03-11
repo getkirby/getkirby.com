@@ -26,3 +26,7 @@ minwords | all values that match the given min number of words
 >=       | all values that are greater or equal the given value
 <        | all values that are smaller than the given value
 <=       | all values that are smaller or equal the given value
+
+## More information
+
+(link: docs/cookbook/content/filtering text: Filtering compendium)

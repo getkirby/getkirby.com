@@ -198,3 +198,10 @@ The `snippet()` function has a third, optional parameter of type `boolean`. If s
 ```php
 $emailBody = snippet('email', ['data' => $data], true);
 ```
+
+
+## More information
+
+- (link: docs/cookbook/templating/menus text: Menus)
+- (link: docs/cookbook/templating/previous-next text: Previous / Next navigation)
+- (link: docs/cookbook/templating/pagination text: Pagination)

@@ -18,3 +18,7 @@ $largeFiles = $page->files()->filter(function($file) {
   return $file->size() > (1024*1024*2);
 });
 ```
+
+## More information
+
+(link: docs/cookbook/content/filtering text: Filtering compendium)
