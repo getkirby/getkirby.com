@@ -1,0 +1,14 @@
+Title: Video
+
+----
+
+Repository: https://github.com/HashandSalt/kirby3-video
+
+----
+
+Category: assets
+
+----
+
+Description: A Kirby tag and snippet for rendering video players inside textareas
+
