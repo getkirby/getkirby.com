@@ -114,7 +114,7 @@ In this example we want to group our items by a combination of two date fields, 
 ### Grouping files
 We can use both `group()` and `groupBy()` with files.
 
-### Example for `groupBy()``
+### Example for `groupBy()`
 
 In this example, we group all images of all subpages by the photographer field and output a small thumbnail for each group:
 
