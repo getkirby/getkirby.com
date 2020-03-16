@@ -94,7 +94,7 @@ class AlbumPage extends Page
 {
     public function previewImage()
     {
-        if ($image = $page->images()->first()) {
+        if ($image = $this->images()->first()) {
           return $image;
         }
         if (file_exists(kirby()->root('assets') . "/assets/images/default.jpg")) {
