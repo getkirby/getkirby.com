@@ -1,0 +1,13 @@
+Title: Git Commit And Push Content
+
+----
+
+Repository: https://github.com/blankogmbh/kirby-git-commit-and-push-content
+
+----
+
+Category: integrations
+
+----
+
+Description: Automatic commit and push of content changes made via the Panel to a git repository
