@@ -8,13 +8,17 @@ Intro: Blueprints are configuration files written in YAML that let you customize
 
 Text:
 
-Blueprints power the forms in the Panel. They can go from very basic to highly complex depending on the type of project and your content types. If you have pages that require a lot of settings, careful planning is recommended.
+If you click through the Panel in the (link: text: Starterkit) or the (link: text: Demo), you will notice that the forms for different page types all look different: they have a different layouts, different fields to fill in, different sections where you can upload files or add pages. All these different forms are powered by settings in so-called (glossary: blueprint text: blueprints).  Blueprints can go from very simple with just a few fields to highly complex with multiple tabs, columns, sections and many fields, depending on the type of project and your content types. If you have pages that require a lot of settings, careful planning is recommended.
 
 Let's start with getting a basic understanding of blueprints.
 
+<info>
+If you examine the blueprints for the Starterkit, and compare that with what you actually see in the Panel, you should already get a good impression of how it all works. Don't be afraid to mess with it to see how changes you make are reflected in the Panel.
+</info>
+
 ## Yaml syntax
 
-Blueprints are written in `YAML` syntax. This syntax depends on correct indentation. Use spaces for indentation, not tabs, and 2 spaces per indentation level.
+Blueprints are written in `YAML` syntax. This syntax depends on correct indentation. Use spaces for indentation, not tabs, and 2 spaces per indentation level. See (link: #tips-tricks text: Tips & Tricks) at the end of this chapter.
 
 
 ## Blueprint types
@@ -31,7 +35,7 @@ Kirby has different blueprint types, which define the Panel views for `site`, `p
 (reference: panel/blueprints)
 
 <info>
-The start page (so called "Dashboard") of the Panel is defined in the `/site/blueprints/site.yml` blueprint.
+The start page (also often refered to as the "Dashboard") of the Panel is defined in the `/site/blueprints/site.yml` blueprint.
 </info>
 
 ## Presets
@@ -48,7 +52,7 @@ If you know in advance that you need a highly customized Panel setup or you want
 
 ## Custom layouts
 
-If you want to go beyond the possibilities of Kirby's preseta, you can be the interface designer. You decide which features are needed for each type of page, file or user and how to arrange them.
+If you want to go beyond the possibilities of Kirby's presets, you can be your own interface designer. You decide which features are needed for each type of page, file or user, and how to arrange them.
 
 Kirby comes with the following layout features:
 
@@ -72,7 +76,7 @@ Use the query language to find parent pages for sections, fetch options for fiel
 
 (link: docs/guide/blueprints/query-language text: Learn more about Kirby's blueprint query language…)
 
-## Extending blueprints
+## Reusing blueprint parts
 
 You can store fields, sections, tabs and entire blueprint layouts in separate files so that you can reuse them across blueprints. This helps to keep your blueprints clean, and is particularly useful if you find you use the same elements in different places. If you want, you can even create a complete component system to apply to multiple projects.
 
