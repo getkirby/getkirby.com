@@ -43,9 +43,9 @@ The object passed to the callback function gives you access to three important 
 
 Attribute | Description
 -         | -
-`$field->key`   | Name of the field
-`$field->value` | Raw content of the field
-`$field->model` | Parent object: `$page`, `$site`, `$file` or `$user`
+`$field->key()`   | Name of the field
+`$field->value`   | Raw content of the field
+`$field->model()` | Parent object: `$page`, `$site`, `$file` or `$user`
 
 
 ## Return options
