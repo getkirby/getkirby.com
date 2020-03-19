@@ -1,0 +1,39 @@
+Title: Icons
+
+----
+
+Text:
+
+With the `icons` extension, you can register additional icons for use in the Panel.
+
+## Example
+
+As always, you first have to register the Plugin in a plugin folder's `index.php`.
+
+```php "/site/plugins/icons/index.php"
+<?php
+
+Kirby::plugin('my/icons', [
+    'icons' => [    
+    ]
+]);
+```
+
+The second step is to create a corresponding `index.js` file with the Panel plugin:
+
+```js "
+panel.plugin('my/icons', {
+  icons: {
+    'my-icon': '<path d="M7,3V13H5v2H8a1,1,0,0,0,1-1V4h2V2H8A1,1,0,0,0,7,3Z" /><circle cx="2" cy="14" r="2" /><polygon points="12 0 12 6 16 3 12 0" />'
+  }
+});
+```
+
+You can now use this plugin in your blueprints or or plugins, for example:
+
+```yaml
+title: Page blueprint with new icon
+icon: my-icon
+
+# other stuff
+```
