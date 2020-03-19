@@ -79,7 +79,7 @@ With the `pattern` property you can check if the input value matches a given pat
 ```yaml
 text:
   type: text
-   pattern: '/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/'
+  pattern: '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$'
 ```
 
 ### Using validators
