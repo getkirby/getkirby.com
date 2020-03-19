@@ -30,6 +30,12 @@ You can of course output anything in the representation template. As we are buil
 
 You don't have to send a content type header manually, Kirby will do this for you based on the representation type. Here, the response will automatically be sent with the content type `application/json`.
 
+<info>
+A content representation requires that the standard template with the base name is present. If you want to create a JSON representation `project.json.php`, make sure that `project.php` exists. If `project.php` doesn't exist, Kirby will fall back to `default.json.php`, and if that template doesn't exist either, return the error page.
+
+That means, a content representation is always a variant of the standard template. If you don't need the standard template at all, you can use this instead of the representation to return the content type you need. In this case, send a header with the corresponding content type.
+</info>
+
 ## Accessing the representation
 
 Now that we have a representation template for our `default` template, we can request all `default` pages as a JSON file. To access the representation, add the name of the representation to the end of the URL. `https://yourdomain.com/about` becomes `https://yourdomain.com/about.json` and so on.
