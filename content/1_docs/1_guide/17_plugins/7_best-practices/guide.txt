@@ -2,7 +2,7 @@ Title: Plugin best practices
 
 ----
 
-Intro: A collection of tips how to structure, name, tag and describe and promote your plugin
+Intro: A collection of tips how to structure, name, tag, describe and promote your plugin
 
 ----
 
@@ -59,7 +59,7 @@ plugins/
     index.js (auto-generated)
 ```
 
-For more complex plugin, add other subfolders as required.
+For more complex plugins, add other subfolders as required.
 
 ## Commenting
 
@@ -95,7 +95,7 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 
 ## Add a README
 
-In your readme, describe the plugin in every little detail and how to use it:
+In your README, describe the plugin in every little detail and how to use it:
 
 1. What is the purpose of the plugin and who profits from using it?
 2. How can the plugin be installed?
@@ -114,10 +114,7 @@ If it is free but you want people to donate, add a link to the platform where yo
 
 ## Promote your plugin
 
-- Create an new topic in the (link: https://forum.getkirby.com/c/plugins/kirby-3/ text: Kirby3 plugins category on the forum), ping @texnixe to make sure she'll mention it in the next Kosmos issue.
-- Submit it to the (link: /plugins text: Kirby plugins directory), currently either by making a PR to the (link: text: getkirby.com repo) or by creating an issue, but we will add a submit form in the future.
-- Tweet it mentioning @getkirby
+- Create an new topic in the (link: https://forum.getkirby.com/c/plugins/kirby-3/ text: Kirby 3 plugins category on the forum), ping @texnixe to make sure she'll mention it in the next Kosmos issue.
+- Submit it to the (link: /plugins text: Kirby plugins directory), currently either by making a PR to the (link: https://github.com/getkirby/getkirby.com text: getkirby.com repo) or by creating an issue, but we will add a submit form in the future.
+- Tweet it mentioning @getkirby.
 - …
-
-
-
