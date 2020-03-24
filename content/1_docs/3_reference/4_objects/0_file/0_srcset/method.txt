@@ -47,6 +47,8 @@ $image->srcset([
 
 ## Define presets
 
+### Simple example
+
 ```php "site/config/config.php"
 return [
   'thumbs' => [
@@ -54,6 +56,23 @@ return [
 			'default' => [300, 800, 1024],
 			'cover' => [800, 1024, 2048]
 		]
+  ]
+];
+```
+
+### Extended example
+
+```php "/site/config/config.php"
+return [
+  'thumbs' => [
+    'srcsets' => [
+      'default' => [
+        '800w' => ['width' => 800, 'quality' => 80],
+        '1024w' => ['width' => 1024, 'quality' => 80],
+        '1440w' => ['width' => 1440, 'quality' => 80],
+        '2048w' => ['width' => 2048, 'quality' => 80]
+      ]
+  ]
   ]
 ];
 ```
