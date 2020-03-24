@@ -10,4 +10,4 @@ Category: performance
 
 ----
 
-Description: Speed up Kirby's page routing .
+Description: Speed up Kirby's page routing.
