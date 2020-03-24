@@ -23,6 +23,25 @@ return [
 To be used with the `$file->thumb()` method. (link: docs/reference/objects/file/thumb text: Learn more ›)
 </since>
 
+## Srcsets
+
+```php "/site/config/config.php"
+return [
+  'thumbs' => [
+    'srcsets' => [
+      'default' => [
+        '800w' => ['width' => 800, 'quality' => 80],
+        '1024w' => ['width' => 1024, 'quality' => 80],
+        '1440w' => ['width' => 1440, 'quality' => 80],
+        '2048w' => ['width' => 2048, 'quality' => 80]
+      ]
+  ]
+  ]
+];
+```
+
+To be used with the `$file->srcset()` method. (link: docs/reference/objects/file/srcset text: Learn more ›)
+
 ## Auto-orient
 
 Automatically rotate images based on their exif orientation data.
