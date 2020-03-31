@@ -35,6 +35,25 @@ If you use PHP's built-in server (not recommended), you have to start it up with
 php -S localhost:8000 kirby/router.php
 ```
 
+## PHP "Cannot redeclare" error
+
+If you get an error like this:
+
+```
+PHP Fatal error: Cannot redeclare xxx() in /path/to/kirby/config/helpers.php on line xxx
+```
+
+you are most likely using a library or framework together with Kirby that is unfortunately not supported. We are aware of the following libraries being incompatible with Kirby:
+
+- Symfony VarDumper (redeclares the `dump()` function)
+- Swoole Framework (redeclares the `go()` function)
+
+Because two libraries cannot define the same functions, you can unfortunately not use any of these libraries/frameworks together with Kirby.
+
+If you didn't install any other library/framework on purpose, please verify if they come with one of the plugins you are using or if they are provided by your hosting provider. In any case Kirby will only work if the conflicting libraries are disabled/uninstalled.
+
+We may be able to fix this issue in the future by namespacing the helper functions that ship with Kirby, but this is unfortunately something that cannot be implemented in a backwards-compatible way. Sorry for the inconvenience!
+
 ## Weird PHP syntax errors
 
 Please make sure that you use the (link: docs/guide/quickstart#requirements text: required PHP version).
