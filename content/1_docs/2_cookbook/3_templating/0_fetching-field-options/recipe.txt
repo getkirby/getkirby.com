@@ -77,7 +77,7 @@ fields:
       "3D": 
        en: 3D
        de: 3D
-     "Web design":
+      "Web design":
        en: Web design
        de: Webdesign
 ```
