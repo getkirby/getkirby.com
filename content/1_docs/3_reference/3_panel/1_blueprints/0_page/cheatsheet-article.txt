@@ -182,7 +182,7 @@ options:
   preview: "{{ page.parent.url }}/#{{ page.slug }}"
 ```
 
-## Switching templates
+## Change templates
 
 You must define a list of compatible templates with the `changeTemplate` option to allow editors to switch between page templates.
 
