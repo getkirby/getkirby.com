@@ -75,11 +75,11 @@ fields:
         en: Photography
         de: Fotografie
       "3D": 
-       en: 3D
-       de: 3D
+        en: 3D
+        de: 3D
       "Web design":
-       en: Web design
-       de: Webdesign
+        en: Web design
+        de: Webdesign
 ```
 
 But all this is not very versatile and only makes sense in a single language installation. Therefore, let's see how we can stick with the first setup above and still get a more useful output than the key as value.
