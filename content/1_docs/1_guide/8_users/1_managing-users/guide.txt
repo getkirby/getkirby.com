@@ -8,6 +8,10 @@ Intro: The Kirby Panel has a powerful user management section with user roles th
 
 Text:
 
+<info>
+It is not recommended to use a single user for multiple people working in parallel as this may cause issues with people overwriting each other's work. For collaborative editing you should always create one user account per person. This way Kirby can keep track of who is editing what and you can configure user permissions if you need to down the road.
+</info>
+
 ## Create new user
 
 Open the menu and click on "Users". You will find the "Add a new user" button in the top left corner, which will take you to a fresh user form. Fill in all required information and hit "Create" to add the new user.
