@@ -24,7 +24,7 @@ Kirby provides two variants of each hook: `before` and `after` hooks.
 
 A `before` hook is triggered before an action is executed, i.e. before a page is actually updated, a file uploaded, a route called etc.
 
-Typical use cases for `fefore` hooks include:
+Typical use cases for `before` hooks include:
 
 - Throw an error to prevent certain users from executing an action in general or under certain circumstances.
 - Store information in the session.
