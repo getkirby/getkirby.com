@@ -35,16 +35,15 @@ In a plugin, hooks are registered with the `hooks` extension. The extension acce
 
 ```php
 Kirby::plugin('your/plugin', [
-	'hooks' => [
-		'page.delete:before' => function ($page) {
-			// do something before a page gets deleted
-		},
+    'hooks' => [
+        'page.delete:before' => function ($page) {
+            // do something before a page gets deleted
+        },
         'page.create:after' => function ($page) {
-        // do something after the page was created
+            // do something after the page was created
         }
     ]
 ]);
-
 ```
 
 ## Accessing `$kirby`, `$site` and `$user` in a hook callback
@@ -75,3 +74,21 @@ Kirby::plugin('your/plugin', [
     ]
 ]);
 ```
+
+## Creating your own hooks
+
+You can also define your own custom hook types in plugins, which works just like with the built-in hooks:
+
+```php
+Kirby::plugin('your/plugin', [
+    'hooks' => [
+        'your-plugin.your-hook' => function ($page) {
+            // do whatever you need
+        },
+    ]
+]);
+```
+
+As you can see, only the name of the hook has changed. Please make sure to namespace your hooks by including the plugin name in the hook name. Otherwise your hooks might conflict with other plugins or future built-in hooks.
+
+You can trigger your own hooks from anywhere in the system with the `$kirby->trigger()` and `$kirby->apply()` methods.
