@@ -5,3 +5,7 @@ Text:
 ```php
 Last update: <?= $site->modified('d/m/Y H:i') ?>
 ```
+
+<warning>
+`$site->modified()` might take (very) long for websites with many pages because it runs through all pages in the content folder. Use with caution.
+</warning>
