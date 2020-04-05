@@ -4,9 +4,8 @@ Text:
 
 ```php
 <?php
-$file = $page->files()->get('myfile.pdf');
-if(file) {
-    echo $file->url();
-}
+if ($file = $page->files()->get('photography/landscape/hobbits-and-stuff.jpg')):
+  echo $file->url();
+endif;
 ?>
 ```
