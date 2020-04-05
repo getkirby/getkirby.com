@@ -5,7 +5,7 @@ Text:
 ### Fetch a single file
 
 ```php
-if($file = $page->files()->find('myfile.pdf')):
+if ($file = $page->files()->find('myfile.pdf')):
   echo $file->url();
 endif;
 ```
@@ -14,7 +14,7 @@ endif;
 
 ```php
 <ul>
-  <?php foreach($page->files()->find('document-a.pdf', 'document-b.pdf', 'document-c.pdf') as $file): ?>
+  <?php foreach ($page->files()->find('document-a.pdf', 'document-b.pdf', 'document-c.pdf') as $file): ?>
   <li>
     <a href="<?= $file->url() ?>">
       <?= $file->filename()->html() ?>
@@ -22,4 +22,24 @@ endif;
   </li>
   <?php endforeach ?>
 </ul>
+```
+
+<info>
+Note that you have to pass the file path in relation to the given page if you try to find a specific file within a pages collection.
+</info>
+
+## Finding a file in the sibling files collection
+
+```php
+if ($file = $page->siblings()->files()->find('ocean/attention-sharks.jpg')):
+  echo $file->url();
+endif;
+```
+
+## Finding a file in the complete index
+
+```php
+if ($file = $site->index()->files()->find('photography/ocean/attention-sharks.jpg')):
+  echo $file->url();
+endif;
 ```
