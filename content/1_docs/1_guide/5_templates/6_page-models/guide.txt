@@ -37,6 +37,18 @@ class ProjectPage extends Page {
 ```
 This page model will be loaded every time Kirby encounters a page of the given type (so project in this example), whether it is in a template, a snippet or anywhere else.
 
+<info>
+If your template name contains dashes or underscores, these have to be ignored when naming your page model class. That means, both `my-template.php` and `my_template.php` will become:
+
+```php
+class MyTemplatePage extends Page {
+  // all methods of the Page class are inherited and can be overridden here now.
+}
+```
+
+The filenames of the model files themselves will keep the dash or underscore.
+</info>
+
 ## Page models in the wild
 
 A page model can be used for example to fetch a cover image for a project page. Fetching the right image in the template or snippet can be a couple of lines of code. It is cleaner to seperate this functionality into a page model.
