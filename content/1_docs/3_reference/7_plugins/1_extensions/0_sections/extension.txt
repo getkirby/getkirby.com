@@ -128,7 +128,7 @@ modified: {
 ]
 ```
 
-**Modified properities**
+**Modified properties**
 
 ```php
 'props' => [
