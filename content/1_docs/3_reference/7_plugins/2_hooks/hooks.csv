@@ -35,6 +35,8 @@ page.update:before,"$page,$values,$strings",trigger
 page.update:after,"$newPage,$oldPage",trigger
 route:before,"$route,$path,$method",trigger
 route:after,"$route,$path,$method,$result",trigger
+site.changeTitle:before,"$site,$title,$languageCode",trigger
+site.changeTitle:after,"$newSite,$oldSite",trigger
 site.update:before,"$site,$values,$strings",trigger
 site.update:after,"$newSite,$oldSite",trigger
 user.changeEmail:before,"$user,$email",trigger
