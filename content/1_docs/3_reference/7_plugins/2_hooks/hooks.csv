@@ -41,10 +41,10 @@ site.update:before,"$site,$values,$strings",trigger
 site.update:after,"$newSite,$oldSite",trigger
 user.changeEmail:before,"$user,$email",trigger
 user.changeEmail:after,"$newUser,$oldUser",trigger
-user.changeName:before,"$user,$name",trigger
-user.changeName:after,"$newUser,$oldUser",trigger
 user.changeLanguage:before,"$user,$language",trigger
 user.changeLanguage:after,"$newUser,$oldUser",trigger
+user.changeName:before,"$user,$name",trigger
+user.changeName:after,"$newUser,$oldUser",trigger
 user.changePassword:before,"$user,$password",trigger
 user.changePassword:after,"$newUser,$oldUser",trigger
 user.changeRole:before,"$user,$role",trigger
@@ -57,6 +57,6 @@ user.login:before,"$user,$session",trigger
 user.login:after,"$user,$session",trigger
 user.logout:before,"$user,$session",trigger
 user.logout:after,"$user,$session",trigger
-system.loadPlugins:after,"",trigger
 user.update:before,"$user,$values,$strings",trigger
 user.update:after,"$newUser,$oldUser",trigger
+system.loadPlugins:after,"",trigger
