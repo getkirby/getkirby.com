@@ -14,7 +14,6 @@ class HookPage extends Page
 
     public function example()
     {
-
         $tab  = '    ';
         $args = $this->arguments();
 
@@ -25,7 +24,7 @@ class HookPage extends Page
         $example[] = $tab . $tab . $tab . '// your code goes here';
 
         if ($this->type() == 'apply') {
-        $example[] =  $tab . $tab . $tab . 'return ' . $args . ';';
+            $example[] =  $tab . $tab . $tab . 'return ' . $this->content()->return() . ';';
         }
 
         $example[] = $tab . $tab . '}';

@@ -21,7 +21,7 @@ class HooksPage extends Page
 
             $slug = Str::slug($hook['Name']);
             $page = $this->subpages()->find($slug);
-            
+
             return [
                 'slug'     => Str::slug($hook['Name']),
                 'template' => 'hook',
@@ -31,6 +31,7 @@ class HooksPage extends Page
                     'title'     => $hook['Name'],
                     'arguments' => implode(', ', Str::split($hook['Arguments'])),
                     'type'      => $hook['Type'],
+                    'return'    => $hook['Return'],
                     'details'   => $page ? $page->details()->value() : null
                 ]
             ];
