@@ -75,7 +75,7 @@ $relatedSiblings = $page->siblings(false)->filterBy('tags', 'in', $page->tags()-
 To fetch related pages that have at least two tags in common, we can use the `filter()` method instead:
 
 ```php
-$relatedSiblings = $page->siblings(false)->filter(function($sibling) (use $page) {
+$relatedSiblings = $page->siblings(false)->filter(function($sibling) use ($page) {
   return count(array_intersect($sibling->tags()->split(','), $page->tags()->split(','))) >= 2;
 });
 ```
