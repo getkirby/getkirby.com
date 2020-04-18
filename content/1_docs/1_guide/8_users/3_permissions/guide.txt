@@ -49,7 +49,6 @@ permissions:
     sort: true
     update: true
   user:
-    create: false
     changeName: false
     changeEmail: false
     changeLanguage: true
