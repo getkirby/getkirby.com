@@ -60,6 +60,21 @@ preset: files
 layout: cards
 ```
 
+<since v="3.3.3">
+
+### Image
+
+```yaml
+title: Gallery section
+preset: files
+layout: cards
+image:
+  cover: true
+  ratio: 1/1
+  back: black
+```
+</since>
+
 ## Usage in tabs
 
 <info>
