@@ -32,6 +32,30 @@ try {
 // errors, always use try-catch
 ```
 
+<since v="3.3.2">
+
+### With custom name
+
+```php
+$from = new \Kirby\Cms\User([
+  'email' => 'e@mail.com',
+  'name' => 'Vorname Nachname',
+]);
+
+try {
+  $kirby->email([
+    'from' => $from,
+    'to' => 'someone@example.com',
+    'subject' => 'Welcome!',
+    'body'=> 'It\'s great to have you with us',
+  ]);
+} catch (Exception $error) {
+  echo $error;
+}
+```
+
+</since>
+
 ### With multiple recipients:
 
 ```php
