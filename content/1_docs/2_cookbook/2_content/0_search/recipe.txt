@@ -106,7 +106,7 @@ return function ($site) {
 
 ### Search within a specific page
 
-If you want to limit the search to the blog section of your site for example you can just call the seach method on your blog page instead of $site.
+If you want to limit the search to the blog section of your site for example you can just call the search method on your blog page instead of $site.
 
 ```php "/site/controllers/search.php"
 <?php
