@@ -90,7 +90,7 @@ $images = page('blog')
 
 // get all file types exept images
 $files = page('blog')
-  ->images()
+  ->files()
   ->filterBy('type', '!=', 'image');
 ```
 
@@ -186,7 +186,7 @@ $collection = page('events')
 ```php
 // fetch all files that are neither videos nor images
 $files = $page
-  ->images()
+  ->files()
   ->filterBy('type', '!=', 'video')
   ->filterBy('type', '!=', 'image');
 ```
