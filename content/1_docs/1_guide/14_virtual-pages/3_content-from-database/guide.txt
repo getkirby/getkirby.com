@@ -84,8 +84,8 @@ class CommentsPage extends Kirby\Cms\Page
             $comments[] = [
                 'slug'     => $comment->slug(),
                 'num'      => 0,
-                'template' => 'comment',
-                'model'    => 'comment',
+                'template' => 'comments',
+                'model'    => 'comments',
                 'content'  => [
                     'text'  => $comment->text(),
                     'user'  => $comment->user(),
