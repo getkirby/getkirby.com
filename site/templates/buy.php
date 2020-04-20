@@ -12,8 +12,8 @@
             <?php endif ?>
 
             <header class="price-header -mb:medium" style="visibility: hidden">
-              <?php if (empty($sale) === false): ?>
-              <h2 class="h1 -mb:0"><del>€<?= $price ?></del> <span class="price">€<?= $sale ?></span> <small>per site</small></h2>
+              <?php if (empty($saleText) === false): ?>
+              <h2 class="h1 -mb:0"><del>€99 / $109 / £89</del><br> <span class="price">€<?= $sale ?></span> <small>per site</small></h2>
               <?php else: ?>
               <h2 class="h1 -mb:0"><span class="price">€<?= $price ?></span> <small>per site</small></h2>
               <?php endif ?>
