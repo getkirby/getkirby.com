@@ -8,7 +8,7 @@ Text:
 
 Determine which PHP function is used to format dates for pages and files.
 
-Possible values: `date` | `strtime` (default: `date`)
+Possible values: `date` | `strftime` (default: `date`)
 
 ```php
 return [
