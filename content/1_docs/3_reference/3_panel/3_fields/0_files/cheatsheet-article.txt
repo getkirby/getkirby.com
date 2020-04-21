@@ -59,7 +59,7 @@ fields:
 
 ## Layout
 
-You can switch between `list` and `card` layout. Default is `list` layout.
+You can switch between `list` and `cards` layout. Default is `list` layout.
 
 ```yaml
 fields:
