@@ -2,13 +2,13 @@ Title: Creating a Kirby-powered blog
 
 ----
 
-Description: Set up a blog system with an overiew, articles, tags, feeds and more.
+Description: Set up a blog system with an overview, articles, tags, feeds and more.
 
 ----
 
 Text:
 
-In this section you will learn how to build a blog with Kirby. We will start with a very basic and minimalistic blog here. You will find more advanced stuff in (link #further-reading text: related sections).
+In this section you will learn how to build a blog with Kirby. We will start with a very basic and minimalistic blog here. You will find more advanced stuff in (link: #further-reading text: related sections).
 
 ## Setting up the content
 
@@ -26,7 +26,7 @@ content/
     blog.txt
 ```
 
-First we add a new listed blog folder to our site (`3_blog`) so it will be appear in our menu. Inside that blog folder we add subfolders for each new article and a `blog.txt`.
+First we add a new listed blog folder to our site (`3_blog`) so it will appear in our menu. Inside that blog folder we add subfolders for each new article and a `blog.txt`.
 
 ### `blog.txt`
 
