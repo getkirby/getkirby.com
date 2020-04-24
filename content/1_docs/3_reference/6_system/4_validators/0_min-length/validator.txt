@@ -8,12 +8,11 @@ This validator works like (sheet: validators/min) but it always checks for strin
 if(V::minLength('Lorem ipsum dolor sit amet.', 10)) {
   echo 'Yay, valid!';
 }
-
 ```
 
 ## In fields
 
-```
+```yaml
 fields:
   example:
     label: Example field

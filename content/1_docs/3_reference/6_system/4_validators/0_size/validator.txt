@@ -6,12 +6,11 @@ Text:
 if(V::size(F::size('/my/file.jpg'), 12121912)) {
   echo 'Yay, valid!';
 }
-
 ```
 
 ## In fields
 
-```
+```yaml
 fields:
   example:
     label: Example field

@@ -6,12 +6,11 @@ Text:
 if(V::different('A', 'B')) {
   echo 'Yay, valid!';
 }
-
 ```
 
 ## In fields
 
-```
+```yaml
 fields:
   example:
     label: Example field

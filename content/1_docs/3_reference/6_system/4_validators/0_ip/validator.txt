@@ -6,12 +6,11 @@ Text:
 if(V::ip('127.0.0.1')) {
   echo 'Yay, valid!';
 }
-
 ```
 
 ## In fields
 
-```
+```yaml
 fields:
   example:
     label: Example field

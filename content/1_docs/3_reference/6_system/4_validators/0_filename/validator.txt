@@ -6,12 +6,11 @@ Text:
 if(V::filename('myfile.jpg')) {
   echo 'Yay, valid!';
 }
-
 ```
 
 ## In fields
 
-```
+```yaml
 fields:
   example:
     label: Example field

@@ -6,12 +6,11 @@ Text:
 if(V::email('bastian@getkirby.com')) {
   echo 'Yay, valid!';
 }
-
 ```
 
 ## In fields
 
-```
+```yaml
 fields:
   example:
     label: Example field

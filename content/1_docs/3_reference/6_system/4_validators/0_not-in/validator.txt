@@ -6,12 +6,11 @@ Text:
 if(V::notIn('A', ['B', 'C', 'D'])) {
   echo 'Yay, valid!';
 }
-
 ```
 
 ## In fields
 
-```
+```yaml
 fields:
   example:
     label: Example field

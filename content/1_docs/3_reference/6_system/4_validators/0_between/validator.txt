@@ -6,12 +6,11 @@ Text:
 if(V::between($input, 5, 20)) {
   echo 'Yay, valid!';
 }
-
 ```
 
 ## In fields
 
-```
+```yaml
 fields:
   example:
     label: Example field

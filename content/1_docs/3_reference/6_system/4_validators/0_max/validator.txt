@@ -6,12 +6,11 @@ Text:
 if(V::max(5, 10)) {
   echo 'Yay, valid!';
 }
-
 ```
 
 ## In fields
 
-```
+```yaml
 fields:
   example:
     label: Example field

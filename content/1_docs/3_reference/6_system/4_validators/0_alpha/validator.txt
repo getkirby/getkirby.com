@@ -7,12 +7,11 @@ Text:
 if(V::alpha($input)) {
   echo 'Yay, valid!';
 }
-
 ```
 
 ## In Panel fields
 
-```
+```yaml
 fields:
   example:
     label: Example field

@@ -6,12 +6,11 @@ Text:
 if(V::minWords('Lorem ipsum dolor sit amet.', 5)) {
   echo 'Yay, valid!';
 }
-
 ```
 
 ## In fields
 
-```
+```yaml
 fields:
   example:
     label: Example field

@@ -6,12 +6,11 @@ Text:
 if(V::maxWords('Lorem ipsum dolor sit amet.', 10)) {
   echo 'Yay, valid!';
 }
-
 ```
 
 ## In fields
 
-```
+```yaml
 fields:
   example:
     label: Example field
