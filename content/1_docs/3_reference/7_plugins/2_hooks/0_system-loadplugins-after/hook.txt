@@ -1,0 +1,33 @@
+Details:
+
+## Using the hook to dynamically register extensions from plugins
+
+This hook is triggered when Kirby and all plugins have been loaded, so you can safely access any Kirby objects from this hook.
+
+This can be used to dynamically register additional extensions based on a config option, site content or even the availability of other plugins:
+
+```php
+<?php
+
+Kirby::plugin('superwoman/superplugin', [
+    'hooks' => [
+        'system.loadPlugins:after' => function () {
+            // access any Kirby object using kirby(), site() or page()
+            $uri = site()->content()->blogPage();
+
+            // register additional extensions like you would
+            // directly in the Kirby::plugin() call
+            kirby()->extend([
+                'routes' => [
+                    [
+                        'pattern' => $uri,
+                        'action'  => function () {
+                            // ...
+                        }
+                    ]
+                ]
+            ], kirby()->plugin('superwoman/superplugin'));
+        }
+    ]
+]);
+```
