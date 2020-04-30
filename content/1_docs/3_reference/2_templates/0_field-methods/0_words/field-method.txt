@@ -3,7 +3,7 @@ Text:
 ## Example
 
 ```php
-<?= $page->text()->kirbext() ?>
+<?= $page->text()->kirbytext() ?>
 
 <dl class="text-stats">
 
