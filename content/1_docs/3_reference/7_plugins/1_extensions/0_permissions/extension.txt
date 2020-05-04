@@ -1,0 +1,50 @@
+Title: Permissions
+
+----
+
+Since: 3.4.0
+
+----
+
+Text:
+
+If you want to make the permissions for different actions of your plugin configurable by user role, you can register the available actions with the `permissions` extension.
+
+## PHP definition
+
+Each available action needs to be set with the default permission value. The default value is used if the user's role does not specify the permissions for that action.
+
+```php "/site/plugins/permissions/index.php"
+Kirby::plugin('my/permissionPlugin', [
+    'permissions' => [
+        'access' => true,
+        'create' => true,
+        'delete' => false
+    ]
+]);
+```
+
+<info>
+All permissions of the Kirby core are set to `true` by default. Only use the default value `false` if you want to make sure that the action is enabled explicitly for the users who should have access to it.
+</info>
+
+## Usage in the user blueprint
+
+The permissions can now be set in the user blueprint for each role (just like the (link: docs/guide/users/permissions text: core permissions)).
+
+```yaml "/site/blueprints/users/editor.yml"
+title: Editor
+permissions:
+  my.permissionPlugin:
+    *: false
+    access: true
+```
+
+## Access from your plugin
+
+You can then check the permissions for each action in your plugin:
+
+```php
+$kirby->user()->role()->permissions()->for('my.permissionPlugin', 'access') // true
+$kirby->user()->role()->permissions()->for('my.permissionPlugin', 'create') // false
+```
