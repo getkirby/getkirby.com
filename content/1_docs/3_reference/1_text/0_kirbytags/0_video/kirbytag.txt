@@ -13,7 +13,8 @@ Text:
 ### YouTube
 
 Embedded YouTube video by video URL:
-```
+
+```kirbytext
 (\video: http://www.youtube.com/watch?v=lLuc6rtWkrM)
 ```
 
@@ -43,6 +44,7 @@ The following link YouTube link formats are recognized:
 ### Vimeo
 
 Embedded Vimeo video by video URL:
+
 ```kirbytext
 (\video: http://vimeo.com/3432886)
 ```
@@ -53,12 +55,14 @@ Embedded Vimeo video by video URL:
 (\video: http://youtu.be/lLuc6rtWkrM caption: This is a really nice video)
 ```
 
-### iframe size
+### `<iframe>` size
+
 ```kirbytext
 (\video: http://vimeo.com/3432886 width: 300 height: 200)
 ```
 
 ### Custom CSS class
+
 ```kirbytext
 (\video: http://youtu.be/lLuc6rtWkrM class: myvideo)
 ```
