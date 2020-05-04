@@ -19,9 +19,26 @@ Embedded YouTube video by video URL:
 
 The following link YouTube link formats are recognized:
 
-- http://www.youtube.com/watch?v=lLuc6rtWkrM
-- http://www.youtube.com/embed/lLuc6rtWkrM
-- http://youtu.be/lLuc6rtWkrM
+**Basic video URLs:**
+
+- https://www.youtube.com/watch?v=lLuc6rtWkrM
+- https://www.youtube.com/embed/lLuc6rtWkrM
+- https://youtu.be/lLuc6rtWkrM
+- https://www.youtube-nocookie.com/embed/d9NF2edxy-M
+
+<since v="3.4.0">
+**URLs with additional query parameters:**
+- https://www.youtube.com/watch?v=d9NF2edxy-M&t=10
+- https://www.youtube-nocookie.com/watch?v=d9NF2edxy-M&t=10
+- https://www.youtube.com/embed/d9NF2edxy-M?start=10
+- https://www.youtube-nocookie.com/embed/d9NF2edxy-M?start=10
+
+**Playlists:**
+- https://www.youtube.com/embed/videoseries?list=PLj8e95eaxiB9goOAvINIy4Vt3mlWQJxys
+- https://www.youtube-nocookie.com/embed/videoseries?list=PLj8e95eaxiB9goOAvINIy4Vt3mlWQJxys
+- https://www.youtube.com/playlist?list=PLj8e95eaxiB9goOAvINIy4Vt3mlWQJxys
+- https://www.youtube-nocookie.com/playlist?list=PLj8e95eaxiB9goOAvINIy4Vt3mlWQJxys
+</since>
 
 ### Vimeo
 
