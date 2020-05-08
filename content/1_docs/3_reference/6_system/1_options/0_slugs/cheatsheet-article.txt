@@ -23,4 +23,6 @@ Str::$language = [
   'ß' => 'sz' 
 ];
 ```
+
+These custom rules have to be stored in a (link: docs/guide/plugins/plugin-basics text: plugin).
 </since>
