@@ -127,12 +127,12 @@ There is also a special `$event` argument that contains all information about th
 return [
     'hooks' => [
         'page.create:before' => function ($event) {
-            var_dump($event->name());   // 'page.create:before'
-            var_dump($event->type());   // 'page'
-            var_dump($event->action()); // 'create'
-            var_dump($event->state());  // 'before'
-            var_dump($event->page());   // $page
-            var_dump($event->input());  // $input
+            $name   = $event->name();   // 'page.create:before'
+            $type   = $event->type();   // 'page'
+            $action = $event->action(); // 'create'
+            $state  = $event->state();  // 'before'
+            $page   = $event->page();   // $page
+            $input  = $event->input();  // $input
         }
     ]
 ];
