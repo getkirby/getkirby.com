@@ -46,7 +46,7 @@ Let's look at what the three states mean again before we go into details:
 
 | Page state | Description |
 | ---- | ---- |
-| Draft | Draft pages live in the `_drafts` folder of their parent page. Only logged-in users can access draft pages. |
+| Draft | Draft pages live in the `_drafts` folder of their parent page. Only logged-in users or users who received the secret draft link can access draft pages. |
 | Unlisted | Unlisted pages are published pages without a prepended number. They are accessible via their URL but they are not sorted based on their folder number. |
 | Listed | Listed pages are published pages with a prepended number by which they can be sorted. You can use one of three sorting schemes for these numbers. |
 
