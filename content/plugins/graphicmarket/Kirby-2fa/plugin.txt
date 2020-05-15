@@ -1,0 +1,13 @@
+Title: Kirby-2fa
+
+----
+
+Repository: https://github.com/graphicmarket/kirby-2fa
+
+----
+
+Category: panel
+
+----
+
+Description: Two factor authentication for Kirby 3 panel.
