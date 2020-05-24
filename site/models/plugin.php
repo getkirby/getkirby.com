@@ -27,7 +27,7 @@ class PluginPage extends Page
       return $repo . '/get/master.zip';
     } else if (Str::contains($repo, 'gitlab')) {
       $reponame = basename($repo);
-      return '/-/archive/master/' . $reponame . '-master.zip';
+      return $repo . '/-/archive/master/' . $reponame . '-master.zip';
     }
 
     return $repo;
