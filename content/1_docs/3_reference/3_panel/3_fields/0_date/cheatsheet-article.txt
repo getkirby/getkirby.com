@@ -31,6 +31,29 @@ fields:
 
 (field-options: date)
 
+## Time settings
+
+To enable time imput, set the `time` option to `true:
+
+```yaml
+fields:
+  published:
+    label: Published on
+    type: date
+    time: true
+```
+
+For more control over the time selector, you can set the `step` option. Default is `5`.
+
+```yaml
+fields:
+  published:
+    label: Published on
+    type: date
+    time: true
+      step: 1  # 1 minute steps
+```
+
 ## How to use in templates/snippets
 
 To convert the value to a date object, use the [`toDate()`](/docs/reference/templates/field-methods/to-date) method.
