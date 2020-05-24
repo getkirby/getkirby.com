@@ -31,36 +31,6 @@ return [
             }, $text);
         },
 
-        // SINCE
-        function (string $text = null, array $data = []) {
-
-            return preg_replace_callback('!<since v="([0-9.]+)">(.*)</since>!siU', function($match) use ($data) {
-                // Prepare comparison to current version
-                $versions = explode('.', $match[1]);
-                $current  = explode('.', $this->version());
-
-                $block  = '<div class="since-version">';
-                $block .= '<span class="version-badge';
-
-                // If within the current mayor release,
-                // mark as current
-                if (
-                    $current[0] === $versions[0] &&
-                    $current[1] === $versions[1]
-                ) {
-                    $block .= ' current';
-                }
-
-                $block .= '">Since <code>' . version($match[1], '%s') . '</code></span>';
-                $block .= $this->kirbytext($match[2], $data);
-                $block .= '</div>';
-
-                return $block;
-
-            }, $text);
-
-        }
-
     ],
 
     // Look for <code> tags that contain type definitions, such as
@@ -79,5 +49,34 @@ return [
         // }, $text);
 
         return $text;
+    },
+    'kirbytext:after' => function(string $text = null, array $data = []) {
+        
+        // SINCE
+        return preg_replace_callback('!<since v="([0-9.]+)">(.*)</since>!siU', function($match) use ($data) {
+            // Prepare comparison to current version
+            $versions = explode('.', $match[1]);
+            $current  = explode('.', $this->version());
+
+            $block  = '<div class="since-version">';
+            $block .= '<span class="version-badge';
+
+            // If within the current mayor release,
+            // mark as current
+            if (
+                $current[0] === $versions[0] &&
+                $current[1] === $versions[1]
+            ) {
+                $block .= ' current';
+            }
+
+            $block .= '">Since <code>' . version($match[1], '%s') . '</code></span>';
+            $block .= $this->kirbytext($match[2], $data);
+            $block .= '</div>';
+
+            return $block;
+
+        }, $text);
+
     }
 ];
