@@ -50,7 +50,7 @@ return [
 
         return $text;
     },
-    'kirbytext:after' => function(string $text = null, array $data = []) {
+    'kirbytags:after' => function(string $text = null, array $data = []) {
         
         // SINCE
         return preg_replace_callback('!<since v="([0-9.]+)">(.*)</since>!siU', function($match) use ($data) {
