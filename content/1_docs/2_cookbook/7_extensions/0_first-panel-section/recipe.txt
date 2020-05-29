@@ -51,7 +51,7 @@ We also need an `index.php` file that contains the Kirby plugin wrapper, in whic
 
 Kirby::plugin('getkirby/linksection', [
     'sections' => [
-        'links' => require_once __DIR__ . '/sections/links.php',
+        'links' => require __DIR__ . '/sections/links.php',
     ],
 ]);
 ```
