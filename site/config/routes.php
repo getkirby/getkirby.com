@@ -30,15 +30,6 @@ return [
             go();
         }
     ],
-    [
-        'pattern' => 'version(\.json)?',
-        'method'  => 'GET',
-        'action'  => function () {
-            return Response::json([
-                'kirby' => kirby()->version()
-            ]);
-        }
-    ],
 
     /**
      * Legacy redirects
