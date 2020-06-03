@@ -13,6 +13,7 @@ Text:
 | {{ latest }}     | ✅ Latest Kirby release, actively supported                 |
 | {{ supported }}+ | ✅ No known security issues                                 |
 | 2.5.13+          | ⚠️ Security support until 31.12.2020, no active development |
+| 1.*              | ❌ Not supported                                            |
 
 <info>
 If you need the version information from this page in a machine-readable format, you can use the (link: security.json text: JSON representation).
