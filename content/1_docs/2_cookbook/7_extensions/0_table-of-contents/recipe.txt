@@ -291,7 +291,7 @@ The field method returns a collection of headline objects.
 In your templates, you can now use the `headlines()` field method in conjunction with the snippet we registered above.
 
 ```php
-<?php snippet('toc', ['headlines' => $page->text()->kt()->headlines('h2')]) ?>
+<?php snippet('toc', ['headlines' => $page->text()->headlines('h2')]) ?>
 ```
 
 ## Conclusion
@@ -327,6 +327,5 @@ You could also only show the ToC if there is at least a given number of headline
   </nav>
 <?php endif ?>
 ```
-
 
 
