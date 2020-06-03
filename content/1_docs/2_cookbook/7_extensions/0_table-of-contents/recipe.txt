@@ -105,6 +105,62 @@ return [
 ### Result
 If you now look at a page that contains headlines of the given level, you will see that the anchors were added.
 
+## Alternative: A field method to generate the anchors
+
+This is an alternative to using the `kirbytext` hook described above. Do not use the hook and this method in conjunction.
+
+```php "/site/plugins/toc/index.php"
+<?php
+
+Kirby::plugin('k-cookbook/toc', [
+  'fieldMethods' => [
+    'anchorHeadlines' => function($field, $headlines = 'h2|h3') {
+
+      // create the regex pattern to be used as first argument in `preg_replace_callback()`
+      $headlinesPattern = is_array($headlines) ? implode('|', $headlines) : $headlines;
+
+      // use `preg_replace_callback()` to replace matches with anchors
+      $field->value = preg_replace_callback('!<(' . $headlinesPattern . ')>(.*?)</\\1>!s', function ($match) {
+         
+          // create the id from the headline text
+          $id = Str::slug(Str::unhtml($match[2]));
+
+          // return the modified headline: 
+          // $match[1] contains the match for the first subpattern, i.e. `h2`, `h3` etc.
+          // $match[2] contains the match for the second subpattern, i.e. the actual headline text
+          return '<' . $match[1] . ' id="' . $id . '"><a href="#' . $id . '">' . $match[2] . '</a></' . $match[1] . '>';
+
+      }, $field->value);
+
+      return $field;
+    }
+  ]
+]);
+```
+
+In your templates/snippets, you can now use the field method like this:
+
+### With a single headline level
+
+```php
+<?= $page->text()->kt()->anchorHeadlines('h2') ?>
+```
+
+### With multiple headline levels
+
+```php
+<?= $page->text()->kt()->anchorHeadlines('h2|h3|4') ?>
+```
+
+Instead of passing a string of options separated by `|`, you can also pass an array of options:
+
+```php
+<?= $page->text()->kt()->anchorHeadlines(['h2', 'h3', 'h4']) ?>
+```
+
+If you don't pass an argument, the defaults will be used.
+
+
 ## Generate the ToC
 
 While the code we need to generate the ToCs from the headlines in a textarea field is the same, we can use different approaches to add them to the page.
@@ -139,7 +195,7 @@ Kirby::plugin('k-cookbook/toc', [
       function($text) {
 
         // the pattern allows passing an optional headline level `(toc: h3)`
-        $pattern  = '!\(toc:?\s?(h[1-6])?\)!';
+        $pattern  = '!\(toc(?::\s?(h[1-6]))?\)!';
         
         $text = preg_replace_callback($pattern, function($match) use($text) {
           
@@ -200,61 +256,6 @@ The code for the snippet goes into `/site/plugins/toc/snippets/toc.php`:
 ### Result
 If you now add a `(toc)` placeholder to a page that contains headlines of the given level, you should see a ToC appear where you added the placeholder.
 
-## Alternative: A field method to generate the anchors
-
-This is an alternative to using the `kirbytext` hook described above. Do not use the hook and this method in conjunction.
-
-```php "/site/plugins/toc/index.php"
-<?php
-
-Kirby::plugin('k-cookbook/toc', [
-  'fieldMethods' => [
-    'anchorHeadlines' => function($field, $headlines = 'h2|h3') {
-
-      // create the regex pattern to be used as first argument in `preg_replace_callback()`
-      $headlinesPattern = is_array($headlines) ? implode('|', $headlines) : $headlines;
-
-      // use `preg_replace_callback()` to replace matches with anchors
-      $field->value = preg_replace_callback('!<(' . $headlinesPattern . ')>(.*?)</\\1>!s', function ($match) {
-         
-          // create the id from the headline text
-          $id = Str::slug(Str::unhtml($match[2]));
-
-          // return the modified headline: 
-          // $match[1] contains the match for the first subpattern, i.e. `h2`, `h3` etc.
-          // $match[2] contains the match for the second subpattern, i.e. the actual headline text
-          return '<' . $match[1] . ' id="' . $id . '"><a href="#' . $id . '">' . $match[2] . '</a></' . $match[1] . '>';
-
-      }, $field->value);
-
-      return $field;
-    }
-  ]
-]);
-```
-
-In your templates/snippets, you can now use the field method like this:
-
-### With a single headline level
-
-```php
-<?= $page->text()->kt()->anchorHeadlines('h2') ?>
-```
-
-### With multiple headline levels
-
-```php
-<?= $page->text()->kt()->anchorHeadlines('h2|h3|4') ?>
-```
-
-Instead of passing a string of options separated by `|`, you can also pass an array of options:
-
-```php
-<?= $page->text()->kt()->anchorHeadlines(['h2', 'h3', 'h4']) ?>
-```
-
-If you don't pass an argument, the defaults will be used.
-
 ## Alternative: A field method to generate the ToC
 
 ```php "/site/plugins/toc/index.php"
@@ -284,6 +285,7 @@ Kirby::plugin('k-cookbook/toc', [
   ]
 ]);
 ```
+
 The field method returns a collection of headline objects.
 
 In your templates, you can now use the `headlines()` field method in conjunction with the snippet we registered above.
@@ -294,7 +296,37 @@ In your templates, you can now use the `headlines()` field method in conjunction
 
 ## Conclusion
 
-In this recipe we explored different ways to add anchor headlines and a ToC to your pages.
+In this recipe we explored different ways to add anchor headlines and a ToC to pages.
 
-You can also mix the hook that auto-generates anchor headlines with the `headlines` field method and the `toc` snippet to create the ToC in your templates rather than through a placeholder users add manually.
+You can also mix the hook that auto-generates anchor headlines with the `headlines` field method and the `toc.php` snippet to create the ToC in your templates rather than through a placeholder users add manually.
+
+If you vote for generating the ToC via the field method in your templates, you can still give editor control whether to show a ToC on a page by page basis using a toggle or checkbox field in your blueprints, for example:
+
+```yaml
+fields:
+  toggle:
+    label: Toggle
+    type: toggle
+    text: Show ToC
+```
+
+You could also only show the ToC if there is at least a given number of headlines by slightly modifying the `toc.php` snippet, for example, if there are at least 3 headlines:
+
+```php "/site/plugins/toc/snippets/toc.php"
+<?php if ($headlines->count() >= 3) : ?>
+  <nav class="toc">
+
+    <h2>Table of Contents</h2>
+
+    <ol>
+      <?php foreach($headlines as $headline): ?>
+        <li><a href="<?= $headline->url() ?>"><?= $headline->text() ?></a></li>
+      <?php endforeach ?>
+    </ol>
+
+  </nav>
+<?php endif ?>
+```
+
+
 
