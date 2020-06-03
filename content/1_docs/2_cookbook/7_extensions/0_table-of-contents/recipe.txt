@@ -17,10 +17,10 @@ A Table of Contents (ToC) gives readers a quick overview of the contents of a pa
 ## Prerequisites
 Being familiar with (link: docs/guide/plugins/plugin-basics text: registering extensions in Kirby) and a basic understanding of PHP will be useful.  
 
-To follow along, (link: docs/guide/quickstart#download-and-installation text: install a Kirby Starterkit), create a `/toc` folder with an `index.php` inside `/site/plugins/` and add some headlines in a textarea field, for example in one of the subpages of the `/notes` page.
+To follow along, (link: docs/guide/quickstart#download-and-installation text: install a Kirby Starterkit), create a `/site/plugins/toc` folder with an `index.php` inside and add some headlines in a textarea field, for example in one of the subpages of the `/content/notes` page.
 
 <info>
-Note that the techniques described here only work for fields that are rendered using the `kirbyText()` method, usually a `textarea` field (or plugin fields derived from this), not with the (link: https://github.com/getkirby/editor/ text: Editor).
+Note that the techniques described here only work for fields that are rendered using the `kirbytext()` method, usually a `textarea` field (or plugin fields derived from this), not with the (link: https://github.com/getkirby/editor/ text: Editor).
 </info>
 
 ## Plugin parts
@@ -28,7 +28,7 @@ Note that the techniques described here only work for fields that are rendered u
 To create a ToC, we need two things:
 
 - Anchors in the text to which the ToC can link. While those could be added manually, it is much easier to auto-generate them from headlines. Anchors are useful even without a ToC, because you can link to these anchors from elsewhere.
-- A navigation list of links to these anchors usually at the top of the page or the sidebar, the actual ToC
+- A navigation list of links to these anchors usually at the top of the page or the sidebar, the actual ToC.
 
 Consequently, we have to implement two steps:
 
@@ -120,7 +120,7 @@ To keep it simple, we will include only one headline level in our ToC. We will c
 
 ## Using a `toc` placeholder
 
-For the `toc` placeholder, we use another `kirbyText:after` hook, and a snippet that will contain the HTML for the ToC. We will reuse this snippet for the (link: #alternative-a-field-method-to-generate-the-toc text: alternative field method approach) below.
+For the `toc` placeholder, we use another `kirbytext:after` hook, and a snippet that will contain the HTML for the ToC. We will reuse this snippet for the (link: #alternative-a-field-method-to-generate-the-toc text: alternative field method approach) below.
 
 ```php "/site/plugins/toc/index.php"
 <?php
@@ -150,7 +150,7 @@ Kirby::plugin('k-cookbook/toc', [
           preg_match_all('!<' . $headline . '.*?>(.*?)</' . $headline . '>!s', $text, $matches);
 
           // create a new collection for the headlines…
-          $headlines = new Collection;
+          $headlines = new Collection();
     
           // …and add all matches
           foreach ($matches[1] as $text) {
@@ -202,7 +202,7 @@ If you now add a `(toc)` placeholder to a page that contains headlines of the gi
 
 ## Alternative: A field method to generate the anchors
 
-This is an alternative to using the `kirbyText` hook described above. Do not use the hook and this method in conjuntion.
+This is an alternative to using the `kirbytext` hook described above. Do not use the hook and this method in conjunction.
 
 ```php "/site/plugins/toc/index.php"
 <?php
@@ -266,7 +266,7 @@ Kirby::plugin('k-cookbook/toc', [
 
         preg_match_all('!<' . $headline . '.*?>(.*?)</' . $headline . '>!s', $field->kt()->value(), $matches);
 
-        $headlines = new Collection;
+        $headlines = new Collection();
 
         foreach ($matches[1] as $text) {
             $headline = new Obj([
@@ -297,5 +297,4 @@ In your templates, you can now use the `headlines()` field method in conjunction
 In this recipe we explored different ways to add anchor headlines and a ToC to your pages.
 
 You can also mix the hook that auto-generates anchor headlines with the `headlines` field method and the `toc` snippet to create the ToC in your templates rather than through a placeholder users add manually.
-
 
