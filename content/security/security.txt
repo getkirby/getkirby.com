@@ -8,7 +8,7 @@ Text:
 
 <!-- NOTE TO THE EDITOR: If you update this table, please also update the security.json.php template -->
 
-| Version          | Supported                                                   |
+| Version          | Support Status                                              |
 | ---------------- | ----------------------------------------------------------- |
 | {{ latest }}     | ✅ Latest Kirby release, actively supported                 |
 | {{ supported }}+ | ✅ No known security issues                                 |
@@ -19,13 +19,13 @@ Text:
 If you need the version information from this page in a machine-readable format, you can use the (link: security.json text: JSON representation).
 </info>
 
-## Past security incidents
+## Past Security Incidents
 
 {{ incidents }}
 
 ## Security Guide
 
-Please follow our [security guide](https://getkirby.com/docs/guide/security) to keep your Kirby installation safe.
+Please follow our (link: docs/guide/security text: security guide) to keep your Kirby installation secure.
 
 ## Reporting a Vulnerability
 
