@@ -50,6 +50,7 @@
               <li>
                 <a class="h5" href="<?= url('contact') ?>">Misc</a>
                 <ul>
+                  <li><a href="<?= url('security') ?>">Security</a></li>
                   <li><a href="<?= url('privacy') ?>">Privacy</a></li>
                   <li><a href="<?= url('license') ?>">License</a></li>
                   <li><a href="<?= url('contact') ?>">Contact</a></li>
