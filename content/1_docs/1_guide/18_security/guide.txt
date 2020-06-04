@@ -11,7 +11,9 @@ Text:
 
 ## Always update your Kirby installation
 
-We constantly improve the code and security of Kirby with every update. Please always make sure to **update to the latest version** in order to fix possible issues and vulnerabilities.
+We constantly improve the code and security of Kirby with every update. You can find the latest Kirby version and security incidents of previous Kirby releases on our (link: security#supported-versions text: security page).
+
+Please always make sure to **update to the latest version** in order to fix possible issues and vulnerabilities.
 
 <warning>
 However, *never* update a live website directly on the server. Test updates locally or on your staging server first to make sure none of your code breaks or plugins suddenly stop working. Always make sure to have a backup in place.
@@ -139,6 +141,6 @@ You can find more about (link: docs/reference#validators text: Kirby's input val
 - `$file->update()`
 
 
-## Reporting security issues
+## Reporting a Vulnerability
 
-If you have spotted a vulnerability in Kirby's core or the Panel, please make sure to let us know immediately. We take any report very seriously. You can always write us directly at <support@getkirby.com>. Please do *not* write to us publicly, e.g. in the forum.
+If you have spotted a vulnerability in Kirby's core or the Panel, please take a look at our (link: security#reporting-a-vulnerability text: security policy) for more information on how to report the vulnerability to us.
