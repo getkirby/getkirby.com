@@ -54,7 +54,7 @@ Kirby::plugin('k-cookbook/toc', [
       function($text) {
 
         // get the headline levels to convert from a config option, we use h2 as the default
-        $headlines = option('cookbook.toc.headlines', 'h2|h3');
+        $headlines = option('k-cookbook.toc.headlines', 'h2|h3');
 
         // create the regex pattern to be used as first argument in `preg_replace_callback()`
         $headlinesPattern = is_array($headlines) ? implode('|', $headlines) : $headlines;
@@ -149,7 +149,7 @@ In your templates/snippets, you can now use the field method like this:
 ### With multiple headline levels
 
 ```php
-<?= $page->text()->kt()->anchorHeadlines('h2|h3|4') ?>
+<?= $page->text()->kt()->anchorHeadlines('h2|h3|h4') ?>
 ```
 
 Instead of passing a string of options separated by `|`, you can also pass an array of options:
