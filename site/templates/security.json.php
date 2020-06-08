@@ -2,6 +2,7 @@
 
 $data = [
     'latest'    => $kirby->version(),
+    'latestUrl' => 'https://github.com/getkirby/kirby/releases/tag/' . $kirby->version(),
     'supported' => [
         $kirby->version()         => 'Latest Kirby release, actively supported',
         $supported->value() . '+' => 'No known security issues',
