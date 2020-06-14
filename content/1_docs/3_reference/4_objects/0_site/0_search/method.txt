@@ -1,15 +1,14 @@
 Text: 
 
-## Possible parameters/defaults
+## Parameter options
 
-```php
-$defaults = [
-  'minlength' => 2,
-  'fields'    => []
-  'words'     => false,
-  'score'     => []
-];
-```
+| Option | Default | Description |
+| ---- | ---- | ---- |
+| `minlength` | 2 | Minimum length of search word
+| `fields` | `[]` | Fields to search in, defaults to all fields
+| `words` | `false` | Ssearch full words only
+| `score` | `['id' => 64,'title' => 64]` | Score per field
+| `stopwords`| `[]` | Array of words to exclude from search
 
 ## Example
 
