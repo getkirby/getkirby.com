@@ -6,8 +6,9 @@ Text:
 echo $page->hasPrevListed(); //will echo 1 if true, nothing if false
 ```
 
-### Using sort field
+### With collection as argument
 
 ```php
-echo $page->hasPrevListed('date', 'desc');
+$collection = $page->siblings(false)->listed()->sortBy('date', 'desc');
+echo $page->hasPrevListed($collection);
 ```
