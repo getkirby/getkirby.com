@@ -4,7 +4,9 @@ Text:
 
 ```php
 <?php
-echo $page->hasNextListed(); //will echo 1 if true, nothing if false.
+if ($page->hasNextListed()) {
+  echo $page->nextListed()->url();
+}
 ?>
 ```
 
@@ -12,7 +14,9 @@ echo $page->hasNextListed(); //will echo 1 if true, nothing if false.
 
 ```php
 <?php
-$collection = $page->siblings(false)->listed()->sortBy('date', 'desc');
-echo $page->hasNextListed($collection); //will echo 1 if true, nothing if false.
+$collection = $page->siblings()->listed()->sortBy('date', 'desc');
+if ($page->hasNextListed($collection)) {
+  echo $page->nextListed($collection)->url();
+}
 ?>
 ```

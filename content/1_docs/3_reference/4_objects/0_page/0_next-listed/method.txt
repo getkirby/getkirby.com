@@ -12,7 +12,7 @@ Text:
 
 ```php
 <?php
-$collection = $page->siblings(false)->listed()->sortBy('date', 'desc');
+$collection = $page->siblings()->listed()->sortBy('date', 'desc');
 if($next = $page->nextListed($collection)): ?>
 <a href="<?= $next->url() ?>">next listed page</a>
 <?php endif ?>

@@ -12,7 +12,7 @@ Text:
 
 ```php
 <?php
-$collection = $page->siblings(false)->unlisted()->sortBy('date', 'desc');
+$collection = $page->siblings()->unlisted()->sortBy('date', 'desc');
 if($next = $page->nextUnlisted($collection)): ?>
 <a href="<?= $next->url() ?>">next unlisted page</a>
 <?php endif ?>
