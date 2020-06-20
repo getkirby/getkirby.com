@@ -4,14 +4,18 @@ Text:
 
 ```php
 <?php
-echo $page->hasPrev(); //will echo 1 if true, nothing if false.
-?>
+if ($page->hasPrev()) {
+  echo $page->prev()->url();
+}
 ```
 
 ### With collection as argument
 
 ```php
 <?php
-$collection = $page->siblings(false)->sortBy('date', 'desc');
-echo $page->hasPrev($collection); //will echo 1 if true, nothing if false.
+$collection = $page->siblings()->sortBy('date', 'desc');
+if ($page->hasPrev($collection)) {
+  echo $page->prev($collection)->url();
+}
 ?>
+```

@@ -4,7 +4,9 @@ Text:
 
 ```php
 <?php
-echo $page->hasNext(); //will echo 1 if true, nothing if false.
+if ($page->hasNext()) {
+  echo $page->next()->url();
+}
 ?>
 ```
 
@@ -12,7 +14,9 @@ echo $page->hasNext(); //will echo 1 if true, nothing if false.
 
 ```php
 <?php
-$collection = $page->siblings(false)->sortBy('date', 'desc');
-echo $page->hasNext($collection); //will echo 1 if true, nothing if false.
+$collection = $page->siblings()->sortBy('date', 'desc');
+if ($page->hasNext($collection)) {
+  echo $page->next($collection)->url();
+}
 ?>
 ```
