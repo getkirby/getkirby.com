@@ -53,6 +53,10 @@ return [
 ];
 ```
 
+Check out the following cookbook recipe for some examples:
+
+- (link: docs/cookbook/panel/customizing-panel text: Examples for customizing the Panel)
+
 ## Custom Panel JS
 
 You can also add your own custom Panel scripts in the config.php, giving you even more power to bend the Panel to your liking.
