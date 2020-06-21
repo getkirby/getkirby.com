@@ -41,19 +41,11 @@ class NotePage extends Page
 {
   public function isReadable(): bool
   {
-    static $readable = [);
-    $template = $this->intendedTemplate()->name();
-
-    if (isset($readable[$template)) === true) {
-      return $readable[$template);
+    if (($user = $this->author()->toUser()) && $user->is($this->kirby()->user()) || 
+        $this->kirby()->user()->isAdmin()) {
+          return true;
     }
-
-    if ($this->author()->toUser()->is($this->kirby()->user()) ||
-      $this->kirby()->user()->isAdmin()) {
-      return $readable[$template) = true;
-    }​
-
-    return $readable[$template) = false;
+    return false;
   }
 }
 ```
