@@ -23,4 +23,4 @@ Text:
 
 Check out PHP's date function docs for all available formatting options: https://www.php.net/manual/en/function.date.php.
 
-If you use the `strftime` data handler, the format syntax is different: https://www.php.net/manual/en/function.strtotime.
+If you use the `strftime` date handler, the format syntax is different: https://www.php.net/manual/en/function.strtotime.
