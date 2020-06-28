@@ -77,6 +77,8 @@ If you want to use PHP's built-in server, you have to start it up with Kirby's r
 php -S localhost:8000 kirby/router.php
 ```
 
+Other servers (link: docs/reference/system/options/servers text: may work), but are not officially supported.
+
 ### Browsers for the Panel
 
 Kirby does not modify the output of your site's templates and thus has no effect on its browser requirements. The Panel is built on modern browser features though and has a couple browser requirements which need to be met by your site's editors.
