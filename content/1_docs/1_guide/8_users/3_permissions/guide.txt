@@ -187,8 +187,29 @@ $kirby = kirby();
 $kirby->impersonate('kirby');
 
 page('notes/a-great-article')->update([
-  'author'  => 'Homer Simpson'
+  'author' => 'Homer Simpson'
 ]);
 ```
 
-The impersonation will only last for the current request.
+<warning>
+The impersonation will be active for all code that runs in the current request after the call to `$kirby->impersonate()`. If you want to limit the impact to a single operation, call the method with a callback (see below).
+</warning>
+
+<since v="2.4.0">
+#### Impersonate with callback
+
+If you only want a single operation to run with different privileges, use a callback:
+
+```php
+<?php
+
+$kirby = kirby();
+$kirby->impersonate('kirby', function () {
+  page('notes/a-great-article')->update([
+    'author' => 'Homer Simpson'
+  ]);
+});
+```
+
+The impersonation automatically gets reset to the previous value after the callback returns.
+</since>
