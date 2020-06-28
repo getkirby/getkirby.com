@@ -167,7 +167,11 @@ class HelperPage extends Page
                 $doc = null;
             }
 
-            $type     = $parameter->getType() ?? ($doc ? (string)$doc->getType(): null);
+            if ($type = $parameter->getType()) {
+                $type = $type->getName();
+            } else {
+                $type = $doc ? (string)$doc->getType(): null;
+            }
             $name     = $parameter->getName();
             $param    = trim($type . ' $' . $name);
             $default  = null;
