@@ -1,0 +1,13 @@
+Since: 3.4.0
+
+----
+
+Text:
+
+## Example
+
+```php
+$result = $page->description()->callback(function ($field) {
+    return substr($field->value(), 1, 2);
+});
+```
