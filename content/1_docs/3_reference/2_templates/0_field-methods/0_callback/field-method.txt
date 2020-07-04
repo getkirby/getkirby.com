@@ -7,7 +7,8 @@ Text:
 ## Example
 
 ```php
-$result = $page->description()->callback(function ($field) {
-    return substr($field->value(), 1, 2);
+echo $page->title()->callback(function ($field) {
+  $field->value = 'Title: ' . $field->value;
+  return $field;  
 });
 ```

@@ -37,10 +37,12 @@ If you only want a single operation to run with different privileges, use a call
 <?php
 
 $kirby = kirby();
-$kirby->impersonate('kirby', function () {
+$result = $kirby->impersonate('kirby', function () {
   page('notes/a-great-article')->update([
     'author' => 'Homer Simpson'
   ]);
+
+  return 'this will be returned to $result above';
 });
 ```
 
