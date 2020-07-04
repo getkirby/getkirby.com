@@ -94,7 +94,7 @@ $files = page('blog')
   ->filterBy('type', '!=', 'image');
 ```
 
-#### Available filter operators
+#### Available filter methods
 
 (docs: filters)
 
@@ -205,14 +205,18 @@ $files = $kirby
 
 ### Filtering from - to
 
+<info>
+The `date ...` filters were added in Kirby 3.4.0.
+</info>
+
 For a simple from - to filtering of dates, you can string together two `filterBy()` methods as seen above:
 
 ```php
 // fetch all blog post of 2018 using beginning and end dates
 $collection = page('blog')
   ->children()
-  ->filterBy('date', '>', '2018-01-01')
-  ->filterBy('date', '<', '2018-12-31');
+  ->filterBy('date', 'date >', '2018-01-01')
+  ->filterBy('date', 'date <', '2018-12-31');
 ```
 
 If you have a date field but want to filter by year, you can use a filter with a callback:
