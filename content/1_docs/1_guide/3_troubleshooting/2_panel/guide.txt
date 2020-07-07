@@ -15,23 +15,13 @@ php_value opcache.revalidate_freq 0
 
 ## Panel Error Messages
 
-### "The following HTTP methods are not supported by your server"
-
-The API behind the Kirby Panel relies on HTTP `PATCH`, `PUT` and `DELETE` requests. If any of these are blocked, the Panel will not function properly.
-
-Please check the following if you are seeing this error:
-
-- A proxy (common in office networks) may be too old or may block these requests on purpose. You can rule out this issue by creating a (link: try text: personal demo) from the affected client. If that doesn't work as well, it's likely a proxy issue.
-- Some hosting providers offer features to allegedly increase security. For example OVH's "app firewall" is known to cause these issues. Try disabling such features.
-- The web server itself or a reverse proxy that is set up on the server-side in front of the web server may block the requests (again either because it's too old or because someone has explicitly configured it this way). If your web server is Apache, verify if there is `mod_security` rule that blocks some or all of the mentioned HTTP methods.
-
 ### "The JSON response from the API could not be parsed. Please check your API connection."
 
-The API responses get modified or blocked somewhere between Kirby and the client. This is commonly caused by the same issues as the "The following HTTP methods are not supported by your server" error on Kirby installations with Kirby <3.4.0.
+The API responses get modified or blocked somewhere between Kirby and the client.
 
-## Fields not saving or resetting to the saved value immediately when typing
+First try upgrading to Kirby 3.4.0, which doesn't rely on `PATCH` and `DELETE` requests anymore and is therefore compatible with weird server setups.
 
-Please refer to the section on the "The following HTTP methods are not supported by your server" error above.
+If the error persists with Kirby 3.4+, please check your browser's console for errors as well as the network tab of the Dev Tools to see if any API requests (`/api/...`) are responded with garbage (e.g. HTML code from your server).
 
 ## Fields randomly not saving, random logouts…
 

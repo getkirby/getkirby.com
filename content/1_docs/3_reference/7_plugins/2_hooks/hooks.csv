@@ -34,7 +34,7 @@ page.duplicate:after,$duplicatePage,trigger,
 page.update:before,"$page,$values,$strings",trigger,
 page.update:after,"$newPage,$oldPage",trigger,
 route:before,"$route,$path,$method",trigger,
-route:after,"$route,$path,$method,$result",apply,$result
+route:after,"$route,$path,$method,$result,$final",apply,$result
 site.changeTitle:before,"$site,$title,$languageCode",trigger,
 site.changeTitle:after,"$newSite,$oldSite",trigger,
 site.update:before,"$site,$values,$strings",trigger,

@@ -87,6 +87,7 @@ With options, you can control all the file actions that should or should not be 
 |----    | ---- |
 | `changeName` | `true`/`false`  |
 | `delete` | `true`/`false` |
+| `read` | `true`/`false` (added in Kirby 3.4.0) |
 | `replace` | `true`/`false`  |
 | `update` | `true`/`false`  |
 

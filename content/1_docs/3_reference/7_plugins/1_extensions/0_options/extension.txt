@@ -8,25 +8,56 @@ Guide: configuration
 
 Text:
 
-Options are registered with the `options` extension. The extensions accepts an array of options.
+<info>
+Support for registering, setting and getting plugin options with the dot notation was introduced with Kirby 3.4.0. Older Kirby versions only have proper support for simple non-nested options.
+</info>
+
+## Registering options
+
+Options are registered with the `options` extension. The extension accepts an array of options with their default values. The default values will be used if the options are not overwritten in the site config.
 
 ```php
 Kirby::plugin('yourname/yourplugin', [
-  'options' => [
-    'plugin.option' => 'some-value'
-  ]
+    'options' => [
+        'your.option' => 'some-value'
+    ]
 ]);
 ```
 
+<warning>
+Always register your options with the dot notation (like in the example above), never as nested arrays (meaning: each separate option should be defined on the top-level of the options array). Only options registered in that way can be set in all supported ways (dot notation, fully or partially nested) in the site config. This feature protects your plugin options from being nested more than you expect.
+</warning>
+
+## Setting custom options in the site config
+
+Your custom options can be set like core Kirby options in the `site/config/config.php`:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'yourname.yourplugin' => [
+        // with the dot notation
+        'your.option' => 'a-custom-value',
+
+        // or with the nested notation
+        'your' => [
+            'option' => 'also-a-custom-value'
+        ]
+    ]
+];
+```
+
+## Accessing option values
 
 Config options can be used anywhere in Kirby with the `$kirby->option()` method:
 
 ```php
-$kirby->option('yourname.yourplugin.plugin.option');
+$kirby->option('yourname.yourplugin.your.option');
 ```
 
-Or with the option helper:
+Or with the `option()` helper:
 
 ```php
-option('yourname.yourplugin.plugin.option');
+option('yourname.yourplugin.your.option');
 ```

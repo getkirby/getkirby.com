@@ -15,17 +15,17 @@ Hooks are not restricted to Panel events, but are implemented  everywhere: hooks
 
 ## Registering hooks
 
-Hooks can be registered in your `config.php` or in plugins
+Hooks can be registered in your `config.php` or in plugins:
 
 ### In your config
 
 ```php "/site/config/config.php"
 return [
-	'hooks' => [
-		'page.delete:before' => function ($page) {
-			// do something before a page gets deleted
-		}
-	]
+    'hooks' => [
+        'page.delete:before' => function ($page) {
+            // do something before a page gets deleted
+        }
+    ]
 ];
 ```
 
@@ -46,6 +46,54 @@ Kirby::plugin('your/plugin', [
 ]);
 ```
 
+<since v="3.4.0">
+### Wildcard hooks
+
+If you want to register the same hook for multiple events, you can register a wildcard hook (either in your config or in a plugin):
+
+```php "/site/config/config.php"
+return [
+    'hooks' => [
+        'page.*:before' => function ($page) {
+            // do something before something happens with a page
+        }
+    ]
+];
+```
+
+The following wildcards are supported (in this example for an event `type.action:state`):
+
+- `type.*:state`,
+- `type.action:*`,
+- `type.*:*`,
+- `*.action:state`,
+- `*.action:*`,
+- `*:state`,
+- `*`
+
+Depending on where you put the wildcard `*`, your hook will receive all events that match the wildcard name.
+
+If you only want to react on some, but not all matched events, you can filter inside the hook with the `$event` object:
+
+```php "/site/config/config.php"
+return [
+    'hooks' => [
+        'page.*:before' => function ($event, $page) {
+            // check if we want to handle the action
+            if (in_array($event->action(), ['create', 'delete']) !== true) {
+                // no, return early
+                return;
+            }
+
+            // do something before a page gets created or deleted
+        }
+    ]
+];
+```
+
+You can read more about the `$event` object below.
+</since>
+
 ## Accessing `$kirby`, `$site` and `$user` in a hook callback
 
 You get full access to the current Kirby instance and its API with `$this` in a hook callback.
@@ -58,14 +106,47 @@ $username = $this->user()->username();
 $role     = $this->user()->role();
 ```
 
+<since v="3.4.0">
+## Hook arguments
+
+Since Kirby 3.4.0, the hook arguments are no longer provided by position, but by variable name (similar to (link: docs/guide/templates/controllers#accessing-kirby-objects-in-your-controller text: controllers)). This allows you to request just the arguments you need in any order. All arguments that are not available will be passed as `null`:
+
+```php "/site/config/config.php"
+return [
+    'hooks' => [
+        'route:after' => function ($result, $path) {
+            // this hook only cares about these two arguments
+        }
+    ]
+];
+```
+
+There is also a special `$event` argument that contains all information about the event, including the full event name, its individual parts (type, action and state) and all named hook arguments:
+
+```php "/site/config/config.php"
+return [
+    'hooks' => [
+        'page.create:before' => function ($event) {
+            $name   = $event->name();   // 'page.create:before'
+            $type   = $event->type();   // 'page'
+            $action = $event->action(); // 'create'
+            $state  = $event->state();  // 'before'
+            $page   = $event->page();   // $page
+            $input  = $event->input();  // $input
+        }
+    ]
+];
+```
+</since>
+
 ## Error Handling
 
-You can now react on errors in a hook callback and return an error message.
+You can react on errors in a hook callback by throwing an Exception. The error message will be displayed in the Panel.
 
 ```php
 Kirby::plugin('your/plugin', [
     'hooks' => [
-        'page.update:after' => function ($newPage,$oldPage) {
+        'page.update:after' => function ($newPage, $oldPage) {
             throw new Exception('Page Updated');
         },
         'page.create:after' => function ($page) {
@@ -92,3 +173,5 @@ Kirby::plugin('your/plugin', [
 As you can see, only the name of the hook has changed. Please make sure to namespace your hooks by including the plugin name in the hook name. Otherwise your hooks might conflict with other plugins or future built-in hooks.
 
 You can trigger your own hooks from anywhere in the system with the `$kirby->trigger()` and `$kirby->apply()` methods.
+
+The two main use-cases for custom hooks are communication between two plugins (one plugin triggers an event and another registers a hook to listen for it) and hooks that are registered from the site config to allow users to add custom behavior to plugins.

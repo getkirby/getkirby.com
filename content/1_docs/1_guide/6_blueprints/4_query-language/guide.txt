@@ -26,7 +26,7 @@ We recommend using double quotes around strings in the query language, otherwise
 $site->title()
 $page->title()->lower()
 $page->children()
-$page->children()->filterBy("featured", true)
+$page->children()->filterBy('featured', true)
 $site->find('notes')->children()->filterby('tags', 'ocean', ',')
 $page->images()->template('image')
 ```
@@ -37,8 +37,8 @@ $page->images()->template('image')
 site.title
 page.title.lower
 page.children
-page.children.filterBy("featured", true)
-site.find('notes').children.filterBy("tags", "ocean", ",")
+page.children.filterBy('featured', true)
+site.find('notes').children.filterBy('tags', 'ocean', ',')
 page.images.template('image')
 ```
 
@@ -50,7 +50,7 @@ The query language is not limited to built-in methods. You can also use (glossar
 
 ### Blueprint example
 
-There are two ways of using the query language in your blueprints.
+There are two ways of using the query language in your blueprints:
 
 #### 1. To fetch data
 
@@ -88,8 +88,8 @@ tags:
     options: query
     query:
       fetch: page.siblings
-      text: " {{ page.title}}"
-      value: " {{ page.uri}}"
+      text: " {{ page.title }}"
+      value: "{{ page.uri }}"
 
 mySelect:
   label: My Select Box
@@ -131,11 +131,10 @@ info: "{{ page.from.toDate('d.m.Y') }} - {{ page.to.toDate('d.m.Y') }} / {{ page
 info: "{{ file.dimensions }}"
 ```
 
-## Extended query syntax
+## Advanced query syntax
 
 <since v="3.2.0">
-
-You can use array syntax and nested queries in Kirby's query syntax.
+Queries can include arrays and nested method calls:
 
 ```yaml
 # arrays
@@ -144,5 +143,20 @@ query: site.index.filterBy("template", "in", ["note", "album"])
 # nested queries
 query: kirby.collection("some-collection").not(kirby.collection("excluded-collection"))
 ```
+</since>
 
+<since v="3.4.0">
+If you need to include quotes within strings, you can use the other quote type (`"` vs. `'`) or escape the quotes of the same quote type with backslashes:
+
+```yaml
+query: site.title.or("This is a default value with \"quotes\"")
+```
+
+Method calls (`parent.method(arguments...)`) are supported if the parent is an object and the method exists (or if the object has a magic `__call()` method) or if the parent is an array and the method is a PHP closure (anonymous function).
+
+Property access (`parent.property`) will behave like this:
+
+- If the parent is an object, Kirby will first try to call a method with that name, then a magic `__call()` method. If neither exist, Kirby will try to access a property with that name or call the magic `__get()` method.
+- If the parent is an array, the respective array element will be returned.
+- Calling a property without any arguments (`parent.property()`) is equivalent to accessing the property.
 </since>
