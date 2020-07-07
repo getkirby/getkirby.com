@@ -186,7 +186,7 @@ We can use a `route.after` hook to call the `buildPageTree()` method when a page
         $uid = str_replace('+', '/', $uid);
         $page = kirby()->page($uid);
 
-        if ($page->children()->isEmpty()) {
+        if ($page && $page->children()->isEmpty()) {
             buildPageTree($page);
         }
     },
