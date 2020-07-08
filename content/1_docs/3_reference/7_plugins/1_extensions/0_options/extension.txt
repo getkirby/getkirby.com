@@ -25,7 +25,11 @@ Kirby::plugin('yourname/yourplugin', [
 ```
 
 <warning>
-Always register your options with the dot notation (like in the example above), never as nested arrays (meaning: each separate option should be defined on the top-level of the options array). Only options registered in that way can be set in all supported ways (dot notation, fully or partially nested) in the site config. This feature protects your plugin options from being nested more than you expect.
+Always register your options with the dot notation (like in the example above), never as nested arrays (meaning: each separate option should be defined on the top-level of the options array). Only options registered in that way can be set in all supported ways (dot notation, fully or partially nested) in the site config.
+
+The reason why plugin options need to be defined that way is that Kirby needs to know all your options in advance. This allows Kirby to protect the options from expanding keys *inside* that option from the dot notation to a nested structure (which would affect you if your plugin option is a key-value array where the keys may contain dots by accident). Kirby can only protect options that are listed on the top-level using the dot notation.
+
+Please also note that it's not possible to define both a plugin option without a dot *and* a plugin option that starts with the same name but then continues with a dot. For example you can't have both an option `foo` *and* an option `foo.bar` as the option `foo.bar` becomes a child of the option `foo`. However you *can* have two options `foo.bar` and `foo.whatever` (because they are both children of `foo`) or two options `whatever` and `foo.bar` (because the names are unrelated).
 </warning>
 
 ## Setting custom options in the site config
