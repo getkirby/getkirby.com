@@ -39,6 +39,10 @@ composer create-project getkirby/pluginkit site/plugins/your-plugin dev-1-basic 
 
 Please note that using Composer on the command line is *not* required for this tutorial, not even for supporting plugin installation via Composer. For most plugins, you can use the ZIP file of the Pluginkit and never have to touch the command line (unless you want to, which is fine too).
 
+<info>
+The `composer create-project` command creates a `vendor` directory and a `composer.lock` file inside your new plugin directory. Both are not required if you don't plan to use Composer for plugin dependencies or autoloading, however they are also not harmful. In case you don't want to deal with them at all, download the [ZIP file](https://github.com/getkirby/pluginkit/archive/1-basic.zip), which does not include these files.
+</info>
+
 ## General recommended setup
 
 ### Your plugin's Git repo
