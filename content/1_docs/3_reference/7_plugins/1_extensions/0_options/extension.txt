@@ -19,13 +19,16 @@ Options are registered with the `options` extension. The extension accepts an ar
 ```php
 Kirby::plugin('yourname/yourplugin', [
     'options' => [
-        'your.option' => 'some-value'
+        'your.option' => 'some-value',
+        'other.option' => [
+            'with custom keys' => 'and values'
+        ]
     ]
 ]);
 ```
 
 <warning>
-Always register your options with the dot notation (like in the example above), never as nested arrays (meaning: each separate option should be defined on the top-level of the options array). Only options registered in that way can be set in all supported ways (dot notation, fully or partially nested) in the site config.
+Each separate plugin option needs to be registered with the dot notation (like in the example above), not using nested arrays (meaning: each separate option should be defined on the top-level of the options array). Only options registered in that way can be set in all supported ways (dot notation, fully or partially nested) in the site config.
 
 The reason why plugin options need to be defined that way is that Kirby needs to know all your options in advance. This allows Kirby to protect the options from expanding keys *inside* that option from the dot notation to a nested structure (which would affect you if your plugin option is a key-value array where the keys may contain dots by accident). Kirby can only protect options that are listed on the top-level using the dot notation.
 
