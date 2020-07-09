@@ -37,16 +37,16 @@ require __DIR__ . '/kirby/bootstrap.php';
 
 $kirby = new Kirby();
 
-$current_user = $kirby->user();
+$currentUser = $kirby->user();
 
-if ( $current_user && $current_user->role()->name() === 'editor' ):
+if ( $currentUser && $currentUser->role()->name() === 'editor' ):
    $kirby = new Kirby([
        'roots' => [
            'blueprints' => __DIR__ . '/site/blueprints-editor',
        ],
    ]);
 
-elseif ( $current_user && $current_user->role()->name() === 'client' ):
+elseif ( $currentUser && $currentUser->role()->name() === 'client' ):
    $kirby = new Kirby([
        'roots' => [
            'blueprints' => __DIR__ . '/site/blueprints-client',
@@ -76,8 +76,8 @@ This implementation registers blueprints in a plugin, for example, a custom `hom
 ```php "/site/plugins/role-blueprints/index.php"
 <?php
 
-if(($user = kirby()->user()) && $user->role()->name() == 'client') {
-    $dir = __DIR__. '/blueprints/pages/client/home.yml';
+if(($user = kirby()->user()) && $user->role()->name() === 'client') {
+    $dir = __DIR__ . '/blueprints/pages/client/home.yml';
 } else {
     $dir = __DIR__ . '/blueprints/pages/home.yml';
 }
@@ -149,7 +149,7 @@ Since we cannot use a static variable like in the original method, this might ha
 
 ### When is this useful
 
-This plugin is useful if you want to restrict access of a user role to a specific page or pages (and its children) in the panel.
+This plugin is useful if you want to restrict access of a user role to a specific page or pages (and its children) in the Panel.
 
 ### How does it work
 
@@ -157,4 +157,4 @@ Install the (link: text: Bouncer plugin) and follow the instructions in the docu
 
 ### Possible downsides
 
-See the (link: https://github.com/sylvainjule/kirby-bouncer https://github.com/sylvainjule/kirby-bouncer#3-disclaimer text: plugin's disclaimer). Limited to user roles.
+See the (link: https://github.com/sylvainjule/kirby-bouncer#3-disclaimer text: plugin's disclaimer). Limited to user roles.
