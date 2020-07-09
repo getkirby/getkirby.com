@@ -56,7 +56,7 @@ While it may appear obvious to replace `'active' => true` with `'active' => !kir
 
 It would be possible to move the test for a logged-in user into the (link: docs/reference/system/options/ready text: `ready` option), executed after Kirby is completely initiated, but another problem emerges with modifying the `active` setting:
 
-Since API calls (most importantly used by the panel) always originate from authenticated users, this setting would disable the cache for such request; yet, as that would make Kirby believe the cache to be disabled globally when processing authenticated requests, it would not empty the page cache when content is updated.
+Since API calls (most importantly used by the Panel) always originate from authenticated users, this setting would disable the cache for such request; yet, as that would make Kirby believe the cache to be disabled globally when processing authenticated requests, it would not empty the page cache when content is updated.
 
 Therefore, the most straightforward way to achieve this is by moving the test for a user session into the `ignore` callback:
 
