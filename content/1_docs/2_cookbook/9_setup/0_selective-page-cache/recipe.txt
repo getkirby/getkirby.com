@@ -30,10 +30,10 @@ return [
 ];
 ```
 
-Kirby also takes care of emptying the cache whenever content is changed through the panel so that no outdated content is served to users.
+Kirby also takes care of emptying the cache whenever content is changed through the Panel so that no outdated content is served to users.
 
 <info>
-When updating content by other means than the panel, make sure to call `kirby()->cache('pages')->flush()` or manually delete the folder `site/cache/YOURDOMAIN/pages`.
+When updating content by other means than the Panel, make sure to call `kirby()->cache('pages')->flush()` or manually delete the folder `site/cache/YOURDOMAIN/pages`.
 </info>
 
 The reason for emptying the entire cache is that content often is referenced elsewhere, hence it is safest to always start fresh.
