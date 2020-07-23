@@ -5,7 +5,7 @@ Title: Toggle Input
 Text:
 
 ```html
-<k-input v-model="toggle" name="toggle" type="Toggle" />
+<k-input v-model="toggle" name="toggle" type="toggle" />
 ```
 
 ## Props
