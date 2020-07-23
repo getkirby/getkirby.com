@@ -200,7 +200,7 @@ The title is required. It will appear in the file view to indicate the selected 
 
 ### Options
 
-A meta data blueprint can contain different options to define what sort of files can be uploaded etc. For details see (link: docs/blueprints text: files  blueprint options]
+A meta data blueprint can contain different options to define what sort of files can be uploaded etc. For details see (link: docs/blueprints text: files blueprint options)
 
 ### Fields
 
