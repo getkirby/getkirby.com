@@ -21,14 +21,6 @@ return [
 ];
 ```
 
-You can also define single options with the dot syntax:
-
-```php
-return [
-    'remote.agent' => 'My Awesome Site'
-];
-```
-
 ## Configuring the list of allowed certificate authorities (CAs) for HTTPS requests
 
 Kirby ships with a CA bundle based on the Mozilla CA list. We keep that CA bundle up-to-date with new Kirby releases.
@@ -41,7 +33,9 @@ If you want to use a different CA bundle or disable verification completely (not
 <?php
 
 return [
-    'remote.ca' => ...
+    'remote' => [
+        'ca' => ...
+    ]
 ];
 ```
 

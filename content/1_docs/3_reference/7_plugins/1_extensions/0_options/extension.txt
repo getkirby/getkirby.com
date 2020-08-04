@@ -8,10 +8,6 @@ Guide: configuration
 
 Text:
 
-<info>
-Support for registering, setting and getting plugin options with the dot notation was introduced with Kirby 3.4.0. Older Kirby versions only have proper support for simple non-nested options.
-</info>
-
 ## Registering options
 
 Options are registered with the `options` extension. The extension accepts an array of options with their default values. The default values will be used if the options are not overwritten in the site config.
@@ -19,21 +15,13 @@ Options are registered with the `options` extension. The extension accepts an ar
 ```php
 Kirby::plugin('yourname/yourplugin', [
     'options' => [
-        'your.option' => 'some-value',
-        'other.option' => [
-            'with custom keys' => 'and values'
+        'option' => 'some-value',
+        'another-option' => [
+            'with-a-nested-option' => 'and values'
         ]
     ]
 ]);
 ```
-
-<warning>
-Each separate plugin option needs to be registered with the dot notation (like in the example above), not using nested arrays (meaning: each separate option should be defined on the top-level of the options array). Only options registered in that way can be set in all supported ways (dot notation, fully or partially nested) in the site config.
-
-The reason why plugin options need to be defined that way is that Kirby needs to know all your options in advance. This allows Kirby to protect the options from expanding keys *inside* that option from the dot notation to a nested structure (which would affect you if your plugin option is a key-value array where the keys may contain dots by accident). Kirby can only protect options that are listed on the top-level using the dot notation.
-
-Please also note that it's not possible to define both a plugin option without a dot *and* a plugin option that starts with the same name but then continues with a dot. For example you can't have both an option `foo` *and* an option `foo.bar` as the option `foo.bar` becomes a child of the option `foo`. However you *can* have two options `foo.bar` and `foo.whatever` (because they are both children of `foo`) or two options `whatever` and `foo.bar` (because the names are unrelated).
-</warning>
 
 ## Setting custom options in the site config
 
@@ -44,27 +32,43 @@ Your custom options can be set like core Kirby options in the `site/config/confi
 
 return [
     'yourname.yourplugin' => [
-        // with the dot notation
-        'your.option' => 'a-custom-value',
-
-        // or with the nested notation
-        'your' => [
-            'option' => 'also-a-custom-value'
+        'option' => 'a custom value',
+        'another-option' => [
+            'with-a-nested-option' => 'also a custom value'
         ]
     ]
 ];
 ```
+
+<info>
+Before Kirby 3.4.0, only the following syntax was supported:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'yourname.yourplugin.option' => 'a custom value',
+    'yourname.yourplugin.another-option' => [
+        'with-a-nested-option' => 'also a custom value'
+    ]
+];
+```
+
+This syntax is now deprecated because it turned out to be confusing. For now, the old syntax is still supported to ensure backwards-compatibility.
+</info>
 
 ## Accessing option values
 
 Config options can be used anywhere in Kirby with the `$kirby->option()` method:
 
 ```php
-$kirby->option('yourname.yourplugin.your.option');
+$kirby->option('yourname.yourplugin.option');
+$kirby->option('yourname.yourplugin.another-option.with-a-nested-option');
 ```
 
 Or with the `option()` helper:
 
 ```php
-option('yourname.yourplugin.your.option');
+option('yourname.yourplugin.option');
+option('yourname.yourplugin.another-option.with-a-nested-option');
 ```
