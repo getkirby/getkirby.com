@@ -33,7 +33,7 @@ By default, Kirby detects the base URL of the site automatically using the `SERV
 
 The best fix for this issue is to update the configuration of your web server and set a correct `SERVER_NAME`.
 
-If you don't have access to this configuration, you can manually set the correct base URL with Kirby's (url: docs/reference/system/options/url text: `url` option).
+If you don't have access to this configuration, you can manually set the correct base URL with Kirby's (link: docs/reference/system/options/url text: `url` option).
 
 ## Thumbs not generated, Panel not working
 
