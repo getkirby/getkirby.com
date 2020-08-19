@@ -1,0 +1,47 @@
+Text:
+
+## Example
+
+### Redirect to another page
+
+```php
+<?php
+if ($page = page('blog')) {
+  return $page->go();
+}
+?>
+```
+
+### Redirection within the page
+
+```php
+<?php
+// /site/controllers/contact.php
+return function ($kirby, $page) {
+    if ($kirby->request()->is('POST')) {
+        $sent = $kirby->email('contact', [
+            'body' => 'Body',
+        ])->isSent();
+
+        if ($sent === true) {
+            // Will redirect to /contact?status=success&message=Form+successfully+sent#contact-form
+            return $page->go([
+                'query' => [
+                    'status'  => 'success',
+                    'message' => 'Form successfully sent',
+                ],
+                'fragment' => 'contact-form'
+            ]);
+        } else {
+            // Willr edirect to /contact?status=failed&message=Form+could+not+be+submitted
+            return $page->go([
+                'query' => [
+                    'status'  => 'failed',
+                    'message' => 'Form could not be submitted'
+                ]
+            ]);
+        }
+    }
+};
+?>
+```
