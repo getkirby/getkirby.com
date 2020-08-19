@@ -1,5 +1,6 @@
 node_modules
 .vscode
+.idea
 .DS_Store
 /backstop_data
 /www/media
