@@ -33,7 +33,7 @@ return function ($kirby, $page) {
                 'fragment' => 'contact-form'
             ]);
         } else {
-            // Willr edirect to /contact?status=failed&message=Form+could+not+be+submitted
+            // Will redirect to /contact?status=failed&message=Form+could+not+be+submitted
             return $page->go([
                 'query' => [
                     'status'  => 'failed',
