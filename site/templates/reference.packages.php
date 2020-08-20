@@ -1,8 +1,8 @@
-<?php snippet('cheatsheet.header') ?>
+<?php snippet('reference/header') ?>
 
 <article class="cheatsheet-overview cheatsheet-main cheatsheet-panel">
   <header class="cheatsheet-main-header cheatsheet-panel-header">
-    <?php snippet('cheatsheet.menu.button') ?>
+    <?php snippet('reference/nav/menu-btn') ?>
   </header>
   <div class="cheatsheet-main-scrollarea cheatsheet-panel-scrollarea">
 
@@ -13,7 +13,7 @@
       <ul class="cheatsheet-section-entries">
         <?php foreach ($package->children()->filterBy('isTrait', false) as $class): ?>
         <li>
-          <a class="cheatsheet-entry" href="<?= referenceLookup($class->class())->url() ?>">
+          <a class="cheatsheet-entry" href="<?= lookup($class->class())->url() ?>">
             <div>
               <strong>
                 <span><?= Str::after($class->class(), "Kirby\\" . $package->title() . "\\")  ?></span>
@@ -29,4 +29,4 @@
   </div>
 </article>
 
-<?php snippet('cheatsheet.footer') ?>
+<?php snippet('reference/footer') ?>

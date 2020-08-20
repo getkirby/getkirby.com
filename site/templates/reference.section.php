@@ -1,9 +1,9 @@
-<?php snippet('cheatsheet.header', ['icons' => $icons ?? null]) ?>
+<?php snippet('reference/header', ['icons' => $icons ?? null]) ?>
 
 <article class="cheatsheet-section cheatsheet-main cheatsheet-panel">
 
   <div class="cheatsheet-main-header cheatsheet-panel-header">
-    <?php snippet('cheatsheet.menu.button') ?>
+    <?php snippet('reference/nav/menu-btn') ?>
   </div>
 
   <div class="cheatsheet-main-scrollarea cheatsheet-panel-scrollarea">
@@ -17,14 +17,14 @@
       </div>
       <?php endif ?>
 
-      <?php snippet('cheatsheet.article.meta') ?>
+      <?php snippet('reference/entry/meta') ?>
     </header>
 
     <div class="-mb:large">
       <?php if ($page->children()->hasAdvanced()): ?>
-      <?php snippet('cheatsheet.section.advanced-link') ?>
+      <?php snippet('reference/list/advanced-link') ?>
       <?php endif ?>
-      <?php snippet('cheatsheet.section', [
+      <?php snippet('reference/list/section', [
         'section' => $page,
         'excerpt' => $excerpt ?? false,
       ]) ?>
@@ -40,4 +40,4 @@
 
 </article>
 
-<?php snippet('cheatsheet.footer') ?>
+<?php snippet('reference/footer') ?>
