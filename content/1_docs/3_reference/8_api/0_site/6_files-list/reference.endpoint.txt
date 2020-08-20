@@ -1,0 +1,17 @@
+Title: /site/files
+----
+Method: GET
+----
+Excerpt: List files
+----
+Text:
+
+## Query parameters
+
+(docs: api/files-parameters)
+
+## File fields
+
+The following fields are available in the file model and can be fetched with the `select` parameter:
+
+(api-fields: file)

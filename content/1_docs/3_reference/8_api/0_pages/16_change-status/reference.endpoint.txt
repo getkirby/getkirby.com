@@ -1,0 +1,13 @@
+Title: /pages/:id/status
+----
+Method: PATCH
+----
+Excerpt: Change the page status
+----
+Auth: pages.changeStatus
+----
+Text:
+
+## Patch parameters
+
+(docs: api/page-status-data)

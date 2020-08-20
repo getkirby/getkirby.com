@@ -1,0 +1,20 @@
+Title: /pages/:id
+----
+Method: PATCH
+----
+Excerpt: Update page content
+----
+Auth: pages.update
+----
+Text:
+
+## Patch parameters
+
+Send a key/value object with the new page content as request body:
+
+```js
+{
+  "intro": "This is a great article",
+  "text": "It's very very long"
+}
+```

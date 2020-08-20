@@ -1,0 +1,17 @@
+Title: /site/:id/files/search
+----
+Method: GET|POST
+----
+Excerpt: Search for site files
+----
+Since: 3.1.0
+----
+Text:
+
+## Query parameters
+
+(docs: api/search-query)
+
+## Post parameters
+
+(docs: api/search-post)

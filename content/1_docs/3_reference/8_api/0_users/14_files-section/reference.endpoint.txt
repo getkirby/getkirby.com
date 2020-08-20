@@ -1,0 +1,5 @@
+Title: /users/:id/files/:filename/sections/:name
+----
+Method: GET
+----
+Excerpt: Retrieve a file section

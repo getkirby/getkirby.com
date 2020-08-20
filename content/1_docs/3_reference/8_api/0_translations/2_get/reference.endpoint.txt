@@ -1,0 +1,41 @@
+Title: /translations/:code
+----
+Method: GET
+----
+Excerpt: Retrieve a translation
+----
+Text:
+
+## Query parameters
+
+(docs: api/translation-parameters)
+
+## Translation fields
+
+The following fields are available in the translation model and can be fetched with the `select` parameter:
+
+(api-fields: translation)
+
+----
+Example: /api/translations/de
+----
+Response:
+{
+    "code": 200,
+    "data": {
+        "author": "Kirby Team",
+        "data": {
+            "add": "Add",
+            "cancel": "Cancel",
+            "change": "Change",
+            "confirm": "Ok",
+            "copy": "Copy",
+            ...
+       },
+        "direction": "ltr",
+        "id": "en",
+        "name": "English"
+    },
+    "status": "ok",
+    "type": "model"
+}

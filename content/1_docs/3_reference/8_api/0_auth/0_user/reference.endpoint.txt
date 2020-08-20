@@ -1,0 +1,31 @@
+Title: /auth
+----
+Method: GET
+----
+Excerpt: Retrieve info about the logged in user
+----
+Text:
+
+### Query parameters
+
+(docs: api/role-parameters)
+
+## User fields
+
+The following fields are available in the user model and can be fetched with the `select` parameter:
+
+(api-fields: user)
+
+----
+Response:
+
+{
+    "code": 200,
+    "data": {
+        "description": "The admin has all rights",
+        "name": "admin",
+        "title": "Admin"
+    },
+    "status": "ok",
+    "type": "model"
+}

@@ -1,0 +1,13 @@
+Title: /pages/:id/template
+----
+Method: PATCH
+----
+Excerpt: Change the page template
+----
+Auth: pages.changeTemplate
+----
+Text:
+
+## Patch parameters
+
+(docs: api/page-template-data)

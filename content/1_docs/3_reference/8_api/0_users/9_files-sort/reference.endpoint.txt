@@ -1,0 +1,14 @@
+Title: /users/:id/files/sort
+----
+Method: PATCH
+----
+Excerpt: Sort files
+----
+Auth: files.update
+----
+
+Text:
+
+## Patch parameters
+
+(docs: api/file-sort-data)

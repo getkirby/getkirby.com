@@ -1,0 +1,11 @@
+Title: /users/:id/sections/:name
+----
+Method: GET
+----
+Excerpt: Retrieve a user section
+----
+Text:
+----
+Example:
+----
+Response:

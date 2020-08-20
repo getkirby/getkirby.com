@@ -1,0 +1,45 @@
+Title: /languages
+----
+Method: GET
+----
+Excerpt: List languages
+----
+Text:
+
+## Query parameters
+
+(docs: api/languages-parameters)
+
+## Language fields
+
+The following fields are available in the language model and can be fetched with the `select` parameter:
+
+(api-fields: language)
+
+----
+
+Response:
+
+{
+    "code": 200,
+    "data": [
+        {
+            "code": "de",
+            "default": false,
+            "name": "Deutsch"
+        },
+        {
+            "code": "en",
+            "default": true,
+            "name": "English"
+        }
+    ],
+    "pagination": {
+        "page": 1,
+        "total": 2,
+        "offset": 0,
+        "limit": 100
+    },
+    "status": "ok",
+    "type": "collection"
+}

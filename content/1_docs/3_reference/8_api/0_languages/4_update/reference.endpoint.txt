@@ -1,0 +1,11 @@
+Title: /languages/:code
+----
+Method: PATCH
+----
+Excerpt: Update a language
+----
+Text:
+
+## Patch parameters
+
+(docs: api/language-update-data)

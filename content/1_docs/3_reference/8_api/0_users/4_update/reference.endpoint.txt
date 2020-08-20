@@ -1,0 +1,13 @@
+Title: /users/:id
+----
+Method: PATCH
+----
+Excerpt: Update a user
+----
+Auth: users.update
+----
+Text:
+
+## Patch parameters
+
+(docs: api/user-content-data)

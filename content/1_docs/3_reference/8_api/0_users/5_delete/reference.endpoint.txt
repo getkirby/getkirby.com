@@ -1,0 +1,7 @@
+Title: /users/:id
+----
+Method: DELETE
+----
+Auth: users.delete
+----
+Excerpt: Delete a user

@@ -1,0 +1,5 @@
+Title: /pages/:id/files/:filename/sections/:name
+----
+Method: GET
+----
+Excerpt: Retrieve a file section

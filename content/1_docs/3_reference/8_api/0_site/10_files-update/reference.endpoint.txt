@@ -1,0 +1,13 @@
+Title: /site/files/:filename
+----
+Method: PATCH
+----
+Excerpt: Update file content
+----
+Auth: files.update
+----
+Text:
+
+## Patch parameters
+
+(docs: api/file-content-data)

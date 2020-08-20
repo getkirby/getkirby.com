@@ -1,7 +1,0 @@
-Title: /languages/:code
-----
-Info: DELETE
-----
-Excerpt: Delete a language
-----
-Text:

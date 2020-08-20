@@ -1,0 +1,13 @@
+Title: /users/:id/name
+----
+Method: PATCH
+----
+Excerpt: Change the name
+----
+Auth: users.changeName
+----
+Text:
+
+## Patch parameters
+
+(docs: api/user-name-data)

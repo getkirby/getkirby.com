@@ -1,0 +1,68 @@
+Title: /users
+----
+Method: GET
+----
+Excerpt: List users
+----
+Text:
+
+## Query parameters
+
+(docs: api/users-parameters)
+
+## User fields
+
+The following fields are available in the user model and can be fetched with the `select` parameter:
+
+(api-fields: user)
+
+----
+Response:
+
+{
+    "code": 200,
+    "data": [
+        {
+            "avatar": {
+                "exists": false,
+                "modified": false,
+                "url": "http://kir.by/media/users/2c7cd5d4dbb6496cdb9e2149bb6e0ef97649bce3/1003058223-0/profile.jpg"
+            },
+            "email": "addy@getkirby.com",
+            "id": "2c7cd5d4dbb6496cdb9e2149bb6e0ef97649bce3",
+            "language": "de",
+            "name": null,
+            "role": {
+                "description": "The admin has all rights",
+                "name": "admin",
+                "title": "Admin"
+            },
+            "username": "addy@getkirby.com"
+        },
+        {
+            "avatar": {
+                "exists": true,
+                "modified": "2018-10-23T10:10:19+02:00",
+                "url": "http://kir.by/media/users/41a1af7c773d553bad7ab029b8343663182f8a0d/1003058223-1540282219/profile.jpg"
+            },
+            "email": "edith@getkirby.com",
+            "id": "41a1af7c773d553bad7ab029b8343663182f8a0d",
+            "language": "en",
+            "name": null,
+            "role": {
+                "description": "Editors edit stuff",
+                "name": "editor",
+                "title": "Editor"
+            },
+            "username": "edith@getkirby.com"
+        }
+    ],
+    "pagination": {
+        "page": 1,
+        "total": 2,
+        "offset": 0,
+        "limit": 100
+    },
+    "status": "ok",
+    "type": "collection"
+}

@@ -1,0 +1,17 @@
+Title: /users/:id/search
+----
+Method: GET|POST
+----
+Excerpt: Search for users
+----
+Since: 3.1.0
+----
+Text:
+
+## Query parameters
+
+(docs: api/search-query)
+
+## Post parameters
+
+(docs: api/search-post)

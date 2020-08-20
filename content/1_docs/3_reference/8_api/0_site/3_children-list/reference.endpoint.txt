@@ -1,0 +1,72 @@
+Title: /site/children
+----
+Method: GET
+----
+Excerpt: List all subpages
+----
+Text:
+
+## Query parameters
+
+(docs: api/pages-parameters)
+
+## Site fields
+
+The following fields are available in the site model and can be fetched with the `select` parameter:
+
+(api-fields: site)
+
+----
+Example: /api/site/children
+----
+Response:
+
+{
+    "code": 200,
+    "data": [
+        {
+            "id": "projects",
+            "num": 1,
+            "title": "Projects",
+            "url": "http://kir.by/projects"
+        },
+        {
+            "id": "blog",
+            "num": 2,
+            "title": "Blog",
+            "url": "http://kir.by/blog"
+        },
+        {
+            "id": "team",
+            "num": 3,
+            "title": "Team",
+            "url": "http://kir.by/team"
+        },
+        {
+            "id": "contact",
+            "num": 4,
+            "title": "Contact",
+            "url": "http://kir.by/contact"
+        },
+        {
+            "id": "error",
+            "num": null,
+            "title": "Error",
+            "url": "http://kir.by/error"
+        },
+        {
+            "id": "home",
+            "num": null,
+            "title": "Home",
+            "url": "http://kir.by"
+        },
+    ],
+    "pagination": {
+        "page": 1,
+        "total": 6,
+        "offset": 0,
+        "limit": 100
+    },
+    "status": "ok",
+    "type": "collection"
+}

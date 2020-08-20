@@ -1,0 +1,14 @@
+Title: /users/:id/files
+----
+Method: POST
+----
+Excerpt: Upload a new file
+----
+Auth: files.create
+----
+
+Text:
+
+## Post parameters
+
+(docs: api/file-upload-data)

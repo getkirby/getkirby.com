@@ -1,0 +1,13 @@
+Title: /users/:id/files/:filename/name
+----
+Method: PATCH
+----
+Excerpt: Rename a file
+----
+Auth: files.changeName
+----
+Text:
+
+## Patch parameters
+
+(docs: api/file-name-data)

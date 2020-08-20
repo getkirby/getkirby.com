@@ -1,5 +1,0 @@
-Title: /users/:id/files/:filename/sections/:name
-----
-Info: GET
-----
-Excerpt: Retrieve a file section

@@ -1,0 +1,13 @@
+Title: /pages/:id/slug
+----
+Method: PATCH
+----
+Excerpt: Change the page slug
+----
+Auth: pages.changeSlug
+----
+Text:
+
+## Patch parameters
+
+(docs: api/page-slug-data)

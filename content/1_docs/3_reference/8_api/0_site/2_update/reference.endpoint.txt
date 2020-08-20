@@ -1,0 +1,16 @@
+Title: /site/
+----
+Method: PATCH
+----
+Excerpt: Update the site content
+----
+Auth: site.update
+----
+Text:
+
+## Patch parameters
+
+(docs: api/site-content-data)
+
+----
+Response:

@@ -1,0 +1,7 @@
+Title: /pages/:id/files/:filename
+----
+Method: DELETE
+----
+Auth: files.delete
+----
+Excerpt: Delete a file

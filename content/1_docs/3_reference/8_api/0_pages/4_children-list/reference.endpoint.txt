@@ -1,0 +1,17 @@
+Title: /pages/:id/children
+----
+Method: GET
+----
+Excerpt: List all subpages
+----
+Text:
+
+## Query parameters
+
+(docs: api/pages-parameters)
+
+## Page fields
+
+The following fields are available in the page model and can be fetched with the `select` parameter:
+
+(api-fields: page)
