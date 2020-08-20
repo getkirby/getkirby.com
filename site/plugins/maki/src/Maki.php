@@ -152,7 +152,7 @@ class Maki extends ParsedownExtra
 
         return $Block;
     }
-    
+
     protected function blockTableComplete($Block)
     {
         $Block = [
@@ -172,11 +172,11 @@ class Maki extends ParsedownExtra
     protected function inlineCode($Excerpt)
     {
         $Excerpt = parent::inlineCode($Excerpt);
-        
+
         if ($Excerpt !== null) {
             return array_merge($Excerpt, [
                 'element' => [
-                    'rawHtml' => formatDatatype(htmlspecialchars($Excerpt['element']['text'])),
+                    'rawHtml' => formatType(htmlspecialchars($Excerpt['element']['text'])),
                 ],
             ]);
         }
