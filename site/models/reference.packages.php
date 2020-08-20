@@ -37,7 +37,9 @@ class ReferencePackagesPage extends ReflectionSection
                 $class = ucfirst(basename($class, '.php'));
 
                 // see if class is a top-level priority object in Reference
-                $priority = $this->siblings(false)
+                $priority = page('docs/reference/objects')
+                                ->children()
+                                ->listed()
                                  ->filterBy('class', 'Kirby\\' . $package . '\\' . $class)
                                  ->first();
 
