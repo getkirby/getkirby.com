@@ -1,0 +1,11 @@
+{
+    "name": "getkirby/reference",
+    "autoload": {
+        "psr-4": {
+            "Kirby\\Reference\\": "src/"
+        }
+    },
+    "require": {
+        "phpdocumentor/reflection-docblock": "^3.1"
+    }
+}

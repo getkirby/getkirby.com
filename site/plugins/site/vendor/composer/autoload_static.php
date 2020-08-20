@@ -7,14 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInitcc5435cbf327c40cde5b4c79eafdff34
 {
     public static $prefixLengthsPsr4 = array (
-        'p' => 
-        array (
-            'phpDocumentor\\Reflection\\' => 25,
-        ),
-        'W' => 
-        array (
-            'Webmozart\\Assert\\' => 17,
-        ),
         'K' => 
         array (
             'Kirby\\Site\\' => 11,
@@ -22,16 +14,6 @@ class ComposerStaticInitcc5435cbf327c40cde5b4c79eafdff34
     );
 
     public static $prefixDirsPsr4 = array (
-        'phpDocumentor\\Reflection\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-        ),
-        'Webmozart\\Assert\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/webmozart/assert/src',
-        ),
         'Kirby\\Site\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
