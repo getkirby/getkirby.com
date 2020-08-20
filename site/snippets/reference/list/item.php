@@ -1,7 +1,5 @@
 <?php
-
 $excerpt = $excerpt ?? false
-
 ?>
 <a data-slug="<?= $item->slug() ?>" data-title="<?= $item->title() ?>" href="<?= $item->url() ?>"<?php e($item->isActive(), ' aria-current="page"' ) ?> class="cheatsheet-entry">
   <?php if ($item->icon()->isNotEmpty()): ?>

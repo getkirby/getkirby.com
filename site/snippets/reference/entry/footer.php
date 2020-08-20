@@ -3,5 +3,5 @@
   <?php if (!get('plain')): ?>
 </article>
 
-<?php snippet('cheatsheet.footer') ?>
+<?php snippet('reference/footer') ?>
 <?php endif ?>

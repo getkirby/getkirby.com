@@ -1,3 +1,8 @@
+<?php
+extract([
+  'parameters' => $parameters ?? $page->parameters()
+]);
+?>
 <?php if (count($parameters) > 0): ?>
 <h2 id="parameters"><a href="#parameters">Parameters</a></h2>
 <table class="properties">
@@ -13,7 +18,7 @@
     <?php foreach ($parameters as $param): ?>
     <tr>
       <td><code>$<?= $param['name'] ?></code></td>
-      <td><?= formatDatatype($param['type']) ?></td>
+      <td><?= formatType($param['type']) ?></td>
       <td data-property-label="Default:"><?= formatDefault($param['default']) ?></td>
       <td class="text"><?= kti($param['description']) ?></td>
     </tr>

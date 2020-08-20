@@ -1,3 +1,8 @@
+<?php
+extract([
+  'throws' => $throws ?? $page->throws()
+]);
+?>
 <?php if (count($throws) > 0): ?>
 <h2 id="exceptions"><a href="#exceptions">Exceptions</a></h2>
 <table>

@@ -55,4 +55,4 @@
 
     </header>
     <main class="cheatsheet-panels">
-      <?php snippet('cheatsheet.sections') ?>
+      <?php snippet('reference/nav/sections') ?>
