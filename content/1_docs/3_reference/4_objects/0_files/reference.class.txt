@@ -1,5 +1,6 @@
+Title: $files
+----
 Class: Kirby\Cms\Files
-
 ----
 
 Text:
@@ -60,6 +61,3 @@ $firstFile = $files->first();
 ```php
 $files = $files->limit(3);
 ```
-
-
-

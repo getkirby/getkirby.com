@@ -123,7 +123,8 @@ function lookup(string $class)
 
     $roots = [
         'docs/reference/objects',
-        'docs/reference/tools'
+        'docs/reference/tools',
+        'docs/reference/@'
     ];
 
     foreach ($roots as $root) {

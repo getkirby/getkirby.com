@@ -1,5 +1,6 @@
+Title: $site
+----
 Class: Kirby\Cms\Site
-
 ----
 
 Text:
@@ -49,5 +50,3 @@ $pageIndex = $site->index();
 ```php
 $url = $site->url();
 ```
-
-

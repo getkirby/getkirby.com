@@ -16,15 +16,6 @@ function availableIcons()
     return $icons;
 }
 
-function cheatsheetAdvanced($page)
-{
-    if (param('advanced') !== 'true') {
-        return Html::a($page->url() . '/advanced:true',  'Advanced view ›');
-    }
-
-    return Html::a($page->url(),  'Simple view ›');
-}
-
 function iconRoot($name)
 {
     return __DIR__ . '/icons/' . $name . '.svg';
@@ -72,7 +63,7 @@ function icon(string $name, bool $return = false, array $attr = null)
 
 }
 
-function version(string $version, string $format): string
+function version(string $version, string $format = '%s'): string
 {
     return Html::a(option('github') . '/kirby/releases/tag/' . $version, sprintf($format, $version));
 }

@@ -42,25 +42,25 @@ return [
         }
     ],
     'templates' => [
-        'cheatsheet-article',
-        'cheatsheet-section',
+        'reference.article',
+        'reference.section',
         'class' => [
             'filter' => function ($page) {
                 return $page->isListed() === true;
             }
         ],
-        'component',
+        'reference.component',
         'contact',
-        'endpoint',
-        'extension',
-        'field-method',
+        'reference.endpoint',
+        'reference.extension',
+        'reference.fieldmethod',
         'guide',
-        'helper',
-        'hook',
-        'icon',
+        'reference.helper',
+        'reference.hook',
+        'reference.icon',
         'issue',
-        'kirbytag',
-        'method' => [
+        'reference.kirbytag',
+        'reference.classmethod' => [
             'filter' => function ($page) {
                 return $page->isListed() === true &&
                        $page->parent()->isListed() === true;
@@ -70,9 +70,9 @@ return [
         'recipe',
         'release',
         'root',
-        'section',
+        'reference.panelsection',
         'text',
-        'url',
-        'validator',
+        'reference.url',
+        'reference.validator',
     ]
 ];

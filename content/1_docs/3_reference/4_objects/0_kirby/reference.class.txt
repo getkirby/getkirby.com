@@ -1,11 +1,7 @@
-Title: Kirby
-
+Title: $kirby
 ----
-
 Class: Kirby\Cms\App
-
 ----
-
 Text:
 
 ## How to fetch the `$kirby` object
@@ -17,4 +13,3 @@ In any situation, you can define a `$kirby` object using the `kirby()` helper:
 ```php
 $kirby = kirby();
 ````
-

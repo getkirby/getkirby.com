@@ -23,7 +23,7 @@ extract([
 <ul class="cheatsheet-article-meta">
   <?php if ($hasSince): ?>
   <li>
-    Since <code><?= version($since, '%s') ?></code>
+    Since <code><?= version($since) ?></code>
   </li>
   <?php endif ?>
 
@@ -50,6 +50,7 @@ extract([
 
   <?php if ($hasGuide): ?>
   <li>
+    <?= icon('guide') ?>
     <a href="<?= url('docs/guide/' . $guide) ?>" class="follow">
       Read the guide
     </a>
@@ -61,12 +62,16 @@ extract([
 <div class="text">
 <!-- Info box -->
 <?php if ($page->info()->isNotEmpty()): ?>
-<?= kirbytext('<info>' . $page->info() .'</info>') ?>
+<p>
+  <?= kirbytext('<info>' . $page->info() .'</info>') ?>
+</p>
 <?php endif ?>
 
 <!-- Deprecated box -->
 <?php if ($page->deprecated()->isNotEmpty()): ?>
 <?php $status = $page->deprecated()->split('|') ?>
-<?= kirbytext('<info><b>Deprecated in <code>' . version($status[0]) . '</code></b><br>' . parseForReferences($status[1], $page->class()) .'</info>') ?>
+<p>
+  <?= kirbytext('<warning><b>Deprecated in <code>' . version($status[0]) . '</code></b><br>' . parseForReferences($status[1], $page->class()) .'</warning>') ?>
+</p>
 <?php endif ?>
 </div>

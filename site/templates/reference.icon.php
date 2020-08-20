@@ -4,11 +4,15 @@
 <div class="text">
   <?= $page->text()->kt()->anchorHeadlines() ?>
 
-  <?php foreach (['Black', 'White'] as $color): ?>
+  <?php foreach ($colors as $color): ?>
   <section class="cheatsheet-icons" data-color="<?= strtolower($color) ?>">
-    <h2 id="<?= $slug = Str::slug($color) ?>"><a href="#<?= $slug ?>"><?= $color ?></a></h2>
+    <h2 id="<?= $slug = Str::slug($color) ?>">
+      <a href="#<?= $slug ?>">
+        <?= $color ?>
+      </a>
+    </h2>
     <ul>
-      <?php foreach ([16, 32, 64] as $size): ?>
+      <?php foreach ($sizes as $size): ?>
       <li>
         <h3><?= $size ?> px</h3>
         <figure>

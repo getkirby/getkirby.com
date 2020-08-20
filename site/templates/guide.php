@@ -46,7 +46,7 @@
           <?php endif ?>
 
 
-          <?php snippet('github.edit') ?>
+          <?php snippet('github/edit') ?>
 
         </article>
 

@@ -2,10 +2,10 @@
 $excerpt = $excerpt ?? false
 ?>
 <a data-slug="<?= $item->slug() ?>" data-title="<?= $item->title() ?>" href="<?= $item->url() ?>"<?php e($item->isActive(), ' aria-current="page"' ) ?> class="cheatsheet-entry">
-  <?php if ($item->icon()->isNotEmpty()): ?>
+  <?php if ($item->intendedTemplate()->name() === 'reference.icon'): ?>
   <figure class="cheatsheet-entry-icon">
     <svg>
-      <use xlink:href="#<?= $item->icon() ?>" />
+      <use xlink:href="#icon-<?= $item->slug() ?>" />
     </svg>
   </figure>
   <?php endif ?>
@@ -19,7 +19,7 @@ $excerpt = $excerpt ?? false
     // the wrapping of long titles.
     $titleSanitized = str_replace('/', '&#8203;/' /* 1 */, $item->title());
     ?>
-    <strong><span><?= $titleSanitized ?></span><?php if ($item->info()->isNotEmpty()): ?> <span><?= $item->info() ?></span><?php endif ?></strong>
+    <strong><span><?= $titleSanitized ?></span><?php if ($item->method()->isNotEmpty()): ?> <span><?= $item->method() ?></span><?php endif ?></strong>
     <?php if ($excerpt): ?>
     <small><?= $item->excerpt()->kt() ?></small>
     <?php endif ?>

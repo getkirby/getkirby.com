@@ -1,5 +1,6 @@
+Title: $page
+----
 Class: Kirby\Cms\Page
-
 ----
 
 Text:

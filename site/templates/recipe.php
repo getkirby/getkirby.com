@@ -43,7 +43,7 @@
             <?= $page->text()->kt()->anchorHeadlines() ?>
           </div>
 
-          <?php snippet('github.edit') ?>
+          <?php snippet('github/edit') ?>
         </article>
       </div>
     </div>

@@ -1,4 +1,4 @@
-<?php snippet('reference/header', ['icons' => $icons ?? null]) ?>
+<?php snippet('reference/header') ?>
 
 <article class="cheatsheet-section cheatsheet-main cheatsheet-panel">
 

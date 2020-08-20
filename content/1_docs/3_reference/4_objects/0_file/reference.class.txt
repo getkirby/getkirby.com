@@ -1,5 +1,6 @@
+Title: $file
+----
 Class: Kirby\Cms\File
-
 ----
 
 Text:

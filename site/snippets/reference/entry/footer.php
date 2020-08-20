@@ -1,3 +1,5 @@
+      <?php snippet('github/edit') ?>
+
     </div>
   </div>
   <?php if (!get('plain')): ?>

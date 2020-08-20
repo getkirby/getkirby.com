@@ -5,16 +5,16 @@
   <?php snippet('meta') ?>
 
   <?= css('assets/css/index.css') ?>
-  <?= css('assets/css/templates/cheatsheet.css') ?>
+  <?= css('assets/css/templates/reference.css') ?>
   <?= css('@auto') ?>
 
   <?= js('assets/js/index.js', ['defer' => true]) ?>
-  <?= js('assets/js/templates/cheatsheet.js', ['defer' => true]) ?>
+  <?= js('assets/js/templates/reference.js', ['defer' => true]) ?>
 
 </head>
 <body data-template="<?= $page->template() ?>">
 
-  <?= $icons ?? null ?>
+  <?= svg($kirby->root('panel') . '/dist/img/icons.svg') ?>
 
   <div class="cheatsheet">
     <header class="cheatsheet-header">

@@ -1,5 +1,6 @@
+Title: $users
+----
 Class: Kirby\Cms\Users
-
 ----
 
 Text:
@@ -36,5 +37,3 @@ This will return an array with all the email adresses of all users.
 ```php
 $sorted = $users->sortBy('role');
 ```
-
-

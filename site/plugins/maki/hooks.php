@@ -70,7 +70,7 @@ return [
                 $block .= ' current';
             }
 
-            $block .= '">Since <code>' . version($match[1], '%s') . '</code></span>';
+            $block .= '">Since <code>' . version($match[1]) . '</code></span>';
             $block .= $this->kirbytext($match[2], $data);
             $block .= '</div>';
 

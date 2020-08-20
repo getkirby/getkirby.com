@@ -1,6 +1,6 @@
 <?php if (!get('plain')): ?>
 
-<?php snippet('reference/header', ['icons' => $icons ?? null]) ?>
+<?php snippet('reference/header') ?>
 <?php snippet('reference/nav/entries', ['entries' => $page->siblings()->forCheatsheet()]) ?>
 
 <article class="cheatsheet-article cheatsheet-main cheatsheet-panel">

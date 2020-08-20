@@ -299,12 +299,13 @@ class ReflectionPage extends Page
             // First, try to get return type from reflection
             if ($reflection->hasReturnType() === true) {
                 $type = $reflection->getReturnType();
+                $name = $type->getName();
 
                 if ($type->allowsNull() === true) {
-                    $type = $type . '|null';
+                    $name =  $name . '|null';
                 }
 
-                return types($type->getName(), $this);
+                return types($name, $this);
             }
 
             // Otherwise, check DocBlock for return type
