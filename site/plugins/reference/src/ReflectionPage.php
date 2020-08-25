@@ -202,7 +202,7 @@ class ReflectionPage extends Page
      */
     public function onGithub(string $path = ''): Field
     {
-        $url  = option('github.org') . '/kirby/tree/' . App::version();
+        $url  = option('github') . '/kirby/tree/' . App::version();
         $url .= '/' . $path;
         $url .= '#L' . $this->line();
         return $this->customField()->value($url);
