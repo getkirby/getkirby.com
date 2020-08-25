@@ -1,5 +1,6 @@
 <?php snippet('reference/entry/header') ?>
-<?php snippet('reference/entry/meta') ?>
+
+<p><?php snippet('reference/entry/meta') ?></p>
 
 <div class="text">
   <h2 id="example"><a href="#example">Example</a></h2>

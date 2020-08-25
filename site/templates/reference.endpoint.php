@@ -1,6 +1,8 @@
 <?php snippet('reference/entry/header') ?>
 <?php snippet('reference/entry/meta') ?>
 
+<?php snippet('toc', $page->text()->headlines('h2')) ?>
+
 <div class="text">
     <pre class="code"><code class="language-yaml"><?= $page->request() ?></code></pre>
 

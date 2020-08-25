@@ -19,6 +19,7 @@ extract([
   'hasGuide' => $guide->isNotEmpty()
 ]);
 ?>
+
 <?php if ($hasSince || $hasClassname || $hasAlias || $hasAuth || $hasGuide): ?>
 <ul class="cheatsheet-article-meta">
   <?php if ($hasSince): ?>
@@ -60,18 +61,18 @@ extract([
 <?php endif ?>
 
 <div class="text">
-<!-- Info box -->
-<?php if ($page->info()->isNotEmpty()): ?>
-<p>
-  <?= kirbytext('<info>' . $page->info() .'</info>') ?>
-</p>
-<?php endif ?>
+  <!-- Info box -->
+  <?php if ($page->info()->isNotEmpty()): ?>
+  <p>
+    <?= kirbytext('<info>' . $page->info() .'</info>') ?>
+  </p>
+  <?php endif ?>
 
-<!-- Deprecated box -->
-<?php if ($page->deprecated()->isNotEmpty()): ?>
-<?php $status = $page->deprecated()->split('|') ?>
-<p>
-  <?= kirbytext('<warning><b>Deprecated in <code>' . version($status[0]) . '</code></b><br>' . parseForReferences($status[1], $page->class()) .'</warning>') ?>
-</p>
-<?php endif ?>
+  <!-- Deprecated box -->
+  <?php if ($page->deprecated()->isNotEmpty()): ?>
+  <?php $status = $page->deprecated()->split('|') ?>
+  <p>
+    <?= kirbytext('<warning><b>Deprecated in <code>' . version($status[0]) . '</code></b><br>' . parseForReferences($status[1], $page->class()) .'</warning>') ?>
+  </p>
+  <?php endif ?>
 </div>
