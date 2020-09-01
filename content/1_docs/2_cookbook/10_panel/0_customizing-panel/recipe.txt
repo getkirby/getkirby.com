@@ -2,7 +2,7 @@ Title: Examples for customizing the Panel
 
 ----
 
-Published: 2020-06-20
+Published: 2020-09-01
 
 ----
 
