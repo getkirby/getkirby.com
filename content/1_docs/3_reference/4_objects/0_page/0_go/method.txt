@@ -24,20 +24,18 @@ return function ($kirby, $page) {
         ])->isSent();
 
         if ($sent === true) {
-            // Will redirect to /contact?status=success&message=Form+successfully+sent#contact-form
+            // Will redirect to /contact?status=success#contact-form
             return $page->go([
                 'query' => [
                     'status'  => 'success',
-                    'message' => 'Form successfully sent',
                 ],
                 'fragment' => 'contact-form'
             ]);
         } else {
-            // Will redirect to /contact?status=failed&message=Form+could+not+be+submitted
+            // Will redirect to /contact?status=failed
             return $page->go([
                 'query' => [
                     'status'  => 'failed',
-                    'message' => 'Form could not be submitted'
                 ]
             ]);
         }
