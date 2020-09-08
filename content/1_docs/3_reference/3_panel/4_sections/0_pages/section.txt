@@ -150,6 +150,16 @@ The (preview) image for each item in the list is configured with the `image` opt
 image: page.image.findBy("name", "cover")
 ```
 
+<info>
+The query has to return an image object, so use `toFile` when necessary.
+</info>
+
+When querying a preview image by field name:
+
+```yaml
+image: page.cover.toFile
+```
+
 The default preview image is the first image in the folder.
 
 If you need more fine-grained control you can setup the image for each page with further options.
