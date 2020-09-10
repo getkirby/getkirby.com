@@ -14,7 +14,7 @@ $collection->add('somepage');
 ```php
 $collection = page('exhibitions')->children()->listed();
 $page       = Page::create([…]);
-$collection->add($page');
+$collection->add($page);
 ```
 
 ### Add second pages collection
