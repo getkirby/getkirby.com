@@ -279,7 +279,7 @@ Inside the snippet, we recursively call the snippet for the submenu items:
 
     <?php $subMenuItems = $item->subMenu()->toStructure(); ?>
 
-    <?php if ($item->hasSubmenu()->isTrue && $subMenuItems->isNotempty()) : ?>
+    <?php if ($item->hasSubmenu()->isTrue() && $subMenuItems->isNotempty()) : ?>
     <?php snippet('menuitem-list', ['items' => $subMenuItems]) ?>
     <?php endif ?>
     </li>
