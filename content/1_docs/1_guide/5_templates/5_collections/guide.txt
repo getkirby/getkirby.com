@@ -53,7 +53,7 @@ return function ($site) {
 ## How to use collections
 
 Collections can be used in templates and snippets like this:
-
+This template isn't clear enough in my humble opinion. Can it be expanded a little more?:
 ```php
 $kirby->collection("articles");
 $kirby->collection("admins");
