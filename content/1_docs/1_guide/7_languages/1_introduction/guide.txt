@@ -103,12 +103,17 @@ By default, the URL of your site changes and the language code is added to the U
 <?php
 
 return [
-  'code' => 'en',
-  'default' => true,
-  'direction' => 'ltr',
-  'locale' => 'en_US',
-  'name' => 'English',
-  'url' => '/',
+    'code' => 'en',
+    'default' => true,
+    'direction' => 'ltr',
+    'locale' => [
+        'LC_ALL' => 'en_GB'
+    ],
+    'name' => 'English',
+    'translations' => [
+
+    ],
+    'url' => '/'
 ];
 ```
 
