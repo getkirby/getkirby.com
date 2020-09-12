@@ -69,7 +69,7 @@ echo I18n::template('file.max.error', null, [
 $from = 8;
 $to   = 20;
 
-echo I18n::template('file.max.error', null, [
+echo I18n::template('business.hours', null, [
     'from' => $from,
     'to'   => $to
 ]);
