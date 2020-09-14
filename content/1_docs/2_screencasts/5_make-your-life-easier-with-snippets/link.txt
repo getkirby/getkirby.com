@@ -1,0 +1,9 @@
+Title: Make your life easier with snippets
+
+----
+
+Description: Snippets are a great way to clean up your templates and reuse parts of your templates multiple times.
+
+----
+
+Link: https://www.youtube.com/watch?v=CTOoDE9z-WA
