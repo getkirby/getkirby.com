@@ -1,0 +1,13 @@
+Title: Cookie Consent Modal
+
+----
+
+Repository: https://github.com/michnhokn/kirby3-cookie-banner
+
+----
+
+Category: utilities
+
+----
+
+Description: A customizable cookie consent modal for Kirby3.
