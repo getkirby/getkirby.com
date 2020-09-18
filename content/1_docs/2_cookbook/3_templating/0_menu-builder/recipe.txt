@@ -180,7 +180,7 @@ if ($menu->isNotEmpty()) : ?>
       <li><a href="<?= $mainMenuItem->url() ?>"><?= $mainMenuItem->title() ?></a>
       <?php endif ?>
       <?php $subMenu = $item->subMenu()->toPages(); ?>
-      <?php if ($item->hasSubmenu()->isTrue() && $subMenuItems->isNotempty()) : ?>
+      <?php if ($item->hasSubmenu()->isTrue() && $subMenu->isNotempty()) : ?>
         <ul class="submenu-list">
           <?php foreach ($subMenu as $subItem) : ?>
           <li><a href="<?= $subItem->url() ?>"><?= $subItem->title() ?></a></li>
