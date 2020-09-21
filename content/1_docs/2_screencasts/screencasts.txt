@@ -21,6 +21,7 @@ Kirby Basics:
     - how-to-build-a-project-grid
     - how-to-build-a-project-page
     - your-first-blueprints
+    - a-closer-look-at-pages-sections
 ----
 
 Priority: 0.9

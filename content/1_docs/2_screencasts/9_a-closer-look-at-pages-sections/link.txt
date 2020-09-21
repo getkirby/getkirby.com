@@ -1,0 +1,9 @@
+Title: A closer look at pages sections
+
+----
+
+Description: The power of Kirby's admin interface becomes visible when you have a closer look at the options of the pages section. Show subpages as cards or list, add additional info for each page, control the card design, the subpages that can be added and even combine multiple sections for better usability – there are hardly any limits.
+
+----
+
+Link: https://www.youtube.com/watch?v=rVcg4SlAh-A
