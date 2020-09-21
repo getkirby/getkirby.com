@@ -1,4 +1,4 @@
-Title: Convert JPG, JPEG and PNG to WEBP
+Title: Convert JPG and PNG to WEBP
 
 ----
 
