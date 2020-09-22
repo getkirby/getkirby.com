@@ -14,5 +14,4 @@ Featured: false
 
 ----
 
-Description: This plugin implements progressive image loading, proving a better user experience. Tiny thumbnails which inherit the aspect ratio of their source image are combined with a blurry effect for a better placeholder than a solid colour, without sacrificing payload.
-
+Description: Provides a better user experience. Tiny thumbnails which inherit the aspect ratio of their source image are combined with a blurry effect for progressive image loading.
