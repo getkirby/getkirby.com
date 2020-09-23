@@ -41,7 +41,7 @@ Option | Value
 
 ### Using a different cache driver
 
-```php "/site/config.php"
+```php "/site/config/config.php"
 
 return [
   'cache' => [
@@ -64,7 +64,7 @@ return [
 
 If you want to create your own cache instance, you can just add it to the config like this:
 
-```php "/site/config.php"
+```php "/site/config/config.php"
 return [
   'cache.api' => true
 ];
@@ -89,7 +89,7 @@ return function ($kirby) {
   // there's nothing in the cache, so let's fetch it
   if ($apiData === null) {
     $apiData = Remote::get('https://someapi.com');
-    $apiCache->set('apiData', $apiData);
+    $apiCache->set('apiData', $apiData->content());
   }
 
   return compact('apiData');
@@ -100,7 +100,7 @@ return function ($kirby) {
 You can define how long a cache variable is valid by specifying the number of minutes until it expires in the set method:
 
 ```php
-$apiCache->set('apiData', $apiData, 30);
+$apiCache->set('apiData', $apiData->content(), 30);
 ```
 
 The getter will now return `null` after the 30 minutes expired.
