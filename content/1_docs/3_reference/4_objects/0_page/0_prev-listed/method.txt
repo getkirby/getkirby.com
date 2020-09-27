@@ -8,10 +8,12 @@ Text:
 <?php endif ?>
 ```
 
-### Using sort field
+### With collection as argument
 
 ```php
-<?php if($prev = $page->prevListed('date', 'desc')): ?>
+<?php
+$collection = $page->siblings()->listed()->sortBy('date', 'desc');
+if($prev = $page->prevListed($collection)): ?>
 <a href="<?= $prev->url() ?>">previous listed page</a>
 <?php endif ?>
 ```

@@ -27,6 +27,14 @@ If you run Kirby in a subfolder, make sure to set the RewriteBase according to t
 RewriteBase /my-subfolder
 ```
 
+## URLs to other pages and assets don't use the correct hostname
+
+By default, Kirby detects the base URL of the site automatically using the `SERVER_NAME` environment variable that is passed to PHP by your web server. If this variable is set incorrectly, Kirby will also generate incorrect URLs. If it is not set at all, Kirby will fall back to the server's IP address.
+
+The best fix for this issue is to update the configuration of your web server and set a correct `SERVER_NAME`.
+
+If you don't have access to this configuration, you can manually set the correct base URL with Kirby's (link: docs/reference/system/options/url text: `url` option).
+
 ## Thumbs not generated, Panel not working
 
 If you use PHP's built-in server (not recommended), you have to start it up with Kirby's router:

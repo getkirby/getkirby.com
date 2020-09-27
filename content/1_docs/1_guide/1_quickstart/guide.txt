@@ -54,7 +54,7 @@ When copying files to a remote server via (S)FTP, make sure to copy the `.htacce
         </td>
         <td class="text">
             <ul>
-                <li>PHP 7.2, 7.3 or 7.4<br>(PHP 7.3 is recommended)</li>
+                <li>PHP 7.2, 7.3 or 7.4<br>(PHP 7.3 or 7.4 are recommended)</li>
                 <li><code>mbstring</code> extension</li>
                 <li><code>curl</code> extension</li>
                 <li><code>ctype</code> extension</li>
@@ -66,16 +66,13 @@ When copying files to a remote server via (S)FTP, make sure to copy the `.htacce
 
 The server OS must be POSIX compatible.
 
-<info>
-Kirby's (link: docs/guide/api/introduction text: REST API) (used by the Panel) uses `GET`, `POST`, `PATCH`, and `DELETE` HTTP requests. For the Panel to work, make sure that your server settings support them (some hosting providers disable `PATCH` request in particular in their default settings, so if in doubt, contact your provider).
-</info>
-
-
 If you want to use PHP's built-in server, you have to start it up with Kirby's router:
 
 ```php
 php -S localhost:8000 kirby/router.php
 ```
+
+Other servers (link: docs/reference/system/options/servers text: may work), but are not officially supported.
 
 ### Browsers for the Panel
 

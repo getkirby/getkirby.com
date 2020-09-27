@@ -1,0 +1,47 @@
+Title: Security Policy
+
+----
+
+Text:
+
+## Supported Versions
+
+<!-- NOTE TO THE EDITOR: If you update this table, please also update the security.json.php template -->
+
+| Kirby Version    | Support Status                                              |
+| ---------------- | ----------------------------------------------------------- |
+| {{ latest }}     | ✅ Latest Kirby release, actively supported                 |
+| {{ supported }}+ | ✅ No known security issues                                 |
+| 2.5.13+          | ⚠️ Security support until 31.12.2020, no active development |
+| 1.*              | ❌ Not supported                                            |
+
+<info>
+If you need the version information from this page in a machine-readable format, you can use the (link: security.json text: JSON representation).
+</info>
+
+## Past Security Incidents
+
+{{ incidents }}
+
+## Security Guide
+
+Please follow our (link: docs/guide/security text: security guide) to keep your Kirby installation secure.
+
+## Reporting a Vulnerability
+
+If you have spotted a vulnerability in Kirby's core or the Panel, please make sure to let us know immediately. We take any report very seriously and we will react as soon as possible.
+
+You can always write us directly at **<security@getkirby.com>**.
+If you want to encrypt your message, our GPG key is (link: pgp.asc text: 6E6B 057A F491 FFAD 363F  6F49 9101 10FA A459 E120).
+
+Please do *not* write to us publicly, e.g. in the forum, as making security vulnerabilities public before they are fixed can give attackers valuable time to exploit the issue. By letting us know directly, you can protect other Kirby users from such attacks.
+
+----
+
+Incidents:
+
+-
+    description: "Registration block: .dev domains and some reverse proxy setups were treated as local"
+    severity: minor
+    affected: "<=3.3.5"
+    fixed: 3.3.6

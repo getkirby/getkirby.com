@@ -4,6 +4,7 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="referrer" content="same-origin">
 
   <title>Kirby Panel</title>
 
@@ -15,7 +16,8 @@
   <?php endif ?>
 
   <link nonce="<?= $nonce ?>" rel="apple-touch-icon" href="<?= $assetUrl ?>/apple-touch-icon.png" />
-  <link nonce="<?= $nonce ?>" rel="shortcut icon" href="<?= $assetUrl ?>/favicon.png">
+  <link nonce="<?= $nonce ?>" rel="icon" href="<?= $assetUrl ?>/favicon.svg" type="image/svg+xml">
+  <link nonce="<?= $nonce ?>" rel="alternate icon" href="<?= $assetUrl ?>/favicon.png" type="image/png">
 
   <base href="<?= $panelUrl ?>">
 </head>

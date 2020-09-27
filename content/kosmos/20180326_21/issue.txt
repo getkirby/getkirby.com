@@ -55,7 +55,7 @@ Theater
 
 ## Kirby in Style: Themes
 
-Since our last edition, a couple of new themes for Kirby have seen the light of day. Here is a little selection. For more themes, head over to [http://www.getkirby-themes.com](http://www.getkirby-themes.com.), a project created and maintained by Jonathan Baptistella.​
+Since our last edition, a couple of new themes for Kirby have seen the light of day. Here is a little selection. For more themes, head over to [http://www.getkirby-themes.com](http://www.getkirby-themes.com), a project created and maintained by Jonathan Baptistella.​
 
 (columns…)
 

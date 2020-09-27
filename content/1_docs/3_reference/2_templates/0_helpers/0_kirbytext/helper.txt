@@ -14,5 +14,5 @@ Text:
 ### Parse KirbyText for another page
 
 ```php
-<?= kirbytext('(\image: road.jpg)', [$page->children()->first()]) ?>
+<?= kirbytext('(\image: road.jpg)', ['parent' => $page->children()->first()]) ?>
 ```

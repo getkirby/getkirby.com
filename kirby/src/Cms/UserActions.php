@@ -6,6 +6,7 @@ use Closure;
 use Kirby\Data\Data;
 use Kirby\Exception\LogicException;
 use Kirby\Exception\PermissionException;
+use Kirby\Http\Idn;
 use Kirby\Toolkit\Dir;
 use Kirby\Toolkit\F;
 use Kirby\Toolkit\Str;
@@ -29,7 +30,7 @@ trait UserActions
      */
     public function changeEmail(string $email)
     {
-        return $this->commit('changeEmail', [$this, $email], function ($user, $email) {
+        return $this->commit('changeEmail', ['user' => $this, 'email' => Idn::decodeEmail($email)], function ($user, $email) {
             $user = $user->clone([
                 'email' => $email
             ]);
@@ -50,7 +51,7 @@ trait UserActions
      */
     public function changeLanguage(string $language)
     {
-        return $this->commit('changeLanguage', [$this, $language], function ($user, $language) {
+        return $this->commit('changeLanguage', ['user' => $this, 'language' => $language], function ($user, $language) {
             $user = $user->clone([
                 'language' => $language,
             ]);
@@ -71,7 +72,7 @@ trait UserActions
      */
     public function changeName(string $name)
     {
-        return $this->commit('changeName', [$this, $name], function ($user, $name) {
+        return $this->commit('changeName', ['user' => $this, 'name' => $name], function ($user, $name) {
             $user = $user->clone([
                 'name' => $name
             ]);
@@ -92,7 +93,7 @@ trait UserActions
      */
     public function changePassword(string $password)
     {
-        return $this->commit('changePassword', [$this, $password], function ($user, $password) {
+        return $this->commit('changePassword', ['user' => $this, 'password' => $password], function ($user, $password) {
             $user = $user->clone([
                 'password' => $password = User::hashPassword($password)
             ]);
@@ -111,7 +112,7 @@ trait UserActions
      */
     public function changeRole(string $role)
     {
-        return $this->commit('changeRole', [$this, $role], function ($user, $role) {
+        return $this->commit('changeRole', ['user' => $this, 'role' => $role], function ($user, $role) {
             $user = $user->clone([
                 'role' => $role,
             ]);
@@ -135,8 +136,9 @@ trait UserActions
      *
      * @param string $action
      * @param array $arguments
-     * @param Closure $callback
+     * @param \Closure $callback
      * @return mixed
+     * @throws \Kirby\Exception\PermissionException
      */
     protected function commit(string $action, array $arguments = [], Closure $callback)
     {
@@ -144,25 +146,41 @@ trait UserActions
             throw new PermissionException('The Kirby user cannot be changed');
         }
 
-        $old = $this->hardcopy();
+        $old            = $this->hardcopy();
+        $kirby          = $this->kirby();
+        $argumentValues = array_values($arguments);
 
-        $this->rules()->$action(...$arguments);
-        $this->kirby()->trigger('user.' . $action . ':before', ...$arguments);
-        $result = $callback(...$arguments);
-        $this->kirby()->trigger('user.' . $action . ':after', $result, $old);
-        $this->kirby()->cache('pages')->flush();
+        $this->rules()->$action(...$argumentValues);
+        $kirby->trigger('user.' . $action . ':before', $arguments);
+
+        $result = $callback(...$argumentValues);
+
+        if ($action === 'create') {
+            $argumentsAfter = ['user' => $result];
+        } elseif ($action === 'delete') {
+            $argumentsAfter = ['status' => $result, 'user' => $old];
+        } else {
+            $argumentsAfter = ['newUser' => $result, 'oldUser' => $old];
+        }
+        $kirby->trigger('user.' . $action . ':after', $argumentsAfter);
+
+        $kirby->cache('pages')->flush();
         return $result;
     }
 
     /**
      * Creates a new User from the given props and returns a new User object
      *
-     * @param array $props
+     * @param array|null $props
      * @return self
      */
     public static function create(array $props = null)
     {
         $data = $props;
+
+        if (isset($props['email']) === true) {
+            $data['email'] = Idn::decodeEmail($props['email']);
+        }
 
         if (isset($props['password']) === true) {
             $data['password'] = User::hashPassword($props['password']);
@@ -181,7 +199,7 @@ trait UserActions
         $user = $user->clone(['content' => $form->strings(true)]);
 
         // run the hook
-        return $user->commit('create', [$user, $props], function ($user, $props) {
+        return $user->commit('create', ['user' => $user, 'input' => $props], function ($user, $props) {
             $user->writeCredentials([
                 'email'    => $user->email(),
                 'language' => $user->language(),
@@ -228,10 +246,11 @@ trait UserActions
      * Deletes the user
      *
      * @return bool
+     * @throws \Kirby\Exception\LogicException
      */
     public function delete(): bool
     {
-        return $this->commit('delete', [$this], function ($user) {
+        return $this->commit('delete', ['user' => $this], function ($user) {
             if ($user->exists() === false) {
                 return true;
             }
@@ -258,8 +277,10 @@ trait UserActions
      */
     protected function readCredentials(): array
     {
-        if (file_exists($this->root() . '/index.php') === true) {
-            $credentials = require $this->root() . '/index.php';
+        $path = $this->root() . '/index.php';
+
+        if (is_file($path) === true) {
+            $credentials = F::load($path);
 
             return is_array($credentials) === false ? [] : $credentials;
         } else {
@@ -280,8 +301,8 @@ trait UserActions
     /**
      * Updates the user data
      *
-     * @param array $input
-     * @param string $language
+     * @param array|null $input
+     * @param string|null $language
      * @param bool $validate
      * @return self
      */
@@ -323,7 +344,7 @@ trait UserActions
     /**
      * Writes the password to disk
      *
-     * @param string $password
+     * @param string|null $password
      * @return bool
      */
     protected function writePassword(string $password = null): bool

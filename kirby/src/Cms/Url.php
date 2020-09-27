@@ -3,7 +3,6 @@
 namespace Kirby\Cms;
 
 use Kirby\Http\Url as BaseUrl;
-use Kirby\Toolkit\Str;
 
 /**
  * The `Url` class extends the
@@ -55,42 +54,16 @@ class Url extends BaseUrl
     /**
      * Smart resolver for internal and external urls
      *
-     * @param string $path
+     * @param string|null $path
      * @param array|string|null $options Either an array of options for the Uri class or a language string
      * @return string
      */
     public static function to(string $path = null, $options = null): string
     {
-        $kirby    = App::instance();
-        $language = null;
+        $kirby = App::instance();
 
-        // get language from simple string option
-        if (is_string($options) === true) {
-            $language = $options;
-            $options  = null;
-        }
-
-        // get language from array
-        if (is_array($options) === true && isset($options['language']) === true) {
-            $language = $options['language'];
-            unset($options['language']);
-        }
-
-        // get a language url for the linked page, if the page can be found
-        if ($kirby->multilang() === true) {
-            $parts = Str::split($path, '#');
-
-            if ($page = page($parts[0] ?? null)) {
-                $path = $page->url($language);
-
-                if (isset($parts[1]) === true) {
-                    $path .= '#' . $parts[1];
-                }
-            }
-        }
-
-        return $kirby->component('url')($kirby, $path, $options, function (string $path = null, $options = null) {
-            return parent::to($path, $options);
+        return $kirby->component('url')($kirby, $path, $options, function (string $path = null, $options = null) use ($kirby) {
+            return $kirby->nativeComponent('url')($kirby, $path, $options);
         });
     }
 }

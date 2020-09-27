@@ -28,10 +28,23 @@ return [
         return [
             'db' => [
                 'database' => $kirby->root('site') . '/db/database.sqlite',
-                'type' => 'sqlite'
+                'type'     => 'sqlite'
             ]
         ];
     }
-];`
+];
 ```
 
+<since v="3.4.0">
+```php "/site/config/config.php"
+<?php 
+
+return [
+    'ready' => function ($kirby) {
+        return [
+            'debug' => $kirby->user() !== null
+        ];
+    }
+];
+```
+</since>

@@ -1,0 +1,9 @@
+Title: The content folder
+
+----
+
+Description: The content folder is the heart and soul of your Kirby installation. Learn how to create pages and add content with simple text files and folders.
+
+----
+
+Link: https://www.youtube.com/watch?v=zUPqqrhbcR8

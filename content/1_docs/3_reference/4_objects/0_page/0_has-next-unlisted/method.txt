@@ -3,11 +3,16 @@ Text:
 ## Example
 
 ```php
-echo $page->hasNextUnlisted(); //will echo 1 if true, nothing if false
+if ($page->hasNextUnlisted()) {
+  echo $page->nextUnlisted()->url();
+}
 ```
 
-### Using sort field
+### With collection as argument
 
 ```php
-echo $page->hasNextUnlisted('date', 'desc');
+$collection = $page->siblings()->unlisted()->sortBy('date', 'desc');
+if ($page->hasNextUnlisted($collection)) {
+  echo $page->nextUnlisted($collection)->url();
+}
 ```

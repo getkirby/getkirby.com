@@ -142,6 +142,8 @@ return a::merge($shared , compact('titleTag'));
 
 Be careful, when merging the two arrays, to pass the `$shared` array as the first parameter to the `a::merge()` function. This is important because otherwise your new data won't overwrite the content coming from the default controller.
 
+## Final shared controller
+
 The final `home.php` controller will look like this:
 
 ```php "/site/controllers/home.php"

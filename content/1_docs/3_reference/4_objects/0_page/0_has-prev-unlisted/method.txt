@@ -4,14 +4,19 @@ Text:
 
 ```php
 <?php
-echo $page->hasPrevUnlisted(); //will echo 1 if true, nothing if false.
+if ($page->hasPrevUnlisted()) {
+  echo $page->prevUnlisted()->url();
+}
 ?>
 ```
 
-### Using sort field
+### With collection as argument
 
 ```php
 <?php
-echo $page->hasPrevUnlisted('date', 'desc'); //will echo 1 if true, nothing if false.
+$collection = $page->siblings()->unlisted()->sortBy('date', 'desc');
+if ($page->hasPrevUnlisted($collection)) {
+  echo $page->prevUnlisted($collection)->url();
+}
 ?>
 ```

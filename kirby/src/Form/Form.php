@@ -2,7 +2,7 @@
 
 namespace Kirby\Form;
 
-use Kirby\Data\Yaml;
+use Kirby\Data\Data;
 use Throwable;
 
 /**
@@ -59,7 +59,7 @@ class Form
             }
 
             try {
-                $field = new Field($props['type'], $props);
+                $field = new Field($props['type'], $props, $this->fields);
             } catch (Throwable $e) {
                 $field = static::exceptionField($e, $props);
             }
@@ -85,13 +85,22 @@ class Form
         }
     }
 
-    public function data($defaults = false): array
+    public function content(): array
+    {
+        return $this->data(false, false);
+    }
+
+    public function data($defaults = false, bool $includeNulls = true): array
     {
         $data = $this->values;
 
         foreach ($this->fields as $field) {
             if ($field->save() === false || $field->unset() === true) {
-                $data[$field->name()] = null;
+                if ($includeNulls === true) {
+                    $data[$field->name()] = null;
+                } else {
+                    unset($data[$field->name()]);
+                }
             } else {
                 $data[$field->name()] = $field->data($defaults);
             }
@@ -154,7 +163,7 @@ class Form
             if ($value === null) {
                 $strings[$key] = null;
             } elseif (is_array($value) === true) {
-                $strings[$key] = Yaml::encode($value);
+                $strings[$key] = Data::encode($value, 'yaml');
             } else {
                 $strings[$key] = $value;
             }

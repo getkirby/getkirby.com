@@ -11,7 +11,7 @@ return [
         'usd' => 115
     ],
     // 'sale' => [
-    //     'text' => 'Save 20% per license<br><small class="description" style="font-size: .75rem; font-weight: 400">only until April 24th</small>',
+    //     'text' => 'Save 20% per license<br><small class="description" style="font-size: .75rem; font-weight: 400">only until July 12th</small>',
     // ],
 
     'api'     => false,

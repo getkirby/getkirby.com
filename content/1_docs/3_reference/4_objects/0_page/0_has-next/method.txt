@@ -4,14 +4,19 @@ Text:
 
 ```php
 <?php
-echo $page->hasNext(); //will echo 1 if true, nothing if false.
+if ($page->hasNext()) {
+  echo $page->next()->url();
+}
 ?>
 ```
 
-### Using sort field
+### With collection as argument
 
 ```php
 <?php
-echo $page->hasNext('date', 'desc'); //will echo 1 if true, nothing if false.
+$collection = $page->siblings()->sortBy('date', 'desc');
+if ($page->hasNext($collection)) {
+  echo $page->next($collection)->url();
+}
 ?>
 ```

@@ -3,11 +3,16 @@ Text:
 ## Example
 
 ```php
-echo $page->hasPrevListed(); //will echo 1 if true, nothing if false
+if ($page->hasPrevListed()) {
+  echo $page->prevListed()->url();
+}
 ```
 
-### Using sort field
+### With collection as argument
 
 ```php
-echo $page->hasPrevListed('date', 'desc');
+$collection = $page->siblings()->listed()->sortBy('date', 'desc');
+if ($page->hasPrevListed($collection)) {
+  echo $page->prevListed($collection)->url();
+}
 ```

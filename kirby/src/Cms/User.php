@@ -5,7 +5,6 @@ namespace Kirby\Cms;
 use Exception;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
-use Kirby\Session\Session;
 use Kirby\Toolkit\F;
 use Kirby\Toolkit\Str;
 
@@ -83,7 +82,7 @@ class User extends ModelWithContent
     public static $models = [];
 
     /**
-     * @var string
+     * @var \Kirby\Cms\Field
      */
     protected $name;
 
@@ -177,7 +176,7 @@ class User extends ModelWithContent
     /**
      * Returns the UserBlueprint object
      *
-     * @return \Kirby\Cms\UserBlueprint
+     * @return \Kirby\Cms\Blueprint
      */
     public function blueprint()
     {
@@ -201,7 +200,7 @@ class User extends ModelWithContent
      *
      * @internal
      * @param array $data
-     * @param string $languageCode Not used so far
+     * @param string $languageCode|null Not used so far
      * @return array
      */
     public function contentFileData(array $data, string $languageCode = null): array
@@ -401,10 +400,8 @@ class User extends ModelWithContent
      * Logs the user in
      *
      * @param string $password
-     * @param \Kirby\Session\Session|array $session Session options or session object to set the user in
+     * @param \Kirby\Session\Session|array|null $session Session options or session object to set the user in
      * @return bool
-     *
-     * @throws \Kirby\Exception\PermissionException If the password is not valid
      */
     public function login(string $password, $session = null): bool
     {
@@ -417,7 +414,7 @@ class User extends ModelWithContent
     /**
      * Logs the user in without checking the password
      *
-     * @param \Kirby\Session\Session|array $session Session options or session object to set the user in
+     * @param \Kirby\Session\Session|array|null $session Session options or session object to set the user in
      * @return void
      */
     public function loginPasswordless($session = null): void
@@ -426,19 +423,19 @@ class User extends ModelWithContent
 
         $session = $this->sessionFromOptions($session);
 
-        $kirby->trigger('user.login:before', $this, $session);
+        $kirby->trigger('user.login:before', ['user' => $this, 'session' => $session]);
 
         $session->regenerateToken(); // privilege change
         $session->data()->set('user.id', $this->id());
         $this->kirby()->auth()->setUser($this);
 
-        $kirby->trigger('user.login:after', $this, $session);
+        $kirby->trigger('user.login:after', ['user' => $this, 'session' => $session]);
     }
 
     /**
      * Logs the user out
      *
-     * @param \Kirby\Session\Session|array $session Session options or session object to unset the user in
+     * @param \Kirby\Session\Session|array|null $session Session options or session object to unset the user in
      * @return void
      */
     public function logout($session = null): void
@@ -446,7 +443,7 @@ class User extends ModelWithContent
         $kirby   = $this->kirby();
         $session = $this->sessionFromOptions($session);
 
-        $kirby->trigger('user.logout:before', $this, $session);
+        $kirby->trigger('user.logout:before', ['user' => $this, 'session' => $session]);
 
         // remove the user from the session for future requests
         $session->data()->remove('user.id');
@@ -458,12 +455,12 @@ class User extends ModelWithContent
             // session is now empty, we might as well destroy it
             $session->destroy();
 
-            $kirby->trigger('user.logout:after', $this, null);
+            $kirby->trigger('user.logout:after', ['user' => $this, 'session' => null]);
         } else {
             // privilege change
             $session->regenerateToken();
 
-            $kirby->trigger('user.logout:after', $this, $session);
+            $kirby->trigger('user.logout:after', ['user' => $this, 'session' => $session]);
         }
     }
 
@@ -515,11 +512,12 @@ class User extends ModelWithContent
      *
      * @param string $format
      * @param string|null $handler
+     * @param string|null $languageCode
      * @return int|string
      */
-    public function modified(string $format = 'U', string $handler = null)
+    public function modified(string $format = 'U', string $handler = null, string $languageCode = null)
     {
-        $modifiedContent = F::modified($this->contentFile());
+        $modifiedContent = F::modified($this->contentFile($languageCode));
         $modifiedIndex   = F::modified($this->root() . '/index.php');
         $modifiedTotal   = max([$modifiedContent, $modifiedIndex]);
         $handler         = $handler ?? $this->kirby()->option('date.handler', 'date');
@@ -683,6 +681,41 @@ class User extends ModelWithContent
     }
 
     /**
+     * Returns all available roles
+     * for this user, that can be selected
+     * by the authenticated user
+     *
+     * @return \Kirby\Cms\Roles
+     */
+    public function roles()
+    {
+        $kirby = $this->kirby();
+        $roles = $kirby->roles();
+
+        // a collection with just the one role of the user
+        $myRole = $roles->filterBy('id', $this->role()->id());
+
+        // if there's an authenticated user …
+        if ($user = $kirby->user()) {
+
+            // admin users can select pretty much any role
+            if ($user->isAdmin() === true) {
+                // except if the user is the last admin
+                if ($this->isLastAdmin() === true) {
+                    // in which case they have to stay admin
+                    return $myRole;
+                }
+
+                // return all roles for mighty admins
+                return $roles;
+            }
+        }
+
+        // any other user can only keep their role
+        return $myRole;
+    }
+
+    /**
      * The absolute path to the user directory
      *
      * @return string
@@ -722,13 +755,13 @@ class User extends ModelWithContent
     /**
      * Sets the user email
      *
-     * @param string $email
+     * @param string $email|null
      * @return self
      */
     protected function setEmail(string $email = null)
     {
         if ($email !== null) {
-            $this->email = strtolower(trim($email));
+            $this->email = Str::lower(trim($email));
         }
         return $this;
     }
@@ -736,7 +769,7 @@ class User extends ModelWithContent
     /**
      * Sets the user id
      *
-     * @param string $id
+     * @param string $id|null
      * @return self
      */
     protected function setId(string $id = null)
@@ -748,7 +781,7 @@ class User extends ModelWithContent
     /**
      * Sets the user language
      *
-     * @param string $language
+     * @param string $language|null
      * @return self
      */
     protected function setLanguage(string $language = null)
@@ -760,7 +793,7 @@ class User extends ModelWithContent
     /**
      * Sets the user name
      *
-     * @param string $name
+     * @param string $name|null
      * @return self
      */
     protected function setName(string $name = null)
@@ -772,7 +805,7 @@ class User extends ModelWithContent
     /**
      * Sets the user's password hash
      *
-     * @param string $password
+     * @param string $password|null
      * @return self
      */
     protected function setPassword(string $password = null)
@@ -784,12 +817,12 @@ class User extends ModelWithContent
     /**
      * Sets the user role
      *
-     * @param string $role
+     * @param string $role|null
      * @return self
      */
     protected function setRole(string $role = null)
     {
-        $this->role = $role !== null ? strtolower(trim($role)) : null;
+        $this->role = $role !== null ? Str::lower(trim($role)) : null;
         return $this;
     }
 
@@ -844,15 +877,17 @@ class User extends ModelWithContent
      * String template builder
      *
      * @param string|null $template
+     * @param array|null $data
+     * @param string $fallback Fallback for tokens in the template that cannot be replaced
      * @return string
      */
-    public function toString(string $template = null): string
+    public function toString(string $template = null, array $data = [], string $fallback = ''): string
     {
         if ($template === null) {
             $template = $this->email();
         }
 
-        return parent::toString($template);
+        return parent::toString($template, $data);
     }
 
     /**
@@ -870,12 +905,12 @@ class User extends ModelWithContent
     /**
      * Compares the given password with the stored one
      *
-     * @param string $password
+     * @param string $password|null
      * @return bool
      *
      * @throws \Kirby\Exception\NotFoundException If the user has no password
      * @throws \Kirby\Exception\InvalidArgumentException If the entered password is not valid
-     * @throws \Kirby\Exception\InvalidArgumentException If the entered password does not match the user password
+     *                                                   or does not match the user password
      */
     public function validatePassword(string $password = null): bool
     {

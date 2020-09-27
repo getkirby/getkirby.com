@@ -13,8 +13,16 @@ namespace Kirby\Cms;
  */
 class UserPermissions extends ModelPermissions
 {
+    /**
+     * @var string
+     */
     protected $category = 'users';
 
+    /**
+     * UserPermissions constructor
+     *
+     * @param \Kirby\Cms\Model $model
+     */
     public function __construct(Model $model)
     {
         parent::__construct($model);
@@ -23,21 +31,17 @@ class UserPermissions extends ModelPermissions
         $this->category = $this->user && $this->user->is($model) ? 'user' : 'users';
     }
 
+    /**
+     * @return bool
+     */
     protected function canChangeRole(): bool
     {
-        // only one role, makes no sense to change it
-        if ($this->user->kirby()->roles()->count() < 2) {
-            return false;
-        }
-
-        // users who are not admins cannot change their own role
-        if ($this->user->is($this->model) === true && $this->user->isAdmin() === false) {
-            return false;
-        }
-
-        return $this->model->isLastAdmin() !== true;
+        return $this->model->roles()->count() > 1;
     }
 
+    /**
+     * @return bool
+     */
     protected function canCreate(): bool
     {
         // the admin can always create new users
@@ -53,6 +57,9 @@ class UserPermissions extends ModelPermissions
         return true;
     }
 
+    /**
+     * @return bool
+     */
     protected function canDelete(): bool
     {
         return $this->model->isLastAdmin() !== true;

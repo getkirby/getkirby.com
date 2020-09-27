@@ -3,6 +3,7 @@
 namespace Kirby\Cms;
 
 use Kirby\Exception\Exception;
+use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Http\Uri;
 use Kirby\Toolkit\A;
@@ -236,7 +237,7 @@ class Page extends ModelWithContent
     /**
      * Returns an array with all blueprints that are available for the page
      *
-     * @param string $inSection
+     * @param string|null $inSection
      * @return array
      */
     public function blueprints(string $inSection = null): array
@@ -301,7 +302,7 @@ class Page extends ModelWithContent
      *
      * @internal
      * @param array $data
-     * @param string $languageCode
+     * @param string|null $languageCode
      * @return array
      */
     public function contentFileData(array $data, string $languageCode = null): array
@@ -317,7 +318,7 @@ class Page extends ModelWithContent
      * which is found by the inventory method
      *
      * @internal
-     * @param string $languageCode
+     * @param string|null $languageCode
      * @return string
      */
     public function contentFileName(string $languageCode = null): string
@@ -332,6 +333,7 @@ class Page extends ModelWithContent
      * @param array $data
      * @param string $contentType
      * @return array
+     * @throws \Kirby\Exception\InvalidArgumentException If the controller returns invalid objects for `kirby`, `site`, `pages` or `page`
      */
     public function controller($data = [], $contentType = 'html'): array
     {
@@ -344,7 +346,31 @@ class Page extends ModelWithContent
         ]);
 
         // call the template controller if there's one.
-        return array_merge($kirby->controller($this->template()->name(), $data, $contentType), $data);
+        $controllerData = $kirby->controller($this->template()->name(), $data, $contentType);
+
+        // merge controller data with original data safely
+        if (empty($controllerData) === false) {
+            $classes = [
+                'kirby' => 'Kirby\Cms\App',
+                'site'  => 'Kirby\Cms\Site',
+                'pages' => 'Kirby\Cms\Pages',
+                'page'  => 'Kirby\Cms\Page'
+            ];
+
+            foreach ($controllerData as $key => $value) {
+                if (array_key_exists($key, $classes) === true) {
+                    if (is_a($value, $classes[$key]) === true) {
+                        $data[$key] = $value;
+                    } else {
+                        throw new InvalidArgumentException('The returned variable "' . $key . '" from the controller "' . $this->template()->name() . '" is not of the required type "' . $classes[$key] . '"');
+                    }
+                } else {
+                    $data[$key] = $value;
+                }
+            }
+        }
+
+        return $data;
     }
 
     /**
@@ -407,22 +433,21 @@ class Page extends ModelWithContent
      * gets dragged onto a textarea
      *
      * @internal
-     * @param string $type (null|auto|kirbytext|markdown)
+     * @param string|null $type (null|auto|kirbytext|markdown)
      * @return string
      */
     public function dragText(string $type = null): string
     {
-        $type = $type ?? 'auto';
+        $type = $this->dragTextType($type);
 
-        if ($type === 'auto') {
-            $type = option('panel.kirbytext', true) ? 'kirbytext' : 'markdown';
+        if ($dragTextFromCallback = $this->dragTextFromCallback($type)) {
+            return $dragTextFromCallback;
         }
 
-        switch ($type) {
-            case 'markdown':
-                return '[' . $this->title() . '](' . $this->url() . ')';
-            default:
-                return '(link: ' . $this->id() . ' text: ' . $this->title() . ')';
+        if ($type === 'markdown') {
+            return '[' . $this->title() . '](' . $this->url() . ')';
+        } else {
+            return '(link: ' . $this->id() . ' text: ' . $this->title() . ')';
         }
     }
 
@@ -451,6 +476,20 @@ class Page extends ModelWithContent
         }
 
         return new static($props);
+    }
+
+    /**
+     * Redirects to this page,
+     * wrapper for the `go()` helper
+     *
+     * @since 3.4.0
+     *
+     * @param array $options Options for `Kirby\Http\Uri` to create URL parts
+     * @param int $code HTTP status code
+     */
+    public function go(array $options = [], int $code = 302)
+    {
+        go($this->url($options), $code);
     }
 
     /**
@@ -718,6 +757,7 @@ class Page extends ModelWithContent
     /**
      * @deprecated 3.0.0 Use `Page::isUnlisted()` instead
      * @return bool
+     * @codeCoverageIgnore
      */
     public function isInvisible(): bool
     {
@@ -809,6 +849,7 @@ class Page extends ModelWithContent
     /**
      * @deprecated 3.0.0 Use `Page::isListed()` instead
      * @return bool
+     * @codeCoverageIgnore
      */
     public function isVisible(): bool
     {
@@ -822,7 +863,7 @@ class Page extends ModelWithContent
      * This is only used for drafts so far.
      *
      * @internal
-     * @param string $token
+     * @param string|null $token
      * @return bool
      */
     public function isVerified(string $token = null)
@@ -887,13 +928,18 @@ class Page extends ModelWithContent
     /**
      * Returns the last modification date of the page
      *
-     * @param string $format
+     * @param string|null $format
      * @param string|null $handler
+     * @param string|null $languageCode
      * @return int|string
      */
-    public function modified(string $format = null, string $handler = null)
+    public function modified(string $format = null, string $handler = null, string $languageCode = null)
     {
-        return F::modified($this->contentFile(), $format, $handler ?? $this->kirby()->option('date.handler', 'date'));
+        return F::modified(
+            $this->contentFile($languageCode),
+            $format,
+            $handler ?? $this->kirby()->option('date.handler', 'date')
+        );
     }
 
     /**
@@ -911,7 +957,7 @@ class Page extends ModelWithContent
      * according to the blueprint settings
      *
      * @internal
-     * @param array $params
+     * @param array|null $params
      * @return array
      */
     public function panelIcon(array $params = null): array
@@ -1114,8 +1160,8 @@ class Page extends ModelWithContent
      *
      * @param array $data
      * @param string $contentType
-     * @param int $code
      * @return string
+     * @throws \Kirby\Exception\NotFoundException If the default template cannot be found
      */
     public function render(array $data = [], $contentType = 'html'): string
     {
@@ -1174,6 +1220,7 @@ class Page extends ModelWithContent
      * @internal
      * @param mixed $type
      * @return \Kirby\Cms\Template
+     * @throws \Kirby\Exception\NotFoundException If the content representation cannot be found
      */
     public function representation($type)
     {
@@ -1214,7 +1261,7 @@ class Page extends ModelWithContent
     /**
      * Search all pages within the current page
      *
-     * @param string $query
+     * @param string|null $query
      * @param array $params
      * @return \Kirby\Cms\Pages
      */
@@ -1244,7 +1291,7 @@ class Page extends ModelWithContent
      * more reliable in connection with the inventory
      * than computing the dirname afterwards
      *
-     * @param string $dirname
+     * @param string|null $dirname
      * @return self
      */
     protected function setDirname(string $dirname = null)
@@ -1268,7 +1315,7 @@ class Page extends ModelWithContent
     /**
      * Sets the sorting number
      *
-     * @param int $num
+     * @param int|null $num
      * @return self
      */
     protected function setNum(int $num = null)
@@ -1316,7 +1363,7 @@ class Page extends ModelWithContent
     /**
      * Sets the intended template
      *
-     * @param string $template
+     * @param string|null $template
      * @return self
      */
     protected function setTemplate(string $template = null)
@@ -1331,7 +1378,7 @@ class Page extends ModelWithContent
     /**
      * Sets the Url
      *
-     * @param string $url
+     * @param string|null $url
      * @return self
      */
     protected function setUrl(string $url = null)
@@ -1448,7 +1495,7 @@ class Page extends ModelWithContent
      */
     protected function token(): string
     {
-        return sha1($this->id() . $this->template());
+        return $this->kirby()->contentToken($this, $this->id() . $this->template());
     }
 
     /**
@@ -1526,8 +1573,8 @@ class Page extends ModelWithContent
      * Builds the Url for a specific language
      *
      * @internal
-     * @param string $language
-     * @param array $options
+     * @param string|null $language
+     * @param array|null $options
      * @return string
      */
     public function urlForLanguage($language = null, array $options = null): string

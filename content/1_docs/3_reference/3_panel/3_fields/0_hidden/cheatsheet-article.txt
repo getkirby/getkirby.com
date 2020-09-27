@@ -14,7 +14,7 @@ Guide: blueprints/fields
 
 Text:
 
-The hidden field makes it possible to keep fields in content files without actually making them editable or even visible in Panel forms.
+The hidden field allows storing values in the content file that are not visible to users in the Panel. This can be useful to store additional information for a page, which is only available to the developer or editors who have access to the filesystem. Such a `hidden` field can be edited only either directly in the filesystem or programmatically via a script.
 
 ## Example
 
@@ -29,5 +29,3 @@ fields:
   notes:
     type: hidden
 ```
-
-This can be useful to store additional information for a page, which is only available to the developer or editors who have access to the filesystem.

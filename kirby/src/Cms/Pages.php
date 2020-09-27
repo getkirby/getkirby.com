@@ -43,6 +43,7 @@ class Pages extends Collection
      *
      * @param mixed $object
      * @return self
+     * @throws \Kirby\Exception\InvalidArgumentException
      */
     public function add($object)
     {
@@ -136,7 +137,7 @@ class Pages extends Collection
      * Creates a pages collection from an array of props
      *
      * @param array $pages
-     * @param \Kirby\Cms\Model $model
+     * @param \Kirby\Cms\Model|null $model
      * @param bool $draft
      * @return self
      */
@@ -238,11 +239,11 @@ class Pages extends Collection
     public function findByIdRecursive(string $id, string $startAt = null, bool $multiLang = false)
     {
         $path       = explode('/', $id);
-        $collection = $this;
         $item       = null;
         $query      = $startAt;
 
         foreach ($path as $key) {
+            $collection = $item ? $item->children() : $this;
             $query = ltrim($query . '/' . $key, '/');
             $item  = $collection->get($query) ?? null;
 
@@ -253,8 +254,6 @@ class Pages extends Collection
             if ($item === null) {
                 return null;
             }
-
-            $collection = $item->children();
         }
 
         return $item;
@@ -340,9 +339,12 @@ class Pages extends Collection
 
         foreach ($this->data as $pageKey => $page) {
             $this->index->data[$pageKey] = $page;
+            $index = $page->index($drafts);
 
-            foreach ($page->index($drafts) as $childKey => $child) {
-                $this->index->data[$childKey] = $child;
+            if ($index) {
+                foreach ($index as $childKey => $child) {
+                    $this->index->data[$childKey] = $child;
+                }
             }
         }
 
@@ -353,6 +355,7 @@ class Pages extends Collection
      * @deprecated 3.0.0 Use `Pages::unlisted()` instead
      *
      * @return self
+     * @codeCoverageIgnore
      */
     public function invisible()
     {
@@ -513,6 +516,7 @@ class Pages extends Collection
      * @deprecated 3.0.0 Use `Pages::listed()` instead
      *
      * @return \Kirby\Cms\Pages
+     * @codeCoverageIgnore
      */
     public function visible()
     {

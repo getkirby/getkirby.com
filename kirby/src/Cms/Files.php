@@ -55,7 +55,7 @@ class Files extends Collection
      * Sort all given files by the
      * order in the array
      *
-     * @param array $files List of filenames
+     * @param array $files List of file ids
      * @param int $offset Sorting offset
      * @return self
      */
@@ -76,7 +76,6 @@ class Files extends Collection
      *
      * @param array $files
      * @param \Kirby\Cms\Model $parent
-     * @param array $inject
      * @return self
      */
     public static function factory(array $files, Model $parent)

@@ -248,4 +248,4 @@ $kirby->response()->type('text/plain');
 - (link: docs/cookbook/templating/custom-post-types text: Custom post types)
 - (link: docs/cookbook/templating/php-templates text: Kirby templates 101)
 - (link: docs/cookbook/setup/debugging-basics text: Basic error hunting & prevention)
-- (link: docs/cookbook/templating/one-page text: One-pager site)
+- (link: docs/cookbook/templating/one-pager text: One-pager site)

@@ -37,8 +37,8 @@ We suggest that you stick to the format `YYYY-MM-DD HH:MM:SS` (i.e. `2018-11-21 
   <h1><?= $article->title() ?></h1>
   <?= $article->text()->kirbytext() ?>
 
-  <time datetime="<?= $page->date()->toDate('c') ?>" pubdate="pubdate">
-    <?= $page->date()->toDate('d.m.Y H:i') ?>
+  <time datetime="<?= $page->published()->toDate('c') ?>" pubdate="pubdate">
+    <?= $page->published()->toDate('d.m.Y H:i') ?>
   </time>
 
 </article>
@@ -61,5 +61,5 @@ If you change the date handler you have to adjust all the date format strings in
 In your template …
 
 ```php
-<?= $page->date()->toDate('%d.%m.%Y') ?>
+<?= $page->published()->toDate('%d.%m.%Y') ?>
 ```

@@ -1,0 +1,9 @@
+Title: Your first blueprints
+
+----
+
+Description: After the first templates are set up, we will have a closer look at Kirby's super flexible admin panel. Learn how to create custom a fully customised admin interface for every page type.
+
+----
+
+Link: https://www.youtube.com/watch?v=yK3gNjWU_5s

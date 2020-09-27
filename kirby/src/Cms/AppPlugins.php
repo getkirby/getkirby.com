@@ -7,7 +7,7 @@ use Kirby\Exception\DuplicateException;
 use Kirby\Form\Field as FormField;
 use Kirby\Text\KirbyTag;
 use Kirby\Toolkit\A;
-use Kirby\Toolkit\Collection;
+use Kirby\Toolkit\Collection as ToolkitCollection;
 use Kirby\Toolkit\Dir;
 use Kirby\Toolkit\F;
 use Kirby\Toolkit\V;
@@ -31,6 +31,13 @@ trait AppPlugins
     protected static $plugins = [];
 
     /**
+     * Cache for system extensions
+     *
+     * @var array
+     */
+    protected static $systemExtensions = null;
+
+    /**
      * The extension registry
      *
      * @var array
@@ -47,6 +54,7 @@ trait AppPlugins
         'components' => [],
         'controllers' => [],
         'collectionFilters' => [],
+        'collectionMethods' => [],
         'fieldMethods' => [],
         'fileMethods' => [],
         'filesMethods' => [],
@@ -56,25 +64,20 @@ trait AppPlugins
         'pageMethods' => [],
         'pagesMethods' => [],
         'pageModels' => [],
+        'permissions' => [],
         'routes' => [],
         'sections' => [],
         'siteMethods' => [],
         'snippets' => [],
         'tags' => [],
         'templates' => [],
+        'thirdParty' => [],
         'translations' => [],
         'userMethods' => [],
         'userModels' => [],
         'usersMethods' => [],
         'validators' => []
     ];
-
-    /**
-     * Cache for system extensions
-     *
-     * @var array
-     */
-    protected static $systemExtensions = null;
 
     /**
      * Flag when plugins have been loaded
@@ -89,7 +92,7 @@ trait AppPlugins
      *
      * @internal
      * @param array $extensions
-     * @param \Kirby\Cms\Plugin $plugin The plugin which defined those extensions
+     * @param \Kirby\Cms\Plugin $plugin|null The plugin which defined those extensions
      * @return array
      */
     public function extend(array $extensions, Plugin $plugin = null): array
@@ -152,7 +155,18 @@ trait AppPlugins
      */
     protected function extendCollectionFilters(array $filters): array
     {
-        return $this->extensions['collectionFilters'] = Collection::$filters = array_merge(Collection::$filters, $filters);
+        return $this->extensions['collectionFilters'] = ToolkitCollection::$filters = array_merge(ToolkitCollection::$filters, $filters);
+    }
+
+    /**
+     * Registers additional collection methods
+     *
+     * @param array $methods
+     * @return array
+     */
+    protected function extendCollectionMethods(array $methods): array
+    {
+        return $this->extensions['collectionMethods'] = Collection::$methods = array_merge(Collection::$methods, $methods);
     }
 
     /**
@@ -278,13 +292,7 @@ trait AppPlugins
     protected function extendOptions(array $options, Plugin $plugin = null): array
     {
         if ($plugin !== null) {
-            $prefixed = [];
-
-            foreach ($options as $key => $value) {
-                $prefixed[$plugin->prefix() . '.' . $key] = $value;
-            }
-
-            $options = $prefixed;
+            $options = [$plugin->prefix() => $options];
         }
 
         return $this->extensions['options'] = $this->options = A::merge($options, $this->options, A::MERGE_REPLACE);
@@ -335,9 +343,25 @@ trait AppPlugins
     }
 
     /**
+     * Registers additional permissions
+     *
+     * @param array $permissions
+     * @param \Kirby\Cms\Plugin|null $plugin
+     * @return array
+     */
+    protected function extendPermissions(array $permissions, Plugin $plugin = null): array
+    {
+        if ($plugin !== null) {
+            $permissions = [$plugin->prefix() => $permissions];
+        }
+
+        return $this->extensions['permissions'] = Permissions::$extendedActions = array_merge(Permissions::$extendedActions, $permissions);
+    }
+
+    /**
      * Registers additional routes
      *
-     * @param array|Closure $routes
+     * @param array|\Closure $routes
      * @return array
      */
     protected function extendRoutes($routes): array
@@ -374,8 +398,8 @@ trait AppPlugins
     /**
      * Registers SmartyPants component
      *
-     * @param Closure $smartypants
-     * @return Closure
+     * @param \Closure $smartypants
+     * @return \Closure
      */
     protected function extendSmartypants(Closure $smartypants)
     {
@@ -424,6 +448,19 @@ trait AppPlugins
     protected function extendTranslations(array $translations): array
     {
         return $this->extensions['translations'] = array_replace_recursive($this->extensions['translations'], $translations);
+    }
+
+    /**
+     * Add third party extensions to the registry
+     * so they can be used as plugins for plugins
+     * for example.
+     *
+     * @param array $extensions
+     * @return array
+     */
+    protected function extendThirdParty(array $extensions): array
+    {
+        return $this->extensions['thirdParty'] = array_replace_recursive($this->extensions['thirdParty'], $extensions);
     }
 
     /**
@@ -514,7 +551,7 @@ trait AppPlugins
             $class = str_replace(['.', '-', '_'], '', $name) . 'Page';
 
             // load the model class
-            include_once $model;
+            F::loadOnce($model);
 
             if (class_exists($class) === true) {
                 $models[$name] = $class;
@@ -529,7 +566,7 @@ trait AppPlugins
      * the options array. I.e. hooks and routes can be
      * setup from the config.
      *
-     * @return array
+     * @return void
      */
     protected function extensionsFromOptions()
     {
@@ -544,7 +581,6 @@ trait AppPlugins
     /**
      * Apply all plugin extensions
      *
-     * @param array $plugins
      * @return void
      */
     protected function extensionsFromPlugins()
@@ -577,16 +613,18 @@ trait AppPlugins
      */
     protected function extensionsFromSystem()
     {
+        $root = $this->root('kirby');
+
         // load static extensions only once
         if (static::$systemExtensions === null) {
             // Form Field Mixins
-            FormField::$mixins['filepicker'] = include static::$root . '/config/fields/mixins/filepicker.php';
-            FormField::$mixins['min']        = include static::$root . '/config/fields/mixins/min.php';
-            FormField::$mixins['options']    = include static::$root . '/config/fields/mixins/options.php';
-            FormField::$mixins['pagepicker'] = include static::$root . '/config/fields/mixins/pagepicker.php';
-            FormField::$mixins['picker']     = include static::$root . '/config/fields/mixins/picker.php';
-            FormField::$mixins['upload']     = include static::$root . '/config/fields/mixins/upload.php';
-            FormField::$mixins['userpicker'] = include static::$root . '/config/fields/mixins/userpicker.php';
+            FormField::$mixins['filepicker'] = include $root . '/config/fields/mixins/filepicker.php';
+            FormField::$mixins['min']        = include $root . '/config/fields/mixins/min.php';
+            FormField::$mixins['options']    = include $root . '/config/fields/mixins/options.php';
+            FormField::$mixins['pagepicker'] = include $root . '/config/fields/mixins/pagepicker.php';
+            FormField::$mixins['picker']     = include $root . '/config/fields/mixins/picker.php';
+            FormField::$mixins['upload']     = include $root . '/config/fields/mixins/upload.php';
+            FormField::$mixins['userpicker'] = include $root . '/config/fields/mixins/userpicker.php';
 
             // Tag Aliases
             KirbyTag::$aliases = [
@@ -612,32 +650,32 @@ trait AppPlugins
             ];
 
             // blueprint presets
-            PageBlueprint::$presets['pages']   = include static::$root . '/config/presets/pages.php';
-            PageBlueprint::$presets['page']    = include static::$root . '/config/presets/page.php';
-            PageBlueprint::$presets['files']   = include static::$root . '/config/presets/files.php';
+            PageBlueprint::$presets['pages']   = include $root . '/config/presets/pages.php';
+            PageBlueprint::$presets['page']    = include $root . '/config/presets/page.php';
+            PageBlueprint::$presets['files']   = include $root . '/config/presets/files.php';
 
             // section mixins
-            Section::$mixins['empty']          = include static::$root . '/config/sections/mixins/empty.php';
-            Section::$mixins['headline']       = include static::$root . '/config/sections/mixins/headline.php';
-            Section::$mixins['help']           = include static::$root . '/config/sections/mixins/help.php';
-            Section::$mixins['layout']         = include static::$root . '/config/sections/mixins/layout.php';
-            Section::$mixins['max']            = include static::$root . '/config/sections/mixins/max.php';
-            Section::$mixins['min']            = include static::$root . '/config/sections/mixins/min.php';
-            Section::$mixins['pagination']     = include static::$root . '/config/sections/mixins/pagination.php';
-            Section::$mixins['parent']         = include static::$root . '/config/sections/mixins/parent.php';
+            Section::$mixins['empty']          = include $root . '/config/sections/mixins/empty.php';
+            Section::$mixins['headline']       = include $root . '/config/sections/mixins/headline.php';
+            Section::$mixins['help']           = include $root . '/config/sections/mixins/help.php';
+            Section::$mixins['layout']         = include $root . '/config/sections/mixins/layout.php';
+            Section::$mixins['max']            = include $root . '/config/sections/mixins/max.php';
+            Section::$mixins['min']            = include $root . '/config/sections/mixins/min.php';
+            Section::$mixins['pagination']     = include $root . '/config/sections/mixins/pagination.php';
+            Section::$mixins['parent']         = include $root . '/config/sections/mixins/parent.php';
 
             // section types
-            Section::$types['info']            = include static::$root . '/config/sections/info.php';
-            Section::$types['pages']           = include static::$root . '/config/sections/pages.php';
-            Section::$types['files']           = include static::$root . '/config/sections/files.php';
-            Section::$types['fields']          = include static::$root . '/config/sections/fields.php';
+            Section::$types['info']            = include $root . '/config/sections/info.php';
+            Section::$types['pages']           = include $root . '/config/sections/pages.php';
+            Section::$types['files']           = include $root . '/config/sections/files.php';
+            Section::$types['fields']          = include $root . '/config/sections/fields.php';
 
             static::$systemExtensions = [
-                'components'   => include static::$root . '/config/components.php',
-                'blueprints'   => include static::$root . '/config/blueprints.php',
-                'fields'       => include static::$root . '/config/fields.php',
-                'fieldMethods' => include static::$root . '/config/methods.php',
-                'tags'         => include static::$root . '/config/tags.php'
+                'components'   => include $root . '/config/components.php',
+                'blueprints'   => include $root . '/config/blueprints.php',
+                'fields'       => include $root . '/config/fields.php',
+                'fieldMethods' => include $root . '/config/methods.php',
+                'tags'         => include $root . '/config/tags.php'
             ];
         }
 
@@ -657,11 +695,24 @@ trait AppPlugins
     }
 
     /**
+     * Returns the native implementation
+     * of a core component
+     *
+     * @param string $component
+     * @return \Closure|false
+     */
+    public function nativeComponent(string $component)
+    {
+        return static::$systemExtensions['components'][$component] ?? false;
+    }
+
+    /**
      * Kirby plugin factory and getter
      *
      * @param string $name
      * @param array|null $extends If null is passed it will be used as getter. Otherwise as factory.
      * @return \Kirby\Cms\Plugin|null
+     * @throws \Kirby\Exception\DuplicateException
      */
     public static function plugin(string $name, array $extends = null)
     {
@@ -687,7 +738,7 @@ trait AppPlugins
      * Loading only happens on the first call.
      *
      * @internal
-     * @param array $plugins Can be used to overwrite the plugins registry
+     * @param array|null $plugins Can be used to overwrite the plugins registry
      * @return array
      */
     public function plugins(array $plugins = null): array
@@ -733,7 +784,7 @@ trait AppPlugins
                 continue;
             }
 
-            include_once $entry;
+            F::loadOnce($entry);
 
             $loaded[] = $dir;
         }

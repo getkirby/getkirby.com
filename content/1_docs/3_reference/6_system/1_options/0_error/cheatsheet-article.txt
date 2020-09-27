@@ -1,4 +1,4 @@
-Excerpt: The the name of the error page folder
+Excerpt: The name of the error page folder
 
 ----
 

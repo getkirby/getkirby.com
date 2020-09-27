@@ -37,7 +37,6 @@ Kirby::plugin('your/plugin', [
 Kirby::plugin('your/plugin', [
 	'tags' => [
 		'wikipedia' => require_once __DIR__ . '/tags/wikipedia.php'
-		]
 	]
 ]);
 ```

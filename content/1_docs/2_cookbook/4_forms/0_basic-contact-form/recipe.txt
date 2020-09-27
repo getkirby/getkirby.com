@@ -115,9 +115,9 @@ return function($kirby, $pages, $page) {
         ];
 
         $rules = [
-            'name'  => ['required', 'min' => 3],
+            'name'  => ['required', 'minLength' => 3],
             'email' => ['required', 'email'],
-            'text'  => ['required', 'min' => 3, 'max' => 3000],
+            'text'  => ['required', 'minLength' => 3, 'maxLength' => 3000],
         ];
 
         $messages = [

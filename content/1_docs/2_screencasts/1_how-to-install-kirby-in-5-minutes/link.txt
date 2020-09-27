@@ -1,0 +1,11 @@
+Title: How to install Kirby in 5 minutes
+
+----
+
+Description:
+
+Learn how to install Kirby on your computer with PHP's built-in server
+
+----
+
+Link: https://www.youtube.com/watch?v=EDVYjxWMecc

@@ -79,11 +79,11 @@ Now we need a (link: docs/reference/plugins/extensions/hooks text: hook) that is
 We can define it within the `return` array of our `config.php`:
 
 ```php "/site/config/config.php"
-    'hooks' => [
-        'page.create:after' => function ($page) {
-            buildPageTree($page);
-        }
-    ]
+'hooks' => [
+    'page.create:after' => function ($page) {
+        buildPageTree($page);
+    }
+]
 ```
 
 Within the hook's callback function, we call a function called `buildPageTree()` with the newly created `$page` as first parameter. We will define that function in a plugin.
@@ -148,3 +148,62 @@ function buildPageTree($page) {
 ```
 
 In this example, all subpages in the tree are automatically published. That way, they will be published together with the parent without any further interaction.
+
+## Creating subpages if the pages already exists
+
+The workflow we outlined above works with a `page.create:after` hook, so when a new page is created. But what if you want to restructure your site and add those subpages after (some) of the pages already exist.
+
+There are several ways to deal with this:
+
+### Using a `page.update:after` hook
+
+We can call the `buildPageTree()` method in a `page.update:after` hook to create the subpages when a page is updated.
+
+
+```php "/site/config/config.php"
+'hooks' => [
+    'page.update:after' => function ($newPage) {
+        if ($newPage->children()->isEmpty()) {
+          buildPageTree($newPage);
+        }
+    }
+]
+```
+
+Depending on whether the page can have other subpages, you might have to adapt the condition.
+
+In many cases, waiting for a page to be updated is not ideal, though.
+
+### Using a `route:after` hook
+
+We can use a `route.after` hook to call the `buildPageTree()` method when a page is visited rather then updated. This is usually more useful, because you would have to visit a page anyway to access the subpages:
+
+```php "/site/config/config.php"
+'hooks' => [
+    'route:after' => function ($route, $path, $method) {
+        $uid = explode('/', $path);
+        $uid = end($uid);
+        $uid = str_replace('+', '/', $uid);
+        $page = kirby()->page($uid);
+
+        if ($page && $page->children()->isEmpty()) {
+            buildPageTree($page);
+        }
+    },
+]
+```
+As before, you might have to adapt the condition.
+
+### Programmatically call the method
+
+In a plugin, or for one time use even in a template, we can call the `buildPageTree()` method on all pages that don't have children yet:
+
+```php
+<?php
+foreach (page('notes')->childrenAndDrafts()->filterBy('hasChildren', false) as $note) {
+    kirby()->impersonate('kirby');
+    buildPageTree($note);
+}
+```
+
+Again, this is only an example and your conditions may be different.

@@ -3,6 +3,7 @@
 namespace Kirby\Toolkit;
 
 use Exception;
+use Kirby\Exception\InvalidArgumentException;
 use Kirby\Http\Idn;
 use ReflectionFunction;
 use Throwable;
@@ -152,7 +153,10 @@ class V
             $fieldValue = $input[$fieldName] ?? null;
 
             // first check for required fields
-            if (($fieldRules['required'] ?? false) === true && $fieldValue === null) {
+            if (
+                ($fieldRules['required'] ?? false) === true &&
+                $fieldValue === null
+            ) {
                 throw new Exception(sprintf('The "%s" field is missing', $fieldName));
             }
 
@@ -165,12 +169,10 @@ class V
             }
 
             try {
-                V::value($fieldValue, $fieldRules);
+                static::value($fieldValue, $fieldRules);
             } catch (Exception $e) {
                 throw new Exception(sprintf($e->getMessage() . ' for field "%s"', $fieldName));
             }
-
-            static::value($fieldValue, $fieldRules);
         }
 
         return true;
@@ -212,15 +214,15 @@ V::$validators = [
     /**
      * Valid: `a-z | A-Z`
      */
-    'alpha' => function ($value): bool {
-        return V::match($value, '/^([a-z])+$/i') === true;
+    'alpha' => function ($value, bool $unicode = false): bool {
+        return V::match($value, ($unicode === true ? '/^([\pL])+$/u' : '/^([a-z])+$/i')) === true;
     },
 
     /**
      * Valid: `a-z | A-Z | 0-9`
      */
-    'alphanum' => function ($value): bool {
-        return V::match($value, '/^[a-z0-9]+$/i') === true;
+    'alphanum' => function ($value, bool $unicode = false): bool {
+        return V::match($value, ($unicode === true ? '/^[\pL\pN]+$/u' : '/^([a-z0-9])+$/i')) === true;
     },
 
     /**
@@ -239,13 +241,47 @@ V::$validators = [
     },
 
     /**
-     * Checks for a valid date
+     * Checks for a valid date or compares two
+     * dates with each other.
+     *
+     * Pass only the first argument to check for a valid date.
+     * Pass an operator as second argument and another date as
+     * third argument to compare them.
      */
-    'date' => function ($value): bool {
-        $date = date_parse($value);
-        return $date !== false &&
-                $date['error_count'] === 0 &&
-                $date['warning_count'] === 0;
+    'date' => function (?string $value, string $operator = null, string $test = null): bool {
+        $args = func_get_args();
+
+        // simple date validation
+        if (count($args) === 1) {
+            $date = date_parse($value);
+            return $date !== false &&
+                    $date['error_count'] === 0 &&
+                    $date['warning_count'] === 0;
+        }
+
+        $value = strtotime($value);
+        $test  = strtotime($test);
+
+        if (is_int($value) !== true || is_int($test) !== true) {
+            return false;
+        }
+
+        switch ($operator) {
+            case '!=':
+                return $value !== $test;
+            case '<':
+                return $value < $test;
+            case '>':
+                return $value > $test;
+            case '<=':
+                return $value <= $test;
+            case '>=':
+                return $value >= $test;
+            case '==':
+                return $value === $test;
+        }
+
+        throw new InvalidArgumentException('Invalid date comparison operator: "' . $operator . '". Allowed operators: "==", "!=", "<", "<=", ">", ">="');
     },
 
     /**
@@ -271,10 +307,7 @@ V::$validators = [
     'email' => function ($value): bool {
         if (filter_var($value, FILTER_VALIDATE_EMAIL) === false) {
             try {
-                $parts   = Str::split($value, '@');
-                $address = $parts[0] ?? null;
-                $domain  = Idn::encode($parts[1] ?? '');
-                $email   = $address . '@' . $domain;
+                $email = Idn::encodeEmail($value);
             } catch (Throwable $e) {
                 return false;
             }

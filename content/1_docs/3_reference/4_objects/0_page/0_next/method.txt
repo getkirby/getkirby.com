@@ -8,10 +8,12 @@ Text:
 <?php endif ?>
 ```
 
-### Using sort field
+### Pass a collection
 
 ```php
-<?php if($next = $page->next('date', 'desc')): ?>
+<?php
+$collection = $page->siblings()->listed()->sortBy('date', 'desc');
+if($next = $page->next($collection): ?>
 <a href="<?= $next->url() ?>">next page</a>
 <?php endif ?>
 ```

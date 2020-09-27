@@ -20,7 +20,8 @@ class Languages extends Collection
      * Creates a new collection with the given language objects
      *
      * @param array $objects
-     * @param object $parent
+     * @param null $parent
+     * @throws \Kirby\Exception\DuplicateException
      */
     public function __construct($objects = [], $parent = null)
     {
@@ -74,6 +75,7 @@ class Languages extends Collection
     /**
      * @deprecated 3.0.0  Use `Languages::default()` instead
      * @return \Kirby\Cms\Language|null
+     * @codeCoverageIgnore
      */
     public function findDefault()
     {
@@ -94,7 +96,7 @@ class Languages extends Collection
         $files     = glob(App::instance()->root('languages') . '/*.php');
 
         foreach ($files as $file) {
-            $props = include $file;
+            $props = F::load($file);
 
             if (is_array($props) === true) {
                 // inject the language code from the filename if it does not exist

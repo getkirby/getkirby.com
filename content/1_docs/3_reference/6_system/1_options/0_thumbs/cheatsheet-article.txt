@@ -61,7 +61,7 @@ The default JPEG compression quality for all thumbnails
 ```php
 return [
   'thumbs' => [
-    'quality' => '80'
+    'quality' => 80
   ]
 ];
 ```
@@ -101,7 +101,7 @@ JPEGs can be set to interlace mode with this option
 ```php
 return [
   'thumbs' => [
-    'interlace' => false
+    'interlace' => true
   ]
 ];
 ```

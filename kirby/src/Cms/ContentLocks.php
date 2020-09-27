@@ -2,7 +2,7 @@
 
 namespace Kirby\Cms;
 
-use Kirby\Data\Yaml;
+use Kirby\Data\Data;
 use Kirby\Exception\Exception;
 use Kirby\Toolkit\F;
 
@@ -52,6 +52,7 @@ class ContentLocks
      *
      * @param string $file
      * @return void
+     * @throws \Kirby\Exception\Exception
      */
     protected function closeHandle(string $file)
     {
@@ -108,7 +109,7 @@ class ContentLocks
                 // always read the whole file
                 rewind($handle);
                 $string = fread($handle, $filesize);
-                $data   = Yaml::decode($string);
+                $data   = Data::decode($string, 'yaml');
             }
         }
 
@@ -123,6 +124,7 @@ class ContentLocks
      * @param string $file
      * @param bool $create Whether to create the file if it does not exist
      * @return resource|null File handle
+     * @throws \Kirby\Exception\Exception
      */
     protected function handle(string $file, bool $create = false)
     {
@@ -168,6 +170,7 @@ class ContentLocks
      * @param \Kirby\Cms\ModelWithContent $model
      * @param array $data
      * @return bool
+     * @throws \Kirby\Exception\Exception
      */
     public function set(ModelWithContent $model, array $data): bool
     {
@@ -207,7 +210,7 @@ class ContentLocks
             return F::remove($file);
         }
 
-        $yaml = Yaml::encode($this->data[$file]);
+        $yaml = Data::encode($this->data[$file], 'yaml');
 
         // delete all file contents first
         if (rewind($handle) !== true || ftruncate($handle, 0) !== true) {

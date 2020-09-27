@@ -1,0 +1,14 @@
+Since: 3.4.0
+
+----
+
+Text:
+
+## Example
+
+```php
+echo $page->title()->callback(function ($field) {
+  $field->value = 'Title: ' . $field->value;
+  return $field;  
+});
+```
