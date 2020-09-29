@@ -33,3 +33,28 @@ You can pass a collection as argument as well:
   <?php endforeach ?>
 </ul>
 ```
+
+### Array of ids, collections or objects as argument
+
+<since v="3.4.3">
+
+You can also use an array of ids, collections or objects or a mixture of them to exclude from a collection:
+
+#### An array of ids
+
+```php
+$children = $page->index()->listed()->not(['path/to/page-a', 'path/to/page-c', 'path/to/page-non-exists']);
+```
+
+#### An array of objects
+
+```php
+$children = $page->index()->listed()->not([page('path/to/page-a'), page('path/to/page-c')]);
+```
+
+#### An array of mixed values
+
+```php
+$children = $page->index()->not([$page->children()->template('article-video'), page('path/to/page-a')]);
+```
+</since>
