@@ -94,32 +94,24 @@ Let's have a look at the output. If I use the complete command sequence from the
 ```bash
 articles.filtered.$type: Articles filtered by
 back.to.overview: Back to overview
-bio: Bio
-email: Email
 external.links: External links
 in:
 keep.reading: Keep reading
-legal.links: Legal
-mail.subject2: in category
-mail.subject: Mail from Website
-message.error: The form could not be sent
-message: Message
 message.success: Your message has been sent - thank you!
-name: Name
 published.in: Category
 related.pages: Related pages
-select.category: Category
 similar.pages: Similar pages
 submit: Submit
 tagged.with: Tags
-tags: Tags
 valid.category: Please provide a correct category
 valid.email: Please enter a valid email address
 valid.name: Please enter a valid name
 valid.text: Please enter a text between 10 and 3000 characters
 ```
 
-Remember, these are the used keys and their fallback value, if any. We haven't used a fallback value for the key `in`. And, as you can see in the first line, we have a variable in a translation key which still needs our investigation and replacement(s).
+Remember, these are the used keys and their fallback value, if any. As you can see in the first line, we have a variable in a translation key which still needs our investigation and replacement(s). And in line 4, there is no fallback value for the key `in` ,which we probably want to provide.
+
+In order to provide the translations in different languages, we just need to copy this file now and add or replace the english phrases with their foreign counterparts.
 
 ## Author
 
