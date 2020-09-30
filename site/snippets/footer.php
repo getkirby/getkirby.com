@@ -19,6 +19,7 @@
               <a href="https://instagram.com/getkirby"><?= icon('instagram') ?></a>
               <a href="https://github.com/getkirby"><?= icon('github') ?></a>
               <a href="https://youtube.com/kirbycasts"><?= icon('youtube') ?></a>
+              <a href="https://discord.gg/guMqMfJ"><?= icon('discord') ?></a>
             </nav>
           </div>
 
