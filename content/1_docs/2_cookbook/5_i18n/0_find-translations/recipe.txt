@@ -12,13 +12,13 @@ Description: Find and collect all your translations used with the t() helper fun
 
 Text:
 
-Sometimes you realize that you or your developer may have used the `t()` helper function excessively througout your templates, snippets, and controllers. While this is good, at some point in time you need to find all these occurances to provide a proper translation in your languages files.
+Sometimes you realize that you or your developer may have used the `t()` helper function a lot throughout your templates, snippets, and controllers. While this is good, at some point in time you need to find all these occurrences to provide a proper translation in your languages files.
 
 The `t()` helper function may be used with one or two parameters, the first being a key for the translation, the second an optional string which will be inserted as a fallback if no translation is provided for the given key.
 
-With the following command - which is in fact a combination of some common UNIX shell commands piped together - you can find all occurances of `t()` and output the used translations in a convenient format. Although written and tested in a Linux bash shell, all commands can be used in a Windows environvent as well, by means of the appropriate tools installed on your machine.
+With the following command - which is in fact a combination of some common UNIX shell commands piped together - you can find all occurrences of `t()` and output the used translations in a convenient format. Although written and tested in a Linux bash shell, all commands can be used in a Windows environvent as well if you install the required tools on your machine.
 
-The following example assumes that your present working directory is the `site` folder of your installation. For your convenience, the one-line command is put here with continuation lines split by every new pipe symbol (`|`) but still it is a one-liner. In case you are unfamiliar with "piping", this is just a method to feed the output of some command as input of another command.
+The following example assumes that your present working directory is the `site` folder of your installation. For your convenience, the one-line command is put here with continuation lines split by every new pipe symbol (`|`) but still it is a one-liner. In case you are unfamiliar with "piping", this is a method that strings commands together so that the output of one command becomes the input of another command.
 
 ## The command
 
@@ -33,13 +33,13 @@ $ find controllers snippets templates -type f -print0 \
  | sed -e "s/'//g" -e "s/\s*,\s*/: /"
 ```
 
-On first sight, this might look as weired as if an armadillo had rolled across the keyboard. Lets dig through it step by step:
+On first sight, this might look as weird as if an armadillo had rolled across the keyboard. Lets dig through it step by step:
 
 ```bash
 find controllers snippets templates -type f -print0
 ```
 
-The `find` command just searches through the three subdirectories `controllers`, `snippets`, and `templates` of the site folder (the present working directory), find all entries which are a file (`-type f`) and prints them to the standard output (STDOUT), which is the terminal. `-print0` is used here to make the following command immutable against weired filenames by printing them with a NUL as separator instead of a newline. You can execute this command by its own, replacing `-print0` with `-print`, to see all the files found line-by-line.
+The `find` command searches through the three subdirectories `controllers`, `snippets`, and `templates` of the site folder (the present working directory), finds all entries which are a file (`-type f`) and prints them to the standard output (STDOUT), which is the terminal. `-print0` is used here to make the following command immutable against weird filenames by printing them with a NUL as separator instead of a newline. You can execute this command by its own, replacing `-print0` with `-print`, to see all the files found line by line.
 
 As said above, the output of this first command is fed into the input of the next command, which is:
 
@@ -47,11 +47,11 @@ As said above, the output of this first command is fed into the input of the nex
 xargs -0r grep -Eoh "\s+t\([^\)]+\)"
 ```
 
-The `xargs` command takes its input which is assumed to be NUL-separated (`-0`) and runs it piece by piece through the `grep` command. `grep` will search the content of all files and find all occurances which match the regular expression pattern (`\s+t\([^\)]+\)`) which is any sequence of whitespace characters (`\s+`), followed by `t(`, followed by any sequence of characters which do not contain `)` until it reaches the `)`. The `-o` and `-h` options cause the output of grep to contain only the matching pattern line by line even if there are input lines which contain more than one matching pattern.
+The `xargs` command takes its input which is assumed to be NUL-separated (`-0`) and runs it piece by piece through the `grep` command. `grep` will search the content of all files and find all occurrences which match the regular expression pattern (`\s+t\([^\)]+\)`). This pattern matches any sequence of whitespace characters (`\s+`), followed by `t(`, followed by any sequence of characters which do not contain `)` until it reaches the `)`. The `-o` and `-h` options cause the output of grep to contain only the matching pattern line by line even if there are input lines which contain more than one matching pattern.
 
-The next command, `tr \" \'`, will transliterate every `"` character into `'` character to make the use of quotation marks unique.
+The next command, `tr \" \'`, will transliterate every `"` character into a `'` character to make the use of quotation marks unique.
 
-Then, it comes to a point, when we want to get rid of the surrounding `t()`, which is a good task for the stream editor `sed`:
+Next, we want to get rid of the surrounding `t()`, which is a good task for the stream editor `sed`:
 
 ```bash
 sed -Ee "s/^\s*t\(\s*(.+)\s*\)$/\1/g"
@@ -59,7 +59,7 @@ sed -Ee "s/^\s*t\(\s*(.+)\s*\)$/\1/g"
 
 By using the `\s*` construct multiple times, we will also get rid of some leading and trailing whitespace characters.
 
-After that, the `sort` and `uniq` commands will first sort the output and then get rid of adjacent matching lines, because, of course, we might have use some translations multiple times.
+After that, the `sort` and `uniq` commands will first sort the output and then get rid of adjacent matching lines, because we might have used some translations multiple times.
 
 Let's continue:
 
@@ -67,13 +67,13 @@ Let's continue:
 sed -e "/,/! s/$/,/" -e "s/\s*\.\s*\\$/$/g"
 ```
 
-It might be, that we do use the `t()` helper with and without the second parameter. In the latter case, we do not have the separation character `,` in our function and therefore not in our remaining sequence of characters. This will be fixed by the first regular expression substitution `"/,/! s/$/,/"` which will append a `,` at the end if this character has not been found before (`/,/!`). The second regular expression substitution will take into account, that we might have used variables (`$var`) in our translation key, and will get rid of the string concatanation operator (`.`), regardless whether it is surrounded by any amount of whitespace character, but only if it is followed by the `$` character. The `$` character will be kept.
+We might have used the `t()` helper with or without the second parameter. In the latter case, there is no separation character `,` in our function and therefore not in our remaining sequence of characters. This will be fixed by the first regular expression substitution `"/,/! s/$/,/"` which will append a `,` at the end if this character has not been found before (`/,/!`). The second regular expression substitution will take into account that we might have used variables (`$var`) in our translation key, and will get rid of the string concatenation operator (`.`), regardless whether it is surrounded by any amount of whitespace character, but only if it is followed by the `$` character. The `$` character will be kept.
 
 <warning>
-Watch out: The command will not replace the variable with real values. This is still left by you.
+The command will not replace the variable with real values. You will have to fix this yourself.
 </warning>
 
-We are almost done! What' left is a nice output. With
+We are almost done! What's left is a nice output. With
 
 ```bash
 sed -e "s/'//g" -e "s/\s*,\s*/: /" -e "s/\s*$//"
@@ -85,11 +85,11 @@ we get rid of the quote characters and replace the `,` by `: ` which will result
 sed -e "s/\s*,\s*/ => /" -e "s/\s*$/,/"
 ```
 
-instead, the output format will fit into PHP files as array elements. In both cases however, we get rid of some whitespace characters which might still occur at the end of the string.
+instead, the output format will fit into PHP files as array elements. In both cases however, we get rid of whitespace characters at the end of the string.
 
-If you would like to redirect the output into a file, use the redirection with, i.e. `> en.yml` or `> en.php` resp.
+To redirect the output into a file, use `> en.yml` or `> en.php` respectively.
 
-Let's have a look onto the output. If I use the complete command sequence from the first code block, the output in a current project looks like this:
+Let's have a look at the output. If I use the complete command sequence from the first code block, the output in a current project looks like this:
 
 ```bash
 articles.filtered.$type: Articles filtered by
@@ -119,7 +119,7 @@ valid.name: Please enter a valid name
 valid.text: Please enter a text between 10 and 3000 characters
 ```
 
-Remember, these are the used keys and their fallback value, if any. We do not have used a fallback value for the key `in`. And, as you can see in the first line, we have a variable in a translation key which still needs our investigation and replacement(s).
+Remember, these are the used keys and their fallback value, if any. We haven't used a fallback value for the key `in`. And, as you can see in the first line, we have a variable in a translation key which still needs our investigation and replacement(s).
 
 ## Author
 
