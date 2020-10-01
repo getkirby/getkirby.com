@@ -23,7 +23,7 @@ This example consists of several parts and files:
 
 ## The contact page
 
-(link: docs/guide/content/creating-pages text: Create a contact page) with a `contact.txt` content file. For our means, we only need a title in the content files, the rest is up to you. You could, for example, store an introductory text or some variables – like the recepient email address.
+(link: docs/guide/content/creating-pages text: Create a contact page) with a `contact.txt` content file. For our means, we only need a title in the content files, the rest is up to you. You could, for example, store an introductory text or some variables – like the recipient email address.
 
 For use in the Panel, you can also create a (glossary: blueprint text: blueprint) for the page. We will skip this step here.
 
@@ -149,7 +149,7 @@ return function($kirby, $pages, $page) {
                 $alert['error'] = "The form could not be sent";
             }
 
-            // no exception occured, let's send a success message
+            // no exception occurred, let's send a success message
             if (empty($alert) === true) {
                 $success = 'Your message has been sent, thank you. We will get back to you soon!';
                 $data = [];
