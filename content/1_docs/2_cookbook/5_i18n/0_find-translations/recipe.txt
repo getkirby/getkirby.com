@@ -109,9 +109,9 @@ valid.name: Please enter a valid name
 valid.text: Please enter a text between 10 and 3000 characters
 ```
 
-Remember, these are the used keys and their fallback value, if any. As you can see in the first line, we have a variable in a translation key which still needs our investigation and replacement(s). And in line 4, there is no fallback value for the key `in` ,which we probably want to provide.
+Remember, these are the used keys and their fallback values, if any. As you can see in the first line, we have a variable in a translation key which still needs our attention and replacement(s). And in line 4, there is no fallback value for the key `in`, which we probably want to provide.
 
-In order to provide the translations in different languages, we just need to copy this file now and add or replace the english phrases with their foreign counterparts.
+In order to provide the translations in different languages, we just need to copy this file now and add or replace the English phrases.
 
 ## Author
 
