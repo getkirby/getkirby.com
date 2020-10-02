@@ -23,6 +23,7 @@ Kirby Basics:
     - your-first-blueprints
     - a-closer-look-at-pages-sections
     - fun-with-fields
+    - asset-management
 ----
 
 Priority: 0.9
