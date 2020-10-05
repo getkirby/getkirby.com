@@ -6,4 +6,4 @@ Intro: Our plugin developers created dozens of fantastic plugins for Kirby. Belo
 
 ----
 
-Link: http://getkirby-plugins.com
+Link: plugins

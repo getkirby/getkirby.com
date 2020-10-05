@@ -2,78 +2,14 @@
 
   <main class="community-page | main" id="maincontent">
 
-    <div class="wrap">
-
-      <header class="community-page-hero hero">
-        <h1><?= $page->title() ?></h1>
-        <div class="intro -mb:medium">
-          <?= $page->intro()->kt() ?>
-          <p><a href="https://forum.getkirby.com">forum.getkirby.com</a></p>
-        </div>
-      </header>
-
-    </div>
-
-    <!-- # Plugins Showcase -->
-
-    <section class="community-plugins-section -mb:huge">
-      <div class="wrap">
-        <div class="community-plugins-container">
-          <header class="-mb:large">
-            <h2 id="plugins" class="h2 -color:white"><?= $pluginsPage->title() ?></h2>
-            <p class="intro -theme:dark">
-              <?= $pluginsPage->intro() ?>
-            </p>
-          </header>
-
-          <div class="community-plugins">
-            <?php foreach($plugins as $item): ?>
-            <article>
-              <a href="<?= $item->url() ?>">
-                <figure class="screenshot -mb:medium">
-                  <?php if ($image = $item->image()): ?>
-                    <?= $image->html() ?>
-                  <?php endif ?>
-                </figure>
-
-                <header>
-                  <h3 class="h6 -mb:tiny -color:white"><?= $item->title() ?></h3>
-                  <p class="-mb:small">by <?= $item->parent()->title()->h() ?></p>
-
-                  <div class="text">
-                    <?= $item->description()->kt() ?>
-                  </div>
-                </header>
-              </a>
-            </article>
-            <?php endforeach ?>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <div class="wrap">
-
-      <!-- # Themes -->
-      <div class="community-themes">
-
-        <h2 id="themes" class="h2">Themes</h2>
-        <div>
-          <figure>
-            <a href="https://getkirby-themes.com"><?= $themes->image() ?></a>
-          </figure>
-          <div class="intro -mb:medium">
-            <?= $themes->intro()->kt() ?>
-            <p><a href="https://getkirby-themes.com">getkirby-themes.com</a></p>
-          </div>
-        </div>
-      </div>
 
       <!-- # Team Section -->
       <section class="community-team-section | section">
 
         <header class="-mb:large">
-          <h2 id="team" class="h2">Team</h2>
+          <h2 id="team" class="h1">Core Team</h2>
           <p class="intro">
             Kirby grew from a one-man show to a team of dedicated developers, designers and writers.
           </p>
@@ -125,7 +61,7 @@
 
         <div class="community-contributors">
           <header class="-mb:large">
-            <h2 id="contributors" class="h2">Our contributors</h2>
+            <h2 id="contributors" class="h1">Contributors</h2>
             <p class="intro">
               We are very lucky to have a really supportive group of developers and translators, who build plugins and help us test and plan new features for Kirby.
             </p>

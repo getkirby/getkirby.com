@@ -26,6 +26,14 @@
           <nav class="footer-menu">
             <ul>
               <li>
+                <a class="h5" href="<?= url('docs') ?>">Product</a>
+                <ul>
+                  <?php foreach (page('product')->children()->listed() as $item): ?>
+                  <li><?= $item->title()->link() ?></li>
+                  <?php endforeach ?>
+                </ul>
+              </li>
+              <li>
                 <a class="h5" href="<?= url('docs') ?>">Docs</a>
                 <ul>
                   <?php foreach (page('docs')->children()->listed() as $item): ?>
@@ -34,17 +42,9 @@
                 </ul>
               </li>
               <li>
-                <a class="h5" href="<?= url('community') ?>">Community</a>
+                <a class="h5" href="<?= url('resources') ?>">Resources</a>
                 <ul>
-                  <?php foreach (page('community')->children()->listed() as $item): ?>
-                  <li><?= $item->title()->link() ?></li>
-                  <?php endforeach ?>
-                </ul>
-              </li>
-              <li>
-                <a class="h5" href="<?= url('news') ?>">News</a>
-                <ul>
-                  <?php foreach (page('news')->children()->listed() as $item): ?>
+                  <?php foreach (page('resources')->children()->listed() as $item): ?>
                   <li><?= $item->title()->link() ?></li>
                   <?php endforeach ?>
                 </ul>
@@ -52,11 +52,12 @@
               <li>
                 <a class="h5" href="<?= url('contact') ?>">Misc</a>
                 <ul>
+                  <li><a href="<?= url('https://forum.getkirby.com') ?>">Forum</a></li>
+                  <li><a href="<?= url('https://feedback.getkirby.com') ?>">Feedback</a></li>
                   <li><a href="<?= url('security') ?>">Security</a></li>
                   <li><a href="<?= url('privacy') ?>">Privacy</a></li>
                   <li><a href="<?= url('license') ?>">License</a></li>
                   <li><a href="<?= url('contact') ?>">Contact</a></li>
-                  <li><a href="<?= url('press') ?>">Presskit</a></li>
                 </ul>
               </li>
               <li>
