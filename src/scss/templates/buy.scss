@@ -31,6 +31,11 @@
     right: -.25rem;
     top: 50%;
   }
+
+  @media screen and (max-width: 30rem) {
+    display: none;
+  }
+
 }
 
 .sale {
