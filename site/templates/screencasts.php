@@ -6,23 +6,21 @@
 
       <?php snippet('hero') ?>
 
-      <?php foreach ($page->structure()->yaml() as $categoryTitle => $categoryPages): ?>
+      <?php foreach ($page->children()->listed() as $category): ?>
       <section>
-        <h2 class="h6"><?= $categoryTitle ?></h2>
+        <h2 class="h6" id="<?= $category->slug() ?>"><?= $category->title() ?></h2>
 
         <ul class="cardgrid | -mb:huge">
-          <?php foreach ($categoryPages as $item): ?>
-            <?php if ($item = $page->find($item)): ?>
-            <li class="cardgrid-item">
-              <a href="<?= $item->link() ?>" class="cardgrid-link">
-                <?php if ($image = $item->image()): ?>
-                  <figure class="-mb:small"><?= $image ?></figure>
-                <?php endif ?>
-                <h2 class="h5"><?= $item->title()->widont() ?></h2>
-                <p class="description"><?= $item->description() ?></p>
-              </a>
-            </li>
-            <?php endif ?>
+          <?php foreach ($category->children()->listed() as $screencast): ?>
+          <li class="cardgrid-item">
+            <a href="<?= $screencast->link() ?>" class="cardgrid-link">
+              <?php if ($image = $screencast->image()): ?>
+                <figure class="-mb:small"><?= $image ?></figure>
+              <?php endif ?>
+              <h2 class="h5"><?= $screencast->title()->widont() ?></h2>
+              <p class="description"><?= $screencast->description() ?></p>
+            </a>
+          </li>
           <?php endforeach ?>
         </ul>
 

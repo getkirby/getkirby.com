@@ -10,20 +10,4 @@ Intro: Become a Kirby PRO with our free video tutorial series. Subscribe to our 
 
 ----
 
-Structure:
-
-Kirby Basics:
-    - how-to-install-kirby-in-5-minutes
-    - feel-at-home-in-your-kirby-installation
-    - the-content-folder
-    - your-first-kirby-template
-    - make-your-life-easier-with-snippets
-    - how-to-build-a-project-grid
-    - how-to-build-a-project-page
-    - your-first-blueprints
-    - a-closer-look-at-pages-sections
-    - fun-with-fields
-    - asset-management
-----
-
 Priority: 0.9

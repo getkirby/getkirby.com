@@ -1,0 +1,9 @@
+Title: Perfect titles
+
+----
+
+Description: Good content for your HTML title element is important for your visitors, but also for search engines or whenever your pages get shared on social media. In this video I show you a quick setup how to create perfect custom titles in Kirby
+
+----
+
+Link: https://www.youtube.com/watch?v=4b14020fQDA
