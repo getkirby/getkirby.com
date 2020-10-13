@@ -7,7 +7,7 @@ Text:
   <ol>
     <?php foreach($site->breadcrumb() as $crumb): ?>
     <li>
-      <a href="<?= $crumb->blogurl() ?>" <?= e($crumb->isActive(), 'aria-current="page"') ?>>
+      <a href="<?= $crumb->url() ?>" <?= e($crumb->isActive(), 'aria-current="page"') ?>>
         <?= html($crumb->title()) ?>
       </a>
     </li>
