@@ -146,7 +146,11 @@ return function($kirby, $pages, $page) {
                 ]);
 
             } catch (Exception $error) {
-                $alert['error'] = "The form could not be sent";
+                if(option('debug')):
+                    $alert['error'] = 'The form could not be sent: <strong>' . $error->getMessage() . '</strong>';
+                else:
+                    $alert['error'] = 'The form could not be sent!';
+                endif;
             }
 
             // no exception occurred, let's send a success message
