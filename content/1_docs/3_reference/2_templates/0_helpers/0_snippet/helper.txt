@@ -10,8 +10,8 @@ Text:
 <?php snippet('header', ['class' => 'blog']) ?>
 
 // Return the rendered snippet code
-<?php $header = snippet('header', [], true);
-<?php $header = snippet('header', ['class' => 'blog'], true);
+<?php $header = snippet('header', [], true); ?>
+<?php $header = snippet('header', ['class' => 'blog'], true); ?>
 ```
 
 ## Snippet alternatives
