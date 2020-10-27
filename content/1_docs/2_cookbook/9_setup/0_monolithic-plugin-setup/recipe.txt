@@ -164,17 +164,17 @@ README.md
 When we publish our plugin, we don't want the files related to our test site to appear in the production version of the plugin that people will be putting in their sites. We can exclude whatever we want with the `.gitattributes` file:
 
 ```   
-content export-ignore
-site export-ignore
-src export-ignore
+/content/ export-ignore
+/site/ export-ignore
+/src/ export-ignore
 
-.editorconfig export-ignore
-.gitattributes export-ignore
-.gitignore export-ignore
-.htaccess export-ignore
-index.site.php export-ignore
-package.json export-ignore
-package-lock.json export-ignore
+/.editorconfig export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/.htaccess export-ignore
+/index.site.php export-ignore
+/package.json export-ignore
+/package-lock.json export-ignore
 ```
 
 To verify that, run the following command:
