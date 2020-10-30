@@ -186,7 +186,7 @@ $data = $pages->find('blog')->children()->published()->paginate(10);
 $json = [];
 
 $json['data']  = [];
-$json['pages'] = $data->pagination()->countPages();
+$json['pages'] = $data->pagination()->pages();
 $json['page']  = $data->pagination()->page();
 
 foreach($data as $article) {
@@ -226,7 +226,7 @@ $data = $pages->find('blog')->children()->published()->paginate(10);
 $json = [];
 
 $json['data']  = [];
-$json['pages'] = $data->pagination()->countPages();
+$json['pages'] = $data->pagination()->pages();
 $json['page']  = $data->pagination()->page();
 
 foreach($data as $article) {
