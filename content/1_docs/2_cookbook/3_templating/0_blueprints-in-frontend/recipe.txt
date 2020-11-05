@@ -42,7 +42,7 @@ dump($blueprintTitle);
 With
 
 ```php
-$fields = page('photography')->blueprint()->fields();
+$fields = $page->blueprint()->fields();
 dump($fields);
 ```
 
