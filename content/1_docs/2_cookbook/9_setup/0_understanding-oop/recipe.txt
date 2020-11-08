@@ -1,0 +1,428 @@
+Title: A very brief intro to object oriented programming in PHP
+
+----
+
+Published: 2020-11-09
+
+----
+
+Description: Understanding classes, objects, member functions and common pitfalls
+
+----
+
+Text:
+
+## Intro
+
+The Kirby core is written in PHP, a scripting language that still powers a majority of websites.
+
+In the past, PHP was mostly written using a procedural approach, with functions that act on data structures.
+
+Today, professional PHP programming is based on an OOP (Object Oriented Programming) architecture which has many advantages over the procedural approach. The idea behind OOP is basically to encapsulate data and the methods that act on it, in order to produce modular, extendable and maintainable software.
+
+This recipe will give you just enough background to understand Kirby's architecture and after all, to understand typical errors thrown in your code, like "calling a member function x on null" or why you can use variables like `$kirby` or `$page` in some contexts but not in others.
+
+## Prerequisites
+
+If you want to follow along with this recipe, you need the following:
+
+- A web server (ideally on your (link: docs/cookbook/setup/development-environment text: local machine))
+- A Kirby installation ((link: docs/guide/quickstart text: Starterkit or Plainkit))
+- A code/text editor of your choice
+
+## What is OOP?
+
+Object Oriented Programming is a programming paradigm based on the concept of objects that have certain properties and methods that allow interacting with these objects. The properties and methods of such an object are described in a class, which is the abstract model or blueprint for an object, whereas the object is an instance of this class, i.e. a "thing" with very specific properties.
+
+In a larger software program, you typically have multiple classes whose objects can interact with each other.
+
+### A simple class example
+
+Let's examine a very simple example to get a basic idea. Here we define a class called `Book` with some properties that should apply to all objects of this class, and methods to work with objects of this class.
+
+```php
+<?php
+class Book {
+
+    private $title;
+    private $author;
+    private $isbn;
+    private $price;
+    private $publisher;
+
+    public function __construct( $title, $author) {
+        $this->title  = $title;
+        $this->author = $author;
+    }
+
+    public function getTitle() {
+        return $this->title;
+    }
+
+    public function getAuthor() {
+        return $this->author;
+    }
+
+    public function getPrice() {
+        return $this->price;
+    }
+
+    public function getPublisher() {
+        return $this->publisher;
+    }
+    
+    public function getIsbn() {
+        return $this->isbn;
+    }
+    
+    public function setTitle( string $title) {
+        return $this->title = $title;;
+    }
+
+    public function setAuthor( string $author ) {
+        return $this->author = $author;
+    }
+
+    public function setPrice( float $price) {
+        return $this->price = $price;
+    }
+
+    public function setPublisher( string $publisher ) {
+        return $this->publisher = $publisher;
+    }
+    
+    public function setIsbn( int $isbn ) {
+        return $this->isbn = $isbn;
+    }      
+}
+```
+
+So what's all this?
+
+## Describing a class
+
+First of all, we define our new `Book` class with the keyword `class`. Inside our class, we define the properties of this class, like the title, the author, the publisher etc. Of course, this book can have many more properties, but we keep it basic.
+
+### Properties and method
+
+Class properties and also the methods can have different states of visibility: private, protected or public. Usually, properties of a class should be private or protected, so that they are not directly accessible. To access these properties, we provide public so called getters that return the value of a property (`getPrice()`, `getTitle()` etc.) and setters which can be used to assign a value to the property of an object (`setPrice()`, `setTitle()` etc.). Getters and setters are often prefixed with `get-` and `set-`, but this is not mandatory and you will not find a single method named that way in Kirby's core.
+
+### Trying it out
+
+Now let's work a little with our mini class to see how this works.
+
+<info>
+We assume that you have a local development server set up and that you can create new files and folders in the webroot of this server.
+</info>
+
+In a folder in your webroot, create a file called `book.php` with the class definition from above. Next to it, create an `index.php` file with the following content:
+
+```php "index.php"
+<?php
+ini_set('display_errors', 1);
+require_once __DIR__ . '/book.php';
+
+// we create a new book object, by setting a title and an author
+$book = new Book( 'The Hitchhiker\'s Guide to the Galaxy', 'Douglas Adams');
+
+// we have declared our properties as private, so we cannot access them directly
+echo $book->author; // this line will throw an error ( Fatal error: Uncaught Error: Cannot access private property Book::$author )
+
+// but we can use the getters to get these properties from the book object
+// Note that you have to comment the above error line before you will see the results of this code
+echo $book->getTitle();
+echo $book->getAuthor();
+
+// the price is not yet set, so this will no print anything
+echo $book->getPrice();
+
+// and we can set or modify properties using the setters
+// so let's give our book a price
+$book->setPrice(10.50);
+
+// now the price will be printed
+echo $book->getPrice();
+
+// Let's create another error
+$book = null;
+echo $book->getAuthor(); // Fatal error: Uncaught Error: Call to a member function getAuthor() on null
+
+$book2 = new Book('Beloved', 'Toni Morrison')
+echo $book->type(); //
+```
+
+Play around with this a bit to get a hang of it, setting a new title or other properties. If you have already worked with Kirby's API, this will look familiar, as it looks the same as calling `$page->title()` or `$page->template()` and is the same stuff.
+
+If you try this out, you will get an error when trying to access any of the properties directly, as in the line where we try to echo `$book->author`. We have to use the getters to access these properties.
+
+<warning>
+Note that PHP stops script execution after the first error. You have to comment or remove the wrong lines so that the script can continue.
+</warning>
+
+The last error `Fatal error: Uncaught Error: Call to a member function getAuthor() on null` will probably look familiar if you have worked with Kirby for a while.
+
+What's the issue? We have declared the `$book` variable, but instead of instantiating an object of the book class, we have assigned `null` to the variable. The method we try to call (`getAuthor()`), however, is not some function you can use anywhere at will, it is a member function (or method) of the `Book` class and can therefore *only* be used with objects of this class. The same error (with a slightly different error message) would appear if `$book` was a string, a boolean or an integer. Try it out.
+
+On the other hand, if you have a `book` object, but try to use a method that is not defined in the class, you will also get an error, this time `
+
+You can create as many book objects from this class as you like, by providing the minimum properties to define a book (in this case the title and the author).
+
+### The constructor
+
+The the example above, we declared a `__constructor()` method. This method is totally optional, but allows us to initialize an object's properties (or the properties we regard as essential) upon creation of the object. In our example, we have to pass the title and the author as parameters when creating a new instance of the class and cannot just create a new Book with `new Book()`. But this totally depends on the class and the objectives.
+
+<info>
+Objects as instances of a class only exist at runtime of the script.
+</info>
+
+## Classes and objects in Kirby
+
+After this short intro to classes and objects in PHP, we should be prepared to dive a little into Kirby's classes which will also extend our knowledge of classes that we have covered so far.
+
+## The `Page` class
+
+The `Page` class is one of the – if not *the* – most important classes in Kirby: after all, content in Kirby is based on the concept of pages. A folder in the `/content` folder represents a page.
+
+The `Page` class is defined in `/kirby/src/Cms/Page.php`. In your Kirby project, open this file and have a look at it.
+
+Looks a bit different than our example above, doesn't it? It's not only very much longer but it doesn't even start with the class definition. Let's quickly explain what this stuff at the top means.
+
+The first line after the opening PHP tag is this:
+
+```php "/kirby/src/Cms/Page.php"
+namespace Kirby\Cms;
+```
+
+Here, we declare a (link: https://www.php.net/manual/en/language.namespaces.rationale.php text: namespace ) for the class to prevent name collisions with other classes of the same name and to group classes that belong together. 
+
+After that follows a long list of `use` statements.
+
+```php "/kirby/src/Cms/Page.php"
+use Kirby\Exception\Exception;
+use Kirby\Exception\InvalidArgumentException;
+use Kirby\Exception\NotFoundException;
+use Kirby\Http\Uri;
+use Kirby\Toolkit\A;
+use Kirby\Toolkit\F;
+```
+
+ The purpose of the `use` keyword is to import classes into the file or to use aliases for class names, more in the (link: https://www.php.net/manual/en/language.namespaces.importing.php text: PHP documentation).
+
+As you can see, the `Page` class relies on quite a few other classes to provide it's functionality, some of which you have probably already worked with, like the `A` class for messing with arrays or the `F` class for file handling.
+
+The next part is a comment with information about the class, followed by the actual class definition. But what is that? It doesn't just say `class Page` but:
+
+
+```php "/kirby/src/Cms/Page.php"
+class Page extends ModelWithContent
+```
+
+### Inheritance
+
+If a class extends another class, we speak of inheritance, one of the big advantages of OOP. In this case, the `Page` class is a child class of the `ModelWithContent` class and inherits all its methods and properties.
+
+However, it doesn't just inherit them but can modify existing methods or add new properties and methods. Basically, the `ModelWithContent` class is the more generic class, and `Page` is a more specific version of this class. Other Kirby classes that inherit from `ModelWithContent` are `Site`, `File` and `User`.
+
+If we return to the `Book` example from above, it would probably make sense to extend the basic `Book` class with more specific child classes, for example for ebooks that are different from paper books. A paper book, for example, has pages you can count, an ebook doesn't. A paper book probably has a hard- or softcover, whereas an eBook has different file formats like PDF or Mobi etc. Inheritance is therefore a powerful way to modularize code while at the same time keeping code dry. You only have to redefine methods or extend where necessary.
+
+<info>
+In the same way, `Pages`, `Users`, `Files`, `Roles`, `Languages`, `Fields` etc. all extend the `Collection` class which is why these classes basically share the same methods.
+
+And you will of course find a few more classes that inherit from other classes.
+</info>
+
+When you create a page model, you create a child class of the `Page` class that inherits all it's properties and methods and thus allows you to extend this class with your own methods and properties, or to redifine existing methods in the same way that the `Page` class extends the `ModelWithContent` class.
+
+## Abstract classes and methods
+
+Before we continue, let's make a little detour to the `ModelWithContent` class to get to know some other concepts of PHP's classes.
+
+If you open the class file `kirby\src\Cms\ModelWithContent.php`, you will see that the class is defined as
+
+```php "/kirby/src/Cms/ModelWithContent.php"
+abstract class ModelWithContent extends Model
+```
+
+Apart from the fact that this class also inherits from the `Model` class, it is defined as `abstract` class.
+
+An abstract class is a class that cannot be instanciated, i.e. you **cannot** create an object from it with `new ModelWithContent()`. Any class that contains at least one abstract method, must be abstract.
+
+The `ModelWithContent` class contains both abstract and "normal" member functions.
+
+Abstract methods are methods that only declare a signature, but have no actual implementation, for example:
+
+```php "/kirby/src/Cms\ModelWithContent.php"
+abstract public function contentFileName(): string;
+```
+
+Such abstract methods must be implemented in the classes that inherit from the abstract class, and if we return to the `Page` class, we will in fact find that method implemented there:
+
+```php "/kirby/src/Cms/Page.php"
+public function contentFileName(string $languageCode = null): string
+{
+    return $this->intendedTemplate()->name();
+}
+```
+
+## Traits
+
+With the `Page` class we started with one that comes at you like a sly old dog. Lot's of stuff that you wouldn't have expected.
+
+```php "/kirby/src/Cms/Page.php"
+const CLASS_ALIAS = 'page';
+
+use PageActions;
+use PageSiblings;
+use HasChildren;
+use HasFiles;
+use HasMethods;
+use HasSiblings;
+```
+
+While the first statement declares an alias for the class (we'll get back to this later), this is followed by another bunch of use statements, this time inside the class definition. The function of these statements is similar to the ones above, but this time we import so called traits into the class.
+
+(link: https://www.php.net/manual/en/language.oop5.traits.php text: Traits) provide a group of methods you can include within another class in PHP and are thus a way to reuse code between independent classes; contrary to classes, they cannot be instanciated on their own. Traits can also just be used to modularize methods into their own files without actually reusing them.
+
+In this case, the `PageActions` and `PageSiblings` traits are only used within the `Page` class, whereas the other four traits are also used by different classes.
+
+## Properties
+
+When you look at the properties defined in the Page class, you will notice two things: there are public and protected properties and there are static properties.
+
+### Visibility of properties and methods
+
+We have already briefly mentioned it above, properties and methods can have different types of (link: https://www.php.net/manual/en/language.oop5.visibility.php text: visibility), namely `public`, `protected` and `private`.
+
+Public properties and methods like the setters and getters in our `Book` class can be called anywhere, not only inside the class where they are defined, but also in other classes or scripts.
+
+Protected properties and methods can be called within a class itself or within children of a class, but not outside, when working with an object of this class.
+
+Private properties and methods are even more restricted, they can only be used inside the defining class itself, not anywhere else.
+
+### Static properties and methods
+
+Static properties like and methods can be called directly, i.e. without creating an instance of a class using the `new` keyword.
+
+Examples for static properties in the `Page` class are `$methods`  and `$models`, examples for static methods the `factory()` or the `model()` functions.
+
+The syntax for calling static properties and methods is different from non-static ones:
+
+```php
+$p = Page::factory([
+  'slug' => 'projects',
+  'content' => [
+      'title' => 'Projects'
+  ]
+]);
+dump($p);
+```
+
+Instead of the arrow syntax used for methods that are called on an instance of a class like `$page->update()`, a double colon (or (link: https://en.wikipedia.org/wiki/Scope_resolution_operator text: "Paamayim Nekudotayim")) is used to access a static method or property of a class.
+
+## A closer look at the methods and properties of the `Page` class
+
+If you have a closer look at the properties defined in the `Page.php` file, you will notice that apart from the two static ones mentioned above, most of them are protected. If you then inspect the methods in that file, you will find that there is a public method for all these properties, the getters as we explained above.
+
+For example, we can access the `$parent` property with `$page->parent()`, the `$inventory` property with `$page->inventory()` etc.
+
+But what about setting properties like in our `Book` example above where we could call `$book->setPrice($price)` to assign a new price to the object at runtime? Can we change a `Page` property by calling `$page->setTitle()`. Spoiler: No, we can't.
+
+All setter methods, like `setProperties()`, `setSlug()` etc. are protected functions that cannot be used outside the class and its child classes. The object is therefore immutable.
+
+The only way to change a Page's properties is thus to actually modify the page on disk and then store the result of the modification in a (new) variable.
+
+### Objects are immutable
+
+Try this in a template in a Starterkit:
+
+```php
+$kirby->impersonate('kirby');
+$p = page('notes');
+dump($p->title());
+$p->update([
+    'title' => 'Blog'
+]);
+dump($p->title());
+```
+You will notice that nothing will have changed, although the title was actually changed on disk (check the content text file to verify). Only after you reload the page, the changes will be reflected.
+
+To fix this, we can do it like this instead:
+
+```php
+$p = page('notes');
+dump($p->title());
+$p = $p->update([
+    'title' => 'Blog'
+]);
+dump($p->title());
+```
+Now the changes will be reflected without reloading the page.
+
+## Fatal error: Calling a member function on null
+
+We have already come across this error above when we worked with the example code from the `Book` class. But since this is such a common error message, I want to cover this again here in the context of the `Page` class.
+
+We already learned above, that member methods of a class can only be called on objects of this class, not on other types of objects, not on strings, integers, booleans or null.
+
+That is why we always have to make sure that we have an object when we call such a member function.
+
+Let's look at a typical example from a Kirby context:
+
+```php
+$p = page('notes');
+echo $p->url();
+```
+
+If I'm lucky and in a Starterkit and nobody has deleted the `notes` page or renamed it, `$p` will be a page object and my code just works.
+
+If I have a typo in my slug name or the folder has been renamed or deleted, I'm out of luck and will get the dreaded error message, because in this case, `$p` will be null, and not the object I had hoped for.
+
+Therefore, we have to always use an if statement to make sure that we are dealing with an object of our class.
+
+If we want to be extra sure we really have an instance of a given class, we can use `instanceof` (this will also return `true` for child classes):
+
+```php
+$p = page('notes');
+if ($p instanceof Kirby\Cms\Page) {
+ echo $p->url();
+}
+```
+
+Another way to verify an instance of the Page class would be:
+
+```php
+$p = page('notes');
+if ( is_a($p, 'Page' ) {
+ echo $p->url();
+}
+```
+
+In the context of our templates, however, where we actually try to create a specific object, it is usually completely sufficient to use this shortcut:
+
+```php
+if ($p = page('notes')) {
+echo $p->url();
+}
+```
+
+If you internalize this and use it whenever you deal with pages, users, files etc. in Kirby, those dreaded error messages will be a thing of the past and if it happens to you again, you will at least know how to deal with it.
+
+## $kirby, $pages, $page & $site
+
+The `$kirby`, `$pages`, `$page` and `$site` objects are injected into the Kirby instance at runtime and are therefore automatically available in templates and snippets.
+
+In other contexts, however, for example in your plugins, in routes etc., you first have to create these objects, which is easily done using the helpers `kirby()`, `pages()`, `page()` and `site()`.
+
+## Conclusion
+
+This was a quick introduction into OOP with PHP and a run-through of Kirby's `Page` class as an example. While we have already covered quite a bit, we have really only scratched the surface.
+
+Nevertheless, I hope this recipe got you hooked to dive in deeper, even if you are not a developer (yet).
+
+Here are some resources for further study:
+
+- https://phptherightway.com/
+- https://phpenthusiast.com/object-oriented-php-tutorials
+- https://phpapprentice.com/classes.html
+
+Of course, you can find a lot of other resources and and also great paid courses online.
