@@ -264,7 +264,7 @@ to
 ```php
 <?php
 
-return function ($kirby) {
+return function ($site, $pages, $page, $kirby) {
 
   $args = $kirby->route()->arguments();
     // contains all arguments from the current route
