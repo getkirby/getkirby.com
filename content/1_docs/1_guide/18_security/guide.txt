@@ -73,7 +73,7 @@ All text files within the `content` folder should not be accessible from the out
 RewriteRule ^content/(.*)\.(txt|md|mdown)$ index.php [L]
 ```
 
-Check if this rule works in your setup by browsing to one of your content text files (e.g. http://yourdomain.com/content/site.txt). If your setup is correct, you should be redirected to the error page.
+Check if this rule works in your setup by browsing to one of your content text files (e.g. http://yourdomain.com/content/site.txt). If your setup is correct, you should be redirected to the index page.
 
 ### Your `site` folder
 
@@ -83,7 +83,7 @@ All your files within the `site` folder must be protected as well. Kirby's rule 
 RewriteRule ^site/(.*) index.php [L]
 ```
 
-You can check if this block works by browsing to http://yourdomain.com/site/config/config.php. If everything is correct, you will be redirected to the error page.
+You can check if this block works by browsing to http://yourdomain.com/site/config/config.php. If everything is correct, you will be redirected to the index page.
 
 ### Your `kirby` folder
 
@@ -93,7 +93,7 @@ Last but not least your `kirby` folder must be protected as well. Here's the rul
 RewriteRule ^kirby/(.*) index.php [L]
 ```
 
-By browsing to http://yourdomain.com/kirby/bootstrap.php, you can make sure that you will be correctly redirected to the error page.
+By browsing to http://yourdomain.com/kirby/bootstrap.php, you can make sure that you will be correctly redirected to the index page.
 
 ## Prevent directory listings
 
