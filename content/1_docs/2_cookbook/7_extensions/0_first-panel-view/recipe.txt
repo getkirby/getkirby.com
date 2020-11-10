@@ -162,9 +162,9 @@ export default {
 
 ## Register the new component
 
-When we visit our Panel view, nothing has changed yet. That's because we haven't registered the new component yet. Let'd do that now.
+When we visit our Panel view, nothing has changed yet. That's because we haven't registered the new component yet. Let's do that now.
 
-In our `View` component, we do three this:
+In our `View` component, we do three things:
 
 1. We import the `Reviews.vue" component
 2. In our `export` object, we register the component
