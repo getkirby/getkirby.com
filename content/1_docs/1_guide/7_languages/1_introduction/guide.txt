@@ -64,9 +64,9 @@ return [
 
 Repeat for every new language you want to use.
 
-<info>
-If you don't use the Panel, you have to add the language extension to your text files manually.
-</info>
+<warning>
+If you don't use the Panel, you have to add the language extension to your text files manually. The language extension is **mandatory**, otherwise Kirby will not work as expected.
+</warning>
 
 ### Via the Panel
 
