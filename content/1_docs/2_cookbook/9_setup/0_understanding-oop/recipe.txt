@@ -35,15 +35,16 @@ If you want to follow along with this recipe, you need the following:
 
 Object Oriented Programming is a programming paradigm based on the concept of objects that have certain properties and methods that allow interacting with these objects. The properties and methods of such an object are described in a class, which acts as the model or blueprint for such objects, whereas an object is an instance of this class, i.e. a specific embodiment of the class.
 
-In a larger software program, you typically have multiple classes whose objects can interact with each other.
+In a larger software program, you typically have multiple classes whose objects can interact with each other (maybe an apple, a tree and a farmer).
 
 ### A simple class example
 
-Let's examine a very simple example to get a basic idea. Here we define a class called `Book` with some properties that should apply to all objects of this class, and methods to work with objects of this class.
+Now let's take a look at a PHP example of OOP. Here we define a class called `Book` with some properties that should apply to all objects of this class, and methods to work with objects of this class.
 
 ```php "book.php"
 <?php
-class Book {
+class Book
+{
 
     private $title;
     private $author;
@@ -51,7 +52,8 @@ class Book {
     private $price;
     private $publisher;
 
-    public function __construct( string $title, string $author) {
+    public function __construct(string $title, string $author)
+    {
         $this->title  = $title;
         $this->author = $author;
     }
@@ -80,7 +82,8 @@ class Book {
         $this->title = $title;;
     }
 
-    public function setAuthor( string $author): void {
+    public function setAuthor(string $author): void
+    {
         $this->author = $author;
     }
 
@@ -109,7 +112,7 @@ First of all, we define our new `Book` class with the keyword `class`. Inside ou
 
 Class properties (variables and constants) and also the methods can have different states of visibility: private, protected or public. Properties of a class should be private or protected to keep control over what can be assigned to a property and what not.
 
-To access these properties, we provide public so called getters that return the value of a property (`getPrice()`, `getTitle()` etc.) and setters which can be used to assign a value to the property of an object (`setPrice()`, `setTitle()` etc.). Getters and setters are often prefixed with `get-` and `set-` to make it obvious what these methods do, but this is not mandatory ( and you will not find a single method named that way in Kirby's core).
+To access these properties, we provide public so called getters that return the value of a property (`getPrice()`, `getTitle()` etc.) and setters, which can be used to assign a value to the property of an object (`setPrice()`, `setTitle()` etc.). Getters and setters are often prefixed with `get-` and `set-` to make it obvious what these methods do, but this is not mandatory (and you will not find a single method named that way in Kirby's core).
 
 Not every method in your class must be public. Methods that are only relevant inside the class should therefore also be private or protected.
 
@@ -130,7 +133,8 @@ ini_set('display_errors', 1);
 require_once __DIR__ . '/book.php';
 
 // we create a new book object, by setting a title and an author as required by the constructor
-$book = new Book( 'The Hitchhiker\'s Guide to the Galaxy', 'Douglas Adams');
+// (the `__construct()` method that creates new objects of the class)
+$book = new Book('The Hitchhiker\'s Guide to the Galaxy', 'Douglas Adams');
 
 /*
 // we have declared our properties as private, so we cannot access them directly
@@ -465,4 +469,3 @@ Here are some resources for further study:
 - https://www.phptpoint.com/php-object-oriented/
 
 Of course, you can find a lot of other resources online.
-
