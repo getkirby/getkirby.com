@@ -146,7 +146,7 @@ echo $book->author; // this line will throw an error ( Fatal error: Uncaught Err
 echo $book->getTitle();
 echo $book->getAuthor();
 
-// the price is not yet set, so this will no print anything
+// the price is not yet set, so this will not print anything
 echo $book->getPrice();
 
 // and we can set or modify properties using the setters
@@ -164,7 +164,7 @@ echo $book->getAuthor(); // Fatal error: Uncaught Error: Call to a member functi
 
 /*
 $book2 = new Book('Beloved', 'Toni Morrison')
-echo $book->type(); // Fatal error: Uncaught Error: Call to undefined method Book::type()
+echo $book2->type(); // Fatal error: Uncaught Error: Call to undefined method Book::type()
 */
 ```
 
@@ -192,7 +192,7 @@ will probably look familiar if you have worked with Kirby for a while.
 
 What's the issue? We have declared the `$book` variable, but instead of instantiating an object of the book class, we have assigned `null` to the variable. The method we try to call (`getAuthor()`), however, is not some function you can use anywhere at will, it is a member function (or method) of the `Book` class and can therefore *only* be used with objects of this class. The same error (with a slightly different error message) would appear if `$book` was a string, a boolean or an integer. Try it out.
 
-On the other hand, if you have a `book` object, but try to use a method that is not defined in the class, you will also get an error, this time 
+On the other hand, if you have a `Book` object, but try to use a method that is not defined in the class, you will also get an error, this time:
 
 ```
 Fatal error: Uncaught Error: Call to undefined method Book::type()
@@ -206,7 +206,7 @@ In our example above, we have also introduced type declarations for parameters a
 
 ### The constructor
 
-In the example above, we declared a `__constructor()` method. This method is optional, but allows us to initialize an object's properties (or the properties we regard as essential) upon creation of the object. In our example, we have to pass the title and the author parameters both as strings when creating a new instance of the class and cannot just create a new Book with `new Book()`. It is also possible to set default values for certain parameters (which doesn't really make sense for our books). But all of this totally depends on the class and the objectives.
+In the example above, we declared a `__construct()` method. This method is optional, but allows us to initialize an object's properties (or the properties we regard as essential) upon creation of the object. In our example, we have to pass the title and the author parameters both as strings when creating a new instance of the class and cannot just create a new Book with `new Book()`. It is also possible to set default values for certain parameters (which doesn't really make sense for our books). But all of this totally depends on the class and the objectives.
 
 ## Classes and objects in Kirby
 
@@ -259,10 +259,10 @@ If a class extends another class, we speak of inheritance, one of the big advant
 
 However, it doesn't just inherit them but can modify existing (public or protected) methods or add additional properties and methods. Basically, the `ModelWithContent` class can be regarded as the more generic class, and `Page` is a more specific child class of this class. Other Kirby classes that inherit from `ModelWithContent` are `Site`, `File` and `User`.
 
-If we return to the `Book` example from above, it would probably make sense to extend the basic `Book` class with more specific child classes, for example for ebooks that are different from paper books. A paper book, for example, has pages you can count, an ebook doesn't. A paper book probably has a hard- or softcover, whereas an eBook has different file formats like PDF or Mobi etc. Inheritance is therefore a powerful way to modularize code while at the same time keeping code dry. You only have to redefine methods or extend where necessary.
+If we return to the `Book` example from above, it would probably make sense to extend the basic `Book` class with more specific child classes, for example for eBooks that are different from paper books. A paper book, for example, has pages you can count, an eBook doesn't. A paper book probably has a hard- or softcover, whereas an eBook has different file formats like PDF or Mobi etc. Inheritance is therefore a powerful way to modularize code while at the same time keeping code DRY ("don't repeat yourself"). You only have to redefine methods or extend where necessary.
 
 <info>
-In the same way, `Pages`, `Users`, `Files`, `Roles`, `Languages`, `Fields` etc. all extend the `Collection` class which is why these classes basically share the same methods.
+In the same way, `Pages`, `Users`, `Files`, `Roles`, `Languages`, `Fields` etc. all extend the `Collection` class, which is why these classes basically share the same methods.
 
 And you will of course find a few more classes that inherit from other classes.
 </info>
@@ -271,7 +271,7 @@ When you create a (link: docs/guide/templates/page-models text: page model), you
 
 ## Traits
 
-With the `Page` class we started with one that comes at you like a sly old dog. Lot's of stuff that you wouldn't have expected.
+With the `Page` class we started with one that comes at you like a sly old dog. Lots of stuff that you wouldn't have expected.
 
 ```php "/kirby/src/Cms/Page.php"
 const CLASS_ALIAS = 'page';
@@ -365,7 +365,7 @@ $p = $p->update([
 ]);
 dump($p->title());
 ```
-Now the changes will be reflected without reloading the page, because we override the original `$p` variable and assign the new page object to it.
+Now the changes will be reflected without reloading the page, because we overwrite the original `$p` variable and assign the new page object to it.
 
 ## Fatal error: Calling a member function on null
 
