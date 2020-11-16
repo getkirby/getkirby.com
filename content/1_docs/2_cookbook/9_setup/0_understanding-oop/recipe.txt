@@ -16,7 +16,7 @@ Text:
 
 The Kirby core is written in PHP, a scripting language that still powers a majority of websites.
 
-In the past, PHP was mostly written using a procedural approach, with functions that act on data structures.
+In the past, PHP was mostly written using a procedural approach, with functions that work with data structures.
 
 Today, professional PHP programming is based on an OOP (Object Oriented Programming) architecture which has many advantages over the procedural approach. The idea behind OOP is basically to encapsulate data and the methods that act on it, in order to produce modular, extendable and maintainable software.
 
@@ -33,9 +33,13 @@ If you want to follow along with this recipe, you need the following:
 
 ## What is OOP?
 
-Object Oriented Programming is a programming paradigm based on the concept of objects that have certain properties and methods that allow interacting with these objects. The properties and methods of such an object are described in a class, which acts as the model or blueprint for such objects, whereas an object is an instance of this class, i.e. a specific embodiment of the class.
+Object Oriented Programming (OOP) is all about objects, their properties and their methods.
 
-In a larger software program, you typically have multiple classes whose objects can interact with each other (maybe an apple, a tree and a farmer).
+Let's first think about a real-world example: An object could be a book. Its properties are the author, title, publisher and the price for which it is sold in a shop. And its methods are the actions you could do with the book, e.g. you can write it, read it or sell it.
+
+OOP uses the same paradigms for data structures in a program. The properties and methods of an object like the book are described in a class, which acts as the model or blueprint for every book you might have in your application, whereas an object is an instance of this class, i.e. a specific embodiment of the class (the specific book in your library).
+
+In a larger software program, you typically have multiple classes whose objects can interact with each other (like a book, a bookshop and a shop assistant that sells the book).
 
 ### A simple class example
 
@@ -46,11 +50,11 @@ Now let's take a look at a PHP example of OOP. Here we define a class called `Bo
 class Book
 {
 
-    private $title;
-    private $author;
-    private $isbn;
-    private $price;
-    private $publisher;
+    protected $title;
+    protected $author;
+    protected $isbn;
+    protected $price;
+    protected $publisher;
 
     public function __construct(string $title, string $author)
     {
@@ -111,6 +115,8 @@ First of all, we define our new `Book` class with the keyword `class`. Inside ou
 ### Properties and methods
 
 Class properties (variables and constants) and also the methods can have different states of visibility: private, protected or public. Properties of a class should be private or protected to keep control over what can be assigned to a property and what not.
+
+That is because both private and protected properties cannot be accessed from the outside of the class, private properties are even more limited in access. In most cases, protected properties are fine. You can read more about the difference below.
 
 To access these properties, we provide public so called getters that return the value of a property (`getPrice()`, `getTitle()` etc.) and setters, which can be used to assign a value to the property of an object (`setPrice()`, `setTitle()` etc.). Getters and setters are often prefixed with `get-` and `set-` to make it obvious what these methods do, but this is not mandatory (and you will not find a single method named that way in Kirby's core).
 
@@ -229,6 +235,8 @@ namespace Kirby\Cms;
 
 Here, we declare a (link: https://www.php.net/manual/en/language.namespaces.rationale.php text: namespace ) for the class to prevent name collisions with other classes of the same name (for example classes from third party libraries we want to use in our project) and to logically group classes that belong together. 
 
+Because of this namespace, the full name of the `Page` class therefore becomes `Kirby\Cms\Page`.
+
 ### Importing other classes
 
 After the namespace declaration follows a long list of `use` statements.
@@ -242,7 +250,9 @@ use Kirby\Toolkit\A;
 use Kirby\Toolkit\F;
 ```
 
- The purpose of the `use` keyword here is to import classes into the file or to use aliases for class names so that we don't have to refer to them by their full names. You can read more about namespacing in the (link: https://www.php.net/manual/en/language.namespaces.importing.php text: PHP documentation).
+ The purpose of the `use` keyword here is to import classes into the file or to use aliases for class names so that we don't have to refer to them by their full names. For example, since we import the `Kirby\Toolkit\F` class, we can then refer to this class by its short name `F`, for example `F::write()`.
+
+You can read more about namespacing in the (link: https://www.php.net/manual/en/language.namespaces.importing.php text: PHP documentation).
 
 As you can see, the `Page` class relies on quite a few other classes to provide it's functionality, some of which you have probably already worked with, like the `A` class for messing with arrays or the `F` class for file handling.
 
@@ -255,9 +265,9 @@ class Page extends ModelWithContent
 
 ### Inheritance (`extends`)
 
-If a class extends another class, we speak of inheritance, one of the big advantages of OOP. In this case, the `Page` class is a child class of the `ModelWithContent` class and inherits all its methods and properties.
+If a class extends another class, we speak of inheritance, one of the big advantages of OOP. In this case, the `Page` class is a child class of the `ModelWithContent` class and inherits all its methods and properties, like a real-life child inherits certain "properties" from its parents (although that kind of inheritance is much more complicated).
 
-However, it doesn't just inherit them but can modify existing (public or protected) methods or add additional properties and methods. Basically, the `ModelWithContent` class can be regarded as the more generic class, and `Page` is a more specific child class of this class. Other Kirby classes that inherit from `ModelWithContent` are `Site`, `File` and `User`.
+However, a child class doesn't just inherit methods and properties, but can modify them or add additional properties and methods. Basically, the `ModelWithContent` class can be regarded as the more generic class, and `Page` is a more specific child class of this class. Other Kirby classes that inherit from `ModelWithContent` are `Site`, `File` and `User`.
 
 If we return to the `Book` example from above, it would probably make sense to extend the basic `Book` class with more specific child classes, for example for eBooks that are different from paper books. A paper book, for example, has pages you can count, an eBook doesn't. A paper book probably has a hard- or softcover, whereas an eBook has different file formats like PDF or Mobi etc. Inheritance is therefore a powerful way to modularize code while at the same time keeping code DRY ("don't repeat yourself"). You only have to redefine methods or extend where necessary.
 
