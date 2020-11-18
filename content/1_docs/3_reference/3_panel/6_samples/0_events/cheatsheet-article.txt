@@ -41,10 +41,9 @@ listed:
 type: pages
 headline: Events
 parent: site.find("events")
-sortBy: from asc
+sortBy: from desc
 template: event
 empty: No events yet
-sortBy: date desc
 ```
 
 ### Result
