@@ -1,0 +1,9 @@
+Title: Collections
+
+----
+
+Description: Learn how to create custom collections of pages (projects, products, blog articles, etc.) that you can reuse across your site without repeating yourself
+
+----
+
+Link: https://www.youtube.com/watch?v=FKw3pNOvVBs
