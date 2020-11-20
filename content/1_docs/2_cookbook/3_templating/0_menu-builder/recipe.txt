@@ -260,7 +260,7 @@ Let's see how we can handle this field definition in our template. To keep our c
 <?php $items = $site->nestedMenu()->toStructure() ?>
 <?php if ($items->isNotEmpty()) : ?>
 <nav>
-  <?php snippet('menuitem-list', ['items' => $items)]) ?>
+  <?php snippet('menuitem-list', ['items' => $items]) ?>
 </nav>
 <?php endif ?>
 ```
@@ -272,9 +272,9 @@ Inside the snippet, we recursively call the snippet for the submenu items:
   <?php foreach ($items as $item) : ?>
 
     <?php if ($pageLink = $item->pageLink()->toPage()) : ?>
-    <li><a href="<?= $pageLink->url() ?>"><?= $item->itemTitle()->or($pageLink->title()) ?></a>
+    <li><a href="<?= $pageLink->url() ?>"><?= $item->linkTitle()->or($pageLink->title()) ?></a>
     <?php elseif ($item->externalLink()->isNotEmpty()) : ?>
-    <li><a href="<?= $item->externalLink() ?>"><?= $item->itemTitle()->or(Url::short($item->externalLink()->value())) ?></a>
+    <li><a href="<?= $item->externalLink() ?>"><?= $item->linkTitle()->or(Url::short($item->externalLink()->value())) ?></a>
     <?php endif ?>
 
     <?php $subMenuItems = $item->subMenu()->toStructure(); ?>
