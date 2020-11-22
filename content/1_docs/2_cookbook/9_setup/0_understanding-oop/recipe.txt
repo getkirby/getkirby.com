@@ -118,7 +118,7 @@ Class properties (variables and constants) and also the methods can have differe
 
 That is because both private and protected properties cannot be accessed from the outside of the class, private properties are even more limited in access. In most cases, protected properties are fine. You can read more about the difference below.
 
-To access these properties, we provide public so called getters that return the value of a property (`getPrice()`, `getTitle()` etc.) and setters, which can be used to assign a value to the property of an object (`setPrice()`, `setTitle()` etc.). Getters and setters are often prefixed with `get-` and `set-` to make it obvious what these methods do, but this is not mandatory (and you will not find a single method named that way in Kirby's core).
+To access these properties, we provide public so called getters that return the value of a property (`getPrice()`, `getTitle()` etc.) and setters, which can be used to assign a value to the property of an object (`setPrice()`, `setTitle()` etc.). Getters and setters are often prefixed with `get-` and `set-` to make it obvious what these methods do, but this is not mandatory.
 
 Not every method in your class must be public. Methods that are only relevant inside the class should therefore also be private or protected.
 
@@ -265,11 +265,46 @@ class Page extends ModelWithContent
 
 ### Inheritance (`extends`)
 
-If a class extends another class, we speak of inheritance, one of the big advantages of OOP. In this case, the `Page` class is a child class of the `ModelWithContent` class and inherits all its methods and properties, like a real-life child inherits certain "properties" from its parents (although that kind of inheritance is much more complicated).
+If a class extends another class, we speak of inheritance, one of the advantages of OOP. In this case, the `Page` class is a child class of the `ModelWithContent` class and inherits all its methods and properties, like a real-life child inherits certain "properties" from its parents (although that kind of inheritance is much more complicated).
 
 However, a child class doesn't just inherit methods and properties, but can modify them or add additional properties and methods. Basically, the `ModelWithContent` class can be regarded as the more generic class, and `Page` is a more specific child class of this class. Other Kirby classes that inherit from `ModelWithContent` are `Site`, `File` and `User`.
 
 If we return to the `Book` example from above, it would probably make sense to extend the basic `Book` class with more specific child classes, for example for eBooks that are different from paper books. A paper book, for example, has pages you can count, an eBook doesn't. A paper book probably has a hard- or softcover, whereas an eBook has different file formats like PDF or Mobi etc. Inheritance is therefore a powerful way to modularize code while at the same time keeping code DRY ("don't repeat yourself"). You only have to redefine methods or extend where necessary.
+
+But enough theory, let's just try it out and actually extend our `Book` example from above. In a new file `ebook.php`, let's create the `Ebook` child class and add a new property and its setter and getter.
+
+```php "ebook.php"
+<?php
+class Ebook extends Book
+{
+  protected $format;
+  
+  public function setFormat($format) {
+    $this->format = $format;
+  }
+
+  public function getFormat() {
+    return $this->format;
+  }
+}
+```
+
+Then in your `index.php`, require this new file and instantiate a new `Ebook` object:
+
+```php "index.php"
+<?php
+ini_set('display_errors', 1);
+require_once __DIR__ . '/book.php';
+require_once __DIR__ . '/ebook.php';
+
+// rest of code we added before
+
+$ebook = new Ebook('Form Design Patterns', 'Adam Silver');
+$ebook->setFormat('mobi');
+var_dump($ebook);
+```
+
+We can now start adding additional methods or modify the existing ones. But I leave that to you to play around.
 
 <info>
 In the same way, `Pages`, `Users`, `Files`, `Roles`, `Languages`, `Fields` etc. all extend the `Collection` class, which is why these classes basically share the same methods.
@@ -337,6 +372,31 @@ Instead of the arrow syntax used for methods that are called on an instance of a
 <info>
 Kirby's Toolkit comes with multiple classes that have only static methods, for example the `Str` or the `Html` classes.
 </info>
+
+Let's get our hands a bit more dirty by adding a static method to our `Book` class as well, so that we can create the new object statically instead.
+
+```php "book.php"
+<?php
+class Ebook extends Book
+{
+  
+  // ... other code
+
+  public static function create($title, $author) {
+    return new static($title, $author);
+  }
+
+}
+```
+
+This new static method does nothing else but call the constructor of the class. But the cool thing is, that we can now create a new instance of the Book or Ebook class like this:
+
+```php "index.php"
+
+$ebook2 = Ebook::create('The Pragmatic Programmer', 'David Thomas, Andrew Hunt');
+var_dump($ebook2);
+```
+The real advantages of this approach are not immediately obvious and we won't dig into this now.
 
 ## A closer look at the methods and properties of the `Page` class
 
@@ -473,6 +533,7 @@ Nevertheless, I hope this recipe got you hooked to dive in deeper.
 Here are some resources for further study:
 
 - https://phptherightway.com/
+- https://front-line-php.com
 - https://phpenthusiast.com/object-oriented-php-tutorials
 - https://phpapprentice.com/classes.html
 - http://openbook.rheinwerk-verlag.de/oop/ (German only)
