@@ -339,6 +339,12 @@ templates:
   - article
 ```
 
+<since v="3.5.0">
+
+#### Template dialog
+
+The list of templates when a new page is added to the section is only displayed if more than one template is available. If only one template is available and the debug mode is set to `true`, the template selection dialog is still displayed for error diagnosis.
+
 ## "Add" button
 
 Editors can add new pages to the section with the "Add" button in the top right corner.
