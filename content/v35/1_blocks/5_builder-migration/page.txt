@@ -42,3 +42,13 @@ fields:
 
 The Builder used a field method called `$page->blocks()->toBuilderBlocks()`. This has to be replaced with `$page->blocks()->toBlocks()`
 
+## In your block snippets
+
+Your old block snippets should work as expected, but a few things are deprecated and you should follow the new way of doing things in the snippets:
+
+The new `$block` object replaces `$data` You can still use `$data` instead, but consider this deprecated. The following `$block` object methods replace the old `$data` methods:
+
+Builder | Blocks
+- | -
+`$data->_uid()` | `$block->id()`
+`$data->_key()` | `$block->type()`
