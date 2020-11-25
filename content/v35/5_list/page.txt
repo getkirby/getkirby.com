@@ -1,0 +1,29 @@
+Title: List field
+----
+Intro: As another spin-off of the Blocks field, we also added a new list field, which can be used if you need to create simple ordered or unordered lists in a more visual way than with Markdown.
+----
+Text:
+
+(screenshot: list.png)
+
+## Usage
+
+```yaml
+fields:
+  list:
+    type: list
+```
+
+## Choosing available marks
+
+```yaml
+fields:
+  text:
+    type: list
+    marks:
+        - bold
+        - italic
+        - strike
+```
+
+

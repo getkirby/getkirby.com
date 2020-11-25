@@ -1,0 +1,11 @@
+Title: Date field
+----
+Intro: We've completely revamped our date and time fields to be more usable and adjustable
+
+----
+Text:
+
+(screenshot: date.png)
+
+Docs for new options are coming soon …
+

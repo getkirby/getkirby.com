@@ -1,0 +1,36 @@
+Title: Configuration
+
+----
+
+Intro: You can configure the default setup of your Blocks field in your config.php
+
+----
+
+Text:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+  'blocks' => [
+    'fieldsets' => [
+      'text' => [
+        'label' => 'Text',
+        'type' => 'group',
+        'fieldsets' => [
+          'text',
+          'heading'
+        ]
+      ],
+      'media' => [
+        'label' => 'Media',
+        'type' => 'group',
+        'fieldsets' => [
+          'image',
+          'video'
+        ]
+      ]
+    ]
+  ]
+];
+```

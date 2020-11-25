@@ -1,0 +1,57 @@
+Title: Editor migration
+
+----
+
+Intro: The Blocks field is replacing our Editor field for long-form text. Learn how to migrate your Editor blocks.
+
+----
+
+Text:
+
+The Blocks field has a built-in smart importer for Editor blocks. The migration should normally be mostly effortless. There are a couple block types that have changed though and you might need to update your editor block snippets.
+
+<info>
+Please let us know if you are running into migratin issues. We will try to make this as smooth as possible for you. https://github.com/getkirby/kirby/issues
+</info>
+
+<warning>
+Right now, the Editor plugin does not run properly under 3.5.0. Please remove the plugin first before you continue.
+</warning>
+
+## In your blueprints
+
+The only thing you have to change to upgrade from the Editor to the new Blocks field is to change the field type:
+
+*previously:*
+
+```yaml "editor"
+fields:
+  blocks:
+    type: editor
+```
+
+*now:*
+
+```yaml "blocks"
+fields:
+  blocks:
+    type: blocks
+```
+
+## Changed snippets
+
+The following block types have changed in the Blocks field and you need to move and rename your snippets if you have customized them in your installation.
+
+Editor | Blocks
+- | -
+`/site/snippets/editor/h1.php` | `/site/snippets/blocks/heading.php`
+`/site/snippets/editor/h2.php` | `/site/snippets/blocks/heading.php`
+`/site/snippets/editor/h3.php` | `/site/snippets/blocks/heading.php`
+`/site/snippets/editor/blockquote.php` | `/site/snippets/blocks/quote.php`
+`/site/snippets/editor/kirbytext.php` | `/site/snippets/blocks/markdown.php`
+`/site/snippets/editor/ol.php` | `/site/snippets/blocks/list.php`
+`/site/snippets/editor/paragraph.php` | `/site/snippets/blocks/text.php`
+`/site/snippets/editor/ul.php` | `/site/snippets/blocks/list.php`
+
+
+

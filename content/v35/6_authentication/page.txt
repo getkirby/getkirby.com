@@ -1,0 +1,11 @@
+Title: Enhanced authentication
+----
+Intro: With 3.5 we are introducing major enhancements for our login flow.
+----
+Text:
+
+(screenshot: login.png)
+
+You can now reset your password, login password-less via secure email verification code and even provide your own verification methods via auth challenge plugins. Combine this with the option to enable 2FA authentication to increase the security of your Panel.
+
+Docs: TBD

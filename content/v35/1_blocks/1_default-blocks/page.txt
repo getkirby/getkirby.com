@@ -1,0 +1,150 @@
+Title: Default block types
+
+----
+
+Intro: The Blocks field comes with a set of predefined block types that are available out of the box
+
+----
+
+Text:
+
+## `code`
+
+A inline code block for code snippets and examples.
+
+### Default snippet
+
+```php "/site/snippets/blocks/code.php"
+<pre><code class="language-<?= $block->language()->or('text') ?>"><?= $block->code() ?></code></pre>
+```
+
+## `gallery`
+
+A list of images to create galleries of all sorts
+
+### Default snippet
+
+```php "/site/snippets/blocks/gallery.php"
+<figure>
+  <ul>
+    <?php foreach ($block->images()->toFiles() as $image): ?>
+    <li>
+      <?= $image ?>
+    </li>
+    <?php endforeach ?>
+  </ul>
+</figure>
+```
+
+## `heading`
+
+Headline from `<h1>` to `<h6>`
+
+### Default snippet
+
+```php "/site/snippets/blocks/heading.php"
+<<?= $level = $block->level()->or('h2') ?>>
+  <?= $block->text() ?>
+</<?= $level ?>>
+```
+
+## `image`
+
+A single image
+
+### Default snippet
+
+```php "/site/snippets/blocks/image.php"
+<?php if ($image = $block->image()->toFile()): ?>
+<figure<?= attr(['data-ratio' => $block->ratio(), 'data-crop' => $block->crop()->isTrue()], ' ') ?>>
+  <?php if ($block->link()->isNotEmpty()): ?>
+  <a href="<?= $block->link()->toUrl() ?>">
+    <img src="<?= $image->url() ?>" alt="<?= $block->alt()->or($image->alt()) ?>">
+  </a>
+  <?php else: ?>
+  <img src="<?= $image->url() ?>" alt="<?= $block->alt()->or($image->alt()) ?>">
+  <?php endif ?>
+
+  <?php if ($block->caption()->isNotEmpty()): ?>
+  <figcaption>
+    <?= $block->caption() ?>
+  </figcaption>
+  <?php endif ?>
+</figure>
+<?php endif ?>
+```
+
+## `list`
+
+Ordered and unordered lists
+
+### Default snippet
+
+```php "/site/snippets/blocks/list.php"
+<?= $block->text() ?>
+```
+
+
+## `markdown`
+
+A plaintext HTML/markdown/kirbytext block. This is perfect to combine WYSIWYG content with custom HTML, Kirbytext or Markdown.
+
+### Default snippet
+
+```php "/site/snippets/blocks/markdown.php"
+<?= $block->text()->kt() ?>
+```
+
+## `quote`
+
+A quote with optional citation
+
+### Default snippet
+
+```php "/site/snippets/blocks/quote.php"
+<blockquote>
+  <?= $block->text() ?>
+  <?php if ($block->citation()->isNotEmpty()): ?>
+  <footer>
+    <?= $block->citation() ?>
+  </footer>
+  <?php endif ?>
+</blockquote>
+```
+
+## `table`
+
+A customizable table preview component
+
+### Default snippet
+
+<info>
+The table block does not come with a default snippet. You need to add your own to `/site/snippets/blocks/table.php`
+</info>
+
+## `text`
+
+A simple text block with multiple paragraphs
+
+### Default snippet
+
+```php "/site/snippets/blocks/text.php"
+<?= $block->text() ?>
+```
+
+## `video`
+
+A Youtube or Vimeo video embed
+
+### Default snippet
+
+```php "/site/snippets/blocks/video.php"
+<?php if ($block->url()->isNotEmpty()): ?>
+<figure>
+  <?= video($block->url()) ?>
+  <?php if ($block->caption()->isNotEmpty()): ?>
+  <figcaption><?= $block->caption() ?></figcaption>
+  <?php endif ?>
+</figure>
+<?php endif ?>
+```
