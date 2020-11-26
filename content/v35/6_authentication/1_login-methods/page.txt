@@ -1,0 +1,174 @@
+Title: Login methods
+----
+Intro: There are now three ways to get into the Panel that can be configured with the `auth.methods` option
+----
+Text:
+
+## Available methods
+
+1. **Password (`password`)**
+This is the default method, which will use the same UI and features as previously (i.e. the passwordless login form is disabled). This is because not everyone needs/wants password reset and also because the email configuration needs to be set up and working.
+
+2. **Passwordless login (`code`)**
+Kind of like Notion: The user enters their email address, gets a code and logs in.
+
+3. **Password reset (`password-reset`)**
+The user enters the email address, gets a code and logs in with it. After logging in, the user will be redirected to the password reset form. After confirming the new password, the user is redirected to the Panel dashboard.
+
+<info>
+All login methods, except the default `password` method need a working email transport configuration. Otherwise verification emails cannot be sent. Find out more about **(link: /docs/reference/system/options/email#email-transport text: how to configure your email transport)**
+</info>
+
+
+## Login via code
+
+If you want to avoid logins via password completely, you can set the login methods option to `code`. The default login via password will be disabled.
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'auth' => [
+        'methods' => 'code'
+    ]
+];
+```
+
+(screenshot: login.png)
+
+## Login via code & login via password
+
+You can also combine login via code and login via password. The `password-reset` method is then no longer available.
+
+**The first method in the array will be the default login method.**
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'auth' => [
+        'methods' => ['code', 'password']
+    ]
+];
+```
+
+(screenshot: email-and-password.png)
+
+
+## Password reset
+
+To enable the password reset form, you can combine the default `password` login method with the `password-reset` method:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'auth' => [
+        'methods' => ['password', 'password-reset']
+    ]
+];
+```
+
+(screenshot: password-reset.png)
+
+## 2-factor authentication
+
+To enable 2-factor authentication for your logins, you can pass the `2fa` option to the password method in an array.
+
+2-factor authentication will ask users for their email and password first and then send a verification email with an additional code that they have to enter afterwards to verify their login.
+
+2-factor authentication is not compatible with the `code` or `password-reset` options.
+
+```php
+<?php
+
+return [
+    'auth' => [
+        'methods' => [
+            'password' => ['2fa' => true],
+        ]
+    ]
+];
+```
+
+(screenshot: 2fa.png)
+
+## Additional configuration options
+
+### `auth.challenge.timeout`
+
+```php
+<?php
+
+return [
+    'auth' => [
+        'methods' => ['code', 'password'],
+        'timeout' => 5 * 60 // 5 minutes
+    ]
+];
+```
+
+### `auth.challenge.email.*`
+
+```php
+<?php
+
+return [
+    'auth' => [
+        'methods' => ['code', 'password'],
+        'timeout' => 5 * 60 // 5 minutes,
+        'email' => [
+            'from'     => 'mail@example.com',
+            'fromName' => 'My example project',
+            'subject'  => 'Login code'
+        ]
+    ]
+];
+```
+
+## Email Templates
+
+You can overwrite our standard email templates for the code verification and password reset, by placing the following email templates in `/site/templates/emails/auth`
+
+### Login via code
+
+HTML
+`/site/templates/emails/auth/login.html.php`
+
+Text
+`/site/templates/emails/auth/login.php`
+
+Default email text
+```txt "Subject: Your login code"
+Hi {user.nameOrEmail},
+
+You recently requested a login code for the Kirby Panel.
+The following login code will be valid for {timeout} minutes:
+
+{code}
+
+If you did not request a login code, please ignore this email or contact your administrator if you have questions.
+For security, please DO NOT forward this email.
+```
+
+### Password reset
+
+HTML
+`/site/templates/emails/auth/login.html.php`
+
+Text
+`/site/templates/emails/auth/login.php`
+
+Default email text
+```txt "Subject: Your password reset code"
+Hi {user.nameOrEmail},
+
+You recently requested a password reset code for the Kirby Panel.
+The following password reset code will be valid for {timeout} minutes:
+
+{code}
+
+If you did not request a password reset code, please ignore this email or contact your administrator if you have questions.
+For security, please DO NOT forward this email.
+```
+
