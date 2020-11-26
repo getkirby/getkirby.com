@@ -260,3 +260,23 @@ Our block components have an update method, which we can use to tell the Blocks 
 With `{ text: 'Something' }` we can only update the text field of the block. With `$event.target.value`, we fetch the current value of the input field whenever the value changes.
 
 The Blocks field will take care of the rest.
+
+### Adjusting the index.css
+
+To wrap this up, we need to adjust our CSS file a bit to make it work with the input element instead of the button.
+
+```css
+.k-block-type-button input {
+    border: 2px solid #000;
+    border-radius: 3rem;
+    padding: .25rem .75rem;
+    cursor: pointer;
+    font: inherit;
+    text-align: center;
+}
+.k-block-type-button input:focus {
+    outline: 0;
+    border-color: var(--color-focus);
+}
+```
+
