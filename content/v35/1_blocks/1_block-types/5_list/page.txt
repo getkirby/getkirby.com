@@ -1,0 +1,32 @@
+Title: list
+
+----
+
+Intro: Ordered and unordered lists
+
+----
+
+Text:
+
+## Preview
+
+(screenshot: list.png)
+
+## Default snippet
+
+```php "/site/snippets/blocks/list.php"
+<?= $block->text() ?>
+```
+
+## Default blueprint
+
+```yaml
+name: field.blocks.list.name
+icon: list-bullet
+preview: list
+fields:
+  text:
+    label: field.blocks.list.name
+    type: list
+```
+

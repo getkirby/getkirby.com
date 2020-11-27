@@ -1,0 +1,11 @@
+Title: Block types
+
+----
+
+Intro: The Blocks field comes with a set of predefined block types that are available out of the box
+
+----
+
+Text:
+
+(pages: site.find('v35/blocks/block-types').children)

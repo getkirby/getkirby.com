@@ -1,0 +1,34 @@
+Title: markdown
+
+----
+
+Intro: A plaintext HTML/markdown/kirbytext block. This is perfect to combine WYSIWYG content with custom HTML, Kirbytext or Markdown.
+
+----
+
+Text:
+
+## Preview
+
+(screenshot: markdown.png)
+
+## Default snippet
+
+```php "/site/snippets/blocks/markdown.php"
+<?= $block->text()->kt() ?>
+```
+
+## Default blueprint
+
+```yaml
+name: field.blocks.markdown.name
+icon: markdown
+preview: markdown
+fields:
+  text:
+    label: field.blocks.markdown.label
+    placeholder: field.blocks.markdown.placeholder
+    type: textarea
+    buttons: false
+    font: monospace
+```
