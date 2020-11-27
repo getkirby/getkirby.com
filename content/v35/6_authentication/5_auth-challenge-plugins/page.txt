@@ -87,7 +87,7 @@ Kirby::plugin('superwoman/custom-challenge', [
 
 ## Configuration of the challenge priority
 
-If multiple auth challenges are installed, the user can define the priority of the challenges, i.e. which challenges are tried in which order:
+If multiple auth challenges are installed, you can define the priority of the challenges, i.e. which challenges are tried in which order:
 
 ```php
 <?php
