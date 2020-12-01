@@ -12,7 +12,7 @@ Text:
 | ---------------- | ----------------------------------------------------------- |
 | {{ latest }}     | ✅ Latest Kirby release, actively supported                 |
 | {{ supported }}+ | ✅ No known security issues                                 |
-| 2.5.13+          | ⚠️ Security support until 31.12.2020, no active development |
+| 2.5.14+          | ⚠️ Security support until 31.12.2020, no active development |
 | 1.*              | ❌ Not supported                                            |
 
 <info>
@@ -45,3 +45,9 @@ Incidents:
     severity: minor
     affected: "<=3.3.5"
     fixed: 3.3.6
+
+-
+    description: "PHP Phar archives could be uploaded by Panel users as content files and executed"
+    severity: notable
+    affected: "<=3.4.4"
+    fixed: 3.4.5

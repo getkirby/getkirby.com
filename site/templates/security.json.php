@@ -6,7 +6,7 @@ $data = [
     'supported' => [
         $kirby->version()         => 'Latest Kirby release, actively supported',
         $supported->value() . '+' => 'No known security issues',
-        '2.5.13+'                 => 'Security support until 31.12.2020, no active development',
+        '2.5.14+'                 => 'Security support until 31.12.2020, no active development',
         '1.*'                     => 'Not supported'
     ],
     'incidents' => array_values($incidents->toArray())
