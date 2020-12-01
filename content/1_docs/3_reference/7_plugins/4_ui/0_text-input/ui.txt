@@ -3,7 +3,7 @@ Title: Text Input
 Text:
 
 ```html
-<k-input v-model="text" name="text" type="text" />
+<k-text-input v-model="text" name="text" type="text" />
 ```
 
 ## Props
