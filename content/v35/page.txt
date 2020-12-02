@@ -26,7 +26,7 @@ This is a pre-release and probably not fully stable yet. Don't use in production
 
 ### How to test the pre-release?
 
-Download the latest pre-release and replace your kirby folder: https://github.com/getkirby/kirby/releases/tag/3.5.0-rc.1
+Download the latest pre-release and replace your kirby folder: https://github.com/getkirby/kirby/releases/tag/3.5.0-rc.2
 
 ### Reporting issues
 
