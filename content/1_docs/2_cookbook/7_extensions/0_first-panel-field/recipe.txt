@@ -401,6 +401,7 @@ export default {
     icon: String
     label: String,
     required: Boolean,
+    when: String,
     value: String,
   },
   methods: {
