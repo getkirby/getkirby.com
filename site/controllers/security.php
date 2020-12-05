@@ -4,18 +4,25 @@ return function ($kirby, $page) {
     $incidents      = $page->incidents()->toStructure();
     $incidentsTable = snippet('security-incidents', compact('incidents'), true);
 
-    $supported = null;
+    $noVulns = null;
     foreach ($incidents as $incident) {
-        if ($supported === null || version_compare($incident->fixed(), $supported, '>')) {
-            $supported = $incident->fixed();
+        if ($noVulns === null || version_compare($incident->fixed(), $noVulns, '>')) {
+            $noVulns = $incident->fixed();
         }
     }
 
-    $text = new Field($page, 'text', Str::template($page->text(), [
-        'latest'    => $kirby->version(),
-        'supported' => $supported,
-        'incidents' => $incidentsTable
-    ]));
+    $data = [
+        'latest'             => $kirby->version(),
+        'no-vulnerabilities' => $noVulns
+    ];
+
+    $supported      = $page->supported()->replace($data)->toStructure();
+    $supportedTable = snippet('security-supported', compact('supported'), true);
+
+    $text = new Field($page, 'text', Str::template($page->text(), array_merge($data, [
+        'incidents' => $incidentsTable,
+        'supported' => $supportedTable
+    ])));
 
     return compact('text', 'supported', 'incidents');
 };

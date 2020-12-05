@@ -3,7 +3,7 @@
     
     <?php foreach ($incidents as $incident): ?>
     <tr>
-        <td><?= $incident->affected()->escape() ?></td>
+        <td><code><?= $incident->affected()->escape() ?></code></td>
         <td title="severity: <?= $incident->severity() ?>" class="-color:<?= str_replace(['major', 'notable', 'minor'], ['red', 'orange', 'yellow'], $incident->severity()->value()) ?>">
             <?= $incident->description() ?>
         </td>

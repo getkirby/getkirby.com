@@ -6,14 +6,7 @@ Text:
 
 ## Supported Versions
 
-<!-- NOTE TO THE EDITOR: If you update this table, please also update the security.json.php template -->
-
-| Kirby Version    | Support Status                                              |
-| ---------------- | ----------------------------------------------------------- |
-| {{ latest }}     | ✅ Latest Kirby release, actively supported                 |
-| {{ supported }}+ | ✅ No known security issues                                 |
-| 2.5.14+          | ⚠️ Security support until 31.12.2020, no active development |
-| 1.*              | ❌ Not supported                                            |
+{{ supported }}
 
 <info>
 If you need the version information from this page in a machine-readable format, you can use the (link: security.json text: JSON representation).
@@ -35,6 +28,30 @@ You can always write us directly at **<security@getkirby.com>**.
 If you want to encrypt your message, our GPG key is (link: pgp.asc text: 6E6B 057A F491 FFAD 363F  6F49 9101 10FA A459 E120).
 
 Please do *not* write to us publicly, e.g. in the forum, as making security vulnerabilities public before they are fixed can give attackers valuable time to exploit the issue. By letting us know directly, you can protect other Kirby users from such attacks.
+
+----
+
+Supported:
+
+-
+    version: {{ latest }}
+    status: latest
+    description: ✅ Latest Kirby release, actively supported
+
+-
+    version: >={{ no-vulnerabilities }}
+    status: no-vulnerabilities
+    description: ✅ No known vulnerabilities
+
+-
+    version: ^2.5.14
+    status: security-support
+    description: ⚠️ Security support until 31.12.2020, no active development
+
+-
+    version: 1.*
+    status: end-of-life
+    description: ❌ Not supported
 
 ----
 
