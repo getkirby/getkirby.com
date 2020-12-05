@@ -58,13 +58,18 @@ Supported:
 Incidents:
 
 -
+    cve: CVE-2020-26253
     description: "Registration block: .dev domains and some reverse proxy setups were treated as local"
     severity: minor
     affected: "<=3.3.5"
     fixed: 3.3.6
-
+    links:
+        GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-2ccx-2gf3-8xvv
 -
+    cve: CVE-2020-26255
     description: "PHP Phar archives could be uploaded by Panel users as content files and executed"
     severity: notable
     affected: "<=3.4.4"
     fixed: 3.4.5
+    links:
+        GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-g3h8-cg9x-47qw
