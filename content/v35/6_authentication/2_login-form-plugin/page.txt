@@ -1,7 +1,55 @@
 Title: Themeable login form
 ----
-Intro: With 3.5 it's now a lot easier to style our login form.
+Intro: With 3.5 it's a lot easier to style the Panel login form.
 ----
 Text:
 
-TBD
+Kirby 3.2 introduced a plugin extension that (link: docs/reference/plugins/extensions/panel-login text: allowed replacing the login form), which meant that you needed to write the complete login logic yourself or copy over code from our built-in login form.
+
+Kirby 3.5 now allows *extending* the login form with your own markup (e.g. logos, contact information, links etc.):
+
+```js "index.js"
+import LoginScreen from "./components/LoginScreen.vue";
+
+panel.plugin('my/auth', {
+  login: LoginScreen
+});
+```
+
+```js "LoginScreen.vue"
+<template>
+  <div class="my-login-form">
+    <h1>My awesome login form</h1>
+
+    <!-- reuse Kirby's login form -->
+    <k-login />
+
+    <a href="mailto:admin@example.com" class="my-login-form-link">
+      <k-icon type="email" />
+      Contact
+    </a>
+  </div>
+</template>
+
+<style lang="scss">
+.my-login-form h1 {
+  margin-bottom: 2rem;
+}
+
+.my-login-form-link {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}
+
+.my-login-form-link .k-icon {
+  margin-bottom: .25rem;
+}
+</style>
+```
+
+(screenshot: login-form.png)
+
+<info>
+If you want to replace the whole login form with your own logic, you can still do that like before. In the meantime we are working on a new plugin extension to register additional forms to toggle between. Stay tuned!
+</info>
