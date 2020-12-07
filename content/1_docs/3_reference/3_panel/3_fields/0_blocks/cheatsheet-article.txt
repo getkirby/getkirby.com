@@ -1,0 +1,34 @@
+Title: Blocks
+
+----
+
+Since: 3.5.0
+
+----
+
+Excerpt:
+
+A visual editor for long-form text and modular pages
+
+----
+
+Guide: blueprints/fields
+
+----
+
+Text:
+
+The Blocks field is the perfect solution for complex single-column layouts and long-form text.
+
+(screenshot: blocks.png)
+
+## Example
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+```
+
+
+
