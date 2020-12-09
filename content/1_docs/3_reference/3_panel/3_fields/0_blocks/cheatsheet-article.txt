@@ -22,13 +22,249 @@ The Blocks field is the perfect solution for complex single-column layouts and l
 
 (screenshot: blocks.png)
 
-## Example
+## Blueprint setup
+
+You can add the Blocks field to any fields section in your Panel like this:
 
 ```yaml
+fields:
+  text:
+    type: blocks
+```
+
+## Field properties
+
+Property | Type | Default | Description
+- | - | - | - |
+autofocus | `bool` | - | Sets the focus on this field when the form loads. Only the first field with this label gets
+default | `array` | - | Default value for the field, which will be used when a page/file/user is created
+disabled | `bool` | - | If true, the field is no longer editable and will not be saved
+empty | `string` | - | Customize the default text when the blocks field is empty
+fieldsets | `array` | - | Defines the allowed block types in the blocks field. See below.
+help | | - | Optional help text below the field
+label | | - | The field label can be set as string or associative array with translations
+max | `int` | - | Maximum number of allowed blocks
+min | `int` | - | Minimum number of required blocks
+pretty | `bool` | `false` | Saves pretty printed JSON in text files
+required | `bool` | `false` | If true, the field has to be filled in correctly to be saved.
+translate | `bool` | `true` | If false, the field will be disabled in non-default languages and cannot be translated. This is only relevant in multi-language setups.
+when |  | - | Conditions when the field will be shown (since 3.1.0)
+width | `string` | `1/1` | The width of the field in the field grid. Available widths: `1/1`, `1/2`, `1/3`, `1/4`, `2/3`, `3/4`
+
+## Defining Fieldsets
+
+You can fully customize the selector for new block types with sorted block types and groups. By default, the block selector just shows a single list of available block types in alphabetical order:
+
+```yaml
+fields:
+  text:
+    type: blocks
+```
+
+(screenshot: single.png)
+
+When you want to change the order of available blocks, you need to list them manually with the `fieldsets` option
+
+```yaml
+fields:
+  text:
+    type: blocks
+    fieldsets:
+      - heading
+      - text
+      - list
+      - image
+      - gallery
+      - video
+      - code
+      - markdown
+```
+
+(screenshot: single-sorted.png)
+
+### Groups
+
+When you work with a lot of block types – especially when you start creating your own block types – you might want to group them in the block selector to give a better overview of available options.
+
+The Blocks field has a generic "group" block type, which can be used to create such groups.
+
+```yaml
+fields:
+  text:
+    type: blocks
+    fieldsets:
+      text:
+        label: Text
+        type: group
+        fieldsets:
+          - heading
+          - text
+          - list
+      media:
+        label: Media
+        type: group
+        fieldsets:
+          - image
+          - video
+      code:
+        label: Code
+        type: group
+        fieldsets:
+          - code
+          - markdown
+```
+
+(screenshot: groups.png)
+
+### Closed groups
+
+When your list of block types gets even longer, you can also create groups that are closed by default for block types that are not needed that frequently.
+
+```yaml
+fields:
+  text:
+    type: blocks
+    fieldsets:
+      text:
+        label: Text
+        type: group
+        fieldsets:
+          - heading
+          - text
+          - list
+      media:
+        label: Media
+        type: group
+        fieldsets:
+          - image
+          - video
+      code:
+        label: Code
+        type: group
+        open: false
+        fieldsets:
+          - code
+          - markdown
+```
+
+(screenshot: closed-groups.png)
+
+## Block types
+
+(reference: panel/blocks)
+
+(docs: blocks/blocks)
+
+## Configuration
+
+You can configure the default setup of your Blocks field in your config.php
+
+```php "/site/config/config.php"
+<?php
+
+return [
+  'blocks' => [
+    'fieldsets' => [
+      'text' => [
+        'label' => 'Text',
+        'type' => 'group',
+        'fieldsets' => [
+          'text',
+          'heading'
+        ]
+      ],
+      'media' => [
+        'label' => 'Media',
+        'type' => 'group',
+        'fieldsets' => [
+          'image',
+          'video'
+        ]
+      ]
+    ]
+  ]
+];
+```
+
+## Builder migration
+
+The Blocks field is replacing the popular Builder field plugin. It comes with a built-in smart importer for Builder blocks. The migration should normally be effortless.
+
+### Your blueprints
+
+The only thing you have to change to upgrade from the Builder to the new Blocks field is to change the field type:
+
+*previously:*
+
+```yaml "builder"
+fields:
+  blocks:
+    type: builder
+    fieldsets:
+      ...
+```
+
+*now:*
+
+```yaml "blocks"
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      ...
+```
+
+### Your templates
+
+The Builder used a field method called `$page->blocks()->toBuilderBlocks()`. This has to be replaced with `$page->blocks()->toBlocks()`
+
+### Your block snippets
+
+Your old block snippets should work as expected, but a few things are deprecated and you should follow the new way of doing things in the snippets:
+
+The new `$block` object replaces `$data` You can still use `$data` instead, but consider this deprecated. The following `$block` object methods replace the old `$data` methods:
+
+Builder | Blocks
+- | -
+`$data->_uid()` | `$block->id()`
+`$data->_key()` | `$block->type()`
+
+
+## Editor migration
+
+The Blocks field is not just replacing the Builder but also our Editor field plugin. It has a built-in smart importer for Editor blocks. The migration should normally be mostly effortless. There are a couple block types that have changed though and you might need to update your editor block snippets.
+
+### Your blueprints
+
+The only thing you have to change to upgrade from the Editor to the new Blocks field is to change the field type:
+
+*previously:*
+
+```yaml "editor"
+fields:
+  blocks:
+    type: editor
+```
+
+*now:*
+
+```yaml "blocks"
 fields:
   blocks:
     type: blocks
 ```
 
+### Changed snippets
 
+The following block types have changed in the Blocks field and you need to move and rename your snippets if you have customized them in your installation.
 
+Editor | Blocks
+- | -
+`/site/snippets/editor/h1.php` | `/site/snippets/blocks/heading.php`
+`/site/snippets/editor/h2.php` | `/site/snippets/blocks/heading.php`
+`/site/snippets/editor/h3.php` | `/site/snippets/blocks/heading.php`
+`/site/snippets/editor/blockquote.php` | `/site/snippets/blocks/quote.php`
+`/site/snippets/editor/kirbytext.php` | `/site/snippets/blocks/markdown.php`
+`/site/snippets/editor/ol.php` | `/site/snippets/blocks/list.php`
+`/site/snippets/editor/paragraph.php` | `/site/snippets/blocks/text.php`
+`/site/snippets/editor/ul.php` | `/site/snippets/blocks/list.php`

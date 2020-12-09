@@ -7,13 +7,17 @@ If you don't want to care about the HTML for each individual block, you can echo
 
 ```
 
+## Block snippets
+
+The HTML for each individual block is stored in its own block snippet. All our default block types bring their own snippets and can be overwritten. Block snippets are stored in `/site/snippets/blocks`
+
+As an example, if you want to overwrite the snippet for our heading block, you would create a snippet file called `/site/snippets/blocks/heading.php`
+
 ## Looping through blocks
 
 Looping through blocks to control their HTML can be very powerful. You can assign custom CSS classes, IDs for links and more.
 
-### Simple
-
-You don't need to render the HTML for each individual block in the loop though. You can wrap the block with your custom HTML and then echo `$block` to render the block snippet.
+You don't need to render the HTML for each individual block in the loop though. You can wrap the block with your custom HTML and then echo the `$block` object to render the matching block snippet.
 
 ```php
 <?= <<<'CODE'
@@ -27,7 +31,7 @@ CODE;
 
 ```
 
-### Manually loading snippets
+## Manually loading snippets
 
 Sometimes you might wish to customize the way block snippets are loaded. Maybe you want to inject more snippet variables.
 
