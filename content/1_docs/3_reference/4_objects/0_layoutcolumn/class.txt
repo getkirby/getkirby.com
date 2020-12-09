@@ -1,0 +1,9 @@
+Class: Kirby\Cms\LayoutColumn
+
+----
+
+Since: 3.5.0
+
+----
+
+Text:

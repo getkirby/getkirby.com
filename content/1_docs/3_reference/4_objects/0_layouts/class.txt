@@ -1,0 +1,11 @@
+Class: Kirby\Cms\Layouts
+
+----
+
+Since: 3.5.0
+
+----
+
+Text:
+
+(docs: layouts/to-layouts)
