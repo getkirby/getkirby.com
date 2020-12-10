@@ -20,7 +20,7 @@
             'cols'  => 6,
             'rows'  => 4,
             'class' => 'center',
-            'image' => page('home')->image('dashboard.png')->resize(1200),
+            'image' => page('home')->image('dashboard.jpg')->resize(1200),
             'alt'   => 'A screenshot of Kirby\'s admin interface'
           ]) ?>
 
@@ -96,7 +96,7 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => page('home')->image('microsite.png')->resize(1200),
+            'image' => page('home')->image('microsite.jpg')->resize(1200),
             'class' => 'center',
             'alt'   => 'A screenshot of a Panel setup for blog articles'
           ]) ?>
@@ -166,7 +166,7 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => page('home')->image('article.png')->resize(1200),
+            'image' => page('home')->image('article.jpg')->resize(1200),
             'class' => 'stretch',
             'alt'   => 'An example of a more complex panel layout with multiple custom fields'
           ]) ?>
