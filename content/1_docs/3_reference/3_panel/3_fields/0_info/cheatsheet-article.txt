@@ -34,7 +34,11 @@ fields:
       Your admin
 ```
 
-### Using `KirbyText`
+## Field properties
+
+(field-options: info)
+
+## Using `KirbyText`
 
 <since v="3.3.0">
 In addition to markdown, you can use `KirbyText` in your info text, even including images:
@@ -45,11 +49,11 @@ info:
   text: Check out the &lpar;link: help text: help pages) for details
 ```
 
-### Themes
+## Themes
 
 The info field is displayed as a blue info box. You can switch the theme with the `theme` option, to match the importance or meaning of the information.
 
-#### Available themes:
+### Available themes
 
 - `info` (default)
 - `positive`
@@ -67,7 +71,7 @@ fields:
 (screenshot: info-negative.png)
 
 <since v="3.3.4">
-#### Disable theming
+### Disable theming
 
 You can disable the infobox theme entirely to show neutral text.
 
