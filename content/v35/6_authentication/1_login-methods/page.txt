@@ -164,10 +164,10 @@ For security, please DO NOT forward this email.
 ### Password reset
 
 **HTML template:**
-`/site/templates/emails/auth/login.html.php`
+`/site/templates/emails/auth/password-reset.html.php`
 
 **Text template:**
-`/site/templates/emails/auth/login.php`
+`/site/templates/emails/auth/password-reset.php`
 
 **Default email text:**
 ```txt "Subject: Your password reset code"
