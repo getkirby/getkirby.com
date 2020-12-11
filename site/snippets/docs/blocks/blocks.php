@@ -1,4 +1,4 @@
-## Rendering all blocks
+## Blocks in your templates
 
 If you don't want to care about the HTML for each individual block, you can echo the entire blocks collection to render all blocks.
 
@@ -12,6 +12,30 @@ If you don't want to care about the HTML for each individual block, you can echo
 The HTML for each individual block is stored in its own block snippet. All our default block types bring their own snippets and can be overwritten. Block snippets are stored in `/site/snippets/blocks`
 
 As an example, if you want to overwrite the snippet for our heading block, you would create a snippet file called `/site/snippets/blocks/heading.php`
+
+#### The default heading snippet
+
+```php
+<?= <<<'CODE'
+<<?= $level = $block->level()->or('h2') ?>>
+  <?= $block->text() ?>
+</<?= $level ?>>
+CODE;
+?>
+
+```
+
+#### Your customized version
+
+```php "/site/snippets/blocks/heading.php"
+<?= <<<'CODE'
+<<?= $level = $block->level()->or('h2') ?> id="<?= $block->customId()->or($block->id()) ?>">
+  <?= $block->text() ?>
+</<?= $level ?>>
+CODE;
+?>
+
+```
 
 ## Looping through blocks
 

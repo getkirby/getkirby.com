@@ -153,6 +153,251 @@ fields:
 
 (reference: panel/blocks)
 
+## Custom block types
+
+You can create your own Block types for the Blocks field in the same way you might already know from the famous Builder plugin. In fact, the Blocks field is our effort to embed the functionality of the Builder into the core of Kirby.
+
+Custom blocks can be defined directly in the fieldsets list:
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      - heading
+      - text
+      button:
+        name: Button
+        icon: bolt
+        fields:
+          link:
+            type: url
+          text:
+            type: text
+```
+
+In the example above, we mix the unchanged default block types (heading and text) with our own custom block type to add a call to action button
+
+### Preview
+
+Custom block types don't have a visual preview by default. They show up with the icon and the name from your blueprint definition.
+
+(screenshot: preview.png)
+
+### Editing
+
+To edit a custom block type, the editor can either double-tap on the block or click on the edit icon in the toolbar. The block drawer opens with the fields you've defined.
+
+(screenshot: editing.png)
+
+### Tabs
+
+Like in the builder field, you can also define tabs for your blocks when they need a lot of settings
+
+```yaml
+fields:
+  blocks:
+    label: Text
+    type: blocks
+    fieldsets:
+      - heading
+      - text
+      button:
+        name: Button
+        icon: bolt
+        tabs:
+          content:
+            fields:
+              link:
+                type: url
+              text:
+                type: text
+          styles:
+            fields:
+              class:
+                type: text
+              id:
+                type: text
+```
+
+The tabs will then show up in the block drawer
+
+(screenshot: tabs.png)
+
+### Global block types
+
+A more reusable way to store such a custom block type definition is in a folder called `site/blueprints/blocks`. In this case we would store it in `/site/blueprints/blocks/button.yml`:
+
+```yaml
+# /site/blueprints/blocks/button.yml
+name: Button
+icon: bolt
+tabs:
+  content:
+    fields:
+      link:
+        type: url
+      text:
+        type: text
+  styles:
+    fields:
+      class:
+        type: text
+      id:
+        type: text
+```
+
+Now, we can use it in our fieldsets option for any blocks field.
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      - heading
+      - text
+      - button
+```
+
+Of course, this also works in groups:
+
+```yaml
+fields:
+  text:
+    type: blocks
+    fieldsets:
+      text:
+        label: Text
+        type: group
+        fieldsets:
+          - heading
+          - text
+          - list
+          - button
+      media:
+        label: Media
+        type: group
+        fieldsets:
+          - image
+          - video
+      code:
+        label: Code
+        type: group
+        fieldsets:
+          - code
+          - markdown
+```
+
+### Custom block type snippet
+
+To render the HTML for your custom block type, it needs a snippet in `/site/snippets/blocks`. In this case we would create a file called `/site/snippets/blocks/button.php`
+
+```php "/site/snippets/blocks/button.php"
+<a href="<?= $block->link() ?>" class="btn">
+  <?= $block->text() ?>
+</a>
+```
+
+## Preview plugins
+
+You can turn your custom blocks into highly visual, interactive representations with a custom block preview plugin.
+
+(image: custom-preview.png class: screenshot link: docs/reference/plugins/extensions/blocks)
+
+**(link: docs/reference/plugins/extensions/blocks text: Read our plugin guide, how to create such previews.)**
+
+## Extending core blocks
+
+You can take our core blocks as a starting point for your own custom blocks and extend them with your own fields, snippets and previews. Extending our core blocks is working the same way as extending fields, tabs, sections in blueprints everywhere else.
+
+### Example: extending the heading block
+
+Let's take the heading block and add a simple text field to add a custom ID for the heading
+
+```yaml
+fields:
+  blocks:
+  type: blocks
+  fieldsets:
+    heading:
+      extends: blocks/heading
+      fields:
+        customId:
+          label: Custom ID
+          type: text
+```
+
+This will add the `customID` field below the default fields of the block.
+
+(screenshot: custom-id.png)
+
+### Extending existing fields
+
+Instead of only adding new fields, you can also adjust the field settings for the default fields of the block.
+
+Let's limit the number of heading levels for our heading block.
+
+```yaml
+fields:
+  blocks:
+  type: blocks
+  fieldsets:
+    heading:
+      extends: blocks/heading
+      fields:
+        level:
+          options:
+            - h2
+            - h3
+```
+
+You can find all block fields and their settings in the (link: docs/reference/panel/blocks text: docs for each block).
+
+### Adding tabs
+
+You can extend our core blocks with additional tabs. Be aware though that you need to recreate all default fields in this case, as tabs will replace the default fields.
+
+```yaml
+fields:
+  blocks:
+  type: blocks
+  fieldsets:
+    heading:
+      extends: blocks/heading
+      tabs:
+        content:
+          fields:
+            level:
+              type: select
+              empty: false
+              default: "h2"
+              width: 1/6
+              options:
+                - h1
+                - h2
+                - h3
+            text:
+              type: writer
+              inline: true
+              width: 5/6
+            customId:
+              label: Custom ID
+              type: text
+        styles:
+          fields:
+            backgroundColor:
+              type: select
+              options:
+                - red
+                - green
+                - blue
+            textColor:
+              type: select
+              options:
+                - white
+                - black
+```
+
 (docs: blocks/blocks)
 
 ## Configuration
