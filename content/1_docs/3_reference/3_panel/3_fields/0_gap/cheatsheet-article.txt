@@ -41,7 +41,7 @@ With conditional fields:
 ```yml
 fields:
   hasHeadline:
-    type: radio
+    type: toggle
     options:
       - yes
       - no
