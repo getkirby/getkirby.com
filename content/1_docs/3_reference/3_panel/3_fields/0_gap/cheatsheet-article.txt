@@ -42,9 +42,9 @@ With conditional fields:
 fields:
   hasHeadline:
     type: radio
-    options:
-      - yes
-      - no
+    text:  
+      - "no"
+      - "yes"
   headline:
     type: text
     width: 1/2
