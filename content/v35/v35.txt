@@ -1,2 +1,21 @@
 Title: 3.5
+----
+Blocks:
 
+```yaml
+fields:
+  blocks:
+    type: blocks
+```
+----
+Layout:
+
+```yaml
+fields:
+  layout:
+    type: layout
+    layouts:
+      - "1/1"
+      - "1/2, 1,2"
+      - "1/3, 1,3, 1/3"
+```
