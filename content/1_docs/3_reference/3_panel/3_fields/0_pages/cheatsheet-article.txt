@@ -204,7 +204,7 @@ Kirby will then either show a default page icon or the icon defined in the page 
 The `info` and `text` properties allow you to define what information is shown for each selected item (and in the modal). You can use Kirby's (link: docs/guide/blueprints/query-language text: query language) to query any information you need.
 
 ### Text
-The `text` property shows the main information for the page, by defauult that is the page title. You can however either modify what is shown and how:
+The `text` property shows the main information for the page, by default that is the page title. You can however either modify what is shown and how:
 
 ```yaml
 text: "{{ page.title.upper }}"
