@@ -339,6 +339,12 @@ templates:
   - article
 ```
 
+<since v="3.5.0">
+<info>
+If only one template is available when [adding a new page](#add-button), the template select will be hidden in the dialog (except when the [`debug` option](/docs/reference/system/options/debug) is active).
+</info>
+</since>
+
 ## "Add" button
 
 Editors can add new pages to the section with the "Add" button in the top right corner.
