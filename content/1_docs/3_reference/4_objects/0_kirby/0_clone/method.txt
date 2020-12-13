@@ -1,0 +1,13 @@
+Text:
+
+## Usage
+
+<warning>
+If you don't pass the second argument (or no argument at all), Kirby will set your new cloned instance as the global instance that is also used for handling the current request. Please never call this method like that inside a plugin unless your plugin code executes outside of request handling (e.g. in a command line interface).
+
+In most cases, it's recommended to call the method like this:
+
+```php
+$kirby->clone($props, false);
+```
+</warning>
