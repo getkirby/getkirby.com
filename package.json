@@ -50,7 +50,6 @@
     "loadjs": "^3.6.1",
     "respimage": "^1.4.2",
     "smoothscroll-polyfill": "^0.4.4",
-    "svgo": "^1.2.0",
     "svgxuse": "^1.2.6",
     "tippy.js": "^4.2.1"
   },
