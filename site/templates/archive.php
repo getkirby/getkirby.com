@@ -14,7 +14,7 @@
           <figcaption>
             <a href="<?= $version->src() ?>">
               <p><strong>Kirby Docs <?= $version->title() ?></strong></p>
-              <p><?= $version->description() ?></p>
+              <?= $version->description()->kt() ?>
             </a>
             <dl>
               <a href="<?= $version->src() ?>">
