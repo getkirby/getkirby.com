@@ -36,7 +36,7 @@ fields:
 
 Property | Type | Default | Description
 - | - | - | - |
-autofocus | `bool` | - | Sets the focus on this field when the form loads. Only the first field with this label gets
+autofocus | `bool` | - | Sets the focus on this field when the form loads. Only the first field with this property gets focus.
 default | `array` | - | Default value for the field, which will be used when a page/file/user is created
 disabled | `bool` | - | If true, the field is no longer editable and will not be saved
 empty | `string` | - | Customize the default text when the blocks field is empty
@@ -53,7 +53,7 @@ width | `string` | `1/1` | The width of the field in the field grid. Available w
 
 ## Defining Fieldsets
 
-You can fully customize the selector for new block types with sorted block types and groups. By default, the block selector just shows a single list of available block types in alphabetical order:
+By default, the block selector shows a single list of available block types in alphabetical order.
 
 ```yaml
 fields:
@@ -63,7 +63,9 @@ fields:
 
 (screenshot: single.png)
 
-When you want to change the order of available blocks, you need to list them manually with the `fieldsets` option
+However, you can fully customize the selector for new block types with sorted block types and groups. 
+
+To change the order of available blocks, list them manually with the `fieldsets` option:
 
 ```yaml
 fields:
@@ -84,9 +86,9 @@ fields:
 
 ### Groups
 
-When you work with a lot of block types – especially when you start creating your own block types – you might want to group them in the block selector to give a better overview of available options.
+You can group block types in the block selector for a better overview of the available options. This is particularly useful when your blocks lists gets longer once your start creating your own custom blocks.
 
-The Blocks field has a generic "group" block type, which can be used to create such groups.
+To create such groups, use the Blocks field's a generic "group" block type:
 
 ```yaml
 fields:
@@ -118,7 +120,7 @@ fields:
 
 ### Closed groups
 
-When your list of block types gets even longer, you can also create groups that are closed by default for block types that are not needed that frequently.
+By default, all groups are open. With very long list, you might want to close groups of blocks that are used less frequently with the `open: false` option:
 
 ```yaml
 fields:
@@ -155,9 +157,7 @@ fields:
 
 ## Custom block types
 
-You can create your own Block types for the Blocks field in the same way you might already know from the famous Builder plugin. In fact, the Blocks field is our effort to embed the functionality of the Builder into the core of Kirby.
-
-Custom blocks can be defined directly in the fieldsets list:
+You can create your own Block types for the Blocks field. Custom blocks are defined directly in the fieldsets list:
 
 ```yaml
 fields:
@@ -176,7 +176,7 @@ fields:
             type: text
 ```
 
-In the example above, we mix the unchanged default block types (heading and text) with our own custom block type to add a call to action button
+In the example above, we mix the default block types (heading and text) with our own custom block type to add a call to action button.
 
 ### Preview
 
@@ -186,13 +186,13 @@ Custom block types don't have a visual preview by default. They show up with the
 
 ### Editing
 
-To edit a custom block type, the editor can either double-tap on the block or click on the edit icon in the toolbar. The block drawer opens with the fields you've defined.
+To edit a custom block type, editors can either double-tap on the block or click on the edit icon in the toolbar. The block drawer opens with the fields you've defined for the block.
 
 (screenshot: editing.png)
 
 ### Tabs
 
-Like in the builder field, you can also define tabs for your blocks when they need a lot of settings
+You can also define tabs for your blocks when they have a lot of settings:
 
 ```yaml
 fields:
@@ -220,13 +220,13 @@ fields:
                 type: text
 ```
 
-The tabs will then show up in the block drawer
+The tabs will then show up in the block drawer.
 
 (screenshot: tabs.png)
 
 ### Global block types
 
-A more reusable way to store such a custom block type definition is in a folder called `site/blueprints/blocks`. In this case we would store it in `/site/blueprints/blocks/button.yml`:
+For reuse in multiple places, custom block type definitions can be stored in a folder called `site/blueprints/blocks`. In this case we would store it in `/site/blueprints/blocks/button.yml`:
 
 ```yaml
 # /site/blueprints/blocks/button.yml
@@ -259,7 +259,7 @@ fields:
       - button
 ```
 
-Of course, this also works in groups:
+This also works in groups:
 
 ```yaml
 fields:
@@ -290,7 +290,7 @@ fields:
 
 ### Custom block type snippet
 
-To render the HTML for your custom block type, it needs a snippet in `/site/snippets/blocks`. In this case we would create a file called `/site/snippets/blocks/button.php`
+To render the HTML for your custom block type in the frontend, create a snippet in `/site/snippets/blocks`. In this case we create a file called `/site/snippets/blocks/button.php`
 
 ```php "/site/snippets/blocks/button.php"
 <a href="<?= $block->link() ?>" class="btn">
@@ -304,11 +304,11 @@ You can turn your custom blocks into highly visual, interactive representations 
 
 (image: custom-preview.png class: screenshot link: docs/reference/plugins/extensions/blocks)
 
-**(link: docs/reference/plugins/extensions/blocks text: Read our plugin guide, how to create such previews.)**
+**(link: docs/reference/plugins/extensions/blocks text: Read our plugin guide on how to create such previews.)**
 
 ## Extending core blocks
 
-You can take our core blocks as a starting point for your own custom blocks and extend them with your own fields, snippets and previews. Extending our core blocks is working the same way as extending fields, tabs, sections in blueprints everywhere else.
+You can take our core blocks as a starting point for your own custom blocks and extend them with your own fields, snippets and previews. Extending our core blocks works the same way as extending fields, tabs or sections in blueprints everywhere else.
 
 ### Example: extending the heading block
 
@@ -433,7 +433,7 @@ return [
 
 ## Builder migration
 
-The Blocks field is replacing the popular Builder field plugin. It comes with a built-in smart importer for Builder blocks. The migration should normally be effortless.
+The Blocks field replaces the Builder field plugin. It comes with a built-in smart importer for Builder blocks. The migration should normally be effortless.
 
 ### Your blueprints
 
@@ -477,7 +477,7 @@ Builder | Blocks
 
 ## Editor migration
 
-The Blocks field is not just replacing the Builder but also our Editor field plugin. It has a built-in smart importer for Editor blocks. The migration should normally be mostly effortless. There are a couple block types that have changed though and you might need to update your editor block snippets.
+The Blocks field also replaces our Editor field plugin. It has a built-in smart importer for Editor blocks. The migration should normally be mostly effortless. There are a couple block types that have changed though and you might need to update your editor block snippets.
 
 ### Your blueprints
 
