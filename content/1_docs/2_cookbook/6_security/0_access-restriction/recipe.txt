@@ -148,21 +148,13 @@ return function ($kirby) {
   // handle the form submission
   if ($kirby->request()->is('POST') && get('login')) {
 
-    // fetch the user by username
-    if ($user = $kirby->user(get('email'))) {
-      // if the user exists, try to log them in
-      try {
-        $user->login(get('password'));
-        // redirect to the homepage
-        // if the login was successful
-        go('/');
-      } catch (Exception $e) {
-        $error = true;
-      }
-        
-    } else {
-      // make sure the alert is
-      // displayed in the template
+    // try to log the user in with the provided credentials
+    try {
+      $kirby->auth()->login(get('email'), get('password'));
+
+      // redirect to the homepage if the login was successful
+      go('/');
+    } catch (Exception $e) {
       $error = true;
     }
 
@@ -175,14 +167,11 @@ return function ($kirby) {
 };
 ```
 
-
 The login will redirect the user back to the homepage if it was successful. Otherwise the error variable is returned to the template as true and the alert is displayed. If you want to redirect the user to a different page, change the path in the `go()` method.
-
 
 ## The logout
 
 For the logout we don’t need a real page. A simple URL to send logged-in users to is enough.
-
 
 ```php "/site/config/config.php"
 return [

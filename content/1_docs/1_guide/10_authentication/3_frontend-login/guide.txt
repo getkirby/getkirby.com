@@ -1,0 +1,64 @@
+Title: Frontend login
+----
+Intro: You can access Kirby's login logic from your templates and controllers, which allows you to use all of Kirby's login methods for frontend login forms. 
+----
+Text:
+
+Kirby's `Auth` class provides the following methods that can be used for authentication. All methods will throw `Exception`s if the input is not valid.
+
+## Login with email and password
+
+```php
+$kirby->auth()->login(string $email, string $password, bool $long = false);
+```
+
+This method validates the email and password of the user and logs the user in immediately if the credentials are correct. If the `$long` parameter is set to `true`, the user will stay logged in using a "long" session (default = `false`).
+
+You can find an example how to use this method in our (link: docs/cookbook/security/access-restriction#the-login-template__the-controller text: cookbook recipe "Restricting access to your site").
+
+## Creating an authentication challenge
+
+```php
+$kirby->auth()->createChallenge(string $email, bool $long = false, string $mode = 'login');
+```
+
+By calling this method, you can create an authentication challenge (e.g. for passwordless login or password reset). Kirby will automatically choose the challenge based on the user's email address and the provided `$mode` (which can be `login` or `password-reset`) using the (link: docs/reference/system/options/auth#authentication-challenges__challenge-priority text: configured challenge priorities).
+
+The method returns the name of the challenge that was created (e.g. `'email'`) or `null` if no challenge was available for the user.
+
+<warning>
+Be careful not to leak a return value of `null` to the visitor because it could be used to tell if the user exists at all (Kirby will create and return a challenge for a valid user while it will return `null` for users that don't exist). This information could be used by attackers.
+
+Kirby (link: docs/reference/system/options/auth#authentication-challenges__challenge-priority text: "fakes" an email challenge) in this situation, which you can also do like this:
+
+```php
+// default to a faked email challenge if `null` gets returned
+$challenge = $kirby->auth()->createChallenge(...) ?? 'email';
+```
+
+The actual `null` value can be useful for special use-cases or debugging, but please don't display it to the user.
+</warning>
+
+You can detect if a challenge is active by checking the `kirby.challenge.email` key in the visitor's session. This key will always be set, even if `null` was returned from the method (for the same reasons explained in the warning above).
+
+If an actual challenge was created, the `kirby.challenge.type` session key will contain the name of the session (e.g. `'email'`). If the `kirby.challenge.email` key is set but `kirby.challenge.type` isn't, please fake a challenge to avoid leaking whether the user exists (also like explained in the warning above).
+
+## 2FA login
+
+```php
+$kirby->auth()->login2fa(string $email, string $password, bool $long = false);
+```
+
+This method is a combination of the `login()` method and the `createChallenge()` method: It will first validate the password and then create an authentication challenge (which will be returned from the method like explained above). The user is only logged in after both steps are done.
+
+<warning>
+The warning from the section above also applies here.
+</warning>
+
+## Verifying a provided code
+
+Once the user enters the code you requested with the `createChallenge()` or `login2fa()` methods, all you need to do is to call the `verifyChallenge()` method and Kirby will automatically check if the code is correct:
+
+```php
+$kirby->auth()->verifyChallenge(string $code);
+```
