@@ -2,7 +2,7 @@ Title: v1
 
 ----
 
-Description: Kirby 1 has reached its end of life and is no longer supported by us.
+Description: Kirby 1 has reached its **end of life** on Feb&nbsp;1,&nbsp;2016 and is no longer supported by us.
 
 ----
 

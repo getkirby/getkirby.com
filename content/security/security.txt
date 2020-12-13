@@ -51,7 +51,7 @@ Supported:
 -
     version: 1.*
     status: end-of-life
-    description: ❌ Not supported
+    description: ❌ Not supported (end of life) since February 1, 2016
 
 ----
 
