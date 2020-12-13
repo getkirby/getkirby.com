@@ -142,7 +142,7 @@
         <?php snippet('v35/feature', [
           'headline' => 'Date & Time',
           'image' => $page->image('date.png'),
-          'text' => 'We‘ve never been really happy with our date field and many of you weren‘t either. The new date and time fields are a joy to work with and open completely new ways to enter dates.'
+          'text' => 'The new date and time fields are a joy to work with and open completely new ways to enter dates with custom date formats and intervals.'
         ]) ?>
 
         <?php snippet('v35/feature', [
@@ -160,19 +160,19 @@
         <?php snippet('v35/feature', [
           'headline' => 'List field',
           'image' => $page->image('list.png'),
-          'text' => 'As another spin-off of the Blocks field, we also added a new list field, which can be used if you need to create simple ordered or unordered lists in a more visual way than with Markdown.'
+          'text' => 'The new list field can be used if you want to create simple ordered or unordered lists in a more visual way than with Markdown.'
         ]) ?>
 
         <?php snippet('v35/feature', [
           'headline' => 'Title & URL',
           'image' => $page->image('unified-dialog.png'),
-          'text' => 'Renaming a page title or changing the page URL is now done in the same dialog. With this simplified workflow you can instantly see when your Page title and slug no longer matches and need to be updated.'
+          'text' => 'Changing the page title or the page URL is now done in the same dialog. With this simplified workflow you can instantly see when your Page title and slug no longer match and should be updated.'
         ]) ?>
 
         <?php snippet('v35/feature', [
           'headline' => 'Status icons',
           'image' => $page->image('status-icon.png'),
-          'text' => 'Our page status icons are now accessible with distinctive forms that no longer challenge people with color blindness.'
+          'text' => 'Kirby\'s page status icons now have distinctive forms to make them accessible for people with color blindness.'
         ]) ?>
       </div>
     </section>
