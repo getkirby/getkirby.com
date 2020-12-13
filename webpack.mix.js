@@ -57,7 +57,6 @@ mix.options({
 /* -------------------------------------------------------------------------- */
 
 mix.js("src/js/index.js", "js");
-mix.js("src/js/polyfills/respimage.js", "js/polyfills");
 
 /* Search for template-specific JavaScript files */
 const templateJS = glob.sync("./src/js/templates/*.js");
