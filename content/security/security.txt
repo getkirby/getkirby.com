@@ -44,9 +44,9 @@ Supported:
     description: ✅ No known vulnerabilities
 
 -
-    version: ^2.5.14
-    status: security-support
-    description: ⚠️ Security support until 31.12.2020, no active development
+    version: 2.*
+    status: end-of-life
+    description: ❌ Not supported (end of life) since January 1, 2021
 
 -
     version: 1.*
