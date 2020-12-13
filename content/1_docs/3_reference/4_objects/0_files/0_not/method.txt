@@ -23,7 +23,7 @@ You can also use an array of ids, collections or objects or a mixture of them to
 #### An array of ids
 
 ```php
-$files = $page->images->>not(['image-a.jpg', 'image-b.jpg']);
+$files = $page->images()->not(['image-a.jpg', 'image-b.jpg']);
 ```
 
 #### An array of objects
