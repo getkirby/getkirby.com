@@ -81,7 +81,7 @@ function formatDatatype(?string $type = null): ?string
 
         if (in_array('', $types)) {
             // Don’t process code blocks, that contain empty elements
-            return "<code>{$type}</code>"; 
+            return "<code>{$type}</code>";
         }
 
         $types = array_map(function ($value) {
@@ -167,6 +167,10 @@ function icon(string $name, bool $return = false, array $attr = null)
 
 function referenceLookup(string $class)
 {
+    if (option('referenceLookup') === false) {
+        return false;
+    }
+
     $roots = [
         'docs/reference/objects',
         'docs/reference/tools',

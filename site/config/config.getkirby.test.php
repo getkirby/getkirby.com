@@ -2,4 +2,5 @@
 
 return [
     'debug' => true,
+    'referenceLookup' => false
 ];

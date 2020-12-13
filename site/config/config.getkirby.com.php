@@ -18,5 +18,6 @@ return [
     'cloudinary' => true,
     'keycdn' => [
         'domain' => 'https://assets.getkirby.com',
-    ]
+    ],
+    'referenceLookup' => true
 ];

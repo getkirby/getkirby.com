@@ -4,7 +4,7 @@
     <a data-lightbox href="<?= $image->url() ?>">
       <figure>
         <span><?= $image ?></span>
-        <figcaption>Perfect HTML</figcaption>
+        <figcaption><?= $image->caption()->kt() ?></figcaption>
       </figure>
     </a>
   </li>
