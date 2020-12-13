@@ -39,7 +39,7 @@ In a default installation, the web root folder is located under `programs/XAMPP/
 
 ## PHP's built-in server
 
-If PHP 7.1+ is already installed on your system and you are fine using the command line, you can spin up PHP's built-in server from the command line, specifying the `kirby/router.php` file to use Kirby's router.
+If a recent PHP version that (link: docs/guide/quickstart#requirements text: supports Kirby) is already installed on your system and you are fine using the command line, you can spin up PHP's built-in server from the command line, specifying the `kirby/router.php` file to use Kirby's router.
 
 ```bash
 cd ~/path-to-your-kirby-project
@@ -82,7 +82,3 @@ Follow their (link: https://www.vagrantup.com/intro/getting-started/index.html t
 ## Laravel Homestead
 
 (link: https://laravel.com/docs/5.8/homestead text: Laravel Homestead) is an official, pre-packaged Vagrant box and provides a full-featured virtual development environment, that doesn't require you to install PHP, a web server, or any other server software on your computer. Homestead runs on Windows, Mac, or Linux systems.
-
-
-
-
