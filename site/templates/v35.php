@@ -38,7 +38,7 @@
             <aside class="mb-12">
               <h3 class="text-xl mb-3">Highlights</h3>
               <?php snippet('v35/gallery', [
-                'images' => $page->images()->find('blocks-selector.png', 'blocks-settings.png', 'blocks-plugins.png')
+                'images' => ['blocks-selector', 'blocks-settings', 'blocks-plugins']
               ]) ?>
             </aside>
             <p><a class="btn-link" href="<?= url('docs/reference/panel/fields/blocks') ?>">Learn more</a></p>
@@ -71,7 +71,7 @@
             <aside class="mb-12">
               <h3 class="text-xl mb-3">Highlights</h3>
               <?php snippet('v35/gallery', [
-                'images' => $page->images()->find('layout-blocks.png', 'layout-selector.png', 'layout-settings.png')
+                'images' => ['layout-blocks', 'layout-selector', 'layout-settings']
               ]) ?>
             </aside>
             <p><a class="btn-link" href="<?= url('docs/reference/panel/fields/layout') ?>">Learn more</a></p>
@@ -80,7 +80,7 @@
       </div>
     </section>
 
-    <section class="v35-section bg-black">
+    <section class="v35-auth v35-section bg-black">
       <div class="v35-container">
         <h2 class="text-2xl">Authentication</h2>
 
@@ -100,21 +100,7 @@
               <p><a class="btn-link" href="">Learn more</a></p>
             </div>
           </article>
-          <article class="column" style="--columns: 4">
-            <header>
-              <h3 class="text-2xl mb-6" style="color: var(--color-code-aqua)">2FA</h3>
-            </header>
-            <div class="text text-lg">
-              <p>Secure standard password-based authentication with an additional one-time code verification layer for increased security.</p>
-              <?php snippet('v35/image', [
-                'image' => $page->image('login.png')
-              ]) ?>
-              <?php snippet('v35/image', [
-                'image' => $page->image('login-code.png')
-              ]) ?>
-              <p><a class="btn-link" href="">Learn more</a></p>
-            </div>
-          </article>
+
           <article class="column" style="--columns: 4">
             <header>
               <h3 class="text-2xl mb-6" style="color: var(--color-code-purple)">Password reset</h3>
@@ -133,6 +119,23 @@
               <p><a class="btn-link" href="">Learn more</a></p>
             </div>
           </article>
+
+          <article class="column" style="--columns: 4">
+            <header>
+              <h3 class="text-2xl mb-6" style="color: var(--color-code-aqua)">2FA</h3>
+            </header>
+            <div class="text text-lg">
+              <p>Secure standard password-based authentication with an additional one-time code verification layer for increased security.</p>
+              <?php snippet('v35/image', [
+                'image' => $page->image('login.png')
+              ]) ?>
+              <?php snippet('v35/image', [
+                'image' => $page->image('login-code.png')
+              ]) ?>
+              <p><a class="btn-link" href="">Learn more</a></p>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
@@ -171,7 +174,7 @@
 
         <?php snippet('v35/feature', [
           'headline' => 'Status icons',
-          'image' => $page->image('status-icon.png'),
+          'image' => $page->image('status-icons.png'),
           'text' => 'Kirby\'s page status icons now have distinctive forms to make them accessible for people with color blindness.'
         ]) ?>
       </div>
@@ -230,17 +233,36 @@
 
   <footer class="v35-footer v35-section bg-black">
     <div class="v35-container">
-      <a class="btn" href="<?= url('try') ?>">
-        <?php icon('download') ?>
-        Try 3.5 now
-      </a>
 
-      <nav class="v35-social">
-        <a href="https://twitter.com/getkirby"><?= icon('twitter') ?></a>
-        <a href="https://chat.getkirby.com"><?= icon('discord') ?></a>
-        <a href="https://instagram.com/getkirby"><?= icon('instagram') ?></a>
-        <a href="https://github.com/getkirby"><?= icon('github') ?></a>
-      </nav>
+      <p class="v35-kirby color-gray-400 text-lg">
+        <a href="<?= url() ?>"><strong>Kirby:</strong> the file-based CMS that adapts to any project, loved by developers and editors alike</a>
+      </p>
+
+      <div class="v35-footer-cta">
+        <nav class="v35-buttons">
+          <a class="btn" href="<?= url('try') ?>">
+            <?php icon('download') ?>
+            Try
+          </a>
+          <span>&rsaquo;</span>
+          <a class="btn" href="<?= url('love') ?>">
+            <?php icon('love') ?>
+            Love
+          </a>
+          <span>&rsaquo;</span>
+          <a class="btn" href="<?= url('love') ?>">
+            <?php icon('cart') ?>
+            Buy
+          </a>
+        </nav>
+
+        <nav class="v35-social">
+          <a href="https://twitter.com/getkirby"><?= icon('twitter') ?></a>
+          <a href="https://chat.getkirby.com"><?= icon('discord') ?></a>
+          <a href="https://instagram.com/getkirby"><?= icon('instagram') ?></a>
+          <a href="https://github.com/getkirby"><?= icon('github') ?></a>
+        </nav>
+      </div>
     </div>
   </footer>
 

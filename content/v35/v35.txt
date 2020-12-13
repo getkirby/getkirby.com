@@ -155,12 +155,12 @@ Stats:
 - 261 commits
 - 67 closed PRs and issues
 - Contributors (alphabetical order):
-  - @afbora
-  - @bastianallgeier
-  - @distantnative
-  - @lukasbestle
-  - @neildaniels
-  - @pedroborges
+  - (link: https://github.com/afbora text: @afbora)
+  - (link: https://github.com/bastianallgeier text: @bastianallgeier)
+  - (link: https://github.com/distantnative text: @distantnative)
+  - (link: https://github.com/lukasbestle text: @lukasbestle)
+  - (link: https://github.com/neildaniels text: @neildaniels)
+  - (link: https://github.com/pedroborges text: @pedroborges)
 
 ----
 

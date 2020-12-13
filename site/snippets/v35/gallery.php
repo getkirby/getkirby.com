@@ -1,9 +1,13 @@
 <ul class="v35-gallery">
-  <?php foreach ($images as $image): ?>
+  <?php foreach ($images as $filename): ?>
+  <?php
+  $image = page()->images()->findBy('name', $filename);
+  $thumb = page()->images()->findBy('name', $filename . '-thumb') ?? $image;
+  ?>
   <li>
     <a data-lightbox href="<?= $image->url() ?>">
       <figure>
-        <span><?= $image ?></span>
+        <span><?= $thumb ?></span>
         <figcaption><?= $image->caption()->kt() ?></figcaption>
       </figure>
     </a>
