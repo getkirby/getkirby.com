@@ -1,4 +1,3 @@
-
 Title: File blueprints
 
 ----
@@ -85,7 +84,7 @@ The accept option in this example limit file uploads to `.jpg` and `.png` images
 title: Cover
 
 accept:
-  mime: image/jpeg, image/png
+  extension: jpg, png
 
 fields:
   alt:
