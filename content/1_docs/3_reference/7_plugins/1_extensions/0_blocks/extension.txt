@@ -12,7 +12,7 @@ The default preview for custom blocks is nice, but it can be even better! You ca
 
 ## Simple preview
 
-The easiest way to get started with block previews is a with a Vue component that only generates a bit of HTML for the block.
+The easiest way to get started with block previews is a Vue component that only generates a bit of HTML for the block.
 
 Let's use a custom call to action button block as example for this plugin guide:
 
@@ -43,7 +43,7 @@ Create a new folder called `/site/plugins/button` and add an `index.php`, `index
 
 ### index.php
 
-The `index.php` file is only there so far to tell Kirby the plugin exists. You can use it later to define a default blueprint and snippet for your block, but we leave this out for now.
+For starters, the `index.php` file will do nothing but tell Kirby that the plugin exists. Later, we will add a default blueprint and snippet for the block, but we skip this for the moment.
 
 ```php "/site/plugins/button/index.php"
 <?php
@@ -53,7 +53,7 @@ Kirby::plugin('your-project/button-block', []);
 
 ### index.js
 
-The `index.js` file will be the place to register your Vue component for the Panel and create the template for your block. You can write it in simple vanilla JS, or you can go for a full-blown setup with build process to work with Vue single-file-components. We keep it simple for this example.
+The `index.js` file is the place to register your Vue component for the Panel and create the template for your block. You can write it in simple vanilla JS, or you can go for a full-blown setup with build process to work with Vue single-file-components. We keep it simple for this example.
 
 ```js "/site/plugins/button/index.js"
 panel.plugin("your-project/button-block", {
@@ -67,13 +67,13 @@ panel.plugin("your-project/button-block", {
 });
 ```
 
-In its most simple form, the button block can be just an HTML template string that renders the block preview.
+In its most basic form, the button block is just an HTML template string that renders the block preview.
 
 As you can see in the template above, there are a few things that don't look like vanilla JS and come from Vue.
 
-With `@click="open"` we react to the click event of the button and call the open method that every block automatically has. This open method will then open the block drawer with the form fields you've defined in the blueprint for the block.
+With `@click="open"` we react to the click event of the button and call the `open` method that every block has. This `open` method will open the block drawer with the form fields you defined in the blueprint for the block.
 
-Every block also has access to a `content` object that has all the values for your fields. With `{{ content.text }}` we can render the value of the text field for your button. `{{ content.link }}` would print the URL.
+Every block also has access to a `content` object with all the values of your fields. With `{{ content.text }}` we can render the value of the text field for the button. `{{ content.link }}` would print the URL.
 
 ### index.css
 
@@ -97,11 +97,11 @@ We can finally polish our preview with a little bit of CSS.
 }
 ```
 
-Every block in the Panel will automatically have a class name that reflects the type (i.e. `k-block-type-button`, `k-block-type-heading`) Styling the content of the blocks is really easy that way. Of course you can add additional class names to elements inside your button previews as well for even better control.
+Every block in the Panel has a default class name that reflects the block type (i.e. `k-block-type-button`, `k-block-type-heading`) for easy styling. For more control, add additional class names to elements inside your previews.
 
 ### The final result
 
-Instead of the generic preview, we will now see a much more visual representation of the button we are creating. Feel free to add your own styles and make that button even nicer.
+Instead of the generic preview, we will now see a much more visual representation of the button we created. Add your own styles to adapt the button to your design.
 
 (screenshot: custom-preview.png)
 
@@ -134,11 +134,11 @@ See the magic happen …
 
 Let's talk about the code a bit more. We use a regular HTML text input and put a little bit of Vue.js magic on top of it.
 
-With `:value="content.text"` we can feed the value from the text field into our input. The : is Vue's syntax for passing non-string attribute values.
+With `:value="content.text"` we can feed the value from the text field into our input. The `:` is Vue's syntax for passing non-string attribute values.
 
 We listen to the `input` event of the input field by using Vue's `@input` event listener syntax.
 
-Our block components have an update method, which we can use to tell the Blocks field that the block content has changed. The update method will merge the content object, with whatever we pass as argument.
+Our block components have an update method, which we can use to tell the Blocks field that the block content has changed. The update method will merge the content object with whatever we pass as an argument.
 
 With `{ text: 'Something' }` we can only update the text field of the block. With `$event.target.value`, we fetch the current value of the input field whenever the value changes.
 
@@ -191,7 +191,7 @@ To wrap this up, we need to adjust our CSS file a bit to make it work with the i
 
 ## Single file components
 
-All examples above are written in plain JS. You don't need a build process to create such preview plugins. But if you want to go further and use Vue's brilliant single file components, you would need to look into our (link: docs/guide/plugins/plugin-setup-panel text: pluginkit) for Panel plugins that comes with a full build process and parses Vue single file components. You can switch the example above to a single file component in no time:
+All examples above are written in plain JS. You don't need a build process to create such preview plugins. But if you want to go further and use Vue's brilliant single file components, you need to look into our (link: docs/guide/plugins/plugin-setup-panel text: pluginkit) for Panel plugins that comes with a full build process and parses Vue single file components. You can then switch the example above to a single file component in no time:
 
 ```html "/site/plugins/button/components/Button.vue"
 <template>
@@ -243,11 +243,11 @@ When using single file components, you store your CSS directly with the componen
 
 ## Full block plugins
 
-So far, we've created a preview plugin for a custom block that we defined in our blueprints. We can extend our plugin even more to include the blueprint definition and snippet to share as stand-alone blocks with other projects or Kirby users.
+We now created a preview plugin for a custom block that we defined in our blueprints. We can extend our plugin to include the blueprint definition and snippet to share as stand-alone blocks with other projects or Kirby users.
 
 ### Adding a default blueprint and snippet
 
-As a first step you need to reference the custom snippet and blueprint in the index.php of your plugin.
+As a first step, register the custom snippet and blueprint in the index.php of your plugin:
 
 ```php "/site/plugins/button/index.php"
 <?php
@@ -261,6 +261,8 @@ Kirby::plugin('your-project/button-block', [
   ]
 ]);
 ```
+
+Then, add the blueprint definition and the snippet code in their respective files:
 
 ### Blueprint
 
