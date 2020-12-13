@@ -24,7 +24,7 @@ display: DD.MM.YYYY
 display: MM/DD/YYYY
 ```
 
-The following tokens are supported:
+The following tokens are supported for the `date` field:
 
 | Token | Output | Description |
 |--|--|--|
@@ -36,6 +36,11 @@ The following tokens are supported:
 | `MMMM` | January-December | Full month name
 | `D` | 1-31 | Day of the month
 | `DD` | 01-31 | Day of the month, 2-digits
+
+The following tokens are supported for the `time` field:
+
+| Token | Output | Description |
+|--|--|--|
 | `H` | 0-23 | Hour
 | `HH` | 00-23 | Hour, 2-digits
 | `h` | 1-12 | Hour, 12-hour clock
@@ -115,7 +120,7 @@ myMonth:
 It's important to keep in mind that a full date is still stored in the content file, e.g. `2020-05-01` in this case. You need to adapt your frontend output as well to only show month and year, e.g. `$page->myMonth()->toDate('F Y')`.
 </info>
 
-## What's about time?
+## What about time?
 
 So all this also applies to the time field:
 
@@ -128,13 +133,15 @@ myTime:
     size: 15
 ```
 
-And of course you can also have your date and time field again:
+If you want to use a `date` field combined with time, make sure to specify the `display` options separately:
+
 
 ```yaml
 myDateTime:
   type: date
-  display: DD.MM.YYYY HH:mm
-  time: true
+  display: MM/DD/YYYY
+  time:
+    display: h.mm a
 ```
 
 ## What else
