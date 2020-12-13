@@ -2,12 +2,10 @@ node_modules
 .vscode
 .idea
 .DS_Store
-/backstop_data
 /www/media
 /site/accounts
 /site/cache
 /site/config/keys
 /site/config/.license
 /site/sessions
-/backstop.json
 /config.json
