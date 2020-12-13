@@ -223,3 +223,21 @@ $result = $kirby->impersonate('kirby', function () {
 
 The impersonation automatically gets reset to the previous value after the callback returns.
 </since>
+
+<since v="3.5.0">
+#### Disable all permissions
+
+It is also possible to disable all permissions, even if a user is currently logged in. This is useful for operations where you want to ensure that no changes are made to the site (read-only access):
+
+```php
+<?php
+
+$kirby = kirby();
+$kirby->impersonate('nobody');
+
+// later in the code: an unwanted update, which will now fail
+page('notes/a-great-article')->update([
+  'author' => 'Homer Simpson'
+]);
+```
+</since>
