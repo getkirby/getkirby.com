@@ -2,7 +2,7 @@ Title: Database
 
 ----
 
-Description: Connecting to a database and querying results
+Description: Connect to a database and query results.
 
 ----
 

@@ -20,6 +20,7 @@ Get productive:
     - users
 Get advanced:
     - configuration
+    - authentication
     - routing
     - cache
     - emails
@@ -27,7 +28,6 @@ Get advanced:
 Get pro:
     - virtual-pages
     - api
-    - sessions
     - plugins
 Get secure:
     - security
