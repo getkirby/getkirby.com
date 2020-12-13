@@ -1,7 +1,7 @@
 Title: v2
 ----
 
-Description: Kirby 2 will be supported by us with security updates until December 31, 2020
+Description: Kirby 2 has reached its **end of life** on Jan&nbsp;1,&nbsp;2021 and is no longer supported by us.
 
 ----
 
