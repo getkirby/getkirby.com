@@ -96,4 +96,34 @@ return [
             go('kosmos/' . $path);
         }
     ],
+    [
+        'pattern' => 'releases',
+        'action'  => function () {
+            return false;
+        }
+    ],
+    [
+        'pattern' => 'releases/(:num)\-(:num)',
+        'action'  => function ($generation, $major) {
+            return go('releases/' . $generation . '.' . $major);
+        }
+    ],
+    [
+        'pattern' => 'releases/(:num)\.(:num)',
+        'action'  => function ($generation, $major) {
+            return page('releases/' . $generation . '-' . $major);
+        }
+    ],
+    [
+        'pattern' => 'v3',
+        'action'  => function () {
+            return go('releases/3.0');
+        }
+    ],
+    [
+        'pattern' => 'v35',
+        'action'  => function () {
+            return go('releases/3.5');
+        }
+    ],
 ];

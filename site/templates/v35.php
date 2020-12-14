@@ -250,7 +250,7 @@
             Love
           </a>
           <span>&rsaquo;</span>
-          <a class="btn" href="<?= url('love') ?>">
+          <a class="btn" href="<?= url('buy') ?>">
             <?php icon('cart') ?>
             Buy
           </a>
