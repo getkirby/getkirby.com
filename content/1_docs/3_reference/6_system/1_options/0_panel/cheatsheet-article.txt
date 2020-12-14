@@ -81,7 +81,7 @@ return [
 ];
 ```
 
-## KirbyText
+## KirbyText/Markdown
 
 If false, the Panel formatting buttons and drag and drop for files and links will create regular (glossary: Markdown) instead of (glossary: kirbytag text: KirbyTags).
 
@@ -93,6 +93,34 @@ return [
 ];
 ```
 
+### Drag texts
 
+<since v="3.4.3">
+You can define custom callback functions (`pageDragText` or `fileDragText`) for the text that gets inserted when dragging a page or a file on a textarea, e.g.
+
+```php
+return [
+  'panel' => [
+        'kirbytext' => [
+            'fileDragText' => function(\Kirby\Cms\File $file, $url) {
+                if($file->extension() === 'jpg') {
+                    return sprintf('(screenshot: %s)', $url);
+                }
+        
+                if($file->type() === 'video') {
+                    return sprintf('(video: %s loop: true)', $url);
+                }
+        
+                return null;
+            },
+            'pageDragText' => function (\Kirby\Cms\Page $page) {
+                return sprintf('Check out this great page: %s', $page->url());
+            },
+            
+        ],
+    ],
+];
+```
+</since>
 
 

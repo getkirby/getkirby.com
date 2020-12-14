@@ -26,23 +26,3 @@ The default height that is added to Youtube and Vimeo iframes (default: `false` 
 
 ### `width`
 The default width that is added to Youtube and Vimeo iframes (default: `false` = no width)
-
-## Drag texts
-
-<since v="3.4.3">
-You can define custom callback functions (`pageDragText` or `fileDragText`) for the text that gets inserted when dragging a page or a file on a textarea, e.g.
-
-```php
-return [
-  'kirbytext' => [
-    'fileDragText' => function (Kirby\Cms\File $file, string $url) {
-        if ($file->extension() === 'heic') {
-            return sprintf('(image: %s)', $url);
-        }
-
-        return null;
-    },
-  ]
-];
-```
-</since>
