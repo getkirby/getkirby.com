@@ -153,6 +153,7 @@ main h1, main h2, main h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .v35-buttons {
   display: flex;

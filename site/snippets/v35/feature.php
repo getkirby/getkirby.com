@@ -5,6 +5,7 @@
   <div class="column" style="--columns: 6">
     <a href="<?= $image->url() ?>" data-lightbox>
       <img
+        class="<?= $class ?? null ?>"
         loading="lazy"
         src="<?= $image->resize(600)->url() ?>"
         srcset="<?= $image->srcset([

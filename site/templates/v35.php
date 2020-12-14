@@ -201,6 +201,14 @@
           'image' => $page->image('status-icons.jpg'),
           'text' => 'Kirby\'s page status icons now have distinctive forms to make them accessible for people with color blindness.'
         ]) ?>
+
+        <?php snippet('v35/feature', [
+          'headline' => 'New starterkit',
+          'image' => $page->image('starterkit.jpg'),
+          'class' => 'shadow',
+          'text' => 'We completely overhauld Kirby’s Starterkit to feature a new design together with the new blocks and layout fields.',
+          'link' => 'https://github.com/getkirby/starterkit'
+        ]) ?>
       </div>
     </section>
 
