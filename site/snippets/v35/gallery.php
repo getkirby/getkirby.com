@@ -7,7 +7,19 @@
   <li>
     <a data-lightbox href="<?= $image->url() ?>">
       <figure>
-        <span><?= $thumb ?></span>
+        <span>
+          <img
+            loading="lazy"
+            class="shadow"
+            src="<?= $thumb->resize(200)->url() ?>"
+            srcset="<?= $thumb->srcset([
+              200 => '1x',
+              400 => '2x'
+            ])?>"
+            alt="<?= $image->alt() ?>"
+          />
+          <?= $thumb ?>
+        </span>
         <figcaption><?= $image->caption()->kt() ?></figcaption>
       </figure>
     </a>

@@ -45,7 +45,17 @@
           </article>
           <figure class="column" style="--columns: 6">
             <a href="<?= url('docs/reference/panel/fields/blocks') ?>">
-              <?= $page->image('blocks.png') ?>
+              <?php if ($image = $page->image('blocks.jpg')): ?>
+              <img
+                loading="lazy"
+                src="<?= $image->resize(700)->url() ?>"
+                srcset="<?= $image->srcset([
+                  700 => '1x',
+                  1400 => '2x'
+                ]) ?>"
+                alt="The new blocks field"
+              >
+              <?php endif ?>
             </a>
           </figure>
         </div>
@@ -57,7 +67,18 @@
         <div class="grid">
           <figure class="column" style="--columns: 6">
             <a href="<?= url('docs/reference/panel/fields/layout') ?>">
-              <?= $page->image('layouts.png')->html(['class' => 'shadow']) ?>
+              <?php if ($image = $page->image('layouts.jpg')): ?>
+              <img
+                loading="lazy"
+                class="shadow"
+                src="<?= $image->resize(700)->url() ?>"
+                srcset="<?= $image->srcset([
+                  700 => '1x',
+                  1400 => '2x'
+                ]) ?>"
+                alt="The new layouts field"
+              >
+              <?php endif ?>
             </a>
           </figure>
           <article class="column" style="--columns: 6">
@@ -92,12 +113,12 @@
             <div class="text text-lg">
               <p>With 3.5 we are introducing major enhancements for our login flow. Enable password-less login for secure, one-time code authentication.</p>
               <?php snippet('v35/image', [
-                'image' => $page->image('login-passwordless.png')
+                'image' => $page->image('login-passwordless.jpg')
               ]) ?>
               <?php snippet('v35/image', [
-                'image' => $page->image('login-code.png')
+                'image' => $page->image('login-code.jpg')
               ]) ?>
-              <p><a class="btn-link" href="">Learn more</a></p>
+              <p><a class="btn-link" href="<?= url('docs/guide/authentication/login-methods') ?>">Learn more</a></p>
             </div>
           </article>
 
@@ -108,15 +129,15 @@
             <div class="text text-lg">
               <p>With our new authentication enhancements, we are now also offering a secure way for your users to reset their passwords.</p>
               <?php snippet('v35/image', [
-                'image' => $page->image('password-reset-email.png')
+                'image' => $page->image('password-reset-email.jpg')
               ]) ?>
               <?php snippet('v35/image', [
-                'image' => $page->image('password-reset-code.png')
+                'image' => $page->image('password-reset-code.jpg')
               ]) ?>
               <?php snippet('v35/image', [
-                'image' => $page->image('password-reset.png')
+                'image' => $page->image('password-reset.jpg')
               ]) ?>
-              <p><a class="btn-link" href="">Learn more</a></p>
+              <p><a class="btn-link" href="<?= url('docs/guide/authentication/password-reset-form') ?>">Learn more</a></p>
             </div>
           </article>
 
@@ -127,12 +148,12 @@
             <div class="text text-lg">
               <p>Secure standard password-based authentication with an additional one-time code verification layer for increased security.</p>
               <?php snippet('v35/image', [
-                'image' => $page->image('login.png')
+                'image' => $page->image('login.jpg')
               ]) ?>
               <?php snippet('v35/image', [
-                'image' => $page->image('login-code.png')
+                'image' => $page->image('login-code.jpg')
               ]) ?>
-              <p><a class="btn-link" href="">Learn more</a></p>
+              <p><a class="btn-link" href="<?= url('docs/guide/authentication/frontend-login') ?>">Learn more</a></p>
             </div>
           </article>
 
@@ -144,37 +165,40 @@
       <div class="v35-container">
         <?php snippet('v35/feature', [
           'headline' => 'Date & Time',
-          'image' => $page->image('date.png'),
-          'text' => 'The new date and time fields are a joy to work with and open completely new ways to enter dates with custom date formats and intervals.'
+          'image' => $page->image('date.jpg'),
+          'text' => 'The new date and time fields are a joy to work with and open completely new ways to enter dates with custom date formats and intervals.',
+          'link' => 'docs/reference/panel/fields/date'
         ]) ?>
 
         <?php snippet('v35/feature', [
           'headline' => 'Quicksearch',
-          'image' => $page->image('search.png'),
+          'image' => $page->image('search.jpg'),
           'text' => 'The Panel search has been redesigned and now shows nice previews for pages, files and users.'
         ]) ?>
 
         <?php snippet('v35/feature', [
           'headline' => 'Writer field',
-          'image' => $page->image('writer.png'),
-          'text' => 'You don’t need the full power of the Blocks? Maybe just some inline HTML? Then the new Writer field is here for you. Create single-line HTML with formats like bold, italic, underline or links'
+          'image' => $page->image('writer.jpg'),
+          'text' => 'You don’t need the full power of the Blocks? Maybe just some inline HTML? Then the new Writer field is here for you. Create single-line HTML with formats like bold, italic, underline or links',
+          'link' => 'docs/reference/panel/fields/writer'
         ]) ?>
 
         <?php snippet('v35/feature', [
           'headline' => 'List field',
-          'image' => $page->image('list.png'),
-          'text' => 'The new list field can be used if you want to create simple ordered or unordered lists in a more visual way than with Markdown.'
+          'image' => $page->image('list.jpg'),
+          'text' => 'The new list field can be used if you want to create simple ordered or unordered lists in a more visual way than with Markdown.',
+          'link' => 'docs/reference/panel/fields/list'
         ]) ?>
 
         <?php snippet('v35/feature', [
           'headline' => 'Title & URL',
-          'image' => $page->image('unified-dialog.png'),
+          'image' => $page->image('unified-dialog.jpg'),
           'text' => 'Changing the page title or the page URL is now done in the same dialog. With this simplified workflow you can instantly see when your Page title and slug no longer match and should be updated.'
         ]) ?>
 
         <?php snippet('v35/feature', [
           'headline' => 'Status icons',
-          'image' => $page->image('status-icons.png'),
+          'image' => $page->image('status-icons.jpg'),
           'text' => 'Kirby\'s page status icons now have distinctive forms to make them accessible for people with color blindness.'
         ]) ?>
       </div>
@@ -273,7 +297,7 @@
   Array.from(document.querySelectorAll("[data-lightbox]")).forEach(element => {
     element.onclick = (e) => {
       e.preventDefault();
-      basicLightbox.create(`<img src="${element.href}">`).show();
+      basicLightbox.create(`<img loading="lazy" src="${element.href}">`).show();
     };
   });
   </script>

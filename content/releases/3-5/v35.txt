@@ -28,6 +28,7 @@ Features:
 - It's now possible to pass `nobody` to `$kirby->impersonate()` to switch to a user without permissions.
 - New `$user->nameOrEmail()` method
 - Interval handling for the calendar component
+- More detailed accept options for file blueprints
 - New UI kit components
   - New dialogs to sort pages and files
   - New help option for headline and info fields
@@ -53,6 +54,7 @@ Features:
 
 Enhancements:
 
+- Support for PHP 8
 - Updated translations
 - Support for hashes in router links #2941
 - Better structure field preview for date + time field
@@ -75,6 +77,8 @@ Enhancements:
 - Concurrent sort API calls are now prevented #2863
 - Faster unit tests
 - We are now using Cypress for frontend tests
+- Faster file cache access
+- Better debouncing of input events to increase performance
 
 ----
 Breaking:
