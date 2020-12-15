@@ -23,7 +23,18 @@
         <form class="demo" action="https://<?= r(param('demo') === 'staging', 'staging.') ?>trykirby.com" method="POST">
           <h2 class="h3">Personal Demo</h2>
           <figure>
-            <button class="button-reset"><?= $page->image('interface.png')->resize(800) ?></button>
+            <button class="button-reset">
+              <?php if($image = $page->image('interface.jpg')): ?>
+              <img
+                src="<?= $image->resize(800)->url() ?>"
+                srcset="<?= $image->srcset([
+                  800 => '1x',
+                  1600 => '2x'
+                ]) ?>"
+                alt="The dashboard of the Panel in our online demo"
+              />
+              <?php endif ?>
+            </button>
           </figure>
 
           <div class="grid -mb:medium">

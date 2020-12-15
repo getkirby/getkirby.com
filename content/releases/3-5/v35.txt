@@ -156,8 +156,8 @@ Bugs:
 
 Stats:
 
-- 261 commits
-- 67 closed PRs and issues
+- 407 commits
+- 104 closed issues and PRs
 - Contributors (alphabetical order):
   - (link: https://github.com/afbora text: @afbora)
   - (link: https://github.com/bastianallgeier text: @bastianallgeier)
