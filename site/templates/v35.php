@@ -206,7 +206,7 @@
           'headline' => 'New starterkit',
           'image' => $page->image('starterkit.jpg'),
           'class' => 'shadow',
-          'text' => 'We completely overhauld Kirby’s Starterkit to feature a new design together with the new blocks and layout fields.',
+          'text' => 'We completely overhauled Kirby’s Starterkit to feature a new design together with the new blocks and layout fields.',
           'link' => 'https://github.com/getkirby/starterkit'
         ]) ?>
       </div>
