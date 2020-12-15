@@ -34,7 +34,7 @@ Please read the (link: docs/cookbook/templating/create-a-blog text: article abou
 
 ## Content representation for the blog
 
-In this example we will create a JSON representation of the `blog` template. After we are done, our blog page will not only be able to viewd as HTML but also be available in JSON. We will see below how exactly that works.
+In this example we will create a JSON representation of the `blog` template. After we are done, our blog page will not only be able to viewed as HTML but also be available in JSON. We will see below how exactly that works.
 
 A representation is defined by its representation template. For our JSON representation, let's create a file `blog.json.php` in our `/site/templates` directory.
 
