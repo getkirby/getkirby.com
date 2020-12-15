@@ -2,6 +2,7 @@
 
 namespace Kirby\Cms;
 
+use Exception;
 use Kirby\Data\Json;
 use Kirby\Data\Yaml;
 use Kirby\Parsley\Parsley;
@@ -75,8 +76,12 @@ class Blocks extends Items
             return [];
         }
 
-        // no layouts
-        if (array_key_exists('columns', $input[0]) === false) {
+        if (
+            // no columns = no layout
+            array_key_exists('columns', $input[0]) === false ||
+            // checks if this is a block for the builder plugin
+            array_key_exists('_key', $input[0]) === true
+        ) {
             return $input;
         }
 
@@ -101,19 +106,22 @@ class Blocks extends Items
      */
     public static function parse($input): array
     {
-        if (is_array($input) === false) {
+        if (empty($input) === false && is_array($input) === false) {
             try {
                 $input = Json::decode((string)$input);
             } catch (Throwable $e) {
-                // try to import the old YAML format
-                $yaml = Yaml::decode((string)$input);
+                try {
+                    // try to import the old YAML format
+                    $yaml  = Yaml::decode((string)$input);
+                    $first = A::first($yaml);
 
-                // check for valid yaml
-                if (empty($yaml) === false && isset(A::first($yaml)['_key']) === true) {
-                    $input = $yaml;
-
-                // try to import HTML instead
-                } elseif (empty($input) === false) {
+                    // check for valid yaml
+                    if (empty($yaml) === true || (isset($first['_key']) === false && isset($first['type']) === false)) {
+                        throw new Exception('Invalid YAML');
+                    } else {
+                        $input = $yaml;
+                    }
+                } catch (Throwable $e) {
                     $parser = new Parsley((string)$input, new BlockSchema());
                     $input  = $parser->blocks();
                 }
