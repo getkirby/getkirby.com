@@ -239,6 +239,33 @@ return [
 ];
 ```
 
+## Access PHPMailer instance
+
+<since v="3.4.1">
+You can get access to the underlying PHPMailer instance via the `beforeSend` callback:
+
+```php
+$kirby->email([
+    // …
+    'beforeSend' => function ($mailer) {
+        $mailer->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            ]
+        ];
+
+        return $mailer;
+    }
+]);
+```
+</since>
+
+<since v="3.4.1">
+The `beforeSend` callback can also be added as [preset](#email-presets).
+</since>
+
 ## More information
 - (link: docs/reference/objects/kirby/email text: `$kirby->email()` )
 - (link: docs/cookbook/forms/basic-contact-form text: Email contact form)

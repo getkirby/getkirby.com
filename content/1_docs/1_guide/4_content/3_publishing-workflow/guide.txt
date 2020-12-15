@@ -85,7 +85,7 @@ To publish a draft manually in your content folder, drag it from the `_drafts` f
 ```filesystem
 /content/projects/my-project-draft/
 ```
-This will make the page `listed`. You can apply sorting by prepending a number. Optionally, you can then delete the `_drafts` folder if it's no longer needed or just leave it in place.
+This will make the page `unlisted`. You can make it `listed` and apply sorting by prepending a number. Optionally, you can then delete the `_drafts` folder if it's no longer needed or just leave it in place.
 
 ### Drafts in your templates
 

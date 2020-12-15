@@ -68,6 +68,8 @@ num: zero
 
 ### Sorting by a custom sort number field
 
+You may use a field value, for example from a field called `customSortNumberField`, to customize the sort order:
+
 ```yaml
 num: '{{ page.customSortNumberField }}'
 ```
@@ -75,6 +77,8 @@ num: '{{ page.customSortNumberField }}'
 The return value of the query has to be an integer which will be used for sorting. Learn more about Kirby's (link: docs/guide/blueprints/query-language text: query language).
 
 ### Chronological sorting by date field
+
+If your page blueprint contains a date field, you can use that date (and, optionally time) to sort your pages chronologically. For example, for a date field named `created`, you can apply the following:
 
 #### By date
 ```yaml
