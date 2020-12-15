@@ -45,3 +45,7 @@ fields:
     type: writer
     inline: true
 ```
+
+## Default Vue Component
+
+https://github.com/getkirby/kirby/blob/master/panel/src/components/Blocks/Types/Video.vue

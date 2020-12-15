@@ -36,3 +36,7 @@ fields:
     buttons: false
     font: monospace
 ```
+
+## Default Vue Component
+
+https://github.com/getkirby/kirby/blob/master/panel/src/components/Blocks/Types/Markdown.vue

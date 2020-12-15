@@ -34,3 +34,6 @@ fields:
     type: list
 ```
 
+## Default Vue Component
+
+https://github.com/getkirby/kirby/blob/master/panel/src/components/Blocks/Types/List.vue

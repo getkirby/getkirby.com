@@ -84,3 +84,7 @@ fields:
       xml: XML
       yaml: YAML
 ```
+
+## Default Vue Component
+
+https://github.com/getkirby/kirby/blob/master/panel/src/components/Blocks/Types/Code.vue

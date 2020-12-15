@@ -48,3 +48,7 @@ fields:
     width: 5/6
     placeholder: field.blocks.heading.placeholder
 ```
+
+## Default Vue Component
+
+https://github.com/getkirby/kirby/blob/master/panel/src/components/Blocks/Types/Heading.vue
