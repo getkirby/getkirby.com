@@ -36,7 +36,7 @@
         <h2 class="h3 -align:center">Screenshots</h2>
         <ul>
           <?php foreach ($page->images()->filterBy('extension', 'png') as $screenshot): ?>
-          <li><a href="<?= $screenshot->resize(1400)->url() ?>" download><?= $screenshot ?></a></li>
+          <li><a class="screenshot" href="<?= $screenshot->resize(1400)->url() ?>" download><?= $screenshot ?></a></li>
           <?php endforeach ?>
         </ul>
       </section>
