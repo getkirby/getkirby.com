@@ -13,7 +13,7 @@ Intro: Kirby is a modern, fast, flexible, file-based CMS with a beautiful contro
 Text:
 
 
-## A peak under the hood: Kirby's folder structure
+## A peek under the hood: Kirby's folder structure
 
 | Folder | What's in it? |
 |---- | ---- |
