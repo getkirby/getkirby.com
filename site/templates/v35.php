@@ -111,7 +111,7 @@
               <h3 class="text-2xl mb-6" style="color: var(--color-code-green)">Passwordless login</h3>
             </header>
             <div class="text text-lg">
-              <p>With 3.5 we are introducing major enhancements for our login flow. Enable password-less login for secure, one-time code authentication.</p>
+              <p>3.5 comes with major enhancements for your login flow. Enable password-less login for secure, one-time code authentication.</p>
               <?php snippet('v35/image', [
                 'image' => $page->image('login-passwordless.jpg')
               ]) ?>
@@ -127,7 +127,7 @@
               <h3 class="text-2xl mb-6" style="color: var(--color-code-purple)">Password reset</h3>
             </header>
             <div class="text text-lg">
-              <p>With our new authentication enhancements, we are now also offering a secure way for your users to reset their passwords.</p>
+              <p>The new authentication enhancements now offer a secure way for your users to reset their passwords.</p>
               <?php snippet('v35/image', [
                 'image' => $page->image('password-reset-email.jpg')
               ]) ?>
