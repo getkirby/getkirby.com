@@ -8,7 +8,7 @@ Since: 3.5.0
 
 Excerpt:
 
-A simple WYSIWG editor field for inline content with formats like bold, italic, etc.
+A simple WYSIWYG editor field for inline content with formats like bold, italic, etc.
 
 ----
 
