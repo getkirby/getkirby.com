@@ -8,7 +8,7 @@ Since: 3.5.0
 
 Excerpt:
 
-A simple WYSIWG editor field for ordered and unordered lists
+A simple WYSIWYG editor field for ordered and unordered lists
 
 ----
 
