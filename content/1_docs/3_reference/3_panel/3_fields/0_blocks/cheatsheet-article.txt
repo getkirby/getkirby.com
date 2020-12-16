@@ -499,6 +499,10 @@ fields:
     type: blocks
 ```
 
+### Your templates
+
+The Editor used a field method called `$page->blocks()->blocks()`. This has to be replaced with `$page->blocks()->toBlocks()`
+
 ### Changed snippets
 
 The following block types have changed in the Blocks field and you need to move and rename your snippets if you have customized them in your installation.
