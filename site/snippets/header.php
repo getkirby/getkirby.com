@@ -32,7 +32,8 @@
 <?= js([
   'https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js',
   'assets/js/index.js'
-], ['defer' => true]) ?>
+]) ?>
+<script type="module" src="<?= url('assets/js-nobuild/app.js') ?>"></script>
 <?= js('@auto', ['defer' => true]) ?>
 
 
