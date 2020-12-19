@@ -41,6 +41,7 @@ return function($kirby, $page) {
   }
 
   return [
+    'demoServer'    => 'https://' . r(param('demo') === 'staging', 'staging.') . 'trykirby.com',
     'statusMessage' => $statusMessage,
     'statusType'    => $statusType
   ];

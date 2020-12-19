@@ -20,7 +20,7 @@
 
     <div class="grid" style="--gutter: 3rem">
       <div class="column box" style="--columns: 8">
-        <form class="demo" action="https://<?= r(param('demo') === 'staging', 'staging.') ?>trykirby.com" method="POST">
+        <form x-data="{}" action="<?= $demoServer ?>" method="POST" class="demo" @submit="$el.setAttribute('disabled', true)">
           <h2 class="h3">Personal Demo</h2>
           <figure>
             <button class="button-reset">
