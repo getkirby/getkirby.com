@@ -1,0 +1,18 @@
+Title: Search
+
+----
+
+Documentation: https://distantnative.com/search
+
+----
+
+Repository: https://github.com/distantnative/search-for-kirby
+
+----
+
+Category: panel
+
+----
+
+Description: Really find what you are looking for. Index-based search running on Sqlite or Angolia.
+
