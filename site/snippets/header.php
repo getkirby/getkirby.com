@@ -29,7 +29,10 @@
   </script>
 <?php endif ?>
 
-<?= js('assets/js/index.js', ['defer' => true]) ?>
+<?= js([
+  'https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js',
+  'assets/js/index.js'
+], ['defer' => true]) ?>
 <?= js('@auto', ['defer' => true]) ?>
 
 
