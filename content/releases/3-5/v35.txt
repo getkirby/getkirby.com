@@ -128,7 +128,7 @@ Removed | Use instead
 `$page->isInvisible()` | `$page->isUnlisted()`
 `$page->isVisible()` | `$page->isListed()`
 `$pages->invisible()` | `$pages->unlisted()`
-`$pages->visible()` | `$page->listed()`
+`$pages->visible()` | `$pages->listed()`
 
 #### Deprecated methods
 
