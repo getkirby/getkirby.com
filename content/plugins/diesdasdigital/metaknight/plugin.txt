@@ -2,6 +2,10 @@ Title: MetaKnight
 
 ----
 
+Documentation: https://metaknight.diesdas.digital
+
+----
+
 Repository: https://github.com/diesdasdigital/kirby-meta-knight
 
 ----

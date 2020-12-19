@@ -34,12 +34,16 @@
           </span>
 
           <span>
+            <?php if ($page->documentation()->isNotEmpty()): ?>
+            <a class="cta" href="<?= $page->documentation() ?>">
+              <?= icon('guide') ?>Documentation
+            </a>
+            <?php endif ?>
+            <?php if ($page->repository()->isNotEmpty()): ?>
             <a class="cta" href="<?= $page->repository() ?>">
               <?= icon('git') ?>Source
             </a>
-            <a class="cta" href="<?= $page->repository() ?>">
-              <?= icon('guide') ?>Documentation
-            </a>
+            <?php endif ?>
           </span>
         </nav>
 
