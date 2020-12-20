@@ -58,12 +58,6 @@ mix.options({
 
 mix.js("src/js/index.js", "js");
 
-/* Search for template-specific JavaScript files */
-const templateJS = glob.sync("./src/js/templates/*.js");
-for (let i = 0, l = templateJS.length; i < l; i++) {
-  mix.js(templateJS[i], "js/templates");
-}
-
 mix.sass("src/scss/index.scss", "css", sassSettings);
 
 /* Search for template-specific CSS files */
