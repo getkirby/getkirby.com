@@ -2,4 +2,4 @@ Caption:
 
 **Layout settings**
 
-Add custom fields to your layouts to assign styles, backgrounds, custom classes or whatever you need in your project
+Add custom fields to your layouts to assign styles, backgrounds, custom classes or whatever you need in your project.

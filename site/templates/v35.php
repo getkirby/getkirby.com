@@ -179,7 +179,7 @@
         <?php snippet('v35/feature', [
           'headline' => 'Writer field',
           'image' => $page->image('writer.jpg'),
-          'text' => 'You don’t need the full power of the Blocks? Maybe just some inline HTML? Then the new Writer field is here for you. Create single-line HTML with formats like bold, italic, underline or links',
+          'text' => 'You don’t need the full power of the Blocks? Maybe just some inline HTML? Then the new Writer field is here for you. Create single-line HTML with formats like bold, italic, underline or links.',
           'link' => 'docs/reference/panel/fields/writer'
         ]) ?>
 
@@ -193,7 +193,7 @@
         <?php snippet('v35/feature', [
           'headline' => 'Title & URL',
           'image' => $page->image('unified-dialog.jpg'),
-          'text' => 'Changing the page title or the page URL is now done in the same dialog. With this simplified workflow you can instantly see when your Page title and slug no longer match and should be updated.'
+          'text' => 'Changing the page title or the page URL is now done in the same dialog. With this simplified workflow you can instantly see when your page title and slug no longer match and should be updated.'
         ]) ?>
 
         <?php snippet('v35/feature', [

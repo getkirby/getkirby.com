@@ -70,13 +70,13 @@ Enhancements:
 - New Locale class for PHP locale handling and consistent locale formats in locale option #2893
 - Better README.md and CONTRIBUTING.md
 - Updated JS dependencies
-- additional Japanese slug rules
+- Additional Japanese slug rules
 - Core session keys are now prefixed with `kirby`.
 - Better error messages in the login form when debug mode is enabled
 - The `k-empty` component is now automatically converted to a button if there's a click handler.
-- Concurrent sort API calls are now prevented #2863
+- Concurrent sort API calls are now prevented. #2863
 - Faster unit tests
-- We are now using Cypress for frontend tests
+- We are now using Cypress for frontend tests.
 - Faster file cache access
 - Better debouncing of input events to increase performance
 
@@ -149,8 +149,8 @@ Bugs:
 - Fixed pagination error in Structure field when duplicating items
 - Fixed item index on delete for structure field #2887
 - Fixed sorting in the files section when the section is not sortable #2690
-- Panel views can be replaced in your plugins again #2506
-- You can extend nested Vue components in your plugins #1438
+- Panel views can be replaced in your plugins again. #2506
+- You can extend nested Vue components in your plugins. #1438
 
 ----
 
