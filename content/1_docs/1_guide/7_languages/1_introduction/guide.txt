@@ -117,6 +117,10 @@ return [
 ];
 ```
 
+<info>
+Using the root URL for the default language will disable [automatic language detection](#automatic-language-detection).
+</info>
+
 ## Using different domains for each language
 
 Kirby supports cross-domain multi-language sites. You can define the domain for each language like this:
