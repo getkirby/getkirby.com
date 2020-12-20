@@ -25,7 +25,7 @@
 <?php endif ?>
 
 <?= js('assets/js/index.js', ['defer' => true]) ?>
-<?= js('@auto', ['type' => 'module', 'defer' => true]) ?>
+<?= js(['assets/js/site.js', '@auto'], ['type' => 'module']) ?>
 
 
 </head>

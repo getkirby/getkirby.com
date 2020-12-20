@@ -12,7 +12,6 @@ import "focus-visible";
 /* -----  Components -------------------------------------------------------- */
 
 import "./components/affiliates";
-import "./components/lazyloading";
 import "./components/menu";
 import "./components/menu-search";
 import "./components/sidebar";
