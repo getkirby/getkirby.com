@@ -1,32 +1,31 @@
-import { $, $$ } from "../utils/selector";
-import ready from "../utils/ready";
 
-class Menu {
+export default class {
 
-  constructor(el) {
-    this.el     = el;
-    this.mobileToggleButton = $("button[aria-controls]");
-    this.menu   = $("#menu");
-    this.isOpen = false;
-    this.submenuItems = this.menu.querySelectorAll(".menu-item.has-dropdown");
+  constructor(element) {
+    this.$el       = element;
+    this.menu      = document.querySelector("#menu");
+    this.mobile    = document.querySelector("button[aria-controls]");
+    this.isOpen    = false;
+    this.dropdowns = this.menu.querySelectorAll(".menu-item.has-dropdown");
+    this.current   = null;
+
     this.handleGlobalClickForMobileMenuBound = this.handleGlobalClickForMobileMenu.bind(this);
     this.handleGlobalEventForSubmenusBound = this.handleGlobalEventForSubmenus.bind(this);
 
-    this.currentSubmenu = null;
 
-    this.mediaQuery = matchMedia("(min-width: 56em)");
-    this.mediaQuery.addListener(this.toggleDesktopAndMobileMenu.bind(this));
+    this.media = matchMedia("(min-width: 56em)");
+    this.media.addListener(this.toggleDesktopAndMobileMenu.bind(this));
     this.init();
   }
 
   init() {
-    this.mobileToggleButton.addEventListener("click", (e) => {
+    this.mobile.addEventListener("click", (e) => {
       e.preventDefault();
       this.toggleMobilePopup();
     });
 
-    for (let i = 0, l = this.submenuItems.length; i < l; i++) {
-      const item = this.submenuItems[i];
+    for (let i = 0, l = this.dropdowns.length; i < l; i++) {
+      const item = this.dropdowns[i];
       const link = item.querySelector("a");
 
       link.addEventListener("touchend", (e) => {
@@ -35,28 +34,28 @@ class Menu {
           }
 
           e.preventDefault();
-          this.toggleSubmenu(item);
+          this.toggleDropdown(item);
       });
 
       link.addEventListener("mouseenter", (e) => {
         if (!this.isDesktop()) {
           return;
         }
-        this.toggleSubmenu(item, true);
+        this.toggleDropdown(item, true);
       });
 
       link.addEventListener("focus", (e) => {
         if (!this.isDesktop()) {
           return;
         }
-        this.toggleSubmenu(item, true);
+        this.toggleDropdown(item, true);
       });
 
       item.addEventListener("mouseleave", (e) => {
         if (!this.isDesktop()) {
           return;
         }
-        this.toggleSubmenu(item, false);
+        this.toggleDropdown(item, false);
       });
     }
 
@@ -64,37 +63,37 @@ class Menu {
   }
 
   handleGlobalEventForSubmenus(e) {
-    if (this.currentSubmenu === null) {
+    if (this.current === null) {
       return;
     }
 
-    if (this.currentSubmenu.contains(e.target) === false) {
-      this.toggleSubmenu(this.currentSubmenu, false);
+    if (this.current.contains(e.target) === false) {
+      this.toggleDropdown(this.current, false);
     }
   }
 
   toggleDesktopAndMobileMenu() {
     if(this.isDesktop()) {
-      this.mobileToggleButton.setAttribute("aria-hidden", "true");
-      this.mobileToggleButton.hidden = true;
+      this.mobile.setAttribute("aria-hidden", "true");
+      this.mobile.hidden = true;
     } else {
-      this.mobileToggleButton.removeAttribute("aria-hidden");
-      this.mobileToggleButton.hidden = false;
+      this.mobile.removeAttribute("aria-hidden");
+      this.mobile.hidden = false;
     }
   }
 
   isDesktop() {
-    return this.mediaQuery.matches;
+    return this.media.matches;
   }
 
   closeAllSubmenus() {
-    for (let i = 0, l = this.submenuItems.length; i < l; i++) {
-      const subItem = this.submenuItems[i];
-      this.toggleSubmenu(subItem, false);
+    for (let i = 0, l = this.dropdowns.length; i < l; i++) {
+      const subItem = this.dropdowns[i];
+      this.toggleDropdown(subItem, false);
     }
   }
 
-  toggleSubmenu(item, force) {
+  toggleDropdown(item, force) {
 
     let newState = !item.classList.contains("is-open");
 
@@ -106,23 +105,23 @@ class Menu {
     }
 
     if (newState === true) {
-      for (let i = 0, l = this.submenuItems.length; i < l; i++) {
-        const subItem = this.submenuItems[i];
-        this.toggleSubmenu(subItem, false);
+      for (let i = 0, l = this.dropdowns.length; i < l; i++) {
+        const subItem = this.dropdowns[i];
+        this.toggleDropdown(subItem, false);
       }
     }
 
     item.classList.toggle("is-open", newState);
 
-    if (this.currentSubmenu === null) {
+    if (this.current === null) {
       window.addEventListener("focusin", this.handleGlobalEventForSubmenusBound);
       document.body.addEventListener("click", this.handleGlobalEventForSubmenusBound);
       document.body.addEventListener("touchstart", this.handleGlobalEventForSubmenusBound);
     }
 
-    this.currentSubmenu = newState ? item : null;
+    this.current = newState ? item : null;
 
-    if (this.currentSubmenu === null) {
+    if (this.current === null) {
       window.removeEventListener("focusin", this.handleGlobalEventForSubmenusBound);
       document.body.removeEventListener("click", this.handleGlobalEventForSubmenusBound);
       document.body.removeEventListener("touchstart", this.handleGlobalEventForSubmenusBound);
@@ -140,8 +139,8 @@ class Menu {
       newState = force;
     }
 
-    this.mobileToggleButton.setAttribute("aria-expanded", newState ? "true" : "false");
-    this.mobileToggleButton.setAttribute("aria-label", newState ? "Close menu" : "Open menu");
+    this.mobile.setAttribute("aria-expanded", newState ? "true" : "false");
+    this.mobile.setAttribute("aria-label", newState ? "Close menu" : "Open menu");
 
     setTimeout(() => {
       if (newState) {
@@ -160,15 +159,4 @@ class Menu {
       this.toggleMobilePopup(false);
     }
   }
-
 }
-
-ready(() => {
-
-  const menu = $(".menu");
-
-  if (menu) {
-    new Menu(menu);
-  }
-
-});
