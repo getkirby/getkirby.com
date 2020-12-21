@@ -191,5 +191,5 @@ A challenge will be skipped if it isn't available in general or for the user who
 
 The `email` challenge is always available as it doesn't need additional configuration (only in some cases the SMTP options). It is also enabled by default if no custom priorities are defined.
 
-If none of the configured challenges is available, Kirby will "fake" an email challenge to avoid leaking security-relevant information (e.g. whether the user exists). In debug mode, there will be a clear error message instead.
+If none of the configured challenges is available, Kirby will "fake" the last configured challenge to avoid leaking security-relevant information (e.g. whether the user exists). In debug mode, there will be a clear error message instead.
 </since>
