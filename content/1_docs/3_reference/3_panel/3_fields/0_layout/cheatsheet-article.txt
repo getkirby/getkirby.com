@@ -110,4 +110,47 @@ fields:
 
 (screenshot: layout-settings.png)
 
+## Reusing and extending layout settings
+
+If you always use the same settings in layouts and want to easily update all of them from a single file without repeating, you can reuse or extend the layout settings. Let's see how it is used together.
+
+**Sample settings fields**
+
+```yaml "/site/blueprints/fields/settings.yml"
+fields:
+  class:
+    type: text
+    width: 1/2
+  id:
+    type: text
+    width: 1/2
+  image:
+    label: Background image
+    type: files
+```
+
+**Simple reuse**
+
+```yaml
+fields:
+  layout:
+    type: layout
+    settings: fields/settings
+```
+
+**Extended reuse**
+
+```yaml
+fields:
+  layout:
+    type: layout
+    settings:
+      extends: fields/settings
+      fields:
+        color:
+          label: Background color
+          type: text
+          default: FFF
+```
+
 (docs: layouts/to-layouts)
