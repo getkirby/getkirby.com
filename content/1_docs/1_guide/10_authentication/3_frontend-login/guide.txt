@@ -6,7 +6,7 @@ Text:
 
 Kirby's `Auth` class provides the following methods that can be used for authentication. All methods will throw `Exception`s if the input is not valid.
 
-## Login with email and password
+## Logging in with email and password
 
 ```php
 $kirby->auth()->login(string $email, string $password, bool $long = false);
@@ -19,41 +19,37 @@ You can find an example how to use this method in our (link: docs/cookbook/secur
 ## Creating an authentication challenge
 
 ```php
-$kirby->auth()->createChallenge(string $email, bool $long = false, string $mode = 'login');
+$status = $kirby->auth()->createChallenge(string $email, bool $long = false, string $mode = 'login');
 ```
 
-By calling this method, you can create an authentication challenge (e.g. for passwordless login or password reset). Kirby will automatically choose the challenge based on the user's email address and the provided `$mode` (which can be `login` or `password-reset`) using the (link: docs/reference/system/options/auth#authentication-challenges__challenge-priority text: configured challenge priorities).
+This method can be used for passwordless login or password reset.
 
-The method returns the name of the challenge that was created (e.g. `'email'`) or `null` if no challenge was available for the user.
+It creates an authentication challenge (for example by sending an email with a login code). The type of challenge that gets created is determined automatically based on the user's email address and the provided `$mode` (which can be `login` or `password-reset`). The (link: docs/reference/system/options/auth#authentication-challenges__challenge-priority text: configured challenge priorities) are respected.
 
-<warning>
-Be careful not to leak a return value of `null` to the visitor because it could be used to tell if the user exists at all (Kirby will create and return a challenge for a valid user while it will return `null` for users that don't exist). This information could be used by attackers.
-
-Kirby (link: docs/reference/system/options/auth#authentication-challenges__challenge-priority text: "fakes" an email challenge) in this situation, which you can also do like this:
+The `$auth->createChallenge()` method returns the authentication status object. This object contains all necessary information about the next steps:
 
 ```php
-// default to a faked email challenge if `null` gets returned
-$challenge = $kirby->auth()->createChallenge(...) ?? 'email';
+$status->challenge(); // for example 'email', 'totp', ...
+$status->email();     // email address of the pending authentication
+$status->status();    // 'pending' if a challenge is active
+$status->toArray();   // all public information combined in an array
 ```
 
-The actual `null` value can be useful for special use-cases or debugging, but please don't display it to the user.
-</warning>
+<info>
+For security, the status object with a `pending` challenge is (link: docs/reference/system/options/auth#authentication-challenges__challenge-priority text: also returned if no challenge was available for the user) (e.g. if the user doesn't exist or no suitable challenge was found). This is because Kirby would otherwise leak which users exist and which don't, which is a piece of information that could be used by attackers. In `debug` mode, an `Exception` will be thrown in this case, but in production it's important to keep this information secret.
 
-You can detect if a challenge is active by checking the `kirby.challenge.email` key in the visitor's session. This key will always be set, even if `null` was returned from the method (for the same reasons explained in the warning above).
+If your code needs to know if a challenge was really created **and you know what you are doing**, you can override this security feature by calling `$status->challenge(false)`.
+</info>
 
-If an actual challenge was created, the `kirby.challenge.type` session key will contain the name of the session (e.g. `'email'`). If the `kirby.challenge.email` key is set but `kirby.challenge.type` isn't, please fake a challenge to avoid leaking whether the user exists (also like explained in the warning above).
+Kirby remembers the pending authentication status via the user's session. You can access the status at any time with `$kirby->auth()->status()`.
 
 ## 2FA login
 
 ```php
-$kirby->auth()->login2fa(string $email, string $password, bool $long = false);
+$status = $kirby->auth()->login2fa(string $email, string $password, bool $long = false);
 ```
 
-This method is a combination of the `login()` method and the `createChallenge()` method: It will first validate the password and then create an authentication challenge (which will be returned from the method like explained above). The user is only logged in after both steps are done.
-
-<warning>
-The warning from the section above also applies here.
-</warning>
+This method is a combination of the `login()` method and the `createChallenge()` method: It will first validate the password and then create an authentication challenge (which will be returned in the status object like explained above). The user is only logged in after both steps are done.
 
 ## Verifying a provided code
 
