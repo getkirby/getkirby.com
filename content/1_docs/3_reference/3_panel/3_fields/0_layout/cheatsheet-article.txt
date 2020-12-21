@@ -110,9 +110,10 @@ fields:
 
 (screenshot: layout-settings.png)
 
+<since v="3.5.1">
 ## Reusing and extending layout settings
 
-If you always use the same settings in layouts and want to easily update all of them from a single file without repeating, you can reuse or extend the layout settings. Let's see how it is used together.
+If you always use the same options in layouts and want to easily update all of them from a single file without repeating the options, you can reuse or extend the layout settings. Let's see how:
 
 **Sample settings fields**
 
@@ -152,5 +153,6 @@ fields:
           type: text
           default: FFF
 ```
+</since>
 
 (docs: layouts/to-layouts)
