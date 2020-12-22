@@ -101,6 +101,9 @@ Traditionally, we combine patch and minor releases though and never really need 
 
 With this release **we drop support for PHP&nbsp;7.2**, which has reached end of life. But we also introduce support for the brand new stable version of **PHP&nbsp;8.0**, which has been released on December 1st.
 
+#### Date field `format` option
+3.5.0 is dropping the `format` option of the date field. This is a breaking change which we will (link: https://github.com/getkirby/kirby/issues/3026 text: reverse in 3.5.1).
+
 ----
 Deprecated:
 
