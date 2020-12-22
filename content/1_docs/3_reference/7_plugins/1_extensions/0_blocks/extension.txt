@@ -254,10 +254,10 @@ As a first step, register the custom snippet and blueprint in the index.php of y
 
 Kirby::plugin('your-project/button-block', [
   'blueprints' => [
-    'blocks/button' => __DIR__ . '/blueprints/button.yml'
+    'blocks/button' => __DIR__ . '/blueprints/blocks/button.yml'
   ],
   'snippets' => [
-    'blocks/button' => __DIR__ . '/snippets/button.php'
+    'blocks/button' => __DIR__ . '/snippets/blocks/button.php'
   ]
 ]);
 ```
@@ -266,7 +266,7 @@ Then, add the blueprint definition and the snippet code in their respective file
 
 ### Blueprint
 
-```yaml "/site/plugins/button/blueprints/button.yml"
+```yaml "/site/plugins/button/blueprints/blocks/button.yml"
 name: Button
 icon: bolt
 fields:
@@ -278,7 +278,7 @@ fields:
 
 ### Snippet
 
-```php "/site/plugins/button/snippets/button.php"
+```php "/site/plugins/button/snippets/blocks/button.php"
 <a class="btn" href="<?= $block->link()->toUrl() ?>">
   <?= $block->text()->html() ?>
 </a>
