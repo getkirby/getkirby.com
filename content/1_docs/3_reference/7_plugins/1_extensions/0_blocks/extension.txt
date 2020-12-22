@@ -233,7 +233,9 @@ export default {
 import Button from "./components/Button.vue";
 
 panel.plugin("your-project/button-block", {
-  blocks: Button
+  blocks: {
+    button: Button
+  }
 });
 ```
 
