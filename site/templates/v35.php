@@ -6,8 +6,8 @@
 
   <?= css('assets/lightbox/lightbox.css') ?>
   <?= css('assets/css/index.css') ?>
-  <?= css('assets/css/v35.css') ?>
-  <?= js('assets/js/index.js', ['defer' => true]) ?>
+  <?= css('assets/css/templates/v35.css') ?>
+  <?= js(['assets/js/index.js'], ['type' => 'module']) ?>
 </head>
 <body class="v35">
 
