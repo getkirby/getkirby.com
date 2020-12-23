@@ -10,10 +10,10 @@ return [
         'eur' => 99,
         'usd' => 115
     ],
-    'sale' => [
-        'text' => 'Save 20% per license<br><small class="description" style="font-size: .75rem; font-weight: 400">only until December 22nd</small>',
-        'banner' => 'Save <strong>20% per license</strong> until December 22nd'
-    ],
+    // 'sale' => [
+    //     'text' => 'Save 20% per license<br><small class="description" style="font-size: .75rem; font-weight: 400">only until December 22nd</small>',
+    //     'banner' => 'Save <strong>20% per license</strong> until December 22nd'
+    // ],
 
     'api'     => false,
     'panel'   => false,
