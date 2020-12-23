@@ -1,2 +1,1 @@
-
-import "../libraries/lazysizes.min.js"
+import "../libraries/lazysizes.js";

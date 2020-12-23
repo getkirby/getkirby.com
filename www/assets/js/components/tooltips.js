@@ -1,6 +1,4 @@
-
 export default class {
-
   constructor() {
     this.tooltips = [];
 
@@ -9,11 +7,12 @@ export default class {
     // e.g. using AJAX/fetch().
 
     new MutationObserver(this.init.bind(this)).observe(
-      document.documentElement, {
+      document.documentElement,
+      {
         childList: true,
         subtree: true,
         attributes: false,
-        characterData: false
+        characterData: false,
       }
     );
 
@@ -24,15 +23,14 @@ export default class {
     const tooltips = document.querySelectorAll("[data-tooltip]");
 
     // stop here if page does not contain any tooltips
-    if(!tooltips.length) {
+    if (!tooltips.length) {
       return;
     }
 
-    await import("../libraries/popper.min.js");
-    await import("../libraries/tippy.min.js");
+    await import("../libraries/popper.js");
+    await import("../libraries/tippy.js");
 
-    for(let i = 0, l = tooltips.length; i < l; i++) {
-
+    for (let i = 0, l = tooltips.length; i < l; i++) {
       // Make sure to only initalize the same tooltip once
       if (this.tooltips.includes(tooltips[i])) {
         continue;
@@ -51,10 +49,11 @@ export default class {
         theme: "kirby",
         appendTo: document.body,
         content: (reference) => {
-          return `<div class="tippy-inner | text text-small -background:black">${reference.getAttribute("data-tooltip")}</div>`;
-        }
+          return `<div class="tippy-inner | text text-small -background:black">${reference.getAttribute(
+            "data-tooltip"
+          )}</div>`;
+        },
       });
     }
   }
-
 }
