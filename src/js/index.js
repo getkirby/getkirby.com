@@ -7,10 +7,3 @@ import "./components/config";
 
 import "./components/menu-search";
 import "./components/tooltip";
-
-
-/* ----- Code Highlighting -------------------------------------------------------- */
-
-import highlight from "./components/code";
-
-highlight();

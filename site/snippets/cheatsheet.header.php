@@ -9,6 +9,7 @@
   <?= css('@auto') ?>
 
   <?= js('assets/js/index.js', ['defer' => true]) ?>
+  <?= js(['assets/js/site.js'], ['type' => 'module']) ?>
   <?= js('assets/js/templates/cheatsheet.js', ['defer' => true]) ?>
 
 </head>
