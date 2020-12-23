@@ -4,8 +4,10 @@
 
   <?php snippet('meta') ?>
 
-  <?= css('assets/css/index.css') ?>
-  <?= css('assets/css/templates/legacy.css') ?>
+  <?= css([
+    $kirby->url('assets') . '/css/index.css', 
+    $kirby->url('assets') . '/css/templates/legacy.css'
+  ]) ?>
 
 </head>
 <body data-template="<?= $page->template() ?>">

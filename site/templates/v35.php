@@ -4,10 +4,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kirby 3.5 is here 🚀</title>
 
-  <?= css('assets/lightbox/lightbox.css') ?>
-  <?= css('assets/css/index.css') ?>
-  <?= css('assets/css/templates/v35.css') ?>
-  <?= js(['assets/js/index.js'], ['type' => 'module']) ?>
+  <?= css([
+    $kirby->url('assets') . '/lightbox/lightbox.css',
+    $kirby->url('assets') . '/css/index.css',
+    $kirby->url('assets') . '/css/templates/v35.css'
+  ]) ?>
+  <?= js([$kirby->url('assets') . '/js/index.js'], ['type' => 'module']) ?>
 </head>
 <body class="v35">
 
@@ -298,7 +300,7 @@
     </div>
   </footer>
 
-  <?= js('assets/lightbox/lightbox.js') ?>
+  <?= js($kirby->url('assets') . '/lightbox/lightbox.js') ?>
 
   <script>
   // Lightbox

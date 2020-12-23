@@ -17,8 +17,8 @@
 <link rel="preconnect" href="https://res.cloudinary.com">
 <?php endif ?>
 
-<link rel="preload" href="<?= url('assets/css/index.css') ?>" as="style">
-<link rel="preload" href="<?= url('assets/js/index.js') ?>" as="script">
+<link rel="preload" href="<?= url($kirby->url('assets') . '/css/index.css') ?>" as="style">
+<link rel="modulepreload" href="<?= url($kirby->url('assets') . '/js/index.js') ?>" as="script">
 
 <?php if ($page->template()->name() === 'buy'): ?>
 <link rel="preload" href="https://cdn.paddle.com/paddle/paddle.js" as="script">

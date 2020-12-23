@@ -3,13 +3,12 @@
 <head>
 <?php snippet('meta') ?>
 
-<?= css('assets/css/index.css') ?>
-<?= css('@auto') ?>
+<?= css([$kirby->url('assets') . '/css/index.css', '@auto']) ?>
 
 <!--  Replace `no-js` class in root element with `js` -->
 <script>(function(cl){cl.remove('no-js');cl.add('js');})(document.documentElement.classList);</script>
 
-<?= js(['assets/js/index.js', '@auto'], ['type' => 'module']) ?>
+<?= js([$kirby->url('assets') . '/js/index.js', '@auto'], ['type' => 'module']) ?>
 
 </head>
 <body data-template="<?= $page->template() ?>">
