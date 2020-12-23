@@ -1,0 +1,31 @@
+{
+  "name": "getkirby.com",
+  "version": "3.1.0",
+  "description": "The entire getkirby.com website.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run css && npm run js",
+    "css": "npm run css:base && npm run css:templates",
+    "css:base": "postcss www/assets/css/index.css --output www/dist/css/index.css --use postcss-import cssnano --map",
+    "css:templates": "postcss www/assets/css/templates/*.css --dir www/dist/css/templates --use postcss-import cssnano --map",
+    "js": "terser-folder www/assets/js --output www/dist/js --each --extension .js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "postcss": "^8.2.1",
+    "postcss-cli": "^8.3.1",
+    "postcss-import": "^14.0.0",
+    "terser-folder": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/getkirby/getkirby.com.git"
+  },
+  "author": "The Kirby Team <mail@getkirby.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/getkirby/getkirby.com/issues"
+  },
+  "homepage": "https://github.com/getkirby/getkirby.com#readme"
+}
