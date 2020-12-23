@@ -10,8 +10,8 @@
     "css:lightbox": "postcss www/assets/lightbox/lightbox.css --output www/dist/lightbox/lightbox.css --use postcss-import cssnano --map",
     "css:templates": "postcss www/assets/css/templates/*.css --dir www/dist/css/templates --use postcss-import cssnano --map",
     "js": "npm run js:base && npm run js:lightbox",
-    "js:base": "terser-folder www/assets/js --output www/dist/js --each --extension .js",
-    "js:lightbox": "terser-folder www/assets/lightbox --output www/dist/lightbox --each --extension .js"
+    "js:base": "uglifyjs-folder www/assets/js --output www/dist/js --each --extension .js --config-file uglify.json",
+    "js:lightbox": "uglifyjs-folder www/assets/lightbox --output www/dist/lightbox --each --extension .js"
   },
   "dependencies": {},
   "devDependencies": {
@@ -19,7 +19,7 @@
     "postcss": "^8.2.1",
     "postcss-cli": "^8.3.1",
     "postcss-import": "^14.0.0",
-    "terser-folder": "^2.0.0"
+    "uglifyjs-folder": "^2.0.0"
   },
   "repository": {
     "type": "git",
