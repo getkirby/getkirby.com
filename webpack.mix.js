@@ -56,8 +56,6 @@ mix.options({
 
 /* -------------------------------------------------------------------------- */
 
-mix.js("src/js/index.js", "js");
-
 mix.sass("src/scss/index.scss", "css", sassSettings);
 
 /* Search for template-specific CSS files */
