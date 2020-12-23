@@ -9,17 +9,7 @@
 <!--  Replace `no-js` class in root element with `js` -->
 <script>(function(cl){cl.remove('no-js');cl.add('js');})(document.documentElement.classList);</script>
 
-<?php if (option('keycdn', false) !== false): ?>
-  <script>
-  window.kirbyConfig = {
-    assetsPath: "<?= addslashes(option('keycdn.domain')) ?>/assets/",
-  };
-  </script>
-<?php endif ?>
-
-<?= js('assets/js/index.js', ['defer' => true]) ?>
-<?= js(['assets/js/site.js', '@auto'], ['type' => 'module']) ?>
-
+<?= js(['assets/js/index.js', '@auto'], ['type' => 'module']) ?>
 
 </head>
 <body data-template="<?= $page->template() ?>">
