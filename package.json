@@ -41,8 +41,7 @@
   "dependencies": {
     "algoliasearch": "^3.32.1",
     "awesomplete": "^1.1.4",
-    "svgo": "^1.2.0",
-    "tippy.js": "^4.2.1"
+    "svgo": "^1.2.0"
   },
   "eslintConfig": {
     "root": true,
