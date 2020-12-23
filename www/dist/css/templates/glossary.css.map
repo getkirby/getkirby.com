@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../assets/css/templates/glossary.css"],"names":[],"mappings":"AAEA,yBACE,aAAc,CACd,eAAgB,CAChB,kBACF","file":"glossary.css","sourcesContent":["@charset \"UTF-8\";\n\n.glossary-page .h5::after {\n  color: #cca000;\n  content: \"\\203A\";\n  margin-left: .25rem;\n}\n\n"]}
