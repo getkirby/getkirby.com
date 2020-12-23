@@ -22,4 +22,8 @@ if (sidebar) {
   new Sidebar(sidebar);
 }
 
+// Tooltips
+import Tooltips from "./components/tooltips.js"
+new Tooltips();
+
 import "./libraries/focus-visible.js";

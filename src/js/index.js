@@ -6,4 +6,3 @@ import "./components/config";
 /* -----  Components -------------------------------------------------------- */
 
 import "./components/menu-search";
-import "./components/tooltip";

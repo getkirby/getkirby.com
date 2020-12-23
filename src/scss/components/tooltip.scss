@@ -1,13 +1,9 @@
-/* -----  Tooltip Reference  ------------------------------------------------ */
-
 [data-tooltip] {
-  border-bottom: 1px dotted rgba($color-black, .5);
+  border-bottom: 1px dotted rgba($color-black, 0.5);
   cursor: help;
 }
 
-/* -----  Tooltip Popup  ---------------------------------------------------- */
-
-.tippy-tooltip {
+.tippy-box {
   background: $color-black;
   border-radius: $border-radius;
   box-shadow: $shadow;
@@ -15,39 +11,12 @@
   padding: 0;
 }
 
-.tippy-tooltip .tippy-content {
+.tippy-box .tippy-content {
   font-size: 1rem; // 16px
   line-height: 1.5;
-  padding: .5rem .75rem; // 8px 12px
-  text-align: left;
+  padding: 0.5rem 0.75rem; // 8px 12px
 }
 
-.tippy-popper[x-placement^="top"] .tippy-arrow,
-.tippy-popper[x-placement^="bottom"] .tippy-arrow {
-  border-left-width: .375rem; // 6px
-  border-right-width: .375rem; // 6px
-}
-
-.tippy-popper[x-placement^="top"] .tippy-arrow {
-  border-top-color: $color-black;
-  border-top-width: .375rem; // 6px
-  bottom: -.375rem; // -6px
-}
-
-.tippy-popper[x-placement^="right"] .tippy-arrow {
-  border-right-color: $color-black;
-  border-right-width: .375rem; // 6px
-  left: -.375rem; // -6px
-}
-
-.tippy-popper[x-placement^="bottom"] .tippy-arrow {
-  border-bottom-color: $color-black;
-  border-bottom-width: .375rem; // 6px
-  top: -.375rem; // -6px
-}
-
-.tippy-popper[x-placement^="left"] .tippy-arrow {
-  border-left-color: $color-black;
-  border-left-width: .375rem; // 6px
-  right: -.375rem; // -6px
+.tippy-arrow {
+  color: $color-black;
 }
