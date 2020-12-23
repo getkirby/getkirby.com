@@ -11,7 +11,6 @@ import "focus-visible";
 
 /* -----  Components -------------------------------------------------------- */
 
-import "./components/affiliates";
 import "./components/menu-search";
 import "./components/sidebar";
 import "./components/tooltip";

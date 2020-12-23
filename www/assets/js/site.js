@@ -1,4 +1,7 @@
 
+// Affiliates
+import "./components/affiliates.js"
+
 // Lazy loading
 import "./components/lazyloading.js"
 
