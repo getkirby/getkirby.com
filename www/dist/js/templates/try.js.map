@@ -1,0 +1,1 @@
+{"version":3,"sources":["templates/try.js"],"names":["document","querySelector","addEventListener","this","setAttribute"],"mappings":"AAAAA,SAASC,cAAc,aAAaC,iBAAiB,UAAU,WAC7DC,KAAKC,aAAa,YAAY"}

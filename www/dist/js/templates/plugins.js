@@ -1,1 +1,1 @@
-import filter from"../components/filter.js";filter("#plugins");
+import o from"../components/filter.js";o("#plugins");

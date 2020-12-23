@@ -1,1 +1,1 @@
-import filter from"../components/filter.js";filter("#cookbook");
+import o from"../components/filter.js";o("#cookbook");
