@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  triage:
+  svgo:
     runs-on: ubuntu-latest
     steps:
     - uses: ericcornelissen/svgo-action@v1
