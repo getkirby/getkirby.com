@@ -3,12 +3,6 @@
 // it would not execute before any other imports are resolved.
 import "./components/config";
 
-/* -----  Polyfills  -------------------------------------------------------- */
-
-// Displays focus ring when user tabs, but not when user
-// clicks in sth.
-import "focus-visible";
-
 /* -----  Components -------------------------------------------------------- */
 
 import "./components/menu-search";

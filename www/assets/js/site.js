@@ -1,8 +1,5 @@
 
-// Affiliates
 import "./components/affiliates.js"
-
-// Lazy loading
 import "./components/lazyloading.js"
 
 // Menu
@@ -20,3 +17,5 @@ const sidebar = document.querySelector(".js-sidebar");
 if (sidebar) {
   new Sidebar(sidebar);
 }
+
+import "./libraries/focus-visible.js";
