@@ -92,7 +92,7 @@ accept:
 
 In this example, Kirby will generate a file upload input with an `accept="image/*"` attribute and will then validate both the MIME type and the detected file type on the server after the file is uploaded.
 
-If no type restrictions (`extension`, `mime` or `type`) are defined in the file blueprint, Kirby will limit the accepted uploads to the types `image`, `document`, `archive`, `audio` and `video` by default. This protects your site against unexpected uploads like code files that could be used to attack the server or the visitor's browsers.
+If no type restrictions (`extension`, `mime` or `type`) are defined in the file blueprint, Kirby will limit the accepted uploads to the types `image`, `document`, `archive`, `audio` and `video` by default. This protects your site against unexpected uploads like code files that could be used to attack the server or the visitors' browsers.
 
 You can disable the automatic types and allow all uploads like this:
 
@@ -105,6 +105,10 @@ accept:
     orientation: square
     ...
 ```
+
+<warning>
+Please only allow all uploads if all Panel users can be trusted completely as it will be possible to upload files that could be used to attack the server or the visitors' browsers.
+</warning>
 
 ## Options
 
