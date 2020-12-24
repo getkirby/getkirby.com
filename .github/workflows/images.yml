@@ -1,29 +1,39 @@
 
-name: Image optimization
+name: Compress images
 
 on:
   push:
-    branches: [ master ]
+    paths:
+      - '**.jpg'
+      - '**.jpeg'
+      - '**.png'
+      - '**.webp'
+      - '**.svg'
   pull_request:
-    branches: [ master ]
-
-  workflow_dispatch:
+    paths:
+      - '**.jpg'
+      - '**.jpeg'
+      - '**.png'
+      - '**.webp'
+      - '**.svg'
 
 jobs:
   svgo:
     runs-on: ubuntu-latest
     steps:
-    - uses: ericcornelissen/svgo-action@v1
+    - name: Compress SVGs
+      uses: ericcornelissen/svgo-action@v1
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         comment: true
-  tinify:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
-      - uses: namoscato/action-tinify@v1
+      - name: Compress JPGs + PNGs
+        uses: calibreapp/image-actions@main
         with:
-          api_key: ${{ secrets.TINIFY_API_KEY }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
