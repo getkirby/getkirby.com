@@ -11,7 +11,7 @@
     "css:templates": "postcss www/assets/css/templates/*.css --dir www/dist/css/templates --use postcss-import cssnano --map",
     "js": "npm run js:base && npm run js:lightbox",
     "js:base": "uglifyjs-folder www/assets/js --output www/dist/js --each --extension .js --config-file uglify.json",
-    "js:lightbox": "uglifyjs-folder www/assets/lightbox --output www/dist/lightbox --each --extension .js"
+    "js:lightbox": "uglifyjs-folder www/assets/lightbox --output www/dist/lightbox --each --extension .js --config-file uglify.json"
   },
   "dependencies": {},
   "devDependencies": {
