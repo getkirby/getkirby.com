@@ -317,14 +317,14 @@ Let's take the heading block and add a simple text field to add a custom ID for 
 ```yaml
 fields:
   blocks:
-  type: blocks
-  fieldsets:
-    heading:
-      extends: blocks/heading
-      fields:
-        customId:
-          label: Custom ID
-          type: text
+    type: blocks
+    fieldsets:
+      heading:
+        extends: blocks/heading
+        fields:
+          customId:
+            label: Custom ID
+            type: text
 ```
 
 This will add the `customID` field below the default fields of the block.
@@ -340,15 +340,15 @@ Let's limit the number of heading levels for our heading block.
 ```yaml
 fields:
   blocks:
-  type: blocks
-  fieldsets:
-    heading:
-      extends: blocks/heading
-      fields:
-        level:
-          options:
-            - h2
-            - h3
+    type: blocks
+    fieldsets:
+      heading:
+        extends: blocks/heading
+        fields:
+          level:
+            options:
+              - h2
+              - h3
 ```
 
 You can find all block fields and their settings in the (link: docs/reference/panel/blocks text: docs for each block).
@@ -360,42 +360,42 @@ You can extend our core blocks with additional tabs. Be aware though that you ne
 ```yaml
 fields:
   blocks:
-  type: blocks
-  fieldsets:
-    heading:
-      extends: blocks/heading
-      tabs:
-        content:
-          fields:
-            level:
-              type: select
-              empty: false
-              default: "h2"
-              width: 1/6
-              options:
-                - h1
-                - h2
-                - h3
-            text:
-              type: writer
-              inline: true
-              width: 5/6
-            customId:
-              label: Custom ID
-              type: text
-        styles:
-          fields:
-            backgroundColor:
-              type: select
-              options:
-                - red
-                - green
-                - blue
-            textColor:
-              type: select
-              options:
-                - white
-                - black
+    type: blocks
+    fieldsets:
+      heading:
+        extends: blocks/heading
+        tabs:
+          content:
+            fields:
+              level:
+                type: select
+                empty: false
+                default: "h2"
+                width: 1/6
+                options:
+                  - h1
+                  - h2
+                  - h3
+              text:
+                type: writer
+                inline: true
+                width: 5/6
+              customId:
+                label: Custom ID
+                type: text
+          styles:
+            fields:
+              backgroundColor:
+                type: select
+                options:
+                  - red
+                  - green
+                  - blue
+              textColor:
+                type: select
+                options:
+                  - white
+                  - black
 ```
 
 (docs: blocks/blocks)
