@@ -33,10 +33,6 @@
     "stylelint-order": "^2.1.0",
     "stylelint-scss": "^3.5.4"
   },
-  "dependencies": {
-    "algoliasearch": "^3.32.1",
-    "awesomplete": "^1.1.4",
-  },
   "eslintConfig": {
     "root": true,
     "parser": "babel-eslint",
