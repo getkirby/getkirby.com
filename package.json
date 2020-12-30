@@ -36,7 +36,6 @@
   "dependencies": {
     "algoliasearch": "^3.32.1",
     "awesomplete": "^1.1.4",
-    "tippy.js": "^4.2.1"
   },
   "eslintConfig": {
     "root": true,
