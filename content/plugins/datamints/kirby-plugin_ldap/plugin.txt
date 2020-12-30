@@ -1,4 +1,4 @@
-Title: Datamints Kirby-Plugin Ldap
+Title: LDAP login
 
 ----
 
