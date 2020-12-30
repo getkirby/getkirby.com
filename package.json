@@ -42,7 +42,6 @@
     "lazysizes": "^5.2.1-rc1",
     "list.js": "^1.5.0",
     "loadjs": "^3.6.1",
-    "svgxuse": "^1.2.6",
     "tippy.js": "^4.2.1"
   },
   "eslintConfig": {
