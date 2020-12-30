@@ -4,12 +4,16 @@
 
   <?php snippet('meta') ?>
 
-  <?= css('assets/css/index.css') ?>
-  <?= css('assets/css/templates/cheatsheet.css') ?>
-  <?= css('@auto') ?>
+  <?= css([
+    $kirby->url('assets') . '/css/index.css', 
+    $kirby->url('assets') . '/css/templates/cheatsheet.css', 
+    '@auto'
+  ]) ?>
 
-  <?= js('assets/js/index.js', ['defer' => true]) ?>
-  <?= js('assets/js/templates/cheatsheet.js', ['defer' => true]) ?>
+  <?= js([
+    $kirby->url('assets') . '/js/index.js',
+    $kirby->url('assets') . '/js/templates/cheatsheet.js'
+  ], ['type' => 'module']) ?>
 
 </head>
 <body data-template="<?= $page->template() ?>">
