@@ -1,2 +1,4 @@
 /* Legacy - remove when all templates refactored */
 @import "./legacy.css";
+
+@import "./variables.css";
