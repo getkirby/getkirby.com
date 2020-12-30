@@ -1,0 +1,1 @@
+export default function(e,t){const n=document.getElementsByTagName("script")[0],o=document.createElement("script");o.src=e,n.parentNode.insertBefore(o,n),o.onload=()=>{t&&t()}}
