@@ -20,7 +20,7 @@ CODE;
 
 ## Calculate the column span value
 
-Each column in a layout as a `$column->width()` method which will return the width defined in the blueprint. (i.e. `1/2`) but for many grid systems you need to know how many columns the current column should span in the grid. This can be done with the `$column->span()` method. The method calculates with a 12-column grid by default. So for example, if your column width is `1/2` the span method would return a value of 6. If you are working with a different kind of grid system you can pass the number of columns like this: `$column->span(6)`:
+Each column in a layout has a `$column->width()` method which will return the width defined in the blueprint. (i.e. `1/2`) but for many grid systems you need to know how many columns the current column should span in the grid. This can be done with the `$column->span()` method. The method calculates with a 12-column grid by default. So for example, if your column width is `1/2` the span method would return a value of 6. If you are working with a different kind of grid system you can pass the number of columns like this: `$column->span(6)`:
 
 ```php
 <?= <<<'CODE'
