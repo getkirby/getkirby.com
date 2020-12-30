@@ -14,10 +14,6 @@
 (function(w, d) {
   function loadJS(url, async){var r=d.getElementsByTagName("script")[0],s=d.createElement("script");if(async)s.async=true;s.src=url;r.parentNode.insertBefore(s,r);}
 
-  // Promise polyfill for IE 11
-  if(!window.Promise) {
-    loadJS('<?= url('assets/js/polyfills/promise.js') ?>');
-  }
 })(window, document);
 </script>
 
