@@ -6,7 +6,7 @@ Description: Set up custom components to deliver assets and files through a CDN.
 
 ----
 
-Published: 2020-03-09
+Published: 2021-01-01
 
 ----
 
@@ -66,7 +66,7 @@ If your website uses TLS, set up a certificate first before you create a Zone Al
 
 Once you have set up your Zone and an optional Zone Alias, you are ready to start working on the Kirby side of things.
 
-## KeyCDN plugin
+## CDN plugin
 
 On the Kirby side, we now have to make sure that the assets we want to serve from the CDN use the CDN's Zone URL instead of the ones linked to the website's domain, and this without us having to manually change each URL. We can achieve this with the (link: docs/reference/plugins/components/url text: `url` component extension), which will take care of rerouting the relevant paths.
 
@@ -86,25 +86,25 @@ Let's start with configuring the options for the CDN plugin in `config.php` (if 
 ```php "/site/config/config.php"
 <?php
 return [
-  'keycdn'        => true,
-  'keycdn.domain' => 'https://yourpullzone.yourcdn.com'
+  'cdn'        => true,
+  'cdn.domain' => 'https://yourpullzone.yourcdn.com'
 ];
 ```
 
-Here we set two options: With the `keycdn` option we control if the plugin should route our assets through the plugin or not, so that we can easily disable it. With the `keycdn.domain` option, we set the domain for the Pull Zone we created above.
+Here we set two options: With the `cdn` option we control if the plugin should route our assets through the plugin or not, so that we can easily disable it. With the `cdn.domain` option, we set the domain for the Pull Zone we created above.
 
 ### The URL component
 
 Let's start with the (link: docs/reference/plugins/components/url text: URL component) for the static assets, leaving alone files from the media folder for the moment.
 
-```php "/site/plugins/keycdn/index.php"
+```php "/site/plugins/cdn/index.php"
 <?php
 
-Kirby::plugin('author/keycdn', [
+Kirby::plugin('author/cdn', [
     'components' => [
         'url' => function ($kirby, $path, $options, $original) {
-            if (option('keycdn', false) !== false && Str::contains($path, 'assets')) {
-                return option('keycdn.domain') . '/' . $path;
+            if (option('cdn', false) !== false && Str::beginsWith($path, 'assets')) {
+                return option('cdn.domain') . '/' . $path;
             }
 
             return $original($path, $options);
@@ -113,14 +113,14 @@ Kirby::plugin('author/keycdn', [
 ]);
 ```
 
-Without any limitations, the URL component would modify all Kirby URLs. Therefore, we first check if the `keycdn` option is enabled, and if that's the case, we want limit the routes to URLs in the `/assets` path. We therefore check if the path matches the given regex pattern (i.e. if it contains the `assets` bit):
+Without any limitations, the URL component would modify all Kirby URLs. Therefore, we first check if the `cdn` option is enabled, and if that's the case, we want limit the routes to URLs in the `/assets` path. We therefore check if the path matches the given regex pattern (i.e. if it begins with the `assets` bit):
 
 ```php
-Str::contains($path, 'assets')
+Str::beginsWith($path, 'assets')
 ```
 All other paths remain untouched.
 
-Almost there! But hold on: you will notice that we added the original path after the KeyCDN domain. However, what if our assets are updated? How will the CDN know that it has to fetch a new file? Keep on reading!
+Almost there! But hold on: you will notice that we added the original path after the CDN domain. However, what if our assets are updated? How will the CDN know that it has to fetch a new file? Keep on reading!
 
 ## Cache busting
 
@@ -128,14 +128,14 @@ A problem when using CDNs is the lifespan of the assets on the network. When you
 
 This is where cache-busting is used to force the CDN to load the new version of a files once it has changed. The most common way of doing this is to add a version number or timestamp to the filename. There are different ways to achieve this. On the (link: https://getkirby.com text: getkirby.com) website, we do it with a plugin you can grab from the (link: https://github.com/getkirby/getkirby.com/tree/master/site/plugins/cachebuster text: getkirby.com repo). If we put this plugin into the `/site/plugins` folder, we can then modify the code above like this:
 
-```php "/site/plugins/keycdn/index.php"
+```php "/site/plugins/cdn/index.php"
 <?php
 
-Kirby::plugin('author/keycdn', [
+Kirby::plugin('author/cdn', [
     'components' => [
         'url' => function ($kirby, $path, $options, $original) {
-            if (option('keycdn', false) !== false && Str::contains($path, 'assets')) {
-                return option('keycdn.domain') . '/' . Cachebuster::path($path);
+            if (option('cdn', false) !== false && Str::beginsWith($path, 'assets')) {
+                return option('cdn.domain') . '/' . Cachebuster::path($path);
             }
 
             return $original($path, $options);
@@ -170,7 +170,7 @@ For this purpose, we have to create the (link: docs/reference/plugins/components
 To process images using KeyCDN, you have to enable this feature in your Pull Zone settings. Allow for some time for your zone to catch up with the new settings. Note that image processing comes at an additional cost.
 </info>
 
-```php "/site/plugins/keycdn/index.php"
+```php "/site/plugins/cdn/index.php"
 <?php
 
 use Kirby\Cms\File;
@@ -179,7 +179,7 @@ use Kirby\Http\Uri;
 use Kirby\Toolkit\Str;
 
 
-function keycdn($file, $params = [])
+function cdn($file, $params = [])
 {
     $query = null;
     // check the parameters passed to the function and set width and height
@@ -196,23 +196,23 @@ function keycdn($file, $params = [])
     $path = Url::path($file->mediaUrl());
 
     // return final URL
-    return option('keycdn.domain') . '/' . $path . $query;
+    return option('cdn.domain') . '/' . $path . $query;
 }
 
-Kirby::plugin('author/keycdn', [
+Kirby::plugin('author/cdn', [
     'components' => [
         'url' => function ($kirby, $path, $options, $original) {
-            if (option('keycdn', false) !== false && Str::contains($path, 'assets')) {
-                return option('keycdn.domain') . '/' . Cachebuster::path($path);
+            if (option('cdn', false) !== false && Str::beginsWith($path, 'assets')) {
+                return option('cdn.domain') . '/' . Cachebuster::path($path);
             }
 
             return $original($path, $options);
         },
         'file::version' => function (Kirby $kirby, File $file, array $options = []) {
             static $originalComponent;
-            // if keycdn option is enabled
-            if (option('keycdn', false) !== false) {
-                $url = keycdn($file, $options);
+            // if cdn option is enabled
+            if (option('cdn', false) !== false) {
+                $url = cdn($file, $options);
                 // return a new FileVersion object with the given settings
                 return new FileVersion([
                     'modifications' => $options,
@@ -232,8 +232,8 @@ Kirby::plugin('author/keycdn', [
             static $originalComponent;
             // if the file type is an image
             if ($file->type() === 'image') {
-                // call the keycdn method
-                return keycdn($file);
+                // call the cdn method
+                return cdn($file);
             }
             // if $originalComponent is null, require the original component
             if ($originalComponent === null) {
@@ -247,7 +247,7 @@ Kirby::plugin('author/keycdn', [
 ```
 
 <info>
-If you have other files than images that you also want to route through the CDN, remove the if-statement around the `keycdn()` function call in the `file::url` component.
+If you have other files than images that you also want to route through the CDN, remove the if-statement around the `cdn()` function call in the `file::url` component.
 </info>
 
 ## Image processing
