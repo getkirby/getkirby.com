@@ -1,3 +1,1 @@
-<svg width="32" height="32" viewBox="0 0 32 32" class="icon icon-arrow-big-left">
-  <polygon fill-rule="evenodd" points="9.657 14 30 14 30 18 9.657 18 17.556 25.899 14.728 28.728 2 16 14.728 3.272 17.556 6.101"></polygon>
-</svg>
+<svg width="32" height="32" class="icon icon-arrow-big-left"><path fill-rule="evenodd" d="M9.657 14H30v4H9.657l7.899 7.899-2.828 2.829L2 16 14.728 3.272l2.828 2.829z"/></svg>
