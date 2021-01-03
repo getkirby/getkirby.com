@@ -272,6 +272,10 @@ return function ($kirby) {
 };
 ```
 
+<since v="3.1.3">
+In your route, you can also pass all arguments explicitely to the `->render()` method to make them directly accessible in the controller. (link: docs/guide/templates/controllers#arguments-from-page-render-in-route text: Read more ›)
+</since> 
+
 ### Page status
 
 While filter methods like `visible()`, `invisible()` and related Pages methods will still work, these are now deprecated. To make your project future-proof, we recommend that you replace them with (link: docs/reference/objects/pages/listed text: `listed`)/(link: docs/reference/objects/pages/unlisted text: `unlisted`)/(link: docs/reference/objects/pages/published text: `published`) and related methods as required.
