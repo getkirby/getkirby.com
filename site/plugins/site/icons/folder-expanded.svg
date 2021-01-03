@@ -1,3 +1,1 @@
-<svg width="16" height="16" viewBox="0 0 16 16" class="icon icon-folder-expanded">
-  <path d="M1 2h7v2h7v10h-14v-12zM3 6v2h10v-2h-10z"></path>
-</svg>
+<svg width="16" height="16" class="icon icon-folder-expanded"><path d="M1 2h7v2h7v10H1V2zm2 4v2h10V6H3z"/></svg>
