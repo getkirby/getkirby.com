@@ -189,17 +189,20 @@ In this first step, the `$notes` and `$tag` variable are still uninitialized.
 
 If we now click on `Step over` in the debug toolbar (or press <kbd>F10</kbd>), we can see how the content in the debug panel changes. Now the `$tag` variable is no longer uninitialized, but changes to an empty string.
 
-(screenshot: tag-variable.png)
+(screenshot: empty-tag-variable.png)
+
 
 If we use `Step over` again,  we will now see how the `$notes` variable has changed:
 
-We can now inspect this variable in detail. We learn that the variable contains an object of type `Kirby\Cms\Pages`, that the data array contains the subpages and a lot more.
-
 (screenshot: notes-variable.png)
+
+We can now inspect this variable in detail. We learn that the variable contains an object of type `Kirby\Cms\Pages`, that the data array contains the subpages and a lot more.
 
 With the debugging listener still active, let's return to the browser and add a tag in the address bar, e.g `http://yourlocaldomain/notes/tag:desert`. Now reload the page in the browser and return to the editor.
 
 Notice how after the first `Step over`, the `$tag` variable now contains the string `desert`. Step over again, and the `$notes` variable will still be the same as before.
+
+(screenshot: tag-variable.png)
 
 With the third step over, we will reach the if statement and another step forward, we will notice that the `$notes` variable has now changed. The `data` array inside the variable now only has a single item, whereas it had 6 before the filtering took place.
 
