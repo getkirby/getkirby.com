@@ -189,6 +189,8 @@ In this first step, the `$notes` and `$tag` variable are still uninitialized.
 
 If we now click on `Step over` in the debug toolbar (or press <kbd>F10</kbd>), we can see how the content in the debug panel changes. Now the `$tag` variable is no longer uninitialized, but changes to an empty string.
 
+(screenshot: tag-variable.png)
+
 If we use `Step over` again,  we will now see how the `$notes` variable has changed:
 
 We can now inspect this variable in detail. We learn that the variable contains an object of type `Kirby\Cms\Pages`, that the data array contains the subpages and a lot more.
