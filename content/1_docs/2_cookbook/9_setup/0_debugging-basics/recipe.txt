@@ -204,6 +204,6 @@ if (!empty($tags)) {
 
 You might also be interested in checking out some PHP debugging tools.
 
-- (link: https://xdebug.org text: Xdebug)
+- (link: https://xdebug.org text: Xdebug) (also see our (link: docs/cookbook/setup/php-debugging-with-xdebug text: recipe about Xdebug))
 - (link: https://addons.mozilla.org/de/firefox/addon/firephp/ text: FirePHP)
 - (link: https://craig.is/writing/chrome-logger text: Chrome Logger, formerly known as ChromePHP)
