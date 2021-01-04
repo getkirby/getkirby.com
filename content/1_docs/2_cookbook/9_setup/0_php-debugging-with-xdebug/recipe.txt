@@ -6,7 +6,7 @@ Published: 2021-01-04
 
 ----
 
-Description: Xdebug helps you track down errors in your PHP scripts. In this recipe, we will set it up with VS Code
+Description: Xdebug helps you track down errors in your PHP scripts. In this recipe, we will set it up with VS Code.
 
 ----
 
@@ -14,7 +14,7 @@ Text:
 
 ## What is Xdebug and why use it?
 
-In our (link: docs/cookbook/setup/debugging-basics text: Basic error hunting & prevention) recipe, we introduced some functions like `var_dump()`, `print_r()` or `error_log()` to help debug your variables in PHP. While these functions are usually helpful for taking a quick look at the output of your variables, they are not useful for evaluating these variables at runtime, analyze stack traces or set breakpoints.
+In our (link: docs/cookbook/setup/debugging-basics text: Basic error hunting & prevention) recipe, we introduced some functions like `var_dump()`, `print_r()` or `error_log()` to help debug your variables in PHP. While these functions are usually helpful for taking a quick look at the output of your variables, they are not useful for evaluating these variables at runtime, analyzing stack traces or setting breakpoints.
 
 This is where Xdebug comes in, a PHP extension that provides debugging and profiling capabilities, which will finally speed up your development process, help you write better code and facilitate refactoring. With Xdebug, you can break code execution at any point, follow code execution step by step right from the beginning, and inspect all variables during a request.
 
@@ -39,7 +39,7 @@ In some development environments like MAMP Pro, Xdebug comes bundled, so you don
 
 Let's first check if Xdebug is already installed on your system. You can check this by either putting a `phpinfo()` statement into a Kirby template or into a separate file and look for the `xdebug` section, or open a terminal and type 
 
-```php
+```sh
 php -v
 ```
 on the command line. If Xdebug is installed, this command will output something like:
@@ -58,7 +58,7 @@ You can find the installation instructions for your platform in the official (li
 
 There's also a (link: https://xdebug.org/wizard text: wizard) where you can enter the output of your `phpinfo()` to get instructions to build Xdebug from source for your environment.
 
-Once Xdebug is installed, we have to make some configuration settings.
+Once Xdebug is installed, we have to set some configuration settings.
 
 ### Configuration
 
@@ -66,7 +66,7 @@ The first step to configure Xdebug is to find the `.ini` file for your current P
 
 With
 
-```php
+```sh
 php --ini
 ```
 
@@ -79,11 +79,11 @@ With `phpinfo()`, you find the information at the top of the output in the field
 - Scan this dir for additional .ini files
 - Additional .ini files parsed 
 
-If you find a specific `.ini` file for Xdebug, you will work with this file, otherwise, use the main `.ini` file.
+If you find a specific `.ini` file for Xdebug, you will work with this file, otherwise, use the main `.ini` file. If a directory is listed in "Scan this dir for additional .ini files", you can also create a file for Xdebug yourself to keep your main `php.ini` clean.
 
-Check if the file already contains the configuration for the Xdebug extension (in my environments, this line was added automatically when I installed Xdebug):
+Check if the file you are working with already contains the configuration for the Xdebug extension (in my environments, this line was added automatically when I installed Xdebug):
 
-```
+```ini
 zend_extension=path/to/where/you/installed/xdebug.so
 ```
 
@@ -91,7 +91,7 @@ If not, add this line now, and restart your server. Verify that Xdebug is proper
 
 We now have to add some more config settings. Add the following settings to the same `.ini` file:
 
-```
+```ini
 zend_extension=path/to/where/you/installed/xdebug.so
 xdebug.mode=debug
 xdebug.start_with_request = yes
@@ -109,7 +109,7 @@ You can find a description for all config settings in the (link: https://xdebug.
 <warning>
 From Xdebug 2 to Xdebug 3, the naming of config settings has changed. The above settings are the Xdebug settings for Xdebug 3.x. If you are running Xdebug 2.x, you have to either update or use the equivalent Xdebug 2.x settings.
 
-```
+```ini
 zend_extension=path/to/where/you/installed/xdebug.so
 xdebug.remote_enable=true
 xdebug.remote_host=localhost
@@ -121,14 +121,14 @@ xdebug.remote_autostart = 1
 
 
 <info>
-In this recipe, we assume that your code under test and Xdebug run on the same server.
+In this recipe, we assume that your tested code and Xdebug run on the same server.
 
 There are multiple ways to tell Xdebug how to connect to a remote debugger as described in the (link: text: Xdebug documentation), but we stick with the `start_with_request` method recommended by the plugin we will install in the next step.
 </info>
 
 ## Installing the VS Code extension
 
-To make Xdebug work with VS Code, we need to install the (link: https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug text: PHP Debug extension by Felix Becker). Since we already installed Xdebug and made the required `.ini` settings above, there is no further configuration needed at this point.
+To make Xdebug work with VS Code, we need to install the (link: https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug text: PHP Debug extension by Felix Becker). Since we already installed Xdebug and configured the required `.ini` settings above, there is no further configuration needed at this point.
 
 Once this is done, we are ready to start our first debugging session.
 
@@ -145,7 +145,7 @@ A new `launch.json` file with default settings is created in the project folder.
 
 We now have to change the port settings for both configurations in this file to what we entered in the `php.ini` file. Since I stuck with the default port, this is port 9003. Since the second configuration "Launch currently open script" is not relevant for the purposes of this recipe, I didn't copy it here.
 
-```json "launch.json"
+```js "launch.json"
 {
     "version": "0.2.0",
     "configurations": [
@@ -165,7 +165,7 @@ For details of available `launch.json` settings, check out the PHP Debug documen
 
 To add breakpoints, click in the left-hand gutter of the code.
 
-Open the `site/controllers/notes.php` controller and set three breakpoint on `$tag` and the two `$notes` variable definitions. A red dot will mark each breakpoint.
+Open the `site/controllers/notes.php` controller and set three breakpoints on `$tag` and the two `$notes` variable definitions. A red dot will mark each breakpoint.
 
 (screenshot: breakpoints.png)
 
@@ -177,7 +177,7 @@ Now open the debug panel again and click on the little green triangle to start l
 
 (screenshot: debug-toolbar.png)
 
-We will explain the different button in this toolbar below.
+We will explain the different buttons in this toolbar below.
 
 Next, open the `notes` page of the Starterkit in your browser. If all went well, you will be switched back to the VS Code editor, with the formerly empty debug panel now filled with information.
 
@@ -187,7 +187,7 @@ In this first step, the `$notes` and `$tag` variable are still uninitialized.
 
 (screenshot: uninitialized-variables.png)
 
-If we now click on `Step over` in the debug toolbar (or press F10 ), we can see how the content in the debug panel changes. Now the `$tag` variable is no longer uninitialized, but changes to an empty string.
+If we now click on `Step over` in the debug toolbar (or press <kbd>F10</kbd>), we can see how the content in the debug panel changes. Now the `$tag` variable is no longer uninitialized, but changes to an empty string.
 
 If we use `Step over` again,  we will now see how the `$notes` variable has changed:
 
@@ -207,7 +207,7 @@ Get out of debug mode by clicking on `Stop` in the debugging toolbar and remove 
 
 ## Error debugging
 
-Up to this moment, we haven't run into any errors. Let's change that by deliberately changing our code to make it likely to run into ann error, and see what happens.
+Up to this moment, we haven't run into any errors. Let's change that by deliberately changing our code to make it likely to run into an error, and see what happens.
 
 We make the following changes in the Starterkit:
 
@@ -294,7 +294,7 @@ When in debug mode, you get a debug toolbar for controlling the execution of the
 
 ## MAMP Pro
 
-If you use MAMP Pro, the only difference to the steps above is that you enable XDebug in PHP Settings, then add the configuration settings in the `.ini` file for the selected PHP version which you can also access via the settings.
+If you use MAMP Pro, the only difference to the steps above is that you enable Xdebug in PHP Settings, then add the configuration settings in the `.ini` file for the selected PHP version, which you can also access via the settings.
 
 In this recipe, we cannot cover all operating systems, development environments or IDEs. Please use a search engine to find relevant, up-to-date articles for your specific setup or post your question on our (link: https://forum.getkirby.com text: forum).
 
@@ -302,7 +302,6 @@ In this recipe, we cannot cover all operating systems, development environments 
 ## Resources
 
 - (link: https://code.visualstudio.com/Docs/editor/debugging text: VS Code debugging)
-- (link: https://www.jetbrains.com/help/phpstorm/configuring-xdebug.html text: Configure Xdebug)
-- (link https://www.youtube.com/watch?v=114XVdpV4ow text: Derick Rethans about Xdebug 3)
+- (link: https://www.jetbrains.com/help/phpstorm/configuring-xdebug.html text: Configure Xdebug in PHPStorm)
+- (link: https://www.youtube.com/watch?v=114XVdpV4ow text: Derick Rethans about Xdebug 3)
 - (link: https://www.youtube.com/watch?v=VRAySYr2q-U text: XAMPP (PHP8), Xdebug 3 and PHPStorm)
-
