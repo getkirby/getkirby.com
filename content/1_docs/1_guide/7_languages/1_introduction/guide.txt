@@ -57,7 +57,7 @@ return [
   'code' => 'en',
   'default' => true,
   'direction' => 'ltr',
-  'locale' => 'en_US',
+  'locale' => 'en_US.utf-8',
   'name' => 'English',
 ];
 ```
@@ -107,7 +107,7 @@ return [
     'default' => true,
     'direction' => 'ltr',
     'locale' => [
-        'LC_ALL' => 'en_GB'
+        'LC_ALL' => 'en_GB.utf-8'
     ],
     'name' => 'English',
     'translations' => [
@@ -132,7 +132,7 @@ return [
   'code' => 'en',
   'default' => true,
   'direction' => 'ltr',
-  'locale' => 'en_US',
+  'locale' => 'en_US.utf-8',
   'name' => 'English',
   'url' => 'https://example.com'
 ];
@@ -145,7 +145,7 @@ return [
   'code' => 'de',
   'default' => false,
   'direction' => 'ltr',
-  'locale' => 'de_DE',
+  'locale' => 'de_DE.utf-8',
   'name' => 'Deutsch',
   'url' => 'https://example.de'
 ];
