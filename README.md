@@ -75,4 +75,4 @@ npm run lint
 
 ## Metadata for search engines and social media
 
-See `site/plugins/meta/README.md` for further information.
+See [`site/plugins/meta/README.md`](/site/plugins/meta/README.md) for further information.
