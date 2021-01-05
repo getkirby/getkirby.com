@@ -156,13 +156,7 @@ If you already use another cache busting plugin or your own solution, you will h
 
 ## Serving files
 
-While the (link: https://getkirby.com text: getkirby.com) website uses (link: https://cloudinary.com text: Cloudinary) instead of KeyCDN to serve images, we will continue this example with serving these files from KeyCDN as well.
-
 Let's extend the plugin code in order to route the URLs to these files automatically through KeyCDN as well.
-
-<info>
-If you want to use Cloudinary instead, check out the Cloudinary plugin in the (link: https://github.com/getkirby/getkirby.com text: getkirby.com repo). There's also a plugin for (link: https://www.imgix.com/ text: Imgix) available.
-</info>
 
 For this purpose, we have to create the (link: docs/reference/plugins/components/file-version text: `file::version`) and (link: docs/reference/plugins/components/file-urls text: `file::url`) components, and we also need a helper method that we use in both components. Here is the complete code with annotations for better understanding:
 
