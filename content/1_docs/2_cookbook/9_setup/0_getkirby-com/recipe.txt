@@ -254,24 +254,24 @@ We host all our assets on (link: https://www.keycdn.com/ text: KeyCDN) with a ti
 
 Kirby::plugin('getkirby/keycdn', [
     'components' => [
-        'url' => function ($kirby, $path, $options, $original) {
+        'url' => function ($kirby, $path, $options) {
+            $original = $kirby->nativeComponent('url');
+
             if (preg_match('!assets!', $path)) {
+                $path = Cachebuster::path($path);
+
                 if (option('keycdn', false) !== false) {
-                    return option('keycdn.domain') . '/' . Cachebuster::path($path);
-                } else {
-                    return $original(Cachebuster::path($path), $options);
+                    return option('keycdn.domain') . '/' . $path;
                 }
-            } else {
-                return $original($path, $options);
             }
+            
+            return $original($kirby, $path, $options);
         }
     ]
 ]);
 ```
 
-### Cloudinary
-
-To optimize screenshots and other images, we use (link: https://cloudinary.com text: Cloudinary). A (link: https://github.com/getkirby/getkirby.com/blob/master/site/plugins/cloudinary/index.php text: small plugin) routes all URLs to image files automatically through Cloudinary,  and Cloudinary then pulls the originals from our server, optimizes them and hosts them on their CDN. A very comfortable solution!
+The plugin also takes care of optimizing images. Check out the (link: https://github.com/getkirby/getkirby.com/blob/master/site/plugins/keycdn/index.php text: source code) if you are interested in learning more about it.
 
 ### Algolia
 

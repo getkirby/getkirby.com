@@ -35,11 +35,9 @@ https://getkirby.com
 We don't collect any personal data on our website except server logs. We use the following third parties to improve our website performance:
 
 - KeyCDN:
-*To speed up access to our site across the globe*
+*To speed up access to our site across the globe and to minify our images*
 - Algolia:
 *To provide a really good search experience for our site and docs*
-- Cloudinary:
-*To minify our images and increase loading speed for images across the globe*
 
 [Read more ›](#website)
 
@@ -152,7 +150,7 @@ We use the following third-party services to improve the performance and usabili
 
 #### KeyCDN
 
-We use a content delivery network to provide faster access to our CSS, JavaScript and font files from anywhere around the world. Our CDN is provided by:
+We use a content delivery network to provide faster access to our CSS, JavaScript, images and font files from anywhere around the world. Our CDN is provided by:
 
 *proinity LLC (KeyCDN)
 Ruemikerstrasse 60
@@ -160,17 +158,6 @@ CH-8409 Winterthur
 Switzerland*
 
 KeyCDN complies with GDPR. You can find their privacy policy here: [https://www.keycdn.com/privacy](https://www.keycdn.com/privacy)
-
-#### Cloudinary
-
-We use a third-party service to reduce the file size of the images on our site and also to provide faster access through their content delivery network. This service is provided by
-
-*Cloudinary Ltd.
-111 W Evelyn Ave, Suite 206
-Sunnyvale, California 94086
-USA*
-
-You can find their privacy policy here: [https://cloudinary.com/privacy](https://cloudinary.com/privacy)
 
 #### Algolia
 

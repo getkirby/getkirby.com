@@ -12,11 +12,6 @@
 <link rel="preconnect" href="<?= option('keycdn.domain') ?>">
 <?php endif ?>
 
-<?php if(option('cloudinary', false) !== false): ?>
-<link rel="dns-prefetch" href="https://res.cloudinary.com">
-<link rel="preconnect" href="https://res.cloudinary.com">
-<?php endif ?>
-
 <link rel="preload" href="<?= url('assets/css/index.css') ?>" as="style">
 <link rel="preload" href="<?= url('assets/js/index.js') ?>" as="script">
 
