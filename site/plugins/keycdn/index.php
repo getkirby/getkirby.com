@@ -42,16 +42,16 @@ Kirby::plugin('getkirby/keycdn', [
 
             static $original;
 
-            if ($original === null) {
-                $original = $kirby->nativeComponent('url');
-            }
-
             if (preg_match('!assets!', $path)) {
                 $path = Cachebuster::path($path);
 
                 if (option('keycdn', false) !== false) {
                     return option('keycdn.domain') . '/' . $path;
                 }
+            }
+
+            if ($original === null) {
+                $original = $kirby->nativeComponent('url');
             }
             
             return $original($kirby, $path, $options);

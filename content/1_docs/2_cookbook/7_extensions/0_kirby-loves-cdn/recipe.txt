@@ -6,7 +6,7 @@ Description: Set up custom components to deliver assets and files through a CDN.
 
 ----
 
-Published: 2021-01-01
+Published: 2021-01-05
 
 ----
 
@@ -102,11 +102,12 @@ Let's start with the (link: docs/reference/plugins/components/url text: URL comp
 
 Kirby::plugin('author/cdn', [
     'components' => [
-        'url' => function ($kirby, $path, $options, $original) {
+        'url' => function ($kirby, $path, $options) {
             if (option('cdn', false) !== false && Str::beginsWith($path, 'assets')) {
                 return option('cdn.domain') . '/' . $path;
             }
 
+            $original = $kirby->nativeComponent('url');
             return $original($path, $options);
         },
     ]
@@ -118,7 +119,7 @@ Without any limitations, the URL component would modify all Kirby URLs. Therefor
 ```php
 Str::beginsWith($path, 'assets')
 ```
-All other paths remain untouched.
+All other paths remain untouched. We use the original native `url` component for all other paths, retrieving it via `$kirby->nativeComponent()`.
 
 Almost there! But hold on: you will notice that we added the original path after the CDN domain. However, what if our assets are updated? How will the CDN know that it has to fetch a new file? Keep on reading!
 
@@ -133,11 +134,16 @@ This is where cache-busting is used to force the CDN to load the new version of 
 
 Kirby::plugin('author/cdn', [
     'components' => [
-        'url' => function ($kirby, $path, $options, $original) {
-            if (option('cdn', false) !== false && Str::beginsWith($path, 'assets')) {
-                return option('cdn.domain') . '/' . Cachebuster::path($path);
+        'url' => function ($kirby, $path, $options) {
+            if (Str::beginsWith($path, 'assets')) {
+                $path = Cachebuster::path($path);
+
+                if (option('cdn', false) !== false) {
+                    return option('cdn.domain') . '/' . $path;
+                }
             }
 
+            $original = $kirby->nativeComponent('url');
             return $original($path, $options);
         },
     ]
@@ -172,10 +178,10 @@ use Kirby\Cms\FileVersion;
 use Kirby\Http\Uri;
 use Kirby\Toolkit\Str;
 
-
 function cdn($file, $params = [])
 {
     $query = null;
+
     // check the parameters passed to the function and set width and height
     if (empty($params) === false) {
         if (empty($params['crop']) === false && $params['crop'] !== false) {
@@ -186,8 +192,13 @@ function cdn($file, $params = [])
         $query = '?' . http_build_query($params);
     }
 
+    // if $file is an object, resolve it to its media URL
+    if (is_object($file) === true) {
+        $file = $file->mediaUrl();
+    }
+
     // set the path
-    $path = Url::path($file->mediaUrl());
+    $path = Url::path($file);
 
     // return final URL
     return option('cdn.domain') . '/' . $path . $query;
@@ -196,14 +207,27 @@ function cdn($file, $params = [])
 Kirby::plugin('author/cdn', [
     'components' => [
         'url' => function ($kirby, $path, $options, $original) {
-            if (option('cdn', false) !== false && Str::beginsWith($path, 'assets')) {
-                return option('cdn.domain') . '/' . Cachebuster::path($path);
+
+            static $original;
+
+            if (Str::beginsWith($path, 'assets')) {
+                $path = Cachebuster::path($path);
+
+                if (option('cdn', false) !== false) {
+                    return option('cdn.domain') . '/' . $path;
+                }
+            }
+
+            if ($original === null) {
+                $original = $kirby->nativeComponent('url');
             }
 
             return $original($path, $options);
         },
         'file::version' => function (Kirby $kirby, File $file, array $options = []) {
-            static $originalComponent;
+
+            static $original;
+
             // if cdn option is enabled
             if (option('cdn', false) !== false) {
                 $url = cdn($file, $options);
@@ -215,26 +239,32 @@ Kirby::plugin('author/cdn', [
                     'url'           => $url,
                 ]);
             }
-            // if $originalComponent is null, require the original component
-            if ($originalComponent === null) {
-                $originalComponent = (require $kirby->root('kirby') . '/config/components.php')['file::version'];
+
+            // if static $original is null, get the original component
+            if ($original === null) {
+                $original = $kirby->nativeComponent('file::version');
             }
+
             // and return it with the given options
-            return $originalComponent($kirby, $file, $options);
+            return $original($kirby, $file, $options);
         },
         'file::url' => function (Kirby $kirby, File $file): string {
-            static $originalComponent;
+
+            static $original;
+
             // if the file type is an image
             if ($file->type() === 'image') {
                 // call the cdn method
                 return cdn($file);
             }
-            // if $originalComponent is null, require the original component
-            if ($originalComponent === null) {
-                $originalComponent = (require $kirby->root('kirby') . '/config/components.php')['file::url'];
+
+            // if static $original is null, get the original component
+            if ($original === null) {
+                $original = $kirby->nativeComponent('file::url');
             }
-            // and return it
-            return $originalComponent($kirby, $file);
+
+            // and return it with the given options
+            return $original($kirby, $file);
         }
     ]
 ]);
