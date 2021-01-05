@@ -41,9 +41,9 @@ class SiteMeta
             $sitemap[] = '<?xml version="1.0" encoding="UTF-8"?>';
             $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-            $allowTemplates = option('kirby.meta.templatesInclude', []);
-            $allowPages     = option('kirby.meta.pagesInclude', []);
-            $ignorePages    = option('kirby.meta.pagesExclude', []);
+            $allowTemplates = option('meta.templatesInclude', []);
+            $allowPages     = option('meta.pagesInclude', []);
+            $ignorePages    = option('meta.pagesExclude', []);
             $ignorePattern  = '!^(?:' . implode('|', $ignorePages) . ')$!i';
 
             foreach (site()->index() as $item) {
