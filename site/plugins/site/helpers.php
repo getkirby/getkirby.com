@@ -167,10 +167,6 @@ function icon(string $name, bool $return = false, array $attr = null)
 
 function referenceLookup(string $class)
 {
-    if (option('referenceLookup') === false) {
-        return false;
-    }
-
     $roots = [
         'docs/reference/objects',
         'docs/reference/tools',

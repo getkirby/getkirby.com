@@ -17,6 +17,5 @@ return [
     ],
     'keycdn' => [
         'domain' => 'https://assets.getkirby.com',
-    ],
-    'referenceLookup' => true
+    ]
 ];
