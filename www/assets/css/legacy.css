@@ -2954,6 +2954,7 @@ body:not(.js-focus-visible) .sidebar-toggle:focus::before {
   width: 100%;
 }
 
+.text .video video,
 .text .video iframe {
   border: 0;
   height: 100%;

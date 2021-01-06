@@ -10,7 +10,7 @@ Text:
 
 First things first, here is a glimpse at what we will build:
 
-`backups-overview.mp4`
+(video: backups-overview.mp4)
 
 **What you will need :**
 
@@ -23,7 +23,7 @@ First things first, here is a glimpse at what we will build:
 
 Let's start with a fresh folder structure. Download, unzip and put [the Starterkit](https://github.com/getkirby/starterkit) (or clone it) at the root of your localhost.
 
-Since we're going to develop a rather complex panel view, some build processes will be a great help to keep our code structured and be able to create components. 
+Since we're going to develop a rather complex panel view, some build processes will be a great help to keep our code structured and be able to create components.
 
 Head over to your `site/plugins` folder, and from there follow the **[Setup for panel plugins](https://github.com/getkirby/pluginkit)** guide to create a new plugin boilerplate named `backups` (don't forget to edit the `composer.json` file to reflect what's actually in the plugin).
 
@@ -49,7 +49,7 @@ package.json
 README.md
 ```
 
-We can do a test run with `npm run build` to make sure everything is in place. 
+We can do a test run with `npm run build` to make sure everything is in place.
 
 Let's begin building the plugin!
 
@@ -135,7 +135,7 @@ Head back to the panel:
 
 (image: backups-02.png)
 
-Now let's set up our static view. I will use some placeholders here, we will add the logic and actions later on. 
+Now let's set up our static view. I will use some placeholders here, we will add the logic and actions later on.
 
 First, we create the View's header. Not a single line of CSS is needed for it to look very kirby-ish:
 
@@ -165,7 +165,7 @@ Then we put together the markup of the backups list:
 <template>
   <k-view class="k-backups-view">
     <k-header class="k-backups-view-header">(...)</k-header>
-    
+
     <section class="backups-section">
       <header class="backups-header">
         <div class="backup-filename">Filename</div>
@@ -270,7 +270,7 @@ And then some styling:
 
 (image: backups-04.png)
 
-This thing is starting to look nice, but there is one last thing we can do to make the next steps easier. 
+This thing is starting to look nice, but there is one last thing we can do to make the next steps easier.
 
 Since we'll be reusing the `li.backup-entry` a lot, it makes sense to wrap it in its own component. First, let's create the component itself:
 
@@ -343,7 +343,7 @@ export default {
 (...)
 ```
 
-Once it's done our view should still display the same list, only now with the beauty of Vue the backups list is directly tied to the data `backups` array. 
+Once it's done our view should still display the same list, only now with the beauty of Vue the backups list is directly tied to the data `backups` array.
 
 The more objects we'll add in the array, the more `li.backup-entry` will be displayed:
 
@@ -379,7 +379,7 @@ We're all set to start adding some actions!
 At this point, you should have the kirby-janitor plugin installed. I will use some endpoints and options provided by this plugin to generate the backups, find the backup directory, etc.
 </info>
 
-First, we need some dummy data. 
+First, we need some dummy data.
 
 I find it better in the context of this plugin to have some human readable string in the backup's name, rather than only the timestamp:
 
@@ -415,7 +415,7 @@ Kirby::plugin('sylvainjule/backups', [
         'action'  => function() {
           $dir   = \Bnomei\BackupZipJob::directory();
           $backups = Dir::read($dir);
-          
+
           // we want the most recent backups first
           rsort($backups);
 
@@ -460,7 +460,7 @@ export default {
       })
   }
 };
-</script> 
+</script>
 
 (...)
 ```
@@ -469,7 +469,7 @@ Good, now we are displaying a list that reflects the content of the backups fold
 
 Next on our list: we want the user to be able to download a backup by clicking on the *Download* button.
 
-Here's the catch: since our backups are stored in a protected `site/backups` folder (and we want to keep it that way), we can't just click on a link to download the backups. Instead, when the user clicks on the *Download* button, we copy the backup in a public `assets/backups-temp` folder and download the file from there. 
+Here's the catch: since our backups are stored in a protected `site/backups` folder (and we want to keep it that way), we can't just click on a link to download the backups. Instead, when the user clicks on the *Download* button, we copy the backup in a public `assets/backups-temp` folder and download the file from there.
 
 To do so, on `@click` on the button, we emit an event that tells the parent list that the user requested to download a backup, and pass the filename along:
 
@@ -512,7 +512,7 @@ export default {
     }
   }
 };
-</script> 
+</script>
 
 (...)
 ```
@@ -566,7 +566,7 @@ export default {
     }
   }
 };
-</script> 
+</script>
 
 (...)
 ```
@@ -597,7 +597,7 @@ We now tweak the `copyAndDownload` methods a bit to store the requested filename
     <section class="backups-section" v-if="backups.length">
       (...)
       <ul class="backups-list">
-        <backup-entry v-for="backup in backups" :key="backup.filename" :backup="backup" 
+        <backup-entry v-for="backup in backups" :key="backup.filename" :backup="backup"
                 :downloading="downloading == backup.filename"
                 @download="copyAndDownload" />
       </ul>
@@ -627,7 +627,7 @@ export default {
     }
   }
 };
-</script> 
+</script>
 
 (...)
 ```
@@ -663,7 +663,7 @@ And add a CSS line to make sure our disabled button keeps a full opacity:
 
 We're good to go:
 
-`backups-07.mp4`
+(video: backups-07.mp4)
 
 But wait. The backups get copied in the `asset/backups-temp` but never get deleted from it and stay publicly accessible, which kind of defeats the purpose of storing them in a protected folder in the first place. To solve this, we should delete the public folder when the user is done with the view.
 
@@ -789,7 +789,7 @@ Kirby::plugin('example-plugin/backups', [
 
 Let's try it out:
 
-`backups-08.mp4`
+(video: backups-08.mp4)
 
 It works, but we are missing a few things:
 
@@ -878,7 +878,7 @@ We also add some style for this new `backups-placeholder` block:
 
 It's looking much better, and that will be it for the list's logic:
 
-`backups-09.mp4`
+(video: backups-09.mp4)
 
 ## Set the header's "Create a new backup" logic
 
@@ -932,7 +932,7 @@ export default {
       this.$api.get('plugin-janitor/backupZip')
         .then(response => {
           this.setCreationStatus(response.status, true)
-          
+
           // if the creation was successfull, we add the new backup on top of the list
           if(response.status == 200) {
             let newBackup = {
@@ -951,7 +951,7 @@ export default {
     setCreationStatus(status, resetAfter = true) {
       // we set the new creationStatus depending on the status code returned by janitor
       this.creationStatus = status == 200 ? 'success' : 'error';
-        
+
       // we only display the success / error message for 2 seconds, then back to the original state
       if(resetAfter) {
         setTimeout(() => {
@@ -969,7 +969,7 @@ export default {
 
 Let's give it a shot:
 
-`backups-11.mp4`
+(video: backups-11.mp4)
 
 
 ## Set the header's "Download the latest backup" logic
@@ -1013,7 +1013,7 @@ export default {
     }
   }
 };
-</script> 
+</script>
 ```
 
 Finally, we call the method on click on the header's button, and add a *Downloading* state for it too:
@@ -1035,7 +1035,7 @@ Finally, we call the method on click on the header's button, and add a *Download
 
 Testing it out:
 
-`backups-12.mp4`
+(video: backups-12.mp4)
 
 ## Translate the plugin
 
@@ -1122,6 +1122,6 @@ You should end up with a completely functional Backups view!
 
 [The Backups plugin](https://github.com/sylvainjule/kirby-backups) has a few more functionalities, hopefully using this guide as a starting point you will be able to figure them out from the source code.
 
-The final code of this guide [is in a dedicated `cookbook` branch](https://github.com/sylvainjule/kirby-backups/tree/cookbook) (where I also added some CSS rules to make the view responsive), so that if any problem occurs you can compare your code with a working one. 
+The final code of this guide [is in a dedicated `cookbook` branch](https://github.com/sylvainjule/kirby-backups/tree/cookbook) (where I also added some CSS rules to make the view responsive), so that if any problem occurs you can compare your code with a working one.
 
 Many thanks to Bruno Meilick for making adjustments to the janitor plugin, in order to make this guide easier to cope with.
