@@ -14,4 +14,4 @@ Featured: false
 
 ----
 
-Description: Password-protect pages easily, panel blueprint included.
+Description: Password-protect pages easily, Panel blueprint included.
