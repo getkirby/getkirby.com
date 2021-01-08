@@ -71,7 +71,7 @@ return [
 
 ## Default Panel language
 
-You can set the default Panel language that is used before a user logs in:
+You can set the default Panel language that is used before a user logs in or when the user does not have a valid language configured:
 
 ```php "/site/config/config.php"
 return [
@@ -80,6 +80,10 @@ return [
   ]
 ];
 ```
+
+<since v="3.5.1">
+If the Panel language is not configured, Kirby will default to English on single-language sites and the default content language on multi-language sites.
+</since>
 
 ## KirbyText/Markdown
 
@@ -122,5 +126,3 @@ return [
 ];
 ```
 </since>
-
-
