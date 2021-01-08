@@ -33,9 +33,10 @@ sections:
         label: Text
         type: textarea
 ```
-<since v="3.3.0">
+
 ## Section shortcuts
 
+<since v="3.3.0">
 For simple sections that are only used once per blueprint, you can use shortcuts. In its most basic form, a `fields` section consists of the section type as name, and a set of fields:
 
 ```yaml

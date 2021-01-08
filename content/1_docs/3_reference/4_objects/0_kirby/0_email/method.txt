@@ -31,9 +31,9 @@ try {
 'replyTo' => 'jane@supercompany.com'
 ```
 
-<since v="3.3.2">
-
 #### `from` with name
+
+<since v="3.3.2">
 ```php
 'from'     => 'no-reply@supercompany.com',
 'fromName' => 'Jane Doe'
@@ -89,7 +89,7 @@ $from = new \Kirby\Cms\User([
 
 ```php
 'to' => [
-    'jane@doe.com', 
+    'jane@doe.com',
     'mark@otto.com'
 ],
 ```

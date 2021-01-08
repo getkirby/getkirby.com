@@ -31,9 +31,9 @@ return [
 ];
 ```
 
-<since v="3.5.0">
 ## Login methods
 
+<since v="3.5.0">
 The `auth.methods` option controls the available login methods for the Panel and the API.
 
 The available options are:
