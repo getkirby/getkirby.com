@@ -216,7 +216,7 @@ Up to this moment, we haven't run into any errors. Let's change that by delibera
 
 We make the following changes in the Starterkit:
 
-- In `site/models/note.php` remove or uncomment the `cover()` function
+- In `site/models/note.php` remove or comment out the `cover()` function
 - Change `/site/snippets/note.php` like this:
 
     ```php
