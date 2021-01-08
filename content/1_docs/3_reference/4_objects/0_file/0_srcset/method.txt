@@ -17,10 +17,9 @@ $image->srcset([
 ]);
 ```
 
-<since v="3.2.0">
-
 ### More complex sizes options
 
+<since v="3.2.0">
 The `$sizes` parameter also accepts an associated array of options:
 
 ```php

@@ -60,10 +60,9 @@ preset: files
 layout: cards
 ```
 
-<since v="3.3.3">
-
 ### Image
 
+<since v="3.3.3">
 ```yaml
 title: Gallery section
 preset: files
