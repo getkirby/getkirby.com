@@ -129,5 +129,4 @@ We should therefore fix this and store the result of the queries in variables fi
 
 ## Takeaway
 
-Always store query results in variables when they are used multiple times. This improves your overall performance, keeps your code dry and easier to read, and prevents unexpected results.
-
+Always store query results in variables when they are used multiple times. This improves your overall performance, keeps your code DRY and easier to read, and prevents unexpected results.
