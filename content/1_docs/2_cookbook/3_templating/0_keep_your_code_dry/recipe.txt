@@ -53,7 +53,7 @@ Furthermore, this often results in unexpected behaviour. Consider this example:
 return function($page) {
   $articles = $page->articles()->listed();
   if($tag = param('tag')) {
-    $articles = $articles->filterBy('tags', $tag, ',');
+    $articles = $articles->filter('tags', $tag, ',');
   }
   return [
     'articles' => $articles,
