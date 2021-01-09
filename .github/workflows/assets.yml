@@ -1,26 +1,32 @@
-name: Compile assets
+name: Compile dist
 
 on:
-  push:
-    paths:
-      - 'www/assets/**'
-  pull_request:
-    paths:
-      - 'www/assets/**'
+  pull_request_review:
+    types:
+      - submitted
 
 jobs:
-  assets:
-    runs-on: ubuntu-16.04
+  build:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout getkirby.com
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
-      - uses: actions/setup-node@v2
+
+      - name: Setup node environment
+        uses: actions/setup-node@v2
+
+      - name: Install npm
+        run: npm ci
+
+      - name: Build dist for assets
+        run: npm run build
+
+      - name: Commit dist files
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          node-version: 12
-      - run: npm install
-      - run: npm run build
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Compiled assets dist files
+          commit_message: Update dist files for assets
           file_pattern: www/dist/*
