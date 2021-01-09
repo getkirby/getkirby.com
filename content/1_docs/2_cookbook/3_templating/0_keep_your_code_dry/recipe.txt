@@ -6,7 +6,7 @@ Published: 2021-01-09
 
 ----
 
-Description: Don't repeat yourself is a coding paradigm that when not heeded can seriously harm performance.
+Description: "Don't repeat yourself" (DRY) is a coding paradigm that when not heeded can seriously harm performance.
 
 ----
 
