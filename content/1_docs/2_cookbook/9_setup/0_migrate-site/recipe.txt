@@ -69,6 +69,21 @@ require __DIR__ . '/kirby/bootstrap.php';
 Kirby\Cms\System::upgradeContent(__DIR__ . '/content');
 ```
 
+<info>
+If calling such an external script doesn't work in your environment, you can instead add a route in your `site/config/config.php file and open the route path in your browser:
+
+```php "site/config/config.php"
+'routes' => [
+    [
+        'pattern' => 'upgrade',
+        'action'  => function() {
+            return Kirby\Cms\System::upgradeContent(kirby()->root('content'));
+        }
+    ]
+]
+```
+While this might return the error page, it will still do the job.
+</info>
 
 ### Delete accounts and avatars
 
@@ -279,6 +294,10 @@ In your route, you can also pass all arguments explicitely to the `->render()` m
 ### Page status
 
 While filter methods like `visible()`, `invisible()` and related Pages methods will still work, these are now deprecated. To make your project future-proof, we recommend that you replace them with (link: docs/reference/objects/pages/listed text: `listed`)/(link: docs/reference/objects/pages/unlisted text: `unlisted`)/(link: docs/reference/objects/pages/published text: `published`) and related methods as required.
+
+<since v="3.5.0">
+These methods have been removed in Kirby 3.5 and will break your template code. Replace them with their equivalent Kirby 3 counterparts.
+</since>
 
 ### KirbyText pre/post filters
 
