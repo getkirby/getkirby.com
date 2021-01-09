@@ -61,7 +61,7 @@ return function($page) {
 };
 ```
 
-If we now use the same template code as in the example above, we will probably wonder why the filter doesn't work. So if this happens, check if you haven't made a new unfiltered query in the template.
+If we now use the same template code as in the example above, we will probably be surprised why the filter doesn't work. So if this happens, check if you haven't made a new unfiltered query in the template.
 
 Our template should therefore look like this:
 
