@@ -1,0 +1,3 @@
+[submodule "www/assets/css/framework"]
+	path = www/assets/css/framework
+	url = https://github.com/getkirby/css

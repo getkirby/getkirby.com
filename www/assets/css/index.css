@@ -1,4 +1,14 @@
+/* Framework */
+@import "./framework/css/variables.css";
+@import "./framework/css/reset.css";
+@import "./framework/css/buttons.css";
+@import "./framework/css/columns.css";
+@import "./framework/css/headings.css";
+@import "./framework/css/aspect-ratio.css";
+@import "./framework/css/prose.css";
+@import "./framework/css/boxes.css";
+@import "./framework/css/code.css";
+@import "./framework/css/utilities.css";
+
 /* Legacy - remove when all templates refactored */
 @import "./legacy.css";
-
-@import "./variables.css";
