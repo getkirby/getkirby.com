@@ -1,6 +1,8 @@
 <?php
 
-class CompressorCache extends Kirby\Cache\ApcuCache
+namespace Kirby\Compressor;
+
+class Cache extends \Kirby\Cache\ApcuCache
 {
 
     public function set(string $key, $value, int $minutes = 0): bool
@@ -30,11 +32,4 @@ class CompressorCache extends Kirby\Cache\ApcuCache
         parent::set($key, $value, $minutes);
 
     }
-
 }
-
-Kirby::plugin('getkirby/compressor', [
-    'cacheTypes' => [
-        'compressor' => CompressorCache::class
-    ]
-]);
