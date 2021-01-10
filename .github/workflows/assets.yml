@@ -8,18 +8,24 @@ on:
 jobs:
   build:
     if: github.event.review.state == 'approved'
+
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout getkirby.com
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
 
-      - name: Setup node environment
+      - name: Setup Node environment
         uses: actions/setup-node@v2
 
-      - name: Install npm
+      - name: Cache npm dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+
+      - name: Install npm dependencies
         run: npm ci
 
       - name: Build dist for assets
