@@ -1,5 +1,7 @@
 <?php
 
+namespace Kirby\Cachebuster;
+
 use Kirby\Cms\App;
 
 class Cachebuster
