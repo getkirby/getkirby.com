@@ -99,7 +99,7 @@ To get the array of options from this field, we create a `toOptions()` (link: do
 
 <?php
 
-Kirby::plugin('yourname/placeholders', [
+Kirby::plugin('cookbook/placeholders', [
     'fieldMethods' => [
         'toOptions' => function($field) {
             $result = [];
@@ -142,7 +142,7 @@ Let's put this in our plugin:
 ```php "/site/plugins/placeholders/index.php"
 <?php
 
-Kirby::plugin('yourname/placeholders', [
+Kirby::plugin('cookbook/placeholders', [
     'fieldMethods' => [
         'replace' => function ($field, array $placeholders = []) {
 
@@ -165,7 +165,7 @@ We can automate it even more, though. A hook replaces all the placeholders autom
 ```php "/site/plugins/placeholders/index.php"
 <?php
 
-Kirby::plugin('yourname/placeholders', [
+Kirby::plugin('cookbook/placeholders', [
     'hooks' => [
         'kirbytext:before' => function ($text) {
             return Str::template($text, site()->placeholders()->toOptions());
@@ -184,7 +184,7 @@ Config options for plugins should always follow the naming convention: `yourName
 ```php "/site/plugins/placeholders/index.php"
 <?php
 
-Kirby::plugin('getkirby/placeholders', [
+Kirby::plugin('cookbook/placeholders', [
     'fieldMethods' => [
         'replace' => function ($field, array $placeholders = []) {
 
@@ -199,7 +199,7 @@ Kirby::plugin('getkirby/placeholders', [
                 // use only key/value pairs that are not empty
                 if ($option->key()->isNotEmpty() && $option->value()->isNotEmpty()) {
                     // check if the block field is set to true and parse KirbyTags
-                    if ($option->block()->value() === true) {
+                    if ($option->block()->toBool() === true) {
                         $result[$option->key()->value()] = kirbytags($option->value());
                     } else {
                         $result[$option->key()->value()] = $option->value()->html();
@@ -213,12 +213,12 @@ Kirby::plugin('getkirby/placeholders', [
         'kirbytags:before' => function ($text) {
 
             // set the options from the config as defaults
-            $defaults = option('yourname.placeholders.replacements', []);
+            $defaults = option('cookbook.placeholders.replacements', []);
             $options  = [];
 
             // if options from fields are set to true, get options from field
-            if (option('yourname.placeholders.field')) {
-                $field   = option('yourname.placeholders.field', 'placeholders');
+            if (option('cookbook.placeholders.field')) {
+                $field   = option('cookbook.placeholders.field', 'placeholders');
                 $options = site()->{$field}()->toOptions();
             }
 
@@ -236,11 +236,11 @@ Now, we can control the behavior of the plugin through additional config options
 ```php "/site/config/config.php"
 <?php
 return [
-    'yourname.placeholders.replacements' => [
+    'cookbook.placeholders.replacements' => [
         'company' => 'Great company',
         'phone'   => '+01 123 1234567',
     ],
-    'yourname.placeholders.field' => 'placeholders'
+    'cookbook.placeholders.field' => 'placeholders'
 ];
 ```
 
