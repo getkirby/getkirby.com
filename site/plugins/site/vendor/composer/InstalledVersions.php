@@ -29,11 +29,20 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'fc8348b3ef82548bd7e6f83e21687d236c087f0b',
+    'reference' => '9cfcf8f926709ecfb57563136035d56fcf6e01b3',
     'name' => 'getkirby/site',
   ),
   'versions' => 
   array (
+    'algolia/algoliasearch-client-php' => 
+    array (
+      'pretty_version' => '1.28.1',
+      'version' => '1.28.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '43b0b0dc64e2d0f206d903ad3a4fb8b0a3660f81',
+    ),
     'getkirby/site' => 
     array (
       'pretty_version' => 'dev-develop',
@@ -41,7 +50,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'fc8348b3ef82548bd7e6f83e21687d236c087f0b',
+      'reference' => '9cfcf8f926709ecfb57563136035d56fcf6e01b3',
     ),
     'phpdocumentor/reflection-common' => 
     array (
@@ -72,12 +81,12 @@ private static $installed = array (
     ),
     'symfony/polyfill-ctype' => 
     array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
+      'pretty_version' => 'v1.22.0',
+      'version' => '1.22.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f4ba089a5b6366e453971d3aad5fe8e897b37f41',
+      'reference' => 'c6c942b1ac76c82448322025e084cadc56048b4e',
     ),
     'webmozart/assert' => 
     array (

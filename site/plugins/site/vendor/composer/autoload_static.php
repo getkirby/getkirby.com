@@ -50,8 +50,37 @@ class ComposerStaticInitdf751880121a0bfd018c9018e5105878
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'A' => 
+        array (
+            'AlgoliaSearch' => 
+            array (
+                0 => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
+        'AlgoliaSearch\\AlgoliaConnectionException' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/AlgoliaConnectionException.php',
+        'AlgoliaSearch\\AlgoliaException' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/AlgoliaException.php',
+        'AlgoliaSearch\\Analytics' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/Analytics.php',
+        'AlgoliaSearch\\Client' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/Client.php',
+        'AlgoliaSearch\\ClientContext' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/ClientContext.php',
+        'AlgoliaSearch\\FailingHostsCache' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/FailingHostsCache.php',
+        'AlgoliaSearch\\FileFailingHostsCache' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/FileFailingHostsCache.php',
+        'AlgoliaSearch\\InMemoryFailingHostsCache' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/InMemoryFailingHostsCache.php',
+        'AlgoliaSearch\\Index' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/Index.php',
+        'AlgoliaSearch\\IndexBrowser' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/IndexBrowser.php',
+        'AlgoliaSearch\\Iterators\\AlgoliaIterator' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/Iterators/AlgoliaIterator.php',
+        'AlgoliaSearch\\Iterators\\RuleIterator' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/Iterators/RuleIterator.php',
+        'AlgoliaSearch\\Iterators\\SynonymIterator' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/Iterators/SynonymIterator.php',
+        'AlgoliaSearch\\Json' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/Json.php',
+        'AlgoliaSearch\\PlacesIndex' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/PlacesIndex.php',
+        'AlgoliaSearch\\SynonymType' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/SynonymType.php',
+        'AlgoliaSearch\\Version' => __DIR__ . '/..' . '/algolia/algoliasearch-client-php/src/AlgoliaSearch/Version.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Kirby\\Algolia\\Results' => __DIR__ . '/../..' . '/src/Algolia/Results.php',
+        'Kirby\\Algolia\\Search' => __DIR__ . '/../..' . '/src/Algolia/Search.php',
         'Kirby\\Cachebuster\\Cachebuster' => __DIR__ . '/../..' . '/src/Cachebuster/Cachebuster.php',
         'Kirby\\CodeBlock\\FileSystem' => __DIR__ . '/../..' . '/src/CodeBlock/FileSystem.php',
         'Kirby\\CodeBlock\\KirbyContent' => __DIR__ . '/../..' . '/src/CodeBlock/KirbyContent.php',
@@ -142,6 +171,7 @@ class ComposerStaticInitdf751880121a0bfd018c9018e5105878
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitdf751880121a0bfd018c9018e5105878::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitdf751880121a0bfd018c9018e5105878::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitdf751880121a0bfd018c9018e5105878::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitdf751880121a0bfd018c9018e5105878::$classMap;
 
         }, null, ClassLoader::class);

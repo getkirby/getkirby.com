@@ -5,6 +5,7 @@ require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/helpers/cdn.php';
 require __DIR__ . '/helpers/html.php';
 require __DIR__ . '/helpers/reference.php';
+require __DIR__ . '/helpers/search.php';
 
 Kirby::plugin('getkirby/site', [
     'cacheTypes'   => include __DIR__ . '/extensions/cacheTypes.php',
