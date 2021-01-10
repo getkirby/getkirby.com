@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Site;
+namespace Kirby\Reference;
 
 use Exception;
 use phpDocumentor\Reflection\DocBlockFactory;
