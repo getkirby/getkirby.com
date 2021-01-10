@@ -125,7 +125,9 @@ $tags['picture'] = $tags['screenshot'] = [
 $tags['reference'] = [
     'html' => function ($tag) {
         if ($page = page('docs/reference/' . $tag->value())) {
-            return snippet('cheatsheet', ['methods' => $page->children()->listed()], true);
+            return snippet('reference/list/tag', [
+                'methods' => $page->children()->listed()
+            ], true);
         }
     }
 ];
