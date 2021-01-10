@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../assets/css/templates/release.css"],"names":[],"mappings":"AAAA,eACE,aAAc,CACd,eACF","file":"release.css","sourcesContent":[".v3-page .text {\n  margin: 0 auto;\n  max-width: 35rem;\n}\n\n"]}
