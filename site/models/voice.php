@@ -1,7 +1,5 @@
 <?php
 
-namespace Kirby\Site\Models;
-
 use Kirby\Cms\Url;
 use Kirby\Cms\Html;
 use Kirby\Cms\Page;

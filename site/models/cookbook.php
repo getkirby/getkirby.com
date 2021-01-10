@@ -1,7 +1,5 @@
 <?php
 
-namespace Kirby\Site\Models;
-
 use Kirby\Cms\Page;
 
 class CookbookPage extends Page
