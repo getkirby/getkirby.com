@@ -16,4 +16,4 @@ git clone git@github.com:getkirby/getkirby.com.git
 
 ## Metadata for search engines and social media
 
-See [`site/plugins/meta/README.md`](/site/plugins/meta/README.md) for further information.
+See [the specific `README.md`](/site/plugins/site/src/Meta/README.md) for further information.

@@ -10,7 +10,6 @@ use Kirby\Toolkit\Xml;
 class SiteMeta
 {
 
-
     public static function robots(): Responder
     {
         $robots = 'User-agent: *' . PHP_EOL;

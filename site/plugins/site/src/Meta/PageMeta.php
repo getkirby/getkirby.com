@@ -1,6 +1,7 @@
 <?php
 
 namespace Kirby\Meta;
+
 use Kirby\Cms\Field;
 use Kirby\Cms\File;
 use Kirby\Toolkit\Html;

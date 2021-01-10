@@ -4,7 +4,7 @@ This plugins handles the generation of meta tags for search engines, social netw
 
 ## How it works
 
-The plugin tries looks for metadata from a pages content file (e.g. article.txt) by the corrsponding key. If the page does not contain the specific field, it looks in the pagel model, if it provides a `metadata()` method, that returns an array or metadata fields. If that also fails, it will fall back to default metadata, as stored in the `site.txt` file at the top-level of the content directory.
+The plugin tries looks for metadata from a pages content file (e.g. article.txt) by the corrsponding key. If the page does not contain the specific field, it looks in the pagel model, if it provides a `->metadata()` method, that returns an array or metadata fields. If that also fails, it will fall back to default metadata, as stored in the `site.txt` file at the top-level of the content directory.
 
 That way, every page will always be able to serve default values, even if the specific page or its model does not contain information like e.g. a thumbnail or a dedicated description.
 
