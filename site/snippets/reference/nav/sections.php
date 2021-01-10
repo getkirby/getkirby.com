@@ -1,4 +1,3 @@
-
 <nav class="cheatsheet-sections cheatsheet-panel">
   <header class="cheatsheet-sections-header cheatsheet-panel-header">
     <button data-show="main">
@@ -22,5 +21,4 @@
     </section>
     <?php endforeach ?>
   </div>
-
 </nav>

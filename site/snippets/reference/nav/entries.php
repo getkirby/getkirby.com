@@ -11,7 +11,7 @@
     <ul>
       <?php foreach ($entries as $item): ?>
       <li>
-        <?php snippet('cheatsheet.entry', [
+        <?php snippet('reference/list/item', [
           'item' => $item,
           'excerpt' => true,
         ]) ?>

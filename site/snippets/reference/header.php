@@ -6,19 +6,19 @@
 
   <?= css([
     $kirby->url('assets') . '/css/index.css', 
-    $kirby->url('assets') . '/css/templates/cheatsheet.css', 
+    $kirby->url('assets') . '/css/templates/reference.css', 
     '@auto'
   ]) ?>
 
   <?= js([
     $kirby->url('assets') . '/js/index.js',
-    $kirby->url('assets') . '/js/templates/cheatsheet.js'
+    $kirby->url('assets') . '/js/templates/reference.js'
   ], ['type' => 'module']) ?>
 
 </head>
 <body data-template="<?= $page->template() ?>">
 
-  <?= $icons ?? null ?>
+  <?= svg($kirby->root('panel') . '/dist/img/icons.svg') ?>
 
   <div class="cheatsheet">
     <header class="cheatsheet-header">
@@ -59,4 +59,4 @@
 
     </header>
     <main class="cheatsheet-panels">
-      <?php snippet('cheatsheet.sections') ?>
+      <?php snippet('reference/nav/sections') ?>

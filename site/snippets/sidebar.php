@@ -4,15 +4,15 @@ $levels = $levels ?? 3;
 $items  = $items ?? $site->find('docs')->children()->listed();
 
 $doNotSkipTemplates = [
-  'cheatsheet',
-  'fields',
-  'field-methods',
-  'packages',
-  'helpers',
-  'kirbytags',
-  'roots',
-  'urls',
-  'validators',
+  'reference',
+  'reference.fields',
+  'reference.fieldmethods',
+  'reference.packages',
+  'reference.helpers',
+  'reference.kirbytags',
+  'reference.roots',
+  'reference.urls',
+  'reference.validators',
 ];
 
 ?>
