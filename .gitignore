@@ -2,10 +2,10 @@ node_modules
 .vscode
 .idea
 .DS_Store
-/www/media
 /site/accounts
 /site/cache
 /site/config/keys
 /site/config/.license
 /site/sessions
-/config.json
+/www/dist
+/www/media
