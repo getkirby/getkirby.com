@@ -63,8 +63,20 @@
               <li>
                 <span class="h5">Partners</span>
                 <ul class="footer-partners">
-                  <li><a href="https://algolia.com" aria-label="Algolia"><?= icon('algolia') ?></a></li>
-                  <li><a href="https://keycdn.com" aria-label="KeyCDN"><?= icon('keycdn') ?></a></li>
+                  <li>
+                    <a href="https://keycdn.com">
+                      <svg style="height: 1.75rem">
+                        <use class="fill-current" xlink:href="<?= url('assets/images/partners.svg#keycdn') ?>">
+                      </svg>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://algolia.com">
+                      <svg style="height: 1.5rem">
+                        <use class="fill-current" xlink:href="<?= url('assets/images/partners.svg#algolia') ?>">
+                      </svg>
+                    </a>
+                  </li>
                 </ul>
               </li>
             </ul>
