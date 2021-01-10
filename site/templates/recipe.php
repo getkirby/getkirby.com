@@ -38,7 +38,7 @@
           <div class="text intro -mb:large">
             <?= $page->description()->kt() ?>
           </div>
-          <?php snippet('toc', $page->text()->headlines('h2')) ?>
+          <?php snippet('prose/toc', ['field' => $page->text() ]) ?>
           <div class="text">
             <?= $page->text()->kt()->anchorHeadlines() ?>
           </div>

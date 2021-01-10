@@ -1,13 +1,12 @@
 <?php
 
-namespace Kirby\Maki;
+namespace Kirby\CodeBlock;
 
 use Kirby\Toolkit\F;
 use Kirby\Toolkit\Str;
 
 class FileSystem
 {
-
     /**
      * File System Icons
      */
@@ -27,13 +26,11 @@ class FileSystem
         'text'       => ['txt'],
     ];
 
-    protected static function getIcon($icon): string
-    {
-        return icon($icon, true);
-    }
-
     protected static function getIconByFilename($filename): string
     {
+        if (in_array($filename, ['...', '…'])) {
+            return 'file';
+        }
 
         $extension = F::extension($filename);
         $icon      = F::type($filename);
@@ -45,7 +42,7 @@ class FileSystem
             }
         }
 
-        return static::getIcon($icon ?? 'file');
+        return $icon ?? 'file';
     }
 
     public static function parse($text): string
@@ -96,44 +93,63 @@ class FileSystem
         return $result;
     }
 
-    protected static function renderBlock($files): string
+    protected static function icon($type)
     {
-        $html = '';
-        $html .= '<ul class="filesystem-items">';
+        $colors = [
+            'image'      => 'green-light',
+            'archive'    => 'green-light',
+            'video'      => 'purple-light',
+            'javascript' => 'orange-light',
+            'html'       => 'orange-light',
+            'yaml'       => 'orange-light',
+            'css'        => 'orange-light',
+            'code'       => 'orange-light',
+            'text'       => 'yellow-light',
+            'markdown'   => 'aqua-light',
+            'document'   => 'aqua-light',
+            'font'       => 'aqua-light',
+            'git'        => 'red-light',
+            'gulpfile'   => 'red-light',
+            'audio'      => 'red-light',
+        ];
+
+        $color = $colors[$type] ?? 'blue-light';
+
+        return icon([
+            'type'  => $type,
+            'color' => $color,
+            'class' => 'mr-2'
+        ]);
+    }
+
+    protected static function renderBlock($files, $level = 0): string
+    {
+        $html = '<ul class="filesystem-items">';
 
         foreach ($files as $filename => $children) {
 
             $hasChildren = count($children) > 0;
             $isFolder    = Str::endsWith($filename, '/');
 
+            $html .= '<li>';
+
             if ($isFolder) {
-                $icon     = $hasChildren ? 'folder-expanded' : 'folder-collapsed';
-                $icon     = static::getIcon($icon);
                 $filename = preg_replace('/\/$/', '', $filename);
-            } elseif(in_array($filename, ['...', '…'])) {
-                $icon = '';
-            } else {
-                $icon = static::getIconByFilename($filename);
+                $icon     = $hasChildren ? 'folder-expanded' : 'folder-collapsed';
+
+                $html .= '<details open>';
+                $html .= '<summary class="flex items-center outline-none ' . ($hasChildren ? 'cursor-pointer' : '') . '">' . static::icon($icon) . $filename . '</summary>';
+                $html .= static::renderBlock($children, $level + 1);
+                $html .= '</details>';
+
+                continue;
             }
 
-            $class = [];
+            $icon = static::getIconByFilename($filename);
 
-            if (empty($icon)) {
-                $class[] = 'has-no-icon';
-            }
-
-            if ($hasChildren) {
-                $class[] = 'has-children';
-            }
-
-            $html .= '<li' . ((count($class) > 0) ? ' class="' . implode(' ', $class) . '"' : '') . '>';
-            $html .= "{$icon}<span>{$filename}</span>";
-
-            if ($hasChildren) {
-                $html .= static::renderBlock($children);
-            }
-
+            $html .= '<span class="flex items-center">' . static::icon($icon) . $filename . '</span>';
             $html .= '</li>';
+
         }
 
         $html .= '</ul>';

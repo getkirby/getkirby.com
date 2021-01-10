@@ -809,6 +809,7 @@ h6 code,
  */
 
 .filesystem.filesystem {
+  list-style: none;
   margin-bottom: 1.5em;
   margin-top: 0;
 }
@@ -852,21 +853,23 @@ h6 code,
   position: relative;
 }
 
-/**
- * 1. Prevents the `<span>` from collapsing, if it does not
- *    have any text-content.
- */
-
 .filesystem span {
-  display: block;
+  display: flex;
+  align-items: center;
   min-height: 1.5rem;
-  /* 1 */
-  padding-left: 1.5rem;
+}
+
+.filesystem summary {
+  display: flex;
+  align-items: center;
 }
 
 .filesystem .icon {
-  position: absolute;
-  top: .25rem;
+  margin-right: 0.5rem;
+}
+
+.filesystem summary::-webkit-details-marker {
+  display: none;
 }
 
 /* Filesystem Lines */

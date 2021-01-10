@@ -6,6 +6,16 @@ use Kirby\Cms\FileModifications;
 use Kirby\Cms\FileVersion;
 
 return [
+    'markdown' => function (App $kirby, string $text = null, array $options = [], bool $inline = false) {
+        static $parser;
+        $parser = $parser ?? new Kirby\Marsdown\Marsdown();
+
+        if ($inline === true) {
+            return @$parser->line($text);
+        }
+
+        return @$parser->text($text);
+    },
     'file::url' => function (App $kirby, $file): string {
 
         static $original;

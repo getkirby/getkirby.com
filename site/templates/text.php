@@ -7,7 +7,7 @@
 
       <div class="text-page-layout">
         <aside class="text-page-sidebar">
-          <?php snippet('toc', $page->text()->headlines()) ?>
+          <?php snippet('prose/toc', ['field' => $page->text() ]) ?>
         </aside>
         <div class="text-page-body text">
           <?= $page->text()->kt()->anchorHeadlines(); ?>

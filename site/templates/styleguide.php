@@ -5,15 +5,7 @@
     <article class="wrap">
 
       <?php snippet('hero') ?>
-
-      <?php
-
-      $headlines = $page->text()->headlines('h2');
-
-
-      snippet('toc', $headlines);
-
-      ?>
+      <?php snippet('prose/toc', ['field' => $page->text()]) ?>
 
       <div class="text">
         <?= $page->text()->kt()->anchorHeadlines('h2') ?>

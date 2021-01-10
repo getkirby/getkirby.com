@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Maki;
+namespace Kirby\CodeBlock;
 
 use Kirby\Toolkit\F;
 use Kirby\Toolkit\Str;

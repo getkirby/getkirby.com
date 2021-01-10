@@ -26,7 +26,7 @@
           </div>
           <?php endif ?>
 
-          <?php snippet('toc', $page->text()->headlines('h2')) ?>
+          <?php snippet('prose/toc', ['field' => $page->text()]) ?>
 
           <div class="text">
             <?= $page->text()->kt()->anchorHeadlines() ?>
