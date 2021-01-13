@@ -46,9 +46,9 @@ Kirby::plugin('your/plugin', [
 ]);
 ```
 
-<since v="3.4.0">
 ### Wildcard hooks
 
+<since v="3.4.0">
 If you want to register the same hook for multiple events, you can register a wildcard hook (either in your config or in a plugin):
 
 ```php "/site/config/config.php"
@@ -106,9 +106,9 @@ $username = $this->user()->username();
 $role     = $this->user()->role();
 ```
 
-<since v="3.4.0">
 ## Hook arguments
 
+<since v="3.4.0">
 Since Kirby 3.4.0, the hook arguments are no longer provided by position, but by variable name (similar to (link: docs/guide/templates/controllers#accessing-kirby-objects-in-your-controller text: controllers)). This allows you to request just the arguments you need in any order. All arguments that are not available will be passed as `null`:
 
 ```php "/site/config/config.php"

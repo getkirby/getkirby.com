@@ -25,9 +25,9 @@ sections:
     type: files
     template: gallery
 ```
-<since v="3.3.0">
 ## Section shortcuts
 
+<since v="3.3.0">
 For simple sections that are only used once per blueprint, you can use shortcuts. In its most basic form, a `files` section consists of the section type as name, and  `true` as its value.
 
 ```yaml
@@ -42,7 +42,7 @@ These shortcuts can be extended with other section properties as needed, for exa
 ```yaml
 sections:
 
-  files: 
+  files:
     headline: My Files
     template: cover
 ```
