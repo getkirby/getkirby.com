@@ -32,9 +32,11 @@ use Kirby\Site\Models\MethodPage;
 
   <?php if ($page->auth()->isNotEmpty()): ?>
   <li>
-    <?php icon('lock') ?> <code data-tooltip="<a href='<?= url('docs/guide/users/permissions') ?>'><strong>Permission <code><?= $page->auth() ?></code></strong><br>is required. Learn more ›</a>">
-      <?= $page->auth() ?>
-    </code>
+    <a href="<?= url('docs/guide/users/permissions') ?>">
+      <?php icon('lock') ?> <code>
+        <?= $page->auth() ?>
+      </code>
+    </a>
   </li>
   <?php endif ?>
 

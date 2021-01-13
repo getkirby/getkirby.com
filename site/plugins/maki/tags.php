@@ -175,18 +175,12 @@ return [
             'text'
         ],
         'html' => function ($tag) {
-
-            if ($entry = Glossary::entry($tag->value)) {
-
-                $content  = Glossary::content($entry);
-                $headline = Html::a(Glossary::url($entry), $entry->title());
-                $tooltip  = Html::div([$headline], ['class' => 'bold -mb:small']) . $content;
-
-                return Html::span($tag->text ?? $entry->title(), ['data-tooltip' => $tooltip]);
+            if ($glossary = page('docs/glossary/' . $tag->value)) {
+                return
+                    '<mark class="glossary">' .
+                        '<a href="' . $glossary->url() . '">' . $tag->attr('text', $glossary->title()) . '</a>' .
+                    '</mark>';
             }
-
-            return Glossary::missingTerm($tag->value);
-
         }
     ],
 
