@@ -3072,27 +3072,10 @@ hr::after {
   text-decoration: none;
 }
 
-[data-tooltip] {
+mark.glossary {
   border-bottom: 1px dotted rgba(0, 0, 0, 0.5);
   cursor: help;
-}
-
-.tippy-box {
-  background: #000;
-  border-radius: 1px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  color: #fff;
-  padding: 0;
-}
-
-.tippy-box .tippy-content {
-  font-size: 1rem;
-  line-height: 1.5;
-  padding: 0.5rem 0.75rem;
-}
-
-.tippy-arrow {
-  color: #000;
+  background: none;
 }
 
 /* -----  Voices Grid  ------------------------------------------------------------- */

@@ -19,8 +19,4 @@ component(".menu", "./components/menu.js");
 component(".js-menu-search", "./components/search.js");
 component(".js-sidebar", "./components/sidebar.js");
 
-// Tooltips
-import Tooltips from "./components/tooltips.js";
-new Tooltips();
-
 import "./libraries/focus-visible.js";
