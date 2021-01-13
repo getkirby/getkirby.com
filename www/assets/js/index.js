@@ -1,22 +1,10 @@
-import "./components/affiliates.js";
+import { component } from "./utils/load.js";
+
+component("../components/menu.js", ".menu");
+component("../components/search.js", ".js-menu-search");
+component("../components/sidebar.js", ".js-sidebar");
+component("../components/code.js");
+component("../components/affiliates.js");
+
 import "./components/lazyloading.js";
-
-// Code highlighting
-import Code from "./components/code.js";
-new Code();
-
-// Components
-const component = async (selector, source) => {
-  const element = document.querySelector(selector);
-
-  if (element) {
-    const { default: Component } = await import(source);
-    new Component(element);
-  }
-};
-
-component(".menu", "./components/menu.js");
-component(".js-menu-search", "./components/search.js");
-component(".js-sidebar", "./components/sidebar.js");
-
 import "./libraries/focus-visible.js";

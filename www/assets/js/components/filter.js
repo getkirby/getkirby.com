@@ -1,25 +1,22 @@
+export default class {
+  constructor(element) {
+    this.$el = element;
+    this.input = this.$el.querySelector("input.filter-search");
+    this.items = this.$el.querySelectorAll("[data-filter]");
 
-export default function (selector) {
+    // listen to any changes on the search input
+    this.input.addEventListener("input", this.onInput.bind(this));
+  }
 
-  const container = document.querySelector(selector);
-  const input     = container.querySelector("input.filter-search");
-  const items     = container.querySelectorAll("[data-filter]");
-
-  // listen to any changes on the search input
-  input.addEventListener("input", function (e) {
-
+  onInput(e) {
     const q = e.target.value.toLowerCase();
 
     // add/remove class to container element
-    if (q !== "") {
-      container.classList.add("searching");
-    } else {
-      container.classList.remove("searching");
-    }
+    this.$el.classList[this.q !== "" ? "add" : "remove"]("searching");
 
     // loop through all elements and
     // show or hide if matching search term
-    items.forEach(function (item) {
+    this.items.forEach(function (item) {
       const content = item.dataset.filter.toLowerCase();
 
       if (q === "" || content.includes(q)) {
@@ -28,6 +25,5 @@ export default function (selector) {
         item.style.display = "none";
       }
     });
-
-  });
+  }
 }
