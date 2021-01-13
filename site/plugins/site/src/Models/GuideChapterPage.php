@@ -4,7 +4,7 @@ namespace Kirby\Site\Models;
 
 use Kirby\Cms\Page;
 
-class GuidePage extends Page
+class GuideChapterPage extends Page
 {
     public function metadata(): array
     {

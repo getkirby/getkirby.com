@@ -7,7 +7,7 @@
   <?= css([
     $kirby->url('assets') . '/lightbox/lightbox.css',
     $kirby->url('assets') . '/css/index.css',
-    $kirby->url('assets') . '/css/templates/v35.css'
+    $kirby->url('assets') . '/css/templates/release.35.css'
   ]) ?>
   <?= js([$kirby->url('assets') . '/js/index.js'], ['type' => 'module']) ?>
 </head>

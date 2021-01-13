@@ -8,8 +8,8 @@
         <!-- # Sidebar -->
 
         <div class="docs-sidebar">
-          <p class="h1"><a href="<?= $root->url() ?>"><?= $root->title() ?></a></p>
-          <?php snippet('sidebar', ['items' => $root->children()]) ?>
+          <p class="h1"><a href="<?= url('docs/guide') ?>">Guide</a></p>
+          <?php snippet('sidebar', ['items' => page('docs/guide')->children()->listed()]) ?>
         </div>
 
         <!-- # Guide Content -->
@@ -17,7 +17,7 @@
         <article class="docs-content">
 
           <header>
-            <h1><?= $page->headline()->or($page->title())->html()->widont() ?></h1>
+            <h1><?= $page->title()->html()->widont() ?></h1>
           </header>
 
           <?php if ($page->intro()->isNotEmpty()): ?>
@@ -44,6 +44,9 @@
             <?php endforeach ?>
           </ul>
           <?php endif ?>
+
+
+          <?php snippet('github.edit') ?>
 
         </article>
 
