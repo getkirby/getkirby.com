@@ -36,6 +36,7 @@
     </div>
     <?php endif ?>
 
+    <?php snippet('github.edit') ?>
   </div>
 
 </article>
