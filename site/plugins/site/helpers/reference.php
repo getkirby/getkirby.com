@@ -184,3 +184,78 @@ function types(string $string, $model)
 
     return implode('|', $types);
 }
+
+/**
+ * Fetch prop definitions from Fields and Sections
+ * and create an options table for it.
+ *
+ * @param array $definition
+ * @return array
+ * @todo refactor/deprecate
+ */
+function componentOptions(array $props) {
+
+    $table = [];
+
+    foreach ($props as $attr => $prop) {
+
+        if ($attr === 'value') {
+            continue;
+        }
+
+        if (is_callable($prop) === false) {
+            continue;
+        }
+
+        $reflection = new ReflectionFunction($prop);
+        $parameter  = $reflection->getParameters()[0] ?? null;
+        $comment    = null;
+
+        try {
+            $default = $parameter->getDefaultValue();
+        } catch (Exception $e) {
+            $default = null;
+        }
+
+        if ($docComment = $reflection->getDocComment()) {
+            try {
+                $docBlock = new DocBlock($docComment);
+                $comment  = trim($docBlock->getSummary());
+                $comment  = str_replace(PHP_EOL, ' ', $comment);
+
+                if ($comment === '/') {
+                    $comment = null;
+                }
+
+            } catch (Throwable $e) {
+
+            }
+        }
+
+        if (is_array($default) === true) {
+            $default = '[]';
+        }
+
+        if ($default === true) {
+            $default = 'true';
+        }
+
+        if ($default === false) {
+            $default = 'false';
+        }
+
+        $table[$attr] = [
+            'prop'     => $attr,
+            'required' => $parameter->isOptional() !== true,
+            'type'     => $parameter->getType() ? $parameter->getType()->getName() : null,
+            'default'  => $default,
+            'comment'  => $comment,
+        ];
+
+    }
+
+    ksort($table);
+
+    return $table;
+
+}
