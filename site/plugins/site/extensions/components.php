@@ -2,13 +2,13 @@
 
 use Kirby\Cachebuster\Cachebuster;
 use Kirby\Cms\App;
-use Kirby\Cms\FileModifications;
 use Kirby\Cms\FileVersion;
+use Kirby\Marsdown\Marsdown;
 
 return [
     'markdown' => function (App $kirby, string $text = null, array $options = [], bool $inline = false) {
         static $parser;
-        $parser = $parser ?? new Kirby\Marsdown\Marsdown();
+        $parser = $parser ?? new Marsdown();
 
         if ($inline === true) {
             return @$parser->line($text);

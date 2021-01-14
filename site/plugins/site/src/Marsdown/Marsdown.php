@@ -186,9 +186,9 @@ class Marsdown extends ParsedownExtra
             $caption  = $infostring[1];
             $openChar = $caption[0];
 
-            if ($openChar === '"' || $openChar === '"') {
+            if ($openChar === '"') {
                 $captionLength = strlen($caption);
-                $lastChar      = $caption[$captionLenght - 1];
+                $lastChar      = $caption[$captionLength - 1];
 
                 if ($lastChar === $openChar) {
                     // Remove quotes surrounding caption

@@ -29,7 +29,6 @@ class Cache extends \Kirby\Cache\ApcuCache
         $html .= PHP_EOL . '<!-- compressor cache -->';
         $value['html'] = $html;
 
-        parent::set($key, $value, $minutes);
-
+        return parent::set($key, $value, $minutes);
     }
 }
