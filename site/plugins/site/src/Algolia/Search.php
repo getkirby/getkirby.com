@@ -9,7 +9,6 @@ use Exception;
 use AlgoliaSearch\Client as AlgoliaClient;
 
 // Kirby dependencies
-use Kirby\Toolkit\A;
 use Kirby\Cms\Page;
 use Kirby\Cms\Field;
 
