@@ -29,7 +29,6 @@ return array(
     'Kirby\\Cachebuster\\Cachebuster' => $baseDir . '/src/Cachebuster/Cachebuster.php',
     'Kirby\\CodeBlock\\FileSystem' => $baseDir . '/src/CodeBlock/FileSystem.php',
     'Kirby\\CodeBlock\\KirbyContent' => $baseDir . '/src/CodeBlock/KirbyContent.php',
-    'Kirby\\Compressor\\Cache' => $baseDir . '/src/Compressor/Cache.php',
     'Kirby\\Marsdown\\Marsdown' => $baseDir . '/src/Marsdown/Marsdown.php',
     'Kirby\\Meta\\PageMeta' => $baseDir . '/src/Meta/PageMeta.php',
     'Kirby\\Meta\\SiteMeta' => $baseDir . '/src/Meta/SiteMeta.php',

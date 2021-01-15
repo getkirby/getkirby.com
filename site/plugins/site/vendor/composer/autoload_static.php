@@ -84,7 +84,6 @@ class ComposerStaticInitdf751880121a0bfd018c9018e5105878
         'Kirby\\Cachebuster\\Cachebuster' => __DIR__ . '/../..' . '/src/Cachebuster/Cachebuster.php',
         'Kirby\\CodeBlock\\FileSystem' => __DIR__ . '/../..' . '/src/CodeBlock/FileSystem.php',
         'Kirby\\CodeBlock\\KirbyContent' => __DIR__ . '/../..' . '/src/CodeBlock/KirbyContent.php',
-        'Kirby\\Compressor\\Cache' => __DIR__ . '/../..' . '/src/Compressor/Cache.php',
         'Kirby\\Marsdown\\Marsdown' => __DIR__ . '/../..' . '/src/Marsdown/Marsdown.php',
         'Kirby\\Meta\\PageMeta' => __DIR__ . '/../..' . '/src/Meta/PageMeta.php',
         'Kirby\\Meta\\SiteMeta' => __DIR__ . '/../..' . '/src/Meta/SiteMeta.php',
