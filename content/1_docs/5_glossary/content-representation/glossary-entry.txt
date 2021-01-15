@@ -1,0 +1,9 @@
+Title: Content representation
+
+----
+Entry:
+
+Content Representations allow you to output your content in different formats, e.g. JSON for your frontend JS library of choice or to use Kirby as an API for other tools, an automatic RSS feed representation of your blog or a plain text representation of your résumé.
+----
+
+Link: docs/guide/templates/content-representations
