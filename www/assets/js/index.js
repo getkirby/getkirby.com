@@ -1,7 +1,7 @@
 import { component } from "./utils/load.js";
 
 component("../components/menu.js", ".menu");
-component("../components/search.js", ".js-menu-search");
+component("../components/search.js", ".search");
 component("../components/sidebar.js", ".js-sidebar");
 component("../components/code.js");
 component("../components/affiliates.js");

@@ -29,20 +29,20 @@
         </a>
       </h1>
 
-      <form class="js-menu-search" action="<?= u('search') ?>" data-base-url="<?= u() ?>">
+      <form class="search" action="<?= u('search') ?>">
           <label for="cheatsheet-search">
             <span class="screen-reader-text">Search</span>
             <?php icon('search', false, ['aria-hidden' => 'true']) ?>
           </label>
           <input
             id="cheatsheet-search"
-            class="js-menu-search-input"
             placeholder="Search …"
             data-filters="area:reference"
             name="q"
             autocomplete="off"
             aria-autocomplete="list"
-            type="search">
+            type="search"
+          >
       </form>
 
       <?php if ($guide = page('docs/guide')) : ?>

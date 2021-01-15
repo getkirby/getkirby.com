@@ -257,58 +257,60 @@ body {
   width: 100%;
 }
 
-.cheatsheet-header form input:focus {
+.cheatsheet .search input:focus {
   color: #f0c674;
 }
 
-.cheatsheet-header .awesomplete ul {
+.cheatsheet .search ul {
   background: #000;
   box-shadow: rgba(0, 0, 0, 0.2) 0 2px 20px;
   color: #fff;
-  font-size: .875rem;
+  font-size: 0.875rem;
   left: 0;
   position: absolute;
   right: 0;
   top: 100%;
 }
 
-.cheatsheet-header .awesomplete li {
-  cursor: pointer;
-  line-height: 1.25em;
+.cheatsheet .search li {
   margin: 0;
   overflow: hidden;
-  padding: .75rem 1rem;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.cheatsheet-header .awesomplete strong {
+.cheatsheet .search a {
+  line-height: 1.25em;
+  padding: 0.75rem 1rem;
+}
+
+.cheatsheet .search strong {
   display: block;
-  font-size: .875rem;
+  font-size: 0.875rem;
   font-weight: 400;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.cheatsheet-header .awesomplete small {
+.cheatsheet .search small {
   display: block;
-  font-size: .75rem;
-  opacity: .5;
+  font-size: 0.75rem;
+  opacity: 0.5;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.cheatsheet-header .awesomplete li[aria-selected="true"],
-.cheatsheet-header .awesomplete li:hover {
+.cheatsheet .search li[aria-selected="true"],
+.cheatsheet .search li:hover {
   background: #2f3137;
 }
 
-.cheatsheet-header .awesomplete li[aria-selected="true"] small,
-.cheatsheet-header .awesomplete li:hover small {
+.cheatsheet .search li[aria-selected="true"] small,
+.cheatsheet .search li:hover small {
   color: #fff;
 }
 
-.cheatsheet-header .menu-search-view-all {
+.cheatsheet .search .view-all {
   align-items: center;
   display: flex;
 }
