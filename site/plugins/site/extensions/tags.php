@@ -84,20 +84,6 @@ $tags['field-options'] = [
     }
 ];
 
-$tags['glossary'] = [
-    'attr' => [
-        'text'
-    ],
-    'html' => function ($tag) {
-        if ($glossary = page('docs/glossary/' . $tag->value)) {
-            return
-                '<mark class="glossary">' .
-                    '<a href="' . $glossary->url() . '">' . $tag->attr('text', $glossary->title()) . '</a>' .
-                '</mark>';
-        }
-    }
-];
-
 /**
  * @todo deprecate
  */
