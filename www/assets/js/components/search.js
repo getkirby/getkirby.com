@@ -2,99 +2,71 @@ const ALGOLIA_APP = "S7OGBIAJTV";
 const ALGOLIA_KEY = "d161a2f4cd2d69247c529a3371ad3050";
 const ALGOLIA_INDEX = "getkirby-3";
 
-// Placeholder string used to distinguish the "view all" preudo-result
-// from regular search results
-const VIEW_ALL_RESULTS_LABEL = "VIEW_ALL_RESULTS_UXfpeDFlmye9rXkXP5wd";
-const SEARCH_ERROR_LABEL = "SEARCH_ERROR_UXfpeDFlmye9rXkXP5wd";
-const CHEVRON_RIGHT_SVG =
-  '<svg viewBox="0 0 5 11" width="5" height="11" aria-hidden="true"><path d="M2.96153846,5.41538462 L0,9.13846154 L1.35384615,10.1538462 L4.73846154,5.92307692 C4.82307692,5.75384615 4.90769231,5.58461538 4.90769231,5.41538462 C4.90769231,5.24615385 4.82307692,5.07692308 4.73846154,4.90769231 L1.35384615,0.676923077 L0,1.69230769 L2.96153846,5.41538462 Z"/></svg>';
-
 export default class {
+
   constructor(element) {
-    this.init(element);
-  }
-
-  async init(element) {
     this.$el = element;
+    this.input = this.$el.querySelector("input");
+    this.list = null;
 
-    await import("../libraries/algoliasearch.js");
-    await import("../libraries/awesomplete.js");
+    this.q = "";
+    this.results = [];
+    this.selected = null;
 
-    this.input = this.$el.querySelector(".js-menu-search-input");
-    this.client = algoliasearch(ALGOLIA_APP, ALGOLIA_KEY);
-    this.index = this.client.initIndex(ALGOLIA_INDEX);
-    this.recent = "";
-    this.list = [];
-    this.awesome = new Awesomplete(this.input, {
-      list: [],
-      filter: () => true,
-      sort: false,
-      item: this.item,
-    });
-
+    this.$el.addEventListener("keydown", this.onKey.bind(this));
+    this.input.addEventListener("input", this.onInput.bind(this));
     this.input.addEventListener("focus", this.onFocus.bind(this));
-    this.input.addEventListener("blur", this.onBlur.bind(this));
-    this.input.addEventListener("keypress", this.onKeypress.bind(this));
-    this.input.addEventListener("keyup", this.onKeyup.bind(this), 250);
-    this.input.addEventListener("awesomplete-select", this.onSelect.bind(this));
+    document.addEventListener("click", this.onBlur.bind(this));
   }
 
-  item(text) {
-    const item = document.createElement("li");
+  build() {
+    this.remove();
 
-    if (text.label === VIEW_ALL_RESULTS_LABEL) {
-      // view all link
-      item.classList.add("menu-search-view-all");
-      item.innerHTML = `<strong>View all results</strong>${CHEVRON_RIGHT_SVG}`;
-    } else if (text.label === SEARCH_ERROR_LABEL) {
-      // error message link
-      item.classList.add("menu-search-error");
-      item.innerHTML = `<strong>Sorry, an error occured. Please try advanced search instead.</strong>${CHEVRON_RIGHT_SVG}`;
-    } else {
-      // regular result
-      item.innerHTML = `<strong>${text.label}</strong> <small>${text.value}</small>`;
+    if (this.results.length === 0) {
+      return;
     }
 
+    this.list = document.createElement("ul");
+
+    for (let i = 0; i < this.results.length; i++) {
+      const entry = this.item(this.results[i]);
+      this.list.appendChild(entry);
+    }
+
+    this.input.after(this.list);
+  }
+
+  item(entry) {
+    const item = document.createElement("li");
+    const link = document.createElement("a");
+    link.href = "/" + entry.value;
+
+    // View all link
+    if (entry.label === "VIEW_ALL_RESULTS") {
+      link.classList.add("view-all");
+      link.innerHTML = `<strong>View all results</strong><svg viewBox="0 0 5 11" width="5" height="11" aria-hidden="true"><path d="M2.96153846,5.41538462 L0,9.13846154 L1.35384615,10.1538462 L4.73846154,5.92307692 C4.82307692,5.75384615 4.90769231,5.58461538 4.90769231,5.41538462 C4.90769231,5.24615385 4.82307692,5.07692308 4.73846154,4.90769231 L1.35384615,0.676923077 L0,1.69230769 L2.96153846,5.41538462 Z"/></svg>`;
+    } else {
+      link.innerHTML = `<strong>${entry.label}</strong> <small>${entry.value}</small>`;
+    }
+
+    item.appendChild(link);
     return item;
   }
 
-  onBlur() {
-    document.documentElement.classList.remove("is-menu-search-open");
-  }
+  remove() {
+    this.selected = null;
 
-  onFocus() {
-    // helper class used by the reference templates’ CSS
-    document.documentElement.classList.add("is-menu-search-open");
-  }
-
-  onKeypress(e) {
-    if ((e.key && e.key === "Enter") || e.keyCode === 13) {
-      this.$el.submit();
+    if (this.list) {
+      this.list.remove();
     }
   }
 
-  async onKeyup() {
-    const value = this.input.value.trim();
+  async search(value) {
+    const results = [];
 
-    if (value === this.recent) {
-      return true;
-    }
-
-    this.recent = value;
-    this.list = [];
-
-    if (value === "") {
-      this.awesome.list = this.list;
-      this.awesome.evaluate();
-      return true;
-    }
-
-    // don't search for very short words
-    if (value.length <= 2) {
-      return true;
-    }
-
+    // Gather params for Algolia API call
     const params = {
+      query: value,
       hitsPerPage: 5,
     };
 
@@ -104,47 +76,126 @@ export default class {
       params.filters = filters;
     }
 
-    const { hits, nbHits, hitsPerPage } = await this.index.search(
-      value,
-      params
+    // Call the Algolia API
+    const response = await fetch(
+      `https://${ALGOLIA_APP}-dsn.algolia.net/1/indexes/${ALGOLIA_INDEX}/query`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Algolia-Application-Id": ALGOLIA_APP,
+          "X-Algolia-API-Key": ALGOLIA_KEY,
+        },
+        body: JSON.stringify(params),
+      }
     );
+    const { hits, nbHits, hitsPerPage } = await response.json();
 
+    // Create a result entry per hit
     for (var i = 0, l = hits.length; i < l; i++) {
-      const item = hits[i];
-      this.list.push({
-        label: item.title,
-        value: item.objectID,
+      results.push({
+        label: hits[i].title,
+        value: hits[i].objectID,
       });
     }
 
     // Show View all item if there are any hits and
     // there are more hits than those displayed in the popup.
     if (nbHits > 0 && nbHits > hitsPerPage) {
-      this.list.push({
-        label: VIEW_ALL_RESULTS_LABEL,
-        value: nbHits,
+      results.push({
+        label: "VIEW_ALL_RESULTS",
+        value: "search?q=" + value,
       });
     }
 
-    this.awesome.list = this.list;
-    this.awesome.evaluate();
-    this.awesome.open();
+    return results;
   }
 
-  onSelect(e) {
-    e.preventDefault();
+  select() {
+    if (this.list) {
+      // clear previous selection
+      const previous = this.list.querySelector("[aria-selected=true]");
+      if (previous) {
+        previous.setAttribute("aria-selected", false);
+      }
 
-    // When the "view all results" or "error" entry was clicked/selected,
-    // submit the form to go to the regular search results page.
-    if (
-      e.text.label === VIEW_ALL_RESULTS_LABEL ||
-      e.text.label === SEARCH_ERROR_LABEL
-    ) {
-      this.$el.submit();
+      // set new selection
+      if (this.selected !== null) {
+        this.list.childNodes[this.selected].setAttribute("aria-selected", true);
+      }
+    }
+  }
 
-      // Regular search result selected.
-    } else {
-      window.location.href = `/${e.text.value}`;
+  onArrowDown() {
+    if (this.selected === null) {
+      this.selected = 0;
+    } else if (this.selected < this.results.length - 1) {
+      this.selected++;
+    }
+
+    this.select();
+  }
+
+  onArrowUp() {
+    this.selected--;
+
+    if (this.selected < 0) {
+      this.selected = null;
+    }
+
+    this.select();
+  }
+
+  onBlur(e) {
+    if (this.$el.contains(e.target) === false) {
+      document.documentElement.classList.remove("is-menu-search-open");
+      this.remove();
+    }
+  }
+
+  onEnter(e) {
+    // If a result entry is currently selected,
+    // navigate to result page
+    if (this.selected !== null) {
+      e.preventDefault();
+      window.location = "/" + this.results[this.selected].value;
+      return;
+    }
+
+    // otherwise submit form to search result page
+    this.$el.submit();
+  }
+
+  onFocus() {
+    // helper class used by the reference templates’ CSS
+    document.documentElement.classList.add("is-menu-search-open");
+    this.build();
+  }
+
+  async onInput() {
+    const value = this.input.value.trim();
+
+    if (value === this.q) {
+      return;
+    }
+
+    this.q = value;
+    this.results = [];
+
+    if (value !== "" && value.length > 2) {
+      this.results = await this.search(value);
+    }
+
+    this.build();
+  }
+
+  onKey(e) {
+    if ((e.key && e.key === "Enter") || e.keyCode === 13) {
+      this.onEnter(e);
+    } else if (e.keyCode == "38") {
+      this.onArrowUp();
+    } else if (e.keyCode == "40") {
+      this.onArrowDown();
     }
   }
 }
