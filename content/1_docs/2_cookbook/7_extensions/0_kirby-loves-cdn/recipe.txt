@@ -103,7 +103,7 @@ Let's start with the (link: docs/reference/plugins/components/url text: URL comp
 Kirby::plugin('author/cdn', [
     'components' => [
         'url' => function ($kirby, $path, $options) {
-            if (option('cdn', false) !== false && Str::beginsWith($path, 'assets')) {
+            if (option('cdn', false) !== false && Str::startsWith($path, 'assets')) {
                 return option('cdn.domain') . '/' . $path;
             }
 
@@ -117,7 +117,7 @@ Kirby::plugin('author/cdn', [
 Without any limitations, the URL component would modify all Kirby URLs. Therefore, we first check if the `cdn` option is enabled, and if that's the case, we want limit the routes to URLs in the `/assets` path. We therefore check if the path matches the given regex pattern (i.e. if it begins with the `assets` bit):
 
 ```php
-Str::beginsWith($path, 'assets')
+Str::startsWith($path, 'assets')
 ```
 All other paths remain untouched. We use the original native `url` component for all other paths, retrieving it via `$kirby->nativeComponent()`.
 
@@ -135,7 +135,7 @@ This is where cache-busting is used to force the CDN to load the new version of 
 Kirby::plugin('author/cdn', [
     'components' => [
         'url' => function ($kirby, $path, $options) {
-            if (Str::beginsWith($path, 'assets')) {
+            if (Str::startsWith($path, 'assets')) {
                 $path = Cachebuster::path($path);
 
                 if (option('cdn', false) !== false) {
@@ -210,7 +210,7 @@ Kirby::plugin('author/cdn', [
 
             static $original;
 
-            if (Str::beginsWith($path, 'assets')) {
+            if (Str::startsWith($path, 'assets')) {
                 $path = Cachebuster::path($path);
 
                 if (option('cdn', false) !== false) {
