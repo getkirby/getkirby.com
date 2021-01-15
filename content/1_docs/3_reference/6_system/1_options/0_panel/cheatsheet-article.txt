@@ -108,7 +108,7 @@ return [
                 }
         
                 if($file->type() === 'video') {
-                    return sprintf('(video: %s loop: true)', $url);
+                    return sprintf('(\video: %s loop: true)', $url);
                 }
         
                 return null;
