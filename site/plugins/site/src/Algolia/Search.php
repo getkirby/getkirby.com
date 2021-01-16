@@ -6,7 +6,7 @@ namespace Kirby\Algolia;
 use Exception;
 
 // Vendor dependencies
-use AlgoliaSearch\Client as AlgoliaClient;
+use Algolia\AlgoliaSearch\SearchClient as AlgoliaClient;
 
 // Kirby dependencies
 use Kirby\Cms\Page;
@@ -45,7 +45,10 @@ class Search
             throw new Exception('Please set your Algolia API credentials in the Kirby configuration.');
         }
 
-        $this->algolia = new AlgoliaClient($this->options['app'], $this->options['key']);
+        $this->algolia = AlgoliaClient::create(
+            $this->options['app'], 
+            $this->options['key']
+        );
     }
 
     /**
