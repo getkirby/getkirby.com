@@ -1,0 +1,23 @@
+# ignore all the vendor cruft
+/vendor/**/.*
+/vendor/**/*.json
+/vendor/**/*.txt
+/vendor/**/*.md
+/vendor/**/*.yml
+/vendor/**/*.yaml
+/vendor/**/*.xml
+/vendor/**/*.dist
+/vendor/**/*.php_cs
+/vendor/**/readme.php
+/vendor/**/LICENSE
+/vendor/**/COPYING
+/vendor/**/COMMITMENT
+/vendor/**/VERSION
+/vendor/**/.github/*
+/vendor/**/.circleci/*
+/vendor/**/docs/*
+/vendor/**/example/*
+/vendor/**/examples/*
+/vendor/**/test/*
+/vendor/**/tests/*
+/vendor/**/php4/*
