@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'fb33ebfb3a7eb18846447b8300d975750ecfc466',
+    'reference' => 'd23fbacd9183ebfec939789ca96ea698c836f095',
     'name' => 'getkirby/site',
   ),
   'versions' => 
@@ -50,34 +50,34 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'fb33ebfb3a7eb18846447b8300d975750ecfc466',
+      'reference' => 'd23fbacd9183ebfec939789ca96ea698c836f095',
     ),
     'phpdocumentor/reflection-common' => 
     array (
-      'pretty_version' => '1.0.1',
-      'version' => '1.0.1.0',
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '21bdeb5f65d7ebf9f43b1b25d404f87deab5bfb6',
+      'reference' => '1d01c49d4ed62f25aa84a747ad35d5a16924662b',
     ),
     'phpdocumentor/reflection-docblock' => 
     array (
-      'pretty_version' => '3.3.2',
-      'version' => '3.3.2.0',
+      'pretty_version' => '5.2.2',
+      'version' => '5.2.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'bf329f6c1aadea3299f08ee804682b7c45b326a2',
+      'reference' => '069a785b2141f5bcf49f3e353548dc1cce6df556',
     ),
     'phpdocumentor/type-resolver' => 
     array (
-      'pretty_version' => '0.4.0',
-      'version' => '0.4.0.0',
+      'pretty_version' => '1.4.0',
+      'version' => '1.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9c977708995954784726e25d0cd1dddf4e65b0f7',
+      'reference' => '6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0',
     ),
     'symfony/polyfill-ctype' => 
     array (

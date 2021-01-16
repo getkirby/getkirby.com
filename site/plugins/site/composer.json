@@ -7,7 +7,7 @@
   },
   "require": {
     "algolia/algoliasearch-client-php": "^1.25",
-    "phpdocumentor/reflection-docblock": "^3.1"
+    "phpdocumentor/reflection-docblock": "^5.2.2"
   },
   "config": {
     "optimize-autoloader": true
