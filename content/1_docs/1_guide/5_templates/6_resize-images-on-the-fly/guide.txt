@@ -8,7 +8,7 @@ Intro: Kirby's built-in thumbs creator lets you resize and crop any image on the
 
 Text:
 
-With Kirby's new Thumbnail API, thumbs are generated asynchronously. This makes thumb creation feel at lot faster and creates less memory issues, which could easily become an issue with many images or when creating many different images sizes to serve responsive images.
+With Kirby's new Thumbnail API, thumbs are generated asynchronously. This makes thumb creation feel a lot faster and creates less memory issues, which could easily become an issue with many images or when creating many different images sizes to serve responsive images.
 
 A new set of plugin points can be used to hook into the thumbnail API or the thumbnail URLs, see (link: docs/reference/plugins/extensions/core-components text: core components).
 
