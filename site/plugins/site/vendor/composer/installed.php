@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '10d3d706396984db272ce7699c14a33374a76790',
+    'reference' => 'fb33ebfb3a7eb18846447b8300d975750ecfc466',
     'name' => 'getkirby/site',
   ),
   'versions' => 
@@ -27,7 +27,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '10d3d706396984db272ce7699c14a33374a76790',
+      'reference' => 'fb33ebfb3a7eb18846447b8300d975750ecfc466',
     ),
     'phpdocumentor/reflection-common' => 
     array (
