@@ -13,16 +13,27 @@ if (php_sapi_name() !== 'cli') die();
 // load Kirby
 require __DIR__ . '/../kirby/bootstrap.php';
 
-$kirby = new Kirby([
-    'roots' => [
-        'index'   => __DIR__ . '/../www',
-        'content' => __DIR__ . '/../content',
-        'site'    => __DIR__ . '/../site',
+$props = [
+  'roots' => [
+      'index'   => __DIR__ . '/../www',
+      'content' => __DIR__ . '/../content',
+      'site'    => __DIR__ . '/../site',
+  ],
+];
+
+// override the configured read-only API key with a custom
+// key if passed as an environment variable
+if ($algoliaKey = getenv('ALGOLIA_KEY')) {
+  $props['options'] = [
+    'algolia' => [
+      'key' => $algoliaKey,
     ],
-]);
+  ];
+}
 
 // initialize Kirby and site
 echo "\033[1mLoading Kirby...\033[0m\n";
+$kirby = new Kirby($props);
 
 // re-index using the Algolia plugin
 try {
