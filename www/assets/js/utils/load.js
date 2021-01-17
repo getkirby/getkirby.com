@@ -1,17 +1,20 @@
 
 export async function component(source, selector) {
-  let element;
 
-  // if selector string was passed, query document for element
-  if (selector) {
-    element = document.querySelector(selector);
+  // If no selector was passed, just load and invoke the element
+  if (!selector) {
+    const { default: Component } = await import(source);
+    return new Component();
   }
 
-  // if the element was found or if no element was supposed to be selected,
-  // load component module and initialize component class (with/withour element)
-  if (element || !selector) {
+  // If selector string was passed, query document for elements
+  const elements = document.querySelectorAll(selector);
+
+  if (elements.length > 0) {
     const { default: Component } = await import(source);
-    new Component(element);
+    for (let i = 0; i < elements.length; i++) {
+      new Component(elements[i]);
+    }
   }
 }
 
