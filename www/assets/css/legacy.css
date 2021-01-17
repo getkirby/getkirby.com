@@ -757,7 +757,6 @@ h6 code,
   font-size: 14px;
   letter-spacing: 0;
   line-height: 1.7142857143;
-  margin-bottom: 1.5rem;
 }
 
 .code ::selection,
@@ -1017,6 +1016,7 @@ h6 code,
 :not(.codeblock-figure) > .code-toolbar {
   overflow: hidden;
   position: relative;
+  margin-bottom: 1.5rem;
 }
 
 .code-toolbar .toolbar {
