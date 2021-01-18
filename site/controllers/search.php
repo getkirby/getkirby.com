@@ -15,7 +15,6 @@ return function () {
     if (!empty($query)) {
         $results = algolia()->search($query, $pageNum, [
             'hitsPerPage'           => $hitsPerPage,
-            'typoTolerance'         => false,
             'attributesToHighlight' => false,
             'attributesToSnippet'   => '*'
         ]);
