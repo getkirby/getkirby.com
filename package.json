@@ -5,13 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run css && npm run js",
-    "css": "npm run css:base && npm run css:lightbox && npm run css:templates",
+    "css": "npm run css:base && npm run css:templates",
     "css:base": "postcss www/assets/css/index.css --output www/dist/css/index.css --use postcss-import cssnano --map",
-    "css:lightbox": "postcss www/assets/lightbox/lightbox.css --output www/dist/lightbox/lightbox.css --use postcss-import cssnano --map",
     "css:templates": "postcss www/assets/css/templates/*.css --dir www/dist/css/templates --use postcss-import cssnano --map",
-    "js": "npm run js:base && npm run js:lightbox",
-    "js:base": "uglifyjs-folder www/assets/js --output www/dist/js --each --extension .js --config-file uglify.json",
-    "js:lightbox": "uglifyjs-folder www/assets/lightbox --output www/dist/lightbox --each --extension .js --config-file uglify.json"
+    "js": "uglifyjs-folder www/assets/js --output www/dist/js --each --extension .js --config-file uglify.json"
   },
   "devDependencies": {
     "cssnano": "^4.1.10",
