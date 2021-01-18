@@ -18,9 +18,9 @@ When you have already tinkered with Kirby for a while, you are likely to have co
 
 If that is true, then this recipe is for you. We will look into the basics of object oriented programming (OOP) with the goal of making you understand what this is all about.
 
-The Kirby core is written in PHP, a scripting language that still powers a majority of websites both in the backend and in the frontend.
+The Kirby core is written in PHP, a scripting language that still powers a majority of websites.
 
-Like basically all professional PHP applications today, Kirby is based on an OOP (Object Oriented Programming) architecture which has many advantages over the procedural approach you often find in older PHP programs. The idea behind this architecture is to encapsulate data and the methods that work with this data, in order to produce modular, extendable and maintainable code.
+Like basically all professional PHP applications today, Kirby is based on an OOP (Object Oriented Programming) architecture, which has many advantages over the procedural approach you often find in older PHP programs. The idea behind the OOP architecture is to encapsulate data and the methods that work with this data, in order to produce modular, extendable and maintainable code.
 
 <warning>
 No images, lots of text😉. But at least some code to play with. So get some coffee or tea.
@@ -39,7 +39,7 @@ If you want to code along with this recipe, you need the following:
 
 Object Oriented Programming (OOP) is all about objects, their properties and their methods.
 
-Let's consider a real-world object. Such an object could be a book in your library (or a computer, a smartphone, a piece of furniture…). It has certain properties like an author, a title, an ISBN number, a price tag and a cover, and it was probably published by a publishing house. Its methods would be the actions you could do with the book, e.g. you can read it, you can give it away as a present, put it back in your shelf or throw it away if you don't like it. And while all the books in your library are different, they nevertheless share the same general properties and methods.
+Let's consider a real-world object. Such an object could be a book in your library. It has certain properties like an author, a title, an ISBN number, a price tag and a cover, and it was probably published by a publishing house. Its methods would be the actions you could do with the book, e.g. you can read it, you can give it away as a present, put it back in your shelf or throw it away if you don't like it. And while all the books in your library are different, they nevertheless share the same general properties and methods. Other objects could be a computer, a smartphone or a piece of furniture. All have their own properties and methods.
 
 OOP uses the same paradigms for data structures in a program. The properties and methods of an object like the book are described in a class, which acts as the model or blueprint for every book you might have in your application, whereas an object is an instance of this class, i.e. a specific embodiment of the class (the specific book in your library).
 
@@ -49,9 +49,9 @@ In a larger software program, you typically have multiple classes whose objects 
 
 Time for the first coffee. Let's start with a simple example and do some coding to see how we can actually create such a class in PHP and how we can create (instantiate) objects from that class. We define a class called `Book` with some properties that should apply to all objects of this class, and methods to work with the data of these objects.
 
-In your webserver's (glossary: document-root text: document root), create a new folder `book` and inside of this folder a new file called `book.php` with the class definition code from above. Copy the code below into this file.
+In your webserver's (glossary: document-root text: document root), create a new folder `book` and inside of this folder a new file called `Book.php` with the class definition code from above. Copy the code below into this file.
 
-```php "/book/book.php"
+```php "/book/Book.php"
 <?php
 class Book
 {
@@ -69,35 +69,43 @@ class Book
         $this->author = $author;
     }
 
-    public function getTitle(): string {
+    public function getTitle(): string
+    {
         return $this->title;
     }
 
-    public function getAuthor(): string {
+    public function getAuthor(): string
+    {
         return $this->author;
     }
 
-    public function getPrice(): float {
+    public function getPrice(): float
+    {
         return $this->price;
     }
 
-    public function getPriceWithCurrencySymbol(string $symbol): float {
+    public function getPriceWithCurrencySymbol(string $symbol): float
+    {
         return $symbol . $this->price;
     }
 
-    public function getPublisher(): string {
+    public function getPublisher(): string
+    {
         return $this->publisher;
     }
     
-    public function getIsbn(): string {
+    public function getIsbn(): string
+    {
         return $this->isbn;
     }
       
-    public function getType(): string {
+    public function getType(): string
+    {
         return $this->type;
     }
 
-    public function setTitle(string $title): void {
+    public function setTitle(string $title): void
+    {
         $this->title = $title;;
     }
 
@@ -106,23 +114,28 @@ class Book
         $this->author = $author;
     }
 
-    public function setPrice(float $price): void {
+    public function setPrice(float $price): void
+    {
         $this->price = $price;
     }
 
-    public function setPublisher(string $publisher): void {
+    public function setPublisher(string $publisher): void
+    {
         $this->publisher = $publisher;
     }
     
-    public function setIsbn(string $isbn): void {
+    public function setIsbn(string $isbn): void
+    {
         $this->isbn = $isbn;
     }
 
-    public function setType(string $type): void {
+    public function setType(string $type): void
+    {
         $this->type = $type;
     }
     
-    public function isEbook(): bool {
+    public function isEbook(): bool
+    {
         return $this->type === 'ebook';
     }
 }
@@ -143,15 +156,15 @@ Class properties (variables and constants) and methods can have different (link:
 
 We define a protected property with `protected` followed by the variable for the property, e.g. `protected $author`. The properties of a class usually should not be public to prevent users from assigning unexpected values.
 
-Public properties and methods like the setters and getters in our `Book` class can be called anywhere, not only inside the class where they are defined, but also inside other classes or scripts when we work with objects of that class.
+Public properties and methods like the setters and getters in our `Book` class can be called from anywhere, not only inside from the class where they are defined, but also from other classes or scripts when we work with objects of that class.
 
-Protected properties and methods can be called within the defining class itself or within the children of that class, but not outside of these classes.
+Protected properties and methods can be called from the defining class itself or from the children of that class, but not from outside of these classes.
 
 Private properties and methods are even more restricted, they can only be used inside the defining class itself, not anywhere else.
 
 #### Getters and setters
 
-Because the properties are not public, we cannot access them directly, but have to create so called *getters* that return the value of a property (`getPrice()`, `getTitle()` etc.) and *setters*, which assign a value to the property of an object (`setPrice()`, `setTitle()` etc.). Getters and setters are often prefixed with `get-`/`set-` to indicate their purpose, but this is not required and you can name them what you want (although it is good practice to give methods, variables etc. speaking names and not name them foo or bar);
+Because the properties are not public, we cannot access them directly, but have to create so called *getters* that return the value of a property (`getPrice()`, `getTitle()` etc.) and *setters*, which assign a value to the property of an object (`setPrice()`, `setTitle()` etc.). Getters and setters are often prefixed with `get-`/`set-` to indicate their purpose, but this is not required and you can name them what you want (although it is good practice to give methods, variables etc. speaking names and not name them foo or bar).
 
 #### Other methods
 
@@ -169,14 +182,14 @@ You may have noticed that we use `$this` in all setters and getters above. `$thi
 
 Enough talk, let's do some more coding: We will be creating new objects, set their properties and retrieve them.
 
-Next to the `book.php` file from above, create an `index.php` file with the following content:
+Next to the `Book.php` file from above, create an `index.php` file with the following content:
 
 ```php "/book/index.php"
 <?php
 // make PHP display errors on screen
 ini_set('display_errors', 1);
 // require the book class
-require_once __DIR__ . '/book.php';
+require_once __DIR__ . '/Book.php';
 ```
 
 Now open this `index.php` file in a browser by visiting `http(s)://localhost/index.php` (change the URL as needed for your environment). You will see nothing but a blank page, because this code doesn't output anything yet.
@@ -275,7 +288,7 @@ Let's create another error:
 
 ```php "/book/index.php"
 // …
-$book2 = new Book('Beloved', 'Toni Morrison')
+$book2 = new Book('Beloved', 'Toni Morrison');
 echo $book2->type();
 ```
 
@@ -288,7 +301,7 @@ In this case, `$book2` is a perfectly valid Book object, however, the name of th
 In the example above, we declared a `__construct()` method. This method is optional, but allows us to initialize an object's properties (or the properties we regard as essential) upon creation of the object. In our example, we have to pass the title and the author parameters both as strings when creating a new instance of the class and cannot just create a new book with `new Book()`. It would also be possible to set default values for certain parameters (which doesn't really make sense for our books). But all of this totally depends on the classes and their purpose.
 ## Inheritance (`extends`)
 
-At one point in our example, we set the type of the book to `ebook`. While an eBook shares its main with a printed book, like author, title, price, there are also some important differences. For example, an eBook doesn't usually have a fixed number of pages (unless it's a PDF), it doesn't have a cover type like hardcover or softcover, but instead has a file type like `pdf`, `epub` or `mobi`, or might be under DRM (Digital Rights Management).
+At one point in our example, we set the type of the book to `ebook`. While an eBook shares its main properties with a printed book, like author, title, price, there are also some important differences. For example, an eBook doesn't usually have a fixed number of pages (unless it's a PDF), it doesn't have a cover type like hardcover or softcover, but instead has a file type like `pdf`, `epub` or `mobi`, or might be under DRM (Digital Rights Management).
 
 If we think that eBooks are sufficiently different from printed books (and for the purposes of this recipe we do), we might come to the conclusion that they are better off in their own `Ebook` class. However, we do not really want to copy all the code we defined in the `Book` class for the properties both classes share. That's where inheritance comes into play.
 
@@ -296,19 +309,21 @@ If a class extends another class, we speak of inheritance, one of the advantages
 
 However, in the same way that a child is not an exact copy of one of its parents, a child class can modify the inherited properties and methods and add additional ones. Inheritance is therefore a way to diversify while at the same time keeping code DRY ("Don't Repeat Yourself"). You only have to redefine or extend where necessary.
 
-But enough theory, let's just try it out with a little help of more coffee, and actually extend the `Book` class. In a new file `ebook.php` in the same folder as above, create the `Ebook` child class and add a new property and its setter and getter.
+But enough theory, let's just try it out with a little help of more coffee, and actually extend the `Book` class. In a new file `Ebook.php` in the same folder as above, create the `Ebook` child class and add a new property and its setter and getter.
 
-```php "/book/ebook.php"
+```php "/book/Ebook.php"
 <?php
 class Ebook extends Book
 {
   protected $format;
   
-  public function setFormat($format) {
+  public function setFormat($format): void
+  {
     $this->format = $format;
   }
 
-  public function getFormat() {
+  public function getFormat(): string
+  {
     return $this->format;
   }
 }
@@ -319,8 +334,8 @@ Then in your `index.php`, require this new file and instantiate a new `Ebook` ob
 ```php "/book/index.php"
 <?php
 ini_set('display_errors', 1);
-require_once __DIR__ . '/book.php';
-require_once __DIR__ . '/ebook.php';
+require_once __DIR__ . '/Book.php';
+require_once __DIR__ . '/Ebook.php';
 
 // … rest of code we added before
 
@@ -342,7 +357,7 @@ To prevent such collisions, classes usually live in their own namespaces, so tha
 
 Let's add a namespace to our `Book` and `Ebook` classes, for example `Cookbook\Books`:
 
-```php "/book/book.php"
+```php "/book/Book.php"
 <?php
 
 namespace Cookbook\Books;
@@ -352,12 +367,12 @@ class Book {
 }
 ```
 
-```php "/book/ebook.php"
+```php "/book/Ebook.php"
 <?php
 
 namespace Cookbook\Books;
 
-class EBook {
+class Ebook {
     //… code as before
 }
 ```
@@ -384,14 +399,14 @@ Instead of instantiating an object with its full class name, we can import the c
 // make PHP display errors on screen
 ini_set('display_errors', 1);
 // require the book class
-require_once __DIR__ . '/book.php';
-require_once __DIR__ . '/ebook.php';
+require_once __DIR__ . '/Book.php';
+require_once __DIR__ . '/Ebook.php';
 
 use Cookbook\Books\Book;
-use Cookbook\Books\EBook;
+use Cookbook\Books\Ebook;
 
 $book  = new Book(…);
-$ebook = new EBook(…);
+$ebook = new Ebook(…);
 //…
 ```
 
@@ -399,7 +414,7 @@ $ebook = new EBook(…);
 
 Static properties and methods can be called directly without creating an instance of a class using the `new` keyword.
 
-You have probably come around such static methods when using Kirby. Same classes in the Toolkit, for example the `A`, Str` or 'Html` classes, have only static methods.
+You have probably come around such static methods when using Kirby. Some classes in the Toolkit, for example the `A`, `Str` or `Html` classes, have only static methods.
 
 That we don't have to explicitly instanciate an object is not the only difference, we also call these methods differently, for example:
 
@@ -409,16 +424,17 @@ echo Str::upper('Kirby is my favorite CMS');
 
 Instead of the arrow syntax used for methods that are called on an instance of a class like `$page->update()`, a double colon (or (link: https://en.wikipedia.org/wiki/Scope_resolution_operator text: "Paamayim Nekudotayim")) is used to access a static method or property of a class.
 
-Fetch another coffee or tea and then let's add a static method to our `Book` class as well, so that we can create the new object statically instead.
+Grab another coffee or tea and then let's add a static method to our `Book` class as well, so that we can create the new object statically instead.
 
-```php "/book/book.php"
+```php "/book/Book.php"
 <?php
-class Ebook extends Book
+class Book
 {
   
   // ... other code
 
-  public static function create($title, $author) {
+  public static function create($title, $author)
+  {
     return new static($title, $author);
   }
 
@@ -428,25 +444,29 @@ class Ebook extends Book
 This new static method does nothing but call the constructor of the class internally, so that we can instantiate a new object without the `new` keyword:
 
 ```php "/book/index.php"
-$ebook2 = Ebook::create('The Pragmatic Programmer', 'David Thomas, Andrew Hunt');
+$ebook2 = Book::create('The Pragmatic Programmer', 'David Thomas, Andrew Hunt');
 var_dump($ebook2);
 ```
 
 One advantage of this approach is that we can now call other methods directly without having to wrap the object into parentheses.
 
 ```php "/book/index.php"
-$title = (new Ebook('Form Design Patterns', 'Adam Silver'))->getTitle();
+$title = (new Book('Form Design Patterns', 'Adam Silver'))->getTitle();
 ```
 
 vs.
 
 ```php "/book/index.php"
-$title = Ebook::create('Form Design Patterns', 'Adam Silver')->getTitle();
+$title = Book::create('Form Design Patterns', 'Adam Silver')->getTitle();
 ```
+
+<info>
+This pattern is sometimes quite useful, but probably shouldn't be used all the time.
+</info>
 
 ## Conclusion && resources
 
-There would be so much more to learn and explore, but hopefully this recipe has lowered the entry barrier a bit, so that you are prepared to dive deeper yourself. If you explore the Kirby core classes, you will find a quite a few other OOP related terms like traits, abstract methods and classes, classes that implement rather than extend other classes and, and, and.
+There would be so much more to learn and explore, but hopefully this recipe has lowered the entry barrier a bit, so that you are prepared to dive deeper yourself. If you explore the Kirby core classes, you will find quite a few other OOP related terms like traits, abstract methods and classes, classes that implement interfaces rather than extend other classes and, and, and.
 
 Nevertheless, I hope this recipe got you hooked to go the next steps.
 
