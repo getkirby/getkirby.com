@@ -4,7 +4,7 @@ namespace Kirby\Site\Models;
 
 use Kirby\Cms\Page;
 
-class IssuePage extends Page
+class KosmosIssuePage extends Page
 {
 
     public function metadata(): array

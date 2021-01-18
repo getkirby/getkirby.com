@@ -29,11 +29,11 @@ return [
             }
 
             switch ($page->template()->name()) {
-                case 'recipe':
+                case 'cookbook-recipe':
                     return 'cookbook';
-                case 'guide':
+                case 'guide-chapter':
                     return 'guide';
-                case 'issue':
+                case 'kosmos-issue':
                     return 'kosmos';
                 case 'plugin':
                     return 'plugin';
@@ -54,11 +54,11 @@ return [
         'endpoint',
         'extension',
         'field-method',
-        'guide',
+        'guide-chapter',
         'helper',
         'hook',
         'icon',
-        'issue',
+        'komsos-issue',
         'kirbytag',
         'method' => [
             'filter' => function ($page) {
@@ -67,7 +67,7 @@ return [
             }
         ],
         'plugin',
-        'recipe',
+        'cookbook-recipe',
         'release',
         'root',
         'section',

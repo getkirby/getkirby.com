@@ -1,13 +1,15 @@
 <?php
 
-return function ($page) {
 
-  if ($page->text()->isEmpty() && $page->hasChildren()) {
-    go($page->children()->first()->url());
-  }
+return function($page) {
+
+  $sidebarItemTemplates = ['cookbook', 'reference', 'glossary'];
+  
+  $items = $page->children()->listed();
 
   return [
-    'guide' => $page,
+    'mainItems' => $items->filterBy('template', 'not in', $sidebarItemTemplates),
+    'sidebarItems' => $items->filterBy('template', 'in', $sidebarItemTemplates),
   ];
 
 };
