@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+ <?php
+
+ use Kirby\Toolkit\F;
+
+ // check if we are indeed on the command line
+ if (php_sapi_name() !== 'cli') die();
+
+ // load Kirby
+ require __DIR__ . '/../kirby/bootstrap.php';
+
+ $kirby = new Kirby([
+     'roots' => [
+         'index'   => __DIR__ . '/../www',
+         'content' => __DIR__ . '/../content',
+         'site'    => __DIR__ . '/../site',
+     ],
+ ]);
+
+ // renaming map
+ $templates = [
+     'guide'             => 'guide-chapter',
+     'documentation'     => 'guide',
+     'cookbook-category' => 'cookbook-category',
+     'recipe'            => 'cookbook-recipe',
+     'archive'           => 'versions',
+     'v35'               => 'release-35',
+     'issue'             => 'kosmos-issue',
+     'plugin-developer'  => 'plugin-developer',
+     'glossary-entry'    => 'glossary-entry'
+ ];
+
+ $index = $kirby->site()->index();
+ $pages = $index->filterBy('intendedTemplate', 'in', array_keys($templates));
+ $kirby->impersonate('kirby');
+
+ foreach ($pages as $page) {
+     $old = $page->intendedTemplate()->name();
+     $new = $templates[$old];
+     F::rename($page->root() . '/' . $page->intendedTemplate()->name() . '.txt', $new);
+     echo "\033[1m" . $page->id() . ": " . $old . " -> " . $new ."\033[0m\n";
+ }
+
+ exit(0); 
