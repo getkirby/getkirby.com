@@ -8,6 +8,7 @@ on:
     paths:
     - content/**.txt
     - site/config/algolia.php
+    - site/models/**
     - site/plugins/**
 
 jobs:
