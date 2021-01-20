@@ -5,14 +5,14 @@ $items  = $items ?? $site->find('docs')->children()->listed();
 
 $doNotSkipTemplates = [
   'reference',
-  'reference.fields',
-  'reference.fieldmethods',
-  'reference.packages',
-  'reference.helpers',
-  'reference.kirbytags',
-  'reference.roots',
-  'reference.urls',
-  'reference.validators',
+  'reference-fields',
+  'reference-fieldmethods',
+  'reference-packages',
+  'reference-helpers',
+  'reference-kirbytags',
+  'reference-roots',
+  'reference-urls',
+  'reference-validators',
 ];
 
 ?>

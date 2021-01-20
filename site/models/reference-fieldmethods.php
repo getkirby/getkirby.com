@@ -41,8 +41,8 @@ class ReferenceFieldMethodsPage extends ReflectionSection
             $children[] = [
                 'slug'       => $slug,
                 'num'        => 0,
-                'template'   => 'reference.fieldmethod',
-                'model'      => 'reference.fieldmethod',
+                'template'   => 'reference-fieldmethod',
+                'model'      => 'reference-fieldmethod',
                 'content'    => $content
             ];
         }

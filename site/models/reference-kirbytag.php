@@ -60,7 +60,7 @@ class ReferenceKirbytagPage extends ReflectionPage
 
     public function template()
     {
-        return $this->kirby()->template('reference.method');
+        return $this->kirby()->template('reference-method');
     }
 
     public function title(): Field

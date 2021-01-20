@@ -22,6 +22,6 @@ class ReflectionSection extends ReflectionPage
             return parent::template();
         }
 
-        return $this->kirby()->template('reference.section');
+        return $this->kirby()->template('reference-section');
     }
 }

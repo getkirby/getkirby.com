@@ -344,7 +344,7 @@ class ReflectionPage extends Page
             return parent::template();
         }
 
-        return $this->kirby()->template('reference.article');
+        return $this->kirby()->template('reference-article');
     }
 
     /**

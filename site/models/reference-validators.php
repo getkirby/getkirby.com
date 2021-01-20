@@ -30,8 +30,8 @@ class ReferenceValidatorsPage extends ReflectionSection
             $children[] = [
                 'slug'     => $slug,
                 'num'      => 0,
-                'model'    => 'reference.validator',
-                'template' => 'reference.validator',
+                'model'    => 'reference-validator',
+                'template' => 'reference-validator',
                 'parent'   => $this,
                 'content'  => $content
             ];

@@ -20,7 +20,7 @@ class ReferenceUrlPage extends ReflectionPage
 
     public function template()
     {
-        return $this->kirby()->template('reference.system');
+        return $this->kirby()->template('reference-system');
     }
 
     public function title(): Field

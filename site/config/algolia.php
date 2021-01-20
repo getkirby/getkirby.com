@@ -42,25 +42,25 @@ return [
         }
     ],
     'templates' => [
-        'reference.article',
-        'reference.section',
+        'reference-article',
+        'reference-section',
         'class' => [
             'filter' => function ($page) {
                 return $page->isListed() === true;
             }
         ],
-        'reference.component',
+        'reference-component',
         'contact',
-        'reference.endpoint',
-        'reference.extension',
-        'reference.fieldmethod',
+        'reference-endpoint',
+        'reference-extension',
+        'reference-fieldmethod',
         'guide',
-        'reference.helper',
-        'reference.hook',
-        'reference.icon',
+        'reference-helper',
+        'reference-hook',
+        'reference-icon',
         'issue',
-        'reference.kirbytag',
-        'reference.classmethod' => [
+        'reference-kirbytag',
+        'reference-classmethod' => [
             'filter' => function ($page) {
                 return $page->isListed() === true &&
                        $page->parent()->isListed() === true;
@@ -70,9 +70,9 @@ return [
         'recipe',
         'release',
         'root',
-        'reference.panelsection',
+        'reference-panelsection',
         'text',
-        'reference.url',
-        'reference.validator',
+        'reference-url',
+        'reference-validator',
     ]
 ];

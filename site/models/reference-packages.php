@@ -70,8 +70,8 @@ class ReferencePackagesPage extends ReflectionSection
                 } else {
                     $pages[] = [
                         'slug'     => Str::slug($class),
-                        'model'    => 'reference.class',
-                        'template' => 'reference.class',
+                        'model'    => 'reference-class',
+                        'template' => 'reference-class',
                         'num'      => 0,
                         'content'  => [
                             'class' => 'Kirby\\' . $package . '\\' . $class

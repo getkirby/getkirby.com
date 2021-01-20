@@ -23,8 +23,8 @@ class ReferenceIconsPage extends ReflectionSection
             $slug = str_replace('icon-', '', $symbol->attributes()->id);
             $children[] = [
                 'slug'     => $slug,
-                'template' => 'reference.icon',
-                'model'    => 'reference.icon',
+                'template' => 'reference-icon',
+                'model'    => 'reference-icon',
                 'num'      => 0,
                 'content'  => [
                     'excerpt' => '&lt;k-icon type="' . $slug . '"&gt;'

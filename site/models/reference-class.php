@@ -69,8 +69,8 @@ class ReferenceClassPage extends ReflectionSection
 
             $children[] = [
                 'slug'     => $slug,
-                'model'    => 'reference.classmethod',
-                'template' => 'reference.classmethod',
+                'model'    => 'reference-classmethod',
+                'template' => 'reference-classmethod',
                 'parent'   => $this,
                 'content'  => $content,
                 'num'      => $num

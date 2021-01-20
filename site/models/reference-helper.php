@@ -29,11 +29,11 @@ class ReferenceHelperPage extends ReflectionPage
     }
 
     /**
-     * Overwrite template to `reference.method`
+     * Overwrite template to `reference-method`
      */
     public function template()
     {
-        return $this->kirby()->template('reference.method');
+        return $this->kirby()->template('reference-method');
     }
 
     public function title(): Field

@@ -33,8 +33,8 @@ class ReferenceHooksPage extends ReflectionSection
 
             return [
                 'slug'     => Str::slug($hook['Name']),
-                'template' => 'reference.hook',
-                'model'    => 'reference.hook',
+                'template' => 'reference-hook',
+                'model'    => 'reference-hook',
                 'num'      => 0,
                 'content'  => $content
             ];

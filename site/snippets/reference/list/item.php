@@ -2,7 +2,7 @@
 $excerpt = $excerpt ?? false
 ?>
 <a data-slug="<?= $item->slug() ?>" data-title="<?= $item->title() ?>" href="<?= $item->url() ?>"<?php e($item->isActive(), ' aria-current="page"' ) ?> class="cheatsheet-entry">
-  <?php if ($item->intendedTemplate()->name() === 'reference.icon'): ?>
+  <?php if ($item->intendedTemplate()->name() === 'reference-icon'): ?>
   <figure class="cheatsheet-entry-icon">
     <svg>
       <use xlink:href="#icon-<?= $item->slug() ?>" />
