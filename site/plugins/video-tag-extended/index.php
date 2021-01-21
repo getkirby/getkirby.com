@@ -24,7 +24,7 @@ Kirby::plugin('getkirby/video-tag-extended', [
             ],
             'html' => function ($tag) {
                 // available attributes
-                $attrs = KirbyTag::$types[$tag->type];
+                $attrs = KirbyTag::$types[$tag->type]['attr'];
 
                 // gets global video tag options
                 $options = $tag->kirby()->option('kirbytext.video', []);
