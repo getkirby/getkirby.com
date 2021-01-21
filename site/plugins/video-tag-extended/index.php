@@ -30,11 +30,9 @@ Kirby::plugin('getkirby/video-tag-extended', [
                 $options = $tag->kirby()->option('kirbytext.video', []);
 
                 // injects default values
-                // applies only string options (ignored youtube and vimeo options)
-                // and defined attributes to safely update tag props
+                // applies only defined attributes to safely update tag props
                 foreach ($options as $option => $value) {
                     if (
-                        is_string($option) === true &&
                         in_array($option, $attrs) === true &&
                         (isset($tag->{$option}) === false || $tag->{$option} === null)
                     ) {
