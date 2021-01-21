@@ -55,10 +55,10 @@ Kirby::plugin('getkirby/video-tag-extended', [
 
                     return [
                         'autoplay' => $autoplay = Str::toType($tag->autoplay, 'bool'),
-                        'controls' => Str::toType($tag->controls !== null ? $tag->controls : true, 'bool'),
+                        'controls' => Str::toType($tag->controls ?? true, 'bool'),
                         'height'   => $tag->height,
                         'loop'     => Str::toType($tag->loop, 'bool'),
-                        'muted'    => Str::toType($tag->muted !== null ? $tag->muted : $autoplay, 'bool'),
+                        'muted'    => Str::toType($tag->muted ?? $autoplay, 'bool'),
                         'poster'   => $tag->poster,
                         'preload'  => $tag->preload,
                         'width'    => $tag->width
