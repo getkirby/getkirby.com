@@ -51,7 +51,7 @@ return [
 ];
 ```
 
-In your code, you can now access the translation strings and replace your placeholders using the [`I18n::template()` method](docs/reference/tools/i18n/template) like this:
+In your code, you can now access the translation strings and replace your placeholders using the [`I18n::template()` method](/docs/reference/tools/i18n/template) like this:
 
 ```php
 echo I18n::template('file.success', null, [
