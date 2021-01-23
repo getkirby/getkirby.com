@@ -20,10 +20,10 @@ If that is true, then this recipe is for you. We will look into the basics of ob
 
 The Kirby core is written in PHP, a scripting language that still powers a majority of websites.
 
-Like basically all professional PHP applications today, Kirby is based on an OOP (Object Oriented Programming) architecture, which has many advantages over the procedural approach you often find in older PHP programs. The idea behind the OOP architecture is to encapsulate data and the methods that work with this data, in order to produce modular, extendable and maintainable code.
+Like basically all professional PHP applications today, Kirby is based on an OOP (Object Oriented Programming) architecture, which has many advantages over the procedural approach you often find in older PHP programs. The idea behind the OOP architecture is to encapsulate data and the methods that work with this data, in order to produce modular, extensible and maintainable code.
 
 <warning>
-No images, lots of text😉. But at least some code to play with. So get some coffee or tea.
+No images, lots of text 😉. But at least some code to play with. So get some coffee or tea.
 </warning>
 
 ## Prerequisites
@@ -32,7 +32,7 @@ If you want to code along with this recipe, you need the following:
 
 - A web server (ideally on your (link: docs/cookbook/setup/development-environment text: local machine))
 - A current version of PHP
-- A Kirby installation , either (link: docs/guide/quickstart text: Starterkit or Plainkit)
+- A Kirby installation, either (link: docs/guide/quickstart text: Starterkit or Plainkit)
 - A code/text editor of your choice
 
 ## What is OOP?
@@ -154,7 +154,7 @@ For starters, we define our new `Book` class with the keyword `class`. Inside th
 
 Class properties (variables and constants) and methods can have different (link: https://www.php.net/manual/en/language.oop5.visibility.php text: visibility statuses): private, protected or public. 
 
-We define a protected property with `protected` followed by the variable for the property, e.g. `protected $author`. The properties of a class usually should not be public to prevent users from assigning unexpected values.
+We define a protected property with `protected` followed by the property name, e.g. `protected $author`. The properties of a class usually should not be public to prevent users from assigning unexpected values.
 
 Public properties and methods like the setters and getters in our `Book` class can be called from anywhere, not only inside from the class where they are defined, but also from other classes or scripts when we work with objects of that class.
 
@@ -192,7 +192,7 @@ ini_set('display_errors', 1);
 require_once __DIR__ . '/Book.php';
 ```
 
-Now open this `index.php` file in a browser by visiting `http(s)://localhost/index.php` (change the URL as needed for your environment). You will see nothing but a blank page, because this code doesn't output anything yet.
+Now open this `index.php` file in a browser by visiting `http(s)://localhost/book/index.php` (change the URL as needed for your environment). You will see nothing but a blank page, because this code doesn't output anything yet.
 
 Next, let's create a new instance of the class—the object—using the keyword `new` followed by the class name, and the `title` and `author` as parameters as required by the `__construct()` method:
 
@@ -216,7 +216,7 @@ object(Book)[2]
   protected 'type' => null
 ```
 
-#### Using methods
+#### Using properties and methods
 
 To test that we really cannot access these properties, let's play a little make and break. Add the following line, and open the file again in your browser after saving:
 
@@ -391,7 +391,7 @@ or we import the class…
 
 ### Importing classes
 
-Instead of instantiating an object with its full class name, we can import the classes using the `use` keyword. Once that is done, we can continue using the short name when instatiation an object like before:
+Instead of instantiating an object with its full class name, we can import the classes using the `use` keyword. Once that is done, we can continue using the short name when instantiating an object like before:
 
 
 ```php "/book/index.php"
@@ -416,7 +416,7 @@ Static properties and methods can be called directly without creating an instanc
 
 You have probably come around such static methods when using Kirby. Some classes in the Toolkit, for example the `A`, `Str` or `Html` classes, have only static methods.
 
-That we don't have to explicitly instanciate an object is not the only difference, we also call these methods differently, for example:
+That we don't have to explicitly instantiate an object is not the only difference, we also call these methods differently, for example:
 
 ```php
 echo Str::upper('Kirby is my favorite CMS');
@@ -428,6 +428,9 @@ Grab another coffee or tea and then let's add a static method to our `Book` clas
 
 ```php "/book/Book.php"
 <?php
+
+namespace Cookbook\Books;
+
 class Book
 {
   
