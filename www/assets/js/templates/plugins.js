@@ -1,3 +1,2 @@
-import { component } from "../utils/load.js";
 
-component("../components/filter.js", "#plugins");
+component("./components/filter.js", "#plugins");
