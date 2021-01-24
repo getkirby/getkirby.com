@@ -5,7 +5,7 @@
   <title>Kirby 3.5 is here 🚀</title>
 
   <?= css([$kirby->url('assets') . '/css/index.css', '@auto']) ?>
-  <?= js([$kirby->url('assets') . '/js/index.js', '@auto'], ['type' => 'module']) ?>
+  <?= js([$kirby->url('assets') . '/js/index.js', $kirby->url('assets') . '/js/components/lightbox.js'], ['type' => 'module']) ?>
 </head>
 <body class="v35">
 
