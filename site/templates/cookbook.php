@@ -6,7 +6,7 @@
 
     <header class="hero filter-hero">
       <h1><a href="<?= $page->url() ?>">Cookbook</a></h1>
-      <input class="filter-search search" placeholder="Search recipes …" />
+      <input class="filter-search" placeholder="Search recipes …" />
     </header>
 
     <div class="filter-layout">
