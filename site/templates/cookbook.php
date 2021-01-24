@@ -1,5 +1,9 @@
 <?php snippet('header') ?>
 
+<script type="module">
+component("./components/filter.js", "#cookbook");
+</script>
+
 <main class="main" id="maincontent">
 
   <div id="cookbook" class="wrap">

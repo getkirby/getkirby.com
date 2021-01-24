@@ -1,5 +1,11 @@
 <?php snippet('header') ?>
 
+<script type="module">
+document.querySelector("form.demo").addEventListener("submit", function () {
+  this.setAttribute("disabled", true);
+});
+</script>
+
 <main class="try-page | main" id="maincontent">
   <article class="wrap">
 
