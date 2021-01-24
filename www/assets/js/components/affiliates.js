@@ -29,13 +29,24 @@ export default class {
       p.has("link") &&
       p.has("p_tok")
     ) {
-      const { external } = await import("../utils/load.js");
-
-      external(PADDLE_SCRIPT_URL, () => {
-        Paddle.Setup({
-          vendor: PADDLE_VENDOR_ID,
-        });
-      });
+      this.load();
     }
+  }
+
+  load() {
+    // create script tag for external paddle.js
+    const script = document.createElement("script");
+    script.src = PADDLE_SCRIPT_URL;
+
+    // set callback for when script is loaded
+    script.onload = () => {
+      Paddle.Setup({
+        vendor: PADDLE_VENDOR_ID,
+      });
+    };
+
+    // insert in DOM
+    const at = document.getElementsByTagName("script")[0];
+    at.parentNode.insertBefore(script, at);
   }
 }
