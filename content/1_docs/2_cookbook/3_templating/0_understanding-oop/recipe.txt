@@ -32,7 +32,6 @@ If you want to code along with this recipe, you need the following:
 
 - A web server (ideally on your (link: docs/cookbook/setup/development-environment text: local machine))
 - A current version of PHP
-- A Kirby installation, either (link: docs/guide/quickstart text: Starterkit or Plainkit)
 - A code/text editor of your choice
 
 ## What is OOP?
