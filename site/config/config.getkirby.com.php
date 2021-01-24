@@ -12,9 +12,6 @@ return [
             'type'   => 'apcu'
         ]
     ],
-    'cachebuster' => [
-        'mode' => 'path'
-    ],
     'keycdn' => [
         'domain' => 'https://assets.getkirby.com',
     ],
