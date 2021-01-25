@@ -10,7 +10,7 @@ $options = [
     ]
 ];
 
-if(Url::host() === "getkirby.com") {
+if(in_array(Url::host(), ['getkirby.com', 'staging.getkirby.com'])) {
     $options['urls'] = [
         'assets' => 'dist'
     ];
