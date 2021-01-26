@@ -3,8 +3,11 @@
 return [
     // Simple
     'docs/guide/installation'         => 'docs/guide/quickstart',
-    'reference/(:all?)'               => 'docs/reference/$1',
+    'reference'                       => 'docs/reference',
+    'reference/(:all)'                => 'docs/reference/$1',
+    'docs/cheatsheet'                 => 'docs/reference',
     'docs/cheatsheet/(:all?)'         => 'docs/reference/$1',
+    'docs/toolkit'                    => 'docs/reference',
     'docs/toolkit/(:all?)'            => 'docs/reference/$1',
     'docs/cookbook/migration/sites'   => 'docs/cookbook/setup/migrate-site',
     'docs/cookbook/migration/files'   => 'docs/cookbook/setup/migrate-files',
@@ -20,14 +23,14 @@ return [
         if ($page = page('docs/reference')->grandChildren()->listed()->findBy('uid', $group)) {
             return $page->id() . '/'. $path;
         }
-        
+
         return 'error';
     },
     'docs/cookbook/(:any)/(:all)'     => function ($category, $uid) {
         if ($page = page('docs/cookbook')->grandChildren()->listed()->findBy('uid', $uid)) {
             return $page->url();
         }
-        
+
         return 'error';
     }
 ];
