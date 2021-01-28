@@ -3,7 +3,7 @@ Title: Load more with Ajax
 ----
 
 
-Published: 2021-01-15
+Published: 2021-01-28
 
 ----
 
@@ -20,13 +20,15 @@ Text:
 
 ## Intro
 
-When creating a portfolio, blog or image gallery webpage, we often only want to show a limited number of projects, articles or images at first load, but give visitors the possibility to load more with a button. In this recipe, we will go through the steps needed to implement such a solution.
+When creating a portfolio, blog or image gallery webpage, we often want to show a limited number of projects, articles or images at first load, but give visitors the possibility to load more with a button. In this recipe, we will go through the steps needed to implement such a solution.
 
-We will base this recipe off the photography page in Kirby's Starterkit with lists a number of subpages with an image and a title.
+We will base this recipe off the photography page in Kirby's Starterkit which lists a number of subpages with an image and a title.
+
+Kirby's (link: docs/cookbook/templating/pagination text: pagination class) will help us break up the projects into digestible chunks and make the logic pretty straightforward.
 
 ## HTML Template
 
-The photography page uses the `photography.php` (glossary: template text: template), which untouched looks like this:
+The photography page uses the `photography.php` (glossary: template text: template), which looks like this when untouched:
 
 ```php "/site/templates/photography.php"
 <?php snippet('header') ?>
@@ -84,7 +86,9 @@ As a first step, let's move the `<li>` element from the template into a separate
 <?php snippet('footer') ?>
 ```
 
-Next, we add a load-more button after the project list and replace `$page->children()->listed()` with `$projects`. We will define this variable in the next step in a (glossary: controller text: controller).
+We do this so that we can reuse this snippet again later.
+
+Next, we add a load-more button after the project list, and replace `$page->children()->listed()` with `$projects`. We will define this variable in the next step in a (glossary: controller text: controller).
 
 ```php "/site/templates/photography.php"
 <?php snippet('header') ?>
@@ -101,26 +105,26 @@ Next, we add a load-more button after the project list and replace `$page->child
 
 ## HTML controller
 
-We will now put the logic we need into a new controller. Create a new `photography.php` controller in `site/controllers` with the following code:
+Now, let's put the logic we need into a new controller. Create a new `photography.php` controller in `site/controllers` with the following code:
 
 ```php "/site/controllers/photography.php"
 <?php
 
 return function ($page) {
-  
   $limit    = 4;
-  $projects = $page->children()->listed()->limit($limit);
+  $projects = $page->children()->listed()->paginate($limit);
 
   return [
-      'limit'    => $limit,
-      'projects' => $projects,    
+      'limit'      => $limit,
+      'projects'   => $projects,  
+      'pagination' => $projects->pagination(),  
     ];
 };
 ```
 
-Here we define the `$projects` variable and limit the collection to the limit set in the `$limit` variable, in this case 4.
+Here we define the `$projects` variable and paginate the pages collection into chunks of 4 as defined in the `$limit` variable. You can change the chunk size as needed, we use 4 here because we only have a limited set of data.
 
-If we visit the page in the browser at this point, we will see four projects and our fancy load-more button. Of course, clicking on the button won't do anything yet.
+If we visit the page in the browser at this point, we will see four projects and our super fancy load-more button. However, as much as you might click on the button, nothing will happen yet.
 
 (screenshot: load-more.png)
 
@@ -128,18 +132,17 @@ If we visit the page in the browser at this point, we will see four projects and
 
 To implement the logic for the load-more functionality, we create the controller for the JSON (glossary: content-representation text: content representation).
 
-This content representation will be available at the url `localhost/photography.json` and is the URL we will use in our JavaScript in the next step.
+This content representation will be available at the url `localhost/photography.json` and is the URL we will use in the JavaScript in the next step.
 
 ```php "/site/controllers/photography.json.php"
 <?php
 
 return function ($page) {
   
-  $projects = $page->children()->listed();
-  $limit    = 4;
-  $offset   = intval(get('offset'));
-  $more     = $projects->count() > $offset + $limit;
-  $projects = $projects->offset($offset)->limit($limit);
+  $limit      = 4;
+  $projects   = $page->children()->listed()->paginate($limit);
+  $pagination = $projects->pagination();
+  $more       = $pagination->hasNextPage();
 
   return [
       'projects' => $projects,
@@ -150,19 +153,9 @@ return function ($page) {
 };
 ```
 
-We need a bit more logic here than in the `photography.php` controller.
+The `$more` variable is a boolean and checks if the pagination object still has a next page.
 
-```php
-$offset = intval(get('offset'));
-``` 
-With the offset we tell Kirby to start fetching projects starting from the number we have shown initially. The first time the content representation is called, the offset will therefore be 4 then 8 etc. We get the offset from the query string of the AJAX call (see below in the JS part).
-
-
-```php
-$more = $count > $offset + $limit;
-```
-
-The `$more` variable is a boolean and checks if there are any projects left to be fetched, which is the case as long as the project countsis higher than the sum of `$offset` and `$limit`.
+Additionally, we initialize the `$html` and `$json` variables, which will be assigned their values in the `photography.json.php` template in the next step.
 
 ## JSON template
 
@@ -182,17 +175,19 @@ $json['more'] = $more;
 echo json_encode($json);
 ```
 
-Again we loop through the projects as before in the HTML template and call the same snippet. This time, we store everything the `$html` variable, which we add to the `$json` array together with the `$more` variable we defined in the controller. Finally, we encode the array.
+Again we loop through the projects as before in the HTML template and call the same snippet. This time, we store everything in the `$html` variable, which we add to the `$json` array together with the `$more` variable defined in the controller. Finally, we encode the array so that the template returns the data in JSON format.
+
+If all went well and you open `localhost/photography.json` in your browser, you will see the generated JSON data.
 
 ## HTML template, part 2
 
-Before we can get to our last missing piece, the JavaScript, we have to modify our `ul` element in the template a little bit. We add the class `projects` and the `data-limit` attribute, so that we can fetch the limit in our JS.
+Before we can get to our last missing piece, the JavaScript, we have to modify the `ul` element in the template a little bit. We add the class name `projects` and the `data-page` attribute, so that we can fetch the number of the next pagination page in our JS.
 
 ```php "/site/templates/photography.php"
 <?php snippet('header') ?>
 <?php snippet('intro') ?>
 
-<ul class="grid projects"  data-limit="<?= $limit ?>" style="--gutter: 1.5rem">
+<ul class="grid projects"  data-page="<?= $pagination->nextPage() ?>" style="--gutter: 1.5rem">
   <?php foreach ($projects as $project): ?>
     <?php snippet('project', ['project' => $project]) ?>
   <?php endforeach ?>
@@ -212,35 +207,34 @@ If you put the script file into another location, make sure to load it in the fo
 ```js "assets/js/templates/photography.js"
 const element = document.querySelector('.projects');
 const button  = document.querySelector('.load-more');
-const limit   = parseInt(element.getAttribute('data-limit'));
-let offset    = limit;
+let page      = parseInt(element.getAttribute('data-page'));
 
 const fetchProjects = async () => {
-  let url = `${window.location.href}.json?offset=${offset}`;
+  let url = `${window.location.href}.json/page:${page}`;
   try {
     const response       = await fetch(url);
     const { html, more } = await response.json();
     button.hidden        = !more;
     element.innerHTML    += html;
-    offset               += limit;
+    page++;
+    console.log(page);
   } catch (error) {
     console.log('Fetch error: ', error);
   }
 }
+
 button.addEventListener('click', fetchProjects);
 ```
 
 First we define a set of variables that we need for fetching the projects later on:
 
 ```js
-// the container `ul` to which we will later append the other other project
+// the container `ul` to which we will later append the other chunks of projects
 const element = document.querySelector('.projects');
 // the load-more button
 const button  = document.querySelector('.load-more');
-// the limit from the data attribute
-const limit   = parseInt(element.getAttribute('data-limit'));
-// at the outset, the offset equals the limit
-let offset    = limit;
+// the next page from the data attribute as explained in the last step
+const page    = parseInt(element.getAttribute('data-limit'));
 ```
 
 With
@@ -249,11 +243,11 @@ With
 button.addEventListener('click', fetchProjects);
 ```
 
-we add an event listener to the button which calls the closure stored in the `fetchProjects` variable.
+we add an event listener to the button which calls the closure (anonymous function) stored in the `fetchProjects` variable.
 
-Inside the closure, we make a fetch request to the JSON representation (current URL suffixed with `.json` plus the offset query), and on success, we add the elements to the DOM.
+Inside the closure, we make a (link: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API text: fetch ) request to the JSON representation (current URL suffixed with `.json` plus the pagination page), and on success, we add the elements to the DOM and increment the page counter by one.
 
-When there are no more elements to fetch, we hide the button:
+When there are no more pages to fetch, we hide the button:
 
 ```js
 button.hidden = !data.more;
