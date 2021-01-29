@@ -99,6 +99,7 @@ permissions:
 | `changeTitle` | `true`/`false` |
 | `create` | `true`/`false` |
 | `delete` | `true`/`false` |
+| `duplicate` | `true`/`false` |
 | `preview` | `true`/`false` |
 | `update` | `true`/`false` |
 
