@@ -7,7 +7,7 @@
     </button>
   </header>
   <div class="cheatsheet-panel-scrollarea">
-    <?php foreach ($kirby->collection('cheatsheet') as $group): ?>
+    <?php foreach ($kirby->collection('reference') as $group): ?>
     <section>
       <h2><a href="<?= $group->url() ?>"><?= $group->title() ?></a></h2>
       <ul>
