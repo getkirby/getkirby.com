@@ -1,12 +1,16 @@
 
 export default class {
 
-  constructor(element) {
-    this.$el       = element;
-    this.menu      = document.querySelector("#menu");
+  constructor() {
+    this.$el       = document.querySelector(".menu");
+
+    if (!this.$el) {
+      return;
+    }
+
     this.mobile    = document.querySelector("button[aria-controls]");
     this.isOpen    = false;
-    this.dropdowns = this.menu.querySelectorAll(".menu-item.has-dropdown");
+    this.dropdowns = this.$el.querySelectorAll(".menu-item.has-dropdown");
     this.current   = null;
 
     this.handleGlobalClickForMobileMenuBound = this.handleGlobalClickForMobileMenu.bind(this);
@@ -154,7 +158,7 @@ export default class {
   }
 
   handleGlobalClickForMobileMenu(e) {
-    if (!this.menu.contains(e.target)) {
+    if (!this.$el.contains(e.target)) {
       e.preventDefault();
       this.toggleMobilePopup(false);
     }

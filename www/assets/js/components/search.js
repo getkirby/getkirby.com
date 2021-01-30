@@ -4,8 +4,8 @@ const ALGOLIA_INDEX = "getkirby-3";
 
 export default class {
 
-  constructor(element) {
-    this.$el = element;
+  constructor() {
+    this.$el = document.querySelector(".search");
     this.input = this.$el.querySelector("input");
     this.list = null;
 

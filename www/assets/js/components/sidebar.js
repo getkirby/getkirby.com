@@ -1,9 +1,14 @@
 
 export default class {
 
-  constructor(element) {
+  constructor() {
     const sidebar = this;
-    this.$el      = element;
+    this.$el      = document.querySelector(".js-sidebar");
+
+    if (!this.$el) {
+      return;
+    }
+
     this.toggles  = this.$el.querySelectorAll(".js-sidebar-toggle");
 
     for(let i = 0; i < this.toggles.length; i++) {
