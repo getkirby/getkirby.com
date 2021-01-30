@@ -1,6 +1,7 @@
 export default class {
-  constructor(element) {
-    this.$el = element;
+
+  constructor(selector) {
+    this.$el   = document.querySelector(selector);
     this.input = this.$el.querySelector("input.filter-search");
     this.items = this.$el.querySelectorAll("[data-filter]");
 

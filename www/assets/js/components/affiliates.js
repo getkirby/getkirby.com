@@ -1,9 +1,11 @@
+
 const PADDLE_VENDOR_ID = 1129;
 const PADDLE_SCRIPT_URL = "https://cdn.paddle.com/paddle/paddle.js";
 
 export default class {
+
   constructor() {
-    window.addEventListener("load", this.init);
+    this.init();
   }
 
   async init() {
@@ -40,9 +42,7 @@ export default class {
 
     // set callback for when script is loaded
     script.onload = () => {
-      Paddle.Setup({
-        vendor: PADDLE_VENDOR_ID,
-      });
+      Paddle.Setup({ vendor: PADDLE_VENDOR_ID });
     };
 
     // insert in DOM
