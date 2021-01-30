@@ -31,7 +31,7 @@ return [
             switch ($page->template()->name()) {
                 case 'cookbook-recipe':
                     return 'cookbook';
-                case 'guide-chapter':
+                case 'guide':
                     return 'guide';
                 case 'kosmos-issue':
                     return 'kosmos';
@@ -42,25 +42,25 @@ return [
         }
     ],
     'templates' => [
-        'cheatsheet-article',
-        'cheatsheet-section',
-        'class' => [
+        'reference-article',
+        'reference-section',
+        'reference-class' => [
             'filter' => function ($page) {
                 return $page->isListed() === true;
             }
         ],
-        'component',
+        'reference-component',
         'contact',
-        'endpoint',
-        'extension',
-        'field-method',
-        'guide-chapter',
-        'helper',
-        'hook',
-        'icon',
+        'reference-endpoint',
+        'reference-extension',
+        'reference-fieldmethod',
+        'guide',
+        'reference-helper',
+        'reference-hook',
+        'reference-icon',
         'komsos-issue',
-        'kirbytag',
-        'method' => [
+        'reference-kirbytag',
+        'reference-classmethod' => [
             'filter' => function ($page) {
                 return $page->isListed() === true &&
                        $page->parent()->isListed() === true;
@@ -69,10 +69,10 @@ return [
         'plugin',
         'cookbook-recipe',
         'release',
-        'root',
-        'section',
+        'reference-root',
+        'reference-section',
         'text',
-        'url',
-        'validator',
+        'reference-url',
+        'reference-validator',
     ]
 ];
