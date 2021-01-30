@@ -101,6 +101,7 @@ permissions:
 | `delete` | `true`/`false` |
 | `duplicate` | `true`/`false` |
 | `preview` | `true`/`false` |
+| `read` | `true`/`false` |
 | `sort` | `true`/`false` |
 | `update` | `true`/`false` |
 
