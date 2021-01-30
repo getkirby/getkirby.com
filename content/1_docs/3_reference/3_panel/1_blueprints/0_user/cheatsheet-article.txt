@@ -101,6 +101,7 @@ permissions:
 | `delete` | `true`/`false` |
 | `duplicate` | `true`/`false` |
 | `preview` | `true`/`false` |
+| `sort` | `true`/`false` |
 | `update` | `true`/`false` |
 
 #### Example: Prevent deleting and creating pages and changing their template
