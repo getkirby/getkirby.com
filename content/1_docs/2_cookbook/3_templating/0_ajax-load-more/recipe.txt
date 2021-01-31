@@ -252,9 +252,11 @@ When there are no more pages to fetch, we hide the button:
 ```js
 button.hidden = !data.more;
 ```
-## Progressive enhancement or when JavaScript is disabled…
+## When JavaScript is disabled…
 
-To progressively enhance this setup, i.e. make our content accessible for users when JavaScript is disabled, we need a fallback solution. Thanks to the pagination object, we can add such a fallback with a few lines of code.
+But what if JavaScript is disabled? Then our fancy load-more button is of no use anymore. To make our content accessible for users when JavaScript is disabled, we need a basic fallback solution that always works, and the load-more button provides progressive enhancement for supporting browsers.
+
+Thanks to the pagination object, we can add such a fallback with a few lines of code.
 
 ### Check if JavaScript is disabled
 
