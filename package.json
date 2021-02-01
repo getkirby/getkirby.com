@@ -6,9 +6,9 @@
   "scripts": {
     "build": "npm run css && npm run js",
     "css": "npm run css:base && npm run css:templates",
-    "css:base": "postcss www/assets/css/index.css --output www/dist/css/index.css --use postcss-import cssnano --map",
-    "css:templates": "postcss www/assets/css/templates/*.css --dir www/dist/css/templates --use postcss-import cssnano --map",
-    "js": "uglifyjs-folder www/assets/js --output www/dist/js --each --extension .js --config-file uglify.json"
+    "css:base": "postcss assets/css/index.css --output dist/css/index.css --use postcss-import cssnano --map",
+    "css:templates": "postcss assets/css/templates/*.css --dir dist/css/templates --use postcss-import cssnano --map",
+    "js": "uglifyjs-folder assets/js --output dist/js --each --extension .js --config-file uglify.json"
   },
   "devDependencies": {
     "cssnano": "^4.1.10",

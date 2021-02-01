@@ -123,7 +123,7 @@ class PageMeta {
                     '@type' => 'Organization',
                     'name' => 'Kirby',
                     'url' => url(),
-                    'logo' => url('kirby-signet.svg'),
+                    'logo' => url('assets/images/kirby-signet.svg'),
                     'sameAs' => [
                         'https://twitter.com/getkirby',
                         'https://instagram.com/getkirby',

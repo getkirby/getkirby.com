@@ -7,5 +7,5 @@ node_modules
 /site/config/keys
 /site/config/.license
 /site/sessions
-/www/dist
-/www/media
+/dist
+/media
