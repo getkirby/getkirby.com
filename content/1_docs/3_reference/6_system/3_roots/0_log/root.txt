@@ -1,3 +1,0 @@
-Title: log
-----
-Excerpt: Returns the root of the log file folder.
