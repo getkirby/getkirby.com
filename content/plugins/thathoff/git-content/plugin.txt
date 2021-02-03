@@ -1,8 +1,8 @@
-Title: Git Commit And Push Content
+Title: Git Content
 
 ----
 
-Repository: https://github.com/blankogmbh/kirby-git-commit-and-push-content
+Repository: https://github.com/thathoff/kirby-git-content
 
 ----
 

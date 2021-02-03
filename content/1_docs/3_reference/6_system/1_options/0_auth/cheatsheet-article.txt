@@ -158,7 +158,7 @@ return [
     'auth' => [
         'methods'   => ['code', 'password'],
         'challenge' => [
-            'timeout' => 5 * 60 // 5 minutes,
+            'timeout' => 5 * 60, // 5 minutes
             'email' => [
                 'from'     => 'mail@example.com',
                 'fromName' => 'My example project',
