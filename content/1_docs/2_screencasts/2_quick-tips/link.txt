@@ -1,4 +1,0 @@
-Title: Quick tips
-----
-Link: docs/screencasts/#quick-tips
-

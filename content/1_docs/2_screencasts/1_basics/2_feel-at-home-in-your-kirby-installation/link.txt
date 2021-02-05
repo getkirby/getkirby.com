@@ -1,9 +1,0 @@
-Title: Feel at home in your Kirby installation
-
-----
-
-Description: Let me guide you through all the folders that come with our Starterkit and explain where to find stuff.
-
-----
-
-Link: https://www.youtube.com/watch?v=lLQZd64uvPs

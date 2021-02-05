@@ -1,9 +1,0 @@
-Title: Your first Kirby template
-
-----
-
-Description: Learn how to build your very first Kirby template. Connect the content from your content folder with your static HTML and bring your pages to life.
-
-----
-
-Link: https://www.youtube.com/watch?v=bmz6NYUNWPk

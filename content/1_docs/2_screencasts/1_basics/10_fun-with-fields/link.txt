@@ -1,9 +1,0 @@
-Title: Fun with fields
-
-----
-
-Description: Kirby has powerful custom fields that can be added to your page types in seconds. Learn how to create intuitive forms for your editors, how to create field layouts, inline help and more
-
-----
-
-Link: https://www.youtube.com/watch?v=cOUmDlvsPaE

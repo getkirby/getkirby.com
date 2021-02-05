@@ -1,9 +1,0 @@
-Title: Asset management
-
-----
-
-Description: Asset management in Kirby can be fine-tuned with our files section. Add galleries, PDF downloads, videos, spreadsheets and other file types to your site. Add custom fields to your files, validate uploads and customise the look and feel of your files sections with ease.
-
-----
-
-Link: https://www.youtube.com/watch?v=V_2ITjCuiY0
