@@ -108,7 +108,7 @@ Kirby::plugin('author/cdn', [
             }
 
             $original = $kirby->nativeComponent('url');
-            return $original($path, $options);
+            return $original($kirby, $path, $options);
         },
     ]
 ]);
@@ -144,7 +144,7 @@ Kirby::plugin('author/cdn', [
             }
 
             $original = $kirby->nativeComponent('url');
-            return $original($path, $options);
+            return $original($kirby, $path, $options);
         },
     ]
 ]);
@@ -222,7 +222,7 @@ Kirby::plugin('author/cdn', [
                 $original = $kirby->nativeComponent('url');
             }
 
-            return $original($path, $options);
+            return $original($kirby, $path, $options);
         },
         'file::version' => function (Kirby $kirby, File $file, array $options = []) {
 
