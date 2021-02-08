@@ -1,9 +1,0 @@
-Title: Stay in control with controllers
-
-----
-
-Description: You should avoid mixing your HTML templates with PHP logic. Controllers are a great way to move logic for your templates into a separate file.
-
-----
-
-Link: https://www.youtube.com/watch?v=Im2bx2WytPc

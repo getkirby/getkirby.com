@@ -108,7 +108,7 @@ Kirby::plugin('author/cdn', [
             }
 
             $original = $kirby->nativeComponent('url');
-            return $original($path, $options);
+            return $original($kirby, $path, $options);
         },
     ]
 ]);
@@ -144,7 +144,7 @@ Kirby::plugin('author/cdn', [
             }
 
             $original = $kirby->nativeComponent('url');
-            return $original($path, $options);
+            return $original($kirby, $path, $options);
         },
     ]
 ]);
@@ -222,7 +222,7 @@ Kirby::plugin('author/cdn', [
                 $original = $kirby->nativeComponent('url');
             }
 
-            return $original($path, $options);
+            return $original($kirby, $path, $options);
         },
         'file::version' => function (Kirby $kirby, File $file, array $options = []) {
 
@@ -281,10 +281,16 @@ KeyCDN offers image processing via URL parameters. That means KeyCDN fetches the
 With this plugin in place, you can now use (link: https://www.keycdn.com/support/image-processing text: all image processing features supported by KeyCDN), by passing those parameters to the `thumb()` method, which will give you a lot more options than Kirby's native processing.
 
 ```php
-<?php
+<?= $page->image()->thumb(['width' => 300, 'negate' => true]) ?>
 
-echo $page->image()->thumb(['width' => 300, 'negate' => true]);
-echo $page->image()->thumb(['width' => 300, 'height' => 300, 'crop' => true', 'blur' => 2]);
+… or …
+
+<?= $page->image()->thumb([
+    'width'  => 300,
+    'height' => 300,
+    'crop'   => true,
+    'blur'   => 2
+]) ?>
 ```
 
 Using Kirby's shortcuts `crop()`, `resize()`, `bw()` etc. is also still possible.

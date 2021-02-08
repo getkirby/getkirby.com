@@ -1,9 +1,0 @@
-Title: How to build a project grid
-
-----
-
-Description: After the first basics, we are finally building our first custom template. Learn how to create a nice project grid for your portfolio or agency website with just a few lines of PHP, HTML and CSS.
-
-----
-
-Link: https://www.youtube.com/watch?v=op5iP71Bg6w
