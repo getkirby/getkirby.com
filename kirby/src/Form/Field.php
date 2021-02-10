@@ -177,7 +177,7 @@ class Field extends Component
                     return I18n::translate($label, $label);
                 },
                 /**
-                 * Optional placeholder value that will be shown when the field is empty
+                 * Optional placeholder value that will be shown when the field is empty. Supports query templates like `{{ page.title }}` (since 3.2.5)
                  */
                 'placeholder' => function ($placeholder = null) {
                     return I18n::translate($placeholder, $placeholder);
