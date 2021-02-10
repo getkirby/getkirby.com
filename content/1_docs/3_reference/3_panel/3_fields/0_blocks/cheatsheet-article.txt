@@ -88,7 +88,7 @@ fields:
 
 You can group block types in the block selector for a better overview of the available options. This is particularly useful when your blocks lists gets longer once your start creating your own custom blocks.
 
-To create such groups, use the Blocks field's a generic "group" block type:
+To create such groups, use the Blocks field's generic "group" block type:
 
 ```yaml
 fields:
