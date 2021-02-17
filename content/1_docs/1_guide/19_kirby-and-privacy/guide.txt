@@ -39,10 +39,6 @@ The Panel also stores unsaved changes in `localStorage` in the user’s browser.
 
 To protect the Panel login against brute-force attacks, Kirby temporarily stores a shortened SHA256 hash of the IP address on login failures. This hash cannot be converted back to the raw IP address. You can control the number of possible trials before brute-force protections kicks in and the time span for which this data is stored in your (link: docs/reference/system/options/auth text: config settings).
 
-### Language detection
-
-If you use the (link: docs/reference/system/options/languages text: `languages.detect` option) on a multi-language site, Kirby also creates a session cookie to keep track of the visitor’s language. This option is disabled by default.
-
 ### `csrf()` helper
 
 If you use the (link: docs/reference/templates/helpers/csrf text: `csrf` helper), Kirby will create a session cookie so that the helper can validate the CSRF token in a later request.
