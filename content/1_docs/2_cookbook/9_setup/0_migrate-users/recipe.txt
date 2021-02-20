@@ -22,7 +22,7 @@ yMr6qjWF/
   user.txt
 ```
 
-The `.htpasswd` is used to store the encrypted passwort. The `index.php` contains system-critical data such as the email address, user name, language and role. Finally, the `user.txt` stores any additional user data.
+The `.htpasswd` is used to store the encrypted password. The `index.php` contains system-critical data such as the email address, user name, language and role. Finally, the `user.txt` stores any additional user data.
 
 ## Migrate your accounts
 
