@@ -64,7 +64,7 @@ You can also add your own custom Panel scripts in the config.php, giving you eve
 ```php "/site/config/config.php"
 return [
   'panel' => [
-    'js' => 'assets/css/panel.js'
+    'js' => 'assets/js/panel.js'
   ]
 ];
 ```
