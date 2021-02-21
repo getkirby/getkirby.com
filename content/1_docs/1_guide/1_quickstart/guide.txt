@@ -186,9 +186,7 @@ Now that you have successfully installed Kirby on your server, it's time to expl
 ### (link: docs/cookbook/setup/kirby-in-a-nutshell text: Kirby in a nutshell)
 Get (link: docs/cookbook/setup/kirby-in-a-nutshell text: a concise overview) of how Kirby works and what to keep in mind when you start your project. It's all about what you wish you had known when you started your first Kirby project.
 
-(…columns)
-
-(columns…)
+++++
 
 ### (link: docs/guide text: Guide)
 
@@ -200,9 +198,7 @@ Our guide introduces you to every aspect of Kirby. From your first (glossary: te
 
 Once you have familiarized yourself with the basics, the (link: docs/reference text: Reference) is the number one resource you will keep getting back to. It's a collection of every method, option, helper, tag, root, url and more.
 
-(…columns)
-
-(columns…)
+++++
 
 ### (link: docs/cookbook text: Cookbook)
 
@@ -213,9 +209,7 @@ The (link: docs/cookbook text: Cookbook) is a collection of solutions you can bu
 ### (link: plugins text: Plugins)
 Our plugin developers created dozens of fantastic plugins for Kirby. Check out  our (link: plugins text: official plugin repository) before creating your own solution for common features.
 
-(…columns)
-
-(columns…)
+++++
 
 ### (link: docs/guide/troubleshooting text: Troubleshooting)
 

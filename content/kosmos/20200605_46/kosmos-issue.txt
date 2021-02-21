@@ -79,9 +79,7 @@ Convert and transform WordPress WXR RSS export files into a new Kirby 3 site wit
 
 [Themes for Kirby](https://themesforkirby.com/) is a collection of currently six themes for Kirby. Single theme or bulk pricing available.
 
-(…columns)
-
-(columns…)
+++++
 
 (screenshot: kosmos-46-theme-512.jpg)
 

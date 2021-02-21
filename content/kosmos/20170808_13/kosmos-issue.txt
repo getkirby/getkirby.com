@@ -75,9 +75,7 @@ Event location
 ### Ma Petite Entreprise
 As the French name of [this theme created by Constantin Joly](https://cj-lab.fr/themes/mpe/) suggests, it targets small businesses like a Restaurant, Tattoo Studio or Architect. Features filters, categories, galleries and some customizations.
 
-(…columns)
-
-(columns…)
+++++
 ### Velox
 [Velox ](http://themes.vlady.cc/velox/)is a universal, multi-purpose theme by Vladimir Yordanov. Like the [Kirby Starterkit](https://getkirby.com/try), it features a blog, project section and some static pages. Built using the [Bulma CSS framework](http://bulma.io).
 

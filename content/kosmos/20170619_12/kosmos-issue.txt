@@ -61,9 +61,7 @@ Designer at Microsoft
 ### Case Study: Interface Lovers
 [Interface Lovers](https://interfacelovers.com) is an "online magazine for creative professionals". Read about how and why they use Kirby to power their website in our [latest case study](https://getkirby.com/blog/interface-lovers).
 
-(…columns)
-
-(columns…)
+++++
 
 
 ### Cookbook: RelMeAuth
@@ -73,9 +71,7 @@ RelMeAuth is a [proposed web standard ](http://microformats.org/wiki/RelMeAuth) 
 
 (picture: kirby-cookbook.jpg)
 
-(…columns)
-
-(columns…)
+++++
 
 (picture: decoupled-kirby.jpg)
 

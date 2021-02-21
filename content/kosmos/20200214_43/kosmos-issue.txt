@@ -40,9 +40,7 @@ Be it a huge complex company website with thousands of pages or your personal po
 
 Bauhaus is one of the largest DIY store chains in Europe. [Richtig gut](https://richtiggut.de/) is a spin-off of their main website with instructions and inspiration around house and garden.
 
-(…columns)
-
-(columns…)
+++++
 
 [OBS Studio](https://obsproject.com) is a free and open-source cross-platform streaming and recording software. The website is available in 16 languages built with (link: docs/guide/languages/introduction text: Kirby's multi-language feature).
 

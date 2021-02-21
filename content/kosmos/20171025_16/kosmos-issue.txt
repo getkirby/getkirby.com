@@ -78,9 +78,7 @@ Symmetric is a nice multi-purpose theme by Constantin Holy.
 [Alpha](http://t.starck.io/alpha/)
 Alpha is a minimalistic blog theme created by Christopher Boutillé.
 
-(…columns)
-
-(columns…)
+++++
 
 (picture: uime-theme.jpg)
 
@@ -93,9 +91,7 @@ UI-ME is a customizable multi-purpose theme created by Constantin Joly.
 [Kollide](http://themes.yordanoff.net/kollide/)
 Kollide is a very feature-rich Portfolio Theme created by Joro Yordanov.
 
-(…columns)
-
-(columns…)
+++++
 ## Kirby Tutorials
 
 Julian Oster shares his new [workflow with Kirby and Git](https://jlnostr.de/blog/better-workflow-with-kirby-and-git) with us.
@@ -104,9 +100,7 @@ Julian Oster shares his new [workflow with Kirby and Git](https://jlnostr.de/blo
 
 (picture: kirby-workflow-with-git.jpg)
 
-(…columns)
-
-(columns…)
+++++
 ## Javascript
 
 [Draggable](https://shopify.github.io/draggable/) is a lightweight, open source JavaScript drag & drop library. The website itself is an beautiful, playful demo of its capabilities.
@@ -115,9 +109,7 @@ Julian Oster shares his new [workflow with Kirby and Git](https://jlnostr.de/blo
 
 (picture: draggable.jpg)
 
-(…columns)
-
-(columns…)
+++++
 
 ## Performance I
 
