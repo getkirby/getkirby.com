@@ -113,7 +113,7 @@ echo kirby()->render();
 
 In addition to the index file, we need the `.htaccess` file so that all requests are pointed to that index file, which can load Kirby and let _it_ handle the request.
 
-We can use the [`.htaccess` file from the Kirby Plainkit](https://github.com/getkirby/plainkit/blob/master/.htaccess) and add a line so that it points to our newly crated `index.site.php`, instead of `index.php`:
+We can use the [`.htaccess` file from the Kirby Plainkit](https://github.com/getkirby/plainkit/blob/main/.htaccess) and add a line so that it points to our newly crated `index.site.php`, instead of `index.php`:
 
 ```bash ".htaccess"
 RewriteRule index.php index.site.php [L]
