@@ -1,0 +1,914 @@
+Title: Creating a custom block type from scratch
+
+----
+
+
+Published: 2021-02-21
+
+----
+
+Description: A step-by-step guide to creating custom blocks with preview using the example of an audio block with a poster and some additional settings.
+
+----
+
+Text:
+
+Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with quite a few (link: docs/reference/panel/blocks text: default block types) that are great for most purposes and can be customized for your purposes. But you probably wouldn't be reading this if you wouldn't be striving for more, and this recipe will hopefully be a great first step into your bright future as a custom block type developer 😉.
+
+## Prerequisites
+
+- A Kirby Plainkit or Starterkit for testing
+- A code editor
+- Basic understanding how to create plugins in Kirby
+- (link: text: Parcel)  must be installed on your system for the single file component approach at the end of this tuturial, unless you use your own custom build process (but don't worry, this is not necessarily required for our preview)
+- Probably a big pot of hot coffee and a cool head
+
+## Useful links
+- (link: docs/guide/plugins/plugin-basics#kirby-plugin-one-ring-to-rule-them-all text: Registering extensions)
+- (link: docs/reference/plugins/extensions/blocks text: Block previews)
+
+
+## What we will be building
+
+(screenshot: audio-block-panel-preview.png caption: Preview of our amazing audio block in the Panel)
+
+We are going to use the example of an audio block type to show you how to create custom block types for the blocks field from scratch, complete with an inline editable preview for the Panel using a single file component with a build process.
+
+A block type plugin basically consists of the following files:
+
+- An `index.php` to register the plugin (required for all plugins)
+- A block yaml file that defines the fields available for the block type (required)
+- A block snippet that renders the block on the frontend (required)
+- An `index.js` file to render a Panel preview (optional)
+- A `.vue` single component file (optional, requires build process)
+- A package.json file for the bundler (optional)
+
+After finishing this tutorial, you should have a solid understanding about block types that will enable you to start building your own, even if you will never ever need an audio block at all.
+
+## Final plugin folder structure
+
+When we will be finished, the resulting folder structure of our plugin will look like this. When you are unsure where to put what, you can come back to this overview.
+
+```filesystem
+plugins/
+    audio-block/
+      blueprints/
+        blocks/
+          audio.yml
+        files/
+          audio.yml
+          poster.yml
+      snippets/
+        blocks/
+          audio.yml
+      src/
+        components/
+          Audio.vue
+        index.js
+      index.php
+      index.js (auto-generated file)
+      package.json
+```   
+
+## Register a new plugin
+
+Let's start with the most important plugin file, the `index.php`, where we register the blueprints for the block, two file blueprints to restrict file uploads, and the snippet to render the audio block on the frontend.
+
+```php "/site/plugins/audio-block/index.php"
+<?php
+
+Kirby::plugin('cookbook/audio-block', [
+   'blueprints' => [
+    'blocks/audio' => __DIR__ . '/blueprints/blocks/audio.yml',
+    'files/audio'  => __DIR__ . '/blueprints/files/audio.yml',
+    'files/poster' => __DIR__ . '/blueprints/files/poster.yml',
+  ],
+  'snippets' => [
+    'blocks/audio' => __DIR__ . '/snippets/blocks/audio.php',
+  ],
+]);
+```
+## The block blueprint
+
+In the audio block blueprint, we define the fields for the block that will later show up in the drawer in the Panel. In addition to the files field we need for the audio file itself, we add some additional settings for the audio tag like the controls and the autoplay attributes. And to make it less boring and more enlightening, our block gets a poster image, headlines and a description.
+
+You can adapt this blueprint to your needs, particularly if you want to add track files for audio transcriptions to make your audio files more accessible.
+
+```yaml "/site/plugins/audio-block/blueprints/blocks/audio.yml"
+name: Audio
+icon: file-audio
+tabs:
+  main:
+    label: Main
+    fields:
+      poster:
+        type: files
+        template: image
+        layout: cards
+        size: small
+        max: 1
+        width: 1/2
+      source:
+        type: files
+        template: audio
+        multiple: false
+        max: 1
+        uploads:
+          template: audio
+        width: 1/2
+      title:
+        type: text
+        placehoder: Title
+      subline:
+        type: text
+        placeholder: Subtitle
+      description:
+        type: writer
+        placeholder: Description
+        icon: text
+        inline: true
+        marks:
+          - bold
+          - italic
+  settings:
+    label: Audio settings
+    fields:
+      controls:
+        type: toggle
+        text: Show controls?
+        width: 1/2
+        default: true
+      autoplay:
+        type: toggle
+        text: autoplay
+        width: 1/2
+        default: false
+```
+
+In our blueprint, we create two tabs, one for the general stuff and a second one for the audio settings. This is just to show (off) that you can use tabs to separate your different settings.
+
+When this block is open, the drawer look like this:
+
+(screenshot: audio-block-drawer.png)
+## File blueprints
+
+Since we want to prevent users from uploading non-audio files in the `source` field, we need a (link: docs/reference/panel/blueprints/file text: file blueprint), in which we can restrict file uploads via the `accept` property.
+
+We keep this simple, but of course, you can add fields to allow users to add meta data for the audio files.
+
+```yaml "/site/plugins/audio-block/blueprints/files/audio.yml"
+title: Audio
+
+accept:
+  extension: mp3
+
+fields:
+  # some fields here if you want
+```
+
+And while we are at it, let's add the `poster.yml` blueprint to restrict the file types allowed for the poster field as well. We also want an `alt` field to fill the `alt` attribute.
+
+```yaml "/site/plugins/audio-block/blueprints/files/poster.yml"
+title: Poster
+
+accept:
+  extension: jpg, jpeg, png, webp
+
+fields:
+  alt:
+    type: text
+```
+
+## Snippet for the frontend
+
+Inside the block snippet, you have access to the full `$block` (link: docs/reference/objects/blocktext: Block object) with all kind of properties and methods, and of course to the fields we defined for the block in the block blueprint.
+
+```php "/site/plugins/audio-block/snippets/audio.php"
+<?php if ($file = $block->source()->toFile()) : ?>
+  <div class="audio-wrapper">
+    <?php if ($poster = $block->poster()->toFile()) : ?>
+    <figure class="audio-poster">
+      <img src="<?= $poster->crop(200,200)->url() ?>" alt="<?= $poster->alt()->html() ?>">
+    </figure>
+    <div class="audio-info">
+      <h1 class="audio-title"><?= $block->title()->html() ?></h1>
+      <h2 class="audio-subtitle"><?= $block->subtitle()->html() ?></h1>
+      <div class="audio-description">
+        <?= $block->description() ?>
+      </div>
+      <audio class="audio-element"
+        <?= $block->controls()->bool() ? 'controls' : '' ?>
+        <?= $block->autoplay()->bool() ? 'autoplay' : '' ?>
+      >    
+        <source src="<?= $file->url()?>" type="<?= $file->mime() ?>">
+          Your browser does not support the <code>audio</code> element.
+      </audio>
+    </div>
+  </div>
+  
+<?php endif ?>
+```
+
+In the first line, we check if we can convert the filename stored in the source field into a file object, so that the markup of the snippet is only rendered if there is an audio file.
+
+We then check if we have a poster file object, and if that is the case, we render a figure tag with the image.
+
+For the audio element's source tag, we need the file's URL and the mime type, which are available through the file object.
+
+We also check whether to show the controls, and if the audio should start auto-playing on load.
+
+In most cases, controls should be present to allow users to interact with the audio, and autoplay should be off. It's up to you whether you want to make these setting available to the user at all. If not, remove the corresponding fields from the audio block blueprint. Or add other (link: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio#attributes text: attributes) available for the audio element. 
+
+We should probably also add some basic styling:
+
+```css
+<style>
+.audio-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-flow: nowrap;
+  background: black;
+  color: white;
+}
+.audio-poster {
+  width: 200px;
+  height: 200px;
+}
+.audio-title {
+  font-size: 1.5rem;
+}
+.audio-subtitle {
+  font-size: 1rem;
+}
+.audio-element {
+  margin-top: 2rem;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+</style>
+```
+
+For the sake of this tutorial, we put the styles within a style tag at the top of the `audio.php` block snippet.
+
+At this point, our new block is ready to be used in the Panel and can be rendered on the frontend. Time to give yourself a first pat on the shoulder:
+
+(screenshot: audio-block-frontend.png)
+
+However, our block in the Panel currently looks like this:
+
+(screenshot: audio-block-without-preview.png)
+
+We can surely do better. In the next step, we are going to change this and create a slightly more pleasant preview with an audio tag.
+
+## Simple `index.js`
+
+We can start very basic with an `index.js` **next to the main `index.php` file**:
+
+```js "/site/plugins/audio-block/index.js"
+panel.plugin("cookbook/audio-block", {
+  blocks: {
+    audio: {
+      template: `
+        <div>
+          Listen to Mr. Pod talk about stuff
+        </div>
+      `
+    }
+  }
+});
+```
+
+(screenshot: audio-block-creating-preview-step-one.png)
+
+Not really what we want to end up with, but easy, right?
+
+Let's replace this with an audio tag and the title from our block (we leave the other fields for later to prevent being too repetitive):
+
+```js "/site/plugins/audio-block/index.js"
+panel.plugin("cookbook/audio-block", {
+  blocks: {
+    audio: {
+      template: `
+        <div class="audio-wrapper">
+          <h1>{{content.title}}</h1>
+          <audio controls>
+          <source :src="content.source[0].url"" type="audio/mpeg">
+          </audio>
+        </div>
+      `
+    }
+  }
+});
+```
+
+We have access to the fields through `content`, so we can get the title with `content.title`. The `content.source` files field returns an array of file objects, so we can fetch the first one with the index `0` and the URL from the `url` property.
+
+Now listen to this! We have a simple audio tag preview with a title (provided that we selected a file before).
+
+But hold on! If we tried to add an audio block now in the Panel, we will run into an error. Try it out. Why's that? Because we haven't made sure that we actually have a file. Let's change this with a computed method to pass to the `src` attribute:
+
+```js "/site/plugins/audio-block/index.js"
+panel.plugin("cookbook/audio-block", {
+  blocks: {
+    audio: {
+      computed: {
+        src() {
+          if (this.content.source[0] && this.content.source[0].url) {
+            return this.content.source[0].url;
+          }
+          return false;
+        },
+      },
+      template: `
+        <div>
+          <div v-if="src" class="audio-wrapper">
+            <h1>{{content.title}}</h1>
+            <audio controls>
+            <source :src="src" type="audio/mpeg">
+            </audio>
+          </div>
+          <div v-else>No audio selected</div>
+        </div>
+      `
+    }
+  }
+});
+```
+
+The `src` method checks if the file exists and returns the file URL. In the template we can now use the `v-if`/`v-else` directive to render either the audio element or a message that no audio file was selected.
+
+Theoretically, we could now go ahead and put all our methods and the complete template into this file. But that gets a bit tedious if you have more than a little bit of HTML and we also want to add some styling to our block preview, so a single file component is what we want.
+
+Feel free to stop here and relax if your blocks don't require more than that.
+
+(screenshot: audio-block-with-audio-tag.png)
+
+## `index.js` with single file component
+
+Since we want to use a single file component in this example, let's move our current `index.js` file one level up into the `src` folder (if you haven't created this yet, now is the time). Our build process will then auto-generate the main `index.js` file from this file.
+
+We also need a `package.json` next to `index.php` with the following content:
+
+```js "/site/plugins/audio-block/package.json"
+{
+  "scripts": {
+    "dev": "parcel watch src/index.js --no-source-maps -d ./",
+    "build": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting -d ./"
+  },
+  "posthtml": {
+    "recognizeSelfClosing": true
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.2.0",
+    "sass": "^1.32.5",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "dependencies": {
+    "vue": "^2.6.12",
+    "vue-hot-reload-api": "^2.3.4"
+  }
+}
+```
+This file tells the Parcel bundler which files to compile and an output destination. Since our plugin setup is always the same in our documentation, it's the same file we also use in our other Panel related plugin recipes.
+
+The package.json file has two script commands, `dev` and `build`. The `dev` command runs a watcher that compiles the source files whenever we are making changes, the `build` command builds our production-ready file.
+
+
+Back to our `index.js`, where we import the yet to create `Audio.vue` components and assign it to the audio block:
+
+```js "/site/plugins/audio-block/src/index.js"
+import audio from './components/Audio.vue';
+
+panel.plugin("cookbook/audio-block", {
+  blocks: {
+    audio: audio
+  }
+});
+```
+
+From now on, all the stuff we had in the old `index.js` now moves into the component file.
+## `Audio.vue` single file components
+
+Create an `Audio.vue` file in `/src/components`. Then let's start by recreating exactly what we had before:
+
+```html "/site/plugins/audio-block/src/components/Audio.vue
+<template>
+  <div>
+    <div v-if="src" class="audio-wrapper">
+      <h1>{{content.title}}</h1>
+      <audio controls>
+      <source :src="src" type="audio/mpeg">
+      </audio>
+    </div>
+    <div v-else>No audio selected</div>
+  </div>
+</template>
+
+<script>
+export default {
+  computed: {
+    src() {
+      if (this.content.source[0] && this.content.source[0].url) {
+        return this.content.source[0].url;
+      }
+      return false;
+    },
+  }
+};
+</script>
+```
+
+The only differences to our previous code is that we wrapped the HTML in a template tag, and export the JavaScript within script tags.
+
+### Compiling…
+
+To see the result of our endeavors, we compile the file. Open a terminal, `cd` into the plugin folder and run the command…
+
+```bash
+npm run dev
+```
+
+to start the watch process.
+
+If all went well, you will find a compiled `index.js` in the root of the audio-block plugin folder. In the Panel,everything should look exactly the same as before.
+
+## Refining
+
+Now for some refinements. After all, our poster is not there yet, nor have we made used of the other fields.
+### A placeholder and the missing pieces
+
+As our first refinement step, we wrap the current HTML in a `k-block-figure` component to get a nice placeholder when there is no audio file selected yet.
+
+```html "/site/plugins/audio-block/src/components/Audio.vue
+<template>
+  <k-block-figure
+    :empty-text="$t('No file selected yet') + ' …'"
+    :is-empty="!src"
+    empty-icon="audio-file"
+    @open="open"
+    @update="update"
+  >
+    <div>
+      <div v-if="src" class="audio-wrapper">
+        <h1>{{content.title}}</h1>
+        <h2>{{content.subtitle}}</h2>
+        <div v-html="content.description"></div>
+        <audio controls>
+        <source :src="src" type="audio/mpeg">
+        </audio>
+      </div>
+      <div v-else>No audio selected</div>
+    </div>
+  </k-block-figure>
+</template>
+```
+(screenshot: audio-block-empty.png)
+
+We also add some missing pieces, i.e. the subtitle and the description.
+
+Note how we use the `v-html` directive to render the contents of the descriptions field, which is a writer field that contains HTML. If we would try to render it without this directive, all HTML tags would be shown as plain text.
+
+### Adding the poster and some styling
+
+For the poster that is stored in the `poster` field, we take advantage of Kirby's `k-aspect-ratio` Vue component to display a square image.
+
+```html
+<template v-if="posterUrl">
+  <figure class="k-block-type-audio-poster">
+    <k-aspect-ratio ratio="1/1" cover="true">
+      <img class="k-block-type-audio-poster-image" :src="posterUrl" :alt="">
+    </k-aspect-ratio>
+</figure>
+</template>
+```
+
+We use a hard-coded ratio and set the `cover` attribute to `true`, but this can of course be made configurable from the blueprint.
+
+We haven't defined the `posterUrl` method yet, which is does the same as the `src` method for the audio.
+
+Here is the complete code for this step with some added styling:
+
+```html "/site/plugins/audio-block/src/components/Audio.vue
+<template>
+  <k-block-figure
+    :empty-text="$t('No file selected yet') + ' …'"
+    :is-empty="!src"
+    empty-icon="audio-file"
+    @open="open"
+    @update="update"
+  >
+    <div>
+      <div v-if="src" class="k-block-type-audio-wrapper">
+        <template v-if="posterUrl">
+          <figure class="k-block-type-audio-poster">
+            <k-aspect-ratio ratio="1/1" cover="true">
+              <img class="k-block-type-audio-poster-image" :src="posterUrl" alt="">
+            </k-aspect-ratio>
+          </figure>
+        </template>
+        <div>
+          <h1 class="k-block-type-audio-title">{{content.title}}</h1>
+          <h2 class="k-block-type-audio-subtitle">{{content.subtitle}}</h2>
+          <div class="k-block-type-audio-description" v-html="content.description"></div>
+          <audio class="k-block-type-audio-element" controls>
+            <source :src="src" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+      <div v-else>No audio selected</div>
+    </div>
+  </k-block-figure>
+</template>
+
+<script>
+export default {
+  computed: {
+    src() {
+      if (this.content.source[0] && this.content.source[0].url) {
+        return this.content.source[0].url;
+      }
+      return false;
+    },
+    posterUrl() {
+       if (this.content.poster[0] && this.content.poster[0].url) {
+        return this.content.poster[0].url;
+      }
+      return false;
+    }
+  }
+};
+</script>
+<style lang="scss">
+
+.k-block-type-audio-wrapper{
+  display: flex;
+  flex-direction: row;
+  flex-flow: nowrap;
+  padding: 1rem;
+  background: black;
+  color: white;
+}
+.k-block-type-audio-poster {
+  width: 200px;
+  height: 200px;
+  margin-right: 1rem;
+}
+.k-block-type-audio-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.k-block-type-audio-subtitle {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.k-block-type-audio-description {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.k-block-type-audio-element {
+  margin-top: 2rem;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+.k-block-type-audio-poster-image {
+  max-width: 100%;
+}
+</style>
+```
+
+It starts to look like what we anticipated at the beginning:
+
+(screenshot: audio-block-almost-there.png)
+### Getting the mime type through the API
+
+If you look closely, you will notice that we hard-coded the mime-type of the audio file all this time, because we don't have access to the mime type of the file through `content.source[0]`. In our example it doesn't really matter much because we limited the uploadable file types to `.mp3` files. But once we want to allow multiple files types or want to provide multiple file formats for the same audio file, we better find out how to get at the file object (who knows, maybe you need exactly that piece of information in one of your next custom blocks).
+
+Long story short, Kirby's API to the rescue. In this case, we need access to the endpoint `api/pages/:id/files/:filename`.
+
+To this purpose, let's create a new method that retrieves the file:
+
+```js
+  //...
+  methods: {
+    file() {
+      if( this.audioLink ) {
+        this.$api
+          .get(this.audioLink)
+          .then(file => {
+            this.mime = file.mime;
+          });
+      }
+    }
+  },
+  computed: {
+    audioLink() {
+       if (this.content.source[0] && this.content.source[0].link) {
+        return this.content.source[0].link;
+      }
+      return false;
+    },
+    //...
+  }
+
+```
+
+We get the relevant endpoint from the `link` property which we fetch in the computer property `audioLink`. This endpoint we then pass to `this.$api.get()`.
+
+When we get back the file from the API, we assign the mime type to a new attribute `mime`, which we can then add to the source element:
+
+New status of our code:
+
+```html "/site/plugins/audio-block/src/components/Audio.vue
+<template>
+  <k-block-figure
+    :empty-text="$t('No file selected yet') + ' …'"
+    :is-empty="!src"
+    empty-icon="audio-file"
+    @open="open"
+    @update="update"
+  >
+    <div>
+      <div v-if="src" class="k-block-type-audio-wrapper">
+        <template v-if="posterUrl">
+          <figure class="k-block-type-audio-poster">
+            <k-aspect-ratio ratio="1/1" cover="true">
+              <img class="k-block-type-audio-poster-image" :src="posterUrl" alt="">
+            </k-aspect-ratio>
+          </figure>
+        </template>
+        <div>
+          <h1 class="k-block-type-audio-title">{{content.title}}</h1>
+          <h2 class="k-block-type-audio-subtitle">{{content.subtitle}}</h2>
+          <div class="k-block-type-audio-description" v-html="content.description"></div>
+          <audio class="k-block-type-audio-element" controls>
+            <source :src="src" :type="mime">
+          </audio>
+        </div>
+      </div>
+      <div v-else>No audio selected</div>
+    </div>
+  </k-block-figure>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      mime: '',
+    };
+  },
+  created() {
+    this.file();
+  },
+  methods: {
+    file() {
+      if( this.audioLink ) {
+        this.$api
+          .get(this.audioLink)
+          .then(file => {
+            this.mime = file.mime;
+          });
+      }
+    }
+  },
+  computed: {
+    audioLink() {
+       if (this.content.source[0] && this.content.source[0].link) {
+        return this.content.source[0].link;
+      }
+      return false;
+    },
+    src() {
+      if (this.content.source[0] && this.content.source[0].url) {
+        return this.content.source[0].url;
+      }
+      return false;
+    },
+    posterUrl() {
+       if (this.content.poster[0] && this.content.poster[0].url) {
+        return this.content.poster[0].url;
+      }
+      return false;
+    }
+  }
+};
+</script>
+<!-- styles here -->
+```
+### Making the text fields editable
+
+Ok, that was a lot of stuff. But we are not ready yes. As promised in the intro, we want to make the headlines and the description editable.
+
+To do this, we will replace all text instances with `k-writer` components:
+
+So instead of the `h1` element
+
+```html
+<h1 class="k-block-type-audio-title">{{content.title}}</h1>
+````
+
+We use
+
+```html
+<div :data-level="1" class="k-block-type-audio-title">
+  <k-writer
+    :inline="true"
+    :marks="false"
+    :placeholder="titleField.placeholder"
+    :value="content.title"
+    @input="update({ title: $event })"
+  />
+</div>
+```
+
+To make the placeholder work, we need another computed property:
+
+```js
+computed: {
+  //…
+  titleField() {
+    return this.field("title", {
+      marks: false
+    });
+  },
+ 
+  }
+```
+
+If we repeat this procedure for every field, we end up with our final result:
+
+```html "/site/plugins/audio-block/src/components/Audio.vue
+<template>
+  <k-block-figure
+    :empty-text="$t('No file selected yet') + ' …'"
+    :is-empty="!src"
+    empty-icon="audio-file"
+    @open="open"
+    @update="update"
+  >
+    <div>
+      <div v-if="src" class="k-block-type-audio-wrapper">
+        <template >
+          <figure class="k-block-type-audio-poster">
+            <k-aspect-ratio ratio="1/1" cover="true">
+              <img 
+                v-if="posterUrl" 
+                class="k-block-type-audio-poster-image" 
+                :src="posterUrl" 
+                alt="">
+              <div v-else>
+                {{ $t('No poster selected yet') + ' …' }}
+              </div>
+            </k-aspect-ratio>
+          </figure>
+        </template>
+        <div>
+          <div :data-level="1" class="k-block-type-audio-title">
+            <k-writer
+              :inline="true"
+              :marks="false"
+              :placeholder="titleField.placeholder"
+              :value="content.title"
+              @input="update({ title: $event })"
+            />
+          </div>
+          <div :data-level="2" class="k-block-type-audio-subtitle">
+            <k-writer
+              :inline="true"
+              :marks="false"
+              :placeholder="subtitleField.placeholder"
+              :value="content.subtitle"
+              @input="update({ subtitle: $event })"
+            />
+          </div>
+          <div class="k-block-type-audio-description">
+            <k-writer
+              :inline="true"
+              :marks="false"
+              :placeholder="descriptionField.placeholder"
+              :value="content.description"
+              @input="update({ title: $event })"
+            />
+          </div>
+          <audio class="k-block-type-audio-element" controls>
+            <source :src="src" :type="mime">
+          </audio>
+        </div>
+      </div>
+      <div v-else>No audio selected</div>
+    </div>
+  </k-block-figure>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      mime: '',
+      alt: '',
+    };
+  },
+  created() {
+    this.file();
+  },
+  methods: {
+    file() {
+      if( this.audioLink ) {
+        this.$api
+          .get(this.audioLink)
+          .then(file => {
+            this.mime = file.mime;
+          });
+      }
+    }
+  },
+  computed: {
+   audioLink() {
+       if (this.content.source[0] && this.content.source[0].link) {
+        return this.content.source[0].link;
+      }
+      return false;
+    },
+    src() {
+      if (this.content.source[0] && this.content.source[0].url) {
+        return this.content.source[0].url;
+      }
+      return false;
+    },
+    posterUrl() {
+       if (this.content.poster[0] && this.content.poster[0].url) {
+        return this.content.poster[0].url;
+      }
+      return false;
+    },
+    titleField() {
+      return this.field("title", {
+        marks: false
+      });
+    },
+    subtitleField() {
+      return this.field("subtitle", {
+        marks: false
+      });
+    },
+    descriptionField() {
+      return this.field("description", {
+        marks: true
+      });
+    }
+  }
+};
+</script>
+<style lang="scss">
+
+.k-block-type-audio-wrapper{
+  display: flex;
+  flex-direction: row;
+  flex-flow: nowrap;
+  padding: 1rem;
+  background: black;
+  color: white;
+}
+.k-block-type-audio-poster {
+  width: 200px;
+  height: 200px;
+  margin-right: 1rem;
+}
+.k-block-type-audio-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.k-block-type-audio-subtitle {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.k-block-type-audio-description {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.k-block-type-audio-element {
+  margin-top: 2rem;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+.k-block-type-audio-poster-image {
+  max-width: 100%;
+}
+</style>
+```
+
+Note that we ignored the audio settings like controls and autoplay for the preview because they are not relevant here. If you want to change that, you should know enough by now to adapt all settings to your liking.
+
+## End result
+
+As a last step, we run the final build step with
+
+```
+npm run build
+```
+
+In its different states the block now looks like this:
+
+(screenshot: audio-block-final-states.png)
