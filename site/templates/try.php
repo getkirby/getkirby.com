@@ -72,7 +72,7 @@
             <?= snippet('cta', [
               'text' => 'Download',
               'icon' => 'download',
-              'link' => 'https://github.com/getkirby/starterkit/archive/master.zip'
+              'link' => 'https://github.com/getkirby/starterkit/archive/main.zip'
             ]) ?>
           </p>
         </div>
@@ -86,7 +86,7 @@
             <?= snippet('cta', [
               'text' => 'Download',
               'icon' => 'download',
-              'link' => 'https://github.com/getkirby/plainkit/archive/master.zip'
+              'link' => 'https://github.com/getkirby/plainkit/archive/main.zip'
             ]) ?>
           </p>
         </div>
