@@ -103,14 +103,15 @@ tabs:
     fields:
       poster:
         type: files
-        template: image
+        query: page.images.template('poster')
+        uploads: poster
         layout: cards
         size: small
         max: 1
         width: 1/2
       source:
         type: files
-        template: audio
+        query: page.audio.template('audio')
         multiple: false
         max: 1
         uploads:
