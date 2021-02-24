@@ -134,7 +134,7 @@ Once this is done, we are ready to start our first debugging session.
 
 ## Debugging our first Kirby controller
 
-Now for the fun part. Download and open a (link: https://github.com/getkirby/starterkit/archive/master.zip text: Kirby Starterkit) in a new VS Code window.
+Now for the fun part. Download and open a (link: https://github.com/getkirby/starterkit/archive/main.zip text: Kirby Starterkit) in a new VS Code window.
 
 
 To bring up the Run View, click on the `Run` icon in the VS Code Activity Bar on the left side of VS Code, or press CMD-SHIFT-D (Mac)/CTRL-SHIFT-D (Linux/Windows). In Run view, click `Create a launch.json file` and then choose PHP from the environment dropdown:

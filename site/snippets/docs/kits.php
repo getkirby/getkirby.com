@@ -14,7 +14,7 @@
   <div class="column">
     <h3>
       <?php snippet('cta', [
-        'link' => 'https://github.com/getkirby/plainkit/archive/master.zip',
+        'link' => 'https://github.com/getkirby/plainkit/archive/main.zip',
         'text' => 'Plainkit',
         'icon' => 'download',
       ]) ?>
