@@ -47,6 +47,12 @@ RewriteRule ^(.*) index.php [L]
 #
 # php_flag short_open_tag on
 
+# Make sure cache gets revalidated for JS modules
+<IfModule mod_headers.c>
+<FilesMatch ".(js|mjs)$">
+Header set Cache-Control "no-cache"
+</FilesMatch>
+</IfModule>
 
 <IfModule mod_deflate.c>
 AddOutputFilterByType DEFLATE text/html

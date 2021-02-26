@@ -4,12 +4,16 @@
 
   <?php snippet('meta') ?>
 
-  <?= css('assets/css/index.css') ?>
-  <?= css('assets/css/templates/cheatsheet.css') ?>
-  <?= css('@auto') ?>
+  <?= css([
+    $kirby->url('assets') . '/css/index.css', 
+    $kirby->url('assets') . '/css/templates/cheatsheet.css', 
+    '@auto'
+  ]) ?>
 
-  <?= js('assets/js/index.js', ['defer' => true]) ?>
-  <?= js('assets/js/templates/cheatsheet.js', ['defer' => true]) ?>
+  <?= js([
+    $kirby->url('assets') . '/js/index.js',
+    $kirby->url('assets') . '/js/templates/cheatsheet.js'
+  ], ['type' => 'module']) ?>
 
 </head>
 <body data-template="<?= $page->template() ?>">
@@ -25,20 +29,20 @@
         </a>
       </h1>
 
-      <form class="js-menu-search" action="<?= u('search') ?>" data-base-url="<?= u() ?>">
+      <form class="search" action="<?= u('search') ?>">
           <label for="cheatsheet-search">
             <span class="screen-reader-text">Search</span>
             <?php icon('search', false, ['aria-hidden' => 'true']) ?>
           </label>
           <input
             id="cheatsheet-search"
-            class="js-menu-search-input"
             placeholder="Search …"
             data-filters="area:reference"
             name="q"
             autocomplete="off"
             aria-autocomplete="list"
-            type="search">
+            type="search"
+          >
       </form>
 
       <?php if ($guide = page('docs/guide')) : ?>

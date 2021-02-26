@@ -42,7 +42,7 @@ Kirby::plugin('getkirby/keycdn', [
 
             static $original;
 
-            if (preg_match('!assets!', $path)) {
+            if (preg_match('!assets|dist!', $path)) {
                 $path = Cachebuster::path($path);
 
                 if (option('keycdn', false) !== false) {
