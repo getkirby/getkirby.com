@@ -42,7 +42,7 @@ class SecurityPage extends Page
     public function text()
     {
         return parent::text()->replace(array_merge($this->replace(), [
-            'incidents' => $this->incidentTable(),
+            'incidents' => $this->incidentsTable(),
             'supported' => $this->supportedTable()
         ]));
     }
