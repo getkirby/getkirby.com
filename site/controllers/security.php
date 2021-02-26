@@ -1,7 +1,7 @@
 <?php
 
 return function ($kirby, $page) {
-    $incidents      = $page->incidents()->toStructure();
+    $incidents      = $page->incidents();
     $incidentsTable = snippet('security-incidents', compact('incidents'), true);
 
     $noVulns = null;
@@ -16,7 +16,7 @@ return function ($kirby, $page) {
         'no-vulnerabilities' => $noVulns
     ];
 
-    $supported      = $page->supported()->replace($data)->toStructure();
+    $supported      = $page->supported();
     $supportedTable = snippet('security-supported', compact('supported'), true);
 
     $text = new Field($page, 'text', Str::template($page->text(), array_merge($data, [
