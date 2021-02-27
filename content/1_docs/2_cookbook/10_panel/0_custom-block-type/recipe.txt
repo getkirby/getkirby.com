@@ -3,23 +3,23 @@ Title: Creating a custom block type from scratch
 ----
 
 
-Published: 2021-02-21
+Published: 2021-03-01
 
 ----
 
-Description: A step-by-step guide to creating custom blocks with preview using the example of an audio block with a poster and some additional settings.
+Description: A step-by-step guide to creating custom blocks with a preview using the example of an audio block with a poster and some additional settings.
 
 ----
 
 Text:
 
-Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with quite a few (link: docs/reference/panel/blocks text: default block types) that are great for most purposes and can be customized for your purposes. But you probably wouldn't be reading this if you wouldn't be striving for more, and this recipe will hopefully be a great first step into your bright future as a custom block type developer 😉.
+Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with quite a few (link: docs/reference/panel/blocks text: default block types) that are great for most purposes and can be customized to your needs. But you probably wouldn't be reading this if you wouldn't be striving for more, and this recipe will hopefully be a great first step into your bright future as a custom block type developer 😉.
 
 ## Prerequisites
 
-- A Kirby Plainkit or Starterkit for testing
+- A Kirby (link: docs/guide/quickstart#download-and-installation text: Plainkit or Starterkit) for testing
 - A code editor
-- Basic understanding how to create plugins in Kirby
+- Basic understanding (link: docs/guide/plugins/plugin-basics text: how to create plugins in Kirby)
 - (link: text: Parcel)  must be installed on your system for the single file component approach at the end of this tuturial, unless you use your own custom build process (but don't worry, this is not necessarily required for our preview)
 - Probably a big pot of hot coffee and a cool head
 
@@ -148,7 +148,7 @@ tabs:
 
 In our blueprint, we create two tabs, one for the general stuff and a second one for the audio settings. This is just to show (off) that you can use tabs to separate your different settings.
 
-When this block is open, the drawer look like this:
+When this block is open, the drawer will look like this:
 
 (screenshot: audio-block-drawer.png)
 ## File blueprints
@@ -252,6 +252,42 @@ We should probably also add some basic styling:
 For the sake of this tutorial, we put the styles within a style tag at the top of the `audio.php` block snippet.
 
 At this point, our new block is ready to be used in the Panel and can be rendered on the frontend. Time to give yourself a first pat on the shoulder:
+
+## Using the new block in the blocks field
+
+To use the new block type, for example in a page blueprint, let's add it to our blocks field.
+
+If you are using the Starterkit, open the file `/site/blueprints/pages/note.yml`, where we already have a blocks field. It currently looks like this:
+
+```yaml "/site/blueprints/pages/note.yml"
+fields:
+  text:
+    type: blocks
+```
+
+To add our custom block, we need to list all fieldsets we want to use for this block:
+
+```yaml "/site/blueprints/pages/note.yml"
+fields:
+  text:
+    type: blocks
+    fieldsets:
+      - heading
+      - text
+      - gallery
+      - audio
+      # more block types here if you want
+```
+
+The order we use here will determine the order in which these blocks will appear in the block list.
+
+If you use a Plainkit, add this blocks field definition in the `/site/blueprints/pages/default.yml` blueprint or create a new blueprint.
+
+<info>
+For more information how to list fieldsets, create groups of fieldsets etc., check out the (link: docs/reference/panel/fields/blocks text: blocks field docs).
+</info>
+
+Now head over to the Panel, fill in some data, and open the page on the frontend. It will look similar to this:
 
 (screenshot: audio-block-frontend.png)
 
@@ -375,7 +411,7 @@ This file tells the Parcel bundler which files to compile and an output destinat
 The package.json file has two script commands, `dev` and `build`. The `dev` command runs a watcher that compiles the source files whenever we are making changes, the `build` command builds our production-ready file.
 
 
-Back to our `index.js`, where we import the yet to create `Audio.vue` components and assign it to the audio block:
+Back to our `index.js`, where we import the yet to create `Audio.vue` component and assign it to the audio block:
 
 ```js "/site/plugins/audio-block/src/index.js"
 import audio from './components/Audio.vue';
@@ -388,7 +424,7 @@ panel.plugin("cookbook/audio-block", {
 ```
 
 From now on, all the stuff we had in the old `index.js` now moves into the component file.
-## `Audio.vue` single file components
+## `Audio.vue` single file component
 
 Create an `Audio.vue` file in `/src/components`. Then let's start by recreating exactly what we had before:
 
@@ -431,11 +467,11 @@ npm run dev
 
 to start the watch process.
 
-If all went well, you will find a compiled `index.js` in the root of the audio-block plugin folder. In the Panel,everything should look exactly the same as before.
+If all went well, you will find a compiled `index.js` in the root of the audio-block plugin folder. In the Panel, everything should look exactly the same as before.
 
 ## Refining
 
-Now for some refinements. After all, our poster is not there yet, nor have we made used of the other fields.
+Now for some refinements. After all, our poster is not there yet, nor have we made use of the other fields.
 ### A placeholder and the missing pieces
 
 As our first refinement step, we wrap the current HTML in a `k-block-figure` component to get a nice placeholder when there is no audio file selected yet.
