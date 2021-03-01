@@ -68,7 +68,7 @@ plugins/
       index.php
       index.js (auto-generated file)
       package.json
-```   
+```
 
 ## Register a new plugin
 
@@ -184,7 +184,7 @@ fields:
 
 Inside the block snippet, you have access to the full `$block` (link: docs/reference/objects/blocktext: Block object) with all kind of properties and methods, and of course to the fields we defined for the block in the block blueprint.
 
-```php "/site/plugins/audio-block/snippets/audio.php"
+```php "/site/plugins/audio-block/snippets/blocks/audio.php"
 <?php if ($file = $block->source()->toFile()) : ?>
   <div class="audio-wrapper">
     <?php if ($poster = $block->poster()->toFile()) : ?>
@@ -200,13 +200,13 @@ Inside the block snippet, you have access to the full `$block` (link: docs/refer
       <audio class="audio-element"
         <?= $block->controls()->bool() ? 'controls' : '' ?>
         <?= $block->autoplay()->bool() ? 'autoplay' : '' ?>
-      >    
+      >
         <source src="<?= $file->url()?>" type="<?= $file->mime() ?>">
           Your browser does not support the <code>audio</code> element.
       </audio>
     </div>
   </div>
-  
+
 <?php endif ?>
 ```
 
@@ -218,7 +218,7 @@ For the audio element's source tag, we need the file's URL and the mime type, wh
 
 We also check whether to show the controls, and if the audio should start auto-playing on load.
 
-In most cases, controls should be present to allow users to interact with the audio, and autoplay should be off. It's up to you whether you want to make these setting available to the user at all. If not, remove the corresponding fields from the audio block blueprint. Or add other (link: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio#attributes text: attributes) available for the audio element. 
+In most cases, controls should be present to allow users to interact with the audio, and autoplay should be off. It's up to you whether you want to make these setting available to the user at all. If not, remove the corresponding fields from the audio block blueprint. Or add other (link: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio#attributes text: attributes) available for the audio element.
 
 We should probably also add some basic styling:
 
@@ -769,7 +769,7 @@ computed: {
       marks: false
     });
   },
- 
+
   }
 ```
 
@@ -789,10 +789,10 @@ If we repeat this procedure for every field, we end up with our final result:
         <template >
           <figure class="k-block-type-audio-poster">
             <k-aspect-ratio ratio="1/1" cover="true">
-              <img 
-                v-if="posterUrl" 
-                class="k-block-type-audio-poster-image" 
-                :src="posterUrl" 
+              <img
+                v-if="posterUrl"
+                class="k-block-type-audio-poster-image"
+                :src="posterUrl"
                 alt="">
               <div v-else>
                 {{ $t('No poster selected yet') + ' …' }}
