@@ -222,7 +222,7 @@ In most cases, controls should be present to allow users to interact with the au
 
 We should probably also add some basic styling:
 
-```css
+```html
 <style>
 .audio-wrapper {
   display: flex;
