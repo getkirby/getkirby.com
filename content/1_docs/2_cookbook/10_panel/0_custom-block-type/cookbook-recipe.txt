@@ -178,7 +178,7 @@ fields:
 
 ## Snippet for the frontend
 
-Inside the block snippet, you have access to the full `$block` (link: docs/reference/objects/blocktext: Block object) with all kind of properties and methods, and of course to the fields we defined for the block in the block blueprint.
+Inside the block snippet, you have access to the full `$block` (link: docs/reference/objects/blocktext: Block object) with all kinds of properties and methods, and of course to the fields we defined for the block in the block blueprint.
 
 ```php "/site/plugins/audio-block/snippets/blocks/audio.php"
 <?php if ($file = $block->source()->toFile()): ?>
@@ -506,7 +506,7 @@ For the poster that is stored in the `poster` field, we take advantage of Kirby'
 
 We use a hard-coded ratio and set the `cover` attribute to `true`, but this can of course be made configurable from the blueprint.
 
-We haven't defined the `posterUrl` method yet, which is does the same as the `src` method for the audio.
+We haven't defined the `posterUrl` method yet, which does the same as the `source` method for the audio.
 
 Here is the complete code for this step with some added styling:
 
@@ -707,7 +707,7 @@ export default {
 <!-- styles here (see above ) -->
 ```
 
-Congratultions. Side quest completed! 👏
+Congratulations. Side quest completed! 👏
 
 ### Making the text fields editable
 
