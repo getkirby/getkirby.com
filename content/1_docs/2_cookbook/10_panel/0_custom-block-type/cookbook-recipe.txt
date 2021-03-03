@@ -861,6 +861,17 @@ export default {
 
 Note that we ignored the audio settings like controls and autoplay for the preview because they are not relevant here. If you want to change that, you should know enough by now to adapt all settings to your liking.
 
+You also might have noticed this line:
+
+```html
+<div @dblclick.stop>
+```
+
+The `<k-block-figure>` component has a built-in handler to open the block drawer on double-click. This is cool, but it's not ideal for writer components. I.e. you might want to double-click to select some text. With `@dblclick.stop` we can prevent the double-click event from bubbling up. The drawer will not open when we double-click on one of the writers.
+
+You should definitely check out the docs for (link: https://vuejs.org/v2/guide/events.html text: Vue’s awesome event handling shortcuts) for more tricks like this.
+
+
 ## End result
 
 As a last step, we run the final build step with
