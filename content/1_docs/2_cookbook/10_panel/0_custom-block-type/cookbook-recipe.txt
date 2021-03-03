@@ -23,6 +23,11 @@ Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with
 - (link: https://parceljs.org/ text: Parcel)  must be installed on your system for the single file component approach at the end of this tuturial, unless you use your own custom build process (but don't worry, this is not necessarily required for our preview)
 - Probably a big pot of hot coffee and a cool head. We are going to dive deep.
 
+## Resources
+
+- (file: sample.mp3 text: A sample mp3 file)
+- (file: mr-pod.jpg text: A sample podcast cover)
+
 ## Useful links
 - (link: docs/guide/plugins/plugin-basics#kirby-plugin-one-ring-to-rule-them-all text: Registering extensions)
 - (link: docs/reference/plugins/extensions/blocks text: Block previews)
