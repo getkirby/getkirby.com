@@ -517,3 +517,11 @@ Editor | Blocks
 `/site/snippets/editor/ol.php` | `/site/snippets/blocks/list.php`
 `/site/snippets/editor/paragraph.php` | `/site/snippets/blocks/text.php`
 `/site/snippets/editor/ul.php` | `/site/snippets/blocks/list.php`
+
+## Further reading
+
+- (link: https://getkirby.com/docs/reference/panel/blocks text: Block types)
+- (link: docs/reference/objects/block text: Block methods)
+- (link: docs/reference/objects/blocks text: Blocks collection methods)
+- (link: docs/reference/plugins/extensions/blocks text: Custom block types)
+- (link: docs/cookbook/panel/custom-block-type text: Recipe: Creating a custom block type from scratch)
