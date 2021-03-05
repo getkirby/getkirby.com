@@ -672,7 +672,7 @@ New status of our code:
         </h2>
         <div class="k-block-type-audio-description" v-html="content.description"></div>
         <audio class="k-block-type-audio-element" controls>
-          <source :src="source.url" type="audio/mpeg">
+          <source :src="source.url" :type="mime">
         </audio>
       </div>
     </div>
