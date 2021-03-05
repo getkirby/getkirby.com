@@ -285,3 +285,7 @@ fields:
   <?= $block->text()->html() ?>
 </a>
 ```
+
+## Further reading
+
+- (link: docs/cookbook/panel/custom-block-type text: Recipe: Creating a custom block type from scratch)
