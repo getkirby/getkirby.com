@@ -65,7 +65,7 @@ plugins/
           poster.yml
       snippets/
         blocks/
-          audio.yml
+          audio.php
       src/
         components/
           Audio.vue
