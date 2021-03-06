@@ -156,6 +156,8 @@ If you don’t want the Panel to connect to our server, registration via the Pan
 
 To update Kirby, download the latest version and replace the `kirby` folder.
 
+Make sure to delete the media folder. It will be automatically recreated.
+
 That's it! Because Kirby does not use a database by default, you don't have to run any database migrations.
 
 <warning>
