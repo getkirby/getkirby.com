@@ -20,7 +20,7 @@ Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with
 - A Kirby (link: docs/guide/quickstart#download-and-installation text: Plainkit or Starterkit) for testing
 - A code editor
 - Basic understanding (link: docs/guide/plugins/plugin-basics text: how to create plugins in Kirby)
-- (link: https://parceljs.org/ text: Parcel)  must be installed on your system for the single file component approach at the end of this tuturial, unless you use your own custom build process (but don't worry, this is not necessarily required for our preview)
+- For the single file approach, (link: https://parceljs.org/ text: Parcel)  must be installed on your system, unless you use your own custom build process. But don't worry, we also show you how to build this block without such a build process (see link below).
 - Probably a big pot of hot coffee and a cool head. We are going to dive deep.
 
 ## Resources
@@ -31,6 +31,7 @@ Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with
 ## Useful links
 - (link: docs/guide/plugins/plugin-basics#kirby-plugin-one-ring-to-rule-them-all text: Registering extensions)
 - (link: docs/reference/plugins/extensions/blocks text: Block previews)
+- (link: docs/cookbook/panel/to-bundle-or-not-to-bundle text: To bundle or not to bundle: differences of creating plugins with or without a build process)
 
 
 ## What we will be building
@@ -374,7 +375,7 @@ Theoretically, we could now go ahead and put all our methods and the complete te
 
 But that gets a bit tedious for more complex block previews. We can make our lives a lot easier with single file components.
 
-Feel free to stop here and relax if your blocks don't require more than that.
+Feel free to stop here and relax if your blocks don't require more than that. Or head over to our (link: docs/cookbook/panel/to-bundle-or-not-to-bundle text: To bundle or not to bundle: differences of creating plugins with or without a build process) recipe to learn how to create our complete example without a build process.
 
 ## `index.js` with single file component
 
