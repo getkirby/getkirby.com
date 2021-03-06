@@ -95,7 +95,9 @@ If you use a sorting scheme other than default sorting by number, i.e. automatic
 </info>
 ## Statuses
 
-With the `status` option, you define the page status you want to allow for the page. You can also change their label and description. This option gives you a lot of flexibility how you want to use page status in your website.
+With the `status` option, you define the page statuses you want to allow for the page. You can also change their label and description. This option gives you a lot of flexibility how you want to use page status in your website.
+
+<info>The `draft` status of a page can not be removed or disabled – only its label and description can be changed.</info>
 
 ### Simple example
 
