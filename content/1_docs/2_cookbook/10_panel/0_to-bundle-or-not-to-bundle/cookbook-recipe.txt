@@ -17,6 +17,10 @@ In our (link: docs/cookbook/panel/custom-block-type text: Creating a custom bloc
 
 The final code from that recipe can be converted to a regular `index.js` with the steps below. Let's start with the code of the single file component from that recipe.
 
+<info>
+Note that this is not a complete recipe. Regarding the other files needed for the audio-block, please head over to main recipe. While we use the example of the audio-block, the steps described here are generic.
+</info>
+
 ## Original single file component
 
 ```html "/site/plugins/audio-block/src/components/Audio.vue"
