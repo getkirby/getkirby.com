@@ -22,11 +22,11 @@ Text:
 
 On Wednesday, we released [Kirby 3.5.3](https://github.com/getkirby/kirby/releases/tag/3.5.3), which is all about fixing those little issues that keep magically popping up no matter how good your tests. But a new release wouldn't really be Kirby-like if we didn't always sneak in a few little features as well, which you can find in the change log.
 
-## 💬 Kirby chat with Bastian
+## Kirby chat with Bastian
 
 [Listen to Bastian chatting with Matt Guay](https://capiche.fm/saas/kirby-chat-with-bastian-allgeier) on the SaaS Radio Hour podcast about flat-file content management systems, building a hosted version of Kirby, balancing open source and a business model, Markdown vs WYSIWYG, and more.
 
-## ☁ Kirbyzone
+## Kirbyzone
 
 Kirbyzone is custom hosting for Kirby, made by people who have worked with Kirby for years. Planned features include a secure and fully managed environment, superfast SSD servers that run only what's needed, automatic deployments, license handling, GitHub integration, free SSL certificate setup, your choice of a datacenter location all around the world, personal support and so much more. Kirbyzone is still in its early stages, but if you are interested and want to know more, hop on the [dedicated Discord channel](https://discord.com/channels/525634039965679616/525634039965679618/803970495028527195).
 
