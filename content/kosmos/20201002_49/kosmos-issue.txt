@@ -55,7 +55,7 @@ Become a Kirby Pro quickly with [Bastian's video tutorials](https://youtube.com/
 (…columns)
 
 
-## ❤️ Kirby in the wild
+## Kirby in the wild
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility there are hardly any limits to what you can create with Kirby.
 
@@ -63,7 +63,7 @@ Websites created with Kirby out in the wild are always a great source of inspira
 
 [HaeMa](https://www.haema-labor.de/)
 
-## 🧩 Kirby plugins
+## Kirby plugins
 
 The [Blurry Placeholder plugin](https://github.com/johannschopplich/kirby-blurry-placeholder) implements progressive image loading to provide a better user experience. Tiny thumbnails of the original image are combined with a blurry effect for a better placeholder experience without sacrificing payload.
 
@@ -73,7 +73,7 @@ If VS Code is your favorite code editor, you will be pleased to read that [Kirby
 
 <small>Always test third-party plugins thoroughly before using them in production. Note that we do not test plugins we list here.</small>
 
-## 😋 Kirby Cookbook
+## Kirby Cookbook
 
 Uwe Gehring shares how you can [fetch all your translation strings from the `t()` helper](https://getkirby.com/docs/cookbook/i18n/find-translations) that are scattered around your templates, snippets etc. and output them into a file to be translated, all with a one-liner on the command line. Looks intimidating to the uninitiated like me, but is super useful ;).
 

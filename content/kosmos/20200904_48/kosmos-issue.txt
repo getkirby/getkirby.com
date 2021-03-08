@@ -23,7 +23,7 @@ Text:
 
 We are finally back again after a longish summer break with episode 48 full of plugins, articles, tools, and other links.
 
-## ❤️ Kirby in the wild 1
+## Kirby in the wild 1
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility there are hardly any limits to what you can create with Kirby.
 
@@ -31,7 +31,7 @@ Websites created with Kirby out in the wild are always a great source of inspira
 
 [Fridays for Future Austria](https://fridaysforfuture.at/)
 
-## 🧩 Kirby plugins
+## Kirby plugins
 
 - [Kirby 3 Donuts](https://github.com/fundevogel/kirby3-donuts) is a plugin for creating SVG donut (and pie) charts.
 
@@ -55,7 +55,7 @@ Websites created with Kirby out in the wild are always a great source of inspira
 
 [Fontwerk](https://fontwerk.com/en/), type foundry
 
-## 😋 Kirby Cookbook
+## Kirby Cookbook
 
 - Style Panel elements via blueprint settings and custom CSS with our [recipe](https://getkirby.com/docs/cookbook/panel/customizing-panel).
 

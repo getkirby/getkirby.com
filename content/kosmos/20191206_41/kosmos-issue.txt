@@ -70,7 +70,7 @@ Wrap this in a plugin and define your replacements via the Panel or in your `con
 
 **Note**: The promised recipe is now available: (link: docs/cookbook/extensions/use-placeholders text: The power of placeholders)
 
-## 😋 Kirby Cookbook
+## Kirby Cookbook
 
 **Menus**
 
