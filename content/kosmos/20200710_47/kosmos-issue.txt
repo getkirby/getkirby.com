@@ -37,14 +37,14 @@ Here are a few of the many features:
 To keep Kirby 3.4 company, there's also a new version of the [Editor](https://github.com/getkirby/editor/releases/tag/1.0.4) with enhancements and fixes.
 
 
-## ❤️ Kirby in the wild 1
+## Kirby in the wild 1
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility there are hardly any limits to what you can create with Kirby.
 
 (screenshot: tellie.jpg)
 [Tellie Videoconferencing](https://www.tellie.eu/en)
 
-## 🧩 Kirby plugins
+## Kirby plugins
 
 The list of new plugins is almost as long as the Kirby 3.4 changelog:
 
@@ -79,7 +79,7 @@ The [Rollup Pluginkit](https://github.com/johannschopplich/rollup-pluginkit) is 
 (screenshot: lowa.jpg)
 [LOWA](https://lowa.de/)
 
-## 😋 Kirby Cookbook
+## Kirby Cookbook
 
 Sebastian Greger wrote a great recipe about [conditionally disabling the page cache](https://getkirby.com/docs/cookbook/setup/selective-page-cache) for logged-in users.
 

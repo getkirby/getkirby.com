@@ -28,7 +28,7 @@ What a milestone: issue 50 of our Kosmos newsletter! This episode is pretty long
 
 (screenshot: kosmos-50-kirby-blocks.png)
 
-## ❤️ Kirby in the wild 1
+## Kirby in the wild 1
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility there are hardly any limits to what you can create with Kirby.
 
@@ -37,13 +37,13 @@ Websites created with Kirby out in the wild are always a great source of inspira
 
 [Métiers Maritimes](https://metiersmaritimes.com/)
 
-## 🧩 Kirby plugins
+## Kirby plugins
 
 [Colorist](https://github.com/fundevogel/kirby3-colorist) is a Kirby wrapper around Joe Drago's colorist, capable of generating and manipulating next-gen image formats like AVIF.
 
 <small>Always test third-party plugins thoroughly before using them in production. Note that we do not test plugins we list here.</small>
 
-## 📺 Kirby screencasts
+## Kirby screencasts
 
 (columns…)
 
@@ -83,7 +83,7 @@ Control element sizing, maintain proper spacing, and implement fluid typography 
 
 Fed up with data-hungry Google services? Mail, analytics, maps, video and more: there's a privacy friendly alternative for each service. Find the replacement that fits your needs on [No More Google](https://nomoregoogle.com/).
 
-## ❤️ Kirby in the wild 2
+## Kirby in the wild 2
 
 (screenshot: kosmos-50-2-here-we-grow.jpg)
 

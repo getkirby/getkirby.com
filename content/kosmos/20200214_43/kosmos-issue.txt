@@ -22,13 +22,13 @@ Text:
 
 As we promised in our last issue, one of our goals for 2020 is to put a stronger focus on marketing Kirby–not only to strengthen our Kirby user family but to support you–users, developers or agencies when convincing clients that Kirby is the optimal choice for a project.
 
-## 🚀 Your Kirby Personal Demo is here
+## Your Kirby Personal Demo is here
 
 As a major step in this direction, here comes [Kirby demo](https://getkirby.com/try): discover Kirby instantly without installing. The demo features multiple site types integrated into a single site, showcasing the extreme flexibility of Kirby for your projects–big or small. As a demo user, access the Panel and explore Kirby's user-friendly editing interface: add blog posts, create new products, upload images to the gallery, edit and add users, and more. Check it out and let us know what you think! And if you are curious to know how we made it, visit the [repo on GitHub](https://github.com/getkirby/demokit).
 
 (screenshot: kirby-demo.jpg)
 
-## ❤️ Kirby in the wild
+## Kirby in the wild
 
 Be it a huge complex company website with thousands of pages or your personal portfolio, Kirby helps you build a first-class experience for editors and website visitors alike.
 
@@ -58,7 +58,7 @@ Want to see more examples? Visit our [showcase](https://getkirby.com/love)!
 
 [Kirby 3.3.4](https://github.com/getkirby/kirby/releases/tag/3.3.4) and [Editor 1.0.2](https://github.com/getkirby/editor/releases/tag/1.0.2-rc.1) will be released next week. You can already test the release candidates.
 
-## 💡 Kirby tip of the month
+## Kirby tip of the month
 
 Did you know you can leverage the full power of (link: docs/guide/content/text-formatting text: KirbyText) in info sections/info fields or help text and even combine that with (link: docs/guide/blueprints/query-language text: Kirby's query language)? In the example below, we insert a KirbyText link tag and dynamically add the page URL.
 
@@ -71,7 +71,7 @@ fields:
     After saving, use the (link: https://search.google.com/structured-data/testing-tool#url={{ page.url }} text: Google Structured Data Testing Tool) to verify the schema.
 ```
 
-## 🧩 Kirby plugins
+## Kirby plugins
 
 (columns…)
 
@@ -111,7 +111,7 @@ Schedule automatic publishing of page drafts at a certain date+time with the [Au
 <small>Always test third-party plugins thoroughly before using them in production.</small>
 
 
-## 😋Kirby Cookbook
+## Kirby Cookbook
 
 The (link: docs/cookbook text: Cookbook) is the place on our website where you find a collection of solutions you can build with Kirby with step by step explanations how to build them. Here are our recent additions:
 

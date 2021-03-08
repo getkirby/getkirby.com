@@ -30,7 +30,7 @@ On Wednesday, we released [Kirby 3.5.3](https://github.com/getkirby/kirby/releas
 
 Kirbyzone is custom hosting for Kirby, made by people who have worked with Kirby for years. Planned features include a secure and fully managed environment, superfast SSD servers that run only what's needed, automatic deployments, license handling, GitHub integration, free SSL certificate setup, your choice of a datacenter location all around the world, personal support and so much more. Kirbyzone is still in its early stages, but if you are interested and want to know more, hop on the [dedicated Discord channel](https://discord.com/channels/525634039965679616/525634039965679618/803970495028527195).
 
-## ❤️ Kirby in the wild
+## Kirby in the wild
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility there are hardly any limits to what you can create with Kirby.
 
@@ -38,7 +38,7 @@ Websites created with Kirby out in the wild are always a great source of inspira
 
 [Zammad](https://zammad.com/en) Ticketing System
 
-## 🧩 Plugins
+## Plugins
 
 Some like it light: A [light color scheme for the Panel](https://github.com/TobeyEh/kirby3csstheme) with rounded border edges, light focus-outlines and mini-animations.
 
@@ -46,7 +46,7 @@ The first in a hopefully long list of custom blocks for the new blocks field: A 
 
 <small>Always test third-party plugins thoroughly before using them in production. Note that we do not test plugins we list here.</small>
 
-### 😋 Cookbook recipes
+### Cookbook recipes
 
 If you want to get a basic understanding of objects and classes in Kirby, check out our new [Understanding OOP recipe](https://getkirby.com/docs/cookbook/templating/understanding-oop).
 

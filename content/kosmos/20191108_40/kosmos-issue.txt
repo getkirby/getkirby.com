@@ -31,7 +31,7 @@ Last week, Bastian and I met with Flo Kosiol and the people from [3st digital](h
 
 Also known as [Kirby 3.3.0](https://github.com/getkirby/kirby/releases) and probably the Kirby 3 release with the longest changelog so far. Hundreds of GitHub issues were closed during its development. Some highlights: Search and pagination in [users](https://getkirby.com/docs/reference/panel/fields/users), [pages](https://getkirby.com/docs/reference/panel/fields/pages) and [files](https://getkirby.com/docs/reference/panel/fields/files) fields, [language specific SmartyPants](https://getkirby.com/docs/reference/system/options/smartypants#language-specific-replacements), [unsaved changes' overview](https://getkirby.com/docs/guide/content/publishing-workflow#unsaved-changes) in the Panel, [new icons](https://getkirby.com/docs/reference/panel/icons), a [last minute config option](https://getkirby.com/docs/reference/system/options/ready), and a lot more.
 
-## Kirby Editor 1.0.0 🚀
+## Kirby Editor 1.0.0
 
 [Kirby Editor](https://github.com/getkirby/editor) is a new official visual writing and layout field for Kirby – and a game changer. Compose long-form text with consistent inline styles. Add images, videos, quotes and more. Bring your own block types and always rest assured that the output will be valid, customizable HTML. On top, it delivers structured JSON content you can use for different output channels. And you can even import and export content.
 

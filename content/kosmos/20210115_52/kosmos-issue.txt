@@ -22,7 +22,7 @@ Text:
 
 Happy New Year! Hope you had a relaxing break over the holidays and feel recharged to cope with whatever 2021 has in store for us.
 
-## ❤️ Kirby in the wild
+## Kirby in the wild
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility there are hardly any limits to what you can create with Kirby.
 
@@ -50,7 +50,7 @@ Missed the Kirby 3.5 Release Show in beyond tellerrand’s Stay Curious Café?
 
 (…columns)
 
-## 🧩 Plugins
+## Plugins
 
 Track page views, referrers and devices on your Kirby 3 website. [Kirby 3 Simplestats](https://github.com/Daandelange/kirby3-simplestats) provides a minimal solution for self-hosted and non-intrusive visitor analytics.
 
@@ -60,7 +60,7 @@ Cache bust your assets without using query strings with a little help from the [
 
 <small>Always test third-party plugins thoroughly before using them in production. Note that we do not test plugins we list here.</small>
 
-## 😋 Cookbook recipes
+## Cookbook recipes
 
 Do you want to get better at debugging your PHP code and leave `var_dump()` behind? Then check out our new step-by-step recipe [how to get Xdebug up and running](https://getkirby.com/docs/cookbook/setup/php-debugging-with-xdebug) together with VS Code.
 

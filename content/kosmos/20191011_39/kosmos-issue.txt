@@ -52,7 +52,7 @@ The [Kirby Spreadsheet plugin](https://github.com/texnixe/kirby3-spreadsheet) pr
 
 ## Kirby tip of the month
 
-Did you know there is a shortcut for adding fields to a blueprint by using the field type as key and `true` as value? Instead of simply setting it to `true`, you can set other options like the label, without having to specify the field type. Keep in mind that field names can only be used once per blueprint, so there is a natural limit to being lazy😉.
+Did you know there is a shortcut for adding fields to a blueprint by using the field type as key and `true` as value? Instead of simply setting it to `true`, you can set other options like the label, without having to specify the field type. Keep in mind that field names can only be used once per blueprint, so there is a natural limit to being lazy 😉.
 
 ```yaml
 fields:

@@ -23,7 +23,7 @@ Text:
 
 Hope you all had a great start into 2020. We finished the last year with the release of Kirby 3.3.2 before the winter break, and are now picking up speed for 3.4, scheduled for some time in March.
 
-## 🎫 &nbsp;1. Kirby Konf: Get your ticket now
+## 1. Kirby Konf: Get your ticket now
 
 Only <del>10</del> 9 more weeks until our first Kirby "family gathering". Meet other Kirby developers & the team on [March 21st, 2020 in Mainz, Germany](https://getkirby.com/konf). Book your ticket now (there are only 50), and if you want, you can also register for the warm-up event the night before. Tickets are free, but you can support the event with an amount of your choice! *(Please, make sure to register even if you added yourself to the temporary Colloq page!)*
 
@@ -80,7 +80,7 @@ Since Kirby adds this color to a `data-back` attribute, you can then add the fol
 
 A similar approach will work for info sections or fields, if you prefer to have no background/border (a neutral theme will come in a future release) or use custom styles.
 
-## 😋 &nbsp;Kirby Cookbook
+## Kirby Cookbook
 
 As promised in the last newsletter, we have a new Cookbook recipe: [The power of placeholders](https://getkirby.com/docs/cookbook/extensions/use-placeholders) extends last month's Kirby tip to get the most out of this technique.
 

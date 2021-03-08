@@ -22,7 +22,7 @@ Text:
 
 Behind the scenes of the Kirbyverse, a lot of interesting stuff is happening. Not only is the development of Kirby 3.4 taking shape, there's also things in the pipeline that will make extending Kirby easier and more fun. But enough mouth-watering, let's see what's happened in the last few weeks…
 
-## ❤️ Kirby in the wild 1
+## Kirby in the wild 1
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility there are hardly any limits to what you can create with Kirby.
 
@@ -30,7 +30,7 @@ Websites created with Kirby out in the wild are always a great source of inspira
 
 [PräPosition](https://www.praeposition.com)
 
-## 💡 Kirby tip of the month
+## Kirby tip of the month
 
 Last month, we already mentioned [page models](https://getkirby.com/docs/guide/templates/page-models) as a powerful way to override Kirby's native page methods. Overriding the `isReadable()` method in a model gives you additional superpowers for restricting page access to user roles or even individual users.
 
@@ -49,7 +49,7 @@ class NotePage extends Page
   }
 }
 ```
-## 🧩 Kirby plugins
+## Kirby plugins
 
 I'm often surprised to find plugins for Kirby that are never officially announced anywhere.
 
@@ -98,7 +98,7 @@ Convert and transform WordPress WXR RSS export files into a new Kirby 3 site wit
 
 [Rivista Savej](https://rivistasavej.it)
 
-## 😋 Kirby Cookbook
+## Kirby Cookbook
 
 Add anchors and a Table of Contents to your Kirby pages with a little help from our brand-new [Of anchors and ToCs, part 1](https://getkirby.com/docs/cookbook/extensions/table-of-contents) recipe.
 
