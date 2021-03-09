@@ -170,7 +170,7 @@ For the rest of the code, please head over to the original recipe.
 
 Everything that is between the script tag goes into the main `index.js` file. So
 
-```js
+```html
 <script>
 export default {
   methods: {...},
