@@ -15,7 +15,7 @@ A pages section can be used to show children of the current page or of any other
 <info>
 A pages section can be filtered by template and by status, but its members cannot be filtered using a query. If you need to query pages, a (link: docs/reference/panel/fields/pages text: pages field) or a (link: docs/reference/plugins/extensions/sections text: custom section plugin) might be an alternative.
 
-Sections do not store anything in the content file, which means that you cannot fetch content from a the section in your templates like you would from field content.
+Sections do not store anything in the content file, which means that you cannot fetch content from a section in your templates like you would from field content.
 </info>
 
 (screenshot: pages.png)
