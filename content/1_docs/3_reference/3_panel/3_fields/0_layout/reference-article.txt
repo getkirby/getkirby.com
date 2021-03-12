@@ -74,7 +74,7 @@ The layout field supports up to 12 columns and all are listed below.
 
 The layout field also accepts the `fieldsets` option from the blocks field to control blocks in columns.
 
-The fieldsets setup is exactly the same. You can follow the instructions from the (link: ./blocks/block-selector text: Blocks field).
+The fieldsets setup is exactly the same. You can follow the instructions from the (link: /docs/reference/panel/fields/blocks#defining-fieldsets text: Blocks field).
 
 ```yaml
 fields:
