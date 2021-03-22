@@ -43,7 +43,7 @@ class Users extends Collection
     public function add($object)
     {
         // add a page collection
-        if (is_a($object, static::class) === true) {
+        if (is_a($object, self::class) === true) {
             $this->data = array_merge($this->data, $object->data);
 
         // add a user by id
@@ -128,13 +128,13 @@ class Users extends Collection
     }
 
     /**
-     * Shortcut for `$users->filterBy('role', 'admin')`
+     * Shortcut for `$users->filter('role', 'admin')`
      *
      * @param string $role
      * @return self
      */
     public function role(string $role)
     {
-        return $this->filterBy('role', $role);
+        return $this->filter('role', $role);
     }
 }

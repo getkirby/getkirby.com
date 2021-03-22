@@ -1,0 +1,60 @@
+Text:
+
+## Example
+
+Note that you have to pass the full [`id`](/docs/reference/objects/page/id) as parameter:
+
+```php
+<h2>All pages except project-b</h2>
+<ul>
+  <?php foreach($page->children()->not('projects/project-b') as $subpage): ?>
+  <li>
+    <a href="<?= $subpage->url() ?>">
+      <?= $subpage->title()->html() ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```
+
+### Pass collection as argument
+You can pass a collection as argument as well:
+
+```php
+<ul>
+  <?php
+  $excluded = $page->children()->filterBy('template', 'some_template');
+  foreach($page->children()->not($excluded) as $subpage): ?>
+  <li>
+    <a href="<?= $subpage->url() ?>">
+      <?= $subpage->title()->html() ?>
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```
+
+### Array of ids, collections or objects as argument
+
+<since v="3.4.3">
+
+You can also use an array of ids, collections or objects or a mixture of them to exclude from a collection:
+
+#### An array of ids
+
+```php
+$children = $page->index()->listed()->not(['path/to/page-a', 'path/to/page-c', 'path/to/page-non-exists']);
+```
+
+#### An array of objects
+
+```php
+$children = $page->index()->listed()->not([page('path/to/page-a'), page('path/to/page-c')]);
+```
+
+#### An array of mixed values
+
+```php
+$children = $page->index()->not([$page->children()->template('article-video'), page('path/to/page-a')]);
+```
+</since>

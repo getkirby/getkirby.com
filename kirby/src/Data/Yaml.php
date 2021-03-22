@@ -6,7 +6,7 @@ use Kirby\Exception\InvalidArgumentException;
 use Spyc;
 
 /**
- * Simple Wrapper around Symfony's Yaml Component
+ * Simple Wrapper around the Spyc YAML class
  *
  * @package   Kirby Data
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -24,6 +24,9 @@ class Yaml extends Handler
      */
     public static function encode($data): string
     {
+        // TODO: The locale magic should no longer be
+        //       necessary when support for PHP 7.x is dropped
+
         // fetch the current locale setting for numbers
         $locale = setlocale(LC_NUMERIC, 0);
 

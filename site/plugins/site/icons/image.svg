@@ -1,3 +1,1 @@
-<svg viewBox="0 0 16 16" width="16" height="16" class="icon icon-image">
-  <path d="M7.024 10.829l-1.524-1.829-2.5 3h10l-3.5-4-2.476 2.829zM2 2h12v12h-12v-12z"></path>
-</svg>
+<svg width="16" height="16" class="icon icon-image"><path d="M7.024 10.829L5.5 9 3 12h10L9.5 8l-2.476 2.829zM2 2h12v12H2V2z"/></svg>

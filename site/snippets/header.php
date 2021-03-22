@@ -44,7 +44,7 @@
   <div class="producthunt">
     <div class="wrap">
       <?php if (option('sale')): ?>
-      <a href="<?= url('buy') ?>">🛍&nbsp;&nbsp;Save <strong>20% per license</strong> until July 12th</a>
+      <a href="<?= url('buy') ?>">🛍&nbsp;&nbsp;<?= option('sale.banner') ?></a>
       <?php else: ?>
       <a href="https://www.producthunt.com/posts/kirby-3-0">🎉&nbsp;&nbsp;Featured as <strong>#1 product of the day</strong> on <i>Product&nbsp;Hunt</i></a>
       <?php endif ?>

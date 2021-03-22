@@ -23,9 +23,11 @@ use Kirby\Toolkit\Str;
 trait PageActions
 {
     /**
-     * Changes the sorting number
+     * Changes the sorting number.
      * The sorting number must already be correct
-     * when the method is called
+     * when the method is called.
+     * This only affects this page,
+     * siblings will not be resorted.
      *
      * @param int|null $num
      * @return self
@@ -168,7 +170,9 @@ trait PageActions
 
     /**
      * Change the status of the current page
-     * to either draft, listed or unlisted
+     * to either draft, listed or unlisted.
+     * If changing to `listed`, you can pass a position for the
+     * page in the siblings collection. Siblings will be resorted.
      *
      * @param string $status "draft", "listed" or "unlisted"
      * @param int|null $position Optional sorting number
@@ -203,7 +207,7 @@ trait PageActions
     }
 
     /**
-     * @param int $position
+     * @param int|null $position
      * @return self
      */
     protected function changeStatusToListed(int $position = null)
@@ -245,6 +249,19 @@ trait PageActions
         $this->resortSiblingsAfterUnlisting();
 
         return $page;
+    }
+
+    /**
+     * Change the position of the page in its siblings
+     * collection. Siblings will be resorted. If the page
+     * status isn't yet `listed`, it will be changed to it.
+     *
+     * @param int|null $position
+     * @return self
+     */
+    public function changeSort(int $position = null)
+    {
+        return $this->changeStatus('listed', $position);
     }
 
     /**
@@ -516,7 +533,9 @@ trait PageActions
                 $lang   = $this->kirby()->defaultLanguage() ?? null;
                 $field  = $this->content($lang)->get('date');
                 $date   = $field->isEmpty() ? 'now' : $field;
-                return date($format, strtotime($date));
+                // TODO: in 3.6.0 throw an error if date() doesn't
+                // return a number, see https://github.com/getkirby/kirby/pull/3061#discussion_r552783943
+                return (int)date($format, strtotime($date));
                 break;
             case 'default':
 
@@ -545,7 +564,7 @@ trait PageActions
                 return $num;
             default:
                 // get instance with default language
-                $app = $this->kirby()->clone();
+                $app = $this->kirby()->clone([], false);
                 $app->setCurrentLanguage();
 
                 $template = Str::template($mode, [
@@ -735,7 +754,7 @@ trait PageActions
         }
 
         $parent = $this->parentModel();
-        $parent->children = $parent->children()->sortBy('num', 'asc');
+        $parent->children = $parent->children()->sort('num', 'asc');
 
         return true;
     }
@@ -761,18 +780,22 @@ trait PageActions
                 $sibling->changeNum($index);
             }
 
-            $parent->children = $siblings->sortBy('num', 'asc');
+            $parent->children = $siblings->sort('num', 'asc');
         }
 
         return true;
     }
 
     /**
+     * @deprecated 3.5.0 Use `Page::changeSort()` instead
+     *
      * @param null $position
      * @return self
      */
     public function sort($position = null)
     {
+        deprecated('$page->sort() is deprecated, use $page->changeSort() instead. $page->sort() will be removed in Kirby 3.6.0.');
+
         return $this->changeStatus('listed', $position);
     }
 
@@ -816,17 +839,17 @@ trait PageActions
      * Updates the page data
      *
      * @param array|null $input
-     * @param string|null $language
+     * @param string|null $languageCode
      * @param bool $validate
      * @return self
      */
-    public function update(array $input = null, string $language = null, bool $validate = false)
+    public function update(array $input = null, string $languageCode = null, bool $validate = false)
     {
         if ($this->isDraft() === true) {
             $validate = false;
         }
 
-        $page = parent::update($input, $language, $validate);
+        $page = parent::update($input, $languageCode, $validate);
 
         // if num is created from page content, update num on content update
         if ($page->isListed() === true && in_array($page->blueprint()->num(), ['zero', 'default']) === false) {

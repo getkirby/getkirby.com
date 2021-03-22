@@ -3,15 +3,23 @@ Title: Panel issues
 ----
 Text:
 
-## OPcache
+## OPcache/server-side caching in general
 
-When OPcache settings are too aggressive, it can happen that responses are not updated, for example resulting in changes in the Panel not being updated (e.g the user language or the display language).
+When cache settings on the server are too aggressive, it can happen that responses are not updated, for example resulting in changes in the Panel not being updated.
 
-Adding this line in the `.htaccess` has helped users fixing this issue:
+Adding this line in the `.htaccess` has helped users fixing an issue with OPcache:
 
 ```
 php_value opcache.revalidate_freq 0
 ```
+
+It might also help to set the Cache-Control header at the top of your `.htaccess`:
+
+```
+Header set Cache-Control "no-cache, private"
+```
+
+Make sure to flush the server cache afterwards.
 
 ## Panel Error Messages
 

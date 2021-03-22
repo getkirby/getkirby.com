@@ -14,7 +14,7 @@ class PluginPage extends Page
 
   public function cacheId($section): string
   {
-    return $this->slug() . '/' . $section;
+    return $this->id() . '/' . $section;
   }
 
   public function download()

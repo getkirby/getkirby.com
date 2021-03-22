@@ -1,0 +1,5 @@
+Caption:
+
+**Block plugins**
+
+Create rich previews for your custom blocks or make them even editable inline.

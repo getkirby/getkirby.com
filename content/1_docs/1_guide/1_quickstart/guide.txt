@@ -54,7 +54,7 @@ When copying files to a remote server via (S)FTP, make sure to copy the `.htacce
         </td>
         <td class="text">
             <ul>
-                <li>PHP 7.2, 7.3 or 7.4<br>(PHP 7.3 or 7.4 are recommended)</li>
+                <li>PHP 7.3, 7.4 or 8.0<br>(PHP 7.4 is recommended)</li>
                 <li><code>mbstring</code> extension</li>
                 <li><code>curl</code> extension</li>
                 <li><code>ctype</code> extension</li>
@@ -155,6 +155,8 @@ If you don’t want the Panel to connect to our server, registration via the Pan
 ## Updates
 
 To update Kirby, download the latest version and replace the `kirby` folder.
+
+Make sure to delete the media folder. It will be automatically recreated.
 
 That's it! Because Kirby does not use a database by default, you don't have to run any database migrations.
 

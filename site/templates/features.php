@@ -19,7 +19,8 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => page('home')->image('interface-1.jpg')->resize(1200),
+            'class' => 'center',
+            'image' => page('home')->image('dashboard.jpg')->resize(1200),
             'alt'   => 'A screenshot of Kirby\'s admin interface'
           ]) ?>
 
@@ -95,8 +96,8 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => page('home')->image('interface-2.jpg')->resize(1200),
-            'class' => 'stretch',
+            'image' => page('home')->image('microsite.jpg')->resize(1200),
+            'class' => 'center',
             'alt'   => 'A screenshot of a Panel setup for blog articles'
           ]) ?>
 
@@ -165,7 +166,7 @@
           <?= snippet('features/image', [
             'cols'  => 6,
             'rows'  => 4,
-            'image' => page('home')->image('interface-5.jpg')->resize(1200),
+            'image' => page('home')->image('article.jpg')->resize(1200),
             'class' => 'stretch',
             'alt'   => 'An example of a more complex panel layout with multiple custom fields'
           ]) ?>
@@ -203,29 +204,29 @@
         <div class="features-grid">
           <?= snippet('features/text', [
             'heading' => 'Writing',
-            'text'    => 'Content editors love the flexibility and intuitive features of our new editor. Write without distraction and add formatting you can trust. The result will be clean, accessible and polished for the web.',
-            'link'    => 'https://github.com/getkirby/editor',
+            'text'    => 'Content editors love the flexibility and intuitive features of our blocks field. Write without distraction and add formatting you can trust. The result will be clean, accessible and polished for the web.',
+            'link'    => 'docs/reference/panel/fields/blocks',
           ]) ?>
 
           <?= snippet('features/image', [
             'cols'  => 4,
             'rows'  => 6,
             'class' => 'stretch',
-            'image' => $page->image('editor.jpg'),
-            'link'  => 'https://github.com/getkirby/editor',
-            'alt'   => 'A screenshot of Kirby\'s visual editor plugin'
+            'image' => $page->image('blocks.jpg'),
+            'link'  => 'docs/reference/panel/fields/blocks',
+            'alt'   => 'A screenshot of Kirby\'s visual block editor'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Full control',
-            'text'    => 'As a developer, you decide how each individual block type of the editor is rendered. You control the markup and the design. Nothing happens by accident and all content stays structured.',
-            'link'    => 'https://github.com/getkirby/editor/wiki/Block-snippets'
+            'text'    => 'As a developer, you decide how each individual block type is rendered. You control the markup and the design. Nothing happens by accident and all content stays structured.',
+            'link'    => 'docs/reference/panel/fields/blocks'
           ]) ?>
 
           <?= snippet('features/text', [
             'heading' => 'Extensible',
-            'text'    => 'Add new block types to the editor. You need a call to action button, a gallery or a table block? No problem! Our powerful block component API, based on Vue.js, is here for you.',
-            'link'    => 'https://github.com/getkirby/editor/wiki/Block-extensions'
+            'text'    => 'Add new block types: You need a call to action button, product previews or a table block? No problem! Our powerful block component API, based on Vue.js, is here for you.',
+            'link'    => 'docs/reference/panel/fields/blocks'
           ]) ?>
         </div>
       </div>

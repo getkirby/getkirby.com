@@ -8,7 +8,6 @@ use Kirby\Exception\NotFoundException;
 use Kirby\Http\Uri;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\F;
-use Kirby\Toolkit\Str;
 
 /**
  * The `$page` object is the heart and
@@ -140,7 +139,7 @@ class Page extends ModelWithContent
     /**
      * The intended page template
      *
-     * @var string
+     * @var \Kirby\Cms\Template
      */
     protected $template;
 
@@ -755,18 +754,6 @@ class Page extends ModelWithContent
     }
 
     /**
-     * @deprecated 3.0.0 Use `Page::isUnlisted()` instead
-     * @return bool
-     * @codeCoverageIgnore
-     */
-    public function isInvisible(): bool
-    {
-        deprecated('$page->isInvisible() is deprecated, use $page->isUnlisted() instead. $page->isInvisible() will be removed in Kirby 3.5.0.');
-
-        return $this->isUnlisted();
-    }
-
-    /**
      * Checks if the page has a sorting number
      *
      * @return bool
@@ -844,18 +831,6 @@ class Page extends ModelWithContent
     public function isUnlisted(): bool
     {
         return $this->isListed() === false;
-    }
-
-    /**
-     * @deprecated 3.0.0 Use `Page::isListed()` instead
-     * @return bool
-     * @codeCoverageIgnore
-     */
-    public function isVisible(): bool
-    {
-        deprecated('$page->isVisible() is deprecated, use $page->isListed() instead. $page->isVisible() will be removed in Kirby 3.5.0.');
-
-        return $this->isListed();
     }
 
     /**
@@ -964,11 +939,6 @@ class Page extends ModelWithContent
     {
         if ($icon = $this->blueprint()->icon()) {
             $params['type'] = $icon;
-
-            // check for emojis
-            if (strlen($icon) !== Str::length($icon)) {
-                $params['emoji'] = true;
-            }
         }
 
         return parent::panelIcon($params);

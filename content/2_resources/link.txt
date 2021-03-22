@@ -1,0 +1,9 @@
+Title: Resources
+
+----
+
+Submenu: true
+
+----
+
+Link: kosmos

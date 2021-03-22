@@ -1,0 +1,51 @@
+Guide: templates/php-api#permissions
+
+----
+
+Text:
+
+## `$who`
+
+There are four options for the `$who` parameter:
+- a username (impersonates the specific user with their permissions)
+- `'kirby'` (impersonates the allmighty user with full permissions)
+- `'nobody'` (disables the currently logged in user, added in Kirby 3.5.0)
+- `null` (resets the impersonation)
+
+## Example
+
+```php
+<?php
+
+$kirby = kirby();
+$kirby->impersonate('kirby');
+
+page('notes/a-great-article')->update([
+  'author' => 'Homer Simpson'
+]);
+```
+
+<warning>
+The impersonation will be active for all code that runs in the current request after the call to `$kirby->impersonate()`. If you want to limit the impact to a single operation, call the method with a callback (see below).
+</warning>
+
+<since v="3.4.0">
+## With callback
+
+If you only want a single operation to run with different privileges, use a callback:
+
+```php
+<?php
+
+$kirby = kirby();
+$result = $kirby->impersonate('kirby', function () {
+  page('notes/a-great-article')->update([
+    'author' => 'Homer Simpson'
+  ]);
+
+  return 'this will be returned to $result above';
+});
+```
+
+The impersonation automatically gets reset to the previous value after the callback returns.
+</since>

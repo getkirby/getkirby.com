@@ -13,8 +13,8 @@
                 <?php icon('download') ?>
                 Try for free
               </a>
-              <a class="home-hero-v3" href="<?= url('features') ?>">
-                Features &rsaquo;
+              <a class="home-hero-v3" href="<?= url('v35') ?>">
+                Kirby 3.5 is here! &rsaquo;
               </a>
             </p>
           </div>

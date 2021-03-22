@@ -5,6 +5,7 @@ namespace Kirby\Cms;
 use Kirby\Image\Image;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\F;
+use Throwable;
 
 /**
  * The `$file` object provides a set
@@ -386,19 +387,6 @@ class File extends ModelWithContent
     }
 
     /**
-     * @deprecated 3.0.0 Use `File::content()` instead
-     *
-     * @return \Kirby\Cms\Content
-     * @codeCoverageIgnore
-     */
-    public function meta()
-    {
-        deprecated('$file->meta() is deprecated, use $file->content() instead. $file->meta() will be removed in Kirby 3.5.0.');
-
-        return $this->content();
-    }
-
-    /**
      * Get the file's last modification time.
      *
      * @param string|null $format
@@ -515,6 +503,31 @@ class File extends ModelWithContent
         }
 
         return parent::panelImageSource($query);
+    }
+
+    /**
+     * Returns an array of all actions
+     * that can be performed in the Panel
+     *
+     * @since 3.3.0 This also checks for the lock status
+     * @since 3.5.1 This also checks for matching accept settings
+     *
+     * @param array $unlock An array of options that will be force-unlocked
+     * @return array
+     */
+    public function panelOptions(array $unlock = []): array
+    {
+        $options = parent::panelOptions($unlock);
+
+        try {
+            // check if the file type is allowed at all,
+            // otherwise it cannot be replaced
+            $this->match($this->blueprint()->accept());
+        } catch (Throwable $e) {
+            $options['replace'] = false;
+        }
+
+        return $options;
     }
 
     /**
@@ -758,7 +771,7 @@ class File extends ModelWithContent
      */
     public function templateSiblings(bool $self = true)
     {
-        return $this->siblings($self)->filterBy('template', $this->template());
+        return $this->siblings($self)->filter('template', $this->template());
     }
 
     /**
@@ -780,6 +793,6 @@ class File extends ModelWithContent
      */
     public function url(): string
     {
-        return $this->url ?? $this->url = $this->kirby()->component('file::url')($this->kirby(), $this);
+        return $this->url ?? $this->url = ($this->kirby()->component('file::url'))($this->kirby(), $this);
     }
 }

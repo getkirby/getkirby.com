@@ -79,8 +79,9 @@ class App
      * Creates a new App instance
      *
      * @param array $props
+     * @param bool $setInstance If false, the instance won't be set globally
      */
-    public function __construct(array $props = [])
+    public function __construct(array $props = [], bool $setInstance = true)
     {
         // register all roots to be able to load stuff afterwards
         $this->bakeRoots($props['roots'] ?? []);
@@ -110,7 +111,9 @@ class App
         ]);
 
         // set the singleton
-        Model::$kirby = static::$instance = $this;
+        if (static::$instance === null || $setInstance === true) {
+            Model::$kirby = static::$instance = $this;
+        }
 
         // setup the I18n class with the translation loader
         $this->i18n();
@@ -331,6 +334,24 @@ class App
         };
 
         return $router->call($path ?? $this->path(), $method ?? $this->request()->method());
+    }
+
+    /**
+     * Creates an instance with the same
+     * initial properties
+     *
+     * @param array $props
+     * @param bool $setInstance If false, the instance won't be set globally
+     * @return self
+     */
+    public function clone(array $props = [], bool $setInstance = true)
+    {
+        $props = array_replace_recursive($this->propertyData, $props);
+
+        $clone = new static($props, $setInstance);
+        $clone->data = $this->data;
+
+        return $clone;
     }
 
     /**
@@ -831,7 +852,7 @@ class App
      */
     public function markdown(string $text = null, bool $inline = false): string
     {
-        return $this->component('markdown')($this, $text, $this->options['markdown'] ?? [], $inline);
+        return ($this->component('markdown'))($this, $text, $this->options['markdown'] ?? [], $inline);
     }
 
     /**
@@ -1079,10 +1100,16 @@ class App
         // when the page has been found
         if ($page) {
             try {
-                return $this
-                    ->response()
-                    ->body($page->render([], $extension))
-                    ->type($extension);
+                $response = $this->response();
+                $output   = $page->render([], $extension);
+
+                // attach a MIME type based on the representation
+                // only if no custom MIME type was set
+                if ($response->type() === null) {
+                    $response->type($extension);
+                }
+
+                return $response->body($output);
             } catch (NotFoundException $e) {
                 return null;
             }
@@ -1347,7 +1374,7 @@ class App
             }
         }
 
-        return $this->component('smartypants')($this, $text, $options);
+        return ($this->component('smartypants'))($this, $text, $options);
     }
 
     /**
@@ -1361,7 +1388,7 @@ class App
      */
     public function snippet($name, array $data = []): ?string
     {
-        return $this->component('snippet')($this, $name, array_merge($this->data, $data));
+        return ($this->component('snippet'))($this, $name, array_merge($this->data, $data));
     }
 
     /**
@@ -1386,7 +1413,7 @@ class App
      */
     public function template(string $name, string $type = 'html', string $defaultType = 'html')
     {
-        return $this->component('template')($this, $name, $type, $defaultType);
+        return ($this->component('template'))($this, $name, $type, $defaultType);
     }
 
     /**
@@ -1399,7 +1426,7 @@ class App
      */
     public function thumb(string $src, string $dst, array $options = []): string
     {
-        return $this->component('thumb')($this, $src, $dst, $options);
+        return ($this->component('thumb'))($this, $src, $dst, $options);
     }
 
     /**

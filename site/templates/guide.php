@@ -9,7 +9,7 @@
 
         <div class="docs-sidebar">
           <p class="h1"><a href="<?= url('docs/guide') ?>">Guide</a></p>
-          <?php snippet('sidebar', ['items' => page('docs/guide')->children()]) ?>
+          <?php snippet('sidebar', ['items' => page('docs/guide')->children()->listed()]) ?>
         </div>
 
         <!-- # Guide Content -->

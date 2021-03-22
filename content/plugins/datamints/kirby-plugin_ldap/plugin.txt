@@ -1,0 +1,13 @@
+Title: LDAP login
+
+----
+
+Repository: https://github.com/datamints/kirby-plugin_ldap
+
+----
+
+Category: integrations
+
+----
+
+Description: With this plugin, you can login into Kirby with your LDAP-credentials

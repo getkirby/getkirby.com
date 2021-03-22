@@ -28,11 +28,6 @@ class User extends ModelWithContent
     use UserActions;
 
     /**
-     * @var File
-     */
-    protected $avatar;
-
-    /**
      * @var UserBlueprint
      */
     protected $blueprint;
@@ -373,7 +368,8 @@ class User extends ModelWithContent
      */
     public function isLastAdmin(): bool
     {
-        return $this->role()->isAdmin() === true && $this->kirby()->users()->filterBy('role', 'admin')->count() <= 1;
+        return $this->role()->isAdmin() === true &&
+               $this->kirby()->users()->filter('role', 'admin')->count() <= 1;
     }
 
     /**
@@ -387,13 +383,24 @@ class User extends ModelWithContent
     }
 
     /**
+     * Checks if the current user is the virtual
+     * Nobody user
+     *
+     * @return bool
+     */
+    public function isNobody(): bool
+    {
+        return $this->email() === 'nobody@getkirby.com';
+    }
+
+    /**
      * Returns the user language
      *
      * @return string
      */
     public function language(): string
     {
-        return $this->language ?? $this->language = $this->credentials()['language'] ?? $this->kirby()->option('panel.language', 'en');
+        return $this->language ?? $this->language = $this->credentials()['language'] ?? $this->kirby()->panelLanguage();
     }
 
     /**
@@ -426,7 +433,7 @@ class User extends ModelWithContent
         $kirby->trigger('user.login:before', ['user' => $this, 'session' => $session]);
 
         $session->regenerateToken(); // privilege change
-        $session->data()->set('user.id', $this->id());
+        $session->data()->set('kirby.userId', $this->id());
         $this->kirby()->auth()->setUser($this);
 
         $kirby->trigger('user.login:after', ['user' => $this, 'session' => $session]);
@@ -446,7 +453,7 @@ class User extends ModelWithContent
         $kirby->trigger('user.logout:before', ['user' => $this, 'session' => $session]);
 
         // remove the user from the session for future requests
-        $session->data()->remove('user.id');
+        $session->data()->remove('kirby.userId');
 
         // clear the cached user object from the app state of the current request
         $this->kirby()->auth()->flush();
@@ -541,6 +548,18 @@ class User extends ModelWithContent
         }
 
         return $this->name = new Field($this, 'name', $this->credentials()['name'] ?? null);
+    }
+
+    /**
+     * Returns the user's name or,
+     * if empty, the email address
+     *
+     * @return \Kirby\Cms\Field
+     */
+    public function nameOrEmail()
+    {
+        $name = $this->name();
+        return $name->isNotEmpty() ? $name : new Field($this, 'email', $this->email());
     }
 
     /**
@@ -693,7 +712,7 @@ class User extends ModelWithContent
         $roles = $kirby->roles();
 
         // a collection with just the one role of the user
-        $myRole = $roles->filterBy('id', $this->role()->id());
+        $myRole = $roles->filter('id', $this->role()->id());
 
         // if there's an authenticated user …
         if ($user = $kirby->user()) {
@@ -798,7 +817,7 @@ class User extends ModelWithContent
      */
     protected function setName(string $name = null)
     {
-        $this->name = $name !== null ? trim($name) : null;
+        $this->name = $name !== null ? trim(strip_tags($name)) : null;
         return $this;
     }
 

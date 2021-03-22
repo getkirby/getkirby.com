@@ -79,7 +79,7 @@ class Location
         $seconds = count($coord) > 2 ? $this->num($coord[2]) : 0;
 
         $hemi = strtoupper($hemi);
-        $flip = ($hemi == 'W' || $hemi == 'S') ? -1 : 1;
+        $flip = ($hemi === 'W' || $hemi === 'S') ? -1 : 1;
 
         return $flip * ($degrees + $minutes / 60 + $seconds / 3600);
     }
@@ -94,8 +94,8 @@ class Location
     {
         $parts = explode('/', $part);
 
-        if (count($parts) == 1) {
-            return $parts[0];
+        if (count($parts) === 1) {
+            return (float)$parts[0];
         }
 
         return (float)($parts[0]) / (float)($parts[1]);

@@ -6,14 +6,7 @@ Text:
 
 ## Supported Versions
 
-<!-- NOTE TO THE EDITOR: If you update this table, please also update the security.json.php template -->
-
-| Kirby Version    | Support Status                                              |
-| ---------------- | ----------------------------------------------------------- |
-| {{ latest }}     | ✅ Latest Kirby release, actively supported                 |
-| {{ supported }}+ | ✅ No known security issues                                 |
-| 2.5.13+          | ⚠️ Security support until 31.12.2020, no active development |
-| 1.*              | ❌ Not supported                                            |
+{{ supported }}
 
 <info>
 If you need the version information from this page in a machine-readable format, you can use the (link: security.json text: JSON representation).
@@ -38,10 +31,45 @@ Please do *not* write to us publicly, e.g. in the forum, as making security vuln
 
 ----
 
+Supported:
+
+-
+    version: {{ latest }}
+    status: latest
+    description: ✅ Latest Kirby release, actively supported
+
+-
+    version: >={{ no-vulnerabilities }}
+    status: no-vulnerabilities
+    description: ✅ No known vulnerabilities
+
+-
+    version: 2.*
+    status: end-of-life
+    description: ❌ Not supported (end of life) since January 1, 2021
+
+-
+    version: 1.*
+    status: end-of-life
+    description: ❌ Not supported (end of life) since February 1, 2016
+
+----
+
 Incidents:
 
 -
+    cve: CVE-2020-26253
     description: "Registration block: .dev domains and some reverse proxy setups were treated as local"
     severity: minor
     affected: "<=3.3.5"
     fixed: 3.3.6
+    links:
+        GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-2ccx-2gf3-8xvv
+-
+    cve: CVE-2020-26255
+    description: "PHP Phar archives could be uploaded by Panel users as content files and executed"
+    severity: notable
+    affected: "<=3.4.4"
+    fixed: 3.4.5
+    links:
+        GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-g3h8-cg9x-47qw

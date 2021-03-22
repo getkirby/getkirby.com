@@ -1,6 +1,6 @@
 <?php
 
-include '../kirby/bootstrap.php';
+include '../kirby/vendor/autoload.php';
 
 $kirby = new Kirby([
     'roots' => [

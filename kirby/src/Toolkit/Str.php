@@ -289,7 +289,7 @@ class Str
         for ($i = 0; $i < static::length($string); $i++) {
             $char = static::substr($string, $i, 1);
             list(, $code) = unpack('N', mb_convert_encoding($char, 'UCS-4BE', 'UTF-8'));
-            $encoded .= rand(1, 2) == 1 ? '&#' . $code . ';' : '&#x' . dechex($code) . ';';
+            $encoded .= rand(1, 2) === 1 ? '&#' . $code . ';' : '&#x' . dechex($code) . ';';
         }
 
         return $encoded;
@@ -410,7 +410,7 @@ class Str
      */
     public static function isURL(string $string = null): bool
     {
-        return filter_var($string, FILTER_VALIDATE_URL);
+        return filter_var($string, FILTER_VALIDATE_URL) !== false;
     }
 
     /**
@@ -804,6 +804,78 @@ class Str
     }
 
     /**
+     * Calculates the similarity between two strings with multibyte support
+     *
+     * @author Based on the work of Antal Áron
+     * @copyright Original Copyright (c) 2017, Antal Áron
+     * @license https://github.com/antalaron/mb-similar-text/blob/master/LICENSE MIT License
+     * @param string $first
+     * @param string $second
+     * @param bool $caseInsensitive If `true`, strings are compared case-insensitively
+     * @return array matches: Number of matching chars in both strings
+     *               percent: Similarity in percent
+     */
+    public static function similarity(string $first, string $second, bool $caseInsensitive = false): array
+    {
+        $matches = 0;
+        $percent = 0.0;
+
+        if ($caseInsensitive === true) {
+            $first  = static::lower($first);
+            $second = static::lower($second);
+        }
+
+        if (static::length($first) + static::length($second) > 0) {
+            $pos1 = $pos2 = $max = 0;
+            $len1 = static::length($first);
+            $len2 = static::length($second);
+
+            for ($p = 0; $p < $len1; ++$p) {
+                for ($q = 0; $q < $len2; ++$q) {
+                    for (
+                        $l = 0;
+                        ($p + $l < $len1) && ($q + $l < $len2) &&
+                        static::substr($first, $p + $l, 1) === static::substr($second, $q + $l, 1);
+                        ++$l
+                    ) {
+                        // nothing to do
+                    }
+
+                    if ($l > $max) {
+                        $max  = $l;
+                        $pos1 = $p;
+                        $pos2 = $q;
+                    }
+                }
+            }
+
+            $matches = $max;
+
+            if ($matches) {
+                if ($pos1 && $pos2) {
+                    $similarity = static::similarity(
+                        static::substr($first, 0, $pos1),
+                        static::substr($second, 0, $pos2)
+                    );
+                    $matches += $similarity['matches'];
+                }
+
+                if (($pos1 + $max < $len1) && ($pos2 + $max < $len2)) {
+                    $similarity = static::similarity(
+                        static::substr($first, $pos1 + $max, $len1 - $pos1 - $max),
+                        static::substr($second, $pos2 + $max, $len2 - $pos2 - $max)
+                    );
+                    $matches += $similarity['matches'];
+                }
+            }
+
+            $percent = ($matches * 200.0) / ($len1 + $len2);
+        }
+
+        return compact('matches', 'percent');
+    }
+
+    /**
      * Convert a string to snake case.
      *
      * @param string $value
@@ -957,7 +1029,7 @@ class Str
      * @param mixed $type
      * @return mixed
      */
-    public static function toType($string = null, $type)
+    public static function toType($string, $type)
     {
         if (is_string($type) === false) {
             $type = gettype($type);

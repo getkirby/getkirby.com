@@ -1,3 +1,1 @@
-<svg viewBox="0 0 16 16" width="16" height="16" class="icon icon-readme">
-  <path d="M3 6h4v1h-4v-1zM3 9h4v-1h-4v1zM3 11h4v-1h-4v1zM14 6h-4v1h4v-1zM14 8h-4v1h4v-1zM14 10h-4v1h4v-1zM16 4v9c0 0.552-0.448 1-1 1h-5.5l-1 1-1-1h-5.5c-0.552 0-1-0.448-1-1v-9c0-0.552 0.448-1 1-1h5.5l1 1 1-1h5.5c0.552 0 1 0.448 1 1zM8 4.5l-0.5-0.5h-5.5v9h6v-8.5zM15 4h-5.5l-0.5 0.5v8.5h6v-9z"></path>
-</svg>
+<svg width="16" height="16" class="icon icon-readme"><path d="M3 6h4v1H3V6zm0 3h4V8H3v1zm0 2h4v-1H3v1zm11-5h-4v1h4V6zm0 2h-4v1h4V8zm0 2h-4v1h4v-1zm2-6v9a1 1 0 01-1 1H9.5l-1 1-1-1H2a1 1 0 01-1-1V4a1 1 0 011-1h5.5l1 1 1-1H15a1 1 0 011 1zm-8 .5L7.5 4H2v9h6V4.5zm7-.5H9.5l-.5.5V13h6V4z"/></svg>

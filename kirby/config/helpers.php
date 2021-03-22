@@ -5,6 +5,7 @@ use Kirby\Cms\Asset;
 use Kirby\Cms\Html;
 use Kirby\Cms\Response;
 use Kirby\Cms\Url;
+use Kirby\Exception\InvalidArgumentException;
 use Kirby\Toolkit\Escape;
 use Kirby\Toolkit\F;
 use Kirby\Toolkit\I18n;
@@ -66,16 +67,16 @@ function csrf(string $check = null)
     if (func_num_args() === 0) {
         // no arguments, generate/return a token
 
-        $token = $session->get('csrf');
+        $token = $session->get('kirby.csrf');
         if (is_string($token) !== true) {
             $token = bin2hex(random_bytes(32));
-            $session->set('csrf', $token);
+            $session->set('kirby.csrf', $token);
         }
 
         return $token;
-    } elseif (is_string($check) === true && is_string($session->get('csrf')) === true) {
+    } elseif (is_string($check) === true && is_string($session->get('kirby.csrf')) === true) {
         // argument has been passed, check the token
-        return hash_equals($session->get('csrf'), $check) === true;
+        return hash_equals($session->get('kirby.csrf'), $check) === true;
     }
 
     return false;
@@ -110,7 +111,7 @@ function css($url, $options = null): ?string
         }
     }
 
-    $url  = $kirby->component('css')($kirby, $url, $options);
+    $url  = ($kirby->component('css'))($kirby, $url, $options);
     $url  = Url::to($url);
     $attr = array_merge((array)$options, [
         'href' => $url,
@@ -136,30 +137,34 @@ function deprecated(string $message): bool
     return false;
 }
 
-/**
- * Simple object and variable dumper
- * to help with debugging.
- *
- * @param mixed $variable
- * @param bool $echo
- * @return string
- */
-function dump($variable, bool $echo = true): string
-{
-    $kirby = App::instance();
-    return $kirby->component('dump')($kirby, $variable, $echo);
+if (function_exists('dump') === false) {
+    /**
+     * Simple object and variable dumper
+     * to help with debugging.
+     *
+     * @param mixed $variable
+     * @param bool $echo
+     * @return string
+     */
+    function dump($variable, bool $echo = true): string
+    {
+        $kirby = App::instance();
+        return ($kirby->component('dump'))($kirby, $variable, $echo);
+    }
 }
 
-/**
- * Smart version of echo with an if condition as first argument
- *
- * @param mixed $condition
- * @param mixed $value The string to be echoed if the condition is true
- * @param mixed $alternative An alternative string which should be echoed when the condition is false
- */
-function e($condition, $value, $alternative = null)
-{
-    echo r($condition, $value, $alternative);
+if (function_exists('e') === false) {
+    /**
+     * Smart version of echo with an if condition as first argument
+     *
+     * @param mixed $condition
+     * @param mixed $value The string to be echoed if the condition is true
+     * @param mixed $alternative An alternative string which should be echoed when the condition is false
+     */
+    function e($condition, $value, $alternative = null)
+    {
+        echo r($condition, $value, $alternative);
+    }
 }
 
 /**
@@ -215,7 +220,7 @@ function gist(string $url, string $file = null): string
  * @param int $code
  * @return void
  */
-function go(string $url = null, int $code = 302)
+function go(string $url = '/', int $code = 302)
 {
     die(Response::redirect($url, $code));
 }
@@ -378,7 +383,7 @@ function js($url, $options = null): ?string
         }
     }
 
-    $url  = $kirby->component('js')($kirby, $url, $options);
+    $url  = ($kirby->component('js'))($kirby, $url, $options);
     $url  = Url::to($url);
     $attr = array_merge((array)$options, ['src' => $url]);
 
@@ -619,7 +624,7 @@ function site()
 function size($value): int
 {
     if (is_numeric($value)) {
-        return $value;
+        return (int)$value;
     }
 
     if (is_string($value)) {
@@ -639,6 +644,8 @@ function size($value): int
             return $value->count();
         }
     }
+
+    throw new InvalidArgumentException('Could not determine the size of the given value');
 }
 
 /**
@@ -705,10 +712,6 @@ function svg($file)
     if (file_exists($file) === false) {
         $root = App::instance()->root();
         $file = realpath($root . '/' . $file);
-
-        if (file_exists($file) === false) {
-            return false;
-        }
     }
 
     return F::read($file);
@@ -743,10 +746,10 @@ function tc($key, int $count)
  * by the defined step
  *
  * @param string $date
- * @param int $step
- * @return string|null
+ * @param int $step array of `unit` and `size` to round to nearest
+ * @return int|null
  */
-function timestamp(string $date = null, int $step = null): ?string
+function timestamp(string $date = null, $step = null): ?int
 {
     if (V::date($date) === false) {
         return null;
@@ -758,13 +761,50 @@ function timestamp(string $date = null, int $step = null): ?string
         return $date;
     }
 
-    $hours   = date('H', $date);
-    $minutes = date('i', $date);
-    $minutes = floor($minutes / $step) * $step;
-    $minutes = str_pad($minutes, 2, 0, STR_PAD_LEFT);
-    $date    = date('Y-m-d', $date) . ' ' . $hours . ':' . $minutes;
+    // fallback for pre-3.5.0 usage
+    if (is_int($step) === true) {
+        $step = [
+            'unit' => 'minute',
+            'size' => $step
+        ];
+    }
 
-    return strtotime($date);
+    if (is_array($step) === false) {
+        return $date;
+    }
+
+    $parts = [
+        'second' => date('s', $date),
+        'minute' => date('i', $date),
+        'hour'   => date('H', $date),
+        'day'    => date('d', $date),
+        'month'  => date('m', $date),
+        'year'   => date('Y', $date),
+    ];
+
+    $current = $parts[$step['unit']];
+    $nearest = round($current / $step['size']) * $step['size'];
+    $parts[$step['unit']] = $nearest;
+
+    foreach ($parts as $part => $value) {
+        if ($part === $step['unit']) {
+            break;
+        }
+
+        $parts[$part] = 0;
+    }
+
+    $timestamp = strtotime(
+        $parts['year'] . '-' .
+        str_pad($parts['month'], 2, 0, STR_PAD_LEFT) . '-' .
+        str_pad($parts['day'], 2, 0, STR_PAD_LEFT) . ' ' .
+        str_pad($parts['hour'], 2, 0, STR_PAD_LEFT) . ':' .
+        str_pad($parts['minute'], 2, 0, STR_PAD_LEFT) . ':' .
+        str_pad($parts['second'], 2, 0, STR_PAD_LEFT)
+    );
+
+    // on error, convert `false` into `null`
+    return $timestamp ? $timestamp : null;
 }
 
 /**
@@ -824,6 +864,36 @@ function url(string $path = null, $options = null): string
 {
     return Url::to($path, $options);
 }
+
+/**
+ * Creates a compliant v4 UUID
+ * Taken from: https://github.com/symfony/polyfill
+ *
+ * @return string
+ */
+function uuid(): string
+{
+    $uuid = bin2hex(random_bytes(16));
+
+    return sprintf(
+        '%08s-%04s-4%03s-%04x-%012s',
+        // 32 bits for "time_low"
+        substr($uuid, 0, 8),
+        // 16 bits for "time_mid"
+        substr($uuid, 8, 4),
+        // 16 bits for "time_hi_and_version",
+        // four most significant bits holds version number 4
+        substr($uuid, 13, 3),
+        // 16 bits:
+        // * 8 bits for "clk_seq_hi_res",
+        // * 8 bits for "clk_seq_low",
+        // two most significant bits holds zero and one for variant DCE1.1
+        hexdec(substr($uuid, 16, 4)) & 0x3fff | 0x8000,
+        // 48 bits for "node"
+        substr($uuid, 20, 12)
+    );
+}
+
 
 /**
  * Creates a video embed via iframe for Youtube or Vimeo

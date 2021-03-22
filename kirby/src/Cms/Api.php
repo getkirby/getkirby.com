@@ -41,8 +41,11 @@ class Api extends BaseApi
 
         $allowImpersonation = $this->kirby()->option('api.allowImpersonation', false);
         if ($user = $this->kirby->user(null, $allowImpersonation)) {
-            $this->kirby->setCurrentTranslation($user->language());
+            $translation = $user->language();
+        } else {
+            $translation = $this->kirby->panelLanguage();
         }
+        $this->kirby->setCurrentTranslation($translation);
 
         return parent::call($path, $method, $requestData);
     }
@@ -56,28 +59,7 @@ class Api extends BaseApi
      */
     public function fieldApi($model, string $name, string $path = null)
     {
-        $form       = Form::for($model);
-        $fieldNames = Str::split($name, '+');
-        $index      = 0;
-        $count      = count($fieldNames);
-        $field      = null;
-
-        foreach ($fieldNames as $fieldName) {
-            $index++;
-
-            if ($field = $form->fields()->get($fieldName)) {
-                if ($count !== $index) {
-                    $form = $field->form();
-                }
-            } else {
-                throw new NotFoundException('The field "' . $fieldName . '" could not be found');
-            }
-        }
-
-        // it can get this error only if $name is an empty string as $name = ''
-        if ($field === null) {
-            throw new NotFoundException('No field could be loaded');
-        }
+        $field = Form::for($model)->field($name);
 
         $fieldApi = $this->clone([
             'routes' => $field->api(),
@@ -210,6 +192,53 @@ class Api extends BaseApi
                 'slug' => $id
             ]
         ]);
+    }
+
+    /**
+     * Returns the subpages for the given
+     * parent. The subpages can be filtered
+     * by status (draft, listed, unlisted, published, all)
+     *
+     * @param string|null $parentId
+     * @param string|null $status
+     * @return \Kirby\Cms\Pages
+     */
+    public function pages(string $parentId = null, string $status = null)
+    {
+        $parent = $parentId === null ? $this->site() : $this->page($parentId);
+
+        switch ($status) {
+            case 'all':
+                return $parent->childrenAndDrafts();
+            case 'draft':
+            case 'drafts':
+                return $parent->drafts();
+            case 'listed':
+                return $parent->children()->listed();
+            case 'unlisted':
+                return $parent->children()->unlisted();
+            case 'published':
+            default:
+                return $parent->children();
+        }
+    }
+
+    /**
+     * Search for direct subpages of the
+     * given parent
+     *
+     * @param string|null $parent
+     * @return \Kirby\Cms\Pages
+     */
+    public function searchPages(string $parent = null)
+    {
+        $pages = $this->pages($parent, $this->requestQuery('status'));
+
+        if ($this->requestMethod() === 'GET') {
+            return $pages->search($this->requestQuery('q'));
+        }
+
+        return $pages->query($this->requestBody());
     }
 
     /**

@@ -71,10 +71,13 @@ class F
         ],
         'image' => [
             'ai',
+            'avif',
             'bmp',
             'gif',
             'eps',
             'ico',
+            'j2k',
+            'jp2',
             'jpeg',
             'jpg',
             'jpe',
@@ -522,9 +525,12 @@ class F
      * Converts an integer size into a human readable format
      *
      * @param mixed $size The file size or a file path
-     * @return string|int
+     * @param string|null|false $locale Locale for number formatting,
+     *                                  `null` for the current locale,
+     *                                  `false` to disable number formatting
+     * @return string
      */
-    public static function niceSize($size): string
+    public static function niceSize($size, $locale = null): string
     {
         // file mode
         if (is_string($size) === true && file_exists($size) === true) {
@@ -536,21 +542,37 @@ class F
 
         // avoid errors for invalid sizes
         if ($size <= 0) {
-            return '0 KB';
+            return '0 KB';
         }
 
         // the math magic
-        return round($size / pow(1024, ($i = floor(log($size, 1024)))), 2) . ' ' . static::$units[$i];
+        $size = round($size / pow(1024, ($unit = floor(log($size, 1024)))), 2);
+
+        // format the number if requested
+        if ($locale !== false) {
+            $size = I18n::formatNumber($size, $locale);
+        }
+
+        return $size . ' ' . static::$units[$unit];
     }
 
     /**
-     * Reads the content of a file
+     * Reads the content of a file or requests the
+     * contents of a remote HTTP or HTTPS URL
      *
-     * @param string $file The path for the file
+     * @param string $file The path for the file or an absolute URL
      * @return string|false
      */
     public static function read(string $file)
     {
+        if (
+            is_file($file) !== true &&
+            Str::startsWith($file, 'https://') !== true &&
+            Str::startsWith($file, 'http://') !== true
+        ) {
+            return false;
+        }
+
         return @file_get_contents($file);
     }
 
@@ -576,7 +598,7 @@ class F
             return $newRoot;
         }
 
-        if (F::move($file, $newRoot) !== true) {
+        if (F::move($file, $newRoot, $overwrite) !== true) {
             return false;
         }
 
@@ -759,6 +781,18 @@ class F
         }
 
         return null;
+    }
+
+    /**
+     * Returns all extensions of a given file type
+     * or `null` if the file type is unknown
+     *
+     * @param string $type
+     * @return array|null
+     */
+    public static function typeToExtensions(string $type): ?array
+    {
+        return static::$types[$type] ?? null;
     }
 
     /**

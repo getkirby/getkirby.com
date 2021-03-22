@@ -15,8 +15,8 @@ return [
     'cachebuster' => [
         'mode' => 'path'
     ],
-    'cloudinary' => true,
     'keycdn' => [
         'domain' => 'https://assets.getkirby.com',
-    ]
+    ],
+    'referenceLookup' => true
 ];

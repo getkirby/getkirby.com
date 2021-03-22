@@ -3,6 +3,7 @@
 namespace Kirby\Toolkit;
 
 use Closure;
+use NumberFormatter;
 
 /**
  * Localization class, roughly inspired by VueI18n
@@ -37,28 +38,51 @@ class I18n
     public static $translations = [];
 
     /**
-     * The fallback locale
+     * The fallback locale or a
+     * list of fallback locales
      *
-     * @var string
+     * @var string|array
      */
-    public static $fallback = 'en';
+    public static $fallback = ['en'];
 
     /**
-     * Returns the fallback code
+     * Cache of `NumberFormatter` objects by locale
+     *
+     * @var array
+     */
+    protected static $decimalsFormatters = [];
+
+    /**
+     * Returns the first fallback locale
+     *
+     * @deprecated 3.5.1 Use \Kirby\Toolkit\I18n::fallbacks() instead
      *
      * @return string
      */
     public static function fallback(): string
     {
-        if (is_string(static::$fallback) === true) {
-            return static::$fallback;
+        return static::fallbacks()[0];
+    }
+
+    /**
+     * Returns the list of fallback locales
+     *
+     * @return array
+     */
+    public static function fallbacks(): array
+    {
+        if (
+            is_array(static::$fallback) === true ||
+            is_string(static::$fallback) === true
+        ) {
+            return A::wrap(static::$fallback);
         }
 
         if (is_callable(static::$fallback) === true) {
-            return static::$fallback = (static::$fallback)();
+            return static::$fallback = A::wrap((static::$fallback)());
         }
 
-        return static::$fallback = 'en';
+        return static::$fallback = ['en'];
     }
 
     /**
@@ -76,6 +100,25 @@ class I18n
         }
 
         return $count === 1 ? 'singular' : 'plural';
+    }
+
+    /**
+     * Formats a number
+     *
+     * @param int|float $number
+     * @param string $locale
+     * @return string
+     */
+    public static function formatNumber($number, string $locale = null): string
+    {
+        $locale = $locale ?? static::locale();
+
+        $formatter = static::decimalNumberFormatter($locale);
+        if ($formatter !== null) {
+            $number = $formatter->format($number);
+        }
+
+        return (string)$number;
     }
 
     /**
@@ -127,8 +170,15 @@ class I18n
             return $fallback;
         }
 
-        if ($locale !== static::fallback()) {
-            return static::translation(static::fallback())[$key] ?? null;
+        foreach (static::fallbacks() as $fallback) {
+            // skip locales we have already tried
+            if ($locale === $fallback) {
+                continue;
+            }
+
+            if ($translation = static::translation($fallback)[$key] ?? null) {
+                return $translation;
+            }
         }
 
         return null;
@@ -139,12 +189,12 @@ class I18n
      * placeholders in the text
      *
      * @param string $key
-     * @param string $fallback
-     * @param array $replace
-     * @param string $locale
+     * @param string|array|null $fallback
+     * @param array|null $replace
+     * @param string|null $locale
      * @return string
      */
-    public static function template(string $key, $fallback = null, array $replace = null, string $locale = null)
+    public static function template(string $key, $fallback = null, ?array $replace = null, ?string $locale = null): string
     {
         if (is_array($fallback) === true) {
             $replace  = $fallback;
@@ -190,6 +240,24 @@ class I18n
     }
 
     /**
+     * Returns (and creates) a decimal number formatter for a given locale
+     *
+     * @return \NumberFormatter|null
+     */
+    protected static function decimalNumberFormatter(string $locale): ?NumberFormatter
+    {
+        if (isset(static::$decimalsFormatters[$locale])) {
+            return static::$decimalsFormatters[$locale];
+        }
+
+        if (extension_loaded('intl') !== true || class_exists('NumberFormatter') !== true) {
+            return null; // @codeCoverageIgnore
+        }
+
+        return static::$decimalsFormatters[$locale] = new NumberFormatter($locale, NumberFormatter::DECIMAL);
+    }
+
+    /**
      * Translates amounts
      *
      * Translation definition options:
@@ -202,10 +270,13 @@ class I18n
      * @param string $key
      * @param int $count
      * @param string $locale
+     * @param bool $formatNumber If set to `false`, the count is not formatted
      * @return mixed
      */
-    public static function translateCount(string $key, int $count, string $locale = null)
+    public static function translateCount(string $key, int $count, string $locale = null, bool $formatNumber = true)
     {
+        $locale = $locale ?? static::locale();
+
         $translation = static::translate($key, null, $locale);
 
         if ($translation === null) {
@@ -224,6 +295,10 @@ class I18n
             } else {
                 $message = end($translation);
             }
+        }
+
+        if ($formatNumber === true) {
+            $count = static::formatNumber($count, $locale);
         }
 
         return str_replace('{{ count }}', $count, $message);

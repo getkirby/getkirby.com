@@ -60,6 +60,21 @@ $kirby->collection("admins");
 $kirby->collection("project-covers");
 ```
 
+You can loop through the collections like through any collection like this:
+
+```php
+<?php 
+foreach($kirby->collection('articles') as $article) {
+	echo $article->title()->html();
+}
+?>
+```
+Or store the collection in a variable for further use:
+
+```php
+$articles = $kirby->collection('articles');
+```
+
 ### Nested collections
 
 <since v="3.1.0">

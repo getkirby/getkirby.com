@@ -40,6 +40,7 @@ class LanguageRoutes
 
                     // jump through to the fallback if nothing
                     // can be found for this language
+                    /** @var \Kirby\Http\Route $this */
                     $this->next();
                 }
             ];
@@ -116,7 +117,7 @@ class LanguageRoutes
             'action'  => function () use ($kirby) {
 
                 // find all languages with the same base url as the current installation
-                $languages = $kirby->languages()->filterBy('baseurl', $kirby->url());
+                $languages = $kirby->languages()->filter('baseurl', $kirby->url());
 
                 // if there's no language with a matching base url,
                 // redirect to the default language

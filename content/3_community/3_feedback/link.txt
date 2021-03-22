@@ -1,0 +1,5 @@
+Title: Feature requests
+
+----
+
+Link: https://feedback.getkirby.com

@@ -65,11 +65,16 @@ return [
 Repeat for every new language you want to use.
 
 <info>
-If you don't use the Panel, you have to add the language extension to your text files manually.
+If you encounter issues with functions like `strftime` that depend on the locale setting, you might have to add a suffix to the locale code that specifies the encoding format. Depending on your operating system and setup, try adding e.g. `.utf-8` to your locale codes. Some operating systems however use different notations such as `.UTF-8` or `.UTF8`.
+
+You can list all available locales on your system by typing `locale -a` on the command line.
 </info>
 
-### Via the Panel
+<warning>
+If you don't use the Panel, you have to add the language extension to your text files manually. The language extension is **mandatory**, otherwise Kirby will not work as expected.
+</warning>
 
+### Via the Panel
 
 After enabling languages in your config as described above, you can find the language setup on the Panel in the "Settings" page.
 
@@ -116,6 +121,10 @@ return [
     'url' => '/'
 ];
 ```
+
+<info>
+Using the root URL for the default language will disable [automatic language detection](#automatic-language-detection).
+</info>
 
 ## Using different domains for each language
 

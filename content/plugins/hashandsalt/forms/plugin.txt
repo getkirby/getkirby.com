@@ -1,0 +1,14 @@
+Title: Forms
+
+----
+
+Repository: https://github.com/HashandSalt/kirby3-forms
+
+----
+
+Category: templating
+
+----
+
+Description: A small plugin for creating HTML forms more easily.
+

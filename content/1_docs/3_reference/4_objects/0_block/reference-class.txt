@@ -1,0 +1,6 @@
+Class: Kirby\Cms\Block
+
+----
+
+Text:
+
