@@ -12,7 +12,7 @@ A visual editor for complex multi-column layouts
 
 ----
 
-Guide: blueprints/fields
+Guide: blueprints/layout
 
 ----
 
