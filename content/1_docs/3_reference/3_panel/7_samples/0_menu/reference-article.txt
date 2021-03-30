@@ -63,7 +63,7 @@ fields:
 
 ### Controller
 
-```php "site/controllers/menu.php
+```php "site/controllers/menu.php"
 <?php
 return function () {
     $categories = [
@@ -80,7 +80,7 @@ return function () {
 
 ### Template
 
-```php "site/templates/menu.php
+```php "site/templates/menu.php"
 <?php snippet('header') ?>
 
 <main class="restaurant-menu">
