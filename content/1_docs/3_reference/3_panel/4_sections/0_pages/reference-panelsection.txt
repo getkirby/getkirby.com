@@ -147,7 +147,7 @@ info: " {{ page.date.toDate('Y-m-d') }}"
 The (preview) image for each item in the list is configured with the `image` option:
 
 ```yaml
-image: page.image.findBy("name", "cover")
+image: page.images.findBy("name", "cover")
 ```
 
 <info>
