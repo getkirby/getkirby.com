@@ -2,7 +2,6 @@ Title: Virtual pages from image gallery
 
 ----
 
-
 Published: 2021-03-25
 
 ----
@@ -30,19 +29,19 @@ Thanks to virtual pages in Kirby, we can, and that with little more code than wh
 ## Files we will create in this recipe
 
 ### Blueprints
-- site/blueprint/pages/gallery.yml
-- site/blueprint/files/gallery-image.yml
+- /site/blueprint/pages/gallery.yml
+- /site/blueprint/files/gallery-image.yml
 
 ### Templates
-- site/templates/gallery.php
-- site/templates/gallery-image.php
+- /site/templates/gallery.php
+- /site/templates/gallery-image.php
 
 ### Models
-- site/models/gallery.php
-- site/models/gallery-image.php
+- /site/models/gallery.php
+- /site/models/gallery-image.php
 
 ### Plugin (optional)
-- site/plugins/virtual-gallery/index.php
+- /site/plugins/virtual-gallery/index.php
 
 <info>
 At the end of this recipe we will wrap all this code into a plugin. So if you prefer to start with that structure right from the beginning, you will find the folder structure (link: #final-result text: below).
@@ -113,7 +112,7 @@ We are ready to view our spectacular little gallery on the frontend.
 (screenshot: gallery-overview.png)
 
 
-If you look closely, you will notice that we currently output the images of the page and the `href` attribute points to the image URL itself. If you click on any of the links, the browser will open the single file in a new tab or window, but not in the context of a new page. That's not really what we want, and we'll of course fix that later. 
+If you look closely, you will notice that we currently output the images of the page and the `href` attribute points to the image URL itself. If you click on any of the links, the browser will open the single file in a new tab or window, but not in the context of a new page. That's not really what we want, and we'll of course fix that later.
 
 So next, let's go tell Kirby that we want these images to be children of the gallery page.
 
@@ -128,23 +127,21 @@ In a (glossary: model), we can however overwrite this method and thus change wha
 
 class GalleryPage extends Page
 {
+  public function children()
+  {
+    $images = [];
 
-public function children()
-{
-  $images = [];
+    foreach ($this->images()->template('gallery-image') as $image) {
+      $images[] = [
+        'slug'     => $image->name(),
+        'num'      => $image->sort()->value(),
+        'template' => 'gallery-image',
+        'model'    => 'gallery-image',
+      ];
+    }
 
-  foreach ($this->images()->template( 'gallery-image' ) as $image) {
-    $images[] = [
-      'slug'     => $image->name(),
-      'num'      => $image->sort()->value(),
-      'template' => 'gallery-image',
-      'model'    => 'gallery-image',
-    ];
+    return Pages::factory($images, $this);
   }
-
-  return Pages::factory($images, $this);
-  }
-
 }
 ```
 
@@ -185,7 +182,7 @@ With this model in place, we can now modify our `gallery.php` template and outpu
 
 Instead of looping through the images as before, we now loop through the children (and just output the URL for the moment).
 
-But if we open this page in the browser, all we see is some url strings ( or black rectangles if you used the Starterkit) instead of the images we had before. But if we click on one of the links, the new virtual subpage opens with the file's name as title (and otherwise almost empty). We are getting there…
+But if we open this page in the browser, all we see is some url strings (or black rectangles if you used the Starterkit) instead of the images we had before. But if we click on one of the links, the new virtual subpage opens with the file's name as title (and otherwise almost empty). We are getting there…
 
 ## Fetch image
 
@@ -196,15 +193,14 @@ How do we get the images back? We need another page model for the child pages th
 
 class GalleryImagePage extends Page
 {
-
   public function image(?string $filename = null)
   {
-    if ( ! $filename ) {
+    if (!$filename) {
        // since filterBy() returns a collection, we fetch the first item
       return $this->parent()->images()->template('gallery-image')->filterBy('name', $this->slug())->first();
     }
-    return parent::image($filename);
 
+    return parent::image($filename);
   }
 }
 ```
@@ -282,12 +278,11 @@ Since we want to access the file meta data as if it was page data, we have to ma
 
 class GalleryPage extends Page
 {
-
   public function children()
   {
     $images = [];
 
-    foreach ($this->images()->template( 'gallery-image' ) as $image) {
+    foreach ($this->images()->template('gallery-image') as $image) {
       $images[] = [
         'slug'     => $image->name(),
         'num'      => $image->sort()->value(),
@@ -306,7 +301,6 @@ class GalleryPage extends Page
 
     return Pages::factory($images, $this);
   }
-
 }
 ```
 
@@ -314,8 +308,9 @@ class GalleryPage extends Page
 
 With the page model complete, let's set out to create a template for the children pages.
 
-```php "/site/templates/gallery-image.php
+```php "/site/templates/gallery-image.php"
 <?php snippet('header') ?>
+
 <?php if ($image = $page->image()) : ?>
   <a href="<?= $image->crop(1200, 600)->url() ?>" data-lightbox class="img margin-s" style="--w:2; --h:1">
     <?= $image ?>
@@ -351,7 +346,6 @@ With the page model complete, let's set out to create a template for the childre
       </nav>
     </div>
   </div>
-
 </article>
 
 <?php snippet('footer') ?>
@@ -377,14 +371,15 @@ Inside the `/plugins` folder, create a folder `virtual-gallery` with the followi
 ```php "/site/plugins/file-component/index.php"
 <?php
 Kirby::plugin('cookbook/virtual-gallery', [
-  'components'   => [
+  'components' => [
     'file::url' => function (Kirby $kirby, $file) {
-      if ($kirby->visitor()->prefersJson() &&   $file->parent()->slug() === 'gallery' ) {
+      if ($kirby->visitor()->prefersJson() && $file->parent()->slug() === 'gallery') {
           return $kirby->url() . '/' . $file->parent()->slug() . '/' . $file->name();
       }
+
       return $file->mediaUrl();
-    },
-  ],
+    }
+  ]
 ]);
 ```
 
@@ -413,9 +408,9 @@ plugins/
     index.php
 ```
 
-### `index.php``
+### `index.php`
 
-```php "/site/plugins/virtual-gallery/index.php
+```php "/site/plugins/virtual-gallery/index.php"
 <?php
 use Kirby\Cms\App as Kirby;
 
@@ -424,32 +419,33 @@ require __DIR__ . '/models/GalleryImage.php';
 
 Kirby::plugin('cookbook/virtual-gallery', [
   'blueprints' => [
-    'pages/gallery' => __DIR__ . '/blueprints/pages/gallery.yml',
+    'pages/gallery'       => __DIR__ . '/blueprints/pages/gallery.yml',
     'pages/gallery-image' => __DIR__ . '/blueprints/pages/gallery-image.yml',
     'files/gallery-image' => __DIR__ . '/blueprints/files/gallery-image.yml',
   ],
   'pageModels' => [
-    'gallery'      => 'GalleryPage',
+    'gallery'       => 'GalleryPage',
     'gallery-image' => 'GalleryImagePage',
   ],
   'templates' => [
     'gallery'       => __DIR__ . '/templates/gallery.php',
     'gallery-image' => __DIR__ . '/templates/gallery-image.php',
   ],
-  'components'   => [
+  'components' => [
     'file::url' => function (Kirby $kirby, $file) {
-      if ($kirby->visitor()->prefersJson() &&   $file->parent()->slug() === 'gallery' ) {
+      if ($kirby->visitor()->prefersJson() && $file->parent()->slug() === 'gallery') {
           return $kirby->url() . '/' . $file->parent()->slug() . '/' . $file->name();
       }
+
       return $file->mediaUrl();
-    },
-  ],
+    }
+  ]
 ]);
 ```
 
 ### `gallery.yml` page blueprint
 
-```yaml "/site/plugins/virtual-gallery/blueprints/pages/gallery.yml
+```yaml "/site/plugins/virtual-gallery/blueprints/pages/gallery.yml"
 title: Gallery
 
 sections:
@@ -467,7 +463,7 @@ sections:
 
 ### `gallery-image.yml` file blueprint
 
-```yaml "/site/plugins/virtual-gallery/blueprints/files/gallery.yml
+```yaml "/site/plugins/virtual-gallery/blueprints/files/gallery.yml"
 title: Gallery Image
 
 columns:
@@ -499,7 +495,7 @@ columns:
 
 ### Gallery model
 
-```php "/site/plugins/virtual-gallery/models/Gallery.php
+```php "/site/plugins/virtual-gallery/models/Gallery.php"
 <?php
 
 use Kirby\Cms\Page;
@@ -507,58 +503,55 @@ use Kirby\Cms\Pages;
 
 class GalleryPage extends Page
 {
+  public function children()
+  {
+    $images = [];
 
-public function children()
-{
-  $images = [];
+    foreach ($this->images()->template('gallery-image') as $image) {
+      $images[] = [
+        'slug'     => $image->name(),
+        'num'      => $image->sort()->value(), // or use the image sort number here if available
+        'template' => 'gallery-image',
+        'model'    => 'gallery-image',
+        'content'  => [
+          'title'        => $image->title()->value(),
+          'subheading'   => $image->subheading()->value(),
+          'story'        => $image->story()->value(),
+          'date'         => $image->date()->value(),
+          'photographer' => $image->photographer()->value(),
+          'place'        => $image->place()->value(),
+        ],
+      ];
+    }
 
-  foreach ($this->images()->template( 'gallery-image' ) as $image) {
-    $images[] = [
-      'slug'     => $image->name(),
-      'num'      => $image->sort()->value(), // or use the image sort number here if available
-      'template' => 'gallery-image',
-      'model'    => 'gallery-image',
-      'content'  => [
-        'title'        => $image->title()->value(),
-        'subheading'   => $image->subheading()->value(),
-        'story'        => $image->story()->value(),
-        'date'         => $image->date()->value(),
-        'photographer' => $image->photographer()->value(),
-        'place'        => $image->place()->value(),
-      ],
-    ];
+    return Pages::factory($images, $this);
   }
-
-  return Pages::factory($images, $this);
-  }
-
 }
 ```
 
 ### GalleryImage model
 
-```php "/site/plugins/virtual-gallery/models/GalleryImage.php
+```php "/site/plugins/virtual-gallery/models/GalleryImage.php"
 <?php
 
 use Kirby\Cms\Page;
 
 class GalleryImagePage extends Page
 {
-
   public function image(?string $filename = null)
   {
-    if ( ! $filename ) {
+    if (!$filename) {
       return $this->parent()->images()->template('gallery-image')->filterBy('name', $this->slug())->first();
     }
-    return parent::filename($filename);
 
+    return parent::filename($filename);
   }
 }
 ```
 
 ### `gallery.php` template
 
-```php "/site/plugins/virtual-gallery/templates/gallery.php
+```php "/site/plugins/virtual-gallery/templates/gallery.php"
 <?php snippet('header') ?>
 <?php snippet('intro') ?>
 
@@ -583,8 +576,9 @@ class GalleryImagePage extends Page
 
 ### `gallery-image` template
 
-```php "/site/plugins/virtual-gallery/templates/gallery-image.php
+```php "/site/plugins/virtual-gallery/templates/gallery-image.php"
 <?php snippet('header') ?>
+
 <?php if ($image = $page->image()) : ?>
   <a href="<?= $image->crop(1200, 600)->url() ?>" data-lightbox class="img margin-s" style="--w:2; --h:1">
     <?= $image ?>
@@ -620,12 +614,10 @@ class GalleryImagePage extends Page
       </nav>
     </div>
   </div>
-
 </article>
 
 <?php snippet('footer') ?>
 ```
-
 
 ## Further reading
 
