@@ -2,7 +2,7 @@ Title: FormBuilder
 
 ----
 
-Repository: https://gitlab.com/kirbyzone/formbuilder
+Repository: https://github.com/kirbyzone/formbuilder
 
 ----
 
