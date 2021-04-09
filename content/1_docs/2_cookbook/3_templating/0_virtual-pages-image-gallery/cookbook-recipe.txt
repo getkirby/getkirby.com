@@ -2,7 +2,7 @@ Title: Virtual pages from image gallery
 
 ----
 
-Published: 2021-03-25
+Published: 2021-04-09
 
 ----
 
@@ -196,8 +196,7 @@ class GalleryImagePage extends Page
   public function image(?string $filename = null)
   {
     if (!$filename) {
-       // since filterBy() returns a collection, we fetch the first item
-      return $this->parent()->images()->template('gallery-image')->filterBy('name', $this->slug())->first();
+      return $this->parent()->images()->template('gallery-image')->findBy('name', $this->slug());
     }
 
     return parent::image($filename);
@@ -288,14 +287,7 @@ class GalleryPage extends Page
         'num'      => $image->sort()->value(),
         'template' => 'gallery-image',
         'model'    => 'gallery-image',
-        'content'  => [
-          'title'        => $image->title()->value(),
-          'subheading'   => $image->subheading()->value(),
-          'story'        => $image->story()->value(),
-          'date'         => $image->date()->value(),
-          'photographer' => $image->photographer()->value(),
-          'place'        => $image->place()->value(),
-        ],
+        'content'  => $image->content()->toArray(),
       ];
     }
 
@@ -513,14 +505,7 @@ class GalleryPage extends Page
         'num'      => $image->sort()->value(), // or use the image sort number here if available
         'template' => 'gallery-image',
         'model'    => 'gallery-image',
-        'content'  => [
-          'title'        => $image->title()->value(),
-          'subheading'   => $image->subheading()->value(),
-          'story'        => $image->story()->value(),
-          'date'         => $image->date()->value(),
-          'photographer' => $image->photographer()->value(),
-          'place'        => $image->place()->value(),
-        ],
+        'content'  => $image->content()->toArray(),
       ];
     }
 
@@ -541,7 +526,7 @@ class GalleryImagePage extends Page
   public function image(?string $filename = null)
   {
     if (!$filename) {
-      return $this->parent()->images()->template('gallery-image')->filterBy('name', $this->slug())->first();
+      return $this->parent()->images()->template('gallery-image')->findBy('name', $this->slug());
     }
 
     return parent::filename($filename);
