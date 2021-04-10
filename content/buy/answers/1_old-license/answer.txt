@@ -1,5 +1,0 @@
-Title: Can I still buy a v2 license?
-----
-Text:
-
-We no longer sell the old licenses, but you can buy a v3 license and get in contact with us to use it for a v2 installation: <support@getkirby.com>
