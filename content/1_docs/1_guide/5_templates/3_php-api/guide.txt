@@ -31,3 +31,28 @@ There are a lot more classes and objects at play within Kirby. You can find the 
 Some parts of Kirby's PHP API only work if you are logged in (or authenticated in other ways), because they respect the permissions of the currently logged in user. E.g. users cannot update a page via `$page->update()`, unless they are logged in and have adequate permissions. This helps increase the security of your code by blocking operations for unauthorized users.
 
 You can read more about available user permissions as well as how to authenticate or impersonate in the (link: docs/guide/users/permissions text: Users permissions docs ›)
+
+## Immutable objects
+
+Many methods of Kirby objects do not return a string, integer or similar but a Kirby object of the same type. For example, `$page->update()` is a method applied to an object of `Kirby\Cms\Page` and also returns an object of `Kirby\Cms\Page`.
+
+However, it is important to know that most often Kirby's objects are immutable. That means, when you modify an object like `$page`, `$file` etc. using a method like `update()`, `changeTitle()` and so on, a new (cloned) object with changes applied is returned.
+
+Therefore, you have to store the returned object in a new variable to be able to further work with it. Or if you want to continue using the existing object with these new changes, you need to reassign the returned object to the existing variable:
+ 
+
+```php
+// $project would still have the old value
+$project = page('project/project-a');
+$project->update(['year' => 2014]);
+
+// $project has the new value after reassigning
+$project = page('project/project-a');
+$poject  = $project->update(['year' => 2014]);
+```
+
+Some methods can return both, `$this` (the same instance you were calling) and a cloned object (`static` or `self`). In the reference, this case is marked with "$this|static" as the return value in the doc block for the method. `$this` is returned whenever the object wasn't changed (e.g. values remained the same), while a cloned object is returned when the data changed - to keep the original object immutable. Most times, this difference will not affect your code if you always store the return value in a variable and continue working with that variable as explained above.
+
+<warning>
+Keep in mind that, while some methods like `update()`, `changeTitle()` and so on do not modify the PHP object (but return a new one), they immediately change the content file of the existing page, file, ... nevertheless.
+</warning>
