@@ -17,7 +17,7 @@
 
   <h3 id="default-files__blueprint"><a href="#default-files__blueprint">Blueprint</a></h3>
   <?= kt('
-```yaml
+```yaml "/site/blueprints/blocks/' . $page->slug() . '.yml"
 ' . file_get_contents(kirby()->root('kirby') . '/config/blocks/' . $page->slug() . '/' . $page->slug() . '.yml') .'
 ```    
   ') ?>
