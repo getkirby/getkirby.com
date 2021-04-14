@@ -122,13 +122,7 @@ $tags['docs'] = [
         'field'
     ],
     'html' => function ($tag) {
-        $file = $tag->kirby()->root('site') . '/docs/' . $tag->value . '.php';
-
-        if (file_exists($file) === false) {
-            return;
-        }
-
-        $snippet = Tpl::load($file, [
+        $snippet = snippet('docs/' . $tag->value, [
             'page'  => $tag->parent(),
             'field' => $tag->attr('field')
         ]);
