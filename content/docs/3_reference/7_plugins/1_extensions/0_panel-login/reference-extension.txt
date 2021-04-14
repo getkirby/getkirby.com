@@ -93,7 +93,7 @@ panel.plugin('my/auth', {
 </style>
 ```
 
-(screenshot: login-form.png)
+(image: login-form.png)
 </since>
 
 <info>

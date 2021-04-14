@@ -20,7 +20,7 @@ Text:
 
 The Blocks field is the perfect solution for complex single-column layouts and long-form text.
 
-(screenshot: blocks.png)
+(image: blocks.png)
 
 ## Blueprint setup
 
@@ -61,7 +61,7 @@ fields:
     type: blocks
 ```
 
-(screenshot: single.png)
+(image: single.png)
 
 However, you can fully customize the selector for new block types with sorted block types and groups.
 
@@ -82,7 +82,7 @@ fields:
       - markdown
 ```
 
-(screenshot: single-sorted.png)
+(image: single-sorted.png)
 
 ### Groups
 
@@ -116,7 +116,7 @@ fields:
           - markdown
 ```
 
-(screenshot: groups.png)
+(image: groups.png)
 
 ### Closed groups
 
@@ -149,7 +149,7 @@ fields:
           - markdown
 ```
 
-(screenshot: closed-groups.png)
+(image: closed-groups.png)
 
 ## Block types
 
@@ -182,13 +182,13 @@ In the example above, we mix the default block types (heading and text) with our
 
 Custom block types don't have a visual preview by default. They show up with the icon and the name from your blueprint definition.
 
-(screenshot: preview.png)
+(image: preview.png)
 
 ### Editing
 
 To edit a custom block type, editors can either double-tap on the block or click on the edit icon in the toolbar. The block drawer opens with the fields you've defined for the block.
 
-(screenshot: editing.png)
+(image: editing.png)
 
 ### Tabs
 
@@ -222,7 +222,7 @@ fields:
 
 The tabs will then show up in the block drawer.
 
-(screenshot: tabs.png)
+(image: tabs.png)
 
 ### Global block types
 
@@ -302,7 +302,7 @@ To render the HTML for your custom block type in the frontend, create a snippet 
 
 You can turn your custom blocks into highly visual, interactive representations with a custom block preview plugin.
 
-(screenshot: custom-preview.png link: docs/reference/plugins/extensions/blocks)
+(image: custom-preview.png link: docs/reference/plugins/extensions/blocks)
 
 **(link: docs/reference/plugins/extensions/blocks text: Read our plugin guide on how to create such previews.)**
 
@@ -329,7 +329,7 @@ fields:
 
 This will add the `customID` field below the default fields of the block.
 
-(screenshot: custom-id.png)
+(image: custom-id.png)
 
 ### Extending existing fields
 

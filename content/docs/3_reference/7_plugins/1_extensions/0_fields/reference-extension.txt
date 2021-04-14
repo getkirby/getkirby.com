@@ -267,7 +267,7 @@ fields:
 
 ### Result
 
-(picture: field.png)
+(image: field.png)
 
 ## Kirby Ui Kit
 

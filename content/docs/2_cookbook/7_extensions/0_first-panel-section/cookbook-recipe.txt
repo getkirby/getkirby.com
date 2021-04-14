@@ -14,7 +14,7 @@ Text:
 
 In this recipe, we will create a custom Panel section that displays a list of links with an icon, a title and a description. This is what it will look like once we are ready:
 
-(screenshot: custom-section.jpg)
+(image: custom-section.jpg)
 
 
 <info>

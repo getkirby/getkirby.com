@@ -51,7 +51,7 @@ sortBy: date desc
 
 ### Result
 
-(screenshot: blog.png)
+(image: blog.png)
 
 ## Single article
 
@@ -97,7 +97,7 @@ columns:
 
 ### Result
 
-(screenshot: article.png)
+(image: article.png)
 
 ## Cookbook
 

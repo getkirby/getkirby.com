@@ -19,11 +19,11 @@ Title: Pages preset example
 preset: pages
 ```
 
-(screenshot: pages-empty.png)
+(image: pages-empty.png)
 
 By default, this adds two sections of type `pages` to your form: A drafts section (default headline "Drafts") and a section of listed pages (default headline "Published").
 
-(screenshot: pages-filled.png)
+(image: pages-filled.png)
 
 This preset is again extendable. For example, if you want to add a section for pages in review while at the same time using predefined sections with additional options, you can do it like this using the keywords `drafts`, `unlisted`, and `listed`:
 
@@ -46,5 +46,5 @@ listed:
   headline: Published articles
 ```
 
-(screenshot: pages-blog.png)
+(image: pages-blog.png)
 

@@ -38,7 +38,7 @@ Since name and email are default fields, we don't have to define them here. With
 
 In the Panel, this setup will now look like this:
 
-(picture: author-form.jpg)
+(image: author-form.jpg)
 
 This can be extended to a full database of author contact details and more, depending on your use case.
 

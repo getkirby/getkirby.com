@@ -19,7 +19,7 @@ Before you can add new pages via the Panel, you have to set up a (link: docs/ref
 
 Click on the "Add" button in the top right corner of a pages section. Every new page in the Panel is created as a draft first. This prevents accidental publishing of a page that is not ready yet.
 
-(picture: Bildschirmfoto2018-07-05um14.34.45.png)
+(image: Bildschirmfoto2018-07-05um14.34.45.png)
 
 Drafts are stored in a `_drafts` subfolder for every page. These drafts are only accessible when you are logged in. 
 

@@ -16,7 +16,7 @@ Text:
 
 The tags field is perfect for multiple variable options, which should be stored in a single field. It comes with built-in autocompletion for options and an intuitive interface for adding and removing multiple tags.
 
-(screenshot: tags.png)
+(image: tags.png)
 
 ## Example
 
@@ -92,7 +92,7 @@ fields:
     layout: list
 ```
 
-(screenshot: tags-list-layout.png)
+(image: tags-list-layout.png)
 
 ## How to use in templates/snippets
 

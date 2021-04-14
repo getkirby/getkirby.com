@@ -30,11 +30,11 @@ The first Kirby Workshop in November in Düsseldorf was a huge success. 20 peopl
 
 ## Kirby in the Wild
 
-(picture: buildski-brothers.jpg size: banner)
+(image: buildski-brothers.jpg size: banner)
 [Buildski Brothers](https://buildski.com)
 Ski Manufacture
 
-(picture: inflight-vr.jpg size: banner)
+(image: inflight-vr.jpg size: banner)
 [Inflight VR](https://inflight-vr.com)
 Virtual Reality Solutions
 
@@ -60,7 +60,7 @@ Over the last month, Kirby plugin developers have been busy coming up with new i
 
 Another new theme has arrived on http://getkirby-themes.com: [Masonry](http://masonry.oliviergassies.fr) by Olivier Gassies.
 
-(picture: masonry-theme.jpg)
+(image: masonry-theme.jpg)
 
 ## JavaScript
 

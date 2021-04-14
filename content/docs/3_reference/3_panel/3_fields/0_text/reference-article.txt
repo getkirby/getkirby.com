@@ -16,7 +16,7 @@ Text:
 
 The text field creates a standard text input
 
-(screenshot: text.png)
+(image: text.png)
 
 ## Example
 

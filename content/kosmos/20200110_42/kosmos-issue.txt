@@ -29,7 +29,7 @@ Only <del>10</del> 9 more weeks until our first Kirby "family gathering". Meet o
 
 **Update 2019-01-20**: All tickets were sold within two days, but the waiting list is still open.
 
-(screenshot: kirbykonf-location.jpg)
+(image: kirbykonf-location.jpg)
 
 ## Plans for 2020
 
@@ -50,7 +50,7 @@ The next Kirby Workshop with Bastian will take place in a few days, on January 2
 
 ## Kirby in the wild
 
-(screenshot: m10.jpg)
+(image: m10.jpg)
 
 [M10](https://m10.io/)
 

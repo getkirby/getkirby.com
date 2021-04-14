@@ -12,7 +12,7 @@ Text:
 
 With the fields section you can create flexible forms for your pages. Add all fields in a single fields section or combine multiple sections to achieve more intuitive (glossary: Panel) layouts.
 
-(screenshot: fields.png)
+(image: fields.png)
 
 ## Example
 
@@ -64,7 +64,7 @@ The fields section has only one option called `fields`. The `fields` option cont
 
 Especially for more complex pages with lots of different field types, it often makes sense to layout fields in multiple columns. That way you can create a main area for the most important content and a sidebar for secondary information for example.
 
-(screenshot: fields-in-columns.png)
+(image: fields-in-columns.png)
 
 We can use the `columns` option in our blueprint to create such a layout. The number of columns is up to the actual requirements for your page type. You can get started with two columns and a classic sidebar layout, but of course it can get a lot more sophisticated than that. If you aren't yet familiar with using columns to layout your sections, check out (link: docs/guide/blueprints/layout text: the guide).
 
@@ -118,10 +118,10 @@ When the field setup gets too complex, you can also spread forms over multiple t
 Here's an example how to move the meta information for the article above into another tab.
 
 #### Content Tab
-(screenshot: fields-in-tabs-1.png)
+(image: fields-in-tabs-1.png)
 
 #### Info Tab
-(screenshot: fields-in-tabs-2.png)
+(image: fields-in-tabs-2.png)
 
 #### Blueprint
 

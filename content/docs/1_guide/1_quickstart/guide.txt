@@ -29,7 +29,7 @@ Text:
 3. Visit your new Kirby site in your browser at `yourdomain.com`
 4. Visit the (glossary: Panel) at `yourdomain.com/panel`
 
-(screenshot: panel.png)
+(image: panel.png)
 
  <info>
 When copying files to a remote server via (S)FTP, make sure to copy the `.htaccess` file as well. By default, files starting with a dot are invisible in the filesystem, so make sure enable the display of invisible files before copying.

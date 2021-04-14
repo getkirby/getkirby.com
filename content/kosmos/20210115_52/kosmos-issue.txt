@@ -26,7 +26,7 @@ Happy New Year! Hope you had a relaxing break over the holidays and feel recharg
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility there are hardly any limits to what you can create with Kirby.
 
-(screenshot: hid.png)
+(image: hid.png)
 
 [HID](https://human-interface.de/en) made by [JUNO](https://www.juno-hamburg.com/)
 
@@ -40,7 +40,7 @@ New blocks navigation in the blocks drawerExtendable settings in the Layout fiel
 
 (columns…)
 
-(screenshot: kirby-show.png)
+(image: kirby-show.png)
 
 ++++
 

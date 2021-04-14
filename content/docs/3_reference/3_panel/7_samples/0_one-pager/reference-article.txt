@@ -33,7 +33,7 @@ sections:
       - pager-video
 ```
 
-(screenshot: one-page.png)
+(image: one-page.png)
 
 ### Template
 
@@ -59,7 +59,7 @@ fields:
     required: true
 ```
 
-(screenshot: headline.png)
+(image: headline.png)
 
 ## Part: Hero slider
 
@@ -78,7 +78,7 @@ sections:
 
 ```
 
-(screenshot: hero.png)
+(image: hero.png)
 
 ```yaml "/site/blueprints/files/pager-hero.yml"
 title: Hero slide
@@ -93,7 +93,7 @@ fields:
     width: 1/2
 ```
 
-(screenshot: hero-files.png)
+(image: hero-files.png)
 
 ## Part: Text
 
@@ -109,7 +109,7 @@ fields:
     required: true
 ```
 
-(screenshot: text.png)
+(image: text.png)
 
 
 ## Part: Video
@@ -126,6 +126,6 @@ fields:
     help: Copy the video ID from youtube here to embed the video.
 ```
 
-(screenshot: video.png)
+(image: video.png)
 
 

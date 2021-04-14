@@ -14,7 +14,7 @@ Text:
 
 ## Intro
 
-(screenshot: surfing-with-sharks.png)
+(image: surfing-with-sharks.png)
 
 If we want to show single files on a page together with some additional information, we can create a parent page with subpages, and upload a single image to each subpage. However, in the Panel those pages would be pretty empty when the information about the image is actually stored in the image meta data. Wouldn't it be cool and less time consuming if we could just upload a bunch of images to the parent page, fill in the meta data—maybe even automatically add some EXIF data at upload (no, that's not part of this recipe)—,and the child pages would be automagically created from these images?
 
@@ -79,7 +79,7 @@ pages:
 
 Now, log in to Panel and create a new gallery page using the `gallery.yml` blueprint. Upload some files (if you use the Starterkit, you can borrow somes images from the subpages of the `photography` page). Then publish the page.
 
-(screenshot: panel-overview.png)
+(image: panel-overview.png)
 
 ## Gallery template
 
@@ -109,7 +109,7 @@ Before we visit the image gallery on the frontend, we need a new template—`gal
 
 We are ready to view our spectacular little gallery on the frontend.
 
-(screenshot: gallery-overview.png)
+(image: gallery-overview.png)
 
 
 If you look closely, you will notice that we currently output the images of the page and the `href` attribute points to the image URL itself. If you click on any of the links, the browser will open the single file in a new tab or window, but not in the context of a new page. That's not really what we want, and we'll of course fix that later.
@@ -266,7 +266,7 @@ columns:
         type: text
 ```
 
-(screenshot: panel-form.png)
+(image: panel-form.png)
 
 ## Update gallery model
 

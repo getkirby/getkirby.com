@@ -117,7 +117,7 @@ fields:
 
 When we open the unlisted `Sandbox` page in the Panel, we can see the `doi` field in the Panel:
 
-(screenshot: doifield-1.jpg)
+(image: doifield-1.jpg)
 
 Ok, ok, this only prints `Hello` and is far from impressive, but hey, it's a start.
 
@@ -184,7 +184,7 @@ Let's move a little further and turn this into a real field input using a standa
 ```
 After the code compiles, we now have an input field with a an hard-wired `Hello` label. And while you can type text into the input field, you will not be able to store it. But one step after the other, so how do we get the `Doi field` label we already put into the blueprint into our field label?
 
-(screenshot: doifield-2.jpg)
+(image: doifield-2.jpg)
 
 ## Here come props
 
@@ -216,7 +216,7 @@ If you now change the field label in the blueprint and reload the page, you can 
 
 Once we reload the page in the Panel, we see that the label has changed:
 
-(screenshot: doifield-3.jpg)
+(image: doifield-3.jpg)
 
 
 <info>
@@ -261,7 +261,7 @@ export default {
 `:value="value"` is shorthand syntax for the Vue.js `v-bind` directive, which can be used instead of the long form `v-bind:value="value".
 </info>
 
-(screenshot: doifield-4.jpg)
+(image: doifield-4.jpg)
 
 Great, we can now bind the value in the text field to the input. But if we try to change the value in the Panel, nothing will happen yet, no orange save bar will pop up, and we cannot store changes.
 
@@ -304,7 +304,7 @@ We can now use standard JavaScript to fetch the value from the input field with 
 
 And that's it. When we now return to the Panel, we can edit the field value and as soon as we do so, the orange bar at the bottom pops up, allowing us to either store the new or revert to the original value 🎉.
 
-(screenshot: doifield-5.jpg)
+(image: doifield-5.jpg)
 
 ## Reusing standard Kirby components
 
@@ -326,7 +326,7 @@ We start with replacing the wrapper div with the `k-field` component. Each compo
 
 Hurray, our field immediately starts looking better with the label above the input.
 
-(screenshot: doifield-6.jpg)
+(image: doifield-6.jpg)
 
 The input field we replace with a `k-input` component and add the `theme` prop to make it look like an input field:
 
@@ -358,7 +358,7 @@ export default {
 
 With this, we now have a fully working input field that looks like a normal text field.
 
-(screenshot: doifield-7.jpg)
+(image: doifield-7.jpg)
 
 We can now add more props, if we want, to make the standard field properties like `help`, `disabled`, `required` work as well.
 
@@ -489,4 +489,4 @@ export default {
 
 Voilà, our new doi field is ready for use.
 
-(screenshot: doifield-8.jpg)
+(image: doifield-8.jpg)

@@ -14,7 +14,7 @@ Text:
 
 The range field creates a flexible slider, that can be used to display numbered values in a more visual and intuitive way.
 
-(screenshot: range.png)
+(image: range.png)
 
 ## Example
 

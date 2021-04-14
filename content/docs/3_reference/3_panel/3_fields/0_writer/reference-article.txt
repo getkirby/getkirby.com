@@ -18,7 +18,7 @@ Guide: blueprints/fields
 
 Text:
 
-(screenshot: writer.png)
+(image: writer.png)
 
 ## Example
 

@@ -15,7 +15,7 @@ Text:
 
 Kirby automatically locks pages that are currently being edited by another user in the Panel, making working in teams a lot safer. If you open a page that is edited by another user, you are informed about the editing user and cannot overwrite their changes.
 
-(picture: content-locking.png)
+(image: content-locking.png)
 
 If the editing user doesn't save their changes within 2 minutes, you can unlock the page. If you do so, the editing user is informed that their changes have been overwritten and can then download them to edit the unsaved changes manually.
 
@@ -33,7 +33,7 @@ You can deactivate content locking via the `content.locking` config option in yo
 
 When you edit pages, files or user accounts in the Panel, you will see an "unsaved changes" icon in the topbar. This overview of unsaved changes makes it a lot easier to keep track of content that is still work-in-progress.
 
-(screenshot: unsaved-changes.png)
+(image: unsaved-changes.png)
 
 </since>
 
@@ -62,13 +62,13 @@ In your blueprints for the Panel, you can (link: docs/reference/panel/blueprints
 
 To publish a draft in the Panel, click on the "Draft" button with the red status icon in the toolbar or go to "Settings" > "Change status".
 
-(picture: Bildschirmfoto2018-07-05um14.30.12.png)
+(image: Bildschirmfoto2018-07-05um14.30.12.png)
 
 <warning>
 You can only publish a draft in the Panel if all required fields are filled in and all validations have passed.
 </warning>
 
-(picture: Bildschirmfoto2018-07-05um14.31.59.png)
+(image: Bildschirmfoto2018-07-05um14.31.59.png)
 
 ### In the content folder
 

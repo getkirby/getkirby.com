@@ -127,7 +127,7 @@ Here we define the `$projects` variable and paginate the pages collection into c
 
 If we visit the page in the browser at this point, we will see four projects and our super fancy load-more button. However, as much as you might click on the button, nothing will happen yet.
 
-(screenshot: load-more.png)
+(image: load-more.png)
 
 ## JSON controller
 

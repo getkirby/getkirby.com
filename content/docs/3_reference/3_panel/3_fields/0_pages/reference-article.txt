@@ -16,7 +16,7 @@ Text:
 
 The pages field allows you to select one or more related pages. It has a handy navigator to go through the entire site tree and select the pages you want
 
-(screenshot: pages.png)
+(image: pages.png)
 
 ## Example
 

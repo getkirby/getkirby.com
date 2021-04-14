@@ -57,7 +57,7 @@ You can upload files via the Panel to pages that allow file uploads. To upload a
 
 ++++
 
-(picture: Bildschirmfoto2018-07-09um21.13.28.jpg)
+(image: Bildschirmfoto2018-07-09um21.13.28.jpg)
 
 (…columns)
 

@@ -16,7 +16,7 @@ Text:
 
 The users field can be used to select one or more users. It's perfect to store authors for an article, for example.
 
-(screenshot: users.png)
+(image: users.png)
 
 ## Example
 

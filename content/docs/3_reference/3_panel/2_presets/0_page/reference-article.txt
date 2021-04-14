@@ -23,7 +23,7 @@ preset: page
 
 This simple blueprint creates an empty main section and a sidebar with a files and a pages section.
 
-(screenshot: page-empty.png)
+(image: page-empty.png)
 
 You can now extend this basic preset by adding as many fields as you like:
 
@@ -41,10 +41,10 @@ fields:
 ```
 
 ### Empty
-(screenshot: page-setup.png)
+(image: page-setup.png)
 
 ### Filled
-(screenshot: page-filled.png)
+(image: page-filled.png)
 
 And you can of course extend this basic setup in many ways.
 

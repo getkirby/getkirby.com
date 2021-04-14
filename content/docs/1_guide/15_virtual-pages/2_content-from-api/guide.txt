@@ -129,4 +129,4 @@ For the children themselves, you can create their own `review.php` template to a
 
 The result could then look something like this:
 
-(screenshot: review.jpg)
+(image: review.jpg)

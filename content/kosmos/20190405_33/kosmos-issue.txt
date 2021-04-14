@@ -32,10 +32,10 @@ With our new [Why Kirby? page](https://getkirby.com/why), we are responding to y
 
 ## Kirby in the Wild
 
-(picture: devontechnologies.png)
+(image: devontechnologies.png)
 [DEVONtechnologies](https://www.devontechnologies.com)
 
-(picture: give-a-vote.png)
+(image: give-a-vote.png)
 [European Youth Card Association](https://www.giveavote.eu)
 
 ## Kirby Plugins
@@ -47,12 +47,12 @@ Kirby 3 plugins have finally found a beautiful new [home on our website](https:/
 
 (columns…)
 
-(picture: podcaster.png)
+(image: podcaster.png)
 If you want to integrate podcasts on your website, give the [Kirby Podcaster plugin](https://github.com/mauricerenck/kirby-podcaster) a try.
 
 ++++
 
-(picture: retour.png)
+(image: retour.png)
 [Retour for Kirby](https://github.com/distantnative/retour-for-kirby) is a plugin that takes care of discovering 404s and rerouting your pages.
 
 (…columns)

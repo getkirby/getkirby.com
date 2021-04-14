@@ -22,10 +22,10 @@ preset: files
 ```
 
 ### Empty
-(screenshot: files-empty.png)
+(image: files-empty.png)
 
 ### Filled
-(screenshot: files-filled.png)
+(image: files-filled.png)
 
 This basic blueprint can be extended in many ways.
 

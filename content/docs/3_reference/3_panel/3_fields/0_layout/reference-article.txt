@@ -18,7 +18,7 @@ Guide: blueprints/fields
 
 Text:
 
-(screenshot: layout.png)
+(image: layout.png)
 
 ## Getting started
 
@@ -49,7 +49,7 @@ fields:
 
 Those layouts will then show up in the layout selector when an editor creates a new row:
 
-(screenshot: selector.png)
+(image: selector.png)
 
 ### Available widths
 <since v="3.5.1">
@@ -127,7 +127,7 @@ fields:
           type: files
 ```
 
-(screenshot: layout-settings.png)
+(image: layout-settings.png)
 
 ## Reusing and extending layout settings
 <since v="3.5.1">

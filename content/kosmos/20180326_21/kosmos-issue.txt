@@ -30,7 +30,7 @@ After a bit of a slowdown during the turn of the year, [Kirby Next](https://getk
 
 ## Kirby in the Wild
 
-(picture: theater-lulu.jpg size: banner)
+(image: theater-lulu.jpg size: banner)
 
 [Theater Lulu](http://theaterlulu.de)
 Theater
@@ -59,7 +59,7 @@ Since our last edition, a couple of new themes for Kirby have seen the light of 
 
 (columns…)
 
-(picture: scribe-theme.jpg)
+(image: scribe-theme.jpg)
 
 ++++
 
@@ -71,7 +71,7 @@ Since our last edition, a couple of new themes for Kirby have seen the light of 
 
 (columns…)
 
-(picture: hipster-theme.jpg)
+(image: hipster-theme.jpg)
 
 ++++
 
@@ -105,7 +105,7 @@ Since our last edition, a couple of new themes for Kirby have seen the light of 
 ## Kirby Project
 (columns…)
 
-(picture: vauvarin-confdays.jpg)
+(image: vauvarin-confdays.jpg)
 
 ++++
 

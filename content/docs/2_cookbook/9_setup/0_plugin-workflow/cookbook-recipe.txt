@@ -62,7 +62,7 @@ fields:
 
 When you open the Panel, you should see something like this:
 
-(picture: plugin.gif)
+(image: plugin.gif)
 
 ### Bootstrapping Kirby
 

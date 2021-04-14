@@ -16,7 +16,7 @@ Text:
 
 The number field generates an HTML 5 number input, which is great when you need a comfortable way to enter any numeric values. The number field also comes with built-in validation for numeric data.
 
-(screenshot: number.png)
+(image: number.png)
 
 ## Example
 

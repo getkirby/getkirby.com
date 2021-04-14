@@ -35,7 +35,7 @@ fields:
 
 By default, such custom blocks will all use a generic block preview including the defined icon and the name of the block.
 
-(screenshot: editing.png)
+(image: editing.png)
 
 ### Plugin setup
 
@@ -103,7 +103,7 @@ Every block in the Panel has a default class name that reflects the block type (
 
 Instead of the generic preview, we will now see a much more visual representation of the button we created. Add your own styles to adapt the button to your design.
 
-(screenshot: custom-preview.png)
+(image: custom-preview.png)
 
 ## WYSIWYG editing
 

@@ -14,7 +14,7 @@ Text:
 
 The Kirby website plays a very special role for us and has two main objectives: One is presenting Kirby and its features to the world and doing a good job to generate happy customers and hopefully some sales. The other is providing Kirby’s documentation––the part that has always been way more complex than the rest.
 
-(picture: home.jpg)
+(image: home.jpg)
 
 In this article, I want to focus on all the hidden gems and secrets we built into this site to make our lives easier while maintaining the documentation and to give you better and more reliable docs.
 
@@ -108,7 +108,7 @@ We use the same technique for our (link: docs/reference/templates/helpers text: 
 
 Ok, it may sound weird, but you can actually create pages from an SVG icon sprite. As SVG is just XML, PHP can parse it. We wanted to document the icon set we use in the Panel to make it available for all plugin developers. That icon set is updated constantly with new icons and we wanted to reflect those changes in the docs without too much work.
 
-(screenshot: icons.jpg)
+(image: icons.jpg)
 
 To document our icon set, the reference has an icons page with an `icons.txt`
 

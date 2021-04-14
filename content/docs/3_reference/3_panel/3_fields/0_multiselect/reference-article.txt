@@ -16,7 +16,7 @@ Text:
 
 The multiselect field displays any number of options in a dropdown selectbox with a search box that helps narrowing down the options. This is perfect if you have lots of options, from which the user can just choose one or more.
 
-(screenshot: multiselect.png)
+(image: multiselect.png)
 
 ## Example
 

@@ -2,7 +2,7 @@
 
 <div class="prose">
   <h2 id="preview"><a href="#preview">Preview</a></h2>
-  <?= kirbytag('screenshot', $page->image()->filename()) ?>
+  <?= kirbytag('image', $page->image()->filename()) ?>
 
   <?= $page->text()->kt() ?>
 

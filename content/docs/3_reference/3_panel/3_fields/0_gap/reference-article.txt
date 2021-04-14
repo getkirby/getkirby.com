@@ -34,7 +34,7 @@ fields:
       - "yes"
 ```
 
-(screenshot: gap-field.png)
+(image: gap-field.png)
 
 With conditional fields:
 

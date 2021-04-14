@@ -13,10 +13,7 @@ $tags = [];
  * For editors
  */
 
- /**
-  * @todo: refactor content files to only use (image: )
-  */
-$tags['image'] = $tags['picture'] = $tags['screenshot'] = [
+$tags['image'] = [
     'attr' => [
         'caption',
         'link',

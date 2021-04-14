@@ -24,7 +24,7 @@ Kirby is all about giving you the freedom and the tools to create what you want,
 
 However, this freedom to create also means that you basically start from scratch and then build your project step by step, a bit like building with Lego™ blocks. It means that you need to know the basics like HTML and CSS, and some PHP (or be prepared to learn what you need along the way). While quite a few themes for Kirby are available to get you jump-started on (link: https://getkirby-themes.com), you will have to touch code to make changes if these themes are not a 100% fit. The idea behind Kirby is to empower you to (link: love text: create your own unique site) and not make your project look like thousands of others out there.
 
-(screenshot: showcase.png link: love)
+(image: showcase.png link: love)
 
 ## All files and folders
 
@@ -85,7 +85,7 @@ Next to the content folder, there is a second important folder in your installat
 
 These file names are important, because the whole Kirby system is based on matching file names. There is usually also a strong tie between content and templates.
 
-(screenshot: from-blueprint-to-frontend.png)
+(image: from-blueprint-to-frontend.png)
 
 If you create a page with a given content file name, this page will be rendered in the frontend with a PHP (glossary: template text: template) of the same name and the extension `.php`. If such a template does not exists, the `default.php` template will be used.
 
@@ -143,7 +143,7 @@ Therefore, if you change the name of the folder (directly in the file system, th
 
 ## So many fields
 
-(screenshot: panel-form-fields.png)
+(image: panel-form-fields.png)
 
 ### Field names
 Field names can sometimes lead to confusion. Ok, field names may only contain alpha-numeric characters and underscores, that's one thing. But field names can also collide with native Kirby methods. Let's assume you set up a (link: docs/reference/panel/fields/files text: `files` field) like this in a blueprint:
@@ -186,7 +186,7 @@ Pages and files can be organized in the Panel using files/pages fields or files/
 
 ### Pages section vs. pages field
 
-(screenshot: pages-section-vs-pages-field.png)
+(image: pages-section-vs-pages-field.png)
 
 #### Pages section
 
@@ -205,7 +205,7 @@ Pages and files can be organized in the Panel using files/pages fields or files/
 
 ### Files section vs. files field
 
-(screenshot: files-section-vs-files-field.png)
+(image: files-section-vs-files-field.png)
 
 #### Files section
 
@@ -232,7 +232,7 @@ Pages and files can be organized in the Panel using files/pages fields or files/
 
 The Panel dashboard is the first page users get to see when they access the Panel. In its most basic form, it provides a kind of sitemap to all or the most important pages of the site and can also contain fields for global information like a top level SEO title and description, the company name and address etc., that is, information that is not tied to a particular page.
 
-(screenshot: panel-dashboard.png)
+(image: panel-dashboard.png)
 
 The form fields and sections for the dashboard are defined in the `/site/blueprints/site.yml` blueprint. The text file for the `$site` object is called `site.txt` and lives directly in the content folder. Next to the `site.txt` file you can store media files that belong to the `$site` object.
 

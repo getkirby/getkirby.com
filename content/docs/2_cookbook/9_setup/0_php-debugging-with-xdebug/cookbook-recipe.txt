@@ -139,7 +139,7 @@ Now for the fun part. Download and open a (link: https://github.com/getkirby/sta
 
 To bring up the Run View, click on the `Run` icon in the VS Code Activity Bar on the left side of VS Code, or press CMD-SHIFT-D (Mac)/CTRL-SHIFT-D (Linux/Windows). In Run view, click `Create a launch.json file` and then choose PHP from the environment dropdown:
 
-(screenshot: run-tab.png)
+(image: run-tab.png)
 
 A new `launch.json` file with default settings is created in the project folder. 
 
@@ -167,7 +167,7 @@ To add breakpoints, click in the left-hand gutter of the code.
 
 Open the `site/controllers/notes.php` controller and set three breakpoints on `$tag` and the two `$notes` variable definitions. A red dot will mark each breakpoint.
 
-(screenshot: breakpoints.png)
+(image: breakpoints.png)
 
 When PHP executes a line that has a breakpoint on it, Xdebug will step in and pause execution allowing you to gain valuable insight to all that is happening during execution.
 
@@ -175,7 +175,7 @@ When PHP executes a line that has a breakpoint on it, Xdebug will step in and pa
 
 Now open the debug panel again and click on the little green triangle to start listening for Xdebug. You will notice this new debug toolbar at the top of the editor window:
 
-(screenshot: debug-toolbar.png)
+(image: debug-toolbar.png)
 
 We will explain the different buttons in this toolbar below.
 
@@ -185,16 +185,16 @@ Next, open the `notes` page of the Starterkit in your browser. If all went well,
 
 In this first step, the `$notes` and `$tag` variable are still uninitialized. 
 
-(screenshot: uninitialized-variables.png)
+(image: uninitialized-variables.png)
 
 If we now click on `Step over` in the debug toolbar (or press <kbd>F10</kbd>), we can see how the content in the debug panel changes. Now the `$tag` variable is no longer uninitialized, but changes to an empty string.
 
-(screenshot: empty-tag-variable.png)
+(image: empty-tag-variable.png)
 
 
 If we use `Step over` again,  we will now see how the `$notes` variable has changed:
 
-(screenshot: notes-variable.png)
+(image: notes-variable.png)
 
 We can now inspect this variable in detail. We learn that the variable contains an object of type `Kirby\Cms\Pages`, that the data array contains the subpages and a lot more.
 
@@ -202,11 +202,11 @@ With the debugging listener still active, let's return to the browser and add a 
 
 Notice how after the first `Step over`, the `$tag` variable now contains the string `desert`. Step over again, and the `$notes` variable will still be the same as before.
 
-(screenshot: tag-variable.png)
+(image: tag-variable.png)
 
 With the third step over, we will reach the if statement and another step forward, we will notice that the `$notes` variable has now changed. The `data` array inside the variable now only has a single item, whereas it had 6 before the filtering took place.
 
-(screenshot: filtered-notes.png)
+(image: filtered-notes.png)
 
 Get out of debug mode by clicking on `Stop` in the debugging toolbar and remove all breakpoints.
 
@@ -272,21 +272,21 @@ Before we come to an end though, let's have a brief look at the other areas in t
 
 In the `Call Stack` tab, you see an interactive history of the chain of methods that have been executed up to the current breakpoint or current point of the execution.
 
-(screenshot: callstack-tab.png)
+(image: callstack-tab.png)
 
 
 ## Breakpoints tab
 
 In the Breakpoints tab, you can set the level of errors that Xdebug will log (Warnings, Errors etc.), temporarily disable or remove all breakpoints at once, or disable, remove or add breakpoints.
 
-(screenshot: breakpoints-tab.png)
+(image: breakpoints-tab.png)
 
 
 ## The debug toolbar
 
 When in debug mode, you get a debug toolbar for controlling the execution of the code.
 
-(screenshot: debug-toolbar.png)
+(image: debug-toolbar.png)
 
 
 1. Pause: Pause execution (not available during debugging)

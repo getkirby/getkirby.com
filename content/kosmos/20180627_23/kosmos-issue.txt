@@ -27,7 +27,7 @@ There is so much interesting stuff going on in our industry: with browsers suppo
 
 ## Kirby in the Wild
 
-(picture: schaetzing-tyrannei-schmetterling.jpg)
+(image: schaetzing-tyrannei-schmetterling.jpg)
 [Frank Schätzing](http://www.frank-schaetzing.com)
 Author/Book Website
 
@@ -45,7 +45,7 @@ If you are planning to use CSS grid in in an upcoming project, check out [CSSGr.
 
 ++++
 
-(picture: cssgrid.jpg)
+(image: cssgrid.jpg)
 
 (…columns)
 
@@ -74,7 +74,7 @@ If you are planning to use CSS grid in in an upcoming project, check out [CSSGr.
 
 ++++
 
-(picture: dear-data.jpg)
+(image: dear-data.jpg)
 
 (…columns)
 

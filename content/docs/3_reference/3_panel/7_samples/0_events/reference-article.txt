@@ -48,7 +48,7 @@ empty: No events yet
 
 ### Result
 
-(screenshot: events.png)
+(image: events.png)
 
 
 ## Single event
@@ -86,7 +86,7 @@ fields:
 
 ### Result
 
-(screenshot: event.png)
+(image: event.png)
 
 ## Example template
 

@@ -18,7 +18,7 @@ A pages section can be filtered by template and by status, but its members canno
 Sections do not store anything in the content file, which means that you cannot fetch content from a section in your templates like you would from field content.
 </info>
 
-(screenshot: pages.png)
+(image: pages.png)
 
 ## Example
 
@@ -110,7 +110,7 @@ The `list` layout is perfect for more text-heavy pages, like articles, link list
 layout: list
 ```
 
-(screenshot: list.png)
+(image: list.png)
 
 ### Cards layout
 
@@ -120,7 +120,7 @@ The `card` layout is great for media-heavy pages, like galleries, products, proj
 layout: cards
 ```
 
-(screenshot: cards.png)
+(image: cards.png)
 
 ## Page information
 
@@ -247,7 +247,7 @@ image:
 
 | `cover: true` | `cover: false` |
 | -   | -   |
-| (screenshot: cover.png) | (screenshot: no-cover.png) |
+| (image: cover.png) | (image: no-cover.png) |
 
 ### `ratio`
 
@@ -262,7 +262,7 @@ image:
 
 | `ratio: 2/3` | `ratio: 1/1` | `ratio: 3/2` | ratio: `16/9` |
 | -   | -   | -   | -    |
-| (screenshot: 2by3.png) | (screenshot: 1by1.png) | (screenshot: 3by2.png) | (screenshot: 16by9.png) |
+| (image: 2by3.png) | (image: 1by1.png) | (image: 3by2.png) | (image: 16by9.png) |
 
 <info>
 You are not limited to the example ratios above. In fact, Kirby calculates the ratio for you as long as you enter it in the format **`a/b`**
@@ -285,7 +285,7 @@ image:
 
 | `back: pattern` | `back: black` | `back: white` |
 | -   | -   | -   |
-| (screenshot: pattern.png) | (screenshot: black.png) | (screenshot: white.png) |
+| (image: pattern.png) | (image: black.png) | (image: white.png) |
 
 ## Empty state
 

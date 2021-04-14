@@ -74,4 +74,4 @@ If you use the (glossary: panel), you have to add the `related` field to your (g
 
 We use the `query` option to display all sibling pages of the current page in the list. By passing `false` to the [`siblings()`](/docs/reference/objects/page/siblings) method, we exclude the current page from the list – we don't want the article itself to be a related article. (link: docs/guide/blueprints/query-language text: Learn more) about our query syntax.
 
-(screenshot: related.png)
+(image: related.png)

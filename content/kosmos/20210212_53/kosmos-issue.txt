@@ -34,7 +34,7 @@ Kirbyzone is custom hosting for Kirby, made by people who have worked with Kirby
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility there are hardly any limits to what you can create with Kirby.
 
-(screenshot: zammad.com.jpg)
+(image: zammad.com.jpg)
 
 [Zammad](https://zammad.com/en) Ticketing System
 

@@ -29,7 +29,7 @@ fields:
 ```
 
 
-(screenshot: simple-page.png)
+(image: simple-page.png)
 
 Besides defining form fields, you can also control the files and pages settings within this preset. (link: docs/reference/panel/presets/page text: Learn more ›)
 
@@ -46,7 +46,7 @@ title: Blog
 preset: pages
 ```
 
-(screenshot: blog.png)
+(image: blog.png)
 
 You have a lot of additional options to configure the way subpages are displayed with this preset and which templates are allowed. (link: docs/reference/panel/presets/pages text: Learn more ›)
 
@@ -59,7 +59,7 @@ title: Gallery
 preset: files
 ```
 
-(screenshot: gallery.png)
+(image: gallery.png)
 
 The `files` preset can do a lot more to set up the ratio, size, image cropping and info of each card. (link: docs/reference/panel/presets/files text: Learn more ›)
 

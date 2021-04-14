@@ -12,7 +12,7 @@ Text:
 
 The info section is perfect for any kind of static text that you want to place in a (glossary: Panel) layout. It can be used for general info, help, warnings and other guides for your editors.
 
-(screenshot: info.png)
+(image: info.png)
 
 ## Example
 
@@ -145,7 +145,7 @@ sections:
 
 ### negative
 
-(screenshot: negative.png)
+(image: negative.png)
 
 ```yaml
 title: Gallery
@@ -162,7 +162,7 @@ sections:
 
 ### positive
 
-(screenshot: positive.png)
+(image: positive.png)
 
 ```yaml
 title: Gallery

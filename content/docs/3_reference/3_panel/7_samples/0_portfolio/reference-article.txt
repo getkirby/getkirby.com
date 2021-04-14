@@ -47,7 +47,7 @@ Note that the above section will throw an error in the Panel as long as the give
 
 ### Result
 
-(screenshot: projects.png)
+(image: projects.png)
 
 ## Single project
 
@@ -96,7 +96,7 @@ sidebar:
 
 ### Result
 
-(screenshot: project.png)
+(image: project.png)
 
 ## Example `projects` template
 

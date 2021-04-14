@@ -14,7 +14,7 @@ Text:
 
 The toggle field is perfect for simple on/off or yes/no states.
 
-(screenshot: toggle.png)
+(image: toggle.png)
 
 ## Example
 

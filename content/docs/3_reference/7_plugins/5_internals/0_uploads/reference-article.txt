@@ -223,7 +223,7 @@ return $this->upload(function ($source, $filename) {
 
 This example also demonstrates how you can handle errors in the callback. Exceptions will be automatically passed forward to the `k-upload` component and displayed in a nice way.
 
-(screenshot: error.png)
+(image: error.png)
 
 #### Connect your component
 

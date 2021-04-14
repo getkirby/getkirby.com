@@ -12,5 +12,5 @@ Text:
 
 These fields can be defined in your (link: docs/guide/blueprints text: blueprints) for use in the Panel to structure your content in the best possible way.
 
-(screenshot: panel-form-fields.png)
+(image: panel-form-fields.png)
 

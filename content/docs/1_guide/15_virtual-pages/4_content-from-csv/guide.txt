@@ -12,7 +12,7 @@ Intro: Sometimes Excel or Numbers are fantastic content management systems. In t
 
 Text:
 
-(screenshot: animals.png)
+(image: animals.png)
 
 In this example we are going to read a list of (dummy) animals from a (file: animals.csv text: CSV file) and create virtual pages for each animal.
 

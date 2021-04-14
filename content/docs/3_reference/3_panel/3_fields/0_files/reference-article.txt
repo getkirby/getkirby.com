@@ -16,7 +16,7 @@ Text:
 
 The files field allows you to select one or more files.
 
-(screenshot: files.png)
+(image: files.png)
 
 ## Example
 

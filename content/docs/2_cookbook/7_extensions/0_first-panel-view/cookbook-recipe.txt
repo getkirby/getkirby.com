@@ -14,7 +14,7 @@ Text:
 
 For our very first Panel view, we will query a public API and display the results in a nice card layout.
 
-(screenshot: movie-reviews-custom-view.jpg)
+(image: movie-reviews-custom-view.jpg)
 
 <info>
 For the purposes of this recipe, we assume that Parcel is already installed globally as described in the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide).
@@ -138,7 +138,7 @@ in our plugin folder, and Parcel will compile an `index.js` in the `moviereviews
 
 If all went well, we will now see a new menu entry in the Panel dropdown navigation, and when we click on it, we can visit the newly created view that's still empty at this time.
 
-(screenshot: empty-panel-view.jpg)
+(image: empty-panel-view.jpg)
 
 ## A component for our data
 
@@ -192,7 +192,7 @@ export default {
 
 If we now return to the Panel, our view has changed and will show the cards component with a single empty card in it.
 
-(screenshot: panel-view-with-card.jpg)
+(image: panel-view-with-card.jpg)
 
 
 ## Connecting the data

@@ -30,7 +30,7 @@ If you have only recently discovered Kirby, I'd like to invite you to our [forum
 
 ## Kirby in the Wild
 
-(picture: radical-wireless.jpg)
+(image: radical-wireless.jpg)
 [Radical Wireless](https://www.radicalwireless.com)
 Wireless products
 
@@ -52,7 +52,7 @@ More Kirby themes on [getkirby-themes.com](https://www.getkirby-themes.com).
 
 ++++
 
-(picture: landing-theme.jpg)
+(image: landing-theme.jpg)
 
 (…columns)
 

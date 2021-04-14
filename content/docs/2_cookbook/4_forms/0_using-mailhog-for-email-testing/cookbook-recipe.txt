@@ -40,7 +40,7 @@ By default, MailHog runs with the following default settings:
 
 If your system already uses ports 1025/8025 for other services, you can configure MailHog to use other settings.
 
-(screenshot: mailhog-ui.png)
+(image: mailhog-ui.png)
 
 ## Configure Kirby to use MailHog
 
@@ -100,7 +100,7 @@ Before you hit the send button of the form or open the page with the email code 
 
 Now go open the page with the email code in a browser, and if all went well, you should now see the newly sent mail in MailHog's Web UI:
 
-(screenshot: mailhog-mail.png)
+(image: mailhog-mail.png)
 
 <warning>
 If you put the email code into an arbitrary template instead of setting up a form, remember to remove it again after you have finished testing. Otherwise you will see an error if MailHog is not running and you want to visit that page again some time later, when you have long forgotten that you put that test code in there.
