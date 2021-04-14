@@ -52,8 +52,7 @@ class ComposerStaticInit7735eedf59144eaf4d78690a66d8bbdf
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Kirby\\CodeBlock\\FileSystem' => __DIR__ . '/../..' . '/src/CodeBlock/FileSystem.php',
-        'Kirby\\CodeBlock\\KirbyContent' => __DIR__ . '/../..' . '/src/CodeBlock/KirbyContent.php',
+        'Kirby\\Marsdown\\FileSystem' => __DIR__ . '/../..' . '/src/Marsdown/FileSystem.php',
         'Kirby\\Marsdown\\Marsdown' => __DIR__ . '/../..' . '/src/Marsdown/Marsdown.php',
         'Kirby\\Reference\\DocBlock' => __DIR__ . '/../..' . '/src/Reference/DocBlock.php',
         'Kirby\\Reference\\ReflectionPage' => __DIR__ . '/../..' . '/src/Reference/ReflectionPage.php',

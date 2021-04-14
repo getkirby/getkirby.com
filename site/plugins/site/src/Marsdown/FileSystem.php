@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\CodeBlock;
+namespace Kirby\Marsdown;
 
 use Kirby\Toolkit\F;
 use Kirby\Toolkit\Str;
