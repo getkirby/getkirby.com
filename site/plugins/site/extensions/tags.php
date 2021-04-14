@@ -9,10 +9,9 @@ use Kirby\Reference\DocBlock;
 
 $tags = [];
 
-/**
- * For editors
- */
-
+ /**
+  * (image: my-screenshot.jpg)
+  */
 $tags['image'] = [
     'attr' => [
         'caption',
@@ -30,6 +29,9 @@ $tags['image'] = [
     }
 ];
 
+/**
+ * (screencast: https://www.youtube.com/watch?v=EDVYjxWMecc title: How to install Kirby in 5 minutes)
+ */
 $tags['screencast'] = [
     'attr' => [
         'title',
@@ -44,6 +46,9 @@ $tags['screencast'] = [
     }
 ];
 
+/**
+ * (glossary: panel)
+ */
 $tags['glossary'] = [
     'attr' => ['text'],
     'html' => function ($tag) {
@@ -55,6 +60,10 @@ $tags['glossary'] = [
     }
 ];
 
+/**
+ * (reference: templates/field-methods)
+ * Renders a grid of all children of the reference page
+ */
 $tags['reference'] = [
     'html' => function ($tag) {
         if ($page = page('docs/reference/' . $tag->value())) {
@@ -66,9 +75,8 @@ $tags['reference'] = [
 ];
 
 /**
- * For internal usage
+ * Used to render automatic $props array table
  */
-
 $tags['properties'] = [
     'attr' => [
         'class',
@@ -95,7 +103,9 @@ $tags['properties'] = [
     }
 ];
 
-
+/**
+ * Used for replacing nested glossary tags
+ */
 $tags['plain'] = [
     'attr' => ['text'],
     'html' => function ($tag) {
@@ -105,8 +115,7 @@ $tags['plain'] = [
 
 /**
 * (docs: some-snippet)
-*
-* Injects shared doc snippets rom site/docs
+* Injects shared doc snippets from site/docs
 */
 $tags['docs'] = [
     'attr' => [
@@ -132,11 +141,6 @@ $tags['docs'] = [
 
 
 
-
-
-// @todo All the following should be refactored, but this requires
-// content file changes, so we wait
-
 /**
  * Fetch prop definitions from Fields and Sections
  * and create an options table for it.
@@ -145,7 +149,7 @@ $tags['docs'] = [
  * @return array
  * @todo refactor/deprecate
  */
-function componentOptions(array $props) {
+function toOptions(array $props) {
 
     $table = [];
 
@@ -234,7 +238,7 @@ $tags['field-options'] = [
         $type       = $tag->value;
         $definition = Field::setup($type);
         $props      = $definition['props'] ?? [];
-        $table      = componentOptions($props);
+        $table      = toOptions($props);
 
         return snippet('templates/reference/entry/parameters', [
             'title' => false,
@@ -248,7 +252,7 @@ $tags['section-options'] = [
         $type       = $tag->value;
         $definition = Section::setup($type);
         $props      = $definition['props'] ?? [];
-        $table      = componentOptions($props);
+        $table      = toOptions($props);
 
         return snippet('templates/reference/entry/parameters', [
             'title' => false,
