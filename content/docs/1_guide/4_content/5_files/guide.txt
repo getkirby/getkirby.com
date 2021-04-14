@@ -138,11 +138,11 @@ Meta data files follow the same scheme for fields like the main text files for p
 ## Example meta data file
 
 ```kirbycontent "lake.jpg.txt"
-  Title: A day at the lake
-  ----
-  Caption: We spent an entire day at the lake. The weather was nice.
-  ----
-  Photographer: Ansel Adams' cat
+Title: A day at the lake
+\----
+Caption: We spent an entire day at the lake. The weather was nice.
+\----
+Photographer: Ansel Adams' cat
 ```
 
 ## Accessing meta data in templates

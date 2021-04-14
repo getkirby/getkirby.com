@@ -63,22 +63,21 @@ In this example we have defined a sidebar with some meta data fields and an auth
 In the content file `article.txt`, the selected user is stored in `yaml` format
 
 ```kirbycontent
-  Title: Content in Kirby
+Title: Content in Kirby
 
-  ----
+\----
 
-  Date: 2017-08-04 00:00
+Date: 2017-08-04 00:00
 
-  ----
+\----
 
-  Text:  Some great text
+Text:  Some great text
 
-  ----
+\----
 
-  Author:
+Author:
 
-  - john.doe@example.com
-
+- john.doe@example.com
 ```
 
 ## The article template

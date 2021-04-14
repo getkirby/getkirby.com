@@ -63,11 +63,11 @@ The content for each page is stored in a text file together with additional reso
 In each text file in the content folder, content is structured in fields. Those fields are defined by our own simple syntax:
 
 ```kirbycontent
-    Title: Page Title
-    ----
-    Text: Some Text
-    ----
-    Date: (date: Y-m-d)
+Title: Page Title
+\----
+Text: Some Text
+\----
+Date: (date: Y-m-d)
 ```
 
 Those fields come for free. You can add as many as you need. We recommend using them heavily to structure your content. It will help you later if you need to access specific data in your templates and is much cleaner than just one large blob of text.

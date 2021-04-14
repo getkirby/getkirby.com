@@ -17,10 +17,10 @@ For this example, we use a freely accessible API, in this case the (link: https:
 First, create a parent page, e.g. `reviews` in the `/content` folder and inside it, a `reviews.txt` text file.
 
 ```kirbycontent "/content/reviews/reviews.txt"
-   Title: Movie reviews
+Title: Movie reviews
 
-   ----
-   Intro: This page lists all available movie reviews from the NYT movie review API.
+\----
+Intro: This page lists all available movie reviews from the NYT movie review API.
 ```
 This page will serve as our model for child pages.
 

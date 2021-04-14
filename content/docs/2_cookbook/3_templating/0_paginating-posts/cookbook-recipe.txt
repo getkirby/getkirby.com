@@ -21,19 +21,19 @@ In this example, we will insert manual page breaks where we want to split the po
 In a `note` post, add an HTML comment where you want to paginate:
 
 ```kirbycontent "/content/notes/note.txt"
-    Title: Across the ocean
+Title: Across the ocean
 
-    ----
+\----
 
-    Text:
+Text:
 
-    Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.
-
-
-    <!--nextpage-->
+Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.
 
 
-    Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden
+<!--nextpage-->
+
+
+Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden
 
 ```
 

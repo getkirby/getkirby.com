@@ -5,14 +5,14 @@ Text:
 ### Text file
 
 ```kirbycontent
-  Title: My page
-  ----
-  Text: Some text
-  ----
-  Related:
+Title: My page
+\----
+Text: Some text
+\----
+Related:
 
-  - blog/article-a
-  - blog/article-b
+- blog/article-a
+- blog/article-b
 ```
 
 ### Template

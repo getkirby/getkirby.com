@@ -54,23 +54,23 @@ By creating a content file with these fields, we can make the form more dynamic 
 
 
 ```kirbycontent "/content/login/login.txt"
-  Title: Login
+Title: Login
 
-  ----
+\----
 
-  Alert: Invalid user or password
+Alert: Invalid user or password
 
-  ----
+\----
 
-  Username: User name
+Username: User name
 
-  ----
+\----
 
-  Password: Password
+Password: Password
 
-  ----
+\----
 
-  Button: Log in
+Button: Log in
 ```
 
 ## The corresponding blueprint for the Panel

@@ -228,12 +228,11 @@ Note that hot module reloading only works for frontend code, when changing stuff
 Currently, our input field has no content yet. Before we start editing the field in the Panel, let's add some content in our text file and see how we can load the value of the field into the input field.
 
 ```kirbycontent "/content/sandbox/sandbox.txt"
-  Title: Sandbox
+Title: Sandbox
 
-  ----
+\----
 
-  Doi: Some boring text
-
+Doi: Some boring text
 ```
 
 

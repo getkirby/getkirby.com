@@ -19,14 +19,14 @@ With **(glossary: yaml text: YAML) content** and the **pages field** you can eas
 Add a new field to any of your content files to which you'd like to add related pages:
 
 ```kirbycontent "/content/2_notes/20180625_a-night-in-the-forest/note.txt"
-    Title: A night in the forest
-    ----
-    Text: Some insightful text for the audience
-    ----
-    Related:
+Title: A night in the forest
+\----
+Text: Some insightful text for the audience
+\----
+Related:
 
-    - notes/across-the-ocean
-    - notes/in-the-jungle-of-sumatra
+- notes/across-the-ocean
+- notes/in-the-jungle-of-sumatra
 ```
 
 You are free to name the field that contains the related pages however you like, as long as you take care of using the right variable in the template later.

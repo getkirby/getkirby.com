@@ -281,17 +281,17 @@ If the registration fails, we add the error message to our alerts variable.
 If the registration was successful, the user is redirected to the `success` page.
 
 ```kirbycontent "/content/success/success.txt"
-    Title: Success
+Title: Success
 
-    ----
-    Text:
+\----
+Text:
 
-    Hello {{ name }},
-    Thank your for registering for **{{ event }}**.
+Hello {{ name }},
+Thank your for registering for **{{ event }}**.
 
-    You will receive confirmation and further information soon via email to the address you provided.
+You will receive confirmation and further information soon via email to the address you provided.
 
-    If you want to register for another event, go back to the (link: events text: Events overview page).
+If you want to register for another event, go back to the (link: events text: Events overview page).
 ```
 
 In the `text` field, we include a placeholder for the event title to customize it a little. To actually display the title, we use a `kirbyTags:after` hook in a plugin.

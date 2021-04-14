@@ -428,17 +428,16 @@ Both templates are kept very simple. Kirby provides the variables we defined in 
 The success content file contains placeholders for the applicant's name and the job reference number:
 
 ```kirbycontent
-    Title: Success
+Title: Success
+\----
+Text:
 
-    ----
-    Text:
+Hello {{ name }},
+Thank you for applying as **{{ job }}**.
 
-    Hello {{ name }},
-    Thank you for applying as **{{ job }}**.
+We will be in touch shortly.
 
-    We will be in touch shortly.
-
-    Your HR department
+Your HR department
 ```
 
 ### A plugin to replace the placeholders

@@ -6,13 +6,13 @@ While the (link: docs/reference/templates/field-methods/yaml text: `yaml` method
 
 ### Text file
 ```kirbycontent
-  Title: My page
-  ----
-  Accounts:
-    - name: Twitter
-      url: http://twitter.com/getkirby
-    - name: GitHub
-      url: http://github.com/getkirby
+Title: My page
+\----
+Accounts:
+  - name: Twitter
+    url: http://twitter.com/getkirby
+  - name: GitHub
+    url: http://github.com/getkirby
 ```
 ### Template
 

@@ -17,13 +17,13 @@ Text:
 If you prefer to write your content files in a text editor, you can separate one field from the next with four dashes on a separate line:
 
 ```kirbycontent
-    Title: An interesting article
-    ----
-    Date: (date: Y-m-d)
-    ----
-    Text:
+Title: An interesting article
+\----
+Date: (date: Y-m-d)
+\----
+Text:
 
-    Really interesting content here...
+Really interesting content here...
 ```
 
 Each field begins with the fieldname and a colon. The content of a field can be a single or multiple lines of text. You can store plain text, HTML, JSON, YAML or anything else which can be written in plain text in a field.

@@ -156,14 +156,14 @@ The **gallery server** is an *awesome* server.
 
 ### Kirby-specific file types
 
-Our content files follow a simple schema for storing variables in a human-readable format. Examples of content files (located in the `/content` directory of your Kirby installation by default) can be highlighted by specifying `kirbycontent` as the code language. As our content is stored in a content file itself, you need to add 2 spaces of indentation for all content in the block to prevent the content parsing any separators in your example (`----` in an otherwise empty line). The indentation is automatically removed when the content is displayed.
+Our content files follow a simple schema for storing variables in a human-readable format. Examples of content files (located in the `/content` directory of your Kirby installation by default) can be highlighted by specifying `kirbycontent` as the code language. As our content is stored in a content file itself, you need to escape separators in your example (`\----`).
 
 ```kirbycontent "Kirby Content (kirbycontent)"
-  Title: My Gallery Page
+Title: My Gallery Page
 
-  ----
+\----
 
-  Text: This page contains my awesome gallery.
+Text: This page contains my awesome gallery.
 ```
 
 Always use uppercase field names.
@@ -171,7 +171,7 @@ Always use uppercase field names.
 For highlighting content itself, specify `kirbytext` as the code block’s language. KirbyText examples also get highlighting for Markdown formatting. If you need to include KirbyTags into a code sample, you have to escape the opening bracket of each tag `(` by substituting it with `&lpar;` to prevent the parser from interpreting that particular tag.
 
 ```kirbytext "KirbyText (kirbytext)"
-  This is an example of &lpar;glossary: kirbytext) with **benefits**.
+This is an example of &lpar;glossary: kirbytext) with **benefits**.
 ```
 
 ## Custom KirbyTags

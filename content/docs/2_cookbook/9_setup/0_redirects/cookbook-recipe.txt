@@ -31,17 +31,17 @@ Inside each folder, we put a `link.txt` content file. You can freely choose the 
 The `link.txt` file has just two fields. The title field and a link field:
 
 ```kirbycontent
-	Title: Blog
-	----
-	Link: https://ourawesomeproduct.tumblr.com
-	----
+Title: Blog
+\----
+Link: https://ourawesomeproduct.tumblr.com
+\----
 ```
 …and…
 ```kirbycontent
-	Title: Support
-	----
-	Link: https://www.zendesk.com/ourawesomeproduct
-	----
+Title: Support
+\----
+Link: https://www.zendesk.com/ourawesomeproduct
+\----
 ```
 Your clients can change the content later.
 
