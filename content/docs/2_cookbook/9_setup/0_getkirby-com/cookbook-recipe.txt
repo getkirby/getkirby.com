@@ -61,8 +61,8 @@ docs/
 Each `class.txt` contains the full name of the class we want to document:
 
 ```kirbycontent
-  Class: Kirby\Cms\Page
-  ----
+Class: Kirby\Cms\Page
+\----
 ```
 
 The class pages have their own page model. This page model overwrites the default children method to fetch subpages from the reflection.
@@ -180,9 +180,9 @@ Fabian spent a lot of time improving the syntax highlighter of our code examples
 We now have syntax highlighting for HTML, PHP, JS, CSS, JSON, YAML, and our own Kirby field syntax in text files.
 
 ```kirbycontent
-    title: Hello world
-    ----
-    text: Lorem ipsum …
+title: Hello world
+\----
+text: Lorem ipsum …
 ```
 
 Every code block has a copy button and we can inject the filename in a small toolbar above the example, showing you where to put the examples in your installations.

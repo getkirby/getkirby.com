@@ -38,21 +38,21 @@ So whenever you want to post a video, you are going to use the `article.video.tx
 You are free to use different content fields in each of those text files. For example for a video post it would makes sense to have something like:
 
 ```kirbycontent
-  Title: My awesome Video
-  ----
-  Video: http://www.youtube.com/watch?v=YQIMGV5vtd4
-  ----
-  Text: A Swarm of Nano Quadrotors – I want one for Christmas
+Title: My awesome Video
+\----
+Video: http://www.youtube.com/watch?v=YQIMGV5vtd4
+\----
+Text: A Swarm of Nano Quadrotors – I want one for Christmas
 ```
 
 …whereas for a quote it would be better to have something like:
 
 ```kirbycontent
-  Title: My awesome Quote
-  ----
-  Quote: Design is how it works
-  ----
-  By: Steve Jobs
+Title: My awesome Quote
+\----
+Quote: Design is how it works
+\----
+By: Steve Jobs
 ```
 
 It's up to you which fields you use for each post. All you need to make sure is to use them in your templates accordingly.

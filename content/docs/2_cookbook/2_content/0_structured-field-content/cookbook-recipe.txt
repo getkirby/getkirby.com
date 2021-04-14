@@ -21,17 +21,17 @@ With the help of YAML our content can be even more powerful.
 If you are building a contact page and you've got just one address, so far you could simply structure the content like this for example…
 
 ```kirbycontent
-	Title: Contact
-	----
-	Street: 15 Sesamestreet
-	----
-	ZIP: 9210
-	----
-	City: New York
-	----
-	Phone: 500-12131
-	----
-	Email: myawesome@email.com
+Title: Contact
+\----
+Street: 15 Sesamestreet
+\----
+ZIP: 9210
+\----
+City: New York
+\----
+Phone: 500-12131
+\----
+Email: myawesome@email.com
 ```
 
 But what happens, when you got more than just one address? Maybe your company has various offices all around the world or you are just very rich and you want to show off with the addresses of your houses on the Bahamas, New York, LA and in Monaco.
@@ -41,21 +41,21 @@ One way would be to add subpages for each address and then build a foreach loop 
 You could also add multiple fields like this:
 
 ```kirbycontent
-  Street_a: 15 Sesamestreet
-  ----
-  ZIP_a: 9210
-  ----
-  City_a: New York
-  ----
-  Phone_a: 500-12131
-  ----
-  Street_b: Rue de WTF 17
-  ----
-  ZIP_b: 1112
-  ----
-  City_b: Monaco
-  ----
-  Phone_b: 555-1234
+Street_a: 15 Sesamestreet
+\----
+ZIP_a: 9210
+\----
+City_a: New York
+\----
+Phone_a: 500-12131
+\----
+Street_b: Rue de WTF 17
+\----
+ZIP_b: 1112
+\----
+City_b: Monaco
+\----
+Phone_b: 555-1234
 ```
 
 But that wouldn't be very easy to read and maintain.

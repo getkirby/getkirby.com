@@ -11,10 +11,10 @@ Text:
 Any field in Kirby can be converted to a date if the content is parseable by PHP.
 
 ```kirbycontent
-    Title: Super Nice Content
-    ----
-    Published: 2018-11-21
-    ----
+Title: Super Nice Content
+\----
+Published: 2018-11-21
+\----
 ```
 
 In your template …

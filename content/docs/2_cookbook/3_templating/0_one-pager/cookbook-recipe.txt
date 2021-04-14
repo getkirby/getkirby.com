@@ -68,51 +68,51 @@ As you can see, there’s an additional level of subfolders for projects and tes
 You are free to add whatever fields you need in each text file. Here are some possible setups for all the different text files:
 
 ```kirbycontent "about-me.txt"
-    title: About me
-    ----
-    text: Some text about you and your skills
+title: About me
+\----
+text: Some text about you and your skills
 ```
 
 ```kirbycontent "projects.txt"
-    title: Projects
-    ----
-    text: An introduction to your work
+title: Projects
+\----
+text: An introduction to your work
 ```
 
 ```kirbycontent "project.txt"
-    title: Project title
-    ----
-    text: Project description
-    ----
-    year: maybe a year when the project has been created
-    ----
-    tags: maybe, some additional, tags, to characterize, the project
-    ----
-    url: http://projecturl.com
+title: Project title
+\----
+text: Project description
+\----
+year: maybe a year when the project has been created
+\----
+tags: maybe, some additional, tags, to characterize, the project
+\----
+url: http://projecturl.com
 ```
 
 ```kirbycontent "testimonials.txt"
-    title: Testimonials
-    ----
-    text: an optional introduction text for the testimonials section
+title: Testimonials
+\----
+text: an optional introduction text for the testimonials section
 ```
 
 ```kirbycontent "testimonial.txt"
-    title: John Doe
-    ----
-    quote: This dude is the best photographer in the world
-    ----
-    url: http://yourtestimonialswebsite.com
+title: John Doe
+\----
+quote: This dude is the best photographer in the world
+\----
+url: http://yourtestimonialswebsite.com
 ```
 
 ```kirbycontent "contact.txt"
-    title: Contact
-    ----
-    address: 123 Sesamestreet, NYC
-    ----
-    email: mail@mywebsite.com
-    ----
-    phone: 555 - 1234 5678
+title: Contact
+\----
+address: 123 Sesamestreet, NYC
+\----
+email: mail@mywebsite.com
+\----
+phone: 555 - 1234 5678
 ```
 
 ## The home.php template

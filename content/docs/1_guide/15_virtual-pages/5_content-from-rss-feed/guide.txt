@@ -19,11 +19,11 @@ To start, we create a parent page, e.g. `rssfeed` in the `/content` folder and i
 Let's give our parent page a title and maybe a short intro.
 
 ```kirbycontent "/content/rssfeed/rssfeed.txt"
-   Title: My virtual feed
+Title: My virtual feed
 
-   ----
+\----
 
-   Intro: This page lists articles from an RSS feed.
+Intro: This page lists articles from an RSS feed.
 ```
 
 

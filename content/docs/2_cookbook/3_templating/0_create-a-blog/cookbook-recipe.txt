@@ -33,10 +33,10 @@ First we add a new listed blog folder to our site (`3_blog`) so it will appear i
 Add two fields to your `blog.txt`.
 
 ```kirbycontent "/content/3_blog/blog.txt"
-    Title: Blog
-    ----
-    Text: This is a very insightful blog about things I know.
-    ----
+Title: Blog
+\----
+Text: This is a very insightful blog about things I know.
+\----
 ```
 
 More on how we use that later when we build our templates.
@@ -46,10 +46,10 @@ More on how we use that later when we build our templates.
 Inside each article folder, add an `article.txt`. By naming it like this, we can later add an `article.php` template to our template folder and create a specific template for all articles. Add two fields to each `article.txt`.
 
 ```kirbycontent
-    Title: This is my first Article
-    ----
-    Text: Hello World!
-    ----
+Title: This is my first Article
+\----
+Text: Hello World!
+\----
 ```
 
 ## Building the templates
@@ -222,11 +222,11 @@ You might also want to add a back link, which will take your visitors back to th
 To add an article intro which you can display and maybe style differently from the rest of the post you have to set up an additional field in your `article.txt` content files first.
 
 ```kirbycontent
-    Title: Some title
-    ----
-    Intro: This is a nice article intro.
-    ----
-    Text: Some great text
+Title: Some title
+\----
+Intro: This is a nice article intro.
+\----
+Text: Some great text
 ```
 
 ### Template adjustments

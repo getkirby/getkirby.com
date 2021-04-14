@@ -13,13 +13,13 @@ Kirby shines when it comes to custom fields. We believe that your content should
 Kirby's text files have therefor a very simple system. You define a field of data with a name, a colon and some content. You separate multiple fields with four dashes:
 
 ```kirbycontent
-	Title: This is my title
-	----
-	Text: This is a nice text
-	----
-	Date: 2012/01/11
-	----
-	etc.
+Title: This is my title
+\----
+Text: This is a nice text
+\----
+Date: 2012/01/11
+\----
+etc.
 ```
 
 You are not limited to any number of fields per file. You could have hundreds of them, though that would be quite a mess to read and update – but you could :) There's only one restriction. **Field names must only contain alphanumeric characters and underscores.**
@@ -27,8 +27,8 @@ You are not limited to any number of fields per file. You could have hundreds of
 Stuff like…
 
 ```kirbycontent
-	My fancy görman field: Some text
-	----
+My fancy görman field: Some text
+\----
 ```
 
 …won't work. It won't break anything, but you will not be able to use the data of that field in your template.
@@ -66,16 +66,16 @@ Kirby is being used by many designers, architects and photographers to create th
 #### The content
 
 ```kirbycontent "/content/projects/acme/project.txt"
-	Title: New Acme Company Website
-	----
-	Link: http://acme.com
-	----
-	Description: We helped Acme to become the leading placeholder company in the world
-	----
-	Year: 2018
-	----
-	Tags: Redesign, HTML5, CSS3
-	----
+Title: New Acme Company Website
+\----
+Link: http://acme.com
+\----
+Description: We helped Acme to become the leading placeholder company in the world
+\----
+Year: 2018
+\----
+Tags: Redesign, HTML5, CSS3
+\----
 ```
 
 #### The files
@@ -122,22 +122,22 @@ Kirby is by no means great to build a full-featured eCommerce shop. You shoudn't
 #### The content
 
 ```kirbycontent
-	Title: Shirty
-	----
-	Subtitle: Fancy Shirt with fancy print
-	----
-	Text: This nice shirt is made of organic cotton and is soooo fluffy.
-	----
-	Sizes: XS, S, M, L, XL, XXL, TENT
-	----
-	Colors: red, green, yellow, blue, purple
-	----
-	Available: yes
-	----
-	Price: $39
-	----
-	Link: https://myshopservice/add-to-cart?id=someidforshirty
-	----
+Title: Shirty
+\----
+Subtitle: Fancy Shirt with fancy print
+\----
+Text: This nice shirt is made of organic cotton and is soooo fluffy.
+\----
+Sizes: XS, S, M, L, XL, XXL, TENT
+\----
+Colors: red, green, yellow, blue, purple
+\----
+Available: yes
+\----
+Price: $39
+\----
+Link: https://myshopservice/add-to-cart?id=someidforshirty
+\----
 ```
 
 #### The files
@@ -181,20 +181,20 @@ Conference sites often need very different kinds of content and templates for ea
 #### The content
 
 ```kirbycontent
-	Title: J. Montgomery Burns
-	----
-	About: J. Montgomery Burns is a very nice old man.
-	----
-	Talk: Why nuclear power is awesome
-	----
-	Teaser: In times of blah, blah, blah we need nuclear power.
-	----
-	Time: Saturday, 11:30 am
-	----
-	Venue: Great Hall
-	----
-	Link: http://j.montgomerybur.ns
-	----
+Title: J. Montgomery Burns
+\----
+About: J. Montgomery Burns is a very nice old man.
+\----
+Talk: Why nuclear power is awesome
+\----
+Teaser: In times of blah, blah, blah we need nuclear power.
+\----
+Time: Saturday, 11:30 am
+\----
+Venue: Great Hall
+\----
+Link: http://j.montgomerybur.ns
+\----
 ```
 
 #### The files
@@ -236,7 +236,6 @@ content/
 ```
 
 
-
 ****
 
 ### Photography Project
@@ -244,18 +243,18 @@ content/
 As a photographer you want the best presentation platform for your pictures. Something nice and clean, where your photos can shine. It might also be cool to add additional information about each picture and the process of taking it – things like the location, the lens, the time of day, etc.
 
 ```kirbycontent
-	Title: Mount Rushmore at noon
-	----
-	Description: The picture is a symbol for this and that.
-	----
-	Location: Mount Rushmore, SD, United States
-	----
-	Date: 2012/01/11 12:00
-	----
-	Camera: Leica M9
-	----
-	Lens: Leica Summilux-M 24 mm f/1.4 ASPH
-	----
+Title: Mount Rushmore at noon
+\----
+Description: The picture is a symbol for this and that.
+\----
+Location: Mount Rushmore, SD, United States
+\----
+Date: 2012/01/11 12:00
+\----
+Camera: Leica M9
+\----
+Lens: Leica Summilux-M 24 mm f/1.4 ASPH
+\----
 ```
 
 #### The files

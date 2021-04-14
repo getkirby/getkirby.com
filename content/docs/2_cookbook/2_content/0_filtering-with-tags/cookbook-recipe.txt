@@ -29,16 +29,15 @@ This creates a tags field where users can add any tags they want. You can finetu
 In the content file, the tags are stored as a comma separated list:
 
 ```kirbycontent
+Title: Some title
 
-  Title: Some title
-  ----
+\----
 
-  Text: Some great text
+Text: Some great text
 
-  ----
+\----
 
-  Tags: design, photography, architecture, whatever
-
+Tags: design, photography, architecture, whatever
 ```
 
 ## Filtering content by tag

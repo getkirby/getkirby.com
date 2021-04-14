@@ -6,9 +6,9 @@ Text:
 ### Text file
 
 ```kirbycontent
-    Title: My great article
-    ----
-    More: some/related/page
+Title: My great article
+\----
+More: some/related/page
 ```
 
 ### Template

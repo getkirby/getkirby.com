@@ -29,17 +29,17 @@ When multiple languages are configured for your site, you can add an additional 
 Here's a quick example – English is the default language:
 
 ```kirbycontent "content/projects/projects.en.txt"
-  Title: My Title
-  ----
-  Text: This is the text for the projects page
+Title: My Title
+\----
+Text: This is the text for the projects page
 ```
 
 ```kirbycontent "content/projects/projects.de.txt"
-  Title: Mein Titel
-  ----
-  Slug: projekte
-  ----
-  Text: Das ist der Text für die Projekt Seite
+Title: Mein Titel
+\----
+Slug: projekte
+\----
+Text: Das ist der Text für die Projekt Seite
 ```
 
 The URL for the English version will be:

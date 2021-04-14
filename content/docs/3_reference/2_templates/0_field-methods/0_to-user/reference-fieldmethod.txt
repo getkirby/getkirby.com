@@ -6,9 +6,9 @@ Text:
 ### Text file
 
 ```kirbycontent
-    Title: My great article
-    ----
-    Author: author@company.com
+Title: My great article
+\----
+Author: author@company.com
 ```
 
 ### Template
