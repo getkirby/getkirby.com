@@ -3,8 +3,6 @@
 namespace Kirby\Marsdown;
 
 use DomDocument;
-use Kirby\CodeBlock\FileSystem;
-use Kirby\CodeBlock\KirbyContent;
 use Kirby\Toolkit\Str;
 use Kirby\Types\Type;
 use ParsedownExtra;
@@ -264,7 +262,7 @@ class Marsdown extends ParsedownExtra
                 ];
                 break;
             case 'kirbycontent':
-                $Block['element']['element']['text'] = KirbyContent::parse($Block['element']['element']['text']);
+                $Block['element']['element']['text'] = str_replace(["\r\n", "\r"], "\n", $Block['element']['element']['text']);
                 break;
             default:
                 $text = $Block['element']['element']['text'];

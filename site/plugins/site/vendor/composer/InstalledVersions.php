@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '25f3685214da8f3eeaf14004e2758c809f418e3c',
+    'reference' => 'f986015002654a1deee0acf0a909a02de1d2268c',
     'name' => 'getkirby/site',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '25f3685214da8f3eeaf14004e2758c809f418e3c',
+      'reference' => 'f986015002654a1deee0acf0a909a02de1d2268c',
     ),
     'phpdocumentor/reflection-common' => 
     array (
@@ -312,7 +312,6 @@ self::$canGetVendors = method_exists('Composer\Autoload\ClassLoader', 'getRegist
 $installed = array();
 
 if (self::$canGetVendors) {
-
 foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
 if (isset(self::$installedByVendor[$vendorDir])) {
 $installed[] = self::$installedByVendor[$vendorDir];

@@ -7,8 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'Kirby\\CodeBlock\\FileSystem' => $baseDir . '/src/CodeBlock/FileSystem.php',
-    'Kirby\\CodeBlock\\KirbyContent' => $baseDir . '/src/CodeBlock/KirbyContent.php',
+    'Kirby\\Marsdown\\FileSystem' => $baseDir . '/src/Marsdown/FileSystem.php',
     'Kirby\\Marsdown\\Marsdown' => $baseDir . '/src/Marsdown/Marsdown.php',
     'Kirby\\Reference\\DocBlock' => $baseDir . '/src/Reference/DocBlock.php',
     'Kirby\\Reference\\ReflectionPage' => $baseDir . '/src/Reference/ReflectionPage.php',
