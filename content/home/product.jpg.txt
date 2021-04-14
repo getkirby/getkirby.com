@@ -1,5 +1,0 @@
-Caption: Product
-
-----
-
-Description: Kirby is the perfect starting point for your shop. Create the perfect editing interface for your product attributes.

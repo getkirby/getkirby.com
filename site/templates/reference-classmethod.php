@@ -1,17 +1,8 @@
-<?php snippet('cheatsheet.article.header') ?>
+<?php layout('reference') ?>
 
-  <?php snippet('method/call', ['call' => $page->methodCall()]) ?>
+<div class="prose">
+  <?php snippet('templates/reference/entry/call') ?>
+  <?php snippet('templates/reference/entry/class') ?>
 
-  <div class="text">
-
-    <?php snippet('method/parameters',  ['parameters' => $page->parameters()]) ?>
-    <?php snippet('method/returns', ['type' => $page->returnType()]) ?>
-    <?php snippet('method/throws', ['throws' => $page->throws()]) ?>
-
-    <?= $page->text()->kt()->anchorHeadlines() ?>
-
-    <?php snippet('method/inherits',  ['inherits' => $page->inheritedFrom()]) ?>
-    <?php snippet('method/source', ['link' => $page->githubSource()]) ?>
-  </div>
-
-<?php snippet('cheatsheet.article.footer') ?>
+  <?= $page->text()->kt() ?>
+</div>

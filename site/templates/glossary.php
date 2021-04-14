@@ -1,28 +1,19 @@
-<?php snippet('header') ?>
+<?php layout() ?>
 
-  <main class="glossary-page | main" id="maincontent">
-
-    <div class="wrap">
-
-      <header class="hero">
-        <h1><?= $page->title() ?></h1>
-      </header>
-
-      <div class="cardgrid">
-        <?php foreach ($items as $term): ?>
-        <article id="<?= $term->slug() ?>">
-          <a href="<?= $term->link()->toUrl() ?>">
-            <h3 class="h5"><?= $term->title() ?></h3>
-            <div class="text description">
-              <?= $term->entry()->kt() ?>
-            </div>
-          </a>
-        </article>
-        <?php endforeach ?>
-      </div>
-
-    </div>
-
-  </main>
-
-<?php snippet('footer') ?>
+<article>
+  <h1 class="h1 mb-12"><?= $page->title() ?></h1>
+  <ul class="auto-fill auto-rows-fr" style="--gap: var(--spacing-12)">
+    <?php foreach ($page->children()->sortBy('title', 'asc') as $term): ?>
+    <li>
+      <article id="<?= $term->slug() ?>">
+        <a href="<?= $term->link()->toUrl() ?>">
+          <h2 class="h6 mb-1"><?= $term->title() ?></h2>
+          <div class="prose text-base border-top pt-3">
+            <?= $term->entry()->stripGlossary()->kt() ?>
+          </div>
+        </a>
+      </article>
+    </li>
+    <?php endforeach ?>
+  </ul>
+</article>

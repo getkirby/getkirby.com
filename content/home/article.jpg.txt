@@ -1,5 +1,0 @@
-Caption: Article
-
-----
-
-Description: Set up the perfect, distraction-free writing interface for your articles with our brand new blocks field.

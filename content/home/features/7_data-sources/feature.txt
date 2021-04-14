@@ -1,5 +1,0 @@
-Title: Bring your own data sources
-
-----
-
-Text: While files and folders are Kirby’s primary data source, you can generate pages from databases, REST APIs or even Excel sheets if that’s your thing.

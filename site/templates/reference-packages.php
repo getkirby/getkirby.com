@@ -1,32 +1,8 @@
-<?php snippet('cheatsheet.header') ?>
+<?php layout('reference') ?>
 
-<article class="cheatsheet-overview cheatsheet-main cheatsheet-panel">
-  <header class="cheatsheet-main-header cheatsheet-panel-header">
-    <?php snippet('cheatsheet.menu.button') ?>
-  </header>
-  <div class="cheatsheet-main-scrollarea cheatsheet-panel-scrollarea">
-
-    <?php foreach ($page->children() as $package): ?>
-      <h2 id="<?= $package->slug() ?>"><a href="#<?= $package->slug() ?>">Kirby\<?= $package->title() ?></a></h2>
-
-      <section class="-mb:large">
-      <ul class="cheatsheet-section-entries">
-        <?php foreach ($package->children()->filterBy('isTrait', false) as $class): ?>
-        <li>
-          <a class="cheatsheet-entry" href="<?= referenceLookup($class->class())->url() ?>">
-            <div>
-              <strong>
-                <span><?= Str::after($class->class(), "Kirby\\" . $package->title() . "\\")  ?></span>
-              </strong>
-            </div>
-          </a>
-        </li>
-        <?php endforeach ?>
-      </ul>
-      </section>
-    <?php endforeach ?>
-
-  </div>
-</article>
-
-<?php snippet('cheatsheet.footer') ?>
+<?php foreach ($page->children()->listed() as $package): ?>
+<div class="mb-24">
+  <h2 class="h2 mb-3" id="<?= $package->slug() ?>"><?= $package->title() ?></h2>
+  <?php snippet('templates/reference/section', $package->children()->listed()) ?>
+</div>
+<?php endforeach ?>

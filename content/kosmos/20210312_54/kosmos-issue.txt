@@ -48,9 +48,7 @@ And it seems that Vite.js is the new cool kid on the block, since with the [Kirb
 
 [MetaKnight](https://getkirby.com/plugins/diesdasdigital/metaknight) is a powerful search-engine-optimization (SEO) plugin for Kirby. Jonathan Muth from diesdas.digital [gives some insights about the background of this plugin](https://medium.com/diesdas-direct/metaknight-win-every-seo-fight-2cf272d23a8f).
 
-(…columns)
-
-(columns…)
+++++
 
 With the [Code Editor](https://github.com/sylvainjule/kirby-code-editor) field you get code highlighting, optional line numbers, tabs or spaces for intentation and support for various languages in the Panel.
 

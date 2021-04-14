@@ -2,4 +2,4 @@ Title: How can I pay for a license?
 ----
 Text:
 
-(link: https://paddle.com text: Paddle) currently supports all major credit cards, Paypal, Apple Pay and Purchase Order.
+(link: https://paddle.com text: Paddle) currently supports all major credit cards, PayPal, Apple Pay and Purchase Order.

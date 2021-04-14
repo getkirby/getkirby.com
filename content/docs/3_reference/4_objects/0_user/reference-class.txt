@@ -1,0 +1,74 @@
+Title: $user
+
+----
+
+Class: Kirby\Cms\User
+
+----
+
+Text:
+
+## How to create a `$user` object
+
+Before you can call the methods of the User class, you need a `$user` object.
+
+The `$user` object is available via the `$kirby` object:
+
+### The current user
+
+```php
+$user = $kirby->user();
+```
+
+### A specific user by user id or email address
+```php
+$user = $kirby->user('you@yourdomain.com');
+```
+
+### The first user of the users collection
+```php
+$user = $kirby->users()->first();
+```
+
+<info>
+Before calling any of the methods of the User class, verify that you have a valid User object.
+</info>
+
+
+## Examples
+
+With the `$user` object in place, you can use the methods of the user class to get information about the user or modify the user object.
+
+### Check if the user is an admin
+
+```php
+if ($user->isAdmin()) {
+  echo "Hey, great, you can do anything you like!"
+}
+```
+
+### Convert user object to array
+
+```php
+$userData = $user->toArray();
+```
+
+### Change the user name programmatically
+
+```php
+$user->changeName('new-name');
+```
+
+### Fetch all files belonging to the user object
+
+```php
+$userFiles = $user->files();
+```
+
+<info>
+To keep the examples short, we don't [check if the (user) object exists](docs/cookbook/templating/php-templates#and-one-last-trick) in the examples above. In your code, you should always do that.
+</info>
+
+
+
+

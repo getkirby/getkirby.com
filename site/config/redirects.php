@@ -2,9 +2,10 @@
 
 return [
     // Simple
+    'blog/kosmos-(:any)'              => 'kosmos/$1',
+    'community'                       => 'https://chat.getkirby.com',
+    'community/(:all?)'               => 'https://chat.getkirby.com',
     'docs/guide/installation'         => 'docs/guide/quickstart',
-    'reference'                       => 'docs/reference',
-    'reference/(:all)'                => 'docs/reference/$1',
     'docs/cheatsheet'                 => 'docs/reference',
     'docs/cheatsheet/(:all?)'         => 'docs/reference/$1',
     'docs/toolkit'                    => 'docs/reference',
@@ -13,10 +14,14 @@ return [
     'docs/cookbook/migration/files'   => 'docs/cookbook/setup/migrate-files',
     'docs/cookbook/migration/users'   => 'docs/cookbook/setup/migrate-users',
     'docs/cookbook/migration/plugins' => 'docs/cookbook/setup/migrate-plugins',
+    'made-with-kirby-and-love'        => 'love',
+    'product'                         => 'features/developers',
+    'reference'                       => 'docs/reference',
+    'reference/(:all)'                => 'docs/reference/$1',
+    'resources'                       => 'kosmos',
     'v3'                              => 'releases/3.0',
     'v35'                             => 'releases/3.5',
-    'blog/kosmos-(:any)'              => 'kosmos/$1',
-    'made-with-kirby-and-love'        => 'love',
+    'why'                             => 'features/developers',
 
     // With logic
     'docs/reference/(:any)/(:all?)' => function ($group, $path = null) {

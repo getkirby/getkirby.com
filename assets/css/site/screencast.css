@@ -1,0 +1,27 @@
+.screencast {
+  grid-template-columns: 1fr;
+  border-radius: var(--rounded);
+  overflow: hidden;
+}
+
+.screencast .h6,
+.screencast .h2 {
+  color: var(--color-white);
+  margin-top: 0;
+}
+
+.screencast a {
+  text-decoration: none;
+}
+
+@media screen and (min-width: 42rem) {
+  .screencast {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 72rem) {
+  .screencast {
+    grid-template-columns: 1fr 2fr;
+  }
+}

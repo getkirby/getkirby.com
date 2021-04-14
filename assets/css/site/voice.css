@@ -1,0 +1,5 @@
+.voice > p {
+  border-left: 2px solid var(--color-black);
+  padding-left: .75rem;
+  max-width: 25rem;
+}

@@ -1,0 +1,27 @@
+.masonry {
+  --columns: 4;
+  --columns-sm: 1;
+  --columns-md: 2;
+  --gap: var(--spacing-6);
+  columns: var(--columns-sm);
+  column-gap: var(--gap);
+}
+.masonry > * {
+  display: inline-block;
+  break-inside: avoid;
+  margin-bottom: var(--gap);
+}
+
+@media screen and (min-width: 40rem) {
+  .masonry {
+    columns: var(--columns-md);
+  }
+}
+
+@media screen and (min-width: 72rem) {
+  .masonry {
+    --columns-lg: var(--columns);
+    columns: var(--columns-lg);
+  }
+}
+

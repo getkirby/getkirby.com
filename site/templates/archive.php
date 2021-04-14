@@ -1,37 +1,77 @@
-<?php snippet('header') ?>
+<?php layout() ?>
 
-  <main class="archive-page | main" id="maincontent">
-    <article class="wrap">
+<article>
 
-      <?php snippet('hero', ['align' => 'center']) ?>
+  <header class="mb-24">
+		<h1 class="h1">
+			Travel back in time
+		</h1>
+  </header>
 
-      <section class="archive">
-        <?php foreach ($page->children() as $version): ?>
-        <figure>
-          <a href="<?= $version->src() ?>" class="screenshot">
-            <?= $version->image()->crop(1100, 800, 'top ') ?>
+  <ul class="columns items-center" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 3; --gap: var(--spacing-12)">
+    <li>
+      <article>
+        <header class="mb-3">
+          <p class="h6 mb-1">2012-2014</p>
+          <h2 class="h2 border-top pt-3">Kirby 1</h2>
+        </header>
+        <div class="color-gray-700 mb-12">
+          <p>Kirby 1 has reached its end of life and is no longer supported by us.</p>
+        </div>
+        <nav class="columns" style="--columns: 2">
+          <a href="https://k1.getkirby.com/docs" class="btn btn--outlined">
+            <?= icon('book') ?>
+            Docs
           </a>
-          <figcaption>
-            <a href="<?= $version->src() ?>">
-              <p><strong>Kirby Docs <?= $version->title() ?></strong></p>
-              <?= $version->description()->kt() ?>
-            </a>
-            <dl>
-              <a href="<?= $version->src() ?>">
-                <dt>Docs</dt>
-                <dd><?= $version->src() ?></dd>
-              </a>
-              <a href="<?= $version->github() ?>">
-                <dt>Source:</dt>
-                <dd><?= $version->github() ?></dd>
-              </a>
-            </dl>
-          </figcaption>
-        </figure>
-        <?php endforeach ?>
-      </section>
+          <a href="https://github.com/getkirby-v1" class="btn btn--outlined">
+            <?= icon('github') ?>
+            Source
+          </a>
+        </nav>
+      </article>
+    </li>
+    <li>
+      <article>
+        <header class="mb-3">
+          <p class="h6 mb-1">2014-2020</p>
+          <h2 class="h2 border-top pt-3">Kirby 2</h2>
+        </header>
+        <div class="color-gray-700 mb-12">
+          <p>Kirby 2 has reached its end of life and is no longer supported by us.</p>
+        </div>
+        <nav class="columns" style="--columns: 2">
+          <a href="https://k2.getkirby.com/docs" class="btn btn--outlined">
+            <?= icon('book') ?>
+            Docs
+          </a>
+          <a href="https://github.com/getkirby-v2" class="btn btn--outlined">
+            <?= icon('github') ?>
+            Source
+          </a>
+        </nav>
+      </article>
+    </li>
+    <li>
+      <article class="p-6 bg-white shadow-2xl">
+        <header class="mb-3">
+          <p class="h6 mb-1">Since 2019</p>
+          <h2 class="h2 border-top pt-3">Kirby 3</h2>
+        </header>
+        <div class="color-gray-700 mb-12">
+          <p>Kirby 3 is the latest version of Kirby. <br><strong class="color-black">Start new projects with Kirby 3!</strong></p>
+        </div>
+        <nav class="columns" style="--columns: 2">
+          <a href="/docs" class="btn btn--filled">
+            <?= icon('book') ?>
+            Docs
+          </a>
+          <a href="https://github.com/getkirby" class="btn btn--filled">
+            <?= icon('github') ?>
+            Source
+          </a>
+        </nav>
+      </article>
+    </li>
+  </ul>
 
-    </article>
-  </main>
-
-<?php snippet('footer') ?>
+</article>

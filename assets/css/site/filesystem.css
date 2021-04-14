@@ -1,0 +1,103 @@
+.filesystem {
+  --border: #3c3c3c;
+  --icon-aqua: var(--color-aqua-400);
+  --icon-blue: var(--color-blue-400);
+  --icon-green: var(--color-green-400);
+  --icon-orange: var(--color-orange-400);
+  --icon-purple: var(--color-purple-400);
+  --icon-red: var(--color-red-400);
+  --icon-yellow: var(--color-yellow-400);
+  --gradient: linear-gradient(var(--border), var(--border));
+  padding: var(--spacing-4);
+  background: var(--color-black);
+  color: var(--color-gray-100);
+  font-family: var(--font-mono);
+  line-height: var(--leading-relaxed);
+  border-radius: var(--rounded);
+  font-size: var(--text-base);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filesystem details {
+  padding-right: var(--spacing-4);
+  width: min-content;
+}
+
+.filesystem-label {
+  --icon: var(--color-white);
+  min-height: 1.625rem;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.filesystem-label svg {
+  margin-right: var(--spacing-2);
+  color: var(--icon);
+  flex-shrink: 0;
+}
+.filesystem summary {
+  outline: none;
+  list-style: none;
+}
+.filesystem summary::-webkit-details-marker {
+  display: none;
+}
+
+/** Filesystem **/
+.filesystem ul {
+  margin: 0 !important;
+}
+.filesystem li {
+  list-style: none !important;
+}
+
+/* Filesystem Lines */
+.filesystem li li {
+  background: var(--gradient) 0.4375rem 0/0.0625rem 100% no-repeat, var(--gradient) 0.4375rem 0.75em/0.5rem 0.0625rem no-repeat;
+  padding-left: 1.625rem;
+}
+.filesystem li li:last-child {
+  background: var(--gradient) 0.4375rem 0/0.0625rem 0.75em no-repeat, var(--gradient) 0.4375rem 0.75em/0.5rem 0.0625rem no-repeat;
+}
+
+/* Filesystem icons */
+.filesystem [data-type="folder-collapsed"],
+.filesystem [data-type="folder-expanded"],
+.filesystem [data-type="php"],
+.filesystem [data-type="css"] {
+  --icon: var(--icon-blue);
+}
+
+.filesystem [data-type="image"],
+.filesystem [data-type="code"],
+.filesystem [data-type="archive"] {
+  --icon: var(--icon-green);
+}
+
+.filesystem [data-type="video"] {
+  --icon: var(--icon-purple);
+}
+
+.filesystem [data-type="javascript"],
+.filesystem [data-type="html"],
+.filesystem [data-type="yaml"] {
+  --icon: var(--icon-orange);
+}
+
+.filesystem [data-type="text"] {
+  --icon: var(--icon-yellow);
+}
+
+.filesystem [data-type="markdown"],
+.filesystem [data-type="document"],
+.filesystem [data-type="font"] {
+  --icon: var(--icon-aqua);
+}
+
+.filesystem [data-type="git"],
+.filesystem [data-type="audio"] {
+  --icon: var(--icon-red);
+}

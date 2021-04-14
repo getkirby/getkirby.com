@@ -1,9 +1,0 @@
-Title: Versions
-
-----
-
-Description: Docs for older versions of Kirby.
-
-----
-
-Intro: Time travel is possible!

@@ -45,9 +45,7 @@ Brewery
 [SVGeez](https://svgeez.com)
 Free SVG resources for your projects and at the same time a website made with Kirby.
 
-(…columns)
-
-(columns…)
+++++
 
 [The Whale](https://thewhale.cc), a new project by Gilles Vauvarin, not only brings you weekly news but is also one of the first few projects out in the wild built on [Kirby&nbsp;3](https://getkirby.com/next) beta.
 

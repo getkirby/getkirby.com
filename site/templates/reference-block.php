@@ -1,6 +1,6 @@
-<?php snippet('cheatsheet.article.header') ?>
+<?php layout('reference') ?>
 
-<div class="text">
+<div class="prose">
   <h2 id="preview"><a href="#preview">Preview</a></h2>
   <?= kirbytag('screenshot', $page->image()->filename()) ?>
 
@@ -27,7 +27,3 @@
   <h3 id="default-files__vue-component"><a href="#default-files__vue-component">Vue component</a></h3>
   <p><a href="https://github.com/getkirby/kirby/blob/master/panel/src/components/Blocks/Types/<?= ucfirst($page->title()) ?>.vue">kirby/blob/master/panel/src/components/Blocks/Types/<?= ucfirst($page->title()) ?>.vue</a></p>
 </div>
-
-<?php snippet('github.edit') ?>
-
-<?php snippet('cheatsheet.article.footer') ?>

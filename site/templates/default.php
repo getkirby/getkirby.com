@@ -1,12 +1,8 @@
-<?php snippet('header') ?>
+<?php layout() ?>
 
-  <main class="default-page | main" id="maincontent">
-    <article class="wrap">
-      <?php snippet('hero', ['align' => 'center']) ?>
-      <div class="text">
-        <?= $page->text()->kt()->anchorHeadlines() ?>
-      </div>
-    </article>
-  </main>
-
-<?php snippet('footer') ?>
+<article class="max-w-xl mx-auto mb-42">
+  <h1 class="h1 mb-24"><?= $page->title() ?></h1>
+  <div class="prose">
+    <?= $page->text()->kt() ?>
+  </div>
+</article>

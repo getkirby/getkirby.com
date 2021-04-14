@@ -1,0 +1,14 @@
+.deployignore
+.editorconfig
+.github
+.github/**
+.htaccess
+.vscode
+.vscode/**
+composer.json
+package-lock.json
+package.json
+postcss.config.js
+README.md
+scripts
+uglify.json

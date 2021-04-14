@@ -34,7 +34,7 @@ Websites created with Kirby out in the wild are always a great source of inspira
 
 On Tuesday, we published the Kirby 3.5.1 release candidate. Help us test it before the final release next Tuesday. [Kirby 3.5.1](https://github.com/getkirby/kirby/releases/tag/3.5.1-rc.1) comes with a lot of enhancements, fixes and some new features:
 
-New blocks navigation in the blocks drawerExtendable settings in the Layout fieldSupport for blocks in field queries 
+New blocks navigation in the blocks drawerExtendable settings in the Layout fieldSupport for blocks in field queries
 
 ## (Re)watch the Kirby 3.5 show
 

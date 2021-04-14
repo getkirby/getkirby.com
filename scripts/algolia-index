@@ -17,7 +17,7 @@ require __DIR__ . '/../kirby/bootstrap.php';
 
 $props = [
   'roots' => [
-      'index'   => __DIR__ . '/../www',
+      'index'   => __DIR__ . '/..',
       'content' => __DIR__ . '/../content',
       'site'    => __DIR__ . '/../site',
   ],

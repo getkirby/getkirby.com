@@ -1,5 +1,0 @@
-Title: Built-in REST API
-
-----
-
-Text: Use Kirby as a **headless CMS** with the full power of the Panel in the background. This makes Kirby the perfect companion for your SPAs or mobile applications.

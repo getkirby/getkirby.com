@@ -1,9 +1,0 @@
-Title: Content
-
-----
-Entry:
-
-Content can refer either to the content folder or to anything within the content folder: text files, media files or meta data files.
-
-----
-Link: docs/guide/content/introduction

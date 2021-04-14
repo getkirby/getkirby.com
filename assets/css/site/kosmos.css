@@ -1,0 +1,26 @@
+.kosmos-fields {
+  margin-left: -1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.kosmos-field {
+  flex-grow: 1;
+  flex-basis: 33.33%;
+  min-width: 12rem;
+  margin-bottom: 1.5rem;
+  margin-left: 1.5rem;
+}
+.kosmos-field:last-child {
+  flex-basis: auto;
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 45rem) {
+  .kosmos-form label {
+    height: 2rem;
+    margin-bottom: 0;
+  }
+  .kosmos-form .btn {
+    margin-top: 2rem;
+  }
+}

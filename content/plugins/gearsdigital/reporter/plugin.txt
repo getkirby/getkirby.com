@@ -10,4 +10,4 @@ Category: panel
 
 ----
 
-Description: Report issues to Github and Gitlab with ease – directly from the panel!
+Description: Report issues to GitHub and GitLab with ease – directly from the panel!

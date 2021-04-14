@@ -24,7 +24,7 @@ Kirby 3 comes with a beautiful new control Panel built on top of (link: https://
 
 ### Sections & Tabs
 
-Our brand new section system lifts blueprints to a completely different level. You become the interface designer and decide for each type of page which features you need and how to arrange them.
+Our brand-new section system lifts blueprints to a completely different level. You become the interface designer and decide for each type of page which features you need and how to arrange them.
 
 (picture: blueprint.png)
 
@@ -130,7 +130,7 @@ With Kirby 3, you can make use of our page cache or add custom caching of your o
 
 This introduction could go on forever. We recommend you just give it a try and play around with all the new features yourself.
 
-The best starting point is our brand new (link: try text: Starterkit):
+The best starting point is our brand-new (link: try text: Starterkit):
 
 (screenshot: starterkit.jpg)
 

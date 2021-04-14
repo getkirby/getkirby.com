@@ -1,0 +1,10 @@
+Title: Section
+
+----
+
+Entry:
+
+Sections are used in blueprints to organize content or to display information. Kirby comes with four built-in section types but you can create your own in a plugin.
+
+----
+Link: docs/guide/blueprints/layout

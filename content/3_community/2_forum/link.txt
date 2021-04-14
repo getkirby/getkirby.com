@@ -1,9 +1,0 @@
-Title: Support forum
-
-----
-
-Intro: Our forum is the best place to meet the community, our core team and contributors. Find help, post your latest Kirby sites and just hang out with us.
-
-----
-
-Link: https://forum.getkirby.com

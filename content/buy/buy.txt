@@ -1,4 +1,4 @@
-Title: Pricing
+Title: Buy
 
 ----
 
@@ -6,13 +6,9 @@ Description: Buy a Kirby license and get answers to common questions about buyin
 
 ----
 
-MenuTitle: Buy
-
-----
-
-Intro:
-
-Kirby combines the transparency of an open-source project with a friendly community and a fair license model.
+Thumbnail:
+  -
+  title: Buy license
 
 ----
 

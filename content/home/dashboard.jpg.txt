@@ -1,5 +1,0 @@
-Caption: Dashboard
-
-----
-
-Description: Set up the dashboard to fit each site perfectly. Give editors quick access to the most important data.

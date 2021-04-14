@@ -1,9 +1,0 @@
-Title: Markdown
-
-----
-Entry:
-
-A markup language that uses plain text formatting syntax that can be converted to HTML and other formats. Created by (link: https://daringfireball.net/projects/markdown/ text: John Gruber) in 2004.
-
-----
-Link: docs/guide/content/text-formatting#markdown

@@ -1,0 +1,10 @@
+Title: Route
+
+----
+Entry:
+
+A route is a URL pattern that when called executes a defined action, for example to return a particular page, create a new page, read data from a file etc.
+
+----
+
+Link: docs/guide/routing

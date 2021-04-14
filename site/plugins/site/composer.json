@@ -1,11 +1,14 @@
 {
-    "name": "kirby/site",
-    "autoload": {
-        "psr-4": {
-            "Kirby\\Site\\": "src/"
-        }
-    },
-    "require": {
-        "phpdocumentor/reflection-docblock": "^3.1"
+  "name": "getkirby/site",
+  "autoload": {
+    "psr-4": {
+      "Kirby\\": "src/"
     }
+  },
+  "require": {
+    "phpdocumentor/reflection-docblock": "^5.2.2"
+  },
+  "config": {
+    "optimize-autoloader": true
+  }
 }

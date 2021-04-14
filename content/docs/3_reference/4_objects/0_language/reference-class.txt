@@ -1,0 +1,57 @@
+Title: $language
+
+----
+
+Class: Kirby\Cms\Language
+
+----
+
+Text:
+
+## Details
+
+To have access to the methods of the `$language` object, you need to get a language object first:
+
+### Default language
+
+```php
+$language = $kirby->defaultLanguage();
+```
+
+### The current language
+
+```php
+$language = $kirby->language();
+```
+
+### Any particular language
+
+```php
+$language = $kirby->language('fr');
+```
+
+## Examples
+
+With the object in place, you can use it like this:
+
+### Get the language code
+
+```php
+echo $language->code();
+```
+
+### Get the language name
+
+```php
+echo $language->name();
+```
+
+### Get the available translations
+
+```php
+dump($language->translations());
+```
+
+
+
+

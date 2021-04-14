@@ -5,12 +5,12 @@ class SecurityPage extends Page
 
     public function incidents()
     {
-        return parent::incidents()->toStructure();
+        return parent::incidents()->toStructure()->flip();
     }
 
     public function incidentsTable()
     {
-        return snippet('security-incidents', ['incidents' => $this->incidents()], true);
+        return snippet('templates/security/incidents', ['incidents' => $this->incidents()], true);
     }
 
     public function replace()
@@ -36,7 +36,7 @@ class SecurityPage extends Page
 
     public function supportedTable()
     {
-        return snippet('security-supported', ['supported' => $this->supported()], true);
+        return snippet('templates/security/supported', ['supported' => $this->supported()], true);
     }
 
     public function text()

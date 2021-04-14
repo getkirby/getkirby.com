@@ -1,0 +1,5 @@
+Template: content-type
+----
+Caption: Project
+----
+Text: Put your projects in the limelight. Create galleries, download lists, custom attributes, art-directed project templates and more.

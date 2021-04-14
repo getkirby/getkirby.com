@@ -1,0 +1,7 @@
+.logo {
+  display: flex;
+  padding: var(--spacing-3);
+}
+.logo svg {
+  display: flex;
+}

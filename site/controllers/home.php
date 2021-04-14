@@ -1,13 +1,28 @@
 <?php
 
-return function ($kirby, $page) {
+use Kirby\Toolkit\V;
 
-  return [
-    'chameleon'  => $page->image('chameleon.jpg'),
-    'components' => $page->image('components.jpg'),
-    'hero'       => $page->image('hero.jpg'),
-    'matomo'     => $page->image('matomo.jpg'),
-    'panel'      => $page->images()->find('dashboard.jpg', 'article.jpg', 'blog.jpg', 'microsite.jpg', 'product.jpg'),
-  ];
+return function ($page) {
+    $storyId    = get('your') ?? 'company';
+    $story      = $page->find($storyId) ?? $page->find('company');
+    $storyImage = $story->images()->findBy('name', 'panel');
 
+    // shows banner only startDate/endDate is empty or current date is between in
+    if (option('banner.enabled') === true) {
+        foreach (option('banner.types', []) as $type) {
+            if (
+                (empty($type['startDate']) === true || V::date($type['startDate'], '<=', date('Y-m-d'))) &&
+                (empty($type['endDate']) === true || V::date($type['endDate'], '>=', date('Y-m-d')))
+            ) {
+                $banner = $type;
+                break;
+            }
+        }
+    }
+
+    return [
+        'banner'     => $banner ?? null,
+        'story'      => $story,
+        'storyImage' => $storyImage
+    ];
 };

@@ -1,5 +1,0 @@
-Title: Releases
-
-----
-
-Link: https://github.com/getkirby/kirby/releases

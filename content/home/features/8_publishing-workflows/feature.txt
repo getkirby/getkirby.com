@@ -1,5 +1,0 @@
-Title: Custom publishing workflows
-
-----
-
-Text: Customizable page states give you maximum control over your workflow, from drafts over unreviewed to published pages. Choose what you need and start creating.

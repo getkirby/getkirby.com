@@ -1,9 +1,0 @@
-Title: Themes
-
-----
-
-Intro: You are looking for a nice theme to get started with instead of creating your site from scratch? Check out dozens of free and commercial themes.
-
-----
-
-Link: http://getkirby-themes.com

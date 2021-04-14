@@ -1,9 +1,0 @@
-Title: Contributors
-
-----
-
-Intro: Kirby is well-known and loved for its friendly community. We keep tight contact with our customers to constantly improve our product and everything around it.
-
-----
-
-Link: community/#contributors

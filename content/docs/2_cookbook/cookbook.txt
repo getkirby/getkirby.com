@@ -1,0 +1,11 @@
+Title: Cookbook
+
+----
+
+Description: Delicious recipes and solutions for common tasks.
+
+----
+
+Thumbnail:
+  -
+  image: outline/bookmark.svg
