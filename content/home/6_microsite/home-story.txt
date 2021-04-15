@@ -47,37 +47,19 @@ Api:
 
 ```yaml
 {
-  columns: [
+  blocks: [
     {
-      width: "1/1",
-      blocks: [
-        {
-          type: "heading",
-          content: {
-            text: "Our app is quite good",
-            level: "h1"
-          }
-        }
-      ]
+      type: "text",
+      content: {
+        text: "It can do all of this …",
+      }
     },
     {
-      width: "1/3",
-      blocks: [
-        {
-          type: "text",
-          content: {
-            text: "It can do all of this …",
-          }
-        },
-        {
-          type: "image",
-          content: {
-            src: "https://the.app.kirby/medium/.../app.jpg",
-          }
-        }
-      ]
-    },
-    ...
+      type: "image",
+      content: {
+        src: "https://the.app.kirby/medium/.../app.jpg",
+      }
+    }
   ]
 }
 ```
