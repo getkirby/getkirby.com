@@ -23,7 +23,7 @@ class Cachebuster
 
         if (file_exists($root)) {
             $version = static::version($root, $path);
-            $path    = dirname($path) . '/' . F::name($path) . '.' . $version . '.' . F::extension($path);
+            $path = $path . '?v=' . $version;
         }
 
         return $path;

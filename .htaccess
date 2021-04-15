@@ -22,10 +22,6 @@ RewriteEngine on
 #
 # RewriteBase /
 
-# cache busting
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^assets/(.*).([a-zA-Z0-9]*).(js|css|png|jpg|jpeg|gif|ico|svg)$ assets/$1.$3 [L]
-
 # block files and folders beginning with a dot, such as .git
 # except for the .well-known folder, which is used for Let's Encrypt and security.txt
 RewriteRule (^|/)\.(?!well-known\/) index.php [L]
