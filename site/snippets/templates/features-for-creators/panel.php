@@ -1,4 +1,4 @@
-<section style="margin-bottom: 16rem">
+<section id="panel" style="margin-bottom: 16rem">
   <div class="columns items-end mb-12" style="--columns: 2; --gap: var(--spacing-24)">
     <div>
       <?php snippet('templates/features/intro', [

@@ -4,17 +4,17 @@ return [
     'panel' => [
         'text' => 'The Panel',
         'icon' => 'outline/panel',
-        'link' => '/features/creators#the-panel'
+        'link' => '/features/creators#panel'
     ],
     'field-blocks' => [
         'text' => 'Blocks field',
         'icon' => 'outline/blocks',
-        'link' => '/features/creators#next-level-editing'
+        'link' => '/features/creators#editing'
     ],
     'field-layout' => [
-        'text' => 'Layout field',
+        'text' => 'Layouts',
         'icon' => 'outline/blocks',
-        'link' => '/features/designers#layout-field'
+        'link' => '/features/designers#layouts'
     ],
     'plugins' => [
         'text' => 'Plugins',
@@ -24,7 +24,7 @@ return [
     'languages' => [
         'text' => 'Languages',
         'icon' => 'outline/globe',
-        'link' => '/features/creators#go-global'
+        'link' => '/features/creators#internationalisation'
     ],
     'users' => [
         'text' => 'Users',
@@ -34,17 +34,17 @@ return [
     'files' => [
         'text' => 'Just files & folders',
         'icon' => 'outline/content',
-        'link' => '/features/developers#at-the-core-files-folders'
+        'link' => '/features/developers#files-and-folders'
     ],
     'assets' => [
         'text' => 'Assets',
         'icon' => 'outline/link',
-        'link' => '/features/creators#asset-management'
+        'link' => '/features/creators#assets'
     ],
     'headless' => [
         'text' => 'Go headless',
         'icon' => 'outline/cloud',
-        'link' => '/features/developers#go-headless'
+        'link' => '/features/developers#headless'
     ],
     'templates' => [
         'text' => 'Templating',
