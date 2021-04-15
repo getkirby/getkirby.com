@@ -1,4 +1,4 @@
-Title: Kirby - The CMS that adapts to any project
+Title: Kirby is the CMS that adapts to you
 
 ----
 

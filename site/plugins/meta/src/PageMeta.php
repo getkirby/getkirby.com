@@ -7,6 +7,7 @@ use Kirby\Cms\Field;
 use Kirby\Cms\File;
 use Kirby\Http\Response;
 use Kirby\Toolkit\A;
+use Kirby\Toolkit\F;
 use Kirby\Toolkit\Html;
 use Kirby\Toolkit\Tpl;
 
@@ -326,10 +327,14 @@ class PageMeta {
             imagesy($logo)
         );
 
-        // Image or domain
         if ($image = $data['image'] ?? null) {
-
             $image = url($image->url());
+        } else {
+            $image = null;
+        }
+
+        // Image or domain
+        if ($image && F::extension($image) !== 'svg') {
 
             // Convert SVG to image string
             if (strpos(pathinfo($image)['extension'], 'svg') !== false) {
