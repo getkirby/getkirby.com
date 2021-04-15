@@ -21,7 +21,9 @@ function cdn($file, array $params = []): string
             $params['height'] = $params['height'] ?? $params['width'];
             $params['crop'] = 'smart';
         } else {
-            $params['fit'] = 'inside';
+            if (isset($params['width']) && isset($params['height'])) {
+                $params['fit'] = 'inside';
+            }
         }
 
         $query = '?' . http_build_query($params);
