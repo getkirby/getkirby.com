@@ -1,9 +1,25 @@
 <?php
-
 $area  = $area ?? 'all';
 $areas = option('search.areas');
-
 ?>
+
+<style>
+.search-input figure svg:last-child {
+  animation: Spin .9s linear infinite;
+}
+@keyframes Spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+form:not([data-fetching]) .search-input figure svg:last-child {
+  display: none;
+}
+form[data-fetching] .search-input figure svg:first-child {
+  display: none;
+}
+</style>
+
 <div class="search">
   <button class="search-button" type="button" data-area="<?= $area ?? 'all' ?>">
     <?= icon('search') ?>
@@ -12,7 +28,10 @@ $areas = option('search.areas');
   <dialog class="overlay search-dialog">
     <form class="relative bg-white shadow-xl" action="/search">
       <div class="search-input relative flex items-stretch">
-        <figure class="grid place-items-center"><?= icon('search') ?></figure>
+        <figure class="grid place-items-center">
+          <?= icon('search') ?>
+          <?= icon('loader') ?>
+        </figure>
         <input
           type="text"
           name="q"

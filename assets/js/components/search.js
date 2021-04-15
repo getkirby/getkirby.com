@@ -30,7 +30,7 @@ export default class {
     });
 
     this.$dialog.addEventListener("click", this.onBlur.bind(this));
-    this.$input.addEventListener("input", debounce(this.onInput.bind(this), 200));
+    this.$input.addEventListener("input", debounce(this.onInput.bind(this), 100));
     this.$dialog.addEventListener("keydown", this.onKey.bind(this));
 
     // Keyboard shortcut:
@@ -146,7 +146,9 @@ export default class {
     this.total = 0;
 
     if (this.q.length > 2) {
+      this.$form.setAttribute("data-fetching", true);
       this.results = await this.fetch(this.q);
+      this.$form.removeAttribute("data-fetching");
     }
 
     this.render();
