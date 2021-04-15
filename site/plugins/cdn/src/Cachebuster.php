@@ -3,6 +3,7 @@
 namespace Kirby\Cdn;
 
 use Kirby\Cms\App;
+use Kirby\Toolkit\F;
 
 class Cachebuster
 {
@@ -22,7 +23,7 @@ class Cachebuster
 
         if (file_exists($root)) {
             $version = static::version($root, $path);
-            $path = $path . '?v=' . $version;
+            $path    = dirname($path) . '/' . F::name($path) . '.' . $version . '.' . F::extension($path);
         }
 
         return $path;

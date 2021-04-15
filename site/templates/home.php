@@ -24,6 +24,6 @@
 </article>
 
 <script type="module">
-import { Playground } from "/assets/js/components/playground.js";
+import { Playground } from "<?= url("/assets/js/layouts/playground.js") ?>";
 new Playground();
 </script>

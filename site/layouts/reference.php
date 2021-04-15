@@ -155,7 +155,7 @@
   </script>
 
   <script type="module">
-  import  { Menu } from "/assets/js/components/reference.js";
+  import  { Menu } from "<?= url('/assets/js/layouts/reference.js') ?>";
   new Menu();
   </script>
 

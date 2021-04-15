@@ -33,5 +33,10 @@ extract([
 <?= $meta->social() ?>
 
 <?= css('/assets/css/index.css') ?>
+
+<script type="module">
+
+</script>
+
 <?= js(['/assets/js/index.js'], ['type' => 'module']) ?>
 
