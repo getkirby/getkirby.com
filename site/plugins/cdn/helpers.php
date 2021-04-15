@@ -35,6 +35,8 @@ function cdn($file, array $params = []): string
             }
         }
 
+        $params['v'] = $file->mediaHash();
+
         $query = '?' . http_build_query($params);
     }
 
