@@ -546,7 +546,7 @@ class Search {
 
 
 /** AREA SELECTOR */
-export class AreaSelector {
+class AreaSelector {
 
   constructor(parent) {
     this.$parent = parent;
