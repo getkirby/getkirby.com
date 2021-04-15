@@ -279,7 +279,7 @@ We still trust in (link: https://algolia.com text: Algolia) for our search. They
 
 ### Deployment
 
-Whenever we push changes to our (link: https://github.com/getkirby/getkirby.com text: master branch on GitHub), (link: https://deployhq.com text: DeployHQ) picks those changes up and deploys them to our server. This workflow is the fastest for us as a team and we can all work remotely on different parts of the site and iterate quickly over issues.
+Whenever we push changes to our (link: https://github.com/getkirby/getkirby.com text: main branch on GitHub), (link: https://deployhq.com text: DeployHQ) picks those changes up and deploys them to our server. This workflow is the fastest for us as a team and we can all work remotely on different parts of the site and iterate quickly over issues.
 
 ## Get involved
 

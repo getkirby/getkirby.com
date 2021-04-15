@@ -4,10 +4,11 @@ name: Update Algolia index
 on:
   push:
     branches:
-    - master
+    - main
     paths:
+    - .github/workflows/algolia.yml
     - content/**.txt
-    - site/config/algolia.php
+    - site/config/search.php
     - site/models/**
     - site/plugins/**
 
