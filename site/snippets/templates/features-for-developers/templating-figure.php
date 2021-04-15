@@ -7,6 +7,7 @@
 <select aria-label="Switch the template engine example" class="template-select mb-3">
   <option value="php" selected>PHP template</option>
   <option value="twig">Twig template</option>
+  <option value="blade">Blade template</option>
 </select>
 
 <div id="php" data-template>
@@ -18,6 +19,14 @@
   </div>
   <div class="font-mono text-xs color-gray-700">
     <a href="/plugins/mgfagency/twig"><strong class="font-normal color-black link">Kirby Twig plugin</strong> by Christian Zehetner</a>
+  </div>
+</div>
+<div id="blade" data-template class="hidden">
+  <div class="mb-3">
+    <?= $page->bladeTemplate()->kt() ?>
+  </div>
+  <div class="font-mono text-xs color-gray-700">
+    <a href="/plugins/afbora/blade"><strong class="font-normal color-black link">Kirby Blade plugin</strong> by Ahmet Bora</a>
   </div>
 </div>
 

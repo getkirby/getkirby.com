@@ -101,6 +101,31 @@ twigTemplate:
 ```
 
 ----
+
+bladeTemplate:
+
+```php
+@extends('layouts.default')
+
+@section('content')
+<article class="album">
+  <h1>{{ $page->title() }}</h1>
+  <figure class="cover">
+    {!! $cover->resize(800, 600) !!}
+  </figure>
+  <div class="text">
+    {!! $page->text()->kirbytext() !!}
+  </div>
+  <ul class="gallery">
+    @foreach($gallery as $image)
+    <li>{!! $image->crop(300) !!}</li>
+    @endforeach
+  </ul>
+</article>
+@endsection
+```
+
+----
 Api:
 
 ```yaml "/api/pages/notes/children"
