@@ -18,9 +18,29 @@
   <ul class="auto-fill highlight bg-dark" style="--min: 12rem; --gap: var(--spacing-12);">
     <?php foreach ($images as $image): ?>
     <li>
-      <a data-lightbox="panel" href="<?= $image->url() ?>">
+      <a data-lightbox="panel" href="<?= $image->resize(1800, 1800)->url() ?>">
         <figure>
-          <p class="mb-3 shadow-xl rounded overflow-hidden" style="--aspect-ratio: 3/2"><?= $image->crop(700, 466, 'top') ?></p>
+          <p class="mb-3 bg-black shadow-xl rounded overflow-hidden" style="--aspect-ratio: 3/2">
+            <?= img($image, [
+              'src' => [
+                'crop'   => 'top',
+                'width'  => 400,
+                'height' => 266,
+              ],
+              'srcset' => [
+                '1x' => [
+                  'crop'   => 'top',
+                  'width'  => 400,
+                  'height' => 266,
+                ],
+                '2x' => [
+                  'crop'   => 'top',
+                  'width'  => 800,
+                  'height' => 532,
+                ],
+              ]
+            ]) ?>
+          </p>
           <figcaption class="font-mono text-sm color-gray-400">
             <h3 class="color-white"><?= $image->caption() ?></h3>
             <p"><?= $image->text() ?></p>

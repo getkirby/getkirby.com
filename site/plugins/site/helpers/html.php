@@ -12,6 +12,10 @@ function icon($name)
 
 function img($file, array $props = [])
 {
+    if (is_string($file) === true) {
+        $file = image($file);
+    }
+
     if (!$file) {
         return;
     }

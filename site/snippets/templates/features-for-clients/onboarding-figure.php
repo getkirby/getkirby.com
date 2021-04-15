@@ -1,6 +1,5 @@
-<?php if ($image = image('company.jpg')): ?>
 <figure>
-  <?= img($image, [
+  <?= img('company.jpg', [
     'class' => 'shadow-2xl',
     'lightbox' => true,
     'src' => [
@@ -16,4 +15,3 @@
     ]
   ]) ?>
 </figure>
-<?php endif ?>
