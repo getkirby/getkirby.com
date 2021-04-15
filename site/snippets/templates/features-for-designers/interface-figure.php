@@ -12,18 +12,83 @@
 
 <div class="ingrid">
   <div style="grid-column: span 6; align-self: flex-end">
-    <?php snippet('img', ['image' => image('author.png')]) ?>
+    <?= img('author.png', [
+      'lightbox' => 'interface',
+      'src' => [
+        'width' => 500,
+      ],
+      'srcset' => [
+        '1x' => [
+          'width' => 500
+        ],
+        '2x' => [
+          'width' => 1000
+        ],
+      ]
+    ]) ?>
   </div>
   <div style="grid-column: span 6; align-self: flex-end">
-    <?php snippet('img', ['image' => image('list.png')]) ?>
+    <?= img('list.png', [
+      'lightbox' => 'interface',
+      'src' => [
+        'width' => 500,
+      ],
+      'srcset' => [
+        '1x' => [
+          'width' => 500
+        ],
+        '2x' => [
+          'width' => 1000
+        ],
+      ]
+    ]) ?>
   </div>
   <div style="grid-column: span 12">
-    <?php snippet('img', ['image' => image('images.png')]) ?>
+    <?= img('images.png', [
+      'lightbox' => 'interface',
+      'src' => [
+        'width' => 1000,
+      ],
+      'srcset' => [
+        '1x' => [
+          'width' => 1000
+        ],
+        '2x' => [
+          'width' => 2000
+        ],
+      ]
+    ]) ?>
   </div>
   <div style="grid-column: span 9">
-    <?php snippet('img', ['image' => image('structure.png')]) ?>
+    <?= img('structure.png', [
+      'lightbox' => 'interface',
+      'src' => [
+        'width' => 750,
+      ],
+      'srcset' => [
+        '1x' => [
+          'width' => 750
+        ],
+        '2x' => [
+          'width' => 1500
+        ],
+      ]
+    ]) ?>
   </div>
   <div style="grid-column: span 6">
-    <?php snippet('img', ['image' => image('albums.png')]) ?>
+    <?= img('albums.png', [
+      'lightbox' => 'interface',
+      'src' => [
+        'width' => 500,
+      ],
+      'srcset' => [
+        '1x' => [
+          'width' => 500
+        ],
+        '2x' => [
+          'width' => 1000
+        ],
+      ]
+    ]) ?>
   </div>
 </div>

@@ -48,7 +48,7 @@ function img($file, array $props = [])
 
     if (empty($props['lightbox']) === false && $props['lightbox'] !== false) {
         return Html::a($file->resize(1800, 1800)->url(), [$img], [
-            'class'         => 'block bg-light',
+            'class'         => 'block',
             'style'         => '--aspect-ratio: ' . $file->width() . '/' . $file->height(),
             'data-lightbox' => $props['lightbox']
         ]);
