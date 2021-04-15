@@ -19,11 +19,13 @@ function cdn($file, array $params = []): string
         // Use the width as height if the height is not set
         if (empty($params['crop']) === false && $params['crop'] !== false) {
             $params['height'] = $params['height'] ?? $params['width'];
-            $params['crop']   = 'smart';
 
-            if (empty($params['position']) === false && $params['position'] === 'top') {
+            if ($params['crop'] === 'top') {
                 $params['crop'] = 'fp,0,0';
+            } else {
+                $params['crop'] = 'smart';
             }
+
         } else {
             if (isset($params['width']) && isset($params['height'])) {
                 $params['fit'] = 'inside';
