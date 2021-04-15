@@ -29,6 +29,8 @@ function cdn($file, array $params = []): string
         } else {
             if (isset($params['width']) && isset($params['height'])) {
                 $params['fit'] = 'inside';
+            } else {
+                $params['fit'] = true;
             }
         }
 
