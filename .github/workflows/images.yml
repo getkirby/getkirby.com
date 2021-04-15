@@ -1,6 +1,6 @@
 # Image Actions will run in the following scenarios:
 # - on Pull Requests containing images
-# - on pushing of images to `master`
+# - on pushing of images to `main`
 # For Pull Requests, the images are added to the PR.
 # For other scenarios, a new PR will be opened if any images are compressed.
 
@@ -15,8 +15,9 @@ on:
       - '!kirby/**'
   push:
     branches:
-      - master
+      - main
     paths:
+      - .github/workflows/images.yml
       - '**.jpg'
       - '**.jpeg'
       - '**.png'
