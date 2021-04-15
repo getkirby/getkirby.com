@@ -29,9 +29,22 @@
         You are one click away from your personal demo. Explore the Panel and get to know Kirby with our six example projects.
       </p>
 
-      <button class="block rounded w-100% mb-6">
+      <button aria-label="Start the demo" class="block rounded w-100% mb-6">
         <figure class="bg-light" style="--aspect-ratio: 2800/1866">
-          <?= image() ?>
+          <?= img(image(), [
+            'alt' => 'A screenshot of the Panel',
+            'src' => [
+              'width'  => 1000,
+            ],
+            'srcset' => [
+              '1x' => [
+                'width'  => 1000
+              ],
+              '2x' => [
+                'width'  => 1500
+              ],
+            ]
+          ]) ?>
         </figure>
       </button>
 
@@ -53,7 +66,7 @@
         <article class="p-6 bg-white">
           <h2 class="font-bold mb-1">Starterkit</h2>
           <p class="mb-6">Fully annotated sample site for everyone who wants to learn about Kirby's capabilities. </p>
-          <a class="btn btn--filled" href="https://github.com/getkirby/starterkit/archive/main.zip">
+          <a aria-label="Download the Starterkit" class="btn btn--filled" href="https://github.com/getkirby/starterkit/archive/main.zip">
             <?= icon('download') ?>
             Download
           </a>
@@ -62,7 +75,7 @@
         <article class="p-6 bg-white">
           <h2 class="font-bold mb-1">Plainkit</h2>
           <p class="mb-6">No templates, no content, no styles – just you, Kirby and your imagination.</p>
-          <a class="btn btn--filled" href="https://github.com/getkirby/plainkit/archive/main.zip">
+          <a aria-label="Download the Plainkit" class="btn btn--filled" href="https://github.com/getkirby/plainkit/archive/main.zip">
             <?= icon('download') ?>
             Download
           </a>

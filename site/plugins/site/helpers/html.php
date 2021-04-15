@@ -39,7 +39,7 @@ function img($file, array $props = [])
     }
 
     $img = '<img ' . attr([
-        'alt'     => $props['alt'] ?? '',
+        'alt'     => $props['alt'] ?? ' ',
         'class'   => $props['class'] ?? null,
         'loading' => $loading,
         'src'     => $src,

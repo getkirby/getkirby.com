@@ -13,6 +13,7 @@
 <div class="ingrid">
   <div style="grid-column: span 6; align-self: flex-end">
     <?= img('author.png', [
+      'alt' => 'A screenshot of the users and tags fields',
       'lightbox' => 'interface',
       'src' => [
         'width' => 500,
@@ -29,6 +30,7 @@
   </div>
   <div style="grid-column: span 6; align-self: flex-end">
     <?= img('list.png', [
+      'alt' => 'A screenshot with a list of pages',
       'lightbox' => 'interface',
       'src' => [
         'width' => 500,
@@ -45,6 +47,7 @@
   </div>
   <div style="grid-column: span 12">
     <?= img('images.png', [
+      'alt' => 'A screenshot of our layout field',
       'lightbox' => 'interface',
       'src' => [
         'width' => 1000,
@@ -61,6 +64,7 @@
   </div>
   <div style="grid-column: span 9">
     <?= img('structure.png', [
+      'alt' => 'A screenshot of our structure field to edit tabular data',
       'lightbox' => 'interface',
       'src' => [
         'width' => 750,
@@ -77,6 +81,7 @@
   </div>
   <div style="grid-column: span 6">
     <?= img('albums.png', [
+      'alt' => 'A screenshot of an gallery section in the Panel.',
       'lightbox' => 'interface',
       'src' => [
         'width' => 500,

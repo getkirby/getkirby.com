@@ -1,5 +1,6 @@
 <figure>
   <?= img('blocks.png', [
+    'alt' => 'A screenshot of our blocks field',
     'lightbox' => true,
     'src' => [
       'width' => 1000,

@@ -30,8 +30,22 @@
     <ul class="columns" style="--columns: 2; --gap: var(--spacing-12)">
       <?php foreach ($page->images()->filterBy('extension', 'png') as $screenshot): ?>
       <li>
-        <a href="<?= $screenshot->resize(1400)->url() ?>" download>
-          <?= $screenshot->html(['class' => 'shadow-2xl']) ?>
+        <a aria-label="Download the Panel screenshot" class="block bg-light" href="<?= $screenshot->url() ?>" style="--aspect-ratio: <?= $screenshot->width() . '/' . $screenshot->height() ?>" download>
+          <?= img($screenshot, [
+            'alt' => 'A panel screenshot',
+            'class' => 'shadow-2xl',
+            'src' => [
+              'width'  => 1000,
+            ],
+            'srcset' => [
+              '1x' => [
+                'width'  => 1000
+              ],
+              '2x' => [
+                'width'  => 1500
+              ],
+            ]
+          ]) ?>
         </a>
       </li>
       <?php endforeach ?>

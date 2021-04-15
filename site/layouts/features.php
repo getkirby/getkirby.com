@@ -14,7 +14,7 @@
           <div class="columns" style="--columns-md: 1; --columns: 2; --column-gap: var(--spacing-24)">
             <div>
               <h1 class="h1 max-w-xl mb-6"><?= $page->headline()->or($page->description()) ?></h1>
-              <p class="h1 font-thin">&darr;</p>
+              <span aria-hidden="true" class="h1 font-thin">&darr;</span>
             </div>
             <div class="pt-3">
               <p class="h6 mb-3"><?= $page->title() ?></p>

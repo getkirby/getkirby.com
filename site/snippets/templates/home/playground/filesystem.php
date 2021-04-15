@@ -5,14 +5,14 @@
       <p class="color-gray-600">Kirby stores your content in simple text files. Folders are pages. Add images, documents and videos and you are ready to go. It’s that simple.</p>
     </header>
 
-    <div aria-hidden="true" class="playground-filesystem-files">
-      <div class="playground-filesystem-folders">
+    <div class="playground-filesystem-files">
+      <div role="img" aria-label="An example setup of folders and files to store content for Kirby" class="playground-filesystem-folders">
         <?= $story->filesystem()->kt() ?>
       </div>
 
-      <hr class="hr-v hr-indent" style="height: var(--spacing-12);">
+      <span class="hr-v hr-indent" style="height: var(--spacing-12);"></span>
 
-      <figure class="playground-filesystem-editor bg-white max-w-xs shadow-2xl rounded-xl">
+      <figure role="img" aria-label="A text editor with content for Kirby" class="playground-filesystem-editor bg-white max-w-xs shadow-2xl rounded-xl">
         <header class="flex items-center py-1 px-3 text-center text-sm font-bold">
           <div class="dots absolute">
             <i></i>
@@ -20,19 +20,19 @@
             <i></i>
           </div>
           <div class="flex-grow">
-          <?= $story->filename() ?>
+            <?= $story->filename() ?>
           </div>
         </header>
         <div class="font-mono text-sm p-3 no-highlight">
-        <?= $story->filecontent()->kt() ?>
+          <?= $story->filecontent()->kt() ?>
         </div>
       </figure>
 
-      <hr aria-hidden="true" class="hr-v hr-indent" style="height: var(--spacing-42); grid-column: 1">
+      <span class="hr-v hr-indent" style="height: var(--spacing-42); grid-column: 1"></span>
     </div>
   </div>
 
   <div class="columns">
-    <hr aria-hidden="true" class="hr-h hr-indent hr-end">
+    <span class="hr-h hr-indent hr-end"></span>
   </div>
 </section>

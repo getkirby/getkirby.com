@@ -1,14 +1,10 @@
-<aside>
+<hr class="hr mb-6">
 
-  <hr class="hr mb-6">
+<p class="prose text-sm mb-6 max-w-xs">
+  Did you find an error? Help us improve our docs and edit this page on Github. Make sure to check out
+  <a href="/styleguide">our styleguide &rarr;</a>
+</p>
 
-  <p class="prose text-sm mb-6 max-w-xs">
-    Did you find an error? Help us improve our docs and edit this page on Github. Make sure to check out
-    <a href="/styleguide">our styleguide &rarr;</a>
-  </p>
-
-  <a href="<?= option('github') ?>/getkirby.com/edit/main/content/<?= $page->diruri() ?>/<?= $page->intendedTemplate() ?>.txt" class="btn btn--outlined mb-3">
-    <?= icon('github') ?> Edit this page
-  </a>
-
-</aside>
+<a href="<?= option('github') ?>/getkirby.com/edit/main/content/<?= $page->diruri() ?>/<?= $page->intendedTemplate() ?>.txt" class="btn btn--outlined mb-3">
+  <?= icon('github') ?> Edit this page
+</a>

@@ -18,16 +18,16 @@
         <div class="color-gray-700 mb-12">
           <p>Kirby 1 has reached its end of life and is no longer supported by us.</p>
         </div>
-        <nav class="columns" style="--columns: 2">
-          <a href="https://k1.getkirby.com/docs" class="btn btn--outlined">
+        <div class="columns" style="--columns: 2">
+          <a aria-label="Visit the Kirby 1 docs" href="https://k1.getkirby.com/docs" class="btn btn--outlined">
             <?= icon('book') ?>
             Docs
           </a>
-          <a href="https://github.com/getkirby-v1" class="btn btn--outlined">
+          <a aria-label="The Kirby 1 repository on Github" href="https://github.com/getkirby-v1" class="btn btn--outlined">
             <?= icon('github') ?>
             Source
           </a>
-        </nav>
+        </div>
       </article>
     </li>
     <li>
@@ -39,16 +39,16 @@
         <div class="color-gray-700 mb-12">
           <p>Kirby 2 has reached its end of life and is no longer supported by us.</p>
         </div>
-        <nav class="columns" style="--columns: 2">
-          <a href="https://k2.getkirby.com/docs" class="btn btn--outlined">
+        <div class="columns" style="--columns: 2">
+          <a aria-label="Visit the Kirby 2 docs" href="https://k2.getkirby.com/docs" class="btn btn--outlined">
             <?= icon('book') ?>
             Docs
           </a>
-          <a href="https://github.com/getkirby-v2" class="btn btn--outlined">
+          <a aria-label="The Kirby 2 repository on Github" href="https://github.com/getkirby-v2" class="btn btn--outlined">
             <?= icon('github') ?>
             Source
           </a>
-        </nav>
+        </div>
       </article>
     </li>
     <li>
@@ -60,16 +60,16 @@
         <div class="color-gray-700 mb-12">
           <p>Kirby 3 is the latest version of Kirby. <br><strong class="color-black">Start new projects with Kirby 3!</strong></p>
         </div>
-        <nav class="columns" style="--columns: 2">
-          <a href="/docs" class="btn btn--filled">
+        <div class="columns" style="--columns: 2">
+          <a aria-label="Visit the Kirby 3 docs" href="/docs" class="btn btn--filled">
             <?= icon('book') ?>
             Docs
           </a>
-          <a href="https://github.com/getkirby" class="btn btn--filled">
+          <a aria-label="The Kirby 3 repository on Github" href="https://github.com/getkirby" class="btn btn--filled">
             <?= icon('github') ?>
             Source
           </a>
-        </nav>
+        </div>
       </article>
     </li>
   </ul>

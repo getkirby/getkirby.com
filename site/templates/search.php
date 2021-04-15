@@ -74,8 +74,8 @@
       <li>
         <a class="leading-tight" href="<?= url($result->objectID()) ?>">
           <h2 class="font-bold"><?= $result->title() ?></h2>
-          <aside class="search-area" data-area="<?= $result->area() ?>"><?= $areas[$result->area()] ?? '' ?></aside>
-          <small class="text-xs font-mono color-gray-600"><?= $result->objectID() ?></small>
+          <small class="search-area" data-area="<?= $result->area() ?>"><?= $areas[$result->area()] ?? '' ?></small>
+          <small class="text-xs font-mono color-gray-700"><?= $result->objectID() ?></small>
         </a>
       </li>
       <?php endforeach ?>

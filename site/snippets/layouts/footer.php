@@ -2,10 +2,10 @@
   <div class="container mb-24">
     <hr class="hr mb-6">
     <div class="columns" style="--columns-sm: 1; --columns-md: 1; --columns: 2; --gap: var(--spacing-12)">
-      <aside class="footer-info mb-6">
-        <h6 class="font-bold mb-1">Kirby</h6>
+      <div class="footer-info mb-6">
+        <p class="font-bold mb-1">Kirby</p>
         <p class="mb-1">The CMS that adapts to any project. Made for developers, designers, creators and clients.</p>
-        <nav class="social">
+        <nav aria-label="Kirby on the web" class="social">
           <a href="https://twitter.com/getkirby">
             <?= icon('twitter') ?>
           </a>
@@ -22,11 +22,11 @@
             <?= icon('discord') ?>
           </a>
         </nav>
-      </aside>
-      <nav class="footer-menu">
+      </div>
+      <nav aria-label="Footer menu" class="footer-menu">
         <ul class="footer-menu-1 columns" style="--columns-sm: 2; --columns-md: 3; --columns: 3; --gap: var(--spacing-6)">
           <li>
-            <h6 class="font-bold mb-1">The CMS</h6>
+            <p class="font-bold mb-1">The CMS</p>
             <ul class="footer-menu-2">
               <li><a href="/features/developers">For developers</a></li>
               <li><a href="/features/designers">For designers</a></li>
@@ -36,7 +36,7 @@
             </ul>
           </li>
           <li>
-            <h6 class="font-bold mb-1">Docs</h6>
+            <p class="font-bold mb-1">Docs</p>
             <ul class="footer-menu-2">
               <li><a href="/docs/guide">Guide</a></li>
               <li><a href="/docs/cookbook">Cookbook</a></li>
@@ -46,7 +46,7 @@
             </ul>
           </li>
           <li>
-            <h6 class="font-bold mb-1">Resources</h6>
+            <p class="font-bold mb-1">Resources</p>
             <ul class="footer-menu-2">
               <li><a href="/kosmos">Newsletter</a></li>
               <li><a href="/plugins">Plugins</a></li>
@@ -56,7 +56,7 @@
             </ul>
           </li>
           <li>
-            <h6 class="font-bold mb-1">Community</h6>
+            <p class="font-bold mb-1">Community</p>
             <ul class="footer-menu-2">
               <li><a href="https://feedback.getkirby.com">Feedback</a></li>
               <li><a href="https://forum.getkirby.com">Support forum</a></li>
@@ -66,7 +66,7 @@
             </ul>
           </li>
           <li>
-            <h6 class="font-bold mb-1">Kirby</h6>
+            <p class="font-bold mb-1">Kirby</p>
             <ul class="footer-menu-2">
               <li><a href="/security">Security</a></li>
               <li><a href="/privacy">Privacy</a></li>
@@ -76,7 +76,7 @@
             </ul>
           </li>
           <li>
-            <h6 class="font-bold mb-1">Partners</h6>
+            <p class="font-bold mb-1">Partners</p>
             <ul class="footer-menu-2 footer-menu-partners">
               <li class="mb-1">
                 <a href="https://keycdn.com">

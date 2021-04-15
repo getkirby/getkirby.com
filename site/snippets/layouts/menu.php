@@ -3,7 +3,7 @@
   <label tabindex="0" class="menu-toggle" for="menu-check" aria-label="Show / hide menu">
     <?= icon('menu') ?>
   </label>
-  <nav>
+  <nav aria-label="Main menu">
     <ul class="menu-1">
       <li class="has-submenu">
         <a href="/features/developers">The CMS</a>

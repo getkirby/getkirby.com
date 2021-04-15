@@ -5,20 +5,20 @@
       <?= icon($plugin->icon()) ?>
     </figure>
     <a class="block" href="<?= $plugin->url() ?>">
-      <h3 class="h4"><?= $plugin->title() ?></h3>
+      <<?= $h = $headingLevel ?? 'h2' ?> class="h4"><?= $plugin->title() ?></<?= $h ?>>
       <p class="text-sm color-gray-700">
         <?= $plugin->description()->widont() ?>
       </p>
     </a>
-    <nav class="flex pt-1" style="--gap: var(--spacing-3)">
-      <a href="<?= $plugin->download() ?>" class="iconbox bg-light"><?= icon('download') ?></a>
+    <div class="flex pt-1" style="--gap: var(--spacing-3)">
+      <a aria-label="Download the <?= $plugin->title() ?> plugin" href="<?= $plugin->download() ?>" class="iconbox bg-light"><?= icon('download') ?></a>
 
       <?php if ($plugin->repository()->isNotEmpty()): ?>
-      <a class="iconbox bg-light" href="<?= $plugin->repository() ?>">
+      <a aria-label="Github repository of the <?= $plugin->title() ?> plugin" class="iconbox bg-light" href="<?= $plugin->repository() ?>">
         <?= icon('github') ?>
       </a>
       <?php endif ?>
-    </nav>
+    </div>
   </li>
   <?php endforeach ?>
 </ul>

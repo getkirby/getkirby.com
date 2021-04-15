@@ -78,5 +78,5 @@
       <?php snippet('templates/features/feature', ['feature' => $feature]) ?>
     </li>
     <?php endforeach ?>
-  <ul>
+  </ul>
 </section>

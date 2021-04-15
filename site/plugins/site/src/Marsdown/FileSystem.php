@@ -102,7 +102,7 @@ class FileSystem
 
     protected static function renderLabel(string $name, ?string $type = null): string
     {
-        $html  = '<span class="filesystem-label" data-type="' . $type . '">';
+        $html  = '<span role="presentation" class="filesystem-label" data-type="' . $type . '">';
         if ($type !== null) {
             $html .= icon($type);
         }

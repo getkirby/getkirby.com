@@ -115,13 +115,13 @@ export default class {
       const link = result.querySelector("a");
       link.href = "/" + this.results[i].objectID;
 
-      const label = result.querySelector("strong");
+      const label = result.querySelector(".search-title");
       label.innerText = this.results[i].title;
-      const info = result.querySelector("small");
+      const info = result.querySelector(".search-link");
       info.innerText = this.results[i].objectID;
 
       if (this.results[i].area) {
-        const area = result.querySelector("aside");
+        const area = result.querySelector(".search-area");
         area.dataset.area = this.results[i].area;
         area.innerText = this.results[i].area[0].toUpperCase() + this.results[i].area.slice(1);
       }

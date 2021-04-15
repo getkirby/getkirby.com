@@ -13,7 +13,7 @@
           </div>
         </div>
 
-        <nav class="auto-fill items-center" style="--min: 10rem;">
+        <nav aria-label="Plugin links" class="auto-fill items-center" style="--min: 10rem;">
           <a class="btn btn--filled" href="<?= $download ?>">
             <?= icon('download') ?>Download <?= $page->version() ?>
           </a>
@@ -40,14 +40,14 @@
   <?php if ($authorPlugins->count()): ?>
   <section class="mb-42">
     <h2 class="h2 mb-6">Other plugins by <?= $author->title() ?></h2>
-    <?php snippet('templates/plugins/plugins', ['plugins' => $authorPlugins ]) ?>
+    <?php snippet('templates/plugins/plugins', ['plugins' => $authorPlugins, 'headingLevel' => 'h3']) ?>
   </section>
   <?php endif ?>
 
   <?php if ($relatedPlugins->count()): ?>
   <section>
     <h2 class="h2 mb-6">Related plugins</h2>
-    <?php snippet('templates/plugins/plugins', ['plugins' => $relatedPlugins]) ?>
+    <?php snippet('templates/plugins/plugins', ['plugins' => $relatedPlugins, 'headingLevel' => 'h3']) ?>
   </section>
   <?php endif ?>
 </article>

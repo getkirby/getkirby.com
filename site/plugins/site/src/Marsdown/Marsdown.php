@@ -159,7 +159,7 @@ class Marsdown extends ParsedownExtra
 
         return [
             'element' => [
-                'name' => 'aside',
+                'name' => 'div',
                 'rawHtml' => snippet('kirbytext/box', [
                     'type'  => $type,
                     'text'  => $text,

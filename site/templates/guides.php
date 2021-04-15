@@ -11,7 +11,7 @@
             <?= $guide->images()->findBy('extension', 'svg')->read() ?>
           </figure>
           <div class="border-top pt-3">
-            <h3 class="h2 mb-3"><?= $guide->title() ?></h3>
+            <h2 class="h2 mb-3"><?= $guide->title() ?></h2>
             <p class="color-gray-700"><?= $guide->description() ?></p>
           </div>
         </a>
@@ -21,6 +21,6 @@
   </ul>
 </div>
 
-<aside class="h2">
+<footer class="h2">
   Travel back in time <a class="underline" href="/docs/archive">with our docs archive &rarr;</a>
-</aside>
+</footer>

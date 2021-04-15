@@ -4,7 +4,7 @@
 }
 </style>
 
-<select class="template-select mb-3">
+<select aria-label="Switch the template engine example" class="template-select mb-3">
   <option value="php" selected>PHP template</option>
   <option value="twig">Twig template</option>
 </select>

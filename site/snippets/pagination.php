@@ -5,7 +5,7 @@
     &larr; Prev
   </a>
   <?php else: ?>
-  <span class="color-gray-400">&larr; Prev</span>
+  <span aria-hidden="true" class="color-gray-400">&larr; Prev</span>
   <?php endif ?>
   <span>
     Page <?= $item->page() ?>&nbsp;of&nbsp;<?= $item->pages() ?>
@@ -15,7 +15,7 @@
     Next &rarr;
   </a>
   <?php else: ?>
-  <span class="color-gray-400">Next &rarr;</span>
+  <span aria-hidden="true" class="color-gray-400">Next &rarr;</span>
   <?php endif ?>
 </nav>
 <?php endif ?>

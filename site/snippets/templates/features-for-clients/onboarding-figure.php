@@ -1,5 +1,6 @@
 <figure>
   <?= img('company.jpg', [
+    'alt' => 'A screenshot of the Panel',
     'class' => 'shadow-2xl',
     'lightbox' => true,
     'src' => [

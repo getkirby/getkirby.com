@@ -1,4 +1,4 @@
-<nav>
+<nav aria-label="Plugins menu">
   <div class="sticky" style="--top: var(--spacing-6)">
     <?php slot('hero') ?>
     <p class="h1 mb-12 color-gray-400"><a href="/plugins">Plugins</a></p>
@@ -14,10 +14,10 @@
           <?= icon('search') ?> Search
         </button>
       </li>
-      <hr class="hr">
+      <li><hr class="hr"></li>
       <?php foreach ($categories as $categoryId => $category): ?>
       <li>
-        <a href="/plugins/category:<?= $categoryId ?>"<?= ariaCurrent($categoryId === $currentCategory) ?>>
+        <a aria-label="<?= $category['label'] ?> plugins" href="/plugins/category:<?= $categoryId ?>"<?= ariaCurrent($categoryId === $currentCategory) ?>>
           <?= icon($category['icon']) ?> <?= $category['label'] ?>
         </a>
       </li>

@@ -37,9 +37,9 @@ $areas = option('search.areas');
         <template>
           <li>
             <a class="leading-tight" href="">
-              <strong class="text-sm"></strong>
-              <aside class="search-area" data-area=""></aside>
-              <small class="text-xs font-mono color-gray-600"></small>
+              <strong class="search-title text-sm"></strong>
+              <small class="search-area" data-area=""></small>
+              <small class="search-link text-xs font-mono color-gray-700"></small>
             </a>
           </li>
         </template>

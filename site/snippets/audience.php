@@ -5,7 +5,7 @@
     <article>
       <h3 class="h2 mb-3">
         <span class="mr-1"><?= $audience->for() ?></span>
-        <span class="font-thin">&rarr;</span>
+        <span aria-hidden="true" class="font-thin">&rarr;</span>
       </h3>
       <p class="color-gray-700"><?= $audience->description()->widont() ?></p>
     </article>

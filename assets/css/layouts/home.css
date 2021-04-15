@@ -14,6 +14,10 @@
   margin-bottom: calc(var(--spacing-1) * 56);
 }
 
+.playground .hr-h,
+.playground .hr-v {
+  display: block;
+}
 .playground .hr-h {
   height: 1px;
   background: var(--color-gray-300);

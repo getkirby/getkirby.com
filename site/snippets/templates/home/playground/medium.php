@@ -5,9 +5,9 @@
     <p class="color-gray-600">Deliver your content to browsers, phones, tablets, smart watches or your refrigerator. Headless or not – you decide.</p>
   </header>
 
-  <hr aria-hidden="true" class="hr-v hr-main">
+  <span class="hr-v hr-main"></span>
 
-  <figure aria-hidden="true" class="playground-medium-browser bg-white shadow-2xl rounded-xl overflow-hidden">
+  <figure role="img" aria-label="A browser window with an example website" class="playground-medium-browser bg-white shadow-2xl rounded-xl overflow-hidden">
     <header class="p-3 flex">
       <div class="dots mr-3">
         <i></i>
@@ -23,13 +23,13 @@
     </div>
   </figure>
 
-  <hr aria-hidden="true" class="hr-h" style="grid-column: 11/12; grid-row: 1; align-self: center">
-  <hr aria-hidden="true" class="hr-h" style="grid-column: 12/21">
-  <hr aria-hidden="true" class="hr-v" style="grid-column: 12; grid-row: span 2">
-  <hr aria-hidden="true" class="hr-v" style="grid-column: 15; height: var(--spacing-12)">
-  <hr aria-hidden="true" class="hr-v" style="grid-column: 21; height: var(--spacing-12)">
+  <span class="hr-h" style="grid-column: 11/12; grid-row: 1; align-self: center"></span>
+  <span class="hr-h" style="grid-column: 12/21"></span>
+  <span class="hr-v" style="grid-column: 12; grid-row: span 2"></span>
+  <span class="hr-v" style="grid-column: 15; height: var(--spacing-12)"></span>
+  <span class="hr-v" style="grid-column: 21; height: var(--spacing-12)"></span>
 
-  <div aria-hidden="true" class="playground-medium-phone">
+  <div role="img" aria-label="A phone with an example application" class="playground-medium-phone">
     <div class="relative bg-white overflow-hidden shadow-2xl rounded-xl">
       <header class="color-white leading-snug">
         <p class="font-bold"><?= $story->phoneTitle() ?></p>
@@ -58,12 +58,12 @@
       </figure>
     </div>
   </div>
-  <div aria-hidden="true" class="playground-medium-api">
+  <div role="img" aria-label="An example API response" class="playground-medium-api">
     <div class="bg-black shadow-2xl rounded-xl" style="overflow: hidden">
       <?= $story->api()->kt() ?>
     </div>
   </div>
 
-  <hr aria-hidden="true" class="hr-h hr-end" style="grid-column: 1/12;">
+  <span class="hr-h hr-end" style="grid-column: 1/12;"></span>
 
 </section>

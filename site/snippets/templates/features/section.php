@@ -1,6 +1,6 @@
 <section id="<?= $id ?>" class="features-section<?= ($reverse ?? false) ? ' features-section--reverse' : '' ?>">
   <header class="features-section-header max-w-xl">
-    <h2 class="h2"><a id="<?= Str::slug($title) ?>"></a><?= widont($title) ?></h2>
+    <h2 class="h2"><?= widont($title) ?></h2>
     <?php if ($intro ?? null): ?>
     <p class="h2 color-gray-600"><?= widont($intro) ?></p>
     <?php endif ?>
