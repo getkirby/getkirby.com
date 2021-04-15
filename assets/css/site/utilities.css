@@ -3,6 +3,10 @@ html {
   background: linear-gradient(to right, var(--color-white), var(--color-gray-100), #fbf8f4);
 }
 
+img {
+  transform: translate3d(0,0,0);
+}
+
 .badge {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
