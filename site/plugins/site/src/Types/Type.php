@@ -105,27 +105,17 @@ class Type
             return static::tag($type, $type);
         }
 
-        // Assume, it’s a class name
-        if (preg_match('/^[A-Z]/', $type) === 1) {
-            // Namespaced class name, look whether it’s a Kirby classs
-            if ($class = ReferenceClassPage::findByName($type)) {
-                return static::tag(
-                    $type,
-                    'object',
-                    $withLink ? $class->url() : null
-                );
-            }
-
-            // Some class that exists in PHP in the global namespace. The
-            // seconds check is done to ensure correct case, as `class_exists()`
-            // is not case-sensitive.
-            if (
-                isset($url) === false &&
-                class_exists($type) === true &&
-                (new ReflectionClass($type))->getName() === $type
-            ) {
-                return static::tag($type, 'class');
-            }
+        // Assume, it’s a class name,
+        // look whether it’s a Kirby classs
+        if (
+            preg_match('/^[A-Z]/', $type) === 1 &&
+            $class = ReferenceClassPage::findByName($type)
+        ) {
+            return static::tag(
+                $type,
+                'object',
+                $withLink ? $class->url() : null
+            );
         }
 
         // Probably a code example (not a datatype),
