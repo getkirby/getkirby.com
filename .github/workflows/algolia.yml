@@ -11,6 +11,7 @@ on:
     - site/config/search.php
     - site/models/**
     - site/plugins/**
+    - scripts/algolia-index
 
 jobs:
   algolia:

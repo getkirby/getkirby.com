@@ -73,7 +73,7 @@ There's also a (link: https://github.com/cretueusebiu/valet-windows text: Window
 
 It provides a virtual development environment where you don't have to install a server, PHP, database or other development tools on your local computer. The advantage of this solution is that you can install a box that resembles your deployment environment as closely as possible.
 
-Follow their (link: https://www.vagrantup.com/intro/getting-started/index.html text: Getting Started guide) to get up and running.
+Follow their (link: https://www.vagrantup.com/intro/getting-started/index text: Getting Started guide) to get up and running.
 
 ## Laragon
 

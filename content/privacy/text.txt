@@ -255,7 +255,7 @@ CampaignMonitor is offering extensive analytics tools to check if newsletters ha
 
 You can unsubscribe from our newsletter at any time. This can be done by using the unsubscribe link in every newsletter or by sending an email to <support@getkirby.com> and we will handle it for you.
 
-CampaignMonitor complies with GDRP. You can find our more about their privacy policy on their site: https://campaignmonitor.com/privacy
+CampaignMonitor complies with GDRP. You can find our more about their privacy policy on their site: https://www.campaignmonitor.com/policies/#privacy-policy
 
 ## Your Kirby installation
 
