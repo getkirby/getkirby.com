@@ -55,7 +55,7 @@ content/
 ----
 phpTemplate:
 
-```php "PHP Template"
+```php
 <?php snippet('header') ?>
 
 <article class="album">
@@ -79,7 +79,7 @@ phpTemplate:
 ----
 twigTemplate:
 
-```php "Twig Template"
+```php
 {% extends 'layout.twig' %}
 
 {% block content %}
