@@ -21,6 +21,7 @@ export default class {
     this.$more    = this.$form.querySelector(".search-more a");
 
     this.q = "";
+    this.fetchingTimeout = null;
     this.results = [];
     this.total = 0;
 
@@ -146,7 +147,12 @@ export default class {
     this.total = 0;
 
     if (this.q.length > 2) {
-      this.$form.setAttribute("data-fetching", true);
+      clearTimeout(this.fetchingTimeout);
+
+      this.fetchingTimeout = setTimeout(function () {
+       this.$form.setAttribute("data-fetching", true);
+      }, 100);
+
       this.results = await this.fetch(this.q);
       this.$form.removeAttribute("data-fetching");
     }
