@@ -2,10 +2,7 @@ Title: Kirby is the CMS that adapts to you
 
 ----
 
-Thumbnail:
-  -
-  lead: The CMS that adapts to you
-  title: Kirby
+Ogimage: opengraph.jpg
 
 ----
 
