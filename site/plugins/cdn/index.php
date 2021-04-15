@@ -15,24 +15,24 @@ Kirby::plugin('getkirby/cdn', [
         'file::url' => function (App $kirby, $file): string {
 
             static $original;
-    
+
             if ($file->type() === 'image') {
                 return cdn($file);
             }
-    
+
             if ($original === null) {
                 $original = $kirby->nativeComponent('file::url');
             }
-    
+
             return $original($kirby, $file);
         },
         'file::version' => function (App $kirby, $file, $options) {
-    
+
             static $original;
-    
+
             if (option('cdn', false) !== false) {
                 $url = cdn($file, $options);
-    
+
                 return new FileVersion([
                     'modifications' => $options,
                     'original'      => $file,
@@ -40,31 +40,31 @@ Kirby::plugin('getkirby/cdn', [
                     'url'           => $url,
                 ]);
             }
-    
+
             if ($original === null) {
                 $original = $kirby->nativeComponent('file::version');
             }
-    
+
             return $original($kirby, $file, $options);
         },
         'url' => function (App $kirby, $path, $options): string {
-    
+
             static $original;
-    
-            if (preg_match('!assets!', $path)) {
+
+            if (preg_match('!assets\/!', $path)) {
                 $path = Cachebuster::path($path);
-    
+
                 if (option('cdn', false) !== false) {
                     return option('cdn.domain') . '/' . $path;
                 }
             }
-    
+
             if ($original === null) {
                 $original = $kirby->nativeComponent('url');
             }
-            
+
             return $original($kirby, $path, $options);
         },
     ]
-    
+
 ]);

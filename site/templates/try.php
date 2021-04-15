@@ -30,8 +30,9 @@
       </p>
 
       <button aria-label="Start the demo" class="block rounded w-100% mb-6">
-        <figure class="bg-light" style="--aspect-ratio: 2800/1866">
-          <?= img(image(), [
+        <?php if ($image = image('home/company/panel.png')): ?>
+        <figure class="bg-light" style="--aspect-ratio: <?= $image->width() ?>/<?= $image->height() ?>">
+          <?= img($image, [
             'alt' => 'A screenshot of the Panel',
             'src' => [
               'width'  => 1000,
@@ -46,6 +47,7 @@
             ]
           ]) ?>
         </figure>
+        <?php endif ?>
       </button>
 
       <button class="btn btn--filled">
