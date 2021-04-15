@@ -26,6 +26,7 @@ function cdn($file, array $params = []): string
                 $params['crop'] = 'smart';
             }
 
+            $params['fit'] = true;
         } else {
             if (isset($params['width']) && isset($params['height'])) {
                 $params['fit'] = 'inside';
