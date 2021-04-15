@@ -107,7 +107,7 @@ class PageMeta {
 
     public function priority(): float
     {
-        $priority = $this->get('priority')->or(0.5);
+        $priority = $this->get('priority')->or(0.5)->value();
         return (float)min(1, max(0, $priority));
     }
 
@@ -222,14 +222,14 @@ class PageMeta {
         // Get data from content file
         if ($page->thumbnail()->exists()) {
             $yaml = $page->thumbnail()->yaml()[0];
-            
-            /** 
+
+            /**
              * thumnail: image.png
              */
             if (is_string($yaml) === true) {
                 $data['image'] = $yaml;
-            
-            /** 
+
+            /**
              * thumnail:
              *   -
              *   lead: Something interesting
@@ -256,7 +256,7 @@ class PageMeta {
 
         // Create canvas
         $canvas = imagecreatetruecolor(1200, 628);
-        
+
         // Define colors and fonts
         $black  = imagecolorallocate($canvas, 0, 0, 0);
         $gray   = imagecolorallocate($canvas, 119, 119, 119);
@@ -277,13 +277,13 @@ class PageMeta {
 
         // Lead text
         [$x, $y] = imagettftext(
-            $canvas, 
-            $size = 28, 
-            0, 
-            $margin, 
-            $y += $size, 
-            $gray, 
-            $mono, 
+            $canvas,
+            $size = 28,
+            0,
+            $margin,
+            $y += $size,
+            $gray,
+            $mono,
             $data['lead'] ?? $page->metaLead(null, 'The CMS')
         );
 
@@ -300,13 +300,13 @@ class PageMeta {
         $lines  = substr_count($title, "\n") + 1;
 
         [$x, $y] = imagettftext(
-            $canvas, 
-            $size, 
-            0, 
-            $margin - 5, 
-            $y += $size + 45, 
-            $black, 
-            $sans, 
+            $canvas,
+            $size,
+            0,
+            $margin - 5,
+            $y += $size + 45,
+            $black,
+            $sans,
             $title
         );
         $y += $margin;
@@ -314,15 +314,15 @@ class PageMeta {
         // Logo
         $logo = imagecreatefrompng(__DIR__ . '/assets/logo.png');
         imagecopyresampled(
-            $canvas, 
-            $logo, 
-            $width - $margin - imagesx($logo), 
-            $height - $margin - 10 - imagesy($logo), 
-            0, 
-            0, 
-            imagesx($logo), 
-            imagesy($logo), 
-            imagesx($logo), 
+            $canvas,
+            $logo,
+            $width - $margin - imagesx($logo),
+            $height - $margin - 10 - imagesy($logo),
+            0,
+            0,
+            imagesx($logo),
+            imagesy($logo),
+            imagesx($logo),
             imagesy($logo)
         );
 
@@ -330,17 +330,17 @@ class PageMeta {
         if ($image = $data['image'] ?? null) {
 
             $image = url($image->url());
-                        
+
             // Convert SVG to image string
             if (strpos(pathinfo($image)['extension'], 'svg') !== false) {
-                
+
                 $im = new Imagick();
                 $box = 280 - ($lines * 50);
                 $svg = file_get_contents($image);
-                $im->setResolution(460, 460);                
+                $im->setResolution(460, 460);
                 $im->readImageBlob($svg);
                 $im->setImageFormat('jpeg');
-                $im->resizeImage($box, $box, imagick::FILTER_LANCZOS, 1); 
+                $im->resizeImage($box, $box, imagick::FILTER_LANCZOS, 1);
                 $data = $im->getImageBlob();
                 $image = imagecreatefromstring($data);
                 $y = $height - imagesy($image) - $margin - 10;
@@ -348,9 +348,9 @@ class PageMeta {
             // Load other formats as image string via curl
             } else {
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $image); 
+                curl_setopt($ch, CURLOPT_URL, $image);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1); 
+                curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
                 $data = curl_exec($ch);
                 curl_close($ch);
                 $image = imagecreatefromstring($data);
@@ -362,15 +362,15 @@ class PageMeta {
             if ($w > $max) $w = $max;
             $h = (imagesy($image) / imagesx($image)) * $w;
             imagecopyresampled(
-                $canvas, 
-                $image, 
-                $margin, 
-                $y, 
-                0, 
-                0, 
-                $w, 
-                $h, 
-                imagesx($image), 
+                $canvas,
+                $image,
+                $margin,
+                $y,
+                0,
+                0,
+                $w,
+                $h,
+                imagesx($image),
                 imagesy($image)
             );
 
@@ -379,13 +379,13 @@ class PageMeta {
             imagesetthickness($canvas, 3);
             imageline($canvas, $x - 5, $y, 342, $y, $yellow);
             imagettftext(
-                $canvas, 
-                32, 
-                0, 
-                $margin, 
-                $y -= 5, 
-                $black, 
-                $bold, 
+                $canvas,
+                32,
+                0,
+                $margin,
+                $y -= 5,
+                $black,
+                $bold,
                 'getkirby.com'
             );
         }
