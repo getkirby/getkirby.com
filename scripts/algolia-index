@@ -27,9 +27,11 @@ $props = [
 // key if passed as an environment variable
 if ($algoliaKey = getenv('ALGOLIA_KEY')) {
   $props['options'] = [
-    'algolia' => [
-      'key' => $algoliaKey,
-    ],
+    'search' => [
+      'algolia' => [
+        'key' => $algoliaKey,
+      ],
+    ]
   ];
 }
 
