@@ -34,13 +34,23 @@ function img($file, array $props = [])
         $loading = null;
     }
 
-    return '<img ' . attr([
+    $img = '<img ' . attr([
         'alt'     => $props['alt'] ?? '',
         'class'   => $props['class'] ?? null,
         'loading' => $loading,
         'src'     => $src,
         'srcset'  => $srcset,
     ]) . '>';
+
+    if (empty($props['lightbox']) === false && $props['lightbox'] !== false) {
+        return Html::a($file->resize(1800, 1800)->url(), [$img], [
+            'class'         => 'block bg-light',
+            'style'         => '--aspect-ratio: ' . $file->width() . '/' . $file->height(),
+            'data-lightbox' => $props['lightbox']
+        ]);
+    }
+
+    return $img;
 }
 
 function json(array $data, bool $pretty = true) {

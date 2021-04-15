@@ -1,7 +1,19 @@
 <?php if ($image = image('company.jpg')): ?>
 <figure>
-  <a class="block" href="<?= $image->url() ?>" data-lightbox>
-    <?= $image->html(['class' => 'shadow-2xl']) ?>
-  </a>
+  <?= img($image, [
+    'class' => 'shadow-2xl',
+    'lightbox' => true,
+    'src' => [
+      'width'  => 1000,
+    ],
+    'srcset' => [
+      '1x' => [
+        'width'  => 1000
+      ],
+      '2x' => [
+        'width'  => 1500
+      ],
+    ]
+  ]) ?>
 </figure>
 <?php endif ?>
