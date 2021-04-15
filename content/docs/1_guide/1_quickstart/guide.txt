@@ -31,7 +31,7 @@ Text:
 
 (image: panel.png)
 
- <info>
+<info>
 When copying files to a remote server via (S)FTP, make sure to copy the `.htaccess` file as well. By default, files starting with a dot are invisible in the filesystem, so make sure enable the display of invisible files before copying.
 </info>
 

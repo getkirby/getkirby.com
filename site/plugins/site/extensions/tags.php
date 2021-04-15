@@ -125,7 +125,7 @@ $tags['docs'] = [
         $snippet = snippet('docs/' . $tag->value, [
             'page'  => $tag->parent(),
             'field' => $tag->attr('field')
-        ]);
+        ], true);
 
         return kirbytext($snippet, [
             'parent' => $tag->parent()
