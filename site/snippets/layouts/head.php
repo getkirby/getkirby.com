@@ -21,10 +21,10 @@ extract([
 <?php endif ?>
 
 <?php if ($page->template()->name() === 'buy'): ?>
+<link rel="preconnect" href="https://cdn.paddle.com">
 <link rel="preload" href="https://cdn.paddle.com/paddle/paddle.js" as="script">
 <?php else: ?>
 <link rel="dns-prefetch" href="https://cdn.paddle.com">
-<link rel="preconnect" href="https://cdn.paddle.com">
 <?php endif ?>
 
 <?= $meta->robots() ?>
