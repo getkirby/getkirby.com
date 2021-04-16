@@ -35,6 +35,23 @@
   fill: currentColor;
 }
 
+/** Banner **/
+.banner {
+  position: absolute;
+  top: 5rem;
+  right: 0;
+  display: none;
+}
+.banner::before {
+  position: absolute;
+  top: -6px;
+  right: 4.5rem;
+  content: "";
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #fff;
+}
+
 /** Menu Toggle **/
 .menu input {
   position: absolute;
@@ -160,5 +177,8 @@
   .menu-steps {
     margin: 0 .75rem;
   }
-}
 
+  .banner {
+    display: block;
+  }
+}

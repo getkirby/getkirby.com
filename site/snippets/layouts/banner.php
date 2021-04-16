@@ -1,4 +1,4 @@
-<?php if (isset($banner) && $banner !== null): ?>
+<?php if ($banner = currentBanner()): ?>
 <aside class="banner bg-white shadow-2xl rounded text-sm">
   <?php if ($url = $banner->url()): ?>
   <a href="<?= $url ?>"><?= $banner->text() ?></a>

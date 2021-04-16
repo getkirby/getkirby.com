@@ -34,29 +34,6 @@
   grid-template-rows: repeat(var(--rows), auto);
 }
 
-/** BANNER **/
-.banner {
-  position: absolute;
-  top: 5rem;
-  right: 0;
-  display: none;
-}
-.banner::before {
-  position: absolute;
-  top: -6px;
-  right: 4.5rem;
-  content: "";
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid #fff;
-}
-@media screen and (min-width: 60rem) {
-  .banner {
-    display: block;
-  }
-}
-
-
 
 /** HEADER **/
 /** Shared */

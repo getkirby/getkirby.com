@@ -6,7 +6,6 @@ return function ($page) {
     $storyImage = $story->images()->findBy('name', 'panel');
 
     return [
-        'banner'     => currentBanner(),
         'story'      => $story,
         'storyImage' => $storyImage
     ];
