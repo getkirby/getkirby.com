@@ -86,3 +86,9 @@
 
   </article>
 </div>
+
+<script>
+  const $form   = document.querySelectorAll("form")[1];
+  const $inputs = document.querySelectorAll("input[name=area]");
+  [...$inputs].forEach(input => input.addEventListener("change", () => $form.submit()));
+</script>
