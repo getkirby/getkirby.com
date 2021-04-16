@@ -19,6 +19,9 @@ Text:
 - Start simple with presets.
 - Create your own layouts with tabs, columns and sections.
 
+(screencast: https://www.youtube.com/watch?v=yK3gNjWU_5s title: Your first blueprints text: The heart and soul of your Kirby installation: Learn how to create custom a fully customised admin interface for every page type.)
+
+
 ## Blueprint types
 
 The Panel layouts for  `site`, `pages`, `files` and `users` all get their own blueprints. The blueprint folder is structured accordingly:

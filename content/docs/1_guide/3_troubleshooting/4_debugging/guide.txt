@@ -8,7 +8,7 @@ Text:
 
 Kirby honours your PHP error logging settings by default. If you've switched off error logging, you won't get any errors and might end up with a white screen.
 
-Especially on your local machine, we recommend to switch on error logging in your `php.ini`. Kirby also has a built-in option which tries to enforce this:
+Especially on your local machine, we recommend to switch on error logging in your `php.ini`. Kirby also has a (link: /docs/reference/system/options/debug text: built-in option) which tries to enforce this:
 
 ```php "/site/config/config.php"
 return [
@@ -18,7 +18,7 @@ return [
 
 Add this to `/site/config/config.php` in order to show errors immediately.
 
-<warning>
+<alert>
 Make sure to disable `debug` mode in production! Displaying PHP errors on a public server can be a serious security risk: 
 
 - Error messages are displayed with detailed information about the code structure (e.g. file path, class, method)
@@ -26,7 +26,9 @@ Make sure to disable `debug` mode in production! Displaying PHP errors on a publ
 - Detailed error messages for login failures could leak information to attackers
 
 In a production environment, always log errors to your PHP error logs.
-</warning>
+</alert>
+
+(screencast: https://www.youtube.com/watch?v=GrBbuwRSuMA title: Debug mode text: Kirby's debug mode is super helpful to find mistakes in your templates, snippets or other parts of your project.)
 
 ## var_dump
 

@@ -12,6 +12,8 @@ Intro: Kirby is a modern, fast, flexible, file-based CMS with a beautiful contro
 
 Text:
 
+(screencast: https://www.youtube.com/watch?v=lLQZd64uvPs title: Feel at home in your Kirby installation text: Getting started with Kirby? Let's explore our Starterkit and see where to find stuff.)
+
 
 ## A peek under the hood: Kirby's folder structure
 

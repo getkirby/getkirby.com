@@ -12,12 +12,6 @@ Text:
 
 A pages section can be used to show children of the current page or of any other **single** parent page in your site. It also the standard way for adding new pages to the selected parent page if the (link: #filtering-pages text: selected `status` option) allows it.
 
-<info>
-A pages section can be filtered by template and by status, but its members cannot be filtered using a query. If you need to query pages, a (link: docs/reference/panel/fields/pages text: pages field) or a (link: docs/reference/plugins/extensions/sections text: custom section plugin) might be an alternative.
-
-Sections do not store anything in the content file, which means that you cannot fetch content from a section in your templates like you would from field content.
-</info>
-
 (image: pages.png)
 
 ## Example
@@ -40,6 +34,13 @@ sections:
     templates: article
 ```
 
+(screencast: https://www.youtube.com/watch?v=rVcg4SlAh-A title: A closer look at pages sections text: Show subpages as cards or list, add additional info for each page, control the card design – there are hardly any limits.)
+
+<info>
+<p>A pages section can be filtered by template and by status, but its members cannot be filtered using a query. If you need to query pages, a (link: docs/reference/panel/fields/pages text: pages field) or a (link: docs/reference/plugins/extensions/sections text: custom section plugin) might be an alternative.</p>
+
+<p>Sections do not store anything in the content file, which means that you cannot fetch content from a section in your templates like you would from field content.</p>
+</info>
 
 ## Section shortcuts
 
