@@ -2,7 +2,12 @@
 
 return [
     'toToc' => function ($field, string $headline = 'h2') {
-        preg_match_all('!<' . $headline . '.*?>(.*?)</' . $headline . '>!s', $field->kt()->value(), $matches);
+        $value = $field->value();
+        
+        // Make sure not to include sceencast boxes
+        $value = preg_replace('$\(screencast:.*\)$', '', $value);
+        
+        preg_match_all('!<' . $headline . '.*?>(.*?)</' . $headline . '>!s', $field->value($value)->kt()->value(), $matches);
 
         $headlines = new Collection;
 
