@@ -2,6 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+require __DIR__ . '/helpers/banner.php';
 require __DIR__ . '/helpers/html.php';
 require __DIR__ . '/helpers/reference.php';
 
@@ -13,4 +14,3 @@ Kirby::plugin('getkirby/site', [
     'pagesMethods' => include __DIR__ . '/extensions/pagesMethods.php',
     'tags'         => include __DIR__ . '/extensions/tags.php'
 ]);
-    
