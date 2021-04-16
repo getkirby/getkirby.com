@@ -32,11 +32,28 @@ extract([
 <?= $meta->opensearch() ?>
 <?= $meta->social() ?>
 
-<?= css('/assets/css/index.css') ?>
+<?= css('assets/css/index.css') ?>
 
 <script type="module">
+window.debounce = (callback, delay) => {
+  let timeout;
+  return () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(callback, delay);
+  }
+}
 
+import "<?= url('/assets/js/polyfills/dialog.js') ?>";
+
+import Affiliates from "<?= url('/assets/js/components/affiliates.js') ?>";
+import Code from "<?= url('/assets/js/components/code.js') ?>";
+import Lightbox from "<?= url('/assets/js/components/lightbox.js') ?>";
+import Menu from "<?= url('/assets/js/components/menu.js') ?>";
+import Search from "<?= url('/assets/js/components/search.js') ?>";
+
+new Affiliates();
+new Code();
+new Lightbox();
+new Menu();
+new Search();
 </script>
-
-<?= js(['/assets/js/index.js'], ['type' => 'module']) ?>
-
