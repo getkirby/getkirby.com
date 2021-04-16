@@ -2,6 +2,7 @@
 
 namespace Kirby\Cms;
 
+use Kirby\Exception\InvalidArgumentException;
 use Kirby\Toolkit\Mime;
 use Kirby\Toolkit\Str;
 
@@ -16,6 +17,14 @@ use Kirby\Toolkit\Str;
  */
 class Responder
 {
+    /**
+     * Timestamp when the response expires
+     * in Kirby's cache
+     *
+     * @var int|null
+     */
+    protected $cacheExpiry = null;
+
     /**
      * HTTP status code
      *
@@ -71,6 +80,50 @@ class Responder
     }
 
     /**
+     * Setter and getter for the cache expiry
+     * timestamp for Kirby's cache
+     *
+     * @param int|string|null $cacheExpiry Timestamp or time string to parse
+     * @param bool $override If `true`, the already defined timestamp will be overridden
+     * @return int|null|self
+     */
+    public function cacheExpiry($cacheExpiry = null, bool $override = false)
+    {
+        // getter
+        if ($cacheExpiry === null && $override === false) {
+            return $this->cacheExpiry;
+        }
+
+        // explicit un-setter
+        if ($cacheExpiry === null) {
+            $this->cacheExpiry = null;
+            return $this;
+        }
+
+        // normalize the value to an integer
+        if (is_int($cacheExpiry) !== true) {
+            $parsedCacheExpiry = strtotime($cacheExpiry);
+
+            if (is_int($parsedCacheExpiry) !== true) {
+                throw new InvalidArgumentException('Invalid time string "' . $cacheExpiry . '"');
+            }
+
+            $cacheExpiry = $parsedCacheExpiry;
+        }
+
+        // by default only ever *reduce* the cache expiry time
+        if (
+            $override === true ||
+            $this->cacheExpiry === null ||
+            $cacheExpiry < $this->cacheExpiry
+        ) {
+            $this->cacheExpiry = $cacheExpiry;
+        }
+
+        return $this;
+    }
+
+    /**
      * Setter and getter for the status code
      *
      * @param int|null $code
@@ -94,6 +147,7 @@ class Responder
     public function fromArray(array $response): void
     {
         $this->body($response['body'] ?? null);
+        $this->cacheExpiry($response['cacheExpiry'] ?? null);
         $this->code($response['code'] ?? null);
         $this->headers($response['headers'] ?? null);
         $this->type($response['type'] ?? null);
