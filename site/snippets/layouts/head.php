@@ -13,7 +13,12 @@ extract([
 <title><?= $page->isHomePage() ? $page->title() : $page->title() . ' | ' . $site->title() ?></title>
 
 <link rel="preload" href="<?= url('/assets/css/index.css') ?>" as="style">
-<link rel="modulepreload" href="<?= url('/assets/js/index.js') ?>">
+<link rel="modulepreload" href="<?= url('/assets/js/polyfills/dialog.js') ?>">
+<link rel="modulepreload" href="<?= url('/assets/js/components/affiliates.js') ?>">
+<link rel="modulepreload" href="<?= url('/assets/js/components/code.js') ?>">
+<link rel="modulepreload" href="<?= url('/assets/js/components/lightbox.js') ?>">
+<link rel="modulepreload" href="<?= url('/assets/js/components/menu.js') ?>">
+<link rel="modulepreload" href="<?= url('/assets/js/components/search.js') ?>">
 
 <?php if (option('cdn', false) !== false): ?>
 <link rel="dns-prefetch" href="<?= option('cdn.domain') ?>">
