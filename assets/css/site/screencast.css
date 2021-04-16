@@ -14,14 +14,20 @@
   text-decoration: none;
 }
 
-@media screen and (min-width: 42rem) {
-  .screencast {
-    grid-template-columns: 1fr 1fr;
+@media screen and (min-width: 60rem) {
+  .screencast:not(.reference-content .screencast) {
+    grid-template-columns: 1fr 2fr;
   }
 }
 
-@media screen and (min-width: 72rem) {
-  .screencast {
+@media screen and (min-width: 60rem) and (max-width: 72rem) {
+  .screencast p {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 100rem) {
+  .reference-content .screencast {
     grid-template-columns: 1fr 2fr;
   }
 }
