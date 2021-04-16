@@ -146,13 +146,12 @@ export default class {
     this.total = 0;
 
     if (this.q.length > 2) {
-      clearTimeout(this.fetchingTimeout);
-
-      this.fetchingTimeout = setTimeout(function () {
+      this.fetchingTimeout = setTimeout(() => {
        this.$form.setAttribute("data-fetching", true);
       }, 100);
 
       this.results = await this.fetch(this.q);
+      clearTimeout(this.fetchingTimeout);
       this.$form.removeAttribute("data-fetching");
     }
 
