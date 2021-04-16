@@ -55,7 +55,7 @@ Kirby::plugin('getkirby/cdn', [
                 $path = Cachebuster::path($path);
 
                 if (option('cdn', false) !== false) {
-                    return option('cdn.domain') . '/' . $path;
+                    return option('cdn.domain') . '/' . ltrim($path, '/');
                 }
             }
 
