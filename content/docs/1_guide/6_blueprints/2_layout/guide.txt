@@ -17,6 +17,9 @@ You can combine those section types in any way you like and also use multiple se
 
 For one page type you might need a list of all subpages, files and a few form elements, whereas for the next page type you just need subpages or a gallery. With sections, all this is possible.
 
+(screencast: https://www.youtube.com/watch?v=rVcg4SlAh-A title: A closer look at pages sections text: Show subpages as cards or list, add additional info for each page, control the card design – there are hardly any limits.)
+
+
 ## Defining columns
 
 Columns can be defined in two ways:
