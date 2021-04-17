@@ -24,6 +24,8 @@ html {
   width: 2rem;
 }
 .reference-panels {
+  --sidebar: 12rem;
+  --entries: 18rem;
   display: flex;
   flex-grow: 1;
   overflow: hidden;
@@ -36,7 +38,7 @@ html {
   border-right: 1px solid var(--color-gray-300);
 }
 .reference-sidebar {
-  width: 14rem;
+  width: var(--sidebar);
   flex-shrink: 0;
   padding: var(--spacing-6) var(--spacing-12);
   margin-left: 3px;
@@ -44,8 +46,8 @@ html {
 }
 
 .reference-entries {
+  width: var(--entries);
   flex-shrink: 0;
-  width: 20rem;
 }
 .reference-content {
   --px: var(--spacing-6);
@@ -56,10 +58,10 @@ html {
   max-width: var(--container);
 }
 .reference-sidebar + .reference-content article {
-  max-width: calc(var(--container) - 14rem);
+  max-width: calc(var(--container) - var(--sidebar));
 }
 .reference-entries + .reference-content article {
-  max-width: calc(var(--container) - 14rem - 20rem);
+  max-width: calc(var(--container) - var(--sidebar) - var(--entries));
 }
 
 @media screen and (min-width: 60rem) {
@@ -67,7 +69,11 @@ html {
     --px: var(--spacing-12);
   }
 }
-@media screen and (min-width: 80rem) {
+@media screen and (min-width: 85rem) {
+  .reference-panels {
+    --sidebar: 14rem;
+    --entries: 20rem;
+  }
   .reference-content {
     --px: var(--spacing-24);
   }
@@ -122,7 +128,7 @@ html {
   margin-right: var(--spacing-2);
 }
 
-@media screen and (min-width: 60rem) {
+@media screen and (min-width: 70rem) {
   .reference-menu {
     display: none;
   }
@@ -139,7 +145,7 @@ html {
   }
 }
 
-@media screen and (max-width: 60rem) {
+@media screen and (max-width: 70rem) {
   .reference-panel:not(:last-child) {
     display: none;
     width: 100%;
@@ -209,7 +215,7 @@ html {
 
 /* Parameters tables */
 
-@media screen and (max-width: 60rem) {
+@media screen and (max-width: 42rem) {
 
   .parameters,
   .parameters thead,
