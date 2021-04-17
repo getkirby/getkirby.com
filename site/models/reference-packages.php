@@ -80,7 +80,7 @@ class ReferencePackagesPage extends SectionPage
                     'template' => 'link',
                     'num'      => 0,
                     'content'  => [
-                        'title'   => $priority->name(true),
+                        'title'   => $priority->reflection()->getShortName(),
                         'excerpt' => $priority->excerpt(),
                         'link'    => $priority->id()
                     ]
