@@ -218,7 +218,7 @@ class ReferenceClassPage extends SectionPage
             $description = null;
             $type        = null;
             $required    = false;
-            
+
             if ($method = $reflection->getMethod('set' . $name)) {
                 $required  = $method->getNumberOfRequiredParameters() > 0;
                 $parameter = $method->getParameters()[0];
@@ -239,11 +239,20 @@ class ReferenceClassPage extends SectionPage
                 } elseif ($doc) {
                     $type = (string)$doc->getParameters()[0]->getType();
                 }
+
+                if ($parameter->isOptional()) {
+                    $type = preg_replace('/\|null/', '', $type);
+                }
             }
+            
+          
 
             $type   = Type::factory($type ?? 'mixed', $this);
             $data[] = compact('name', 'required', 'type', 'description');
         }
+
+        // remove line breaks from description
+        $description = str_replace("\n", ' ', $description);
 
         // sort by the name of the prop
         array_multisort(array_column($data, 'name'), SORT_ASC, $data);
