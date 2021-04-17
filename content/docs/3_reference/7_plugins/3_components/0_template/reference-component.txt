@@ -17,3 +17,7 @@ Kirby::plugin('my/template', [
     ]
 ]);
 ```
+
+<info>
+Make sure to check out all (link: /plugins/category:templating text: existing plugins for template engines).
+</info>
