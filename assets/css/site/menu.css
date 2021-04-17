@@ -35,23 +35,6 @@
   fill: currentColor;
 }
 
-/** Banner **/
-.banner {
-  position: absolute;
-  top: 5rem;
-  right: 0;
-  display: none;
-}
-.banner::before {
-  position: absolute;
-  top: -6px;
-  right: 4.5rem;
-  content: "";
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid #fff;
-}
-
 /** Menu Toggle **/
 .menu input {
   position: absolute;
@@ -75,6 +58,15 @@
   right: .75rem;
   transform: translateY(-50%) rotate(-45deg);
   color: var(--color-gray-400);
+}
+
+/** Banner **/
+.banner {
+  display: none;
+  position: absolute;
+  padding: .5rem .75rem;
+  line-height: var(--leading-none);
+  white-space: nowrap;
 }
 
 /** Small **/
@@ -112,6 +104,16 @@
   .menu-steps {
     display: flex;
     align-items: center;
+  }
+
+  .header[data-template=home] .banner,
+  .header[data-template=buy] .banner {
+    display: block;
+    top: 8.5rem;
+    top: clamp(8.5rem, 22vw, 10rem);
+  }
+  .banner a::after {
+    content: " →"
   }
 }
 
@@ -180,5 +182,18 @@
 
   .banner {
     display: block;
+    top: 5rem;
+    right: 0;
+    background: var(--color-white);
+    box-shadow: var(--shadow-2xl);
+  }
+  .banner::before {
+    position: absolute;
+    top: -6px;
+    right: 4.5rem;
+    content: "";
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #fff;
   }
 }

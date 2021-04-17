@@ -10,10 +10,10 @@
   <option value="blade">Blade template</option>
 </select>
 
-<div id="php" data-template>
+<div id="php" data-templating>
   <?= $page->phpTemplate()->kt() ?>
 </div>
-<div id="twig" data-template class="hidden">
+<div id="twig" data-templating class="hidden">
   <div class="mb-3">
     <?= $page->twigTemplate()->kt() ?>
   </div>
@@ -21,7 +21,7 @@
     <a href="/plugins/mgfagency/twig"><strong class="font-normal color-black link">Kirby Twig plugin</strong> by Christian Zehetner</a>
   </div>
 </div>
-<div id="blade" data-template class="hidden">
+<div id="blade" data-templating class="hidden">
   <div class="mb-3">
     <?= $page->bladeTemplate()->kt() ?>
   </div>
@@ -32,7 +32,7 @@
 
 <script>
 const select    = document.querySelector(".template-select");
-const templates = [...document.querySelectorAll("[data-template]")];
+const templates = [...document.querySelectorAll(".template-select ~ [data-templating]")];
 
 const changeTemplate = () => {
   templates.forEach(x => x.classList.add("hidden"));
