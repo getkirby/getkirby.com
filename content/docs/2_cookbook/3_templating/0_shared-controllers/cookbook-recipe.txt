@@ -16,6 +16,8 @@ Controllers are an excellent tool to keep your templates and blueprints clean an
 
 Luckily for us, creating a shared controller is an easy task in Kirby 3.
 
+(author: Manu Moreale link: https://manuelmoreale.com)
+
 ## A simple example
 
 We'll use the `<title>` and `<meta name="description">` tags as an example. The easiest way to add those two tags to our site would be to add them directly into the `header.php` snippet. Something like this:
@@ -199,7 +201,3 @@ return function ($page, $pages, $site, $kirby) {
 
 };
 ```
-
-## Author
-
-This cookbook recipe was written by (link: https://manuelmoreale.com text: Manu Moreale).

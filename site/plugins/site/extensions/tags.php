@@ -30,6 +30,21 @@ $tags['image'] = [
 ];
 
 /**
+ * (author: Bastian Allgeier link: https://getkirby.com)
+ */
+$tags['author'] = [
+    'attr' => [
+        'link'
+    ],
+    'html' => function ($tag) {
+        return snippet('kirbytext/author', [
+            'name'  => $tag->value,
+            'link'  => $tag->link ?? null
+        ], true);
+    }
+];
+
+/**
  * (screencast: https://www.youtube.com/watch?v=EDVYjxWMecc title: How to install Kirby in 5 minutes)
  */
 $tags['screencast'] = [
