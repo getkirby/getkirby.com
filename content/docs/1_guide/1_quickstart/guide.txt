@@ -116,9 +116,7 @@ There are alternative installation methods for advanced users who prefer to inst
 - (link: docs/cookbook/setup/composer text: Installation via Composer)
 - (link: docs/cookbook/setup/git text: Installation as Git submodule)
 
-<info>
 If you don't have a local development environment yet and don't know what to use, check out our (link: docs/cookbook/setup/development-environment text: Local development environment) recipe.
-</info>
 
 ### Installation guides for webhosts
 Some providers have created dedicated guides how to install Kirby on their servers. If you are with one of these providers, keep on reading:
@@ -131,9 +129,9 @@ Some providers have created dedicated guides how to install Kirby on their serve
 
 Kirby's control panel (aka. the Panel) comes without any pre-installed accounts. Open `http://yourdomain.com/panel` in the browser to start the installer and create the first account.
 
-<info>
+<warning>
 For security reasons, you cannot install the Panel on a public server by default. To allow this, you can enable the (link: docs/reference/system/options/panel#allow-the-panel-to-be-installed-on-a-remote-server text: `panel.install` option):
-</info>
+</warning>
 
 ## Purchase license & register your installation
 
@@ -162,13 +160,13 @@ If you don’t want the Panel to connect to our server, registration via the Pan
 
 To update Kirby, download the latest version and replace the `kirby` folder.
 
-Make sure to delete the media folder. It will be automatically recreated.
+Make sure to delete the `media` folder. It will be automatically recreated.
 
 That's it! Because Kirby does not use a database by default, you don't have to run any database migrations.
 
-<warning>
+<alert>
 Never update a live website directly on the server. Test updates locally first to see if something breaks.
-</warning>
+</alert>
 
 ### Updating Kirby with the advanced methods
 
@@ -177,10 +175,8 @@ If you used one of the advanced installation methods, you can also use them to u
 - (link: docs/cookbook/setup/composer#updating-kirby text: Update via Composer)
 - (link: docs/cookbook/setup/git#updating-kirby text: Update of the Git submodule)
 
-<info>
-**Upgrade from Kirby 2**
-If you want to upgrade an existing Kirby 2 installation, head over to our (link: docs/cookbook/setup/migrate-site text: upgrade guide).
-</info>
+### Upgrade from Kirby 2
+If you want to upgrade an existing Kirby 2 installation, make sure to follow all the steps from our (link: docs/cookbook/setup/migrate-site text: Kirby 2 upgrade) recipe.
 
 ## Where to go from here
 
