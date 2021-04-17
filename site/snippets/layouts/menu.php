@@ -56,9 +56,5 @@
         <a href="/buy">Buy</a>
       </li>
     </ul>
-
-    <?php if (Kirby\Layout\Layout::$name !== 'reference'): ?>
-    <?php snippet('layouts/banner') ?>
-    <?php endif ?>
   </nav>
 </div>
