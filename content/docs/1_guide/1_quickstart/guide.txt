@@ -11,6 +11,9 @@ Intro: All you need to know to get Kirby up and running: Installation, requireme
 
 Text:
 
+
+If you stumbled over Kirby recently, take the chance and get you hands on our (link: /try text: instant online demo). Ready to dive into the code and start your first own project? Let's get right to it…
+
 (screencast: https://www.youtube.com/watch?v=EDVYjxWMecc title: How to install Kirby in 5 minutes text: We are using PHP's built-in server to create a simple local development environment.)
 
 ## Download and installation
