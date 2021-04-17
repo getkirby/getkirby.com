@@ -241,7 +241,7 @@ class ReferenceClassPage extends SectionPage
                 }
 
                 if ($parameter->isOptional()) {
-                    $type = preg_replace('/\|null/', '', $type);
+                    $type = Str::rtrim($type, '|null');
                 }
             }
             
