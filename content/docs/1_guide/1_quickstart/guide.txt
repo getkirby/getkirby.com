@@ -9,12 +9,6 @@ Intro: All you need to know to get Kirby up and running: Installation, requireme
 
 ----
 
-Todos:
-- Add a nice screenshot of the starterkit
-- Add a glossary entry for document root and link it in the installation step
-
-----
-
 Text:
 
 (screencast: https://www.youtube.com/watch?v=EDVYjxWMecc title: How to install Kirby in 5 minutes text: We are using PHP's built-in server to create a simple local development environment.)
@@ -25,7 +19,7 @@ Text:
 
 (docs: kits)
 
-2. Extract the contents of the ZIP file into your server's web root
+2. Extract the contents of the ZIP file into your server's (glossary: document-root)
 3. Visit your new Kirby site in your browser at `yourdomain.com`
 4. Visit the (glossary: Panel) at `yourdomain.com/panel`
 
