@@ -4,7 +4,16 @@
       <div>Creatious labs</div>
       <div class="color-gray-500">Product design</div>
     </div>
-    <div class="text-3xs color-gray-400">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>
+    <div class="text-3xs">
+      <div class="color-gray-400 mb-3">
+        <p class="mb-3">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+        
+        <p>Pellentesque non malesuada nisi, vel fermentum odio. Cras ultricies blandit felis, in porta lacus cursus auctor. Donec auctor aliquet lacinia. Aliquam et tortor urna.</p>
+      </div>
+      <div class="color-gray-500">
+        #water #brand
+      </div>
+    </div>  
   </div>
   <div class="playground-medium-browser-gallery">
     <?php foreach ($story->images()->filterBy('name', '^=', 'project') as $image): ?>

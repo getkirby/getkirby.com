@@ -26,7 +26,9 @@
   </div>
   <div style="--span: 4">
     <div class="text-3xs color-gray-400 mb-3">
-      Nulla vitae elit libero, a pharetra augue. Sed posuere consectetur est at lobortis.
+      <p class="mb-1">Nulla vitae elit libero, a pharetra augue. Sed posuere consectetur est at lobortis.</p>
+    
+      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo.</p>
     </div>
     <div class="text-sm mb-3">
       59 €
