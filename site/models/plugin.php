@@ -4,6 +4,7 @@ use Kirby\Data\Data;
 use Kirby\Cms\File;
 use Kirby\Cms\Nest;
 use Kirby\Cache\FileCache;
+use Kirby\Toolkit\Str;
 
 class PluginPage extends Page
 {
@@ -20,18 +21,23 @@ class PluginPage extends Page
 
     public function download()
     {
-        $repo = $this->repository()->value();
+        $url   = $this->repository()->value();
+        $branch = $this->branch()->value() ?? 'master';
 
-        if (Str::contains($repo, 'github')) {
-            return $repo . '/archive/master.zip';
-        } else if (Str::contains($repo, 'bitbucket')) {
-            return $repo . '/get/master.zip';
-        } else if (Str::contains($repo, 'gitlab')) {
-            $reponame = basename($repo);
-            return $repo . '/-/archive/master/' . $reponame . '-master.zip';
+        if (Str::contains($url, 'github')) {
+            return Str::replace($url, 'github.com', 'api.github.com/repos') . '/zipball';
+        }
+        
+        if (Str::contains($url, 'bitbucket')) {
+            return $url . '/get/' . $branch . '.zip';
+        }
+        
+        if (Str::contains($url, 'gitlab')) {
+            $repo = basename($url);
+            return $url . '/-/archive/' . $branch . '/' . $repo . '-' . $branch . '.zip';
         }
 
-        return $repo;
+        return $url;
     }
 
     public function icon()
