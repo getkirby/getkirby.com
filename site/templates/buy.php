@@ -104,20 +104,28 @@ function paddle_price(data) {
     const listPrice    = product.list_price.net;
     const isSale       = currentPrice !== listPrice;
 
-    const formatter = (price) => {
-      return new Intl.NumberFormat("en", { style: "currency", currencyDisplay: "narrowSymbol", currency: currency, minimumFractionDigits: 0 }).format(price)
-    };
+    // Try to use formatter with narrow currency symbol,
+    // fall back to normal symbol if not supported by browser
+    let formatter;
+    try {
+      formatter = new Intl.NumberFormat("en", { style: "currency", currency, currencyDisplay: "narrowSymbol", minimumFractionDigits: 0 });
+    } catch (e) {
+      if (e.constructor !== RangeError) {
+        throw e;
+      }
+      formatter = new Intl.NumberFormat("en", { style: "currency", currency, minimumFractionDigits: 0});
+    }
 
     const $price = document.querySelector(".price");
     const $vat   = document.querySelector(".vat");
     const $sale  = document.querySelector(".sale");
 
-    $price.firstElementChild.innerText = formatter(currentPrice);
+    $price.firstElementChild.innerText = formatter.format(currentPrice);
     $price.classList.remove("invisible");
     $vat.classList.remove("invisible");
 
     if (isSale) {
-      $sale.firstElementChild.innerText = formatter(listPrice);
+      $sale.firstElementChild.innerText = formatter.format(listPrice);
       $sale.classList.remove("hidden");
     }
 }
