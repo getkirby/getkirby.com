@@ -3,9 +3,7 @@
 return function ($page) {
     
     if ($advanced = get('advanced')) {
-        Cookie::set('getkirby$advanced', $advanced, [
-            'lifetime' => 60 * 24 * 365* 2
-        ]);
+        Cookie::set('getkirby$advanced', $advanced);
     }
         
     return [
