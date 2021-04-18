@@ -6,12 +6,13 @@ use Kirby\Toolkit\Html;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Tpl;
 use Kirby\Reference\DocBlock;
+use Kirby\Reference\Types;
 
 $tags = [];
 
- /**
-  * (image: my-screenshot.jpg)
-  */
+/**
+ * (image: my-screenshot.jpg)
+ */
 $tags['image'] = [
     'attr' => [
         'caption',
@@ -134,6 +135,44 @@ $tags['docs'] = [
 ];
 
 
+/**
+ * Enhanced link tag with support for automatic 
+ * linking to Reference pages
+ */
+$tags['class'] = $tags['method'] = [
+    'attr' => [
+        'method',
+        'text'
+    ],
+    'html' => function ($tag) {
+        $type = $tag->value;
+        $text = $tag->attr('text');
+
+        // (class: foo method: bar)
+        if ($tag->attr('class') && $tag->attr('method')) {
+            $type .= '::' . $tag->attr('method');
+            
+            if ($text === null) {
+                $parts = Str::split($tag->attr('class'), '\\');
+                $name  = array_pop($parts);
+                $text = $name . '->' . $tag->attr('method') . '()';
+            }
+        }
+        
+        return Types::format($type, true, $text);
+    }
+];
+
+$tags['helper'] = [
+
+    'html' => function ($tag) {
+        return kirbytag('method', 'Helper::' . $tag->value, ['text' => $tag->value . '()']);
+    }
+];
+
+
+// @todo All the following should be refactored, but this requires
+// content file changes, so we wait
 
 /**
  * Fetch prop definitions from Fields and Sections
