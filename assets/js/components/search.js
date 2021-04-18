@@ -34,17 +34,14 @@ export default class {
     this.$dialog.addEventListener("keydown", this.onKey.bind(this));
 
     // Keyboard shortcut:
-    // `/` if no focus
-    // `Alt + /` always
-    // `Cmd + k` or `Ctrl + k` always
     document.addEventListener("keydown", (e) => {
-      const withSlash = e.key === "/" || e.code === "Slash";
-      const withMeta  = e.ctrlKey === true || e.metaKey === true;
-
       if (
-        (e.target === document.body && withSlash) ||
-        (e.altKey === true && withSlash) ||
-        (withMeta && e.key === "k")
+        // `/` if no focus
+        (e.target === document.body && e.key === "/") ||
+        // `Alt + /` always
+        (e.altKey === true && e.key === "/") ||
+        // `Cmd + k` or `Ctrl + k` always
+        ((e.ctrlKey === true || e.metaKey === true) && e.key === "k")
       ) {
         this.open(this.$btn[0])
         e.preventDefault();
