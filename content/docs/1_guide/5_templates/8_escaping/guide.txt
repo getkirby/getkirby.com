@@ -2,7 +2,7 @@ Title: Escaping content
 
 ----
 
-Intro: Not all content you render in your templates or snippets you can trust. For example, it may come from user-generated content like a registration or comment form. Or you might use content from external sources such as an API or external database. When you cannot fully trust the content, it is important to escape it correctly before it's sent to the browser to prevent cross-site scripting (XSS) attacks.
+Intro: Not all content you render in your templates or snippets can be trusted. For example, it may come from user-generated content like a registration or comment form. Or you might use content from external sources such as an API or external database. When you cannot fully trust the content, it is important to escape it correctly before it's sent to the browser to prevent cross-site scripting (XSS) attacks.
 
 ----
 
@@ -46,18 +46,18 @@ Yikes! Every time the page is loaded, every user's browser will now execute the 
 
 This is just one example of an XSS attack. XSS can also occur with attribute values, strings printed inside legitimate `<script>` blocks etc. Often the attacker needs to be a bit more clever than in our example, but without protection it's always possible to misuse your template or snippet for an XSS attack.
 
-Attackers can only make use of such vulnerabilites if they find a way to inject their malicious content into your site. For example, they could be an editor with access to your Kirby Panel. But it could also be as simple as submitting a contact, comment or registration form on your site.  Don't underestimate the chances.
+Attackers can only make use of such vulnerabilites if they find a way to inject their malicious content into your site. For example, they could be an editor with access to your Kirby Panel. But it could also be as simple as submitting a contact, comment or registration form on your site. Don't underestimate the chances.
 
 ## How to protect against XSS attacks
 
 There are three common ways to prevent XSS attacks:
 
 1. **Data validation**
-  This involves making 100 % sure that the content you output in your templates and snippets has the exact format you expect and doesn't contain unexpected characters that could be misued. While (link: docs/guide/blueprints/fields#validating-fields text: validating your content fields) can be very useful to make sure your content fits your site and works correctl), it is hard to get right as it's often difficult to make the validator strict enough to block any harmful content. It's also difficult to even anticipate every possible attack.
+  This involves making 100 % sure that the content you output in your templates and snippets has the exact format you expect and doesn't contain unexpected characters that could be misued. While (link: docs/guide/blueprints/fields#validating-fields text: validating your content fields) can be very useful to make sure your content fits your site and works correctly, it is hard to get right as it's often difficult to make the validator strict enough to block any harmful content. It's also difficult to even anticipate every possible attack.
 2. **Data sanitization**
   Sanitizing data means removing any unwanted characters from it. Basically it is a stricter form of validation and can be useful in use-cases like comment forms, but it shares its disadvantages with data validation – it's hard to implement it securely.
 3. **Escaping**
-  Escaping means replacing every unsafe character with an escape sequence that tells the browser it should interpret the character as text and not as a special character. When printing content in the HTML body, for example, a harmful character could be escaped with an HTML entity: The `<` character would become `&lt;`. It's important to use the right escaper each context, i.e. the place where your content is being output (HTML body, HTML attribute, inside a `<script>` tag, as part of a URL...). Otherwise attackers will be able to circumvent your escaper.
+  Escaping means replacing every unsafe character with an escape sequence that tells the browser it should interpret the character as text and not as a special character. When printing content in the HTML body, for example, a harmful character could be escaped with an HTML entity: The `<` character would become `&lt;`. It's important to use the right escaper for each output context, i.e. the place where your content is being output (HTML body, HTML attribute, inside a `<script>` tag, as part of a URL...). Otherwise attackers will be able to circumvent your escaper.
 
 Depending on your use-case, one or more of these strategies might be a good fit. You can combine multiple of them and sometimes you need to – e.g. your validator might not know in which places your content is being output, so you need a context-sensitive escaper on top of your validator. The validator then only checks if the content follows the right structure.
 
@@ -65,7 +65,7 @@ Depending on your use-case, one or more of these strategies might be a good fit.
 
 ### The `esc()` helper and `escape()`/`esc()` field methods
 
-Often the  most effective and also easiest solution to prevent XSS on your Kirby site is to use context-sensitive escaping.
+Often the most effective and also easiest solution to prevent XSS on your Kirby site is to use context-sensitive escaping.
 
 For that, we provide the (link: docs/reference/helpers/esc text: `esc()` helper) and the (link: docs/reference/templates/field-methods/escape text: `escape()`/`esc()` field methods).
 

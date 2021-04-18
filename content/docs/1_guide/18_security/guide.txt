@@ -142,7 +142,7 @@ You can find more about (link: docs/reference#validators text: Kirby's input val
 
 ## Escape content in your templates and snippets
 
-Some content you output in your templates or snippets may be untrusted. For example it may come from user-generated content like a registration or comment form or you might use content from external sources like an API or external database.
+Not all content you render in your templates or snippets can be trusted. For example, it may come from user-generated content like a registration or comment form. Or you might use content from external sources such as an API or external database.
 
 When you cannot fully trust the content, it is important to (link: docs/guide/templates/escaping text: escape it correctly) before it's sent to the browser to prevent cross-site scripting (XSS) attacks.
 
