@@ -10,7 +10,7 @@ Text:
 
 ## What is an XSS attack?
 
-(link: https://en.wikipedia.org/wiki/Cross-site_scripting text: Cross-site scripting) (XSS) is a type of security vulnerability that allows attackers to run arbitrary JavaScript in the browser of other, legitimate users of your site. This attack can be used to extract critical authentication information like session cookies from your users' browsers or to manipulate your site in unexpected ways.
+(link: https://en.wikipedia.org/wiki/Cross-site_scripting text: Cross-site scripting) (XSS) is a type of security vulnerability that allows attackers to run arbitrary JavaScript in the browsers of other, legitimate users of your site. This attack can be used to extract critical authentication information like session cookies from your users' browsers or to manipulate your site in unexpected ways.
 
 XSS works by injecting code into the HTML output of your site in a place where you didn't expect it when writing the template code. Here's an example of a vulnerable snippet:
 
