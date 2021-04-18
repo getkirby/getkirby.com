@@ -119,15 +119,15 @@ class ReferenceClassPage extends SectionPage
             return null;
         }
 
-        $packages = 'docs/reference/@/classes';
-        $class    = explode('\\', $class);
+        $objects = 'docs/reference/objects';
+        $class   = explode('\\', $class);
 
         if (count($class) > 2) {
             $namespace = implode('//', array_slice($class, 1, -1));
             $class     = array_slice($class, -1)[0];
-            $id        = Str::slug($namespace) . '/' .  Str::slug($class);
+            $id        = Str::kebab($namespace) . '/' .  Str::kebab($class);
 
-            if ($page = page($packages . '/' . $id)) {
+            if ($page = page($objects . '/' . $id)) {
                 if ($page->intendedTemplate()->name() === 'link') {
                     $page = page($page->link());
                 }
