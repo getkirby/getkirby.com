@@ -1,0 +1,29 @@
+Text:
+
+## Examples
+
+```php
+<p><?= $page->text()->escape() ?></p>
+```
+
+```php
+<img alt="<?= $image->alt()->escape('attr') ?>" src="<?= $image->url() ?>" />
+```
+
+```php
+<section style="--columns: <?= $section->columns()->escape('css')">
+...
+</section>
+```
+
+```php
+<script>
+let yourVariable = "<?= $page->jsVariable()->escape('js') ?>";
+
+// ...
+</script>
+```
+
+```php
+<iframe src="https://map.example.com/?lat=<?= $map->lat()->escape('url') ?>&lon=<?= $map->lon()->escape('url') ?>"></iframe>
+```
