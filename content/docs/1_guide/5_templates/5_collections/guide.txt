@@ -67,7 +67,7 @@ You can loop through the collections like through any collection like this:
 ```php
 <?php 
 foreach($kirby->collection('articles') as $article) {
-	echo $article->title()->html();
+	echo $article->title()->escape();
 }
 ?>
 ```

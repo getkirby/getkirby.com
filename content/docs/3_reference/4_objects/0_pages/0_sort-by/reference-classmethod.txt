@@ -7,7 +7,7 @@ Text:
   <?php foreach($page->children()->sortBy('title', 'desc') as $subpage): ?>
   <li>
     <a href="<?= $subpage->url() ?>">
-      <?= $subpage->title()->html() ?>
+      <?= $subpage->title()->escape() ?>
     </a>
   </li>
   <?php endforeach ?>

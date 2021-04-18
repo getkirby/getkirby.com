@@ -46,7 +46,7 @@ $articles = page('blog')->children()->listed()->sortBy(function ($page) {
 // let's loop through the collection and output date and title
 foreach($articles as $article): ?>
   <span><?= $article->date()->toDate('Y-m-d') ?></span>
-  <h2><?= $article->title()->html() ?></h2>
+  <h2><?= $article->title()->escape() ?></h2>
 <?php endforeach ?>
 ```
 
@@ -106,8 +106,8 @@ $sortedEvents = $events->sortBy(function ($page) {
 
 foreach($sortedEvents as $event): ?>
   <span><?= $event->date()->toDate('Y-m-d') ?></span>
-  <h2><?= $event->title()->html() ?></h2>
-  <?= $event->location()->kirbytext() ?>
+  <h2><?= $event->title()->escape() ?></h2>
+  <?= $event->location()->escape()->kirbytext() ?>
 <?php endforeach ?>
 ```
 

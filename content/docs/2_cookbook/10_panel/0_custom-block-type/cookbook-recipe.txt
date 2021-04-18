@@ -199,16 +199,16 @@ Inside the block snippet, you have access to the full `$block` (link: docs/refer
   </figure>
   <?php endif ?>
   <div class="audio-info">
-    <h1 class="audio-title"><?= $block->title()->html() ?></h1>
-    <h2 class="audio-subtitle"><?= $block->subtitle()->html() ?></h1>
+    <h1 class="audio-title"><?= $block->title()->escape() ?></h1>
+    <h2 class="audio-subtitle"><?= $block->subtitle()->escape() ?></h1>
     <div class="audio-description">
-      <?= $block->description() ?>
+      <?= $block->description()->escape() ?>
     </div>
     <audio class="audio-element"
       <?= $block->controls()->isTrue() ? 'controls' : '' ?>
       <?= $block->autoplay()->isTrue() ? 'autoplay' : '' ?>
     >
-      <source src="<?= $file->url()?>" type="<?= $file->mime() ?>">
+      <source src="<?= $file->url()?>" type="<?= esc($file->mime(), 'attr') ?>">
       Your browser does not support the <code>audio</code> element.
     </audio>
   </div>

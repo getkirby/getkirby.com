@@ -98,7 +98,7 @@ Since these example events link to external events, we only show an events overv
 
 <section class="events">
 
-  <h1><?= $page->title()->html() ?></h1>
+  <h1><?= $page->title()->escape() ?></h1>
 
   <?php 
   $events = $page->children()->listed();
@@ -108,16 +108,16 @@ Since these example events link to external events, we only show an events overv
     <li class="event">
       <a href="<?= $event->link() ?>">
         <header>
-          <h3><?= $event->title()->html() ?></h3>
+          <h3><?= $event->title()->escape() ?></h3>
           <time><?= $event->from()->toDate('d.m.Y') ?> - <?= $event->to()->toDate('d.m.Y') ?></time>
         </header>
         <main>
-          <?= $event->text()->kirbytext() ?>
+          <?= $event->text()->escape()->kirbytext() ?>
           <?php if ($image = $event->image()): ?>
           <figure><?= $event->image() ?></figure>
           <?php endif ?>
         </main>
-        <footer><?= $event->location()->html() ?></footer>
+        <footer><?= $event->location()->escape() ?></footer>
       </a>
     </li>
     <?php endforeach ?>

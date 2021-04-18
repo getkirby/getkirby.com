@@ -17,7 +17,7 @@ endif;
   <?php foreach ($page->files()->find('document-a.pdf', 'document-b.pdf', 'document-c.pdf') as $file): ?>
   <li>
     <a href="<?= $file->url() ?>">
-      <?= $file->filename()->html() ?>
+      <?= $file->filename()->escape() ?>
     </a>
   </li>
   <?php endforeach ?>

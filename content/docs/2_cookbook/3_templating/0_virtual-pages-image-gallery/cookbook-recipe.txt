@@ -312,12 +312,12 @@ With the page model complete, let's set out to create a template for the childre
 <article>
   <div class="grid">
     <div class="column" style="--columns:11; --gutter:1.5rem">
-      <h1 class="h1 margin-m"><?= $page->title()->html() ?></h1>
+      <h1 class="h1 margin-m"><?= $page->title()->escape() ?></h1>
       <?php if ($page->subheading()->isNotEmpty()) : ?>
-        <p class="h2 color-grey"><?= $page->subheading()->html() ?></p>
+        <p class="h2 color-grey"><?= $page->subheading()->escape() ?></p>
       <?php endif ?>
       <time datetime="<?= $page->date('c') ?>">Taken on <?= $page->date() ?></time>
-      <p class="margin-m">by <?= $page->photographer()->html() ?></p>
+      <p class="margin-m">by <?= $page->photographer()->escape() ?></p>
       <?= $page->story()->toBlocks() ?>
     </div>
 
@@ -573,12 +573,12 @@ class GalleryImagePage extends Page
 <article>
   <div class="grid">
     <div class="column" style="--columns:11; --gutter:1.5rem">
-      <h1 class="h1 margin-m"><?= $page->title()->html() ?></h1>
+      <h1 class="h1 margin-m"><?= $page->title()->escape() ?></h1>
       <?php if ($page->subheading()->isNotEmpty()) : ?>
-        <p class="h2 color-grey"><?= $page->subheading()->html() ?></p>
+        <p class="h2 color-grey"><?= $page->subheading()->escape() ?></p>
       <?php endif ?>
       <time datetime="<?= $page->date('c') ?>">Taken on <?= $page->date() ?></time>
-      <p class="margin-m">by <?= $page->photographer()->html() ?></p>
+      <p class="margin-m">by <?= $page->photographer()->escape() ?></p>
       <?= $page->story()->toBlocks() ?>
     </div>
 

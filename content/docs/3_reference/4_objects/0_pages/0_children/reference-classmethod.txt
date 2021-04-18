@@ -6,6 +6,6 @@ Text:
 
 ```php
 foreach($pages->children() as $child) {
-  echo $child->title()->html();
+  echo $child->title()->escape();
 }
 ```

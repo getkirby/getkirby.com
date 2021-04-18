@@ -78,7 +78,7 @@ With such a page model you can now use the new cover method throughout all templ
   <?php foreach(page('projects')->children()->published()->limit(3) as $project): ?>
   <li>
     <a href="<?= $project->url() ?>">
-      <img src="<?= $project->cover()->url() ?>" alt="<?= $project->title() ?>" />
+      <img src="<?= $project->cover()->url() ?>" alt="<?= $project->title()->escape() ?>" />
     </a>
   </li>
   <?php endforeach ?>

@@ -52,10 +52,10 @@ The most basic use case for snippets is splitting the header and footer into sep
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="<?= $site->description() ?>">
-  <meta name="keywords" content="<?= $site->keywords() ?>">
+  <meta name="description" content="<?= $site->description()->escape('attr') ?>">
+  <meta name="keywords" content="<?= $site->keywords()->escape('attr') ?>">
   <title>
-    <?= $page->title() ?> | <?= $site->title() ?>
+    <?= $page->title()->escape() ?> | <?= $site->title()->escape() ?>
   </title>
 </head>
 <body>
@@ -63,18 +63,18 @@ The most basic use case for snippets is splitting the header and footer into sep
   <header>
     <h1>
       <a href="<?= $site->url() ?>">
-        <?= $site->title() ?>
+        <?= $site->title()->escape() ?>
       </a>
     </h1>
   </header>
 
   <main>
-    <h1><?= $page->title() ?></h1>
-    <?= $page->text() ?>
+    <h1><?= $page->title()->escape() ?></h1>
+    <?= $page->text()->escape() ?>
   </main>
 
   <footer>
-    <p class="copyright"><?= $site->copyright() ?></p>
+    <p class="copyright"><?= $site->copyright()->escape() ?></p>
   </footer>
 
 </body>
@@ -89,9 +89,9 @@ Well, we don't want to waste our precious time, so let's clean this up a bit!
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="<?= $site->description() ?>">
+  <meta name="description" content="<?= $site->description()->escape('attr') ?>">
   <title>
-    <?= $page->title() ?> | <?= $site->title() ?>
+    <?= $page->title()->escape() ?> | <?= $site->title()->escape() ?>
   </title>
 </head>
 <body>
@@ -99,7 +99,7 @@ Well, we don't want to waste our precious time, so let's clean this up a bit!
   <header>
     <h1>
       <a href="<?= $site->url() ?>">
-        <?= $site->title() ?>
+        <?= $site->title()->escape() ?>
       </a>
     </h1>
   </header>
@@ -107,7 +107,7 @@ Well, we don't want to waste our precious time, so let's clean this up a bit!
 
 ```php "/site/snippets/footer.php"
   <footer>
-    <p class="copyright"><?= $site->copyright() ?></p>
+    <p class="copyright"><?= $site->copyright()->escape() ?></p>
   </footer>
 
 </body>
@@ -120,8 +120,8 @@ Now that we have separated those parts, the final template looks very neat:
 <?php snippet('header') ?>
 
   <main>
-    <h1><?= $page->title() ?></h1>
-    <?= $page->text()->kirbytext() ?>
+    <h1><?= $page->title()->escape() ?></h1>
+    <?= $page->text()->escape()->kirbytext() ?>
   </main>
 
 <?php snippet('footer') ?>
@@ -186,9 +186,9 @@ In this example, we pass the `$article` variable (which is a page object) to the
 
 ```php "/site/snippets/article.php"
 <article>
-  <h1><?= $article->title()->html() ?></h1>
+  <h1><?= $article->title()->escape() ?></h1>
   <time><?= $article->date()->toDate('d/m/Y') ?></time>
-  <?= $article->intro()->kirbytext() ?>
+  <?= $article->intro()->escape()->kirbytext() ?>
   <a href="<?= $article->url() ?>">Read more…</a>
 </article>
 ```

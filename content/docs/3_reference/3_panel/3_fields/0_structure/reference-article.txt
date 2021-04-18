@@ -186,11 +186,11 @@ Let's say we wanted to render the `holidays` structure field example from above 
 $items = $page->holidays()->toStructure();
 // we can then loop through the entries and render the individual fields
 foreach ($items as $item): ?>
-  <h2><?= $item->title()->html() ?></h2>
+  <h2><?= $item->title()->escape() ?></h2>
   <?php foreach ($item->images()->toFiles() as $image): ?>
     <img src="<?= $image->crop(400)->url() ?>">
   <?php endforeach ?>
-  <p><?= $item->price() ?></p>
+  <p><?= $item->price()->escape() ?></p>
 <?php endforeach ?>
 ```
 

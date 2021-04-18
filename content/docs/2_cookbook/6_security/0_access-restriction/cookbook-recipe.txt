@@ -105,23 +105,23 @@ In the login template, create the login form and a container for the error messa
 ```php "/site/templates/login.php"
 <?php snippet('header') ?>
 
-<h1><?= $page->title()->html() ?></h1>
+<h1><?= $page->title()->escape() ?></h1>
 
 <?php if($error): ?>
-<div class="alert"><?= $page->alert()->html() ?></div>
+<div class="alert"><?= $page->alert()->escape() ?></div>
 <?php endif ?>
 
 <form method="post" action="<?= $page->url() ?>">
   <div>
-    <label for="email"><?= $page->username()->html() ?></label>
-    <input type="email" id="email" name="email" value="<?= esc(get('email')) ?>">
+    <label for="email"><?= $page->username()->escape() ?></label>
+    <input type="email" id="email" name="email" value="<?= esc(get('email'), 'attr') ?>">
   </div>
   <div>
-    <label for="password"><?= $page->password()->html() ?></label>
-    <input type="password" id="password" name="password" value="<?= esc(get('password')) ?>">
+    <label for="password"><?= $page->password()->escape() ?></label>
+    <input type="password" id="password" name="password" value="<?= esc(get('password'), 'attr') ?>">
   </div>
   <div>
-    <input type="submit" name="login" value="<?= $page->button()->html() ?>">
+    <input type="submit" name="login" value="<?= $page->button()->escape('attr') ?>">
   </div>
 </form>
 
@@ -238,9 +238,9 @@ In the same way, you can hide parts of a page from unauthenticated users:
 ```php
 <?php snippet('header') ?>
 
-<h1><?= $page->title()->html() ?></h1>
+<h1><?= $page->title()->escape() ?></h1>
 
-<?= $page->text()->kirbytext() ?>
+<?= $page->text()->escape()->kirbytext() ?>
 
 <?php if ($kirby->user()): ?>
 Top Secret: the meaning of life is…

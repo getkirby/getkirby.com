@@ -21,7 +21,7 @@ Text:
   <?php foreach($site->grandChildren() as $item): ?>
   <li>
     <a href="<?= $item->url() ?>">
-      <?= $item->title()->html() ?>
+      <?= $item->title()->escape() ?>
     </a>
   </li>
   <?php endforeach ?>

@@ -10,7 +10,7 @@ Note that you have to pass the full [`id`](/docs/reference/objects/page/id) as p
   <?php foreach($page->children()->not('projects/project-b') as $subpage): ?>
   <li>
     <a href="<?= $subpage->url() ?>">
-      <?= $subpage->title()->html() ?>
+      <?= $subpage->title()->escape() ?>
     </a>
   </li>
   <?php endforeach ?>
@@ -27,7 +27,7 @@ You can pass a collection as argument as well:
   foreach($page->children()->not($excluded) as $subpage): ?>
   <li>
     <a href="<?= $subpage->url() ?>">
-      <?= $subpage->title()->html() ?>
+      <?= $subpage->title()->escape() ?>
     </a>
   </li>
   <?php endforeach ?>

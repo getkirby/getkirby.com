@@ -175,17 +175,17 @@ Here we use the `urldecode()`d page slug as our filter value.
 <?php if ($articles->isNotEmpty()) : ?>
     <?php foreach ($articles as $article) : ?>
         <article>
-            <h2><?= $article->title()->html() ?></h2>
+            <h2><?= $article->title()->escape() ?></h2>
             <?= $article->text()->kt() ?>
             <ul>
             <?php foreach ($page->tags()->split(',') as $tag) : ?>
-                <li><a href="<?= page('blog')->url() . '/tag/' . urlencode($tag) ?>"><?= $tag ?></a></li>
+                <li><a href="<?= page('blog')->url() . '/tag/' . esc($tag, 'url') ?>"><?= esc($tag) ?></a></li>
             <?php endforeach ?>
             </ul>
         </article>
     <?php endforeach ?>
 <?php else : ?>    
-    <div>No results for tag <?= $tag ?></div>
+    <div>No results for tag <?= esc($tag) ?></div>
 <?php endif ?>
 <?php snippet('footer') ?>
 ```

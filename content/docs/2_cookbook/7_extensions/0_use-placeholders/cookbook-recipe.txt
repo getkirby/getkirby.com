@@ -36,7 +36,7 @@ If you want to use different start and end characters instead of the curly brace
 In your templates, you can replace such placeholders on the fly using the [`Str::template()`](/docs/reference/tools/str/template) method:
 
 ```php
-<?= Str::template($page->text()->kt(), [
+<?= Str::template($page->text()->escape()->kt(), [
     'company' => 'Great Company',
     'phone'   => '+01 123 1234567'
 ]) ?>
@@ -65,7 +65,7 @@ With this in place, we can pass this array to the `Str::template()` method:
 
 
 ```php
-<?= Str::template($page->text()->kt(), option('placeholders', [])) ?>
+<?= Str::template($page->text()->escape()->kt(), option('placeholders', [])) ?>
 ```
 
 Now, if we want to add additional placeholders, we can do that in the config.
@@ -105,7 +105,7 @@ Kirby::plugin('cookbook/placeholders', [
             $result = [];
             foreach ($field->toStructure() as $option) {
                 if ($option->key()->isNotEmpty() && $option->value()->isNotEmpty()) {
-                   $result[$option->key()->value()] = $option->value()->html();
+                   $result[$option->key()->value()] = $option->value()->escape();
                 }
             }
             return $result;
@@ -117,7 +117,7 @@ Kirby::plugin('cookbook/placeholders', [
 We can now get the replacement array from the field above like this:
 
 ```php
-<?= Str::template($page->text()->kt(), $site->placeholders()->toOptions()) ?>
+<?= Str::template($page->text()->escape()->kt(), $site->placeholders()->toOptions()) ?>
 ```
 
 ## Custom field method
@@ -125,7 +125,7 @@ We can now get the replacement array from the field above like this:
 Wouldn't it be nice to create our own field method and write it like this?:
 
 ```php
-<?= $page->text()->kt()->replace([
+<?= $page->text()->escape()->kt()->replace([
     'company' => 'Great company',
     'phone'   => '+01 123 1234567',
 ]) ?>
@@ -134,7 +134,7 @@ Wouldn't it be nice to create our own field method and write it like this?:
 … or connected to our structure field:
 
 ```php
-<?= $page->text()->kt()->replace($site->placeholders()->toOptions()) ?>
+<?= $page->text()->escape()->kt()->replace($site->placeholders()->toOptions()) ?>
 ```
 
 Let's put this in our plugin:
@@ -200,9 +200,9 @@ Kirby::plugin('cookbook/placeholders', [
                 if ($option->key()->isNotEmpty() && $option->value()->isNotEmpty()) {
                     // check if the block field is set to true and parse KirbyTags
                     if ($option->block()->toBool() === true) {
-                        $result[$option->key()->value()] = kirbytags($option->value());
+                        $result[$option->key()->value()] = kirbytags($option->value()->escape());
                     } else {
-                        $result[$option->key()->value()] = $option->value()->html();
+                        $result[$option->key()->value()] = $option->value()->escape();
                     }
                 }
             }

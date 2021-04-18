@@ -35,12 +35,12 @@ Now let's see how to output this collection object:
 <?php
 // first we loop through the years and echo the year
 foreach($years as $year => $itemsPerYear): ?>
-    <h2><?= $year ?></h2>
+    <h2><?= esc($year) ?></h2>
     <ul>
       <?php
       // then we loop through all the items for each year
       foreach($itemsPerYear as $item) : ?>
-      <li><?= $item->title() ?></li>
+      <li><?= $item->title()->escape() ?></li>
       <?php endforeach; ?>
     </ul>
 <?php endforeach ?>
@@ -66,10 +66,10 @@ $groupedItems = page('projects')->children()->listed()->group($callback);
 
 // output items by year
 foreach($groupedItems as $year => $itemsPerYear): ?>
-    <h2><?= $year ?></h2>
+    <h2><?= esc($year) ?></h2>
     <ul>
       <?php foreach($itemsPerYear as $item) : ?>
-      <li><?= $item->title() ?></li>
+      <li><?= $item->title()->escape() ?></li>
       <?php endforeach; ?>
     </ul>
 <?php endforeach ?>
@@ -89,10 +89,10 @@ $groups = $page->children()->listed()->group(function($article) {
 });
 ?>
 <?php foreach($groups as $description => $items): ?>
-  <h2><?= $description ?></h2>
+  <h2><?= esc($description) ?></h2>
 
   <?php foreach($items->sortBy('clicks', 'desc') as $item): ?>
-    <h2><?= $item->title()->html() ?></h2>
+    <h2><?= $item->title()->escape() ?></h2>
   <?php endforeach ?>
 <?php endforeach ?>
 ```
@@ -124,7 +124,7 @@ $groups = $page->children()->images()->groupBy('photographer');
 foreach($groups as $photographer => $items):
 ?>
 
-<h2><?= $photographer ?></h2>
+<h2><?= esc($photographer) ?></h2>
   <ul>
     <?php foreach($items as $item): ?>
     <li><?= $item->resize(100) ?></li>
@@ -148,7 +148,7 @@ $callback = function($f) {
 $groupedFiles = page('projects')->children()->listed()->images()->group($callback);
 
 foreach($groupedFiles as $year => $images): ?>
-  <h2><?= $year ?></h2>
+  <h2><?= esc($year) ?></h2>
   <?php
     // loop through the images
     foreach($images as $image): ?>

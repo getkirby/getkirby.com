@@ -28,7 +28,7 @@ You can extend the set of defined page methods very easily in a plugin file.
 Kirby::plugin('my/page-methods', [
     'pageMethods' => [
         'linktag' => function () {
-            return '<a href="' . $this->url() . '">' . $this->title()->html() . '</a>';
+            return '<a href="' . $this->url() . '">' . $this->title()->escape() . '</a>';
         }
     ]
 ]);

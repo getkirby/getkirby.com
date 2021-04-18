@@ -6,6 +6,6 @@ Text:
 <?php
 $parents = $page->parents();
 foreach($parents as $parent): ?>
-  <h1><?= $parent->title()->html() ?></h1>
+  <h1><?= $parent->title()->escape() ?></h1>
 <?php endforeach ?>
 ```

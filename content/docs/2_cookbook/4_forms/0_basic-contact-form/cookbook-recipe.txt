@@ -35,7 +35,7 @@ Our `contact.php` template contains the form and will display error messages if 
 
 <?php snippet('header') ?>
     <main class="main">
-        <h1><?= $page->title()->html() ?></h1>
+        <h1><?= $page->title()->escape() ?></h1>
 
         <?php if($success): ?>
         <div class="alert success">
@@ -54,24 +54,24 @@ Our `contact.php` template contains the form and will display error messages if 
                 <label for="name">
                     Name <abbr title="required">*</abbr>
                 </label>
-                <input type="text" id="name" name="name" value="<?= $data['name'] ?? '' ?>" required>
-                <?= isset($alert['name']) ? '<span class="alert error">' . html($alert['name']) . '</span>' : '' ?>
+                <input type="text" id="name" name="name" value="<?= esc($data['name'] ?? '', 'attr') ?>" required>
+                <?= isset($alert['name']) ? '<span class="alert error">' . esc($alert['name']) . '</span>' : '' ?>
             </div>
             <div class="field">
                 <label for="email">
                     Email <abbr title="required">*</abbr>
                 </label>
-                <input type="email" id="email" name="email" value="<?= $data['email'] ?? '' ?>" required>
-                <?= isset($alert['email']) ? '<span class="alert error">' . html($alert['email']) . '</span>' : '' ?>
+                <input type="email" id="email" name="email" value="<?= esc($data['email'] ?? '', 'attr') ?>" required>
+                <?= isset($alert['email']) ? '<span class="alert error">' . esc($alert['email']) . '</span>' : '' ?>
             </div>
             <div class="field">
                 <label for="text">
                     Text <abbr title="required">*</abbr>
                 </label>
                 <textarea id="text" name="text" required>
-                    <?= $data['text']?? '' ?>
+                    <?= esc($data['text'] ?? '') ?>
                 </textarea>
-                <?= isset($alert['text']) ? '<span class="alert error">' . html($alert['text']) . '</span>' : '' ?>
+                <?= isset($alert['text']) ? '<span class="alert error">' . esc($alert['text']) . '</span>' : '' ?>
             </div>
             <input type="submit" name="submit" value="Submit">
         </form>

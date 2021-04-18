@@ -50,7 +50,7 @@ In general, you are free to name your fields like you want to, but there are two
 Field content is accessible in your templates via the field's name:
 
 ```php
-<?= $page->title()->html() ?>
+<?= $page->title()->escape() ?>
 <?= $page->text()->kirbytext() ?>
 <?= $page->date()->toDate('Y-m-d') ?>
 ```

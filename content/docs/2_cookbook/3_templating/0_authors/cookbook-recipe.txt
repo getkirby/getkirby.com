@@ -89,14 +89,14 @@ You can now fetch the author data in the article template. This is just a basic 
 
 <article>
 
-  <h1><?= $page->title()->html() ?></h1>
+  <h1><?= $page->title()->escape() ?></h1>
   <time><?= $page->date()->toDate('d.m.Y') ?></time>
-  <?= $page->text()->kirbytext() ?>
+  <?= $page->text()->escape()->kirbytext() ?>
 
   <?php if($author = $page->author()->toUser()): ?>
     <aside class="author">
 
-      <h1><?= $author->name() ?></h1>
+      <h1><?= $author->name()->escape() ?></h1>
 
       <?php if($avatar = $author->avatar()): ?>
         <figure>
@@ -104,7 +104,7 @@ You can now fetch the author data in the article template. This is just a basic 
         </figure>
       <?php endif ?>
 
-      <?= $author->bio()->kirbytext() ?>
+      <?= $author->bio()->escape()->kirbytext() ?>
 
       <h2>On the web:</h2>
 
@@ -145,7 +145,7 @@ In that template you can fetch all authors from the articles and build a list ou
 
 <?php foreach($authors as $author): ?>
   <article class="author">
-    <h1><?= $author->name() ?></h1>
+    <h1><?= $author->name()->escape() ?></h1>
     <?php if($avatar = $author->avatar()): ?>
       <figure>
         <img src="<?= $avatar->url() ?>">
@@ -155,11 +155,11 @@ In that template you can fetch all authors from the articles and build a list ou
       <ul class="articles">
       <?php
         // filter all articles per author
-          $articles = $blog->children()->listed()->filter(function($child) use($author){
+          $articles = $blog->children()->listed()->filter(function($child) use($author) {
           return in_array($author->email(), $child->author()->yaml());
         });
         foreach($articles as $article): ?>
-          <li><a href="<?= $article->url() ?>"><?= $article->title() ?></a></li>
+          <li><a href="<?= $article->url() ?>"><?= $article->title()->escape() ?></a></li>
         <?php endforeach ?>
       </ul>
     <?php endif ?>

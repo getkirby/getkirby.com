@@ -42,7 +42,7 @@ In the template:
 <nav>
   <ul>
     <?php foreach ($menu as $menuItem) : ?>
-    <li><a href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a></li>
+    <li><a href="<?= $menuItem->url() ?>"><?= $menuItem->title()->escape() ?></a></li>
     <?php endforeach ?>
   </ul>
 </nav>
@@ -77,10 +77,10 @@ In the template, we can use it like this to render each menu with its headline:
     <?php $menuItems = $menu->menuItems()->toPages(); ?>
     <?php if ($menuItems->isNotEmpty()) : ?>
     <nav class="footer-menu">
-      <h4><?= $menu->menuHeadline()->html() ?></h4>
+      <h4><?= $menu->menuHeadline()->escape() ?></h4>
       <ul>
         <?php foreach ($menuItems as $menuItem) : ?>
-          <li><a href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a></li>
+          <li><a href="<?= $menuItem->url() ?>"><?= $menuItem->title()->escape() ?></a></li>
         <?php endforeach ?>
       </ul>
     </nav>
@@ -129,9 +129,9 @@ In the template:
   <ul>
     <?php foreach ($menuItems as $menuItem) : ?>
     <?php if ($pageLink = $menuItem->pageLink()->toPage()) : ?>
-    <li><a href="<?= $pageLink->url() ?>"><?= $menuItem->linkTitle()->or($pageLink->title()) ?></a></li>
+    <li><a href="<?= $pageLink->url() ?>"><?= $menuItem->linkTitle()->or($pageLink->title())->escape() ?></a></li>
     <?php elseif ($menuItem->externalLink()->isNotEmpty()) : ?>
-      <li><a href="<?= $menuItem->externalLink() ?>"><?= $menuItem->linkTitle()->or(Url::short($menuItem->externalLink()->value())) ?></a></li>
+      <li><a href="<?= $menuItem->externalLink() ?>"><?= $menuItem->linkTitle()->or(Url::short($menuItem->externalLink()->value()))->escape() ?></a></li>
       <?php endif ?>
     <?php endforeach ?>
   </ul>
@@ -177,13 +177,13 @@ if ($menu->isNotEmpty()) : ?>
   <ul>
     <?php foreach ($menu as $item): ?>
       <?php if ($mainMenuItem = $item->mainMenu()->toPage()) : ?>
-      <li><a href="<?= $mainMenuItem->url() ?>"><?= $mainMenuItem->title() ?></a>
+      <li><a href="<?= $mainMenuItem->url() ?>"><?= $mainMenuItem->title()->escape() ?></a>
       <?php endif ?>
       <?php $subMenu = $item->subMenu()->toPages(); ?>
       <?php if ($item->hasSubmenu()->isTrue() && $subMenu->isNotEmpty()) : ?>
         <ul class="submenu-list">
           <?php foreach ($subMenu as $subItem) : ?>
-          <li><a href="<?= $subItem->url() ?>"><?= $subItem->title() ?></a></li>
+          <li><a href="<?= $subItem->url() ?>"><?= $subItem->title()->escape() ?></a></li>
           <?php endforeach ?>
         </ul>
       </li>
@@ -272,14 +272,14 @@ Inside the snippet, we recursively call the snippet for the submenu items:
   <?php foreach ($items as $item) : ?>
 
     <?php if ($pageLink = $item->pageLink()->toPage()) : ?>
-    <li><a href="<?= $pageLink->url() ?>"><?= $item->linkTitle()->or($pageLink->title()) ?></a>
+    <li><a href="<?= $pageLink->url() ?>"><?= $item->linkTitle()->or($pageLink->title())->escape() ?></a>
     <?php elseif ($item->externalLink()->isNotEmpty()) : ?>
-    <li><a href="<?= $item->externalLink() ?>"><?= $item->linkTitle()->or(Url::short($item->externalLink()->value())) ?></a>
+    <li><a href="<?= $item->externalLink() ?>"><?= $item->linkTitle()->or(Url::short($item->externalLink()->value()))->escape() ?></a>
     <?php endif ?>
 
     <?php $subMenuItems = $item->subMenu()->toStructure(); ?>
 
-    <?php if ($item->hasSubmenu()->isTrue() && $subMenuItems->isNotempty()) : ?>
+    <?php if ($item->hasSubmenu()->isTrue() && $subMenuItems->isNotEmpty()) : ?>
     <?php snippet('menuitem-list', ['items' => $subMenuItems]) ?>
     <?php endif ?>
     </li>

@@ -75,13 +75,13 @@ This is the template for the main blog view, which will show a list of all artic
 
 <section class="content blog">
 
-  <h1><?= $page->title()->html() ?></h1>
-  <?= $page->text()->kirbytext() ?>
+  <h1><?= $page->title()->escape() ?></h1>
+  <?= $page->text()->escape()->kirbytext() ?>
 
   <?php foreach($page->children()->listed()->flip() as $article): ?>
 
   <article>
-    <h1><?= $article->title()->html() ?></h1>
+    <h1><?= $article->title()->escape() ?></h1>
     <p><?= $article->text()->excerpt(300) ?></p>
     <a href="<?= $article->url() ?>">Read more…</a>
   </article>
@@ -107,8 +107,8 @@ First we include our header and main menu snippets and start the content section
 Next we build the title of our blog and the short description, which we added in `blog.txt`.
 
 ```php
-<h1><?= $page->title()->html() ?></h1>
-<?= $page->text()->kirbytext() ?>
+<h1><?= $page->title()->escape() ?></h1>
+<?= $page->text()->escape()->kirbytext() ?>
 ```
 
 The next few lines of code consist of a loop, where we build a short version for each article of our blog:
@@ -117,7 +117,7 @@ The next few lines of code consist of a loop, where we build a short version for
 <?php foreach($page->children()->listed()->flip() as $article): ?>
 
 <article>
-  <h1><?= $article->title()->html() ?></h1>
+  <h1><?= $article->title()->escape() ?></h1>
   <p><?= $article->text()->excerpt(300) ?></p>
   <a href="<?= $article->url() ?>">Read more…</a>
 </article>
@@ -159,7 +159,7 @@ Within the foreach loop, we build the HTML for each article in our list.
 <?php foreach($page->children()->listed()->flip() as $article): ?>
 
 <article>
-  <h1><?= $article->title()->html() ?></h1>
+  <h1><?= $article->title()->escape() ?></h1>
   <p><?= $article->text()->excerpt(300) ?></p>
   <a href="<?= $article->url() ?>">Read more…</a>
 </article>
@@ -195,8 +195,8 @@ The article template will be responsible for displaying the detailed view of art
 
 <section class="content article">
   <article>
-    <h1><?= $page->title()->html() ?></h1>
-    <?= $page->text()->kirbytext() ?>
+    <h1><?= $page->title()->escape() ?></h1>
+    <?= $page->text()->escape()->kirbytext() ?>
 
     <a href="<?= url('blog') ?>">Back…</a>
 
@@ -239,14 +239,14 @@ Now we are going to implement the intro in the blog’s overview loop (instead o
 
 <main class="blog" role="main">
 
-  <h1><?= $page->title()->html() ?></h1>
-  <?= $page->text()->kirbytext() ?>
+  <h1><?= $page->title()->escape() ?></h1>
+  <?= $page->text()->escape()->kirbytext() ?>
 
   <?php foreach($page->children()->listed()->flip() as $article): ?>
 
   <article>
-    <h1><?= $article->title()->html() ?></h1>
-    <?= $article->intro()->kirbytext() ?>
+    <h1><?= $article->title()->escape() ?></h1>
+    <?= $article->intro()->escape()->kirbytext() ?>
     <a href="<?= $article->url() ?>">Read more…</a>
   </article>
 
@@ -265,9 +265,9 @@ Your article template could then look like this:
 
 <section class="content article">
   <article>
-    <h1><?= $page->title()->html() ?></h1>
-    <?= $page->intro()->kirbytext() ?>
-    <?= $page->text()->kirbytext() ?>
+    <h1><?= $page->title()->escape() ?></h1>
+    <?= $page->intro()->escape()->kirbytext() ?>
+    <?= $page->text()->escape()->kirbytext() ?>
 
     <a href="<?= url('blog') ?>">Back…</a>
 

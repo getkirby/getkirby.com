@@ -43,7 +43,7 @@ The photography page uses the `photography.php` (glossary: template text: templa
           <?= ($cover = $project->cover()) ? $cover->crop(400, 500) : null ?>
         </span>
         <figcaption class="img-caption">
-          <?= $project->title()->html() ?>
+          <?= $project->title()->escape() ?>
         </figcaption>
       </figure>
     </a>
@@ -64,7 +64,7 @@ As a first step, let's move the `<li>` element from the template into a separate
           <?= ($cover = $project->cover()) ? $cover->crop(400, 500) : null ?>
         </span>
         <figcaption class="img-caption">
-          <?= $project->title()->html() ?>
+          <?= $project->title()->escape() ?>
         </figcaption>
       </figure>
     </a>

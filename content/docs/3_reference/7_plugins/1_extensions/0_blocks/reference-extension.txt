@@ -282,7 +282,7 @@ fields:
 
 ```php "/site/plugins/button/snippets/blocks/button.php"
 <a class="btn" href="<?= $block->link()->toUrl() ?>">
-  <?= $block->text()->html() ?>
+  <?= $block->text()->escape() ?>
 </a>
 ```
 

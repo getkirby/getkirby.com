@@ -25,7 +25,7 @@ if($items->isNotEmpty()):
 <nav>
   <ul>
     <?php foreach($items as $item): ?>
-    <li><a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a></li>
+    <li><a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->escape() ?></a></li>
     <?php endforeach ?>
   </ul>
 </nav>
@@ -56,7 +56,7 @@ if($items and $items->isNotEmpty()):
 <nav>
   <ul>
     <?php foreach($items as $item): ?>
-    <li><a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a></li>
+    <li><a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->escape() ?></a></li>
     <?php endforeach ?>
   </ul>
 </nav>
@@ -89,7 +89,7 @@ if($items and $items->isNotEmpty()):
 <nav>
   <ul>
     <?php foreach($items as $item): ?>
-    <li><a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a></li>
+    <li><a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->escape() ?></a></li>
     <?php endforeach ?>
   </ul>
 </nav>
@@ -106,7 +106,7 @@ The recursive `treemenu` snippet renders a menu of all your site's pages and sub
 <ul>
   <?php foreach($subpages->listed() as $p): ?>
   <li class="depth-<?= $p->depth() ?>">
-    <a<?php e($p->isActive(), ' class="active"') ?> href="<?= $p->url() ?>"><?= $p->title()->html() ?></a>
+    <a<?php e($p->isActive(), ' class="active"') ?> href="<?= $p->url() ?>"><?= $p->title()->escape() ?></a>
     <?php if($p->hasChildren()): ?>
     <?php snippet('treemenu', ['subpages' => $p->children()]) ?>
     <?php endif ?>
@@ -155,7 +155,7 @@ if($items->isNotEmpty()):
   <ul>
     <?php foreach($items as $item): ?>
     <li>
-      <a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a>
+      <a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->escape() ?></a>
 
       <?php
 
@@ -168,7 +168,7 @@ if($items->isNotEmpty()):
       ?>
       <ul>
         <?php foreach($children as $child): ?>
-        <li><a<?php e($child->isOpen(), ' class="active"') ?> href="<?= $child->url() ?>"><?= $child->title()->html() ?></a></li>
+        <li><a<?php e($child->isOpen(), ' class="active"') ?> href="<?= $child->url() ?>"><?= $child->title()->escape() ?></a></li>
         <?php endforeach ?>
       </ul>
       <?php endif ?>
@@ -196,7 +196,7 @@ if($items and $items->isNotEmpty()):
 <nav>
   <ul>
     <?php foreach($items as $item): ?>
-    <li><a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a></li>
+    <li><a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->escape() ?></a></li>
     <?php endforeach ?>
   </ul>
 </nav>
@@ -218,7 +218,7 @@ if($items->isNotEmpty()):
 ?>
 <select onchange="window.location.href = this.value">
   <?php foreach($items as $item): ?>
-  <option value="<?= $item->url() ?>"<?php e($item->isOpen(), ' selected="selected"') ?>><?= $item->title()->html() ?></option>
+  <option value="<?= $item->url() ?>"<?php e($item->isOpen(), ' selected="selected"') ?>><?= $item->title()->escape() ?></option>
   <?php endforeach ?>
 </select>
 <?php endif ?>
@@ -230,7 +230,7 @@ if($items->isNotEmpty()):
 <nav>
   <ul>
     <?php foreach($site->breadcrumb() as $crumb): ?>
-    <li<?php e($crumb->isActive(), ' class="is-active"') ?>><a href="<?= $crumb->url() ?>"><?= $crumb->title()->html() ?></a></li>
+    <li<?php e($crumb->isActive(), ' class="is-active"') ?>><a href="<?= $crumb->url() ?>"><?= $crumb->title()->escape() ?></a></li>
     <?php endforeach; ?>
   </ul>
 </nav>
@@ -249,7 +249,7 @@ It's often necessary to style particular items in a menu without touching the ot
 ```php
 <nav>
   …
-  <li class="<?= $item->uid() ?>"><a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a></li>
+  <li class="<?= $item->uid() ?>"><a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->escape() ?></a></li>
   …
 </nav>
 ```
@@ -280,7 +280,7 @@ Especially in nested menus it can be helpful to have an additional selector that
 ```php
 <nav>
   …
-  <li class="depth-<?= $item->depth() ?>"><a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a></li>
+  <li class="depth-<?= $item->depth() ?>"><a<?php e($item->isOpen(), ' class="active"') ?> href="<?= $item->url() ?>"><?= $item->title()->escape() ?></a></li>
   …
 </nav>
 ```

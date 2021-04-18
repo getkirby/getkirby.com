@@ -64,7 +64,7 @@ The template contains the form and will display error messages if something goes
 
 <?php snippet('header') ?>
     <main class="main">
-        <h1><?= $page->title()->html() ?></h1>
+        <h1><?= $page->title()->escape() ?></h1>
 
         <?php
         // if the form input is not valid, show a list of alerts
@@ -95,26 +95,26 @@ The template contains the form and will display error messages if something goes
         <label for="name">
             Name <abbr title="required">*</abbr>
         </label>
-        <input type="text" id="name" name="name" value="<?= $data['name'] ?? null ?>" required>
-        <?= isset($alert['name']) ? '<span class="alert error">' . html($alert['name']) . '</span>' : '' ?>
+        <input type="text" id="name" name="name" value="<?= esc($data['name'] ?? '', 'attr') ?>" required>
+        <?= isset($alert['name']) ? '<span class="alert error">' . esc($alert['name']) . '</span>' : '' ?>
     </div>
     <div class="form-element">
         <label for="email">
             Email <abbr title="required">*</abbr>
         </label>
-        <input type="email" id="email" name="email" value="<?= $data['email'] ?? null ?>" required>
+        <input type="email" id="email" name="email" value="<?= esc($data['email'] ?? '', 'attr') ?>" required>
     </div>
     <div class="form-element">
         <label for="reference">
             Job reference number <abbr title="required">*</abbr>
         </label>
-        <input type="text" id="reference" name="reference" value="<?= $data['reference'] ?? get('reference') ?? null ?>" required>
+        <input type="text" id="reference" name="reference" value="<?= esc($data['reference'] ?? get('reference') ?? '', 'attr') ?>" required>
     </div>
     <div class="form-element">
         <label for="message">
             Message <abbr title="required">*</abbr>
         </label>
-        <textarea id="message" name="message" required><?= $data['message']?? null ?></textarea>
+        <textarea id="message" name="message" required><?= esc($data['message'] ?? '') ?></textarea>
     </div>
     <div class="form-element">
       <label for="file">Upload your documents

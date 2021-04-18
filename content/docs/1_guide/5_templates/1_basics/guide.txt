@@ -80,7 +80,7 @@ The `$site` object contains important information about the site in general and 
 <html>
 <head>
   <meta charset="UTF-8">
-  <title><?= $site->title()->html() ?></title>
+  <title><?= $site->title()->escape() ?></title>
 </head>
 <body>
   Hello world!
@@ -121,9 +121,9 @@ All this data can be used in your templates instantly:
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="<?= $site->description()->html() ?>">
+  <meta name="description" content="<?= $site->description()->escape('attr') ?>">
   <title>
-    <?= $site->title()->html() ?>
+    <?= $site->title()->escape() ?>
   </title>
 </head>
 <body>
@@ -131,7 +131,7 @@ All this data can be used in your templates instantly:
   <header>
     <h1 class="logo">
       <a href="<?= $site->url() ?>">
-        <?= $site->title()->html() ?>
+        <?= $site->title()->escape() ?>
       </a>
     </h1>
   </header>
@@ -139,7 +139,7 @@ All this data can be used in your templates instantly:
   Hello world!
 
   <footer>
-    <p class="copyright"><?= $site->copyright()->html() ?></p>
+    <p class="copyright"><?= $site->copyright()->escape() ?></p>
   </footer>
 
 </body>
@@ -147,6 +147,10 @@ All this data can be used in your templates instantly:
 ```
 
 As you can see, the `$site` object also contains the main URL of your site, which can be used to link the logo back to your homepage for example. The `$site` object has many more methods you can find in the (link: docs/reference text: Reference).
+
+<info>
+You might be wondering what the calls to the `escape()` method are for. These are used to protect against cross-site scripting (XSS) attacks. (link: docs/guide/templates/escaping text: Read more ›)
+</info>
 
 ## The `$page` variable
 
@@ -158,10 +162,10 @@ Like the `$site` variable, the `$page` variable has many methods that allow us t
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="<?= $site->description() ?>">
-  <meta name="keywords" content="<?= $site->keywords() ?>">
+  <meta name="description" content="<?= $site->description()->escape('attr') ?>">
+  <meta name="keywords" content="<?= $site->keywords()->escape('attr') ?>">
   <title>
-    <?= $page->title()->html() ?> | <?= $site->title()->html() ?>
+    <?= $page->title()->escape() ?> | <?= $site->title()->escape() ?>
   </title>
 </head>
 <body>
@@ -169,18 +173,18 @@ Like the `$site` variable, the `$page` variable has many methods that allow us t
   <header>
     <h1>
       <a href="<?= $site->url() ?>">
-        <?= $site->title()->html() ?>
+        <?= $site->title()->escape() ?>
       </a>
     </h1>
   </header>
 
   <main>
-    <h1><?= $page->title()->html() ?></h1>
-    <?= $page->text()->kirbytext() ?>
+    <h1><?= $page->title()->escape() ?></h1>
+    <?= $page->text()->escape()->kirbytext() ?>
   </main>
 
   <footer>
-    <p class="copyright"><?= $site->copyright()->html() ?></p>
+    <p class="copyright"><?= $site->copyright()->escape() ?></p>
   </footer>
 
 </body>
