@@ -422,6 +422,7 @@
   }
   .playground-medium-api pre {
     padding: var(--spacing-3);
+    line-height: var(--leading-tight);
   }
   .playground-medium-api pre code {
     font-size: 7px;
