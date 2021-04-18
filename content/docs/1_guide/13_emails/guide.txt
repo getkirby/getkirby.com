@@ -271,6 +271,6 @@ The `beforeSend` callback can also be added as [preset](#email-presets).
 </since>
 
 ## More information
-- (link: docs/reference/objects/kirby/email text: `$kirby->email()`)
+- `$kirby->email()`
 - (link: docs/cookbook/forms/basic-contact-form text: Email contact form)
 - (link: docs/cookbook/forms/email-with-attachments text: Email with attachments)

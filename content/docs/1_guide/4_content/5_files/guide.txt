@@ -30,11 +30,10 @@ You can access the page's files using handy methods for each common file type:
 
 | Type | Extensions | API Method |
 | ---- | ---------- | ---------- |
-| Archives | gz, gzip, tar, tgz, zip | `$page->archives()` |
 | Audio | aif, aiff, m4a, midi, mp3, wav | `$page->audio()` |
-| Code | css, js, json, java, htm, html, php, rb, py, scss, xml, yml | `$page->code()` |
-| Documents | csv, doc, docx, dotx, indd, md, mdown, pdf, ppt, pptx, rtf, xl, xls, xlsx, xltx | `$page->documents()` |
-| Images | ai, bmp, gif, eps, ico, jpeg, jpg, jpe, png, ps, psd, svg, tif, tiff, webp | `$page->images()` |
+| Code | css, js, json, java, htm, html, php, rb, py, scss, xml, yaml, yml | `$page->code()` |
+| Documents | csv, doc, docx, dotx, indd, md, mdown, pdf, ppt, pptx, rtf, txt, xl, xls, xlsx, xltx | `$page->documents()` |
+| Images | ai, avif, bmp, gif, eps, ico, j2k, jp2, jpeg, jpg, jpe, png, ps, psd, svg, tif, tiff, webp | `$page->images()` |
 | Videos | avi, flv, m4v, mov, movie, mpe, mpg, mp4, ogg, ogv, swf, webm | `$page->videos()` |
 
 Other file types are of course also supported.
@@ -51,15 +50,10 @@ Note that if you upload files to a page and want to use them later in the Panel,
 
 ## Uploading files via the Panel
 
-(columns…)
-
 You can upload files via the Panel to pages that allow file uploads. To upload a file in the Panel, click on the `Add` button above the files section and select a file from your file system. If the file validates, it will be uploaded.
 
-++++
 
-(image: Bildschirmfoto2018-07-09um21.13.28.jpg)
-
-(…columns)
+(image: files-section.jpg)
 
 ## Linking to files in your content
 
@@ -68,11 +62,6 @@ Files can be linked or embedded in any field with KirbyTags or used in templates
 ## Rendering files in your templates
 
 Kirby provides many ways to render files in your templates. Here are some examples:
-
-<info>
-Note that the default sorting order of files is according to their order in the file system. To sort files by their manual sorting order, you can use `$files->sortBy('sort')`, where `sort` is the field that stores the sorting number if you manually sort files in the Panel.
-</info>
-
 
 ### Fetching all images of a page
 
@@ -116,6 +105,10 @@ Note that the default sorting order of files is according to their order in the 
 
 These are just some basic examples to give you an idea. You can filter and find files by type, template, by their meta data etc. More information on the available file and files methods in the (link: docs/reference/objects/file text: Reference).
 
+<success>
+The default sorting order of files is based on their order in the file system. To retrieve files in the order they appear in the Panel, you can use `$files->sortBy('sort')`, where `sort` is the field that stores the sorting number from the Panel.
+</success>
+
 ## Adding meta data to your files
 
 A meta data file is stored next to the file and named after the following pattern:
@@ -147,18 +140,18 @@ Photographer: Ansel Adams' cat
 
 ## Accessing meta data in templates
 
-Meta data is instantly available from each `$file` object in your templates and snippets.
+Meta data is available from each (class: Kirby\Cms\File text: $file) object in your templates and snippets.
 
 ```php "project.php"
-<?php if($image = $page->image('lake.jpg')): ?>
+<?php if($file = $page->image('lake.jpg')): ?>
   <figure>
-    <img src="<?= $image->url() ?>" alt="<?= $image->title() ?>">
+    <img src="<?= $file->url() ?>" alt="<?= $file->title() ?>">
     <figcaption>
       <span class="caption">
-        <?= $image->caption() ?>
+        <?= $file->caption() ?>
       </span>
       <span class="photographer">
-        <?= $image->photographer() ?>
+        <?= $file->photographer() ?>
       </span>
     </figcaption>
   </figure>

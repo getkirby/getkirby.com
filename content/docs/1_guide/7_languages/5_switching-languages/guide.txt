@@ -16,7 +16,7 @@ With the `$kirby->languages()` method we can fetch all information about availab
 
 ## Switch A
 
-The first option is to redirect users to the home page when they select another language. This can be done by using `$language->url()` for the link.
+The first option is to redirect users to the home page when they select another language. This can be done by using (method: Kirby\Cms\Language::url text: $language->url()) for the link.
 
 ```php
 <nav class="languages">

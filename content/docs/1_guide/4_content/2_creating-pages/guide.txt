@@ -78,7 +78,7 @@ If you want to create a draft manually in the content folder you can create a `_
 
 Pages can also be created via Kirby's API methods in a controller, template, plugin, hook etc. This is useful if you want to create pages from form data, external files (like an Excel or `.csv` file), or from an external API.
 
-The basic syntax for creating a page with code looks like this:
+The basic syntax for creating a page using the `$page->createChild()` method looks like this:
 
 ```php
 <?php
