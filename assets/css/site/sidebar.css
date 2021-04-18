@@ -33,3 +33,8 @@
   font-weight: normal;
   color: var(--color-gray-700);
 }
+.sidebar-menu-2 li > hr {
+  width: 3rem;
+  margin: var(--spacing-3) 0;
+  border-top: 2px solid var(--color-gray-200);
+}

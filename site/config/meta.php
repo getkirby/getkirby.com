@@ -8,7 +8,8 @@ return [
         'templates' => [
             'error',
             'link',
-            'reference-packages'
+            'reference-packages',
+            'separator'
         ]
     ],
 ];
