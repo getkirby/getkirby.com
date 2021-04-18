@@ -2,7 +2,7 @@ Title: Checkboxes
 
 ----
 
-Excerpt:
+Intro:
 
 A list of checkbox fields
 

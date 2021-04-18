@@ -2,7 +2,7 @@ Title: /users/:id/password
 ----
 Info: PATCH
 ----
-Excerpt: Change the password
+Intro: Change the password
 ----
 Auth: users.changePassword
 ----

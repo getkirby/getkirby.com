@@ -2,7 +2,7 @@ Title: /auth/login
 ----
 Info: POST
 ----
-Excerpt: Start a new session
+Intro: Start a new session
 ----
 Text:
 

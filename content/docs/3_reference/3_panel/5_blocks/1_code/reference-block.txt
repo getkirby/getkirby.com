@@ -6,4 +6,4 @@ Since: 3.5.0
 
 ----
 
-Excerpt: An inline code block for code snippets and examples.
+Intro: An inline code block for code snippets and examples.

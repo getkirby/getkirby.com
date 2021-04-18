@@ -2,7 +2,7 @@ Title: /languages
 ----
 Info: GET
 ----
-Excerpt: List languages
+Intro: List languages
 ----
 Text:
 

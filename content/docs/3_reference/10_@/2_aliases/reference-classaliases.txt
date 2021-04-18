@@ -2,4 +2,4 @@ Title: Aliases
 
 ----
 
-Excerpt: In Kirby, classes are separated in different namespaces such as `Kirby\Cms\` or `Kirby\Http\`. Aliases help to access specific classes without the need to mention their namespace.
+Intro: In Kirby, classes are separated in different namespaces such as `Kirby\Cms\` or `Kirby\Http\`. Aliases help to access specific classes without the need to mention their namespace.

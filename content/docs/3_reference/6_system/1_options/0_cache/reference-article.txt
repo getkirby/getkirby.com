@@ -1,4 +1,4 @@
-Excerpt: Enables/disables Kirby's cache and sets cache options
+Intro: Enables/disables Kirby's cache and sets cache options
 
 ----
 

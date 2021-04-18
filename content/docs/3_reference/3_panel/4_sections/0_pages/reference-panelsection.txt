@@ -2,7 +2,7 @@ Title: Pages section
 
 ----
 
-Excerpt:
+Intro:
 
 List and edit subpages
 

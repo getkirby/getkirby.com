@@ -2,7 +2,7 @@ Title: Page blueprint
 
 ----
 
-Excerpt: Page blueprints are located in `/site/blueprints/pages` and control the Panel setup and form fields for pages.
+Intro: Page blueprints are located in `/site/blueprints/pages` and control the Panel setup and form fields for pages.
 
 ----
 

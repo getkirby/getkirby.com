@@ -2,7 +2,7 @@ Title: /site/:id/files/search
 ----
 Info: GET|POST
 ----
-Excerpt: Search for site files
+Intro: Search for site files
 ----
 Since: 3.1.0
 ----

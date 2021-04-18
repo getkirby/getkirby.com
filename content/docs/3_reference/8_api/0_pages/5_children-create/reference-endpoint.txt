@@ -2,7 +2,7 @@ Title: /pages/:id/children
 ----
 Info: POST
 ----
-Excerpt: Create a new subpage
+Intro: Create a new subpage
 ----
 Auth: pages.create
 ----

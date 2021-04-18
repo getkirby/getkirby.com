@@ -2,7 +2,7 @@ Title: /users/:id/files/search
 ----
 Info: GET|POST
 ----
-Excerpt: Search for user files
+Intro: Search for user files
 ----
 Since: 3.1.0
 ----

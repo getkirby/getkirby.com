@@ -2,7 +2,7 @@ Title: Blueprints
 
 ----
 
-Excerpt:
+Intro:
 
 Blueprints configure what forms look like in Kirby's highly customizable (glossary: Panel). There are different blueprint types for pages, files, the site and users.
 

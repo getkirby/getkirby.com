@@ -2,7 +2,7 @@ Title: /pages/:id/files/:filename/name
 ----
 Info: PATCH
 ----
-Excerpt: Rename a file
+Intro: Rename a file
 ----
 Auth: files.changeName
 ----

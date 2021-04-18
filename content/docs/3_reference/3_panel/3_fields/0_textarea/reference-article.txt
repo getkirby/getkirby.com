@@ -2,7 +2,7 @@ Title: Textarea
 
 ----
 
-Excerpt:
+Intro:
 
 A textarea field, which auto-resizes and has built-in format buttons.
 

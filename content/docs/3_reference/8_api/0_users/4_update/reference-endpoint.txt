@@ -2,7 +2,7 @@ Title: /users/:id
 ----
 Info: PATCH
 ----
-Excerpt: Update a user
+Intro: Update a user
 ----
 Auth: users.update
 ----

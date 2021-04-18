@@ -2,7 +2,7 @@ Title: (:all)
 
 ----
 
-Excerpt: Matches all characters including slashes
+Intro: Matches all characters including slashes
 
 ----
 

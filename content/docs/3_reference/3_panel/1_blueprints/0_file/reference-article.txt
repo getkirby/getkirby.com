@@ -2,7 +2,7 @@ Title: File blueprint
 
 ----
 
-Excerpt: File blueprints are located in `/site/blueprints/files` and control the Panel setup and form fields for individual file types.
+Intro: File blueprints are located in `/site/blueprints/files` and control the Panel setup and form fields for individual file types.
 
 ----
 

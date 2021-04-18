@@ -6,4 +6,4 @@ Since: 3.5.0
 
 ----
 
-Excerpt: A single image
+Intro: A single image

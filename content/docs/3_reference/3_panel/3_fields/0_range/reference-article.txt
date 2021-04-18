@@ -2,7 +2,7 @@ Title: Range
 
 ----
 
-Excerpt: A handy slider
+Intro: A handy slider
 
 ----
 

@@ -2,7 +2,7 @@ Title: excerpt($text, $length = 140, $mode = 'chars')
 
 ----
 
-Excerpt: Creates an excerpt of any text by a given character or word length
+Intro: Creates an excerpt of any text by a given character or word length
 
 ----
 

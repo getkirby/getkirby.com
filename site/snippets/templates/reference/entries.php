@@ -7,7 +7,7 @@
           <div class="flex-grow">
             <h4 class="h6"><?= $entry->title() ?></h4>
             <div class="color-gray-700 text-xs">
-              <?= strip_tags($entry->excerpt()->kti()) ?>
+              <?= strip_tags($entry->intro()->kti()) ?>
             </div>
           </div>
         </a>

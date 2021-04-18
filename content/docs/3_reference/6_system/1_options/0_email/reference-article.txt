@@ -1,4 +1,4 @@
-Excerpt: Set options for Kirby's built-in email class
+Intro: Set options for Kirby's built-in email class
 
 ----
 

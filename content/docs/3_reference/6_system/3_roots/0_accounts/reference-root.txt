@@ -2,4 +2,4 @@ Title: accounts
 
 ----
 
-Excerpt: Returns the root of the accounts folder.
+Intro: Returns the root of the accounts folder.

@@ -2,7 +2,7 @@ Title: Urls
 
 ----
 
-Excerpt:
+Intro:
 
 All main system URLs are available from the `$kirby->urls()` object and can be used to create valid links.
 

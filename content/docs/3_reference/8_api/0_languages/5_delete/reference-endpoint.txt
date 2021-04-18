@@ -2,6 +2,6 @@ Title: /languages/:code
 ----
 Info: DELETE
 ----
-Excerpt: Delete a language
+Intro: Delete a language
 ----
 Text:

@@ -39,10 +39,10 @@
       <article>
         <header class="mb-12">
           <h1 class="h1 mb-12"><?= $page->title() ?></h1>
-          <?php if ($page->excerpt()->isNotEmpty()): ?>
+          <?php if ($page->intro()->isNotEmpty()): ?>
           <div class="prose mb-12">
             <div class="intro color-gray-700">
-              <?= $page->excerpt()->kt() ?>
+              <?= $page->intro()->kt() ?>
             </div>
           </div>
           <?php endif ?>

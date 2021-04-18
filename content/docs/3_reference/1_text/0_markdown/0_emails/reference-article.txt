@@ -2,10 +2,6 @@ Title: Email addresses
 
 ----
 
-Excerpt:
-
-----
-
 Text:
 
 Without link text:

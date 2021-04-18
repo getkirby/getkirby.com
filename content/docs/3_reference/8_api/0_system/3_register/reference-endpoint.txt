@@ -2,7 +2,7 @@ Title: /system/register
 ----
 Info: POST
 ----
-Excerpt: Register a Kirby license
+Intro: Register a Kirby license
 ----
 Text:
 

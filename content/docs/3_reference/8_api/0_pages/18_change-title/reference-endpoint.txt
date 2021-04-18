@@ -2,7 +2,7 @@ Title: /pages/:id/title
 ----
 Info: PATCH
 ----
-Excerpt: Change the page title
+Intro: Change the page title
 ----
 Auth: pages.changeTitle
 ----

@@ -2,7 +2,7 @@ Title: Files section
 
 ----
 
-Excerpt:
+Intro:
 
 List, edit and upload files
 

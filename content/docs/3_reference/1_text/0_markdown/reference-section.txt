@@ -6,7 +6,7 @@ Guide: content/text-formatting#markdown
 
 ----
 
-Excerpt: (glossary: Markdown) is a lightweight markup language to convert plain text into HTML without any HTML skills.
+Intro: (glossary: Markdown) is a lightweight markup language to convert plain text into HTML without any HTML skills.
 
 ----
 

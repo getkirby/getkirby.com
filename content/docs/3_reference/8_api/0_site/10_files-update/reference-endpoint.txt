@@ -2,7 +2,7 @@ Title: /site/files/:filename
 ----
 Info: PATCH
 ----
-Excerpt: Update file content
+Intro: Update file content
 ----
 Auth: files.update
 ----

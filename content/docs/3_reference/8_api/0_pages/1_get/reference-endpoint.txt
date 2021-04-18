@@ -2,7 +2,7 @@ Title: /pages/:id
 ----
 Info: GET
 ----
-Excerpt: Retrieve a page
+Intro: Retrieve a page
 ----
 Text:
 

@@ -2,7 +2,7 @@ Title: /pages/:id/children/search
 ----
 Info: GET|POST
 ----
-Excerpt: Search for children pages
+Intro: Search for children pages
 ----
 Since: 3.1.0
 ----

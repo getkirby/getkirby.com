@@ -2,7 +2,7 @@ Title: Text
 
 ----
 
-Excerpt:
+Intro:
 
 A standard, single-line input field
 

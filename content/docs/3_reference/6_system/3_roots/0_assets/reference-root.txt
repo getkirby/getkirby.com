@@ -2,4 +2,4 @@ Title: assets
 
 ----
 
-Excerpt: Returns the root of the assets folder.
+Intro: Returns the root of the assets folder.

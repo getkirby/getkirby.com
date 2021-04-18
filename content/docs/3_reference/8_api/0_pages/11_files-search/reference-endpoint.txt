@@ -2,7 +2,7 @@ Title: /pages/:id/files/search
 ----
 Info: GET|POST
 ----
-Excerpt: Search for page files
+Intro: Search for page files
 ----
 Since: 3.1.0
 ----

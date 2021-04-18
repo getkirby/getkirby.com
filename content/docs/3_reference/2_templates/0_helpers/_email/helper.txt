@@ -2,7 +2,7 @@ Title: email($params)
 
 ----
 
-Excerpt: Sends an email
+Intro: Sends an email
 
 ----
 

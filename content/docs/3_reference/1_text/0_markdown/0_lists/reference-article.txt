@@ -2,10 +2,6 @@ Title: Lists
 
 ----
 
-Excerpt:
-
-----
-
 Text:
 
 ## Unordered Lists

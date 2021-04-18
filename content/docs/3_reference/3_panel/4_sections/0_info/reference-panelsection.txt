@@ -2,7 +2,7 @@ Title: Info section
 
 ----
 
-Excerpt:
+Intro:
 
 Add help text and info boxes to the Panel to help your editors
 

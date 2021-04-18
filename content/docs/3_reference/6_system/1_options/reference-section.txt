@@ -2,7 +2,7 @@ Title: Options
 
 ----
 
-Excerpt:
+Intro:
 
 Kirby comes with sensible default settings, but you can use its config options to change Kirby's behavior and functionality according to your preferences. You can even set environment specific options by providing additonal, domain-specific config files.
 

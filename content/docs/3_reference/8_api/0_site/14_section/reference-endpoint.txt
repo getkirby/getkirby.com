@@ -2,7 +2,7 @@ Title: /site/sections/:name
 ----
 Info: GET
 ----
-Excerpt: Retrieve a site section
+Intro: Retrieve a site section
 ----
 Text:
 ----

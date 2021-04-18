@@ -2,7 +2,7 @@ Title: Exception
 
 ----
 
-Excerpt: Throwing exceptions will automatically invoke the error page with a matching HTTP status code.
+Intro: Throwing exceptions will automatically invoke the error page with a matching HTTP status code.
 
 ----
 

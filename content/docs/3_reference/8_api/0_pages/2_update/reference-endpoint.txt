@@ -2,7 +2,7 @@ Title: /pages/:id
 ----
 Info: PATCH
 ----
-Excerpt: Update page content
+Intro: Update page content
 ----
 Auth: pages.update
 ----

@@ -6,6 +6,6 @@ Guide: blueprints/presets
 
 ----
 
-Excerpt:
+Intro:
 
 Blueprint presets provide sensible default settings for common blueprint types and simplify your blueprint setup.

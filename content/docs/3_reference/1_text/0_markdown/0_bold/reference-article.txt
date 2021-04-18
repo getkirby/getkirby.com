@@ -2,10 +2,6 @@ Title: Bold text
 
 ----
 
-Excerpt:
-
-----
-
 Text:
 
 ```markdown

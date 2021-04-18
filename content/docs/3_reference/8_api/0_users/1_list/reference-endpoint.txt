@@ -2,7 +2,7 @@ Title: /users
 ----
 Info: GET
 ----
-Excerpt: List users
+Intro: List users
 ----
 Text:
 

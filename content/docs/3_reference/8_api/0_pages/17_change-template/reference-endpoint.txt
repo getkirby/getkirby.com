@@ -2,7 +2,7 @@ Title: /pages/:id/template
 ----
 Info: PATCH
 ----
-Excerpt: Change the page template
+Intro: Change the page template
 ----
 Auth: pages.changeTemplate
 ----

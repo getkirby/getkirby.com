@@ -6,4 +6,4 @@ Since: 3.5.0
 
 ----
 
-Excerpt: A quote with optional citation
+Intro: A quote with optional citation

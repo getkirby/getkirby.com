@@ -2,4 +2,4 @@ Title: models
 
 ----
 
-Excerpt: Returns the root of the models folder.
+Intro: Returns the root of the models folder.

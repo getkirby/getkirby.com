@@ -2,10 +2,6 @@ Title: Links
 
 ----
 
-Excerpt:
-
-----
-
 Text:
 
 Without link text:

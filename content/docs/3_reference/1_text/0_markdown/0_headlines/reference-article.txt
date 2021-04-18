@@ -2,10 +2,6 @@ Title: Headlines
 
 ----
 
-Excerpt:
-
-----
-
 Text:
 
 ```markdown

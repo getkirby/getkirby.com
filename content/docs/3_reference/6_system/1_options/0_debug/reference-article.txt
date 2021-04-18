@@ -1,4 +1,4 @@
-Excerpt: Enables/disables PHP errors
+Intro: Enables/disables PHP errors
 
 ----
 

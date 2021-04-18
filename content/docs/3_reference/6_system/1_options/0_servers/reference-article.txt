@@ -1,4 +1,4 @@
-Excerpt: Defines the supported web servers
+Intro: Defines the supported web servers
 
 ----
 

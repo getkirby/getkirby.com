@@ -3,7 +3,7 @@ Title: Restaurant menu
 
 ----
 
-Excerpt: Easily list all those bites
+Intro: Easily list all those bites
 
 ----
 

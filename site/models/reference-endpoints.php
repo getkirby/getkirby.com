@@ -6,9 +6,9 @@ use Kirby\Reference\SectionPage;
 class ReferenceEndpointsPage extends SectionPage
 {
 
-    public function excerpt(): Field
+    public function intro(): Field
     {
-        return parent::excerpt()->value('/api/' . $this->slug());
+        return parent::intro()->value('/api/' . $this->slug());
     }
 
     public function metadata(): array

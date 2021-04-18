@@ -6,4 +6,4 @@ Since: 3.5.0
 
 ----
 
-Excerpt: A simple text block with multiple paragraphs
+Intro: A simple text block with multiple paragraphs

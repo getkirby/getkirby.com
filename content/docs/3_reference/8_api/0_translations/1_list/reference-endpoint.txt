@@ -2,7 +2,7 @@ Title: /translations
 ----
 Info: GET
 ----
-Excerpt: List all translations
+Intro: List all translations
 ----
 Text:
 

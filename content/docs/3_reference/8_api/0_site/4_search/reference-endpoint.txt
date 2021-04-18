@@ -2,7 +2,7 @@ Title: /site/:id/search
 ----
 Info: GET|POST
 ----
-Excerpt: Search for pages (index)
+Intro: Search for pages (index)
 ----
 Since: 3.1.0
 ----

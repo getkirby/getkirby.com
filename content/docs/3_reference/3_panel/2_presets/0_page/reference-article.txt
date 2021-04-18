@@ -6,7 +6,7 @@ Guide: blueprints/presets#available-presets__single-page-page
 
 ----
 
-Excerpt: The Page preset simplifies the setup for standard pages with form fields, optional subpages and files.
+Intro: The Page preset simplifies the setup for standard pages with form fields, optional subpages and files.
 
 ----
 

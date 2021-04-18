@@ -2,7 +2,7 @@ Title: (:num)
 
 ----
 
-Excerpt: Matches any number
+Intro: Matches any number
 
 ----
 

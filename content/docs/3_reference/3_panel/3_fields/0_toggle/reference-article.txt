@@ -2,7 +2,7 @@ Title: Toggle
 
 ----
 
-Excerpt: Yes/no or on/off toggle
+Intro: Yes/no or on/off toggle
 
 ----
 

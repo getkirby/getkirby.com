@@ -39,7 +39,7 @@ $numberOfLanguage = $languages->count();
 $sortedLanguages = $languages->sortBy('name', 'desc');
 ----
 
-Excerpt:
+Intro:
 
 The `$languages` object gives you a collection of all the languages that have been defined for your Kirby installation. The methods of this class allow you to filter, find, group, search the languages collection.
 

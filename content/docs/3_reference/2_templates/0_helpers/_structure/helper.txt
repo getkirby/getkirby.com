@@ -2,7 +2,7 @@ Title: structure($data, $page = null, $key = null)
 
 ----
 
-Excerpt: Creates a Kirby structure object from a data array
+Intro: Creates a Kirby structure object from a data array
 
 ----
 

@@ -1,4 +1,4 @@
-Excerpt: Set the base URL for the site.
+Intro: Set the base URL for the site.
 
 ----
 

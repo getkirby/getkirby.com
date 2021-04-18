@@ -2,10 +2,6 @@ Title: Line breaks & paragraphs
 
 ----
 
-Excerpt:
-
-----
-
 Text:
 
 Markdown automatically converts single line breaks and paragraphs.

@@ -2,7 +2,7 @@ Title: Validators
 
 ----
 
-Excerpt:
+Intro:
 
 Validators can be used in your code to run common validations against any kind of data. They are also available in Panel fields to extend form validation.
 

@@ -2,7 +2,7 @@ Title: Fields section
 
 ----
 
-Excerpt:
+Intro:
 
 Define forms for your content
 

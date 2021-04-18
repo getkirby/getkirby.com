@@ -2,7 +2,7 @@ Title: Select
 
 ----
 
-Excerpt:
+Intro:
 
 A simple selectbox field
 

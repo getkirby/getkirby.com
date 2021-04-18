@@ -6,4 +6,4 @@ Since: 3.5.0
 
 ----
 
-Excerpt: Headline from `<h1>` to `<h6>`
+Intro: Headline from `<h1>` to `<h6>`

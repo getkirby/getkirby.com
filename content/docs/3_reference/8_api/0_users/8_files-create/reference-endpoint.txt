@@ -2,7 +2,7 @@ Title: /users/:id/files
 ----
 Info: POST
 ----
-Excerpt: Upload a new file
+Intro: Upload a new file
 ----
 Auth: files.create
 ----

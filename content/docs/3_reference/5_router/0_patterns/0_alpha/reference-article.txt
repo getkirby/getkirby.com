@@ -2,7 +2,7 @@ Title: (:alpha)
 
 ----
 
-Excerpt: Matches any characters between a-z & A-Z
+Intro: Matches any characters between a-z & A-Z
 
 ----
 

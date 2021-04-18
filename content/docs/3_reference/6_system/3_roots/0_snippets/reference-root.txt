@@ -2,4 +2,4 @@ Title: snippets
 
 ----
 
-Excerpt: Returns the root of the snippets folder.
+Intro: Returns the root of the snippets folder.

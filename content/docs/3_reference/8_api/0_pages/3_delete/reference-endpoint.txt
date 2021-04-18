@@ -2,7 +2,7 @@ Title: /pages/:id
 ----
 Info: DELETE
 ----
-Excerpt: Delete a page
+Intro: Delete a page
 ----
 Auth: pages.delete
 ----

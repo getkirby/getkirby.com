@@ -6,7 +6,7 @@ Since: 3.5.0
 
 ----
 
-Excerpt:
+Intro:
 
 A visual editor for complex multi-column layouts
 

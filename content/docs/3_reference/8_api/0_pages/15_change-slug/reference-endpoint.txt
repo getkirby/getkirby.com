@@ -2,7 +2,7 @@ Title: /pages/:id/slug
 ----
 Info: PATCH
 ----
-Excerpt: Change the page slug
+Intro: Change the page slug
 ----
 Auth: pages.changeSlug
 ----

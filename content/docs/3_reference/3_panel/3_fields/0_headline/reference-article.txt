@@ -2,7 +2,7 @@ Title: Headline
 
 ----
 
-Excerpt:
+Intro:
 
 Creates a headline to group fields
 

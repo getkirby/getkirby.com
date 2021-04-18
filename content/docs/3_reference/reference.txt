@@ -6,7 +6,7 @@ Description: The Reference provides a quick but detailed reference to pretty muc
 
 ----
 
-Excerpt:
+Intro:
 
 The Reference provides a quick but detailed reference to pretty much any aspect of Kirby.
 

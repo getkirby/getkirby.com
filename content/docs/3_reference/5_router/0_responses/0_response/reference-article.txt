@@ -2,7 +2,7 @@ Title: Response
 
 ----
 
-Excerpt: A custom Response object can be returned to gain full control over the response type.
+Intro: A custom Response object can be returned to gain full control over the response type.
 
 ----
 

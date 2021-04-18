@@ -1,4 +1,4 @@
-Excerpt: Configuration settings for Kirby sessions
+Intro: Configuration settings for Kirby sessions
 
 ----
 

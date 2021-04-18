@@ -1,4 +1,4 @@
-Excerpt: Set language for slug generator
+Intro: Set language for slug generator
 
 ----
 

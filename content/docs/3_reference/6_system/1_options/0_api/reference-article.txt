@@ -1,4 +1,4 @@
-Excerpt: Set options for Kirby's REST API
+Intro: Set options for Kirby's REST API
 
 ----
 

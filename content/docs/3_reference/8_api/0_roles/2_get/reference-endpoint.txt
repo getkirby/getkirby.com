@@ -2,7 +2,7 @@ Title: /roles/:id
 ----
 Info: GET
 ----
-Excerpt: Retrieve a role
+Intro: Retrieve a role
 ----
 Text:
 

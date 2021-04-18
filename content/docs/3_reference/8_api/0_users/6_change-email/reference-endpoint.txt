@@ -2,7 +2,7 @@ Title: /users/:id/email
 ----
 Info: PATCH
 ----
-Excerpt: Change the email
+Intro: Change the email
 ----
 Auth: users.changeEmail
 ----

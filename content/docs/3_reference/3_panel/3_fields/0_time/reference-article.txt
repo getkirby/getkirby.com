@@ -2,7 +2,7 @@ Title: Time
 
 ----
 
-Excerpt: A time picker field
+Intro: A time picker field
 
 ----
 

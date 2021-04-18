@@ -6,7 +6,7 @@ use Kirby\Reference\ReflectionPage;
 class ReferenceHookPage extends ReflectionPage
 {
 
-    public function excerpt(): Field
+    public function intro(): Field
     {
         return $this->arguments();
     }

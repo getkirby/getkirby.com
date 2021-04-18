@@ -38,8 +38,8 @@ class ReferenceClassAliasesPage extends SectionPage
                 'num'      => 0,
                 'content'  => [
                     'title' => ucfirst($alias),
-                    'excerpt' => '&rarr; ' . $class,
-                    'link' => ReferenceClassPage::findByName($class)->id()
+                    'intro' => '&rarr; ' . $class,
+                    'link'  => ReferenceClassPage::findByName($class)->id()
                 ],
             ];
         }

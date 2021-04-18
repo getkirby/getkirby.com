@@ -2,6 +2,6 @@ Title: /site/files/:filename
 ----
 Info: DELETE
 ----
-Excerpt: Delete a file
+Intro: Delete a file
 ----
 Auth: files.delete

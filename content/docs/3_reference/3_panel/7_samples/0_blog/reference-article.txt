@@ -3,7 +3,7 @@ Title: Blog
 
 ----
 
-Excerpt: A simple blog and articles setup
+Intro: A simple blog and articles setup
 
 ----
 

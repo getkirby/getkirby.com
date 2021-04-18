@@ -1,4 +1,4 @@
-Excerpt: Additional route setup for Kirby's internal router
+Intro: Additional route setup for Kirby's internal router
 
 ----
 

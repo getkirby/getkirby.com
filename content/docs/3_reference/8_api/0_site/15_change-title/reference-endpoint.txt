@@ -2,7 +2,7 @@ Title: /site/title
 ----
 Info: PATCH
 ----
-Excerpt: Change the site title
+Intro: Change the site title
 ----
 Auth: site.changeTitle
 ----

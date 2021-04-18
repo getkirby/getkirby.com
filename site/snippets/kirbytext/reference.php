@@ -2,7 +2,7 @@
   <?php foreach ($entries as $entry): ?>
   <a class="block p-3 bg-light" href="<?= $entry->url() ?>" style="text-decoration: none">
     <strong class="block"><?= $entry->title() ?></strong>
-    <?= strip_tags($entry->excerpt()->kt()) ?>
+    <?= strip_tags($entry->intro()->kt()) ?>
   </a>
   <?php endforeach ?>
   </nav>

@@ -2,7 +2,7 @@ Title: File blueprints
 
 ----
 
-Excerpt: Common file blueprints
+Intro: Common file blueprints
 
 ----
 

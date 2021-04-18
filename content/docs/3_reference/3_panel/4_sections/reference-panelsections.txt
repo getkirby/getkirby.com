@@ -2,7 +2,7 @@ Title: Sections
 
 ----
 
-Excerpt:
+Intro:
 
 Sections help you to organize content in the (glossary: Panel) or provide additional information or functionality. Kirby comes with 4 default section types.
 

@@ -2,4 +2,4 @@ Title: kirby
 
 ----
 
-Excerpt: Returns the root of the Kirby core folder
+Intro: Returns the root of the Kirby core folder
