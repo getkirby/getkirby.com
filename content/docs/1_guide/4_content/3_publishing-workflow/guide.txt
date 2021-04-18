@@ -23,7 +23,7 @@ If the editing user doesn't save their changes within 2 minutes, you can unlock 
 
 <since v="3.2.5">
 
-You can deactivate content locking via the `content.locking` config option in your `site/config/config.php`. (link: docs/reference/system/options/content#locking text: Read more ›)
+You can deactivate content locking via the (link: docs/reference/system/options/content#content-locking text: `content.locking` config option) in your `site/config/config.php`. 
 
 </since>
 
@@ -129,7 +129,7 @@ To sort pages alphabetically, 0 is prepended as the sorting number in the file s
 Pages without a sorting number are unlisted pages. Unlisted pages are still accessible by anyone who knows the URL to the page. Unlisted pages are useful if you want to exclude them from menus or  lists. A typical example for an unlisted page would be the error page or maybe a new project that still needs to be reviewed by the client via URL, but not yet listed.
 
 ```filesystem
-im-only-accessible-via-url/
+only-access-via-url/
 ```
 
 

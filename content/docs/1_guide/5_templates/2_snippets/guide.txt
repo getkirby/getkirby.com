@@ -26,7 +26,7 @@ Snippets are stored in the `/site/snippets` folder and like templates, they have
 
 ## Using snippets
 
-Kirby's `snippet()` helper function lets you include snippets into your templates:
+Kirby's (helper: snippet) helper function lets you include snippets into your templates:
 
 Snippet                     | In your template
 -                           | -
@@ -195,7 +195,7 @@ In this example, we pass the `$article` variable (which is a page object) to the
 
 ## Assigning a snippet to a variable
 
-The `snippet()` function has a third, optional parameter of type `boolean`. If set to `true`, Kirby returns the parsed content instead of directly echoing it. With this option, snippets can be used in a variety of situations, not just inside page templates:
+The (helper: snippet) function has a third, optional parameter of type `boolean`. If set to `true`, Kirby returns the parsed content instead of directly echoing it. With this option, snippets can be used in a variety of situations, not just inside page templates:
 
 ```php
 $emailBody = snippet('email', ['data' => $data], true);

@@ -22,13 +22,13 @@ If you need even more options to format text, like footnotes, tables, definition
 
 ## KirbyText
 
-In addition to Markdown, Kirby automatically parses a set of handy tags in your text, whenever you use the `->kirbytext()` field method to render content in your templates. Those tags make it simple to embed links, images, videos and more.
+In addition to Markdown, Kirby automatically parses a set of handy tags in your text, whenever you use the (method: $field::kirbytext text: ->kirbytext()) field method to render content in your templates. Those tags make it simple to embed links, images, videos and more.
 
 (reference: text/kirbytags)
 
 ### Using KirbyTags in templates
 
-You can even use KirbyTags in your templates with the `kirbytag()` helper, for example to embed a video quickly:
+You can even use KirbyTags in your templates with the (helper: kirbytag) helper, for example to embed a video quickly:
 
 ```php
 <?= kirbytag&lpar;[
@@ -48,7 +48,7 @@ You'd love to have a special tag for embedding cat pictures from [http://placek
 
 (link: https://michelf.ca/projects/php-smartypants/ text: SmartyPants) is a handy little helper to convert typical formatting issues in text into a typographically correct version. This includes quotes, dashes and more.
 
-When you activate SmartyPants in your config, SmartyPants rules are automatically applied whenever you use the `->kirbytext()` or `->smartypants()` field methods.
+When you activate SmartyPants in your config, SmartyPants rules are automatically applied whenever you use the (method: $field::kirbytext text: ->kirbytext()) or (method: $field::smartypants text: ->smartypants()) field methods.
 
 ```php "/site/config/config.php"
 return [

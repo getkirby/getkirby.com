@@ -134,7 +134,7 @@ You can find more about (link: docs/reference#validators text: Kirby's input val
 
 **Never directly add unfiltered/unvalidated user data to methods such as…**
 
-- `$page->children()->create()`
+- `Page::create()`
 - `$page->update()`
 - `$kirby->users()->create()`
 - `$user->update()`

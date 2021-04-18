@@ -27,7 +27,7 @@ Controllers go into `/site/controllers`. Create the directory if it's not there
 
 Template | Controller
 -        | -
-`/site/templates/article.php` | `/site/controllers/article.php`
+/site/templates/article.php | /site/controllers/article.php
 
 
 Kirby will automatically load the controller for your template if it can find one.
@@ -54,7 +54,7 @@ In this case the `$foo` and `$bar` variables will be available in the corres
 
 ## Accessing Kirby objects in your controller
 
-Like in templates, you can access the `$site`, `$page`, `$pages` and `$kirby` objects by loading them as arguments to the anonymous function. Kirby will magically inject the right objects for you:
+Like in templates, you can access the (Class: Kirby\Cms\Site text: $site), (Class: Kirby\Cms\Page text: $page), (Class: Kirby\Cms\Pages text: $pages) and (Class: Kirby\Cms\App text: $kirby) objects by loading them as arguments to the anonymous function. Kirby will magically inject the right objects for you:
 
 ### A single object
 
@@ -143,7 +143,7 @@ With such a controller, the template can be super clean. A foreach loop for the 
 
 ## Arguments from the router
 
-If you work with additional routes and you want to access the arguments from the router in your controller, you can use Kirby's `route()` method to access an array of router arguments.
+If you work with additional routes and you want to access the arguments from the router in your controller, you can use Kirby's (method: Kirby::route text: route()) method to access an array of router arguments.
 
 ```php
 <?php
@@ -160,7 +160,7 @@ return function ($kirby) {
 ## Arguments from `$page->render()` in route
 
 <since v="3.1.3">
-When using the [`$page->render()`](/docs/reference/objects/page/render) method to return a page in a route, you can send an array of additional data with it:
+When using the `$page->render()` method to return a page in a route, you can send an array of additional data with it:
 
 ```php "/site/config/config.php"
 return [
@@ -178,7 +178,7 @@ return [
 ];
 ```
 
-In the controller, you can load each variable that you passed to the `render()` method in the route into the controller's anonymous function and then work with it.
+In the controller, you can load each variable that you passed to the (method: $page::render text: render()) method in the route into the controller's anonymous function and then work with it.
 
 ```php
 <?php
