@@ -60,16 +60,12 @@ return [
             'reference-block',
             'reference-class' => [
                 'filter' => function ($page) {
-                    // don't index the auto-generated pages
-                    // in docs/reference/@/classes
-                    return Str::startsWith($page->id(), 'docs/reference/@') === false;
+                    return ReferenceClassesPage::isFeatured($page->id());
                 }
             ],
             'reference-classmethod' => [
                 'filter' => function ($page) {
-                    // don't index the auto-generated pages
-                    // in docs/reference/@/classes
-                    return Str::startsWith($page->id(), 'docs/reference/@') === false;
+                    return ReferenceClassesPage::isFeatured($page->id());
                 }
             ],
             'reference-component',
@@ -80,7 +76,6 @@ return [
             'reference-hook',
             'reference-icon',
             'reference-kirbytag',
-            'reference-packages',
             'reference-panelsection',
             'reference-root',
             'reference-section',

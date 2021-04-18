@@ -150,4 +150,22 @@ class ReferenceClassesPage extends SectionPage
     {
         return false;
     }
+
+    public static function isFeatured(string $page): bool
+    {
+        $objects = page('docs/reference/objects');
+        $tools   = page('docs/reference/tools');
+        $ids     = array_merge(
+            $objects->menu()->yaml(), 
+            $tools->menu()->yaml()
+        );
+
+        foreach ($ids as $id) {
+            if (Str::startsWith($page, $id)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
