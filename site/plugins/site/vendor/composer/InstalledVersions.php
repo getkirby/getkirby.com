@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'f986015002654a1deee0acf0a909a02de1d2268c',
+    'reference' => 'df59716ed2cf35db632dcc280edd336d8b93b2ab',
     'name' => 'getkirby/site',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'f986015002654a1deee0acf0a909a02de1d2268c',
+      'reference' => 'df59716ed2cf35db632dcc280edd336d8b93b2ab',
     ),
     'phpdocumentor/reflection-common' => 
     array (

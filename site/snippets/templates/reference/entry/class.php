@@ -7,9 +7,9 @@ extract([
 <?php if ($parent): ?>
 <h2 id="class"><a href="#class">Parent class</a></h2>
 <p>
-  <?= Type::format($parent) ?>
+  <?= Types::format($parent) ?>
   <?php if ($inherited): ?>
-  inherited from <?= Type::format(is_a($inherited, Page::class) ? $inherited->class() : $inherited) ?>
+  inherited from <?= Types::format(is_a($inherited, Page::class) ? $inherited->class() : $inherited) ?>
   <?php endif ?>
 </p>
 <?php endif ?>

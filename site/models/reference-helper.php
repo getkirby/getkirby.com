@@ -10,7 +10,11 @@ class ReferenceHelperPage extends ReflectionPage
     {
         return function_exists($this->slug());
     }
-
+    
+    public static function findByName(string $name): ?ReferenceHelperPage
+    {
+        return page('docs/reference/templates/helpers')->find(Str::kebab($name));
+    }
     public function metadata(): array
     {
         return array_replace_recursive(parent::metadata(), [

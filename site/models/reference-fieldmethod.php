@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\Field;
+use Kirby\Toolkit\Str;
 use Kirby\Reference\ReflectionPage;
 
 class ReferenceFieldMethodPage extends ReflectionPage
@@ -24,6 +25,11 @@ class ReferenceFieldMethodPage extends ReflectionPage
     public function call(): string
     {
         return '$field->' . parent::call();
+    }
+
+    public static function findByName(string $name): ?ReferenceFieldMethodPage
+    {
+        return page('docs/reference/templates/field-methods')->find(Str::kebab($name));
     }
 
     public function metadata(): array

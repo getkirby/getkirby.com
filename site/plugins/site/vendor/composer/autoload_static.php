@@ -57,7 +57,7 @@ class ComposerStaticInit7735eedf59144eaf4d78690a66d8bbdf
         'Kirby\\Reference\\DocBlock' => __DIR__ . '/../..' . '/src/Reference/DocBlock.php',
         'Kirby\\Reference\\ReflectionPage' => __DIR__ . '/../..' . '/src/Reference/ReflectionPage.php',
         'Kirby\\Reference\\SectionPage' => __DIR__ . '/../..' . '/src/Reference/SectionPage.php',
-        'Kirby\\Types\\Type' => __DIR__ . '/../..' . '/src/Types/Type.php',
+        'Kirby\\Reference\\Types' => __DIR__ . '/../..' . '/src/Reference/Types.php',
         'Symfony\\Polyfill\\Ctype\\Ctype' => __DIR__ . '/..' . '/symfony/polyfill-ctype/Ctype.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',

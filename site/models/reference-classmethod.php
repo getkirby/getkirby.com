@@ -2,7 +2,8 @@
 
 use Kirby\Cms\Field;
 use Kirby\Reference\ReflectionPage;
-use Kirby\Types\Type;
+use Kirby\Reference\Types;
+use \ReferenceClassPage as ReferenceClass;
 
 class ReferenceClassMethodPage extends ReflectionPage
 {
@@ -38,6 +39,34 @@ class ReferenceClassMethodPage extends ReflectionPage
         return method_exists($this->class(), $this->name());
     }
 
+    public static function findByNames($page, array $methods): ?Page
+    {
+        // Until we reach end of methods chain
+        while (count($methods) > 0) {
+            // Try to find method page
+            $method = array_shift($methods);
+            $page   = $page->find(Str::kebab($method));
+
+            if ($page === null) {
+                break;
+            }
+
+            // If has subsequent methods in the chain,
+            // get return value and turn into class page
+            if (count($methods) > 0) {
+                $return = $page->returnType();
+                $return = explode('|', $return)[0];
+                $page   = ReferenceClass::findByName($return);
+
+                if ($page === null) {
+                    break;
+                }
+            }
+        }
+
+        return $page;
+    }
+
     public function inheritedFrom(): ?string
     {
         if ($this->inherited !== null) {
@@ -49,7 +78,7 @@ class ReferenceClassMethodPage extends ReflectionPage
                 return null;
             }
 
-            if ($page = ReferenceClassPage::findByName($parent->getName())) {
+            if ($page = ReferenceClass::findByName($parent->getName())) {
                 return $this->inherited = $page->name();
             }
 
@@ -110,7 +139,7 @@ class ReferenceClassMethodPage extends ReflectionPage
         $parameters = parent::parameters();
 
         foreach ($parameters as $key => $parameter) {
-            $parameters[$key]['type'] = Type::factory($parameter['type'], $this);
+            $parameters[$key]['type'] = Types::factory($parameter['type'], $this);
         }
 
         return $this->parameters = $parameters;

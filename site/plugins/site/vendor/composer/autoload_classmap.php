@@ -12,7 +12,7 @@ return array(
     'Kirby\\Reference\\DocBlock' => $baseDir . '/src/Reference/DocBlock.php',
     'Kirby\\Reference\\ReflectionPage' => $baseDir . '/src/Reference/ReflectionPage.php',
     'Kirby\\Reference\\SectionPage' => $baseDir . '/src/Reference/SectionPage.php',
-    'Kirby\\Types\\Type' => $baseDir . '/src/Types/Type.php',
+    'Kirby\\Reference\\Types' => $baseDir . '/src/Reference/Types.php',
     'Symfony\\Polyfill\\Ctype\\Ctype' => $vendorDir . '/symfony/polyfill-ctype/Ctype.php',
     'Webmozart\\Assert\\Assert' => $vendorDir . '/webmozart/assert/src/Assert.php',
     'Webmozart\\Assert\\Mixin' => $vendorDir . '/webmozart/assert/src/Mixin.php',
