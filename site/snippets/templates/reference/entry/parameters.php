@@ -44,12 +44,12 @@ extract([
       <tr>
         <td>
           <?= $row['name'] ?>
-          <?= Type::required($row['required']) ?>
+          <?= Types::required($row['required']) ?>
         </td>
-        <td><?= Type::format($row['type']) ?></td>
+        <td><?= Types::format($row['type']) ?></td>
 
         <?php if ($hasDefaults) : ?>
-        <td data-label="Default:"><?= Type::default($row['default']) ?></td>
+        <td data-label="Default:"><?= Types::default($row['default']) ?></td>
         <?php endif ?>
 
         <?php if ($hasDescriptions) : ?>

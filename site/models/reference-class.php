@@ -3,6 +3,7 @@
 use Kirby\Cms\Field;
 use Kirby\Reference\DocBlock;
 use Kirby\Reference\SectionPage;
+use Kirby\Reference\Types;
 use Kirby\Toolkit\Properties;
 use Kirby\Toolkit\Str;
 
@@ -247,7 +248,7 @@ class ReferenceClassPage extends SectionPage
             
           
 
-            $type   = Type::factory($type ?? 'mixed', $this);
+            $type   = Types::factory($type ?? 'mixed', $this);
             $data[] = compact('name', 'required', 'type', 'description');
         }
 

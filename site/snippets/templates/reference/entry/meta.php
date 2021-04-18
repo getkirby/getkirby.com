@@ -66,7 +66,7 @@ extract([
         Deprecated in <?= version($deprecated[0], '%s') ?>
       </div>
       <?php if (count($deprecated) > 1) : ?>
-      <?= Type::parse($deprecated[1], $page->class()) ?>
+      <?= kti($deprecated[1]) ?>
       <?php endif ?>
     </div>
   </div>

@@ -23,3 +23,9 @@
 .type.type-class {
   background: var(--color-yellow-300);
 }
+.type.type-method {
+  background: var(--color-blue-300);
+}
+.box--info .type.type-method {
+  background: var(--color-blue-400);
+}

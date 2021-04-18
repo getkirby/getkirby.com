@@ -6,7 +6,7 @@ use Kirby\Cms\App;
 use Kirby\Cms\Field;
 use Kirby\Cms\Page;
 use Kirby\Cms\Template;
-use Kirby\Types\Type;
+use Kirby\Reference\Types;
 
 abstract class ReflectionPage extends Page
 {
@@ -248,7 +248,7 @@ abstract class ReflectionPage extends Page
             $parameters[] = [
                 'name'        => '$' . $name,
                 'required'    => $optional === false,
-                'type'        => Type::factory($type ?? 'mixed', $this),
+                'type'        => Types::factory($type ?? 'mixed', $this),
                 'default'     => $default,
                 'description' => $doc ? (string)$doc->getDescription() : null,
                 'export'      => $param
@@ -311,7 +311,7 @@ abstract class ReflectionPage extends Page
     public function returnType(): ?string
     {
         if ($return = $this->returns()) {
-            return Type::factory($return, $this); 
+            return Types::factory($return, $this); 
         }
 
         return null;

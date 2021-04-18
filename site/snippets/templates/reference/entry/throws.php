@@ -17,7 +17,7 @@ extract([
     <tbody>
       <?php foreach ($throws as $throw): ?>
       <tr>
-        <td><?= Type::format($throw['type']) ?></td>
+        <td><?= Types::format($throw['type']) ?></td>
         <td class="text"><?= kti($throw['description']) ?></td>
       </tr>
       <?php endforeach ?>
