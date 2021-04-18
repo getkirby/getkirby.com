@@ -36,3 +36,8 @@
   padding-top: .25rem;
   padding-bottom: .25rem;
 }
+.sidebar-menu-2 li > hr {
+  width: 3rem;
+  margin: var(--spacing-3) 0;
+  border-top: 2px solid var(--color-gray-200);
+}
