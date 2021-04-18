@@ -2,7 +2,7 @@ Title: /site
 ----
 Info: GET
 ----
-Excerpt: Retrieve information about the site
+Intro: Retrieve information about the site
 ----
 Text:
 

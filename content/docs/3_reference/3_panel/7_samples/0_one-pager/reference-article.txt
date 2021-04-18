@@ -3,7 +3,7 @@ Title: One pager
 
 ----
 
-Excerpt: Just keep scrolling
+Intro: Just keep scrolling
 
 ----
 

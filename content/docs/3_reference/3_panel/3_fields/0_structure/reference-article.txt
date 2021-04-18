@@ -2,7 +2,7 @@ Title: Structure
 
 ----
 
-Excerpt:
+Intro:
 
 Structured data input, which stores data in a field as YAML.
 

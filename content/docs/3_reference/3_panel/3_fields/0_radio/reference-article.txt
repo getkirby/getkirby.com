@@ -2,7 +2,7 @@ Title: Radio
 
 ----
 
-Excerpt: A list of radio buttons
+Intro: A list of radio buttons
 
 ----
 

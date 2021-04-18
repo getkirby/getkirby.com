@@ -1,7 +1,7 @@
 Title: Uploads
 ----
 
-Excerpt:
+Intro:
 
 Learn how to handle uploads in your own fields, sections and panel views
 

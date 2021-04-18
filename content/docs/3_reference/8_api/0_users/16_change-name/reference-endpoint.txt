@@ -2,7 +2,7 @@ Title: /users/:id/name
 ----
 Info: PATCH
 ----
-Excerpt: Change the name
+Intro: Change the name
 ----
 Auth: users.changeName
 ----

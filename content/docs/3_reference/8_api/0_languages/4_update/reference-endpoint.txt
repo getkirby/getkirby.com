@@ -2,7 +2,7 @@ Title: /languages/:code
 ----
 Info: PATCH
 ----
-Excerpt: Update a language
+Intro: Update a language
 ----
 Text:
 

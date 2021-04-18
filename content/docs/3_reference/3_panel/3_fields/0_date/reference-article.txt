@@ -2,7 +2,7 @@ Title: Date
 
 ----
 
-Excerpt:
+Intro:
 
 A date picker field
 

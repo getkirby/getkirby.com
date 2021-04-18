@@ -1,4 +1,4 @@
-Excerpt: Enables language definitions via the Panel
+Intro: Enables language definitions via the Panel
 
 ----
 

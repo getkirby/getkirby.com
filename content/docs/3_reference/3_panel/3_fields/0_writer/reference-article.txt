@@ -6,7 +6,7 @@ Since: 3.5.0
 
 ----
 
-Excerpt:
+Intro:
 
 A simple WYSIWYG editor field for inline content with formats like bold, italic, etc.
 

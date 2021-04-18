@@ -2,7 +2,7 @@ Title: Roots
 
 ----
 
-Excerpt:
+Intro:
 
 The `$roots` object gives you access to the roots of the different folders that make up your Kirby installation. This is useful whenever you want to access those folders to fetch a file from a folder etc.
 

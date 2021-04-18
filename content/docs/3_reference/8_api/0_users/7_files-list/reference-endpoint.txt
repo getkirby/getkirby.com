@@ -2,7 +2,7 @@ Title: /users/:id/files
 ----
 Info: GET
 ----
-Excerpt: List files
+Intro: List files
 ----
 Text:
 

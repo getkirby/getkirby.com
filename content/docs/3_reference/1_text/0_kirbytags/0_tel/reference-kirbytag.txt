@@ -4,7 +4,7 @@ tel
 
 ----
 
-Excerpt: Embeds a linked telephone number
+Intro: Embeds a linked telephone number
 
 ----
 

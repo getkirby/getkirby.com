@@ -2,7 +2,7 @@ Title: Gap
 
 ----
 
-Excerpt:
+Intro:
 
 Layout field to create gaps in the field grid.
 

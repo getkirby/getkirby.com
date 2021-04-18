@@ -2,7 +2,7 @@ Title: Line
 
 ----
 
-Excerpt:
+Intro:
 
 Draws a horizontal line to separate fields
 

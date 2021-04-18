@@ -4,7 +4,7 @@ email
 
 ----
 
-Excerpt: Creates an email address link
+Intro: Creates an email address link
 
 ----
 

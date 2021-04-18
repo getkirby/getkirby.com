@@ -2,7 +2,7 @@ Title: /system/install
 ----
 Info: POST
 ----
-Excerpt: Install the initial account
+Intro: Install the initial account
 ----
 Text:
 

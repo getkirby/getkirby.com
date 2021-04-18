@@ -2,7 +2,7 @@ Title: /users/:id/role
 ----
 Info: PATCH
 ----
-Excerpt: Change the role
+Intro: Change the role
 ----
 Auth: users.changeRole
 ----

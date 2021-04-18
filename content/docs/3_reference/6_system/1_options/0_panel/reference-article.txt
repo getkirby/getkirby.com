@@ -1,4 +1,4 @@
-Excerpt: Options for the Panel
+Intro: Options for the Panel
 
 ----
 

@@ -2,10 +2,6 @@ Title: Italic text
 
 ----
 
-Excerpt:
-
-----
-
 Text:
 
 ```markdown

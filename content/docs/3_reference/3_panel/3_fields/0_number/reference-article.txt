@@ -2,7 +2,7 @@ Title: Number
 
 ----
 
-Excerpt:
+Intro:
 
 A number input field with validation
 

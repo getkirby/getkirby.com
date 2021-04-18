@@ -2,7 +2,7 @@ Title: /users/:id/sections/:name
 ----
 Info: GET
 ----
-Excerpt: Retrieve a user section
+Intro: Retrieve a user section
 ----
 Text:
 ----

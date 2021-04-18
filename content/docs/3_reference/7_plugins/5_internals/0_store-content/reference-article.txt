@@ -1,7 +1,7 @@
 Title: Store: content
 ----
 
-Excerpt:
+Intro:
 
 Interact with the current form content as well as all unsaved changes.
 

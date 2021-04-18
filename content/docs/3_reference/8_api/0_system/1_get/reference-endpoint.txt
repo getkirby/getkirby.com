@@ -2,7 +2,7 @@ Title: /system
 ----
 Info: GET
 ----
-Excerpt: Retrieve system information
+Intro: Retrieve system information
 ----
 Text:
 

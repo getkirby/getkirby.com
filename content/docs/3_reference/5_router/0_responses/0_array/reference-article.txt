@@ -2,7 +2,7 @@ Title: Array
 
 ----
 
-Excerpt: PHP arrays will automatically be converted to a JSON response
+Intro: PHP arrays will automatically be converted to a JSON response
 
 ----
 

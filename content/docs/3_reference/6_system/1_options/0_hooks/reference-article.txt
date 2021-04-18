@@ -1,4 +1,4 @@
-Excerpt: Hook into Kirby events and execute your functions in the background
+Intro: Hook into Kirby events and execute your functions in the background
 
 ----
 

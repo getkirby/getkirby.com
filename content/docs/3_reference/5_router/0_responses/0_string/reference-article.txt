@@ -2,7 +2,7 @@ Title: String
 
 ----
 
-Excerpt: A simple string will be converted to an HTML response with a HTTP status code of 200
+Intro: A simple string will be converted to an HTML response with a HTTP status code of 200
 
 ----
 

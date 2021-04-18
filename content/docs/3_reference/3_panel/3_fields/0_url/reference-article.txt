@@ -2,7 +2,7 @@ Title: Url
 
 ----
 
-Excerpt: A URL input field with validation
+Intro: A URL input field with validation
 
 ----
 

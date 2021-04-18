@@ -1,4 +1,4 @@
-Excerpt: Enables/disables the Whoops debugger
+Intro: Enables/disables the Whoops debugger
 
 ----
 

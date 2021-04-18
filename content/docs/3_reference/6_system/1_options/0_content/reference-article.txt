@@ -1,4 +1,4 @@
-Excerpt: Set how Kirby handles content
+Intro: Set how Kirby handles content
 
 ----
 

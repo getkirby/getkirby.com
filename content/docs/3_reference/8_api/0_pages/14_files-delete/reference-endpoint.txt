@@ -4,4 +4,4 @@ Info: DELETE
 ----
 Auth: files.delete
 ----
-Excerpt: Delete a file
+Intro: Delete a file

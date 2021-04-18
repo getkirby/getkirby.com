@@ -2,7 +2,7 @@ Title: Multiselect
 
 ----
 
-Excerpt:
+Intro:
 
 A select field that allows you to select multiple options
 

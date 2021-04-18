@@ -2,7 +2,7 @@ Title: /languages
 ----
 Info: POST
 ----
-Excerpt: Create a language
+Intro: Create a language
 ----
 Text:
 

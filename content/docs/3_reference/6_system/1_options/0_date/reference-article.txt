@@ -1,4 +1,4 @@
-Excerpt: Setup date handling
+Intro: Setup date handling
 
 ----
 

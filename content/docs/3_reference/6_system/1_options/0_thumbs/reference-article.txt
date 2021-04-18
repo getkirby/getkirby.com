@@ -1,4 +1,4 @@
-Excerpt: Set default configuration for thumbs
+Intro: Set default configuration for thumbs
 
 ----
 

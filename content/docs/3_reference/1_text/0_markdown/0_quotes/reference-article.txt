@@ -2,10 +2,6 @@ Title: Quotes
 
 ----
 
-Excerpt:
-
-----
-
 Text:
 
 ```markdown

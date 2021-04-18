@@ -1,4 +1,4 @@
-Excerpt: Configure the behavior of (glossary: KirbyText) and particular tags
+Intro: Configure the behavior of (glossary: KirbyText) and particular tags
 
 ----
 

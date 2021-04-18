@@ -2,7 +2,7 @@ Title: /pages/:id/files/sort
 ----
 Info: PATCH
 ----
-Excerpt: Sort files
+Intro: Sort files
 ----
 Auth: files.update
 ----

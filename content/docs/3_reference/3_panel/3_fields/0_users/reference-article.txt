@@ -2,7 +2,7 @@ Title: Users
 
 ----
 
-Excerpt:
+Intro:
 
 A user select field that allows to select one or multiple users
 

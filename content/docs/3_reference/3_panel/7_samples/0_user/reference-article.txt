@@ -3,7 +3,7 @@ Title: User blueprints
 
 ----
 
-Excerpt: Common user blueprints
+Intro: Common user blueprints
 
 ----
 

@@ -2,7 +2,7 @@ Title: Page
 
 ----
 
-Excerpt: Returning a Page object will automatically render the HTML response for that page.
+Intro: Returning a Page object will automatically render the HTML response for that page.
 
 ----
 

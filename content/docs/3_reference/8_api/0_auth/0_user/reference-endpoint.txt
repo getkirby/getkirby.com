@@ -2,7 +2,7 @@ Title: /auth
 ----
 Info: GET
 ----
-Excerpt: Retrieve info about the logged in user
+Intro: Retrieve info about the logged in user
 ----
 Text:
 

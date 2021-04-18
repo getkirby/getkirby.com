@@ -6,4 +6,4 @@ Since: 3.5.0
 
 ----
 
-Excerpt: Ordered and unordered lists
+Intro: Ordered and unordered lists

@@ -3,7 +3,7 @@ Title: Portfolio
 
 ----
 
-Excerpt: Highlight your projects
+Intro: Highlight your projects
 
 ----
 

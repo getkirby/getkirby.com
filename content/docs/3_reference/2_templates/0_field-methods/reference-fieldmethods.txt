@@ -2,7 +2,7 @@ Title: Field methods
 
 ----
 
-Excerpt:
+Intro:
 
 With field methods, you convert, validate, inspect or manipulate the content of your fields, for example, transform the field value to uppercase, convert it to another format or get a collection of pages from a list of URIs.
 

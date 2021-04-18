@@ -4,7 +4,7 @@ date
 
 ----
 
-Excerpt: Adds a dynamic date to the text
+Intro: Adds a dynamic date to the text
 
 ----
 

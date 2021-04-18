@@ -1,4 +1,4 @@
-Excerpt: Set the name of the home page folder
+Intro: Set the name of the home page folder
 
 ----
 

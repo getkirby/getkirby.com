@@ -2,7 +2,7 @@ Title: Extensions
 
 ----
 
-Excerpt: Kirby has an extensive plugin system for almost any system-relevant part. The following types of plugins can be created by you:
+Intro: Kirby has an extensive plugin system for almost any system-relevant part. The following types of plugins can be created by you:
 
 ----
 

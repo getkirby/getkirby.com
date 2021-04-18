@@ -1,4 +1,4 @@
-Excerpt: Convert typical text formatting issues into a typographically correct version
+Intro: Convert typical text formatting issues into a typographically correct version
 
 ----
 

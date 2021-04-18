@@ -26,7 +26,7 @@ return [
             'template',
             'title',
             'description' => function ($page) {
-                $field = $page->description()->or($page->excerpt()->or($page->intro()));
+                $field = $page->description()->or($page->intro());
                 return strip_tags($field->kti());
             },
             'text' => function($page) {

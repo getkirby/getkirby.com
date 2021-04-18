@@ -1,4 +1,4 @@
-Excerpt: Sets the global locale setting for PHP
+Intro: Sets the global locale setting for PHP
 
 ----
 

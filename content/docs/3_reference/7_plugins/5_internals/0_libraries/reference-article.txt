@@ -1,7 +1,7 @@
 Title: Libraries
 ----
 
-Excerpt:
+Intro:
 
 The Panel bundles a few common libraries that also can be used by plugins.
 

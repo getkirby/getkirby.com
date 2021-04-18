@@ -2,7 +2,7 @@ Title: /pages/:id/files/:filename
 ----
 Info: GET
 ----
-Excerpt: Retrieve a file
+Intro: Retrieve a file
 ----
 Text:
 

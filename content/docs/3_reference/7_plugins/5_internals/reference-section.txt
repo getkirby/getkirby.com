@@ -2,7 +2,7 @@ Title: Panel internals
 
 ----
 
-Excerpt:
+Intro:
 
 Learn more about the mechanisms that connect our Panel components: our stores, events etc.
 

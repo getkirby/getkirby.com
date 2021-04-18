@@ -1,4 +1,4 @@
-Excerpt: Set options for login via the Panel and the API
+Intro: Set options for login via the Panel and the API
 
 ----
 Text:

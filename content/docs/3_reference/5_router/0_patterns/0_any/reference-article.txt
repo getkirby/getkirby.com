@@ -2,7 +2,7 @@ Title: (:any)
 
 ----
 
-Excerpt: Matches any character until the next slash
+Intro: Matches any character until the next slash
 
 ----
 

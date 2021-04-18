@@ -6,7 +6,7 @@ Guide: blueprints/presets#available-presets__group-of-pages-pages
 
 ----
 
-Excerpt: The Pages preset is intended for container pages like a blog with subpages in different states of their publishing cycle
+Intro: The Pages preset is intended for container pages like a blog with subpages in different states of their publishing cycle
 
 ----
 

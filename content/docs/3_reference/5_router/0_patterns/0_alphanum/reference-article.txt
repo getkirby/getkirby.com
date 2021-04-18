@@ -2,7 +2,7 @@ Title: (:alphanum)
 
 ----
 
-Excerpt: Matches any characters between a-z, A-Z & 0-9
+Intro: Matches any characters between a-z, A-Z & 0-9
 
 ----
 

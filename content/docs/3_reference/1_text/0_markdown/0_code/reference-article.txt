@@ -2,10 +2,6 @@ Title: Code blocks
 
 ----
 
-Excerpt:
-
-----
-
 Text:
 
 ```

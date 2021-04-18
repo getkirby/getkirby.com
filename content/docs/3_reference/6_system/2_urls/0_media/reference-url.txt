@@ -2,4 +2,4 @@ Title: Media
 
 ----
 
-Excerpt: Returns the URL of the media folder
+Intro: Returns the URL of the media folder

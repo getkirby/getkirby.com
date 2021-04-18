@@ -2,7 +2,7 @@ Title: Hooks
 
 ----
 
-Excerpt:
+Intro:
 
 With hooks you can intercept all kinds of Kirby events to inject your own code, for example, react when a user uploads a file or when they save a page. See below for more (link: #details text: details).
 

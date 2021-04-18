@@ -2,7 +2,7 @@ Title: Email
 
 ----
 
-Excerpt:
+Intro:
 
 An email input field with validation
 

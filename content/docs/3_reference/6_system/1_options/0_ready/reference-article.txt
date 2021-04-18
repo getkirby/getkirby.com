@@ -1,4 +1,4 @@
-Excerpt: Inject last minute configuration options
+Intro: Inject last minute configuration options
 
 ----
 

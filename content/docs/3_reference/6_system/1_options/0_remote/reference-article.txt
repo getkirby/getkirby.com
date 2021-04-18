@@ -1,4 +1,4 @@
-Excerpt: Overrides the defaults for requests to remote servers
+Intro: Overrides the defaults for requests to remote servers
 
 ----
 

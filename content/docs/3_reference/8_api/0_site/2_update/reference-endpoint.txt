@@ -2,7 +2,7 @@ Title: /site/
 ----
 Info: PATCH
 ----
-Excerpt: Update the site content
+Intro: Update the site content
 ----
 Auth: site.update
 ----

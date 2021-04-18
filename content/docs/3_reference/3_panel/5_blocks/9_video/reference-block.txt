@@ -6,4 +6,4 @@ Since: 3.5.0
 
 ----
 
-Excerpt: A Youtube or Vimeo video embed
+Intro: A Youtube or Vimeo video embed

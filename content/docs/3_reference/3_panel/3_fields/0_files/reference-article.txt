@@ -2,7 +2,7 @@ Title: Files
 
 ----
 
-Excerpt:
+Intro:
 
 A files select field that allows to select one or multiple related files
 

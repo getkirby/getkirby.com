@@ -2,5 +2,5 @@ Title: site
 
 ----
 
-Excerpt: Returns the root of the site folder
+Intro: Returns the root of the site folder
 

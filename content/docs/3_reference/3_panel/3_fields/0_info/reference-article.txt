@@ -2,7 +2,7 @@ Title: Info
 
 ----
 
-Excerpt:
+Intro:
 
 A plain HTML field for user instructions
 

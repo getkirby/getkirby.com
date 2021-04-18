@@ -25,7 +25,7 @@ class ReferenceIconsPage extends SectionPage
                 'model'    => 'reference-icon',
                 'num'      => 0,
                 'content'  => [
-                    'excerpt' => '&lt;k-icon type="' . $slug . '"&gt;'
+                    'intro' => '&lt;k-icon type="' . $slug . '"&gt;'
                 ]
             ];
         }

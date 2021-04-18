@@ -2,7 +2,7 @@ Title: User blueprint
 
 ----
 
-Excerpt: User blueprints are located in `/site/blueprints/users` and control the Panel setup, form fields and permissions for a user role.
+Intro: User blueprints are located in `/site/blueprints/users` and control the Panel setup, form fields and permissions for a user role.
 
 ----
 

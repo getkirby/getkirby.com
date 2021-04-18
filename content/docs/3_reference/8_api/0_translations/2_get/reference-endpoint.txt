@@ -2,7 +2,7 @@ Title: /translations/:code
 ----
 Info: GET
 ----
-Excerpt: Retrieve a translation
+Intro: Retrieve a translation
 ----
 Text:
 

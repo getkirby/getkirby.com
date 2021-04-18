@@ -2,7 +2,7 @@ Title: /users/:id/language
 ----
 Info: PATCH
 ----
-Excerpt: Change the language
+Intro: Change the language
 ----
 Auth: users.changeLanguage
 ----

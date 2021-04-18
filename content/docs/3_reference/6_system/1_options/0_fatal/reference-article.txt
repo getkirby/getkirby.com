@@ -1,4 +1,4 @@
-Excerpt: Custom fatal view that is shown if there's a PHP error
+Intro: Custom fatal view that is shown if there's a PHP error
 
 ----
 

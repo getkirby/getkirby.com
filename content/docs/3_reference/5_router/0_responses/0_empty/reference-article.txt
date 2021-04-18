@@ -2,7 +2,7 @@ Title: Empty
 
 ----
 
-Excerpt: Null, false, or an empty string will automatically be converted to 404 error page
+Intro: Null, false, or an empty string will automatically be converted to 404 error page
 
 ----
 

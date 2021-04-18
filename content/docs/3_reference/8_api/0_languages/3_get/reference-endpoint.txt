@@ -2,7 +2,7 @@ Title: /languages/:code
 ----
 Info: GET
 ----
-Excerpt: Retrieve a language
+Intro: Retrieve a language
 ----
 Text:
 

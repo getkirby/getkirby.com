@@ -4,4 +4,4 @@ Info: DELETE
 ----
 Auth: users.delete
 ----
-Excerpt: Delete a user
+Intro: Delete a user

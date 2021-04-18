@@ -80,30 +80,30 @@ abstract class ReflectionPage extends Page
     }
 
     /**
-     * Returns a description excerpt
+     * Returns an intro description
      *
      * @return \Kirby\Cms\Field
      */
-    public function excerpt(): Field
+    public function intro(): Field
     {
-        $excerpt = null;
+        $intro = null;
 
-        // prefer excerpt defined in content file
-        if ($this->content()->has('excerpt')) {
-            return $this->content()->get('excerpt');
+        // prefer intro defined in content file
+        if ($this->content()->has('intro')) {
+            return $this->content()->get('intro');
         }
 
         // otherwise try to get summary from DocBlock in code
         if ($docBlock = $this->docBlock()) {
-            $excerpt = trim($docBlock->getSummary());
-            $excerpt = str_replace(PHP_EOL, ' ', $excerpt);
+            $intro = trim($docBlock->getSummary());
+            $intro = str_replace(PHP_EOL, ' ', $intro);
 
-            if ($excerpt === '/') {
-                $excerpt = null;
+            if ($intro === '/') {
+                $intro = null;
             }
         }
 
-        return new Field($this, 'excerpt', $excerpt);
+        return new Field($this, 'intro', $intro);
     }
 
     /**
@@ -158,7 +158,7 @@ abstract class ReflectionPage extends Page
     public function metadata(): array
     {
         return [
-            'description' => strip_tags($this->excerpt()->kirbytags()),
+            'description' => strip_tags($this->intro()->kirbytags()),
             'thumbnail' => [
                 'lead'  => $this->metaLead(page('docs/reference'), 'Reference')
             ]

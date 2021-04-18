@@ -3,7 +3,7 @@ Title: Shop
 
 ----
 
-Excerpt: Products for your sales
+Intro: Products for your sales
 
 ----
 

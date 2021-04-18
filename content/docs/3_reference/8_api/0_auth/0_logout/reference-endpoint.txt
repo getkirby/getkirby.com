@@ -2,7 +2,7 @@ Title: /auth/logout
 ----
 Info: POST
 ----
-Excerpt: Logout from an existing session
+Intro: Logout from an existing session
 ----
 Text:
 

@@ -2,7 +2,7 @@ Title: Pages
 
 ----
 
-Excerpt:
+Intro:
 
 A pages select field that allows to select one or multiple related pages
 

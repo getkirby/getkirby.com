@@ -2,7 +2,7 @@ Title: Response types
 
 ----
 
-Excerpt: Routes can return different response types as listed below.
+Intro: Routes can return different response types as listed below.
 
 ----
 

@@ -2,7 +2,7 @@ Title: /pages/:id/children
 ----
 Info: GET
 ----
-Excerpt: List all subpages
+Intro: List all subpages
 ----
 Text:
 
