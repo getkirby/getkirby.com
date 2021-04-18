@@ -71,7 +71,7 @@
       ],
       [
         'title' => 'Professional support',
-        'text'  => 'With dedicated support in our forum, a direct communication channel on our chat server or via email and optional team workshops, we are here to help you and your team.',
+        'text'  => 'With dedicated support in (link: https://forum.getkirby.com/ text: our forum class: underline), a direct communication channel on (link: https://chat.getkirby.com text: our chat server class: underline) or via (email: support@getkirby.com text: email class: underline) and optional team workshops, we are here to help you and your team.',
       ]
     ] as $feature): ?>
     <li class="bg-light p-6">

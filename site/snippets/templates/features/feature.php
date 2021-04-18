@@ -6,5 +6,5 @@
   <?php endif ?>
 </h3>
 <p class="color-gray-700">
-  <?= $feature['text'] ?>
+  <?= kti($feature['text']) ?>
 </p>
