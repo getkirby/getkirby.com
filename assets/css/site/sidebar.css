@@ -30,6 +30,7 @@
   margin-bottom: .5rem;
 }
 .sidebar-menu-2 li > a {
+  display: block;
   font-weight: normal;
   color: var(--color-gray-700);
 }
