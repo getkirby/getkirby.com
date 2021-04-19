@@ -8,7 +8,15 @@
     </h1>
 
     <a href="https://pay.paddle.com/checkout/499826" class="pricing highlight bg-white shadow-xl">
+
+      <?php if ($banner = banner()): ?>
+      <div class="mb-6">
+        <p><?= $banner['text'] ?></p>
+        <del class="color-gray-500">99 € / 109 $</del>
+      </div>
+      <?php endif ?>
       <p class="h1 mb-3 price invisible">99 € per site</p>
+
       <div class="columns" style="--columns: 2; --gap: var(--spacing-12)">
         <div class="flex flex-column justify-between">
           <p class="h6 mb-12 vat invisible">+ VAT if applicable</p>
