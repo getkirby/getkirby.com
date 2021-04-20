@@ -4,19 +4,19 @@ Link: docs/reference/objects#toolkit
 ----
 Menu:
 - objects/toolkit/a
-- objects/toolkit/cookie
-- objects/toolkit/data
+- objects/http/cookie
+- objects/data/data
 - objects/toolkit/dir
 - objects/toolkit/escape
 - objects/toolkit/f
-- objects/toolkit/header
-- objects/toolkit/html
+- objects/http/header
+- objects/cms/html
 - objects/toolkit/i18n
 - objects/toolkit/mime
 - objects/toolkit/query
-- objects/toolkit/server
+- objects/http/server
 - objects/toolkit/str
 - objects/toolkit/tpl
-- objects/toolkit/url
+- objects/cms/url
 - objects/toolkit/v
 - objects/toolkit/xml
