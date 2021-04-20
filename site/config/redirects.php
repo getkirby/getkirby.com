@@ -4,6 +4,7 @@ return [
     // Quicklinks
     'v3'                              => 'releases/3.0',
     'v35'                             => 'releases/3.5',
+    'releases.rss'                    => 'https://github.com/getkirby/kirby/releases.atom',
 
     // 2021 - Legacy
     'resources'                       => 'kosmos',
