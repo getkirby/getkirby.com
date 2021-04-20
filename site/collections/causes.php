@@ -2,11 +2,12 @@
 
 return function ($kirby) {
     return $kirby->collection('cases')->find([
-        'fridays-for-future-at',
         'berlin-in-bewegung',
         'fairclimatefund',
-        'strassenfeger',
+        'fridays-for-future-at',
+        'klimaliste-berlin',
         'natucate',
+        'strassenfeger',
         'teteenlair'
     ]);
 };
