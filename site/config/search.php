@@ -65,7 +65,7 @@ return [
             ],
             'reference-classmethod' => [
                 'filter' => function ($page) {
-                    return ReferenceClassesPage::isFeatured($page->id());
+                    return ReferenceClassesPage::isFeatured($page->parent()->id());
                 }
             ],
             'reference-component',

@@ -161,11 +161,11 @@ class ReferenceClassesPage extends SectionPage
         );
 
         foreach ($ids as $id) {
-            if (Str::startsWith($page, $id)) {
-                return false;
+            if (Str::endsWith($page, $id)) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 }

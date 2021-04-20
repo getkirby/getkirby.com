@@ -42,7 +42,10 @@ class SiteMeta
 
             $templates = option('meta.exclude.templates', []);
             $pages     = option('meta.exclude.pages', []);
-            $exclude   = '!^(?:' . implode('|', $pages) . ')$!i';
+
+            if (is_callable($pages)) {
+                $pages = $pages();
+            }
 
             foreach (site()->index() as $item) {
 
@@ -50,7 +53,7 @@ class SiteMeta
                     continue;
                 }
 
-                if (preg_match($exclude, $item->id())) {
+                if (preg_match('!^(?:' . implode('|', $pages) . ')$!i', $item->id())) {
                     continue;
                 }
 
