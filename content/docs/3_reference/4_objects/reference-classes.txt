@@ -4,6 +4,7 @@ Title: Objects
 
 Menu:
 - objects/cms/app
+- objects/cms/site
 - objects/cms/page
 - objects/cms/pages
 - objects/cms/file
