@@ -23,14 +23,16 @@
   position: relative;
   font-size: var(--text-sm);
   line-height: 1;
-  padding-top: .625rem;
-  padding-bottom: .125rem;
+  padding-top: .375rem;
+  padding-bottom: .375rem;
 }
 .sidebar-menu-2 li {
-  margin-bottom: .5rem;
+  margin-bottom: 0;
 }
 .sidebar-menu-2 li > a {
   display: block;
   font-weight: normal;
   color: var(--color-gray-700);
+  padding-top: .25rem;
+  padding-bottom: .25rem;
 }
