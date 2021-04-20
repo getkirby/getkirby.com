@@ -16,6 +16,7 @@ return [
     'why'                             => 'features/developers',
 
     // 2021 - refactored objects in reference
+    'docs/reference/@'                => 'docs/reference/objects',
     'docs/reference/@/aliases'        => 'docs/reference/objects/aliases',
     'docs/reference/@/classes'        => 'docs/reference/objects',
     'docs/reference/@/classes/(:all)' => 'docs/reference/objects/$1',
