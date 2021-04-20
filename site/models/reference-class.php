@@ -125,7 +125,7 @@ class ReferenceClassPage extends SectionPage
         if (count($class) > 2) {
             $namespace = implode('//', array_slice($class, 1, -1));
             $class     = array_slice($class, -1)[0];
-            $id        = Str::kebab($namespace) . '/' .  Str::kebab($class);
+            $id        = Str::slug($namespace) . '/' .  Str::kebab($class);
 
             if ($page = page($objects . '/' . $id)) {
                 if ($page->intendedTemplate()->name() === 'link') {

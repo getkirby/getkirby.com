@@ -2,13 +2,22 @@
 
 return [
     'exclude' => [
-        'pages' => [
-            'docs\/reference\/@\/.*'
-        ],
+        'pages' => function () {
+            $pages = [];
+
+            foreach (page('docs/reference/objects')->grandChildren() as $page) {
+                if (ReferenceClassesPage::isFeatured($page->id()) === false) {
+                    $pages[] = $page->id() . '.*';
+                }
+            }
+
+            return $pages;
+        },
         'templates' => [
             'error',
             'link',
-            'reference-packages',
+            'reference-classes',
+            'reference-shortlink',
             'separator'
         ]
     ],

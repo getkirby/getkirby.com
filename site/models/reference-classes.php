@@ -93,7 +93,7 @@ class ReferenceClassesPage extends SectionPage
     protected function namespace(string $name, string $root): array
     {
         return [
-            'slug'     => $slug = Str::kebab($name),
+            'slug'     => $slug = Str::slug($name),
             'template' => 'link',
             'parent'   => $this,
             'num'      => null,
@@ -161,11 +161,11 @@ class ReferenceClassesPage extends SectionPage
         );
 
         foreach ($ids as $id) {
-            if (Str::startsWith($page, $id)) {
-                return false;
+            if (Str::endsWith($page, $id)) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 }
