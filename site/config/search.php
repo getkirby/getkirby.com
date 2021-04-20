@@ -58,16 +58,8 @@ return [
             'plugin',
             'reference-article',
             'reference-block',
-            'reference-class' => [
-                'filter' => function ($page) {
-                    return ReferenceClassesPage::isFeatured($page->id());
-                }
-            ],
-            'reference-classmethod' => [
-                'filter' => function ($page) {
-                    return ReferenceClassesPage::isFeatured($page->parent()->id());
-                }
-            ],
+            'reference-class',
+            'reference-classmethod',
             'reference-component',
             'reference-endpoint',
             'reference-extension',
