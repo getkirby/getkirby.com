@@ -93,7 +93,7 @@ class ReferenceClassesPage extends SectionPage
     protected function namespace(string $name, string $root): array
     {
         return [
-            'slug'     => $slug = Str::kebab($name),
+            'slug'     => $slug = Str::slug($name),
             'template' => 'link',
             'parent'   => $this,
             'num'      => null,
