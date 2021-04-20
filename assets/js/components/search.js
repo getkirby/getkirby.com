@@ -113,7 +113,7 @@ export default class {
       link.href = "/" + this.results[i].objectID;
 
       const label = result.querySelector(".search-title");
-      label.innerText = this.results[i].title;
+      label.innerHTML = this.results[i].title;
       const info = result.querySelector(".search-link");
       info.innerText = this.results[i].objectID;
 
