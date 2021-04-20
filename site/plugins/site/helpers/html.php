@@ -90,3 +90,9 @@ function version(string $version, string $format = '%s'): string
         sprintf($format, $version)
     );
 }
+
+if (function_exists('xml') === false) {
+    function xml($value) {
+        return Xml::encode($value);
+    }
+}
