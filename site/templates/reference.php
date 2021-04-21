@@ -11,7 +11,12 @@
         <?= $section->title() ?>
       </a>
     </h3>
-    <?php snippet('templates/reference/section', $section->children()->listed()) ?>
+    <?php
+    if ($section->intendedTemplate()->name() === 'reference-quicklink') {
+      $section = $section->link()->toPage();
+    }
+    snippet('templates/reference/section', $section->children()->listed());
+    ?>
   </section>
   <?php endforeach ?>
 </section>

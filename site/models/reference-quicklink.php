@@ -45,6 +45,7 @@ class ReferenceQuickLinkPage extends Page
                     $children[] = [
                         'slug'     => basename($menu),
                         'model'    => 'reference-quicklink',
+                        'template' => 'reference-quicklink',
                         'num'      => 0,
                         'content'  => [
                             'link'  => 'docs/reference/' . $menu
