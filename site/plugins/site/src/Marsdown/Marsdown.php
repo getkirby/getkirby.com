@@ -125,9 +125,15 @@ class Marsdown extends ParsedownExtra
 
         if ($Line['text'] === '</' . $Block['box']['type'] . '>') {
             $Block['complete'] = true;
-        } else {
-            $Block['box']['html'] .= "\n" . str_repeat(' ', $Line['indent']) . $Line['text'];
+            return $Block;
         }
+
+        if (isset($Block['interrupted'])) {
+            $Block['box']['html'] .= str_repeat("\n", $Block['interrupted']);
+            unset($Block['interrupted']);
+        }
+
+        $Block['box']['html'] .= "\n" . $Line['body'];
 
         return $Block;
     }
