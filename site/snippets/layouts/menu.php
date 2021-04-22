@@ -56,7 +56,5 @@
         <a href="/buy">Buy</a>
       </li>
     </ul>
-
-    <?php snippet('layouts/banner') ?>
   </nav>
 </div>

@@ -12,29 +12,29 @@
 @import "framework/table.css";
 @import "framework/code.css";
 
-@import "site/details.css";
-@import "site/filters.css";
 @import "site/variables.css";
-@import "site/links.css";
-@import "site/header.css";
-@import "site/brands.css";
+@import "site/banner.css";
 @import "site/boxes.css";
+@import "site/brands.css";
 @import "site/code.css";
-@import "site/highlight.css";
+@import "site/details.css";
 @import "site/filesystem.css";
+@import "site/filters.css";
+@import "site/footer.css";
+@import "site/header.css";
+@import "site/highlight.css";
+@import "site/kosmos.css";
 @import "site/lightbox.css";
+@import "site/links.css";
 @import "site/logo.css";
 @import "site/menu.css";
+@import "site/screencast.css";
 @import "site/search.css";
 @import "site/sidebar.css";
 @import "site/types.css";
 @import "site/toc.css";
-@import "site/footer.css";
-@import "site/screencast.css";
-@import "site/kosmos.css";
-@import "site/with-sidebar.css";
 @import "site/voice.css";
+@import "site/with-sidebar.css";
 @import "site/utilities.css";
-
 
 @import "framework/utilities.css";

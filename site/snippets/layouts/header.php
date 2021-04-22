@@ -5,6 +5,7 @@
       <?php snippet('layouts/logo') ?>
       <?php snippet('layouts/menu') ?>
       <?php snippet('layouts/search', ['area' => $search ?? 'all']) ?>
+      <?php snippet('layouts/banner') ?>
     </div>
   </div>
 </header>
