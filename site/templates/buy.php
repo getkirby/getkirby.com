@@ -10,12 +10,12 @@
     <a href="https://pay.paddle.com/checkout/499826" class="pricing highlight bg-white shadow-xl">
 
       <?php if ($banner = banner()): ?>
-      <div class="mb-6">
-        <p><?= $banner['text'] ?></p>
-        <del class="color-gray-500">99 € / 109 $</del>
+      <div>
+        <p class="mb-6"><?= $banner['text'] ?></p>
+        <del class="invisible sale h6 color-gray-700">€99</del>
       </div>
       <?php endif ?>
-      <p class="h1 mb-3 price invisible"><span>99 €</span> per site</p>
+      <p class="h1 mb-3 price invisible"><span>€99</span> per site</p>
 
       <div class="columns" style="--columns: 2; --gap: var(--spacing-12)">
         <div class="flex flex-column justify-between">
@@ -125,8 +125,8 @@ function paddle_price(data) {
     $vat.classList.remove("invisible");
 
     if (isSale) {
-      $sale.firstElementChild.innerText = formatter.format(listPrice);
-      $sale.classList.remove("hidden");
+      $sale.innerHTML = formatter.format(listPrice);
+      $sale.classList.remove("invisible");
     }
 }
 </script>
