@@ -5,6 +5,7 @@
 <?php endslot() ?>
 
 <?php slot() ?>
+<?php snippet('toc', ['title' => 'In this recipe']) ?>
 <div class="prose">
   <?= $page->text()->kt() ?>
 </div>
