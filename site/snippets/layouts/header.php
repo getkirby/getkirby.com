@@ -5,7 +5,10 @@
       <?php snippet('layouts/logo') ?>
       <?php snippet('layouts/menu') ?>
       <?php snippet('layouts/search', ['area' => $search ?? 'all']) ?>
-      <?php snippet('layouts/banner') ?>
+
+      <?php if ($page->id() !== 'buy'): ?>
+      <?php snippet('layouts/banner', ['banner' => banner()]) ?>
+      <?php endif ?>
     </div>
   </div>
 </header>

@@ -8,7 +8,6 @@ return function ($page) {
     $storyImage = $story->images()->findBy('name', 'panel');
 
     return [
-        'banner'     => banner(),
         'story'      => $story,
         'storyImage' => $storyImage
     ];
