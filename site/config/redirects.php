@@ -20,7 +20,6 @@ return [
     'docs/reference/@/aliases'        => 'docs/reference/objects/aliases',
     'docs/reference/@/classes'        => 'docs/reference/objects',
     'docs/reference/@/classes/(:all)' => 'docs/reference/objects/$1',
-    'docs/reference/tools/(:all)'     => 'docs/reference/objects/toolkit/$1',
 
     'docs/reference/objects/(:any)/(:all)' => function ($class, $method) {
         if ($class === 'request') {
@@ -34,6 +33,21 @@ return [
         }
         return 'docs/reference/objects/cms/' . $class . '/' . $method;
     },
+
+    'docs/reference/tools/(:any)/(:all)' => function ($class, $method) {
+        // get the `reference-quicklink` page
+        if ($page = page('docs/reference/tools/' . $class)) {
+            // follow to target page (in `reference/objects/`)
+            if ($target = $page->link()->toPage()) {
+                // get the child page requested
+                if ($target = $target->find($method)) {
+                    return $target->id();
+                }
+            }
+        }
+        return 'error';
+    },
+
 
     // 2019 - Legacy
     'blog/kosmos-(:any)'              => 'kosmos/$1',
