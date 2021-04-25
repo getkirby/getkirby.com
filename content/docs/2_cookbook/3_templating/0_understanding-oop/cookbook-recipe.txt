@@ -466,7 +466,7 @@ $title = Book::create('Form Design Patterns', 'Adam Silver')->getTitle();
 This pattern is sometimes quite useful, but probably shouldn't be used all the time.
 </info>
 
-## Conclusion && resources
+## Conclusion & resources
 
 There would be so much more to learn and explore, but hopefully this recipe has lowered the entry barrier a bit, so that you are prepared to dive deeper yourself. If you explore the Kirby core classes, you will find quite a few other OOP related terms like traits, abstract methods and classes, classes that implement interfaces rather than extend other classes and, and, and.
 
