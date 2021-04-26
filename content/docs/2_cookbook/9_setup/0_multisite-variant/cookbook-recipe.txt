@@ -10,6 +10,12 @@ Description: An alternative approach for running multiple sites from the same Ki
 
 ----
 
+Authors:
+
+- authors/uwe-gehring
+
+----
+
 Text:
 
 In (link: docs/cookbook/setup/multisite text: this recipe) a scenario for running multiple sites via the same Kirby setup has been presented. The proposed setup makes use of the fact that you need only one `/kirby` folder where the heart of Kirby is beating. However, it is also based on the assumption that you have only one virtual (or even real) webserver host from where your various sites will be served. The `index.php` at the root of your installation in this scenario works like a dispatcher and therefore needs some modification.
@@ -188,6 +194,3 @@ Want to switch `my-site.com` back to Kirby 3.3.1? You know how easy this is by y
 
 Of course, like explained in (link: docs/cookbook/setup/multisite#licenses-for-your-multi-site text: this recipe), you need a license for each of your sites.
 
-## Author
-
-This cookbook recipe was written by (link: https://forum.getkirby.com/u/adspectus/ text: Uwe Gehring).

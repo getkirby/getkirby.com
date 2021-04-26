@@ -8,7 +8,7 @@
 
     <a class="btn btn--outlined" href="https://git-tower.com">
       <?= icon('heart') ?>
-			<?= Url::short(Url::base($case->link()->value())) ?>
+			<?= $case->link()->shortUrl() ?>
     </a>
 
   </div>

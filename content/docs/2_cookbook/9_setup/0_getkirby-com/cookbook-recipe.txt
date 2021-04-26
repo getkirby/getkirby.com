@@ -10,6 +10,12 @@ Description: Learn more about the hidden gems and secrets in our own website.
 
 ----
 
+Authors:
+
+- authors/bastian-allgeier
+
+----
+
 Text:
 
 The Kirby website plays a very special role for us and has two main objectives: One is presenting Kirby and its features to the world and doing a good job to generate happy customers and hopefully some sales. The other is providing Kirby’s documentation––the part that has always been way more complex than the rest.
@@ -264,7 +270,7 @@ Kirby::plugin('getkirby/keycdn', [
                     return option('keycdn.domain') . '/' . $path;
                 }
             }
-            
+
             return $original($kirby, $path, $options);
         }
     ]
