@@ -17,7 +17,7 @@
 				</figure>
 				<h2 class="font-bold mb-1"><?= $case->title() ?></h2>
 				<p class="font-mono text-xs color-gray-400">
-					<?= Url::short(Url::base($case->link()->value())) ?>
+					<?= $case->link()->shortUrl() ?>
 				</p>
 			</a>
 		</article>

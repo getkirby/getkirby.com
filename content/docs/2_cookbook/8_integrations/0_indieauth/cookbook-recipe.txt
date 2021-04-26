@@ -10,6 +10,12 @@ Description: Log in to other sites with your domain via RelMeAuth/IndieAuth.
 
 ----
 
+Authors:
+
+- authors/lukas-bestle
+
+----
+
 Text:
 
 ## Introduction

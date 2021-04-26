@@ -15,6 +15,13 @@ Thumbnail: audio-block-final-states.png
 
 ----
 
+Authors:
+
+- authors/sonja-broda
+- authors/bastian-allgeier
+
+----
+
 Text:
 
 Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with quite a few (link: docs/reference/panel/blocks text: default block types) that are great for most purposes and can be customized to your needs. But you probably wouldn't be reading this if you wouldn't be striving for more, and this recipe will hopefully be a great first step into your bright future as a custom block type developer 😉.

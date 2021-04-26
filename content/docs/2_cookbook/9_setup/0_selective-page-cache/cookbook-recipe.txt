@@ -10,6 +10,12 @@ Description: Customize pages for authenticated users while using the default pag
 
 ----
 
+Authors:
+
+- authors/sebastian-greger
+
+----
+
 Text:
 
 Using Kirby's (link: docs/guide/cache#caching-pages text: page cache) is an efficient means to improve the performance of a website. It keeps a copy of every page rendered and Kirby returns the cached copy for future requests instead of rendering it anew.
@@ -112,6 +118,3 @@ return [
 
 This can be extended by further conditions, all of which should return `true` for those cases where the cache should be bypassed.
 
-## Author
-
-This cookbook recipe was written by (link: https://sebastiangreger.net text: Sebastian Greger).

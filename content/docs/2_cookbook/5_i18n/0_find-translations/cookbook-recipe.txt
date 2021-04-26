@@ -10,6 +10,12 @@ Description: Find and collect all your translations used with the t() helper fun
 
 ----
 
+Authors:
+
+- authors/uwe-gehring
+
+----
+
 Text:
 
 Sometimes you realize that you or your developer may have used the `t()` helper function a lot throughout your templates, snippets, and controllers. While this is good, at some point in time you need to find all these occurrences to provide a proper translation in your languages files.
@@ -113,6 +119,3 @@ Remember, these are the used keys and their fallback values, if any. As you can 
 
 In order to provide the translations in different languages, we just need to copy this file now and add or replace the English phrases.
 
-## Author
-
-This cookbook recipe was written by (link: https://forum.getkirby.com/u/adspectus/ text: Uwe Gehring).

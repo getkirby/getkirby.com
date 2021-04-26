@@ -10,11 +10,20 @@ Published: 2020-02-10
 
 ----
 
-Text:
+Authors:
+
+- authors/manu-moreale
+
+----
+
+Intro:
 
 Controllers are an excellent tool to keep your templates and blueprints clean and "logic free". For better or worse, a controller is tied to a specific template and this can sometimes be a problem when we want to share the same data across all our templates.
 
 Luckily for us, creating a shared controller is an easy task in Kirby 3.
+
+----
+Text:
 
 ## A simple example
 
@@ -168,7 +177,7 @@ And that's it. We now have a place to store all the data that is shared among al
 
 ## Closing thoughts
 
-In this example we've used the `site.php` controller to share content across the entire site but the same concept can be adapted to share content across a more local scope. 
+In this example we've used the `site.php` controller to share content across the entire site but the same concept can be adapted to share content across a more local scope.
 
 For example, in a blog you could have different controllers for different type of blog posts...
 
@@ -199,7 +208,3 @@ return function ($page, $pages, $site, $kirby) {
 
 };
 ```
-
-## Author
-
-This cookbook recipe was written by (link: https://manuelmoreale.com text: Manu Moreale).

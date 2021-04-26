@@ -2,6 +2,12 @@
 
 class CookbookRecipePage extends Page
 {
+
+    public function authors()
+    {
+        return parent::authors()->or('authors/sonja-broda')->toPages();
+    }
+
     public function isNew(): bool
     {
         return $this->published()->toDate('U') > (time() - 4500000);
