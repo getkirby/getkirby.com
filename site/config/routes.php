@@ -2,6 +2,12 @@
 
 return [
     [
+        'pattern' => 'authors/(:all?)',
+        'action'  => function () {
+            return false;
+        }
+    ],
+    [
         'pattern' => 'hooks/clean',
         'method'  => 'GET|POST',
         'action'  => function () {
