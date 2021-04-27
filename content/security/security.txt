@@ -74,3 +74,11 @@ Incidents:
     fixed: 3.4.5
     links:
         GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-g3h8-cg9x-47qw
+-
+    cve: CVE-2021-29460
+    description: "Cross-site scripting (XSS) from unvalidated uploaded SVG or XML files"
+    severity: high
+    affected: "<=3.5.3.1"
+    fixed: 3.5.4
+    links:
+        GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-qgp4-5qx6-548g
