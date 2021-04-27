@@ -69,7 +69,7 @@ Incidents:
 -
     cve: CVE-2020-26255
     description: "PHP Phar archives could be uploaded by Panel users as content files and executed"
-    severity: notable
+    severity: critical
     affected: "<=3.4.4"
     fixed: 3.4.5
     links:
