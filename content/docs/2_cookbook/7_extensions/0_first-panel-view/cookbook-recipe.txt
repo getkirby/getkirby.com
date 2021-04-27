@@ -2,14 +2,6 @@ Title: My first Panel view
 
 ----
 
-Description: Create your first custom Panel view from scratch
-
-----
-
-Published: 2019-11-20
-
-----
-
 Text:
 
 For our very first Panel view, we will query a public API and display the results in a nice card layout.
@@ -349,3 +341,15 @@ moviereviews/
 ## Where to go from here
 
 To get more familiar with how this all plays together, play around a bit. Try to get other data in, from a database, a .csv file, another API or try to fetch some data from your Kirby installation. Adjust the data provider route as needed. Change the layout to a table. Try to add events…
+
+----
+
+Description: Create your first custom Panel view from scratch
+
+----
+
+Published: 2019-11-20
+
+----
+
+Authors: - authors/sonja-broda

@@ -2,14 +2,6 @@ Title: Of anchors and ToCs, part 1
 
 ----
 
-Published: 01.06.2020
-
-----
-
-Description: Auto-replace headlines with anchors and generate a table of contents
-
-----
-
 Text:
 
 A Table of Contents (ToC) gives readers a quick overview of the contents of a page and allows accessing specific parts quickly.
@@ -328,4 +320,14 @@ You could also only show the ToC if there is at least a given number of headline
 <?php endif ?>
 ```
 
+----
 
+Published: 01.06.2020
+
+----
+
+Description: Auto-replace headlines with anchors and generate a table of contents
+
+----
+
+Authors: - authors/sonja-broda

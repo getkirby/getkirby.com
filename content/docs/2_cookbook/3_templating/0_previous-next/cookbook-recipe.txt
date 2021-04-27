@@ -2,10 +2,6 @@ Title: Previous / Next navigation
 
 ----
 
-Description: Create a previous/next navigation for your site.
-
-----
-
 Text:
 
 These little snippets let you create a useful prev / next switcher navigation for your pages.
@@ -49,3 +45,11 @@ These little snippets let you create a useful prev / next switcher navigation fo
 <info>
 If you flip the sorting of your pages, for example in a list of blog articles, you might also need to reverse the logic of the prev and next links to make sense.
 </info>
+
+----
+
+Description: Create a previous/next navigation for your site.
+
+----
+
+Authors: - authors/sonja-broda

@@ -2,14 +2,6 @@ Title: Paginating long posts
 
 ----
 
-Published: 2019-04-27
-
-----
-
-Description: Split long post into separate pages with pagination
-
-----
-
 Text:
 
 In many online publications, long posts are split across multiple pages with pagination at the bottom. How can we achieve this in Kirby?
@@ -146,6 +138,14 @@ Or you could add a little table of contents on each page.
 
 You can also extend the pagination navigation and add a numbered link for each page, making use of the `$pagination->range()` method. You can find an example in our (link: docs/cookbook/templating/pagination text: pagination recipe).
 
+----
 
+Published: 2019-04-27
 
+----
 
+Description: Split long post into separate pages with pagination
+
+----
+
+Authors: - authors/sonja-broda

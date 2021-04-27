@@ -2,10 +2,6 @@ Title: Restricting access to your site
 
 ----
 
-Description: Use Kirby’s authentication system to build login-protected pages.
-
-----
-
 Text:
 
 You can use Kirby’s user system to restrict access to parts of your website that should only be available to certain users, for example, a clients’ area.
@@ -266,3 +262,11 @@ Note that this recipe only provides a basic example to give you an idea how to h
 <warning>
 The process described here doesn’t prevent access to your assets (images, video, documents etc., which will still be accessible to anyone who guesses the URL to these files). We will deal with this in a separate recipe.
 </warning>
+
+----
+
+Description: Use Kirby’s authentication system to build login-protected pages.
+
+----
+
+Authors: - authors/sonja-broda

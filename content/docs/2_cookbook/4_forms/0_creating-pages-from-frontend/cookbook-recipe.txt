@@ -2,14 +2,6 @@ Title: Creating pages from frontend
 
 ----
 
-Published: 2019-05-11
-
-----
-
-Description: Create pages from user input on the front end, e.g. from an event registration form.
-
-----
-
 Text:
 
 You will learn how you can use (link: docs/guide/templates/php-api text: Kirby's API) to create pages based on user input entered into a form on the frontend. A typical use case for this is an event or newsletter registration form.
@@ -328,3 +320,15 @@ Kirby::plugin('eventkit/event', [
 ## Download example
 
 For a working example, download the (file: eventkit.zip text: demo "Eventkit").
+
+----
+
+Published: 2019-05-11
+
+----
+
+Description: Create pages from user input on the front end, e.g. from an event registration form.
+
+----
+
+Authors: - authors/sonja-broda

@@ -2,10 +2,6 @@ Title: Filter collections by tags
 
 ----
 
-Description: Classify content and make it easy for visitors to find related content.
-
-----
-
 Text:
 
 Tags are a great way to separate your content into different categories and make it easier for your visitors to find the articles and pages they are looking for.
@@ -215,3 +211,11 @@ Once we've done that, the `blog.php` template is free of any logic, which makes 
 
 <?php snippet('footer') ?>
 ```
+
+----
+
+Description: Classify content and make it easy for visitors to find related content.
+
+----
+
+Authors: - authors/sonja-broda

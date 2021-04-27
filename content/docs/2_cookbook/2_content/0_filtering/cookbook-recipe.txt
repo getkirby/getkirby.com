@@ -2,10 +2,6 @@ Title: Filtering compendium
 
 ----
 
-Description: Filter pages, files and users with Kirby's extensive filtering methods.
-
-----
-
 Text:
 
 This guide will give you an overview about the many ways you can filter collections of pages, files, users, structures, languages or general collections in Kirby.
@@ -306,3 +302,11 @@ While these examples showcase pages collections, the same syntax can be applied 
 ## Filtering using the search method
 
 Another option of filtering collections is by using the `search()` method. There is another cookbook recipe on (link: ./search text: how to add a search to your site).
+
+----
+
+Description: Filter pages, files and users with Kirby's extensive filtering methods.
+
+----
+
+Authors: - authors/sonja-broda

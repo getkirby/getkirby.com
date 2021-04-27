@@ -2,14 +2,6 @@ Title: A brief intro to object oriented programming in PHP
 
 ----
 
-Published: 2021-01-11
-
-----
-
-Description: Understanding classes, objects, member functions and common pitfalls
-
-----
-
 Text:
 
 ## Intro
@@ -482,3 +474,15 @@ Here are some resources for further study:
 - https://www.phptpoint.com/php-object-oriented/
 
 Of course, you can find a lot of other resources online. Just make sure to check if they are based on current PHP versions, because there is a lot of outdated stuff around.
+
+----
+
+Published: 2021-01-11
+
+----
+
+Description: Understanding classes, objects, member functions and common pitfalls
+
+----
+
+Authors: - authors/sonja-broda

@@ -2,14 +2,6 @@ Title: Subpage builder
 
 ----
 
-Published: 2019-05-13
-
-----
-
-Description: Auto-generate subpages when you create a new page
-
-----
-
 Text:
 
 If you want to auto-create a given set of subpages every time you create a particular page, you can achieve this with a `page.create:after` hook. To make it more versatile, you can define a custom blueprint setting that leverages Kirby's new `$page->blueprint()` method. We will take you step by step through an example based on the (link: docs/guide/installation#installation text: Starterkit).
@@ -207,3 +199,15 @@ foreach (page('notes')->childrenAndDrafts()->filterBy('hasChildren', false) as $
 ```
 
 Again, this is only an example and your conditions may be different.
+
+----
+
+Published: 2019-05-13
+
+----
+
+Description: Auto-generate subpages when you create a new page
+
+----
+
+Authors: - authors/sonja-broda

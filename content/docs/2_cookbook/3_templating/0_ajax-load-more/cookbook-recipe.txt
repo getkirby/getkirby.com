@@ -2,15 +2,6 @@ Title: Load more with Ajax
 
 ----
 
-
-Published: 2021-01-28
-
-----
-
-Description: Add a load more button to your listings and append items via Ajax.
-
-----
-
 Text:
 
 ## Requirements
@@ -327,6 +318,14 @@ Thanks to (link: https://scottboms.com text: Scott Boms) for the progressive enh
 
 That was it. If you want to check if a second or third button trigger works as well, publish the draft that is still lurking in the photography page or add some new cool projects of your own.
 
+----
 
+Published: 2021-01-28
 
+----
 
+Description: Add a load more button to your listings and append items via Ajax.
+
+----
+
+Authors: - authors/sonja-broda

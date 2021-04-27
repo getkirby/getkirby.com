@@ -2,14 +2,6 @@ Title: Virtual pages from image gallery
 
 ----
 
-Published: 2021-04-09
-
-----
-
-Description: Create virtual pages from a set of uploaded images and their meta data.
-
-----
-
 Text:
 
 ## Intro
@@ -608,3 +600,14 @@ class GalleryImagePage extends Page
 
 - (link: text: Virtual pages guide)
 
+----
+
+Published: 2021-04-09
+
+----
+
+Description: Create virtual pages from a set of uploaded images and their meta data.
+
+----
+
+Authors: - authors/sonja-broda

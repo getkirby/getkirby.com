@@ -2,10 +2,6 @@ Title: How to upgrade Kirby 2 plugins
 
 ----
 
-Description: Adapt your existing plugins to Kirby 3's new plugin system.
-
-----
-
 Text:
 
 ## A new way to define plugins
@@ -42,3 +38,13 @@ These plugin types have no chance of being converted without rewriting them from
 
 - (link: docs/reference/plugins/extensions/core-components  text: Components)
 - (link: docs/reference/plugins/extensions/fields text: Fields)
+
+----
+
+Description: Adapt your existing plugins to Kirby 3's new plugin system.
+
+----
+
+Authors:
+
+- authors/nico-hoffmann

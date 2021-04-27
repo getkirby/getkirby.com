@@ -2,14 +2,6 @@ Title: Related articles
 
 ----
 
-Description: Build relations between articles using YAML content and the pages field.
-
-----
-
-Thumbnail: related.png
-
-----
-
 Text:
 
 With **(glossary: yaml text: YAML) content** and the **pages field** you can easily link information on your site with other sources in Kirby. All examples below are based on the (link: docs/guide/installation#installation text: Starterkit).
@@ -75,3 +67,15 @@ If you use the (glossary: panel), you have to add the `related` field to your (g
 We use the `query` option to display all sibling pages of the current page in the list. By passing `false` to the `$page->siblings()` method, we exclude the current page from the list – we don't want the article itself to be a related article. (link: docs/guide/blueprints/query-language text: Learn more) about our query syntax.
 
 (image: related.png)
+
+----
+
+Description: Build relations between articles using YAML content and the pages field.
+
+----
+
+Thumbnail: related.png
+
+----
+
+Authors: - authors/bastian-allgeier

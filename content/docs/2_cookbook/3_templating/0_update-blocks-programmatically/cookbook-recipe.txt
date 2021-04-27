@@ -2,15 +2,6 @@ Title: Quicktip: Add blocks to a blocks field programmatically
 
 ----
 
-
-Published: 2021-01-09
-
-----
-
-Description: Update a blocks field from the frontend, for example from form data
-
-----
-
 Text:
 
 If you want to update a `blocks` field programmatically, e.g. with data from a frontend form, you can do it with the following code:
@@ -66,3 +57,15 @@ fields:
 
 - (link: docs/reference/panel/fields/blocks text: Blocks field)
 - (link: docs/reference/plugins/extensions/blocks text: Extending the blocks field)
+
+----
+
+Published: 2021-01-09
+
+----
+
+Description: Update a blocks field from the frontend, for example from form data
+
+----
+
+Authors: - authors/sonja-broda

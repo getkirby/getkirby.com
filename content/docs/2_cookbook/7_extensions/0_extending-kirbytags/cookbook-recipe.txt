@@ -2,10 +2,6 @@ Title: Quicktip: Reusing KirbyTags in custom tags
 
 ----
 
-Description: Extend existing KirbyTags in custom tags with less hassle.
-
-----
-
 Text:
 
 Sometimes, you may want to extend an existing (glossary: KirbyTag) in a custom KirbyTag, for example, to add attributes or to modify the HTML output.
@@ -108,3 +104,11 @@ Kirby::plugin('your/plugin', [
 <info>
 If you store the original tag in a variable outside the plugin wrapper like in the examples, you can override the original tag by using the same tag name instead of the custom names.
 </info>
+
+----
+
+Description: Extend existing KirbyTags in custom tags with less hassle.
+
+----
+
+Authors: - authors/sonja-broda

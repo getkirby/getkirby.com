@@ -2,10 +2,6 @@ Title: Fun with loops and collections
 
 ----
 
-Description: Foreach loops are control structures useful in many contexts.
-
-----
-
 Text:
 
 Foreach loops are needed everywhere. No matter if you build a menu, a simple list of subpages, a gallery, a table of contents, in short, whenever dealing with collections, arrays etc. – foreach loops are your best friends.
@@ -212,3 +208,10 @@ More methods in the Reference
 - (link: docs/reference/objects/files text: `$files` methods)
 - (link: docs/reference/objects/users text: `$users` methods)
 
+----
+
+Description: Foreach loops are control structures useful in many contexts.
+
+----
+
+Authors: - authors/sonja-broda

@@ -2,14 +2,6 @@ Title: Kirby in a nutshell
 
 ----
 
-Published: 2019-10-03
-
-----
-
-Description: Or what you wish you had known when you started your first Kirby project.
-
-----
-
 Text:
 
 Everyone has their own way of going about things. What works for you, might not work for others. And the things to consider vary for each project, depending on whether you are migrating from another system or whether you are trying to set things up from scratch, whether your project is small or really huge, and so on.
@@ -307,5 +299,14 @@ All (link: docs/guide/virtual-pages text: virtual pages) are seamlessly integrat
 
 Get started! Any questions? Visit our (link: https://forum.getkirby.com text: forum) and ask us anything.
 
+----
 
+Published: 2019-10-03
 
+----
+
+Description: Or what you wish you had known when you started your first Kirby project.
+
+----
+
+Authors: - authors/sonja-broda

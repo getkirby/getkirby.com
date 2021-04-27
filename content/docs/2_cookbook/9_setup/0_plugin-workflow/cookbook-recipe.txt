@@ -2,14 +2,6 @@ Title: Plugin test workflow with PHPUnit
 
 ----
 
-Published: 2019-06-26
-
-----
-
-Description: Set up multiple plugins with PHPUnit testing under a single Kirby installation.
-
-----
-
 Text:
 
 ## Introduction
@@ -109,7 +101,7 @@ This requires the same script that Kirby normally requires and echoes the site t
 ```bash
 cd link-field/tests/
 php bootstrap.php
-Site Title 
+Site Title
 ```
 
 #### Custom Kirby components
@@ -252,3 +244,17 @@ If you open the Panel, you should see your custom plugin content and be able to 
 ### Other custom components
 
 In this guide, we used only custom blueprints and content. However, you can define other custom components for your plugin as well. To do so, change (link: docs/reference/system/roots/ text: the roots) in your plugin's `bootstrap.php` accordingly. This means you can have global setups in your Kirby installation and each plugin can define its own components as needed.
+
+----
+
+Published: 2019-06-26
+
+----
+
+Description: Set up multiple plugins with PHPUnit testing under a single Kirby installation.
+
+----
+
+Authors:
+
+- authors/hristiyan-dodov

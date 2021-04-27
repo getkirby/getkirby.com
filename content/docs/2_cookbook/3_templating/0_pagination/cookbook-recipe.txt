@@ -2,10 +2,6 @@ Title: Pagination
 
 ----
 
-Description: Use pagination to divide content into a list of digestible chunks.
-
-----
-
 Text:
 
 The time will come when we have more than just a few articles or projects in our blog/projects list and we can't show them all on one page.
@@ -127,3 +123,11 @@ Both will automatically attach `/page:2` for example to your url.
   </ul>
 </nav>
 ```
+
+----
+
+Description: Use pagination to divide content into a list of digestible chunks.
+
+----
+
+Authors: - authors/bastian-allgeier

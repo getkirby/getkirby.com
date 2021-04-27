@@ -2,14 +2,6 @@ Title: Random content
 
 ----
 
-Published: 2012-01-19
-
-----
-
-Description:  Simulate activity on your site by showing random content.
-
-----
-
 Text:
 
 Random content is a great way to simulate activity on your site. Especially the homepage is a perfect place to show randomly selected articles from your blog, a different header image each time the page gets refreshed or a box with a random featured project from your portfolio.
@@ -128,3 +120,15 @@ $randomImage = page('portfolio')
   ->shuffle()
   ->first();
 ```
+
+----
+
+Published: 2012-01-19
+
+----
+
+Description: Simulate activity on your site by showing random content.
+
+----
+
+Authors: - authors/bastian-allgeier

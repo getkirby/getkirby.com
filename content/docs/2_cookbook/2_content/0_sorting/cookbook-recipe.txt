@@ -2,17 +2,7 @@ Title: Sorting
 
 ----
 
-Published: 2018-11-21
-
-----
-
-Description: Use Kirby's API to sort your content by all sorts of criteria.
-
-----
-
 Text:
-
-
 
 5, 4, 3, 2, 1…, sorting content is an everyday developer's task when dealing with all sorts of content collections: articles, events, images or similar data needs to be sorted, for example, by date or title, in descending or ascending order, or even by a more complicated sorting algorithm.
 
@@ -231,3 +221,15 @@ $usera = $kirby->users()->sortBy('language', 'desc');
 ```
 
 For files and users (and all the other stuff we can sort) we could also go to extremes, but let's keep it dry and finish here.
+
+----
+
+Published: 2018-11-21
+
+----
+
+Description: Use Kirby's API to sort your content by all sorts of criteria.
+
+----
+
+Authors: - authors/sonja-broda

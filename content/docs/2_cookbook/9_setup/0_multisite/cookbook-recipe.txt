@@ -2,10 +2,6 @@ Title: Using Kirby for multiple sites
 
 ----
 
-Description: Run multiple sites from the same Kirby installation.
-
-----
-
 Text:
 
 You can run multiple sites via the same Kirby setup. This can help you maintain your sites as you only need to keep a single setup updated.
@@ -103,3 +99,11 @@ $kirby = new Kirby([
 ## Licenses for your multi-site
 
 Even when running multiple sites through the same setup and code, you need a license for each of these sites: A single license is valid for a single Kirby installation, running on a single domain. If you add additional installations (i.e. under additional subdomains or subfolders) you need to (link: buy text: purchase licenses) for each of those installations.
+
+----
+
+Description: Run multiple sites from the same Kirby installation.
+
+----
+
+Authors: - authors/sonja-broda

@@ -2,14 +2,6 @@ Title: My first Panel section
 
 ----
 
-Description: Let's build a custom Panel section
-
-----
-
-Published: 2019-11-24
-
-----
-
 Text:
 
 In this recipe, we will create a custom Panel section that displays a list of links with an icon, a title and a description. This is what it will look like once we are ready:
@@ -358,3 +350,15 @@ linksection/
 This is a very basic example that should still have given you an understanding of how the different parts play together and enable you to set up your first custom sections for your clients. The data to fill this section can come in fact come from anywhere, you can provide it through a route, a database or whatever you see fit. And you probably don't just want to display stuff, but add actions to each item etc. We'll cover that in future recipes.
 
 You don't have to use the components Kirby provides, either, but can come up with your own markup and design. The possibilities are pretty much endless.
+
+----
+
+Description: Let's build a custom Panel section
+
+----
+
+Published: 2019-11-24
+
+----
+
+Authors: - authors/sonja-broda

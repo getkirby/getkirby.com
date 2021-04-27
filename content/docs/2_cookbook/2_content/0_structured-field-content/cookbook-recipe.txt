@@ -2,14 +2,6 @@ Title: Structured field content
 
 ----
 
-Date: 2012-03-19
-
-----
-
-Description: Add structured data like addresses, events, etc. to your site.
-
-----
-
 Text:
 
 Kirby's content fields can contain any plain text format. But that does not have to be one-dimensional data like a title or some text. One way to further structure plain text is called (link: http://www.yaml.org text: YAML) - a human-readable data structure syntax.
@@ -195,3 +187,15 @@ Mary:
 ```
 
 …or whatever structured data you need!
+
+----
+
+Date: 2012-03-19
+
+----
+
+Description: Add structured data like addresses, events, etc. to your site.
+
+----
+
+Authors: - authors/bastian-allgeier

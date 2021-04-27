@@ -10,6 +10,12 @@ Description: Install and update Kirby via Composer.
 
 ----
 
+Authors:
+
+- authors/lukas-bestle
+
+----
+
 Text:
 
 ## What is Composer?

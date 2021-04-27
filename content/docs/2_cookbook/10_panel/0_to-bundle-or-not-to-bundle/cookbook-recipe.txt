@@ -2,15 +2,6 @@ Title: To bundle or not to bundle: differences of creating plugins with or witho
 
 ----
 
-
-Published: 2021-03-05
-
-----
-
-Description: Using bundlers like Parcel is not for everyone. Here we show how you can build Panel extensions without a build process.
-
-----
-
 Text:
 
 In our (link: docs/cookbook/panel/custom-block-type text: Creating a custom block type from scratch) recipe, we built a custom block type using a single file component with a build process. Single file components are a reformatted way of writing regular JS components, with certain advantages. They keep your code clean and self-contained. Anything that belongs to a component is in a single file: the HTML template, the logic and the styles. But this comes at the price of having to use a bundler.
@@ -457,3 +448,15 @@ panel.plugin('cookbook/audio-block', {
 ## Conclusion
 
 While it is possible to bypass the extra complexity a build process introduces into our workflow, this way of creating Panel blocks or other Panel extension has its limits. With more complex logic and templates, it easily gets messy, and particularly if you want to have more than one extension in a single plugin.
+
+----
+
+Published: 2021-03-05
+
+----
+
+Description: Using bundlers like Parcel is not for everyone. Here we show how you can build Panel extensions without a build process.
+
+----
+
+Authors: - authors/sonja-broda

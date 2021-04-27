@@ -2,10 +2,6 @@ Title: How to migrate users
 
 ----
 
-Description: Move your Kirby 2 user accounts over to Kirby 3.
-
-----
-
 Text:
 
 <info>
@@ -151,3 +147,13 @@ foreach ($pages as $page) {
     }
 }
 ```
+
+----
+
+Description: Move your Kirby 2 user accounts over to Kirby 3.
+
+----
+
+Authors:
+
+- authors/nico-hoffmann

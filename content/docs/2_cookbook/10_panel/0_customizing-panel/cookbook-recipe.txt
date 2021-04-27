@@ -2,14 +2,6 @@ Title: Examples for customizing the Panel
 
 ----
 
-Published: 2020-09-01
-
-----
-
-Description: Style Panel elements via blueprint settings and custom CSS
-
-----
-
 Text:
 
 We can change many aspects of the look and feel of the (glossary: panel text: Panel) by adding a custom Panel stylesheet and overriding the default styles.
@@ -91,3 +83,15 @@ As before, we can use this attribute as selector in our stylesheet:
 ```
 
 In the same way, you can modify other elements that get their `data` attributes via blueprint settings, like the card size.
+
+----
+
+Published: 2020-09-01
+
+----
+
+Description: Style Panel elements via blueprint settings and custom CSS
+
+----
+
+Authors: - authors/sonja-broda

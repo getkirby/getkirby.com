@@ -2,10 +2,6 @@ Title: Kirby templates 101
 
 ----
 
-Description: Learn some PHP basics that make creating templates a breeze.
-
-----
-
 Text:
 
 In this post you are going to learn the basics of how to write clean templates with Kirby's PHP template engine.
@@ -343,3 +339,11 @@ You often have to check for an existing object first, before you can use it. For
 ## Still no friend of PHP templates?
 
 We keep our template engine as simple and effective as possible, but we also don't want to lock you in. Our plugin system offers a simple way to embed your own template engine and there are plugins for Twig and other template engines available.
+
+----
+
+Description: Learn some PHP basics that make creating templates a breeze.
+
+----
+
+Authors: - authors/sonja-broda

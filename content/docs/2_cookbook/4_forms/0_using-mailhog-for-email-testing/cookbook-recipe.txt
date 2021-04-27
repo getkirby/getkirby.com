@@ -2,14 +2,6 @@ Title: Using MailHog for local email testing
 
 ----
 
-Description: Make email testing a breeze with the right tools for the task
-
-----
-
-Published: 2020-09-30
-
-----
-
 Text:
 
 ## The problem
@@ -117,3 +109,14 @@ Of course, MailHog is not the only email testing tool around. Here are some alte
 - (link: https://github.com/ChangemakerStudios/Papercut-SMTP text: Papercut SMTP, Windows only Desktop app)
 - (link: https://usehelo.com/ text: Helo, SAAS, paid plan)
 
+----
+
+Description: Make email testing a breeze with the right tools for the task
+
+----
+
+Published: 2020-09-30
+
+----
+
+Authors: - authors/sonja-broda

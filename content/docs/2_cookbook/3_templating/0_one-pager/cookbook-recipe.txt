@@ -2,10 +2,6 @@ Title: One-pager site
 
 ----
 
-Description: Create a one-pager for small companies or simple portfolios.
-
-----
-
 Text:
 
 The data structure behind a Kirby site is very simple: one folder = one page. But this does not mean that you have to stick to this pattern. In fact it’s very simple to build a one-page website with multiple different sections and still have a folder for each section.
@@ -282,3 +278,11 @@ As a final step you should setup a proper `error.php` template. It doesn’t hav
 ## Final thoughts
 
 With those steps, you get a very comfortable setup for your “one-pager” which you can update and maintain. But please just take this as an inspiration for your own project. It’s up to you to stick those pieces together in a way you are most happy with. Working with subfolders not only for full rendered pages can be a very cool way to store and retrieve data with Kirby. Once you get the hang of it, you will be able to come up with pretty much anything you have in mind.
+
+----
+
+Description: Create a one-pager for small companies or simple portfolios.
+
+----
+
+Authors: - authors/bastian-allgeier

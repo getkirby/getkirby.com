@@ -2,10 +2,6 @@ Title: How to upgrade from Kirby 2
 
 ----
 
-Description: Learn how to upgrade an existing project to Kirby 3.
-
-----
-
 Text:
 
 Kirby 3 comes with a wealth of new features and changes under the hood. In this guide we go through the steps necessary to upgrade your existing Kirby 2 site to Kirby 3 step by step.
@@ -463,9 +459,20 @@ The `popup: yes` property in a `link` KirbyTag becomes `target: _blank`:
 If you run into any kind of upgrade issue, please help us by letting us know [in the forum](https://forum.getkirby.com) or by creating a ticket: [https://github.com/getkirby/kirby/issues](https://github.com/getkirby/kirby/issues)
 
 Please only create tickets if you are pretty sure it is a Kirby issue.
+
 ----
-TODO: List of deprecated classes and methods and their K3 replacements
+
+Description: Learn how to upgrade an existing project to Kirby 3.
+
+----
+
+Todo:
+
+List of deprecated classes and methods and their K3 replacements
 
 - new Asset() => new Kirby\Image\Image();
 - What about the old Upload class, how to handle this now?
 
+----
+
+Authors: - authors/sonja-broda

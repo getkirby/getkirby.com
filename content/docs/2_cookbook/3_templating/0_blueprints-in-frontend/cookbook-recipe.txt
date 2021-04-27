@@ -2,10 +2,6 @@ Title: Using blueprints in the frontend
 
 ----
 
-Description: Access blueprints and use this data to control your logic.
-
-----
-
 Text:
 
 Being able to query the blueprints that define the Panel layout gives you endless possibilities for control structures in your front-end––from simple field queries to building your front-end forms.
@@ -131,3 +127,11 @@ return [
 <info>
 Instead of adding a new option to the options array, you can use custom attributes anywhere in your blueprint. Just make sure they don't interfere with Kirby's default blueprint settings. To be on the safe side, you can prefix your custom options.
 </info>
+
+----
+
+Description: Access blueprints and use this data to control your logic.
+
+----
+
+Authors: - authors/sonja-broda

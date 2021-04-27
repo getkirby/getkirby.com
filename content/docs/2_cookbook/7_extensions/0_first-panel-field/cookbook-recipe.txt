@@ -2,14 +2,6 @@ Title: My first Panel field
 
 ----
 
-Description: Create your first custom Panel field from scratch
-
-----
-
-Published: 2020-02-10
-
-----
-
 Text:
 
 This cookbook recipe is based on these two video episodes…
@@ -489,3 +481,15 @@ export default {
 Voilà, our new doi field is ready for use.
 
 (image: doifield-8.jpg)
+
+----
+
+Description: Create your first custom Panel field from scratch
+
+----
+
+Published: 2020-02-10
+
+----
+
+Authors: - authors/sonja-broda
