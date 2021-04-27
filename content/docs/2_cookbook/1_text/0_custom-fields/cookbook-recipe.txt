@@ -2,10 +2,6 @@ Title: Custom content fields
 
 ----
 
-Description: Structure your content in the most flexible way with custom fields.
-
-----
-
 Text:
 
 Kirby shines when it comes to custom fields. We believe that your content should be as well structured as possible and it should be simple to add more fields whenever you need them.
@@ -279,3 +275,11 @@ content/
 <?= $page->camera() ?>
 <?= $page->lens() ?>
 ```
+
+----
+
+Description: Structure your content in the most flexible way with custom fields.
+
+----
+
+Authors: - authors/bastian-allgeier

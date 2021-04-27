@@ -2,14 +2,6 @@ Title: Monolithic Plugin Setup
 
 ----
 
-Published: 2020-05-08
-
-----
-
-Description: Set up a plugin workflow that allows you to both develop and test your plugin from the same Git repository.
-
-----
-
 Text:
 
 If you're developing a plugin, you also need somewhere to test it, especially if it involves the Kirby panel. In other words, you need a sample Kirby site where your plugin can run. In this guide, you'll see how to set this up under a single Git repository.
@@ -50,7 +42,7 @@ Kirby::plugin('getkirby/pluginkit', [
   },
   "posthtml": {
     "recognizeSelfClosing": true
-  }  
+  }
 }
 ```
 
@@ -163,7 +155,7 @@ README.md
 
 When we publish our plugin, we don't want the files related to our test site to appear in the production version of the plugin that people will be putting in their sites. We can exclude whatever we want with the `.gitattributes` file:
 
-```   
+```
 /content/ export-ignore
 /site/ export-ignore
 /src/ export-ignore
@@ -202,3 +194,17 @@ Later, when you create a new release of the plugin on GitHub, it should create a
 We managed to create a setup where we can develop and view our plugin from the same repository, while still providing just the necessary files on release.
 
 To get started right away with the same setup, use [this template repository](https://github.com/OblikStudio/kirby-plugin).
+
+----
+
+Published: 2020-05-08
+
+----
+
+Description: Set up a plugin workflow that allows you to both develop and test your plugin from the same Git repository.
+
+----
+
+Authors:
+
+- authors/hristiyan-dodov

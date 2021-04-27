@@ -2,10 +2,6 @@ Title: Add authors to your pages
 
 ----
 
-Description: Tie pages to a person. Create an author system for your blog posts.
-
-----
-
 Text:
 
 Assigning one or more people to pages like posts or projects is a common use case and Kirby's user system in combination with the users field is a perfect fit for this.
@@ -177,4 +173,10 @@ As an alternative, you can put this list of authors with their articles into the
 
 Each author will show up on http://yourdomain.com/authors with the user avatar and a list of articles they have written. This can be extended with more info about each author or more info about each article.
 
+----
 
+Description: Tie pages to a person. Create an author system for your blog posts.
+
+----
+
+Authors: - authors/sonja-broda

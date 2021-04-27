@@ -2,10 +2,6 @@ Title: Art-directed pages
 
 ----
 
-Description: Add custom CSS and JavaScript to style individual pages without the need for additional templates.
-
-----
-
 Text:
 
 When you are looking for a way to create individual, art-directed subpages for your site, one way would be to create new templates for each new page. But this can get very redundant. Especially if the HTML structure doesn't really change, but you just want to make some adjustments via CSS or maybe add some JavaScript.
@@ -59,3 +55,13 @@ The `css()` and `js()` helpers handle the rest. As soon as they get an array of 
 ```
 
 And that's it. Now you can create art-directed posts or custom styles for individual pages.
+
+----
+
+Description: Add custom CSS and JavaScript to style individual pages without the need for additional templates.
+
+----
+
+Authors:
+
+- authors/bastian-allgeier

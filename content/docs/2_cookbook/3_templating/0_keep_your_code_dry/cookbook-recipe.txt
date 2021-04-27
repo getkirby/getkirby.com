@@ -2,14 +2,6 @@ Title: Quicktip: Don't repeat the same query multiple times
 
 ----
 
-Published: 2021-01-09
-
-----
-
-Description: "Don't repeat yourself" (DRY) is a coding paradigm that when not heeded can seriously harm performance.
-
-----
-
 Text:
 
 Modularizing your code into resusable chunks to keep things organized and not repeat yourself is an important coding paradigm.
@@ -130,3 +122,15 @@ We should therefore fix this and store the result of the queries in variables fi
 ## Takeaway
 
 Always store query results in variables when they are used multiple times. This improves your overall performance, keeps your code DRY and easier to read, and prevents unexpected results.
+
+----
+
+Published: 2021-01-09
+
+----
+
+Description: "Don't repeat yourself" (DRY) is a coding paradigm that when not heeded can seriously harm performance.
+
+----
+
+Authors: - authors/sonja-broda

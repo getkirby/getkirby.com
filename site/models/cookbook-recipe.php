@@ -5,7 +5,7 @@ class CookbookRecipePage extends Page
 
     public function authors()
     {
-        return parent::authors()->or('authors/sonja-broda')->toPages();
+        return parent::authors()->toPages();
     }
 
     public function isNew(): bool

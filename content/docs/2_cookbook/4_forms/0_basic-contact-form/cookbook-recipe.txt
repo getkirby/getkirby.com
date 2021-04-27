@@ -2,14 +2,6 @@ Title: Email contact form
 
 ----
 
-Description: Create a basic contact form that sends HTML or plain text emails.
-
-----
-
-Published: 2019-03-18
-
-----
-
 Text:
 
 Form handling is always a bit of a pain. In this recipe we will take you step by step through a basic example which you can then extend according to your needs.
@@ -227,3 +219,15 @@ Some ideas for extending this basic example:
 - Send files as attachments.
 - Create pages from form data instead of or in addition to sending email.
 - …
+
+----
+
+Description: Create a basic contact form that sends HTML or plain text emails.
+
+----
+
+Published: 2019-03-18
+
+----
+
+Authors: - authors/sonja-broda

@@ -2,14 +2,6 @@ Title: Filtering via routes
 
 ----
 
-Description: Learn how to filter using routes instead of parameters
-
-----
-
-Published: 2019-04-23
-
-----
-
 Text:
 
 <info>
@@ -189,3 +181,15 @@ Here we use the `urldecode()`d page slug as our filter value.
 <?php endif ?>
 <?php snippet('footer') ?>
 ```
+
+----
+
+Description: Learn how to filter using routes instead of parameters
+
+----
+
+Published: 2019-04-23
+
+----
+
+Authors: - authors/sonja-broda

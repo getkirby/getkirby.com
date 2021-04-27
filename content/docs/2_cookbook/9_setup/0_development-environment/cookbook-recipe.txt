@@ -2,14 +2,6 @@ Title: Local development environment
 
 ----
 
-Description: Find the development environment that fits your needs.
-
-----
-
-Published: 2019-04-15
-
-----
-
 Text:
 
 The easiest way to start testing and developing with Kirby is in a local development environment: you can easily edit your files locally, immediately see changes in the browser, and deploy your site on a public server when you are ready.
@@ -82,3 +74,15 @@ Follow their (link: https://www.vagrantup.com/intro/getting-started/index text: 
 ## Laravel Homestead
 
 (link: https://laravel.com/docs/5.8/homestead text: Laravel Homestead) is an official, pre-packaged Vagrant box and provides a full-featured virtual development environment, that doesn't require you to install PHP, a web server, or any other server software on your computer. Homestead runs on Windows, Mac, or Linux systems.
+
+----
+
+Description: Find the development environment that fits your needs.
+
+----
+
+Published: 2019-04-15
+
+----
+
+Authors: - authors/sonja-broda

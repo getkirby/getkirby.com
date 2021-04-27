@@ -2,13 +2,7 @@ Title: Menus
 
 ----
 
-Description: Create any kind of menu you need for your project.
-
-----
-
 Text:
-
-
 
 ## Main menu
 
@@ -296,3 +290,11 @@ nav .depth-2 {
 ### The entire API
 
 Of course this is only a minimal extract of all possibilities. The entire Kirby API is there to get the most out of your ideas, so check out the (link: docs/reference text: Kirby Reference) for additional methods you can use.
+
+----
+
+Description: Create any kind of menu you need for your project.
+
+----
+
+Authors: - authors/bastian-allgeier

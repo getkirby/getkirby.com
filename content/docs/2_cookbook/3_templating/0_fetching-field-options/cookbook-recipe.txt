@@ -2,14 +2,6 @@ Title: Fetching field options
 
 ----
 
-Published: 2019-05-11
-
-----
-
-Description: Get text labels for your option values from fields
-
-----
-
 Text:
 
 A typical select field with a set of predefined options looks like this:
@@ -192,3 +184,15 @@ foreach ($categories as $category) {
     echo $field['options'][$category] ?? html($category);
 }
 ```
+
+----
+
+Published: 2019-05-11
+
+----
+
+Description: Get text labels for your option values from fields
+
+----
+
+Authors: - authors/sonja-broda

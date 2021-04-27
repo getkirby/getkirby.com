@@ -10,6 +10,12 @@ Description: Write scripts to import and export translations for external transl
 
 ----
 
+Authors:
+
+- authors/bastian-allgeier
+
+----
+
 Text:
 
 Kirby's Panel is the perfect place to work on translations for your content. But sometimes it is necessary to collaborate with external translators or use existing translation services instead of the Panel.

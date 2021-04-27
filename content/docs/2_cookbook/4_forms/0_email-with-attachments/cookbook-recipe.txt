@@ -2,14 +2,6 @@ Title: Email with attachments
 
 ----
 
-Description: Send an email with attachments from form input.
-
-----
-
-Published: 2019-05-17
-
-----
-
 Text:
 
 This recipe extends the (link: text: basic contact form) example, but this time the user can attach some files. As an example we use a job application form.
@@ -479,3 +471,15 @@ You can of course extend this example:
 - Progressively enhance with JavaScript validation.
 - Integrate other field types.
 - …
+
+----
+
+Description: Send an email with attachments from form input.
+
+----
+
+Published: 2019-05-17
+
+----
+
+Authors: - authors/sonja-broda

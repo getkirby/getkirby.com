@@ -2,14 +2,6 @@ Title: Cleaning up content files
 
 ----
 
-Description: Remove unused fields from content files
-
-----
-
-Published: 30.05.2019
-
-----
-
 Text:
 
 Kirby doesn't delete fields from content files if you later remove them from your blueprints, rename them, or if you add fields manually with an editor. Especially during development, you therefore often end up with a lot of unused stuff you will probably want to clean up before handing a project over to your client.
@@ -110,3 +102,15 @@ function cleanUp($collection, $ignore = null, string $lang = null) {
 ```
 
 Instead of echoing the results on screen, you can also write them into a log file if you prefer.
+
+----
+
+Description: Remove unused fields from content files
+
+----
+
+Published: 30.05.2019
+
+----
+
+Authors: - authors/sonja-broda

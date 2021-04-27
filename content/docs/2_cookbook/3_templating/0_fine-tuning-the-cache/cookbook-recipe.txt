@@ -2,13 +2,6 @@ Title: Quicktip: Fine-tuning cache settings
 
 ----
 
-Published: 2020-01-25
-
-----
-Description: Control caching from a blueprint option or a field
-
-----
-
 Text:
 
 (link: docs/guide/cache text: Cache options) are set via the `config.php` file. To prevent caching for certain pages, we can use the `ignore` option and either provide a list of page IDs to be ignored, or a callback function that returns a boolean for more control. 
@@ -96,3 +89,15 @@ These two approaches can also be combined to allow editors to override default b
 </info>
 
 Thanks to (link: http://denhoff.com/ text: Markus Denhoff) for sharing the idea with the blueprint option.
+
+----
+
+Published: 2020-01-25
+
+----
+
+Description: Control caching from a blueprint option or a field
+
+----
+
+Authors: - authors/sonja-broda

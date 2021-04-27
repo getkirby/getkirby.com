@@ -1,9 +1,7 @@
 Title: Uploading files from frontend
 
 ----
-Description: Learn how to upload files through a frontend form.
 
-----
 Text:
 
 In this recipe we will create a basic file upload form where users can upload files from the frontend. What we need:
@@ -267,3 +265,11 @@ This recipes presented a basic way to implement file uploads from the frontend. 
 - Add additional fields to the form
 - Combine it with a user registration form
 - Add access restrictions to the `storage` page
+
+----
+
+Description: Learn how to upload files through a frontend form.
+
+----
+
+Authors: - authors/sonja-broda

@@ -2,10 +2,6 @@ Title: Working with dates
 
 ----
 
-
-Description: Use dates in your content files and output different date formats.
-
-----
 Text:
 
 Any field in Kirby can be converted to a date if the content is parseable by PHP.
@@ -63,3 +59,11 @@ In your template …
 ```php
 <?= $page->published()->toDate('%d.%m.%Y') ?>
 ```
+
+----
+
+Description: Use dates in your content files and output different date formats.
+
+----
+
+Authors: - authors/bastian-allgeier

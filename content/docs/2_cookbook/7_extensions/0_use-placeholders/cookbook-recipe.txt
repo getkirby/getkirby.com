@@ -2,14 +2,6 @@ Title: The power of placeholders
 
 ----
 
-Published: 2019-12-09
-
-----
-
-Description: Use placeholders for recurring text snippets and more
-
-----
-
 Text:
 
 Placeholders are a powerful way to include repeatedly used text snippets like company names, email addresses or phone numbers, but also dynamic stuff like galleries into your text fields. When you want to change this text snippet, you can do that in one place and it will automatically update in all places where the placeholder is used. It's also useful if these text snippets need a special styling or markup. Placeholders thus help you to keep information consistent and maintainable.
@@ -271,3 +263,15 @@ placeholders:
 <info>
 If you rename the fields within the structure field or don't want to put the field into the site options, make sure to adapt the plugin code accordingly.
 </info>
+
+----
+
+Published: 2019-12-09
+
+----
+
+Description: Use placeholders for recurring text snippets and more
+
+----
+
+Authors: - authors/sonja-broda

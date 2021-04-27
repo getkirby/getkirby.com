@@ -2,9 +2,6 @@ Title: A/B testing with Kirby
 
 ----
 
-Description: Split visitors into groups to compare how different versions perform.
-
-----
 Text:
 
 This tutorial will introduce you to the A/B testing plugin, which is basically just a simple function.
@@ -150,3 +147,11 @@ And that's it! Our final plugin for A/B testing with Kirby.
 I went through this with very detailed little steps and the more experienced coders among you will probably be bored by now, but let me take this chance to encourage every Kirby user — PHP beginner or pro — to try writing your own code first, before looking for a plugin.
 
 I know there's this golden *"Don't reinvent the wheel"* rule, but most problems can be solved by just a little bit of code and along the way there's a good chance you might even learn something new. Take that chance. You will end up with much cleaner code and much more coding skills in the long run.
+
+----
+
+Description: Split visitors into groups to compare how different versions perform.
+
+----
+
+Authors: - authors/bastian-allgeier

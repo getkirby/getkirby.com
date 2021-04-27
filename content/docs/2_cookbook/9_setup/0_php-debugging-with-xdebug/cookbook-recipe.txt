@@ -2,14 +2,6 @@ Title: First steps to start debugging with Xdebug
 
 ----
 
-Published: 2021-01-04
-
-----
-
-Description: Xdebug helps you track down errors in your PHP scripts. In this recipe, we will set it up with VS Code.
-
-----
-
 Text:
 
 ## What is Xdebug and why use it?
@@ -310,3 +302,15 @@ In this recipe, we cannot cover all operating systems, development environments 
 - (link: https://www.jetbrains.com/help/phpstorm/configuring-xdebug.html text: Configure Xdebug in PHPStorm)
 - (link: https://www.youtube.com/watch?v=114XVdpV4ow text: Derick Rethans about Xdebug 3)
 - (link: https://www.youtube.com/watch?v=VRAySYr2q-U text: XAMPP (PHP8), Xdebug 3 and PHPStorm)
+
+----
+
+Published: 2021-01-04
+
+----
+
+Description: Xdebug helps you track down errors in your PHP scripts. In this recipe, we will set it up with VS Code.
+
+----
+
+Authors: - authors/sonja-broda

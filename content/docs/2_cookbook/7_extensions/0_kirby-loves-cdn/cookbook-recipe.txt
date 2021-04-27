@@ -2,14 +2,6 @@ Title: Kirby loves CDN
 
 ----
 
-Description: Set up custom components to deliver assets and files through a CDN.
-
-----
-
-Published: 2021-01-05
-
-----
-
 Text:
 
 ## Who is this recipe for?
@@ -294,3 +286,15 @@ With this plugin in place, you can now use (link: https://www.keycdn.com/support
 ```
 
 Using Kirby's shortcuts `crop()`, `resize()`, `bw()` etc. is also still possible.
+
+----
+
+Description: Set up custom components to deliver assets and files through a CDN.
+
+----
+
+Published: 2021-01-05
+
+----
+
+Authors: - authors/sonja-broda

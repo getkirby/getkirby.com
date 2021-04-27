@@ -2,10 +2,6 @@ Title: Creating a Kirby-powered blog
 
 ----
 
-Description: Set up a blog system with an overview, articles, tags, feeds and more.
-
-----
-
 Text:
 
 In this section you will learn how to build a blog with Kirby. We will start with a very basic and minimalistic blog here. You will find more advanced stuff in (link: #further-reading text: related sections).
@@ -293,4 +289,10 @@ To manage your blog and write articles in the (glossary: panel), you will need t
 - (link: docs/cookbook/templating/custom-post-types text: How to add custom post types to your blog)
 - (link: docs/cookbook/content/related-articles text: How to add related posts to your articles)
 
+----
 
+Description: Set up a blog system with an overview, articles, tags, feeds and more.
+
+----
+
+Authors: - authors/bastian-allgeier

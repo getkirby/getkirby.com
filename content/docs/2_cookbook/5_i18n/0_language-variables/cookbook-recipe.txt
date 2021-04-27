@@ -2,10 +2,6 @@ Title: Flexible language variables
 
 ----
 
-Description: Define language variables the way you need them.
-
-----
-
 Text:
 
 The "standard" way to (link: docs/guide/languages/custom-language-variables text: store language variables) in Kirby is to define an array of language variables in the language file itself, e.g. `/site/languages/de.php`.
@@ -87,3 +83,11 @@ function getVariables($lang = null) {
 ```
 
 As you can see, you can get pretty flexible with this to make it work with the requirements of your multi-language project.
+
+----
+
+Description: Define language variables the way you need them.
+
+----
+
+Authors: - authors/sonja-broda

@@ -2,10 +2,6 @@ Title: Custom post types
 
 ----
 
-Description: Create different templates for different kinds of content.
-
-----
-
 Text:
 
 A blog is not just a great way to post text, but also images, videos, links or quotes. Putting all those different types of content into a dumb old article template is quite boring and so custom post types have become very popular.
@@ -140,3 +136,11 @@ Each snippet contains the template code that is needed to create the article pre
 ```
 
 Within each snippet you can work with the `$article` variable, that we've passed to the snippet in the foreach loop. The best part about this is, that a missing post type is simply ignored as the snippet won't load.
+
+----
+
+Description: Create different templates for different kinds of content.
+
+----
+
+Authors: - authors/sonja-broda

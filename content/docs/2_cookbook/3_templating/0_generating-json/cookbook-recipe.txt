@@ -2,10 +2,6 @@ Title: Generating JSON with Kirby
 
 ----
 
-Description: Create a JSON representation of your blog content in Kirby.
-
-----
-
 Text:
 
 With Kirby, you cannot only generate HTML output. In this recipe, we will explain how to generate JSON with Kirby using content representations. If you've never heard about [JSON](https://en.wikipedia.org/wiki/JSON), this tutorial is probably not for you, but you should definitely learn more about it – it's awesome!
@@ -249,3 +245,11 @@ echo json_encode($json);
 It's up to you what you build with this on the front-end. I'm sure you already got some great ideas :)
 
 This tutorial is not limited to a blog-scenario. You can easily adapt this to make other parts of your site available as JSON. You could even build a port to XML or CSV. There are hardly any limits.
+
+----
+
+Description: Create a JSON representation of your blog content in Kirby.
+
+----
+
+Authors: - authors/bastian-allgeier

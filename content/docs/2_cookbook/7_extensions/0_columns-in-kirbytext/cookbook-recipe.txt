@@ -2,16 +2,7 @@ Title: Columns in Kirbytext
 
 ----
 
-Published: 2014-12-16
-
-----
-
-Description: Add columns to your textarea fields with this KirbyTag plugin.
-
-----
-
 Text:
-
 
 (glossary: kirbytag text: KirbyTags) are really great for use cases like adding images or links, but they come to a limit if you want to nest  KirbyTags or want to add more than just a single line of text.
 
@@ -222,3 +213,14 @@ To make the columns display correctly as columns, we finally need some CSS, in t
 
 Once you've added the code above to your CSS file for your site, you should be able to see your grid.
 
+----
+
+Published: 2014-12-16
+
+----
+
+Description: Add columns to your textarea fields with this KirbyTag plugin.
+
+----
+
+Authors: - authors/sonja-broda

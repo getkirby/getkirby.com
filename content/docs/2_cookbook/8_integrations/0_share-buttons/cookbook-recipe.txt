@@ -2,10 +2,6 @@ Title: Quicktip: Simple share buttons
 
 ----
 
-Description: Add basic Twitter and Facebook buttons to your site.
-
-----
-
 Text:
 
 ## Tweet Button
@@ -27,3 +23,11 @@ This link will share the title and the corresponding url of the current page on 
 ```
 
 This link will share the current page on Facebook.
+
+----
+
+Description: Add basic Twitter and Facebook buttons to your site.
+
+----
+
+Authors: - authors/sonja-broda

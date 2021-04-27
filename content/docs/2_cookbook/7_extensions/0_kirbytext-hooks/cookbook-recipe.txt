@@ -2,14 +2,6 @@ Title: The order of KirbyText/KirbyTags hooks
 
 ----
 
-Published: 2019-12-15
-
-----
-
-Description: When to use what type of KirbyText/KirbyTags hook
-
-----
-
 Text:
 
 ## Available hooks
@@ -55,3 +47,15 @@ Related:
 
 - (link: docs/cookbook/extensions/use-placeholders text: The power of placeholders)
 - (link: docs/cookbook/extensions/columns-in-kirbytext text: Columns in kirbytext)
+
+----
+
+Published: 2019-12-15
+
+----
+
+Description: When to use what type of KirbyText/KirbyTags hook
+
+----
+
+Authors: - authors/sonja-broda

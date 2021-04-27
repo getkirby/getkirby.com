@@ -10,6 +10,12 @@ Description: Install and update Kirby via Git
 
 ----
 
+Authors:
+
+- authors/bastian-allgeier
+
+----
+
 Text:
 
 ## What is Git?

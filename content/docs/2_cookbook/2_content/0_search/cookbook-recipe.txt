@@ -2,10 +2,6 @@ Title: Search
 
 ----
 
-Description: Learn how to build a simple search for your site or sections of your site.
-
-----
-
 Text:
 
 (link: docs/reference/objects/site/search text: Search) is a built-in core feature. You can search all pages of your site or specific sets of pages. In this example you are going to learn how to build a simple search page, how to configure the search and how to display results.
@@ -145,3 +141,11 @@ return function ($site) {
 
 };
 ```
+
+----
+
+Description: Learn how to build a simple search for your site or sections of your site.
+
+----
+
+Authors: - authors/bastian-allgeier
