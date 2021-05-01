@@ -77,8 +77,9 @@ Dropdown items can also be fetched from a JSON endpoint:
 
 This will fetch the options only as soon as the dropdown will be opened.
 
+----
 
-## CSS classes
+CSS:
 
 `.k-dropdown`
 `.k-dropdown-content`

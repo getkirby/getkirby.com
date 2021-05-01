@@ -96,8 +96,3 @@ As you can see in the example, the `@submit` event of the dialog is used to trig
 In the submit method the API call is done. On success, the dialog will be closed, while `catch()` will take care of showing the error notification bar in the dialog and keep it open.
 
 By setting up the dialog and form like this, you can make sure that the ok button and any submit events within the form (i.e. enter key) are doing the same.
-
-## CSS class
-
-`.k-dialog`
-

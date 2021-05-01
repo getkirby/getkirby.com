@@ -52,7 +52,3 @@ export default {
 ## Keyboard Shortcuts
 
 The Form component automatically registers the `cmd+s` shortcut to submit the form.
-
-## CSS Class
-
-`.k-form`

@@ -1,7 +1,3 @@
 Text:
 
 All slots are optional.
-
-## CSS class
-
-`.k-bar`

@@ -11,7 +11,3 @@ You can pass an emoji as icon type:
 ```html
 <k-icon type="😱" :emoji="true" />
 ```
-
-## CSS class
-
-`.k-icon`

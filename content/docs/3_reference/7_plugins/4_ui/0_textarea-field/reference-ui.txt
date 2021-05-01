@@ -23,8 +23,3 @@ Available buttons:
 - `code`
 - `ol`
 - `ul`
-
-## CSS class
-
-`.k-textarea-field`
-
