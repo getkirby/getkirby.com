@@ -27,7 +27,3 @@ Text:
 	}"
 />
 ```
-
-## CSS class
-
-`.k-range-field`
