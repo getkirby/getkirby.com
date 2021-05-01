@@ -7,7 +7,3 @@ Tags can have a "remove" button and a connected remove event
 ```html
 <k-tag :removable="true" @remove="removeTag">Design</k-tag>
 ```
-
-## CSS class
-
-`.k-tag`

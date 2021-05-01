@@ -1,7 +1,0 @@
-Text:
-
-## CSS class
-
-`.k-toggle-input`
-
-

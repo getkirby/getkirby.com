@@ -15,7 +15,3 @@ Text:
   </k-button-group>
 </k-header>
 ```
-
-## CSS class
-
-`.k-header`

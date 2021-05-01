@@ -19,7 +19,3 @@ In addition, inherits the props from [`<k-field>`](./field), [`<k-input>`](./inp
 	@input="input"
 />
 ```
-
-## CSS class
-
-`.k-checkboxes-field`

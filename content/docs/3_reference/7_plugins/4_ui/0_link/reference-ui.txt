@@ -3,7 +3,3 @@ Text:
 ## Events
 
 You can bind any event to the link.
-
-## CSS Class
-
-`.k-link`

@@ -24,9 +24,3 @@ The box can be filled with your own elements to overwrite the default text imple
   <!-- custom html goes here -->
 </k-box>
 ```
-
-
-
-## CSS class
-
-`.k-box`

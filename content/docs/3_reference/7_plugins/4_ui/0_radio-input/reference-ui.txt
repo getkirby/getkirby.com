@@ -13,7 +13,3 @@ Text:
 	type="radio"
 />
 ```
-
-## CSS class
-
-`.k-radio-input`

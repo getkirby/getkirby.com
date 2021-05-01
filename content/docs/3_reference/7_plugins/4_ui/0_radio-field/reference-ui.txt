@@ -1,8 +1,5 @@
-Text:
+Example:
 
-## Example
-
-```html
 <k-radio-field
 	v-model="value"
 	:options="[
@@ -15,8 +12,3 @@ Text:
 	help="This is a radio field"
 	@input="input"
 />
-```
-
-## CSS class
-
-`.k-radio-field`

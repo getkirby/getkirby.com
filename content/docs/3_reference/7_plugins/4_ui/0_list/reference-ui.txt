@@ -10,7 +10,3 @@ Text:
   <k-list-item key="item-d" v-bind="{}" />
 </k-list>
 ```
-
-## CSS class
-
-`.k-list`
