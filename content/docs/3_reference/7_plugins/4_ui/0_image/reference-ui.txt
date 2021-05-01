@@ -14,7 +14,3 @@ You can bind any native event to the image. Additionally the image component wil
   @click="clicked"
 />
 ```
-
-## CSS class
-
-`.k-image`

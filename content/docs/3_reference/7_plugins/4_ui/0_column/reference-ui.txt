@@ -11,7 +11,3 @@ Text:
 ```
 
 The grid takes care of the responsiveness of the elements and also of wrapping lines automatically.
-
-## CSS class
-
-`.k-column`

@@ -13,7 +13,3 @@ Text:
 	type="select"
 />
 ```
-
-## CSS class
-
-`.k-select-input`
