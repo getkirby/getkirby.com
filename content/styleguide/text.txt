@@ -56,7 +56,7 @@ In general, you should use text formatting sparingly to prevent the text from be
 
 ### Data types in inline code
 
-Our custom Markdown extension automatically handles highlighting of atomic data types and classes available in PHP. In addition to that, Kirby’s built-in classes will get highlighting applied and linked to their respective entry in the (link: docs/reference text: reference). The latter only works if the class name contains the fully-qualified name including namespace (i.e. contains at least one backslash `\` character). If the content of the `<code>` element starts with an uppercase letter and the class exists in the current environment, it is highlighted, but not linked. All class names must be specified case-sensitive. If that also fails, the highlighter assumes given inline code is not a data type or class name. You can also specify multiple types by separating them with a pipe `|` character. Any inline code that does not solely consist of alphanumeric characters, underscores `_` and backslashes `\` is considered to be not a data type.
+Our custom Markdown extension automatically handles highlighting of atomic data types and classes available in PHP. In addition to that, Kirby’s built-in classes will get highlighting applied and linked to their respective entry in the (link: docs/reference text: Reference). The latter only works if the class name contains the fully-qualified name including namespace (i.e. contains at least one backslash `\` character). All class names must be specified case-sensitive. If that also fails, the highlighter assumes given inline code is not a data type or class name. You can also specify multiple types by separating them with a pipe `|` character. Any inline code that does not solely consist of alphanumeric characters, underscores `_` and backslashes `\` is considered to be not a data type.
 
 ```markdown
 Use a string `string` or `int` as parameter.
@@ -72,6 +72,27 @@ Available data types: `string`, `int`, `float`, `bool`, `object`, `array`, `null
 Class examples: `Kirby\Cms\Page`, `Kirby\Toolkit\Str`
 
 Multiple data types: `Kirby\Cms\Page|null`, `string|bool`
+
+### Method calls in inline code
+
+We went one step further to also highlight and link method calls: for class methods, field methods, helpers, e.g. `$page->url()`.
+
+This works either by parsing normal inline code:
+```kirbytext
+Check out `$page->url()`.
+Or even `Kirby\Toolkit\F::exists()`
+```
+
+As you can see, (link: /docs/reference/objects/aliases text: class aliases) can be used in their short form. All other classes require fully-qualified names including namespace.
+
+Since that might look a little odd, we have added some Kirbytags:
+
+```kirbytext
+Check out &lpar;class: Kirby\Toolkit\F method: exists text: ->exists()).
+And then &lpar;method: Kirby\Toolkit\F::size text: $myFile->size()).
+```
+
+And it does work: (class: Kirby\Toolkit\F method: exists text: ->exists()) and (method: Kirby\Toolkit\F::size text: $myFile->size()).
 
 ### Headlines
 
