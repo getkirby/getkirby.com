@@ -1,5 +1,0 @@
-Text:
-
-## CSS class
-
-`.k-info-field`

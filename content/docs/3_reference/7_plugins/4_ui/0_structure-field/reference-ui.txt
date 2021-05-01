@@ -12,7 +12,3 @@ Text:
 	@input="input"
 />
 ```
-
-## CSS class
-
-`.k-structure-field`

@@ -5,6 +5,12 @@
 
 <?php slot() ?>
 <div class="prose">
+  <?= kirbytext("
+<warning>
+We are currently rebuilding the UI kit docs. Our apologies that during this time the displayed information can be incomplete.
+</warning>
+  ") ?>
+
   <?php if ($page->description()->isNotEmpty()): ?>
     <?= $page->description()->kt() ?>
   <?php endif ?>
@@ -180,6 +186,9 @@
   <div id="docs">
     <div></div>
     <?= $page->text()->kt() ?>
+
+    <h2>CSS classes</h2>
+    <?= $page->css()->or('`.k-' . $page->slug() . '`')->kt() ?>
   </div>
   <?php endif ?>
 

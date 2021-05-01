@@ -30,8 +30,3 @@ You can bind any typical button event to this component.
 <k-button theme="positive">Save</k-button>
 <k-button theme="negative">Delete</k-button>
 ```
-
-
-## CSS class
-
-`.k-button`

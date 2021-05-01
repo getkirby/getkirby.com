@@ -16,7 +16,3 @@ Text:
 	@input="input"
 />
 ```
-
-## CSS class
-
-`.k-select-field`

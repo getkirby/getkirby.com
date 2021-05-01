@@ -13,7 +13,3 @@ Text:
   type="tags"
 />
 ```
-
-## CSS class
-
-`.k-tags-input`

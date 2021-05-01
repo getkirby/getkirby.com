@@ -1,6 +1,0 @@
-Text:
-
-## CSS class
-
-`.k-time-field`
-

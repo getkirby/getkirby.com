@@ -28,7 +28,3 @@ export default {
 }
 </script>
 ```
-
-## CSS class
-
-`.k-autocomplete`

@@ -52,7 +52,3 @@ With some CSS variable magic, the Grid component can change its number of column
   <div>...</div>
 </k-grid>
 ```
-
-## CSS class
-
-`.k-grid`
