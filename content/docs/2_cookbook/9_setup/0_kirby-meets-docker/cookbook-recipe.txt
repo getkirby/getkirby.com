@@ -27,7 +27,7 @@ On a side note: Many services and tools like CI/CD pipelines today rely on Docke
 ## Prerequisites
 
 - Docker and Docker Compose must be installed on your computer (see below where to go for instructions)
-- You are willing to enter a few commands on the command line 
+- You are willing to enter a few commands on the command line
 - Basic familiarity with Linux and shell scripting is helpful for easier understanding but not required to follow along
 - A text/code editor, e.g. VS Code or similar
 
@@ -37,7 +37,7 @@ This recipe has been tested on macOS Big Sure and Ubuntu 20.04.
 
 ## What is Docker?
 
-When we use the term (link: https://www.docker.com/ text: Docker) in this recipe, we actually refer to the Docker Engine that is developed by Docker Inc. In the wider sense, Docker is a full platform that does not only provide the Docker Engine but also the Docker Hub as a registry, Docker Swarm and a whole universe of services around it. 
+When we use the term (link: https://www.docker.com/ text: Docker) in this recipe, we actually refer to the Docker Engine that is developed by Docker Inc. In the wider sense, Docker is a full platform that does not only provide the Docker Engine but also the Docker Hub as a registry, Docker Swarm and a whole universe of services around it.
 
 Basically, the Docker Engine provides a way to package and distribute applications or services. Docker encapsulates these applications together with their dependencies in images. Docker will take these images and run them as containerized applications. This not only eliminates the need to install services like a web server, a database server, etc. on your host computer, it also lets you install other dependencies in the version that is needed for your application. The company itself claims on their website: "Docker makes development efficient and predictable". The Docker software runs on Linux, Mac or Windows, in the Cloud or even an IoT device.
 
@@ -59,7 +59,7 @@ You will also have to install (link: https://docs.docker.com/compose/install/ te
 
 Ok, so you have successfully installed Docker and Docker Compose on your system and the engine is up and running. For a little warm up, let's just check which Docker version is installed on your system.
 
-Open a terminal and type 
+Open a terminal and type
 
 ```bash
 docker -v
@@ -116,7 +116,7 @@ In the next line, we use
 RUN apt-get update && apt-get install -y git
 ```
 
-`RUN` is a keyword that tells Docker to execute commands. The commands we actually execute here are standard Linux commands that install packages, here we only install Git. 
+`RUN` is a keyword that tells Docker to execute commands. The commands we actually execute here are standard Linux commands that install packages, here we only install Git.
 
 <info>
 The tools (and thus the commands) used to install packages differ in different Linux distributions, here the base OS is Debian and the command `apt-get`.
@@ -165,7 +165,7 @@ Back in the terminal, let's start a container from this image with:
 docker run --name mycontainer -p 80:80 docker-starterkit
 ```
 
-`docker run` (or `docker container run`) tells Docker to start a container from the `docker-starterkit` image. With `-p 80:80` we bind the local port 80 to port 80 in the container (which is the default web server port). With `--name mycontainer` we give our container a name, otherwise Docker would create a random name for it. 
+`docker run` (or `docker container run`) tells Docker to start a container from the `docker-starterkit` image. With `-p 80:80` we bind the local port 80 to port 80 in the container (which is the default web server port). With `--name mycontainer` we give our container a name, otherwise Docker would create a random name for it.
 
 <info>
 If you get an error at this point saying "Error response from daemon: Ports are not available: listen tcp 0.0.0.0:80: bind: address already in use.", your local port 80 is already in use, probably by a local web server (Apache, MAMP, XAMPP, Valet or whatever). You can then either stop that web server or use another port for the container, e.g. `-p 8080:80` or whatever is currently not used on your host computer.
@@ -369,7 +369,7 @@ ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Remove annoying messages during package installation
-ARG DEBIAN_FRONTEND=noninteractive 
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Install packages: web server Apache, PHP and extensions
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -393,7 +393,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 COPY default.conf /etc/apache2/sites-available/000-default.conf
 
 # Remove default content (existing index.html)
-RUN rm /var/www/html/* 
+RUN rm /var/www/html/*
 
 # Clone the Kirby Starterkit
 RUN git clone https://github.com/getkirby/starterkit.git /var/www/html
@@ -474,7 +474,7 @@ docker rm mycontainer
 
 ## Example 3: Sharing a filesystem
 
-While the above examples were nice for playing around with the Starterkit, we are still an important step away from our mission, because currently we cannot persist our data locally. 
+While the above examples were nice for playing around with the Starterkit, we are still an important step away from our mission, because currently we cannot persist our data locally.
 
 In this example, we will work with a local Starterkit that we then bind mount into the container. The rationale here is to use an installation of Kirby on our host computer instead of in the container which will persist even if the container is removed.
 
@@ -508,7 +508,7 @@ ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Remove annoying messages during package installation
-ARG DEBIAN_FRONTEND=noninteractive 
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Install packages: web server & PHP plus extensions
 RUN apt-get update && apt-get install -y \
@@ -569,13 +569,13 @@ This will change the web server's UID and GID to match those of our local user.
 On MacOS, using the actual UID and GID of the host user might not work if these values are already in use in the container. In this case, use 1001/1001 or some other values for this section and the following. Since these rights are not important on a Mac but only on Linux, it doesn't really matter.
 </warning>
 
-Now it is time to build the image with 
+Now it is time to build the image with
 
 ```bash
 docker build -t docker-starterkit .
 ```
 
-and to start the container. 
+and to start the container.
 
 But wait, there is one thing missing: We need to tell the container about the shared filesystem. Because there is no way to do this when building the image, we have to extend our `docker run` command to start the container:
 
@@ -713,7 +713,7 @@ docker-compose config
 
 This will output the contents of the `docker-compose.yml` file with the expanded file paths and environment variables:
 
-```bash
+```yaml
 services:
   web server:
     build:
@@ -827,10 +827,10 @@ In our config file, we need to add the following (link: docs/reference/system/op
   'transport' => [
     'type' => 'smtp',
     // use the hostname defined in the docker compose file
-    'host' => 'mailhog', 
-    // the ports needs to be the port inside the container, 
+    'host' => 'mailhog',
+    // the ports needs to be the port inside the container,
     // i.e. 1025 no matter what you use locally
-    'port' => 1025, 
+    'port' => 1025,
     'security' => false,
   ]
 ],
@@ -923,7 +923,7 @@ More in the (link: https://docs.docker.com/engine/reference/builder/ text: Docke
 
 ## Where to go from here
 
-In this recipe, our focus was on giving you a hands-on approach to using Docker as an optional development environment while leaving out most of the technical backgrounds. If you want to dive deeper into all the possibilities containers offer, here are some resources that might prove helpful: 
+In this recipe, our focus was on giving you a hands-on approach to using Docker as an optional development environment while leaving out most of the technical backgrounds. If you want to dive deeper into all the possibilities containers offer, here are some resources that might prove helpful:
 
 - (link: https://www.youtube.com/watch?v=YFl2mCHdv24 text: Learn Docker in 12 Minutes) gives you a very brief overview of what Docker is, great for the big picture in a few minutes.
 - (link: text: Getting started with Docker) is a great introduction to Docker for beginners, while the (link: https://app.pluralsight.com/library/courses/docker-deep-dive-update/table-of-contents text: Docker Deep Dive) by the same author goes deeper and also covers swarm orchestration and enterprise tooling. Both courses require a paid Pluralsight membership, but you can get 200 Minutes free which should be enough to work through the first one.
