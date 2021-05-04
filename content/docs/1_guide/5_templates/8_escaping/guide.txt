@@ -1,0 +1,164 @@
+Title: Escaping content
+
+----
+
+Intro: Not all content you render in your templates or snippets can be trusted. For example, it may come from user-generated content like a registration or comment form. Or you might use content from external sources such as an API or external database. Panel editors can also be a risk, especially in larger organizations.
+
+When you cannot fully trust the content, it is important to escape it correctly before it's sent to the browser to prevent cross-site scripting (XSS) attacks.
+
+----
+
+Text:
+
+<info>
+It is **not** necessary to apply the information from this guide to every single field you output. Keep the level of risk in mind for each case – escaping is important in the scenarios explained above, but not necessary for content from a trusted source.
+</info>
+
+## What is an XSS attack?
+
+(link: https://en.wikipedia.org/wiki/Cross-site_scripting text: Cross-site scripting) (XSS) is a type of security vulnerability that allows attackers to run arbitrary JavaScript in the browsers of other, legitimate users of your site. This attack can be used to extract critical authentication information like session cookies from your users' browsers or to manipulate your site in unexpected ways.
+
+XSS works by injecting code into the HTML output of your site in a place where you didn't expect it when writing the template code. Here's an example of a vulnerable snippet:
+
+```php
+<footer>
+  <p class="copyright">
+    <?= $site->copyright() ?>
+  </p>
+</footer>
+```
+
+Looks harmless, right? But what if the `copyright` field of your `site.txt` contains this:
+
+```kirbycontent "site.txt"
+Title: ...
+
+\----
+
+Copyright: <script>alert('Something malicious')</script>
+```
+
+The HTML output you will get from the snippet is this:
+
+```html
+<footer>
+  <p class="copyright">
+    <script>alert('Something malicious')</script>
+  </p>
+</footer>
+```
+
+Yikes! Every time the page is loaded, every user's browser will now execute the malicious JavaScript – whatever code it contains. Of course it doesn't have to be a simple call to the `alert()` function, it can do everything JavaScript is capable of. And that can be very harmful.
+
+This is just one example of an XSS attack. XSS can also occur with attribute values, strings printed inside legitimate `<script>` blocks etc. Often the attacker needs to be a bit more clever than in our example, but without protection it's always possible to misuse your template or snippet for an XSS attack.
+
+<info>
+Attackers can only make use of such vulnerabilities if they find a way to inject their malicious content into your site. For example, they could be an editor with access to your Kirby Panel. But it could also be as simple as submitting a contact, comment or registration form on your site. Don't underestimate the chances.
+</info>
+
+## How to protect against XSS attacks
+
+There are three common ways to prevent XSS attacks:
+
+1. **Data validation**
+  This involves making 100 % sure that the content you output in your templates and snippets has the exact format you expect and doesn't contain unexpected characters that could be misued. While (link: docs/guide/blueprints/fields#validating-fields text: validating your content fields) can be very useful to make sure your content fits your site and works correctly, it is hard to get right as it's often difficult to make the validator strict enough to block any harmful content. It's also difficult to even anticipate every possible attack.
+2. **Data sanitization**
+  Sanitizing data means removing any unwanted characters from it. Basically it is a stricter form of validation and can be useful in use-cases like comment forms, but it shares its disadvantages with data validation – it's hard to implement it securely.
+3. **Escaping**
+  Escaping means replacing every unsafe character with an escape sequence that tells the browser it should interpret the character as text and not as a special character. When printing content in the HTML body, for example, a harmful character could be escaped with an HTML entity: The `<` character would become `&lt;`. It's important to use the right escaper for each output context, i.e. the place where your content is being output (HTML body, HTML attribute, inside a `<script>` tag, as part of a URL...). Otherwise attackers will be able to circumvent your escaper.
+
+Depending on your use-case, one or more of these strategies might be a good fit. You can combine multiple of them and sometimes you need to – e.g. your validator might not know in which places your content is being output, so you need a context-sensitive escaper on top of your validator. The validator then only checks if the content follows the right structure.
+
+## Escaping data in templates and snippets
+
+### The `esc()` helper and `escape()`/`esc()` field methods
+
+Often the most effective and also easiest solution to prevent XSS on your Kirby site is to use context-sensitive escaping.
+
+For that, we provide the (link: docs/reference/helpers/esc text: `esc()` helper) and the (link: docs/reference/templates/field-methods/escape text: `escape()`/`esc()` field methods).
+
+Let's take our example snippet from above and add escaping to it:
+
+```php
+<footer>
+  <p class="copyright">
+    <?= $site->copyright()->escape() ?>
+  </p>
+</footer>
+```
+
+It's that simple! Now let's see what the output looks like for the malicious content:
+
+```html
+<footer>
+  <p class="copyright">
+    &lt;script&gt;alert('Something malicious')&lt;/script&gt;
+  </p>
+</footer>
+```
+
+Because all special characters in HTML have been escaped, the browser will no longer execute the malicious script but will print the field contents as-is (so the malicious HTML code itself will be displayed without doing any harm).
+
+### Context-sensitive escaping
+
+You might wonder why Kirby doesn't escape everything automatically if it's so simple. As you've read above, escaping always needs to be context-sensitive. You cannot use the same escaping method for HTML text, attributes or URLs. This is why you need to tell Kirby what type of escaping you need. Here are a few examples of different contexts:
+
+```php
+<img alt="<?= $image->alt()->escape('attr') ?>" src="<?= $image->url() ?>" />
+```
+
+```php
+<section style="--columns: <?= $section->columns()->escape('css')">
+...
+</section>
+```
+
+```php
+<script>
+let yourVariable = "<?= $page->jsVariable()->escape('js') ?>";
+
+// ...
+</script>
+```
+
+```php
+<iframe src="https://map.example.com/?lat=<?= $map->lat()->escape('url') ?>&lon=<?= $map->lon()->escape('url') ?>"></iframe>
+```
+
+As you can see, you can pass the context type to the helper or field method and Kirby will automatically escape the content correctly.
+
+<alert>
+Always pass the correct context to the `esc()` helper and field methods, otherwise the escaping won't have an effect and your site will still be vulnerable.
+</alert>
+
+### Escaping KirbyText
+
+As KirbyText is an extension of (glossary: markdown), it also supports raw HTML:
+
+```kirbytext
+## Nice headline
+
+This is a paragraph with **some formatting**.
+
+<script>alert('And here comes something malicious.')</script>
+```
+
+If you can't trust your KirbyText content but do want to allow formatting, you can combine Kirby's escaper with KirbyText:
+
+```php
+<?= $page->escape()->kirbytext() ?>
+```
+
+This will create the following output:
+
+```html
+<h2>Nice headline</h2>
+<p>This is a paragraph with <strong>some formatting</strong>.</p>
+<p>&lt;script&gt;alert(&#039;And here comes something malicious&#039;)&lt;/script&gt;</p>
+```
+
+<warning>
+Make sure to always put `escape()` before `kirbytext()`, otherwise the allowed KirbyText formatting will be escaped as well.
+
+Please note that not all Markdown formatting will survive the escaping, even with the right method order. For example simple Markdown links like `<https://example.com>` and blockquotes like `> This is a quote` will currently break during escaping. This is a limitation in our Markdown parser and we are working on a solution.
+</warning>
