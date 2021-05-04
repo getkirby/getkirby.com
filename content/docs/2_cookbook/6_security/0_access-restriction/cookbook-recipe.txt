@@ -110,11 +110,11 @@ In the login template, create the login form and a container for the error messa
 <form method="post" action="<?= $page->url() ?>">
   <div>
     <label for="email"><?= $page->username()->html() ?></label>
-    <input type="email" id="email" name="email" value="<?= esc(get('email')) ?>">
+    <input type="email" id="email" name="email" value="<?= esc(get('email'), 'attr') ?>">
   </div>
   <div>
     <label for="password"><?= $page->password()->html() ?></label>
-    <input type="password" id="password" name="password" value="<?= esc(get('password')) ?>">
+    <input type="password" id="password" name="password" value="<?= esc(get('password'), 'attr') ?>">
   </div>
   <div>
     <input type="submit" name="login" value="<?= $page->button()->html() ?>">

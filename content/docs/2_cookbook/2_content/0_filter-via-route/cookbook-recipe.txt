@@ -171,7 +171,7 @@ Here we use the `urldecode()`d page slug as our filter value.
             <?= $article->text()->kt() ?>
             <ul>
             <?php foreach ($page->tags()->split(',') as $tag) : ?>
-                <li><a href="<?= page('blog')->url() . '/tag/' . urlencode($tag) ?>"><?= $tag ?></a></li>
+                <li><a href="<?= page('blog')->url() . '/tag/' . esc($tag, 'url') ?>"><?= $tag ?></a></li>
             <?php endforeach ?>
             </ul>
         </article>
