@@ -675,7 +675,7 @@ Let's start with a single service, the web server, and just rebuild what we have
 ```yaml "/docker-example-4/docker-compose.yml"
 version: '3'
 services:
-  web server:
+  webserver:
     build: .
     image: docker-starterkit
     container_name: webserver
@@ -715,7 +715,7 @@ This will output the contents of the `docker-compose.yml` file with the expanded
 
 ```yaml
 services:
-  web server:
+  webserver:
     build:
       context: /Users/myname/public_html/kirby-docker-examples/docker-example-4
     container_name: kirbyserver
@@ -777,7 +777,7 @@ MailHog is a tool that intercepts outgoing mail, see our (link: docs/cookbook/fo
 ```yaml
 version: '3'
 services:
-  web server:
+  webserver:
     build: .
     image: docker-starterkit
     container_name: kirbyserver
