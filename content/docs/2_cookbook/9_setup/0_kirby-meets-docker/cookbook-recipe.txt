@@ -703,7 +703,7 @@ services:
 
 A `docker-compose.yml` file always starts with the Docker Compose version number. The current minor version at the time of writing this recipe is 3.8.
 
-After that, the next top level keyword is `services`, which is followed by an indented list of named services. The names of these services are arbitrary, but of course it makes sense to give them names that indicate their purpose. In the file above, we currently have only one service called `web server`.
+After that, the next top level keyword is `services`, which is followed by an indented list of named services. The names of these services are arbitrary, but of course it makes sense to give them names that indicate their purpose. In the file above, we currently have only one service called `webserver`.
 
 Each service container can either be created from an existing image using the `image` keyword, or from a Dockerfile using the `build` keyword, as in our example. The dot indicates that we want to use the Dockerfile contained in the current path. Here the additional `image` keyword defines the name of our image (`docker-starterkit`).
 
