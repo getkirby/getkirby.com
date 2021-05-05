@@ -250,7 +250,6 @@ This will output a lot of information about the container, the part that interes
 ```bash
 "Env": [
       "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-      "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c", llllllllllllllllllllllllllllllllllllll
       "PHP_INI_DIR=/usr/local/etc/php",
       "PHP_EXTRA_CONFIGURE_ARGS=--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi",
       "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
@@ -493,6 +492,7 @@ git clone https://github.com/getkirby/starterkit.git
 
 If you don't have Git or don't want to use it, (link: https://github.com/getkirby/starterkit/archive/main.zip text: download a Starterkit) and put the unzipped folder into the newly created `docker-example-3` folder. Rename the folder with the Starterkit from `starterkit-main` to `starterkit`.
 
+Then copy the `default.conf` file from the last example into the new folder.
 ### Dockerfile
 
 Next to the `starterkit` folder, create a new Dockerfile. Our Dockerfile looks slightly different than before. This time, we don't need to install Git in the container, and we remove the steps that cloned the Starterkit and the commands that changed the files and directories ownership. With that done, our Dockerfile now looks like this:
@@ -536,9 +536,8 @@ RUN rm /var/www/html/*
 # Activate Apache modules headers & rewrite
 RUN a2enmod headers rewrite
 
-# Change web server's IDs to match local user, replace with your local user and group IDs
-# On Mac, try using these values for this example.
-RUN usermod --uid 1001 www-data && groupmod --gid 1001 www-data
+# Change web server's user id to match local user, replace with your local user id
+RUN usermod --uid 1001 www-data
 
 # Tell container to listen to port 80 at runtime
 EXPOSE 80
@@ -547,27 +546,31 @@ EXPOSE 80
 CMD [ "/usr/sbin/apache2ctl", "-DFOREGROUND" ]
 ```
 
-
 Apart from the stuff that we removed, there is one new line which needs an explanation.
 
 We have seen in our first example above that the Panel didn't run in the container when the web server user didn't have the correct rights to write files to the filesystem in the container.
 
 In this example, this gets even worse, because we will mount our local files created with our local user into the container. But we still want the web server user in the container (`www-data`) to be able to change the files we create or modify in our host directory as local user, and vice versa we want to be able to modify files that the web server user in the container creates.
 
-There are several ways to tackle this problem, the easiest of which is probably to run the web server in the container with the same numerical userid (UID) and groupid (GID) as our local user. For this, we need to find out the numerical ids of our local user and modify the web server user in the image accordingly.
+There are several ways to tackle this problem, the easiest of which is probably to run the web server in the container with the same numerical userid (UID) as our local user. For this, we need to find out the numerical id of our local user and modify the web server user in the image accordingly.
 
-To get the UID of our local user we run the command `id -u` in our shell and to get the GID `id -g` will do the job. On my Ubuntu computer I will get `1001` for the UID and `1001` for the GID and these values will go into the command:
+To get the UID of our local user we run the command `id -u` in our shell. On my Ubuntu computer I will get `1001` for the UID and this value will go into the command:
 
 ```Dockerfile
 # Change web server's IDs to match local user, replace with your local user and group IDs
-RUN usermod --uid 1001 www-data && groupmod --gid 1001 www-data
+RUN usermod --uid 1001 www-data
 ```
 
-This will change the web server's UID and GID to match those of our local user.
+This will change the web server's UID to match that of our local user.
 
-<warning>
-On MacOS, using the actual UID and GID of the host user might not work if these values are already in use in the container. In this case, use 1001/1001 or some other values for this section and the following. Since these rights are not important on a Mac but only on Linux, it doesn't really matter.
-</warning>
+At this point, your folder structure should look like this:
+
+```filesystem
+docker-example-3/
+  starterkit/
+  default.conf
+  Dockerfile
+```
 
 Now it is time to build the image with
 
@@ -586,14 +589,14 @@ docker run -d --name mycontainer -p 80:80 \
 
 The `source` and `destination` parameters need an absolute pathname, and since the `starterkit` directory is in our working directory, we can use the output of the command `pwd` here.
 
-#### Parametrizing the local UID and GID
+#### Parametrizing the local UID
 
-Before we continue to the last example, let's reconsider the command in the Dockerfile which we used to change the web server's UID and GID. Remember that this change goes into the image, and the image is read-only. In most cases, you will want to share your carefully created image with others who want to work with it on their computers. Chances are they will run into trouble because their UID and GID is different from yours.
+Before we continue to the last example, let's reconsider the command in the Dockerfile which we used to change the web server's UID. Remember that this change goes into the image, and the image is read-only. In most cases, you will want to share your carefully created image with others who want to work with it on their computers. Chances are they will run into trouble because their UID is different from yours.
 
-Therefore, we should move this command out of the build process into the process of starting a container. And we surely should not hard-code the values for UID and GID. Again, we have multiple options to accomplish this. The one we want to use here is an `ENTRYPOINT` command in our Dockerfile. So lets exchange the line
+Therefore, we should move this command out of the build process into the process of starting a container. And we surely should not hard-code the values for the UID. Again, we have multiple options to accomplish this. The one we want to use here is an `ENTRYPOINT` command in our Dockerfile. So lets exchange the line
 
 ```Dockerfile
-RUN usermod --uid 1001 www-data && groupmod --gid 1001 www-data
+RUN usermod --uid 1001 www-data
 ```
 
 with
@@ -617,7 +620,6 @@ Our `entrypoint.sh` file is a little executable script which we have to create n
 set -e -u
 
 [[ $USERID ]] && usermod --uid "${USERID}" www-data
-[[ $GROUPID ]] && groupmod --gid "${GROUPID}" www-data
 
 exec "$@"
 ```
@@ -628,21 +630,31 @@ When you have created this file, head back to your terminal and make it executab
 chmod +x entrypoint.sh
 ```
 
-What will this script do? It will change the UID and GID of the `www-data` user in the container to the values of the host user (our local user) by picking up the environment variables that we pass to the container upon start-up.
+What will this script do? It will change the UID of the `www-data` user in the container to the value of the host user (our local user) by picking up the environment variable that we pass to the container upon start-up.
 
-Passing environment variables from the host to the container can also be done in various ways, here we will utilize a file which contains the variables and their values. To accomplish this, we can use the same commands as above to find out the values for our local user, but this time we will create a file which contains these values as environment variables in `var=value` format:
+Passing environment variables from the host to the container can also be done in various ways, here we will utilize a file which contains the variable and its value. To accomplish this, we can use the same commands as above to find out the value for our local user, but this time we will create a file which contains this value as environment variable in `var=value` format:
 
 In your terminal, `cd` into the `docker-example-3` folder and type the following command:
 
 ```bash
-echo -e "USERID=$(id -u)\nGROUPID=$(id -g)" > id.env
+echo -e "USERID=$(id -u)" > id.env
 ```
 
-This command will get both IDs with the `id -u` and `id -g` commands we already used above, and output them into a file. The resulting `id.env` file will look similar to this, only with your UID and GID, which might differ from mine.
+This command will get the ID with the `id -u` command we already used above, and output it into a file. The resulting `id.env` file will look similar to this, only with your UID, which might differ from mine.
 
 ```
 USERID=1001
-GROUPID=1001
+```
+
+At this point, your folder structure should look like this:
+
+```filesystem
+docker-example-3/
+  starterkit/
+  default.conf
+  Dockerfile
+  entrypoint.sh
+  id.env
 ```
 
 After stopping and removing the previous container we build a new image, start a new container and see what happens:
@@ -651,7 +663,7 @@ After stopping and removing the previous container we build a new image, start a
 docker build -t docker-starterkit .
 docker run -d --name mycontainer -p 80:80 \
   --mount type=bind,source=$(pwd)/starterkit,destination=/var/www/html \
-  --env-file id.env starterkit
+  --env-file id.env docker-starterkit
 ```
 
 At this point, you can start making changes locally, view them in the browser and they will of course still be there in your filesystem even after you remove the container again.
@@ -717,17 +729,16 @@ This will output the contents of the `docker-compose.yml` file with the expanded
 services:
   webserver:
     build:
-      context: /Users/myname/public_html/kirby-docker-examples/docker-example-4
-    container_name: kirbyserver
+      context: /Users/sonja/dockerstuff/docker-example-3
+    container_name: webserver
     environment:
-      GROUPID: '20'
-      USERID: '501'
-    image: starterkit
+      USERID: '1001'
+    image: docker-starterkit
     ports:
     - published: 80
       target: 80
     volumes:
-    - /Users/myname/public_html/kirby-docker-examples/docker-example-4/starterkit:/var/www/html:rw
+    - /Users/sonja/dockerstuff/docker-example-3/starterkit:/var/www/html:rw
 version: '3'
 ```
 
