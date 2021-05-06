@@ -27,11 +27,11 @@ class PluginPage extends Page
         if (Str::contains($url, 'github')) {
             return Str::replace($url, 'github.com', 'api.github.com/repos') . '/zipball';
         }
-        
+
         if (Str::contains($url, 'bitbucket')) {
             return $url . '/get/' . $branch . '.zip';
         }
-        
+
         if (Str::contains($url, 'gitlab')) {
             $repo = basename($url);
             return $url . '/-/archive/' . $branch . '/' . $repo . '-' . $branch . '.zip';
@@ -87,7 +87,10 @@ class PluginPage extends Page
 
             $path = Url::path((string)$repo);
             $response = Remote::get('https://api.github.com/repos/' . $path . '/releases/latest', [
-                'headers' => ['User-Agent' => 'Kirby']
+                'headers' => [
+                    'User-Agent'    => 'Kirby',
+                    'Authorization' => 'token ' . getenv('GITHUB_ACCESS_TOKEN'),
+                ]
             ]);
 
             $version = $response->json()['tag_name'] ?? false;
