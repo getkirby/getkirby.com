@@ -105,7 +105,7 @@ Create a new folder somewhere in your file system, e.g. `~/docker-example-1` (wh
 ```Dockerfile "~/docker-example-1/Dockerfile"
 FROM webdevops/php-apache-dev:8.0
 RUN apt-get update && apt-get install -y git
-RUN git clone https://github.com/getkirby/starterkit.git /app
+RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /app
 ```
 
 A Dockerfile is a simple text file with instructions that tell Docker which steps to perform to create a Docker image. In most cases you will start from an existing Docker image (i.e. some Linux distribution). This is done using the `FROM` keyword that always goes on the first line of the Dockerfile. In our example:
@@ -131,7 +131,7 @@ The tools (and thus the commands) used to install packages differ in different L
 Finally, we clone the Starterkit into the `/app` folder, which serves as the web root of the base image we use for our little adventure with:
 
 ```Dockerfile
-RUN git clone https://github.com/getkirby/starterkit.git /app
+RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /app
 ```
 
 ### Build image
@@ -215,7 +215,7 @@ Let's change the Dockerfile a bit by running one more command that changes the f
 ```Docker "~/docker-example-1/Dockerfile"
 FROM webdevops/php-apache-dev:8.0
 RUN apt-get update && apt-get install -y git
-RUN git clone https://github.com/getkirby/starterkit.git /app
+RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /app
 RUN chown -R application:application /app/
 ```
 
@@ -402,7 +402,7 @@ COPY default.conf /etc/apache2/sites-available/000-default.conf
 RUN rm /var/www/html/*
 
 # Clone the Kirby Starterkit
-RUN git clone https://github.com/getkirby/starterkit.git /var/www/html
+RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /var/www/html
 
 # Fix files and directories ownership
 RUN chown -R www-data:www-data /var/www/html/
