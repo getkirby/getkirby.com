@@ -5,24 +5,6 @@ function ariaCurrent(bool $condition, $type = true, string $prefix = ' ')
     return $condition ? $prefix . attr(['aria-current' => $type]) : null;
 }
 
-function banner()
-{
-    // shows banner only startDate/endDate is empty or current date is between in
-    if (option('banner.enabled') === true) {
-        foreach (option('banner.types', []) as $banner) {
-            if (
-                (empty($banner['startDate']) === true || V::date($banner['startDate'], '<=', date('Y-m-d'))) &&
-                (empty($banner['endDate']) === true || V::date($banner['endDate'], '>=', date('Y-m-d')))
-            ) {
-                return $banner;
-            }
-        }
-    }
-
-    return null;
-}
-
-
 function icon($name)
 {
     return svg('assets/icons/' . $name . '.svg');
