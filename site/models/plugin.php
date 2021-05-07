@@ -3,7 +3,6 @@
 use Kirby\Data\Data;
 use Kirby\Cms\File;
 use Kirby\Cms\Nest;
-use Kirby\Cache\FileCache;
 use Kirby\Toolkit\Str;
 
 class PluginPage extends Page
@@ -95,10 +94,19 @@ class PluginPage extends Page
 
             $version = $response->json()['tag_name'] ?? false;
 
-            // GitHub returns 404 if no releases are found
-            // keeps the cache of a non-release repository longer (one day) for performance
-            $this->cache()->set($cacheId, $version, $response->code() === 404 ? 1440 : 180);
+            // GitHub returns following HTTP response status codes:
+            // 200: releases found
+            // 404: no releases are found
+            if ($response->code() === 200) {
+                // caches for 3 hours if repository releases exists
+                $this->cache()->set($cacheId, $version, 180);
 
+                // remove plugins representation cache
+                $this->kirby()->cache('pages')->remove('plugins.json');
+            } else {
+                // keeps the cache of a non-release repository longer (one day) for performance
+                $this->cache()->set($cacheId, $version, 1440);
+            }
         }
 
         return $version;
