@@ -142,7 +142,7 @@ From this Dockerfile we can now build our own image. In the terminal, `cd` into 
 docker build -t docker-starterkit .
 ```
 
-This command builds an image from the Dockerfile in the current path with the repo name `starterkit`. Don't forget the dot at the end, it provides the context where the code (in this case only the Dockerfile itself) is located, i.e. the current directory.
+This command builds an image from the Dockerfile in the current path with the repo name `docker-starterkit`. Don't forget the dot at the end, it provides the context where the code (in this case only the Dockerfile itself) is located, i.e. the current directory.
 
 When we run this command, Docker will download the specified image `webdevops/php-apache-dev:8.0` from Docker Hub if it doesn't exist locally yet. In future iterations the local copy of the image will be used.
 
@@ -152,7 +152,7 @@ Let's learn another command. With…
 docker images
 ```
 
-…we get a list of all local images. You should get an output similar to this with the new `starterkit` image:
+…we get a list of all local images. You should get an output similar to this with the new `docker-starterkit` image:
 
 ```bash
 REPOSITORY         TAG    IMAGE ID       CREATED          SIZE
