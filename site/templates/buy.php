@@ -11,7 +11,7 @@
 
       <?php if ($banner = banner()): ?>
       <div>
-        <p class="mb-6"><?= $banner['text'] ?></p>
+        <p class="mb-6"><?= $banner->text() ?></p>
         <del class="invisible sale h6 color-gray-700">€99</del>
       </div>
       <?php endif ?>
