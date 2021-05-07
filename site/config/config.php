@@ -2,7 +2,7 @@
 
 return [
     'api'      => false,
-    'banner'   => require __DIR__ . '/banner.php',
+    'banners'  => require __DIR__ . '/banners.php',
     'debug'    => true,
     'github'   => 'https://github.com/getkirby',
     'features' => require __DIR__ . '/features.php',
