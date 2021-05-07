@@ -97,7 +97,7 @@ class PluginPage extends Page
 
             // GitHub returns 404 if no releases are found
             // keeps the cache of a non-release repository longer (one day) for performance
-            $this->cache()->set($cacheId, $version, $response->code() === 404 ? 1440 : 60);
+            $this->cache()->set($cacheId, $version, $response->code() === 404 ? 1440 : 180);
 
         }
 
