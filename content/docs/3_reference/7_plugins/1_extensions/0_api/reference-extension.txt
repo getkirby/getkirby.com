@@ -15,6 +15,8 @@ Kirby's REST API can be customized in various ways via the `api` extension.
 If you want to provide your own API endpoints for your plugin and make use of our authentication and other API features, you can define them as the `routes` option of the `api` extension. Endpoint routes are defined as an array of key/value pairs. You have to define at least a pattern and an action.
 
 ```php "/site/plugins/api/index.php"
+<?php
+
 Kirby::plugin('my/api', [
   'api' => [
     'routes' => [
