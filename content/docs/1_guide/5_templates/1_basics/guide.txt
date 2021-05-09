@@ -245,6 +245,10 @@ $kirby->response()->type('txt');
 $kirby->response()->type('text/plain');
 ```
 
+<info>
+The `$kirby->response()` object provides several other methods to customize the response (e.g. caching, HTTP headers and the HTTP status code). (link: docs/reference/objects/cms/responder text: Learn more in the reference ›)
+</info>
+
 ## More information
 
 - (link: docs/cookbook/templating/custom-post-types text: Custom post types)
