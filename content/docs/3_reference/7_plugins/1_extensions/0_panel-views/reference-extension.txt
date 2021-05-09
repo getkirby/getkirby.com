@@ -65,8 +65,35 @@ Your plugin will be available at `https://your-site.com/panel/plugins/todos`.
 |--|--|--|
 | `component` | <code></code> | Vue component definition for the view |
 | `icon` | `page` | Set icon to use in UI. Choose from (link: docs/reference/panel/icons text: these). |
-| `menu` | `true` | Whether to show custom view in Panel menu |
+| `menu` | `true` | Whether to show custom view in Panel menu, see below |
 | `label` | <code></code> | Label for menu item in Panel menu |
+
+<since v="3.5.5">
+### Dynamic control over the menu item
+
+The `menu` option can have the values `true` (always active), `false` (no menu item) or `"disabled"` (disabled menu item, e.g. if the user doesn't have enough permissions).
+
+You can also define the option as a function that receives the `app` object for dynamic control:
+
+```js "/site/plugins/todos/index.js"
+panel.plugin("yourname/todos", {
+  views: {
+    todos: {
+      label: "Todos",
+      icon: "list-bullet",
+      menu(app) {
+        if (app.$permissions["yourname.todos"].access !== true) {
+          return "disabled";
+        }
+
+        return true;
+      },
+      component: ...
+    }
+  }
+});
+```
+</since>
 
 ## CSS styles
 

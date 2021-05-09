@@ -74,5 +74,5 @@ For security, please DO NOT forward this email.
 ```
 
 <info>
-Our default templates are translated into our Panel languages. So if you just want the text in your native language, you can (link: docs/reference/system/options/panel#default-panel-language text: switch the default Panel language) – which will then be used for the login UI and the email templates.
+Our default templates are translated into our Panel languages. Kirby will automatically pick the best language for the email text (the configured user language, the (link: docs/reference/system/options/panel#default-panel-language text: default `panel.language`) or the default site language of a multilang site). The `panel.language` option is also used for the login UI.
 </info>
