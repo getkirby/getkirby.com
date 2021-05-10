@@ -81,7 +81,7 @@ class PluginPage extends Page
         if ($version === null) {
 
             if ($onlyIfCached === true) {
-                return false;
+                return null;
             }
 
             $path = Url::path((string)$repo);
