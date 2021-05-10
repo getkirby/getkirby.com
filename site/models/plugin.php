@@ -85,12 +85,12 @@ class PluginPage extends Page
             }
 
             $path = Url::path((string)$repo);
-            $response = Remote::get('https://api.github.com/repos/' . $path . '/releases/latest', [
-                'headers' => [
-                    'User-Agent'    => 'Kirby',
-                    'Authorization' => 'token ' . getenv('GITHUB_ACCESS_TOKEN'),
-                ]
-            ]);
+            $headers = ['User-Agent' => 'Kirby'];
+            if ($key = option('github.key')) {
+                $headers['Authorization'] = 'token ' . $key;
+            }
+
+            $response = Remote::get('https://api.github.com/repos/' . $path . '/releases/latest', compact('headers'));
 
             $version = $response->json()['tag_name'] ?? false;
 

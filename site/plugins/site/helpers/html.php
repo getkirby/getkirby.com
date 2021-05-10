@@ -86,7 +86,7 @@ function json(array $data, bool $pretty = true) {
 function version(string $version, string $format = '%s'): string
 {
     return Html::a(
-        option('github') . '/kirby/releases/tag/' . $version,
+        option('github.url') . '/kirby/releases/tag/' . $version,
         sprintf($format, $version)
     );
 }
