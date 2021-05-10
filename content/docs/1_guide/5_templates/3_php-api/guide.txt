@@ -48,7 +48,7 @@ $project->update(['year' => 2014]);
 
 // $project has the new value after reassigning
 $project = page('project/project-a');
-$poject  = $project->update(['year' => 2014]);
+$project = $project->update(['year' => 2014]);
 ```
 
 Some methods can return both, `$this` (the same instance you were calling) and a cloned object (`static` or `self`). In the reference, this case is marked with "$this|static" as the return value in the doc block for the method. `$this` is returned whenever the object wasn't changed (e.g. values remained the same), while a cloned object is returned when the data changed - to keep the original object immutable. Most times, this difference will not affect your code if you always store the return value in a variable and continue working with that variable as explained above.
