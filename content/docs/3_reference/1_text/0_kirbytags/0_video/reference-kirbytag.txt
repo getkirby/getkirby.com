@@ -2,7 +2,7 @@ Title: video
 
 ----
 
-Intro: Embeds a YouTube or Vimeo video by URL
+Intro: Embeds a video from YouTube, Vimeo or a local file by URL or filename
 
 ----
 
