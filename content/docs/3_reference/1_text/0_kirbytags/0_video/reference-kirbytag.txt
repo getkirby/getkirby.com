@@ -49,6 +49,55 @@ Embedded Vimeo video by video URL:
 (\video: http://vimeo.com/3432886)
 ```
 
+<since v="3.5.5">
+### Local and remote video
+
+You can now embed a video on local or remote server.
+
+```kirbytext
+# local
+(\video: local-video.mp4)
+
+# remote
+(\video: https://www.getkirby.com/sample-video.mp4)
+```
+
+<info>
+  Video will be muted automatically if `autoplay` is enabled and `muted` is not defined. To start autoplay with sound, use it as in the following example:
+
+  ```kirbytext
+  (\video: local-video.mp4 autoplay: true muted: false)
+  ```
+</info>
+
+### New Attributes
+
+The video tag now supports some attributes of the HTML `<video>` element: `autoplay`, `controls`, `loop`, `muted`, `poster`, `preload`
+
+```kirbytext
+# example 1
+(\video: local-video.mp4  autoplay: true)
+
+# example 2
+(\video: local-video.mp4 controls: false autoplay: true loop: true)
+
+# example 3
+(\video: local-video.mp4 poster: cover.jpg)
+
+# example 4
+(\video: local-video.mp4 preload: auto)
+
+# example 5
+(\video: https://www.getkirby.com/sample-video.mp4 muted: true controls: false autoplay: true)
+
+# example 6
+(\video: local-video.mp4 poster: https://www.getkirby.com/sample-cover.jpg)
+```
+
+<info>New attributes are not supported by video providers such as YouTube and Vimeo.</info>
+
+</since>
+
 ### Caption
 
 ```kirbytext
