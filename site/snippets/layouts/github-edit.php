@@ -5,6 +5,6 @@
   <a href="/styleguide">our styleguide &rarr;</a>
 </p>
 
-<a href="<?= option('github') ?>/getkirby.com/edit/main/content/<?= $page->diruri() ?>/<?= $page->intendedTemplate() ?>.txt" class="btn btn--outlined mb-3">
+<a href="<?= option('github.url') ?>/getkirby.com/edit/main/content/<?= $page->diruri() ?>/<?= $page->intendedTemplate() ?>.txt" class="btn btn--outlined mb-3">
   <?= icon('github') ?> Edit this page
 </a>

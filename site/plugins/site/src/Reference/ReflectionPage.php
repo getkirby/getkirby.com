@@ -185,7 +185,7 @@ abstract class ReflectionPage extends Page
     public function onGitHub(string $path = ''): Field
     {
         if ($line = $this->line()) {
-            $url  = option('github') . '/kirby/tree/' . App::version();
+            $url  = option('github.url') . '/kirby/tree/' . App::version();
             $url .= '/' . $path;
             $url .= '#L' . $line;
         }
