@@ -122,8 +122,8 @@ icon: box
 preview: box
 wysiwyg: true
 fields:
-  type:
-    label: Boxtype
+  boxType:
+    label: Box Type
     type: radio
     default: text
     options:
@@ -154,13 +154,13 @@ panel.plugin("cookbook/block-factory", {
   blocks: {
     box: {
       template: `
-        <div :class="'k-block-type-box box-' + content.type" @dblclick="open">
+        <div :class="'k-block-type-box box-' + content.boxtype" @dblclick="open">
             <div v-if="content.text" v-html="content.text"></div>
             <div v-else>No content yet</div>
             <k-icon
-              v-if="content.type !== 'neutral'"
+              v-if="content.boxtype !== 'neutral'"
               class="k-block-type-box-icon"
-              :type="content.type"
+              :type="content.boxtype"
             />
           </div>
         </div>
@@ -311,8 +311,8 @@ panel.plugin("cookbook/block-factory", {
 name: field.blocks.faq.name
 icon: question
 fields:
-  headline:
-    label: Headline
+  heading:
+    label: Heading
     type: writer
     inline: true
     marks: false
@@ -516,7 +516,7 @@ panel.plugin("cookbook/block-factory", {
           return this.content.faq || {};
         },
         headingField() {
-          return this.field("heading");
+          return this.field("heading") || '';
         }
       },
       methods: {
@@ -583,9 +583,10 @@ Cards are nice in multi-column layouts, and they can be "hand-made" or created f
 
 ```yaml "/site/plugins/block-factory/blueprints/blocks/card.yml"
 name: field.blocks.card.name
-icon: card
+icon: image
 fields:
   cardType:
+    label: Card Type
     type: radio
     default: page
     options:
@@ -594,7 +595,7 @@ fields:
   page:
     type: pages
     max: 1
-    query: page('photography).children.listed
+    query: kirby.page('photography').children.listed
     when:
       cardType: page
   link:
@@ -767,6 +768,7 @@ fields:
     marks: false
   jobPosition:
     type: writer
+    label: Job Position
     inline: true
     marks: false
   company:
