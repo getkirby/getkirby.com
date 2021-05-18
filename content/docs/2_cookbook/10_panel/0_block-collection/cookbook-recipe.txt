@@ -184,7 +184,7 @@ panel.plugin("cookbook/block-factory", {
         }
       },
       template: `
-        <div :class="'k-block-type-box box-' + content.type">
+        <div :class="'k-block-type-box box-' + content.boxtype">
           <k-writer
             class="label"
             ref="textbox"
@@ -196,7 +196,7 @@ panel.plugin("cookbook/block-factory", {
           <k-icon
             v-if="content.type !== 'neutral'"
             class="k-block-type-box-icon"
-            :type="content.type"
+            :type="content.boxtype"
           />
         </div>
       `
