@@ -1,0 +1,13 @@
+Title: Versions
+
+----
+
+Repository: https://github.com/lukasbestle/kirby-versions
+
+----
+
+Category: panel
+
+----
+
+Description: Keep track of content changes and switch between different versions from the Panel
