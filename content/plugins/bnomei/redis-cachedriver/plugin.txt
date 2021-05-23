@@ -1,0 +1,13 @@
+Title: Redis Cache Driver
+
+----
+
+Repository: https://github.com/bnomei/kirby3-redis-cachedriver
+
+----
+
+Category: performance
+
+----
+
+Description: Redis based Cache-Driver and Content-File Cache
