@@ -186,7 +186,7 @@ abstract class ReflectionPage extends Page
     {
         
         if (empty($path) === false) {
-            $url  = option('github') . '/kirby/tree/' . App::version();
+            $url  = option('github.url') . '/kirby/tree/' . App::version();
             $url .= '/' . $path;
 
             if ($line = $this->line()) {
