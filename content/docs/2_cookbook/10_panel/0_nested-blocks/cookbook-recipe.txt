@@ -1,0 +1,251 @@
+Title: Nested blocks
+
+----
+
+Published: 2020-05-25
+
+----
+
+Description: This is an example of how to build a nested block including live panel preview and output snippets for the website.
+
+----
+
+Authors: - authors/christian-fickinger
+
+----
+
+Text:
+
+This is an example of how to build a nested block including live panel preview and output snippets for the website. In our example we are creating a FAQ block, which allows us to add nested question/answer blocks within it. The block is built as a standalone plugin and can be extended and modified to your own needs. The example is based on a blank kirby installation (v.3.5+) and everything is explained step by step.
+
+(image: nested-blocks.jpg)
+
+
+##Preparation
+
+First we prepare our Kirby config file to enable custom blocks. We keep the Kirby default blocks grouped and separate our new custom blocks for a better overview.
+
+```php "/site/config/config.php"
+return [
+  'blocks' => [
+    'fieldsets' => [
+      'custom' => [
+        'label' => 'Custom blocks',
+        'type' => 'group',
+        'fieldsets' => [
+          'faq'
+        ]
+      ],
+      'kirby' => [
+        'label' => 'Kirby blocks',
+        'type' => 'group',
+        'fieldsets' => [
+          'heading',
+          'text',
+          'list',
+          'quote',
+          'image',
+          'video',
+          'code',
+          'markdown'
+        ]
+      ]
+    ]
+  ]
+];
+```
+
+##Blueprints
+
+Now let's create the blueprint for the FAQ block itself and the blueprint for the nested block with a question and answer field.
+
+<info>
+The name of the block (`faq` in our example) must be unique and must not already be used by Kirby (e.g. `heading`, `text`, etc.). If the name is already in use, you can simply add an prefix or suffix to it (e.g. `my_custom_fag`).
+</info>
+
+###FAQ blueprint
+
+The first blueprint defines our FAQ block. Beside our new nested block we use an additional `text` field and a `writer` field in our example.
+
+```yaml "/site/plugins/faq/blueprints/index.yml"
+name: FAQ
+icon: star
+fields:
+  headline:
+    type: text
+  text:
+    type: writer
+  blocks:
+    type: blocks
+    fieldsets:
+      - faq_item
+```
+
+###Question/answer blueprint (nested)
+
+The second blueprint defines the nested block with the `question` and the `answer` field. Hereafter we call this block `faq_item`.
+
+```yaml "/site/plugins/faq/blueprints/item.yml"
+name: Question / Answer
+icon: box
+fields:
+  question:
+    type: text
+  answer:
+    type: writer
+    inline: true
+```
+
+##Output
+
+Now we build the output snippets for the website. We need a snippet for the `faq` block and a snippet for the `faq_item` block.
+
+###Default template
+
+For completeness, we also show the `default` template here, which can be used to insert our newly created `faq` block.
+
+```php "/site/templates/default.php"
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+    <h1><?= $page->title() ?></h1>
+    <?= $page->blocks()->toBlocks(); ?>
+</body>
+</html>
+```
+
+###FAQ snippet
+
+The first output snippet is for the FAQ block. We show `headline` and `text` of this block as usual and we call the nested block(s) as follows.
+
+```php "/site/plugins/faq/snippets/index.php"
+<div class="my-faq-block">
+    <h2><?= $block->content()->headline()->html() ?></h2>
+    <p><?= $block->content()->text() ?></p>
+    <dl>
+    <?
+  foreach ($block->content()->blocks()->toBlocks() as $nested_block):
+    snippet('blocks/' . $nested_block->type(), [
+      'block' => $nested_block,
+    ]);
+  endforeach;
+    ?>
+    </dl>
+</div>
+```
+
+###Question/answer snippet
+
+The second snippet defines the output of the nested question/answer block.
+
+```php "/site/plugins/faq/snippets/item.php"
+<dt><?= $block->question() ?></dt>
+<dd><?= $block->answer() ?></dd>
+```
+
+##The plugin
+
+Now let's create the plugin itself. The plugin needs only 2 files to work: `index.php` and `index.js`. An optional file `index.css` allows individual stylesheets for the preview.
+
+###index.php
+
+The php file is to register our blueprints and output snippets, respectively for the FAQ block (`faq`) and the question/answer block (`faq_item`).
+
+```php "/site/plugins/faq/index.php"
+<?
+Kirby::plugin('your-project/faq-block', [
+
+    'blueprints' => [
+        'blocks/faq'      => __DIR__ . '/blueprints/index.yml',
+        'blocks/faq_item' => __DIR__ . '/blueprints/item.yml'
+    ],
+
+    'snippets' => [
+        'blocks/faq'      => __DIR__ . '/snippets/index.php',
+        'blocks/faq_item' => __DIR__ . '/snippets/item.php'
+    ]
+]);
+```
+
+###index.js
+
+The js file handles the preview inside Kirby. We define a template for `faq` and `faq_item`.
+
+```php "/site/plugins/faq/index.js"
+panel.plugin('your-project/faq-block', {
+    blocks: {
+        faq: {
+            template:
+                `<div @dblclick="open" class="faq">
+
+                    <h2>{{ content.headline }}</h2>
+
+                    <div v-html="content.text"></div>
+
+                    <dl v-for="item in content.blocks">
+                        <dt v-html="item.content.question"></dt>
+                        <dd v-html="item.content.answer"></dd>
+                    </dl>
+                </div>`
+        },
+
+        faq_item: {
+            template:
+                `<div @dblclick="open">
+                    <strong contenteditable="true" @blur="update({ question: $event.target.innerText });">{{content.question}}</strong>
+                    <div v-html="content.answer" contenteditable="true" @blur="update({ answer: $event.target.innerText });"></div>
+                </div>`
+        }
+    }
+});
+```
+
+###index.css
+
+The .css file is optional and can be used to style the preview for the block (and the nested blocks if needed).
+
+```css "/site/plugins/faq/index.css"
+/* This is just an example
+   Add your individual css code here */
+
+div.faq {
+    padding: 1.5rem;
+    background: #fef3c7;
+}
+div.faq h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+div.faq h2 + div {
+    color: #da7c0d;
+}
+div.faq dl {
+    padding: 20px 0 0;
+}
+div.faq dl dt {
+    font-weight: bold;
+}
+div.faq dl dd {
+    font-style: italic;
+}
+```
+
+##Summary
+
+**That's it!** Now you have a fully functional example of how nested blocks are working. Add your own fields and styles to your block as you like.
+
+The following files are used in our example:
+```filesystem "/site/plugins/faq"
+blueprints/
+  index.yml
+  item.yml
+snippets/
+  index.php
+  item.php
+index.css
+index.js
+index.php
+```
+
+Feel free to download all needed files here: [Nested blocks example](https://kirby.christianfickinger.de/nested-block-example.zip).
