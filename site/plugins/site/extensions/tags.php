@@ -82,7 +82,9 @@ $tags['properties'] = [
     'attr' => [
         'class',
         'title',
-        'intro'
+        'intro',
+        'rows',
+        'additional'
     ],
     'html' => function ($tag) {
         $name = $tag->value ?? '$props';
@@ -93,11 +95,18 @@ $tags['properties'] = [
             $page = $tag->parent();
         }
 
+        $rows = $this->attr('rows') ?? $page->properties();
+
+        if ($additional = $tag->attr('additional')) {
+            $rows = array_merge($rows, $additional);
+            array_multisort(array_column($rows, 'name'), SORT_ASC, $rows);
+        }
+
         if ($page) {
             return snippet('templates/reference/entry/parameters', [
                 'title'    => $tag->title ?? false,
                 'intro'    => $tag->intro ?? false,
-                'rows'     => $page->properties(),
+                'rows'     => $rows,
                 'defaults' => false
             ], true);
         }

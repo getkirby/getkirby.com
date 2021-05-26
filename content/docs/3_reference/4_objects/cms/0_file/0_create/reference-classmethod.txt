@@ -2,11 +2,11 @@ Auth: files.create
 
 ----
 
-Properties: $props
-
-----
-
 Text:
+
+## `$props` parameter
+
+(docs: props/file-create)
 
 ## Example
 
