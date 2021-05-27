@@ -95,7 +95,7 @@ $tags['properties'] = [
             $page = $tag->parent();
         }
 
-        $rows = $this->attr('rows') ?? $page->properties();
+        $rows = $tag->attr('rows') ?? $page->properties();
 
         if ($additional = $tag->attr('additional')) {
             $rows = array_merge($rows, $additional);
