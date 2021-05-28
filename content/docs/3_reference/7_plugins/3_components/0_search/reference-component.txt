@@ -26,3 +26,24 @@ Kirby::plugin('my/search', [
   ]
 ]);
 ```
+
+To replace the search for just one specific type of collection (e.g. for pages only), fall back on Kirby's native component for the rest:
+
+```php "/site/plugins/my-search/index.php"
+Kirby::plugin('my/search', [
+   'components' => [
+      'search' => function (Kirby $kirby, \Kirby\Toolkit\Collection $collection, string $query = null, $params = []) {
+
+            // only replace the search component for Pages collections
+            if (get_class($collection) === 'Kirby\Cms\Pages') {
+                // only search in the field named keywords
+                $result = $collection->filterBy('keywords', '*=', $query);
+                return $result;
+            }
+
+            // for other searches (users, files...) use the native component
+            return $kirby->nativeComponent('search')($kirby, $collection, $query, $params);
+        }
+  ]
+]);
+```
