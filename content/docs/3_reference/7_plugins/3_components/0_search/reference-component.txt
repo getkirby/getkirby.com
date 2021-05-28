@@ -12,9 +12,11 @@ Keep in mind that the search component will be used for all searches of collecti
 
 
 ```php "/site/plugins/my-search/index.php"
+use Kirby\Toolkit\Collection;
+
 Kirby::plugin('my/search', [
    'components' => [
-      'search' => function (Kirby $kirby, \Kirby\Toolkit\Collection $collection, string $query = null, $params = []) {
+      'search' => function (Kirby $kirby, Collection $collection, string $query = null, $params = []) {
 
             // only search in the field named keywords
             $result = $collection->filterBy('keywords', '*=', $query);
