@@ -1,0 +1,13 @@
+Title: Upload Extended
+
+----
+
+Repository: https://github.com/Werbschaft/kirby-upload-extended
+
+----
+
+Category: utilities
+
+----
+
+Description: More options when uploading files like name changes, resizing via Kirby or compression and optional resizing via TinyPNG.
