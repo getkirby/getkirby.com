@@ -405,17 +405,6 @@ use Kirby\Cms\File;
 
 class VirtualFile extends File
 {
-  public function __construct( array $props, $parent = null)
-  {
-    return parent::__construct([
-      'filename' => $props['filename'],
-      'url'      => $props['url'],
-      'parent'   => $parent,
-      'template' => $props['template'],
-      'id'       => $parent->id(),
-      'content'  => $props['content'] ?? [],
-    ]);
-  }
 
   public function url(): string
   {
@@ -525,6 +514,8 @@ class PhotosPage extends Page
 
 Instead of using the `Files::factory()` as before, we now create an empty `Files` object (`$filesCollection`), and then add instances of the new `VirtualFile` object to this collection.
 
+Note that we also extended the the data array we pass to the new `VirtualFile` object with the `parent` property.
+
 In this example, we use the call to the Unsplash API again, but you can replace this with the simple data array from the first example or with some data from other sources.
 
 ## Thumbs
@@ -557,7 +548,7 @@ public function thumb($options = null)
         'url'      => $this->url . $query,
         'parent'   => $this->parent,
         'template' => $this->template,
-      ], $this->parent);
+      ]);
   }
 
   return $this;
@@ -607,7 +598,9 @@ Even if we know the file dimensions, we cannot simply pass the data to the `Virt
 
 However, as we said above, we are free to add new properties and methods to our class, so if our data source provides this information, we can pass the properties to the class constructor.
 
-Let’s add a `dimensions` property and set its value in the constructor to a `Kirby\Image\Dimensions` object. And since we are at it, we might as well add some methods to retrieve the `width`, `height`, `ratio` and `orientation` from the new `dimensions` property.  The ratio and orientation calculation is done by the `Dimensions` class from the width and height properties.
+Let’s add a `dimensions` property and overwrite the original class constructor with a custom constructor. We then set the value of the new property to a `Kirby\Image\Dimensions` object, and return the parent constructor with the given props.
+
+And since we are at it, we might as well add some methods to retrieve the `width`, `height`, `ratio` and `orientation` from the new `dimensions` property.  The ratio and orientation calculation is done by the `Dimensions` class from the width and height properties.
 
 ```php
 <?php
@@ -617,20 +610,14 @@ use Kirby\Image\Dimensions;
 
 class VirtualFile extends File
 {
+
   protected $dimensions;
 
-  public function __construct(array $props, $parent = null)
+  public function __construct(array $props)
   {
-    $this->dimensions = new Dimensions($data['width'] ?? 0, $data['height'] ?? 0);
+    $this->dimensions = new Dimensions($props['width'] ?? 0, $props['height'] ?? 0);
 
-    return parent::__construct([
-      'filename' => $props['filename'],
-      'url'      => $props['url'],
-      'parent'   => $parent,
-      'template' => $props['template'],
-      'id'       => $parent->id(),
-      'content'  => $props['content'] ?? [],
-    ]);
+    return parent::__construct($props),
   }
 
   public function width(): int
