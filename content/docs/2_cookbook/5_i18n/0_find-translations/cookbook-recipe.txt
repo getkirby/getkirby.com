@@ -24,7 +24,7 @@ The `t()` helper function may be used with one or two parameters, the first bein
 
 With the following command - which is in fact a combination of some common UNIX shell commands piped together - you can find all occurrences of `t()` and output the used translations in a convenient format. Although written and tested in a Linux bash shell, all commands can be used in a Windows environvent as well if you install the required tools on your machine.
 
-The following example assumes that your present working directory is the `site` folder of your installation. For your convenience, the one-line command is put here with continuation lines split by every new pipe symbol (`|`) but still it is a one-liner. In case you are unfamiliar with "piping", this is a method that strings commands together so that the output of one command becomes the input of another command.
+The following example assumes that your present working directory is the `site` folder of your installation. For your convenience, the one-line command is put here with continuation lines split by every new pipe symbol "|" (vertical bar) but still it is a one-liner. In case you are unfamiliar with "piping", this is a method that strings commands together so that the output of one command becomes the input of another command.
 
 ## The command
 
