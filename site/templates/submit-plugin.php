@@ -40,7 +40,7 @@
   <?php endif ?>
 </header>
 
-<form action="/submit-plugin" id="plugin-form" method="post" class="plugin-form highlight bg-light mb-12" enctype="multipart/form-data">
+<form action="http://forms.getkirby.test/submit-plugin" id="plugin-form" method="post" class="plugin-form highlight bg-light mb-12" enctype="multipart/form-data">
   <div class="plugin-fields">
     <div class="plugin-field mb-3">
       <label class="h5 mb-3 block" for="title">Title <small>(required)</small></label>
@@ -86,7 +86,6 @@
         </svg>
         Submit
       </button>
-      <input type="hidden" name="csrf" value="<?= csrf() ?>">
     </div>
   </div>
 </form>
