@@ -1,0 +1,13 @@
+Title: SQLite Cache Driver
+
+----
+
+Repository: https://github.com/bnomei/kirby3-sqlite-cachedriver
+
+----
+
+Category: performance
+
+----
+
+Description: SQLite based Cache-Driver

@@ -38,6 +38,7 @@ plugins/
   pluginname/
     index.php
     index.js
+    composer.json
 ```
 
 ### Panel plugin with components
@@ -92,6 +93,25 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 1. MAJOR version when you make incompatible API changes
 2. MINOR version when you add functionality in a backwards compatible manner, and
 3. PATCH version when you make backwards compatible bug fixes
+
+### Add `composer.json`
+
+Add a composer.json file with basic information about your plugin, including the current version number, so that users can easily get information about your plugin with Kirby's plugin methods.
+
+```js "composer.json"
+{
+    "name": "superwoman/superplugin",
+    "description": "Superwoman Demo Plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Superwoman",
+            "email": "superwoman@example.com"
+        }
+    ]
+}
+```
 
 ## Add a README
 

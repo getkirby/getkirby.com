@@ -2,7 +2,11 @@
 
 <div class="prose">
   <h2 id="preview"><a href="#preview">Preview</a></h2>
-  <?= kirbytag('image', $page->image()->filename()) ?>
+  <?php if($image = $page->image()): ?>
+    <?= kirbytag('image', $image->filename()) ?>
+  <?php endif ?>
+  
+  <?php if($page->slug() !== 'table'): ?>
 
   <?= $page->text()->kt() ?>
 
@@ -22,7 +26,11 @@
 ' . file_get_contents(kirby()->root('kirby') . '/config/blocks/' . $page->slug() . '/' . $page->slug() . '.yml') .'
 ```    
   ') ?>
-    <p>To overwrite this default blueprint, place your custom file in <code>/site/blueprints/blocks/<?= $page->slug() ?>.yml</code>.</p>
+  <p>To overwrite this default blueprint, place your custom file in <code>/site/blueprints/blocks/<?= $page->slug() ?>.yml</code>.</p>
+
+  <?php else: ?>
+    <?= $page->text()->kt() ?>
+  <?php endif ?>
 
   <h3 id="default-files__vue-component"><a href="#default-files__vue-component">Vue component</a></h3>
   <p><a href="https://github.com/getkirby/kirby/blob/master/panel/src/components/Blocks/Types/<?= ucfirst($page->title()) ?>.vue">kirby/blob/master/panel/src/components/Blocks/Types/<?= ucfirst($page->title()) ?>.vue</a></p>

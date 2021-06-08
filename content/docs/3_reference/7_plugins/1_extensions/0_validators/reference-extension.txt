@@ -9,7 +9,7 @@ Validators are registered with the `validators` extension. The validators extens
 Kirby::plugin('your/plugin', [
   'validators' => [
     'isGreen' => function ($value) {
-      return V::in($value, ['green','lightgreen', 'darkgreen', 'mediumgreen'];
+      return V::in($value, ['green','lightgreen', 'darkgreen', 'mediumgreen']);
     }
   ]
 ]);
