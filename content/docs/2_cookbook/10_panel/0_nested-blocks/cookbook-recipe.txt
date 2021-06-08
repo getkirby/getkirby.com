@@ -249,4 +249,4 @@ index.js
 index.php
 ```
 
-Feel free to download all needed files here: [Nested blocks example](https://kirby.christianfickinger.de/nested-block-example.zip).
+Feel free to download all needed files here: (file: example.zip text: Nested blocks example).
