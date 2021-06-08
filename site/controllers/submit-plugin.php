@@ -14,11 +14,11 @@ return function ($kirby, $page) {
             }
 
             $data = [
-                'title' => get('title'),
-                'url' => get('url'),
-                'category' => get('category'),
-                'description' => get('description'),
-                'developer' => get('developer'),
+                'title' => esc(get('title')),
+                'url' => esc(get('url')),
+                'category' => esc(get('category')),
+                'description' => esc(get('description')),
+                'developer' => esc(get('developer')),
             ];
 
             $rules = [
@@ -42,13 +42,12 @@ return function ($kirby, $page) {
                 $errors = $invalid;
             }
 
-            // @todo: test uploading screenshot
             // check plugin screenshot file
-            if ($upload = $kirby->request()->files()->get('file')) {
-                if ($upload['error'] === 4) {
-                    $errors[] = 'You have to add at least one file';
-                } elseif ($upload['error'] !== 0) {
-                    $errors[] = 'The file could not be uploaded';
+            $upload = $kirby->request()->files()->get('featured_image');
+
+            if (empty($errors) === true && empty($upload['tmp_name']) === false) {
+                if ($upload['error'] !== 0) {
+                    $errors[] = 'The screenshot could not be uploaded';
                 } elseif ($upload['size'] > 1000000) {
                     $errors[] = $upload['name'] . ' is larger than 1 MB';
                 } elseif (in_array($upload['type'], ['image/png']) === false) {
@@ -57,8 +56,8 @@ return function ($kirby, $page) {
                     list($width, $height) = getimagesize($upload['tmp_name']);
 
                     // finally, check the width and height.
-                    if ($width > 800 || $height > 600) {
-                        $errors[] = 'Screenshot max resolution must be 800x600 px';
+                    if ($width > 1280 || $height > 800) {
+                        $errors[] = 'Screenshot max resolution must be 1280x800 px';
                     } else {
                         $data['featured_image'] = F::read($upload['tmp_name']);
                     }

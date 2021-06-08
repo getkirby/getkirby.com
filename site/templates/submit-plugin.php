@@ -9,8 +9,9 @@
     <p>If you have Kirby 3 plugin or if there is a Kirby plugin that you think is not in the plugins directory, you can add it via the form below. You must have a valid plugin skeleton to submit
       it.</p>
     <ul>
-      <li>existing <code>composer.json</code> file</li>
-      <li>composer type should be <code>kirby-plugin</code></li>
+      <li>Plugin must be hosted on GitHub</li>
+      <li>Existing <code>composer.json</code> file</li>
+      <li>Composer type should be <code>kirby-plugin</code></li>
     </ul>
   </div>
 
@@ -49,7 +50,7 @@
     <div class="plugin-field mb-3">
       <label class="h5 mb-3 block" for="url">Repository <small>(required)</small></label>
       <input class="input mb-3" id="url" name="url" type="url" value="<?= esc(get('url')) ?>" required>
-      <p class="text-sm">GitHub or GitLab repository url. Eg: https://github.com/johndoe/new-kirby-plugin</p>
+      <p class="text-sm">GitHub repository url. Eg: <code>https://github.com/johndoe/new-kirby-plugin</code></p>
     </div>
     <div class="plugin-field mb-3">
       <label class="h5 mb-3 block" for="category">Category <small>(required)</small></label>
@@ -74,7 +75,7 @@
     <div class="plugin-field mb-3">
       <label class="h5 mb-3 block" for="featured_image">Featured Image</label>
       <input class="input mb-3" id="featured_image" name="featured_image" type="file" accept="image/png">
-      <p class="text-sm">Only JPG or PNG supports. Max resolution is 800x600 and max file size ise 1MB.</p>
+      <p class="text-sm">Only JPG or PNG supports. Max resolution is 1280x800 px and max file size ise 1MB.</p>
     </div>
     <div class="plugin-field mb-3">
       <button type="submit" class="btn btn--filled w-100%">

@@ -33,28 +33,31 @@ class SubmitPlugin
 
     /**
      * SubmitPlugin constructor.
+     * Set and extract some data to be need
+     *
      * @param array $data
+     * @throws \Kirby\Exception\Exception
      */
     public function __construct(array $data)
     {
-        $this->setData($data);
-    }
+        // Only supports GitHub repositories
+        if (Url::toObject($data['url'])->host() !== 'github.com') {
+            throw new Exception('You can only add GitHub repositories. If it is not a GitHub repository, please contact us.');
+        }
 
-    /**
-     * @param array $data
-     * @return array
-     */
-    public function setData(array $data): self
-    {
-        // extract some data to be need
         $data['repository'] = Url::path($data['url']);
-        $data['owner'] = Str::split($data['repository'], '/')[0];
-        $data['repo'] = basename($data['url']);
+
+        $repositorySegments = Str::split($data['repository'], '/');
+        $data['owner'] = $repositorySegments[0] ?? null;
+        $data['repo'] = $repositorySegments[1] ?? null;
+
+        if (empty($data['owner']) === true || empty($data['repo']) === true) {
+            throw new Exception('Your plugin URL is invalid. Please check your repository url.');
+        }
+
         $data['ref'] = 'plugin/' . $data['repo'];
 
         $this->data = $data;
-
-        return $this;
     }
 
     /**
@@ -97,23 +100,72 @@ class SubmitPlugin
      * Runs basic validations before API request
      *
      * @throws \Kirby\Exception\Exception
-     * @todo: complete the method
      */
     private function checkInfo()
     {
-        // checks repository exists
-        if (false) {
+        try {
+            // checks plugin exists
+            $this->checkPluginExists();
+
+            // checks repository exists
+            $this->checkRepoExists();
+
+            // checks composer.json file
+            $this->checkValidComposer();
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * @return void
+     * @throws \Kirby\Exception\Exception
+     */
+    public function checkPluginExists(): void
+    {
+        if (page('plugins/' . $this->data('repository'))) {
+            throw new Exception('The plugin already exists in plugins directory.');
+        }
+    }
+
+    /**
+     * @return void
+     * @throws \Kirby\Exception\Exception
+     */
+    public function checkRepoExists()
+    {
+        // if plugin exists, response header will be 200
+        // otherwise catches the exception
+        try {
+            $this->request($this->api('', $this->data('repository')), [], 'GET');
+        } catch (Exception $e) {
             throw new Exception('The repository not found.');
         }
+    }
 
-        // checks composer.json file
-        if (false) {
-            throw new Exception('No valid composer.json file found.');
-        }
+    /**
+     * @return void
+     * @throws \Kirby\Exception\Exception
+     */
+    public function checkValidComposer(): void
+    {
+        try {
+            $response = $this->request($this->api('/contents/composer.json', $this->data('repository')), [], 'GET');
 
-        // checks `kirby-plugin` composer.json file
-        if (false) {
-            throw new Exception('The composer.json file must be of type "kirby-plugin".');
+            if (empty($response) === false) {
+                // checks `kirby-plugin` composer.json file
+                $content = empty($response['content']) === false ? base64_decode($response['content']) : null;
+                $composer = json_decode($content, true);
+                $type = $composer['type'] ?? null;
+
+                if ($type !== 'kirby-plugin') {
+                    throw new Exception('The composer.json file must be of type "kirby-plugin".');
+                }
+            } else {
+                throw new Exception('No valid composer.json file found.');
+            }
+        } catch (Exception $e) {
+            throw $e;
         }
     }
 
@@ -168,8 +220,7 @@ class SubmitPlugin
     {
         return $this->request($this->api('/git/refs'), [
             'ref' => 'refs/heads/' . $this->data('ref'),
-            // sha of main branch
-            'sha' => '96ac0994434eefb5b1214279c496fed50424bc82',
+            'sha' => $this->getRefSha()
         ]);
     }
 
@@ -181,9 +232,7 @@ class SubmitPlugin
     private function deleteRef(): void
     {
         try {
-            $this->request($this->api('/git/refs'), [
-                'ref' => 'refs/heads/' . $this->data('ref')
-            ], 'DELETE');
+            $this->request($this->api('/git/refs/heads/' . $this->data('ref')), [], 'DELETE');
         } catch (Exception $e) {
             // do not throw exception
             // silently continue
@@ -221,7 +270,7 @@ class SubmitPlugin
     private function createPullRequest()
     {
         return $this->request($this->api('/pulls'), [
-            'base' => 'master',
+            'base' => 'main',
             'head' => $this->data('ref'),
             'title' => 'Add ' . $this->data('title') . ' plugin',
             'body' => 'This pull request created with automated via GitHub API for ' . $this->data('title') . ' plugin'
@@ -232,35 +281,56 @@ class SubmitPlugin
      * @param string $endpoint
      * @return string
      */
-    private function api(string $endpoint): string
+    private function api(string $endpoint = '', string $repository = null): string
     {
-        return 'https://api.github.com/repos/' . option('github.repository.website') . $endpoint;
+        return 'https://api.github.com/repos/' . ($repository ?? option('github.repository.website')) . $endpoint;
+    }
+
+    /**
+     * Get main branch SHA of getkirby.com repository via API
+     *
+     * @return string
+     * @throws \Kirby\Exception\Exception
+     */
+    private function getRefSha()
+    {
+        $response = $this->request($this->api('/git/refs/heads/main'), [], 'GET');
+
+        if (isset($response['object']['sha']) === false) {
+            throw new Exception('Targeted main branch SHA not found!');
+        }
+
+        return $response['object']['sha'];
     }
 
     /**
      * @param string $url
      * @param array $params
      * @param string $type
+     * @return array
      * @throws \Kirby\Exception\Exception
      */
-    private function request(string $url, array $params = [], string $type = 'POST')
+    private function request(string $url, array $params = [], string $type = 'POST'): array
     {
         try {
             $response = Remote::request($url, [
                 'method' => $type,
                 'data' => json_encode($params),
-                'agent' => $_SERVER['HTTP_USER_AGENT'],
+                'agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'Kirby',
                 'headers' => [
                     'Authorization: token ' . option('github.key'),
                     'Accept: application/vnd.github.v3+json'
                 ]
             ]);
 
-            if ($response->code() !== 200) {
-                throw new Exception($response->json()->message ?? 'GitHub API failed!');
+            $json = $response->json();
+
+            // 200: OK, 201: Created, 202: Accepted, 204: No Content
+            if (in_array($response->code(), [200, 201, 202, 204]) === false) {
+                throw new Exception($json['message'] ?? 'GitHub API failed!');
             }
 
-            return $response;
+            return $json;
         } catch (Exception $e) {
             throw $e;
         }
