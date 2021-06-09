@@ -50,7 +50,6 @@ cd your-project
 
 # remove the kirby directory as it will be replaced in the next step
 rm -R kirby
-git add kirby
 
 # install the submodule
 git submodule add https://github.com/getkirby/kirby.git kirby
