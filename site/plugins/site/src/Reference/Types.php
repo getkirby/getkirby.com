@@ -81,7 +81,7 @@ class Types
 
         // Get page for base class/object
         if ($page = ReferenceClassPage::findByName($class)) {
-            
+
             // If type is only the class, return the page
             if (count($chain) === 0) {
                 return $page;
@@ -121,7 +121,7 @@ class Types
         // that cannot be part of a datatype, just return a plain
         // code element.
         if (preg_match('/^[^\\a-z0-9_\->:]+$/iu', $type) === 1) {
-            return "<code>{$text}</code>";
+            return '<code>' . ($text ?? $type) . '</code>';
         }
 
         // Multiple datatypes
@@ -172,7 +172,7 @@ class Types
         // (starting with a letter, \ or $)
         if (preg_match('/^[A-Z\\\$]/', $type) === 1) {
 
-            // Check if reference page for Kirby class 
+            // Check if reference page for Kirby class
             // or class method exists
             if ($page = static::findReferencePage($type)) {
                 $class = is_a($page, ReferenceClassPage::class) === true ? 'object' : 'method';
@@ -187,8 +187,8 @@ class Types
                 return $tag;
             }
 
-            // Some class that exists in PHP in the global namespace. 
-            // The second check is done to ensure correct case, 
+            // Some class that exists in PHP in the global namespace.
+            // The second check is done to ensure correct case,
             // as `class_exists()` is not case-sensitive.
             if (class_exists($type) === true &&
                 (new ReflectionClass($type))->getName() === $type
