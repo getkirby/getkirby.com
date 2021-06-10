@@ -54,6 +54,15 @@ return [
 ];
 ```
 
+The blocks field can now be used without adding the new FAQ block type manually:
+
+```yaml "/site/blueprints/pages/default.yaml"
+title: Page
+fields:
+  blocks:
+    type: blocks
+```
+
 ## Blueprints
 
 Now let's create the blueprint for the FAQ block itself, and the blueprint for the nested block with a question and answer field.
@@ -66,7 +75,7 @@ The name of the block (`faq` in our example) must be unique and must not already
 
 The first blueprint defines our FAQ block. Besides our new nested block we use an additional `text` field and a `writer` field in our example.
 
-```yaml "/site/plugins/faq/blueprints/index.yml"
+```yaml "/site/plugins/faq-block/blueprints/blocks/faq.yml"
 name: FAQ
 icon: star
 fields:
@@ -77,27 +86,28 @@ fields:
   blocks:
     type: blocks
     fieldsets:
-      - faq_item
+      - faqItem
 ```
 
 ### Question/answer blueprint (nested)
 
-The second blueprint defines the nested block with the `question` and the `answer` fields. Hereafter we call this block `faq_item`.
+The second blueprint defines the nested block with the `question` and the `answer` fields. Hereafter we call this block `faqItem`.
 
-```yaml "/site/plugins/faq/blueprints/item.yml"
+```yaml "/site/plugins/faq-block/blueprints/blocks/faqItem.yml"
 name: Question / Answer
 icon: box
 fields:
   question:
     type: text
+    placeholder: Your question …
   answer:
     type: writer
-    inline: true
+    placeholder: Your answer …
 ```
 
 ## Output
 
-Now we build the output snippets for the website. We need a snippet for the `faq` block and a snippet for the `faq_item` block.
+Now we build the output snippets for the website. We need a snippet for the `faq` block and a snippet for the `faqItem` block.
 
 ### Default template
 
@@ -118,21 +128,13 @@ For completeness, we also show the `default` template here, which can be used to
 
 The first output snippet is for the FAQ block. We show `headline` and `text` of this block as usual and we call the nested block(s) as follows.
 
-```php "/site/plugins/faq/snippets/index.php"
-<div class="my-faq-block">
-    <h2><?= $block->content()->headline()->html() ?></h2>
-    <p><?= $block->content()->text() ?></p>
-    <dl>
-      <?php
-      foreach ($block->content()->blocks()->toBlocks() as $nested_block):
-        snippet('blocks/' . $nested_block->type(),
-          [
-            'block' => $nested_block,
-          ]
-        );
-      endforeach;
-      ?>
-    </dl>
+```php "/site/plugins/faq-block/snippets/blocks/faq.php"
+<div class="faq">
+  <h2><?= $block->headline() ?></h2>
+  <p><?= $block->text() ?></p>
+  <dl>
+    <?= $block->blocks()->toBlocks() ?>
+  </dl>
 </div>
 ```
 
@@ -140,7 +142,7 @@ The first output snippet is for the FAQ block. We show `headline` and `text` of 
 
 The second snippet defines the output of the nested question/answer block.
 
-```php "/site/plugins/faq/snippets/item.php"
+```php "/site/plugins/faq-block/snippets/blocks/faqItem.php"
 <dt><?= $block->question() ?></dt>
 <dd><?= $block->answer() ?></dd>
 ```
@@ -151,30 +153,29 @@ Now let's create the plugin itself. The plugin needs only two files to work: `in
 
 ### `index.php`
 
-In the `index.php` file we register our blueprints and output snippets, respectively for the FAQ block (`faq`) and the question/answer block (`faq_item`).
+In the `index.php` file we register our blueprints and output snippets, respectively for the FAQ block (`faq`) and the question/answer block (`faqItem`).
 
-```php "/site/plugins/faq/index.php"
+```php "/site/plugins/faq-block/index.php"
 <?php
+
 Kirby::plugin('your-project/faq-block', [
-
     'blueprints' => [
-        'blocks/faq'      => __DIR__ . '/blueprints/index.yml',
-        'blocks/faq_item' => __DIR__ . '/blueprints/item.yml'
+        'blocks/faq'      => __DIR__ . '/blueprints/blocks/faq.yml',
+        'blocks/faqItem'  => __DIR__ . '/blueprints/blocks/faqItem.yml'
     ],
-
     'snippets'   => [
-        'blocks/faq'      => __DIR__ . '/snippets/index.php',
-        'blocks/faq_item' => __DIR__ . '/snippets/item.php'
+        'blocks/faq'      => __DIR__ . '/snippets/blocks/faq.php',
+        'blocks/faqItem'  => __DIR__ . '/snippets/blocks/faqItem.php'
     ]
 ]);
 ```
 
 ### `index.js`
 
-The `index.js` file handles the previews inside the Panel. We define a template for `faq` and `faq_item`.
+The `index.js` file handles the previews inside the Panel. We define a template for `faq` and `faqItem`.
 
-```js "/site/plugins/faq/index.js"
-panel.plugin("your-project/faq-block", {
+```js "/site/plugins/faq-block/index.js"
+panel.plugin('your-project/faq-block', {
   blocks: {
     faq: {
       template: `
@@ -182,22 +183,33 @@ panel.plugin("your-project/faq-block", {
           <h2>{{ content.headline }}</h2>
           <div v-html="content.text"></div>
           <dl v-for="item in content.blocks">
-              <dt v-html="item.content.question"></dt>
-              <dd v-html="item.content.answer"></dd>
+            <dt v-html="item.content.question"></dt>
+            <dd v-html="item.content.answer"></dt>
           </dl>
         </div>
-      `,
+      `
     },
-
-    faq_item: {
+    faqItem: {
       template: `
-        <div @dblclick="open">
-          <strong contenteditable="true" @blur="update({ question: $event.target.innerText });">{{content.question}}</strong>
-          <div v-html="content.answer" contenteditable="true" @blur="update({ answer: $event.target.innerText });"></div>
+        <div>
+          <strong>
+            <k-input
+              v-bind="field('question')"
+              :value="content.question"
+              @input="update({ question: $event })">
+            </k-input>
+          </strong>
+          <p>
+            <k-writer
+              v-bind="field('answer')"
+              :value="content.answer"
+              @input="update({ answer: $event })">
+            </k-writer>
+          </p>
         </div>
-      `,
-    },
-  },
+      `
+    }
+  }
 });
 ```
 
@@ -205,28 +217,30 @@ panel.plugin("your-project/faq-block", {
 
 The `.css` file is optional and can be used to style the preview for the block (and the nested blocks if needed).
 
-```css "/site/plugins/faq/index.css"
-/* This is just an example
-   Add your individual css code here */
+```css "/site/plugins/faq-block/index.css"
+/**
+ * This is just an example
+ * Add your individual css code here
+ */
 
-div.faq {
+.faq {
   padding: 1.5rem;
   background: #fef3c7;
 }
-div.faq h2 {
+.faq h2 {
   font-size: 1.8em;
   font-weight: bold;
 }
-div.faq h2 + div {
+.faq h2 + div {
   color: #da7c0d;
 }
-div.faq dl {
+.faq dl {
   padding: 20px 0 0;
 }
-div.faq dl dt {
+.faq dl dt {
   font-weight: bold;
 }
-div.faq dl dd {
+.faq dl dd {
   font-style: italic;
 }
 ```
@@ -237,13 +251,15 @@ div.faq dl dd {
 
 The following files are used in our example:
 
-```filesystem "/site/plugins/faq"
+```filesystem "/site/plugins/faq-block"
 blueprints/
-  index.yml
-  item.yml
+  blocks/
+    faq.yml
+    faqItem.yml
 snippets/
-  index.php
-  item.php
+  blocks/
+    faq.php
+    faqItem.php
 index.css
 index.js
 index.php
