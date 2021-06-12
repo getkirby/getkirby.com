@@ -42,7 +42,7 @@ However, we can improve this code to get an array of error messages in case upda
 
 ```php
 <?php
-$result = $kirby->impersonate('kirby', function () use($page) {
+$result = $kirby->impersonate('kirby', function () use ($page) {
   $messages = [];
   foreach ($page->files() as $file) {
     try {
@@ -50,7 +50,7 @@ $result = $kirby->impersonate('kirby', function () use($page) {
         'template' => 'gallery-image',
         // other metadata if required
       ]);
-    } catch(Exception $e) {
+    } catch (Exception $e) {
       $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
     }
   }
@@ -67,25 +67,21 @@ The above script will only update the default language metadata if you have a mu
 ```php
 <?php
 $data = ['template' => 'gallery-hug'];
-$result = $kirby->impersonate('kirby', function () use($page, $data) {
+$result = $kirby->impersonate('kirby', function () use ($page, $data) {
   $messages = [];
   foreach ($page->files() as $file) {
-    // if we have a multi-language site, we loop through all languages
-    if ($this->multilang() === true) {
-      $languages = $this->languages();
-      foreach ($languages as $language) {
-        try {
+    try {
+      // if we have a multi-language site, we loop through all languages
+      if ($this->multilang() === true) {
+        $languages = $this->languages();
+        foreach ($languages as $language) {
           $newFile = $file->update($data, $language->code());
-        } catch (Exception $e) {
-          $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
         }
-      }
-    } else {
-      try {
+      } else {
         $newFile = $file->update($data);
-      } catch (Exception $e) {
-        $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
       }
+    } catch (Exception $e) {
+      $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
     }
   }
   return $messages;
@@ -104,25 +100,21 @@ In a plugin, lets create a new files method that takes a data array as argument 
 <?php
 Kirby::plugin('cookbook/update-metadata', [
   'filesMethods' => [
-    'update' => function(array $data) {
+    'update' => function (array $data) {
       $messages = [];
       $kirby    = kirby();
       foreach ($this as $file) {
-        if ($kirby->multilang() === true) {
-          $languages = $kirby->languages();
-          foreach ($languages as $language) {
-            try {
+        try {
+          if ($kirby->multilang() === true) {
+            $languages = $kirby->languages();
+            foreach ($languages as $language) {
               $newFile = $file->update($data, $language->code());
-            } catch(Exception $e) {
-              $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
             }
+          } else {
+            $newFile = $file->update($data);
           }
-        } else {
-          try {
-            $newFile = $file->update($data, $language->code());
-          } catch(Exception $e) {
-            $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
-          }
+        } catch (Exception $e) {
+          $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
         }
       }
       return $messages;
@@ -136,10 +128,10 @@ We can then call this method on a collection of files anywhere like this:
 ```php
 <?php
 // update all files of all subpages of the current page
-$result = $kirby->impersonate('kirby', function() use($page) {
+$result = $kirby->impersonate('kirby', function () use ($page) {
   return $page->index()->files()->update([
     'template' => 'gallery-image',
-    // more metadate if required
+    // more metadata if required
   ]);
 });
 dump($result);
