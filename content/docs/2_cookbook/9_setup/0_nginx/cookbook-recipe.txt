@@ -48,7 +48,7 @@ server {
   root /usr/share/nginx/html; # Adjust to your setup
 
   location / {
-    try_files $uri $uri/ /index.php$is_args$args;
+    try_files $uri $uri/ /index.php$is_args&$args;
   }
 
   location ~* \.php$ {
@@ -91,7 +91,7 @@ This is a very [important directive](http://nginx.org/en/docs/http/ngx_http_core
 
 ```
 location / {
-  try_files $uri $uri/ /index.php$is_args$args;
+  try_files $uri $uri/ /index.php$is_args&$args;
 }
 ```
 
