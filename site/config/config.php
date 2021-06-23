@@ -1,5 +1,10 @@
 <?php
 
+header('X-Frame-Options: sameorigin');
+header('X-XSS-Protection: 1; mode=block');
+header('Permissions-Policy: interest-cohort=()');
+header('X-Content-Type-Options: nosniff');
+
 return [
     'api'      => false,
     'banners'  => require __DIR__ . '/banners.php',
