@@ -1,4 +1,6 @@
-Title: 3.6
+Title: 3.6-alpha
+----
+Version: 3.6
 ----
 Area:
 
