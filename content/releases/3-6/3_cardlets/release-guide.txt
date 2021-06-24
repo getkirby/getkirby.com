@@ -1,0 +1,13 @@
+Title: Cardlets
+----
+Text:
+
+```yaml
+sections:
+  notes:
+    type: pages
+    template: note
+    layout: cardlets
+```
+
+(image: cardlets.png)

@@ -26,3 +26,21 @@
 <?php snippet('templates/release-36/plugins') ?>
 <?php snippet('templates/release-36/cardlets') ?>
 
+<section id="get-started" class="mb-42">
+  <h2 class="h2 text-center mb-6">What are you waiting for?</h2>
+  <?php snippet('cta', [
+    'buttons' => [
+      [
+        'text' => 'Try now',
+        'link' => '/try',
+        'icon' => 'download'
+      ],
+      [
+        'text'  => 'Guide',
+        'link'  => $page->children()->first()->url(),
+        'icon'  => 'flash',
+        'style' => 'outlined'
+      ]
+    ]
+  ]) ?>
+</section>

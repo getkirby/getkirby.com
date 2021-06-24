@@ -1,0 +1,20 @@
+Title: Custom file types
+----
+Text:
+
+```php
+Kirby::plugin('your/plugin', [
+    'fileTypes' => [
+        'm4p' => [
+            'mime' => 'video/m4p',
+            'type' => 'video',
+        ],
+        'heif' => [
+            'mime' => ['image/heic', 'image/heif'],
+            'type' => 'image',
+            'resizable' => true,
+            'viewable' => true,
+        ]
+    ]
+]);
+```
