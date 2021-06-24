@@ -27,4 +27,6 @@
     ]) ?>
   </div>
   <?php endif ?>
+
+  <?php snippet($footer ?? '') ?>
 </section>
