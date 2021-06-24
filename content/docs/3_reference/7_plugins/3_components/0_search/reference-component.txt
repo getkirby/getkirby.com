@@ -12,15 +12,43 @@ Keep in mind that the search component will be used for all searches of collecti
 
 
 ```php "/site/plugins/my-search/index.php"
+<?php
+
+use Kirby\Toolkit\Collection;
+
 Kirby::plugin('my/search', [
-   'components' => [
-      'search' => function (Kirby $kirby, Collection $collection, string $query = null, $params = []) {
+  'components' => [
+    'search' => function (Kirby $kirby, Collection $collection, string $query = null, $params = []) {
+      // only search in the field named keywords
+      $result = $collection->filterBy('keywords', '*=', $query);
 
-            // only search in the field named keywords
-            $result = $collection->filterBy('keywords', '*=', $query);
+      return $result;
+    }
+  ]
+]);
+```
 
-            return $result;
-        }
+To replace the search for just one specific type of collection (e.g. for pages only), fall back on Kirby's native component for the rest:
+
+```php "/site/plugins/my-search/index.php"
+<?php
+
+use Kirby\Toolkit\Collection;
+
+Kirby::plugin('my/search', [
+  'components' => [
+    'search' => function (Kirby $kirby, Collection $collection, string $query = null, $params = []) {
+      // only replace the search component for Pages collections
+      if (is_a($collection, 'Kirby\Cms\Pages') === true) {
+        // only search in the field named keywords
+        $result = $collection->filterBy('keywords', '*=', $query);
+
+        return $result;
+      }
+
+      // use the native component for other searches (users, files...)
+      return $kirby->nativeComponent('search')($kirby, $collection, $query, $params);
+    }
   ]
 ]);
 ```

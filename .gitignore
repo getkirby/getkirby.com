@@ -11,6 +11,13 @@ Icon
 !/media/index.html
 /node_modules/
 
+# Editors
+# ---------------
+*.sublime-project
+*.sublime-workspace
+/.vscode
+/.idea
+
 # Plugin cruft
 # ---------------
 

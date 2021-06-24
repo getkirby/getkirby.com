@@ -201,6 +201,7 @@ panel.plugin("cookbook/block-factory", {
         </div>
       `
     }
+  }
 });
 ```
 Our computed method `textField()` returns the `text` field, so that we can fetch the placeholder and marks information set for the field if available.
@@ -849,6 +850,7 @@ panel.plugin("cookbook/block-factory", {
         </blockquote>
       `
     },
+  }
 });
 ```
 

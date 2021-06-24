@@ -41,7 +41,7 @@ Kirby::plugin('your/plugin', [
         'custom-image' => [
             'attr' => $originalTag['attr'],
 
-            'html' => function($tag) {
+            'html' => function($tag) use ($originalTag) {
 
                 $image =  $originalTag['html'];
                 $markup = $image($tag);
