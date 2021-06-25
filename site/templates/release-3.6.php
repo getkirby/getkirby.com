@@ -36,7 +36,7 @@
         'icon' => 'download'
       ],
       [
-        'text'  => 'Guide',
+        'text'  => '3.6 docs',
         'link'  => $page->children()->first()->url(),
         'icon'  => 'flash',
         'style' => 'outlined'
