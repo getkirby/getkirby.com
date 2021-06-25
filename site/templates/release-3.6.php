@@ -26,6 +26,37 @@
 <?php snippet('templates/release-36/plugins') ?>
 <?php snippet('templates/release-36/cardlets') ?>
 
+<section id="assets" class="mb-42">
+  <div class="columns" style="--columns: 2; --gap: var(--spacing-24)">
+    <div>
+      <?php snippet('templates/features/intro', [
+        'title' => 'WebP & Avif Support',
+        'intro' => 'Serve smaller and better images',
+        'text'  => 'Our image processing API finally supports webp and avif as better alternatives for your jpegs or pngs.',
+      ]) ?>
+
+      <figure class="bg-black rounded">
+        <?= $page->webp()->kt() ?>
+      </figure>
+
+    </div>
+    <div>
+      <?php snippet('templates/features/intro', [
+        'title' => 'Better panel image settings',
+        'intro' => 'Improve your previews with custom queries',
+        'text'  => 'You can now set custom backgrounds, icons, images and more for your pages via blueprint settings',
+      ]) ?>
+
+      <figure class="bg-black rounded">
+        <?= $page->imageSettings()->kt() ?>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+<?php snippet('templates/release-36/webp') ?>
+
 <section id="get-started" class="mb-42">
   <h2 class="h2 text-center mb-6">What are you waiting for?</h2>
   <?php snippet('cta', [
