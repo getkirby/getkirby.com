@@ -29,6 +29,7 @@ image:
 image:
   back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);"
 ```
+- Support for alternative thumb file formats (e.g. webp or avif)
 
 ## Enhancements
 

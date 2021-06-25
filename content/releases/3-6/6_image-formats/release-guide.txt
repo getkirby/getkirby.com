@@ -1,0 +1,16 @@
+Title: webp & avif support
+----
+Text:
+
+Either set as global option `'thumbs.format' => 'webp'` or pass as option:
+
+```php
+$image->thumb(['width' => 200, 'format' => 'webp'])
+
+$image->srcset([
+  ['width' => 200, 'format' => 'webp'],
+  ['width' => 200, 'format' => 'jpg']
+])
+```
+
+GDLib/SimpleImage driver currently only supports `webp`, ImageMagick supports `webp` and `avif`
