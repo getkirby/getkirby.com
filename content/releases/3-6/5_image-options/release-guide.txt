@@ -1,0 +1,18 @@
+Title: New Panel image options
+----
+Text:
+
+All Panel preview image options (back, color, cover, ratio, icon) now support Query syntax
+
+```yaml
+image:
+  back: "{{ page.panelBack }}"
+  icon: false
+```
+
+Panel image `back` and `color` options now support shorthands for core CSS color variables as well as HEX codes and all other native CSS color properties (e.g. even gradients)
+
+```yaml
+image:
+  back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);"
+```
