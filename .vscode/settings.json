@@ -1,9 +1,0 @@
-{
-    "[markdown]": {
-        "editor.wordWrap": "on",
-        "editor.quickSuggestions": false
-    },
-    "files.associations": {
-        "*.txt": "markdown"
-    }
-}
