@@ -5,121 +5,197 @@ Text:
 
 ## New Features
 
-- Sections offer a new `layout` type in the Panel: `cardlets`
-- New `fileTypes` plugin extension to extend custom file and mime types
-- The Panel logic is now structured with a new feature called Panel areas. An area defines basic information e.g. for the menu entry as well as Panel routes that return dedicated Panel views or that can host other logic (e.g. our `logout` route which doesn't return a view but ends the user session and redirects to the `login` route). Our default areas are defined in `kirby/config/areas`. This feature is directly connected with the introduction of Fiber (see below in "Refactoring").
-- New PHP plugin extension `areas` that allows defining custom Panel areas
-- A new `router()` helper that takes a set of routes and request data and directly executes the matching routing action
-- New `$helper.color` JS helper method to turn a string into a valid CSS color value (e.g. hex code or CSS variable)
-- Added `k-options-dropdown` component
-- New email dialog for the writer field and text blocks
+### Core
+
+- Support for [alternative thumb file formats](/releases/3.6/image-formats) (e.g. webp or avif)
+- New [`fileTypes` extension](/releases/3.6/custom-file-types) to extend custom file and mime types
 - New `A::map($array, $callback)` method [#3434](https://github.com/getkirby/kirby/pull/3434)
-- `$model->panel()->image()` now supports a second parameter to specify layout (default is `cards`) [https://github.com/getkirby/kirby/pull/3425](https://github.com/getkirby/kirby/pull/3425)
-- New `navigation` option for prev/next pages in Panel
-- New Vue component
-- Define the Panel preview image (for page, file or user) now also in the blueprint via the `image` option and not only per section
-- All Panel preview image options (`back`, `color`, `cover`, `ratio`, `icon`) now support Query syntax
-```yaml
+- New `router()` helper that takes a set of routes and request data and directly executes the matching routing action
+
+### Panel
+
+- Sections offer a new `layout` type: [`cardlets`](/releases/3.6/cardlets)
+(image: releases/3-6/cardlets.png)
+- [Panel areas](/releases/3.6/panel-areas): easily define views, routes, dialogs and more for the Panel in the PHP backend. Replaces the previous custom Panel views. This feature is directly connected to our new Fiber framework (see below in "Refactoring").
+- New `areas` extension for defining custom Panel areas.
+
+- Define the Panel preview image (for page, file or user) now also in the blueprint via the `image` option (overrules section settings):
+```yaml "site/blueprints/pages/note.yml"
 image:
-  back: "{{ page.panelBack }}"
-  icon: false
+    back: blue-200
+    icon: 📝
 ```
-- Panel image `back` and `color` options now support shorthands for core CSS color variables as well as HEX codes and all other native CSS color properties (e.g. even gradients)
+- Panel preview image options now all support Query syntax:
+```yaml "site/blueprints/pages/note.yml"
+image:
+  back: "{{ page.myCustomBackColor }}"
+```
+- `back` and `color` options for Panel preview image now support shorthands for core CSS color variables as well as HEX codes or other native CSS color properties (e.g. even gradients)
 ```yaml
 image:
   back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);"
 ```
-- Support for alternative thumb file formats (e.g. webp or avif)
+
+- New [`navigation` option](/releases/3.6/navigation) for prev/next arrows
+```yaml "/site/blueprints/pages/default.yml"
+navigation:
+    status: listed
+    template: default
+    sortBy: title asc
+```
+
+- `writer` field and text blocks: new email dialog
+
+- New `k-items`, `k-item` and `k-item-image` Vue components
+- New `k-options-dropdown` Vue component
+- New `k-login-alert` Vue component
 
 ## Enhancements
 
-- Much smaller Panel files to load
-- The `avif` file extension is now considered viewable, so it can be displayed in the Panel [#2877](https://github.com/getkirby/kirby/pull/2877)
-- The license code is now only displayed to admins, even if other users have access to the settings view in the Panel
-- The `F::relativepath()` method now supports file paths with an unrelated base by prefixing `../` to build a truly relative path; this improves API error paths when a custom directory setup is used [#3267](https://github.com/getkirby/kirby/issues/3267)
+### Core
+
 - The video embedding helpers and methods now use a much more robust URL parser with support for local and remote URLs. The same parser is used in the Panel for consistency. [#3074](https://github.com/getkirby/kirby/pull/3074)
-- Invalid media URLs now render the error page instead of a simple error to avoid information leaks and to allow overriding the error behavior with custom code on the error page [#3202](https://github.com/getkirby/kirby/pull/3202)
-- New `Panel` class alias for `Kirby\Panel\Panel`
-- New `theme` property for `k-dropdown-content` to switch between dark (default) and `light` dropdowns
-- New `k-options-dropdown` component
-- New `$helper.color` method
+- `avif` file extension is now considered viewable [#2877](https://github.com/getkirby/kirby/pull/2877)
+- Invalid media URLs now render full error page instead of a simple error to avoid information leaks and to allow overriding the error behavior with custom code on the error page [#3202](https://github.com/getkirby/kirby/pull/3202)
+- `F::relativepath()` now supports file paths with an unrelated base by prefixing `../` to build a relative path [#3267](https://github.com/getkirby/kirby/issues/3267)
+- Improved API error paths when using custom directory setup
 - `Html::encode()` uses the `ENT_QUOTES` constant now for `htmlentities()`, converting both double and single quotes
 
-## Fixes
+### Panel
+
+- Much [smaller Panel files](/releases/3.6#fiber) to load
+- The license code is now only displayed to admins
+- The loading indicator of the Panel is now located in the breadcrumb
+- New `theme` property for `k-dropdown-content` to switch between `dark` (default) and `light` dropdowns
+- `$model->panel()->image()` now supports a second parameter to specify layout (default is `cards`) [https://github.com/getkirby/kirby/pull/3425](https://github.com/getkirby/kirby/pull/3425)
+- New `$store.dispatch("content/clear")` Vuex action that removes all unsaved changes from localStorage.
+- New JS helper to deep-merge objects (`helpers/object.js`)
+- New `$helper.color` helper for turninga string into a valid CSS color value
+- New `Panel` class alias for `Kirby\Panel\Panel`
+
+## Fixed
 
 - `User::changeEmail()` and `System::register()` now convert the provided email address to lowercase for better reliability [#3307](https://github.com/getkirby/kirby/pull/3307)
-- `cover` option fixed for all models and list layout in section. It can now be applied. [#3226](https://github.com/getkirby/kirby/issues/3226)
+- `cover` option fixed for all models and list layout in section. [#3226](https://github.com/getkirby/kirby/issues/3226)
+- Fixed overlay jumps top of the page at ESC keydown. [#3387](https://github.com/getkirby/kirby/issues/3387)
+- `Str::accepted` returns always floats as `quality` value (before default `1` as int, all actual quality values as string, e.g. `'0.7'`) [#3393](https://github.com/getkirby/kirby/pull/3393)
+- `Str::pool()`: the passed `$type` parameter is now treated case-insensitively [#3393](https://github.com/getkirby/kirby/pull/3393)
+- `Str::pool()` now also returns a string (if set via the second argument) if an array of types is passed as  first argument [#3393](https://github.com/getkirby/kirby/pull/3393)
 - Fixed return type for `Kirby\Cms\App::translation()` in DocBlock [#3383](https://github.com/getkirby/kirby/pull/3383)
-- Fixed overlay jumps top of the page when keydown escape. [#3387](https://github.com/getkirby/kirby/issues/3387)
-- `Str::accepted` returns always floats as `quality` value (before default `1` as int, all actual quality values as string, e.g. `'0.7'`) [https://github.com/getkirby/kirby/pull/3393](https://github.com/getkirby/kirby/pull/3393)
-- `Str::pool()`: the passed `$type` parameter is now treated case-insensitively [https://github.com/getkirby/kirby/pull/3393](https://github.com/getkirby/kirby/pull/3393)
-- `Str::pool()` now also returns a string (if set via the second argument) if an array of types is passed as  first argument [https://github.com/getkirby/kirby/pull/3393](https://github.com/getkirby/kirby/pull/3393)
+
 
 ## Refactoring & development changes
 
 ### Core
 
-- We merged all functionality from `Kirby\Cms\Dir` into `Kirby\Toolkit\Dir`. A class alias for the old class has been added. [#3290](https://github.com/getkirby/kirby/pull/3290)
-- `Kirby\Cms\KirbyTag` and `Kirby\Cms\KirbyTags` have been merged into `Kirby\Text\KirbyTag` and `Kirby\Text\KirbyTag`. Class aliases have been added. [#3296](https://github.com/getkirby/kirby/pull/3296)
-- We refactored many file-related classes started to gather all of them in the new `Kirby\Filesystem` namespace. [#3285](https://github.com/getkirby/kirby/pull/3285)
-    - `Kirby\Toolkit\File` takes care of everything CMS-unrelated. Gained a few more methods (e.g. `download`, `headers`).
-    - New class `Kirby\Filesystem\File` extends `Kirby\Toolkit\File` with some Cms-related functions (e.g. `::modified()` with handler, `::isResizable()`) - takes over a lot of functionality that was previously part of `Kirby\Image\Image` even for non-images
-    - New trait `Kirby\\Filesystem\IsFile` adds method-proxying to an asset object - either to `Kirby\Image\Image` or `Kirby\Filesystem\File` depending on the file type of the `$root` property
-    - `Kirby\Cms\FileFoundation` is removed - it gets replaced by `Kirby\Filesystem\IsFile` and all proxied methods of `Kirby\Filesystem\File`/`Kirby\Image\Image` which reach down to `Kirby\Toolkit\File` as well
-    - `Kirby\Cms\Asset` has been moved to the new namespace as `Kirby\Filesystem\Asset`
-    - `Kirby\Cms\Filename` has been moved to the new namespace as `Kirby\Filesystem\Filename`
-    - `Kirby\Image\Image` now extends `Kirby\Filesystem\File` and adds image-related methods (e.g. `dimensions`, `exif`)
-- `Kirby\Cms\Form` was merged into `Kirby\Form\Form`. A class alias has been added. [#3312](https://github.com/getkirby/kirby/pull/3312)
-- We have created a new `Kirby\Panel` namespace and refactored some classes to move to this new namespace. For all moved classes, class aliases have been created. [#3238](https://github.com/getkirby/kirby/pull/3238)
-- `$field->method()` uses `Html::encode()`
+- `$field->html()` uses `Html::encode()`
+
+#### Namespace shuffeling
+
+We reorganized internal packages and namespaces quite a bit with 3.6.
+
+**New `Kirby\Filesystem` namespace**
+
+We refactored many file-related classes started to gather all of them in the new `Kirby\Filesystem` namespace. [#3285](https://github.com/getkirby/kirby/pull/3285), [#3290](https://github.com/getkirby/kirby/pull/3290)
+
+| Before 3.6 | In 3.6 | Description |
+|-|-|-|
+| Kirby\Toolkit\File | `Kirby\Filesystem\File` | Everything related to a file in the filesystem - takes over a lot of functionality that was previously part of `Kirby\Image\Image` even for non-images |
+| Kirby\Image\Image | `Kirby\Image\Image` | now extends `Kirby\Filesystem\File` and adds image-related methods (e.g. `dimensions`, `exif`) |
+| Kirby\Cms\FileFoundation | `Kirby\Filesystem\IsFile` | adds method-proxying to an asset object - either to `Kirby\Filesystem\File` or `Kirby\Image\Image` depending on the file type of the `$root` property |
+| Kirby\Cms\Asset | `Kirby\Filesystem\Asset` | |
+| Kirby\Cms\Filename | `Kirby\Filesystem\Filename` | |
+| Kirby\Toolkit\Dir | `Kirby\Filesystem\Dir` | |
+| Kirby\Toolkit\F | `Kirby\Filesystem\F` | |
+| Kirby\Toolkit\Mime | `Kirby\Filesystem\Mime` | |
+
+**Moved and merged classes**
+
+We also moved and merged some more classes to simplify our setup:
+
+| Before 3.6 | In 3.6 | Reference |
+|-|-|-|
+| Kirby\Cms\Form | `Kirby\Form\Form` | [#3312](https://github.com/getkirby/kirby/pull/3312) |
+| Kirby\Cms\KirbyTag | `Kirby\Text\KirbyTag` | [#3296](https://github.com/getkirby/kirby/pull/3296) |
+| Kirby\Cms\KirbyTags | `Kirby\Text\KirbyTag` | [#3296](https://github.com/getkirby/kirby/pull/3296) |
+
+
+For all these changes, we have added class aliases that we will keep around until at least Kirby 4. This will make sure that your class references continue to work.
+
+**New `Kirby\Panel` namespace**
+
+[#3238](https://github.com/getkirby/kirby/pull/3238)
+
+
+| Before 3.6 | In 3.6 |
+|-|-|
+| Kirby\Cms\Panel | `Kirby\Panel\Panel` |
+| Kirby\Cms\PanelPlugins | `Kirby\Panel\Plugins` |
+
+The new namespace also holds some new classes, e.g. `Kirby\Panel\Page` or `Kirby\Panel\File`. We moved some Panel-related methods from the normal model classes to these, e.g. in case of `$page`:
+
+| Before 3.6 | In 3.6 |
+|-|-|
+| Kirby\Cms\Page::dragText() | `Kirby\Panel\Page::dragText()` |
+| Kirby\Cms\Page::panelId() | `Kirby\Panel\Page::id()` |
+| Kirby\Cms\Page::panelImage() | `Kirby\Panel\Page::image()` |
+| Kirby\Cms\Page::panelOptions() | `Kirby\Panel\Page::options()` |
+| Kirby\Cms\Page::panelPath() | `Kirby\Panel\Page::path()` |
+| Kirby\Cms\Page::panelPickerData() | `Kirby\Panel\Page::pickerData()` |
+| Kirby\Cms\Page::panelUrl() | `Kirby\Panel\Page::url()` |
+
+We added a new `->panel()` method to all models to access the Panel objects, so `$page->panelImage()` is now `$page->panel()->image()`.
+
 
 ### Panel
 
-- We now use Vite instead of Vue CLI for enhanced dev and build performance and a cleaner upgrade path to Vue 3. [#3190](https://github.com/getkirby/kirby/pull/3190)
-    - `npm run dev` in ~200 ms vs. ~9s (!)
-    - `npm run build` in ~8 s vs. ~10s
-- We moved from SCSS to plain CSS for the Panel with lots of new custom CSS properties that can be overwritten in the Panel CSS. [#3194](https://github.com/getkirby/kirby/pull/3194)
-- We started using [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties) and values for RTL support in the Panel. For now, we are also creating fallback code for older browsers. [#3306](https://github.com/getkirby/kirby/pull/3306)
-- Panel navigation now runs on Fiber - a new framework that allows us to handle routing, state data and much more from the backend. More exciting features and improvements built with Fiber to come.
-- New Panel frontend method `this.$reload()` which refreshes all view data via Fiber. Supports partial refreshes via `this.$reload({ only: "$user" })`
-- Local Panel development can now be done directly on the site domain when the [Kirby Sandbox](https://github.com/getkirby/sandbox) is used. Simply run Vite inside `kirby/panel` with `npm run dev` and open the Panel as normal.
-- New `k-items`, `k-item` and `k-item-image` Vue components that replace `k-cards`, `k-card` and `k-list`, `k-list-item`. To replace the old components, use e.g. `k-items` with `layout: cards`.
-- The Vue `k-app` component is now `k-inside` for creating the Panel wrapper setup when the user is logged in. Use `k-inside` - or new `k-outside` - to wrap views accordingly.
-- New `$store.dispatch("content/clear")` Vuex action that removes all unsaved changes from localStorage.
-- New `k-login-alert` Vue component
-- New JS helper to deep-merge objects (`helpers/object.js`)
+- [Vite](https://vitejs.dev) instead of Vue CLI for a faster development setup.
+- Local development can be done directly on the site domain when using the [Kirby Sandbox](https://github.com/getkirby/sandbox). Run `npm run dev` inside `kirby/panel` and open the Panel as normal.
+- Moved from SCSS to plain CSS. [#3194](https://github.com/getkirby/kirby/pull/3194)
+- New CSS variables that can be used for customizingthe Panel. [#3194](https://github.com/getkirby/kirby/pull/3194)
+- [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties) and values for RTL support in the Panel. For now, with fallback code for older browsers. [#3306](https://github.com/getkirby/kirby/pull/3306)
+- Large parts of the Panel run on our [new Fiber framework](/releases/3.6#fiber).
 - New `window.deprecated()` helper for the Panel frontend
-- Our CI uses dynamically built production files for frontend testing now
+- CI uses dynamically-built production files for frontend testing
 - Fixed deprecated slot syntax for Vue components [#3308](https://github.com/getkirby/kirby/pull/3308)
-- Removed classes in the `Header` component that were not applied in the DOM before and are therefore dead code [#3315](https://github.com/getkirby/kirby/pull/3315)
+- Removed unapplied classes in the `Header` component [#3315](https://github.com/getkirby/kirby/pull/3315)
 - Removed `$t()` from prop defaults [#3304](https://github.com/getkirby/kirby/pull/3304)
 - `vuex-i18n` was replaced with a custom implementation. [#2969](https://github.com/getkirby/kirby/pull/2969)
-- The Panel event bus was replaced with `mitt` [#3191](https://github.com/getkirby/kirby/pull/3191)
-- The loading indicator of the Panel is now located in the breadcrumb
+- Replaced Panel event bus with `mitt` [#3191](https://github.com/getkirby/kirby/pull/3191)
+- The former development `panel/index.html` file was removed
+- The internal Panel sandbox has been removed
 
 ## Breaking changes
 
 ### Core
 
-- `Kirby\Image\Image::__toString()` now returns the HTML `<img>` tag instead of the root string
+**Deprecated code that has been removed with 3.6.0**
+
+| Removed | Use instead |
+|-|-|
+| `Kirby\Cms\App::setLocale()` | `Kirby\Toolkit\Locale::set()` |
+| `Kirby\Cms\Asset::alt()` | - |
+| `Kirby\Cms\Page::sort()` | `Kirby\Cms\Page::changeSort()` |
+| `Kirby\Cms\KirbyTags::$tagClass` | You cannot set the class for KirbyTag objects to be created via `KirbyTags::parse()` anymore. |
+| `GET pages/(:any)/children/blueprints` | `GET pages/(:any)/blueprints` |
+| `GET site/children/blueprints` | `GET site/blueprints` |
+
+**Further breaking changes**
+
+- Multi-language setup: Slugs in content files of the default language will be ignored. The folder names decide the slugs for the default language.
+- `Html::encode()`: Single quotes now are also converted
+- `Kirby\Image\Image::__toString()` returns the HTML `<img>` tag instead of the root string
 - File hooks: the `$upload` parameter is now a `Kirby\Filesystem\File` object, before `Kirby\Image\Image`
 - The video embedding helpers and methods no longer throw exceptions if the provided URL is invalid, instead `null` is returned.
 - `Kirby\Toolkit\File::header()` now returns `void` instead of an empty `string` by default
-- The `Asset::alt()` method was removed as it didn't have a function on its own
-- Deprecated `Kirby\Cms\Page::sort()` has been removed. Use `Kirby\Cms\Page::changeSort()` instead.
-- `$files->add()` and `$users->add()` now throw exceptions when something other than a `File`/`User` object, a `Files`/`Users` object or a file/user ID is passed to them. Empty values (`null`, `false` and `true`) are silently ignored. The new behavior ensures consistency with `$pages->add()`. [#3248](https://github.com/getkirby/kirby/pull/3248)
-- Deprecated `Kirby\Cms\App::setLocale()` has been removed. Use `Kirby\Toolkit\Locale::set()` instead.
-- Deprecated API endpoint `pages/(:any)/children/blueprints` has been removed. Use `pages/(:any)/blueprints`instead.
-- Deprecated API endpoint `site/children/blueprints` has been removed. Use `site/blueprints` instead.
-- `KirbyTags::$tagClass` has been removed. You cannot set the class for KirbyTag objects to be created via `KirbyTags::parse()`.
-- Some argument and property types are now more specific and therefore stricter [#3282](https://github.com/getkirby/kirby/pull/3282) [#3241](https://github.com/getkirby/kirby/pull/3241)
-- Multi-language setup: Slugs in content files of the default language will be ignored. The folder names decide the slugs for the default language.
-- Use `$model->panel()->image()` instead `$model->panel()->icon()`
-- Removed `icon` prop from `k-card` and `k-list-item`. Pass data as part of the `image` prop instead.
-- `$model->panel()->image()` doesn't return `cards` and `list` keys with data for both sizes anymore but instead only `src` and `srcset` keys at the top level that correspondent to the `layout` parameter
-- `Html::encode()`: Single quotes now are also converted
+- `$files->add()` and `$users->add()` now throw exceptions when something other than a `File`/`User` object, a `Files`/`Users` object or a file/user ID is passed to them. Empty values (`null`, `false` and `true`) are silently ignored. [#3248](https://github.com/getkirby/kirby/pull/3248)
+- All API endpoints for content locking/unlocking don't display an exception anymore when content locking isn't supported.
+- Some argument and property types are now more specific and therefore stricter [#3282](https://github.com/getkirby/kirby/pull/3282), [#3241](https://github.com/getkirby/kirby/pull/3241)
+
 
 ### Panel
+
+**For all users**
 
 - New minimum browser requirements (browsers with native ESM support):
     - Firefox 60+
@@ -128,59 +204,72 @@ image:
     - macOS Safari 11+
     - Android Browser 81+
     - Chrome for Android 88+
-- Using custom Panel views (incl. routing, breadcrumbs...) in plugins has changed fundamentally. The old way of registering might still partly work but has shortcomings and will be completely removed in 3.7.0. Use Panel areas instead.
-- If you have modified the `->panel*()` in custom page models, you now need to return a custom panel model (based on `Kirby\Panel\Model`) at `$page->panel()` which then takes care of all Panel-related functions, e.g. if you had customized `$page->panelImage()` you need a custom `Kirby\Panel\Model` to then customise `$page→panel()->image()`.
-- New `k-items`, `k-item` and `k-item-image` Vue components that replace `k-cards`, `k-card` and `k-list`, `k-list-item`. To replace the old components, use e.g. `k-items` with `layout: cards`.
-- The `previewThumb` helper has been removed. `k-item-image` takes care of processing the image data correctly inside `k-item`.
+- Direct URLs for tabs ihave changed, e.g. now `/panel/site/?tab=yourTabName`
+- Direct URLs for the users view have changed, e.g. now `/panel/users/?role=yourRole`
+
+**Custom Panel views**
+- Using custom Panel views (incl. routing, breadcrumbs...) in plugins has changed fundamentally. You will have to use the [new Panel areas feature](/releases/3.6/panel-areas) now.
+- Accordingly, the frontend extension `panel.plugin({ view: [...] })` has been  removed. Use Panel areas instead.
+
+**`Kirby\Panel` namespace related**
+
+- If you have modified the `->panel*()` in custom models, you now need to return a custom Panel model (based on `Kirby\Panel\Model`) at `$page->panel()` which then takes care of all Panel-related functions, e.g. if you had customized `$page->panelImage()` you need a custom `Kirby\Panel\Page` to then customise `$page->panel()->image()`.
+- Use `$model->panel()->image()` instead `$model->panel()->icon()`
+- `$model->panel()->image()` doesn't return `cards` and `list` keys anymore. Instead, `src` and `srcset` keys at the top level that correspondent to the new `$layout` parameter.
+
+**Vue component changes**
+
+| Removed | Use instead |
+|-|-|
+| `k-app` | `k-inside` (authenticated) or `k-outside` (unauthenticated) |
+| `k-cards` | `k-items`  with `layout: cards` |
+| `k-card` | `k-item` with `layout: cards` |
+| `k-list` | `k-items`  with `layout: list` |
+| `k-list-item` | `k-item` with `layout: list` |
+| `k-browser-view` | - |
+| `k-custom-view` | - |
+
+- Removed `icon` prop from `k-card` and `k-list-item`. Pass data as part of the `image` prop instead.
+- If the `cover` option is not defined for a section, it is disabled by default [#3226](https://github.com/getkirby/kirby/issues/3226)
+
+**Helpers & libraries**
 - `vue-router` has been completely removed, use Panel areas to define custom Panel routes
-- If the `cover` option is not defined in the sections list layout, it is disabled by default [#3226](https://github.com/getkirby/kirby/issues/3226)
-- The following methods from `vuex-i18n` are no longer available in the new custom implementation:
-    - `$tc`
-    - `$tlang`
-    - `$i18n.localeExists`
-    - `$i18n.keyExists`
-
-    Translation strings cannot be added dynamically anymore, only through our official plugin extension
-
 - Changes in the Vuex store and store modules
-    - The `content` module doesn't handle content locking information anymore. This in now provided directly to the model views via Fiber.
-    - The `language` module has been removed, use `this.$language` and `this.$languages` instead.
-    - The `system` module has been removed, use `this.$system` instead.
-    - The `translation` module has been removed, use `this.$$translation` instead.
-    - The `user` module has been removed, use `this.$user` instead.
-    - `$store.dispatch('breadcrumb')` has been deprecated and removed. Use Panel areas instead to define the view breadcrumb.
-    - `$store.dispatch('title')` has been deprecated and removed. Use Panel areas instead to define the view title.
-- Direct URLs for tabs in the Panel have changed, e.g. now `/panel/site/?tab=yourTabName`
-- Direct URLs for the users view in the Panel filtered by a specific role have changed, e.g. now `/panel/users/?role=yourRole`
-- All API endpoints for content locking/unlocking don't display an exception anymore when content locking isn't supported.
-- The former development `panel/index.html` file was removed
-- `k-browser-view` and `k-custom-view` Vue components have been removed
-- The internal Panel sandbox has been removed
+    - `content` module doesn't handle content locking information anymore. This in now provided directly to the model views.
+    - `language` module has been removed, use `this.$language` and `this.$languages` instead.
+    - `system` module has been removed, use `this.$system` instead.
+    - `translation` module has been removed, use `this.$translation` instead.
+    - `user` module has been removed, use `this.$user` instead.
+    - `$store.dispatch('breadcrumb')` and `$store.dispatch('title')`have been removed. Use Panel areas instead.
+- The `previewThumb` helper has been removed. `k-item-image` takes care of processing the image data correctly inside `k-item`.
+- The following methods from `vuex-i18n` are no longer available in the new custom implementation: `$tc`,  `$tlang`, `$i18n.localeExists`, `$i18n.keyExists`.     Translation strings cannot be added dynamically anymore, only through our official extension.
+
 
 ## Deprecated
 
-- The frontend extension `panel.plugin({ view: [...] })` has been deprecated and will be removed in 3.7.0 - there are already some functionalities (e.g. menu entry) that aren't fully supported anymore. Use Panel areas instead.
-- We moved some Panel-Related methods for `$site`, `$page`, `$file` and `$user`:
-    - `->dragText()` is now `→panel()→dragText()`
-    - `->panelIcon()` is now `→panel()→icon()`
-    - `->panelImage()` is now `→panel()→image()`
-    - `->panelImageSource()` is now `→panel()→imageSource()`
-    - `->panelPath()` is now `→panel()→path()`
-    - `->panelPickerData()` is now `→panel()→pickerData()`
-    - `->panelOptions()` is now `→panel()→options()`
-    - `->panelUrl()` is now `→panel()→url()`
-    The old methods have been marked as deprecated, will start throwing warnings in 3.7.0 and will be removed in 3.8.0.
-- The API field `page.panelIcon` has been deprecated and will be removed in 3.7.0. Use `page.panelImage` instead
-- The API field `file.panelIcon` has been deprecated and will be removed in 3.7.0. Use `file.panelImage` instead
-- `page()` will now throw a deprecation warning if multiple IDs get passed. Will be enforced (breaking change) in 3.7.0. Use `pages()` instead.
-- `pages()` will now throw a deprecation warning if single ID gets passed. Will be enforced (breaking change) in 3.7.0. Use `page()` instead.
-- Deprecated API endpoint `pages/(:any)/children/blueprints` is now throwing deprecation warnings. Will be removed in 3.7.0. Use `pages/(:any)/blueprints` instead.
-- Deprecated API endpoint `site/children/blueprints` is now throwing deprecation warnings. Will be removed in 3.7.0. Use `site/blueprints` instead.
-- Deprecated `Kirby\Cms\App::setLocale()` is now throwing deprecation warnings. Will be removed in 3.7.0. Use `Kirby\Toolkit\Locale::set()` instead.
-- Deprecated `Kirby\Cms\Block::_key()` is now throwing deprecation warnings. Will be removed in 3.7.0. Use `Kirby\Cms\Block::type()` instead.
-- Deprecated `Kirby\Cms\Block::_uid()` is now throwing deprecation warnings. Will be removed in 3.7.0. Use `Kirby\Cms\Block::id()` instead.
-- Deprecated `Kirby\Toolkit\I18n::fallback()` is now throwing deprecation warnings. Will be removed in 3.7.0. Use `Kirby\Toolkit\I18n::fallbacks()[0]` instead.
-- `Kirby\Toolkit\Str::isUrl()` has been marked as deprecated and will be removed in 3.8.0. Use `Kirby\Toolkit\V::url()` instead [https://github.com/getkirby/kirby/pull/3391](https://github.com/getkirby/kirby/pull/3391)
+- `page()` helper now throws a deprecation warning if multiple IDs get passed. Will be enforced in 3.7.0. Use `pages()` instead.
+- `pages()` will now throw a deprecation warning if single ID gets passed. Will be enforced in 3.7.0. Use `page()` instead.
 - Creating a `Kirby\Cms\File` without a `parent` property has been deprecated and throws a warning. Starting in 3.7.0 the property will be required and cause a breaking error if not passed. [#3372](https://github.com/getkirby/kirby/pull/3372)
-- `GET (:all)/lock` and `GET (:all)/unlock` API endpoints have been deprecated and throw a warning in debug mode. They will be removed in 3.7.0.
-- The `heartbeat` Vuex module has been deprecated and will be removed in 3.7.0
+
+| Deprecated | Throws warning | Removed in | Use instead |
+|-|-|-|-|
+| `GET pages/(:any)/children/blueprints` | yes | 3.7.0 | `GET pages/(:any)/blueprints` |
+| `GET site/children/blueprints` | yes | 3.7.0 | `GET site/blueprints` |
+| API field `page.panelIcon` | yes | 3.7.0 | `page.panelImage` |
+| API field `file.panelIcon` | yes | 3.7.0 | `file.panelImage` |
+| `Kirby\Cms\App::setLocale()` | yes | 3.7.0 | `Kirby\Toolkit\Locale::set()` |
+| `Kirby\Cms\Block::_key()` | yes | 3.7.0 | `Kirby\Cms\Block::type()` |
+| `Kirby\Cms\Block::_uid()` | yes | 3.7.0 | `Kirby\Cms\Block::id()` |
+| `Kirby\Toolkit\I18n::fallback()` | yes | 3.7.0 | `Kirby\Toolkit\I18n::fallbacks()[0]` |
+| `GET (:all)/lock` | yes | 3.7.0 | - |
+| `GET (:all)/unlock` | yes | 3.7.0 | - |
+| Vuex `heartbeat` module | yes | 3.7.0 | - |
+| `$model->dragText()` | 3.7.0 | 3.8.0 | `$model->panel()->dragText()` |
+| `$model->panelIcon()` | 3.7.0 | 3.8.0 | `$model->panel()->image()` |
+| `$model->panelImage()` | 3.7.0 | 3.8.0 | `$model->panel()->image()` |
+| `$model->panelImageSource()` | 3.7.0 | 3.8.0 | `$model->panel()->imageSource()` |
+| `$model->panelPath()` | 3.7.0 | 3.8.0 | `$model->panel()->path()` |
+| `$model->panelPickerData()` | 3.7.0 | 3.8.0 | `$model->panel()->pickerData()` |
+| `$model->panelOptions()` | 3.7.0 | 3.8.0 | `$model->panel()->options()` |
+| `$model->panelUrl()` | 3.7.0 | 3.8.0 | `$model->panel()->url()` |
+| `Kirby\Toolkit\Str::isUrl()` | 3.7.0 | 3.8.0 | `Kirby\Toolkit\V::url()` |
