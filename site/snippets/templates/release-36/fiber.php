@@ -12,7 +12,7 @@
     ],
     [
       'title' => 'Super simple plugins',
-      'text' => 'While Panel plugins were already extremely powerful, they were also quite complex to build. With the new backend architecture, we can handle many tasks on the server now. Building views, dialogs and more is so much easier now. No need to be a Vue.js expert anymore.'
+      'text' => 'While Panel plugins were already extremely powerful, they were also quite complex to build. With the new backend architecture, we can handle many tasks on the server now. Building views, dialogs and more is much easier now. No need to be a Vue.js expert anymore.'
     ],
     [
       'title' => 'Better performance',

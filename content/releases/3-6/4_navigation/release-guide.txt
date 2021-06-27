@@ -2,8 +2,7 @@ Title: Navigation option
 ----
 Text:
 
-```yaml
-# /site/blueprints/pages/default.yml
+```yaml "/site/blueprints/pages/default.yml"
 
 title: Simple Page
 

@@ -53,7 +53,7 @@
   <ul class="roadmap flex justify-between mb-24">
     <li>
       <p class="h2">alpha</p>
-      <p class="font-mono text-xs">June 29th</p>
+      <p class="font-mono text-xs">July 2nd</p>
     </li>
     <li>
       <p class="h2">beta</p>
