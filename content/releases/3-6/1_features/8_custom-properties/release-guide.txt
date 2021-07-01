@@ -125,3 +125,12 @@ Text:
 }
 ```
 
+## Example
+
+```css "/assets/css/panel.css"
+:root {
+  --color-backgdrop: rgba(255, 255, 255, 0.6);
+}
+```
+
+
