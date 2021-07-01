@@ -11,9 +11,15 @@
     'buttons' => [
       [
         'text' => 'Try now',
-        'link' => '/try',
+        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-alpha.1',
         'icon' => 'download',
         'style' => 'filled'
+      ],
+      [
+        'text' => '3.6 docs',
+        'link' => $page->children()->first()->url(),
+        'icon' => 'book',
+        'style' => 'outlined'
       ],
     ],
     'center' => false,
@@ -63,13 +69,13 @@
     'buttons' => [
       [
         'text' => 'Try now',
-        'link' => '/try',
+        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-alpha.1',
         'icon' => 'download'
       ],
       [
         'text'  => '3.6 docs',
         'link'  => $page->children()->first()->url(),
-        'icon'  => 'flash',
+        'icon'  => 'book',
         'style' => 'outlined'
       ]
     ]
