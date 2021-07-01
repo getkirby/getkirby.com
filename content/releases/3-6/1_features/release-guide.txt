@@ -1,0 +1,21 @@
+Title: Features
+
+----
+
+Intro: Kirby 3.6 is not just a groundbreaking overhaul of our Panel architecture. It also introduces and paves the way for many new highly-requested features.
+
+----
+
+Text:
+
+## Implemented
+
+You can find a list and docs for all implemented new features on the right. We will extend this list with every new implemented feature. Keep coming back for more.
+
+## Planned
+
+- Fiber sections
+- Fiber search
+- Fiber dropdowns
+- Copy & paste for the blocks field
+

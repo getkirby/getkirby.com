@@ -1,0 +1,30 @@
+Title: New Panel classes
+----
+Text:
+
+## Moved classes
+
+| Before 3.6 | In 3.6 |
+|-|-|
+| Kirby\Cms\Panel | `Kirby\Panel\Panel` |
+| Kirby\Cms\PanelPlugins | `Kirby\Panel\Plugins` |
+
+## New classes
+
+The new namespace also holds some new classes, e.g. `Kirby\Panel\Page` or `Kirby\Panel\File`. We moved some Panel-related methods from the normal model classes to these, e.g. in case of `$page`:
+
+| Before 3.6 | In 3.6 |
+|-|-|
+| Kirby\Cms\Page::dragText() | `Kirby\Panel\Page::dragText()` |
+| Kirby\Cms\Page::panelId() | `Kirby\Panel\Page::id()` |
+| Kirby\Cms\Page::panelImage() | `Kirby\Panel\Page::image()` |
+| Kirby\Cms\Page::panelOptions() | `Kirby\Panel\Page::options()` |
+| Kirby\Cms\Page::panelPath() | `Kirby\Panel\Page::path()` |
+| Kirby\Cms\Page::panelPickerData() | `Kirby\Panel\Page::pickerData()` |
+| Kirby\Cms\Page::panelUrl() | `Kirby\Panel\Page::url()` |
+
+We added a new `->panel()` method to all models to access the Panel objects, so `$page->panelImage()` is now `$page->panel()->image()`.
+
+## Pull request
+
+[#3238](https://github.com/getkirby/kirby/pull/3238)
