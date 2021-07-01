@@ -87,7 +87,7 @@
 </section>
 
 <section id="get-started" class="mb-42">
-  <h2 class="h2 text-center mb-6">What are you waiting for?</h2>
+  <h2 class="h2 text-center mb-6">Get involved</h2>
   <?php snippet('cta', [
     'buttons' => [
       [
