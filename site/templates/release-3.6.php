@@ -48,7 +48,7 @@
     </div>
     <div>
       <?php snippet('templates/features/intro', [
-        'title' => 'Better panel image settings',
+        'title' => 'Better Panel image settings',
         'intro' => 'Improve your previews with custom queries',
         'text'  => 'You can now set custom backgrounds, icons, images and more for your pages via blueprint settings <a href="/releases/3.6/features/image-options">Learn more &rsaquo;</a>',
       ]) ?>

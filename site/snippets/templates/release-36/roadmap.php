@@ -43,9 +43,9 @@
   </style>
 
   <div class="prose bg-white p-12 shadow-xl text-xl mb-24 introduction">
-    <p>We've started working on Kirby 3.6 in April and want to take you with us on our journey from now on.</p>
-    <p>This release is maybe the most important one since 3.0. The v3 foundation is still holding up and we see endless possibilities to extend it and keep it growing. But we also want to make sure that we don't carry along old baggage. We've learned a ton from all the projects you build and the plugins you develop and there are things in our architecture that could be better, simpler – more aligned with Kirby's philosophy.</p>
-    <p>With 3.6, we want to get rid of the bad parts and move forward with some fantastic new parts. 3.6 is the door opener for all your feature requests that are currently blocked by some over-complicated parts in the core – yes, they exist ;) We don't even want to think about Kirby 4. We want to make Kirby 3 even more awesome and more stable – for years to come.</p>
+    <p>We started working on Kirby 3.6 in April and want to take you with us on our journey from now on.</p>
+    <p>This release is maybe the most important one since 3.0. The v3 foundation is still holding up and we see endless possibilities to extend it and keep it growing. But we also want to make sure that we don't carry along old baggage. We've learned a ton from all the projects you build and the plugins you develop, and there are things in our architecture that could be better, simpler – more aligned with Kirby's philosophy.</p>
+    <p>With 3.6, we want to get rid of the bad parts and move forward with some fantastic new parts. 3.6 is the door opener for all your feature requests that are currently blocked. We don't want to think about Kirby 4 right now. We want to make Kirby 3 even more awesome and more stable – for years to come.</p>
     <p>We are taking some bigger steps with this release that introduce breaking changes. That's why we want you to have full insight in our roadmap, in the state of the alpha and beta and hear your feedback as early as possible.</p>
     <p>We hope you'll enjoy the alpha!</p>
     <p><strong>– The Kirby team</strong></p>

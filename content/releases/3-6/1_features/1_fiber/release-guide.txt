@@ -1,18 +1,18 @@
 Title: Fiber
 ----
-Intro: We’ve spent the last months working on a brand new backend architecture for the Panel. Moving from a single page application to a more traditional approach with a simplified server-rendered backend. The new architecture is inspired by Inertia.js and simplifies our Panel and Panel plugins in ways that we’ve never dreamed of.
+Intro: We’ve spent the last months working on a brand new backend architecture for the Panel. Moving away from a single page application to a more traditional approach with a simplified server-rendered backend. The new architecture is inspired by Inertia.js and simplifies our Panel and Panel plugins in ways that we’ve never dreamed of.
 ----
 Text:
 
 ## Fiber?
 
-The single page application architecture has served us well so far in Kirby 3. But we also realized that adding features always means adding tons of JavaScript. Every new route, dialog, every new field type and section increases the amount of JS the Panel will send back to our users and there's hardly any way out of it. But we want less JS not more.
+The single page application architecture has served us well in Kirby 3 until now. But we also realized that adding features always means adding tons of JavaScript. Every new route, dialog, every new field type and section increases the amount of JS the Panel will send back to our users ,and there's hardly any way out of it. But we want less JS not more.
 
-This is where the new Fiber concept really shines. It takes all the routing and state management back to the server. Whatever can be prepared in PHP will be prepared in PHP and our Vue application is mostly responsible to display the Panel afterwards and add the interactive bits and pieces. If you've ever heard of Turbolink, Pjax or similar approaches, you already know mostly what Fiber does.
+This is where the new Fiber concept really shines. It takes all the routing and state management back to the server. Whatever can be prepared in PHP will be prepared in PHP, and our Vue application is mainly responsible for displaying the Panel afterwards and adding the interactive bits and pieces. If you've ever heard of Turbolink, Pjax or similar approaches, you already know mostly what Fiber does.
 
 ### Here's how Fiber works
 
-You visit the Panel for the first time and a regular HTTP request is sent to the server. The server will render the Panel HTML document, which looks like this (simplified):
+When you visit the Panel for the first time, a regular HTTP request is sent to the server. The server will render the Panel HTML document, which looks like this (simplified):
 
 ```html "/panel"
 <html>
@@ -37,7 +37,7 @@ Now Vue.js kicks in and only renders that view with the data in the fiber object
 
 ### Routing
 
-When you now click on a link in the Panel, the event is being intercepted and a JS fetch request is being sent to the server. This fetch request will no longer return the entire Panel document, but only the updated Fiber object for the new view.
+When you now click on a link in the Panel, the event is intercepted and a JS fetch request is sent to the server. This fetch request will no longer return the entire Panel document, but only the updated Fiber object for the new view.
 
 ```json "/panel/pages/page-a"
 {
@@ -52,7 +52,7 @@ Fiber now does two things:
 1. It updates the URL in the Browser
 2. It refreshes the Vue app with the new state from the new Fiber object
 
-Whenever you reload the same URL afterwards, you go back to the beginning and the server would return the full document again with the same state.
+Whenever you reload the same URL afterwards, you go back to the beginning and the server will return the full document again with the same state.
 
 ### What makes this approach so great?
 
@@ -74,7 +74,7 @@ With this approach, we already managed to cut a huge 100kb+ chunk out of our Vue
 
 ## Areas
 
-Fiber comes with a new structure for the Panel. Every part of the panel is a separated area with routes, optional menu item, icon, breadcrumb label, access permissions, etc.
+Fiber comes with a new structure for the Panel. Every part of the Panel is a separated area with routes, optional menu item, icon, breadcrumb label, access permissions, etc.
 
 Your plugins can create additional Areas for entire new Panel parts and mini applications.
 

@@ -132,7 +132,7 @@ Our custom properties can now be used throughout the Panel and in every plugin. 
 
 ## Logical properties
 
-Our RTL support is now powered by [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties) For now, with fallback code for older browsers. We encourage all plugin developers to look into logical properties for their Panel plugins.
+Our RTL support is now powered by [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties). For now with fallback code for older browsers. We encourage all plugin developers to look into logical properties for their Panel plugins.
 
 ## Pull requests
 

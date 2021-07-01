@@ -6,7 +6,7 @@ We reorganized internal packages and namespaces quite a bit with 3.6.
 
 ## New `Kirby\Filesystem` namespace
 
-We refactored many file-related classes started to gather all of them in the new `Kirby\Filesystem` namespace. [#3285](https://github.com/getkirby/kirby/pull/3285), [#3290](https://github.com/getkirby/kirby/pull/3290)
+We refactored many file-related classes and started to gather all of them in the new `Kirby\Filesystem` namespace. [#3285](https://github.com/getkirby/kirby/pull/3285), [#3290](https://github.com/getkirby/kirby/pull/3290)
 
 | Before 3.6 | In 3.6 | Description |
 |-|-|-|
