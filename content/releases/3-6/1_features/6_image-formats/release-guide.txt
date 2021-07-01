@@ -42,7 +42,7 @@ $image->srcset([
 
 ## Support
 
-GDLib/SimpleImage driver currently only supports `webp`, ImageMagick supports `webp` and `avif`
+The GDLib/SimpleImage driver currently only supports `webp`, ImageMagick supports `webp` and `avif`
 
 Be aware that not all browsers support the new formats yet.
 

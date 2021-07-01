@@ -22,9 +22,9 @@ $array = A::map($array, function ($item) {
 
 ## `router()`
 
-New `router()` helper that takes a set of routes and request data and directly executes the matching routing action
+The new `router()` helper takes a set of routes and request data and directly executes the matching routing action.
 
-This helper is great to build your own custom router. This could be done in route or in a custom script.
+This helper is great to build your own custom router. This could be done in the config or in a custom script.
 
 ```php "/site/config/config.php"
 <?php

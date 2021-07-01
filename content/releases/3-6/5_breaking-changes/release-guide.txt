@@ -12,7 +12,7 @@ We know that breaking changes suck, when they break your plugins or other parts 
 
 - We will provide a tool to check for breaking changes in your installation
 - We've created aliases for changed classes that will be removed in later releases to give you a transition time
-- Were possible, we will try to help plugin developers with pull requests to migrate their plugins
+- Where possible, we will try to help plugin developers with pull requests to migrate their plugins
 
 ## Core
 
@@ -29,7 +29,7 @@ We know that breaking changes suck, when they break your plugins or other parts 
 
 ### Further breaking changes
 
-- Multi-language setup: Slugs in content files of the default language will be ignored. The folder names decide the slugs for the default language.
+- Multi-language setup: slugs in content files of the default language will be ignored. The folder names decide the slugs for the default language.
 - `Html::encode()`: Single quotes now are also converted
 - `Kirby\Image\Image::__toString()` returns the HTML `<img>` tag instead of the root string
 - File hooks: the `$upload` parameter is now a `Kirby\Filesystem\File` object, before `Kirby\Image\Image`
@@ -51,7 +51,7 @@ We know that breaking changes suck, when they break your plugins or other parts 
     - macOS Safari 11+
     - Android Browser 81+
     - Chrome for Android 88+
-- Direct URLs for tabs ihave changed, e.g. now `/panel/site/?tab=yourTabName`
+- Direct URLs for tabs have changed, e.g. now `/panel/site/?tab=yourTabName`
 - Direct URLs for the users view have changed, e.g. now `/panel/users/?role=yourRole`
 
 ### Custom Panel views
@@ -60,9 +60,9 @@ We know that breaking changes suck, when they break your plugins or other parts 
 
 ### `Kirby\Panel` namespace related
 
-- If you have modified the `->panel*()` in custom models, you now need to return a custom Panel model (based on `Kirby\Panel\Model`) at `$page->panel()` which then takes care of all Panel-related functions, e.g. if you had customized `$page->panelImage()` you need a custom `Kirby\Panel\Page` to then customise `$page->panel()->image()`.
-- Use `$model->panel()->image()` instead `$model->panel()->icon()`
-- `$model->panel()->image()` doesn't return `cards` and `list` keys anymore. Instead, `src` and `srcset` keys at the top level that correspondent to the new `$layout` parameter.
+- If you have modified the `->panel*()` in custom models, you now need to return a custom Panel model (based on `Kirby\Panel\Model`) at `$page->panel()` which then takes care of all Panel-related functions, e.g. if you had customized `$page->panelImage()` you need a custom `Kirby\Panel\Page` to then customize `$page->panel()->image()`.
+- Use `$model->panel()->image()` instead of `$model->panel()->icon()`
+- `$model->panel()->image()` doesn't return `cards` and `list` keys anymore. Instead, `src` and `srcset` keys at the top level that correspond to the new `$layout` parameter.
 
 ### Vue component changes
 

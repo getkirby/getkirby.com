@@ -10,7 +10,7 @@ Text:
 
 ## Implemented
 
-Every implemented feature will be listed here and we will already document them as good as we can during the process. Keep coming back for more.
+Every implemented feature will be listed here and we will start documenting them as best we can during the process. Keep coming back for more.
 
 (snippet: templates/release-36/features-implemented)
 

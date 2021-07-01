@@ -6,8 +6,8 @@ Text:
 ## Core
 
 - The video embedding helpers and methods now use a much more robust URL parser with support for local and remote URLs. The same parser is used in the Panel for consistency. [#3074](https://github.com/getkirby/kirby/pull/3074)
-- `avif` file extension is now considered viewable [#2877](https://github.com/getkirby/kirby/pull/2877)
-- Invalid media URLs now render full error page instead of a simple error to avoid information leaks and to allow overriding the error behavior with custom code on the error page [#3202](https://github.com/getkirby/kirby/pull/3202)
+- The `avif` file extension is now considered viewable [#2877](https://github.com/getkirby/kirby/pull/2877)
+- Invalid media URLs now render the full error page instead of a simple error to avoid information leaks and to allow overriding the error behavior with custom code on the error page [#3202](https://github.com/getkirby/kirby/pull/3202)
 - `F::relativepath()` now supports file paths with an unrelated base by prefixing `../` to build a relative path [#3267](https://github.com/getkirby/kirby/issues/3267)
 - Improved API error paths when using custom directory setup
 - `Html::encode()` uses the `ENT_QUOTES` constant now for `htmlentities()`, converting both double and single quotes
