@@ -3,7 +3,7 @@
 
 <header class="mb-12 flex items-end justify-between">
   <div>
-    <h1 class="h1">3.6-alpha ⚡</h1>
+    <h1 class="h1">3.6-alpha.1 ⚡</h1>
     <p class="h1 color-gray-600">Developer preview</p>
   </div>
 
@@ -38,7 +38,7 @@
       <?php snippet('templates/features/intro', [
         'title' => 'WebP & Avif Support',
         'intro' => 'Serve smaller and better images',
-        'text'  => 'Our image processing API finally supports webp and avif as better alternatives for your jpegs or pngs.',
+        'text'  => 'Our image processing API finally supports webp and avif as better alternatives for your jpegs or pngs. <a href="/releases/3.6/features/image-formats">Learn more &rsaquo;</a>',
       ]) ?>
 
       <figure class="bg-black rounded">
@@ -50,7 +50,7 @@
       <?php snippet('templates/features/intro', [
         'title' => 'Better panel image settings',
         'intro' => 'Improve your previews with custom queries',
-        'text'  => 'You can now set custom backgrounds, icons, images and more for your pages via blueprint settings',
+        'text'  => 'You can now set custom backgrounds, icons, images and more for your pages via blueprint settings <a href="/releases/3.6/features/image-options">Learn more &rsaquo;</a>',
       ]) ?>
 
       <figure class="bg-black rounded">
