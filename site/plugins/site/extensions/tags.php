@@ -11,6 +11,15 @@ use Kirby\Reference\Types;
 $tags = [];
 
 /**
+ * (snippet: snippet/to/render/the/children)
+ */
+$tags['snippet'] = [
+    'html' => function ($tag) {
+        return snippet($tag->value(), [], true);
+    }
+];
+
+/**
  * (image: my-screenshot.jpg)
  */
 $tags['image'] = [
@@ -145,7 +154,7 @@ $tags['docs'] = [
 
 
 /**
- * Enhanced link tag with support for automatic 
+ * Enhanced link tag with support for automatic
  * linking to Reference pages
  */
 $tags['class'] = $tags['method'] = [
@@ -160,14 +169,14 @@ $tags['class'] = $tags['method'] = [
         // (class: foo method: bar)
         if ($tag->attr('class') && $tag->attr('method')) {
             $type .= '::' . $tag->attr('method');
-            
+
             if ($text === null) {
                 $parts = Str::split($tag->attr('class'), '\\');
                 $name  = array_pop($parts);
                 $text = $name . '->' . $tag->attr('method') . '()';
             }
         }
-        
+
         return Types::format($type, true, $text);
     }
 ];
