@@ -1,4 +1,4 @@
-Title: TailwindUI components
+Title: Nested blocks advanced
 
 ----
 
@@ -6,7 +6,7 @@ Published: 2021-06-24
 
 ----
 
-Description: Building easily TailwindUI components with nested blocks and different layouts.
+Description: A more advanced example of nested blocks with different layouts.
 
 ----
 
@@ -15,29 +15,11 @@ Authors: - authors/christian-fickinger
 ----
 
 Text:
-This example shows, how you can easily implement [TailwindUI](https://tailwindui.com/) components using nested blocks. You should have read and understood the cookbook recipe [Nested blocks](../panel/nested-blocks) first. It is an advanced version of it, which additionally allows to pass collected values from the parent block to the nested block. The possiblity to use different layouts inside the same block is perfect to build complex libraries like TailwindUI components are.
-
-
-## Preview
-
-In our example we build a [FAQ section](https://tailwindui.com/components/marketing/sections/faq-sections) with different layouts.
-
-(image: example1.png)
-*Example: Offset with supporting text*
-
-(image: example2.png)
-*Example: Two columns on brand*
-
+This is an advanced version of the cookbook recipe for nested blocks, which additionally allows to pass collected values from the parent block to the nested block. You should have read and understood the cookbook recipe [Nested blocks](../panel/nested-blocks) first. In this example we extend it with additional layouts.
 
 
 ## Preparation
-You need to install the [Nested blocks](../panel/nested-blocks) example from the mentioned cookbook recipe above. We modify this example step by step. [Tailwindcss](https://tailwindcss.com/) is not needed for this example.
-
-<info>Unfortunately TailwindUI components are not free, so I can't provide the full HTML code, but with this example, you can easily implement it yourself. </info>
-
-
-
-
+You need to install the [Nested blocks](../panel/nested-blocks) example from the mentioned cookbook recipe above. We modify this example step by step.
 
 
 ## Blueprints
@@ -84,7 +66,7 @@ elseif ($layout == 'v2'):
 
 endif;
 ```
-Within each version, we now call the nested block as follows. It is important to pass the selected layout` to the nested block, if we want to use different HTML markup for each version.
+Within each version, we now call the nested block as follows. It is important to pass the selected `layout` to the nested block, if we want to use different HTML markup for each version.
 
 ```php
 foreach ($block->blocks()->toBlocks() as $nestedBlock):
