@@ -7,11 +7,13 @@
   'features' => [
     [
       'title' => 'New cardlets',
-      'text' => 'They are finally here! We’ve been showing them more than a year ago and the time is finally right. Cardlets are now available everywhere and can be used instead of lists or cards. They are the perfect mixture between visual and text content.'
+      'text' => 'They are finally here! We’ve been showing them more than a year ago and the time is finally right. Cardlets are now available everywhere and can be used instead of lists or cards. They are the perfect mixture between visual and text content.',
+      'link' => '/releases/3.6/features/cardlets'
     ],
     [
       'title' => 'CSS variables',
-      'text' => 'Every little detail of the Panel is now defined as a CSS variable. What’s great about that? You can overwrite our variables in your panel.css. Custom Panel themes just got so much easier.'
+      'text' => 'Every little detail of the Panel is now defined as a CSS variable. What’s great about that? You can overwrite our variables in your panel.css. Custom Panel themes just got so much easier.',
+      'link' => '/releases/3.6/features/custom-properties'
     ],
   ]
 ]);
