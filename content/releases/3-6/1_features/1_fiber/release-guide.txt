@@ -1,12 +1,82 @@
 Title: Fiber
 ----
-Intro:
+Intro: We’ve spent the last months working on a brand new backend architecture for the Panel. Moving from a single page application to a more traditional approach with a simplified server-rendered backend. The new architecture is inspired by Inertia.js and simplifies our Panel and Panel plugins in ways that we’ve never dreamed of.
 ----
 Text:
 
+## Fiber?
+
+The single page application architecture has served us well so far in Kirby 3. But we also realized that adding features always means adding tons of JavaScript. Every new route, dialog, every new field type and section increases the amount of JS the Panel will send back to our users and there's hardly any way out of it. But we want less JS not more.
+
+This is where the new Fiber concept really shines. It takes all the routing and state management back to the server. Whatever can be prepared in PHP will be prepared in PHP and our Vue application is mostly responsible to display the Panel afterwards and add the interactive bits and pieces. If you've ever heard of Turbolink, Pjax or similar approaches, you already know mostly what Fiber does.
+
+### Here's how Fiber works
+
+You visit the Panel for the first time and a regular HTTP request is sent to the server. The server will render the Panel HTML document, which looks like this (simplified):
+
+```html "/panel"
+<html>
+	<head>
+		<link rel="stylesheet" href="/app.css">
+	</head>
+	<div id="app"></div>
+	<script>
+		const fiber = '<?= json_encode([
+			'user' => [...],
+			'view' => [...],
+			'translation' => [...],
+			// etc.
+		]) ?>';
+	</script>
+	<script src="/app.js">
+</html>
+```
+
+The JS fiber object is populated with data from PHP. The server injects all the data that the Panel needs for that particular view that way.
+Now Vue.js kicks in and only renders that view with the data in the fiber object.
+
+### Routing
+
+When you now click on a link in the Panel, the event is being intercepted and a JS fetch request is being sent to the server. This fetch request will no longer return the entire Panel document, but only the updated Fiber object for the new view.
+
+```json "/panel/pages/page-a"
+{
+	"user": {...},
+	"view": {...},
+	"translation": {...}
+	// etc.
+}
+```
+Fiber now does two things:
+
+1. It updates the URL in the Browser
+2. It refreshes the Vue app with the new state from the new Fiber object
+
+Whenever you reload the same URL afterwards, you go back to the beginning and the server would return the full document again with the same state.
+
+### What makes this approach so great?
+
+- Routing is done in PHP with our good old Kirby router.
+- We can exactly control what data needs to be sent for each view
+- State can be handled on the server with good old sessions
+- The API is not affected by any of this and can be a lot less specific
+- The bundle size does not blow up with new routes or new requirements for state management
+- Less logic in JS and a lot less complicated Vue components. You throw in state via props and that's it.
+- Every view is super easy to test on the backend with PHPUnit
+
+### Not just views
+
+We've taken this concept and extended it to more parts of the Panel. Dialogs are now also handled with a similar approach and we are already working on search, dropdowns and more.
+
+### A lot less JS
+
+With this approach, we already managed to cut a huge 100kb+ chunk out of our Vue.js application. It's massive and it's so much fun.
+
 ## Areas
 
-Every section of the panel is a separated area with routes, optional menu item, icon, breadcrumb label, access permissions, etc.
+Fiber comes with a new structure for the Panel. Every part of the panel is a separated area with routes, optional menu item, icon, breadcrumb label, access permissions, etc.
+
+Your plugins can create additional Areas for entire new Panel parts and mini applications.
 
 ## Default areas
 
@@ -21,108 +91,84 @@ The following "areas" are installed by default:
 
 ## Area definition
 
-Areas are defined in a callback function that receives the `$kirby` instance and must return their configuration as an array
-
-```php
-return function (Kirby $kirby) {
-	return [
-		// icon for the menu and breadcrumb
-	  'icon'  => 'home',
-
-		// Label for the menu and the breadcrumb
-    'label' => t('site'),
-
-		// optional replacement for the breadcrumb label
-		'breadcrumbLabel' => function () {
-			return kirby()->site()->title()->or(t('site'))->value();
-		},
-
-		// show/hide from menu
-    'menu'  => true,
-
-		// the menu link
-    'link'  => 'site',
-
-		// routes for the area
-		'routes' => [
-			[
-				// All panel patterns must not start with 'panel/'
-				// The panel slug is automatically prepended.
-				'pattern' => 'site',
-				'action'  => function () {
-
-					// app routes return a simple array
-					// which will be injected into our Vue app
-					// The array can control the loaded Vue component,
-					// props for the component and settings for the current view
-					// (like breadcrumb, title, active search type etc)
-					return [
-
-						// The Vue view component is stored in
-						// panel/src/components/Views and will be loaded
-						// by the Vue app. For plugins, it can also be
-						// created manually in a plugin index.js
-						'component' => 'k-site-view',
-
-						// the breadcrumb can be just an array or a callback
-						// function for more complex breadcrumb logic.
-						'breadcrumb' => function () {
-							// each item in the breadcrumb array
-							// has a label and a link attribute
-							return [
-								[
-									'label' => 'My page',
-									'link'  => '/site/pages+mypage'
-								]
-							];
-						},
-
-						// props will be directly available in the
-						// Vue component. It's a super convenient way
-						// to send backend data to the Panel
-						'props' => [
-							...
-						]
-
-						// we can preset the search type with the
-						// search attribute
-						'search' => 'pages',
-						'title' => 'My Page'
-
-					];
-				}
-			]
-		]
-}
-```
-
-## Area plugins
-
 Plugins can create their own Panel areas. Areas can be just a single view or really complex applications with multiple routes.
+
+Areas are defined in a callback function that receives the `$kirby` instance and must return their configuration as an array
 
 ```php
 Kirby::plugin('yourname/todos', [
 	'areas' => [
-		'todos' => [
-			'label' => 'Todos',
-			'icon'  => 'check',
-			'menu' => true
-			'link' => 'todos',
-			'routes' => [
-				[
-					'pattern' => 'todos',
-					'action'  => function () {
-						return [
-							'component' => 'k-todos-view',
-							'title' => 'Todos',
-							'props' => [
-								'todos' => [...]
+		'todos' => function ($kirby) {
+			return [
+				// Label for the menu and the breadcrumb
+				'label' => 'Todos',
+
+				// icon for the menu and breadcrumb
+				'icon' => 'check',
+
+				// optional replacement for the breadcrumb label
+				'breadcrumbLabel' => function () {
+					return '12 Todos'
+				},
+
+				// show / hide from the menu
+				'menu' => true
+
+				// link to the main area view
+				'link' => 'todos',
+
+				// views
+				'views' => [
+					[
+						// All panel patterns must not start with 'panel/'
+						// The panel slug is automatically prepended.
+						'pattern' => 'todos',
+						'action'  => function () {
+
+							// view routes return a simple array
+							// which will be injected into our Vue app
+							// The array can control the loaded Vue component,
+							// props for the component and settings for the current view
+							// (like breadcrumb, title, active search type etc)
+
+							return [
+
+								// The Vue component can be defined in the
+								// index.js of your plugin
+								'component' => 'k-todos-view',
+
+								// The document title for the current view
+								'title' => 'Todos',
+
+								// the breadcrumb can be just an array or a callback
+								// function for more complex breadcrumb logic.
+								'breadcrumb' => function () {
+									// each item in the breadcrumb array
+									// has a label and a link attribute
+									return [
+										[
+											'label' => 'Buy some milk',
+											'link'  => '/todos/123'
+										]
+									];
+								},
+
+								// props will be directly available in the
+								// Vue component. It's a super convenient way
+								// to send backend data to the Panel
+								'props' => [
+									'todos' => [...]
+								],
+
+								// we can preset the search type with the
+								// search attribute
+								'search' => 'pages',
 							]
-						]
-					}
+						}
+					]
 				]
 			]
-		]
+		}
 	]
 ])
 ```
@@ -161,41 +207,47 @@ For dialogs with a custom text message
 Dialogs are defined as a part of areas
 
 ```php
-return function (Kirby $kirby) {
-	return [
-		'dialogs' => [
-			// the key of the dialog defines the dialog routing pattern
-			'site/changeName' => function () {
-				// The load event is creating a GET route at
-				// /panel/dialogs/{pattern}
-				//
-				// It returns the setup for the dialog, including
-				// used component, buttons, props, etc.
-				'load' => function () {
-					return [
-						'component' => 'k-form-dialog',
-						'props' => [
-							// field definition for the form dialog
-							'fields' => [ ... ],
-							// the prefilled model data
-							'value' => [ ]
-						]
-					]
-				},
-				// the submit event is creating a POST route at
-				// /panel/dialogs/{pattern}
-				//
-				// The submit button of the dialog is automatically
-				// wired to fire the POST request with the form
-				// data or whatever data the dialog provides
-				'submit' => function () {
-						site()->changeName(get('name'));
-						return true;
-				}
-			}
-		]
+Kirby::plugin('yourname/todos', [
+	'areas' => [
+		'todos' => function ($kirby) {
+			return [
+				// ... (see area definiton above)
+				'dialogs' => [
+
+					// the key of the dialog defines the dialog routing pattern
+					'todos/create' => function () {
+						// The load event is creating a GET route at
+						// /panel/dialogs/{pattern}
+						//
+						// It returns the setup for the dialog, including
+						// used component, buttons, props, etc.
+						'load' => function () {
+							return [
+								'component' => 'k-form-dialog',
+								'props' => [
+									// field definition for the form dialog
+									'fields' => [ ... ],
+									// the prefilled model data
+									'value' => [ ... ]
+								]
+							]
+						},
+						// the submit event is creating a POST route at
+						// /panel/dialogs/{pattern}
+						//
+						// The submit button of the dialog is automatically
+						// wired to fire the POST request with the form
+						// data or whatever data the dialog provides
+						'submit' => function () {
+							// create todo
+							return true;
+						}
+					}
+				]
+			]
+		};
 	]
-};
+];
 ```
 
 ## Submit event responses
@@ -208,7 +260,7 @@ Returning nothing or false is interpreted as a 404. It suggests that the model c
 
 `return true`
 
-Returning true is interpreted as a success and will automatically close the dialog. Closing the dialog will trigger an event, defined by the dialog routing pattern. I.e. `site/changeTitle` will trigger an event `site.changeTitle` with the return value of the submit event. (In this case simply `true`)
+Returning true is interpreted as a success and will automatically close the dialog.
 
 `return [ ... ]`
 
@@ -216,7 +268,7 @@ By returning an array, you gain more control of what happens when the dialog clo
 
 ```php
 return [
-	'event' => 'site.customEvent',
+	'event' => 'todo.create',
 	'data'  => [
 		// some data for the event
 	],
