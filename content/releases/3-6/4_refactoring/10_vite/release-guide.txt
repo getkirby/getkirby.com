@@ -1,0 +1,9 @@
+Title: From Vue CLI to Vite
+----
+Text:
+
+We've moved our build and development process for the Panel to [Vite](https://vitejs.dev).
+
+Vite massively increases the HMR performance during development and also the build times. It's a joy to work with.
+
+Local development can now be done directly on the site domain when using the [Kirby Sandbox](https://github.com/getkirby/sandbox). Run `npm run dev` inside `kirby/panel` and open the Panel as normal.
