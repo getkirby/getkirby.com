@@ -72,6 +72,11 @@ We've taken this concept and extended it to more parts of the Panel. Dialogs are
 
 With this approach, we already managed to cut a huge 100kb+ chunk out of our Vue.js application. It's massive and it's so much fun.
 
+### Why not just Inertia.js?
+
+Fiber is mainly inspired by (link: https://inertiajs.com/ text: Inertia.js). But the more we dug into the concept, the more ways we found how we can adjust and improve the principles of Inertia for our own needs. First, we implemented our own client implementation of Inertia. Then we started changing lots of parts on the backend. In the end, the basic request concept is still the same, but the implementation is very different. It felt confusing to use the same name. You cannot lookup things in the Inertia.js docs when you work with the Panel. Dialogs and other ideas for future Fiber Panel features don't exist in Inertia. Fiber seemed like an appropriate alternative term.
+
+
 ## Areas
 
 Fiber comes with a new structure for the Panel. Every part of the Panel is a separated area with routes, optional menu item, icon, breadcrumb label, access permissions, etc.
