@@ -21,7 +21,7 @@
       <div style="--value: 8; --color: var(--color-blue-300)">app.css: <br>82.48 kb</div>
     </div>
   </div>
-  <div style="width: 88%">
+  <div class="mb-12" style="width: 88%">
     <div class="flex justify-between text-sm mb-1">
       <h4 class="font-bold">3.6-alpha</h4>
       <p class="font-mono text-xs">Total: 791.23 kb</p>
@@ -31,5 +31,10 @@
       <div style="--value: 31; --color: var(--color-yellow-400)">app.js: <br>318.55 kb</div>
       <div style="--value: 9; --color: var(--color-blue-300)">app.css: <br>93.36 kb</div>
     </div>
+  </div>
+
+  <div>
+    <div class="text-2xl">-118 kb</div>
+    <div class="font-mono text-xs"> less JS</div>
   </div>
 </div>
