@@ -36,9 +36,15 @@
 <section id="roadmap" class="mb-42">
 
   <style>
-    .introduction {
-      columns: 2;
-      column-gap: var(--spacing-24);
+    @media (min-width: 65rem) {
+      .introduction {
+        columns: 2;
+        column-gap: var(--spacing-24);
+      }
+    }
+
+    .introduction p {
+      max-width: none;
     }
   </style>
 
