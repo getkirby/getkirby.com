@@ -68,6 +68,7 @@ Incidents:
         GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-2ccx-2gf3-8xvv
 -
     cve: CVE-2020-26255
+    cvss: CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H
     description: "PHP Phar archives could be uploaded by Panel users as content files and executed"
     severity: critical
     affected: "<=3.4.4"
@@ -76,9 +77,19 @@ Incidents:
         GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-g3h8-cg9x-47qw
 -
     cve: CVE-2021-29460
+    cvss: CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:H/I:L/A:N
     description: "Cross-site scripting (XSS) from unvalidated uploaded SVG or XML files"
     severity: high
     affected: "<=3.5.3.1"
     fixed: 3.5.4
     links:
         GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-qgp4-5qx6-548g
+-
+    cve: CVE-2021-32735
+    cvss: CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:N
+    description: "Cross-site scripting (XSS) from field and configuration text displayed in the Panel"
+    severity: high
+    affected: "<=3.5.6"
+    fixed: 3.5.7
+    links:
+        GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-2f2w-349x-vrqm
