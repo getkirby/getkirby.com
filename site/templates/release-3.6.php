@@ -1,7 +1,20 @@
 <?php layout() ?>
 <?= css('assets/css/layouts/features.css') ?>
 
-<header class="mb-12 flex items-end justify-between">
+<header class="mb-12 flex items-end justify-between release-header">
+  <style>
+  @media (max-width: 50rem) {
+    .release-header {
+      flex-direction: column;
+      align-items: initial;
+    }
+
+    .release-header nav {
+      margin: 2rem 0 0;
+    }
+  }
+  </style>
+
   <div>
     <h1 class="h1">3.6-alpha.1 ⚡</h1>
     <p class="h1 color-gray-600">Developer preview</p>
