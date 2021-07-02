@@ -9,8 +9,8 @@ Text:
 ```yaml "/site/blueprints/pages/default.yml"
 title: Simple Page
 navigation:
-    status: all
-    template: all
+  status: all
+  template: all
 ```
 
 ## Limit navigation by template & status type
@@ -18,20 +18,19 @@ navigation:
 ```yaml "/site/blueprints/pages/default.yml"
 title: Simple Page
 navigation:
-    status:
-       - draft
-       - unlisted
-    template:
-       - album
-       - default
+  status:
+    - draft
+    - unlisted
+  template:
+    - album
+    - default
 ```
 
 ## Adjust the sorting of the previous/next page
 ```yaml "/site/blueprints/pages/default.yml"
 title: Simple Page
 navigation:
-    status: listed
-    template: default
-    sortBy: title asc
+  status: listed
+  template: default
+  sortBy: title asc
 ```
-

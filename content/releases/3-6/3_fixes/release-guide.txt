@@ -4,10 +4,9 @@ Title: Fixes
 Text:
 
 - `User::changeEmail()` and `System::register()` now convert the provided email address to lowercase for better reliability [#3307](https://github.com/getkirby/kirby/pull/3307)
-- `cover` option fixed for all models and list layout in section. [#3226](https://github.com/getkirby/kirby/issues/3226)
-- Fixed overlay jumps top of the page at ESC keydown. [#3387](https://github.com/getkirby/kirby/issues/3387)
-- `Str::accepted` returns always floats as `quality` value (before default `1` as int, all actual quality values as string, e.g. `'0.7'`) [#3393](https://github.com/getkirby/kirby/pull/3393)
+- `cover` option fixed for all models and list layout in section [#3226](https://github.com/getkirby/kirby/issues/3226)
+- Fixed jump to the top of the page at ESC keydown in an overlay [#3387](https://github.com/getkirby/kirby/issues/3387)
+- `Str::accepted` always a float as `quality` value (before default `1` as int, all actual quality values as string, e.g. `'0.7'`) [#3393](https://github.com/getkirby/kirby/pull/3393)
 - `Str::pool()`: the passed `$type` parameter is now treated case-insensitively [#3393](https://github.com/getkirby/kirby/pull/3393)
 - `Str::pool()` now also returns a string (if set via the second argument) if an array of types is passed as  first argument [#3393](https://github.com/getkirby/kirby/pull/3393)
 - Fixed return type for `Kirby\Cms\App::translation()` in DocBlock [#3383](https://github.com/getkirby/kirby/pull/3383)
-

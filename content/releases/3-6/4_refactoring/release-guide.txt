@@ -6,13 +6,13 @@ Text:
 ## Core
 
 - `$field->html()` uses `Html::encode()`
-- (link: releases/3.6/namespaces text: Namespace changes)
-- (link: releases/3.6/panel-classes text: New Panel classes)
+- (link: releases/3.6/refactoring/namespaces text: Namespace changes)
+- (link: releases/3.6/refactoring/panel-classes text: New Panel classes)
 
 ## Panel
 
-- (link: releases/3.6/vite text: We moved from Vue CLI to Vite)
-- (link: releases/3.6/css text: New custom CSS properties and logical properties)
+- (link: releases/3.6/refactoring/vite text: We moved from Vue CLI to Vite)
+- (link: releases/3.6/refactoring/css text: New custom CSS properties and logical properties)
 - Large parts of the Panel run on our [new Fiber framework](/releases/3.6#fiber).
 - New `window.deprecated()` helper for the Panel frontend
 - CI uses dynamically-built production files for frontend testing
@@ -23,4 +23,3 @@ Text:
 - Replaced Panel event bus with `mitt` [#3191](https://github.com/getkirby/kirby/pull/3191)
 - The former development `panel/index.html` file was removed
 - The internal Panel sandbox has been removed
-

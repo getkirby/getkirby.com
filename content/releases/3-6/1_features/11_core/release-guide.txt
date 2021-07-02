@@ -11,12 +11,12 @@ Text:
 ```php
 // why?
 $array = array_map(function ($item) {
-    // some mapping
+  // some mapping
 }, $array);
 
 // yes!
 $array = A::map($array, function ($item) {
-    // some mapping
+  // some mapping
 });
 ```
 
@@ -30,33 +30,30 @@ This helper is great to build your own custom router. This could be done in the 
 <?php
 
 return [
-    'routes' => [
-        [
-            'pattern' => 'shop/(:all)',
-            'action'  => function (string $path) {
-                return router($path, 'GET', [
-                    [
-                        'pattern' => 'cart',
-                        'action'  => function () {
-
-                        }
-                    ],
-                    [
-                        'pattern' => 'checkout',
-                        'action'  => function () {
-
-                        }
-                    ]
-                ]);
+  'routes' => [
+    [
+      'pattern' => 'shop/(:all)',
+      'action'  => function (string $path) {
+        return router($path, 'GET', [
+          [
+            'pattern' => 'cart',
+            'action'  => function () {
+                // ...
             }
-        ]
+          ],
+          [
+            'pattern' => 'checkout',
+            'action'  => function () {
+                // ...
+            }
+          ]
+        ]);
+      }
     ]
+  ]
 ];
 ```
 
 Although the example above could of course also simply be solved with more route definitions, it's sometimes really useful to implement such a nested router.
 
 You can also use it for any kind of logic that depends on path matching with regex.
-
-
-

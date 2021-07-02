@@ -1,6 +1,6 @@
 Title: From SCSS to CSS
 ----
-Intro: With 3.6 we leave SCSS behind and fully embrace modern CSS with custom properties and logical properties in the Panel
+Intro: With 3.6 we leave SCSS behind and fully embrace modern CSS with custom properties and logical properties in the Panel.
 
 ----
 Text:
