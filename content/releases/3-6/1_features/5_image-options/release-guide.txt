@@ -2,14 +2,14 @@ Title: New Panel image options
 ----
 Text:
 
-## Image options on the blueprint-level
+## Image options on the blueprint level
 
 The image options for pages, files and users can now be defined directly in their own blueprint. This significantly simplifies the setup of sections as they all inherit the image settings. You can still set image settings in sections the good old way if needed.
 
 ```yaml "site/blueprints/pages/note.yml"
 image:
-    back: blue-200
-    icon: 📝
+  back: blue-200
+  icon: 📝
 ```
 
 ## Support for queries
@@ -22,7 +22,7 @@ image:
 ```
 
 ## Custom colors
-`back` and `color` options for Panel preview images now support shorthands for core CSS color variables as well as HEX codes or other native CSS color properties (e.g. even gradients)
+`back` and `color` options for Panel preview images now support shorthands for core CSS color variables as well as HEX codes or other native CSS color properties (e.g. even gradients):
 
 ### CSS color property shorthands
 
@@ -30,13 +30,13 @@ image:
 image:
   back: "purple-400"
 ```
-Check out the (link: releases/3.6/features/custom-properties text: list of our color properties) for available options
+Check out the (link: releases/3.6/features/custom-properties text: list of our color properties) for available options.
 
 ### Hex codes
 
 ```yaml
 image:
-  back: "#FF0000"
+  back: "#ff0000"
 ```
 
 ### CSS rules

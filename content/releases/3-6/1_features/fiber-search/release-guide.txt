@@ -24,7 +24,7 @@ return [
             $results = [];
             $pages   = site()->search($query)->limit($limit);
 
-            foreach($pages as $page) {
+            foreach ($pages as $page) {
                 $results[] = [
                     'text'  => $page->title()->value(),
                     'link'  => $page->panel()->url(),

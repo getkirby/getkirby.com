@@ -14,7 +14,7 @@ To convert an existing JPEG, GIF or PNG into a WebP or AVIF file, you need to us
 
 ## Default format option
 
-You can also set the default format option in your config file and convert all images unless you overwrite the format option in the thumb method.
+You can also set the default format option in your config file and convert all images unless you override the format option in the thumb method.
 
 ```php "/site/config/config.php"
 <?php
@@ -26,7 +26,7 @@ return [
 ];
 ```
 
-This is only recommended if you really find yourself converting 90% of your files to that format anyway. Otherwise you will need to overwrite the default quite a lot.
+This is only recommended if you really find yourself converting 90% of your files to that format anyway. Otherwise you will need to override the default quite a lot.
 
 ## srcset
 
@@ -42,7 +42,7 @@ $image->srcset([
 
 ## Support
 
-The GDLib/SimpleImage driver currently only supports `webp`, ImageMagick supports `webp` and `avif`
+The GDLib/SimpleImage driver currently only supports `webp`, ImageMagick supports `webp` and `avif`.
 
 Be aware that not all browsers support the new formats yet.
 

@@ -10,9 +10,9 @@ Breaking changes in minor releases? 3.6 is not a minor release. We follow the pa
 
 We know that breaking changes suck, when they break your plugins or other parts of your sites. Here's our plan how to ease your pain:
 
-- We will provide a tool to check for breaking changes in your installation
-- We've created aliases for changed classes that will be removed in later releases to give you a transition time
-- Where possible, we will try to help plugin developers with pull requests to migrate their plugins
+- We will provide a tool to check for breaking changes in your installation.
+- We've created aliases for changed classes that will be removed in later releases to give you a transition time.
+- Where possible, we will try to help plugin developers with pull requests to migrate their plugins.
 
 ## Core
 
@@ -90,5 +90,3 @@ We know that breaking changes suck, when they break your plugins or other parts 
     - `$store.dispatch('breadcrumb')` and `$store.dispatch('title')`have been removed. Use Panel areas instead.
 - The `previewThumb` helper has been removed. `k-item-image` takes care of processing the image data correctly inside `k-item`.
 - The following methods from `vuex-i18n` are no longer available in the new custom implementation: `$tc`,  `$tlang`, `$i18n.localeExists`, `$i18n.keyExists`.     Translation strings cannot be added dynamically anymore, only through our official extension.
-
-

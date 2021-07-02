@@ -54,7 +54,7 @@ FiberPHP:
 ----
 FiberJS:
 
-```html "View components in Vue.js"
+```html "View component in Vue.js"
 <template>
   <k-header>{{ title }}</k-header>
   <ul>
