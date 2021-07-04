@@ -10,3 +10,4 @@ Text:
 - `Str::pool()`: the passed `$type` parameter is now treated case-insensitively [#3393](https://github.com/getkirby/kirby/pull/3393)
 - `Str::pool()` now also returns a string (if set via the second argument) if an array of types is passed as  first argument [#3393](https://github.com/getkirby/kirby/pull/3393)
 - Fixed return type for `Kirby\Cms\App::translation()` in DocBlock [#3383](https://github.com/getkirby/kirby/pull/3383)
+- Fixed `tc()` helper docblock and parameter typing [#3474](https://github.com/getkirby/kirby/issues/3474)
