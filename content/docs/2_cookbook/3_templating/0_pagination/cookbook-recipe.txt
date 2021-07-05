@@ -43,14 +43,14 @@ Add this below your foreach loop:
 <?php if ($articles->pagination()->hasPages()): ?>
 <nav class="pagination">
 
-  <?php if ($articles->pagination()->hasNextPage()): ?>
-  <a class="next" href="<?= $articles->pagination()->nextPageURL() ?>">
+  <?php if ($articles->pagination()->hasPrevPage()): ?>
+  <a class="next" href="<?= $articles->pagination()->prevPageURL() ?>">
     ‹ older posts
   </a>
   <?php endif ?>
 
-  <?php if ($articles->pagination()->hasPrevPage()): ?>
-  <a class="prev" href="<?= $articles->pagination()->prevPageURL() ?>">
+  <?php if ($articles->pagination()->hasNextPage()): ?>
+  <a class="prev" href="<?= $articles->pagination()->nextPageURL() ?>">
     newer posts ›
   </a>
   <?php endif ?>
