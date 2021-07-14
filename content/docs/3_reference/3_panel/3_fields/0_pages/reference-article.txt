@@ -124,7 +124,7 @@ class AlbumPage extends Page
         if ($image = $this->images()->first()) {
           return $image;
         }
-        if (file_exists(kirby()->root('assets') . "/assets/images/default.jpg")) {
+        if (file_exists(kirby()->root('assets') . "/images/default.jpg")) {
             return new Asset("assets/images/default.jpg");
         }
         return false;
