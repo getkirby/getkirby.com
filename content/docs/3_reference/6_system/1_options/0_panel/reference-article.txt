@@ -26,6 +26,9 @@ return [
 ];
 ```
 
+It's recommended to remove this setting after the installation on your remote server is complete. 
+
+
 ## Moving the Panel to a different URL
 
 If you want to add a little bit of additional security to your site and hide the Panel behind a different URL, you can set the URL slug in your config.
