@@ -199,6 +199,7 @@ class PageMeta {
 
         // Otherwise go with auto-generated image
         return new File([
+            'parent'   => $this->page,
             'filename' => 'og:image',
             'url'      => '/' . $this->page->id() . '/opengraph.png'
         ]);
