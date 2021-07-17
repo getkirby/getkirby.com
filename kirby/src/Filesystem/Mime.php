@@ -1,7 +1,8 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Kirby\Filesystem;
 
+use Kirby\Toolkit\Str;
 use SimpleXMLElement;
 
 /**
@@ -10,7 +11,7 @@ use SimpleXMLElement;
  * from different criteria like
  * extensions etc.
  *
- * @package   Kirby Toolkit
+ * @package   Kirby Filesystem
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier GmbH
@@ -127,12 +128,12 @@ class Mime
         // fixing map
         $map = [
             'text/html' => [
-                'svg' => ['Kirby\Toolkit\Mime', 'fromSvg'],
+                'svg' => ['Kirby\Filesystem\Mime', 'fromSvg'],
             ],
             'text/plain' => [
                 'css'  => 'text/css',
                 'json' => 'application/json',
-                'svg'  => ['Kirby\Toolkit\Mime', 'fromSvg'],
+                'svg'  => ['Kirby\Filesystem\Mime', 'fromSvg'],
             ],
             'text/x-asm' => [
                 'css' => 'text/css'
@@ -161,7 +162,7 @@ class Mime
      * @param string $extension
      * @return string|null
      */
-    public static function fromExtension(string $extension)
+    public static function fromExtension(string $extension): ?string
     {
         $mime = static::$types[$extension] ?? null;
         return is_array($mime) === true ? array_shift($mime) : $mime;

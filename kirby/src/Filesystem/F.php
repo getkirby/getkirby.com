@@ -1,8 +1,10 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Kirby\Filesystem;
 
 use Exception;
+use Kirby\Toolkit\I18n;
+use Kirby\Toolkit\Str;
 use Throwable;
 use ZipArchive;
 
@@ -12,7 +14,7 @@ use ZipArchive;
  * level, like creating, reading,
  * deleting, copying or validatings files.
  *
- * @package   Kirby Toolkit
+ * @package   Kirby Filesystem
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier GmbH
@@ -20,6 +22,9 @@ use ZipArchive;
  */
 class F
 {
+    /**
+     * @var array
+     */
     public static $types = [
         'archive' => [
             'gz',
@@ -105,6 +110,9 @@ class F
         ],
     ];
 
+    /**
+     * @var array
+     */
     public static $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
     /**
@@ -638,6 +646,8 @@ class F
      * Returns the relative path of the file
      * starting after $in
      *
+     * @SuppressWarnings(PHPMD.CountInLoopExpression)
+     *
      * @param string $file
      * @param string $in
      * @return string
@@ -652,11 +662,24 @@ class F
         $file = str_replace('\\', '/', $file);
         $in   = str_replace('\\', '/', $in);
 
-        if (Str::contains($file, $in) === false) {
-            return basename($file);
+        // trim trailing slashes
+        $file = rtrim($file, '/');
+        $in   = rtrim($in, '/');
+
+        if (Str::contains($file, $in . '/') === false) {
+            // make the paths relative by stripping what they have
+            // in common and adding `../` tokens at the start
+            $fileParts = explode('/', $file);
+            $inParts = explode('/', $in);
+            while (count($fileParts) && count($inParts) && ($fileParts[0] === $inParts[0])) {
+                array_shift($fileParts);
+                array_shift($inParts);
+            }
+
+            return str_repeat('../', count($inParts)) . implode('/', $fileParts);
         }
 
-        return Str::after($file, $in);
+        return '/' . Str::after($file, $in . '/');
     }
 
     /**
