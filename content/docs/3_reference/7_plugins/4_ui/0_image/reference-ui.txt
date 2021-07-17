@@ -1,7 +1,5 @@
 Text:
 
-## Events
-
 You can bind any native event to the image. Additionally the image component will fire a `load` or `error` event, once the image has been loaded or failed to load.
 
 ```html
