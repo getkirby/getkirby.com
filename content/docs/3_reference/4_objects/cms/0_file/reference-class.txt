@@ -6,7 +6,9 @@ Class: Kirby\Cms\File
 
 ----
 
-Proxies: Kirby\Image\Image
+Proxies:
+- Kirby\Filesystem\File
+- Kirby\Image\Image
 
 ----
 
