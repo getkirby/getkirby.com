@@ -1,4 +1,4 @@
-<?php $advanced = Cookie::get('getkirby$advanced') === 'yes' ?>
+<?php $advanced = $kirby->session()->get('getkirby$advanced') === 'yes' ?>
 <?php if ($page->hasAdvanced()): ?>
 <nav class="reference-advanced flex text-xs">
   <a <?= ariaCurrent(!$advanced) ?> href="<?= $page->url(['query' => 'advanced=no']) ?>">Most used</a>
