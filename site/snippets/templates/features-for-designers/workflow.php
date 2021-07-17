@@ -20,7 +20,7 @@
     ],
     [
       'title' => 'An interface without branding',
-      'text'  => 'The Panel, Kirby\'s admin backend, comes with a very timeless design. Besides the default favicon, there isn\'t any branding – at no extra cost. And your site frontend is fully yours as well, so you get a white-label solution without having to modify the sources.'
+      'text'  => 'The Panel, Kirby\'s admin backend, comes with a very timeless design without Kirby branding – at no extra cost. And your site frontend is fully yours as well, so you get a white-label solution without having to modify the sources.'
     ]
   ]
 ]);
