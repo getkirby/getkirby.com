@@ -12,9 +12,9 @@ class ReferenceUiPage extends ReflectionPage
         return parent::intro()->value(html('<k-' . $this->slug() . '>'));
     }
 
-    public function isInternal(): bool
+    public function isPublic(): bool
     {
-        return ($this->data()->value()['tags']['internal'] ?? null) !== null;
+        return ($this->data()->value()['tags']['access'][0]['description'] ?? null) === 'public';
     }
 
     public function metadata(): array
@@ -32,5 +32,5 @@ class ReferenceUiPage extends ReflectionPage
     {
         return parent::onGithub('panel/' . $this->source());
     }
-    
+
 }

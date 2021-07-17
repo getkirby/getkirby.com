@@ -141,7 +141,7 @@ class Types
         }
 
         // Native PHP/JS datatypes
-        $native = [
+        $natives = [
             'string',
             'int',
             'float',
@@ -154,8 +154,10 @@ class Types
             'null',
         ];
 
-        if (in_array($type, $native) === true) {
-            return static::tag($type, $type);
+        $native = strtolower($type);
+
+        if (in_array($native, $natives) === true) {
+            return static::tag($type, $native);
         }
 
         // Implied native datatypes
