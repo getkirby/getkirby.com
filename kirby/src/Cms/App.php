@@ -8,17 +8,19 @@ use Kirby\Exception\ErrorPageException;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
 use Kirby\Exception\NotFoundException;
+use Kirby\Filesystem\Dir;
+use Kirby\Filesystem\F;
 use Kirby\Http\Request;
 use Kirby\Http\Router;
 use Kirby\Http\Server;
 use Kirby\Http\Uri;
 use Kirby\Http\Visitor;
 use Kirby\Session\AutoSession;
+use Kirby\Text\KirbyTag;
+use Kirby\Text\KirbyTags;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Config;
 use Kirby\Toolkit\Controller;
-use Kirby\Toolkit\Dir;
-use Kirby\Toolkit\F;
 use Kirby\Toolkit\Properties;
 use Throwable;
 
@@ -748,8 +750,13 @@ class App
         $data['kirby']  = $data['kirby']  ?? $this;
         $data['site']   = $data['site']   ?? $data['kirby']->site();
         $data['parent'] = $data['parent'] ?? $data['site']->page();
+        $options        = $this->options;
 
-        return KirbyTags::parse($text, $data, $this->options, $this);
+        $text = $this->apply('kirbytags:before', compact('text', 'data', 'options'), 'text');
+        $text = KirbyTags::parse($text, $data, $options);
+        $text = $this->apply('kirbytags:after', compact('text', 'data', 'options'), 'text');
+
+        return $text;
     }
 
     /**
@@ -818,12 +825,13 @@ class App
     /**
      * Returns all available site languages
      *
+     * @param bool
      * @return \Kirby\Cms\Languages
      */
-    public function languages()
+    public function languages(bool $clone = true)
     {
         if ($this->languages !== null) {
-            return clone $this->languages;
+            return $clone === true ? clone $this->languages : $this->languages;
         }
 
         return $this->languages = Languages::load();
@@ -996,6 +1004,10 @@ class App
         $parent = $parent ?? $this->site();
 
         if ($page = $parent->find($id)) {
+            /**
+             * We passed a single $id, we can be sure that the result is
+             * @var \Kirby\Cms\Page $page
+             */
             return $page;
         }
 

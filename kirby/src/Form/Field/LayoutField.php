@@ -4,10 +4,10 @@ namespace Kirby\Form\Field;
 
 use Kirby\Cms\Blueprint;
 use Kirby\Cms\Fieldset;
-use Kirby\Cms\Form;
 use Kirby\Cms\Layout;
 use Kirby\Cms\Layouts;
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Form\Form;
 use Kirby\Toolkit\Str;
 use Throwable;
 
@@ -145,12 +145,6 @@ class LayoutField extends BlocksField
     public function store($value)
     {
         $value = Layouts::factory($value, ['parent' => $this->model])->toArray();
-
-        // returns empty string to avoid storing empty array as string `[]`
-        // and to consistency work with `$field->isEmpty()`
-        if (empty($value) === true) {
-            return '';
-        }
 
         foreach ($value as $layoutIndex => $layout) {
             if ($this->settings !== null) {
