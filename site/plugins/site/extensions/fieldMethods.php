@@ -6,6 +6,11 @@ return [
             return Url::short(Url::base($value));
         });
     },
+    'stripBreaks' => function ($field) {
+        return $field->value(function ($value) {
+            return preg_replace("$\r|\n$", ' ', $value);
+        });
+    },
     'stripGlossary' => function ($field) {
         return $field->value(function ($value) {
             return str_replace('(glossary:', '(plain:', $value);

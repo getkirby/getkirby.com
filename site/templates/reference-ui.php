@@ -6,7 +6,7 @@
 <?php slot() ?>
 <div class="prose">
   <?php if ($page->description()->isNotEmpty()): ?>
-    <?= $page->description()->kt() ?>
+    <?= $page->description()->stripBreaks()->kt() ?>
   <?php endif ?>
 
   <?php if ($page->example()->isNotEmpty()): ?>
@@ -16,7 +16,7 @@
 ```
     ") ?>
   <?php endif ?>
-  
+
   <?php if ($page->props()->isNotEmpty()): ?>
   <h2>Props</h2>
   <div class="table">
@@ -39,7 +39,7 @@
             </div>
             <?php if ($prop['values'] ?? null) : ?>
               <small>
-                <b>Valid values:</b><br> 
+                <b>Supported values:</b><br>
                 <?= kti(implode(', ', $prop['values'])) ?>
               </small>
             <?php endif ?>
@@ -49,10 +49,10 @@
             <div class="<?= isset($prop['tags']['example']) ? 'mb-3' : null ?>">
               <?= kti($prop['description'] ?? null) ?>
             </div>
-            
+
             <?php if ($prop['tags']['example'] ?? null) : ?>
               <small>
-                <b>Example:</b><br> 
+                <b>Example:</b><br>
                 <?= kti('```' . $prop['tags']['example'][0]['description'] . '```') ?>
               </small>
             <?php endif ?>
@@ -123,14 +123,14 @@
             <div class="<?= isset($event['tags'][0]) ? 'mb-3' : null ?>">
               <?= kti($event['description'] ?? null) ?>
             </div>
-            
+
             <?php if ($event['tags'][0] ?? null) : ?>
               <small>
-                <b>Example:</b><br> 
+                <b>Example:</b><br>
                 <?= kti('```' . $event['tags'][0]['content'] . '```') ?>
               </small>
-            <?php endif ?>  
-          </td>        
+            <?php endif ?>
+          </td>
 
           <td>
             <?php if (count($event['properties'] ?? []) > 0) : ?>
