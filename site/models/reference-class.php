@@ -6,6 +6,7 @@ use Kirby\Reference\SectionPage;
 use Kirby\Reference\Types;
 use Kirby\Toolkit\Properties;
 use Kirby\Toolkit\Str;
+use \ReferenceClassMethodPage as ReferenceClassMethod;
 
 class ReferenceClassPage extends SectionPage
 {
@@ -57,7 +58,7 @@ class ReferenceClassPage extends SectionPage
             if ($slug === '__construct') {
                 $num = 0;
 
-                // Automatially activate $props support for 
+                // Automatially activate $props support for
                 // constructur classmethod pages
                 if ($parameter = $method->getParameters()[0]) {
                     if ($type = $parameter->getType()) {
@@ -82,23 +83,20 @@ class ReferenceClassPage extends SectionPage
         $children = Pages::factory($children, $this)->filterBy('exists', true);
 
         // If the class is flagged as proxying another class,
-        // get the proxied class object and merge all its methods that are
-        // not covered by an actual class method
+        // get the proxied methods that are not covered by an
+        // actual class method and add them
         if ($this->proxies()->isNotEmpty()) {
-            if ($proxy = ReferenceClassPage::findByName($this->proxies())) {
-                $methods = $proxy->children()->filter(function ($method) use ($children) {
-                    return $children->findByURI($method->slug()) === null;
-                });
-                $missing  = $methods->not($methods->intersection($children));
-                $children = $children->add($missing);
+            foreach ($this->proxies()->yaml() as $proxy) {
+                $proxied = ReferenceClassMethod::proxied($proxy, $children);
+                $children = $children->add($proxied);
             }
         }
 
-        // Return children pages collection sorted by slug, 
+        // Return children pages collection sorted by slug,
         // but making sure `__construct` goes first
         return $this->children = $children->sortBy(
-            'isMagic', 'desc', 
-            'slug', 'asc', 
+            'isMagic', 'desc',
+            'slug', 'asc',
         SORT_NATURAL);
     }
 
@@ -185,7 +183,7 @@ class ReferenceClassPage extends SectionPage
         }
 
         $reflection = $this->reflection();
-        
+
 
         if (!$reflection) {
             return $this->props = [];
@@ -196,7 +194,7 @@ class ReferenceClassPage extends SectionPage
             if ($class->getParentClass() !== false) {
                 $getTraits($class->getParentClass());
             }
-            
+
             $traits = array_merge($traits, $class->getTraitNames());
         };
         $getTraits($reflection);
@@ -206,7 +204,7 @@ class ReferenceClassPage extends SectionPage
         }
 
         $properties = array_filter($reflection->getProperties(), function ($prop) use ($reflection) {
-            return $prop->getName() !== 'propertyData' && 
+            return $prop->getName() !== 'propertyData' &&
                    $prop->isStatic() === false &&
                    $reflection->hasMethod('set' . $prop->getName()) === true;
         });
@@ -245,8 +243,8 @@ class ReferenceClassPage extends SectionPage
                     $type = Str::rtrim($type, '|null');
                 }
             }
-            
-          
+
+
 
             $type   = Types::factory($type ?? 'mixed', $this);
             $data[] = compact('name', 'required', 'type', 'description');
