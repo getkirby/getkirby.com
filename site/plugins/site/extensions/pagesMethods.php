@@ -5,15 +5,21 @@ use Kirby\Http\Cookie;
 return [
     'filtered' => function () {
         return $this->listed()->filter(function ($child) {
-            if (
-                method_exists($child, 'isInternal') === true && 
-                method_exists($child, 'isDeprecated') === true
-            ) {
-                return $child->isInternal() === false &&
-                       $child->isDeprecated() === false;
+            $vetos = [];
+
+            if (method_exists($child, 'isPublic') === true) {
+                $vetos[] = $child->isPublic() === false;
             }
 
-            return  true;
+            if (method_exists($child, 'isInternal') === true) {
+                $vetos[] = $child->isInternal() === true;
+            }
+
+            if (method_exists($child, 'isDeprecated') === true) {
+                $vetos[] = $child->isDeprecated() === true;
+            }
+
+            return count(array_filter($vetos)) === 0;
         });
     },
     'referenced' => function () {
