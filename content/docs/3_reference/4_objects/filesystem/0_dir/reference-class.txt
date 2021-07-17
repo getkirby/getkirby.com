@@ -1,8 +1,12 @@
-Class: Kirby\Toolkit\Dir
+Class: Kirby\Filesystem\Dir
 
 ----
 
 Text:
+
+<since v="3.6.0">
+This class used to be called `Kirby\Toolkit\Dir`.
+</since>
 
 ## Examples
 
