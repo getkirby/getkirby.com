@@ -44,10 +44,11 @@ return [
     ],
     'methods' => [
         'userResponse' => function ($user) {
-            return $user->panelPickerData([
-                'info'  => $this->info,
-                'image' => $this->image,
-                'text'  => $this->text,
+            return $user->panel()->pickerData([
+                'info'   => $this->info,
+                'image'  => $this->image,
+                'layout' => $this->layout,
+                'text'   => $this->text,
             ]);
         },
         'toUsers' => function ($value = null) {
@@ -75,7 +76,7 @@ return [
                     $field = $this->field();
 
                     return $field->userpicker([
-                        'image'  => $field->image(),
+                        'image'  => $field->image([], $field->layout),
                         'info'   => $field->info(),
                         'limit'  => $field->limit(),
                         'page'   => $this->requestQuery('page'),
