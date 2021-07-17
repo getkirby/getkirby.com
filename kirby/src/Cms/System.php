@@ -6,10 +6,10 @@ use Kirby\Data\Json;
 use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\PermissionException;
+use Kirby\Filesystem\Dir;
+use Kirby\Filesystem\F;
 use Kirby\Http\Remote;
 use Kirby\Toolkit\A;
-use Kirby\Toolkit\Dir;
-use Kirby\Toolkit\F;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\V;
 use Throwable;
@@ -319,7 +319,7 @@ class System
         // only return the actual license key if the
         // current user has appropriate permissions
         $user = $this->app->user();
-        if ($user && $user->role()->permissions()->for('access', 'settings') === true) {
+        if ($user && $user->isAdmin() === true) {
             return $license['license'];
         } else {
             return true;
@@ -445,10 +445,11 @@ class System
             ]);
         }
 
+        // @codeCoverageIgnoreStart
         $response = Remote::get('https://licenses.getkirby.com/register', [
             'data' => [
                 'license' => $license,
-                'email'   => $email,
+                'email'   => Str::lower(trim($email)),
                 'domain'  => $this->indexUrl()
             ]
         ]);
@@ -474,6 +475,7 @@ class System
                 'key' => 'license.verification'
             ]);
         }
+        // @codeCoverageIgnoreEnd
 
         return true;
     }

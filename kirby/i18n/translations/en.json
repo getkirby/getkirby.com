@@ -92,6 +92,7 @@
   "error.language.code": "Please enter a valid code for the language",
   "error.language.duplicate": "The language already exists",
   "error.language.name": "Please enter a valid name for the language",
+  "error.language.notFound": "The language could not be found",
 
   "error.layout.validation.block": "There's an error in block {blockIndex} in layout {layoutIndex}",
   "error.layout.validation.settings": "There's an error in layout {index} settings",
@@ -165,6 +166,7 @@
   "error.user.password.undefined": "The user does not have a password",
   "error.user.password.wrong": "Wrong password",
   "error.user.role.invalid": "Please enter a valid role",
+  "error.user.undefined": "The user cannot be found",
   "error.user.update.permission": "You are not allowed to update the user \"{name}\"",
 
   "error.validation.accepted": "Please confirm",
@@ -497,7 +499,7 @@
   "url.placeholder": "https://example.com",
 
   "user": "User",
-  "user.blueprint": "You can define additional sections and form fields for this user role in <strong>/site/blueprints/users/{role}.yml</strong>",
+  "user.blueprint": "You can define additional sections and form fields for this user role in <strong>/site/blueprints/{blueprint}.yml</strong>",
   "user.changeEmail": "Change email",
   "user.changeLanguage": "Change language",
   "user.changeName": "Rename this user",

@@ -2,7 +2,6 @@
 
 use Kirby\Cms\Blueprint;
 use Kirby\Toolkit\A;
-use Kirby\Toolkit\Escape;
 use Kirby\Toolkit\I18n;
 
 return [
@@ -151,31 +150,23 @@ return [
             $data = [];
 
             foreach ($this->pages as $item) {
+                $panel       = $item->panel();
                 $permissions = $item->permissions();
-                $image       = $item->panelImage($this->image);
-
-                // escape the default text
-                // TODO: no longer needed in 3.6
-                $text = $item->toString($this->text);
-                if ($this->text === '{{ page.title }}') {
-                    $text = Escape::html($text);
-                }
 
                 $data[] = [
                     'id'          => $item->id(),
-                    'dragText'    => $item->dragText(),
-                    'text'        => $text,
+                    'dragText'    => $panel->dragText(),
+                    'text'        => $item->toString($this->text),
                     'info'        => $item->toString($this->info ?? false),
                     'parent'      => $item->parentId(),
-                    'icon'        => $item->panelIcon($image),
-                    'image'       => $image,
-                    'link'        => $item->panelUrl(true),
+                    'image'       => $panel->image($this->image, $this->layout),
+                    'link'        => $panel->url(true),
                     'status'      => $item->status(),
                     'permissions' => [
                         'sort'         => $permissions->can('sort'),
                         'changeSlug'   => $permissions->can('changeSlug'),
                         'changeStatus' => $permissions->can('changeStatus'),
-                        'changeTitle'  => $permissions->can('changeTitle')
+                        'changeTitle'  => $permissions->can('changeTitle'),
                     ]
                 ];
             }
@@ -226,8 +217,8 @@ return [
             return true;
         },
         'link' => function () {
-            $modelLink  = $this->model->panelUrl(true);
-            $parentLink = $this->parent->panelUrl(true);
+            $modelLink  = $this->model->panel()->url(true);
+            $parentLink = $this->parent->panel()->url(true);
 
             if ($modelLink !== $parentLink) {
                 return $parentLink;

@@ -287,12 +287,7 @@ class Collection extends Iterator implements Countable
         }
 
         // get the filter from the filters array
-        $filter = static::$filters[$operator] ?? null;
-
-        // return an unfiltered list if the filter does not exist
-        if ($filter === null) {
-            return $this;
-        }
+        $filter = static::$filters[$operator];
 
         if (is_array($filter) === true) {
             $collection = clone $this;
@@ -321,8 +316,8 @@ class Collection extends Iterator implements Countable
     /**
      * Alias for `Kirby\Toolkit\Collection::filter`
      *
-     * @param string|array|\Closure $field
-     * @param mixed ...$args
+     * @param string|Closure $field
+     * @param array ...$args
      * @return static
      */
     public function filterBy(...$args)

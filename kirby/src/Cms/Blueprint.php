@@ -6,9 +6,9 @@ use Exception;
 use Kirby\Data\Data;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
+use Kirby\Filesystem\F;
 use Kirby\Form\Field;
 use Kirby\Toolkit\A;
-use Kirby\Toolkit\F;
 use Kirby\Toolkit\I18n;
 use Throwable;
 
@@ -56,6 +56,10 @@ class Blueprint
     {
         if (empty($props['model']) === true) {
             throw new InvalidArgumentException('A blueprint model is required');
+        }
+
+        if (is_a($props['model'], ModelWithContent::class) === false) {
+            throw new InvalidArgumentException('Invalid blueprint model');
         }
 
         $this->model = $props['model'];
@@ -697,6 +701,7 @@ class Blueprint
                 'columns' => $this->normalizeColumns($tabName, $tabProps['columns'] ?? []),
                 'icon'    => $tabProps['icon']  ?? null,
                 'label'   => $this->i18n($tabProps['label'] ?? ucfirst($tabName)),
+                'link'    => $this->model->panel()->url(true) . '/?tab=' . $tabName,
                 'name'    => $tabName,
             ]);
         }
@@ -760,11 +765,15 @@ class Blueprint
     /**
      * Returns a single tab by name
      *
-     * @param string $name
+     * @param string|null $name
      * @return array|null
      */
-    public function tab(string $name): ?array
+    public function tab(?string $name = null): ?array
     {
+        if ($name === null) {
+            return A::first($this->tabs);
+        }
+
         return $this->tabs[$name] ?? null;
     }
 

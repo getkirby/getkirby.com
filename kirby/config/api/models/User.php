@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Cms\Form;
 use Kirby\Cms\User;
+use Kirby\Form\Form;
 
 /**
  * User
@@ -39,7 +39,10 @@ return [
             return $user->next();
         },
         'options' => function (User $user) {
-            return $user->panelOptions();
+            return $user->panel()->options();
+        },
+        'panelImage' => function (User $user) {
+            return $user->panel()->image();
         },
         'permissions' => function (User $user) {
             return $user->role()->permissions()->toArray();
