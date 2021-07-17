@@ -5,6 +5,14 @@
 
 <?php slot() ?>
 <div class="prose">
+  <?php if ($page->isPublic() === false): ?>
+    <?= kirbytext("
+<warning>
+This UI component hasn't been finalized yet. The functionality and syntax aren't stable and might be redone in an upcoming release. Only use it at your own risk - breaking changes are likely to occur.
+</warning>
+  ") ?>
+  <?php endif ?>
+
   <?php if ($page->description()->isNotEmpty()): ?>
     <?= $page->description()->stripBreaks()->kt() ?>
   <?php endif ?>
@@ -39,7 +47,7 @@
             </div>
             <?php if ($prop['values'] ?? null) : ?>
               <small>
-                <b>Supported values:</b><br>
+                <b style="white-space: nowrap">Supported values:</b><br>
                 <?= kti(implode(', ', $prop['values'])) ?>
               </small>
             <?php endif ?>
@@ -47,7 +55,7 @@
           <td><?= $prop['defaultValue']['value'] ?? '<span>–</span>' ?></td>
           <td>
             <div class="<?= isset($prop['tags']['example']) ? 'mb-3' : null ?>">
-              <?= kti($prop['description'] ?? null) ?>
+              <?= field($prop['description'] ?? null)->stripBreaks()->kti() ?>
             </div>
 
             <?php if ($prop['tags']['example'] ?? null) : ?>
@@ -176,15 +184,16 @@
   </div>
   <?php endif ?>
 
-  <?php if ($page->text()->isNotEmpty()): ?>
+
   <div id="docs">
     <div></div>
-    <?= $page->text()->kt() ?>
+    <?php if ($page->text()->isNotEmpty()): ?>
+      <?= $page->text()->kt() ?>
+    <?php endif ?>
 
     <h2>CSS classes</h2>
     <?= $page->css()->or('`.k-' . $page->slug() . '`')->kt() ?>
   </div>
-  <?php endif ?>
 
 </div>
 <?php endslot() ?>

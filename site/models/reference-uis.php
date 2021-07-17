@@ -21,9 +21,9 @@ class ReferenceUisPage extends SectionPage
         foreach ($data as $ui) {
             // only include components that
             // have been flagged as public
-            $access = $ui['tags']['access'][0]['description'] ?? 'private';
+            $internal = $ui['tags']['internal'] ?? null;
 
-            if ($access !== 'public') {
+            if ($internal !== null) {
                 continue;
             }
 
