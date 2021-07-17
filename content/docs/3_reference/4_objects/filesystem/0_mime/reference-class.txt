@@ -1,0 +1,7 @@
+Class: Kirby\Filesystem\Mime
+
+----
+
+<since v="3.6.0">
+This class used to be called `Kirby\Toolkit\Mime`.
+</since>
