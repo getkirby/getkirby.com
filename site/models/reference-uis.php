@@ -5,17 +5,27 @@ use Kirby\Reference\SectionPage;
 
 class ReferenceUisPage extends SectionPage
 {
-    
+
     public function children(): Pages
     {
         if ($this->children !== null) {
             return $this->children;
         }
 
-        
+
         $root     = $this->kirby()->root('assets') . '/ui.json';
+        $data     = Data::read($root);
         $pages    = parent::children();
-        $children = array_map(function ($ui) use ($pages) {
+        $children = [];
+
+        foreach ($data as $ui) {
+            // only include components that
+            // have been flagged as public
+            $access = $ui['tags']['access'][0]['description'] ?? 'private';
+
+            if ($access !== 'public') {
+                continue;
+            }
 
             $slug = Str::kebab($ui['displayName']);
 
@@ -39,36 +49,36 @@ class ReferenceUisPage extends SectionPage
 
             // Sort lists
             array_multisort(
-                array_column($content['props'], 'name'), 
-                SORT_ASC, 
+                array_column($content['props'], 'name'),
+                SORT_ASC,
                 $content['props']
             );
             array_multisort(
-                array_column($content['methods'], 'name'), 
-                SORT_ASC, 
+                array_column($content['methods'], 'name'),
+                SORT_ASC,
                 $content['methods']
             );
             array_multisort(
-                array_column($content['events'], 'name'), 
-                SORT_ASC, 
+                array_column($content['events'], 'name'),
+                SORT_ASC,
                 $content['events']
             );
             array_multisort(
-                array_column($content['slots'], 'name'), 
-                SORT_ASC, 
+                array_column($content['slots'], 'name'),
+                SORT_ASC,
                 $content['slots']
             );
 
-            return [
+            $children[] = [
                 'slug'     => $slug,
                 'template' => 'reference-ui',
                 'model'    => 'reference-ui',
                 'num'      => 0,
                 'content'  => $content
             ];
-        }, Data::read($root));
-        
+        }
+
         return $this->children = Pages::factory($children, $this)->sortBy('title', 'asc');
     }
-    
+
 }
