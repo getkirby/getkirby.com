@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\Field;
+use Kirby\Cms\Pages;
 use Kirby\Reference\ReflectionPage;
 use Kirby\Reference\Types;
 use \ReferenceClassPage as ReferenceClass;
@@ -145,6 +146,34 @@ class ReferenceClassMethodPage extends ReflectionPage
         return $this->parameters = $parameters;
     }
 
+    /**
+     * Returns all methods of the proxied
+     * class that are not already part
+     * of the methods collection
+     *
+     * @param string $source class name that is proxied
+     * @param \Kirby\Cms\Pages $methods existing methods collection
+     * @return \Kirby\Cms\Pages
+     */
+    public static function proxied(string $source, Pages $methods): Pages
+    {
+        if ($proxy = ReferenceClass::findByName($source)) {
+            $toSlug = function ($p) {
+                return $p->slug();
+            };
+
+            $proxied    = $proxy->children();
+            $additional = array_diff(
+                $proxied->values($toSlug),
+                $methods->values($toSlug)
+            );
+
+            return $proxied->find(...$additional);
+        }
+
+        return new Pages();
+    }
+
     public function title(): Field
     {
         $call = $this->call($this->name() . '()');
@@ -155,5 +184,5 @@ class ReferenceClassMethodPage extends ReflectionPage
     {
         return new ReflectionMethod($this->parent()->name(), $this->name());
     }
-    
+
 }
