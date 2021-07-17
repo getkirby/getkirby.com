@@ -5,8 +5,9 @@ namespace Kirby\Cms;
 use Exception;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
-use Kirby\Toolkit\Escape;
-use Kirby\Toolkit\F;
+use Kirby\Filesystem\Dir;
+use Kirby\Filesystem\F;
+use Kirby\Panel\User as Panel;
 use Kirby\Toolkit\Str;
 
 /**
@@ -125,7 +126,8 @@ class User extends ModelWithContent
      */
     public function __construct(array $props)
     {
-        $props['id'] = $props['id'] ?? $this->createId();
+        // TODO: refactor later to avoid redundant prop setting
+        $this->setProperty('id', $props['id'] ?? $this->createId(), true);
         $this->setProperties($props);
     }
 
@@ -578,92 +580,13 @@ class User extends ModelWithContent
     }
 
     /**
-     * Panel icon definition
+     * Returns the panel info object
      *
-     * @internal
-     * @param array $params
-     * @return array
+     * @return \Kirby\Panel\User
      */
-    public function panelIcon(array $params = null): array
+    public function panel()
     {
-        $params['type'] = 'user';
-
-        return parent::panelIcon($params);
-    }
-
-    /**
-     * Returns the image file object based on provided query
-     *
-     * @internal
-     * @param string|null $query
-     * @return \Kirby\Cms\File|\Kirby\Cms\Asset|null
-     */
-    protected function panelImageSource(string $query = null)
-    {
-        if ($query === null) {
-            return $this->avatar();
-        }
-
-        return parent::panelImageSource($query);
-    }
-
-    /**
-     * Returns the full path without leading slash
-     *
-     * @internal
-     * @return string
-     */
-    public function panelPath(): string
-    {
-        return 'users/' . $this->id();
-    }
-
-    /**
-     * Returns prepared data for the panel user picker
-     *
-     * @param array|null $params
-     * @return array
-     */
-    public function panelPickerData(array $params = null): array
-    {
-        $image = $this->panelImage($params['image'] ?? []);
-        $icon  = $this->panelIcon($image);
-
-        // escape the default text
-        // TODO: no longer needed in 3.6
-        $textQuery = $params['text'] ?? '{{ user.username }}';
-        $text = $this->toString($textQuery);
-        if ($textQuery === '{{ user.username }}') {
-            $text = Escape::html($text);
-        }
-
-        return [
-            'icon'     => $icon,
-            'id'       => $this->id(),
-            'image'    => $image,
-            'email'    => $this->email(),
-            'info'     => $this->toString($params['info'] ?? false),
-            'link'     => $this->panelUrl(true),
-            'text'     => $text,
-            'username' => $this->username(),
-        ];
-    }
-
-    /**
-     * Returns the url to the editing view
-     * in the panel
-     *
-     * @internal
-     * @param bool $relative
-     * @return string
-     */
-    public function panelUrl(bool $relative = false): string
-    {
-        if ($relative === true) {
-            return '/' . $this->panelPath();
-        } else {
-            return $this->kirby()->url('panel') . '/' . $this->panelPath();
-        }
+        return new Panel($this);
     }
 
     /**
@@ -955,5 +878,73 @@ class User extends ModelWithContent
         }
 
         return true;
+    }
+
+
+    /**
+     * Deprecated!
+     */
+
+    /**
+     * Panel icon definition
+     *
+     * @todo Add `deprecated()` helper warning in 3.7.0
+     * @todo Remove in 3.8.0
+     *
+     * @internal
+     * @param array $params
+     * @return array
+     * @codeCoverageIgnore
+     */
+    public function panelIcon(array $params = null): array
+    {
+        return $this->panel()->icon($params);
+    }
+
+    /**
+     * Returns the full path without leading slash
+     *
+     * @todo Add `deprecated()` helper warning in 3.7.0
+     * @todo Remove in 3.8.0
+     *
+     * @internal
+     * @return string
+     * @codeCoverageIgnore
+     */
+    public function panelPath(): string
+    {
+        return $this->panel()->path();
+    }
+
+    /**
+     * Returns prepared data for the panel user picker
+     *
+     * @todo Add `deprecated()` helper warning in 3.7.0
+     * @todo Remove in 3.8.0
+     *
+     * @param array|null $params
+     * @return array
+     * @codeCoverageIgnore
+     */
+    public function panelPickerData(array $params = null): array
+    {
+        return $this->panel()->pickerData($params);
+    }
+
+    /**
+     * Returns the url to the editing view
+     * in the panel
+     *
+     * @todo Add `deprecated()` helper warning in 3.7.0
+     * @todo Remove in 3.8.0
+     *
+     * @internal
+     * @param bool $relative
+     * @return string
+     * @codeCoverageIgnore
+     */
+    public function panelUrl(bool $relative = false): string
+    {
+        return $this->panel()->url($relative);
     }
 }
