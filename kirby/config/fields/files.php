@@ -68,11 +68,12 @@ return [
     ],
     'methods' => [
         'fileResponse' => function ($file) {
-            return $file->panelPickerData([
-                'image' => $this->image,
-                'info'  => $this->info ?? false,
-                'model' => $this->model(),
-                'text'  => $this->text,
+            return $file->panel()->pickerData([
+                'image'  => $this->image,
+                'info'   => $this->info ?? false,
+                'layout' => $this->layout,
+                'model'  => $this->model(),
+                'text'   => $this->text,
             ]);
         },
         'toFiles' => function ($value = null) {
@@ -99,7 +100,7 @@ return [
                     $field = $this->field();
 
                     return $field->filepicker([
-                        'image'  => $field->image(),
+                        'image'  => $field->image([], $field->layout),
                         'info'   => $field->info(),
                         'limit'  => $field->limit(),
                         'page'   => $this->requestQuery('page'),
@@ -117,8 +118,8 @@ return [
                     $uploads = $field->uploads();
 
                     return $field->upload($this, $uploads, function ($file, $parent) use ($field) {
-                        return $file->panelPickerData([
-                            'image' => $field->image(),
+                        return $file->panel()->pickerData([
+                            'image' => $field->image([], $field->layout),
                             'info'  => $field->info(),
                             'model' => $field->model(),
                             'text'  => $field->text(),

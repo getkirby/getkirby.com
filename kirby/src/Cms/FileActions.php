@@ -5,8 +5,9 @@ namespace Kirby\Cms;
 use Closure;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
-use Kirby\Image\Image;
-use Kirby\Toolkit\F;
+use Kirby\Filesystem\F;
+use Kirby\Filesystem\File as BaseFile;
+use Kirby\Form\Form;
 
 /**
  * FileActions
@@ -75,6 +76,8 @@ trait FileActions
                 F::move($oldFile->contentFile(), $newFile->contentFile());
             }
 
+            $newFile->parent()->files()->remove($oldFile->id());
+            $newFile->parent()->files()->set($newFile->id(), $newFile);
 
             return $newFile;
         });
@@ -178,7 +181,7 @@ trait FileActions
 
         // create the basic file and a test upload object
         $file = static::factory($props);
-        $upload = new Image($props['source']);
+        $upload = new BaseFile($props['source']);
 
         // create a form for the file
         $form = Form::for($file, [
@@ -277,7 +280,7 @@ trait FileActions
      */
     public function replace(string $source)
     {
-        return $this->commit('replace', ['file' => $this, 'upload' => new Image($source)], function ($file, $upload) {
+        return $this->commit('replace', ['file' => $this, 'upload' => new BaseFile($source)], function ($file, $upload) {
 
             // delete all public versions
             $file->unpublish();

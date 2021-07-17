@@ -1,13 +1,14 @@
 <?php
 
 use Kirby\Cms\App;
-use Kirby\Cms\Asset;
 use Kirby\Cms\Html;
 use Kirby\Cms\Response;
 use Kirby\Cms\Url;
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Filesystem\Asset;
+use Kirby\Filesystem\F;
+use Kirby\Http\Router;
 use Kirby\Toolkit\Escape;
-use Kirby\Toolkit\F;
 use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\V;
@@ -16,7 +17,7 @@ use Kirby\Toolkit\V;
  * Helper to create an asset object
  *
  * @param string $path
- * @return \Kirby\Cms\Asset
+ * @return \Kirby\Filesystem\Asset
  */
 function asset(string $path)
 {
@@ -551,12 +552,19 @@ function option(string $key, $default = null)
  * id or the current page when no id is specified
  *
  * @param string|array ...$id
- * @return \Kirby\Cms\Page|null
+ * @return \Kirby\Cms\Page|\Kirby\Cms\Pages|null
+ * @todo reduce to one parameter in 3.7.0 (also change return and return type)
  */
 function page(...$id)
 {
     if (empty($id) === true) {
         return App::instance()->site()->page();
+    }
+
+    if (count($id) > 1) {
+        // @codeCoverageIgnoreStart
+        deprecated('Passing multiple parameters to the `page()` helper has been deprecated. Please use the `pages()` helper instead.');
+        // @codeCoverageIgnoreEnd
     }
 
     return App::instance()->site()->find(...$id);
@@ -566,10 +574,17 @@ function page(...$id)
  * Helper to build page collections
  *
  * @param string|array ...$id
- * @return \Kirby\Cms\Pages
+ * @return \Kirby\Cms\Page|\Kirby\Cms\Pages|null
+ * @todo return only Pages|null in 3.7.0, wrap in Pages for single passed id
  */
 function pages(...$id)
 {
+    if (count($id) === 1) {
+        // @codeCoverageIgnoreStart
+        deprecated('Passing a single id to the `pages()` helper will return a Kirby\Cms\Pages collection with a single element instead of the single Kirby\Cms\Page object itself - starting in 3.7.0.');
+        // @codeCoverageIgnoreEnd
+    }
+
     return App::instance()->site()->find(...$id);
 }
 
@@ -606,6 +621,20 @@ function params(): array
 function r($condition, $value, $alternative = null)
 {
     return $condition ? $value : $alternative;
+}
+
+/**
+ * Creates a micro-router and executes
+ * the routing action immediately
+ *
+ * @param string $path
+ * @param string $method
+ * @param array $routes
+ * @return mixed
+ */
+function router(string $path = null, string $method = 'GET', array $routes = [], ?Closure $callback = null)
+{
+    return (new Router($routes))->call($path, $method, $callback);
 }
 
 /**
@@ -906,9 +935,9 @@ function uuid(): string
  * @param string $url
  * @param array $options
  * @param array $attr
- * @return string
+ * @return string|null
  */
-function video(string $url, array $options = [], array $attr = []): string
+function video(string $url, array $options = [], array $attr = []): ?string
 {
     return Html::video($url, $options, $attr);
 }
@@ -919,9 +948,9 @@ function video(string $url, array $options = [], array $attr = []): string
  * @param string $url
  * @param array $options
  * @param array $attr
- * @return string
+ * @return string|null
  */
-function vimeo(string $url, array $options = [], array $attr = []): string
+function vimeo(string $url, array $options = [], array $attr = []): ?string
 {
     return Html::vimeo($url, $options, $attr);
 }
@@ -945,9 +974,9 @@ function widont(string $string = null): string
  * @param string $url
  * @param array $options
  * @param array $attr
- * @return string
+ * @return string|null
  */
-function youtube(string $url, array $options = [], array $attr = []): string
+function youtube(string $url, array $options = [], array $attr = []): ?string
 {
     return Html::youtube($url, $options, $attr);
 }

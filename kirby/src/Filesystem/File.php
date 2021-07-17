@@ -1,22 +1,32 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Kirby\Filesystem;
 
-use Exception;
+use Kirby\Cms\App;
+use Kirby\Exception\Exception;
+use Kirby\Http\Response;
 use Kirby\Sane\Sane;
+use Kirby\Toolkit\Escape;
+use Kirby\Toolkit\Html;
+use Kirby\Toolkit\Properties;
+use Kirby\Toolkit\V;
 
 /**
  * Flexible File object with a set of helpful
  * methods to inspect and work with files.
  *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
+ * @since 3.6.0
+ *
+ * @package   Kirby Filesystem
+ * @author    Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier GmbH
- * @license   https://opensource.org/licenses/MIT
+ * @license   https://getkirby.com/license
  */
 class File
 {
+    use Properties;
+
     /**
      * Absolute file path
      *
@@ -25,13 +35,41 @@ class File
     protected $root;
 
     /**
-     * Constructs a new File object by absolute path
+     * Absolute file URL
      *
-     * @param string $root Absolute file path
+     * @var string|null
      */
-    public function __construct(string $root = null)
+    protected $url;
+
+    /**
+     * Validation rules to be used for `::match()`
+     *
+     * @var array
+     */
+    public static $validations = [
+        'maxsize' => ['size', 'max'],
+        'minsize' => ['size', 'min']
+    ];
+
+    /**
+     * Constructor sets all file properties
+     *
+     * @param array|string|null $props Properties or deprecated `$root` string
+     * @param string|null $url Deprecated argument, use `$props['url']` instead
+     */
+    public function __construct($props = null, string $url = null)
     {
-        $this->root = $root;
+        // Legacy support for old constructor of
+        // the `Kirby\Image\Image` class
+        // @todo 4.0.0 remove
+        if (is_array($props) === false) {
+            $props = [
+                'root' => $props,
+                'url'  => $url
+            ];
+        }
+
+        $this->setProperties($props);
     }
 
     /**
@@ -42,6 +80,16 @@ class File
     public function __debugInfo(): array
     {
         return $this->toArray();
+    }
+
+    /**
+     * Returns the URL for the file object
+     *
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->url() ?? $this->root() ?? '';
     }
 
     /**
@@ -99,6 +147,18 @@ class File
         return true;
     }
 
+    /*
+     * Automatically sends all needed headers for the file to be downloaded
+     * and echos the file's content
+     *
+     * @param string|null $filename Optional filename for the download
+     * @return string
+     */
+    public function download($filename = null): string
+    {
+        return Response::download($this->root, $filename ?? $this->filename());
+    }
+
     /**
      * Checks if the file actually exists
      *
@@ -140,6 +200,34 @@ class File
     }
 
     /**
+     * Sends an appropriate header for the asset
+     *
+     * @param bool $send
+     * @return \Kirby\Http\Response|void
+     */
+    public function header(bool $send = true)
+    {
+        $response = new Response('', $this->mime());
+
+        if ($send !== true) {
+            return $response;
+        }
+
+        $response->send();
+    }
+
+    /**
+     * Converts the file to html
+     *
+     * @param array $attr
+     * @return string
+     */
+    public function html(array $attr = []): string
+    {
+        return Html::a($this->url() ?? '', $attr);
+    }
+
+    /**
      * Checks if a file is of a certain type
      *
      * @param string $value An extension or mime type
@@ -161,6 +249,27 @@ class File
     }
 
     /**
+     * Checks if the file is a resizable image
+     *
+     * @return bool
+     */
+    public function isResizable(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Checks if a preview can be displayed for the file
+     * in the panel or in the frontend
+     *
+     * @return bool
+     */
+    public function isViewable(): bool
+    {
+        return false;
+    }
+
+    /**
      * Checks if the file is writable
      *
      * @return bool
@@ -168,6 +277,84 @@ class File
     public function isWritable(): bool
     {
         return F::isWritable($this->root);
+    }
+
+    /**
+     * Returns the app instance if it exists
+     *
+     * @return \Kirby\Cms\App|null
+     */
+    public function kirby()
+    {
+        return App::instance(null, true);
+    }
+
+    /**
+     * Runs a set of validations on the file object
+     * (mainly for images).
+     *
+     * @param array $rules
+     * @return bool
+     * @throws \Kirby\Exception\Exception
+     */
+    public function match(array $rules): bool
+    {
+        $rules = array_change_key_case($rules);
+
+        if (is_array($rules['mime'] ?? null) === true) {
+            $mime = $this->mime();
+
+            // determine if any pattern matches the MIME type;
+            // once any pattern matches, `$carry` is `true` and the rest is skipped
+            $matches = array_reduce($rules['mime'], function ($carry, $pattern) use ($mime) {
+                return $carry || Mime::matches($mime, $pattern);
+            }, false);
+
+            if ($matches !== true) {
+                throw new Exception([
+                    'key'  => 'file.mime.invalid',
+                    'data' => compact('mime')
+                ]);
+            }
+        }
+
+        if (is_array($rules['extension'] ?? null) === true) {
+            $extension = $this->extension();
+            if (in_array($extension, $rules['extension']) !== true) {
+                throw new Exception([
+                    'key'  => 'file.extension.invalid',
+                    'data' => compact('extension')
+                ]);
+            }
+        }
+
+        if (is_array($rules['type'] ?? null) === true) {
+            $type = $this->type();
+            if (in_array($type, $rules['type']) !== true) {
+                throw new Exception([
+                    'key'  => 'file.type.invalid',
+                    'data' => compact('type')
+                ]);
+            }
+        }
+
+        foreach (static::$validations as $key => $arguments) {
+            $rule = $rules[$key] ?? null;
+
+            if ($rule !== null) {
+                $property  = $arguments[0];
+                $validator = $arguments[1];
+
+                if (V::$validator($this->$property(), $rule) === false) {
+                    throw new Exception([
+                        'key'  => 'file.' . $key,
+                        'data' => [$property => $rule]
+                    ]);
+                }
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -181,15 +368,21 @@ class File
     }
 
     /**
-     * Get the file's last modification time.
+     * Returns the file's last modification time
      *
      * @param string $format
-     * @param string $handler date or strftime
+     * @param string|null $handler date or strftime
      * @return mixed
      */
-    public function modified(string $format = null, string $handler = 'date')
+    public function modified(?string $format = null, ?string $handler = null)
     {
-        return F::modified($this->root, $format, $handler);
+        $kirby = $this->kirby();
+
+        return F::modified(
+            $this->root,
+            $format,
+            $handler ?? ($kirby ? $kirby->option('date.handler', 'date') : 'date')
+        );
     }
 
     /**
@@ -280,6 +473,40 @@ class File
     }
 
     /**
+     * Setter for the root
+     *
+     * @param string|null $root
+     * @return $this
+     */
+    protected function setRoot(?string $root = null)
+    {
+        $this->root = $root;
+        return $this;
+    }
+
+    /**
+     * Setter for the file url
+     *
+     * @param string|null $url
+     * @return $this
+     */
+    protected function setUrl(?string $url = null)
+    {
+        $this->url = $url;
+        return $this;
+    }
+
+    /**
+     * Returns the absolute url for the file
+     *
+     * @return string|null
+     */
+    public function url(): ?string
+    {
+        return $this->url;
+    }
+
+    /**
      * Returns the raw size of the file
      *
      * @return int
@@ -298,28 +525,41 @@ class File
     public function toArray(): array
     {
         return [
-            'root'         => $this->root(),
-            'hash'         => $this->hash(),
-            'filename'     => $this->filename(),
-            'name'         => $this->name(),
-            'safeName'     => F::safeName($this->name()),
             'extension'    => $this->extension(),
-            'size'         => $this->size(),
-            'niceSize'     => $this->niceSize(),
-            'modified'     => $this->modified('c'),
-            'mime'         => $this->mime(),
-            'type'         => $this->type(),
-            'isWritable'   => $this->isWritable(),
+            'filename'     => $this->filename(),
+            'hash'         => $this->hash(),
             'isReadable'   => $this->isReadable(),
+            'isResizable'  => $this->isResizable(),
+            'isWritable'   => $this->isWritable(),
+            'mime'         => $this->mime(),
+            'modified'     => $this->modified('c'),
+            'name'         => $this->name(),
+            'niceSize'     => $this->niceSize(),
+            'root'         => $this->root(),
+            'safeName'     => F::safeName($this->name()),
+            'size'         => $this->size(),
+            'type'         => $this->type(),
+            'url'          => $this->url()
         ];
+    }
+
+    /**
+     * Converts the entire file array into
+     * a json string
+     *
+     * @return string
+     */
+    public function toJson(): string
+    {
+        return json_encode($this->toArray());
     }
 
     /**
      * Returns the file type.
      *
-     * @return string|false
+     * @return string|null
      */
-    public function type()
+    public function type(): ?string
     {
         return F::type($this->root);
     }
