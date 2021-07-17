@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Http\Cookie;
+use Kirby\Session\Session;
 
 return [
     'filtered' => function () {
@@ -23,7 +23,7 @@ return [
         });
     },
     'referenced' => function () {
-        if (Cookie::get('getkirby$advanced') === 'yes') {
+        if (kirby()->session()->get('getkirby$advanced') === 'yes') {
             $pages = $this->listed();
         } else {
             $pages = $this->filtered();
