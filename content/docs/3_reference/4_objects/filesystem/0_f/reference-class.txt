@@ -1,0 +1,9 @@
+Class: Kirby\Filesystem\F
+
+----
+
+Text:
+
+<since v="3.6.0">
+This class used to be called `Kirby\Toolkit\F`.
+</since>
