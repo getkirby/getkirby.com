@@ -192,7 +192,7 @@ return function (App $app) {
          * @return \Kirby\Cms\Layouts
          */
         'toLayouts' => function (Field $field) {
-            return Layouts::factory(Layouts::parse($field->value()), [
+            return Layouts::factory(Data::decode($field->value, 'json'), [
                 'parent' => $field->parent()
             ]);
         },
@@ -366,7 +366,7 @@ return function (App $app) {
          * @return \Kirby\Cms\Field
          */
         'html' => function (Field $field) {
-            $field->value = htmlentities($field->value, ENT_COMPAT, 'utf-8');
+            $field->value = Html::encode($field->value);
             return $field;
         },
 

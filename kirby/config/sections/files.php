@@ -1,7 +1,6 @@
 <?php
 
 use Kirby\Cms\File;
-use Kirby\Toolkit\Escape;
 use Kirby\Toolkit\I18n;
 
 return [
@@ -70,6 +69,7 @@ return [
             if ($this->template) {
                 $file = new File([
                     'filename' => 'tmp',
+                    'parent'   => $this->model(),
                     'template' => $this->template
                 ]);
 
@@ -115,27 +115,19 @@ return [
             $dragTextAbsolute = $this->model->is($this->parent) === false;
 
             foreach ($this->files as $file) {
-                $image = $file->panelImage($this->image);
-
-                // escape the default text
-                // TODO: no longer needed in 3.6
-                $text = $file->toString($this->text);
-                if ($this->text === '{{ file.filename }}') {
-                    $text = Escape::html($text);
-                }
+                $panel = $file->panel();
 
                 $data[] = [
-                    'dragText' => $file->dragText('auto', $dragTextAbsolute),
+                    'dragText' => $panel->dragText('auto', $dragTextAbsolute),
                     'extension' => $file->extension(),
                     'filename' => $file->filename(),
                     'id'       => $file->id(),
-                    'icon'     => $file->panelIcon($image),
-                    'image'    => $image,
+                    'image'    => $panel->image($this->image, $this->layout),
                     'info'     => $file->toString($this->info ?? false),
-                    'link'     => $file->panelUrl(true),
+                    'link'     => $panel->url(true),
                     'mime'     => $file->mime(),
-                    'parent'   => $file->parent()->panelPath(),
-                    'text'     => $text,
+                    'parent'   => $file->parent()->panel()->path(),
+                    'text'     => $file->toString($this->text),
                     'url'      => $file->url(),
                 ];
             }
@@ -174,8 +166,8 @@ return [
             ];
         },
         'link' => function () {
-            $modelLink  = $this->model->panelUrl(true);
-            $parentLink = $this->parent->panelUrl(true);
+            $modelLink  = $this->model->panel()->url(true);
+            $parentLink = $this->parent->panel()->url(true);
 
             if ($modelLink !== $parentLink) {
                 return $parentLink;

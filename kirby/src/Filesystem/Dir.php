@@ -1,8 +1,10 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Kirby\Filesystem;
 
 use Exception;
+use Kirby\Cms\App;
+use Kirby\Cms\Page;
 use Throwable;
 
 /**
@@ -12,7 +14,12 @@ use Throwable;
  * listing, moving, copying or
  * evaluating directories etc.
  *
- * @package   Kirby Toolkit
+ * For the Cms, it includes methods,
+ * that handle scanning directories
+ * and converting the results into
+ * children, files and other page stuff.
+ *
+ * @package   Kirby Filesystem
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier GmbH
@@ -36,6 +43,8 @@ class Dir
         'Thumb.db',
         '@eaDir'
     ];
+
+    public static $numSeparator = '_';
 
     /**
      * Copy the directory to a new destination
@@ -190,6 +199,171 @@ class Dir
     }
 
     /**
+     * Scans the directory and analyzes files,
+     * content, meta info and children. This is used
+     * in `Kirby\Cms\Page`, `Kirby\Cms\Site` and
+     * `Kirby\Cms\User` objects to fetch all
+     * relevant information.
+     *
+     * Don't use outside the Cms context.
+     *
+     * @internal
+     *
+     * @param string $dir
+     * @param string $contentExtension
+     * @param array|null $contentIgnore
+     * @param bool $multilang
+     * @return array
+     */
+    public static function inventory(string $dir, string $contentExtension = 'txt', array $contentIgnore = null, bool $multilang = false): array
+    {
+        $dir = realpath($dir);
+
+        $inventory = [
+            'children' => [],
+            'files'    => [],
+            'template' => 'default',
+        ];
+
+        if ($dir === false) {
+            return $inventory;
+        }
+
+        $items = static::read($dir, $contentIgnore);
+
+        // a temporary store for all content files
+        $content = [];
+
+        // sort all items naturally to avoid sorting issues later
+        natsort($items);
+
+        foreach ($items as $item) {
+
+            // ignore all items with a leading dot
+            if (in_array(substr($item, 0, 1), ['.', '_']) === true) {
+                continue;
+            }
+
+            $root = $dir . '/' . $item;
+
+            if (is_dir($root) === true) {
+
+                // extract the slug and num of the directory
+                if (preg_match('/^([0-9]+)' . static::$numSeparator . '(.*)$/', $item, $match)) {
+                    $num  = (int)$match[1];
+                    $slug = $match[2];
+                } else {
+                    $num  = null;
+                    $slug = $item;
+                }
+
+                $inventory['children'][] = [
+                    'dirname' => $item,
+                    'model'   => null,
+                    'num'     => $num,
+                    'root'    => $root,
+                    'slug'    => $slug,
+                ];
+            } else {
+                $extension = pathinfo($item, PATHINFO_EXTENSION);
+
+                switch ($extension) {
+                    case 'htm':
+                    case 'html':
+                    case 'php':
+                        // don't track those files
+                        break;
+                    case $contentExtension:
+                        $content[] = pathinfo($item, PATHINFO_FILENAME);
+                        break;
+                    default:
+                        $inventory['files'][$item] = [
+                            'filename'  => $item,
+                            'extension' => $extension,
+                            'root'      => $root,
+                        ];
+                }
+            }
+        }
+
+        // remove the language codes from all content filenames
+        if ($multilang === true) {
+            foreach ($content as $key => $filename) {
+                $content[$key] = pathinfo($filename, PATHINFO_FILENAME);
+            }
+
+            $content = array_unique($content);
+        }
+
+        $inventory = static::inventoryContent($inventory, $content);
+        $inventory = static::inventoryModels($inventory, $contentExtension, $multilang);
+
+        return $inventory;
+    }
+
+    /**
+     * Take all content files,
+     * remove those who are meta files and
+     * detect the main content file
+     *
+     * @param array $inventory
+     * @param array $content
+     * @return array
+     */
+    protected static function inventoryContent(array $inventory, array $content): array
+    {
+
+        // filter meta files from the content file
+        if (empty($content) === true) {
+            $inventory['template'] = 'default';
+            return $inventory;
+        }
+
+        foreach ($content as $contentName) {
+
+            // could be a meta file. i.e. cover.jpg
+            if (isset($inventory['files'][$contentName]) === true) {
+                continue;
+            }
+
+            // it's most likely the template
+            $inventory['template'] = $contentName;
+        }
+
+        return $inventory;
+    }
+
+    /**
+     * Go through all inventory children
+     * and inject a model for each
+     *
+     * @param array $inventory
+     * @param string $contentExtension
+     * @param bool $multilang
+     * @return array
+     */
+    protected static function inventoryModels(array $inventory, string $contentExtension, bool $multilang = false): array
+    {
+        // inject models
+        if (empty($inventory['children']) === false && empty(Page::$models) === false) {
+            if ($multilang === true) {
+                $contentExtension = App::instance()->defaultLanguage()->code() . '.' . $contentExtension;
+            }
+
+            foreach ($inventory['children'] as $key => $child) {
+                foreach (Page::$models as $modelName => $modelClass) {
+                    if (file_exists($child['root'] . '/' . $modelName . '.' . $contentExtension) === true) {
+                        $inventory['children'][$key]['model'] = $modelName;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return $inventory;
+    }
+
+    /**
      * Create a (symbolic) link to a directory
      *
      * @param string $source
@@ -198,7 +372,7 @@ class Dir
      */
     public static function link(string $source, string $link): bool
     {
-        Dir::make(dirname($link), true);
+        static::make(dirname($link), true);
 
         if (is_dir($link) === true) {
             return true;
@@ -221,7 +395,6 @@ class Dir
      * @param string $dir The path for the new directory
      * @param bool $recursive Create all parent directories, which don't exist
      * @return bool True: the dir has been created, false: creating failed
-     * @throws \Exception If a file with the provided path already exists or the parent directory is not writable
      */
     public static function make(string $dir, bool $recursive = true): bool
     {
@@ -231,10 +404,6 @@ class Dir
 
         if (is_dir($dir) === true) {
             return true;
-        }
-
-        if (is_file($dir) === true) {
-            throw new Exception(sprintf('A file with the name "%s" already exists', $dir));
         }
 
         $parent = dirname($dir);

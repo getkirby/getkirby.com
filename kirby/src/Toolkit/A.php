@@ -2,6 +2,7 @@
 
 namespace Kirby\Toolkit;
 
+use Closure;
 use Exception;
 
 /**
@@ -372,6 +373,19 @@ class A
             }
         }
         return $array;
+    }
+
+    /**
+     * A simple wrapper around array_map
+     * with a sane argument order
+     *
+     * @param array $array
+     * @param callable $map
+     * @return array
+     */
+    public static function map(array $array, callable $map): array
+    {
+        return array_map($map, $array);
     }
 
     /**
