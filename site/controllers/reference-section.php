@@ -1,13 +1,12 @@
 <?php
 
-return function ($page) {
-    
+return function ($kirby, $page) {
+
     if ($advanced = get('advanced')) {
-        Cookie::set('getkirby$advanced', $advanced);
+        $kirby->session()->set('getkirby$advanced', $advanced);
     }
-        
+
     return [
         'entries' => $page->children()->referenced()
-    ];       
+    ];
 };
-        
