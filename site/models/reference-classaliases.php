@@ -16,34 +16,41 @@ class ReferenceClassAliasesPage extends SectionPage
 
         return static::$aliases = require kirby()->root('kirby') . '/config/aliases.php';
     }
-    
+
     public function children(): Pages
     {
         if ($this->children !== null) {
             return $this->children;
         }
-        
+
         $aliases  = $this->aliases();
         $children = [];
-        
+
+        ksort($aliases);
+
         foreach ($aliases as $alias => $class) {
 
-            $parts = explode('\\', $class);
+            $parts = explode('\\', $alias);
 
-            $children[] = [
-                'slug'     => Str::kebab($alias),
-                'model'    => 'link',
-                'template' => 'link',
-                'parent'   => $this,
-                'num'      => 0,
-                'content'  => [
-                    'title' => ucfirst($alias),
-                    'intro' => '&rarr; ' . $class,
-                    'link'  => ReferenceClassPage::findByName($class)->id()
-                ],
-            ];
+            if (
+                count($parts) < 2 &&
+                $page = ReferenceClassPage::findByName($class)
+            ) {
+                $children[] = [
+                    'slug'     => Str::kebab($alias),
+                    'model'    => 'link',
+                    'template' => 'link',
+                    'parent'   => $this,
+                    'num'      => 0,
+                    'content'  => [
+                        'title' => ucfirst($alias),
+                        'intro' => '&rarr; ' . $class,
+                        'link'  => $page->id()
+                    ],
+                ];
+            }
         }
-        
+
         return $this->children = Pages::factory($children, $this);
     }
 
@@ -62,5 +69,5 @@ class ReferenceClassAliasesPage extends SectionPage
         return $aliases[Str::lower($name)] ?? $name;
 
     }
-    
+
 }
