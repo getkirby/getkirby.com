@@ -1,0 +1,1292 @@
+Title: Users from database
+
+----
+
+Published: 2021-07-20
+
+----
+
+Description: Replace Kirby's flat file users with users from a database
+
+----
+
+Authors:
+
+- authors/sonja-broda
+
+----
+
+Text:
+
+As a flat file CMS, Kirby stores all content in folders and files. This is not only true for pages, but also for files and user accounts, which are by default stored in the `/site/accounts` folder.
+
+But in the same way as you can incorporate content from other sources like spreadsheets, feeds or databases to create (link: text: virtual pages in Kirby), you can also replace users stored in the file system with users stored in a database (or some other source).
+
+In this recipe, we will see how we can achieve this. For this purpose, we will start with a simple read-only solution and then extend this basic setup step-by-step into a solution that lets us create and edit database users from the Panel, including multi-language user content.
+
+No time and just want the solution? Head over to the end of this recipe where you will find the (link: #tl-dr-final-code text:final code).
+
+## Prerequisites
+
+
+- A running Kirby (link: try text: StarterKit)
+- A code editor
+- Basic understanding of (link: docs/cookbook/templating/understanding-oop text: Object Oriented Programming) is helpful for following along, but of course, you can just copy and paste the solutions explained here.
+
+## Preps
+
+We start with some preparations. First, (link: docs/guide/plugins/plugin-basics text: create a new plugin) called `dbusers` in the `site/plugins` folder with the obligatory `index.php` file inside it.
+### Create new database, user table and a some users
+
+Let's start with editing the `index.php` file in our plugin. Inside the static `Kirby::plugin` method, we register a new route in the `routes` array. The code inside the route creates a new SQLite database file, inserts a new `users` table into it and adds a couple of users. See the comments for details of the implementation.
+
+```php "/site/plugins/dbusers/index.php"
+<?php
+
+use Kirby\Cms\App as Kirby;
+use Kirby\Dabase\Database;
+use Kirby\Dabase\Db;
+
+Kirby::plugin('cookbook/dbusers', [
+    'routes' => [
+        [
+            'pattern' => 'create-db',
+            'action' => function () {
+                $result = [];
+                try {
+                    // create new SQLite database file
+                    $database = new SQLite3(kirby()->root('index') . '/db-users.sqlite');
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+
+                if ($database) {
+                    // create new Database object
+                    // replace `path_to_file` with the absolute path to the file on your computer!
+                    $db = new Database([
+                        'type'     => 'sqlite',
+                        'database' => 'path_to_sqlite_file/db-users.sqlite',
+                    ]);
+                    // add users table with id, email, name, role, language and password fields
+                    // all fields use type text
+                    $db->createTable('users', [
+                        'id'       => [
+                            'type'   => 'text',
+                            'unique' => true,
+                            'key'    => 'primary'
+                        ],
+                        'email'    => [
+                            'type' => 'text',
+                        ],
+                        'name'     =>  [
+                            'type' => 'text',
+                        ],
+                        'role'     =>  [
+                            'type' => 'text',
+                        ],
+                        'language' =>  [
+                            'type' => 'text',
+                        ],
+                        'password' =>  [
+                            'type' => 'text',
+                        ],
+                    ]);
+                    // set the users table as the one we want to query
+                    $query = $db->table('users');
+                    // three users show be enough for a start
+                    $users =  [
+                        [ 
+                          'id'        => Str::random(8),
+                          'email'     => 'hallo@getkirby.com',
+                          'password'  => User::hashPassword('12345678'),
+                          'role'      => 'admin',
+                          'language'  => 'en',
+                        ],
+                        [ 
+                          'id'        => Str::random(8),
+                          'email'     => 'hello@getkirby.com',
+                          'password'  => User::hashPassword('12345678'),
+                          'role'      => 'admin',
+                          'language'  => 'en',
+                        ],
+                        [ 
+                          'id'        => Str::random(8),
+                          'email'     => 'moin@getkirby.com',
+                          'password'  => User::hashPassword('12345678'),
+                          'role'      => 'admin',
+                          'language'  => 'en',
+                        ]
+                    ];
+                    // loops through users array and insert each data set into users table
+                    foreach ($users as $user ) {
+                      $query->values($user);
+                      $result[] = $query->insert();
+                    }
+                }
+
+                return $result;
+            }
+        ],
+    ]
+];
+```
+
+In your browser, visit the route at `http(s)://localhost/create-db` (replace `localhost` with your local domain if necessary). This should now create the new database file in the root of your project and output a JSON array with the created indices in your browser:
+
+```json
+[1,2,3]
+```
+
+You might also like to inspect the table in a SQLite capabable database tool like (link: https://sqlitebrowser.org/ text: DB Browser for SQLite), which is available for Mac, Windows and Linux.
+
+### Add database setup to config
+
+Now let's add the (link: docs/guide/database#database-connection text: settings for the database) in the `config.php` file.
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    // …other settings here
+    'db' => [
+        'type'     => 'sqlite',
+        'database' => 'path_to_sqlite_file/db-users.sqlite' // replace with absolute path to file in your project
+    ],
+];
+```
+This allows us to easily access the database instance via the `Db` class and its methods.
+
+Let's test if it works as expected with another route:
+
+```php "/site/plugins/dbusers/index.php"
+<?php
+
+use Kirby\Cms\App as Kirby;
+use Kirby\Dabase\Database;
+use Kirby\Dabase\Db;
+
+Kirby::plugin('cookbook/dbusers', [
+    'routes' => [
+        // …previous route here
+        [
+            'pattern' => 'test-db-connection',
+            'action'  => function() {
+                $users = Db::select('users');
+                $result = [];
+                foreach( $users as $user) {
+                    $result[] = $user->email;
+                }
+                return $result;
+            }
+        ],
+    ]
+];
+```
+
+When you open the route in your browser, you should see the following `JSON` array:
+
+```json
+["hallo@getkirby.com","hello@getkirby.com","moin@getkirby.com"]
+```
+
+If you get an error message, check if the path to the SQLite file is correct.
+
+Great! We are now ready for the important stuff.
+
+## Registering custom users
+
+We somehow have to tell Kirby that our users should come from this database and not from the `/site/accounts` folder in the file system.
+
+Kirby users are a property of the `Kirby\Cms\App` class (aka `Kirby`). So in order to redefine our users, we have to create a custom class that replaces and extends the `Kirby` class.
+
+<info>
+If you are not familiar with classes, objects and inheritance and want to understand what we are doing here a bit better, check out (link: docs/cookbook/templating/understanding-oop text: our brief introduction to OOP).
+</info>
+
+Inside this plugin folder add a new folder called `src` and inside that folder a file called `DbKirby.php` file. This file will hold our new `DbKirby` class.
+
+In the new class, we overwrite the parent class's `users()` method. Details are in the comments.
+
+```php "/site/plugins/db-users/src/DbKirby.php
+<?php
+
+use Kirby\Cms\App as Kirby;
+use Kirby\Cms\Users;
+use Kirby\Database\Db;
+
+class DbKirby extends Kirby
+{
+
+    public function users()
+    {
+        // use the cached array if available
+        if (is_a($this->users, 'Kirby\Cms\Users') === true) {
+            return $this->users;
+        }
+        // query users table
+        $users   = Db::select('users');
+        $dbUsers = [];
+        // add users to the `$dbUsers` array
+        if (!empty($users)) {
+            foreach ($users as $user) {
+                $dbUsers[] = $user->toArray();
+            }
+        }
+        // pass `$dbUsers` array to the `Users::factory` method 
+        // and assign the collection to the `users` property
+        return $this->users = Users::factory($dbUsers);
+    }
+}
+
+```
+
+This might look familiar if you have played with (link: docs/guide/virtual-pages text: virtual pages) before. With the difference that instead of a custom page model with a `children()` method we extend the `Kirby` class and its `users()` method.
+## Replace Kirby class with `DbKirby` class
+
+To make our installation use the new class, we have to replace the `Kirby` class with our `DbKirby` class in the `index.php` file at the root of our installation:
+
+```php "/index.php"
+<?php
+
+require __DIR__ . '/kirby/bootstrap.php';
+// require the DbKirby class file
+require __DIR__ . '/site/plugins/dbusers/src/DbKirby.php';
+
+// create an instance of the new `DbKirby` class
+$kirby = new DbKirby();
+
+echo $kirby->render();
+```
+
+Now let's try to log in with one of our database users. Open `http(s)://localhost/panel` in your browser and enter the user credentials from one of the users we created above, e.g. `hello@getkirby.com` as user email and `12345678` as password.
+
+Once logged in, open the Users view in the Panel: all database users should appear in the listing.
+
+(image: dbusers.png)
+
+If you don't want to manage users from the Panel, we are almost there. However, since Kirby would still create user account files in the filesystem if we edit a user or try to create one, we have to set some permissions to prevent that.
+
+### Prevent user creation and editing
+
+To prevent user editing and creation, we create a user blueprint for each role we have in our database (currently, there's only the admin role) with the following permissions that disallow every user/users action:
+
+```yml "/site/plugins/dbusers/blueprints/users/admin.yml"
+title: Admin
+
+permissions:
+
+  user:
+    changeEmail: false
+    changeLanguage: false
+    changeName: false
+    changePassword: false
+    changeRole: false
+    delete: false
+    update: false
+  users:
+    changeEmail: false
+    changeLanguage: false
+    changeName: false
+    changePassword: false
+    changeRole: false
+    create: false
+    delete: false
+    update: false
+```
+
+Of course, we must register this blueprint in our plugin's `index.php`:
+
+```php
+<?php
+
+use Kirby\Cms\App as Kirby;
+
+Kirby::plugin('cookbook/dbusers', [
+    'blueprints' => [
+        'users/admin' => __DIR__ . '/blueprints/users/admin.yml', 
+    ],
+]);
+```
+And with this, our first example is ready to be used in your projects.
+
+In most cases, however, you probably want to edit your virtual users from the Panel and also be able to add new users. To be able to do that, we need a custom user class in which we can overwrite the methods that are responsible for user actions like creating, updating, or changing the credentials.
+
+<info>
+In case you want to continue with the next part, remove the permissions in the `admin.yml` file or disable them by adding a dot before `permissions`:.
+
+```yaml
+.permissions
+  # rest of code
+```
+</info>
+
+## Custom user class
+
+For the custom user class, create a file called `DbUser.php` in the `/src` folder of our plugin. This will allow us to overwrite user methods so that the data is stored in the database instead of in the file system
+
+
+```php "/site/plugins/db-users/src/DbUser.php
+<?php
+use Kirby\Cms\App as Kirby;
+use Kirby\Cms\User;
+use Kirby\Database\Db;
+
+class DbUser extends User
+{
+    //methods will be added  here later
+}
+```
+
+## Modified DbKirby class
+
+In the `users` method in our `DbKirby` class we now have to instanciate objects of the new `DbUser` class, instead of using the `User::factory` method like before.
+
+```php "/site/plugins/db-users/src/DbKirby.php
+<?php
+
+use Kirby\Cms\App as Kirby;
+use Kirby\Cms\Users;
+use Kirby\Database\Db;
+
+class DbKirby extends Kirby
+{
+
+    public function users()
+    {
+        // use the cached array if available
+        if ($this->users === true) {
+            return $this->users;
+        }
+
+        // instantiate a new empty users object
+        $userCollection = new Users([], $this);
+        // fetch users from database
+        $users          = Db::select('users');
+
+        // loop through the users collection
+        foreach ($users as $user) {
+            // create a new DbUser object for each user data
+            $user = new DbUser($user->toArray());
+            // and append it to the users collection
+            $userCollection->append($user->id(), $user);
+        }
+
+        return $this->users = $userCollection;
+    }
+}
+```
+
+We first instantiate a new empty `Users` object. Then inside the loop, we instantiate a new `DbUser` object for each user item, append it to the `$userCollection` and finally assign the collection to the `users` property.
+
+
+Before we can continue, we have to require the new class in `index.php`:
+
+```php "/site/plugins/dbusers/index.php"
+<?php
+
+require __DIR__ . '/src/DbUser.php';
+
+//...rest of code from above
+```
+
+When we visit the users view in the Panel, nothing has changed: our users are still there, but we still cannot start editing users in the database, because currently, the `DbUser` class is just a stupid copy of the parent `User` class.
+
+## Overwriting user methods
+
+One by one, we can now overwrite the relevant methods of the `User` class in our custom class, in particular
+
+- `$user->writePassword()`
+- `$user->writeCredentials()`
+- `$user->updateCredentials()`
+- `$user->update()`
+- `$user->delete()`
+- `$user::create()`
+
+Let's first add them all in the `DbUser` class, so that we can fill them with life afterwards. 
+
+```php "/site/plugins/dbusers/src/DbUser.php"
+<?php
+
+use Kirby\Cms\App as Kirby;
+use Kirby\Cms\Form;
+use Kirby\Cms\User;
+use Kirby\Database\Db;
+use Kirby\Http\Idn;
+
+class DbUser extends User
+{
+
+    /**
+     * Creates a user
+     */
+    public static function create(array $props = null)
+    {
+       // code
+    }
+
+    /**
+     * Deletes the user
+     *
+     * @return bool
+     * @throws \Kirby\Exception\LogicException
+     */
+    public function delete(): bool
+    {
+        // code
+    }
+
+    /**
+     * Checks if the user exists in users database table
+     *
+     * @return bool
+     */
+    public function exists(): bool
+    {
+        return (bool) Db::first('users', '*', ['id' => $this->id()]);
+    }
+
+    /**
+     * Updates the user data
+     *
+     * @param array|null $input
+     * @param string|null $languageCode
+     * @param bool $validate
+     * @return static
+     */
+    public function update(array $input = null, string $languageCode = null, bool $validate = false)
+    {
+        // code
+    }
+
+    /**
+     * Update credentials
+     */
+    protected function updateCredentials(array $credentials): bool
+    {
+        // code
+    }
+ 
+    /**
+     * Write user password
+     */
+    protected function writePassword(string $password = null): bool
+    {
+        // code
+    }
+}
+```
+
+We will add some helper methods later where necessary, but this is the basic skeleton.
+
+<info>
+If we want to overwrite an existing method, we have to make sure that we use the same signature, i.e. the arguments and return types are the same.
+</info>
+
+### Changing the password
+
+Let's start with something simple like changing the password. This is done via the `writePassword()` method.
+
+<info>
+Always replace the method placeholders in the above skeleton with the final method as we go along.
+</info>
+
+```php "/site/plugins/dbusers/src/DbUser.php"
+protected function writePassword(string $password = null): bool
+{
+  return Db::update(
+    'users',
+    ['password' => $password],
+    ['id' => $this->id()]
+  );
+}
+```
+
+The method is pretty straightforward: update the `users` table with the new password data where the id is the current user's id.
+
+**Don't hesitate to test if each method does what it is supposed to do once you have added it to the class.**
+
+### Update email, name, role and language 
+
+While these actions are handled by four different methods in the parent user class (`changeEmail()`, `changeName()`, `changeRole` and `changeLanguage`), these methods internally all use the `updateCredentials()` method, so we only have to modify this one to cover them all:
+
+```php
+protected function updateCredentials(array $credentials): bool
+{
+    return Db::update(
+        'users',
+        array_merge(
+            $this->credentials(),
+            $credentials
+        ),
+        ['id' => $this->id()]
+    );
+}
+```
+The method works similar to the first one above: update the `users` table with the new credentials data where the id is the current user's id.
+
+### Delete user
+
+This method is a bit different from the other two, it uses `Db::delete()` instead of `Db::update()`. It also calls the `exists` method internally, which checks if a user file exists, so we will have to overwrite this method as well.
+```php
+public function delete(): bool
+{
+    return $this->commit('delete', ['user' => $this], function ($user) {
+
+        // if the user doesn't exist, we don't do anything
+        // we have to overwrite the `exists()` method as well
+        if ($user->exists() === false) {
+            return true;
+        }
+
+        // delete the user from users table
+        $bool = Db::delete('users', ['id' => $user->id()]);
+        // if the user cannot be deleted, throw an exception
+        if ($bool !== true) {
+            throw new LogicException('The user "' . $user->email() . '" could not be deleted');
+        }
+        // remove the user from users collection
+        $user->kirby()->users()->remove($user);
+
+        return true;
+    });
+}
+```
+
+Also complete the `exists()` method, that checks if the current user is stored in the database.
+
+```php
+public function exists(): bool
+{
+    return (bool) Db::first('users', '*', ['id' => $this->id()]);
+}
+```
+
+## Create new user
+
+Up till now, we have modified existing users and successfully updated the database table. Now we want to be able to also create new users. This is going to be a little bit more complex.
+
+While there is indeed a `create` method in the parent `User` class which we have to and will overwrite in our child class, that alone is not enough. Why?
+
+Because the API route that is responsible for creating a new user calls the `Users::create()` method, which in turn calls the `User::create()` method, i.e. the method of the parent class. And the parent's `create()` method creates our users in the file system.
+
+So we have to do a couple of things to achieve what we want:
+
+1. Create a new child class of the `Users()` class where we can overwrite the `create()` method
+2. Load the class in `index.php`
+2. Modify the `users()` method in the `DbKirby` class to use our new custom class
+3. Overwrite the `create()` method in the `DbUser` class
+
+### Custom users class
+
+Let's start with the first step, and create a new file in our plugin's `src` folder called `DbUsers.php` with the following content:
+
+```php "/site/plugins/dbusers/src/DbUsers.php
+<?php
+
+use Kirby\Cms\Users;
+
+class DbUsers extends Users
+{
+
+    public function create($data)
+    {
+        return DbUser::create($data);
+    }
+}
+```
+As already mentioned, this method internally calls the yet-to-create `DbUsers::create()` method.
+
+### Require class
+
+In `index.php` require the class:
+
+```php "/index.php"
+<?php
+
+use Kirby\Cms\App as Kirby;
+
+require __DIR__ . '/src/DbUser.php';
+require __DIR__ . '/src/DbUsers.php';
+```
+
+### Modify users method in DbKirby class
+
+We have to change one line in our `users` method in the `DbKirby` class. Replace
+
+```php
+$userCollection = new Users([], $this);
+```
+
+with
+
+```php
+$userCollection = new DbUsers([], $this);
+```
+
+### `User::create()` method
+
+Now we can overwrite the parent `create()` method in our `DbUser` class, see comments for details:
+
+```php
+public static function create(array $props = null)
+{
+    $data = $props;
+
+    // decode email address to Unicode format
+    if (isset($props['email']) === true) {
+        $data['email'] = Idn::decodeEmail($props['email']);
+    }
+
+    // Hash the password
+    if (isset($props['password']) === true) {
+        $data['password'] = User::hashPassword($props['password']);
+    }
+
+    // assign the role
+    $props['role'] = $props['model'] = strtolower($props['role'] ?? 'default');
+
+    // create user object from user data
+    $user = static::factory($data);
+
+    // run the hook
+    return $user->commit('create', ['user' => $user, 'input' => $props], function ($user, $props) {
+
+        $data = [
+            'id'       => $user->id(),
+            'email'    => $user->email(),
+            'language' => $user->language(),
+            'name'     => $user->name()->value(),
+            'role'     => $user->role()->id(),
+            'password' => $user->password()
+        ];
+        // insert row into database
+        $result = Db::insert('users', $data);
+        if ($result === false) {
+            throw new LogicException('The user could not be created');
+        }
+
+        return $user;
+    });
+}
+
+```
+
+## User content
+
+There is one method left unfilled in our `DbUser` class: the `update` method which is supposed to update user content fields.
+
+In our database, there are currently no columns for content fields. To more easily cater for multi-language content, I have decided to create a separate table for content, where each language variant can be a separate entry, connected to the `users` table by user id.
+
+Let's create the new table and then to finish up, add the full plugin with all changes that are nececessary in different places.
+
+Here is the route to create the new content table, which we add the plugins `index` file inside the `routes` array, i.e. after the existing routes.
+
+```php "/site/plugins/dbusers/index.php"
+<?php
+
+use Kirby\Database\Database;
+use Kirby\Database\Db;
+use Kirby\Toolkit\Str;
+use Kirby\Cms\User;
+
+Kirby::plugin('cookbook/dbusers', [
+    // …other settings
+    'routes' => [
+        // …routes from above
+        [
+            'pattern' => 'create-content-table',
+            'action' => function () {
+                $db = new Database([
+                    'type'     => 'sqlite',
+                    'database' => '/Users/sonja/public_html/lang-test/db-users.sqlite', #full path to file
+                ]);
+                $result = $db->createTable('content', [
+                    'id' => [
+                        'type' => 'text',
+                        'unique' => true,
+                    ],
+                    'language' => [
+                        'type' => 'text',
+                    ],
+                    'street' =>  [
+                        'type' => 'text',
+                    ],
+                    'zip' =>  [
+                        'type' => 'text',
+                    ],
+                    'city' =>  [
+                        'type' => 'text',
+                    ],
+                    'website' =>  [
+                        'type' => 'text',
+                    ],
+                    'twitter' =>  [
+                        'type' => 'text',
+                    ],
+                    'instagram' =>  [
+                        'type' => 'text',
+                    ],
+                ]);
+                return $result ? 'The table was successfully created' : 'An error occurred';
+            }
+        ],
+    ]
+];
+```
+
+ As in the earlier examples, call this route in the browser to create the table. Once the table exists, we make the necessary changes in the `DbKirby` and `DbUser` classes and in index.php. We also add some fields in the users blueprint.
+
+## TL; DR: Final code
+The final structure of the plugin looks like this:
+
+```filesystem
+dbusers/
+    src/
+        DbKirby.php
+        DbUser.php
+        DbUsers.php
+    blueprints/
+        users/
+            admin.yml
+    index.php
+```
+### index.php
+
+In `index.php`, we add some options to allow for more flexibility in table names and also add a `defaultLanguage` option for non-multilanguage sites. That way, a language will always be stored in the content table and we don't have to worry if we later switch to a multi-language site.
+
+```php "/site/plugins/dbusers/index.php"
+<?php
+
+use Kirby\Cms\App as Kirby;
+use Kirby\Database\Database;
+use Kirby\Database\Db;
+
+require __DIR__ . '/src/DbUser.php';
+require __DIR__ . '/src/DbUsers.php';
+
+Kirby::plugin('cookbook/dbusers', [
+    'options' => [
+        'contentTable'    => 'content',
+        'userTable'       => 'users',
+        'defaultLanguage' => 'en',
+    ],
+    'blueprints' => [
+        'users/admin' => __DIR__ . '/blueprints/users/admin.yml',
+    ],
+    'routes' => [
+        [
+            'pattern' => 'create-db',
+            'action' => function () {
+                $result = [];
+
+                try {
+                    $database = new SQLite3(kirby()->root('index') . '/db-users.sqlite');
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+
+
+                if ($database) {
+                    $db = new Database([
+                        'type'     => 'sqlite',
+                        'database' => '/Users/sonja/public_html/lang-test/db-users.sqlite', #full path to file
+                    ]);
+
+                    $db->createTable('users', [
+                        'id' => [
+                            'type' => 'text',
+                            'unique' => true,
+                            'key' => 'primary'
+                        ],
+                        'email' => [
+                            'type' => 'text',
+                        ],
+                        'name' =>  [
+                            'type' => 'text',
+                        ],
+                        'role' =>  [
+                            'type' => 'text',
+                        ],
+                        'language' =>  [
+                            'type' => 'text',
+                        ],
+                        'password' =>  [
+                            'type' => 'text',
+                        ],
+                    ]);
+                    // set the users table
+                    $query = $db->table('users');
+                    $users =  [
+
+                        [
+                            'id'        => Str::random(8),
+                            'email'     => 'hallo@getkirby.com',
+                            'password'  => User::hashPassword('12345678'),
+                            'role'      => 'admin',
+                            'language'  => 'en',
+                        ],
+                        [
+                            'id'        => Str::random(8),
+                            'email'     => 'hello@getkirby.com',
+                            'password'  => User::hashPassword('12345678'),
+                            'role'      => 'admin',
+                            'language'  => 'en',
+                        ],
+                        [
+                            'id'        => Str::random(8),
+                            'email'     => 'moin@getkirby.com',
+                            'password'  => User::hashPassword('12345678'),
+                            'role'      => 'admin',
+                            'language'  => 'en',
+                        ]
+                    ];
+                    foreach ($users as $user) {
+                        $query->values($user);
+                        $result[] = $query->insert();
+                    }
+                }
+                return $result;
+            }
+        ],
+        [
+            'pattern' => 'test-user-db',
+            'action'  => function () {
+                $users = Db::select('users');
+                $result = [];
+                foreach ($users as $user) {
+                    $result[] = $user->role;
+                }
+                return $result;
+            }
+        ],
+        [
+            'pattern' => 'create-content-table',
+            'action' => function () {
+                $db = new Database([
+                    'type'     => 'sqlite',
+                    'database' => '/Users/sonja/public_html/lang-test/db-users.sqlite', #full path to file
+                ]);
+                $result = $db->createTable('content', [
+                    'id' => [
+                        'type' => 'text',
+                    ],
+                    'language' => [
+                        'type' => 'text',
+                    ],
+                    'company' =>  [
+                        'type' => 'text',
+                    ],
+                    'street' =>  [
+                        'type' => 'text',
+                    ],
+                    'zip' =>  [
+                        'type' => 'text',
+                    ],
+                    'city' =>  [
+                        'type' => 'text',
+                    ],
+                    'country' =>  [
+                        'type' => 'text',
+                    ],
+                    'website' =>  [
+                        'type' => 'text',
+                    ],
+                    'phone' =>  [
+                        'type' => 'text',
+                    ],
+                    'mobile' =>  [
+                        'type' => 'text',
+                    ],
+                    'twitter' =>  [
+                        'type' => 'text',
+                    ],
+                    'instagram' =>  [
+                        'type' => 'text',
+                    ],
+                ]);
+                return $result ? 'The table was successfully created' : 'An error occurred';
+            }
+        ],
+    ]
+]);
+
+```
+
+### `DbKirby` class
+
+Here we use the options introduced in `index.php` and add multi-language capabilities.
+
+```php "/site/plugins/dbusers/src/DbKirby.php"
+
+<?php
+
+use Kirby\Cms\App as Kirby;
+use Kirby\Database\Db;
+
+class DbKirby extends Kirby
+{
+
+    public function users()
+    {
+        // get cached users if available
+        if ($this->users !== null) {
+            return $this->users;
+        }
+        // instantiate a new empty DbUsers object
+        $userCollection = new DbUsers([], $this);
+        $contentTable   = option('cookbook.dbusers.contentTable');
+        // get users from database table
+        $users          = Db::select(option('cookbook.dbusers.userTable'));
+        $languageCode   = $this->multilang() === true ? $this->language()->code() : option('cookbook.dbusers.defaultLanguage');
+
+        // loop through the users collection
+        foreach ($users as $user) {
+            $data            = $user->toArray();
+            $content         = Db::first($contentTable, '*', ['id' => $user->id(), 'language' => $languageCode]);
+            $data['content'] = $content !== false ? $content->toArray() : [];
+
+
+            if ($this->multilang() === true) {
+                unset($data['content']);
+                $data['translations'] = $this->getDbContentTranslations($contentTable, $user->id());
+            }
+            // create a new DbUser object for each user item
+            $user = new DbUser($data);
+            // and append it to the user collection
+            $userCollection->append($user->id(), $user);
+        }
+
+        return $this->users = $userCollection;
+    }
+
+    /**
+     * Build content translations array
+     * 
+     * @return array
+     */
+    protected function getDbContentTranslations(string $table, string $id)
+    {
+        $translations = [];
+        foreach ($this->languages() as $language) {
+            $content =  Db::first($table, '*', ['id' => $id, 'language' => $language->code()]);
+            if ($language === $this->defaultLanguage()) {
+                $translations[] = [
+                    'code'    => $language->code(),
+                    'content' => $content !== false ? $content->toArray() : [],
+                    'exists'  => true,
+                ];
+            } else {
+                $translations[] =  [
+                    'code'    => $language->code(),
+                    'content' => [
+                        'country' => $content !== false ? $content->toArray()['country'] : null,
+                    ],
+                    'exists'  => true,
+                ];
+            }
+        }
+
+        return $translations;
+    }
+}
+```
+
+### `DbUser` class
+
+In the `DbUser` class, we modify the `create()` method to handle (multi-language) user content, complete the `update()` method, make sure to also delete related content rows when a user is deleted in the `delete()` method, and add some helper methods.
+
+```php "/site/plugins/dbusers/src/DbUser.php"
+<?php
+
+use Kirby\Cms\App as Kirby;
+use Kirby\Cms\Form;
+use Kirby\Cms\User;
+use Kirby\Database\Db;
+use Kirby\Http\Idn;
+
+class DbUser extends User
+{
+
+    public static function create(array $props = null)
+    {
+        $data = $props;
+
+        if (isset($props['email']) === true) {
+            $data['email'] = Idn::decodeEmail($props['email']);
+        }
+
+        if (isset($props['password']) === true) {
+            $data['password'] = User::hashPassword($props['password']);
+        }
+
+        $props['role'] = $props['model'] = strtolower($props['role'] ?? 'default');
+
+        $user = static::factory($data);
+
+        // create a form for the user
+        $form = Form::for($user, [
+            'values' => $props['content'] ?? []
+        ]);
+        // inject the content
+        $user = $user->clone(['content' => $form->strings(true)]);
+        // run the hook
+        return $user->commit('create', ['user' => $user, 'input' => $props], function ($user, $props) {
+
+            $data = [
+                'id'       => $user->id(),
+                'email'    => $user->email(),
+                'language' => $user->language(),
+                'name'     => $user->name()->value(),
+                'role'     => $user->role()->id(),
+                'password' => $user->password()
+            ];
+
+            // get language code for the content language
+            if ($user->kirby()->multilang() === true) {
+                $languageCode = $user->kirby()->defaultLanguage()->code();
+            } else {
+                $languageCode = $user->kirby()->option('cookbook.dbusers.defaultLanguage');
+            }
+
+            $result = Db::insert(option('cookbook.dbusers.userTable'), $data);
+            if ($result === false) {
+                throw new LogicException('The user could not be created');
+            }
+
+            //write content data to content table
+            $user->writeDbContent($user->content()->toArray(), $user->id(), $languageCode);
+
+            return $user;
+        });
+    }
+
+    /**
+     * Deletes the user
+     *
+     * @return bool
+     * @throws \Kirby\Exception\LogicException
+     */
+    public function delete(): bool
+    {
+        return $this->commit('delete', ['user' => $this], function ($user) {
+
+            if ($user->exists() === false) {
+                return true;
+            }
+
+            // delete the user from users table
+            $bool = Db::delete(option('cookbook.dbusers.userTable'), ['id' => $user->id()]);
+            if ($bool !== true) {
+                throw new LogicException('The user "' . $user->email() . '" could not be deleted');
+            }
+            // delete content from all languages
+            $user->deleteContentRows();
+            // remove the user from users collection
+            $user->kirby()->users()->remove($user);
+
+            return true;
+        });
+    }
+
+    /**
+     * Delete all user-related content rows
+     */
+    protected function deleteContentRows(): bool
+    {
+        return Db::delete(option('cookbook.dbusers.contentTable'), ['id' => $this->id()]);
+    }
+
+    /**
+     * Checks if the user exists in database table
+     *
+     * @return bool
+     */
+    public function exists(): bool
+    {
+        return (bool) Db::first(option('cookbook.dbusers.userTable'), '*', ['id' => $this->id()]);
+    }
+
+    /**
+     * Updates the user data
+     *
+     * @param array|null $input
+     * @param string|null $languageCode
+     * @param bool $validate
+     * @return static
+     */
+    public function update(array $input = null, string $languageCode = null, bool $validate = false)
+    {
+        // set language code to default language for non-multilang sites
+        if ($languageCode === null) {
+            $languageCode = option('cookbook.dbusers.defaultLanguage');
+        }
+
+        $result = $this->updateTable($input, $languageCode);
+        if ($result !== true) {
+            throw new LogicException('The user could not be updated');
+        }
+
+        // set auth user data only if the current user is this user
+        if ($this->kirby()->users()->findBy('id', $this->id())->isLoggedIn() === true) {
+            $this->kirby()->auth()->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Update credentials
+     */
+    protected function updateCredentials(array $credentials): bool
+    {
+        return Db::update(
+            option('cookbook.dbusers.userTable'),
+            array_merge(
+                $this->credentials(),
+                $credentials
+            ),
+            ['id' => $this->id()]
+        );
+    }
+
+    /**
+     * Updates content table
+     */
+    protected function updateTable(array $data, string $languageCode = null): bool
+    {
+        $data['id']       = $this->id();
+        $data['language'] = $languageCode;
+        $contentTable     = option('cookbook.dbusers.contentTable');
+        if ($id = Db::first($contentTable, '*', ['id' => $this->id(), 'language' => $languageCode])) {
+            $result = Db::update($contentTable, $data, ['id' => $this->id(), 'language' => $languageCode]);
+        } else {
+            $result = Db::insert($contentTable, $data);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Writes content to content db table
+     */
+    protected function writeDbContent(array $data, $id, string $languageCode = null)
+    {
+        $data['id'] = $id;
+        $data['language'] = $languageCode;
+        return Db::insert(option('cookbook.dbusers.contentTable'), $data);
+    }
+
+    /**
+     * Write user password
+     */
+    protected function writePassword(string $password = null): bool
+    {
+        return Db::update(
+            option('cookbook.dbusers.userTable'),
+            ['password' => $password],
+            ['id' => $this->id()]
+        );
+    }
+}
+```
+### `DbUsers` class
+
+This class remains unchanged.
+
+```php "/site/plugins/dbusers/src/DbUsers.php"
+<?php
+
+use Kirby\Cms\Users;
+class DbUsers extends Users
+{
+
+    public function create($data)
+    {
+        return DbUser::create($data);
+    }
+}
+```
+
+### User blueprint
+
+Our admin blueprint gets the same fields as the ones we defined in the `content` database table.
+
+```yaml "/site/plugins/dbusers/blueprints/users/admin.yml"
+Title: Admin
+
+columns:
+  - width: 1/2
+    fields:
+      company:
+        label: Company
+        type: text
+      street:
+        label: Street
+        type: text
+      zip:
+        label: ZIP
+        type: text
+        width: 1/4
+      city:
+        label: City
+        type: text
+        width: 3/4
+      country:
+        label: Country
+        type: text
+  - width: 1/2
+    fields:
+      phone:
+        label: Phone
+        type: tel
+      mobile:
+        label: Mobile
+        type: tel
+      website:
+        label: Website
+        type: url
+      twitter:
+        label: Twitter
+        type: text
+      instagram:
+        label: Instragram
+        type: text
+```
+### `index.php`/`config.php`
+
+For completeness sake and if you are coming here without having made all the way through the recipe, let's repeat the changes you have to make to the main `index.php` at the root of your project and your config:
+
+#### `index.php`
+
+```php "/index.php"
+<?php
+
+require __DIR__ . '/kirby/bootstrap.php';
+// require the DbKirby class file
+require __DIR__ . '/site/plugins/dbusers/src/DbKirby.php';
+
+// create an instance of the new DbKirby class
+$kirby = new DbKirby();
+
+echo $kirby->render();
+```
+
+#### `config.php``
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    // other settings
+    'db' => [
+        'type'     => 'sqlite',
+        'database' => 'path_to_sqlite_file/db-users.sqlite' // replace with absolute path to file in your project
+    ],
+];
+```
+
+That was it!
+
+Of course, you can change the content fields in the user blueprint and in the database as needed. You can also replace the SQLite database with MySQL/MariaDB if you prefer.
+
+
