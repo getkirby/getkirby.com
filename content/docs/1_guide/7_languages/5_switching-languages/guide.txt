@@ -57,8 +57,8 @@ You can use this third option if you want to redirect the user to the error page
 <nav class="languages">
   <ul>
   <?php foreach($kirby->languages() as $language): ?>
-    <li<?php e($kirby->language() == $language, ' class="active"') ?>>
-      <a href="<?php e($page->content($language->code())->language() != $site->language($language->code()), page('error')->url($language->code()), $page->url($language->code()))?>"><?php echo $language->code(); ?></a>
+    <li<?php e($kirby->language() === $language, ' class="active"') ?>>
+      <a href="<?php e($page->translation($language->code())->exists(), $page->url($language->code()), page('error')->url($language->code())) ?>"><?php echo $language->code(); ?></a>
     </li>
   <?php endforeach ?>
   </ul>
