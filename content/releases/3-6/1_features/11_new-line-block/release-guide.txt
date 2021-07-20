@@ -1,0 +1,10 @@
+Title: New Line Block
+----
+Intro:
+----
+Text:
+
+Add horizontal rules to your blocks with the new line block. It automatically supports and imports hr blocks from the old Editor plugin.
+
+(image: line-block.png)
+

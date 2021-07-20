@@ -1,5 +1,5 @@
-Title: Oh no! 😕
+Title: Oh no!
 
 ----
 
-Intro: The page could not be found
+Intro: The page could not be found 😕

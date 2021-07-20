@@ -4,6 +4,7 @@ namespace Kirby\Cms;
 
 use Kirby\Image\Image;
 use Kirby\Toolkit\A;
+use Kirby\Toolkit\Escape;
 use Kirby\Toolkit\F;
 use Throwable;
 
@@ -254,6 +255,8 @@ class File extends ModelWithContent
         } else {
             if ($this->type() === 'image') {
                 return '(image: ' . $url . ')';
+            } elseif ($this->type() === 'video') {
+                return '(video: ' . $url . ')';
             } else {
                 return '(file: ' . $url . ')';
             }
@@ -265,7 +268,7 @@ class File extends ModelWithContent
      *
      * @internal
      * @param mixed $props
-     * @return self
+     * @return static
      */
     public static function factory($props)
     {
@@ -559,6 +562,14 @@ class File extends ModelWithContent
             $absolute = $this->parent() !== $params['model'];
         }
 
+        // escape the default text
+        // TODO: no longer needed in 3.6
+        $textQuery = $params['text'] ?? '{{ file.filename }}';
+        $text = $this->toString($textQuery);
+        if ($textQuery === '{{ file.filename }}') {
+            $text = Escape::html($text);
+        }
+
         return [
             'filename' => $this->filename(),
             'dragText' => $this->dragText('auto', $absolute ?? false),
@@ -567,7 +578,7 @@ class File extends ModelWithContent
             'image'    => $image,
             'info'     => $this->toString($params['info'] ?? false),
             'link'     => $this->panelUrl(true),
-            'text'     => $this->toString($params['text'] ?? '{{ file.filename }}'),
+            'text'     => $text,
             'type'     => $this->type(),
             'url'      => $this->url(),
             'uuid'     => $uuid,
@@ -661,7 +672,7 @@ class File extends ModelWithContent
      * Sets the Blueprint object
      *
      * @param array|null $blueprint
-     * @return self
+     * @return $this
      */
     protected function setBlueprint(array $blueprint = null)
     {
@@ -677,7 +688,7 @@ class File extends ModelWithContent
      * Sets the filename
      *
      * @param string $filename
-     * @return self
+     * @return $this
      */
     protected function setFilename(string $filename)
     {
@@ -686,10 +697,12 @@ class File extends ModelWithContent
     }
 
     /**
-     * Sets the parent model object
+     * Sets the parent model object;
+     * this property is required for `File::create()` and
+     * will be generally required starting with Kirby 3.7.0
      *
      * @param \Kirby\Cms\Model|null $parent
-     * @return self
+     * @return $this
      */
     protected function setParent(Model $parent = null)
     {
@@ -702,7 +715,7 @@ class File extends ModelWithContent
      * auto root detection
      *
      * @param string|null $root
-     * @return self
+     * @return $this
      */
     protected function setRoot(string $root = null)
     {
@@ -712,7 +725,7 @@ class File extends ModelWithContent
 
     /**
      * @param string|null $template
-     * @return self
+     * @return $this
      */
     protected function setTemplate(string $template = null)
     {
@@ -724,7 +737,7 @@ class File extends ModelWithContent
      * Sets the url
      *
      * @param string|null $url
-     * @return self
+     * @return $this
      */
     protected function setUrl(string $url = null)
     {

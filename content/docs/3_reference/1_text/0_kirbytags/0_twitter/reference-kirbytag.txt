@@ -1,0 +1,44 @@
+Title:
+
+twitter
+
+----
+
+Intro: Creates a link to a Twitter profile
+
+----
+
+Text:
+
+## Examples and options:
+
+### Twitter profile link without link text
+The username is used as the link text.
+```kirbytext
+(\twitter: getkirby)
+```
+
+It doesn't matter if you omit the @ or not.
+```kirbytext
+(\twitter: @getkirby)
+```
+
+### Twitter profile link with custom link text
+```kirbytext
+(\twitter: getkirby text: follow us on Twitter)
+```
+
+### Twitter profile link with `title` attribute
+```kirbytext
+(\twitter: getkirby title: follow us on Twitter)
+```
+
+### Twitter profile link with `rel` attribute
+```kirbytext
+(\twitter: getkirby rel: me)
+```
+
+### Twitter profile link with custom CSS class
+```kirbytext
+(\twitter: getkirby class: twitter)
+```

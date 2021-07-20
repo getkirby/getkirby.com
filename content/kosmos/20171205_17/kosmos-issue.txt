@@ -29,15 +29,15 @@ Save the date! For all of you who couldn't get a place on the first Kirby Worksh
 ## Kirby in the Wild
 
 
-(picture: mirrormirror.jpg)
+(image: mirrormirror.jpg)
 [Mirror Mirror](http://mirrormirror.be)
 Branding and Visual Communication
 
-(picture: soundtrack-business.jpg)
+(image: soundtrack-business.jpg)
 [Soundtrack Business](https://www.soundtrackyourbrand.com/soundtrack-business)
 Music Services for Businesses
 
-(picture: antwerpart.jpg)
+(image: antwerpart.jpg)
 [Antwerp Art](https://antwerpart.be)
 Non-profit organization/art scene
 
@@ -61,13 +61,13 @@ The collection of available themes on(http://getkirby-themes.com) is steadily gr
 
 (columns…)
 
-(picture: way-theme.jpg)
+(image: way-theme.jpg)
 [Way](http://themes.kueker.net/way/)
 Blog theme with modular site layout created by Florian Kueker.
 
 ++++
 
-(picture:showcase-theme.jpg)
+(image:showcase-theme.jpg)
 [Showcase](http://demo.11bits.es/showcase/)
 Clean and minimalistic portfolio theme made by 11bits.
 

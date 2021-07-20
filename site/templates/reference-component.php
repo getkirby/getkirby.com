@@ -1,16 +1,9 @@
-<?php snippet('cheatsheet.article.header') ?>
+<?php layout('reference') ?>
 
-  <div class="text">
+<div class="prose">
+  <?= $page->text()->kt() ?>
 
-    <?= $page->text()->kt()->anchorHeadlines() ?>
+  <?php snippet('templates/reference/entry/parameters') ?>
+  <?php snippet('templates/reference/entry/returns') ?>
+</div>
 
-    <?php snippet('method/parameters',  ['parameters' => $page->parameters()]) ?>
-    <?php snippet('method/returns', ['type' => $page->returnType()]) ?>
-
-    <?php snippet('method/source', ['link' => $page->githubSource()]) ?>
-
-  </div>
-
-  <?php snippet('github.edit') ?>
-
-<?php snippet('cheatsheet.article.footer') ?>

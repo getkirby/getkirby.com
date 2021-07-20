@@ -1,0 +1,197 @@
+Title: Info section
+
+----
+
+Intro:
+
+Add help text and info boxes to the Panel to help your editors
+
+----
+
+Text:
+
+The info section is perfect for any kind of static text that you want to place in a (glossary: Panel) layout. It can be used for general info, help, warnings and other guides for your editors.
+
+(image: info.png)
+
+## Example
+
+```yaml
+title: Gallery
+
+sections:
+  info:
+    type: info
+    headline: Info
+    text: |
+      Please double-check the licenses and sources
+      of all images before you upload them to the gallery.
+```
+
+### Using `KirbyText`
+
+<since v="3.3.0">
+In addition to markdown, you can use `KirbyText` in your info text, even including images:
+</since>
+```yaml
+info:
+  text: |
+    Check out the &lpar;link: help text: help pages) for details
+```
+
+## Section shortcuts
+
+<since v="3.3.0">
+
+For simple sections that are only used once per blueprint, you can use shortcuts. In its most basic form, an `info` section consists of the section type as name, and the `text` property with the information you want to show.
+
+```yaml
+sections:
+  info:
+    text: Some text
+```
+
+Keep in mind that the same section name can only be used once per blueprint.
+
+</since>
+
+## Info section vs. info field
+
+The info section behaves pretty much like the (link: docs/reference/panel/fields/info text: info field). Why do we have both of them? Because both are useful. The info field can be placed in a field grid and is perfect to offer help within a form. The info section can be placed anywhere else, especially in layouts that don't need form fields.
+
+## Section properties
+
+(section-options: info)
+
+## Headline
+
+The headline will be displayed above the info section. You can pass a simple headline as a string or you can provide translations for multiple languages, if you have an international editing team.
+
+### Single language
+
+```yaml
+headline: This is some very important information
+```
+
+### Multiple languages
+```yaml
+headline:
+  en: Attention
+  de: Achtung
+  es: Attencion
+```
+
+### Placeholders
+
+You can inject information from the current page into the headline with template placeholders using our (link: docs/guide/blueprints/query-language text: query language).
+
+```yaml
+headline: "{{ page.title }} Information"
+```
+
+## Text
+
+The text can be a simple string, Markdown, KirbyText or HTML. Just like the headline, the text can also be translated. You can also use Kirby's query language to query text from some field or show some other information.
+
+### Single language
+```yaml
+text: Info
+```
+
+### Multiple languages
+```yaml
+text:
+  en: This is some very important information
+  de: Das ist eine wichtige Mitteilung
+```
+
+### Multi-line text
+
+If you want to write multi-line text with paragraphs, you have to use a special YAML syntax for it.
+
+```yaml
+text: |
+  Dear Edith,
+
+  this is some multi line text with paragraphs.
+
+  Cheers,
+  A. Dmin
+```
+### Text queries
+
+```yaml
+text: "{{ kirby.page('somepage').text()->kt() }}"
+text: "{{ site.index.count }}"
+text: "{{ site.index.images.count }}"
+```
+
+## Themes
+
+### info
+
+```yaml
+title: Gallery
+
+sections:
+  info:
+    type: info
+    headline: Info
+    theme: info
+    text: |
+      Please double-check the licenses and sources
+      of all images before you upload them to the gallery.
+```
+
+### negative
+
+(image: negative.png)
+
+```yaml
+title: Gallery
+
+sections:
+  info:
+    type: info
+    headline: Attention
+    theme: negative
+    text: |
+      Please double-check the licenses and sources
+      of all images before you upload them to the gallery.
+```
+
+### positive
+
+(image: positive.png)
+
+```yaml
+title: Gallery
+
+sections:
+  info:
+    type: info
+    headline: Wohooww
+    theme: positive
+    text: |
+      Just upload whatever you want. We get sued anyway.
+```
+
+### Disable theming
+
+<since v="3.3.4">
+You can disable the infobox theme entirely to show neutral text.
+
+```yaml
+fields:
+  info:
+    type: info
+    headline: Info
+    theme: none
+    text: |
+      This is a very neutral message
+```
+</since>
+
+
+(docs: sections/conditional-sections)
+

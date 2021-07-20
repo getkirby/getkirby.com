@@ -1,0 +1,25 @@
+Title: (:all)
+
+----
+
+Intro: Matches all characters including slashes
+
+----
+
+Text:
+
+## Example
+
+```php "/site/config/config.php"
+return [
+  'routes' => [
+    [
+      'pattern' => '/projects/(:all)',
+      'action'  => function (string $path) {
+        // react to requests
+      }
+    ]
+  ]
+];
+```
+

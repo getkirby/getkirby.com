@@ -1,0 +1,528 @@
+Title: Blocks
+
+----
+
+Since: 3.5.0
+
+----
+
+Intro:
+
+A visual editor for long-form text and modular pages
+
+----
+
+Guide: blueprints/fields
+
+----
+
+Text:
+
+The Blocks field is the perfect solution for complex single-column layouts and long-form text.
+
+(image: blocks.png)
+
+## Blueprint setup
+
+You can add the Blocks field to any fields section in your Panel like this:
+
+```yaml
+fields:
+  text:
+    type: blocks
+```
+
+## Field properties
+
+Property | Type | Default | Description
+- | - | - | - |
+autofocus | `bool` | - | Sets the focus on this field when the form loads. Only the first field with this property gets focus.
+default | `array` | - | Default value for the field, which will be used when a page/file/user is created
+disabled | `bool` | - | If true, the field is no longer editable and will not be saved
+empty | `string` | - | Customize the default text when the blocks field is empty
+fieldsets | `array` | - | Defines the allowed block types in the blocks field. See below.
+help | | - | Optional help text below the field
+label | | - | The field label can be set as string or associative array with translations
+max | `int` | - | Maximum number of allowed blocks
+min | `int` | - | Minimum number of required blocks
+pretty | `bool` | `false` | Saves pretty printed JSON in text files
+required | `bool` | `false` | If true, the field has to be filled in correctly to be saved.
+translate | `bool` | `true` | If false, the field will be disabled in non-default languages and cannot be translated. This is only relevant in multi-language setups.
+when |  | - | Conditions when the field will be shown (since 3.5.1)
+width | `string` | `1/1` | The width of the field in the field grid. Available widths: `1/1`, `1/2`, `1/3`, `1/4`, `2/3`, `3/4`
+
+## Defining Fieldsets
+
+By default, the block selector shows a single list of available block types in alphabetical order.
+
+```yaml
+fields:
+  text:
+    type: blocks
+```
+
+(image: single.png)
+
+However, you can fully customize the selector for new block types with sorted block types and groups.
+
+To change the order of available blocks, list them manually with the `fieldsets` option:
+
+```yaml
+fields:
+  text:
+    type: blocks
+    fieldsets:
+      - heading
+      - text
+      - list
+      - image
+      - gallery
+      - video
+      - code
+      - markdown
+```
+
+(image: single-sorted.png)
+
+### Groups
+
+You can group block types in the block selector for a better overview of the available options. This is particularly useful when your blocks lists gets longer once your start creating your own custom blocks.
+
+To create such groups, use the Blocks field's generic "group" block type:
+
+```yaml
+fields:
+  text:
+    type: blocks
+    fieldsets:
+      text:
+        label: Text
+        type: group
+        fieldsets:
+          - heading
+          - text
+          - list
+      media:
+        label: Media
+        type: group
+        fieldsets:
+          - image
+          - video
+      code:
+        label: Code
+        type: group
+        fieldsets:
+          - code
+          - markdown
+```
+
+(image: groups.png)
+
+### Closed groups
+
+By default, all groups are open. With very long list, you might want to close groups of blocks that are used less frequently with the `open: false` option:
+
+```yaml
+fields:
+  text:
+    type: blocks
+    fieldsets:
+      text:
+        label: Text
+        type: group
+        fieldsets:
+          - heading
+          - text
+          - list
+      media:
+        label: Media
+        type: group
+        fieldsets:
+          - image
+          - video
+      code:
+        label: Code
+        type: group
+        open: false
+        fieldsets:
+          - code
+          - markdown
+```
+
+(image: closed-groups.png)
+
+## Block types
+
+(reference: panel/blocks)
+
+## Custom block types
+
+You can create your own Block types for the Blocks field. Custom blocks are defined directly in the fieldsets list:
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      - heading
+      - text
+      button:
+        name: Button
+        icon: bolt
+        fields:
+          link:
+            type: url
+          text:
+            type: text
+```
+
+In the example above, we mix the default block types (heading and text) with our own custom block type to add a call to action button.
+
+### Preview
+
+Custom block types don't have a visual preview by default. They show up with the icon and the name from your blueprint definition.
+
+(image: preview.png)
+
+### Editing
+
+To edit a custom block type, editors can either double-tap on the block or click on the edit icon in the toolbar. The block drawer opens with the fields you've defined for the block.
+
+(image: editing.png)
+
+### Tabs
+
+You can also define tabs for your blocks when they have a lot of settings:
+
+```yaml
+fields:
+  blocks:
+    label: Text
+    type: blocks
+    fieldsets:
+      - heading
+      - text
+      button:
+        name: Button
+        icon: bolt
+        tabs:
+          content:
+            fields:
+              link:
+                type: url
+              text:
+                type: text
+          styles:
+            fields:
+              class:
+                type: text
+              id:
+                type: text
+```
+
+The tabs will then show up in the block drawer.
+
+(image: tabs.png)
+
+### Global block types
+
+For reuse in multiple places, custom block type definitions can be stored in a folder called `site/blueprints/blocks`. In this case we would store it in `/site/blueprints/blocks/button.yml`:
+
+```yaml
+# /site/blueprints/blocks/button.yml
+name: Button
+icon: bolt
+tabs:
+  content:
+    fields:
+      link:
+        type: url
+      text:
+        type: text
+  styles:
+    fields:
+      class:
+        type: text
+      id:
+        type: text
+```
+
+Now, we can use it in our fieldsets option for any blocks field.
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      - heading
+      - text
+      - button
+```
+
+This also works in groups:
+
+```yaml
+fields:
+  text:
+    type: blocks
+    fieldsets:
+      text:
+        label: Text
+        type: group
+        fieldsets:
+          - heading
+          - text
+          - list
+          - button
+      media:
+        label: Media
+        type: group
+        fieldsets:
+          - image
+          - video
+      code:
+        label: Code
+        type: group
+        fieldsets:
+          - code
+          - markdown
+```
+
+### Custom block type snippet
+
+To render the HTML for your custom block type in the frontend, create a snippet in `/site/snippets/blocks`. In this case we create a file called `/site/snippets/blocks/button.php`
+
+```php "/site/snippets/blocks/button.php"
+<a href="<?= $block->link() ?>" class="btn">
+  <?= $block->text() ?>
+</a>
+```
+
+## Preview plugins
+
+You can turn your custom blocks into highly visual, interactive representations with a custom block preview plugin.
+
+(image: custom-preview.png link: docs/reference/plugins/extensions/blocks)
+
+**(link: docs/reference/plugins/extensions/blocks text: Read our plugin guide on how to create such previews.)**
+
+## Extending core blocks
+
+You can take our core blocks as a starting point for your own custom blocks and extend them with your own fields, snippets and previews. Extending our core blocks works the same way as extending fields, tabs or sections in blueprints everywhere else.
+
+### Example: extending the heading block
+
+Let's take the heading block and add a simple text field to add a custom ID for the heading
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      heading:
+        extends: blocks/heading
+        fields:
+          customId:
+            label: Custom ID
+            type: text
+```
+
+This will add the `customID` field below the default fields of the block.
+
+(image: custom-id.png)
+
+### Extending existing fields
+
+Instead of only adding new fields, you can also adjust the field settings for the default fields of the block.
+
+Let's limit the number of heading levels for our heading block.
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      heading:
+        extends: blocks/heading
+        fields:
+          level:
+            options:
+              - h2
+              - h3
+```
+
+You can find all block fields and their settings in the (link: docs/reference/panel/blocks text: docs for each block).
+
+### Adding tabs
+
+You can extend our core blocks with additional tabs. Be aware though that you need to recreate all default fields in this case, as tabs will replace the default fields.
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      heading:
+        extends: blocks/heading
+        tabs:
+          content:
+            fields:
+              level:
+                type: select
+                empty: false
+                default: "h2"
+                width: 1/6
+                options:
+                  - h1
+                  - h2
+                  - h3
+              text:
+                type: writer
+                inline: true
+                width: 5/6
+              customId:
+                label: Custom ID
+                type: text
+          styles:
+            fields:
+              backgroundColor:
+                type: select
+                options:
+                  - red
+                  - green
+                  - blue
+              textColor:
+                type: select
+                options:
+                  - white
+                  - black
+```
+
+(docs: blocks/blocks)
+
+## Configuration
+
+You can configure the default setup of your Blocks field in your config.php
+
+```php "/site/config/config.php"
+<?php
+
+return [
+  'blocks' => [
+    'fieldsets' => [
+      'text' => [
+        'label' => 'Text',
+        'type' => 'group',
+        'fieldsets' => [
+          'text',
+          'heading'
+        ]
+      ],
+      'media' => [
+        'label' => 'Media',
+        'type' => 'group',
+        'fieldsets' => [
+          'image',
+          'video'
+        ]
+      ]
+    ]
+  ]
+];
+```
+
+## Builder migration
+
+The Blocks field replaces the Builder field plugin. It comes with a built-in smart importer for Builder blocks. The migration should normally be effortless.
+
+### Your blueprints
+
+The only thing you have to change to upgrade from the Builder to the new Blocks field is to change the field type:
+
+*previously:*
+
+```yaml "builder"
+fields:
+  blocks:
+    type: builder
+    fieldsets:
+      ...
+```
+
+*now:*
+
+```yaml "blocks"
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      ...
+```
+
+### Your templates
+
+The Builder used a field method called `$page->blocks()->toBuilderBlocks()`. This has to be replaced with `$page->blocks()->toBlocks()`
+
+### Your block snippets
+
+Your old block snippets should work as expected, but a few things are deprecated and you should follow the new way of doing things in the snippets:
+
+The new `$block` object replaces `$data` You can still use `$data` instead, but consider this deprecated. The following `$block` object methods replace the old `$data` methods:
+
+Builder | Blocks
+- | -
+`$data->_uid()` | `$block->id()`
+`$data->_key()` | `$block->type()`
+
+
+## Editor migration
+
+The Blocks field also replaces our Editor field plugin. It has a built-in smart importer for Editor blocks. The migration should normally be mostly effortless. There are a couple block types that have changed though and you might need to update your editor block snippets.
+
+### Your blueprints
+
+The only thing you have to change to upgrade from the Editor to the new Blocks field is to change the field type:
+
+*previously:*
+
+```yaml "editor"
+fields:
+  blocks:
+    type: editor
+```
+
+*now:*
+
+```yaml "blocks"
+fields:
+  blocks:
+    type: blocks
+```
+
+### Your templates
+
+The Editor used a field method called `$page->blocks()->blocks()`. This has to be replaced with `$page->blocks()->toBlocks()`
+
+### Changed snippets
+
+The following block types have changed in the Blocks field and you need to move and rename your snippets if you have customized them in your installation.
+
+Editor | Blocks
+- | -
+`/site/snippets/editor/h1.php` | `/site/snippets/blocks/heading.php`
+`/site/snippets/editor/h2.php` | `/site/snippets/blocks/heading.php`
+`/site/snippets/editor/h3.php` | `/site/snippets/blocks/heading.php`
+`/site/snippets/editor/blockquote.php` | `/site/snippets/blocks/quote.php`
+`/site/snippets/editor/kirbytext.php` | `/site/snippets/blocks/markdown.php`
+`/site/snippets/editor/ol.php` | `/site/snippets/blocks/list.php`
+`/site/snippets/editor/paragraph.php` | `/site/snippets/blocks/text.php`
+`/site/snippets/editor/ul.php` | `/site/snippets/blocks/list.php`
+
+## Further reading
+
+- (link: https://getkirby.com/docs/reference/panel/blocks text: Block types)
+- (link: docs/reference/objects/cms/block text: Block methods)
+- (link: docs/reference/objects/cms/blocks text: Blocks collection methods)
+- (link: docs/reference/plugins/extensions/blocks text: Custom block types)
+- (link: docs/cookbook/panel/custom-block-type text: Recipe: Creating a custom block type from scratch)
+- (link: docs/cookbook/panel/block-collection text: Recipe: Block factory: Creating your own blocks collection)

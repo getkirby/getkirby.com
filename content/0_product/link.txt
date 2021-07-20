@@ -1,9 +1,0 @@
-Title: Product
-
-----
-
-Submenu: true
-
-----
-
-Link: features

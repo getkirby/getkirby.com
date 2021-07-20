@@ -1,0 +1,17 @@
+Text:
+
+
+## Example
+
+### Text file
+
+```kirbycontent
+Title: My great article
+\----
+More: some/related/page
+```
+
+### Template
+```php
+<a href="<?= $page->more()->toUrl() ?>">Read more …</a>
+```

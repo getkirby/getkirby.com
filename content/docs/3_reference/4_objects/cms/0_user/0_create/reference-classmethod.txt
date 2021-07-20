@@ -1,0 +1,25 @@
+Auth: users.create
+
+----
+
+Properties: $props
+
+----
+
+Text:
+
+## Example
+
+```php
+$newUser = User::create([
+  'email'     => 'bastian@getkirby.com',
+  'name'      => 'Bastian',
+  'role'      => 'admin',
+  'language'  => 'en',
+  'password'  => 'topSecret',
+  'content'   => [
+    'twitter'   => '@getkirby',
+    'position'  => 'founder'
+  ]
+]);
+```

@@ -1,0 +1,5 @@
+Title: Assets
+
+----
+
+Intro: Returns the url of the assets folder

@@ -1,38 +1,26 @@
-<?php snippet('header') ?>
+<?php layout() ?>
 
-  <main class="documentation-page | main" id="maincontent">
+<div class="mb-36">
+  <h1 class="h1 mb-12">Guide</h1>
+  <ul class="guides auto-fill auto-rows-fr mb-12" style="--min: 16rem; --gap: var(--spacing-12)">
+    <?php foreach ($page->children()->listed() as $guide): ?>
+    <li>
+      <article>
+        <a class="block" href="<?= $guide->url() ?>">
+          <figure class="mb-3" style="--size: 4rem">
+            <?= $guide->images()->findBy('extension', 'svg')->read() ?>
+          </figure>
+          <div class="border-top pt-3">
+            <h2 class="h2 mb-3"><?= $guide->title() ?></h2>
+            <p class="color-gray-700"><?= $guide->description() ?></p>
+          </div>
+        </a>
+      </article>
+    </li>
+    <?php endforeach ?>
+  </ul>
+</div>
 
-    <div class="wrap">
-
-      <header class="hero">
-        <h1><?= $page->title() ?></h1>
-      </header>
-
-      <?php foreach ($page->structure()->yaml() as $categoryTitle => $categoryPages): ?>
-      <section>
-        <h2 class="h6 -mb:large"><?= $categoryTitle ?></h2>
-
-        <ul class="cardgrid | -mb:huge">
-          <?php foreach ($categoryPages as $item): ?>
-            <?php if ($item = $page->find($item)): ?>
-            <li class="cardgrid-item">
-              <a href="<?= $item->url() ?>" class="cardgrid-link">
-                <?php if ($image = $item->images()->findBy('extension', 'svg')): ?>
-                  <figure class="-mb:medium"><?= $image->read() ?></figure>
-                <?php endif ?>
-                <h2 class="h5"><?= $item->title()->widont() ?></h2>
-                <p class="description"><?= $item->description() ?></p>
-              </a>
-            </li>
-            <?php endif ?>
-          <?php endforeach ?>
-        </ul>
-
-      </section>
-      <?php endforeach ?>
-
-    </div>
-
-  </main>
-
-<?php snippet('footer') ?>
+<footer class="h2">
+  Travel back in time <a class="underline" href="/docs/archive">with our docs archive &rarr;</a>
+</footer>

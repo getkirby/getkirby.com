@@ -26,7 +26,7 @@ As we promised in our last issue, one of our goals for 2020 is to put a stronger
 
 As a major step in this direction, here comes [Kirby demo](https://getkirby.com/try): discover Kirby instantly without installing. The demo features multiple site types integrated into a single site, showcasing the extreme flexibility of Kirby for your projects–big or small. As a demo user, access the Panel and explore Kirby's user-friendly editing interface: add blog posts, create new products, upload images to the gallery, edit and add users, and more. Check it out and let us know what you think! And if you are curious to know how we made it, visit the [repo on GitHub](https://github.com/getkirby/demokit).
 
-(screenshot: kirby-demo.jpg)
+(image: kirby-demo.jpg)
 
 ## Kirby in the wild
 
@@ -34,21 +34,19 @@ Be it a huge complex company website with thousands of pages or your personal po
 
 (columns…)
 
-(screenshot: bauhaus-richtig-gut.jpg)
+(image: bauhaus-richtig-gut.jpg)
 
 ++++
 
 Bauhaus is one of the largest DIY store chains in Europe. [Richtig gut](https://richtiggut.de/) is a spin-off of their main website with instructions and inspiration around house and garden.
 
-(…columns)
-
-(columns…)
+++++
 
 [OBS Studio](https://obsproject.com) is a free and open-source cross-platform streaming and recording software. The website is available in 16 languages built with (link: docs/guide/languages/introduction text: Kirby's multi-language feature).
 
 ++++
 
-(screenshot: obs-studio.jpg)
+(image: obs-studio.jpg)
 
 (…columns)
 
@@ -75,7 +73,7 @@ fields:
 
 (columns…)
 
-(screenshot: seo-preview-section.gif)
+(image: seo-preview-section.gif)
 
 
 ++++
@@ -89,7 +87,7 @@ Preview how your SEO fields will look in search results with the interactive, co
 
 (columns…)
 
-(screenshot: enhanced-toolbar-link-dialog.jpg)
+(image: enhanced-toolbar-link-dialog.jpg)
 
 ++++
 

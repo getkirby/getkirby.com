@@ -1,0 +1,42 @@
+Title: $pagination
+
+----
+
+Class: Kirby\Cms\Pagination
+
+----
+
+Text:
+
+## How to create a `$pagination` object
+
+To create a `$pagination` object, you have to paginate a collection of pages and then call the `pagination()` method:
+
+```php
+$articles   = page('blog')->children()->listed()->paginate(5);
+$pagination = $articles->pagination();
+```
+This will give us  5 articles per pagination page.
+
+## Example
+
+With the object in place, we can now use the methods to create our pagination navigation
+
+```php
+<?php if ($pagination->hasPages()): ?>
+<nav class="pagination">
+
+  <?php if ($pagination->hasNextPage()): ?>
+  <a class="next" href="<?= $pagination->nextPageURL() ?>">older posts</a>
+  <?php endif ?>
+
+  <?php if ($pagination->hasPrevPage()): ?>
+  <a class="prev" href="<?= $pagination->prevPageURL() ?>">newer posts</a>
+  <?php endif ?>
+
+</nav>
+<?php endif ?>
+```
+
+(screencast: https://www.youtube.com/watch?v=p1JhCpSRvlc title: Pagination text: When a list of pages grows longer and longer you need to paginate it.)
+

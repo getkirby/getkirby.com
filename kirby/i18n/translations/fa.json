@@ -118,7 +118,7 @@
   "error.page.duplicate.permission": "You are not allowed to duplicate \"{slug}\"",
   "error.page.notFound": "صفحه مورد نظر با آدرس «{slug}» پیدا نشد.",
   "error.page.num.invalid": "لطفا شماره ترتیب را بدرستی وارد نمایید. اعداد نباید منفی باشند.",
-  "error.page.slug.invalid": "لطفا یک پیشوند Url صحیح وارد کنید",
+  "error.page.slug.invalid": "Please enter a valid URL appendix",
   "error.page.slug.maxlength": "Slug length must be less than \"{length}\" characters",
   "error.page.sort.permission": "امکان مرتب‌سازی «{slug}» نیست",
   "error.page.status.invalid": "لطفا وضعیت صحیحی برای صفحه انتخاب کنید",
@@ -163,6 +163,7 @@
   "error.user.password.invalid": "لطفا گذرواژه صحیحی با حداقل طول 8 حرف وارد کنید. ",
   "error.user.password.notSame": "\u0644\u0637\u0641\u0627 \u062a\u06a9\u0631\u0627\u0631 \u06af\u0630\u0631\u0648\u0627\u0698\u0647 \u0631\u0627 \u0648\u0627\u0631\u062f \u0646\u0645\u0627\u06cc\u06cc\u062f",
   "error.user.password.undefined": "کاربر فاقد گذرواژه است",
+  "error.user.password.wrong": "Wrong password",
   "error.user.role.invalid": "لطفا نقش صحیحی وارد نمایید",
   "error.user.update.permission": "شما اجازه بروزرسانی کاربر «{name}» را ندارید",
 
@@ -371,9 +372,11 @@
   "more": "بیشتر",
   "name": "نام",
   "next": "بعدی",
+  "no": "no",
   "off": "off",
   "on": "on",
   "open": "بازکردن",
+  "open.newWindow": "Open in new window",
   "options": "گزینه‌ها",
   "options.none": "No options",
 
@@ -465,7 +468,9 @@
   "toolbar.button.file.select": "Select a file",
   "toolbar.button.file.upload": "Upload a file",
   "toolbar.button.link": "\u067e\u06cc\u0648\u0646\u062f",
+  "toolbar.button.strike": "Strike-through",
   "toolbar.button.ol": "لیست مرتب",
+  "toolbar.button.underline": "Underline",
   "toolbar.button.ul": "لیست معمولی",
 
   "translation.author": "تیم کربی",
@@ -517,5 +522,6 @@
   "view.users": "\u06a9\u0627\u0631\u0628\u0631\u0627\u0646",
 
   "welcome": "خوش آمدید",
-  "year": "سال"
+  "year": "سال",
+  "yes": "yes"
 }

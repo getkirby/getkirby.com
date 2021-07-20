@@ -1,0 +1,84 @@
+Title: $page
+
+----
+
+Class: Kirby\Cms\Page
+
+----
+
+Text:
+
+You can extend this set of methods with (link: docs/reference/plugins/extensions/page-methods text: custom page methods) or in a (link: docs/reference/plugins/extensions/page-models text: page model).
+
+## How to fetch the `$page` object
+
+The `$page` class is available in Kirby's templates/snippets etc. through the `$page` variable that -  unless otherwise defined – always refers to the current page. However, you can also define a `$page` object by calling a specific page using the [`page()` helper](/docs/reference/templates/helpers/page):
+
+```php
+$page = page('somepage');
+```
+
+Or getting it from a collection of pages
+
+```php
+$page = $pages->first();
+```
+
+<info>
+When getting a specific page via the [`page()` helper](/docs/reference/templates/helpers/page) or when trying to create a page object from field values stored in content, always verify that you have a page object before you call any of the Page methods.
+</info>
+
+## Content fields
+
+The `$page` class offers a magic caller for your (link: docs/guide/content/fields text: content fields). Instead of getting them via e.g.
+
+```php
+$page->content()->get('your_field')
+```
+
+you can use the shorthand
+
+```php
+$page->your_field()
+```
+
+<info>
+You can not use the shorthand for fields with names that conflict with the default methods of the `$page` class (see above) or used by custom page methods.
+</info>
+
+
+## Examples
+
+With the `$page` object defined, you can start using the methods of the class:
+
+### Get a field of the page
+
+```php
+<?= $page->title() ?>
+```
+
+### Get the children of the page
+
+```php
+<?php $children = $page->children() ?>
+```
+
+### Get all images of the page
+
+```php
+<?php $images = $page->images() ?>
+```
+
+### Check if the page is active
+
+```php
+<?php e($page->isActive(), 'active') ?>
+```
+
+### Check if the page has draft children
+
+```php
+if ($page->hasDrafts()) {
+  echo "This page still has some children that haven't been published yet";
+}
+```

@@ -1,0 +1,25 @@
+Title: (:any)
+
+----
+
+Intro: Matches any character until the next slash
+
+----
+
+Text:
+
+## Example
+
+```php "/site/config/config.php"
+return [
+  'routes' => [
+    [
+      'pattern' => '/projects/(:any)',
+      'action'  => function (string $path) {
+        // react to requests
+      }
+    ]
+  ]
+];
+```
+

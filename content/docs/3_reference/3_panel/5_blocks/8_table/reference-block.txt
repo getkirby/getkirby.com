@@ -1,0 +1,85 @@
+Title: table
+
+----
+
+Since: 3.5.0
+
+----
+
+Intro: A table block based on the structure field
+
+----
+Text:
+
+The table block is a rather rudimentary block that is supposed to be fully implemented with a custom block blueprint and snippet.
+
+## Files
+
+### Blueprint
+
+The default blueprint is really just a placeholder and looks like this:
+
+```yaml "/kirby/config/blocks/table/table.yml"
+name: Table
+icon: menu
+preview: table
+```
+
+For your custom table block blueprint, create a `table.yml` file in `/site/blueprints/blocks`. The table block is supposed to be used with a structure field called `rows`. As regards the fields inside the structure, you are free to name them whatever you like.
+
+```yaml "/site/blueprints/blocks/table.yml"
+name: Simple 3-column menu table
+icon: menu
+preview: table
+fields:
+  rows:
+    type: structure
+    columns:
+      dish:
+        width: 1/4
+      description:
+        width: 1/4
+      price:
+        width: 1/2
+        align: right
+        after: "USD"
+    fields:
+      dish:
+        type: writer
+        marks: false
+        inline: true
+      description:
+        type: text
+      price:
+        type: number
+```
+
+In addition to this basic setup, you can also add additional fields that would allow users to add classes or ids to the block.
+
+### Snippet
+
+The table block doesn’t come with a default snippet, but you have to create it yourself depending on the setup of your table blueprint.
+
+```php "/site/snippets/blocks/table.php"
+<?php 
+$rows = $block->rows()->toStructure();
+if($rows->isNotEmpty()):
+?>
+<table class="block-table">
+  <tr>
+    <th>Dish</th>
+    <th>Description</th>
+    <th>Price</th>
+  </tr>
+  <?php foreach( $rows as $row): ?>
+    <tr>
+      <td><?= $row->dish()->html() ?></td>
+      <td><?= $row->description()->html() ?></td>
+      <td><?= number_format ( $row->price()->toFloat(), 2 , null, '.' ) ?></td>
+    </tr>
+  <?php endforeach ?>
+</table>
+<?php endif; ?>
+```
+
+If you don’t like the default preview, you can of course (link: docs/reference/panel/fields/blocks#preview-plugins text: create your own preview as well).

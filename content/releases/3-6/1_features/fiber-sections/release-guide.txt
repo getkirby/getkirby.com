@@ -1,0 +1,50 @@
+Title: Fiber Sections
+----
+Text:
+
+<info>
+Status: **in progress**
+</info>
+
+With our sections concept in the Panel, we decided to lazy-load each section individually once the main view has been loaded. This works well, but also leads to layout shifts and flickering and adds to the complexity of our sections.
+
+We don't see as many section plugins as we hoped for and one reason is most likely that they are super hard to get right.
+
+With Fiber, we have a chance to rebuild them in a much simpler way. They will be no longer lazy-loaded and as a result their implementation couldn't be more straightforward. In fact, they work exactly like Field plugins …
+
+```php "Section code in the backend"
+Kirby::plugin('my/section', [
+    'sections' => [
+        'message' => [
+            'props' => [
+                'message' => function (string $message) {
+                    return $message;
+                }
+            ]
+        ]
+    ]
+]);
+```
+
+```yaml "Blueprint setup"
+sections:
+    myCustomSection:
+        message: Hello world
+```
+
+```html "Vue code"
+<template>
+    <p>{{ message }}</p>
+</template>
+
+<script>
+export default {
+    props: {
+        message: String
+    }
+}
+</script>
+```
+
+
+

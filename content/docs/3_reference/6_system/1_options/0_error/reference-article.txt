@@ -1,0 +1,13 @@
+Intro: The name of the error page folder
+
+----
+
+Text:
+
+The default folder is called `error` and must be present unless you set a different folder.
+
+```php
+return [
+  'error' => 'fehler'
+];
+```

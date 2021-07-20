@@ -34,7 +34,7 @@ Kirbyzone is custom hosting for Kirby, made by people who have worked with Kirby
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility there are hardly any limits to what you can create with Kirby.
 
-(screenshot: zammad.com.jpg)
+(image: zammad.com.jpg)
 
 [Zammad](https://zammad.com/en) Ticketing System
 
@@ -92,8 +92,8 @@ Not buying the latest gadget is arguably the best way to reduce e-waste in the f
 
 Maybe I'm a little obsessed with dark patterns recently. But they keep haunting me around the web. At least Amazon is now [facing legal challenges for their 6-page Prime member cancellation trickery](https://www.bbc.com/news/technology-55637140). More about dark patterns:
 
-- [Dark Patterns](https://www.darkpatterns.org/) 
-- [Losing faith in UX](https://creativegood.com/blog/21/losing-faith-in-ux.html) 
+- [Dark Patterns](https://www.darkpatterns.org/)
+- [Losing faith in UX](https://creativegood.com/blog/21/losing-faith-in-ux.html)
 - [We Value Your Privacy (At About $0.50) – Dark Patterns in UI Copy](https://prototypr.io/post/we-value-your-privacy-at-about-0-50-dark-patterns-in-ui-copy/)
 
 Handy: If you replace `github` with [`github1s`](https://github.com/conwnet/github1s) in a GitHub URL, you can read GitHub code with VS Code and easily navigate between files and folders.

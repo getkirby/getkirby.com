@@ -1,0 +1,48 @@
+Intro: Overrides the defaults for requests to remote servers
+
+----
+
+Since: 3.4.0
+
+----
+
+Text:
+
+This option defines global default values for all requests that are made with the `Kirby\Toolkit\Remote` class.
+
+## Example
+
+```php
+return [
+    'remote' => [
+        'agent'   => 'My Awesome Site',
+        'timeout' => 20
+    ]
+];
+```
+
+## Configuring the list of allowed certificate authorities (CAs) for HTTPS requests
+
+Kirby ships with a CA bundle based on the Mozilla CA list. We keep that CA bundle up-to-date with new Kirby releases.
+
+The CA bundle is used whenever a request to an HTTPS destination is made.
+
+If you want to use a different CA bundle or disable verification completely (not recommended!), you can set the `remote.ca` option:
+
+```php
+<?php
+
+return [
+    'remote' => [
+        'ca' => ...
+    ]
+];
+```
+
+Options are:
+
+- An absolute path to a CA file in `.pem` format
+- An absolute path to a CA directory with certificate files that cURL can understand
+- The special value `Remote::CA_INTERNAL` for Kirby's internal CA (default)
+- The special value `Remote::CA_SYSTEM` to use the CA bundle that is configured in `php.ini`
+- `false` to disable TLS verification completely (not recommended!)

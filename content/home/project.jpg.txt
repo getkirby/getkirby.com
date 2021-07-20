@@ -1,5 +1,0 @@
-Caption: Project
-
-----
-
-Description: Create visually stunning interfaces for projects with galleries and custom meta data.

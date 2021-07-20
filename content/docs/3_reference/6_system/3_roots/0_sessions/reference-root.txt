@@ -1,0 +1,5 @@
+Title: sessions
+
+----
+
+Intro: The storage folder for all session files

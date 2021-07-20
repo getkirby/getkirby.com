@@ -33,19 +33,19 @@ It's always inspiring to see what others are creating with Kirby. This month’s
 
 (columns…)
 
-(picture:kultur-in-hessen.jpg)
+(image:kultur-in-hessen.jpg)
 [Kultur in Hessen](https://www.kultur-in-hessen.de)
 Places
 
 ++++
 
-(picture: templetate.jpg)
+(image: templetate.jpg)
 [Gregory Temple Tate](http://www.templetate.com)
 Graphic Artist
 
 ++++
 
-(picture: russiklenner.jpg)
+(image: russiklenner.jpg)
 [Russi Klenner](http://russiklenner.de)
 Galery
 
@@ -69,7 +69,7 @@ Note: Both gallery plugins use the "gallery" Kirbytag, so you will have to chang
 
 (columns…)
 
-(picture: illustrated-radio-buttons.jpg)
+(image: illustrated-radio-buttons.jpg)
 
 ++++
 
@@ -87,14 +87,14 @@ Add visual clues to [radio buttons](https://github.com/sylvainjule/kirby-imagera
 
 ++++
 
-(picture: kollapse.jpg)
+(image: kollapse.jpg)
 
 (…columns)
 
 
 (columns…)
 
-(picture: contrast-ratio.jpg)
+(image: contrast-ratio.jpg)
 
 ++++
 

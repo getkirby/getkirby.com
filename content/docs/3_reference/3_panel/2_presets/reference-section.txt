@@ -1,0 +1,11 @@
+Title: Presets
+
+----
+
+Guide: blueprints/presets
+
+----
+
+Intro:
+
+Blueprint presets provide sensible default settings for common blueprint types and simplify your blueprint setup.

@@ -1,43 +1,17 @@
-<?php snippet('cheatsheet.header', ['icons' => $icons ?? null]) ?>
+<?php layout('reference') ?>
 
-<article class="cheatsheet-section cheatsheet-main cheatsheet-panel">
+<?php slot('toc') ?>
+<?php endslot() ?>
 
-  <div class="cheatsheet-main-header cheatsheet-panel-header">
-    <?php snippet('cheatsheet.menu.button') ?>
-  </div>
+<?php slot() ?>
+<div class="mb-24">
+  <?php snippet('templates/reference/advanced') ?>
+  <?php snippet('templates/reference/section', $entries) ?>
+</div>
 
-  <div class="cheatsheet-main-scrollarea cheatsheet-panel-scrollarea">
+<?php snippet('toc') ?>
 
-    <header class="-mb:large">
-      <h2 class="h1"><?= $page->title() ?></h2>
-
-      <?php if ($page->excerpt()->isNotEmpty()): ?>
-      <div class="intro">
-        <?= $page->excerpt()->kt() ?>
-      </div>
-      <?php endif ?>
-
-      <?php snippet('cheatsheet.article.meta') ?>
-    </header>
-
-    <div class="-mb:large">
-      <?php if ($page->children()->hasAdvanced()): ?>
-      <?php snippet('cheatsheet.section.advanced-link') ?>
-      <?php endif ?>
-      <?php snippet('cheatsheet.section', [
-        'section' => $page,
-        'excerpt' => $excerpt ?? false,
-      ]) ?>
-    </div>
-
-    <?php if ($page->text()->isNotEmpty()): ?>
-    <div class="text">
-      <?= $page->text()->kt()->anchorHeadlines() ?>
-    </div>
-    <?php endif ?>
-
-  </div>
-
-</article>
-
-<?php snippet('cheatsheet.footer') ?>
+<div class="prose">
+  <?= $page->text()->kt() ?>
+</div>
+<?php endslot() ?>

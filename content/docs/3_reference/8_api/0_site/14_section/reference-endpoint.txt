@@ -1,0 +1,9 @@
+Title: /site/sections/:name
+----
+Info: GET
+----
+Intro: Retrieve a site section
+----
+Text:
+----
+Response:

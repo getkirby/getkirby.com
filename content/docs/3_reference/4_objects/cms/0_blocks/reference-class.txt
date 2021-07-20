@@ -1,0 +1,19 @@
+Title: $blocks
+
+----
+
+Class: Kirby\Cms\Blocks
+
+----
+
+Since: 3.5.0
+
+----
+
+Text:
+
+## What are blocks?
+
+When you want to work with the content of a (link: docs/reference/panel/fields/blocks text: Blocks field), you would use the (method: $field::toBlocks text: toBlocks) field method to convert it to a Blocks collection - a collection of `Kirby\Cms\Block` objects. The Blocks collection makes it easy to render the entire set of blocks or loop through blocks and create individual HTML for them.
+
+(docs: blocks/blocks)

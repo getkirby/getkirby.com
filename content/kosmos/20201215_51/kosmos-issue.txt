@@ -26,7 +26,7 @@ Welcome to episode 51 of our Kosmos newsletter.
 
 Today, almost two years after the initial release of Kirby 3, we are introducing Kirby 3.5. The release feels almost as existing as that big steps forward for Kirby.
 
-(screenshot: kirby-35.png)
+(image: kirby-35.png)
 
 
 (columns…)
@@ -43,7 +43,7 @@ Arrange blocks in multiple columns and build complex page layouts.
 
 (…columns)
 
-(screenshot: kirby-35-blocks-and-layouts.png)
+(image: kirby-35-blocks-and-layouts.png)
 
 (columns…)
 
@@ -51,20 +51,20 @@ Arrange blocks in multiple columns and build complex page layouts.
 
 2-factor authentication, passwordless login and password reset.
 
-(screenshot: kirby-35-password-reset.png)
+(image: kirby-35-password-reset.png)
 
 **Writer field**
 
 For formatted single-line HTML.
 
-(screenshot: kirby-35-writer-field.png)
+(image: kirby-35-writer-field.png)
 
 
 **Quicksearch**
 
 Nice previews for pages, files and users.
 
-(screenshot: kirby-35-quicksearch.png)
+(image: kirby-35-quicksearch.png)
 
 
 ++++
@@ -73,20 +73,20 @@ Nice previews for pages, files and users.
 
 Completely new ways to enter dates with date formatting and interval support.
 
-(screenshot: kirby-35-date-field.png)
+(image: kirby-35-date-field.png)
 
 **List field**
 
 For stand-alone visual ordered and unordered lists.
 
-(screenshot: kirby-35-list-field.png)
+(image: kirby-35-list-field.png)
 
 
 **Title & URL dialog**
 
 Simplified workflow to enter the page title and URL.
 
-(screenshot: kirby-35-unified-dialog.png)
+(image: kirby-35-unified-dialog.png)
 
 
 (…columns)
@@ -113,7 +113,7 @@ As always at this time of the year, we have a big winter sale from December 14, 
 
 [Kirby's Starterkit](https://github.com/getkirby/starterkit) and [Demokit](https://getkirby.com/try) got a huge overhaul to show off Kirby's new features with examples for the blocks and layout fields, design patterns from our [Demokit](https://github.com/getkirby/demokit), and inline docs. Make sure to check them out.
 
-(screenshot: kirby-35-starterkit-layout.jpg)
+(image: kirby-35-starterkit-layout.jpg)
 
 ## Stay in touch
 
@@ -126,7 +126,7 @@ As always at this time of the year, we have a big winter sale from December 14, 
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility there are hardly any limits to what you can create with Kirby.
 
-(screenshot: jon-hicks.png)
+(image: jon-hicks.png)
 
 [Jon Hicks](https://hicks.design)
 

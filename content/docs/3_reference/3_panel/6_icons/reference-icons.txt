@@ -1,0 +1,6 @@
+Title: Icons
+
+----
+Intro:
+
+Kirby comes with a set of icons that you can use in blueprints and extensions.

@@ -1,0 +1,7 @@
+Title: /site/files/:filename
+----
+Info: DELETE
+----
+Intro: Delete a file
+----
+Auth: files.delete

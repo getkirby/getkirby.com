@@ -1,0 +1,25 @@
+Title: (:num)
+
+----
+
+Intro: Matches any number
+
+----
+
+Text:
+
+## Example
+
+```php "/site/config/config.php"
+return [
+  'routes' => [
+    [
+      'pattern' => '/projects/(:num)',
+      'action'  => function ($num) {
+        // react to requests
+      }
+    ]
+  ]
+];
+```
+

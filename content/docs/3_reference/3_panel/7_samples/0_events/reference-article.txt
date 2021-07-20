@@ -1,0 +1,129 @@
+
+Title: Events
+
+----
+
+Intro: Announce your next get-togethers
+
+----
+
+Text:
+
+
+## Events overview
+
+```yaml "/site/blueprints/pages/events.yml"
+title: Events
+preset: pages
+icon: 📅
+
+options:
+  url: false
+  status: false
+  delete: false
+
+drafts:
+  extends: sections/events
+  headline: Unpublished events
+
+unlisted:
+  extends: sections/events
+  headline: Unlisted events
+
+listed:
+  extends: sections/events
+  headline: Published events
+```
+
+### Predefined section for reusage
+
+```yaml "/site/blueprints/sections/events.yml"
+type: pages
+headline: Events
+parent: site.find("events")
+sortBy: from desc
+template: event
+empty: No events yet
+```
+
+### Result
+
+(image: events.png)
+
+
+## Single event
+
+```yaml "/site/blueprints/pages/event.yml"
+title: Event
+preset: page
+pages: false
+icon: 📅
+num: "{{ page.from.toDate('Ymd') }}"
+
+fields:
+  from:
+    label: Start
+    type: date
+    width: 1/2
+    default: today
+  to:
+    label: End
+    type: date
+    width: 1/2
+    default: today + 1day
+  location:
+    label: Location
+    type: text
+    width: 1/2
+  link:
+    label: Link
+    type: url
+    width: 1/2
+  text:
+    label: Description
+    type: textarea
+```
+
+### Result
+
+(image: event.png)
+
+## Example template
+
+Since these example events link to external events, we only show an events overview and do not need a template for the single event.
+
+```php "/site/templates/events.php"
+<?php snippet('header') ?>
+<?php snippet('menu') ?>
+
+<section class="events">
+
+  <h1><?= $page->title()->html() ?></h1>
+
+  <?php 
+  $events = $page->children()->listed();
+  if ($events->count() > 0): ?>
+  <ul>
+    <?php foreach ($events as $event): ?>
+    <li class="event">
+      <a href="<?= $event->link() ?>">
+        <header>
+          <h3><?= $event->title()->html() ?></h3>
+          <time><?= $event->from()->toDate('d.m.Y') ?> - <?= $event->to()->toDate('d.m.Y') ?></time>
+        </header>
+        <main>
+          <?= $event->text()->kirbytext() ?>
+          <?php if ($image = $event->image()): ?>
+          <figure><?= $event->image() ?></figure>
+          <?php endif ?>
+        </main>
+        <footer><?= $event->location()->html() ?></footer>
+      </a>
+    </li>
+    <?php endforeach ?>
+  </ul>
+  <?php endif ?>
+</section>
+
+<?php snippet('footer') ?>
+```

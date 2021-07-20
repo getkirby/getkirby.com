@@ -1,0 +1,89 @@
+Title: Checkboxes
+
+----
+
+Intro:
+
+A list of checkbox fields
+
+----
+
+Guide: blueprints/fields
+
+----
+
+Text:
+
+The checkboxes field displays any number of checkboxes in a list. This is perfect if you have a predefined number of options a user can select from.
+
+(image: checkboxes.png)
+
+## Example
+
+```yaml
+fields:
+  categories:
+    label: Categories
+    type: checkboxes
+    options:
+      design: Design
+      architecture: Architecture
+      photography: Photography
+      3d: 3D
+      web: Web
+```
+
+## Field properties
+
+(field-options: checkboxes)
+
+## Default value
+
+### Example with a single default value
+
+```yaml
+fields:
+  categories:
+    label: Categories
+    type: checkboxes
+    default: architecture
+    options:
+      design: Design
+      architecture: Architecture
+      photography: Photography
+      3d: 3D
+      web: Web
+```
+
+### Example with multiple default values
+
+```yaml
+fields:
+  categories:
+    label: Categories
+    type: checkboxes
+    default:
+      - architecture
+      - web
+    options:
+      design: Design
+      architecture: Architecture
+      photography: Photography
+      3d: 3D
+      web: Web
+```
+
+(docs: panel-field-options field: checkboxes)
+
+
+## How to use in templates/snippets
+
+A checkboxes field stores all selected values in a comma separated list (`value1, value2, value3`) You can split this list with the [`split()`](/docs/reference/templates/field-methods/split) method in your templates and then work with the result:
+
+```php
+<ul>
+  <?php foreach ($page->categories()->split() as $category): ?>
+  <li><?= $category ?></li>
+  <?php endforeach ?>
+</ul>
+```

@@ -1,0 +1,5 @@
+Title: config
+
+----
+
+Intro: Returns the root of the config folder.

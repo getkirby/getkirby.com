@@ -7,6 +7,7 @@ use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Http\Remote;
 use Kirby\Http\Url;
+use Kirby\Toolkit\Escape;
 use Kirby\Toolkit\Properties;
 use Kirby\Toolkit\Query;
 use Kirby\Toolkit\Str;
@@ -86,10 +87,14 @@ class OptionsApi
      * @param array $data
      * @return string
      */
-    protected function field(string $field, array $data)
+    protected function field(string $field, array $data): string
     {
         $value = $this->$field();
-        return Str::template($value, $data);
+        return Str::template($value, $data, [
+            'callback' => function ($result) {
+                return Escape::html($result);
+            }
+        ]);
     }
 
     /**
@@ -149,7 +154,7 @@ class OptionsApi
 
     /**
      * @param array $data
-     * @return self
+     * @return $this
      */
     protected function setData(array $data)
     {
@@ -159,7 +164,7 @@ class OptionsApi
 
     /**
      * @param string|null $fetch
-     * @return self
+     * @return $this
      */
     protected function setFetch(string $fetch = null)
     {
@@ -169,7 +174,7 @@ class OptionsApi
 
     /**
      * @param $options
-     * @return self
+     * @return $this
      */
     protected function setOptions($options = null)
     {
@@ -179,7 +184,7 @@ class OptionsApi
 
     /**
      * @param $text
-     * @return self
+     * @return $this
      */
     protected function setText($text = null)
     {
@@ -189,7 +194,7 @@ class OptionsApi
 
     /**
      * @param $url
-     * @return self
+     * @return $this
      */
     protected function setUrl($url)
     {
@@ -199,7 +204,7 @@ class OptionsApi
 
     /**
      * @param null $value
-     * @return self
+     * @return $this
      */
     protected function setValue($value = null)
     {

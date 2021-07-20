@@ -1,0 +1,210 @@
+Title: Controllers
+
+
+----
+
+Subtitle: Separate the logic of pages from their presentation
+
+----
+
+Intro: Templates should contain as little code as possible to separate logic and form. With template controllers you can add more logic to your templates without messing up your markup.
+
+----
+
+Text:
+
+## TL;DR
+
+- Use a controller for the logic of your templates.
+- A controller must have the same file name as the corresponding template file.
+- Save controllers in `/site/controllers`.
+
+(screencast: https://www.youtube.com/watch?v=Im2bx2WytPc title: Stay in control with controllers text: Controllers are a great way to move logic for your templates into a separate file.)
+
+## The controllers directory
+
+Controllers go into `/site/controllers`. Create the directory if it's not there yet. Controllers are named exactly like the templates they belong to:
+
+Template | Controller
+-        | -
+/site/templates/article.php | /site/controllers/article.php
+
+
+Kirby will automatically load the controller for your template if it can find one.
+
+## Default controller
+
+You can also have a default page controller: It works like a normal page controller. You only have to add it as `/site/controllers/site.php`. Be aware that the default controller only works as a fallback if no specific page controller for the template exists. It is *not* loaded in addition to the template-specific one.
+
+## Creating a controller
+
+The basic code for a controller is very simple. It's an anonymous function that should return the variables that you want to pass to the template as an associative array.
+
+```php
+<?php
+
+return function () {
+  return [
+    'foo' => 'my first template variable',
+    'bar' => 'my second template variable'
+  ];
+};
+```
+In this case the `$foo` and `$bar` variables will be available in the corresponding template.
+
+## Accessing Kirby objects in your controller
+
+Like in templates, you can access the (Class: Kirby\Cms\Site text: $site), (Class: Kirby\Cms\Page text: $page), (Class: Kirby\Cms\Pages text: $pages) and (Class: Kirby\Cms\App text: $kirby) objects by loading them as arguments to the anonymous function. Kirby will magically inject the right objects for you:
+
+### A single object
+
+```php
+return function ($page) {
+	// do something with the page
+};
+```
+
+### Multiple objects
+
+```php
+return function ($page, $site, $kirby) {
+	// do something with the page, site and kirby
+};
+```
+
+### Order doesn't matter
+
+```php
+return function ($site, $page, $kirby) {
+	// do something with the page, site and kirby
+};
+```
+
+## A real world example
+
+A typical example where a controller can come in handy is a blog template. Fetching the right articles can take a couple lines of code and it's much nicer to wrap these in a controller. So let's create `/site/templates/blog.php` and `/site/controllers/blog.php`
+
+### The controller
+
+The controller will take care of fetching the right articles and add pagination to them. It will then pass the `$articles` and `$pagination` variables to the template to keep it clean.
+
+```php "/site/controllers/blog.php"
+<?php
+
+return function ($page) {
+
+  // get all articles
+  $articles = $page->children()->listed()->flip();
+
+  // add a tag filter
+  if ($tag = get('tag')) {
+    $articles = $articles->filterBy('tags', '=', $tag, ',');
+  }
+
+  // add pagination
+  $articles = $articles->paginate(20);
+
+  // create a shortcut for pagination
+  $pagination = $articles->pagination();
+
+  // pass $articles and $pagination to the template
+  return [
+    'articles' => $articles,
+    'pagination' => $pagination
+  ];
+
+};
+```
+## The template
+
+With such a controller, the template can be super clean. A foreach loop for the articles and the prev/next pagination and you're done.
+
+```php "/site/templates/blog.php"
+<?php snippet('header') ?>
+
+<?php foreach ($articles as $article): ?>
+<?php snippet('article', ['article' => $article]) ?>
+<?php endforeach ?>
+
+<nav class="pagination">
+
+  <?php if ($pagination->hasPrevPage()): ?>
+  <a href="<?= $pagination->prevPageUrl() ?>">previous articles</a>
+  <?php endif ?>
+
+  <?php if ($pagination->hasNextPage()): ?>
+  <a href="<?= $pagination->nextPageUrl() ?>">next articles</a>
+  <?php endif ?>
+
+</nav>
+
+<?php snippet('footer') ?>
+```
+
+## Arguments from the router
+
+If you work with additional routes and you want to access the arguments from the router in your controller, you can use Kirby's (method: Kirby::route text: route()) method to access an array of router arguments.
+
+```php
+<?php
+
+return function ($kirby) {
+
+  $args = $kirby->route()->arguments();
+	// contains all arguments from the current route
+
+};
+```
+
+
+## Arguments from `$page->render()` in route
+
+<since v="3.1.3">
+When using the `$page->render()` method to return a page in a route, you can send an array of additional data with it:
+
+```php "/site/config/config.php"
+return [
+    'routes' => [
+        [
+            'pattern' => 'blog/tag/(:any)',
+            'action' => function ($value) {
+                $data = [
+                  'tag' => $value,
+                ];
+                return page('blog')->render($data);
+            }
+        ]
+    ]
+];
+```
+
+In the controller, you can load each variable that you passed to the (method: $page::render text: render()) method in the route into the controller's anonymous function and then work with it.
+
+```php
+<?php
+
+return function ($page, $tag) {
+
+  $articles = $page->children()->listed();
+
+    if ($tag) {
+        $articles = $articles->filterBy('tags', $tag, ',');
+    }
+
+    return [
+        'articles' => $articles
+    ];
+
+};
+```
+
+<info>
+The properties defined in the `$data` array are exposed to **templates** as global variables, so in use cases where you **do not** need them in a controller, you can use them directly.
+</info>
+
+</since>
+
+
+## More information
+
+(link: docs/cookbook/templating/shared-controllers text: Shared controllers)

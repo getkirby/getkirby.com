@@ -1,0 +1,14 @@
+Title: /users/:id/language
+----
+Info: PATCH
+----
+Intro: Change the language
+----
+Auth: users.changeLanguage
+----
+Text:
+
+## Patch parameters
+
+(docs: api/user-language-data)
+

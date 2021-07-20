@@ -1,0 +1,31 @@
+.type {
+  white-space: nowrap;
+}
+.type-link {
+  text-decoration: none !important;
+}
+.type.type-string {
+  background: var(--color-green-300);
+}
+.type.type-int {
+  background: var(--color-orange-300);
+}
+.type.type-float {
+  background: var(--color-red-300);
+}
+.type.type-bool {
+  background: var(--color-purple-300);
+}
+.type.type-array {
+  background: var(--color-aqua-300);
+}
+.type.type-object,
+.type.type-class {
+  background: var(--color-yellow-300);
+}
+.type.type-method {
+  background: var(--color-blue-300);
+}
+.box--info .type.type-method {
+  background: var(--color-blue-400);
+}

@@ -1,0 +1,11 @@
+Title: /languages
+----
+Info: POST
+----
+Intro: Create a language
+----
+Text:
+
+## Post parameters
+
+(docs: api/language-create-data)

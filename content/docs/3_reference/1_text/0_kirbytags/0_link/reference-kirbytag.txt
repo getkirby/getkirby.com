@@ -1,0 +1,73 @@
+Title:
+
+link
+
+----
+
+Intro: Creates a link
+
+----
+
+Text:
+
+## Examples and options:
+
+### Link with link text
+
+```kirbytext
+(\link: http://wikipedia.org text: Wikipedia)
+```
+
+### Relative link
+
+```kirbytext
+(\link: some/page text: Link to some internal page)
+```
+
+### Link to page in a specific language
+
+```kirbytext
+(\link: some/page lang: de)
+```
+
+### Link to an anchor
+
+```kirbytext
+(\link: #some-section text: Link to some section on the same page)
+```
+
+### Specifying the target for the link
+
+```kirbytext
+(\link: http://wikipedia.org text: Wikipedia target: _blank)
+```
+
+### Link with a `title` attribute
+
+```kirbytext
+(\link: http://wikipedia.org text: Wikipedia title: Go to Wikipedia)
+```
+
+### Link with a `rel` attribute
+
+```kirbytext
+(\link: http://yourdomain.com text: My website rel: me)
+```
+
+### Link with a custom CSS class
+
+```kirbytext
+(\link: http://wikipedia.org text: Wikipedia class: mylink)
+```
+
+### Link to a page in another language (only on multi-language sites)
+
+```kirbytext
+(\link: some/page text: Some page in German lang: de)
+```
+
+### Link with a `role` attribute
+
+```kirbytext
+(\link: delete-account text: Delete my account role: button)
+```

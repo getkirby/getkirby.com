@@ -1,0 +1,5 @@
+Title: assets
+
+----
+
+Intro: Returns the root of the assets folder.

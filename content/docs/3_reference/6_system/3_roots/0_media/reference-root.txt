@@ -1,0 +1,5 @@
+Title: media
+
+----
+
+Intro: Returns the root of the media folder.

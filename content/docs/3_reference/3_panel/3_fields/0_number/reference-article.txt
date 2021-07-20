@@ -1,0 +1,84 @@
+Title: Number
+
+----
+
+Intro:
+
+A number input field with validation
+
+----
+
+Guide: blueprints/fields
+
+----
+
+Text:
+
+The number field generates an HTML 5 number input, which is great when you need a comfortable way to enter any numeric values. The number field also comes with built-in validation for numeric data.
+
+(image: number.png)
+
+## Example
+
+```yaml
+fields:
+  number:
+    label: Number
+    type: number
+```
+
+## Field properties
+
+(field-options: number)
+
+## Decimals
+
+Decimals can be used by adding the `step` option.
+
+```yaml
+fields:
+  price:
+    label: Price
+    type: number
+    step: .01
+```
+
+## Minimum and maximum value
+
+The `min` and `max` options define which numbers can be selected with the browser-specific up/down arrows and are also used to validate the input.
+
+```yaml
+fields:
+  temperature:
+    label: Temperature
+    type: number
+    min: -50
+    max: 250
+```
+
+## `before` & `after` values
+
+The number field can show additional text before or after the input. This is great when you need a price field for example:
+
+```yaml
+fields:
+  price:
+    label: Price
+    type: number
+    min: 0
+    before: €
+```
+
+## How to use in templates/snippets
+
+If your number field contains only integers, you can convert the value to a proper integer with the `toInt()` field method:
+
+```php
+<?= $page->numberfield()->toInt() ?>
+```
+
+For floating value, use the `toFloat()` method:
+
+```php
+<?= $page->numberfield()->toFloat() ?>
+```

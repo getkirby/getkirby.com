@@ -1,0 +1,987 @@
+Title: Block factory: Creating your own blocks collection
+
+----
+
+Published: 2021-05-08
+
+----
+
+Description: Start your own block collection based on examples in this recipe
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+Text:
+
+Custom block types for Kirby can be anything from very simple to rather complex. In this recipe, we will create a little collection of blocks that are not overly complicated.
+
+All block types will live in a single plugin, and we will build them without using a build process.
+
+Since the styling is very much up to you and your project, we'll keep styling very basic in these examples. You can find the `index.css` file with all styles at the end of this recipe.
+
+## General plugin setup
+
+Let's start with creating the plugin. In the `site/plugins` folder, create a new folder called `block-factory`, and inside that folder an `index.php`, an `index.js`, and an `index.css` file. Additionally, we create the folder structure for the block snippets and blueprints..
+
+```filesystem "/site/plugins"
+block-factory/
+  blueprints/
+    blocks/
+      ...
+  snippets/
+    blocks/
+      ...
+  index.css
+  index.js
+  index.php
+```
+
+### Register blueprints and snippets
+
+The `index.php` file is the place where we register the blueprints and snippets for the custom blocks. The basic structure looks like this. We can add multiple blueprints and snippets for each block that we will create.
+
+```php "/site/plugins/block-factory/index.php"
+<?php
+Kirby::plugin('cookbook/block-factory', [
+  'blueprints' => [
+    'blocks/awesomeblock' => __DIR__ . '/blueprints/blocks/awesomeblock.yml',
+    // more blueprints
+  ],
+  'snippets' => [
+    'blocks/awesomeblock' => __DIR__ . '/snippets/blocks/awesomeblock.php',
+    // more snippets
+  ],
+  'translations' => [
+    'en' => [
+      'field.blocks.awesomeblock.name' => 'My awesome block',
+      // more block names
+    ],
+    'de' => [
+       'field.blocks.awesomeblock.name' => 'Mein Superblock',
+      // more block names
+
+    ],
+    // more languages
+  ]
+]);
+```
+
+### Register templates
+
+The preview templates for the blocks go into the `index.js` file:
+
+```js "/site/plugins/block-factory/index.js"
+panel.plugin("cookbook/block-factory", {
+  blocks: {
+    awesomeblock: `
+      <div @click="open">
+        {{ content.text }}
+      </div>
+    `,
+    // more blocks
+  }
+});
+```
+
+As you can see, a basic preview is no more than a simple Vue template.
+
+With this general structure in place, our blocks factory is ready to produce any number of new blocks.
+
+<info>
+For each of the following examples, don't forget to register the snippets and blueprints in the `index.php` file as outlined above. You can find the full `index.php` at the end of this recipe.
+</info>
+
+<warning>
+Note that custom block types don't show up in your `blocks` and `layout` fields automatically. You have to add them explicitly via the `fieldsets` property.
+
+**Example:**
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      - accordion
+      - box
+      - faq
+      # ...
+```
+</warning>
+
+## Custom flavored boxes
+
+(image: boxes.png)
+
+### Blueprint
+
+```yaml "/site/plugins/block-factory/blueprints/blocks/box.yml"
+name: field.blocks.box.name
+icon: box
+preview: box
+wysiwyg: true
+fields:
+  boxType:
+    label: Box Type
+    type: radio
+    default: text
+    options:
+      - text
+      - bolt
+      - alert
+      - neutral
+  text:
+    label: Text
+    type: writer
+    placeholder: Enter some text…
+```
+
+### Snippet
+
+```php "/site/plugins/block-factory/snippets/blocks/box.php"
+<?php if($block->text()->isNotEmpty()): ?>
+  <div class="box box-<?= $block->boxType() ?>">
+    <?= $block->text() ?>
+  </div>
+<?php endif; ?>
+```
+
+### Simple preview
+
+```js "/site/plugins/block-factory/index.js"
+panel.plugin("cookbook/block-factory", {
+  blocks: {
+    box: {
+      template: `
+        <div :class="'k-block-type-box box-' + content.boxtype" @dblclick="open">
+            <div v-if="content.text" v-html="content.text"></div>
+            <div v-else>No content yet</div>
+            <k-icon
+              v-if="content.boxtype !== 'neutral'"
+              class="k-block-type-box-icon"
+              :type="content.boxtype"
+            />
+          </div>
+        </div>
+      `
+    }
+  }
+});
+```
+
+### Editable preview
+
+For the editable plugin, we replace `<div v-html="content.text"></div>`, with a `k-writer` component:
+
+```js
+panel.plugin("cookbook/block-factory", {
+   blocks: {
+    box: {
+      computed: {
+        textField() {
+          return this.field("text");
+        }
+      },
+      template: `
+        <div :class="'k-block-type-box box-' + content.boxtype">
+          <k-writer
+            class="label"
+            ref="textbox"
+            :marks="textField.marks"
+            :value="content.text"
+            :placeholder="textField.placeholder || 'Enter some stuff…'"
+            @input="update({ text: $event })"
+          />
+          <k-icon
+            v-if="content.type !== 'neutral'"
+            class="k-block-type-box-icon"
+            :type="content.boxtype"
+          />
+        </div>
+      `
+    }
+  }
+});
+```
+Our computed method `textField()` returns the `text` field, so that we can fetch the placeholder and marks information set for the field if available.
+
+## Accordion block
+
+### Blueprint
+
+```yaml "/site/plugins/block-factory/blueprints/blocks/accordion.yml"
+name: field.blocks.accordion.name
+icon: bars
+fields:
+  summary:
+    label: Summary
+    type: writer
+    marks: false
+    placeholder: Enter summary…
+  details:
+    label: Detail
+    type: writer
+    marks: true
+```
+### Snippet
+
+```php "/site/plugins/block-factory/snippets/blocks/accordion.php"
+<?php if($block->summary()->isNotEmpty()): ?>
+  <details class="accordion-details">
+    <summary class="accordion-summary"><?= $block->summary() ?></summary>
+    <div class="accordion-text"><?= $block->details() ?></div>
+  </details>
+<?php endif; ?>
+```
+
+### Simple preview
+
+```js "/site/plugins/block-factory/index.js"
+panel.plugin("cookbook/block-factory", {
+  blocks: {
+    accordion: `
+      <div>
+        <div v-if="content.summary">
+          <details>
+            <summary>{{ content.summary }}</summary>
+            <div v-if="content.details" v-html="content.details"></div>
+          </details>
+        </div>
+        <div v-else>
+          No content yet
+        </div>
+      </div>
+    `
+  }
+});
+```
+
+### Editable preview
+
+The editable version of the accordion preview is similar to the box block preview, with the difference that we now use to `k-writer` components for the `summary` and `details` fields.
+
+```js "/site/plugins/block-factory/index.js"
+panel.plugin("cookbook/block-factory", {
+  blocks: {
+    accordion: {
+      computed: {
+        summaryField() {
+          return this.field("summary");
+        },
+        detailsField() {
+          return this.field("details");
+        }
+      },
+      template: `
+        <div @dblclick="open">
+          <details>
+            <summary>
+              <k-writer
+                ref="summary"
+                :inline="true"
+                marks="false"
+                :placeholder="summaryField.placeholder || 'Add a summary…'"
+                :value="content.summary"
+                @input="update({ summary: $event })"
+              />
+            </summary>
+            <k-writer
+                ref="details"
+                :inline="detailsField.inline || false"
+                :marks="detailsField.marks"
+                :value="content.details"
+                :placeholder="detailsField.placeholder || 'Add some details'"
+                @input="update({ details: $event })"
+              />
+          </details>
+        </div>
+      `
+    },
+  }
+});
+```
+
+## FAQ block using structure field
+
+(image: faq.png)
+
+### Blueprint
+
+```yaml "/site/plugins/block-factory/blueprints/blocks/faq.yml"
+name: field.blocks.faq.name
+icon: question
+fields:
+  heading:
+    label: Heading
+    type: writer
+    inline: true
+    marks: false
+  faq:
+    label: FAQ
+    type: structure
+    fields:
+      question:
+        label: Question
+        type: writer
+        inline: true
+        marks: false
+        placeholder: Type a question…
+      answer:
+        label: Answer
+        marks: true
+        type: writer
+```
+
+### Snippet
+
+```php "/site/plugins/block-factory/snippets/blocks/faq.php"
+<?php $faqItems = $block->faq()->toStructure(); ?>
+<?php if($faqItems->isNotEmpty()): ?>
+  <h2><?= $block->heading() ?></h2>
+    <?php foreach($faqItems as $item): ?>
+      <details>
+        <summary><?= $item->question() ?></summary>
+        <div><?= $item->answer() ?></div>
+      </details>
+    <?php endforeach; ?>
+<?php endif; ?>
+```
+
+### Simple preview
+
+In this simple preview, we loop through the structure field items using the `v-for` directive and simply output each item.
+
+```js "/site/plugins/block-factory/index.js"
+panel.plugin("cookbook/block-factory", {
+  blocks: {
+    faq: `
+      <div @dblclick="open">
+        <h2 class="k-block-type-faq-heading" v-html="content.headline"></h2>
+        <div v-if="content.faq.length">
+          <details v-for="(item, index) in content.faq" class="k-block-type-faq-item" :key="index">
+            <summary>{{ index + item.question }}</summary>
+            <div v-html="item.answer"></div>
+          </details>
+        </div>
+        <div v-else>No questions yet</div>
+      </div>
+    `,
+  }
+});
+```
+
+### Editable preview
+
+For the editable preview, we need a custom method to update the items in the structure field, which we do with the `updateItem()` method.
+
+```js "/site/plugins/block-factory/index.js"
+panel.plugin("cookbook/block-factory", {
+  blocks: {
+    faq: {
+      computed: {
+        items() {
+          return this.content.faq || {};
+        },
+        headingField() {
+          return this.field("heading");
+        }
+      },
+      methods: {
+        updateItem(content, index, fieldName, value) {
+          content.faq[index][fieldName] = value;
+          this.$emit("update", {
+              ...this.content,
+              ...content
+            });
+        }
+      },
+      template: `
+        <div>
+          <h2 class="k-block-type-faq-heading">
+            <k-writer
+              ref="heading"
+              :inline="headingField.inline"
+              :marks="headingField.marks"
+              :placeholder="headingField.placeholder || 'Add a heading'"
+              :value="content.heading"
+              @input="update({ heading: $event })"
+            />
+          </h2>
+          <div v-if="items.length">
+            <details v-for="(item, index) in items" :key="index">
+              <summary>
+                <k-writer
+                  ref="question"
+                  :inline="true"
+                  :marks="false"
+                  :value="item.question"
+                  @input="updateItem(content, index, 'question', $event)"
+                />
+              </summary>
+              <k-writer
+                class="label"
+                ref="answer"
+                :marks="true"
+                :value="item.answer"
+                @input="updateItem(content, index, 'answer', $event)"
+              />
+            </details>
+          </div>
+          <div v-else>No questions yet</div>
+        </div>
+      `
+    },
+  }
+});
+```
+
+## FAQ block using nested blocks
+
+The single blocks we introduced above are already quite great, and blocks with structure fields give us the possibility to add items inside a block. But we can go one step further and nest blocks inside blocks. For our FAQ block example this means that we will replace the structure field with a blocks field.
+
+<info>
+This example requires the `accordion` block from above.
+</info>
+
+(image: faq-section-2-drawer.png)
+
+### Blueprint
+
+```yaml "/site/plugins/block-factory/blueprints/blocks/faq2.yml"
+name: field.blocks.faq2.name
+icon: question
+fields:
+  heading:
+    label: Section Heading
+    type: writer
+    inline: true
+    marks: false
+  faq:
+    label: FAQ
+    type: blocks
+    fieldsets:
+      - accordion
+```
+
+### Snippet
+
+```php "/site/plugins/block-factory/snippets/blocks/faq2.php"
+<?php $faqItems = $block->faq()->toBlocks(); ?>
+<div class="faq-section">
+  <?php if($faqItems->isNotEmpty()): ?>
+    <h2><?= $block->heading() ?></h2>
+    <?= $faqItems ?>
+  <?php endif; ?>
+</div>
+```
+
+### Simple preview
+
+The simple preview for our alternative version is not very different from the example with the structure field, but differs in the way we call the values of the individual items, i.e. `item.content.details` vs. `item.details` in the previous example.
+
+```js "/site/plugins/block-factory/index.js"
+panel.plugin("cookbook/block-factory", {
+  blocks: {
+    faq2: `
+      <div @dblclick="open">
+        <h2 class="k-block-type-faq-heading" v-html="content.heading"></h2>
+        <div v-if="content.faq.length">
+          <details
+            class="k-block-type-faq-item"
+            v-for="(item, index) in content.faq"
+            :key="index"
+          >
+            <summary v-html="item.content.summary"></summary>
+              <div v-html="item.content.details"></div>
+            </div>
+          </details>
+        </div>
+        <div v-else>No items yet</div>
+      </div>
+    `,
+  }
+});
+```
+
+### Editable preview
+
+Let's see how we can build an editable version of this variant. If you look closely, the only difference here is the syntax how we fetch and update the block items.
+
+```js "/site/plugins/block-factory/index.js"
+panel.plugin("cookbook/block-factory", {
+  blocks: {
+    faq2: {
+      computed: {
+        items() {
+          return this.content.faq || {};
+        },
+        headingField() {
+          return this.field("heading") || '';
+        }
+      },
+      methods: {
+        updateItem(content, index, name, value) {
+          content.faq[index].content[name]= value;
+          this.$emit("update", {
+              ...this.content,
+              ...content
+            });
+        }
+      },
+      template: `
+        <div @dblclick="open">
+          <h2 class="k-block-type-faq-heading">
+            <k-writer
+              ref="heading"
+              :inline="headingField.inline"
+              :marks="headingField.marks"
+              :placeholder="headingField.placeholder || 'Add a heading'"
+              :value="content.heading"
+              @input="update({ heading: $event })"
+            />
+          </h2>
+          <div v-if="content.faq.length">
+            <details
+              class="k-block-type-faq-item"
+              v-for="(item, index) in items"
+              :key="index"
+            >
+            <summary>
+              <k-writer
+                ref="summary"
+                :inline="true"
+                :marks="false"
+                :value="item.content.summary"
+                @input="updateItem(content, index, 'summary', $event)"
+              />
+            </summary>
+            <div>
+              <k-writer
+                ref="details"
+                :marks="true"
+                :value="item.content.details"
+                @input="updateItem(content, index, 'details', $event)"
+            />
+            </div>
+            </details>
+          </div>
+          <div v-else>No items yet</div>
+        </div>
+      `
+    },
+  }
+});
+```
+
+## Card type block
+
+Cards are nice in multi-column layouts, and they can be "hand-made" or created from existing pages.
+
+(image: cards.png)
+
+### Blueprint
+
+```yaml "/site/plugins/block-factory/blueprints/blocks/card.yml"
+name: field.blocks.card.name
+icon: image
+fields:
+  cardType:
+    label: Card Type
+    type: radio
+    default: page
+    options:
+      page: Create card from page
+      manual: Create manual card
+  page:
+    type: pages
+    max: 1
+    query: kirby.page('photography').children.listed
+    when:
+      cardType: page
+  link:
+    type: url
+    when:
+      cardType: manual
+  image:
+    label: Image
+    type: files
+    uploads: image
+    when:
+      cardType: manual
+  heading:
+    label: Heading
+    inline: true
+    marks: false
+    type: writer
+    when:
+      cardType: manual
+  text:
+    label: Text
+    type: writer
+    marks: false
+    when:
+      cardType: manual
+```
+
+### Snippet
+
+```php "/site/plugins/block-factory/snippets/blocks/card.php"
+<?php
+$cardType = $block->cardType()->value();
+$page     = $cardType === 'page' ? $block->page()->toPage() : null;
+$link     = $page ? $page->url() : ($cardType === 'manual' ? $block->link()->value() : null);
+$image    = $cardType === 'page' && $page ? $page->cover() : $block->image()->toFile();
+$text     = $cardType === 'manual' ? $block->text() : ($page ? $page->text() : '');
+?>
+
+<?php if($block->isNotEmpty()): ?>
+<div class="card">
+  <?php if(!empty($link)): ?>
+    <a href="<?= $link ?>">
+  <?php endif; ?>
+    <?php if($image): ?>
+      <figure>
+        <img src="<?= $image->crop(500,500)->url() ?>" alt="<?= $image->alt() ?>">
+      </figure>
+    <?php endif ?>
+    <div>
+      <?= $text ?>
+    </div>
+  <?php if(!empty($link)): ?>
+  </a>
+  <?php endif; ?>
+</div>
+<?php endif; ?>
+```
+
+### Preview
+
+This time, we will only use a single preview option, because card content can come from two sources, so making it inline editable doesn't make that much sense.
+
+However, the logic here is a bit more complicated, because we have to retrieve some content via the API.
+
+The most notable thing here are the `watch` methods which let us react on changes in the component. In this case, we watch for any changes to the `cardType` and `pageId` values, and depending on these values change the `text` property. Also, if the card type is of type `page`, we fetch the content of the text field via Kirby's API.
+
+```js "/site/plugins/block-factory/index.js"
+panel.plugin("cookbook/block-factory", {
+  blocks: {
+   card: {
+      data() {
+        return {
+          text: "No text value"
+        };
+      },
+      computed: {
+        cardType() {
+          return this.content.cardtype;
+        },
+        heading() {
+          return (this.cardType === 'manual') ? this.content.heading : this.page.text;
+        },
+        image() {
+          if(this.cardType === 'manual') {
+            return this.content.image[0] || {};
+          } else {
+            return this.page.image || {}
+          }
+        },
+        pageId() {
+          return this.page ? this.page.id : '';
+        },
+        page() {
+            return this.content.page[0] || {};
+        },
+      },
+      watch: {
+        "cardType": {
+          handler (value) {
+           if(value === 'page' && this.pageId) {
+            this.$api.get('pages/' + this.pageId.replace('/', '+')).then(page => {
+              this.text = page.content.text.replace(/(<([^>]+)>)/gi, "") || this.text;
+            });
+           } else if(value === 'manual') {
+             this.text = this.content.text || this.text;
+           }
+
+          },
+          immediate: true
+        },
+        "page": {
+          handler (value) {
+           if(this.cardType === 'page' && this.pageId) {
+            this.$api.get('pages/' + this.pageId.replace('/', '+')).then(page => {
+              this.text = page.content.text.replace(/(<([^>]+)>)/gi, "") || this.text;
+            });
+           } else if(value === 'manual') {
+             this.text = this.content.text || this.text;
+           }
+          },
+          immediate: true
+        }
+      },
+      template: `
+        <div @dblclick="open">
+          <k-aspect-ratio
+            class="k-block-type-card-image"
+            cover="true"
+            ratio="1/1"
+          >
+            <img
+              v-if="image.url"
+              :src="image.url"
+              alt=""
+            >
+          </k-aspect-ratio>
+          <h2 class="k-block-type-card-heading">{{ heading }}</h2>
+          <div class="k-block-type-card-text">{{ text }}</div>
+        </div>
+      `
+    },
+  }
+});
+```
+
+## Testimonial
+
+(image: testimonial.png)
+
+### Blueprint
+
+```yaml "/site/plugins/block-factory/blueprints/blocks/testimonial.yml"
+name: field.blocks.testimonial.name
+icon: account
+preview: testimonial
+fields:
+  quote:
+    label: Quote
+    type: writer
+    marks: false
+    inline: false
+  image:
+    label: Company logo or portrait
+    type: files
+    layout: list
+    max: 1
+  name:
+    type: writer
+    inline: true
+    marks: false
+  jobPosition:
+    type: writer
+    label: Job Position
+    inline: true
+    marks: false
+  company:
+    type: writer
+    inline: true
+    marks: false
+
+```
+
+### Snippet
+
+```php "/site/plugins/block-factory/snippets/blocks/testimonial.php"
+<?php if($block->quote()->isNotEmpty()): ?>
+  <blockquote class="testimonial">
+    <p class="quote-text">
+      <?= $block->quote() ?>
+    </p>
+    <footer>
+        <figure class="flex items-center">
+          <?php if($image = $block->image()->toFile()): ?>
+            <div class="testimonial-image">
+              <img src="<?= $image->crop(50, 50)->url() ?>" alt="<?= $image->alt() ?>">
+            </div>
+          <?php endif ?>
+          <figcaption>
+            <?= implode(', ', array_filter([$block->name()->value(), $block->company()->value()])) ?>
+          </figcaption>
+        </figure>
+    </footer>
+  </blockquote>
+<?php endif; ?>
+```
+
+### Preview
+
+```js "/site/plugins/block-factory/index.js"
+panel.plugin("cookbook/block-factory", {
+  blocks: {
+    testimonial: {
+      computed: {
+        image() {
+          return this.content.image[0] || {};
+        },
+        bio() {
+          return [this.content.jobposition, this.content.company].filter(el => {
+            return el != null && el != '';
+          }).join(', ');
+        },
+        quoteField() {
+          return this.field("quote");
+        }
+      },
+      template: `
+        <blockquote class="k-block-type-testimonial-quote" @dblclick="open">
+          <k-writer
+            ref="quote"
+            :inline="true"
+            :marks="false"
+            :value="content.quote"
+            :placeholder="quoteField.placeholder"
+            @input="update({ quote: $event })"
+          />
+          <footer>
+            <figure class="k-block-type-testimonial-voice">
+              <img
+                v-if="image.url"
+                :src="image.url"
+                width="48px"
+                height="48px"
+                :alt="'Photo of ' + content.name"
+              >
+              <figcaption>
+                {{content.name }}<br>
+                {{ bio }}
+               </figcaption>
+            </figure>
+          </footer>
+        </blockquote>
+      `
+    },
+  }
+});
+```
+
+## Complete `index.php`
+
+Here is the complete `index.php` with all registered blueprints and examples introduced in this recipe:
+
+```php "/site/plugins/block-factory/index.php"
+
+<?php
+Kirby::plugin('cookbook/block-factory', [
+  'blueprints' => [
+    'blocks/accordion'   => __DIR__ . '/blueprints/blocks/accordion.yml',
+    'blocks/box'         => __DIR__ . '/blueprints/blocks/box.yml',
+    'blocks/card'        => __DIR__ . '/blueprints/blocks/card.yml',
+    'blocks/faq'         => __DIR__ . '/blueprints/blocks/faq.yml',
+    'blocks/faq2'        => __DIR__ . '/blueprints/blocks/faq2.yml',
+    'blocks/testimonial' => __DIR__ . '/blueprints/blocks/testimonial.yml',
+  ],
+  'snippets' => [
+    'blocks/accordion'   => __DIR__ . '/snippets/blocks/accordion.php',
+    'blocks/box'         => __DIR__ . '/snippets/blocks/box.php',
+    'blocks/card'        => __DIR__ . '/snippets/blocks/card.php',
+    'blocks/faq'         => __DIR__ . '/snippets/blocks/faq.php',
+    'blocks/faq2'        => __DIR__ . '/snippets/blocks/faq2.php',
+    'blocks/testimonial' => __DIR__ . '/snippets/blocks/testimonial.php',
+  ],
+  'translations' => [
+    'en' => [
+      'field.blocks.accordion.name'   => 'Accordion block',
+      'field.blocks.box.name'         => 'Textbox block',
+      'field.blocks.card.name'        => 'Card',
+      'field.blocks.faq.name'         => 'FAQ Section Version 1',
+      'field.blocks.faq2.name'        => 'FAQ Section Version 2',
+      'field.blocks.testimonial.name' => 'Testimonial',
+    ]
+  ],
+]);
+```
+
+## Stylesheet
+
+Since these blocks are just examples and styling is totally individual, here some quick & dirty Panel styles:
+
+```css "/site/plugins/block-factory/index.css"
+.k-block-type-box {
+  position: relative;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.k-block-type-box.box-text {
+  background: #cce3ff;
+}
+
+.k-block-type-box.box-bolt {
+  background: #ffd9b3;
+}
+
+.k-block-type-box.box-alert {
+  background: #fcc;
+}
+
+.k-block-type-box.box-neutral {
+  background: #ccc;
+}
+
+.k-block-type-box-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+details {
+  margin-left: 1rem;
+}
+
+details summary {
+  margin-left: -1rem;
+  margin-bottom: .5rem;
+  font-weight: 600;
+}
+
+details summary .k-writer {
+  display: inline-block;
+  width: calc(100% - 2rem);
+}
+
+.k-block-container:hover .fieldtype {
+  display: block
+}
+
+.k-block-type-card-heading {
+  margin: 1rem 0;
+}
+
+.k-block-type-card-category {
+  margin-top: 1rem;
+  color: #333;
+
+}
+
+.k-block-type-faq-heading {
+  margin: 1rem 0;
+}
+
+.k-block-type-faq-item {
+  margin-bottom: 1rem;
+}
+
+.k-block-type-testimonial-quote footer{
+  margin-top: 1rem;
+}
+
+.k-block-type-testimonial-quote p {
+  border-left: 2px solid black;
+  padding-left: .75rem;
+  max-width: 25rem;
+}
+
+.k-block-type-testimonial-voice {
+  display: flex;
+  align-items: center;
+}
+
+.k-block-type-testimonial-voice img {
+  margin-right: 10px;
+}
+
+.k-block-type-testimonial-voice input {
+  border: none;
+}
+
+```

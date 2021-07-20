@@ -1,0 +1,13 @@
+Title: Horizontal rules
+
+----
+
+Text:
+
+```markdown
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+
+****
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+```

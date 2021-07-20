@@ -1,5 +1,0 @@
-Title: media
-
-----
-
-Excerpt: Returns the root of the media folder.

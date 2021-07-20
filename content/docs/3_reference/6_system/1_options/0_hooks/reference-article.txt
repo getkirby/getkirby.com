@@ -1,0 +1,24 @@
+Intro: Hook into Kirby events and execute your functions in the background
+
+----
+
+Text:
+
+```php "/site/config/config.php"
+return [
+  'hooks' => [
+    'page.delete:before' => function ($page) {
+      // do something before a page gets deleted
+    }
+  ]
+];
+```
+## More information
+
+In addition to registering hooks in the `config` file, you can also register them in plugins. In the plugin docs you will also find more detailed information about hooks.
+
+(link: /docs/reference/plugins/hooks text: Register hooks in plugin)
+
+## Available hooks
+
+(reference: plugins/hooks)

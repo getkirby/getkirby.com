@@ -1,0 +1,22 @@
+Title: Tools
+----
+Link: docs/reference/objects#toolkit
+----
+Menu:
+- objects/toolkit/a
+- objects/http/cookie
+- objects/data/data
+- objects/toolkit/dir
+- objects/toolkit/escape
+- objects/toolkit/f
+- objects/http/header
+- objects/cms/html
+- objects/toolkit/i18n
+- objects/toolkit/mime
+- objects/toolkit/query
+- objects/http/server
+- objects/toolkit/str
+- objects/toolkit/tpl
+- objects/cms/url
+- objects/toolkit/v
+- objects/toolkit/xml

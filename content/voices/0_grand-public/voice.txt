@@ -6,4 +6,8 @@ Text: We choose Kirby because it’s easy to use and possible to customize it to
 
 ----
 
-Url: http://grandpublic.se
+Website: http://grandpublic.se
+
+----
+
+Bio: Brand agency

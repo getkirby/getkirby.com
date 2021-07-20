@@ -1,3 +1,0 @@
-Text:
-
-(docs: methods/page/props)

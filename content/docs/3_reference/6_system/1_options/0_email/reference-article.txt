@@ -1,0 +1,74 @@
+Intro: Set options for Kirby's built-in email class
+
+----
+
+Text:
+
+## Email presets
+
+```php
+return [
+  'email' => [
+    'presets' => [
+      'contact' => [
+        'from'    => 'no-reply@supercompany.com',
+        'subject' => 'Thank you for your contact request',
+        'cc'      => 'marketing@supercompany.com',
+        'body'    => 'We will never reply'
+      ]
+    ]
+  ]
+];
+````
+
+## Email transport
+
+```php
+return [
+  'email' => [
+    'transport' => [
+      'type' => 'smtp',
+      'host' => 'smtp.company.com',
+      'port' => 465,
+      'security' => true
+    ]
+  ]
+];
+```
+
+<since v="3.5.1">
+If `security` is set to `true`, Kirby automatically converts it to `'tls'` or `'ssl'` depending on the configured port. If no port is given and secure transport is enabled, the port is set to 587 (the common port for SMTP over TLS).
+</since>
+
+You can also use `'tls'` or `'ssl'` explicitly via the `security` key:
+
+```php
+return [
+  'email' => [
+    'transport' => [
+      ...
+      'port' => 587,
+      'security' => 'tls'
+    ]
+  ]
+];
+```
+
+
+## Email transport with authentication
+
+```php
+return [
+  'email' => [
+    'transport' => [
+      'type' => 'smtp',
+      'host' => 'smtp.server.com',
+      'port' => 465,
+      'security' => true,
+      'auth' => true,
+      'username' => '...',
+      'password' => '...',
+    ]
+  ]
+];
+```

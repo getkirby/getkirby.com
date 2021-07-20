@@ -1,0 +1,5 @@
+Title: cache
+
+----
+
+Intro: Returns the root of the cache folder.

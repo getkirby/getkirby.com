@@ -1,0 +1,44 @@
+Title: $users
+
+----
+
+Class: Kirby\Cms\Users
+
+----
+
+Text:
+
+## How to get a `$users` object
+
+The users object is available via the `$kirby` object:
+
+```php
+$users = $kirby->users();
+```
+
+This will return a collection of all users of the site.
+
+## Examples
+
+With the `$users` object in place, you can now use all the methods of the class, for example:
+
+### Get all admin users
+
+```php
+$admins = $users->filterBy('isAdmin');
+```
+
+### Fetch all values of a user field into an array
+
+```php
+$userEmails = $users->pluck('email');
+```
+This will return an array with all the email adresses of all users.
+
+### Sort users
+
+```php
+$sorted = $users->sortBy('role');
+```
+
+

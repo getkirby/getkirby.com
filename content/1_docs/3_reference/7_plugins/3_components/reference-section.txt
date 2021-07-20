@@ -1,6 +1,0 @@
-Title: Core components
-
-----
-Excerpt:
-
-You can replace some core components with your own extension to modify their behaviour.

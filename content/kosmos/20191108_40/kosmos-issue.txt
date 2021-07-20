@@ -25,7 +25,7 @@ It is decided! Meet other Kirby users, developers and the team on March 21, 2020
 
 Last week, Bastian and I met with Flo Kosiol and the people from [3st digital](https://3st-digital.de/), who invited us to host the conference in their offices, a beautiful venue facing the river Rhine. We are very much looking forward to meeting you all there. If you want to attend, click the "Attend" button on the [conference website](https://colloq.io/events/kirby-konf/2020/mainz/1). You can discuss your ideas for the event in our [Kirby Konf repo](https://github.com/getkirby/konf).
 
-(screenshot: 3st-digital.jpg)
+(image: 3st-digital.jpg)
 
 ## Trioceros is here!
 
@@ -67,7 +67,7 @@ We enhanced the [Virtual Pages guide](https://getkirby.com/docs/guide/virtual-pa
 
 ## Kirby in the wild
 
-(screenshot: forstory.jpg)
+(image: forstory.jpg)
 [forStory GmbH](https://www.forstory.de/)
 
 ## CSS

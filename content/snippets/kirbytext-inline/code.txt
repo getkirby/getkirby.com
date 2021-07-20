@@ -1,9 +1,0 @@
-Title: Inline KirbyText
-----
-Text:
-
-```php
-<p class="intro">
-  <?= $page->intro()->kirbyTextInline() ?>
-</p>
-```

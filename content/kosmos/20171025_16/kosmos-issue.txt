@@ -29,15 +29,15 @@ In the meantime, we are continuing to improve Kirby 2 and just published [Kirby 
 
 ## Kirby in the Wild
 
-(picture: 2pac.jpg)
+(image: 2pac.jpg)
 [Tupac Amaru Shakur (1971-1996)](http://www.2pac.com)
 Artist
 
-(picture: integrated-2017.jpg)
+(image: integrated-2017.jpg)
 [Integrated 2017](https://integratedconf.org)
 Conference
 
-(picture: kueste-gegen-plastik.jpg)
+(image: kueste-gegen-plastik.jpg)
 [Küste gegen Plastik](https://www.kueste-gegen-plastik.de)
 Nonprofit organization fighting the toxic impact of plastic on oceans
 
@@ -67,57 +67,49 @@ The collection of available themes on (http://getkirby-themes.com) has grown aga
 
 (columns…)
 
-(picture: symmetric-theme.jpg)
+(image: symmetric-theme.jpg)
 
 [Symmetric](https://cj-lab.fr/themes/symmetric/).
 Symmetric is a nice multi-purpose theme by Constantin Holy.
 
 ++++
 
-(picture: alpha-theme.jpg)
+(image: alpha-theme.jpg)
 [Alpha](http://t.starck.io/alpha/)
 Alpha is a minimalistic blog theme created by Christopher Boutillé.
 
-(…columns)
+++++
 
-(columns…)
-
-(picture: uime-theme.jpg)
+(image: uime-theme.jpg)
 
 [UI-ME](https://cj-lab.fr/themes/uime/)
 UI-ME is a customizable multi-purpose theme created by Constantin Joly.
 
 ++++
 
-(picture: kollide-theme.jpg)
+(image: kollide-theme.jpg)
 [Kollide](http://themes.yordanoff.net/kollide/)
 Kollide is a very feature-rich Portfolio Theme created by Joro Yordanov.
 
-(…columns)
-
-(columns…)
+++++
 ## Kirby Tutorials
 
 Julian Oster shares his new [workflow with Kirby and Git](https://jlnostr.de/blog/better-workflow-with-kirby-and-git) with us.
 
 ++++
 
-(picture: kirby-workflow-with-git.jpg)
+(image: kirby-workflow-with-git.jpg)
 
-(…columns)
-
-(columns…)
+++++
 ## Javascript
 
 [Draggable](https://shopify.github.io/draggable/) is a lightweight, open source JavaScript drag & drop library. The website itself is an beautiful, playful demo of its capabilities.
 
 ++++
 
-(picture: draggable.jpg)
+(image: draggable.jpg)
 
-(…columns)
-
-(columns…)
+++++
 
 ## Performance I
 
@@ -125,7 +117,7 @@ Julian Oster shares his new [workflow with Kirby and Git](https://jlnostr.de/blo
 
 ++++
 
-(picture: essential-image-optimization.jpg)
+(image: essential-image-optimization.jpg)
 
 (…columns)
 

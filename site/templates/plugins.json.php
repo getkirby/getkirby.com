@@ -2,8 +2,8 @@
 
 $plugins = [];
 
-foreach ($page->grandChildren() as $plugin) {
+foreach ($page->grandChildren()->sortBy('title', 'asc') as $plugin) {
   $plugins[] = $plugin->toJson(true);
 }
 
-echo json_encode($plugins, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+echo json($plugins);

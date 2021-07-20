@@ -1,38 +1,34 @@
-<?php snippet('header') ?>
+<?php layout() ?>
 
-  <main class="cases-page | main" id="maincontent">
-    <article class="wrap">
+<style>
+.header,
+.footer h6 {
+  color: var(--color-white);
+}
+.header .banner {
+  color: initial;
+}
+html {
+  background: var(--color-dark);
+  color: var(--color-gray-400);
+}
+</style>
 
-      <?php snippet('hero') ?>
+<article>
 
-      <ul class="cases-grid">
-        <?php foreach ($page->children()->listed()->shuffle() as $case): ?>
-        <li>
-          <article>
-            <a href="<?= $case->link()->toUrl() ?>">
-              <h2 class="h5"><?= $case->title() ?></h2>
-              <p class="h6 -mb:medium">
-                <?= Url::short(Url::base($case->link()->value())) ?>
-              </p>
-              <figure class="screenshot">
-                <span class="intrinsic" style="padding-bottom: 133.33%">
-                  <?= $case->cover()->toFile() ?? $case->image() ?>
-                </span>
-              </figure>
-            </a>
-          </article>
-        </li>
-        <?php endforeach ?>
-      </ul>
+  <h1 class="h1 mb-12 color-white">Made with&nbsp;Kirby</h1>
 
-      <div class="text description">
-        <p>
-          <strong>You built something with Kirby?</strong>
-          <br>We have a <a href="https://forum.getkirby.com/t/made-with-kirby-and-3/83/434">public thread in our forum</a> where you can share your work with other Kirby users.
-        </p>
-      </div>
+  <div class="mb-12">
+    <?php snippet('templates/cases/cases', [
+      'cases' => collection('cases')->shuffle()
+    ]) ?>
+  </div>
 
-    </article>
-  </main>
+  <footer class="h2">
+    <h2>You built something with Kirby?</h2>
+    <p class="color-white">
+      Share your work in our <a class="link" href="https://forum.getkirby.com/t/made-with-kirby-and-3/83">forum</a>
+    </p>
+  </footer>
 
-<?php snippet('footer') ?>
+</article>

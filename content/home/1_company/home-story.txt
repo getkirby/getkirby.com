@@ -1,0 +1,78 @@
+Title: Your company
+
+----
+
+Filesystem:
+
+```filesystem
+content/
+    1_projects/
+      creatious-labs/
+        creatious-labs.jpg
+        project.txt
+    2_team/
+    3_clients/
+    home/
+    site.txt
+```
+
+----
+
+Filename: site.txt
+
+----
+
+Filecontent:
+
+Title: H&C
+
+&minus;---
+
+Twitter: @h-and-c
+
+&minus;---
+
+Instagram: @h-and-c
+
+----
+
+Browser: agency.kirby
+
+----
+
+PhoneTitle: H&C
+
+----
+
+PhoneSubtitle: Digital Agency
+
+----
+
+PhoneImage: agency.jpg
+
+----
+
+Api:
+
+```yaml
+{
+  "site": {
+    "title": "H&C", "twitter": "@h-and-c", "instagram": "@h-and-c"
+  },
+  "projects": [
+    { "title": "Creatious Labs.", "url": "/projects/creatious-labs" },
+    { "title": "Frontacular", "url": "/projects/frontacular" },
+    ...
+  ],
+  "team": [
+    { "name": "Ajo Ogunsei", "position": "CEO" },
+    { "name": "Eliana Stout", "position": "CTO" },
+    ...
+  ],
+  "clients": [
+    { "org": "BakeBakeLove", "website": "https://bakebakelove.kirby" },
+    { "org": "BeautyBox", "website": "https://beautybox.kirby" },
+    ...
+  ]
+}
+```

@@ -1,52 +1,39 @@
-<?php snippet('header') ?>
+<?php layout('cookbook') ?>
 
-  <main class="docs-page | main" id="maincontent">
-    <div class="wrap">
-      <div class="docs-grid">
-        <!-- # Sidebar -->
-        <nav class="docs-sidebar">
-          <p class="h1">
-            <a href="<?= url('docs/cookbook') ?>">Cookbook</a>
-          </p>
+<?php slot('h1') ?>
+<?= $page->title()->widont() ?>
+<?php endslot() ?>
 
-          <nav class="sidebar" >
-           <ul class="sidebar-items">
-              <?php foreach ($categories as $category) : ?>
-              <li class="sidebar-item">
-                <span class="sidebar-item-link">
-                  More <a href="<?= url('docs/cookbook') ?>?category=<?= $category['slug'] ?>"><strong><?= $category['title'] ?></strong></a> recipes:
-                </span>
+<?php slot() ?>
 
-                <div class="sidebar-submenu">
-                  <ul class="sidebar-subpages">
-                  <?php foreach($category['items'] as $related): ?>
-                    <li class="sidebar-subpage">
-                      <?= $related->title()->link(['class' => 'sidebar-subpage-link']) ?>
-                    </li>
-                  <?php endforeach ?>
-                  </ul>
-                </div>
-              </li>
-              <?php endforeach ?>
-            </ul>
-          </nav>
-        </nav>
+  <?php snippet('toc', ['title' => 'In this recipe']) ?>
+  <div class="prose mb-24">
+    <?= $page->text()->kt() ?>
+  </div>
 
-        <!-- # Recipe Content -->
-        <article class="docs-content">
-          <h1><?= $page->title()->widont() ?></h1>
-          <div class="text intro -mb:large">
-            <?= $page->description()->kt() ?>
-          </div>
-          <?php snippet('toc', $page->text()->headlines('h2')) ?>
-          <div class="text">
-            <?= $page->text()->kt()->anchorHeadlines() ?>
-          </div>
+  <?php if ($authors->count()): ?>
+  <section id="authors">
+    <header class="prose mb-6">
+      <h2><?= $authors->count() > 1 ? 'Authors' : 'Author' ?></h2>
+    </header>
+    <ul class="auto-fill" style="--min: 12rem; --max: 14rem">
+      <?php foreach ($authors as $author): ?>
+      <li>
+        <a class="block bg-white p-6 shadow-2xl" href="<?= $author->website() ?>">
+          <figure>
+            <p class="mb-3" style="--aspect-ratio: 1/1"><?= $author->image()->crop(400) ?></p>
+            <figcaption class="flex-grow text-sm leading-tight">
+              <p class="font-bold"><?= $author->title() ?></p>
+              <p class="mb-6 color-gray-700"><?= $author->bio() ?></p>
+              <p class="font-mono link"><?= $author->website()->shortUrl() ?></p>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      <?php endforeach ?>
+    </ul>
+  </section>
+  <?php endif ?>
 
-          <?php snippet('github.edit') ?>
-        </article>
-      </div>
-    </div>
-  </main>
+<?php endslot() ?>
 
-<?php snippet('footer') ?>

@@ -2,19 +2,11 @@ Title: Retour
 
 ----
 
-Documentation: https://distantnative.com/retour
-
-----
-
 Repository: https://github.com/distantnative/retour-for-kirby
 
 ----
 
 Category: panel
-
-----
-
-Featured: true
 
 ----
 

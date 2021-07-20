@@ -1,0 +1,51 @@
+Intro: Configuration settings for Kirby sessions
+
+----
+
+Text:
+
+You can define the following configuration options in your `/site/config/config.php`:
+
+```php
+<?php
+
+return [
+    'session' => [
+        'durationNormal' => 7200,            // default: 2 hours
+        'durationLong'   => 1209600,         // default: 2 weeks
+        'timeout'        => 1800,            // default: half an hour
+        'cookieName'     => 'kirby_session',
+        'gcInterval'     => 100              // default: cleanup every ~100 requests
+    ]
+];
+```
+
+## `durationNormal`
+
+Maximum duration of a normal session in seconds; if that time is over and the session has not been renewed, the session becomes invalid and is deleted from the server.
+
+<info>
+Renewing happens automatically in the background. You can read more about this (link: docs/guide/sessions#the-session-lifecycle text: in the guide).
+</info>
+
+## `durationLong`
+
+If you tick the "keep me logged in" checkbox in the Panel, you get a "long" session, which has a longer duration and no activity timeout, so you can close the browser window and come back at any time within the configured duration.
+
+## `timeout`
+
+The duration options above define the absolute session expiry. Like in Kirby 2, there is also an additional activity timeout: If the session wasn't seen for this time, the session also becomes invalid.
+
+<info>
+If you leave a Panel window open, the session never expires, even without clicking on anything.
+</info>
+
+## `cookieName`
+
+The name of the session cookie
+
+## `gcInterval`
+
+Expired sessions are automatically cleaned up from the `/site/sessions` directory. To increase performance, this only happens every few requests.
+
+You can also disable this process completely by setting the option to `false` and then (link: docs/guide/sessions#manually-collecting-garbage text: manually calling the garbage collector) from a Cronjob.

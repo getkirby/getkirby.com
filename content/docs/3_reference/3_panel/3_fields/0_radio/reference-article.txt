@@ -1,0 +1,79 @@
+Title: Radio
+
+----
+
+Intro: A list of radio buttons
+
+----
+
+Guide: blueprints/fields
+
+----
+
+Text:
+
+The radiobuttons field displays any number of radio buttons in a list. This is perfect if you have a predefined number of options, from which the user can just choose one.
+
+(image: radio.png)
+
+## Example
+
+```yaml
+fields:
+  category:
+    label: Category
+    type: radio
+    options:
+      design: Design
+      architecture: Architecture
+      photography: Photography
+      3d: 3D
+      web: Web
+```
+
+## Field properties
+
+(field-options: radio)
+
+## Default value
+
+By default, the first item in the list of options is preselected. To change the default value:
+
+```yaml
+fields:
+  category:
+    label: Category
+    type: radio
+    default: architecture
+    options:
+      design: Design
+      architecture: Architecture
+      photography: Photography
+      3d: 3D
+      web: Web
+```
+To prevent preselection of a value, set `default: false`.
+
+(docs: panel-field-options field: radio)
+
+## How to use in templates/snippets
+
+To only render the value stored in the content file, call the field name:
+
+```php
+<?= $page->category() ?>
+```
+
+If your saved values are lowercase versions of the text shown to the user, you might want to uppercase the first letter:
+
+```php
+<?= Str::ucfirst($page->category()) ?>
+```
+
+If you want to render all letters in uppercase:
+
+```php
+<?= $page->category()->toUpper() ?>
+```
+
+If you want to output the text that is shown to the user rather than the value stored in the content file, you have different options, that are explained in our Cookbook recipe (link: docs/cookbook/templating/fetching-field-options text: Fetching field options).

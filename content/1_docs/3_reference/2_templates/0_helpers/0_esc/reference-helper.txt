@@ -1,8 +1,0 @@
-Text:
-
-## Example
-
-
-```php
-<?= esc('untrusted data') ?>
-```

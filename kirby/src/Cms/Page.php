@@ -7,6 +7,7 @@ use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Http\Uri;
 use Kirby\Toolkit\A;
+use Kirby\Toolkit\Escape;
 use Kirby\Toolkit\F;
 
 /**
@@ -239,7 +240,7 @@ class Page extends ModelWithContent
      * @param string|null $inSection
      * @return array
      */
-    public function blueprints(string $inSection = null): array
+    public function blueprints(?string $inSection = null): array
     {
         if ($inSection !== null) {
             return $this->blueprint()->section($inSection)->blueprints();
@@ -304,7 +305,7 @@ class Page extends ModelWithContent
      * @param string|null $languageCode
      * @return array
      */
-    public function contentFileData(array $data, string $languageCode = null): array
+    public function contentFileData(array $data, ?string $languageCode = null): array
     {
         return A::prepend($data, [
             'title' => $data['title'] ?? null,
@@ -320,7 +321,7 @@ class Page extends ModelWithContent
      * @param string|null $languageCode
      * @return string
      */
-    public function contentFileName(string $languageCode = null): string
+    public function contentFileName(?string $languageCode = null): string
     {
         return $this->intendedTemplate()->name();
     }
@@ -466,7 +467,7 @@ class Page extends ModelWithContent
      *
      * @internal
      * @param mixed $props
-     * @return self
+     * @return static
      */
     public static function factory($props)
     {
@@ -885,7 +886,7 @@ class Page extends ModelWithContent
      * @internal
      * @param string $name
      * @param array $props
-     * @return self
+     * @return static
      */
     public static function model(string $name, array $props = [])
     {
@@ -995,6 +996,14 @@ class Page extends ModelWithContent
         $image = $this->panelImage($params['image'] ?? []);
         $icon  = $this->panelIcon($image);
 
+        // escape the default text
+        // TODO: no longer needed in 3.6
+        $textQuery = $params['text'] ?? '{{ page.title }}';
+        $text  = $this->toString($textQuery);
+        if ($textQuery === '{{ page.title }}') {
+            $text = Escape::html($text);
+        }
+
         return [
             'dragText'    => $this->dragText(),
             'hasChildren' => $this->hasChildren(),
@@ -1003,7 +1012,7 @@ class Page extends ModelWithContent
             'image'       => $image,
             'info'        => $this->toString($params['info'] ?? false),
             'link'        => $this->panelUrl(true),
-            'text'        => $this->toString($params['text'] ?? '{{ page.title }}'),
+            'text'        => $text,
             'url'         => $this->url(),
         ];
     }
@@ -1175,11 +1184,11 @@ class Page extends ModelWithContent
             $response = $kirby->response()->toArray();
 
             // cache the result
-            if ($cache !== null) {
+            if ($cache !== null && $kirby->response()->cache() === true) {
                 $cache->set($cacheId, [
                     'html'     => $html,
                     'response' => $response
-                ]);
+                ], $kirby->response()->expires() ?? 0);
             }
         }
 
@@ -1244,7 +1253,7 @@ class Page extends ModelWithContent
      * Sets the Blueprint object
      *
      * @param array|null $blueprint
-     * @return self
+     * @return $this
      */
     protected function setBlueprint(array $blueprint = null)
     {
@@ -1262,7 +1271,7 @@ class Page extends ModelWithContent
      * than computing the dirname afterwards
      *
      * @param string|null $dirname
-     * @return self
+     * @return $this
      */
     protected function setDirname(string $dirname = null)
     {
@@ -1274,7 +1283,7 @@ class Page extends ModelWithContent
      * Sets the draft flag
      *
      * @param bool $isDraft
-     * @return self
+     * @return $this
      */
     protected function setIsDraft(bool $isDraft = null)
     {
@@ -1286,7 +1295,7 @@ class Page extends ModelWithContent
      * Sets the sorting number
      *
      * @param int|null $num
-     * @return self
+     * @return $this
      */
     protected function setNum(int $num = null)
     {
@@ -1298,7 +1307,7 @@ class Page extends ModelWithContent
      * Sets the parent page object
      *
      * @param \Kirby\Cms\Page|null $parent
-     * @return self
+     * @return $this
      */
     protected function setParent(Page $parent = null)
     {
@@ -1310,7 +1319,7 @@ class Page extends ModelWithContent
      * Sets the absolute path to the page
      *
      * @param string|null $root
-     * @return self
+     * @return $this
      */
     protected function setRoot(string $root = null)
     {
@@ -1322,7 +1331,7 @@ class Page extends ModelWithContent
      * Sets the required Page slug
      *
      * @param string $slug
-     * @return self
+     * @return $this
      */
     protected function setSlug(string $slug)
     {
@@ -1334,7 +1343,7 @@ class Page extends ModelWithContent
      * Sets the intended template
      *
      * @param string|null $template
-     * @return self
+     * @return $this
      */
     protected function setTemplate(string $template = null)
     {
@@ -1349,7 +1358,7 @@ class Page extends ModelWithContent
      * Sets the Url
      *
      * @param string|null $url
-     * @return self
+     * @return $this
      */
     protected function setUrl(string $url = null)
     {

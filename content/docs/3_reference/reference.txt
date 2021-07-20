@@ -1,0 +1,19 @@
+Title: Reference
+
+----
+
+Description: The Reference provides a quick but detailed reference to pretty much any aspect of Kirby.
+
+----
+
+Intro:
+
+The Reference provides a quick but detailed reference to pretty much any aspect of Kirby.
+
+----
+
+Changefreq: daily
+
+----
+
+Priority: 0.9

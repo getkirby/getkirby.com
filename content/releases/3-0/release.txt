@@ -2,6 +2,10 @@ Title: Introducing Kirby 3
 
 ----
 
+Version: 3.0
+
+----
+
 Description: After over two years of development and seven years after launching Kirby 1, we are back with our biggest release to date…
 
 ----
@@ -18,15 +22,15 @@ Text:
 
 ## A new Panel
 
-(screenshot: panel.jpg)
+(image: panel.jpg)
 
 Kirby 3 comes with a beautiful new control Panel built on top of (link: https://vuejs.org text: Vue) that allows you to build unique custom interfaces for any kind of project, small or complex, exactly tailored to your content (if you are more the nerdy type, you can still edit text files with a text editor if you want).
 
 ### Sections & Tabs
 
-Our brand new section system lifts blueprints to a completely different level. You become the interface designer and decide for each type of page which features you need and how to arrange them.
+Our brand-new section system lifts blueprints to a completely different level. You become the interface designer and decide for each type of page which features you need and how to arrange them.
 
-(picture: blueprint.png)
+(image: blueprint.png)
 
 With native tabs you can go even further and create incredibly clean and usable editing environments for your editors.
 
@@ -46,7 +50,7 @@ The Panel is built on top of our own Vue UI kit that can be used in all Panel pl
 
 With the new power of our Vue application, we introduce far better fields than before. More powerful structures, related pages, files and more are available and can be combined with the first amazing field plugins from our third-party developers.
 
-(screenshot: fields.png)
+(image: fields.png)
 
 (link: docs/reference/panel/fields text: Learn more ›)
 
@@ -54,7 +58,7 @@ With the new power of our Vue application, we introduce far better fields than b
 
 Customizable page states give you maximum control over your workflow, from drafts over unreviewed to published pages. Choose what you need and start creating.
 
-(screenshot: drafts.png)
+(image: drafts.png)
 
 (link: docs/guide/content/creating-pages text: Learn more ›)
 
@@ -130,9 +134,9 @@ With Kirby 3, you can make use of our page cache or add custom caching of your o
 
 This introduction could go on forever. We recommend you just give it a try and play around with all the new features yourself.
 
-The best starting point is our brand new (link: try text: Starterkit):
+The best starting point is our brand-new (link: try text: Starterkit):
 
-(screenshot: starterkit.jpg)
+(image: starterkit.jpg)
 
 ## Support
 

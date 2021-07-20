@@ -1,9 +1,0 @@
-Title: Community
-
-----
-
-Submenu: true
-
-----
-
-Link: community/contributors

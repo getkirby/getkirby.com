@@ -42,7 +42,7 @@ Our contributors section on the new Kirby website is still all male. So if as a 
 
 ## Kirby in the Wild
 
-(picture: patrik-hjelm.jpg)
+(image: patrik-hjelm.jpg)
 [Patrik Hjelm](https://hjelmpatrik.com)
 Design & Development
 

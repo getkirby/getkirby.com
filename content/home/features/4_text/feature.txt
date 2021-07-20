@@ -1,5 +1,0 @@
-Title: Markdown & KirbyText
-
-----
-
-Text: Enjoy a fast and effective editing experience with Markdown. KirbyText extends Markdown and makes it even easier to add links, images, videos and more to your text.

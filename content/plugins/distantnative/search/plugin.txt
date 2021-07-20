@@ -2,10 +2,6 @@ Title: Search
 
 ----
 
-Documentation: https://distantnative.com/search
-
-----
-
 Repository: https://github.com/distantnative/search-for-kirby
 
 ----

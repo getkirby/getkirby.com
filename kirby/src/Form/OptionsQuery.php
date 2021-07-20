@@ -6,6 +6,7 @@ use Kirby\Cms\Field;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Toolkit\Collection;
+use Kirby\Toolkit\Escape;
 use Kirby\Toolkit\Obj;
 use Kirby\Toolkit\Properties;
 use Kirby\Toolkit\Query;
@@ -33,27 +34,27 @@ class OptionsQuery
     protected $aliases = [];
 
     /**
-     * @var
+     * @var array
      */
     protected $data;
 
     /**
-     * @var
+     * @var array|string|null
      */
     protected $options;
 
     /**
-     * @var
+     * @var string
      */
     protected $query;
 
     /**
-     * @var
+     * @var mixed
      */
     protected $text;
 
     /**
-     * @var
+     * @var mixed
      */
     protected $value;
 
@@ -102,7 +103,26 @@ class OptionsQuery
             $value = $value[$object];
         }
 
-        return Str::template($value, $data);
+        $result = Str::template($value, $data);
+
+        // escape the default queries for the `text` field
+        // TODO: remove after default escape implemented for query templates in 3.6
+        if ($field === 'text') {
+            $defaults = [
+                'arrayItem'     => '{{ arrayItem.value }}',
+                'block'         => '{{ block.type }}: {{ block.id }}',
+                'file'          => '{{ file.filename }}',
+                'page'          => '{{ page.title }}',
+                'structureItem' => '{{ structureItem.title }}',
+                'user'          => '{{ user.username }}',
+            ];
+
+            if (isset($defaults[$object]) && $value === $defaults[$object]) {
+                $result = Escape::html($result);
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -190,9 +210,9 @@ class OptionsQuery
 
     /**
      * @param array|null $aliases
-     * @return self
+     * @return $this
      */
-    protected function setAliases(array $aliases = null)
+    protected function setAliases(?array $aliases = null)
     {
         $this->aliases = $aliases;
         return $this;
@@ -200,7 +220,7 @@ class OptionsQuery
 
     /**
      * @param array $data
-     * @return self
+     * @return $this
      */
     protected function setData(array $data)
     {
@@ -209,8 +229,8 @@ class OptionsQuery
     }
 
     /**
-     * @param $options
-     * @return self
+     * @param array|string|null $options
+     * @return $this
      */
     protected function setOptions($options = null)
     {
@@ -220,7 +240,7 @@ class OptionsQuery
 
     /**
      * @param string $query
-     * @return self
+     * @return $this
      */
     protected function setQuery(string $query)
     {
@@ -229,8 +249,8 @@ class OptionsQuery
     }
 
     /**
-     * @param $text
-     * @return self
+     * @param mixed $text
+     * @return $this
      */
     protected function setText($text)
     {
@@ -239,8 +259,8 @@ class OptionsQuery
     }
 
     /**
-     * @param $value
-     * @return self
+     * @param mixed $value
+     * @return $this
      */
     protected function setValue($value)
     {

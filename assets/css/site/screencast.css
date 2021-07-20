@@ -1,0 +1,33 @@
+.screencast {
+  grid-template-columns: 1fr;
+  border-radius: var(--rounded);
+  overflow: hidden;
+}
+
+.screencast .h6,
+.screencast .h2 {
+  color: var(--color-white);
+  margin-top: 0;
+}
+
+.screencast a {
+  text-decoration: none;
+}
+
+@media screen and (min-width: 60rem) {
+  .screencast:not(.reference-content .screencast) {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+@media screen and (min-width: 60rem) and (max-width: 72rem) {
+  .screencast p {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 100rem) {
+  .reference-content .screencast {
+    grid-template-columns: 1fr 2fr;
+  }
+}

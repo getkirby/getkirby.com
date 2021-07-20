@@ -1,0 +1,16 @@
+Text:
+
+(screencast: https://www.youtube.com/watch?v=3ioaFfgDRDE title: Working with SVG text: Kirby has a few useful helpers to load and embed logos and icons in your site.)
+
+## With `$file` object
+<since v="3.3.0">
+
+In addition to a string parameter you can also add a file object:
+
+```php
+<?php if ($file = $page->files()->filterBy('extension', 'svg')->first()) :?>
+<?= svg($file) ?>
+<?php endif ?>
+```
+</since>
+

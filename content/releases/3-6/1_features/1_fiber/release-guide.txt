@@ -1,0 +1,284 @@
+Title: Fiber
+----
+Intro: We’ve spent the last months working on a brand new backend architecture for the Panel. Moving away from a single page application to a more traditional approach with a simplified server-rendered backend. The new architecture is inspired by Inertia.js and simplifies our Panel and Panel plugins in ways that we’ve never dreamed of.
+----
+Text:
+
+## Fiber?
+
+The single page application architecture has served us well in Kirby 3 until now. But we also realized that adding features always means adding tons of JavaScript. Every new route, dialog, every new field type and section increases the amount of JS the Panel will send back to our users – and there's hardly any way out of it. But we want less JS, not more.
+
+This is where the new Fiber concept really shines. It takes all the routing and state management back to the server. Whatever can be prepared in PHP will be prepared in PHP, and our Vue application is mainly responsible for displaying the Panel afterwards and adding the interactive bits and pieces. If you've ever heard of Turbolink, Pjax or similar approaches, you already know mostly what Fiber does.
+
+### Here's how Fiber works
+
+When you visit the Panel for the first time, a regular HTTP request is sent to the server. The server will render the Panel HTML document, which looks like this (simplified):
+
+```html "/panel"
+<html>
+  <head>
+    <link rel="stylesheet" href="/app.css">
+  </head>
+  <div id="app"></div>
+  <script>
+    const fiber = '<?= json_encode([
+      'user' => [...],
+      'view' => [...],
+      'translation' => [...],
+      // etc.
+    ]) ?>';
+  </script>
+  <script src="/app.js">
+</html>
+```
+
+The JS fiber object is populated with data from PHP. The server injects all the data that the Panel needs for that particular view that way.
+Now Vue.js kicks in and only renders that view with the data in the `fiber` object.
+
+### Routing
+
+When you now click on a link in the Panel, the event is intercepted and a JS fetch request is sent to the server. This fetch request will no longer return the entire Panel document, but only the updated Fiber object for the new view.
+
+```js "/panel/pages/page-a"
+{
+  "user": {...},
+  "view": {...},
+  "translation": {...}
+  // etc.
+}
+```
+Fiber now does two things:
+
+1. It updates the URL in the browser
+2. It refreshes the Vue app with the new state from the new Fiber object
+
+Whenever you reload the same URL afterwards, you go back to the beginning and the server will return the full document again with the same state.
+
+### What makes this approach so great?
+
+- Routing is done in PHP with our good old Kirby router.
+- We can exactly control what data needs to be sent for each view.
+- State can be handled on the server with good old sessions.
+- The API is not affected by any of this and can be a lot less specific.
+- The bundle size does not blow up with new routes or new requirements for state management.
+- Less logic in JS and a lot less complicated Vue components. You throw in state via props and that's it.
+- Every view is super easy to test on the backend with PHPUnit.
+
+### Not just views
+
+We've taken this concept and extended it to more parts of the Panel. Dialogs are now also handled with a similar approach and we are already working on search, dropdowns and more.
+
+### A lot less JS
+
+With this approach, we already managed to cut a huge 100kb+ chunk out of our Vue.js application. It's massive and it's so much fun.
+
+### Why not just Inertia.js?
+
+Fiber is mainly inspired by (link: https://inertiajs.com/ text: Inertia.js). But the more we dug into the concept, the more ways we found how we can adjust and improve the principles of Inertia for our own needs. First, we implemented our own client implementation of Inertia. Then we started changing lots of parts on the backend. In the end, the basic request concept is still the same, but the implementation is very different. It felt confusing to use the same name. You cannot lookup things in the Inertia.js docs when you work with the Panel. Dialogs and other ideas for future Fiber Panel features don't exist in Inertia. Fiber seemed like an appropriate alternative term.
+
+
+## Areas
+
+Fiber comes with a new structure for the Panel. Every part of the Panel is a separated area with routes, optional menu item, icon, breadcrumb label, access permissions, etc.
+
+Your plugins can create additional Areas for entire new Panel parts and mini applications.
+
+## Default areas
+
+The following "areas" are installed by default:
+
+- account
+- installation
+- login
+- settings
+- site
+- users
+
+## Area definition
+
+Plugins can create their own Panel areas. Areas can be just a single view or really complex applications with multiple routes.
+
+Areas are defined in a callback function that receives the `$kirby` instance and must return their configuration as an array
+
+```php
+Kirby::plugin('yourname/todos', [
+  'areas' => [
+    'todos' => function ($kirby) {
+      return [
+        // label for the menu and the breadcrumb
+        'label' => 'Todos',
+
+        // icon for the menu and breadcrumb
+        'icon' => 'check',
+
+        // optional replacement for the breadcrumb label
+        'breadcrumbLabel' => function () {
+          return '12 Todos';
+        },
+
+        // show / hide from the menu
+        'menu' => true,
+
+        // link to the main area view
+        'link' => 'todos',
+
+        // views
+        'views' => [
+          [
+            // the Panel patterns must not start with 'panel/',
+            // the `panel` slug is automatically prepended.
+            'pattern' => 'todos',
+            'action'  => function () {
+
+              // view routes return a simple array,
+              // which will be injected into our Vue app;
+              // the array can control the loaded Vue component,
+              // props for the component and settings for the current view
+              // (like breadcrumb, title, active search type etc.)
+
+              return [
+                // the Vue component can be defined in the
+                // `index.js` of your plugin
+                'component' => 'k-todos-view',
+
+                // the document title for the current view
+                'title' => 'Todos',
+
+                // the breadcrumb can be just an array or a callback
+                // function for more complex breadcrumb logic
+                'breadcrumb' => function () {
+                  // each item in the breadcrumb array
+                  // has a label and a link attribute
+                  return [
+                    [
+                      'label' => 'Buy some milk',
+                      'link'  => '/todos/123'
+                    ]
+                  ];
+                },
+
+                // props will be directly available in the
+                // Vue component. It's a super convenient way
+                // to send backend data to the Panel
+                'props' => [
+                  'todos' => [...]
+                ],
+
+                // we can preset the search type with the
+                // search attribute
+                'search' => 'pages'
+              ]
+            }
+          ]
+        ]
+      ]
+    }
+  ]
+])
+```
+
+```js
+panel.plugin('yourname/todos', {
+  components: {
+    'k-todos-view': {
+      props: {
+        todos: Array
+      },
+      template: ...
+    }
+  }
+})
+```
+
+## Dialogs
+
+The new Fiber dialogs are created mainly on the backend. They all reuse the same dialog components.
+
+| Component name | Usage |
+| --- | --- |
+| `k-form-dialog` | For dialogs with form fields and submit buttons |
+| `k-remove-dialog` | To confirm deleting items |
+| `k-text-dialog` | For dialogs with a custom text message |
+
+## Dialog setup
+
+Dialogs are defined as a part of areas:
+
+```php
+Kirby::plugin('yourname/todos', [
+  'areas' => [
+    'todos' => function ($kirby) {
+      return [
+        // ... (see area definiton above)
+        'dialogs' => [
+
+          // the key of the dialog defines the dialog routing pattern
+          'todos/create' => [
+            // the load event is creating a GET route at
+            // `/panel/dialogs/{pattern}`;
+            // it returns the setup for the dialog, including
+            // used component, buttons, props, etc.
+            'load' => function () {
+              return [
+                'component' => 'k-form-dialog',
+                'props' => [
+                  // field definition for the form dialog
+                  'fields' => [ ... ],
+                  // the prefilled model data
+                  'value' => [ ... ]
+                ]
+              ]
+            },
+            // the submit event is creating a POST route at
+            // `/panel/dialogs/{pattern}`;
+            // the submit button of the dialog is automatically
+            // wired to fire the POST request with the form
+            // data or whatever data the dialog provides
+            'submit' => function () {
+              // create todo
+              return true;
+            }
+          ]
+        ]
+      ]
+    };
+  ]
+];
+```
+
+## Submit event responses
+
+The Dialog submit has multiple ways to interact with the component.
+
+`return void|null|false`
+
+Returning nothing or false is interpreted as a 404. It suggests that the model could not be found.
+
+`return true`
+
+Returning true is interpreted as a success and will automatically close the dialog.
+
+`return [ ... ]`
+
+By returning an array, you gain more control of what happens when the dialog closes. You can pass data to the event, dispatch Vuex events and more.
+
+```php
+return [
+  'event' => 'todo.create',
+  'data'  => [
+    // some data for the event
+  ],
+];
+```
+
+`throw new Exception`
+
+Any exception is interpreted as an error and will show the error message box in the dialog containing the exception message
+
+`Panel::go()`
+
+You can redirect the Panel to a different location after submitting the dialog by calling:
+
+```php
+Panel::go('some/path');
+```

@@ -1,0 +1,24 @@
+Title: $kirby
+
+----
+
+Name: Kirby
+
+----
+
+Class: Kirby\Cms\App
+
+----
+
+Text:
+
+## How to fetch the `$kirby` object
+
+The `$kirby` class is accessible in Kirby's templates/snippets etc. through the `$kirby` variable.
+
+In any situation, you can define a `$kirby` object using the `kirby()` helper:
+
+```php
+$kirby = kirby();
+````
+

@@ -7,3 +7,11 @@ Text: I was looking for a CMS easy to deploy and back up, simple, flexible, whic
 ----
 
 Username: pixenjoy
+
+----
+
+Website: https://pixenjoy.com/
+
+----
+
+Bio: Freelance Developer

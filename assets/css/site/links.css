@@ -1,0 +1,18 @@
+.filters a[aria-current],
+.prose a,
+.toc a,
+.sidebar ul a[aria-current],
+.playground-header-menu a[aria-current],
+.reference-entries a[aria-current] h4,
+.link {
+  text-decoration: underline;
+  text-decoration-color: var(--color-yellow-500);
+  text-decoration-thickness: 2px;
+}
+.link:hover,
+.prose a:hover,
+.toc a:hover,
+.sidebar ul a:hover {
+  text-decoration-color: var(--color-yellow-600);
+}
+

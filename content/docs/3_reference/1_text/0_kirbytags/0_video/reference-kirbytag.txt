@@ -1,0 +1,113 @@
+Title: video
+
+----
+
+Intro: Embeds a video from YouTube, Vimeo or a local file by URL or filename
+
+----
+
+Text:
+
+## Supported video sources
+
+### YouTube
+
+Embedded YouTube video by video URL:
+
+```kirbytext
+(\video: http://www.youtube.com/watch?v=lLuc6rtWkrM)
+```
+
+The following link YouTube link formats are recognized:
+
+**Basic video URLs:**
+
+- https://www.youtube.com/watch?v=lLuc6rtWkrM
+- https://www.youtube.com/embed/lLuc6rtWkrM
+- https://youtu.be/lLuc6rtWkrM
+- https://www.youtube-nocookie.com/embed/d9NF2edxy-M
+
+<since v="3.4.0">
+**URLs with additional query parameters:**
+- https://www.youtube.com/watch?v=d9NF2edxy-M&t=10
+- https://www.youtube-nocookie.com/watch?v=d9NF2edxy-M&t=10
+- https://www.youtube.com/embed/d9NF2edxy-M?start=10
+- https://www.youtube-nocookie.com/embed/d9NF2edxy-M?start=10
+
+**Playlists:**
+- https://www.youtube.com/embed/videoseries?list=PLj8e95eaxiB9goOAvINIy4Vt3mlWQJxys
+- https://www.youtube-nocookie.com/embed/videoseries?list=PLj8e95eaxiB9goOAvINIy4Vt3mlWQJxys
+- https://www.youtube.com/playlist?list=PLj8e95eaxiB9goOAvINIy4Vt3mlWQJxys
+- https://www.youtube-nocookie.com/playlist?list=PLj8e95eaxiB9goOAvINIy4Vt3mlWQJxys
+</since>
+
+### Vimeo
+
+Embedded Vimeo video by video URL:
+
+```kirbytext
+(\video: http://vimeo.com/3432886)
+```
+
+<since v="3.5.5">
+### Local and remote videos
+
+You can now embed videos from the local or from remote servers.
+
+```kirbytext
+# local
+(\video: local-video.mp4)
+
+# remote
+(\video: https://example.com/sample-video.mp4)
+```
+
+<info>
+The video will be muted automatically if `autoplay` is enabled and `muted` is not defined. To start autoplay with sound, use it as in the following example:
+
+```kirbytext
+(\video: local-video.mp4 autoplay: true muted: false)
+```
+</info>
+</since>
+
+## Options
+
+### Caption
+
+```kirbytext
+(\video: http://youtu.be/lLuc6rtWkrM caption: This is a really nice video)
+```
+
+### `<iframe>` size
+
+```kirbytext
+(\video: http://vimeo.com/3432886 width: 300 height: 200)
+```
+
+### Custom CSS class
+
+```kirbytext
+(\video: http://youtu.be/lLuc6rtWkrM class: myvideo)
+```
+
+<since v="3.5.5">
+### New attributes
+
+The video tag now supports some attributes of the HTML `<video>` element: `autoplay`, `controls`, `loop`, `muted`, `poster`, `preload`
+
+```kirbytext
+(\video: local-video.mp4 autoplay: true)
+(\video: local-video.mp4 controls: false autoplay: true loop: true)
+(\video: local-video.mp4 poster: cover.jpg)
+(\video: local-video.mp4 preload: auto)
+(\video: https://example.com/sample-video.mp4 muted: true controls: false autoplay: true)
+(\video: local-video.mp4 poster: https://example.com/sample-cover.jpg)
+```
+
+<info>These new attributes are *not* supported by video providers such as YouTube and Vimeo.</info>
+</since>
+
+## Version 2's `youtube` and `vimeo` tags
+
+<info>To keep your content compatible with older Kirby versions, we still have the old `youtube` and `vimeo` KirbyTags. We recommend switching to the new `video` tag though.</info>

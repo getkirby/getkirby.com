@@ -1,22 +1,18 @@
-<?php snippet('cheatsheet.article.header') ?>
+<?php layout('reference') ?>
 
-  <div class="text">
-    <?php if (count($attributes)): ?>
-    <h2 id="attributes"><a href="#attributes">Attributes</a></h2>
+<div class="prose">
+  <?php if (count($page->attributes()) > 0): ?>
+  <h2 id="attributes"><a href="#attributes">Attributes</a></h2>
+  <div class="table">
     <table>
-      <?php foreach ($attributes as $attribute): ?>
+      <?php foreach ($page->attributes() as $attribute): ?>
       <tr>
         <td><?= $attribute ?></td>
       </tr>
       <?php endforeach ?>
     </table>
-    <?php endif ?>
-
-    <?= $page->text()->kt()->anchorHeadlines() ?>
-
-    <?php snippet('method/source', ['link' => $page->githubSource()]) ?>
   </div>
+  <?php endif ?>
 
-  <?php snippet('github.edit') ?>
-
-<?php snippet('cheatsheet.article.footer') ?>
+  <?= $page->text()->kt() ?>
+</div>

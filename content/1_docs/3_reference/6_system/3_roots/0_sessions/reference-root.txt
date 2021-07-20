@@ -1,5 +1,0 @@
-Title: sessions
-
-----
-
-Excerpt: The storage folder for all session files

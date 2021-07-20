@@ -1,0 +1,5 @@
+Title: Index
+
+----
+
+Intro: Returns the base url of the site

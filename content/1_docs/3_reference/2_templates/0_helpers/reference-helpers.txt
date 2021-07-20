@@ -1,6 +1,0 @@
-Title: Helpers
-
-----
-
-Excerpt: Helper functions simplify common tasks or provide easy shortcuts to Kirby methods.
-

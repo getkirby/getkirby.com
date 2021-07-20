@@ -1,0 +1,28 @@
+Intro: Configure the behavior of (glossary: KirbyText) and particular tags
+
+----
+
+Text:
+
+```php
+return [
+  'kirbytext' => [
+    'video' => [
+      'class' => 'video',
+      'height' => false,
+      'width' => false
+    ]
+  ]
+];
+```
+
+## Video options
+
+### `class`
+The default class which is added to Youtube and Vimeo iframes (default: `video`)
+
+### `height`
+The default height that is added to Youtube and Vimeo iframes (default: `false` = no height)
+
+### `width`
+The default width that is added to Youtube and Vimeo iframes (default: `false` = no width)

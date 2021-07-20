@@ -1,0 +1,55 @@
+Title: Roots
+
+----
+
+Intro:
+
+The `$roots` object gives you access to the roots of the different folders that make up your Kirby installation. This is useful whenever you want to access those folders to fetch a file from a folder etc.
+
+----
+
+Custom:
+
+If you want to overwrite the root you can do this in your `index.php` by passing a custom roots setup to the Kirby constructor.
+
+```php "/index.php"
+<?php
+
+include 'kirby/bootstrap.php';
+
+$kirby = new Kirby([
+    'roots' => [
+        '{{ root }}' => '/absolute/path/to/custom/root',
+    ],
+]);
+
+echo $kirby->render();
+
+```
+
+----
+Text:
+
+## Accessing the `$roots` object
+
+Before you can call the method, you need access to the roots object:
+
+```php
+$roots = $kirby->roots();
+```
+
+This will return an object with all the roots of the installation.
+
+With the object in place, you can now call the available roots methods.
+
+Instead of the following syntax to access the folders:
+
+```php
+$accounts = $kirby->roots()->accounts();
+```
+
+you can also use the `root()` method to access an individual root directly:
+
+```php
+$accounts = $kirby->root('accounts');
+```

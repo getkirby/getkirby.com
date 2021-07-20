@@ -26,7 +26,7 @@ Since "life is what happens to you while you're busy making other plans", our an
 
 ## Kirby in the Wild
 
-(picture: gridonic.jpg size: banner)
+(image: gridonic.jpg size: banner)
 [Gridonic](https://gridonic.ch)
 Digital Design Agency
 
@@ -48,7 +48,7 @@ Since our last edition, a couple of new themes for Kirby have seen the light of 
 
 (columns…)
 
-(picture:kompact-pro-theme.jpg)
+(image:kompact-pro-theme.jpg)
 
 ++++
 
@@ -59,7 +59,7 @@ Since our last edition, a couple of new themes for Kirby have seen the light of 
 
 (columns…)
 
-(picture: thinking-theme.jpg)
+(image: thinking-theme.jpg)
 
 ++++
 
@@ -70,7 +70,7 @@ Since our last edition, a couple of new themes for Kirby have seen the light of 
 
 (columns…)
 
-(picture: koncrete-theme.jpg)
+(image: koncrete-theme.jpg)
 
 ++++
 

@@ -1,0 +1,5 @@
+Title: index
+
+----
+
+Intro: Returns the document root of the website

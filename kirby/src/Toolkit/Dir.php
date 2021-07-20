@@ -69,7 +69,7 @@ class Dir
 
             if (is_dir($root) === true) {
                 if ($recursive === true) {
-                    static::copy($root, $target . '/' . $name);
+                    static::copy($root, $target . '/' . $name, true, $ignore);
                 }
             } else {
                 F::copy($root, $target . '/' . $name);
@@ -221,6 +221,7 @@ class Dir
      * @param string $dir The path for the new directory
      * @param bool $recursive Create all parent directories, which don't exist
      * @return bool True: the dir has been created, false: creating failed
+     * @throws \Exception If a file with the provided path already exists or the parent directory is not writable
      */
     public static function make(string $dir, bool $recursive = true): bool
     {
@@ -230,6 +231,10 @@ class Dir
 
         if (is_dir($dir) === true) {
             return true;
+        }
+
+        if (is_file($dir) === true) {
+            throw new Exception(sprintf('A file with the name "%s" already exists', $dir));
         }
 
         $parent = dirname($dir);
@@ -254,7 +259,7 @@ class Dir
      * @param string $dir The path of the directory
      * @param string $format
      * @param string $handler
-     * @return int
+     * @return int|string
      */
     public static function modified(string $dir, string $format = null, string $handler = 'date')
     {

@@ -1,0 +1,13 @@
+Title: /pages/:id/title
+----
+Info: PATCH
+----
+Intro: Change the page title
+----
+Auth: pages.changeTitle
+----
+Text:
+
+## Patch parameters
+
+(docs: api/page-title-data)

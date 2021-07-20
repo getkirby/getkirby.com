@@ -1,40 +1,50 @@
-<?php snippet('header', [ 'background' => 'dark' ]) ?>
+<?php layout('article') ?>
 
-  <main class="issue-page | main" id="maincontent">
-    <article>
+<?php slot('sidebar') ?>
+<style>
+  .with-sidebar {
+    grid-gap: 9rem;
+  }
+</style>
 
-      <!-- # Hero Section -->
+<nav>
+  <div class="mb-12">
+    <p class="h1 color-gray-400 mb-1"><a href="/kosmos">Kosmos</a></p>
+    <p>&nbsp;</p>
+  </div>
 
-      <header class="issue-hero | hero | -align:center">
-        <h1 class="-mb:0">
-          <a href="<?= url('kosmos') ?>">Kirby Kosmos</a><br>
-        </h1>
-        <nav class="issue-nav h1">
-          <?php if ($next = $page->nextListed()): ?>
-          <a class="issue-nav-button issue-nav-next" aria-label="Next issue" href="<?= $next->url() ?>"><?php icon('chevron-left') ?></a>
-          <?php else: ?>
-          <span class="issue-nav-button issue-nav-next"><?php icon('chevron-left') ?></span>
-          <?php endif ?>
+  <div class="sticky" style="--top: var(--spacing-12)">
+    <?php if ($prev = $page->prevListed()): ?>
+    <section class="mb-12">
+      <h2 class="h2 mb-6">Previous</h2>
+      <?php snippet('templates/kosmos/issue', ['issue' => $prev]) ?>
+    </section>
+    <?php endif ?>
 
-          <span class="issue-nav-index"><?= $page->uid() ?></span>
+    <?php if ($next = $page->nextListed()): ?>
+    <section class="mb-12">
+      <h2 class="h2 mb-6">Next</h2>
+      <?php snippet('templates/kosmos/issue', ['issue' => $next]) ?>
+    </section>
+    <?php endif ?>
+  </div>
+</nav>
+<?php endslot() ?>
 
-          <?php if ($prev = $page->prevListed()): ?>
-          <a class="issue-nav-button issue-nav-prev" aria-label="Previous issue" href="<?= $prev->url() ?>"><?php icon('chevron-right') ?></a>
-          <?php else: ?>
-          <span class="issue-nav-button issue-nav-prev"><?php icon('chevron-right') ?></span>
-          <?php endif ?>
-        </nav>
-      </header>
+<?php slot('header') ?>
+<header class="mb-12">
+  <h1 class="h1 mb-1">Episode <?= $page->slug() ?></h1>
+  <date><?= $page->date()->toDate('d M Y') ?></date>
+</header>
+<?php endslot() ?>
 
-      <!-- # Article Content -->
-      <div class="issue-body">
-        <div class="text">
-          <?= $page->text()->kt()->anchorHeadlines() ?>
-        </div>
-      </div>
+<?php slot('toc') ?>
+<?php snippet('toc', ['title' => 'In this episode']) ?>
+<?php endslot() ?>
 
-    </article>
-
-  </main>
-
-<?php snippet('footer', ['theme' => 'dark']) ?>
+<?php slot('footer') ?>
+<footer>
+  <h2 class="h2 mb-6">Join 3,000+ readers</h2>
+  <?php snippet('templates/kosmos/form') ?>
+</footer>
+<?php endslot() ?>

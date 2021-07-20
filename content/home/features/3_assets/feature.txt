@@ -1,7 +1,0 @@
-Title: Asset management
-
-----
-
-Text: Kirby stores media files in the same folder as the page content, not in a giant media library. Never lose track of pictures or other items again.
-
-

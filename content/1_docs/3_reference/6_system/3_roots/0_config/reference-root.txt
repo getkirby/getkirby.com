@@ -1,5 +1,0 @@
-Title: config
-
-----
-
-Excerpt: Returns the root of the config folder.

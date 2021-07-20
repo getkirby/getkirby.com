@@ -1,0 +1,39 @@
+Title: Libraries
+----
+
+Intro:
+
+The Panel bundles a few common libraries that also can be used by plugins.
+
+----
+
+Text:
+
+## How to access libraries
+
+The Panel exposes all shared libraries via `this.$library`:
+
+```js
+// example in the Vue component of a custom field
+
+panel.plugin("your/date-display-field", {
+  fields: {
+    "date-display": {
+      // …
+      computed: {
+        currentDate() {
+          return this.$library.dayjs().format("DD/MM/YYYY");
+        }
+      }
+      // …
+    }
+  }
+});
+```
+
+## Available libraries
+
+| Library | Description |
+|--|--|
+|`this.$library.autosize` |Automatically adjust textarea height to fit text. <br><a href="http://jacklmoore.com/autosize" class="arrow-link">Documentation ›</a>|
+|`this.$library.dayjs` |Parse, validate, manipulate, and display dates and times. <br><a href="https://github.com/iamkun/dayjs" class="arrow-link">Documentation ›</a>|

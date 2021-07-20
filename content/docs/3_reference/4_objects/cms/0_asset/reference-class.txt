@@ -1,0 +1,35 @@
+Title: $asset
+
+----
+
+Class: Kirby\Cms\Asset
+
+----
+Since: 3.0.2
+
+----
+Text:
+
+## Details
+
+You can create a new Asset object via the `asset()` helper or via the class constructor:
+
+### Via the helper
+
+```php
+$asset = asset('assets/images/logo.svg');
+```
+
+### Via the constructor
+
+```php
+$asset = new Asset('assets/images/logo.svg');
+```
+
+With the object defined, you can then start calling the class's methods:
+
+```php
+if ($asset->exists()) {
+    echo $asset->width();
+}
+```

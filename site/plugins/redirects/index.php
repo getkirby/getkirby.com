@@ -6,10 +6,10 @@ use Kirby\Http\Router;
  * Plugin creates redirect routes (using the `go()` helper) that only
  * take over if no actual page/route has been matched.
  *
- * The rredirects get defined in `site/config/redirects.php` in an array
+ * Redirects are defined in `site/config/redirects.php` as an array
  * with the old pattern as key and the target page/URL as value. Placeholders
  * can be used in the key and referenced via $1, $2, $3 in the target string.
- * Instead of a target string, a callback function returning that stirng can
+ * Instead of a target string, a callback function returning that string can
  * also be used.
  *
  * @author    Nico Hoffmann <nico@getkirby.com>

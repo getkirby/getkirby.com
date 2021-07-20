@@ -1,0 +1,16 @@
+Title: /system/install
+----
+Info: POST
+----
+Intro: Install the initial account
+----
+Text:
+
+## Post parameters
+
+(docs: api/user-create-data)
+
+<info>
+This endpoint is deactivated as soon as the first account is installed
+</info>
+

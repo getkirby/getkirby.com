@@ -1,0 +1,27 @@
+Title: Validators
+
+----
+Text:
+
+Validators are registered with the `validators` extension. The validators extension accepts an array of validators where the key is the name of the validator and the value a callback function that receives the value as parameter and returns a boolean.
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('your/plugin', [
+  'validators' => [
+    'isGreen' => function ($value) {
+      return V::in($value, ['green','lightgreen', 'darkgreen', 'mediumgreen']);
+    }
+  ]
+]);
+```
+
+In your templates, you can now check if the value is in the given array of green values:
+
+```php "/site/templates/default.php"
+$input = 'lightgreen';
+if(V::isGreen($input)) {
+  echo 'Yay, valid!';
+} else {
+  echo 'Oh no, not valid';
+}
+```

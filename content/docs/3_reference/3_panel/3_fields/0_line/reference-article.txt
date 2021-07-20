@@ -1,0 +1,48 @@
+Title: Line
+
+----
+
+Intro:
+
+Draws a horizontal line to separate fields
+
+----
+
+Guide: blueprints/fields
+
+----
+
+Text:
+
+Sometimes it can be helpful to visually seperate the form into different sections. The line field is perfect here. It will draw a horizontal rule with enough white space around it to separate sets of fields nicely.
+
+(image: line.png)
+
+## Example
+
+```yaml
+fields:
+  line:
+    type: line
+```
+
+If you want to add multiple lines to your form, make sure that the names for each field are unique:
+
+```yaml
+fields:
+
+  …
+
+  line-a:
+    type: line
+
+  …
+
+  line-b:
+    type: line
+
+  …
+
+  line-c:
+    type: line
+```

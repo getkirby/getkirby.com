@@ -1,0 +1,129 @@
+Title: Page
+
+----
+
+Guide: blueprints/presets#available-presets__single-page-page
+
+----
+
+Intro: The Page preset simplifies the setup for standard pages with form fields, optional subpages and files.
+
+----
+
+Text:
+
+## Basic setup
+
+This allows you to create a very basic blueprint like this:
+
+```yaml
+title: Page preset example
+preset: page
+```
+
+This simple blueprint creates an empty main section and a sidebar with a files and a pages section.
+
+(image: page-empty.png)
+
+You can now extend this basic preset by adding as many fields as you like:
+
+```yaml
+title: Default
+preset: page
+
+fields:
+  intro:
+    type: textarea
+    size: small
+  text:
+    type: textarea
+    size: small
+```
+
+### Empty
+(image: page-setup.png)
+
+### Filled
+(image: page-filled.png)
+
+And you can of course extend this basic setup in many ways.
+
+## No files or pages section
+
+If you don't want a files or pages section, set either option to false in the page options:
+
+No pages section:
+
+```yaml
+pages: false
+```
+
+No files section:
+
+```yaml
+files: false
+```
+
+## Extend files/pages sections
+
+You can extend the pages and files sections with the options available for (link: docs/reference/panel/sections/pages#section-properties text: pages sections) and (link: docs/reference/panel/sections/files#section-properties text: files sections).
+
+### Pages section
+
+```yaml
+pages:
+  template: default
+  max: 10
+  min: 1
+```
+
+### Files section
+
+```yaml
+files:
+  template: image
+  min: 4
+  max: 8
+```
+
+## Overwrite the sidebar
+
+You can also overwrite the sidebar column:
+
+```yaml
+#  Only an image section
+sidebar:
+  images:
+    extends: sections/images
+```
+<info>
+In this example, we extend an existing files section which we have defined in `/site/blueprints/sections/images.yml`. Instead of extending a existing files section, you can also define a complete (link: docs/guide/blueprints/layout text: files section) here.
+</info>
+
+
+```yaml
+# Image section and additional fields
+sidebar:
+  meta:
+    type: fields
+    fields:
+      date:
+        type: date
+        time: true
+        default: now
+      author:
+        type: users
+      tags:
+        type: tags
+        options: query
+        query:
+          fetch: site.tags.toStructure.sortBy("name", "asc")
+          text: "{{ structureItem.name }}"
+          value: "{{ structureItem.value }}"
+  images:
+    extends: sections/images
+```
+
+<info>
+The main column can only take fields, the sidebar can have multiple sections of different types. Completely custom layouts are possible with layout blueprints.
+</info>

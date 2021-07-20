@@ -26,7 +26,7 @@ Happy New Year! Hope you had a relaxing break over the holidays and feel recharg
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility there are hardly any limits to what you can create with Kirby.
 
-(screenshot: hid.png)
+(image: hid.png)
 
 [HID](https://human-interface.de/en) made by [JUNO](https://www.juno-hamburg.com/)
 
@@ -34,13 +34,13 @@ Websites created with Kirby out in the wild are always a great source of inspira
 
 On Tuesday, we published the Kirby 3.5.1 release candidate. Help us test it before the final release next Tuesday. [Kirby 3.5.1](https://github.com/getkirby/kirby/releases/tag/3.5.1-rc.1) comes with a lot of enhancements, fixes and some new features:
 
-New blocks navigation in the blocks drawerExtendable settings in the Layout fieldSupport for blocks in field queries 
+New blocks navigation in the blocks drawerExtendable settings in the Layout fieldSupport for blocks in field queries
 
 ## (Re)watch the Kirby 3.5 show
 
 (columns…)
 
-(screenshot: kirby-show.png)
+(image: kirby-show.png)
 
 ++++
 

@@ -43,10 +43,10 @@ Important: For everyone who is still working on a Kirby 2 project and hasn't got
 
 ## Kirby in the Wild
 
-(picture: berlin-by-food.png)
+(image: berlin-by-food.png)
 [Berlin by Food](https://berlinbyfood.eu)
 
-(picture: das-feministische-archiv.png)
+(image: das-feministische-archiv.png)
 [FFBIZ - the feminist archive](https://www.das-feministische-archiv.de)
 
 ##Kirby Plugins

@@ -1,0 +1,29 @@
+Text:
+
+## Examples
+
+```php
+<p><?= esc('untrusted data') ?></p>
+```
+
+```php
+<img alt="<?= esc($alt, 'attr') ?>" src="/your-image.jpg" />
+```
+
+```php
+<section style="--columns: <?= esc($columns, 'css')">
+...
+</section>
+```
+
+```php
+<script>
+let yourVariable = "<?= esc($variable, 'js') ?>";
+
+// ...
+</script>
+```
+
+```php
+<iframe src="https://map.example.com/?lat=<?= esc($lat, 'url') ?>&lon=<?= esc($lon, 'url') ?>"></iframe>
+```

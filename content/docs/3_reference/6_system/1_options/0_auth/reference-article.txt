@@ -1,0 +1,195 @@
+Intro: Set options for login via the Panel and the API
+
+----
+Text:
+
+## Brute-force protection
+
+The following options configure how fast Kirby's (link: docs/guide/security#passwords text: login brute-force protection) gets activated and how long it takes until the triggered protection is disabled again.
+
+### Number of trials
+
+You can set the number of wrong trials per timeout period (see below) before login gets blocked for the current IP address and user (since v3.2.3). The default setting is 10.
+
+```php
+return [
+  'auth' => [
+    'trials' => 10
+  ]
+];
+```
+
+### Timeout
+
+You can also set the timeout in seconds for the period of time against which the number of trials is counted. The default is 3600 (one hour). After the timeout is over, login for the current IP address and user is possible again.
+
+```php
+return [
+  'auth' => [
+    'timeout' => 3600
+  ]
+];
+```
+
+## Login methods
+
+<since v="3.5.0">
+The `auth.methods` option controls the available login methods for the Panel and the API.
+
+The available options are:
+
+| Name | Explanation |
+| ---- | ----------- |
+| `password` | Login with email and password (default) |
+| `code` | Passwordless login with just the email address and a code |
+| `password-reset` | Password reset via a code |
+
+You can read more about the options in the (link: docs/guide/authentication/login-methods#available-methods text: guide). The options can be combined like in the following examples.
+
+<info>
+All login methods except the default `password` method need a working email transport configuration. Otherwise verification emails cannot be sent. Find out more about **(link: /docs/reference/system/options/email#email-transport text: how to configure your email transport)**.
+</info>
+
+### Login via code
+
+If you want to prevent login via password completely, you can set the login methods option to `code`. The default login via password will be disabled.
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'auth' => [
+        'methods' => 'code'
+    ]
+];
+```
+
+(image: login.png)
+
+### Login via code & login via password
+
+You can also combine login via code and login via password. The `password-reset` method is then no longer available.
+
+**The first method in the array will be the default login method.**
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'auth' => [
+        'methods' => ['code', 'password']
+    ]
+];
+```
+
+(image: email-and-password.png)
+
+### Password reset
+
+To enable the password reset form, you can combine the default `password` login method with the `password-reset` method:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'auth' => [
+        'methods' => ['password', 'password-reset']
+    ]
+];
+```
+
+(image: password-reset.png)
+
+### Two-step or two-factor authentication
+
+To enable two-step/two-factor authentication for your logins, you can pass the `2fa` option to the `password` method in an array.
+
+The default `2fa` mode will ask users for their email and password first and then send a verification email with an additional code that they have to enter afterwards to verify their login.
+
+This is a two-step authentication as it relies on the password to the email account being secure. If you want even more security, you can use (link: docs/reference/plugins/extensions/auth-challenges text: auth challenge plugins) for challenges like TOTP, SMS or hardware tokens. The login flow is the same, but the additional login code then gets verified by the plugin.
+
+Two-factor/two-step authentication is *not* compatible with the `code` or `password-reset` options as logging in via just a code would circumvent the added `2fa` security.
+
+```php
+<?php
+
+return [
+    'auth' => [
+        'methods' => [
+            'password' => ['2fa' => true]
+        ]
+    ]
+];
+```
+
+(image: 2fa.png)
+
+## Authentication challenges
+
+Once the user requests a login code or a password reset code, an authentication challenge is created. Kirby by default ships with an email challenge where the code is sent via email. Additional challenges can be added by (link: docs/reference/plugins/extensions/auth-challenges text: auth challenge plugins).
+
+The challenges can be configured with the following options:
+
+### Code timeout
+
+The timeout controls how long a generated login code is valid. The default is 10 minutes.
+
+```php
+<?php
+
+return [
+    'auth' => [
+        'methods'   => ['code', 'password'],
+        'challenge' => [
+            'timeout' => 5 * 60 // 5 minutes
+        ]
+    ]
+];
+```
+
+### Email options
+
+You can customize the sender and the subject of the code emails:
+
+```php
+<?php
+
+return [
+    'auth' => [
+        'methods'   => ['code', 'password'],
+        'challenge' => [
+            'timeout' => 5 * 60, // 5 minutes
+            'email' => [
+                'from'     => 'mail@example.com',
+                'fromName' => 'My example project',
+                'subject'  => 'Login code'
+            ]
+        ]
+    ]
+];
+```
+
+<info>
+If you want to customize the emails even more, take a look how to (link: docs/guide/authentication/login-methods#email-templates text: customize the email templates) in the guide.
+</info>
+
+### Challenge priority
+
+If multiple auth challenges are installed, you can define the priority of the challenges, i.e. which challenges are tried in which order:
+
+```php
+<?php
+
+return [
+    'auth' => [
+        'challenges' => ['totp', 'email']
+    ]
+];
+```
+
+A challenge will be skipped if it isn't available in general or for the user who tries to log in (e.g. a TOTP challenge needs a prior registration, an SMS challenge needs the mobile number etc.).
+
+The `email` challenge is always available as it doesn't need additional configuration (only in some cases the SMTP options). It is also enabled by default if no custom priorities are defined.
+
+If none of the configured challenges is available, Kirby will "fake" the last configured challenge to avoid leaking security-relevant information (e.g. whether the user exists). In debug mode, there will be a clear error message instead.
+</since>

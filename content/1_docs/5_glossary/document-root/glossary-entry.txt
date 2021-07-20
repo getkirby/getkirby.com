@@ -1,7 +1,0 @@
-Title: Document root
-
-----
-Entry:
-
-The folder on a web server that holds the web pages for a specific website/domain. Also called "docroot". Typical folder names are for example "www", "public_html" or "htdocs".
-

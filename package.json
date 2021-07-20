@@ -1,16 +1,18 @@
 {
   "name": "getkirby.com",
-  "version": "3.0.0",
   "description": "The entire getkirby.com website.",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "build": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "lint": "./node_modules/.bin/stylelint ./src/scss/**/*.scss && ./node_modules/.bin/eslint ./src/js/",
-    "backstop-config": "./scripts/backstop-config",
-    "backstop-reference": "npm run build && backstop reference",
-    "backstop-test": "npm run build && backstop test",
-    "backstop-report": "backstop openReport"
+    "build": "npm run css && npm run js",
+    "css": "postcss --replace assets/css/**",
+    "js": "uglifyjs-folder assets/js --output assets/js --each --extension .js --config-file uglify.json"
+  },
+  "devDependencies": {
+    "cssnano": "^5.0.6",
+    "postcss": "^8.3.5",
+    "postcss-cli": "^8.3.1",
+    "postcss-import": "^14.0.0",
+    "uglifyjs-folder": "^3.0.0"
   },
   "repository": {
     "type": "git",
@@ -21,56 +23,5 @@
   "bugs": {
     "url": "https://github.com/getkirby/getkirby.com/issues"
   },
-  "homepage": "https://github.com/getkirby/getkirby.com#readme",
-  "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "backstopjs": "^3.8.8",
-    "browser-sync": "^2.26.12",
-    "browser-sync-webpack-plugin": "^2.2.2",
-    "cross-env": "^5.2.0",
-    "eslint": "^5",
-    "extend": "^3.0.2",
-    "laravel-mix": "^2.1.14",
-    "postcss-calc": "^7",
-    "stylelint": "^9.10.1",
-    "stylelint-config-standard": "^18.2.0",
-    "stylelint-order": "^2.1.0",
-    "stylelint-scss": "^3.5.4"
-  },
-  "dependencies": {
-    "algoliasearch": "^3.32.1",
-    "awesomplete": "^1.1.4",
-    "body-scroll-lock": "^2.6.1",
-    "clipboard": "^2",
-    "es6-promise": "^4.2.6",
-    "focus-visible": "^4.1.5",
-    "lazysizes": "^5.2.1-rc1",
-    "list.js": "^1.5.0",
-    "loadjs": "^3.6.1",
-    "respimage": "^1.4.2",
-    "smoothscroll-polyfill": "^0.4.4",
-    "svgxuse": "^1.2.6",
-    "tippy.js": "^4.2.1"
-  },
-  "eslintConfig": {
-    "root": true,
-    "parser": "babel-eslint",
-    "env": {
-      "browser": true,
-      "es6": true
-    },
-    "extends": [
-      "eslint:recommended"
-    ],
-    "rules": {
-      "quotes": [
-        "error",
-        "double",
-        {
-          "avoidEscape": true
-        }
-      ]
-    }
-  }
+  "homepage": "https://github.com/getkirby/getkirby.com#readme"
 }

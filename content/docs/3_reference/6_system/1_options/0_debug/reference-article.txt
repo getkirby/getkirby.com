@@ -1,0 +1,25 @@
+Intro: Enables/disables PHP errors
+
+----
+
+Text:
+
+A quick way to turn on/off PHP errors.
+
+```php
+return [
+    'debug'  => true
+];
+```
+
+<alert>
+Make sure to disable `debug` mode in production! Displaying PHP errors on a public server can be a serious security risk: 
+
+- Error messages are displayed with detailed information about the code structure (e.g. file path, class, method)
+- With Whoops enabled, there will be even more detailed information about the code structure
+- Detailed error messages for login failures could leak information to attackers
+
+In a production environment, always log errors to your PHP error logs.
+</alert>
+
+(screencast: https://www.youtube.com/watch?v=GrBbuwRSuMA title: Debug mode text: Kirby's debug mode is super helpful for finding mistakes in your templates, snippets or other parts of your project.)

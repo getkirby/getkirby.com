@@ -2,8 +2,12 @@ Title: Marc Thiele
 
 ----
 
-Text: Quick. Well documented. Best support. With Kirby a basic site setup is done within 5 minutes. Brilliant.
+Text: Fast. Well documented. Best support. With Kirby a basic site setup is done within 5 minutes. Brilliant.
 
 ----
 
-Url: https://marcthiele.com
+Website: https://beyondtellerrand.com
+
+----
+
+Bio: Organizer of @btconf

@@ -1,0 +1,5 @@
+Auth: files.create
+
+----
+
+Properties: $props|Kirby\Cms\File

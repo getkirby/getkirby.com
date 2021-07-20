@@ -1,0 +1,159 @@
+Title: How to migrate users
+
+----
+
+Text:
+
+<info>
+Migrating user accounts between version 2 and 3 is no trivial task and problems can occur. If you only have a few accounts, **consider creating them from scratch**. If that is not an option, the following instructions are a starting point to moving them over.
+</info>
+
+## A new approach to user accounts
+The account structure differs significantly from version 2. In Kirby 3, accounts still live in `/site/accounts`. However, each account consists of a folder (named with a hash of its ID) and three files:
+
+```filesystem
+yMr6qjWF/
+  .htpasswd
+  index.php
+  user.txt
+```
+
+The `.htpasswd` is used to store the encrypted password. The `index.php` contains system-critical data such as the email address, user name, language and role. Finally, the `user.txt` stores any additional user data.
+
+## Migrate your accounts
+
+To migrate your Kirby 2 user accounts to Kirby 3, you need to follow these steps:
+
+1. **Backup** all Kirby 2 account files from `/site/accounts`. Things can go wrong. We do not want you to lose this important data.
+2. **Create (link: docs/guide/users/roles#creating-your-own-roles text: user blueprints)** for every (link: docs/guide/users/roles text: user role). If you do not create these first, all user accounts will be assigned the role `nobody`.
+3. Remove the `.logins` and `index.html` files from `/site/accounts`. Only your Kirby 2 account files should be left.
+4. Put the following **`migrate.php` script** into your document root next to the `index.php` and run it by visiting `http://yourdomain.com/migrate.php`.
+5. Delete the script.
+
+<warning>
+Kirby 3 requires passwords to be at least 8 characters long. If a password from Kirby 2 is shorter, users will not be able to log in with these old passwords. In those cases, please generate the hash of a new password with the `User::hashPassword()` method and write it manually to the corresponding `.htpasswd`.
+</warning>
+
+## The `migrate.php` script
+
+```php "/migrate.php"
+<?php
+
+require __DIR__ . '/kirby/bootstrap.php';
+
+$kirby = new Kirby;
+$dir   = $kirby->root('accounts');
+
+// authenticate as almighty
+$kirby->impersonate('kirby');
+
+// loop through each K2 account file
+foreach (Dir::files($dir) as $account) {
+
+    // read K2 account file
+    $data  = Data::read($dir . '/' . $account, 'yaml');
+
+    // prepare data to be processed
+    $name        = $data['username'];
+    $email       = $data['email'];
+    $password    = $data['password'];
+    $role        = $data['role'];
+    $language    = $data['language'];
+
+    unset(
+        $data[0],
+        $data['username'],
+        $data['email'],
+        $data['password'],
+        $data['role'],
+        $data['language'],
+        $data['history']
+    );
+
+    // create new K3 user account
+    $user = $kirby->users()->create([
+        'email'    => $email,
+        'name'     => $name,
+        'role'     => $role,
+        'language' => $language,
+        'content'  => $data
+    ]);
+
+    // write K2 password hash to .htpasswd
+    F::write($dir . '/' . $user->id() . '/.htpasswd', $password);
+
+    // delete K2 account file
+    F::remove($dir . '/' . $account);
+
+    echo 'User migrated: ' . $user->email() . '<br>';
+}
+```
+
+## Update user fields
+
+If you have used user fields in Kirby 2 to store e.g. the author of a blog post, you will need to update these field values if you want to use them with the (link: docs/reference/panel/fields/users text: new `users` field). The following script helps you to update the fields after you have migrated all user accounts.
+
+<warning>
+Before you run this script, make sure to remove all title fields from your blueprints, otherwise your titles will be deleted.
+</warning>
+
+```php "/update-user-fields.php"
+<?php
+
+require __DIR__ . '/kirby/bootstrap.php';
+
+$kirby = new Kirby;
+
+// ATTENTION:
+// If running into timeouts, change the following
+// line to a smaller pages collection
+$pages = $kirby->site()->index();
+
+// authenticate as almighty
+$kirby->impersonate('kirby');
+
+// loop through each page
+foreach ($pages as $page) {
+
+    // get all fields for this page
+    $fields = $page->blueprint()->fields();
+
+    // loop through each field
+    foreach ($fields as $field) {
+
+        // only deal with user/s fields
+        if (in_array($field['type'], ['users', 'user'])) {
+
+            // get old username
+            $name = $page->{$field['name']}();
+
+            if ($name->isNotEmpty()) {
+
+                // find user by old username
+                if ($user = $kirby->users()->findBy('username', $name)) {
+
+                    // update with email as identifier
+                    $page->update([
+                        $field['name'] => Yaml::encode([
+                            $user->email()
+                        ])
+                    ]);
+
+                } else {
+                    echo 'User "' . $name . '" could not be found.<br>';
+                }
+            }
+        }
+    }
+}
+```
+
+----
+
+Description: Move your Kirby 2 user accounts over to Kirby 3.
+
+----
+
+Authors:
+
+- authors/nico-hoffmann

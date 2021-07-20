@@ -31,29 +31,27 @@ Save the date: The next hands-on [Kirby Workshop](https://beyondtellerrand.com/e
 
 ## Kirby in the Wild
 
-(picture: good-guys-brew.jpg)
+(image: good-guys-brew.jpg)
 
 [Good Guys Brew](https://www.goodguysbrew.com)
 Brewery
 
 (columns…)
 
-(picture: svgeez.jpg)
+(image: svgeez.jpg)
 
 ++++
 
 [SVGeez](https://svgeez.com)
 Free SVG resources for your projects and at the same time a website made with Kirby.
 
-(…columns)
-
-(columns…)
+++++
 
 [The Whale](https://thewhale.cc), a new project by Gilles Vauvarin, not only brings you weekly news but is also one of the first few projects out in the wild built on [Kirby&nbsp;3](https://getkirby.com/next) beta.
 
 ++++
 
-(picture: the-whale.jpg)
+(image: the-whale.jpg)
 
 (…columns)
 
@@ -75,7 +73,7 @@ Sara Soueidan shares an article that sums up [different ways to mark up accordio
 
 (columns…)
 
-(picture: picular.jpg)
+(image: picular.jpg)
 
 ++++
 

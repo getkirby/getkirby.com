@@ -28,7 +28,7 @@ This episode starts with a big Thank You. Thank you, Jens Törnell, for your wor
 Have you always wanted to learn Kirby 3 right from its creator? There are still some seats left for the [next Kirby Workshop](https://beyondtellerrand.com/events/berlin-2018/workshops/kirby-cms) on November 5, 2018 in Berlin. Come and share your experiences with other Kirby devs and have a fun time learning. All levels welcome.
 
 ## Kirby in the Wild
-(picture: cruelpark.jpg)
+(image: cruelpark.jpg)
 [Cruelpark](https://cruelpark.com)
 A Film
 

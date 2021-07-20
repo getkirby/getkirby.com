@@ -1,0 +1,41 @@
+Title: $request
+
+----
+
+Class: Kirby\Http\Request
+
+----
+
+Text:
+
+## How to get a `$request` object
+
+The `$request` object is available via the `$kirby` object:
+
+```php
+$request = $kirby->request();
+```
+
+## Examples
+
+With the object in place, you have access to all the methods listed above.
+
+### Get a specific variable from the query string
+
+```php
+$filter = $request->query()->filter();
+```
+
+### Get the Params object
+
+The `$params` object contains all  URL parameters
+
+```php
+$params = $request->params();
+```
+
+### Get the request method
+
+```php
+$method = $request->method();
+```

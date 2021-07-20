@@ -10,7 +10,6 @@ Category: integrations
 
 ----
 
-Description: Add Github-style badges to your site with the (badge: …) Kirbytag
+Description: Add GitHub-style badges to your site with the (badge: …) Kirbytag
 
 ----
-

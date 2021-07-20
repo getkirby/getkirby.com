@@ -28,19 +28,19 @@ Every month, a lot of great Kirby-powered websites are published. As always, we 
 
 (columns…)
 
-(picture: radio-garden.jpg link: http://radio.garden)
+(image: radio-garden.jpg link: http://radio.garden)
 (link: http://radio.garden text: Radio Garden)
 Radio Stations
 
 ++++
 
-(picture: oblik-designstudio.jpg link: http://oblik.works)
+(image: oblik-designstudio.jpg link: http://oblik.works)
 (link: http://oblik.works text: Oblik)
 Agency
 
 ++++
 
-(picture: lostboy.jpg link: http://lostboyworld.com)
+(image: lostboy.jpg link: http://lostboyworld.com)
 (link: http://lostboyworld.com text: Lost Boy)
 Film
 

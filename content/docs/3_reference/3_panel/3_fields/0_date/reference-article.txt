@@ -1,0 +1,162 @@
+Title: Date
+
+----
+
+Intro:
+
+A date picker field
+
+----
+
+Guide: blueprints/fields
+
+----
+
+Text:
+
+The date field generates a simple input with a nice date picker. It can be setup to display and store dates.
+
+(image: date.png)
+
+## Example
+
+```yaml
+fields:
+  published:
+    label: Published on
+    type: date
+```
+
+## Field properties
+
+(field-options: date)
+
+## Display format
+
+<since v="3.5.0">
+You can define the format of the date via the `display` option:
+
+```yaml
+display: YYYY-MM-DD
+display: DD.MM.YYYY
+display: MM/DD/YYYY
+```
+
+| Token | Output | Description |
+|--|--|--|
+| `YY` | 18 | Two-digit year
+| `YYYY` | 2018 | Four-digit year
+| `M` | 1-12 | Month
+| `MM` | 01-12 | Month, 2-digits
+| `MMM` | Jan-Dec | Abbreviated month name
+| `MMMM` | January-December | Full month name
+| `D` | 1-31 | Day of the month
+| `DD` | 01-31 | Day of the month, 2-digits
+
+The field will parse any input by matching it to the display format. `display: DD.MM.YYYY` will match an input of `01.05.2015`. It will also match partials or slight variations, e.g. `01.05.`, `1.5.2015`, `01.05.15`. The base for partials will be the current year, month...
+</since>
+
+## Step
+
+<since v="3.5.0">
+The `step` option allows you to define intervals of valid values. Any input to the field gets rounded to the nearest interval step.
+
+```yaml
+step:
+  unit: day
+  size: 2
+
+# only unit, size will default to `1`
+step: month
+
+# only size, unit will default to `day`
+step: 2
+```
+
+While this is more useful in the [`time` field](/docs/reference/panel/fields/time) (e.g. rounding to 5 minute steps), in the context of the `date` field this can be used, e.g. to let users only select month and year:
+
+```yaml
+myMonth:
+  type: date
+  display: MMM YYYY
+  step: month
+```
+
+<info>
+Keep in mind that the full date is still [stored in the content file](#how-to-use-in-templates-snippets), e.g. `2020-05-01`. You need to adapt your templates as well to only show month and year, e.g. `$page->myMonth()->toDate('F Y')`.
+</info>
+</since>
+
+## Time settings
+
+To enable time imput, set the `time` option to `true`:
+
+```yaml
+fields:
+  published:
+    label: Published on
+    type: date
+    time: true
+```
+
+You can also pass all [`time` field](/docs/reference/panel/fields/time) options to the time input:
+
+```yaml
+fields:
+  published:
+    label: Published on
+    type: date
+    time:
+      step: 1 # 1 minute steps
+```
+
+
+<since v="3.5.0">
+If you want to define a `display` option, define it for date and time input separately:
+
+```yaml
+fields:
+  published:
+    label: Published on
+    type: date
+    display: MM/DD/YYYY
+    time:
+      display: h.mm a
+```
+</since>
+
+## Default value
+
+The default value can either be set to a specific date (e.g. `2020-05-01`) or as `today`.
+
+```yaml
+fields:
+  published:
+    label: Published on
+    type: date
+    default: today
+```
+
+## How to use in templates/snippets
+
+The field stores its value in a standardized format in the content file: `Y-m-d` for only dates, `Y-m-d H:i:s` for date and time combined. To convert the value to a date object, use the [`toDate()`](/docs/reference/templates/field-methods/to-date) method.
+
+Without a date format, the `toDate()` field method renders a UNIX timestamp:
+
+```php
+<?= $page->published()->toDate() ?>
+```
+
+Use a date format to render the date in your desired (link: https://www.php.net/manual/en/function.date.php text: output format):
+
+
+```php
+<?= $page->published()->toDate('Y-m-d') ?>
+```
+
+
+If you have set the (link: docs/reference/system/options/date text: date handler) to `strftime` in your config, use the corresponding (link: https://www.php.net/manual/en/function.strftime.php text: format syntax):
+
+```php
+<?= $page->published()->toDate('%Y-%m-%d') ?>
+```

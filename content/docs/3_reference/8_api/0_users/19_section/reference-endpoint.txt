@@ -1,0 +1,11 @@
+Title: /users/:id/sections/:name
+----
+Info: GET
+----
+Intro: Retrieve a user section
+----
+Text:
+----
+Example:
+----
+Response:

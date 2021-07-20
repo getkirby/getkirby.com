@@ -1,0 +1,14 @@
+Title: /users/:id/password
+----
+Info: PATCH
+----
+Intro: Change the password
+----
+Auth: users.changePassword
+----
+Text:
+
+## Patch parameters
+
+(docs: api/user-password-data)
+

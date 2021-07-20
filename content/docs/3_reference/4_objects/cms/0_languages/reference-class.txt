@@ -1,0 +1,45 @@
+Title: $languages
+
+----
+
+Class: Kirby\Cms\Languages
+
+----
+
+Text:
+
+## Details
+
+To use the methods of the `$languages` class, you need a `$languages` object, which you get can like this:
+
+```php
+$languages = $kirby->languages();
+```
+
+With the object in place, you can now use it like this:
+
+## Examples
+
+### Find a language by code
+
+```php
+$language = $languages->find('de');
+```
+
+
+### Get the number of languages
+
+```php
+$numberOfLanguage = $languages->count();
+```
+
+### Sort languages by name
+
+```php
+$sortedLanguages = $languages->sortBy('name', 'desc');
+----
+
+Intro:
+
+The `$languages` object gives you a collection of all the languages that have been defined for your Kirby installation. The methods of this class allow you to filter, find, group, search the languages collection.
+

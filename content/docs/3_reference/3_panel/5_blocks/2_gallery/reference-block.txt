@@ -1,0 +1,9 @@
+Title: gallery
+
+----
+
+Since: 3.5.0
+
+----
+
+Intro: A list of images to create galleries of all sorts

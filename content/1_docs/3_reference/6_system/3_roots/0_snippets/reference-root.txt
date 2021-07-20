@@ -1,5 +1,0 @@
-Title: snippets
-
-----
-
-Excerpt: Returns the root of the snippets folder.

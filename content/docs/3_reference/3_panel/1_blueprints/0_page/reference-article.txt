@@ -1,0 +1,207 @@
+Title: Page blueprint
+
+----
+
+Intro: Page blueprints are located in `/site/blueprints/pages` and control the Panel setup and form fields for pages.
+
+----
+
+Guide: blueprints/introduction
+
+----
+
+Text:
+
+## Blueprint location
+
+```filesystem
+/site/blueprints/pages/
+```
+
+## Default page blueprint
+
+To create the same set of fields for all pages, you can setup a `default.yml` that is used whenever no custom page blueprint is configured.
+
+```filesystem
+/site/blueprints/pages/default.yml
+```
+
+## Title
+
+The title is required and will appear in the list of selectable templates when a new page is created and multiple templates are available.
+
+```yaml
+title: Article
+```
+
+### Translated titles
+
+The title can be translated by passing an array of translations with the matching language code as key:
+
+```yaml
+title:
+	en: Article
+	de: Artikel
+```
+
+## Presets
+
+Presets are typical standard setups for page, pages and files, see (link: docs/guide/blueprints/presets text: presets).
+
+```yaml
+preset: page
+```
+
+## Sorting
+
+The `num` option defines which numbering scheme to use when a page is published.
+
+<info>
+Default sorting is numbering (1 to x) and doesn't need any setup.
+</info>
+
+### Alphabetical sorting by page uid
+
+```yaml
+num: zero
+```
+
+### Sorting by a custom sort number field
+
+You may use a field value, for example from a field called `customSortNumberField`, to customize the sort order:
+
+```yaml
+num: '{{ page.customSortNumberField }}'
+```
+
+The return value of the query has to be an integer which will be used for sorting. Learn more about Kirby's (link: docs/guide/blueprints/query-language text: query language).
+
+### Chronological sorting by date field
+
+If your page blueprint contains a date field, you can use that date (and, optionally time) to sort your pages chronologically. For example, for a date field named `created`, you can apply the following:
+
+#### By date
+```yaml
+num: '{{ page.created.toDate("Ymd") }}'
+```
+
+#### By datetime
+```yaml
+num: '{{ page.created.toDate("YmdHi") }}'
+```
+
+<info>
+If you use a sorting scheme other than default sorting by number, i.e. automatic sorting, manual sorting in the Panel will be disabled.
+</info>
+## Statuses
+
+With the `status` option, you define the page statuses you want to allow for the page. You can also change their label and description. This option gives you a lot of flexibility how you want to use page status in your website.
+
+<info>The `draft` status of a page can not be removed or disabled – only its label and description can be changed.</info>
+
+### Simple example
+
+```yaml
+status:
+	draft: Draft
+	listed: Published
+```
+
+### Extended example
+
+```yaml
+status:
+  draft:
+    label: Draft
+    text: The article is still in draft mode. It can only be seen by editors with Panel access.
+  unlisted:
+    label: In Review
+    text: The article is online and can be visited with the direct URL. The team must still give the final go to publish it.
+  listed:
+    label: Published
+    text: The article is online and listed in the blog
+```
+
+## Icon
+
+The icon can either be one of our (link: docs/reference/panel/icons text: own icons) or an emoji. Icons appear in page lists when no preview image is available.
+
+```yaml
+icon: page
+```
+
+### Emoji
+
+```yaml
+icon: 📚
+```
+
+## Options
+
+With options, you can control all the page actions that should or should not be available for this particular page type. The option dropdown for pages will adjust accordingly.
+
+
+| Option | Value |
+|----    | ---- |
+| `changeSlug` | `true`/`false` |
+| `changeStatus` | `true`/`false` |
+| `changeTemplate` | `false` or list of allowed template |
+| `changeTitle` | `true`/`false` |
+| `delete` | `true`/`false` |
+| `duplicate` | `true`/`false` (since v3.2.0)|
+| `preview` | `true`/`false`/template string (see below) |
+| `read` | `true`/`false` |
+| `update` | `true`/`false` |
+
+(docs: permissions/option-permissions)
+
+## Preview
+
+You can change the link of the preview button or disable it entirely with the option setting.
+
+### Disabling the preview button
+
+For some pages it makes sense to disable the preview entirely.
+
+```yaml
+options:
+  preview: false
+```
+
+### Custom link
+
+The `preview` option can also take any absolute link or a template string.
+
+#### Absolute URL
+
+```yaml
+options:
+  preview: https://preview.mysite.com
+```
+
+#### Template string
+
+You can use Kirby's powerful (link: docs/guide/blueprints/query-language text: query syntax) to create any link dynamically.
+
+```yaml
+options:
+  preview: "{{ page.parent.url }}/#{{ page.slug }}"
+```
+
+## Change templates
+
+You must define a list of compatible templates with the `changeTemplate` option to allow editors to switch between page templates.
+
+```yaml
+options:
+  changeTemplate:
+    - video-post
+    - link-post
+    - text-post
+```
+
+<info>When an editor switches templates, all fields with the same name and type will be synced. Incompatible fields will be discarded. Be aware of this step when you define the list of compatible templates.</info>
+
+## Examples
+
+You can find examples of different types of page blueprints in the (link: docs/reference/panel/samples text: samples section).

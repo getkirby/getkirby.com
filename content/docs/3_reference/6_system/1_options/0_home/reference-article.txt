@@ -1,0 +1,15 @@
+Intro: Set the name of the home page folder
+
+----
+
+Text:
+
+By default, the name of the home page folder is called `home`. This folder must be present, unless you set the home folder to another folder with this option.
+
+Example to set the ` home` folder to the `blog` folder:
+
+```php
+return [
+  'home' => 'blog'
+];
+```

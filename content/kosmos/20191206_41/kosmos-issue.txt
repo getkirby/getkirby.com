@@ -31,7 +31,7 @@ Enjoy the holidays.
 
 ## Kirby in the wild I
 
-(screenshot: art-fair-dijon.jpg)
+(image: art-fair-dijon.jpg)
 
 [Art Fair Dijon](https://art-fair-dijon.fr/en)
 
@@ -86,7 +86,7 @@ While Kirby comes with users, files and pages sections on board, custom sections
 
 ## Kirby in the wild II
 
-(screenshot: hart-magazine.jpg)
+(image: hart-magazine.jpg)
 
 [HART Magazine](https://hart-magazine.be/)
 
@@ -94,7 +94,7 @@ While Kirby comes with users, files and pages sections on board, custom sections
 
 (columns…)
 
-(screenshot: kirbysites.jpg)
+(image: kirbysites.jpg)
 
 ++++
 

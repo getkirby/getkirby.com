@@ -1,0 +1,23 @@
+Title: Empty
+
+----
+
+Intro: Null, false, or an empty string will automatically be converted to 404 error page
+
+----
+
+Text:
+
+```php "/site/config/config.php"
+return [
+  'routes' => [
+    [
+      'pattern' => 'custom/response',
+      'action'  => function () {
+        return false;
+      }
+    ]
+  ]
+];
+```
+

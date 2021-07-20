@@ -1,0 +1,5 @@
+Template: content-type
+----
+Caption: Microsite
+----
+Text: Use Kirby's brand-new layout field to create complex modular microsites and page layouts.

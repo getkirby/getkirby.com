@@ -1,13 +1,10 @@
-<?php
-
-$link   = $link ?? '#';
-$class  = $class ?? '';
-$icon   = $icon ? icon($icon, true) : '';
-$button = $button ?? false;
-
-if ($button) {
-  echo Html::button([$icon, "<span class=\"cta-text\">{$text}</span>"], ['class' => trim("cta {$class}")]);
-} else {
-  echo Html::a($link, [$icon, "<span class=\"cta-text\">{$text}</span>"], ['class' => trim("cta {$class}")]);
-}
-
+<nav class="auto-fit items-center mb-<?= $mb ?? 0 ?> <?= ($center ?? true) ? ' mx-auto' : '' ?>" style="--min: 9rem; --gap: var(--spacing-3); max-width: 20rem">
+  <?php foreach ($buttons as $btn): ?>
+  <a class="btn btn--<?= $btn['style'] ?? 'filled' ?>" href="<?= $btn['link'] ?>">
+    <?php if ($btn['icon'] ?? null): ?>
+    <?= icon($btn['icon']) ?>
+    <?php endif ?>
+    <?= $btn['text'] ?>
+  </a>
+  <?php endforeach ?>
+</nav>

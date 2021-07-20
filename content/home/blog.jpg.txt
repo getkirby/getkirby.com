@@ -1,5 +1,0 @@
-Caption: Blog
-
-----
-
-Description: Show drafts, unreviewed and published articles in a side-by-side view for your blog.

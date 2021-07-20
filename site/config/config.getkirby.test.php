@@ -1,6 +1,7 @@
 <?php
 
 return [
-    'debug' => true,
-    'referenceLookup' => false
+    'thumbs' => [
+        'bin' => '/usr/local/bin/convert'
+    ],
 ];

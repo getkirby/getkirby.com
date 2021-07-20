@@ -1,0 +1,11 @@
+Title: /users/:id/files/:filename
+----
+Info: GET
+----
+Intro: Retrieve a file
+----
+Text:
+
+## Query parameters
+
+(docs: api/file-parameters)

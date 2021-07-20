@@ -31,19 +31,19 @@ It's always inspiring to see what others are creating with Kirby. This month’s
 
 (columns…)
 
-(picture: ho36-hostel.jpg link: http://www.ho36hostels.com)
+(image: ho36-hostel.jpg link: http://www.ho36hostels.com)
 (link: http://www.ho36hostels.com text: ho36 Hostel)
 Hostel
 
 ++++
 
-(picture: buhrs.jpg link: http://www.buhrs.de)
+(image: buhrs.jpg link: http://www.buhrs.de)
 (link: http://www.buhrs.de text: Buhrs 3.0)
 Agency
 
 ++++
 
-(picture: ramon-marin.jpg link: http://ramonmarin.co.uk)
+(image: ramon-marin.jpg link: http://ramonmarin.co.uk)
 (link: http://ramonmarin.co.uk text: Ramon Marin)
 Climber & Designer
 
@@ -65,29 +65,25 @@ Sam Nabi's E-Commerce solution [Shopkit](https://shopkit.samnabi.com) is now ava
 
 ++++
 
-(picture: shopkit.jpg)
+(image: shopkit.jpg)
 
-(…columns)
-
-(columns…)
+++++
 ## Images Field
 
 The [Images field](https://github.com/medienbaecker/kirby-images) lets you drag&drop multiple images into a field, reorder them easily and even move images between multiple instances of its kind (beta). Made by Thomas Günther.
 
 ++++
 
-(picture: kirby-images.jpg)
+(image: kirby-images.jpg)
 
-(…columns)
-
-(columns…)
+++++
 ## Preview Field
 
 The [Preview](https://github.com/texnixe/kirby-preview) field shows a preview of a selected page in an iframe to allow users to copy and paste content into fields of a new page. Special preview templates can be defined (beta).
 
 ++++
 
-(picture: kirby-preview.jpg)
+(image: kirby-preview.jpg)
 
 (…columns)
 
@@ -97,37 +93,34 @@ The number of ready-to-use themes for Kirby is growing constantly. Constantin Jo
 
 (columns…)
 
-(picture: tempo.jpg)
+(image: tempo.jpg)
 [Tempo](http://kc.konstantin.fr/tempo-theme/)
 Blog
 
 ++++
 
-(picture: mima.jpg)
+(image: mima.jpg)
 [Mima](http://kc.konstantin.fr/mima-kirby-theme/)
 Blog, Project, Personal
 
 ++++
 
-(picture: variations.jpg)
+(image: variations.jpg)
 [Variations](http://kc.konstantin.fr/variations-theme/)
 One-Pager
 
-(…columns)
-
-(columns…)
+++++
 ## Sorting & grouping
 
 Sorting and grouping of content collections is an everyday developer's task. This brand new [cookbook recipe](https://getkirby.com/docs/cookbook/sorting-and-grouping) walks you through several use cases and how to solve them using Kirby's powerful API methods.
 
 ++++
 
-(picture: sorting-and-grouping.jpg)
+(image: sorting-and-grouping.jpg)
 
-(…columns)
-(columns…)
+++++
 
-(picture: habita.jpg)
+(image: habita.jpg)
 ++++
 
 ## Case Study: Habita

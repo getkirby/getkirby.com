@@ -1,0 +1,12 @@
+Title: Code blocks
+
+----
+
+Text:
+
+```
+```php
+<?php
+// awesome code example
+?>
+```

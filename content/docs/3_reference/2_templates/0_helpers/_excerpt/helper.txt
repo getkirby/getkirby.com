@@ -1,0 +1,41 @@
+Title: excerpt($text, $length = 140, $mode = 'chars')
+
+----
+
+Intro: Creates an excerpt of any text by a given character or word length
+
+----
+
+Params: - 
+  name: $text
+  type: string
+  text:
+- 
+  name: $length
+  type: int
+  text: Length in characters/words
+- 
+  name: $mode
+  type: 'chars' or 'words'
+  text: Mode of the $length parameter
+
+----
+
+Return:
+
+type: string
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+// Limit to 300 characters
+<?= excerpt($page->text(), 300) ?>
+
+// Limit to 20 words
+<?= excerpt($page->text(), 20, 'words') ?>
+```

@@ -118,7 +118,7 @@
   "error.page.duplicate.permission": "You are not allowed to duplicate \"{slug}\"",
   "error.page.notFound": "Страницата \"{slug}\" не може да бъде намерена",
   "error.page.num.invalid": "Моля въведете валидно число за сортиране. Числата не трябва да са негативни.",
-  "error.page.slug.invalid": "Моля въведете валиден URL префикс",
+  "error.page.slug.invalid": "Please enter a valid URL appendix",
   "error.page.slug.maxlength": "Slug length must be less than \"{length}\" characters",
   "error.page.sort.permission": "Страницата \"{slug}\" не може да бъде сортирана",
   "error.page.status.invalid": "Моля изберете валиден статус на страницата",
@@ -163,6 +163,7 @@
   "error.user.password.invalid": "Моля въведете валидна парола. Тя трабва да съдържа поне 8 символа.",
   "error.user.password.notSame": "\u041c\u043e\u043b\u044f, \u043f\u043e\u0442\u0432\u044a\u0440\u0434\u0435\u0442\u0435 \u043f\u0430\u0440\u043e\u043b\u0430\u0442\u0430",
   "error.user.password.undefined": "Потребителят няма парола",
+  "error.user.password.wrong": "Wrong password",
   "error.user.role.invalid": "Моля въведете валидна роля",
   "error.user.update.permission": "Нямате права да обновите този потребител \"{name}\"",
 
@@ -371,9 +372,11 @@
   "more": "Още",
   "name": "Име",
   "next": "Next",
+  "no": "no",
   "off": "off",
   "on": "on",
   "open": "Отвори",
+  "open.newWindow": "Open in new window",
   "options": "Options",
   "options.none": "No options",
 
@@ -465,7 +468,9 @@
   "toolbar.button.file.select": "Select a file",
   "toolbar.button.file.upload": "Upload a file",
   "toolbar.button.link": "\u0412\u0440\u044a\u0437\u043a\u0430",
+  "toolbar.button.strike": "Strike-through",
   "toolbar.button.ol": "Подреден списък",
+  "toolbar.button.underline": "Underline",
   "toolbar.button.ul": "Списък",
 
   "translation.author": "Kirby екип",
@@ -517,5 +522,6 @@
   "view.users": "\u041f\u043e\u0442\u0440\u0435\u0431\u0438\u0442\u0435\u043b\u0438",
 
   "welcome": "Добре дошли",
-  "year": "Year"
+  "year": "Year",
+  "yes": "yes"
 }

@@ -1,5 +1,0 @@
-Title: Vue UI Kit
-
-----
-
-Text: Kirby’s Panel is powered by Vue. Use the full power of Vue or our Vue UI component kit to make the admin interface truly yours.

@@ -1,0 +1,51 @@
+Intro: Sets the global locale setting for PHP
+
+----
+
+Text:
+
+## Basic settings
+
+```php
+return [
+  'locale' => 'en_GB.utf-8'
+];
+```
+
+## Detailed settings
+
+```php
+return [
+  'locale' => [
+    LC_ALL      => 'tr_TR.utf-8',
+    LC_COLLATE  => 'tr_TR.utf-8',
+    LC_MONETARY => 'tr_TR.utf-8',
+    LC_NUMERIC  => 'tr_TR.utf-8',
+    LC_TIME     => 'tr_TR.utf-8',
+    LC_MESSAGES => 'tr_TR.utf-8',
+    LC_CTYPE    => 'en_US.utf-8'
+  ]
+];
+```
+
+<since v="3.5.0">
+You can also define the locale names as strings (for example if you are loading the confguration from a JSON file):
+
+```php
+return [
+  'locale' => [
+    'LC_ALL'      => 'tr_TR.utf-8',
+    'LC_COLLATE'  => 'tr_TR.utf-8',
+    'LC_MONETARY' => 'tr_TR.utf-8',
+    'LC_NUMERIC'  => 'tr_TR.utf-8',
+    'LC_TIME'     => 'tr_TR.utf-8',
+    'LC_MESSAGES' => 'tr_TR.utf-8',
+    'LC_CTYPE'    => 'en_US.utf-8'
+  ]
+];
+```
+</since>
+
+<info>
+The `LC_ALL` locale should always be set as it is used as a default locale internally in the Kirby core. Other locales can be set to override the default `LC_ALL` locale for specific use-cases.
+</info>

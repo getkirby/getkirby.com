@@ -1,0 +1,179 @@
+Title: Layout
+
+----
+
+Since: 3.5.0
+
+----
+
+Intro:
+
+A visual editor for complex multi-column layouts
+
+----
+
+Guide: blueprints/fields
+
+----
+
+Text:
+
+(image: layout.png)
+
+## Getting started
+
+By default the layout field comes with a single 1-column layout and all the default fieldsets from the Blocks field.
+
+```yaml
+fields:
+  layout:
+    type: layout
+```
+
+## Defining your own layouts
+
+Defining available layouts is simple: each layout is list of column widths. i.e. `1/2, 1/2` or `1/4, 3/4` …
+
+If the sum of the layout is greater than one, the other columns will be wrapped to the next line.
+
+```yaml
+fields:
+  layout:
+    type: layout
+    layouts:
+      - "1/1"
+      - "1/2, 1/2"
+      - "1/4, 1/4, 1/4, 1/4"
+      - "1/1, 1/3, 2/3"
+      - "1/1, 2/3, 1/3"
+      - "1/2, 1/2, 1/3, 1/3, 1/3"
+```
+
+Those layouts will then show up in the layout selector when an editor creates a new row:
+
+(image: selector.png)
+
+### Available widths
+<since v="3.5.1">
+
+The layout field supports up to 12 columns and all are listed below.
+
+- `1/1` `1/2` `1/3` `1/4` `1/6` `1/12`
+- `2/2` `2/3` `2/4` `2/6` `2/12`
+- `3/3` `3/4` `3/6` `3/12`
+- `4/4` `4/6` `4/12`
+- `5/6` `5/12`
+- `6/6` `6/12`
+- `7/12`
+- `8/12`
+- `9/12`
+- `10/12`
+- `11/12`
+- `12/12`
+</since>
+
+## Fieldsets
+
+The layout field also accepts the `fieldsets` option from the blocks field to control blocks in columns.
+
+The fieldsets setup is exactly the same. You can follow the instructions from the (link: /docs/reference/panel/fields/blocks#defining-fieldsets text: Blocks field).
+
+```yaml
+fields:
+  layout:
+    type: layout
+    layouts:
+      - "1/1"
+      - "1/2, 1/2"
+      - "1/4, 1/4, 1/4, 1/4"
+      - "1/3, 2/3"
+      - "2/3, 1/3"
+      - "1/3, 1/3, 1/3"
+    fieldsets:
+      - heading
+      - text
+      - image
+```
+
+## Layout settings
+
+It's often useful to set additional class names, IDs or even something like background colors and images for layout sections. This can be achieved with layout settings.
+
+Layout settings are defined globally. Each layout will then get a "Settings" button in its dropdown and open a settings drawer with the configured fields.
+
+```yaml
+fields:
+  layout:
+    type: layout
+    layouts:
+      - "1/1"
+      - "1/2, 1/2"
+      - "1/4, 1/4, 1/4, 1/4"
+      - "1/3, 2/3"
+      - "2/3, 1/3"
+      - "1/3, 1/3, 1/3"
+    fieldsets:
+      - heading
+      - text
+      - image
+    settings:
+      fields:
+        class:
+          type: text
+          width: 1/2
+        id:
+          type: text
+          width: 1/2
+        image:
+          label: Background image
+          type: files
+```
+
+(image: layout-settings.png)
+
+## Reusing and extending layout settings
+<since v="3.5.1">
+
+If you always use the same options in layouts and want to easily update all of them from a single file without repeating the options, you can reuse or extend the layout settings. Let's see how:
+
+**Sample settings fields**
+
+```yaml "/site/blueprints/fields/settings.yml"
+fields:
+  class:
+    type: text
+    width: 1/2
+  id:
+    type: text
+    width: 1/2
+  image:
+    label: Background image
+    type: files
+```
+
+**Simple reuse**
+
+```yaml
+fields:
+  layout:
+    type: layout
+    settings: fields/settings
+```
+
+**Extended reuse**
+
+```yaml
+fields:
+  layout:
+    type: layout
+    settings:
+      extends: fields/settings
+      fields:
+        color:
+          label: Background color
+          type: text
+          default: FFF
+```
+</since>
+
+(docs: layouts/to-layouts)

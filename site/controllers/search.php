@@ -1,33 +1,30 @@
 <?php
 
-return function () {
+return function ($kirby) {
 
-    $hitsPerPage = 50;
-    $options     = $this->option('algolia');
+    $query = trim(get('q'));
+    $area  = trim(get('area'));
 
-    if (!$options) {
-        go();
-    }
+    if (empty($query) === false) {
 
-    $pageNum = param('page');
-    $query   = trim(get('q'));
-
-    if (!empty($query)) {
-        $results = algolia()->search($query, $pageNum, [
-            'hitsPerPage'           => $hitsPerPage,
+        $params = [
+            'hitsPerPage'           => 50,
             'attributesToHighlight' => false,
             'attributesToSnippet'   => '*'
-        ]);
-    } else {
-        $results = new Collection;
-        $results = $results->paginate(10);
+        ];
+
+        if (empty($area) == false && $area !== 'all') {
+            $params['filters'] = 'area:' . $area;
+        }
+
+        $results = algolia()->search($query, param('page') ?? 1, $params);
     }
 
     return [
-        'results'     => $results,
-        'query'       => html(strip_tags($query), false),
-        'hitsPerPage' => $hitsPerPage,
-        'startNumber' => ($hitsPerPage * ($results->pagination()->page() -1) + 1),
+        'results'    => $results ?? [],
+        'pagination' => isset($results) ? $results->pagination() : null,
+        'query'      => html(strip_tags($query), false),
+        'area'       => empty($area) ? null : $area,
+        'areas'      => option('search.areas')
     ];
-
 };

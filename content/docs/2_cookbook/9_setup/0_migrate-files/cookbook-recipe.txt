@@ -1,0 +1,141 @@
+Title: How to migrate file metadata
+
+----
+
+Text:
+
+<info>
+Things can always go wrong. Always make a backup of your content folder/Kirby installation before starting out on this journey.
+</info>
+
+Kirby 2 only had a single upload section for files in the sidebar and it wasn’t possible to assign different types of metadata fields to different types of files. Kirby 3 changes this completely by replacing this fixed single upload section with files sections. Each page blueprint can define as many (link: docs/reference/panel/sections/files text: files sections) as the data structure requires. And each of these sections can use different (link: docs/reference/panel/blueprints/file text: file blueprints) that define the Panel setup for files and the fields available for these files.
+
+This new way of dealing with files gives you much more flexibility but it also means that you have to adapt some things when migrating a Kirby 2 site, because you can no longer define the meta data fields in the page blueprint.
+
+<info>
+This recipe assumes that your content folder has already been updated with the new folder numbers as explained in the (link: docs/cookbook/migration/sites#folder-and-file-structure text: main migration guide).
+</info>
+
+These are the basic steps to migrate your metadata fields to Kirby 3:
+1.  Remove the old file settings from your page blueprints.
+2. Create new file blueprints for each set of files that shares the same fields and other setup options (accepted mime types, dimensions etc.)
+2. Fetch/filter the files you want to assign each template to (you might want to filter files according to file type or other criteria).
+3. Loop through the files and assign the new template
+
+It’s probably best to go through an example.
+
+## Remove the old file settings
+
+Let’s assume that in your Kirby 2 project, the children of the projects page use the `project.yml` blueprint. In that file, you have the following file settings:
+
+```yaml
+files:
+  fields:
+    author:
+      label: Author
+      type: text
+    caption:
+      label: Caption
+      type: text
+    description:
+      label: Description
+      type: textarea
+```
+
+In your new `/site/blueprints/project.yml` blueprint, remove these lines.
+
+## Set up a files section
+
+We now recreate the blueprint with a files section for our files and assign a file template:
+
+```yaml "site/blueprints/pages/project.yml"
+title: Project
+
+icon: 🖼
+
+columns:
+  main:
+    width: 2/3
+    fields:
+      # some fields here
+
+  sidebar:
+    width: 1/3
+    sections:
+      gallery:
+        type: files
+        template: project
+```
+
+Now whenever we upload a new file to this new files section, if will be created with the `project` template.
+
+## Create the file blueprint
+
+But stop. We haven't created a `blueprints/files/project.yml` blueprint yet. Let's do this now.
+
+```yaml "site/blueprints/files/project.yml"
+
+title: project
+
+accept: image/jpeg, image/png
+
+fields:
+  fields:
+    author:
+      label: Author
+      type: text
+    caption:
+      label: Caption
+      type: text
+    description:
+      label: Description
+      type: textarea
+```
+
+We copy our fields from the old blueprint into the new files blueprint. And since we only want user to upload images to this files section, we add an `accept` option.
+
+Almost there.
+
+## Update file metadata
+
+With these blueprints in place, all new files will pick up the file blueprint and show up in the files section. But our old images won't just yet, because their blueprint files are missing the template information. Let's change that.
+
+Create a new `update-metadata.php` file in your site root.
+
+```php "update-metadata.php"
+<?php
+
+require __DIR__ . '/kirby/bootstrap.php';
+
+$kirby = new Kirby;
+
+// authenticate as almighty
+$kirby->impersonate('kirby');
+
+foreach (page('projects')->children()->images() as $image) {
+
+  try {
+      $image->update([
+        'template' => 'project'
+      ]);
+      echo 'The meta info has been updated';
+  } catch (Exception $e) {
+      echo $e->getMessage();
+  }
+
+}
+```
+
+Then run this script with http://yourdomain.com/update-metadata.php. Delete the script when done.
+
+<info>
+You can adapt this script to your needs or use it multiple times for different sets of files with different templates.
+</info>
+
+----
+
+Description: Update your file meta data for Kirby 3.
+
+----
+
+Authors: - authors/sonja-broda

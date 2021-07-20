@@ -1,5 +1,0 @@
-Title: accounts
-
-----
-
-Excerpt: Returns the root of the accounts folder.

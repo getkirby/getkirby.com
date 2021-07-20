@@ -1,0 +1,47 @@
+.h1,
+.prose h1 {
+  font-size: var(--text-h1);
+  line-height: 1;
+}
+.h2,
+.prose h2 {
+  font-size: var(--text-3xl);
+  line-height: 1.125;
+}
+.h3,
+.prose h3 {
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
+}
+.h4,
+.prose h4 {
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  font-weight: 500;
+}
+.h5,
+.prose h5 {
+  font-size: var(--text-base);
+  font-weight: 500;
+}
+.h6,
+.prose h6 {
+  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+}
+
+.h1 code,
+.h2 code,
+.h3 code,
+.h4 code,
+.h5 code,
+.h6 code,
+.prose h1 code,
+.prose h2 code,
+.prose h3 code,
+.prose h4 code,
+.prose h5 code,
+.prose h6 code {
+  font-size: .875em;
+  font-weight: 400;
+}

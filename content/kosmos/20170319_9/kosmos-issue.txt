@@ -28,18 +28,18 @@ Its always inspiring to see what others are creating with Kirby. This month’s 
 
 (columns…)
 
-(picture: eindhoven.jpg link: https://www.beleefdevestdijk.nl)
+(image: eindhoven.jpg link: https://www.beleefdevestdijk.nl)
 (link: https://www.beleefdevestdijk.nl text: Eindhoven)
 Urban Development
 ++++
 
-(picture: chris-cubellis.jpg link: http://chrs.cblls.com)
+(image: chris-cubellis.jpg link: http://chrs.cblls.com)
 (link: http://chrs.cblls.com text: Chris Cubellis)
 Product Designer
 
 ++++
 
-(picture: m-p.jpg link: http://www.mp-gmbh.de)
+(image: m-p.jpg link: http://www.mp-gmbh.de)
 (link: http://www.mp-gmbh.de text: m&p GmbH)
 Public Relations
 
@@ -71,7 +71,7 @@ Out of the many new plugin mentioned above, I have selected a few you might like
 
 ++++
 
-(picture: le-chasseur.jpg)
+(image: le-chasseur.jpg)
 
 (…columns)
 
@@ -79,7 +79,7 @@ Out of the many new plugin mentioned above, I have selected a few you might like
 
 (columns…)
 
-(picture: le-chasseur.jpg)
+(image: le-chasseur.jpg)
 
 ++++
 
@@ -93,11 +93,11 @@ Out of the many new plugin mentioned above, I have selected a few you might like
 
 (columns…)
 
-(picture: handling-images-in-kirby.jpg)
+(image: handling-images-in-kirby.jpg)
 Our new Cookbook recipe [Handling images in Kirby](https://getkirby.com/docs/cookbook/handling-images-in-kirby) covers everything from image settings in the Panel to accessing images and their meta data in your templates. Next up: Multi-language sites. Stay tuned.
 ++++
 
-(picture: kirby-courses-structure-field.jpg)
+(image: kirby-courses-structure-field.jpg)
 Do you love watching videos over reading docs and want to learn about Kirby's structure field? Check out Thomas Günther's [latest video](https://www.youtube.com/watch?v=UFmQrQxr7EY) in his Kirby Courses series on YouTube. Keep up the good work, Thomas!
 
 (…columns)

@@ -1,0 +1,7 @@
+Title: /users/:id
+----
+Info: DELETE
+----
+Auth: users.delete
+----
+Intro: Delete a user

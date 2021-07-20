@@ -36,22 +36,23 @@ Supported:
 -
     version: {{ latest }}
     status: latest
-    description: ✅ Latest Kirby release, actively supported
-
+    description: Latest Kirby release, actively supported
+    supported: true
 -
     version: >={{ no-vulnerabilities }}
     status: no-vulnerabilities
-    description: ✅ No known vulnerabilities
-
+    description: No known vulnerabilities
+    supported: true
 -
     version: 2.*
     status: end-of-life
-    description: ❌ Not supported (end of life) since January 1, 2021
-
+    description: Not supported (end of life) since January 1, 2021
+    supported: false
 -
     version: 1.*
     status: end-of-life
-    description: ❌ Not supported (end of life) since February 1, 2016
+    description: Not supported (end of life) since February 1, 2016
+    supported: false
 
 ----
 
@@ -59,17 +60,37 @@ Incidents:
 
 -
     cve: CVE-2020-26253
+    cvss: CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N/E:U/RL:O/RC:R
     description: "Registration block: .dev domains and some reverse proxy setups were treated as local"
-    severity: minor
+    severity: medium
     affected: "<=3.3.5"
     fixed: 3.3.6
     links:
         GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-2ccx-2gf3-8xvv
 -
     cve: CVE-2020-26255
+    cvss: CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H/E:H/RL:O/RC:C
     description: "PHP Phar archives could be uploaded by Panel users as content files and executed"
-    severity: notable
+    severity: critical
     affected: "<=3.4.4"
     fixed: 3.4.5
     links:
         GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-g3h8-cg9x-47qw
+-
+    cve: CVE-2021-29460
+    cvss: CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:H/I:L/A:N/E:H/RL:O/RC:C
+    description: "Cross-site scripting (XSS) from unvalidated uploaded SVG or XML files"
+    severity: high
+    affected: "<=3.5.3.1"
+    fixed: 3.5.4
+    links:
+        GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-qgp4-5qx6-548g
+-
+    cve: CVE-2021-32735
+    cvss: CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:N/E:H/RL:O/RC:R
+    description: "Cross-site scripting (XSS) from field and configuration text displayed in the Panel"
+    severity: high
+    affected: "<=3.5.6"
+    fixed: 3.5.7
+    links:
+        GitHub: https://github.com/getkirby/kirby/security/advisories/GHSA-2f2w-349x-vrqm

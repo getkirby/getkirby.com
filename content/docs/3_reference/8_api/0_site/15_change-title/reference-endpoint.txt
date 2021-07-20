@@ -1,0 +1,16 @@
+Title: /site/title
+----
+Info: PATCH
+----
+Intro: Change the site title
+----
+Auth: site.changeTitle
+----
+Text:
+
+## Patch parameters
+
+(docs: api/site-title-data)
+
+----
+Response:

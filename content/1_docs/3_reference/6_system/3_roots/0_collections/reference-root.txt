@@ -1,5 +1,0 @@
-Title: collections
-
-----
-
-Excerpt: The directory where all your shared collections are stored.

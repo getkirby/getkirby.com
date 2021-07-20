@@ -1,1 +1,0 @@
-Alt: Interface elements for Kirby’s control panel

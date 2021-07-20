@@ -1,5 +1,0 @@
-Title: Index
-
-----
-
-Excerpt: Returns the base url of the site

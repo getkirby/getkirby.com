@@ -41,7 +41,7 @@ To keep Kirby 3.4 company, there's also a new version of the [Editor](https://gi
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility there are hardly any limits to what you can create with Kirby.
 
-(screenshot: tellie.jpg)
+(image: tellie.jpg)
 [Tellie Videoconferencing](https://www.tellie.eu/en)
 
 ## Kirby plugins
@@ -50,7 +50,7 @@ The list of new plugins is almost as long as the Kirby 3.4 changelog:
 
 (columns…)
 
-(screenshot: plugin-editor-gallery-block.png)
+(image: plugin-editor-gallery-block.png)
 
 ++++
 
@@ -76,7 +76,7 @@ The [Rollup Pluginkit](https://github.com/johannschopplich/rollup-pluginkit) is 
 
 ## Kirby in the wild 2
 
-(screenshot: lowa.jpg)
+(image: lowa.jpg)
 [LOWA](https://lowa.de/)
 
 ## Kirby Cookbook

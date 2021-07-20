@@ -26,7 +26,7 @@ One week later than usual after the Easter break, but here we are again. The dev
 
 (columns…)
 
-(picture: virtual-pages.png)
+(image: virtual-pages.png)
 
 ++++
 
@@ -53,10 +53,10 @@ If you are interested in organizing a Kirby MeetUp or Kirby workshop in your cit
 
 ## Kirby in the Wild
 
-(picture: ofenbau-voppichler.jpg)
+(image: ofenbau-voppichler.jpg)
 [Ofenbau Voppichler](https://www.ofenbau-voppichler.at)
 
-(picture: risd-grad-show.jpg)
+(image: risd-grad-show.jpg)
 [RISD Grad Show 2019](http://risd.gd)
 
 ## Kirby Plugins
@@ -73,7 +73,7 @@ Two new plugins allow you to manage language variables from the Panel. The [Vari
 
 (columns…)
 
-(picture: merx-plugin.jpg)
+(image: merx-plugin.jpg)
 
 ++++
 

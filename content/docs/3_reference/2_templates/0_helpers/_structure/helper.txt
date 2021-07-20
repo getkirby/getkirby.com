@@ -1,0 +1,50 @@
+Title: structure($data, $page = null, $key = null)
+
+----
+
+Intro: Creates a Kirby structure object from a data array
+
+----
+
+Params: -
+  name: $data
+  type: array
+  text:
+-
+  name: $page
+  type: Page
+  text: Optional, defaults to the current page
+-
+  name: $key
+  type: string
+  text: Field key for the page object
+
+----
+
+Return:
+
+type: $structure
+text:
+
+----
+
+Text:
+
+## Example
+
+```php
+$structure = structure([
+	[
+		'name' => 'Apple',
+		'type' => 'fruit'
+	],
+	[
+		'name' => 'Banana',
+		'type' => 'fruit'
+	],
+	[
+		'name' => 'Salad',
+		'type' => 'vegetable'
+	]
+], $page, 'food');
+```

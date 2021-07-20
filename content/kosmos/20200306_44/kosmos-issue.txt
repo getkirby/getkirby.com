@@ -48,7 +48,7 @@ We are incredibly happy to have found two great partners for Kirby Konf who will
 
 (columns…)
 
-(screenshot: uberspace.jpg)
+(image: uberspace.jpg)
 
 ++++
 
@@ -62,7 +62,7 @@ We are incredibly happy to have found two great partners for Kirby Konf who will
 
 (columns…)
 
-(screenshot: keycdn.jpg)
+(image: keycdn.jpg)
 
 ++++
 
@@ -78,7 +78,7 @@ While flat-file by nature, Kirby also supports virtual pages from all sorts of s
 
 (columns…)
 
-(screenshot: talking-shorts.jpg)
+(image: talking-shorts.jpg)
 
 ++++
 
@@ -94,7 +94,7 @@ While flat-file by nature, Kirby also supports virtual pages from all sorts of s
 
 ++++
 
-(screenshot: goose-gourmet.jpg)
+(image: goose-gourmet.jpg)
 
 (…columns)
 

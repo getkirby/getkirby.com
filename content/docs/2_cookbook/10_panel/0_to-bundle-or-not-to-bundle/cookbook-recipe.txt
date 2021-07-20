@@ -1,0 +1,462 @@
+Title: To bundle or not to bundle: differences of creating plugins with or without a build process
+
+----
+
+Text:
+
+In our (link: docs/cookbook/panel/custom-block-type text: Creating a custom block type from scratch) recipe, we built a custom block type using a single file component with a build process. Single file components are a reformatted way of writing regular JS components, with certain advantages. They keep your code clean and self-contained. Anything that belongs to a component is in a single file: the HTML template, the logic and the styles. But this comes at the price of having to use a bundler.
+
+The final code from that recipe can be converted to a regular `index.js` with the steps below. Let's start with the code of the single file component from that recipe.
+
+<info>
+Note that this is not a complete recipe. Regarding the other files needed for the audio-block, please head over to main recipe. While we use the example of the audio-block, the steps described here are generic.
+</info>
+
+## Original single file component
+
+```html "/site/plugins/audio-block/src/components/Audio.vue"
+<template>
+  <k-block-figure
+    :is-empty="!source.url"
+    empty-icon="audio-file"
+    empty-text="No file selected yet …"
+    @open="open"
+    @update="update"
+  >
+    <div class="k-block-type-audio-wrapper">
+      <div>
+        <k-aspect-ratio
+          class="k-block-type-audio-poster"
+          cover="true"
+          ratio="1/1"
+        >
+          <img
+            v-if="poster.url"
+            :src="poster.url"
+            alt=""
+          >
+        </k-aspect-ratio>
+      </div>
+      <div @dblclick.stop>
+        <k-writer
+          :inline="true"
+          :marks="false"
+          :placeholder="field('title').placeholder"
+          :value="content.title"
+          class="k-block-type-audio-title"
+          @input="update({ title: $event })"
+        />
+        <k-writer
+          :inline="true"
+          :marks="false"
+          :placeholder="field('subtitle').placeholder"
+          :value="content.subtitle"
+          class="k-block-type-audio-subtitle"
+          @input="update({ subtitle: $event })"
+        />
+        <k-writer
+          :inline="true"
+          :marks="false"
+          :placeholder="field('description').placeholder"
+          :value="content.description"
+          class="k-block-type-audio-description"
+          @input="update({ description: $event })"
+        />
+        <audio class="k-block-type-audio-element" controls>
+          <source :src="source.url" :type="mime">
+        </audio>
+      </div>
+    </div>
+  </k-block-figure>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      mime: null
+    };
+  },
+  computed: {
+    poster() {
+      return this.content.poster[0] || {};
+    },
+    source() {
+      return this.content.source[0] || {};
+    }
+  },
+  watch: {
+    "source.link": {
+      handler (link) {
+        if (link) {
+          this.$api.get(link).then(file => {
+            this.mime = file.mime;
+          });
+        }
+      },
+      immediate: true
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+.k-block-type-audio-wrapper {
+  display: flex;
+  padding: 1rem;
+  background: black;
+  color: white;
+}
+.k-block-type-audio-poster {
+  width: 12rem;
+  margin-right: 1rem;
+  background: #333;
+}
+.k-block-type-audio-title,
+.k-block-type-audio-subtitle {
+  font-size: 1.5rem;
+}
+.k-block-type-audio-title {
+  font-weight: 600;
+}
+.k-block-type-audio-subtitle {
+  margin-bottom: 1rem;
+  color: #999;
+}
+.k-block-type-audio-description {
+  line-height: 1.5;
+}
+.k-block-type-audio-element {
+  margin-top: 2rem;
+  height: 2rem;
+}
+</style>
+```
+
+## Structure of plugin folder without single file component
+
+When we remove the single file component, the logic and the template live in the main `index.js` file and the styles in the `index.css` file.
+
+```filesystem
+plugins/
+    audio-block/
+      blueprints/
+        blocks/
+          audio.yml
+        files/
+          audio.yml
+          poster.yml
+      snippets/
+        blocks/
+          audio.yml
+      index.php
+      index.js
+      index.css
+      package.json
+```
+
+For the rest of the code, please head over to the original recipe.
+
+## Moving the script part
+
+Everything that is between the script tag goes into the main `index.js` file. So
+
+```html
+<script>
+export default {
+  methods: {...},
+  computed: {...},
+  // etc.
+}
+</script>
+```
+
+becomes
+
+```js
+panel.plugin("me/myblock", {
+  blocks: {
+    myBlock: {
+      computed: {...},
+      methods: {...},
+      // etc.
+    }
+  }
+});
+```
+
+Translated to our `audio-block` example:
+
+```js "/site/plugins/audio-block/index.js"
+panel.plugin('cookbook/audio-block', {
+  blocks: {
+    audio: {
+      data() {
+        return {
+          mime: null
+        };
+      },
+      computed: {
+        poster() {
+          return this.content.poster[0] || {};
+        },
+        source() {
+          return this.content.source[0] || {};
+        }
+      },
+      watch: {
+        "source.link": {
+          handler (link) {
+            if (link) {
+              this.$api.get(link).then(file => {
+                  this.mime = file.mime;
+              });
+            }
+          },
+        immediate: true
+        }
+      },
+    }
+});
+```
+
+## The template
+
+Everything in the `<template>` part of our example above goes into the `template` property.
+
+```html
+<template>
+  <p><!-- my block html --></p>
+</template>
+```
+becomes
+
+```js
+panel.plugin("me/myblock", {
+  blocks: {
+    myBlock: {
+      methods: {...},
+      computed: {...},
+      // etc.
+      template: `
+        <p><!-- my block html --></p>
+      `
+    }
+  }
+});
+```
+
+Translated to our `audio-block` example:
+
+```js "/site/plugins/audio-block/index.js"
+template: `
+  <k-block-figure
+      :is-empty="!source.url"
+      empty-icon="audio-file"
+      empty-text="No file selected yet …"
+      @open="open"
+      @update="update"
+  >
+    <div class="k-block-type-audio-wrapper">
+      <div>
+        <k-aspect-ratio
+          class="k-block-type-audio-poster"
+          cover="true"
+          ratio="1/1"
+        >
+        <img
+          v-if="poster.url"
+          :src="poster.url"
+          alt=""
+        >
+        </k-aspect-ratio>
+      </div>
+      <div @dblclick.stop>
+        <k-writer
+          :inline="true"
+          :marks="false"
+          :placeholder="field('title').placeholder"
+          :value="content.title"
+          class="k-block-type-audio-title"
+          @input="update({ title: $event })"
+        />
+        <k-writer
+          :inline="true"
+          :marks="false"
+          :placeholder="field('subtitle').placeholder"
+          :value="content.subtitle"
+          class="k-block-type-audio-subtitle"
+          @input="update({ subtitle: $event })"
+        />
+        <k-writer
+          :inline="true"
+          :marks="false"
+          :placeholder="field('description').placeholder"
+          :value="content.description"
+          class="k-block-type-audio-description"
+          @input="update({ description: $event })"
+        />
+        <audio class="k-block-type-audio-element" controls>
+            <source :src="source.url" :type="mime">
+        </audio>
+      </div>
+    </div>
+  </k-block-figure>
+`
+}
+```
+
+## Move the styles
+
+Everything between the `style` tag…
+
+```html
+<style>
+.someStyles {}
+</style>
+```
+
+… goes into a separate `index.css` file
+
+```css
+.someStyles {}
+```
+
+For the real-life example:
+
+```css "/site/plugins/audio-block/index.css"
+.k-block-type-audio-wrapper {
+  display: flex;
+  padding: 1rem;
+  background: black;
+  color: white;
+}
+.k-block-type-audio-poster {
+  width: 12rem;
+  margin-right: 1rem;
+  background: #333;
+}
+.k-block-type-audio-title,
+.k-block-type-audio-subtitle {
+  font-size: 1.5rem;
+}
+.k-block-type-audio-title {
+  font-weight: 600;
+}
+.k-block-type-audio-subtitle {
+  margin-bottom: 1rem;
+  color: #999;
+}
+.k-block-type-audio-description {
+  line-height: 1.5;
+}
+.k-block-type-audio-element {
+  margin-top: 2rem;
+  height: 2rem;
+}
+```
+
+That's it. Just in case, here is the complete `index.js` file again:
+
+```js "/site/plugins/audio-block/index.js"
+panel.plugin('cookbook/audio-block', {
+  blocks: {
+    audio: {
+      data() {
+        return {
+          mime: null
+        };
+      },
+      computed: {
+        poster() {
+          return this.content.poster[0] || {};
+        },
+        source() {
+          return this.content.source[0] || {};
+        }
+      },
+      watch: {
+        "source.link": {
+          handler (link) {
+            if (link) {
+              this.$api.get(link).then(file => {
+                  this.mime = file.mime;
+              });
+            }
+          },
+        immediate: true
+        }
+      },
+      template: `
+        <k-block-figure
+            :is-empty="!source.url"
+            empty-icon="audio-file"
+            empty-text="No file selected yet …"
+            @open="open"
+            @update="update"
+        >
+          <div class="k-block-type-audio-wrapper">
+            <div>
+              <k-aspect-ratio
+                class="k-block-type-audio-poster"
+                cover="true"
+                ratio="1/1"
+              >
+              <img
+                v-if="poster.url"
+                :src="poster.url"
+                alt=""
+              >
+              </k-aspect-ratio>
+            </div>
+            <div @dblclick.stop>
+              <k-writer
+                :inline="true"
+                :marks="false"
+                :placeholder="field('title').placeholder"
+                :value="content.title"
+                class="k-block-type-audio-title"
+                @input="update({ title: $event })"
+              />
+              <k-writer
+                :inline="true"
+                :marks="false"
+                :placeholder="field('subtitle').placeholder"
+                :value="content.subtitle"
+                class="k-block-type-audio-subtitle"
+                @input="update({ subtitle: $event })"
+              />
+              <k-writer
+                :inline="true"
+                :marks="false"
+                :placeholder="field('description').placeholder"
+                :value="content.description"
+                class="k-block-type-audio-description"
+                @input="update({ description: $event })"
+              />
+              <audio class="k-block-type-audio-element" controls>
+                  <source :src="source.url" :type="mime">
+              </audio>
+            </div>
+          </div>
+        </k-block-figure>
+      `
+    }
+});
+```
+
+## Conclusion
+
+While it is possible to bypass the extra complexity a build process introduces into our workflow, this way of creating Panel blocks or other Panel extension has its limits. With more complex logic and templates, it easily gets messy, and particularly if you want to have more than one extension in a single plugin.
+
+----
+
+Published: 2021-03-05
+
+----
+
+Description: Using bundlers like Parcel is not for everyone. Here we show how you can build Panel extensions without a build process.
+
+----
+
+Authors: - authors/sonja-broda

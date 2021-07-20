@@ -29,19 +29,19 @@ Every month, a lot of great Kirby-powered websites are published. As always, we 
 
 (columns…)
 
-(picture: changeisgood.jpg link: http://changeisgood.fr)
+(image: changeisgood.jpg link: http://changeisgood.fr)
 (link: http://changeisgood.fr text: Change is Good)
 Agency
 
 ++++
 
-(picture: armchairmedia.jpg link: http://armchairmedia.com)
+(image: armchairmedia.jpg link: http://armchairmedia.com)
 (link: http://armchairmedia.com text: Armchair Media)
 Agency
 
 ++++
 
-(picture: offground.jpg link: http://www.offground.at)
+(image: offground.jpg link: http://www.offground.at)
 (link: http://www.offground.at text: Offground Solutions)
 Rope Access
 

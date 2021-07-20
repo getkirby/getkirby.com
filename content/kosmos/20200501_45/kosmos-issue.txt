@@ -31,7 +31,7 @@ While we are busy working on 3.4 we had to to release a security release this we
 
 While flat-file by nature, Kirby also supports virtual pages from all sorts of sources (database, APIs etc.). Or use Kirby as your backend and go headless on the frontend. The possible solutions are as flexible as your ideas are infinite.
 
-(screenshot: idup.jpg)
+(image: idup.jpg)
 
 [iga dolowy URBANISME PAYSAGE](http://id-up.org)
 
@@ -65,7 +65,7 @@ Both [Kirby Resolve](https://github.com/lukaskleinschmidt/kirby-resolve) and [Ki
 
 (columns…)
 
-(screenshot: kirby-git.png)
+(image: kirby-git.png)
 
 ++++
 
@@ -80,7 +80,7 @@ Both [Kirby Resolve](https://github.com/lukaskleinschmidt/kirby-resolve) and [Ki
 
 (columns…)
 
-(screenshot: zeroone-theme.jpg)
+(image: zeroone-theme.jpg)
 
 
 ++++
@@ -91,7 +91,7 @@ Both [Kirby Resolve](https://github.com/lukaskleinschmidt/kirby-resolve) and [Ki
 
 ## Kirby in the wild 2
 
-(screenshot: mode-remote.jpg)
+(image: mode-remote.jpg)
 
 [Mode Remote](https://moderemote.com)
 

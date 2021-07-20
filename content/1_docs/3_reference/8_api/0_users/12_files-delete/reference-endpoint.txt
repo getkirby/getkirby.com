@@ -1,7 +1,0 @@
-Title: /users/:id/files/:filename
-----
-Info: DELETE
-----
-Excerpt: Delete a file
-----
-Auth: files.delete

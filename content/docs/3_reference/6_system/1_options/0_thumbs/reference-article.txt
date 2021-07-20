@@ -1,0 +1,107 @@
+Intro: Set default configuration for thumbs
+
+----
+
+Text:
+
+## Presets
+
+<since v="3.0.3">
+You can define option presets for thumbs:
+
+```php "/site/config/config.php"
+return [
+    'thumbs' => [
+        'presets' => [
+            'default' => ['width' => 1024, 'quality' => 80],
+            'blurred' => ['blur' => true]
+        ]
+    ]
+];
+```
+
+To be used with the `$file->thumb()` method. (link: docs/reference/objects/file/thumb text: Learn more ›)
+</since>
+
+## Srcsets
+
+```php "/site/config/config.php"
+return [
+  'thumbs' => [
+    'srcsets' => [
+      'default' => [
+        '800w' => ['width' => 800, 'quality' => 80],
+        '1024w' => ['width' => 1024, 'quality' => 80],
+        '1440w' => ['width' => 1440, 'quality' => 80],
+        '2048w' => ['width' => 2048, 'quality' => 80]
+      ]
+  ]
+  ]
+];
+```
+
+To be used with the `$file->srcset()` method. (link: docs/reference/objects/file/srcset text: Learn more ›)
+
+## Auto-orient
+
+Automatically rotate images based on their exif orientation data.
+
+```php
+return [
+  'thumbs' => [
+    'autoOrient' => true
+  ]
+];
+```
+
+## Quality
+
+The default JPEG compression quality for all thumbnails
+
+```php
+return [
+  'thumbs' => [
+    'quality' => 80
+  ]
+];
+```
+
+## Thumbs driver
+
+Kirby comes with drivers for GD Lib (`gd`) and ImageMagick (`im`), which can be used out of the box. The default thumbs driver is `gd`.
+
+You can also define your own custom thumbs drivers.
+
+```php
+return [
+  'thumbs' => [
+    'driver' => 'im'
+  ]
+];
+```
+
+### Additional options for the ImageMagick driver
+
+#### `bin`
+
+If the ImageMagick convert binary is not correctly linked, you can set the absolute path to the binary here.
+
+```php
+return [
+  'thumbs' => [
+    'bin' => 'convert'
+  ]
+];
+```
+
+#### `interlace`
+
+JPEGs can be set to interlace mode with this option
+
+```php
+return [
+  'thumbs' => [
+    'interlace' => true
+  ]
+];
+```

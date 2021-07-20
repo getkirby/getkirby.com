@@ -1,9 +1,17 @@
 <?php
 
 namespace Kirby\Meta;
+
+use Kirby\Cms\Asset;
 use Kirby\Cms\Field;
 use Kirby\Cms\File;
+use Kirby\Http\Response;
+use Kirby\Toolkit\A;
+use Kirby\Toolkit\F;
 use Kirby\Toolkit\Html;
+use Kirby\Toolkit\Tpl;
+
+use Imagick;
 
 class PageMeta {
 
@@ -17,105 +25,47 @@ class PageMeta {
     public function __construct($page) {
         $this->page = $page;
 
-        if (method_exists($this->page, 'metadata')) {
+        // Get metadata from page model
+        if (method_exists($this->page, 'metadata') === true) {
             $this->metadata = $this->page->metadata();
         }
     }
 
     public function __call($name, $arguments)
     {
-        $name = strtolower($name);
-        
-        $prefix = 'hasown';
-        
-        if (strpos($name, $prefix) === 0) {
-            return $this->get(substr($name, strlen($prefix)), false)->isNotEmpty();    
-        }
-        
-        return $this->get($name);
+        return $this->get(strtolower($name));
     }
 
-    public function get(string $key, bool $fallback = true): Field
+    public function get(string $key, bool $fallback = false): Field
     {
-        $key = strtolower($key);
-
+        // From content file...
+        $key   = strtolower($key);
         $field = $this->page->content()->get($key);
 
-        if ($field->exists()) {
+        if ($field->exists() === true) {
             return $field;
         }
 
+        // From page model...
         if (array_key_exists($key, $this->metadata) === true) {
-            $value = $this->metadata[$key];
-            if (is_callable($value) === true) {
-                $result = $value->call($this->page);
-
-                if (is_a($result, Kirby\Cms\Field::class)) {
-                    return $result;
-                }
-
-                return new Field($this->page, $key, $result);
-            }
-            
-            return new Field($this->page, $key, $value);
+            return new Field($this->page, $key, $this->metadata[$key]);
         }
 
+        // From site as fallback...
         if ($fallback === true) {
-            $siteContent = site()->content();
+            $fallback = site()->content()->get($key);
 
-            if ($siteContent->get($key)->exists()) {
-                return $siteContent->get($key);
+            if ($fallback->exists()) {
+                return $fallback;
             }
         }
 
         return new Field($this->page, $key, null);
     }
 
-    public function getFile(string $key, bool $fallback = true): ?File
-    {
-        $key = strtolower($key);
-
-        $field = $this->page->content()->get($key);
-
-        if ($field->exists() && ($file = $field->toFile())) {
-            return $file;
-        }
-
-        if (array_key_exists($key, $this->metadata) === true) {
-            $value = $this->metadata[$key];
-            if (is_callable($value) === true) {
-                $value = $value->call($this->page);
-            }
-            
-            if (is_a($value, File::class) === true) {
-                return $value;
-            }
-
-            if (is_a($value, Field::class) === true) {
-                return $value->toFile();
-            }
-
-            if (is_string($value) === true) {
-                return $this->page->file($value);
-            }
-        }
-
-        if ($fallback === true) {
-            return site()->content()->get($key)->toFile();
-        }
-        
-        return null;
-    }
-
-    public function hasOwnThumbnail(): bool
-    {
-        return $this->getFile('thumbnail', false) !== null;
-    }
-
     public function jsonld(): string
     {
         $html = [];
-
         $json = [
             '@context' => 'https://schema.org',
             '@graph' => [
@@ -123,7 +73,7 @@ class PageMeta {
                     '@type' => 'Organization',
                     'name' => 'Kirby',
                     'url' => url(),
-                    'logo' => url('kirby-signet.svg'),
+                    'logo' => url('/assets/images/kirby-signet.svg'),
                     'sameAs' => [
                         'https://twitter.com/getkirby',
                         'https://instagram.com/getkirby',
@@ -143,39 +93,29 @@ class PageMeta {
             ],
         ];
 
-        $html[] = '<script type="application/ld+json">';
-        $html[] = json_encode($json, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-        $html[] = '</script>';
-
-        return implode(PHP_EOL, $html) . PHP_EOL;
+        return Tpl::load(__DIR__ . '/templates/json.php', compact('json'));
     }
 
     public function opensearch(): string
     {
         return Html::tag('link', null, [
-            'rel' => 'search',
-            'type' => 'application/opensearchdescription+xml',
+            'rel'   => 'search',
+            'type'  => 'application/opensearchdescription+xml',
             'title' => site()->title(),
-            'href' => url('open-search.xml'),
+            'href'  => url('/open-search.xml'),
         ]) . PHP_EOL;
     }
 
     public function priority(): float
     {
-        $priority = $this->get('priority', false)->value();
-
-        if (empty($priority) === true) {
-            $priority = 0.5;
-        }
-
-        return (float) min(1, max(0, $priority));
+        $priority = $this->get('priority')->or(0.5)->value();
+        return (float)min(1, max(0, $priority));
     }
 
     public function robots(): string
     {
-        $html = [];
-
-        $robots = $this->get('robots');
+        $html   = [];
+        $robots = $this->get('robots', true);
 
         if ($robots->isNotEmpty()) {
             $html[] = Html::tag('meta', null, [
@@ -196,76 +136,272 @@ class PageMeta {
     {
         $html = [];
         $meta = [];
-        $opengraph = [];
+        $og   = [];
         $site = site();
 
         // Basic OpenGraph tags
-        $opengraph['og:site_name'] = $site->title()->value();
-        $opengraph['og:url'] = $this->page->url();
-        $opengraph['og:type'] = 'website';
-
-
-        $opengraph['og:title'] = $this->get('ogtitle')->or($this->page->title());
+        $og['og:site_name'] = $site->title()->value();
+        $og['og:url']       = $this->page->url();
+        $og['og:type']      = 'website';
+        $og['og:title']     = $this->get('ogtitle')->or($this->page->title());
 
         // Meta and OpenGraph description
-        $description = $this->get('description');
-
+        $description = $this->get('description', true);
         if ($description->isNotEmpty()) {
-            $opengraph['og:description'] = $description->excerpt(200);
-            $meta['description'] = $description->excerpt(160);
+            $og['og:description'] = $description->excerpt(200);
+            $meta['description']  = $description->excerpt(160);
         }
 
-        $twitterCard = $this->get('twittercard');
+        $twitterCard = $this->get('twittercard', true);
         if ($twitterCard->isNotEmpty()) {
             $meta['twitter:card'] = $twitterCard->value();
         }
 
         // Image
-        if ($thumbnail = $this->getFile('thumbnail')) {
-            $opengraph['og:image'] = $thumbnail->url();
+        if ($thumbnail = $this->thumbnail()) {
+            $og['og:image'] = url($thumbnail->url());
 
             if ($thumbnail->alt()->isNotEmpty()) {
-                $opengraph['og:image:alt'] = $thumbnail->alt()->value();
+                $og['og:image:alt'] = $thumbnail->alt()->value();
             }
-        } else {
-            if ($meta['twitter:card'] === 'summary_large_image') {
-                $meta['twitter:card'] = 'summary';
-            }
+        } else if ($meta['twitter:card'] === 'summary_large_image') {
+            $meta['twitter:card'] = 'summary';
         }
 
         // Twitter settings
-        $twitterSite = $this->get('twittersite');
+        $twitterSite = $this->get('twittersite', true);
         if ($twitterSite->isNotEmpty()) {
             $meta['twitter:site'] = $twitterSite->value();
         }
 
-        $twitterCreator = $this->get('twittercreator');
+        $twitterCreator = $this->get('twittercreator', true);
         if ($twitterCreator->isNotEmpty()) {
             $meta['twitter:creator'] = $twitterCreator->value();
         }
 
-        // Generate Meta Tags
-        foreach($meta as $name => $content):
-            $html[] = Html::tag('meta', null, [
-            'name'    => $name,
-            'content' => $content,
-            ]);
-        endforeach;
-
-        // Generate Opengraph Tags
-        foreach($opengraph as $prop => $content):
-            $html[] = Html::tag('meta', null, [
-            'property' => $prop,
-            'content'  => $content,
-            ]);
-        endforeach;
-
-        return implode(PHP_EOL, $html) . PHP_EOL;
+        return Tpl::load(__DIR__ . '/templates/social.php', compact('meta', 'og'));
     }
 
-    public function thumbnail(bool $fallback = true): ?File
+    public function thumbnail(): ?File
     {
-        return $this->getFile('thumbnail', $fallback);
+        // Overrule auto-generated image if custom one is set:
+        // In content file...
+        $custom = $this->page->content()->get('ogimage');
+
+        if ($custom->exists() && ($image = $custom->toFile())) {
+            return $image;
+        }
+
+        // In page model...
+        if ($this->metadata['ogimage'] ?? null) {
+            return $this->metadata['ogimage'];
+        }
+
+        // Otherwise go with auto-generated image
+        return new File([
+            'filename' => 'og:image',
+            'url'      => '/' . $this->page->id() . '/opengraph.png'
+        ]);
+    }
+
+    public static function renderThumbnail(string $id)
+    {
+        // Get page for which the thumbnail should be generated
+        $page = page(urldecode($id));
+
+        if ($page === null) {
+            return null;
+        }
+
+        $data = [];
+
+        // Get data from page model
+        if (method_exists($page, 'metadata') === true) {
+            $data = $page->metadata()['thumbnail'] ?? [];
+        }
+
+        // Get data from content file
+        if ($page->thumbnail()->exists()) {
+            $yaml = $page->thumbnail()->yaml()[0];
+
+            /**
+             * thumnail: image.png
+             */
+            if (is_string($yaml) === true) {
+                $data['image'] = $yaml;
+
+            /**
+             * thumnail:
+             *   -
+             *   lead: Something interesting
+             *   image: image.png
+             */
+            } else {
+                $data = array_merge($data, $yaml);
+            }
+
+            // If image is still a string and not a file object yet,
+            // try to find image in the page's files
+            if ($data['image'] ?? null) {
+                if (is_string($data['image']) === true) {
+                    $image = $page->file($data['image']);
+
+                    if ($image === null) {
+                        $image = new Asset('assets/icons/' . $data['image']);
+                    }
+
+                    $data['image'] = $image;
+                }
+            }
+        }
+
+        // Create canvas
+        $canvas = imagecreatetruecolor(1200, 628);
+
+        // Define colors and fonts
+        $black  = imagecolorallocate($canvas, 0, 0, 0);
+        $gray   = imagecolorallocate($canvas, 119, 119, 119);
+        $white  = imagecolorallocate($canvas, 255, 255, 255);
+        $yellow = imagecolorallocate($canvas, 253, 197, 0);
+
+        $sans = __DIR__ . '/assets/Inter-Regular.otf';
+        $bold = __DIR__ . '/assets/Inter-Bold.otf';
+        $mono = __DIR__ . '/assets/RobotoMono.ttf';
+
+        // Add background
+        $width = 1200;
+        $height = 628;
+        imagefilledrectangle($canvas, 0, 0, $width, $height, $white);
+
+        // Margin and initial y coordinate
+        $margin = $y = 60;
+
+        // Lead text
+        [$x, $y] = imagettftext(
+            $canvas,
+            $size = 28,
+            0,
+            $margin,
+            $y += $size,
+            $gray,
+            $mono,
+            $data['lead'] ?? $page->metaLead(null, 'The CMS')
+        );
+
+        // Line
+        $y += 25;
+        imagesetthickness($canvas, 4);
+        imageline($canvas, $x, $y, $width - $margin, $y, $black);
+
+        // Title text
+        $title  = $data['title'] ?? $page->title();
+        $length = strlen($title);
+        $size   = $length < 12 ? 74 : ($length < 24 ? 64 : 58);
+        $title  = wordwrap($title, $size > 60 ? 20 : 25, "\n");
+        $lines  = substr_count($title, "\n") + 1;
+
+        [$x, $y] = imagettftext(
+            $canvas,
+            $size,
+            0,
+            $margin - 5,
+            $y += $size + 45,
+            $black,
+            $sans,
+            $title
+        );
+        $y += $margin;
+
+        // Logo
+        $logo = imagecreatefrompng(__DIR__ . '/assets/logo.png');
+        imagecopyresampled(
+            $canvas,
+            $logo,
+            $width - $margin - imagesx($logo),
+            $height - $margin - 10 - imagesy($logo),
+            0,
+            0,
+            imagesx($logo),
+            imagesy($logo),
+            imagesx($logo),
+            imagesy($logo)
+        );
+
+        if ($image = $data['image'] ?? null) {
+            $image = url($image->url());
+        } else {
+            $image = null;
+        }
+
+        // Image or domain
+        if ($image && F::extension($image) !== 'svg') {
+
+            // Convert SVG to image string
+            if (strpos(pathinfo($image)['extension'], 'svg') !== false) {
+
+                $im = new Imagick();
+                $box = 280 - ($lines * 50);
+                $svg = file_get_contents($image);
+                $im->setResolution(460, 460);
+                $im->readImageBlob($svg);
+                $im->setImageFormat('jpeg');
+                $im->resizeImage($box, $box, imagick::FILTER_LANCZOS, 1);
+                $data = $im->getImageBlob();
+                $image = imagecreatefromstring($data);
+                $y = $height - imagesy($image) - $margin - 10;
+
+            // Load other formats as image string via curl
+            } else {
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $image);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+                $data = curl_exec($ch);
+                curl_close($ch);
+                $image = imagecreatefromstring($data);
+            }
+
+            // Set size (auto with max-width)
+            $w = imagesx($image);
+            $max = $width - (3 * $margin) - imagesx($logo);
+            if ($w > $max) $w = $max;
+            $h = (imagesy($image) / imagesx($image)) * $w;
+            imagecopyresampled(
+                $canvas,
+                $image,
+                $margin,
+                $y,
+                0,
+                0,
+                $w,
+                $h,
+                imagesx($image),
+                imagesy($image)
+            );
+
+        } else {
+            $y = $height - $margin - 15;
+            imagesetthickness($canvas, 3);
+            imageline($canvas, $x - 5, $y, 342, $y, $yellow);
+            imagettftext(
+                $canvas,
+                32,
+                0,
+                $margin,
+                $y -= 5,
+                $black,
+                $bold,
+                'getkirby.com'
+            );
+        }
+
+        // Render
+        ob_start();
+        imagepng($canvas);
+        $body = ob_get_clean();
+        imagedestroy($canvas);
+
+        return new Response($body, 'image/png');
     }
 
 }

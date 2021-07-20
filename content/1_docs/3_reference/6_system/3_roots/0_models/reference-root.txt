@@ -1,5 +1,0 @@
-Title: models
-
-----
-
-Excerpt: Returns the root of the models folder.

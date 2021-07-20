@@ -1,0 +1,23 @@
+Title: String
+
+----
+
+Intro: A simple string will be converted to an HTML response with a HTTP status code of 200
+
+----
+
+Text:
+
+```php "/site/config/config.php"
+return [
+  'routes' => [
+    [
+      'pattern' => 'custom/response',
+      'action'  => function () {
+        return '<html><body>Boring!</body></html>';
+      }
+    ]
+  ]
+];
+```
+

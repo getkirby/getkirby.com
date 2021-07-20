@@ -1,5 +1,0 @@
-Title: /site/files/:filename/sections/:name
-----
-Info: GET
-----
-Excerpt: Retrieve a file section

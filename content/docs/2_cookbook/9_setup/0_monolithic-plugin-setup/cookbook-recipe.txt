@@ -1,0 +1,210 @@
+Title: Monolithic Plugin Setup
+
+----
+
+Text:
+
+If you're developing a plugin, you also need somewhere to test it, especially if it involves the Kirby panel. In other words, you need a sample Kirby site where your plugin can run. In this guide, you'll see how to set this up under a single Git repository.
+
+You can follow along, but there will be a GitHub template at the end of the guide that you can use for your plugin and start right away!
+
+## Plugin files
+
+To begin, we need to establish the base of our plugin first. The [pluginkit](https://github.com/getkirby/pluginkit/tree/4-panel) is a very nice starting point:
+
+```filesystem
+src/
+.editorconfig
+.gitattributes
+.gitignore
+composer.json
+index.php
+LICENSE.md
+package.json
+README.md
+```
+
+This gives us the `index.php` file that initializes our plugin:
+
+```php
+Kirby::plugin('getkirby/pluginkit', [
+    // plugin magic happens here
+]);
+```
+
+...and `package.json` with npm scripts for [Parcel](https://parceljs.org/):
+
+```js
+{
+  "scripts": {
+    "dev": "parcel watch src/index.js --no-source-maps -d ./",
+    "build": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting -d ./"
+  },
+  "posthtml": {
+    "recognizeSelfClosing": true
+  }
+}
+```
+
+If you don't have Parcel, install it globally on your machine:
+
+```bash
+npm install -g parcel
+```
+
+After that, you should be able to start it up by running the `dev` npm script:
+
+```bash
+npm run dev
+```
+
+This will generate the following files in your repo:
+
+```filesystem
+index.css
+index.js
+```
+
+...but how do you view them? You need a Kirby site to run the plugin.
+
+## Site files
+
+First, we'll use Composer to install Kirby:
+
+```bash
+composer require getkirby/cms
+```
+
+...and add some basic site files, like the default template and the home page:
+
+```filesystem
+content/
+  home/
+    default.txt
+  site.txt
+kirby/
+site/
+  templates/
+    default.php
+vendor/
+```
+
+### Index file
+
+The site can't work without its `index.php` file, but this file already exists - it loads the plugin. Well, we'll simply create an index file with a different name:
+
+```php "index.site.php"
+<?php
+
+require_once 'kirby/bootstrap.php';
+
+echo kirby()->render();
+```
+
+### .htaccess file
+
+In addition to the index file, we need the `.htaccess` file so that all requests are pointed to that index file, which can load Kirby and let _it_ handle the request.
+
+We can use the [`.htaccess` file from the Kirby Plainkit](https://github.com/getkirby/plainkit/blob/main/.htaccess) and add a line so that it points to our newly crated `index.site.php`, instead of `index.php`:
+
+```bash ".htaccess"
+RewriteRule index.php index.site.php [L]
+```
+
+## Loading the plugin
+
+At this point, if you open the project folder on `localhost`, you should see the Kirby site. Now we need to close the loop by loading our plugin in that site. We, of course, do that by loading it from the `plugin` folder. Create the following file:
+
+```php "site/plugins/plugin/index.php"
+<?php
+
+require dirname(__DIR__, 3) . '/index.php';
+```
+
+When Kirby loads, it will include this "fake" plugin, which in turn will load our actual plugin's `index.php` that lies 3 folders up the directory tree. If your plugin depends on other plugins, feel free to install them as well!
+
+The full directory structure should look like this:
+
+```filesystem
+content/
+  home/
+    default.txt
+  site.txt
+kirby/
+site/
+  plugins/
+    plugin/
+      index.php
+  templates/
+    default.php
+src/
+vendor/
+.editorconfig
+.gitattributes
+.gitignore
+.htaccess
+composer.json
+index.php
+index.site.php
+LICENSE.md
+package.json
+README.md
+```
+
+## Excluding site files
+
+When we publish our plugin, we don't want the files related to our test site to appear in the production version of the plugin that people will be putting in their sites. We can exclude whatever we want with the `.gitattributes` file:
+
+```
+/content/ export-ignore
+/site/ export-ignore
+/src/ export-ignore
+
+/.editorconfig export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/.htaccess export-ignore
+/index.site.php export-ignore
+/package.json export-ignore
+/package-lock.json export-ignore
+```
+
+To verify that, run the following command:
+
+```bash
+git archive HEAD -o test.zip --worktree-attributes
+```
+
+You should get a ZIP file with the following contents:
+
+```filesystem
+composer.json
+composer.lock
+index.css
+index.js
+index.php
+LICENSE.md
+README.md
+```
+
+Later, when you create a new release of the plugin on GitHub, it should create an identical ZIP with only these files. There will be no trace of your test site in the final version of the plugin.
+
+## Conclusion
+
+We managed to create a setup where we can develop and view our plugin from the same repository, while still providing just the necessary files on release.
+
+To get started right away with the same setup, use [this template repository](https://github.com/OblikStudio/kirby-plugin).
+
+----
+
+Published: 2020-05-08
+
+----
+
+Description: Set up a plugin workflow that allows you to both develop and test your plugin from the same Git repository.
+
+----
+
+Authors:
+
+- authors/hristiyan-dodov

@@ -1,0 +1,5 @@
+Title: logs
+
+----
+
+Intro: Returns the root of the logs file folder.

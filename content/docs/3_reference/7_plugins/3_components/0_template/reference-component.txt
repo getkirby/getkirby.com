@@ -1,0 +1,23 @@
+Title: Templates
+
+----
+
+Text:
+
+```php "/site/plugins/template-engine/index.php"
+class CustomTemplate extends Kirby\Cms\Template {
+
+}
+
+Kirby::plugin('my/template', [
+    'components' => [
+        'template' => function (Kirby $kirby, string $name, string $contentType = null) {
+            return new CustomTemplate($name, $contentType);
+        }
+    ]
+]);
+```
+
+<info>
+Make sure to check out all (link: /plugins/category:templating text: existing plugins for template engines).
+</info>

@@ -12,6 +12,12 @@ We publish a monthly newsletter with hand-picked news about plugins, themes, new
 
 ----
 
+Thumbnail:
+  -
+  lead: Newsletter
+
+----
+
 Changefreq: monthly
 
 ----

@@ -1,5 +1,0 @@
-Caption: Microsite
-
-----
-
-Description: Use Kirby's brand-new layout field to create complex modular microsites and page layouts.

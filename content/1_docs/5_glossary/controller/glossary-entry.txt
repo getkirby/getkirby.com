@@ -1,9 +1,0 @@
-Title: Controller
-
-----
-Entry:
-
-A PHP file that can contains the logic for a specific page template. Controllers are stored in `/site/controllers`.
-----
-
-Link: docs/guide/templates/controllers

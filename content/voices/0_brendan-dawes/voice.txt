@@ -2,16 +2,12 @@ Title: Brendan Dawes
 
 ----
 
-Username: brendandawes
+Website: http://www.brendandawes.com/
 
 ----
 
-Tweet: https://twitter.com/#!/brendandawes/status/157389852416016384
+Text: Been using Kirby for my site for many years but now using v3 for a site for a friend and oh my. It’s quite brilliant. The new Layout and Blocks feature is so good. Wonderful.
 
 ----
 
-Url: http://www.brendandawes.com/
-
-----
-
-Text: Just read the docs for @getkirby and it looks great. @bastianallgeier is one clever bastard.
+Bio: Digital artist

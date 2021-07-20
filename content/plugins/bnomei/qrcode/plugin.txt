@@ -1,0 +1,13 @@
+Title: QR Code
+
+----
+
+Repository: https://github.com/bnomei/kirby3-qrcode
+
+----
+
+Category: utilities
+
+----
+
+Description: Generate QRCodes

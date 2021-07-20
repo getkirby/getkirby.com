@@ -1,0 +1,26 @@
+Title: Array
+
+----
+
+Intro: PHP arrays will automatically be converted to a JSON response
+
+----
+
+Text:
+
+```php "/site/config/config.php"
+return [
+  'routes' => [
+    [
+      'pattern' => 'custom/response',
+      'action'  => function () {
+        return [
+          'status' => 'ok',
+          'data'   => ['foo' => 'bar']
+        ];
+      }
+    ]
+  ]
+];
+```
+

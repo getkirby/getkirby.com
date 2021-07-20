@@ -1,7 +1,9 @@
 Title: Julie Ng
 ----
-Username: jng5
+Link: https://twitter.com/jng5/status/199608333215342595
 ----
-Tweet: https://twitter.com/jng5/status/199608333215342595
+Text: Really loving how flexible Kirby is. The documentation is also really thorough and fab.
 ----
-Text: Really loving how flexible @getkirby is. The documentation is also really thorough and fab.
+Bio: Developer at Microsoft
+----
+Website: http://julie.io/

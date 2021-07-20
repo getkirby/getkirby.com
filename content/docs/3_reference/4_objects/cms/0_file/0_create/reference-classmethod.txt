@@ -1,0 +1,23 @@
+Auth: files.create
+
+----
+
+Text:
+
+## `$props` parameter
+
+(docs: props/file-create)
+
+## Example
+
+```php
+$file = File::create([
+  'source'     => kirby()->root('assets').'/images/some-image.jpg',
+  'parent'     => page('photography')->children()->listed()->first(),
+  'filename'   => 'new-image.jpg',
+  'template' => 'cover',
+  'content'   => [
+    'caption'   => 'A nice view from above',
+  ]
+]);
+```

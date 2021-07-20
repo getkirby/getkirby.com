@@ -1,0 +1,13 @@
+Title: Patterns
+
+----
+
+Intro:
+
+ Kirby route patterns cannot only contains static strings, you can also use dynamic placeholders. The following placeholders are available. If you need more fine-grained control, you can also use custom regex patterns.
+
+----
+
+Text:
+
+For more information on using routes, head over to the (link: docs/guide/routing text: guide).

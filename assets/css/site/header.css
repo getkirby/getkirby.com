@@ -1,0 +1,10 @@
+.header-content {
+  margin: 0 -.75rem;
+  padding: var(--spacing-3) 0;
+}
+
+@media screen and (min-width: 40rem) {
+  .header-content {
+    padding: var(--spacing-6) 0;
+  }
+}

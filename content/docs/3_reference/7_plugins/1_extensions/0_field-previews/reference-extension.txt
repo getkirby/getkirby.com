@@ -1,0 +1,52 @@
+Title: Field previews
+
+----
+Text:
+
+The (link: docs/reference/panel/fields/structure text: structure field) tries to create the best possible preview for the field in its table view, once you have submitted the form.
+
+(image: structure.png)
+
+For more complex fields like URL, email, files, pages or users, we provide special preview components in (glossary: vue) that take care of rendering the result in a nice way.
+
+If you create your own (link: docs/reference/plugins/extensions/fields text: field plugins), you might want to optimize the preview of such fields in the structure table as well. This can be done with custom field preview components in your plugin.
+
+```js "/site/plugins/demo/index.js"
+panel.plugin('demo/plugin', {
+  fields: {
+	  myfield: {
+		  ...
+	  }
+  },
+  components: {
+    'k-myfield-field-preview': {
+      props: {
+        value: String,
+        column: Object,
+        field: Object
+      },
+      template: '<p>Your preview code goes here</p>'
+    }
+  }
+});
+```
+
+## Naming
+
+The important part here is that you get the naming of the component right. Otherwise the structure field cannot find your preview component:
+
+```js
+"k-${yourFieldName}-field-preview"
+```
+
+## Props
+
+The preview component automatically receives the following props:
+
+| Prop | Type | Description |
+| - | - | - |
+| `value` | mixed | The current value that has been entered in the form |
+| `column` | Object | The optional column definition from the blueprint |
+| `field` | Object | The field definition from the blueprint |
+
+You don't necessarily have to register them all. Register the ones you need for your preview. It's fine if you only need the value.

@@ -9,6 +9,7 @@ use Kirby\Toolkit\Properties;
 /**
  * Information container for the
  * authentication status
+ * @since 3.5.1
  *
  * @package   Kirby Cms
  * @author    Lukas Bestle <lukas@getkirby.com>
@@ -153,7 +154,7 @@ class Status
      * Sets the type of the active challenge
      *
      * @param string|null $challenge
-     * @return self
+     * @return $this
      */
     protected function setChallenge(?string $challenge = null)
     {
@@ -166,7 +167,7 @@ class Status
      * a fallback when $challenge is `null`
      *
      * @param string|null $challengeFallback
-     * @return self
+     * @return $this
      */
     protected function setChallengeFallback(?string $challengeFallback = null)
     {
@@ -178,7 +179,7 @@ class Status
      * Sets the email address of the current/pending user
      *
      * @param string|null $email
-     * @return self
+     * @return $this
      */
     protected function setEmail(?string $email = null)
     {
@@ -190,7 +191,7 @@ class Status
      * Sets the Kirby instance for user lookup
      *
      * @param \Kirby\Cms\App $kirby
-     * @return self
+     * @return $this
      */
     protected function setKirby(App $kirby)
     {
@@ -202,7 +203,7 @@ class Status
      * Sets the authentication status
      *
      * @param string $status `active|impersonated|pending|inactive`
-     * @return self
+     * @return $this
      */
     protected function setStatus(string $status)
     {

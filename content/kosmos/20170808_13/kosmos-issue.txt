@@ -36,19 +36,19 @@ It's always inspiring to see what others are creating with Kirby. This month’s
 
 (columns…)
 
-(picture: monkey47.jpg)
+(image: monkey47.jpg)
 [Monkey 47](https://monkey47.com)
 Distillers
 
 ++++
 
-(picture: vault.jpg)
+(image: vault.jpg)
 [Vault](https://getvault.com)
 Investment Advisors
 
 ++++
 
-(picture: normannenhaus-jena.jpg)
+(image: normannenhaus-jena.jpg)
 [Normannenhaus Jena](http://www.normannenhaus-jena.de)
 Event location
 
@@ -68,22 +68,20 @@ Event location
 
 (columns…)
 
-(picture: ma-petite-entreprise.jpg)
+(image: ma-petite-entreprise.jpg)
 
 ++++
 
 ### Ma Petite Entreprise
 As the French name of [this theme created by Constantin Joly](https://cj-lab.fr/themes/mpe/) suggests, it targets small businesses like a Restaurant, Tattoo Studio or Architect. Features filters, categories, galleries and some customizations.
 
-(…columns)
-
-(columns…)
+++++
 ### Velox
 [Velox ](http://themes.vlady.cc/velox/)is a universal, multi-purpose theme by Vladimir Yordanov. Like the [Kirby Starterkit](https://getkirby.com/try), it features a blog, project section and some static pages. Built using the [Bulma CSS framework](http://bulma.io).
 
 ++++
 
-(picture: velox.jpg)
+(image: velox.jpg)
 
 (…columns)
 

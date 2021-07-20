@@ -31,7 +31,7 @@ But while all this is happening [behind the scenes](https://getkirby.com/next), 
 
 ## Kirby in the Wild
 
-(picture: lastrada-augsburg-city.jpg)
+(image: lastrada-augsburg-city.jpg)
 [Augsburg Marketing](https://lastrada.augsburg-city.de)
 International Street Performer Festival
 

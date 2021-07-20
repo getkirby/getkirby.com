@@ -1,0 +1,21 @@
+Title: Features
+
+----
+
+Intro: Kirby 3.6 is not just a groundbreaking overhaul of our Panel architecture. It also introduces and paves the way for many new highly-requested features.
+
+----
+
+Text:
+
+## Implemented
+
+Every implemented feature will be listed here and we will start documenting them as best we can during the process. Keep coming back for more.
+
+(snippet: templates/release-36/features-implemented)
+
+## In progress
+
+We are just getting started. You can still vote for or post new feature ideas on (link: https://feedback.getkirby.com text: our feedback platform).
+
+(snippet: templates/release-36/features-planned)

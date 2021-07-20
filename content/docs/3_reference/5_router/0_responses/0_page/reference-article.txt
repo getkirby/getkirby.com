@@ -1,0 +1,23 @@
+Title: Page
+
+----
+
+Intro: Returning a Page object will automatically render the HTML response for that page.
+
+----
+
+Text:
+
+```php "/site/config/config.php"
+return [
+  'routes' => [
+    [
+      'pattern' => 'custom/response',
+      'action'  => function () {
+        return page('projects');
+      }
+    ]
+  ]
+];
+```
+

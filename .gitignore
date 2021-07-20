@@ -1,13 +1,81 @@
-node_modules
-.vscode
-.idea
+# System files
+# ------------
+
+Icon
 .DS_Store
-/backstop_data
-/www/media
-/site/accounts
-/site/cache
-/site/config/keys
+
+# Temporary files
+# ---------------
+
+/media/*
+!/media/index.html
+/node_modules/
+
+# Editors
+# ---------------
+*.sublime-project
+*.sublime-workspace
+/.vscode
+/.idea
+
+# Plugin cruft
+# ---------------
+
+/site/plugins/*/vendor/**/.*
+/site/plugins/*/vendor/**/*.json
+/site/plugins/*/vendor/**/*.txt
+/site/plugins/*/vendor/**/*.md
+/site/plugins/*/vendor/**/*.yml
+/site/plugins/*/vendor/**/*.yaml
+/site/plugins/*/vendor/**/*.xml
+/site/plugins/*/vendor/**/*.dist
+/site/plugins/*/vendor/**/*.php_cs
+/site/plugins/*/vendor/**/readme.php
+/site/plugins/*/vendor/**/COPYING
+/site/plugins/*/vendor/**/COMMITMENT
+/site/plugins/*/vendor/**/VERSION
+/site/plugins/*/vendor/**/.github/*
+/site/plugins/*/vendor/**/.circleci/*
+/site/plugins/*/vendor/**/docs/*
+/site/plugins/*/vendor/**/example/*
+/site/plugins/*/vendor/**/examples/*
+/site/plugins/*/vendor/**/test/*
+/site/plugins/*/vendor/**/tests/*
+/site/plugins/*/vendor/**/php4/*
+/site/plugins/ray
+
+
+# Lock files
+# ---------------
+.lock
+
+# -------------SECURITY-------------
+# NEVER publish these files via Git!
+# -------------SECURITY-------------
+
+# Cache Files
+# ---------------
+
+/site/cache/*
+!/site/cache/index.html
+
+# Config
+# ------
+
+/site/config/keys/*
+
+# Accounts
+# ---------------
+
+/site/accounts/*
+!/site/accounts/index.html
+
+# Sessions
+# ---------------
+
+/site/sessions/*
+!/site/sessions/index.html
+
+# License
+# ---------------
 /site/config/.license
-/site/sessions
-/backstop.json
-/config.json

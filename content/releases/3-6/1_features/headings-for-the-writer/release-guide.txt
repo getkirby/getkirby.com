@@ -1,0 +1,11 @@
+Title: Headings for the writer field
+----
+Text:
+
+<info>
+Status: **in progress**
+</info>
+
+The writer field can already handle inline styles and lists, but headings were already sleeping under the hood and now we are going to wake them up.
+
+(image: headings.gif)

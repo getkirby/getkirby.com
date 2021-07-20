@@ -1,0 +1,79 @@
+Title:
+
+file
+
+----
+
+Intro: Creates a download link for any file
+
+----
+
+Text:
+
+## Examples and options
+
+### Download link with filename as text
+
+```kirbytext
+(\file: companysecrets.pdf)
+```
+
+### Download link with custom text
+
+```kirbytext
+(\file: companysecrets.pdf text: Download our company secrets)
+```
+
+### Download link for a file from another internal page
+
+```kirbytext
+(\file: some/other/page/companysecrets.pdf text: Download our company secrets)
+```
+
+### Download link for an external file
+
+```kirbytext
+(\file: http://example.com/companysecrets.pdf text: Download their company secrets)
+```
+
+### Download link with a `title` attribute
+
+```kirbytext
+(\file: companysecrets.pdf title: Download our company secrets)
+```
+
+### Download link with a `rel` attribute
+
+```kirbytext
+(\file: cv.pdf text: My CV rel: me)
+```
+
+### Download link with a specified target
+
+```kirbytext
+(\file: companysecrets.pdf target: _blank)
+```
+
+### Download link with a custom CSS class
+
+```kirbytext
+(\file: companysecrets.pdf class: download)
+```
+
+### Download link with `download` attribute
+
+<since v="3.2.0">
+
+To avoid direct downloads you can set the `download` option to `false`:
+
+```kirbytext
+(\file: companysecrets.pdf download: false)
+```
+
+</since>
+
+
+
+
+
+

@@ -1,9 +1,0 @@
-Title: Team
-
-----
-
-Intro: Kirby grew from a one-man show to a team of dedicated developers, designers and writers. But the real team is made up of our independent developers and users who make Kirby great.
-
-----
-
-Link: community/#team

@@ -1,0 +1,71 @@
+Intro: Set how Kirby handles content
+
+----
+
+Text:
+
+## Content file extension
+
+Set the extension you want to use for your content files.
+
+Possible values: `txt`| `md` (default: `txt`)
+
+```php
+return [
+  'content' => [
+    'extension' => 'md'
+  ]
+];
+```
+
+## Ignore files/folders
+
+Set an array of file/folder names that are not scanned by Kirby's core.
+
+```php
+return [
+  'content' => [
+    'ignore' => []
+  ]
+];
+```
+
+## Content locking
+
+<since v="3.2.5">
+Deactivate the content locking mechanism used by the Panel to prevent concurrent edits to a page, file or user:
+
+```php
+return [
+  'content' => [
+    'locking' => false
+  ]
+];
+```
+</since>
+
+## Salt for drafts and media files
+
+<since v="3.4.0">
+URLs of page drafts and media files contain a hashed token that should be hard to guess. The token is based on the filesystem path of the page/file by default, but you can define your own salt that will be used instead:
+
+```php
+return [
+  'content' => [
+    'salt' => '...'
+  ]
+];
+```
+
+You can also dynamically generate a salt based on the model that needs a token:
+
+```php
+return [
+  'content' => [
+    'salt' => function ($model) {
+      return '...';
+    }
+  ]
+];
+```
+</since>

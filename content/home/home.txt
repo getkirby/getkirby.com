@@ -1,42 +1,8 @@
-Title: Kirby - The file-based content management system
-----
-Filesystem:
-
-```filesystem
-content/
-    photography/
-        oceans/
-            album.txt
-            ocean.jpg
-        photography.txt
-    contact/
-        contact.txt
-    home/
-        home.txt
-    error/
-        error.txt
-    site.txt
-```
+Title: Kirby is the CMS that adapts to you
 
 ----
-Templates:
 
-```php
-<article class="album">
-  <h1><?= $page->title() ?></h1>
-  <figure class="cover">
-    <?= $cover->resize(800, 600) ?>
-  </figure>
-  <div class="text">
-    <?= $page->text()->kirbytext() ?>
-  </div>
-  <ul class="gallery">
-    <?php foreach ($gallery as $image): ?>
-    <li><?= $image->crop(300) ?></li>
-    <?php endforeach ?>
-  </ul>
-</article>
-```
+Ogimage: opengraph.jpg
 
 ----
 

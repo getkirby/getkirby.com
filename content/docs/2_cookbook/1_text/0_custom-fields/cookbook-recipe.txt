@@ -1,0 +1,285 @@
+Title: Custom content fields
+
+----
+
+Text:
+
+Kirby shines when it comes to custom fields. We believe that your content should be as well structured as possible and it should be simple to add more fields whenever you need them.
+
+Kirby's text files have therefor a very simple system. You define a field of data with a name, a colon and some content. You separate multiple fields with four dashes:
+
+```kirbycontent
+Title: This is my title
+\----
+Text: This is a nice text
+\----
+Date: 2012/01/11
+\----
+etc.
+```
+
+You are not limited to any number of fields per file. You could have hundreds of them, though that would be quite a mess to read and update – but you could :) There's only one restriction. **Field names must only contain alphanumeric characters and underscores.**
+
+Stuff like…
+
+```kirbycontent
+My fancy görman field: Some text
+\----
+```
+
+…won't work. It won't break anything, but you will not be able to use the data of that field in your template.
+
+You are also not limited to use a certain kind of formatted content. You can add plain text, Markdown formatted text or even just HTML to each field.
+
+## Using data in your templates:
+
+Once you've added your content, you can use those fields in your template files. Kirby will try to find a matching template for the name of your text file. So if your text file is `project.txt`, Kirby will try to load the template `/site/templates/project.php`. If it is not there, it will fall back to `/site/templates/default.php` So you can add specific templates for specific types of data very easily.
+
+Let's say the text file for the current page has a title, text, date and tags field, you can add them to your template like this:
+
+```php
+<?= $page->title() ?>
+<?= $page->text() ?>
+<?= $page->date() ?>
+<?= $page->tags() ?>
+
+```
+
+You can find more about it in the (link: docs text: docs).
+
+But now on to the cool stuff …
+
+## Examples
+
+Here are some examples of data setups for different types of pages. It's just to get an idea how Kirby works. It's up to you to build whatever you want with it – a bit like Lego for web designers.
+
+****
+
+### Portfolio page
+
+Kirby is being used by many designers, architects and photographers to create their portfolios.
+
+#### The content
+
+```kirbycontent "/content/projects/acme/project.txt"
+Title: New Acme Company Website
+\----
+Link: http://acme.com
+\----
+Description: We helped Acme to become the leading placeholder company in the world
+\----
+Year: 2018
+\----
+Tags: Redesign, HTML5, CSS3
+\----
+```
+
+#### The files
+
+To show some screenshots or pictures of each project, add a list of images to the same content folder. You can use numbers to easily sort them. In fact any alphabetic naming convention will do.
+
+```filesystem
+content/
+  projects/
+    acme/
+	  acme-01.jpg
+	  acme-02.jpg
+	  acme-03.jpg
+	  acme-04.jpg
+	  project.txt
+```
+
+#### Available template variables in project.php
+
+```php
+<?= $page->title() ?>
+<?= $page->link() ?>
+<?= $page->description() ?>
+<?= $page->year() ?>
+<?= $page->tags() ?>
+```
+
+#### Example: how to add all images
+
+```php
+<ul>
+  <?php foreach ($page->images() as $img): ?>
+  <li><img src="<?= $img->url() ?>" alt=""></li>
+  <?php endforeach ?>
+</ul>
+```
+
+****
+
+### Product Page
+
+Kirby is by no means great to build a full-featured eCommerce shop. You shoudn't store private customer data in your text files. But there are great services out there to help you with the payment process and pre-built shopping cart solutions. So for a smaller project it might be an alternative to build your own little store front with pages for all your articles and redirect your visitors to a hosted checkout system once they want to buy something from your shop.
+
+#### The content
+
+```kirbycontent
+Title: Shirty
+\----
+Subtitle: Fancy Shirt with fancy print
+\----
+Text: This nice shirt is made of organic cotton and is soooo fluffy.
+\----
+Sizes: XS, S, M, L, XL, XXL, TENT
+\----
+Colors: red, green, yellow, blue, purple
+\----
+Available: yes
+\----
+Price: $39
+\----
+Link: https://myshopservice/add-to-cart?id=someidforshirty
+\----
+```
+
+#### The files
+Good shop sites often have multiple images for each product. For example a main picture of the entire product plus two close-ups with details.
+
+```filesystem
+content/
+  shop/
+    shirty/
+	  01-shirty-front.jpg
+	  02-shirty-back.jpg
+	  03-shirty-detail.jpg
+	  product.txt
+```
+
+#### Available template variables in product.php
+
+```php
+<?= $page->title() ?>
+<?= $page->subtitle() ?>
+<?= $page->text() ?>
+<?= $page->sizes() ?>
+<?= $page->colors() ?>
+<?= $page->available() ?>
+<?= $page->price() ?>
+<?= $page->link() ?>
+```
+
+#### Example: how to add a single image
+
+```php
+<?= $page->image('01-shirty-front.jpg') ?>
+```
+
+****
+
+### Conference Speaker Page
+
+Conference sites often need very different kinds of content and templates for each page. There's the schedule, all about the venue, information about accommodation and travel, the registration page and of course the introduction for each speaker. This is an example how to generate a page for each speaker with loads of information about them.
+
+#### The content
+
+```kirbycontent
+Title: J. Montgomery Burns
+\----
+About: J. Montgomery Burns is a very nice old man.
+\----
+Talk: Why nuclear power is awesome
+\----
+Teaser: In times of blah, blah, blah we need nuclear power.
+\----
+Time: Saturday, 11:30 am
+\----
+Venue: Great Hall
+\----
+Link: http://j.montgomerybur.ns
+\----
+```
+
+#### The files
+
+You won't need much here. Probably just an additional portrait of the speaker and maybe a pdf with additional information, which visitors can download.
+
+```filesystem
+content/
+  speakers/
+    burns/
+	  mister-burns-cv.pdf
+	  mister-burns.jpg
+	  speaker.txt
+```
+
+#### Available template variables in speaker.php
+
+```php
+<?= $page->title() ?>
+<?= $page->about() ?>
+<?= $page->talk() ?>
+<?= $page->teaser() ?>
+<?= $page->time() ?>
+<?= $page->venue() ?>
+<?= $page->link() ?>
+```
+
+#### Example: how to add a pdf download
+
+```php
+<a href="<?= $page->document('mister-burns-cv.pdf')->url() ?>">Download CV</a>
+```
+
+#### Example: show the download size of a file
+
+```php
+<?= $page->document('mister-burns-cv.pdf')->niceSize() ?>
+<!-- will echo something like 405.4 kb or 5.2 MB -->
+```
+
+
+****
+
+### Photography Project
+
+As a photographer you want the best presentation platform for your pictures. Something nice and clean, where your photos can shine. It might also be cool to add additional information about each picture and the process of taking it – things like the location, the lens, the time of day, etc.
+
+```kirbycontent
+Title: Mount Rushmore at noon
+\----
+Description: The picture is a symbol for this and that.
+\----
+Location: Mount Rushmore, SD, United States
+\----
+Date: 2012/01/11 12:00
+\----
+Camera: Leica M9
+\----
+Lens: Leica Summilux-M 24 mm f/1.4 ASPH
+\----
+```
+
+#### The files
+
+Upload the picture to the same folder to include it in your template later.
+
+```filesystem
+content/
+  photography/
+    mount-rushmore/
+	  mount-rushmore.jpg
+      picture.txt
+```
+
+#### Available template variables in picture.php
+
+```php
+<?= $page->title() ?>
+<?= $page->description() ?>
+<?= $page->location() ?>
+<?= $page->date() ?>
+<?= $page->camera() ?>
+<?= $page->lens() ?>
+```
+
+----
+
+Description: Structure your content in the most flexible way with custom fields.
+
+----
+
+Authors: - authors/bastian-allgeier

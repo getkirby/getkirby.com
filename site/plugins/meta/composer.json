@@ -1,9 +1,0 @@
-{
-  "require": {
-  },
-  "autoload": {
-      "psr-4": {
-          "Kirby\\Meta\\": "src/"
-      }
-  }
-}

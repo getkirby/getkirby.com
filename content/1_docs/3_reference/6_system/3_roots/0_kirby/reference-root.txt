@@ -1,5 +1,0 @@
-Title: kirby
-
-----
-
-Excerpt: Returns the root of the Kirby core folder

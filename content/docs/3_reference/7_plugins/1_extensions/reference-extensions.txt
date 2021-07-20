@@ -1,0 +1,11 @@
+Title: Extensions
+
+----
+
+Intro: Kirby has an extensive plugin system for almost any system-relevant part. The following types of plugins can be created by you:
+
+----
+
+Text:
+
+For an **introduction to using extensions**, head over to the (link: docs/guide/plugins text: guide).

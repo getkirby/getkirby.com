@@ -1,0 +1,53 @@
+Title: Tel
+
+----
+
+Intro:
+
+A phone number input field
+
+----
+
+Guide: blueprints/fields
+
+----
+
+Text:
+
+The phone field creates a text input with the type `tel` and a custom phone icon.
+
+(image: tel.png)
+
+## Example
+
+```yaml
+fields:
+  phone:
+    label: Phone
+    type: tel
+```
+
+## Field properties
+
+(field-options: tel)
+
+## How to use in templates/snippets
+
+Just printing the phone number:
+
+```php
+<?php if ($page->phone()->isNotEmpty()): ?>
+  <dt>Phone</dt>
+  <dd>$page->phone() ?></dd>
+<?php endif ?>
+```
+
+
+Generating an `a` tag for the phone number:
+
+```php
+<?php if ($page->phone()->isNotEmpty()): ?>
+  <dt>Phone</dt>
+  <dd><?= Html::tel($page->phone()) ?></dd>
+<?php endif ?>
+```

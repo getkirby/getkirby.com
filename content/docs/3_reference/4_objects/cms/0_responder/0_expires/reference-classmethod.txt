@@ -1,0 +1,17 @@
+Text:
+
+## Example
+
+```php
+<?php
+
+return function ($kirby) {
+  $results = yourApi();
+
+  $kirby->response()->expires(1234567890);   // timestamp OR
+  $kirby->response()->expires(60);           // minutes   OR
+  $kirby->response()->expires('2021-12-31'); // time string
+
+  return compact('results');
+};
+```

@@ -1,0 +1,25 @@
+Title: (:alpha)
+
+----
+
+Intro: Matches any characters between a-z & A-Z
+
+----
+
+Text:
+
+## Example
+
+```php "/site/config/config.php"
+return [
+  'routes' => [
+    [
+      'pattern' => '/projects/(:alpha)',
+      'action'  => function (string $path) {
+        // react to requests
+      }
+    ]
+  ]
+];
+```
+

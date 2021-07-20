@@ -1,0 +1,57 @@
+Title: $site
+
+----
+
+Class: Kirby\Cms\Site
+
+----
+
+Text:
+
+## How to access the `$site` object
+
+The `$site` variable is automatically available in your templates and snippets.
+
+To access the `$site` object in extensions, you have to define it first:
+
+```php
+// via the kirby object
+$site = $kirby->site();
+
+// using the `site()` helper
+$site = site();
+```
+
+## Examples
+
+### Get the site title
+
+```php
+echo $site->title();
+```
+
+### Get any custom field of the site
+
+```php
+echo $site->description();
+```
+
+### Get the files stored in the content folder
+
+```php
+$siteFiles = $site->files();
+```
+
+### Get all the pages of the site
+
+```php
+$pageIndex = $site->index();
+```
+
+### Get the URL of the site
+
+```php
+$url = $site->url();
+```
+
+

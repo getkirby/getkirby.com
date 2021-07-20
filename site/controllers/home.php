@@ -1,13 +1,12 @@
 <?php
 
-return function ($kirby, $page) {
+return function ($page) {
+    $storyId    = get('your') ?? 'company';
+    $story      = $page->find($storyId) ?? $page->find('company');
+    $storyImage = $story->images()->findBy('name', 'panel');
 
-  return [
-    'chameleon'  => $page->image('chameleon.jpg'),
-    'components' => $page->image('components.jpg'),
-    'hero'       => $page->image('hero.jpg'),
-    'matomo'     => $page->image('matomo.jpg'),
-    'panel'      => $page->images()->find('dashboard.jpg', 'article.jpg', 'blog.jpg', 'microsite.jpg', 'product.jpg'),
-  ];
-
+    return [
+        'story'      => $story,
+        'storyImage' => $storyImage
+    ];
 };

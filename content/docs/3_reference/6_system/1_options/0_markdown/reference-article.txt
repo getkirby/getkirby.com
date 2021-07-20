@@ -1,0 +1,39 @@
+Intro: Options for the (glossary: Markdown) parser
+
+----
+
+Guide: content/text-formatting#markdown
+
+----
+
+Text:
+
+<info>
+Check out the full list of the available **(link: docs/reference/text/markdown text:  Markdown tags)**.
+</info>
+
+## Additional tags: `markdown.extra`
+
+Enables/disables the (link: https://michelf.ca/projects/php-markdown/extra/ text: Markdown Extra) parser with additional Markdown features like footnotes and tables.
+
+```php
+return [
+  'markdown' => [
+    'extra' => true
+  ]
+];
+```
+
+## Automatic line breaks: `markdown.breaks`
+
+Enables/disables automatic line breaks in Markdown like on GitHub. Otherwise line breaks must be confirmed with three spaces at the end of the line.
+
+Default: `true`
+
+```php
+return [
+  'markdown' => [
+    'breaks' => false
+  ]
+];
+```

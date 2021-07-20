@@ -1,0 +1,6 @@
+Title: site
+
+----
+
+Intro: Returns the root of the site folder
+

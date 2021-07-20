@@ -30,10 +30,10 @@ Georg Obermayr, a self-declared Kirby enthusiast, has written [a great article a
 
 ## Kirby in the Wild
 
-(picture: silo.png)
+(image: silo.png)
 [SILO](https://s-i-l-o.fr)
 
-(picture: fair-climate-fund.png)
+(image: fair-climate-fund.png)
 [Fair Climate Fund](https://www.fairclimatefund.nl/en)
 
 ## Kirby Plugins

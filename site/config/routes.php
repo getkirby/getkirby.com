@@ -2,6 +2,12 @@
 
 return [
     [
+        'pattern' => 'authors/(:all?)',
+        'action'  => function () {
+            return false;
+        }
+    ],
+    [
         'pattern' => 'hooks/clean',
         'method'  => 'GET|POST',
         'action'  => function () {
@@ -24,6 +30,12 @@ return [
         'pattern' => 'releases/(:num)\.(:num)',
         'action'  => function ($generation, $major) {
             return page('releases/' . $generation . '-' . $major);
+        }
+    ],
+    [
+        'pattern' => 'releases/(:num)\.(:num)/(:all?)',
+        'action'  => function ($generation, $major, $path) {
+            return page('releases/' . $generation . '-' . $major . '/' . $path);
         }
     ],
 ];

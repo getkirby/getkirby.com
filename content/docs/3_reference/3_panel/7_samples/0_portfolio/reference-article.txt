@@ -1,0 +1,192 @@
+
+Title: Portfolio
+
+----
+
+Intro: Highlight your projects
+
+----
+
+Text:
+
+## Projects overview
+
+```yaml "/site/blueprints/pages/projects.yml"
+title: Projects
+preset: pages
+icon: 🖼
+
+drafts:
+  extends: sections/projects
+  headline: Project Drafts
+
+listed:
+  extends: sections/projects
+  headline: Published Projects
+  layout: cards
+```
+
+### Reusable projects section
+
+```yaml "/site/blueprints/sections/projects.yml"
+type: pages
+headline: Projects
+parent: kirby.page('projects')
+layout: cards
+template: project
+image:
+  query: page.images.template("cover").first
+  ratio: 3/2
+  cover: true
+info: "{{ page.year }}"
+```
+
+<info>
+Note that the above section will throw an error in the Panel as long as the given parent page does not exist in the file system.
+</info>
+
+### Result
+
+(image: projects.png)
+
+## Single project
+
+```yaml "/site/blueprints/pages/project.yml"
+title: Project
+preset: page
+
+status:
+  draft: Draft
+  listed: Published
+
+fields:
+  headline:
+    type: text
+    width: 3/4
+    required: true
+  year:
+    type: number
+    min: 2000
+    default: 2018
+    required: true
+    width: 1/4
+  tags:
+    type: tags
+  intro:
+    type: textarea
+    size: small
+  text:
+    type: textarea
+    size: large
+
+sidebar:
+  cover:
+    type: files
+    headline: Cover
+    layout: cards
+    info: "{{ file.dimensions }}"
+    template: cover
+    min: 1
+    max: 3
+  gallery:
+    type: files
+    headline: Gallery
+    template: image
+```
+
+### Result
+
+(image: project.png)
+
+## Example `projects` template
+
+```php "/site/templates/projects.php"
+<?php snippet('header') ?>
+
+<main>
+  <?php snippet('intro') ?>
+
+  <ul class="projects"<?= attr(['data-even' => $page->children()->listed()->isEven()], ' ') ?>>
+    <?php foreach ($page->children()->listed() as $project): ?>
+    <li>
+      <a href="<?= $project->url() ?>">
+        <figure>
+          <?= $project->images()->findBy("template", "cover") ?>
+          <figcaption><?= $project->title() ?> <small><?= $project->year() ?></small></figcaption>
+        </figure>
+      </a>
+    </li>
+    <?php endforeach ?>
+  </ul>
+</main>
+
+<?php snippet('footer') ?>
+```
+
+## Example `project` controller and template
+
+### Controller
+
+```php "/site/controllers/project.php"
+<?php
+
+return function ($page) {
+
+    $gallery = $page->images()->filterBy("template", "image")->sortBy("sort");
+
+    return [
+        'gallery' => $gallery
+    ];
+
+};
+```
+
+### Template
+
+```php "/site/templates/project.php"
+<?php snippet('header') ?>
+
+<main class="project">
+  <article>
+
+    <header>
+      <?php if ($cover = $page->images()->findBy("template", "cover")): ?>
+      <figure class="project-cover">
+        <?= $cover ?>
+        <figcaption>
+          <div>
+            <h1><?= $page->headline()->or($page->title()) ?></h1>
+            <?php if($page->intro()->isNotEmpty()): ?>
+            <div class="text">
+              <?= $page->intro()->kt() ?>
+            </div>
+            <?php endif ?>
+          </div>
+        </figcaption>
+      </figure>
+      <?php endif ?>
+    </header>
+
+    <div class="project-text text">
+      <time class="project-year"><?= $page->year() ?></time>
+      <?= $page->text()->kt() ?>
+
+      <?php if ($page->tags()->isNotEmpty()): ?>
+      <p class="project-tags"># <?= $page->tags() ?></p>
+      <?php endif ?>
+    </div>
+
+    <ul class="project-gallery"<?= attr(['data-even' => $gallery->isEven(), 'data-count' => $gallery->count()], ' ') ?>>
+      <?php foreach ($gallery as $image): ?>
+      <li>
+        <figure>
+          <?= $image->crop(800, 1000) ?>
+        </figure>
+      </li>
+      <?php endforeach ?>
+    </ul>
+  </article>
+</main>
+
+<?php snippet('footer') ?>
+```

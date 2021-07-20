@@ -1,87 +1,53 @@
-<?php snippet('header', [ 'background' => 'dark' ]) ?>
+<?php layout('plugins') ?>
 
-<main class="main" id="maincontent">
+<article>
 
-  <article class="plugin">
+  <header>
 
-    <header class="hero | -theme:dark">
-      <div class="wrap">
-
-        <?php if ($image = $page->images()->findBy('name', 'screenshot')): ?>
-        <div class="grid">
-          <div class="column">
-            <h1><span><?= $page->title() ?></span> Plugin</h1>
-            <div class="intro | -theme:dark -mb:large">
-              <?= $page->description()->kt() ?>
-            </div>
+    <div class="columns mb-42" style="--columns-md: 1; --columns: 2; --gap: var(--spacing-12);">
+      <div class="mb-6">
+        <h1 class="h1 block mb-12"><?= $page->title() ?></h1>
+        <div class="prose mb-6">
+          <div class="intro">
+            <?= $page->description()->kt()->widont() ?>
           </div>
-          <figure class="column">
-            <?= $image ?>
-          </figure>
         </div>
-        <?php else: ?>
-        <h1><span><?= $page->title() ?></span> Plugin</h1>
-        <div class="intro | -theme:dark -mb:large">
-          <?= $page->description()->kt() ?>
-        </div>
-        <?php endif ?>
 
-        <nav class="ctas">
-          <span>
-            <a class="cta" href="<?= $download ?>">
-              <?= icon('download') ?>Download <?= $page->version() ?>
-            </a>
-          </span>
+        <nav aria-label="Plugin links" class="auto-fill items-center" style="--min: 10rem;">
+          <a class="btn btn--filled" href="<?= $download ?>">
+            <?= icon('download') ?>Download <?= $page->version() ?>
+          </a>
 
-          <span>
-            <?php if ($page->documentation()->isNotEmpty()): ?>
-            <a class="cta" href="<?= $page->documentation() ?>">
-              <?= icon('guide') ?>Documentation
-            </a>
-            <?php endif ?>
-            <?php if ($page->repository()->isNotEmpty()): ?>
-            <a class="cta" href="<?= $page->repository() ?>">
-              <?= icon('git') ?>Source
-            </a>
-            <?php endif ?>
-          </span>
-        </nav>
-
-      </div>
-    </header>
-
-    <div class="-background:light">
-      <div class="wrap">
-        <nav class="breadcrumb">
-          <span>
-            <a href="<?= url('plugins') ?>">Plugins</a>
-            <a href="<?= url('plugins?category=' . $page->category()) ?>"><?= option('plugins.categories.' . $page->category() . '.label') ?></a>
-            <a href="<?= $page->url() ?>"><?= $page->title() ?></a>
-          </span>
-          <p>by <?= $author->title() ?></p>
+          <?php if ($page->repository()->isNotEmpty()): ?>
+          <a class="btn btn--filled" href="<?= $page->repository() ?>">
+            <?= icon('github') ?>Source
+          </a>
+          <?php endif ?>
         </nav>
       </div>
+
+      <?php if ($image = $page->screenshot()): ?>
+      <figure>
+        <a class="block" data-lightbox href="<?= $image->url() ?>">
+          <?= $image->resize(600)->html(['class' => 'shadow-2xl']) ?>
+        </a>
+      </figure>
+      <?php endif ?>
     </div>
 
-    <?php if ($authorPlugins->count()): ?>
-    <section class="section | -background:light">
-      <div class="wrap">
-        <h2>Other plugins by <?= $author->title() ?></h2>
-        <?php snippet('plugins', ['plugins' => $authorPlugins ]) ?>
-      </div>
-    </section>
-    <?php endif ?>
+  </header>
 
-    <?php if ($relatedPlugins->count()): ?>
-    <section class="section | -background:light">
-      <div class="wrap">
-        <h2>Related plugins</h2>
-        <?php snippet('plugins', ['plugins' => $relatedPlugins]) ?>
-      </div>
-    </section>
-    <?php endif ?>
-  </article>
+  <?php if ($authorPlugins->count()): ?>
+  <section class="mb-42">
+    <h2 class="h2 mb-6">Other plugins by <?= $author->title() ?></h2>
+    <?php snippet('templates/plugins/plugins', ['plugins' => $authorPlugins, 'headingLevel' => 'h3']) ?>
+  </section>
+  <?php endif ?>
 
-</main>
-
-<?php snippet('footer', [ 'theme' => 'dark' ]) ?>
+  <?php if ($relatedPlugins->count()): ?>
+  <section>
+    <h2 class="h2 mb-6">Related plugins</h2>
+    <?php snippet('templates/plugins/plugins', ['plugins' => $relatedPlugins, 'headingLevel' => 'h3']) ?>
+  </section>
+  <?php endif ?>
+</article>

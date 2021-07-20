@@ -1,0 +1,13 @@
+Intro: Set the base URL for the site.
+
+----
+
+Text:
+
+You can set a base URL for the site. When set to false, Kirby auto-detects the correct URL.
+
+```php
+return [
+  'url' => 'https://mydomain.com'
+];
+```

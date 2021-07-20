@@ -1,0 +1,65 @@
+Title: Fields
+
+----
+
+Description: Content within text files can be structured with fields. Learn how field naming works and how to access page content in your templates.
+
+----
+
+Intro: Content within text files can be structured with fields. You can add as many fields to a content file as your content model requires. Each text file can contain its very own set of fields. Together with the flexible folder structure you get a NoSQL-like data store with literally unlimited possibilities.
+
+----
+
+Text:
+
+## Adding fields manually
+
+If you prefer to write your content files in a text editor, you can separate one field from the next with four dashes on a separate line:
+
+```kirbycontent
+Title: An interesting article
+\----
+Date: (date: Y-m-d)
+\----
+Text:
+
+Really interesting content here...
+```
+
+Each field begins with the fieldname and a colon. The content of a field can be a single or multiple lines of text. You can store plain text, HTML, JSON, YAML or anything else which can be written in plain text in a field.
+
+Fields can be added or removed at any time. All fields are instantly available in Kirby's templates.
+
+When you add fields manually, there is no way to validate what you enter into each field.
+
+## Fields in the Panel
+
+Before fields are available to be filled by users in the Panel, they need to be defined for each content model. These field definitions are done in blueprints and give you full control over what sort of content each field can contain.
+
+The Panel comes with many pre-defined field types that help with structuring your content. A full list of available field types and their options can be accessed in the (link: docs/reference/panel/fields text: Reference):
+
+(reference: panel/fields)
+
+There are (link: plugins/category:panel text: several plugins) with custom field types available.
+
+## Naming fields
+
+In general, you are free to name your fields like you want to, but there are two limitations:
+
+1. You can only use alphanumeric characters and underscores in field names.
+2. If you use field names that are also used by native Kirby methods, your field names will conflict with Kirby's existing methods, e.g. if you give your field the name "image", it will conflict with Kirby's `$page->image()` method. If you still want to use this name for the field, you will have to call these fields differently in your templates. For details please refer to (link: docs/guide/templates/basics text: the template docs).
+
+## Accessing fields in templates
+
+Field content is accessible in your templates via the field's name:
+
+```php
+<?= $page->title()->html() ?>
+<?= $page->text()->kirbytext() ?>
+<?= $page->date()->toDate('Y-m-d') ?>
+```
+The methods that are chained to the name of the field are field methods that allow you to modify the field content in multiple ways. You can find a full list of available field methods in the (link: docs/reference/templates/field-methods text: Reference).
+
+## Further reading
+
+Also make sure to check out our Cookbook recipe on (link: docs/cookbook/text/custom-fields text: custom content fields).

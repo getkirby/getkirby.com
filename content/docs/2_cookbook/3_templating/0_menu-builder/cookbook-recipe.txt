@@ -1,0 +1,300 @@
+Title: Menu builders
+
+----
+
+Text:
+
+(image: menu-builders.jpg)
+
+In our (link: docs/cookbook/templating/menus text: menus recipe), we show how to build several types of menus with Kirby. However, those examples work with main pages and their children and have their limits when it comes to building more flexible menus where the depth of a page is not important or where you need multiple menus with selected pages.
+
+In this recipe, we will look how we can build such custom menus where editors can pick the pages they want to include in a menu, or how we can even include external links.
+
+<info>
+In this recipe we assume that these menus are created in `site.yml`, so that we use the `$site` object when rendering them in the template. You can of course also use these menus in a page and adjust the template code accordingly.
+</info>
+
+## Independent single level custom menu
+
+The easiest way to create a custom menu from existing pages is the use of a (link: docs/reference/panel/fields/pages text: pages field):
+
+```yaml
+mainMenu:
+  type: pages
+  label: Main menu pages
+```
+
+This setup can be used for a main menu, or for different single-level menus in the footer or in a sidebar.
+
+In the template:
+
+```php
+<?php $menu = $site->mainMenu()->toPages(); ?>
+<?php if ($menu->isNotEmpty()) : ?>
+<nav>
+  <ul>
+    <?php foreach ($menu as $menuItem) : ?>
+    <li><a href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a></li>
+    <?php endforeach ?>
+  </ul>
+</nav>
+<?php endif ?>
+```
+
+## Multiple independent custom menus
+
+The above works well if the required menus are known in advance, so that we can provide a field per menu.
+
+In some cases, for example for a footer with multiple menus, we need some more flexibility. In such a case, where the number of menus can vary, a structure field is more useful.
+
+```yaml
+menus:
+  type: structure
+  fields:
+    menuHeadline:
+      type: text
+      label: Menu headline
+    menuItems:
+      type: pages
+      label: Menu item
+```
+
+In the template, we can use it like this to render each menu with its headline:
+
+```php
+<?php $menus = $site->menus()->toStructure(); ?>
+<?php if ($menus->isNotEmpty()) : ?>
+  <?php foreach ($menus as $menu) : ?>
+
+    <?php $menuItems = $menu->menuItems()->toPages(); ?>
+    <?php if ($menuItems->isNotEmpty()) : ?>
+    <nav class="footer-menu">
+      <h4><?= $menu->menuHeadline()->html() ?></h4>
+      <ul>
+        <?php foreach ($menuItems as $menuItem) : ?>
+          <li><a href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a></li>
+        <?php endforeach ?>
+      </ul>
+    </nav>
+    <?php endif ?>
+    
+  <?php endforeach ?>
+<?php endif ?>
+```
+
+We loop through the structure items and create a new `nav` tag for each menu. Inside the `nav` tag, we render the title for each menu and the navigation items as a list.
+
+## Mixed menu I
+
+What if we want mix external links with Kirby pages in our menu? We can also achieve this with a structure field.
+
+```yaml
+mixedMenu:
+  type: structure
+  fields:
+    linkTitle:
+      type: text
+      label: Menu item title
+    isExternal:
+      type: toggle
+    pageLink:
+      type: pages
+      label: Page link
+      max: 1
+      when:
+        isExternal: false
+    externalLink:
+      type: url
+      label: External URL
+      when:
+        isExternal: true
+```
+
+Here, we show the `pageLink` field to select a page if `isExternal` is false, and the `externalLink` field if `isExternal` is set to true. For both types of links the editor can also set a custom title.
+
+In the template:
+
+```php
+<?php $menuItems = $site->mixedMenu()->toStructure(); ?>
+<?php if ($menuItems->isNotEmpty()) : ?>
+<nav>
+  <ul>
+    <?php foreach ($menuItems as $menuItem) : ?>
+    <?php if ($pageLink = $menuItem->pageLink()->toPage()) : ?>
+    <li><a href="<?= $pageLink->url() ?>"><?= $menuItem->linkTitle()->or($pageLink->title()) ?></a></li>
+    <?php elseif ($menuItem->externalLink()->isNotEmpty()) : ?>
+      <li><a href="<?= $menuItem->externalLink() ?>"><?= $menuItem->linkTitle()->or(Url::short($menuItem->externalLink()->value())) ?></a></li>
+      <?php endif ?>
+    <?php endforeach ?>
+  </ul>
+</nav>
+<?php endif ?>
+```
+
+In our template, we loop through all items and check if the provided link is a page or an URL. We render the title from the structure item if it is given, otherwise we fall back to the page title for a page link or to the shortened URL for external links.
+
+## Two-level custom menu
+
+In our blueprint, we create a structure field with the following setup:
+
+```yaml
+menu:
+  type: structure
+  fields:
+    mainMenu:
+      type: pages
+      label: Mainmenu item
+      max: 1
+    hasSubmenu:
+      type: toggle
+      text: Include a submenu?
+    subMenu:
+      type: pages
+      label: Submenu items
+      when:
+        hasSubmenu: true
+```
+
+The structure field has a pages field for the first level of menu items, and a second conditional pages field for the submenu items that is only shown to editors if they set the `hasSubmenu` toggle field to `true`. The toggle field is not absolutely necessary but helps to keep the form concise.
+
+The `mainMenu` pages field is limited to `max: 1` pages, whereas the `subMenu` field can have multiple subpages.
+
+We can now render this menu in the template like this:
+
+```php
+<?php 
+$menu = $site->menu()->toStructure();
+if ($menu->isNotEmpty()) : ?>
+<nav>
+  <ul>
+    <?php foreach ($menu as $item): ?>
+      <?php if ($mainMenuItem = $item->mainMenu()->toPage()) : ?>
+      <li><a href="<?= $mainMenuItem->url() ?>"><?= $mainMenuItem->title() ?></a>
+      <?php endif ?>
+      <?php $subMenu = $item->subMenu()->toPages(); ?>
+      <?php if ($item->hasSubmenu()->isTrue() && $subMenu->isNotEmpty()) : ?>
+        <ul class="submenu-list">
+          <?php foreach ($subMenu as $subItem) : ?>
+          <li><a href="<?= $subItem->url() ?>"><?= $subItem->title() ?></a></li>
+          <?php endforeach ?>
+        </ul>
+      </li>
+      <?php endif ?>
+    <?php endforeach ?>
+  </ul>
+</nav>
+<?php endif ?>
+```
+
+First we check if our structure field contains items with `$menu->isNotEmpty()`, because we don't want to render empty `nav` tags.
+
+We then loop through the structure items, and for each first level item we check if the stored value is actually a page.
+
+For the second level menu items, we also check if the pages collection (`$item->subMenu()->toPages()`) is empty, and only render the submenu if there are items.
+
+If you need more menu levels, you can extend this example and nest another structure field inside the first level structure.
+
+## Mixed menu II
+
+We can also combine this example with external links like in the example before.
+
+Since our fields are repetive, we split them into two parts.
+
+The first part is our nested menu structure field:
+
+```yaml
+nestedMenu:
+  type: structure
+  label: Nested menu
+  fields:
+    menufields: fields/menufields
+    hasSubmenu:
+      type: toggle
+      text: Add a submenu?
+    submenu:
+      type: structure
+      label: Second Level Items
+      when:
+        hasSubmenu: true
+      fields:
+        menufields: fields/menufields
+```
+
+Inside this field, we (link: docs/guide/blueprints/extending-blueprints#reusing-and-extending-field-groups text: reuse a group of fields) we have defined in `/site/blueprints/fields/menufields.yml`, because we need these 4 fields in both structure levels:
+
+```yaml "/site/blueprints/fields/menufields.yml"
+type: group
+fields:
+  isExternal:
+    type: toggle
+    label: External link?
+  linkTitle:
+    type: text
+    label: Link title
+  pageLink:
+    label: Page link
+    type: pages
+    max: 1
+    when:
+      isExternal: false
+  externalLink:
+    type: url
+    label: External link
+    when:
+      isExternal: true
+```
+
+This example allows us to have conditional external links both on the first and on the second levels of the menu. Editors can also add an optional link title.
+
+Let's see how we can handle this field definition in our template. To keep our code dry, we use a snippet inside the template:
+
+```php
+<?php $items = $site->nestedMenu()->toStructure() ?>
+<?php if ($items->isNotEmpty()) : ?>
+<nav>
+  <?php snippet('menuitem-list', ['items' => $items]) ?>
+</nav>
+<?php endif ?>
+```
+
+Inside the snippet, we recursively call the snippet for the submenu items:
+
+```php "site/snippets/menuitem-list.php"
+<ul>
+  <?php foreach ($items as $item) : ?>
+
+    <?php if ($pageLink = $item->pageLink()->toPage()) : ?>
+    <li><a href="<?= $pageLink->url() ?>"><?= $item->linkTitle()->or($pageLink->title()) ?></a>
+    <?php elseif ($item->externalLink()->isNotEmpty()) : ?>
+    <li><a href="<?= $item->externalLink() ?>"><?= $item->linkTitle()->or(Url::short($item->externalLink()->value())) ?></a>
+    <?php endif ?>
+
+    <?php $subMenuItems = $item->subMenu()->toStructure(); ?>
+
+    <?php if ($item->hasSubmenu()->isTrue() && $subMenuItems->isNotempty()) : ?>
+    <?php snippet('menuitem-list', ['items' => $subMenuItems]) ?>
+    <?php endif ?>
+    </li>
+
+  <?php endforeach ?>
+</ul>
+```
+
+****
+
+As always, this is just a basic collection of ideas that you can extend for your use cases. In the structure field examples, you could, for example, include additional fields for link attributes, like `target: _blank` for those clients who absolutely want to open links in new tabs.
+
+
+Instead of using conditional fields for page links vs. external links, you could also use the (link: https://github.com/OblikStudio/kirby-link-field text: link field plugin).
+
+----
+
+Published: 2019-11-15
+
+----
+
+Description: Create custom menus from the Panel leveraging the power of the pages and the structure field
+
+----
+
+Authors: - authors/sonja-broda

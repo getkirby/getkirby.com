@@ -1,0 +1,11 @@
+Title: /pages/:id/children/blueprints
+----
+Info: GET
+----
+Intro: List all allowed blueprints for children
+----
+Text:
+
+## Query parameters
+
+(docs: api/page-blueprints-parameters)

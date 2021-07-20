@@ -1,0 +1,5 @@
+Title: content
+
+----
+
+Intro: Returns the root of the content folder

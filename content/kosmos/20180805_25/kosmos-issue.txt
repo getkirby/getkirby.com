@@ -31,7 +31,7 @@ We are hitting a big Kirby 3 milestone today with the first private single-langu
 
 - [Mockmodule](https://github.com/plusForta/mockmodule) is a plugin for all Kirby users who use both the Modules and the Patterns plugins. It allows you to add static content for modules in the pattern lab (free).
 
-- The [Kirby TOC plugin](https://github.com/jenstornell/kirby-toc) is an enhancement of the [TOC plugin](https://github.com/getkirby/getkirby.com/tree/master/site/plugins/toc) you probably know from the https://getkirby.com website with support for multiple heading levels (free).
+- The [Kirby TOC plugin](https://github.com/jenstornell/kirby-toc) is an enhancement of the TOC plugin you probably know from the https://getkirby.com website with support for multiple heading levels (free).
 
 <small>Always test third party plugins thoroughly before using them in production!</small>
 
