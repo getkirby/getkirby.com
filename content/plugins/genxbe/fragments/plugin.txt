@@ -1,0 +1,13 @@
+Title: Fragments
+
+----
+
+Repository: https://github.com/genxbe/k3-fragments
+
+----
+
+Category: templating
+
+----
+
+Description: Kirby3 Fragments is a small string/translation helper. You can use fragments in your code 'laravel/blade' style and optionally translate them on site or page level. Additionaly you can pass placeholders to the fragment. A perfect solution for translation of static labels etc... But can also be used to make other 'static' content manageable via the CMS.
