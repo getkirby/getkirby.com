@@ -11,6 +11,11 @@ Text:
 - `F::relativepath()` now supports file paths with an unrelated base by prefixing `../` to build a relative path [#3267](https://github.com/getkirby/kirby/issues/3267)
 - Improved API error paths when using custom directory setup
 - `Html::encode()` uses the `ENT_QUOTES` constant now for `htmlentities()`, converting both double and single quotes
+- `F::size` and `F::niceSize` accept array of file paths
+- `Dir::size()` has new `$recursive` parameter
+- The new `license` root allows to store the license outside of the config dir for easier deployments and multi-site setups.
+- The default block snippet for the `image` block now escapes the content output from the source, alt and link fields. This protects against XSS attacks against site visitors.
+- `Str::widont` applies to punctuation with gap
 
 ## Panel
 
@@ -23,3 +28,6 @@ Text:
 - New JS helper to deep-merge objects (`helpers/object.js`)
 - New `$helper.color` helper for turning a string into a valid CSS color value
 - New `Panel` class alias for `Kirby\Panel\Panel`
+- Writer field: marks (floating toolbar buttons) now show tooltips
+- Blocks without fields don't open empty drawer anymore (e.g. new line block)
+- `$t()` JS helper now supports a fallback value as third parameter

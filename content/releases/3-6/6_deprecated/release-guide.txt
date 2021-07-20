@@ -5,6 +5,7 @@ Text:
 - The `page()` helper now throws a deprecation warning if multiple IDs get passed. Will be enforced in 3.7.0 by only returning the first page. Use `pages()` for multiple pages instead.
 - `pages()` will now throw a deprecation warning if single ID gets passed. Will be enforced in 3.7.0 by always returning a `Pages` collection. Use `page()` for a single page instead.
 - Creating a `Kirby\Cms\File` without a `parent` property has been deprecated and throws a warning. Starting in 3.7.0 the property will be required and cause a breaking error if not passed. [#3372](https://github.com/getkirby/kirby/pull/3372)
+- `Str::template()`: the parameters `$fallback`, `$start` and `$end` have been deprecated and throw a deprecation warning. Use instead an `$options` array with `fallback`, `start` and/or `end` keys as third parameter.
 
 | Deprecated | Throws warning | Removed in | Use instead |
 |-|-|-|-|

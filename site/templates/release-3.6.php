@@ -16,15 +16,15 @@
   </style>
 
   <div>
-    <h1 class="h1">3.6-alpha.1 ⚡</h1>
-    <p class="h1 color-gray-600">Developer preview</p>
+    <h1 class="h1"><?= $page->title() ?> ⚡</h1>
+    <p class="h1 color-gray-600">Release preview</p>
   </div>
 
   <?php snippet('cta', [
     'buttons' => [
       [
         'text' => 'Try now',
-        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-alpha.1',
+        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-alpha.2',
         'icon' => 'download',
         'style' => 'filled'
       ],

@@ -11,3 +11,13 @@ Text:
 - `Str::pool()` now also returns a string (if set via the second argument) if an array of types is passed as  first argument [#3393](https://github.com/getkirby/kirby/pull/3393)
 - Fixed return type for `Kirby\Cms\App::translation()` in DocBlock [#3383](https://github.com/getkirby/kirby/pull/3383)
 - Fixed `tc()` helper docblock and parameter typing [#3474](https://github.com/getkirby/kirby/issues/3474)
+- Extending a non-existing Vue component is ignored now instead throwing an console error and breaking the Panel
+- Changing the page title no longer causes errors with slug autocorrection (e.g. from underscores to dashes) if the user does not have permissions to change the slug
+
+## Fixed regressions from 3.6.0-alpha.1
+
+- Fixed dropdown issue in model views [#3491](https://github.com/getkirby/kirby/issues/3491)
+- Fixed default permissions for Panel views [#3487](https://github.com/getkirby/kirby/issues/3487)
+- Fixed error dialog not shown at form errors [#3520](https://github.com/getkirby/kirby/pull/3520)
+- Fixed dialog events not being triggered
+- Fixed blueprint placeholder messages for file views with default template

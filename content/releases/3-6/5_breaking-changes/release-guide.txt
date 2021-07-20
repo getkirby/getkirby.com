@@ -38,7 +38,7 @@ We know that breaking changes suck, when they break your plugins or other parts 
 - `$files->add()` and `$users->add()` now throw exceptions when something other than a `File`/`User` object, a `Files`/`Users` object or a file/user ID is passed to them. Empty values (`null`, `false` and `true`) are silently ignored. [#3248](https://github.com/getkirby/kirby/pull/3248)
 - All API endpoints for content locking/unlocking don't display an exception anymore when content locking isn't supported.
 - Some argument and property types are now more specific and therefore stricter [#3282](https://github.com/getkirby/kirby/pull/3282), [#3241](https://github.com/getkirby/kirby/pull/3241)
-
+- `F::niceSize()` doesn't check anymore whether file exists
 
 ## Panel
 
@@ -90,3 +90,8 @@ We know that breaking changes suck, when they break your plugins or other parts 
     - `$store.dispatch('breadcrumb')` and `$store.dispatch('title')`have been removed. Use Panel areas instead.
 - The `previewThumb` helper has been removed. `k-item-image` takes care of processing the image data correctly inside `k-item`.
 - The following methods from `vuex-i18n` are no longer available in the new custom implementation: `$tc`,  `$tlang`, `$i18n.localeExists`, `$i18n.keyExists`.     Translation strings cannot be added dynamically anymore, only through our official extension.
+
+### CSS Selectors
+- `.k-panel[data-translation]` is now `.k-panel[data-language]`
+- `.k-panel[data-default-translation]` is now `.k-panel[data-default-translation]`
+

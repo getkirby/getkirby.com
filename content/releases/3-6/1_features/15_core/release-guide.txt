@@ -57,3 +57,13 @@ return [
 Although the example above could of course also simply be solved with more route definitions, it's sometimes really useful to implement such a nested router.
 
 You can also use it for any kind of logic that depends on path matching with regex.
+
+## `System::title()`
+
+Is now used for all emails to replace "Kirby Panel" as generic title
+
+## `$files->size()` and `$files->niceSize()`
+
+Get the file size of all files in a collection
+
+

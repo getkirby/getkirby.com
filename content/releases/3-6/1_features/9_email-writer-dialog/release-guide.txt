@@ -2,6 +2,8 @@ Title: Email dialog for the writer field
 ----
 Text:
 
-<info>
-Status: **in progress**
-</info>
+The format toolbar in Writer fields has a new button for emails.
+
+(image: email-button.png)
+
+(image: email-dialog.png)
