@@ -20,6 +20,10 @@ class PluginPage extends Page
 
     public function download()
     {
+        if ($this->content()->has('download')) {
+            return $this->content()->get('download')->value();
+        }
+
         $url   = $this->repository()->value();
         $branch = $this->branch()->value() ?? 'master';
 
