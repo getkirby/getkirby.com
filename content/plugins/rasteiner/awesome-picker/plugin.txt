@@ -1,0 +1,14 @@
+Title: Awesome Picker
+
+----
+
+Repository: https://github.com/rasteiner/k3-awesome-picker
+
+----
+
+Category: panel
+
+----
+
+Description: Font Awesome icon picker field for the panel.
+
