@@ -2,10 +2,6 @@ Title: Fiber Search
 ----
 Text:
 
-<info>
-Status: **planned**
-</info>
-
 So far it's impossible to extend our Panel search in a good way and to add your own search type next to pages, files and users.
 
 With Fiber it's becoming a lot easier to implement custom search types and even overwrite existing search implementations.

@@ -94,4 +94,5 @@ We know that breaking changes suck, when they break your plugins or other parts 
 ### CSS Selectors
 - `.k-panel[data-translation]` is now `.k-panel[data-language]`
 - `.k-panel[data-default-translation]` is now `.k-panel[data-default-translation]`
+- CSS class `.k-block-handle` has been replaced with `.k-sort-handle`
 

@@ -13,6 +13,10 @@ Text:
 - Fixed `tc()` helper docblock and parameter typing [#3474](https://github.com/getkirby/kirby/issues/3474)
 - Extending a non-existing Vue component is ignored now instead throwing an console error and breaking the Panel
 - Changing the page title no longer causes errors with slug autocorrection (e.g. from underscores to dashes) if the user does not have permissions to change the slug
+- Fixed blocks field sort handle on hover [#3538](https://github.com/getkirby/kirby/issues/3538)
+- Fixed writer field RTL support [https://kirby.nolt.io/322](https://kirby.nolt.io/322)
+- Fixed version number in settings view in RTL interface [#3581](https://github.com/getkirby/kirby/pull/3581)
+- Fixed manual files sorting via changePosition dialog [#3589](https://github.com/getkirby/kirby/issues/3589)
 
 ## Fixed regressions from 3.6.0-alpha.1
 
@@ -21,3 +25,13 @@ Text:
 - Fixed error dialog not shown at form errors [#3520](https://github.com/getkirby/kirby/pull/3520)
 - Fixed dialog events not being triggered
 - Fixed blueprint placeholder messages for file views with default template
+
+## Fixed regressions from 3.6.0-alpha.2
+
+- Fixed drag handle for picker fields [#3553](https://github.com/getkirby/kirby/issues/3553)
+- Fixed blocks field options bar [#3552](https://github.com/getkirby/kirby/issues/3552)
+- Fixed correct `dir` attribute for fields [#3568](https://github.com/getkirby/kirby/pull/3568)
+- Styling for tabbed link highlighting works again [#3576](https://github.com/getkirby/kirby/issues/3576)
+- Topbar is fully responsive again [#3574](https://github.com/getkirby/kirby/issues/3574)
+- Languages get deleted without error again [#3588](https://github.com/getkirby/kirby/issues/3588)
+- Dropdowns and dropdown buttons no longer appear above the save bar. [#3554](https://github.com/getkirby/kirby/issues/3554)

@@ -16,6 +16,7 @@ Text:
 - The new `license` root allows to store the license outside of the config dir for easier deployments and multi-site setups.
 - The default block snippet for the `image` block now escapes the content output from the source, alt and link fields. This protects against XSS attacks against site visitors.
 - `Str::widont` applies to punctuation with gap
+- The `Data\Json::decode()` and `Data\Xml::decode()` methods now accept empty strings and treat them as an empty data set (empty array) for consistency with `Data\Txt::decode()` and `Data\Yaml::decode()` [#3565](https://github.com/getkirby/kirby/pull/3565)
 
 ## Panel
 
@@ -31,3 +32,6 @@ Text:
 - Writer field: marks (floating toolbar buttons) now show tooltips
 - Blocks without fields don't open empty drawer anymore (e.g. new line block)
 - `$t()` JS helper now supports a fallback value as third parameter
+- Enhanced CSS support for RTL Panel interface [#3556](https://github.com/getkirby/kirby/pull/3556)
+- New `v-direction` directive to set the `dir` attribute based on the current content translation [#3568](https://github.com/getkirby/kirby/pull/3568)
+- File view uses stable preview link for files (instead of media folder URL) [#3575](https://github.com/getkirby/kirby/pull/3575)
