@@ -2,10 +2,6 @@ Title: Fiber Dropdowns
 ----
 Text:
 
-<info>
-Status: **in progress**
-</info>
-
 Our action dropdowns for pages, files and users are all loaded on request. This way, we can load and evaluate permissions individually from the API and then disable items in the dropdowns that should not be accessible.
 
 So far, quite a lot of frontend code is needed to get this right. With the Fiber concept, we can handle those dropdowns easily on the backend and then just replace our frontend code with a simple single call.
