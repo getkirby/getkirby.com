@@ -24,7 +24,7 @@
     'buttons' => [
       [
         'text' => 'Try now',
-        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-alpha.2',
+        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-alpha.3',
         'icon' => 'download',
         'style' => 'filled'
       ],
@@ -105,7 +105,7 @@
     'buttons' => [
       [
         'text' => 'Try now',
-        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-alpha.1',
+        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-alpha.3',
         'icon' => 'download'
       ],
       [

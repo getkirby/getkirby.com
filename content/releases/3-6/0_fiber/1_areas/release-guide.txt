@@ -1,0 +1,116 @@
+Title: Areas
+----
+
+Intro: Fiber comes with a new structure for the Panel. Every part of the Panel is a separated area with routes, optional menu item, icon, breadcrumb label, access permissions, etc.
+
+Your plugins can create additional Areas for entire new Panel parts and mini applications.
+
+----
+Text:
+
+## Default areas
+
+The following "areas" are installed by default:
+
+- account
+- installation
+- login
+- settings
+- site
+- users
+
+## Area definition
+
+Plugins can create their own Panel areas. Areas can be just a single view or really complex applications with multiple routes.
+
+Areas are defined in a callback function that receives the `$kirby` instance and must return their configuration as an array
+
+```php
+Kirby::plugin('yourname/todos', [
+  'areas' => [
+    'todos' => function ($kirby) {
+      return [
+        // label for the menu and the breadcrumb
+        'label' => 'Todos',
+
+        // icon for the menu and breadcrumb
+        'icon' => 'check',
+
+        // optional replacement for the breadcrumb label
+        'breadcrumbLabel' => function () {
+          return '12 Todos';
+        },
+
+        // show / hide from the menu
+        'menu' => true,
+
+        // link to the main area view
+        'link' => 'todos',
+
+        // views
+        'views' => [
+          [
+            // the Panel patterns must not start with 'panel/',
+            // the `panel` slug is automatically prepended.
+            'pattern' => 'todos',
+            'action'  => function () {
+
+              // view routes return a simple array,
+              // which will be injected into our Vue app;
+              // the array can control the loaded Vue component,
+              // props for the component and settings for the current view
+              // (like breadcrumb, title, active search type etc.)
+
+              return [
+                // the Vue component can be defined in the
+                // `index.js` of your plugin
+                'component' => 'k-todos-view',
+
+                // the document title for the current view
+                'title' => 'Todos',
+
+                // the breadcrumb can be just an array or a callback
+                // function for more complex breadcrumb logic
+                'breadcrumb' => function () {
+                  // each item in the breadcrumb array
+                  // has a label and a link attribute
+                  return [
+                    [
+                      'label' => 'Buy some milk',
+                      'link'  => '/todos/123'
+                    ]
+                  ];
+                },
+
+                // props will be directly available in the
+                // Vue component. It's a super convenient way
+                // to send backend data to the Panel
+                'props' => [
+                  'todos' => [...]
+                ],
+
+                // we can preset the search type with the
+                // search attribute
+                'search' => 'pages'
+              ]
+            }
+          ]
+        ]
+      ]
+    }
+  ]
+])
+```
+
+```js
+panel.plugin('yourname/todos', {
+  components: {
+    'k-todos-view': {
+      props: {
+        todos: Array
+      },
+      template: ...
+    }
+  }
+})
+```
