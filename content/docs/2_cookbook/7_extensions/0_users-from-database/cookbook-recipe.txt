@@ -24,7 +24,12 @@ But in the same way as you can incorporate content from other sources like sprea
 
 In this recipe, we will see how we can achieve this. For this purpose, we will start with a simple read-only solution and then extend this basic setup step-by-step into a solution that lets us create and edit database users from the Panel, including multi-language user content.
 
+<info>
+Note that using users from a database as described in this recipe will **not** solve potential performance issues with thousands of users.
+</info>
+
 No time and just want the solution? Head over to the end of this recipe where you will find the (link: #tl-dr-final-code text:final code).
+
 
 ## Prerequisites
 
@@ -53,74 +58,80 @@ Kirby::plugin('cookbook/dbusers', [
             'pattern' => 'create-db',
             'action' => function () {
                 $result = [];
-                try {
-                    // create new SQLite database file
-                    $database = new SQLite3(kirby()->root('index') . '/db-users.sqlite');
-                } catch (Exception $e) {
-                    echo $e->getMessage();
-                }
+                // only create database file if it doesn't exist yet
+                if (file_exists(kirby()->root('index') . '/db-users.sqlite') === false) {
+                    try {
+                        // create new SQLite database file
+                        $database = new SQLite3(kirby()->root('index') . '/db-users.sqlite');
+                    } catch (Exception $e) {
+                        echo $e->getMessage();
+                    }
 
-                if ($database) {
-                    // create new Database object
-                    // replace `path_to_file` with the absolute path to the file on your computer!
-                    $db = new Database([
-                        'type'     => 'sqlite',
-                        'database' => 'path_to_sqlite_file/db-users.sqlite',
-                    ]);
-                    // add users table with id, email, name, role, language and password fields
-                    // all fields use type text
-                    $db->createTable('users', [
-                        'id'       => [
-                            'type'   => 'text',
-                            'unique' => true,
-                            'key'    => 'primary'
-                        ],
-                        'email'    => [
-                            'type' => 'text',
-                        ],
-                        'name'     =>  [
-                            'type' => 'text',
-                        ],
-                        'role'     =>  [
-                            'type' => 'text',
-                        ],
-                        'language' =>  [
-                            'type' => 'text',
-                        ],
-                        'password' =>  [
-                            'type' => 'text',
-                        ],
-                    ]);
-                    // set the users table as the one we want to query
-                    $query = $db->table('users');
-                    // three users show be enough for a start
-                    $users =  [
-                        [ 
-                          'id'        => Str::random(8),
-                          'email'     => 'hallo@getkirby.com',
-                          'password'  => User::hashPassword('12345678'),
-                          'role'      => 'admin',
-                          'language'  => 'en',
-                        ],
-                        [ 
-                          'id'        => Str::random(8),
-                          'email'     => 'hello@getkirby.com',
-                          'password'  => User::hashPassword('12345678'),
-                          'role'      => 'admin',
-                          'language'  => 'en',
-                        ],
-                        [ 
-                          'id'        => Str::random(8),
-                          'email'     => 'moin@getkirby.com',
-                          'password'  => User::hashPassword('12345678'),
-                          'role'      => 'admin',
-                          'language'  => 'en',
-                        ]
-                    ];
-                    // loops through users array and insert each data set into users table
-                    foreach ($users as $user ) {
-                      $query->values($user);
-                      $result[] = $query->insert();
+                    if ($database) {
+                        // create new Database object
+                        // replace `path_to_file` with the absolute path to the file on your computer!
+                        $db = new Database([
+                            'type'     => 'sqlite',
+                            'database' => 'path_to_sqlite_file/db-users.sqlite',
+                        ]);
+                        // only create table if it doesn't exist yet
+                        if ($db->validateTable('users') === false) {
+                            // add users table with id, email, name, role, language and password fields
+                            // all fields use type text
+                            $db->createTable('users', [
+                                'id'       => [
+                                    'type'   => 'text',
+                                    'unique' => true,
+                                    'key'    => 'primary'
+                                ],
+                                'email'    => [
+                                    'type' => 'text',
+                                ],
+                                'name'     =>  [
+                                    'type' => 'text',
+                                ],
+                                'role'     =>  [
+                                    'type' => 'text',
+                                ],
+                                'language' =>  [
+                                    'type' => 'text',
+                                ],
+                                'password' =>  [
+                                    'type' => 'text',
+                                ],
+                            ]);
+                            // set the users table as the one we want to query
+                            $query = $db->table('users');
+                            // three users show be enough for a start
+                            $users =  [
+                                [ 
+                                'id'        => Str::random(8),
+                                'email'     => 'hallo@getkirby.com',
+                                'password'  => User::hashPassword('12345678'),
+                                'role'      => 'admin',
+                                'language'  => 'en',
+                                ],
+                                [ 
+                                'id'        => Str::random(8),
+                                'email'     => 'hello@getkirby.com',
+                                'password'  => User::hashPassword('12345678'),
+                                'role'      => 'admin',
+                                'language'  => 'en',
+                                ],
+                                [ 
+                                'id'        => Str::random(8),
+                                'email'     => 'moin@getkirby.com',
+                                'password'  => User::hashPassword('12345678'),
+                                'role'      => 'admin',
+                                'language'  => 'en',
+                                ]
+                            ];
+                            // loops through users array and insert each data set into users table
+                            foreach ($users as $user ) {
+                                $query->values($user);
+                                $result[] = $query->insert();
+                            }
+                        }
                     }
                 }
 
@@ -130,6 +141,9 @@ Kirby::plugin('cookbook/dbusers', [
     ]
 ];
 ```
+<warning>
+**All routes we use in this recipe are only here to make it easy for you to create the database, tables and users. Under no circumstances should they be used in any production environment. Make sure remove them once they are no longer needed to prevent unauthorized access and potential data loss.**
+</warning>
 
 In your browser, visit the route at `http(s)://localhost/create-db` (replace `localhost` with your local domain if necessary). This should now create the new database file in the root of your project and output a JSON array with the created indices in your browser:
 
@@ -700,34 +714,37 @@ Kirby::plugin('cookbook/dbusers', [
                     'type'     => 'sqlite',
                     'database' => '/Users/sonja/public_html/lang-test/db-users.sqlite', #full path to file
                 ]);
-                $result = $db->createTable('content', [
-                    'id' => [
-                        'type' => 'text',
-                        'unique' => true,
-                    ],
-                    'language' => [
-                        'type' => 'text',
-                    ],
-                    'street' =>  [
-                        'type' => 'text',
-                    ],
-                    'zip' =>  [
-                        'type' => 'text',
-                    ],
-                    'city' =>  [
-                        'type' => 'text',
-                    ],
-                    'website' =>  [
-                        'type' => 'text',
-                    ],
-                    'twitter' =>  [
-                        'type' => 'text',
-                    ],
-                    'instagram' =>  [
-                        'type' => 'text',
-                    ],
-                ]);
-                return $result ? 'The table was successfully created' : 'An error occurred';
+                // only create table if it doesn't exist yet
+                if($db->validateTable('content') === false) {
+                    $result = $db->createTable('content', [
+                        'id' => [
+                            'type' => 'text',
+                            'unique' => true,
+                        ],
+                        'language' => [
+                            'type' => 'text',
+                        ],
+                        'street' =>  [
+                            'type' => 'text',
+                        ],
+                        'zip' =>  [
+                            'type' => 'text',
+                        ],
+                        'city' =>  [
+                            'type' => 'text',
+                        ],
+                        'website' =>  [
+                            'type' => 'text',
+                        ],
+                        'twitter' =>  [
+                            'type' => 'text',
+                        ],
+                        'instagram' =>  [
+                            'type' => 'text',
+                        ],
+                    ]);
+                    return $result ? 'The table was successfully created' : 'An error occurred';
+                }
             }
         ],
     ]
@@ -773,78 +790,90 @@ Kirby::plugin('cookbook/dbusers', [
     'blueprints' => [
         'users/admin' => __DIR__ . '/blueprints/users/admin.yml',
     ],
+    // make sure to remove these routes when they are no longer needed.
+    // done move them into a production environment to prevent potential data loss.
     'routes' => [
         [
             'pattern' => 'create-db',
             'action' => function () {
                 $result = [];
+                // only create database file if it doesn't exist yet
+                if (file_exists(kirby()->root('index') . '/db-users.sqlite') === false) {
+                    try {
+                        // create new SQLite database file
+                        $database = new SQLite3(kirby()->root('index') . '/db-users.sqlite');
+                    } catch (Exception $e) {
+                        echo $e->getMessage();
+                    }
 
-                try {
-                    $database = new SQLite3(kirby()->root('index') . '/db-users.sqlite');
-                } catch (Exception $e) {
-                    echo $e->getMessage();
-                }
-
-
-                if ($database) {
-                    $db = new Database([
-                        'type'     => 'sqlite',
-                        'database' => '/Users/sonja/public_html/lang-test/db-users.sqlite', #full path to file
-                    ]);
-
-                    $db->createTable('users', [
-                        'id' => [
-                            'type' => 'text',
-                            'unique' => true,
-                            'key' => 'primary'
-                        ],
-                        'email' => [
-                            'type' => 'text',
-                        ],
-                        'name' =>  [
-                            'type' => 'text',
-                        ],
-                        'role' =>  [
-                            'type' => 'text',
-                        ],
-                        'language' =>  [
-                            'type' => 'text',
-                        ],
-                        'password' =>  [
-                            'type' => 'text',
-                        ],
-                    ]);
-                    // set the users table
-                    $query = $db->table('users');
-                    $users =  [
-
-                        [
-                            'id'        => Str::random(8),
-                            'email'     => 'hallo@getkirby.com',
-                            'password'  => User::hashPassword('12345678'),
-                            'role'      => 'admin',
-                            'language'  => 'en',
-                        ],
-                        [
-                            'id'        => Str::random(8),
-                            'email'     => 'hello@getkirby.com',
-                            'password'  => User::hashPassword('12345678'),
-                            'role'      => 'admin',
-                            'language'  => 'en',
-                        ],
-                        [
-                            'id'        => Str::random(8),
-                            'email'     => 'moin@getkirby.com',
-                            'password'  => User::hashPassword('12345678'),
-                            'role'      => 'admin',
-                            'language'  => 'en',
-                        ]
-                    ];
-                    foreach ($users as $user) {
-                        $query->values($user);
-                        $result[] = $query->insert();
+                    if ($database) {
+                        // create new Database object
+                        // replace `path_to_file` with the absolute path to the file on your computer!
+                        $db = new Database([
+                            'type'     => 'sqlite',
+                            'database' => 'path_to_sqlite_file/db-users.sqlite',
+                        ]);
+                        // only create table if it doesn't exist yet
+                        if ($db->validateTable('users') === false) {
+                            // add users table with id, email, name, role, language and password fields
+                            // all fields use type text
+                            $db->createTable('users', [
+                                'id'       => [
+                                    'type'   => 'text',
+                                    'unique' => true,
+                                    'key'    => 'primary'
+                                ],
+                                'email'    => [
+                                    'type' => 'text',
+                                ],
+                                'name'     =>  [
+                                    'type' => 'text',
+                                ],
+                                'role'     =>  [
+                                    'type' => 'text',
+                                ],
+                                'language' =>  [
+                                    'type' => 'text',
+                                ],
+                                'password' =>  [
+                                    'type' => 'text',
+                                ],
+                            ]);
+                            // set the users table as the one we want to query
+                            $query = $db->table('users');
+                            // three users show be enough for a start
+                            $users =  [
+                                [ 
+                                'id'        => Str::random(8),
+                                'email'     => 'hallo@getkirby.com',
+                                'password'  => User::hashPassword('12345678'),
+                                'role'      => 'admin',
+                                'language'  => 'en',
+                                ],
+                                [ 
+                                'id'        => Str::random(8),
+                                'email'     => 'hello@getkirby.com',
+                                'password'  => User::hashPassword('12345678'),
+                                'role'      => 'admin',
+                                'language'  => 'en',
+                                ],
+                                [ 
+                                'id'        => Str::random(8),
+                                'email'     => 'moin@getkirby.com',
+                                'password'  => User::hashPassword('12345678'),
+                                'role'      => 'admin',
+                                'language'  => 'en',
+                                ]
+                            ];
+                            // loops through users array and insert each data set into users table
+                            foreach ($users as $user ) {
+                                $query->values($user);
+                                $result[] = $query->insert();
+                            }
+                        }
                     }
                 }
+
                 return $result;
             }
         ],
@@ -866,50 +895,52 @@ Kirby::plugin('cookbook/dbusers', [
                     'type'     => 'sqlite',
                     'database' => '/Users/sonja/public_html/lang-test/db-users.sqlite', #full path to file
                 ]);
-                $result = $db->createTable('content', [
-                    'id' => [
-                        'type' => 'text',
-                    ],
-                    'language' => [
-                        'type' => 'text',
-                    ],
-                    'company' =>  [
-                        'type' => 'text',
-                    ],
-                    'street' =>  [
-                        'type' => 'text',
-                    ],
-                    'zip' =>  [
-                        'type' => 'text',
-                    ],
-                    'city' =>  [
-                        'type' => 'text',
-                    ],
-                    'country' =>  [
-                        'type' => 'text',
-                    ],
-                    'website' =>  [
-                        'type' => 'text',
-                    ],
-                    'phone' =>  [
-                        'type' => 'text',
-                    ],
-                    'mobile' =>  [
-                        'type' => 'text',
-                    ],
-                    'twitter' =>  [
-                        'type' => 'text',
-                    ],
-                    'instagram' =>  [
-                        'type' => 'text',
-                    ],
-                ]);
+                // only create table if it doesn't exist yet
+                if($db->validateTable('content') === false) {
+                    $result = $db->createTable('content', [
+                        'id' => [
+                            'type' => 'text',
+                        ],
+                        'language' => [
+                            'type' => 'text',
+                        ],
+                        'company' =>  [
+                            'type' => 'text',
+                        ],
+                        'street' =>  [
+                            'type' => 'text',
+                        ],
+                        'zip' =>  [
+                            'type' => 'text',
+                        ],
+                        'city' =>  [
+                            'type' => 'text',
+                        ],
+                        'country' =>  [
+                            'type' => 'text',
+                        ],
+                        'website' =>  [
+                            'type' => 'text',
+                        ],
+                        'phone' =>  [
+                            'type' => 'text',
+                        ],
+                        'mobile' =>  [
+                            'type' => 'text',
+                        ],
+                        'twitter' =>  [
+                            'type' => 'text',
+                        ],
+                        'instagram' =>  [
+                            'type' => 'text',
+                        ],
+                    ]);
+                }
                 return $result ? 'The table was successfully created' : 'An error occurred';
             }
         ],
     ]
 ]);
-
 ```
 
 ### `DbKirby` class
@@ -1288,5 +1319,9 @@ return [
 That was it!
 
 Of course, you can change the content fields in the user blueprint and in the database as needed. You can also replace the SQLite database with MySQL/MariaDB if you prefer.
+
+<warning>
+**As already mentioned at the beginning, under no circumstances use any of the routes from this recipe in your production environment. Remove them from the plugin code once you have created the tables to prevent unauthorized access and potential data loss.**
+</warning>
 
 
