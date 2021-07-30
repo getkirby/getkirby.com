@@ -197,17 +197,16 @@ Like with our website, connections to the Personal Demo are always encrypted wit
 
 The server for the Personal Demo is provided by
 
-*Uberspace
-Jonas Pasche
-Kaiserstr. 15
-55116 Mainz
-Germany*
+*Linode LLC
+249 Arch Street
+Philadelphia, Pennsylvania 19106
+USA*
 
-Uberspace complies with GDPR. The server is located in their data center in **Frankfurt, Germany**. You can find their privacy policy here: [https://uberspace.de/en/about/privacy/](https://uberspace.de/en/about/privacy/)
+Linode complies with GDPR. The server is located in their data center in **Frankfurt, Germany**. You can find their privacy policy here: [https://www.linode.com/privacy](https://www.linode.com/privacy)
 
 ### Server log files
 
-We automatically collect and store information that your browser transmits to us in "server log files" on our Uberspace server. These are:
+We automatically collect and store information that your browser transmits to us in "server log files" on our Linode server. These are:
 
 - Browser type and browser version
 - Operating system used
