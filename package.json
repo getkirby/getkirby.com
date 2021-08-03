@@ -1,6 +1,5 @@
 {
   "name": "getkirby.com",
-  "version": "3.2.0",
   "description": "The entire getkirby.com website.",
   "main": "index.js",
   "scripts": {
@@ -9,11 +8,11 @@
     "js": "uglifyjs-folder assets/js --output assets/js --each --extension .js --config-file uglify.json"
   },
   "devDependencies": {
-    "cssnano": "^4.1.10",
-    "postcss": "^8.2.6",
+    "cssnano": "^5.0.6",
+    "postcss": "^8.3.5",
     "postcss-cli": "^8.3.1",
     "postcss-import": "^14.0.0",
-    "uglifyjs-folder": "^2.0.0"
+    "uglifyjs-folder": "^3.0.0"
   },
   "repository": {
     "type": "git",

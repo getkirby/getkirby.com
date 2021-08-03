@@ -32,4 +32,10 @@ return [
             return page('releases/' . $generation . '-' . $major);
         }
     ],
+    [
+        'pattern' => 'releases/(:num)\.(:num)/(:all?)',
+        'action'  => function ($generation, $major, $path) {
+            return page('releases/' . $generation . '-' . $major . '/' . $path);
+        }
+    ],
 ];

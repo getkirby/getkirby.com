@@ -1,0 +1,37 @@
+Title: Enhancements
+----
+
+Text:
+
+## Core
+
+- The video embedding helpers and methods now use a much more robust URL parser with support for local and remote URLs. The same parser is used in the Panel for consistency. [#3074](https://github.com/getkirby/kirby/pull/3074)
+- The `avif` file extension is now considered viewable [#2877](https://github.com/getkirby/kirby/pull/2877)
+- Invalid media URLs now render the full error page instead of a simple error to avoid information leaks and to allow overriding the error behavior with custom code on the error page [#3202](https://github.com/getkirby/kirby/pull/3202)
+- `F::relativepath()` now supports file paths with an unrelated base by prefixing `../` to build a relative path [#3267](https://github.com/getkirby/kirby/issues/3267)
+- Improved API error paths when using custom directory setup
+- `Html::encode()` uses the `ENT_QUOTES` constant now for `htmlentities()`, converting both double and single quotes
+- `F::size` and `F::niceSize` accept array of file paths
+- `Dir::size()` has new `$recursive` parameter
+- The new `license` root allows to store the license outside of the config dir for easier deployments and multi-site setups.
+- The default block snippet for the `image` block now escapes the content output from the source, alt and link fields. This protects against XSS attacks against site visitors.
+- `Str::widont` applies to punctuation with gap
+- The `Data\Json::decode()` and `Data\Xml::decode()` methods now accept empty strings and treat them as an empty data set (empty array) for consistency with `Data\Txt::decode()` and `Data\Yaml::decode()` [#3565](https://github.com/getkirby/kirby/pull/3565)
+
+## Panel
+
+- Much [smaller Panel files](/releases/3.6#fiber) to load
+- The license code is now only displayed to admins
+- The loading indicator of the Panel is now located in the breadcrumb
+- New `theme` property for `k-dropdown-content` to switch between `dark` (default) and `light` dropdowns
+- `$model->panel()->image()` now supports a second parameter to specify layout (default is `cards`) [#3425](https://github.com/getkirby/kirby/pull/3425)
+- New `$store.dispatch("content/clear")` Vuex action that removes all unsaved changes from localStorage.
+- New JS helper to deep-merge objects (`helpers/object.js`)
+- New `$helper.color` helper for turning a string into a valid CSS color value
+- New `Panel` class alias for `Kirby\Panel\Panel`
+- Writer field: marks (floating toolbar buttons) now show tooltips
+- Blocks without fields don't open empty drawer anymore (e.g. new line block)
+- `$t()` JS helper now supports a fallback value as third parameter
+- Enhanced CSS support for RTL Panel interface [#3556](https://github.com/getkirby/kirby/pull/3556)
+- New `v-direction` directive to set the `dir` attribute based on the current content translation [#3568](https://github.com/getkirby/kirby/pull/3568)
+- File view uses stable preview link for files (instead of media folder URL) [#3575](https://github.com/getkirby/kirby/pull/3575)

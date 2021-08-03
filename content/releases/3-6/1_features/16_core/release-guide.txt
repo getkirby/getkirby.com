@@ -1,0 +1,103 @@
+Title: Core features
+----
+Intro:
+----
+Text:
+
+## `A::map($array, $callback)`
+
+`A::map` is a simple wrapper around `array_map` to fix the weird, inconsistent argument order. [#3434](https://github.com/getkirby/kirby/pull/3434)
+
+```php
+// why?
+$array = array_map(function ($item) {
+  // some mapping
+}, $array);
+
+// yes!
+$array = A::map($array, function ($item) {
+  // some mapping
+});
+```
+
+## `router()`
+
+The new `router()` helper takes a set of routes and request data and directly executes the matching routing action.
+
+This helper is great to build your own custom router. This could be done in the config or in a custom script.
+
+```php "/site/config/config.php"
+<?php
+
+return [
+  'routes' => [
+    [
+      'pattern' => 'shop/(:all)',
+      'action'  => function (string $path) {
+        return router($path, 'GET', [
+          [
+            'pattern' => 'cart',
+            'action'  => function () {
+                // ...
+            }
+          ],
+          [
+            'pattern' => 'checkout',
+            'action'  => function () {
+                // ...
+            }
+          ]
+        ]);
+      }
+    ]
+  ]
+];
+```
+
+Although the example above could of course also simply be solved with more route definitions, it's sometimes really useful to implement such a nested router.
+
+You can also use it for any kind of logic that depends on path matching with regex.
+
+## `System::title()`
+
+Is now used for all emails to replace "Kirby Panel" as generic title
+
+## `$files->size()` and `$files->niceSize()`
+
+Get the file size of all files in a collection
+
+## `$blocks->hasType()`
+
+Useful if you want to include scripts etc. depending on block types.
+
+```php
+$blocks = $page->blocks()->toBlocks();
+
+if ($blocks->hasType('code') === true) {
+  // include some scripts
+}
+```
+
+## `$layouts->toBlocks()`
+
+The `toBlocks()` method makes it easy to filter blocks from layouts.
+
+```php
+$layouts = $page->layout()->toLayouts();
+$blocks  = $layouts->toBlocks();
+$banner  = $blocks->filter('type', 'banner')->first();
+```
+
+## `$layouts->hasBlockType()`
+
+Useful if you want to include scripts etc. depending on block types in layout field.
+
+```php
+$layouts = $page->layout()->toLayouts();
+
+if ($layouts->hasBlockType('heading') === true) {
+  // include some scripts
+}
+```
+
+

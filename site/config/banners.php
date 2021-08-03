@@ -2,8 +2,8 @@
 
 return [
     'sale' => [
-        'text'      => '🛍 &nbsp; <strong>Save 20%</strong> until April 23rd',
-        'startDate' => '2021-04-15',
-        'endDate'   => '2021-04-23',
+        'text'      => '🛍 &nbsp; <strong>Save 20%</strong> until July 9th',
+        'startDate' => '2021-07-02',
+        'endDate'   => '2021-07-09',
     ]
 ];

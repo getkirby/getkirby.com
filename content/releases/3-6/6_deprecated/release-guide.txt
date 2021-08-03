@@ -1,0 +1,31 @@
+Title: Deprecated
+----
+Text:
+
+- The `page()` helper now throws a deprecation warning if multiple IDs get passed. Will be enforced in 3.7.0 by only returning the first page. Use `pages()` for multiple pages instead.
+- `pages()` will now throw a deprecation warning if single ID gets passed. Will be enforced in 3.7.0 by always returning a `Pages` collection. Use `page()` for a single page instead.
+- Creating a `Kirby\Cms\File` without a `parent` property has been deprecated and throws a warning. Starting in 3.7.0 the property will be required and cause a breaking error if not passed. [#3372](https://github.com/getkirby/kirby/pull/3372)
+- `Str::template()`: the parameters `$fallback`, `$start` and `$end` have been deprecated and throw a deprecation warning. Use instead an `$options` array with `fallback`, `start` and/or `end` keys as third parameter.
+
+| Deprecated | Throws warning | Removed in | Use instead |
+|-|-|-|-|
+| `GET pages/(:any)/children/blueprints` | yes | 3.7.0 | `GET pages/(:any)/blueprints` |
+| `GET site/children/blueprints` | yes | 3.7.0 | `GET site/blueprints` |
+| API field `page.panelIcon` | yes | 3.7.0 | `page.panelImage` |
+| API field `file.panelIcon` | yes | 3.7.0 | `file.panelImage` |
+| `Kirby\Cms\App::setLocale()` | yes | 3.7.0 | `Kirby\Toolkit\Locale::set()` |
+| `Kirby\Cms\Block::_key()` | yes | 3.7.0 | `Kirby\Cms\Block::type()` |
+| `Kirby\Cms\Block::_uid()` | yes | 3.7.0 | `Kirby\Cms\Block::id()` |
+| `Kirby\Toolkit\I18n::fallback()` | yes | 3.7.0 | `Kirby\Toolkit\I18n::fallbacks()[0]` |
+| `GET (:all)/lock` | yes | 3.7.0 | - |
+| `GET (:all)/unlock` | yes | 3.7.0 | - |
+| Vuex `heartbeat` module | yes | 3.7.0 | - |
+| `$model->dragText()` | 3.7.0 | 3.8.0 | `$model->panel()->dragText()` |
+| `$model->panelIcon()` | 3.7.0 | 3.8.0 | `$model->panel()->image()` |
+| `$model->panelImage()` | 3.7.0 | 3.8.0 | `$model->panel()->image()` |
+| `$model->panelImageSource()` | 3.7.0 | 3.8.0 | `$model->panel()->imageSource()` |
+| `$model->panelPath()` | 3.7.0 | 3.8.0 | `$model->panel()->path()` |
+| `$model->panelPickerData()` | 3.7.0 | 3.8.0 | `$model->panel()->pickerData()` |
+| `$model->panelOptions()` | 3.7.0 | 3.8.0 | `$model->panel()->options()` |
+| `$model->panelUrl()` | 3.7.0 | 3.8.0 | `$model->panel()->url()` |
+| `Kirby\Toolkit\Str::isUrl()` | 3.7.0 | 3.8.0 | `Kirby\Toolkit\V::url()` |
