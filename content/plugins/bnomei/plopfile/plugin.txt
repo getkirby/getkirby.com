@@ -1,0 +1,14 @@
+Title: Plopfile
+
+----
+
+Repository: https://github.com/bnomei/kirby3-plopfile
+
+----
+
+Category: utilities
+
+----
+
+Description: CLI tool to generate and append to various files for Kirby3 CMS using Plop.js
+
