@@ -151,6 +151,49 @@ fields:
 
 (image: closed-groups.png)
 
+## Default values
+
+You can set default blocks/values for blocks fields which will prepopulate the field using the `default` prop. The `type` property is required, but default blocks can be empty or filled with example content.
+
+### Empty default block
+
+```yaml
+fields:
+  text:
+    type: blocks
+    default:
+      - type: text
+```
+
+### Default block with content
+
+```yaml
+fields:
+  text:
+    type: blocks
+    default:
+      - type: text
+        content: 
+          text: Write something great…
+```
+
+### Multiple block types
+
+You can also set multiple default block entries:
+
+```yaml
+fields:
+  text:
+    type: blocks
+    default:
+      - type: heading
+        content:
+          level: h2
+          text: A heading
+      - type: text
+        content: 
+          text: Write something great…
+```
 ## Block types
 
 (reference: panel/blocks)
