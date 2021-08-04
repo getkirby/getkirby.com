@@ -68,3 +68,7 @@
                          "voice figure";
   }
 }
+
+#features input[type="checkbox"] {
+  pointer-events: none;
+}

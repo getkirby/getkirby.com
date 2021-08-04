@@ -1,0 +1,115 @@
+Title: 3.6-alpha.3
+----
+Version: 3.6
+----
+Area:
+
+```php
+Kirby::plugin('yourname/todos', [
+  'areas' => [
+    'todos' => [
+      'label' => 'Todos',
+      'icon'  => 'check',
+      'menu' => true
+      'link' => 'todos',
+      'dialogs' => [
+        'todos/create' => [
+          'load' => function () { ... },
+          'submit' => function () { ... }
+        ]
+      ],
+      'views' => [
+        [
+          'pattern' => 'todos',
+          'action' => function () { ... }
+        ]
+      ]
+    ]
+  ]
+]);
+```
+
+----
+
+FiberPHP:
+
+```php "Panel view definition in PHP"
+[
+  'pattern' => 'todos',
+  'action'  => function () {
+    return [
+      'component' => 'k-todo-view',
+      'props' => [
+        'title' => 'Todos',
+        'todos' => [
+          'Buy milk',
+          'Try Kirby 3.6'
+        ]
+      ]
+    ]
+  }
+]
+```
+
+----
+FiberJS:
+
+```html "View component in Vue.js"
+<template>
+  <k-header>{{ title }}</k-header>
+  <ul>
+    <li v-for="(todo, index) in todos" :key="index">
+      {{ todo }}
+    </li>
+  </ul>
+</template>
+
+<script>
+export default {
+  props: {
+    title: String,
+    todos: Array
+  }
+}
+</script>
+```
+
+----
+
+Cardlets:
+
+```yaml
+sections:
+  notes:
+    type: pages
+    template: note
+    layout: cardlets
+```
+
+----
+
+Webp:
+
+```php
+$image->thumb(['width' => 200, 'format' => 'webp']);
+
+$image->srcset([
+  ['width' => 200, 'format' => 'avif'],
+  ['width' => 200, 'format' => 'webp'],
+  ['width' => 200, 'format' => 'jpg']
+]);
+```
+
+----
+
+ImageSettings:
+
+```yaml
+image:
+  back: "{{ page.panelBack }}"
+
+# or
+
+image:
+  back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);"
+```

@@ -952,6 +952,7 @@ In this recipe, our focus was on giving you a hands-on approach to using Docker 
 - (link: https://www.docker.com/101-tutorial text: Docker 101 Tutorial)
 - (link: https://labs.play-with-docker.com/ text: Play with Docker) is an interactive browser-based playground to experiment with Docker.
 - (link: https://linuxhandbook.com/container-lifecycle-docker-commands/ text: Docker Commands for Managing Container Lifecycle)
+- (link: https://docker-handbook.farhan.dev/ text: Docker Handbook)
 - Not to forget (link: https://docs.docker.com/reference/ text: the official Docker reference), which can be a bit daunting for beginners though.
 
 ## Thank you

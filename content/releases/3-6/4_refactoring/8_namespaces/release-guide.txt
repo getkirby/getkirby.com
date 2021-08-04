@@ -1,0 +1,41 @@
+Title: Namespace changes
+----
+Text:
+
+We reorganized internal packages and namespaces quite a bit with 3.6.
+
+## New `Kirby\Filesystem` namespace
+
+We refactored many file-related classes and started to gather all of them in the new `Kirby\Filesystem` namespace. [#3285](https://github.com/getkirby/kirby/pull/3285), [#3290](https://github.com/getkirby/kirby/pull/3290)
+
+| Before 3.6 | In 3.6 | Description |
+|-|-|-|
+| Kirby\Toolkit\File | `Kirby\Filesystem\File` | Everything related to a file in the filesystem - takes over a lot of functionality that was previously part of `Kirby\Image\Image` even for non-images |
+| Kirby\Image\Image | `Kirby\Image\Image` | now extends `Kirby\Filesystem\File` and adds image-related methods (e.g. `dimensions`, `exif`) |
+| Kirby\Cms\FileFoundation | `Kirby\Filesystem\IsFile` | adds method-proxying to an asset object - either to `Kirby\Filesystem\File` or `Kirby\Image\Image` depending on the file type of the `$root` property |
+| Kirby\Cms\Asset | `Kirby\Filesystem\Asset` | |
+| Kirby\Cms\Filename | `Kirby\Filesystem\Filename` | |
+| Kirby\Toolkit\Dir | `Kirby\Filesystem\Dir` | |
+| Kirby\Toolkit\F | `Kirby\Filesystem\F` | |
+| Kirby\Toolkit\Mime | `Kirby\Filesystem\Mime` | |
+
+## Moved and merged classes
+
+We also moved and merged some more classes to simplify our setup:
+
+| Before 3.6 | In 3.6 | Reference |
+|-|-|-|
+| Kirby\Cms\Form | `Kirby\Form\Form` | [#3312](https://github.com/getkirby/kirby/pull/3312) |
+| Kirby\Cms\KirbyTag | `Kirby\Text\KirbyTag` | [#3296](https://github.com/getkirby/kirby/pull/3296) |
+| Kirby\Cms\KirbyTags | `Kirby\Text\KirbyTag` | [#3296](https://github.com/getkirby/kirby/pull/3296) |
+
+<info>
+For all these changes, we have added class aliases that we will keep around until at least Kirby 4. This will make sure that your class references continue to work.
+</info>
+
+## Pull requests
+
+- [#3312](https://github.com/getkirby/kirby/pull/3312)
+- [#3296](https://github.com/getkirby/kirby/pull/3296)
+- [#3285](https://github.com/getkirby/kirby/pull/3285)
+- [#3290](https://github.com/getkirby/kirby/pull/3290)

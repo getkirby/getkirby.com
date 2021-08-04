@@ -18,5 +18,9 @@
       'title' => 'A philosophy of minimalism',
       'text' => 'Our philosophy at Kirby is to start as lean as possible and to create a powerful set of building blocks for you. With Kirby you add the things you need in a project instead of having to remove tons of unwanted features and plugins to get started.'
     ],
+    [
+      'title' => 'An interface without branding',
+      'text'  => 'The Panel, Kirby\'s admin backend, comes with a very timeless design without Kirby branding – at no extra cost. And your site frontend is fully yours as well, so you get a white-label solution without having to modify the sources.'
+    ]
   ]
 ]);

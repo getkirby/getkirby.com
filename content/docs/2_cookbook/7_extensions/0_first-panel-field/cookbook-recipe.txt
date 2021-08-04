@@ -149,9 +149,9 @@ In the single file component, we recreate the template inside `template` tags:
 
 We are also adding the script tags that will shortly contain the logic for the field and an optional style tag (we will not use custom styles for this example, so you might as well omit them).
 
-In `/src/index.php`, we import this new component, assign the component to the `doi` field and remove the `template` property from the first iteration, so that it looks like this:
+In `/src/index.js`, we import this new component, assign the component to the `doi` field and remove the `template` property from the first iteration, so that it looks like this:
 
-```js "site/plugins/doifield/src/components/fields/DoiField.vue"
+```js "site/plugins/doifield/src/index.js"
 import DoiField from "./components/fields/DoiField.vue";
 panel.plugin('pluginAuthor/doi', {
   fields: {
@@ -389,7 +389,7 @@ export default {
     before: String,
     disabled: Boolean,
     help: String,
-    icon: String
+    icon: String,
     label: String,
     required: Boolean,
     when: String,

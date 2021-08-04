@@ -1,0 +1,16 @@
+Title: Queries for default field values
+----
+Text:
+
+<info>
+Status: **in progress**
+</info>
+
+Blueprint queries are a powerful way to inject dynamic values into fields. We've already implemented this in many places, but often got asked to also provide the same functionality for default values.
+
+```yaml
+fields:
+    customTitle:
+        type: text
+        default: "{{ page.title }} is great"
+```

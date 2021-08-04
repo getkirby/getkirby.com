@@ -1,0 +1,37 @@
+Title: Fixes
+----
+
+Text:
+
+- `User::changeEmail()` and `System::register()` now convert the provided email address to lowercase for better reliability [#3307](https://github.com/getkirby/kirby/pull/3307)
+- `cover` option fixed for all models and list layout in section [#3226](https://github.com/getkirby/kirby/issues/3226)
+- Fixed jump to the top of the page at ESC keydown in an overlay [#3387](https://github.com/getkirby/kirby/issues/3387)
+- `Str::accepted` always a float as `quality` value (before default `1` as int, all actual quality values as string, e.g. `'0.7'`) [#3393](https://github.com/getkirby/kirby/pull/3393)
+- `Str::pool()`: the passed `$type` parameter is now treated case-insensitively [#3393](https://github.com/getkirby/kirby/pull/3393)
+- `Str::pool()` now also returns a string (if set via the second argument) if an array of types is passed as  first argument [#3393](https://github.com/getkirby/kirby/pull/3393)
+- Fixed return type for `Kirby\Cms\App::translation()` in DocBlock [#3383](https://github.com/getkirby/kirby/pull/3383)
+- Fixed `tc()` helper docblock and parameter typing [#3474](https://github.com/getkirby/kirby/issues/3474)
+- Extending a non-existing Vue component is ignored now instead throwing an console error and breaking the Panel
+- Changing the page title no longer causes errors with slug autocorrection (e.g. from underscores to dashes) if the user does not have permissions to change the slug
+- Fixed blocks field sort handle on hover [#3538](https://github.com/getkirby/kirby/issues/3538)
+- Fixed writer field RTL support [https://kirby.nolt.io/322](https://kirby.nolt.io/322)
+- Fixed version number in settings view in RTL interface [#3581](https://github.com/getkirby/kirby/pull/3581)
+- Fixed manual files sorting via changePosition dialog [#3589](https://github.com/getkirby/kirby/issues/3589)
+
+## Fixed regressions from 3.6.0-alpha.1
+
+- Fixed dropdown issue in model views [#3491](https://github.com/getkirby/kirby/issues/3491)
+- Fixed default permissions for Panel views [#3487](https://github.com/getkirby/kirby/issues/3487)
+- Fixed error dialog not shown at form errors [#3520](https://github.com/getkirby/kirby/pull/3520)
+- Fixed dialog events not being triggered
+- Fixed blueprint placeholder messages for file views with default template
+
+## Fixed regressions from 3.6.0-alpha.2
+
+- Fixed drag handle for picker fields [#3553](https://github.com/getkirby/kirby/issues/3553)
+- Fixed blocks field options bar [#3552](https://github.com/getkirby/kirby/issues/3552)
+- Fixed correct `dir` attribute for fields [#3568](https://github.com/getkirby/kirby/pull/3568)
+- Styling for tabbed link highlighting works again [#3576](https://github.com/getkirby/kirby/issues/3576)
+- Topbar is fully responsive again [#3574](https://github.com/getkirby/kirby/issues/3574)
+- Languages get deleted without error again [#3588](https://github.com/getkirby/kirby/issues/3588)
+- Dropdowns and dropdown buttons no longer appear above the save bar. [#3554](https://github.com/getkirby/kirby/issues/3554)

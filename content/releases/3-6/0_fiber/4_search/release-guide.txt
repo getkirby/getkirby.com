@@ -1,0 +1,105 @@
+Title: Search
+----
+
+Intro:
+
+So far it's impossible to extend our Panel search in a good way and to add your own search type next to pages, files and users.
+
+With Fiber it's becoming a lot easier to implement custom search types and even overwrite existing search implementations.
+
+----
+Text:
+
+```php "Site area"
+return [
+    'label' => 'Site',
+    ...
+    'dialogs' => ...
+    'views' => ...
+    // set the default page type
+    'search' => 'pages',
+    // define new search endpoints
+    'searches' => [
+        'pages' => function (string $query, int $limit = 10) {
+            $results = [];
+            $pages   = site()->search($query)->limit($limit);
+
+            foreach ($pages as $page) {
+                $results[] = [
+                    'text'  => $page->title()->value(),
+                    'link'  => $page->panel()->url(),
+                    'info'  => $page->id(),
+                    'image' => $page->panel()->image()
+                ];
+            }
+
+            return $results;
+        }
+    ]
+];
+```
+
+In Vue, the search can then be exectued like this:
+
+```js
+const results = await this.$search('pages');
+```
+
+## Search results
+
+Search results are a simple array with parameters for each item.
+
+| Parameter | Type | Description |
+| - | - | - |
+| `image` | `array` | Optional image settings |
+| `icon` | `string` | The name of the option icon |
+| `info` | `string` | Optional info text on the right |
+| `link` | `string` | The url/path which will be visited on click |
+| `text` | `string` | The label for the search result |
+
+## In your plugin
+
+```php
+Kirby::plugin('your-plugin/todos', [
+    'areas' => [
+        'todos' => [
+            ...
+            'searches' => [
+                'todos' => [
+                    'label' => 'Todos',
+                    'icon' => 'check',
+                    'query' => function () {
+                        // search for $todos here.
+                        $results = [];
+
+                        foreach ($todos as $todo) {
+                            $results[] = [
+                                'image' => [ // optional image settings ],
+                                'text'  => $todo->text(),
+                                'link'  => '/todos/' . $todo->id(),
+                                'info'  => 'Get it done!'
+                            ];
+                        }
+
+                        return $results;
+                    }
+                ]
+            ]
+        ]
+    ]
+]);
+```
+
+That's all it takes to create your own search index for your own plugins.
+
+The search will automatically appear in the search dialog, but can also be run manually from your Vue components with …
+
+```js
+const query = 'Searchy search';
+const todos = await this.$search('todos', query);
+```
+
+
+## Extending searches
+
+Like all other Fiber features, it will soon be possible to overwrite and extend our default searches for pages, files and users 🎉

@@ -87,6 +87,12 @@
 .prose ul p {
   margin-top: 0;
 }
+.prose ol ol,
+.prose ol ul,
+.prose ul ol,
+.prose ul ul {
+  margin-top: 0;
+}
 .prose ol > li {
   list-style: decimal-leading-zero;
   padding-left: .25em;
