@@ -266,3 +266,83 @@ index.php
 ```
 
 Feel free to download all needed files here: (file: example.zip text: Nested blocks example).
+
+## Advanced usage
+
+In some cases it is necessary to pass collected values from the parent block to the nested block, if you need different (nested) HTML markup depending on which option is selected. This is actually pretty simple if you know how. The next step explains how to extend nested blocks with additional layouts.
+
+(image: nested-blocks-advanced.jpg)
+
+### Blueprints
+First let's change the blueprints with the new requirements. We add a select field `layout` to our FAQ block and offer two layout variants for it.
+
+```yaml "/site/plugins/faq-block/blueprints/blocks/faq.yml"
+name: FAQ
+icon: star
+fields:
+  layout:
+    type: select
+    empty: false
+    options:
+      v1: "Layout 1: Columns with description"
+      v2: "Layout 2: Grid with icons"
+  headline:
+    type: text
+  text:
+    type: writer
+  blocks:
+    type: blocks
+    fieldsets:
+      - faqItem
+```
+
+Now we modify the output snippets with our new requirements.
+
+### FAQ snippet
+We can deliver different HTML markup depending on which version we are in by checking the `layout` value.
+
+```php
+if ($block->layout()->value() == 'v1'):
+
+  // HTML markup for layout version 1
+
+elseif ($block->layout()->value() == 'v2'):
+
+  // HTML markup for layout version 2
+
+endif;
+```
+Now we call the nested block within each version as follows. It is important to pass the selected `layout` to the nested block, if we want to use different HTML markup for each version.
+
+```php
+foreach ($block->blocks()->toBlocks() as $nestedBlock):
+
+  snippet('blocks/' . $nestedBlock->type(),[
+    'block' => $nestedBlock,
+    'layout' => $block->layout()->value()
+  ]);
+
+endforeach;
+```
+
+### Question/answer snippet
+
+By passing the layout value from the parent block, we can use it via `$data['layout']` in the nested block now. We just need to check the value and can deliver different HTML output for each version.
+
+```php "/site/plugins/faq-block/snippets/blocks/faqItem.php"
+if ($data['layout'] == 'v1'):
+
+  // Nested HTML markup for layout version 1
+
+elseif ($data['layout'] == 'v2'):
+
+  // Nested HTML markup for layout version 2
+
+endif;
+```
+
+
+### Conclusion
+Now you can create your own layouts regardless of the HTML markup you need. As a content creator you have the full flexibility to duplicate complete blocks, change the layout and compare which version fits better to your needs.
+
+(image: preview.jpg)
