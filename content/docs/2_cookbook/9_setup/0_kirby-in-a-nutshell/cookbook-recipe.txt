@@ -232,8 +232,8 @@ The form fields and sections for the dashboard are defined in the `/site/bluepri
 
 One-pager websites or generally pages that contain different sections (often with repeating types of content) can be realized in multiple ways:
 
-- The sections are created as subpages of the parent page, like in our (link: docs/cookbook/templating/one-pager text: one-pager example).
-- The sections are created using (link: https://github.com/TimOetting/kirby-builder text: Tim Oetting's Builder plugin).
+- You can create the sections as subpages of the parent page like in our (link: docs/cookbook/templating/one-pager text: one-pager example).
+- You can create the sections using the (link: docs/reference/panel/fields/layout text: layout) and (link: docs/reference/panel/fields/blocks text: blocks) fields.
 
 Here are some guidelines that help you pick the right solution for your project:
 
@@ -252,14 +252,14 @@ Options to circumvent some disadvantages:
 - Use the (link: https://github.com/steirico/kirby-plugin-custom-add-fields text: Custom Add Fields plugin) that allows skipping the title when creating new section pages.
 
 
-### The Builder plugin
+### Layout and blocks fields
 
 - All content is created in the same page.
 - Nested structures are possible but should probably be limited to two levels. Nested content cannot be moved between blocks.
-- Easy creation of new blocks.
-- Better preview of final result.
+- Layouts can be moved around freely and blocks can be moved between layouts
+- Easy creation of custom blocks
+- Great preview of final result.
 - No redirecting necessary.
-- Currently not compatible with the (link: https://github.com/getkirby/editor text: Editor plugin)
 
 
 ## The media folder
