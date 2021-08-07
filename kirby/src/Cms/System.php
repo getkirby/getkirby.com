@@ -132,6 +132,13 @@ class System
             throw new PermissionException('The accounts directory could not be created');
         }
 
+        // init /site/sessions
+        try {
+            Dir::make($this->app->root('sessions'));
+        } catch (Throwable $e) {
+            throw new PermissionException('The sessions directory could not be created');
+        }
+
         // init /content
         try {
             Dir::make($this->app->root('content'));
@@ -276,7 +283,7 @@ class System
     public function license()
     {
         try {
-            $license = Json::read($this->app->root('config') . '/.license');
+            $license = Json::read($this->app->root('license'));
         } catch (Throwable $e) {
             return false;
         }
@@ -465,7 +472,7 @@ class System
         $json['email'] = $email;
 
         // where to store the license file
-        $file = $this->app->root('config') . '/.license';
+        $file = $this->app->root('license');
 
         // save the license information
         Json::write($file, $json);
@@ -515,8 +522,23 @@ class System
     }
 
     /**
-     * Return the status as array
+     * Returns the site's title as defined in the
+     * content file or `site.yml` blueprint
      *
+     * @return string
+     */
+    public function title(): string
+    {
+        $site = $this->app->site();
+
+        if ($site->title()->isNotEmpty()) {
+            return $site->title()->value();
+        }
+        
+        return $site->blueprint()->title();
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array

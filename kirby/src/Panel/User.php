@@ -30,6 +30,64 @@ class User extends Model
     }
 
     /**
+     * Provides options for the user dropdown
+     *
+     * @param array $options
+     * @return array
+     */
+    public function dropdown(array $options = []): array
+    {
+        $page        = $this->model;
+        $permissions = $this->options(['preview']);
+        $url         = $this->url(true);
+        $result      = [];
+
+        $result[] = [
+            'dialog'   => $url . '/changeName',
+            'icon'     => 'title',
+            'text'     => t('user.changeName'),
+            'disabled' => $this->isDisabledDropdownOption('changeName', $options, $permissions)
+        ];
+
+        $result[] = [
+            'dialog'   => $url . '/changeEmail',
+            'icon'     => 'email',
+            'text'     => t('user.changeEmail'),
+            'disabled' => $this->isDisabledDropdownOption('changeEmail', $options, $permissions)
+        ];
+
+        $result[] = [
+            'dialog'   => $url . '/changeRole',
+            'icon'     => 'bolt',
+            'text'     => t('user.changeRole'),
+            'disabled' => $this->isDisabledDropdownOption('changeRole', $options, $permissions)
+        ];
+
+        $result[] = [
+            'dialog'   => $url . '/changePassword',
+            'icon'     => 'key',
+            'text'     => t('user.changePassword'),
+            'disabled' => $this->isDisabledDropdownOption('changePassword', $options, $permissions)
+        ];
+
+        $result[] = [
+            'dialog'   => $url . '/changeLanguage',
+            'icon'     => 'globe',
+            'text'     => t('user.changeLanguage'),
+            'disabled' => $this->isDisabledDropdownOption('changeLanguage', $options, $permissions)
+        ];
+
+        $result[] = [
+            'dialog'   => $url . '/delete',
+            'icon'     => 'trash',
+            'text'     => t('user.delete'),
+            'disabled' => $this->isDisabledDropdownOption('delete', $options, $permissions)
+        ];
+
+        return $result;
+    }
+
+    /**
      * Default settings for the user's Panel image
      *
      * @return array
@@ -85,37 +143,6 @@ class User extends Model
     }
 
     /**
-     * Returns the data array for the
-     * view's component props
-     *
-     * @internal
-     *
-     * @return array
-     */
-    public function props(): array
-    {
-        $user   = $this->model;
-        $avatar = $user->avatar();
-
-        return array_merge(
-            parent::props(),
-            $this->prevNext(),
-            [
-                'model' => [
-                    'avatar'   => $avatar ? $avatar->url() : null,
-                    'content'  => $this->content(),
-                    'email'    => $user->email(),
-                    'id'       => $user->id(),
-                    'language' => $this->translation()->name(),
-                    'name'     => $user->name()->toString(),
-                    'role'     => $user->role()->title(),
-                    'username' => $user->username(),
-                ]
-            ]
-        );
-    }
-
-    /**
      * Returns navigation array with
      * previous and next user
      *
@@ -137,6 +164,38 @@ class User extends Model
                 return $prev ? $prev->panel()->toLink('username') : null;
             }
         ];
+    }
+
+    /**
+     * Returns the data array for the
+     * view's component props
+     *
+     * @internal
+     *
+     * @return array
+     */
+    public function props(): array
+    {
+        $user   = $this->model;
+        $avatar = $user->avatar();
+
+        return array_merge(
+            parent::props(),
+            $this->prevNext(),
+            [
+                'blueprint' => $this->model->role()->name(),
+                'model' => [
+                    'avatar'   => $avatar ? $avatar->url() : null,
+                    'content'  => $this->content(),
+                    'email'    => $user->email(),
+                    'id'       => $user->id(),
+                    'language' => $this->translation()->name(),
+                    'name'     => $user->name()->toString(),
+                    'role'     => $user->role()->title(),
+                    'username' => $user->username(),
+                ]
+            ]
+        );
     }
 
     /**
