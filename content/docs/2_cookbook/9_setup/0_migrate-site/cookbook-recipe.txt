@@ -190,12 +190,13 @@ The following field types no longer exist and have to be replaced:
 - `checkbox` field &rarr; (link: docs/reference/panel/fields/toggle text: `toggle` field)
 - `datetime` field &rarr; (link: docs/reference/panel/fields/date text: `date` field) with `time` option
 
-Also remove or update custom field types, see (link: #plugins-and-extensions text: plugins and extensions)
+Also remove or update custom field types, see (link: #plugins-and-extensions text: plugins and extensions).
 
+When moving from the old `user`, `page` and `image` fields to the Kirby 3 `users`, `pages` and `files` fields, keep in mind that the new fields store their data in `yaml` format.
 
 ### Dashboard and widgets
 
-The Kirby 2 Dashboards no longer exists in Kirby 3. With the Dashboard, Panel widgets are gone. Widgets can be replaced with (link: docs/reference/plugins/extensions/sections text: custom Panel sections).
+The Kirby 2 Dashboard no longer exists in Kirby 3. With the Dashboard, Panel widgets are gone. Widgets can be replaced with (link: docs/reference/plugins/extensions/sections text: custom Panel sections).
 
 ## Configuration
 
@@ -289,7 +290,7 @@ In your route, you can also pass all arguments explicitly to the `->render()` me
 
 ### Page status
 
-While filter methods like `visible()`, `invisible()` and related Pages methods will still work, these are now deprecated. To make your project future-proof, we recommend that you replace them with (link: docs/reference/objects/pages/listed text: `listed`)/(link: docs/reference/objects/pages/unlisted text: `unlisted`)/(link: docs/reference/objects/pages/published text: `published`) and related methods as required.
+Filter methods like `visible()`, `invisible()` and related Pages methods will still work, these are now deprecated. To make your project future-proof, we recommend that you replace them with (link: docs/reference/objects/pages/listed text: `listed`)/(link: docs/reference/objects/pages/unlisted text: `unlisted`)/(link: docs/reference/objects/pages/published text: `published`) and related methods as required.
 
 <since v="3.5.0">
 These methods have been removed in Kirby 3.5 and will break your template code. Replace them with their equivalent Kirby 3 counterparts.
@@ -448,11 +449,17 @@ As a next step, replace old plugins with new ones where available and/or port yo
 
 ## Miscellaneous
 
+### Kirbytext properties
+
 The `popup: yes` property in a `link` KirbyTag becomes `target: _blank`: 
 
 ```kirbytext
 (\link: http://wikipedia.org text: Wikipedia target: _blank)
 ```
+
+### Filenames
+
+Media filenames starting with an underscore (e.g. `_dsc9876.jgg` are ignored in Kirby 3. You need to rename such files.
 
 ## Getting stuck?
 
