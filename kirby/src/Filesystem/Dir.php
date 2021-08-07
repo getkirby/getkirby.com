@@ -395,6 +395,7 @@ class Dir
      * @param string $dir The path for the new directory
      * @param bool $recursive Create all parent directories, which don't exist
      * @return bool True: the dir has been created, false: creating failed
+     * @throws \Exception If a file with the provided path already exists or the parent directory is not writable
      */
     public static function make(string $dir, bool $recursive = true): bool
     {
@@ -404,6 +405,10 @@ class Dir
 
         if (is_dir($dir) === true) {
             return true;
+        }
+
+        if (is_file($dir) === true) {
+            throw new Exception(sprintf('A file with the name "%s" already exists', $dir));
         }
 
         $parent = dirname($dir);
@@ -553,27 +558,25 @@ class Dir
     }
 
     /**
-     * Gets the size of the directory and all subfolders and files
+     * Gets the size of the directory
      *
      * @param string $dir The path of the directory
+     * @param bool $recursive Include all subfolders and their files
      * @return mixed
      */
-    public static function size(string $dir)
+    public static function size(string $dir, bool $recursive = true)
     {
         if (is_dir($dir) === false) {
             return false;
         }
 
-        $size  = 0;
-        $items = static::read($dir);
+        // Get size for all direct files
+        $size = F::size(static::files($dir, null, true));
 
-        foreach ($items as $item) {
-            $root = $dir . '/' . $item;
-
-            if (is_dir($root) === true) {
-                $size += static::size($root);
-            } elseif (is_file($root) === true) {
-                $size += F::size($root);
+        // if recursive, add sizes of all subdirectories
+        if ($recursive === true) {
+            foreach (static::dirs($dir, null, true) as $subdir) {
+                $size += static::size($subdir);
             }
         }
 

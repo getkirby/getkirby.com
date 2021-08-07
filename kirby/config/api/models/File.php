@@ -48,7 +48,7 @@ return [
             return $file->next();
         },
         'nextWithTemplate' => function (File $file) {
-            $files = $file->templateSiblings()->sort('sort', 'asc', 'filename', 'asc');
+            $files = $file->templateSiblings()->sorted();
             $index = $files->indexOf($file);
 
             return $files->nth($index + 1);
@@ -76,7 +76,7 @@ return [
             return $file->prev();
         },
         'prevWithTemplate' => function (File $file) {
-            $files = $file->templateSiblings()->sort('sort', 'asc', 'filename', 'asc');
+            $files = $file->templateSiblings()->sorted();
             $index = $files->indexOf($file);
 
             return $files->nth($index - 1);
@@ -110,7 +110,7 @@ return [
             return $file->type();
         },
         'url' => function (File $file) {
-            return $file->url(true);
+            return $file->url();
         },
     ],
     'type'  => 'Kirby\Cms\File',

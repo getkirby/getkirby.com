@@ -6,7 +6,7 @@ use Kirby\Cms\File;
 use Kirby\Cms\Page;
 
 /**
- * Provides common field prop definitons
+ * Provides common field prop definitions
  * for dialogs and other places
  *
  * @since 3.6.0
@@ -46,7 +46,7 @@ class Field
         $index   = 0;
         $options = [];
 
-        foreach ($file->siblings(false) as $sibling) {
+        foreach ($file->siblings(false)->sorted() as $sibling) {
             $index++;
 
             $options[] = [
@@ -152,7 +152,7 @@ class Field
     {
         $kirby   = kirby();
         $user    = $kirby->user();
-        $isAdmin = $user ? $user->isAdmin() : false;
+        $isAdmin = $user && $user->isAdmin();
         $roles   = [];
 
         foreach ($kirby->roles() as $role) {
@@ -235,6 +235,7 @@ class Field
      */
     public static function translation(array $props = []): array
     {
+        $translations = [];
         foreach (kirby()->translations() as $translation) {
             $translations[] = [
                 'text'  => $translation->name(),
