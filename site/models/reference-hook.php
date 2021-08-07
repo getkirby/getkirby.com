@@ -13,8 +13,9 @@ class ReferenceHookPage extends ReflectionPage
 
     public function example()
     {
-        $tab  = '    ';
-        $args = $this->arguments();
+        $tab    = '    ';
+        $args   = $this->arguments();
+        $return = $this->return()->or($args);
 
         $example[] = '```php "/site/config/config.php"';
         $example[] = 'return [';
@@ -23,7 +24,7 @@ class ReferenceHookPage extends ReflectionPage
         $example[] = $tab . $tab . $tab . '// your code goes here';
 
         if ($this->type() == 'apply') {
-        $example[] =  $tab . $tab . $tab . 'return ' . $args . ';';
+            $example[] =  $tab . $tab . $tab . 'return ' . $return . ';';
         }
 
         $example[] = $tab . $tab . '}';
@@ -43,5 +44,5 @@ class ReferenceHookPage extends ReflectionPage
             ]
         ]);
     }
-    
+
 }
