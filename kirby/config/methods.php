@@ -192,7 +192,7 @@ return function (App $app) {
          * @return \Kirby\Cms\Layouts
          */
         'toLayouts' => function (Field $field) {
-            return Layouts::factory(Data::decode($field->value, 'json'), [
+            return Layouts::factory(Layouts::parse($field->value()), [
                 'parent' => $field->parent()
             ]);
         },
@@ -498,13 +498,13 @@ return function (App $app) {
          */
         'replace' => function (Field $field, array $data = [], string $fallback = '') use ($app) {
             if ($parent = $field->parent()) {
-                $field->value = $field->parent()->toString($field->value, $data, $fallback);
+                $field->value = $parent->toString($field->value, $data, $fallback);
             } else {
                 $field->value = Str::template($field->value, array_replace([
                     'kirby' => $app,
                     'site'  => $app->site(),
                     'page'  => $app->page()
-                ], $data), $fallback);
+                ], $data), ['fallback' => $fallback]);
             }
 
             return $field;

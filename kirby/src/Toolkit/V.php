@@ -71,9 +71,9 @@ class V
 
             if (is_array($value) === true) {
                 try {
-                    foreach ($value as $index => $item) {
+                    foreach ($value as $key => $item) {
                         if (is_array($item) === true) {
-                            $value[$index] = implode('|', $item);
+                            $value[$key] = implode('|', $item);
                         }
                     }
                     $value = implode(', ', $value);
@@ -463,6 +463,12 @@ V::$validators = [
      * Checks that the value has the given size
      */
     'size' => function ($value, $size, $operator = '=='): bool {
+        // if value is field object, first convert it to a readable value
+        // it is important to check at the beginning as the value can be string or numeric
+        if (is_a($value, '\Kirby\Cms\Field') === true) {
+            $value = $value->value();
+        }
+
         if (is_numeric($value) === true) {
             $count = $value;
         } elseif (is_string($value) === true) {

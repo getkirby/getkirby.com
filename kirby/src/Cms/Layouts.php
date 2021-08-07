@@ -2,6 +2,9 @@
 
 namespace Kirby\Cms;
 
+use Kirby\Data\Data;
+use Throwable;
+
 /**
  * A collection of layouts
  * @since 3.5.0
@@ -36,5 +39,61 @@ class Layouts extends Items
         }
 
         return parent::factory($items, $params);
+    }
+
+    /**
+     * Checks if a given block type exists in the layouts collection
+     *
+     * @param string $type
+     * @return bool
+     */
+    public function hasBlockType(string $type): bool
+    {
+        return $this->toBlocks()->hasType($type);
+    }
+
+    /**
+     * Parse layouts data
+     *
+     * @param array|string $input
+     * @return array
+     */
+    public static function parse($input): array
+    {
+        if (empty($input) === false && is_array($input) === false) {
+            try {
+                $input = Data::decode($input, 'json');
+            } catch (Throwable $e) {
+                return [];
+            }
+        }
+
+        if (empty($input) === true) {
+            return [];
+        }
+
+        return $input;
+    }
+
+    /**
+     * Converts layouts to blocks
+     *
+     * @return \Kirby\Cms\Blocks
+     */
+    public function toBlocks()
+    {
+        $blocks = [];
+
+        if ($this->isNotEmpty() === true) {
+            foreach ($this->data() as $layout) {
+                foreach ($layout->columns() as $column) {
+                    foreach ($column->blocks() as $block) {
+                        $blocks[] = $block->toArray();
+                    }
+                }
+            }
+        }
+
+        return Blocks::factory($blocks);
     }
 }
