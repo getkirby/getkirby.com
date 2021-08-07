@@ -94,10 +94,10 @@ Webp:
 $image->thumb(['width' => 200, 'format' => 'webp']);
 
 $image->srcset([
-  ['width' => 200, 'format' => 'avif'],
-  ['width' => 200, 'format' => 'webp'],
-  ['width' => 200, 'format' => 'jpg']
-]);
+  '400vw'  => ['width' => 400, 'format' => 'webp'],
+  '800vw'  => ['width' => 800, 'format' => 'webp']
+  '1200vw' => ['width' => 1200, 'format' => 'webp']
+])
 ```
 
 ----
