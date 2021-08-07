@@ -148,10 +148,23 @@ class View
         // user permissions
         $permissions = $user ? $user->role()->permissions()->toArray() : [];
 
+        // current content language
+        $language = $kirby->language();
+
         // shared data for all requests
         return [
-            '$language' => function () use ($kirby, $multilang) {
-                if ($multilang === true && $language = $kirby->language()) {
+            '$direction' => function () use ($kirby, $multilang, $language, $user) {
+                if ($multilang === true && $language && $user) {
+                    $isDefault = $language->direction() === $kirby->defaultLanguage()->direction();
+                    $isFromUser = $language->code() === $user->language();
+
+                    if ($isDefault === false && $isFromUser === false) {
+                        return $language->direction();
+                    }
+                }
+            },
+            '$language' => function () use ($kirby, $multilang, $language) {
+                if ($multilang === true && $language) {
                     return [
                         'code'    => $language->code(),
                         'default' => $language->isDefault(),
@@ -178,6 +191,7 @@ class View
             '$permissions' => $permissions,
             '$license' => (bool)$kirby->system()->license(),
             '$multilang' => $multilang,
+            '$searches' => static::searches($options['areas'] ?? [], $permissions),
             '$url' => Url::current(),
             '$user' => function () use ($user) {
                 if ($user) {
@@ -205,7 +219,12 @@ class View
                 $view = array_replace_recursive($defaults, $options['area'] ?? [], $view);
 
                 // make sure that views and dialogs are gone
-                unset($view['views'], $view['dialogs']);
+                unset(
+                    $view['dialogs'],
+                    $view['dropdowns'],
+                    $view['searches'],
+                    $view['views']
+                );
 
                 // resolve all callbacks in the view array
                 return A::apply($view);
@@ -322,7 +341,7 @@ class View
                 continue;
             }
 
-            $access   = $permissions['access'][$areaId] ?? false;
+            $access   = $permissions['access'][$areaId] ?? true;
             $disabled = $menuSetting === 'disabled' || $access === false;
 
             $menu[] = [
@@ -406,5 +425,21 @@ class View
 
         // render the full HTML document
         return Document::response($fiber);
+    }
+
+    public static function searches(array $areas, array $permissions)
+    {
+        $searches = [];
+
+        foreach ($areas as $area) {
+            foreach ($area['searches'] ?? [] as $id => $params) {
+                $searches[$id] = [
+                    'icon'  => $params['icon'] ?? 'search',
+                    'label' => $params['label'] ?? Str::ucfirst($id),
+                    'id'    => $id
+                ];
+            }
+        }
+        return $searches;
     }
 }

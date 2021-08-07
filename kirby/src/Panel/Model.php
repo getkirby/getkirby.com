@@ -127,7 +127,6 @@ abstract class Model
             if (is_a($image, 'Kirby\Cms\File') === true) {
                 $settings['src'] = static::imagePlaceholder();
 
-
                 switch ($layout) {
                     case 'cards':
                         $sizes = [352, 864, 1408];
@@ -136,6 +135,7 @@ abstract class Model
                         $sizes = [96, 192];
                         break;
                     case 'list':
+                    default:
                         $sizes = [38, 76];
                         break;
                 }
@@ -225,6 +225,21 @@ abstract class Model
     }
 
     /**
+     * Checks for disabled dropdown options according
+     * to the given permissions
+     *
+     * @param string $action
+     * @param array $options
+     * @param array $permissions
+     * @return bool
+     */
+    public function isDisabledDropdownOption(string $action, array $options, array $permissions): bool
+    {
+        $option = $options[$action] ?? true;
+        return $permissions[$action] === false || $option === false || $option === 'false';
+    }
+
+    /**
      * Returns lock info for the Panel
      *
      * @return array|false array with lock info,
@@ -291,15 +306,19 @@ abstract class Model
      */
     public function pickerData(array $params = []): array
     {
+        // todo: in 3.5.7 this method would have escaped the default text;
+        //       no longer needed in 3.6
+
         return [
-            'id'    => $this->model->id(),
-            'image' => $this->image(
+            'id'       => $this->model->id(),
+            'image'    => $this->image(
                 $params['image'] ?? [],
                 $params['layout'] ?? 'list'
             ),
-            'info'  => $this->model->toString($params['info'] ?? false),
-            'link'  => $this->url(true),
-            'text'  => $this->model->toString($params['text'] ?? false),
+            'info'     => $this->model->toString($params['info'] ?? false),
+            'link'     => $this->url(true),
+            'sortable' => true,
+            'text'     => $this->model->toString($params['text'] ?? false)
         ];
     }
 
@@ -318,7 +337,6 @@ abstract class Model
         $tab       = $blueprint->tab(get('tab')) ?? $tabs[0] ?? null;
 
         $props = [
-            'blueprint'   => $blueprint->name(),
             'lock'        => $this->lock(),
             'permissions' => $this->model->permissions()->toArray(),
             'tabs'        => $tabs,
