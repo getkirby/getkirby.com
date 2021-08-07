@@ -7,10 +7,7 @@ use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Exception\PermissionException;
-use Kirby\Http\Request;
 use Kirby\Http\Response;
-use Kirby\Http\Url;
-use Kirby\Toolkit\A;
 use Kirby\Toolkit\Tpl;
 use Throwable;
 
@@ -114,7 +111,7 @@ class Panel
         $permissions = $user->role()->permissions()->toArray()['access'];
 
         // check for general panel access
-        if (($permissions['panel'] ?? false) !== true) {
+        if (($permissions['panel'] ?? true) !== true) {
             throw new PermissionException(['key' => 'access.panel']);
         }
 
@@ -242,7 +239,11 @@ class Panel
         switch ($options['type'] ?? 'view') {
             case 'dialog':
                 return Dialog::response($result, $options);
-            default:
+            case 'dropdown':
+                return Dropdown::response($result, $options);
+            case 'search':
+                return Search::response($result, $options);
+            case 'view':
                 return View::response($result, $options);
         }
     }
@@ -338,7 +339,9 @@ class Panel
             $routes = array_merge(
                 $routes,
                 static::routesForViews($areaId, $area),
-                static::routesForDialogs($areaId, $area)
+                static::routesForSearches($areaId, $area),
+                static::routesForDialogs($areaId, $area),
+                static::routesForDropdowns($areaId, $area),
             );
         }
 
@@ -421,6 +424,66 @@ class Panel
     }
 
     /**
+     * Extract all routes for dropdowns
+     *
+     * @param string $areaId
+     * @param array $area
+     * @return array
+     */
+    public static function routesForDropdowns(string $areaId, array $area): array
+    {
+        $dropdowns = $area['dropdowns'] ?? [];
+        $routes    = [];
+
+        foreach ($dropdowns as $pattern => $action) {
+
+            // create the full pattern with dropdowns prefix
+            $pattern = 'dropdowns/' . trim($pattern, '/');
+
+            // load event
+            $routes[] = [
+                'pattern' => $pattern,
+                'type'    => 'dropdown',
+                'area'    => $areaId,
+                'action'  => $action
+            ];
+        }
+
+        return $routes;
+    }
+
+    /**
+     * Extract all routes for searches
+     *
+     * @param string $areaId
+     * @param array $area
+     * @return array
+     */
+    public static function routesForSearches(string $areaId, array $area): array
+    {
+        $searches = $area['searches'] ?? [];
+        $routes   = [];
+
+        foreach ($searches as $name => $params) {
+
+            // create the full routing pattern
+            $pattern = 'search/' . $name;
+
+            // load event
+            $routes[] = [
+                'pattern' => $pattern,
+                'type'    => 'search',
+                'area'    => $areaId,
+                'action'  => function () use ($params) {
+                    return $params['query'](get('query'));
+                }
+            ];
+        }
+
+        return $routes;
+    }
+
+    /**
      * Extract all views from an area
      *
      * @param string $areaId
@@ -453,10 +516,10 @@ class Panel
         $kirby = kirby();
 
         // language switcher
-        if ($kirby->options('languages')) {
-            $session  = $kirby->session();
+        if ($kirby->option('languages')) {
+            $session         = $kirby->session();
             $sessionLanguage = $session->get('panel.language', 'en');
-            $language = get('language') ?? $sessionLanguage;
+            $language        = get('language') ?? $sessionLanguage;
 
             // keep the language for the next visit
             if ($language !== $sessionLanguage) {
