@@ -113,7 +113,7 @@ class File extends ModelWithContent
         }
 
         // content fields
-        return $this->content()->get($method, $arguments);
+        return $this->content()->get($method);
     }
 
     /**
@@ -740,5 +740,17 @@ class File extends ModelWithContent
     public function panelUrl(bool $relative = false): string
     {
         return $this->panel()->url($relative);
+    }
+
+    /**
+     * Simplified File URL that uses the parent
+     * Page URL and the filename as a more stable
+     * alternative for the media URLs.
+     *
+     * @return string
+     */
+    public function previewUrl(): string
+    {
+        return url($this->id());
     }
 }

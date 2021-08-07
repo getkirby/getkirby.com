@@ -63,9 +63,9 @@ class Document
             'css' => [
                 'index'   => $url . '/css/style.css',
                 'plugins' => $plugins->url('css'),
-                'custom'  => static::customCss($kirby),
+                'custom'  => static::customCss(),
             ],
-            'icons' => [
+            'icons' => $kirby->option('panel.favicon', [
                 'apple-touch-icon' => [
                     'type' => 'image/png',
                     'url'  => $url . '/apple-touch-icon.png',
@@ -78,12 +78,12 @@ class Document
                     'type' => 'image/png',
                     'url'  => $url . '/favicon.png',
                 ]
-            ],
+            ]),
             'js' => [
                 'vendor'       => $url . '/js/vendor.js',
                 'pluginloader' => $url . '/js/plugins.js',
                 'plugins'      => $plugins->url('js'),
-                'custom'       => static::customJs($kirby),
+                'custom'       => static::customJs(),
                 'index'        => $url . '/js/index.js',
             ]
         ];
