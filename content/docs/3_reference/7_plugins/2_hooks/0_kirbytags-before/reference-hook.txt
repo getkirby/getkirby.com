@@ -1,3 +1,18 @@
+Example:
+
+```php "/site/config/config.php"
+return [
+    'hooks' => [
+        'kirbytags:before' => function ($text, $data, $options) {
+            // your code goes here
+            return $text;
+        }
+    ]
+]
+```
+
+----
+
 Details:
 
 ## More information

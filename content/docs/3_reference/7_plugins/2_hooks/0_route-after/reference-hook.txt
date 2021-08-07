@@ -1,3 +1,18 @@
+Example:
+
+```php "/site/config/config.php"
+return [
+    'hooks' => [
+        'route:after' => function ($route, $path, $method, $result, $final) {
+            // your code goes here
+            return 'something';
+        }
+    ]
+]
+```
+
+----
+
 Details:
 
 <since v="3.4.0">
