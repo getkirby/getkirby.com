@@ -107,6 +107,11 @@ If you want to use the same action for multiple patterns, you can either use reg
 ]
 ```
 
+<warning>
+When using placeholders like `(:any)` and `(:all)` or regex patterns, make sure that they are not too greedy and you accidentally catch routes you want left intact, resulting in things not working as expected anymore.
+
+Example: A pattern like `(:any)` will not only catch routes with a URL part like `notes` or `photography`, but also their JSON content representations `notes.json` or `photography.json`. In this case, using `(:alphanum)` can be more suitable.
+</warning>
 
 ## Response types
 
