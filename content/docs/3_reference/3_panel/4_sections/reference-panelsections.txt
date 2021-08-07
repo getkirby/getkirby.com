@@ -10,7 +10,7 @@ Sections help you to organize content in the (glossary: Panel) or provide additi
 
 Text:
 
-Sections are be defined in your (glossary: blueprint text: blueprints) and help you to structure your content in the best possible way. Sections can be defined once and reused and extended in different blueprints.
+Sections are defined in your (glossary: blueprint text: blueprints) and help you to structure your content in the best possible way. Sections can be defined once and reused and extended in different blueprints.
 
 In addition to the default section types, you can also **(link: docs/reference/plugins/extensions/sections text: create your own custom sections)**.
 
