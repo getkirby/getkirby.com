@@ -22,7 +22,7 @@
   <?php endforeach ?>
 
   <?php foreach ($assets['icons'] as $rel => $icon): ?>
-  <link nonce="<?= $nonce ?>" rel="<?= $rel ?>" href="<?= $icon['url'] ?>" type="<?= $icon['type'] ?>">
+  <link nonce="<?= $nonce ?>" rel="<?= $rel ?>" href="<?= url($icon['url']) ?>" type="<?= $icon['type'] ?>">
   <?php endforeach ?>
 
   <base href="<?= $panelUrl ?>">
@@ -48,7 +48,7 @@
 
   <script nonce="<?= $nonce ?>">
     // Panel state
-    const json = <?= json_encode($fiber, JSON_UNESCAPED_SLASHES) ?>;
+    const json = <?= json_encode($fiber) ?>;
 
     window.panel = JSON.parse(JSON.stringify(json));
 

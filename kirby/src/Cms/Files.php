@@ -3,6 +3,7 @@
 namespace Kirby\Cms;
 
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Filesystem\F;
 
 /**
  * The `$files` object extends the general
@@ -126,6 +127,42 @@ class Files extends Collection
     public function findByKey(string $key)
     {
         return $this->findById($key);
+    }
+
+    /**
+     * Returns the file size for all
+     * files in the collection in a
+     * human-readable format
+     *
+     * @return string
+     */
+    public function niceSize(): string
+    {
+        return F::niceSize($this->size());
+    }
+
+    /**
+     * Returns the raw size for all
+     * files in the collection
+     *
+     * @return int
+     */
+    public function size(): int
+    {
+        return F::size($this->values(function ($file) {
+            return $file->root();
+        }));
+    }
+
+    /**
+     * Returns the collection sorted by
+     * the sort number and the filename
+     *
+     * @return static
+     */
+    public function sorted()
+    {
+        return $this->sort('sort', 'asc', 'filename', 'asc');
     }
 
     /**
