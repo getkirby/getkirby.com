@@ -55,7 +55,7 @@ We know that breaking changes suck, when they break your plugins or other parts 
 - Direct URLs for the users view have changed, e.g. now `/panel/users/?role=yourRole`
 
 ### Custom Panel views
-- Using custom Panel views (incl. routing, breadcrumbs...) in plugins has changed fundamentally. You will have to use the [new Panel areas feature](/releases/3.6/features/fiber#area-definition) now.
+- Using custom Panel views (incl. routing, breadcrumbs...) in plugins has changed fundamentally. You will have to use the [new Panel areas feature](/releases/3.6/fiber/areas#area-definition) now.
 - Accordingly, the frontend extension `panel.plugin({ view: [...] })` has been  removed. Use Panel areas instead.
 
 ### `Kirby\Panel` namespace related
