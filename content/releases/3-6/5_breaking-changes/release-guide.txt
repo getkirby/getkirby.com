@@ -57,13 +57,23 @@ We know that breaking changes suck, when they break your plugins or other parts 
 ### Custom Panel views
 - Using custom Panel views (incl. routing, breadcrumbs...) in plugins has changed fundamentally. You will have to use the [new Panel areas feature](/releases/3.6/fiber/areas#area-definition) now.
 - Accordingly, the frontend extension `panel.plugin({ view: [...] })` has been  removed. Use Panel areas instead.
-- If the custom panel view is for authenticated users, you will have to wrap your custom view with `<k-inside>`. [See more component changes](/releases/3.6/breaking-changes#panel__vue-component-changes)
+- If the custom Panel view is for authenticated users, you will have to wrap your custom view with `<k-inside>`. If not, you should wrap it with `<k-outside>`. [See more component changes](/releases/3.6/breaking-changes#panel__vue-component-changes)
 
-```html "View component in Vue.js"
+**View component in Vue.js**
+
+```html "For authenticated page"
 <template>
   <k-inside>
     ...
   </k-inside>
+</template>
+```
+
+```html "After logout for visitors"
+<template>
+  <k-outside>
+    ...
+  </k-outside>
 </template>
 ```
 
