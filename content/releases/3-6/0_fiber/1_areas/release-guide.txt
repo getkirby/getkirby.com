@@ -92,14 +92,14 @@ Kirby::plugin('yourname/todos', [
                 // we can preset the search type with the
                 // search attribute
                 'search' => 'pages'
-              ]
+              ];
             }
           ]
         ]
-      ]
+      ];
     }
   ]
-])
+]);
 ```
 
 ```js
