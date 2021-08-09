@@ -2,13 +2,17 @@ Title: Kirby meets Tailwind CSS
 
 ----
 
+Published: 2021-08-09
+
+----
+
 Text:
 
 This is a walkthrough on how to install and use Tailwind CSS with Kirby.
 
 
 ## Preparation
-Before we start, we need to install Node.js for the build process on your client machine (or on the machine where you want to use Tailwind CSS). The latest version, which also includes npm (Node package management) can be downloaded on the (link: https://nodejs.org/en/download/ text: official Node.js website). You can test the successful installation by opening a terminal window and typing the following two commands.
+Before we start, you need to install Node.js for the build process on your client machine (or on the machine where you want to use Tailwind CSS). The latest version, which also includes npm (Node package management) can be downloaded from the (link: https://nodejs.org/en/download/ text: official Node.js website). You can test successful installation by opening a terminal window and typing the following two commands:
 
 ```bash
 node --version
@@ -17,14 +21,12 @@ node --version
 npm --version
 ```
 
-We use a plain Kirby installation to get started and just add a new folder `build` and a new folder `assets` to the root directory.
+We use a Kirby (link: try text: Starterkit or Plainkit) to get started, and create a new `/src` folder in the project's root, so that our folder structure looks like this.
 
 
 
 ```filesystem
 .htaccess
-assets/
-build/
 composer.json
 content/
 index.php
@@ -32,82 +34,86 @@ kirby/
 media/
 README.md
 site/
+src/
 ```
 
 ## Configuration
-Now let's create the file `package.json` which controls our build process inside the newly created directory. This file contains two build scripts, one for development (*watch*) and one for live mode (*build*).
+Also in the projects's root, we create a `package.json` file which controls the build process. This file contains two build scripts, one for development (*watch*) and one for live mode (*build*).
 
-```js "/build/package.json"
+```js "/src/package.json"
 {
     "name": "projectname",
 	"scripts": {
-		"watch": "npx tailwindcss -i ./tailwind.css -o ../assets/styles.css --jit --purge '../site/**/*.php' -w",
-        "build": "npx tailwindcss -i ./tailwind.css -o ../assets/styles.css --jit --purge '../site/**/*.php' -m"
+		"watch": "npx tailwindcss -i ./src/css/tailwind.css -o ../assets/css/styles.css --jit --purge '../site/**/*.php' -w",
+        "build": "npx tailwindcss -i ./src/css/tailwind.css -o ../assets/css/styles.css --jit --purge '../site/**/*.php' -m"
 	}
 }
 ```
 
 
 ### Explanation
-Use `watch` to observe changes and generate a css file on change
-Use `build` to generate a final minified css file
+Use `watch` to observe changes and generate a CSS file on change
+Use `build` to generate a final minified CSS file
 
-- `-i ./tailwind.css`: input file with Tailwind`s css classes
-- `-o ../assets/styles.css`: output file which will be generated
+- `-i ./src/css/tailwind.css`: input file with Tailwind's css classes
+- `-o ../assets/css/styles.css`: output file which will be generated
 - `--jit`: Tailwinds just in time engine *(still preview, but highly recommend!)*
-- `--purge '../site/**/*.php'`: folder to watch for Tailwind`s classes
+- `--purge '../site/**/*.php'`: folder to watch for Tailwind's classes
 - `-w`: defines watch mode
 - `-m`: minify output file
 
 
 
 ## CSS Styles
-<info>This is just a basic setup. More details on how to customize Tailwind CSS can be found on the (link: https://tailwindcss.com/ text:Tailwind CSS website)</info>
+<info>This is just a basic setup. More details on how to customize Tailwind CSS can be found on the (link: https://tailwindcss.com/ text: Tailwind CSS website)</info>
 
-After creating the build configuration, we create a basic css file and use the `@tailwind` directive to inject Tailwind’s `base`, `components`, and `utilities` styles.
-```css "/build/tailwind.css"
+After creating the build configuration, we create a subfolder `/css` in the `/src` folder and inside that folder a file called `tailwind.css`. Inside that file we use the `@tailwind` directive to inject Tailwind’s `base`, `components`, and `utilities` styles.
+```css "/src/css/tailwind.css"
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 ```
 
-Our `build` directory should look like follows and we are ready to install Tailwind CSS.
+Our `/src` folder should look like follows and we are ready to install Tailwind CSS.
 ```filesystem
-build/
-    package.json
-    tailwind.css
+src/
+  css/
+  tailwind.css
 ```
 
 
 ## Install Tailwind CSS
-Open the terminal window again (and leave it open), change to directory `build` and type the following command:
+Open the terminal window again (and leave it open), change to the project folder and type the following command:
 ```bash
 npm install tailwindcss@latest
 ```
-By executing the command above the needed folder `node_modules` and the file `package-lock.json` will be automatically created.
+By executing the command above a `node_modules` folder with the required dependencies and the file `package-lock.json` will be automatically created in the project root.
 
 
 ## Build
-Now we have a full functional basic setup and are ready to generate our css file. Be sure to be the `build` directory and start the `watch` or the `build` script as follows:
+Now we have a fully functional basic setup and are ready to generate our CSS file. Make sure you are in the project root folder and start the `watch` or the `build` script as follows:
 
-Use `watch` to observe changes and generate a css file on change:
+Use `watch` to observe changes and generate a CSS file on every change:
 ```bash
 npm run watch
 ```
 
-Use `build` to generate a final minified css file:
+Use `build` to generate a final minified CSS file:
 ```bash
 npm run build
 ```
 
-Both scripts check all php files inside the `site` directory for Tailwind CSS classes and writes them to the css file `site.css`. You just need to add the css source to your HTML markup like follows:
+Both scripts scan all php files inside the `/site` folder for Tailwind CSS classes and write them to the CSS file `styles.css`. 
+
+<info>
+If it doesn't exist, the `/assets/` folder structure will be created by the script automatically.
+</info>
+
+All that's left to do is link to this file in your HTML `head` tag:
+
 ```php
-<?= css('assets/styles.css') ?>
+<?= css('assets/css/styles.css') ?>
 ```
-
-
-
-
 
 
 ----
