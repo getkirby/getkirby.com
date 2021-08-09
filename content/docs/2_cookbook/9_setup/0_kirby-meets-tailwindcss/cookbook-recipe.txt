@@ -17,12 +17,13 @@ node --version
 npm --version
 ```
 
-We use a plain kirby installation to get started and just add a new folder `build` to the root directory.
+We use a plain kirby installation to get started and just add a new folder `build` and a new folder `assets` to the root directory.
 
 
 
 ```filesystem
 .htaccess
+assets/
 build/
 composer.json
 content/
@@ -34,23 +35,25 @@ site/
 ```
 
 ## Configuration
-Now let's create the file `package.json` which controls our build process inside the newly created directory. This file contains two build scripts, one for development and one for live mode.
+Now let's create the file `package.json` which controls our build process inside the newly created directory. This file contains two build scripts, one for development (*watch*) and one for live mode (*build*).
 
 ```js "/build/package.json"
 {
     "name": "My project",
 	"scripts": {
-        // Use WATCH to observe changes and generate a css file on change
-		"watch": "npx tailwindcss -i ./tailwind.css -o ./site.css --jit --purge '../site/**/*.php' -w",
-
-        // Use BUILD to generate a final minified css file
-        "build": "npx tailwindcss -i ./tailwind.css -o ./site.css --jit --purge '../site/**/*.php' -m"
+		"watch": "npx tailwindcss -i ./tailwind.css -o ../assets/styles.css --jit --purge '../site/**/*.php' -w",
+        "build": "npx tailwindcss -i ./tailwind.css -o ../assets/styles.css --jit --purge '../site/**/*.php' -m"
 	}
 }
 ```
+
+
 ### Explanation
+Use `watch` to observe changes and generate a css file on change
+Use `build` to generate a final minified css file
+
 - `-i ./tailwind.css`: input file with Tailwind`s css classes
-- `-o ./site.css`: output file which will be generated
+- `-o ../assets/styles.css`: output file which will be generated
 - `--jit`: Tailwinds just in time engine *(still preview, but highly recommend!)*
 - `--purge '../site/**/*.php'`: folder to watch for Tailwind`s classes
 - `-w`: defines watch mode
@@ -81,6 +84,8 @@ Open the terminal window again (and leave it open), change to directory `build` 
 ```bash
 npm install tailwindcss@latest
 ```
+By executing the command above the needed folder `node_modules` and the file `package-lock.json` will be automatically created.
+
 
 ## Build
 Now we have a full functional basic setup and are ready to generate our css file. Be sure to be the `build` directory and start the `watch` or the `build` script as follows:
@@ -96,8 +101,8 @@ npm run build
 ```
 
 Both scripts check all php files inside the `site` directory for Tailwind CSS classes and writes them to the css file `site.css`. You just need to add the css source to your HTML markup like follows:
-```html
-<link href="/build/site.css" rel="stylesheet" />
+```php
+<?= css('assets/style.css') ?>
 ```
 
 
