@@ -4,7 +4,7 @@ Title: Kirby meets Tailwind CSS
 
 Text:
 
-This is a walktrouh on how to install and use Tailwind CSS with Kirby.
+This is a walkthrough on how to install and use Tailwind CSS with Kirby.
 
 
 ## Preparation
@@ -17,7 +17,7 @@ node --version
 npm --version
 ```
 
-We use a plain kirby installation to get started and just add a new folder `build` and a new folder `assets` to the root directory.
+We use a plain Kirby installation to get started and just add a new folder `build` and a new folder `assets` to the root directory.
 
 
 
@@ -39,7 +39,7 @@ Now let's create the file `package.json` which controls our build process inside
 
 ```js "/build/package.json"
 {
-    "name": "My project",
+    "name": "projectname",
 	"scripts": {
 		"watch": "npx tailwindcss -i ./tailwind.css -o ../assets/styles.css --jit --purge '../site/**/*.php' -w",
         "build": "npx tailwindcss -i ./tailwind.css -o ../assets/styles.css --jit --purge '../site/**/*.php' -m"
@@ -71,7 +71,7 @@ After creating the build configuration, we create a basic css file and use the `
 @tailwind utilities;
 ```
 
-Our `build`directory should look like follows and we are ready to install Tailwind CSS.
+Our `build` directory should look like follows and we are ready to install Tailwind CSS.
 ```filesystem
 build/
     package.json
@@ -102,7 +102,7 @@ npm run build
 
 Both scripts check all php files inside the `site` directory for Tailwind CSS classes and writes them to the css file `site.css`. You just need to add the css source to your HTML markup like follows:
 ```php
-<?= css('assets/style.css') ?>
+<?= css('assets/styles.css') ?>
 ```
 
 
@@ -112,7 +112,7 @@ Both scripts check all php files inside the `site` directory for Tailwind CSS cl
 
 ----
 
-Description: A walktrouh on how to install and use Tailwind CSS with Kirby.
+Description: A walkthrough on how to install and use Tailwind CSS with Kirby.
 
 ----
 
