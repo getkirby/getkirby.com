@@ -42,10 +42,10 @@ Also in the projects's root, we create a `package.json` file which controls the 
 
 ```js "/src/package.json"
 {
-    "name": "projectname",
+  "name": "projectname",
 	"scripts": {
-		"watch": "npx tailwindcss -i ./src/css/tailwind.css -o ../assets/css/styles.css --jit --purge '../site/**/*.php' -w",
-        "build": "npx tailwindcss -i ./src/css/tailwind.css -o ../assets/css/styles.css --jit --purge '../site/**/*.php' -m"
+	  "watch": "npx tailwindcss -i ./src/css/tailwind.css -o ./assets/css/styles.css --jit --purge './site/**/*.php' -w",
+		"build": "npx tailwindcss -i ./src/css/tailwind.css -o ./assets/css/styles.css --jit --purge './site/**/*.php' -m"
 	}
 }
 ```
@@ -103,7 +103,7 @@ Use `build` to generate a final minified CSS file:
 npm run build
 ```
 
-Both scripts scan all php files inside the `/site` folder for Tailwind CSS classes and write them to the CSS file `styles.css`. 
+Both scripts scan all php files inside the `/site` folder for Tailwind CSS classes and write them to the CSS file `styles.css`.
 
 <info>
 If it doesn't exist, the `/assets/` folder structure will be created by the script automatically.
