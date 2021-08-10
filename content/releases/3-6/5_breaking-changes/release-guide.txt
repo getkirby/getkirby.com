@@ -44,13 +44,16 @@ We know that breaking changes suck, when they break your plugins or other parts 
 
 ### For all users
 
-- New minimum browser requirements (browsers with native ESM support):
-    - Firefox 60+
-    - Chrome 61+,
-    - Opera 48+
-    - macOS Safari 11+
-    - Android Browser 81+
-    - Chrome for Android 88+
+- New minimum browser requirements (browsers with native ESM and import support):
+
+    - Firefox 67+
+    - Chrome 63+
+    - Opera 50+
+    - macOS Safari 11.1+
+    - Safari iOS 11+
+    - Android Browser 92+
+    - Chrome for Android 92+
+
 - Direct URLs for tabs have changed, e.g. now `/panel/site/?tab=yourTabName`
 - Direct URLs for the users view have changed, e.g. now `/panel/users/?role=yourRole`
 
@@ -109,6 +112,15 @@ We know that breaking changes suck, when they break your plugins or other parts 
     - `$store.dispatch('breadcrumb')` and `$store.dispatch('title')`have been removed. Use Panel areas instead.
 - The `previewThumb` helper has been removed. `k-item-image` takes care of processing the image data correctly inside `k-item`.
 - The following methods from `vuex-i18n` are no longer available in the new custom implementation: `$tc`,  `$tlang`, `$i18n.localeExists`, `$i18n.keyExists`.     Translation strings cannot be added dynamically anymore, only through our official extension.
+- Removed outdated $api methods in Vue:
+    - `$api.pages.breadcrumb`
+    - `$api.files.breadcrumb`
+    - `$api.users.breadcrumb`
+    - `$api.site.breadcrumb`
+    - `$api.site.options`
+    - `$api.roles.options`
+    - `$api.translations.options`
+
 
 ### CSS Selectors
 - `.k-panel[data-translation]` is now `.k-panel[data-language]`

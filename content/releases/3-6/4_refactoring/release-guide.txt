@@ -23,3 +23,4 @@ Text:
 - Replaced Panel event bus with `mitt` [#3191](https://github.com/getkirby/kirby/pull/3191)
 - The former development `panel/index.html` file was removed
 - The internal Panel sandbox has been removed
+- The `api.csrf` option is automatically set to `dev` when the `panel.dev` option is true

@@ -100,4 +100,15 @@ if ($layouts->hasBlockType('heading') === true) {
 }
 ```
 
+## `$file->sha1()`
 
+Generates a sha1 hash for the given file.
+
+```php
+$hashA = $fileA->sha1();
+$hashB = $fileB->sha1();
+
+if ($hashA === $hashB) {
+  echo 'The files are the same';
+}
+```

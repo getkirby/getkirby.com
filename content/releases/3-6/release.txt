@@ -1,4 +1,4 @@
-Title: 3.6-alpha.3
+Title: 3.6-alpha.4
 ----
 Version: 3.6
 ----
@@ -7,24 +7,25 @@ Area:
 ```php
 Kirby::plugin('yourname/todos', [
   'areas' => [
-    'todos' => [
-      'label' => 'Todos',
-      'icon'  => 'check',
-      'menu' => true
-      'link' => 'todos',
-      'dialogs' => [
-        'todos/create' => [
-          'load' => function () { ... },
-          'submit' => function () { ... }
+    'todos' => function () {
+      return [
+        'label' => 'Todos',
+        'icon'  => 'check',
+        'menu'  => true
+        'dialogs' => [
+          'todos/create' => [
+            'load' => function () { ... },
+            'submit' => function () { ... }
+          ]
+        ],
+        'views' => [
+          [
+            'pattern' => 'todos',
+            'action' => function () { ... }
+          ]
         ]
-      ],
-      'views' => [
-        [
-          'pattern' => 'todos',
-          'action' => function () { ... }
-        ]
-      ]
-    ]
+      ];
+    }
   ]
 ]);
 ```
