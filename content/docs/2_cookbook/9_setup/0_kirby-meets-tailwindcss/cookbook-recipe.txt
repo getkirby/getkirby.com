@@ -91,7 +91,7 @@ By executing the command above a `node_modules` folder with the required depende
 
 
 ## Config Tailwind CSS (optional)
-If you want to customize your Tailwind installation, you just need to create an additional config file `tailwind.config.js` in the project root. The build process automatically passes through this file if it exists.
+If you want to customize your Tailwind installation, you can create an additional config file `tailwind.config.js` in the project root. This file will then be automatically processed at build time if it exists.
 
 
 ```js "/tailwind.config.js"
@@ -104,7 +104,7 @@ module.exports = {
   plugins: [],
 }
 ```
-<info>More details on how to customize Tailwind CSS can be found on the (link: https://tailwindcss.com/ text: Tailwind CSS website).</info>
+<info>More details on how to customize Tailwind CSS can be found on the (link: https://tailwindcss.com/docs/configuration text: in the Tailwind CSS docs).</info>
 
 
 ## Build
