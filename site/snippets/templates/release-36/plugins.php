@@ -2,7 +2,7 @@
   'id'    => 'plugins',
   'title' => 'Panel areas',
   'intro' => 'The plugin API you’ve been dreaming of',
-  'text'  => 'Our new Fiber architecture splits the Panel in areas: site area, users area, settings area, etc. You can create your own areas and build entire applications on top of the Panel. <a href="/releases/3.6/features/fiber#area-definition">Learn more &rsaquo;</a>',
+  'text'  => 'Our new Fiber architecture splits the Panel in areas: site area, users area, settings area, etc. You can create your own areas and build entire applications on top of the Panel. <a href="/releases/3.6/fiber/areas">Learn more &rsaquo;</a>',
   'figure' => 'templates/release-36/plugins-figure',
   'reverse' => true,
   'features' => [

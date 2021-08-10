@@ -2,7 +2,7 @@
   'id'    => 'fiber',
   'title' => 'Fiber',
   'intro' => 'Our architecture for the future',
-  'text'  => 'We’ve spent the last months working on a brand new backend architecture for the Panel. Moving from a single page application to a more traditional approach with a simplified server-rendered backend. The new architecture is inspired by Inertia.js and simplifies our Panel and Panel plugins in ways that we’ve never dreamed of. <a href="/releases/3.6/features/fiber">Learn more &rsaquo;</a>',
+  'text'  => 'We’ve spent the last months working on a brand new backend architecture for the Panel. Moving from a single page application to a more traditional approach with a simplified server-rendered backend. The new architecture is inspired by Inertia.js and simplifies our Panel and Panel plugins in ways that we’ve never dreamed of. <a href="/releases/3.6/fiber">Learn more &rsaquo;</a>',
   'figure' => 'templates/release-36/fiber-figure',
   'footer' => 'templates/release-36/fiber-footer',
   'features' => [
