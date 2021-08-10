@@ -21,7 +21,7 @@ Blueprints for Panel forms are usually static YAML files. While this is totally 
 
 In a Kirby plugin, we can (link: docs/reference/plugins/extensions/blueprints text: register blueprints) inside the blueprints array as key/value pairs, where the key is the name of the blueprint. As values we can either provide the path to a file or we can pass the blueprint definition as an array.
 
-So why not return this array via PHP?
+Since Kirby 3.6, we can also return a closure, which allows us to create blueprint plugins dynamically without sacrificing performance.
 
 This approach works for complete page/user/file blueprints as well as for partial blueprints like tabs, fieldgroups etc.
 
@@ -52,8 +52,9 @@ use Kirby\Cms\App as Kirby;
 Kirby::plugin('cookbook/programmable-blueprints', 
 [
   'blueprints' => [
-    'pages/notes' => include __DIR__ . '/blueprints/pages/notes.php'
-  ],
+    'pages/notes' => function ($kirby) {
+          return include __DIR__ . '/blueprints/pages/notes.php';
+    },
 ]);
 ```
 
@@ -129,8 +130,12 @@ use Kirby\Cms\App as Kirby;
 Kirby::plugin('cookbook/programmable-blueprints', 
 [
     'blueprints' => [
-        'pages/notes'         => include __DIR__ . '/blueprints/pages/notes.php'
-        'fields/multiselects' => include __DIR__ . '/blueprints/fields/multiselects.php'
+        'pages/notes'         => function($kirby) {
+            return include __DIR__ . '/blueprints/pages/notes.php';
+        },
+        'fields/multiselects' => function($kirby) {
+            return include __DIR__ . '/blueprints/fields/multiselects.php';
+        }
     ],
 ]);
 ```
@@ -180,9 +185,15 @@ Again, we register a new section blueprint:
 Kirby::plugin('cookbook/programmable-blueprints', 
 [
     'blueprints' => [
-        'pages/notes'         => include __DIR__ . '/blueprints/pages/notes.php',
-        'fields/multiselects' => include __DIR__ . '/blueprints/fields/multiselects.php',
-        'sections/notes'      => include __DIR__ . '/blueprints/sections/notes.php',
+        'pages/notes'         => function($kirby) {
+            return include __DIR__ . '/blueprints/pages/notes.php';
+        },
+        'fields/multiselects' => function($kirby) {
+            return include __DIR__ . '/blueprints/fields/multiselects.php';
+        },
+        'sections/notes'      => function($kirby) {
+            return include __DIR__ . '/blueprints/sections/notes.php';
+        },
     ],
 ]);
 
@@ -250,10 +261,18 @@ use Kirby\Cms\App as Kirby;
 Kirby::plugin('cookbook/programmable-blueprints', 
 [
     'blueprints' => [
-        'pages/notes'         => include __DIR__ . '/blueprints/pages/notes.php',
-        'fields/multiselects' => include __DIR__ . '/blueprints/fields/multiselects.php',
-        'sections/notes'      => include __DIR__ . '/blueprints/sections/notes.php',
-        'tab/meta'            => include __DIR__ . '/blueprints/tabs/meta.php',
+        'pages/notes'         => function($kirby) {
+            return include __DIR__ . '/blueprints/pages/notes.php';
+        },
+        'fields/multiselects' => function($kirby) {
+            return include __DIR__ . '/blueprints/fields/multiselects.php';
+        },
+        'sections/notes'      => function($kirby) {
+            return include __DIR__ . '/blueprints/sections/notes.php';
+        },
+        'tabs/meta'           => function($kirby) {
+            return include __DIR__ . '/blueprints/tabs/meta.php';
+        },
     ],
 ]);
 ```
@@ -335,3 +354,5 @@ tabs:
 ## Recap
 
 In this recipe we looked into creating different types of blueprints dynamically, which can be helpful in several use cases. And if you don't like `YAML`, it might even become your favorite way of creating blueprints. Despite some limitations, you can still get pretty creative with this approach.
+
+If you have other great ideas how to use this feature, let use know.
