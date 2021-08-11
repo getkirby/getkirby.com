@@ -44,10 +44,11 @@ We know that breaking changes suck, when they break your plugins or other parts 
 
 ### For all users
 
-- New minimum browser requirements (browsers with native ESM and import support):
+- New minimum browser requirements (browsers with native ESM and dynamic `import()` support):
 
     - Firefox 67+
     - Chrome 63+
+    - Edge 79+
     - Opera 50+
     - macOS Safari 11.1+
     - Safari iOS 11+
