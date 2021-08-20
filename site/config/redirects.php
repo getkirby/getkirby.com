@@ -22,16 +22,21 @@ return [
     'docs/reference/@/classes/(:all)' => 'docs/reference/objects/$1',
 
     'docs/reference/objects/(:any)/(:all)' => function ($class, $method) {
-        if ($class === 'request') {
-            return 'docs/reference/objects/http/request/' . $method;
-        }
-        if ($class === 'session') {
-            return 'docs/reference/objects/session/session-data/' . $method;
-        }
         if ($class === 'kirby') {
-            $class = 'app';
+            $class = 'cms/app';
+        } else if ($class === 'request') {
+            $class = 'http/request';
+        } else if ($class === 'session') {
+            $class = 'session/session-data';
+        } else  {
+            $class = 'cms/' . $class;
         }
-        return 'docs/reference/objects/cms/' . $class . '/' . $method;
+
+        if ($page = page('docs/reference/objects/' . $class . '/' . $method)) {
+            return $page->url();
+        }
+
+        return 'error';
     },
 
     'docs/reference/tools/(:any)/(:all)' => function ($class, $method) {
