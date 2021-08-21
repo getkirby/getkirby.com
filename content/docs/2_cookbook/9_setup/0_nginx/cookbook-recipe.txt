@@ -126,3 +126,7 @@ fastcgi_param SERVER_PORT 8080;
 ```
 
 Including `fastcgi.conf` will properly set some global PHP variables like `SCRIPT_NAME`, which the PHP process needs. Now there's only three of them that we need to set manually starting with `fastcgi_split_path_info`. This directive needs to contain a regular expression with two capture groups. The first group will become the `$fastcgi_script_name` variable, and the second capture group will become `$fastcgi_path_info`. We're only interested in the second variable, which we'll use in the next line to set the `PATH_INFO` variable correctly. The last line is only necessary, if your Nginx is running on a different port than the one that is really exposed to the outside (e.g. if you run Nginx in a Docker container with an internal Port 80, but the port is mapped to 8080 on the host). Kirby uses this variable to create internal links – so if this is not set correctly, internal links won't work.
+
+## Permissions for nginx user
+
+If you encounter images not being generated because of permission error like `The directory "/var/www/site_name/media" cannot be created`, set ownership of kirby root folder to nginx user (commonly `www-data`) or use `chmod XXX`
