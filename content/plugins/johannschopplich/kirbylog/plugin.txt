@@ -1,0 +1,17 @@
+Title: Kirbylog
+
+----
+
+Repository: https://github.com/johannschopplich/kirbylog
+
+----
+
+Category: utilities
+
+----
+
+Featured: false
+
+----
+
+Description: Zero-dependency global `kirbylog()` helper for any content
