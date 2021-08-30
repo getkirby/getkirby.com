@@ -38,3 +38,7 @@ If you randomly can't save pages, are randomly logged out or cannot log out with
 ## Field content saving but not updating in Panel
 
 Check if you have are sending Cache-Control headers or have set Expires HTTP headers in the `mod_expires` module in your `.htaccess`/server configuration.
+
+## File editing issues
+
+When you get an "Unauthenticated" error when trying to access or edit files in the Panel, check if Varnish cache is activated on the server. This may result in (wrong) requests getting cached and resulting in such issues. When you run into such issues, disable Varnish cache.

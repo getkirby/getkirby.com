@@ -182,7 +182,7 @@ If you want to restrict what types of files can be uploaded to the given destina
 
 </since>
 
-(docs: panel-picker-pagination field: pages)
+(docs: panel-picker-pagination field: files)
 
 ## How to use in templates/snippets
 

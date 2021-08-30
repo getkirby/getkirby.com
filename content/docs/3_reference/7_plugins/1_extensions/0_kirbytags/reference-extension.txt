@@ -76,7 +76,7 @@ Kirby::plugin('your/plugin', [
 
 ## Adding attributes
 
-If you want to add attributes, you can add them as an `attr` array like this:
+If you want to add attributes (e.g. `(wikipedia: class: my-class)`), you can add them as an `attr` array like this:
 
 ```php
 <?php

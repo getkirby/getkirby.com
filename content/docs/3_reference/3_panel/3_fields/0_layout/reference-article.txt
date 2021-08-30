@@ -131,6 +131,33 @@ fields:
 
 (image: layout-settings.png)
 
+### Tabs
+
+If you have a lot of settings, you can organize them in tabs:
+
+```yaml
+fields:
+  layout:
+    type: layout
+    layouts:
+      # …
+    fieldsets:
+      # …
+    settings:
+      tabs:
+        content:
+          fields:
+            link:
+              type: url
+            text:
+              type: text
+        styles:
+          fields:
+            class:
+              type: text
+            id:
+              type: text
+```
 ## Reusing and extending layout settings
 <since v="3.5.1">
 

@@ -107,6 +107,11 @@ If you want to use the same action for multiple patterns, you can either use reg
 ]
 ```
 
+<warning>
+When using placeholders like `(:any)` and `(:all)` or regex patterns, make sure that they are not too greedy and you accidentally catch routes you want left intact, resulting in things not working as expected anymore.
+
+Example: A pattern like `(:any)` will not only catch routes with a URL part like `notes` or `photography`, but also their JSON content representations `notes.json` or `photography.json`. In this case, using `(:alphanum)` can be more suitable.
+</warning>
 
 ## Response types
 
@@ -380,6 +385,49 @@ return [
   ]
 ];
 ```
+
+## Removing the parent page slug from the URL
+
+Sometimes we want to get rid of part of an URL for cleaner URLs, for example to replace the following URL
+
+```
+http://yourdomain.com/blog/my-awesome-article
+```
+
+…with…
+```
+
+http://yourdomain.com/my-awesome-article
+````
+
+This can be achieved with the following two routes in your `config.php` (or in a plugin):
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'routes' => [
+        [
+            'pattern' => '(:any)',
+            'action'  => function($uid) {
+                $page = page($uid);
+                if(!$page) $page = page('blog/' . $uid);
+                if(!$page) $page = site()->errorPage();
+                return site()->visit($page);
+            }
+        ],
+        [
+            'pattern' => 'blog/(:any)',
+            'action'  => function($uid) {
+                go($uid);
+            }
+        ]
+    ]
+];
+```
+Replace `blog` with the slug of the parent page you want to remove from the URL.
+
+Additionally, you can overwrite the `$page->url()` in a (link: docs/guide/templates/page-models text: page model) to return the desired target URL when you use this method.
 
 ## More information
 

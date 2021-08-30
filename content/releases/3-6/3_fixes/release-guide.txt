@@ -35,3 +35,9 @@ Text:
 - Topbar is fully responsive again [#3574](https://github.com/getkirby/kirby/issues/3574)
 - Languages get deleted without error again [#3588](https://github.com/getkirby/kirby/issues/3588)
 - Dropdowns and dropdown buttons no longer appear above the save bar. [#3554](https://github.com/getkirby/kirby/issues/3554)
+
+## Fixed regressions from 3.6.0-alpha.3
+
+- Fixed CSS dir issue in dialogs and drawers
+- Fixed images in picker field previews [#3551](https://github.com/getkirby/kirby/issues/3551)
+- Fixed file urls for draft pages [#3587](https://github.com/getkirby/kirby/issues/3587)

@@ -69,31 +69,33 @@ Of course, you can create your own dropdowns for your plugins
 ```php
 Kirby::plugin('your-plugin/todos', [
     'areas' => [
-        'todos' => [
-            ...
-            'dropdowns' => [
-                'todos/(:any)' => function (string $id) {
-                    // find the $todo here. (i.e. from a database)
-                    return [
-                        [
-                            'text'   => 'Edit',
-                            'dialog' => 'todos/' . $id . '/edit',
-                            'icon'   => 'edit'
-                        ],
-                        [
-                            'text'   => 'Duplicate',
-                            'dialog' => 'todos/' . $id . '/duplicate',
-                            'icon'   => 'copy'
-                        ],
-                        [
-                            'text'   => 'Delete',
-                            'dialog' => 'todos/' . $id . '/delete',
-                            'icon'   => 'trash'
-                        ]
-                    ];
-                }
-            ]
-        ]
+        'todos' => function ($kirby) {
+            return [
+                ...
+                'dropdowns' => [
+                    'todos/(:any)' => function (string $id) {
+                        // find the $todo here. (i.e. from a database)
+                        return [
+                            [
+                                'text'   => 'Edit',
+                                'dialog' => 'todos/' . $id . '/edit',
+                                'icon'   => 'edit'
+                            ],
+                            [
+                                'text'   => 'Duplicate',
+                                'dialog' => 'todos/' . $id . '/duplicate',
+                                'icon'   => 'copy'
+                            ],
+                            [
+                                'text'   => 'Delete',
+                                'dialog' => 'todos/' . $id . '/delete',
+                                'icon'   => 'trash'
+                            ]
+                        ];
+                    }
+                ]
+            ];
+        }
     ]
 ]);
 ```

@@ -35,3 +35,7 @@ Text:
 - Enhanced CSS support for RTL Panel interface [#3556](https://github.com/getkirby/kirby/pull/3556)
 - New `v-direction` directive to set the `dir` attribute based on the current content translation [#3568](https://github.com/getkirby/kirby/pull/3568)
 - File view uses stable preview link for files (instead of media folder URL) [#3575](https://github.com/getkirby/kirby/pull/3575)
+- File uploads now check for duplicates via sha1 hashes. This leads to a better upload experience because when you upload the exact same file twice, the upload is simply ignored.
+- The files field can now accept new files via drag & drop
+- New files automatically store the sort attribute on upload if the files section is sortable [#2886](https://github.com/getkirby/kirby/issues/2886)
+- Instant field and info section loading
