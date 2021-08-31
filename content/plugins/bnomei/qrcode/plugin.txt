@@ -10,4 +10,4 @@ Category: utilities
 
 ----
 
-Description: Generate QRCodes. The included Panel-Field will show the QRCode and trigger download on click.
+Description: Generate QRCodes. The included Panel field will show the QRCode and trigger download on click.
