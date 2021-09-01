@@ -96,9 +96,9 @@ return [
 
 Now our update loop can be triggered using the URL `mydomain.com/batch-update-content` after first logging in to the site with an admin role.
 
-<note>
+<info>
 Remember to delete or comment-out this route when done, to keep things clean and safe.
-</note>
+</info>
 
 ## Advanced batch processing
 
