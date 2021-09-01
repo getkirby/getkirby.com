@@ -156,6 +156,44 @@ foreach($collection as $page) {
 
 The `split()` method similarly applies when dealing with a [multiselect](https://getkirby.com/docs/reference/panel/fields/multiselect) field.
 
+### Updating content within blocks
+
+When dealing with contents in a blocks field, we have to create a modified clone of the original Blocks object and replace the field's value with that (see also [this recipe](https://getkirby.com/docs/cookbook/templating/update-blocks-programmatically) to see the underlying principle).
+
+```php
+foreach($collection as $page) {
+
+    // loop over each block in the blocks field
+    foreach ($page->myfield()->toBlocks() as $block) {
+
+        // store the current values
+		$old = $block->toArray();
+
+        // target specific blocks only (e.g. only block type `text`)
+		if ($block->type() === 'text') {
+
+            // manipulate the desired value in the content array
+			$old['content']['text'] = str_replace('OldBrand', 'NewBrand', $old['content']['text']);
+		}
+
+        // add block to the clone
+		$new[] = new Kirby\Cms\Block($old);
+
+	}
+
+    // create the cloned Blocks object from the array of blocks
+	$blocks = new Kirby\Cms\Blocks($new ?? []);
+
+    //update the content file
+    $page->update([
+        'text' => $blocks
+    ]);
+    
+}
+```
+
+Similarly, we could change other attributes of Blocks objects; for instance we could manipulate the `$old['type']` variable to make turn all blocks of type `text` into a (hypothetical) custom block type `mytext`, etc.
+
 ### Updating files
 
 The same logic can be used to loop over files and do something with them. For example, we could loop over all attached files of template `image` and resize them to a maximum width of 2000 pixels.
