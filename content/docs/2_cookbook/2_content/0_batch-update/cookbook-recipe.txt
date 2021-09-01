@@ -167,24 +167,24 @@ foreach($collection as $page) {
     foreach ($page->myfield()->toBlocks() as $block) {
 
         // store the current values
-		$old = $block->toArray();
+        $old = $block->toArray();
 
         // target specific blocks only (e.g. only block type `text`)
-		if ($block->type() === 'text') {
+        if ($block->type() === 'text') {
 
             // manipulate the desired value in the content array
-			$old['content']['text'] = str_replace('OldBrand', 'NewBrand', $old['content']['text']);
-		}
+            $old['content']['text'] = str_replace('OldBrand', 'NewBrand', $old['content']['text']);
+        }
 
         // add block to the clone
-		$new[] = new Kirby\Cms\Block($old);
+        $new[] = new Kirby\Cms\Block($old);
 
-	}
+    }
 
     // create the cloned Blocks object from the array of blocks
-	$blocks = new Kirby\Cms\Blocks($new ?? []);
+    $blocks = new Kirby\Cms\Blocks($new ?? []);
 
-    //update the content file
+    // update the content file
     $page->update([
         'text' => $blocks
     ]);
