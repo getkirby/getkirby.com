@@ -1,0 +1,17 @@
+Title: Highlighter
+
+----
+
+Repository: https://github.com/johannschopplich/kirby-highlighter
+
+----
+
+Category: templating
+
+----
+
+Featured: false
+
+----
+
+Description: Server-side syntax highlighting for the Kirby code block & KirbyText
