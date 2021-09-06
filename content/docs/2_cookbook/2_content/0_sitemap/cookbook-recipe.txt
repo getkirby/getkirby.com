@@ -29,6 +29,10 @@ Create a new snippet with the following content in `/site/snippets`:
 </urlset>
 ```
 
+<info>
+The variables in this snippet are defined and passed to the `snippet()` helper in the route below.
+</info>
+
 ## Create new routes
 
 In your `config.php`, create these two new (glossary: route text: routes):
@@ -91,6 +95,42 @@ To let your favorite search engines know about your brand-new sitemap, please re
 
 This is a very basic example. If you need something more complex, you can either use one of the (link: https://getkirby.com/plugins text: plugins provided by the community), or extend it yourself, for example, by fine-tuning the options for pages you want to ignore (e.g. filter by template), or adding images.
 
+## Final config
+
+Make sure that your `config` file only has one return array with all your options:
+
+```php "/site/config/config.php"
+
+<?php
+
+return [
+  // … your other settings
+   'routes' => [
+    [
+      'pattern' => 'sitemap.xml',
+      'action'  => function() {
+          $pages = site()->pages()->index();
+
+          // fetch the pages to ignore from the config settings,
+          // if nothing is set, we ignore the error page
+          $ignore = kirby()->option('sitemap.ignore', ['error']);
+
+          $content = snippet('sitemap', compact('pages', 'ignore'), true);
+
+          // return response with correct header type
+          return new Kirby\Cms\Response($content, 'application/xml');
+      }
+    ],
+    [
+      'pattern' => 'sitemap',
+      'action'  => function() {
+        return go('sitemap.xml', 301);
+      }
+    ]
+  ],
+  'sitemap.ignore' => ['error'],
+];
+```
 ----
 
 Published: 2018-11-25
