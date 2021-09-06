@@ -8,7 +8,7 @@ Assigning one or more people to pages like posts or projects is a common use cas
 
 ## Creating authors
 
-Authors can be created as (link: docs/guide/users text: Kirby users). A Kirby user can have different roles, and you can store any information in a user profile, including a profile picture.
+Authors can be created as (link: docs/guide/users text: Kirby users). A Kirby user can have one of different roles, and you can store any information in a user's profile, including a profile picture.
 
 Before you add new users as authors, think about what information you want to store for these users. We can then set out to create a (link: docs/reference/panel/blueprints/user text: blueprint for our authors).
 
@@ -73,8 +73,11 @@ Text:  Some great text
 
 Author:
 
-- john.doe@example.com
+- XBdlwR1W
 ```
+<info>
+Note that since Kirby 3.3.0 Kirby stores the user ID instead of the user email so that the reference to the user is persistent even if the email changes. The user ID is a random string (folder name that contains the user related files) assigned to a user when the user is created.
+</info>
 
 ## The article template
 
@@ -131,10 +134,10 @@ In that template you can fetch all authors from the articles and build a list ou
 ```php "/site/templates/authors.php"
 <?php snippet('header') ?>
 <?php
-  // fetch all used authors emails from all articles
-  $emails = $articles->pluck('author', '-', true);
+  // fetch all unique author ids from all articles
+  $ids = $articles->pluck('author', '-', true);
   // get a list of all authors filtered by the ones with articles
-  $authors = $kirby->users()->filterBy('email', 'in', $emails);
+  $authors = $kirby->users()->filterBy('id', 'in', $ids);
 ?>
 
 <h1>Authors</h1>
@@ -152,7 +155,7 @@ In that template you can fetch all authors from the articles and build a list ou
       <?php
         // filter all articles per author
           $articles = $blog->children()->listed()->filter(function($child) use($author){
-          return in_array($author->email(), $child->author()->yaml());
+          return in_array($author->id(), $child->author()->yaml());
         });
         foreach($articles as $article): ?>
           <li><a href="<?= $article->url() ?>"><?= $article->title() ?></a></li>
