@@ -14,4 +14,4 @@ Featured: false
 
 ----
 
-Description: Provides a better user experience. Tiny thumbnails which inherit the aspect ratio of their source image are combined with a blurry effect for progressive image loading.
+Description: Blurry image placeholders and progressive image loading for better UX
