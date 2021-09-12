@@ -159,7 +159,7 @@ You can also fetch a particular item by its position in the collection, using th
 
 ```php
 $items  = $pages->listed();
-$item = $items->nth(3); // get the third element in the collection
+$item = $items->nth(3); // get the 4th element in the collection (index starts at 0)
 echo $item->title();
 ```
 
