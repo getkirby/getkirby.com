@@ -26,7 +26,7 @@ Whenever running batch operations on content, make sure to create a full backup 
 
 ## It all starts with a simple loop
 
-Before adressing more advanced examples and related challenges, let's have a look at the barebone workflow:
+Before addressing more advanced examples and related challenges, let's have a look at the barebone workflow:
 
 ```php
 // the collection of pages to update
@@ -36,7 +36,7 @@ $collection = site()->index(true);
 foreach($collection as $page) {
 
     // read the current value
-    $oldValue = $page->myfield()->value();
+    $oldValue = $page->content()->myfield()->value();
 
     // manipulate the value; e.g. add a prefix
     $newValue = 'Prefix ' . $oldValue;
@@ -61,7 +61,7 @@ All that counts is that the `$collection` variable has to be a [Pages collection
 
 ## A (temporary) route to trigger the batch loop
 
-While we could create a dedicated plugin for this purpose or temporarily hack it into a controller or template, a clean and easy way is to create a route in the site's config file. In doing so, it is a good idea to verify admin status, just to be safe:
+While we could create a dedicated plugin for this purpose or temporarily hack it into a controller or template, a clean and easy way is to create a route in the site's config file:
 
 ```php "/site/config.php"
 <?php
@@ -80,7 +80,7 @@ return [
                     foreach($collection as $page) {
 
                         // read, manipulate, update
-                        $oldValue = $page->myfield()->value();
+                        $oldValue = $page->content()->myfield()->value();
                         $newValue = 'Prefix ' . $oldValue;
                         $page->update([
                             'myfield' => $newValue
@@ -94,10 +94,12 @@ return [
 ];
 ```
 
-Now our update loop can be triggered using the URL `mydomain.com/batch-update-content` after first logging in to the site with an admin role.
+Now our update loop can be triggered using the URL `mydomain.com/batch-update-content`. This includes a check to verify admin status; the route will fail unless logged in. It is a good idea to delete or comment-out this route when done, to keep things clean and safe.
+
+On multi-language sites, we have to specify a language both on read and write. `$page->content()->myfield()->value()` becomes `$page->content('en')->myfield()->value()` to retrieve the desired content, and `$page->update(['myfield' => $newValue])` receives an additional second argument with the target language: `$page->update(['myfield' => $newValue], 'en')`.
 
 <info>
-Remember to delete or comment-out this route when done, to keep things clean and safe.
+All code samples in this recipe are templates to start with, leaving out additional checks for missing fields etc. To avoid runtime errors, consider adding clauses like `if ($page->content()->has('myfield'))` while crafting your custom update loops.
 </info>
 
 ## Advanced batch processing
@@ -106,13 +108,13 @@ The `foreach` loop in above code is our workhorse, and can be adjusted to pretty
 
 ### Updating structure fields
 
-While the first example deals with the one-dimentional case of prefixing a string in a text field, [structure fields](https://getkirby.com/docs/reference/panel/fields/structure) require a few extra lines of code, as their content is stored in YAML format.
+While the first example deals with the one-dimensional case of prefixing a string in a text field, [structure fields](https://getkirby.com/docs/reference/panel/fields/structure) require a few extra lines of code, as their content is stored in YAML format:
 
 ```php
 foreach($collection as $page) {
 
     // turn current value into an array
-    $oldValue = $page->myfield()->yaml();
+    $oldValue = $page->content()->myfield()->yaml();
 
     // change some fields inside the array (NB. the ampersand)
     foreach ($oldValue as &$item) {
@@ -136,7 +138,7 @@ Similarly we can search-and-replace an existing tag ([tags fields](https://getki
 foreach($collection as $page) {
 
     // split comma-separated string into an array
-    $oldValue = $page->myfield()->split();
+    $oldValue = $page->content()->myfield()->split();
 
     // change some fields inside the array (NB. the ampersand)
     foreach ($oldValue as &$tag) {
@@ -164,7 +166,7 @@ When dealing with contents in a blocks field, we have to create a modified clone
 foreach($collection as $page) {
 
     // loop over each block in the blocks field
-    foreach ($page->myfield()->toBlocks() as $block) {
+    foreach ($page->content()->myfield()->toBlocks() as $block) {
 
         // store the current values
         $old = $block->toArray();
@@ -267,7 +269,7 @@ return [
                     foreach($pages as $page) {
 
                         // read, manipulate, update
-                        $oldValue = $page->myfield()->value();
+                        $oldValue = $page->content()->myfield()->value();
                         $newValue = 'Prefix ' . $oldValue;
                         $page->update([
                             'myfield' => $newValue
@@ -347,7 +349,7 @@ return [
 
                     foreach($pages as $page) {
 
-                        $oldValue = $page->myfield()->value();
+                        $oldValue = $page->content()->myfield()->value();
                         $newValue = 'Prefix ' . $oldValue;
                         $page->update([
                             'myfield' => $newValue
@@ -375,7 +377,7 @@ return [
 ];
 ```
 
-Only the page IDs applicable for the run at hand are turned into a Pages collection (this is important, as creating large Pages collections from IDs is another potential bottleneck on content-heavy sites). Finally, the script cleans up after itself.
+Only the page IDs applicable for the current run are turned into a Pages collection (this is important, as creating large Pages collections from IDs is another potential bottleneck on content-heavy sites). Finally, the script cleans up after itself.
 
 ## Voilá -- your Swiss Army knife for content updates
 
