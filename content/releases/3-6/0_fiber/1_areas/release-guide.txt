@@ -114,3 +114,46 @@ panel.plugin('yourname/todos', {
   }
 })
 ```
+
+## Translating labels, titles, etc.
+
+You probably want to translate elements like labels, titles, breadcrumbs or other parts of the interface at some point. This can be done by using Kirby's `t()` method:
+
+```php
+Kirby::plugin('your/plugin', [
+    'translations' => [
+        'en' => [
+            'todo' => 'Todo',
+        ],
+        'de' => [
+            'todo' => 'Aufgabe',
+        ]
+    ],
+    'areas' => [
+        'todos' => function () {
+            return [
+                'label' => t('todo'),
+                ...
+            ];
+        }
+    ]
+]);
+```
+
+Defining translations is the most solid way to do this, but sometimes you just need a quick way to offer two or three translations for your users in an internal plugin. You can also define translations as an array for such a case:
+
+```php
+Kirby::plugin('your/plugin', [
+    'areas' => [
+        'todos' => function () {
+            return [
+                'label' => t([
+                  'en' => 'Todo',
+                  'de' => 'Aufgabe'
+                ]),
+                ...
+            ];
+        }
+    ]
+]);
+```
