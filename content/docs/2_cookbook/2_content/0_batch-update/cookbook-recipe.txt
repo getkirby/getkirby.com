@@ -345,7 +345,10 @@ return [
                     $listsegment = array_slice($list, $offset, $limit);
 
                     // turn IDs into a collection to loop over
-                    $pages = pages($listsegment);
+                    $pages = new Pages();
+                    foreach ($listsegment as $pageid) {
+                        $pages->add(kirby()->page($pageid));
+                    }
 
                     foreach($pages as $page) {
 
