@@ -131,7 +131,7 @@ function buildPageTree($page) {
                 $subPage->publish();
 
                 if (isset($build['num']) === true) {
-                    $subPage->sort($build['num']);
+                    $subPage->changeSort($build['num']);
                 }
             }
         }
