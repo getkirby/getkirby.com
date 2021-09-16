@@ -37,9 +37,9 @@ $page->images()->template('image')
 site.title
 page.title.lower
 page.children
-page.children.filterBy('featured', true)
-site.find('notes').children.filterBy('tags', 'ocean', ',')
-page.images.template('image')
+page.children.filterBy("featured", true)
+site.find("notes").children.filterBy("tags", "ocean", ",")
+page.images.template("image")
 ```
 
 These are just a few examples. As you can see, it is very close to the PHP syntax. You don't need to relearn anything this way.
