@@ -6,3 +6,6 @@ Text:
 <?php $collection = pages(['home', 'blog']) ?>
 <?php $collection = pages([$page, $page->children()->first()]) ?>
 ```
+<info>
+The `pages()` helper fetches published pages only; ids of draft pages are ignored.
+</info>
