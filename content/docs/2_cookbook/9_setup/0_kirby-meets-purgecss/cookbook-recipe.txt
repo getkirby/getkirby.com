@@ -131,7 +131,7 @@ When you now change the `CSS/SASS/SCSS` file (that includes your CSS framework),
 
 (image: prepros-overview-screenshot.png caption: Screenshot of Prepros file explorer with customization panel)
 
-All that's left to do is a link to this file in your HTML `head` tag or the respective `snippet`/ `template` PHP file:
+All that's left to do is to add a link to this file in your HTML head tag in your header snippet (or your template).
 
 ```php "site/snippets/layouts/head.php"
 // for CLI method use
@@ -140,6 +140,10 @@ All that's left to do is a link to this file in your HTML `head` tag or the resp
 // for GUI method use
 <?= css('assets/css/CSS_FRAMEWORK.min.css') ?>
 ```
+
+<info>
+To indicate which CSS selectors are safe to leave in the final output file, check out the (link:https://purgecss.com/safelisting.html text:  Safelisting part) in the documentation for PurgeCSS.
+</info>
 
 
 ----
