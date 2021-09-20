@@ -2,7 +2,7 @@ Title: Batch updating content
 
 ----
 
-Published: 2021-08-30
+Published: 2021-09-20
 
 ----
 
@@ -234,7 +234,9 @@ foreach($collection as $page) {
 
 For compatibility with the next iteration in this recipe's code, we loop over each page's images while looping through all pages; of course the script could also be rewritten to directly deal with a collection of files:
 
-`$collection = $site->index(true)->files()->filterBy('template, 'image')`
+```
+$collection = $site->index(true)->files()->filterBy('template, 'image')
+```
 
 This would make the second `foreach` loop obsolete as `$page` would already be a file, not a page, object.
 
@@ -386,11 +388,11 @@ return [
 
 Only the page IDs applicable for the current run are turned into a Pages collection (this is important, as creating large Pages collections from IDs is another potential bottleneck on content-heavy sites). Finally, the script cleans up after itself.
 
-## Voilá -- your Swiss Army knife for content updates
+## Voilá – your Swiss Army knife for content updates
 
 Now we hold a universal boilerplate for any kind of batch updates, without server timeout worries. To adapt to different use cases, all we need to change are:
 
 * the `$collection` variable's definition to control what pages to process, and
 * the code contained within the `foreach` loop as outlined in the examples above.
 
-The ideal value for `$limit` has to be determined through trial-and-error -- a safe value of 25, even 100 or more, should be fine for most tasks altering content fields; if pages have large amounts of files attached and when manipulating those files rather than just content fields, a much lower number may be advised (for example resizing images can be a time-consuming process and quickly hit the 30 or 60 second timeout threshold on some shared hosting environments).
+The ideal value for `$limit` has to be determined through trial-and-error – a safe value of 25, even 100 or more, should be fine for most tasks altering content fields; if pages have large amounts of files attached and when manipulating those files rather than just content fields, a much lower number may be advised (for example resizing images can be a time-consuming process and quickly hit the 30 or 60 second timeout threshold on some shared hosting environments).
