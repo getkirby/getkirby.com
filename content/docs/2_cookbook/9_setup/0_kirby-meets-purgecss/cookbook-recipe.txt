@@ -18,7 +18,7 @@ This is where PurgeCSS comes into play. PurgeCSS analyzes your content and your 
 
 ## Setup for CLI
 
-Before we start, you need to install Node.js for the build process on your client machine. The latest version, which also includes npm (Node package management) can be downloaded from the (link: https://nodejs.org/en/download/ text: official Node.js website). You can test the successful installation by opening a terminal window and typing the following two commands:
+Before we start, you need to install Node.js for the build process on your client machine. The latest version, which also includes npm (Node package manager) can be downloaded from the (link: https://nodejs.org/en/download/ text: official Node.js website). You can test the successful installation by opening a terminal window and typing the following two commands:
 
 ### Install Node
 
@@ -31,12 +31,12 @@ npm --version
 
 ### Install PurgeCSS
 
-We use a Kirby (link: try text: Starterkit or Plainkit) to get started and create a new `/purge` folder in the project's root so that our folder structure looks like this.
+We use a Kirby (link: try text: Starterkit or Plainkit) to get started and create a new `/purge` folder in the project's root so that our folder structure looks like this:
 
 ```filesystem
 assets/
   css/
-    CSS_FRAMEWORK.css
+    css-framework.css
 content/
 kirby/
 site/
@@ -57,7 +57,7 @@ Also in the project's root, we create a `package.json` file that controls the bu
 {
   "name": "projectname",
 	"scripts": {
-    "build": "npx purgecss -css assets/css/CSS_FRAMEWORK.css --content site/**/*.php --output purge/"
+    "build": "npx purgecss -css assets/css/css-framework.css --content site/**/*.php --output purge/"
 	}
 }
 ```
@@ -65,7 +65,7 @@ Also in the project's root, we create a `package.json` file that controls the bu
 ### Explanation
 Use `build` to generate a final minified CSS file
 
-- `--css assets/css/CSS_FRAMEWORK.css`: input file with your framework's CSS
+- `--css assets/css/css-framework.css`: input file with your framework's CSS
 - `--content 'site/**/*.php'`: folder to watch for CSS framework's classes
 - `--output  purge/`: output folder with purged CSS
 
@@ -73,7 +73,7 @@ If you want to customize your PurgeCSS installation, you can create an additiona
 
 ```js "/purgecss.config.js"
 module.exports = {
-    css: ['assets/css/CSS_FRAMEWORK.css'],
+    css: ['assets/css/css-framework.css'],
     content: ['site/**/*.php'],
     output: 'purge/'
 }
@@ -102,7 +102,7 @@ Make sure you add the root folder of your Kirby installation to Prepros as a new
 </warning>
 
 <info>
-Prepros will likely popup an error regarding that there are more than 2000 files for the watcher. Just close the popup since there **is no need** to increase the limit. Afterward, Prepros will automatically disable "*Watch files for changes*". Simply toggle the setup at least for your CSS folders.
+Prepros will probably show an error that there are more than 2000 files for the watcher. You can ignore this warning and close the popup. Afterward, Prepros will automatically disable "*Watch files for changes*". Enable this setting at least for your CSS folders.
 </info>
 
 1. Open _Project Settings_ 
@@ -120,14 +120,14 @@ purgecss --css {{input}} --content "{{rawRootDir}}/site/**/*.php" --output {{out
 (image: prepros-config-screenshot.png caption: Screenshot of Prepros "Add Custom Command" section)
 
 <info>
-The {{output}} placeholder is required by Prepros but PurgeCSS doesn't support an explicit output path, so the {{output}} placeholder is ignored by PurgeCSS.
+The `{{output}}` placeholder is required by Prepros but PurgeCSS doesn't support an explicit output path, so the `{{output}}` placeholder is ignored by PurgeCSS.
 </info>
 
 The command scans all PHP files inside the `/site` folder for CSS classes and writes them to the output CSS file, e.g.  `CSS_FRAMEWORK.min.css`.
 
 ## Process
 
-When you now change the `CSS/SASS/SCSS` file (that includes your CSS framework), Prepros will automatically - when enabled -  perform the custom command afterward and purge your final CSS.
+When you now change the `CSS/SASS/SCSS` file (that includes your CSS framework), Prepros will automatically perform the custom command afterward when enabled and purge your final CSS.
 
 (image: prepros-overview-screenshot.png caption: Screenshot of Prepros file explorer with customization panel)
 
