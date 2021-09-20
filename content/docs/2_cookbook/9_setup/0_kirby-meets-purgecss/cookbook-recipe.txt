@@ -120,7 +120,7 @@ purgecss --css {{input}} --content "{{rawRootDir}}/site/**/*.php" --output {{out
 (image: prepros-config-screenshot.png caption: Screenshot of Prepros "Add Custom Command" section)
 
 <info>
-`{{output}}` placeholder is required by Prepros but PurgeCSS doesn't support explicit output path so the `{{output}}` placeholder is ignored by PurgeCSS.
+The {{output}} placeholder is required by Prepros but PurgeCSS doesn't support an explicit output path, so the {{output}} placeholder is ignored by PurgeCSS.
 </info>
 
 The command scans all PHP files inside the `/site` folder for CSS classes and writes them to the output CSS file, e.g.  `CSS_FRAMEWORK.min.css`.
