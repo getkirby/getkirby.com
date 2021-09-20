@@ -244,7 +244,7 @@ The sky is the limit: within the loop, we could even access an API, retrieve dat
 
 ## Dealing with script timeouts
 
-While straightforward in theory, running such loops over a great amount of pages or files may eventually lead to server timeouts. While we sometimes have control over adjusting the cutoff time in the server configuration, the most robust way of updating content is to process the batch in a staggered process.
+While straightforward in theory, running such loops over a great amount of pages or files may eventually lead to server timeouts. While we sometimes have control over adjusting the cutoff time in the server configuration or may be able to trigger long-running scripts on the PHP command line, a robust way of updating content is to process the batch in a staggered process.
 
 For this purpose, we introduce a `$offset` index, contained in the route's URL, in combination with a `$limit` variable, and extend the routing script to repeatedly call itself until done:
 
