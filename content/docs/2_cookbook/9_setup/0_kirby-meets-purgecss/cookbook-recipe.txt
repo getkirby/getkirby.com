@@ -47,7 +47,7 @@ purge/
 ```
 
 <info>
-This setup is just for illustration, since purging the CSS for Starterkit or Plainkit is not ideal for demonstration. It´s recommended to use PurgeCSS with "heavy" CSS frameworks that bloat your final CSS file unnecessarily.
+This setup is just for illustration, since purging the CSS for Starterkit or Plainkit is not ideal for demonstration. It's recommended to use PurgeCSS with "heavy" CSS frameworks that bloat your final CSS file unnecessarily.
 </info>
 
 ## Node.js Configuration
