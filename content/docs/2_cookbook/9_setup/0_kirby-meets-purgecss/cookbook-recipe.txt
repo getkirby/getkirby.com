@@ -33,10 +33,6 @@ npm --version
 
 We use a Kirby (link: try text: Starterkit or Plainkit) to get started and create a new `/purge` folder in the project's root so that our folder structure looks like this.
 
-<info>
-This setup is just for illustration, since purging the CSS for Starterkit or Plainkit is not ideal for demonstration. It´s recommended to use PurgeCSS with "heavy" CSS frameworks that bloat your final CSS file unnecessarily.
-</info>
-
 ```filesystem
 assets/
   css/
@@ -49,6 +45,10 @@ index.php
 .htaccess
 purge/
 ```
+
+<info>
+This setup is just for illustration, since purging the CSS for Starterkit or Plainkit is not ideal for demonstration. It´s recommended to use PurgeCSS with "heavy" CSS frameworks that bloat your final CSS file unnecessarily.
+</info>
 
 ## Node.js Configuration
 Also in the projects' root, we create a `package.json` file that controls the build process. This file contains only a (*build*) script.
