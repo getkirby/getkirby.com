@@ -94,7 +94,11 @@ return [
 ];
 ```
 
-Now our update loop can be triggered using the URL `mydomain.com/batch-update-content`. This includes a check to verify admin status; the route will fail unless logged in. It is a good idea to delete or comment-out this route when done, to keep things clean and safe.
+Now our update loop can be triggered using the URL `mydomain.com/batch-update-content`. This includes a check to verify admin status; the route will fail unless logged in.
+
+<warning>
+It is a good idea to delete or comment-out this route when done, to keep things clean and safe.
+</warning>
 
 On multi-language sites, we have to specify a language both on read and write. `$page->content()->myfield()->value()` becomes `$page->content('en')->myfield()->value()` to retrieve the desired content, and `$page->update(['myfield' => $newValue])` receives an additional second argument with the target language: `$page->update(['myfield' => $newValue], 'en')`.
 
@@ -194,7 +198,7 @@ foreach($collection as $page) {
 }
 ```
 
-Similarly, we could change other attributes of Blocks objects; for instance we could manipulate the `$old['type']` variable to make turn all blocks of type `text` into a (hypothetical) custom block type `mytext`, etc.
+Similarly, we could change other attributes of Blocks objects; for instance we could manipulate the `$old['type']` variable to convert all blocks of type `text` into a (hypothetical) custom block type `mytext`, etc.
 
 ### Updating files
 
