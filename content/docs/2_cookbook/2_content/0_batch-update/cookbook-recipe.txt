@@ -147,14 +147,14 @@ foreach($collection as $page) {
     // change some fields inside the array (NB. the ampersand)
     foreach ($oldValue as &$tag) {
         if ($tag == 'oldtag') {
-            $tag = 'newtag'
+            $tag = 'newtag';
         }
     }
 
     // turn back into CSV string and update the content file
     $newValue = A::join($oldValue, ', ');
     $page->update([
-        'myfield' => $newValue;
+        'myfield' => $newValue
     ]);
     
 }
