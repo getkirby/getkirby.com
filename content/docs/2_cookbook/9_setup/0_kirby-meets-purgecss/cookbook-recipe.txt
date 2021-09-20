@@ -51,7 +51,7 @@ This setup is just for illustration, since purging the CSS for Starterkit or Pla
 </info>
 
 ## Node.js Configuration
-Also in the projects' root, we create a `package.json` file that controls the build process. This file contains only a (*build*) script.
+Also in the project's root, we create a `package.json` file that controls the build process. This file contains only a (*build*) script.
 
 ```js "/package.json"
 {
