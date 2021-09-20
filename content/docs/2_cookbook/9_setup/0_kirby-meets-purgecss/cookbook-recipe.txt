@@ -14,7 +14,7 @@ This is a walkthrough on how to set up and use PurgeCSS with a Command-line inte
 When you are building a website, you might decide to use a CSS framework like TailwindCSS, Bootstrap, Bulma, MaterializeCSS, Foundation, etc... But you will only use a small set of the framework, and a lot of unused CSS styles will be included.
 </info>
 
-> This is where PurgeCSS comes into play. PurgeCSS analyzes your content and your CSS files. Then it matches the selectors used in your files with the ones in your content files. It removes unused selectors from your CSS, resulting in smaller CSS files.
+This is where PurgeCSS comes into play. PurgeCSS analyzes your content and your CSS files. Then it matches the selectors used in your files with the ones in your content files. It removes unused selectors from your CSS, resulting in smaller CSS files.
 
 ## Setup for CLI
 
