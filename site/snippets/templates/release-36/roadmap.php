@@ -63,11 +63,11 @@
     </li>
     <li>
       <p class="h2">beta</p>
-      <p class="font-mono text-xs">Early September</p>
+      <p class="font-mono text-xs">September 21st</p>
     </li>
     <li>
       <p class="h2">launch</p>
-      <p class="font-mono text-xs">Late September</p>
+      <p class="font-mono text-xs">October</p>
     </li>
     <li></li>
   </ul>

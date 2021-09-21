@@ -24,3 +24,5 @@ Text:
 - The former development `panel/index.html` file was removed
 - The internal Panel sandbox has been removed
 - The `api.csrf` option is automatically set to `dev` when the `panel.dev` option is true
+- Moved `panel/src/component/Blocks` to `panel/src/component/Forms/Blocks`
+- Moved `panel/src/component/Writer` to `panel/src/component/Forms/Writer`

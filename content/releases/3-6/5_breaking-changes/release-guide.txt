@@ -57,6 +57,7 @@ We know that breaking changes suck, when they break your plugins or other parts 
 
 - Direct URLs for tabs have changed, e.g. now `/panel/site/?tab=yourTabName`
 - Direct URLs for the users view have changed, e.g. now `/panel/users/?role=yourRole`
+- Several blueprint options that use the query syntax were updated to escape the placeholder values against raw HTML output that may lead to XSS attacks. HTML code directly in the query (like `This is <strong>{{ page.important }}</strong>`) still works as normal. If placeholders need to return HTML, you can use the new `{< site.myMethodWithHtml >}` syntax. In this case you need to ensure manually that the returned HTML code is safe. With the `{{ }}` syntax, Kirby performs the escaping for you.
 
 ### Custom Panel views
 - Using custom Panel views (incl. routing, breadcrumbs...) in plugins has changed fundamentally. You will have to use the [new Panel areas feature](/releases/3.6/fiber/areas#area-definition) now.
@@ -101,6 +102,7 @@ We know that breaking changes suck, when they break your plugins or other parts 
 
 - Removed `icon` prop from `k-card` and `k-list-item`. Pass data as part of the `image` prop instead.
 - If the `cover` option is not defined for a section, it is disabled by default [#3226](https://github.com/getkirby/kirby/issues/3226)
+- The `<k-box text="..." />` property is now rendered as plain text by default instead of as HTML code. For the previous behavior use `<k-box text="..." :html="true" />`.
 
 ### Helpers & libraries
 - `vue-router` has been completely removed, use Panel areas to define custom Panel routes

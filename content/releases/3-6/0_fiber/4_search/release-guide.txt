@@ -102,4 +102,50 @@ const todos = await this.$search('todos', query);
 
 ## Extending searches
 
-Like all other Fiber features, it will soon be possible to overwrite and extend our default searches for pages, files and users 🎉
+You don't like the way the pages search works? Maybe you already have your data in Elastic search or Algolia and you want to use a real search server instead? No problem. It's now super easy to extend and overwrite our core searches.
+
+```php
+<?php
+
+Kirby::plugin('example/search', [
+  'areas' => [
+    // extending a core search
+    'site' => function ($kirby) {
+      return [
+        'searches' => [
+          'pages' => [
+            'query' => function (string $query) {
+              // run your own search here ...
+
+              // example result
+              return [
+                [
+                  'image' => [
+                    'src'   => 'https://source.unsplash.com/random',
+                    'cover' => true,
+                    'back'  => 'white'
+                  ],
+                  'text'  => 'Test Result',
+                  'link'  => '/site',
+                  'info'  => 'test info'
+                ]
+              ];
+            }
+          ]
+        ]
+      ];
+    },
+  ]
+]);
+```
+
+
+
+## Core searches
+
+Area | Search name
+- | -
+`site` | `pages`
+`site` | `files`
+`users` | `users`
+

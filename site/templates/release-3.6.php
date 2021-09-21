@@ -24,7 +24,7 @@
     'buttons' => [
       [
         'text' => 'Try now',
-        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-alpha.4',
+        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-beta.1',
         'icon' => 'download',
         'style' => 'filled'
       ],
@@ -76,27 +76,14 @@
 
 <section id="features" class="mb-42">
   <?php snippet('templates/features/intro', [
-    'title' => 'We are not done yet',
-    'intro' => 'Help us shape the rest of this release',
-    'text'  => 'We are looking for your feedback, your ideas and your magic testing skills :)',
+    'title' => 'There’s more …',
+    'intro' => 'This release is packed with features',
+    'text'  => 'Find out more about each of them in our early 3.6 docs',
   ]) ?>
 
-  <div class="columns" style="--columns: 2; --gap: var(--spacing-24)">
-    <div>
-      <h3 class="h3">Implemented</h3>
-      <?php snippet('templates/release-36/features-implemented', [
-        'page' => $page->find('features')
-      ]) ?>
-    </div>
-    <div>
-      <h3 class="h3">In progress / planned</h3>
-      <?php snippet('templates/release-36/features-planned', [
-        'page' => $page->find('features')
-      ]) ?>
-
-      <p class="prose text-base pt-6">You can still vote for or post new feature ideas on our <a href="https://feedback.getkirby.com">feedback platform</a> or <a href="https://github.com/getkirby/kirby/issues">submit an issue for the alpha</a> on Github.</p>
-    </div>
-  </div>
+  <?php snippet('templates/release-36/features-implemented', [
+    'page' => $page->find('features')
+  ]) ?>
 </section>
 
 <section id="get-started" class="mb-42">
@@ -105,7 +92,7 @@
     'buttons' => [
       [
         'text' => 'Try now',
-        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-alpha.4',
+        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-beta.1',
         'icon' => 'download'
       ],
       [

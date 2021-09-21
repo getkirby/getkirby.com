@@ -1,7 +1,0 @@
-Title: Copy & paste for blocks
-----
-Text:
-
-<info>
-Status: **in progress**
-</info>

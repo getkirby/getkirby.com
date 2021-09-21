@@ -94,3 +94,63 @@ You can redirect the Panel to a different location after submitting the dialog b
 ```php
 Panel::go('some/path');
 ```
+
+## Extending dialogs
+
+We've seen above, how to create entirely new dialogs, but you can also replace or extend core dialogs.
+
+```php
+<?php
+
+Kirby::plugin('custom/dialog', [
+  'areas' => [
+    'site' => function ($kirby) {
+      return [
+        'dialogs' => [
+          'page.changeStatus' =>
+            'load' => function (string $id) {
+              // custom dialog setup
+            },
+            'submit' => function (string $id) {
+              // custom dialog submitter action
+            }
+          ]
+        ]
+      ];
+    },
+  ]
+]);
+```
+
+### Core dialogs
+
+Area | Dialog name
+- | -
+`settings` | `language.create`
+`settings` | `language.delete`
+`settings` | `language.update`
+`site` | `page.changeSort`
+`site` | `page.changeStatus`
+`site` | `page.changeTemplate`
+`site` | `page.changeTitle`
+`site` | `page.create`
+`site` | `page.delete`
+`site` | `page.duplicate`
+`site` | `page.file.changeName`
+`site` | `page.file.changeSort`
+`site` | `page.file.delete`
+`site` | `site.changeTitle`
+`site` | `site.file.changeName`
+`site` | `site.file.changeSort`
+`site` | `site.file.delete`
+`users` | `user.create`
+`users` | `user.changeEmail`
+`users` | `user.changeLanguage`
+`users` | `user.changeName`
+`users` | `user.changePassword`
+`users` | `user.changeRole`
+`users` | `user.delete`
+`users` | `user.file.changeName`
+`users` | `user.file.changeSort`
+`users` | `user.file.delete`
+

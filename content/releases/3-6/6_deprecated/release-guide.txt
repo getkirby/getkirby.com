@@ -29,3 +29,4 @@ Text:
 | `$model->panelOptions()` | 3.7.0 | 3.8.0 | `$model->panel()->options()` |
 | `$model->panelUrl()` | 3.7.0 | 3.8.0 | `$model->panel()->url()` |
 | `Kirby\Toolkit\Str::isUrl()` | 3.7.0 | 3.8.0 | `Kirby\Toolkit\V::url()` |
+| `<k-text align="right">` | - | 3.7.0 | `<k-text align="end">` |

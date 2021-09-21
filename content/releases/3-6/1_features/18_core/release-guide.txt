@@ -112,3 +112,9 @@ if ($hashA === $hashB) {
   echo 'The files are the same';
 }
 ```
+
+## `Str::safeTemplate()`
+
+`Str::safeTemplate()` escapes HTML from all regular query placeholders, allows HTML with new `{< site.myMethodWithHtml >}` syntax
+
+Safe templates are now also available for Page, User, File and Site classes with the new `$model->toSafeString()` method

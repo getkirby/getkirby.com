@@ -17,6 +17,14 @@ Text:
 - Fixed writer field RTL support [https://kirby.nolt.io/322](https://kirby.nolt.io/322)
 - Fixed version number in settings view in RTL interface [#3581](https://github.com/getkirby/kirby/pull/3581)
 - Fixed manual files sorting via changePosition dialog [#3589](https://github.com/getkirby/kirby/issues/3589)
+- The `$field->replace()` method no longer returns the model ID for empty fields, instead an empty string is returned as expected. [#3652](https://github.com/getkirby/kirby/issues/3652)
+- `this.$helper.upload` now correctly uses the method parameter
+- Fixed writer field email title [#3630](https://github.com/getkirby/kirby/issues/3630)
+- Changing template of a page on a multi-language setup no longer creates content files for untranslated languages [#3674](https://github.com/getkirby/kirby/issues/3674)
+- Video block does now show domain-restricted clips in Panel [#3257](https://github.com/getkirby/kirby/issues/3257)
+- Fixed autofocus option for the blocks field [#3681](https://github.com/getkirby/kirby/pull/3681)
+- `k-progress`: fixed not updating when value prop changed
+- Fixed opening blocks that have no fields or no editable [#3686](https://github.com/getkirby/kirby/pull/3686)
 
 ## Fixed regressions from 3.6.0-alpha.1
 
@@ -41,3 +49,16 @@ Text:
 - Fixed CSS dir issue in dialogs and drawers
 - Fixed images in picker field previews [#3551](https://github.com/getkirby/kirby/issues/3551)
 - Fixed file urls for draft pages [#3587](https://github.com/getkirby/kirby/issues/3587)
+
+## Fixed regressions from 3.6.0-alpha.4
+
+- Fixed storing content in the account view [#3665](https://github.com/getkirby/kirby/issues/3655)
+- The CSS utility classes for text alignment now set the correct CSS custom properties again (`—-align` instead of `--algin`) [#3641](https://github.com/getkirby/kirby/pull/3641)
+- Fixed alignment of the sort icon (+ new icon) [#3595](https://github.com/getkirby/kirby/issues/3595)
+- Remove unwanted focus outline on outer panel div [#3632](https://github.com/getkirby/kirby/issues/3632)
+- Fiber search now respects `read: false` [#3650](https://github.com/getkirby/kirby/issues/3650)
+- `image: false` and `image: icon` options work again in pages and files sections. [#3633](https://github.com/getkirby/kirby/issues/3633)
+- Conditional sections with extending fields does work again [#3636](https://github.com/getkirby/kirby/issues/3636)
+- Fixed broken files field upload [#3687](https://github.com/getkirby/kirby/issues/3687)
+- Fix for display error in narrow columns [#3689](https://github.com/getkirby/kirby/issues/3629)
+- Fixed compatibility with Parcel [#3628](https://github.com/getkirby/kirby/issues/3628)

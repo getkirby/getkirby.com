@@ -1,0 +1,64 @@
+Title: New icons
+----
+Intro:
+----
+Text:
+
+Icon | Name
+- | -
+(icon: audio) | audio
+(icon: crop) | crop
+(icon: display) | display
+(icon: flag) | flag
+(icon: food) | food
+(icon: grid) | grid
+(icon: grid-bottom) | grid-bottom
+(icon: grid-bottom-left) | grid-bottom-left
+(icon: grid-bottom-right) | grid-bottom-right
+(icon: grid-bottom-right) | grid-bottom-right
+(icon: grid-full) | grid-full
+(icon: grid-right) | grid-right
+(icon: grid-top) | grid-top
+(icon: grid-top-right) | grid-top-right
+(icon: grid-top-left) | grid-top-left
+(icon: h1) | h1
+(icon: h2) | h2
+(icon: h3) | h3
+(icon: h4) | h4
+(icon: h5) | h5
+(icon: h6) | h6
+(icon: heart-outline) | heart-outline
+(icon: info) | info
+(icon: images) | images
+(icon: mobile) | mobile
+(icon: order-alpha-asc) | order-alpha-asc
+(icon: order-alpha-desc) | order-alpha-desc
+(icon: order-num-asc) | order-num-asc
+(icon: order-num-desc) | order-num-desc
+(icon: paypal) | paypal
+(icon: pin) | pin
+(icon: pipette) | pipette
+(icon: play) | play
+(icon: print) | print
+(icon: qr-code) | qr-code
+(icon: server) | server
+(icon: shuffle) | shuffle
+(icon: sitemap) | sitemap
+(icon: star-outline) | star-outline
+(icon: sun) | sun
+(icon: table) | table
+(icon: tablet) | tablet
+(icon: text-center) | text-center
+(icon: text-justify) | text-justify
+(icon: text-left) | text-left
+(icon: text-right) | text-right
+(icon: tiktok) | tiktok
+
+## Icon aliases
+
+Some old icon names will be replaced with clearer alternatives as we add new icons. We've created the following aliases to keep the old icons working.
+
+Icon | New name | Old name (still valid)
+- | - | -
+(icon: text-left) | `text-left` | `text`
+(icon: filter) | `filter` | `funnel`

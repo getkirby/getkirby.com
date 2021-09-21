@@ -111,4 +111,51 @@ Your dropdown options can then be loaded in your Vue code like this:
 
 ## Extending dropdowns
 
-It will soon be possible to extend our default dropdowns for pages, users and files with your own custom options.
+Pages, files and users have dynamic option dropdowns. Those dropdowns show all the available options like changing titles, sorting pages, deleting stuff, etc.
+
+Those dropdowns can now be extended to add additional options, remove options or simply change what's normally shown.
+
+```php
+<?php
+
+Kirby::plugin('example/dropdown', [
+  'areas' => [
+    'site' => function ($kirby) {
+      return [
+        'dropdowns' => [
+          'page' => function (string $id) {
+
+            // find the right page for the dropdown
+            $page = Find::page($id);
+
+            // load the core dropdown definition
+            $dropdown = $page->panel()->dropdown();
+
+            // append a separator
+            $dropdown[] = '-';
+
+            // append a new option
+            $dropdown[] = [
+              'icon'   => 'share',
+              'text'   => 'Publish on Netlify',
+              'dialog' => 'publish'
+            ];
+
+            return $dropdown;
+          }
+        ]
+      ];
+    },
+  ]
+]);
+```
+
+### Core dropdowns
+
+Area | Dropdown name
+- | -
+`site` | `page`
+`site` | `page.file`
+`site` | `site.file`
+`users` | `user`
+`users` | `user.file`

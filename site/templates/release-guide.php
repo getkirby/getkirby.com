@@ -1,4 +1,4 @@
-<?php layout('article') ?>
+<?php layout('release-guide') ?>
 
 <?php slot('sidebar') ?>
 <?php $release = $page->release() ?>

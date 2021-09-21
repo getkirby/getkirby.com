@@ -20,6 +20,15 @@ $tags['snippet'] = [
 ];
 
 /**
+ * (icon: icon-name)
+ */
+$tags['icon'] = [
+    'html' => function ($tag) {
+        return '<svg width="16" height="16"><use href="#icon-' . $tag->value() . '" /></svg>';
+    }
+];
+
+/**
  * (image: my-screenshot.jpg)
  */
 $tags['image'] = [
