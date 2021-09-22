@@ -31,7 +31,7 @@ Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with
 - A Kirby (link: docs/guide/quickstart#download-and-installation text: Plainkit or Starterkit) for testing
 - A code editor
 - Basic understanding (link: docs/guide/plugins/plugin-basics text: how to create plugins in Kirby)
-- For the single file approach, (link: https://parceljs.org/ text: Parcel)  must be installed on your system, unless you use your own custom build process. But don't worry, we also show you how to build this block without such a build process (see link below).
+- For the single file approach, Node 14+ and (link: https://github.com/johannschopplich/kirbyup text: kirbyup). But don't worry, we also show you how to build this block without such a build process (see link below).
 - Probably a big pot of hot coffee and a cool head. We are going to dive deep.
 
 ## Resources
@@ -397,21 +397,15 @@ We also need a `package.json` next to `index.php` with the following content:
 ```js "/site/plugins/audio-block/package.json"
 {
   "scripts": {
-    "dev": "parcel watch src/index.js --no-source-maps -d ./",
-    "build": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting -d ./"
-  },
-  "posthtml": {
-    "recognizeSelfClosing": true
+    "dev": "npx -y kirbyup src/index.js --watch",
+    "build": "npx -y kirbyup src/index.js"
   }
 }
 ```
-This file tells the (link: https://parceljs.org/ text: Parcel) bundler which files to compile and an output destination. Since our plugin setup is always the same in our documentation, it's the same file we also use in our other Panel related plugin recipes.
 
-If you haven't installed Parcel globally yet, you can do this by running the following command:
+This file tells the (link: https://github.com/johannschopplich/kirbyup text: kirbyup) bundler which files to compile. Since our plugin setup is always the same in our documentation, it's the same file we also use in our other Panel related plugin recipes.
 
-```
-npm install -g parcel-bundler
-```
+You don't have to install kirbyup locally or globally, since it will be fetched remotely once when running your first command. This may take a short amount of time.
 
 The `package.json` file has two script commands, `dev` and `build`. The `dev` command runs a watcher that compiles the source files whenever we are making changes, the `build` command builds our production-ready file.
 

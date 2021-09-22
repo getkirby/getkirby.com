@@ -8,9 +8,8 @@ In this recipe, we will create a custom Panel section that displays a list of li
 
 (image: custom-section.jpg)
 
-
 <info>
-For the purposes of this recipe, we assume that Parcel is already installed globally as described in the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide).
+For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup).
 
 You can install the (link: https://github.com/getkirby/pluginkit/tree/4-panel text: Pluginkit) as a basis or create the file structure we need manually, that's up to you. Also, it doesn't matter if you use the Plainkit or the Starterkit as a starting point.
 </info>
@@ -19,19 +18,17 @@ You can install the (link: https://github.com/getkirby/pluginkit/tree/4-panel te
 
 Please read the (link: docs/reference/plugins/extensions/sections text: chapter about custom sections in the reference) before starting with this example.
 
-Let's get started with the plugin folder, we'll call it `/linksection`. Inside this folder, we create a `package.json` file which is needed so that Parcel knows what to do.
+Let's get started with the plugin folder, we'll call it `/linksection`. Inside this folder, we create a `package.json` file which is needed so that kirbyup knows what to do.
 
 ```yaml "/site/plugins/linksection/package.json"
 {
   "scripts": {
-    "dev": "parcel watch src/index.js --no-source-maps -d ./",
-    "build": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting -d ./"
-  },
-  "posthtml": {
-    "recognizeSelfClosing": true
+    "dev": "npx -y kirbyup src/index.js --watch",
+    "build": "npx -y kirbyup src/index.js"
   }
 }
 ```
+
 This will take care of compiling our source files into an `index.js` file in the root of our `linksection` plugin folder.
 
 ## Register the section: PHP part
