@@ -122,7 +122,41 @@ Kirby::plugin('custom/dialog', [
 ]);
 ```
 
-### Core dialogs
+You have multiple options to extend a core dialog. You can keep the submit handler and only replace the load setup, you can change both or you can load an entirely new custom dialog component and modify the entire look of the dialog. It's all possible.
+
+Check out the dialog docs above to learn more about dialog setups. It also helps to look at our original source code for dialogs. You can find the dialog code in `/kirby/config/areas`. Check out dialog files in the `site`, `users` and `files` subfolders.
+
+### Reusing core code
+
+When you plan to extend a dialog, you might want to fall back to Kirby's core behaviour in some cases. This can be done with our new core code loader:
+
+```php
+<?php
+
+Kirby::plugin('custom/dialog', [
+  'areas' => [
+    'site' => function ($kirby) {
+      return [
+        'dialogs' => [
+          'page.changeStatus' =>
+            'load' => function (string $id) use ($kirby) {
+              $page = Find::page($id);
+
+              if ($page->id() === 'blog') {
+                // return some custom dialog setup for the blog
+              }
+
+              return $kirby->core()->area('site')['dialogs']['page.changeStatus']['load']($id);
+            }
+          ]
+        ]
+      ];
+    },
+  ]
+]);
+```
+
+## Core dialogs
 
 Area | Dialog name
 - | -

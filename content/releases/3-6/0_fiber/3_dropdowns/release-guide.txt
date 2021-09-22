@@ -150,7 +150,64 @@ Kirby::plugin('example/dropdown', [
 ]);
 ```
 
-### Core dropdowns
+### Reusing core code
+
+When you plan to extend a dropdown, you might want to fall back to Kirby's core behaviour in some cases. This can be done with our new core code loader:
+
+```php
+<?php
+
+Kirby::plugin('example/dropdown', [
+  'areas' => [
+    'site' => function ($kirby) {
+      return [
+        'dropdowns' => [
+          'page' => function (string $id) {
+
+            // find the right page for the dropdown
+            $page = Find::page($id);
+
+            if ($page->id() === 'blog') {
+                // return a custom dropdown
+            }
+
+            return $kirby->core()->area('site')['dropdowns']['page']['options']($id);
+          }
+        ]
+      ];
+    },
+  ]
+]);
+```
+
+The core models (page, user and file) all have a separate `$model->panel()->dropdown()` method for their own dropdown. While the code above is the correct way to load core code for any part of an area, you can simplify this for dropdowns by reusing the dropdown method.
+
+```php
+<?php
+
+Kirby::plugin('example/dropdown', [
+  'areas' => [
+    'site' => function ($kirby) {
+      return [
+        'dropdowns' => [
+          'page' => function (string $id) {
+            // find the right page for the dropdown
+            $page = Find::page($id);
+
+            if ($page->id() === 'blog') {
+                // return a custom dropdown
+            }
+
+            return $page->panel()->dropdown();
+          }
+        ]
+      ];
+    },
+  ]
+]);
+```
+
+## Core dropdowns
 
 Area | Dropdown name
 - | -

@@ -139,7 +139,35 @@ Kirby::plugin('example/search', [
 ]);
 ```
 
+### Reusing core code
 
+When you plan to extend a search, you might want to fall back to Kirby's core behaviour in some cases. This can be done with our new core code loader:
+
+```php
+<?php
+
+Kirby::plugin('example/search', [
+  'areas' => [
+    // extending a core search
+    'site' => function ($kirby) {
+      return [
+        'searches' => [
+          'pages' => [
+            'query' => function (string $query) use ($kirby) {
+
+              if ($kirby->user()->isAdmin()) {
+                // return super secret search results for the admin
+              }
+
+              return $kirby->core()->area('site')['searches']['pages']['query']($query);
+            }
+          ]
+        ]
+      ];
+    },
+  ]
+]);
+```
 
 ## Core searches
 
