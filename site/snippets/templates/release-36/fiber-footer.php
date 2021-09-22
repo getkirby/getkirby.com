@@ -22,7 +22,7 @@
   </div>
   <div class="mb-12" style="width: 83%">
     <div class="flex justify-between text-sm mb-1">
-      <h4 class="font-bold">3.6-alpha</h4>
+      <h4 class="font-bold">3.6-beta</h4>
       <p class="font-mono text-xs">Total: 678.52 KB</p>
     </div>
     <div class="size text-xs font-mono">
