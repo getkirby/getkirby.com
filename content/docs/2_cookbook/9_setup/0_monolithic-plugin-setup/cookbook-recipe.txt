@@ -32,27 +32,20 @@ Kirby::plugin('getkirby/pluginkit', [
 ]);
 ```
 
-...and `package.json` with npm scripts for [Parcel](https://parceljs.org/):
+...and `package.json` with npm scripts for [kirbyup](https://github.com/johannschopplich/kirbyup):
 
 ```js
 {
   "scripts": {
-    "dev": "parcel watch src/index.js --no-source-maps -d ./",
-    "build": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting -d ./"
-  },
-  "posthtml": {
-    "recognizeSelfClosing": true
+    "dev": "npx -y kirbyup src/index.js --watch",
+    "build": "npx -y kirbyup src/index.js"
   }
 }
 ```
 
-If you don't have Parcel, install it globally on your machine:
+You don't have to install kirbyup locally or globally, since it will be fetched remotely once when running your first command. This may take a short amount of time.
 
-```bash
-npm install -g parcel
-```
-
-After that, you should be able to start it up by running the `dev` npm script:
+Now, start kirbyup in watch mode by running the `dev` npm script:
 
 ```bash
 npm run dev

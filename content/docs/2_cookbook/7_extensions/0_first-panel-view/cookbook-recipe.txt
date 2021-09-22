@@ -9,7 +9,7 @@ For our very first Panel view, we will query a public API and display the result
 (image: movie-reviews-custom-view.jpg)
 
 <info>
-For the purposes of this recipe, we assume that Parcel is already installed globally as described in the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide).
+For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup).
 
 You can install the (link: https://github.com/getkirby/pluginkit/tree/4-panel text: Pluginkit) as a basis or create the file structure we need manually, that's up to you. Also, it doesn't matter if you use the Plainkit or the Starterkit as a starting point.
 </info>
@@ -19,16 +19,13 @@ Let's start by creating a new folder in the plugins folder, which we will call `
 ```js "/site/plugins/moviereviews/package.json"
 {
   "scripts": {
-    "dev": "parcel watch src/index.js --no-source-maps -d ./",
-    "build": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting -d ./"
-  },
-  "posthtml": {
-    "recognizeSelfClosing": true
+    "dev": "npx -y kirbyup src/index.js --watch",
+    "build": "npx -y kirbyup src/index.js"
   }
 }
 ```
-This will take care of compiling our source files into an `index.js` file in the root of our `moviereviews` plugin folder.
 
+This will take care of compiling our source files into an `index.js` file in the root of our `moviereviews` plugin folder.
 
 ## Custom API route
 
@@ -126,7 +123,7 @@ Now let's run
 npm run dev
 ```
 
-in our plugin folder, and Parcel will compile an `index.js` in the `moviereviews` folder.
+in our plugin folder, and kirbyup will compile an `index.js` in the `moviereviews` folder.
 
 If all went well, we will now see a new menu entry in the Panel dropdown navigation, and when we click on it, we can visit the newly created view that's still empty at this time.
 

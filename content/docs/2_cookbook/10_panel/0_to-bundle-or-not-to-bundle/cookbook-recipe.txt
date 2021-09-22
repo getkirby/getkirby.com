@@ -455,7 +455,7 @@ Published: 2021-03-05
 
 ----
 
-Description: Using bundlers like Parcel is not for everyone. Here we show how you can build Panel extensions without a build process.
+Description: Using bundlers like kirbyup is not for everyone. Here we show how you can build Panel extensions without a build process.
 
 ----
 

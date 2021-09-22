@@ -16,7 +16,7 @@ This cookbook recipe is based on these two video episodes…
 In this recipe, we start with the basics of creating a field from scratch using a Vue.js single file component, and then build on this by reusing parts of Kirby's UI Kit. We will deviate a little from the example in the videos though, and our final result will be a text input for (link: https://www.doi.org/ text: DOI names), with a link that allows us to verify the input by calling the link `https://www.doi.org/` suffixed with the field input.
 
 <info>
-For the purposes of this recipe, we assume that Parcel is already installed globally as described in the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide).
+For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup).
 
 You can install the (link: https://github.com/getkirby/pluginkit/tree/4-panel text: Pluginkit) as a basis or create the file structure we need manually, that's up to you. Also, it doesn't matter if you use the Plainkit or the Starterkit as a starting point.
 </info>
@@ -26,16 +26,13 @@ Let's start by creating a new folder in the `plugins` folder called `doifield`. 
 ```js "/site/plugins/moviereviews/package.json"
 {
   "scripts": {
-    "dev": "parcel watch src/index.js --no-source-maps -d ./",
-    "build": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting -d ./"
-  },
-  "posthtml": {
-    "recognizeSelfClosing": true
+    "dev": "npx -y kirbyup src/index.js --watch",
+    "build": "npx -y kirbyup src/index.js"
   }
 }
 ```
-This will take care of compiling our source files into an `index.js` file in the root of our `doifield` plugin folder.
 
+This will take care of compiling our source files into an `index.js` file in the root of our `doifield` plugin folder.
 
 ## Register the field: PHP part
 
@@ -91,7 +88,6 @@ npm run dev
 ```
 
 …in the `/doifield` folder to compile the code. If everything works as expected, there will now be a compiled `index.js` file in the `doifield` folder.
-
 
 ## Blueprint
 
