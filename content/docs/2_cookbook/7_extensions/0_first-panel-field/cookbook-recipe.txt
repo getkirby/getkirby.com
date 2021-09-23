@@ -159,8 +159,8 @@ panel.plugin('pluginAuthor/doi', {
 In the Panel, we won't see any changes at this point.
 
 ## Creating an HTML field input
-Let's move a little further and turn this into a real field input using a standard HTML input tag:
 
+Let's move a little further and turn this into a real field input using a standard HTML input tag:
 
 ```html "site/plugins/doifield/src/components/fields/DoiField.vue"
 <template>
@@ -206,11 +206,6 @@ Once we reload the page in the Panel, we see that the label has changed:
 
 (image: doifield-3.jpg)
 
-
-<info>
-Note that hot module reloading only works for frontend code, when changing stuff in the background, you need to reload the page.
-</info>
-
 ## Load value of field into Panel
 
 Currently, our input field has no content yet. Before we start editing the field in the Panel, let's add some content in our text file and see how we can load the value of the field into the input field.
@@ -222,7 +217,6 @@ Title: Sandbox
 
 Doi: Some boring text
 ```
-
 
 Let's add `value` as a prop and bind this value to the input field with `:value="value"`. 
 
@@ -251,7 +245,6 @@ export default {
 (image: doifield-4.jpg)
 
 Great, we can now bind the value in the text field to the input. But if we try to change the value in the Panel, nothing will happen yet, no orange save bar will pop up, and we cannot store changes.
-
 
 ## Events
 

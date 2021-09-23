@@ -48,7 +48,7 @@ Your Panel plugin code is located in the `src` folder. Your main plugin file is 
 
 ### Panel reloading
 
-To inspect changes made by your plugin, you will have to trigger a manual reload in your Panel. kirbyup doesn't support hot module reloading yet, wants to in the future.
+Reload the Kirby Panel after you have updated the plugin's code to inspect your changes.
 
 ## Building your plugin
 
