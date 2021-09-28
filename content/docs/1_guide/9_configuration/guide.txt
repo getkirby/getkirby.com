@@ -153,7 +153,7 @@ The key to this setup is the `index.php` in the `public` folder:
 ```php "/public/index.php"
 <?php
 
-include __DIR__ . '/../vendor/autoload.php';
+include __DIR__ . '/../kirby/vendor/autoload.php';
 
 $kirby = new Kirby([
     'roots' => [
@@ -170,6 +170,10 @@ $kirby = new Kirby([
 
 echo $kirby->render();
 ```
+
+<info>
+Note that the path to `/vendor/autoload.php` might vary depending on your setup, for example when you install Kirby with Composer.
+</info>
 
 ####  Shared storage folder
 
