@@ -77,7 +77,7 @@ We also want a `downloads.php` template to list the uploaded files.
 <section>
   <h1 class="h1"><?= $page->title()->html() ?></h1>
   <ul class="file-list">
-    <?php foreach( $page->files()->template('download') as $file ) : ?>
+    <?php foreach( $page->files()->template('protected') as $file ) : ?>
       <li><a href="<?= $file->url() ?>"><?= $file->filename() ?></a></li>
     <?php endforeach ?>
   </ul>
