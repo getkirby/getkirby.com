@@ -19,7 +19,10 @@ Text:
 - The `Data\Json::decode()` and `Data\Xml::decode()` methods now accept empty strings and treat them as an empty data set (empty array) for consistency with `Data\Txt::decode()` and `Data\Yaml::decode()` [#3565](https://github.com/getkirby/kirby/pull/3565)
 - Improved plugin asset resolver [#2422](https://github.com/getkirby/kirby/issues/2422)
 - Custom iframe attributes allowed in video helper
-
+- Unit tests for remaining Fiber changes [#3406](https://github.com/getkirby/kirby/issues/3406)
+- Added server-side sanitization in the writer field on field changes for extra security against XSS attacks
+- Improved error messages for file validation/sanitization errors (`Sane` classes)
+- The `Sane` classes now have proper XML namespace support so that custom namespace prefixes are properly detected
 
 ## Panel
 
@@ -63,3 +66,5 @@ will now load the Fiber dropdown defined like this in one of your areas:
   }
 ];
 ```
+
+- Improved fiber error handling for dialogs and dropdowns

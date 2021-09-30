@@ -25,6 +25,17 @@ Text:
 - Fixed autofocus option for the blocks field [#3681](https://github.com/getkirby/kirby/pull/3681)
 - `k-progress`: fixed not updating when value prop changed
 - Fixed opening blocks that have no fields or no editable [#3686](https://github.com/getkirby/kirby/pull/3686)
+- Fix overlay/dialogs/drawers on back navigation [#3704](https://github.com/getkirby/kirby/issues/3651)
+- Login with invalid password now sends a 401 in debug mode [#2856](https://github.com/getkirby/kirby/issues/2856)
+- Inconsistent return types between Query class insert method and shortcut `Db::$queries['insert']` have been fixed [#3140](https://github.com/getkirby/kirby/issues/3140)
+- Added fallbacks for deprecated CSS classes [#3706](https://github.com/getkirby/kirby/issues/3706)
+- Confirming empty password dialog no longer throws error [#3716](https://github.com/getkirby/kirby/issues/3716)
+- Changing the slug of a page with an irrelevant .lock file no longer causes PHP to completely hang [#2516](https://github.com/getkirby/kirby/issues/2516)
+- The panel now sets the correct default language in multi language projects: [#3647](https://github.com/getkirby/kirby/issues/3647)
+- Fix inner join queries [#2501](https://github.com/getkirby/kirby/issues/2501)
+- Support for multi-line tags [#3614](https://github.com/getkirby/kirby/issues/3614)
+- Fixed saving nested structure fields without click OK button [#2550](https://github.com/getkirby/kirby/issues/2550)
+- Top-level pages with a slug called `files` will no longer create havoc [#3187](https://github.com/getkirby/kirby/issues/3187)
 
 ## Fixed regressions from 3.6.0-alpha.1
 
@@ -62,3 +73,11 @@ Text:
 - Fixed broken files field upload [#3687](https://github.com/getkirby/kirby/issues/3687)
 - Fix for display error in narrow columns [#3689](https://github.com/getkirby/kirby/issues/3629)
 - Fixed compatibility with Parcel [#3628](https://github.com/getkirby/kirby/issues/3628)
+
+## Fixes regressions from 3.6.0-beta.1
+
+- Blocks in layouts can be edited again without problems [#3699](https://github.com/getkirby/kirby/issues/3699)
+- Toggle field without `text` prop on `site` working again [#3696](https://github.com/getkirby/kirby/issues/3696)
+- When debug is set to false and there is no longer just one blueprint available [#3644](https://github.com/getkirby/kirby/issues/3644)
+- Fixed links and icons broken in unsaved changes dialog [#3709](https://github.com/getkirby/kirby/issues/3709)
+- Fixes minLength typo on checkboxes validations [#3726](https://github.com/getkirby/kirby/issues/3726)

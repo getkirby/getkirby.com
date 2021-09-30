@@ -24,7 +24,7 @@
     'buttons' => [
       [
         'text' => 'Try now',
-        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-beta.1',
+        'link' => $page->link(),
         'icon' => 'download',
         'style' => 'filled'
       ],
@@ -92,7 +92,7 @@
     'buttons' => [
       [
         'text' => 'Try now',
-        'link' => 'https://github.com/getkirby/kirby/releases/tag/3.6.0-beta.1',
+        'link' => $page->link(),
         'icon' => 'download'
       ],
       [

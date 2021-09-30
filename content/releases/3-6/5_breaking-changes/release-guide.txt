@@ -39,6 +39,9 @@ We know that breaking changes suck, when they break your plugins or other parts 
 - All API endpoints for content locking/unlocking don't display an exception anymore when content locking isn't supported.
 - Some argument and property types are now more specific and therefore stricter [#3282](https://github.com/getkirby/kirby/pull/3282), [#3241](https://github.com/getkirby/kirby/pull/3241)
 - `F::niceSize()` doesn't check anymore whether file exists
+- The public static configuration attributes of the `Sane` classes have been renamed for consistency with the new `Toolkit\Dom` class
+- The `Sane\Svg::$allowedNamespaces` attribute now expects namespace reference names as the array keys instead of full attribute names (so `xmlns:xlink` should become just `xlink` and `xmlns` should become an empty string)
+- The `Sane\Svg::$allowedTags` attribute (before `$allowedElements`) now is an associative array with the allowed attributes for this tag as the value
 
 ## Panel
 

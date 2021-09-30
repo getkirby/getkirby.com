@@ -23,16 +23,16 @@
   <div class="mb-12" style="width: 83%">
     <div class="flex justify-between text-sm mb-1">
       <h4 class="font-bold">3.6-beta</h4>
-      <p class="font-mono text-xs">Total: 678.52 KB</p>
+      <p class="font-mono text-xs">Total: 687.27 KB</p>
     </div>
     <div class="size text-xs font-mono">
       <div style="--value: 38; --color: var(--color-red-400)">vendor.js: <br>383.11 KB KB</div>
-      <div style="--value: 29; --color: var(--color-yellow-400)">app.js: <br>295.41 KB KB</div>
+      <div style="--value: 30; --color: var(--color-yellow-400)">app.js: <br>304.16 KB KB</div>
     </div>
   </div>
 
   <div>
-    <div class="text-2xl">-129.84 KB</div>
+    <div class="text-2xl">-121.09 KB</div>
     <div class="font-mono text-xs"> less JS</div>
   </div>
 </div>

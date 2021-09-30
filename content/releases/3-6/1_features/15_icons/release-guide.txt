@@ -35,6 +35,7 @@ Icon | Name
 (icon: order-alpha-desc) | order-alpha-desc
 (icon: order-num-asc) | order-num-asc
 (icon: order-num-desc) | order-num-desc
+(icon: paragraph) | paragraph
 (icon: paypal) | paypal
 (icon: pin) | pin
 (icon: pipette) | pipette

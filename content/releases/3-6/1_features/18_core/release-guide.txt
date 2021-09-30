@@ -118,3 +118,23 @@ if ($hashA === $hashB) {
 `Str::safeTemplate()` escapes HTML from all regular query placeholders, allows HTML with new `{< site.myMethodWithHtml >}` syntax
 
 Safe templates are now also available for Page, User, File and Site classes with the new `$model->toSafeString()` method
+
+## New `Toolkit\Dom` class
+
+Allows to parse, modify and sanitize DOM-based documents (XML and HTML)
+
+## New `Sane\Html` class
+
+For validating and sanitizing HTML files or HTML snippets
+
+## `$file->sanitizeContents()`
+
+Sanitizes the file content with the matching `Sane` handler
+
+```php
+$sanitized = $file->sanitizeContents();
+```
+
+## `Sane::sanitize()` and `Sane::sanitizeFile()`
+
+Will apply the same rules as `validate()` but directly modify the input string/file so it is valid afterwards

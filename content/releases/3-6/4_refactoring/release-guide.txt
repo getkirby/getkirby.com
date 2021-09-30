@@ -26,3 +26,4 @@ Text:
 - The `api.csrf` option is automatically set to `dev` when the `panel.dev` option is true
 - Moved `panel/src/component/Blocks` to `panel/src/component/Forms/Blocks`
 - Moved `panel/src/component/Writer` to `panel/src/component/Forms/Writer`
+- Refactored async code to async/wait [#3694](https://github.com/getkirby/kirby/pull/3694)
