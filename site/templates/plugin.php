@@ -39,7 +39,7 @@
 
   <?php if ($authorPlugins->count()): ?>
   <section class="mb-42">
-    <h2 class="h2 mb-6">Other plugins by <?= $author->title() ?></h2>
+    <h2 class="h2 mb-6">Other plugins by <a href="<?= $author->url() ?>" class="link"><?= $author->title() ?></a></h2>
     <?php snippet('templates/plugins/plugins', ['plugins' => $authorPlugins, 'headingLevel' => 'h3']) ?>
   </section>
   <?php endif ?>
