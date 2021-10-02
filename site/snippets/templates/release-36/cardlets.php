@@ -18,7 +18,7 @@
     [
       'title' => 'New formats for the writer field',
       'text' => 'Enable headings and list block formats for your writer fields and simplify WYSIWYG editing for your users.',
-      'link' => '/releases/3.6/features/copy-paste'
+      'link' => '/releases/3.6/features/writer'
     ],
     [
       'title' => 'New icons',
