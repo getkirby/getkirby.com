@@ -71,7 +71,7 @@ Keep in mind that the same section name can only be used once per blueprint.
 
 The pages section has multiple options to control what kind of pages should be displayed, how they should be displayed and what happens if a new page is added.
 
-(section-options: pages)
+(section-options: pages) 
 
 ## Headline
 
