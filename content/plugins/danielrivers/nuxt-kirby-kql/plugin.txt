@@ -1,0 +1,17 @@
+Title: KQL Nuxt
+
+----
+
+Repository: https://github.com/DanielRivers/nuxt-kirby-kql
+
+----
+
+Category: integrations
+
+----
+
+Featured: false
+
+----
+
+Description: This plugin allows ease of access to all of your Kirby pages on sites that use the KQL plugin
