@@ -1,8 +1,0 @@
-.plugins .plugin-author {
-  display: flex;
-  align-items: center;
-}
-
-.plugin-author svg {
-  margin-right: var(--spacing-1);
-}

@@ -2,20 +2,23 @@
   <?php foreach ($plugins as $plugin): ?>
   <li class="grid border-top">
     <figure class="iconbox bg-black color-white">
-      <?= icon($plugin->icon()) ?>
+      <a href="<?= $plugin->url() ?>"><?= icon($plugin->icon()) ?></a>
     </figure>
     <div>
-      <a class="block mb-3" href="<?= $plugin->url() ?>">
-        <<?= $h = $headingLevel ?? 'h2' ?> class="h4"><?= $plugin->title() ?></<?= $h ?>>
-        <p class="text-sm color-gray-700">
-          <?= $plugin->description()->widont() ?>
-        </p>
-      </a>
-      <?php if ($page->is($plugin->parent()) === false): ?>
-      <a href="<?= $plugin->parent()->url() ?>" class="plugin-author">
-        <?= icon('user') ?> <?= $plugin->parent()->title() ?>
-      </a>
-      <?php endif ?>
+      <<?= $h = $headingLevel ?? 'h2' ?> class="h4">
+        <a href="<?= $plugin->url() ?>">
+        <?= $plugin->title() ?>
+      </<?= $h ?>>
+
+      <p class="mb-3">
+        <a href="<?= $plugin->parent()->url() ?>" class="block font-mono text-xs color-gray-500">
+        by <span class="color-black"><?= $plugin->parent()->title() ?></span>
+        </a>
+      </p>
+
+      <p class="text-sm color-gray-700 mb-3">
+        <?= $plugin->description()->widont() ?>
+      </p>
     </div>
     <div class="flex pt-1" style="--gap: var(--spacing-3)">
       <a aria-label="Download the <?= $plugin->title() ?> plugin" href="<?= $plugin->download() ?>" class="iconbox bg-light"><?= icon('download') ?></a>
