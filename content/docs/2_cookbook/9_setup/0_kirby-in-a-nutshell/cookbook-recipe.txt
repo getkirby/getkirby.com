@@ -127,7 +127,7 @@ Examples:
 | Folder name           | Resulting URL
 | ----                  | ----
 | `projects`            | `https://yourdomain/projects`
-| `about-us`            | `https://yourdomain/about`
+| `about-us`            | `https://yourdomain/about-us`
 | `photography/animals` | `https://yourdomain/photography/animals`
 
 Therefore, if you change the name of the folder (directly in the file system, through the Panel or programmatically), you also change the URL of the page. This doesn't matter so much during development, but it has some implications to be aware of and to keep in mind.
