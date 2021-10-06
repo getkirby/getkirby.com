@@ -1,0 +1,16 @@
+title: Virtual pages helper kit
+
+----
+
+Repository: https://github.com/bvdputte/kirby-vpkit
+
+----
+
+Category: utilities
+
+----
+
+Description: Opinionated boilerplate helper to make it easier to work with virtual pages in a multilingual kirby 3 setup.
+
+
+
