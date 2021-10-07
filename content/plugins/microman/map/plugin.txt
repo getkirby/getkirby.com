@@ -1,0 +1,13 @@
+Title: Map-Suite
+
+----
+
+Repository: https://github.com/youngcut/kirby-map
+
+----
+
+Category: panel
+
+----
+
+Description: Geolocation field & map block: All you need for a map on your website.

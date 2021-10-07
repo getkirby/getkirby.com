@@ -1,0 +1,13 @@
+Title: Grid Block
+
+----
+
+Repository: https://github.com/youngcut/kirby-grid-block
+
+----
+
+Category: panel
+
+----
+
+Description: With this plugin you can use layouts right within any blocks field!
