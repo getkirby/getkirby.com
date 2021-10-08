@@ -36,6 +36,9 @@ Text:
 - Support for multi-line tags [#3614](https://github.com/getkirby/kirby/issues/3614)
 - Fixed saving nested structure fields without click OK button [#2550](https://github.com/getkirby/kirby/issues/2550)
 - Top-level pages with a slug called `files` will no longer create havoc [#3187](https://github.com/getkirby/kirby/issues/3187)
+- Fixed parsing logic for entire documents and breaks when pasting blocks [#3735](https://github.com/getkirby/kirby/issues/3735)
+- The expired `DST Root CA X3` CA certificate (previously used for Let's Encrypt certificates) has been removed from the CA bundle to prevent "expired certificate" warnings when requesting remote resources (like in options API fields) on some server systems [#3765](https://github.com/getkirby/kirby/pull/3765)
+- Fixed unstable links / hashes for media files [#3646](https://github.com/getkirby/kirby/issues/3646)
 
 ## Fixed regressions from 3.6.0-alpha.1
 
@@ -81,3 +84,20 @@ Text:
 - When debug is set to false and there is no longer just one blueprint available [#3644](https://github.com/getkirby/kirby/issues/3644)
 - Fixed links and icons broken in unsaved changes dialog [#3709](https://github.com/getkirby/kirby/issues/3709)
 - Fixes minLength typo on checkboxes validations [#3726](https://github.com/getkirby/kirby/issues/3726)
+
+## Fixed regressions from 3.6.0-beta.2
+
+- `k-item` now features former `k-list-item` slots again
+- Fixed border-radius and box-shadow on image in lists [#3733](https://github.com/getkirby/kirby/issues/3733)
+- Backward and forward buttons work properly in the Panel again
+- Fixed unwanted hover effect on disabled buttons [#3742](https://github.com/getkirby/kirby/issues/3742)
+- Fixed translation bug after login and installation [#3725](https://github.com/getkirby/kirby/issues/3725)
+- Fixed empty box layout for cardlets
+- Fixed block selector collapsing when there are no groups
+- Fixed low quality thumbnail in the pages field [#3756](https://github.com/getkirby/kirby/issues/3756)
+- Fixed unsaved changes loop caused by the blocks field [#3736](https://github.com/getkirby/kirby/issues/3736)
+- Fixed odd revert behaviour caused by the blocks field [#3008](https://github.com/getkirby/kirby/issues/3008#issuecomment-935750735)
+- Fixed escaped HTML in blueprint info box [#3763](https://github.com/getkirby/kirby/issues/3763)
+- Fixed files field option dropdown when upload disabled [#3768](https://github.com/getkirby/kirby/issues/3768)
+- Fixed node issues in the writer field [#3749](https://github.com/getkirby/kirby/issues/3749)
+- Fixed missing href attribute for email addresses in the writer [#3754](https://github.com/getkirby/kirby/issues/3754)

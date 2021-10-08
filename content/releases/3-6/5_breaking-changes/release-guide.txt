@@ -42,6 +42,7 @@ We know that breaking changes suck, when they break your plugins or other parts 
 - The public static configuration attributes of the `Sane` classes have been renamed for consistency with the new `Toolkit\Dom` class
 - The `Sane\Svg::$allowedNamespaces` attribute now expects namespace reference names as the array keys instead of full attribute names (so `xmlns:xlink` should become just `xlink` and `xmlns` should become an empty string)
 - The `Sane\Svg::$allowedTags` attribute (before `$allowedElements`) now is an associative array with the allowed attributes for this tag as the value
+- `F::modified()` does no longer calculate a maximum between mtime and ctime for file changes. This could in theory lead to different timestamps in some scenarios. Very unlikely though.
 
 ## Panel
 

@@ -68,3 +68,8 @@ will now load the Fiber dropdown defined like this in one of your areas:
 ```
 
 - Improved fiber error handling for dialogs and dropdowns
+- Multiselect with CMD/CTRL keys for blocks field [#3748](https://github.com/getkirby/kirby/pull/3748)
+- Updated npm dependencies [#3744](https://github.com/getkirby/kirby/pull/3744)
+- Blocks are now always selected in the original order, no matter in which order they have been selected in.
+- Parsing blocks from Word documents is now a lot more reliable and the results will be better.
+- Canonical language URLs in the Panel [#3759](https://github.com/getkirby/kirby/pull/3759)
