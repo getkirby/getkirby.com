@@ -3,6 +3,8 @@ Title: Fixes
 
 Text:
 
+## General fixes
+
 - `User::changeEmail()` and `System::register()` now convert the provided email address to lowercase for better reliability [#3307](https://github.com/getkirby/kirby/pull/3307)
 - `cover` option fixed for all models and list layout in section [#3226](https://github.com/getkirby/kirby/issues/3226)
 - Fixed jump to the top of the page at ESC keydown in an overlay [#3387](https://github.com/getkirby/kirby/issues/3387)
