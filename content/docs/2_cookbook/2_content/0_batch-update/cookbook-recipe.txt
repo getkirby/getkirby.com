@@ -234,8 +234,8 @@ foreach($collection as $page) {
 
 For compatibility with the next iteration in this recipe's code, we loop over each page's images while looping through all pages; of course the script could also be rewritten to directly deal with a collection of files:
 
-```
-$collection = $site->index(true)->files()->filterBy('template, 'image')
+```php
+$collection = $site->index(true)->files()->filterBy('template', 'image');
 ```
 
 This would make the second `foreach` loop obsolete as `$page` would already be a file, not a page, object.
@@ -269,7 +269,7 @@ return [
                     $collection = site()->index(true);
 
                     // pick the applicable pages from the collection
-                    $pages = $collection->offset($offset)->limit($limit)
+                    $pages = $collection->offset($offset)->limit($limit);
 
                     // loop over this slice of the collection
                     foreach($pages as $page) {
@@ -293,7 +293,6 @@ return [
 
                     // ...or process the next batch
                     return '<!DOCTYPE html><title>' . $offset . '</title><script>window.location.replace("/batch-update-content/' . $offset . '")</script>';
-
 
                 }
             }

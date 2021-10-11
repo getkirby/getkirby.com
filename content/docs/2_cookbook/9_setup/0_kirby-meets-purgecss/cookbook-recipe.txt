@@ -56,9 +56,9 @@ Also in the project's root, we create a `package.json` file that controls the bu
 ```js "/package.json"
 {
   "name": "projectname",
-	"scripts": {
+  "scripts": {
     "build": "npx purgecss -css assets/css/css-framework.css --content site/**/*.php --output purge/"
-	}
+  }
 }
 ```
 
@@ -73,9 +73,9 @@ If you want to customize your PurgeCSS installation, you can create an additiona
 
 ```js "/purgecss.config.js"
 module.exports = {
-    css: ['assets/css/css-framework.css'],
-    content: ['site/**/*.php'],
-    output: 'purge/'
+  css: ['assets/css/css-framework.css'],
+  content: ['site/**/*.php'],
+  output: 'purge/'
 }
 ```
 
