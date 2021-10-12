@@ -289,6 +289,6 @@ category:
 With this simple addition, the API URL will always refer to the main URL of the site. You can also access the configuration instead to get even more flexibility
 
 ```yaml
-url: "{{ kirby.option.optionApiUrl }}/companies.json"
+url: "{{ kirby.option('optionApiUrl') }}/companies.json"
 ```
 
