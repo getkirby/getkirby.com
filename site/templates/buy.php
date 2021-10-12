@@ -57,7 +57,7 @@
     <?php snippet('faq') ?>
   </section>
 
-  <section class="columns columns--reverse" style="--columns: 2; --gap: var(--spacing-12)">
+  <section class="mb-42 columns columns--reverse" style="--columns: 2; --gap: var(--spacing-12)">
     <div>
       <h2 class="h2 mb-6">For a good cause?</h2>
       <div class="prose mb-12">
@@ -94,6 +94,11 @@
       <?php endforeach ?>
     </ul>
   </section>
+
+  <footer class="h2 max-w-xl">
+    Manage your existing licenses on our <a href="https://licenses.getkirby.com"><span class="link">license&nbsp;server</span> &rarr;</a>
+  </footer>
+
 </article>
 
 <script type="text/javascript">

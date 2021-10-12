@@ -21,6 +21,6 @@
   </ul>
 </div>
 
-<footer class="h2">
-  Travel back in time <a class="underline" href="/docs/archive">with our docs archive &rarr;</a>
+<footer class="h2 max-w-xl">
+  Travel back in time with our <a href="/docs/archive"><span class="link">docs archive</span> &rarr;</a>
 </footer>

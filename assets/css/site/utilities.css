@@ -93,3 +93,7 @@ img {
 .shadow-2xl {
   box-shadow: var(--shadow-2xl);
 }
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
