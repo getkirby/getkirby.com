@@ -6,11 +6,15 @@ Intro: The new Fiber dialogs are created mainly on the backend. They all reuse t
 ----
 Text:
 
+## Supported components
+
 | Component name | Usage |
 | --- | --- |
 | `k-form-dialog` | For dialogs with form fields and submit buttons |
 | `k-remove-dialog` | To confirm deleting items |
 | `k-text-dialog` | For dialogs with a custom text message |
+
+Other components will be supported in the future.
 
 ## Dialog setup
 
@@ -39,7 +43,7 @@ Kirby::plugin('yourname/todos', [
                   // the prefilled model data
                   'value' => [ ... ]
                 ]
-              ]
+              ];
             },
             // the submit event is creating a POST route at
             // `/panel/dialogs/{pattern}`;
@@ -52,10 +56,10 @@ Kirby::plugin('yourname/todos', [
             }
           ]
         ]
-      ]
-    };
+      ];
+    }
   ]
-];
+]);
 ```
 
 ## Submit event responses

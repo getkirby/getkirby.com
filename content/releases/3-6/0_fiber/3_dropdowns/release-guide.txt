@@ -162,7 +162,7 @@ Kirby::plugin('example/dropdown', [
     'site' => function ($kirby) {
       return [
         'dropdowns' => [
-          'page' => function (string $id) {
+          'page' => function (string $id) use ($kirby) {
 
             // find the right page for the dropdown
             $page = Find::page($id);
