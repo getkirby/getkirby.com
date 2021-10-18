@@ -101,7 +101,7 @@ Typical usecase: Editors should only be able to have access to a single parent p
 
 ### How does it work
 
-To make this work, the subpage blueprints needs to have a field that stores the current user when the page is created. In this example, we modify the `author` field in the `/site/blueprints/pages/note.php` template in the (link: https://getkirby.com/try text: Starterkit) and disable it so that it cannot be changed.
+To make this work, the subpage blueprints needs to have a field that stores the current user when the page is created. In this example, we modify the `author` field in the `/site/blueprints/pages/note.yml` template in the (link: https://getkirby.com/try text: Starterkit) and disable it so that it cannot be changed.
 
 ```yaml
 author:
