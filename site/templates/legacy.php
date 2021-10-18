@@ -1,0 +1,3 @@
+<?php
+
+go($page->src());
