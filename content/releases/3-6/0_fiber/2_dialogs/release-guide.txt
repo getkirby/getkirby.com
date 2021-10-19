@@ -10,6 +10,7 @@ Text:
 
 | Component name | Usage |
 | --- | --- |
+| `k-error-dialog` | For detailed error warnings (i.e. form validation) |
 | `k-form-dialog` | For dialogs with form fields and submit buttons |
 | `k-remove-dialog` | To confirm deleting items |
 | `k-text-dialog` | For dialogs with a custom text message |

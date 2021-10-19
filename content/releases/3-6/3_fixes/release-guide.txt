@@ -41,6 +41,10 @@ Text:
 - Fixed parsing logic for entire documents and breaks when pasting blocks [#3735](https://github.com/getkirby/kirby/issues/3735)
 - The expired `DST Root CA X3` CA certificate (previously used for Let's Encrypt certificates) has been removed from the CA bundle to prevent "expired certificate" warnings when requesting remote resources (like in options API fields) on some server systems [#3765](https://github.com/getkirby/kirby/pull/3765)
 - Fixed unstable links / hashes for media files [#3646](https://github.com/getkirby/kirby/issues/3646)
+- Fixed layout issue in the mobile version of the settings view [#3789](https://github.com/getkirby/kirby/pull/3789)
+- It's no longer possible to switch from draft to unlisted page if there are page errors [#3781](https://github.com/getkirby/kirby/issues/3781)
+- Fixed multiline placeholder for writer field Multiline placeholder in writer field renders as single line [#3470](https://github.com/getkirby/kirby/issues/3470)
+- Fixed filename collision for cropped image files [#3418](https://github.com/getkirby/kirby/issues/3418)
 
 ## Fixed regressions from 3.6.0-alpha.1
 
@@ -103,3 +107,16 @@ Text:
 - Fixed files field option dropdown when upload disabled [#3768](https://github.com/getkirby/kirby/issues/3768)
 - Fixed node issues in the writer field [#3749](https://github.com/getkirby/kirby/issues/3749)
 - Fixed missing href attribute for email addresses in the writer [#3754](https://github.com/getkirby/kirby/issues/3754)
+
+## Fixed regressions from 3.6.0-beta.3
+
+- Fixed page rendering json string [#3734](https://github.com/getkirby/kirby/issues/3734)
+- Fixed `->panelIcon()` method [#3782](https://github.com/getkirby/kirby/issues/3782)
+- Fixes panel keyboard modifier 'ctrl' gets stuck [#3800](https://github.com/getkirby/kirby/issues/3800)
+- Fixed youtube short urls on video block video block no preview for `youtu.be` url [#3799](https://github.com/getkirby/kirby/issues/3799)
+- Fixed overlaping layout field [#3805](https://github.com/getkirby/kirby/issues/3805)
+- Fixes annoying layout shifts due to a missing scrollbar [#3777](https://github.com/getkirby/kirby/issues/3777)
+- Session timeout no longer throws an API error and then a lock error [#3780](https://github.com/getkirby/kirby/issues/3780)
+- `Panel::go()` now also works in dialogs and searches [#3814](https://github.com/getkirby/kirby/issues/3814)
+- Fixes copy & paste issues for single paragraphs [#3813](https://github.com/getkirby/kirby/issues/3813)
+
