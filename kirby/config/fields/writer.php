@@ -11,7 +11,7 @@ return [
             return $inline;
         },
         /**
-         * Sets the allowed HTML formats. Available formats: `bold`, `italic`, `underline`, `strike`, `code`, `link`. Activate them all by passing `true`. Deactivate them all by passing `false`
+         * Sets the allowed HTML formats. Available formats: `bold`, `italic`, `underline`, `strike`, `code`, `link`, `email`. Activate them all by passing `true`. Deactivate them all by passing `false`
          * @param array|bool $marks
          */
         'marks' => function ($marks = true) {
