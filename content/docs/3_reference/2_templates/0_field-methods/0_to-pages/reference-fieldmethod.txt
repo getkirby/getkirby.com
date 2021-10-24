@@ -1,5 +1,9 @@
 Text:
 
+<info>
+The `toPages()` field method only returns published (listed and unlisted) pages, not drafts.
+</info>
+
 ## Example
 
 ### Text file
