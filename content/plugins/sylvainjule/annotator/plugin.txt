@@ -2,7 +2,7 @@ Title: Annotator
 
 ----
 
-Repository: https://github.com/sylvainjule/kirby-image-annotator
+Repository: https://github.com/sylvainjule/kirby-annotator
 
 ----
 
