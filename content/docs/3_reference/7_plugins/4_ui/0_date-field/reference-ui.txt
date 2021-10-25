@@ -36,7 +36,7 @@ The first allowed date
 
 `Boolean|Object (default: false)`
 
-The time input is disabled by default. You can either pass true or an configuration object to enable it. Check out the [time field docs](./time) for available options.
+The time input is disabled by default. You can either pass true or an configuration object to enable it. Check out the [time field docs](./time-field) for available options.
 
 ### value / v-model
 
