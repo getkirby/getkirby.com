@@ -72,11 +72,11 @@ If you want to update Kirby to the latest version, all you need to do is to upda
 cd kirby
 
 # update to the latest version
-git checkout master   # [1]
-git pull              # [2]
+git checkout main   # [1]
+git pull            # [2]
 ```
 
-Command `[1]` ensures that the submodule is on the `master` branch of the Kirby repo. This branch always receives the latest released and stable Kirby version. The command `[2]` then fetches all changes from GitHub and updates the code.
+Command `[1]` ensures that the submodule is on the `main` branch of the Kirby repo. This branch always receives the latest released and stable Kirby version. The command `[2]` then fetches all changes from GitHub and updates the code.
 
 Now you only need to commit the changes to your repo:
 
@@ -100,7 +100,7 @@ If you don't want to type all this every time you want to update Kirby, you can 
 cd "$(dirname "$0")/kirby"
 
 # update to the latest version
-git checkout master
+git checkout main
 git pull
 
 # change back into the main project folder
@@ -136,4 +136,4 @@ git checkout develop
 git pull
 ```
 
-Then stage and commit your changes like above. This way, you can easily switch between the `develop` and the `master` branches.
+Then stage and commit your changes like above. This way, you can easily switch between the `develop` and the `main` branches.

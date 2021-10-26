@@ -132,7 +132,7 @@ You can replace the following components:
 - `k-users-view`
 - `k-user-view`
 
-The Panel views are often very complex. If you want to replace them without losing features, check out the orginal source code for each component. You can find them (link: https://github.com/getkirby/kirby/tree/master/panel/src/components/Views text: on GitHub).
+The Panel views are often very complex. If you want to replace them without losing features, check out the orginal source code for each component. You can find them (link: https://github.com/getkirby/kirby/tree/main/panel/src/components/Views text: on GitHub).
 </since>
 
 ## More information
