@@ -5,7 +5,7 @@ Text:
 The icon component can be used to display any icon from our own icon set.
 
 ```html
-<k-icon type="pencil" />
+<k-icon type="edit" />
 ```
 
 ## Available icons
@@ -21,7 +21,7 @@ The icon component can be used to display any icon from our own icon set.
 For better accessibility of icons, you can pass an additional alt attribute like for images.
 
 ```html
-<k-icon type="pencil" alt="Edit something" />
+<k-icon type="edit" alt="Edit something" />
 ```
 
 ### back
