@@ -23,9 +23,9 @@ return [
 
 ## Configuring the list of allowed certificate authorities (CAs) for HTTPS requests
 
-Kirby ships with a CA bundle based on the Mozilla CA list. We keep that CA bundle up-to-date with new Kirby releases.
+The security of remote requests to HTTPS URLs relies on the validity of the certificate chain. A well-known certificate authority must have signed the server certificate so that you and Kirby can be sure that the HTTPS connection is secure and was not tampered with. The allowed certificate authorities are listed in a so-called CA bundle.
 
-The CA bundle is used whenever a request to an HTTPS destination is made.
+Kirby ships with a CA bundle based on the Mozilla CA list. We keep that CA bundle up-to-date with new Kirby releases.
 
 If you want to use a different CA bundle or disable verification completely (not recommended!), you can set the `remote.ca` option:
 
@@ -44,5 +44,11 @@ Options are:
 - An absolute path to a CA file in `.pem` format
 - An absolute path to a CA directory with certificate files that cURL can understand
 - The special value `Remote::CA_INTERNAL` for Kirby's internal CA (default)
-- The special value `Remote::CA_SYSTEM` to use the CA bundle that is configured in `php.ini`
+- The special value `Remote::CA_SYSTEM` to use the CA bundle that is configured in `php.ini` or that was defined when PHP was compiled
 - `false` to disable TLS verification completely (not recommended!)
+
+We recommend to use the CA bundle of your server operating system. This file is generally updated from system packages and therefore the most up-to-date list you can have.
+
+<since v="3.6.0">
+If a CA bundle is configured in `php.ini` in the `curl.cainfo` option, Kirby will use this bundle by default by switching to the default value `Remote::CA_SYSTEM`. You can still override this default with the `remote.ca` option as explained above.
+</since>
