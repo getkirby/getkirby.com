@@ -2,6 +2,10 @@ Title: Block models
 
 ----
 
+Since: 3.6.0
+
+----
+
 Text:
 
 Block models are registered with the `blockModels` extension.
