@@ -1,0 +1,57 @@
+Title: Blocks methods
+
+----
+
+Text:
+
+Blocks methods are registered with the `blocksMethods` extension.
+
+## Default blocks methods
+
+**For a full (link: docs/reference/objects/cms/blocks text: list of default blocks methods), please check out the Reference.**
+
+<info>Be aware that you cannot override these default blocks methods with any custom blocks method.</info>
+
+## Getting started
+
+You can extend the set of defined blocks methods very easily in a plugin file.
+
+```php "/site/plugins/blocks-methods/index.php"
+Kirby::plugin('my/blocksMethods', [
+    'blocksMethods' => [
+        'wrap' => function () {
+            return '<div class="blocks-wrapper">' . $this->toHtml() . '</div>';
+        }
+    ]
+]);
+```
+
+This example shows the basic architecture of a blocks method. You define the method name with the key for the `blocksMethods` array. `$this` in the callback function is the `$blocks` collection.
+
+The blocks method can be used afterwards in your code:
+
+```php
+<?= $page->text()->toBlocks()->wrap() ?>
+```
+
+
+## Working with method arguments
+
+In some cases it might be helpful to be able to pass arguments to the method:
+
+```php
+<?= $page->text()->toBlocks()->wrap('custom-wrapper-class') ?>
+```
+
+The definition for such a method with arguments is very simple:
+
+```php
+Kirby::plugin('my/blocksMethods', [
+    'blocksMethods' => [
+        'wrap' => function ($className = 'blocks-wrapper') {
+            return '<div class="' . $className . '">' . $this->toHtml() . '</div>';
+        }
+    ]
+]);
+```
+
