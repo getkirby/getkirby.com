@@ -3,6 +3,7 @@
 use Kirby\Cms\Find;
 use Kirby\Panel\Field;
 use Kirby\Toolkit\A;
+use Kirby\Toolkit\Escape;
 
 $languageDialogFields = [
     'name' => [
@@ -39,7 +40,8 @@ $languageDialogFields = [
 return [
 
     // create language
-    'languages/create' => [
+    'language.create' => [
+        'pattern' => 'languages/create',
         'load' => function () use ($languageDialogFields) {
             return [
                 'component' => 'k-language-dialog',
@@ -69,15 +71,15 @@ return [
     ],
 
     // delete language
-    'languages/(:any)/delete' => [
+    'language.delete' => [
+        'pattern' => 'languages/(:any)/delete',
         'load' => function (string $id) {
             $language = Find::language($id);
             return [
                 'component' => 'k-remove-dialog',
                 'props' => [
-                    // todo: escape placeholder (output with `v-html`)
                     'text' => tt('language.delete.confirm', [
-                        'name' => $language->name()
+                        'name' => Escape::html($language->name())
                     ])
                 ]
             ];
@@ -91,7 +93,8 @@ return [
     ],
 
     // update language
-    'languages/(:any)/update' => [
+    'language.update' => [
+        'pattern' => 'languages/(:any)/update',
         'load' => function (string $id) use ($languageDialogFields) {
             $language = Find::language($id);
             $fields   = $languageDialogFields;
@@ -140,45 +143,6 @@ return [
             ]);
             return [
                 'event' => 'language.update'
-            ];
-        }
-    ],
-
-    // license registration
-    'registration' => [
-        'load' => function () {
-            return [
-                'component' => 'k-form-dialog',
-                'props' => [
-                    'fields' => [
-                        'license' => [
-                            'label'       => t('license.register.label'),
-                            'type'        => 'text',
-                            'required'    => true,
-                            'counter'     => false,
-                            'placeholder' => 'K3-',
-                            'help'        => t('license.register.help')
-                        ],
-                        'email' => Field::email([
-                            'required' => true
-                        ])
-                    ],
-                    'submitButton' => t('license.register'),
-                    'value' => [
-                        'license' => null,
-                        'email'   => null
-                    ]
-                ]
-            ];
-        },
-        /**
-         * @codeCoverageIgnore
-         */
-        'submit' => function () {
-            kirby()->system()->register(get('license'), get('email'));
-            return [
-                'event'   => 'system.register',
-                'message' => t('license.register.success')
             ];
         }
     ],

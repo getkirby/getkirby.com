@@ -832,13 +832,13 @@ class User extends ModelWithContent
      * @param string $fallback Fallback for tokens in the template that cannot be replaced
      * @return string
      */
-    public function toString(string $template = null, array $data = [], string $fallback = ''): string
+    public function toString(string $template = null, array $data = [], string $fallback = '', string $handler = 'template'): string
     {
         if ($template === null) {
             $template = $this->email();
         }
 
-        return parent::toString($template, $data);
+        return parent::toString($template, $data, $fallback, $handler);
     }
 
     /**
@@ -874,7 +874,7 @@ class User extends ModelWithContent
         }
 
         if (password_verify($password, $this->password()) !== true) {
-            throw new InvalidArgumentException(['key' => 'user.password.wrong']);
+            throw new InvalidArgumentException(['key' => 'user.password.wrong', 'httpCode' => 401]);
         }
 
         return true;
@@ -884,22 +884,6 @@ class User extends ModelWithContent
     /**
      * Deprecated!
      */
-
-    /**
-     * Panel icon definition
-     *
-     * @todo Add `deprecated()` helper warning in 3.7.0
-     * @todo Remove in 3.8.0
-     *
-     * @internal
-     * @param array $params
-     * @return array
-     * @codeCoverageIgnore
-     */
-    public function panelIcon(array $params = null): array
-    {
-        return $this->panel()->icon($params);
-    }
 
     /**
      * Returns the full path without leading slash

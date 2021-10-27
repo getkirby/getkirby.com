@@ -2,6 +2,7 @@
 
 namespace Kirby\Panel;
 
+use Kirby\Http\Response;
 use Kirby\Http\Url;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
@@ -287,7 +288,7 @@ class View
 
                 return [
                     'ascii'   => Str::$ascii,
-                    'csrf'    => $kirby->option('api.csrf') ?? csrf(),
+                    'csrf'    => $kirby->auth()->csrfFromSession(),
                     'isLocal' => $kirby->system()->isLocal(),
                     'locales' => $locales,
                     'slugs'   => Str::$language,
@@ -331,22 +332,30 @@ class View
 
         // areas
         foreach ($areas as $areaId => $area) {
+            $access = $permissions['access'][$areaId] ?? true;
+
+            // areas without access permissions get skipped entirely
+            if ($access === false) {
+                continue;
+            }
+
+            // fetch custom menu settings from the area definition
             $menuSetting = $area['menu'] ?? false;
 
+            // menu settings can be a callback that can return true, false or disabled
             if (is_a($menuSetting, 'Closure') === true) {
                 $menuSetting = $menuSetting($areas, $permissions, $current);
             }
 
+            // false will remove the area entirely just like with
+            // disabled permissions
             if ($menuSetting === false) {
                 continue;
             }
 
-            $access   = $permissions['access'][$areaId] ?? true;
-            $disabled = $menuSetting === 'disabled' || $access === false;
-
             $menu[] = [
                 'current'  => $areaId === $current,
-                'disabled' => $disabled,
+                'disabled' => $menuSetting === 'disabled',
                 'icon'     => $area['icon'],
                 'id'       => $areaId,
                 'link'     => $area['link'],
@@ -354,7 +363,6 @@ class View
             ];
         }
 
-        // account
         $menu[] = '-';
         $menu[] = [
             'current'  => $current === 'account',
@@ -391,8 +399,12 @@ class View
         $area  = $options['area']  ?? [];
         $areas = $options['areas'] ?? [];
 
+        // handle redirects
+        if (is_a($data, 'Kirby\Panel\Redirect') === true) {
+            return Response::redirect($data->location(), $data->code());
+
         // handle Kirby exceptions
-        if (is_a($data, 'Kirby\Exception\Exception') === true) {
+        } elseif (is_a($data, 'Kirby\Exception\Exception') === true) {
             $data = static::error($data->getMessage(), $data->getHttpCode());
 
         // handle regular exceptions

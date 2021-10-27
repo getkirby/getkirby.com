@@ -1,9 +1,10 @@
 <?php
 
 use Kirby\Cms\Find;
+use Kirby\Toolkit\Escape;
 
 return [
-    [
+    'users' => [
         'pattern' => 'users',
         'action'  => function () {
             $kirby = kirby();
@@ -38,13 +39,12 @@ return [
 
                         return [
                             'data' => $users->values(function ($user) {
-                                // todo: probably escape info and text (output with `v-html`)
                                 return [
                                     'id'    => $user->id(),
                                     'image' => $user->panel()->image(),
-                                    'info'  => $user->role()->title(),
+                                    'info'  => Escape::html($user->role()->title()),
                                     'link'  => $user->panel()->url(true),
-                                    'text'  => $user->username()
+                                    'text'  => Escape::html($user->username())
                                 ];
                             }),
                             'pagination' => $users->pagination()->toArray()
@@ -54,16 +54,16 @@ return [
             ];
         }
     ],
-    [
+    'user' => [
         'pattern' => 'users/(:any)',
         'action'  => function (string $id) {
-            return Find::user($id)->panel()->route();
+            return Find::user($id)->panel()->view();
         }
     ],
-    [
+    'user.file' => [
         'pattern' => 'users/(:any)/files/(:any)',
         'action'  => function (string $id, string $filename) {
-            return Find::file('users/' . $id, $filename)->panel()->route();
+            return Find::file('users/' . $id, $filename)->panel()->view();
         }
     ],
 ];
