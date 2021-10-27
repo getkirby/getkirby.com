@@ -67,7 +67,7 @@
     </li>
     <li>
       <p class="h2">launch</p>
-      <p class="font-mono text-xs">October</p>
+      <p class="font-mono text-xs">November 2nd</p>
     </li>
     <li></li>
   </ul>
