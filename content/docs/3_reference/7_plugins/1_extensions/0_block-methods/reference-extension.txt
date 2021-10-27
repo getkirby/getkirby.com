@@ -1,0 +1,34 @@
+Title: Block methods
+
+----
+
+Text:
+
+Block methods are registered with the `blockMethods` extension.
+
+## Default block methods
+
+**For a full (link: docs/reference/objects/cms/block text: list of default block methods), please check out the Reference.**
+
+<info>Be aware that - contrary to (link: docs/reference/plugins/extensions/block-models text: block models) - custom block methods cannot override default block methods.</info>
+
+## Custom block methods vs. block models
+
+(link: docs/reference/plugins/extensions/block-models text: block models) are a great way to create an extended version of the default block object with additional methods and functionalities. But a block model is tied to a specific block type, while custom block methods apply to all block objects. If your use case is based on one specific block types, a block model might be the better solution. If you have methods that should be available for all block objects, a custom block method is the way to go.
+
+## Getting started
+
+You can extend the set of defined block methods very easily in a plugin file.
+
+```php "/site/plugins/block-methods/index.php"
+Kirby::plugin('my/block-methods', [
+    'blockMethods' => [
+        'url' => function () {
+            return $this->parent()->url() . '/#' . $this->id();
+        }
+    ]
+]);
+```
+
+This example shows the basic architecture of a block method. You define the method name with the key for the `blockMethods` extension array. `$this` in the callback function is the `$block` object.
+
