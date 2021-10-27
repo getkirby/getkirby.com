@@ -1,0 +1,23 @@
+title: System View
+
+----
+
+text:
+
+(image: system-view.png)
+
+We received a lot of feedback about the confusing state of the Settings view in the Panel. Technically, it was never really about settings. It was a mixture of system information and languages. This is why we decided to replace this view with two new views. A new system view with all kinds of additional information about your Kirby installation and a brand new languages view.
+
+The system view contains the version and license information from the previous settings view. But now it also features additional health information about your setup, which will be extended step by step in later releases. It also contains a list of your installed plugins.
+
+## Permissions
+
+The system view can be switched on or off by role with the new access permissions:
+
+```yaml
+# users/editor.yml
+title: Editor
+permissions:
+  access:
+    system: false
+```

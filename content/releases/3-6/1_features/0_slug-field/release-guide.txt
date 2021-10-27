@@ -1,0 +1,41 @@
+Title: Slug field
+----
+Intro:
+----
+Text:
+
+The new slug field is perfect when you want to create sanitized strings for IDs, URL paths, css class names, etc.
+
+## Setup
+
+```yaml
+fields:
+  className:
+    label: Class Name
+    type: slug
+```
+
+## Sync option
+
+You can sync the slug field with another field. Whenever the editor types something into the synced field, the slug field will update with a sluggified version of the input:
+
+```yaml
+fields:
+  className:
+    label: Class Name
+    type: slug
+    sync: title
+```
+
+## Allow option
+
+By default, the slug field will strip out or replace any non-alphabetic, non-numeric character with a simple dash. You can define additional allowed characters with the allow option:
+
+```yaml
+fields:
+  className:
+    label: Class Name
+    type: slug
+    sync: title
+    allow: _
+```

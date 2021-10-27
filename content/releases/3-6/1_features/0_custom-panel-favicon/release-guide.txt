@@ -1,4 +1,4 @@
-Title: Custom favicon for the Panel
+Title: Custom Panel Favicon
 ----
 Intro:
 ----

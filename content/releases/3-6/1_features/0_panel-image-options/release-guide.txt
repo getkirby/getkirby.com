@@ -1,4 +1,4 @@
-Title: New Panel image options
+Title: Panel image options
 ----
 Text:
 

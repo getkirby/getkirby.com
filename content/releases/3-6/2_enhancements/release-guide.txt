@@ -24,6 +24,10 @@ Text:
 - Improved error messages for file validation/sanitization errors (`Sane` classes)
 - The `Sane` classes now have proper XML namespace support so that custom namespace prefixes are properly detected
 - Improved docblocks for the HasChildren Trait [#3791](https://github.com/getkirby/kirby/pull/3791)
+- The `Remote` class now by default prefers the system certificate authority bundle (CA bundle) for verifying remote TLS connections if a bundle is configured in `php.ini` (`curl.cainfo` option). If no bundle is configured, Kirby will still use its internal CA bundle.
+- Additional unit tests for Filesystem, CMS, Form, Image and Panel classes
+- Fixed validation code for the `Kirby\Form\FieldClass` class
+- Cleaner solution to ignore entire files from code coverage
 
 ## Panel
 
@@ -78,3 +82,5 @@ will now load the Fiber dropdown defined like this in one of your areas:
 - Improved parsing content from Word documents to create blocks [#3770](https://github.com/getkirby/kirby/pull/3770)
 - Add `data-id` for drawer and blocks
 - Changes badge position improved on tabs [#3805](https://github.com/getkirby/kirby/issues/3805)
+- Updated inline docs for the writer field
+- Better error handling for dialogs without proper handlers

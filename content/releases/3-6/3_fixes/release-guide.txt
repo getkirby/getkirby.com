@@ -120,3 +120,9 @@ Text:
 - `Panel::go()` now also works in dialogs and searches [#3814](https://github.com/getkirby/kirby/issues/3814)
 - Fixes copy & paste issues for single paragraphs [#3813](https://github.com/getkirby/kirby/issues/3813)
 
+## Fixed regressions from 3.6.0-rc.1
+
+- Fixed issue in slug field with undefined value [#3826](https://github.com/getkirby/kirby/issues/3826)
+- Fix writer field caret position on blocks/layout field [#3838](https://github.com/getkirby/kirby/issues/3838)
+- Fix writer field height on blocks/layout field
+- Fixed collision when changing the user language [#3844](https://github.com/getkirby/kirby/issues/3844)

@@ -1,4 +1,4 @@
-Title: Vue components
+Title: New UI components
 ----
 Intro:
 ----
