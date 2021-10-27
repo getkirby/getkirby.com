@@ -1,12 +1,12 @@
 <?php
 
-// @codeCoverageIgnoreStart
 return [
     // cms classes
     'collection' => 'Kirby\Cms\Collection',
     'field'      => 'Kirby\Cms\Field',
     'file'       => 'Kirby\Cms\File',
     'files'      => 'Kirby\Cms\Files',
+    'find'       => 'Kirby\Cms\Find',
     'html'       => 'Kirby\Cms\Html',
     'kirby'      => 'Kirby\Cms\App',
     'page'       => 'Kirby\Cms\Page',
@@ -15,6 +15,7 @@ return [
     'r'          => 'Kirby\Cms\R',
     'response'   => 'Kirby\Cms\Response',
     's'          => 'Kirby\Cms\S',
+    'sane'       => 'Kirby\Sane\Sane',
     'site'       => 'Kirby\Cms\Site',
     'structure'  => 'Kirby\Cms\Structure',
     'url'        => 'Kirby\Cms\Url',
@@ -77,4 +78,3 @@ return [
     'kirby\toolkit\file'       => 'Kirby\Filesystem\File',
     'kirby\toolkit\mime'       => 'Kirby\Filesystem\Mime',
 ];
-// @codeCoverageIgnoreEnd

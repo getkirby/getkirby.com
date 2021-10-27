@@ -3,7 +3,6 @@
 namespace Kirby\Cms;
 
 use Kirby\Data\Data;
-use Kirby\Email\PHPMailer as Emailer;
 use Kirby\Exception\ErrorPageException;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
@@ -55,6 +54,7 @@ class App
 
     protected $api;
     protected $collections;
+    protected $core;
     protected $defaultLanguage;
     protected $language;
     protected $languages;
@@ -86,6 +86,8 @@ class App
      */
     public function __construct(array $props = [], bool $setInstance = true)
     {
+        $this->core = new Core($this);
+
         // register all roots to be able to load stuff afterwards
         $this->bakeRoots($props['roots'] ?? []);
 
@@ -267,7 +269,7 @@ class App
      */
     protected function bakeRoots(array $roots = null)
     {
-        $roots = array_merge(require dirname(__DIR__, 2) . '/config/roots.php', (array)$roots);
+        $roots = array_merge($this->core->roots(), (array)$roots);
         $this->roots = Ingredients::bake($roots);
         return $this;
     }
@@ -285,7 +287,7 @@ class App
             $urls['index'] = $this->options['url'];
         }
 
-        $urls = array_merge(require $this->root('kirby') . '/config/urls.php', (array)$urls);
+        $urls = array_merge($this->core->urls(), (array)$urls);
         $this->urls = Ingredients::bake($urls);
         return $this;
     }
@@ -506,6 +508,17 @@ class App
     }
 
     /**
+     * Get access to object that lists
+     * all parts of Kirby core
+     *
+     * @return \Kirby\Cms\Core
+     */
+    public function core()
+    {
+        return $this->core;
+    }
+
+    /**
      * Returns the default language object
      *
      * @return \Kirby\Cms\Language|null
@@ -557,11 +570,14 @@ class App
      *
      * @param mixed $preset
      * @param array $props
-     * @return \Kirby\Email\PHPMailer
+     * @return \Kirby\Email\Email
      */
     public function email($preset = [], array $props = [])
     {
-        return new Emailer((new Email($preset, $props))->toArray(), $props['debug'] ?? false);
+        $debug = $props['debug'] ?? false;
+        $props = (new Email($preset, $props))->toArray();
+
+        return ($this->component('email'))($this, $props, $debug);
     }
 
     /**
@@ -834,6 +850,16 @@ class App
         }
 
         return $this->languages = Languages::load();
+    }
+
+    /**
+     * Access Kirby's part loader
+     *
+     * @return \Kirby\Cms\Loader
+     */
+    public function load()
+    {
+        return new Loader($this);
     }
 
     /**
@@ -1224,7 +1250,7 @@ class App
         }
 
         $registry = $this->extensions('routes');
-        $system   = (include $this->root('kirby') . '/config/routes.php')($this);
+        $system   = $this->core->routes();
         $routes   = array_merge($system['before'], $registry, $system['after']);
 
         return $this->routes = $routes;

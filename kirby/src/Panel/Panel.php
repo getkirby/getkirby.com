@@ -4,10 +4,11 @@ namespace Kirby\Panel;
 
 use Kirby\Cms\User;
 use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Exception\PermissionException;
 use Kirby\Http\Response;
+use Kirby\Http\Url;
+use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Tpl;
 use Throwable;
 
@@ -29,10 +30,10 @@ class Panel
      * Normalize a panel area
      *
      * @param string $id
-     * @param array $area
+     * @param array|string $area
      * @return array
      */
-    public static function area(string $id, array $area): array
+    public static function area(string $id, $area): array
     {
         $area['id']              = $id;
         $area['label']           = $area['label'] ?? $id;
@@ -54,44 +55,55 @@ class Panel
     public static function areas(): array
     {
         $kirby  = kirby();
-        $root   = $kirby->root('kirby') . '/config/areas';
         $system = $kirby->system();
         $user   = $kirby->user();
+        $areas  = $kirby->load()->areas();
 
         // the system is not ready
         if ($system->isOk() === false || $system->isInstalled() === false) {
             return [
-                'installation' => static::area('installation', (require $root . '/installation.php')($kirby)),
+                'installation' => static::area('installation', $areas['installation']),
             ];
         }
 
         // not yet authenticated
         if (!$user) {
             return [
-                'login' => static::area('login', (require $root . '/login.php')($kirby)),
+                'login' => static::area('login', $areas['login']),
             ];
         }
 
-        // load default areas
-        $areas = [
-            'site'     => static::area('site', (require $root . '/site.php')($kirby)),
-            'settings' => static::area('settings', (require $root . '/settings.php')($kirby)),
-            'users'    => static::area('users', (require $root . '/users.php')($kirby)),
-            'account'  => static::area('account', (require $root . '/account.php')($kirby)),
-        ];
+        unset($areas['installation'], $areas['login']);
 
-        // load plugins
-        foreach ($kirby->extensions('areas') as $id => $area) {
-            if (is_a($area, 'Closure') === false) {
-                throw new InvalidArgumentException(sprintf('Panel area "%s" must be defined as a Closure', $id));
-            }
-
-            $areas[$id] = static::area($id, (array)$area($kirby));
+        // disable the language area for single-language installations
+        if (!$kirby->option('languages')) {
+            unset($areas['languages']);
         }
 
-        return $areas;
-    }
+        $menu = $kirby->option('panel.menu', [
+            'site',
+            'languages',
+            'users',
+            'system',
+        ]);
 
+        $result = [];
+
+        // add the sorted areas
+        foreach ($menu as $id) {
+            if ($area = ($areas[$id] ?? null)) {
+                $result[$id] = static::area($id, $area);
+                unset($areas[$id]);
+            }
+        }
+
+        // add the remaining areas
+        foreach ($areas as $id => $area) {
+            $result[$id] = static::area($id, $area);
+        }
+
+        return $result;
+    }
 
     /**
      * Check for access permissions
@@ -143,11 +155,9 @@ class Panel
      * @return void
      * @codeCoverageIgnore
      */
-    public static function go(?string $path = null, int $code = 302): void
+    public static function go(?string $url = null, int $code = 302): void
     {
-        $slug = kirby()->option('panel.slug', 'panel');
-        $url  = url($slug . '/' . trim($path, '/'));
-        throw new Redirect($url, $code);
+        throw new Redirect(static::url($url), $code);
     }
 
     /**
@@ -196,7 +206,8 @@ class Panel
     public static function json(array $data, int $code = 200)
     {
         return Response::json($data, $code, get('_pretty'), [
-            'X-Fiber' => 'true'
+            'X-Fiber' => 'true',
+            'Cache-Control' => 'no-store'
         ]);
     }
 
@@ -236,14 +247,14 @@ class Panel
         }
 
         // handle different response types (view, dialog, ...)
-        switch ($options['type'] ?? 'view') {
+        switch ($options['type'] ?? null) {
             case 'dialog':
                 return Dialog::response($result, $options);
             case 'dropdown':
                 return Dropdown::response($result, $options);
             case 'search':
                 return Search::response($result, $options);
-            case 'view':
+            default:
                 return View::response($result, $options);
         }
     }
@@ -293,8 +304,6 @@ class Panel
                 }
 
                 $result = $route->action()->call($route, ...$route->arguments());
-            } catch (Redirect $e) {
-                $result = Response::redirect($e->location(), $e->getCode());
             } catch (Throwable $e) {
                 $result = $e;
             }
@@ -355,18 +364,8 @@ class Panel
                 'installation',
                 'login',
             ],
-            'action' => function () use ($kirby) {
-                // if the last path has been stored in the
-                // session, redirect the user to it
-                // (used after successful login)
-                $path = trim($kirby->session()->get('panel.path'), '/');
-
-                // ignore various paths when redirecting
-                if (in_array($path, ['', 'login', 'logout', 'installation'])) {
-                    $path = 'site';
-                }
-
-                Panel::go($path);
+            'action' => function () {
+                Panel::go(Home::url());
             }
         ];
 
@@ -393,10 +392,10 @@ class Panel
         $dialogs = $area['dialogs'] ?? [];
         $routes  = [];
 
-        foreach ($dialogs as $pattern => $dialog) {
+        foreach ($dialogs as $key => $dialog) {
 
             // create the full pattern with dialogs prefix
-            $pattern = 'dialogs/' . trim($pattern, '/');
+            $pattern = 'dialogs/' . trim(($dialog['pattern'] ?? $key), '/');
 
             // load event
             $routes[] = [
@@ -404,7 +403,7 @@ class Panel
                 'type'    => 'dialog',
                 'area'    => $areaId,
                 'action'  => $dialog['load'] ?? function () {
-                    return false;
+                    return 'The load handler for your dialog is missing';
                 },
             ];
 
@@ -415,7 +414,7 @@ class Panel
                 'area'    => $areaId,
                 'method'  => 'POST',
                 'action'  => $dialog['submit'] ?? function () {
-                    return false;
+                    return 'Your dialog does not define a submit handler';
                 }
             ];
         }
@@ -435,17 +434,16 @@ class Panel
         $dropdowns = $area['dropdowns'] ?? [];
         $routes    = [];
 
-        foreach ($dropdowns as $pattern => $action) {
-
+        foreach ($dropdowns as $name => $dropdown) {
             // create the full pattern with dropdowns prefix
-            $pattern = 'dropdowns/' . trim($pattern, '/');
+            $pattern = 'dropdowns/' . trim(($dropdown['pattern'] ?? $name), '/');
 
             // load event
             $routes[] = [
                 'pattern' => $pattern,
                 'type'    => 'dropdown',
                 'area'    => $areaId,
-                'action'  => $action
+                'action'  => $dropdown['options'] ?? $dropdown['action']
             ];
         }
 
@@ -517,8 +515,14 @@ class Panel
 
         // language switcher
         if ($kirby->option('languages')) {
+            $fallback = 'en';
+
+            if ($defaultLanguage = $kirby->defaultLanguage()) {
+                $fallback = $defaultLanguage->code();
+            }
+
             $session         = $kirby->session();
-            $sessionLanguage = $session->get('panel.language', 'en');
+            $sessionLanguage = $session->get('panel.language', $fallback);
             $language        = get('language') ?? $sessionLanguage;
 
             // keep the language for the next visit
@@ -556,5 +560,33 @@ class Panel
         $kirby->setCurrentTranslation($translation);
 
         return $translation;
+    }
+
+    /**
+     * Creates an absolute Panel URL
+     * independent of the Panel slug config
+     *
+     * @param string|null $url
+     * @return string
+     */
+    public static function url(?string $url = null): string
+    {
+        $slug = kirby()->option('panel.slug', 'panel');
+
+        // only touch relative paths
+        if (Url::isAbsolute($url) === false) {
+            $path = trim($url, '/');
+
+            // add the panel slug prefix if it it's not
+            // included in the path yet
+            if (Str::startsWith($path, $slug . '/') === false) {
+                $path = $slug . '/' . $path;
+            }
+
+            // create an absolute URL
+            $url = url($path);
+        }
+
+        return $url;
     }
 }

@@ -104,7 +104,9 @@ abstract class Model
         // skip image thumbnail if option
         // is explicitly set to show the icon
         if ($settings === 'icon') {
-            $settings = [];
+            $settings = [
+                'query' => false
+            ];
         } elseif (is_string($settings) === true) {
             // convert string settings to proper array
             $settings = [
@@ -115,7 +117,7 @@ abstract class Model
         // merge with defaults and blueprint option
         $settings = array_merge(
             $this->imageDefaults(),
-            $settings,
+            $settings ?? [],
             $this->model->blueprint()->image() ?? [],
         );
 
@@ -306,19 +308,16 @@ abstract class Model
      */
     public function pickerData(array $params = []): array
     {
-        // todo: in 3.5.7 this method would have escaped the default text;
-        //       no longer needed in 3.6
-
         return [
             'id'       => $this->model->id(),
             'image'    => $this->image(
                 $params['image'] ?? [],
                 $params['layout'] ?? 'list'
             ),
-            'info'     => $this->model->toString($params['info'] ?? false),
+            'info'     => $this->model->toSafeString($params['info'] ?? false),
             'link'     => $this->url(true),
             'sortable' => true,
-            'text'     => $this->model->toString($params['text'] ?? false)
+            'text'     => $this->model->toSafeString($params['text'] ?? false),
         ];
     }
 
@@ -351,16 +350,6 @@ abstract class Model
 
         return $props;
     }
-
-    /**
-     * Returns the data array for
-     * this model's Panel routes
-     *
-     * @internal
-     *
-     * @return array
-     */
-    abstract public function route(): array;
 
     /**
      * Returns link url and tooltip
@@ -397,4 +386,14 @@ abstract class Model
 
         return $this->model->kirby()->url('panel') . '/' . $this->path();
     }
+
+    /**
+     * Returns the data array for
+     * this model's Panel view
+     *
+     * @internal
+     *
+     * @return array
+     */
+    abstract public function view(): array;
 }

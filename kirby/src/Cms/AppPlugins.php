@@ -9,6 +9,7 @@ use Kirby\Filesystem\F;
 use Kirby\Filesystem\Mime;
 use Kirby\Form\Field as FormField;
 use Kirby\Image\Image;
+use Kirby\Panel\Panel;
 use Kirby\Text\KirbyTag;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Collection as ToolkitCollection;
@@ -33,13 +34,6 @@ trait AppPlugins
     protected static $plugins = [];
 
     /**
-     * Cache for system extensions
-     *
-     * @var array
-     */
-    protected static $systemExtensions = null;
-
-    /**
      * The extension registry
      *
      * @var array
@@ -52,6 +46,9 @@ trait AppPlugins
         'api' => [],
         'areas' => [],
         'authChallenges' => [],
+        'blockMethods' => [],
+        'blockModels' => [],
+        'blocksMethods' => [],
         'blueprints' => [],
         'cacheTypes' => [],
         'collections' => [],
@@ -65,6 +62,9 @@ trait AppPlugins
         'filesMethods' => [],
         'fields' => [],
         'hooks' => [],
+        'layoutMethods' => [],
+        'layoutColumnMethods' => [],
+        'layoutsMethods' => [],
         'pages' => [],
         'pageMethods' => [],
         'pagesMethods' => [],
@@ -138,7 +138,15 @@ trait AppPlugins
      */
     protected function extendAreas(array $areas): array
     {
-        return $this->extensions['areas'] = array_merge($this->extensions['areas'], $areas);
+        foreach ($areas as $id => $area) {
+            if (isset($this->extensions['areas'][$id]) === false) {
+                $this->extensions['areas'][$id] = [];
+            }
+
+            $this->extensions['areas'][$id][] = $area;
+        }
+
+        return $this->extensions['areas'];
     }
 
     /**
@@ -150,6 +158,39 @@ trait AppPlugins
     protected function extendAuthChallenges(array $challenges): array
     {
         return $this->extensions['authChallenges'] = Auth::$challenges = array_merge(Auth::$challenges, $challenges);
+    }
+
+    /**
+     * Registers additional block methods
+     *
+     * @param array $methods
+     * @return array
+     */
+    protected function extendBlockMethods(array $methods): array
+    {
+        return $this->extensions['blockMethods'] = Block::$methods = array_merge(Block::$methods, $methods);
+    }
+
+    /**
+     * Registers additional block models
+     *
+     * @param array $models
+     * @return array
+     */
+    protected function extendBlockModels(array $models): array
+    {
+        return $this->extensions['blockModels'] = Block::$models = array_merge(Block::$models, $models);
+    }
+  
+    /**
+     * Registers additional blocks methods
+     *
+     * @param array $methods
+     * @return array
+     */
+    protected function extendBlocksMethods(array $methods): array
+    {
+        return $this->extensions['blockMethods'] = Blocks::$methods = array_merge(Blocks::$methods, $methods);
     }
 
     /**
@@ -360,6 +401,39 @@ trait AppPlugins
     protected function extendMarkdown(Closure $markdown)
     {
         return $this->extensions['markdown'] = $markdown;
+    }
+
+    /**
+     * Registers additional layout methods
+     *
+     * @param array $methods
+     * @return array
+     */
+    protected function extendLayoutMethods(array $methods): array
+    {
+        return $this->extensions['layoutMethods'] = Layout::$methods = array_merge(Layout::$methods, $methods);
+    }
+
+    /**
+     * Registers additional layout column methods
+     *
+     * @param array $methods
+     * @return array
+     */
+    protected function extendLayoutColumnMethods(array $methods): array
+    {
+        return $this->extensions['layoutColumnMethods'] = LayoutColumn::$methods = array_merge(LayoutColumn::$methods, $methods);
+    }
+
+    /**
+     * Registers additional layouts methods
+     *
+     * @param array $methods
+     * @return array
+     */
+    protected function extendLayoutsMethods(array $methods): array
+    {
+        return $this->extensions['layoutsMethods'] = Layouts::$methods = array_merge(Layouts::$methods, $methods);
     }
 
     /**
@@ -693,95 +767,27 @@ trait AppPlugins
      */
     protected function extensionsFromSystem()
     {
-        $root = $this->root('kirby');
+        // mixins
+        FormField::$mixins = $this->core->fieldMixins();
+        Section::$mixins   = $this->core->sectionMixins();
 
-        // load static extensions only once
-        if (static::$systemExtensions === null) {
-            // Form Field Mixins
-            FormField::$mixins['datetime']   = include $root . '/config/fields/mixins/datetime.php';
-            FormField::$mixins['filepicker'] = include $root . '/config/fields/mixins/filepicker.php';
-            FormField::$mixins['min']        = include $root . '/config/fields/mixins/min.php';
-            FormField::$mixins['options']    = include $root . '/config/fields/mixins/options.php';
-            FormField::$mixins['pagepicker'] = include $root . '/config/fields/mixins/pagepicker.php';
-            FormField::$mixins['picker']     = include $root . '/config/fields/mixins/picker.php';
-            FormField::$mixins['upload']     = include $root . '/config/fields/mixins/upload.php';
-            FormField::$mixins['userpicker'] = include $root . '/config/fields/mixins/userpicker.php';
+        // aliases
+        KirbyTag::$aliases = $this->core->kirbyTagAliases();
+        Field::$aliases    = $this->core->fieldMethodAliases();
 
-            // Tag Aliases
-            KirbyTag::$aliases = [
-                'youtube' => 'video',
-                'vimeo'   => 'video'
-            ];
+        // blueprint presets
+        PageBlueprint::$presets = $this->core->blueprintPresets();
 
-            // Field method aliases
-            Field::$aliases = [
-                'bool'    => 'toBool',
-                'esc'     => 'escape',
-                'excerpt' => 'toExcerpt',
-                'float'   => 'toFloat',
-                'h'       => 'html',
-                'int'     => 'toInt',
-                'kt'      => 'kirbytext',
-                'kti'     => 'kirbytextinline',
-                'link'    => 'toLink',
-                'md'      => 'markdown',
-                'sp'      => 'smartypants',
-                'v'       => 'isValid',
-                'x'       => 'xml'
-            ];
-
-            // blueprint presets
-            PageBlueprint::$presets['pages']   = include $root . '/config/presets/pages.php';
-            PageBlueprint::$presets['page']    = include $root . '/config/presets/page.php';
-            PageBlueprint::$presets['files']   = include $root . '/config/presets/files.php';
-
-            // section mixins
-            Section::$mixins['empty']          = include $root . '/config/sections/mixins/empty.php';
-            Section::$mixins['headline']       = include $root . '/config/sections/mixins/headline.php';
-            Section::$mixins['help']           = include $root . '/config/sections/mixins/help.php';
-            Section::$mixins['layout']         = include $root . '/config/sections/mixins/layout.php';
-            Section::$mixins['max']            = include $root . '/config/sections/mixins/max.php';
-            Section::$mixins['min']            = include $root . '/config/sections/mixins/min.php';
-            Section::$mixins['pagination']     = include $root . '/config/sections/mixins/pagination.php';
-            Section::$mixins['parent']         = include $root . '/config/sections/mixins/parent.php';
-
-            // section types
-            Section::$types['info']            = include $root . '/config/sections/info.php';
-            Section::$types['pages']           = include $root . '/config/sections/pages.php';
-            Section::$types['files']           = include $root . '/config/sections/files.php';
-            Section::$types['fields']          = include $root . '/config/sections/fields.php';
-
-            static::$systemExtensions = [
-                'components'   => include $root . '/config/components.php',
-                'blueprints'   => include $root . '/config/blueprints.php',
-                'fields'       => include $root . '/config/fields.php',
-                'fieldMethods' => include $root . '/config/methods.php',
-                'snippets'     => include $root . '/config/snippets.php',
-                'tags'         => include $root . '/config/tags.php',
-                'templates'    => include $root . '/config/templates.php'
-            ];
-        }
-
-        // default auth challenges
-        $this->extendAuthChallenges([
-            'email' => 'Kirby\Cms\Auth\EmailChallenge'
-        ]);
-
-        // default cache types
-        $this->extendCacheTypes([
-            'apcu'      => 'Kirby\Cache\ApcuCache',
-            'file'      => 'Kirby\Cache\FileCache',
-            'memcached' => 'Kirby\Cache\MemCached',
-            'memory'    => 'Kirby\Cache\MemoryCache',
-        ]);
-
-        $this->extendComponents(static::$systemExtensions['components']);
-        $this->extendBlueprints(static::$systemExtensions['blueprints']);
-        $this->extendFields(static::$systemExtensions['fields']);
-        $this->extendFieldMethods((static::$systemExtensions['fieldMethods'])($this));
-        $this->extendSnippets(static::$systemExtensions['snippets']);
-        $this->extendTags(static::$systemExtensions['tags']);
-        $this->extendTemplates(static::$systemExtensions['templates']);
+        $this->extendAuthChallenges($this->core->authChallenges());
+        $this->extendCacheTypes($this->core->cacheTypes());
+        $this->extendComponents($this->core->components());
+        $this->extendBlueprints($this->core->blueprints());
+        $this->extendFields($this->core->fields());
+        $this->extendFieldMethods($this->core->fieldMethods());
+        $this->extendSections($this->core->sections());
+        $this->extendSnippets($this->core->snippets());
+        $this->extendTags($this->core->kirbyTags());
+        $this->extendTemplates($this->core->templates());
     }
 
     /**
@@ -793,7 +799,7 @@ trait AppPlugins
      */
     public function nativeComponent(string $component)
     {
-        return static::$systemExtensions['components'][$component] ?? false;
+        return $this->core->components()[$component] ?? false;
     }
 
     /**

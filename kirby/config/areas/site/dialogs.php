@@ -13,7 +13,8 @@ $files = require __DIR__ . '/../files/dialogs.php';
 return [
 
     // change page position
-    'pages/(:any)/changeSort' => [
+    'page.changeSort' => [
+        'pattern' => 'pages/(:any)/changeSort',
         'load' => function (string $id) {
             $page     = Find::page($id);
             $position = null;
@@ -49,7 +50,8 @@ return [
     ],
 
     // change page status
-    'pages/(:any)/changeStatus' => [
+    'page.changeStatus' => [
+        'pattern' => 'pages/(:any)/changeStatus',
         'load' => function (string $id) {
             $page      = Find::page($id);
             $blueprint = $page->blueprint();
@@ -63,6 +65,22 @@ return [
                     'text'  => $state['label'],
                     'info'  => $state['text'],
                 ];
+            }
+
+            if ($status === 'draft') {
+                $errors = $page->errors();
+
+                // switch to the error dialog if there are
+                // errors and the draft cannot be published
+                if (count($errors) > 0) {
+                    return [
+                        'component' => 'k-error-dialog',
+                        'props'     => [
+                            'message' => t('error.page.changeStatus.incomplete'),
+                            'details' => $errors,
+                        ]
+                    ];
+                }
             }
 
             $fields = [
@@ -105,7 +123,8 @@ return [
     ],
 
     // change template
-    'pages/(:any)/changeTemplate' => [
+    'page.changeTemplate' => [
+        'pattern' => 'pages/(:any)/changeTemplate',
         'load' => function (string $id) {
             $page       = Find::page($id);
             $blueprints = $page->blueprints();
@@ -143,7 +162,8 @@ return [
     ],
 
     // change title
-    'pages/(:any)/changeTitle' => [
+    'page.changeTitle' => [
+        'pattern' => 'pages/(:any)/changeTitle',
         'load' => function (string $id) {
             $page        = Find::page($id);
             $permissions = $page->permissions();
@@ -230,7 +250,8 @@ return [
     ],
 
     // create a new page
-    'pages/create' => [
+    'page.create' => [
+        'pattern' => 'pages/create',
         'load' => function () {
             // the parent model for the new page
             $parent = get('parent', 'site');
@@ -258,7 +279,7 @@ return [
             $blueprints = $view->blueprints($section);
 
             // the pre-selected template
-            $template = null;
+            $template = $blueprints[0]['name'] ?? $blueprints[0]['value'] ?? null;
 
             $fields = [
                 'parent' => Field::hidden(),
@@ -270,16 +291,16 @@ return [
                     'required' => true,
                     'sync'     => 'title',
                     'path'     => empty($model->id()) === false ? '/' . $model->id() . '/' : '/'
-                ])
+                ]),
+                'template' => Field::hidden()
             ];
 
+            // only show template field if > 1 templates available
+            // or when in debug mode
             if (count($blueprints) > 1 || option('debug') === true) {
                 $fields['template'] = Field::template($blueprints, [
                     'required' => true
                 ]);
-
-                // preselect the first available template
-                $template = $fields['template']['options'][0]['value'];
             }
 
             return [
@@ -319,11 +340,13 @@ return [
     ],
 
     // delete page
-    'pages/(:any)/delete' => [
+    'page.delete' => [
+        'pattern' => 'pages/(:any)/delete',
         'load' => function (string $id) {
             $page = Find::page($id);
-            // todo: escape placeholder (output with `v-html`)
-            $text = tt('page.delete.confirm', ['title' => $page->title()->value()]);
+            $text = tt('page.delete.confirm', [
+                'title' => Escape::html($page->title()->value())
+            ]);
 
             if ($page->childrenAndDrafts()->count() > 0) {
                 return [
@@ -347,14 +370,14 @@ return [
                         'theme'        => 'negative',
                     ]
                 ];
-            } else {
-                return [
-                    'component' => 'k-remove-dialog',
-                    'props' => [
-                        'text' => $text
-                    ]
-                ];
             }
+
+            return [
+                'component' => 'k-remove-dialog',
+                'props' => [
+                    'text' => $text
+                ]
+            ];
         },
         'submit' => function (string $id) {
             $page     = Find::page($id);
@@ -383,7 +406,8 @@ return [
     ],
 
     // duplicate page
-    'pages/(:any)/duplicate' => [
+    'page.duplicate' => [
+        'pattern' => 'pages/(:any)/duplicate',
         'load' => function (string $id) {
             $page            = Find::page($id);
             $hasChildren     = $page->hasChildren();
@@ -451,16 +475,29 @@ return [
     ],
 
     // change filename
-    '(site|pages/.*?)/files/(:any)/changeName' => $files['changeName'],
+    'page.file.changeName' => [
+        'pattern' => '(pages/.*?)/files/(:any)/changeName',
+        'load'    => $files['changeName']['load'],
+        'submit'  => $files['changeName']['submit'],
+    ],
 
     // change sort
-    '(site|pages/.*?)/files/(:any)/changeSort' => $files['changeSort'],
+    'page.file.changeSort' => [
+        'pattern' => '(pages/.*?)/files/(:any)/changeSort',
+        'load'    => $files['changeSort']['load'],
+        'submit'  => $files['changeSort']['submit'],
+    ],
 
-    // delete site or page file
-    '(site|pages/.*?)/files/(:any)/delete' => $files['delete'],
+    // delete
+    'page.file.delete' => [
+        'pattern' => '(pages/.*?)/files/(:any)/delete',
+        'load'    => $files['delete']['load'],
+        'submit'  => $files['delete']['submit'],
+    ],
 
     // change site title
-    'site/changeTitle' => [
+    'site.changeTitle' => [
+        'pattern' => 'site/changeTitle',
         'load' => function () {
             return [
                 'component' => 'k-form-dialog',
@@ -484,6 +521,27 @@ return [
                 'event' => 'site.changeTitle',
             ];
         }
+    ],
+
+    // change filename
+    'site.file.changeName' => [
+        'pattern' => '(site)/files/(:any)/changeName',
+        'load'    => $files['changeName']['load'],
+        'submit'  => $files['changeName']['submit'],
+    ],
+
+    // change sort
+    'site.file.changeSort' => [
+        'pattern' => '(site)/files/(:any)/changeSort',
+        'load'    => $files['changeSort']['load'],
+        'submit'  => $files['changeSort']['submit'],
+    ],
+
+    // delete
+    'site.file.delete' => [
+        'pattern' => '(site)/files/(:any)/delete',
+        'load'    => $files['delete']['load'],
+        'submit'  => $files['delete']['submit'],
     ],
 
 ];

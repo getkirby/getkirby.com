@@ -63,6 +63,13 @@ class Page extends Model
      */
     public function dropdown(array $options = []): array
     {
+        $defaults = [
+            'view'   => get('view'),
+            'sort'   => get('sort'),
+            'delete' => get('delete')
+        ];
+
+        $options     = array_merge($defaults, $options);
         $page        = $this->model;
         $permissions = $this->options(['preview']);
         $view        = $options['view'] ?? 'view';
@@ -70,7 +77,7 @@ class Page extends Model
         $result      = [];
 
         if ($view === 'list') {
-            $result[] = [
+            $result['preview'] = [
                 'link'     => $page->previewUrl(),
                 'target'   => '_blank',
                 'icon'     => 'open',
@@ -80,7 +87,7 @@ class Page extends Model
             $result[] = '-';
         }
 
-        $result[] = [
+        $result['changeTitle'] = [
             'dialog' => [
                 'url'   => $url . '/changeTitle',
                 'query' => [
@@ -92,7 +99,7 @@ class Page extends Model
             'disabled' => $this->isDisabledDropdownOption('changeTitle', $options, $permissions)
         ];
 
-        $result[] = [
+        $result['duplicate'] = [
             'dialog'   => $url . '/duplicate',
             'icon'     => 'copy',
             'text'     => t('duplicate'),
@@ -101,7 +108,7 @@ class Page extends Model
 
         $result[] = '-';
 
-        $result[] = [
+        $result['changeSlug'] = [
             'dialog' => [
                 'url'   => $url . '/changeTitle',
                 'query' => [
@@ -113,23 +120,23 @@ class Page extends Model
             'disabled' => $this->isDisabledDropdownOption('changeSlug', $options, $permissions)
         ];
 
-        $result[] = [
+        $result['changeStatus'] = [
             'dialog'   => $url . '/changeStatus',
             'icon'     => 'preview',
             'text'     => t('page.changeStatus'),
             'disabled' => $this->isDisabledDropdownOption('changeStatus', $options, $permissions)
         ];
 
-        if ($view === 'list') {
-            $result[] = [
-                'dialog'   => $url . '/changeSort',
-                'icon'     => 'sort',
-                'text'     => t('page.sort'),
-                'disabled' => $this->isDisabledDropdownOption('sort', $options, $permissions)
-            ];
-        }
+        $siblings = $page->parentModel()->children()->listed()->not($page);
 
-        $result[] = [
+        $result['changeSort'] = [
+            'dialog'   => $url . '/changeSort',
+            'icon'     => 'sort',
+            'text'     => t('page.sort'),
+            'disabled' => $siblings->count() === 0 || $this->isDisabledDropdownOption('sort', $options, $permissions)
+        ];
+
+        $result['changeTemplate'] = [
             'dialog'   => $url . '/changeTemplate',
             'icon'     => 'template',
             'text'     => t('page.changeTemplate'),
@@ -137,7 +144,7 @@ class Page extends Model
         ];
 
         $result[] = '-';
-        $result[] = [
+        $result['delete'] = [
             'dialog'   => $url . '/delete',
             'icon'     => 'trash',
             'text'     => t('delete'),
@@ -322,6 +329,7 @@ class Page extends Model
                 'model' => [
                     'content'    => $this->content(),
                     'id'         => $page->id(),
+                    'link'       => $this->url(true),
                     'parent'     => $page->parentModel()->panel()->url(true),
                     'previewUrl' => $page->previewUrl(),
                     'status'     => $page->status(),
@@ -338,13 +346,13 @@ class Page extends Model
 
     /**
      * Returns the data array for
-     * this model's Panel routes
+     * this model's Panel view
      *
      * @internal
      *
      * @return array
      */
-    public function route(): array
+    public function view(): array
     {
         $page = $this->model;
 
