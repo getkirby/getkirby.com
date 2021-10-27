@@ -101,6 +101,13 @@ class File extends Model
      */
     public function dropdown(array $options = []): array
     {
+        $defaults = [
+            'view'   => get('view'),
+            'update' => get('update'),
+            'delete' => get('delete')
+        ];
+
+        $options     = array_merge($defaults, $options);
         $file        = $this->model;
         $permissions = $this->options(['preview']);
         $view        = $options['view'] ?? 'view';
@@ -315,13 +322,15 @@ class File extends Model
      */
     public function props(): array
     {
-        $file     = $this->model;
-        $siblings = $file->templateSiblings()->sortBy(
+        $file       = $this->model;
+        $dimensions = $file->dimensions();
+        $siblings   = $file->templateSiblings()->sortBy(
             'sort',
             'asc',
             'filename',
             'asc'
         );
+
 
         return array_merge(
             parent::props(),
@@ -330,18 +339,51 @@ class File extends Model
                 'blueprint' => $this->model->template() ?? 'default',
                 'model' => [
                     'content'    => $this->content(),
-                    'dimensions' => $file->dimensions()->toArray(),
+                    'dimensions' => $dimensions->toArray(),
                     'extension'  => $file->extension(),
                     'filename'   => $file->filename(),
-                    'id'         => $file->id(),
+                    'link'       => $this->url(true),
                     'mime'       => $file->mime(),
                     'niceSize'   => $file->niceSize(),
+                    'id'         => $id = $file->id(),
                     'parent'     => $file->parent()->panel()->path(),
-                    'panelImage' => $this->image([], 'cards'),
-                    'previewUrl' => $file->previewUrl(),
-                    'url'        => $file->url(),
                     'template'   => $file->template(),
                     'type'       => $file->type(),
+                    'url'        => $file->url(),
+                ],
+                'preview' => [
+                    'image'   => $this->image([
+                        'back'  => 'transparent',
+                        'ratio' => '1/1'
+                    ], 'cards'),
+                    'url'     => $url = $file->previewUrl(),
+                    'details' => [
+                        [
+                            'title' => t('template'),
+                            'text'  => $file->template() ?? '—'
+                        ],
+                        [
+                            'title' => t('mime'),
+                            'text'  => $file->mime()
+                        ],
+                        [
+                            'title' => t('url'),
+                            'text'  => $id,
+                            'link'  => $url
+                        ],
+                        [
+                            'title' => t('size'),
+                            'text'  => $file->niceSize()
+                        ],
+                        [
+                            'title' => t('dimensions'),
+                            'text'  => $file->type() === 'image' ? $file->dimensions() . ' ' . t('pixel') : '—'
+                        ],
+                        [
+                            'title' => t('orientation'),
+                            'text'  => $file->type() === 'image' ? t('orientation.' . $dimensions->orientation()) : '—'
+                        ],
+                    ]
                 ]
             ]
         );
@@ -376,16 +418,28 @@ class File extends Model
             }
         ];
     }
+    /**
+     * Returns the url to the editing view
+     * in the panel
+     *
+     * @param bool $relative
+     * @return string
+     */
+    public function url(bool $relative = false): string
+    {
+        $parent = $this->model->parent()->panel()->url($relative);
+        return $parent . '/' . $this->path();
+    }
 
     /**
      * Returns the data array for
-     * this model's Panel routes
+     * this model's Panel view
      *
      * @internal
      *
      * @return array
      */
-    public function route(): array
+    public function view(): array
     {
         $file = $this->model;
 
@@ -398,18 +452,5 @@ class File extends Model
             'search'    => 'files',
             'title'     => $file->filename(),
         ];
-    }
-
-    /**
-     * Returns the url to the editing view
-     * in the panel
-     *
-     * @param bool $relative
-     * @return string
-     */
-    public function url(bool $relative = false): string
-    {
-        $parent = $this->model->parent()->panel()->url($relative);
-        return $parent . '/' . $this->path();
     }
 }

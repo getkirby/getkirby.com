@@ -5,13 +5,15 @@ use Kirby\Cms\UserRules;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Panel\Field;
 use Kirby\Panel\Panel;
+use Kirby\Toolkit\Escape;
 
 $files = require __DIR__ . '/../files/dialogs.php';
 
 return [
 
     // create
-    'users/create' => [
+    'user.create' => [
+        'pattern' => 'users/create',
         'load' => function () {
             $kirby = kirby();
             return [
@@ -57,7 +59,8 @@ return [
     ],
 
     // change email
-    'users/(:any)/changeEmail' => [
+    'user.changeEmail' => [
+        'pattern' => 'users/(:any)/changeEmail',
         'load' => function (string $id) {
             $user = Find::user($id);
 
@@ -88,7 +91,8 @@ return [
     ],
 
     // change language
-    'users/(:any)/changeLanguage' => [
+    'user.changeLanguage' => [
+        'pattern' => 'users/(:any)/changeLanguage',
         'load' => function (string $id) {
             $user = Find::user($id);
 
@@ -96,17 +100,17 @@ return [
                 'component' => 'k-form-dialog',
                 'props' => [
                     'fields' => [
-                        'language' => Field::translation(['required' => true])
+                        'translation' => Field::translation(['required' => true])
                     ],
                     'submitButton' => t('change'),
                     'value' => [
-                        'language' => $user->language()
+                        'translation' => $user->language()
                     ]
                 ]
             ];
         },
         'submit' => function (string $id) {
-            Find::user($id)->changeLanguage(get('language'));
+            Find::user($id)->changeLanguage(get('translation'));
 
             return [
                 'event'  => 'user.changeLanguage',
@@ -118,7 +122,8 @@ return [
     ],
 
     // change name
-    'users/(:any)/changeName' => [
+    'user.changeName' => [
+        'pattern' => 'users/(:any)/changeName',
         'load' => function (string $id) {
             $user = Find::user($id);
 
@@ -147,7 +152,8 @@ return [
     ],
 
     // change password
-    'users/(:any)/changePassword' => [
+    'user.changePassword' => [
+        'pattern' => 'users/(:any)/changePassword',
         'load' => function (string $id) {
             $user = Find::user($id);
 
@@ -172,7 +178,7 @@ return [
             $passwordConfirmation = get('passwordConfirmation');
 
             // validate the password
-            UserRules::validPassword($user, $password);
+            UserRules::validPassword($user, $password ?? '');
 
             // compare passwords
             if ($password !== $passwordConfirmation) {
@@ -191,7 +197,8 @@ return [
     ],
 
     // change role
-    'users/(:any)/changeRole' => [
+    'user.changeRole' => [
+        'pattern' => 'users/(:any)/changeRole',
         'load' => function (string $id) {
             $user = Find::user($id);
 
@@ -222,16 +229,16 @@ return [
     ],
 
     // delete
-    'users/(:any)/delete' => [
+    'user.delete' => [
+        'pattern' => 'users/(:any)/delete',
         'load' => function (string $id) {
             $user = Find::user($id);
 
             return [
                 'component' => 'k-remove-dialog',
                 'props' => [
-                    // todo: escape placeholder (output with `v-html`)
                     'text' => tt('user.delete.confirm', [
-                        'email' => $user->email()
+                        'email' => Escape::html($user->email())
                     ])
                 ]
             ];
@@ -264,12 +271,24 @@ return [
     ],
 
     // change file name
-    '(users/.*?)/files/(:any)/changeName' => $files['changeName'],
+    'user.file.changeName' => [
+        'pattern' => '(users/.*?)/files/(:any)/changeName',
+        'load'    => $files['changeName']['load'],
+        'submit'  => $files['changeName']['submit'],
+    ],
 
     // change file sort
-    '(users/.*?)/files/(:any)/changeSort' => $files['changeSort'],
+    'user.file.changeSort' => [
+        'pattern' => '(users/.*?)/files/(:any)/changeSort',
+        'load'    => $files['changeSort']['load'],
+        'submit'  => $files['changeSort']['submit'],
+    ],
 
     // delete file
-    '(users/.*?)/files/(:any)/delete' => $files['delete'],
+    'user.file.delete' => [
+        'pattern' => '(users/.*?)/files/(:any)/delete',
+        'load'    => $files['delete']['load'],
+        'submit'  => $files['delete']['submit'],
+    ]
 
 ];

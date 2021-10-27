@@ -88,6 +88,19 @@ class User extends Model
     }
 
     /**
+     * @return string|null
+     */
+    public function home(): ?string
+    {
+        if ($home = ($this->model->blueprint()->home() ?? null)) {
+            $url = $this->model->toString($home);
+            return url($url);
+        }
+
+        return Panel::url('site');
+    }
+
+    /**
      * Default settings for the user's Panel image
      *
      * @return array
@@ -190,30 +203,13 @@ class User extends Model
                     'email'    => $user->email(),
                     'id'       => $user->id(),
                     'language' => $this->translation()->name(),
+                    'link'     => $this->url(true),
                     'name'     => $user->name()->toString(),
                     'role'     => $user->role()->title(),
                     'username' => $user->username(),
                 ]
             ]
         );
-    }
-
-    /**
-     * Returns the data array for
-     * this model's Panel routes
-     *
-     * @internal
-     *
-     * @return array
-     */
-    public function route(): array
-    {
-        return [
-            'breadcrumb' => $this->breadcrumb(),
-            'component'  => 'k-user-view',
-            'props'      => $this->props(),
-            'title'      => $this->model->username(),
-        ];
     }
 
     /**
@@ -227,5 +223,23 @@ class User extends Model
         $kirby = $this->model->kirby();
         $lang  = $this->model->language();
         return $kirby->translation($lang);
+    }
+
+    /**
+     * Returns the data array for
+     * this model's Panel view
+     *
+     * @internal
+     *
+     * @return array
+     */
+    public function view(): array
+    {
+        return [
+            'breadcrumb' => $this->breadcrumb(),
+            'component'  => 'k-user-view',
+            'props'      => $this->props(),
+            'title'      => $this->model->username(),
+        ];
     }
 }
