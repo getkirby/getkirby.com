@@ -1,0 +1,63 @@
+Title: Slug
+
+----
+
+Intro:
+
+A phone number input field
+
+----
+
+Guide: blueprints/fields
+
+----
+
+Text:
+
+The slug field creates a text input that automatically sanitizes the typed value with our built-in sluggify method. It's perfect if you want to create IDs or class names for HTML elements or paths for files or URLs.
+
+## Example
+
+```yaml
+fields:
+  className:
+    label: Class
+    type: slug
+```
+
+## Field properties
+
+(field-options: slug)
+
+## How to use in templates/snippets
+
+```php
+<div class="<?= $page->className() ?>">
+  <!-- -->
+</div>
+```
+
+## Sync option
+
+You can sync the slug field with another field. Whenever the editor types something into the synced field, the slug field will update with a sluggified version of the input:
+
+```yaml
+fields:
+  className:
+    label: Class Name
+    type: slug
+    sync: title
+```
+
+## Allow option
+
+By default, the slug field will strip out or replace any non-alphabetic, non-numeric character with a simple dash. You can define additional allowed characters with the allow option:
+
+```yaml
+fields:
+  className:
+    label: Class Name
+    type: slug
+    sync: title
+    allow: _
+```
