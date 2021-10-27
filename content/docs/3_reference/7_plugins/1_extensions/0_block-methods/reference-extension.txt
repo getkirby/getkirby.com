@@ -2,6 +2,10 @@ Title: Block methods
 
 ----
 
+Since: 3.6.0
+
+----
+
 Text:
 
 Block methods are registered with the `blockMethods` extension.
