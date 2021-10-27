@@ -30,7 +30,7 @@ image:
 image:
   back: "purple-400"
 ```
-Check out the (link: releases/3.6/features/custom-properties text: list of our color properties) for available options.
+Check out the (link: releases/3.6/features/custom-css-properties text: list of our color properties) for available options.
 
 ### Hex codes
 
