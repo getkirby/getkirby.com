@@ -1,0 +1,55 @@
+Title: Block models
+
+----
+
+Text:
+
+Block models are registered with the `blockModels` extension.
+
+Block models extend Kirby's default `Kirby\Cms\Block` object. Methods that you define in a block model are available everywhere in Kirby where you work with a block of the extended type.
+
+
+## Creating a custom block model
+
+```php "/site/plugins/block-models/index.php"
+use Kirby\Cms\Block;
+
+class HeadingBlock extends Block
+{
+    public function toHtml(): string
+    {
+        return '<h1>Custom HTML for headings</h1>';
+    }
+}
+
+Kirby::plugin('my/blockModels', [
+    'blockModels' => [
+        'heading' => HeadingBlock::class
+    ]
+]);
+```
+
+## Overwriting the default block class
+
+You can also overwrite the default `Kirby\Cms\Block` model with a custom class.
+
+```php "/site/plugins/block-models/index.php"
+use Kirby\Cms\Block;
+
+class DefaultBlock extends Block
+{
+    public function id(): string
+    {
+        return 'block-' . parent::id();
+    }
+}
+
+Kirby::plugin('my/blockModels', [
+    'blockModels' => [
+        'Kirby\\Cms\\Block' => DefaultBlock::class,
+    ]
+]);
+```
+
+
+
