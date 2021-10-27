@@ -26,7 +26,7 @@ return [
 ];
 ```
 
-It's recommended to remove this setting after the installation on your remote server is complete. 
+It's recommended to remove this setting after the installation on your remote server is complete.
 
 
 ## Moving the Panel to a different URL
@@ -80,6 +80,20 @@ return [
 ];
 ```
 
+<since v="3.6.0">
+## Custom Panel Favicon
+
+To offer a full white-label solution for your customers, you can even set a custom favicon for the Panel.
+
+```php "/site/config/config.php"
+return [
+  'panel' => [
+    'favicon' => 'assets/favicon.ico'
+  ]
+];
+```
+</since>
+
 ## Default Panel language
 
 You can set the default Panel language that is used before a user logs in or when the user does not have a valid language configured:
@@ -121,17 +135,17 @@ return [
                 if($file->extension() === 'jpg') {
                     return sprintf('(\screenshot: %s)', $url);
                 }
-        
+
                 if($file->type() === 'video') {
                     return sprintf('(\video: %s loop: true)', $url);
                 }
-        
+
                 return null;
             },
             'pageDragText' => function (\Kirby\Cms\Page $page) {
                 return sprintf('Check out this great page: %s', $page->url());
             },
-            
+
         ],
     ],
 ];
