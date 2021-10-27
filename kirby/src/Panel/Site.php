@@ -54,21 +54,22 @@ class Site extends Model
             'blueprint' => 'site',
             'model' => [
                 'content'    => $this->content(),
+                'link'       => $this->url(true),
                 'previewUrl' => $this->model->previewUrl(),
-                'title'      => $this->model->title()->toString()
+                'title'      => $this->model->title()->toString(),
             ]
         ]);
     }
 
     /**
      * Returns the data array for
-     * this model's Panel routes
+     * this model's Panel view
      *
      * @internal
      *
      * @return array
      */
-    public function route(): array
+    public function view(): array
     {
         return [
             'component' => 'k-site-view',
