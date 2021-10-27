@@ -1,0 +1,88 @@
+Title: Email
+
+----
+
+Since: 3.6.0
+
+----
+
+Text:
+
+You integrate your own email providers (sendgrid, mailgun, mailchimp, sparkpost, etc) instead of using Kirby's default PHPMailer library.
+
+```php
+class CustomEmailProvider extends Kirby\Email\Email
+{
+    public function send(bool $debug = false): bool
+    {
+        // sending stuff
+        return true;
+    }
+}
+
+Kirby::plugin('my/email', [
+    'components' => [
+        'email' => function ($kirby, $props, $debug) {
+            return new CustomEmailProvider($props, $debug);
+        }
+    ]
+]);
+```
+
+## SendGrid example
+
+```php
+class SendGridProvider extends Kirby\Email\Email
+{
+    public function send(): bool
+    {
+        $sendgrid = new SendGrid("SENDGRID_APIKEY");
+        $email    = new SendGrid\Email();
+
+        $email->addTo(current(array_keys($this->to())))
+              ->setFrom($this->from())
+              ->setSubject($this->subject())
+              ->setHtml($this->body()->html());
+
+        return $sendgrid->send($email);
+    }
+}
+
+Kirby::plugin('my/sendgrid', [
+    'components' => [
+        'email' => function ($kirby, $props, $debug) {
+            return new SendGridProvider($props, $debug);
+        }
+    ]
+]);
+```
+
+## Mailgun Example
+
+```php
+class MailgunProvider extends Kirby\Email\Email
+{
+    public function send(): bool
+    {
+        $mg = Mailgun\Mailgun::create('key-example'); // For US servers
+        $mg = Mailgun\Mailgun::create('key-example', 'https://api.eu.mailgun.net'); // For EU servers
+
+        return $mg->messages()->send('example.com', [
+          'from'    => $this->from(),
+          'to'      => current(array_keys($this->to())),
+          'subject' => $this->subject(),
+          'text'    => $this->body()->text()
+        ]);
+    }
+}
+
+Kirby::plugin('my/mailgun', [
+    'components' => [
+        'email' => function ($kirby, $props, $debug) {
+            return new MailgunProvider($props, $debug);
+        }
+    ]
+]);
+```
+
+
