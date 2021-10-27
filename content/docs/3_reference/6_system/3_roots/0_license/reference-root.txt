@@ -1,0 +1,5 @@
+Title: license
+
+----
+
+Intro: Returns the absolute path to the license file
