@@ -1,0 +1,9 @@
+Title: line
+
+----
+
+Since: 3.6.0
+
+----
+
+Intro: A separating line (hr)
