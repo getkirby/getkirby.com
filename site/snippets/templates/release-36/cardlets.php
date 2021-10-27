@@ -13,22 +13,22 @@
     [
       'title' => 'Copy & paste for blocks',
       'text' => 'With 3.6, you can now copy and paste blocks between block and layout fields and even import blocks from HTML or text. This lifts the blocks field on an entirely new level in terms of usability.',
-      'link' => '/releases/3.6/features/copy-paste'
+      'link' => '/releases/3.6/features/copy-paste-for-blocks'
     ],
     [
       'title' => 'New formats for the writer field',
       'text' => 'Enable headings and list block formats for your writer fields and simplify WYSIWYG editing for your users.',
-      'link' => '/releases/3.6/features/writer'
+      'link' => '/releases/3.6/features/new-formats-for-the-writer-field'
     ],
     [
       'title' => 'New icons',
       'text' => 'Select from 48 brand new icons. Improve your fields, plugins and more with recognizable visuals.',
-      'link' => '/releases/3.6/features/icons'
+      'link' => '/releases/3.6/features/new-icons'
     ],
     [
       'title' => 'CSS variables',
       'text' => 'Every little detail of the Panel is now defined as a CSS variable. What’s great about that? You can overwrite our variables in your panel.css. Custom Panel themes just got so much easier.',
-      'link' => '/releases/3.6/features/custom-properties'
+      'link' => '/releases/3.6/features/custom-css-properties'
     ],
     [
       'title' => 'It’s all in the details',
