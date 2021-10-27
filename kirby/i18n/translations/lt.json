@@ -1,5 +1,6 @@
 {
   "add": "Pridėti",
+  "author": "Author",
   "avatar": "Profilio nuotrauka",
   "back": "Atgal",
   "cancel": "Atšaukti",
@@ -9,6 +10,7 @@
   "collapse": "Sutraukti",
   "collapse.all": "Sutraukti viską",
   "copy": "Kopijuoti",
+  "copy.all": "Kopijuoti visus",
   "create": "Sukurti",
 
   "date": "Data",
@@ -23,23 +25,27 @@
   "days.tue": "Ant",
   "days.wed": "Tre",
 
+  "debugging": "Debugging",
+
   "delete": "Pašalinti",
   "delete.all": "Pašalinti viską",
-  "dimensions": "Išmatavimai",
-  "disabled": "Išjungta",
-  "discard": "Atšaukti",
-  "download": "Parsisiųsti",
-  "duplicate": "Kopijuoti",
-  "edit": "Redaguoti",
-  "expand": "Išskleisti",
-  "expand.all": "Išskleisti viską",
 
   "dialog.files.empty": "Nėra failų pasirinkimui",
   "dialog.pages.empty": "Nėra puslapių pasirinkimui",
   "dialog.users.empty": "Nėra vartotojų pasirinkimui",
 
+  "dimensions": "Išmatavimai",
+  "disabled": "Išjungta",
+  "discard": "Atšaukti",
+  "download": "Parsisiųsti",
+  "duplicate": "Dublikuoti",
+
+  "edit": "Redaguoti",
+
   "email": "El. paštas",
   "email.placeholder": "mail@example.com",
+
+  "environment": "Environment",
 
   "error.access.code": "Neteisinas kodas",
   "error.access.login": "Neteisingas prisijungimo vardas",
@@ -92,6 +98,7 @@
   "error.language.code": "Prašome įrašyti teisingą kalbos kodą",
   "error.language.duplicate": "Tokia kalba jau yra",
   "error.language.name": "Prašome įrašyti teisingą kalbos pavadinimą",
+  "error.language.notFound": "Nepavyko rasti šios kalbos",
 
   "error.layout.validation.block": "Yra klaida bloke {blockIndex} išdėstyme {layoutIndex}",
   "error.layout.validation.settings": "Yra klaida išdėstymo {index} nustatymuose",
@@ -165,6 +172,7 @@
   "error.user.password.undefined": "Vartotojas neturi slaptažodžio",
   "error.user.password.wrong": "Neteisingas slaptažodis",
   "error.user.role.invalid": "Įrašykite teisingą rolę",
+  "error.user.undefined": "Vartotojas nerastas",
   "error.user.update.permission": "Neturite teisės keisti vartotojo \"{name}\"",
 
   "error.validation.accepted": "Prašome patvirtinti",
@@ -208,6 +216,9 @@
   "error.validation.time.between": "Įrašykite laiką tarp {min} ir {max}",
   "error.validation.url": "Prašome įrašyti teisingą URL",
 
+  "expand": "Išskleisti",
+  "expand.all": "Išskleisti viską",
+
   "field.required": "Laukas privalomas",
   "field.blocks.changeType": "Pakeisti tipą",
   "field.blocks.code.name": "Kodas",
@@ -218,6 +229,7 @@
   "field.blocks.delete.confirm.selected": "Ar tikrai norite pašalinti pasirinktus blokus?",
   "field.blocks.empty": "Dar nėra blokų",
   "field.blocks.fieldsets.label": "Pasirinkite bloko tipą ...",
+  "field.blocks.fieldsets.paste": "Spauskite <kbd>{{ shortcut }}</kbd> įterpti/importuoti nukopijuotus blokus",
   "field.blocks.gallery.name": "Galerija",
   "field.blocks.gallery.images.empty": "Dar nėra nuotraukų",
   "field.blocks.gallery.images.label": "Nuotraukos",
@@ -234,6 +246,7 @@
   "field.blocks.image.placeholder": "Pasirinkite nuotrauką",
   "field.blocks.image.ratio": "Proporcijos",
   "field.blocks.image.url": "Nuotraukos URL",
+  "field.blocks.line.name": "Linija",
   "field.blocks.list.name": "Sąrašas",
   "field.blocks.markdown.name": "Markdown",
   "field.blocks.markdown.label": "Tekstas",
@@ -263,7 +276,7 @@
   "field.structure.empty": "Dar nėra įrašų",
   "field.users.empty": "Dar nėra vartotojų",
 
-  "file.blueprint": "Šis failas dar neturi blueprint. Jūs galite nustatyti jį <strong>/site/blueprints/{template}.yml</strong>",
+  "file.blueprint": "Šis failas dar neturi blueprint. Galite nustatyti jį per <strong>/site/blueprints/files/{blueprint}.yml</strong>",
   "file.delete.confirm": "Ar tikrai norite pašalinti <br><strong>{filename}</strong>?",
   "file.sort": "Pakeisti poziciją",
 
@@ -272,6 +285,7 @@
 
   "hide": "Paslėpti",
   "hour": "Valanda",
+  "import": "Importuoti",
   "insert": "Įterpti",
   "insert.after": "Įterpti po",
   "insert.before": "Įterpti prieš",
@@ -337,9 +351,9 @@
   "login.code.label.password-reset": "Slaptažodžio atstatymo kodas",
   "login.code.placeholder.email": "000 000",
   "login.code.text.email": "Jei jūsų el. paštas yra užregistruotas, užklaistas kodas buvo išsiųstas el. paštu.",
-  "login.email.login.body": "Sveiki, {user.nameOrEmail},\n\nJūs ką tik užklausėte prisijungimo kodą svetainės valdymui.\nŠis kodas galios {timeout} minučių:\n\n{code}\n\nJei neprašėte šio kodo, galite ignoruoti šį laišką arba kreiptis į administratorių dėl patikslinimo.\nDėl saugumo, prašome nepersiųsti šio laiško kitiems.",
+  "login.email.login.body": "Sveiki, {user.nameOrEmail},\n\nNeseniai užklausėte prisijungimo kodo svetainėje {site}.\nŠis kodas galios {timeout} min.:\n\n{code}\n\nJei neprašėte šio kodo, tiesiog ignoruokite, arba susisiekite su administratoriumi.\nDėl saugumo, prašome NEPERSIŲSTI šio laiško.",
   "login.email.login.subject": "Jūsų prisijungimo kodas",
-  "login.email.password-reset.body": "Sveiki, {user.nameOrEmail},\n\njūs ką tik užklausėte slaptažodžio atstatymo kodą svetainės valdymui .\nŠis kodas galios {timeout} minučių:\n\n{code}\n\nJei neprašėte šio kodo, galite ignoruoti šį laišką arba kreiptis į administratorių dėl patikslinimo.\nDėl saugumo, prašome nepersiųsti šio laiško kitiems.",
+  "login.email.password-reset.body": "Sveiki, {user.nameOrEmail},\n\nNeseniai užklausėte naujo slaptažodžio kūrimo kodo svetainėje {site}.\nŠis kodas galios {timeout} min.:\n\n{code}\n\nJei neprašėte šio kodo, tiesiog ignoruokite, arba susisiekite su administratoriumi.\nDėl saugumo, prašome NEPERSIŲSTI šio laiško",
   "login.email.password-reset.subject": "Jūsų slaptažodžio atstatymo kodas ",
   "login.remember": "Likti prisijungus",
   "login.reset": "Sukurti naują slaptažodį",
@@ -373,8 +387,8 @@
   "name": "Pavadinimas",
   "next": "Toliau",
   "no": "ne",
-  "off": "off",
-  "on": "on",
+  "off": "ne",
+  "on": "taip",
   "open": "Atidaryti",
   "open.newWindow": "Atidaryti naujame lange",
   "options": "Pasirinkimai",
@@ -385,7 +399,7 @@
   "orientation.portrait": "Portretas",
   "orientation.square": "Kvadratas",
 
-  "page.blueprint": "Šis puslapis dar neturi blueprint. Jūs galite nustatyti jį <strong>/site/blueprints/{template}.yml</strong>",
+  "page.blueprint": "Šis puslapis dar neturi blueprint. Galite jį nustatyti per <strong>/site/blueprints/pages/{blueprint}.yml</strong>",
   "page.changeSlug": "Pakeisti URL",
   "page.changeSlug.fromTitle": "Sukurti URL pagal pavadinimą",
   "page.changeStatus": "Pakeisti statusą",
@@ -417,7 +431,10 @@
   "pagination.page": "Puslapis",
 
   "password": "Slaptažodis",
+  "paste": "Įterpti",
+  "paste.after": "Įterpti po",
   "pixel": "Pikselis",
+  "plugins": "Plugins",
   "prev": "Ankstesnis",
   "preview": "Peržiūra",
   "remove": "Pašalinti",
@@ -454,6 +471,8 @@
   "template": "Puslapio šablonas",
   "today": "Šiandien",
 
+  "server": "Server",
+
   "site.blueprint": "Svetainė neturi blueprint. Jūs galite nustatyti jį <strong>/site/blueprints/site.yml</strong>",
 
   "toolbar.button.code": "Kodas",
@@ -463,11 +482,15 @@
   "toolbar.button.heading.1": "Heading 1",
   "toolbar.button.heading.2": "Heading 2",
   "toolbar.button.heading.3": "Heading 3",
+  "toolbar.button.heading.4": "Antrašte 4",
+  "toolbar.button.heading.5": "Antrašte 5",
+  "toolbar.button.heading.6": "Antrašte 6",
   "toolbar.button.italic": "Italic",
   "toolbar.button.file": "Failas",
   "toolbar.button.file.select": "Pasirinkite failą",
   "toolbar.button.file.upload": "Įkelti failą",
   "toolbar.button.link": "Nuoroda",
+  "toolbar.button.paragraph": "Paragrafas",
   "toolbar.button.strike": "Perbraukimas",
   "toolbar.button.ol": "Sąrašas su skaičiais",
   "toolbar.button.underline": "Pabraukimas",
@@ -497,7 +520,7 @@
   "url.placeholder": "https://example.com",
 
   "user": "Vartotojas",
-  "user.blueprint": "Galite nustatyti papildomas sekcijas ir formos laukelius šiai vartotojo rolei faile <strong>/site/blueprints/users/{role}.yml</strong>",
+  "user.blueprint": "Galite nustatyti papildomas sekcijas ir formos laukelius šiam vartotojui per <strong>/site/blueprints/users/{blueprint}.yml</strong>",
   "user.changeEmail": "Keisti el. paštą",
   "user.changeLanguage": "Keisti kalbą",
   "user.changeName": "Pervadinti vartotoją",
@@ -516,9 +539,10 @@
 
   "view.account": "Jūsų paskyra",
   "view.installation": "Installation",
+  "view.languages": "Kalbos",
   "view.resetPassword": "Sukurti naują slaptažodį",
-  "view.settings": "Nustatymai",
   "view.site": "Svetainė",
+  "view.system": "System",
   "view.users": "Vartotojai",
 
   "welcome": "Sveiki",

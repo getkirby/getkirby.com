@@ -7,7 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
 {
     public static $files = array (
-        '7e9bd612cc444b3eed788ebbe46263a0' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/autoload.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '04c6c5c2f7095ccf6c481d3e53e1776f' => __DIR__ . '/..' . '/mustangostang/spyc/Spyc.php',
         'f864ae44e8154e5ff6f4eec32f46d37f' => __DIR__ . '/../..' . '/config/setup.php',
@@ -34,7 +33,6 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         ),
         'L' => 
         array (
-            'Laminas\\ZendFrameworkBridge\\' => 28,
             'Laminas\\Escaper\\' => 16,
         ),
         'K' => 
@@ -63,10 +61,6 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
-        ),
-        'Laminas\\ZendFrameworkBridge\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src',
         ),
         'Laminas\\Escaper\\' => 
         array (
@@ -133,6 +127,7 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Cms\\ContentLock' => __DIR__ . '/../..' . '/src/Cms/ContentLock.php',
         'Kirby\\Cms\\ContentLocks' => __DIR__ . '/../..' . '/src/Cms/ContentLocks.php',
         'Kirby\\Cms\\ContentTranslation' => __DIR__ . '/../..' . '/src/Cms/ContentTranslation.php',
+        'Kirby\\Cms\\Core' => __DIR__ . '/../..' . '/src/Cms/Core.php',
         'Kirby\\Cms\\Email' => __DIR__ . '/../..' . '/src/Cms/Email.php',
         'Kirby\\Cms\\Event' => __DIR__ . '/../..' . '/src/Cms/Event.php',
         'Kirby\\Cms\\Field' => __DIR__ . '/../..' . '/src/Cms/Field.php',
@@ -165,6 +160,7 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Cms\\LayoutColumn' => __DIR__ . '/../..' . '/src/Cms/LayoutColumn.php',
         'Kirby\\Cms\\LayoutColumns' => __DIR__ . '/../..' . '/src/Cms/LayoutColumns.php',
         'Kirby\\Cms\\Layouts' => __DIR__ . '/../..' . '/src/Cms/Layouts.php',
+        'Kirby\\Cms\\Loader' => __DIR__ . '/../..' . '/src/Cms/Loader.php',
         'Kirby\\Cms\\Media' => __DIR__ . '/../..' . '/src/Cms/Media.php',
         'Kirby\\Cms\\Model' => __DIR__ . '/../..' . '/src/Cms/Model.php',
         'Kirby\\Cms\\ModelPermissions' => __DIR__ . '/../..' . '/src/Cms/ModelPermissions.php',
@@ -292,6 +288,7 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Panel\\Dropdown' => __DIR__ . '/../..' . '/src/Panel/Dropdown.php',
         'Kirby\\Panel\\Field' => __DIR__ . '/../..' . '/src/Panel/Field.php',
         'Kirby\\Panel\\File' => __DIR__ . '/../..' . '/src/Panel/File.php',
+        'Kirby\\Panel\\Home' => __DIR__ . '/../..' . '/src/Panel/Home.php',
         'Kirby\\Panel\\Json' => __DIR__ . '/../..' . '/src/Panel/Json.php',
         'Kirby\\Panel\\Model' => __DIR__ . '/../..' . '/src/Panel/Model.php',
         'Kirby\\Panel\\Page' => __DIR__ . '/../..' . '/src/Panel/Page.php',
@@ -308,7 +305,9 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Parsley\\Schema' => __DIR__ . '/../..' . '/src/Parsley/Schema.php',
         'Kirby\\Parsley\\Schema\\Blocks' => __DIR__ . '/../..' . '/src/Parsley/Schema/Blocks.php',
         'Kirby\\Parsley\\Schema\\Plain' => __DIR__ . '/../..' . '/src/Parsley/Schema/Plain.php',
+        'Kirby\\Sane\\DomHandler' => __DIR__ . '/../..' . '/src/Sane/DomHandler.php',
         'Kirby\\Sane\\Handler' => __DIR__ . '/../..' . '/src/Sane/Handler.php',
+        'Kirby\\Sane\\Html' => __DIR__ . '/../..' . '/src/Sane/Html.php',
         'Kirby\\Sane\\Sane' => __DIR__ . '/../..' . '/src/Sane/Sane.php',
         'Kirby\\Sane\\Svg' => __DIR__ . '/../..' . '/src/Sane/Svg.php',
         'Kirby\\Sane\\Svgz' => __DIR__ . '/../..' . '/src/Sane/Svgz.php',
@@ -328,6 +327,7 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Toolkit\\Component' => __DIR__ . '/../..' . '/src/Toolkit/Component.php',
         'Kirby\\Toolkit\\Config' => __DIR__ . '/../..' . '/src/Toolkit/Config.php',
         'Kirby\\Toolkit\\Controller' => __DIR__ . '/../..' . '/src/Toolkit/Controller.php',
+        'Kirby\\Toolkit\\Dom' => __DIR__ . '/../..' . '/src/Toolkit/Dom.php',
         'Kirby\\Toolkit\\Escape' => __DIR__ . '/../..' . '/src/Toolkit/Escape.php',
         'Kirby\\Toolkit\\Facade' => __DIR__ . '/../..' . '/src/Toolkit/Facade.php',
         'Kirby\\Toolkit\\Html' => __DIR__ . '/../..' . '/src/Toolkit/Html.php',
@@ -348,11 +348,6 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Laminas\\Escaper\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/laminas/laminas-escaper/src/Exception/ExceptionInterface.php',
         'Laminas\\Escaper\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/laminas/laminas-escaper/src/Exception/InvalidArgumentException.php',
         'Laminas\\Escaper\\Exception\\RuntimeException' => __DIR__ . '/..' . '/laminas/laminas-escaper/src/Exception/RuntimeException.php',
-        'Laminas\\ZendFrameworkBridge\\Autoloader' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/Autoloader.php',
-        'Laminas\\ZendFrameworkBridge\\ConfigPostProcessor' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/ConfigPostProcessor.php',
-        'Laminas\\ZendFrameworkBridge\\Module' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/Module.php',
-        'Laminas\\ZendFrameworkBridge\\Replacements' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/Replacements.php',
-        'Laminas\\ZendFrameworkBridge\\RewriteRules' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/RewriteRules.php',
         'League\\ColorExtractor\\Color' => __DIR__ . '/..' . '/league/color-extractor/src/League/ColorExtractor/Color.php',
         'League\\ColorExtractor\\ColorExtractor' => __DIR__ . '/..' . '/league/color-extractor/src/League/ColorExtractor/ColorExtractor.php',
         'League\\ColorExtractor\\Palette' => __DIR__ . '/..' . '/league/color-extractor/src/League/ColorExtractor/Palette.php',

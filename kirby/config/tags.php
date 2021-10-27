@@ -2,7 +2,6 @@
 
 use Kirby\Cms\Html;
 use Kirby\Cms\Url;
-use Kirby\Text\KirbyTag;
 use Kirby\Toolkit\Str;
 
 /**
@@ -251,29 +250,6 @@ return [
             'width',
         ],
         'html' => function ($tag) {
-            // all available video tag attributes
-            $availableAttrs = KirbyTag::$types[$tag->type]['attr'];
-
-            // global video tag options
-            $attrs   = $tag->kirby()->option('kirbytext.video', []);
-            $options = $attrs['options'] ?? [];
-
-            // removes options from attributes
-            if (isset($attrs['options']) === true) {
-                unset($attrs['options']);
-            }
-
-            // injects default values from global options
-            // applies only defined attributes to safely update tag props
-            foreach ($attrs as $key => $value) {
-                if (
-                    in_array($key, $availableAttrs) === true &&
-                    (isset($tag->{$key}) === false || $tag->{$key} === null)
-                ) {
-                    $tag->{$key} = $value;
-                }
-            }
-
             // checks and gets if poster is local file
             if (
                 empty($tag->poster) === false &&
@@ -285,26 +261,41 @@ return [
                 }
             }
 
-            // converts tag attributes to supported formats (listed below) to output correct html
-            // booleans: autoplay, controls, loop, muted
-            // strings : height, poster, preload, width
-            // for ex  : `autoplay` will not work if `false` is a `string` instead of a `boolean`
-            $attrs = [
-                'autoplay' => $autoplay = Str::toType($tag->autoplay, 'bool'),
-                'controls' => Str::toType($tag->controls ?? true, 'bool'),
-                'height'   => $tag->height,
-                'loop'     => Str::toType($tag->loop, 'bool'),
-                'muted'    => Str::toType($tag->muted ?? $autoplay, 'bool'),
-                'poster'   => $tag->poster,
-                'preload'  => $tag->preload,
-                'width'    => $tag->width
-            ];
-
-            // handles local and remote video file
-            if (
+            // checks video is local or provider(remote)
+            $isLocalVideo = (
                 Str::startsWith($tag->value, 'http://') !== true &&
                 Str::startsWith($tag->value, 'https://') !== true
-            ) {
+            );
+            $isProviderVideo = (
+                $isLocalVideo === false &&
+                (
+                    Str::contains($tag->value, 'youtu', true) === true ||
+                    Str::contains($tag->value, 'vimeo', true) === true
+                )
+            );
+
+            // default attributes for local and remote videos
+            $attrs = [
+                'height' => $tag->height,
+                'width'  => $tag->width
+            ];
+
+            // don't use attributes that iframe doesn't support
+            if ($isProviderVideo === false) {
+                // converts tag attributes to supported formats (listed below) to output correct html
+                // booleans: autoplay, controls, loop, muted
+                // strings : poster, preload
+                // for ex  : `autoplay` will not work if `false` is a `string` instead of a `boolean`
+                $attrs['autoplay'] = $autoplay = Str::toType($tag->autoplay, 'bool');
+                $attrs['controls'] = Str::toType($tag->controls ?? true, 'bool');
+                $attrs['loop']     = Str::toType($tag->loop, 'bool');
+                $attrs['muted']    = Str::toType($tag->muted ?? $autoplay, 'bool');
+                $attrs['poster']   = $tag->poster;
+                $attrs['preload']  = $tag->preload;
+            }
+
+            // handles local and remote video file
+            if ($isLocalVideo === true) {
                 // handles local video file
                 if ($tag->file = $tag->file($tag->value)) {
                     $source = Html::tag('source', null, [
@@ -316,7 +307,7 @@ return [
             } else {
                 $video = Html::video(
                     $tag->value,
-                    $options,
+                    $tag->kirby()->option('kirbytext.video.options', []),
                     $attrs
                 );
             }

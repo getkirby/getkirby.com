@@ -42,8 +42,15 @@ abstract class Json
      */
     public static function response($data, array $options = [])
     {
+        // handle redirects
+        if (is_a($data, 'Kirby\Panel\Redirect') === true) {
+            $data = [
+                'redirect' => $data->location(),
+                'code'     => $data->code()
+            ];
+
         // handle Kirby exceptions
-        if (is_a($data, 'Kirby\Exception\Exception') === true) {
+        } elseif (is_a($data, 'Kirby\Exception\Exception') === true) {
             $data = static::error($data->getMessage(), $data->getHttpCode());
 
         // handle exceptions
@@ -53,6 +60,10 @@ abstract class Json
         // only expect arrays from here on
         } elseif (is_array($data) === false) {
             $data = static::error('Invalid response', 500);
+        }
+
+        if (empty($data) === true) {
+            $data = static::error('The response is empty', 404);
         }
 
         // always inject the response code
