@@ -2,27 +2,241 @@ Intro: Configure the behavior of (glossary: KirbyText) and particular tags
 
 ----
 
+Since: 3.6.0
+
+----
+
 Text:
+
+## &#x28;email: ..&#x29;
 
 ```php
 return [
   'kirbytext' => [
-    'video' => [
-      'class' => 'video',
-      'height' => false,
-      'width' => false
+    'email' => [
+      'class' => 'email',
+      'rel' => 'nofollow',
+      'target' => '_blank',
+      'text' => 'Write Us',
+      'title' => 'Email'
     ]
   ]
 ];
 ```
 
-## Video options
+### Options
 
-### `class`
-The default class which is added to Youtube and Vimeo iframes (default: `video`)
+| Attribute | Description | Default |
+|---- | ---- | ---- |
+| class | The default class which is added to email link | `null` |
+| rel | The default rel attribute that is added to email link | `null` |
+| target | The default target attribute that is added to email link | `null` |
+| text | The default text that is added to email link | `null` |
+| title | The default title attribute that is added to email link | `null` |
 
-### `height`
-The default height that is added to Youtube and Vimeo iframes (default: `false` = no height)
+## &#x28;file: ..&#x29;
 
-### `width`
-The default width that is added to Youtube and Vimeo iframes (default: `false` = no width)
+```php
+return [
+  'kirbytext' => [
+    'file' => [
+      'class' => 'file',
+      'download' => true,
+      'rel' => 'nofollow',
+      'target' => '_blank',
+      'text' => 'Download',
+      'title' => 'Filename'
+    ]
+  ]
+];
+```
+
+### Options
+
+| Attribute | Description | Default |
+|---- | ---- | ---- |
+| class | The default class which is added to file link | `null` |
+| download | The default download attribute that is added to file link | `true` |
+| rel | The default rel attribute that is added to file link | `null` |
+| target | The default target attribute that is added to file link | `null` |
+| text | The default text that is added to file link | `null` |
+| title | The default title attribute that is added to file link | `null` |
+
+## &#x28;gist: ..&#x29;
+
+```php
+return [
+  'kirbytext' => [
+    'gist' => [
+      'file' => 'targetblank.js',
+    ]
+  ]
+];
+```
+
+### Options
+
+| Attribute | Description | Default |
+|---- | ---- | ---- |
+| file | Load a specific file as default | `null` |
+
+## &#x28;image: ..&#x29;
+
+```php
+return [
+  'kirbytext' => [
+    'image' => [
+      'alt' => 'This is an awesome picture',
+      'caption' => 'I took this image in the park',
+      'class' => 'floated',
+      'height' => 600,
+      'imgclass' => 'myimage',
+      'linkclass' => 'myimage',
+      'rel' => 'gallery',
+      'target' => '_blank',
+      'title' => 'This is an awesome picture ',
+      'width' => 800,
+    ]
+  ]
+];
+```
+
+### Options
+
+| Attribute | Description | Default |
+|---- | ---- | ---- |
+| alt | The default alt attribute that is added to img element | `null` |
+| caption | The default caption | `null` |
+| class | The default class which is added to figure element | `null` |
+| height | The default height which is added to img element | `null` |
+| imgclass | The default class which is added to img element | `null` |
+| linkclass | The default class which is added to link element | `null` |
+| rel | The default rel attribute that is added to link element | `null` |
+| target | The default target attribute that is added to link element | `null` |
+| title | The default title attribute that is added to img element | `null` |
+| width | The default height which is added to img element | `null` |
+
+## &#x28;link: ..&#x29;
+
+```php
+return [
+  'kirbytext' => [
+    'link' => [
+      'class' => 'mylink',
+      'lang' => 'de',
+      'rel' => 'nofollow',
+      'role' => 'button',
+      'target' => '_blank',
+      'title' => 'Wikipedia',
+      'text' => 'Wikipedia',
+    ]
+  ]
+];
+```
+
+### Options
+
+| Attribute | Description | Default |
+|---- | ---- | ---- |
+| class | The default class which is added to link element | `null` |
+| lang | The default language for link to a page in another language (only on multi-language sites) | `null` |
+| rel | The default rel attribute that is added to link element | `null` |
+| role | The default role attribute that is added to link element | `null` |
+| target | The default target attribute that is added to link element | `null` |
+| title | The default title attribute that is added to link element | `null` |
+| text | The default text that is added to link element | `null` |
+
+## &#x28;tel: ..&#x29;
+
+```php
+return [
+  'kirbytext' => [
+    'tel' => [
+      'class' => 'phone',
+      'rel' => 'nofollow',
+      'text' => 'call us',
+      'title' => 'This is my phone number',
+    ]
+  ]
+];
+```
+
+### Options
+
+| Attribute | Description | Default |
+|---- | ---- | ---- |
+| class | The default class which is added to link element | `null` |
+| rel | The default rel attribute that is added to link element | `null` |
+| title | The default title attribute that is added to link element | `null` |
+| text | The default text that is added to link element | `null` |
+
+## &#x28;twitter: ..&#x29;
+
+```php
+return [
+  'kirbytext' => [
+    'twitter' => [
+      'class' => 'twitter',
+      'rel' => 'nofollow',
+      'target' => '_blank',
+      'text' => 'follow us on Twitter',
+      'title' => 'follow us on Twitter',
+    ]
+  ]
+];
+```
+
+### Options
+
+| Attribute | Description | Default |
+|---- | ---- | ---- |
+| class | The default class which is added to link element | `null` |
+| rel | The default rel attribute that is added to link element | `null` |
+| target | The default target attribute that is added to link element | `null` |
+| title | The default title attribute that is added to link element | `null` |
+| text | The default text that is added to link element | `null` |
+
+## &#x28;video: ..&#x29;
+
+```php
+return [
+  'kirbytext' => [
+    'video' => [
+      'autoplay' => true,
+      'caption' => 'This is a really nice video',
+      'controls' => true,
+      'class' => 'video',
+      'height' => 200,
+      'loop' => true,
+      'muted' => true,
+      'poster' => 'cover.jpg',
+      'preload' => 'auto',
+      'style' => 'border: 3px solid red;'
+      'width' => 300,
+
+      'options'  => [
+        'youtube' => [
+          'controls' => 0
+        ]
+      ]
+    ]
+  ]
+];
+```
+
+### Options
+
+| Attribute | Description | Default |
+|---- | ---- | ---- |
+| autoplay | The default autoplay which is added to video element (only for local and remote videos) | `false` |
+| caption | The default caption | `null` |
+| controls | The default controls which is added to video element (only for local and remote videos) | `true` |
+| class | The default class which is added to iframe and video elements | `video` |
+| height | The default height that is added to iframe and video elements | `null` |
+| loop | The default loop which is added to video element (only for local and remote videos) | `true` |
+| muted | The default muted which is added to video element (only for local and remote videos) | `true` |
+| poster | The default poster attribute specifies an image to be shown while the video is downloading (only for local and remote videos) | `true` |
+| preload | The default option that the video should be loaded when the page loads (only for local and remote videos) | `null` |
+| style | The default style that is added to iframe and video elements | `null` |
+| width | The default width that is added to iframe and video elements | `null` |
+| options | The default options for video providers | `[]` |
