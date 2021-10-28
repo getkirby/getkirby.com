@@ -83,7 +83,7 @@ return [
 <since v="3.6.0">
 ## Custom Panel Favicon
 
-To offer a full white-label solution for your customers, you can even set a custom favicon for the Panel.
+To offer a full white-label solution for your customers, you can even set a custom favicon for the Panel. From a simple implementation…
 
 ```php "/site/config/config.php"
 return [
@@ -92,6 +92,31 @@ return [
   ]
 ];
 ```
+
+…to full control over all formats:
+
+
+```php "/site/config/config.php"
+return [
+  'panel' => [
+    'favicon' => [
+      'apple-touch-icon' => [
+        'type' => 'image/png',
+        'url'  =>  'assets/apple-touch-icon.png',
+      ],
+      'shortcut icon' => [
+        'type' => 'image/svg+xml',
+        'url'  => 'assets/favicon.svg',
+      ],
+      'alternate icon' => [
+        'type' => 'image/png',
+        'url'  => 'assets/favicon.png',
+      ]
+    ]
+  ]
+];
+```
+
 </since>
 
 ## Default Panel language
