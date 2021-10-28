@@ -1,0 +1,71 @@
+
+Title: Styling
+
+----
+
+Intro: Learn how you can customise the Panel look via CSS.
+
+----
+
+Guide: ../cookbook/panel/customizing-panel
+
+----
+
+Text:
+
+## Options
+
+The (link: docs/reference/system/options/panel text: `panel` config option) allows you to customise parts of the Panel look. Besides setting a (link: docs/reference/system/options/panel#custom-panel-favicon text: custom favicon), you can add a (link: docs/reference/system/options/panel#custom-panel-css text: custom CSS file) to the Panel in which you can utilize the following CSS selectors and variables.
+
+## CSS selectors
+
+Throughout the Panel we are using class-based CSS selectors which you can target in your custom `panel.css` to modify the look of the Panel:
+
+```css "assets/panel.css"
+.k-topbar {
+  background: lightslategray;
+}
+```
+
+<since v="3.6.0">
+Besides adding more CSS selectors, we are also using data attributes to allow for much more powerful and tailored Panel customizations:
+
+| Selector | Description |
+| -------- | ----------- |
+| `.k-panel[data-language]` | for the current content translation language |
+| `.k-panel[data-default-language]` | for the default content translation language |
+| `.k-panel[data-translation]` | for the current Panel UI/user language |
+| `.k-panel[data-role]` | for current user role |
+| `.k-panel[data-user]` | for current user ID |
+| `.k-page-view[data-id]` | for page ID |
+| `.k-page-view[data-template]` | for page's intended template |
+| `.k-file-view[data-id]` | for file ID |
+| `.k-file-view[data-template]` | for file's template |
+| `.k-user-view[data-id]` | for user ID |
+| `.k-user-view[data-role]` | for user's role |
+| `.k-site-view[data-id]` | for site ID (/) |
+| `.k-site-view[data-template]` | for site's template (site) |
+| `.k-languages-dropdown` | for content translation language dropdown |
+| `.k-page-view-options`, `.k-file-view-options` and `.k-user-view-options` | for options dropdown on model views |
+| `.k-page-view-preview`, `.k-file-view-preview`, `.k-site-view-preview` and `.k-user-view-preview` | for preview button on model views |
+| `.k-pages-section .k-item[data-id]`, `.k-pages-section .k-item[data-status]` and `.k-pages-section .k-item[data-template]` | |
+| `.k-files-section .k-item[data-id]` and `.k-files-section .k-item[data-template]` | |
+| `.k-status-icon .k-status-icon-{status}` | for the page's status button |
+
+</since>
+
+
+
+## CSS properties
+
+We use CSS properties for the most important parameters in the Panel. This is useful for customising the look of the Panel but als for plugin developers to create UIs that seamlessly integrate with the rest of the Panel.
+
+You can overwrite our default properties in your custom `panel.css`:
+
+```css "assets/panel.css"
+:root {
+  --color-backgdrop: rgba(255, 255, 255, 0.6);
+}
+```
+
+(link: docs/reference/plugins/ui#colors text: Get to know all CSS properties ›)
