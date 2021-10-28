@@ -1,0 +1,55 @@
+Title: Layouts methods
+
+----
+
+Since: 3.6.0
+
+----
+
+Text:
+
+Layouts methods are registered with the `layoutsMethods` extension.
+
+## Default layouts methods
+
+**For a full (link: docs/reference/#layouts text: list of default layouts methods), please check out the Reference.**
+
+<info>Be aware that you cannot override these default layouts methods with any custom layouts method.</info>
+
+## Getting started
+
+You can extend the set of defined layouts methods in a plugin file.
+
+```php "/site/plugins/layouts-methods/index.php"
+Kirby::plugin('my/plugin', [
+    'layoutsMethods' => [
+          'test' => function () {
+              return 'layouts method';
+          }
+      ]
+]);
+```
+
+This example shows the basic architecture of a layouts method. You define the method name with the key for the `layoutsMethods` extension array. `$this` in the callback function refers to the `$layouts` object.
+
+## Working with method arguments
+
+In some cases it might be helpful to be able to pass arguments to the method:
+
+You can define arguments for a method like this:
+
+```php "/site/plugins/layouts-methods/index.php"
+Kirby::plugin('my/plugin', [
+    'layoutsMethods' => [
+        'info' => function ($text = 'Count:') {
+            return $this->toBlocks()->count() . ' ' . $text;
+        }
+    ]
+]);
+```
+
+And then use it like this:
+
+```php
+<?= $layouts->info('Blocks') ?>
+```
