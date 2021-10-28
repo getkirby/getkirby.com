@@ -234,3 +234,9 @@ We use custom CSS properties for the most important parameters in the Panel. Thi
 --z-background
 ```
 </since>
+
+## Logical properties
+
+<since v="3.6.0">
+Our RTL support is powered by [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties). For now with fallback code for older browsers. We encourage all plugin developers to look into logical properties for their Panel plugins.
+</since>
