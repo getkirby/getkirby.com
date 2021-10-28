@@ -202,6 +202,42 @@ options:
 
 <info>When an editor switches templates, all fields with the same name and type will be synced. Incompatible fields will be discarded. Be aware of this step when you define the list of compatible templates.</info>
 
+## Navigation option
+<since v="3.6.0">
+The previous/next item navigation in the Panel is a very effective way for editors to move between content. With `navigation` option you can improve the usability of the navigation for your users with additional options to customize the links.
+
+### Navigate between all pages
+
+```yaml "/site/blueprints/pages/default.yml"
+title: Simple Page
+navigation:
+  status: all
+  template: all
+```
+
+### Limit navigation by template & status type
+
+```yaml "/site/blueprints/pages/default.yml"
+title: Simple Page
+navigation:
+  status:
+    - draft
+    - unlisted
+  template:
+    - album
+    - default
+```
+</since>
+
+### Adjust the sorting of the previous/next page
+```yaml "/site/blueprints/pages/default.yml"
+title: Simple Page
+navigation:
+  status: listed
+  template: default
+  sortBy: title asc
+```
+
 ## Examples
 
 You can find examples of different types of page blueprints in the (link: docs/reference/panel/samples text: samples section).
