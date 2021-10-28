@@ -28,7 +28,7 @@ class PluginPage extends Page
         $branch = $this->branch()->value() ?? 'master';
 
         if (Str::contains($url, 'github')) {
-            return Str::replace($url, 'github.com', 'api.github.com/repos') . '/zipball';
+            return rtrim(Str::replace($url, 'github.com', 'api.github.com/repos'), '/') . '/zipball';
         }
 
         if (Str::contains($url, 'bitbucket')) {
