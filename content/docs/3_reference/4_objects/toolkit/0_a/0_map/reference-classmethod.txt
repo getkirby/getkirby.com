@@ -1,0 +1,15 @@
+Text:
+
+## Example
+
+```php
+// why this weird, inconsistent argument order?
+$array = array_map(function ($item) {
+  // some mapping
+}, $array);
+
+// yes!
+$array = A::map($array, function ($item) {
+  // some mapping
+});
+```
