@@ -1,6 +1,6 @@
 <?php layout('reference') ?>
 
-<div class="prose">
+<div class="prose mb-12">
   <?= $page->text()->kt() ?>
 </div>
 
