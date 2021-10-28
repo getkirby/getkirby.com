@@ -1,0 +1,61 @@
+Title: File types
+
+----
+
+Since: 3.6.0
+
+----
+
+Text:
+
+Kirby categorizes file types by extension and MIME type. We support a wide range of file types, but of course we cannot predefine them all. You can add your own file types to the system.
+
+## Registering a new file type
+
+New file types can be defined in plugins. The array key represents the file extension. Define the matching MIME type and file type category like this:
+
+```php
+Kirby::plugin('your/plugin', [
+  'fileTypes' => [
+    'm4p' => [
+      'mime' => 'video/m4p',
+      'type' => 'video',
+    ],
+  ]
+]);
+```
+
+Kirby will now recognize `m4p` files by filename and by MIME type. `$file->type()` will now return `video` for such files and they will also be included in the `$page->videos()` collection. Of course you can now also find them by using `$page->files()->filterBy('type', 'video')`.
+
+## Image processing
+
+If you want to make your new file type available for image processing, you can set the `resizable` attribute. It still depends on the thumb driver or your image processing API if it can handle the file type though, but Kirby will now give it a try.
+
+```php
+Kirby::plugin('your/plugin', [
+  'fileTypes' => [
+    'heif' => [
+      'mime'      => ['image/heic', 'image/heif'],
+      'type'      => 'image',
+      'resizable' => true,
+    ]
+  ]
+]);
+```
+
+## Image previews
+
+If your new file type should get a preview in the Panel file view, you can set the `viewable` option. It depends on the browser if it can actually display the file inline.
+
+```php
+Kirby::plugin('your/plugin', [
+  'fileTypes' => [
+    'heif' => [
+      'mime'      => ['image/heic', 'image/heif'],
+      'type'      => 'image',
+      'resizable' => true,
+      'viewable'  => true
+    ]
+  ]
+]);
+```
