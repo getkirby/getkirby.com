@@ -1,0 +1,63 @@
+Title: Layout methods
+
+----
+
+Since: 3.6.0
+
+----
+
+Text:
+
+Layout methods are registered with the `layoutMethods` extension.
+
+## Default layout methods
+
+**For a full (link: docs/reference/objects/cms/layout text: list of default layout methods), please check out the Reference.**
+
+<info>Be aware that you cannot override these default layout methods with any custom layout method.</info>
+
+## Getting started
+
+You can extend the set of defined layout methods in a plugin file.
+
+```php "/site/plugins/layout-methods/index.php"
+Kirby::plugin('my/plugin', [
+    'layoutMethods' => [
+          'test' => function () {
+              return 'layout method';
+          }
+      ]
+]);
+```
+
+This example shows the basic architecture of a layout method. You define the method name with the key for the `layoutMethods` extension array. `$this` in the callback function refers to the `$layout` object.
+
+## Working with method arguments
+
+In some cases it might be helpful to be able to pass arguments to the method:
+
+You can define arguments for a method like this:
+
+```php "/site/plugins/layout-methods/index.php"
+Kirby::plugin('my/plugin', [
+    'layoutMethods' => [
+        'blocks' => function ($limit = null) {
+            $blocks = [];
+
+            foreach ($layout->columns() as $column) {
+                foreach ($column->blocks() as $block) {
+                    $blocks[] = $block->toArray();
+                }
+            }
+
+            return Blocks::factory($blocks)->limit($limit);
+        }
+    ]
+]);
+```
+
+And then use it like this:
+
+```php
+<?= $layout->blocks(3) ?>
+```
