@@ -1,0 +1,39 @@
+Text:
+
+## Example
+
+The `router()` helper takes a set of routes and request data and directly executes the matching routing action.
+
+This helper is great to build your own custom router. This could be done in the config or in a custom script.
+
+```php "/site/config/config.php"
+<?php
+
+return [
+  'routes' => [
+    [
+      'pattern' => 'shop/(:all)',
+      'action'  => function (string $path) {
+        return router($path, 'GET', [
+          [
+            'pattern' => 'cart',
+            'action'  => function () {
+                // ...
+            }
+          ],
+          [
+            'pattern' => 'checkout',
+            'action'  => function () {
+                // ...
+            }
+          ]
+        ]);
+      }
+    ]
+  ]
+];
+```
+
+Although the example above could of course also simply be solved with more route definitions, it's sometimes really useful to implement such a nested router.
+
+You can also use it for any kind of logic that depends on path matching with regex.
