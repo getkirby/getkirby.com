@@ -15,8 +15,8 @@ Icon | Name
 (icon: grid-bottom) | grid-bottom
 (icon: grid-bottom-left) | grid-bottom-left
 (icon: grid-bottom-right) | grid-bottom-right
-(icon: grid-bottom-right) | grid-bottom-right
 (icon: grid-full) | grid-full
+(icon: grid-left) | grid-left
 (icon: grid-right) | grid-right
 (icon: grid-top) | grid-top
 (icon: grid-top-right) | grid-top-right
