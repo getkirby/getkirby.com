@@ -4,10 +4,6 @@ $icon = null;
 if ($entry->intendedTemplate()->name() === 'reference-icon') {
   $icon = $entry->slug();
 }
-
-if ($entry->intendedTemplate()->name() === 'reference-ui') {
-  $icon = $entry->isPublic() ? 'check' : 'none';
-}
 ?>
 
 <?php if ($icon): ?>
