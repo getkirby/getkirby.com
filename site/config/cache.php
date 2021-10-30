@@ -8,5 +8,9 @@ return [
     'plugins' => [
         'active' => true,
         'type'   => 'apcu'
+    ],
+    'reference' => [
+        'active' => true,
+        'type'   => 'apcu'
     ]
 ];
