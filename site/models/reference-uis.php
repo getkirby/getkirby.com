@@ -12,21 +12,32 @@ class ReferenceUisPage extends SectionPage
             return $this->children;
         }
 
+        $cache  = $this->kirby()->cache('reference');
+        $key    = 'ui-' . $this->kirby()->version();
+        $data   = $cache->get($key);
 
-        $root     = $this->kirby()->root('assets') . '/ui.json';
-        $data     = Data::read($root);
+        // load JSON from remote server if not cached yet
+        // and write it to cache
+        if ($data === null) {
+            // @todo rename to actual URL, e.g. https://files.getkirby.com/
+            $data = Remote::get('http://ui.test/' . $key . '.json')->json();
+
+             // only include components that
+            // have been flagged as public
+            $data = array_filter($data, function ($ui) {
+                return (
+                    isset($ui['tags']['internal']) === false ||
+                    $ui['tags']['internal'] === null
+                );
+            });
+
+            $cache->set($key, $data);
+        }
+
         $pages    = parent::children();
         $children = [];
 
         foreach ($data as $ui) {
-            // only include components that
-            // have been flagged as public
-            $internal = $ui['tags']['internal'] ?? null;
-
-            if ($internal !== null) {
-                continue;
-            }
-
             $slug = Str::kebab($ui['displayName']);
 
             if ($page = $pages->find($slug)) {
@@ -36,7 +47,7 @@ class ReferenceUisPage extends SectionPage
             }
 
             $content = array_merge([
-                'title'       => $ui['displayName'],
+                'title'       => ucfirst(strtolower(trim(implode(' ',preg_split('/(?=[A-Z])/', $ui['displayName']))))),
                 'description' => $ui['description'],
                 'example'     => $ui['tags']['examples'][0]['content'] ?? null,
                 'props'       => $ui['props'] ?? [],
