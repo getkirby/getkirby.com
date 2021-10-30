@@ -96,6 +96,23 @@ return [
 ];
 ```
 
+<since v="3.6.0">
+You can set a default format option in your config file and convert all images unless you override the format option in the thumb method.
+
+```php "/site/config/config.php"
+<?php
+
+return [
+  'thumbs' => [
+    'format' => 'webp'
+  ]
+];
+```
+
+This is only recommended if you find yourself converting 90% of your files to that format anyway. Otherwise you will need to override the default quite a lot.
+
+</since>
+
 (link: docs/reference/system/options/thumbs text: All thumbs options)
 
 ## Presets
@@ -128,5 +145,19 @@ You can use Kirby's [`$image->srcset()`](/docs/reference/objects/file/srcset) me
 
 ```php
 <img srcset="<?= $image->srcset([300, 800, 1024]) ?>">
+```
+</since>
+
+
+
+## Image Formats
+<since v="3.6.0">
+
+You can use the `format` option to convert an existing JPEG, GIF or PNG into a WebP or AVIF file with the `thumb()` method.
+
+```php
+<?= $image->thumb(['width' => 200, 'format' => 'webp']) ?>
+<?= $image->thumb(['width' => 200, 'format' => 'avif']) ?>
+
 ```
 </since>
