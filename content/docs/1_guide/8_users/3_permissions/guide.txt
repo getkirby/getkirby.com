@@ -75,6 +75,20 @@ permissions:
     update: true
 ```
 
+<since v="3.6.0">
+
+In a multi-language installation, you can control access to the language view by role with the new access permissions:
+
+```yaml
+# users/editor.yml
+title: Editor
+permissions:
+  access:
+    languages: false
+```
+
+</since>
+
 <info>
 The `user` permission only applies to the user itself, while the `users` permissions sets these permissions for all users.
 </info>
