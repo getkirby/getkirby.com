@@ -103,7 +103,16 @@ The `card` layout is great for all kinds of images.
 layout: cards
 ```
 
-(image: cards.png)
+### Cardlets layout
+
+<since v="3.6.0">
+
+The `cardlets` layout is great for nice visual previews of files, while your text content is still representend decently.
+
+```yaml
+layout: cardlets
+```
+</since>
 
 ## File information
 
