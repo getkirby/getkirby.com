@@ -29,7 +29,7 @@ permissions:
   access:
     panel: true
     site: true
-    settings: true
+    settings: true # Settings view was replaced with system and language views since Kirby 3.6.0
     users: true
   files:
     create: true
@@ -77,6 +77,7 @@ permissions:
 
 <since v="3.6.0">
 
+### Access to language view
 In a multi-language installation, you can control access to the language view by role with the new access permissions:
 
 ```yaml
@@ -87,6 +88,19 @@ permissions:
     languages: false
 ```
 
+### Access to system view
+
+To control access to the system view by role, use the system access permissions:
+
+```yaml
+# users/editor.yml
+title: Editor
+permissions:
+  access:
+    system: false
+```
+
+In versions prior to Kirby 3.6.0, the view and its access permission was called `settings`.
 </since>
 
 <info>
