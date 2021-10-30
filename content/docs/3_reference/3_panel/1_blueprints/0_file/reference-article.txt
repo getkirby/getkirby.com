@@ -110,6 +110,54 @@ accept:
 Please only allow all uploads if all Panel users can be trusted completely as it will be possible to upload files that could be used to attack the server or the visitors' browsers.
 </warning>
 
+## Image options
+
+<since v="3.6.0">
+
+The image options for files can now be defined directly in their own blueprint. This significantly simplifies the setup of sections as they all inherit the image settings. You can still set image settings in sections the good old way if needed.
+
+```yaml "site/blueprints/files/document.yml"
+image:
+  back: blue-200
+  icon: 📝
+```
+
+### Support for queries
+
+Panel preview image options now all support our powerful queries:
+
+```yaml "site/blueprints/files/document.yml"
+image:
+  back: "{{ file.myCustomBackColor }}"
+```
+
+### Custom colors
+`back` and `color` options for Panel preview images now support shorthands for core CSS color variables as well as HEX codes or other native CSS color properties (e.g. even gradients):
+
+#### CSS color property shorthands
+
+```yaml
+image:
+  back: "purple-400"
+```
+Check out the (link: docs/reference/plugins/ui#colors text: list of our color properties) for available options.
+
+#### Hex codes
+
+```yaml
+image:
+  back: "#ff0000"
+```
+
+#### CSS rules
+
+```yaml
+image:
+  back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);"
+```
+
+</since>
+
 ## Options
 
 With options, you can control all the file actions that should or should not be available for this particular file type. The option dropdown for files will adjust accordingly.
