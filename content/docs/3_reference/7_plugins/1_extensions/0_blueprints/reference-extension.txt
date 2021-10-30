@@ -40,3 +40,30 @@ Kirby::plugin('your/plugin', [
 	]
 ]);
 ```
+
+<since v="3.6.0">
+## Callback definition
+
+Plugins can now define dynamic blueprints based on config settings, content and other factors.
+
+```php
+<?php
+
+Kirby::plugin('my/blueprint', [
+    'blueprints' => [
+        'pages/blog' => function ($kirby) {
+            return [
+                'title' => 'Blog',
+                'sections' => [
+                    'articles' => [
+                        'type'     => 'pages',
+                        'template' => 'article',
+                        'limit'    => $kirby->option('blog.article.limit')
+                    ]
+                ]
+            ];
+        }
+    ]
+]);
+```
+</since>
