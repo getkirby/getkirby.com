@@ -20,7 +20,7 @@ class ReferenceUisPage extends SectionPage
         // and write it to cache
         if ($data === null) {
             // @todo rename to actual URL, e.g. https://files.getkirby.com/
-            $data = Remote::get('http://ui.test/' . $key . '.json')->json();
+            $data = Remote::get('https://ui.getkirby.com/index.json')->json();
 
              // only include components that
             // have been flagged as public
