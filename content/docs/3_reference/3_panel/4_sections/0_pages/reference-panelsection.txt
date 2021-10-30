@@ -123,6 +123,21 @@ layout: cards
 
 (image: cards.png)
 
+
+### Cardlets layout
+
+<since v="3.6.0">
+
+The `cardlets` layout is great for nice visual previews of pages, while your text content is still representend decently.
+
+```yaml
+layout: cardlets
+```
+
+(image: cardlets.png)
+
+</since>
+
 ## Page information
 
 You can fine-tune the display text and additional information for every page in the list with the `text` and `info` options.
