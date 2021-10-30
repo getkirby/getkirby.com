@@ -20,16 +20,44 @@ $options = [
 ];
 ```
 
+<since v="3.6.0">
+You can also set the `format` option to convert an existing JPEG, GIF or PNG into a WebP or AVIF file method (value is the default value).
+
+```php
+$options = [
+  // other options
+  'format'     => null,
+];
+```
+
+</since>
+
 You can define presets of options in your `config.php`. (link: docs/guide/templates/resize-images-on-the-fly#presets text: Learn more ›)
 
-## Example
+## Examples
 
 ```php
 if($image = $page->image()):
     echo $image->thumb([
       'width'   => 300,
       'height'  => 200,
-      'quality' => 80
+      'quality' => 80,
     ])->html();
 endif;
 ```
+
+<since v="3.6.0">
+
+```php
+if($image = $page->image()):
+    echo $image->thumb([
+      'width'   => 300,
+      'height'  => 200,
+      'quality' => 80,
+      'format'  => 'webp',
+    ])->html();
+endif;
+```
+
+</since>
+
