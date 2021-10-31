@@ -28,13 +28,29 @@ echo json_encode($data);
 
 You can of course output anything in the representation template. As we are building a JSON representation in our example, the output should be valid JSON.
 
-You don't have to send a content type header manually, Kirby will do this for you based on the representation type. Here, the response will automatically be sent with the content type `application/json`.
+The response will automatically be sent with the content type `application/json`.
 
 <info>
 A content representation requires that the standard template with the base name is present. If you want to create a JSON representation `project.json.php`, make sure that `project.php` exists. If `project.php` doesn't exist, Kirby will fall back to `default.json.php`, and if that template doesn't exist either, return the error page.
 
 That means, a content representation is always a variant of the standard template. If you don't need the standard template at all, you can use this instead of the representation to return the content type you need. In this case, send a header with the corresponding content type.
 </info>
+
+## Representation types
+
+In most cases, you don't have to send a content type header manually, Kirby will do this for you based on the representation type (based on extension and/or content). If you use some custom extension, Kirby will assume a default content type of `text/html`. In case you want to set a specific content type, you can do this with (link: docs/guide/templates/basics#setting-response-types text: response types), for example:
+
+```php
+<?php
+
+// send a `text/plain` response type
+$kirby->response()->type('text/plain');
+// code to generate article hash:
+// $hash = ...
+
+echo $hash;
+```
+
 
 ## Accessing the representation
 
