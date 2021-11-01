@@ -1,11 +1,16 @@
 Title:  Panel login
 
 ----
-
-Since: 3.2.0
-
-----
 Text:
+
+<since v="3.6.0">
+<warning>
+Panel views have been replaced with (link: docs/reference/plugins/extensions/panel-areas text: Panel areas) in 3.6.0.
+</info>
+</warning>
+</since>
+
+<since v="3.2.0">
 
 With the `login` plugin type you can customize Kirby's default login screen or replace it with your own. This is perfect when you want to theme the form, add additional information or links or implement your own authentication methods.
 
@@ -99,3 +104,4 @@ panel.plugin('my/auth', {
 <info>
 If you want to replace the whole login form with your own logic, you can still do that like before. In the meantime we are working on a new plugin extension to register additional forms to toggle between so you don't have to replace the whole form in the future. Stay tuned!
 </info>
+</since>
