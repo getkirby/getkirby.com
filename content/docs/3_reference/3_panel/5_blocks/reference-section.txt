@@ -10,4 +10,4 @@ The (glossary: Panel) offers a wide range of default block types that you can us
 
 Text:
 
-
+In addition to the default block types, you can also **(link: docs/reference/plugins/extensions/blocks text: create your own custom block types)**.
