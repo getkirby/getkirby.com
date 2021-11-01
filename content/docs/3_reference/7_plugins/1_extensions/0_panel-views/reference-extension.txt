@@ -4,6 +4,13 @@ Title:  Panel views
 
 Text:
 
+<since v="3.6.0">
+<warning>
+Panel views have been replaced with (link: docs/reference/plugins/extensions/panel-areas text: Panel areas) in 3.6.0.
+</info>
+</warning>
+</since>
+
 Views are the building blocks of the (glossary: Panel). While the Panel is very extensible already with fields and sections, you might reach the point where you need your own dedicated space in the Panel - or where you might want to replace an existing view.
 
 With a Panel view plugin you can build your own stand-alone view, that is just accessible via link, located in the main menu or replaces an existing default view.
