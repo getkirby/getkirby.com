@@ -28,6 +28,7 @@ Text:
 - Additional unit tests for Filesystem, CMS, Form, Image and Panel classes
 - Fixed validation code for the `Kirby\Form\FieldClass` class
 - Cleaner solution to ignore entire files from code coverage
+- The `Toolkit\Dom::toString` method now exports the document with the same structure as the input. [#3887](https://github.com/getkirby/kirby/pull/3887)
 
 ## Panel
 

@@ -45,6 +45,9 @@ Text:
 - It's no longer possible to switch from draft to unlisted page if there are page errors [#3781](https://github.com/getkirby/kirby/issues/3781)
 - Fixed multiline placeholder for writer field Multiline placeholder in writer field renders as single line [#3470](https://github.com/getkirby/kirby/issues/3470)
 - Fixed filename collision for cropped image files [#3418](https://github.com/getkirby/kirby/issues/3418)
+- Hidden blocks are no longer visible in layouts [#3857](https://github.com/getkirby/kirby/issues/3857)
+- The `image/svg` MIME type is now recognized by the `Sane` classes
+- Account files are now fully accessible through the account view, even if permissions for the users area is blocked [#2580](https://github.com/getkirby/kirby/issues/2580)
 
 ## Fixed regressions from 3.6.0-alpha.1
 
@@ -126,3 +129,19 @@ Text:
 - Fix writer field caret position on blocks/layout field [#3838](https://github.com/getkirby/kirby/issues/3838)
 - Fix writer field height on blocks/layout field
 - Fixed collision when changing the user language [#3844](https://github.com/getkirby/kirby/issues/3844)
+
+## Fixed regressions from 3.6.0-rc.2
+
+- Fixed changes dropdown [#3854](https://github.com/getkirby/kirby/issues/3854)
+- Fixed missing max/min length indicator in the Textarea counter [#3861](https://github.com/getkirby/kirby/issues/3861)
+- Fixed file upload validation [#3849](https://github.com/getkirby/kirby/issues/3849)
+- Fixed breaking change in `FieldClass::store` method [#3866](https://github.com/getkirby/kirby/issues/3866)
+- Fixed blocks field `empty` prop [#3872](https://github.com/getkirby/kirby/issues/3872)
+- Fixed port detection behind proxy [#3645](https://github.com/getkirby/kirby/issues/3645)
+- CSS gets auto prefixed again (e.g. solves issue with toggle field in Safari)
+- Fixed inline docs for `cardlets` layout option
+- Unicode characters in the writer field are no longer converted to HTML entities. [#3887](https://github.com/getkirby/kirby/pull/3887)
+- Fixed account permission issues when the users area is blocked [#3868](https://github.com/getkirby/kirby/pull/3868)
+- Fixed block selection in layout columns: [#3856](https://github.com/getkirby/kirby/issues/3856)
+- Fixed error notification dialog [#3890](https://github.com/getkirby/kirby/issues/3890)
+- Fixed "Invalid redirect URL" error [#3892](https://github.com/getkirby/kirby/issues/3892)

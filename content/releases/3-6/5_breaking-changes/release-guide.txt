@@ -6,14 +6,6 @@ Breaking changes in minor releases? 3.6 is not a minor release. We follow the pa
 
 `3.6.0.0` is the 6th major release for Kirby 3 and it's a really big and important step. We don't take breaking changes lightly but they sometimes have to happen in order to keep moving forward.
 
-## Easing the pain
-
-We know that breaking changes suck, when they break your plugins or other parts of your sites. Here's our plan how to ease your pain:
-
-- We will provide a tool to check for breaking changes in your installation.
-- We've created aliases for changed classes that will be removed in later releases to give you a transition time.
-- Where possible, we will try to help plugin developers with pull requests to migrate their plugins.
-
 ## Core
 
 ### Deprecated code that has been removed with 3.6.0
@@ -44,6 +36,11 @@ We know that breaking changes suck, when they break your plugins or other parts 
 - The `Sane\Svg::$allowedTags` attribute (before `$allowedElements`) now is an associative array with the allowed attributes for this tag as the value
 - `F::modified()` does no longer calculate a maximum between mtime and ctime for file changes. This could in theory lead to different timestamps in some scenarios. Very unlikely though.
 - The crop keyword is now always present in filenames for cropped files. All center cropped files need to be regenerated.
+- Kirby no longer supports PHP 7.3, which will reach its [end-of-life date](https://www.php.net/supported-versions.php) soon. We will add support for PHP 8.1 to Kirby as soon as possible after the official release of PHP 8.1.
+- Hidden blocks in the layout field will no longer be visible (as expected)
+- `Cms\Collection::has()`: 1st parameter got renamed to `$key`
+- `Cms\Collection::indexOf()`: 1st parameter got renamed to `$needle`
+- `Cms\Collection::query()`: 1st parameter got renamed to `$arguments`
 
 ## Panel
 
