@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\Pages;
+use Kirby\Data\Data;
 use Kirby\Reference\SectionPage;
 
 class ReferenceUisPage extends SectionPage
@@ -12,17 +13,24 @@ class ReferenceUisPage extends SectionPage
             return $this->children;
         }
 
-        $cache  = $this->kirby()->cache('reference');
-        $key    = 'ui-' . $this->kirby()->version();
-        $data   = $cache->get($key);
+        // give preference to local JSON file
+        $local = $this->kirby()->root('kirby') . '/panel/dist/ui.json';
+
+        if (F::exists($local) === true) {
+            $data = Data::read($local);
+
+        } else {
+            // otherwise try to load from cache
+            $cache  = $this->kirby()->cache('reference');
+            $data   = $cache->get('ui');
+        }
 
         // load JSON from remote server if not cached yet
         // and write it to cache
         if ($data === null) {
-            // @todo rename to actual URL, e.g. https://files.getkirby.com/
             $data = Remote::get('https://ui.getkirby.com/index.json')->json();
 
-             // only include components that
+            // only include components that
             // have been flagged as public
             $data = array_filter($data, function ($ui) {
                 return (
@@ -31,7 +39,7 @@ class ReferenceUisPage extends SectionPage
                 );
             });
 
-            $cache->set($key, $data);
+            $cache->set('ui', $data);
         }
 
         $pages    = parent::children();
