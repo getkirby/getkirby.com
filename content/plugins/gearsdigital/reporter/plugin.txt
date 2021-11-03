@@ -2,7 +2,7 @@ Title: Reporter
 
 ----
 
-Repository: https://github.com/gearsdigital/kirby-reporter/
+Repository: https://github.com/gearsdigital/kirby-reporter
 
 ----
 
