@@ -26,8 +26,8 @@
       <p class="font-mono text-xs">Total: 694.98 KB</p>
     </div>
     <div class="size text-xs font-mono">
-      <div style="--value: 38; --color: var(--color-red-400)">vendor.js: <br>385.04 KB KB</div>
-      <div style="--value: 30; --color: var(--color-yellow-400)">app.js: <br>309.94 KB KB</div>
+      <div style="--value: 38; --color: var(--color-red-400)">vendor.js: <br>385.04 KB</div>
+      <div style="--value: 30; --color: var(--color-yellow-400)">app.js: <br>309.94 KB</div>
     </div>
   </div>
 
