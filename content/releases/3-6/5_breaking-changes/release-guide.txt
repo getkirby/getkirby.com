@@ -129,6 +129,6 @@ Breaking changes in minor releases? 3.6 is not a minor release. We follow the pa
 
 ### CSS Selectors
 - `.k-panel[data-translation]` is now `.k-panel[data-language]`
-- `.k-panel[data-default-translation]` is now `.k-panel[data-default-translation]`
+- `.k-panel[data-translation-default]` is now `.k-panel[data-language-default]`
 - CSS class `.k-block-handle` has been replaced with `.k-sort-handle`
 
