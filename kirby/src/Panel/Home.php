@@ -19,6 +19,7 @@ use Throwable;
  * The Home class also makes sure to check access
  * before a redirect happens and avoids redirects
  * to inaccessible views.
+ * @since 3.6.0
  *
  * @package   Kirby Panel
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -246,12 +247,12 @@ class Home
         // a redirect to login, logout or installation
         // views would lead to an infinite redirect loop
         if (in_array($path, ['', 'login', 'logout', 'installation'], true) === true) {
-            throw new InvalidArgumentException('Invalid redirect URL');
+            $path = 'site';
         }
 
         // Check if the user can access the URL
         if (static::hasAccess($user, $path) === true) {
-            return $url;
+            return Panel::url($path);
         }
 
         // Try to find an alternative

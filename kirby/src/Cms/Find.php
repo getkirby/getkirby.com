@@ -75,7 +75,7 @@ class Find
      */
     public static function page(string $id)
     {
-        $id   = str_replace('+', '/', $id);
+        $id   = str_replace(['+', ' '], '/', $id);
         $page = App::instance()->page($id);
 
         if ($page && $page->isReadable() === true) {
@@ -100,6 +100,7 @@ class Find
      */
     public static function parent(string $path)
     {
+        $path       = trim($path, '/');
         $modelType  = in_array($path, ['site', 'account']) ? $path : trim(dirname($path), '/');
         $modelTypes = [
             'site'    => 'site',
@@ -156,6 +157,12 @@ class Find
      */
     public static function user(string $id = null)
     {
+        // account is a reserved word to find the current
+        // user. It's used in various API and area routes.
+        if ($id === 'account') {
+            $id = null;
+        }
+
         $kirby = App::instance();
 
         // get the authenticated user
