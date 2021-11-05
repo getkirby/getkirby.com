@@ -155,3 +155,4 @@ Text:
 - Fixed monospace option in textarea fields [#3902](https://github.com/getkirby/kirby/issues/3902)
 - Language dropdown is no longer missing when adding languages manually [#3888](https://github.com/getkirby/kirby/issues/3888)
 - The `k-link` component now correctly handles absolute URLs
+- The `writer` field allows relative URLs again. [#3754](https://github.com/getkirby/kirby/issues/3754)
