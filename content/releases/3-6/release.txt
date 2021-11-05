@@ -1,8 +1,8 @@
-Title: 3.6-rc.3
+Title: 3.6-rc.4
 ----
 Version: 3.6
 ----
-Link: https://github.com/getkirby/kirby/releases/tag/3.6.0-rc.3
+Link: https://github.com/getkirby/kirby/releases/tag/3.6.0-rc.4
 ----
 Area:
 

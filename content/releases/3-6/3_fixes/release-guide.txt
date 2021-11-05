@@ -145,3 +145,13 @@ Text:
 - Fixed block selection in layout columns: [#3856](https://github.com/getkirby/kirby/issues/3856)
 - Fixed error notification dialog [#3890](https://github.com/getkirby/kirby/issues/3890)
 - Fixed "Invalid redirect URL" error [#3892](https://github.com/getkirby/kirby/issues/3892)
+
+## Fixed regressions from 3.6.0-rc.3
+
+- Fixed unsaved changes loop in the writer field [#3798](https://github.com/getkirby/kirby/issues/3798)
+- Copy & Paste to blocks no longer adds unwanted line breaks [#3813](https://github.com/getkirby/kirby/issues/3813)
+- Fixed converting slugs incorrectly in multilanguage websites [#3900](https://github.com/getkirby/kirby/issues/3900)
+- Fixed overwritable custom site title [#3901](https://github.com/getkirby/kirby/issues/3901)
+- Fixed monospace option in textarea fields [#3902](https://github.com/getkirby/kirby/issues/3902)
+- Language dropdown is no longer missing when adding languages manually [#3888](https://github.com/getkirby/kirby/issues/3888)
+- The `k-link` component now correctly handles absolute URLs
