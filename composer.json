@@ -4,8 +4,8 @@
     "type": "project",
     "homepage": "https://getkirby.com",
     "require": {
-        "php": ">=7.3.0",
-        "getkirby/cms": "^3.5"
+        "php": ">=7.4.0",
+        "getkirby/cms": "^3.6"
     },
     "scripts": {
         "run": "php -S localhost:8181 kirby/router.php"
