@@ -11,6 +11,7 @@ use Kirby\Toolkit\Str;
  * The View response class handles Fiber
  * requests to render either a JSON object
  * or a full HTML document for Panel views
+ * @since 3.6.0
  *
  * @package   Kirby Panel
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -141,7 +142,7 @@ class View
         $kirby = kirby();
 
         // multilang setup check
-        $multilang = $kirby->option('languages', false) !== false;
+        $multilang = Panel::multilang();
 
         // get the authenticated user
         $user = $kirby->user();
@@ -167,9 +168,11 @@ class View
             '$language' => function () use ($kirby, $multilang, $language) {
                 if ($multilang === true && $language) {
                     return [
-                        'code'    => $language->code(),
-                        'default' => $language->isDefault(),
-                        'name'    => $language->name(),
+                        'code'      => $language->code(),
+                        'default'   => $language->isDefault(),
+                        'direction' => $language->direction(),
+                        'name'      => $language->name(),
+                        'rules'     => $language->rules(),
                     ];
                 }
             },
@@ -177,9 +180,11 @@ class View
                 if ($multilang === true) {
                     return $kirby->languages()->values(function ($language) {
                         return [
-                            'code'    => $language->code(),
-                            'default' => $language->isDefault(),
-                            'name'    => $language->name(),
+                            'code'      => $language->code(),
+                            'default'   => $language->isDefault(),
+                            'direction' => $language->direction(),
+                            'name'      => $language->name(),
+                            'rules'     => $language->rules(),
                         ];
                     });
                 }

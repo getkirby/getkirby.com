@@ -10,6 +10,7 @@ use DOMElement;
 use DOMNode;
 use DOMProcessingInstruction;
 use DOMXPath;
+use Kirby\Cms\App;
 use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
 
@@ -34,6 +35,14 @@ class Dom
     protected $body;
 
     /**
+     * The original input code as
+     * passed to the constructor
+     *
+     * @var string
+     */
+    protected $code;
+
+    /**
      * Document object
      *
      * @var \DOMDocument
@@ -55,7 +64,8 @@ class Dom
      */
     public function __construct(string $code, string $type = 'HTML')
     {
-        $this->doc = new DOMDocument();
+        $this->code = $code;
+        $this->doc  = new DOMDocument();
 
         $loaderSetting = null;
         if (\PHP_VERSION_ID < 80000) {
@@ -70,12 +80,26 @@ class Dom
 
         $this->type = strtoupper($type);
         if ($this->type === 'HTML') {
+            // ensure proper parsing for HTML snippets
+            if (preg_match('/<(html|body)[> ]/i', $code) !== 1) {
+                $code = '<body>' . $code . '</body>';
+            }
+
             // the loadHTML() method expects ISO-8859-1 by default;
-            // convert every native UTF-8 character to an entity
-            $load = $this->doc->loadHTML(mb_convert_encoding($code, 'HTML-ENTITIES', 'UTF-8'));
+            // force parsing as UTF-8 by injecting an XML declaration
+            $xmlDeclaration = 'encoding="UTF-8" id="' . Str::random(10) . '"';
+            $load = $this->doc->loadHTML('<?xml ' . $xmlDeclaration . '>' . $code);
+
+            // remove the injected XML declaration again
+            $pis = $this->query('//processing-instruction()');
+            foreach (iterator_to_array($pis) as $pi) {
+                if ($pi->data === $xmlDeclaration) {
+                    static::remove($pi);
+                }
+            }
 
             // remove the default doctype
-            if (Str::contains($code, '<!DOCTYPE ') === false) {
+            if (Str::contains($code, '<!DOCTYPE ', true) === false) {
                 static::remove($this->doc->doctype);
             }
         } else {
@@ -258,8 +282,60 @@ class Dom
         }
 
         // allow URLs that point to fragments inside the file
-        // as well as site-internal URLs
-        if (in_array(mb_substr($url, 0, 1), ['#', '/']) === true) {
+        if (mb_substr($url, 0, 1) === '#') {
+            return true;
+        }
+
+        // disallow protocol-relative URLs
+        if (mb_substr($url, 0, 2) === '//') {
+            return 'Protocol-relative URLs are not allowed';
+        }
+
+        // allow site-internal URLs that didn't match the
+        // protocol-relative check above
+        if (mb_substr($url, 0, 1) === '/') {
+            // if a CMS instance is active, only allow the URL
+            // if it doesn't point outside of the index URL
+            if ($kirby = App::instance(null, true)) {
+                $indexUrl = $kirby->url('index', true)->path()->toString(true);
+
+                if (Str::startsWith($url, $indexUrl) !== true) {
+                    return 'The URL points outside of the site index URL';
+                }
+
+                // disallow directory traversal outside of the index URL
+                // TODO: the ../ sequences could be cleaned from the URL
+                //       before the check by normalizing the URL; then the
+                //       check above can also validate URLs with ../ sequences
+                if (
+                    Str::contains($url, '../') !== false ||
+                    Str::contains($url, '..\\') !== false
+                ) {
+                    return 'The ../ sequence is not allowed in relative URLs';
+                }
+            }
+
+            // no active CMS instance, always allow site-internal URLs
+            return true;
+        }
+
+        // allow relative URLs (= URLs without a scheme);
+        // this is either a URL without colon or one where the
+        // part before the colon is definitely no valid scheme;
+        // see https://url.spec.whatwg.org/#url-writing
+        if (
+            Str::contains($url, ':') === false ||
+            Str::contains(Str::before($url, ':'), '/') === true
+        ) {
+            // disallow directory traversal as we cannot know
+            // in which URL context the URL will be printed
+            if (
+                Str::contains($url, '../') !== false ||
+                Str::contains($url, '..\\') !== false
+            ) {
+                return 'The ../ sequence is not allowed in relative URLs';
+            }
+
             return true;
         }
 
@@ -300,7 +376,7 @@ class Dom
         if (Str::startsWith($url, 'mailto:') === true) {
             $address = Str::after($url, 'mailto:');
 
-            if (empty($address) || V::email($address) === true) {
+            if (empty($address) === true || V::email($address) === true) {
                 return true;
             }
 
@@ -311,7 +387,10 @@ class Dom
         if (Str::startsWith($url, 'tel:') === true) {
             $address = Str::after($url, 'tel:');
 
-            if (empty($address) || preg_match('!^[+]?[0-9]+$!', $address)) {
+            if (
+                empty($address) === true ||
+                preg_match('!^[+]?[0-9]+$!', $address) === 1
+            ) {
                 return true;
             }
 
@@ -529,24 +608,26 @@ class Dom
     /**
      * Returns the document markup as string
      *
-     * @param bool $xmlDecl If set to `false`, the XML declaration
-     *                      is omitted from the output
+     * @param bool $normalize If set to `true`, the document
+     *                        is exported with an XML declaration/
+     *                        full HTML markup even if the input
+     *                        didn't have them
      * @return string
      */
-    public function toString(bool $xmlDecl = true): string
+    public function toString(bool $normalize = false): string
     {
-        if ($this->type === 'XML' && $xmlDecl === false) {
-            // only return child nodes, which omits the XML declaration
-            $result = '';
-            foreach ($this->doc->childNodes as $node) {
-                $result .= $this->doc->saveXML($node) . "\n";
-            }
-
-            return $result;
+        if ($this->type === 'HTML') {
+            $string = $this->exportHtml($normalize);
+        } else {
+            $string = $this->exportXml($normalize);
         }
 
-        $method = 'save' . $this->type;
-        return $this->doc->$method();
+        // add trailing newline if the input contained one
+        if (rtrim($this->code, "\r\n") !== $this->code) {
+            $string .= "\n";
+        }
+
+        return $string;
     }
 
     /**
@@ -569,6 +650,77 @@ class Dom
         }
 
         static::remove($node);
+    }
+
+    /**
+     * Returns the document markup as HTML string
+     *
+     * @param bool $normalize If set to `true`, the document
+     *                        is exported with full HTML markup
+     *                        even if the input didn't have it
+     * @return string
+     */
+    protected function exportHtml(bool $normalize = false): string
+    {
+        // enforce export as UTF-8 by injecting a <meta> tag
+        // at the beginning of the document
+        $metaTag = $this->doc->createElement('meta');
+        $metaTag->setAttribute('http-equiv', 'Content-Type');
+        $metaTag->setAttribute('content', 'text/html; charset=utf-8');
+        $metaTag->setAttribute('id', $metaId = Str::random(10));
+        $this->doc->insertBefore($metaTag, $this->doc->documentElement);
+
+        if (
+            preg_match('/<html[> ]/i', $this->code) === 1 ||
+            $this->doc->doctype !== null ||
+            $normalize === true
+        ) {
+            // full document
+            $html = $this->doc->saveHTML();
+        } elseif (preg_match('/<body[> ]/i', $this->code) === 1) {
+            // there was a <body>, but no <html>; export just the <body>
+            $html = $this->doc->saveHTML($this->body());
+        } else {
+            // just an HTML snippet
+            $html = $this->innerMarkup($this->body());
+        }
+
+        // remove the <meta> tag from the document and from the output
+        static::remove($metaTag);
+        $html = str_replace($this->doc->saveHTML($metaTag), '', $html);
+
+        return trim($html);
+    }
+
+    /**
+     * Returns the document markup as XML string
+     *
+     * @param bool $normalize If set to `true`, the document
+     *                        is exported with an XML declaration
+     *                        even if the input didn't have it
+     * @return string
+     */
+    protected function exportXml(bool $normalize = false): string
+    {
+        if (Str::contains($this->code, '<?xml ', true) === false && $normalize === false) {
+            // the input didn't contain an XML declaration;
+            // only return child nodes, which omits it
+            $result = [];
+            foreach ($this->doc->childNodes as $node) {
+                $result[] = $this->doc->saveXML($node);
+            }
+
+            return implode("\n", $result);
+        }
+
+        // ensure that the document is encoded as UTF-8
+        // unless a different encoding was specified in
+        // the input or before exporting
+        if ($this->doc->encoding === null) {
+            $this->doc->encoding = 'UTF-8';
+        }
+
+        return trim($this->doc->saveXML());
     }
 
     /**
