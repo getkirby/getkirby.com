@@ -43,6 +43,7 @@ class Layouts extends Items
 
     /**
      * Checks if a given block type exists in the layouts collection
+     * @since 3.6.0
      *
      * @param string $type
      * @return bool
@@ -77,17 +78,19 @@ class Layouts extends Items
 
     /**
      * Converts layouts to blocks
+     * @since 3.6.0
      *
+     * @param bool $includeHidden Sets whether to include hidden blocks
      * @return \Kirby\Cms\Blocks
      */
-    public function toBlocks()
+    public function toBlocks(bool $includeHidden = false)
     {
         $blocks = [];
 
         if ($this->isNotEmpty() === true) {
             foreach ($this->data() as $layout) {
                 foreach ($layout->columns() as $column) {
-                    foreach ($column->blocks() as $block) {
+                    foreach ($column->blocks($includeHidden) as $block) {
                         $blocks[] = $block->toArray();
                     }
                 }
