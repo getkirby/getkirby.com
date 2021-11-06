@@ -15,8 +15,6 @@
     <?php snippet('layouts/skipper') ?>
     <div class="header-content relative flex items-center">
       <?php snippet('layouts/logo') ?>
-      <p><a class="font-bold" href="https://github.com/getkirby/kirby/releases/latest">Kirby <span class="link tabular-nums"><?= $kirby->version() ?></span></a></p>
-
       <?php snippet('layouts/menu') ?>
       <?php snippet('layouts/search', ['area' => 'reference']) ?>
     </div>
