@@ -283,6 +283,10 @@
   border-radius: 3rem;
   margin-left: -.75rem;
 }
+.since summary.new {
+  background: var(--color-yellow-400);
+  border: 1px solid var(--color-yellow-500);
+}
 .since summary a {
   text-decoration: none;
 }
