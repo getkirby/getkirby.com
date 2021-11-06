@@ -5,3 +5,7 @@
 .logo svg {
   display: flex;
 }
+
+.logo + .version.archived .link {
+  text-decoration-color: var(--color-gray-400);
+}
