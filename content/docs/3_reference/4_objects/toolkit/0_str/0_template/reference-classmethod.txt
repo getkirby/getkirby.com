@@ -1,0 +1,2 @@
+Deprecated:
+3.6.0|The parameters `$fallback`, `$start` and `$end` have been deprecated and throw a deprecation warning. Use instead an `$options` array with `fallback`, `start` and/or `end` keys as third parameter.

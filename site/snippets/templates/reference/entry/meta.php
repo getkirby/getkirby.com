@@ -15,9 +15,9 @@ extract([
   <?php endif ?>
 
   <?php if (
-    is_a($page, ReferenceClassPage::class) === true || 
+    is_a($page, ReferenceClassPage::class) === true ||
     (
-      is_a($page, ReferenceClassmethodPage::class) === true && 
+      is_a($page, ReferenceClassmethodPage::class) === true &&
       $page->name() === '__construct'
     )
   ): ?>
@@ -58,10 +58,13 @@ extract([
 </ul>
 
 <?php if ($page->deprecated()->isNotEmpty()): ?>
-  <?php $deprecated = $page->deprecated()->split('|') ?>
-  <div class="prose box box--alert">
-    <?= icon('ban') ?>
-    <div>
+<?php $deprecated = $page->deprecated()->split('|') ?>
+<div class="prose">
+  <div class="box box--alert">
+    <figure class="box-icon iconbox bg-black color-white">
+      <?= icon('alert') ?>
+    </figure>
+    <div class="box-text">
       <div class="font-bold">
         Deprecated in <?= version($deprecated[0], '%s') ?>
       </div>
@@ -70,4 +73,5 @@ extract([
       <?php endif ?>
     </div>
   </div>
+</div>
 <?php endif ?>
