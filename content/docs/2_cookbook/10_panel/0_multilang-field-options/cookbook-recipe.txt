@@ -1,0 +1,163 @@
+Title: Multilang field options
+
+----
+
+Published: 2021-11-06
+
+----
+
+Description: Localized field options according to the selected content language
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Text:
+
+## Intro
+When you use language keys in your blueprints to (link: https://getkirby.com/docs/guide/blueprints/translations text: translate field labels etc.), these translations are shown based on the selected user language, not based on the currently selected content language.
+
+This example from the docs…
+
+```yaml
+fields:
+  category:
+      label:
+        en: Category
+        de: Kategorie
+      type: select
+      options:
+        architecture:
+          en: Architecture
+          de: Architektur
+        photography:
+          en: Photography
+          de: Fotografie
+        design:
+          en: Design
+          de: Design
+```
+
+will therefore not switch to the German translation when we switch the content language to German, but when a user selects German as their interface language.
+
+But often, users expect to see the translated option labels when they switch the content language. So, how can we achieve this?
+
+## Options from API
+
+Luckily, field options for the select or multiselect fields can be queried from an API. This API can be a simple route we define in our config. 
+
+Our custom API endpoint will return options for the different languages of our multisite.
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    // other config settings
+    'routes' => [
+        [
+            'pattern' => 'category-options/(:any)',
+            'action' => function($lang) {
+                $categories = [
+                    'en' => [
+                        'architecture' => 'Architecture',
+                        'photography'  => 'Photography',
+                        'design'       => 'Design'
+                    ],
+                    'de' => [
+                        'architecture' => 'Architektur',
+                        'photography'  => 'Fotografie',
+                        'design'       => 'Design'
+                    ],
+                ];
+                return $categories[$lang] ?? [];
+            }
+        ]
+    ],
+];
+````
+
+With this route in place, you can now change the field yaml from our example above like this:
+
+```yaml
+fields:
+  category:
+      label:
+        en: Category
+        de: Kategorie
+      type: select
+      options: api
+      api: "{{kirby.url}}/category-options/{{kirby.language.code}}"
+```
+## Result
+The option labels will now react when you switch the content language:
+
+(columns…)
+
+(image: options-english.png)
+
+++++
+
+(image: options-german.png)
+
+(…columns)
+
+## Using custom language variables
+Instead of hard-coding the translated labels in the array, we can take advantage of Kirby's (link: docs/guide/languages/custom-language-variables text: language variables).
+
+
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    // other config settings
+    'routes' => [
+        [
+            'pattern' => 'category-options/(:any)',
+            'action' => function($lang) {
+                $categories = [
+                    'en' => [
+                        'architecture' => I18n::translate('architecture', null, $lang),
+                        'photography'  => I18n::translate('photography', null, $lang),
+                        'design'       => I18n::translate('design', null, $lang)
+                    ],
+                    'de' => [
+                        'architecture' => I18n::translate('architecture', null, $lang),
+                        'photography'  => I18n::translate('photography', null, $lang),
+                        'design'       => I18n::translate('design', null, $lang)
+                    ],
+                ];
+                return $categories[$lang] ?? [];
+            }
+        ]
+    ],
+];
+```
+
+Then add the translations in your language definitions, e.g. for English:
+
+```php "/site/languages/en.php"
+return [
+    'code' => 'en',
+    'default' => true,
+    'direction' => 'ltr',
+    'locale' => [
+        'LC_ALL' => 'en_US'
+    ],
+    'name' => 'English',
+    'translations' => [
+        'architecture' => 'Architecture',
+        'photography' => 'Photography',
+        'design' => 'Design',
+    ],
+    'url' => $url
+];
+```
+
+You can now use these translations in the frontend as well.
+
+<info>
+We can't use the `t()` helper here in the route, because we have to pass the language code as parameter.
+</info>
