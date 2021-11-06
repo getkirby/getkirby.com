@@ -37,15 +37,5 @@ return [
         'action'  => function ($generation, $major, $path) {
             return page('releases/' . $generation . '-' . $major . '/' . $path);
         }
-    ],
-    [
-        'pattern' => '(:all?)',
-        'action'  => function ($path) {
-            if ($page = page($path)) {
-                return $page;
-            }
-
-            go('https://getkirby.com/' . $path);
-        }
     ]
 ];
