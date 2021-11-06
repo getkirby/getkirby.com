@@ -7,7 +7,6 @@ Text:
 <since v="3.6.0">
 <warning>
 Panel views have been replaced with (link: docs/reference/plugins/extensions/panel-areas text: Panel areas) in 3.6.0.
-</info>
 </warning>
 </since>
 
