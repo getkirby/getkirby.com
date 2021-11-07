@@ -124,15 +124,8 @@ layout: cards
 (image: cards.png)
 
 
-### Cardlets layout
+(docs: sections/cardlets)
 
-<since v="3.6.0">
-
-The `cardlets` layout is great for nice visual previews of pages, while your text content is still representend decently.
-
-```yaml
-layout: cardlets
-```
 
 (image: cardlets.png)
 
