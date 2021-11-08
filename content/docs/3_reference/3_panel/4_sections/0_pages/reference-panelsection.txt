@@ -261,7 +261,7 @@ image:
 
 #### Examples
 
-| `ratio: 2/3` | `ratio: 1/1` | `ratio: 3/2` | ratio: `16/9` |
+| `ratio: 2/3` | `ratio: 1/1` | `ratio: 3/2` | `ratio: 16/9` |
 | -   | -   | -   | -    |
 | (image: 2by3.png) | (image: 1by1.png) | (image: 3by2.png) | (image: 16by9.png) |
 
