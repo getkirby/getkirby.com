@@ -6,6 +6,9 @@
 .security-versions th {
   font-size: var(--text-sm);
 }
+.security-versions td:nth-child(2) {
+  text-align: center;
+}
 </style>
 
 <div class="security-versions table">
