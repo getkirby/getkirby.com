@@ -46,8 +46,6 @@ The most important stuff for our new area happens in the PHP part. Inside the `m
 ```php "/site/plugins/moviereviews/index.php"
 <?php
 
-use Kirby\Cms\App as Kirby;
-
 Kirby::plugin('cookbook/moviereviews', [
   'areas' => [
     'moviereviews' => function ($kirby) {
@@ -98,7 +96,7 @@ Kirby::plugin('cookbook/moviereviews', [
 
 We define a new (link: docs/reference/plugins/extensions/panel-areas text: area) inside the `areas` array. Within that array, the `views` array contains the different routes that belong to the area. Here we only define one main view.
 
-Each route return an array which will be injected into our Vue app. The array controls the Vue component, the props for the component, and the settings for the current view (like breadcrumb, title, active search type etc.).
+Each route returns an array which will be injected into our Vue app. The array controls the Vue component, the props for the component, and the settings for the current view (like breadcrumb, title, active search type etc.).
 
 In our example, we set the component (`moviereviews`), the document title and the props.
 
@@ -115,7 +113,7 @@ import MovieReviews from "./components/MovieReviews.vue";
 
 panel.plugin("cookbook/moviereviews", {
   components: {
-    'moviereviews': MovieReviews,
+    moviereviews: MovieReviews,
   },
 });
 ```
@@ -146,7 +144,7 @@ Inside `MovieReviews.vue`, we use Kirby's `k-inside`, `k-view` and `k-header` co
 </script>
 ```
 
-Within the script tags, we set up the same props we already defined in our `index.php´.
+Within the script tags, we set up the same props we already defined in our `index.php`.
 
 ## Compile and check
 
