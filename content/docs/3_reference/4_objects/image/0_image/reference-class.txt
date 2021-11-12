@@ -1,0 +1,10 @@
+
+Class: Kirby\Image\Image
+
+----
+
+Text:
+
+<info>
+If you use or echo the `$image` object as string, it will be returned as HTML `<img>` tag.
+</info>
