@@ -48,6 +48,8 @@ Text:
 - Hidden blocks are no longer visible in layouts [#3857](https://github.com/getkirby/kirby/issues/3857)
 - The `image/svg` MIME type is now recognized by the `Sane` classes
 - Account files are now fully accessible through the account view, even if permissions for the users area is blocked [#2580](https://github.com/getkirby/kirby/issues/2580)
+- Fixed nested blocks drawer breadcrumb issue [#3871](https://github.com/getkirby/kirby/issues/3871)
+- Fix rotating loader in Firefox
 
 ## Fixed regressions from 3.6.0-alpha.1
 
@@ -156,3 +158,11 @@ Text:
 - Language dropdown is no longer missing when adding languages manually [#3888](https://github.com/getkirby/kirby/issues/3888)
 - The `k-link` component now correctly handles absolute URLs
 - The `writer` field allows relative URLs again. [#3754](https://github.com/getkirby/kirby/issues/3754)
+
+## Fixed regressions from 3.6.0-rc.4
+
+- Fixed cursor on the empty box in pages and files sections [#3915](https://github.com/getkirby/kirby/issues/3915)
+- Fixed strikethrough tag for writer field [#3920](https://github.com/getkirby/kirby/issues/3920)
+- Fixed layout shift when opening overlays [#3823](https://github.com/getkirby/kirby/issues/3823)
+- Fixed dialog reset when dialogs are not closed properly [#3923](https://github.com/getkirby/kirby/issues/3923)
+- Fix hover effect on disabled buttons

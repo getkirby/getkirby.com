@@ -58,6 +58,8 @@ Text:
 - The `toggle` field now supports the query syntax in the `text` property
 - The `RadioInput` component now supports (escaped) HTML in the `info` property for radio options.
 - The `k-dropdown-content` component is now compatible with our dynamic Fiber dropdowns. You can pass a string for the `options` prop and the component will automatically load the matching Fiber dropdown defined in PHP.
+- Use Tailwind `sr-only` utility instead of `k-offscreen` The old class name is still available to avoid breaking change
+- Moved offline warning to new `k-offline-warning` component. The offline warning is now translatable with `error.offline` and has a new design.
 
 ```html
 <k-dropdown-content options="my/custom/dropdown" />

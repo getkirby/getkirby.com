@@ -8,6 +8,7 @@ Text:
 :root {
   --color-backdrop: rgba(0, 0, 0, 0.6);
   --color-black: #000;
+  --color-dark: #313740;
   --color-light: var(--color-gray-200);
   --color-white: #fff;
 
@@ -122,6 +123,25 @@ Text:
   --text-4xl: 2.5rem;
   --text-5xl: 3rem;
   --text-6xl: 4rem;
+
+  --z-offline: 1200;
+  --z-fatal: 1100;
+  --z-loader: 1000;
+  --z-notification: 900;
+  --z-dialog: 800;
+  --z-navigation: 700;
+  --z-dropdown: 600;
+  --z-drawer: 500;
+  --z-dropzone: 400;
+  --z-toolbar: 300;
+  --z-content: 200;
+  --z-background: 100;
+
+  --bg-pattern: repeating-conic-gradient(rgba(0,0,0, 0) 0% 25%, rgba(0,0,0, .2) 0% 50%) 50% / 20px 20px;
+
+  --shadow-sticky: rgba(0, 0, 0, .05) 0 2px 5px;
+  --shadow-dropdown: var(--shadow-lg);
+  --shadow-item: var(--shadow);
 }
 ```
 
