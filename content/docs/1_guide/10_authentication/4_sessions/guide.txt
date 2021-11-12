@@ -124,7 +124,6 @@ If a session already exists, it is automatically extended appropriately, so you 
 
 ## Manually collecting garbage
 
-<since v="3.3.1">
 Kirby periodically deletes expired sessions (so-called "garbage collection").
 
 If your site has lots of users or if you create sessions for your site visitors, it might make sense to clean up expired sessions in the background to increase performance.
@@ -151,7 +150,6 @@ require 'path/to/kirby/bootstrap.php';
 $kirby = new Kirby();
 $kirby->sessionHandler()->collectGarbage();
 ```
-</since>
 
 ## Configuration
 

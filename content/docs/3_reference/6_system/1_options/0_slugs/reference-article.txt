@@ -6,7 +6,6 @@ Text:
 
 ## Set language for slug generator
 
-<since v="3.0.3">
 You can set a language for Kirby's slug generator, so that it uses the language specific settings:
 
 ```php "/site/config/config.php"
@@ -20,16 +19,13 @@ Additionally, you can define custom rules:
 
 ```php  "/site/config/config.php"
 Str::$language = [
-  'ß' => 'sz' 
+  'ß' => 'sz'
 ];
 ```
 
 These custom rules have to be stored in a (link: docs/guide/plugins/plugin-basics text: plugin).
-</since>
 
 ## Set allowed max length of slugs
-
-<since v="3.4.3">
 
 You can set a maximum length for page slugs:
 
@@ -38,5 +34,3 @@ return [
   'slugs.maxlength' => 120
 ];
 ```
-
-</since>

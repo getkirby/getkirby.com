@@ -32,8 +32,6 @@ If you come from Kirby 2, please note that the title field is automatically adde
 
 ## Conditional fields
 
-<since v="3.1.0">
-
 In all fields, you can set a condition for displaying the field via the `when` option. In the `when` option you define a field name as the key and the required value of that field. In the following example, the text field is only shown when the toggle is set to `true`:
 
 ```yaml
@@ -68,8 +66,6 @@ fields:
 <info>
 Field names still need to be unique, no matter if they are displayed at the same time or not. Values of undisplayed fields will still be preserved and stored in the content file.
 </info>
-
-</since>
 
 ## Validating fields
 
@@ -115,7 +111,7 @@ text:
   validate:
     startsWith:
       AB-
-```      
+```
 
 ## Field shortcuts
 
@@ -139,7 +135,7 @@ fields:
       - a
       - b
       - c
-```      
+```
 
 ## Custom fields
 

@@ -1,8 +1,6 @@
 Details:
 
-<since v="3.4.0">
-The `$final` argument was added in Kirby 3.4.0. It tells you whether the specific route was used by the router (in which case `$final` is `true`) or skipped because the route called `$this->next()` (in which case `$final` is `false`).
-</since>
+The `$final` argument tells you whether the specific route was used by the router (in which case `$final` is `true`) or skipped because the route called `$this->next()` (in which case `$final` is `false`).
 
 ## When is the hook triggered
 

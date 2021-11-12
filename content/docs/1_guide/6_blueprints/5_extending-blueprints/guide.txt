@@ -283,7 +283,6 @@ tabs:
 
 ## Unset parts of extended blueprints
 
-<since v="3.2.0">
 When you reuse mixins for blueprints, such as field definitions or entire tabs, you can unset the parts that you don't want/need.
 
 
@@ -304,10 +303,8 @@ Then in the extending blueprint …
 
 ```yaml
 tabs:
-  seo: 
+  seo:
     extends: tabs/seo
     fields:
       seoDescription: false
 ```
-
-</since>

@@ -120,37 +120,34 @@ fields:
 			price:
 				type: number
 ```
-<since v="3.2.0">
 Structure columns can be set to any fraction and will be automatically calculated into the right width.
 
 ```yaml
-fields: 
-  mystructure: 
+fields:
+  mystructure:
     label: Structure
     type: structure
-    columns: 
-      title: 
-        width: 3/5		
-      images: 
+    columns:
+      title:
+        width: 3/5
+      images:
         width: 1/5
-      price: 
+      price:
         width: 1/10
-    fields: 
-      title: 
+    fields:
+      title:
         label: A
         type: text
-      images: 
+      images:
         label: B
         type: text
-      price: 
+      price:
         label: C
         type: text
-```        
-</since>
+```
 
 ### Hide toggle field text in preview
 
-<since v="3.3.0">
 When using toggle fields within structures, displaying the field's text in the preview can sometimes look cluttered. You can hide the text with the `text` option in the columns' definition.
 
 ```yaml
@@ -167,8 +164,7 @@ fields:
       b:
         type: toggle
         text: this is some long text
-```        
-</since>
+```
 
 ## Preview of fields in the table
 
@@ -181,7 +177,7 @@ To access a structure field in your templates, you can use the [`yaml()`](/docs/
 Let's say we wanted to render the `holidays` structure field example from above in a template:
 
 ```php
-<?php 
+<?php
 // using the `toStructure()` method, we create a structure collection
 $items = $page->holidays()->toStructure();
 // we can then loop through the entries and render the individual fields

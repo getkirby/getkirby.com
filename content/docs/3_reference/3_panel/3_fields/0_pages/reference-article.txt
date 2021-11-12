@@ -85,8 +85,6 @@ By default, users can also select subpages of the given selection. Use the `subp
 
 ### Include subpages
 
-<since v="3.3.0">
-
 With the subpages property you can control whether or not you want to navigate the subpages of the given parent. The default is set to `true`:
 
 ```yaml
@@ -96,8 +94,6 @@ pages:
   subpages: false
 ```
 This will deactivate the subpage navigation and only show the first level pages (or the children of the page set in the `query` option).
-
-</since>
 
 
 ## Preview images
@@ -109,8 +105,6 @@ image: page.image.findBy("name", "cover")
 ```
 
 ### Preview image from assets folder
-
-<since v="3.2.0">
 
 You can also provide an image from the assets folder via a page model, for example as a fallback if the page has no images:
 
@@ -128,7 +122,7 @@ class AlbumPage extends Page
             return new Asset("assets/images/default.jpg");
         }
         return false;
-        
+
     }
 }
 ```
@@ -143,7 +137,6 @@ image: page.previewImage
 Note that a model only works for pages that share the same blueprint. For pages with different blueprints, use a (link: docs/reference/plugins/extensions/page-methods text: custom page method) instead.
 </info>
 
-</since>
 
 For more fine-grained control you can set further options:
 

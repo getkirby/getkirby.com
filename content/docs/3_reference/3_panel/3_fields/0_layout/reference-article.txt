@@ -54,7 +54,6 @@ Those layouts will then show up in the layout selector when an editor creates a 
 (image: selector.png)
 
 ### Available widths
-<since v="3.5.1">
 
 The layout field supports up to 12 columns and all are listed below.
 
@@ -70,7 +69,6 @@ The layout field supports up to 12 columns and all are listed below.
 - `10/12`
 - `11/12`
 - `12/12`
-</since>
 
 ## Fieldsets
 
@@ -159,7 +157,6 @@ fields:
               type: text
 ```
 ## Reusing and extending layout settings
-<since v="3.5.1">
 
 If you always use the same options in layouts and want to easily update all of them from a single file without repeating the options, you can reuse or extend the layout settings. Let's see how:
 
@@ -201,6 +198,5 @@ fields:
           type: text
           default: FFF
 ```
-</since>
 
 (docs: layouts/to-layouts)

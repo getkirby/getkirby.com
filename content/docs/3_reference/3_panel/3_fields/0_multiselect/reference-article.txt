@@ -41,10 +41,9 @@ fields:
 
 (docs: panel-field-options field: multiselect)
 
-## Customise search behavior 
+## Customise search behavior
 
-<since v="3.4.0">
-Multiselect fields with a huge amount of options can get a bit less responsive when all options have to be displayed immediately. For that use case, you can customise the `search` option a bit more. Instead of just activating/deactivating it (`true`/`false`), you can pass suboptions: 
+Multiselect fields with a huge amount of options can get a bit less responsive when all options have to be displayed immediately. For that use case, you can customise the `search` option a bit more. Instead of just activating/deactivating it (`true`/`false`), you can pass suboptions:
 
 
 ```yaml
@@ -54,7 +53,6 @@ search:
 ```
 
 Now the filtering of options will only begin when at least 3 characters have been typed into the search input. And only up to 10 options will be displayed (you can still reveal all fitlered options via an extra click).
-</since>
 
 ## How to use in templates/snippets
 

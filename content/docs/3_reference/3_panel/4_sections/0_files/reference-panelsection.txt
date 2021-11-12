@@ -27,7 +27,6 @@ sections:
 ```
 ## Section shortcuts
 
-<since v="3.3.0">
 For simple sections that are only used once per blueprint, you can use shortcuts. In its most basic form, a `files` section consists of the section type as name, and  `true` as its value.
 
 ```yaml
@@ -47,7 +46,7 @@ sections:
     template: cover
 ```
 Keep in mind that the same section name can only be used once per blueprint.
-</since>
+
 
 ## Section properties
 
@@ -218,14 +217,12 @@ You can sort the list of files by a given field in descending or ascending order
 sortBy: filename desc
 ```
 
-<since v="3.2.3">
 You can pass (link: https://www.php.net/manual/en/function.sort.php text: PHP sorting type flags), for example to make sorting work with special language specific characters.
 
 ```yaml
 sortBy: filename SORT_LOCALE_STRING
 sortBy: filename asc SORT_LOCALE_STRING
 ```
-</since>
 
 <info>
 The `sortBy` option will automatically switch off manual sorting.
@@ -241,8 +238,6 @@ sortable: false
 
 ### `flip`
 
-<since v="3.3.0">
-
 Use the `flip` option to enable/disable reverse sorting (default is `false`):
 
 ```yaml
@@ -250,7 +245,6 @@ sortBy: filename
 flip: true
 ```
 
-</since>
 
 ## Limits
 
