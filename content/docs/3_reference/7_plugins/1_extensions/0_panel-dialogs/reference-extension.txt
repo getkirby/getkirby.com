@@ -16,10 +16,10 @@ All reuse the same dialog components:
 
 | Component name | Usage |
 | --- | --- |
-| `k-error-dialog` | For detailed error warnings (i.e. form validation) |
-| `k-form-dialog` | For dialogs with form fields and submit buttons |
-| `k-remove-dialog` | To confirm deleting items |
-| `k-text-dialog` | For dialogs with a custom text message |
+| (link: docs/reference/plugins/ui/error-dialog text: `k-error-dialog`) | For detailed error warnings (i.e. form validation) |
+| (link: docs/reference/plugins/ui/form-dialog text: `k-form-dialog`) | For dialogs with form fields and submit buttons |
+| (link: docs/reference/plugins/ui/remove-dialog text: `k-remove-dialog`) | To confirm deleting items |
+| (link: docs/reference/plugins/ui/text-dialog text: `k-text-dialog`) | For dialogs with a custom text message |
 
 More components will be supported in future releases.
 
