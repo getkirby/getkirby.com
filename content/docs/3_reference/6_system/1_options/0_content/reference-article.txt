@@ -32,7 +32,6 @@ return [
 
 ## Content locking
 
-<since v="3.2.5">
 Deactivate the content locking mechanism used by the Panel to prevent concurrent edits to a page, file or user:
 
 ```php
@@ -42,11 +41,9 @@ return [
   ]
 ];
 ```
-</since>
 
 ## Salt for drafts and media files
 
-<since v="3.4.0">
 URLs of page drafts and media files contain a hashed token that should be hard to guess. The token is based on the filesystem path of the page/file by default, but you can define your own salt that will be used instead:
 
 ```php
@@ -68,4 +65,3 @@ return [
   ]
 ];
 ```
-</since>

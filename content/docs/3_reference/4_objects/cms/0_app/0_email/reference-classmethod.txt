@@ -33,15 +33,10 @@ try {
 
 #### `from` with name
 
-<since v="3.3.2">
 ```php
 'from'     => 'no-reply@supercompany.com',
 'fromName' => 'Jane Doe'
 ```
-</since>
-
-
-<since v="3.3.2">
 
 #### `from` with user object
 
@@ -53,18 +48,12 @@ $from = new \Kirby\Cms\User([
 
 'from'     => $from,
 ```
-</since>
-
-
-<since v="3.3.2">
 
 #### `replyTo` with name
 ```php
 'replyTo'     => 'jane@supercompany.com',
 'replyToName' => 'Jane Doe'
 ```
-
-</since>
 
 
 ### `to` , `cc` and `bcc`
@@ -77,13 +66,11 @@ $from = new \Kirby\Cms\User([
 'bcc' => 'simone@example.com',
 ```
 
-<since v="3.3.2">
 #### Single recipient with name
 
 ```php
 'to' => ['jane@example.com', 'Super Company'],
 ```
-</since>
 
 #### Multiple recipients
 
@@ -103,8 +90,6 @@ $kirby->email([
 ]);
 ```
 
-<since v="3.3.2">
-
 ### Multiple recipients with name
 
 ```php
@@ -120,4 +105,3 @@ $kirby->email([
     ['mark@otto.com', 'Mark Otto']
 ],
 ```
-</since>

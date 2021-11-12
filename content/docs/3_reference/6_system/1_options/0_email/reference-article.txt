@@ -36,9 +36,7 @@ return [
 ];
 ```
 
-<since v="3.5.1">
 If `security` is set to `true`, Kirby automatically converts it to `'tls'` or `'ssl'` depending on the configured port. If no port is given and secure transport is enabled, the port is set to 587 (the common port for SMTP over TLS).
-</since>
 
 You can also use `'tls'` or `'ssl'` explicitly via the `security` key:
 

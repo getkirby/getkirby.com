@@ -35,11 +35,11 @@ Kirby's current version number is stored in `/kirby/composer.json` in the versio
 
 Your server's security is essential for the security of your website and data as well as Kirby's security. Please make sure that you work together with experienced system administrators and hosting partners who keep your server up to date and know how to protect it against external attacks. Don't try to setup your own server if you don't exactly know what you are doing.
 
-### Use secure connections to your server
+### Connecting with your server
 
 Unfortunately, many cheap hosting providers still offer normal FTP accounts for their customers. This is a horrible idea. Always make sure that you only **connect to your server via a secured connection** (SFTP, SSH). A regular FTP connection submits your password in plain text over the network. It is very easy to get access to your password that way.
 
-### Use and enforce HTTPS
+### HTTPS
 
 We can only encourage you to **use a TLS certificate** for your domain. Nowadays it is very easy to get a free certificate from [Let's Encrypt](https://letsencrypt.org/), which even offers easy installation and updates.
 
@@ -53,21 +53,17 @@ Many providers unfortunately still offer very old PHP versions which are no long
 
 You can check which PHP versions are still supported on the (link: https://php.net/supported-versions.php text: PHP website).
 
-### Restrict the set of executable files
+## Passwords
 
-Because Kirby uses PHP, your web server needs to execute PHP files with the file extension `.php`.
+Use very long passwords for the connection to your server and for your Panel logins! Try to convince your clients to use something more secure than `123456789` as well. Short passwords can be hacked by a brute-force attack within seconds. They are no longer a viable protection. Also make sure to use different passwords for different sites and tools. Never use the same password more than once. The Panel helps you with **long and secure password** suggestions on installation and in the user account management.
 
-Some providers unfortunately still support alternative file extensions or even other scripting languages like Perl.
+The Panel also has a built-in **brute-force protection** for the Panel login. It will delay requests with invalid credentials and also block access to the Panel by IP address and by user after 10 login failures within an hour. You can change these defaults with the (link: docs/reference/system/options/auth text: auth options). Please note that Kirby can't protect your SFTP/SSH accounts, also brute-force attacks are only hindered and not prevented entirely. So it's always important to use strong passwords.
 
-Once an executable file gets on your server (e.g. via file upload in the Panel), this file can be executed simply by accessing its URL. Because the executed script has full access to your files, such attacks can have devastating consequences.
-
-Kirby protects against file uploads with the extensions `.php*`, `.phar*` and `.phtml*` by default (which includes deprecated extensions like `.php5`). Please make sure that your web server does not execute files with any other file extension.
-
-### Block access to sensitive folders and files
+## Blocked folders and files
 
 Kirby's default `.htaccess` file for Apache comes with a set of predefined rules to block external access to certain files and folders in order to secure them. If you run your own `.htaccess` file with your own set of rules, or if you use another server architecture such as Nginx, make sure to block the same files and folders with your setup.
 
-#### Text files in your `content` folder
+### Text files in your `content` folder
 
 All text files within the `content` folder should not be accessible from the outside. Kirby's `.htaccess` file uses the following rule to achieve this:
 
@@ -77,7 +73,7 @@ RewriteRule ^content/(.*)\.(txt|md|mdown)$ index.php [L]
 
 Check if this rule works in your setup by browsing to one of your content text files (e.g. http://yourdomain.com/content/site.txt). If your setup is correct, you should be redirected to the error page.
 
-#### Your `site` folder
+### Your `site` folder
 
 All your files within the `site` folder must be protected as well. Kirby's rule for this is:
 
@@ -87,7 +83,7 @@ RewriteRule ^site/(.*) index.php [L]
 
 You can check if this block works by browsing to http://yourdomain.com/site/config/config.php. If everything is correct, you will be redirected to the error page.
 
-#### Your `kirby` folder
+### Your `kirby` folder
 
 Last but not least your `kirby` folder must be protected as well. Here's the rule:
 
@@ -97,7 +93,7 @@ RewriteRule ^kirby/(.*) index.php [L]
 
 By browsing to http://yourdomain.com/kirby/bootstrap.php, you can make sure that you will be correctly redirected to the error page.
 
-### Prevent directory listings
+## Prevent directory listings
 
 Check if your provider/system administrator has disabled (link: https://wiki.apache.org/httpd/DirectoryListings text: directory listings), so that the contents of your directories are not listed if accessed directly. If directory listings are enabled and you don't have access to the server configuration, add the following command in your `.htaccess` file:
 
@@ -105,19 +101,11 @@ Check if your provider/system administrator has disabled (link: https://wiki.apa
 Options -Indexes
 ```
 
-### Restrict file permissions
+## File Permissions
 
 Never set the file permissions on your server too wide (777). Especially on a shared hosting environment, other users could get access to important files of your site and overwrite or read them.
 
 We are working on our own dedicated docs on secure file permissions, but you can find an excellent introduction into (link: http://www.smashingmagazine.com/2014/05/proper-wordpress-filesystem-permissions-ownerships text: secure file permissions for WordPress on Smashing Magazine). Those instructions can be applied to any Kirby installation as well.
-
-## Use good passwords
-
-Use very long passwords for the connection to your server and for your Panel logins! Try to convince your clients to use something more secure than `123456789` as well. Short passwords can be hacked by a brute-force attack within seconds. They are no longer a viable protection. Also make sure to use different passwords for different sites and tools. Never use the same password more than once. The Panel helps you with **long and secure password** suggestions on installation and in the user account management.
-
-<since v="3.2.3">
-The Panel also has a built-in **brute-force protection** for the Panel login. It will delay requests with invalid credentials and also block access to the Panel by IP address and by user after 10 login failures within an hour. You can change these defaults with the (link: docs/reference/system/options/auth text: auth options). Please note that Kirby can't protect your SFTP/SSH accounts, also brute-force attacks are only hindered and not prevented entirely. So it's always important to use strong passwords.
-</since>
 
 ## Secure data in Git repositories
 
@@ -136,7 +124,7 @@ config.dev.mysite.com.php
 config.mysite.com.php
 ```
 
-## Filer and sanitize inputs
+## Input filtering and sanitization
 
 If you work with forms or any other kind of user-generated content on your site, you have to make sure to properly **filter and sanitize any user input**. Even though Kirby does not use a database system and SQL injections are therefore not possible, an attacker could still add malicious input to your text files in order to try to manipulate your site.
 
@@ -156,6 +144,6 @@ Not all content you render in your templates or snippets can be trusted. For exa
 
 When you cannot fully trust the content, it is important to (link: docs/guide/templates/escaping text: escape it correctly) before it's sent to the browser to prevent cross-site scripting (XSS) attacks.
 
-## How to report vulnerabilities in Kirby
+## Reporting a Vulnerability
 
 If you have spotted a vulnerability in Kirby's core or the Panel, please take a look at our (link: security#reporting-a-vulnerability text: security policy) for more information on how to report the vulnerability to us.

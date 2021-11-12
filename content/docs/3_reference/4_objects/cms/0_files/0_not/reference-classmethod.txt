@@ -1,4 +1,4 @@
-Text: 
+Text:
 
 ## Example
 
@@ -15,8 +15,6 @@ Text:
 ```
 
 ### Array of ids, collections or objects as argument
-
-<since v="3.4.3">
 
 You can also use an array of ids, collections or objects or a mixture of them to exclude from a collection:
 
@@ -37,4 +35,3 @@ $files = $page->images()->not([image('image-a.jpg'), image('image-b.jpg')]);
 ```php
 $files = $page->files()->not([$page->files()->template('cover'), image('image-a.jpg'), 'image-b.jpg']);
 ```
-</since>
