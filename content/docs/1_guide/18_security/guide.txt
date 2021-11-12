@@ -134,7 +134,7 @@ config.dev.mysite.com.php
 config.mysite.com.php
 ```
 
-## Filer and sanitize inputs
+## Filter and sanitize inputs
 
 If you work with forms or any other kind of user-generated content on your site, you have to make sure to properly **filter and sanitize any user input**. Even though Kirby does not use a database system and SQL injections are therefore not possible, an attacker could still add malicious input to your text files in order to try to manipulate your site.
 
