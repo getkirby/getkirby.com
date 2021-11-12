@@ -10,7 +10,6 @@ Since:
 ----
 Text:
 
-<since v="3.2.0">
 Kirby's slug generator has language specific rules that improve the quality of created slugs in the Panel drastically. If you have certain preferences, you can define your own rules for each language in the language files:
 
 ```php "/site/languages/de.php"
@@ -27,4 +26,3 @@ return [
   ]
 ];
 ```
-</since>

@@ -65,7 +65,7 @@ $kirby->collection("project-covers");
 You can loop through the collections like through any collection like this:
 
 ```php
-<?php 
+<?php
 foreach($kirby->collection('articles') as $article) {
 	echo $article->title()->html();
 }
@@ -79,7 +79,6 @@ $articles = $kirby->collection('articles');
 
 ### Nested collections
 
-<since v="3.1.0">
 If you have a lot of collections, it might come handy to organize them in subfolders. Kirby can handle this:
 
 ```php "/site/collections/articles/latest.php"
@@ -93,7 +92,6 @@ return function ($site) {
 ```php
 $kirby->collection("articles/latest");
 ```
-</since>
 
 ## Best practices
 

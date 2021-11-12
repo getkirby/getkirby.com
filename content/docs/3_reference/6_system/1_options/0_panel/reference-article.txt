@@ -123,9 +123,7 @@ return [
 ];
 ```
 
-<since v="3.5.1">
 If the Panel language is not configured, Kirby will default to English on single-language sites and the default content language on multi-language sites.
-</since>
 
 ## KirbyText/Markdown
 
@@ -141,7 +139,6 @@ return [
 
 ### Drag texts
 
-<since v="3.4.3">
 You can define custom callback functions (`pageDragText` or `fileDragText`) for the text that gets inserted when dragging a page or a file on a textarea, e.g.
 
 ```php
@@ -167,4 +164,3 @@ return [
     ],
 ];
 ```
-</since>

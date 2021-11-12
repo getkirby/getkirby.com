@@ -19,7 +19,6 @@ $image->srcset([
 
 ### More complex sizes options
 
-<since v="3.2.0">
 The `$sizes` parameter also accepts an associated array of options:
 
 ```php
@@ -42,12 +41,9 @@ $image->srcset([
 ]);
 ```
 
-</since>
-
 ### Convert image format
 
 <since v="3.6.0">
-
 ```php
 $image->srcset([
   '400w'  => ['width' => 400, 'format' => 'webp'],
@@ -55,7 +51,6 @@ $image->srcset([
   '1200w' => ['width' => 1200, 'format' => 'webp']
 ])
 ```
-
 </since>
 
 ## Define presets

@@ -11,31 +11,20 @@ Text:
 
 ## Content locking
 
-<since v="3.2.0">
-
 Kirby automatically locks pages that are currently being edited by another user in the Panel, making working in teams a lot safer. If you open a page that is edited by another user, you are informed about the editing user and cannot overwrite their changes.
 
 (image: content-locking.png)
 
 If the editing user doesn't save their changes within 2 minutes, you can unlock the page. If you do so, the editing user is informed that their changes have been overwritten and can then download them to edit the unsaved changes manually.
 
-</since>
 
-<since v="3.2.5">
-
-You can deactivate content locking via the (link: docs/reference/system/options/content#content-locking text: `content.locking` config option) in your `site/config/config.php`. 
-
-</since>
+You can deactivate content locking via the (link: docs/reference/system/options/content#content-locking text: `content.locking` config option) in your `site/config/config.php`.
 
 ## Unsaved changes
-
-<since v="3.3.0">
 
 When you edit pages, files or user accounts in the Panel, you will see an "unsaved changes" icon in the topbar. This overview of unsaved changes makes it a lot easier to keep track of content that is still work-in-progress.
 
 (image: unsaved-changes.png)
-
-</since>
 
 ## Page states
 Kirby's page states give you full control over your publishing workflow. They allows you to define access to content, to filter content by status criteria and much more.

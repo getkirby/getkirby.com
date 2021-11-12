@@ -80,8 +80,6 @@ fields:
 
 ## File upload and select
 
-<since v="3.1.0">
-
 (image: file-selector.png)
 
 The file upload and select button is super useful if you want to embed images or other files right in your text.
@@ -117,23 +115,20 @@ textarea:
   uploads: false
 ```
 
-</since>
 
 (docs: panel-field-max-and-min field: textarea)
 
 ## Monospace
 
-<since v="3.2.0">
 You can set the `font` option to `monospace`, for example for fields that contain code:
 
 ```yaml
-fields: 
-  text: 
+fields:
+  text:
     label: Text
     type: textarea
     font: monospace
-```    
-</since>
+```
 
 
 ## How to use in templates/snippets
