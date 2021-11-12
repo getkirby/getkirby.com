@@ -31,7 +31,7 @@ class ReferenceHooksPage extends SectionPage
             ], $content);
 
             return [
-                'slug'     => Str::slug($hook['Name']),
+                'slug'     => $slug,
                 'template' => 'reference-hook',
                 'model'    => 'reference-hook',
                 'num'      => 0,

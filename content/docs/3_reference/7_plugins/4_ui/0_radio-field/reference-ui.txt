@@ -1,6 +1,6 @@
-Title: Radio Field
-----
 Text:
+
+## Example
 
 ```html
 <k-radio-field
@@ -16,36 +16,6 @@ Text:
 	@input="input"
 />
 ```
-
-## Props
-
-(docs: fields/props/autofocus)
-
-(docs: fields/props/disabled)
-
-(docs: fields/props/help)
-
-(docs: fields/props/icon)
-
-(docs: fields/props/label)
-
-(docs: fields/props/name)
-
-(docs: fields/props/options)
-
-(docs: fields/props/required)
-
-### value / v-model
-
-`String|Number|Boolean (default: null)`
-
-## Methods
-
-(docs: fields/methods/focus)
-
-## Events
-
-(docs: fields/events/input)
 
 ## CSS class
 
