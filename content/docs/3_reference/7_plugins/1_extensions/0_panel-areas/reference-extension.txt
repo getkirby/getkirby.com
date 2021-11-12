@@ -10,18 +10,18 @@ Text:
 
 Every part of the Panel is a separated area with routes, optional menu item, icon, breadcrumb label, access permissions, etc.
 
-Your plugins can create additional areas for entire new Panel parts and mini applications. 
+Your plugins can create additional areas for entire new Panel parts and mini applications.
 
 ## Default areas
 
 The following "areas" are installed by default:
 
-- account
-- installation
-- login
-- settings
-- site
-- users
+- `account`
+- `installation`
+- `login`
+- `settings`
+- `site`
+- `users`
 
 ## Area definition
 
@@ -333,13 +333,14 @@ Area | View name
 `account` | `password`
 `installation` | `installation`
 `installation` | `installation.fallback`
+`languages` | `languages`
 `login` | `login`
 `login` | `login.fallback`
-`settings` | `settings`
 `site` | `site`
 `site` | `site.file`
 `site` | `page`
 `site` | `page.file`
+`system` | `system`
 `users` | `user`
 `users` | `user.file`
 `users` | `users`
