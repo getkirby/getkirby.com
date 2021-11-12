@@ -1,9 +1,5 @@
 Text:
 
-<info>
-Make sure to check out `<k-dropdown-content>` and `<k-dropdown-item>`.
-</info>
-
 ## Example
 
 ```html
@@ -37,7 +33,16 @@ Instead of adding `k-dropdown-item` elements manually, you can also inject them 
 </k-dropdown>
 ```
 
-### Dynamic from an async function (e.g. API call)
+### from dropdown extension
+
+Using a (link: docs/reference/plugins/extensions/panel-dropdowns text: Panel dropdown extension), you can simply reference it like this:
+
+```html
+<k-dropdown-content options="my/custom/dropdown" />`
+```
+
+
+### from an async function (e.g. API call)
 
 The item array can also be returned in an options handler to dynamically load options
 
@@ -64,7 +69,7 @@ export default {
 </script>
 ```
 
-### From an JSON API endpoint
+### from an JSON API endpoint
 
 Dropdown items can also be fetched from a JSON endpoint:
 
