@@ -40,9 +40,7 @@ fields:
 
 ## Using `KirbyText`
 
-<since v="3.3.0">
 In addition to markdown, you can use `KirbyText` in your info text, even including images:
-</since>
 
 ```yaml
 info:
@@ -72,7 +70,6 @@ fields:
 
 ### Disable theming
 
-<since v="3.3.4">
 You can disable the infobox theme entirely to show neutral text.
 
 ```yaml
@@ -83,4 +80,3 @@ fields:
     theme: none
     text: This is a very neutral message.
 ```
-</since>

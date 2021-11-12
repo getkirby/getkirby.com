@@ -88,7 +88,6 @@ export default {
 
 Fired when all files have been uploaded successfully.
 
-<since v="3.1.0">
 The API response is returned as second argument in the `@success` event:
 
 ```html
@@ -111,8 +110,6 @@ export default {
 </script>
 ```
 
-
-</since>
 
 ### @error
 

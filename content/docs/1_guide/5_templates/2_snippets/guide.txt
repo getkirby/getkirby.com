@@ -145,7 +145,6 @@ With the above code, `/site/snippets/mysnippet.php` will receive a title variabl
 
 ## Snippet alternatives
 
-<since v="3.2.0">
 You can define an array of snippet alternatives if the first snippet cannot be found:
 
 ```php
@@ -158,7 +157,6 @@ This is useful if you want to provide fallbacks for a snippet based on page inpu
 <?php snippet(['articles/' . $page->postType(), 'articles/default']) ?>
 ```
 
-</since>
 
 ## Real life example: list of blog articles
 

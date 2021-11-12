@@ -164,12 +164,12 @@ options:
   update: true
   delete: false
 ```
-<since v="3.2.0">
+
 You can control each option for pages, files and users in blueprints with fine-grained permissions based on user role:
 
 ```yaml
-options: 
-  delete: 
+options:
+  delete:
     admin: true
     editor: false
 ```
@@ -181,9 +181,8 @@ options:
   update:
     *: false
     editor: true
-```    
+```
 
-</since>
 
 ## Controlling permissions with hooks
 
@@ -231,7 +230,6 @@ page('notes/a-great-article')->update([
 The impersonation will be active for all code that runs in the current request after the call to `$kirby->impersonate()`. If you want to limit the impact to a single operation, call the method with a callback (see below).
 </warning>
 
-<since v="3.4.0">
 #### Impersonate with callback
 
 If you only want a single operation to run with different privileges, use a callback:
@@ -250,9 +248,8 @@ $result = $kirby->impersonate('kirby', function () {
 ```
 
 The impersonation automatically gets reset to the previous value after the callback returns.
-</since>
 
-<since v="3.5.0">
+
 #### Disable all permissions
 
 It is also possible to disable all permissions, even if a user is currently logged in. This is useful for operations where you want to ensure that no changes are made to the site (read-only access):
@@ -268,4 +265,3 @@ page('notes/a-great-article')->update([
   'author' => 'Homer Simpson'
 ]);
 ```
-</since>

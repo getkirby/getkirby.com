@@ -62,7 +62,6 @@ layout: cards
 
 ### Image
 
-<since v="3.3.3">
 ```yaml
 title: Gallery section
 preset: files
@@ -72,7 +71,6 @@ image:
   ratio: 1/1
   back: black
 ```
-</since>
 
 ## Usage in tabs
 

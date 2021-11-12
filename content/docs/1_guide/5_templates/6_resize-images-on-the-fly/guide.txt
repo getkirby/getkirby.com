@@ -117,7 +117,6 @@ This is only recommended if you find yourself converting 90% of your files to th
 
 ## Presets
 
-<since v="3.0.3">
 You can define option presets for thumbs in your `config.php`:
 
 ```php "/site/config/config.php"
@@ -137,17 +136,13 @@ Then you can use them e.g. in your templates:
 $file->thumb(); // for default preset
 $file->thumb('blurred');
 ```
-</since>
 
 ## Responsive images
-<since v="3.1.0">
 You can use Kirby's [`$image->srcset()`](/docs/reference/objects/file/srcset) method to easily create the `srcset` attribute for responsive images. (link: docs/reference/objects/file/srcset text: Learn more ›)
 
 ```php
 <img srcset="<?= $image->srcset([300, 800, 1024]) ?>">
 ```
-</since>
-
 
 
 ## Image Formats

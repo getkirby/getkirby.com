@@ -234,7 +234,6 @@ In case of multi-language sites you must call the `$site->visit()` method in ord
 ```
 
 ### Language scope
-<since v="3.2.0">
 
 In multi-lang installations, you can set a language scope for the route:
 
@@ -282,10 +281,8 @@ return [
 ```
 In this example, we return the `notes` page with the filter data. In your controller, you can now (link: docs/guide/templates/controllers#arguments-from-page-render-in-route text: use this filter to return only the children with the given tag).
 
-</since>
 ## `next()`
 
-<since v="3.0.3">
 In some scenarios, you want to perform actions on all requests matching a route pattern, but then let the router find the next matching route. For this scenario you can use the (method: Kirby\Http\Route::next text: $this->next()) call within your route.
 
 ```php "/site/config/config.php"
@@ -306,7 +303,6 @@ return [
 ```
 
 This is perfect for the example above when you want to intercept URLs like `https://yourdomain.com/photography-project-name` and create flat URLs. But at the same time you don’t want to break all the other pages. In this case you can search for the photography project in the route and if it doesn’t exist you can jump to the regular route for all the other pages with (method: Kirby\Http\Route::next text: $this->next()).
-</since>
 
 
 ## Pass data to controller

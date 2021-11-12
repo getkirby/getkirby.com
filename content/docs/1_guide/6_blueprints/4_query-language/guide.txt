@@ -133,7 +133,6 @@ info: "{{ file.dimensions }}"
 
 ## Advanced query syntax
 
-<since v="3.2.0">
 Queries can include arrays and nested method calls:
 
 ```yaml
@@ -143,9 +142,7 @@ query: site.index.filterBy("template", "in", ["note", "album"])
 # nested queries
 query: kirby.collection("some-collection").not(kirby.collection("excluded-collection"))
 ```
-</since>
 
-<since v="3.4.0">
 If you need to include quotes within strings, you can use the other quote type (`"` vs. `'`) or escape the quotes of the same quote type with backslashes:
 
 ```yaml

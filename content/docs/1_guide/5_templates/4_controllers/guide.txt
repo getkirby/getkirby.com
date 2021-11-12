@@ -159,7 +159,6 @@ return function ($kirby) {
 
 ## Arguments from `$page->render()` in route
 
-<since v="3.1.3">
 When using the `$page->render()` method to return a page in a route, you can send an array of additional data with it:
 
 ```php "/site/config/config.php"
@@ -201,8 +200,6 @@ return function ($page, $tag) {
 <info>
 The properties defined in the `$data` array are exposed to **templates** as global variables, so in use cases where you **do not** need them in a controller, you can use them directly.
 </info>
-
-</since>
 
 
 ## More information

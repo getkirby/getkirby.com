@@ -21,7 +21,7 @@ return [
 ```
 
 ```php "/site/config/config.php"
-<?php 
+<?php
 
 return [
     'ready' => function ($kirby) {
@@ -35,9 +35,8 @@ return [
 ];
 ```
 
-<since v="3.4.0">
 ```php "/site/config/config.php"
-<?php 
+<?php
 
 return [
     'ready' => function ($kirby) {
@@ -47,4 +46,3 @@ return [
     }
 ];
 ```
-</since>

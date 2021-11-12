@@ -68,7 +68,6 @@ return [
 
 ## Language specific replacements
 
-<since v="3.3.0">
 To use language specific replacements, you have to enable the `smartypants` option in your config and then add your array of options to each language file in `/site/languages/`.
 
 ```php "/site/config/config.php"
@@ -95,4 +94,3 @@ return [
     ]
 ];
 ```
-</since>

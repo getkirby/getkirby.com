@@ -28,7 +28,6 @@ return [
 ];
 ```
 
-<since v="3.5.0">
 You can also define the locale names as strings (for example if you are loading the confguration from a JSON file):
 
 ```php
@@ -44,7 +43,6 @@ return [
   ]
 ];
 ```
-</since>
 
 <info>
 The `LC_ALL` locale should always be set as it is used as a default locale internally in the Kirby core. Other locales can be set to override the default `LC_ALL` locale for specific use-cases.
