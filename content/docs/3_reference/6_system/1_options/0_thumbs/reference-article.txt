@@ -6,7 +6,6 @@ Text:
 
 ## Presets
 
-<since v="3.0.3">
 You can define option presets for thumbs:
 
 ```php "/site/config/config.php"
@@ -21,7 +20,6 @@ return [
 ```
 
 To be used with the `$file->thumb()` method. (link: docs/reference/objects/file/thumb text: Learn more ›)
-</since>
 
 ## Srcsets
 

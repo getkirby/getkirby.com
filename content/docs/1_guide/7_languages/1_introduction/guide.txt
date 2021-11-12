@@ -237,6 +237,4 @@ return [
 
 ## Language specific SmartyPants
 
-<since v="3.3.0">
 See (link: docs/reference/system/options/smartypants text: SmartyPants config option)
-</since>

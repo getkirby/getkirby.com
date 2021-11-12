@@ -13,7 +13,3 @@ return [
   }
 ];
 ```
-
-<since v="3.5.5">
-The `$exception` argument was added in Kirby 3.5.5.
-</since>

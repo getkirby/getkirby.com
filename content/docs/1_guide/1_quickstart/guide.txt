@@ -143,8 +143,6 @@ Once you publish your website, you need to (link: buy text: purchase a Kirby lic
 
 ### Without using the Panel
 
-<since v="3.3.0">
-
 If you don’t want the Panel to connect to our server, registration via the Panel fails, or you are not using the Panel at all, you can download your license files directly from our licenses website:
 
 1. Visit (link: https://licenses.getkirby.com).
@@ -154,7 +152,6 @@ If you don’t want the Panel to connect to our server, registration via the Pan
 5. Rename the downloaded file to `.license` (without extensions).
 6. Place it in the `/site/config/` folder of your Kirby installation.
 
-</since>
 
 ## Updates
 

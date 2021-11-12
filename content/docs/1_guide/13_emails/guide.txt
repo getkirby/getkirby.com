@@ -32,8 +32,6 @@ try {
 // errors, always use try-catch
 ```
 
-<since v="3.3.2">
-
 ### With custom name
 
 ```php
@@ -53,8 +51,6 @@ try {
   echo $error;
 }
 ```
-
-</since>
 
 ### With multiple recipients:
 
@@ -218,11 +214,7 @@ return [
 ];
 ```
 
-<since v="3.5.1">
-If `security` is set to `true`, Kirby automatically converts it to `'tls'` or `'ssl'` depending on the configured port. If no port is given and secure transport is enabled, the port is set to 587 (the common port for SMTP over TLS).
-</since>
-
-You can also use `'tls'` or `'ssl'` explicitly via the `security` key.
+If `security` is set to `true`, Kirby automatically converts it to `'tls'` or `'ssl'` depending on the configured port. If no port is given and secure transport is enabled, the port is set to 587 (the common port for SMTP over TLS). You can also use `'tls'` or `'ssl'` explicitly via the `security` key.
 
 ### With authentication
 
@@ -245,7 +237,6 @@ return [
 
 ## Access PHPMailer instance
 
-<since v="3.4.1">
 You can get access to the underlying PHPMailer instance via the `beforeSend` callback:
 
 ```php
@@ -264,11 +255,8 @@ $kirby->email([
     }
 ]);
 ```
-</since>
 
-<since v="3.4.1">
 The `beforeSend` callback can also be added as [preset](#email-presets).
-</since>
 
 ## More information
 - `$kirby->email()`

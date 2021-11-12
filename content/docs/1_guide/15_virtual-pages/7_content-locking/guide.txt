@@ -18,8 +18,6 @@ Kirby creates a `.lock` file in the directory of the content file, retrieved via
 
 ## Disable content locking
 
-<since v="3.2.3">
-
 In many cases of virtual pages, content locking might not be desired. If you want to disable content locking for your virtual page, add a `lock()` method to your (link: docs/guide/templates/page-models text: page model) which returns `null`:
 
 ```php "/site/models/reviews.php"
@@ -33,9 +31,6 @@ class ReviewsPage extends Page
     }
 }
 ```
-
-</since>
-
 
 ## Support content locking
 

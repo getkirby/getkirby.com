@@ -45,8 +45,6 @@ With options, you can control all the site actions that should or should not be 
 
 ## Custom preview URL
 
-<since v="3.2.0">
-
 You can set the preview URL for the site in the site.yml with the `preview` property:
 
 ```yaml
@@ -55,5 +53,3 @@ title: Site
 options:
   preview: https://mycustomdomain.com
 ```
-
-</since>
