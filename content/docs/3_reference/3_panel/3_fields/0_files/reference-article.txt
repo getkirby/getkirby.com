@@ -142,8 +142,6 @@ image: false
 
 ## Upload options
 
-<since v="3.2.0">
-
 By default, the files field allows you to upload files. You can define the `Add` button behavior with the `uploads` option: When clicking on the `Add` button, you can either select a file and/or upload a file (which is then automatically selected).
 
 ### Prevent uploading
@@ -163,7 +161,7 @@ By default all files will be uploaded to the current page and without a predefin
 ```yaml
 gallery:
   type: files
-  uploads: 
+  uploads:
     parent: site
     template: files-upload
 ```
@@ -179,8 +177,6 @@ gallery:
 ### Restricting uploads to certain file types
 
 If you want to restrict what types of files can be uploaded to the given destination, assign a file template using the `uploads` property. In your file template, set the `accept` option. See the docs about (link: docs/reference/panel/blueprints/file#accept text: file blueprints).
-
-</since>
 
 (docs: panel-picker-pagination field: files)
 
