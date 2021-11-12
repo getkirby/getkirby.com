@@ -156,4 +156,3 @@ Property access (`parent.property`) will behave like this:
 - If the parent is an object, Kirby will first try to call a method with that name, then a magic `__call()` method. If neither exist, Kirby will try to access a property with that name or call the magic `__get()` method.
 - If the parent is an array, the respective array element will be returned.
 - Calling a property without any arguments (`parent.property()`) is equivalent to accessing the property.
-</since>
