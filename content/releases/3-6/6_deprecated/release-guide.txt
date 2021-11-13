@@ -2,10 +2,7 @@ Title: Deprecated
 ----
 Text:
 
-- The `page()` helper now throws a deprecation warning if multiple IDs get passed. Will be enforced in 3.7.0 by only returning the first page. Use `pages()` for multiple pages instead.
-- `pages()` will now throw a deprecation warning if single ID gets passed. Will be enforced in 3.7.0 by always returning a `Pages` collection. Use `page()` for a single page instead.
-- Creating a `Kirby\Cms\File` without a `parent` property has been deprecated and throws a warning. Starting in 3.7.0 the property will be required and cause a breaking error if not passed. [#3372](https://github.com/getkirby/kirby/pull/3372)
-- `Str::template()`: the parameters `$fallback`, `$start` and `$end` have been deprecated and throw a deprecation warning. Use instead an `$options` array with `fallback`, `start` and/or `end` keys as third parameter.
+As part of modernising our code base, we have marked some parts as deprecated in 3.6. Most of these parts will throw a deprecation warning when you are still using them. They will be removed in a future release. Let's point you towards the alternatives you can use instead:
 
 | Deprecated | Throws warning | Removed in | Use instead |
 |-|-|-|-|
@@ -31,3 +28,10 @@ Text:
 | `Kirby\Toolkit\Str::isUrl()` | 3.7.0 | 3.8.0 | `Kirby\Toolkit\V::url()` |
 | `<k-text align="right">` | - | 3.7.0 | `<k-text align="end">` |
 | Users `settings` access permission | - | 3.7.0 | `system` and `languages` |
+
+- The `page()` helper now throws a deprecation warning if multiple IDs get passed. Will be enforced in 3.7.0 by only returning the first page. Use (method: Helper::pages text: pages()) for multiple pages instead.
+- `pages()` will now throw a deprecation warning if single ID gets passed. Will be enforced in 3.7.0 by always returning a `Pages` collection. Use (method: Helper::page text: page()) for a single page instead.
+- `Str::template()`: the parameters `$fallback`, `$start` and `$end` have been deprecated and throw a deprecation warning. Use instead an `$options` array with `fallback`, `start` and/or `end` keys as third parameter.
+- Creating a `Kirby\Cms\File` without a `parent` property has been deprecated and throws a warning. Starting in 3.7.0 the property will be required and cause a breaking error if not passed. [#3372](https://github.com/getkirby/kirby/pull/3372)
+
+

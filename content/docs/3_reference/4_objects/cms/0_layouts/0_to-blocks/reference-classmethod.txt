@@ -1,0 +1,11 @@
+Text:
+
+## Example
+
+The method makes it easy to filter blocks from layouts:
+
+```php
+$layouts = $page->layout()->toLayouts();
+$blocks  = $layouts->toBlocks();
+$banner  = $blocks->filter('type', 'banner')->first();
+```

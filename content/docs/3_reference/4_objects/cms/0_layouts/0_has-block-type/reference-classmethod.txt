@@ -1,0 +1,13 @@
+Text:
+
+## Example
+
+Useful if you want to include scripts etc. depending on block types in layout field.
+
+```php
+$layouts = $page->layout()->toLayouts();
+
+if ($layouts->hasBlockType('heading') === true) {
+  // include some scripts
+}
+```
