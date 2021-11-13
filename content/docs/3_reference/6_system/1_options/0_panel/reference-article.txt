@@ -56,6 +56,14 @@ return [
 ];
 ```
 
+<info>
+If you have multiple environments like staging, production etc., you can use different stylesheets per environment (link: docs/guide/configuration#multi-environment-setup text: in your domain-specific config files). Shared styles can be imported into each domain-specific stylesheet with an import statement:
+
+```css
+@import url("custom.css");
+```
+</info>
+
 Check out the following cookbook recipe for some examples:
 
 - (link: docs/cookbook/panel/customizing-panel text: Examples for customizing the Panel)
