@@ -17,7 +17,7 @@
 
   <div>
     <h1 class="h1"><?= $page->title() ?> ⚡</h1>
-    <p class="h1 color-gray-600">Release preview</p>
+    <p class="h1 color-gray-600">Jungle Calumna</p>
   </div>
 
   <?php snippet('cta', [
@@ -29,7 +29,7 @@
         'style' => 'filled'
       ],
       [
-        'text' => '3.6 docs',
+        'text' => '3.6 notes',
         'link' => $page->children()->first()->url(),
         'icon' => 'book',
         'style' => 'outlined'
@@ -51,7 +51,7 @@
       <?php snippet('templates/features/intro', [
         'title' => 'WebP & AVIF Support',
         'intro' => 'Serve smaller and better images',
-        'text'  => 'Our image processing API finally supports WebP and AVIF as better alternatives for your JPEGs or PNGs. <a href="/releases/3.6/features/webp-and-avif-support">Learn more &rsaquo;</a>',
+        'text'  => 'Our image processing API finally supports WebP and AVIF as better alternatives for your JPEGs or PNGs. <a href="/releases/3.6/features#core__image-formats">Learn more &rsaquo;</a>',
       ]) ?>
 
       <figure class="bg-black rounded">
@@ -63,7 +63,7 @@
       <?php snippet('templates/features/intro', [
         'title' => 'Better Panel image settings',
         'intro' => 'Improve your previews with custom queries',
-        'text'  => 'You can now set custom backgrounds, icons, images and more for your pages via blueprint settings. <a href="/releases/3.6/features/panel-image-options">Learn more &rsaquo;</a>',
+        'text'  => 'You can now set custom backgrounds, icons, images and more for your pages via blueprint settings. <a href="/releases/3.6/features#panel__even-more-visual">Learn more &rsaquo;</a>',
       ]) ?>
 
       <figure class="bg-black rounded">
@@ -96,7 +96,7 @@
         'icon' => 'download'
       ],
       [
-        'text'  => '3.6 docs',
+        'text'  => '3.6 notes',
         'link'  => $page->children()->first()->url(),
         'icon'  => 'book',
         'style' => 'outlined'

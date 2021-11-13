@@ -145,7 +145,7 @@ You can use Kirby's [`$image->srcset()`](/docs/reference/objects/file/srcset) me
 ```
 
 
-## Image Formats
+## Image formats
 <since v="3.6.0">
 
 You can use the `format` option to convert an existing JPEG, GIF or PNG into a WebP or AVIF file with the `thumb()` method.
@@ -153,6 +153,25 @@ You can use the `format` option to convert an existing JPEG, GIF or PNG into a W
 ```php
 <?= $image->thumb(['width' => 200, 'format' => 'webp']) ?>
 <?= $image->thumb(['width' => 200, 'format' => 'avif']) ?>
-
 ```
+
+The format option can also be used in srcset definitions.
+
+```php
+
+$image->srcset([
+  '400w'  => ['width' => 400, 'format' => 'webp'],
+  '800w'  => ['width' => 800, 'format' => 'webp'],
+  '1200w' => ['width' => 1200, 'format' => 'webp']
+])
+```
+
+The GDLib/SimpleImage driver currently only supports `webp`, ImageMagick supports `webp` and `avif`.
+
+<warning>
+Be aware that not all browsers support the new formats yet.
+
+https://caniuse.com/webp
+https://caniuse.com/avif
+</warning>
 </since>
