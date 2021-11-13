@@ -11,6 +11,5 @@ class_alias('Kirby\\Reference\\Types', 'Types');
 Kirby::plugin('getkirby/site', [
     'components'   => include __DIR__ . '/extensions/components.php',
     'fieldMethods' => include __DIR__ . '/extensions/fieldMethods.php',
-    'pagesMethods' => include __DIR__ . '/extensions/pagesMethods.php',
     'tags'         => include __DIR__ . '/extensions/tags.php'
 ]);
