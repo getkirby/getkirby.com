@@ -22,7 +22,7 @@ Breaking changes in minor releases? 3.6 is not a minor release. We follow the pa
     - Chrome for Android 92+
 
 
-- Several blueprint options that use the **(link: docs/guide/blueprints/query-language text: query syntax)** were updated to **escape against raw HTML** output that may lead to XSS attacks. HTML code directly in the blueprint option still works as normal. If queries tehmselves need to return HTML, you can use the new `{< >}` syntax. In this case you need to ensure manually that the returned HTML code is safe. With the `{{ }}` syntax, Kirby performs the escaping for you.
+- Several blueprint options that use the **(link: docs/guide/blueprints/query-language text: query syntax)** were updated to **escape against raw HTML** output that may lead to XSS attacks. HTML code directly in the blueprint option still works as normal. If queries need to return HTML, you can use the new `{< >}` syntax. In this case you need to ensure manually that the returned HTML code is safe. With the `{{ }}` syntax, Kirby performs the escaping for you.
 
 ```yaml
 # works as normal
