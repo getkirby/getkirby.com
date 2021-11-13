@@ -123,7 +123,7 @@ To copy multiple blocks, you can `cmd+click` or `alt+click` on all blocks you wa
 
 - **`navigation` option:** The previous/next item navigation in the Panel is a very effective way for editors to move between content. We've drastically improved the usability of the navigation for your users (link: docs/reference/panel/blueprints/page#navigation-option text: with additional options) to customize the links.
 
-- **`home` option for users:** When a user logs in to the Panel, they normally get redirected to the last view they've been on before they've been logged out or the Site view. When you work with permissions, you might want to block the Site view or redirect the user to a completely different view instead. This is now possible with the (link: docs/reference/panel/blueprints/user#home-option text: new `home` option for user blueprints).
+- **`home` option for users:** When a user logs in to the Panel, they normally get redirected to the last view they were on before they were logged out, or the Site view. When you work with permissions, you might want to block the Site view or redirect the user to a completely different view instead. This is now possible with the (link: docs/reference/panel/blueprints/user#home-option text: new `home` option for user blueprints).
 
 - **New formats for the writer field:** Our writer field is getting more powerful with headings and lists. (link: docs/reference/panel/fields/writer#format-node-options text: Learn more ›)
 (image: writer-formats.png)
