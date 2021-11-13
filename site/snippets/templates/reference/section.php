@@ -3,7 +3,9 @@
   <li>
     <a href="<?= $entry->url() ?>" class="flex items-center">
       <?php snippet('templates/reference/entry/icon', ['entry' => $entry]) ?>
-      <h3><?= $entry->title() ?></h3>
+      <div class="">
+        <h3 class="mb-1"><?= $entry->title() ?></h3>
+      </div>
     </a>
   </li>
   <?php endforeach ?>
