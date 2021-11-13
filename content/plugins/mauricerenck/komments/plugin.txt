@@ -10,7 +10,7 @@ Category: integrations
 
 ----
 
-Description: A webmention enabled comment plugin. Receive comments and webmentions, send webmentions. Spam protection and a moderation panel view included. Extra features for mastodon and archive.org available.
+Description: A webmention enabled comment plugin. Receive comments and webmentions. Spam protection and a moderation panel view included. Kirby 3.6 ready.
 
 ----
 
