@@ -11,21 +11,21 @@ Text:
 
 ## Available helpers
 
-- (link: #clipboard text: `this.$helper.clipboard`)
-- (link: #clone text: `this.$helper.clone`)
-- (link: #color text: `this.$helper.color`)
-- (link: #debounce text: `this.$helper.debounce`)
-- (link: #embed text: `this.$helper.embed`)
-- (link: #isComponent text: `this.$helper.isComponent`)
-- (link: #isUploadEvent text: `this.$helper.isUploadEvent`)
-- (link: #keyboard text: `this.$helper.keyboard`)
-- (link: #object text: `this.$helper.object`)
-- (link: #pad text: `this.$helper.pad`)
-- (link: #ratio text: `this.$helper.ratio`)
-- (link: #slug text: `this.$helper.slug`)
-- (link: #sort text: `this.$helper.sort`)
-- (link: #string text: `this.$helper.string`)
-- (link: #upload text: `this.$helper.upload`)
+- (link: #reference__this-helper-clipboard text: `this.$helper.clipboard`)
+- (link: #reference__this-helper-clone text: `this.$helper.clone`)
+- (link: #reference__this-helper-color text: `this.$helper.color`)
+- (link: #reference__this-helper-debounce text: `this.$helper.debounce`)
+- (link: #reference__this-helper-embed text: `this.$helper.embed`)
+- (link: #reference__this-helper-iscomponent text: `this.$helper.isComponent`)
+- (link: #reference__this-helper-isuploadevent text: `this.$helper.isUploadEvent`)
+- (link: #reference__this-helper-keyboard text: `this.$helper.keyboard`)
+- (link: #reference__this-helper-object text: `this.$helper.object`)
+- (link: #reference__this-helper-pad text: `this.$helper.pad`)
+- (link: #reference__this-helper-ratio text: `this.$helper.ratio`)
+- (link: #reference__this-helper-slug text: `this.$helper.slug`)
+- (link: #reference__this-helper-sort text: `this.$helper.sort`)
+- (link: #reference__this-helper-string text: `this.$helper.string`)
+- (link: #reference__this-helper-upload text: `this.$helper.upload`)
 
 ## How to access helpers
 
