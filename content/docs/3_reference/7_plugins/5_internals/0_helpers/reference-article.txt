@@ -267,21 +267,78 @@ return this.$helper.sort(valueA, valueB);
 
 ### `this.$helper.string`
 
-Helper that offers two methods:
+Helper that offers a couple of methods:
 
-##### `ucfirst`
+##### `camelToKebab`
 
 ```js
-return this.$helper.string.ucfirst("hello);
-// result: "Hello"
+return this.$helper.string.camelToKebab("myFavoriteSong");
+// result: "my-favorite-song"
+```
+
+##### `escapeHTML`
+
+```js
+return this.$helper.string.escapeHTML("<script>");
+// result: "&lt;script&gt;"
+```
+
+##### `hasEmoji`
+
+```js
+return this.$helper.string.hasEmoji("hello");
+// result: false
+
+return this.$helper.string.hasEmoji("😎");
+// result: true
 ```
 
 ##### `lcfirst`
 
 ```js
-return this.$helper.string.lcfirst("Hello);
+return this.$helper.string.lcfirst("Hello");
 // result: "hello"
 ```
+
+##### `random`
+
+Returns a random alpha-numeric string of specified length.
+
+```js
+return this.$helper.string.random(8);
+```
+
+##### `stripHTML`
+
+```js
+return this.$helper.string.ucfirst("<p>Hello</p>");
+// result: "Hello"
+```
+
+##### `template`
+
+Replaces placeholers in a string with provided values
+
+```js
+return this.$helper.string.template("Hello, { name }!", { name: "Homer" });
+// result: "Hello, Homer!"
+```
+
+##### `ucfirst`
+
+```js
+return this.$helper.string.ucfirst("hello");
+// result: "Hello"
+```
+
+##### `ucwords`
+
+```js
+return this.$helper.string.ucwords("hello my dear");
+// result: "Hello My Dear"
+```
+
+
 
 
 ### `this.$helper.upload`
