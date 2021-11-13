@@ -1,0 +1,219 @@
+Title: Store
+----
+
+Intro:
+
+Use the store to access and manage the Panel's state and trigger actions.
+
+----
+
+Text:
+
+
+<info>
+We use (link: https://vuex.vuejs.org text: Vuex) to ensure a consistent state of data throughout the Panel. If you have not worked with Vuex before, you should first familiarize yourself with (link: https://vuex.vuejs.org/guide/ text: their documentation).
+</info>
+
+## How to access `$store`?
+
+
+The Panel exposes all the store and all its modules via `this.$store`:
+
+```js
+// example in the Vue component of a custom field
+
+panel.plugin("your/display-other-field", {
+  fields: {
+    "other-display": {
+      // …
+      computed: {
+        otherValue() {
+          return this.$store.getters["content/values"]()["other-field"];
+        }
+      }
+      // …
+    }
+  }
+});
+```
+
+## Main store
+
+### State
+
+```js
+this.$store.state
+```
+
+| Key | Description |
+|-|-|
+| `isLoading` | Whether the Panel is currently loading something, e.g. via API |
+
+```js
+// example of store state
+{
+  isLoading: false
+}
+```
+
+### Actions
+
+#### `isLoading`
+
+Sets the Panel state to loading, e.g. starts the loading spinner in the Panel's topbar.
+
+```js
+this.$store.dispatch("isLoading", true);
+this.$store.dispatch("isLoading", false);
+```
+
+## `notification` module
+
+Centrally handles all notifications shown, which can be dispatched from any part of the Panel
+
+### State
+
+```js
+this.$store.state.notification
+```
+
+| Key | Description |
+|-|-|
+| `type` | Type of the current notification (error, success) |
+| `message` | The notification message shown in the topbar |
+| `details` | Additional attributes for the notification. Not used yet |
+| `timeout` | Time in milliseconds until the notification gets hidden again |
+
+```js
+// example of store state
+{
+  type: "error",
+  message: "The page could not be deleted",
+  details: null,
+  timeout: 4000
+}
+```
+
+### Actions
+
+#### `notification/open`
+
+Opens a new notification
+
+```js
+this.$store.dispatch("notification/open", {
+  type: "success",
+  message: "Yay, it worked",
+  timeout: 5000
+});
+```
+
+#### `notification/success`
+
+Triggers a success notification
+
+```js
+this.$store.dispatch("notification/success", "Yay, it worked");
+```
+
+#### `notification/error`
+
+Triggers an error notification
+
+```js
+this.$store.dispatch("notification/error", "Nooooooo!");
+```
+
+#### `notification/close`
+
+Closes the current notification
+
+```js
+this.$store.dispatch("notification/close")
+```
+
+
+
+## `content` module
+
+Holds the content values of the currently viewed model (e.g. page, file, user) as well as all unsaved changes.
+
+<warning>
+We are planning to refactor this in a future release, e.g. moving unsaved changes from the store (saved in `localStorage`) to the PHP backend (stored on the server). We will always inform you in detail of any breaking changes. Nevertheless, use with caution.
+</warning>
+
+### State
+
+```js
+this.$store.state.content.current
+```
+
+| Key | Description |
+|-|-|
+| `current` | ID of the current model (with translation suffix) |
+| `models` | Array of already loaded models |
+| `status` | Object with `enabled` (bool) |
+
+```js
+// example of store state
+{
+  current: "pages/notes+a-great-post/?language=en",
+  models: {
+    "pages/notes+a-great-post/?language=en": {
+      api: "…",
+      originals: {
+        categories: "long read, weekend, travel"
+      },
+      changes: {
+        categories: "long read, weekend, at home"
+      }
+    },
+    "users/hjk343n": {
+      api: "…",
+      originals: {
+        name: "Homer Simpson"
+      },
+      changes: {}
+    }
+  },
+  status: {
+    enabled: false
+  }
+}
+```
+
+### Getters
+
+```js
+this.$store.getters["content/values"](id)
+```
+
+| Key | Parameters | Description |
+|-|-|-|
+| `exists` | `id` | Checks if a model exists in the store |
+| `hasChanges` | `id` (optional) | Checks if a model has unsaved changes |
+| `id` | `id` | Returns ID (current or provided) with correct language suffix |
+| `isCurrent` |  `id` | Checks if specified ID is the current model |
+| `model` |  `id` (optional) | Returns the full model object |
+| `originals` |  `id` (optional) | Returns all original values (as in content file) for a model |
+| `changes` |  `id` (optional) | Returns all unsaved changes for a model |
+| `values` | `id` (optional) | Returns all values for a model (originals updated with unsaved changes) |
+
+### Actions
+
+```js
+this.$store.dispatch("content/update", ["myField", "newValue"])
+```
+
+| Key | Parameters | Description |
+|-|-|-|
+| `clear` | | Removes all unsaved changes |
+| `create` | `model` | Create a store entry for a model |
+| `current` | `id` | Set the current model |
+| `disable ` |  | Disable content forms |
+| `enable ` |  | Enable content forms |
+| `move` | `[oldId, newId]` | Move a store entry for a model |
+| `remove` | `id` | Remove a model from store |
+| `revert` | `id` (optional) | Discard unsaved changes for a model |
+|`save`  | `id` (optional) | Update content file for a model |
+| `update` | `[field, value, id]` (id optional) | Update a field value for a model |
