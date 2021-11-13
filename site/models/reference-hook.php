@@ -6,11 +6,6 @@ use Kirby\Reference\ReflectionPage;
 class ReferenceHookPage extends ReflectionPage
 {
 
-    public function intro(): Field
-    {
-        return $this->arguments();
-    }
-
     public function example()
     {
         $tab    = '    ';
