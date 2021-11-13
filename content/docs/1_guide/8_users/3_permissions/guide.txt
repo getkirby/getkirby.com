@@ -29,7 +29,8 @@ permissions:
   access:
     panel: true
     site: true
-    settings: true # Settings view was replaced with system and language views since Kirby 3.6.0
+    languages: true
+    system: true
     users: true
   files:
     create: true
