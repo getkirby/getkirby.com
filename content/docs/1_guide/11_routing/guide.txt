@@ -429,6 +429,34 @@ Replace `blog` with the slug of the parent page you want to remove from the URL.
 
 Additionally, you can overwrite the `$page->url()` in a (link: docs/guide/templates/page-models text: page model) to return the desired target URL when you use this method.
 
+## Accessing parameters and query strings
+
+Query strings and parameters cannot be part of a route pattern. However, you can passed parameters or query strings with Kirby's `param()` and `get()` helpers inside a route:
+
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'routes' => [
+        [
+            'pattern' => 'products/(:any)',
+            'action'  => function($uid) {
+                // parameter, e.g. `https://example.com/products/color:black`
+                if ($param = param('color')) {
+                  // do something
+                }
+                // query string, e.g. `https://example.com/products?color=black`
+                if ($query = get('color')) {
+                  // do something
+                }
+                // ...
+            }
+        ],
+    ]
+];
+```
+
 ## More information
 
 (link: docs/cookbook/content/filter-via-route text: Filtering via routes)
