@@ -9,6 +9,24 @@ The Panel bundles a few functions that help you with common tasks.
 
 Text:
 
+## Available helpers
+
+- (link: #clipboard text: `this.$helper.clipboard`)
+- (link: #clone text: `this.$helper.clone`)
+- (link: #color text: `this.$helper.color`)
+- (link: #debounce text: `this.$helper.debounce`)
+- (link: #embed text: `this.$helper.embed`)
+- (link: #isComponent text: `this.$helper.isComponent`)
+- (link: #isUploadEvent text: `this.$helper.isUploadEvent`)
+- (link: #keyboard text: `this.$helper.keyboard`)
+- (link: #object text: `this.$helper.object`)
+- (link: #pad text: `this.$helper.pad`)
+- (link: #ratio text: `this.$helper.ratio`)
+- (link: #slug text: `this.$helper.slug`)
+- (link: #sort text: `this.$helper.sort`)
+- (link: #string text: `this.$helper.string`)
+- (link: #upload text: `this.$helper.upload`)
+
 ## How to access helpers
 
 The Panel exposes all shared helpers via `this.$helper`:
@@ -31,21 +49,23 @@ panel.plugin("your/pad-display-field", {
 });
 ```
 
-## Available helpers
 
-| Library | Description |
-|--|--|
-|(link: #clone text: `this.$helper.clone`) | |
-|(link: #debounce text: `this.$helper.debounce`) | |
-|(link: #pad text: `this.$helper.pad`) | |
-|(link: #ratio text: `this.$helper.ratio`) | |
-|(link: #slug text: `this.$helper.slug`) | |
-|(link: #sort text: `this.$helper.sort`) | |
-|(link: #string text: `this.$helper.string`) | |
-|(link: #upload text: `this.$helper.upload`) | |
-|(link: #isUploadEvent text: `this.$helper.isUploadEvent`) | |
+## Reference
 
-## `clone`
+<since v="3.6.0">
+### `this.$helper.clipboard`
+Helpers to read from and write to the clipboard.
+
+#### Example
+
+```js
+this.$helper.clipboard.read(ClipboardEvent);
+this.$helper.clipboard.read(value);
+```
+</since>
+
+
+### `this.$helper.clone`
 Shorthand helper for
 
 ```js
@@ -60,7 +80,21 @@ let cloned = this.$helper.clone(array);
 ```
 
 
-## `debounce`
+<since v="3.6.0">
+### `this.$helper.color`
+Turns a string into a valid CSS color making use of the Panel's (link: docs/reference/plugins/ui#colors text: custom CSS properties).
+
+#### Example
+
+```js
+this.$helper.color("#444");
+this.$helper.color("purple-400");
+this.$helper.color("pattern");
+```
+</since>
+
+
+### `this.$helper.debounce`
 
 #### Parameters
 
@@ -78,7 +112,84 @@ debounce(function (query) {
 ```
 
 
-## `pad`
+<since v="3.6.0">
+### `this.$helper.embed`
+Helps to generate proper YouTube or Vimeo embed URLs.
+
+#### Parameters
+
+| Name  | Description
+| ----  | ---- |
+| `url` | URL to transform into valid embed URL |
+| `doNotTrack` | If URL should try to enforce non-tracking (default: `false`) |
+
+
+#### Example
+
+```js
+this.$helper.embed.video(youtubeUrl);
+this.$helper.embed.youtube(youtubeUrl);
+this.$helper.embed.vimeo(vimeoUrl);
+```
+</since>
+
+
+### `this.$helper.isComponent`
+Checks if string refers to an existing Vue component.
+
+#### Example
+
+```js
+this.$helper.isComponent("my-mysterious-component");
+```
+
+
+### `this.$helper.isUploadEvent`
+Checks if a javascript event is really an upload event.
+
+#### Example
+
+```javascript "YourVueComponent.vue"
+<template>
+  <div @drop="onDrop" />
+</template>
+
+<script>
+export default {
+  methods: {
+    onDrop(event) {
+      if (this.$helper.isUploadEvent(event) === true) {
+        // …
+      }
+    }
+  }
+}
+```
+
+
+### `this.$helper.keyboard`
+Collection of helpers corresponding to keyboard events
+
+#### Example
+
+```js
+// returns meta key name depending on operating system, e.g. "cmd"
+this.$helper.keyboard.metaKey();
+```
+
+
+<since v="3.6.0">
+### `this.$helper.object`
+Collection of helpers for JavaScript objects.
+
+#### Example
+
+```js
+this.$helper.object.merge(object1, object2);
+```
+</since>
+
+### `this.$helper.pad`
 
 Adds <code>0</code> to the left of the value
 
@@ -98,7 +209,7 @@ return this.$helper.pad(money, 4);
 ```
 
 
-## `ratio`
+### `this.$helper.ratio`
 
 Receive a padding percentage for a specified image ratio.
 
@@ -116,7 +227,7 @@ return this.$helper.ratio("1/2");
 ```
 
 
-## `slug`
+### `this.$helper.slug`
 
 Transform a string to a valid slug according to a specified ruleset.
 
@@ -143,7 +254,7 @@ return this.$helper.slug("Was für ein Spaß", [
 ```
 
 
-## `sort`
+### `this.$helper.sort`
 
  Natural sort algorithm with unicode support
 
@@ -153,25 +264,27 @@ return this.$helper.slug("Was für ein Spaß", [
 return this.$helper.sort(valueA, valueB);
 ```
 
-## `string`
+
+### `this.$helper.string`
 
 Helper that offers two methods:
 
-#### `ucfirst`
+##### `ucfirst`
 
 ```js
 return this.$helper.string.ucfirst("hello);
 // result: "Hello"
 ```
 
-#### `lcfirst`
+##### `lcfirst`
 
 ```js
 return this.$helper.string.lcfirst("Hello);
 // result: "hello"
 ```
 
-## `upload`
+
+### `this.$helper.upload`
 
 Helper to upload a file.
 
@@ -197,26 +310,3 @@ const defaults = {
 };
 ```
 
-
-## `isUploadEvent`
-
-Checks if a javascript event is really an upload event.
-
-#### Example
-
-```javascript "YourVueComponent.vue"
-<template>
-  <div @drop="onDrop" />
-</template>
-
-<script>
-export default {
-  methods: {
-    onDrop(event) {
-      if (this.$helper.isUploadEvent(event) === true) {
-        // …
-      }
-    }
-  }
-}
-```
