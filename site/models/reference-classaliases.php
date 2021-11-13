@@ -29,11 +29,8 @@ class ReferenceClassAliasesPage extends SectionPage
         ksort($aliases);
 
         foreach ($aliases as $alias => $class) {
-
-            $parts = explode('\\', $alias);
-
             if (
-                count($parts) < 2 &&
+                count(explode('\\', $alias)) < 2 &&
                 $page = ReferenceClassPage::findByName($class)
             ) {
                 $children[] = [
