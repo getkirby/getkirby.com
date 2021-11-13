@@ -1,0 +1,12 @@
+Title: /site/blueprints
+----
+Info: GET
+----
+Intro: List all allowed blueprints for site
+----
+
+Text:
+
+## Query parameters
+
+(docs: api/site-blueprints-parameters)
