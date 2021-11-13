@@ -2,9 +2,10 @@ Title: $asset
 
 ----
 
-Class: Kirby\Cms\Asset
+Class: Kirby\Filesystem\Asset
 
 ----
+
 Since: 3.0.2
 
 ----
