@@ -39,6 +39,7 @@ Text:
 - `$model->panel()->image()` now supports a second parameter to specify layout (default is `cards`) [#3425](https://github.com/getkirby/kirby/pull/3425)
 - New `$store.dispatch("content/clear")` Vuex action that removes all unsaved changes from localStorage.
 - New JS helper to deep-merge objects (`helpers/object.js`)
+- New `$helper.clipboard` helper handling reading from/writing to the clipboard
 - New `$helper.color` helper for turning a string into a valid CSS color value
 - New `Panel` class alias for `Kirby\Panel\Panel`
 - Writer field: marks (floating toolbar buttons) now show tooltips
