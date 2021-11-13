@@ -1,4 +1,8 @@
-Text: 
+Text:
+
+<alert until="3.7.0">
+The `pages()` helper throws a deprecation warning if a single ID gets passed. Starting in 3.7.0 it will awlays return a `Kirby\Cms\Pages` collection. Use (link: docs/reference/templates/helpers/page text: `page()`) for a single page instead.
+</alert>
 
 ## Example
 
