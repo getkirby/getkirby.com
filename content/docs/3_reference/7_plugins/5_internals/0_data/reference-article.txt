@@ -1,0 +1,154 @@
+Title: Data
+----
+
+Intro:
+
+Access key meta data about the installation and site in any Panel component.
+
+----
+
+Text:
+
+The Panel provides a range of meta data information about the current Panel view, the Kirby installaiton and the site itself. In most places, you will be able to accessthis information directly through its key, e.g. as `this.$config`. In contexts wherethis is not possible, you can still access the information via `window.panel`, e.g. `window.panel.$config`.
+
+## `$config`
+
+| Key | Description|
+|:--- |:---|
+| `debug` | Debug mode (`bool`) |
+| `kirbytext` | Kirbytext active (`bool`) |
+| `search` | Settings for Panel search (object with keys `limit` and `type`) |
+| `translation` | Default Panel UI language (locale `string`, e.g. `en`) |
+
+```js
+ if (this.$config.debug === true) {
+   // do something only shown when debug mode is enabled
+ }
+```
+
+## `$direction`
+
+`ltr` (left-to-right) or `rtl` (right-to-left) depending on the currently viewed language.
+
+## `$language`
+
+Info on the currently active language for a model's content.
+
+| Key | Description|
+|:--- |:---|
+| `code` | Locale code |
+| `default` | Ifthis is the site's default language (`bool`) |
+| `direction` | Whether `ltr` or `rtl` (right-to-left) |
+| `name` | Name of the content language |
+| `rules` | Conversion rules into ASCII-only characters |
+
+```js
+this.$language.code
+```
+
+## `$languages`
+
+All available languages for site content.
+
+| Key | Description|
+|:--- |:---|
+| `code` | Locale code |
+| `default` | Ifthis is the site's default language (`bool`) |
+| `direction` | Whether `ltr` or `rtl` (right-to-left) |
+| `name` | Name of the content language |
+| `rules` | Conversion rules into ASCII-only characters |
+
+```js
+this.$language.code
+```
+
+## `$multilang`
+
+Whether the site is a multilang installation or not (`bool`).
+
+## `$permissions`
+
+Info on the available (link: docs/guide/users/permissions text: permissions) for the current user.
+
+```js
+this.$permissions.access.system
+```
+
+## `$system`
+
+| Key | Description|
+|:--- |:---|
+| `ascii` | General conversion rules into ASCII-only characters |
+| `csrf` | Current CSRF token |
+| `isLocal` | Whether the site is installed locally |
+| `locales` | Available locales |
+| `slugs` | Slug-specific conversion rules based into ASCII-only characters |
+| `title` | Title of the site installation |
+
+```js
+this.$system.title
+```
+
+
+## `$translation`
+
+Info about the current language for the Panel UI, either the Panel's default language or based on currently authenticated user's setting.
+
+| Key | Description|
+|:--- |:---|
+| `code` | Locale code |
+| `data` | Object of translated strings |
+| `direction` | Whether `ltr` or `rtl` (right-to-left) |
+| `name` | Name of the translation language |
+
+```js
+this.$translation.code
+```
+
+## `$url`
+
+Current Panel URL.
+
+## `$urls`
+
+| Key | Description|
+|:--- |:---|
+| `api` | URL to the REST API |
+| `site` | URL of the main site |
+
+```js
+this.$urls.site
+```
+
+## `$user`
+
+Info on the currently authenticated user.
+
+| Key | Description|
+|:--- |:---|
+| `email` | User's email address |
+| `id` | User id |
+| `language` | User's language |
+| `role` | User's role |
+| `username` | User's username |
+
+```js
+this.$user.id
+```
+
+
+## `$view`
+
+Info for the current Panel view.
+
+| Key | Description|
+|:--- |:---|
+| `breadcrumb` | Array of breadcrumb items for the Panel's topbar |
+| `path` | Panel path segment of the view |
+| `props` | Props for the Vue view component |
+| `search` | Default search type for the view |
+
+```js
+this.$view.path
+```
+
