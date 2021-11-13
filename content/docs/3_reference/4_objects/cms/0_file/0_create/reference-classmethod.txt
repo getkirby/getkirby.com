@@ -8,6 +8,10 @@ Text:
 
 (docs: props/file-create)
 
+<alert until="3.7.0">
+Creating a `Kirby\Cms\File` without a parent property has been deprecated and throws a warning. Starting in 3.7.0 the property will be required and cause a breaking error if not passed.
+</alert>
+
 ## Example
 
 ```php

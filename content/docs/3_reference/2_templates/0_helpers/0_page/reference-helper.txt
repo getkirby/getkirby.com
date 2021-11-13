@@ -1,4 +1,8 @@
-Text: 
+Text:
+
+<alert until="3.7.0">
+The `page()` helper throws a deprecation warning if multiple IDs get passed. Starting in 3.7.0 it will only return the first page. Use (link: docs/reference/templates/helpers/pages text: `pages()`) for multiple pages instead.
+</alert>
 
 ## Example
 
