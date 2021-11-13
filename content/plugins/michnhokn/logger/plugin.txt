@@ -1,0 +1,13 @@
+Title: Logger
+
+----
+
+Repository: https://github.com/michnhokn/kirby3-logger
+
+----
+
+Category: panel
+
+----
+
+Description: This plugin logs all actions in the panel and displays them in a separate view.
