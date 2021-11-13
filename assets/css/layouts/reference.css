@@ -196,23 +196,6 @@ html {
   display: none;
 }
 
-/* Advanced toggle */
-
-.reference-advanced {
-  margin-bottom: var(--spacing-8);
-}
-.reference-advanced > a {
-  padding: var(--spacing-1) var(--spacing-2);
-  background: var(--color-gray-200);
-}
-.reference-advanced > a[aria-current] {
-  background: var(--color-black);
-  color: var(--color-white);
-}
-.reference-advanced > a:first-child {
-  margin-right: var(--spacing-2px);
-}
-
 /* Parameters tables */
 
 @media screen and (max-width: 42rem) {
