@@ -1,0 +1,63 @@
+Title: Translating
+----
+
+Intro:
+
+The Panel offers easy ways to translate its UI into the user's language.
+
+----
+
+Text:
+
+When you create your custom Panel (link: docs/reference/plugins/extensions/panel-areas text: views), (link: docs/reference/plugins/extensions/fields#vue-component text: fields), (link: docs/reference/plugins/extensions/sections#vue-component text: sections) or else, you should support that any visible text can be translated into the user's preferred language. Our Panel has built-in support for this.
+
+## Providing i18n strings
+
+You can feed the Panel all the strings to be translated as well as translations for all languages you want to support via the (link: docs/reference/plugins/extensions/translations text: translations extension).
+
+#### Example
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('your/plugin', [
+    'translations' => [
+        'en' => [
+            'your.plugin.welcome' => 'Hi { name }!',
+            'your.plugin.export' => 'Export',
+        ],
+        'de' => [
+            'your.plugin.welcome' => 'Hallo { name }!',
+            'your.plugin.export' => 'Exportieren',
+        ]
+    ]
+]);
+```
+
+## Using strings in your Vue component
+
+When working on your custom (link: docs/reference/plugins/ui text: Vue UI components) (e.g. for a view, a field etc.), you can use some helper methods to pull in the translated strings. The Panel will make sure to use the correct language for the user.
+
+### `this.$t(key, data, fallback)`
+
+With `this.$t()` you can replace your static text with translated strings (you can omit the `this.` part in the `<template>` block of Vue's Single File Components).
+
+```js
+<template>
+  <div>
+    <p>{{ $t('your.plugin.export') }}</p>
+  </div>
+</template>
+```
+
+You can pass an object with data to be interpolated into the string as second parameter and a fallback value as third parameter.
+
+```js
+<p>{{ $t('your.plugin.welcome', { name: "Homer" }, "Welcome!") }}</p>
+```
+
+### `v-direction` directive
+
+In addition, you can use the `v-direction` directive on an HTML element to automatically apply the correct `dir` attribute to it.
+
+```html
+<input v-direction />
+```
