@@ -1,0 +1,13 @@
+Text:
+
+## Example
+
+Useful if you want to include scripts etc. depending on block types.
+
+```php
+$blocks = $page->blocks()->toBlocks();
+
+if ($blocks->hasType('code') === true) {
+  // include some scripts
+}
+```
