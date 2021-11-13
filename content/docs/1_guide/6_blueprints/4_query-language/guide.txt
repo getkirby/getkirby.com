@@ -131,6 +131,21 @@ info: "{{ page.from.toDate('d.m.Y') }} - {{ page.to.toDate('d.m.Y') }} / {{ page
 info: "{{ file.dimensions }}"
 ```
 
+<since v="3.6.0">
+### Escaping HTML
+By default, we escape all queries to be displayed against raw HTML output that may lead to XSS attacks. If you include the HTML direcly in the blueprint option, this will still work and display the HTML as intended.
+
+```yaml
+info: "<strong>{{ file.dimensions }}</strong>"
+```
+
+The query result itself will be escpaped though, so if e.g. you would have a cusotm page method that returns HTML the HTML would be displayed as normal text. If such queries need to return HTML, you can use the `{< >}` syntax. In this case you need to ensure manually that the returned HTML code is safe.
+
+```yaml
+info: "{< page.myMethodWithHTML >}"
+```
+</since>
+
 ## Advanced query syntax
 
 Queries can include arrays and nested method calls:
@@ -156,3 +171,4 @@ Property access (`parent.property`) will behave like this:
 - If the parent is an object, Kirby will first try to call a method with that name, then a magic `__call()` method. If neither exist, Kirby will try to access a property with that name or call the magic `__get()` method.
 - If the parent is an array, the respective array element will be returned.
 - Calling a property without any arguments (`parent.property()`) is equivalent to accessing the property.
+
