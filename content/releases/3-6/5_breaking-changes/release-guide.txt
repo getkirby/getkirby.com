@@ -12,12 +12,9 @@ Breaking changes in minor releases? 3.6 is not a minor release. We follow the pa
 
 | Removed | Use instead |
 |-|-|
-| `Kirby\Cms\App::setLocale()` | `Kirby\Toolkit\Locale::set()` |
 | `Kirby\Cms\Asset::alt()` | - |
 | `Kirby\Cms\Page::sort()` | `Kirby\Cms\Page::changeSort()` |
 | `Kirby\Cms\KirbyTags::$tagClass` | You cannot set the class for KirbyTag objects to be created via `KirbyTags::parse()` anymore. |
-| `GET pages/(:any)/children/blueprints` | `GET pages/(:any)/blueprints` |
-| `GET site/children/blueprints` | `GET site/blueprints` |
 
 ### Further breaking changes
 
