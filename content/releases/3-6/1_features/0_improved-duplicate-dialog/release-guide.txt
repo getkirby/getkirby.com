@@ -1,9 +1,0 @@
-Title: Improved Duplicate Dialog
-----
-Intro:
-----
-Text:
-
-The Page Duplicate Dialog now also accepts a title for the new page
-
-(image: duplicate-dialog.png)
