@@ -77,8 +77,8 @@
 <section id="features" class="mb-42">
   <?php snippet('templates/features/intro', [
     'title' => 'There’s more …',
-    'intro' => 'This release is packed with features',
-    'text'  => 'Find out more about each of them in our early 3.6 docs',
+    'intro' => 'This release is packed with features and improvements',
+    'text'  => 'Find out more about each of them in the <a href="/releases/3.6/features">full release notes</a>.',
   ]) ?>
 
   <?php snippet('templates/release-36/features-implemented', [

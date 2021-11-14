@@ -7,37 +7,35 @@ Text:
 
 - The video embedding helpers and methods now use a much more robust URL parser with support for local and remote URLs. The same parser is used in the Panel for consistency. [#3074](https://github.com/getkirby/kirby/pull/3074)
 - The `avif` file extension is now considered viewable [#2877](https://github.com/getkirby/kirby/pull/2877)
-- Invalid media URLs now render the full error page instead of a simple error to avoid information leaks and to allow overriding the error behavior with custom code on the error page [#3202](https://github.com/getkirby/kirby/pull/3202)
-- `F::relativepath()` now supports file paths with an unrelated base by prefixing `../` to build a relative path [#3267](https://github.com/getkirby/kirby/issues/3267)
-- Improved API error paths when using custom directory setup
+- Invalid media URLs now render the full error page instead of a simple error to avoid information leaks and to allow overriding the error behavior with custom code on the error page. [#3202](https://github.com/getkirby/kirby/pull/3202)
+- `F::relativepath()` now supports file paths with an unrelated base by prefixing `../` to build a relative path. [#3267](https://github.com/getkirby/kirby/issues/3267)
+- Improved API error paths when using a custom directory setup
 - `Html::encode()` uses the `ENT_QUOTES` constant now for `htmlentities()`, converting both double and single quotes
-- `F::size` and `F::niceSize` accept array of file paths
-- `Dir::size()` has new `$recursive` parameter
+- `F::size` and `F::niceSize` accept an array of file paths
+- `Dir::size()` has a new `$recursive` parameter to calculate the total size of the directory
 - The new `license` root allows to store the license outside of the config dir for easier deployments and multi-site setups.
 - The default block snippet for the `image` block now escapes the content output from the source, alt and link fields. This protects against XSS attacks against site visitors.
 - `Str::widont` applies to punctuation with gap
-- The `Data\Json::decode()` and `Data\Xml::decode()` methods now accept empty strings and treat them as an empty data set (empty array) for consistency with `Data\Txt::decode()` and `Data\Yaml::decode()` [#3565](https://github.com/getkirby/kirby/pull/3565)
+- The `Data\Json::decode()` and `Data\Xml::decode()` methods now accept empty strings and treat them as an empty data set (empty array) for consistency with `Data\Txt::decode()` and `Data\Yaml::decode()`. [#3565](https://github.com/getkirby/kirby/pull/3565)
 - Improved plugin asset resolver [#2422](https://github.com/getkirby/kirby/issues/2422)
-- Custom iframe attributes allowed in video helper
-- Unit tests for remaining Fiber changes [#3406](https://github.com/getkirby/kirby/issues/3406)
+- The video helper now allows custom `<iframe>` attributes
 - Added server-side sanitization in the writer field on field changes for extra security against XSS attacks
 - Improved error messages for file validation/sanitization errors (`Sane` classes)
-- The `Sane` classes now have proper XML namespace support so that custom namespace prefixes are properly detected
-- Improved docblocks for the HasChildren Trait [#3791](https://github.com/getkirby/kirby/pull/3791)
+- The `Sane` classes now have proper XML namespace support so that custom namespace prefixes are properly detected.
+- Improved docblocks for the `HasChildren` trait [#3791](https://github.com/getkirby/kirby/pull/3791)
 - The `Remote` class now by default prefers the system certificate authority bundle (CA bundle) for verifying remote TLS connections if a bundle is configured in `php.ini` (`curl.cainfo` option). If no bundle is configured, Kirby will still use its internal CA bundle.
-- Additional unit tests for Filesystem, CMS, Form, Image and Panel classes
+- Additional unit tests for `Filesystem`, `Cms`, `Form`, `Image` and `Panel` classes
 - Fixed validation code for the `Kirby\Form\FieldClass` class
 - Cleaner solution to ignore entire files from code coverage
-- The `Toolkit\Dom::toString` method now exports the document with the same structure as the input. [#3887](https://github.com/getkirby/kirby/pull/3887)
 
 ## Panel
 
 - Much [smaller Panel files](/releases/3.6#fiber) to load
-- The license code is now only displayed to admins
-- The loading indicator of the Panel is now located in the breadcrumb
+- The license code is now only displayed to admins.
+- The loading indicator of the Panel is now located in the breadcrumb.
 - New `theme` property for `k-dropdown-content` to switch between `dark` (default) and `light` dropdowns
-- `$model->panel()->image()` now supports a second parameter to specify layout (default is `cards`) [#3425](https://github.com/getkirby/kirby/pull/3425)
-- New `$store.dispatch("content/clear")` Vuex action that removes all unsaved changes from localStorage.
+- `$model->panel()->image()` now supports a second parameter to specify layout (default is `cards`). [#3425](https://github.com/getkirby/kirby/pull/3425)
+- New `$store.dispatch("content/clear")` Vuex action that removes all unsaved changes from localStorage
 - New JS helper to deep-merge objects (`helpers/object.js`)
 - New `$helper.clipboard` helper handling reading from/writing to the clipboard
 - New `$helper.color` helper for turning a string into a valid CSS color value
@@ -48,18 +46,17 @@ Text:
 - Enhanced CSS support for RTL Panel interface [#3556](https://github.com/getkirby/kirby/pull/3556)
 - New `v-direction` directive to set the `dir` attribute based on the current content translation [#3568](https://github.com/getkirby/kirby/pull/3568)
 - File view uses stable preview link for files (instead of media folder URL) [#3575](https://github.com/getkirby/kirby/pull/3575)
-- File uploads now check for duplicates via sha1 hashes. This leads to a better upload experience because when you upload the exact same file twice, the upload is simply ignored.
-- The files field can now accept new files via drag & drop
-- New files automatically store the sort attribute on upload if the files section is sortable [#2886](https://github.com/getkirby/kirby/issues/2886)
+- File uploads now check for duplicates via SHA1 hashes. This leads to a better upload experience because when you upload the exact same file twice, the upload is simply ignored.
+- The files field can now accept new files via drag & drop.
+- New files automatically store the sort attribute on upload if the files section is sortable. [#2886](https://github.com/getkirby/kirby/issues/2886)
 - Instant field and info section loading
 - Better string template parsing in block labels [#3661](https://github.com/getkirby/kirby/issues/3661)
-- The Video block is now more privacy friendly by creating embeds with the "do not track" option
-- The page position field is hidden from dialogs when only one option available (except when in `debug` mode)
-- Sort page is disabled in page dropdown when only one option would be available
-- The `toggle` field now supports the query syntax in the `text` property
+- The video block is now more privacy friendly by creating embeds with the "do not track" option
+- The page position field is hidden from dialogs when only one option is available (except when in `debug` mode)
+- Sorting pages is disabled in the page dropdown when only one option would be available
+- The toggle field now supports the query syntax in the `text` property.
 - The `RadioInput` component now supports (escaped) HTML in the `info` property for radio options.
 - The `k-dropdown-content` component is now compatible with our dynamic Fiber dropdowns. You can pass a string for the `options` prop and the component will automatically load the matching Fiber dropdown defined in PHP.
-- Use Tailwind `sr-only` utility instead of `k-offscreen` The old class name is still available to avoid breaking change
 - Moved offline warning to new `k-offline-warning` component. The offline warning is now translatable with `error.offline` and has a new design.
 
 ```html
@@ -77,7 +74,7 @@ will now load the Fiber dropdown defined like this in one of your areas:
 ```
 
 - Improved fiber error handling for dialogs and dropdowns
-- Multiselect with CMD/CTRL keys for blocks field [#3748](https://github.com/getkirby/kirby/pull/3748)
+- Multiselect with Cmd/Ctrl keys for blocks field [#3748](https://github.com/getkirby/kirby/pull/3748)
 - Updated npm dependencies [#3744](https://github.com/getkirby/kirby/pull/3744)
 - Blocks are now always selected in the original order, no matter in which order they have been selected in.
 - Parsing blocks from Word documents is now a lot more reliable and the results will be better.

@@ -17,7 +17,7 @@ Text:
 (image: cardlets.png)
 
 - **Image options on steriods:**
-  - Support for (link: docs/guide/blueprints/query-language text: query language)
+  - Support for Kirby's (link: docs/guide/blueprints/query-language text: query language)
   - Custom colors: `back` and `color` options now support shorthands for (link: docs/reference/plugins/ui#colors text: core CSS colors) as well as HEX codes or other native CSS color properties (e.g. even gradients)
   - Per blueprint: The `image` options for pages, files and users can now be defined directly in their own blueprint. You can still set image settings in sections the good old way if needed.
 
@@ -110,15 +110,15 @@ image:
 
 To copy multiple blocks, you can `cmd+click` or `alt+click` on all blocks you want to include in your selection and copy them with `cmd+c` or via the copy button afterwards.
 
-- **New (link: docs/reference/panel/blocks/line text: line block)** which automatically supports and imports hr blocks from the old Editor plugin.
+- **New (link: docs/reference/panel/blocks/line text: line block)**, which automatically supports and imports `hr` blocks from the old Editor plugin.
 (image: line-block.png)
 
 
 ### Improved UX
 
-- **New slug field:** perfect for when you want to create sanitized strings for IDs, URL paths, css class names, etc. (link: https://getkirby.test/docs/reference/panel/fields/slug text: Learn more ›)
+- **New slug field:** perfect for when you want to create sanitized strings for IDs, URL paths, CSS class names, etc. (link: https://getkirby.test/docs/reference/panel/fields/slug text: Learn more ›)
 
-- **Improved duplicate dialog** which now also accepts a title for the new page
+- **Improved duplicate dialog**, which now also accepts a title for the new page.
 (image: duplicate-dialog.png)
 
 - **`navigation` option:** The previous/next item navigation in the Panel is a very effective way for editors to move between content. We've drastically improved the usability of the navigation for your users (link: docs/reference/panel/blueprints/page#navigation-option text: with additional options) to customize the links.
@@ -134,7 +134,7 @@ To copy multiple blocks, you can `cmd+click` or `alt+click` on all blocks you wa
 
 ### New Panel views
 
-Settings view has been replaced by a **new system view** with all kinds of additional information about your Kirby installation and a brand **new languages view**.
+The settings view has been replaced by a **new system view** with all kinds of additional information about your Kirby installation and a brand **new languages view**.
 
 (image: language-view.png)
 
@@ -142,7 +142,7 @@ The system view contains the version and license information from the previous s
 
 (image: system-view.png)
 
-Both new views come with corresponding (link: permissions#role-based-permissions-in-user-blueprints text: access permissions).
+Both new views come with corresponding (link: /docs/guide/users/permissions#role-based-permissions-in-user-blueprints text: access permissions).
 
 
 
@@ -157,7 +157,7 @@ Both new views come with corresponding (link: permissions#role-based-permissions
 <?= $image->thumb(['width' => 200, 'format' => 'avif']) ?>
 ```
 
-- Set a (link: docs/reference/system/options/thumbs#format text: default thumb format) in your config
+- Set a (link: docs/reference/system/options/thumbs#format text: default thumb format) in your config.
 
 ### More powerful config options
 
@@ -166,17 +166,17 @@ Both new views come with corresponding (link: permissions#role-based-permissions
 
 ### Security
 
-- (method: Kirby\Toolkit\Str::safeTemplate text: Str::safeTemplate($string, $data)) which escapes HTML from all regular query placeholders and allows HTML with new `{< site.myMethodWithHtml >}` syntax. Safe templates are now also available for `Page`, `User`, `File` and `Site` classes with the new `$model->toSafeString()` method.
+- (method: Kirby\Toolkit\Str::safeTemplate text: Str::safeTemplate($string, $data)), which escapes HTML from all regular query placeholders and allows HTML with the new `{< site.myMethodWithHtml >}` syntax. Safe templates are now also available for `Page`, `User`, `File` and `Site` classes with the new `$model->toSafeString()` method.
 - New `Kirby\Toolkit\Dom` class to parse, modify and sanitize DOM-based documents (XML and HTML)
 - New `Kirby\Sane\Html` for validating and sanitizing HTML files or HTML snippets
-- (method: Kirby\Filesystem\File::sha1 text: $file->sha1()) which generates a sha1 hash for the given file.
+- (method: Kirby\Filesystem\File::sha1 text: $file->sha1()), which generates an SHA1 hash of the given file
 
 ### Sparkles
 
 - New (method: Kirby\Cms\Blocks::hasType text: $blocks->hasType()), (method: Kirby\Cms\Layouts::toBlocks text: $layouts->toBlocks()) and (method: Kirby\Cms\Layouts::hasBlockType text: $layouts->hasBlockType()) class methods
-- (method: Kirby\Toolkit\A::map text: A::map($array, $callback)) a simple wrapper around `array_map` to fix the weird, inconsistent argument order.
+- (method: Kirby\Toolkit\A::map text: A::map($array, $callback)) – a simple wrapper around `array_map` to fix the weird, inconsistent argument order.
 - New (method: Helper::router text: router()) helper
-- (method: Kirby\Cms\System::title()) which we now use for all emails to replace "Kirby Panel" as generic title.
+- (method: Kirby\Cms\System::title()), which we now use for all emails to replace "Kirby Panel" as generic title.
 - (method: Kirby\Cms\Files::size text: $files->size()) and (method: Kirby\Cms\Files::niceSize text: $files->niceSize()) to get the total size of all files in a collection.
 
 
@@ -185,7 +185,7 @@ Both new views come with corresponding (link: permissions#role-based-permissions
 
 ### Fiber - a whole new way of Panel extensions
 
-We’ve spent the last months working on a brand new backend architecture for the Panel. Moving away from a single page application to a more traditional approach with a simplified server-rendered backend. The new architecture is inspired by Inertia.js and simplifies our Panel and Panel plugins in ways that we’ve never dreamed of. (link: releases/3.6/refactoring#fiber text: Learn more about Fiber ›).
+We’ve spent the last months working on a brand new backend architecture for the Panel. Moving away from a single page application to a more traditional approach with a simplified server-rendered backend. The new architecture is inspired by Inertia.js and simplifies our Panel and Panel plugins in ways that we’ve never dreamed of. (link: releases/3.6/refactoring#fiber text: Learn more about Fiber ›)
 
 - New (link: docs/reference/plugins/extensions/panel-areas text: Panel areas) extension
 - New (link: docs/reference/plugins/extensions/panel-dialogs text: Panel dialogs) extension
@@ -198,7 +198,7 @@ We’ve spent the last months working on a brand new backend architecture for th
 - New custom (link: docs/reference/plugins/extensions/blocks-methods text: blocks methods) extensions
 - New custom (link: docs/reference/plugins/extensions/layout-methods text: layout methods) extensions
 - New custom (link: docs/reference/plugins/extensions/layouts-methods text: layouts methods) extensions
-- New custom (link: docs/reference/plugins/extensions/layout-columns-methods text: layout columns methods) extensions
+- New custom (link: docs/reference/plugins/extensions/layout-column-methods text: layout column methods) extensions
 - New (link: docs/reference/plugins/extensions/block-models text: block models) extensions
 
 ### Craft your own things for the Panel

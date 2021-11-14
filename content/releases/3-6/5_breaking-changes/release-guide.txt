@@ -72,7 +72,7 @@ info: "via {< site.myMethodWithHtml >}"
     - `user` module has been removed, use `this.$user` instead.
     - `$store.dispatch('breadcrumb')` and `$store.dispatch('title')`have been removed. Use Panel areas instead.
 - The `previewThumb` helper has been removed. `k-item-image` takes care of processing the image data correctly inside `k-item`.
-- The following methods from `vuex-i18n` are no longer available in the new custom implementation: `$tc`,  `$tlang`, `$i18n.localeExists`, `$i18n.keyExists`.     Translation strings cannot be added dynamically anymore, only through our official extension.
+- The following methods from `vuex-i18n` are no longer available in the new custom implementation: `$tc`,  `$tlang`, `$i18n.localeExists`, `$i18n.keyExists`. Translation strings cannot be added dynamically anymore, only through our (link: docs/reference/plugins/extensions/translations text: official extension).
 - Removed outdated $api methods in Vue:
     - `$api.pages.breadcrumb`
     - `$api.files.breadcrumb`
@@ -84,27 +84,27 @@ info: "via {< site.myMethodWithHtml >}"
 
 
 ### CSS Selectors
-- `.k-panel[data-translation]` is now `.k-panel[data-language]`
-- `.k-panel[data-translation-default]` is now `.k-panel[data-language-default]`
-- CSS class `.k-block-handle` has been replaced with `.k-sort-handle`
+- `.k-panel[data-translation]` is now `.k-panel[data-language]`.
+- `.k-panel[data-translation-default]` is now `.k-panel[data-language-default]`.
+- CSS class `.k-block-handle` has been replaced with `.k-sort-handle`.
 
 
 ## Core
 
 - Kirby no longer supports PHP 7.3, which will reach its [end-of-life date](https://www.php.net/supported-versions.php) soon. We will add support for PHP 8.1 to Kirby as soon as possible after the official release of PHP 8.1.
-- Multi-language setup: slugs in content files of the default language will be ignored. The folder names decide the slugs for the default language.
-- Hidden blocks in the layout field will no longer be visible (as expected)
+- Multi-language setup: Slugs in content files of the default language will be ignored. The folder names decide the slugs for the default language.
+- Hidden blocks in the layout field will no longer be visible (as expected).
 - `$files->add()` and `$users->add()` now throw exceptions when something other than a `File`/`User` object, a `Files`/`Users` object or a file/user ID is passed to them. Empty values (`null`, `false` and `true`) are silently ignored. [#3248](https://github.com/getkirby/kirby/pull/3248)
 - `F::modified()` does no longer calculate a maximum between mtime and ctime for file changes. This could in theory lead to different timestamps in some scenarios. Very unlikely though.
-- `Html::encode()`: Single quotes now are also converted
-- `Kirby\Image\Image::__toString()` returns the HTML `<img>` tag instead of the root string
-- File hooks: the `$upload` parameter is now a `Kirby\Filesystem\File` object, before `Kirby\Image\Image`
+- `Html::encode()`: Single quotes now are also converted.
+- `Kirby\Image\Image::__toString()` returns the HTML `<img>` tag instead of the root string.
+- File hooks: the `$upload` parameter is now a `Kirby\Filesystem\File` object, before `Kirby\Image\Image`.
 - The video embedding helpers and methods no longer throw exceptions if the provided URL is invalid, instead `null` is returned.
-- `Kirby\Toolkit\File::header()` now returns `void` instead of an empty `string` by default
-- `F::niceSize()` doesn't check anymore whether file exists
-- The public static configuration attributes of the `Sane` classes have been renamed for consistency with the new `Toolkit\Dom` class
-- The `Sane\Svg::$allowedNamespaces` attribute now expects namespace reference names as the array keys instead of full attribute names (so `xmlns:xlink` should become just `xlink` and `xmlns` should become an empty string)
-- The `Sane\Svg::$allowedTags` attribute (before `$allowedElements`) now is an associative array with the allowed attributes for this tag as the value
+- `Kirby\Toolkit\File::header()` now returns `void` instead of an empty `string` by default.
+- `F::niceSize()` doesn't check anymore whether the file exists.
+- The public static configuration attributes of the `Sane` classes have been renamed for consistency with the new `Toolkit\Dom` class.
+- The `Sane\Svg::$allowedNamespaces` attribute now expects namespace reference names as the array keys instead of full attribute names (so `xmlns:xlink` should become just `xlink` and `xmlns` should become an empty string).
+- The `Sane\Svg::$allowedTags` attribute (before `$allowedElements`) now is an associative array with the allowed attributes for this tag as the value. Attributes defined in `$allowedAttrs` are allowed globally and don't need to be copied to each tag.
 - All API endpoints for content locking/unlocking don't display an exception anymore when content locking isn't supported.
 - The crop keyword is now always present in filenames for cropped files. All center cropped files need to be regenerated.
 - `Cms\Collection::has()`: 1st parameter got renamed to `$key`
