@@ -12,7 +12,7 @@
     ],
     [
       'title' => 'Your own dialogs in seconds',
-      'text' => 'Dialogs can now also be defined in PHP and opened with a simple JS call `$dialog("my-dialog")`. Create form dialogs, text dialogs or confirmation dialogs to delete entries. It’s so much fun.'
+      'text' => 'Dialogs can now also be defined in PHP and opened with a simple JS call `$dialog("my-dialog")`. Create form dialogs, text dialogs or confirmation dialogs to delete entries. It’s so much fun.'
     ],
     [
       'title' => 'Access control made simple',
