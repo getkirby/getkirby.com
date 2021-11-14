@@ -33,5 +33,4 @@ As part of modernising our code base, we have marked some parts as deprecated in
 - `pages()` will now throw a deprecation warning if single ID gets passed. Will be enforced in 3.7.0 by always returning a `Pages` collection. Use (method: Helper::page text: page()) for a single page instead.
 - `Str::template()`: the parameters `$fallback`, `$start` and `$end` have been deprecated and throw a deprecation warning. Use instead an `$options` array with `fallback`, `start` and/or `end` keys as third parameter.
 - Creating a `Kirby\Cms\File` without a `parent` property has been deprecated and throws a warning. Starting in 3.7.0 the property will be required and cause a breaking error if not passed. [#3372](https://github.com/getkirby/kirby/pull/3372)
-
-
+- Use Tailwind `sr-only` utility instead of `k-offscreen`. The old class name is still available to avoid a breaking change.

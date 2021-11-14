@@ -49,9 +49,10 @@
   </style>
 
   <div class="prose bg-white p-12 shadow-xl text-xl mb-24 introduction">
-    <p>We started working on Kirby 3.6 in April and we finally release it on November 16th.</p>
+    <p>We started working on Kirby 3.6 in April and we finally release it on November 16th, 2021.</p>
     <p>This release is maybe the most important one since 3.0. The v3 foundation is still holding up and we see endless possibilities to extend it and keep it growing. But we also wanted to make sure that we don't carry along old baggage. We've learned a ton from all the projects you build and the plugins you develop, and there were things in our architecture that could have been better, simpler – more aligned with Kirby's philosophy.</p>
-    <p>With 3.6, we get rid of the bad parts and move forward with fantastic new parts. 3.6 is the door opener for all your feature requests that are currently blocked. It is the foundation for the coming years and we couldn't be more proud of it.</p>
+    <p>With 3.6, we get rid of the bad parts and move forward with fantastic new parts. 3.6 is the door opener for all your feature requests that were previously blocked. It is the foundation for the coming years and we couldn't be more proud of it.</p>
+    <p>And it's not only about Kirby's architecture: Kirby 3.6 also comes with many features and improvements that make Kirby even more flexible and powerful.</p>
     <p>We hope you'll enjoy it!</p>
     <p><strong>– The Kirby team</strong></p>
   </div>
