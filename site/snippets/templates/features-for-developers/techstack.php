@@ -11,7 +11,7 @@
         <?= image('php.svg')->read() ?>
       </figure>
       <h3 class="font-bold">Modern PHP</h3>
-      <p class="color-gray-700">Kirby is built on our own PHP micro-framework and can be combined with your favorite PHP libraries. Tested and continously improved over more than 9 years, it fully leverages the power of modern PHP. With a code coverage of 91.7% across the entire CMS backend and more than 70 releases since 3.0, we invest heavily into the quality of our foundation.</p>
+      <p class="color-gray-700">Kirby is built on our own PHP micro-framework and can be combined with your favorite PHP libraries. Tested and continously improved over more than 9 years, it fully leverages the power of modern PHP. With over 4,800 automated tests with a code coverage of 94.9% across the entire CMS backend and more than 70 releases since 3.0, we invest heavily into the quality of our foundation.</p>
     </article>
     <article class="p-6 bg-light">
       <figure class="mb-6" style="height: 3rem">
