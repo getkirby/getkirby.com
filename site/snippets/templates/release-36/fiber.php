@@ -8,7 +8,7 @@
   'features' => [
     [
       'title' => 'Drastically reduced bundle size',
-      'text' => 'With the move to Fiber, we massively reduce the complexity and bundle size of the Panel. <strong>We shaved off more than 100kb of uncompressed JavaScript</strong> and will likely manage to shave off even more. 🤯'
+      'text' => 'With the move to Fiber, we massively reduce the complexity and bundle size of the Panel. <strong>We shaved off more than 100 KB of uncompressed JavaScript</strong>. 🤯'
     ],
     [
       'title' => 'Super simple plugins',
