@@ -11,8 +11,8 @@ We refactored many file-related classes and started to gather all of them in the
 | Before 3.6 | In 3.6 | Description |
 |-|-|-|
 | Kirby\Toolkit\File | `Kirby\Filesystem\File` | Everything related to a file in the filesystem - takes over a lot of functionality that was previously part of `Kirby\Image\Image` even for non-images |
-| Kirby\Image\Image | `Kirby\Image\Image` | now extends `Kirby\Filesystem\File` and adds image-related methods (e.g. `dimensions`, `exif`) |
-| Kirby\Cms\FileFoundation | `Kirby\Filesystem\IsFile` | adds method-proxying to an asset object - either to `Kirby\Filesystem\File` or `Kirby\Image\Image` depending on the file type of the `$root` property |
+| Kirby\Image\Image | `Kirby\Image\Image` | Now extends `Kirby\Filesystem\File` and adds image-related methods (e.g. `dimensions`, `exif`) |
+| Kirby\Cms\FileFoundation | `Kirby\Filesystem\IsFile` | Adds method-proxying to an asset object - either to `Kirby\Filesystem\File` or `Kirby\Image\Image` depending on the file type of the `$root` property |
 | Kirby\Cms\Asset | `Kirby\Filesystem\Asset` | |
 | Kirby\Cms\Filename | `Kirby\Filesystem\Filename` | |
 | Kirby\Toolkit\Dir | `Kirby\Filesystem\Dir` | |
@@ -25,7 +25,7 @@ We also moved and merged some more classes to simplify our setup:
 |-|-|-|
 | Kirby\Cms\Form | `Kirby\Form\Form` | [#3312](https://github.com/getkirby/kirby/pull/3312) |
 | Kirby\Cms\KirbyTag | `Kirby\Text\KirbyTag` | [#3296](https://github.com/getkirby/kirby/pull/3296) |
-| Kirby\Cms\KirbyTags | `Kirby\Text\KirbyTag` | [#3296](https://github.com/getkirby/kirby/pull/3296) |
+| Kirby\Cms\KirbyTags | `Kirby\Text\KirbyTags` | [#3296](https://github.com/getkirby/kirby/pull/3296) |
 
 <info>
 For all these changes, we have added class aliases that we will keep around until at least Kirby 4. This will make sure that your class references continue to work.
@@ -129,7 +129,7 @@ We've taken this concept and extended it to more parts of the Panel. Dialogs are
 
 ### A lot less JS
 
-With this approach, we already managed to cut a huge 100kb+ chunk out of our Vue.js application. It's massive and it's so much fun.
+With this approach, we already managed to cut a huge 100 KB+ chunk out of our Vue.js application. It's massive and it's so much fun.
 
 ### Why not just Inertia.js?
 
