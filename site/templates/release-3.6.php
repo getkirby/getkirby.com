@@ -1,18 +1,18 @@
 <?php layout() ?>
 <?= css('assets/css/layouts/features.css') ?>
 
-<header class="mb-12 flex items-end justify-between release-header">
+<header class="mb-36 flex items-end justify-between release-header">
   <style>
-  @media (max-width: 50rem) {
-    .release-header {
-      flex-direction: column;
-      align-items: initial;
-    }
+    @media (max-width: 50rem) {
+      .release-header {
+        flex-direction: column;
+        align-items: initial;
+      }
 
-    .release-header nav {
-      margin: 2rem 0 0;
+      .release-header nav {
+        margin: 2rem 0 0;
+      }
     }
-  }
   </style>
 
   <div>
@@ -33,14 +33,13 @@
         'link' => $page->children()->first()->url(),
         'icon' => 'book',
         'style' => 'outlined'
-      ],
+      ]
     ],
     'center' => false,
     'mb' => 0
   ]) ?>
 </header>
 
-<?php snippet('templates/release-36/roadmap') ?>
 <?php snippet('templates/release-36/fiber') ?>
 <?php snippet('templates/release-36/plugins') ?>
 <?php snippet('templates/release-36/cardlets') ?>
@@ -74,20 +73,17 @@
   </div>
 </section>
 
-<section id="features" class="mb-42">
-  <?php snippet('templates/features/intro', [
-    'title' => 'There’s more …',
-    'intro' => 'This release is packed with features and improvements',
-    'text'  => 'Find out more about each of them in the <a href="/releases/3.6/features">full release notes</a>.',
-  ]) ?>
+<?php snippet('templates/release-36/icons') ?>
 
-  <?php snippet('templates/release-36/features-implemented', [
-    'page' => $page->find('features')
-  ]) ?>
-</section>
+
+<?php snippet('templates/release-36/changes/panel') ?>
+<?php snippet('templates/release-36/changes/templating') ?>
+<?php snippet('templates/release-36/changes/security') ?>
+<?php snippet('templates/release-36/changes/core') ?>
+
 
 <section id="get-started" class="mb-42">
-  <h2 class="h2 text-center mb-6">Get involved</h2>
+  <h2 class="h2 text-center mb-6">Get started</h2>
   <?php snippet('cta', [
     'buttons' => [
       [
