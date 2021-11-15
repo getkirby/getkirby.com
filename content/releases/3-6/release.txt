@@ -1,4 +1,4 @@
-Title: 3.6.0
+Title: 3.6
 ----
 Version: 3.6
 ----
@@ -79,14 +79,38 @@ export default {
 
 ----
 
+Cards:
+
+```yaml
+sections:
+  team:
+    type: pages
+    template: colleague
+    layout: cards
+```
+
+----
+
 Cardlets:
 
 ```yaml
 sections:
-  notes:
+  team:
     type: pages
-    template: note
+    template: colleague
     layout: cardlets
+```
+
+----
+
+List:
+
+```yaml
+sections:
+  team:
+    type: pages
+    template: colleague
+    layout: list
 ```
 
 ----
@@ -94,27 +118,29 @@ sections:
 Webp:
 
 ```php
-$image->thumb(['width' => 200, 'format' => 'webp']);
-
-$image->srcset([
-  '400vw'  => ['width' => 400, 'format' => 'webp'],
-  '800vw'  => ['width' => 800, 'format' => 'webp']
-  '1200vw' => ['width' => 1200, 'format' => 'webp']
-])
+<picture>
+  <source srcset="<?= $image->thumb(['format' => 'avif'])->url() ?>" type="image/avif">
+  <source srcset="<?= $image->thumb(['format' => 'webp'])->url() ?>" type="image/webp">
+  <img src="<?= $image->thumb(['format' => 'jpg'])->url() ?>" alt="A highly optimized image">
+</picture>
 ```
+----
+
+ImageSettingsIntro:
+
+- Support for Kirby's (link: docs/guide/blueprints/query-language text: query language)
+- Custom colors: `back` and `color` options now support shorthands for (link: docs/reference/plugins/ui#colors text: core CSS colors) as well as HEX codes or other native CSS color properties (e.g. even gradients)
+- Per blueprint: The `image` options for pages, files and users can now be defined directly in their own blueprint. You can still set image settings in sections the good old way if needed.
 
 ----
 
 ImageSettings:
 
-```yaml
+```yaml "site/blueprints/pages/note.yml"
 image:
-  back: "{{ page.panelBack }}"
-
-# or
-
-image:
-  back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);"
+  color: "blue-200"
+  back: "{{ page.myCustomBackColor }}"
+  icon: 📝
 ```
 
 ----
