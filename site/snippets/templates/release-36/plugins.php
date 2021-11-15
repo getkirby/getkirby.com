@@ -20,7 +20,7 @@
     ],
     [
       'title' => 'No more API endpoint hassle',
-      'text' => 'With Fiber, you return exactly the data you need for your Panel components. Good-bye to multiple API calls or custom API routes. Write some PHP and be done.'
+      'text' => 'With Fiber, you return exactly the data you need for your Panel components. Goodbye to multiple API calls or custom API routes. Write some PHP and be done.'
     ],
   ]
 ]);
