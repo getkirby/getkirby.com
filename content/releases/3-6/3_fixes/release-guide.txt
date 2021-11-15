@@ -50,4 +50,4 @@ Text:
 - Fixed multiline placeholder for writer field [#3470](https://github.com/getkirby/kirby/issues/3470)
 - Account files are now fully accessible through the account view, even if permissions for the users area is blocked. [#2580](https://github.com/getkirby/kirby/issues/2580)
 - Fixed nested blocks drawer breadcrumb issue [#3871](https://github.com/getkirby/kirby/issues/3871)
-- Fix rotating loader in Firefox
+- Fixed rotating loader in Firefox
