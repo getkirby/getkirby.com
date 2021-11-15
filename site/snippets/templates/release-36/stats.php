@@ -16,6 +16,7 @@
         'rasteiner',
         'ronaldtorres',
         'sinnbeck',
+        'sylvainjule',
         'texnixe',
         'thathoff',
       ] as $contributor): ?>
