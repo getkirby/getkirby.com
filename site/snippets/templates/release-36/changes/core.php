@@ -1,5 +1,5 @@
 <?php if ($section = $page->find('changes/core')) : ?>
-  <section id="plugins" class="mb-42">
+  <section id="changes-core" class="mb-42">
 
     <?php snippet('templates/features/intro', [
       'title' => $section->title(),
