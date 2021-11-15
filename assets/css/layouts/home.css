@@ -35,6 +35,21 @@
 }
 
 
+.playground-header-title h1 {
+  margin-bottom: var(--spacing-6);
+}
+
+@media screen and (min-width: 50rem) {
+  .playground-header-title {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .playground-header-title h1 {
+    margin-bottom: 0;
+  }
+}
+
 /** HEADER **/
 /** Shared */
 .playground-header-menu a {
