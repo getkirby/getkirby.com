@@ -1,7 +1,7 @@
 <div class="mb-6">
   <div class="container">
     <a href="/releases/3.6" class="font-bold py-3 block flex justify-between" style="border-bottom: 2px solid var(--color-black)">
-      <span><span class="mr-3">🚀</span> 3.6.0 is here!</span>
+      <span><span class="mr-3">🚀</span> Kirby 3.6 is here!</span>
       <span>See what’s new &rsaquo;</span>
     </a>
   </div>
