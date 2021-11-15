@@ -2,7 +2,7 @@
   <?php snippet('templates/features/intro', [
     'title' => 'Cardlets',
     'intro' => 'A new way to present your content',
-    'text'  => 'While lists are great for dense information and cards are fantastic if you want to highlight visual content, there’s often a gray zone in between. The new cardlets layout option gives you nice visual previews while your text content is still representend decently. Use them in pages or files sections as well as pages, files or users fields.'
+    'text'  => 'While lists are great for dense information and cards are fantastic to highlight visual content, there’s often a gray zone in between. The new cardlets layout option gives you nice visual previews while your text content is still represented decently. Use them in pages and files sections as well as pages, files and users fields.'
   ]) ?>
 
   <div class="columns mb-6" style="--columns: 3; --gap: var(--spacing-1)">
