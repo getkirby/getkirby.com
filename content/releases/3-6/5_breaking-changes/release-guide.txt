@@ -42,7 +42,7 @@ info: "via {< site.myMethodWithHtml >}"
 
 ### `Kirby\Panel` namespace related
 
-- If you have modified the `->panel*()` in custom models, you now need to return a custom Panel model (based on `Kirby\Panel\Model`) at `$page->panel()` which then takes care of all Panel-related functions, e.g. if you had customized `$page->panelImage()` you need a custom `Kirby\Panel\Page` to then customize `$page->panel()->image()`.
+- If you have modified the `->panel*()` methods in custom models, you now need to return a custom Panel model (based on `Kirby\Panel\Model`) at `$page->panel()` which then takes care of all Panel-related functions, e.g. if you had customized `$page->panelImage()` you need a custom `Kirby\Panel\Page` to then customize `$page->panel()->image()`.
 - Use `$model->panel()->image()` instead of `$model->panel()->icon()`
 - `$model->panel()->image()` doesn't return `cards` and `list` keys anymore. Instead, `src` and `srcset` keys at the top level that correspond to the new `$layout` parameter.
 

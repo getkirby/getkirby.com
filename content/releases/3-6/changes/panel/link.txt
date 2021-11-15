@@ -15,9 +15,9 @@ Features:
 - **New (link: docs/reference/panel/blocks/line text: line block)**, which automatically supports and imports `hr` blocks from the old Editor plugin.
 
 #### Fields
-- **New slug field:** perfect for when you want to create sanitized strings for IDs, URL paths, CSS class names, etc. (link: https://getkirby.test/docs/reference/panel/fields/slug text: Learn more ›)
+- **New slug field:** perfect if you want to create sanitized strings for IDs, URL paths, CSS class names, etc. (link: https://getkirby.test/docs/reference/panel/fields/slug text: Learn more ›)
 - **New formats for the writer field:** Our writer field is getting more powerful with headings and lists. (link: docs/reference/panel/fields/writer#format-node-options text: Learn more ›)
-- **Email dialog** for the writer field:
+- **Email dialog** for the writer field
 
 #### Blueprints
 - **Image options on steriods:**
@@ -51,31 +51,31 @@ Enhancements:
 
 - Improved parsing content from Word documents to create blocks [#3770](https://github.com/getkirby/kirby/pull/3770)
 - Multiselect with Cmd/Ctrl keys for blocks field [#3748](https://github.com/getkirby/kirby/pull/3748)
-- Blocks without fields don't open empty drawer anymore (e.g. new line block)
-- Blocks are now always selected in the original order, no matter in which order they have been selected in.
-- The video block is now more privacy friendly by creating embeds with the "do not track" option
+- Blocks without fields don't open empty drawer anymore (e.g. new line block).
+- Blocks are now always selected in the original order, independed of the order in which they were selected.
+- The video block is now more privacy friendly by creating embeds with the "do not track" option.
 
 #### Fields
 
-- Writer field: marks (floating toolbar buttons) now show tooltips
+- Writer field: marks (floating toolbar buttons) now show tooltips.
 - The files field can now accept new files via drag & drop.
 - The toggle field now supports the query syntax in the `text` property.
 
 #### Files
 
-- File view uses stable preview link for files (instead of media folder URL) [#3575](https://github.com/getkirby/kirby/pull/3575)
+- File view uses stable preview link for files (instead of media folder URL) [#3575](https://github.com/getkirby/kirby/pull/3575).
 - File uploads now check for duplicates via SHA1 hashes. This leads to a better upload experience because when you upload the exact same file twice, the upload is simply ignored.
 - New files automatically store the sort attribute on upload if the files section is sortable. [#2886](https://github.com/getkirby/kirby/issues/2886)
 
 #### Pages
 
-- The page position field is hidden from dialogs when only one option is available (except when in `debug` mode)
-- Sorting pages is disabled in the page dropdown when only one option would be available
+- The page position field is hidden from dialogs when only one option is available (except when in `debug` mode).
+- Sorting pages is disabled in the page dropdown when only one option would be available.
 
 #### More …
 
 - The license code is now only displayed to admins.
-- Canonical language URLs in the Panel [#3759](https://github.com/getkirby/kirby/pull/3759)
+- Canonical language URLs in the Panel [#3759](https://github.com/getkirby/kirby/pull/3759).
 
 ----
 
@@ -83,7 +83,7 @@ Fixes:
 
 #### Interface
 
-- Fix rotating loader in Firefox
+- Fixed rotating loader in Firefox
 - Fixed jump to the top of the page at ESC keydown in an overlay [#3387](https://github.com/getkirby/kirby/issues/3387)
 - `cover` option fixed for all models and list layout in section [#3226](https://github.com/getkirby/kirby/issues/3226)
 - Fixed version number in settings view in RTL interface [#3581](https://github.com/getkirby/kirby/pull/3581)
