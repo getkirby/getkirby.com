@@ -77,7 +77,7 @@
 <?php snippet('templates/release-36/changes/plugins') ?>
 <?php snippet('templates/release-36/changes/security') ?>
 <?php snippet('templates/release-36/changes/core') ?>
-
+<?php snippet('templates/release-36/stats') ?>
 
 <section id="get-started" class="mb-42">
   <h2 class="h2 text-center mb-6">Get started</h2>
