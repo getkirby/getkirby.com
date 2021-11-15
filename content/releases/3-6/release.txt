@@ -1,4 +1,4 @@
-Title: 3.6
+Title: Kirby 3.6
 ----
 Version: 3.6
 ----
