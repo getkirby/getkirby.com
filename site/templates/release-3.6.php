@@ -27,6 +27,12 @@
         'link' => $page->link(),
         'icon' => 'download',
         'style' => 'filled'
+      ],
+      [
+        'text'  => 'Docs',
+        'link'  => '/docs',
+        'icon'  => 'book',
+        'style' => 'outlined'
       ]
     ],
     'center' => false,
