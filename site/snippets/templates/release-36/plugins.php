@@ -2,7 +2,7 @@
   'id'    => 'plugins',
   'title' => 'Panel areas',
   'intro' => 'The plugin API you’ve been dreaming of',
-  'text'  => 'Our new Fiber architecture splits the Panel in areas: site area, users area, settings area, etc. You can create your own areas and build entire applications on top of the Panel. <a href="/docs/reference/plugins/extensions/panel-areas">Learn more &rsaquo;</a>',
+  'text'  => 'Our new Fiber architecture splits the Panel in areas: site area, users area, system area, etc. You can create your own areas and build entire applications on top of the Panel. <a href="/docs/reference/plugins/extensions/panel-areas">Learn more &rsaquo;</a>',
   'figure' => 'templates/release-36/plugins-figure',
   'reverse' => true,
   'features' => [
@@ -16,11 +16,11 @@
     ],
     [
       'title' => 'Access control made simple',
-      'text' => 'You want your own permissions for your shiny new Panel area? No problem. It’s automatically handled for you. Deny access for individual roles and the Panel will lock users out that are not allowed in.'
+      'text' => 'You want your own permissions for your shiny new Panel area? No problem. It’s automatically handled for you. Deny access for individual roles and the Panel will make sure to keep those users out.'
     ],
     [
       'title' => 'No more API endpoint hassle',
-      'text' => 'With Fiber, you return exactly the kind of data you need for your Panel components. No more multiple API calls or custom API routes. Write some PHP and be done.'
+      'text' => 'With Fiber, you return exactly the data you need for your Panel components. Good-bye to multiple API calls or custom API routes. Write some PHP and be done.'
     ],
   ]
 ]);

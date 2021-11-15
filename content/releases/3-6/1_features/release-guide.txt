@@ -116,7 +116,7 @@ To copy multiple blocks, you can `cmd+click` or `alt+click` on all blocks you wa
 
 ### Improved UX
 
-- **New slug field:** perfect for when you want to create sanitized strings for IDs, URL paths, CSS class names, etc. (link: https://getkirby.test/docs/reference/panel/fields/slug text: Learn more ›)
+- **New slug field:** perfect if you want to create sanitized strings for IDs, URL paths, CSS class names, etc. (link: https://getkirby.test/docs/reference/panel/fields/slug text: Learn more ›)
 
 - **Improved duplicate dialog**, which now also accepts a title for the new page.
 (image: duplicate-dialog.png)
@@ -166,7 +166,7 @@ Both new views come with corresponding (link: /docs/guide/users/permissions#role
 
 ### Security
 
-- (method: Kirby\Toolkit\Str::safeTemplate text: Str::safeTemplate($string, $data)), which escapes HTML from all regular query placeholders and allows HTML with the new `{< site.myMethodWithHtml >}` syntax. Safe templates are now also available for `Page`, `User`, `File` and `Site` classes with the new `$model->toSafeString()` method.
+- (method: Kirby\Toolkit\Str::safeTemplate text: Str::safeTemplate($string, $data)), which escapes HTML from all regular query placeholders and allows HTML with the new `{< site.myMethodWithHtml >}` syntax. Safe templates are now also available for the `Page`, `User`, `File` and `Site` classes with the new `$model->toSafeString()` method.
 - New `Kirby\Toolkit\Dom` class to parse, modify and sanitize DOM-based documents (XML and HTML)
 - New `Kirby\Sane\Html` for validating and sanitizing HTML files or HTML snippets
 - (method: Kirby\Filesystem\File::sha1 text: $file->sha1()), which generates an SHA1 hash of the given file
@@ -185,7 +185,7 @@ Both new views come with corresponding (link: /docs/guide/users/permissions#role
 
 ### Fiber - a whole new way of Panel extensions
 
-We’ve spent the last months working on a brand new backend architecture for the Panel. Moving away from a single page application to a more traditional approach with a simplified server-rendered backend. The new architecture is inspired by Inertia.js and simplifies our Panel and Panel plugins in ways that we’ve never dreamed of. (link: releases/3.6/refactoring#fiber text: Learn more about Fiber ›)
+We’ve spent the last months working on a brand-new backend architecture for the Panel. Moving away from a single page application to a more traditional approach with a simplified server-rendered backend. The new architecture is inspired by Inertia.js and simplifies our Panel and Panel plugins in ways that we’ve never dreamed of. (link: releases/3.6/refactoring#fiber text: Learn more about Fiber ›)
 
 - New (link: docs/reference/plugins/extensions/panel-areas text: Panel areas) extension
 - New (link: docs/reference/plugins/extensions/panel-dialogs text: Panel dialogs) extension

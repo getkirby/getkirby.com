@@ -226,7 +226,7 @@ Fixes:
 - Fixed manual files sorting via changePosition dialog [#3589](https://github.com/getkirby/kirby/issues/3589)
 - `cover` option fixed for all models and list layout in section [#3226](https://github.com/getkirby/kirby/issues/3226)
 - Fixed jump to the top of the page at ESC keydown in an overlay [#3387](https://github.com/getkirby/kirby/issues/3387)
-- Extending a non-existing Vue component is ignored now instead throwing an console error and breaking the Panel
+- Extending a non-existing Vue component is ignored now instead of throwing a console error and breaking the Panel
 - Fixed blocks field sort handle on hover [#3538](https://github.com/getkirby/kirby/issues/3538)
 - Fixed writer field RTL support [https://kirby.nolt.io/322](https://kirby.nolt.io/322)
 - Fixed version number in settings view in RTL interface [#3581](https://github.com/getkirby/kirby/pull/3581)
@@ -248,7 +248,7 @@ Fixes:
 - Fixed multiline placeholder for writer field Multiline placeholder in writer field renders as single line [#3470](https://github.com/getkirby/kirby/issues/3470)
 - Account files are now fully accessible through the account view, even if permissions for the users area is blocked [#2580](https://github.com/getkirby/kirby/issues/2580)
 - Fixed nested blocks drawer breadcrumb issue [#3871](https://github.com/getkirby/kirby/issues/3871)
-- Fix rotating loader in Firefox
+- Fixed rotating loader in Firefox
 
 ----
 Breaking:
@@ -293,7 +293,7 @@ info: "via {< site.myMethodWithHtml >}"
 
 ### `Kirby\Panel` namespace related
 
-- If you have modified the `->panel*()` in custom models, you now need to return a custom Panel model (based on `Kirby\Panel\Model`) at `$page->panel()` which then takes care of all Panel-related functions, e.g. if you had customized `$page->panelImage()` you need a custom `Kirby\Panel\Page` to then customize `$page->panel()->image()`.
+- If you have modified the `->panel*()` methods in custom models, you now need to return a custom Panel model (based on `Kirby\Panel\Model`) at `$page->panel()` which then takes care of all Panel-related functions, e.g. if you had customized `$page->panelImage()` you need a custom `Kirby\Panel\Page` to then customize `$page->panel()->image()`.
 - Use `$model->panel()->image()` instead of `$model->panel()->icon()`
 - `$model->panel()->image()` doesn't return `cards` and `list` keys anymore. Instead, `src` and `srcset` keys at the top level that correspond to the new `$layout` parameter.
 
