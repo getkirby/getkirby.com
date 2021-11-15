@@ -1,5 +1,5 @@
-<?php if ($section = $page->find('changes/panel')) : ?>
-  <section id="panel" class="mb-42">
+<?php if ($section = $page->find('changes/plugins')) : ?>
+  <section id="plugins" class="mb-42">
 
     <?php snippet('templates/features/intro', [
       'title' => $section->title(),

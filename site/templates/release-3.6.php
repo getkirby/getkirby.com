@@ -78,6 +78,7 @@
 
 <?php snippet('templates/release-36/changes/panel') ?>
 <?php snippet('templates/release-36/changes/templating') ?>
+<?php snippet('templates/release-36/changes/plugins') ?>
 <?php snippet('templates/release-36/changes/security') ?>
 <?php snippet('templates/release-36/changes/core') ?>
 

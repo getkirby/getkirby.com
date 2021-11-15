@@ -1,5 +1,5 @@
-<?php if ($section = $page->find('changes/panel')) : ?>
-  <section id="panel" class="mb-42">
+<?php if ($section = $page->find('changes/core')) : ?>
+  <section id="plugins" class="mb-42">
 
     <?php snippet('templates/features/intro', [
       'title' => $section->title(),
@@ -31,6 +31,20 @@
         <h3 class="h3 mb-6">Breaking changes</h3>
         <div class="prose text-sm">
           <?= $section->breaking()->kt() ?>
+        </div>
+      </div>
+
+      <div class="highlight bg-light">
+        <h3 class="h3 mb-6">Refactoring</h3>
+        <div class="prose text-sm">
+          <?= $section->refactoring()->kt() ?>
+        </div>
+      </div>
+
+      <div class="highlight bg-light">
+        <h3 class="h3 mb-6">Deprecated</h3>
+        <div class="prose text-sm">
+          <?= $section->deprecated()->kt() ?>
         </div>
       </div>
     </div>
