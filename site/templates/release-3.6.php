@@ -70,6 +70,8 @@
 <p class="h2 color-gray-600 mb-42 max-w-xl">
   <span class="color-black">This release is big</span>
   <br>
+  7 months of work
+  <br>
   More than 1200 commits 😱
   <br>
   Ready to read the full changelog?
