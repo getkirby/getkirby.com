@@ -55,19 +55,19 @@ When you now click on a link in the Panel, the event is intercepted and a JS fet
 ```
 Fiber now does two things:
 
-1. It updates the URL in the browser
-2. It refreshes the Vue app with the new state from the new Fiber object
+1. It updates the URL in the browser.
+2. It refreshes the Vue app with the new state from the new Fiber object.
 
 Whenever you reload the same URL afterwards, you go back to the beginning and the server will return the full document again with the same state.
 
 ### What makes this approach so great?
 
-- Routing is done in PHP with our good old Kirby router.
-- We can exactly control what data needs to be sent for each view.
+- Routing is done in PHP with our trusted Kirby router.
+- We can control what exact data needs to be sent for each view.
 - State can be handled on the server with good old sessions.
 - The API is not affected by any of this and can be a lot less specific.
 - The bundle size does not blow up with new routes or new requirements for state management.
-- Less logic in JS and a lot less complicated Vue components. You throw in state via props and that's it.
+- Less logic is needed in JS, which results in a lot less complicated Vue components. You throw in state via props and that's it.
 - Every view is super easy to test on the backend with PHPUnit.
 
 ### Not just views
@@ -80,4 +80,4 @@ With this approach, we already managed to (link: /releases/3.6#fiber text: cut a
 
 ### Why not just Inertia.js?
 
-Fiber is mainly inspired by (link: https://inertiajs.com/ text: Inertia.js). But the more we dug into the concept, the more ways we found how we can adjust and improve the principles of Inertia for our own needs. First, we implemented our own client implementation of Inertia. Then we started changing lots of parts on the backend. In the end, the basic request concept is still the same, but the implementation is very different. It felt confusing to use the same name. You cannot lookup things in the Inertia.js docs when you work with the Panel. Dialogs and other ideas for future Fiber Panel features don't exist in Inertia. Fiber seemed like an appropriate alternative term.
+Fiber is mainly inspired by (link: https://inertiajs.com/ text: Inertia.js). But the more we dug into the concept, the more ways we found how we can adjust and improve the principles of Inertia for our own needs. First, we implemented our own client implementation of Inertia. Then we started changing lots of parts on the backend. In the end, the basic request concept is still the same, but the implementation is very different. It felt confusing to use the same name. You cannot look up things in the Inertia.js docs when you work with the Panel. Dialogs and other ideas for future Fiber Panel features don't exist in Inertia. Fiber seemed like an appropriate alternative term.

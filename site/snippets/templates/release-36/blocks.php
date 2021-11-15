@@ -2,7 +2,7 @@
   'id'       => 'blocks',
   'title'    => 'Blocks',
   'intro'    => 'Now even more awesome',
-  'text'     => 'Our blocks field has lifted Kirby’s editing experience to another level since 3.5. Now we are taking it even a step further.',
+  'text'     => 'The blocks field we introduced in Kirby 3.5 has lifted Kirby’s editing experience to another level. Now we are even taking it a step further.',
   'figure'   => 'templates/release-36/blocks-figure',
   'features' => [
     [
@@ -15,7 +15,7 @@
     ],
     [
       'title' => 'New line block',
-      'text' => 'The new line block supports and automatically imports <code>hr</code> blocks from the old Editor plugin and <code>hr</code> elements from pasted HTML'
+      'text' => 'The new line block supports and automatically imports <code>hr</code> blocks from the old Editor plugin and <code>hr</code> elements from pasted HTML.'
     ],
     [
       'title' => 'Privacy friendly video block',

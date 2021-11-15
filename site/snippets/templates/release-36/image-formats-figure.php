@@ -2,13 +2,13 @@
   <figure>
     <img src="<?= ($image = $page->image('demo.jpg'))->url() ?>" loading="lazy">
     <figcaption class="font-mono text-sm pt-1">
-      JPG <?= $image->niceSize() ?>
+      JPEG <?= $image->niceSize() ?>
     </figcaption>
   </figure>
   <figure>
     <img src="<?= ($image = $page->image('demo.webp'))->url() ?>" loading="lazy">
     <figcaption class="font-mono text-sm pt-1">
-      Webp <?= $image->niceSize() ?>
+      WebP <?= $image->niceSize() ?>
     </figcaption>
   </figure>
   <figure>
