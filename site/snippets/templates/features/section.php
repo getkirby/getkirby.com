@@ -16,9 +16,11 @@
     <?php snippet($figure) ?>
   </div>
 
+  <?php if (empty($features) === false): ?>
   <div class="features-section-grid">
     <?php snippet('templates/features/features-grid', ['features' => $features]) ?>
   </div>
+  <?php endif ?>
 
   <?php if ($voice ?? null): ?>
   <div class="features-section-voice">
