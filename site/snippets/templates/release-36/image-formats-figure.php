@@ -14,7 +14,7 @@
   <figure>
     <img src="<?= ($image = $page->image('demo.avif'))->url() ?>" loading="lazy">
     <figcaption class="font-mono text-sm pt-1">
-      Webp <?= $image->niceSize() ?>
+      AVIF <?= $image->niceSize() ?>
     </figcaption>
   </figure>
 </div>
