@@ -99,7 +99,7 @@ Breaking:
 
 | Removed | Use instead |
 |-|-|
-| `k-app` | `k-inside` (authenticated) or `k-outside` (unauthenticated) |
+| `k-app` | `k-panel`, optionally  `k-inside` to include topbar |
 | `k-cards` | `k-items`  with `layout: cards` |
 | `k-card` | `k-item` with `layout: cards` |
 | `k-list` | `k-items`  with `layout: list` |
