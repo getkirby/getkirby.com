@@ -27,12 +27,6 @@
         'link' => $page->link(),
         'icon' => 'download',
         'style' => 'filled'
-      ],
-      [
-        'text' => '3.6 notes',
-        'link' => $page->children()->first()->url(),
-        'icon' => 'book',
-        'style' => 'outlined'
       ]
     ],
     'center' => false,
@@ -40,29 +34,21 @@
   ]) ?>
 </header>
 
+<?php snippet('templates/release-36/blocks') ?>
+<?php snippet('templates/release-36/cardlets') ?>
+<?php snippet('templates/release-36/image-formats') ?>
+<?php snippet('templates/release-36/views') ?>
+
 <?php snippet('templates/release-36/fiber') ?>
 <?php snippet('templates/release-36/plugins') ?>
-<?php snippet('templates/release-36/cardlets') ?>
 
-<section id="assets" class="mb-42">
+<!-- <section id="assets" class="mb-42">
   <div class="columns" style="--columns: 2; --gap: var(--spacing-24)">
     <div>
       <?php snippet('templates/features/intro', [
-        'title' => 'WebP & AVIF Support',
-        'intro' => 'Serve smaller and better images',
-        'text'  => 'Our image processing API finally supports WebP and AVIF as better alternatives for your JPEGs or PNGs. <a href="/releases/3.6/features#core__image-formats">Learn more &rsaquo;</a>',
-      ]) ?>
-
-      <figure class="bg-black rounded">
-        <?= $page->webp()->kt() ?>
-      </figure>
-
-    </div>
-    <div>
-      <?php snippet('templates/features/intro', [
-        'title' => 'Better Panel image settings',
+        'title' => 'Image options on steriods',
         'intro' => 'Improve your previews with custom queries',
-        'text'  => 'You can now set custom backgrounds, icons, images and more for your pages via blueprint settings. <a href="/releases/3.6/features#panel__even-more-visual">Learn more &rsaquo;</a>',
+        'text'  => $page->imageSettingsIntro()->kt(),
       ]) ?>
 
       <figure class="bg-black rounded">
@@ -71,9 +57,19 @@
 
     </div>
   </div>
-</section>
+</section> -->
 
 <?php snippet('templates/release-36/icons') ?>
+
+<p class="h2 color-gray-600 mb-42 max-w-xl">
+  <span class="color-black">This release is big</span>
+  <br>
+  More than 1200 commits 😱
+  <br>
+  Ready to read the full changelog?
+  <br>
+  Here we go …
+</p>
 
 
 <?php snippet('templates/release-36/changes/panel') ?>
@@ -93,8 +89,8 @@
         'icon' => 'download'
       ],
       [
-        'text'  => '3.6 notes',
-        'link'  => $page->children()->first()->url(),
+        'text'  => 'Docs',
+        'link'  => '/docs',
         'icon'  => 'book',
         'style' => 'outlined'
       ]

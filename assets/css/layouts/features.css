@@ -54,7 +54,7 @@
   .features-section {
     display: grid;
     grid-column-gap: var(--spacing-24);
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-rows: auto auto auto 1fr;
     grid-template-areas: "figure header"
                          "figure text"
