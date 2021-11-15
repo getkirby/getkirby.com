@@ -48,7 +48,7 @@
           ]
         ]) ?>
       </figure>
-      <p class="font-mono text-sm color-gray-400">Manage languages through the new languages view. Add new languages, update existing ones and protect language management via the brand new access permissions.</p>
+      <p class="font-mono text-sm color-gray-400">Manage languages through the new languages view. Add new languages, update existing ones and protect language management via the brand-new access permissions.</p>
     </article>
   </div>
 

@@ -11,7 +11,7 @@ Features:
 #### Escaping
 - The default block snippet for the `image` block now escapes the content output from the source, alt and link fields. This protects against XSS attacks against site visitors.
 - (method: Kirby\Toolkit\Str::safeTemplate text: Str::safeTemplate($string, $data)), which escapes HTML from all regular query placeholders and allows HTML with the new `{< site.myMethodWithHtml >}` syntax.
-- Safe templates are now also available for `Page`, `User`, `File` and `Site` classes with the new `$model->toSafeString()` method.
+- Safe templates are now also available for the `Page`, `User`, `File` and `Site` classes with the new `$model->toSafeString()` method.
 
 #### Sane classes
 - Improved error messages for file validation/sanitization errors (`Sane` classes)
