@@ -29,7 +29,6 @@ Text:
 - Fixed manual files sorting via changePosition dialog [#3589](https://github.com/getkirby/kirby/issues/3589)
 - `cover` option fixed for all models and list layout in section [#3226](https://github.com/getkirby/kirby/issues/3226)
 - Fixed jump to the top of the page at ESC keydown in an overlay [#3387](https://github.com/getkirby/kirby/issues/3387)
-- Extending a non-existing Vue component is ignored now instead throwing an console error and breaking the Panel
 - Fixed blocks field sort handle on hover [#3538](https://github.com/getkirby/kirby/issues/3538)
 - Fixed writer field RTL support [idea 322](https://kirby.nolt.io/322)
 - Fixed version number in settings view in RTL interface [#3581](https://github.com/getkirby/kirby/pull/3581)
