@@ -1,4 +1,0 @@
-Title: Templating
-----
-Text:
-

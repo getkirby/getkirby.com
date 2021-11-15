@@ -157,7 +157,7 @@
   display: inline-flex;
   font-size: .825em;
   max-width: 100%;
-  padding: 0 var(--spacing-2);
+  padding: 0 .5em;
   border-radius: 3px;
   background: var(--prose-code-bg);
   color: var(--prose-color-highlight);
