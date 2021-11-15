@@ -211,50 +211,50 @@ As part of modernising our code base, we have marked some parts as deprecated in
 
 #### API Endpoints
 
-| Deprecated | Throws warning | Removed in | Use instead |
+| Deprecated | Use instead | Throws warning | Removed in |
 |-|-|-|-|
-| `GET pages/(:any)/children/blueprints` | yes | 3.7.0 | `GET pages/(:any)/blueprints` |
-| `GET site/children/blueprints` | yes | 3.7.0 | `GET site/blueprints` |
-| `GET (:all)/lock` | yes | 3.7.0 | - |
-| `GET (:all)/unlock` | yes | 3.7.0 | - |
+| `GET pages/(:any)/children/blueprints` | `GET pages/(:any)/blueprints` | yes | 3.7.0 |
+| `GET site/children/blueprints` | `GET site/blueprints` | yes | 3.7.0 |
+| `GET (:all)/lock` | - | yes | 3.7.0 |
+| `GET (:all)/unlock` | - | yes | 3.7.0 |
 
 #### API Fields
 
-| Deprecated | Throws warning | Removed in | Use instead |
+| Deprecated | Use instead | Throws warning | Removed in |
 |-|-|-|-|
-| `page.panelIcon` | yes | 3.7.0 | `page.panelImage` |
-| `file.panelIcon` | yes | 3.7.0 | `file.panelImage` |
+| `page.panelIcon` | `page.panelImage` | yes | 3.7.0 |
+| `file.panelIcon` | `file.panelImage` | yes | 3.7.0 |
 
 #### Permissions
 
-| Deprecated | Throws warning | Removed in | Use instead |
-|-|-|-|-|
-| Users `settings` access permission | - | 3.7.0 | `system` and `languages` |
+| Deprecated | Use instead | Removed in |
+|-|-|-|
+| Users `settings` access permission | `system` and `languages` | 3.7.0 |
 
 #### PHP Methods
 
-| Deprecated | Throws warning | Removed in | Use instead |
+| Deprecated | Use instead | Throws warning | Removed in |
 |-|-|-|-|
-| `Kirby\Cms\App::setLocale()` | yes | 3.7.0 | `Kirby\Toolkit\Locale::set()` |
-| `Kirby\Cms\Block::_key()` | yes | 3.7.0 | `Kirby\Cms\Block::type()` |
-| `Kirby\Cms\Block::_uid()` | yes | 3.7.0 | `Kirby\Cms\Block::id()` |
-| `Kirby\Toolkit\I18n::fallback()` | yes | 3.7.0 | `Kirby\Toolkit\I18n::fallbacks()[0]` |
-| `$model->dragText()` | 3.7.0 | 3.8.0 | `$model->panel()->dragText()` |
-| `$model->panelIcon()` | 3.7.0 | 3.8.0 | `$model->panel()->image()` |
-| `$model->panelImage()` | 3.7.0 | 3.8.0 | `$model->panel()->image()` |
-| `$model->panelImageSource()` | 3.7.0 | 3.8.0 | `$model->panel()->imageSource()` |
-| `$model->panelPath()` | 3.7.0 | 3.8.0 | `$model->panel()->path()` |
-| `$model->panelPickerData()` | 3.7.0 | 3.8.0 | `$model->panel()->pickerData()` |
-| `$model->panelOptions()` | 3.7.0 | 3.8.0 | `$model->panel()->options()` |
-| `$model->panelUrl()` | 3.7.0 | 3.8.0 | `$model->panel()->url()` |
-| `Kirby\Toolkit\Str::isUrl()` | 3.7.0 | 3.8.0 | `Kirby\Toolkit\V::url()` |
+| `Kirby\Cms\App::setLocale()` | `Kirby\Toolkit\Locale::set()` | yes | 3.7.0 |
+| `Kirby\Cms\Block::_key()` | `Kirby\Cms\Block::type()` | yes | 3.7.0 |
+| `Kirby\Cms\Block::_uid()` | `Kirby\Cms\Block::id()` | yes | 3.7.0 |
+| `Kirby\Toolkit\I18n::fallback()` | `Kirby\Toolkit\I18n::fallbacks()[0]` | yes | 3.7.0 |
+| `$model->dragText()` | `$model->panel()->dragText()` | 3.7.0 | 3.8.0 |
+| `$model->panelIcon()` | `$model->panel()->image()` | 3.7.0 | 3.8.0 |
+| `$model->panelImage()` | `$model->panel()->image()` | 3.7.0 | 3.8.0 |
+| `$model->panelImageSource()` | `$model->panel()->imageSource()` | 3.7.0 | 3.8.0 |
+| `$model->panelPath()` | `$model->panel()->path()` | 3.7.0 | 3.8.0 |
+| `$model->panelPickerData()` | `$model->panel()->pickerData()` | 3.7.0 | 3.8.0 |
+| `$model->panelOptions()` | `$model->panel()->options()` | 3.7.0 | 3.8.0 |
+| `$model->panelUrl()` | `$model->panel()->url()` | 3.7.0 | 3.8.0 |
+| `Kirby\Toolkit\Str::isUrl()` | `Kirby\Toolkit\V::url()` | 3.7.0 | 3.8.0 |
 
 #### Vue code
 
-| Deprecated | Throws warning | Removed in | Use instead |
+| Deprecated | Use instead | Throws warning | Removed in |
 |-|-|-|-|
-| Vuex `heartbeat` module | yes | 3.7.0 | - |
-| `<k-text align="right">` | - | 3.7.0 | `<k-text align="end">` |
+| Vuex `heartbeat` module | - | yes | 3.7.0 |
+| `<k-text align="right">` | `<k-text align="end">` | - | 3.7.0 |
 
 #### More …
 - The `page()` helper now throws a deprecation warning if multiple IDs get passed. Will be enforced in 3.7.0 by only returning the first page. Use (method: Helper::pages text: pages()) for multiple pages instead.
