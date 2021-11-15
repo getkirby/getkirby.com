@@ -16,7 +16,7 @@
   </style>
 
   <div>
-    <h1 class="h1">3.6</h1>
+    <h1 class="h1"><?= $page->title() ?></h1>
     <p class="h1 color-gray-600">Jungle Calumna</p>
   </div>
 
