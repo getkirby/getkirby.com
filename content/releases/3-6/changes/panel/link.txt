@@ -5,9 +5,9 @@ Features:
 
 #### Interface
 
-- **Cardlets**: While lists are great for dense information and cards are fantastic if you want to highlight visual content, there's often a gray zone in between. The new `cardlets` layout option gives you nice visual previews while your text content is still representend decently. Use them in (link: docs/reference/panel/sections/pages#__cardlets-layout text: pages) or (link: docs/reference/panel/sections/files#__cardlets-layout text: files) sections as well as (link: docs/reference/panel/fields/pages text: pages), (link: docs/reference/panel/fields/files text: files) or (link: docs/reference/panel/fields/users text: users) fields.
-- **(link: docs/reference/panel/icons text: New icons)** by popular demand
-- Set your **(link: docs/reference/system/options/panel#custom-panel-favicon text: own favicon(s)) for the Panel** – the last step to a full white-label solution
+- **Cardlets**: While lists are great for dense information and cards are fantastic if you want to highlight visual content, there's often a gray zone in between. The new `cardlets` layout option gives you nice visual previews while your text content is still representend decently. Use them in (link: docs/reference/panel/sections/pages#__cardlets-layout text: pages) and (link: docs/reference/panel/sections/files#__cardlets-layout text: files) sections as well as (link: docs/reference/panel/fields/pages text: pages), (link: docs/reference/panel/fields/files text: files) and (link: docs/reference/panel/fields/users text: users) fields.
+- **(link: #icons text: New icons)** by popular demand ((link: docs/reference/panel/icons text: full list))
+- Set your **(link: docs/reference/system/options/panel#custom-panel-favicon text: own favicon(s)) for the Panel** – the last step to a full white-label solution.
 
 #### Blocks
 
@@ -21,7 +21,7 @@ Features:
 
 #### Blueprints
 - **Image options on steriods:**
-  - Support for Kirby's (link: docs/guide/blueprints/query-language text: query language)
+  - Support for Kirby's (link: docs/guide/blueprints/query-language#querying-an-image-in-the-image-option text: query language)
   - Custom colors: `back` and `color` options now support shorthands for (link: docs/reference/plugins/ui#colors text: core CSS colors) as well as HEX codes or other native CSS color properties (e.g. even gradients)
   - Per blueprint: The `image` options for pages, files and users can now be defined directly in their own blueprint. You can still set image settings in sections the good old way if needed.
 - **`navigation` option:** The previous/next item navigation in the Panel is a very effective way for editors to move between content. We've drastically improved the usability of the navigation for your users (link: docs/reference/panel/blueprints/page#navigation-option text: with additional options) to customize the links.
@@ -54,14 +54,14 @@ Enhancements:
 - The loading indicator of the Panel is now located in the breadcrumb.
 - Enhanced CSS support for RTL Panel interface [#3556](https://github.com/getkirby/kirby/pull/3556)
 - The offline warning is now translatable with `error.offline` and has a new design.
-- Changes badge position improved on tabs [#3805](https://github.com/getkirby/kirby/issues/3805)
+- Improved badge positioning on tabs [#3805](https://github.com/getkirby/kirby/issues/3805)
 
 #### Blocks
 
 - Improved parsing content from Word documents to create blocks [#3770](https://github.com/getkirby/kirby/pull/3770)
 - Multiselect with Cmd/Ctrl keys for blocks field [#3748](https://github.com/getkirby/kirby/pull/3748)
-- Blocks without fields don't open empty drawer anymore (e.g. new line block).
-- Blocks are now always selected in the original order, independed of the order in which they were selected.
+- Blocks without fields don't open an empty drawer anymore (e.g. with the new line block).
+- Blocks are now always selected in the original order, independent of the order in which they were selected.
 - The video block is now more privacy friendly by creating embeds with the "do not track" option.
 
 #### Fields
@@ -72,7 +72,7 @@ Enhancements:
 
 #### Files
 
-- File view uses stable preview link for files (instead of media folder URL) [#3575](https://github.com/getkirby/kirby/pull/3575).
+- The file view now uses the stable preview link for files (instead of the media folder URL). [#3575](https://github.com/getkirby/kirby/pull/3575)
 - File uploads now check for duplicates via SHA1 hashes. This leads to a better upload experience because when you upload the exact same file twice, the upload is simply ignored.
 - New files automatically store the sort attribute on upload if the files section is sortable. [#2886](https://github.com/getkirby/kirby/issues/2886)
 
@@ -84,7 +84,7 @@ Enhancements:
 #### More …
 
 - The license code is now only displayed to admins.
-- Canonical language URLs in the Panel [#3759](https://github.com/getkirby/kirby/pull/3759).
+- Canonical language URLs in the Panel [#3759](https://github.com/getkirby/kirby/pull/3759)
 
 ----
 
@@ -99,7 +99,7 @@ Fixes:
 - Fixed layout issue in the mobile version of the settings view [#3789](https://github.com/getkirby/kirby/pull/3789)
 
 #### Blocks
-- Video block does now show domain-restricted clips in Panel [#3257](https://github.com/getkirby/kirby/issues/3257)
+- The video block now displays domain-restricted clips in the Panel. [#3257](https://github.com/getkirby/kirby/issues/3257)
 - Fixed blocks field sort handle on hover [#3538](https://github.com/getkirby/kirby/issues/3538)
 - Fixed autofocus option for the blocks field [#3681](https://github.com/getkirby/kirby/pull/3681)
 - Fixed opening blocks that have no fields or are not editable [#3686](https://github.com/getkirby/kirby/pull/3686)
@@ -110,26 +110,26 @@ Fixes:
 
 - Fixed writer field RTL support [idea 322](https://kirby.nolt.io/322)
 - Fixed writer field email title [#3630](https://github.com/getkirby/kirby/issues/3630)
-- Fixed multiline placeholder for writer field [#3470](https://github.com/getkirby/kirby/issues/3470)
+- Fixed multi-line placeholder for writer field [#3470](https://github.com/getkirby/kirby/issues/3470)
 - Support for multi-line tags [#3614](https://github.com/getkirby/kirby/issues/3614)
 - Fixed saving nested structure fields when the nested OK button was not clicked [#2550](https://github.com/getkirby/kirby/issues/2550)
 
 #### Files
 
-- Fixed manual files sorting via changePosition dialog [#3589](https://github.com/getkirby/kirby/issues/3589)
-- Account files are now fully accessible through the account view, even if permissions for the users area is blocked. [#2580](https://github.com/getkirby/kirby/issues/2580)
+- Fixed manual file sorting via changePosition dialog [#3589](https://github.com/getkirby/kirby/issues/3589)
+- Account files are now fully accessible through the account view, even if the user doesn't have permissions for the users area. [#2580](https://github.com/getkirby/kirby/issues/2580)
 
 #### Pages
 
 - Changing the page title no longer causes errors with slug autocorrection (e.g. from underscores to dashes) if the user does not have permissions to change the slug
-- Top-level pages with a slug called `files` will no longer create havoc [#3187](https://github.com/getkirby/kirby/issues/3187)
-- It's no longer possible to switch from draft to unlisted page if there are page errors [#3781](https://github.com/getkirby/kirby/issues/3781)
+- Top-level pages with a slug called `files` will no longer cause havoc. [#3187](https://github.com/getkirby/kirby/issues/3187)
+- It's no longer possible to switch from draft to unlisted page if there are page errors. [#3781](https://github.com/getkirby/kirby/issues/3781)
 
 #### More …
 
-- The Panel now sets the correct default language in multi language projects: [#3647](https://github.com/getkirby/kirby/issues/3647)
-- Confirming an empty password dialog no longer throws an error [#3716](https://github.com/getkirby/kirby/issues/3716)
-- Login with invalid password now sends a HTTP 401 in debug mode [#2856](https://github.com/getkirby/kirby/issues/2856)
+- The Panel now sets the correct default language in multi language projects. [#3647](https://github.com/getkirby/kirby/issues/3647)
+- Confirming an empty password dialog no longer throws an error. [#3716](https://github.com/getkirby/kirby/issues/3716)
+- Login with invalid password now sends a HTTP 401 in debug mode. [#2856](https://github.com/getkirby/kirby/issues/2856)
 
 ----
 
@@ -157,5 +157,5 @@ Other browsers and versions might be compatible depending on their JS engine and
 
 #### URLs
 
-- Direct URLs for tabs have changed, e.g. now `/panel/site/?tab=yourTabName`
-- Direct URLs for the users view have changed, e.g. now `/panel/users/?role=yourRole`
+- Direct URLs for tabs have changed, e.g. now `/panel/site/?tab=yourTabName`.
+- Direct URLs for the users view have changed, e.g. now `/panel/users/?role=yourRole`.
