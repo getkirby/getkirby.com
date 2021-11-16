@@ -13,7 +13,7 @@
 <div class="pt-12">
   <div class="mb-6">
     <div class="flex justify-between text-sm mb-1">
-      <h4 class="font-bold">3.5.8</h4>
+      <h4 class="font-bold">Kirby 3.5.8</h4>
       <p class="font-mono text-xs">Total: 808.50 KB</p>
     </div>
     <div class="size text-xs font-mono">
@@ -21,9 +21,9 @@
       <div style="--value: 35; --color: var(--color-yellow-400)">app.js: <br>351.46 KB</div>
     </div>
   </div>
-  <div class="mb-12" style="width: 86.24%">
+  <div class="mb-12" style="width: 86.23%">
     <div class="flex justify-between text-sm mb-1">
-      <h4 class="font-bold"><?= $page->title() ?></h4>
+      <h4 class="font-bold">Kirby 3.6.0</h4>
       <p class="font-mono text-xs">Total: 697.15 KB</p>
     </div>
     <div class="size text-xs font-mono">
