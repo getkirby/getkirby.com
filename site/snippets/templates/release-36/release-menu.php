@@ -3,6 +3,7 @@
     <li><a href="#blocks">Blocks</a></li>
     <li><a href="#cardlets">Cardlets</a></li>
     <li><a href="#image-formats">WebP & AVIF Support</a></li>
+    <li><a href="#image-options">Image options</a></li>
     <li><a href="#views">System & Languages</a></li>
     <li><a href="#fiber">Fiber</a></li>
     <li><a href="#plugins">Plugins</a></li>

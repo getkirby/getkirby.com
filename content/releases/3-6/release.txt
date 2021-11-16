@@ -434,3 +434,20 @@ Thank you to all the contributors who helped with pull requests, translations an
 
 Thank you to our amazing community for your ongoing support. Without all your feedback, patience and passion, Kirby wouldn't be where it is today! 💛
 
+
+----
+
+ImageOptions:
+
+```yaml
+sections:
+  recipes:
+    headline: Recipes
+    type: pages
+    info: "{{ page.categoryLabel }}"
+    image:
+      icon: "{{ page.categoryIcon }}"
+      query: false
+      color: black
+      back: "{{ page.categoryColor }}"
+```
