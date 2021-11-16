@@ -42,8 +42,8 @@
       <h2 class="mb-12">This release is big</h2>
       <ul class="mb-12 color-gray-600">
         <li>&rarr; 7 months of work</li>
-        <li>&rarr; More than 1200 commits</li>
-        <li>&rarr; Hundreds of closed issues and pull requests</li>
+        <li>&rarr; 1288 commits</li>
+        <li>&rarr; 471 closed issues and pull requests</li>
       </ul>
       <p>
         Ready to read the full changelog?
