@@ -43,7 +43,7 @@
       <h2 class="mb-12">This release is big</h2>
       <ul class="mb-12 color-gray-600">
         <li>&rarr; 7 months of work</li>
-        <li>&rarr; 1288 commits</li>
+        <li>&rarr; 1293 commits</li>
         <li>&rarr; 471 closed issues and pull requests</li>
         <li>&rarr; And the update from Kirby 3.5 is free!</li>
       </ul>
