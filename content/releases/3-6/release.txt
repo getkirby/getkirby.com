@@ -2,6 +2,8 @@ Title: Kirby 3.6
 ----
 Version: 3.6
 ----
+ogimage: opengraph.jpg
+----
 Link: https://github.com/getkirby/kirby/releases/tag/3.6.0
 ----
 Area:
