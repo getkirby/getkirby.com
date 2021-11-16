@@ -137,7 +137,7 @@ Breaking:
 | `Kirby\Cms\KirbyTags::$tagClass` | You cannot set the class for KirbyTag objects to be created via `KirbyTags::parse()` anymore. |
 
 #### More …
-- Multi-language setup: Slugs in content files of the default language will be ignored. The folder names decide the slugs for the default language.
+- Multi-language setup: Slugs in content files of the default language will be ignored. The folder names decide the slugs for the default language. Check out our **(link: https://github.com/getkirby/kirby/releases/download/3.6.0/content-migration-checker.zip text: migration plugin)** to help with the upgrade.
 - `$files->add()` and `$users->add()` now throw exceptions when something other than a `File`/`User` object, a `Files`/`Users` object or a file/user ID is passed to them. Empty values (`null`, `false` and `true`) are silently ignored. [#3248](https://github.com/getkirby/kirby/pull/3248)
 - `Cms\Collection::has()`: 1st parameter got renamed to `$key`
 - `Cms\Collection::indexOf()`: 1st parameter got renamed to `$needle`
