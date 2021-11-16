@@ -16,6 +16,6 @@
         <li><a href="#changes-core">&vdash; Core</a></li>
       </ul>
     </li>
-    <li><a href="#contributors">Stats</a></li>
+    <li><a href="#contributors">Contributors</a></li>
   </ul>
 </nav>
