@@ -50,7 +50,9 @@ With 3.6 we leave SCSS behind and fully embrace modern CSS with (link: docs/refe
 
 #### Logical CSS properties
 
-Our RTL support is now powered by [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties). For now with fallback code for older browsers. We encourage all plugin developers to look into logical properties for their Panel plugins.
+Our RTL support is now powered by [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties), for now with fallback code for older browsers.
+
+We encourage all plugin developers to look into logical properties for their Panel plugins. The fallback handling is natively supported by the [kirbyup](https://github.com/johannschopplich/kirbyup) builder.
 
 #### Vue
 - New `theme` property for `k-dropdown-content` to switch between `dark` (default) and `light` dropdowns
@@ -63,7 +65,7 @@ Our RTL support is now powered by [CSS logical properties](https://developer.moz
 - The `RadioInput` component now supports (escaped) HTML in the `info` property for radio options.
 - The `k-dropdown-content` component is now compatible with our dynamic Fiber dropdowns. You can pass a string for the `options` prop and the component will automatically load the matching Fiber dropdown defined in PHP.
 - Moved offline warning to new `k-offline-warning` component.
-- Now default block previews are overwritable [#3776](https://github.com/getkirby/kirby/issues/3776)
+- Default block previews can now be overridden. [#3776](https://github.com/getkirby/kirby/issues/3776)
 - Add `data-id` for drawer and blocks
 - Updated inline docs for the writer field
 
@@ -75,9 +77,9 @@ Our RTL support is now powered by [CSS logical properties](https://developer.moz
 
 Fixes:
 
-- Extending a non-existing Vue component is ignored now instead of throwing a console error and breaking the Panel
-- `this.$helper.upload` now correctly uses the method parameter
-- `k-progress`: fixed not updating when value prop changed
+- Extending a non-existing Vue component is ignored now instead of throwing a console error and breaking the Panel.
+- `this.$helper.upload` now correctly uses the method parameter.
+- `k-progress` now updates correctly when the prop value changes.
 - Added fallbacks for deprecated CSS classes [#3706](https://github.com/getkirby/kirby/issues/3706)
 
 ----
@@ -92,7 +94,7 @@ Breaking:
 #### `Kirby\Panel` namespace related
 
 - If you have modified the `->panel*()` methods in custom models, you now need to return a custom Panel model (based on `Kirby\Panel\Model`) at `$page->panel()` which then takes care of all Panel-related functions, e.g. if you had customized `$page->panelImage()` you need a custom `Kirby\Panel\Page` to then customize `$page->panel()->image()`.
-- Use `$model->panel()->image()` instead of `$model->panel()->icon()`
+- Use `$model->panel()->image()` instead of `$model->panel()->icon()`.
 - `$model->panel()->image()` doesn't return `cards` and `list` keys anymore. Instead, `src` and `srcset` keys at the top level that correspond to the new `$layout` parameter.
 
 #### Vue component changes
@@ -113,18 +115,18 @@ Breaking:
 
 #### Helpers & libraries
 
-- `vue-router` has been completely removed, use (link: docs/reference/plugins/extensions/panel-areas text: Panel areas) to define custom Panel routes
+- `vue-router` has been completely removed, use (link: docs/reference/plugins/extensions/panel-areas text: Panel areas) to define custom Panel routes.
 - The `previewThumb` helper has been removed. `k-item-image` takes care of processing the image data correctly inside `k-item`.
 
 #### Vuex
 
 - The following methods from `vuex-i18n` are no longer available in the new custom implementation: `$tc`,  `$tlang`, `$i18n.localeExists`, `$i18n.keyExists`. Translation strings cannot be added dynamically anymore, only through our (link: docs/reference/plugins/extensions/translations text: official extension).
-- `content` module doesn't handle content locking information anymore. This in now provided directly to the model views.
-- `language` module has been removed, use `this.$language` and `this.$languages` instead.
-- `system` module has been removed, use `this.$system` instead.
-- `translation` module has been removed, use `this.$translation` instead.
-- `user` module has been removed, use `this.$user` instead.
-- `$store.dispatch('breadcrumb')` and `$store.dispatch('title')`have been removed. Use Panel areas instead.
+- The `content` module doesn't handle content locking information anymore. This in now provided directly to the model views.
+- The `language` module has been removed, use `this.$language` and `this.$languages` instead.
+- The `system` module has been removed, use `this.$system` instead.
+- The `translation` module has been removed, use `this.$translation` instead.
+- The `user` module has been removed, use `this.$user` instead.
+- `$store.dispatch('breadcrumb')` and `$store.dispatch('title')` have been removed. Use Panel areas instead.
 
 #### API methods
 
