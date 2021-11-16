@@ -4,7 +4,7 @@
       <?php snippet('templates/features/intro', [
         'title' => 'Image options',
         'intro' => 'Improve your previews with custom queries',
-        'text'  => 'You can now set custom backgrounds, icons, images and more for your pages via blueprint settings.'
+        'text'  => 'You can now set custom backgrounds, icons, images and more for your pages via blueprint settings. Per page, not just per section.'
       ]) ?>
       <?= $page->imageOptions()->kt() ?>
     </div>
