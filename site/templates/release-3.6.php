@@ -33,6 +33,7 @@
     <?php snippet('templates/release-36/blocks') ?>
     <?php snippet('templates/release-36/cardlets') ?>
     <?php snippet('templates/release-36/image-formats') ?>
+    <?php snippet('templates/release-36/image-options') ?>
     <?php snippet('templates/release-36/views') ?>
     <?php snippet('templates/release-36/fiber') ?>
     <?php snippet('templates/release-36/plugins') ?>
