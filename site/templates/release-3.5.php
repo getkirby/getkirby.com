@@ -9,7 +9,10 @@
 </style>
 
 <header class="mb-42 flex items-center justify-between">
-  <h1 class="h1">3.5</h1>
+  <div>
+    <h1 class="h1"><?= $page->title() ?></h1>
+    <p class="h1 color-gray-600">Calumna</p>
+  </div>
 
   <?php snippet('cta', [
     'buttons' => [
