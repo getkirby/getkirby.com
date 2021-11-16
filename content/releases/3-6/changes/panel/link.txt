@@ -15,7 +15,7 @@ Features:
 - **New (link: docs/reference/panel/blocks/line text: line block)**, which automatically supports and imports `hr` blocks from the old Editor plugin.
 
 #### Fields
-- **New slug field:** perfect if you want to create sanitized strings for IDs, URL paths, CSS class names, etc. (link: https://getkirby.test/docs/reference/panel/fields/slug text: Learn more ›)
+- **New slug field:** perfect if you want to create sanitized strings for IDs, URL paths, CSS class names, etc. (link: docs/reference/panel/fields/slug text: Learn more ›)
 - **New formats for the writer field:** Our writer field is getting more powerful with headings and lists. (link: docs/reference/panel/fields/writer#format-node-options text: Learn more ›)
 - **Email dialog** for the writer field
 
