@@ -34,27 +34,8 @@
     <?php snippet('templates/release-36/cardlets') ?>
     <?php snippet('templates/release-36/image-formats') ?>
     <?php snippet('templates/release-36/views') ?>
-
     <?php snippet('templates/release-36/fiber') ?>
     <?php snippet('templates/release-36/plugins') ?>
-
-    <!-- <section id="assets" class="mb-42">
-  <div class="columns" style="--columns: 2; --gap: var(--spacing-24)">
-    <div>
-      <?php snippet('templates/features/intro', [
-      'title' => 'Image options on steriods',
-      'intro' => 'Improve your previews with custom queries',
-      'text' => $page->imageSettingsIntro()->kt(),
-    ]) ?>
-
-      <figure class="bg-black rounded">
-        <?= $page->imageSettings()->kt() ?>
-      </figure>
-
-    </div>
-  </div>
-</section> -->
-
     <?php snippet('templates/release-36/icons') ?>
 
     <section id="changes">
