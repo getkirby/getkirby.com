@@ -38,14 +38,14 @@
     <?php snippet('templates/release-36/plugins') ?>
     <?php snippet('templates/release-36/icons') ?>
 
-    <section id="changes">
-      <p class="h2 color-gray-600 mb-42 max-w-xl">
-        <span class="color-black">This release is big</span>
-        <br>
-        7 months of work
-        <br>
-        More than 1200 commits 😱
-        <br>
+    <section id="changes" class="h2 mb-42">
+      <h2 class="mb-12">This release is big</h2>
+      <ul class="mb-12 color-gray-600">
+        <li>&rarr; 7 months of work</li>
+        <li>&rarr; More than 1200 commits</li>
+        <li>&rarr; Hundreds of closed issues and pull requests</li>
+      </ul>
+      <p>
         Ready to read the full changelog?
         <br>
         Here we go …
