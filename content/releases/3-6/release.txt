@@ -441,15 +441,18 @@ Thank you to our amazing community for your ongoing support. Without all your fe
 
 ImageOptions:
 
-```yaml
+```yaml "/site/blueprints/site.yml"
 sections:
   recipes:
     headline: Recipes
     type: pages
     info: "{{ page.categoryLabel }}"
-    image:
-      icon: "{{ page.categoryIcon }}"
-      query: false
-      color: black
-      back: "{{ page.categoryColor }}"
+```
+<br>
+```yaml "/site/blueprints/pages/recipe.yml"
+image:
+  icon: "{{ page.categoryIcon }}"
+  query: false
+  color: black
+  back: "{{ page.categoryColor }}"
 ```
