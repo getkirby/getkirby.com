@@ -11,7 +11,7 @@
 <header class="mb-42 flex items-center justify-between">
   <div>
     <h1 class="h1"><?= $page->title() ?></h1>
-    <p class="h1 color-gray-600">Calumna</p>
+    <p class="h1 color-gray-600">Calumma</p>
   </div>
 
   <?php snippet('cta', [
