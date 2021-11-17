@@ -5,7 +5,7 @@
 <header class="mb-36 flex items-end justify-between release-header">
   <div>
     <h1 class="h1"><?= $page->title() ?></h1>
-    <p class="h1 color-gray-600">Jungle Calumna</p>
+    <p class="h1 color-gray-600">Jungle Calumma</p>
   </div>
 
   <?php snippet('cta', [
