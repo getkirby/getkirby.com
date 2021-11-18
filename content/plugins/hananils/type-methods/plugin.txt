@@ -1,0 +1,13 @@
+Title: Type Methods
+
+----
+
+Repository: https://github.com/hananils/kirby-type-methods
+
+----
+
+Category: templating, utilities
+
+----
+
+Description: Type Methods is a plugin helping to identify the type of an object, either page, user or file, in order to simplify logic in snippets that – for instance – handle content from both $page and $user objects.

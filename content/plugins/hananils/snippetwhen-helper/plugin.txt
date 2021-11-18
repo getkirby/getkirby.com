@@ -1,0 +1,13 @@
+Title: snippetWhen Helper
+
+----
+
+Repository: https://github.com/hananils/kirby-snippetwhen-helper
+
+----
+
+Category: templating, utilities
+
+----
+
+Description: snippetWhen is a helper function to conditionally embed snippets.

@@ -1,0 +1,13 @@
+Title: Date Methods
+
+----
+
+Repository: https://github.com/hananils/kirby-date-methods
+
+----
+
+Category: templating, utilities
+
+----
+
+Description: Date Methods is a plugin that allows for advanced date and time parsing and formatting using PHP's core date objects. It offers methods for fields to handle single dates, methods for pages to handle multiple dates (ranges) and also provides helper functions to simplify working with dates and times in general.
