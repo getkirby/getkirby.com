@@ -1,0 +1,13 @@
+Title: Layouts
+
+----
+
+Repository: https://github.com/getkirby/layouts
+
+----
+
+Category: templating
+
+----
+
+Description: This plugin extends Kirby’s templates with a powerful layout system.
