@@ -10,4 +10,4 @@ Category: templating
 
 ----
 
-Description: Enable XSLT templating in your Kirby installation by generating XML for all front-end pages
+Description: Template component for XSLT support in your templates. It let's you specify the needed data for each blueprint which is then provided as XML on the frontend.
