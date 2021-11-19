@@ -56,7 +56,7 @@
     <h2 class="h2 mb-6">Volume discounts</h2>
     <div class="columns" style="--columns: 4; --gap: var(--spacing-1)">
       <?php foreach ($discounts as $volume => $discount) : ?>
-        <a class="block" target="_blank" href="/buy/checkout?volume=<?= $volume ?>" data-discount="<?= $discount ?>" data-volume="<?= $volume ?>">
+        <a class="block" target="_blank" href="/buy/checkout/<?= $volume ?>" data-discount="<?= $discount ?>" data-volume="<?= $volume ?>">
           <article class="p-12 bg-light text-center">
             <h3 class="mb-3 font-mono text-sm"><?= $volume ?> licenses</h3>
             <p class="h2 mb-6 discounted-price">&nbsp;</p>

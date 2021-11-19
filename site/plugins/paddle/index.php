@@ -130,16 +130,16 @@ class Checkout
         }
 
         $discount = $this->discounts[$volume];
-        $info     = $this->info('DE');
+        $info     = $this->info();
         $currency = $info['currency'];
         $price    = $info['price'];
         $prices   = [$currency . ':' . $this->total($price, $volume, $discount)];
 
-        // // If the currency is different from product's base currency (EUR),
-        // // the base currency price must be included as well
-        // if ($currency !== 'EUR') {
-        //     $prices[] = 'EUR:' . $this->total($this->info('DE')['price'], $volume, $discount);
-        // }
+        // If the currency is different from product's base currency (EUR),
+        // the base currency price must be included as well
+        if ($currency !== 'EUR') {
+            $prices[] = 'EUR:' . $this->total($this->info('DE')['price'], $volume, $discount);
+        }
 
         $data = [
             'vendor_id'         => $this->vendorId,

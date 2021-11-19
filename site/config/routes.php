@@ -39,12 +39,14 @@ return [
         }
     ],
     [
-        'pattern' => 'buy/checkout',
-        'action'  => function() {
-            $checkout = new Kirby\Paddle\Checkout();
-            $volume   = get('volume', 5);
-
-            go($checkout->url($volume));
+        'pattern' => 'buy/checkout/(:any)',
+        'action'  => function($volume) {
+            try {
+                $checkout = new Kirby\Paddle\Checkout();
+                go($checkout->url($volume));
+            } catch (Throwable $e) {
+                die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
+            }
         }
     ]
 ];
