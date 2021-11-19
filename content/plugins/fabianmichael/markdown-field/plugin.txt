@@ -2,7 +2,7 @@ Title: Markdown Field
 
 ----
 
-Repository: https://github.com/sylvainjule/kirby-markdown-field
+Repository: https://github.com/fabianmichael/kirby-markdown-field
 
 ----
 
