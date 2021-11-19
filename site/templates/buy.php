@@ -7,7 +7,7 @@
       The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
     </h1>
 
-    <a href="https://pay.paddle.com/checkout/<?= $product ?>" title="Buy Kirby" class="pricing highlight bg-white shadow-xl">
+    <a href="https://pay.paddle.com/checkout/<?= $product ?>" target="_blank" title="Buy Kirby" class="pricing highlight bg-white shadow-xl">
 
       <?php if ($banner) : ?>
         <div>
@@ -184,10 +184,3 @@
 </script>
 
 <script src="https://checkout.paddle.com/api/2.0/prices?product_ids=<?= $product ?>&callback=paddle_price"></script>
-
-<script type="module">
-  import {
-    Checkout
-  } from "<?= url('/assets/js/components/paddle.js') ?>";
-  new Checkout();
-</script>

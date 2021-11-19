@@ -47,17 +47,3 @@ export class Affiliates extends Paddle {
     }
   }
 }
-
-export class Checkout extends Paddle {
-  constructor() {
-    super();
-    this.$btn = document.querySelector(".pricing");
-
-    this.load();
-
-    this.$btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      window.Paddle.Checkout.open({ product: 499826 });
-    }, false);
-  }
-}
