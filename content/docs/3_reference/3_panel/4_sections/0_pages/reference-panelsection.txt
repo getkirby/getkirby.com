@@ -202,22 +202,16 @@ Note that a model only works for pages that share the same blueprint. For pages 
 
 ### Show icon instead of image
 
-To display the icon set in the page blueprint or a default icon instead of a preview image, you can set the `image` option to `false`:
+To display the icon set in the page blueprint or a default icon instead of a preview image, you can set the `image` option to `icon`:
 
 ```yaml
-image: false
+image: icon
 ```
 
 To show no image or icon at all, you can set the `image`option to `false`:
 
 ```yaml
 image: false
-```
-
-To show the icon set in the page blueprint or a default icon, you can set the `image` option to `icon`:
-
-```yaml
-image: icon
 ```
 
 ### `query`
