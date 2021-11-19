@@ -38,4 +38,13 @@ return [
             return page('releases/' . $generation . '-' . $major . '/' . $path);
         }
     ],
+    [
+        'pattern' => 'buy/checkout',
+        'action'  => function() {
+            $checkout = new Kirby\Paddle\Checkout();
+            $volume   = get('volume', 5);
+
+            go($checkout->url($volume));
+        }
+    ]
 ];

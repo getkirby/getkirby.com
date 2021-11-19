@@ -11,6 +11,7 @@ return [
     'github'   => require __DIR__ . '/github.php',
     'features' => require __DIR__ . '/features.php',
     'meta'     => require __DIR__ . '/meta.php',
+    'paddle'   => require __DIR__ . '/paddle.php',
     'panel'    => false,
     'plugins'  => require __DIR__ . '/plugins.php',
     'routes'   => require __DIR__ . '/routes.php',
