@@ -275,7 +275,6 @@ navigation:
     - album
     - default
 ```
-</since>
 
 ### Adjust the sorting of the previous/next page
 ```yaml "/site/blueprints/pages/default.yml"
@@ -285,6 +284,7 @@ navigation:
   template: default
   sortBy: title asc
 ```
+</since>
 
 ## Examples
 
