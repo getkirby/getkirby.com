@@ -333,7 +333,7 @@ return [
                     $list = F::read($logfile);
 
                     // ...or build it from the index
-                    if ($list == null || $offset !== 0) {
+                    if ($list == null) {
 
                         $collection = site()->index(true);
 
