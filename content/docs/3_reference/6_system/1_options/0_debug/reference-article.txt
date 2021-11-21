@@ -4,7 +4,7 @@ Intro: Enables/disables PHP errors
 
 Text:
 
-A quick way to turn on/off PHP errors.
+A quick way to turn on/off Php errors.
 
 ```php
 return [
