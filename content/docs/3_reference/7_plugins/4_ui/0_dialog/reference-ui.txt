@@ -11,7 +11,7 @@ By default, the dialog component is coming with cancel and submit buttons in the
 
 <k-dialog
   ref="dialog"
-  button="Delete"
+  submitButton="Delete"
   theme="negative"
   icon="trash"
 >
