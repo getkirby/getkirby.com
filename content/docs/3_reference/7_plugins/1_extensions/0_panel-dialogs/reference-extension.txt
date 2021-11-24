@@ -157,7 +157,7 @@ Kirby::plugin('custom/dialog', [
     'site' => function ($kirby) {
       return [
         'dialogs' => [
-          'page.changeStatus' =>
+          'page.changeStatus' => [
             'load' => function (string $id) {
               // custom dialog setup
             },
@@ -188,7 +188,7 @@ Kirby::plugin('custom/dialog', [
     'site' => function ($kirby) {
       return [
         'dialogs' => [
-          'page.changeStatus' =>
+          'page.changeStatus' => [
             'load' => function (string $id) use ($kirby) {
               $page = Find::page($id);
 
