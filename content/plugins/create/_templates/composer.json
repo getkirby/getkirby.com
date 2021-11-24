@@ -1,0 +1,19 @@
+{
+    "name": "{{ plugin.id }}",
+    "description": "{{ description }}",
+    "type": "kirby-plugin",
+    "license": "{{ license }}",
+    "homepage": "https://getkirby.com/plugins/{{ plugin.id }}",
+    "authors": [
+        {
+            "name": "{{ author.name }}",
+            "email": "{{ author.email }}"
+        }
+    ],
+    "require": {
+        "getkirby/composer-installer": "^1.2"
+    },
+    "extra": {
+        "installer-name": "{{ plugin.name }}"
+    }
+}
