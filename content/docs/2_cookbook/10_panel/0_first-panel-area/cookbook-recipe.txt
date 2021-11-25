@@ -184,8 +184,8 @@ All that's left now, is create the component for our API data. Kirby's ready to 
           }"
           target="_blank"
         />
-        <div v-else>No items available</div>
       </k-items>
+      <div v-else>No items available</div>
     </k-view>
   </k-inside>
 </template>
