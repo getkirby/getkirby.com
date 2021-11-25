@@ -37,81 +37,263 @@
     font-size: var(--text-base);
     color: var(--color-white);
     overflow-x: auto;
-    padding: var(--spacing-6);
+    padding: var(--spacing-3);
+  }
+
+  .strikethrough {
+    text-decoration: line-through;
+  }
+
+  .plugin-file {
+    background: var(--color-white);
+  }
+
+  .plugin-file[open] {
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  .plugin-file summary {
+    font-weight: var(--font-bold);
+    padding: var(--spacing-2) var(--spacing-3);
+  }
+
+  .plugin-file input {
+    margin: 0 var(--spacing-2);
+  }
+
+  .plugin-file[open] summary {
+    border-bottom: 1px solid var(--color-gray-800);
   }
 </style>
 
+<?= js('assets/js/libraries/jszip.js') ?>
+<?= js('assets/js/libraries/filesaver.js') ?>
 <script type="module">
   import {
-    createApp
-  } from 'https://unpkg.com/petite-vue?module'
+    createApp,
+    reactive
+  } from '<?= url('assets/js/libraries/petite-vue.js') ?>';
 
-  createApp({
-    author: {
-      id: 'your-id',
-      name: '',
-      email: ''
+  const templates = <?= $templates ?>;
+
+  const esc = (string) => {
+    const entityMap = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+      '/': '&#x2F;',
+      '`': '&#x60;',
+      '=': '&#x3D;'
+    };
+
+    return String(string).replace(/[&<>"'`=/]/g, (char) => {
+      return entityMap[char];
+    });
+  };
+
+  const json = (data) => {
+    return JSON.stringify(data, null, 2);
+  };
+
+  const sluggify = (string) => {
+    return string.toLowerCase().replace(/[^a-z0-9]/g, "-");
+  };
+
+  const template = (string, values = {}) => {
+    const resolve = (parts, data = {}) => {
+      const part = esc(parts.shift());
+      const value = data[part] ?? null;
+
+      if (value === null) {
+        return Object.prototype.hasOwnProperty.call(data, part) || "…";
+      } else if (parts.length === 0) {
+        return value;
+      } else {
+        return resolve(parts, value);
+      }
+    };
+
+    const opening = "[{]{1,2}[\\s]?";
+    const closing = "[\\s]?[}]{1,2}";
+
+    string = string.replace(new RegExp(`${opening}(.*?)${closing}`, "gi"), ($0, $1) => {
+      return resolve($1.split("."), values);
+    });
+
+    return string.replace(new RegExp(`${opening}.*${closing}`, "gi"), "…");
+  };
+
+  const author = reactive({
+    id: 'your-id',
+    name: '',
+    email: '',
+    get homepage() {
+      return 'https://getkirby.com/plugins/' + this.slug
     },
+    get slug() {
+      return sluggify(this.id);
+    },
+  });
+
+  const plugin = reactive({
     description: '',
     license: 'MIT',
     name: 'plugin-name',
-    panel: false,
-    get composer() {
-      return JSON.stringify({
-        name: this.pluginId,
-        description: this.description,
-        type: 'kirby-plugin',
-        license: this.license,
-        homepage: this.homepage,
-        authors: [{
-          name: this.author.name,
-          email: this.author.email
-        }, ],
-        require: {
-          'getkirby/composer-installer': '^1.2'
-        },
-        extra: {
-          "installer-name": this.pluginName
-        },
-      }, null, 2);
-    },
     get homepage() {
-      return 'https://getkirby.com/plugins/' + this.pluginId;
+      return 'https://getkirby.com/plugins/' + this.id;
     },
-    get indexJS() {
-
-      return `panel.plugin('${this.pluginId}', {
-  components: {
-
-  }
-});`;
-
+    get id() {
+      return author.slug + '/' + this.slug;
     },
-    get indexPHP() {
-
-      return `<` + `?php
-
-Kirby::plugin('${this.pluginId}', [
-
-]);`;
-
+    get slug() {
+      return sluggify(this.name);
     },
-    get package() {
-      return JSON.stringify({
-        scripts: {
-          dev: "npx -y kirbyup src/index.js --watch",
-          build: "npx -y kirbyup src/index.js"
+  });
+
+  const files = reactive({
+    gitattributes: {
+      filename: '.gitattributes',
+      include: true,
+      get contents() {
+        return template(templates.gitattributes);
+      },
+    },
+    gitignore: {
+      filename: '.gitignore',
+      include: true,
+      get contents() {
+        return template(templates.gitignore);
+      },
+    },
+    editorconfig: {
+      filename: '.editorconfig',
+      include: true,
+      get contents() {
+        return template(templates.editorconfig);
+      },
+    },
+    composer: {
+      filename: 'composer.json',
+      include: true,
+      open: true,
+      get contents() {
+        return json({
+          name: plugin.id,
+          description: plugin.description,
+          type: 'kirby-plugin',
+          license: plugin.license,
+          homepage: plugin.homepage,
+          version: "0.1.0",
+          authors: [{
+            name: author.name,
+            email: author.email,
+            homepage: author.homepage
+          }, ],
+          require: {
+            'getkirby/composer-installer': '^1.2'
+          },
+          extra: {
+            "installer-name": plugin.name
+          },
+        });
+      },
+    },
+    indexphp: {
+      filename: 'index.php',
+      include: true,
+      get contents() {
+        return template(templates.indexphp, {
+          author,
+          plugin
+        });
+      },
+    },
+    license: {
+      filename: 'LICENSE.md',
+      include: true,
+      get contents() {
+        return template(templates.license, {
+          author,
+          plugin,
+          year: new Date().getFullYear()
+        });
+      },
+    },
+    indexjs: {
+      filename: 'src/index.js',
+      include: true,
+      get contents() {
+        return template(templates.indexjs, {
+          author,
+          plugin
+        });
+      },
+    },
+    package: {
+      filename: 'package.json',
+      include: true,
+      get contents() {
+        return json({
+          scripts: {
+            dev: "npx -y kirbyup src/index.js --watch",
+            build: "npx -y kirbyup src/index.js"
+          }
+        });
+      },
+    },
+    readme: {
+      filename: 'README.md',
+      include: true,
+      get contents() {
+        return template(templates.readme, {
+          author,
+          plugin
+        });
+      }
+    },
+    security: {
+      filename: 'SECURITY.md',
+      include: true,
+      get contents() {
+        return template(templates.security, {
+          author,
+          plugin
+        });
+      },
+    }
+  });
+
+  createApp({
+    author,
+    files,
+    plugin,
+    onInputAuthorId(event) {
+      author.id = sluggify(event.target.value);
+    },
+    onInputPluginName(event) {
+      plugin.name = sluggify(event.target.value);
+    },
+    async zip() {
+      var zip = new JSZip();
+
+      Object.keys(this.files).forEach(key => {
+        const file = this.files[key];
+
+        if (file.include) {
+          zip.file(plugin.slug + "/" + file.filename, file.contents);
         }
-      }, null, 2);
-    },
-    get pluginId() {
-      return this.sluggify(this.author.id) + '/' + this.pluginName;
-    },
-    get pluginName() {
-      return this.sluggify(this.name);
-    },
-    sluggify(string) {
-      return string.toLowerCase().replace(/[^a-z0-9]/g, "-");
+      });
+
+      zip.generateAsync({
+          type: "blob"
+        })
+        .then(content => {
+          saveAs(content, plugin.slug + ".zip");
+        });
+
     }
   }).mount();
 </script>
@@ -121,70 +303,48 @@ Kirby::plugin('${this.pluginId}', [
 
   <div class="columns highlight rounded bg-light" style="--columns: 2; --gap: var(--spacing-24)">
 
-    <form method="post">
+    <div>
       <div class="columns" style="--gap: var(--spacing-6)">
         <div style="--span: 6">
           <label class="label">Developer ID</label>
-          <input class="input" required name="author.id" autofocus type="text" v-model="author.id">
+          <input class="input" autofocus type="text" :value="author.id" @input="onInputAuthorId">
         </div>
         <div style="--span: 6">
           <label class="label">Plugin name</label>
-          <input class="input" required name="plugin.name"  type="text" v-model="name">
+          <input class="input" type="text" :value="plugin.name" @input="onInputPluginName">
         </div>
         <div style="--span: 12">
           <label class="label">Description</label>
-          <input class="input" required name="description" type="text" v-model="description">
-        </div>
-        <div style="--span: 12">
-          <label class="label">License</label>
-          <div class="input select">
-            <select name="license" v-model="license">
-              <option value="MIT">MIT</option>
-              <option value="The Unlicense">The Unlicense</option>
-              <option value="Commercial">Commercial</option>
-            </select>
-          </div>
+          <input class="input" type="text" v-model="plugin.description">
         </div>
         <div style="--span: 6">
           <label class="label">Author name</label>
-          <input class="input" required name="author.name" type="text" v-model="author.name">
+          <input class="input" type="text" v-model="author.name">
         </div>
-        <div style="--span: 6">
+        <div style="--span: 6" class="mb-12">
           <label class="label">Author email</label>
-          <input class="input" required name="author.email" type="email" v-model="author.email">
-        </div>
-        <div class="mb-12" style="--span: 12">
-          <h2 class="label">Features</h2>
-          <label><input type="checkbox" class="mr-3" v-model="panel"> Panel extensions</label>
+          <input class="input" type="email" v-model="author.email">
         </div>
         <div style="--span: 12">
-          <button class="btn btn--filled">
+          <button type="button" @click="zip" class="btn btn--filled">
             <?= icon('download') ?>
             Download
           </button>
         </div>
       </div>
-    </form>
+    </div>
 
     <div>
-      <div class="mb-6">
-        <label class="label">composer.json</label>
-        <pre class="codeblock"><code>{{ composer }}</code></pre>
-      </div>
-      <div class="mb-6">
-        <label class="label">index.php</label>
-        <pre class="codeblock"><code>{{ indexPHP }}</code></pre>
-      </div>
-      <template v-if="panel">
-        <div class="mb-6">
-          <label class="label">package.json</label>
-          <pre class="codeblock"><code>{{ package }}</code></pre>
-        </div>
-        <div>
-          <label class="label">index.js</label>
-          <pre class="codeblock"><code>{{ indexJS }}</code></pre>
-        </div>
-      </template>
+      <h2 class="label">Files</h2>
+      <details class="plugin-file rounded shadow mb-1" v-for="(file, key) in files" :key="key" :open="file.open" class="mb-3">
+        <summary class="summary font-mono text-sm" :class="{strikethrough: !file.include}">
+          <span class="inline-flex items-center">
+            <input type="checkbox" v-model="file.include">
+            {{ file.filename }}
+          </span>
+        </summary>
+        <pre class="codeblock"><code>{{ file.contents }}</code></pre>
+      </details>
     </div>
   </div>
 
