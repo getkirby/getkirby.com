@@ -20,7 +20,7 @@ Text:
 
 Whenever you upload a file to your content folder and then access this file via its URL in the browser, a copy of the file is created in the media folder for public access. Additionally, the Panel creates thumbs for display in sections and fields or in the file view. This approach has several advantages, one of which is that you can move your content folder out of the web root for an additional layer of security.
 
-However, if we want to restrict access to certain pages of a site as explained in our (link: text: Restricting access to your site ) recipe, any files attached to these pages will still be accessible to anyone who can guess their URL.
+However, if we want to restrict access to certain pages of a site as explained in our (link: /docs/cookbook/security/access-restriction text: Restricting access to your site ) recipe, any files attached to these pages will still be accessible to anyone who can guess their URL.
 
 In this recipe, we will create a simple `downloads` page, where registered users can download files. The example will be based on Kirby's Starterkit.
 
