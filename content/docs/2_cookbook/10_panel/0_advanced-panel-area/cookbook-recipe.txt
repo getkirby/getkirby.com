@@ -1,0 +1,743 @@
+Title: Advanced Panel area
+
+----
+
+Description: Create an editable product list as custom Panel area, complete with dialogs, dropdowns and search.
+
+----
+
+Published: 2021-11-28
+
+----
+
+Authors: 
+- authors/sonja-broda
+- authors/bastian-allgeier
+
+----
+
+Text:
+
+## Intro
+
+Among other use cases, Panel areas are a great way to show and edit data that is not bound to Kirby pages, real or virtual, for example a product list from a JSON file or database.
+
+This recipe is based on the products area demo Bastian presented during the (link: https://www.youtube.com/watch?v=QgCMc89rdNY text: 3.6 product launch), but we will extend it a bit.
+
+<info>
+For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup) and are familiar with the (link: docs/reference/plugins/extensions/panel-areas text: basic Panel area setup).
+
+You can install the (link: https://github.com/getkirby/pluginkit/tree/4-panel text: Pluginkit) as a basis or create the file structure we need manually, that’s up to you. Also, it doesn’t matter if you use the Plainkit or the Starterkit as a starting point.
+</info>
+
+<warning>
+Some of the components used in the recipe are not finalized yet and therefore subject to possible breaking changes in future releases!
+</warning>
+
+## Downloads
+
+- (file: products.zip text: Products area demo code)
+- (file: products-extended.zip text: Extended products area demo code)
+
+You can either download the demo with the products example or ideally code along as we go through the steps in this recipe.
+
+Let’s start by creating a new `products` folder inside the plugins folder. Inside the `products` folder, we first create a `package.json` file with the contents copied from the Pluginkit example mentioned above.
+
+```js "/site/plugins/products/package.json"
+{
+  "scripts": {
+    "dev": "npx -y kirbyup src/index.js --watch",
+    "build": "npx -y kirbyup src/index.js"
+  }
+}
+```
+
+This will take care of compiling our source files into an `index.js` file in the root of our `products` plugin folder.
+
+## `index.php`
+
+The most important stuff for our shiny new area happens in the PHP part of the plugin. Inside the `products` folder, we create the obligatory `index.php` with the Kirby plugin wrapper. And inside this wrapper, we define the new area:
+
+```php "/site/plugins/products/index.php"
+<?php
+
+function products() {
+    return Data::read(__DIR__ . '/products.json');
+}
+
+Kirby::plugin('getkirby/products', [
+  'areas' => [
+    'products' => [
+      'label'   => 'Products',
+      'icon'    => 'cart',
+      'menu'    => true,
+      // edit and delete dialogs
+      'dialogs' => [
+          require __DIR__ . '/dialogs/edit.php',
+          require __DIR__ . '/dialogs/delete.php'
+      ],
+      // dropdown with edit and delete buttons
+      'dropdowns' => [
+          //require __DIR__ . '/dropdowns/product.php'
+      ],
+      // search for productss
+      'searches' => [
+          //'products' => require __DIR__ . '/searches/products.php'
+      ],
+      // view route
+      'views' => [
+        require __DIR__ . '/views/products.php'
+      ]
+    ]
+  ]
+]);
+```
+
+For the moment, let's comment `dropdowns` and `searches`, we will get to that later.
+
+This code snippet looks very clean, because the separate parts are moved into their own files, which we will go through step by step.
+
+## Plugin structure
+
+Before we continue, let's create the missing files and folders for the basic plugin structure as outlined in the `index.php` file, which looks like this:
+
+```filesystem
+products/
+  dialogs/
+    delete.php
+    edit.php
+  dropdowns/
+    product.php
+  searches/
+    products.php
+  src/
+    components/
+      Products.Vue
+    index.js
+  views/
+    products.php
+  index.php
+  package.json
+  products.json
+```
+
+## `products.json`
+
+The `products.json` file contains the product data for this example, you can copy it into the plugins folder from the demo files. It has the following basic structure (leaving out the fields that are not used in our example):
+
+```js "/site/products/products.json"
+{
+  "1": {
+    "title":"Sweet fresh strawberry",
+    "type":"fruit",
+    "description":"Sweet fresh stawberry on the wooden table",
+    "price":29.45
+    // …
+  },
+  "2": {
+    "title":"Asparagus",
+    "type":"vegetable",
+    "description":"Asparagus with ham on the wooden table",
+    "price":18.95
+  }
+  // …
+}
+```
+
+## View route
+
+If we opened the Panel at this point, we wouldn't see much apart from the menu entry. So let's add the PHP part for the view first.
+
+```php "/site/plugins/products/views/products.php"
+<?php
+
+return [
+    'pattern' => 'products',
+    'action'  => function () {
+        return [
+            'component' => 'k-products-view',
+            'props' => [
+                'products' => products()
+            ]
+        ];
+    }
+];
+```
+
+A view is a (link: docs/guide/routing text: route) with a `pattern` that when called executes the given `action`, that has to return an array. This array controls the Vue component to be loaded, the props for the component and (optional) other settings for the view.
+
+The Vue component we will create in a second, we call `k-products-view`, and as props we return the product list from the JSON file as array via the `products` function we defined at the top of our `index.php`.
+
+The props we return to the component can of course be anything, so the product data from the JSON file can easily be replaced with data from a database or an API (see example in the (link: docs/cookbook/pane/first-panel-area text: My first Panel area recipe)).
+
+We could for example pass the user role to the component and show different stuff based on role, or a config option for the layout etc.. The possibilities here are rather endless.
+
+
+## View component
+
+Let's move on to the JS side of stuff. In our `index.js` we register the `k-products-view` component:
+
+```js "/site/plugins/products/src/index.js"
+import Products from "./components/Products.vue";
+
+panel.plugin("getkirby/products", {
+  components: {
+    "k-products-view": Products
+  }
+});
+```
+
+The view component itself lives in the imported `Products.vue` file and is responsible for actually displaying the data we passed to it as props in the view's route.
+
+The product data itself we display in a table.
+
+```html "/site/plugins/products/src/components/Products.vue"
+<template>
+  <k-inside>
+    <k-view>
+      <k-header>Products</k-header>
+      <table class="k-products">
+        <tr>
+          <th>Title</th>
+          <th class="k-product-type">Type</th>
+          <th>Description</th>
+          <th class="k-product-price">Price</th>
+          <th class="k-product-options"></th>
+        </tr>
+        <tr v-for="(product, id) in products" :key="id">
+          <td>{{ product.title }}</td>
+          <td class="k-product-type">{{ product.type }}</td>
+          <td>{{ product.description }}</td>
+          <td class="k-product-price">{{ price(product.price) }}</td>
+          <td class="k-product-options">
+            <k-options-dropdown :options="'products/' + id" />
+          </td>
+        </tr>
+      </table>
+    </k-view>
+  </k-inside>
+</template>
+
+<script>
+export default {
+  props: {
+    products: Array
+  },
+  methods: {
+    // format the price in EURO
+    price(price) {
+      return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(price);
+    }
+  }
+};
+</script>
+
+<style>
+.k-products {
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 1px;
+}
+.k-products td,
+.k-products th {
+  text-align: left;
+  font-size: var(--text-sm);
+  padding: var(--spacing-2);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  background: var(--color-white);
+}
+.k-product-type {
+  width: 8rem;
+}
+.k-product-price {
+  width: 5rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right !important;
+}
+.k-product-options {
+  padding: 0 !important;
+  width: 3rem;
+  overflow: visible !important;
+}
+</style>
+```
+
+Maybe worth mentioning is the `price` method which converts the price into a nicely formatted currency.
+
+The last table column contains the (link: docs/reference/plugins/ui/options-dropdown text: options dropdown)for the edit and delete buttons).
+
+```html
+  <k-options-dropdown :options="'products/' + id" />
+```
+
+## Compile and check
+
+At this point, it's time to build the `index.js` file. To this purpose we open a terminal, `cd` into the `products` folder and run
+
+```
+npm run dev
+```
+
+Now open the Panel and navigate to the new Panel area. It will now look like this:
+
+(image: product-list.png)
+
+
+Since we haven't implemented the dropdowns yet, they will throw an error if you click on the buttons. But we already have a nice working list view of our products!
+
+## Options dropdown
+
+The options dropdown is again a route that returns an array of options with text, icon and the dialog to open when clicked. Here the options are `edit` and `delete`.
+
+```php "/site/plugins/products/dropdowns/product.php"
+<?php
+
+return [
+    'pattern' => 'products/(:any)',
+    'action'  => function (string $id) {
+        return [
+            [
+                'text'   => 'Edit',
+                'icon'   => 'edit',
+                'dialog' => 'products/' . $id . '/edit'
+            ],
+            [
+                'text'   => 'Delete',
+                'icon'   => 'trash',
+                'dialog' => 'products/' . $id . '/delete'
+            ]
+        ];
+    }
+];
+```
+
+## Dialogs
+
+What is still missing is the dialogs. Dialogs are a part of Panel area extensions, and each (link: docs/reference/plugins/extensions/panel-dialogs text: dialog) has a route pattern at which the dialog is called.
+
+Each dialog has a `load` callback and a `submit` callback. You can read more about those callbacks in the docs linked above.
+
+### Delete
+
+The `delete` dialog reuses Kirby's (link: docs/reference/plugins/ui/remove-dialog text: `k-remove-dialog` component), asks for confirmation, and on submit removes the product with the given `id` from the array and writes the remaining new array to file.
+
+```php "/site/plugins/products/dialogs/delete.php"
+<?php
+
+return [
+    'pattern' => 'products/(:any)/delete',
+    'load' => function (string $id) {
+        return [
+            'component' => 'k-remove-dialog',
+            'props' => [
+                'text' => 'Do you really want to delete this product?'
+            ]
+        ];
+    },
+    'submit' => function (string $id) {
+        $products = products();
+
+        unset($products[$id]);
+
+        Data::write(__DIR__ . '/../products.json', $products);
+
+        return true;
+    }
+];
+```
+
+### Edit
+
+The edit dialog uses Kirby's (link: docs/reference/plugins/ui/form-dialog text: `k-form-dialog` component), in which we define the fields the user can edit. Each field is an array with the same props you would usually define in the blueprint for the given field type. Here we use two text fields for `title` and `type`, a textarea field for the `description` and a number field for the `price`. As `value` we set the current product.
+
+```php "/site/plugins/products/dialogs/edit.php"
+<?php
+
+return [
+    'pattern' => 'products/(:any)/edit',
+    'load'    => function (string $id) {
+        $product = products()[$id];
+
+        return [
+            'component' => 'k-form-dialog',
+            'props' => [
+                'fields' => [
+                    'title' => [
+                        'label' => 'Title',
+                        'type'  => 'text'
+                    ],
+                    'type' => [
+                        'label' => 'Type',
+                        'type'  => 'text'
+                    ],
+                    'description' => [
+                        'label'   => 'Description',
+                        'type'    => 'textarea',
+                        'buttons' => false
+                    ],
+                    'price' => [
+                        'label'  => 'Price',
+                        'type'   => 'number',
+                        'step'   => 0.01,
+                        'before' => '€'
+                    ]
+                ],
+                'value' => $product
+            ]
+        ];
+    },
+    'submit' => function (string $id) {
+        $products = products();
+        $products[$id] = get();
+
+        Data::write(__DIR__ . '/../products.json', $products);
+
+        return true;
+    }
+];
+```
+
+Once the user submits the dialog, we overwrite the existing array item with the new data and write the new data to file.
+
+**At this point, uncomment the commented lines in your `index.php`.**
+
+And with these dialogs in place, we can now edit items or delete them from the list.
+
+## Extension: Adding items
+
+Wouldn't it be great to be able to add new items, too? I think so, so let's do that. Luckily, we don't have to add a lot of code to achieve that.
+
+Let's first add an `add` button to our view below the `k-header` component:
+
+```html "/site/plugins/products/src/components/Products.vue"
+<template>
+  <k-inside>
+    <k-view>
+      <k-header>Products</k-header>
+      <k-text align="right">
+        <k-button
+          text='Add'
+          icon='add'
+          @click="$dialog('products/add')"
+        />
+      </k-text>
+      <table class="k-products">
+        <tr>
+          <th>Title</th>
+          <th class="k-product-type">Type</th>
+          <th>Description</th>
+          <th class="k-product-price">Price</th>
+          <th class="k-product-options"></th>
+        </tr>
+        <tr v-for="(product, id) in products" :key="id">
+          <td>{{ product.title }}</td>
+          <td class="k-product-type">{{ product.type }}</td>
+          <td>{{ product.description }}</td>
+          <td class="k-product-price">{{ price(product.price) }}</td>
+          <td class="k-product-options">
+            <k-options-dropdown :options="'products/' + id" />
+          </td>
+        </tr>
+      </table>
+    </k-view>
+  </k-inside>
+</template>
+```
+
+The view should now look like this:
+
+(image: products-add.png)
+
+When the user clicks on this button, a new dialog, which we have yet to define, will open.
+
+We register this new dialog in `index.php` next to the existing `edit` and `delete` dialogs…
+
+```php "/site/plugins/products/index.php"
+// …
+'dialogs' => [
+    require __DIR__ . '/dialogs/edit.php',
+    require __DIR__ . '/dialogs/delete.php',
+    require __DIR__ . '/dialogs/add.php'
+],
+// …
+```
+
+and then create an `add.php` file in the `/dialogs` folder with the following code:
+
+```php "/site/plugins/products/dialogs/add.php"
+<?php
+
+return [
+    'pattern' => 'products/add',
+    'load'    => function () {
+
+        return [
+            'component' => 'k-form-dialog',
+            'props' => [
+                'fields' => [
+                    'title' => [
+                        'label' => 'Title',
+                        'type'  => 'text'
+                    ],
+                    'type' => [
+                        'label' => 'Type',
+                        'type'  => 'text'
+                    ],
+                    'description' => [
+                        'label'   => 'Description',
+                        'type'    => 'textarea',
+                        'buttons' => false
+                    ],
+                    'price' => [
+                        'label'  => 'Price',
+                        'type'   => 'number',
+                        'step'   => 0.01,
+                        'before' => '€'
+                    ]
+                ],
+                'value' => [
+                    'title'       => get('title'),
+                    'type'        => get('type'),
+                    'description' => get('description'),
+                    'price'       => get('price'),
+                ],
+            ]
+        ];
+    },
+    'submit' => function () {
+        $products = products();
+        $products[] = get();
+
+        Data::write(__DIR__ . '/../products.json', $products);
+
+        return true;
+    }
+];
+```
+
+This looks pretty similar to the `edit` dialog with a few differences:
+
+- Because we don't edit an existing product, we don't pass an id in the route pattern
+- Instead of passing an existing product as value, we pass the field values
+- In the `submit` action, we append the new product data to the existing products array.
+
+And that's it! We can now also add products to the list. Try it out!
+
+## Search
+
+Panel areas also allow you to add your own (link: docs/reference/plugins/extensions/panel-search text: search type) to the Panel - next to pages, files and users. With this step, we add a custom search that allows us to search through our list of products:
+
+```php "/site/plugins/products/searches/products.php"
+<?php
+
+return [
+    'label' => 'Products',
+    'icon'  => 'cart',
+    'query' => function (string $query) {
+        $products = products();
+        $results  = [];
+        foreach ($products as $product) {
+            if (Str::contains($product['title'], $query, true) === true) {
+                $results[] = [
+                    'text' => $product['title'],
+                    'link' => '/products',
+                    'image' => [
+                        'icon' => 'cart',
+                        'back' => 'purple-400'
+                    ]
+                ];
+            }
+        }
+
+        return $results;
+    }
+];
+```
+In the `query` callback, we loop through the list items and return each item that contains the given query string in the product title. The parameters you can return for each item you find in the linked docs.
+
+
+At this point, when we use the search, it works fine and returns the expected result set as we type.
+
+(image: area-search.png)
+
+However, when we click on the desired item, we are just redirected to the current view. Also, we currently have to select the `product` search from the menu first.
+
+Let's first fix the second issue by setting the products search as our default search for this view. We do that in the `action` callback of our product view route:
+
+```php "/site/plugins/products/views/products.php"
+<?php
+
+return [
+    'pattern' => 'products',
+    'action'  => function () {
+        return [
+            'component' => 'k-products-view',
+            'props' => [
+                'products' => products()
+            ],
+            // set products search as default
+            'search' => 'products'
+        ];
+    }
+];
+```
+
+Now, we don't have to select the right search component anymore when we use the search function.
+
+For the second issue, we will create a single product view we can redirect to when the user clicks on an item.
+
+## Single product subview
+
+Let's first change the loop in our products search component so that we get the key and can pass it to the `link` prop in the `$results` array:
+
+```php "/site/plugins/products/searches/products.php"
+// …
+foreach ($products as $key => $product) {
+    if (Str::contains($product['title'], $query, true) === true) {
+        $results[] = [
+            'text' => $product['title'],
+            'link' => '/products/' . $key,
+            'image' => [
+                'icon' => 'cart',
+                'back' => 'purple-400'
+            ]
+        ];
+    }
+}
+// …
+```
+
+Next, we need a second route for our area, which we register next to the first one in the `index.php` file:
+
+```php "/site/plugins/products/index.php"
+// …
+'views' => [
+  require __DIR__ . '/views/products.php',
+  require __DIR__ . '/views/product.php'
+]
+// …
+```
+
+We then create the the new `product.php` file in the `/views` folder:
+
+```php "/site/plugins/products/views/product.php"
+<?php
+
+return [
+    'pattern' => 'products/(:any)',
+    'action'  => function ($id) {
+        return [
+            'component' => 'k-product-view',
+            'props' => [
+                'product' => products()[$id]
+            ],
+        ];
+    }
+];
+```
+
+As route pattern we use a placeholder for the product `id`. In the `action` return array, we define a new `k-product-view` component, and in the `props` array, we return the single product with the given id as data for the view.
+
+As before, we register the component in our `index.js`:
+
+```js "/site/plugins/products/src/index.js"
+import Products from "./components/Products.vue";
+import Product from "./components/Product.vue";
+
+panel.plugin("getkirby/products", {
+  components: {
+    "k-products-view": Products,
+    "k-product-view": Product
+  }
+});
+```
+
+And finally create the view for our single product, in which we basically use the same code as in the product list, with the difference that we don't need a loop this time, because we are only dealing with a single product:
+
+```html
+<template>
+  <k-inside>
+    <k-view>
+      <k-header>Product</k-header>
+      <table class="k-products">
+        <tr>
+          <th>Title</th>
+          <th class="k-product-type">Type</th>
+          <th>Description</th>
+          <th class="k-product-price">Price</th>
+          <th class="k-product-options"></th>
+        </tr>
+        <tr>
+          <td>{{ product.title }}</td>
+          <td class="k-product-type">{{ product.type }}</td>
+          <td>{{ product.description }}</td>
+          <td class="k-product-price">{{ price(product.price) }}</td>
+          <td class="k-product-options">
+            <k-options-dropdown :options="'products/' + id" />
+          </td>
+        </tr>
+      </table>
+    </k-view>
+  </k-inside>
+</template>
+
+<script>
+export default {
+  props: {
+    product: Array
+  },
+  methods: {
+    price(price) {
+      return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(price);
+    },
+  }
+};
+</script>
+
+<style>
+.k-products {
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 1px;
+}
+.k-products td,
+.k-products th {
+  text-align: left;
+  font-size: var(--text-sm);
+  padding: var(--spacing-2);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  background: var(--color-white);
+}
+.k-product-type {
+  width: 8rem;
+}
+.k-product-price {
+  width: 5rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right !important;
+}
+.k-product-options {
+  padding: 0 !important;
+  width: 3rem;
+  overflow: visible !important;
+}
+</style>
+```
+
+When we go to the single view now, the result should look like this:
+
+(image: single-product-view.png)
+
+Depending on your real world data, you might want to choose a completely different layout for the single view, but that's up to you and you can start experimenting with your newly aquired knowledge from here on.
+
+## More information
+
+- (link: docs/reference/plugins/extensions/panel-areas text: Panel areas)
+- (link: docs/cookbook/panel/first-panel-area text: My first Panel area)
+- (link: docs/reference/plugins/extensions/panel-dialogs text: Panel dialogs)
+- (link: docs/reference/plugins/extensions/panel-dropdowns text: Panel dropdowns)
+- (link: docs/reference/plugins/extensions/panel-search text: Panel search)
