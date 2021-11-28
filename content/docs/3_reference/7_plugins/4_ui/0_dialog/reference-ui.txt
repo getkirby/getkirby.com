@@ -59,7 +59,7 @@ A dialog can easily be combined with a form by using the `k-form` component. It'
       :fields="{
         title: {
           label: 'Title',
-          type: 'title'
+          type: 'text'
         }
       }"
       @submit="submit"
