@@ -132,6 +132,20 @@ All that's left to do is link to this file in your HTML `head` tag:
 <?= css('assets/css/styles.css') ?>
 ```
 
+## Limitations
+
+Writer or other output generating fields won’t work well with this solution so far. As TailwindCSS expects all HTML to have styling classes, the output of these Kirby fields will be completely unstyled (not bold/italic, etc). There is no easy way to set the required classes for the Kirby fields and output them to the template.
+
+### Workarounds
+
+One way to work around this would be to have a separate stylesheet for these cases that define all the output cases again, this time not in Tailwind style but classic CSS:
+```
+b, strong {
+    font-weight: bold;
+}
+```
+
+Another solution would be to create your own additional rendering of the fields. This has the advantage that you can use TailwindCSS and nothing else for the page styling but the disadvantage of creating your own output renderer. You need to inject the classes via Regular Expressions that match the allowed HTML tags, for example [by using KirbyText hooks](https://getkirby.com/docs/cookbook/extensions/kirbytext-hooks) like `kirbytext:after`.
 
 ----
 
@@ -139,4 +153,6 @@ Description: A walkthrough on how to install and use Tailwind CSS with Kirby.
 
 ----
 
-Authors: - authors/christian-fickinger
+Authors: 
+    - authors/christian-fickinger
+    - authors/anselm-hannemann
