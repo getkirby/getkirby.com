@@ -77,7 +77,7 @@ Our `/src` folder should look like follows and we are ready to install Tailwind 
 ```filesystem
 src/
   css/
-  tailwind.css
+    tailwind.css
 ```
 
 
