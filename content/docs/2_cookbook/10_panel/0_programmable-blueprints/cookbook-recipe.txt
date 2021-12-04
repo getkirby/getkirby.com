@@ -2,7 +2,7 @@ Title: Programmable blueprints
 
 ----
 
-Published: 2021-11-20
+Published: 2021-12-04
 
 ----
 
@@ -19,9 +19,9 @@ Text:
 
 Blueprints for Panel forms are usually static YAML files. While this is totally fine for most use cases, there are some situations where you might wish there was a more dynamic way of creating blueprints.
 
-In a Kirby plugin, we can (link: docs/reference/plugins/extensions/blueprints text: register blueprints) inside the blueprints array as key/value pairs, where the key is the name of the blueprint. As values we can either provide the path to a file or we can assign an array or a callback. The callback approach allows us to create blueprint plugins dynamically without sacrificing performance.
+In a Kirby plugin, we can (link: docs/reference/plugins/extensions/blueprints text: register blueprints) inside the blueprints array as key/value pairs, where the key is the name of the blueprint. As values we can either provide the path to a file or we can assign an array or a callback. While an array is static, the callback approach allows us to create blueprint plugins dynamically without sacrificing performance.
 
-This approach works for complete page/user/file blueprints as well as for partial blueprints like tabs, fieldgroups etc.
+This approach works for complete page/user/file blueprints as well as for partial blueprints like tabs, fieldgroups etc. and opens up many new possibilities.
 
 <info>
 We don't have access to the current page object in the PHP blueprint files, and therefore have to hard-code the pages we want to fetch via PHP. So the possibilities we have with this type of setup not endless but useful in certain situations.
@@ -32,15 +32,171 @@ We don't have access to the current page object in the PHP blueprint files, and 
 - A running Kirby (link: text: StarterKit)
 - The (link: https://github.com/rasteiner/k3-pagesdisplay-section text: Pagesdisplay section plugin) installed, for the page sections example
 
+Let's start with a new plugin folder called `programmable-blueprints` in `/site/plugins/`. Inside that folder, let's create the obligatory `index.php` file, where we will register all blueprints for this recipe.
 
+```php "/site/plugins/programmable-blueprints/index.php"
+<?php
+
+use Kirby\Cms\App as Kirby;
+
+Kirby::plugin('cookbook/programmable-blueprints', 
+[
+  'blueprints' => [
+    // here we will add the blueprints
+  ]
+]);
+```
+
+## Load different blueprints per user
+
+With programmable blueprints it is now much easier to load different blueprints per user or user role, which is for example useful if you want to hide fields/sections/tabs from certain users/roles.
+
+Let's assume we had multiple (link: docs/guide/users/roles text: user roles), e.g. the default `admin` role and other roles like `editor` etc., and we wanted to provide a different `site.yml` blueprints for each role.
+
+
+To achieve this, we create a subfolder `/blueprints` with two files `site.admin.yml` and `site.editor.yml`.
+
+Then we register a `site` blueprint and assign the two files to use conditionally:
+
+
+```php "/site/plugins/programmable-blueprints/index.php"
+<?php
+
+use Kirby\Cms\App as Kirby;
+
+Kirby::plugin('cookbook/programmable-blueprints', 
+[
+  'blueprints' => [
+        'site'                  => function () {
+            if (($user = kirby()->user()) && $user->isAdmin()) {
+                return Data::read(__DIR__ . '/blueprints/site.admin.yml');
+            } else {
+                return Data::read(__DIR__ . '/blueprints/site.editor.yml');
+            }
+        },
+  ]
+]);
+```
+We use `Data::read()` to read the `yaml` files into an array.
+
+Next we fill the blueprints with some content. For this example, let's keep them simple:
+
+The `site.admin.yml` get's two tabs, one to access all pages of the site, the second for general meta settings which should not be editable by non-admin users.
+
+```yaml "/site/plugins/programmable-blueprints/blueprints/site.admin.yml"
+title: Site
+
+tabs:
+  overview:
+    label: Page Overview
+    columns:
+      - width: 1/2
+        sections:
+          albums:
+            type: pages
+            headline: Photography
+            parent: kirby.page("photography")
+            size: small
+            info: "{{ page.images.count }} image(s)"
+            layout: cards
+            template: album
+            empty: No albums yet
+            image:
+              query: page.cover
+              cover: true
+              ratio: 3/2
+      - width: 1/2
+        sections:
+          notes:
+            type: pages
+            headline: Notes
+            parent: kirby.page("notes")
+            info: "{{ page.published }}"
+            template: note
+            empty: No notes yet
+            sortBy: date desc
+            image:
+              query: page.cover
+              cover: true
+            ratio: 3/2
+          pages:
+            type: pages
+            create: default
+            templates:
+              - about
+              - home
+              - default
+  settings:
+    label: Settings
+    icon: gear
+    sections:
+      fields:
+        type: fields
+        fields:
+          metaTitle:
+            label: Meta Title
+            type: text
+          metaDesc:
+            label: Meta Description
+            type: text
+          ogImg:
+            label: Open Graph Image
+            type: files
+            query: site.images
+          ## ... more fields
+```
+
+In the `site.editor.yml` file, we don't need tabs and only include the pages overview without the meta data settings:
+
+```yaml "/site/plugins/programmable-blueprints/blueprints/site.editor.yml"
+
+title: Site
+
+columns:
+  - width: 1/2
+    sections:
+      albums:
+        type: pages
+        headline: Photography
+        parent: kirby.page("photography")
+        size: small
+        info: "{{ page.images.count }} image(s)"
+        layout: cards
+        template: album
+        empty: No albums yet
+        image: icon
+
+  - width: 1/2
+    sections:
+      notes:
+        type: pages
+        headline: Notes
+        parent: kirby.page("notes")
+        info: "{{ page.published }}"
+        template: note
+        empty: No notes yet
+        sortBy: date desc
+        image:
+          query: page.cover
+          cover: true
+        ratio: 3/2
+      pages:
+        type: pages
+        create: default
+        templates:
+          - about
+          - home
+          - default
+```
+
+To check if everything works, delete the `site.yml` file from `/site/blueprints`. Then log in as `admin`. Create a new `editor` user role as outlined (link: docs/guide/users/roles#creating-your-own-roles text: in the docs), create a new user with this role and log in with this user. You should now see the simplified site view.
 
 ## Page blueprint with filtered pages sections
 
 A typical situation that has come up multiple times in support are dynamic numbers of pages sections that filter pages by category. Since the number of categories is usually not set in stone from the outset but new categories might be added any time, we cannot possibly set up all sections in advance. In such a use case, being able to create those sections dynamically is a big plus.
 
-First, let's create a new plugin folder called `programmable-blueprints` in `/site/plugins/` with its obligatory `index.php` file.
 
-Inside this `index.php` file, we register a pages blueprint called `notes`and include the `notes.php` file which we have yet to create.
+For this example we register a pages blueprint called `notes` in our `index.php` and include the `notes.php` file which we have yet to create.
 
 ```php "/site/plugins/programmable-blueprints/index.php"
 <?php
@@ -57,7 +213,7 @@ Kirby::plugin('cookbook/programmable-blueprints',
 ]);
 ```
 
-Now create a new subfolder structure `blueprints/pages` and inside the `pages` folder the `notes.php` file with the following code:
+Now create a new subfolder `pages` in the `/blueprints` folder, and inside the `pages` folder the `notes.php` file with the following code:
 
 
 ```php "/site/plugins/programmable-blueprints/blueprints/pages/notes.php"
