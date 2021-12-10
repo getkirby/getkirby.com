@@ -2,7 +2,7 @@ Title: Twit
 
 ----
 
-Repository: https://github.com/HashandSalt/kirby-twit
+Repository: https://github.com/HashandSalt/kirby3-twitter
 
 ----
 
