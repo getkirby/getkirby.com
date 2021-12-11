@@ -88,7 +88,6 @@ The template contains the form and will display error messages if something goes
             Name <abbr title="required">*</abbr>
         </label>
         <input type="text" id="name" name="name" value="<?= esc($data['name'] ?? '', 'attr') ?>" required>
-        <?= isset($alert['name']) ? '<span class="alert error">' . esc($alert['name']) . '</span>' : '' ?>
     </div>
     <div class="form-element">
         <label for="email">
