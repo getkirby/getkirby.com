@@ -1,0 +1,342 @@
+Title: How to make Kirby PWA ready
+
+----
+
+Published: 2021-12-12
+
+----
+
+Text:
+
+## Intro
+
+### What is PWA?
+
+A progressive web application (**PWA**), is a type of application software delivered through the web, built using common web technologies including `HTML`, `CSS`, `JavaScript` (**JS**). Since a PWA is a type of webpage or website, they do not require separate bundling or distribution. Developers can just publish the web application online, ensuring that it meets baseline "installability requirements", and end-users will be able to add the application to their home screen or taskbar.
+
+<warning>
+The "Add to home screen" (A2HS) / installation feature is only supported by Chromium-based desktop browsers and most mobile browsers. See (link: https://caniuse.com/web-app-manifest text: Can I use - Web App manifest) for further information.
+</warning>
+
+### What makes PWA interesting?
+
+As mentioned above PWA or web app manifests enable the user to install the website as a standalone application. Especially for Kirby´s Panel, this might be an interesting use-case since PWA feels a little bit like a native app the user can start via the home screen of their device or with a click on the taskbar icon on a desktop environment.
+
+<info>
+The following walkthrough is based on (link: https://www.pwabuilder.com/ text: PWABuilder.com) founded by Microsoft. You can also learn more on (link: https://web.dev/learn/pwa/ text: web.dev), a learning platform powered by Google.
+</info>
+
+Additonally, this guide was prepared on a clean installation of (link: https://getkirby.com/try text: Kirby´s Starterkit (Version 3.6.1)).
+
+## The App Manifest
+
+The most fundamental part is the _(link: https://developer.mozilla.org/en-US/docs/Web/Manifest text: web app manifest)_. 
+So create a `.json` file in the root directory, e.g. `manifest.json` and add the basic information required.
+
+```filesystem
+assets/
+content/
+kirby/
+site/
+manifest.json
+```
+
+```js "/manifest.json"
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Kirby Starterkit",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Kirby",
+  "start_url": "/",
+  "theme_color": "#ffffff"
+}
+```
+<info>
+For a detailed explanation of the dedicated attributes, please check (link: https://developer.mozilla.org/en-US/docs/Web/Manifest text: MDN Web Docs).
+</info>
+
+In case you plan the PWA only for the Panel, you can change the appropriate attributes to...
+
+```js "/manifest.json"
+{
+  ...
+  "scope": "/panel/",
+  "start_url": "/panel/site/",
+  ...
+}
+```
+
+## PWA Icons
+
+One crucial part of the web app manifest that is missing are icons. It is recommended to use an icon generator that yields all kinds of versions of icons. 
+
+<warning>
+Especially desktop browsers can be pretty picky when they are not able to detect the proper icon size and therefore will not show the installation dialog.
+</warning>
+
+(link: https://www.pwabuilder.com/imagegenerator text: PWABuilder provides an Image Generator) that can do that task. The only thing you need is to provide a 512x512px or larger square PNG image.
+
+The downloaded `.zip` file looks like this:
+
+```filesystem
+android/
+ios/
+windows11/
+icons.json
+```
+
+Now, we have to extract all the folders to the `assets` folder or whatever location you prefer. Important will be the reference to the correct path. The file `icons.json` provides the relative path to the images. Copy the attribute `"icons"` to the previously created `manifest.json` and adopt the path to your environment.
+
+<info>
+To speed up the process of changing ~112 paths manually you should use _Search & Replace_. Search for `"src": "` and replace with `"src: "assets/images/"`.
+</info>
+
+```js "/manifest.json"
+{
+  ...
+  "icons": [{
+      "src": "assets/images/windows11/SmallTile.scale-100.png",
+      "sizes": "71x71"
+    },
+    {
+      "src": "assets/images/windows11/SmallTile.scale-125.png",
+      "sizes": "89x89"
+    },
+    {
+      "src": "assets/images/windows11/SmallTile.scale-150.png",
+      "sizes": "107x107"
+    },
+    ...
+  ...
+}
+```
+
+<success>
+One of the hardest parts is over now!
+</success>
+
+The following tasks are more _Copy & Paste_ and a little bit of configuration.
+
+## (Offline) Service Worker
+
+PWABuilder provides pre-built Service Workers that utilize (link: https://developers.google.com/web/tools/workbox/ text: Workbox) to make building your offline experience easy. Therefore, we create the `pwabuilder-sw.js` next to the `manifest.json` at the root directory. _Copy & Paste_ the following JavaScript:
+
+<alert>
+Please name the `JS` file **pwabuilder-sw.js** since this name will be used by external scripts later on!
+</alert>
+
+```JS "/pwabuilder-sw.js"
+// This is the "Offline page" service worker
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+
+const CACHE = "pwabuilder-page";
+
+// TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
+const offlineFallbackPage = "offline.html";
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+self.addEventListener('install', async(event) => {
+  event.waitUntil(
+    caches.open(CACHE)
+    .then((cache) => cache.add(offlineFallbackPage))
+  );
+});
+
+if (workbox.navigationPreload.isSupported()) {
+  workbox.navigationPreload.enable();
+}
+
+self.addEventListener('fetch', (event) => {
+  if (event.request.mode === 'navigate') {
+    event.respondWith((async() => {
+      try {
+        const preloadResp = await event.preloadResponse;
+
+        if (preloadResp) {
+          return preloadResp;
+        }
+
+        const networkResp = await fetch(event.request);
+        return networkResp;
+      } catch (error) {
+
+        const cache = await caches.open(CACHE);
+        const cachedResp = await cache.match(offlineFallbackPage);
+        return cachedResp;
+      }
+    })());
+  }
+});
+```
+
+<warning>
+We are not done here yet! At the very top of the `JS` file there is a comment mentioning the `offlineFallbackPage`.
+</warning>
+
+Even though we do not need offline functionality yet, it is recommended to use at least one _Service Worker_ feature. Offline functionality seemed to be the most obvious, to begin with PWAs.
+
+### Offline HTML Page
+
+Let´s create a super simple `HTML` that is shown when users are offline.
+
+So far we have the following file structure:
+```filesystem
+assets/
+content/
+kirby/
+site/
+manifest.json
+offline.html
+pwabuilder-sw.js
+```
+
+```html "/offline.html"
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <!-- Do not use external stylesheets! -->
+    <style>
+      /* */
+    </style>
+    <meta charset="UTF-8">
+    <title>Offline Page</title>
+  </head>
+
+  <body>
+    <h1>HTTP 418: I`m a teapod!</h1>
+    <p>Please connect to the internet.</p>
+  </body>
+
+</html>
+```
+
+## Publish PWA
+
+At this point, everything is set up so far. The only step left is to link the manifest and load the required `JS` at the frontend level. To enable PWA in the frontend, we have two scenarios:
+
+- Frontend (Kirby Website)
+- Backend (Kirby Panel)
+
+<warning>
+Since the backend, e.g., Kirby Panel fits the purpose of a standalone application quite well and it sounds logical, it is not possible without issues. More on later.
+</warning>
+
+Therefore, we start with the implementation for the frontend.
+
+### Frontend (Kirby Website)
+
+To link the web app manifest and load the `JS`, we need to change the appropriate snippet or template file. In this case, it is the `header.php` snippet.
+
+```PHP "site/snippet/header.php"
+<head>
+  ...
+  <!-- ONLY FOR LOGGED IN USERS (WITH SPECIAL ROLE?)-->
+  <?php if ($user = kirby()->user()): ?>
+    <link rel="manifest" href="/manifest.json" />
+    <script type="module">
+      import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+      const el = document.createElement('pwa-update');
+      document.body.appendChild(el);
+    </script>
+  <?php endif; ?>
+  ...
+</head>
+``` 
+
+<info>
+The `JS` on https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate will check for `pwabuilder-sw.js` as mentioned above.  
+</info>
+
+<success>
+Congrats, you now have a PWA!
+</success>
+
+Reload your website and look at the URL bar for the installation icon.
+
+(image: kirby-pwa-prompt.png caption: Screenshot of PWA install prompt in Microsoft Edge browser. )
+
+After the installation is complete, the browser will close the current browser tab and welcome you with a new standalone application window.
+
+(image: kirby-pwa-fullscreen.png caption: Screenshot of PWA after successful installation.)
+
+Depending on your configured `"start_url"` within `manifest.json` the welcome page changes. Since `"start_url"` is set to the panel ("_/panel/site/_") the first screen when starting the PWA looks like the following:
+
+(image: kirby-pwa-start-url-panel.png caption: Screenshot of PWA after application start.)
+
+<info>
+Depending on your defined `"scope"`, URLs outside will be opened in a new browser tab! 
+</info>
+
+> That is so fancy, isn´t it!?
+
+You can check the (link: https://github.com/pwa-builder/pwabuilder-web/blob/V2/src/assets/next-steps.md text: GitHub repository of PWABuilder) for a summarized version of all required steps.
+
+
+### Backend (Kirby Panel)
+
+<alert>
+Follow only for internal testing. This part is just for demonstration purposes!
+</alert>
+
+To make a PWA installation only possible within the Panel, we need to customize the Panel with some JavaScript. To add (link: https://getkirby.com/docs/reference/system/options/panel#custom-panel-js text: Custom Panel JS) you need to add a `"panel"` configuration to your `config.php`.
+
+But first, we need to create a `JS` file (for instance `pwa.js`) that loads and links the required stuff to the panel `HTML` output as we did for the frontend inside `PHP`, but this time via `JS`!
+
+```JS "assets/js/pwa.js"
+// Link manifest.json
+var link = document.createElement('link');
+link.rel = 'manifest';
+link.href = '/manifest.json';
+document.head.appendChild(link);
+
+// Add PWA script (module)
+var script = document.createElement('script');
+script.type = 'module';
+script.innerHTML = 'import "https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate";';
+script.innerHTML += 'const el = document.createElement("pwa-update");';
+script.innerHTML += 'document.body.appendChild(el);';
+document.head.appendChild(script);
+```
+
+<info>
+The `JS` on https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate will check for `pwabuilder-sw.js` as already mentioned before.  
+</info>
+
+Following we need to load the `JS` inside the panel with a dedicated panel config entry:
+
+```PHP "site/config.php"
+  'panel' =>[
+    'js' => 'assets/js/pwa.js'
+  ],
+```
+
+Unfortunately, Kirby´s Panel holds an HTML (link: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base text: <base>-tag).
+
+```HTML
+<base href='/panel/' />
+```` 
+
+This leads to a wrong path for the external script request. In this case, the external `JS` (see infobox above) will search for `pwabuilder-sw.js`, but since the base tag is present the call will go to **panel/pwabuilder-sw.js**. That is the reason why the installation of the Service Workers fails and the Kirby Panel shows an error message.
+
+<info>
+In case you have an idea how to solve this issue, please feel free to start a new topic on the (link: https://forum.getkirby.com/ text: forum).
+</info>
+
+> Maybe the PWA installation for Kirby´s Panel will be default in a future release!?
+
+----
+
+Description: Make a Kirby website or the Panel itself a basic progessive web application that can be installed via the browser.
+
+----
+
+Authors: - authors/manuel-steinberg
