@@ -172,3 +172,82 @@ Property access (`parent.property`) will behave like this:
 - If the parent is an array, the respective array element will be returned.
 - Calling a property without any arguments (`parent.property()`) is equivalent to accessing the property.
 
+## Access different data types
+### Array items
+
+```yaml
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query:
+    fetch: site.taxonomy.split
+    text: "{{ arrayItem.value.upper }}"
+    value: "{{ arrayItem.value.slug }}"
+```
+
+### Structure items
+
+```yaml
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query:
+    fetch: site.contactoptions.toStructure
+    text: "{{ structureItem.name }}"
+    value: "{{ structureItem.twitter }}"
+```
+
+### Pages
+
+```yaml
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query:
+    fetch: site.children.published
+    text: "{{ page.year }} - {{ page.title.upper }}"
+    value: "{{ page.slug }}"
+```
+
+
+### Files
+
+```yaml
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query:
+    fetch: site.files
+    text: "{{ file.name }}"
+    value: "{{ file.filename }}"
+```
+
+### Users
+
+```yaml
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query:
+    fetch: kirby.users.filterBy("role", "client")
+    text: "{{ user.email }}"
+    value: "{{ user.id }}"
+```
+
+### Blocks
+
+```yaml
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query:
+    fetch: page.text.toBlocks.filterBy("type", "heading")
+    text: "{{ block.text }}"
+    value: "{{ block.id }}"
+```
