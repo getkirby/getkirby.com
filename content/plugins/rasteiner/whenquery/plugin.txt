@@ -1,0 +1,14 @@
+Title: WhenQuery
+
+----
+
+Repository: https://github.com/rasteiner/k3-whenquery
+
+----
+
+Category: panel
+
+----
+
+Description: Conditionally show and hide your fields and sections by evaluating a query expression.
+
