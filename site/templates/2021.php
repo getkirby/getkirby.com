@@ -16,6 +16,7 @@
 }
 .roadmap li {
   position: relative;
+  padding-right: 1rem;
 }
 .roadmap li::after {
   width: 2px;
@@ -39,6 +40,59 @@
   <h1 class="h1">The state of Kirby</h1>
   <h2 class="h1 color-gray-400">December 2021</h2>
 </header>
+
+<section class="mb-24">
+  <h2 class="h3 mb-12">9.99 years and counting …</h2>
+  <div class="">
+    <ul class="roadmap flex justify-between mb-6">
+      <li style="flex-grow: 1">
+        <p class="font-bold">beta</p>
+        <p class="font-mono text-xs">early '11</p>
+      </li>
+      <li style="flex-grow: 2">
+        <p class="font-bold">1.0</p>
+        <p class="font-mono text-xs">Jan '12</p>
+      </li>
+      <li style="flex-grow: 5">
+        <p class="font-bold">2.0</p>
+        <p class="font-mono text-xs">Mid '14</p>
+      </li>
+      <li style="flex-grow: 1">
+        <p class="font-bold">3.0</p>
+        <p class="font-mono text-xs">Jan '19</p>
+      </li>
+      <!-- <li style="flex-grow: 0.25">
+        <p class="font-bold">3.1</p>
+        <p class="font-mono text-xs">Mar '19</p>
+      </li>
+      <li style="flex-grow: 0.5">
+        <p class="font-bold">3.2</p>
+        <p class="font-mono text-xs">Jun '19</p>
+      </li>
+      <li style="flex-grow: 0.5">
+        <p class="font-bold">3.3</p>
+        <p class="font-mono text-xs">Nov '19</p>
+      </li>
+      <li style="flex-grow: 0.5">
+        <p class="font-bold">3.4</p>
+        <p class="font-mono text-xs">Jul '20</p>
+      </li>
+      <li style="flex-grow: 1">
+        <p class="font-bold">3.5</p>
+        <p class="font-mono text-xs">Dec '20</p>
+      </li> -->
+      <li style="flex-grow: 0.3">
+        <p class="font-bold">3.6</p>
+        <p class="font-mono text-xs">Nov '21</p>
+      </li>
+      <li>
+        <p class="font-bold">10th anniversary 🎉</p>
+        <p class="font-mono text-xs">Jan '22</p>
+      </li>
+      <li></li>
+    </ul>
+  </div>
+</section>
 
 <section class="mb-24">
   <h2 class="h3 mb-6">Community</h2>
