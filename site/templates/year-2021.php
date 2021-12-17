@@ -138,7 +138,7 @@
 
 <section class="mb-24">
   <h2 class="h3 mb-6"><?= $issues->count() ?> new Kosmos issues in 2021</h2>
-  <div class="highlight bg-dark columns text-sm" style="--columns: 5; --gap: var(--spacing-6)">
+  <div class="highlight bg-dark columns text-sm" style="--columns: 4; --gap: var(--spacing-6)">
     <?php foreach ($issues as $issue): ?>
     <?php snippet('templates/kosmos/issue', compact('issue')) ?>
     <?php endforeach ?>

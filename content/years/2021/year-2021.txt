@@ -2,6 +2,10 @@ Title: 2021
 
 ----
 
+Plugins: 14
+
+----
+
 Contributors:
 
 - bastianallgeier
