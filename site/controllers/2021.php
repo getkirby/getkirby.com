@@ -9,10 +9,12 @@ return function ($page) {
   $plugins      = page('plugins')->children()->children();
   $plugins2021  = Data::read($page->root() . '/plugins-2021.yaml');
   $plugins2021  = $plugins->find($plugins2021)->sortBy('title', 'asc');
+  $authors      = page('authors')->children();
 
   sort($contributors);
 
   return [
+    'authors'      => $authors,
     'contributors' => $contributors,
     'issues'       => $issues,
     'plugins'      => $plugins,

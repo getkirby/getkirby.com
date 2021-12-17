@@ -41,28 +41,32 @@
 </header>
 
 <section class="mb-24">
-  <h2 class="h3 mb-6">The Kirby community</h2>
+  <h2 class="h3 mb-6">Community</h2>
 
-  <ul class="columns" style="--columns-sm: 4; --columns: 5; --gap: var(--spacing-1)">
+  <ul class="columns" style="--columns-sm: 4; --columns: 4; --gap: var(--spacing-1)">
     <li class="bg-white p-6">
-      <span class="block text-2xl" style="color: var(--color-aqua-600)">3,888</span>
-      <span class="font-mono text-xs"> forum users</span>
+      <a class="block" href="https://forum.getkirby.com">
+        <span class="block text-2xl" style="color: var(--color-aqua-500)">3,888</span>
+        <span class="font-mono text-xs"> forum users</span>
+      </a>
     </li>
     <li class="bg-white p-6">
-      <span class="block text-2xl" style="color: var(--color-purple-500)">1,312</span>
-      <span class="font-mono text-xs"> discord users</span>
+      <a class="block" href="https://chat.getkirby.com">
+        <span class="block text-2xl" style="color: var(--color-purple-500)">1,312</span>
+        <span class="font-mono text-xs"> discord users</span>
+      </a>
     </li>
     <li class="bg-white p-6">
-      <span class="block text-2xl" style="color: var(--color-blue-500)">5,827</span>
-      <span class="font-mono text-xs"> Twitter followers</span>
+      <a class="block" href="https://twitter.com/getkirby">
+        <span class="block text-2xl" style="color: var(--color-blue-500)">5,827</span>
+        <span class="font-mono text-xs"> Twitter followers</span>
+      </a>
     </li>
     <li class="bg-white p-6">
-      <span class="block text-2xl" style="color: var(--color-red-500)">1,100</span>
-      <span class="font-mono text-xs"> Youtube subscribers</span>
-    </li>
-    <li class="bg-white p-6">
-      <span class="block text-2xl" style="color: var(--color-green-700)">30,350</span>
-      <span class="font-mono text-xs"> Created demos</span>
+      <a class="block" href="https://youtube.com/kirbycasts">
+        <span class="block text-2xl" style="color: var(--color-red-500)">1,100</span>
+        <span class="font-mono text-xs"> Youtube subscribers</span>
+      </a>
     </li>
   </ul>
 </section>
@@ -86,6 +90,12 @@
     <li class="bg-light p-6">
       <span class="block text-2xl">20</span>
       <span class="font-mono text-xs"> contributors</span>
+    </li>
+    <li class="bg-light p-6">
+      <a class="block" href="https://github.com/getkirby/kirby">
+        <span class="block text-2xl">612</span>
+        <span class="font-mono text-xs"> stars</span>
+      </a>
     </li>
   </ul>
 
@@ -166,6 +176,22 @@
     <?php foreach ($recipes as $recipe): ?>
     <li>
       <a class="block bg-white p-3 truncate" href="<?= $recipe->url() ?>">📔 <?= $recipe->title() ?></a>
+    </li>
+    <?php endforeach ?>
+  </ul>
+</section>
+
+<section class="mb-24">
+  <h2 class="h3 mb-6"><?= $authors->count() ?> cookbook authors</h2>
+  <ul class="columns text-sm" style="--columns: 4; --gap: var(--spacing-3)">
+    <?php foreach ($authors as $author): ?>
+    <li>
+      <a class="flex items-center" href="<?= $author->website() ?>">
+        <?php if ($image = $author->image()): ?>
+        <img src="<?= $image->crop(64)->url() ?>" class="bg-black mr-3" style="width: 2rem; --aspect-ratio: 1/1">
+        <?php endif ?>
+        <?= $author->title() ?>
+      </a>
     </li>
     <?php endforeach ?>
   </ul>
