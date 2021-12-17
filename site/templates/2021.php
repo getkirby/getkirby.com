@@ -57,36 +57,12 @@
         <p class="font-bold">2.0</p>
         <p class="font-mono text-xs">Mid '14</p>
       </li>
-      <li style="flex-grow: 1">
+      <li style="flex-grow: 3">
         <p class="font-bold">3.0</p>
         <p class="font-mono text-xs">Jan '19</p>
       </li>
-      <!-- <li style="flex-grow: 0.25">
-        <p class="font-bold">3.1</p>
-        <p class="font-mono text-xs">Mar '19</p>
-      </li>
-      <li style="flex-grow: 0.5">
-        <p class="font-bold">3.2</p>
-        <p class="font-mono text-xs">Jun '19</p>
-      </li>
-      <li style="flex-grow: 0.5">
-        <p class="font-bold">3.3</p>
-        <p class="font-mono text-xs">Nov '19</p>
-      </li>
-      <li style="flex-grow: 0.5">
-        <p class="font-bold">3.4</p>
-        <p class="font-mono text-xs">Jul '20</p>
-      </li>
-      <li style="flex-grow: 1">
-        <p class="font-bold">3.5</p>
-        <p class="font-mono text-xs">Dec '20</p>
-      </li> -->
-      <li style="flex-grow: 0.3">
-        <p class="font-bold">3.6</p>
-        <p class="font-mono text-xs">Nov '21</p>
-      </li>
       <li>
-        <p class="font-bold">10th anniversary 🎉</p>
+        <p class="font-bold" style="white-space: nowrap">10 years 🎉</p>
         <p class="font-mono text-xs">Jan '22</p>
       </li>
       <li></li>
@@ -97,7 +73,7 @@
 <section class="mb-24">
   <h2 class="h3 mb-6">Community</h2>
 
-  <ul class="columns" style="--columns-sm: 4; --columns: 4; --gap: var(--spacing-1)">
+  <ul class="columns" style="--columns-sm: 2; --columns-md: 2; --columns: 4; --gap: var(--spacing-1)">
     <li class="bg-white p-6">
       <a class="block" href="https://forum.getkirby.com">
         <span class="block text-2xl" style="color: var(--color-aqua-500)">3,888</span>
@@ -128,7 +104,7 @@
 <section class="mb-24">
   <h2 class="h3 mb-6"><?= count($releases) ?> new releases in 2021</h2>
 
-  <ul class="columns" style="--columns-sm: 4; --columns: 5; --gap: var(--spacing-1)">
+  <ul class="columns" style="--columns-sm: 2; --columns-md: 3; --columns: 5; --gap: var(--spacing-1)">
     <li class="bg-light p-6">
       <span class="block text-2xl">1,939</span>
       <span class="font-mono text-xs"> commits</span>
@@ -153,7 +129,7 @@
     </li>
   </ul>
 
-  <ul class="mb-6 columns font-mono text-sm" style="--columns: 5; --gap: var(--spacing-1)">
+  <ul class="mb-6 columns font-mono text-sm" style="--columns-sm: 2; --columns-md: 3; --columns: 5; --gap: var(--spacing-1)">
     <?php foreach ($releases as $release): ?>
     <li>
       <a class="block bg-white p-3" href="https://github.com/getkirby/kirby/releases/tag/<?= $release['name'] ?>">
@@ -166,7 +142,7 @@
 
 <section class="mb-24">
   <h2 class="h3 mb-6"><?= count($contributors) ?> contributors in 2021</h2>
-  <ul class="columns text-sm" style="--columns: 5; --gap: var(--spacing-3)">
+  <ul class="columns text-sm" style="--columns-sm: 2; --columns-md: 3; --columns: 5; --gap: var(--spacing-3)">
     <?php foreach ($contributors as $contributor): ?>
     <li>
       <a class="flex items-center" href="https://github.com/<?= $contributor ?>">
@@ -183,7 +159,7 @@
 <section class="mb-24">
   <h2 class="h3 mb-6">2 online events in 2021</h2>
 
-  <div class="columns bg-dark highlight color-white" style="--columns: 2; --gap: var(--spacing-12)">
+  <div class="columns bg-dark highlight color-white" style="--columns-sm: 1; --columns-md: 1; --columns: 2; --gap: var(--spacing-12)">
     <article class="bg-black">
       <figure class="video" style="--aspect-ratio: 16/9">
         <?= video('https://www.youtube.com/watch?v=QgCMc89rdNY', [
@@ -237,7 +213,7 @@
 
 <section class="mb-24">
   <h2 class="h3 mb-6"><?= $authors->count() ?> cookbook authors</h2>
-  <ul class="columns text-sm" style="--columns: 4; --gap: var(--spacing-3)">
+  <ul class="columns text-sm" style="--columns-sm: 2; --columns-md: 3; --columns: 4; --gap: var(--spacing-3)">
     <?php foreach ($authors as $author): ?>
     <li>
       <a class="flex items-center" href="<?= $author->website() ?>">
@@ -253,7 +229,7 @@
 
 <section class="mb-24">
   <h2 class="h3 mb-6"><?= $issues->count() ?> new Kosmos issues in 2021</h2>
-  <div class="highlight bg-dark columns text-sm" style="--columns: 4; --gap: var(--spacing-6)">
+  <div class="highlight bg-dark columns text-sm" style="--columns-sm: 1; --columns-md: 3; --columns: 4; --gap: var(--spacing-6)">
     <?php foreach ($issues as $issue): ?>
     <?php snippet('templates/kosmos/issue', compact('issue')) ?>
     <?php endforeach ?>
@@ -262,7 +238,7 @@
 
 <section class="mb-42">
   <h2 class="h3 mb-6"><?= $plugins2021->count() ?> new plugins in 2021</h2>
-  <ul class="columns" style="--columns: 4; --gap: var(--spacing-6)">
+  <ul class="columns" style="--columns-sm: 2; --columns-md: 2; --columns: 4; --gap: var(--spacing-6)">
     <?php foreach ($plugins2021 as $plugin): ?>
     <li>
       <a class="flex items-center" href="<?= $plugin->url() ?>">
