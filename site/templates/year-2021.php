@@ -1,5 +1,40 @@
 <?php layout() ?>
 
+<style>
+.roadmap {
+  position: relative;
+}
+.roadmap::after,
+.roadmap li::after {
+  position: absolute;
+  left: 1.5rem;
+  right: 0;
+  bottom: -.75rem;
+  content: "";
+  height: 2px;
+  background: var(--color-black);
+}
+.roadmap li {
+  position: relative;
+}
+.roadmap li::after {
+  width: 2px;
+  height: .75rem;
+  right: auto;
+}
+.roadmap li:last-child::after {
+  background: none;
+  left: auto;
+  right: 0;
+  width: auto;
+  height: auto;
+  bottom: calc(-.75rem - 5px);
+  border-top: 6px solid transparent;
+  border-left: 6px solid var(--color-black);
+  border-bottom: 6px solid transparent;
+}
+</style>
+
 <header class="mb-24">
   <h1 class="h1">The state of Kirby</h1>
   <h2 class="h1 color-gray-400">December 2021</h2>
@@ -145,7 +180,30 @@
   </div>
 </section>
 
+<section class="mb-42">
+  <h2 class="h3 mb-6"><?= $plugins2021->count() ?> new plugins in 2021</h2>
+  <ul class="columns" style="--columns: 4; --gap: var(--spacing-6)">
+    <?php foreach ($plugins2021 as $plugin): ?>
+    <li>
+      <a class="flex items-center" href="<?= $plugin->url() ?>">
+        <figure class="iconbox bg-black color-white mr-3">
+          <?= icon($plugin->icon()) ?>
+        </figure>
+        <div>
+          <h3 class="text-sm"><?= $plugin->title() ?></h3>
+          <p class="block font-mono text-xs color-gray-500">
+            by <span class="color-black"><?= $plugin->parent()->title() ?></span>
+          </p>
+        </div>
+      </a>
+    </li>
+    <?php endforeach ?>
+  </ul>
+</section>
+
 <footer class="h3 max-w-xl">
   Thank you for a very successful year 💛
+  <br><br>
+  The Kirby Team
 </footer>
 
