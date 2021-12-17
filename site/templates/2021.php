@@ -245,10 +245,10 @@
         <figure class="iconbox bg-black color-white mr-3">
           <?= icon($plugin->icon()) ?>
         </figure>
-        <div>
-          <h3 class="text-sm"><?= $plugin->title() ?></h3>
-          <p class="block font-mono text-xs color-gray-500">
-            by <span class="color-black"><?= $plugin->parent()->title() ?></span>
+        <div class="truncate">
+          <h3 class="text-sm truncate"><?= $plugin->title() ?></h3>
+          <p class="block font-mono text-xs color-gray-500" style="white-space: nowrap">
+            by <span class="color-black inline-flex truncate"><?= $plugin->parent()->title() ?></span>
           </p>
         </div>
       </a>
@@ -258,8 +258,8 @@
 </section>
 
 <footer class="h3 max-w-xl">
-  Thank you for a very successful year 💛
-  <br><br>
+  Thank you for your support 💛<br>
+  <br>
   The Kirby Team
 </footer>
 
