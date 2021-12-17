@@ -26,7 +26,7 @@ export default {
   methods: {
     upload() {
       this.$refs.upload.open({
-        url: window.panel.api + "/my-plugin/upload"
+        url: this.$urls.api + "/my-plugin/upload"
       });
     },
     onSuccess() {
@@ -49,7 +49,7 @@ export default {
   methods: {
     upload() {
       this.$refs.upload.open({
-        url: window.panel.api + "/site/files"
+        url: this.$urls.api + "/site/files"
       });
     }
   }
@@ -67,7 +67,7 @@ export default {
   methods: {
     upload() {
       this.$refs.upload.open({
-        url: window.panel.api + "/pages/projects+project-a/files"
+        url: this.$urls.api + "/pages/projects+project-a/files"
       });
     }
   }
@@ -85,7 +85,7 @@ export default {
   methods: {
     upload() {
       this.$refs.upload.open({
-        url: window.panel.api + "/" + this.$api.pages.url("projects/project-a", "files")
+        url: this.$urls.api + "/" + this.$api.pages.url("projects/project-a", "files")
       });
     }
   }
@@ -109,7 +109,7 @@ export default {
       const userId = "5GjjUzXU";
 
       this.$refs.upload.open({
-        url: window.panel.api + "/users/" + userId + "/files"
+        url: this.$urls.api + "/users/" + userId + "/files"
       });
     }
   }
@@ -127,7 +127,7 @@ export default {
       const userId = "5GjjUzXU";
 
       this.$refs.upload.open({
-        url: window.panel.api + "/" + this.$api.users.url(userId, "files")
+        url: this.$urls.api + "/" + this.$api.users.url(userId, "files")
       });
     }
   }
@@ -235,7 +235,7 @@ export default {
   methods: {
     upload() {
       this.$refs.upload.open({
-        url: window.panel.api + "/your-name/uploader",
+        url: this.$urls.api + "/your-name/uploader",
         accept: "text/csv",
         multiple: false
       });
@@ -270,7 +270,7 @@ export default {
   methods: {
     upload() {
       this.$refs.upload.drop(files, {
-        url: window.panel.api + "/your-name/uploader",
+        url: this.$urls.api + "/your-name/uploader",
         accept: "text/csv",
         multiple: false
       });
