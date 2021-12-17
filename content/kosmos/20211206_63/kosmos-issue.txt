@@ -107,3 +107,4 @@ With [Streamhut](https://streamhut.io/) you can easily share your terminal with 
 Interesting read [on the rise and fall of popular frameworks](https://stitcher.io/blog/birth-and-death-of-a-framework).
 
 When [consistent design](https://uxdesign.cc/be-usable-not-consistent-not-uniform-9ac72374cf93) becomes a usability issue.
+
