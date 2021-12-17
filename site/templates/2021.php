@@ -73,29 +73,35 @@
 <section class="mb-24">
   <h2 class="h3 mb-6">Community</h2>
 
-  <ul class="columns" style="--columns-sm: 2; --columns-md: 2; --columns: 4; --gap: var(--spacing-1)">
-    <li class="bg-white p-6">
+  <ul class="columns color-white mb-1" style="--columns-sm: 2; --columns-md: 3; --columns: 5; --gap: var(--spacing-1)">
+    <li class="bg-dark p-6">
       <a class="block" href="https://forum.getkirby.com">
-        <span class="block text-2xl" style="color: var(--color-aqua-500)">3,888</span>
-        <span class="font-mono text-xs"> forum users</span>
+        <span class="block text-2xl" style="color: var(--color-yellow-500)">3,888</span>
+        <span class="font-mono text-xs"> Forum users</span>
       </a>
     </li>
-    <li class="bg-white p-6">
+    <li class="bg-dark p-6">
       <a class="block" href="https://chat.getkirby.com">
-        <span class="block text-2xl" style="color: var(--color-purple-500)">1,312</span>
-        <span class="font-mono text-xs"> discord users</span>
+        <span class="block text-2xl" style="color: var(--color-purple-400)">1,312</span>
+        <span class="font-mono text-xs"> Discord users</span>
       </a>
     </li>
-    <li class="bg-white p-6">
+    <li class="bg-dark p-6">
       <a class="block" href="https://twitter.com/getkirby">
-        <span class="block text-2xl" style="color: var(--color-blue-500)">5,827</span>
+        <span class="block text-2xl" style="color: var(--color-blue-400)">5,827</span>
         <span class="font-mono text-xs"> Twitter followers</span>
       </a>
     </li>
-    <li class="bg-white p-6">
+    <li class="bg-dark p-6">
       <a class="block" href="https://youtube.com/kirbycasts">
         <span class="block text-2xl" style="color: var(--color-red-500)">1,100</span>
         <span class="font-mono text-xs"> Youtube subscribers</span>
+      </a>
+    </li>
+    <li class="bg-dark p-6">
+      <a class="block" href="/kosmos">
+        <span class="block text-2xl" style="color: var(--color-green-400)">3,400</span>
+        <span class="font-mono text-xs"> Newsletter recipients</span>
       </a>
     </li>
   </ul>
