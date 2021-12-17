@@ -18,7 +18,7 @@ export default {
   methods: {
     upload() {
       this.$refs.upload.open({
-        url: window.panel.api + "/my-plugin/upload",
+        url: this.$urls.api + "/my-plugin/upload",
         accept: "image/*",
         multiple: false
       });
