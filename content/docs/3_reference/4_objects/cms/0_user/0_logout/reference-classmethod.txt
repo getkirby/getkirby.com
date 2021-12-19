@@ -9,7 +9,8 @@ if($user = $kirby->user()) {
   $user->logout();
 }
 
-go('panel/login');
+// do something, e.g. redirect to a custom login page
+go('login');
 
 ?>
 ```
