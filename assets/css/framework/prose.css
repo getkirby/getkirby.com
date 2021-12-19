@@ -208,7 +208,9 @@
 .prose h4,
 .prose h5,
 .prose h6,
-.prose .box {
+.prose .box,
+.prose .code,
+.prose .filesystem {
   max-width: 42rem;
 }
 
