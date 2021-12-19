@@ -9,7 +9,7 @@ if($user = $kirby->user()) {
   $user->logout();
 }
 
-go('login');
+go('panel/login');
 
 ?>
 ```
