@@ -37,8 +37,6 @@
 - plugins/cre8ivclick/sitemapper
 - >
   plugins/d4l-data4life/static-site-generator
-- >
-  plugins/danielrivers/timeline-editor-block
 - plugins/datamints/kirby-plugin_ldap
 - plugins/diesdasdigital/imgix
 - plugins/diesdasdigital/metaknight
