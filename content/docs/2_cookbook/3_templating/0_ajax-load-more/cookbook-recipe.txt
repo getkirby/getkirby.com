@@ -70,7 +70,7 @@ As a first step, let's move the `<li>` element from the template into a separate
 
 <ul class="grid" style="--gutter: 1.5rem">
   <?php foreach ($page->children()->listed() as $project): ?>
-    <?php snippet('project', ['project' => 'project']) ?>
+    <?php snippet('project', ['project' => $project]) ?>
   <?php endforeach ?>
 </ul>
 
