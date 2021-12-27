@@ -8,7 +8,7 @@ Text:
 Kirby::plugin('my/urls', [
   'components' => [
     'url' => function (Kirby $kirby, string $path, array $options = []): string {
-        $original = $kirby->nativeComponent('url')
+        $original = $kirby->nativeComponent('url');
         return $original($kirby, $path, $options);
     }
   ]
