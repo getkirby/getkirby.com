@@ -45,7 +45,7 @@ Open the new template file and add the following code:
 ```php "/site/templates/blog.json.php"
 <?php
 
-$data = $pages->find('blog')->children()->published()->flip();
+$data = $pages->find('blog')->children()->listed()->flip();
 $json = [];
 
 foreach($data as $article) {
@@ -67,10 +67,10 @@ It might look a bit frightening first, but let me explain this a bit more.
 ### 1. Fetching the data
 
 ```php
-$data = $pages->find('blog')->children()->published()->flip();
+$data = $pages->find('blog')->children()->listed()->flip();
 ```
 
-What we want is to fetch the same list of articles, which we use to build our regular blog template. First we are going to find the blog page -> then we select all children -> make sure to get the published children only -> and finally flip them to get the latest article first.
+What we want is to fetch the same list of articles, which we use to build our regular blog template. First we are going to find the blog page -> then we select all children -> make sure to get the listed children only -> and finally flip them to get the latest article first.
 
 ### 2. Building the result
 
@@ -178,7 +178,7 @@ Depending on the size of your blog, you migh want to add pagination to your JSON
 ```php "/site/templates/blog.json.php"
 <?php
 
-$data = $pages->find('blog')->children()->published()->paginate(10);
+$data = $pages->find('blog')->children()->listed()->paginate(10);
 $json = [];
 
 $json['data']  = [];
@@ -218,7 +218,7 @@ Here is the entire code for this example:
 ```php "/site/templates/blog.json.php"
 <?php
 
-$data = $pages->find('blog')->children()->published()->paginate(10);
+$data = $pages->find('blog')->children()->listed()->paginate(10);
 $json = [];
 
 $json['data']  = [];
