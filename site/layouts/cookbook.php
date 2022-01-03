@@ -8,7 +8,7 @@
   <main id="main" class="main">
     <div class="container">
       <div class="with-sidebar">
-        <article class="mb-24">
+        <article class="mb-24 w-100%">
           <?php slot('hero') ?>
           <header class="mb-12">
             <h1 class="h1"><?php slot('h1') ?><?php endslot() ?></h1>
