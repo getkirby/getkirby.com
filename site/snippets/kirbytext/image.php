@@ -1,6 +1,7 @@
 <?php
 
 extract([
+  'class'   => $class ?? null,
   'file'    => $file ?? null,
   'link'    => $link ?? null,
   'caption' => $caption ?? null
@@ -15,7 +16,6 @@ echo Html::figure(
           'src' => [
             'width' => 960
           ],
-          'srcset' => [320, 640, 960, 1280],
         ])
       ],
       [
@@ -25,6 +25,6 @@ echo Html::figure(
   ],
   $caption,
   [
-    'class' => 'image'
+    'class' => trim('image ' . $class)
   ]
 );
