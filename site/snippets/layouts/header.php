@@ -1,16 +1,18 @@
+<?php if (1==2): ?>
 <div class="mb-6">
   <div class="container">
     <a href="/releases/3.6" class="font-bold py-3 block flex justify-between" style="border-bottom: 2px solid var(--color-black)">
-      <span><span class="mr-3">🚀</span> Kirby 3.6 is here!</span>
+      <span><span class="mr-3">🎉</span> 10 years since 1.0!</span>
 
-      <?php if ($page->is('releases/3-6')) : ?>
-      <span>Here’s what’s new ↓</span>
+      <?php if ($page->is('10')) : ?>
+        <span>Celebrate with us ↓</span>
       <?php else : ?>
-      <span>See what’s new &rarr;</span>
+        <span>Celebrate with us &rarr;</span>
       <?php endif ?>
     </a>
   </div>
 </div>
+<?php endif ?>
 
 <header class="header mb-24">
   <?php snippet('layouts/skipper') ?>
