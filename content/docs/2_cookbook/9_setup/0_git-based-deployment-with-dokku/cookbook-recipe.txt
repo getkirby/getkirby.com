@@ -72,7 +72,7 @@ cat ~/.ssh/authorized_keys | dokku ssh-keys:add admin
 dokku domains:set-global replace.with.your.domain
 ```
 
-Pay attention to the domain name on the last line. For example if your domain is `example.com`, you would want to run `dokku domains:set-global example.com`
+Pay attention to the domain name on the last line. For example if your domain is `example.domain`, you would want to run `dokku domains:set-global example.domain`
 
 ## Create Dokku apps
 
