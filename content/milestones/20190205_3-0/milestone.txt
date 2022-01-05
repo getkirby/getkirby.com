@@ -1,0 +1,3 @@
+Title: 3.0
+----
+Link: https://getkirby.com/releases/3.0

@@ -1,0 +1,5 @@
+Title: 3.3
+----
+Subtitle: Trioceros
+----
+Link: https://github.com/getkirby/kirby/releases/tag/3.3.0

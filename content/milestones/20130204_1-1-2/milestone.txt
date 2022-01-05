@@ -1,0 +1,3 @@
+Title: 1.1.2 - Last stable v1 release
+----
+Link: https://github.com/getkirby-v1/starterkit/releases/tag/1.1.2
