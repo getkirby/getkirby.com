@@ -1,0 +1,3 @@
+Title: New website
+----
+Link: https://getkirby.com
