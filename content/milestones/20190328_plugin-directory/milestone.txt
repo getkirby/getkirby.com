@@ -1,0 +1,5 @@
+Title: New plugin directory
+----
+Link: https://getkirby.com/plugins
+----
+Tweet: https://twitter.com/getkirby/status/1111296996072214533?s=20
