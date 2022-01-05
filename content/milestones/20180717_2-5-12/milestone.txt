@@ -1,0 +1,3 @@
+Title: 2.5.12 - Last v2 release before v3
+----
+Link: https://github.com/getkirby-v2/kirby/releases/tag/2.5.12
