@@ -2,7 +2,7 @@ Title: Programmable blueprints
 
 ----
 
-Published: 2021-12-04
+Published: 2022-01-06
 
 ----
 
@@ -23,9 +23,14 @@ In a Kirby plugin, we can (link: docs/reference/plugins/extensions/blueprints te
 
 This approach works for complete page/user/file blueprints as well as for partial blueprints like tabs, fieldgroups etc. and opens up many new possibilities.
 
+<warning>
+Dynamic blueprints can be risky if they handle unvalidated or untrusted user data. This recipe assumes that all handled content is trusted.
+</warning>
+
 <info>
 We don't have access to the current page object in the PHP blueprint files, and therefore have to hard-code the pages we want to fetch via PHP. So the possibilities we have with this type of setup are not endless but useful in certain situations.
 </info>
+
 
 ## Prerequisites
 
@@ -329,6 +334,85 @@ fields:
 
 (image: dynamic-fields.png)
 
+## Multilang field options
+
+When you use language keys in your blueprints to (link: https://getkirby.com/docs/guide/blueprints/translations text: translate field labels etc.), these translations are shown based on the selected user language, not based on the currently selected content language.
+
+This example from the docs…
+
+```yaml
+fields:
+  category:
+      label:
+        en: Category
+        de: Kategorie
+      type: select
+      options:
+        architecture:
+          en: Architecture
+          de: Architektur
+        photography:
+          en: Photography
+          de: Fotografie
+        design:
+          en: Design
+          de: Design
+```
+
+will therefore not switch to the German translation when we switch the content language to German, but when a user selects German as their interface language.
+
+But often, users expect to see the translated option labels when they switch the content language. So, how can we achieve this?
+
+Let's register a new field blueprint in our `index.php`:
+
+```php "/site/plugins/programmable-blueprints/index.php"
+
+Kirby::plugin('cookbook/programmable-blueprints', [
+    'blueprints' => [
+        'pages/notes'        => function($kirby) {
+            return include __DIR__ . '/blueprints/pages/notes.php';
+        },
+        'fields/multifields' => function($kirby) {
+            return include __DIR__ . '/blueprints/fields/multifields.php';
+        },
+        'fields/category' => function($kirby) {
+            return include __DIR__ . '/blueprints/fields/category.php';
+        },
+
+    ],
+]);
+
+```
+
+Then we create a new file `category.php` in the corresponding folder with the following code:
+
+```php "/site/plugins/programmable-blueprints/blueprints/fields/category.php"
+<?php
+
+use Kirby\Toolkit\I18n;
+
+return [
+    'label' => [
+      'en' => 'Category,
+      'de' => 'Kategorie'
+    ],
+    'options' => [
+      'architecture' => I18n::translate('architecture', null, kirby()->language()->code()),
+      'photography'  => I18n::translate('photography', null, kirby()->language()->code()),
+      'design'       => I18n::translate('design', null, kirby()->language()->code())
+    ]
+    'type' => 'select',
+];
+```
+
+In our page blueprint, we can now replace the category field definition:
+
+```yaml
+fields:
+  category:
+    extends: fields/category
+```
+
 ## Assigning filtered blueprints to sections
 
 When you want to assign allowed templates to a pages section, you have to list them out one by one. Not with our programmatic approach.
@@ -344,6 +428,9 @@ Kirby::plugin('cookbook/programmable-blueprints', [
         },
         'fields/multifields' => function($kirby) {
             return include __DIR__ . '/blueprints/fields/multifields.php';
+        },
+        'fields/categories' => function($kirby) {
+            return include __DIR__ . '/blueprints/fields/categories.php';
         },
         'sections/notes'      => function($kirby) {
             return include __DIR__ . '/blueprints/sections/notes.php';
@@ -435,6 +522,9 @@ Kirby::plugin('cookbook/programmable-blueprints', [
         },
         'fields/multifields' => function($kirby) {
             return include __DIR__ . '/blueprints/fields/multifields.php';
+        },
+        'fields/categories' => function($kirby) {
+            return include __DIR__ . '/blueprints/fields/categories.php';
         },
         'sections/notes'      => function($kirby) {
             return include __DIR__ . '/blueprints/sections/notes.php';
