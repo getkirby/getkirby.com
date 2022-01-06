@@ -117,19 +117,11 @@ return [
         [
             'pattern' => 'category-options/(:any)',
             'action' => function($lang) {
-                $categories = [
-                    'en' => [
-                        'architecture' => I18n::translate('architecture', null, $lang),
-                        'photography'  => I18n::translate('photography', null, $lang),
-                        'design'       => I18n::translate('design', null, $lang)
-                    ],
-                    'de' => [
-                        'architecture' => I18n::translate('architecture', null, $lang),
-                        'photography'  => I18n::translate('photography', null, $lang),
-                        'design'       => I18n::translate('design', null, $lang)
-                    ],
+                return [
+                    'architecture' => I18n::translate('architecture', null, $lang),
+                    'photography'  => I18n::translate('photography', null, $lang),
+                    'design'       => I18n::translate('design', null, $lang)
                 ];
-                return $categories[$lang] ?? [];
             }
         ]
     ],
