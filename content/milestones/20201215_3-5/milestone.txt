@@ -1,3 +1,0 @@
-Title: 3.5
-----
-Link: https://getkirby.com/releases/3.5

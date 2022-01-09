@@ -36,12 +36,14 @@ $tags['image'] = [
         'caption',
         'link',
         'title',
+        'class'
     ],
     'html' => function ($tag) {
         if ($file = $tag->file($tag->value)) {
             return snippet('kirbytext/image', [
-                'file' => $file,
-                'link' => empty($tag->link) ? null : ($tag->link === 'self' ? $file->url() : $tag->link),
+                'file'    => $file,
+                'class'   => $tag->class,
+                'link'    => empty($tag->link) ? null : ($tag->link === 'self' ? $file->url() : $tag->link),
                 'caption' => $tag->caption ?? $file->caption()->value()
             ], true);
         }

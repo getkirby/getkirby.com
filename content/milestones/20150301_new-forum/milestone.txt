@@ -1,3 +1,0 @@
-Title: New Discourse Forum
-----
-Link: https://forum.getkirby.com

@@ -1,3 +1,0 @@
-Title: 2.5
-----
-Link: https://github.com/getkirby-v2/kirby/releases/tag/2.5.0
