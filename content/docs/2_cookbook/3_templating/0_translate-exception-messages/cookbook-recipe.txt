@@ -1,0 +1,90 @@
+Title: Translate exception messages in frontend
+
+----
+
+Description: Translate Kirby's exception messages on the frontend in single language sites
+
+----
+
+Published: 2022-01-10
+
+----
+
+Authors:
+- authors/sonja-broda
+
+----
+
+Text:
+
+When you have use cases like creating pages or users from the frontend programmatically, you might run into the issue that exceptions messages are always output in English in a single language site, even though Kirby provides translations for these messages.
+
+A typical simple example could look like this:
+
+```php
+<?php
+
+$kirby->impersonate('kirby');
+
+try {
+  $newPage = page('blog')->createChild([
+    'slug'     => Str::slug( 'My awesome post' ),
+    'template' => 'post',
+    'content'  => [
+      'title' => 'My awesome post',
+      'text'  => 'Some content here'
+    ],
+
+  ]);
+} catch (Exception $e) {
+  echo $e->getMessage();
+}
+```
+
+We try to create a new blog article and echo the error message in case the action fails, for example, because a page with the given slug already exists: "A page draft with the URL appendix "my-awesome-post" already exists"
+
+One way to solve this problem is to call the `I18::template()` method with the desired language code:
+
+```php
+$kirby->impersonate('kirby');
+
+try {
+  // …
+} catch (Exception $e) {
+   echo I18n::template($e->getKey(), null, $e->getData(), 'de' );
+}
+```
+
+This is totalle fine for a single message. Alternatively, you can set the `I18n::$locale` property depending on context in your controller, template etc.:
+
+```php
+Kirby\Toolkit\I18n::$locale = 'de';
+
+$kirby->impersonate('kirby');
+
+try {
+  // …
+} catch (Exception $e) {
+   echo $e->getMessage();
+}
+```
+
+This will now output the exception message in the given language if it exists, or fall back to English if it doesn't.
+
+To make these code snippets more versatile, you can replace the hard-coded language string with the locale option set in your `config.php`:
+
+```php "/site/config/config.php
+<?php
+
+return [
+    // other settings
+    'locale' => 'de',
+];
+```
+
+Then use this option in your code:
+
+```php
+Kirby\Toolkit\I18n::$locale = option('locale');
+```
+
