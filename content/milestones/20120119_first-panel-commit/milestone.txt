@@ -1,3 +1,0 @@
-Title: First Panel Commit
-----
-Link: https://github.com/getkirby-v1/panel/commit/171303d735b079b838e1065885cfb8fee3d35ee7

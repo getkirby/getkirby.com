@@ -1,0 +1,17 @@
+Title: 2021
+----
+Text:
+
+## New Website
+
+(image: v3-website-2.png caption: It was time for another redesign of getkirby.com)
+
+## 1000
+
+✅ 1000 PRs
+✅ 1000 Youtube Subscribers
+✅ 1000 Discord Users
+
+## 2021 in numbers
+
+(image: state-of-kirby.png link: 2021 caption: Our first wrap-up post in 10 years. Should keep those coming.)

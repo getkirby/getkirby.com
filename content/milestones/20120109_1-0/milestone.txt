@@ -1,3 +1,0 @@
-Title: 1.0
-----
-Link: https://github.com/getkirby-v1/starterkit/commit/4a4aefe5ddc3a32bb8c22d94822a501fd8ba6535

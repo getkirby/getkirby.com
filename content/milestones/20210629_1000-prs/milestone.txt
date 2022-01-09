@@ -1,3 +1,0 @@
-Title: 1000 PRs
-----
-Link: https://github.com/getkirby/kirby

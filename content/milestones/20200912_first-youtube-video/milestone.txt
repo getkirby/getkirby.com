@@ -1,5 +1,0 @@
-Title: First Youtube video
-----
-Subtitle: How to install Kirby in 5 minutes
-----
-Link: https://www.youtube.com/watch?v=EDVYjxWMecc
