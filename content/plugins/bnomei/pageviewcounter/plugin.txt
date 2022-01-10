@@ -1,0 +1,13 @@
+Title: Pageview Counter
+
+----
+
+Repository: https://github.com/bnomei/kirby3-pageviewcounter
+
+----
+
+Category: analytics
+
+----
+
+Description: Track Page view count and last visited timestamp

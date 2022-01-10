@@ -19,11 +19,11 @@
         <span class="font-mono text-xs"> sites</span>
       </li>
       <li>
-        <span class="block text-2xl">4k+</span>
+        <span class="block text-2xl">3800+</span>
         <span class="font-mono text-xs"> forum users</span>
       </li>
       <li>
-        <span class="block text-2xl">1000+</span>
+        <span class="block text-2xl">1300+</span>
         <span class="font-mono text-xs"> discord users</span>
       </li>
     </ul>

@@ -8,21 +8,19 @@ name: Compress images
 on:
   pull_request:
     paths:
-      - '**.jpg'
-      - '**.jpeg'
-      - '**.png'
-      - '**.webp'
-      - '!kirby/**'
+      - "**.jpg"
+      - "**.jpeg"
+      - "**.png"
+      - "!kirby/**"
   push:
     branches:
       - main
     paths:
       - .github/workflows/images.yml
-      - '**.jpg'
-      - '**.jpeg'
-      - '**.png'
-      - '**.webp'
-      - '!kirby/**'
+      - "**.jpg"
+      - "**.jpeg"
+      - "**.png"
+      - "!kirby/**"
 
 jobs:
   build:
@@ -41,7 +39,7 @@ jobs:
         uses: calibreapp/image-actions@main
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          ignorePaths: 'kirby/**'
+          ignorePaths: "kirby/**,**.webp"
           # For non-Pull Requests, run in compressOnly mode and we'll PR after.
           compressOnly: ${{ github.event_name != 'pull_request' }}
       - name: Create Pull Request

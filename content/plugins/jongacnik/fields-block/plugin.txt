@@ -1,0 +1,13 @@
+Title: Fields Block
+
+----
+
+Repository: https://github.com/jongacnik/kirby-fields-block
+
+----
+
+Category: panel
+
+----
+
+Description: Kirby block preview plugin to directly render block fields, allowing for inline editing.

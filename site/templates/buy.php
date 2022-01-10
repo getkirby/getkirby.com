@@ -8,11 +8,10 @@
     </h1>
 
     <a href="https://pay.paddle.com/checkout/<?= $product ?>" target="_blank" title="Buy Kirby" class="pricing highlight bg-white shadow-xl">
-
       <?php if ($banner) : ?>
         <div>
           <p class="mb-6"><?= $banner->text() ?></p>
-          <del class="invisible sale h6 color-gray-700">€</del>
+          <del class="invisible sale h6 color-gray-700" style="color: var(--color-purple-600)">€</del>
         </div>
       <?php endif ?>
       <p class="h1 mb-3 price invisible"><span>€</span> per site</p>
@@ -56,20 +55,26 @@
     <h2 class="h2 mb-6">Volume discounts</h2>
     <div class="columns" style="--columns-md: 2; --columns: 4; --gap: var(--spacing-1)">
       <?php foreach ($discounts as $volume => $discount) : ?>
-        <a class="block" target="_blank" href="/buy/checkout/<?= $volume ?>" data-discount="<?= $discount ?>" data-volume="<?= $volume ?>">
-          <article class="p-12 bg-light text-center">
+        <a class="block p-12 bg-light text-center" target="_blank" href="/buy/checkout/<?= $volume ?>" data-discount="<?= $discount ?>" data-volume="<?= $volume ?>">
+          <article>
             <h3 class="mb-3 font-mono text-sm"><?= $volume ?> licenses</h3>
+            <?php if ($banner): ?>
+              <del class="invisible discounted-list-price h6" style="color: var(--color-purple-600)">€</del>
+            <?php endif ?>
             <p class="h2 mb-6 discounted-price">&nbsp;</p>
-            <p class="btn btn--outlined font-bold">
+            <p class="btn btn--filled font-bold">
               <?= icon('cart') ?>
-              Save <?= $discount ?>%
+              Save <?= $discount ?>% on top!
             </p>
           </article>
         </a>
       <?php endforeach ?>
-      <a class="block" href="mailto:support@getkirby.com">
-        <article class="p-12 bg-light text-center">
+      <a class="block p-12 bg-light text-center" href="mailto:support@getkirby.com">
+        <article>
           <h3 class="mb-3 font-mono text-sm">Custom packages</h3>
+          <?php if ($banner): ?>
+            <span class="block">&nbsp;</span>
+          <?php endif ?>
           <p class="h2 mb-6 discounted-price">Contact us</p>
           <p class="btn btn--outlined font-bold">
             <?= icon('user') ?>
@@ -132,11 +137,11 @@
 
 <script type="text/javascript">
   function paddle_price(data) {
-    const product      = data.response.products[0];
-    const currency     = product.currency;
+    const product = data.response.products[0];
+    const currency = product.currency;
     const currentPrice = product.price.net;
-    const listPrice    = product.list_price.net;
-    const isSale       = currentPrice !== listPrice;
+    const listPrice = product.list_price.net;
+    const isSale = currentPrice !== listPrice;
 
     // Try to use formatter with narrow currency symbol,
     // fall back to normal symbol if not supported by browser
@@ -160,20 +165,33 @@
     }
 
     const $price = document.querySelector(".price");
-    const $vat   = document.querySelector(".vat");
-    const $sale  = document.querySelector(".sale");
+    const $vat = document.querySelector(".vat");
+    const $sale = document.querySelector(".sale");
 
     $price.firstElementChild.innerText = formatter.format(currentPrice);
     $price.classList.remove("invisible");
     $vat.classList.remove("invisible");
 
+    const packagePrice = (price, discount, volume) => {
+      price = price * ((100 - discount) / 100) * volume;
+      return Math.floor(price / 5) * 5;
+    };
+
     Array.from(document.querySelectorAll("[data-discount]")).forEach(discountBox => {
-      const volume    = parseInt(discountBox.getAttribute("data-volume"));
-      const discount  = parseInt(discountBox.getAttribute("data-discount"));
-      const price     = currentPrice * ((100 - discount) / 100) * volume;
-      const nicePrice = Math.floor(price / 5) * 5;
+      const volume = parseInt(discountBox.getAttribute("data-volume"));
+      const discount = parseInt(discountBox.getAttribute("data-discount"));
+      const nicePrice = packagePrice(currentPrice, discount, volume);
 
       discountBox.querySelector(".discounted-price").innerText = formatter.format(nicePrice);
+
+      if (isSale) {
+        const listPriceElement = discountBox.querySelector(".discounted-list-price");
+        const listPriceForPackage = packagePrice(listPrice, discount, volume);
+
+        listPriceElement.innerHTML = formatter.format(listPriceForPackage);
+        listPriceElement.classList.remove("invisible");
+      }
+
     });
 
     if (isSale) {

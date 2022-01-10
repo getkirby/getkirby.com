@@ -6,7 +6,7 @@ Repository: https://github.com/hananils/kirby-type-methods
 
 ----
 
-Category: templating, utilities
+Category: utilities
 
 ----
 

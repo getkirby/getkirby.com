@@ -162,6 +162,8 @@ Make sure to delete the `media` folder. It will be automatically recreated.
 That's it! Because Kirby does not use a database by default, you don't have to run any database migrations.
 
 <alert>
+Feature releases (e.g 3.5 to 3.6) may contain breaking changes. In such a case, you might have to update your code and plugins used in your installation. You can find breaking changes of a new release in the changelogs. If you are updating from older versions, multiple changelogs may apply. Always read them carefully to identify potential issues.
+
 Never update a live website directly on the server. Test updates locally first to see if something breaks.
 </alert>
 

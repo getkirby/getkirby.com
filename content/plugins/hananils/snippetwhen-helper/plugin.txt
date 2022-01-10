@@ -6,7 +6,7 @@ Repository: https://github.com/hananils/kirby-snippetwhen-helper
 
 ----
 
-Category: templating, utilities
+Category: templating
 
 ----
 

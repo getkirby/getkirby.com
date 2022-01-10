@@ -38,7 +38,7 @@ $blocks = $blocks->add(new Kirby\Cms\Blocks([$heading, $text, $quote]));
 $kirby->impersonate('kirby');
 
 $page->update([
-  'text' => $blocks,
+  'text' => json_encode($blocks->toArray()),
 ]);
 ```
 

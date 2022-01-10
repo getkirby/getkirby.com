@@ -198,7 +198,7 @@ function cdn($file, $params = [])
 
 Kirby::plugin('author/cdn', [
     'components' => [
-        'url' => function ($kirby, $path, $options, $original) {
+        'url' => function ($kirby, $path, $options) {
 
             static $original;
 
