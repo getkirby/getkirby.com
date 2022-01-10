@@ -1,4 +1,3 @@
-<?php if (1==2): ?>
 <div class="mb-6">
   <div class="container">
     <a href="/releases/3.6" class="font-bold py-3 block flex justify-between" style="border-bottom: 2px solid var(--color-black)">
@@ -12,7 +11,6 @@
     </a>
   </div>
 </div>
-<?php endif ?>
 
 <header class="header mb-24">
   <?php snippet('layouts/skipper') ?>
