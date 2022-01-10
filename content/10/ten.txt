@@ -1,2 +1,4 @@
 Title: 10th anniversary
+----
+ogimage: opengraph.jpg
 
