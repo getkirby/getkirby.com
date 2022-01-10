@@ -4,7 +4,11 @@ Text:
 
 ## Nico & Fabian
 
+<<<<<<< HEAD
 More and more work for v2 piled up. We didn't have a proper CI workflow and tests back in those days. Every release was an adventure. It got clear that we need to invest more in a professional setup. Nico was another frequent member of the community, who had built some very impressive projects with Kirby. I asked him to help us out with frontend work for the Panel and other parts of the system. Over the years we had endless experimental coding sessions together and built some really cool things that sometimes even ended up in releases 😄
+=======
+More and more work for v2 piled up. We didn't have a proper CI workflow or tests back in those days, and every release was an adventure. It got clear that we needed to invest in a more professional setup. Nico was another frequent member of the community, who had built some very impressive projects with Kirby. I asked him to help us out with frontend work for the Panel and other parts of the system. Over the years we had endless experimental coding sessions together and built some really cool things that sometimes even ended up in releases 😄.
+>>>>>>> 3830a75e (The morning after fixes)
 
 (image: nico.jpg class: avatar caption: Nico Hoffmann)
 
@@ -14,7 +18,7 @@ While I started as a professional designer, I lost more and more track of the de
 
 ## First Kosmos issue
 
-Sonja found tons of interesting community projects through her moderation work in the forum. It was a shame that it all got lost in there and that there wasn't a better platform to highlight those projects. That's how the idea came up to start a regular (link: kosmos text: newsletter).
+Sonja found tons of interesting community projects through her moderation work in the forum. It was a shame that it all got lost in there and that there wasn't a better platform to highlight those projects. That's how the idea to start a regular (link: kosmos text: newsletter) emerged.
 
 (image: kosmos-1.png caption: The very first Kosmos issue was without any images. But the content was already on 🔥)
 
