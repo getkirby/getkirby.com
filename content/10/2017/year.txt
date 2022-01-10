@@ -12,11 +12,11 @@ Kirby 2 was in a difficult situation at this point. We had to fight quite a lot 
 
 It became clear that we were on the path to v3 and needed a big refactoring round. This would take months to finish and we wanted to get our users involved as early as possible. At the same time, our budget was still tight and we were looking for a way to finance this next step.
 
-As a big fan of Kai Brach's (link: https://www.offscreenmag.com/ text: Offscreen magazine), I found it very inspiring how he started a crowd funding campaign to fund the new version of his magazine. As a benefit for his backers, he offered a glimpse behind the scene and got them involved in every part of the process to create the new magazine.
+As a big fan of Kai Brach's (link: https://www.offscreenmag.com/ text: Offscreen magazine), I found it very inspiring how he started a crowd funding campaign to fund the new version of his magazine. As a benefit for his backers, he offered a glimpse behind the scenes and got them involved in every part of the process to create the new magazine.
 
-This model seemed perfect for us as well. We started a microsite where we introduced our plans and packages. The concept was simple. You could either just follow our work or already buy a license for Kirby 3 in advance. Both would give access to a private Slack group, where we show our progress, invite you to exclusive live streams, discuss features and more. It wasn't clear at all how successful this would be. My expectations weren't too high. Is this even interesting at all? But almost 500 people signed up, which totally blew us away.
+This model seemed perfect for us as well. We started a microsite where we introduced our plans and packages. The concept was simple. You could either just follow our work or already buy a license for Kirby 3 in advance. Both options would give you access to a private Slack group, where we would show our progress, invite you to exclusive live streams, discuss features and more. It wasn't clear at all how successful this would be. My expectations weren't too high. Is this even interesting at all? But almost 500 people signed up, which totally blew us away.
 
-The Slack server turned into a very vibrant group and discussions there were extremely helpful.
+The Slack server turned into a very vibrant group, and discussions there were extremely helpful.
 
 The development took forever and got us into one or the other crisis along the way. But we had full support of our backers. Not just financially, but especially motivationally.
 

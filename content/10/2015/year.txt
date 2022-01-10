@@ -4,11 +4,11 @@ Text:
 
 ## Discourse
 
-v2 brought more users, more demand for support and more community activity. Ditching our self-made, self-hosted forum mess was inevitable, and Discourse seemed like the fitting alternative at that point.
+v2 brought more users, more demand for support and more community activity. Ditching our self-made, self-hosted forum was inevitable, and Discourse seemed like the right alternative at that point.
 
 (image: discourse.png caption: Finally a decent forum link: https://forum.getkirby.com)
 
-It was fantastic to benefit from all the features that Discourse offered. The community grew steadily, technical support requests via email dropped despite the growing activity and users really started to help each other. We should have done this a lot earlier, but you are always smarter in hindsight.
+It was fantastic to benefit from all the features Discourse offered. The community grew steadily, technical support requests via email dropped despite the growing activity and users started to help each other. We should have done this a lot earlier, but you are always smarter in hindsight.
 
 ## Lukas & Sonja
 
@@ -28,20 +28,22 @@ While Sonja is still the heart and soul of the forum, docs and Kosmos, Lukas shi
 
 ## From file-based CMS to shirt shop
 
-With a bigger community, you need merch. It's the obvious next step. 🤷‍♂️ After looking at various services with huge markups, we found a shirt printer in Berlin that was pretty affordable and a better fit for our tight budget.
+With a bigger community, you need merch. It's the obvious next step. 🤷‍♂️ After looking at various services with huge markups, we found a pretty affordable shirt printer in Berlin that was a better fit for our tight budget.
 
 We started collecting pre-orders and printed the first batch of roughly 100 shirts. One day, a huge box arrived in our small apartment.
 
 (image: shirts.jpg caption: Adding custom tags and preparing shipping on our couch)
 
-The shirts looked amazing and we added self-made tags with a K stamp and hexagonal paper cutter that my wife gave me for Christmas. We had a huge Excel list with all the pre-orders from all around the world and packaged and shipped them manually.
+The shirts looked amazing. We added self-made tags with a K stamp and hexagonal paper cutter my wife had given me for Christmas. We had a huge Excel list with all the pre-orders from all around the world, and we packaged and shipped them manually.
 
 (image: stamp.jpg)
 
-It was a hell lot of work. Some shirts never arrived. Some packages took more than a month. I'd never do that again, but it was also a lot of fun.
+It was a hell lot of work. Some shirts never arrived at their destination. Some packages took more than a month. While I'd never do it again, it was also a lot of fun.
 
 ## Nico
 
-More and more work for v2 piled up. We didn't have a proper CI workflow and tests back in those days. Every release was an adventure. It got clear that we need to invest more in a professional setup. Nico was another frequent member of the community, who had built some very impressive projects with Kirby. I asked him to help us out with frontend work for the Panel and other parts of the system. Over the years we had endless experimental coding sessions together and built some really cool things that sometimes even ended up in releases 😄
+More and more work for v2 piled up. We didn't have a proper CI workflow and tests back in those days, and every release was an adventure. It got clear that we need to invest more in a professional setup. Nico was another frequent member of the community, who had built some very impressive projects with Kirby. I asked him to help us out with frontend work for the Panel and other parts of the system. Over the years we had endless experimental coding sessions together and built some really cool things that sometimes even ended up in releases 😄
 
 (image: nico.jpg class: avatar caption: Nico Hoffmann)
+
+
