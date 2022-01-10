@@ -4,7 +4,7 @@ Text:
 
 ## Discourse
 
-v2 brought more users, more demand for support and more community activity. Ditching our self-made, self-hosted forum mess was inevitable and Discourse seemed like the fitting alternative at that point.
+v2 brought more users, more demand for support and more community activity. Ditching our self-made, self-hosted forum mess was inevitable, and Discourse seemed like the fitting alternative at that point.
 
 (image: discourse.png caption: Finally a decent forum)
 
@@ -28,9 +28,9 @@ While Sonja is still the heart and soul of the forum, docs and Kosmos, Lukas shi
 
 ## From file-based CMS to shirt shop
 
-With a bigger community, you need merch. It's the obvious next step. After looking at various services with huge markups, we found a shirt printer in Berlin, that was pretty affordable and a better fit for our tight budget.
+With a bigger community, you need merch. It's the obvious next step. After looking at various services with huge markups, we found a shirt printer in Berlin that was pretty affordable and a better fit for our tight budget.
 
-We started collecting pre-orders and printed the first batch of roughly 100 shirts. One day a huge box of arrived in our small 70sqm apartment.
+We started collecting pre-orders and printed the first batch of roughly 100 shirts. One day, a huge box arrived in our small 70sqm apartment.
 
 (image: shirts.jpg caption: Adding custom tags and preparing shipping on our couch)
 

@@ -6,7 +6,7 @@ Text:
 
 We finally made it. On February 5th, 2019 we released Kirby 3 after almost two years of work.
 
-We are still incredibly proud of this release, as it catapulted us in an entirely new league. We were able to leave our technical debt behind and professionalise our setup and workflows in ways that we still profit from today.
+We are still incredibly proud of this release, as it catapulted us into an entirely new league. We were able to leave our technical debt behind and professionalise our setup and workflows in ways that we still profit from today.
 
 The jump wasn't easy for our users. There were quite a few breaking changes and necessary steps to upgrade existing projects. Maybe because of the Kirby Next campaign or maybe because we have the best community in the world, the feedback was again overwhelmingly positive.
 
@@ -16,9 +16,9 @@ The jump wasn't easy for our users. There were quite a few breaking changes and 
 
 (image: v3-website.png caption: v3 came with a brand new website and a maskot.)
 
-We changed our pricing model once again. After endless discussions with our supporters, we decided to remove personal licenses again. Unfortunately, they have been abused over and over again in the last years and caused more financial damage than helped us move forward. We increased the regular price to €99, which is still the same price we offer today.
+We changed our pricing model once again. After endless discussions with our supporters, we decided to remove personal licenses again. Unfortunately, they were abused time and again over the years, and caused more financial damage instead of helping us move forward. We increased the regular price to €99, which is still the same price we offer today.
 
-We also moved from our shop from Fastspring to Paddle. Another big step that increased conversion significantly.
+We also moved our shop from Fastspring to Paddle. Another big step that increased conversion rates significantly.
 
 2018 was a tough and critical year for Kirby, but we got out of it and managed to double our revenue once more within just a year after the v3 launch.
 
@@ -28,7 +28,7 @@ We also moved from our shop from Fastspring to Paddle. Another big step that inc
 
 The idea to finally meet IRL circulated in the community for a while. The Kirby Next community made hilarious, half-serious plans to meet in a castle or giant villa in Italy.
 
-In 2019, Florian Kosiol contacted me and offered to host the first ever Kirby conference at the 3st digital offices in Mainz, Germany. It got more and more serious and in autumn 2019, Sonja and I met Florian and his colleagues in Mainz to make proper plans. It all looked really nice and the 3st team was amazing. We started selling tickets, organized speakers, booked hotel rooms and catering. We found two fantastic sponsoring partners with KeyCDN and Uberspace and were fully prepared for the first conference on March 21st 2020. You might already know what happened next. But let's move on in chronological order.
+In 2019, Florian Kosiol contacted me and offered to host the first ever Kirby conference at the 3st digital offices in Mainz, Germany. It got more and more serious and in autumn 2019, Sonja and I met Florian and his colleagues in Mainz to make proper plans. It all looked really nice, and the 3st team was amazing. We started selling tickets, organized speakers, booked hotel rooms and catering. With KeyCDN and Uberspace, we found two fantastic sponsoring partners, and were fully prepared for the first conference on March 21st, 2020. You might already know what happened next. But let's move on in chronological order.
 
 
 

@@ -4,9 +4,9 @@ Text:
 
 ## Ahmet
 
-We had plenty of contributors and translators over the years. Some just submit a single PR. Some help out more often. We are always grateful for voluntary contributions and don't take them for granted at all in a non-free project like Kirby.
+Over the years, we had plenty of contributors and translators. Some submit a single PR. Some help out more often. We are always grateful for voluntary contributions, and don't take them for granted at all in a paid project like Kirby.
 
-One day Ahemt appeared on Github. He started to help us reproduce and track down bugs, created all sorts of bug fix PRs, started to build small enhancements and additions and finally full blown features. He wrote tests for everything he built, translated the interface to Turkish, followed all our standards, discussed concepts and was just a dream contributor. The timing wasn't perfect and there was no budget for another freelancer for a couple months. He just kept on going although we were not able to pay him at this poin. We were finally able to hire him at the beginning of 2020. He's just another lovely example how the best team mates emerge from the community. If it goes on like this, we will never need a hiring process.
+One day, Ahmet appeared on Github. He started to help us reproduce and track down bugs, created all sorts of bug fix PRs, started to build small enhancements and additions and finally full blown features. He wrote tests for everything he built, translated the interface to Turkish, followed all our standards, discussed concepts and was just a dream contributor. The timing wasn't perfect and there was no budget for another freelancer for a couple months. He just kept going although we were not able to pay him at this point. We were finally able to hire him at the beginning of 2020. He's just another lovely example how the best team mates emerge from the community. If it goes on like this, we will never need a hiring process.
 
 (image: ahmet.jpg class: avatar caption: Ahmet Bora)
 
@@ -14,7 +14,7 @@ One day Ahemt appeared on Github. He started to help us reproduce and track down
 
 We always offered free trials for Kirby. We want you to be convinced before you buy a license. But installing a local version isn't a 5-minute process for everyone – especially if you are not a developer.
 
-We were thinking about creating a demo server for a long time, but never really found the time. In late 2019, Lukas and I made a concept together how we could run such a demo in a very practical way. Lukas built a really cool demo manager that creates new Kirby instances on demand and discards them after an hour. I built a little theme with different demo sites to show various aspects of the Panel in the best way. It's one of those projects that always fell behind in our priority list, but once it was online it really helped to move Kirby forward. More than 30.000 demos have been created since and sales have gone up noticeably.
+We had been thinking about creating a demo server for a long time, but never really found the time. In late 2019, Lukas and I made a concept together how we could run such a demo in a very practical way. Lukas built a really cool demo manager that creates new Kirby instances on demand and discards them after an hour. I built a little theme with different demo sites to show various aspects of the Panel in the best way. It's one of those projects that always fall behind in our priority list, but once it was online, it really helped to move Kirby forward. More than 30,000 demos have been created since and sales have gone up noticeably.
 
 (image: demo.jpg caption: The demo site on trykirby.com)
 
