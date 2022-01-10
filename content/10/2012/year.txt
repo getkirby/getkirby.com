@@ -38,11 +38,11 @@ I learned a bit later that this guy was 15 at the time. You just have to love th
 
 ## Cheat sheet
 
-(image: cheatsheet.webp caption: The original Kirby cheatsheet. Made in InDesign 🙈)
+(image: cheatsheet.jpg caption: The original Kirby cheat sheet. Made in InDesign 🙈)
 
 With a growing community and more customers, the demand for documentation and support also grew. It's one thing that has not changed in 10 years. Documentation is everything. You can never underestimate the effect of good docs. We invest a lot of time in our documentation and in support and see it not just as a service for our users, but also as a marketing tool.
 
-The very first effort to provide better docs for Kirby 1 was the famous cheat sheet. I cannot believe that I really created this in InDesign and published it as a PDF. It later turned into our reference … which is just slightly more extensive than that PDF.
+The very first effort to provide better docs for Kirby 1 was the famous (file: cheatsheet.pdf text: cheat sheet). I cannot believe that I really created this in InDesign and published it as a PDF. It later turned into our (link: docs/reference text: reference) … which is just slightly more extensive than that PDF.
 
 ## A self-made mess
 
@@ -67,15 +67,5 @@ Authentication was handled through Twitter. Over the years, thousands of threads
 
 I was really impressed by the performance of the file system and pleased by that first forum version. After all, my focus was on Kirby and not the forum itself. I never questioned the effects on the community. Conversations weren’t really working well and overall engagement was pretty poor.
 
-When we switched from our self-made mess to Discourse in 2015, the community really took off. Support requests via email were instantly cut in half. It’s sometimes not very clever to build your own tools, when your focus should be on your main product.
+When we switched from our self-made mess to (link: https://discourse.org text: Discourse) in 2015, the community really took off. Support requests via email were instantly cut in half. It’s sometimes not very clever to build your own tools, when your focus should be on your main product.
 
-----
-
-Releases:
-
-- Release: 1.0
-  Date: 09.01.2012
-  Link: https://github.com/getkirby-v1/starterkit/commit/4a4aefe5ddc3a32bb8c22d94822a501fd8ba6535
-- Release: 1.1
-  Date: 19.06.2012
-  Link: https://github.com/getkirby-v1/starterkit/releases/tag/1.1.0

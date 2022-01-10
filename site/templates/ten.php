@@ -5,6 +5,7 @@
     background: var(--color-light);
     display: flex;
     padding: .5rem;
+    max-width: 42rem;
   }
 
   .avatar figcaption {
