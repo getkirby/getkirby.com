@@ -33,9 +33,9 @@ function cdn($file, array $params = []): string
             } else {
                 $params['fit'] = true;
             }
+            $params['enlarge'] = 0;
         }
 
-        $params['enlarge'] = 0;
         $params['v'] = $file->mediaHash();
 
         $query = '?' . http_build_query($params);
