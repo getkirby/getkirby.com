@@ -6,7 +6,7 @@ Text:
 
 Over the years, we had plenty of contributors and translators. Some submit a single PR. Some help out more often. We are always grateful for voluntary contributions, and don't take them for granted at all in a paid project like Kirby.
 
-One day, Ahmet appeared on Github. He started to help us reproduce and track down bugs, created all sorts of bug fix PRs, started to build small enhancements and additions and finally full blown features. He wrote tests for everything he built, translated the interface to Turkish, followed all our standards, discussed concepts and was just a dream contributor. The timing wasn't perfect and there was no budget for another freelancer for a couple months. He just kept going although we were not able to pay him at this point. We were finally able to hire him at the beginning of 2020. He's just another lovely example how the best team mates emerge from the community. If it goes on like this, we will never need a hiring process.
+One day, Ahmet appeared on GitHub. He started to help us reproduce and track down bugs, created all sorts of bug fix PRs, started to build small enhancements and additions and finally full blown features. He wrote tests for everything he built, translated the interface to Turkish, followed all our standards, discussed concepts and was just a dream contributor. The timing wasn't perfect and there was no budget for another freelancer for a couple months. He just kept going although we were not able to pay him at this point. We were finally able to hire him at the beginning of 2020. He's just another lovely example how the best team mates emerge from the community. If it goes on like this, we will never need a hiring process.
 
 (image: ahmet.jpg class: avatar caption: Ahmet Bora)
 
@@ -40,7 +40,7 @@ Once again, our community didn't let us down and most of the active members move
 
 ## feedback.getkirby.com
 
-That move to Discord gave us a bit of a boost and another long-term pain point was the way we collected feedback. We had a Github repo called ideas. We used the issues feature of that repo to collect all kinds of feature requests and ideas and let people vote with emoji reactions. To keep it short: it was a mess. With roughly 400 issues there was absolutely no chance to get the bigger picture. It was hard to sort by those reactions and almost impossible to prioritize ideas and requests.
+That move to Discord gave us a bit of a boost and another long-term pain point was the way we collected feedback. We had a GitHub repo called ideas. We used the issues feature of that repo to collect all kinds of feature requests and ideas and let people vote with emoji reactions. To keep it short: it was a mess. With roughly 400 issues there was absolutely no chance to get the bigger picture. It was hard to sort by those reactions and almost impossible to prioritize ideas and requests.
 
 One day, I landed on a new feedback platform called Nolt and quite liked the look of it. It wasn't one of those monster tools with endless options and a massive interface. Just a simple way to submit ideas and vote for existing ones. We decided to give it a try and it instantly worked out. It has filled up with posts in no time and we never got so much valuable feedback in such an easily digestable way.
 
@@ -50,14 +50,12 @@ To convert requests into a pretty decent roadmap is also quite nice.
 
 ## Kirby Casts
 
-The private live streams for the Kirby Next supporters really started to grow on me. Plans for a Youtube channel had been lying around in the drawer for a long time. But it still took yet another year until we finally opened our own Youtube channel and I started to record the first videos. Kris from the design studio (link: https://floriankarsten.com/ text: Florian Karsten) helped me with a little logo animation and the first thumbnail designs. I tried to get into a weekly uploading schedule, which worked for quite a while until the pandemic lockdowns started and home schooling broke my streak. New videos are planned for this year!
+The private live streams for the Kirby Next supporters really started to grow on me. Plans for a YouTube channel had been lying around in the drawer for a long time. But it still took yet another year until we finally opened our own YouTube channel and I started to record the first videos. Kris from the design studio (link: https://floriankarsten.com/ text: Florian Karsten) helped me with a little logo animation and the first thumbnail designs. I tried to get into a weekly uploading schedule, which worked for quite a while until the pandemic lockdowns started and home schooling broke my streak. New videos are planned for this year!
 
-(image: kirbycasts.png caption: Finally a Youtube channel!)
+(image: kirbycasts.png caption: Finally a YouTube channel!)
 
 ## Blocks
 
 In December 2020, we released 3.5 with our brand new blocks and layout editors.
 
 (image: blocks.png)
-
-

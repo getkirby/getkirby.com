@@ -14,7 +14,7 @@ Despite the sceptics, Kirby made €600 in its first months and €14.000 in its
 
 ## Nobody will pay for this (Part 2)
 
-While Shaun Inman kept the source code for his apps behind closed doors, I wanted to offer the same transparency open-source projects offered. I put the entire source code for Kirby on Github. Obviously madness. Why would you pay for it, when you can simply download it? The first versions of Kirby came without any license check. But it worked. There were always enough customers that understood the principle of investing in enjoyable software. This principle still works for us today and has generated a very loyal customer base.
+While Shaun Inman kept the source code for his apps behind closed doors, I wanted to offer the same transparency open-source projects offered. I put the entire source code for Kirby on GitHub. Obviously madness. Why would you pay for it, when you can simply download it? The first versions of Kirby came without any license check. But it worked. There were always enough customers that understood the principle of investing in enjoyable software. This principle still works for us today and has generated a very loyal customer base.
 
 ## The Panel
 
@@ -30,19 +30,19 @@ The first version of the Panel was very simple. Users were able to edit site inf
 
 (image: panel-3.png class: screenshot caption: Editor/preview for the site.txt)
 
-## A 14-year old
+## A 15-year old
 
-In early January 2012, I received one of the first code contributions for Kirby. One of our users created a way to load plugins by scanning the plugins directory instead of adding individual plugins to the config. His name was Lukas, and he was quite good with PHP. He turned up with more and more contributions, issues and comments over the next weeks and months, and I was impressed how well the open-source principle still worked despite the commercial model.
+In June 2012, I received one of the first code contributions for Kirby. One of our users created a way to load plugins from folders in the plugins directory instead of adding individual plugins as single PHP files. His name was Lukas, and he was quite good with PHP. He turned up with more and more contributions, issues and comments over the next weeks and months, and I was impressed how well the open-source principle still worked despite the commercial model.
 
-I learned a bit later that this guy was 14 at the time. You just have to love the internet sometimes. Lukas quickly became a constant in the Kirby community. Does the name sound familiar?
+I learned a bit later that this guy was 15 at the time. You just have to love the internet sometimes. Lukas quickly became a constant in the Kirby community. Does the name sound familiar?
 
 ## Cheat sheet
 
-(image: cheatsheet.webp caption: The original Kirby cheatsheet. Made in Indesign 🙈)
+(image: cheatsheet.webp caption: The original Kirby cheatsheet. Made in InDesign 🙈)
 
-With a growing community and more customers, the demand for documentation and support also grew. It's one thing has not changed in 10 years. Documentation is everything. You can never underestimate the effect of good docs. We invest a lot of time in our documentation and in support and see it not just as a service for our users, but also as a marketing tool.
+With a growing community and more customers, the demand for documentation and support also grew. It's one thing that has not changed in 10 years. Documentation is everything. You can never underestimate the effect of good docs. We invest a lot of time in our documentation and in support and see it not just as a service for our users, but also as a marketing tool.
 
-The very first effort to provide better docs for Kirby 1 was the famous cheat sheet. I cannot believe that I really created this in Indesign and published it as a PDF. It later turned into our reference … which is just slightly more extensive than that PDF.
+The very first effort to provide better docs for Kirby 1 was the famous cheat sheet. I cannot believe that I really created this in InDesign and published it as a PDF. It later turned into our reference … which is just slightly more extensive than that PDF.
 
 ## A self-made mess
 

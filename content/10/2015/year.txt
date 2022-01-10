@@ -18,7 +18,7 @@ Two folks stood out more and more: Texnixe and Lukas.
 Texnixe is the alter ego of Sonja Broda: A technical writer and developer from Mainz, Germany. She had built a couple Kirby projects over the years and started to help out other users with their technical questions. Her answers were always friendly, always focused on practical solutions, always very proficient. Her reply rate was off the charts. She often answered questions long before I even had a chance to look at them.
 
 (image: lukas.png class: avatar caption: Lukas Bestle)
-Lukas Bestle was the same guy who was always present on Github and had contributed that very first improvement in January 2012. He knew Kirby inside out by now and already started his own business as a student at an age when others still tried to figure out what to do with their lives.
+Lukas Bestle was the same guy who was always present on GitHub and had contributed his very first improvement in June 2012. He knew Kirby inside out by now and already started his own business after finishing school when others still tried to figure out what to do with their lives.
 
 I was blown away by their professionalism at a point when they contributed all the answers and solutions on a voluntary basis. The forum benefited massively from their support and it became a logical next step to hire them both.
 
@@ -39,5 +39,3 @@ The shirts looked amazing and we added self-made tags with a stamp and hexagonal
 (image: stamp.jpg)
 
 It was a hell lot of work. Some shirts never arrived. Some packages took more than a month. I'd never do that again, but it was also a lot of fun.
-
-

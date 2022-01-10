@@ -12,7 +12,7 @@ Fortunately, Kirby started to generate more revenue and so I decided to hire the
 
 ## v2
 
-Even with Sascha's help, it took months to finish version 2. I decided to rewrite large parts from scratch and especially the Panel was an entirely different system. Feedback can be a blessing and a curse and meeting expectations with such a major new version is a lot of pressure. The new version took quite a long time, but finally launched on October 7th 2014.
+Even with Sascha's help, it took months to finish version 2. I decided to rewrite large parts from scratch and especially the Panel was an entirely different system. Feedback can be a blessing and a curse and meeting expectations with such a major new version is a lot of pressure. The new version took quite a long time, but finally launched on October 7th, 2014.
 
 (image: v2-1.png caption: The new Panel in v2)
 
