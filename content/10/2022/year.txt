@@ -2,10 +2,27 @@ Title: 2022
 ----
 Text:
 
+## Looking back
+
+Here we are in 2022, 10 years after Kirby 1 launched. Back then, I had absolutely no expectations, no long-term plans. I was just winging that launch. A weird product name, a rough logo, a rough website, a rough first version. I honestly thought: If it works it works, if not I wouldn't be surprised.
+
+It worked and it still does. We are not a unicorn, not the next multi-billion dollar business. We've always been working with the money and resources we had as good and fast as we can. Our goal is, to be free and independent. To work on something that we all love and that our customers love.
+
+Our community has grown into a group that often feels like good old friends. We meet online and have great discussions, sometimes heated debates, but always with respect. We share funny stories and sad stories and talk about coding and design, about work and life and everything else.
+
+I am deeply grateful for this beautiful group of people that formed around Kirby. I will never take this for granted.
+
+## Looking forward
+
+Today, we have long-term plans. Kirby is a long-term project. Those are just the first 10 years of hopefully many more decades to come. The are more than enough ideas and plans. We hope you join us along the way.
+
 ## A new company
 
-Here we are, 10 years later, with plans and ideas for at least 10 more years.
+As a first step this year, we are founding a new company. Sonja, Lukas, Nico and I have been working together for so long now that it felt right to start something new together. It will be called Content Folder GmbH & Co. KG and we are working on the last details to get it done. Starting a company in Germany is no fun. We can tell you that. Ahmet will stay a part of the team as freelancer. Let's see how long it takes until we can open an office in Istanbul 😉
 
+Nothing will change for you. No new prices, no new license model, no new major version. Just the same old same old, but with a new name.
 
+We are still massively excited about this step. Stay tuned for updates.
 
-## The future
+Thank you for 10 wonderful years!
+Bastian and the entire Kirby team

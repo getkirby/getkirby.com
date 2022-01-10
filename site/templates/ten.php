@@ -36,7 +36,7 @@
           <?= $year->title() ?>
         </datetime>
       </div>
-      <div style="--span: 6">
+      <div style="--span: 10">
         <div class="prose text-lg">
           <?= $year->text()->kt() ?>
         </div>

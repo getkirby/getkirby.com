@@ -4,7 +4,7 @@ Text:
 
 ## How it all started
 
-In aarly 2011 a client approached me and asked for a custom solution to create HTML newsletters. It should be simple, cheap, and they needed it tomorrow. What sounded like a terrible project back then – and still does today – turned into a success story that already lasts 10 years and has nothing to do with email newsletters.
+In early 2011 a client approached me and asked for a custom solution to create HTML newsletters. It should be simple, cheap, and they needed it tomorrow. What sounded like a terrible project back then – and still does today – turned into a success story that already lasts 10 years and has nothing to do with email newsletters.
 
 I wrote a little PHP script that split custom syntax in text files into variables and injected those into a simple template engine. The input: plain text. The result: monstrous, table-based HTML for newsletters.
 
