@@ -44,9 +44,9 @@ While using the built-in server works fine for many use cases, you might sometim
 
 ## Laravel Valet
 
-(link: https://laravel.com/docs/5.8/valet text: Laravel Valet) is a minimalist development environment for Mac. It requires you to install PHP directly onto your local machine. Valet supports Kirby out of the box. Check it out if you want a fast development environment for Kirby and are not afraid of the command line.
+(link: https://laravel.com/docs/8.x/valet text: Laravel Valet) is a minimalist development environment for Mac. It requires you to install PHP directly onto your local machine. Valet supports Kirby out of the box. Check it out if you want a fast development environment for Kirby and are not afraid of the command line.
 
-Once Valet is (link: https://laravel.com/docs/5.8/valet#installation text: installed), you're ready to start (link: https://laravel.com/docs/5.8/valet#serving-sites text: serving sites) using the `park` or `link` commands.
+Once Valet is (link: https://laravel.com/docs/8.x/valet#installation text: installed), you're ready to start (link: https://laravel.com/docs/8.x/valet#serving-sites text: serving sites) using the `park` or `link` commands.
 
 The beauty of Valet is that is detects every folder you put into your parked sites folder, which is then automatically deployed to `http://project-name.test` without you having to set up hosts manually. It also supports `https` out of the box.
 
