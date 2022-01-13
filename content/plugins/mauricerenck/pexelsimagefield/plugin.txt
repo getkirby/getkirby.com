@@ -1,0 +1,17 @@
+Title: Pexels Image Field
+
+----
+
+Repository: https://github.com/mauricerenck/pexels-image-field
+
+----
+
+Category: panel
+
+----
+
+Description: A panel field allowing you to search pexels.com for stockphotos and download then directly to your Kirby page.
+
+----
+
+Featured: false
