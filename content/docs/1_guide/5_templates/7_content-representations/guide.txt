@@ -57,7 +57,7 @@ echo $hash;
 Now that we have a representation template for our `default` template, we can request all `default` pages as a JSON file. To access the representation, add the name of the representation to the end of the URL. `https://yourdomain.com/about` becomes `https://yourdomain.com/about.json` and so on.
 
 <info>
-If you use content representations on the homepage, the URL will become `https://yourdomain.com/.json` (or whatever extension you use).
+If you use content representations on the homepage, the URL will be `https://yourdomain.com/home.json` for a JSON representation (replace `home` with the name of your `home` page if you have set the (link: docs/reference/system/options/home text: `home` option in your config)).
 </info>
 
 If the representation exists, the template will be loaded and Kirby will send a correct content type header if possible. If the representation doesn’t exist, the error page will be displayed like if you didn’t use content representations at all.
