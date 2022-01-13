@@ -216,7 +216,13 @@ const fetchProjects = async () => {
 
 button.addEventListener('click', fetchProjects);
 ```
+<info>
+If you use the JSON representations on the homepage, make sure to add `home` to `url` variable (or whatever page name you have set for the (link: docs/reference/system/options/home text: `home` option in your config)):
 
+```js
+let url = `${window.location.href}home.json/page:${page}`;
+```
+</info>
 First we define a set of variables that we need for fetching the projects later on:
 
 ```js
