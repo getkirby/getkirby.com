@@ -203,7 +203,7 @@ return $this->upload(function ($source, $filename) {
 }, true);
 ```
 
-<info>Be aware that the upload method does not help you with additional security precausions! It's your job in a custom upload route to validate the mime type and add additional checks to avoid malicious uploads.</info>
+<info>Be aware that the upload method does not help you with additional security precautions! It's your job in a custom upload route to validate the mime type and add additional checks to avoid malicious uploads.</info>
 
 
 #### MIME type checks & error handling
