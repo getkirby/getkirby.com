@@ -400,7 +400,7 @@ return [
       'architecture' => I18n::translate('architecture', null, kirby()->language()->code()),
       'photography'  => I18n::translate('photography', null, kirby()->language()->code()),
       'design'       => I18n::translate('design', null, kirby()->language()->code())
-    ]
+    ],
     'type' => 'select',
 ];
 ```
