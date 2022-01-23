@@ -344,3 +344,8 @@ Area | View name
 `users` | `user`
 `users` | `user.file`
 `users` | `users`
+
+## More information
+
+- (link: docs/cookbook/panel/first-panel-area text: My first Panel area)
+- (link: docs/cookbook/panel/advanced-panel-areatext: Advanced Panel area)
