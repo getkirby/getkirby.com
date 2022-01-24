@@ -1,0 +1,17 @@
+Title: Punctuation Section
+
+----
+
+Repository: https://github.com/johannschopplich/kirby-punctuation-section
+
+----
+
+Category: text
+
+----
+
+Featured: false
+
+----
+
+Description: A simple, customizable section for your Kirby project from which your clients can quickly copy commonly used characters to the clipboard.
