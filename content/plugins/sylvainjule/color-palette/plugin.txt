@@ -6,7 +6,11 @@ Repository: https://github.com/sylvainjule/kirby-color-palette
 
 ----
 
-Category: panel
+Category: fields
+
+----
+
+Subcategory: colors
 
 ----
 

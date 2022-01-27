@@ -11,3 +11,17 @@ Category: seo
 ----
 
 Description: Provide files like /robots.txt, .well-known, etc.
+
+----
+
+Example:
+
+```yaml
+HeadlineWellKnown:
+  type: headline
+  label: well-known
+  numbered: false
+
+TheWellKnown:
+  extends: omz13/wellknown
+```

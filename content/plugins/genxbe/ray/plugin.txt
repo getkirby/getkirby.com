@@ -6,7 +6,11 @@ Repository: https://github.com/genxbe/kirby3-ray
 
 ----
 
-Category: utilities
+Category: devtools
+
+----
+
+Subcategory: debugging
 
 ----
 

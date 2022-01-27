@@ -6,7 +6,11 @@ Repository: https://github.com/Adspectus/k3-date-extended
 
 ----
 
-Category: utilities
+Category: fields
+
+----
+
+Subcategory: dates
 
 ----
 

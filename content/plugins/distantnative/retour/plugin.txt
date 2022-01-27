@@ -10,5 +10,9 @@ Category: panel
 
 ----
 
+Subcategory: view
+
+----
+
 Description: Advanced redirection based on rules, supporting wildcards and HTTP status codes. Comes with a panel view, so redirects can be managed without writing any code.
 

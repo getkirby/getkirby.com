@@ -6,8 +6,20 @@ Repository: https://github.com/bnomei/kirby3-srcset
 
 ----
 
-Category: assets
+Category: media
+
+----
+
+Subcategory: images
 
 ----
 
 Description: Create responsive images using the picture element, including JavaScript-based lazy loading.
+
+----
+
+Example:
+
+```php
+$page->image('ukulele.jpg')->lazysrcset()
+```

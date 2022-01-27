@@ -6,9 +6,12 @@ Repository: https://github.com/sylvainjule/kirby-previews
 
 ----
 
-Category: panel
+Category: fields
+
+----
+
+Subcategory: enhancement
 
 ----
 
 Description: Add enhanced and missing structure previews for various fields in the panel
-

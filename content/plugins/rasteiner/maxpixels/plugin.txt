@@ -6,9 +6,23 @@ Repository: https://github.com/rasteiner/k3-maxpixels-option
 
 ----
 
-Category: assets
+Category: media
+
+----
+
+Subcategory: images
 
 ----
 
 Description: Resize images in the browser before uploading them to the server.
 
+----
+
+Example:
+
+```yaml
+images:
+  type: files
+  maxpixels: 2000000
+  #two million pixels
+```

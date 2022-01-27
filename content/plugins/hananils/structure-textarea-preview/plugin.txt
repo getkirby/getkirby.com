@@ -6,8 +6,13 @@ Repository: https://github.com/hananils/kirby-structure-textarea-preview
 
 ----
 
-Category: panel
+Category: fields
+
+----
+
+Subcategory: enhancement
 
 ----
 
 Description: Structure: Textarea Preview offers Markdown previews for textareas in structure fields.
+

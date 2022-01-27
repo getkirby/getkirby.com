@@ -6,7 +6,11 @@ Repository: https://github.com/bnomei/kirby3-thumb-imageoptim
 
 ----
 
-Category: assets
+Category: media
+
+----
+
+Subcategory: images
 
 ----
 

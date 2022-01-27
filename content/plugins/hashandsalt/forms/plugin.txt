@@ -6,9 +6,23 @@ Repository: https://github.com/HashandSalt/kirby3-forms
 
 ----
 
-Category: templating
+Category: forms
+
+----
+
+Subcategory: templating
 
 ----
 
 Description: A small plugin for creating HTML forms more easily.
 
+----
+
+Example:
+
+```php
+<div class="field">
+    <?= label('Name', 'name') ?>
+    <?= input('text', 'name') ?>
+</div>
+```

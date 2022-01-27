@@ -6,7 +6,11 @@ Repository: https://github.com/gearsdigital/localizer-for-kirby
 
 ----
 
-Category: panel
+Category: i18n
+
+----
+
+Subcategory: panel
 
 ----
 

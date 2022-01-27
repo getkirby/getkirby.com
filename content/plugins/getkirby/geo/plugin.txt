@@ -6,8 +6,19 @@ Repository: https://github.com/getkirby/geo
 
 ----
 
-Category: utilities
+Category: templating
 
 ----
 
 Description: This plugin adds basic geo search and conversion functionalities to Kirby
+
+----
+
+Example:
+
+```php
+$point = Geo::point(49.4883333, 8.4647222);
+
+echo $point->lat();
+echo $point->lng();
+```

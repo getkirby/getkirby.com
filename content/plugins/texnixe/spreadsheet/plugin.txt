@@ -12,3 +12,10 @@ Category: text
 
 Description: This plugin provides a KirbyTag that allows you to include a table inside a textarea field from a spreadsheet (Excel or CSV files).
 
+----
+
+Example:
+
+```kirbytext
+(spreadsheet: pricelist.xlxs)
+```

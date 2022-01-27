@@ -6,11 +6,7 @@ Repository: https://github.com/wagnerwagner/merx
 
 ----
 
-Category: integrations
-
-----
-
-Featured: true
+Category: ecommerce
 
 ----
 

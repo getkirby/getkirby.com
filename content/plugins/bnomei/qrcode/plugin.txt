@@ -6,8 +6,18 @@ Repository: https://github.com/bnomei/kirby3-qrcode
 
 ----
 
-Category: utilities
+Category: fields
 
 ----
 
 Description: Generate QRCodes. The included Panel field will show the QRCode and trigger download on click.
+
+----
+
+Example:
+
+```yaml
+fields:
+  # current page
+  qrcode: qrcode
+```

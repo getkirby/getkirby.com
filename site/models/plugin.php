@@ -18,6 +18,11 @@ class PluginPage extends Page
         return $this->id() . '/' . $section;
     }
 
+    public function card()
+    {
+        return $this->images()->findBy('name', 'card');
+    }
+
     public function download()
     {
         if ($this->content()->has('download')) {
@@ -53,6 +58,11 @@ class PluginPage extends Page
         $info = Data::read($this->file('composer.json')->root());
 
         return Nest::create($info, $this);
+    }
+
+    public function logo()
+    {
+        return $this->images()->findBy('name', 'logo');
     }
 
     public function metadata(): array

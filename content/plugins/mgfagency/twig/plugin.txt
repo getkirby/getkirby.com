@@ -10,5 +10,9 @@ Category: templating
 
 ----
 
+Subcategory: engine
+
+----
+
 Description: Add support for Twig templates to your Kirby installation
 

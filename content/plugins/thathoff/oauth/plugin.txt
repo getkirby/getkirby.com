@@ -6,7 +6,11 @@ Repository: https://github.com/thathoff/kirby-oauth
 
 ----
 
-Category: integrations
+Category: security
+
+----
+
+Subcategory: authentication
 
 ----
 

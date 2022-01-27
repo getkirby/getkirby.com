@@ -1,1 +1,3 @@
 Title: Tristan Bagot
+----
+Github: https://github.com/tristantbg

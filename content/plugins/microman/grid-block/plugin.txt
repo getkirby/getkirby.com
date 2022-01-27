@@ -10,4 +10,8 @@ Category: panel
 
 ----
 
+Subcategory: block
+
+----
+
 Description: With this plugin you can use layouts right within any blocks field!

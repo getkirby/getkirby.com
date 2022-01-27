@@ -10,5 +10,19 @@ Category: templating
 
 ----
 
+Subcategory: engine
+
+----
+
 Description: Component, snippet and page method for semantic templates with Handlebars and Mustache
 
+----
+
+Example:
+
+```html
+<article id="{{ page.slug }}">
+  <h2>{{ page.title }}</h2>
+  {{ page.text }}
+</article>
+```

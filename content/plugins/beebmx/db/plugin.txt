@@ -6,9 +6,22 @@ Repository: https://github.com/beebmx/kirby-db
 
 ----
 
-Category: utilities
+Category: devtools
+
+----
+
+Sort: 1000
 
 ----
 
 Description: Use Laravel's illuminate/database package in Kirby
 
+----
+
+Example:
+
+```php
+use Beebmx\KirbyDB\DB;
+
+DB::table('users')->get();
+```

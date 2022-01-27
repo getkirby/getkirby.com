@@ -6,8 +6,24 @@ Repository: https://github.com/bnomei/kirby3-stopwatch
 
 ----
 
-Category: utilities
+Category: performance
+
+----
+
+Subcategory: optimization
 
 ----
 
 Description: Profile your Kirby 3 CMS code with precision in milliseconds (or seconds).
+
+----
+
+Example:
+
+```php
+site()->stopwatch()->start('myevent');
+// some code to profile
+site()->stopwatch()->stop('myevent');
+
+echo site()->stopwatch()->duration('myevent');
+```

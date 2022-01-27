@@ -6,7 +6,11 @@ Repository: https://github.com/lukasbestle/kirby-versions
 
 ----
 
-Category: panel
+Category: versioning
+
+----
+
+Subcategory: view
 
 ----
 

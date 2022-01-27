@@ -6,7 +6,11 @@ Repository: https://github.com/bnomei/kirby3-mailjet
 
 ----
 
-Category: utilities
+Category: forms
+
+----
+
+Subcategory: emails
 
 ----
 

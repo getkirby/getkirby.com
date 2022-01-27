@@ -6,9 +6,23 @@ Repository: https://github.com/bnomei/kirby3-monolog
 
 ----
 
-Category: utilities
+Category: devtools
+
+----
+
+Subcategory: logging
 
 ----
 
 Description: Use Monolog to log data to files, databases, notifications and more.
 
+----
+
+Example:
+
+```php
+monolog()->info('test-' . time()), [
+    'title' => $page->title(),
+    'page'  => $page->id()
+]);
+```

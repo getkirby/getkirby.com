@@ -12,3 +12,13 @@ Category: panel
 
 Description: Add more specific CSS classes and features to the panel views
 
+----
+
+Example:
+
+```yaml
+options:
+  singleLanguage: true
+  hideStatus: true
+  hideOptions: true
+```

@@ -6,7 +6,11 @@ Repository: https://github.com/medienbaecker/kirby-modules
 
 ----
 
-Category: templating
+Category: panel
+
+----
+
+Subcategory: section
 
 ----
 

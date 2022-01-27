@@ -6,9 +6,13 @@ Repository: https://github.com/OblikStudio/kirby-git
 
 ----
 
-Category: panel
+Category: versioning
 
 ----
 
-Description: Kirby plugin for updating content in the Panel via Git 
+Subcategory: view
+
+----
+
+Description: Kirby plugin for updating content in the Panel via Git
 

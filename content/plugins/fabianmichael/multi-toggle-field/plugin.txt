@@ -6,7 +6,11 @@ Repository: https://github.com/fabianmichael/kirby-multi-toggle-field/
 
 ----
 
-Category: panel
+Category: fields
+
+----
+
+Subcategory: layout
 
 ----
 

@@ -6,7 +6,11 @@ Download: https://clicktonext.com/plugins/accordion-field
 
 ----
 
-Category: panel
+Category: fields
+
+----
+
+Subcategory: structured-content
 
 ----
 

@@ -6,9 +6,17 @@ Repository: https://github.com/bnomei/kirby3-mobile-detect
 
 ----
 
-Category: utilities
+Category: templating
 
 ----
 
 Description: Static class and page methods for using the mobile detect lib
 
+----
+
+Example:
+
+```php
+<?php if ($page->isMobile()): ?>
+  Nice mobile phone!
+<?php endif ?>

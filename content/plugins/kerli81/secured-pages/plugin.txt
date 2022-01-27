@@ -10,5 +10,9 @@ Category: security
 
 ----
 
+Subcategory: content-protection
+
+----
+
 Description: Prevent unauthorized users to access a page or a hierarchy of pages. The permission will be granted by a user group. If the user is not yet logged in, the login page will be displayed.
 

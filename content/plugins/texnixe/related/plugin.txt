@@ -10,5 +10,19 @@ Category: templating
 
 ----
 
+Subcategory: relationships
+
+----
+
 Description: Fetch related pages/files based on matching values in a given field
+
+----
+
+Example:
+
+```php
+foreach ($page->related($options) as $p) {
+  echo $p->title();
+}
+```
 

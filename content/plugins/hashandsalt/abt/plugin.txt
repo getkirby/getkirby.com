@@ -6,7 +6,11 @@ Repository: https://github.com/HashandSalt/kirby3-abt
 
 ----
 
-Category: utilities
+Category: analytics
+
+----
+
+Subcategory: ab-testing
 
 ----
 

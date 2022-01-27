@@ -6,7 +6,7 @@ Repository: https://github.com/bvdputte/kirby-fingerprint
 
 ----
 
-Category: assets
+Category: media
 
 ----
 
@@ -15,3 +15,11 @@ Description: Cache-busting utility to fingerprint assets
 ----
 
 Recommended: bnomei/fingerprint
+
+----
+
+Example:
+
+```php
+href="styles.db5796ea5bf2.css"
+```

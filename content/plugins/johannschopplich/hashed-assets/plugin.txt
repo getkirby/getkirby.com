@@ -6,12 +6,20 @@ Repository: https://github.com/johannschopplich/kirby-hashed-assets
 
 ----
 
-Category: assets
+Category: performance
 
 ----
 
-Featured: false
+Subcategory: cachebusting
 
 ----
 
-Description: File name hashes support for the css() and js() helpers 
+Description: File name hashes support for the css() and js() helpers
+
+----
+
+Example:
+
+```php
+<script src="/js/main.9ad649fd.js">
+```

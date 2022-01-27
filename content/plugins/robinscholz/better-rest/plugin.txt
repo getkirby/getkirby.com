@@ -6,7 +6,11 @@ Repository: https://github.com/robinscholz/better-rest
 
 ----
 
-Category: integrations
+Category: headless
+
+----
+
+Subcategory: api
 
 ----
 

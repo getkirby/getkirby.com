@@ -38,6 +38,9 @@
 .code-toolbar:hover .toolbar {
   opacity: 1;
 }
+[data-no-copy] .code-toolbar .toolbar {
+  opacity: 0;
+}
 .code-toolbar button {
   position: relative;
   display: flex;

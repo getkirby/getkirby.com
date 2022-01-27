@@ -10,4 +10,8 @@ Category: social
 
 ----
 
+Subcategory: social
+
+----
+
 Description: Plugin to help you show your own instagram feed on your website. Works with test users, no app approval needed!

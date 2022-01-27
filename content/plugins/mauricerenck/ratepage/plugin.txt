@@ -6,12 +6,13 @@ Repository: https://github.com/mauricerenck/rate-page
 
 ----
 
-Category: integrations
+Category: social
+
+----
+
+Subcategory: indieweb
 
 ----
 
 Description: A page rating plugin. Working without page reload and can also receive webmentions. Comes with a panel overview of all the ratings.
 
-----
-
-Featured: false

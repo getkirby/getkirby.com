@@ -10,4 +10,8 @@ Category: social
 
 ----
 
+Subcategory: social
+
+----
+
 Description: Simple floating WhatsApp button plugin for Kirby 3.

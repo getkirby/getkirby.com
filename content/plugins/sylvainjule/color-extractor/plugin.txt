@@ -6,7 +6,11 @@ Repository: https://github.com/sylvainjule/kirby-colorextractor
 
 ----
 
-Category: panel
+Category: fields
+
+----
+
+Subcategory: colors
 
 ----
 

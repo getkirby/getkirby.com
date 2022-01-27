@@ -6,9 +6,20 @@ Repository: https://github.com/omz13/kirby3-suncyclepages
 
 ----
 
-Category: utilities
+Category: dates
 
 ----
 
 Description: Embargo pages until sunrise date and withdraw at sunset date
 
+----
+
+Example:
+
+```php
+$articles = page('blog')
+    ->children()
+    ->listed()
+    ->isUnderEmbargo(false)
+    ->isSunset(false);
+```

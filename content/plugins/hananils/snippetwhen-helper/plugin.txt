@@ -11,3 +11,11 @@ Category: templating
 ----
 
 Description: snippetWhen is a helper function to conditionally embed snippets.
+
+----
+
+Example:
+
+```php
+snippetWhen('article', $category->isNotEmpty())
+```

@@ -6,8 +6,26 @@ Repository: https://github.com/afbora/kirby-loader
 
 ----
 
-Category: utilities
+Category: devtools
+
+----
+
+Subcategory: plugins
 
 ----
 
 Description: With Kirby Loader you can load plugins from multiple roots. Thus, you can simplify the management of your plugins by grouping.
+
+----
+
+Example:
+
+```php
+return [
+    'afbora.loader.roots' => [
+        '/plugins/core',
+        '/plugins/payment',
+        '/plugins/shipping',
+    ]
+];
+```

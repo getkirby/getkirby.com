@@ -6,9 +6,20 @@ Repository: https://github.com/bnomei/kirby3-plopfile
 
 ----
 
-Category: utilities
+Category: devtools
 
 ----
 
 Description: CLI tool to generate and append to various files for Kirby3 CMS using Plop.js
 
+----
+
+Example:
+
+```bash
+plop blueprint $ pages blogpost
+plop template $ blogpost
+plop content "Nice!" blog blogpost
+plop content _ blog blogpost
+plop snippet $ slideshow
+```

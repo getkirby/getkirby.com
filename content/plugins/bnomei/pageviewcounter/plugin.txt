@@ -11,3 +11,11 @@ Category: analytics
 ----
 
 Description: Track Page view count and last visited timestamp
+
+----
+
+Example:
+
+```php
+<?= $page->counterImage() ?>
+```

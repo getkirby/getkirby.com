@@ -12,3 +12,10 @@ Category: text
 
 Description: Embed CodePens in your text with the (codepen: …) Kirbytag
 
+----
+
+Example:
+
+```kirbytext
+(codepen: jwGBh)
+```

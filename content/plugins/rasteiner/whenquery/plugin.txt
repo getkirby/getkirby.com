@@ -12,3 +12,13 @@ Category: panel
 
 Description: Conditionally show and hide your fields and sections by evaluating a query expression.
 
+----
+
+Example:
+
+```yaml
+warning:
+  type: info
+  label: Woofling warning
+  theme: negative
+  whenQuery: barsters > 30

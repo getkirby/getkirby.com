@@ -11,3 +11,11 @@ Category: text
 ----
 
 Description: Kirbytag to generate beautiful download links for a specific file
+
+----
+
+Example:
+
+```kirbytext
+(download: flyer.pdf text: our beautiful products)
+```

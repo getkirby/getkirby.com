@@ -6,7 +6,11 @@ Repository: https://github.com/mullema/k3-date-format
 
 ----
 
-Category: panel
+Category: fields
+
+----
+
+Subcategory: dates
 
 ----
 

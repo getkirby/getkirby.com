@@ -6,11 +6,17 @@ Repository: https://github.com/bvdputte/kirby-bettersearch
 
 ----
 
-Category: utilities
+Category: templating
 
 ----
 
 Description: Search for full word combinations rather than just individual words.
 
+----
 
+Example:
+
+```php
+$pages->bettersearch($string, $options)
+```
 

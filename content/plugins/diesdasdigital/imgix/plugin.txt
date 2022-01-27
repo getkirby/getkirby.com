@@ -6,7 +6,11 @@ Repository: https://github.com/diesdasdigital/kirby-3-imgix
 
 ----
 
-Category: assets
+Category: media
+
+----
+
+Subcategory: images
 
 ----
 

@@ -10,4 +10,8 @@ Category: analytics
 
 ----
 
+Subcategory: dashboard
+
+----
+
 Description: Displays simple and useful web analytics from Plausible directly into a panel and provides a frontend snippet for adding the Plausible tracking code to your templates.

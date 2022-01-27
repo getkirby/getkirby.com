@@ -6,7 +6,11 @@ Repository: https://github.com/sylvainjule/kirby-locator
 
 ----
 
-Category: panel
+Category: fields
+
+----
+
+Subcategory: maps
 
 ----
 

@@ -6,8 +6,21 @@ Repository: https://github.com/presprog/kirby-route-attributes
 
 ----
 
-Category: utilities
+Category: devtools
 
 ----
 
 Description: Use PHP8 attributes to define metadata for your custom routes in separate files.
+
+----
+
+Example:
+
+```php
+// site/routes/my-awesome-route.php
+use PresProg\RouteAttributes\Attributes\Get;
+
+return #[Get('/hello')] function () {
+    return '<h1>Hello world!</h1>';
+};
+```

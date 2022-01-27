@@ -6,7 +6,11 @@ Repository: https://github.com/benediktengel/google-calendar-plugin
 
 ----
 
-Category: integrations
+Category: dates
+
+----
+
+Subcategory: calendar
 
 ----
 

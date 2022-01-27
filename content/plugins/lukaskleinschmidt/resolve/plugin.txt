@@ -10,4 +10,18 @@ Category: performance
 
 ----
 
+Subcategory: optimization
+
+----
+
 Description: Speed up Kirby's page routing.
+
+----
+
+Example:
+
+```php
+return [
+    'lukaskleinschmidt.resolve.cache' => true
+];
+```

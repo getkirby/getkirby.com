@@ -6,9 +6,24 @@ Repository: https://github.com/floriankarsten/kirby3-vipsthumbnail
 
 ----
 
-Category: assets
+Category: media
+
+----
+
+Subcategory: videos
 
 ----
 
 Description: This is very basic Kirby CMS thumbnail driver for libvips.
 
+----
+
+Example:
+
+```php
+return [
+  'thumbs' => [
+    'driver' => 'vipsthumbnail'
+  ]
+];
+```

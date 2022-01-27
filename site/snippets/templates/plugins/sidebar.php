@@ -5,7 +5,12 @@
     <?php endslot() ?>
     <ul class="filters">
       <li>
-        <a href="/plugins"<?= ariaCurrent(!$currentCategory) ?>>
+        <a href="/plugins" <?= ariaCurrent(!$currentCategory) ?>>
+          <?= icon('star') ?> Featured
+        </a>
+      </li>
+      <li>
+        <a href="/plugins/category:all" <?= ariaCurrent($currentCategory === 'all') ?>>
           <?= icon('list') ?> All plugins
         </a>
       </li>
@@ -14,13 +19,15 @@
           <?= icon('search') ?> Search
         </button>
       </li>
-      <li><hr class="hr"></li>
-      <?php foreach ($categories as $categoryId => $category): ?>
       <li>
-        <a aria-label="<?= $category['label'] ?> plugins" href="/plugins/category:<?= $categoryId ?>"<?= ariaCurrent($categoryId === $currentCategory) ?>>
-          <?= icon($category['icon']) ?> <?= $category['label'] ?>
-        </a>
+        <hr class="hr">
       </li>
+      <?php foreach ($categories as $categoryId => $category) : ?>
+        <li>
+          <a aria-label="<?= $category['label'] ?> plugins" href="/plugins/category:<?= $categoryId ?>" <?= ariaCurrent($categoryId === $currentCategory) ?>>
+            <?= icon($category['icon']) ?> <?= $category['label'] ?>
+          </a>
+        </li>
       <?php endforeach ?>
     </ul>
   </div>

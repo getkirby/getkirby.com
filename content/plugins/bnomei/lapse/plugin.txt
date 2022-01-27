@@ -10,4 +10,19 @@ Category: performance
 
 ----
 
+Subcategory: caching
+
+----
+
 Description: Cache any data until the set expiration time
+
+----
+
+Example:
+
+```php
+$key  = crc32($page->url());
+$data = lapse($key, function () {
+    return [1, 2, 3];
+});
+```

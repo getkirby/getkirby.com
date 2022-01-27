@@ -6,8 +6,27 @@ Repository: https://github.com/hananils/kirby-tracker
 
 ----
 
-Category: utilities
+Category: devtools
+
+----
+
+Subcategory: logging
 
 ----
 
 Description: Tracker is a plugin to track content changes and create panel logs or front-end notifications in member areas.
+
+----
+
+Example:
+
+```php
+<?php foreach ($notifications as $notification): ?>
+  <li>
+    <?= $notification
+      ->track()
+      ->toReference()
+      ->title() ?>
+  </li>
+<?php endforeach ?>
+```

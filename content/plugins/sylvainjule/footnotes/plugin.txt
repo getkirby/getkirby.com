@@ -11,3 +11,11 @@ Category: text
 ----
 
 Description: This plugin extends Kirby 3 with some basic, extremely easy and unopinionated footnote functionalities.
+
+----
+
+Example:
+
+```kirbytext
+[^This is a footnote.]
+```

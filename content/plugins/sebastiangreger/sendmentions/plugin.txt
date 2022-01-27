@@ -6,7 +6,11 @@ Repository: https://github.com/sebastiangreger/kirby3-sendmentions
 
 ----
 
-Category: integrations
+Category: social
+
+----
+
+Subcategory: indieweb
 
 ----
 

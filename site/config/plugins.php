@@ -2,17 +2,22 @@
 
 return [
     'categories' => [
-        'panel'         => ['icon' => 'panel', 'label' => 'Panel'],
-        'templating'    => ['icon' => 'html', 'label' => 'Templating'],
-        'seo'           => ['icon' => 'seo', 'label' => 'SEO'],
-        'security'      => ['icon' => 'lock', 'label' => 'Security'],
-        'performance'   => ['icon' => 'performance', 'label' => 'Performance'],
         'analytics'     => ['icon' => 'analytics', 'label' => 'Analytics'],
-        'assets'        => ['icon' => 'image', 'label' => 'Assets'],
-        'text'          => ['icon' => 'text', 'label' => 'Text'],
+        'dates'         => ['icon' => 'calendar', 'label' => 'Dates & Calendars'],
+        'ecommerce'     => ['icon' => 'cart', 'label' => 'E-commerce'],
+        'fields'        => ['icon' => 'input', 'label' => 'Fields'],
         'forms'         => ['icon' => 'forms', 'label' => 'Forms'],
-        'utilities'     => ['icon' => 'wand', 'label' => 'Utilities'],
-        'integrations'  => ['icon' => 'integration', 'label' => 'Integrations'],
-        'social'        => ['icon' => 'twitter', 'label' => 'Social Networking']
+        'headless'      => ['icon' => 'integration', 'label' => 'Headless'],
+        'i18n'          => ['icon' => 'globe', 'label' => 'Internationalization'],
+        'devtools'      => ['icon' => 'code', 'label' => 'Dev tools'],
+        'media'         => ['icon' => 'image', 'label' => 'Media'],
+        'panel'         => ['icon' => 'panel', 'label' => 'Panel'],
+        'performance'   => ['icon' => 'performance', 'label' => 'Performance'],
+        'security'      => ['icon' => 'lock', 'label' => 'Security'],
+        'seo'           => ['icon' => 'seo', 'label' => 'SEO'],
+        'social'        => ['icon' => 'user', 'label' => 'Social web'],
+        'text'          => ['icon' => 'text', 'label' => 'Kirbytext'],
+        'templating'    => ['icon' => 'html', 'label' => 'Templating'],
+        'versioning'    => ['icon' => 'git', 'label' => 'Versioning'],
     ]
 ];

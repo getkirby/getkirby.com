@@ -6,9 +6,13 @@ Repository: https://github.com/rasteiner/oh-hi-mark
 
 ----
 
-Category: panel
+Category: fields
 
 ----
 
-Description: Enables the inclusion of custom Writer field marks without patching the Kirby dist files. 
+Subcategory: enhancement
+
+----
+
+Description: Enables the inclusion of custom Writer field marks without patching the Kirby dist files.
 

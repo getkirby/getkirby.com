@@ -6,7 +6,11 @@ Repository: https://github.com/olach/kirby3-relationship
 
 ----
 
-Category: panel
+Category: fields
+
+----
+
+Subcategory: structured-content
 
 ----
 

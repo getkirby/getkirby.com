@@ -6,7 +6,11 @@ Repository: https://github.com/gearsdigital/enhanced-toolbar-link-dialog
 
 ----
 
-Category: panel
+Category: fields
+
+----
+
+Subcategory: enhancement
 
 ----
 

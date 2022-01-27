@@ -6,7 +6,7 @@ Repository: https://github.com/beebmx/kirby-env
 
 ----
 
-Category: utilities
+Category: devtools
 
 ----
 
@@ -15,3 +15,17 @@ Description: Store project credentials and variables in a .env file and access t
 ----
 
 Recommended: bnomei/dotenv
+
+----
+
+Example:
+
+```php
+\Beebmx\KirbyEnv::load('main/path');
+
+return [
+    'debug'  => env('KIRBY_DEBUG', false),
+    'secret' => env('SECRET_KEY'),
+    'public' => env('PUBLIC_KEY'),
+];
+```

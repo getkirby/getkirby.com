@@ -6,8 +6,19 @@ Repository: https://github.com/afbora/kirby-template-hooks
 
 ----
 
-Category: utilities
+Category: devtools
 
 ----
 
 Description: Template hooks allow you to manage hooks for page and file templates more easily.
+
+----
+
+Example:
+
+```php
+// hook
+'page.product.update:after' => function () {
+    // your code goes here
+}
+```

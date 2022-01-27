@@ -6,12 +6,20 @@ Repository: https://github.com/johannschopplich/kirbylog
 
 ----
 
-Category: utilities
+Category: devtools
 
 ----
 
-Featured: false
+Subcategory: logging
 
 ----
 
 Description: Zero-dependency global `kirbylog()` helper for any content
+
+----
+
+Example:
+
+```php
+kirbylog('Something happened');
+```

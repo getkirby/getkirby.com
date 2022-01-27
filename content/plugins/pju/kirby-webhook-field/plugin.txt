@@ -6,7 +6,7 @@ Repository: https://github.com/pju-/kirby-webhook-field
 
 ----
 
-Category: panel
+Category: fields
 
 ----
 

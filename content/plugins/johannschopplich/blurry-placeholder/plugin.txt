@@ -6,11 +6,11 @@ Repository: https://github.com/johannschopplich/kirby-blurry-placeholder
 
 ----
 
-Category: assets
+Category: media
 
 ----
 
-Featured: false
+Subcategory: images
 
 ----
 

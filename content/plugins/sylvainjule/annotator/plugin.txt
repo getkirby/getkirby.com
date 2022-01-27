@@ -6,11 +6,11 @@ Repository: https://github.com/sylvainjule/kirby-annotator
 
 ----
 
-Category: panel
+Category: fields
 
 ----
 
-Featured: true
+Subcategory: images
 
 ----
 

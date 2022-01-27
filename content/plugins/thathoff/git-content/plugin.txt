@@ -6,7 +6,7 @@ Repository: https://github.com/thathoff/kirby-git-content
 
 ----
 
-Category: integrations
+Category: versioning
 
 ----
 

@@ -6,9 +6,16 @@ Repository: https://github.com/HashandSalt/kirby3-yasumi
 
 ----
 
-Category: utilities
+Category: dates
 
 ----
 
 Description: Get a list of official public holidays and the dates they fall on for any country and year.
 
+----
+
+Example:
+
+```php
+$site->holidays('France', 2022);
+```

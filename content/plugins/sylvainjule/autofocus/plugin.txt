@@ -6,7 +6,11 @@ Repository: https://github.com/sylvainjule/kirby-autofocus
 
 ----
 
-Category: assets
+Category: media
+
+----
+
+Subcategory: images
 
 ----
 

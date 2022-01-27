@@ -6,7 +6,11 @@ Repository: https://github.com/Diverently/laravel-mix-kirby
 
 ----
 
-Category: assets
+Category: templating
+
+----
+
+Subcategory: assets
 
 ----
 

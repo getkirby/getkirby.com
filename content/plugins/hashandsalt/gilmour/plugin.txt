@@ -12,3 +12,10 @@ Category: templating
 
 Description: Read ID3 tags from audio files and use it in your templates.
 
+----
+
+Example:
+
+```php
+<?= $file->id3('artist') ?>
+```

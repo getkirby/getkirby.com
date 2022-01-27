@@ -6,9 +6,20 @@ Repository: https://github.com/bvdputte/kirby-log
 
 ----
 
-Category: utilities
+Category: devtools
+
+----
+
+Subcategory: logging
 
 ----
 
 Description: A little log utility (KLogger wrapper)
 
+----
+
+Example:
+
+```php
+$site->log('My message', 'error');
+```

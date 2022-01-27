@@ -6,7 +6,11 @@ Repository: https://github.com/mauricerenck/komments
 
 ----
 
-Category: integrations
+Category: social
+
+----
+
+Subcategory: indieweb
 
 ----
 

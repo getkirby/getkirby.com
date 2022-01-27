@@ -1,1 +1,3 @@
-Title: mgf // Marketing & Kommunikation
+Title: am-teich
+----
+Github: https://github.com/amteich

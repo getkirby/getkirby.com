@@ -10,4 +10,12 @@ Category: social
 
 ----
 
+Subcategory: social
+
+----
+
 Description: Instagram feed on your Kirby website!
+
+----
+
+Similar: plugins/genxbe/instagram

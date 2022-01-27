@@ -6,7 +6,11 @@ Download: https://clicktonext.com/plugins/mercado-pago-merx
 
 ----
 
-Category: integrations
+Category: ecommerce
+
+----
+
+Subcategory: merx
 
 ----
 

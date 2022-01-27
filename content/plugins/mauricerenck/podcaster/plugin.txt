@@ -6,12 +6,13 @@ Repository: https://github.com/mauricerenck/kirby-podcaster
 
 ----
 
-Category: integrations
+Category: social
+
+----
+
+Subcategory: podcasts
 
 ----
 
 Description: Run your own podcast with Kirby! Handle episodes right in the panel, create feeds for all popular "podcatchers", track downloads and integrate a player in your site.
 
-----
-
-Featured: true

@@ -11,3 +11,11 @@ Category: text
 ----
 
 Description: Kirbytag to create blockquotes
+
+----
+
+Example:
+
+```kirbytext
+(quote: Awesome quote author: A. Einstein)
+```

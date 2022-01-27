@@ -6,12 +6,13 @@ Repository: https://github.com/mauricerenck/indieConnector
 
 ----
 
-Category: integrations
+Category: social
 
 ----
 
-Description: A webmention handler. Receives webmentions and propagates them via Kirby hook so your site or other plugins can subscribe to them. 
+Subcategory: indieweb
 
 ----
 
-Featured: false
+Description: A webmention handler. Receives webmentions and propagates them via Kirby hook so your site or other plugins can subscribe to them.
+

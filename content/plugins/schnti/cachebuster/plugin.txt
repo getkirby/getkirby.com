@@ -10,5 +10,18 @@ Category: performance
 
 ----
 
+Subcategory: cachebusting
+
+----
+
 Description: Add modification timestamps to your css and js files, as long as they are embedded with the css() and js() helpers.
 
+----
+
+Example:
+
+```php
+return [
+  'schnti.cachebuster.active' => true
+];
+```

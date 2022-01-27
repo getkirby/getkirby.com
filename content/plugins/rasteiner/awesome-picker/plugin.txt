@@ -6,7 +6,11 @@ Repository: https://github.com/rasteiner/k3-awesome-picker
 
 ----
 
-Category: panel
+Category: fields
+
+----
+
+Subcategory: images
 
 ----
 
