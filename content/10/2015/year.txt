@@ -17,7 +17,7 @@ Two folks stood out more and more: Texnixe and Lukas.
 (image: sonja.jpg class: avatar caption: Sonja Broda)
 Texnixe is the alter ego of Sonja Broda: A technical writer and developer from Mainz, Germany. She had built a couple Kirby projects over the years and started to help out other users with their technical questions. Her answers were always friendly, always focused on practical solutions, always very proficient. Her reply rate was off the charts. She often answered questions long before I even had a chance to look at them.
 
-(image: lukas.png class: avatar caption: Lukas Bestle)
+(image: lukas.jpg class: avatar caption: Lukas Bestle)
 Lukas Bestle was the same guy who was always present on GitHub and had contributed his very first improvement in June 2012. He knew Kirby inside out by now and already started his own business after finishing school when others still tried to figure out what to do with their lives.
 
 I was blown away by their professionalism at a point when they contributed all the answers and solutions on a voluntary basis. The forum benefited massively from their support and it became a logical next step to hire them both.
@@ -45,5 +45,3 @@ It was a hell lot of work. Some shirts never arrived at their destination. Some 
 More and more work for v2 piled up. We didn't have a proper CI workflow and tests back in those days, and every release was an adventure. It got clear that we need to invest more in a professional setup. Nico was another frequent member of the community, who had built some very impressive projects with Kirby. I asked him to help us out with frontend work for the Panel and other parts of the system. Over the years we had endless experimental coding sessions together and built some really cool things that sometimes even ended up in releases 😄
 
 (image: nico.jpg class: avatar caption: Nico Hoffmann)
-
-
