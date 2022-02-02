@@ -374,7 +374,7 @@ User roles can no longer be defined in the config settings, but solely (link: do
 
 ### Permissions
 
-(link: docs/guide/users/permissions text: User permissions) are now defined in `.yml` files, not `.php` files like in Kirby 2. Also, the available permissions have changed to make them easier to implement. On the other hand that mean that currently some functionality for fine-grained control of user access is not available.
+(link: docs/guide/users/permissions text: User permissions) are now defined in `.yml` files, not `.php` files like in Kirby 2. Also, the available permissions have changed to make them easier to implement. On the other hand that means that currently some functionality for fine-grained control of user access is not available.
 
 ### Accessing the `$user` object
 
