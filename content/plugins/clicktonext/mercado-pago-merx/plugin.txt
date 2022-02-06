@@ -1,0 +1,13 @@
+Title: Mercado Pago for Merx
+
+----
+
+Download: https://clicktonext.com/plugins/mercado-pago-merx
+
+----
+
+Category: integrations
+
+----
+
+Description: Mercado Pago payment gateway for Kirby 3 Merx plugin.
