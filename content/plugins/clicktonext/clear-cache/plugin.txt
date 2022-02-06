@@ -1,0 +1,13 @@
+Title: Clear Cache
+
+----
+
+Download: https://clicktonext.com/plugins/clear-cache
+
+----
+
+Category: utilities
+
+----
+
+Description: Clean temporary files and folders such as cache, media, .lock and .logins on your website.
