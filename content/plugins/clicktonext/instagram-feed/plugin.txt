@@ -1,0 +1,13 @@
+Title: Instagram Feed
+
+----
+
+Download: https://clicktonext.com/plugins/instagram-feed
+
+----
+
+Category: social
+
+----
+
+Description: Instagram feed on your Kirby website!
