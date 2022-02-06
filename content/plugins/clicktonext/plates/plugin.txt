@@ -1,0 +1,13 @@
+Title: Plates
+
+----
+
+Download: https://clicktonext.com/plugins/plates
+
+----
+
+Category: templating
+
+----
+
+Description: Plates native PHP template engine/system for Kirby 3.
