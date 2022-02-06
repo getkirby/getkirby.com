@@ -1,0 +1,13 @@
+Title: Move Pages
+
+----
+
+Download: https://clicktonext.com/plugins/move-pages
+
+----
+
+Category: utilities
+
+----
+
+Description: Missing move pages feature for Kirby 3.
