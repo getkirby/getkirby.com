@@ -1,0 +1,13 @@
+Title: Accordion Field
+
+----
+
+Download: https://clicktonext.com/plugins/accordion-field
+
+----
+
+Category: panel
+
+----
+
+Description: Collapses the content below headlines in Panel for Kirby 3.
