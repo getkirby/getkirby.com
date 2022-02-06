@@ -1,0 +1,13 @@
+Title: PWA (Progressive Web App)
+
+----
+
+Download: https://clicktonext.com/plugins/pwa-progressive-web-app
+
+----
+
+Category: utilities
+
+----
+
+Description: Turns your Kirby website into a PWA: progressive web app.
