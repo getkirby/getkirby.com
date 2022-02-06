@@ -1,0 +1,13 @@
+Title: Detect Adblock
+
+----
+
+Download: https://clicktonext.com/plugins/detect-adblock
+
+----
+
+Category: utilities
+
+----
+
+Description: Detect ad blockers and manage the warning messages that will be displayed for Kirby 3.
