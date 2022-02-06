@@ -1,0 +1,13 @@
+Title: Mollie for Merx
+
+----
+
+Download: https://clicktonext.com/plugins/mollie-merx
+
+----
+
+Category: integrations
+
+----
+
+Description: Mollie payment gateway for Kirby 3 Merx plugin.
