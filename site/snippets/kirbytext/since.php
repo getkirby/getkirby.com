@@ -1,5 +1,5 @@
 <?php
-$current = version_compare($version, $kirby->version(), '>=');
+$current = version_compare($version, kirby()->version(), '>=');
 ?>
 
 <summary <?php e($current, 'class="new"') ?>>
