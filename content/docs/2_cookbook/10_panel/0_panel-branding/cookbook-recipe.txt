@@ -1,0 +1,91 @@
+Title: Branding the panel to adapt it to yours or your client's brand
+
+----
+
+Text:
+
+Today we are going to put the focus on a simple modification, but it changes significantly the Look & Feel from the (glossary: Panel Text: Panel) and will give a more personalized experience.
+
+As developers using Kirby, we usually make websites that we deliver to our customers in a personalized way. Modifying a bit the styles of the panel we will go a little further on this customization.
+
+The first thing we must do is to add a custom Panel stylesheet and override the default styles.
+
+To do so, register your custom stylesheet in your `config.php`, for example:
+
+```php "/site/config/config.php"
+return [
+  'panel' => [
+    'css' => 'assets/css/custom-panel.css'
+  ]
+];
+```
+Now, we will load the fonts we need:
+
+```css "/assets/css/custom-panel.css"
+@font-face {
+  font-family: 'bw_gradualbold';
+  src: url('../fonts/bwgradual-bold-webfont.woff2') format('woff2'),
+    url('../fonts/bwgradual-bold-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+```
+Note that I have my fonts on ```/assets/fonts```
+
+If you want to include your fonts, for example from Google Fonts, you can do it like this:
+
+```css "/assets/css/custom-panel.css"
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+```
+Now with few CSS lines we will change the appearance of the whole Panel to adapt it to your brand:
+
+```css "/assets/css/custom-panel.css"
+
+:root {
+  --color-gray-900: #182D31;
+  --color-background: #F3F3F4;
+}
+
+.k-tabs {
+  background-color: #f7e8d6;
+}
+
+.k-headline {
+  font-family: 'Merriweather';
+}
+
+.k-header::before {
+  float: right;
+  content: '';
+  margin-top: 10px;
+  width: 150px;
+  height: 35px;
+  background-image: url('../img/logo-dark.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  clear: right;
+}
+
+```
+You can play with ```margin-top``` ```width``` and ```height``` on ```.k-header::before``` to adjust your logo correctly.
+
+Here you have some examples:
+
+(image: mtlaw.png)
+(image: baylos.png)
+
+
+As you can see it is a simple adaptation that adds a logo, and modify the base colors but you can go much further thanks to the [UI Kit](https://getkirby.com/docs/reference/plugins/ui#colors)
+
+
+----
+
+Published: 2022-02-06
+
+----
+
+Description: Adapt the panel Look & Feel to your brand
+
+----
+
+Authors: - authors/isaac-bordons
