@@ -18,6 +18,12 @@ class PluginPage extends Page
         return $this->id() . '/' . $section;
     }
 
+    public function card()
+    {
+        $images = $this->images();
+        return $images->findBy('name', 'card') ?? $images->findBy('name', 'screenshot') ?? $images->first();
+    }
+
     public function download()
     {
         if ($this->content()->has('download')) {

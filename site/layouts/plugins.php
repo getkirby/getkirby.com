@@ -64,9 +64,6 @@
         <article class="mb-24">
           <?php slot() ?>
           <?php endslot() ?>
-          <footer>
-            <?php snippet('layouts/github-edit') ?>
-          </footer>
         </article>
         <?php snippet('templates/plugins/sidebar') ?>
       </div>

@@ -1,80 +1,112 @@
-
-
 <section id="fields" class="mb-24">
-  <h2 class="mb-6 inline-flex items-center bg-light" style="border-radius: 5rem; padding: .25rem 1rem">
-    <span class="mr-3"><?= icon('forms') ?></span> Fields
-  </h2>
-
-  <div class="columns" style="--columns: 3; --gap: var(--spacing-6)">
-    <?php foreach (pages('plugins/sylvainjule/color-palette', 'plugins/sylvainjule/illustrated-radio', 'plugins/oblikstudio/link-field', 'plugins/sylvainjule/locator', 'plugins/fabianmichael/markdown-field', 'plugins/fabianmichael/multi-toggle-field') as $plugin): ?>
-    <article class="bg-white rounded overflow-hidden shadow-lg">
-      <figure class="bg-light">
-        <img src="<?= $plugin->images()->findBy('name', 'screenshot')->url() ?>" style="--aspect-ratio: 4/3; object-position: left top;">
-      </figure>
-      <div class="p-6">
-        <h4 class="font-bold"><?= $plugin->title() ?></h4>
-        <p class="mb-3">
-          <a href="<?= $plugin->parent()->url() ?>" class="block font-mono text-xs color-gray-500">
-          by <span class="color-black"><?= $plugin->parent()->title() ?></span>
-          </a>
-        </p>
-        <div class="prose text-sm">
-          <?= $plugin->description() ?>
-        </div>
-      </div>
-    </article>
-    <?php endforeach ?>
-  </div>
+  <?php snippet('templates/plugins/headline', [
+    'icon' => 'forms',
+    'text' => 'Fields'
+  ]) ?>
+  <?php snippet('templates/plugins/cards', [
+    'plugins' => pages(
+      'plugins/fabianmichael/markdown-field',
+      'plugins/sylvainjule/color-palette',
+      'plugins/belugachris/navigation',
+      'plugins/oblikstudio/json-field',
+      'plugins/sylvainjule/locator',
+      'plugins/sylvainjule/illustrated-radio',
+    )
+  ]) ?>
 </section>
 
 <section id="seo" class="mb-24">
-  <h2 class="mb-6 inline-flex items-center bg-light" style="border-radius: 5rem; padding: .25rem 1rem">
-    <span class="mr-3"><?= icon('seo') ?></span> SEO
-  </h2>
-
-  <?php foreach (pages(['plugins/diesdasdigital/metaknight']) as $plugin): ?>
-  <article class="bg-dark shadow-xl color-gray-400 rounded overflow-hidden shadow columns" style="--columns: 3; --gap: 0">
-    <img src="<?= $plugin->images()->findBy('name', 'screenshot')->url() ?>" class="px-3 pt-3" style="--span: 2; --aspect-ratio: 3/1.5; object-position: top center">
-    <div class="p-6">
-      <h4 class="color-white font-bold"><?= $plugin->title() ?></h4>
-      <p class="mb-3">
-        <a href="<?= $plugin->parent()->url() ?>" class="block font-mono text-xs color-gray-500">
-        by <span class="color-white"><?= $plugin->parent()->title() ?></span>
-        </a>
-      </p>
-      <div class="prose color-gray-400 text-sm">
-        <?= $plugin->description() ?>
-      </div>
-    </div>
-  </article>
-  <?php endforeach ?>
+  <?php snippet('templates/plugins/headline', [
+    'icon' => 'seo',
+    'text' => 'SEO'
+  ]) ?>
+  <?php snippet('templates/plugins/hero', [
+    'plugin' => page('plugins/diesdasdigital/metaknight'),
+  ]) ?>
 </section>
 
-<section id="analytics" class="mb-42">
-  <h2 class="mb-6 inline-flex items-center bg-light" style="border-radius: 5rem; padding: .25rem 1rem">
-    <span class="mr-3"><?= icon('analytics') ?></span> Analytics
-  </h2>
+<section id="template-engines" class="mb-24">
+  <?php snippet('templates/plugins/headline', [
+    'icon' => 'code',
+    'text' => 'Template Engines'
+  ]) ?>
+  <?php snippet('templates/plugins/cardlets', [
+    'columns' => 2,
+    'plugins' => pages(
+      'plugins/afbora/blade',
+      'plugins/mgfagency/twig'
+    )
+  ]) ?>
+</section>
 
-  <div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
-    <?php foreach (pages('plugins/paulmorel/fathom-analytics', 'plugins/sylvainjule/matomo') as $plugin): ?>
-    <article class="bg-white rounded overflow-hidden shadow-lg">
-      <figure class="bg-light">
-        <img src="<?= $plugin->images()->findBy('name', 'screenshot')->url() ?>" style="--aspect-ratio: 4/3; object-position: left top; mix-blend-mode: multiply">
-      </figure>
-      <div class="p-6">
-        <h4 class="font-bold"><?= $plugin->title() ?></h4>
-        <p class="mb-3">
-          <a href="<?= $plugin->parent()->url() ?>" class="block font-mono text-xs color-gray-500">
-          by <span class="color-black"><?= $plugin->parent()->title() ?></span>
-          </a>
-        </p>
-        <div class="prose text-sm">
-          <?= $plugin->description() ?>
-        </div>
-      </div>
-    </article>
-    <?php endforeach ?>
+<section id="analytics" class="mb-24">
+  <?php snippet('templates/plugins/headline', [
+    'icon' => 'analytics',
+    'text' => 'Analytics'
+  ]) ?>
+
+  <?php snippet('templates/plugins/cards', [
+    'columns' => 2,
+    'plugins' => pages(
+      'plugins/paulmorel/fathom-analytics',
+      'plugins/sylvainjule/matomo',
+      'plugins/rowdyrabouw/plausible',
+      'plugins/daandelange/simplestats',
+    )
+  ]) ?>
+</section>
+
+<section id="ecommerce" class="mb-24">
+  <?php snippet('templates/plugins/headline', [
+    'icon' => 'cart',
+    'text' => 'Shops'
+  ]) ?>
+
+  <div class="mb-6">
+    <?php snippet('templates/plugins/hero', [
+      'plugin' => page(
+        'plugins/wagnerwagner/merx',
+      ),
+    ]) ?>
   </div>
+  <?php snippet('templates/plugins/cardlets', [
+    'columns' => 2,
+    'plugins' => pages(
+      'plugins/tristanbg/shopify',
+      'plugins/hashandsalt/snipcart',
+    )
+  ]) ?>
 
+</section>
+
+<section id="blocks" class="mb-24">
+  <?php snippet('templates/plugins/headline', [
+    'icon' => 'widget',
+    'text' => 'Blocks'
+  ]) ?>
+  <?php snippet('templates/plugins/cards', [
+    'columns' => 3,
+    'plugins' => pages(
+      'plugins/jongacnik/fields-block',
+      'plugins/microman/form-block',
+      'plugins/microman/grid-block',
+    )
+  ]) ?>
+</section>
+
+<section id="sections" class="mb-24">
+  <?php snippet('templates/plugins/headline', [
+    'icon' => 'widget',
+    'text' => 'Panel Apps'
+  ]) ?>
+  <?php snippet('templates/plugins/cards', [
+    'columns' => 2,
+    'plugins' => pages(
+      'plugins/gearsdigital/localizer-for-kirby',
+      'plugins/distantnative/retour',
+      'plugins/lukasbestle/versions',
+      'plugins/michnhokn/logger'
+    )
+  ]) ?>
 </section>
 
