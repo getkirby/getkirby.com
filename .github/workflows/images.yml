@@ -1,36 +1,10 @@
-# Image Actions will run in the following scenarios:
-# - on Pull Requests containing images
-# - on pushing of images to `main`
-# For Pull Requests, the images are added to the PR.
-# For other scenarios, a new PR will be opened if any images are compressed.
-
 name: Compress images
-on:
-  pull_request:
-    paths:
-      - "**.jpg"
-      - "**.jpeg"
-      - "**.png"
-      - "!kirby/**"
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/images.yml
-      - "**.jpg"
-      - "**.jpeg"
-      - "**.png"
-      - "!kirby/**"
+on: workflow_dispatch
 
 jobs:
   build:
     name: calibreapp/image-actions
     runs-on: ubuntu-latest
-    # Only run on main repo on and PRs that match the main repo.
-    if: |
-      github.repository == 'getkirby/getkirby.com' &&
-      (github.event_name != 'pull_request' ||
-       github.event.pull_request.head.repo.full_name == github.repository)
     steps:
       - name: Checkout Branch
         uses: actions/checkout@v2
@@ -40,13 +14,8 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           ignorePaths: "kirby/**,**.webp"
-          # For non-Pull Requests, run in compressOnly mode and we'll PR after.
-          compressOnly: ${{ github.event_name != 'pull_request' }}
+          compressOnly: true
       - name: Create Pull Request
-        # If it's not a Pull Request then commit any changes as a new PR.
-        if: |
-          github.event_name != 'pull_request' &&
-          steps.calibre.outputs.markdown != ''
         uses: peter-evans/create-pull-request@v3
         with:
           title: Auto compress images
