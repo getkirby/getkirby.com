@@ -15,7 +15,7 @@ return [
 
 ```
 
-Additionally, you can define custom rules:
+Alternatively, you can define custom rules:
 
 ```php  "/site/config/config.php"
 Str::$language = [
@@ -23,7 +23,7 @@ Str::$language = [
 ];
 ```
 
-These custom rules have to be stored in a (link: docs/guide/plugins/plugin-basics text: plugin).
+These custom rules have to be stored in a (link: docs/guide/plugins/plugin-basics text: plugin). Custom rules overwrite the `slugs` option.
 
 ## Set allowed max length of slugs
 
