@@ -221,12 +221,12 @@ if($items->isNotEmpty()):
 ## Breadcrumb menu
 
 ```php
-<nav>
-  <ul>
+<nav aria-label="breadcrumb">
+  <ol>
     <?php foreach($site->breadcrumb() as $crumb): ?>
-    <li<?php e($crumb->isActive(), ' class="is-active"') ?>><a href="<?= $crumb->url() ?>"><?= $crumb->title()->html() ?></a></li>
+    <li<?php e($crumb->isActive(), ' aria-current="location"') ?>><a href="<?= $crumb->url() ?>"><?= $crumb->title()->html() ?></a></li>
     <?php endforeach; ?>
-  </ul>
+  </ol>
 </nav>
 ```
 
