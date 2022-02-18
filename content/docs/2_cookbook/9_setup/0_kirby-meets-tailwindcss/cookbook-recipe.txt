@@ -44,8 +44,8 @@ Also in the projects's root, we create a `package.json` file which controls the 
 {
     "name": "projectname",
 	"scripts": {
-		"watch": "npx tailwindcss -i ./src/css/tailwind.css -o ./assets/css/styles.css --jit --purge './site/**/*.php' -w",
-        "build": "npx tailwindcss -i ./src/css/tailwind.css -o ./assets/css/styles.css --jit --purge './site/**/*.php' -m"
+		"watch": "npx tailwindcss -i ./src/css/tailwind.css -o ./assets/css/styles.css --purge './site/**/*.php' -w",
+        "build": "npx tailwindcss -i ./src/css/tailwind.css -o ./assets/css/styles.css --purge './site/**/*.php' -m"
 	}
 }
 ```
@@ -57,7 +57,6 @@ Use `build` to generate a final minified CSS file
 
 - `-i ./src/css/tailwind.css`: input file with Tailwind's css classes
 - `-o ../assets/css/styles.css`: output file which will be generated
-- `--jit`: Tailwinds just in time engine *(still preview, but highly recommend!)*
 - `--purge '../site/**/*.php'`: folder to watch for Tailwind's classes
 - `-w`: defines watch mode
 - `-m`: minify output file
