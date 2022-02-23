@@ -123,6 +123,7 @@ Some providers have created dedicated guides how to install Kirby on their serve
 - (link: https://lab.uberspace.de/guide_kirby.html text: Installation on Uberspace)
 - (link: https://help.fortrabbit.com/install-kirby-3 text: Installation on fortrabbit)
 - (link: https://www.rosehosting.com/blog/how-to-install-kirby-cms-on-ubuntu-18-04/ text: Installation on RoseHosting)
+- (link: https://www.alwaysdata.com/en/marketplace/kirby/ text: Installation on alwaysdata (from Marketplace))
 
 
 ## Create your first account
