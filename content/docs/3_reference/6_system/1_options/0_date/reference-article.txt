@@ -31,7 +31,7 @@ All formats: https://www.php.net/manual/de/function.date.php
 ### `strftime` handler
 
 ```php
-echo $page->date()->toDate('%Y-%m-$d');
+echo $page->date()->toDate('%Y-%m-%d');
 ```
 
 All formats: https://www.php.net/manual/en/function.strftime
