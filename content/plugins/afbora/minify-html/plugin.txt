@@ -1,0 +1,13 @@
+Title: Minify HTML
+
+----
+
+Repository: https://github.com/afbora/kirby-minify-html
+
+----
+
+Category: templating
+
+----
+
+Description: Enable minify HTML output for Kirby 3.
