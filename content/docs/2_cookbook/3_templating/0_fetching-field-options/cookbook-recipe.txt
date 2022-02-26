@@ -155,7 +155,7 @@ echo $field['options'][$value][$kirby->language()->code()] ?? $value;
 
 We add the fallback value here just in case someone stores a value from outside of the Panel.
 
-You can find more examples how to access information from blueprints in our (link: text: "Using blueprints in the frontend") recipe.
+You can find more examples how to access information from blueprints in our (link: https://getkirby.com/docs/cookbook/templating/blueprints-in-frontend text: "Using blueprints in the frontend") recipe.
 
 The same principles can be applied to other fields that use options like the `radio` field, the `multiselect` field, the `tags` field or the `checkboxes` field.
 
