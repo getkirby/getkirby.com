@@ -60,3 +60,4 @@ user.logout:after,"Kirby\Cms\User $user, Kirby\Session\Session $session",trigger
 user.update:before,"Kirby\Cms\User $user, array $values, array $strings",trigger,
 user.update:after,"Kirby\Cms\User $newUser, Kirby\Cms\User $oldUser",trigger,
 system.loadPlugins:after,"",trigger,
+system.exception,"\Throwable $exception",trigger,
