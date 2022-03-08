@@ -22,9 +22,17 @@ RewriteEngine on
 #
 # RewriteBase /
 
+# redirect http to https
+RewriteCond %{HTTP_HOST} ^[a-z0-9]+.getkirby.com
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 # block files and folders beginning with a dot, such as .git
 # except for the .well-known folder, which is used for Let's Encrypt and security.txt
 RewriteRule (^|/)\.(?!well-known\/) index.php [L]
+
+# block access to files in web root
+RewriteRule ^[^\/]+\.[a-z]+ index.php [L]
 
 # block all files in the content folder from being accessed directly
 RewriteRule ^content/(.*) index.php [L]

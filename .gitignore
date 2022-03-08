@@ -83,4 +83,10 @@ Icon
 # ---------------
 /site/config/.license
 
+# Basic auth users
+# ---------------
+/site/config/users.php
+
+# Import scripts
+# ---------------
 import
