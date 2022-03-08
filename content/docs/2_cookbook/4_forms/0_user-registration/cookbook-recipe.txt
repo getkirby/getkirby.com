@@ -1,4 +1,4 @@
-Title: User registration
+Title: User sign-up
 
 ----
 
@@ -6,7 +6,7 @@ Description: Leveraging Kirby's authentication features to create a user registr
 
 ----
 
-Published: 2022-01-14
+Published: 2022-03-08
 
 ----
 
@@ -18,11 +18,11 @@ Text:
 
 ## Requirements
 
-The first example requires at least Kirby 3.6.2, while the second examples works with 3.6.x.
+The first example requires at least Kirby 3.6.2, while the second example works with 3.6.x and higher.
 
 ## Intro
 
-To implement a (frontend) user-registration system in your Kirby project, you can leverage Kirby's authentication features. To achieve this, we are going to implement the following steps:
+To implement a (frontend) user registration in your Kirby project, you can leverage Kirby's authentication features. To achieve this, we are going to implement the following steps:
 
 - Enable login via code in Kirby's config
 - Create a new user when user submits registration form
@@ -38,7 +38,7 @@ Ready? Let's start with the config settings!
 
 ## Config settings
 
-To be able to send emails with login codes, we need to configure the email transport settings and enable authentication via login code:
+To be able to send emails with login codes, we need to configure the email (link: docs/guide/emails#transport-configuration text: transport settings) and enable (link: docs/reference/system/options/auth#login-methods text: authentication via login code):
 
 ```php "/site/config/config.php"
 return [
@@ -59,22 +59,22 @@ return [
 ];
 ```
 <info>
-To test sending the login code email locally, you can use (link: docs/cookbook/forms/using-mailhog-for-email-testing text: MailHog) or a similar tool.
+To test locally whether sending the login code via email works, you can use (link: docs/cookbook/forms/using-mailhog-for-email-testing text: MailHog) or a similar tool.
 </info>
 
-In our first example, we will let the Panel handle the login code verification, and add a login page in the second example, where we handle everything on the frontend.
+In our first example, we will let the (glossary: Panel) handle the login code verification, and add a login page in the second example, where we handle everything on the frontend.
 
 ## User registration
 
 ### Registration page
 
-To handle user registrations, we create a registration page `/registration/registration.txt` in the `/content` folder with a title and optional other information you want to render on the page:
+To handle user registrations, we create a registration page as `/registration/registration.txt` in the `/content` folder with a title and optional other information you want to render on the page:
 
 ```text
 Title: Register
 ```
 
-For this page, we will create a template with a registration form and a controller. But before we get to that, let's create the user blueprint for the role we want to assign to new users.
+For this page, we will create a (glossary: template) with a registration form as well as a (glossary: controller). But before we get to that, let's create the user (glossary: blueprint) for the (link: docs/guide/users/roles text: role) we want to assign to new users.
 
 ### User role blueprint
 
@@ -90,32 +90,32 @@ permissions:
     panel: false
 ```
 
-Change permissions or the (link: docs/reference/panel/blueprints/user#home-option text: home option) as required. For our example, we send the user to the home page after login.
+Change permissions or the (link: docs/reference/panel/blueprints/user#home-option text: home option) as required. For our example, we don't want to allow Panel access and send the user directly to the home page after login.
 
 <info>
-If you like, you could allow this role access to their own user account, while keeping all other areas locked.
+If you like, you could allow this role access to their own user account in the Panel, while keeping all other areas locked.
 </info>
 
 ### Registration template
 
-In its most minimal form, our registration template would just have a form with an `email` field. In our example, we also want to require a username. Add any fields you need, always keeping important privacy principles like data economy in mind:
+In its most minimal form, our registration template would just have a form with an `email` field. In our example, we also want to require a username. Add any fields you need, always keeping important privacy principles like data minimisation in mind:
 
 ```php "/site/templates/registration.php"
 <?php snippet('header') ?>
 <div class="intro">
     <h1><?= $page->title() ?></h1>
 </div>
+
 <?php
 // if the form has errors, show a list of messages
-if (count($errors)) : ?>
-    <div class="alert">
-        <ul>
-            <?php foreach ($errors as $message) : ?>
-                <li><?= kirbytext($message) ?></li>
-            <?php endforeach ?>
-        </ul>
-    </div>
+if (count($errors) > 0) : ?>
+<ul class="alert">
+    <?php foreach ($errors as $message) : ?>
+        <li><?= kirbytext($message) ?></li>
+    <?php endforeach ?>
+</ul>
 <?php endif ?>
+
 <form method="post" action="<?= $page->url() ?>">
     <input type="hidden" name="csrf" value="<?= csrf() ?>">
     <div>
@@ -136,8 +136,7 @@ if (count($errors)) : ?>
 
 ### Registration controller
 
-The controller handles our form validation, and on successful user creation, redirects the new user to the Panel login page. Find the different steps explained in the comments.
-
+The (link: docs/guide/templates/controllers text: controller) handles our form validation and, on successful user creation, redirects the new user to the Panel login page. Find the different steps explained in the comments:
 
 ```php "/site/controllers/registration.php"
 <?php
@@ -149,12 +148,15 @@ return function ($kirby) {
     if ($kirby->user()) {
         go('home');
     }
+
+    // create empty error list
     $errors = [];
+
     // the form was sent
     if (get('register') && $kirby->request()->is('POST')) {
         // validate CSRF token
         if (csrf(get('csrf')) === true) {
-
+            // get form data
             $data = [
                 'email' => get('email'),
                 'name' => get('name'),
@@ -178,15 +180,14 @@ return function ($kirby) {
                 // authenticate
                 $kirby->impersonate('kirby');
                 try {
-                    $userData = [
+                    // create new user
+                    $user = $kirby->users()->create([
                         'email' => $data['email'],
                         'role' => 'client',
                         'language' => 'en',
                         'name' => $data['name'],
-                    ];
-                    // create new user
-                    $user = $kirby->users()->create($userData);
-                    if (isset($user)) {
+                    ]);
+                    if (isset($user) === true) {
                         // create the authentication challenge
                         try {
                             $status = $kirby->auth()->createChallenge($user->email(), false, 'login');
@@ -230,13 +231,14 @@ For our second example, we have to adapt our code from above a little and then a
 But let's first change the redirect link in the `registration.php` controller from…
 
 ```php
-go('panel/login')
+go('panel/login');
 ```
 to…
 
 ```php
-go('login')`
+go('login')`;
 ```
+
 and create a new `login` page with a content file called `login.txt`.
 
 The login page serves two purposes:
@@ -258,27 +260,29 @@ The general procedure is therefore the same as in our first example above.
 <div class="intro">
 <h1><?= $page->title()->html() ?></h1>
 </div>
+
 <article>
     <div class="text">
         <?php if($error): ?>
-            <div class="alert"><?= $error ?></div>
+        <div class="alert"><?= $error ?></div>
         <?php endif ?>
 
         <form method="post" action="<?= $page->url() ?>">
             <input type="hidden" name="csrf" value="<?= csrf() ?>">
             <?php if($status === 'inactive'): ?>
-                <div>
-                    <label for="email">Email:</label>
-                    <input id="email" name="email" required type="email"  value="<?= esc($email, 'attr') ?>">
-                </div>
-            <?php endif; ?>
+            <div>
+                <label for="email">Email:</label>
+                <input id="email" name="email" required type="email"  value="<?= esc($email, 'attr') ?>">
+            </div>
+            <?php endif ?>
+
             <?php if ($status === 'pending'): ?>
-                <div>
-                    <label for="name">Login Code</label>
-                    <input id="code" name="code" placeholder="000 000" required type="text">
-                    <p><small>If your email address is registered, the requested code was sent via email.</small></p>
-                </div>
-            <?php endif; ?>
+            <div>
+                <label for="name">Login Code</label>
+                <input id="code" name="code" placeholder="000 000" required type="text">
+                <p><small>If your email address is registered, the requested code was sent via email.</small></p>
+            </div>
+            <?php endif ?>
             <div>
                 <input type="submit" name="login" value="Log in">
             </div>
@@ -306,10 +310,12 @@ return function ($kirby) {
 
     // get authentication status
     $status = $kirby->auth()->status();
+
     // user is already logged in, send them elsewhere
     if ($status->status() === 'active') {
         go('home');
     }
+
     // form is submitted
     if (get('login') && $kirby->request()->is('POST') ) {
         // check CSRF token
@@ -327,7 +333,8 @@ return function ($kirby) {
                 } else {
                     $error = 'Please provide a valid email address';
                 }
-                // if we get a code, we validate the code
+
+            // if we get a code, we validate the code
             } elseif (get('code')) {
                 $code = get('code');
                 try {
@@ -347,6 +354,7 @@ return function ($kirby) {
                     ]);
                 }
             }
+
         } else {
             $error = 'Invalid CSRF token';
         }
@@ -360,7 +368,7 @@ return function ($kirby) {
 };
 ```
 
-Time for testing. Clear the session folder to make sure you don't have an active session anymore. Register a new user. You should now land on the new login page. Enter the code in the form field and the new user should be logged in again.
+Time for testing. Clear the sessions folder to make sure you don't have an active sessions anymore. Register a new user. You should now land on the new login page. Enter the code in the form field and the new user should be logged in again.
 
 Perfect!
 
@@ -396,22 +404,25 @@ To this purpose, we extend the navigation item in the header snippet as follows:
 
 ```php "/site/snippets/header.php"
 <nav class="menu">
-  <?php foreach ($site->children()->listed() as $item): ?>
-  <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a>
-  <?php endforeach ?>
+    <?php foreach ($site->children()->listed() as $item): ?>
+    <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a>
+    <?php endforeach ?>
+
     <?php if (!$kirby->user()) : ?>
-        <?php foreach($site->children()->find('registration', 'login') as $item): ?>
-            <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a>
-        <?php endforeach; ?>
-    <?php endif; ?>
+    <?php foreach($site->children()->find('registration', 'login') as $item): ?>
+        <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a>
+    <?php endforeach ?>
+    <?php endif ?>
+
     <?php if ($kirby->user()) : ?>
-            <a href="<?= url('logout') ?>">Logout</a>
-    <?php endif; ?>
-  <?php snippet('social') ?>
+        <a href="<?= url('logout') ?>">Logout</a>
+    <?php endif ?>
+
+    <?php snippet('social') ?>
 </nav>
 ```
 
-And additionally add a logout route in the `config`:
+And additionally, add a logout route in your `config`:
 
 ```php "/site/config/config.php
 return [
@@ -420,7 +431,6 @@ return [
         [
             'pattern' => 'logout',
             'action'  => function() {
-
                 if ($user = kirby()->user()) {
                     $user->logout();
                 }
@@ -447,18 +457,21 @@ The first step is to add the current page id as parameter to the navigation link
 
 ```php "/site/snippets/header.php"
 <nav class="menu">
-  <?php foreach ($site->children()->listed() as $item): ?>
-  <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a>
-  <?php endforeach ?>
+    <?php foreach ($site->children()->listed() as $item): ?>
+    <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a>
+    <?php endforeach ?>
+
     <?php if (!$kirby->user()) : ?>
-        <?php foreach($site->children()->find('registration', 'login') as $item): ?>
-            <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url(['params' => ['cookbook.referrer' => $page->id()]]) ?>"><?= $item->title()->html() ?></a>
-        <?php endforeach; ?>
-    <?php endif; ?>
+    <?php foreach($site->children()->find('registration', 'login') as $item): ?>
+        <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url(['params' => ['cookbook.referrer' => $page->id()]]) ?>"><?= $item->title()->html() ?></a>
+    <?php endforeach ?>
+    <?php endif ?>
+
     <?php if ($kirby->user()) : ?>
         <a href="<?= url('logout', ['params' => ['referrer' => $page->id()]]) ?>">Logout</a>
-    <?php endif; ?>
-  <?php snippet('social') ?>
+    <?php endif ?>
+
+    <?php snippet('social') ?>
 </nav>
 ```
 
@@ -501,10 +514,12 @@ return function ($kirby, $site) {
     if ( $referrer = param('referrer')) {
         $kirby->session()->set('login.referrer', $referrer);
     }
+
     // send already logged-in user to the referrer page
     if ($kirby->user()) {
         go($site->loginReferrer());
     }
+
     // …rest of code
 };
 ```
@@ -514,6 +529,7 @@ We also have to fix the redirect link to the login page and add the original ref
 // …rest of code
 try {
     $status = $kirby->auth()->createChallenge($user->email(), false, 'login');
+
     // add referrer to redirect url
     go('login/referrer:' . $site->loginReferrer());
 } catch (PermissionException $e) {
@@ -530,6 +546,7 @@ We also check if the parameter is set in the `login` controller.
 // add the $site variable as parameter
 return function ($kirby, $site) {
     $error = null;
+
     if ($referrer = param('referrer')) {
         $kirby->session()->set('login.referrer', $referrer);
     }
