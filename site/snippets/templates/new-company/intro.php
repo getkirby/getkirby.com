@@ -9,7 +9,7 @@
   </div>
   <div>
     <p>We've always valued data privacy, so we want to do this right: On this page, <mark>we ask you to give our new company permission to move your data with us.</mark></p>
-    <p>The new company will be responsible for Kirby's ongoing development and all new licenses. We will provide support and future updates through the new company. Please transfer your existing licenses and agree to our <a class="link whitespace-nowrap" href="license/2022-03-10">updated license terms</a> to make this possible.</p>
+    <p>The new company will be responsible for Kirby's ongoing development and all new licenses. We will provide support and future updates through the new company. Please transfer your existing licenses and agree to our <a class="link whitespace-nowrap" href="<?= url('license') ?>">updated license terms</a> to make this possible.</p>
     <p>We want to be as transparent as possible with our company transition. If you have any questions, please <a href="mailto:support@getkirby.com">get in touch</a>.</p>
     <p>Thank you for being with us,<br><strong>Your Kirby team</strong></p>
   </div>
