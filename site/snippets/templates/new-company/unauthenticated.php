@@ -29,14 +29,16 @@
           <label for="email" class="color-black font-bold block mb-3">Email address</label>
           <input id="email" type="email" name="email" required class="input">
         </p>
+        <p class="hidden">
+          <label for="email_confirm">Field for spam protection, please leave it empty.</label>
+          <input id="email_confirm" name="email_confirm" type="email">
+        </p>
         <p>
           <label for="name" class="color-black font-bold block mb-3">Name (optional)</label>
           <input id="name" type="name" name="name" class="input">
         </p>
       </div>
-
       <p class="text-sm mb-12">We won't ever spam you! You can unsubscribe at any&nbsp;time.</p>
-
       <input type="hidden" name="gruppe" value="<?= option('newstroll.list') ?>">
       <button type="submit" class="btn btn--filled"><?= icon('flash') ?> Subscribe</button>
     </footer>
