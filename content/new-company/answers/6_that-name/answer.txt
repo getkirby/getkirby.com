@@ -1,4 +1,4 @@
-Title: Can you explain that company name?
+Title: What is your new company name about?
 ----
 Text:
 
@@ -6,7 +6,7 @@ The content folder is the place where all content is stored in Kirby. It’s the
 
 GmbH & Co. KG is our company form. It translates to: limited partnership with a limited liability company as general partner. It offers a very flexible and robust foundation for our future.
 
-The limited liabilty company is the Content Folder Verwaltungs GmbH. (Translation: Content Folder Administration Company With Limited Liability) – no pun intended.
+The limited liability company is the Content Folder Verwaltungsgesellschaft mbH. (Translation: Content Folder Administration Company With Limited Liability) – no pun intended.
 
 Germans like to be complicated sometimes. But we really love our new name and we hope you like it too.
 
