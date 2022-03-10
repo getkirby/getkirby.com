@@ -1,14 +1,12 @@
 <div class="mb-6">
   <div class="container">
-    <a href="/10" class="font-bold py-3 block flex justify-between" style="border-bottom: 2px solid var(--color-black)">
-      <span><span class="mr-3">🎉</span> 10 years since 1.0!</span>
-
-      <?php if ($page->is('10')) : ?>
-        <span>Celebrate with us ↓</span>
-      <?php else : ?>
-        <span>Celebrate with us &rarr;</span>
-      <?php endif ?>
-    </a>
+    <?php snippet('layouts/topbar', [
+      'icon'   => '🎉',
+      'title'  => '10 years since 1.0!',
+      'button' => 'Celebrate with us',
+      'link'   => '/10',
+      'active' => $page->is('10')
+    ]) ?>
   </div>
 </div>
 

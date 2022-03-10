@@ -1,0 +1,29 @@
+.topbar {
+  font-weight: var(--font-bold);
+  padding: var(--spacing-3) 0;
+  border-bottom: 2px solid var(--color-black);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.topbar-icon {
+  margin-right: var(--spacing-2);
+}
+
+.topbar-link > * {
+  display: none;
+}
+.topbar-link::after {
+  display: inline-block;
+  padding-left: var(--spacing-2);
+  content: "→";
+}
+.topbar-link[data-active="true"]::after {
+  content: "↓";
+}
+
+@media screen and (min-width: 35rem) {
+  .topbar-link > * {
+    display: inline;
+  }
+}
