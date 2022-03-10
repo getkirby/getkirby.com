@@ -12,34 +12,37 @@ Priority: .5
 
 Text:
 
-Bastian Allgeier GmbH
+Content Folder GmbH & Co. KG
 Böhmer Weg 22
-69151 Neckargemünd
-Germany
+69151 Neckargemünd, Germany
 
 <mail@getkirby.com>
 <https://getkirby.com>
 
-**Follow Kirby on Twitter**
-<http://twitter.com/getkirby>
+**Follow Kirby on Twitter:**
+<https://twitter.com/getkirby>
 
-**Registergericht**
-Amtsgericht Heidelberg
+**Registry court:**
+Amtsgericht Mannheim, HRA 710522 (commercial registry)
 
-**Registernummer**
-HRB 718613
+**Represented by personally liable partner:**
+Content Folder Verwaltungsgesellschaft mbH
+Amtsgericht Mannheim, HRB 742477 (commercial registry)
 
-**USt-IdNr. (EU VATIN)**
-DE293597540
+**General manager:**
+Bastian Allgeier
+
+**USt-IdNr. (EU VATIN):**
+DE349861713
 
 **© Copyright 2009-(date: year)**
-Bastian Allgeier GmbH.
+Content Folder GmbH & Co. KG.
 
-Responsible for all content accordant §10 paragraph 3 mdstv is Bastian&nbsp;Allgeier
+Responsible for all content accordant § 10 paragraph 3 MDStV is Bastian&nbsp;Allgeier.
 
 ## Disclaimer
 
-»Author« in the sense of the following is the Bastian Allgeier GmbH.
+»Author« in the sense of the following is the Content Folder GmbH & Co. KG.
 
 Online-contents: The author reserves the right not to be responsible for the topicality, correctness, completeness or quality of the information provided. Liability claims regarding damage caused by the use of any information provided, including any kind of information which is incomplete or incorrect, will therefore be rejected. All offers are not-binding and without obligation. Parts of the pages or the complete publication including all offers and information might be extended, changed or partly or completely deleted by the authoress without separate announcement.
 

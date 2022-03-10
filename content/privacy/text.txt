@@ -14,13 +14,13 @@ Text:
 
 ## Who we are
 
-The company behind Kirby CMS and the responsible data controller for this website is the Bastian Allgeier GmbH.
+The company behind Kirby CMS and the responsible data controller for this website is the Content Folder GmbH & Co. KG.
 
-*Bastian Allgeier GmbH
+*Content Folder GmbH & Co. KG
 Böhmer Weg 22
 69151 Neckargemünd
 Germany
-Email: [**support@getkirby.com**](mailto:support@getkirby.com)*
+Email: **<support@getkirby.com>***
 
 You can contact us any time via email or the postal address above, if you have questions about our privacy policy.
 
@@ -45,6 +45,8 @@ We don't collect any personal data on our website except server logs. We use the
 
 The Personal Demo you can access from the (link: try text: Try page) stores a shortened hash of your IP address to protect against XSS attacks and to prevent the creation of too many demo instances per user.
 
+The demo server temporarily stores content that you enter in your demo instance. This data is completely deleted when the demo instance expires or when you delete your instance manually.
+
 Other personal data except server logs is not collected by the Personal Demo.
 
 [Read more ›](#personal-demo)
@@ -67,16 +69,16 @@ Our support forum is provided by Discourse. Your personal data in the forum is c
 
 ### Newsletter
 
-https://getkirby.com/#kosmos
+https://getkirby.com/kosmos
 
-If you sign up to our newsletter, your data is being collected by our Australian newsletter service Campaign Monitor.
+If you sign up to our newsletter, your data is being collected by the German newsletter service Newstroll.
 
 [Read more ›](#newsletter)
 
 
 ## Your rights
 
-GDPR is all about your rights as users and we think this is great! You can exercise your rights by sending us an email at [**support@getkirby.com**](mailto:support@getkirby.com).
+GDPR is all about your rights as users and we think this is great! You can exercise your rights by sending us an email at **<support@getkirby.com>**.
 
 ### You can access information on all data stored about you
 
@@ -127,7 +129,7 @@ The server for our website is provided by
 Philadelphia, Pennsylvania 19106
 USA*
 
-Linode complies with GDPR. The server is located in their data center in **Frankfurt, Germany**. You can find their privacy policy here: [https://www.linode.com/privacy](https://www.linode.com/privacy)
+Linode complies with GDPR. The server is located in their data center in **Frankfurt, Germany**. You can find their privacy policy here: <https://www.linode.com/privacy>
 
 ### Server log files
 
@@ -142,7 +144,7 @@ We automatically collect and store information that your browser transmits to us
 
 This data will not be combined with data from other sources.
 
-The basis for data processing is Art. 6 (1) (f) DSGVO, which allows the processing of data to fulfill a contract or for measures preliminary to a contract.
+The basis for data processing is Art. 6 (1) (f) GDPR, which allows the processing of data to fulfill a contract or for measures preliminary to a contract.
 
 ### Third-party services
 
@@ -153,11 +155,11 @@ We use the following third-party services to improve the performance and usabili
 We use a content delivery network to provide faster access to our CSS, JavaScript, images and font files from anywhere around the world. Our CDN is provided by:
 
 *proinity LLC (KeyCDN)
-Ruemikerstrasse 60
-CH-8409 Winterthur
+Faerberstrasse 9
+8832 Wollerau
 Switzerland*
 
-KeyCDN complies with GDPR. You can find their privacy policy here: [https://www.keycdn.com/privacy](https://www.keycdn.com/privacy)
+KeyCDN complies with GDPR. You can find their privacy policy here: <https://www.keycdn.com/privacy>
 
 #### Algolia
 
@@ -168,7 +170,7 @@ Our site-wide search is running on a third-party search service. We index only t
 75008 Paris
 France*
 
-Algolia complies with GDRP. You can find their privacy policy here: [https://www.algolia.com/security](https://www.algolia.com/security)
+Algolia complies with GDPR. You can find their privacy policy here: <https://www.algolia.com/policies/privacy/>
 
 
 ## Personal Demo
@@ -184,6 +186,10 @@ You can read more about this in our (link: docs/guide/kirby-and-privacy text: pr
 Our demo manager software at https://trykirby.com temporarily stores the IP address of the user who created the demo instance. We need it to protect against XSS attacks and to prevent the creation of too many demo instances per user.
 
 Because the IP address is stored as a shortened hash only, we cannot convert it back to the actual IP address.
+
+### Content
+
+The demo server temporarily stores content that you enter in your demo instance. This data is completely deleted when the demo instance expires or when you delete your instance manually.
 
 ### Analytics and tracking
 
@@ -202,7 +208,7 @@ The server for the Personal Demo is provided by
 Philadelphia, Pennsylvania 19106
 USA*
 
-Linode complies with GDPR. The server is located in their data center in **Frankfurt, Germany**. You can find their privacy policy here: [https://www.linode.com/privacy](https://www.linode.com/privacy)
+Linode complies with GDPR. The server is located in their data center in **Frankfurt, Germany**. You can find their privacy policy here: <https://www.linode.com/privacy>
 
 ### Server log files
 
@@ -218,43 +224,52 @@ We automatically collect and store information that your browser transmits to us
 
 This data will not be combined with data from other sources.
 
-The basis for data processing is Art. 6 (1) (f) DSGVO, which allows the processing of data to fulfill a contract or for measures preliminary to a contract.
+The basis for data processing is Art. 6 (1) (f) GDPR, which allows the processing of data to fulfill a contract or for measures preliminary to a contract.
 
 
 ## Shop
 
 Our order process is conducted by our online reseller (link: https://paddle.com text: Paddle.com). Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.
 
-*Paddle.com
-340 S Lemon Avenue
-Los Angeles, California 91789
-USA*
+*Paddle.com Market Limited
+Judd House
+18-29 Mora Street
+London, EC1V 8BT
+United Kingdom*
 
-Paddle complies with GDPR. You need to agree to their terms of service and privacy policy whenever you buy a license. We don't store your purchasing data or history anywhere else. You can find Paddle's privacy policy here: https://paddle.com/privacy/
+Paddle complies with GDPR. You need to agree to their terms of service and privacy policy whenever you buy a license. We don't store your billing data or history anywhere else. You can find Paddle's privacy policy and the addresses of Paddle's EU and USA branches here: https://paddle.com/privacy/
 
 ## Support Forum
 
-Our support forum is running on an open-source forum software called Discourse and the hosting is provided by the company behind the forum software: [https://www.discourse.org/](https://www.discourse.org/)
+Our support forum is running on an open-source forum software called Discourse and the hosting is provided by the company behind the forum software, Civilized Discourse Construction Kit, Inc. The company's EU representative is:
 
-The hosted Discourse forum is GDPR compliant. You can find the privacy policy of Discourse here: [https://meta.discourse.org/privacy](https://meta.discourse.org/privacy)
+*M. Régis Hanol
+Civilized Discourse Construction Kit, Inc.
+<regis.hanol@discourse.org>
+78 Allée Primavera
+Centre UBIDOCA, 15232
+74370 Annecy
+France*
+
+The hosted Discourse forum is GDPR compliant. You can find the privacy policy of Discourse here: <https://meta.discourse.org/privacy>
 
 ## Newsletter
 
-You can sign up to our monthly Kirby Kosmos Newsletter to receive updates about Kirby, plugins, themes and other news around Kirby and the web. We never sign you up automatically. You have to use the sign up form on our website and confirm your subscription with the double-opt in process. To sign up we require and verify your email address and you can provide an optional name.
+You can sign up to our monthly Kirby Kosmos newsletter to receive updates about Kirby, plugins, themes and other news around Kirby and the web. We never sign you up automatically. You have to use the sign up form on our website or during the Paddle checkout and confirm your subscription with the double-opt in process. To sign up we require and verify your email address and you can provide an optional name.
 
-All subscriber data is collected by our Australian newsletter service CampaignMonitor:
+All subscriber data is collected by the German newsletter service Newstroll:
 
-*Campaign Monitor Pty Ltd
-404/3-5 Stapleton Ave
-Sutherland NSW 2232
-Sydney
-Australia*
+*NEWSTROLL
+Marco Ahrendt
+Maustäle 18
+72793 Pfullingen
+Germany*
 
-CampaignMonitor is offering extensive analytics tools to check if newsletters have been opened and links have been clicked. We only use those analytics to check how interesting and relevant our newsletters are for the entire list of subscribers over time. We never use them to analyze individual subscribers.
+Newstroll offers analytics tools to check if newsletters have been opened and links have been clicked. We have disabled tracking on the subscriber level and only get access to the analytics for the entire list of subscribers. We only use those analytics to check how interesting and relevant our newsletters are over time. We never use them to analyze individual subscribers.
 
 You can unsubscribe from our newsletter at any time. This can be done by using the unsubscribe link in every newsletter or by sending an email to <support@getkirby.com> and we will handle it for you.
 
-CampaignMonitor complies with GDRP. You can find our more about their privacy policy on their site: https://www.campaignmonitor.com/policies/#privacy-policy
+Newstroll complies with GDPR. You can find our more about their privacy policy on their site (German): https://www.newstroll.de/datenschutz/
 
 ## Your Kirby installation
 
@@ -267,4 +282,4 @@ We try to keep our privacy policy as transparent and easy to understand as possi
 ## Updates
 
 We will constantly check and update this privacy policy if necessary.
-**Last update: 30.07.2021**
+**Last update: March 15, 2022**

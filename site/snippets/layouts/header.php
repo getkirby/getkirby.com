@@ -1,11 +1,11 @@
 <div class="mb-6">
   <div class="container">
     <?php snippet('layouts/topbar', [
-      'icon'   => '🎉',
-      'title'  => '10 years since 1.0!',
-      'button' => 'Celebrate with us',
-      'link'   => '/10',
-      'active' => $page->is('10')
+      'icon'   => '👩‍💻👨‍💻',
+      'title'  => 'We are a new team company!',
+      'button' => 'Learn more',
+      'link'   => '/new-company',
+      'active' => $page->is('new-company')
     ]) ?>
   </div>
 </div>

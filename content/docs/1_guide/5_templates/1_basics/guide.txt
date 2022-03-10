@@ -98,7 +98,7 @@ Title: Kirby Starterkit
 
 \----
 
-Author: Bastian Allgeier GmbH
+Author: Content Folder GmbH & Co. KG
 
 \----
 

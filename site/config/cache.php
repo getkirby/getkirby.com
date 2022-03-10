@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'diffs' => [
+        'active' => true,
+        'type'   => 'apcu'
+    ],
     'pages' => [
         'active' => true,
         'type'   => 'apcu'

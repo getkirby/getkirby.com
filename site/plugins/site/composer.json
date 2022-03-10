@@ -6,7 +6,8 @@
     }
   },
   "require": {
-    "phpdocumentor/reflection-docblock": "^5.2.2"
+    "phpdocumentor/reflection-docblock": "^5.2.2",
+    "caxy/php-htmldiff": "^0.1.14"
   },
   "config": {
     "optimize-autoloader": true
