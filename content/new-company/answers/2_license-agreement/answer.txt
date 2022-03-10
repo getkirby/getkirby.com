@@ -1,0 +1,23 @@
+Title: What changed in the license agreement?
+----
+Text:
+
+We based the changes to our license agreement (EULA) on feedback we received in the last months. Our goal is to give you and your clients more legal certainty. Nothing changes in practice for paid licenses, but now your rights are written in black and white. At the same time we have clarified ambiguous parts of the EULA.
+
+In particular, we have changed the following:
+
+- The licensor is now the Content Folder GmbH &amp; Co. KG.
+- We explicitly grant you more rights for working with Kirby. I.e. you may make copies of Kirby for the purpose of deployment or development, use Kirby with or for third parties in defined cases and use the MIT-licensed parts of the code for other projects.
+- We explicitly state that you have the right to transfer licenses by requesting the transfer from us.
+- The EULA now has a specific list of disallowed uses instead of a blanket statement that allowed us to determine if a use qualified under the agreement.
+- We have clarified the definition of cross-domain multi-language installations that only need a single license.
+- We have clarified that headless or static sites built or generated with Kirby are defined by their frontend domain and root directory.
+- For an easier understanding we have renamed the term "Development Machine" to "Internal Site" and clarified that an Internal Site must not be accessible by the public.
+- It is no longer possible to use Kirby for free in an intranet. The free use for development or for personal or family apps on a personal computer or home server is still allowed.
+- We specified that changes to the EULA that constrain your rights to a great extent require your approval. A termination of the agreement only requires the textual form instead of a written letter and can be declared for particular licenses.
+- We clarified that the license restrictions and the warranty exclusion also apply to free licenses and to users who are not a licensee.
+- We defined that only German law applies to the EULA and that the place of jurisdiction is Germany.
+- We added a severability clause to avoid that licenses become void if only a part of the EULA turns out to be invalid.
+- We have reworded some sentences to make them easier to read and understand or to fix typos. We have also made minor changes that don't change the general meaning of the EULA.
+
+Check out the (link: license text: license agreement). You can also take a look at the  (link: /license/2022-03-10?diff text: full set of changes).

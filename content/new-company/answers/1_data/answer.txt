@@ -1,0 +1,5 @@
+Title: What kind of personal data do you store?
+----
+Text:
+
+We store your email address, license keys and registered domains on our license server. We also have access to your invoice data from Paddle and your forum account on Discourse if you are registered there.

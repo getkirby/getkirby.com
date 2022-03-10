@@ -1,3 +1,4 @@
+
 <div id="form" class="columns" style="--columns: 2; --gap: var(--spacing-1)">
   <form method="GET" action="<?= option('hub.url') . '/login' ?>" class="highlight bg-white shadow-xl flex flex-column justify-between">
     <header>

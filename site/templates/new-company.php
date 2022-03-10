@@ -171,10 +171,6 @@
       grid-column: 1 / span 2;
     }
 
-    .form-box footer {
-      min-height: 11rem;
-    }
-
     .form-box footer .columns {
       --columns: 2;
       --gap: var(--spacing-12);
@@ -192,12 +188,7 @@
   <!-- Header & team photos -->
   <header class="mb-24 hero h1">
     <div class="hero-text">
-      <h1>A new company</h1>
-      <p class="color-gray-600">
-        Same product<br>
-        Same team<br>
-        Same vision
-      </p>
+      <h1>Our new team company</h1>
     </div>
     <ul class="hero-images">
       <li>
@@ -244,5 +235,10 @@
       <?php snippet('templates/new-company/unauthenticated') ?>
     <?php endif ?>
   <?php endif ?>
+
+  <section class="mb-42">
+    <h2 class="h2 mb-6">Frequently asked questions</h2>
+    <?php snippet('faq', ['questions' => $page->find('answers')->children()]) ?>
+  </section>
 
 </article>
