@@ -1,5 +1,5 @@
 
-<div id="form" class="columns" style="--columns: 2; --gap: var(--spacing-1)">
+<div id="form" class="columns mb-24" style="--columns: 2; --gap: var(--spacing-1)">
   <form method="GET" action="<?= option('hub.url') . '/login' ?>" class="highlight bg-white shadow-xl flex flex-column justify-between">
     <header>
       <h2 class="h2 mb-6">Customers</h2>
