@@ -1,9 +1,9 @@
 <!-- Form -->
 <form id="form" method="POST" action="#form" class="form pt-6 mb-36">
-  <header class="mb-6 flex justify-between items-baseline">
-    <h2 class="h2">Migrate your data</h2>
+  <header class="mb-3 flex flex-wrap justify-between items-baseline">
+    <h2 class="h2 mb-3">Migrate your data</h2>
     <?php if ($email) : ?>
-      <a href="<?= option('hub.url') ?>" class="h6 flex items-center">
+      <a href="<?= option('hub.url') ?>" class="form-account h6 mb-3 flex items-center">
         <strong class="mr-3">Account</strong>
         <figure class="mr-3"><?= icon('mail') ?></figure> <?= $email ?>
       </a>

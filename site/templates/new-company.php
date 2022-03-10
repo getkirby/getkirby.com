@@ -86,14 +86,19 @@
   }
 
   .checkbox {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     border: 2px solid var(--color-black);
-    padding: var(--spacing-2) var(--spacing-3);
+    padding: var(--spacing-2) var(--spacing-3) var(--spacing-2) var(--spacing-10);
     margin-bottom: var(--spacing-6);
     cursor: pointer;
     border-radius: var(--rounded);
+  }
+  .checkbox input {
+    position: absolute;
+    left: var(--spacing-3);
+    top: var(--spacing-3);
   }
 
   .error {
@@ -125,7 +130,7 @@
   }
 
   .form-box {
-    padding: var(--spacing-12);
+    padding: var(--spacing-6);
     background: var(--color-light);
     display: flex;
     flex-direction: column;
@@ -146,6 +151,10 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: var(--spacing-12);
+  }
+
+  .form-account strong {
+    display: none;
   }
 
   .note {
@@ -171,9 +180,17 @@
       grid-column: 1 / span 2;
     }
 
+    .form-box {
+      padding: var(--spacing-12);
+    }
+
     .form-box footer .columns {
       --columns: 2;
       --gap: var(--spacing-12);
+    }
+
+    .form-account strong {
+      display: block;
     }
   }
 
