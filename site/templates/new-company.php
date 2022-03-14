@@ -251,11 +251,12 @@
     <?php else : ?>
       <?php snippet('templates/new-company/unauthenticated') ?>
     <?php endif ?>
-  <?php endif ?>
 
-  <section class="mb-42">
-    <h2 class="h2 mb-6">Frequently asked questions</h2>
-    <?php snippet('faq', ['questions' => $page->find('answers')->children()]) ?>
-  </section>
+    <section class="mb-42">
+      <h2 class="h2 mb-6">Frequently asked questions</h2>
+      <?php snippet('faq', ['questions' => $page->find('answers')->children()]) ?>
+    </section>
+
+  <?php endif ?>
 
 </article>
