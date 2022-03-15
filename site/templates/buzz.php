@@ -18,10 +18,10 @@
 }
 </style>
 
-<main class="mb-24">
+<article class="kosmos">
   <div class="mb-12">
     <header class="flex flex-column justify-between">
-      <h1 class="h1 mb-12">What others say.<br>What we say.<br>The buzz.</h1>
+      <h1 class="h1 mb-12">What we say.<br>What others say.<br>The buzz.</h1>
     </header>
   </div>
 
@@ -30,9 +30,4 @@
     <?php snippet('templates/buzz/entry', ['entry' => $entry]) ?>
     <?php endforeach ?>
   </section>
-</main>
-
-<footer class="h2 max-w-xl">
-  Stay up-to-date with our <a href="/kosmos"><span class="link">monthly newsletter</span> &rarr;</a>
-</footer>
-
+</article>

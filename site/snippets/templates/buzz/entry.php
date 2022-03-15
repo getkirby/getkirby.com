@@ -13,7 +13,7 @@
   </header>
 
   <?php if(($img = $entry->image()) || $entry->video()->isNotEmpty()): ?>
-  <figure style="--aspect-ratio: 1.91/1">
+  <figure style="--aspect-ratio: 16/9">
     <?php if($entry->video()->isNotEmpty()): ?>
     <?= video(str_replace('www.youtube.com', 'www.youtube-nocookie.com', $entry->video()), [
     'youtube' => [
@@ -26,7 +26,7 @@
     'loading' => 'lazy'
   ]) ?>
     <?php else: ?>
-    <?= $img->resize(896, 469) ?>
+    <?= $img->resize(896, 504) ?>
     <?php endif ?>
   </figure>
   <?php endif ?>
