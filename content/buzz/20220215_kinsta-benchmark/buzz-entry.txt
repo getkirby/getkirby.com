@@ -1,0 +1,13 @@
+Title: PHP platform benchmarks
+
+----
+
+Category: kinsta.com
+
+----
+
+Text: We're excited about these latest platform benchmarks. Take it with a grain of salt, but what's clear: Performance is key. ⚡️
+
+----
+
+Link: https://kinsta.com/blog/php-benchmarks/
