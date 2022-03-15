@@ -50,6 +50,7 @@
             <ul class="footer-menu-2">
               <li><a href="/kosmos">Newsletter</a></li>
               <li><a href="/plugins">Plugins</a></li>
+              <li><a href="/buzz">Buzz</a></li>
               <li><a href="https://kirby.nolt.io/roadmap">Roadmap</a></li>
               <li><a href="https://github.com/getkirby/kirby/releases">Releases</a></li>
               <li><a href="/docs/archive">Archive</a></li>

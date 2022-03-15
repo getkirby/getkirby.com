@@ -1,0 +1,14 @@
+Title: 3.6 is here!
+
+----
+
+Category: Release show
+
+----
+
+Text: For our 3.6 release, Bastian sat down with Marc Thiele and talked about what's new.
+
+----
+
+
+Video: https://www.youtube.com/watch?v=QgCMc89rdNY
