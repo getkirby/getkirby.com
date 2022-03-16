@@ -15,7 +15,6 @@
           </div>
         </figure>
         <p class="color-gray-700"><?= $recipe->description()->widont() ?></p>
-
       </a>
     </article>
   </li>

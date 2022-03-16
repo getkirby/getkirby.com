@@ -1,38 +1,37 @@
-<?php if($entry->link()->isNotEmpty()): ?>
-<a href="<?= $entry->link() ?>" class="buzz-entry mb-6 bg-black color-white grid">
-<?php else: ?>
-<article class="buzz-entry mb-6 bg-black color-white grid">
+<?php if ($entry->link()->isNotEmpty()) : ?>
+  <a href="<?= $entry->link() ?>" class="buzz-entry">
+<?php else : ?>
+  <article class="buzz-entry">
 <?php endif ?>
 
-  <header class="p-6">
-    <span class="h6 block mb-3"><?= $entry->category() ?></span>
-    <h2 class="h2 color-white mb-3"><?= $entry->title() ?></h2>
-    <?php if($entry->text()->isNotEmpty()): ?>
-    <p class="text-base color-gray-400"><?= $entry->text() ?></p>
-    <?php endif ?>
-  </header>
+    <figure class="rounded overflow-hidden mb-6 shadow-lg" style="--aspect-ratio: 800/400">
+      <?php if ($entry->video()->isNotEmpty()) : ?>
+        <?= video(str_replace('www.youtube.com', 'www.youtube-nocookie.com', $entry->video()), [
+          'youtube' => [
+            'controls'       => 0,
+            'modestbranding' => 1,
+            'showinfo'       => 0,
+            'rel'            => 0,
+          ]
+        ], [
+          'loading' => 'lazy'
+        ]) ?>
+      <?php elseif ($img = $entry->image()) : ?>
+        <?= $img->resize(800, 400) ?>
+      <?php else : ?>
+      <?php endif ?>
+    </figure>
 
-  <?php if(($img = $entry->image()) || $entry->video()->isNotEmpty()): ?>
-  <figure style="--aspect-ratio: 16/9">
-    <?php if($entry->video()->isNotEmpty()): ?>
-    <?= video(str_replace('www.youtube.com', 'www.youtube-nocookie.com', $entry->video()), [
-    'youtube' => [
-      'controls'       => 0,
-      'modestbranding' => 1,
-      'showinfo'       => 0,
-      'rel'            => 0,
-    ]
-  ], [
-    'loading' => 'lazy'
-  ]) ?>
-    <?php else: ?>
-    <?= $img->resize(896, 504) ?>
-    <?php endif ?>
-  </figure>
-  <?php endif ?>
+    <header class="mb-12">
+      <p class="font-mono text-xs mb-1"><?= $entry->category() ?></p>
+      <h2 class="h3 mb-3"><?= $entry->title()->widont() ?></h2>
+      <?php if ($entry->text()->isNotEmpty()) : ?>
+        <p class="text-base color-gray-700"><?= $entry->text()->widont() ?></p>
+      <?php endif ?>
+    </header>
 
-<?php if($entry->link()->isNotEmpty()): ?>
-</a>
-<?php else: ?>
-</article>
+<?php if ($entry->link()->isNotEmpty()) : ?>
+  </a>
+<?php else : ?>
+  </article>
 <?php endif ?>
