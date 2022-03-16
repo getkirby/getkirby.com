@@ -6,7 +6,7 @@ Description: Translate Kirby's exception messages on the frontend in single lang
 
 ----
 
-Published: 2022-01-10
+Published: 2022-03-16
 
 ----
 
