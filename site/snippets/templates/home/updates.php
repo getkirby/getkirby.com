@@ -1,7 +1,7 @@
 <section id="kosmos" class="columns" style="--columns-md: 1; --columns: 2; --gap: var(--spacing-12)">
   <div class="columns" style="--columns-sm: 1; --columns-md: 2; --columns-lg: 1; --column-gap: var(--spacing-12)">
     <?php snippet('hgroup', [
-      'title' => 'Join the Kirby community!',
+      'title' => $title ?? 'Join the Kirby community!',
       'subtitle' => 'Subscribe to our <a class="link" href="/kosmos">monthly newsletter</a>. Enter our <a class="link" href="https://chat.getkirby.com">Discord chat</a>. Watch the <a class="link" href="https://youtube.com/kirbycasts">screencasts</a>. Follow us on <a class="link" href="https://twitter.com/getkirby">Twitter</a> and <a class="link" href="https://instagram.com/getkirby">Instagram</a> for the latest updates.',
       'mb' => 3
     ]) ?>

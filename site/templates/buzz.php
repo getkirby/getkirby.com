@@ -11,5 +11,5 @@
     <?php endforeach ?>
   </div>
 
-  <?php snippet('templates/buzz/updates') ?>
+  <?php snippet('templates/home/updates', ['title' => 'More ways to stay up-to-date:']) ?>
 </article>
