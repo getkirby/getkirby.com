@@ -113,7 +113,7 @@ class Types
      */
     public static function format(?string $type = null, bool $withLink = true, ?string $text = null): string
     {
-        if(empty($type) === true) {
+        if($type === null || $type === '') {
             return '';
         }
 
