@@ -146,10 +146,10 @@ And finally, we'll merge the content and return it as an array that will then ge
 
 ```php "/site/controllers/home.php"
 # Return the array containing the data that we want to pass to the template
-return a::merge($shared , compact('titleTag'));
+return A::merge($shared , compact('titleTag'));
 ```
 
-Be careful, when merging the two arrays, to pass the `$shared` array as the first parameter to the `a::merge()` function. This is important because otherwise your new data won't overwrite the content coming from the default controller.
+Be careful, when merging the two arrays, to pass the `$shared` array as the first parameter to the `A::merge()` function. This is important because otherwise your new data won't overwrite the content coming from the default controller.
 
 ## Final shared controller
 
@@ -167,7 +167,7 @@ return function ($page, $pages, $site, $kirby) {
   $titleTag = $site->title() . " | " . $site->tagline();
     
   # Return the array containing the data that we want to pass to the template
-  return a::merge($shared , compact('titleTag'));
+  return A::merge($shared , compact('titleTag'));
 
 };
 ```
@@ -204,7 +204,7 @@ return function ($page, $pages, $site, $kirby) {
   $video = $page->videourl();
     
   # Return the array containing the data that we want to pass to the template
-  return a::merge($post , compact('video'));
+  return A::merge($post , compact('video'));
 
 };
 ```
