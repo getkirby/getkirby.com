@@ -1,0 +1,9 @@
+Title: Fun with flat files
+
+----
+
+Category: Introduzione a Kirby CMS 🇮🇹
+
+----
+
+Text: Gianluca Savini on why he loves to work with a file-based CMS 📂 such as Kirby.
