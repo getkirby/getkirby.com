@@ -139,7 +139,7 @@ By default, we escape all queries to be displayed against raw HTML output that m
 info: "<strong>{{ file.dimensions }}</strong>"
 ```
 
-The query result itself will be escpaped though, so if e.g. you would have a cusotm page method that returns HTML the HTML would be displayed as normal text. If such queries need to return HTML, you can use the `{< >}` syntax. In this case you need to ensure manually that the returned HTML code is safe.
+The query result itself will be escaped though, so if e.g. you would have a custom page method that returns HTML the HTML would be displayed as normal text. If such queries need to return HTML, you can use the `{< >}` syntax. In this case you need to ensure manually that the returned HTML code is safe.
 
 ```yaml
 info: "{< page.myMethodWithHTML >}"
