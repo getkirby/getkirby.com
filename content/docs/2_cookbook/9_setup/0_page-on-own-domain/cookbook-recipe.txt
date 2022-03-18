@@ -35,7 +35,7 @@ return [
 
 ## Extending the example
 
-- You can all a (link: docs/guide/templates/page-models text: page model) for the `blog` page to make sure to render the correct URL in your navigation
+- You can call a (link: docs/guide/templates/page-models text: page model) for the `blog` page to make sure to render the correct URL in your navigation
 - You might want to refine this basic example if you need to make subpages work for this page
 
 ----
