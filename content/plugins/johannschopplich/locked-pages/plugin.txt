@@ -10,7 +10,7 @@ Category: security
 
 ----
 
-Featured: false
+Subcategory: authentication
 
 ----
 

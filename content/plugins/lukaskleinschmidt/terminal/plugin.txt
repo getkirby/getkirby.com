@@ -10,8 +10,9 @@ Category: panel
 
 ----
 
-Description: Manage background processes from the panel. Define scripts like you might already be familiar with from npm. Start or stop predefined scripts and monitor the output directly in the panel.
+Subcategory: section
 
 ----
 
-Featured: false
+Description: Manage background processes from the panel. Define scripts like you might already be familiar with from npm. Start or stop predefined scripts and monitor the output directly in the panel.
+

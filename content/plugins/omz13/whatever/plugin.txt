@@ -6,7 +6,11 @@ Repository: https://github.com/omz13/kirby3-whatever
 
 ----
 
-Category: utilities
+Category: panel
+
+----
+
+Subcategory: field
 
 ----
 

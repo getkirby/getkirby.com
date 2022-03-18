@@ -10,4 +10,8 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: Provides a field to trigger custom webhooks and see their status through the panel. Use it to deploy headless sites, trigger a CI/CD pipleline etc.

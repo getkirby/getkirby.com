@@ -10,4 +10,8 @@ Category: performance
 
 ----
 
+Subcategory: caching
+
+----
+
 Description: Cache any data until the set expiration time

@@ -10,5 +10,9 @@ Category: templating
 
 ----
 
+Subcategory: syntax-highlighting
+
+----
+
 Description: Themeable server-side syntax highlighting
 

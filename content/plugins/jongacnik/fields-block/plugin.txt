@@ -10,4 +10,8 @@ Category: panel
 
 ----
 
+Subcategory: block
+
+----
+
 Description: Kirby block preview plugin to directly render block fields, allowing for inline editing.

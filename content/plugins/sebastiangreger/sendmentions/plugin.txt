@@ -10,5 +10,9 @@ Category: integrations
 
 ----
 
+Subcategory: indieweb
+
+----
+
 Description: The plugin attempts to send Webmentions to all URLs linked from a page's content when it is saved with status "listed".
 

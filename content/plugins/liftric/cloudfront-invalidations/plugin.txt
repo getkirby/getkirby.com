@@ -10,8 +10,9 @@ Category: performance
 
 ----
 
-Description: Kirby plugin which triggers AWS CloudFront invalidations automatically.
+Subcategory: cdn
 
 ----
 
-Featured: false
+Description: Kirby plugin which triggers AWS CloudFront invalidations automatically.
+

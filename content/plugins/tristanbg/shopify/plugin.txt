@@ -6,7 +6,7 @@ Repository: https://github.com/tristantbg/kirby-shopify
 
 ----
 
-Category: integrations
+Category: ecommerce
 
 ----
 

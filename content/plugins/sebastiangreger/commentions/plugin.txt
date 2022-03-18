@@ -10,5 +10,9 @@ Category: integrations
 
 ----
 
+Subcategory: indieweb
+
+----
+
 Description: A minimalistic comment/webmention system
 

@@ -10,4 +10,8 @@ Category: utilities
 
 ----
 
+Subcategory: logging
+
+----
+
 Description: Helper tool that enables ray (https://myray.app/) on all extendable methods.

@@ -10,4 +10,8 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: Menu builder field to create any type of navigation menu

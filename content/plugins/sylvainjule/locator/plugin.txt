@@ -10,6 +10,10 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: A simple map & geolocation field, built on top of open-source services and Mapbox.
 
 ----

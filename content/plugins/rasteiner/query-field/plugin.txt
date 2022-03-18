@@ -14,4 +14,8 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: Author KQL queries in the Panel and use them in your templates.

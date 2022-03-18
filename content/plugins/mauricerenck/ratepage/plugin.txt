@@ -10,8 +10,9 @@ Category: integrations
 
 ----
 
-Description: A page rating plugin. Working without page reload and can also receive webmentions. Comes with a panel overview of all the ratings.
+Subcategory: indieweb
 
 ----
 
-Featured: false
+Description: A page rating plugin. Working without page reload and can also receive webmentions. Comes with a panel overview of all the ratings.
+

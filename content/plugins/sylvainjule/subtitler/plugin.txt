@@ -9,4 +9,8 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: Kirby field for synchronizing content with audio/video files

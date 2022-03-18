@@ -10,7 +10,7 @@ Category: analytics
 
 ----
 
-Featured: true
+Subcategory: dashboard
 
 ----
 

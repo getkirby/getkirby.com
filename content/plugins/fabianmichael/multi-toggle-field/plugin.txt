@@ -10,4 +10,8 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: An exploration of a new UI element/field for Kirby CMS, resembling the multi-toggles ususally found in desktop software for things, such as text alignment and various other settings.

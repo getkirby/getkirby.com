@@ -6,7 +6,11 @@ Download: https://clicktonext.com/plugins/pwa-progressive-web-app
 
 ----
 
-Category: utilities
+Category: performance
+
+----
+
+Subcategory: pwa
 
 ----
 

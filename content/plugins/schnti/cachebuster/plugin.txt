@@ -10,5 +10,9 @@ Category: performance
 
 ----
 
+Subcategory: caching
+
+----
+
 Description: Add modification timestamps to your css and js files, as long as they are embedded with the css() and js() helpers.
 

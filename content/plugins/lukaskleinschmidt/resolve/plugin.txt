@@ -10,4 +10,8 @@ Category: performance
 
 ----
 
+Subcategory: optimization
+
+----
+
 Description: Speed up Kirby's page routing.

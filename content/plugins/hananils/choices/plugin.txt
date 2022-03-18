@@ -6,7 +6,7 @@ Repository: https://github.com/hananils/kirby-choices
 
 ----
 
-Category: utilities
+Category: templating
 
 ----
 

@@ -10,5 +10,9 @@ Category: seo
 
 ----
 
+Subcategory: templating
+
+----
+
 Description: Advanced SEO for structured data to organize and connect microdata based on JSON Linked Data format (JSON-LD).
 

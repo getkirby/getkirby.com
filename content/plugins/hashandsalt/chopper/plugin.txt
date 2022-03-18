@@ -10,5 +10,9 @@ Category: templating
 
 ----
 
+Subcategory: field-method
+
+----
+
 Description: Create excerpts from fields and define the HTML tags you wish to keep
 

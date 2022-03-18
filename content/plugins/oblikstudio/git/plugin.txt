@@ -10,5 +10,9 @@ Category: panel
 
 ----
 
-Description: Kirby plugin for updating content in the Panel via Git 
+Subcategory: git
+
+----
+
+Description: Kirby plugin for updating content in the Panel via Git
 

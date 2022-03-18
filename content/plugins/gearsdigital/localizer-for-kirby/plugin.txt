@@ -10,4 +10,8 @@ Category: panel
 
 ----
 
+Subcategory: view
+
+----
+
 Description: Change every localized string within the Panel – other plugins included! If you want to adapt some Panel translations without effort, this is your chance!

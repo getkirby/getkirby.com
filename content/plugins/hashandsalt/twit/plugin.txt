@@ -10,5 +10,9 @@ Category: integrations
 
 ----
 
+Subcategory: social
+
+----
+
 Description: A wrapper around twitteroauth. Allows you to display tweets on your website without having to use Twitters embedded timelines.
 

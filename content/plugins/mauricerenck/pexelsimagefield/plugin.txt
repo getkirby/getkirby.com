@@ -10,8 +10,11 @@ Category: panel
 
 ----
 
-Description: A panel field allowing you to search pexels.com for stockphotos and download then directly to your Kirby page.
+Subcategory: field
 
 ----
 
-Featured: false
+Description: A panel field allowing you to search pexels.com for stockphotos and download then directly to your Kirby page.
+
+
+

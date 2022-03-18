@@ -10,5 +10,9 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: A color palette field, helping you pick predefined colors / palettes
 

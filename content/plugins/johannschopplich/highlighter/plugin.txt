@@ -10,7 +10,7 @@ Category: templating
 
 ----
 
-Featured: false
+Subcategory: syntax-highlighting
 
 ----
 

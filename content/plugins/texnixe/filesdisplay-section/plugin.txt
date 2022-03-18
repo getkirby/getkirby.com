@@ -10,5 +10,9 @@ Category: panel
 
 ----
 
+Subcategory: section
+
+----
+
 Description: Display files from anywhere in your site in a section. This section only displays files, you cannot sort them manually or upload new files.
 

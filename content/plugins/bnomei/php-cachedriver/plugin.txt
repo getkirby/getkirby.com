@@ -10,4 +10,8 @@ Category: performance
 
 ----
 
+Subcategory: caching
+
+----
+
 Description: PHP based Cache-Driver

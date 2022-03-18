@@ -10,4 +10,8 @@ Category: performance
 
 ----
 
+Subcategory: caching
+
+----
+
 Description: Kirby 3 Plugin to cache the content file using SQLite

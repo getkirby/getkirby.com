@@ -6,7 +6,11 @@ Repository: https://github.com/bnomei/kirby3-janitor
 
 ----
 
-Category: utilities
+Category: panel
+
+----
+
+Subcategory: field
 
 ----
 

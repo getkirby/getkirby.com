@@ -6,7 +6,7 @@ Repository: https://github.com/bnomei/kirby3-cloudconvert
 
 ----
 
-Category: integrations
+Category: assets
 
 ----
 

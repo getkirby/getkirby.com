@@ -10,5 +10,9 @@ Category: performance
 
 ----
 
+Subcategory: cdn
+
+----
+
 Description: Automatically purge Cloudflare cached URLs
 

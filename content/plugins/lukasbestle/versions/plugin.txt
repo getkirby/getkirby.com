@@ -10,4 +10,8 @@ Category: panel
 
 ----
 
+Subcategory: view
+
+----
+
 Description: Keep track of content changes and switch between different versions from the Panel

@@ -10,4 +10,8 @@ Category: templating
 
 ----
 
+Subcategory: engine
+
+----
+
 Description: Use Laravel Blade templates for your Kirby site

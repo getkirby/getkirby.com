@@ -6,7 +6,7 @@ Repository: https://github.com/medienbaecker/kirby-likes
 
 ----
 
-Category: utilities
+Category: templating
 
 ----
 

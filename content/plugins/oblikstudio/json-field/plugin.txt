@@ -10,6 +10,10 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: Use the JSON field to create nested JSON objects and arrays with an intuitive interface
 
 

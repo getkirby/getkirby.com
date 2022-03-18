@@ -10,4 +10,8 @@ Category: panel
 
 ----
 
+Subcategory: section
+
+----
+
 Description: Display any page list in a section. Any parent, many parents, filtered, don't care.

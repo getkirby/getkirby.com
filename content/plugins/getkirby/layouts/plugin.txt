@@ -10,4 +10,8 @@ Category: templating
 
 ----
 
+Subcategory: engine
+
+----
+
 Description: This plugin extends Kirby’s templates with a powerful layout system.

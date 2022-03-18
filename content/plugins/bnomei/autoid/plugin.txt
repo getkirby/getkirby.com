@@ -6,7 +6,11 @@ Repository: https://github.com/bnomei/kirby3-autoid
 
 ----
 
-Category: utilities
+Category: performance
+
+----
+
+Subcategory: optimization
 
 ----
 

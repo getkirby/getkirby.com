@@ -6,7 +6,7 @@ Repository: https://github.com/hananils/kirby-date-methods
 
 ----
 
-Category: utilities
+Category: dates
 
 ----
 

@@ -10,5 +10,9 @@ Category: integrations
 
 ----
 
+Subcategory: indieweb
+
+----
+
 Description: Provides self-hosted authentication for the IndieAuth protocol
 

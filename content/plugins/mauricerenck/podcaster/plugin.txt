@@ -10,8 +10,9 @@ Category: integrations
 
 ----
 
-Description: Run your own podcast with Kirby! Handle episodes right in the panel, create feeds for all popular "podcatchers", track downloads and integrate a player in your site.
+Subcategory: podcasts
 
 ----
 
-Featured: true
+Description: Run your own podcast with Kirby! Handle episodes right in the panel, create feeds for all popular "podcatchers", track downloads and integrate a player in your site.
+

@@ -6,11 +6,11 @@ Repository: https://github.com/johannschopplich/kirby-punctuation-section
 
 ----
 
-Category: text
+Category: panel
 
 ----
 
-Featured: false
+Subcategory: section
 
 ----
 

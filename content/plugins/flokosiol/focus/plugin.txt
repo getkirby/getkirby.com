@@ -6,7 +6,11 @@ Repository: https://github.com/flokosiol/kirby-focus
 
 ----
 
-Category: assets
+Category: panel
+
+----
+
+Subcategory: field
 
 ----
 

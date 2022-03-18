@@ -12,3 +12,10 @@ Category: analytics
 
 Description: Add the Fathom tracking code to your site
 
+----
+
+Example:
+
+```php
+<?php snippet('fathom') ?>
+```

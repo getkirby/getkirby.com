@@ -10,4 +10,8 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: Geolocation field & map block: All you need for a map on your website.

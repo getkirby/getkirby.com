@@ -10,7 +10,7 @@ Category: panel
 
 ----
 
-Featured: true
+Subcategory: field
 
 ----
 

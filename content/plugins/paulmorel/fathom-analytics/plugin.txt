@@ -10,5 +10,9 @@ Category: analytics
 
 ----
 
+Subcategory: dashboard
+
+----
+
 Description: Integrates the privacy first website analytics Fathom Analytics dashboard to the panel and provides the tracking code for your templates.
 

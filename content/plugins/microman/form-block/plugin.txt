@@ -10,4 +10,8 @@ Category: panel
 
 ----
 
+Subcategory: block
+
+----
+
 Description: This form plugin for Kirby offers you maximum flexibility and usability. It can be used as a block anywhere you needed. Even multiple times per page.

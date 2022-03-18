@@ -10,5 +10,9 @@ Category: templating
 
 ----
 
+Subcategory: field-method
+
+----
+
 Description: Parse Kirbytext and wrap the result in an HTML element of your choice
 

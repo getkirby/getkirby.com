@@ -10,4 +10,8 @@ Category: integrations
 
 ----
 
+Subcategory: headless
+
+----
+
 Description: Kirby's Query Language API combines the flexibility of Kirby's data structures, the power of GraphQL and the simplicity of REST.

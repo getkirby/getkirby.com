@@ -10,4 +10,8 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: Integrates the powerful TinyMCE 5 wysiwyg editor into Kirby 3.

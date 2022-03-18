@@ -10,7 +10,7 @@ Category: utilities
 
 ----
 
-Featured: false
+Subcategory: logging
 
 ----
 

@@ -6,7 +6,7 @@ Download: https://clicktonext.com/plugins/detect-adblock
 
 ----
 
-Category: utilities
+Category: templating
 
 ----
 

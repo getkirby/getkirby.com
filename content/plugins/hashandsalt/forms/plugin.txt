@@ -10,5 +10,9 @@ Category: templating
 
 ----
 
+Subcategory: forms
+
+----
+
 Description: A small plugin for creating HTML forms more easily.
 

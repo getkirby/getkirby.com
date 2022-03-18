@@ -10,5 +10,9 @@ Category: templating
 
 ----
 
+Subcategory: privacy
+
+----
+
 Description: Add a cookie approval banner to your templates
 

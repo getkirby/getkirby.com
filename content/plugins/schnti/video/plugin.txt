@@ -10,5 +10,9 @@ Category: integrations
 
 ----
 
+Subcategory: social
+
+----
+
 Description: Embed content from YouTube without compromising privacy.
 

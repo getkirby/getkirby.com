@@ -6,7 +6,7 @@ Repository: https://github.com/hananils/kirby-list-methods
 
 ----
 
-Category: utilities
+Category: templating
 
 ----
 

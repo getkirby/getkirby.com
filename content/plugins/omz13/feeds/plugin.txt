@@ -10,7 +10,7 @@ Category: integrations
 
 ----
 
-Featured: true
+Subcategory: feeds
 
 ----
 

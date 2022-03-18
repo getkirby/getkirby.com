@@ -10,5 +10,9 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: Combine images with radio buttons in this field, to provide an intuitive selection interface for your editors
 

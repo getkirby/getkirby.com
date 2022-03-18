@@ -10,5 +10,9 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: Use the table field plugin to provide an easy way for editors to create and edit tables
 

@@ -6,7 +6,11 @@ Repository: https://github.com/steirico/kirby-plugin-image-crop-field
 
 ----
 
-Category: assets
+Category: panel
+
+----
+
+Subcategory: field
 
 ----
 

@@ -10,5 +10,9 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: Font Awesome icon picker field for the panel.
 

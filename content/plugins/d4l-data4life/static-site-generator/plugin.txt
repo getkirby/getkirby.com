@@ -10,4 +10,8 @@ Category: integrations
 
 ----
 
+Subcategory: static-site-generator
+
+----
+
 Description: Create a static version of your site. Upload the generated files to any CDN or services like Netlify. The result is an even faster site.

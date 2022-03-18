@@ -10,4 +10,8 @@ Category: templating
 
 ----
 
+Subcategory: relationships
+
+----
+
 Description: Find items related to the current item based on similarity between fields

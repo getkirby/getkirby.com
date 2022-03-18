@@ -10,7 +10,7 @@ Category: integrations
 
 ----
 
-Featured: false
+Subcategory: headless
 
 ----
 

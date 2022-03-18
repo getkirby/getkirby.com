@@ -10,5 +10,9 @@ Category: utilities
 
 ----
 
+Subcategory: logging
+
+----
+
 Description: Use Monolog to log data to files, databases, notifications and more.
 

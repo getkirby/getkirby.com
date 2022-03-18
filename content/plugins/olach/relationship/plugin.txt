@@ -10,5 +10,9 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: The Relationship field allows you to select and sort multiple items from a list
 

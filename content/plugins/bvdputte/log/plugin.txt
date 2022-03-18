@@ -10,5 +10,9 @@ Category: utilities
 
 ----
 
+Subcategory: logging
+
+----
+
 Description: A little log utility (KLogger wrapper)
 

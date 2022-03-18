@@ -1,4 +1,5 @@
-<article>
+<?php foreach ($plugins as $plugin): ?>
+<article class="mb-6">
   <a href="<?= $plugin->url() ?>" class="bg-dark shadow-xl color-gray-400 rounded overflow-hidden shadow columns" style="--columns: 3; --gap: 0">
     <div class="p-6">
       <h4 class="color-white font-bold"><?= $plugin->title() ?></h4>
@@ -14,3 +15,4 @@
     <?php endif ?>
   </a>
 </article>
+<?php endforeach ?>

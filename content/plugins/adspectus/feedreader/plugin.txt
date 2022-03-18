@@ -6,7 +6,11 @@ Repository: https://github.com/Adspectus/k3-feedreader
 
 ----
 
-Category: utilities
+Category: integrations
+
+----
+
+Subcategory: feeds
 
 ----
 

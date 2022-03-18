@@ -10,4 +10,8 @@ Category: panel
 
 ----
 
+Subcategory: view
+
+----
+
 Description: This plugin logs all actions in the panel and displays them in a separate view.

@@ -10,5 +10,9 @@ Category: integrations
 
 ----
 
+Subcategory: headless
+
+----
+
 Description: Exposes the internal REST API at /rest with the option to convert Kirbytags to HTML and add a srcset to images in the process. Intended to convert Kirby into a headless CMS.
 

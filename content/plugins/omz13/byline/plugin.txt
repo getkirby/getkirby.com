@@ -10,5 +10,9 @@ Category: templating
 
 ----
 
+Subcategory: field-method
+
+----
+
 Description: Field methods to create plain or linked bylines from single or multiple authors
 

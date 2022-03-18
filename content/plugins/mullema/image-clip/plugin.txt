@@ -10,5 +10,9 @@ Category: panel
 
 ----
 
+Subcategory: field
+
+----
+
 Description: Visually crop images with a handy image editor directly inside the panel
 

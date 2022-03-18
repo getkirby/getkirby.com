@@ -10,4 +10,8 @@ Category: templating
 
 ----
 
+Subcategory: engine
+
+----
+
 Description: Plates native PHP template engine/system for Kirby 3.

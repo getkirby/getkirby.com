@@ -6,7 +6,11 @@ Repository: https://github.com/genxbe/kirby3-instagram
 
 ----
 
-Category: social
+Category: integrations
+
+----
+
+Subcategory: social
 
 ----
 
