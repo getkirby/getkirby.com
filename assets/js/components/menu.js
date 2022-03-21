@@ -1,7 +1,6 @@
 export default class {
-
   constructor() {
-    this.$el = document.querySelector(".menu-toggle")
+    this.$el = document.querySelector(".menu-toggle");
 
     if (this.$el) {
       this.$el.addEventListener("keydown", this.onKey, true);
