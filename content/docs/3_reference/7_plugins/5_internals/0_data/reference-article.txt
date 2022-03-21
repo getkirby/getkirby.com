@@ -11,6 +11,22 @@ Text:
 
 The Panel provides a range of meta data information about the current Panel view, the Kirby installaiton and the site itself. In most places, you will be able to accessthis information directly through its key, e.g. as `this.$config`. In contexts wherethis is not possible, you can still access the information via `window.panel`, e.g. `window.panel.$config`.
 
+```html
+<template>
+  <p v-if="$license">This thing is registered</p>
+</template>
+
+<script>
+export default {
+  computed: {
+    somethingFromTheCurrentView() {
+      return this.$view.props.myProp;
+    }
+  }
+}
+</script>
+```
+
 ## `$config`
 
 | Key | Description|
@@ -20,10 +36,12 @@ The Panel provides a range of meta data information about the current Panel view
 | `search` | Settings for Panel search (object with keys `limit` and `type`) |
 | `translation` | Default Panel UI language (locale `string`, e.g. `en`) |
 
-```js
- if (this.$config.debug === true) {
-   // do something only shown when debug mode is enabled
- }
+```html
+<template>
+  <div v-if="$config.debug">
+    This only shows wehn debug mode is active
+  </div>
+</template>
 ```
 
 ## `$direction`
@@ -59,7 +77,7 @@ All available languages for site content.
 | `rules` | Conversion rules into ASCII-only characters |
 
 ```js
-this.$language.code
+this.$languages[0].code
 ```
 
 ## `$multilang`
