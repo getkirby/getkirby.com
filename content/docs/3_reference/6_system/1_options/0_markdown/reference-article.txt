@@ -37,3 +37,17 @@ return [
   ]
 ];
 ```
+
+## Safe mode: `markdown.safe`
+
+Enables/disables Parsedown's safe mode which applies sanitisation to scripting vectors (such as scripting link destinations) that are introduced by the markdown syntax itself.
+
+Default: `false`
+
+```php
+return [
+  'markdown' => [
+    'safe' => true
+  ]
+];
+```
