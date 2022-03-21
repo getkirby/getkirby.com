@@ -19,16 +19,25 @@
     <ul class="auto-fill" style="--min: 12rem; --max: 14rem">
       <?php foreach ($authors as $author): ?>
       <li>
-        <a class="block bg-white p-6 shadow-2xl" href="<?= $author->website() ?>">
-          <figure>
-            <p class="mb-3" style="--aspect-ratio: 1/1"><?= $author->image()->crop(400) ?></p>
-            <figcaption class="flex-grow text-sm leading-tight">
+        <figure class="block bg-white p-6 shadow-2xl">
+          <p class="mb-3" style="--aspect-ratio: 1/1"><?= $author->image()->crop(400) ?></p>
+          <figcaption class="flex-grow text-sm leading-tight">
+            <div class="mb-6">
               <p class="font-bold"><?= $author->title() ?></p>
-              <p class="mb-6 color-gray-700"><?= $author->bio() ?></p>
-              <p class="font-mono link"><?= $author->website()->shortUrl() ?></p>
-            </figcaption>
-          </figure>
-        </a>
+              <p class="mb-1 color-gray-700"><?= $author->bio() ?></p>
+
+              <?php if ($author->website()->isNotEmpty()): ?>
+              <a href="<?= $author->website() ?>">
+                <p class="font-mono link"><?= $author->website()->shortUrl() ?></p>
+              </a>
+              <?php endif ?>
+            </div>
+
+            <a href="<?= $author->url() ?>">
+              <p class="link">&rarr; All their recipes</p>
+            </a>
+          </figcaption>
+        </figure>
       </li>
       <?php endforeach ?>
     </ul>
