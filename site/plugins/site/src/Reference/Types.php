@@ -124,6 +124,11 @@ class Types
             return '<code>' . ($text ?? $type) . '</code>';
         }
 
+        // handle nullable types
+        if (Str::startsWith($type, '?')) {
+            $type = substr($type, 1) . '|null';
+        }
+
         // Multiple datatypes
         if (Str::contains($type, '|')) {
             $types = explode('|', $type);
@@ -204,6 +209,23 @@ class Types
         // Probably a code example (not a datatype),
         // just return a plain code tag
         return static::tag($text);
+    }
+
+
+    /**
+     * Extracts variable and type from parameter definition
+     *
+     * @param string $parameter
+     * @return array
+     */
+    public static function parameter(string $parameter): array
+    {
+        $argument = explode('=', $parameter);
+        $argument = explode(' ', trim($argument[0]));
+        return [
+            'variable' => $argument[count($argument) - 1],
+            'type'     => static::format($argument[count($argument) - 2] ?? '-')
+        ];
     }
 
     /**

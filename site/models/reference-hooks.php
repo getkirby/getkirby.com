@@ -2,6 +2,7 @@
 
 use Kirby\Cms\Pages;
 use Kirby\Reference\SectionPage;
+use Kirby\Toolkit\Str;
 
 class ReferenceHooksPage extends SectionPage
 {
