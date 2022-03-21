@@ -13,7 +13,7 @@
     <label for="search" class="h1 block color-gray-400 mb-12">Search</label>
     <div class="sticky" style="--top: var(--spacing-6)">
       <div class="flex max-w-xl items-stretch mb-6 rounded">
-        <input autofocus id="search" class="rounded flex-grow bg-light px-3 py-1 mr-3" type="text" value="<?= $query ?>" name="q">
+        <input autofocus id="search" class="rounded flex-grow w-100% bg-light px-3 py-1 mr-3" type="text" value="<?= $query ?>" name="q">
         <button class="flex-shrink-0 flex bg-black color-white rounded items-center px-3" aria-label="Search">
           <?= icon('search') ?>
         </button>
