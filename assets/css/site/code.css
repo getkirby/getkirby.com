@@ -12,8 +12,11 @@
 .code pre {
   padding: 1.5em;
   line-height: var(--leading-relaxed);
-  font-size: .825em;
+  font-size: 0.825em;
   font-family: var(--font-mono);
+}
+.code figcaption,
+.code pre {
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
@@ -30,7 +33,7 @@
   bottom: var(--spacing-3);
   right: var(--spacing-3);
   opacity: 0;
-  transition: opacity .2s;
+  transition: opacity 0.2s;
 }
 .code-toolbar:hover .toolbar {
   opacity: 1;
@@ -44,7 +47,7 @@
   color: var(--color-gray-500);
   font-size: var(--text-xs);
   cursor: pointer;
-  transition: background-color .2s;
+  transition: background-color 0.2s;
   border-radius: var(--rounded-sm);
   outline: none;
 }
