@@ -13,10 +13,10 @@
         <th>Type</th>
       </thead>
       <?php foreach ($arguments as $argument): ?>
-      <?php $argument = explode(' ', $argument) ?>
+      <?php $argument = Types::parameter($argument) ?>
       <tr>
-        <td><?= $argument[count($argument) - 1] ?></td>
-        <td><?= Types::format($argument[count($argument) - 2] ?? '-') ?></td>
+        <td><?= $argument['variable'] ?></td>
+        <td><?= $argument['type'] ?></td>
       </tr>
       <?php endforeach ?>
     </table>
