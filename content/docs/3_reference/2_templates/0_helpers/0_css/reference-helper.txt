@@ -1,4 +1,4 @@
-Text: 
+Text:
 
 ## Example
 
@@ -47,4 +47,11 @@ You can also pass an array of completely custom attributes:
 
 ```php
 <?= css('assets/css/print.css', ['media' => 'print', 'data-something' => 'my-value']) ?>
+```
+
+For the `rel` attribute only `alternate stylesheet` is a valid value, and only if also passing a `title` attribute:
+
+
+```php
+<?= css('assets/css/high-contrast.css', ['rel' => 'alternate stylesheet', 'title' => 'High contrast']) ?>
 ```
