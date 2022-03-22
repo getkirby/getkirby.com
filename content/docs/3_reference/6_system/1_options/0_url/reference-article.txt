@@ -4,10 +4,101 @@ Intro: Set the base URL for the site.
 
 Text:
 
-You can set a base URL for the site. When set to false, Kirby auto-detects the correct URL.
+
+By default, the `url` option is not set and Kirby will try to auto-detect your base URL, based on the `SERVER_NAME`
 
 ```php
 return [
-  'url' => 'https://mydomain.com'
+  // any other config options
 ];
 ```
+
+Alternatively, you can hard-code the base `url` to switch off auto-detection.
+
+```php
+return [
+  'url' => 'https://example.com'
+];
+```
+
+<since v="3.6.3">
+
+Since Kirby 3.6.3, you'll have a couple additional options to control auto-detection and set an allow list of accepted base URLs:
+
+## Auto-detection
+
+Just like before, you can ignore the URL option or use the `Server::HOST_FROM_SERVER` constant to let Kirby find the correct base URL, based on the `SERVER_NAME`.
+
+```php
+return [
+  // any other config option
+];
+```
+… or …
+
+```php
+return [
+  'url' => Server::HOST_FROM_SERVER
+];
+```
+
+This can be combined with the new `Server::HOST_ALLOW_EMPTY` option to accept empty hostnames. This will lead to relative URLs i.e. `/some-url` for your installation if the SERVER_NAME is not set or empty.
+
+```php
+return [
+  'url' => Server::HOST_FROM_SERVER | Server::HOST_ALLOW_EMPTY
+];
+```
+
+## Hard-coded URL
+
+You can also still set the base URL for your site. This will disable any form of auto-detection of URLs. But it also means that you might have to keep different versions for your local installation, staging and your production server. We recommend (link: docs/guide/configuration#multi-environment-setup text: multi-environment config files) for this.
+
+```php
+return [
+  'url' => 'https://example.com'
+];
+```
+
+This also still works for relative URLs without a host.
+
+```php
+return [
+  'url' => '/'
+];
+```
+
+## URL allow list
+
+With the new option to define a set of allowed base URLs, your Kirby installation will automatically pick the right one based on `HTTP_HOST`, `HTTP_X_FORWARDED_HOST` or `SERVER_NAME` (whatever is provided) and makes sure to send an error on an invalid hosts. This is perfect when you cannot fully trust your server configurations on various environments or you work with a reverse proxy.
+
+```php
+return [
+  'url' => [
+     'https://example.com',
+     'https://staging.example.com',
+     'http://example.test'
+  ]
+];
+```
+
+You can also define base URLs with subfolders here and the subfolders will be validated too.
+
+## Wildcard option
+
+If you fully trust your server setup, you can allow any host name coming from `HTTP_HOST` or `HTTP_X_FORWARDED_HOST`. This could be necessary in some situations, but is insecure if you don't know what you are doing with your server configuration.
+
+```php
+return [
+  'url' => Server::HOST_FROM_HEADER
+];
+```
+
+Again, this can be combined with the `Server::HOST_ALLOW_EMPTY` option to allow the host name to be left empty. It will lead to relative URLs for your installation:
+
+```php
+return [
+  'url' => Server::HOST_FROM_HEADER | Server::HOST_ALLOW_EMPTY
+];
+```
+</since>
