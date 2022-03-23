@@ -2,7 +2,7 @@
   <?php foreach ($plugins as $plugin) : ?>
     <a class="block bg-white rounded overflow-hidden shadow" href="<?= $plugin->url() ?>">
       <article class="columns items-center" style="--columns: 4; --gap: var(--spacing-3)">
-        <?php if ($image = $plugin->images()->findBy('name', 'logo')) : ?>
+        <?php if ($image = $plugin->images()->findBy('name', 'logo')): ?>
           <img class="p-3" src="<?= $image->url() ?>" style="--aspect-ratio: 1/1; object-fit: contain">
         <?php else : ?>
           <figure class="p-3">
