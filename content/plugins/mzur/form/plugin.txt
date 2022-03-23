@@ -15,3 +15,20 @@ Subcategory: forms
 ----
 
 Description: A helper library for working with forms, using the Post/Redirect/Get design pattern
+
+----
+
+Example:
+
+```php
+$form = new Form([
+    'name' => [
+        'rules'   => ['required'],
+        'message' => ['Name is required']
+    ],
+]);
+```
+
+----
+
+Similar: plugins/mzur/uniform

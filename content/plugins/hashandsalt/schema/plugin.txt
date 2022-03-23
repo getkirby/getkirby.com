@@ -16,3 +16,14 @@ Subcategory: templating
 
 Description: Easily generate JSON schema for any kind of structured data in the RDFa specification.
 
+----
+
+Example:
+
+```php
+<?= $site
+    ->schema('LocalBusiness')
+    ->name('Hash&Salt')
+    ->email('email@example.com')
+?>
+```

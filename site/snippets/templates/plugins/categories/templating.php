@@ -12,15 +12,15 @@
   'icon'    => 'code',
   'title'   => 'Forms',
   'layout'  => 'cards',
-  'columns' => 3,
-  'plugins' => $plugins->filter('subcategory', 'forms')->pluck('id')
+  'columns' => 2,
+  'plugins' => $plugins->filter('subcategory', 'forms')->filter('similar', '')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
   'id'      => 'field-methods',
   'icon'    => 'code',
   'title'   => 'Field methods',
-  'layout'  => 'cardlets',
+  'layout'  => 'cards',
   'columns' => 2,
   'plugins' => $plugins->filter('subcategory', 'field-method')->pluck('id')
 ]) ?>
@@ -46,7 +46,7 @@
   'id'      => 'related',
   'icon'    => 'code',
   'title'   => 'Related content',
-  'layout'  => 'cardlets',
+  'layout'  => 'cards',
   'columns' => 2,
   'plugins' => $plugins->filter('subcategory', 'relationships')->pluck('id')
 ]) ?>

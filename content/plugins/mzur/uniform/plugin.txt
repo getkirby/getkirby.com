@@ -15,3 +15,16 @@ Subcategory: forms
 ----
 
 Description: Probably the most versatile solution for handling web form submissions, validation and backend processing on your site
+
+----
+
+Example:
+
+```php
+$form = new Form([
+    'name' => [
+        'rules'   => ['required'],
+        'message' => ['Name is required']
+    ],
+]);
+```

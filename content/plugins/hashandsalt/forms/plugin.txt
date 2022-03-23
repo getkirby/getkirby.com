@@ -16,3 +16,13 @@ Subcategory: forms
 
 Description: A small plugin for creating HTML forms more easily.
 
+----
+
+Example:
+
+```php
+<div class="field">
+    <?= label('Name', 'name') ?>
+    <?= input('text', 'name') ?>
+</div>
+```

@@ -15,3 +15,14 @@ Subcategory: relationships
 ----
 
 Description: Find items related to the current item based on similarity between fields
+
+----
+
+Example:
+
+```php
+foreach ($page->similar($options) as $p) {
+  echo $p->title();
+}
+```
+

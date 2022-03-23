@@ -15,3 +15,15 @@ Description: Manage the robots.txt from Kirby's config file
 ----
 
 Similar: omz13/wellknown
+
+----
+
+Example:
+
+```php
+return [
+    'bnomei.robots-txt' => [
+        'content' => '...'
+    ]
+];
+```

@@ -16,3 +16,14 @@ Featured: true
 
 Description: Generates a sitemap for search engines. Can be configured to include/exclude certain pages and more.
 
+----
+
+Example:
+
+```php
+return [
+  'omz13.xmlsitemap' => [
+    'cacheTTL' => 60,
+    'includeUnlistedWhenSlugIs' => [...],
+  ]
+];

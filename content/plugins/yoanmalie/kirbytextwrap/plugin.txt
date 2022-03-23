@@ -16,3 +16,10 @@ Subcategory: field-method
 
 Description: Parse Kirbytext and wrap the result in an HTML element of your choice
 
+----
+
+Example:
+
+```php
+<?= $page->title()->kirbytextWrap('h1') ?>
+```

@@ -16,3 +16,10 @@ Subcategory: field-method
 
 Description: Field method to echo strings based on the boolean value of a field
 
+----
+
+Example:
+
+```php
+<?= $page->thumbsUp()->ecco('👍', '👎') ?>
+```

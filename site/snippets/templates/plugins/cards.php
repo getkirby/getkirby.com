@@ -4,15 +4,15 @@
       <article>
         <figure class="bg-light">
           <?php if ($card = $plugin->card()) : ?>
-            <img src="<?= $card->url() ?>" style="--aspect-ratio: 4/3; object-position: left top;">
+            <img src="<?= $card->url() ?>" style="--aspect-ratio: 2/1; object-fit: contain;">
           <?php elseif ($plugin->example()->isNotEmpty()) : ?>
-            <div style="--aspect-ratio: 4/3; background: #5d6166">
-              <div class="flex items-center justify-center">
+            <div style="--aspect-ratio: 2/1; background: #000; overflow:hidden">
+              <div class="flex items-center justify-center <?= ($columns ?? 3) === 3 ? ' text-xs' : '' ?>">
                 <div class="shadow-xl"><?= $plugin->example()->kt() ?></div>
               </div>
             </div>
           <?php else : ?>
-            <span style="--aspect-ratio: 4/3"></span>
+            <span style="--aspect-ratio: 2/1"></span>
           <?php endif ?>
         </figure>
         <div class="p-6">

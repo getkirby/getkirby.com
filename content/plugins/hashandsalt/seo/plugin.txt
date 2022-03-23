@@ -16,3 +16,10 @@ Subcategory: templating
 
 Description: A small plugin for generating meta data using shared controllers and field data. Also creates Facebook Opengraph and Twitter social sharing information.
 
+----
+
+Example:
+
+```php
+<?php snippet('seo/meta') ?>
+```
