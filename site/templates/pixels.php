@@ -211,9 +211,9 @@
     fieldPlugin: {
       label: "Panel field plugin",
       background: colors[1],
-      mt: 2,
-      ml: 2,
-      mr: 2,
+      mt: 4,
+      ml: 4,
+      mr: 4,
       rounded: false,
       shadow: false
     },
