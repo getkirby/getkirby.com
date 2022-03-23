@@ -42,5 +42,18 @@ return [
                 die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
             }
         }
+    ],
+    [
+        'pattern' => 'pixels',
+        'action'  => function () {
+            return new Page([
+                'slug'     => 'pixels',
+                'template' => 'pixels',
+                'content'  => [
+                    'title' => 'Pixels'
+                ]
+            ]);
+        }
     ]
+
 ];
