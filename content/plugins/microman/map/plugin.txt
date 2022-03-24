@@ -6,11 +6,11 @@ Repository: https://github.com/youngcut/kirby-map
 
 ----
 
-Category: panel
+Category: fields
 
 ----
 
-Subcategory: field
+Subcategory: maps
 
 ----
 

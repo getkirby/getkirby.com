@@ -6,11 +6,7 @@ Repository: https://github.com/bnomei/kirby3-doctor
 
 ----
 
-Category: panel
-
-----
-
-Subcategory: field
+Category: fields
 
 ----
 

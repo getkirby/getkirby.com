@@ -6,11 +6,11 @@ Repository: https://github.com/mullema/k3-image-clip
 
 ----
 
-Category: panel
+Category: fields
 
 ----
 
-Subcategory: field
+Subcategory: images
 
 ----
 

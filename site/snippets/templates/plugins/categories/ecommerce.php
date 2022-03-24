@@ -1,27 +1,19 @@
-<section id="ecommerce" class="mb-24">
-  <?php snippet('templates/plugins/headline', [
-    'icon' => 'cart',
-    'text' => 'Shops'
-  ]) ?>
-
-  <div class="mb-6">
-    <?php snippet('templates/plugins/hero', [
-      'plugins' => pages([
-        'plugins/wagnerwagner/merx',
-      ]),
-    ]) ?>
-  </div>
-  <?php snippet('templates/plugins/cardlets', [
-    'columns' => 2,
-    'plugins' => pages(
-      'plugins/tristanbg/shopify',
-      'plugins/hashandsalt/snipcart',
-    )
-  ]) ?>
-</section>
+<?php snippet('templates/plugins/section', [
+  'id'      => 'ecommerce',
+  'icon'    => 'cart',
+  'hero'    => true,
+  'title'   => 'Shop integrations',
+  'layout'  => 'cardlets',
+  'columns' => 2,
+  'plugins' => [
+    'plugins/wagnerwagner/merx',
+    'plugins/tristanbg/shopify',
+    'plugins/hashandsalt/snipcart',
+  ]
+]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'utilities',
+  'id'      => 'merx-extensions',
   'icon'    => 'cart',
   'title'   => 'Merx extensions',
   'layout'  => 'cardlets',

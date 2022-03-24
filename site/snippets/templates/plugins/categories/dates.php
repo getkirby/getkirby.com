@@ -8,6 +8,18 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
+  'id'      => 'fields',
+  'icon'    => 'calendar',
+  'title'   => 'Panel fields',
+  'layout'  => 'cards',
+  'columns' => 2,
+  'plugins' => [
+    'plugins/adspectus/date-extended',
+    'plugins/mullema/date-format'
+  ]
+]) ?>
+
+<?php snippet('templates/plugins/section', [
   'id'      => 'utilities',
   'icon'    => 'calendar',
   'title'   => 'Utilities',

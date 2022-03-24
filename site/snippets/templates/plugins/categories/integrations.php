@@ -50,15 +50,6 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'git',
-  'icon'    => 'integration',
-  'title'   => 'Git',
-  'layout'  => 'cards',
-  'columns' => 3,
-  'plugins' => page('plugins')->grandChildren()->filter('category', 'panel')->filter('subcategory', 'git')->pluck('id')
-]) ?>
-
-<?php snippet('templates/plugins/section', [
   'id'      => 'feeds',
   'icon'    => 'integration',
   'title'   => 'Feeds',

@@ -10,11 +10,7 @@ Download: https://api.github.com/repos/rasteiner-dist/k3-query-field/zipball
 
 ----
 
-Category: panel
-
-----
-
-Subcategory: field
+Category: fields
 
 ----
 

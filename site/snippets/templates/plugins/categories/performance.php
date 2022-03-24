@@ -32,6 +32,14 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
+  'id'      => 'panel',
+  'icon'    => 'performance',
+  'title'   => 'Panel extensions',
+  'layout'  => 'hero',
+  'plugins' => $plugins->filter('subcategory', 'panel')->pluck('id')
+]) ?>
+
+<?php snippet('templates/plugins/section', [
   'id'      => 'cdns',
   'icon'    => 'performance',
   'title'   => 'CDNs',

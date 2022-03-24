@@ -10,7 +10,7 @@ Category: panel
 
 ----
 
-Subcategory: git
+Subcategory: section
 
 ----
 

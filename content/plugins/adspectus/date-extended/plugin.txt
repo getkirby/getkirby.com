@@ -6,11 +6,11 @@ Repository: https://github.com/Adspectus/k3-date-extended
 
 ----
 
-Category: panel
+Category: fields
 
 ----
 
-Subcategory: field
+Subcategory: dates
 
 ----
 

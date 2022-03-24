@@ -15,3 +15,11 @@ Description: Store project credentials and environment variables in a .env file 
 ----
 
 Similar: beebmx/env
+
+----
+
+Example:
+
+```php
+env('APP_DEBUG');
+```

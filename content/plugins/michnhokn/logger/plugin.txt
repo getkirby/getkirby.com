@@ -6,11 +6,11 @@ Repository: https://github.com/michnhokn/kirby3-logger
 
 ----
 
-Category: panel
+Category: logging
 
 ----
 
-Subcategory: view
+Subcategory: panel
 
 ----
 

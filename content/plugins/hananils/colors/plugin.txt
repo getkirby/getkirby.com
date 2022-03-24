@@ -6,11 +6,11 @@ Repository: https://github.com/hananils/kirby-colors
 
 ----
 
-Category: panel
+Category: fields
 
 ----
 
-Subcategory: field
+Subcategory: colors
 
 ----
 

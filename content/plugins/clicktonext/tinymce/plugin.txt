@@ -6,11 +6,11 @@ Download: https://clicktonext.com/plugins/tinymce-editor
 
 ----
 
-Category: panel
+Category: fields
 
 ----
 
-Subcategory: field
+Subcategory: editing
 
 ----
 

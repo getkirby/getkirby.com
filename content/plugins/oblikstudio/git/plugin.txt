@@ -6,11 +6,11 @@ Repository: https://github.com/OblikStudio/kirby-git
 
 ----
 
-Category: panel
+Category: versioning
 
 ----
 
-Subcategory: git
+Subcategory: view
 
 ----
 

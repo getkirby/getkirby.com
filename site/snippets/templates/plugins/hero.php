@@ -11,7 +11,7 @@
       </div>
     </div>
     <?php if ($image = $plugin->card() ?? $plugin->image()) : ?>
-      <img src="<?= $image->url() ?>" class="px-6 pt-6 shadow-xl" style="--span: 2;">
+      <img src="<?= $image->url() ?>" class="px-6 pt-6" style="--span: 2; --aspect-ratio: 2/1">
     <?php endif ?>
   </a>
 </article>

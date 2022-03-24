@@ -11,7 +11,7 @@
   'icon'    => 'globe',
   'title'   => 'Panel extensions',
   'layout'  => 'cards',
-  'columns' => 3,
+  'columns' => 2,
   'plugins' => $plugins->filter('subcategory', 'panel')->pluck('id')
 ]) ?>
 

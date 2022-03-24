@@ -12,3 +12,12 @@ Category: utilities
 
 Description: Use Laravel's illuminate/database package in Kirby
 
+----
+
+Example:
+
+```php
+use Beebmx\KirbyDB\DB;
+
+DB::table('users')->get();
+```

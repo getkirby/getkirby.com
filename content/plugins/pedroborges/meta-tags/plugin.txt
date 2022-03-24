@@ -22,9 +22,9 @@ Example:
 
 ```php
 <html>
-    <head>
-        <meta charset="utf-8">
-        <?= $page->metaTags() ?>
-    </head>
-    ...
+  <head>
+    <meta charset="utf-8">
+    <?= $page->metaTags() ?>
+  </head>
+  ...
 ```

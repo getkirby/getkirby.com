@@ -12,3 +12,16 @@ Category: utilities
 
 Description: Enable workers in Kirby that can do tasks in the background at scheduled intervals (cron) by working through queues of jobs
 
+----
+
+Example:
+
+```php
+$queue = kqQueue('queuename');
+$job   = kqJob([
+    'foo' => 'foo',
+    'bar' => 'bar'
+]);
+
+$queue->addJob($job);
+```

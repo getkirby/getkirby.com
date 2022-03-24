@@ -5,11 +5,11 @@ Repository: https://github.com/sylvainjule/kirby-subtitler
 
 ----
 
-Category: panel
+Category: fields
 
 ----
 
-Subcategory: field
+Subcategory: videos
 
 ----
 

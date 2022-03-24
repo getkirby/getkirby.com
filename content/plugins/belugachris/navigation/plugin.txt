@@ -6,11 +6,11 @@ Repository: https://github.com/chrisbeluga/kirby-navigation
 
 ----
 
-Category: panel
+Category: fields
 
 ----
 
-Subcategory: field
+Subcategory: navigation
 
 ----
 

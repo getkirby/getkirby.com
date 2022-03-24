@@ -13,6 +13,16 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
+  'id'      => 'ab-testing',
+  'icon'    => 'analytics',
+  'title'   => 'A/B Testing',
+  'layout'  => 'hero',
+  'plugins' => [
+    'plugins/hashandsalt/abt',
+  ]
+]) ?>
+
+<?php snippet('templates/plugins/section', [
   'id'      => 'utilities',
   'icon'    => 'analytics',
   'title'   => 'Utilities',

@@ -6,11 +6,11 @@ Repository: https://github.com/flokosiol/kirby-focus
 
 ----
 
-Category: panel
+Category: fields
 
 ----
 
-Subcategory: field
+Subcategory: images
 
 ----
 

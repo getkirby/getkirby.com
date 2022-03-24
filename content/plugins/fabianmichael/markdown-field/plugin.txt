@@ -6,11 +6,11 @@ Repository: https://github.com/fabianmichael/kirby-markdown-field
 
 ----
 
-Category: panel
+Category: fields
 
 ----
 
-Subcategory: field
+Subcategory: editing
 
 ----
 

@@ -12,5 +12,11 @@ Category: utilities
 
 Description: Search for full word combinations rather than just individual words.
 
+----
 
+Example:
+
+```php
+$pages->bettersearch($string, $options)
+```
 

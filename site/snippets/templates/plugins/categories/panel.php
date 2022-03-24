@@ -1,12 +1,4 @@
 <?php snippet('templates/plugins/section', [
-  'id'      => 'fields',
-  'icon'    => 'forms',
-  'title'   => 'Fields',
-  'layout'  => 'cards',
-  'plugins' => $plugins->filter('subcategory', 'field')->pluck('id')
-]) ?>
-
-<?php snippet('templates/plugins/section', [
   'icon'    => 'widget',
   'id'      => 'extensions',
   'title'   => 'Panel Extensions',
@@ -29,14 +21,6 @@
   'title'   => 'Sections',
   'layout'  => 'cards',
   'plugins' => $plugins->filter('subcategory', 'section')->pluck('id')
-]) ?>
-
-<?php snippet('templates/plugins/section', [
-  'icon'    => 'widget',
-  'id'      => 'git',
-  'title'   => 'Git',
-  'layout'  => 'cards',
-  'plugins' => $plugins->filter('subcategory', 'git')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [

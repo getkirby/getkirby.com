@@ -6,11 +6,7 @@ Repository: https://github.com/thathoff/kirby-git-content
 
 ----
 
-Category: panel
-
-----
-
-Subcategory: git
+Category: versioning
 
 ----
 

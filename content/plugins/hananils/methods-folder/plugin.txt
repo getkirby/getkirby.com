@@ -11,3 +11,16 @@ Category: utilities
 ----
 
 Description: Methods Folder is a plugin to automatically register local methods provided in the folder site/methods just like Kirby accepts local collections, controllers or models without the need of writing a dedicated plugin.
+
+----
+
+Example:
+
+```text
+site
+└ methods
+  └ file.php
+  └ page.php
+  └ site.php
+  └ user.php
+```
