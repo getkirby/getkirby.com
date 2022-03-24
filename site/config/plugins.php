@@ -13,6 +13,7 @@ return [
         'assets'        => ['icon' => 'image', 'label' => 'Assets'],
         'utilities'     => ['icon' => 'wand', 'label' => 'Utilities'],
         'dates'         => ['icon' => 'calendar', 'label' => 'Dates & Calendars'],
-        'text'          => ['icon' => 'text', 'label' => 'Text'],
+        'text'          => ['icon' => 'text', 'label' => 'Kirbytext'],
+        'i18n'          => ['icon' => 'globe', 'label' => 'Internationalization'],
     ]
 ];

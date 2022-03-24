@@ -12,6 +12,6 @@
   'icon'    => 'calendar',
   'title'   => 'Utilities',
   'layout'  => 'cards',
-  'columns' => 3,
+  'columns' => 2,
   'plugins' => $plugins->filter('subcategory', '')->pluck('id')
 ]) ?>

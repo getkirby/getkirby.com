@@ -10,4 +10,8 @@ Category: assets
 
 ----
 
+Subcategory: images
+
+----
+
 Description: If this plugin gets activated, it will serve all images via imgix.

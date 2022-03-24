@@ -11,6 +11,7 @@
   'id'      => 'extensions',
   'title'   => 'Panel Extensions',
   'layout'  => 'cards',
+  'columns' => 2,
   'plugins' => $plugins->filter('subcategory', 'view')->pluck('id')
 ]) ?>
 

@@ -6,11 +6,25 @@ Repository: https://github.com/bvdputte/kirby-autopublish
 
 ----
 
-Category: utilities
+Category: dates
 
 ----
 
 Description: Schedule automatic publishing of pages (drafts) on a certain date & time
 
+----
 
+Example:
+
+```yaml
+autopublish:
+  label: Autopublish on
+  type: date
+  time: true
+  default: now
+autounpublish:
+  label: Automatically unpublish on
+  type: date
+  time: true
+```
 

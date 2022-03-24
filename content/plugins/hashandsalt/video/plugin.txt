@@ -6,9 +6,16 @@ Repository: https://github.com/HashandSalt/kirby3-video
 
 ----
 
-Category: assets
+Category: text
 
 ----
 
 Description: A Kirby tag and snippet for rendering video players inside textareas
 
+----
+
+Example:
+
+```kirbytext
+(vidembed: video.mp4 poster: poster.jpg)
+```

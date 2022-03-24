@@ -16,3 +16,13 @@ Subcategory: feeds
 
 Description: Generate a RSS or JSON-Feed or XML-Sitemap from a collection of pages
 
+----
+
+Example:
+
+```php
+page('blog')->children()->feed([
+    'title'       => 'Latest articles',
+    'link'        => 'blog'
+]);
+```

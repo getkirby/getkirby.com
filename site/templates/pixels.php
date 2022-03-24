@@ -168,13 +168,13 @@
 
   const placeholder = "https://source.unsplash.com/random";
 
-  const colors = [
-    "var(--color-white)",
-    "var(--color-light)",
-    "#5d6166",
-    "var(--color-dark)",
-    "var(--color-black)",
-  ];
+  const colors = {
+    white: "var(--color-white)",
+    light: "var(--color-light)",
+    gray: "#5d6166",
+    dark: "var(--color-dark)",
+    black: "var(--color-black)",
+  };
 
   const positions = {
     topLeft: { y: "top", x: "left", arrow: "↘" },
@@ -191,7 +191,7 @@
   const presets = {
     social: {
       label: "Social media image",
-      background: colors[3],
+      background: colors.dark,
       headline: "Headline …",
       logo: true,
       mt: 12,
@@ -202,7 +202,7 @@
     },
     viewPlugin: {
       label: "Panel view plugin",
-      background: colors[2],
+      background: colors.gray,
       mt: 6,
       ml: 6,
       rounded: true,
@@ -210,7 +210,7 @@
     },
     fieldPlugin: {
       label: "Panel field plugin",
-      background: colors[1],
+      background: colors.light,
       mt: 4,
       ml: 4,
       mr: 4,
@@ -219,18 +219,28 @@
     },
     fullscreen: {
       label: "Fullscreen",
-      background: colors[2],
+      background: colors.gray,
+    },
+    logo: {
+      label: "Plugin logo",
+      background: colors.white,
+      mt: 1,
+      ml: 1,
+      mr: 1,
+      mb: 1,
+      width: 128,
+      height: 128
     },
     showcase: {
       label: "Showcase",
-      background: colors[2],
+      background: colors.gray,
       width: 600,
       height: 800,
     }
   };
 
   const defaults = {
-    background: colors[0],
+    background: colors.white,
     browser: false,
     headline: null,
     image: placeholder,

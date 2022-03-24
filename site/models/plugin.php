@@ -20,8 +20,7 @@ class PluginPage extends Page
 
     public function card()
     {
-        $images = $this->images();
-        return $images->findBy('name', 'card') ?? $images->findBy('name', 'screenshot') ?? $images->first();
+        return $this->images()->findBy('name', 'card');
     }
 
     public function download()

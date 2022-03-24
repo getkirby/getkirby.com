@@ -10,7 +10,7 @@ Category: performance
 
 ----
 
-Subcategory: caching
+Subcategory: cachedriver
 
 ----
 

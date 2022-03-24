@@ -10,4 +10,8 @@ Category: utilities
 
 ----
 
+Subcategory: logging
+
+----
+
 Description: Tracker is a plugin to track content changes and create panel logs or front-end notifications in member areas.

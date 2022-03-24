@@ -10,8 +10,8 @@
         <?= $plugin->description() ?>
       </div>
     </div>
-    <?php if ($card = $plugin->card()) : ?>
-      <img src="<?= $card->url() ?>" class="px-6 pt-6 shadow-xl" style="--span: 2;">
+    <?php if ($image = $plugin->card() ?? $plugin->image()) : ?>
+      <img src="<?= $image->url() ?>" class="px-6 pt-6 shadow-xl" style="--span: 2;">
     <?php endif ?>
   </a>
 </article>

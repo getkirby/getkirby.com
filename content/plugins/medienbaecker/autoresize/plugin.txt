@@ -10,5 +10,23 @@ Category: assets
 
 ----
 
+Subcategory: images
+
+----
+
 Description: Automatically resize images on upload
 
+----
+
+Example:
+
+```php
+
+return [
+    'medienbaecker.autoresize' => [
+        'maxWidth' => 2000,
+        'maxHeight' => 2000,
+        'quality' => 90
+    ]
+];
+```

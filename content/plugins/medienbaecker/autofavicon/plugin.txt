@@ -10,5 +10,9 @@ Category: assets
 
 ----
 
+Subcategory: images
+
+----
+
 Description: Automatically generates an SVG favicon
 

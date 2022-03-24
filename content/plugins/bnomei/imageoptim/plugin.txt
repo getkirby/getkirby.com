@@ -10,5 +10,9 @@ Category: assets
 
 ----
 
+Subcategory: images
+
+----
+
 Description: Thumb component to optimize images using the ImageOptim Api
 

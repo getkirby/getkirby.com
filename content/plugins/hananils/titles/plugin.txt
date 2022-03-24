@@ -6,7 +6,11 @@ Repository: https://github.com/hananils/kirby-tiles
 
 ----
 
-Category: utilities
+Category: assets
+
+----
+
+Subcategory: images
 
 ----
 

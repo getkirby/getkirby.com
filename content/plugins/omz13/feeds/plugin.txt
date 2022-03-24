@@ -16,3 +16,13 @@ Subcategory: feeds
 
 Description: Provides feeds in the most popular formats (RSS, Atom & JSON), generated from a collection of e.g. blog articles or press releases.
 
+----
+
+Example:
+
+```php
+return [
+  'omz13.feeds.cacheTTL' => 60,
+  'omz13.feeds.firehose' => 'articles',
+];
+```

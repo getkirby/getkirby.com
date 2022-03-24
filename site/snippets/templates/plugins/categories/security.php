@@ -10,16 +10,25 @@
   'id'      => 'authentication',
   'icon'    => 'lock',
   'title'   => 'Authentication',
-  'layout'  => 'cards',
+  'layout'  => 'cardlets',
   'columns' => 2,
   'plugins' => $plugins->filter('subcategory', 'authentication')->pluck('id')
+]) ?>
+
+<?php snippet('templates/plugins/section', [
+  'id'      => 'authentication',
+  'icon'    => 'lock',
+  'title'   => 'Content protection',
+  'layout'  => 'cardlets',
+  'columns' => 2,
+  'plugins' => $plugins->filter('subcategory', 'content-protection')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
   'id'      => 'utilities',
   'icon'    => 'lock',
   'title'   => 'Utilities',
-  'layout'  => 'cards',
-  'columns' => 3,
+  'layout'  => 'cardlets',
+  'columns' => 2,
   'plugins' => $plugins->filter('subcategory', '')->pluck('id')
 ]) ?>

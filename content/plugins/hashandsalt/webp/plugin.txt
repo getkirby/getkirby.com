@@ -10,5 +10,9 @@ Category: assets
 
 ----
 
+Subcategory: images
+
+----
+
 Description: A snippet and Kirby tag for using WebP images in templates and within textareas. This plugin will convert uploaded files to WebP on the server.
 

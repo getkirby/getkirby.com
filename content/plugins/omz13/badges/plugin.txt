@@ -13,3 +13,9 @@ Category: text
 Description: Add GitHub-style badges to your site with the (badge: …) Kirbytag
 
 ----
+
+Example:
+
+```kirbytext
+(badge: licence MIT)
+```

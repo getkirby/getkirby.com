@@ -15,3 +15,18 @@ Subcategory: headless
 ----
 
 Description: Kirby's Query Language API combines the flexibility of Kirby's data structures, the power of GraphQL and the simplicity of REST.
+
+----
+
+Example:
+
+```js
+{
+    "query": "page('photography').children",
+    "select": {
+        "url": true,
+        "title": true,
+        "text": "page.text.markdown"
+    }
+}
+```

@@ -10,4 +10,8 @@ Category: performance
 
 ----
 
+Subcategory: optimization
+
+----
+
 Description: Profile your Kirby 3 CMS code with precision in milliseconds (or seconds).

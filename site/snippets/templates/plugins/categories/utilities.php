@@ -3,7 +3,7 @@
   'icon'    => 'wand',
   'title'   => 'Logging',
   'layout'  => 'cards',
-  'columns' => 4,
+  'columns' => 3,
   'plugins' => $plugins->filter('subcategory', 'logging')->pluck('id')
 ]) ?>
 

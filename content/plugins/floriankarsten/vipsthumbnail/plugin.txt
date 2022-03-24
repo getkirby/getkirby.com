@@ -10,5 +10,20 @@ Category: assets
 
 ----
 
+Subcategory: images
+
+----
+
 Description: This is very basic Kirby CMS thumbnail driver for libvips.
 
+----
+
+Example:
+
+```php
+return [
+  'thumbs' => [
+    'driver' => 'vipsthumbnail'
+  ]
+];
+```

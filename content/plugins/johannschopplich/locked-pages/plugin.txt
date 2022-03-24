@@ -10,7 +10,7 @@ Category: security
 
 ----
 
-Subcategory: authentication
+Subcategory: content-protection
 
 ----
 

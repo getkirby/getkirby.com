@@ -10,4 +10,8 @@ Category: assets
 
 ----
 
+Subcategory: images
+
+----
+
 Description: This plugin converts JPG, JPEG and PNG into much smaller WEBP – speed up your website!

@@ -37,7 +37,7 @@
   'id'      => 'syntax-highlighting',
   'icon'    => 'code',
   'title'   => 'Syntax highlighting',
-  'layout'  => 'cards',
+  'layout'  => 'cardlets',
   'columns' => 2,
   'plugins' => $plugins->filter('subcategory', 'syntax-highlighting')->pluck('id')
 ]) ?>

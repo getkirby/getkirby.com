@@ -12,3 +12,10 @@ Category: text
 
 Description: Embed Are.na channels in your text with the (arena: …) Kirbytag
 
+----
+
+Example:
+
+```kirbytext
+(arena: tim-duvendack/aesthetics-1483967740)
+```

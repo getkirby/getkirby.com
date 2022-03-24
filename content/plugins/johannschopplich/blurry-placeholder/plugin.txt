@@ -10,7 +10,7 @@ Category: assets
 
 ----
 
-Featured: false
+Subcategory: images
 
 ----
 

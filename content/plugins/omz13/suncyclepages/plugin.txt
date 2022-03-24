@@ -12,3 +12,14 @@ Category: dates
 
 Description: Embargo pages until sunrise date and withdraw at sunset date
 
+----
+
+Example:
+
+```php
+$articles = page('blog')
+    ->children()
+    ->listed()
+    ->isUnderEmbargo(false)
+    ->isSunset(false);
+```

@@ -3,6 +3,6 @@
   'icon'    => 'image',
   'title'   => 'Kirbytext',
   'layout'  => 'cards',
-  'columns' => 4,
+  'columns' => 2,
   'plugins' => $plugins->filter('subcategory', '')->pluck('id')
 ]) ?>

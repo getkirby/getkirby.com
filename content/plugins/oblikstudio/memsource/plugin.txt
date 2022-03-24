@@ -6,7 +6,11 @@ Repository: https://github.com/OblikStudio/kirby-memsource
 
 ----
 
-Category: integrations
+Category: i18n
+
+----
+
+Subcategory: integration
 
 ----
 

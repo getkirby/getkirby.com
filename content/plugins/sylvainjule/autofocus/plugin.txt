@@ -10,4 +10,8 @@ Category: assets
 
 ----
 
+Subcategory: images
+
+----
+
 Description: Content aware image cropping
