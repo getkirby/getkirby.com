@@ -88,3 +88,12 @@
   'plugins' => $plugins->filter('subcategory', '')->pluck('id')
 ]) ?>
 
+<?php snippet('templates/plugins/section', [
+  'id'      => 'enhancements',
+  'icon'    => 'input',
+  'title'   => 'Field enhancements',
+  'layout'  => 'cardlets',
+  'columns' => 2,
+  'plugins' => $plugins->filter('subcategory', 'enhancement')->pluck('id')
+]) ?>
+

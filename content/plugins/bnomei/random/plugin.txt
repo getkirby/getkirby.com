@@ -12,3 +12,10 @@ Category: templating
 
 Description: Kirby tag and page method to generate various random values
 
+----
+
+Example:
+
+```php
+<?= $page->random('words', 'lorem', 5) ?>
+```

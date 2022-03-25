@@ -11,7 +11,7 @@
   'id'      => 'fields',
   'icon'    => 'calendar',
   'title'   => 'Panel fields',
-  'layout'  => 'cards',
+  'layout'  => 'cardlets',
   'columns' => 2,
   'plugins' => [
     'plugins/adspectus/date-extended',

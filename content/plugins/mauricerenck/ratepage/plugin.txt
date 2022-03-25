@@ -6,7 +6,7 @@ Repository: https://github.com/mauricerenck/rate-page
 
 ----
 
-Category: integrations
+Category: social
 
 ----
 

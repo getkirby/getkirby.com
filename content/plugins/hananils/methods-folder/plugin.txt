@@ -6,7 +6,11 @@ Repository: https://github.com/hananils/kirby-methods-folder
 
 ----
 
-Category: utilities
+Category: devtools
+
+----
+
+Subcategory: plugins
 
 ----
 

@@ -6,11 +6,22 @@ Repository: https://github.com/bvdputte/kirby-vpkit
 
 ----
 
-Category: utilities
+Category: devtools
 
 ----
 
 Description: Opinionated boilerplate helper to make it easier to work with virtual pages in a multilingual kirby 3 setup.
 
+----
 
+Example:
 
+```php
+'en' => [
+    [
+        'id'      => 'some-uuid',
+        'slug'    => 'slug-in-english',
+        'content' => [...]
+    ]
+]
+```

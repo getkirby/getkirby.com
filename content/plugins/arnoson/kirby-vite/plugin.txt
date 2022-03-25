@@ -6,11 +6,11 @@ Repository: https://github.com/arnoson/kirby-vite
 
 ----
 
-Category: assets
+Category: templating
 
 ----
 
-Subcategory: tools
+Subcategory: assets
 
 ----
 

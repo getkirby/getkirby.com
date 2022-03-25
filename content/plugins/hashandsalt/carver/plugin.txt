@@ -12,3 +12,10 @@ Category: templating
 
 Description: Write custom HTML tags, powered by PHP
 
+----
+
+Example:
+
+```php
+<kb:date format="d/m/Y" field="date" />
+```

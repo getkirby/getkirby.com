@@ -16,3 +16,10 @@ Subcategory: privacy
 
 Description: Add a cookie approval banner to your templates
 
+----
+
+Example:
+
+```php
+<?php snippet('cookie') ?>
+```

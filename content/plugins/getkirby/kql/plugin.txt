@@ -6,11 +6,11 @@ Repository: https://github.com/getkirby/kql
 
 ----
 
-Category: integrations
+Category: headless
 
 ----
 
-Subcategory: headless
+Subcategory: api
 
 ----
 

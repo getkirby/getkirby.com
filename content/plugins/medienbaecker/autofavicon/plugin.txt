@@ -6,7 +6,7 @@ Repository: https://github.com/medienbaecker/kirby-autofavicon
 
 ----
 
-Category: assets
+Category: media
 
 ----
 

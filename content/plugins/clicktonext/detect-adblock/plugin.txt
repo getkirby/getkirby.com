@@ -11,3 +11,11 @@ Category: templating
 ----
 
 Description: Detect ad blockers and manage the warning messages that will be displayed for Kirby 3.
+
+----
+
+Example:
+
+```php
+<?php snippet('detect-adblock') ?>
+```

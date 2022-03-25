@@ -12,3 +12,15 @@ Category: templating
 
 Description: Super simple plugin that adds routes, a page method and a panel field so you can easily add likes/hearts/votes to your pages.
 
+----
+
+Example:
+
+```php
+<a href="<?= $page->url() ?>/like/toggle">
+    ❤️ <?= $page->likeCount() ?>
+</a>
+
+<a href="<?= $page->url() ?>/like/add">👍</a>
+<a href="<?= $page->url() ?>/like/remove">👎</a>
+```

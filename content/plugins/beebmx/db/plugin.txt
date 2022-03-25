@@ -6,7 +6,11 @@ Repository: https://github.com/beebmx/kirby-db
 
 ----
 
-Category: utilities
+Category: devtools
+
+----
+
+Sort: 1000
 
 ----
 

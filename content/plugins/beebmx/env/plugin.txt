@@ -6,7 +6,7 @@ Repository: https://github.com/beebmx/kirby-env
 
 ----
 
-Category: utilities
+Category: devtools
 
 ----
 

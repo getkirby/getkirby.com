@@ -15,3 +15,15 @@ Subcategory: privacy
 ----
 
 Description: A customizable cookie consent modal for Kirby3.
+
+----
+
+Example:
+
+```php
+<?php snippet('cookie-modal', [
+    'assets'      => true,
+    'showOnFirst' => true,
+    'features'    => [...],
+]) ?>
+```

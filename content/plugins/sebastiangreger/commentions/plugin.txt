@@ -6,7 +6,7 @@ Repository: https://github.com/sebastiangreger/kirby3-commentions
 
 ----
 
-Category: integrations
+Category: social
 
 ----
 

@@ -6,7 +6,11 @@ Repository: https://github.com/hananils/kirby-tracker
 
 ----
 
-Category: logging
+Category: devtools
+
+----
+
+Subcategory: logging
 
 ----
 

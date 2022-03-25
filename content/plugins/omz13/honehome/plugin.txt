@@ -6,9 +6,21 @@ Repository: https://github.com/omz13/kirby3-honehome
 
 ----
 
-Category: utilities
+Category: i18n
 
 ----
 
 Description: Handle homepage redirection
 
+----
+
+Example:
+
+```yaml
+fields:
+  homelanding:
+    label: Home Override
+    type: select
+    options: query
+    query: site.children.visible
+```

@@ -6,11 +6,11 @@ Repository: https://github.com/mzur/kirby-uniform
 
 ----
 
-Category: templating
+Category: forms
 
 ----
 
-Subcategory: forms
+Subcategory: templating
 
 ----
 

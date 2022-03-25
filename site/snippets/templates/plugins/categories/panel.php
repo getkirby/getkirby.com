@@ -1,8 +1,8 @@
 <?php snippet('templates/plugins/section', [
   'icon'    => 'widget',
   'id'      => 'extensions',
-  'title'   => 'Panel Extensions',
-  'layout'  => 'cards',
+  'title'   => 'Views',
+  'layout'  => 'hero',
   'columns' => 2,
   'plugins' => $plugins->filter('subcategory', 'view')->pluck('id')
 ]) ?>

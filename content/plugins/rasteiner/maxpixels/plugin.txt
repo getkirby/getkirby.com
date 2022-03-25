@@ -6,7 +6,7 @@ Repository: https://github.com/rasteiner/k3-maxpixels-option
 
 ----
 
-Category: assets
+Category: media
 
 ----
 

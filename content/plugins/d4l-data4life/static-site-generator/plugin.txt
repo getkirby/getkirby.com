@@ -6,7 +6,7 @@ Repository: https://github.com/d4l-data4life/kirby3-static-site-generator
 
 ----
 
-Category: integrations
+Category: headless
 
 ----
 

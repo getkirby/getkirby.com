@@ -6,7 +6,7 @@ Repository: https://github.com/medienbaecker/kirby-autoresize
 
 ----
 
-Category: assets
+Category: media
 
 ----
 

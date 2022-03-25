@@ -6,11 +6,11 @@ Repository: https://github.com/floriankarsten/kirby3-vipsthumbnail
 
 ----
 
-Category: assets
+Category: media
 
 ----
 
-Subcategory: images
+Subcategory: videos
 
 ----
 

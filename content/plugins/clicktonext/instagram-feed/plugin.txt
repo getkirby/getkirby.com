@@ -6,7 +6,7 @@ Download: https://clicktonext.com/plugins/instagram-feed
 
 ----
 
-Category: integrations
+Category: social
 
 ----
 
@@ -15,3 +15,7 @@ Subcategory: social
 ----
 
 Description: Instagram feed on your Kirby website!
+
+----
+
+Similar: plugins/genxbe/instagram

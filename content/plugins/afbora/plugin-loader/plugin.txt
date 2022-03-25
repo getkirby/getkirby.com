@@ -6,7 +6,11 @@ Repository: https://github.com/afbora/kirby-loader
 
 ----
 
-Category: utilities
+Category: devtools
+
+----
+
+Subcategory: plugins
 
 ----
 

@@ -3,7 +3,7 @@
   'icon'    => 'cart',
   'hero'    => true,
   'title'   => 'Shop integrations',
-  'layout'  => 'cardlets',
+  'layout'  => 'cards',
   'columns' => 2,
   'plugins' => [
     'plugins/wagnerwagner/merx',

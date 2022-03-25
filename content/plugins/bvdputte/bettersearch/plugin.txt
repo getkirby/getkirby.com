@@ -6,7 +6,7 @@ Repository: https://github.com/bvdputte/kirby-bettersearch
 
 ----
 
-Category: utilities
+Category: templating
 
 ----
 

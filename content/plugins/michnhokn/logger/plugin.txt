@@ -6,11 +6,15 @@ Repository: https://github.com/michnhokn/kirby3-logger
 
 ----
 
-Category: logging
+Category: devtools
 
 ----
 
-Subcategory: panel
+Subcategory: logging
+
+----
+
+Sort: 1000
 
 ----
 

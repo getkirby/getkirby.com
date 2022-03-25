@@ -6,7 +6,7 @@ Repository: https://github.com/bnomei/kirby3-feed
 
 ----
 
-Category: integrations
+Category: templating
 
 ----
 

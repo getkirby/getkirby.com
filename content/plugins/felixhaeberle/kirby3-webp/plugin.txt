@@ -6,7 +6,7 @@ Repository: https://github.com/felixhaeberle/kirby3-webp
 
 ----
 
-Category: assets
+Category: media
 
 ----
 

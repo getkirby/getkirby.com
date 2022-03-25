@@ -6,7 +6,7 @@ Repository: https://github.com/bvdputte/kirby-queue
 
 ----
 
-Category: utilities
+Category: devtools
 
 ----
 

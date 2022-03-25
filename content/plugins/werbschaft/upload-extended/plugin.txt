@@ -6,7 +6,7 @@ Repository: https://github.com/Werbschaft/kirby-upload-extended
 
 ----
 
-Category: assets
+Category: media
 
 ----
 

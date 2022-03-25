@@ -6,7 +6,7 @@ Repository: https://github.com/HashandSalt/kirby3-twitter
 
 ----
 
-Category: integrations
+Category: social
 
 ----
 

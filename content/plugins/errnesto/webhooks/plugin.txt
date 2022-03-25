@@ -6,7 +6,11 @@ Repository: https://github.com/errnesto/kirby-plugin-webhooks
 
 ----
 
-Category: integrations
+Category: headless
+
+----
+
+Subcategory: api
 
 ----
 

@@ -6,7 +6,7 @@ Repository: https://github.com/sebastiangreger/kirby3-selfauth
 
 ----
 
-Category: integrations
+Category: social
 
 ----
 

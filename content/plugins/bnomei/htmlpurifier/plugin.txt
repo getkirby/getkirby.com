@@ -11,3 +11,11 @@ Category: templating
 ----
 
 Description: Static class method, Uniform-Guard and Field-Method to filter your "dirty" HTML inputs to "clean" HTML.
+
+----
+
+Example:
+
+```php
+<?= $page->myfield()->htmlPurify() ?>
+```

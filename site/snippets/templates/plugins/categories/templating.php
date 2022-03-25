@@ -8,12 +8,12 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'forms',
-  'icon'    => 'code',
-  'title'   => 'Forms',
+  'id'      => 'assets',
+  'icon'    => 'image',
+  'title'   => 'Assets',
   'layout'  => 'cards',
   'columns' => 2,
-  'plugins' => $plugins->filter('subcategory', 'forms')->filter('similar', '')->pluck('id')
+  'plugins' => $plugins->filter('subcategory', 'assets')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
@@ -55,16 +55,25 @@
   'id'      => 'privacy',
   'icon'    => 'code',
   'title'   => 'Privacy',
-  'layout'  => 'cardlets',
+  'layout'  => 'cards',
   'columns' => 2,
   'plugins' => $plugins->filter('subcategory', 'privacy')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
+  'id'      => 'feeds',
+  'icon'    => 'code',
+  'title'   => 'Feeds',
+  'layout'  => 'cards',
+  'columns' => 3,
+  'plugins' => $plugins->filter('subcategory', 'feeds')->pluck('id')
+]) ?>
+
+<?php snippet('templates/plugins/section', [
   'id'      => 'utilities',
-  'icon'    => 'analytics',
+  'icon'    => 'code',
   'title'   => 'Utilities',
-  'layout'  => 'cardlets',
+  'layout'  => 'cards',
   'columns' => 2,
   'plugins' => $plugins->filter('subcategory', '')->pluck('id')
 ]) ?>

@@ -18,7 +18,7 @@ return function($page) {
       ->sortBy('title', 'asc');
 
     $plugins = $plugins->filterBy('category', $category);
-    $heading = $categories[$category]['label'] . ' plugins';
+    $heading = $categories[$category]['label'];
   } else {
     $plugins = new Pages();
   }
