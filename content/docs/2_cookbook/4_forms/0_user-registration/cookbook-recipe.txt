@@ -210,7 +210,7 @@ return function ($kirby) {
     ];
 };
 ```
-With the page all set, we are ready for some testing. Open the `registration` page at `example.com/registration` and enter an email address. You should be redirected to the Panel login page with the code form field.
+With the page all set, we are ready for some testing. Make sure you are logged out of the panel. Open the `registration` page at `example.com/registration` and enter an email address. You should be redirected to the Panel login page with the code form field.
 
 Once you enter the login code you received via email in the form field, you are logged in and automatically redirected to the location set via the `home` option in the `client.yml` blueprint.
 
