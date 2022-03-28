@@ -17,7 +17,9 @@
           <div class="px-6 pt-6">
             <div class="shadow-xl" style="--aspect-ratio: 2/1; background: #000; border-top-left-radius: var(--rounded); border-top-right-radius: var(--rounded); overflow:hidden">
               <div class="flex items-center justify-center">
-                <div class="shadow-xl"><?= $plugin->example()->kt() ?></div>
+                <div class="shadow-xl" data-no-copy>
+                  <?= $plugin->example()->kt() ?>
+                </div>
               </div>
             </div>
           </div>
