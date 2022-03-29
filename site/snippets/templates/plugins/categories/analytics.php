@@ -4,7 +4,7 @@
   'title'   => 'Dashboards',
   'layout'  => 'cards',
   'columns' => 2,
-  'plugins' => $plugins->filter('subcategory', 'dashboard')->pluck('id'),
+  'plugins' => $plugins->filter('subcategory', 'dashboard')->filter('similar', '')->pluck('id'),
 ]) ?>
 
 <?php snippet('templates/plugins/section', [

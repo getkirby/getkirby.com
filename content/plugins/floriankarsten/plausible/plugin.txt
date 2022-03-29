@@ -1,0 +1,18 @@
+Title: Plausible
+
+----
+
+Repository: https://github.com/floriankarsten/kirby-plausible
+
+----
+
+Category: analytics
+
+----
+
+Subcategory: dashboard
+
+----
+
+Description: Simple plugin providing plausible iframe panel view to kirby panel and simple frontend snippet.
+

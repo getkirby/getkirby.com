@@ -46,7 +46,7 @@
   'plugins' => [
     'plugins/paulmorel/fathom-analytics',
     'plugins/sylvainjule/matomo',
-    'plugins/rowdyrabouw/plausible',
+    'plugins/floriankarsten/plausible',
     'plugins/daandelange/simplestats',
   ]
 ]) ?>
