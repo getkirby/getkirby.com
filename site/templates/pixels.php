@@ -424,6 +424,8 @@
     accent-color: var(--color-blue-700);
     padding: 1.5rem;
     font-size: var(--text-sm);
+    max-height: 100%;
+    overflow: auto;
   }
 
   .editor-toolbar .field {
@@ -657,11 +659,12 @@
   .editor-exporter {
     position: fixed;
     inset: 0;
-    background: rgba(255,255,255, .6);
+    background: rgba(255, 255, 255, .6);
     z-index: 1;
     display: grid;
     place-items: center;
   }
+
   .editor-exporter p {
     background: white;
     box-shadow: var(--shadow-xl);
