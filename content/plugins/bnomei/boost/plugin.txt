@@ -21,18 +21,11 @@ Description: Boost the speed of Kirby by having content files of pages cached, w
 Example:
 
 ```php
-// 1) set a cache driver in site/config/config.php
-return [
-    'bnomei.boost.cache' => [
-        'type' => 'apcu', // php, redis, mysql, sqlite ...
-    ],
-];
-
-// 2) add boostid field in site/blueprints/pages/blogpost.yml
-
-// 3) extend model in site/models/blogpost.php
-class BlogpostPage extends \Kirby\Cms\Page
-{
+class BlogpostPage extends \Kirby\Cms\Page {
     use \Bnomei\PageHasBoost;
 }
+
+return [
+    'bnomei.boost.cache' => [ 'type' => 'apcu' ], 
+];
 ```
