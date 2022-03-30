@@ -1,0 +1,17 @@
+Title: MySQL Cache Driver
+
+----
+
+Repository: https://github.com/bnomei/kirby3-mysql-cachedriver
+
+----
+
+Category: performance
+
+----
+
+Subcategory: cachedriver
+
+----
+
+Description: MySQL based Cache-Driver
