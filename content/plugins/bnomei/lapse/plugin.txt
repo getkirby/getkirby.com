@@ -21,8 +21,10 @@ Description: Cache any data until the set expiration time
 Example:
 
 ```php
-$key  = crc32($page->url());
-$data = lapse($key, function () {
-    return [1, 2, 3];
-});
+$data = lapse(
+    [$page, $page->files()], // magical key from modified timestamps
+    function () use ($page) { 
+        return $page->files()->toArray(fn ($file) => $file->niceSize());
+    }
+); // expires when any timestamp changes
 ```
