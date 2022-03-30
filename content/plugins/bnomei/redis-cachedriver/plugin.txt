@@ -14,4 +14,4 @@ Subcategory: cachedriver
 
 ----
 
-Description: Redis based Cache-Driver and Content-File Cache
+Description: Redis based Cache-Driver
