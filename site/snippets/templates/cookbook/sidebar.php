@@ -1,31 +1,40 @@
+<?php
+$items = [];
 
-<nav aria-label="Cookbook menu">
-	<div class="cookbook-sidebar sticky" style="--top: var(--spacing-6)">
-		<p class="h1 color-gray-400 mb-12"><a href="/docs/cookbook">Cookbook</a></p>
-		<ul class="filters">
-			<li>
-				<a href="/docs/cookbook"<?= ariaCurrent($page->slug() === 'cookbook') ?>>
-					<?= icon('list') ?> All recipes
-				</a>
-			</li>
-			<li>
-				<a aria-label="New recipes" href="/docs/cookbook/new"<?= ariaCurrent($page->slug() === 'new') ?>>
-					<?= icon('flash') ?> New
-				</a>
-			</li>
-			<li>
-				<button class="search-button" type="button" data-area="cookbook">
-					<?= icon('search') ?> Search
-				</button>
-			</li>
-			<li><hr class="hr"></li>
-			<?php foreach (collection('cookbook/categories') as $category): ?>
-			<li>
-				<a aria-label="<?= $category->title() ?> recipes" href="<?= $category->url() ?>"<?= ariaCurrent($category->isOpen()) ?>>
-					<?= icon($category->icon()) ?> <?= $category->title() ?>
-				</a>
-			</li>
-			<?php endforeach ?>
-		</ul>
-	</div>
-</nav>
+foreach (collection('cookbook/categories') as $category) {
+  $items[] = [
+    'title' => $category->title(),
+    'link'  => $category->url(),
+    'icon'  => $category->icon(),
+    'open'  => ariaCurrent($category->isOpen())
+  ];
+}
+
+snippet('sidebar/sidebar' , [
+  'title' => 'Cookbook',
+  'link'  => '/docs/cookbook',
+  'items' => array_merge([
+    [
+      'title' => 'All recipes',
+      'icon'  => 'list',
+      'link'  => '/docs/cookbook',
+      'open'  => ariaCurrent($page->slug() === 'cookbook')
+    ],
+		[
+      'title' => 'New',
+      'icon'  => 'flash',
+      'link'  => '/docs/cookbook/new',
+      'open'  => ariaCurrent($page->slug() === 'new')
+    ],
+    [
+      'title' => 'Search',
+      'icon'  => 'search',
+      'id'    => 'cookbook'
+    ],
+    [
+      'title' => '-'
+    ]
+  ],
+  $items
+  )
+]) ?>

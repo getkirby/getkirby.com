@@ -36,7 +36,7 @@
           <?php endslot() ?>
         </article>
         <?php slot('sidebar') ?>
-          <?php snippet('sidebar', [
+          <?php snippet('templates/guide/sidebar', [
             'title' => 'Kirby',
             'menu'  => collection('kirby')
           ]) ?>
