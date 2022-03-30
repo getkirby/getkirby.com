@@ -1,14 +1,14 @@
-Title: Branding the panel to adapt it to yours or your client's brand
+Title: Branding the Panel to adapt it to yours or your client's brand
 
 ----
 
 Text:
 
-Today we are going to put the focus on a simple modification, but it changes significantly the Look & Feel from the (glossary: Panel Text: Panel) and will give a more personalized experience.
+Today we are going to put the focus on a simple modification, that will, however, change the look & feel of the (glossary: Panel Text: Panel) significantly and create a more personalized experience.
 
-As developers using Kirby, we usually make websites that we deliver to our customers in a personalized way. Modifying a bit the styles of the panel we will go a little further on this customization.
+As developers using Kirby, we usually make websites that we deliver to our customers in a personalized way. By modifying the styles of the Panel a bit, we will take this customization a little further.
 
-The first thing we must do is to add a custom Panel stylesheet and override the default styles.
+The first thing we have to do is to add a custom Panel stylesheet and override the default styles.
 
 To do so, register your custom stylesheet in your `config.php`, for example:
 
@@ -30,14 +30,15 @@ Now, we will load the fonts we need:
   font-style: normal;
 }
 ```
-Note that I have my fonts on ```/assets/fonts```
+Note that I have my fonts in the  `/assets/fonts` folder.
 
-If you want to include your fonts, for example from Google Fonts, you can do it like this:
+If you want to include your own fonts, for example from Google Fonts, you can do it like this:
 
 ```css "/assets/css/custom-panel.css"
 @import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
 ```
-Now with few CSS lines we will change the appearance of the whole Panel to adapt it to your brand:
+
+With a few lines of CSS, we are now going to change the appearance of the whole Panel to adapt it to your brand:
 
 ```css "/assets/css/custom-panel.css"
 
@@ -67,7 +68,7 @@ Now with few CSS lines we will change the appearance of the whole Panel to adapt
 }
 
 ```
-You can play with ```margin-top``` ```width``` and ```height``` on ```.k-header::before``` to adjust your logo correctly.
+You can play with `margin-top`, `width` and `height` on `.k-header::before` to adjust your logo correctly.
 
 Here you have some examples:
 
@@ -75,16 +76,16 @@ Here you have some examples:
 (image: baylos.png)
 
 
-As you can see it is a simple adaptation that adds a logo, and modify the base colors but you can go much further thanks to the [UI Kit](https://getkirby.com/docs/reference/plugins/ui#colors)
+As you can see, it is a simple adaptation that adds a logo, and modifies the base colors but you can go much further thanks to Kirby's [UI Kit](https://getkirby.com/docs/reference/plugins/ui#colors)
 
 
 ----
 
-Published: 2022-02-06
+Published: 2022-03-26
 
 ----
 
-Description: Adapt the panel Look & Feel to your brand
+Description: Adapt the Panel's look & feel to your brand
 
 ----
 
