@@ -27,7 +27,10 @@ Set a different cache driver, default is the file driver.
 ```php
 return [
   'cache' => [
-    'type' => 'memcached'
+    'pages' => [
+      'active' => true,
+      'type'   => 'memcached'
+    ]
   ]
 ];
 ```
