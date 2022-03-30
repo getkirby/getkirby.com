@@ -4,12 +4,15 @@ $open   ??= false;
 ?>
 <nav class="sidebar" aria-label="<?= $title ?? '' ?> menu">
   <div class="<?= $sticky? 'sticky' : '' ?>" style="--top: var(--spacing-6)">
-    <?php if ($title ?? null): ?>
-    <header class="h1 mb-12 color-gray-400">
-      <a href="<?= $link ?? '#' ?>"><?= $title ?></a>
-    </header>
-    <?php endif ?>
+    <!-- Sidebar responsive toggle -->
+    <input id="sidebar-check" type="checkbox">
 
+    <!-- Header -->
+    <label tabindex="0" class="block h1 mb-12 color-gray-400 sidebar-toggle" for="sidebar-check" aria-label="Show / hide sidebar">
+      <?= $title ?>
+    </label>
+
+    <!-- Items list -->
     <ul class="sidebar-menu-1">
       <?php foreach ($items as $item): ?>
       <li data-id="<?= $item['id'] ?? $item['title'] ?? null ?>">

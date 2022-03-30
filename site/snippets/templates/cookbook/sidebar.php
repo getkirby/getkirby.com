@@ -12,7 +12,6 @@ foreach (collection('cookbook/categories') as $category) {
 
 snippet('sidebar/sidebar' , [
   'title' => 'Cookbook',
-  'link'  => '/docs/cookbook',
   'items' => array_merge([
     [
       'title' => 'All recipes',

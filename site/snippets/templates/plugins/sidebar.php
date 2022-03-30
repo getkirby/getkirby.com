@@ -25,7 +25,6 @@ foreach ($categories as $id => $category) {
 
 snippet('sidebar/sidebar' , [
   'title' => 'Plugins',
-  'link'  => '/plugins',
   'items' => array_merge([
     [
       'title' => 'Featured',

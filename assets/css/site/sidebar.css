@@ -46,3 +46,37 @@
   margin: var(--spacing-3) 0;
   border-top: 2px solid var(--color-gray-200);
 }
+
+#sidebar-check {
+  position: absolute;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+@media screen and (max-width: 48rem) {
+  .sidebar {
+    position: absolute;
+    top: -2.5rem;
+  }
+  .sidebar .h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .sidebar ul {
+    display: none;
+    background: black;
+
+    padding: 1rem 1rem 1rem 2.5rem;
+  }
+
+  .sidebar ul a,
+  .sidebar ul button {
+    color: white !important;
+  }
+
+  #sidebar-check:checked ~ ul {
+    display: block;
+  }
+}
