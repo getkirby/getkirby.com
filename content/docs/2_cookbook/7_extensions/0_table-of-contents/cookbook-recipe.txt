@@ -7,7 +7,7 @@ Text:
 A Table of Contents (ToC) gives readers a quick overview of the contents of a page and allows accessing specific parts quickly.
 
 ## Prerequisites
-Being familiar with (link: docs/guide/plugins/plugin-basics text: registering extensions in Kirby) and a basic understanding of PHP will be useful.  
+Being familiar with (link: docs/guide/plugins/plugin-basics text: registering extensions in Kirby) and a basic understanding of PHP will be useful.
 
 To follow along, (link: docs/guide/quickstart#download-and-installation text: install a Kirby Starterkit), create a `/site/plugins/toc` folder with an `index.php` inside and add some headlines in a textarea field, for example in one of the subpages of the `/content/notes` page.
 
@@ -53,11 +53,11 @@ Kirby::plugin('k-cookbook/toc', [
 
         // use `preg_replace_callback()` to replace matches with anchors
         $text = preg_replace_callback('!<(' . $headlinesPattern . ')>(.*?)</\\1>!s', function ($match) {
-          
+
             // create the id from the headline text
             $id = Str::slug(Str::unhtml($match[2]));
 
-            // return the modified headline: 
+            // return the modified headline:
             // $match[1] contains the match for the first subpattern, i.e. `h2`, `h3` etc.
             // $match[2] contains the match for the second subpattern, i.e. the actual headline text
             return '<' . $match[1] . ' id="' . $id . '"><a href="#' . $id . '">' . $match[2] . '</a></' . $match[1] . '>';
@@ -75,7 +75,7 @@ Since we want to add a second hook of the same type in the next step, we use an 
 </info>
 
 The important part here is the `preg_replace_callback()` function. It needs three parameters…
- 
+
 - the search pattern (`$headlinesPattern`)
 - the callback function
 - the input (`$text`)
@@ -113,11 +113,11 @@ Kirby::plugin('k-cookbook/toc', [
 
       // use `preg_replace_callback()` to replace matches with anchors
       $field->value = preg_replace_callback('!<(' . $headlinesPattern . ')>(.*?)</\\1>!s', function ($match) {
-         
+
           // create the id from the headline text
           $id = Str::slug(Str::unhtml($match[2]));
 
-          // return the modified headline: 
+          // return the modified headline:
           // $match[1] contains the match for the first subpattern, i.e. `h2`, `h3` etc.
           // $match[2] contains the match for the second subpattern, i.e. the actual headline text
           return '<' . $match[1] . ' id="' . $id . '"><a href="#' . $id . '">' . $match[2] . '</a></' . $match[1] . '>';
@@ -179,18 +179,18 @@ use Kirby\Toolkit\Obj;
 
 Kirby::plugin('k-cookbook/toc', [
   'hooks' => [
-  
+
     'kirbytext:after' => [
 
       // (…) add the callback function from above here (without the wrapper)
-        
+
       function($text) {
 
         // the pattern allows passing an optional headline level `(toc: h3)`
         $pattern  = '!\(toc(?::\s?(h[1-6]))?\)!';
-        
+
         $text = preg_replace_callback($pattern, function($match) use($text) {
-          
+
           // get the headline level from the match
           $headline = $match[1] ?? 'h2';
 
@@ -199,7 +199,7 @@ Kirby::plugin('k-cookbook/toc', [
 
           // create a new collection for the headlines…
           $headlines = new Collection();
-    
+
           // …and add all matches
           foreach ($matches[1] as $text) {
               $headline = new Obj([
@@ -215,7 +215,7 @@ Kirby::plugin('k-cookbook/toc', [
           return snippet('toc', ['headlines' => $headlines], false);
 
         }, $text);
-    
+
         return $text;
 
       },
@@ -320,6 +320,37 @@ You could also only show the ToC if there is at least a given number of headline
 <?php endif ?>
 ```
 
+## Extra: ToC from blocks field
+
+If you are using the blocks or layouts fields with separate blocks for your headings, you can filter the blocks by type `heading` and heading level:
+
+```php
+// assuming a blocks field called text
+$headlines = $page->text()->toBlocks()->filterBy('type', 'heading')->filterby('level', 'h2');
+```
+
+Then create the ToC snippet like this:
+
+```php "/site/plugins/toc/snippets/toc.php"
+<?php if ($headlines->count() >= 3) : ?>
+  <nav class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <?php foreach($headlines as $headline): ?>
+          <li><a href="<?= $page->url() . '/#' . Str::slug($headline->text()) ?>"><?= $headline->text() ?></a></li>
+      <?php endforeach ?>
+    </ol>
+
+  </nav>
+<?php endif ?>
+```
+
+The last step is to overwrite the default heading block snippet and add an `id` attribute:
+
+```php "/site/snippets/blocks/heading.php"
+<?php /** @var \Kirby\Cms\Block $block */ ?>
+<<?= $level = $block->level()->or('h2') ?> id="<?= Str::slug($block->text()) ?>"><?= $block->text() ?></<?= $level ?>>
+```
 ----
 
 Published: 01.06.2020
