@@ -7,15 +7,20 @@
 
   .themes {
     background: var(--color-gray-400);
-    --min: 25rem;
+    --min: 15rem;
     --gap: var(--container-padding);
+  }
+
+  @media screen and (min-width: 40rem) {
+    .themes {
+      --min: 25rem;
+    }
   }
 
   @media screen and (min-width: 90rem) {
     .themes {
       --min: 30rem;
     }
-
   }
 </style>
 
