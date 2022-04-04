@@ -78,6 +78,7 @@ To make our installation use the new class, we have to replace the `Kirby` class
 
 // require Kirby's bootstrap file
 require __DIR__ . '/kirby/bootstrap.php';
+
 // require the CustomKirby class
 require __DIR__ . '/site/plugins/extend-core-classes/classes/CustomKirby.php';
 
@@ -235,8 +236,9 @@ class CustomSite extends Site
     public function children() {
         // get existing children
         $children = parent::children();
+        
         // set up virtual pages as array
-        $pages= [
+        $pages = [
             [
                 'slug'     => 'login',
                 'template' => 'login',

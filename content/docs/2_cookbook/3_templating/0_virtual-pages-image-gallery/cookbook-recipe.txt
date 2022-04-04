@@ -598,7 +598,7 @@ class GalleryImagePage extends Page
 
 ## Further reading
 
-- (link: text: Virtual pages guide)
+- (link: docs/guide/virtual-pages text: Virtual pages guide)
 
 ----
 

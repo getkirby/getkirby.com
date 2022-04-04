@@ -1,0 +1,10 @@
+Title: $layout
+
+----
+
+Class: Kirby\Cms\Layout
+
+----
+
+Since: 3.5.0
+

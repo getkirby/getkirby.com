@@ -12,8 +12,11 @@ Menu:
 - objects/cms/user
 - objects/cms/users
 - --
+- objects/cms/block
 - objects/cms/blocks
+- objects/cms/layout
 - objects/cms/layouts
+- --
 - objects/cms/language
 - objects/cms/languages
 - objects/cms/pagination

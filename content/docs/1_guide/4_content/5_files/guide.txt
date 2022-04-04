@@ -138,6 +138,12 @@ Caption: We spent an entire day at the lake. The weather was nice.
 Photographer: Ansel Adams' cat
 ```
 
+Meta data files are automatically added or deleted when the associated file is added or deleted via the Panel.
+
+<warning>
+When you delete a file manually from the file system, be sure to delete its meta data file, too, otherwise Kirby will not find the right blueprint/template and the page will not render properly.
+</warning>
+
 ## Accessing meta data in templates
 
 Meta data is available from each (class: Kirby\Cms\File text: $file) object in your templates and snippets.

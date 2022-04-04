@@ -1,0 +1,9 @@
+Title: $block
+
+----
+
+Class: Kirby\Cms\Block
+
+----
+
+Since: 3.5.0
