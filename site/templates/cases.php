@@ -1,6 +1,9 @@
 <?php layout() ?>
 
 <style>
+.topbar {
+  border-bottom-color: var(--color-white);
+}
 .header,
 .footer h6 {
   color: var(--color-white);
