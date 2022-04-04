@@ -28,7 +28,7 @@
 
 </div>
 
-<div class="p-container themes auto-fit" style="">
+<div class="p-container themes auto-fit mb-24">
   <?php foreach ($page->grandChildren()->shuffle() as $theme) : ?>
     <a href="<?= $theme->link() ?>">
       <article>
@@ -59,3 +59,8 @@
 </div>
 
 <div class="container">
+
+  <div class="columns" style="--columns-md: 1; --columns: 2; --gap: var(--spacing-12)">
+    <p class="h2">Find more Kirby themes on<br> <a class="link" href="https://getkirby-themes.com">getkirby-themes.com</a> &rarr;</p>
+    <p class="h2 max-w-xl">Your theme is missing?<br><a class="link"  href="mailto:support@getkirby.com">Tell us more about it</a> &rarr;</p>
+  </div>
