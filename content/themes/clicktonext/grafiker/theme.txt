@@ -7,3 +7,7 @@ Price: €49
 ----
 
 Link: https://clicktonext.com/themes/grafiker
+
+----
+
+Prio: 7

@@ -7,3 +7,7 @@ Price: €75
 ----
 
 Link: https://www.thezero.club/demo/one/
+
+----
+
+Prio: 3
