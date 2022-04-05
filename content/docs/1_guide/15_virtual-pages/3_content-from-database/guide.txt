@@ -98,7 +98,7 @@ class CommentsPage extends Kirby\Cms\Page
 }
 ```
 
-Here we re-define the `children()` method of the `Page` class to return the commments from the database as children pages.
+Here we re-define the `children()` method of the `Page` class to return the comments from the database as children pages.
 
 ## Accessing the comments in the template
 With this page model in place, we can now access our comments as children of the `comments` page in our template:
@@ -409,7 +409,7 @@ We have to override all methods that are needed for changing the status and the 
 - `changeStatusToUnlisted()`
 - `changeTitle()`
 
-Since we now have an explicit title field, we add the `changeTitle()` method and remove the `title()` method from the model, because that is not longer necessary.
+Since we now have an explicit title field, we add the `changeTitle()` method and remove the `title()` method from the model, because that is no longer necessary.
 
 
 <info>
