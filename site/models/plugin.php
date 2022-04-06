@@ -1,7 +1,9 @@
 <?php
 
 use Kirby\Data\Data;
+use Kirby\Cms\Field;
 use Kirby\Cms\File;
+use Kirby\Cms\Page;
 use Kirby\Cms\Nest;
 use Kirby\Toolkit\Str;
 
@@ -73,6 +75,11 @@ class PluginPage extends Page
                 'image' => $this->screenshot()
             ]
         ];
+    }
+
+    public function preview(): Field
+    {
+        return parent::preview()->or($this->example());
     }
 
     public function screenshot(): ?File
