@@ -1,0 +1,17 @@
+Title: Consent Gate
+
+----
+
+Repository: https://github.com/fendinger/kirby3-consent-gate
+
+----
+
+Category: templating
+
+----
+
+Subcategory: privacy
+
+----
+
+Description: This plugin blocks the loading of content from external sources. The content is only loaded if a consent is accepted (GDPR compliant). The decision can be revoked.
