@@ -5,11 +5,11 @@
         <figure class="bg-light">
           <?php if ($card = $plugin->card()) : ?>
             <img src="<?= $card->url() ?>" style="--aspect-ratio: 2/1; object-fit: contain;">
-          <?php elseif ($plugin->example()->isNotEmpty()) : ?>
+          <?php elseif ($plugin->preview()->isNotEmpty()) : ?>
             <div style="--aspect-ratio: 2/1; background: #000; overflow:hidden">
               <div class="flex items-center justify-center <?= ($columns ?? 3) === 3 ? ' text-xs' : '' ?>">
                 <div class="shadow-xl" data-no-copy>
-                  <?= $plugin->example()->kt() ?>
+                  <?= $plugin->preview()->kt() ?>
                 </div>
               </div>
             </div>
