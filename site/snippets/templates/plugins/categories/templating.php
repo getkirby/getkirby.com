@@ -56,6 +56,7 @@
   'icon'    => 'code',
   'title'   => 'Privacy',
   'layout'  => 'cards',
+  'hero'    => true,
   'columns' => 2,
   'plugins' => $plugins->filter('subcategory', 'privacy')->pluck('id')
 ]) ?>
