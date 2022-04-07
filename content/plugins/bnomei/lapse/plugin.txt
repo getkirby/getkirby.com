@@ -18,13 +18,24 @@ Description: Cache any data until the set expiration time
 
 ----
 
+Preview:
+
+```php
+$key  = crc32($page->url());
+$data = lapse($key, function () {
+    return [1, 2, 3];
+});
+```
+
+----
+
 Example:
 
 ```php
 $keyFromObjects = [$page, $page->files()];
 $data = lapse(
     $keyFromObjects, // will check modified
-    function () use ($page) { 
+    function () use ($page) {
         return $page->files()->toArray(
           fn ($file) => $file->niceSize()
         );
