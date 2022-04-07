@@ -11,6 +11,7 @@
   'icon'    => 'performance',
   'title'   => 'Cachedrivers',
   'layout'  => 'cards',
+  'columns' => 2,
   'plugins' => $plugins->filter('subcategory', 'cachedriver')->pluck('id')
 ]) ?>
 
