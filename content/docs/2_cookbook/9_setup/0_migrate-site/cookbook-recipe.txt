@@ -16,9 +16,9 @@ If you find anything that is not covered by this guide, please create an issue o
 
 ## Requirements and installation
 
-### Dropped support for PHP < 7.1
+### Dropped support for PHP < 7.4
 
-Kirby 3 now requires PHP 7.1+. Please check if your server supports this PHP version before upgrading.
+Kirby 3 now requires PHP 7.4+. Please check if your server supports this PHP version before upgrading.
 
 <info>
 PHP version support has changed since Kirby 3 was originally released. Because old PHP versions don't receive bugfix or even security updates after a few years, Kirby only supports recent PHP versions. You can find the currently compatible PHP versions (link: docs/guide/quickstart#requirements text: in the requirements).
