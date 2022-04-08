@@ -1,0 +1,53 @@
+Title: Darkroom driver
+
+----
+
+Guide: templates/resize-images-on-the-fly
+
+----
+
+Text:
+
+Darkroom drivers are responsible for resizing, cropping and modifying images using Kirby's thumb API.
+
+You can create your own custom darkroom drivers by extending one of the existing drivers or the base `Darkroom` class.
+
+## Extending an existing darkroom driver
+
+To modify only parts of an existing driver like the `ImageMagick` driver, you can extend that class and selectively overwrite individual methods, e.g. the `convert()` method in this example:
+
+```php "/site/plugins/your-plugin/index.php"
+class CustomImageMagick extends Kirby\Image\Darkroom\ImageMagick
+{
+    protected function convert(string $file, array $options): string
+    {
+        // your custom code
+        // ...
+
+        return parent::convert($file, $options);
+    }
+}
+```
+
+You then have to register the new darkroom driver:
+
+```php
+Kirby\Image\Darkroom::$types['custom-im'] = CustomImageMagick::class;
+```
+
+## Extending the `Darkroom` class
+
+Alternatively, you can extend the `Darkroom` class to implement a new darkroom driver.
+
+```php "/site/plugins/your-plugin/index.php"
+class SuperDriver extends Kirby\Image\Darkroom
+{
+    // implement methods here
+}
+```
+
+As before, you have to register the new darkroom driver:
+
+```php
+Kirby\Image\Darkroom::$types['super'] = SuperDriver::class;
+```
