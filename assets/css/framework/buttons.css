@@ -12,7 +12,7 @@ button {
 
 .btn {
   display: inline-flex;
-  padding: .5rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   align-items: center;
   justify-content: center;
   font-size: var(--text-sm);
@@ -25,7 +25,8 @@ button {
   background: none;
 }
 .btn svg {
-  margin-right: .75rem;
+  margin-right: 0.75rem;
+  min-width: 1rem;
 }
 .btn--outlined {
   border-color: var(--btn-bg);
