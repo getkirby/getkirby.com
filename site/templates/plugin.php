@@ -28,9 +28,11 @@
 
 <article>
 
-  <header class="mb-42">
+  <header class="mb-24">
     <h1 class="h1 block mb-12"><?= $page->title() ?></h1>
-    <div class="plugin-summary mb-12">
+
+    <div class="plugin-summary">
+      <!-- Visual -->
       <figure>
         <div class="bg-light rounded overflow-hidden shadow-xl mb-6" style="--aspect-ratio: 2/1">
           <?php if ($card = $page->card()) : ?>
@@ -63,6 +65,8 @@
           <?= $page->description()->kt()->widont() ?>
         </figcaption>
       </figure>
+
+      <!-- Meta -->
       <nav aria-label="Plugin links" class="plugin-links">
         <a href="<?= $author->url() ?>" class="plugin-author flex flex-column items-center bg-light font-mono text-sm p-6">
           <?php if ($avatar = $author->avatar()) : ?>
@@ -79,28 +83,46 @@
           <a class="btn" href="<?= $page->repository() ?>">
             <?= icon('github') ?> Source
           </a>
-        <?php endif ?>
 
-        <?php if ($version = $page->version()) : ?>
-          <a class="btn" href="<?= $download ?>">
-            <?= icon('git') ?> <?= $version ?>
-          </a>
-        <?php endif ?>
+          <?php if ($version = $page->info()->version()) : ?>
+            <a class="btn" href="<?= $download ?>">
+              <?= icon('git') ?> <?= $version ?>
+            </a>
+          <?php endif ?>
 
+          <?php if ($updated = $page->info()->updated()) : ?>
+            <a class="btn" href="<?= $page->repository() ?>" aria-label="Last updated">
+              <?= icon('calendar') ?> <?= date('M Y', strtotime($updated)) ?>
+            </a>
+          <?php endif ?>
+
+          <?php if ($stars = $page->info()->stars()) : ?>
+            <a class="btn" href="<?= $page->repository() ?>">
+              <?= icon('star') ?> <?= $stars ?>
+            </a>
+          <?php endif ?>
+        <?php endif ?>
       </nav>
-    </div>
 
+    </div>
   </header>
 
+  <?php if ($readme = $page->info()->readme()) : ?>
+  <section class="mb-36 p-6 bg-light prose">
+    <?= kt($readme) ?>
+  </section>
+  <?php endif ?>
+
+
   <?php if ($relatedPlugins->count()) : ?>
-    <section class="mb-42">
+    <section class="mb-36">
       <h2 class="h2 mb-6">Related plugins</h2>
       <?php snippet('templates/plugins/cards', ['plugins' => $relatedPlugins, 'headingLevel' => 'h3']) ?>
     </section>
   <?php endif ?>
 
   <?php if ($authorPlugins->count()) : ?>
-    <section class="mb-42">
+    <section class="mb-36">
       <h2 class="h2 mb-6">Other plugins by <a href="<?= $author->url() ?>" class="link"><?= $author->title() ?></a></h2>
       <?php snippet('templates/plugins/cards', ['plugins' => $authorPlugins, 'headingLevel' => 'h3']) ?>
     </section>
