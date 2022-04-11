@@ -33,6 +33,9 @@
               <li><a href="/features/creators">For content creators</a></li>
               <li><a href="/features/clients">For clients & agencies</a></li>
               <li><a href="/love">Showcase</a></li>
+              <li><a href="https://kirby.nolt.io/roadmap">Roadmap</a></li>
+              <li><a href="https://github.com/getkirby/kirby/releases">Releases</a></li>
+
             </ul>
           </li>
           <li>
@@ -43,18 +46,16 @@
               <li><a href="/docs/reference">Reference</a></li>
               <li><a href="https://youtube.com/kirbycasts">Screencasts</a></li>
               <li><a href="/docs/glossary">Glossary</a></li>
+              <li><a href="/docs/archive">Archive</a></li>
             </ul>
           </li>
           <li>
             <p class="font-bold mb-1">Resources</p>
             <ul class="footer-menu-2">
-              <li><a href="/kosmos">Newsletter</a></li>
               <li><a href="/plugins">Plugins</a></li>
               <li><a href="/themes">Themes</a></li>
+              <li><a href="/kosmos">Newsletter</a></li>
               <li><a href="/buzz">Buzz</a></li>
-              <li><a href="https://kirby.nolt.io/roadmap">Roadmap</a></li>
-              <li><a href="https://github.com/getkirby/kirby/releases">Releases</a></li>
-              <li><a href="/docs/archive">Archive</a></li>
             </ul>
           </li>
           <li>
