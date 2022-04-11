@@ -36,6 +36,29 @@ Option | Value
 `active` | `true`/`false`
 `ignore` | Either an array of page IDs to ignore, or a callback function that returns a boolean
 
+### Excluding pages using a page model
+
+If you need even more detailed control over which pages are cached or ignored, you can use (link: docs/guide/templates/page-models text: page models) with an override of the (link: docs/reference/objects/cms/page/is-cacheable text: `$page->isCacheable()`) method:
+
+```php
+<?php
+
+class ProjectPage extends Page
+{
+  public function isCacheable(): bool
+  {
+    // run the core checks
+    if (parent::isCacheable() === false) {
+      return false;
+    }
+        
+    // your custom ignore rules
+        
+    // otherwise consider the page cacheable
+    return true;
+  }
+}
+```
 
 ## Cache drivers and options
 
