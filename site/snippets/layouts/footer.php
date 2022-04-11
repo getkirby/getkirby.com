@@ -79,7 +79,7 @@
             </ul>
           </li>
           <li>
-            <p class="font-bold mb-1">Partners</p>
+            <p class="font-bold mb-1">With support of</p>
             <ul class="footer-menu-2 footer-menu-partners">
               <li class="mb-1">
                 <a href="https://keycdn.com">
