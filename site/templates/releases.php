@@ -15,10 +15,10 @@
       </header>
 
       <figure class="border-top pt-6 mb-3">
-        <?= $release->cover()->toFile()->crop(400) ?>
+        <?= $release->cover()->toFile()?->crop(400) ?>
       </figure>
 
-      <div class=" color-gray-700 mb-12">
+      <div class=" color-gray-700 mb-6">
         <p><?= $release->description() ?></p>
       </div>
       <div class="columns" style="--columns: 2">
@@ -32,6 +32,6 @@
   </ul>
 
   <footer class="h2 max-w-xl">
-    Release notes for <a href="https://github.com/getkirby/kirby/releases"><span class="link">all releases</span> &rarr;</a>
+    Full list of <a href="https://github.com/getkirby/kirby/releases"><span class="link">all releases</span> &rarr;</a>
   </footer>
 </article>
