@@ -10,6 +10,10 @@ Description: After over two years of development and seven years after launching
 
 ----
 
+Cover: panel.jpg
+
+----
+
 Priority: 0.8
 
 ----

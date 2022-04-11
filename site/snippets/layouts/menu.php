@@ -15,7 +15,7 @@
           <li><hr /></li>
           <li><a href="/love">Showcase</a></li>
           <li><a class="is-external" href="https://kirby.nolt.io/roadmap">Roadmap</a></li>
-          <li><a class="is-external" href="https://github.com/getkirby/kirby/releases">Releases</a></li>
+          <li><a href="/releases">Releases</a></li>
         </ul>
       </li>
       <li class="has-submenu">
@@ -36,7 +36,6 @@
           <li><hr /></li>
           <li><a href="/kosmos">Newsletter</a></li>
           <li><a href="/buzz">Buzz</a></li>
-
         </ul>
       </li>
       <li class="has-submenu">
