@@ -1,0 +1,24 @@
+Title: Seobility - Keywordcheck
+
+----
+
+Repository: https://github.com/bnomei/kirby3-seobility
+
+----
+
+Category: seo
+
+----
+
+Description: Kirby 3 Plugin to use free and paid API of Seobility.net like the keywordcheck
+
+----
+
+Example:
+
+```yml
+fields:
+  keywordcheck:
+    label: Seobility.net Keywordcheck
+    type: keywordcheck
+```
