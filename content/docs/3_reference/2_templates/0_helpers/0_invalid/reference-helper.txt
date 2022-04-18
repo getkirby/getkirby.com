@@ -30,6 +30,7 @@ if($invalid = invalid($data, $rules, $messages)) {
 }
 ```
 
+You can change these rules based on the type of data you want to obtain and use (link: docs/reference/system/validators text: Kirby's validators) or your own (link: docs/reference/plugins/extensions/validators text: custom validators) to make sure you get the desired data.
 
 You can also separately define a message for each validation rule:
 
