@@ -8,7 +8,9 @@ Text:
 
 Determine which PHP function is used to format dates for pages and files.
 
-Possible values: `date` | `strftime` (default: `date`)
+Possible values: `date` | `strftime` | `intl` (since 3.6.5), (default: `date`)
+
+### `strftime`
 
 ```php
 return [
@@ -18,7 +20,17 @@ return [
 ];
 ```
 
-Note that the `strftime` format syntax differs from the `date` format syntax:
+### `intl`
+
+```php
+return [
+    'date'  => [
+        'handler' => 'intl'
+    ]
+];
+```
+
+Note that the format syntax differs depending on date handler:
 
 ### `date` handler
 
@@ -36,5 +48,13 @@ echo $page->date()->toDate('%Y-%m-%d');
 
 All formats: https://www.php.net/manual/en/function.strftime
 
+<since v="3.6.5">
 
+### `intl` handler
 
+```php
+echo $page->date()->toDate('EEEE, MMMM d, YYYY');
+```
+
+All formats: https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax
+</since>
