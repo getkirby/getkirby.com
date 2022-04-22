@@ -228,7 +228,7 @@ For the `picture` element, add the `lazyload` class to the `img` element and use
 
 ```php
 <?php if ($image = $page->image()): ?>
-    picture
+    <picture>
         <source data-srcset="<?= $image->thumb(['width' => 1280, 'format' => 'avif'])->url() ?>" type="image/avif">
         <source data-srcset="<?= $image->thumb(['width' => 1280, 'format' => 'webp'])->url() ?>" type="image/webp">
         <img
