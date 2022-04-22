@@ -1,9 +1,32 @@
-Text: 
+Text:
 
-## Example
+## Details
+
+While `$page->template()` returns the actually used template, `$page->intendedTemplate()` returns the name of the content file, i.e.
+
+Assuming you have a content file `article.txt`, then `$page->intendedTemplate()->name()` will  return `article`.
+
+This method is therefore particularly useful to fetch or filter pages that don't have a corresponding template in the `templates` folder.
+
+## Examples
+
+### Basic usuage
 
 ```php
 <?php
 echo $page->intendedTemplate();
 ?>
 ```
+
+### Filtering by `intendedTemplate`
+
+```php
+<?php
+$filtered = $page->children()->filterby('intendedTemplate', 'article');
+?>
+```
+
+## Further Reading
+
+- (link: docs/guide/templates/basics text: Templates)
+- (link: docs/cookbook/setup/kirby-in-a-nutshell#all-files-and-folders Text: Kirby in a nutshell: files and folders)
