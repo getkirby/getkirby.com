@@ -23,7 +23,7 @@ page.changeStatus:before,"Kirby\Cms\Page $page, string $status, ?int $position =
 page.changeStatus:after,"Kirby\Cms\Page $newPage, Kirby\Cms\Page $oldPage",trigger,
 page.changeTemplate:before,"Kirby\Cms\Page $page, string $template",trigger,
 page.changeTemplate:after,"Kirby\Cms\Page $newPage, Kirby\Cms\Page $oldPage",trigger,
-page.changeTitle:before,"Kirby\Cms\Page $page, string $title, string $languageCode",trigger,
+page.changeTitle:before,"Kirby\Cms\Page $page, string $title, ?string $languageCode = null",trigger,
 page.changeTitle:after,"Kirby\Cms\Page $newPage, Kirby\Cms\Page $oldPage",trigger,
 page.create:before,"Kirby\Cms\Page $page, array $input",trigger,
 page.create:after,"Kirby\Cms\Page $page",trigger,
@@ -35,7 +35,7 @@ page.update:before,"Kirby\Cms\Page $page, array $values, array $strings",trigger
 page.update:after,"Kirby\Cms\Page $newPage, Kirby\Cms\Page $oldPage",trigger,
 route:before,"Kirby\Http\Route $route, string $path, string $method",trigger,
 route:after,"Kirby\Http\Route $route, string $path, string $method, mixed $result, bool $final",apply,$result
-site.changeTitle:before,"Kirby\Cms\Site $site, string $title, string $languageCode",trigger,
+site.changeTitle:before,"Kirby\Cms\Site $site, string $title, ?string $languageCode = null",trigger,
 site.changeTitle:after,"Kirby\Cms\Site $newSite, Kirby\Cms\Site $oldSite",trigger,
 site.update:before,"Kirby\Cms\Site $site, array $values, array $strings",trigger,
 site.update:after,"Kirby\Cms\Site $newSite, Kirby\Cms\Site $oldSite",trigger,
