@@ -17,7 +17,7 @@ kirbytext:before,"string $text",apply,$text
 kirbytext:after,"string $text",apply,$text
 page.changeNum:before,"Kirby\Cms\Page $page, int $num",trigger,
 page.changeNum:after,"Kirby\Cms\Page $newPage, Kirby\Cms\Page $oldPage",trigger,
-page.changeSlug:before,"Kirby\Cms\Page $page, string $slug, string $languageCode",trigger,
+page.changeSlug:before,"Kirby\Cms\Page $page, string $slug, ?string $languageCode = null",trigger,
 page.changeSlug:after,"Kirby\Cms\Page $newPage, Kirby\Cms\Page $oldPage",trigger,
 page.changeStatus:before,"Kirby\Cms\Page $page, string $status, ?int $position = null",trigger,
 page.changeStatus:after,"Kirby\Cms\Page $newPage, Kirby\Cms\Page $oldPage",trigger,
