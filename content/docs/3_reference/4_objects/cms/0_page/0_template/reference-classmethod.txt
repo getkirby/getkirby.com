@@ -5,3 +5,7 @@ Text:
 ```php
 <?= $page->template() ?>
 ```
+
+<info>
+This returns the actually used template, which may differ from the blueprint name of a content page (e.g. when no corresponding template exists for blueprint `article`, and template `default` is used instead). Use `$page->intendedTemplate()` to return the template originally defined for a page.
+</info>
