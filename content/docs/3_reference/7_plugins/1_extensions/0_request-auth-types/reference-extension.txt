@@ -1,0 +1,47 @@
+Title: Request auth types
+
+----
+
+Since: 3.7.0
+
+----
+
+Text:
+
+Request auth types are used to parse the authentication information in the `Authorization` header of the HTTP request. They are called by the `$request->auth()` method internally.
+
+You can create your own custom auth types by extending one of the existing types or the base `Auth` class.
+
+## Extending an existing auth type
+
+If your auth type shares some of its logic with an existing type, you can extend the class of that type:
+
+```php "/site/plugins/your-plugin/index.php"
+class CustomTokenAuth extends Kirby\Http\Request\Auth\BearerAuth
+{
+    // implement methods here
+}
+```
+
+You then have to register the new auth type with its name. For example for the `Authorization: Custom-Token ...` header:
+
+```php
+Kirby\Http\Request::$authTypes['custom-token'] = CustomTokenAuth::class;
+```
+
+## Extending the `Auth` class
+
+Alternatively, you can extend the `Auth` class to implement a new auth type.
+
+```php "/site/plugins/your-plugin/index.php"
+class DigestAuth extends Kirby\Http\Request\Auth
+{
+    // implement methods here
+}
+```
+
+As before, you have to register the new auth type:
+
+```php
+Kirby\Http\Request::$authTypes['digest'] = DigestAuth::class;
+```
