@@ -12,7 +12,7 @@ Kirby categorizes file types by extension and MIME type. We support a wide range
 
 ## Registering a new file type
 
-New file types can be defined in plugins. The array key represents the file extension. Define the matching MIME type and file type category like this:
+New file types can be defined in plugins. The array key represents the file extension. Define the matching (link: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types text: MIME type) and (link: docs/guide/content/files#example-page-with-files__supported-file-types text:file type category) like this:
 
 ```php
 Kirby::plugin('your/plugin', [
