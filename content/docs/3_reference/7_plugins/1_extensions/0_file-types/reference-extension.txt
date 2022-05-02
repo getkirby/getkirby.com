@@ -12,7 +12,7 @@ Kirby categorizes file types by extension and MIME type. We support a wide range
 
 ## Registering a new file type
 
-New file types can be defined in plugins. The array key represents the file extension. Define the matching (link: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types text: MIME type) and (link: docs/guide/content/files#example-page-with-files__supported-file-types text:file type category) like this:
+New file types can be defined in plugins. The array key represents the file extension. Define the matching MIME type and file type category like this:
 
 ```php
 Kirby::plugin('your/plugin', [
@@ -26,6 +26,8 @@ Kirby::plugin('your/plugin', [
 ```
 
 Kirby will now recognize `m4p` files by filename and by MIME type. `$file->type()` will now return `video` for such files and they will also be included in the `$page->videos()` collection. Of course you can now also find them by using `$page->files()->filterBy('type', 'video')`.
+
+`type` can be `audio`, `code`, `document`, `image` and `video` (see (link: docs/guide/content/files#example-page-with-files__supported-file-types text: Kirby file types)). For the `mime` attribute, you can explore (link: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types text: a list of common MIME types).
 
 ## Image processing
 
