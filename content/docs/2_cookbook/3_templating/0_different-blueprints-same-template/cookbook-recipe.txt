@@ -74,7 +74,7 @@ Kirby::plugin('cookbook/shared-templates', [
         'events' => __DIR__ . '/templates/grid.php',
         'news'   => __DIR__ . '/templates/grid.php',
         //…
-    ]
+    ],
     'controllers' => [
         'jobs'   => require __DIR__ . '/controllers/grid.php',
         'events' => require __DIR__ . '/controllers/grid.php',
@@ -105,13 +105,13 @@ Kirby::plugin('cookbook/shared-templates', [
         'events' => __DIR__ . '/templates/grid.php',
         'news'   => __DIR__ . '/templates/grid.php',
         //…
-    ]
+    ],
     'controllers' => [
         'jobs'   => require __DIR__ . '/controllers/grid.php',
         'events' => require __DIR__ . '/controllers/grid.php',
         'news'   => require __DIR__ . '/controllers/grid.php',
         // …
-    ]
+    ],
     'pageModels' => [
         'jobs'   => 'BasePage',
         'events' => 'BasePage',
