@@ -9,11 +9,7 @@ Text:
 
 ## The `config.php`
 
-General Kirby configuration settings and configuration settings for plugins go into `/site/config/config.php`. The config file contains a return statement with an array of config options.
-
-<warning>
-Make sure to only use a single return statement in your `config.php` file (with all your options defined in that one return array.
-</warning>
+General Kirby configuration settings and configuration settings for plugins go into `/site/config/config.php`. The config file contains a return statement with an array of config options:
 
 ```php "/site/config/config.php"
 <?php
@@ -23,6 +19,54 @@ return [
     'someOtherSetting' => 'something'
 ];
 ```
+
+<warning>
+Make sure to only use a single return statement in your `config.php` file (with all your options defined in that one return array).
+</warning>
+
+<warning>
+Since Kirby is not being fully initialized yet when reading the configuration, you cannot use the `$kirby` object or `kirby()` helper in the `config.php`.
+
+If you need to set options dynamically, you can use the (link: docs/reference/system/options/ready text: `ready` option) with a callback.
+</warning>
+
+### Plugin options
+
+You can also set options for your installed plugins in the `site/config/config.php`:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'author.pluginname' => [
+        'option' => 'a custom value',
+        'another-option' => [
+            'with-a-nested-option' => 'also a custom value'
+        ]
+    ]
+];
+```
+
+<info>
+Please use the exact syntax as in the example above, i.e. with the `author.pluginname` as a single string. The following example will ***not* work**:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'author' => [
+        'pluginname' => [
+            'option' => 'a custom value',
+            'another-option' => [
+                'with-a-nested-option' => 'also a custom value'
+            ]
+        ]
+    ]
+];
+```
+</info>
+
+### Using multiple config files
 
 If you want to keep your `config.php` clean when using more complex options, you can outsource them to individual files that you require in the return array:
 
@@ -38,10 +82,6 @@ return [
   // your hooks
 ];
 ```
-
-<warning>
-Since Kirby is not being fully initialized yet when reading the configuration, you cannot use the `$kirby` object or `kirby()` helper in the `config.php`.
-</warning>
 
 ## Using options
 

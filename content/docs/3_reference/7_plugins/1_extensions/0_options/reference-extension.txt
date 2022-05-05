@@ -25,37 +25,7 @@ Kirby::plugin('yourname/yourplugin', [
 
 ## Setting custom options in the site config
 
-Your custom options can be set like core Kirby options in the `site/config/config.php`:
-
-```php "/site/config/config.php"
-<?php
-
-return [
-    'yourname.yourplugin' => [
-        'option' => 'a custom value',
-        'another-option' => [
-            'with-a-nested-option' => 'also a custom value'
-        ]
-    ]
-];
-```
-
-<info>
-Before Kirby 3.4.0, only the following syntax was supported:
-
-```php "/site/config/config.php"
-<?php
-
-return [
-    'yourname.yourplugin.option' => 'a custom value',
-    'yourname.yourplugin.another-option' => [
-        'with-a-nested-option' => 'also a custom value'
-    ]
-];
-```
-
-This syntax is now deprecated because it turned out to be confusing. For now, the old syntax is still supported to ensure backwards-compatibility.
-</info>
+See (link: docs/guide/configuration#the-config-php__plugin-options text: the guide).
 
 ## Accessing option values
 
