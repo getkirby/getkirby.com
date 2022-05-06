@@ -11,6 +11,7 @@ Kirby honours your PHP error logging settings by default. If you've switched off
 Especially on your local machine, we recommend to switch on error logging in your `php.ini`. Kirby also has a (link: /docs/reference/system/options/debug text: built-in option) which tries to enforce this:
 
 ```php "/site/config/config.php"
+<?php 
 return [
     'debug' => true
 ];
