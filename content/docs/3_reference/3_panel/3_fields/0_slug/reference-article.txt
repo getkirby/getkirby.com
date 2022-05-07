@@ -12,6 +12,10 @@ Guide: blueprints/fields
 
 ----
 
+Since: 3.6.0
+
+----
+
 Text:
 
 The slug field creates a text input that automatically sanitizes the typed value with our built-in sluggify method. It's perfect if you want to create IDs or class names for HTML elements or paths for files or URLs.
@@ -48,6 +52,23 @@ fields:
     type: slug
     sync: title
 ```
+
+
+## Wizard option
+
+If you don't want to automatically sync the slug field with the other field, you can also to do this manually when you click a button. The `wizard` option accepts a `field` to sync with and a `text` attribute for the button text.
+
+```yaml
+fields:
+  identifier:
+    label: Identifier
+    type: slug
+    wizard:
+      field: input
+      text: Generate!
+```
+
+(image: slug-field-wizard-option.png)
 
 ## Allow option
 
