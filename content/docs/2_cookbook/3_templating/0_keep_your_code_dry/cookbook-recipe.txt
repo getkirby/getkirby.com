@@ -25,7 +25,7 @@ return function($page) {
 
 And then in the template:
 
-```php "/site/temlates/blog.php"
+```php "/site/templates/blog.php"
 <?php
 foreach($page->articles()->listed() as $article) {
   echo $article->title();
