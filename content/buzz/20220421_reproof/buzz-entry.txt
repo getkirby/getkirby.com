@@ -10,4 +10,4 @@ Text: A look behind the scenes of writing tasty Kirby recipes.
 
 ----
 
-Link: (https://reproof.app/blog/kirby-sonja-broda-on-proofreading)
+Link: https://reproof.app/blog/kirby-sonja-broda-on-proofreading
