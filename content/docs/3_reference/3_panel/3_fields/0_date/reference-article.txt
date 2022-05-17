@@ -131,6 +131,31 @@ fields:
     default: today
 ```
 
+With the `time` option enabled, you can set a specific date and time (e.g. `2022-07-01 12:05`) or use `now` for the current date and time:
+
+```yaml
+fields:
+  published:
+    label: Published on
+    type: date
+    time: true
+    default: now
+```
+
+You can even do date/or date-time calculations:
+
+```yaml
+fields:
+  published:
+    label: Published on
+    type: date
+    time: true
+    default: now + 1 day
+```
+
+This also works for `today`. Other relative settings like `tomorrow` or `yesterday` will also work, btw.
+
+
 ## How to use in templates/snippets
 
 The field stores its value in a standardized format in the content file: `Y-m-d` for only dates, `Y-m-d H:i:s` for date and time combined. To convert the value to a date object, use the [`toDate()`](/docs/reference/templates/field-methods/to-date) method.
