@@ -1,3 +1,0 @@
-Title: Headless
-----
-Icon: key
