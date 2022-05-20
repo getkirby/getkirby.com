@@ -222,8 +222,7 @@ You should now be able visit it in a browser after mapping it to a local test do
 
 (image: simpletest.jpg)
 
-Whilst this simple example isn't terribly pretty, it will hopefully get you started with using Kirby Headless. Have a go at changing the query to see what else you can display!
 
 ## Closing 
 
-From here there are quite a lot possibilites. There are many frameworks and systems out there like React, Vue, Nuxt that can consume data from headless CMS systems. This guide is just the tip of the iceberg and should give you the basis to start exploring those systems.
+Whilst this simple example isn't terribly pretty, it will hopefully get you started with using Kirby as a headless CMS. Have a go at changing the query to see what else you can display! From here there are quite a lot possibilites. This guide is just the tip of the iceberg and should give you the basis to start exploring.
