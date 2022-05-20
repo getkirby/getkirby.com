@@ -17,6 +17,8 @@ Authors:
 
 Text:
 
+## Intro
+
 Using Kirby headless can have many benefits, from security & performance to integrating content into apps and other systems. 
 
 This guide will explain how to set Kirby up for headless use on a basic level. This is a pre-curser guide before you move on to pulling data into another system.
@@ -146,7 +148,21 @@ At this point, have some fun trying out a few other queries. You'll find this is
 
 So far we have only made requests and looked at the kind of responses we can get back. It would be great to use it in a practical example. Let's have a go at getting the data displayed in the browser.
 
-Below is a very simple working example using [Guzzle](https://docs.guzzlephp.org/en/stable/) inside a basic PHP file. It will generate a simple list of the pages and content in the Photography pages, complete with the images that belong to each page.
+Create a new folder and start a new Conposer project using the following command, and supply the answers required to generate the project:
+
+```bash
+composer init
+```
+
+Once generated, install [Guzzle](https://docs.guzzlephp.org/en/stable/) via Composer. This package will help us make the connections to the headless Kirby installation from PHP.
+
+```bash
+composer require guzzlehttp/guzzle
+```
+
+From there create an empty `index.php` in the root of the project. Add the following code to it:
+
+
 
 ```PHP
 <?php
@@ -196,6 +212,17 @@ foreach ($posts as $post) {
     }
 }
 ```
+Be sure to fill in your credentials in the auth line:
+
+```PHP
+'auth' => ['xxx', 'xxx'],
+```
+
+You should now be able visit it in a browser after mapping it to a local test domain. It will generate a simple list of the pages and content in the Photography pages, complete with the images that belong to each page.
+
+(image: simpletest.jpg)
+
+Whilst this simple example isn't terribly pretty, it will hopefully get you started with using Kirby Headless. Have a go at changing the query to see what else you can display!
 
 ## Closing 
 
