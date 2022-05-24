@@ -50,7 +50,7 @@ The (only) downside to this approach is that you need to invest some extra work 
 
 ### Documentation
 
-- (link: text: Content representations)
+- (link: docs/guide/templates/content-representations text: Content representations)
 - (link: docs/cookbook/templating/generating-json text: Generating JSON)
 
 ## REST API
@@ -76,7 +76,7 @@ Using the REST API is the way to go if you want to modify data.
 
 - (link: docs/guide/api/introduction text: Using the REST API)
 - (link: docs/guide/api/authentication text: REST API authentication method)
-- (link: https://getkirby.com/docs/reference/api text: API endpoint reference)
+- (link: docs/reference/api text: API endpoint reference)
 - (link: docs/reference/plugins/extensions/api text: Custom API endpoints and data providers)
 
 
