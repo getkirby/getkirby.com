@@ -98,7 +98,7 @@ KQL allows you to fully customize results to your application needs.
 
 ## Custom routes
 
-For completeness sake, let's not forget routes. Routes could also be an option for simple data models, e.g. for use cases where you want to provide a limited set of data from a single endpoint. This approach probably works best if you use Kirby as a standard CMS but want to run re-use some data for other purposes.
+For completeness sake, let's not forget routes. Routes could also be an option for simple data models, e.g. for use cases where you want to provide a limited set of data from a single endpoint. This approach probably works best if you use Kirby as a standard CMS but want to re-use some data for other purposes.
 
 ### Documentation
 
@@ -108,7 +108,7 @@ For completeness sake, let's not forget routes. Routes could also be an option f
 
 As we have seen, Kirby gives you the freedom of choice when it comes to operating in headless mode. Each of the methods presented has its advantages and disadvantages, and which of the options is best for you will largely depend on your specific requirements.
 
-The different methods can even be combined, or you can use this headless mode in addition to the traditional approach as a full CMS:
+The different methods can even be combined, or you can use headless mode in addition to the traditional approach as a full CMS.
 
 Here are a few more resources that can help you get started or give you more ideas for implementing your own solutions. We will update this list on an ongoing basis.
 
