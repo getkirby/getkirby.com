@@ -95,6 +95,7 @@ KQL allows you to fully customize results to your application needs.
 ### Documentation
 
 (link: https://github.com/getkirby/kql/#kirby-ql text: KQL Readme)
+(link: https://kql.getkirby.com/ text: KQL Playground)
 
 ## Custom routes
 
