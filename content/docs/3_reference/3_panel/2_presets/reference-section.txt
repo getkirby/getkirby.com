@@ -8,4 +8,8 @@ Guide: blueprints/presets
 
 Intro:
 
+<warning>
+Do not use presets for new projects. Presets will be deprecated in future versions of Kirby.
+</warning>
+
 Blueprint presets provide sensible default settings for common blueprint types and simplify your blueprint setup.

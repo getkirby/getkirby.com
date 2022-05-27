@@ -16,7 +16,6 @@ Text:
 
 - Blueprints are stored in `/site/blueprints`.
 - Blueprints configure the Panel layout of the site, pages, files and users.
-- Start simple with presets.
 - Create your own layouts with tabs, columns and sections.
 
 (screencast: https://www.youtube.com/watch?v=yK3gNjWU_5s title: Your first blueprints text: The heart and soul of your Kirby installation: Learn how to create a fully customized admin interface for every page type.)
@@ -38,12 +37,6 @@ The Panel layouts for  `site`, `pages`, `files` and `users` all get their own bl
 <info>
 The start page (Dashboard) of the Panel is defined in the `/site/blueprints/site.yml` blueprint.
 </info>
-
-## Presets
-
-We added three useful presets (`page`, `pages` and `files`) to our blueprints that you can use to create single pages, blogs, galleries and more with almost zero configuration.
-
-(link: docs/guide/blueprints/presets text: Learn more about presets…)
 
 ## Layout
 
@@ -102,7 +95,7 @@ field1:
 field2:
   label: "Must do: this"
   type: text
-```  
+```
 
 ### Naming fields
 
@@ -114,7 +107,7 @@ Yes:
 field_1:
   label: Headline
   type: text
-```  
+```
 
 No:
 
@@ -122,4 +115,4 @@ No:
 field-1:
   label: Headline
   type: text
-```  
+```

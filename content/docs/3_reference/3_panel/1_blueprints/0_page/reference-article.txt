@@ -44,14 +44,6 @@ title:
 	de: Artikel
 ```
 
-## Presets
-
-Presets are typical standard setups for page, pages and files, see (link: docs/guide/blueprints/presets text: presets).
-
-```yaml
-preset: page
-```
-
 ## Sorting
 
 The `num` option defines which numbering scheme to use when a page is published.

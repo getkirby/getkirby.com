@@ -12,6 +12,10 @@ Intro: The files preset is intended for pages that only contain files and no add
 
 Text:
 
+<warning>
+Do not use presets for new projects. Presets will be deprecated in future versions of Kirby.
+</warning>
+
 ## Basic setup
 
 A basic blueprint with a files preset creates an empty files upload section:
