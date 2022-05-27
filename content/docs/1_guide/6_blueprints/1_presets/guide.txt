@@ -7,6 +7,10 @@ Intro: Presets help you to set up typical interface layouts in seconds. Single p
 
 Text:
 
+<warning>
+Do not use presets for new projects. Presets will be deprecated in future versions of Kirby.
+</warning>
+
 ## Available presets
 
 Kirby ships with the following blueprint presets that you can use to get started. They can help you to quickly get started with simple but very common blueprint layouts. For more complex and fully customized layouts check out our (link: docs/guide/blueprints/layout text: layout guide).

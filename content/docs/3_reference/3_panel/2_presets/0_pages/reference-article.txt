@@ -12,6 +12,10 @@ Intro: The Pages preset is intended for container pages like a blog with subpage
 
 Text:
 
+<warning>
+Do not use presets for new projects. Presets will be deprecated in future versions of Kirby.
+</warning>
+
 A basic blueprint using a pages preset looks like this:
 
 ```yaml

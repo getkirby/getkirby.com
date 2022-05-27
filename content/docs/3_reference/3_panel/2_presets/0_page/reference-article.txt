@@ -12,6 +12,10 @@ Intro: The Page preset simplifies the setup for standard pages with form fields,
 
 Text:
 
+<warning>
+Do not use presets for new projects. Presets will be deprecated in future versions of Kirby.
+</warning>
+
 ## Basic setup
 
 This allows you to create a very basic blueprint like this:
