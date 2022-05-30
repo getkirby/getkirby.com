@@ -415,3 +415,17 @@ min: 2
 ```
 
 (docs: sections/conditional-sections)
+
+<since v="3.7.0">
+## Search
+
+(image: search.png)
+
+Section search is disabled by default. You can use the `search` option to enable it.
+
+```yaml
+sections:
+  drafts:
+    type: pages
+    search: true
+</since>
