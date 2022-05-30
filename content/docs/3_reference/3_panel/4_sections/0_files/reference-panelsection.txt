@@ -274,3 +274,16 @@ min: 2
 ```
 
 (docs: sections/conditional-sections)
+
+<since v="3.7.0">
+## Search
+
+Section search is disabled by default. You can use the `search` option to enable it.
+
+```yaml
+sections:
+  gallery:
+    type: files
+    search: true
+</since>
+
