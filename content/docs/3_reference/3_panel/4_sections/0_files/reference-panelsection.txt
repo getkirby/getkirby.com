@@ -101,9 +101,8 @@ The `card` layout is great for all kinds of images.
 ```yaml
 layout: cards
 ```
-<since v="3.6.0">
+
 (docs: sections/cardlets)
-</since>
 
 ## File information
 

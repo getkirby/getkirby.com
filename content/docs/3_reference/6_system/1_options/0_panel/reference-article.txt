@@ -80,7 +80,6 @@ return [
 ];
 ```
 
-<since v="3.6.0">
 ## Custom Panel Favicon
 
 To offer a full white-label solution for your customers, you can even set a custom favicon for the Panel. From a simple implementation…
@@ -116,8 +115,6 @@ return [
   ]
 ];
 ```
-
-</since>
 
 ## Default Panel language
 

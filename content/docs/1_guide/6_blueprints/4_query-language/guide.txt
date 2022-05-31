@@ -131,7 +131,6 @@ info: "{{ page.from.toDate('d.m.Y') }} - {{ page.to.toDate('d.m.Y') }} / {{ page
 info: "{{ file.dimensions }}"
 ```
 
-<since v="3.6.0">
 ### Escaping HTML
 By default, we escape all queries to be displayed against raw HTML output that may lead to XSS attacks. If you include the HTML direcly in the blueprint option, this will still work and display the HTML as intended.
 
@@ -144,7 +143,7 @@ The query result itself will be escaped though, so if e.g. you would have a cust
 ```yaml
 info: "{< page.myMethodWithHTML >}"
 ```
-</since>
+
 
 ## Advanced query syntax
 

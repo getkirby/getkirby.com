@@ -120,11 +120,9 @@ layout: cards
 
 (image: cards.png)
 
-<since v="3.6.0">
 (docs: sections/cardlets)
 
 (image: cardlets.png)
-</since>
 
 ## Page information
 

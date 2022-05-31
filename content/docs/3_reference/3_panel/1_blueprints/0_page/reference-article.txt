@@ -138,8 +138,6 @@ icon: 📚
 
 ## Image options
 
-<since v="3.6.0">
-
 The image options for pages can now be defined directly in their own blueprint. This significantly simplifies the setup of sections as they all inherit the image settings. You can still set image settings in sections the good old way if needed.
 
 ```yaml "site/blueprints/pages/note.yml"
@@ -182,7 +180,6 @@ image:
   back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);"
 ```
 
-</since>
 
 ## Options
 
@@ -251,7 +248,6 @@ options:
 <info>When an editor switches templates, all fields with the same name and type will be synced. Incompatible fields will be discarded. Be aware of this step when you define the list of compatible templates.</info>
 
 ## Navigation option
-<since v="3.6.0">
 The previous/next item navigation in the Panel is a very effective way for editors to move between content. With `navigation` option you can improve the usability of the navigation for your users with additional options to customize the links.
 
 ### Navigate between all pages
@@ -284,7 +280,6 @@ navigation:
   template: default
   sortBy: title asc
 ```
-</since>
 
 ## Examples
 

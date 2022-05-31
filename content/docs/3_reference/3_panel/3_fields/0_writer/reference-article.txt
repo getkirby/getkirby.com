@@ -71,7 +71,6 @@ fields:
 
 ## Format/node options
 
-<since v="3.6.0">
 Apart from paragraph nodes, the writer field supports headings and lists. You can fine-tune the writer field from your blueprint by defining the availabel block formats (nodes).
 
 Unsupported formats will automatically be ignored when content is pasted and the toolbar will also not include the matching buttons.
@@ -88,7 +87,6 @@ fields:
 
 (image: writer-extended.png)
 
-</since>
 ## How to use in templates/snippets
 
 The content of the writer field is stored as plain HTML. To render the field in your template, echo the value.
