@@ -35,12 +35,12 @@ With Kirby, you have several options to run in "headless" mode.
 The following is an introduction to each of these options and an overview of their uses.
 
 <info>
-Sometimes, "headless" technologies are used for their own sake, for example to satisfy a buzzword-driven project requirement or to reduce the (perceived) development effort. This is often at the cost of performance (due to additional requests, JS code and frontend calculations), accessibility (due to issues with semantics), efficiency (due to a higher energy usage) and therefore at the cost of the overall user experience.
+The technologies and approaches we describe here have very valid uses as we showed above.
 
-The technologies and approaches we describe here have very valid uses as we showed above. Please use them wisely and not ... *headless*. 🙂
+Sometimes, however, "headless" technologies are used for their own sake, for example to satisfy a buzzword-driven project requirement or to reduce the (perceived) development effort. This is often at the cost of performance (due to additional requests, JS code and frontend calculations), accessibility (due to issues with semantics), efficiency (due to a higher energy usage) and therefore at the cost of the overall user experience.
 </info>
 
-### Content representations
+## Content representations
 
 Content representations work like standard Kirby templates and are usually bound to a page type. They are a great way to create an API that provides exactly the data you need.
 
@@ -52,18 +52,18 @@ As the JSON templates are custom-built by you, they are by design customized to 
 - Also the performance is as good as it gets – because only the needed data is returned.
 - However, each template needs to be developed before the data can be used. This means extra effort on the backend side and requires adaptation if the set of data that's needed by the client changes in the future.
 
-#### When to use
+### When to use
 
 - You want an easy-to-implement way to get data from Kirby without having to worry about authentication
 - You want full control over the output
 - You don't mind the extra effort
 
-#### Documentation
+### Documentation
 
 - (link: docs/guide/templates/content-representations text: Content representations)
 - (link: docs/cookbook/templating/generating-json text: Generating JSON)
 
-### REST API
+## REST API
 
 The REST API was originally designed for use with the Panel (and is of course tailored for that purpose), but it can also be used by you and even extended. However, REST has the problem that it is very limited compared to the flexibility we usually have in Kirby.
 
@@ -77,18 +77,18 @@ You can extend the REST API with your own custom endpoints which means great fle
 It is not recommended to use HTTP Basic Auth in combination with JavaScript front-ends, as you will be exposing your credentials. While there are examples in the wild that implement this via a Panel user with no privileges, this is not the way Basic Auth should be used. By exposing credentials, authentication no longer has a purpose as the access is public.
 </warning>
 
-#### When to use
+### When to use
 
 Using the REST API is the way to go if you want to modify data.
 
-#### Documentation
+### Documentation
 
 - (link: docs/guide/api/introduction text: Using the REST API)
 - (link: docs/guide/api/authentication text: REST API authentication method)
 - (link: docs/reference/api text: API endpoint reference)
 - (link: docs/reference/plugins/extensions/api text: Custom API endpoints and data providers)
 
-### KQL
+## KQL
 
 With KQL, you don't need to write backend code. Your frontend can retrieve the data you need without any changes to the backend. This brings a lot of flexibility and you hardly need to leave your frontend code. For authentication, the same methods are used as for the REST API. In addition, a mode without authentication is supported. KQL supports only a subset of Kirby's API, i.e. non-destructive commands.
 
@@ -98,21 +98,21 @@ KQL allows you to fully customize results to your application needs.
 KQL allows access to *all* content of your Kirby site. Before you disable authentication, please ensure that all and every piece of your site's content is public. Sensitive data may include (but not be limited to) form submissions, drafts, user data etc.
 </warning>
 
-#### When to use
+### When to use
 
 - You want to leverage Kirby's API, but without the hassle
 - You do not need to modify any data
 
-#### Documentation
+### Documentation
 
 (link: https://github.com/getkirby/kql/#kirby-ql text: KQL Readme)
 (link: https://kql.getkirby.com/ text: KQL Playground)
 
-### Custom routes
+## Custom routes
 
 For completeness sake, let's not forget routes. Routes could also be an option for simple data models, e.g. for use cases where you want to provide a limited set of data from a single endpoint. This approach probably works best if you use Kirby as a standard CMS but want to re-use some data for other purposes.
 
-#### Documentation
+### Documentation
 
 - (link: docs/guide/routing text: Routing)
 
