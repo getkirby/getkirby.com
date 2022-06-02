@@ -1,0 +1,27 @@
+Title: Kirby 3.7
+----
+Subtitle: Kinyongia
+----
+Version: 3.7
+----
+ogimage: opengraph.jpg
+----
+Link: https://github.com/getkirby/kirby/releases/tag/3.7.0
+----
+Stats:
+
+```yaml
+stats:
+  type: stats
+  reports:
+    - label: Revenue
+      value: "€29,682"
+      info: +112.5%
+      link: https://awesome.shop
+      theme: positive
+    - label: Transactions
+      value: "{{ page.transactions }}"
+      info: "{{ page.transactionsIncrease }}"
+      ...
+```
+
