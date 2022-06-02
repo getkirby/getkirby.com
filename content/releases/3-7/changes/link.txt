@@ -1,0 +1,103 @@
+Title: Changelog
+----
+
+Features:
+
+- Brand new statistics section
+- New search option for pages and files sections [https://kirby.nolt.io/14](https://kirby.nolt.io/14)  [#4316](https://github.com/getkirby/kirby/pull/4316)
+- New field preview in tables for tags, radio, select, multiselect, checkboxes, structures, blocks, layouts, files, pages and users fields. [#4294](https://github.com/getkirby/kirby/pull/4294) [#4195](https://github.com/getkirby/kirby/pull/4195)
+- `$request->auth()` now also handles Kirby's `Session` auth type automatically [#4264](https://github.com/getkirby/kirby/pull/4264)
+- The auth types for `$request->auth()` can now be extended by plugins: [#4264](https://github.com/getkirby/kirby/pull/4264)
+- New `k-table` component to allow easily for consistent tables
+- Styled preview for tags in tables
+- New JS helper `$helpers.object.isEmpty(value)`
+- New system health checks to detect unintentionally exposed parts of your installation (git repo, content folder, site folder, kirby folder)
+
+----
+
+Enhancements:
+
+- We use the new `k-stats` and k-table components now also for the system view [#4315](https://github.com/getkirby/kirby/pull/4315)
+- Added Kirby’s PHP and extension dependencies to `composer.json` [#4216](https://github.com/getkirby/kirby/pull/4216)
+- Upgrade to Vite 2.9.8 [#4289](https://github.com/getkirby/kirby/pull/4289)
+- `k-collection` supports empty state via `empty` props (passing text and icon keys) [#4247](https://github.com/getkirby/kirby/pull/4247)
+
+#### Helpers
+
+Helpers can be deactivated by setting a global constant named `KIRBY_HELPER_*`, e.g. `KIRBY_HELPER_DUMP` to `false` [#4018](https://github.com/getkirby/kirby/pull/4018)
+
+In some cases, our global helper functions would collide with other tools' global functions as they would use the same name, e.g. `dump()`. If you are affected by this problem, you can now set the matching constant, e.g. `KIRBY_HELPER_DUMP`, to `false` and Kirby will not register its global helper.
+
+To ensure that Kirby still functions properly, we moved all functionality from the helper functions to class methods (and the global helper functions are only aliases now). We recommend plugin developers to also start using these class methods to ensure that your code always uses Kirby's core helpers:
+
+- New `Cms\App::csrf()` method with the functionality of the `csrf()` helper
+- New `Cms\App::image()` method with the functionality of the `image()` helper
+- New `Cms\Helpers::deprecated()` method with the functionality of the `deprecated()` helper
+- New `Cms\Helpers::size()` method with the functionality of the `size()` helper
+- New `Cms\Helpers::dump()` method with the functionality of the `dump()` helper
+- New `Cms\Html::css()` method with the functionality of the `css()` helper
+- New `Cms\Html::js()` method with the functionality of the `js()` helper
+- New `Cms\Html::svg()` method with the functionality of the `svg()` helper
+- New `Filesystem\F::loadClasses()` method with the functionality of the `load()` helper
+- New `Http\Router::execute()` method with the functionality of the `router()` helper
+- New `Http\Response::go()` method with the functionality of the `go()` helper[https://kirby.nolt.io/369](https://kirby.nolt.io/369)
+- New `Toolkit\Date::roundedTimestamp()` method with the functionality of the `timestamp()` helper
+- New `Toolkit\Str::esc()` method with the functionality of the `esc()` helper
+- New `Toolkit\Str::uuid()` method with the functionality of the `uuid()` helper
+- New `Toolkit\V::invalid()` method with the functionality of the `invalid()` helper
+- Extended `Cms\App::kirbytag()` method with the functionality of the `kirbytag()` helper. Allows to pass an array as first parameter.
+- Extended `Cms\App::snippet()` method with the functionality of the `snippet()` helper.
+- Extended `Toolkit\Html::attr()` method with the functionality of the `attr()` helper. Allows to pass `$before` and `$after` string.
+
+----
+
+Fixes:
+
+- `k-empty` now actually supports its `text` prop
+- Improve structure field columns on mobile
+- [Structure field with custom column widths breaks on mobile #3638](https://github.com/getkirby/kirby/issues/3638)
+- Structure field sticky header insider drawers
+- [Structure field: several problems #4242](https://github.com/getkirby/kirby/issues/4242)
+- Wrong draggable ghost element for structure field rows
+- [Structure field: several problems #4242](https://github.com/getkirby/kirby/issues/4242)
+- Preview image from other page was not shown when the page is a child of site and status `published` was queried [#4297](https://github.com/getkirby/kirby/issues/4297)
+- Fixed return type hints to include `null`
+ as possible return value for `Cms\Pagination::firstPageUrl()`
+ and `Cms\Pagination::lastPageUrl()` [#4314](https://github.com/getkirby/kirby/pull/4314)
+- Uploading multiple files now adds correct sorting numbers [#4317](https://github.com/getkirby/kirby/pull/4317)
+- Better responsiveness for Panel section headers [#4316](https://github.com/getkirby/kirby/pull/4316)
+- Upgraded JS dependencies [#4329](https://github.com/getkirby/kirby/pull/4329)
+- Fixed a bug where field content was copied to secondary languages even though `translate: false` was set [#2577](https://github.com/getkirby/kirby/issues/2577)
+- Editing title before translation file has been created causes untranslatable fields to be copied to translation file [#2789](https://github.com/getkirby/kirby/issues/2789)
+- Fixed a bug where fields with uppercase field names in virtual pages could not be searched [#4142](https://github.com/getkirby/kirby/issues/4142)
+
+----
+
+Breaking:
+
+- `Http\Router::$beforeEach` and `Http\Router::$afterEach` aren't static anymore. Pass them in an array as second argument to the constructor instead. [#4260](https://github.com/getkirby/kirby/pull/4260)
+- Custom auth type classes in the `Kirby\Http\Request\Auth\` namespace now need to be registered in the `Kirby\Http\Request::$authTypes` array. We also recommend to move the classes to your own namespace to avoid interference with core classes. [#4264](https://github.com/getkirby/kirby/pull/4264)
+- If you install Kirby using Composer, you may run into errors if your command line installation of PHP doesn’t have the extensions installed that Kirby requires. If you are sure that your web server fulfills the requirements, you can use Composer’s `--ignore-platform-reqs` or `--ignore-platform-req=ext-*` flags. [#4216](https://github.com/getkirby/kirby/pull/4216)
+- `k-block-type-table` and `k-structure-field` have been largely refactored. If you (or a plugin) extends these, stuff might break.
+- `k-pages-section` and `k-files-section` have been modified extensively [#4247](https://github.com/getkirby/kirby/pull/4247)
+- `Toolkit\Html::attr([], null)` now consistently returns `null` instead of an empty string. [#4018](https://github.com/getkirby/kirby/pull/4018)
+- Field names of virtual pages' content are now converted to lowercase. If your virtual page has two fields that only differ in capitalization, only the last defined one will be available.
+
+----
+
+Refactoring:
+
+- Improved internal usage of router callbacks [#4260](https://github.com/getkirby/kirby/pull/4260)
+- Structure field uses `k-table`
+- New internal components `k-structure-form`
+- Table block preview uses `k-table`
+- New internal `k-models-section` [#4247](https://github.com/getkirby/kirby/pull/4247)
+- Refactor `k-pages-section` and `k-files-section` to use (extend) `k-models-section` [#4247](https://github.com/getkirby/kirby/pull/4247)
+- The Kirby core no longer uses Kirby's helper functions internally but calls the underlying methods directly. [#4018](https://github.com/getkirby/kirby/pull/4018)
+- Content field names are now always handled case-insensitively.
+
+----
+
+Deprecated:
+
+- The `dump` component was deprecated and superseded by the new feature to replace helpers (`KIRBY_HELPER_DUMP`constant). The component will be removed in Kirby 3.8.0. [#4018](https://github.com/getkirby/kirby/pull/4018)
