@@ -2,7 +2,7 @@ Title: Fields
 
 ----
 
-Intro: No matter if you use presets or create your own layouts, form fields are an essential part of the configuration and have very powerful options.
+Intro: Form fields are an essential part of the configuration and have very powerful options.
 
 ----
 
