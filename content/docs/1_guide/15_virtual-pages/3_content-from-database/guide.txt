@@ -126,7 +126,7 @@ title: Comments
 
 sections:
   comments:
-    headline: Comments
+    label: Comments
     type: pages
     info: "{{ page.user }}"
     template: comment
@@ -248,7 +248,7 @@ fields:
     label: Status
     type: text
     disabled: true
-```    
+```
 
 ### Extended `comments.php` model
 
@@ -261,7 +261,7 @@ class CommentsPage extends Kirby\Cms\Page
         $comments = [];
 
         foreach (Db::select('comments') as $comment) {
-                        
+
             $comments[] = [
                 'slug'     => $comment->slug(),
                 'num'      => $comment->status() === 'listed' ? 0 : null,
@@ -303,12 +303,12 @@ class CommentPage extends Kirby\Cms\Page
 
 
         $data['slug'] = $slug;
-        
+
         if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
             if (Db::update('comments', $data, ['slug' => $this->slug()])) {
                 return $this;
             };
-        } 
+        }
         return $this;
     }
 
@@ -366,12 +366,12 @@ class CommentPage extends Kirby\Cms\Page
     public function changeTitle(string $title, string $languageCode = null)
     {
         $data['title'] = $title;
-        
+
         if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
             if (Db::update('comments', $data, ['slug' => $this->slug()])) {
                 return $this;
             };
-        } 
+        }
         return $this;
     }
 

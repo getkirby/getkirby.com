@@ -48,7 +48,7 @@ title: Gallery
 
 sections:
   files:
-    headline: Gallery
+    label: Gallery
     type: files
     layout: cards
     size: medium
@@ -434,7 +434,7 @@ title: Gallery
 
 sections:
   files:
-    headline: Gallery images
+    label: Gallery images
     type: files
     layout: cards
     size: medium

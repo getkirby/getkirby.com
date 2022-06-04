@@ -24,7 +24,7 @@ options:
   url: false
   status: false
   delete: false
-```  
+```
 
 ### Reusable layout
 
@@ -38,11 +38,11 @@ tabs:
     label: Team
     preset: pages
     drafts:
-      headline: New Team Members
+      label: New Team Members
       info: "{{ page.position }}"
       template: team-member
     listed:
-      headline: Team
+      label: Team
       layout: cards
       info: "{{ page.position }}"
       template: team-member
@@ -101,13 +101,13 @@ fields:
 sidebar:
   image:
     extends: sections/image
-    headline: Team Member
+    label: Team Member
     min: 1
     max: 1
     image:
       ratio: 1/1
       cover: true
-```      
+```
 
 ### Reusable section blueprint
 
@@ -115,7 +115,7 @@ In the sidebar image section of the team member page, we extend the image sectio
 
 ```yaml "/site/blueprints/sections/image.yml"
 type: files
-headline: Product image
+label: Product image
 max: 1
 layout: cards
 info: "{{ file.dimensions }}"

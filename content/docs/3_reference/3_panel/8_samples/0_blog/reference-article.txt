@@ -21,20 +21,20 @@ columns:
     sections:
       drafts:
         extends: sections/articles
-        headline: Drafts
+        label: Drafts
         status: draft
 
       unlisted:
         extends: sections/articles
-        headline: In Review
+        label: In Review
         status: unlisted
-  
+
   right:
     width: 1/2
     sections:
       listed:
         extends: sections/articles
-        headline: Published
+        label: Published
         status: listed
 ```
 
@@ -42,7 +42,7 @@ columns:
 
 ```yaml "/site/blueprints/sections/articles.yml"
 type: pages
-headline: Articles
+label: Articles
 info: "{{ page.date.toDate('d.m.Y') }}"
 template: article
 empty: No articles yet

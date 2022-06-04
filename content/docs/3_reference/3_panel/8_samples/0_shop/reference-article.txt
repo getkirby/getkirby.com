@@ -24,11 +24,11 @@ options:
 
 drafts:
   extends: sections/products
-  headline: Unpublished Products
+  label: Unpublished Products
 
 listed:
   extends: sections/products
-  headline: Published Products
+  label: Published Products
   layout: cards
 ```
 
@@ -36,7 +36,7 @@ listed:
 
 ```yaml "/site/blueprints/sections/products.yml"
 type: pages
-headline: Products
+label: Products
 parent: site.find("shop")
 template: product
 info: "€ {{ page.price }} / {{ page.design }}"
@@ -102,7 +102,7 @@ sidebar:
 
 ```yaml "/site/blueprints/sections/image.yml"
 type: files
-headline: Product Image
+label: Product Image
 max: 1
 layout: cards
 info: "{{ file.dimensions }}"

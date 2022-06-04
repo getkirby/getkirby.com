@@ -25,7 +25,7 @@ preset: pages
 
 (image: pages-empty.png)
 
-By default, this adds two sections of type `pages` to your form: A drafts section (default headline "Drafts") and a section of listed pages (default headline "Published").
+By default, this adds two sections of type `pages` to your form: A drafts section (default label "Drafts") and a section of listed pages (default label "Published").
 
 (image: pages-filled.png)
 
@@ -41,13 +41,13 @@ options:
   delete: false
 drafts:
   extends: sections/articles
-  headline: Unpublished articles
+  label: Unpublished articles
 unlisted:
   extends: sections/articles
-  headline: Articles in review
+  label: Articles in review
 listed:
   extends: sections/articles
-  headline: Published articles
+  label: Published articles
 ```
 
 (image: pages-blog.png)

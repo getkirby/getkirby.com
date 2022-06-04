@@ -66,7 +66,7 @@ You can store fields, sections, tabs and entire blueprint layouts in separate fi
 
 ## Translating blueprints
 
-For editors from various language backgrounds, you can translate blueprint titles, form field labels, section headlines, help text, options, and more.
+For editors from various language backgrounds, you can translate blueprint titles, form field labels, section labels, help text, options, and more.
 
 (link: docs/guide/blueprints/translations text: Learn more about translating blueprints…)
 

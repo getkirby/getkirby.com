@@ -48,15 +48,15 @@ Kirby::plugin('getkirby/linksection', [
 Note that while we could put the props array we now outsource to `links.php` into our `index.php`, the purpose here is to get an idea how we can structure our files in more complex plugins.
 </info>
 
-Inside `links.php`, we set the section's properties. We keep it simple and only set a headline, a layout and a links property. These are the properties we can later define in the blueprint for the section.
+Inside `links.php`, we set the section's properties. We keep it simple and only set a label, a layout and a links property. These are the properties we can later define in the blueprint for the section.
 
 ```php "/site/plugins/linksection/sections/links.php"
 <?php
 
 return [
     'props' => [
-        'headline' => function ($headline = 'Links') {
-            return $headline;
+        'label' => function ($label = 'Links') {
+            return $label;
         },
         'layout' => function ($layout = 'list') {
             return $layout;
@@ -121,7 +121,7 @@ Title: Site
   sections:
     links:
       type: links
-      headline: Getting started
+      label: Getting started
 ```
 
 If we now open the Panel start page, we will not see anything yet in the browser. However, on inspecting the source code, there will be an empty `div` tag with a class of `k-section k-section-name-links`. Hurray!
@@ -135,7 +135,7 @@ Back to `Links.vue`. We now define the same properties that we already defined i
 export default {
   data() {
     return {
-      headline: null,
+      label: null,
       layout: null,
       links: []
     }
@@ -150,7 +150,7 @@ As a next step, we finalize our template, so it can later display the data:
 <template>
   <section class="k-links-section">
     <header class="k-section-header">
-      <h2 class="k-headline">{{ headline }}</h2>
+      <h2 class="k-headline">{{ label }}</h2>
     </header>
     <k-collection
       :items="links"
@@ -173,7 +173,7 @@ We can now quickly add some placeholder data so that we finally get something to
 export default {
   data() {
     return {
-      headline: "Links",
+      label: "Links",
       layout: "list",
       links: [
         {
@@ -206,7 +206,7 @@ When we get a response, we assign the values to our properties.
 export default {
   data() {
     return {
-      headline: "Links",
+      label: "Links",
       layout: "list",
       links: [
         {
@@ -224,9 +224,9 @@ export default {
   },
   created() {
     this.load().then(response => {
-      this.headline = response.headline;
-      this.layout   = response.layout;
-      this.links    = response.links;
+      this.label  = response.label;
+      this.layout = response.layout;
+      this.links  = response.links;
     });
   }
 };
@@ -240,16 +240,16 @@ Once our props are correctly loaded from the backend, we can remove our hard-cod
 export default {
   data() {
     return {
-      headline: "",
+      label: "",
       layout: "list",
       links: []
     }
   },
   created() {
     this.load().then(response => {
-      this.headline = response.headline;
-      this.layout   = response.layout;
-      this.links    = response.links;
+      this.label  = response.label;
+      this.layout = response.layout;
+      this.links  = response.links;
     });
   }
 };
@@ -267,7 +267,7 @@ Finally, let's add the data we want to show in the section to the section defini
 sections:
   links:
     type: links
-    headline: Getting started
+    label: Getting started
     layout: cards
     links:
       -

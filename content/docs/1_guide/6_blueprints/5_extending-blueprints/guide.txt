@@ -123,7 +123,7 @@ Let's look at an example for a section of `type: pages`. Suppose you want to hav
 
 type: pages
 parent: site.find("blog")
-headline: Blog
+label: Blog
 layout: list
 info: "{{ page.date.toDate('d.m.Y') }}"
 ```
@@ -135,17 +135,17 @@ In your `blog.yml` blueprint, you can now create different pages sections based 
 sections:
   drafts:
     extends: sections/articles
-    headline: Unpublished articles
+    label: Unpublished articles
     status: draft
 
   unlisted:
     extends: sections/articles
-    headline: Articles in review
+    label: Articles in review
     status: unlisted
 
   published:
     extends: sections/articles
-    headline: Published articles
+    label: Published articles
     status: listed
 ```
 
@@ -155,7 +155,7 @@ In the same way, you can create a files section:
 
 ```yaml "/site/blueprints/sections/image.yml"
 type: files
-headline: Cover
+label: Cover
 max: 1
 layout: cards
 info: "{{ file.dimensions }}"
