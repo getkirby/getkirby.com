@@ -21,7 +21,7 @@ title: Project
 
 sections:
   gallery:
-    headline: Gallery
+    label: Gallery
     type: files
     template: gallery
 ```
@@ -42,7 +42,7 @@ These shortcuts can be extended with other section properties as needed, for exa
 sections:
 
   files:
-    headline: My Files
+    label: My Files
     template: cover
 ```
 Keep in mind that the same section name can only be used once per blueprint.
@@ -54,19 +54,19 @@ The files section has multiple options to control what kind of files should be d
 
 (section-options: files)
 
-## Headline
+## Label
 
-The headline will be displayed above the files section. You can pass a simple headline as a string or you can provide translations for multiple languages, if you have an international editing team.
+The label will be displayed above the files section. You can pass a simple headline as a string or you can provide translations for multiple languages, if you have an international editing team.
 
 ### Single language
 
 ```yaml
-headline: Gallery
+label: Gallery
 ```
 
 ### Multiple languages
 ```yaml
-headline:
+label:
   en: Gallery
   de: Galerie
   es: Galería
@@ -74,10 +74,10 @@ headline:
 
 ### Placeholders
 
-You can inject information from the current page into the headline with template placeholders using our (link: docs/guide/blueprints/query-language text: query language).
+You can inject information from the current page into the label with template placeholders using our (link: docs/guide/blueprints/query-language text: query language).
 
 ```yaml
-headline: "{{ page.title }} Gallery"
+label: "{{ page.title }} Gallery"
 ```
 
 ## Layout

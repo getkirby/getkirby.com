@@ -78,12 +78,12 @@ tabs:
           # a list of subpages
           pages:
             type: pages
-            headline: Subpages
+            label: Subpages
 
           # a list of files
           files:
             type: files
-            headline: Files
+            label: Files
 
   # seo tab
   seo:

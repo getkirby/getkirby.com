@@ -35,12 +35,12 @@ This basic blueprint can be extended in many ways.
 
 ## Options
 
-### Headline
+### Label
 
 ```yaml
 title: Gallery section
 preset: files
-headline: Image gallery
+label: Image gallery
 ```
 
 ### Template

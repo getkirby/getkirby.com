@@ -105,12 +105,12 @@ columns:
       # a list of subpages
       pages:
         type: pages
-        headline: Subpages
+        label: Subpages
 
       # a list of files
       files:
         type: files
-        headline: Files
+        label: Files
 ```
 
 ### Result
@@ -181,11 +181,11 @@ title: My blueprint
 sections:
   drafts:
     type: pages
-    headline: Drafts
+    label: Drafts
     status: draft
   published:
     type: pages
-    headline: Published pages
+    label: Published pages
     status: listed
 ```
 

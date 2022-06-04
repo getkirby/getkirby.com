@@ -21,7 +21,7 @@ icon: 📔
 
 sections:
   parts:
-    headline: Parts
+    label: Parts
     type: pages
     status: all
     info: "{{ page.intendedTemplate }}"

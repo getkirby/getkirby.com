@@ -72,7 +72,7 @@ Another way to use the language is to create custom information for page or file
 ```yaml
 # pages section
 published:
-  headline: Published Pages
+  label: Published Pages
   type: pages
   info: "Year: {{ page.year }}"
 ```
@@ -108,7 +108,7 @@ Check out the (link: docs/reference/panel/fields text: docs for each of these fi
 sections:
   articles:
     type: pages
-    headline: Blog Articles
+    label: Blog Articles
     parent: site.find("blog")
 ```
 

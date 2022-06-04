@@ -22,13 +22,13 @@ title: Blog
 sections:
 
   drafts:
-    headline: Drafts
+    label: Drafts
     type: pages
     status: draft
     templates: article
 
   published:
-    headline: Published Articles
+    label: Published Articles
     type: pages
     status: listed
     templates: article
@@ -58,7 +58,7 @@ These shortcuts can be extended with other section properties as needed, for exa
 sections:
 
   pages:
-    headline: Main Pages
+    label: Main Pages
     status: all
 ```
 Keep in mind that the same section name can only be used once per blueprint.
@@ -77,7 +77,7 @@ The headline will be displayed above the pages section. You can pass a simple he
 ### Single language
 
 ```yaml
-headline: Articles
+label: Articles
 ```
 
 ### Multiple languages
@@ -93,7 +93,7 @@ headline:
 You can inject information from the current page into the headline with template placeholders using our (link: docs/guide/blueprints/query-language text: query language).
 
 ```yaml
-headline: "Articles for {{ page.title }}"
+label: "Articles for {{ page.title }}"
 ```
 
 ## Layout

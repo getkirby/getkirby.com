@@ -22,7 +22,7 @@ title: Gallery
 sections:
   info:
     type: info
-    headline: Info
+    label: Info
     text: |
       Please double-check the licenses and sources
       of all images before you upload them to the gallery.
@@ -59,14 +59,14 @@ The info section behaves pretty much like the (link: docs/reference/panel/fields
 
 (section-options: info)
 
-## Headline
+## Label
 
-The headline will be displayed above the info section. You can pass a simple headline as a string or you can provide translations for multiple languages, if you have an international editing team.
+The label will be displayed above the info section. You can pass a simple headline as a string or you can provide translations for multiple languages, if you have an international editing team.
 
 ### Single language
 
 ```yaml
-headline: This is some very important information
+label: This is some very important information
 ```
 
 ### Multiple languages
@@ -82,7 +82,7 @@ headline:
 You can inject information from the current page into the headline with template placeholders using our (link: docs/guide/blueprints/query-language text: query language).
 
 ```yaml
-headline: "{{ page.title }} Information"
+label: "{{ page.title }} Information"
 ```
 
 ## Text
@@ -132,7 +132,7 @@ title: Gallery
 sections:
   info:
     type: info
-    headline: Info
+    label: Info
     theme: info
     text: |
       Please double-check the licenses and sources
@@ -149,7 +149,7 @@ title: Gallery
 sections:
   info:
     type: info
-    headline: Attention
+    label: Attention
     theme: negative
     text: |
       Please double-check the licenses and sources
@@ -166,7 +166,7 @@ title: Gallery
 sections:
   info:
     type: info
-    headline: Wohooww
+    label: Wohooww
     theme: positive
     text: |
       Just upload whatever you want. We get sued anyway.
@@ -180,7 +180,7 @@ You can disable the infobox theme entirely to show neutral text.
 fields:
   info:
     type: info
-    headline: Info
+    label: Info
     theme: none
     text: |
       This is a very neutral message

@@ -24,22 +24,22 @@ options:
 
 drafts:
   extends: sections/events
-  headline: Unpublished events
+  label: Unpublished events
 
 unlisted:
   extends: sections/events
-  headline: Unlisted events
+  label: Unlisted events
 
 listed:
   extends: sections/events
-  headline: Published events
+  label: Published events
 ```
 
 ### Predefined section for reusage
 
 ```yaml "/site/blueprints/sections/events.yml"
 type: pages
-headline: Events
+label: Events
 parent: site.find("events")
 sortBy: from desc
 template: event
@@ -100,7 +100,7 @@ Since these example events link to external events, we only show an events overv
 
   <h1><?= $page->title()->html() ?></h1>
 
-  <?php 
+  <?php
   $events = $page->children()->listed();
   if ($events->count() > 0): ?>
   <ul>

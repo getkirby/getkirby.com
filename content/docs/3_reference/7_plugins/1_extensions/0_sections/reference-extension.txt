@@ -44,7 +44,7 @@ The array key `modified` sets the section type that can later be used in your bl
 
 ### Section properties
 
-Sections can have many options in your blueprint, such as a headline or the layout option for pages and files.
+Sections can have many options in your blueprint, such as a label or the layout option for pages and files.
 
 Those property values from the blueprint will be sent to the section via the REST API and the Vue component can work with them to display the section accordingly.
 
@@ -55,8 +55,8 @@ Kirby::plugin('yourname/modified', [
     'sections' => [
         'modified' => [
             'props' => [
-                'headline' => function ($headline) {
-                    return $headline;
+                'label' => function ($label) {
+                    return $label;
                 }
             ]
         ]
@@ -71,12 +71,12 @@ The property definition above instructs the REST API to process the value from t
 ```yaml "Blueprint"
 modified:
   type: modified
-  headline: Last updates
+  label: Last updates
 ```
 
 ```js "API response"
 modified: {
-  headline: "Last updates"
+  label: "Last updates"
 }
 ```
 
@@ -84,8 +84,8 @@ modified: {
 
 ```php
 'props' => [
-    'headline' => function ($headline) {
-        return $headline;
+    'label' => function ($label) {
+        return $label;
     }
 ]
 ```
@@ -93,8 +93,8 @@ modified: {
 
 ```php
 'props' => [
-    'headline' => function ($headline = null) {
-        return $headline;
+    'label' => function ($label = null) {
+        return $label;
     }
 ]
 ```
@@ -102,8 +102,8 @@ modified: {
 
 ```php
 'props' => [
-    'headline' => function ($headline = 'Last modified') {
-        return $headline;
+    'label' => function ($label = 'Last modified') {
+        return $label;
     }
 ]
 ```
@@ -112,8 +112,8 @@ modified: {
 
 ```php
 'props' => [
-    'headline' => function (string $headline) {
-        return $headline;
+    'label' => function (string $label) {
+        return $label;
     }
 ]
 ```
@@ -122,8 +122,8 @@ modified: {
 
 ```php
 'props' => [
-    'headline' => function ($headline = null) {
-        return I18n::translate($headline);
+    'label' => function ($label = null) {
+        return I18n::translate($label);
     }
 ]
 ```
@@ -132,8 +132,8 @@ modified: {
 
 ```php
 'props' => [
-    'headline' => function (string $headline) {
-        return 'Section: ' . $headline;
+    'label' => function (string $label) {
+        return 'Section: ' . $label;
     }
 ]
 ```
@@ -147,8 +147,8 @@ Kirby::plugin('yourname/modified', [
     'sections' => [
         'modified' => [
             'props' => [
-                'headline' => function (string $headline) {
-                    return $headline;
+                'label' => function (string $label) {
+                    return $label;
                 },
             ],
             'computed' => [
@@ -164,12 +164,12 @@ Kirby::plugin('yourname/modified', [
 ```yaml "Blueprint"
 modified:
     type: modified
-    headline: Last update
+    label: Last update
 ```
 
 ```js "API Response"
 modified: {
-    headline: "Last update",
+    label: "Last update",
     text: "The page has been modified at 12.12.2012 22:33:00",
 }
 ```
@@ -209,14 +209,14 @@ panel.plugin('yourname/modified', {
     modified: {
       data: function () {
         return {
-          headline: null,
+          label: null,
           text: null
         }
       },
       created: function() {
         this.load().then(response => {
-          this.headline = response.headline;
-          this.text     = response.text;
+          this.label = response.label;
+          this.text  = response.text;
         });
       }
     }
@@ -236,19 +236,19 @@ panel.plugin('yourname/modified', {
     modified: {
       data: function () {
         return {
-          headline: null,
+          label: null,
           text: null
         }
       },
       created: function() {
         this.load().then(response => {
-          this.headline = response.headline;
-          this.text     = response.text;
+          this.label = response.label;
+          this.text  = response.text;
         });
       },
       template: `
         <section class="k-modified-section">
-          <k-headline>{{ headline }}</k-headline>
+          <k-label>{{ label }}</k-label>
           <k-text>{{ text }}</k-text>
         </section>
       `

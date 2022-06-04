@@ -18,11 +18,11 @@ icon: 🖼
 
 drafts:
   extends: sections/projects
-  headline: Project Drafts
+  label: Project Drafts
 
 listed:
   extends: sections/projects
-  headline: Published Projects
+  label: Published Projects
   layout: cards
 ```
 
@@ -30,7 +30,7 @@ listed:
 
 ```yaml "/site/blueprints/sections/projects.yml"
 type: pages
-headline: Projects
+label: Projects
 parent: kirby.page('projects')
 layout: cards
 template: project
@@ -82,7 +82,7 @@ fields:
 sidebar:
   cover:
     type: files
-    headline: Cover
+    label: Cover
     layout: cards
     info: "{{ file.dimensions }}"
     template: cover
@@ -90,7 +90,7 @@ sidebar:
     max: 3
   gallery:
     type: files
-    headline: Gallery
+    label: Gallery
     template: image
 ```
 

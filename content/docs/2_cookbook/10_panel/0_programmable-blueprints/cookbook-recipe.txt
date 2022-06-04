@@ -77,7 +77,7 @@ Kirby::plugin('cookbook/programmable-blueprints', [
                 return Data::read(__DIR__ . '/blueprints/site.editor.yml');
             }
         },
-    ]  
+    ]
 ]);
 ```
 We use `Data::read()` to read the `yaml` files into an array.
@@ -97,7 +97,7 @@ tabs:
         sections:
           albums:
             type: pages
-            headline: Photography
+            label: Photography
             parent: kirby.page("photography")
             size: small
             info: "{{ page.images.count }} image(s)"
@@ -112,7 +112,7 @@ tabs:
         sections:
           notes:
             type: pages
-            headline: Notes
+            label: Notes
             parent: kirby.page("notes")
             info: "{{ page.published }}"
             template: note
@@ -160,7 +160,7 @@ columns:
     sections:
       albums:
         type: pages
-        headline: Photography
+        label: Photography
         parent: kirby.page("photography")
         size: small
         info: "{{ page.images.count }} image(s)"
@@ -173,7 +173,7 @@ columns:
     sections:
       notes:
         type: pages
-        headline: Notes
+        label: Notes
         parent: kirby.page("notes")
         info: "{{ page.published }}"
         template: note
@@ -226,10 +226,10 @@ if ($page = page('notes')) {
     // create a new section array for each unique tag plucked from the children pages
     foreach ($page->children()->pluck('tags', ',', true) as $tag) {
         $sections['section_' . $tag] = [
-            'type'     => 'pagesdisplay',
-            'headline' => 'Pages with tag ' . $tag,
+            'type'  => 'pagesdisplay',
+            'label' => 'Pages with tag ' . $tag,
             // note the required quotes around the `$tag` variable
-            'query'    => "page.children.filterBy('tags', '". $tag . "', ',')", 
+            'query' => "page.children.filterBy('tags', '". $tag . "', ',')",
         ];
     }
 }
@@ -247,7 +247,7 @@ $yaml = [
             'sections' => [
               'drafts' => [
                 'type'     => 'pages',
-                'headline' => 'Drafts',
+                'label' => 'Drafts',
                 'status'   => 'drafts',
                 ]
             ],
@@ -453,7 +453,7 @@ $blueprints = array_filter($blueprints, function($blueprint) {
 return [
     'type'      => 'pages',
     'parent'    => "kirby.page('notes')",
-    'headline'  => 'Notepages',
+    'label'     => 'Notepages',
     'info'      => '{{ page.files.count }}',
     'templates' => $blueprints,
 ];
@@ -495,7 +495,7 @@ And load this array for example in the `notes.php` section:
 return [
     'type'      => 'pages',
     'parent'    => "kirby.page('notes')",
-    'headline'  => 'Notepages',
+    'label'     => 'Notepages',
     'info'      => '{{ page.files.count }}',
     'templates' => include __DIR__ . '/../options/blueprints.php',
 ];
@@ -591,7 +591,7 @@ $basicBlueprint['sections']['basicMeta']['fields'] = array_merge($fields, [
         'type' => 'text',
     ]
 ]);
- 
+
 return $basic_blueprint;
 ```
 
