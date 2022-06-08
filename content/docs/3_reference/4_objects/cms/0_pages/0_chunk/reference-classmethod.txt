@@ -1,0 +1,20 @@
+Text:
+
+## Example
+
+E.g. create chunks of three items per chunk:
+
+```php
+<?php
+$chunks = page('events')->children()->listen()->chunk(3);
+
+foreach($chunks as $chunk): ?>
+    <div class="wrapper">
+        <?php foreach($chunk as $event): ?>
+            <article>
+                <h2><?= $event->title()->html() ?></h2>
+            </article>
+        <?php endforeach ?>
+    </div>
+<?php endforeach ?>
+```
