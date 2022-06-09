@@ -2,7 +2,7 @@ Title: Files
 
 ----
 
-Description: Every page in your Kirby installation has its own set of files. Learn how Kirby handles these and how to add meta data to files. 
+Description: Every page in your Kirby installation has its own set of files. Learn how Kirby handles these and how to add meta data to files.
 
 ----
 
@@ -204,3 +204,15 @@ A meta data blueprint can contain different options to define what sort of files
 ### Fields
 
 Finally, a meta data blueprint can have a set of fields. You are free to define any number of fields and the same (link: docs/reference/panel/fields text: field types) as in page blueprints.
+
+## Thumbnails & responsive images
+
+With Kirby's thumb engine, you can resize, crop and otherwise manipulate images. Here are the links to relevant resources:
+
+- (link: docs/guide/templates/resize-images-on-the-fly text: Resize images on the fly)
+- (link: docs/cookbook/performance/responsive-images text: Responsive images)
+- (link: docs/reference/system/options/thumbs text: Thumb options)
+- (link: docs/reference/plugins/components/thumb text: Custom thumb components)
+
+
+

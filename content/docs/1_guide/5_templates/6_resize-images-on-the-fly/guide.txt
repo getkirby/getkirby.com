@@ -144,6 +144,7 @@ You can use Kirby's [`$image->srcset()`](/docs/reference/objects/file/srcset) me
 <img srcset="<?= $image->srcset([300, 800, 1024]) ?>">
 ```
 
+Check out our cookbook recipe (link: docs/cookbook/performance/responsive-images text: Responsive images) to learn more.
 
 ## Image formats
 <since v="3.6.0">
