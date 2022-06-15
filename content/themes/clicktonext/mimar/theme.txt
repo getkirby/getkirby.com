@@ -10,4 +10,4 @@ Link: https://clicktonext.com/themes/mimar
 
 ----
 
-Prio:
+Prio: 10

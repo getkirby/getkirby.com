@@ -10,4 +10,4 @@ Link: https://clicktonext.com/themes/grafiker
 
 ----
 
-Prio: 7
+Prio: 70

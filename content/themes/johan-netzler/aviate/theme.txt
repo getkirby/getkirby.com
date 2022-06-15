@@ -10,4 +10,4 @@ Link: https://themesforkirby.com/themes/aviate
 
 ----
 
-Prio: 8
+Prio: 80

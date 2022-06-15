@@ -10,4 +10,4 @@ Link: https://themesforkirby.com/themes/vendor
 
 ----
 
-Prio: 4
+Prio: 40

@@ -10,4 +10,4 @@ Link: https://themesforkirby.com/themes/starter
 
 ----
 
-Prio: 2
+Prio: 20

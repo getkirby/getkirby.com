@@ -10,4 +10,4 @@ Link: https://themesforkirby.com/themes/landing
 
 ----
 
-Prio: 9
+Prio: 100

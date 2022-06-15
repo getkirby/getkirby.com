@@ -10,4 +10,4 @@ Link: https://clicktonext.com/themes/notlar
 
 ----
 
-Prio: 5
+Prio: 90
