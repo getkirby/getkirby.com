@@ -9,12 +9,12 @@ class ReferenceKirbytagPage extends ReflectionPage
 
     public function attributes(): array
     {
-        return KirbyTag::$types[$this->name()]['attr'];
+        return $this->tag()['attr'];
     }
 
     public function exists(): bool
     {
-        return isset(KirbyTag::$types[$this->name()]) === true;
+        return $this->tag() !== null;
     }
 
 
@@ -51,13 +51,23 @@ class ReferenceKirbytagPage extends ReflectionPage
         return parent::onGitHub('config/tags.php');
     }
 
+    protected function tag()
+    {
+        return static::tags()[$this->name()] ?? null;
+    }
+
+    protected static function tags(): array
+    {
+        return static::$kirby->core()->kirbyTags();
+    }
+
     public function title(): Field
     {
         return new Field($this, 'title', '&#40;' . $this->name() . ': …&#41;');
     }
-    
+
     protected function _reflection()
     {
-        return new ReflectionFunction(KirbyTag::$types[$this->name()]['html']);
+        return new ReflectionFunction($this->tag()['html']);
     }
 }
