@@ -25,3 +25,39 @@ stats:
       ...
 ```
 
+----
+
+Table:
+
+```yaml
+notes:
+  type: pages
+  layout: table
+  columns:
+    subheading:
+      label: Subtitle
+    date:
+      label: Date
+      type: date
+      display: DD.MM.YYYY
+    tags:
+      label: Tags
+      type: tags
+```
+
+----
+
+Icons:
+
+-  archive
+-  badge
+-  brush
+-  discord
+-  discount
+-  folder-structure
+-  github
+-  money
+-  palette
+-  pen
+-  store
+-  ticket
