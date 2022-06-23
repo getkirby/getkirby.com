@@ -8,7 +8,7 @@
 
   <div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
 
-    <figure class="bg-light rounded-xl overflow-hidden" style="--aspect-ratio: 1428/413; --span: 2">
+    <figure class="bg-light rounded-xl overflow-hidden" style="--aspect-ratio: 2633/805; --span: 2">
       <img src="<?= ($image = $page->image('table.png'))->url() ?>" loading="lazy">
     </figure>
 
