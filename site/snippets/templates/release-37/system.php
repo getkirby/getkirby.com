@@ -11,22 +11,22 @@
     </figure>
 
     <div class="p-12 bg-white rounded-xl">
-      <h3 class="text-xl font-bold">Environment</h3>
-      <div class="prose">
+      <h3 class="text-lg font-bold">Environment</h3>
+      <div class="prose text-lg">
         Get vital information about your installation at a glance: License key, version number, PHP version, server software.
       </div>
     </div>
 
     <div class="p-12 bg-white rounded-xl">
-      <h3 class="text-xl font-bold">Security</h3>
-      <div class="prose">
+      <h3 class="text-lg font-bold">Security</h3>
+      <div class="prose text-lg">
         Find potential issues and unintentionally exposed parts of your installation (Git repo, content folder, site folder, kirby folder)
       </div>
     </div>
 
     <div class="p-12 bg-white rounded-xl">
-      <h3 class="text-xl font-bold">Plugins</h3>
-      <div class="prose">
+      <h3 class="text-lg font-bold">Plugins</h3>
+      <div class="prose text-lg">
         See all installed plugins, their authors, license and current version number in our redesigned plugins table.
       </div>
     </div>
