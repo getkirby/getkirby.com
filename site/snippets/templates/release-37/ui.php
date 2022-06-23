@@ -47,7 +47,7 @@
 
     <div class="highlight bg-light rounded-xl overflow-hidden" style="--span: 9">
       <h3 class="text-lg font-bold mb-6">New file icons</h3>
-      <figure style="--aspect-ratio: 921/415">
+      <figure style="--aspect-ratio: 1968/834">
         <?= $page->image('fileicons.png') ?>
       </figure>
     </div>
