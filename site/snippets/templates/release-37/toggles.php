@@ -1,7 +1,7 @@
 <section id="toggles-field" class="mb-42">
   <?php snippet('hgroup', [
     'title'    => 'New toggles field',
-    'subtitle' => 'So many options',
+    'subtitle' => 'Stylish options you will love',
     'mb'       => 12
   ]) ?>
 
