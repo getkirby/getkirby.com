@@ -35,6 +35,7 @@ class Checkout
         $this->vendorAuthCode = $options['vendorAuthCode'] ?? null;
         $this->vendorId       = $options['vendorId'] ?? null;
         $this->volumes        = array_keys($this->discounts);
+
     }
 
     /**

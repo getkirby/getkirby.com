@@ -1,4 +1,4 @@
-<section id="table-layout" class="mb-42">
+<section id="stats" class="mb-42">
   <?php snippet('hgroup', [
     'title'    => 'New stats section',
     'subtitle' => 'Show reports on your dashboard',
@@ -12,8 +12,8 @@
     </figure>
 
     <div class="p-12 bg-white rounded-xl flex flex-column">
-      <h3 class="text-xl font-bold">Easy as 1-2-3</h3>
-      <div class="prose">
+      <h3 class="text-lg font-bold">Easy as 1-2-3</h3>
+      <div class="prose text-lg">
         Show beautiful stats for your site or shop. Revenue, transactions, Twitter likes, page impressions … it’s totally up to you. You can add as many reports to a stats section as needed. Reports can be customized with our query syntax and integrated easily into page models or site methods.
       </div>
     </div>

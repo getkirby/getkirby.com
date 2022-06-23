@@ -152,3 +152,14 @@ toggles:
       icon: text-justify
 ```
 
+----
+
+SectionSearch:
+
+```yaml
+sections:
+  pages:
+    type: pages
+    search: true
+    layout: cards
+```
