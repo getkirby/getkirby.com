@@ -7,7 +7,7 @@
 
   <div class="columns" style="--columns: 3; --gap: var(--spacing-6)">
 
-    <figure class="bg-light rounded-xl overflow-hidden" style="--aspect-ratio: 1265/1177; grid-column: span 2; grid-row: span 2">
+    <figure class="bg-light rounded-xl overflow-hidden" style="--aspect-ratio: 2657/2248; grid-column: span 2; grid-row: span 2">
       <img src="<?= ($image = $page->image('stats.png'))->url() ?>" loading="lazy">
     </figure>
 
