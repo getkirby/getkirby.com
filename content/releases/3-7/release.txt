@@ -61,3 +61,94 @@ Icons:
 -  pen
 -  store
 -  ticket
+
+----
+
+togglesWithLabels:
+
+```yaml
+toggles:
+  type: toggles
+  label: Labels
+  options:
+    # Short version with value: text
+    left: Left
+    center: Center
+    right: Right
+    justify: Justify
+```
+
+----
+
+togglesWithLabelsAndIcons:
+
+```yaml
+toggles:
+  type: toggles
+  label: Icons & Labels
+  options:
+    - value: left
+      text: Left
+      icon: text-left
+    - value: center
+      text: Center
+      icon: text-center
+    - value: right
+      text: Right
+      icon: text-right
+    - value: justify
+      text: Justify
+      icon: text-justify
+```
+
+----
+
+togglesWithIcons:
+
+```yaml
+toggles:
+  type: toggles
+  label: Icons
+  labels: false
+  options:
+    # Text will be used as title
+    # attribute for the <label>
+    - value: left
+      text: Left
+      icon: text-left
+    - value: center
+      text: Center
+      icon: text-center
+    - value: right
+      text: Right
+      icon: text-right
+    - value: justify
+      text: Justify
+      icon: text-justify
+```
+
+----
+
+togglesCompact:
+
+```yaml
+toggles:
+  type: toggles
+  label: Icons
+  labels: false
+  grow: false
+  options:
+    - value: left
+      text: Left
+      icon: text-left
+    - value: center
+      text: Center
+      icon: text-center
+    - value: right
+      text: Right
+      icon: text-right
+    - value: justify
+      text: Justify
+      icon: text-justify
+```
+
