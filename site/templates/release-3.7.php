@@ -33,6 +33,7 @@
   <?php snippet('templates/release-37/stats') ?>
   <?php snippet('templates/release-37/table') ?>
   <?php snippet('templates/release-37/system') ?>
+  <?php snippet('templates/release-37/toggles') ?>
   <?php snippet('templates/release-37/ui') ?>
 
   <?php snippet('templates/release-37/changes') ?>
