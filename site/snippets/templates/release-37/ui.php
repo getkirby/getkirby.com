@@ -27,7 +27,7 @@
     <div class="p-12 bg-white rounded-xl" style="--span: 4">
       <h3 class="text-lg font-bold">Fresh & familiar</h3>
       <div class="prose text-lg">
-        A bit more round, a bit more friendly, just a bit more cosy and yet you will feel instantly at home.
+        Slightly rounder, a bit more friendly, and somewhat more cosy: you will feel instantly at home.
       </div>
     </div>
 

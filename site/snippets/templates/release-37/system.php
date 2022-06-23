@@ -1,7 +1,7 @@
 <section id="system-view" class="mb-42">
   <?php snippet('hgroup', [
     'title'    => 'New system view',
-    'subtitle' => 'All systems go',
+    'subtitle' => 'Everything system related at a glance',
     'mb'       => 12
   ]) ?>
 
@@ -13,7 +13,7 @@
     <div class="p-12 bg-white rounded-xl">
       <h3 class="text-lg font-bold">Environment</h3>
       <div class="prose text-lg">
-        Get vital information about your installation at a glance: License key, version number, PHP version, server software.
+        Vital information about your environment: License key, version number, PHP version, server software.
       </div>
     </div>
 
@@ -27,7 +27,7 @@
     <div class="p-12 bg-white rounded-xl">
       <h3 class="text-lg font-bold">Plugins</h3>
       <div class="prose text-lg">
-        See all installed plugins, their authors, license and current version number in our redesigned plugins table.
+        View all installed plugins, their authors, license and current version number in our redesigned plugins table.
       </div>
     </div>
 
