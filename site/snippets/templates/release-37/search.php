@@ -1,7 +1,7 @@
 <section id="section-search" class="mb-42">
   <?php snippet('hgroup', [
     'title'    => 'New section search',
-    'subtitle' => 'Filter pages and files',
+    'subtitle' => 'Speedy filtering of pages and files',
     'mb'       => 12
   ]) ?>
 
@@ -9,7 +9,7 @@
 
     <div class="p-12 bg-white rounded-xl flex flex-column">
       <div class="prose text-lg">
-        The new section search offers faster access to your pages and files. Long lists of articles or downloads can be filtered instantly now.
+        Find the page or file you are looking for in an instant, no more clicking through long lists.
       </div>
     </div>
 

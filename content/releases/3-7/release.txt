@@ -170,10 +170,10 @@ Features:
 
 - Brand new statistics section
 - New search option for pages and files sections [https://kirby.nolt.io/14](https://kirby.nolt.io/14)  [#4316](https://github.com/getkirby/kirby/pull/4316)
-- New field preview in tables for tags, radio, select, multiselect, checkboxes, structures, blocks, layouts, files, pages and users fields. [#4294](https://github.com/getkirby/kirby/pull/4294) [#4195](https://github.com/getkirby/kirby/pull/4195)
+- New field previews in tables for the tags, radio, select, multiselect, checkboxes, structure, blocks, layout, files, pages and users fields. [#4294](https://github.com/getkirby/kirby/pull/4294) [#4195](https://github.com/getkirby/kirby/pull/4195)
 - `$request->auth()` now also handles Kirby's `Session` auth type automatically [#4264](https://github.com/getkirby/kirby/pull/4264)
 - The auth types for `$request->auth()` can now be extended by plugins: [#4264](https://github.com/getkirby/kirby/pull/4264)
-- New `k-table` component to allow easily for consistent tables
+- New `k-table` component to create consistent tables easily
 - Styled preview for tags in tables
 - New JS helper `$helpers.object.isEmpty(value)`
 - New system health checks to detect unintentionally exposed parts of your installation (git repo, content folder, site folder, kirby folder)
@@ -186,9 +186,9 @@ Enhancements:
 
 Helpers can now be deactivated by setting a global constant named `KIRBY_HELPER_*`, e.g. `KIRBY_HELPER_DUMP` to `false` [#4018](https://github.com/getkirby/kirby/pull/4018)
 
-In some cases, our global helper functions would collide with other tools' global functions as they would use the same name, e.g. `dump()`. If you are affected by this problem, you can now set the matching constant, e.g. `KIRBY_HELPER_DUMP`, to `false` and Kirby will not register its global helper.
+In some cases, our global helper functions will collide with other tools' global functions if they use the same name, e.g. `dump()`. If you are affected by this problem, you can now set the matching constant, e.g. `KIRBY_HELPER_DUMP`, to `false` and Kirby will not register its global helper.
 
-To ensure that Kirby still functions properly, we moved all functionality from the helper functions to class methods (and the global helper functions are only aliases now). We recommend plugin developers to also start using these class methods to ensure that your code always uses Kirby's core helpers:
+To ensure that Kirby still functions properly, we moved all functionality from the helper functions to class methods (and the global helper functions are only aliases now). We recommend that plugin developers also start using these class methods to ensure that your code always uses Kirby's core helpers:
 
 - New `Cms\App::csrf()` method with the functionality of the `csrf()` helper
 - New `Cms\App::image()` method with the functionality of the `image()` helper
@@ -216,7 +216,7 @@ To ensure that Kirby still functions properly, we moved all functionality from t
 - Methods in Kirby's core now use the global environment object instead of `$_SERVER` wherever possible
 - JSON errors in debug mode now contain the file path relative to the document root for consistency with the API that already handles it like this.
 - New `$kirby->isNativeComponent($component)` method [#4348](https://github.com/getkirby/kirby/pull/4348)
-- Kirby's response handling now automatically controls page and HTTP caching based on cookies, session and the `Authorization` request header being used by the response. If any of these are used and also contained in the request, the response is considered private. If they are used but not contained in the request, the page is only cached for visitors without these cookies/session/auth. Manual sessions are always considered private. [#3976](https://github.com/getkirby/kirby/issues/3976)
+- Kirby's response handling now automatically controls page and HTTP caching based on cookies, session and the `Authorization` request header used by the response. If any of these are used and also contained in the request, the response is considered private. If they are used but not contained in the request, the page is only cached for visitors without these cookies/session/auth. Manual sessions are always considered private. [#3976](https://github.com/getkirby/kirby/issues/3976)
 - `$pages->find()` can now find pages by their translated URI in secondary languages of multi-lang setups, even in collections without a parent (like `$page->grandChildren()`)
 
 #### Panel
@@ -237,7 +237,7 @@ Fixes:
 - Fixed a bug where field content was copied to secondary languages even though `translate: false` was set [#2577](https://github.com/getkirby/kirby/issues/2577)
 - Fixed a bug where fields with uppercase field names in virtual pages could not be searched [#4142](https://github.com/getkirby/kirby/issues/4142)
 - File permissions of all non-executable files in the Kirby repo have been set to `644`. [#4336](https://github.com/getkirby/kirby/pull/4336)
-- Editing a page title before the translation file has been created caused untranslatable fields to be copied to translation file [#2789](https://github.com/getkirby/kirby/issues/2789)
+- Editing a page title before the translation file had been created caused untranslatable fields to be copied to the translation file [#2789](https://github.com/getkirby/kirby/issues/2789)
 - `kirby->url()` no longer adds the wrong port or protocol on nginx / reverse proxy [#4311](https://github.com/getkirby/kirby/issues/4311)
 - Url overwrite config now also overwrites protocol correctly [#4234](https://github.com/getkirby/kirby/issues/4234)
 - `file::url` component no longer breaks the preview URL in the Panel [#4143](https://github.com/getkirby/kirby/issues/4143)
@@ -249,7 +249,7 @@ Fixes:
 - `k-empty` now actually supports its `text` prop
 - Improved structure field columns on mobile [#3638](https://github.com/getkirby/kirby/issues/3638)
 - Structure field sticky header inside drawers [#4242](https://github.com/getkirby/kirby/issues/4242)
-- Wrong draggable ghost element for structure field rows [#4242](https://github.com/getkirby/kirby/issues/4242)
+- Fixed wrong draggable ghost element for structure field rows [#4242](https://github.com/getkirby/kirby/issues/4242)
 - Preview image from other page was not shown when the page is a child of site and status `published` was queried [#4297](https://github.com/getkirby/kirby/issues/4297)
 - Uploading multiple files now adds correct sorting numbers [#4317](https://github.com/getkirby/kirby/pull/4317)
 - Better responsiveness for Panel section headers [#4316](https://github.com/getkirby/kirby/pull/4316)
@@ -275,8 +275,7 @@ If you install Kirby using Composer, you may run into errors if your command lin
 - `pages` helper now always only returns a `Kirby\Cms\Pages` collection or `null`, never single page object.  [#4335](https://github.com/getkirby/kirby/pull/4335)
 - Creating a `Kirby\Cms\File` object requires the `parent` property now.  [#4335](https://github.com/getkirby/kirby/pull/4335)
 - `Toolkit\Str::toBytes()` strictly only accepts a string as parameter now.  [#4335](https://github.com/getkirby/kirby/pull/4335)
-- The `$pages->children()`, `$pages->drafts()` and `$pages->index()` methods no longer set the `$pages->parent()` object as the collection items can have multiple different parents. This can change the behaviour when finding collection items in secondary
-languages and when merging collections. [#4105](https://github.com/getkirby/kirby/issues/4105)
+- The `$pages->children()`, `$pages->drafts()` and `$pages->index()` methods no longer set the `$pages->parent()` object as the collection items can have multiple different parents. This can change the behaviour when finding collection items in secondary languages and when merging collections. [#4105](https://github.com/getkirby/kirby/issues/4105)
 
 #### Removed methods
 
@@ -335,7 +334,7 @@ $env = new Environment([
 ]);
 ```
 
-I.e. if it found to be running on the test.getkirby.com host from above, https is on and the port is 9999 and the subfolder also matches, you can get all those parts now correctly via.
+I.e. if it finds to be running on the test.getkirby.com host from above, https is on and the port is 9999 and the subfolder also matches, you can get all those parts now correctly via:
 
 ```php
 $env->https();
