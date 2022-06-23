@@ -6,7 +6,7 @@
   ]) ?>
 
   <div class="columns" style="--columns: 3; --gap: var(--spacing-6)">
-    <figure class="bg-light rounded-xl overflow-hidden" style="--aspect-ratio: 1433/651; --span: 3">
+    <figure class="bg-light rounded-xl overflow-hidden" style="--aspect-ratio: 2398/1308; --span: 3">
       <img src="<?= ($image = $page->image('system.png'))->url() ?>" loading="lazy">
     </figure>
 
