@@ -9,7 +9,7 @@
 
     <div class="release-box bg-light grid items-center" style="--span: 2">
       <figure style="--aspect-ratio: 800/500">
-        <img src="<?= ($image = $page->image('toggles-labels.png'))->url() ?>" loading="lazy">
+        <img src="<?= ($image = $page->image('toggles-labels.png'))->url() ?>" loading="lazy" alt="The toggles field with four text buttons for text alignment">
       </figure>
     </div>
 
@@ -19,7 +19,7 @@
 
     <div class="release-box bg-light grid items-center" style="--span: 2">
       <figure style="--aspect-ratio: 800/500">
-        <img src="<?= ($image = $page->image('toggles-labels-icons.png'))->url() ?>" loading="lazy">
+        <img src="<?= ($image = $page->image('toggles-labels-icons.png'))->url() ?>" loading="lazy" alt="The toggles can combine text and an icon for a more visual representation">
       </figure>
     </div>
 
@@ -27,7 +27,7 @@
       <?= $page->togglesWithLabelsAndIcons()->kt() ?>
     </div>
 
-    <div class="release-box bg-light grid items-center" style="--span: 2">
+    <div class="release-box bg-light grid items-center" style="--span: 2" alt="The toggles can be just icons and have the label text as title attribute on the label in this case">
       <figure style="--aspect-ratio: 800/500">
         <img src="<?= ($image = $page->image('toggles-icons.png'))->url() ?>" loading="lazy">
       </figure>
@@ -39,7 +39,7 @@
 
     <div class="release-box bg-light grid items-center" style="--span: 2">
       <figure style="--aspect-ratio: 800/500">
-        <img src="<?= ($image = $page->image('toggles-compact.png'))->url() ?>" loading="lazy">
+        <img src="<?= ($image = $page->image('toggles-compact.png'))->url() ?>" loading="lazy" alt="The toggles can also be shown in a more compact form">
       </figure>
     </div>
 
