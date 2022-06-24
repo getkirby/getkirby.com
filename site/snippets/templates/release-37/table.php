@@ -1,3 +1,22 @@
+<style>
+.v37-table-grid {
+  display: grid;
+  grid-gap: var(--spacing-6);
+  grid-template-columns: 1fr;
+  grid-template-areas: "figure"
+                       "box1"
+                       "box2";
+}
+
+@media screen and (min-width: 45rem) {
+  .v37-table-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "figure figure"
+                        "box1 box2";
+  }
+}
+</style>
+
 <section id="table-layout" class="mb-42">
 
   <?php snippet('hgroup', [
@@ -6,21 +25,20 @@
     'mb'       => 12
   ]) ?>
 
-  <div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
+  <div class="v37-table-grid">
 
-    <figure class="bg-light rounded-xl overflow-hidden" style="--aspect-ratio: 2633/805; --span: 2">
+    <figure class="release-box bg-light" style="--aspect-ratio: 2633/805; grid-area: figure">
       <img src="<?= ($image = $page->image('table.png'))->url() ?>" loading="lazy">
     </figure>
 
-    <div class="p-12 bg-white rounded-xl">
-      <h3 class="text-xl font-bold">At a glance</h3>
+    <div class="release-text-box" style="grid-area: box1">
+      <h3>At a glance</h3>
       <div class="prose">
-       With the brand new table layout, you get a great overview of the content of your pages. Customize the columns you want to show to present exactly the data you need.
+        With the brand new table layout, you get a great overview of the content of your pages. Customize the columns you want to show to present exactly the data you need.
       </div>
     </div>
-    <div class="bg-black p-1 rounded-xl overflow-hidden">
+    <div class="release-code-box" style="grid-area: box2">
       <?= $page->table()->kt() ?>
     </div>
   </div>
-
 </section>
