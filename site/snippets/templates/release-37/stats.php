@@ -34,7 +34,7 @@
 
   <div class="v37-stats-grid">
     <figure class="release-box bg-light" style="--aspect-ratio: 2657/2248; grid-area: figure">
-      <img src="<?= ($image = $page->image('stats.png'))->url() ?>" loading="lazy">
+      <img src="<?= ($image = $page->image('stats.png'))->url() ?>" loading="lazy" alt="The stats section is used here for a shop site to show revenue, number of orders, average transaction price, refunds and discounted sales.">
     </figure>
 
     <div class="release-text-box" style="grid-area: box1">

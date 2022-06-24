@@ -27,7 +27,7 @@
 
   <div class="v37-system-grid">
     <figure class="release-box bg-light" style="--aspect-ratio: 2398/1308; grid-area: figure">
-      <img src="<?= ($image = $page->image('system.png'))->url() ?>" loading="lazy">
+      <img src="<?= ($image = $page->image('system.png'))->url() ?>" loading="lazy" alt="The system view has a new design and the new security section with a list of warnings">
     </figure>
 
     <div class="release-text-box" style="grid-area: box1">

@@ -28,7 +28,7 @@
   <div class="v37-table-grid">
 
     <figure class="release-box bg-light" style="--aspect-ratio: 2633/805; grid-area: figure">
-      <img src="<?= ($image = $page->image('table.png'))->url() ?>" loading="lazy">
+      <img src="<?= ($image = $page->image('table.png'))->url() ?>" loading="lazy" alt="The new table layout is a lot more compact and can show custom data more conveniently for pages and files">
     </figure>
 
     <div class="release-text-box" style="grid-area: box1">
