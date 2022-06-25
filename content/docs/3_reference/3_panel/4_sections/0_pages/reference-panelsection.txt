@@ -194,6 +194,18 @@ columns:
     value: "{{ page.date.toDate('d.m.Y') }}"
 ```
 
+##### Mobile
+
+Set the `mobile` option to `true` for a column to visible in the mobile view.
+
+```yaml
+layout: table
+columns:
+  subheading:
+    label: Subheading
+    mobile: true
+```
+
 ##### Type
 
 So far we offer three different column types, you can use to improve the preview of your data.
