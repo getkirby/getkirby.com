@@ -112,8 +112,6 @@ Please only allow all uploads if all Panel users can be trusted completely as it
 
 ## Image options
 
-<since v="3.6.0">
-
 The image options for files can now be defined directly in their own blueprint. This significantly simplifies the setup of sections as they all inherit the image settings. You can still set image settings in sections the good old way if needed.
 
 ```yaml "site/blueprints/files/document.yml"
@@ -156,7 +154,6 @@ image:
   back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);"
 ```
 
-</since>
 
 ## Options
 

@@ -41,7 +41,6 @@ Kirby::plugin('your/plugin', [
 ]);
 ```
 
-<since v="3.6.0">
 ## Callback definition
 
 Plugins can now define dynamic blueprints based on config settings, content and other factors.
@@ -66,4 +65,3 @@ Kirby::plugin('my/blueprint', [
     ]
 ]);
 ```
-</since>

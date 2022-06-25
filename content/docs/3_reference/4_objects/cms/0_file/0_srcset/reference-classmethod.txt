@@ -43,7 +43,6 @@ $image->srcset([
 
 ### Convert image format
 
-<since v="3.6.0">
 ```php
 $image->srcset([
   '400w'  => ['width' => 400, 'format' => 'webp'],
@@ -51,7 +50,6 @@ $image->srcset([
   '1200w' => ['width' => 1200, 'format' => 'webp']
 ])
 ```
-</since>
 
 ## Define presets
 

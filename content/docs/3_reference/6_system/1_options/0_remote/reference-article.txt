@@ -49,6 +49,4 @@ Options are:
 
 We recommend to use the CA bundle of your server operating system. This file is generally updated from system packages and therefore the most up-to-date list you can have.
 
-<since v="3.6.0">
 If a CA bundle is configured in `php.ini` in the `curl.cainfo` option, Kirby will use this bundle by default by switching to the default value `Remote::CA_SYSTEM`. You can still override this default with the `remote.ca` option as explained above.
-</since>

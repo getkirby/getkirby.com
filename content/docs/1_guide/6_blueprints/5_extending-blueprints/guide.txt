@@ -308,7 +308,6 @@ tabs:
     fields:
       seoDescription: false
 ```
-<since v="3.6.4">
 ## Multiple extends at once
 
 You can reuse multiple blueprints at once. So you can develop a more modular system by writing less and non-repetitive code.
@@ -359,4 +358,3 @@ fields:
       - layout/fieldsets
       - layout/settings
 ```
-</since>
