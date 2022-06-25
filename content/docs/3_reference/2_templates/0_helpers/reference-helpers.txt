@@ -4,3 +4,30 @@ Title: Helpers
 
 Intro: Helper functions simplify common tasks or provide easy shortcuts to Kirby methods.
 
+----
+
+Text:
+
+## Deactivate a helper globally
+<since v="3.7.0">
+<warning>
+Kirby tries to register its helper functions in PHP's global namespace. This can lead to conflicts when you or a plugin you are using is including other libraries that try to register their own functions globally with same names, e.g. `dump()`. Kirby will throw an error when it detects this - so that this doesn't happen without your notice
+</warning>
+
+To deactivate one of Kirby's helper functions globally, you need to set a specific constant in your `index.php` to `true`, e.g.
+
+```php "/index.php"
+<?php
+
+require __DIR__ . '/kirby/bootstrap.php';
+
+define('KIRBY_HELPER_DUMP', false);
+
+echo (new Kirby)->render();
+```
+
+The name of the corresponding constant is always `KIRBY_HELPER` + name of the helper (uppercased). When you disable a helper function, it won't be registered anymore by Kirby.
+
+As users might disable global helpers in their specific setups, it's recommended for plugin developers not to rely on the helper functions but rather use the corresponding (link: /docs/reference/objects text: class methods).
+
+</since>
