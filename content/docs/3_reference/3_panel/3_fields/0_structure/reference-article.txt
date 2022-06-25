@@ -169,7 +169,7 @@ fields:
 
 ### Set columns to visible on mobile
 
-`mobile` option keeps cells in responsive views. If none of the columns are set to `mobile`, only the first column will be visible on mobile.
+The `mobile` option keeps cells in responsive views. If none of the columns are set to `mobile`, only the first column will be visible on mobile.
 
 ```yaml
 fields:
