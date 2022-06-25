@@ -36,19 +36,21 @@ tabs:
 
   team:
     label: Team
-    preset: pages
-    drafts:
-      label: New Team Members
-      info: "{{ page.position }}"
-      template: team-member
-    listed:
-      label: Team
-      layout: cards
-      info: "{{ page.position }}"
-      template: team-member
-      image:
-        ratio: 1/1
-        cover: true
+    sections:
+      drafts:
+        label: New Team Members
+        info: "{{ page.position }}"
+        template: team-member
+        type: pages
+      listed:
+        label: Team
+        layout: cards
+        info: "{{ page.position }}"
+        template: team-member
+        type: pages
+        image:
+          ratio: 1/1
+          cover: true
 
   content:
     label: Content
@@ -107,6 +109,7 @@ sidebar:
     image:
       ratio: 1/1
       cover: true
+
 ```
 
 ### Reusable section blueprint
