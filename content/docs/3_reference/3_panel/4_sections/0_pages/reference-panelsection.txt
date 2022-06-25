@@ -196,7 +196,7 @@ columns:
 
 ##### Mobile
 
-Set the `mobile` option to `true` for a column to visible in the mobile view.
+Set the `mobile` option to `true` for a column to be visible in the mobile view.
 
 ```yaml
 layout: table
