@@ -233,10 +233,8 @@ To edit a custom block type, editors can either double-tap on the block or click
 
 (image: editing.png)
 
-<since v="3.6.0">
 #### Drawer-less blocks
 If you don't define any `fields`, the block won't have a drawer. This can be useful for blocks that don't feature any configuration (e.g. the default `line` block).
-</since>
 
 ### Tabs
 

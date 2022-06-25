@@ -66,8 +66,6 @@ return [
 
 ## Format
 
-<since v="3.6.0">
-
 You can set a default format for thumbs in your config file to convert all images unless you override the format option in the thumb method.
 
 ```php "/site/config/config.php"
@@ -82,7 +80,6 @@ return [
 
 This is only recommended if you really find yourself converting 90% of your files to that format anyway. Otherwise you will need to override the default quite a lot.
 
-</since>
 
 ## Thumbs driver
 
