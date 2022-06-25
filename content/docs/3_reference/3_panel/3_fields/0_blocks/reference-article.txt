@@ -477,92 +477,9 @@ return [
 ];
 ```
 
-## Builder migration
+## Builder & editor migration
 
-The Blocks field replaces the Builder field plugin. It comes with a built-in smart importer for Builder blocks. The migration should normally be effortless.
-
-### Your blueprints
-
-The only thing you have to change to upgrade from the Builder to the new Blocks field is to change the field type:
-
-*previously:*
-
-```yaml "builder"
-fields:
-  blocks:
-    type: builder
-    fieldsets:
-      ...
-```
-
-*now:*
-
-```yaml "blocks"
-fields:
-  blocks:
-    type: blocks
-    fieldsets:
-      ...
-```
-
-### Your templates
-
-The Builder used a field method called `$page->blocks()->toBuilderBlocks()`. This has to be replaced with `$page->blocks()->toBlocks()`
-
-### Your block snippets
-
-Your old block snippets should work as expected, but a few things are deprecated and you should follow the new way of doing things in the snippets:
-
-The new `$block` object replaces `$data` You can still use `$data` instead, but consider this deprecated. The following `$block` object methods replace the old `$data` methods:
-
-Builder | Blocks
-- | -
-`$data->_uid()` | `$block->id()`
-`$data->_key()` | `$block->type()`
-
-
-## Editor migration
-
-The Blocks field also replaces our Editor field plugin. It has a built-in smart importer for Editor blocks. The migration should normally be mostly effortless. There are a couple block types that have changed though and you might need to update your editor block snippets.
-
-### Your blueprints
-
-The only thing you have to change to upgrade from the Editor to the new Blocks field is to change the field type:
-
-*previously:*
-
-```yaml "editor"
-fields:
-  blocks:
-    type: editor
-```
-
-*now:*
-
-```yaml "blocks"
-fields:
-  blocks:
-    type: blocks
-```
-
-### Your templates
-
-The Editor used a field method called `$page->blocks()->blocks()`. This has to be replaced with `$page->blocks()->toBlocks()`
-
-### Changed snippets
-
-The following block types have changed in the Blocks field and you need to move and rename your snippets if you have customized them in your installation.
-
-Editor | Blocks
-- | -
-`/site/snippets/editor/h1.php` | `/site/snippets/blocks/heading.php`
-`/site/snippets/editor/h2.php` | `/site/snippets/blocks/heading.php`
-`/site/snippets/editor/h3.php` | `/site/snippets/blocks/heading.php`
-`/site/snippets/editor/blockquote.php` | `/site/snippets/blocks/quote.php`
-`/site/snippets/editor/kirbytext.php` | `/site/snippets/blocks/markdown.php`
-`/site/snippets/editor/ol.php` | `/site/snippets/blocks/list.php`
-`/site/snippets/editor/paragraph.php` | `/site/snippets/blocks/text.php`
-`/site/snippets/editor/ul.php` | `/site/snippets/blocks/list.php`
+Builder and editor field migration has been removed since 3.7 release.
 
 ## Further reading
 
