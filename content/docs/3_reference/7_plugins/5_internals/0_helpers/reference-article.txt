@@ -12,7 +12,6 @@ Text:
 ## Available helpers
 
 - (link: #reference__this-helper-clipboard text: `this.$helper.clipboard`)
-- (link: #reference__this-helper-clone text: `this.$helper.clone`)
 - (link: #reference__this-helper-color text: `this.$helper.color`)
 - (link: #reference__this-helper-debounce text: `this.$helper.debounce`)
 - (link: #reference__this-helper-embed text: `this.$helper.embed`)
@@ -49,10 +48,10 @@ panel.plugin("your/pad-display-field", {
 });
 ```
 
-
 ## Reference
 
 ### `this.$helper.clipboard`
+
 Helpers to read from and write to the clipboard.
 
 #### Example
@@ -60,25 +59,12 @@ Helpers to read from and write to the clipboard.
 ```js
 this.$helper.clipboard.read(ClipboardEvent);
 this.$helper.clipboard.read(value);
+
+this.$helper.clipboard.write(value, ClipboardEvent);
 ```
-
-
-### `this.$helper.clone`
-Shorthand helper for
-
-```js
-JSON.parse(JSON.stringify(array))
-```
-
-#### Example
-
-```js
-let array = ["homer, "simpson"];
-let cloned = this.$helper.clone(array);
-```
-
 
 ### `this.$helper.color`
+
 Turns a string into a valid CSS color making use of the Panel's (link: docs/reference/plugins/ui#colors text: custom CSS properties).
 
 #### Example
@@ -89,46 +75,44 @@ this.$helper.color("purple-400");
 this.$helper.color("pattern");
 ```
 
-
 ### `this.$helper.debounce`
 
 #### Parameters
 
-| Name  | Description
-| ----  | ---- |
-| `fn`  | Function to be debounced |
-| `delay` | Delay in miliseconds |
+| Name    | Description              |
+| ------- | ------------------------ |
+| `fn`    | Function to be debounced |
+| `delay` | Delay in miliseconds     |
 
 #### Example
 
 ```js
 debounce(function (query) {
   this.search(query);
-}, 200)
+}, 200);
 ```
 
-
 ### `this.$helper.embed`
+
 Helps to generate proper YouTube or Vimeo embed URLs.
 
 #### Parameters
 
-| Name  | Description
-| ----  | ---- |
-| `url` | URL to transform into valid embed URL |
+| Name         | Description                                                  |
+| ------------ | ------------------------------------------------------------ |
+| `url`        | URL to transform into valid embed URL                        |
 | `doNotTrack` | If URL should try to enforce non-tracking (default: `false`) |
-
 
 #### Example
 
 ```js
-this.$helper.embed.video(youtubeUrl);
+this.$helper.embed.video(youtubeOrVimeoUrl);
 this.$helper.embed.youtube(youtubeUrl);
 this.$helper.embed.vimeo(vimeoUrl);
 ```
 
-
 ### `this.$helper.isComponent`
+
 Checks if string refers to an existing Vue component.
 
 #### Example
@@ -137,8 +121,8 @@ Checks if string refers to an existing Vue component.
 this.$helper.isComponent("my-mysterious-component");
 ```
 
-
 ### `this.$helper.isUploadEvent`
+
 Checks if a javascript event is really an upload event.
 
 #### Example
@@ -160,8 +144,8 @@ export default {
 }
 ```
 
-
 ### `this.$helper.keyboard`
+
 Collection of helpers corresponding to keyboard events
 
 #### Example
@@ -171,34 +155,40 @@ Collection of helpers corresponding to keyboard events
 this.$helper.keyboard.metaKey();
 ```
 
-
 ### `this.$helper.object`
-Collection of helpers for JavaScript objects.
 
-#### Example
+Collection of helpers for JavaScript objects:
+
+#### `clone`
+
+Shorthand helper for cloning an object
+
+```js
+let array = ["homer, "simpson"];
+let cloned = this.$helper.clone(array);
+```
+
+#### `isEmpty`
+
+<since v="3.7.0">
+Checks if a value of any type is empty
+
+```js
+this.$helper.object.isEmpty(undefined) // true
+this.$helper.object.isEmpty(null) // true
+this.$helper.object.isEmpty("") // true
+this.$helper.object.isEmpty([]) // true
+this.$helper.object.isEmpty({}) // true
+```
+</since>
+
+
+#### `merge`
+
+Merges two objects
 
 ```js
 this.$helper.object.merge(object1, object2);
-```
-
-
-### `this.$helper.pad`
-
-Adds <code>0</code> to the left of the value
-
-#### Parameters
-
-| Name  | Description
-| ----  | ---- |
-| `value`  | Value to be padded |
-| `length` | Length of the returned string (default: `2`) |
-
-#### Example
-
-```js
-let money = 9;
-return this.$helper.pad(money, 4);
-// result: "0009"
 ```
 
 
@@ -208,8 +198,8 @@ Receive a padding percentage for a specified image ratio.
 
 #### Parameters
 
-| Name  | Description
-| ----  | ---- |
+| Name    | Description                 |
+| ------- | --------------------------- |
 | `ratio` | e.g. `1/2` (default: `3/2`) |
 
 #### Example
@@ -219,44 +209,15 @@ return this.$helper.ratio("1/2");
 // result: "50%"
 ```
 
-
-### `this.$helper.slug`
-
-Transform a string to a valid slug according to a specified ruleset.
-
-#### Parameters
-
-| Name  | Description
-| ----  | ---- |
-| `string` | String to be transformed |
-| `rules` | Array of transformation rulesets (objects themselves) |
-| `allowed` | String of allowed characters |
-
-#### Example
-
-```js
-return this.$helper.slug("Was für ein Spaß", [
-  {
-    "ü": "ue"
-  },
-  {
-    "ß": "sz"
-  }
-]);
-// result: "was-fuer-ein-spasz"
-```
-
-
 ### `this.$helper.sort`
 
- Natural sort algorithm with unicode support
+Natural sort algorithm with unicode support
 
 #### Example
 
 ```js
 return this.$helper.sort(valueA, valueB);
 ```
-
 
 ### `this.$helper.string`
 
@@ -293,12 +254,51 @@ return this.$helper.string.lcfirst("Hello");
 // result: "hello"
 ```
 
+#### `pad`
+
+Adds <code>0</code> to the left of the value
+
+| Name     | Description                                  |
+| -------- | -------------------------------------------- |
+| `value`  | Value to be padded                           |
+| `length` | Length of the returned string (default: `2`) |
+
+
+```js
+let money = 9;
+return this.$helper.pad(money, 4);
+// result: "0009"
+```
+
 ##### `random`
 
 Returns a random alpha-numeric string of specified length.
 
 ```js
 return this.$helper.string.random(8);
+```
+
+#### `slug`
+
+Transform a string to a valid slug according to a specified ruleset.
+
+| Name      | Description                                           |
+| --------- | ----------------------------------------------------- |
+| `string`  | String to be transformed                              |
+| `rules`   | Array of transformation rulesets (objects themselves) |
+| `allowed` | String of allowed characters                          |
+
+
+```js
+return this.$helper.slug("Was für ein Spaß", [
+  {
+    ü: "ue",
+  },
+  {
+    ß: "sz",
+  },
+]);
+// result: "was-fuer-ein-spasz"
 ```
 
 ##### `stripHTML`
@@ -340,9 +340,9 @@ Helper to upload a file.
 
 #### Parameters
 
-| Name  | Description
-| ----  | ---- |
-| `file` | File object |
+| Name     | Description                         |
+| -------- | ----------------------------------- |
+| `file`   | File object                         |
 | `params` | Options object (see defaults below) |
 
 ```js
