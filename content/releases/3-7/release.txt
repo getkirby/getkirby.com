@@ -372,6 +372,7 @@ Deprecated:
 - The `$pages->findByKey()`, `$files->findByKey()` and `$users->findByKey()` methods have been marked as internal. Please use the `find()` methods instead.
 - The `$inline` parameter in `$kirby->kirbytext()` is deprecated. Use `$options['markdown']['inline']` instead.
 - The `$inline` parameter in `$kirby->markdown()` is deprecated. Use `$options['inline']` instead.
+- Blueprint `page`, `pages` and `files` presets are deprecated.
 
 #### Deprecation warnings
 
