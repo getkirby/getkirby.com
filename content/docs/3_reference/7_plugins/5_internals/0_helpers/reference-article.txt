@@ -52,7 +52,6 @@ panel.plugin("your/pad-display-field", {
 
 ## Reference
 
-<since v="3.6.0">
 ### `this.$helper.clipboard`
 Helpers to read from and write to the clipboard.
 
@@ -62,7 +61,6 @@ Helpers to read from and write to the clipboard.
 this.$helper.clipboard.read(ClipboardEvent);
 this.$helper.clipboard.read(value);
 ```
-</since>
 
 
 ### `this.$helper.clone`
@@ -80,7 +78,6 @@ let cloned = this.$helper.clone(array);
 ```
 
 
-<since v="3.6.0">
 ### `this.$helper.color`
 Turns a string into a valid CSS color making use of the Panel's (link: docs/reference/plugins/ui#colors text: custom CSS properties).
 
@@ -91,7 +88,6 @@ this.$helper.color("#444");
 this.$helper.color("purple-400");
 this.$helper.color("pattern");
 ```
-</since>
 
 
 ### `this.$helper.debounce`
@@ -112,7 +108,6 @@ debounce(function (query) {
 ```
 
 
-<since v="3.6.0">
 ### `this.$helper.embed`
 Helps to generate proper YouTube or Vimeo embed URLs.
 
@@ -131,7 +126,6 @@ this.$helper.embed.video(youtubeUrl);
 this.$helper.embed.youtube(youtubeUrl);
 this.$helper.embed.vimeo(vimeoUrl);
 ```
-</since>
 
 
 ### `this.$helper.isComponent`
@@ -178,7 +172,6 @@ this.$helper.keyboard.metaKey();
 ```
 
 
-<since v="3.6.0">
 ### `this.$helper.object`
 Collection of helpers for JavaScript objects.
 
@@ -187,7 +180,7 @@ Collection of helpers for JavaScript objects.
 ```js
 this.$helper.object.merge(object1, object2);
 ```
-</since>
+
 
 ### `this.$helper.pad`
 

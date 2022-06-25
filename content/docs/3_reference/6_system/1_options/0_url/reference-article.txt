@@ -21,9 +21,7 @@ return [
 ];
 ```
 
-<since v="3.6.3">
-
-Since Kirby 3.6.3, you'll have a couple additional options to control auto-detection and set an allow list of accepted base URLs:
+You have a couple additional options to control auto-detection and set an allow list of accepted base URLs:
 
 ## Auto-detection
 
@@ -101,4 +99,3 @@ return [
   'url' => Server::HOST_FROM_HEADER | Server::HOST_ALLOW_EMPTY
 ];
 ```
-</since>
