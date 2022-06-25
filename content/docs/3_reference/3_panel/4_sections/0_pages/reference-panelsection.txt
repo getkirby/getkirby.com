@@ -194,6 +194,19 @@ columns:
     value: "{{ page.date.toDate('d.m.Y') }}"
 ```
 
+##### HTML
+
+Values are converted to safe HTML by default. This is the most secure way to handle content in your Panel. If you know what you are doing and you want to render HTML in a table cell, you can use the html option to stop HTML from being auto-encoded.
+
+```yaml
+layout: table
+columns:
+  html:
+    label: HTML
+    html: true
+    value: "{{ page.someSafeHTML }}"
+```
+
 ##### Mobile
 
 Set the `mobile` option to `true` for a column to be visible in the mobile view.

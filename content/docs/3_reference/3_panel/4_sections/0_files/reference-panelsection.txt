@@ -102,7 +102,118 @@ The `card` layout is great for all kinds of images.
 layout: cards
 ```
 
+(image: cards.png)
+
 (docs: sections/cardlets)
+
+(image: cardlets.png)
+
+<since v="3.7.0">
+### Table layout
+
+The table layout has the highest information density. Columns can be fully customized and make it perfect if you need to show multiple values at once for better overview and scannability.
+
+(image: table.png)
+
+```yaml
+layout: table
+```
+
+The table layout will show the preview image together with a title and info column based on your text and info settings. You can switch off those automatic columns with `image: false`, `text: false` and `info: false` if you want to introduce your own columns.
+
+#### Columns
+
+Custom table columns can be defined with the `columns` option.
+
+```yaml
+layout: table
+columns:
+  alt: true
+  dimensions: true
+```
+
+Each column can be customized with additional settings
+
+##### Label
+
+```yaml
+layout: table
+columns:
+  alt:
+    label: Alt Text
+```
+
+##### Translated label
+
+```yaml
+layout: table
+columns:
+  alt:
+    label:
+      en: Alternative Text
+      de: Alternativ Text
+```
+
+##### Alignment
+
+Text alignment can be left (default), center or right.
+
+```yaml
+layout: table
+columns:
+  dimensions:
+    label: Dimensions
+    align: right
+```
+
+##### Value
+
+By default, the table cells contain the field value matching the column name. You can customize the value with a string template.
+
+```yaml
+layout: table
+columns:
+  date:
+    label: Date
+    value: "{{ file.date.toDate('d.m.Y') }}"
+```
+
+##### HTML
+
+Values are converted to safe HTML by default. This is the most secure way to handle content in your Panel. If you know what you are doing and you want to render HTML in a table cell, you can use the html option to stop HTML from being auto-encoded.
+
+```yaml
+layout: table
+columns:
+  html:
+    label: HTML
+    html: true
+    value: "{{ file.someSafeHTML }}"
+```
+
+##### Mobile
+
+Set the `mobile` option to `true` for a column to be visible in the mobile view.
+
+```yaml
+layout: table
+columns:
+  alt:
+    label: Alt
+    mobile: true
+```
+
+##### Type
+
+So far we offer three different column types, you can use to improve the preview of your data.
+
+| type | description |
+| - | - |
+| `text` | This is the standard column type |
+| `url` | If the value is a URL, you can convert the value to a link with this type |
+| `tags` | If the value is a comma-separated list of values or an array, you can use this type to show the value as tags. |
+
+</since>
 
 ## File information
 
