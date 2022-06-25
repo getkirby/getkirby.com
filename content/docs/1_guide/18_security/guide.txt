@@ -31,6 +31,14 @@ Kirby's current version number is stored in `/kirby/composer.json` in the versio
 
 <info>Make sure to never show the version number publicly in one of your templates as that may give attackers valuable information about your site.</info>
 
+## Switch off debug mode
+
+Kirby’s debug mode is very handy to find issues in your installation, but **it must be switched off in production!**
+
+Our debug view is exposing important system information that should not be leaked to your visitors.
+
+(link: /docs/reference/system/options/debug text: How to disable debug mode in your config).
+
 ## Secure your server
 
 Your server's security is essential for the security of your website and data as well as Kirby's security. Please make sure that you work together with experienced system administrators and hosting partners who keep your server up to date and know how to protect it against external attacks. Don't try to setup your own server if you don't exactly know what you are doing.
@@ -71,7 +79,7 @@ Kirby's default `.htaccess` file for Apache comes with a set of predefined rules
 
 All text files within the `content` folder should not be accessible from the outside. Kirby's `.htaccess` file uses the following rule to achieve this:
 
-```
+```bash
 RewriteRule ^content/(.*)\.(txt|md|mdown)$ index.php [L]
 ```
 
@@ -81,7 +89,7 @@ Check if this rule works in your setup by browsing to one of your content text f
 
 All your files within the `site` folder must be protected as well. Kirby's rule for this is:
 
-```
+```bash
 RewriteRule ^site/(.*) index.php [L]
 ```
 
@@ -91,11 +99,23 @@ You can check if this block works by browsing to http://yourdomain.com/site/conf
 
 Last but not least your `kirby` folder must be protected as well. Here's the rule:
 
-```
+```bash
 RewriteRule ^kirby/(.*) index.php [L]
 ```
 
 By browsing to http://yourdomain.com/kirby/bootstrap.php, you can make sure that you will be correctly redirected to the error page.
+
+#### Your `.git` folder
+
+If you use a git repo on your server, you should avoid to keep it in the document root. If you have to keep it there, you must make sure that it is not publicy accessibly. Otherwise it could leak sensitive information from your repository. Here's the htaccess rule to protect it:
+
+```bash
+# block files and folders beginning with a dot, such as .git
+# except for the .well-known folder, which is used for Let's Encrypt and security.txt
+RewriteRule (^|/)\.(?!well-known\/) index.php [L]
+```
+
+By browsing to http://yourdomain.com/.git/config, you can make sure that you will be correctly redirected to the error page.
 
 ### Prevent directory listings
 
