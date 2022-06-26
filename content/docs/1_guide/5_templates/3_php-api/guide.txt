@@ -25,6 +25,29 @@ There are a lot more classes and objects at play within Kirby. You can find the 
 - (link: docs/reference/@ text: Advanced: all classes)
 - (link: docs/reference/@/aliases text: Class aliases)
 
+## Access to other pages
+
+On the previous guide pages, we showed you how to access content from the current page with `$page` and from the site with `$site`. You are not limited to these two sources. The `$site` and `$pages` objects also allow you to access the content of *any* page:
+
+```php
+<section class="about-us">
+  <?= $pages->get('about')->text()->kirbytext() ?>
+</section>
+```
+
+The `$pages->get()` method returns a page by its ID, meaning its folder path in the `content` folder.
+
+Kirby also provides the `$pages->find()` method. In addition to the page ID, it also supports the page URI in the current language (if the page slug was translated) and it automatically handles URIs of content representations. So if you know that you are passing the untranslated page ID, `$pages->get()` will get you the page as fast as possible. If you need more leeway, `$pages->find()` will be more resilient, but slightly slower.
+
+Another alternative is the `$pages->findBy()` method. It allows you to query a page by a specific property inside a collection:
+
+```php
+<section class="news">
+  <?= $page->children()->findBy('slug', 'news')->text()->kirbytext() ?>
+</section>
+```
+
+In this example, the `slug` is queried, which is the last part of the page ID. So if the current `$page` has the ID `path/to/page`, the resulting page is `path/to/page/news`.
 
 ## Permissions
 
