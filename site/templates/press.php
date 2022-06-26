@@ -3,7 +3,7 @@
 <article>
   <header class="max-w-xl mb-24">
     <h1 class="h1 mb-12">Download logos and screenshots for use in digital and print media</h1>
-    <a class="btn btn--filled" href="<?= $page->file('kirby-3-presskit.zip')->url() ?>" download>
+    <a class="btn btn--filled" href="<?= $page->file('kirby-presskit.zip')->url() ?>" download>
       <?= icon('download') ?> Download the press kit
     </a>
   </header>
