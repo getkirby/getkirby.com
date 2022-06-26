@@ -14,16 +14,16 @@
     </div>
 
     <div class="release-padded-box bg-light">
-      <h3 class="h3 mb-6">Bug fixes</h3>
+      <h3 class="h3 mb-6">Enhancements</h3>
       <div class="prose text-sm">
-        <?= $page->fixes()->kt() ?>
+        <?= $page->enhancements()->kt() ?>
       </div>
     </div>
 
     <div class="release-padded-box bg-light">
-      <h3 class="h3 mb-6">Enhancements</h3>
+      <h3 class="h3 mb-6">Bug fixes</h3>
       <div class="prose text-sm">
-        <?= $page->enhancements()->kt() ?>
+        <?= $page->fixes()->kt() ?>
       </div>
     </div>
 
