@@ -1,20 +1,20 @@
 <style>
-.v37-table-grid {
-  display: grid;
-  grid-gap: var(--spacing-6);
-  grid-template-columns: 1fr;
-  grid-template-areas: "figure"
-                       "box1"
-                       "box2";
-}
-
-@media screen and (min-width: 45rem) {
   .v37-table-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "figure figure"
-                        "box1 box2";
+    display: grid;
+    grid-gap: var(--spacing-6);
+    grid-template-columns: 1fr;
+    grid-template-areas: "figure"
+      "box1"
+      "box2";
   }
-}
+
+  @media screen and (min-width: 45rem) {
+    .v37-table-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "figure figure"
+        "box1 box2";
+    }
+  }
 </style>
 
 <section id="table-layout" class="mb-42">
@@ -34,7 +34,7 @@
     <div class="release-text-box" style="grid-area: box1">
       <h3>At a glance</h3>
       <div class="prose">
-        With the brand new table layout for pages and files sections, you get a great overview of our content. Customize the columns you want to show to present exactly the data you&nbsp;need.
+        With the brand new <a href="/docs/reference/panel/sections/pages#layout__table-layout">table layout</a> for pages and files sections, you get a great overview of our content. Customize the columns you want to show to present exactly the data you&nbsp;need.
       </div>
     </div>
     <div class="release-code-box" style="grid-area: box2">
