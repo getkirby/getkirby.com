@@ -57,7 +57,7 @@
     <div class="release-text-box">
       <h3>Fresh & familiar</h3>
       <div class="prose">
-        Slightly rounder, a bit more friendly, and somewhat more cosy: you will feel instantly at home.
+        Slightly rounder, friendlier, and more cosy: you will feel instantly at home.
       </div>
     </div>
   </div>

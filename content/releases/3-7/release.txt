@@ -87,6 +87,7 @@ toggles:
   type: toggles
   label: Icons & Labels
   options:
+    # Detailed version with more options
     - value: left
       text: Left
       icon: text-left
@@ -173,7 +174,7 @@ Features:
 - New field previews in tables for the tags, radio, select, multiselect, checkboxes, structure, blocks, layout, files, pages and users fields. [#4294](https://github.com/getkirby/kirby/pull/4294) [#4195](https://github.com/getkirby/kirby/pull/4195)
 - New system health checks to detect unintentionally exposed parts of your installation (Git repo, content folder, site folder, kirby folder)
 - `$request->auth()` now also handles Kirby's `Session` auth type automatically [#4264](https://github.com/getkirby/kirby/pull/4264)
-- The auth types for `$request->auth()` can now be extended by plugins: [#4264](https://github.com/getkirby/kirby/pull/4264)
+- The auth types for `$request->auth()` can now be extended by plugins [#4264](https://github.com/getkirby/kirby/pull/4264)
 - New `$kirby->response()->usesAuth()` and `->usesCookie()` method to tell Kirby's automatic caching system about used `Authorization` headers and cookies. These methods are called automatically when the Kirby `Request` and `Cookie` classes are used.
 - New `$kirby->request()->hasAuth()` method to check the existence of the `Authorization` header [#4277](https://github.com/getkirby/kirby/pull/4277)
 - New `$kirby->isNativeComponent($component)` method [#4348](https://github.com/getkirby/kirby/pull/4348)
@@ -411,7 +412,7 @@ $env->subfolder();
 $env->port();
 ```
 
-We use this new class as foundational element in our `$kirby` instance to construct absolute and relative URLs, roots and paths. You can access it and its methods with `$kirby->environment()`
+We use this new class as foundational element in our `$kirby` instance to construct absolute and relative URLs, roots and paths. You can access it and its methods with `$kirby->environment()`. Kirby internally uses the `Environment` class to set the site's base URL based on the `url` option.
 
 #### Core
 
@@ -433,20 +434,20 @@ We use this new class as foundational element in our `$kirby` instance to constr
 
 Deprecated:
 
-- The `dump` component was deprecated and superseded by the new feature to replace helpers (`KIRBY_HELPER_DUMP`constant). The component will be removed in Kirby 3.8.0. [#4018](https://github.com/getkirby/kirby/pull/4018)
+- The `dump` component was deprecated and superseded by the new feature to replace helpers (`KIRBY_HELPER_DUMP` constant). The component will be removed in Kirby 3.8.0. [#4018](https://github.com/getkirby/kirby/pull/4018)
 - `Http\Server` class will be removed in 3.8.0
-- The constants in `Http\Server::` are now deprecated and will be removed in 3.8. They are no longer needed.
-- The `$pages->findById()` and `$pages->findByUri()` methods have been deprecated and will be removed in v3.8.0. If you want to directly get a page by ID, use `$pages->get()`. If you want the previous fuzzy behaviour that queries both by ID and URI, use `$pages->find()`.
+- The constants in `Http\Server::` are now deprecated and will be removed in 3.8.0. They are no longer needed.
+- The `$pages->findById()` and `$pages->findByUri()` methods have been deprecated and will be removed in 3.8.0. If you want to directly get a page by ID, use `$pages->get()`. If you want the previous fuzzy behaviour that queries both by ID and URI, use `$pages->find()`.
 - The `$pages->findByIdRecursive()` method has been deprecated and will be removed in v3.8.0. Please use `$pages->find()` instead.
 - The `$files->findById()` method has been deprecated and will be removed in v3.8.0. Please use `$files->find()` instead.
 - The `$pages->findByKey()`, `$files->findByKey()` and `$users->findByKey()` methods have been marked as internal. Please use the `find()` methods instead.
 - The `$inline` parameter in `$kirby->kirbytext()` is deprecated. Use `$options['markdown']['inline']` instead.
 - The `$inline` parameter in `$kirby->markdown()` is deprecated. Use `$options['inline']` instead.
-- Blueprint `page`, `pages` and `files` presets are deprecated.
+- Blueprint presets `page`, `pages` and `files` are deprecated.
 
 #### Deprecation warnings
 
-The following deprecated methods/parts throw warnings in 3.7.0 and will be removed in 3.8.0 or later  [#4335](https://github.com/getkirby/kirby/pull/4335)
+The following deprecated methods/parts throw warnings in 3.7.0 and will be removed starting in 3.8.0 [#4335](https://github.com/getkirby/kirby/pull/4335)
 
 **Methods**
 
@@ -458,7 +459,7 @@ The following deprecated methods/parts throw warnings in 3.7.0 and will be remov
 | $file->panelOptions() | $file->panel()->options() | 3.8 |
 | $file->panelPath() | $file->panel()->path() | 3.8 |
 | $file->panelUrl() | $file->panel()->url() | 3.8 |
-| $file->pickerDate() | $file->panel()->pickerData() | 3.8 |
+| $file->pickerData() | $file->panel()->pickerData() | 3.8 |
 | $files->findById() | $files->find() | 3.8 |
 | $kirby->server() | $kirby->environment() | 3.9
 | $page->dragText() | $page->panel()->dragText() | 3.8 |
@@ -468,7 +469,7 @@ The following deprecated methods/parts throw warnings in 3.7.0 and will be remov
 | $page->panelOptions() | $page->panel()->options() | 3.8 |
 | $page->panelPath() | $page->panel()->path() | 3.8 |
 | $page->panelUrl() | $page->panel()->url() | 3.8 |
-| $page->pickerDate() | $page->panel()->pickerData() | 3.8 |
+| $page->pickerData() | $page->panel()->pickerData() | 3.8 |
 | $pages->findById() | $pages->find() | 3.8 |
 | $pages->findByIdRecursive() | $pages->find() | 3.8 |
 | $pages->findByUri() | $pages->find() | 3.8 |
@@ -477,13 +478,13 @@ The following deprecated methods/parts throw warnings in 3.7.0 and will be remov
 | $site->panelOptions() | $site->panel()->options() | 3.8 |
 | $site->panelPath() | $site->panel()->path() | 3.8 |
 | $site->panelUrl() | $site->panel()->url() | 3.8 |
-| $site->pickerDate() | $site->panel()->pickerData() | 3.8 |
+| $site->pickerData() | $site->panel()->pickerData() | 3.8 |
 | $user->panelIcon() | $user->panel()->icon() | 3.8 |
 | $user->panelImage() | $user->panel()->image() | 3.8 |
 | $user->panelOptions() | $user->panel()->options() | 3.8 |
 | $user->panelPath() | $user->panel()->path() | 3.8 |
 | $user->panelUrl() | $user->panel()->url() | 3.8 |
-| $user->pickerDate() | $user->panel()->pickerData() | 3.8 |
+| $user->pickerData() | $user->panel()->pickerData() | 3.8 |
 | Panel\Document::customCss() | Panel\Document::customAsset('panel.css') | 3.8 |
 | Panel\Document::customJs() | Panel\Document::customAsset('panel.js') | 3.8 |
 

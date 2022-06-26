@@ -40,7 +40,7 @@
     <div class="release-text-box" style="grid-area: box2">
       <h3>Security</h3>
       <div class="prose">
-        Find potential issues and unintentionally exposed parts of your installation (Git repo, content folder, site folder, kirby folder)
+        Find potential issues and unintentionally exposed parts of your installation (Git repo, content folder, site folder, kirby folder).
       </div>
     </div>
 
