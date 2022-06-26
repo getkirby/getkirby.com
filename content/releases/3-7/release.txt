@@ -276,7 +276,7 @@ If you install Kirby using Composer, you may run into errors if your command lin
 - Creating a `Kirby\Cms\File` object requires the `parent` property now.  [#4335](https://github.com/getkirby/kirby/pull/4335)
 - `Toolkit\Str::toBytes()` strictly only accepts a string as parameter now.  [#4335](https://github.com/getkirby/kirby/pull/4335)
 - The `$pages->children()`, `$pages->drafts()` and `$pages->index()` methods no longer set the `$pages->parent()` object as the collection items can have multiple different parents. This can change the behaviour when finding collection items in secondary languages and when merging collections. [#4105](https://github.com/getkirby/kirby/issues/4105)
-- `dump()` and `e()` helper functions checks have been removed. If your plugins or dependencies have functions with these two names, you will get an error. You can override the conflicting function by defining the constant `KIRBY_HELPER_*`. (link: docs/reference/templates/helpers#deactivate-a-helper-globally text: Check out how to do it).
+- The `dump()` and `e()` helper function checks have been removed. If your plugins or dependencies have functions with these two names, you will get an error. You can override the conflicting functions by defining the `KIRBY_HELPER_*` contants. (link: docs/reference/templates/helpers#deactivate-a-helper-globally text: Check out how to do it).
 
 #### Removed methods
 
