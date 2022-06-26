@@ -18,4 +18,4 @@ Twittercard: summary_large_image
 
 ----
 
-OgImage: opengraph.jpg
+OgImage: opengraph.png
