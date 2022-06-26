@@ -133,6 +133,26 @@ return [
 
 (reference: plugins/hooks)
 
+## Base URL setup
+
+By default, Kirby detects the base URL of your installation from the server configuration. This base URL is then used to generate all resource URLs and links on your site and in the Panel.
+
+If your URLs are incorrect, this may be because of a reverse proxy that sits in between the client and Kirby. For security reasons, the reverse proxy configuration is only respected if you explicitly configure a fixed base URL or a set of possible base URLs with the `url` option:
+
+```php
+<?php
+
+return [
+  'url' => [
+    'https://example.com',
+    'https://staging.example.com',
+    'http://example.test'
+  ]
+];
+```
+
+You can read more in the (link: reference/system/options/url text: reference).
+
 ## Multi-environment setup
 
 You can set different options based on the domain by adding additional config files containing the domain.
