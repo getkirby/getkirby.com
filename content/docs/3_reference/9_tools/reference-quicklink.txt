@@ -14,7 +14,6 @@ Menu:
 - objects/toolkit/i18n
 - objects/filesystem/mime
 - objects/toolkit/query
-- objects/http/server
 - objects/toolkit/str
 - objects/toolkit/tpl
 - objects/cms/url
