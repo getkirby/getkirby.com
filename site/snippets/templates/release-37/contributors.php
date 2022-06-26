@@ -5,6 +5,7 @@
     <ul class="max-w-xl flex flex-wrap justify-center">
       <?php foreach ([
         'afbora',
+        'awilum',
         'bastianallgeier',
         'distantnative',
         'johannschopplich',
