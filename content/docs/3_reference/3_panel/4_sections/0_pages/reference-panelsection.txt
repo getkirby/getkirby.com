@@ -148,7 +148,7 @@ columns:
   date: true
 ```
 
-Each column can be customized with additional settings
+Each column can be customized with additional settings:
 
 ##### Label
 
