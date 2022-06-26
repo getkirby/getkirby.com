@@ -173,10 +173,77 @@ Features:
 - New field previews in tables for the tags, radio, select, multiselect, checkboxes, structure, blocks, layout, files, pages and users fields. [#4294](https://github.com/getkirby/kirby/pull/4294) [#4195](https://github.com/getkirby/kirby/pull/4195)
 - `$request->auth()` now also handles Kirby's `Session` auth type automatically [#4264](https://github.com/getkirby/kirby/pull/4264)
 - The auth types for `$request->auth()` can now be extended by plugins: [#4264](https://github.com/getkirby/kirby/pull/4264)
+- New `$kirby->response()->usesAuth()` and `->usesCookie()` method to tell Kirby's automatic caching system about used `Authorization` headers and cookies. These methods are called automatically when the Kirby `Request` and `Cookie` classes are used.
+- New `$kirby->request()->hasAuth()` method to check the existence of the `Authorization` header [#4277](https://github.com/getkirby/kirby/pull/4277)
 - New `k-table` component to create consistent tables easily
 - Styled preview for tags in tables
 - New JS helper `$helpers.object.isEmpty(value)`
 - New system health checks to detect unintentionally exposed parts of your installation (git repo, content folder, site folder, kirby folder)
+
+### New Str methods
+
+#### `Str::afterStart()` and `Str::beforeEnd()`
+… to remove a substring only from the start or end of a string [#4339](https://github.com/getkirby/kirby/pull/4339)
+
+#### `Str::camel()` and `Str::studly()` 
+… for case-altering of strings [#4338](https://github.com/getkirby/kirby/pull/4338)
+
+```php
+echo Str::camel('foo_bar'); //=> fooBar
+echo Str::studly('foo_bar'); //=> FooBar
+```
+
+#### `Str::increment()` 
+… for appending a number `-1` to a string or incrementing the ending number to allow `-2`, `-3`, etc. [#4340](https://github.com/getkirby/kirby/pull/4340)    
+
+```php
+echo Str::increment('Page-1'); //=> Page-2
+echo Str::increment('Page', '_'); //=> Page_1
+```
+
+#### `Str::wrap()`
+… for wrapping the string with the given strings.
+
+```php
+echo Str::wrap($string, '# ', ' {.title}'); //=> # Post title {.title}
+echo Str::wrap($string, '"'); //=> "Post title"
+```
+
+### New validators
+
+#### `V::json()`
+… to validate correctly formatted JSON strings.
+
+```php
+if (V::json('{"foo": "Foo"}')) {
+  // do something...
+}
+```
+
+#### `V::empty()` and `V::notEmpty()`
+
+To check for empty values in PHP is not as easy as it sounds like. `empty()` is often giving wrong results. Especially if you pass `0` or `'0'`. The new validators help with this task. They also serve as underlying logic for a better `V::required()`validator. It can now be used in two ways:
+
+With a reference array …
+
+```php
+V::required('myField', ['myField' => 'Some value']);
+```
+
+or just a value …
+
+```php
+V::required('My value');
+```
+
+This makes the method more versatile and it can be used in `V::value()`:
+
+```php
+V::value('My value', [
+  'required' => true,
+  'minlength' => 5,
+]);
+```
 
 ----
 
@@ -277,6 +344,7 @@ If you install Kirby using Composer, you may run into errors if your command lin
 - `Toolkit\Str::toBytes()` strictly only accepts a string as parameter now.  [#4335](https://github.com/getkirby/kirby/pull/4335)
 - The `$pages->children()`, `$pages->drafts()` and `$pages->index()` methods no longer set the `$pages->parent()` object as the collection items can have multiple different parents. This can change the behaviour when finding collection items in secondary languages and when merging collections. [#4105](https://github.com/getkirby/kirby/issues/4105)
 - The `dump()` and `e()` helper function checks have been removed. If your plugins or dependencies have functions with these two names, you will get an error. You can override the conflicting functions by defining the `KIRBY_HELPER_*` contants. (link: docs/reference/templates/helpers#deactivate-a-helper-globally text: Check out how to do it).
+- The second argument of the `kirbytextinline()` and `kti()` helpers has been renamed from `$data` to `$options`
 
 #### Removed methods
 
@@ -351,6 +419,7 @@ We use this new class as foundational element in our `$kirby` instance to constr
 - Improved internal usage of router callbacks [#4260](https://github.com/getkirby/kirby/pull/4260)
 - The Kirby core no longer uses Kirby's helper functions internally but calls the underlying methods directly. [#4018](https://github.com/getkirby/kirby/pull/4018)
 - Content field names are now always handled case-insensitively.
+- Kirby's `composer.json` no longer pins the `psr/log` library to a specific version [#4392](https://github.com/getkirby/kirby/pull/4392)
 
 #### Panel
 
