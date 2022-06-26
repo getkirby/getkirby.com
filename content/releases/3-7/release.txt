@@ -171,14 +171,15 @@ Features:
 - Brand new statistics section
 - New search option for pages and files sections [https://kirby.nolt.io/14](https://kirby.nolt.io/14)  [#4316](https://github.com/getkirby/kirby/pull/4316)
 - New field previews in tables for the tags, radio, select, multiselect, checkboxes, structure, blocks, layout, files, pages and users fields. [#4294](https://github.com/getkirby/kirby/pull/4294) [#4195](https://github.com/getkirby/kirby/pull/4195)
+- New system health checks to detect unintentionally exposed parts of your installation (Git repo, content folder, site folder, kirby folder)
 - `$request->auth()` now also handles Kirby's `Session` auth type automatically [#4264](https://github.com/getkirby/kirby/pull/4264)
 - The auth types for `$request->auth()` can now be extended by plugins: [#4264](https://github.com/getkirby/kirby/pull/4264)
 - New `$kirby->response()->usesAuth()` and `->usesCookie()` method to tell Kirby's automatic caching system about used `Authorization` headers and cookies. These methods are called automatically when the Kirby `Request` and `Cookie` classes are used.
 - New `$kirby->request()->hasAuth()` method to check the existence of the `Authorization` header [#4277](https://github.com/getkirby/kirby/pull/4277)
+- New `$kirby->isNativeComponent($component)` method [#4348](https://github.com/getkirby/kirby/pull/4348)
 - New `k-table` component to create consistent tables easily
 - Styled preview for tags in tables
 - New JS helper `$helpers.object.isEmpty(value)`
-- New system health checks to detect unintentionally exposed parts of your installation (git repo, content folder, site folder, kirby folder)
 
 ### New Str methods
 
@@ -282,7 +283,6 @@ To ensure that Kirby still functions properly, we moved all functionality from t
 - `Toolkit\Xml::value()` now uses better logic to determine whether a `CDATA` block is needed.  [#4335](https://github.com/getkirby/kirby/pull/4335)
 - Methods in Kirby's core now use the global environment object instead of `$_SERVER` wherever possible
 - JSON errors in debug mode now contain the file path relative to the document root for consistency with the API that already handles it like this.
-- New `$kirby->isNativeComponent($component)` method [#4348](https://github.com/getkirby/kirby/pull/4348)
 - Kirby's response handling now automatically controls page and HTTP caching based on cookies, session and the `Authorization` request header used by the response. If any of these are used and also contained in the request, the response is considered private. If they are used but not contained in the request, the page is only cached for visitors without these cookies/session/auth. Manual sessions are always considered private. [#3976](https://github.com/getkirby/kirby/issues/3976)
 - `$pages->find()` can now find pages by their translated URI in secondary languages of multi-lang setups, even in collections without a parent (like `$page->grandChildren()`)
 
@@ -320,7 +320,6 @@ Fixes:
 - Preview image from other page was not shown when the page is a child of site and status `published` was queried [#4297](https://github.com/getkirby/kirby/issues/4297)
 - Uploading multiple files now adds correct sorting numbers [#4317](https://github.com/getkirby/kirby/pull/4317)
 - Better responsiveness for Panel section headers [#4316](https://github.com/getkirby/kirby/pull/4316)
-- Upgraded JS dependencies [#4329](https://github.com/getkirby/kirby/pull/4329)
 - Fixed Copy & Paste in list blocks on the first try [#3974](https://github.com/getkirby/kirby/issues/3974)
 - The Panel and API now send the `Cache-Control: no-store, private` response header instead of just `Cache-Control: no-store` for better compatibility with caches like CloudFlare [#4299](https://github.com/getkirby/kirby/issues/4299)
 
@@ -428,6 +427,7 @@ We use this new class as foundational element in our `$kirby` instance to constr
 - Table block preview uses `k-table`
 - New internal `k-models-section` [#4247](https://github.com/getkirby/kirby/pull/4247)
 - Refactored `k-pages-section` and `k-files-section` to use (extend) `k-models-section` [#4247](https://github.com/getkirby/kirby/pull/4247)
+- Upgraded JS dependencies [#4329](https://github.com/getkirby/kirby/pull/4329)
 
 ----
 
