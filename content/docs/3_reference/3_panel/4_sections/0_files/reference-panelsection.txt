@@ -132,7 +132,7 @@ columns:
   dimensions: true
 ```
 
-Each column can be customized with additional settings
+Each column can be customized with additional settings:
 
 ##### Label
 
@@ -396,4 +396,3 @@ sections:
     type: files
     search: true
 </since>
-

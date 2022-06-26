@@ -107,7 +107,7 @@ By browsing to http://yourdomain.com/kirby/bootstrap.php, you can make sure that
 
 #### Your `.git` folder
 
-If you use a git repo on your server, you should avoid to keep it in the document root. If you have to keep it there, you must make sure that it is not publicy accessibly. Otherwise it could leak sensitive information from your repository. Here's the htaccess rule to protect it:
+If you use a git repo on your server, you should avoid to keep it in the document root. If you have to keep it there, you must make sure that it is not publicly accessible. Otherwise it could leak sensitive information from your repository. Here's the `.htaccess` rule to protect it:
 
 ```bash
 # block files and folders beginning with a dot, such as .git

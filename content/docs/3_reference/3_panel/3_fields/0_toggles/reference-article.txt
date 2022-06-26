@@ -58,7 +58,7 @@ fields:
 
 ## Icons & Labels
 
-The toggles can combine text and an icon for a more visual representation
+The toggles can combine text and an icon for a more visual representation:
 
 (image: toggles-labels-icons.png)
 
