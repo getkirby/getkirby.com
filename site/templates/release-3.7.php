@@ -9,6 +9,7 @@
 .release-text-box {
   border-radius: .5rem;
   overflow: hidden;
+  z-index: 1;
 }
 .release-code-box {
   display: grid;
