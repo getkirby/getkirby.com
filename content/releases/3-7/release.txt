@@ -187,7 +187,7 @@ Features:
 #### `Str::afterStart()` and `Str::beforeEnd()`
 … to remove a substring only from the start or end of a string [#4339](https://github.com/getkirby/kirby/pull/4339)
 
-#### `Str::camel()` and `Str::studly()` 
+#### `Str::camel()` and `Str::studly()`
 … for case-altering of strings [#4338](https://github.com/getkirby/kirby/pull/4338)
 
 ```php
@@ -195,8 +195,8 @@ echo Str::camel('foo_bar'); //=> fooBar
 echo Str::studly('foo_bar'); //=> FooBar
 ```
 
-#### `Str::increment()` 
-… for appending a number `-1` to a string or incrementing the ending number to allow `-2`, `-3`, etc. [#4340](https://github.com/getkirby/kirby/pull/4340)    
+#### `Str::increment()`
+… for appending a number `-1` to a string or incrementing the ending number to allow `-2`, `-3`, etc. [#4340](https://github.com/getkirby/kirby/pull/4340)
 
 ```php
 echo Str::increment('Page-1'); //=> Page-2
@@ -253,7 +253,7 @@ Enhancements:
 
 #### Custom helpers
 
-Helpers can now be deactivated by setting a global constant named `KIRBY_HELPER_*`, e.g. `KIRBY_HELPER_DUMP` to `false` [#4018](https://github.com/getkirby/kirby/pull/4018)
+Helpers can now be deactivated by setting a global constant named `KIRBY_HELPER_*`, e.g. `KIRBY_HELPER_DUMP` to `false` [#4018](https://github.com/getkirby/kirby/pull/4018) (link: docs/reference/templates/helpers#deactivate-a-helper-globally text: Check out the documents).
 
 In some cases, our global helper functions will collide with other tools' global functions if they use the same name, e.g. `dump()`. If you are affected by this problem, you can now set the matching constant, e.g. `KIRBY_HELPER_DUMP`, to `false` and Kirby will not register its global helper.
 
