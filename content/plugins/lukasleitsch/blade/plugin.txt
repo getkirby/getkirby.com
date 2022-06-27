@@ -2,7 +2,7 @@ Title: Blade Templates
 
 ----
 
-Repository: https://github.com/afbora/kirby-blade
+Repository: https://github.com/lukasleitsch/kirby-blade
 
 ----
 

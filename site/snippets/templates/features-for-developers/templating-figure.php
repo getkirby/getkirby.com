@@ -26,7 +26,7 @@
     <?= $page->bladeTemplate()->kt() ?>
   </div>
   <div class="font-mono text-xs color-gray-700">
-    <a href="/plugins/afbora/blade"><strong class="font-normal color-black link">Kirby Blade plugin</strong> by Ahmet Bora</a>
+    <a href="/plugins/lukasleitsch/blade"><strong class="font-normal color-black link">Kirby Blade plugin</strong> by Lukas Leitsch</a>
   </div>
 </div>
 
