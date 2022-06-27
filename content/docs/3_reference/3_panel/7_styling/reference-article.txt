@@ -27,7 +27,6 @@ Throughout the Panel we are using class-based CSS selectors which you can target
 }
 ```
 
-<since v="3.6.0">
 Besides adding more CSS selectors, we are also using data attributes to allow for much more powerful and tailored Panel customizations:
 
 | Selector | Description |
@@ -51,8 +50,6 @@ Besides adding more CSS selectors, we are also using data attributes to allow fo
 | `.k-pages-section .k-item[data-id]`, `.k-pages-section .k-item[data-status]` and `.k-pages-section .k-item[data-template]` | |
 | `.k-files-section .k-item[data-id]` and `.k-files-section .k-item[data-template]` | |
 | `.k-status-icon .k-status-icon-{status}` | for the page's status button |
-
-</since>
 
 
 

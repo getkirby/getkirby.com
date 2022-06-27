@@ -94,6 +94,7 @@ You can define the columns that are shown in the table. This is especially usefu
 | `align` | `left`, `center`, `right` | Set text alignment
 | `before`| `string` | Set text to prepend value
 | `after` | `string` | Set text to append value
+| `mobile` | `true` | Set visible in mobile view (since v3.6.0)
 
 ### Example
 
@@ -164,6 +165,31 @@ fields:
       b:
         type: toggle
         text: this is some long text
+```
+
+### Set columns to visible on mobile
+
+The `mobile` option keeps cells in responsive views. If none of the columns are set to `mobile`, only the first column will be visible on mobile.
+
+```yaml
+fields:
+  structure:
+    columns:
+      image:
+        type: image
+      title:
+        type: text
+        mobile: true
+      date:
+        type: date
+        mobile: true
+    fields:
+      image:
+        type: files
+      title:
+        type: text
+      date:
+        type: date
 ```
 
 ## Preview of fields in the table

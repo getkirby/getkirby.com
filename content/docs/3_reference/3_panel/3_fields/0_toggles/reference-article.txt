@@ -1,0 +1,158 @@
+Title: Toggles
+
+----
+
+Since: 3.7.0
+
+----
+
+Intro: Toggle between different states
+
+----
+
+Guide: blueprints/fields
+
+----
+
+Text:
+
+The toggle field is perfect for simple on/off or yes/no states.
+
+(image: toggles-labels-icons.png)
+
+## Example
+
+```yaml
+fields:
+  alignment:
+    type: toggles
+    label: Alignment
+    options:
+      - left
+      - center
+      - right
+      - justify
+```
+
+## Field properties
+
+(field-options: toggles)
+
+## Labels only
+
+Toggles can be defined with simple values or value & text options. They are a great alternative for the radio buttons.
+
+(image: toggles-labels.png)
+
+```yaml
+fields:
+  alignment:
+    type: toggles
+    label: Icons & Labels
+    options:
+      - left
+      - center
+      - right
+      - justify
+```
+
+## Icons & Labels
+
+The toggles can combine text and an icon for a more visual representation:
+
+(image: toggles-labels-icons.png)
+
+```yaml
+fields:
+  alignment:
+    type: toggles
+    label: Icons & Labels
+    options:
+      - value: left
+        text: Left
+        icon: text-left
+      - value: center
+        text: Center
+        icon: text-center
+      - value: right
+        text: Right
+        icon: text-right
+      - value: justify
+        text: Justify
+        icon: text-justify
+```
+
+## Icons only
+
+Labels can be hidden to toggle visual states. This is great for grid placement, text alignment, or similar use cases.
+
+(image: toggles-icons.png)
+
+```yaml
+fields:
+  alignment:
+    type: toggles
+    label: Icons
+    labels: false
+    options:
+      # Text will be used as title
+      # attribute for the <label>
+      - value: left
+        text: Left
+        icon: text-left
+      - value: center
+        text: Center
+        icon: text-center
+      - value: right
+        text: Right
+        icon: text-right
+      - value: justify
+        text: Justify
+        icon: text-justify
+```
+
+## Compact mode
+
+The buttons span the full width of the field by default. You can switch this off with the `grow` option to get a more compact layout.
+
+(image: toggles-compact.png)
+
+```yaml
+fields:
+  alignment:
+    type: toggles
+    label: Icons
+    labels: false
+    grow: false
+    options:
+      - value: left
+        text: Left
+        icon: text-left
+      - value: center
+        text: Center
+        icon: text-center
+      - value: right
+        text: Right
+        icon: text-right
+      - value: justify
+        text: Justify
+        icon: text-justify
+```
+
+(docs: panel-field-options field: toggles)
+
+## How to use in templates/snippets
+
+To only render the value stored in the content file, call the field name:
+
+```php
+<?= $page->category() ?>
+```
+
+If your saved values are lowercase versions of the text shown to the user, you might want to uppercase the first letter:
+
+```php
+<?= Str::ucfirst($page->category()) ?>
+```
+
+If you want to output the text that is shown to the user rather than the value stored in the content file, you have different options, that are explained in our Cookbook recipe (link: docs/cookbook/templating/fetching-field-options text: Fetching field options).

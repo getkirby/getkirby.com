@@ -364,6 +364,7 @@ info: "via {< site.myMethodWithHtml >}"
 - `Cms\Collection::indexOf()`: 1st parameter got renamed to `$needle`
 - `Cms\Collection::query()`: 1st parameter got renamed to `$arguments`
 - Some argument and property types are now more specific and therefore stricter [#3282](https://github.com/getkirby/kirby/pull/3282), [#3241](https://github.com/getkirby/kirby/pull/3241)
+- In multi-lang setups, calling `$pages->find()`, `$pages->findById()` or `$pages->findByUri()` on a non-children collection (e.g. grandchildren) with just a slug no longer works. This makes the `Pages` class more consistent between single and multi language setups.
 
 ### Deprecated code that has been removed with 3.6.0
 
