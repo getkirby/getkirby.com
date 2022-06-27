@@ -28,7 +28,7 @@
 <section id="stats" class="mb-42">
   <?php snippet('hgroup', [
     'title'    => 'New stats section',
-    'subtitle' => 'Turn your dashboard into a cool report',
+    'subtitle' => 'Turn your dashboard into a smart report',
     'mb'       => 12
   ]) ?>
 
