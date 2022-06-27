@@ -194,7 +194,7 @@ snippet($section->uid(), ['data' => $section]);
 
 What we’re doing here, is to pass the data for each `$section` to each snippet. This will make it possible to access all the content variables, which are stored in the text files.
 
-You can read more about (link: docs/templates/snippets#passing-variables-to-snippets text: how to pass variables to snippets) in the docs.
+You can read more about (link: docs/guide/templates/snippets#passing-variables-to-snippets text: how to pass variables to snippets) in the docs.
 
 ## The section snippets
 
