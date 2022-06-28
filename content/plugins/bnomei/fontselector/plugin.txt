@@ -1,0 +1,17 @@
+Title: Fontselector
+
+----
+
+Repository: https://github.com/bnomei/kirby3-fontselector
+
+----
+
+Category: panel
+
+----
+
+Subcategory: enhancements
+
+----
+
+Description: Select font family and font weight with two synced fields
