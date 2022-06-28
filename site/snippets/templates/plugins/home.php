@@ -30,7 +30,7 @@
   'layout'  => 'cardlets',
   'columns' => 2,
   'plugins' => [
-    'plugins/afbora/blade',
+    'plugins/lukasleitsch/blade',
     'plugins/mgfagency/twig',
     'plugins/clicktonext/plates',
     'plugins/bnomei/handlebars',

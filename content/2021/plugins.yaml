@@ -1,5 +1,4 @@
 - plugins/adspectus/date-extended
-- plugins/afbora/blade
 - plugins/afbora/plugin-loader
 - plugins/afbora/template-hooks
 - plugins/beebmx/db
@@ -77,6 +76,7 @@
 - plugins/kx550/fathom
 - plugins/lukaskleinschmidt/resolve
 - plugins/lukaskleinschmidt/terminal
+- plugins/lukasleitsch/blade
 - plugins/mauricerenck/komments
 - plugins/mauricerenck/podcaster
 - plugins/mauricerenck/ratepage
