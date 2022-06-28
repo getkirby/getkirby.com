@@ -184,6 +184,7 @@ With options, you can control all the page actions that should or should not be 
 | `changeStatus` | `true`/`false` |
 | `changeTemplate` | `false` or list of allowed template |
 | `changeTitle` | `true`/`false` |
+| `create` | `true`/`false` |
 | `delete` | `true`/`false` |
 | `duplicate` | `true`/`false` (since v3.2.0)|
 | `preview` | `true`/`false`/template string (see below) |
