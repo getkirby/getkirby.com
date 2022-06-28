@@ -131,6 +131,7 @@ The `permissions` option can be used to restrict access to certain actions for t
 | `users` | `true`/`false`|
 | `site` | `true`/`false` |
 | `settings`| `true`/`false` |
+| `languages` | `true`/`false` |
 
 #### Example: Prevent accessing user management and settings
 
