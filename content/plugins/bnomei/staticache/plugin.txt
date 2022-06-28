@@ -1,0 +1,31 @@
+Title: Staticache
+
+----
+
+Repository: https://github.com/bnomei/kirby3-staticache
+
+----
+
+Category: performance
+
+----
+
+Subcategory: caching, cachedriver
+
+----
+
+Description: Cache html output statically on demand in setting Kirbys pages caches to this special cachedriver
+
+----
+
+Example:
+
+```php
+require __DIR__ . '/kirby/bootstrap.php';
+
+// output static html if cached ...
+staticache(__DIR__ . '/static');
+
+// ... or render with kirby as usual
+echo (new Kirby)->render();
+```
