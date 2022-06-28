@@ -1,0 +1,17 @@
+Title: Autoloader
+
+----
+
+Repository: https://github.com/bnomei/autoloader-for-kirby
+
+----
+
+Category: dev-tools
+
+----
+
+Subcategory: plugin-development
+
+----
+
+Description: Helper to automatically load various Kirby extensions in a plugin
