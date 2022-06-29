@@ -68,7 +68,7 @@ Check out the following cookbook recipe for some examples:
 
 - (link: docs/cookbook/panel/customizing-panel text: Examples for customizing the Panel)
 
-Instead of adding it to your `config.php`, CSS to be applied globally in the Panel can also be added by means of a plugin: if an `index.css` file is present in the root folder of a plugin, it will automatically be loaded into the panel.
+Instead of adding it to your `config.php`, CSS to be applied globally in the Panel can also be added via a plugin: if an `index.css` file is present in the root folder of a plugin, it will be automatically loaded into the Panel.
 
 ## Custom Panel JS
 
