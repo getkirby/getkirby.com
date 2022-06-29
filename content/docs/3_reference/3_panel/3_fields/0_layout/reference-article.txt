@@ -200,3 +200,26 @@ fields:
 ```
 
 (docs: layouts/to-layouts)
+
+## Accessing layout settings
+
+Layout settings are accessible via the `$layout->attrs()` method. In the example, we add a class name using the `class` field in the layout settings:
+
+```php
+<?php foreach ($page->layout()->toLayouts() as $layout): ?>
+<section class="grid <?= $layout->attrs()->class() ?>" id="<?= $layout->id() ?>">
+  <!-- rest of code -->
+</section>
+<?php endforeach ?>
+```
+
+You have also access to a shortcut, which allows you to call the settings field directly:
+
+
+```php
+<?php foreach ($page->layout()->toLayouts() as $layout): ?>
+<section class="grid <?= $layout->class() ?>" id="<?= $layout->id() ?>">
+  <!-- rest of code -->
+</section>
+<?php endforeach ?>
+```
