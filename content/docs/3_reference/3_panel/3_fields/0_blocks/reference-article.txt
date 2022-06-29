@@ -227,6 +227,39 @@ Custom block types don't have a visual preview by default. They show up with the
 
 (image: preview.png)
 
+### Label
+
+Custom block types can use the `label` property to show some information from a field in the block. This can be particularly useful for blocks that don't have a preview:
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      - heading
+      - text
+      button:
+        name: Button
+        icon: bolt
+        label: "{{ text }}"
+        fields:
+          link:
+            type: url
+          text:
+            type: text
+```
+
+(image: block-labels.png)
+
+Within the label property, you have access to an array of field properties, here are some more examples:
+
+```yaml
+label: "{{ structure.length }}" # to get the number of items in a structure field
+
+label: "{{ gallery.length }} images" # to get the number of images in a gallery files field
+
+label: "{{ image.0.filename }}" # to get the filename of the first image in the image files field
+```
 ### Editing
 
 To edit a custom block type, editors can either double-tap on the block or click on the edit icon in the toolbar. The block drawer opens with the fields you've defined for the block.
