@@ -61,7 +61,7 @@ You can overwrite our default properties in your custom `panel.css`:
 
 ```css "assets/panel.css"
 :root {
-  --color-backgdrop: rgba(255, 255, 255, 0.6);
+  --color-backdrop: rgba(255, 255, 255, 0.6);
 }
 ```
 
