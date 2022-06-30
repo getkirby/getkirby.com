@@ -1,0 +1,13 @@
+Title: Search
+
+----
+
+Description: Search getkirby.com and our docs to find enlightenment.
+
+----
+
+Changefreq: never
+
+----
+
+Priority: .5
