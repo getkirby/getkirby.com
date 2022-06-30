@@ -7,6 +7,10 @@ extract([
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<?php if (option('archived') === true): ?>
+<meta name="robots" content="noindex">
+<?php endif ?>
+
 <title><?= $page->isHomePage() ? $page->title() : $page->title() . ' | ' . $site->title() ?></title>
 
 <link rel="preload" href="<?= url('/assets/css/index.css') ?>" as="style">
