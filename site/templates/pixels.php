@@ -234,6 +234,18 @@
       rounded: true,
       shadow: true
     },
+    instagram: {
+      label: "Instagram",
+      background: colors.dark,
+      mt: 6,
+      mr: 6,
+      ml: 6,
+      mb: 6,
+      width: 1024,
+      height: 1024,
+      position: positions.centerCenter,
+      shadow: true,
+    },
     viewPlugin: {
       label: "Panel view plugin",
       background: colors.gray,
