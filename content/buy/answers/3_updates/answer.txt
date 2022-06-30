@@ -1,7 +1,0 @@
-Title: What about updates?
-----
-Text:
-
-Minor updates of Kirby (e.g. 3.1 to 3.2) will be free. Users with an older license will get a discount for major upgrades (e.g. 3.x to 4.0).
-
-If you are still on v2, we offer attractive prices for all owners of a Kirby 2 license to upgrade to v3. (link: https://licenses.getkirby.com text: Upgrade your v2 license now).

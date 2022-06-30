@@ -1,5 +1,0 @@
-Title: OBS Studio
-----
-
-Link: https://obsproject.com/
-

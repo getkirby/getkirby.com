@@ -1,8 +1,0 @@
-Title: How long can I try it?
-----
-Text:
-
-Your **online demo** will be erased after an hour. You can always start a new one if you need more time though.
-
-Your **local installation** does not expire. You can try it as long as you want.
-

@@ -1,15 +1,3 @@
-<div class="mb-6">
-  <div class="container">
-    <?php snippet('layouts/topbar', [
-      'icon'   => '👩‍💻👨‍💻',
-      'title'  => 'We are a new team company!',
-      'button' => 'Learn more',
-      'link'   => '/new-company',
-      'active' => $page->is('new-company')
-    ]) ?>
-  </div>
-</div>
-
 <header class="header mb-24">
   <?php snippet('layouts/skipper') ?>
   <div class="container">

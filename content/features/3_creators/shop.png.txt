@@ -1,5 +1,0 @@
-Template: content-type
-----
-Caption: Shop
-----
-Text: You want to get more out of your products? Use Kirby as your CMS and connect it with a shop system like Etsy, Shopify or Snipcart.
