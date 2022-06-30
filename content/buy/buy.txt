@@ -2,13 +2,11 @@ Title: Buy
 
 ----
 
-Description: Buy a Kirby license and get answers to common questions about buying or upgrading your license(s).
+Ogtitle: Purchase a Kirby license
 
 ----
 
-Thumbnail:
-  -
-  title: Buy license
+Description: The transparency of open source meets a fair and sustainable pricing model.
 
 ----
 
