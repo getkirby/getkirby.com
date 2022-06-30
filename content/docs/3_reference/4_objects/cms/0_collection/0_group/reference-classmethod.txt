@@ -1,0 +1,15 @@
+Text:
+
+## Example
+
+```php
+<!-- group the collection by the field `category` -->
+<?php foreach ($collection->group('category') as $category => $group): ?>
+  <h2><?= $category ?></h2>
+  <ul>
+    <?php foreach ($group as $item): ?>
+    <li><?= $item->title() ?></li>
+    <?php endforeach ?>
+  </ul>
+<?php endforeach ?>
+```
