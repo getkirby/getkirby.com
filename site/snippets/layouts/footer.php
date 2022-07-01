@@ -6,20 +6,23 @@
         <p class="font-bold mb-1">Kirby</p>
         <p class="mb-1">The CMS that adapts to any project. Made for developers, designers, creators and clients.</p>
         <nav aria-label="Kirby on the web" class="social">
-          <a href="https://twitter.com/getkirby">
+          <a title="Twitter" href="https://twitter.com/getkirby">
             <?= icon('twitter') ?>
           </a>
-          <a href="https://github.com/getkirby">
+          <a title="Github" href="https://github.com/getkirby">
             <?= icon('github') ?>
           </a>
-          <a href="https://instagram.com/getkirby">
+          <a title="Instagram" href="https://instagram.com/getkirby">
             <?= icon('instagram') ?>
           </a>
-          <a href="https://youtube.com/kirbycasts">
+          <a title="Youtube" href="https://youtube.com/kirbycasts">
             <?= icon('youtube') ?>
           </a>
-          <a href="https://chat.getkirby.com">
+          <a title="Discord" href="https://chat.getkirby.com">
             <?= icon('discord') ?>
+          </a>
+          <a title="LinkedIn" href="https://linkedin.com/company/getkirby">
+            <?= icon('linkedin') ?>
           </a>
         </nav>
       </div>
