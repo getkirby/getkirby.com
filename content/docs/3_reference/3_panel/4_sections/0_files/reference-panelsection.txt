@@ -166,6 +166,18 @@ columns:
     align: right
 ```
 
+##### Width
+
+The column width can be set via the `width` property. You can use the usual fractions:
+
+```yaml
+layout: table
+columns:
+  dimensions:
+    label: Dimensions
+    width: 1/6
+```
+
 ##### Value
 
 By default, the table cells contain the field value matching the column name. You can customize the value with a string template.
