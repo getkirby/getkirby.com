@@ -62,6 +62,33 @@ plugins/
 
 For more complex plugins, add other subfolders as required.
 
+## Add `composer.json`
+
+Always add a composer.json file with basic information about your plugin, including the current version number, so that Kirby can use this information in the Panel's System view, and users can easily get information about your plugin with Kirby's plugin methods.
+
+```js "composer.json"
+{
+    "name": "superwoman/superplugin",
+    "description": "Superwoman Demo Plugin",
+    "homepage:": "https://github.com/yourname/yourplugin"
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Superwoman",
+            "email": "superwoman@example.com"
+        }
+    ],
+    "support": [
+      "docs": "https://github.com/yourname/yourplugin/blob/main/README.md",
+      "source": "https://github.com/yourname/yourplugin"
+    ]
+}
+```
+<since v="3.7.0">
+Kirby uses the links in the `homepage`, `support.docs` or `support.source` fields to create a link to your plugin in the Panel's System view. If a `homepage` link is given, this is used, otherwise Kirby falls back to `support.docs` and `support.source` in this order.
+</since>
+
 ## Commenting
 
 Comments help you and your users to understand your code even years later and they make it easier for other developers if they want to contribute to your plugin's development. Documenting comments will allow you to auto-generate documentation of your classes and methods (where applicable).
@@ -94,24 +121,6 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 2. MINOR version when you add functionality in a backwards compatible manner, and
 3. PATCH version when you make backwards compatible bug fixes
 
-### Add `composer.json`
-
-Add a composer.json file with basic information about your plugin, including the current version number, so that users can easily get information about your plugin with Kirby's plugin methods.
-
-```js "composer.json"
-{
-    "name": "superwoman/superplugin",
-    "description": "Superwoman Demo Plugin",
-    "version": "1.0.0",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Superwoman",
-            "email": "superwoman@example.com"
-        }
-    ]
-}
-```
 
 ## Add a README
 
