@@ -76,7 +76,7 @@ phpinfo();
 Alternatively, you can use
 
 ```php
-$errorLogP = ini_get('error_log');
+$errorLog = ini_get('error_log');
 var_dump($errorLog);
 ```
 
