@@ -61,6 +61,31 @@ Make sure to protect the logs folder from being publicly accessible.
 
 You can probably find more information in the help section of your hosting provider, or contact them for help with setting up your environment.
 
+## Finding your PHP error logs
+
+When you don't know the path to the PHP error logs (e.g. on shared hosting), you can use the `phpinfo()` command to find this path.
+
+Call this command from a separate PHP file or from one of your templates, then open the file in your browser and search for `error_log`.
+
+```php
+<?php
+
+phpinfo();
+```
+
+Alternatively, you can use
+
+```php
+$errorLogP = ini_get('error_log');
+var_dump($errorLog);
+```
+
+to get the path.
+
+<info>
+Sometime, error logs are not enabled. If there is no error log, you might have to set it first via `php.ini` as described above.
+</info>
+
 ## Typical PHP errors
 
 PHP has several levels of error messages based on severity. The most common ones - as defined (link: https://www.php.net/manual/en/errorfunc.constants.php text: on the official PHP website) - are:
@@ -199,7 +224,12 @@ You might also be interested in checking out some PHP debugging tools.
 - (link: https://xdebug.org text: Xdebug) (also see our (link: docs/cookbook/setup/php-debugging-with-xdebug text: recipe about Xdebug))
 - (link: https://addons.mozilla.org/de/firefox/addon/firephp/ text: FirePHP)
 - (link: https://craig.is/writing/chrome-logger text: Chrome Logger, formerly known as ChromePHP)
+- (link:https://myray.app/ text: Ray), (link: https://getkirby.com/plugins/genxbe/ray text: Ray plugin for Kirby)
+- (link:https://kint-php.github.io/kint/ text: Kint)
 
+## Further reading
+
+(link: docs/cookbook/setup/php-debugging-with-xdebug text: First steps to start debugging with Xdebug)
 ----
 
 Published: 2016-08-09
