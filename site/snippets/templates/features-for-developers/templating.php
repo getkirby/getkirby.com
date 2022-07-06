@@ -7,25 +7,25 @@
   'reverse' => true,
   'voice' => 'rene-stalder',
   'features' => [
-    [
-      'title' => 'Controllers',
-      'text' => 'Complex logic? Use Kirby’s controllers to filter data collections based on URL query parameters, handle forms, do date-based calculations and more without cluttering your templates. Marie Kondō agrees.',
-      'link' => '/docs/guide/templates/controllers'
-    ],
-    [
-      'title' => 'Models',
-      'text' => 'Super-charge your pages with additional functionalities. Page models extend our default page class and offer unlimited opportunities to customize what a page represents.',
-      'link' => '/docs/guide/templates/page-models'
-    ],
-    [
-      'title' => 'Collections',
-      'text' => 'Keep your code DRY with collections. Featured articles, upcoming events, team members – create reusable collections that you can use everywhere.',
-      'link' => '/docs/guide/templates/collections'
-    ],
-    [
-      'title' => 'Bring your own engine',
-      'text' => 'Your team is familiar with Twig, Blade or your own template engine? No problem! Our engine can be swapped using a template plugin, or you can create your own.',
-      'link' => '/docs/reference/plugins/components/template'
-    ],
+	[
+	  'title' => 'Controllers',
+	  'text' => 'Complex logic? Use Kirby’s controllers to filter data collections based on URL query parameters, handle forms, do date-based calculations and more without cluttering your templates. Marie Kondō agrees.',
+	  'link' => '/docs/guide/templates/controllers'
+	],
+	[
+	  'title' => 'Models',
+	  'text' => 'Super-charge your pages with additional functionalities. Page models extend our default page class and offer unlimited opportunities to customize what a page represents.',
+	  'link' => '/docs/guide/templates/page-models'
+	],
+	[
+	  'title' => 'Collections',
+	  'text' => 'Keep your code DRY with collections. Featured articles, upcoming events, team members – create reusable collections that you can use everywhere.',
+	  'link' => '/docs/guide/templates/collections'
+	],
+	[
+	  'title' => 'Bring your own engine',
+	  'text' => 'Your team is familiar with Twig, Blade or your own template engine? No problem! Our engine can be swapped using a template plugin, or you can create your own.',
+	  'link' => '/docs/reference/plugins/components/template'
+	],
   ]
 ]);

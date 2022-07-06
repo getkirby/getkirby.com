@@ -1,6 +1,6 @@
 [*.{css,scss,less,js,json,ts,sass,html,hbs,mustache,phtml,html.twig,md,yml}]
 charset = utf-8
-indent_style = space
+indent_style = tab
 indent_size = 2
 end_of_line = lf
 insert_final_newline = true
@@ -8,18 +8,9 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 
 [*.md]
+indent_style = space
 indent_size = 4
 trim_trailing_whitespace = false
 
 [*.twig]
-indent_size = 2
-
-[site/templates/**.php]
-indent_size = 2
-
-[site/snippets/**.php]
-indent_size = 2
-
-[package.json,.{babelrc,editorconfig,eslintrc,lintstagedrc,stylelintrc}]
-indent_style = space
 indent_size = 2

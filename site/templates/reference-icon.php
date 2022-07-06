@@ -7,21 +7,21 @@
 <?php foreach ($colors as $color): ?>
 <section class="mb-12">
   <h2 class="h3 mb-1" id="<?= $slug = Str::slug($color) ?>">
-    <a href="#<?= $slug ?>">
-      <?= $color ?>
-    </a>
+	<a href="#<?= $slug ?>">
+	  <?= $color ?>
+	</a>
   </h2>
   <ul class="columns" style="--columns: 3">
-    <?php foreach ($sizes as $size): ?>
-    <li>
-      <h3 class="font-mono mb-1"><?= $size ?> px</h3>
-      <figure class="grid place-items-center icon rounded" data-bg="<?= strtolower($color) ?>">
-        <svg data-size="<?= $size ?>">
-          <use xlink:href="#icon-<?= $page->slug() ?>" />
-        </svg>
-      </figure>
-    </li>
-    <?php endforeach ?>
+	<?php foreach ($sizes as $size): ?>
+	<li>
+	  <h3 class="font-mono mb-1"><?= $size ?> px</h3>
+	  <figure class="grid place-items-center icon rounded" data-bg="<?= strtolower($color) ?>">
+		<svg data-size="<?= $size ?>">
+		  <use xlink:href="#icon-<?= $page->slug() ?>" />
+		</svg>
+	  </figure>
+	</li>
+	<?php endforeach ?>
   </ul>
 </section>
 <?php endforeach ?>

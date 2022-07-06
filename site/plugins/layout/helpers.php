@@ -2,20 +2,20 @@
 
 function layout($name = null, ?array $data = null)
 {
-    if (is_array($name) === true) {
-        $data = $name;
-        $name = null;
-    }
+	if (is_array($name) === true) {
+		$data = $name;
+		$name = null;
+	}
 
-    Kirby\Layout\Layout::start($name, $data);
+	Kirby\Layout\Layout::start($name, $data);
 }
 
 function slot(?string $name = null)
 {
-    Kirby\Layout\Slots::start($name);
+	Kirby\Layout\Slots::start($name);
 }
 
 function endslot()
 {
-    echo Kirby\Layout\Slots::end();
+	echo Kirby\Layout\Slots::end();
 }

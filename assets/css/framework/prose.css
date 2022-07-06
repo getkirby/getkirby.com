@@ -1,35 +1,35 @@
 :root {
-  --prose-code-bg: rgba(0,0,0, .1);
-  --prose-pre-bg: var(--color-black);
-  --prose-size: var(--text-xl);
-  --prose-color-text: var(--color-gray-700);
-  --prose-color-highlight: var(--color-black);
+	--prose-code-bg: rgba(0, 0, 0, 0.1);
+	--prose-pre-bg: var(--color-black);
+	--prose-size: var(--text-xl);
+	--prose-color-text: var(--color-gray-700);
+	--prose-color-highlight: var(--color-black);
 }
 
 .prose {
-  font-size: var(--prose-size);
-  line-height: var(--leading-normal);
-  color: var(--prose-color-text);
+	font-size: var(--prose-size);
+	line-height: var(--leading-normal);
+	color: var(--prose-color-text);
 }
 
 /* Links */
 .prose a {
-  color: var(--prose-color-highlight);
-  max-width: 100%;
-  word-break: break-word;
+	color: var(--prose-color-highlight);
+	max-width: 100%;
+	word-break: break-word;
 }
 
 /* Special elements */
 .prose abbr {
-  text-decoration: none;
+	text-decoration: none;
 }
 .prose abbr a {
-  text-decoration-color: var(--color-gray-500);
-  text-decoration-style: dotted;
-  cursor: help;
+	text-decoration-color: var(--color-gray-500);
+	text-decoration-style: dotted;
+	cursor: help;
 }
 .prose strong {
-  font-weight: var(--font-semibold);
+	font-weight: var(--font-semibold);
 }
 
 /* Highlight elements */
@@ -43,16 +43,16 @@
 .prose strong,
 .prose em,
 .prose b {
-  color: var(--prose-color-highlight);
+	color: var(--prose-color-highlight);
 }
 
 /* Margins */
 .prose > :first-child {
-  padding-top: 0;
-  margin-top: 0;
+	padding-top: 0;
+	margin-top: 0;
 }
 .prose > :last-child {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 .prose * + blockquote,
 .prose * + .box,
@@ -69,45 +69,44 @@
 .prose * + .screencast,
 .prose * + .since,
 .prose * + .table {
-  margin-top: 1.5em;
+	margin-top: 1.5em;
 }
-
 
 /* Lists */
 .prose li::marker {
-  color: var(--prose-color-highlight);
+	color: var(--prose-color-highlight);
 }
 .prose ul {
-  margin-left: 1em;
+	margin-left: 1em;
 }
 .prose ol {
-  margin-left: 1.5em;
+	margin-left: 1.5em;
 }
 .prose ol p,
 .prose ul p {
-  margin-top: 0;
+	margin-top: 0;
 }
 .prose ol ol,
 .prose ol ul,
 .prose ul ol,
 .prose ul ul {
-  margin-top: 0;
+	margin-top: 0;
 }
 .prose ol > li {
-  list-style: decimal-leading-zero;
-  padding-left: .25em;
+	list-style: decimal-leading-zero;
+	padding-left: 0.25em;
 }
 .prose ol > li::marker {
-  font-variant-numeric: tabular-nums;
-  font-weight: var(--font-bold);
-  font-size: var(--text-xs);
-  font-family: var(--font-mono);
+	font-variant-numeric: tabular-nums;
+	font-weight: var(--font-bold);
+	font-size: var(--text-xs);
+	font-family: var(--font-mono);
 }
 .prose ul > li {
-  list-style: disc;
+	list-style: disc;
 }
 .prose ul ul > li {
-  list-style: circle;
+	list-style: circle;
 }
 
 /** Headings **/
@@ -117,85 +116,84 @@
 .prose h4 a,
 .prose h5 a,
 .prose h6 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 .prose h2,
 .prose h3 {
-  scroll-margin-top: var(--spacing-6);
+	scroll-margin-top: var(--spacing-6);
 }
 .prose h2 {
-  font-size: 1.625em;
-  line-height: 1.15em;
+	font-size: 1.625em;
+	line-height: 1.15em;
 }
 .prose * + h2 {
-  margin-top: 3em;
+	margin-top: 3em;
 }
 .prose h3 {
-  font-size: 1.25em;
+	font-size: 1.25em;
 }
 .prose * + h3 {
-  margin-top: 3em;
+	margin-top: 3em;
 }
 .prose h2 + h3 {
-  margin-top: 1.5em;
+	margin-top: 1.5em;
 }
 .prose h4 {
-  font-size: 1em;
-  font-weight: var(--font-normal);
+	font-size: 1em;
+	font-weight: var(--font-normal);
 }
 .prose * + h4 {
-  margin-top: 3em;
+	margin-top: 3em;
 }
 .prose h4 + * {
-  margin-top: var(--spacing-3);
+	margin-top: var(--spacing-3);
 }
 
 /** Code **/
 .prose :not(pre) > code {
-  font-family: var(--font-mono);
-  display: inline-flex;
-  font-size: .825em;
-  max-width: 100%;
-  padding: 0 .5em;
-  border-radius: 3px;
-  background: var(--prose-code-bg);
-  color: var(--prose-color-highlight);
-  white-space: nowrap;
-  overflow-y: hidden;
-  overflow-x: auto;
+	font-family: var(--font-mono);
+	display: inline-flex;
+	font-size: 0.825em;
+	max-width: 100%;
+	padding: 0 0.5em;
+	border-radius: 3px;
+	background: var(--prose-code-bg);
+	color: var(--prose-color-highlight);
+	white-space: nowrap;
+	overflow-y: hidden;
+	overflow-x: auto;
 }
 .prose code a {
-  text-decoration: none;
-  color: inherit;
+	text-decoration: none;
+	color: inherit;
 }
 
 /** Codeblocks **/
 
 /** Blockquotes **/
 .prose > blockquote {
-  margin: 3em 0;
+	margin: 3em 0;
 }
 .prose > blockquote p {
-  border-left: 2px solid #000;
-  padding-left: .75rem;
-  max-width: 20em;
-  font-size: 1.25em;
-  line-height: var(--leading-snug);
-  color: var(--prose-color-highlight);
+	border-left: 2px solid #000;
+	padding-left: 0.75rem;
+	max-width: 20em;
+	font-size: 1.25em;
+	line-height: var(--leading-snug);
+	color: var(--prose-color-highlight);
 }
-
 
 /** Horizontal Rule **/
 .hr {
-  height: var(--spacing-2px);
-  background: currentColor;
-  width: var(--spacing-4);
+	height: var(--spacing-2px);
+	background: currentColor;
+	width: var(--spacing-4);
 }
 
 /** Definition Lists **/
 .prose dt {
-  font-weight: var(--font-bold);
+	font-weight: var(--font-bold);
 }
 
 .prose p,
@@ -211,87 +209,87 @@
 .prose .box,
 .prose .code,
 .prose .filesystem {
-  max-width: 42rem;
+	max-width: 42rem;
 }
 
 /** Images **/
 .prose img {
-  width: auto;
-  max-width: 100%;
+	width: auto;
+	max-width: 100%;
 }
 .prose figure.image {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+	margin-top: 3rem;
+	margin-bottom: 3rem;
 }
 .prose .image a {
-  display: inline-block;
+	display: inline-block;
 }
 .prose .image img {
-  box-shadow: var(--shadow-2xl);
-  background: var(--color-gray-200);
+	box-shadow: var(--shadow-2xl);
+	background: var(--color-gray-200);
 }
 .prose .image figcaption {
-  font-size: var(--text-sm);
-  padding-top: var(--spacing-3);
+	font-size: var(--text-sm);
+	padding-top: var(--spacing-3);
 }
 
 /* Intro */
 .prose .intro {
-  line-height: var(--leading-tight);
-  font-size: var(--text-2xl);
+	line-height: var(--leading-tight);
+	font-size: var(--text-2xl);
 }
 
 /* since */
 .since {
-  position: relative;
-  padding-bottom: 1.5rem;
+	position: relative;
+	padding-bottom: 1.5rem;
 }
 .since::before,
 .since::after {
-  content: "";
-  position: absolute;
+	content: "";
+	position: absolute;
 }
 .since::before {
-  top: calc(.75rem - 1px);
-  left: -1.5rem;
-  bottom: 0;
-  border: 1px solid var(--color-gray-300);
-  border-right: none;
-  width: 1.5rem;
+	top: calc(0.75rem - 1px);
+	left: -1.5rem;
+	bottom: 0;
+	border: 1px solid var(--color-gray-300);
+	border-right: none;
+	width: 1.5rem;
 }
 .since[open]::after {
-  bottom: -.5rem;
-  left: 0;
-  width: 1px;
-  margin-top: -1px;
-  height: 1rem;
-  background: var(--color-gray-300);
+	bottom: -0.5rem;
+	left: 0;
+	width: 1px;
+	margin-top: -1px;
+	height: 1rem;
+	background: var(--color-gray-300);
 }
 .since:not([open])::after {
-  content: "• • •";
-  bottom: -.825rem;
-  color: var(--color-gray-300);
-  left: 0;
+	content: "• • •";
+	bottom: -0.825rem;
+	color: var(--color-gray-300);
+	left: 0;
 }
 .since summary {
-  position: relative;
-  z-index: 1;
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  display: inline-block;
-  padding: var(--spacing-2px) var(--spacing-3);
-  background: var(--color-light);
-  border: 1px solid var(--color-gray-300);
-  border-radius: 3rem;
-  margin-left: -.75rem;
+	position: relative;
+	z-index: 1;
+	font-family: var(--font-mono);
+	font-size: var(--text-xs);
+	display: inline-block;
+	padding: var(--spacing-2px) var(--spacing-3);
+	background: var(--color-light);
+	border: 1px solid var(--color-gray-300);
+	border-radius: 3rem;
+	margin-left: -0.75rem;
 }
 .since summary.new {
-  background: var(--color-yellow-400);
-  border: 1px solid var(--color-yellow-500);
+	background: var(--color-yellow-400);
+	border: 1px solid var(--color-yellow-500);
 }
 .since summary a {
-  text-decoration: none;
+	text-decoration: none;
 }
 .since > div {
-  margin-top: var(--spacing-6);
+	margin-top: var(--spacing-6);
 }

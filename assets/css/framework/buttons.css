@@ -1,44 +1,44 @@
 :root {
-  --btn-bg: var(--color-black);
-  --btn-color: var(--color-black);
-  --btn-filled-bg: var(--color-black);
-  --btn-filled-color: var(--color-white);
+	--btn-bg: var(--color-black);
+	--btn-color: var(--color-black);
+	--btn-filled-bg: var(--color-black);
+	--btn-filled-color: var(--color-white);
 }
 
 button {
-  overflow: hidden;
-  text-overflow: ellipsis;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .btn {
-  display: inline-flex;
-  padding: .5rem 1.5rem;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--text-sm);
-  color: var(--btn-color);
-  cursor: pointer;
-  border: 2px solid transparent;
-  border-radius: var(--rounded-xs);
-  font-family: var(--font-mono);
-  white-space: nowrap;
-  background: none;
+	display: inline-flex;
+	padding: 0.5rem 1.5rem;
+	align-items: center;
+	justify-content: center;
+	font-size: var(--text-sm);
+	color: var(--btn-color);
+	cursor: pointer;
+	border: 2px solid transparent;
+	border-radius: var(--rounded-xs);
+	font-family: var(--font-mono);
+	white-space: nowrap;
+	background: none;
 }
 .btn svg {
-  margin-right: .75rem;
+	margin-right: 0.75rem;
 }
 .btn--outlined {
-  border-color: var(--btn-bg);
+	border-color: var(--btn-bg);
 }
 .btn--outlined.btn--white {
-  border-color: var(--color-white);
-  color: var(--color-white);
+	border-color: var(--color-white);
+	color: var(--color-white);
 }
 .btn--filled {
-  border-color: var(--btn-filled-bg);
-  background: var(--btn-filled-bg);
-  color: var(--btn-filled-color) !important;
+	border-color: var(--btn-filled-bg);
+	background: var(--btn-filled-bg);
+	color: var(--btn-filled-color) !important;
 }
 .btn--filled svg {
-  color: var(--color-yellow-500);
+	color: var(--color-yellow-500);
 }

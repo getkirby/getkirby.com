@@ -6,17 +6,17 @@
   'figure' => 'templates/features-for-developers/filesystem-figure',
   'voice' => 'andy-bell',
   'features' => [
-    [
-      'title' => 'Fast',
-      'text' => 'The file system is much faster than you might think. Most often even way faster than a database. With SSD drives on your server you get a system that can fly.'
-    ],
-    [
-      'title' => 'Resilient',
-      'text' => 'Files and folders are probably the most future-proof way of storing your data. Think version control via Git, simple backup options and syncing via tools like rsync.'
-    ],
-    [
-      'title' => 'Extensible',
-      'text' => 'Combine our flat-file system with databases, APIs or even data from a simple Excel spreadsheet. Kirby handles it all.'
-    ],
+	[
+	  'title' => 'Fast',
+	  'text' => 'The file system is much faster than you might think. Most often even way faster than a database. With SSD drives on your server you get a system that can fly.'
+	],
+	[
+	  'title' => 'Resilient',
+	  'text' => 'Files and folders are probably the most future-proof way of storing your data. Think version control via Git, simple backup options and syncing via tools like rsync.'
+	],
+	[
+	  'title' => 'Extensible',
+	  'text' => 'Combine our flat-file system with databases, APIs or even data from a simple Excel spreadsheet. Kirby handles it all.'
+	],
   ]
 ]);

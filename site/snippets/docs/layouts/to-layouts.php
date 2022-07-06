@@ -8,9 +8,9 @@ Using the (method: $field::toLayouts text: toLayouts) field method, you can retr
 <section class="grid" id="<?= $layout->id() ?>">
   <?php foreach ($layout->columns() as $column): ?>
   <div class="column" style="--span:<?= $column->span() ?>">
-    <div class="blocks">
-      <?= $column->blocks() ?>
-    </div>
+	<div class="blocks">
+	  <?= $column->blocks() ?>
+	</div>
   </div>
   <?php endforeach ?>
 </section>
@@ -30,9 +30,9 @@ Each column in a layout has a (method: Kirby\Cms\LayoutColumn::width text: $colu
 <section class="6-column-grid" id="<?= $layout->id() ?>">
   <?php foreach ($layout->columns() as $column): ?>
   <div class="column" style="--span:<?= $column->span(6) ?>">
-    <div class="blocks">
-      <?= $column->blocks() ?>
-    </div>
+	<div class="blocks">
+	  <?= $column->blocks() ?>
+	</div>
   </div>
   <?php endforeach ?>
 </section>
@@ -52,13 +52,13 @@ In some cases, you might even want to controll the way blocks within layouts are
 <section class="6-column-grid" id="<?= $layout->id() ?>">
   <?php foreach ($layout->columns() as $column): ?>
   <div class="column" style="--span:<?= $column->span(6) ?>">
-    <div class="blocks">
-      <?php foreach ($column->blocks() as $block): ?>
-      <div class="block block-type-<?= $block->type() ?>">
-        <?= $block ?>
-      </div>
-      <?php endforeach ?>
-    </div>
+	<div class="blocks">
+	  <?php foreach ($column->blocks() as $block): ?>
+	  <div class="block block-type-<?= $block->type() ?>">
+		<?= $block ?>
+	  </div>
+	  <?php endforeach ?>
+	</div>
   </div>
   <?php endforeach ?>
 </section>
@@ -78,13 +78,13 @@ If you need to access the layout object in a block snippet, you need to pass it 
 <section class="6-column-grid" id="<?= $layout->id() ?>">
   <?php foreach ($layout->columns() as $column): ?>
   <div class="column" style="--span:<?= $column->span(6) ?>">
-    <div class="blocks">
-      <?php foreach ($column->blocks() as $block): ?>
-      <div class="block block-type-<?= $block->type() ?>">
-        <?php snippet('blocks/' . $block->type(), ['block' => $block, 'layout' => $layout]) ?>
-      </div>
-      <?php endforeach ?>
-    </div>
+	<div class="blocks">
+	  <?php foreach ($column->blocks() as $block): ?>
+	  <div class="block block-type-<?= $block->type() ?>">
+		<?php snippet('blocks/' . $block->type(), ['block' => $block, 'layout' => $layout]) ?>
+	  </div>
+	  <?php endforeach ?>
+	</div>
   </div>
   <?php endforeach ?>
 </section>

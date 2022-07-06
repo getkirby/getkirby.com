@@ -2,13 +2,13 @@
 
 <article class="buzz">
   <header class="mb-24">
-    <h1 class="h1">What others say.<br>What we say.<br>The buzz.</h1>
+	<h1 class="h1">What others say.<br>What we say.<br>The buzz.</h1>
   </header>
 
   <div class="auto-fill mb-36" style="--min: 20rem; --gap: var(--spacing-12)">
-    <?php foreach ($page->children()->listed()->flip() as $entry) : ?>
-      <?php snippet('templates/buzz/entry', ['entry' => $entry]) ?>
-    <?php endforeach ?>
+	<?php foreach ($page->children()->listed()->flip() as $entry) : ?>
+	  <?php snippet('templates/buzz/entry', ['entry' => $entry]) ?>
+	<?php endforeach ?>
   </div>
 
   <?php snippet('templates/home/updates', ['title' => 'More ways to stay up-to-date:']) ?>

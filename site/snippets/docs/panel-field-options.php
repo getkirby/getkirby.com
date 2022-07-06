@@ -7,10 +7,10 @@ Our options (link: docs/guide/blueprints/query-language text: query syntax) offe
 ```yaml
 fields:
   category:
-    label: Category
-    type: <?= $field . PHP_EOL ?>
-    options: query
-    query: site.children.published
+	label: Category
+	type: <?= $field . PHP_EOL ?>
+	options: query
+	query: site.children.published
 ```
 
 The example above will turn all published main pages of the site into options. The title of each page will be used as the text of the option and the page id will be used as the stored value.
@@ -52,9 +52,9 @@ category:
   type: <?= $field . PHP_EOL ?>
   options: query
   query:
-    fetch: site.children.published
-    text: "{{ page.year }}"
-    value: "{{ page.slug }}"
+	fetch: site.children.published
+	text: "{{ page.year }}"
+	value: "{{ page.slug }}"
 ```
 
 As in the example above, all custom fields of a page can be accessed. You can even combine fields and use (link: docs/reference/templates/field-methods text: field methods):
@@ -65,9 +65,9 @@ category:
   type: <?= $field . PHP_EOL ?>
   options: query
   query:
-    fetch: site.children.published
-    text: "{{ page.year }} - {{ page.title.upper }}"
-    value: "{{ page.slug }}"
+	fetch: site.children.published
+	text: "{{ page.year }} - {{ page.title.upper }}"
+	value: "{{ page.slug }}"
 ```
 
 ### Numeric keys
@@ -77,13 +77,13 @@ If you want to store numeric keys as values, you have to use the long notation w
 ```yaml
 fields:
   category:
-    label: Category
-    type: <?= $field . PHP_EOL ?>
-    options:
-      - value: '100'
-        text: Design
-      - value: '200'
-        text: Architecture
+	label: Category
+	type: <?= $field . PHP_EOL ?>
+	options:
+	  - value: '100'
+		text: Design
+	  - value: '200'
+		text: Architecture
 ```
 
 ## Options from other fields
@@ -106,9 +106,9 @@ category:
   type: <?= $field . PHP_EOL ?>
   options: query
   query:
-    fetch: site.taxonomy.split
-    text: "{{ arrayItem.value.upper }}"
-    value: "{{ arrayItem.value.slug }}"
+	fetch: site.taxonomy.split
+	text: "{{ arrayItem.value.upper }}"
+	value: "{{ arrayItem.value.slug }}"
 ```
 
 ### A custom separator
@@ -134,12 +134,12 @@ twitter:
   label: Follow the Kirby Team on Twitter …
   type: structure
   fields:
-    name:
-      label: Team Member
-      type: text
-    twitter:
-      label: Twitter Username
-      type: text
+	name:
+	  label: Team Member
+	  type: text
+	twitter:
+	  label: Twitter Username
+	  type: text
 ```
 
 We can fetch the fields by using the keyword `structureItem`:
@@ -150,9 +150,9 @@ category:
   type: <?= $field . PHP_EOL ?>
   options: query
   query:
-    fetch: site.contactoptions.toStructure
-    text: "{{ structureItem.name }}"
-    value: "{{ structureItem.twitter }}"
+	fetch: site.contactoptions.toStructure
+	text: "{{ structureItem.name }}"
+	value: "{{ structureItem.twitter }}"
 ```
 
 
@@ -179,9 +179,9 @@ Let's assume that our JSON endpoint returns the following JSON:
 ```json
 {
   "Companies": [
-    {"name": "Apple"},
-    {"name": "Intel"},
-    {"name": "Microsoft"}
+	{"name": "Apple"},
+	{"name": "Intel"},
+	{"name": "Microsoft"}
   ]
 }
 ```
@@ -196,10 +196,10 @@ category:
   type: <?= $field . PHP_EOL ?>
   options: api
   api:
-    url: https://example.com/companies.json
-    fetch: Companies
-    text: "{{ item.name }}"
-    value: "{{ item.name.slug }}"
+	url: https://example.com/companies.json
+	fetch: Companies
+	text: "{{ item.name }}"
+	value: "{{ item.name.slug }}"
 ```
 
 With the `fetch` attribute we can define where to start in the JSON document. This can even go down nested structures or sort entries:
@@ -217,28 +217,28 @@ Again, each item is being converted to a Kirby object and every property of the 
 ```json
 {
   "Companies": [
-    {
-      "name": "Apple",
-      "products": [
-        {"name": "MacBook"},
-        {"name": "iPhone"},
-        {"name": "iPad"}
-      ]
-    },
-    {
-      "name": "Intel",
-      "products": [
-        {"name": "Intel Core something"}
-      ]
-    },
-    {
-      "name": "Microsoft",
-      "products": [
-        {"name": "Windows"},
-        {"name": "Hololens"},
-        {"name": "Xbox"}
-      ]
-    }
+	{
+	  "name": "Apple",
+	  "products": [
+		{"name": "MacBook"},
+		{"name": "iPhone"},
+		{"name": "iPad"}
+	  ]
+	},
+	{
+	  "name": "Intel",
+	  "products": [
+		{"name": "Intel Core something"}
+	  ]
+	},
+	{
+	  "name": "Microsoft",
+	  "products": [
+		{"name": "Windows"},
+		{"name": "Hololens"},
+		{"name": "Xbox"}
+	  ]
+	}
   ]
 }
 ```
@@ -277,10 +277,10 @@ category:
   type: <?= $field . PHP_EOL ?>
   options: api
   api:
-    url: "{{ site.url }}/my-api/companies.json"
-    fetch: Companies
-    text: "{{ item.name }}"
-    value: "{{ item.name.slug }}"
+	url: "{{ site.url }}/my-api/companies.json"
+	fetch: Companies
+	text: "{{ item.name }}"
+	value: "{{ item.name.slug }}"
 ```
 
 With this simple addition, the API URL will always refer to the main URL of the site. You can also access the configuration instead to get even more flexibility

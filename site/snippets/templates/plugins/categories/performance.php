@@ -1,14 +1,14 @@
 <?php snippet('templates/plugins/section', [
-  'id'      => 'pwa',
-  'icon'    => 'performance',
+  'id'	  => 'pwa',
+  'icon'	=> 'performance',
   'title'   => 'PWA',
   'layout'  => 'hero',
   'plugins' => $plugins->filter('subcategory', 'pwa')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'cachedrivers',
-  'icon'    => 'performance',
+  'id'	  => 'cachedrivers',
+  'icon'	=> 'performance',
   'title'   => 'Cachedrivers',
   'layout'  => 'cards',
   'columns' => 2,
@@ -16,8 +16,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'caching',
-  'icon'    => 'performance',
+  'id'	  => 'caching',
+  'icon'	=> 'performance',
   'title'   => 'Caching',
   'layout'  => 'cardlets',
   'columns' => 2,
@@ -25,24 +25,24 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'cachebusting',
-  'icon'    => 'performance',
+  'id'	  => 'cachebusting',
+  'icon'	=> 'performance',
   'title'   => 'Cachebusting',
   'layout'  => 'cards',
   'plugins' => $plugins->filter('subcategory', 'cachebusting')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'panel',
-  'icon'    => 'performance',
+  'id'	  => 'panel',
+  'icon'	=> 'performance',
   'title'   => 'Panel extensions',
   'layout'  => 'hero',
   'plugins' => $plugins->filter('subcategory', 'panel')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'cdns',
-  'icon'    => 'performance',
+  'id'	  => 'cdns',
+  'icon'	=> 'performance',
   'title'   => 'CDNs',
   'layout'  => 'cardlets',
   'columns' => 2,
@@ -50,8 +50,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'optimizations',
-  'icon'    => 'analytics',
+  'id'	  => 'optimizations',
+  'icon'	=> 'analytics',
   'title'   => 'Optimizations',
   'layout'  => 'cardlets',
   'columns' => 2,

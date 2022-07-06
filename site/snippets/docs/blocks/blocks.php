@@ -64,8 +64,8 @@ Sometimes you might wish to customize the way block snippets are loaded. Maybe y
 <?php foreach ($page->myBlocksField()->toBlocks() as $block): ?>
 <div id="<?= $block->id() ?>" class="block block-type-<?= $block->type() ?>">
   <?php snippet('blocks/' . $block->type(), [
-    'block' => $block,
-    'theme' => 'dark'
+	'block' => $block,
+	'theme' => 'dark'
   ]) ?>
 </div>
 <?php endforeach ?>
@@ -81,8 +81,8 @@ CODE;
 <?php foreach ($page->myBlocksField()->toBlocks() as $block): ?>
 <div id="<?= $block->id() ?>" class="block block-type-<?= $block->type() ?>">
   <?php snippet('blocks/custom/' . $block->type(), [
-    'block' => $block,
-    'theme' => 'dark'
+	'block' => $block,
+	'theme' => 'dark'
   ]) ?>
 </div>
 <?php endforeach ?>

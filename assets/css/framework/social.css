@@ -1,10 +1,10 @@
 .social {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 .social a {
-  display: grid;
-  place-items: center;
-  width: var(--spacing-10);
-  height: var(--spacing-10);
+	display: grid;
+	place-items: center;
+	width: var(--spacing-10);
+	height: var(--spacing-10);
 }

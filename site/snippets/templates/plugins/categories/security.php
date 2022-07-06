@@ -1,14 +1,14 @@
 <?php snippet('templates/plugins/section', [
-  'id'      => 'doctor',
-  'icon'    => 'lock',
+  'id'	  => 'doctor',
+  'icon'	=> 'lock',
   'title'   => 'Panel',
   'layout'  => 'hero',
   'plugins' => ['plugins/bnomei/doctor']
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'authentication',
-  'icon'    => 'lock',
+  'id'	  => 'authentication',
+  'icon'	=> 'lock',
   'title'   => 'Authentication',
   'layout'  => 'cardlets',
   'columns' => 3,
@@ -16,8 +16,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'content-protection',
-  'icon'    => 'lock',
+  'id'	  => 'content-protection',
+  'icon'	=> 'lock',
   'title'   => 'Content protection',
   'layout'  => 'cards',
   'columns' => 2,
@@ -25,8 +25,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'utilities',
-  'icon'    => 'lock',
+  'id'	  => 'utilities',
+  'icon'	=> 'lock',
   'title'   => 'Utilities',
   'layout'  => 'cards',
   'columns' => 2,

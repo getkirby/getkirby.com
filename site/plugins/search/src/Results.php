@@ -17,20 +17,20 @@ use Kirby\Cms\Pagination;
 class Results extends Collection
 {
 
-    static public function from(array $response): self
-    {
-        // Convert the hits to Obj objects
-        $hits = array_map(function ($hit) {
-            return new Obj($hit);
-        }, $response['hits']);
+	static public function from(array $response): self
+	{
+		// Convert the hits to Obj objects
+		$hits = array_map(function ($hit) {
+			return new Obj($hit);
+		}, $response['hits']);
 
-        $results = new static($hits);
-        $results->pagination = new Pagination([
-            'page'  => ($response['page'] ?? 0) + 1,
-            'total' => $response['nbHits'] ?? 0,
-            'limit' => $response['hitsPerPage'] ?? 20,
-        ]);
+		$results = new static($hits);
+		$results->pagination = new Pagination([
+			'page'  => ($response['page'] ?? 0) + 1,
+			'total' => $response['nbHits'] ?? 0,
+			'limit' => $response['hitsPerPage'] ?? 20,
+		]);
 
-        return $results;
-    }
+		return $results;
+	}
 }

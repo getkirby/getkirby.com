@@ -9,30 +9,30 @@
 
 // check if we are indeed on the command line
 if (php_sapi_name() !== 'cli') {
-  die();
+	die();
 }
 
 // load Kirby
 require __DIR__ . '/../kirby/bootstrap.php';
 
 $props = [
-  'roots' => [
-      'index'   => __DIR__ . '/..',
-      'content' => __DIR__ . '/../content',
-      'site'    => __DIR__ . '/../site',
-  ],
+	'roots' => [
+			'index'   => __DIR__ . '/..',
+			'content' => __DIR__ . '/../content',
+			'site'    => __DIR__ . '/../site',
+	],
 ];
 
 // override the configured read-only API key with a custom
 // key if passed as an environment variable
 if ($algoliaKey = getenv('ALGOLIA_KEY')) {
-  $props['options'] = [
-    'search' => [
-      'algolia' => [
-        'key' => $algoliaKey,
-      ],
-    ]
-  ];
+	$props['options'] = [
+		'search' => [
+			'algolia' => [
+				'key' => $algoliaKey,
+			],
+		]
+	];
 }
 
 // initialize Kirby and site

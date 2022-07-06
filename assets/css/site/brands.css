@@ -1,35 +1,35 @@
 .brands {
-  --columns: 2;
-  display: grid;
-  grid-template-columns: repeat(var(--columns), 1fr);
-  grid-gap: var(--spacing-10);
-  align-items: center;
+	--columns: 2;
+	display: grid;
+	grid-template-columns: repeat(var(--columns), 1fr);
+	grid-gap: var(--spacing-10);
+	align-items: center;
 }
 @media screen and (min-width: 30rem) {
-  .brands {
-    --columns: 3;
-  }
+	.brands {
+		--columns: 3;
+	}
 }
 @media screen and (min-width: 54rem) {
-  .brands {
-    --columns: 6;
-  }
+	.brands {
+		--columns: 6;
+	}
 }
 .brands svg {
-  width: 100%;
-  max-height: 2rem;
+	width: 100%;
+	max-height: 2rem;
 }
 .brands .joyent svg {
-  max-height: 1.375rem;
-  margin-top: 4px;
+	max-height: 1.375rem;
+	margin-top: 4px;
 }
 .brands .eurowings svg {
-  margin-top: -.5rem;
-  max-height: 2.5rem;
+	margin-top: -0.5rem;
+	max-height: 2.5rem;
 }
 .brands .philips svg {
-  max-height: 1.75rem;
+	max-height: 1.75rem;
 }
 .brands .nyt svg {
-  margin-top: .25rem;
+	margin-top: 0.25rem;
 }

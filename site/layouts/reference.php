@@ -12,143 +12,143 @@
 <body class="reference">
 
   <header class="reference-header header">
-    <?php snippet('layouts/skipper') ?>
-    <div class="header-content relative flex items-center">
-      <?php snippet('layouts/logo') ?>
-      <?php snippet('layouts/menu') ?>
-      <?php snippet('layouts/search', ['area' => 'reference']) ?>
-    </div>
+	<?php snippet('layouts/skipper') ?>
+	<div class="header-content relative flex items-center">
+	  <?php snippet('layouts/logo') ?>
+	  <?php snippet('layouts/menu') ?>
+	  <?php snippet('layouts/search', ['area' => 'reference']) ?>
+	</div>
   </header>
 
   <?php snippet('templates/reference/menu') ?>
 
   <main class="reference-panels">
 
-    <nav class="reference-sidebar reference-panel sidebar">
-      <?php snippet('sidebar/menu', [
-        'menu' => collection('reference'),
-        'open' => true
-      ]) ?>
-    </nav>
+	<nav class="reference-sidebar reference-panel sidebar">
+	  <?php snippet('sidebar/menu', [
+		'menu' => collection('reference'),
+		'open' => true
+	  ]) ?>
+	</nav>
 
-    <?php if ($page->hasEntries()): ?>
-    <?php snippet('templates/reference/entries') ?>
-    <?php endif ?>
+	<?php if ($page->hasEntries()): ?>
+	<?php snippet('templates/reference/entries') ?>
+	<?php endif ?>
 
-    <div id="main" class="reference-content reference-panel">
-      <article>
-        <header class="mb-12">
-          <h1 class="h1 mb-12"><?= $page->title() ?></h1>
-          <?php if ($page->intro()->isNotEmpty()): ?>
-          <div class="prose mb-12">
-            <div class="intro color-gray-700">
-              <?= $page->intro()->kt() ?>
-            </div>
-          </div>
-          <?php endif ?>
-          <?php snippet('templates/reference/entry/meta') ?>
-        </header>
+	<div id="main" class="reference-content reference-panel">
+	  <article>
+		<header class="mb-12">
+		  <h1 class="h1 mb-12"><?= $page->title() ?></h1>
+		  <?php if ($page->intro()->isNotEmpty()): ?>
+		  <div class="prose mb-12">
+			<div class="intro color-gray-700">
+			  <?= $page->intro()->kt() ?>
+			</div>
+		  </div>
+		  <?php endif ?>
+		  <?php snippet('templates/reference/entry/meta') ?>
+		</header>
 
-        <?php slot('toc') ?>
-        <?php snippet('toc') ?>
-        <?php endslot() ?>
+		<?php slot('toc') ?>
+		<?php snippet('toc') ?>
+		<?php endslot() ?>
 
-        <?php slot() ?>
-        <?php endslot() ?>
+		<?php slot() ?>
+		<?php endslot() ?>
 
-        <?php snippet('templates/reference/footer') ?>
-      </article>
-    </div>
+		<?php snippet('templates/reference/footer') ?>
+	  </article>
+	</div>
   </main>
 
   <script>
   class ReferenceScrollRestore {
 
-    constructor() {
-      this.storage  = "getkirby$reference$scroll";
-      this.$sidebar = document.querySelector(".reference-sidebar");
-      this.$entries = document.querySelector(".reference-entries");
-      this.$links   = document.querySelectorAll("a");
+	constructor() {
+	  this.storage  = "getkirby$reference$scroll";
+	  this.$sidebar = document.querySelector(".reference-sidebar");
+	  this.$entries = document.querySelector(".reference-entries");
+	  this.$links   = document.querySelectorAll("a");
 
-      this.restore();
-      this.reset();
+	  this.restore();
+	  this.reset();
 
-      for (let i = 0; i < this.$links.length; i++) {
-        this.$links[i].onclick = this.store.bind(this);
-      }
-    }
+	  for (let i = 0; i < this.$links.length; i++) {
+		this.$links[i].onclick = this.store.bind(this);
+	  }
+	}
 
-    restore() {
-      const data = JSON.parse(sessionStorage.getItem(this.storage));
+	restore() {
+	  const data = JSON.parse(sessionStorage.getItem(this.storage));
 
-      if (data) {
-        this.scrollTo(data);
-      } else {
-        this.scrollToActive();
-      }
-    }
+	  if (data) {
+		this.scrollTo(data);
+	  } else {
+		this.scrollToActive();
+	  }
+	}
 
-    scrollTo(offsets) {
-      this.$sidebar.scrollTop = offsets.sidebar;
+	scrollTo(offsets) {
+	  this.$sidebar.scrollTop = offsets.sidebar;
 
-      if (this.$entries) {
-        this.$entries.scrollTop = offsets.entries;
-      }
+	  if (this.$entries) {
+		this.$entries.scrollTop = offsets.entries;
+	  }
 
-      this.reset();
-    }
+	  this.reset();
+	}
 
-    scrollToActive() {
-      <?php
-      $reference = page('docs/reference');
-      $reference = $reference->parents()->add($reference);
-      $sidebar   = $page->parents()->not($reference)->last() ?? $reference;
-      ?>
+	scrollToActive() {
+	  <?php
+	  $reference = page('docs/reference');
+	  $reference = $reference->parents()->add($reference);
+	  $sidebar   = $page->parents()->not($reference)->last() ?? $reference;
+	  ?>
 
-      const data = {
-        sidebar: 0,
-        entries: 0
-      };
+	  const data = {
+		sidebar: 0,
+		entries: 0
+	  };
 
-      const sidebar = this.$sidebar.querySelector(`li[data-id="<?= $sidebar->id() ?>"]`);
-      if (sidebar) {
-        data.sidebar = sidebar.offsetTop - this.$sidebar.offsetTop - 10;
-      }
+	  const sidebar = this.$sidebar.querySelector(`li[data-id="<?= $sidebar->id() ?>"]`);
+	  if (sidebar) {
+		data.sidebar = sidebar.offsetTop - this.$sidebar.offsetTop - 10;
+	  }
 
-      if (this.$entries) {
-        const entries = this.$entries.querySelector(`li[data-id="<?= $page->id() ?>"]`);
-        if (entries) {
-          data.entries = entries.offsetTop - this.$entries.offsetTop;
-        }
-      }
+	  if (this.$entries) {
+		const entries = this.$entries.querySelector(`li[data-id="<?= $page->id() ?>"]`);
+		if (entries) {
+		  data.entries = entries.offsetTop - this.$entries.offsetTop;
+		}
+	  }
 
-      this.scrollTo(data);
-    }
+	  this.scrollTo(data);
+	}
 
-    store(e) {
-      // Make sure to get link tag
-      let target = e.target;
-      while (target.tagName !== "A") {
-        target = target.parentElement;
-      }
+	store(e) {
+	  // Make sure to get link tag
+	  let target = e.target;
+	  while (target.tagName !== "A") {
+		target = target.parentElement;
+	  }
 
-      // If linking outside of reference, skip
-      if (target.href.includes("docs/reference") === false) {
-        return this.reset();
-      }
+	  // If linking outside of reference, skip
+	  if (target.href.includes("docs/reference") === false) {
+		return this.reset();
+	  }
 
-      const data = { sidebar: this.$sidebar.scrollTop };
+	  const data = { sidebar: this.$sidebar.scrollTop };
 
-      if (this.$entries) {
-        data.entries = this.$entries.scrollTop;
-      }
+	  if (this.$entries) {
+		data.entries = this.$entries.scrollTop;
+	  }
 
-      sessionStorage.setItem(this.storage, JSON.stringify(data));
-    }
+	  sessionStorage.setItem(this.storage, JSON.stringify(data));
+	}
 
-    reset() {
-      sessionStorage.removeItem(this.storage);
-    }
+	reset() {
+	  sessionStorage.removeItem(this.storage);
+	}
   }
 
   new ReferenceScrollRestore();

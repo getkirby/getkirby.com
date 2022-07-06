@@ -1,29 +1,30 @@
 .details summary {
-  position: relative;
-  list-style: none;
+	position: relative;
+	list-style: none;
 }
 .details > * {
-  padding-left: 1.75rem;
+	padding-left: 1.75rem;
 }
 .details summary::-webkit-details-marker {
-  display: none;
+	display: none;
 }
 .details summary::after {
-  position: absolute;
-  top: 0;
-  margin-top: .5rem;
-  left: 0;
-  content: "";
-  display: grid;
-  place-items: center;
-  width: 1rem;
-  height: 1rem;
-  border-radius: var(--rounded);
-  background: var(--color-gray-200) url("/assets/icons/plus.svg") no-repeat center center;
+	position: absolute;
+	top: 0;
+	margin-top: 0.5rem;
+	left: 0;
+	content: "";
+	display: grid;
+	place-items: center;
+	width: 1rem;
+	height: 1rem;
+	border-radius: var(--rounded);
+	background: var(--color-gray-200) url("/assets/icons/plus.svg") no-repeat
+		center center;
 }
 .details[open] summary::after {
-  background-image: url("/assets/icons/minus.svg");
+	background-image: url("/assets/icons/minus.svg");
 }
 .details summary:focus {
-  outline: 0;
+	outline: 0;
 }

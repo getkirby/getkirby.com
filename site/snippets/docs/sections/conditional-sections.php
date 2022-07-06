@@ -7,35 +7,35 @@ The condition for displaying the section is set with the `when` option. In the `
 ```yaml
 sections:
   content:
-    type: fields
-    fields:
-      postType:
-        type: select
-        options:
-          - Gallery
-          - Image
-          - Text
+	type: fields
+	fields:
+	  postType:
+		type: select
+		options:
+		  - Gallery
+		  - Image
+		  - Text
   gallery:
-    type: files
-    template: gallery-image
-    layout: cards
-    size: tiny
-    when:
-      postType: Gallery
+	type: files
+	template: gallery-image
+	layout: cards
+	size: tiny
+	when:
+	  postType: Gallery
   image:
-    type: files
-    template: single-image
-    max: 1
-    layout: cards
-    when:
-      postType: Image
+	type: files
+	template: single-image
+	max: 1
+	layout: cards
+	when:
+	  postType: Image
   text:
-    type: fields
-    fields:
-      text:
-        type: textarea
-      tags:
-        type: tags
-    when:
-      postType: Text
+	type: fields
+	fields:
+	  text:
+		type: textarea
+	  tags:
+		type: tags
+	when:
+	  postType: Text
 ```

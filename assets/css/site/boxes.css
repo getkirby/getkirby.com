@@ -1,38 +1,38 @@
 :root {
-  --box-default: var(--color-light);
-  --box-alert: var(--color-red-300);
-  --box-info: var(--color-blue-300);
-  --box-success: var(--color-green-300);
-  --box-warning: var(--color-orange-300);
+	--box-default: var(--color-light);
+	--box-alert: var(--color-red-300);
+	--box-info: var(--color-blue-300);
+	--box-success: var(--color-green-300);
+	--box-warning: var(--color-orange-300);
 }
 
 .box {
-  position: relative;
-  --bg: var(--box-default);
-  background: var(--bg);
-  border-radius: var(--rounded);
-  overflow: hidden;
+	position: relative;
+	--bg: var(--box-default);
+	background: var(--bg);
+	border-radius: var(--rounded);
+	overflow: hidden;
 }
 .box .box-text {
-  color: var(--color-black);
-  padding: var(--spacing-6);
-  margin-right: var(--spacing-6);
+	color: var(--color-black);
+	padding: var(--spacing-6);
+	margin-right: var(--spacing-6);
 }
 .box .box-icon {
-  color: var(--bg);
-  position: absolute;
-  top: 0;
-  right: 0;
+	color: var(--bg);
+	position: absolute;
+	top: 0;
+	right: 0;
 }
 .box--alert {
-  --bg: var(--box-alert);
+	--bg: var(--box-alert);
 }
 .box--info {
-  --bg: var(--box-info);
+	--bg: var(--box-info);
 }
 .box--success {
-  --bg: var(--box-success);
+	--bg: var(--box-success);
 }
 .box--warning {
-  --bg: var(--box-warning);
+	--bg: var(--box-warning);
 }

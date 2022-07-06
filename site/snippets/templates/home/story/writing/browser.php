@@ -1,22 +1,22 @@
 <div class="mb-3 bg-light" style="--aspect-ratio: 5/2">
   <?= img($story->image('dark-forest.jpg'), [
-    'src' => [
-      'crop'   => true,
-      'width'  => 500,
-      'height' => 200,
-    ],
-    'srcset' => [
-      '1x' => [
-        'crop'   => true,
-        'width'  => 500,
-        'height' => 200,
-      ],
-      '2x' => [
-        'crop'   => true,
-        'width'  => 750,
-        'height' => 300,
-      ],
-    ]
+	'src' => [
+	  'crop'   => true,
+	  'width'  => 500,
+	  'height' => 200,
+	],
+	'srcset' => [
+	  '1x' => [
+		'crop'   => true,
+		'width'  => 500,
+		'height' => 200,
+	  ],
+	  '2x' => [
+		'crop'   => true,
+		'width'  => 750,
+		'height' => 300,
+	  ],
+	]
   ]) ?>
 </div>
 

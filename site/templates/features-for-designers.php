@@ -6,15 +6,15 @@
 
 <?php snippet('templates/features/more', [
   'features' => [
-    'panel',
-    'field-blocks',
-    'plugins',
-    'languages',
-    'users',
-    'assets',
-    'templates',
-    'publish-workflow',
-    'cookbook',
-    'docs'
+	'panel',
+	'field-blocks',
+	'plugins',
+	'languages',
+	'users',
+	'assets',
+	'templates',
+	'publish-workflow',
+	'cookbook',
+	'docs'
   ]
 ]) ?>

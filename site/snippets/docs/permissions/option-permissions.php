@@ -3,8 +3,8 @@ Each option can be set on a per user role for fine-grained permissions, for exam
 ```yaml
 options:
   delete:
-    admin: true
-    editor: false
+	admin: true
+	editor: false
 ```
 
 Or using a wildcard to change the default for all roles:
@@ -12,6 +12,6 @@ Or using a wildcard to change the default for all roles:
 ```yaml
 options:
   update:
-    *: false
-    editor: true
+	*: false
+	editor: true
 ```

@@ -1,19 +1,19 @@
 .footer .container {
-  padding-top: 9rem;
+	padding-top: 9rem;
 }
 .footer-info {
-  max-width: 10rem;
+	max-width: 10rem;
 }
 .footer-info .social {
-  margin-left: -.75rem;
+	margin-left: -0.75rem;
 }
 
 .footer-menu a {
-  display: block;
+	display: block;
 }
 .footer-menu-partners a {
-  padding: .25rem 0;
+	padding: 0.25rem 0;
 }
 .footer-menu-partners svg {
-  height: 1.5rem;
+	height: 1.5rem;
 }

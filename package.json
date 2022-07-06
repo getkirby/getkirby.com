@@ -1,27 +1,27 @@
 {
-  "name": "getkirby.com",
-  "description": "The entire getkirby.com website.",
-  "main": "index.js",
-  "scripts": {
-    "build": "npm run css && npm run js",
-    "css": "postcss --replace assets/css/**",
-    "js": "uglifyjs-folder assets/js --output assets/js --each --extension .js --config-file uglify.json"
-  },
-  "devDependencies": {
-    "cssnano": "^5.0.6",
-    "postcss": "^8.3.5",
-    "postcss-cli": "^8.3.1",
-    "postcss-import": "^14.0.0",
-    "uglifyjs-folder": "^3.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/getkirby/getkirby.com.git"
-  },
-  "author": "The Kirby Team <mail@getkirby.com>",
-  "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/getkirby/getkirby.com/issues"
-  },
-  "homepage": "https://github.com/getkirby/getkirby.com#readme"
+	"name": "getkirby.com",
+	"description": "The entire getkirby.com website.",
+	"main": "index.js",
+	"scripts": {
+		"build": "npm run css && npm run js",
+		"css": "postcss --replace assets/css/**",
+		"js": "uglifyjs-folder assets/js --output assets/js --each --extension .js --config-file uglify.json"
+	},
+	"devDependencies": {
+		"cssnano": "^5.0.6",
+		"postcss": "^8.3.5",
+		"postcss-cli": "^8.3.1",
+		"postcss-import": "^14.0.0",
+		"uglifyjs-folder": "^3.0.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/getkirby/getkirby.com.git"
+	},
+	"author": "The Kirby Team <mail@getkirby.com>",
+	"license": "UNLICENSED",
+	"bugs": {
+		"url": "https://github.com/getkirby/getkirby.com/issues"
+	},
+	"homepage": "https://github.com/getkirby/getkirby.com#readme"
 }

@@ -1,6 +1,6 @@
 <?php snippet('templates/plugins/section', [
-  'id'      => 'template-engines',
-  'icon'    => 'code',
+  'id'	  => 'template-engines',
+  'icon'	=> 'code',
   'title'   => 'Template Engines',
   'layout'  => 'cardlets',
   'columns' => 2,
@@ -8,8 +8,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'assets',
-  'icon'    => 'image',
+  'id'	  => 'assets',
+  'icon'	=> 'image',
   'title'   => 'Assets',
   'layout'  => 'cards',
   'columns' => 2,
@@ -17,8 +17,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'field-methods',
-  'icon'    => 'code',
+  'id'	  => 'field-methods',
+  'icon'	=> 'code',
   'title'   => 'Field methods',
   'layout'  => 'cards',
   'columns' => 2,
@@ -26,16 +26,16 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'modules',
-  'icon'    => 'code',
+  'id'	  => 'modules',
+  'icon'	=> 'code',
   'title'   => 'Modules',
   'layout'  => 'hero',
   'plugins' => ['plugins/medienbaecker/modules']
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'syntax-highlighting',
-  'icon'    => 'code',
+  'id'	  => 'syntax-highlighting',
+  'icon'	=> 'code',
   'title'   => 'Syntax highlighting',
   'layout'  => 'cardlets',
   'columns' => 2,
@@ -43,8 +43,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'related',
-  'icon'    => 'code',
+  'id'	  => 'related',
+  'icon'	=> 'code',
   'title'   => 'Related content',
   'layout'  => 'cards',
   'columns' => 2,
@@ -52,18 +52,18 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'privacy',
-  'icon'    => 'code',
+  'id'	  => 'privacy',
+  'icon'	=> 'code',
   'title'   => 'Privacy',
   'layout'  => 'cards',
-  'hero'    => true,
+  'hero'	=> true,
   'columns' => 2,
   'plugins' => $plugins->filter('subcategory', 'privacy')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'feeds',
-  'icon'    => 'code',
+  'id'	  => 'feeds',
+  'icon'	=> 'code',
   'title'   => 'Feeds',
   'layout'  => 'cards',
   'columns' => 3,
@@ -71,8 +71,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'utilities',
-  'icon'    => 'code',
+  'id'	  => 'utilities',
+  'icon'	=> 'code',
   'title'   => 'Utilities',
   'layout'  => 'cards',
   'columns' => 2,

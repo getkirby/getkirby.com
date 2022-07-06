@@ -7,10 +7,10 @@ Recipes
 <?php slot() ?>
 <?php snippet('templates/cookbook/recipes', [
   'recipes' => $page
-    ->children()
-    ->listed()
-    ->children()
-    ->listed()
-    ->sortBy('published', 'desc')
+	->children()
+	->listed()
+	->children()
+	->listed()
+	->sortBy('published', 'desc')
 ]) ?>
 <?php endslot() ?>

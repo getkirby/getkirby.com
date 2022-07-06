@@ -1,7 +1,7 @@
 <?php snippet('templates/plugins/section', [
-  'id'      => 'images',
-  'icon'    => 'input',
-  'hero'    => true,
+  'id'	  => 'images',
+  'icon'	=> 'input',
+  'hero'	=> true,
   'title'   => 'Images',
   'layout'  => 'cards',
   'columns' => 2,
@@ -9,8 +9,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'editing',
-  'icon'    => 'input',
+  'id'	  => 'editing',
+  'icon'	=> 'input',
   'title'   => 'Editing',
   'layout'  => 'cards',
   'columns' => 2,
@@ -18,8 +18,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'colors',
-  'icon'    => 'input',
+  'id'	  => 'colors',
+  'icon'	=> 'input',
   'title'   => 'Colors',
   'layout'  => 'cards',
   'columns' => 3,
@@ -27,8 +27,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'videos',
-  'icon'    => 'input',
+  'id'	  => 'videos',
+  'icon'	=> 'input',
   'title'   => 'Videos',
   'layout'  => 'cards',
   'columns' => 2,
@@ -36,8 +36,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'maps',
-  'icon'    => 'input',
+  'id'	  => 'maps',
+  'icon'	=> 'input',
   'title'   => 'Maps',
   'layout'  => 'cards',
   'columns' => 2,
@@ -45,16 +45,16 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'layout',
-  'icon'    => 'input',
+  'id'	  => 'layout',
+  'icon'	=> 'input',
   'title'   => 'Layout',
   'layout'  => 'hero',
   'plugins' => $plugins->filter('subcategory', 'layout')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'navigation',
-  'icon'    => 'input',
+  'id'	  => 'navigation',
+  'icon'	=> 'input',
   'title'   => 'Navigation',
   'layout'  => 'cards',
   'columns' => 2,
@@ -62,8 +62,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'structured-content',
-  'icon'    => 'input',
+  'id'	  => 'structured-content',
+  'icon'	=> 'input',
   'title'   => 'Structured content',
   'layout'  => 'cards',
   'columns' => 2,
@@ -72,8 +72,8 @@
 
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'dates',
-  'icon'    => 'input',
+  'id'	  => 'dates',
+  'icon'	=> 'input',
   'title'   => 'Dates',
   'layout'  => 'cards',
   'columns' => 2,
@@ -81,16 +81,16 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'editing',
-  'icon'    => 'input',
+  'id'	  => 'editing',
+  'icon'	=> 'input',
   'title'   => 'Helper fields',
   'layout'  => 'cards',
   'plugins' => $plugins->filter('subcategory', '')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'enhancements',
-  'icon'    => 'input',
+  'id'	  => 'enhancements',
+  'icon'	=> 'input',
   'title'   => 'Field enhancements',
   'layout'  => 'cardlets',
   'columns' => 2,

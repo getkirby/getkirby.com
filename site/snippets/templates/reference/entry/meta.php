@@ -15,11 +15,11 @@ extract([
   <?php endif ?>
 
   <?php if (
-    is_a($page, ReferenceClassPage::class) === true ||
-    (
-      is_a($page, ReferenceClassmethodPage::class) === true &&
-      $page->name() === '__construct'
-    )
+	is_a($page, ReferenceClassPage::class) === true ||
+	(
+	  is_a($page, ReferenceClassmethodPage::class) === true &&
+	  $page->name() === '__construct'
+	)
   ): ?>
   <li>Full class name: <code><?= $page->class() ?></code></li>
   <?php endif ?>
@@ -30,28 +30,28 @@ extract([
 
   <?php if ($auth->isNotEmpty()): ?>
   <li>
-    <a href='<?= url('docs/guide/users/permissions') ?>'>
-      <?= icon('lock') ?>
-     <?= $auth ?>
-    </a>
+	<a href='<?= url('docs/guide/users/permissions') ?>'>
+	  <?= icon('lock') ?>
+	 <?= $auth ?>
+	</a>
   </li>
   <?php endif ?>
 
   <?php if ($guide->isNotEmpty()): ?>
   <li>
-    <a href="<?= url('docs/guide/' . $guide) ?>">
-      <?= icon('book') ?>
-      Read the guide
-    </a>
+	<a href="<?= url('docs/guide/' . $guide) ?>">
+	  <?= icon('book') ?>
+	  Read the guide
+	</a>
   </li>
   <?php endif ?>
 
   <?php if ($source->isNotEmpty()): ?>
   <li>
-    <a href="<?= $source ?>">
-      <?= icon('code') ?>
-      kirby/<?= Str::after($source, 'tree/' . Kirby::version() .'/') ?>
-    </a>
+	<a href="<?= $source ?>">
+	  <?= icon('code') ?>
+	  kirby/<?= Str::after($source, 'tree/' . Kirby::version() .'/') ?>
+	</a>
   </li>
   <?php endif ?>
 
@@ -61,17 +61,17 @@ extract([
 <?php $deprecated = $page->deprecated()->split('|') ?>
 <div class="prose">
   <div class="box box--alert">
-    <figure class="box-icon iconbox bg-black color-white">
-      <?= icon('alert') ?>
-    </figure>
-    <div class="box-text">
-      <div class="font-bold">
-        Deprecated in <?= version($deprecated[0], '%s') ?>
-      </div>
-      <?php if (count($deprecated) > 1) : ?>
-      <?= kti($deprecated[1]) ?>
-      <?php endif ?>
-    </div>
+	<figure class="box-icon iconbox bg-black color-white">
+	  <?= icon('alert') ?>
+	</figure>
+	<div class="box-text">
+	  <div class="font-bold">
+		Deprecated in <?= version($deprecated[0], '%s') ?>
+	  </div>
+	  <?php if (count($deprecated) > 1) : ?>
+	  <?= kti($deprecated[1]) ?>
+	  <?php endif ?>
+	</div>
   </div>
 </div>
 <?php endif ?>

@@ -1,16 +1,16 @@
 <?php snippet('templates/plugins/section', [
-  'id'      => 'panel',
-  'icon'    => 'seo',
+  'id'	  => 'panel',
+  'icon'	=> 'seo',
   'title'   => 'Panel',
   'layout'  => 'hero',
   'plugins' => [
-    'plugins/diesdasdigital/metaknight'
+	'plugins/diesdasdigital/metaknight'
   ]
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'utilities',
-  'icon'    => 'analytics',
+  'id'	  => 'utilities',
+  'icon'	=> 'analytics',
   'title'   => 'Templating',
   'layout'  => 'cards',
   'columns' => 2,
@@ -18,8 +18,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'utilities',
-  'icon'    => 'analytics',
+  'id'	  => 'utilities',
+  'icon'	=> 'analytics',
   'title'   => 'Utilities',
   'layout'  => 'cards',
   'columns' => 3,

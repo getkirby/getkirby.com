@@ -1,74 +1,74 @@
 .features-xl {
-  --columns-md: 1;
-  --columns: 2;
-  --row-gap: var(--spacing-12);
-  --column-gap: var(--spacing-24);
+	--columns-md: 1;
+	--columns: 2;
+	--row-gap: var(--spacing-12);
+	--column-gap: var(--spacing-24);
 }
 
 .features-checklist {
-  font-size: var(--text-lg);
-  line-height: var(--leading-snug);
+	font-size: var(--text-lg);
+	line-height: var(--leading-snug);
 }
 .features-checklist li {
-  display: flex;
-  margin-bottom: var(--spacing-2);
+	display: flex;
+	margin-bottom: var(--spacing-2);
 }
 .features-checklist svg {
-  margin-right: var(--spacing-3);
-  margin-top: .215rem;
-  flex-shrink: 0;
+	margin-right: var(--spacing-3);
+	margin-top: 0.215rem;
+	flex-shrink: 0;
 }
-
 
 .features-section {
-  margin-bottom: var(--spacing-42);
+	margin-bottom: var(--spacing-42);
 }
 .features-section-figure {
-  grid-area: figure;
-  margin-top: var(--spacing-12);
+	grid-area: figure;
+	margin-top: var(--spacing-12);
 }
 .features-section-header {
-  grid-area: header;
+	grid-area: header;
 }
 .features-section-text {
-  grid-area: text;
-  margin-top: var(--spacing-6);
+	grid-area: text;
+	margin-top: var(--spacing-6);
 }
 .features-section-voice {
-  grid-area: voice;
-  margin-top: var(--spacing-12);
+	grid-area: voice;
+	margin-top: var(--spacing-12);
 }
 .features-section-grid {
-  grid-area: grid;
-  margin-top: var(--spacing-12);
+	grid-area: grid;
+	margin-top: var(--spacing-12);
 }
 
-
 @media screen and (min-width: 72rem) {
-  .features-section-figure {
-    margin-top: 0;
-  }
-  .features-section-voice {
-    align-self: flex-end;
-  }
-  .features-section {
-    display: grid;
-    grid-column-gap: var(--spacing-24);
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-rows: auto auto auto 1fr;
-    grid-template-areas: "figure header"
-                         "figure text"
-                         "figure grid"
-                         "figure voice";
-  }
-  .features-section--reverse {
-    grid-template-areas: "header figure"
-                         "text figure"
-                         "grid figure"
-                         "voice figure";
-  }
+	.features-section-figure {
+		margin-top: 0;
+	}
+	.features-section-voice {
+		align-self: flex-end;
+	}
+	.features-section {
+		display: grid;
+		grid-column-gap: var(--spacing-24);
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		grid-template-rows: auto auto auto 1fr;
+		grid-template-areas:
+			"figure header"
+			"figure text"
+			"figure grid"
+			"figure voice";
+	}
+	.features-section--reverse {
+		grid-template-areas:
+			"header figure"
+			"text figure"
+			"grid figure"
+			"voice figure";
+	}
 }
 
 #features input[type="checkbox"] {
-  pointer-events: none;
+	pointer-events: none;
 }

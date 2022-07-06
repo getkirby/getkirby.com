@@ -1,17 +1,17 @@
 *,
 *::after,
 *::before {
-  border-width: 0;
-  border-style: solid;
-  border-color: currentColor;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+	border-width: 0;
+	border-style: solid;
+	border-color: currentColor;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 a {
-  color: currentColor;
-  text-decoration: none;
+	color: currentColor;
+	text-decoration: none;
 }
 
 audio,
@@ -23,24 +23,24 @@ img,
 object,
 svg,
 video {
-  display: block;
-  vertical-align: middle;
+	display: block;
+	vertical-align: middle;
 }
 
 body {
-  overflow-x: hidden;
+	overflow-x: hidden;
 }
 
 button {
-  font: inherit;
-  background: none;
-  color: currentColor;
-  cursor: pointer;
-  line-height: inherit;
+	font: inherit;
+	background: none;
+	color: currentColor;
+	cursor: pointer;
+	line-height: inherit;
 }
 button::-moz-focus-inner {
-  padding: 0;
-  border: 0;
+	padding: 0;
+	border: 0;
 }
 
 h1,
@@ -49,54 +49,53 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: inherit;
-  font-weight: inherit;
+	font-size: inherit;
+	font-weight: inherit;
 }
 
 html {
-  font-family: var(--font-sans);
-  line-height: var(--leading-normal);
+	font-family: var(--font-sans);
+	line-height: var(--leading-normal);
 }
 
 img {
-  max-width: 100%;
-  width: 100%;
-  transform-style: preserve-3d;
+	max-width: 100%;
+	width: 100%;
+	transform-style: preserve-3d;
 }
 
 input {
-  font: inherit;
+	font: inherit;
 }
 
 ol,
 ul {
-  list-style: none;
+	list-style: none;
 }
 
 strong,
 b {
-  font-weight: var(--font-bold);
+	font-weight: var(--font-bold);
 }
 
 summary {
-  cursor: pointer;
+	cursor: pointer;
 }
 summary:focus {
-  outline: 0;
+	outline: 0;
 }
 summary:focus-visible {
-  outline: solid;
-  outline: 5px auto -webkit-focus-ring-color;
+	outline: solid;
+	outline: 5px auto -webkit-focus-ring-color;
 }
 
 table {
-  font-variant-numeric: tabular-nums;
-  border-spacing: 0;
-  width: 100%;
+	font-variant-numeric: tabular-nums;
+	border-spacing: 0;
+	width: 100%;
 }
 th,
 td {
-  text-align: left;
-  vertical-align: top;
+	text-align: left;
+	vertical-align: top;
 }
-

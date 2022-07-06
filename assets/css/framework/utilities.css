@@ -1,350 +1,349 @@
 .absolute {
-  position: absolute;
+	position: absolute;
 }
 
 .auto-rows-fr {
-  grid-auto-rows: 1fr;
+	grid-auto-rows: 1fr;
 }
 
 .bg-black {
-  background: var(--color-black);
+	background: var(--color-black);
 }
 .bg-white {
-  background: var(--color-white);
+	background: var(--color-white);
 }
 
 .block {
-  display: block;
+	display: block;
 }
 
 .color-black {
-  color: var(--color-black);
+	color: var(--color-black);
 }
 .color-white {
-  color: var(--color-white);
+	color: var(--color-white);
 }
 
 .container {
-  position: relative;
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 var(--container-padding);
+	position: relative;
+	max-width: var(--container);
+	margin: 0 auto;
+	padding: 0 var(--container-padding);
 }
 
 .fixed {
-  position: fixed;
+	position: fixed;
 }
 
 .flex {
-  --gap: 0;
-  display: flex;
+	--gap: 0;
+	display: flex;
 }
 .flex > * + * {
-  margin-left: var(--gap);
+	margin-left: var(--gap);
 }
 .flex-wrap {
-  flex-wrap: wrap;
+	flex-wrap: wrap;
 }
 .flex-column {
-  flex-direction: column;
+	flex-direction: column;
 }
 .flex-grow {
-  flex-grow: 1;
+	flex-grow: 1;
 }
 .flex-shrink-0 {
-  flex-shrink: 0;
+	flex-shrink: 0;
 }
 
 .font-bold {
-  font-weight: var(--font-bold);
+	font-weight: var(--font-bold);
 }
 .font-mono {
-  font-family: var(--font-mono);
+	font-family: var(--font-mono);
 }
 .font-normal {
-  font-weight: var(--font-normal);
+	font-weight: var(--font-normal);
 }
 .font-sans {
-  font-family: var(--font-sans);
+	font-family: var(--font-sans);
 }
 .font-thin {
-  font-weight: var(--font-thin);
+	font-weight: var(--font-thin);
 }
 
 .grid {
-  display: grid;
+	display: grid;
 }
 
 .hidden {
-  display: none !important;
+	display: none !important;
 }
 
 .inline-flex {
-  display: inline-flex;
+	display: inline-flex;
 }
 
-.inset-0	{
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+.inset-0 {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 
 .invisible {
-  visibility: hidden;
+	visibility: hidden;
 }
 
 .italic {
-  font-style: italic;
+	font-style: italic;
 }
 
 .items-start {
-  align-items: flex-start;
+	align-items: flex-start;
 }
 .items-baseline {
-  align-items: baseline;
+	align-items: baseline;
 }
 .items-center {
-  align-items: center;
+	align-items: center;
 }
 .items-end {
-  align-items: flex-end;
+	align-items: flex-end;
 }
 
 .justify-between {
-  justify-content: space-between;
+	justify-content: space-between;
 }
 .justify-center {
-  justify-content: center;
+	justify-content: center;
 }
 
 .leading-snug {
-  line-height: var(--leading-snug);
+	line-height: var(--leading-snug);
 }
 .leading-tight {
-  line-height: var(--leading-tight);
+	line-height: var(--leading-tight);
 }
 
 .list-none {
-  list-style: none;
+	list-style: none;
 }
 .list-none > summary::-webkit-details-marker {
-  display: none;
+	display: none;
 }
 
 .mb-0 {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 .mb-1 {
-  margin-bottom: var(--spacing-1);
+	margin-bottom: var(--spacing-1);
 }
 .mb-3 {
-  margin-bottom: var(--spacing-3);
+	margin-bottom: var(--spacing-3);
 }
 .mb-6 {
-  margin-bottom: var(--spacing-6);
+	margin-bottom: var(--spacing-6);
 }
 .mb-12 {
-  margin-bottom: var(--spacing-12);
+	margin-bottom: var(--spacing-12);
 }
 .mb-24 {
-  margin-bottom: var(--spacing-24);
+	margin-bottom: var(--spacing-24);
 }
 .mb-36 {
-  margin-bottom: var(--spacing-36);
+	margin-bottom: var(--spacing-36);
 }
 .mb-42 {
-  margin-bottom: var(--spacing-42);
+	margin-bottom: var(--spacing-42);
 }
 
 .ml-auto {
-  margin-left: auto;
+	margin-left: auto;
 }
 
 .mr-1 {
-  margin-right: var(--spacing-1);
+	margin-right: var(--spacing-1);
 }
 .mr-3 {
-  margin-right: var(--spacing-3);
+	margin-right: var(--spacing-3);
 }
 
 .mx-1 {
-  margin-left: var(--spacing-1);
-  margin-right: var(--spacing-1);
+	margin-left: var(--spacing-1);
+	margin-right: var(--spacing-1);
 }
 .mx-auto {
-  margin-left: auto;
-  margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .overflow-hidden {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 .place-items-center {
-  display: grid;
-  place-items: center;
-  align-content: center;
+	display: grid;
+	place-items: center;
+	align-content: center;
 }
-
 
 .p-container {
-  padding: var(--container-padding);
+	padding: var(--container-padding);
 }
 .p-1 {
-  padding: var(--spacing-1);
+	padding: var(--spacing-1);
 }
 .p-3 {
-  padding: var(--spacing-3);
+	padding: var(--spacing-3);
 }
 .p-6 {
-  padding: var(--spacing-6);
+	padding: var(--spacing-6);
 }
 .p-12 {
-  padding: var(--spacing-12);
+	padding: var(--spacing-12);
 }
 .p-24 {
-  padding: var(--spacing-24);
+	padding: var(--spacing-24);
 }
 .pt-1 {
-  padding-top: var(--spacing-1);
+	padding-top: var(--spacing-1);
 }
 .pt-3 {
-  padding-top: var(--spacing-3);
+	padding-top: var(--spacing-3);
 }
 .pt-6 {
-  padding-top: var(--spacing-6);
+	padding-top: var(--spacing-6);
 }
 .pt-12 {
-  padding-top: var(--spacing-12);
+	padding-top: var(--spacing-12);
 }
 .px-1 {
-  padding-left: var(--spacing-1);
-  padding-right: var(--spacing-1);
+	padding-left: var(--spacing-1);
+	padding-right: var(--spacing-1);
 }
 .px-3 {
-  padding-left: var(--spacing-3);
-  padding-right: var(--spacing-3);
+	padding-left: var(--spacing-3);
+	padding-right: var(--spacing-3);
 }
 .px-6 {
-  padding-left: var(--spacing-6);
-  padding-right: var(--spacing-6);
+	padding-left: var(--spacing-6);
+	padding-right: var(--spacing-6);
 }
 .px-12 {
-  padding-left: var(--spacing-12);
-  padding-right: var(--spacing-12);
+	padding-left: var(--spacing-12);
+	padding-right: var(--spacing-12);
 }
 .py-1 {
-  padding-bottom: var(--spacing-1);
-  padding-top: var(--spacing-1);
+	padding-bottom: var(--spacing-1);
+	padding-top: var(--spacing-1);
 }
 .py-3 {
-  padding-bottom: var(--spacing-3);
-  padding-top: var(--spacing-3);
+	padding-bottom: var(--spacing-3);
+	padding-top: var(--spacing-3);
 }
 .py-6 {
-  padding-bottom: var(--spacing-6);
-  padding-top: var(--spacing-6);
+	padding-bottom: var(--spacing-6);
+	padding-top: var(--spacing-6);
 }
 .py-12 {
-  padding-bottom: var(--spacing-12);
-  padding-top: var(--spacing-12);
+	padding-bottom: var(--spacing-12);
+	padding-top: var(--spacing-12);
 }
 
 .relative {
-  position: relative;
+	position: relative;
 }
 
 .rounded {
-  border-radius: var(--rounded);
+	border-radius: var(--rounded);
 }
 
 .shadow {
-  box-shadow: var(--shadow);
+	box-shadow: var(--shadow);
 }
 .shadow-lg {
-  box-shadow: var(--shadow-lg);
+	box-shadow: var(--shadow-lg);
 }
 .shadow-xl {
-  box-shadow: var(--shadow-xl);
+	box-shadow: var(--shadow-xl);
 }
 
-.sr-only	{
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
 }
 
 @media screen and (min-width: 30rem) {
-  .sticky {
-    --top: 0;
-    position: sticky;
-    top: var(--top);
-  }
+	.sticky {
+		--top: 0;
+		position: sticky;
+		top: var(--top);
+	}
 }
 
 .text-center {
-  text-align: center;
+	text-align: center;
 }
 .text-right {
-  text-align: right;
+	text-align: right;
 }
 
 .text-xs {
-  font-size: var(--text-xs);
+	font-size: var(--text-xs);
 }
 .text-sm {
-  font-size: var(--text-sm);
+	font-size: var(--text-sm);
 }
 .text-base {
-  font-size: var(--text-base);
+	font-size: var(--text-base);
 }
 .text-lg {
-  font-size: var(--text-lg);
+	font-size: var(--text-lg);
 }
 .text-xl {
-  font-size: var(--text-xl);
+	font-size: var(--text-xl);
 }
 .text-2xl {
-  font-size: var(--text-2xl);
-  line-height: 1.175em;
+	font-size: var(--text-2xl);
+	line-height: 1.175em;
 }
 
 .truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .underline {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 .w-100\% {
-  width: 100%;
+	width: 100%;
 }
 .w-auto {
-  width: auto;
+	width: auto;
 }
 .w-full {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+	width: 100vw;
+	position: relative;
+	left: 50%;
+	right: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
 }
 
 .whitespace-nowrap {
-  white-space: nowrap;
+	white-space: nowrap;
 }
 
 .z-1 {
-  z-index: 1;
+	z-index: 1;
 }

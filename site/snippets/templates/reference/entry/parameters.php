@@ -6,7 +6,7 @@ extract([
 ]);
 
 extract([
-  'hasDefaults'     => $defaults ?? true,
+  'hasDefaults'	 => $defaults ?? true,
   'hasDescriptions' => count(array_filter(array_column($rows, 'description'))) > 0
 ]);
 ?>
@@ -25,39 +25,39 @@ extract([
 
 <div class="table">
   <table class="parameters">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
+	<thead>
+	  <tr>
+		<th>Name</th>
+		<th>Type</th>
 
-        <?php if ($hasDefaults) : ?>
-        <th>Default</th>
-        <?php endif ?>
+		<?php if ($hasDefaults) : ?>
+		<th>Default</th>
+		<?php endif ?>
 
-        <?php if ($hasDescriptions) : ?>
-        <th>Description</th>
-        <?php endif ?>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach ($rows as $row): ?>
-      <tr>
-        <td>
-          <?= $row['name'] ?>
-          <?= Types::required($row['required']) ?>
-        </td>
-        <td><?= Types::format($row['type']) ?></td>
+		<?php if ($hasDescriptions) : ?>
+		<th>Description</th>
+		<?php endif ?>
+	  </tr>
+	</thead>
+	<tbody>
+	  <?php foreach ($rows as $row): ?>
+	  <tr>
+		<td>
+		  <?= $row['name'] ?>
+		  <?= Types::required($row['required']) ?>
+		</td>
+		<td><?= Types::format($row['type']) ?></td>
 
-        <?php if ($hasDefaults) : ?>
-        <td data-label="Default:"><?= Types::default($row['default']) ?></td>
-        <?php endif ?>
+		<?php if ($hasDefaults) : ?>
+		<td data-label="Default:"><?= Types::default($row['default']) ?></td>
+		<?php endif ?>
 
-        <?php if ($hasDescriptions) : ?>
-        <td><?= kti($row['description']) ?></td>
-        <?php endif ?>
-      </tr>
-      <?php endforeach ?>
-    </tbody>
+		<?php if ($hasDescriptions) : ?>
+		<td><?= kti($row['description']) ?></td>
+		<?php endif ?>
+	  </tr>
+	  <?php endforeach ?>
+	</tbody>
   </table>
 </div>
 <?php endif ?>

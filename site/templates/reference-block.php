@@ -3,7 +3,7 @@
 <div class="prose">
   <h2 id="preview"><a href="#preview">Preview</a></h2>
   <?php if($image = $page->image()): ?>
-    <?= kirbytag('image', $image->filename()) ?>
+	<?= kirbytag('image', $image->filename()) ?>
   <?php endif ?>
 
   <?php if($page->slug() !== 'table'): ?>
@@ -29,7 +29,7 @@
   <p>To overwrite this default blueprint, place your custom file in <code>/site/blueprints/blocks/<?= $page->slug() ?>.yml</code>.</p>
 
   <?php else: ?>
-    <?= $page->text()->kt() ?>
+	<?= $page->text()->kt() ?>
   <?php endif ?>
 
   <h3 id="default-files__vue-component"><a href="#default-files__vue-component">Vue component</a></h3>

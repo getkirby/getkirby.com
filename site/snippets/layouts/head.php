@@ -27,11 +27,11 @@ extract([
 
 <script type="module">
   window.debounce = (callback, delay) => {
-    let timeout;
-    return () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(callback, delay);
-    }
+	let timeout;
+	return () => {
+	  clearTimeout(timeout);
+	  timeout = setTimeout(callback, delay);
+	}
   }
 
   import "<?= url('/assets/js/polyfills/dialog.js') ?>";

@@ -4,16 +4,16 @@
 		<article class="leading-tight color-white">
 			<a class="block" 	href="<?= $case->url() ?>">
 				<figure class="mb-3 shadow-2xl" style="--aspect-ratio: 3/4">
-          <?= img($image = $case->image(), [
-            'alt' => 'Screenshot of the ' . $image->alt() . ' website',
-            'src' => [
-              'width' => 450
-            ],
-            'srcset' => [
-              '1x' => 450,
-              '2x' => 900,
-            ]
-          ]) ?>
+		  <?= img($image = $case->image(), [
+			'alt' => 'Screenshot of the ' . $image->alt() . ' website',
+			'src' => [
+			  'width' => 450
+			],
+			'srcset' => [
+			  '1x' => 450,
+			  '2x' => 900,
+			]
+		  ]) ?>
 				</figure>
 				<h2 class="font-bold mb-1"><?= $case->title() ?></h2>
 				<p class="font-mono text-xs color-gray-400">

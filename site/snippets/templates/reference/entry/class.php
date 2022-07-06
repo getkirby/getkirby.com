@@ -1,6 +1,6 @@
 <?php
 extract([
-  'parent'    => $page->class() ?? null,
+  'parent'	=> $page->class() ?? null,
   'inherited' => $page->inheritedFrom() ?? null
 ]);
 ?>

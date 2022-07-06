@@ -1,58 +1,57 @@
 @media (max-width: 50rem) {
-  .release-header {
-    flex-direction: column;
-    align-items: initial;
-  }
+	.release-header {
+		flex-direction: column;
+		align-items: initial;
+	}
 
-  .release-header nav {
-    margin: var(--spacing-6) 0 0;
-  }
+	.release-header nav {
+		margin: var(--spacing-6) 0 0;
+	}
 }
 
 .release-wrapper {
-  position: relative;
+	position: relative;
 }
 
 @media (max-width: 110rem) {
-  .release-menu {
-    display: none;
-  }
+	.release-menu {
+		display: none;
+	}
 }
 
 .release-menu {
-  position: absolute;
-  top: 0;
-  right: -15rem;
-  bottom: 0;
+	position: absolute;
+	top: 0;
+	right: -15rem;
+	bottom: 0;
 }
 
 .release-menu a {
-  position: relative;
-  display: block;
-  white-space: nowrap;
-  padding: var(--spacing-2px);
+	position: relative;
+	display: block;
+	white-space: nowrap;
+	padding: var(--spacing-2px);
 }
 
 .release-menu a[aria-current]::before {
-  position: absolute;
-  content: "";
-  top: 50%;
-  left: calc(var(--spacing-12) * -1);
-  width: var(--spacing-8);
-  height: 1px;
-  background: var(--color-gray-300);
+	position: absolute;
+	content: "";
+	top: 50%;
+	left: calc(var(--spacing-12) * -1);
+	width: var(--spacing-8);
+	height: 1px;
+	background: var(--color-gray-300);
 }
 
 .release-menu a[aria-current]::after {
-  position: absolute;
-  content: "";
-  width: 10px;
-  height: 10px;
-  top: 50%;
-  margin-top: -4px;
-  left: -1.25rem;
-  background: var(--color-light);
-  border-radius: 50%;
-  border: 1px solid var(--color-gray-300);
+	position: absolute;
+	content: "";
+	width: 10px;
+	height: 10px;
+	top: 50%;
+	margin-top: -4px;
+	left: -1.25rem;
+	background: var(--color-light);
+	border-radius: 50%;
+	border: 1px solid var(--color-gray-300);
 }
-

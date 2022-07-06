@@ -4,9 +4,9 @@ Options in the <?= $field ?> picker are paginated. You can set the number of ite
 ```yaml
 fields:
   <?= $field ?>:
-    type: <?= $field . PHP_EOL ?>
-    label: Select an item
-    limit: 10
+	type: <?= $field . PHP_EOL ?>
+	label: Select an item
+	limit: 10
 ```
 
 
@@ -16,7 +16,7 @@ The <?= $field ?> picker shows a search field by default. If you want to remove 
 ```yaml
 fields:
   <?= $field ?>:
-    type: <?= $field . PHP_EOL ?>
-    label: Select an item
-    search: false
+	type: <?= $field . PHP_EOL ?>
+	label: Select an item
+	search: false
 ```

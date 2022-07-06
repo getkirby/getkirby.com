@@ -5,8 +5,8 @@ You can control the maximal and/or minimal length of the entered text by using t
 ```yaml
 fields:
   name:
-    label: Name
-    type: <?= $field . PHP_EOL ?>
-    minlength: 10
-    maxlength: 1000
+	label: Name
+	type: <?= $field . PHP_EOL ?>
+	minlength: 10
+	maxlength: 1000
 ```

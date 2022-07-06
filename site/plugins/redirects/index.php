@@ -12,51 +12,51 @@ use Kirby\Http\Router;
  * Instead of a target string, a callback function returning that string can
  * also be used.
  *
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
+ * @author	Nico Hoffmann <nico@getkirby.com>
+ * @link	  https://getkirby.com
  * @license   MIT
  */
 
 Kirby::plugin('getkirby/redirects', [
-    'hooks' => [
-            'route:after' => function ($route, $path, $method, $result, $final) {
-                    // only if call didn't match any route and is final
-                    if ($final === true && empty($result) === true) {
+	'hooks' => [
+			'route:after' => function ($route, $path, $method, $result, $final) {
+					// only if call didn't match any route and is final
+					if ($final === true && empty($result) === true) {
 
-                        // load redirects definition
-                        $root      = kirby()->root('config');
-                        $redirects = require $root . '/redirects.php';
+						// load redirects definition
+						$root	  = kirby()->root('config');
+						$redirects = require $root . '/redirects.php';
 
-                        // turn redirects into routes array
-                        $routes = array_map(function($from, $to) {
-                            return [
-                                'pattern' => $from,
-                                'action'  => function (...$parameters) use ($to) {
+						// turn redirects into routes array
+						$routes = array_map(function($from, $to) {
+							return [
+								'pattern' => $from,
+								'action'  => function (...$parameters) use ($to) {
 
-                                    // resolve callback for target
-                                    if (is_callable($to) === true) {
-                                        $to = $to(...$parameters);
-                                    }
+									// resolve callback for target
+									if (is_callable($to) === true) {
+										$to = $to(...$parameters);
+									}
 
-                                    // fill placeholders
-                                    foreach ($parameters as $i => $parameter) {
-                                        $to = str_replace('$' . ($i + 1), $parameter, $to);
-                                    }
+									// fill placeholders
+									foreach ($parameters as $i => $parameter) {
+										$to = str_replace('$' . ($i + 1), $parameter, $to);
+									}
 
-                                    return go($to);
-                                }
-                            ];
-                        }, array_keys($redirects), $redirects);
+									return go($to);
+								}
+							];
+						}, array_keys($redirects), $redirects);
 
-                        // run router on redirects routes
-                        $router = new Router($routes);
+						// run router on redirects routes
+						$router = new Router($routes);
 
-                        try {
-                            return $router->call($path, $method);
-                        } catch (Throwable $e) {
-                            return site()->errorPage();
-                        }
-                    }
-            }
-    ]
+						try {
+							return $router->call($path, $method);
+						} catch (Throwable $e) {
+							return site()->errorPage();
+						}
+					}
+			}
+	]
 ]);

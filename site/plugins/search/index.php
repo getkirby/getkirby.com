@@ -9,5 +9,5 @@ include __DIR__ . '/vendor/autoload.php';
  */
 function algolia()
 {
-    return Kirby\Search\Index::instance();
+	return Kirby\Search\Index::instance();
 }

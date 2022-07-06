@@ -1,7 +1,7 @@
 .code-token.code-punctuation,
 .code-token.code-comment,
 .code-token.code-doctype {
-  color: var(--color-gray-500);
+	color: var(--color-gray-500);
 }
 .code-token.code-tag,
 .code-token.code-markup,
@@ -12,7 +12,7 @@
 .code-token.code-kirbytag-bracket,
 .code-token.code-prolog,
 .code-token.code-delimiter {
-  color: var(--color-red-500);
+	color: var(--color-red-500);
 }
 .code-token.code-constant,
 .code-token.code-number,
@@ -24,41 +24,41 @@
 .code-token.code-entity,
 .code-token.code-bold,
 .code-token.code-bold > .code-punctuation {
-  color: var(--color-orange-400);
+	color: var(--color-orange-400);
 }
 .code-token.code-keyword,
 .code-token.code-italic,
 .code-token.code-italic > .code-punctuation {
-  color: var(--color-purple-400);
+	color: var(--color-purple-400);
 }
 .code-token.code-function {
-  color: var(--color-blue-400);
+	color: var(--color-blue-400);
 }
 .code-token.code-operator,
 .code-token.code-title {
-  color: var(--color-aqua-400);
+	color: var(--color-aqua-400);
 }
 .code-token.code-string,
 .code-token.code-attr-value,
 .code-token.code-attr-value .code-punctuation,
 .code-token.code-list.code-punctuation {
-  color: var(--color-green-400);
+	color: var(--color-green-400);
 }
 .code-token.code-scope,
 .code-token.code-class-name,
 .code-token.code-property,
 .code-token.code-url {
-  color: var(--color-yellow-400);
+	color: var(--color-yellow-400);
 }
 .code-token.code-title,
 .code-token.code-kirbytag-bracket,
 .code-token.code-list.code-punctuation,
 .code-token.code-bold {
-  font-weight: var(--font-bold);
+	font-weight: var(--font-bold);
 }
 .code-token.code-title .code-punctuation {
-  color: var(--color-gray-300);
+	color: var(--color-gray-300);
 }
 .code-token.code-italic {
-  font-style: italic;
+	font-style: italic;
 }

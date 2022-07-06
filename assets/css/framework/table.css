@@ -1,29 +1,29 @@
 .table {
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  background: var(--color-white);
-  border: 1px solid var(--color-gray-300);
-  border-radius: var(--rounded);
-  font-variant-numeric: tabular-nums;
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	background: var(--color-white);
+	border: 1px solid var(--color-gray-300);
+	border-radius: var(--rounded);
+	font-variant-numeric: tabular-nums;
 }
 .table table {
-  color: inherit;
-  min-width: 25rem;
+	color: inherit;
+	min-width: 25rem;
 }
 .table th,
 .table td {
-  padding: .75em 1em;
-  border-bottom: 1px solid var(--color-gray-300);
-  vertical-align: baseline;
-  font-size: .825em;
-  line-height: var(--leading-normal);
+	padding: 0.75em 1em;
+	border-bottom: 1px solid var(--color-gray-300);
+	vertical-align: baseline;
+	font-size: 0.825em;
+	line-height: var(--leading-normal);
 }
 .table th {
-  font-weight: var(--font-bold);
-  white-space: nowrap;
-  color: var(--color-black);
+	font-weight: var(--font-bold);
+	white-space: nowrap;
+	color: var(--color-black);
 }
 .table tr:last-child td {
-  border-bottom: 0;
+	border-bottom: 0;
 }

@@ -1,5 +1,5 @@
 <?php snippet('hgroup', [
-  'title'    => $title,
+  'title'	=> $title,
   'subtitle' => $intro ?? null,
 ]) ?>
 

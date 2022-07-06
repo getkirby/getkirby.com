@@ -1,43 +1,43 @@
 .sidebar {
-  font-size: var(--text-base);
+	font-size: var(--text-base);
 }
 .sidebar ul a {
-  font-weight: var(--font-bold);
+	font-weight: var(--font-bold);
 }
 .sidebar ul a[aria-current] {
-  color: var(--color-black);
+	color: var(--color-black);
 }
 
 .sidebar li {
-  margin-bottom: .25rem;
+	margin-bottom: 0.25rem;
 }
 
 .sidebar .details {
-  margin-left: -1.75rem;
+	margin-left: -1.75rem;
 }
 .sidebar .details summary::after {
-  margin-top: .25rem;
+	margin-top: 0.25rem;
 }
 
 .sidebar-menu-2 {
-  position: relative;
-  font-size: var(--text-sm);
-  line-height: 1;
-  padding-top: .375rem;
-  padding-bottom: .375rem;
+	position: relative;
+	font-size: var(--text-sm);
+	line-height: 1;
+	padding-top: 0.375rem;
+	padding-bottom: 0.375rem;
 }
 .sidebar-menu-2 li {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 .sidebar-menu-2 li > a {
-  display: block;
-  font-weight: normal;
-  color: var(--color-gray-700);
-  padding-top: .25rem;
-  padding-bottom: .25rem;
+	display: block;
+	font-weight: normal;
+	color: var(--color-gray-700);
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
 }
 .sidebar-menu-2 li > hr {
-  width: 3rem;
-  margin: var(--spacing-3) 0;
-  border-top: 2px solid var(--color-gray-200);
+	width: 3rem;
+	margin: var(--spacing-3) 0;
+	border-top: 2px solid var(--color-gray-200);
 }

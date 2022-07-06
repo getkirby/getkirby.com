@@ -1,14 +1,14 @@
 <?php snippet('templates/plugins/section', [
-  'id'      => 'static-site-generator',
-  'icon'    => 'integration',
+  'id'	  => 'static-site-generator',
+  'icon'	=> 'integration',
   'title'   => 'Static Site Generator',
   'layout'  => 'hero',
   'plugins' => $plugins->filter('subcategory', 'static-site-generator')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'api',
-  'icon'    => 'integration',
+  'id'	  => 'api',
+  'icon'	=> 'integration',
   'title'   => 'APIs',
   'layout'  => 'cards',
   'columns' => 2,
@@ -16,8 +16,8 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'authentication',
-  'icon'    => 'integration',
+  'id'	  => 'authentication',
+  'icon'	=> 'integration',
   'title'   => 'Authentication',
   'layout'  => 'cardlets',
   'columns' => 3,
@@ -25,13 +25,13 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'fields',
-  'icon'    => 'integration',
+  'id'	  => 'fields',
+  'icon'	=> 'integration',
   'title'   => 'Fields',
   'layout'  => 'cards',
   'columns' => 2,
   'plugins' => [
-    'plugins/rasteiner/query-field',
-    'plugins/pju/kirby-webhook-field'
+	'plugins/rasteiner/query-field',
+	'plugins/pju/kirby-webhook-field'
   ]
 ]) ?>

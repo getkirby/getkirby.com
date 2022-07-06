@@ -1,33 +1,33 @@
 .type {
-  white-space: nowrap;
+	white-space: nowrap;
 }
 .type-link {
-  text-decoration: none !important;
+	text-decoration: none !important;
 }
 .type.type-string {
-  background: var(--color-green-300);
+	background: var(--color-green-300);
 }
 .type.type-int {
-  background: var(--color-orange-300);
+	background: var(--color-orange-300);
 }
 .type.type-float,
 .type.type-number {
-  background: var(--color-red-300);
+	background: var(--color-red-300);
 }
 .type.type-bool,
 .type.type-boolean {
-  background: var(--color-purple-300);
+	background: var(--color-purple-300);
 }
 .type.type-array {
-  background: var(--color-aqua-300);
+	background: var(--color-aqua-300);
 }
 .type.type-object,
 .type.type-class {
-  background: var(--color-yellow-300);
+	background: var(--color-yellow-300);
 }
 .type.type-method {
-  background: var(--color-blue-300);
+	background: var(--color-blue-300);
 }
 .box--info .type.type-method {
-  background: var(--color-blue-400);
+	background: var(--color-blue-400);
 }

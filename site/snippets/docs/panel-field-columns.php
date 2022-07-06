@@ -5,8 +5,8 @@ Specifying the `column` option lets you change the number of option items that a
 ```yaml
 fields:
   category:
-    label: Category
-    type: <?= $field . PHP_EOL ?>
-    options: children
-    columns: 3
+	label: Category
+	type: <?= $field . PHP_EOL ?>
+	options: children
+	columns: 3
 ```

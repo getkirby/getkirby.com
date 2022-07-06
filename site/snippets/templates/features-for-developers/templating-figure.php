@@ -15,23 +15,23 @@
 </div>
 <div id="twig" data-template class="hidden">
   <div class="mb-3">
-    <?= $page->twigTemplate()->kt() ?>
+	<?= $page->twigTemplate()->kt() ?>
   </div>
   <div class="font-mono text-xs color-gray-700">
-    <a href="/plugins/mgfagency/twig"><strong class="font-normal color-black link">Kirby Twig plugin</strong> by Christian Zehetner</a>
+	<a href="/plugins/mgfagency/twig"><strong class="font-normal color-black link">Kirby Twig plugin</strong> by Christian Zehetner</a>
   </div>
 </div>
 <div id="blade" data-template class="hidden">
   <div class="mb-3">
-    <?= $page->bladeTemplate()->kt() ?>
+	<?= $page->bladeTemplate()->kt() ?>
   </div>
   <div class="font-mono text-xs color-gray-700">
-    <a href="/plugins/lukasleitsch/blade"><strong class="font-normal color-black link">Kirby Blade plugin</strong> by Lukas Leitsch</a>
+	<a href="/plugins/lukasleitsch/blade"><strong class="font-normal color-black link">Kirby Blade plugin</strong> by Lukas Leitsch</a>
   </div>
 </div>
 
 <script>
-const select    = document.querySelector(".template-select");
+const select	= document.querySelector(".template-select");
 const templates = [...document.querySelectorAll("[data-template]")];
 
 const changeTemplate = () => {

@@ -1,6 +1,6 @@
 <?php
 extract([
-  'call'     => $call ?? (string)$page->call(),
+  'call'	 => $call ?? (string)$page->call(),
   'language' => 'php'
 ]);
 ?>
