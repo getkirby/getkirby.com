@@ -17,7 +17,7 @@ return [
         });
     },
     'toToc' => function ($field, string $headline = 'h2') {
-        $value = $field->value();
+        $value = $field->value() ?? '';
 
         // Make sure not to include sceencast boxes
         $value = preg_replace('$\(screencast:.*\)$', '', $value);
