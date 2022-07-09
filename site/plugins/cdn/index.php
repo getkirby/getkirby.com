@@ -13,7 +13,6 @@ use Kirby\Cms\FileVersion;
 Kirby::plugin('getkirby/cdn', [
     'components'   => [
         'file::url' => function (App $kirby, $file): string {
-
             static $original;
 
             if ($file->type() === 'image') {
@@ -27,7 +26,6 @@ Kirby::plugin('getkirby/cdn', [
             return $original($kirby, $file);
         },
         'file::version' => function (App $kirby, $file, $options) {
-
             static $original;
 
             if (option('cdn', false) !== false) {
@@ -48,10 +46,9 @@ Kirby::plugin('getkirby/cdn', [
             return $original($kirby, $file, $options);
         },
         'url' => function (App $kirby, $path, $options): string {
-
             static $original;
 
-            if (preg_match('!assets\/!', $path)) {
+            if (preg_match('!assets\/!', $path ?? '')) {
                 $path = Cachebuster::path($path);
 
                 if (option('cdn', false) !== false) {

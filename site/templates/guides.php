@@ -7,9 +7,11 @@
     <li>
       <article>
         <a class="block" href="<?= $guide->url() ?>">
-          <figure class="mb-3" style="--size: 4rem">
-            <?= $guide->images()->findBy('extension', 'svg')->read() ?>
-          </figure>
+          <?php if ($svg = $guide->images()->findBy('extension', 'svg')): ?>
+            <figure class="mb-3" style="--size: 4rem">
+              <?= $svg->read() ?>
+            </figure>
+          <?php endif ?>
           <div class="border-top pt-3">
             <h2 class="h2 mb-3"><?= $guide->title() ?></h2>
             <p class="color-gray-700"><?= $guide->description() ?></p>
