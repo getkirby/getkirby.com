@@ -63,7 +63,7 @@ To modify a block, you can use the standard blueprints, snippets, and previews o
 
 ## Custom block types
 
-You createcCustom block types from the same three components. If you don't need a visual preview, you even make do with only a blueprint and a snippet. Learn how to create your own custom block types with our extensive documentation:
+You create custom block types from the same three components. If you don't need a visual preview, you even make do with only a blueprint and a snippet. Learn how to create your own custom block types with our extensive documentation:
 
 - (link: docs/reference/panel/fields/blocks#custom-block-types text: Custom block types)
 - (link: docs/cookbook/panel/block-collection text: Block factory: Creating your own blocks collection)
