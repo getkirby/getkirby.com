@@ -46,7 +46,7 @@ return [
 
 In most setups, you will have multiple different allowed base URLs, e.g. for production, staging and development.
 
-If you set the `url` option to a list of allowed URLs, your Kirby installation will automatically pick the right one based on `HTTP_HOST`, `HTTP_FORWARDED`, `HTTP_X_FORWARDED_HOST` or `SERVER_NAME` (whatever is provided) and will make sure to send an error on an invalid hosts. This is perfect when you cannot fully trust your server configurations on various environments or you work with a reverse proxy.
+If you set the `url` option to a list of allowed URLs, your Kirby installation will automatically pick the right one based on `HTTP_HOST`, `HTTP_FORWARDED`, `HTTP_X_FORWARDED_HOST` or `SERVER_NAME` (whatever is provided) and will make sure to send an error on an invalid host. This is perfect when you cannot fully trust your server configurations on various environments or you work with a reverse proxy.
 
 ```php
 return [
@@ -77,7 +77,7 @@ In a (link: docs/guide/configuration#multi-environment-setup text: multi-domain 
 
 As Kirby evaluates the `url` option twice, you can override the option value in the domain-specific config file and Kirby will ensure that the domain-specific value is used for the system's base URL.
 
-For example if your site is hosted in a subfolder on a particular domain but the subfolder is not passed to PHP and cannot be detected by Kirby automatically:
+For example, if your site is hosted in a subfolder on a particular domain but the subfolder is not passed to PHP and cannot be detected by Kirby automatically:
 
 ```php "site/config/config.php"
 return [
