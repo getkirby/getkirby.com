@@ -15,9 +15,9 @@ return [
 ```
 
 <info>
-The `SERVER_NAME` is a variable provided from your web server to PHP and from PHP to Kirby. Its value depends on the server configuration. There is also the `HTTP_HOST` variable (which comes from the request) and the `HTTP_X_FORWARDED_HOST` variable (which also comes from the request, but is usually set by reverse proxies that sit in between the client and Kirby).
+The `SERVER_NAME` is a variable provided from your web server to PHP and from PHP to Kirby. Its value depends on the server configuration. There is also the `HTTP_HOST` variable (which comes from the request) and the `HTTP_FORWARDED` and `HTTP_X_FORWARDED_HOST` variables (which also come from the request, but are usually set by reverse proxies that sit in between the client and Kirby).
 
-As the latter two variables can be set from the request, Kirby by default does *not* use these for auto-detection to protect against attacks.
+As the latter variables can be set from the request, Kirby by default does *not* use these for auto-detection to protect against attacks.
 
 If your site and Panel URLs are incorrect, this may be because of a reverse proxy that sits in between the client and Kirby. In this case please explicitly configure a fixed base URL or a set of possible base URLs (see below).
 </info>
@@ -46,7 +46,7 @@ return [
 
 In most setups, you will have multiple different allowed base URLs, e.g. for production, staging and development.
 
-If you set the `url` option to a list of allowed URLs, your Kirby installation will automatically pick the right one based on `HTTP_HOST`, `HTTP_X_FORWARDED_HOST` or `SERVER_NAME` (whatever is provided) and will make sure to send an error on an invalid hosts. This is perfect when you cannot fully trust your server configurations on various environments or you work with a reverse proxy.
+If you set the `url` option to a list of allowed URLs, your Kirby installation will automatically pick the right one based on `HTTP_HOST`, `HTTP_FORWARDED`, `HTTP_X_FORWARDED_HOST` or `SERVER_NAME` (whatever is provided) and will make sure to send an error on an invalid hosts. This is perfect when you cannot fully trust your server configurations on various environments or you work with a reverse proxy.
 
 ```php
 return [
@@ -62,10 +62,40 @@ You can also define base URLs with subfolders here and the subfolders will be va
 
 ## Wildcard option
 
-If you fully trust your server setup, you can allow any host name coming from `HTTP_HOST` or `HTTP_X_FORWARDED_HOST`. This could be necessary in some situations, but is **insecure** and should only be used if you know what you are doing with your server configuration.
+If you fully trust your server setup, you can allow any host name coming from `HTTP_HOST`, `HTTP_FORWARDED` or `HTTP_X_FORWARDED_HOST`. This could be necessary in some situations, but is **insecure** and should only be used if you know what you are doing with your server configuration.
 
 ```php
 return [
   'url' => '*'
 ];
 ```
+
+<since v="3.7.1">
+## URL override per domain
+
+In a (link: docs/guide/configuration#multi-environment-setup text: multi-domain environment), you may want to define the specific base URLs for each domain in the domain-specific config files.
+
+As Kirby evaluates the `url` option twice, you can override the option value in the domain-specific config file and Kirby will ensure that the domain-specific value is used for the system's base URL.
+
+For example if your site is hosted in a subfolder on a particular domain but the subfolder is not passed to PHP and cannot be detected by Kirby automatically:
+
+```php "site/config/config.php"
+return [
+  'url' => [
+    'https://example.com',
+    'https://staging.example.com',
+    'http://localhost'
+  ]
+];
+```
+
+```php "site/config/config.localhost.php"
+return [
+  'url' => 'http://localhost/example-site'
+];
+```
+
+<info>
+To ensure security, Kirby loads the domain-specific config files based on the `url` option in the main config file. So even if you set the `url` option again in the domain-specific config file, please make sure that the main config file allows the domain at all – otherwise your domain-specific config is never loaded and will not take effect.
+</info>
+</since>
