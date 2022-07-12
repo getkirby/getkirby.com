@@ -1,0 +1,109 @@
+Title: Page Models
+
+----
+
+Intro: Page models extend Kirby's default page object. Methods that you define in a page model are available everywhere in Kirby where you call a page of the extended type.
+
+----
+
+Text:
+
+## Introduction
+
+Page models can be registered (link: docs/reference/plugins/extensions/page-models text: in a plugin) or created in the `/site/models` folder.
+
+A page model definition is a PHP file with the same name as the template of the page you want to extend.
+
+
+| Template | Page model |
+| ----     | ----       |
+| `/site/templates/article.php` | `/site/models/article.php` |
+
+Kirby will automatically load the page model for your template if it can find one.
+
+## Creating a page model
+
+A page model is a PHP class that extends Kirby's default page class. The class name corresponds with the name of the template and text file. So if your text file is called `project.txt`, Kirby will look for a `project.php` model file with a `ProjectPage` class.
+
+```php
+<?php
+
+// For a content file called `project.txt`
+// In general the class name is {{ProjectFileName}}Page
+
+class ProjectPage extends Page {
+  // all methods of the Page class are inherited and can be overridden here now.
+}
+```
+This page model will be loaded every time Kirby encounters a page of the given type (so project in this example), whether it is in a template, a snippet or anywhere else.
+
+<info>
+If your template name contains dashes or underscores, these have to be ignored when naming your page model class. That means, both `my-template.php` and `my_template.php` will become:
+
+```php
+class MyTemplatePage extends Page {
+  // all methods of the Page class are inherited and can be overridden here now.
+}
+```
+
+The filenames of the model files themselves will keep the dash or underscore.
+</info>
+
+## Page models in the wild
+
+A page model can be used for example to fetch a cover image for a project page. Fetching the right image in the template or snippet can be a couple of lines of code. It is cleaner to seperate this functionality into a page model.
+
+## The page model
+
+The page model will make a method called `cover()` available for all your project pages. It will return the cover image, so you don't have to fetch it in the template code.
+
+```php "/site/models/project.php"
+<?php
+class ProjectPage extends Page {
+  public function cover() {
+    return $this->image('cover');
+  }
+}
+```
+Note, that we use `$this` where we would usually use `$page` elsewhere in Kirby, because we refer to the extended page class in this case.
+
+## In your templates
+
+With such a page model you can now use the new cover method throughout all templates, snippets and controllers:
+
+```php
+<h2>Latest Projects</h2>
+
+<ul>
+  <?php foreach(page('projects')->children()->published()->limit(3) as $project): ?>
+  <li>
+    <a href="<?= $project->url() ?>">
+      <img src="<?= $project->cover()->url() ?>" alt="<?= $project->title() ?>" />
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```
+
+By creating the model and the cover method you don't have to repeat this code in every single snippet and template in which you are dealing with projects. The cover method in this case is pretty short and simple, but imagine this with more complex queries for images or other data. As an additional benefit you can make changes that are reflected throughout all your templates and snippets in a single file.
+
+## Overriding the Page class
+
+It is also possible to override the functionality of Kirby's `Page` class. Be careful with this as it is possible to change Kirby's behaviour in unwanted ways!
+
+A simple unintrusive example is to sort all images differently by default.
+
+```php "/site/models/project.php"
+<?php
+
+class ProjectPage extends Page {
+  public function images() {
+    return parent::images()->sortBy('sort', 'ASC');
+  }
+}
+```
+By calling `parent::images()` in this example, we can refer to the original image method in Kirby's default `Page` class in order to simply extend its functionality.
+
+## Page model plugins
+
+You can define page models in plugins to reuse them in other projects or to share them with the community. (link: docs/reference/plugins/extensions/page-models text: Learn more about page model plugins).

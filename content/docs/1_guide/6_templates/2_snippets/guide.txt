@@ -1,0 +1,207 @@
+Title: Snippets
+
+----
+
+Subtitle: Create reusable code blocks that can be used anywhere
+
+----
+
+Description: Snippets are smaller blocks of code that you can reuse across templates. They are ideal for keeping your templates clean and maintainable.
+
+----
+
+Intro: Snippets are smaller blocks of code that you can reuse across templates. They are ideal for keeping your templates clean and maintainable.
+
+----
+
+Text:
+
+## Use cases
+
+Typical examples in the Starterkit are the `header.php`, `footer.php` and `menu.php` snippets that are used in every template.
+
+Snippets are stored in the `/site/snippets` folder and like templates, they have the extension `.php`.
+
+(screencast: https://www.youtube.com/watch?v=CTOoDE9z-WA title: Make your life easier with snippets text: A great way to clean up your templates and reuse parts of your templates multiple times.)
+
+## Using snippets
+
+Kirby's (helper: snippet) helper function lets you include snippets into your templates:
+
+Snippet                     | In your template
+-                           | -
+`/site/snippets/header.php` | `<?php snippet('header') ?>`
+`/site/snippets/menu.php`   | `<?php snippet('menu') ?>`
+`/site/snippets/footer.php` | `<?php snippet('footer') ?>`
+
+<info>
+If you want to organize snippets in subfolders, you can do so. In that case, you have to pass the path to the snippet to the snippet function.
+</info>
+
+
+Snippet                            | In your template
+-                                  | -
+`/site/snippets/basics/header.php` | `<?php snippet('basics/header') ?>`
+</info>
+
+## Let's clean up a template
+
+The most basic use case for snippets is splitting the header and footer into separate snippets. Let's explore how we can break up the basic template from the last section and make parts of it reusable:
+
+```php "/site/templates/default.php"
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="<?= $site->description() ?>">
+  <meta name="keywords" content="<?= $site->keywords() ?>">
+  <title>
+    <?= $page->title() ?> | <?= $site->title() ?>
+  </title>
+</head>
+<body>
+
+  <header>
+    <h1>
+      <a href="<?= $site->url() ?>">
+        <?= $site->title() ?>
+      </a>
+    </h1>
+  </header>
+
+  <main>
+    <h1><?= $page->title() ?></h1>
+    <?= $page->text() ?>
+  </main>
+
+  <footer>
+    <p class="copyright"><?= $site->copyright() ?></p>
+  </footer>
+
+</body>
+</html>
+```
+
+The code above looks fine as long as we just have a single template. But with every template we add, we would have to repeat the same stuff over and over again. What if we wanted to make a change to the header or footer? We would have to touch every single file.
+
+Well, we don't want to waste our precious time, so let's clean this up a bit!
+
+```php "/site/snippets/header.php"
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="<?= $site->description() ?>">
+  <title>
+    <?= $page->title() ?> | <?= $site->title() ?>
+  </title>
+</head>
+<body>
+
+  <header>
+    <h1>
+      <a href="<?= $site->url() ?>">
+        <?= $site->title() ?>
+      </a>
+    </h1>
+  </header>
+```
+
+```php "/site/snippets/footer.php"
+  <footer>
+    <p class="copyright"><?= $site->copyright() ?></p>
+  </footer>
+
+</body>
+</html>
+```
+
+Now that we have separated those parts, the final template looks very neat:
+
+```php "/site/templates/default.php"
+<?php snippet('header') ?>
+
+  <main>
+    <h1><?= $page->title() ?></h1>
+    <?= $page->text()->kirbytext() ?>
+  </main>
+
+<?php snippet('footer') ?>
+```
+
+No matter how many more templates we will add to our site, the header and footer part are now only two lines of code. All we need to modify is the main part of the template.
+
+## Passing variables to snippets
+
+Sometimes it is useful to pass a variable to a snippet.
+
+```php
+<?php snippet('mysnippet', ['title' => 'Hello!']) ?>
+```
+
+With the above code, `/site/snippets/mysnippet.php` will receive a title variable with the content "Hello!" that we can now echo in our snippet:
+
+```php "/site/snippets/mysnippet.php"
+<?= $title ?>
+```
+
+## Snippet alternatives
+
+You can define an array of snippet alternatives if the first snippet cannot be found:
+
+```php
+<?php snippet(['snippet1', 'snippet2', 'snippet3']) ?>
+```
+
+This is useful if you want to provide fallbacks for a snippet based on page input, in case the snippet does not exist:
+
+```php
+<?php snippet(['articles/' . $page->postType(), 'articles/default']) ?>
+```
+
+
+## Real life example: list of blog articles
+
+**The template**
+
+```php
+<?php snippet('header') ?>
+
+<main>
+
+  <h1>Blog</h1>
+
+  <?php foreach($page->children() as $article): ?>
+  <?php snippet('article', ['article' => $article]); ?>
+  <?php endforeach ?>
+
+</main>
+
+<?php snippet('footer') ?>
+```
+
+In this example, we pass the `$article` variable (which is a page object) to the snippet and can then fetch the data from that page in our snippet:
+
+**The `article.php` snippet**
+
+```php "/site/snippets/article.php"
+<article>
+  <h1><?= $article->title()->html() ?></h1>
+  <time><?= $article->date()->toDate('d/m/Y') ?></time>
+  <?= $article->intro()->kirbytext() ?>
+  <a href="<?= $article->url() ?>">Read more…</a>
+</article>
+```
+
+## Assigning a snippet to a variable
+
+The (helper: snippet) function has a third, optional parameter of type `boolean`. If set to `true`, Kirby returns the parsed content instead of directly echoing it. With this option, snippets can be used in a variety of situations, not just inside page templates:
+
+```php
+$emailBody = snippet('email', ['data' => $data], true);
+```
+
+
+## More information
+
+- (link: docs/cookbook/templating/menus text: Menus)
+- (link: docs/cookbook/templating/previous-next text: Previous / Next navigation)
+- (link: docs/cookbook/templating/pagination text: Pagination)

@@ -1,0 +1,99 @@
+Title: Collections
+
+----
+
+Intro: It often happens that we need the same set of pages or files in multiple places across our site. Think of blog articles on the blog and on the home page for example. Collections help with not repeating ourselves in such cases and to access commonly used pages or files collections more easily.
+
+----
+
+Text:
+
+(screencast: https://www.youtube.com/watch?v=FKw3pNOvVBs title: Collections text: Create custom collections of pages (projects, products, blog articles, etc.) and reuse them across your site without repeating yourself.)
+
+## Define a collection
+
+### A list of pages
+
+```php "/site/collections/articles.php"
+<?php
+
+return function ($site) {
+	return $site->find('blog')->children()->listed()->flip();
+};
+```
+
+(link: docs/reference/objects/pages text: Pages reference ›)
+
+### A list of users
+
+```php "/site/collections/admins.php"
+<?php
+
+return function ($users) {
+	return $users->filterBy('role', 'admin');
+};
+```
+
+(link: docs/reference/objects/users text: Users reference ›)
+
+### A list of images/files
+
+```php "/site/collections/project-covers.php"
+<?php
+
+return function ($site) {
+	return $site
+		->find('projects')
+		->children()
+		->images()
+		->template('cover');
+};
+```
+
+(link: docs/reference/objects/files text: Files reference ›)
+
+## How to use collections
+
+Collections can be used in templates and snippets like this:
+
+```php
+$kirby->collection("articles");
+$kirby->collection("admins");
+$kirby->collection("project-covers");
+```
+
+You can loop through the collections like through any collection like this:
+
+```php
+<?php
+foreach($kirby->collection('articles') as $article) {
+	echo $article->title()->html();
+}
+?>
+```
+Or store the collection in a variable for further use:
+
+```php
+$articles = $kirby->collection('articles');
+```
+
+### Nested collections
+
+If you have a lot of collections, it might come handy to organize them in subfolders. Kirby can handle this:
+
+```php "/site/collections/articles/latest.php"
+<?php
+
+return function ($site) {
+	return $site->find('blog')->children()->listed()->flip();
+};
+```
+
+```php
+$kirby->collection("articles/latest");
+```
+
+## Best practices
+
+- It's always a good idea to provide a collection that is not too specific yet.
+- In general, it's better not to apply pagination to collections for example, or to set a limit. You might want to use the same set of pages in different places, but in one template you need three and in the next you need 10.

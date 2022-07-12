@@ -1,0 +1,13 @@
+Title: Password reset form
+----
+Intro: Kirby comes with a simple form to reset your password that you can also use yourself.
+----
+Text:
+
+For our (link: docs/guide/authentication/login-methods text: password reset feature) we built a password reset form on its own dedicated page.
+
+You can access the form directly at `https://example.com/panel/reset-password`:
+
+(image: reset-password.png)
+
+You can use it to make newly registered users set their own password after logging in: Just send them the link and they will land on the form after logging in with their first temporary password. Once the new password is set, they are then redirected to the Panel home.

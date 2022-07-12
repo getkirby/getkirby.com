@@ -1,0 +1,51 @@
+Title: Content locking with virtual pages
+
+----
+
+Description: Prevent concurrent edits via the Panel
+
+----
+
+Intro: Prevent concurrent edits via the Panel
+
+----
+
+Text:
+
+By default, the (glossary: Panel) will try to lock a page if a user makes unsaved changes to it to prevent another user to make changes at the same time.
+
+Kirby creates a `.lock` file in the directory of the content file, retrieved via [`Page::contentFileDirectory()`](/docs/reference/objects/page/content-file-directory). However, your virtual page might not support any content file directory. Let's see how to deal with these cases.
+
+## Disable content locking
+
+In many cases of virtual pages, content locking might not be desired. If you want to disable content locking for your virtual page, add a `lock()` method to your (link: docs/guide/templates/page-models text: page model) which returns `null`:
+
+```php "/site/models/reviews.php"
+<?php
+
+class ReviewsPage extends Page
+{
+    public function lock()
+    {
+        return;
+    }
+}
+```
+
+## Support content locking
+
+To support content locking for your virtual page, Kirby expects a `lock()` method in your (link: docs/guide/templates/page-models text: page model). The method needs to return an object of a custom class that handles the various content locking features:
+
+```php "/site/models/reviews.php"
+<?php
+
+class ReviewsPage extends Page
+{
+    public function lock()
+    {
+        return new CustomContentLock($this);
+    }
+}
+```
+
+Check out the default `Kirby\Cms\ContentLock` class (link: docs/reference/@/cms/contentlock text: documentation) as well as (link: https://github.com/getkirby/kirby/blob/main/src/Cms/ContentLock.php text: source code) to learn more about the methods required to be implemented by your custom content lock class.

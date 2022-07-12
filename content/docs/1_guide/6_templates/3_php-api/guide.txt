@@ -1,0 +1,81 @@
+Title: Kirby's PHP API
+
+----
+
+Intro: Kirby has a mighty PHP API, which you can use in your snippets, templates, controllers and plugins to access each and every bit and piece of data and aspect of your site and system.
+
+----
+
+Text:
+
+## Key objects
+
+| Object available | Description |
+|-|-|
+| (class: Kirby text: $kirby) › | The `$kirby` class is the heart and soul of Kirby. It's the access point for registered users, the current request, route, plugins and more. |
+| (class: Site text: $site) › | The `$site` object represents the root of your site with all the information stored in `/content/site.txt`. |
+| (class: Pages text: $pages) › | The `$pages` object contains the first level of pages. It can be used to build the main menu or dive deeper into the structure of your site. |
+| (class: Page text: $page) › | The `$page` object represents the currently active page. It gives you access to the page's data, attached files, subpages and more. |
+
+## All the classes
+
+There are a lot more classes and objects at play within Kirby. You can find the most common ones in the Reference:
+
+- (link: docs/reference/objects text: Most important objects)
+- (link: docs/reference/@ text: Advanced: all classes)
+- (link: docs/reference/@/aliases text: Class aliases)
+
+## Access to other pages
+
+On the previous guide pages, we showed you how to access content from the current page with `$page` and from the site with `$site`. You are not limited to these two sources. The `$site` and `$pages` objects also allow you to access the content of *any* page:
+
+```php
+<section class="about-us">
+  <?= $pages->get('about')->text()->kirbytext() ?>
+</section>
+```
+
+The `$pages->get()` method returns a page by its ID, meaning its folder path in the `content` folder.
+
+Kirby also provides the `$pages->find()` method. In addition to the page ID, it also supports the page URI in the current language (if the page slug was translated) and it automatically handles URIs of content representations. So if you know that you are passing the untranslated page ID, `$pages->get()` will get you the page as fast as possible. If you need more leeway, `$pages->find()` will be more resilient, but slightly slower.
+
+Another alternative is the `$pages->findBy()` method. It allows you to query a page by a specific property inside a collection:
+
+```php
+<section class="news">
+  <?= $page->children()->findBy('slug', 'news')->text()->kirbytext() ?>
+</section>
+```
+
+In this example, the `slug` is queried, which is the last part of the page ID. So if the current `$page` has the ID `path/to/page`, the resulting page is `path/to/page/news`.
+
+## Permissions
+
+Some parts of Kirby's PHP API only work if you are logged in (or authenticated in other ways), because they respect the permissions of the currently logged in user. E.g. users cannot update a page via `$page->update()`, unless they are logged in and have adequate permissions. This helps increase the security of your code by blocking operations for unauthorized users.
+
+You can read more about available user permissions as well as how to authenticate or impersonate in the (link: docs/guide/users/permissions text: Users permissions docs ›)
+
+## Immutable objects
+
+Many methods of Kirby objects do not return a string, integer or similar but a Kirby object of the same type. For example, `$page->update()` is a method applied to an object of `Kirby\Cms\Page` and also returns an object of `Kirby\Cms\Page`.
+
+However, it is important to know that most often Kirby's objects are immutable. That means, when you modify an object like `$page`, `$file` etc. using a method like `update()`, `changeTitle()` and so on, a new (cloned) object with changes applied is returned.
+
+Therefore, you have to store the returned object in a new variable to be able to further work with it. Or if you want to continue using the existing object with these new changes, you need to reassign the returned object to the existing variable:
+ 
+
+```php
+// $project would still have the old value
+$project = page('project/project-a');
+$project->update(['year' => 2014]);
+
+// $project has the new value after reassigning
+$project = page('project/project-a');
+$project = $project->update(['year' => 2014]);
+```
+
+Some methods can return both, `$this` (the same instance you were calling) and a cloned object (`static` or `self`). In the reference, this case is marked with "$this|static" as the return value in the doc block for the method. `$this` is returned whenever the object wasn't changed (e.g. values remained the same), while a cloned object is returned when the data changed - to keep the original object immutable. Most times, this difference will not affect your code if you always store the return value in a variable and continue working with that variable as explained above.
+
+<warning>
+Keep in mind that, while some methods like `update()`, `changeTitle()` and so on do not modify the PHP object (but return a new one), they immediately change the content file of the existing page, file, ... nevertheless.
+</warning>

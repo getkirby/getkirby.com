@@ -1,0 +1,91 @@
+Title: Page builder
+
+----
+
+Description: Create rich content or even complete page layouts right from the Panel
+
+----
+
+Text:
+
+(image: blocks.png)
+
+## Like Lego® bricks for your content
+
+Blocks are basically like Lego® bricks, but for text and layout. Combine them in whatever way you like to create unique long form content and even complete page layouts without ever leaving the Panel.
+
+While (glossary: Markdown) is great for writing long form text like articles with nothing but a text editor, it doesn't provide a very visual experience, particularly when it comes to integrating rich content elements.
+
+This is where Kirby's (link: docs/reference/panel/fields/blocks text: blocks) and (link: docs/reference/panel/fields/layout text: layout) fields shine brightly: Blocks are the perfect solution for complex single-column layouts and long-form text with images, galleries, code, embedded media and more. With the layout field, you take this one step further to arrange blocks in multiple columns to build complex page layouts.
+
+Together, Kirby's blocks and layout fields combine a great WYSIWYG editing experience with fully customizable, flexible blocks. And you can easily extend the default blocks collection with your own or blocks from community plugins. And the best thing is: The HTML output is totally under your control, so it works nicely with your favorite CSS framework, e.g. (link: https://tailwindcss.com/ text: Tailwind CSS) and others.
+
+
+## Core block types
+
+Kirby comes with the following block types built-in:
+
+(reference: panel/blocks)
+
+
+## Adding blocks field to your blueprint
+
+Add `blocks` and `layout` fields to your blueprints like any other field type. Check out our detailed reference for each field type with all the available configuration options:
+
+- (link: docs/reference/panel/fields/blocks text: Blocks field)
+- (link: docs/reference/panel/fields/layout text: Layout field)
+
+## Copy & paste
+
+You can paste content from documents and websites into a blocks field, and Kirby will try to convert them into blocks automatically. You can also select and copy multiple blocks between pages.
+
+## What makes a block?
+
+A block type is made up of three components:
+
+1. A PHP code (glossary: snippet text: snippet) to render the block content in the frontend
+2. A block (glossary: blueprint text: blueprint) which tells Kirby which fields should be available in the block
+3. An (optional) Panel preview for the WYSIWYG experience
+
+You can find the source files for the existing block types in the (link: docs/reference/panel/blocks text: documentation for each block type).
+
+With this knowledge, we can go ahead and either modify existing block types or create new ones.
+
+## Modifying block types
+
+You can customize all existing block types to your needs in one or all of the following ways:
+
+1. Change how the block renders in the frontend by overwriting the snippet for the block
+2. Add or replace fields in a block type by overwriting the (glossary: blueprint) file for the block type. This will often go hand in hand with modifying the output as in point 1.
+3. Change how the block looks in the Panel by overwriting its preview.
+
+To modify a block, you can use the standard blueprints, snippets, and previews of each block type as a basis for your changes. (link: docs/reference/panel/fields/blocks#extending-core-blocks text: Read more…)
+
+## Custom block types
+
+You create custom block types from the same three components. If you don't need a visual preview, you even make do with only a blueprint and a snippet. Learn how to create your own custom block types with our extensive documentation:
+
+- (link: docs/reference/panel/fields/blocks#custom-block-types text: Custom block types)
+- (link: docs/cookbook/panel/block-collection text: Block factory: Creating your own blocks collection)
+- (link: docs/cookbook/panel/custom-block-type text: Creating a custom block type from scratch)
+- (link: docs/cookbook/panel/nested-blocks text: Nested blocks)
+
+## Block related plugins
+
+Our community of Kirby developers have created cool blocks field plugins, so make sure to check them out:
+
+- (link: plugins/microman/map text: Map-Suite: A geolocation field & map block)
+- (link: plugins/microman/form-block text: Form block: Create forms easily from building blocks)
+- (link: plugins/microman/grid-block text: Grid block: Use layouts right within any blocks field)
+- (link: plugins/jongacnik/fields-block text: Fields block: Kirby block preview plugin to directly render block fields, allowing for inline editing)
+- (link: plugins/adspectus/feedreader text: FeedReader: Integrate a feed using a block)
+- (link: plugins/johannschopplich/highlighter text: Highlighter: Syntax highlighting for code)
+
+## Already made your own?
+
+Don't hesitate to (link: docs/guide/plugins/plugin-setup-basic#publish-your-plugin text: share them with the world). 
+
+## More
+
+- (link: docs/cookbook/setup/kirby-meets-tailwindcss text: Kirby meets Tailwind, includes solutions how to make Tailwind work with (inline) HTML elements in blocks)
+

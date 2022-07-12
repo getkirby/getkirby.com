@@ -1,0 +1,142 @@
+Title: Fields
+
+----
+
+Intro: Form fields are an essential part of the configuration and have very powerful options.
+
+----
+
+Text:
+
+(screencast: https://www.youtube.com/watch?v=cOUmDlvsPaE title: Fun with fields text: Learn how to create intuitive forms for your editors, how to create field layouts, inline help and more.)
+
+
+## Naming fields
+
+You can choose the names for your fields freely, but there are two limitations:
+
+1. You can only use **alphanumeric characters** and **underscores** in field names.
+2. Do not use names that are **reserved by (link: docs/reference/objects/page text: native page methods)**. For example, if you give your field the name "image", it will conflict with Kirby's `$page->image()` method.
+
+<info>
+You can still use field names that conflict with (link: docs/reference/objects/page text: native page methods). But you will have to call such a field via the `$page->content()->image()` method. We recommend prefixing your field names instead.
+</info>
+
+## Available form fields
+
+(reference: panel/fields)
+
+<info>
+If you come from Kirby 2, please note that the title field is automatically added to a page. Please remove all fields called title from your old blueprints.
+</info>
+
+## Conditional fields
+
+In all fields, you can set a condition for displaying the field via the `when` option. In the `when` option you define a field name as the key and the required value of that field. In the following example, the text field is only shown when the toggle is set to `true`:
+
+```yaml
+fields:
+  toggle:
+    type: toggle
+  text:
+    type: text
+    when:
+      toggle: true
+```
+
+If multiple conditions should be fulfilled to show a field, you can add more of them to the `when` option. All of these conditions need to be fulfilled to display the field:
+
+```yaml
+fields:
+  toggle:
+    type: toggle
+  category:
+    type: select
+    options:
+      - A
+      - B
+      - C
+  text:
+    type: text
+    when:
+      toggle: true
+      category: B
+```
+
+<info>
+Field names still need to be unique, no matter if they are displayed at the same time or not. Values of undisplayed fields will still be preserved and stored in the content file.
+</info>
+
+## Validating fields
+
+Most fields come with validators you can add as options in your blueprints like `min` and `max` etc., or built-in validators like the `url` field that will automatically check if the given value is a URL. But you can also do more sophisticated validation.
+
+### Pattern matches
+
+With the `pattern` property you can check if the input value matches a given pattern:
+
+```yaml
+text:
+  type: text
+  pattern: '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$'
+```
+
+### Using validators
+
+You can also use Kirby's (link: docs/reference/system/validators text: built-in validators) or (link: docs/reference/plugins/extensions/validators text: custom validators).
+
+Get a valid IP address:
+
+```yaml
+text:
+  type: text
+  validate:
+    ip
+```
+
+Accept only alphanumerical values:
+
+```yaml
+text:
+  type: text
+  validate:
+    alphanum
+```
+
+Make sure the value starts with a given string:
+
+```yaml
+text:
+  type: text
+  validate:
+    startsWith:
+      AB-
+```
+
+## Field shortcuts
+
+For simple fields that are only used **once** per blueprint , you can use a shortcut. Set the field type as key and `true` as the value:
+
+```yaml
+fields:
+  tags: true
+  text: true
+```
+This code will add a `tags` field and a `text` field with their default properties.
+
+These shortcuts can be extended with a label or other field properties, for example:
+
+```yaml
+fields:
+  text:
+    label: Description
+  select:
+    options:
+      - a
+      - b
+      - c
+```
+
+## Custom fields
+
+You can extend this list with your own field types by creating a (link: docs/reference/plugins/extensions/fields text: field plugin).

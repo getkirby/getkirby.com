@@ -1,5 +1,0 @@
-Title: Blueprints
-
-----
-
-Description: How to create forms for the Panel and access blueprints on the frontend.

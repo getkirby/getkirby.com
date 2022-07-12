@@ -1,0 +1,252 @@
+Title: Query Language
+
+----
+
+Intro: Kirby comes with a blueprint query language that offers basically the same functionality as Kirby's PHP API with a simple dot notation.
+
+----
+
+Text:
+
+## Introduction
+
+The query language adds a lot of flexibility when querying options for select, radio  and checkboxes fields, for querying collections in Panel sections and to manipulate how information is displayed in the Panel.
+
+If you are not familiar with (link: docs/guide/templates/php-api text: Kirby's PHP API) yet, you should learn more about it first. The query language is very close to it and will be confusing without the basics.
+
+<info>
+We recommend using double quotes around strings in the query language, otherwise it can result in the Panel throwing errors in some cases.
+</info>
+
+### Syntax
+
+#### PHP
+
+```php
+$site->title()
+$page->title()->lower()
+$page->children()
+$page->children()->filterBy('featured', true)
+$site->find('notes')->children()->filterby('tags', 'ocean', ',')
+$page->images()->template('image')
+```
+
+#### Query
+
+```txt
+site.title
+page.title.lower
+page.children
+page.children.filterBy("featured", true)
+site.find("notes").children.filterBy("tags", "ocean", ",")
+page.images.template("image")
+```
+
+These are just a few examples. As you can see, it is very close to the PHP syntax. You don't need to relearn anything this way.
+
+<info>
+The query language is not limited to built-in methods. You can also use (glossary: model text: page models) and custom methods within your queries.
+</info>
+
+### Blueprint example
+
+There are two ways of using the query language in your blueprints:
+
+#### 1. To fetch data
+
+In this example we use the query language to fetch options for a select field. You can fetch any collection of pages, files or users to be used as options.
+
+```yaml
+# select field
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query: site.children.listed
+```
+
+#### 2. To create string templates
+
+Another way to use the language is to create custom information for page or file lists. In this case we use the query language as part of our template syntax.
+
+```yaml
+# pages section
+published:
+  label: Published Pages
+  type: pages
+  info: "Year: {{ page.year }}"
+```
+
+## Querying options in fields
+
+In various field types (tags, select, multiselect, checkboxes, radio, files, pages and related custom fields) you can use the `query` option to query possible options, for example:
+
+```yaml
+tags:
+    label: Tags
+    type: tags
+    options: query
+    query:
+      fetch: page.siblings
+      text: " {{ page.title }}"
+      value: "{{ page.uri }}"
+
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query: site.children.listed.template('note') # get all children with the note template
+
+```
+
+Check out the (link: docs/reference/panel/fields text: docs for each of these fields in the Reference).
+
+
+## Querying the parent in pages and files sections
+
+```yaml
+sections:
+  articles:
+    type: pages
+    label: Blog Articles
+    parent: site.find("blog")
+```
+
+## Querying an image in the image option
+
+```yaml
+image:
+  query: page.images.template("cover").first
+  ratio: 1/1
+  cover: true
+```
+
+## Querying information to display
+
+```yaml
+info: "{{ page.from.toDate('d.m.Y') }} - {{ page.to.toDate('d.m.Y') }} / {{ page.location }}"
+```
+
+```yaml
+info: "{{ file.dimensions }}"
+```
+
+### Escaping HTML
+By default, we escape all queries to be displayed against raw HTML output that may lead to XSS attacks. If you include the HTML direcly in the blueprint option, this will still work and display the HTML as intended.
+
+```yaml
+info: "<strong>{{ file.dimensions }}</strong>"
+```
+
+The query result itself will be escaped though, so if e.g. you would have a custom page method that returns HTML the HTML would be displayed as normal text. If such queries need to return HTML, you can use the `{< >}` syntax. In this case you need to ensure manually that the returned HTML code is safe.
+
+```yaml
+info: "{< page.myMethodWithHTML >}"
+```
+
+
+## Advanced query syntax
+
+Queries can include arrays and nested method calls:
+
+```yaml
+# arrays
+query: site.index.filterBy("template", "in", ["note", "album"])
+
+# nested queries
+query: kirby.collection("some-collection").not(kirby.collection("excluded-collection"))
+```
+
+If you need to include quotes within strings, you can use the other quote type (`"` vs. `'`) or escape the quotes of the same quote type with backslashes:
+
+```yaml
+query: site.title.or("This is a default value with \"quotes\"")
+```
+
+Method calls (`parent.method(arguments...)`) are supported if the parent is an object and the method exists (or if the object has a magic `__call()` method) or if the parent is an array and the method is a PHP closure (anonymous function).
+
+Property access (`parent.property`) will behave like this:
+
+- If the parent is an object, Kirby will first try to call a method with that name, then a magic `__call()` method. If neither exist, Kirby will try to access a property with that name or call the magic `__get()` method.
+- If the parent is an array, the respective array element will be returned.
+- Calling a property without any arguments (`parent.property()`) is equivalent to accessing the property.
+
+## Access different data types
+### Array items
+
+```yaml
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query:
+    fetch: site.taxonomy.split
+    text: "{{ arrayItem.value.upper }}"
+    value: "{{ arrayItem.value.slug }}"
+```
+
+### Structure items
+
+```yaml
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query:
+    fetch: site.contactoptions.toStructure
+    text: "{{ structureItem.name }}"
+    value: "{{ structureItem.twitter }}"
+```
+
+### Pages
+
+```yaml
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query:
+    fetch: site.children.published
+    text: "{{ page.year }} - {{ page.title.upper }}"
+    value: "{{ page.slug }}"
+```
+
+
+### Files
+
+```yaml
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query:
+    fetch: site.files
+    text: "{{ file.name }}"
+    value: "{{ file.filename }}"
+```
+
+### Users
+
+```yaml
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query:
+    fetch: kirby.users.filterBy("role", "client")
+    text: "{{ user.email }}"
+    value: "{{ user.id }}"
+```
+
+### Blocks
+
+```yaml
+mySelect:
+  label: My Select Box
+  type: select
+  options: query
+  query:
+    fetch: page.text.toBlocks.filterBy("type", "heading")
+    text: "{{ block.text }}"
+    value: "{{ block.id }}"
+```

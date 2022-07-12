@@ -1,0 +1,272 @@
+Title: Configuration
+
+----
+
+Description: Almost every aspect of Kirby can be controlled and configured to do exactly what you need it to do.
+
+----
+Text:
+
+## The `config.php`
+
+General Kirby configuration settings and configuration settings for plugins go into `/site/config/config.php`. The config file contains a return statement with an array of config options:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'debug'  => true,
+    'someOtherSetting' => 'something'
+];
+```
+
+<warning>
+Make sure to only use a single return statement in your `config.php` file (with all your options defined in that one return array).
+</warning>
+
+<warning>
+Since Kirby is not being fully initialized yet when reading the configuration, you cannot use the `$kirby` object or `kirby()` helper in the `config.php`.
+
+If you need to set options dynamically, you can use the (link: docs/reference/system/options/ready text: `ready` option) with a callback.
+</warning>
+
+### Plugin options
+
+You can also set options for your installed plugins in the `site/config/config.php`:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'author.pluginname' => [
+        'option' => 'a custom value',
+        'another-option' => [
+            'with-a-nested-option' => 'also a custom value'
+        ]
+    ]
+];
+```
+
+<info>
+Please use the exact syntax as in the example above, i.e. with the `author.pluginname` as a single string. The following example will ***not* work**:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'author' => [
+        'pluginname' => [
+            'option' => 'a custom value',
+            'another-option' => [
+                'with-a-nested-option' => 'also a custom value'
+            ]
+        ]
+    ]
+];
+```
+</info>
+
+### Using multiple config files
+
+If you want to keep your `config.php` clean when using more complex options, you can outsource them to individual files that you require in the return array:
+
+```php "/site/config/config.php"
+return [
+  'debug' => true,
+  'hooks' => require_once 'hooks.php'
+];
+```
+
+```php "/site/config/hooks.php"
+return [
+  // your hooks
+];
+```
+
+## Using options
+
+Config options can be used anywhere in Kirby with the `$kirby->option()` method:
+
+```php
+$kirby->option('someOtherSetting');
+```
+
+Or with the `option` helper:
+
+```php
+  option('someOtherSetting');
+```
+
+### Fallbacks
+
+You can pass option fallbacks as second parameter in the option methods. This can be useful if a option does not necessarily have to be set in the config file.
+
+```php
+$kirby->option('someOtherSetting', 'my fallback');
+option('someOtherOption', 'my fallback');
+
+```
+
+### All configuration options
+
+(reference: system/options)
+
+
+## Hooks and Routes
+
+You can register (link: docs/reference/plugins/extensions/hooks text: hooks) or (link: docs/guide/routing text: routes) in your `config.php` if you don't want to create a plugin for them.
+
+```php "/site/config/config.php"
+<?php
+
+return [
+  'hooks' => [
+    // the hooks definition goes here…
+  ],
+  'routes' => [
+    // the routes definition goes here…
+  ]
+];
+```
+
+### All hooks
+
+(reference: plugins/hooks)
+
+## Base URL setup
+
+By default, Kirby detects the base URL of your installation from the server configuration. This base URL is then used to generate all resource URLs and links on your site and in the Panel.
+
+If your URLs are incorrect, this may be because of a reverse proxy that sits in between the client and Kirby. For security reasons, the reverse proxy configuration is only respected if you explicitly configure a fixed base URL or a set of possible base URLs with the `url` option:
+
+```php
+<?php
+
+return [
+  'url' => [
+    'https://example.com',
+    'https://staging.example.com',
+    'http://example.test'
+  ]
+];
+```
+
+You can read more in the (link: reference/system/options/url text: reference).
+
+## Multi-environment setup
+
+You can set different options based on the domain by adding additional config files containing the domain.
+
+### Example setup
+
+```filesystem
+/site/config/config.localhost.php
+/site/config/config.staging.yourdomain.com.php
+/site/config/config.yourdomain.com.php
+/site/config/config.www.yourdomain.com.php
+```
+
+By setting different options in those config files, you get a very flexible system that can be deployed to different servers and react to the current environment accordingly.
+
+<info>
+Note that the settings in the standard `config.php` file are always used. If you need different settings in another environment, you will have to override those settings in the domain specific configuration file (or only set those options in your domain specific config file).
+
+General settings for all environments should be included in the standard `config.php` file to avoid code duplication. 
+</info>
+
+## Custom folder setup
+
+Kirby lets you adjust its default folder setup. Every path to a system-relevant directory is called root in Kirby. All roots can be configured when Kirby is initialized, which normally happens in your `index.php`.
+
+Here is an example in which the site and content folders are renamed.
+
+```php "/index.php"
+<?php
+
+include __DIR__ . '/kirby/bootstrap.php';
+
+$kirby = new Kirby([
+	'roots' => [
+		'index'   => __DIR__,
+		'site'    => __DIR__ . '/project',
+		'content' => __DIR__ . '/data'
+	]
+]);
+
+echo $kirby->render();
+```
+
+### All configurable roots
+
+(reference: system/roots)
+
+### Public folder setup
+
+In our Starterkit, we offer a flat setup that installs all folders directly in the document root of your server. This is not always the best solution, but it's the solution that is most compatible with all types of hosting.
+
+A typical setup for secure, modern web applications has every private folder behind the document root and the domain points to a public folder with the `index.php` and additional public assets like CSS files, images, etc.
+
+#### index.php
+
+The key to this setup is the `index.php` in the `public` folder:
+
+```php "/public/index.php"
+<?php
+
+include __DIR__ . '/../kirby/vendor/autoload.php';
+
+$kirby = new Kirby([
+    'roots' => [
+        'index'    => __DIR__,
+        'base'     => $base    = dirname(__DIR__),
+        'content'  => $base . '/content',
+        'site'     => $base . '/site',
+        'storage'  => $storage = $base . '/storage',
+        'accounts' => $storage . '/accounts',
+        'cache'    => $storage . '/cache',
+        'sessions' => $storage . '/sessions',
+    ]
+]);
+
+echo $kirby->render();
+```
+
+<info>
+Note that the path to `/vendor/autoload.php` might vary depending on your setup, for example when you install Kirby with Composer.
+</info>
+
+####  Shared storage folder
+
+This example does not only use a public folder setup, it also places accounts, cache and sessions folders in a shared storage folder. This can be a useful pattern to keep track of those additional folders that need to be writable by Kirby.
+
+## Custom URL setup
+
+If you want to serve media and assets from other domains than your main domain, you can define custom URLs for all public facing folders.
+
+This allows you to store your media or assets in other locations on your server or even on a CDN.
+
+Your custom URLs can be configured when Kirby is initialized, which normally happens in your `index.php`. In the example below, custom URLs are set for the `media` and `assets` folders:
+
+```php "/index.php"
+<?php
+
+include __DIR__ . '/kirby/bootstrap.php';
+
+$kirby = new Kirby([
+	'urls' => [
+		'index'  => 'https://getkirby.com',
+		'media'  => 'https://media.getkirby.com',
+		'assets' => 'https://assets.getkirby.com',
+	]
+]);
+
+echo $kirby->render();
+```
+
+### All configurable URLs
+
+(reference: system/urls)
+
+## Panel configuration
+
+The Panel has **(link: docs/reference/system/options/panel text: additional configuration options)** to include custom CSS and JS files, to move it to a different subfolder or to switch it off entirely.

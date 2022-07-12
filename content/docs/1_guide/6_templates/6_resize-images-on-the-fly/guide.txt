@@ -1,0 +1,173 @@
+Title: Resizing & cropping images
+
+----
+
+Intro: Kirby's built-in thumbs creator lets you resize and crop any image on the fly in your templates. You can not only resize and crop images from the content folder, but also from the assets folder directly.
+
+----
+
+Text:
+
+With Kirby's new Thumbnail API, thumbs are generated asynchronously. This makes thumb creation feel a lot faster and creates less memory issues, which could easily become an issue with many images or when creating many different images sizes to serve responsive images.
+
+A new set of plugin points can be used to hook into the thumbnail API or the thumbnail URLs, see (link: docs/reference/plugins/extensions/core-components text: core components).
+
+In a default setup, thumbnails are stored in the `/media` folder.
+
+## Resizing images
+
+```php
+$image->resize(300);
+
+$image->resize(300, 200);
+```
+
+## Cropping images
+
+### Square
+
+```php
+$image->crop(100);
+```
+
+### Crop by width and height
+
+```php
+$image->crop(100, 200);
+```
+
+## Crop positions
+
+You can set from which position a file should be cropped. The following crop options are available:
+
+- `top left`
+- `top`
+- `top right`
+- `left`
+- `center`
+- `right`
+- `bottom left`
+- `bottom`
+- `bottom right`
+
+This is how to use the crop positions in your code:
+
+```php
+// quick and simple
+$image->crop(100, 200, 'top right');
+
+// more fine grained control
+$image->crop(100, 200, [
+  'quality' => 70,
+  'crop' => 'left'
+]);
+```
+
+
+## Blur
+
+The `blur` method applies a blur filter to an image. You can modify the intensity of the blur effect by passing an integer. The default value is 10.
+
+```php
+$image->blur();
+$image->blur(30);
+```
+
+## Grayscale
+
+The grayscale method converts an image to grayscale.
+
+```php
+$image->grayscale();
+```
+
+## Configuring your thumbnails
+
+Options for thumbnails are set with the `thumbs` key in Kirby's configuration:
+
+```php "/site/config/config.php"
+return [
+  'thumbs' => [
+    'driver'    => 'im',
+    'quality'   => 90,
+    'bin'       => '/usr/local/bin/convert',
+    'interlace' => true
+  ]
+];
+```
+
+You can set a default format option in your config file and convert all images unless you override the format option in the thumb method.
+
+```php "/site/config/config.php"
+<?php
+
+return [
+  'thumbs' => [
+    'format' => 'webp'
+  ]
+];
+```
+
+This is only recommended if you find yourself converting 90% of your files to that format anyway. Otherwise you will need to override the default quite a lot.
+
+(link: docs/reference/system/options/thumbs text: All thumbs options)
+
+## Presets
+
+You can define option presets for thumbs in your `config.php`:
+
+```php "/site/config/config.php"
+return [
+    'thumbs' => [
+        'presets' => [
+            'default' => ['width' => 1024, 'quality' => 80],
+            'blurred' => ['blur' => true]
+        ]
+    ]
+];
+```
+
+Then you can use them e.g. in your templates:
+
+```php
+$file->thumb(); // for default preset
+$file->thumb('blurred');
+```
+
+## Responsive images
+You can use Kirby's [`$image->srcset()`](/docs/reference/objects/file/srcset) method to easily create the `srcset` attribute for responsive images. (link: docs/reference/objects/file/srcset text: Learn more ›)
+
+```php
+<img srcset="<?= $image->srcset([300, 800, 1024]) ?>">
+```
+
+Check out our cookbook recipe (link: docs/cookbook/performance/responsive-images text: Responsive images) to learn more.
+
+## Image formats
+
+You can use the `format` option to convert an existing JPEG, GIF or PNG into a WebP or AVIF file with the `thumb()` method.
+
+```php
+<?= $image->thumb(['width' => 200, 'format' => 'webp']) ?>
+<?= $image->thumb(['width' => 200, 'format' => 'avif']) ?>
+```
+
+The format option can also be used in srcset definitions.
+
+```php
+
+$image->srcset([
+  '400w'  => ['width' => 400, 'format' => 'webp'],
+  '800w'  => ['width' => 800, 'format' => 'webp'],
+  '1200w' => ['width' => 1200, 'format' => 'webp']
+])
+```
+
+The GDLib/SimpleImage driver currently only supports `webp`, ImageMagick supports `webp` and `avif`.
+
+<warning>
+Be aware that not all browsers support the new formats yet.
+
+https://caniuse.com/webp
+https://caniuse.com/avif
+</warning>

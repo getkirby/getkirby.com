@@ -1,0 +1,99 @@
+Title: Tabs
+----
+
+Intro: When your blueprints get more complex, tabs help to keep them organized.
+
+----
+
+Text:
+
+(image: tabs.png)
+
+## Defining tabs
+
+<info>
+Tabs are basically wrappers around regular blueprint layouts. Check out (link: docs/guide/blueprints/layout text: how to create layouts) before you get started with tabs.
+</info>
+
+A tab definition has three options:
+
+- label
+- columns
+- icon
+
+The icon is optional. Please check out the (link: docs/reference/panel/icons text: list of available icons). You can also use an emoji by pasting it directly into the blueprint.
+
+```yaml
+title: My blueprint
+
+tabs:
+  content:
+    label: Content
+    icon: text
+    columns:
+      # layout
+  seo:
+    label: SEO
+    icon: search
+    columns:
+      # layout
+```
+
+(image: tabs-screen.png)
+
+### Full example
+
+```yaml
+title: My blueprint
+
+tabs:
+
+  # content tab
+  content:
+    label: Content
+    icon: text
+    columns:
+
+      # main
+      left:
+        width: 2/3
+        sections:
+
+          # a simple form
+          content:
+            type: fields
+            fields:
+              headline:
+                label: Headline
+                type: text
+              text:
+                label: Text
+                type: textarea
+
+      # sidebar
+      right:
+        width: 1/3
+        sections:
+
+          # a list of subpages
+          pages:
+            type: pages
+            label: Subpages
+
+          # a list of files
+          files:
+            type: files
+            label: Files
+
+  # seo tab
+  seo:
+    label: SEO
+    icon: search
+    fields:
+      seoTitle:
+        label: SEO Title
+        type: text
+      seoDescription:
+        label: SEO Description
+        type: text
+```

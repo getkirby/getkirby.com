@@ -1,0 +1,118 @@
+Title: Introduction
+
+----
+
+Intro: Blueprints are configuration files written in YAML that let you customize the (glossary: Panel) to make it truly yours.
+
+----
+
+Thumbnail:  tabs.png
+
+----
+
+Text:
+
+## TL;DR
+
+- Blueprints are stored in `/site/blueprints`.
+- Blueprints configure the Panel layout of the site, pages, files and users.
+- Create your own layouts with tabs, columns and sections.
+
+(screencast: https://www.youtube.com/watch?v=yK3gNjWU_5s title: Your first blueprints text: The heart and soul of your Kirby installation: Learn how to create a fully customized admin interface for every page type.)
+
+
+## Blueprint types
+
+The Panel layouts for  `site`, `pages`, `files` and `users` all get their own blueprints. The blueprint folder is structured accordingly:
+
+```filesystem
+/site/blueprints/site.yml
+/site/blueprints/files/
+/site/blueprints/pages/
+/site/blueprints/users/
+```
+
+(reference: panel/blueprints)
+
+<info>
+The start page (Dashboard) of the Panel is defined in the `/site/blueprints/site.yml` blueprint.
+</info>
+
+## Layout
+
+When your project requires more elaborate setups, you can be the interface designer. You decide which features are needed for each type of page, file or user and how to arrange them in (link: docs/guide/blueprints/tabs text: tabs), (link: docs/guide/blueprints/layout#defining-columns text: columns) and (link: docs/guide/blueprints/layout#adding-sections text: sections).
+
+(image: tabs.png)
+
+(link: docs/guide/blueprints/layout text: Learn more about layouts…)
+
+## Fields
+
+With fields you can break up your content into digestable chunks and structure it according to your content model, rather than storing everything in a huge text field. You can add as many fields of different field types as you need.
+
+(link: docs/guide/blueprints/fields text: Learn more about fields…)
+
+## Query language
+
+Kirby comes with a blueprint query language that offers basically the same functionality as Kirby's PHP API with a simple dot notation.
+
+(link: docs/guide/blueprints/query-language text: Learn more about Kirby's blueprint query language…)
+
+## Extending blueprints
+
+You can store fields, sections, tabs and entire blueprint layouts in separate files so that they can be reused within your blueprints. If you want, you can even create a complete component system to apply to multiple projects.
+
+(link: docs/guide/blueprints/extending-blueprints text: Learn more about how to extend and reuse blueprints…)
+
+## Translating blueprints
+
+For editors from various language backgrounds, you can translate blueprint titles, form field labels, section labels, help text, options, and more.
+
+(link: docs/guide/blueprints/translations text: Learn more about translating blueprints…)
+
+## Example blueprints
+
+We have put together an extensive collection of example blueprints for typical setups like a blog, a shop, a project portfolio and more for you to use as a basis for your own.
+
+(link: docs/reference/panel/samples text: Check out the example blueprints…)
+
+## More docs
+
+Our reference has more in-depth documentation about blueprints and their different components.
+
+(link: docs/reference/panel text: Check out the reference…)
+
+## Tips & Tricks
+
+### Using special characters in blueprint labels etc.
+
+To use special characters in labels etc., wrap the text in double quotes:
+
+```yaml
+field1:
+  label: "Fotograf*in"
+  type: text
+field2:
+  label: "Must do: this"
+  type: text
+```
+
+### Naming fields
+
+Make sure to only use alpha-numerical characters and underscores in field names. You cannot use dashes.
+
+Yes:
+
+```yaml
+field_1:
+  label: Headline
+  type: text
+```
+
+No:
+
+```yaml
+field-1:
+  label: Headline
+  type: text
+```

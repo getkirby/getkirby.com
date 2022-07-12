@@ -1,0 +1,98 @@
+Title: Supporting RTL languages
+
+----
+
+Description: Learn how to support languages with a RTL (right to left) reading direction.
+
+----
+
+Intro: A multi-language setup might include a language with a different reading direction – not left-to-right (ltr) but right-to-left (rtl). To support and display these languages properly, some changes are necessary.
+
+----
+
+Text:
+
+## Set up the language
+
+The first step is to specify the reading direction when (link: docs/guide/languages/introduction text: setting up languages). To do so, add a `direction` entry to your language array with a value of `rtl` for right-to-left or `ltr` for left-to-right (default).
+
+```php "/site/languages/ar.php"
+<?php
+
+return [
+  'code'    => 'ar',
+  'name'    => 'Arabic',
+  'locale'  => 'ar_EG',
+  'url'     => '/ar',
+  'direction' => 'rtl'
+];
+```
+
+## Add the body CSS class
+
+The second step is to add the reading direction as a body class e.g. in your header snippet. To fetch and output the current language's reading direction use `$kirby->language()->direction()`.
+
+```php
+<body class="<?php echo $kirby->language()->direction() ?>">
+```
+
+## Modify your CSS
+
+The biggest changes have to be made to your CSS. First you specify the reading direction for the body element when the `rtl` class is applied:
+
+```css
+body.rtl {
+  direction: rtl;
+}
+```
+
+Then you have to mirror every horizontal CSS layout positioning, alignment, padding, margins from left to right and from right to left when `body.rtl` is applied:
+
+```css
+/* left to right */
+div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 2em;
+  padding: 1em 3em 1em 0;
+  border-right: 1px solid #eee;
+}
+
+/* right to left */
+body.rtl div {
+  right: 0;
+  margin-right: 2em;
+  padding: 1em 0 1em 3em;
+  border-left: 1px solid #eee;
+}
+```
+
+### Using SASS as CSS preprocessor
+
+If you are using a CSS preprocessor like SASS, you can simplify this with some handy code:
+
+```css
+div {
+  /* general */
+  position: absolute;
+  top: 0;
+
+  /* left to right */
+  body.ltr & {
+    left: 0;
+    margin-left: 2em;
+    padding: 1em 3em 1em 0;
+    border-right: 1px solid #eee;
+  }
+
+  /* right to left */
+  body.rtl & {
+    right: 0;
+    margin-right: 2em;
+    padding: 1em 0 1em 3em;
+    border-left: 1px solid #eee;
+  }
+}
+```
+

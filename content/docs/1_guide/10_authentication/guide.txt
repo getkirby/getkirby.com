@@ -1,5 +1,0 @@
-Title: Authentication & Sessions
-
-----
-
-Description: Configure how users log in to the Panel and how Kirby remembers state between requests.

@@ -1,0 +1,32 @@
+Title: Virtual pages
+
+----
+
+Description: In Kirby, you can integrate data from any data source and use them as if they were real Kirby pages, including creating and editing their content in the Panel.
+
+----
+
+Intro:
+
+With virtual pages, you can combine Kirby's file-based architecture with content from APIs, databases, excel sheets or any other source that's readable with PHP.
+
+----
+
+Text:
+
+(image: virtual-pages.png)
+
+Since Kirby is a flat-file CMS, pages that make up your website usually exist as files and folders in the filesystem. This has many advantages: your web project can be version controlled, you don't have to deal with a database, it's easy to make backups, you can manually edit your content if you want, and last not least, it's also very fast.
+
+With the new architecture in Kirby 3 you can now combine our native, file-based pages with pages from any other data source – from databases, external APIs, Excel sheets – you name them.
+
+<info>
+We refer to any page that does not exist in the content folder as "virtual&nbsp;page".
+</info>
+
+All virtual pages are seamlessly integrated in Kirby. Routing works out of the box, they are included in API requests and they are even manageable in the panel!
+
+----
+
+Subpages: true
+

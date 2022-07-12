@@ -1,0 +1,142 @@
+Title: Merging content sources
+
+----
+
+Description: Combine virtual content with content from the file system
+
+----
+
+Intro: Combine virtual content with content from the file system
+
+----
+
+Text:
+
+In this example, let us look at how we can combine "virtual" content with content from the file system.
+
+We will extend the (link: docs/guide/virtual-pages/content-from-csv text: Content from a spreadsheet) example with content we actually add in the `content` folder, let's say because we want to add an image to each animal and some additional content.
+
+To this end, we add new subpages to the `/animals` parent page, using the same slugs that we generated in the `animals.php` model.
+
+Your content structure should then look something like this.
+
+
+```filesystem
+content/
+    animals/
+        animals.txt
+        animals.csv
+        0_potus-flavus/
+            animal.txt
+            potus-flavus.jpg
+        0_sauromalus-obesus/
+            animal.txt
+            sauromalus-obesus.jpg    
+```
+<info>
+Make sure to prepend the folder number, because we also use the number in our model.
+</info>
+
+However, if we now try to fetch these newly added images in the `animal.php` template, this will have no effect. We first have to extend our model.
+
+```php "/site/models/animals.php"
+<?php
+
+class AnimalsPage extends Page
+{
+
+    public function subpages()
+    {
+        return Pages::factory($this->inventory()['children'], $this);
+    }
+
+    public function children()
+    {
+        $csv      = csv($this->root() . '/animals.csv', ';');
+        $children = array_map(function ($animal) {
+
+            $slug = Str::slug($animal['Scientific Name']);
+            $page = $this->subpages()->find($slug);
+
+            return [
+                'slug'     => $slug,
+                'template' => 'animal',
+                'model'    => 'animal',
+                'num'      => 0,
+                'files'    => $page ? $page->files()->toArray() : null,
+                'content'  => [
+                    'title'       => $animal['Scientific Name'],
+                    'commonName'  => $animal['Common Name'],
+                    'description' => $animal['Description'],
+                    'somefield'   => $page ? $page->somefield()->value() : null
+                ]
+            ];
+        }, $csv);
+
+        return Pages::factory($children, $this);
+    }
+
+}
+```
+
+First, we add a new `subpages` method that creates a new Pages object from the page's inventory array:
+
+```php
+    public function subpages()
+    {
+        return Pages::factory($this->inventory()['children'], $this);
+    }
+```
+This method will fetch all pages that actually exist in the filesystem.
+
+Within the closure of the `array_map` method, we now try to find a page with each slug:
+
+```php
+$slug = Str::slug($animal['Scientific Name']);
+$page = $this->subpages()->find($slug);
+```
+
+In the return array, we add the files and additional content if the page exists:
+
+```php
+return [
+    'slug'     => $slug,
+    'template' => 'animal',
+    'model'    => 'animal',
+    'num'      => 0,
+    // add files
+    'files'    => $page ? $page->files()->toArray() : null,
+    'content'  => [
+        'title'       => $animal['Scientific Name'],
+        'commonName'  => $animal['Common Name'],
+        'description' => $animal['Description'],
+        // add additional fields
+        'habitat'     => $page ? $page->habitat()->value() : null,
+        'diet'        => $page ? $page->diet()->value() : null,
+    ]
+];
+```
+
+And finally, we modify our subpage template to fetch the additonal content:
+
+```php "/site/templates/animal.php"
+<?php snippet('header') ?>
+
+<article class="animal">
+  <h1 class="animal-scientific-name"><?= $page->title() ?></h1>
+  <p class="animal-common-name">Common name: <?= $page->commonName() ?></p>
+  <?php if ($image = $page->image()): ?>
+    <div class="animal-picture">
+        <?= $image ?>
+    </div>
+  <?php endif ?>  
+  <div class="animal-description">
+    <?= $page->description()->kt() ?>
+    <?= $page->habitat()->kt() ?>
+    <?= $page->diet()->kt() ?>
+  </div>
+</article>
+
+<?php snippet('footer') ?>
+```
+

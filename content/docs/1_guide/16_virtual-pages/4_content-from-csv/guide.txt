@@ -1,0 +1,132 @@
+Title: Content from a spreadsheet
+
+----
+
+Description: Load data from a CSV file and create virtual pages for each row.
+
+----
+
+Intro: Sometimes Excel or Numbers are fantastic content management systems. In this example we will create pages from a simple CSV file that could come from any spreadsheet.
+
+----
+
+Text:
+
+(image: animals.png)
+
+In this example we are going to read a list of (dummy) animals from a (file: animals.csv text: CSV file) and create virtual pages for each animal.
+
+## The parent content folder
+
+Let's create an animals folder for our site, which is used as the parent for all animal subpages.
+
+```filesystem
+content/
+    animals/
+        animals.txt
+        animals.csv
+```
+
+We can put the (file: animals.csv) directly inside this folder to make it nice and clean to read data from that file. You could even provide an uploader for this in the panel later, so your content editors can update the csv file whenever they have a fresh export with updated data.
+
+## Reading from the CSV
+
+To convert the CSV from the file to a PHP array we are going to use a little `csv()` helper function. This function is stored in a small plugin. It takes the absolute path to the csv file and returns a nice and clean array.
+
+```php "/site/plugins/helpers/index.php"
+<?php
+function csv(string $file, string $delimiter = ','): array
+{
+    $lines = file($file);
+
+    $lines[0] = str_replace("\xEF\xBB\xBF", '', $lines[0]);
+
+    $csv = array_map(function($d) use($delimiter) {
+        return str_getcsv($d, $delimiter);
+    }, $lines);
+    
+    array_walk($csv, function(&$a) use ($csv) {
+       $a = array_combine($csv[0], $a);
+    });
+   
+    array_shift($csv);
+
+    return $csv;
+}
+```
+
+## Creating the virtual subpages
+
+We are using a new page model for the animals page, which will read from the csv and create a virtual child page for each animal on the fly.
+
+```php "/site/models/animals.php"
+<?php
+
+class AnimalsPage extends Page
+{
+
+    public function children()
+    {
+        $csv      = csv($this->root() . '/animals.csv', ';');
+        $children = array_map(function ($animal) {
+            return [
+                'slug'     => Str::slug($animal['Scientific Name']),
+                'template' => 'animal',
+                'model'    => 'animal',
+                'num'      => 0,
+                'content'  => [
+                    'title'       => $animal['Scientific Name'],
+                    'commonName'  => $animal['Common Name'],
+                    'description' => $animal['Description'],
+                ]
+            ];
+        }, $csv);
+
+        return Pages::factory($children, $this);
+    }
+
+}
+```
+
+## The template
+
+With the new page model, we can now render all animals in our `animals.php` template as if they were regular Kirby pages.
+
+```php "/site/templates/animals.php"
+<?php snippet('header') ?>
+
+<main>
+  <h1><?= $page->title() ?></h1>
+
+  <ul class="animals">
+    <?php foreach ($page->children() as $animal): ?>
+    <li>
+      <a href="<?= $animal->url() ?>">
+        <?= $animal->title() ?>
+      </a>
+    </li>
+    <?php endforeach ?>
+  </ul>
+
+</main>
+
+<?php snippet('footer') ?>
+```
+
+## Subpages
+
+Each animal will automatically get its own subpage. Routing will work out of the box and you can create an `animal.php` template to render each individual animal.
+
+```php "/site/templates/animal.php"
+<?php snippet('header') ?>
+
+<article class="animal">
+  <h1 class="animal-scientific-name"><?= $page->title() ?></h1>
+  <p class="animal-common-name">Common name: <?= $page->commonName() ?></p>
+  <div class="animal-description">
+    <?= $page->description()->kt() ?>
+  </div>
+</article>
+
+<?php snippet('footer') ?>
+```

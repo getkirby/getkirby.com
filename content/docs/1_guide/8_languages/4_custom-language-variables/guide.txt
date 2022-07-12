@@ -1,0 +1,78 @@
+Title: Custom language variables
+
+----
+
+Description: Learn how to define translatable variables, which can be used to translate fixed parts in your templates like buttons.
+
+----
+
+Intro: When working with a multi-language site, you often need language-specific variables/strings. Simple things like translated button labels for your contact form, for example, or other translatable parts which don't need to be modified by editors. For such cases, Kirby has a built-in language variable management.
+
+----
+
+Text:
+
+Language variables are added as an array of key/value pairs in your language definition files in `/site/languages`.
+
+
+Those files can contain as many custom variables as you need.
+
+
+```php "/site/languages/en.php"
+<?php
+
+return [
+  'code' => 'en',
+  'default' => true,
+  'direction' => 'ltr',
+  'locale' => 'en',
+  'name' => 'English',
+  'url' => '/',
+  'translations' => [
+    'change' => 'Change',
+    'confirm' => 'OK',
+    'copy' => 'Copy',
+    'create' => 'Create'
+  ]
+];
+```
+
+```php "/site/languages/de.php"
+<?php
+
+return [
+  'code' => 'de',
+  'default' => false,
+  'direction' => 'ltr',
+  'locale' => 'de_DE',
+  'name' => 'Deutsch',
+  'translations' => [
+    'change' => 'Ändern',
+    'confirm' => 'OK',
+    'copy' => 'Kopieren',
+    'create' => 'Erstellen'
+  ]
+];
+```
+
+## Using language variables in your template
+
+Those translated variables can be fetched in your template, plugins or snippets with the `t()` helper:
+
+```php
+<input type="submit" value="<?php echo t('change') ?>" />
+```
+
+You can provide a fallback if the language variable is not defined:
+
+
+```php
+<input type="submit" value="<?php echo t('change', 'Change') ?>" />
+```
+
+## More information
+
+Check out the following cookbook recipes to find out how to make language variables more flexible:
+
+- (link: docs/cookbook/i18n/language-variablestext: Flexible language variables)
+- (link: docs/cookbook/i18n/using-variables-in-language-stringstext: Using placeholders in language strings)

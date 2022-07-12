@@ -1,0 +1,178 @@
+Title: Caching
+
+----
+
+Description: Use Kirby's page cache or set up your own cache wherever you need it.
+
+----
+
+Text:
+
+## Caching pages
+
+You can enable Kirby's page cache in your `config.php` file with the `cache.pages` option:
+
+```php "/site/config/config.php"
+return [
+  'cache' => [
+      'pages' => [
+          'active' => true,
+          'ignore' => function ($page) {
+            return $page->title()->value() === 'Do not cache me';
+          }
+      ]
+  ]
+];
+```
+<info>
+The page cache files are stored in the `/site/cache` folder.
+</info>
+
+### Options
+
+Option | Value
+--|--
+`active` | `true`/`false`
+`ignore` | Either an array of page IDs to ignore, or a callback function that returns a boolean
+
+### Excluding pages using a page model
+
+If you need even more detailed control over which pages are cached or ignored, you can use (link: docs/guide/templates/page-models text: page models) with an override of the (link: docs/reference/objects/cms/page/is-cacheable text: `$page->isCacheable()`) method:
+
+```php
+<?php
+
+class ProjectPage extends Page
+{
+  public function isCacheable(): bool
+  {
+    // run the core checks
+    if (parent::isCacheable() === false) {
+      return false;
+    }
+        
+    // your custom ignore rules
+        
+    // otherwise consider the page cacheable
+    return true;
+  }
+}
+```
+
+### Automatic cacheability detection
+
+Not all page responses can and will be cached. Kirby automatically determines whether a response is cacheable.
+
+- Only the base response of a page is cached. If the request matches any of the following criteria, the response is not cached:
+  - If the request contains a query string, request data or a Kirby param
+  - If the request uses a HTTP method other than `GET` and `HEAD` (e.g. `POST`, `PUT` or `DELETE`)
+- If the page is excluded from caching via the `ignore` option or a page model, the page is never cached.
+
+<since v="3.7.0">
+- If the response relies on `$kirby->session()`, a cookie value (`Cookie::get()`) or the `Authorization` header (`$kirby->request()->auth()`), Kirby protects against sharing the cache between visitors who have these values set and those who don't. In particular, Kirby behaves like this:
+  - If any of the queried request headers is set, the response is considered private and never cached.
+  - If the headers are not set in the current request, the response is cached but the cached response is only used for requests without these headers. This ensures that users with the cookie or authentication receive their own personalized response.
+
+If your template code or a plugin you use rely on cookies or authentication but don't use Kirby's built-in methods, Kirby cannot automatically detect the usage. In this case, please call `$kirby->response()->usesCookie($name)` or `$kirby->response()->usesAuth(true)` respectively. You **don't** need to do this if you use Kirby's methods from the list above.
+</since>
+
+## Cache drivers and options
+
+### Using a different cache driver
+
+```php "/site/config/config.php"
+
+return [
+  'cache' => [
+    'pages' => [
+      'active' => true,
+      'type'   => 'memcached',
+      'host'   => 'localhost',
+      'port'   => '11211',
+      'prefix'  => 'pages',
+      'ignore' => function ($page) {
+        return $page->id() === 'something';
+      }
+    ]
+  ]
+];
+```
+
+
+## Set up your own cache
+
+If you want to create your own cache instance, you can just add it to the config like this:
+
+```php "/site/config/config.php"
+return [
+  'cache.api' => true
+];
+```
+
+That's it! Now you got a new cache up and running with the id `api`.
+
+This will again be a file cache instance and stores the cache files in `/site/cache/api`.
+
+You have the same extended options if needed and you can combine different cache types without hassle.
+
+## Using the cache
+
+As soon as you configured your cache in the config, you can start using it like this (for example in a controller):
+
+```php "/site/controllers/your-api.php"
+return function ($kirby) {
+
+  $apiCache = $kirby->cache('api');
+  $apiData  = $apiCache->get('apiData');
+
+  // there's nothing in the cache, so let's fetch it
+  if ($apiData === null) {
+    $apiData = Remote::get('https://someapi.com');
+    $apiCache->set('apiData', $apiData->content());
+  }
+
+  return compact('apiData');
+
+};
+```
+
+You can define how long a cache variable is valid by specifying the number of minutes until it expires in the set method:
+
+```php
+$apiCache->set('apiData', $apiData->content(), 30);
+```
+
+The getter will now return `null` after the 30 minutes expired.
+
+## Plugin caches
+
+Plugins can have their own namespaced caches by defining them in their options:
+
+```php
+Kirby::plugin('superwoman/superplugin', [
+  'options' => [
+    'cache' => true
+  ]
+]);
+```
+This plugin cache instance will be available at:
+
+```php
+$kirby->cache('superwoman.superplugin');
+```
+
+But you can even have multiple cache instances per plugin:
+
+```php
+Kirby::plugin('superwoman/superplugin', [
+  'options' => [
+    'cache.api' => true
+  ]
+]);
+```
+
+Following the same concept, you can access it like this:
+
+```php
+$kirby->cache('superwoman.superplugin.api');
+```

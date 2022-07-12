@@ -1,0 +1,360 @@
+Title: Reusing & extending blueprints
+
+----
+
+Intro: Fields, sections, tabs and entire blueprint layouts can be reused within your blueprints. If you want, you can even create a complete component system to apply to multiple projects.
+
+----
+Text:
+
+<info>
+While the examples used below all refer to page blueprints, you can also
+- reuse field and field group mixins in file and user blueprints and field sections,
+- reuse all section type mixins in user blueprints and
+- reuse layout mixins in user blueprints.
+</info>
+
+## Reusing and extending single fields
+
+You can create single fields in `/site/blueprints/fields` and then reuse them, for example this structure field:
+
+
+```yaml "/site/blueprints/fields/dishes.yml"
+label: Dishes
+type: structure
+fields:
+  dish:
+    label: Dish
+    type: text
+    width: 1/3
+  description:
+    label: Description
+    type: text
+    width: 1/3
+  price:
+    label: Price
+    type: number
+    before: €
+    step: 0.01
+    width: 1/3
+```
+
+Reuse in your page blueprint:
+
+**Simple reuse**
+
+```yaml "/site/blueprints/pages/restaurant-menu.yml"
+title: Restaurant Menu
+icon: 🍕
+
+fields:
+  starters: fields/dishes
+```
+
+**Extended reuse**
+
+```yaml "/site/blueprints/pages/restaurant-menu.yml"
+title: Restaurant Menu
+icon: 🍕
+
+fields:
+  starters:
+    extends: fields/dishes
+    label: Starters
+  #...
+```
+
+## Reusing and extending field groups
+
+Create a field definition of type `group` with your fields:
+
+```yaml "/site/blueprints/fields/meta.yml"
+type: group
+fields:
+  date:
+    type: date
+    time: true
+    default: now
+  author:
+    type: users
+  tags:
+    type: tags
+    options: query
+    query:
+      fetch: site.tags.toStructure.sortBy("name", "asc")
+      text: "{{ structureItem.name }}"
+      value: "{{ structureItem.value }}"
+```
+
+Reuse in your page blueprint:
+
+**Simple reuse**
+
+```yaml "/site/blueprints/pages/article.yml"
+sections:
+  meta:
+    type: fields
+    fields:
+      meta: fields/meta
+```
+
+**Extended reuse**
+
+```yaml "/site/blueprints/pages/article.yml"
+sections:
+  meta:
+    type: fields
+    fields:
+      meta:
+        extends: fields/meta
+        fields:
+          date:
+            time: false
+
+```
+
+## Reusing and extending sections
+
+You can create section blueprints (predefined sections) for pages, files and fields, which you can reuse in your blueprints.
+
+Let's look at an example for a section of `type: pages`. Suppose you want to have multiple page lists in the `blog.yml` blueprint for drafts, unlisted and listed articles. Instead of defining the same section over and over again, you can create a basic section definition like this:
+
+```yaml "/site/blueprints/sections/articles.yml"
+
+type: pages
+parent: site.find("blog")
+label: Blog
+layout: list
+info: "{{ page.date.toDate('d.m.Y') }}"
+```
+
+In your `blog.yml` blueprint, you can now create different pages sections based on this section blueprint:
+
+```yaml "/site/blueprints/pages/blog.yml"
+
+sections:
+  drafts:
+    extends: sections/articles
+    label: Unpublished articles
+    status: draft
+
+  unlisted:
+    extends: sections/articles
+    label: Articles in review
+    status: unlisted
+
+  published:
+    extends: sections/articles
+    label: Published articles
+    status: listed
+```
+
+In the example, we have created three sections that extend the articles section blueprint, one for drafts, one for unlisted subpages and one for listed subpages.
+
+In the same way, you can create a files section:
+
+```yaml "/site/blueprints/sections/image.yml"
+type: files
+label: Cover
+max: 1
+layout: cards
+info: "{{ file.dimensions }}"
+```
+
+And reuse it in your blueprint:
+
+```yaml "/site/blueprints/pages/product.yml"
+sections:
+  cover:
+    extends: sections/image
+    template: cover
+    min: 1
+    max: 3
+```
+
+Check out the (link: https://github.com/getkirby/starterkit text: Starterkit) section and page blueprints for more examples of section reuse.
+
+## Extending tabs
+
+Instead of repeating yourself and adding the same tab configuration to multiple blueprints, you can keep single tab definitions in `/site/blueprints/tabs` and reuse them in every blueprint. A typical use case would be a SEO tab that always contains the same fields.
+
+Let's start with the SEO tab mixin:
+
+```yaml "/site/blueprints/tabs/seo.yml"
+label: SEO
+icon: search
+fields:
+  seoTitle:
+    label: SEO Title
+    type: text
+  seoDescription:
+    label: SEO Description
+    type: text
+```
+
+This is how you can use it in a blueprint:
+
+```yaml "/site/blueprints/pages/demo.yml"
+title: My blueprint
+
+tabs:
+
+  # content tab
+  content:
+    label: Content
+    icon: text
+    preset: page
+    fields:
+      headline:
+        label: Headline
+        type: text
+      text:
+        label: Text
+        type: textarea
+
+  # seo tab
+  seo: tabs/seo
+```
+
+You can see how this instantly reduces your blueprint code and leaves you with the customized parts for each blueprint type. Using such tab mixins extensively will clean your blueprints, and also makes it a lot easier to maintain them afterwards.
+
+If you want to overwrite parts of the mixin you can use the `extends` option instead.
+
+```yaml "/site/blueprints/pages/demo.yml"
+title: My blueprint
+
+tabs:
+
+  # content tab
+  content:
+    label: Content
+    icon: text
+    preset: page
+    fields:
+      headline:
+        label: Headline
+        type: text
+      text:
+        label: Text
+        type: textarea
+
+  # seo tab
+  seo:
+    extends: tabs/seo
+    fields:
+      seoTitle:
+        label: My custom SEO Title
+```
+
+
+## Reusing and extending entire layouts
+
+```yaml "/site/blueprints/layouts/default.yml"
+tabs:
+    content:
+      #...
+    meta:
+      #...
+    seo:
+      #...
+```
+
+Reuse in your page blueprint:
+
+**Simple reuse**
+
+```yaml "/site/blueprints/pages/article.yml"
+title: Article
+extends: layouts/default
+```
+
+**Extended reuse**
+
+
+```yaml "/site/blueprints/pages/article.yml"
+title: Article
+extends: layouts/default
+
+tabs:
+  content:
+    sections:
+      # custom sections setup for the content tab
+```
+
+## Unset parts of extended blueprints
+
+When you reuse mixins for blueprints, such as field definitions or entire tabs, you can unset the parts that you don't want/need.
+
+
+```yaml "/site/blueprints/tabs/seo.yml"
+
+label: SEO
+icon: search
+fields:
+  seoTitle:
+    label: SEO Title
+    type: text
+  seoDescription:
+    label: SEO Description
+    type: text
+```
+
+Then in the extending blueprint …
+
+```yaml
+tabs:
+  seo:
+    extends: tabs/seo
+    fields:
+      seoDescription: false
+```
+## Multiple extends at once
+
+You can reuse multiple blueprints at once. So you can develop a more modular system by writing less and non-repetitive code.
+
+```yaml "/site/blueprints/layout/layouts.yml"
+
+layouts:
+  - "1/1"
+  - "1/2, 1/2"
+  - "1/4, 1/4, 1/4, 1/4"
+  - "1/1, 1/3, 2/3"
+  - "1/1, 2/3, 1/3"
+  - "1/2, 1/2, 1/3, 1/3, 1/3"
+```
+
+```yaml "/site/blueprints/layout/fieldsets.yml"
+
+fieldsets:
+  - heading
+  - text
+  - image
+```
+
+```yaml "/site/blueprints/layout/settings.yml"
+
+settings:
+  fields:
+    class:
+      type: text
+      width: 1/2
+    id:
+      type: text
+      width: 1/2
+    image:
+      label: Background image
+      type: files
+```
+
+Then in the extending blueprint …
+
+```yaml
+fields:
+  layout:
+    type: layout
+    label: Layout
+    extends:
+      - layout/layouts
+      - layout/fieldsets
+      - layout/settings
+```

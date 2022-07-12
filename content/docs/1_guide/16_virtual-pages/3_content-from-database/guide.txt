@@ -1,0 +1,417 @@
+Title: Content from a database
+
+----
+
+Description: Create pages from a database and edit, add or delete entries in the Panel
+
+----
+
+Intro: Create pages from a database and edit, add or delete entries in the Panel
+
+----
+
+Text:
+
+
+Content can also come from a database. This is particularly useful if you already have a large set of data stored in a MySQL or other relational database, like a huge database of products or articles. In only a few steps you can transform data from those databases into Kirby pages that behave like any Kirby page in the frontend, i.e. you can use Kirby's API to access, filter or search content, and edit it in the Panel together with all your file based content.
+
+
+This guide is a short intro into how to create pages from entries in a database table. It is intended as an outline, not a final solution. With lots of entries it would also become necessary to work on a custom collection for the result set that would only fetch the rows it really needs, but this would be more complex.
+
+The example assumes a database table called comments with the following scheme:
+
+| Column | Datatype      | Primary Key | Unique
+| ----   | ----          | ----        | ----
+|`id`    | int           | yes         | yes
+|`text`  | VARCHAR (600) | no          | no
+|`user`  | VARCHAR (100) | no          | no
+|`slug`  | VARCHAR (185) | no          | yes
+
+
+## Create a new parent page
+
+Create a parent page called `comments` in the content folder.
+
+```filesystem
+content/
+    comments/
+        comments.txt
+```
+
+## Connect to the database
+
+In your `config.php`, connect to the database:
+
+```php
+<?php
+
+return [
+    'db' => [
+        'host'     => '127.0.0',
+        'database' => 'kirby',
+        'user'     => 'root',
+        'password' => 'root',
+    ]
+];
+```
+
+<info>
+Here we connect to a local database, your real database should - of course - use a proper database user and secure password.
+</info>
+
+## Query the database
+
+Assuming that your database contains a table called comments, you can now query the database table in your templates like this:
+
+```php "/site/templates/comments.php"
+$comments = Db::select('comments');
+```
+
+## Convert to child pages
+
+We can now convert these database entries to children of the comments parent. To do so, let's create a page model for the parent page:
+
+```php "/site/models/comments.php"
+<?php
+
+class CommentsPage extends Kirby\Cms\Page
+{
+    public function children()
+    {
+        $comments = [];
+
+        foreach (Db::select('comments') as $comment) {
+            $comments[] = [
+                'slug'     => $comment->slug(),
+                'num'      => 0,
+                'template' => 'comment',
+                'model'    => 'comment',
+                'content'  => [
+                    'text'  => $comment->text(),
+                    'user'  => $comment->user(),
+                ]
+            ];
+        }
+
+        return Pages::factory($comments, $this);
+    }
+}
+```
+
+Here we re-define the `children()` method of the `Page` class to return the comments from the database as children pages.
+
+## Accessing the comments in the template
+With this page model in place, we can now access our comments as children of the `comments` page in our template:
+
+```php "/site/templates/comments.php"
+<ul class="comments">
+    <?php foreach ($page->children() as $comment): ?>
+    <li>
+      <a href="<?= $comment->url() ?>">
+        <?= $comment->text() ?> <small>by <?= $comment->user() ?></small>
+      </a>
+    </li>
+    <?php endforeach ?>
+</ul>
+```
+
+## Create the Panel blueprint
+
+We can now access these database-based pages in the Panel. To do this properly, we should create blueprints for the parent and its children first:
+
+### The parent's blueprint
+
+```yaml "/site/blueprints/pages/comments.yml"
+title: Comments
+
+sections:
+  comments:
+    label: Comments
+    type: pages
+    info: "{{ page.user }}"
+    template: comment
+
+```
+
+### The children's blueprint
+
+```yaml "/site/blueprints/pages/comment.yml"
+title: Comment
+icon: 📢
+
+options:
+  changeTitle: false
+  changeStatus: false
+  changeSlug: false
+
+fields:
+  user:
+    label: User
+    type: text
+  text:
+    label: text
+    type: textarea
+    maxlength: 600
+
+```
+
+## Create a model for the comment child page
+
+While these comments are now automatically available in the Panel, we cannot yet edit them. To make sure that they can be edited and deleted, we have to create a `CommentPage` model and modify the code of the parent model:
+
+The `CommentPage` model would need to overwrite the `writeContent()` and `readContent()` methods to get the comment details from the table instead of the text file.
+
+```php "/site/models/comment.php"
+<?php
+
+class CommentPage extends Kirby\Cms\Page
+{
+
+    public function writeContent(array $data, string $languageCode = null): bool
+    {
+        unset($data['title']);
+
+        if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
+            return Db::update('comments', $data, ['slug' => $this->slug()]);
+        } else {
+            $data['slug'] = $this->slug();
+            return Db::insert('comments', $data);
+        }
+
+    }
+
+    public function delete(bool $force = false): bool
+    {
+        return Db::delete('comments', ['slug' => $this->slug()]);
+    }
+
+    public function title(): Kirby\Cms\Field
+    {
+        return $this->text()->excerpt(100)->or('New comment');
+    }
+
+}
+```
+
+## A template for the individual comment
+
+If we want to access each comment on its own page, we can add an additional template for the comment:
+
+```php "/site/templates/comment.php"
+
+<?php snippet('header') ?>
+<div class="comment">
+  <?= $page->text()->kt() ?>
+  <p><small>by <?= $page->user() ?></small></p>
+</div>
+<?php snippet('footer') ?>
+```
+
+## Advanced setup
+
+If we want to enable features like changing the slug via the Panel or use the status workflow with drafts, unlisted and listed entries, we have to extend our models.
+
+But first, our table needs a new column called `status`, which can have the values `null`, `unlisted` and `listed`. We also add a title for our comments, so that we end up with the following table scheme:
+
+| Column | Datatype      | Primary Key | Unique
+| ----   | ----          | ----        | ----
+|`id`    | int           | yes         | yes
+|`text`  | VARCHAR (600) | no          | no
+|`user`  | VARCHAR (100) | no          | no
+|`slug`  | VARCHAR (185) | no          | yes
+|`title` | VARCHAR (185) | no          | no
+|`status`| VARCHAR (8)   | no          | no
+
+### Extended `comment.yml` blueprint
+
+We can show the status field in the Panel as a disabled field for control purposes, but it is not required. The options are only spelled out for clarity, `true` is the default value anyway.
+
+```yaml
+title: Comment
+icon: 📢
+
+options:
+  changeTitle: true
+  changeStatus: true
+  changeSlug: true
+
+fields:
+  user:
+    label: User
+    type: text
+  text:
+    label: text
+    type: textarea
+    maxlength: 600
+  # just for control purposes
+  status:
+    label: Status
+    type: text
+    disabled: true
+```
+
+### Extended `comments.php` model
+
+```php "/site/models/comments.php"
+
+class CommentsPage extends Kirby\Cms\Page
+{
+    public function children()
+    {
+        $comments = [];
+
+        foreach (Db::select('comments') as $comment) {
+
+            $comments[] = [
+                'slug'     => $comment->slug(),
+                'num'      => $comment->status() === 'listed' ? 0 : null,
+                'template' => 'comment',
+                'model'    => 'comment',
+                'content'  => [
+                    'title'  => $comment->title() ?? 'New Comment',
+                    'text'   => $comment->text(),
+                    'user'   => $comment->user(),
+                    'status' => is_null($comment->status()) ? 'draft' : $comment->status()
+                ]
+            ];
+        }
+
+        return Pages::factory($comments, $this);
+    }
+}
+```
+
+There are three differences here compared to the model above:
+
+- We set the `num` property depending on the value of the `status` field in the database.
+- We add the `status` field to the `content` array.
+- We add the `title` field to the `content` array.
+
+### The extended `comment.php` model
+
+The model for a single comment needs more significant changes:
+
+```php "/site/models/comment.php"
+<?php
+
+class CommentPage extends Kirby\Cms\Page
+{
+    public function changeSlug(string $slug, string $languageCode = null)
+    {
+        // always sanitize the slug
+        $slug = Str::slug($slug);
+
+
+        $data['slug'] = $slug;
+
+        if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
+            if (Db::update('comments', $data, ['slug' => $this->slug()])) {
+                return $this;
+            };
+        }
+        return $this;
+    }
+
+    protected function changeStatusToDraft()
+    {
+        $data['status'] = 'null';
+
+        if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
+            return Db::update('comments', $data, ['slug' => $this->slug()]);
+        }
+
+        return $this;
+    }
+
+    protected function changeStatusToListed(int $position = null)
+    {
+        // create a sorting number for the page
+        $num = $this->createNum($position);
+
+        // don't sort if not necessary
+        if ($this->status() === 'listed' && $num === $this->num()) {
+            return $this;
+        }
+
+        $data['status'] = 'listed';
+
+        if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
+            return Db::update('comments', $data, ['slug' => $this->slug()]);
+        }
+
+        if ($this->blueprint()->num() === 'default') {
+            $this->resortSiblingsAfterListing($num);
+        }
+
+        return $this;
+    }
+
+    protected function changeStatusToUnlisted()
+    {
+        if ($this->status() === 'unlisted') {
+            return $this;
+        }
+
+        $data['status'] = 'unlisted';
+
+        if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
+            return Db::update('comments', $data, ['slug' => $this->slug()]);
+        }
+
+        $this->resortSiblingsAfterUnlisting();
+
+        return $this;
+    }
+
+    public function changeTitle(string $title, string $languageCode = null)
+    {
+        $data['title'] = $title;
+
+        if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
+            if (Db::update('comments', $data, ['slug' => $this->slug()])) {
+                return $this;
+            };
+        }
+        return $this;
+    }
+
+    public function delete(bool $force = false): bool
+    {
+        return Db::delete('comments', ['slug' => $this->slug()]);
+    }
+
+    public function isDraft(): bool
+    {
+        return in_array($this->content()->status(), ['listed', 'unlisted']) === false;
+    }
+
+    public function writeContent(array $data, string $languageCode = null): bool
+    {
+        unset($data['title']);
+
+        if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
+            return Db::update('comments', $data, ['slug' => $this->slug()]);
+        } else {
+            $data['slug'] = $this->slug();
+            return Db::insert('comments', $data);
+        }
+
+    }
+
+}
+```
+
+We have to override all methods that are needed for changing the status and the slug, because we have to change the values for each action in the database, not in the local file system.
+
+- `changeSlug()`
+- `changeStatusToDraft()`
+- `changeStatusToListed()`
+- `changeStatusToUnlisted()`
+- `changeTitle()`
+
+Since we now have an explicit title field, we add the `changeTitle()` method and remove the `title()` method from the model, because that is no longer necessary.
+
+
+<info>
+When overriding Kirby's default methods in your models, your methods must use the same function syntax, i.e. parameters, type hints, return types, and return type declarations must be identical.
+</info>
