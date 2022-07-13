@@ -108,7 +108,7 @@ image: page.image.findBy("name", "cover")
 
 You can also provide an image from the assets folder via a page model, for example as a fallback if the page has no images:
 
-```php "/site/models/album.yml"
+```php "/site/models/album.php"
 <?php
 
 class AlbumPage extends Page
