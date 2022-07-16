@@ -59,13 +59,13 @@ You can customize all existing block types to your needs in one or all of the fo
 2. Add or replace fields in a block type by overwriting the (glossary: blueprint) file for the block type. This will often go hand in hand with modifying the output as in point 1.
 3. Change how the block looks in the Panel by overwriting its preview.
 
-To modify a block, you can use the standard blueprints, snippets, and previews of each block type as a basis for your changes. (link: docs/reference/panel/fields/blocks#extending-core-blocks text: Read more…)
+To modify a block, you can use the standard blueprints, snippets, and previews of each block type as a basis for your changes. (link: docs/cookbook/panel/block-basics#extending-core-blocks text: Read more…)
 
 ## Custom block types
 
 You create custom block types from the same three components. If you don't need a visual preview, you even make do with only a blueprint and a snippet. Learn how to create your own custom block types with our extensive documentation:
 
-- (link: docs/reference/panel/fields/blocks#custom-block-types text: Custom block types)
+- (link: docs/cookbook/panel/block-basics#custom-block-types text: Modifying blocks types and custom blocks)
 - (link: docs/cookbook/panel/block-collection text: Block factory: Creating your own blocks collection)
 - (link: docs/cookbook/panel/custom-block-type text: Creating a custom block type from scratch)
 - (link: docs/cookbook/panel/nested-blocks text: Nested blocks)
