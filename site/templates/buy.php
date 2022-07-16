@@ -64,7 +64,7 @@
             <p class="h2 mb-6 discounted-price">&nbsp;</p>
             <p class="btn btn--filled font-bold">
               <?= icon('cart') ?>
-              Save <?= $discount ?>% on top!
+              Save <?= $discount ?>%<?php if ($banner): ?> on top<?php endif ?>!
             </p>
           </article>
         </a>
