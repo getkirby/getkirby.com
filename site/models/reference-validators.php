@@ -40,7 +40,7 @@ class ReferenceValidatorsPage extends SectionPage
             ];
         }
 
-        return Pages::factory($children, $this);
+        return $this->children = Pages::factory($children, $this);
     }
 
 }
