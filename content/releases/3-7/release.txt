@@ -328,6 +328,22 @@ Fixes:
 
 Breaking:
 
+<info>
+We try to avoid breaking changes as much as we can. But we also put a lot of effort in keeping our technical debt in Kirby as low as possible. Sometimes such breaking changes are necessary to move forward with a clean code base.
+
+You might wonder why there are breaking changes in a minor release according to [Semantic Versioning](https://semver.org).
+
+We stick to the (link: docs/guide/quickstart#updates text: following versioning scheme):
+
+```
+{generation}.{major}.{minor}(.{patch})
+```
+
+**This release is Kirby 3.7.0.0** (the seventh major release of Kirby 3)
+
+Traditionally, we combine patch and minor releases though and only need the fourth versioning level for regression fixes.
+</info>
+
 #### Composer installation
 
 If you install Kirby using Composer, you may run into errors if your command line installation of PHP doesn’t have the extensions installed that Kirby requires. If you are sure that your web server fulfills the requirements, you can use Composer’s `--ignore-platform-reqs` or `--ignore-platform-req=ext-*` flags. [#4216](https://github.com/getkirby/kirby/pull/4216)
