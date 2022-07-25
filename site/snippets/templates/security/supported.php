@@ -21,7 +21,14 @@
     <?php foreach ($supported as $entry): ?>
     <tr>
       <td><?= $entry->version()->escape() ?></td>
-      <td><?= $entry->supported()->isTrue() ? '✅' : '❌' ?></td>
+      <td>
+        <?= match ($entry->status()->value()) {
+          'latest', 'no-vulnerabilities', 'active-support' => '✅',
+          'security-support' => '⚠️',
+          'end-of-life' => '❌',
+          default => '❓️'
+        } ?>
+      </td>
       <td class="w-100%"><?= $entry->description() ?></td>
     </tr>
     <?php endforeach ?>
