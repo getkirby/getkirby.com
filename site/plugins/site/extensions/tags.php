@@ -155,11 +155,12 @@ $tags['docs'] = [
     'html' => function ($tag) {
         parse_str($tag->attr('vars'), $vars);
 
-        $snippet = snippet('docs/' . $tag->value, [
+        $data = array_merge([
             'page'  => $tag->parent(),
-            'field' => $tag->attr('field'),
-            ...$vars
-        ], true);
+            'field' => $tag->attr('field')
+        ], $vars);
+
+        $snippet = snippet('docs/' . $tag->value, $data, true);
 
         return kirbytext($snippet, [
             'parent' => $tag->parent()
