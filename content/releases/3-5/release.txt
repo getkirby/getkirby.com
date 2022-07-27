@@ -85,21 +85,7 @@ Enhancements:
 ----
 Breaking:
 
-<info>
-We try to avoid breaking changes as much as we can. But we also put a lot of effort in keeping our technical debt in Kirby as low as possible. Sometimes such breaking changes are necessary to move forward with a clean code base.
-
-You might wonder why there are breaking changes in a minor release according to semver.
-
-We stick to the following versioning pattern:
-
-```
-{generation}.{major}.{minor}.{patch}
-```
-
-**This release is Kirby 3.5.0.0**
-
-Traditionally, we combine patch and minor releases though and never really need the fourth versioning level.
-</info>
+(docs: releases/breaking-changes vars: version=5)
 
 ##### Required PHP Version
 

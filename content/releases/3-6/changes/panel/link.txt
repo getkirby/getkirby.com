@@ -135,6 +135,8 @@ Fixes:
 
 Breaking:
 
+(docs: releases/breaking-changes vars: version=6)
+
 #### New minimum browser requirements
 
 Browsers with native ESM and dynamic `import()` support:

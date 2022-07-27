@@ -145,17 +145,22 @@ $tags['plain'] = [
 
 /**
 * (docs: some-snippet)
-* Injects shared doc snippets from site/docs
+* Injects shared doc snippets from site/snippets/docs
 */
 $tags['docs'] = [
     'attr' => [
-        'field'
+        'field',
+        'vars'
     ],
     'html' => function ($tag) {
-        $snippet = snippet('docs/' . $tag->value, [
+        parse_str($tag->attr('vars'), $vars);
+
+        $data = array_merge([
             'page'  => $tag->parent(),
             'field' => $tag->attr('field')
-        ], true);
+        ], $vars);
+
+        $snippet = snippet('docs/' . $tag->value, $data, true);
 
         return kirbytext($snippet, [
             'parent' => $tag->parent()

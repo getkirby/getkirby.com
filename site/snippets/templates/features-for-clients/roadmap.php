@@ -37,7 +37,7 @@
   <?php snippet('templates/features/intro', [
     'title' => 'Long-term thinking',
     'intro' => 'Backed by a sustainable business',
-    'text'  => 'We know how important it is that you can trust your content management system not to vanish the next day. That’s why we build our business on a sustainable model with a reliable roadmap. Kirby has been around and profitable for almost a decade. We plan for the next decade.'
+    'text'  => 'We know how important it is that you can trust your content management system not to vanish the next day. That’s why we build our business on a sustainable model with a reliable roadmap. Kirby has been around and profitable for over a decade. We plan for the next decade.'
   ]) ?>
   <ul class="roadmap flex justify-between mb-24">
     <li style="flex-grow: 1">

@@ -13,11 +13,19 @@ site/plugins/my-plugin/index.php
 
 Kirby automatically loads all plugins from folders within `/site/plugins` and tries to find an `index.php`.
 
+Plugins can also include an `index.css` and/or `index.js` file. These files are automatically loaded into the Panel. Even if your plugin does not contain any PHP code, we recommend to include the `index.php` file to [properly register your plugin in the system](#extensions__panel-only-plugins).
+
+<since v="3.7.1">
+If a plugin only contains an `index.css` and/or `index.js` file but no `index.php`, Kirby will load the plugin anonymously. This means that the name of your plugin cannot be properly displayed in the Panel's System view.
+
+Plugins that don't have any of the `index.php`, `index.css` or `index.js` files are not loaded by Kirby at all.
+</since>
+
 ## Simple vs. complex plugins
 
 If you only need some **helper functions or general PHP code**, you can define them in your `index.php`. These will then be loaded automatically.
 
-If you want to extend Kirby in more meaningful ways such as by **extending Kirby objects or components**, you need to use our new `Kirby::plugin()` method to define all the parts that will be extended.
+If you want to extend Kirby in more meaningful ways such as by **extending Kirby objects or components**, you need to use our `Kirby::plugin()` method to define all the parts that will be extended.
 
 ## Kirby::plugin() — one ring to rule them all
 
@@ -84,6 +92,18 @@ Check out (link: docs/guide/plugins/plugin-types text: the list of all extension
 ### Dynamic extensions
 
 If you need to register extensions based on a config option, site content or even the availability of other plugins, you can do this inside a (link: docs/reference/plugins/hooks/system-loadplugins-after text: `system.loadPlugins:after` hook).
+
+### Panel-only plugins
+
+If your plugin only defines Panel extensions or custom CSS for the Panel, your `index.php` only needs to define the name of your plugin and nothing else:
+
+```php
+Kirby::plugin('superwoman/superplugin', []);
+```
+
+<info>
+Please make sure to pass the empty array as the second argument. If you omit it, `Kirby::plugin()` will behave as a getter and your plugin will not be registered.
+</info>
 
 ## Plugin information
 

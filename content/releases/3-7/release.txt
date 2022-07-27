@@ -328,6 +328,8 @@ Fixes:
 
 Breaking:
 
+(docs: releases/breaking-changes vars: version=7)
+
 #### Composer installation
 
 If you install Kirby using Composer, you may run into errors if your command line installation of PHP doesn’t have the extensions installed that Kirby requires. If you are sure that your web server fulfills the requirements, you can use Composer’s `--ignore-platform-reqs` or `--ignore-platform-req=ext-*` flags. [#4216](https://github.com/getkirby/kirby/pull/4216)
