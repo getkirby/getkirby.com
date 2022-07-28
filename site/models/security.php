@@ -26,10 +26,21 @@ class SecurityPage extends Page
             }
         }
 
+        $latest = $this->kirby()->version();
+
+        // extract the part before the second dot
+        preg_match('/^(\w+\.\w+)\./', $latest, $matches);
+
         return [
-            'latest'             => $this->kirby()->version(),
+            'latest'             => $latest,
+            'latestMajor'        => $matches[1],
             'no-vulnerabilities' => $noVulns
         ];
+    }
+
+    public function urls()
+    {
+        return parent::urls()->replace($this->replace())->toStructure();
     }
 
     public function versions()
