@@ -97,9 +97,9 @@ We can make things even more complex. Have a look at this example:
 
 ```php
 $groupedItems = page('events')->children()->listed()->map(function($p) {
-    $p->eventDate = $p->from()->toDate('d.m.Y') . ' - ' . $page->to()->toDate('d.m.Y');
+    $p->eventDate = $p->from()->toDate('d.m.Y') . ' - ' . $p->to()->toDate('d.m.Y');
 
-    return $page;
+    return $p;
 })->groupBy('eventDate');
 ```
 
