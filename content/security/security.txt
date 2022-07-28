@@ -33,36 +33,28 @@ Please do *not* write to us publicly, e.g. in the forum, as making security vuln
 
 Versions:
 
--
-    version: {{ latest }}
+{{ latest }}:
     status: latest
     description: Latest Kirby release
--
-    version: >={{ no-vulnerabilities }}
+>={{ no-vulnerabilities }}:
     status: no-vulnerabilities
     description: No known vulnerabilities
--
-    version: 3.7.*
+3.7.*:
     status: active-support
     description: Actively supported
--
-    version: 3.6.*
+3.6.*:
     status: security-support
     description: Security support until June 26, 2024
--
-    version: 3.5.*
+3.5.*:
     status: security-support
     description: Security support until November 15, 2023
--
-    version: 3.* <3.5
+3.* <3.5:
     status: end-of-life
     description: Not supported (end of life) since November 16, 2021
--
-    version: 2.*
+2.*:
     status: end-of-life
     description: Not supported (end of life) since January 1, 2021
--
-    version: 1.*
+1.*:
     status: end-of-life
     description: Not supported (end of life) since February 1, 2016
 

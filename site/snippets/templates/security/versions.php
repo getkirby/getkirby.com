@@ -18,9 +18,9 @@
       <th>Supported</th>
       <th class="w-100%">Support Status</th>
     </tr>
-    <?php foreach ($versions as $entry): ?>
+    <?php foreach ($versions as $version => $entry): ?>
     <tr>
-      <td><?= $entry->version()->escape() ?></td>
+      <td><?= esc($version) ?></td>
       <td>
         <?= match ($entry->status()->value()) {
           'latest', 'no-vulnerabilities', 'active-support' => '✅',
