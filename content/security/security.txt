@@ -71,7 +71,7 @@ Incidents:
 -
     cve: CVE-2020-26253
     cvss: CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N/E:U/RL:O/RC:R
-    description: "Registration block: .dev domains and some reverse proxy setups were treated as local"
+    description: "External Initialization of the Panel on .dev domains and some reverse proxy setups"
     severity: medium
     affected: "<=2.5.13 || 3.0.0-3.3.5"
     fixed: 2.5.14, 3.3.6
@@ -79,7 +79,7 @@ Incidents:
 -
     cve: CVE-2020-26255
     cvss: CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H/E:H/RL:O/RC:C
-    description: "PHP Phar archives could be uploaded by Panel users as content files and executed"
+    description: "Remote code execution (RCE) from PHP Phar archives uploaded by Panel users as content files"
     severity: critical
     affected: "<=2.5.13 || 3.0.0-3.4.4"
     fixed: 2.5.14, 3.4.5
