@@ -6,12 +6,16 @@
 .security-incidents th {
   font-size: var(--text-sm);
 }
+
+.affected-column {
+  width: 15%;
+}
 </style>
 
 <div class="table security-incidents">
   <table>
     <tr>
-      <th>Affected</th>
+      <th class="affected-column">Affected</th>
       <th class="w-100%">Description</th>
       <th>Severity</th>
       <th>CVE ID</th>
@@ -44,9 +48,12 @@
         <?php endif ?>
       </td>
       <td>
-        <a href="https://github.com/getkirby/kirby/releases/tag/<?= $incident->fixed() ?>">
-          <?= $incident->fixed() ?>
+        <?php foreach ($incident->fixed()->split(',') as $version): ?>
+        <?php $major = Str::before($version, '.'); $majorOrg = $major !== '3' ? '-v' . $major : '' ?>
+        <a href="https://github.com/getkirby<?= $majorOrg ?>/kirby/releases/tag/<?= $version ?>">
+          <?= $version ?>
         </a>
+        <?php endforeach ?>
       </td>
     </tr>
     <?php endforeach ?>

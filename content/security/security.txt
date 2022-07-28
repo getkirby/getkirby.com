@@ -73,16 +73,16 @@ Incidents:
     cvss: CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N/E:U/RL:O/RC:R
     description: "Registration block: .dev domains and some reverse proxy setups were treated as local"
     severity: medium
-    affected: "<=3.3.5"
-    fixed: 3.3.6
+    affected: "<=2.5.13 || 3.0.0-3.3.5"
+    fixed: 2.5.14, 3.3.6
     link: https://github.com/getkirby/kirby/security/advisories/GHSA-2ccx-2gf3-8xvv
 -
     cve: CVE-2020-26255
     cvss: CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H/E:H/RL:O/RC:C
     description: "PHP Phar archives could be uploaded by Panel users as content files and executed"
     severity: critical
-    affected: "<=3.4.4"
-    fixed: 3.4.5
+    affected: "<=2.5.13 || 3.0.0-3.4.4"
+    fixed: 2.5.14, 3.4.5
     link: https://github.com/getkirby/kirby/security/advisories/GHSA-g3h8-cg9x-47qw
 -
     cve: CVE-2021-29460
