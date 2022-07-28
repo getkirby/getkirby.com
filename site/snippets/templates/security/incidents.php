@@ -14,7 +14,7 @@
       <th>Affected</th>
       <th class="w-100%">Description</th>
       <th>Severity</th>
-      <th>Details</th>
+      <th>CVE ID</th>
       <th>Fixed in</th>
     </tr>
     <?php foreach ($incidents as $incident): ?>
@@ -24,6 +24,10 @@
       </td>
       <td>
         <?= $incident->description() ?>
+
+        <?php if ($incident->link()->isNotEmpty()): ?>
+        <a class="whitespace-nowrap" href="<?= $incident->link() ?>">Read more ›</a>
+        <?php endif ?>
       </td>
       <td>
         <?php if ($incident->cvss()->isNotEmpty()): ?>
@@ -36,13 +40,8 @@
         <?php if ($incident->cve()->isNotEmpty()): ?>
         <a class="whitespace-nowrap" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=<?= $incident->cve() ?>"><?= $incident->cve() ?></a>
         <?php else: ?>
-        CVE pending
+        CVE ID pending
         <?php endif ?>
-        <br>
-
-        <?php foreach ($incident->links()->value() as $name => $url): ?>
-        <a class="whitespace-nowrap" href="<?= $url ?>"><?= $name ?></a>
-        <?php endforeach ?>
       </td>
       <td>
         <a href="https://github.com/getkirby/kirby/releases/tag/<?= $incident->fixed() ?>">
