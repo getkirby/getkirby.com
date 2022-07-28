@@ -17,9 +17,12 @@ class SecurityPage extends Page
     {
         $noVulns = null;
 
+        // latest `fixed` version in the incident list = no newer known vulnerabilities
         foreach ($this->incidents() as $incident) {
-            if ($noVulns === null || version_compare($incident->fixed(), $noVulns, '>')) {
-                $noVulns = $incident->fixed();
+            foreach ($incident->fixed()->split(',') as $fixed) {
+                if ($noVulns === null || version_compare($fixed, $noVulns, '>')) {
+                    $noVulns = $fixed;
+                }
             }
         }
 
