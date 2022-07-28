@@ -31,6 +31,108 @@ Please do *not* write to us publicly, e.g. in the forum, as making security vuln
 
 ----
 
+Docs:
+
+## Format of version constraints
+
+Version constraints use [Composer's version constraint syntax](https://getcomposer.org/doc/articles/versions.md#writing-version-constraints).
+
+## `Versions` field
+
+The `Versions` field allows to find the support status of a particular version and enables update checks (is a new version available, is it an update or upgrade and what is its version number?).
+
+Each entry MUST have a key with a Composer version constraint, a `status` field (see below) and a human-readable `description` field.
+
+Each Kirby version ever released MUST match at least one of the entries' keys.
+The entries are evaluated from top to bottom, so the "most specific" entry MUST always come before a more general entry.
+
+There MUST be a separate entry with the `status` value `active-support`, `security-support` or `end-of-life` for each major version that requires a paid upgrade. There MAY be separate entries for free major updates with a different support status.
+
+There MUST be exactly one entry with the `status` value `latest`. It MUST be the first entry in the list.
+There also MUST be exactly one entry with the `status` value `no-vulnerabilities`. It MUST be the second entry in the list.
+
+### Possible `status` values
+
+#### `latest`
+
+This is a "fast path" that skips both the update check and the check for known vulnerabilities using the incident list.
+
+The `latest` entry SHOULD be left untouched as it's auto-populated with the Kirby version of the getkirby.com site.
+
+#### `no-vulnerabilities`
+
+This is a "fast path" that skips the check for known vulnerabilities using the incident list.
+During the update check, this entry is skipped and the next matching entry is used.
+
+The `no-vulnerabilities` entry SHOULD be left untouched as it's auto-populated with the latest `fixed` version from the incident list.
+
+#### `active-support`
+
+This marks a version range that receives functionality updates, enhancements and bug fixes.
+
+The `latest` field of the `active-support` entry MUST be set to the latest version that can be updated to for free from any version in the version range. It SHOULD be set to `{{ latest }}`, which will be auto-populated with the Kirby version of the getkirby.com site.
+
+#### `security-support`
+
+This marks a version range that only receives security updates.
+
+The `latest` field of the `security-support` entry MUST be set to the latest version that can be updated to for free from any version in the version range.
+
+#### `end-of-life`
+
+This marks a version range that receives no updates whatsoever.
+
+The `latest` field of the `end-of-life` entry MUST be set to the latest version that can be updated to for free from any version in the version range.
+
+## `Urls` field
+
+The `Urls` field contains URL templates for each version range. They can be used to generate links to the release notes or to ZIP files of each version.
+
+The key of each entry MUST be set to a Composer version constraint.
+Each Kirby version ever released MUST match at least one of the entries' keys.
+The entries are evaluated from top to bottom, so the "most specific" entry MUST always come before a more general entry.
+
+Each entry MAY have the following fields (required fields are marked with a `*`):
+
+- `changes` (*): URL to a page with more information on a particular version
+- `upgrade` (*): URL to a page with migration information for users upgrading from this version range to the latest major release
+- `download`: URL to a ZIP file with the `kirby` folder of a particular version
+
+All fields MAY use the following placeholders in the URL templates:
+
+- `$version`: A version in the version range of the entry's key
+- `$current`: The current Kirby version of the installation
+
+The `changes` and `download` fields MUST use the `$version` placeholders.
+
+## `Incidents` field
+
+The `Incidents` field lists all past security incidents (vulnerabilities in Kirby). It allows to check if a particular version is affected by known vulnerabilities. If this is the case, it points to more information and the version(s) that fixed the vulnerability.
+
+Each incident entry MAY have the following fields (required fields are marked with a `*`):
+
+- `affected` (*): Composer version constraint of all affected versions that had security support when the vulnerability was discovered;
+  the oldest major release SHOULD use the `<=` syntax to cover the previous end-of-life major releases as well (unless they are not affected)
+- `fixed` (*): Comma-separated list of all versions that fixed this vulnerability
+- `description` (*): Human-readable, short description of the vulnerability
+- `link` (*): URL to a page with the detailed vulnerability description
+- `severity` (*): Either `low`, `medium`, `high` or `critical` (according to the FIRST CVSS calculator)
+- `cve`: Assigned [CVE ID](https://cve.mitre.org), if available
+- `cvss`: Vector string for the [Temporal CVSS Score](https://www.first.org/cvss/calculator/3.1)
+
+## `Messages` field
+
+The `Messages` field lists custom security messages by Kirby and PHP version. This can be used in emergencies to get a security-related information out as quickly as possible.
+
+Each message entry MAY have the following fields (required fields are marked with a `*`):
+
+- `text` (*): Human-readable text of the message
+- `kirby` (*): Composer version constraint of all affected Kirby versions (can be `*` for "any")
+- `php` (*): Composer version constraint of all affected PHP versions (can be `*` for "any")
+- `link`: URL to a page with the detailed description
+
+----
+
 Versions:
 
 {{ latest }}:
