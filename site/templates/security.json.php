@@ -10,7 +10,7 @@ $idFilter = function ($entry) {
 $data = [
     'latest'    => $kirby->version(),
     'latestUrl' => 'https://github.com/getkirby/kirby/releases/tag/' . $kirby->version(),
-    'supported' => array_values($page->supported()->toArray($idFilter)),
+    'versions'  => array_values($page->versions()->toArray($idFilter)),
     'incidents' => array_values($page->incidents()->toArray($idFilter))
 ];
 

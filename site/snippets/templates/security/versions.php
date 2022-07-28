@@ -18,7 +18,7 @@
       <th>Supported</th>
       <th class="w-100%">Support Status</th>
     </tr>
-    <?php foreach ($supported as $entry): ?>
+    <?php foreach ($versions as $entry): ?>
     <tr>
       <td><?= $entry->version()->escape() ?></td>
       <td>
