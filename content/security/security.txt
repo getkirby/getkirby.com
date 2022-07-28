@@ -42,21 +42,27 @@ Versions:
 3.7.*:
     status: active-support
     description: Actively supported
+    latest: {{ latest }}
 3.6.*:
     status: security-support
     description: Security support until June 26, 2024
+    latest: {{ latest }}
 3.5.*:
     status: security-support
     description: Security support until November 15, 2023
+    latest: {{ latest }}
 3.* <3.5:
     status: end-of-life
     description: Not supported (end of life) since November 16, 2021
+    latest: {{ latest }}
 2.*:
     status: end-of-life
     description: Not supported (end of life) since January 1, 2021
+    latest: 2.5.14
 1.*:
     status: end-of-life
     description: Not supported (end of life) since February 1, 2016
+    latest: 1.1.2
 
 ----
 
