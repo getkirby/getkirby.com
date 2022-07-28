@@ -6,7 +6,7 @@ Text:
 
 ## Supported Versions
 
-{{ supported }}
+{{ versions }}
 
 <info>
 If you need the version information from this page in a machine-readable format, you can use the (link: security.json text: JSON representation).
@@ -31,7 +31,7 @@ Please do *not* write to us publicly, e.g. in the forum, as making security vuln
 
 ----
 
-Supported:
+Versions:
 
 -
     version: {{ latest }}

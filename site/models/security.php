@@ -29,21 +29,21 @@ class SecurityPage extends Page
         ];
     }
 
-    public function supported()
+    public function versions()
     {
-        return parent::supported()->replace($this->replace())->toStructure();
+        return parent::versions()->replace($this->replace())->toStructure();
     }
 
-    public function supportedTable()
+    public function versionsTable()
     {
-        return snippet('templates/security/supported', ['supported' => $this->supported()], true);
+        return snippet('templates/security/versions', ['versions' => $this->versions()], true);
     }
 
     public function text()
     {
         return parent::text()->replace(array_merge($this->replace(), [
             'incidents' => $this->incidentsTable(),
-            'supported' => $this->supportedTable()
+            'versions'  => $this->versionsTable()
         ]));
     }
 
