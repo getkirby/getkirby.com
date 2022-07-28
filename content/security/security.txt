@@ -66,6 +66,22 @@ Versions:
 
 ----
 
+Urls:
+
+3.*:
+    changes: https://github.com/getkirby/kirby/releases/tag/$version
+    download: https://github.com/getkirby/kirby/archive/refs/tags/$version.zip
+    upgrade: https://getkirby.com/releases/{{ latestMajor }}
+2.*:
+    changes: https://github.com/getkirby-v2/kirby/releases/tag/$version
+    download: https://github.com/getkirby-v2/kirby/archive/refs/tags/$version.zip
+    upgrade: https://getkirby.com/releases/{{ latestMajor }}
+1.*:
+    changes: https://github.com/getkirby-v1/starterkit/releases/tag/$version
+    upgrade: https://getkirby.com/releases/{{ latestMajor }}
+
+----
+
 Incidents:
 
 -
