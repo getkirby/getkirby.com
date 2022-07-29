@@ -8,7 +8,7 @@ Published: 2021-08-09
 
 Text:
 
-This is a walkthrough on how to install and use Tailwind CSS with Kirby.
+This is a walkthrough on how to install and use Tailwind CSS V3 with Kirby.
 
 
 ## Preparation
@@ -57,7 +57,7 @@ Use `build` to generate a final minified CSS file
 
 - `-i ./src/css/tailwind.css`: input file with Tailwind's css classes
 - `-o ../assets/css/styles.css`: output file which will be generated
-- `--purge '../site/**/*.php'`: folder to watch for Tailwind's classes
+- `--content '../site/**/*.php'`: folder to watch for Tailwind's classes
 - `-w`: defines watch mode
 - `-m`: minify output file
 
