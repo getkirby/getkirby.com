@@ -27,7 +27,11 @@ If you have spotted a vulnerability in Kirby's core or the Panel, please make su
 You can always write us directly at **<security@getkirby.com>**.
 If you want to encrypt your message, our GPG key is (link: pgp.asc text: 6E6B 057A F491 FFAD 363F  6F49 9101 10FA A459 E120).
 
-Please do *not* write to us publicly, e.g. in the forum, as making security vulnerabilities public before they are fixed can give attackers valuable time to exploit the issue. By letting us know directly, you can protect other Kirby users from such attacks.
+<warning>
+Please do *not* write to us publicly, e.g. in the forum, on Discord or in a GitHub issue. A public report can give attackers valuable time to exploit the issue before it is fixed.
+
+By letting us know directly and coordinating the disclosure with us, you can help to protect other Kirby users from such attacks.
+</warning>
 
 ----
 
