@@ -13,6 +13,16 @@ class SecurityPage extends Page
         return snippet('templates/security/incidents', ['incidents' => $this->incidents()], true);
     }
 
+    public function messages()
+    {
+        return parent::messages()->toStructure()->flip();
+    }
+
+    public function messagesTable()
+    {
+        return snippet('templates/security/messages', ['messages' => $this->messages()], true);
+    }
+
     public function replace()
     {
         $noVulns = null;
@@ -57,6 +67,7 @@ class SecurityPage extends Page
     {
         return parent::text()->replace(array_merge($this->replace(), [
             'incidents' => $this->incidentsTable(),
+            'messages'  => $this->messagesTable(),
             'versions'  => $this->versionsTable()
         ]));
     }
