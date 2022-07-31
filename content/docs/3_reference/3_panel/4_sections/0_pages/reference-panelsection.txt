@@ -222,7 +222,7 @@ layout: table
 columns:
   html:
     label: HTML
-    html: true
+    type: html
     value: "{{ page.someSafeHTML }}"
 ```
 
