@@ -50,6 +50,10 @@ title:
 
 The `accept` option defines a set of rules which should be validated whenever a file with this type is created. This is perfect to allow only certain MIME types or file extensions, or check for the file size and the image dimensions.
 
+<info>
+If no type restrictions (`extension`, `mime` or `type`) are defined in the file blueprint, Kirby will limit the accepted uploads to the types `image`, `document`, `archive`, `audio` and `video` by default. This protects your site against unexpected uploads like code files that could be used to attack the server or the visitors' browsers.
+</info>
+
 The `accept` option can either be a simple string for a list of accepted MIME types, or an array of multiple accept validation rules:
 
 ### Simple
@@ -92,9 +96,9 @@ accept:
 
 In this example, Kirby will generate a file upload input with an `accept="image/*"` attribute and will then validate both the MIME type and the detected file type on the server after the file is uploaded.
 
-If no type restrictions (`extension`, `mime` or `type`) are defined in the file blueprint, Kirby will limit the accepted uploads to the types `image`, `document`, `archive`, `audio` and `video` by default. This protects your site against unexpected uploads like code files that could be used to attack the server or the visitors' browsers.
+### Allow all file types
 
-You can disable the automatic types and allow all uploads like this:
+If you want to allow the upload of any file type (including code files), you can disable Kirby's default upload type restriction like this:
 
 ```yaml
 accept: true
