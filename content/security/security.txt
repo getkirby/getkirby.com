@@ -82,7 +82,7 @@ This marks a version range that only receives security updates.
 
 The `latest` field of the `security-support` entry MUST be set to the latest version that can be updated to for free from any version in the version range.
 
-`security-support` entries MAY have a `link` field that points to an URL with more information on the support status of this version range.
+`security-support` entries MAY have a `status-link` field that points to an URL with more information on the support status of this version range.
 
 #### `end-of-life`
 
@@ -90,7 +90,7 @@ This marks a version range that receives no updates whatsoever.
 
 The `latest` field of the `end-of-life` entry MUST be set to the latest version that can be updated to for free from any version in the version range.
 
-`end-of-life` entries MAY have a `link` field that points to an URL with more information on the support status of this version range.
+`end-of-life` entries MAY have a `status-link` field that points to an URL with more information on the support status of this version range.
 
 ## `Urls` field
 
