@@ -213,7 +213,7 @@ Kirby's built-in blocktypes are not enough? Create your own! Check out our exten
 
 From modifying the output to how they are previewed in the Panel, you can also overwrite Kirby's built-in block types:
 
-- (link: docs/cookbook/panel/block-basics#extending-core-blocks text: Modifying blocks types and custom blocks)
+- (link: docs/cookbook/panel/block-basics#extending-core-blocks text: Extending core blocks)
 - (link: https://getkirby.com/docs/reference/panel/blocks text: Block types)
 
 (docs: blocks/blocks)
