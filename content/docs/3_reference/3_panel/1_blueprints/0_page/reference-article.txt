@@ -193,6 +193,10 @@ With options, you can control all the page actions that should or should not be 
 
 (docs: permissions/option-permissions)
 
+<info>
+Different option values per role currently don't work for the `changeTemplate` option (which takes a fixed list of allowed templates) or the `preview` option. These two options can only be controlled for all roles at once.
+</info>
+
 ## Preview
 
 You can change the link of the preview button or disable it entirely with the option setting.

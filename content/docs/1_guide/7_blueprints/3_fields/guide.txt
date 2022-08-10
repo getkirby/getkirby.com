@@ -67,6 +67,10 @@ fields:
 Field names still need to be unique, no matter if they are displayed at the same time or not. Values of undisplayed fields will still be preserved and stored in the content file.
 </info>
 
+<info>
+Only “and“ conditions are currently possible, so all conditions need to be fulfilled to display the field. For more complicated cases, a (link: https://getkirby.com/plugins/rasteiner/whenquery text: third-party plugin) is available.
+</info>
+
 ## Validating fields
 
 Most fields come with validators you can add as options in your blueprints like `min` and `max` etc., or built-in validators like the `url` field that will automatically check if the given value is a URL. But you can also do more sophisticated validation.
