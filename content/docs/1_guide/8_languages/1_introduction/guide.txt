@@ -235,6 +235,11 @@ return [
 ]
 ```
 
+<warning>
+Using the [root URL for the default language](#language-specific-urls) will disable automatic language detection.
+</warning>
+
+
 ## Language specific SmartyPants
 
 See (link: docs/reference/system/options/smartypants text: SmartyPants config option)
