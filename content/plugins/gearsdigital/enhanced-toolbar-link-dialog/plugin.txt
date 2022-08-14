@@ -14,4 +14,4 @@ Subcategory: enhancement
 
 ----
 
-Description: The Enhanced Toolbar Link Dialog makes it easy to add internal or external references to your content by extending the default link dialog of Kirby's textarea fields
+Description: Extend Kirby's default link dialog with a search functionality to create links to existing or external pages right at your fingertips.
