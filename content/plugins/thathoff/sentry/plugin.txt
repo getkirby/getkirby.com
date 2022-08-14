@@ -6,7 +6,11 @@ Repository: https://github.com/thathoff/kirby-sentry
 
 ----
 
-Category: integrations
+Category: devtools
+
+----
+
+Subcategory: logging
 
 ----
 
