@@ -2,7 +2,7 @@ Title: Clear Cloudflare Cache
 
 ----
 
-Repository: https://github.com/thestreamable/kirby-clear-cloudflare-cache
+Repository: https://github.com/thathoff/kirby-clear-cloudflare-cache
 
 ----
 
@@ -15,4 +15,3 @@ Subcategory: cdn
 ----
 
 Description: Automatically purge Cloudflare cached URLs
-
