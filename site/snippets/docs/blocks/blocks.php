@@ -22,6 +22,7 @@ You don't need to render the HTML for each individual block in the loop though. 
 <?php endforeach ?>
 CODE;
 ?>
+
 ```
 
 ### Manually loading snippets
