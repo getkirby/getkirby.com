@@ -53,7 +53,7 @@ First, we need the event registration form, which we will save in a snippet call
   </div>
 
   <div class="honey">
-     <label for="message">If you are a human, leave this field empty</label>
+     <label for="website">If you are a human, leave this field empty</label>
      <input type="website" name="website" id="website" value="<?= isset($data['website']) ? esc($data['website']) : null ?>"/>
   </div>
 
