@@ -40,7 +40,7 @@ return [
 
 ## Safe mode: `markdown.safe`
 
-Enables/disables Parsedown's safe mode which applies sanitisation to scripting vectors (such as scripting link destinations) that are introduced by the markdown syntax itself.
+Enables/disables Parsedown's safe mode which escapes HTML code in the Markdown code and applies sanitization to scripting vectors (such as scripting link destinations) that are introduced by the Markdown syntax itself.
 
 Default: `false`
 

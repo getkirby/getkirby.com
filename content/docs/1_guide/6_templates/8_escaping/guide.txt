@@ -143,10 +143,10 @@ This is a paragraph with **some formatting**.
 <script>alert('And here comes something malicious.')</script>
 ```
 
-If you can't trust your KirbyText content but do want to allow formatting, you can combine Kirby's escaper with KirbyText:
+If you can't trust your KirbyText content but do want to allow formatting, you can enable the Markdown safe mode:
 
 ```php
-<?= $page->escape()->kirbytext() ?>
+<?= $page()->kirbytext(['markdown' => ['safeMode' => true]]) ?>
 ```
 
 This will create the following output:
@@ -154,11 +154,7 @@ This will create the following output:
 ```html
 <h2>Nice headline</h2>
 <p>This is a paragraph with <strong>some formatting</strong>.</p>
-<p>&lt;script&gt;alert(&#039;And here comes something malicious&#039;)&lt;/script&gt;</p>
+<p>&lt;script&gt;alert('And here comes something malicious.')&lt;/script&gt;</p>
 ```
 
-<warning>
-Make sure to always put `escape()` before `kirbytext()`, otherwise the allowed KirbyText formatting will be escaped as well.
-
-Please note that not all Markdown formatting will survive the escaping, even with the right method order. For example simple Markdown links like `<https://example.com>` and blockquotes like `> This is a quote` will currently break during escaping. This is a limitation in our Markdown parser and we are working on a solution.
-</warning>
+You can globally enable Markdown safe mode with the (link: docs/reference/system/options/markdown#safe-mode-markdown-safe text: `markdown.safe` option).
