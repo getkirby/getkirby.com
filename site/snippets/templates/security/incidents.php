@@ -42,7 +42,7 @@
       </td>
       <td>
         <?php if ($incident->cve()->isNotEmpty()): ?>
-        <a class="whitespace-nowrap" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=<?= $incident->cve() ?>"><?= $incident->cve() ?></a>
+        <a class="whitespace-nowrap" href="https://nvd.nist.gov/vuln/detail/<?= $incident->cve() ?>"><?= $incident->cve() ?></a>
         <?php else: ?>
         CVE ID pending
         <?php endif ?>
