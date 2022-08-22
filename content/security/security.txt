@@ -242,6 +242,22 @@ Incidents:
     severity: medium
     cve: CVE-2021-41258
     cvss: CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N/E:H/RL:O/RC:C
+-
+    affected: 3.5.7-3.7.3
+    fixed: 3.5.8.1, 3.6.6.1, 3.7.4
+    description: "Cross-site scripting (XSS) from content entered in the tags and multiselect fields"
+    link: https://github.com/getkirby/kirby/security/advisories/GHSA-rv3r-vqjj-8c76
+    severity: high
+    cve: CVE-2022-35174
+    cvss: CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:N/E:H/RL:O/RC:C
+-
+    affected: "<=3.5.8"
+    fixed: 3.5.8.1
+    description: "Cross-site scripting (XSS) from dynamic options in the multiselect field"
+    link: https://github.com/getkirby/kirby/security/advisories/GHSA-3f89-869f-5w76
+    severity: medium
+    cve: CVE-2022-36037
+    cvss: CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:L/A:N/E:U/RL:O
 
 ----
 
