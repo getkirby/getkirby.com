@@ -121,6 +121,7 @@ fields:
 			price:
 				type: number
 ```
+
 Structure columns can be set to any fraction and will be automatically calculated into the right width.
 
 ```yaml
@@ -145,6 +146,29 @@ fields:
       price:
         label: C
         type: text
+```
+
+You can also define columns without additional options if you want to use the defaults. You can still combine this with options for other columns:
+
+```yaml
+fields:
+	holidays:
+		type: structure
+		columns:
+			title: true
+			images: true
+			price:
+				align: right
+				after: "USD"
+		fields:
+			title:
+				type: text
+			images:
+				type: files
+			description:
+				type: textarea
+			price:
+				type: number
 ```
 
 ### Hide toggle field text in preview
