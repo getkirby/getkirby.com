@@ -54,7 +54,7 @@ and the URL for the German translation will be:
 http://yourdomain.com/de/projekte
 ```
 
-You don't have to add the `slug` field to your text files for your default language. Kirby will use the folder name in that case.
+You don't have to add the `slug` field to your text files for your default language. Kirby will always use the folder name for the default language.
 
 ## Panel users
 
