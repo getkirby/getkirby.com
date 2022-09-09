@@ -189,6 +189,7 @@ With options, you can control all the page actions that should or should not be 
 | `duplicate` | `true`/`false` (since v3.2.0)|
 | `preview` | `true`/`false`/template string (see below) |
 | `read` | `true`/`false` |
+| `sort` | `true`/`false` |
 | `update` | `true`/`false` |
 
 (docs: permissions/option-permissions)
