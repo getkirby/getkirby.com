@@ -16,7 +16,7 @@ Guide: blueprints/fields
 
 Text:
 
-The toggle field is perfect for simple on/off or yes/no states.
+The toggles field lets you select between different states.
 
 (image: toggles-labels-icons.png)
 
