@@ -1,0 +1,17 @@
+Title: PWA (Progressive Web App)
+
+----
+
+Download: https://kirbynext.lemonsqueezy.com/checkout/buy/ff67b777-fbf1-4974-b93f-fcbd5d16df04
+
+----
+
+Category: performance
+
+----
+
+Subcategory: pwa
+
+----
+
+Description: Turns your Kirby website into a PWA: progressive web app.

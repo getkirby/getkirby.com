@@ -1,0 +1,17 @@
+Title: Plates
+
+----
+
+Download: https://kirbynext.lemonsqueezy.com/checkout/buy/2e89890c-08f4-4078-bc6d-24497121df1d
+
+----
+
+Category: templating
+
+----
+
+Subcategory: engine
+
+----
+
+Description: Plates native PHP template engine/system for Kirby 3.
