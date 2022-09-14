@@ -249,4 +249,6 @@ To get more familiar with how this all plays together, play around a bit. Try to
 
 (image: movie-reviews-cardlets.png)
 
+To go further, check the (link: docs/cookbook/panel/advanced-panel-area text: advanced Panel area cookbook).
+
 
