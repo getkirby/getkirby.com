@@ -257,6 +257,8 @@ Kirby::plugin('custom/users', [
 
 In the example above, we are showing the anatomy of what's being sent to the `k-users-view` component. The component will then take that data and display it as usual. As you can see, it's super easy to manipulate the result array and send your custom user data, custom role filters or whatever you want to do.
 
+<info>You can find more information about these components and their props in the (link: docs/reference/plugins/ui text: UI Kit docs).</info>
+
 
 ### 2.) replace everything
 
