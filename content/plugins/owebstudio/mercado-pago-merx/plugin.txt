@@ -1,0 +1,17 @@
+Title: Mercado Pago for Merx
+
+----
+
+Download: https://owebstudio.lemonsqueezy.com/checkout/buy/8103e060-69e0-4cbd-b94f-1237c6960048
+
+----
+
+Category: ecommerce
+
+----
+
+Subcategory: merx
+
+----
+
+Description: Mercado Pago payment gateway for Kirby 3 Merx plugin.
