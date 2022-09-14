@@ -1,0 +1,17 @@
+Title: Accordion Field
+
+----
+
+Download: https://owebstudio.lemonsqueezy.com/checkout/buy/05159116-5ad1-41bf-ab0f-bb3f5635d844
+
+----
+
+Category: fields
+
+----
+
+Subcategory: structured-content
+
+----
+
+Description: Collapses the content below headlines in Panel for Kirby 3.

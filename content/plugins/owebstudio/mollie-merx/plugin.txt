@@ -1,0 +1,17 @@
+Title: Mollie for Merx
+
+----
+
+Download: https://owebstudio.lemonsqueezy.com/checkout/buy/c1a1402c-6fd3-4467-96ff-33529994a246
+
+----
+
+Category: ecommerce
+
+----
+
+Subcategory: merx
+
+----
+
+Description: Mollie payment gateway for Kirby 3 Merx plugin.
