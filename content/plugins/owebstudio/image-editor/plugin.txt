@@ -1,0 +1,17 @@
+Title: Image Editor Field
+
+----
+
+Download: https://owebstudio.lemonsqueezy.com/checkout/buy/8a06fd59-6e0c-4426-9c1b-95581fd7374a
+
+----
+
+Category: fields
+
+----
+
+Subcategory: images
+
+----
+
+Description: Full-featured photo image editor using canvas for Kirby 3. It is really easy, and it comes with great filters.
