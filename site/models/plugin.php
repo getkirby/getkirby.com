@@ -25,26 +25,49 @@ class PluginPage extends Page
         return $this->images()->findBy('name', 'card');
     }
 
-    public function download()
+    public function changes($version = null)
+    {
+        if ($this->content()->has('changes')) {
+            return $this->content()->get('changes')->value();
+        }
+
+        $url = $this->repository()->value();
+
+        if (Str::contains($url, 'github')) {
+            if ($version) {
+                return $url . '/releases/tag/' . $version;
+            }
+
+            return $url . '/releases/latest';
+        }
+
+        return $url;
+    }
+
+    public function download($version = null)
     {
         if ($this->content()->has('download')) {
             return $this->content()->get('download')->value();
         }
 
-        $url   = $this->repository()->value();
-        $branch = $this->branch()->value() ?? 'master';
+        $url    = $this->repository()->value();
+        $object = $version ?? $this->branch()->value() ?? 'master';
 
         if (Str::contains($url, 'github')) {
+            if ($version) {
+                return $url . '/archive/refs/tags/' . $version . '.zip';
+            }
+
             return rtrim(Str::replace($url, 'github.com', 'api.github.com/repos'), '/') . '/zipball';
         }
 
         if (Str::contains($url, 'bitbucket')) {
-            return $url . '/get/' . $branch . '.zip';
+            return $url . '/get/' . $object . '.zip';
         }
 
         if (Str::contains($url, 'gitlab')) {
             $repo = basename($url);
-            return $url . '/-/archive/' . $branch . '/' . $repo . '-' . $branch . '.zip';
+            return $url . '/-/archive/' . $object . '/' . $repo . '-' . $object . '.zip';
         }
 
         return $url;
@@ -136,8 +159,8 @@ class PluginPage extends Page
 
     public function toJson($onlyIfCached = false)
     {
-
         $screenshot = $this->images()->findBy('name', 'screenshot');
+        $version    = $this->version($onlyIfCached);
 
         return [
             'title'  => $this->title()->value(),
