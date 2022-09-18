@@ -8,7 +8,7 @@
 }
 
 .affected-column {
-  width: 15%;
+  width: 17%;
 }
 </style>
 
