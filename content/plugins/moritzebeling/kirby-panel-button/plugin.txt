@@ -1,0 +1,18 @@
+Title: Panle Button
+
+----
+
+Repository: https://github.com/moritzebeling/kirby-panel-button
+
+----
+
+Category: fields
+
+----
+
+Subcategory: 
+
+----
+
+Description: Custom Kirby Panel button field to open or trigger URLs
+
