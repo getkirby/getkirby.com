@@ -190,6 +190,10 @@ class PluginPage extends Page
             ],
             'urls' => [
                 '*' => [
+                    // `$version` is wrapped in strings on purpose
+                    // because it is a template placeholder for the
+                    // URL templates (so that the update check can
+                    // insert any version into the template)
                     'changes'  => $this->changes('$version'),
                     'download' => $this->download('$version'),
                     'upgrade'  => $this->repository()->value(),
