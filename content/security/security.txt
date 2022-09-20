@@ -53,7 +53,7 @@ The entries are evaluated from top to bottom, so the "most specific" entry MUST 
 There MUST be a separate entry with the `status` value `active-support`, `security-support` or `end-of-life` for each major version that requires a paid upgrade. There MAY be separate entries for free major updates with a different support status.
 
 There MUST be exactly one entry with the `status` value `latest`. It MUST be the first entry in the list.
-There also MUST be exactly one entry with the `status` value `no-vulnerabilities`. It MUST be the second entry in the list.
+There SHOULD be exactly one entry with the `status` value `no-vulnerabilities`. It MUST be the second entry in the list.
 
 ### Possible `status` values
 
@@ -82,7 +82,7 @@ This marks a version range that only receives security updates.
 
 The `latest` field of the `security-support` entry MUST be set to the latest version that can be updated to for free from any version in the version range.
 
-`security-support` entries MAY have a `status-link` field that points to an URL with more information on the support status of this version range.
+`security-support` entries MAY have a `status-link` field that points to an URL with more information on the support status of this version range. The status link defaults to an empty value (no link).
 
 #### `end-of-life`
 
@@ -90,7 +90,7 @@ This marks a version range that receives no updates whatsoever.
 
 The `latest` field of the `end-of-life` entry MUST be set to the latest version that can be updated to for free from any version in the version range.
 
-`end-of-life` entries MAY have a `status-link` field that points to an URL with more information on the support status of this version range.
+`end-of-life` entries MAY have a `status-link` field that points to an URL with more information on the support status of this version range. The status link defaults to https://getkirby.com/security/end-of-life.
 
 ## `Urls` field
 
@@ -138,6 +138,7 @@ Each message entry MAY have the following fields (required fields are marked wit
 - `kirby` (*): Composer version constraint of all affected Kirby versions (can be `*` for "any")
 - `php` (*): Composer version constraint of all affected PHP versions (can be `*` for "any")
 - `link`: URL to a page with the detailed description
+- `icon`: Custom icon name (see https://getkirby.com/docs/reference/panel/icons); defaults to `alert`
 
 ----
 
