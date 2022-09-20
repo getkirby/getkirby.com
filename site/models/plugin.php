@@ -151,7 +151,32 @@ class PluginPage extends Page
             'category'    => option('plugins.categories.' . $this->category() . '.label'),
             'description' => $this->description()->value(),
             'screenshot'  => $screenshot ? $screenshot->url() : null,
-            'version'     => $this->version($onlyIfCached)
+
+            // basic skeleton for the update check (can be extended later)
+            'latest'   => $version,
+            'versions' => [
+                $version => [
+                    'description' => 'Latest release',
+                    'status'      => 'latest'
+                ],
+                '*' => [
+                    'description' => 'Actively supported',
+                    'latest'      => $version,
+                    'status'      => 'active-support'
+                ]
+            ],
+            'urls' => [
+                '*' => [
+                    // `{{ version}}` is a template placeholder for
+                    // the URL templates (so that the update check
+                    // can insert any version into the URLs)
+                    'changes'  => $this->changes('{{ version }}'),
+                    'download' => $this->download('{{ version }}'),
+                    'upgrade'  => $this->repository()->value(),
+                ]
+            ],
+            'incidents' => [],
+            'messages'  => []
         ];
 
     }
