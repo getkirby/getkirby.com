@@ -106,12 +106,12 @@ Each entry MAY have the following fields (required fields are marked with a `*`)
 - `upgrade` (*): URL to a page with migration information for users upgrading from this version range to the latest major release
 - `download`: URL to a ZIP file with the `kirby` folder of a particular version
 
-All fields MAY use the following placeholders in the URL templates:
+All fields MAY use the following placeholders in the URL templates that are dynamically replaced by the client:
 
-- `$version`: A version in the version range of the entry's key
-- `$current`: The current Kirby version of the installation
+- `{{ version }}`: A version in the version range of the entry's key
+- `{{ current }}`: The current Kirby version of the installation
 
-The `changes` and `download` fields MUST use the `$version` placeholders.
+The `changes` and `download` fields MUST use the `{{ version }}` placeholder.
 
 ## `Incidents` field
 
@@ -142,6 +142,11 @@ Each message entry MAY have the following fields (required fields are marked wit
 ----
 
 Versions:
+
+# Static placeholders (filled by getkirby.com):
+# - `{{ latest }} `: Version number of latest release
+# - `{{ latestMajor }}`: Version number of latest release (major part only)
+# - `{{ no-vulnerabilities }}`: Minimum version number without vulnerabilities
 
 {{ latest }}:
     status: latest
@@ -178,16 +183,24 @@ Versions:
 
 Urls:
 
+# Static placeholders (filled by getkirby.com):
+# - `{{ latest }} `: Version number of latest release
+# - `{{ latestMajor }}`: Version number of latest release (major part only)
+# - `{{ no-vulnerabilities }}`: Minimum version number without vulnerabilities
+# Dynamic placeholders (filled by the client):
+# - `{{ version }}`: A version in the version range of the entry's key
+# - `{{ current }}`: The current Kirby version of the installation
+
 3.*:
-    changes: https://github.com/getkirby/kirby/releases/tag/$version
-    download: https://github.com/getkirby/kirby/archive/refs/tags/$version.zip
+    changes: https://github.com/getkirby/kirby/releases/tag/{{ version }}
+    download: https://github.com/getkirby/kirby/archive/refs/tags/{{ version }}.zip
     upgrade: https://getkirby.com/releases/{{ latestMajor }}
 2.*:
-    changes: https://github.com/getkirby-v2/kirby/releases/tag/$version
-    download: https://github.com/getkirby-v2/kirby/archive/refs/tags/$version.zip
+    changes: https://github.com/getkirby-v2/kirby/releases/tag/{{ version }}
+    download: https://github.com/getkirby-v2/kirby/archive/refs/tags/{{ version }}.zip
     upgrade: https://getkirby.com/releases/{{ latestMajor }}
 1.*:
-    changes: https://github.com/getkirby-v1/starterkit/releases/tag/$version
+    changes: https://github.com/getkirby-v1/starterkit/releases/tag/{{ version }}
     upgrade: https://getkirby.com/releases/{{ latestMajor }}
 
 ----
