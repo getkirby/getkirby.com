@@ -50,12 +50,12 @@ class SecurityPage extends Page
 
     public function urls()
     {
-        return parent::urls()->replace($this->replace())->toStructure();
+        return parent::urls()->replace($this->replace(), null)->toStructure();
     }
 
     public function versions()
     {
-        return parent::versions()->replace($this->replace())->toStructure();
+        return parent::versions()->replace($this->replace(), null)->toStructure();
     }
 
     public function versionsTable()
@@ -69,7 +69,7 @@ class SecurityPage extends Page
             'incidents' => $this->incidentsTable(),
             'messages'  => $this->messagesTable(),
             'versions'  => $this->versionsTable()
-        ]));
+        ]), null);
     }
 
 }
