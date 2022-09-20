@@ -531,7 +531,7 @@ abstract class ModelWithContent extends Model
 	 * @param string $handler For internal use
 	 * @return string
 	 */
-	public function toString(string $template = null, array $data = [], string $fallback = '', string $handler = 'template'): string
+	public function toString(string $template = null, array $data = [], string|null $fallback = '', string $handler = 'template'): string
 	{
 		if ($template === null) {
 			return $this->id() ?? '';
