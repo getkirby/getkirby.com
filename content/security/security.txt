@@ -147,12 +147,12 @@ Versions:
 # Static placeholders (filled by getkirby.com):
 # - `{{ latest }} `: Version number of latest release
 # - `{{ latestMajor }}`: Version number of latest release (major part only)
-# - `{{ no-vulnerabilities }}`: Minimum version number without vulnerabilities
+# - `{{ noVulnerabilities }}`: Minimum version number without vulnerabilities
 
 {{ latest }}:
     status: latest
     description: Latest Kirby release
->={{ no-vulnerabilities }}:
+>={{ noVulnerabilities }}:
     status: no-vulnerabilities
     description: No known vulnerabilities
 3.7.*:
@@ -187,7 +187,7 @@ Urls:
 # Static placeholders (filled by getkirby.com):
 # - `{{ latest }} `: Version number of latest release
 # - `{{ latestMajor }}`: Version number of latest release (major part only)
-# - `{{ no-vulnerabilities }}`: Minimum version number without vulnerabilities
+# - `{{ noVulnerabilities }}`: Minimum version number without vulnerabilities
 # Dynamic placeholders (filled by the client):
 # - `{{ version }}`: A version in the version range of the entry's key
 # - `{{ current }}`: The current Kirby version of the installation
