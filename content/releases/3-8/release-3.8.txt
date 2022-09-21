@@ -1,0 +1,5 @@
+title: Kirby 3.8
+----
+Subtitle: Rhampholeon
+----
+Version: 3.8

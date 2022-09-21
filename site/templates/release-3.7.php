@@ -49,23 +49,8 @@
     <p class="h1 color-gray-600"><?= $page->subtitle() ?></p>
   </div>
 
-  <?php snippet('cta', [
-    'buttons' => [
-      [
-        'text' => 'Try now',
-        'link' => $page->link(),
-        'icon' => 'download',
-        'style' => 'filled'
-      ],
-      [
-        'text' => 'Docs',
-        'link' => '/docs',
-        'icon' => 'book',
-        'style' => 'outlined'
-      ]
-    ],
-    'center' => false,
-    'mb' => 0
+  <?php snippet('templates/releases/cta', [
+    'options' => ['center' => false, 'mb' => 0]
   ]) ?>
 </header>
 
@@ -83,24 +68,7 @@
   <?php snippet('templates/release-37/release-menu') ?>
 </article>
 
-<section id="get-started" class="mb-42">
-  <h2 class="h2 text-center mb-6">Get started</h2>
-  <?php snippet('cta', [
-    'buttons' => [
-      [
-        'text' => 'Try now',
-        'link' => $page->link(),
-        'icon' => 'download'
-      ],
-      [
-        'text' => 'Docs',
-        'link' => '/docs',
-        'icon' => 'book',
-        'style' => 'outlined'
-      ]
-    ]
-  ]) ?>
-</section>
+<?php snippet('templates/releases/get-started') ?>
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {
