@@ -85,9 +85,7 @@ Always add a composer.json file with basic information about your plugin, includ
     ]
 }
 ```
-<since v="3.7.0">
 Kirby uses the links in the `homepage`, `support.docs` or `support.source` fields to create a link to your plugin in the Panel's System view. If a `homepage` link is given, this is used, otherwise Kirby falls back to `support.docs` and `support.source` in this order.
-</since>
 
 ## Commenting
 

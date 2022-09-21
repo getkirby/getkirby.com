@@ -70,7 +70,6 @@ return [
 ];
 ```
 
-<since v="3.7.1">
 ## URL override per domain
 
 In a (link: docs/guide/configuration#multi-environment-setup text: multi-domain environment), you may want to define the specific base URLs for each domain in the domain-specific config files.
@@ -98,4 +97,3 @@ return [
 <info>
 To ensure security, Kirby loads the domain-specific config files based on the `url` option in the main config file. So even if you set the `url` option again in the domain-specific config file, please make sure that the main config file allows the domain at all – otherwise your domain-specific config is never loaded and will not take effect.
 </info>
-</since>
