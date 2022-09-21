@@ -170,7 +170,6 @@ let cloned = this.$helper.clone(array);
 
 #### `isEmpty`
 
-<since v="3.7.0">
 Checks if a value of any type is empty
 
 ```js
@@ -180,8 +179,6 @@ this.$helper.object.isEmpty("") // true
 this.$helper.object.isEmpty([]) // true
 this.$helper.object.isEmpty({}) // true
 ```
-</since>
-
 
 #### `merge`
 

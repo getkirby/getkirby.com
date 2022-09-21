@@ -15,11 +15,9 @@ Kirby automatically loads all plugins from folders within `/site/plugins` and tr
 
 Plugins can also include an `index.css` and/or `index.js` file. These files are automatically loaded into the Panel. Even if your plugin does not contain any PHP code, we recommend to include the `index.php` file to [properly register your plugin in the system](#extensions__panel-only-plugins).
 
-<since v="3.7.1">
 If a plugin only contains an `index.css` and/or `index.js` file but no `index.php`, Kirby will load the plugin anonymously. This means that the name of your plugin cannot be properly displayed in the Panel's System view.
 
 Plugins that don't have any of the `index.php`, `index.css` or `index.js` files are not loaded by Kirby at all.
-</since>
 
 ## Simple vs. complex plugins
 

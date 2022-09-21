@@ -2,10 +2,6 @@ Title: Stats section
 
 ----
 
-Since: 3.7.0
-
-----
-
 Intro:
 
 Show beautiful stats for your site or shop: revenues, orders, likes, views, etc.

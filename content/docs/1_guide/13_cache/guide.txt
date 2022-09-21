@@ -50,9 +50,9 @@ class ProjectPage extends Page
     if (parent::isCacheable() === false) {
       return false;
     }
-        
+
     // your custom ignore rules
-        
+
     // otherwise consider the page cacheable
     return true;
   }
@@ -66,15 +66,14 @@ Not all page responses can and will be cached. Kirby automatically determines wh
 - Only the base response of a page is cached. If the request matches any of the following criteria, the response is not cached:
   - If the request contains a query string, request data or a Kirby param
   - If the request uses a HTTP method other than `GET` and `HEAD` (e.g. `POST`, `PUT` or `DELETE`)
-- If the page is excluded from caching via the `ignore` option or a page model, the page is never cached.
-
-<since v="3.7.0">
 - If the response relies on `$kirby->session()`, a cookie value (`Cookie::get()`) or the `Authorization` header (`$kirby->request()->auth()`), Kirby protects against sharing the cache between visitors who have these values set and those who don't. In particular, Kirby behaves like this:
   - If any of the queried request headers is set, the response is considered private and never cached.
   - If the headers are not set in the current request, the response is cached but the cached response is only used for requests without these headers. This ensures that users with the cookie or authentication receive their own personalized response.
+- If the page is excluded from caching via the `ignore` option or a page model, the page is never cached.
 
+<info>
 If your template code or a plugin you use rely on cookies or authentication but don't use Kirby's built-in methods, Kirby cannot automatically detect the usage. In this case, please call `$kirby->response()->usesCookie($name)` or `$kirby->response()->usesAuth(true)` respectively. You **don't** need to do this if you use Kirby's methods from the list above.
-</since>
+</info>
 
 ## Cache drivers and options
 

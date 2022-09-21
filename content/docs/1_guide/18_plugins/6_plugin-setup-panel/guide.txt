@@ -50,7 +50,6 @@ Your Panel plugin code is located in the `src` folder. Your main plugin file is 
 
 Reload the Kirby Panel after you have updated the plugin's code to inspect your changes.
 
-<since v="3.7.4">
 kirbyup 2.0.0 introduced a new `serve` command that allows hot module reloading. This feature will automatically reload the Panel if you make changes to your plugin. The new `serve` command requires Kirby 3.7.4+ and (link: https://caniuse.com/mdn-javascript_operators_await_top_level text: modern development browsers).
 
 You can use the `serve` command instead of `npm run dev`:
@@ -64,7 +63,6 @@ npm run serve
 ```
 npm run serve -- --port 1234
 ```
-</since>
 
 ## Building your plugin
 
