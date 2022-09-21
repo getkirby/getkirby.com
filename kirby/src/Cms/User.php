@@ -831,7 +831,7 @@ class User extends ModelWithContent
 	 * @param string $fallback Fallback for tokens in the template that cannot be replaced
 	 * @return string
 	 */
-	public function toString(string $template = null, array $data = [], string|null $fallback = '', string $handler = 'template'): string
+	public function toString(string $template = null, array $data = [], string $fallback = '', string $handler = 'template'): string
 	{
 		if ($template === null) {
 			$template = $this->email();
