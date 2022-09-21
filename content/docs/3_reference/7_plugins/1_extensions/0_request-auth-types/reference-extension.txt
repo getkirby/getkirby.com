@@ -2,10 +2,6 @@ Title: Request auth types
 
 ----
 
-Since: 3.7.0
-
-----
-
 Text:
 
 Request auth types are used to parse the authentication information in the `Authorization` header of the HTTP request. They are called by the `$request->auth()` method internally.

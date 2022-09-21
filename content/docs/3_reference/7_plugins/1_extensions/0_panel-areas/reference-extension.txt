@@ -348,12 +348,6 @@ Area | View name
 `users` | `user.file`
 `users` | `users`
 
-<since v="3.7.2">
-<info>
-The `logout` area was introduced with Kirby 3.7.2. It replaced the `account.logout` view.
-</info>
-</since>
-
 ## More information
 
 - (link: docs/cookbook/panel/first-panel-area text: My first Panel area)

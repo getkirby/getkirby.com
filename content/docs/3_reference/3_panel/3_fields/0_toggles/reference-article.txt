@@ -2,10 +2,6 @@ Title: Toggles
 
 ----
 
-Since: 3.7.0
-
-----
-
 Intro: Toggle between different states
 
 ----
