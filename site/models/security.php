@@ -1,5 +1,8 @@
 <?php
 
+use Kirby\Cms\Field;
+use Kirby\Cms\Page;
+
 class SecurityPage extends Page
 {
 
@@ -23,7 +26,7 @@ class SecurityPage extends Page
         return snippet('templates/security/messages', ['messages' => $this->messages()], true);
     }
 
-    public function replace()
+    protected function replace(Field $field, array $data = [])
     {
         $noVulns = null;
 
@@ -41,21 +44,25 @@ class SecurityPage extends Page
         // extract the part before the second dot
         preg_match('/^(\w+\.\w+)\./', $latest, $matches);
 
-        return [
+        $data = array_merge([
             'latest'             => $latest,
             'latestMajor'        => $matches[1],
             'no-vulnerabilities' => $noVulns
-        ];
+        ], $data);
+
+        $field->value = Str::template($field->value, $data);
+
+        return $field;
     }
 
     public function urls()
     {
-        return parent::urls()->replace($this->replace(), null)->toStructure();
+        return $this->replace(parent::urls())->toStructure();
     }
 
     public function versions()
     {
-        return parent::versions()->replace($this->replace(), null)->toStructure();
+        return $this->replace(parent::versions())->toStructure();
     }
 
     public function versionsTable()
@@ -65,11 +72,11 @@ class SecurityPage extends Page
 
     public function text()
     {
-        return parent::text()->replace(array_merge($this->replace(), [
+        return $this->replace(parent::text(), [
             'incidents' => $this->incidentsTable(),
             'messages'  => $this->messagesTable(),
             'versions'  => $this->versionsTable()
-        ]), null);
+        ]);
     }
 
 }
