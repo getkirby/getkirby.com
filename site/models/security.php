@@ -45,9 +45,9 @@ class SecurityPage extends Page
         preg_match('/^(\w+\.\w+)\./', $latest, $matches);
 
         $data = array_merge([
-            'latest'             => $latest,
-            'latestMajor'        => $matches[1],
-            'no-vulnerabilities' => $noVulns
+            'latest'            => $latest,
+            'latestMajor'       => $matches[1],
+            'noVulnerabilities' => $noVulns
         ], $data);
 
         $field->value = Str::template($field->value, $data);
