@@ -160,9 +160,8 @@ class PluginPage extends Page
     public function toJson($onlyIfCached = false)
     {
         $screenshot = $this->images()->findBy('name', 'screenshot');
-        $version    = $this->version($onlyIfCached);
 
-        return [
+        $data = [
             'title'  => $this->title()->value(),
             'url'    => $this->url(),
             'author' => [
@@ -174,35 +173,38 @@ class PluginPage extends Page
             'category'    => option('plugins.categories.' . $this->category() . '.label'),
             'description' => $this->description()->value(),
             'screenshot'  => $screenshot ? $screenshot->url() : null,
-
-            // basic skeleton for the update check (can be extended later)
-            'latest'   => $version,
-            'versions' => [
-                $version => [
-                    'description' => 'Latest release',
-                    'status'      => 'latest'
-                ],
-                '*' => [
-                    'description' => 'Actively supported',
-                    'latest'      => $version,
-                    'status'      => 'active-support'
-                ]
-            ],
-            'urls' => [
-                '*' => [
-                    // `{{ version}}` is a template placeholder for
-                    // the URL templates (so that the update check
-                    // can insert any version into the URLs)
-                    'changes'  => $this->changes('{{ version }}'),
-                    'download' => $this->download('{{ version }}'),
-                    'upgrade'  => $this->repository()->value(),
-                ]
-            ],
-            'incidents' => [],
-            'messages'  => []
         ];
 
+        // basic skeleton for the update check (can be extended later)
+        if ($version = $this->version($onlyIfCached)) {
+            $data += [
+                'latest'   => $version,
+                'versions' => [
+                    $version => [
+                        'description' => 'Latest release',
+                        'status'      => 'latest'
+                    ],
+                    '*' => [
+                        'description' => 'Actively supported',
+                        'latest'      => $version,
+                        'status'      => 'active-support'
+                    ]
+                ],
+                'urls' => [
+                    '*' => [
+                        // `{{ version }}` is a template placeholder for
+                        // the URL templates (so that the update check
+                        // can insert any version into the URLs)
+                        'changes'  => $this->changes('{{ version }}'),
+                        'download' => $this->download('{{ version }}'),
+                        'upgrade'  => $this->repository()->value(),
+                    ]
+                ],
+                'incidents' => [],
+                'messages'  => []
+            ];
+        }
+
+        return $data;
     }
-
-
 }
