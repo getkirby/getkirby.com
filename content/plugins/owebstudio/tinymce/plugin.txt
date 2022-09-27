@@ -2,7 +2,7 @@ Title: TinyMCE
 
 ----
 
-Download: https://owebstudio.lemonsqueezy.com/checkout/buy/1f3ad982-7cfa-4f53-a1c2-fc2d12d80b2f
+Download: https://owebstudio.com/kirby/plugins/tinymce-editor
 
 ----
 

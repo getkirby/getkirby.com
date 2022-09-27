@@ -2,7 +2,7 @@ Title: Clear Cache
 
 ----
 
-Download: https://owebstudio.lemonsqueezy.com/checkout/buy/aa39efcb-c69b-430e-a3e7-a08900a81006
+Download: https://owebstudio.com/kirby/plugins/clear-cache
 
 ----
 
