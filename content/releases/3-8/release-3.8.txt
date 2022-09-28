@@ -3,3 +3,19 @@ title: Kirby 3.8
 Subtitle: Rhampholeon
 ----
 Version: 3.8
+----
+Link: https://github.com/getkirby/kirby/releases/tag/3.8.0
+----
+Features:
+----
+Enhancements:
+----
+Fixes:
+----
+Breaking:
+----
+Refactoring:
+----
+Deprecated:
+
+
