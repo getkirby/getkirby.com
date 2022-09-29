@@ -298,3 +298,22 @@ ObjectFieldTemplate:
   <dd><?= $person->tags() ?></dd>
 </dl>
 ```
+
+----
+
+MigrationForSiteDevelopers:
+
+- New `.htaccess` with `Authorization` header change
+- Run `Kirby\Uuids\Uuids::populate()` (e.g. in a temporary route) to give existing pages and files UUIDs (crucial when you sync your content folder between multiple instances, e.g. staging/live server - otherwise conflicting UUIDs might be generated over time for your existing pages/files).
+- Deprecations/breaking changes as listed above
+
+----
+
+MigrationForPluginDevelopers:
+
+- Custom cache drivers should implement the new `enabled()`  method. The method will be required in a future Kirby release. Until you implement this method, Kirby will assume that your cache driver is always enabled.
+- Deprecations/breaking changes as listed above
+- Please make sure that your plugin name in `index.php` (call to `Kirby::plugin()`) matches the path at `https://getkirby.com/plugins/<vendor>/<plugin>`. Otherwise Kirby‘s update check will trigger an error.
+    - Note that the plugin name in `index.php` is independent from the Composer package name (i.e. you can continue to use a different Composer package name like `vendor/kirby-someplugin`).
+    - If your plugin contains plugin options, changing the plugin name would be a breaking change. If you want to keep your plugin name in `index.php` but the plugin name on [getkirby.com](http://getkirby.com/) differs, please send a pull request to the [getkirby.com repository](https://github.com/getkirby/getkirby.com) or let us know so we can update the site.
+- The update check only works if the plugin’s current version number is set in the `version` field of `composer.json`. Otherwise the message “Could not check for updates” is displayed.
