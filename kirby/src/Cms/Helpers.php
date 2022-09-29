@@ -44,7 +44,18 @@ class Helpers
 	public static function dump($variable, bool $echo = true): string
 	{
 		$kirby = App::instance();
-		return ($kirby->component('dump'))($kirby, $variable, $echo);
+
+		if ($kirby->environment()->cli() === true) {
+			$output = print_r($variable, true) . PHP_EOL;
+		} else {
+			$output = '<pre>' . print_r($variable, true) . '</pre>';
+		}
+
+		if ($echo === true) {
+			echo $output;
+		}
+
+		return $output;
 	}
 
 	/**

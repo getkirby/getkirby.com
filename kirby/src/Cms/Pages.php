@@ -3,6 +3,7 @@
 namespace Kirby\Cms;
 
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Uuid\HasUuids;
 
 /**
  * The `$pages` object refers to a
@@ -22,6 +23,8 @@ use Kirby\Exception\InvalidArgumentException;
  */
 class Pages extends Collection
 {
+	use HasUuids;
+
 	/**
 	 * Cache for the index only listed and unlisted pages
 	 *
@@ -57,15 +60,18 @@ class Pages extends Collection
 		$site = App::instance()->site();
 
 		// add a pages collection
-		if (is_a($object, self::class) === true) {
+		if ($object instanceof self) {
 			$this->data = array_merge($this->data, $object->data);
 
 		// add a page by id
-		} elseif (is_string($object) === true && $page = $site->find($object)) {
+		} elseif (
+			is_string($object) === true &&
+			$page = $site->find($object)
+		) {
 			$this->__set($page->id(), $page);
 
 		// add a page object
-		} elseif (is_a($object, 'Kirby\Cms\Page') === true) {
+		} elseif ($object instanceof Page) {
 			$this->__set($object->id(), $object);
 
 		// give a useful error message on invalid input;
@@ -157,7 +163,7 @@ class Pages extends Collection
 		$children = new static([], $model);
 		$kirby    = $model->kirby();
 
-		if (is_a($model, 'Kirby\Cms\Page') === true) {
+		if ($model instanceof Page) {
 			$parent = $model;
 			$site   = $model->site();
 		} else {
@@ -195,24 +201,6 @@ class Pages extends Collection
 		}
 
 		return $files;
-	}
-
-	/**
-	 * Finds a page in the collection by id.
-	 * This works recursively for children and
-	 * children of children, etc.
-	 * @deprecated 3.7.0 Use `$pages->get()` or `$pages->find()` instead
-	 * @todo 3.8.0 Remove method
-	 * @codeCoverageIgnore
-	 *
-	 * @param string|null $id
-	 * @return mixed
-	 */
-	public function findById(string $id = null)
-	{
-		Helpers::deprecated('Cms\Pages::findById() has been deprecated and will be removed in Kirby 3.8.0. Use $pages->get() or $pages->find() instead.');
-
-		return $this->findByKey($id);
 	}
 
 	/**
@@ -267,10 +255,14 @@ class Pages extends Collection
 	 * @param string|null $key
 	 * @return \Kirby\Cms\Page|null
 	 */
-	public function findByKey(?string $key = null)
+	public function findByKey(string|null $key = null)
 	{
 		if ($key === null) {
 			return null;
+		}
+
+		if ($page = $this->findByUuid($key, 'page')) {
+			return $page;
 		}
 
 		// remove trailing or leading slashes
@@ -293,7 +285,7 @@ class Pages extends Collection
 		}
 
 		// try to find the page by its (translated) URI by stepping through the page tree
-		$start = is_a($this->parent, 'Kirby\Cms\Page') === true ? $this->parent->id() : '';
+		$start = $this->parent instanceof Page ? $this->parent->id() : '';
 		if ($page = $this->findByIdRecursive($key, $start, App::instance()->multilang(), true)) {
 			return $page;
 		}
@@ -309,22 +301,6 @@ class Pages extends Collection
 		}
 
 		return null;
-	}
-
-	/**
-	 * Alias for `$pages->find()`
-	 * @deprecated 3.7.0 Use `$pages->find()` instead
-	 * @todo 3.8.0 Remove method
-	 * @codeCoverageIgnore
-	 *
-	 * @param string $id
-	 * @return \Kirby\Cms\Page|null
-	 */
-	public function findByUri(string $id)
-	{
-		Helpers::deprecated('Cms\Pages::findByUri() has been deprecated and will be removed in Kirby 3.8.0. Use $pages->find() instead.');
-
-		return $this->findByKey($id);
 	}
 
 	/**
@@ -380,7 +356,7 @@ class Pages extends Collection
 		// get object property by cache mode
 		$index = $drafts === true ? $this->indexWithDrafts : $this->index;
 
-		if (is_a($index, 'Kirby\Cms\Pages') === true) {
+		if ($index instanceof self) {
 			return $index;
 		}
 
@@ -451,14 +427,14 @@ class Pages extends Collection
 		}
 
 		// merge an entire collection
-		if (is_a($args[0], self::class) === true) {
+		if ($args[0] instanceof self) {
 			$collection = clone $this;
 			$collection->data = array_merge($collection->data, $args[0]->data);
 			return $collection;
 		}
 
 		// append a single page
-		if (is_a($args[0], 'Kirby\Cms\Page') === true) {
+		if ($args[0] instanceof Page) {
 			$collection = clone $this;
 			return $collection->set($args[0]->id(), $args[0]);
 		}
