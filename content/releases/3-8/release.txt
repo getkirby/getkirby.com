@@ -8,7 +8,7 @@ Link: https://github.com/getkirby/kirby/releases/tag/3.8.0
 ----
 Features:
 
-#### **Unique IDs** for pages, files, users and site #4612
+#### **Unique IDs** for pages, files, users and site [#4612](https://github.com/getkirby/kirby/pull/4612)
 - Get one: `$page->uuid()`, `$file->uuid()` ...
 - Format: `page://OPJmmoAT1gGocMW`
 - All methods that look up an ID/path now also support looking up UUIDs
@@ -16,17 +16,17 @@ Features:
 - Support for structure entries and blocks will follow in a future release
 - Picker fields have a new `store` blueprint option (`uuid` or `id` as value, `uuid` default) to configure how to store the value in the content file
 
-#### **Permanent URLs** for pages and files with UUIDs #4612
+#### **Permanent URLs** for pages and files with UUIDs [#4612](https://github.com/getkirby/kirby/pull/4612)
 - New `$page->permalink()` and `$file->permalink()` methods
 ```
 https://site.com/@/page/OPJmmoAT1gGocMW
 ```
 
 **And more …**
-- New `$users->files()` method (returning a collection of all files of the users) #4499
-- Support for a new `site/config/env.php` file for options that are specific to a deployment: It can override all options from `config.php` and from the config files specific to hostname and server IP address. It can also override the `url` option and control which hostname-specific files will be loaded. #4580
-- New `$cache->getOrSet($key, $callback, $minutes)` method: Retrieves the value from cache if possible, if not via callback function and adds it to the cache #4627
-- New `$cache->enabled()` method to check if the cache is ready to store values beyond the current request #4661
+- New `$users->files()` method (returning a collection of all files of the users) [#4499](https://github.com/getkirby/kirby/pull/4499)
+- Support for a new `site/config/env.php` file for options that are specific to a deployment: It can override all options from `config.php` and from the config files specific to hostname and server IP address. It can also override the `url` option and control which hostname-specific files will be loaded. [#4580](https://github.com/getkirby/kirby/pull/4580)
+- New `$cache->getOrSet($key, $callback, $minutes)` method: Retrieves the value from cache if possible, if not via callback function and adds it to the cache [#4627](https://github.com/getkirby/kirby/pull/4627)
+- New `$cache->enabled()` method to check if the cache is ready to store values beyond the current request [#4661](https://github.com/getkirby/kirby/pull/4661)
 
 ----
 Enhancements:
@@ -34,13 +34,13 @@ Enhancements:
 #### Better error messages for blocks and layout fields [Nolt/313](https://kirby.nolt.io/313)
 ![image](https://user-images.githubusercontent.com/3788865/191568958-d316fe04-914d-475b-b4b4-a29051dba721.png)
 
-#### The error dialog now displays multiple error lines per field #4629
+#### The error dialog now displays multiple error lines per field [#4629](https://github.com/getkirby/kirby/pull/4629)
 ![image](https://user-images.githubusercontent.com/3788865/191569050-689c96df-9581-4f94-9a22-a5515219ab86.png)
 
-#### System view: display "-" for empty plugin table cells #4444
+#### System view: display "-" for empty plugin table cells [#4444](https://github.com/getkirby/kirby/pull/4444)
 ![image](https://user-images.githubusercontent.com/3788865/191569109-bc19cc82-2026-4f90-a701-b246c07d9af5.png)
 
-#### Easily translate options via an i18n key #3955
+#### Easily translate options via an i18n key [#3955](https://github.com/getkirby/kirby/pull/3955)
 ```yaml
 # via `*` pseudo locale
 options:
@@ -51,42 +51,42 @@ options:
 ```
 
 **And more …**
-- When a login challenge has expired, the user is redirected to the login page. #4087
-- Added new `onFormInput` handler of the structure field on form submit event #4616
-- Each report in a `k-stats` widget can now define a `dialog` prop with the name of a dialog to be opened when the report is clicked. #4658
-- Fiber dialogs: the submit button is now disabled while processing a submit request to prevent sending multiple requests at once accidentally #4413
-- The `$field->replace()`, `$modelWithContent->toString()`, `$modelWithContent->toSafeString()` and `Str::safeTemplate()` methods now support the fallback value `null` (which leaves invalid tokens in the output string). #4671
-- Table rows use same outline styling when dragged as cards and lists #4682
+- When a login challenge has expired, the user is redirected to the login page. [#4087](https://github.com/getkirby/kirby/pull/4087)
+- Added new `onFormInput` handler of the structure field on form submit event [#4616](https://github.com/getkirby/kirby/pull/4616)
+- Each report in a `k-stats` widget can now define a `dialog` prop with the name of a dialog to be opened when the report is clicked. [#4658](https://github.com/getkirby/kirby/pull/4658)
+- Fiber dialogs: the submit button is now disabled while processing a submit request to prevent sending multiple requests at once accidentally [#4413](https://github.com/getkirby/kirby/pull/4413)
+- The `$field->replace()`, `$modelWithContent->toString()`, `$modelWithContent->toSafeString()` and `Str::safeTemplate()` methods now support the fallback value `null` (which leaves invalid tokens in the output string). [#4671](https://github.com/getkirby/kirby/pull/4671)
+- Table rows use same outline styling when dragged as cards and lists [#4682](https://github.com/getkirby/kirby/pull/4682)
 
 ----
 Fixes:
 
 **Panel**
-- Tags field: Separates tags on blur correctly #4638
-- Tags field: Loesn't lose current input when hitting Cmd+S #4590
-- Picker fields: Fixed styling for disabled/non-translatable state #4306
-- Structure field: `columns` options now rightly overrule implied options from the field #4514
-- URL field preview is properly truncated with an ellipsis when it is too long #4677
+- Tags field: Separates tags on blur correctly [#4638](https://github.com/getkirby/kirby/pull/4638)
+- Tags field: Loesn't lose current input when hitting Cmd+S [#4590](https://github.com/getkirby/kirby/pull/4590)
+- Picker fields: Fixed styling for disabled/non-translatable state [#4306](https://github.com/getkirby/kirby/pull/4306)
+- Structure field: `columns` options now rightly overrule implied options from the field [#4514](https://github.com/getkirby/kirby/pull/4514)
+- URL field preview is properly truncated with an ellipsis when it is too long [#4677](https://github.com/getkirby/kirby/pull/4677)
 - Users view: The role filter is not shown anymore if there is only one role available
-- The template of the home page can be changed now #4571
-- Items are properly highlighted while being dragged #4648
-- The table layout heading alignment is now working properly #4630
-- Uploaded XML files are no longer blocked because they contain links to external domains #4553
-- The Panel now suppresses error dialog when redirecting to logout #4614
-- We brought back the default slot for `k-items` #4635
+- The template of the home page can be changed now [#4571](https://github.com/getkirby/kirby/pull/4571)
+- Items are properly highlighted while being dragged [#4648](https://github.com/getkirby/kirby/pull/4648)
+- The table layout heading alignment is now working properly [#4630](https://github.com/getkirby/kirby/pull/4630)
+- Uploaded XML files are no longer blocked because they contain links to external domains [#4553](https://github.com/getkirby/kirby/pull/4553)
+- The Panel now suppresses error dialog when redirecting to logout [#4614](https://github.com/getkirby/kirby/pull/4614)
+- We brought back the default slot for `k-items` [#4635](https://github.com/getkirby/kirby/pull/4635)
 
 **Core**
-- Calling a `$file` method inside a custom `file::url` component no longer causes an infinite loop #4274
-- `Str::except()` does not add superfluous space after stripped tag and before interpunctuation #4645
-- Fixed calling `A::average()` with empty array #4269
-- Site search with parameters now returns correct results #4641
-- Caching is no longer disabled when the request passes an empty `Authorization` header. #4634
+- Calling a `$file` method inside a custom `file::url` component no longer causes an infinite loop [#4274](https://github.com/getkirby/kirby/pull/4274)
+- `Str::except()` does not add superfluous space after stripped tag and before interpunctuation [#4645](https://github.com/getkirby/kirby/pull/4645)
+- Fixed calling `A::average()` with empty array [#4269](https://github.com/getkirby/kirby/pull/4269)
+- Site search with parameters now returns correct results [#4641](https://github.com/getkirby/kirby/pull/4641)
+- Caching is no longer disabled when the request passes an empty `Authorization` header. [#4634](https://github.com/getkirby/kirby/pull/4634)
 - Calling `$app->user()` no longer sets the response flag for "uses auth header" unless the `api.basicAuth` option is enabled.
-- Various escaping issues for fields with options #4043 #4229
-- `A::append()` has been fixed for non-associative arrays. It is now an alias for `A::merge()` with the `A::MERGE_APPEND` flag. #4345
-- Language routes that return a falsy value are only called once now #4305
-- `$translation->exists()` now works for virtual pages #4674
-- Database queries can now filter by `'AND'` and `'OR'` as actual values (via `->where()`, `->andWhere()` and `->orWhere()`) #4668
+- Various escaping issues for fields with options [#4043](https://github.com/getkirby/kirby/pull/4043) [#4229](https://github.com/getkirby/kirby/pull/4229)
+- `A::append()` has been fixed for non-associative arrays. It is now an alias for `A::merge()` with the `A::MERGE_APPEND` flag. [#4345](https://github.com/getkirby/kirby/pull/4345)
+- Language routes that return a falsy value are only called once now [#4305](https://github.com/getkirby/kirby/pull/4305)
+- `$translation->exists()` now works for virtual pages [#4674](https://github.com/getkirby/kirby/pull/4674)
+- Database queries can now filter by `'AND'` and `'OR'` as actual values (via `->where()`, `->andWhere()` and `->orWhere()`) [#4668](https://github.com/getkirby/kirby/pull/4668)
 
 ----
 Breaking:
@@ -96,16 +96,16 @@ Breaking:
 - `permalink` cannot be for custom method names for any page or file and content fields with the same name can only be accessed via `$model->content()->get('permalink')`
 - The first-level URL path `@` is now blocked
 - Panel drag texts now use UUIDs (Kirbytext) or permalinks (Markdown) for absolute references
-- Kirby's upload sanitizer no longer checks XML files for external links because they can be pretty common in many XML-based formats; if you want to keep the strict behavior, set `Kirby\Sane\Xml::$allowedDomains = []`, set this property to a custom allowlist or write a custom Sane handler for your XML-based format #4553
-- Kirby now automatically loads the `site/config/env.php` file; if you already use this file path for a different purpose, please rename the file to a different name #4580
-- `A::average()` returns `null` when passed an empty array #4649
-- Multiselect field does not display option value as info #4624
+- Kirby's upload sanitizer no longer checks XML files for external links because they can be pretty common in many XML-based formats; if you want to keep the strict behavior, set `Kirby\Sane\Xml::$allowedDomains = []`, set this property to a custom allowlist or write a custom Sane handler for your XML-based format [#4553](https://github.com/getkirby/kirby/pull/4553)
+- Kirby now automatically loads the `site/config/env.php` file; if you already use this file path for a different purpose, please rename the file to a different name [#4580](https://github.com/getkirby/kirby/pull/4580)
+- `A::average()` returns `null` when passed an empty array [#4649](https://github.com/getkirby/kirby/pull/4649)
+- Multiselect field does not display option value as info [#4624](https://github.com/getkirby/kirby/pull/4624)
 - The default token fallback in `Str::safeTemplate()` changed from an empty string to `null` (which leaves invalid tokens in the output string). This behavior is consistent with `Str::template()`.
 - `$translation->exists()` now returns true for translations without an actual content file but where an content array has been provided
 - The deprecated `master` branch of the Kirby repository was deleted. If you install Kirby via Git, e.g. as a submodule, please use the `main` branch instead.
-- Database queries: subsequent `->where()` clauses don't support passing the mode (`AND`|`OR`) as last parameter anymore, but will interpret these as actual values to filter against. `->andWhere()` or `->orWhere()` instead. #4668
+- Database queries: subsequent `->where()` clauses don't support passing the mode (`AND`|`OR`) as last parameter anymore, but will interpret these as actual values to filter against. `->andWhere()` or `->orWhere()` instead. [#4668](https://github.com/getkirby/kirby/pull/4668)
 
-**Removed deprecated code #4478 #4515**
+**Removed deprecated code [#4478](https://github.com/getkirby/kirby/pull/4478) [#4515](https://github.com/getkirby/kirby/pull/4515)**
 
 Removed `dump` component. Disable `dump()` via `KIRBY_HELPER_DUMP` instead and create your own function.
 
@@ -180,16 +180,16 @@ Removed `dump` component. Disable `dump()` via `KIRBY_HELPER_DUMP` instead and c
 Refactoring:
 
 - Optimized code base to take advantage of PHP 8
-- Using PHP `match` statements instead of `switch` in various places #4452
-- Using `|null` for nullable type hints #4453
-- Using PHP's new null safe operator #4455
-- `Toolkit\A`: Improve type hinting #4495
-- Removed unused variables from PHP `catch` statements #4457
-- Support for default caches (via `Core::caches()`) #4535
-- Use PHP's `instanceof` instead of `is_a()` #4609
-- Custom login views no longer need to display errors themselves with `k-login-alert`, instead they can `this.$emit("error", error)` #4577
-- Updated npm dependencies #4639
-- The properties for the system view are now combined in the backend for easier extension and testing #4658
+- Using PHP `match` statements instead of `switch` in various places [#4452](https://github.com/getkirby/kirby/pull/4452)
+- Using `|null` for nullable type hints [#4453](https://github.com/getkirby/kirby/pull/4453)
+- Using PHP's new null safe operator [#4455](https://github.com/getkirby/kirby/pull/4455)
+- `Toolkit\A`: Improve type hinting [#4495](https://github.com/getkirby/kirby/pull/4495)
+- Removed unused variables from PHP `catch` statements [#4457](https://github.com/getkirby/kirby/pull/4457)
+- Support for default caches (via `Core::caches()`) [#4535](https://github.com/getkirby/kirby/pull/4535)
+- Use PHP's `instanceof` instead of `is_a()` [#4609](https://github.com/getkirby/kirby/pull/4609)
+- Custom login views no longer need to display errors themselves with `k-login-alert`, instead they can `this.$emit("error", error)` [#4577](https://github.com/getkirby/kirby/pull/4577)
+- Updated npm dependencies [#4639](https://github.com/getkirby/kirby/pull/4639)
+- The properties for the system view are now combined in the backend for easier extension and testing [#4658](https://github.com/getkirby/kirby/pull/4658)
 - Adds a new `Option` namespace with refactored options classes
 - Adds several related classes as back port from 3.9 (e.g. in `Blueprint`, `Field`...) - test coverage deactivated until 3.9 for these
 - New blueprint syntax for options (with polyfills for the old syntax):
@@ -224,14 +224,14 @@ options:
   value: "{{ item.twitter }}"
 ```
 
-- `Database\Query`: New third parameter `$mode` for `filterQuery()`  #4564
+- `Database\Query`: New third parameter `$mode` for `filterQuery()`  [#4564](https://github.com/getkirby/kirby/pull/4564)
 
 ----
 Deprecated:
 
-- `$kirby->impersonate($user, $callback)`: the `$callback` will not be bound anymore to the `$kirby` instance in Kirby 3.9.0, `$this` inside the callback will refer to the current context and not `$kirby` instead. Using `$this` as `$kirby` inside the callback will throw a deprecation warning in debug mode. #4498
-- Blueprints: `headline` option for sections will be removed in a future Kirby version. Use `label` instead. #4515
-- `$kirby->server()` has been deprecated and will be removed in Kirby 3.9.0. Use `$kirby->environment()` instead. #4515
+- `$kirby->impersonate($user, $callback)`: the `$callback` will not be bound anymore to the `$kirby` instance in Kirby 3.9.0, `$this` inside the callback will refer to the current context and not `$kirby` instead. Using `$this` as `$kirby` inside the callback will throw a deprecation warning in debug mode. [#4498](https://github.com/getkirby/kirby/pull/4498)
+- Blueprints: `headline` option for sections will be removed in a future Kirby version. Use `label` instead. [#4515](https://github.com/getkirby/kirby/pull/4515)
+- `$kirby->server()` has been deprecated and will be removed in Kirby 3.9.0. Use `$kirby->environment()` instead. [#4515](https://github.com/getkirby/kirby/pull/4515)
 - `Kirby\Form\Options`, `Kirby\Form\OptionsApi`, `Kirby\Form\OptionsQuery` have been deprecated and will be removed in Kirby 3.9
 
 ----
