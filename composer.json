@@ -1,16 +1,16 @@
 {
-    "name": "getkirby/getkirby.com",
-    "description": "The entire getkirby.com website",
-    "type": "project",
-    "homepage": "https://getkirby.com",
-    "require": {
-        "php": ">=7.4.0",
-        "getkirby/cms": "^3.6"
-    },
-    "scripts": {
-        "run": "php -S localhost:8181 kirby/router.php"
-    },
-    "config": {
-        "optimize-autoloader": true
-    }
+  "name": "getkirby/getkirby.com",
+  "description": "The entire getkirby.com website",
+  "type": "project",
+  "homepage": "https://getkirby.com",
+  "require": {
+    "php": ">=8.0.0",
+    "getkirby/cms": "^3.8"
+  },
+  "scripts": {
+    "run": "php -S localhost:8181 kirby/router.php"
+  },
+  "config": {
+    "optimize-autoloader": true
+  }
 }
