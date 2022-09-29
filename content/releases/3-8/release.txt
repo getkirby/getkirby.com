@@ -25,8 +25,8 @@ https://site.com/@/page/OPJmmoAT1gGocMW
 **And more …**
 - New `$users->files()` method (returning a collection of all files of the users) [#4499](https://github.com/getkirby/kirby/pull/4499)
 - Support for a new `site/config/env.php` file for options that are specific to a deployment: It can override all options from `config.php` and from the config files specific to hostname and server IP address. It can also override the `url` option and control which hostname-specific files will be loaded. [#4580](https://github.com/getkirby/kirby/pull/4580)
-- New `$cache->getOrSet($key, $callback, $minutes)` method: Retrieves the value from cache if possible, if not via callback function and adds it to the cache [#4627](https://github.com/getkirby/kirby/pull/4627)
-- New `$cache->enabled()` method to check if the cache is ready to store values beyond the current request [#4661](https://github.com/getkirby/kirby/pull/4661)
+- New (class: Kirby\Cache\Cache method: getOrSet text:$cache->getOrSet($key, $callback, $minutes)) method: Retrieves the value from cache if possible, if not via callback function and adds it to the cache [#4627](https://github.com/getkirby/kirby/pull/4627)
+- New (class: Kirby\Cache\Cache method: enabled text: $cache->enabled()) method to check if the cache is ready to store values beyond the current request [#4661](https://github.com/getkirby/kirby/pull/4661)
 
 ----
 Enhancements:
@@ -77,7 +77,7 @@ Fixes:
 
 **Core**
 - Calling a `$file` method inside a custom `file::url` component no longer causes an infinite loop [#4274](https://github.com/getkirby/kirby/pull/4274)
-- `Str::except()` does not add superfluous space after stripped tag and before interpunctuation [#4645](https://github.com/getkirby/kirby/pull/4645)
+- `Str::excerpt()` does not add superfluous space after stripped tag and before interpunctuation [#4645](https://github.com/getkirby/kirby/pull/4645)
 - Fixed calling `A::average()` with empty array [#4269](https://github.com/getkirby/kirby/pull/4269)
 - Site search with parameters now returns correct results [#4641](https://github.com/getkirby/kirby/pull/4641)
 - Caching is no longer disabled when the request passes an empty `Authorization` header. [#4634](https://github.com/getkirby/kirby/pull/4634)
@@ -92,10 +92,8 @@ Fixes:
 Breaking:
 
 - Kirby 3.8.0 requires a minimum of PHP 8.0.
-- `uuid` cannot be used as field name or custom method for any page, file, user or site anymore
-- `permalink` cannot be for custom method names for any page or file and content fields with the same name can only be accessed via `$model->content()->get('permalink')`
+- `uuid` and `permalink` cannot be used as field name or custom method for any page, file, user or site anymore. Content fields can only be accessed via e.g. `$model->content()->get('permalink')`
 - The first-level URL path `@` is now blocked
-- Panel drag texts now use UUIDs (Kirbytext) or permalinks (Markdown) for absolute references
 - Kirby's upload sanitizer no longer checks XML files for external links because they can be pretty common in many XML-based formats; if you want to keep the strict behavior, set `Kirby\Sane\Xml::$allowedDomains = []`, set this property to a custom allowlist or write a custom Sane handler for your XML-based format [#4553](https://github.com/getkirby/kirby/pull/4553)
 - Kirby now automatically loads the `site/config/env.php` file; if you already use this file path for a different purpose, please rename the file to a different name [#4580](https://github.com/getkirby/kirby/pull/4580)
 - `A::average()` returns `null` when passed an empty array [#4649](https://github.com/getkirby/kirby/pull/4649)
@@ -114,7 +112,7 @@ Removed `dump` component. Disable `dump()` via `KIRBY_HELPER_DUMP` instead and c
 | Removed | Use instead |
 | --- | --- |
 | `$file->dragText()` | `$file->panel()->dragText()` |
-| `$file->panelIcon()` | `$file->panel()->icon()` |
+| `$file->panelIcon()` | `$file->panel()->image()` |
 | `$file->panelImage()` | `$file->panel()->image()` |
 | `$file->panelOptions()` | `$file->panel()->options()` |
 | `$file->panelPath()` | `$file->panel()->path()` |
@@ -122,7 +120,7 @@ Removed `dump` component. Disable `dump()` via `KIRBY_HELPER_DUMP` instead and c
 | `$file->pickerData()` | `$file->panel()->pickerData()` |
 | `$files->findById()` | `$files->find()` |
 | `$page->dragText()` | `$page->panel()->dragText()` |
-| `$page->panelIcon()` | `$page->panel()->icon()` |
+| `$page->panelIcon()` | `$page->panel()->image()` |
 | `$page->panelId()` | `$page->panel()->id()` |
 | `$page->panelImage()` | `$page->panel()->image()` |
 | `$page->panelOptions()` | `$page->panel()->options()` |
@@ -132,13 +130,13 @@ Removed `dump` component. Disable `dump()` via `KIRBY_HELPER_DUMP` instead and c
 | `$pages->findById()` | `$pages->find()` |
 | `$pages->findByIdRecursive()` | `$pages->find()` |
 | `$pages->findByUri()` | `$pages->find()` |
-| `$site->panelIcon()` | `$site->panel()->icon()` |
+| `$site->panelIcon()` | `$site->panel()->image()` |
 | `$site->panelImage()` | `$site->panel()->image()` |
 | `$site->panelOptions()` | `$site->panel()->options()` |
 | `$site->panelPath()` | `$site->panel()->path()` |
 | `$site->panelUrl()` | `$site->panel()->url()` |
 | `$site->pickerData()` | `$site->panel()->pickerData()` |
-| `$user->panelIcon()` | `$user->panel()->icon()` |
+| `$user->panelIcon()` | `$user->panel()->image()` |
 | `$user->panelImage()` | `$user->panel()->image()` |
 | `$user->panelOptions()` | `$user->panel()->options()` |
 | `$user->panelPath()` | `$user->panel()->path()` |
@@ -146,7 +144,7 @@ Removed `dump` component. Disable `dump()` via `KIRBY_HELPER_DUMP` instead and c
 | `$user->pickerData()` | `$user->panel()->pickerData()` |
 | `Kirby\Panel\Document::customCss()` | `Kirby\Panel\Document::customAsset('panel.css')` |
 | `Kirby\Panel\Document::customJs()` | `Kirby\Panel\Document::customAsset('panel.js')` |
-| `Kirby\Toolkit\Str::isUrl()` | `Kirby\Toolkit\V::url()` |
+| `Kirby\Toolkit\Str::isUrl()` | (link: docs/reference/system/validators/url text: `Kirby\Toolkit\V::url()`) |
 
 ** Changed PHP methods**
 
@@ -161,7 +159,7 @@ Removed `dump` component. Disable `dump()` via `KIRBY_HELPER_DUMP` instead and c
 
 | Removed | Use instead |
 | --- | --- |
-| `Kirby\Cms\Server` | `Kirby\Cms\Environment` |
+| `Kirby\Http\Server` | `Kirby\Http\Environment` |
 
 **Class Aliases**
 
@@ -180,18 +178,16 @@ Removed `dump` component. Disable `dump()` via `KIRBY_HELPER_DUMP` instead and c
 Refactoring:
 
 - Optimized code base to take advantage of PHP 8
-- Using PHP `match` statements instead of `switch` in various places [#4452](https://github.com/getkirby/kirby/pull/4452)
-- Using `|null` for nullable type hints [#4453](https://github.com/getkirby/kirby/pull/4453)
-- Using PHP's new null safe operator [#4455](https://github.com/getkirby/kirby/pull/4455)
-- `Toolkit\A`: Improve type hinting [#4495](https://github.com/getkirby/kirby/pull/4495)
-- Removed unused variables from PHP `catch` statements [#4457](https://github.com/getkirby/kirby/pull/4457)
+  - Using PHP `match` statements instead of `switch` in various places [#4452](https://github.com/getkirby/kirby/pull/4452)
+  - Using `|null` for nullable type hints [#4453](https://github.com/getkirby/kirby/pull/4453)
+  - Using PHP's new null safe operator [#4455](https://github.com/getkirby/kirby/pull/4455)
+  - `Kirby\Toolkit\A`: Improve type hinting [#4495](https://github.com/getkirby/kirby/pull/4495)
+  - Removed unused variables from PHP `catch` statements [#4457](https://github.com/getkirby/kirby/pull/4457)
+  - Use PHP's `instanceof` instead of `is_a()` [#4609](https://github.com/getkirby/kirby/pull/4609)
+- Panel drag texts now use UUIDs (Kirbytext) or permalinks (Markdown) for absolute references
 - Support for default caches (via `Core::caches()`) [#4535](https://github.com/getkirby/kirby/pull/4535)
-- Use PHP's `instanceof` instead of `is_a()` [#4609](https://github.com/getkirby/kirby/pull/4609)
 - Custom login views no longer need to display errors themselves with `k-login-alert`, instead they can `this.$emit("error", error)` [#4577](https://github.com/getkirby/kirby/pull/4577)
-- Updated npm dependencies [#4639](https://github.com/getkirby/kirby/pull/4639)
 - The properties for the system view are now combined in the backend for easier extension and testing [#4658](https://github.com/getkirby/kirby/pull/4658)
-- Adds a new `Option` namespace with refactored options classes
-- Adds several related classes as back port from 3.9 (e.g. in `Blueprint`, `Field`...) - test coverage deactivated until 3.9 for these
 - New blueprint syntax for options (with polyfills for the old syntax):
 
 ```yaml
@@ -224,7 +220,9 @@ options:
   value: "{{ item.twitter }}"
 ```
 
-- `Database\Query`: New third parameter `$mode` for `filterQuery()`  [#4564](https://github.com/getkirby/kirby/pull/4564)
+- Adds a new `Option` namespace with refactored options classes
+- `Kirby\Database\Query`: New third parameter `$mode` for `->filterQuery()`  [#4564](https://github.com/getkirby/kirby/pull/4564)
+- Updated npm dependencies [#4639](https://github.com/getkirby/kirby/pull/4639)
 
 ----
 Deprecated:
@@ -232,7 +230,7 @@ Deprecated:
 - `$kirby->impersonate($user, $callback)`: the `$callback` will not be bound anymore to the `$kirby` instance in Kirby 3.9.0, `$this` inside the callback will refer to the current context and not `$kirby` instead. Using `$this` as `$kirby` inside the callback will throw a deprecation warning in debug mode. [#4498](https://github.com/getkirby/kirby/pull/4498)
 - Blueprints: `headline` option for sections will be removed in a future Kirby version. Use `label` instead. [#4515](https://github.com/getkirby/kirby/pull/4515)
 - `$kirby->server()` has been deprecated and will be removed in Kirby 3.9.0. Use `$kirby->environment()` instead. [#4515](https://github.com/getkirby/kirby/pull/4515)
-- `Kirby\Form\Options`, `Kirby\Form\OptionsApi`, `Kirby\Form\OptionsQuery` have been deprecated and will be removed in Kirby 3.9
+- `Kirby\Form\Options`, `Kirby\Form\OptionsApi`, `Kirby\Form\OptionsQuery` have been deprecated and will be removed in Kirby 3.9. Use their `Kirby\Option` equivalents instead.
 
 ----
 
