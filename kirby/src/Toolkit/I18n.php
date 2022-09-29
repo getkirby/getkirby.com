@@ -99,13 +99,9 @@ class I18n
 	 */
 	public static function formatNumber($number, string $locale = null): string
 	{
-		$locale ??= static::locale();
-
-		$formatter = static::decimalNumberFormatter($locale);
-		if ($formatter !== null) {
-			$number = $formatter->format($number);
-		}
-
+		$locale    ??= static::locale();
+		$formatter   = static::decimalNumberFormatter($locale);
+		$number      = $formatter?->format($number) ?? $number;
 		return (string)$number;
 	}
 
@@ -142,16 +138,16 @@ class I18n
 
 		if (is_array($key) === true) {
 			// try to use actual locale
-			if (isset($key[$locale])) {
+			if (isset($key[$locale]) === true) {
 				return $key[$locale];
 			}
 			// try to use language code, e.g. `es` when locale is `es_ES`
 			$lang = Str::before($locale, '_');
-			if (isset($key[$lang])) {
+			if (isset($key[$lang]) === true) {
 				return $key[$lang];
 			}
 			// use fallback
-			if (is_array($fallback)) {
+			if (is_array($fallback) === true) {
 				return $fallback[$locale] ?? $fallback['en'] ?? reset($fallback);
 			}
 			return $fallback;
@@ -189,7 +185,7 @@ class I18n
 	 * @param string|null $locale
 	 * @return string
 	 */
-	public static function template(string $key, $fallback = null, ?array $replace = null, ?string $locale = null): string
+	public static function template(string $key, $fallback = null, array|null $replace = null, string|null $locale = null): string
 	{
 		if (is_array($fallback) === true) {
 			$replace  = $fallback;
@@ -221,7 +217,7 @@ class I18n
 			return static::$translations[$locale];
 		}
 
-		if (is_a(static::$load, 'Closure') === true) {
+		if (static::$load instanceof Closure) {
 			return static::$translations[$locale] = (static::$load)($locale);
 		}
 
@@ -287,7 +283,7 @@ class I18n
 			return null;
 		}
 
-		if (is_a($translation, 'Closure') === true) {
+		if ($translation instanceof Closure) {
 			return $translation($count);
 		}
 
