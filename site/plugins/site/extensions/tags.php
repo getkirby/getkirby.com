@@ -153,7 +153,7 @@ $tags['docs'] = [
         'vars'
     ],
     'html' => function ($tag) {
-        parse_str($tag->attr('vars'), $vars);
+        parse_str($tag->attr('vars', ''), $vars);
 
         $data = array_merge([
             'page'  => $tag->parent(),
