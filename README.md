@@ -4,7 +4,7 @@ This repo contains the whole <getkirby.com> website.
 
 ## Requirements
 
-- Local development server running PHP 7.4+ (e.g. Apache, nginx, MAMP).
+Local development server running PHP 8.0+ (e.g. Apache, nginx, MAMP).
 
 ## Installation and setup
 
