@@ -1,10 +1,10 @@
 <?php
 
 use Kirby\Cms\Field;
+use Kirby\Cms\Pages;
 use Kirby\Reference\DocBlock;
 use Kirby\Reference\SectionPage;
 use Kirby\Reference\Types;
-use Kirby\Toolkit\Properties;
 use Kirby\Toolkit\Str;
 use \ReferenceClassMethodPage as ReferenceClassMethod;
 
@@ -62,7 +62,10 @@ class ReferenceClassPage extends SectionPage
                 // constructur classmethod pages
                 if ($parameter = $method->getParameters()[0]) {
                     if ($type = $parameter->getType()) {
-                        if ($type->getName() === 'array') {
+                        if (
+                            $type instanceof ReflectionUnionType === false &&
+                            $type->getName() === 'array'
+                        ) {
                             $content['properties'] = $content['properties'] ?? '$' . $parameter->getName();
                         }
                     }

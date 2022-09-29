@@ -8,7 +8,7 @@ return [
         static $parser;
         $parser = $parser ?? new Marsdown();
 
-        if ($options['inline'] === true) {
+        if (($options['inline'] ?? false) === true) {
             return @$parser->line($text);
         }
 
