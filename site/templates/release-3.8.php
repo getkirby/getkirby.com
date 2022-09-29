@@ -67,7 +67,11 @@
   <?php snippet('templates/release-38/object-field') ?>
   <?php snippet('templates/release-38/gallery-block') ?>
   <?php snippet('templates/release-38/changes') ?>
+  <?php snippet('templates/release-38/migration') ?>
   <?php snippet('templates/release-38/contributors') ?>
+  <?php snippet('templates/release-38/release-menu') ?>
 </article>
 
 <?php snippet('templates/releases/get-started') ?>
+
+<?= js('assets/js/templates/release.js') ?>

@@ -1,4 +1,4 @@
-<section id="uuids" class="mb-42">
+<section id="gallery-block" class="mb-42">
 
   <?php snippet('hgroup', [
     'title'    => 'Better gallery block',
