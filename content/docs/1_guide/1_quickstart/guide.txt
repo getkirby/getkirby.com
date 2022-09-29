@@ -57,7 +57,7 @@ When copying files to a remote server via (S)FTP, make sure to copy the `.htacce
             </td>
             <td>
                 <ul>
-                    <li>PHP 7.4, 8.0 or 8.1<br>(PHP 8.0 is recommended)</li>
+                    <li>PHP 8.0 or 8.1<br>(PHP 8.0 is recommended)</li>
                     <li><code>mbstring</code> extension</li>
                     <li><code>curl</code> extension</li>
                     <li><code>ctype</code> extension</li>
