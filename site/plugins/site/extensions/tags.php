@@ -193,7 +193,7 @@ $tags['class'] = $tags['method'] = [
             }
         }
 
-        return Types::format($type, true, $text);
+        return Types::format($type, true, trim($text));
     }
 ];
 
