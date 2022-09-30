@@ -10,25 +10,34 @@
     <img src="<?= $page->image('uuids.png')?->url() ?>" loading="lazy" alt="UUIDs">
   </figure>
 
-  <div class="columns" style="--columns: 3">
-    <div class="release-text-box" style="background: var(--color-light)">
-      <h3>Lorem ipsum</h3>
+  <div class="columns" style="--columns: 6">
+    <div class="release-text-box" style="background: var(--color-light); --span: 3">
+      <h3>Reliabilty built-in</h3>
       <div class="prose">
-        Sed posuere consectetur est at lobortis. Nullam quis risus eget urna mollis ornare vel eu leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        <?= $page->uuidsInfo()->kt() ?>
       </div>
     </div>
-    <div class="release-text-box" style="background: var(--color-light)">
-      <h3>Lorem ipsum</h3>
+    <div class="release-text-box" style="background: var(--color-light); --span: 3">
+      <h3>Permalinks</h3>
       <div class="prose">
-        Sed posuere consectetur est at lobortis. Nullam quis risus eget urna mollis ornare vel eu leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        <?= $page->uuidsPermalinks()->kt() ?>
       </div>
     </div>
-    <div class="release-text-box" style="background: var(--color-light)">
-      <h3>Lorem ipsum</h3>
+    <div class="release-text-box" style="background: var(--color-light); --span: 2">
+      <h3>Updated picker fields</h3>
       <div class="prose">
-        Sed posuere consectetur est at lobortis. Nullam quis risus eget urna mollis ornare vel eu leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        <?= $page->uuidsPickerFields()->kt() ?>
       </div>
     </div>
+
+    <figure class="release-box" style="--aspect-ratio: 1123/682; --span: 4; grid-row: span 2">
+      <img src="<?= $page->image('pickers.png')?->url() ?>" loading="lazy" alt="Updated picker fields">
+    </figure>
+
+    <div class="release-code-box" style="--span: 2">
+      <?= $page->uuidsContentFile()->kt() ?>
+    </div>
+
   </div>
 
 </section>
