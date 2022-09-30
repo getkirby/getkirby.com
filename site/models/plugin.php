@@ -156,7 +156,9 @@ class PluginPage extends Page
             }
         }
 
-        return $version;
+        // normalize the version number to be
+        // without leading `v` character
+        return ltrim($version, 'vV');
     }
 
     public function toJson($onlyIfCached = false)
