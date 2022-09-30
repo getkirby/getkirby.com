@@ -112,6 +112,9 @@ class PluginPage extends Page
 
     public function version($onlyIfCached = false)
     {
+        if ($this->content()->version()->isNotEmpty()) {
+            return $this->content()->version()->value();
+        }
 
         $repo = $this->repository();
 
@@ -154,7 +157,6 @@ class PluginPage extends Page
         }
 
         return $version;
-
     }
 
     public function toJson($onlyIfCached = false)

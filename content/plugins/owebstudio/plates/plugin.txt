@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/plates
 
 ----
 
+Version: 1.1.2
+
+----
+
 Category: templating
 
 ----

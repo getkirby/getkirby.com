@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/accordion-field
 
 ----
 
+Version: 1.3.12
+
+----
+
 Category: fields
 
 ----

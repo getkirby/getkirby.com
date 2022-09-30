@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/detect-adblock
 
 ----
 
+Version: 1.0.2
+
+----
+
 Category: templating
 
 ----

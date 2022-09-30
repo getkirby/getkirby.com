@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/pwa-progressive-web-app
 
 ----
 
+Version: 1.0.2
+
+----
+
 Category: performance
 
 ----

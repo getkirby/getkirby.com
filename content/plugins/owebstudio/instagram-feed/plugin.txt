@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/instagram-feed
 
 ----
 
+Version: 1.1.0
+
+----
+
 Category: social
 
 ----

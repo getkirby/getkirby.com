@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/mollie-merx
 
 ----
 
+Version: 1.2.1
+
+----
+
 Category: ecommerce
 
 ----

@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/image-editor-field
 
 ----
 
+Version: 1.1.0
+
+----
+
 Category: fields
 
 ----

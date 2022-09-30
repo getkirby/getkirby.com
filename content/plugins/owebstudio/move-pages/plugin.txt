@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/move-pages
 
 ----
 
+Version: 2.1.0
+
+----
+
 Category: panel
 
 ----

@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/whatsapp-button
 
 ----
 
+Version: 1.0.2
+
+----
+
 Category: social
 
 ----
