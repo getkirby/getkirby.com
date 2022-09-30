@@ -60,7 +60,7 @@
   'columns' => 2,
   'plugins' => [
     'plugins/ww/merx',
-    'plugins/tristanbg/shopify',
+    'plugins/tristanb/kirby-shopify',
     'plugins/hashandsalt/snipcart',
   ]
 ]) ?>
