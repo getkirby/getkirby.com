@@ -64,6 +64,7 @@
 <article class="release-wrapper">
   <?php snippet('templates/release-38/uuids') ?>
   <?php snippet('templates/release-38/updates') ?>
+  <?php snippet('templates/release-38/php8') ?>
   <?php snippet('templates/release-38/object-field') ?>
   <?php snippet('templates/release-38/gallery-block') ?>
   <?php snippet('templates/release-38/changes') ?>
