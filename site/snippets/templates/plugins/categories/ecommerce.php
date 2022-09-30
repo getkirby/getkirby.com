@@ -6,7 +6,7 @@
   'layout'  => 'cards',
   'columns' => 2,
   'plugins' => [
-    'plugins/wagnerwagner/merx',
+    'plugins/ww/merx',
     'plugins/tristanbg/shopify',
     'plugins/hashandsalt/snipcart',
   ]
