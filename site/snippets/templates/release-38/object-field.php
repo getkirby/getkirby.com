@@ -8,7 +8,7 @@
 
   <div class="columns" style="--columns: 6">
 
-    <figure class="release-box bg-light" style="--aspect-ratio: 1312/578; --span: 4">
+    <figure class="release-box bg-light" style="--aspect-ratio: 2751/1402; --span: 4">
       <img src="<?= $page->image('object-field.png')?->url() ?>" loading="lazy" alt="The new object field">
     </figure>
 

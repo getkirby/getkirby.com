@@ -265,18 +265,17 @@ return [
 ObjectFieldConfig:
 
 ```yaml "/site/blueprints/contact.yml"
-person:
-  label: Person
+contact:
   type: object
-  fields:
+  field:
+    photo:
+      type: files
     name:
       type: text
+    email:
+      type: email
     phone:
       type: tel
-    url:
-      type: url
-    tags:
-      type: tags
 ```
 
 ----
@@ -284,17 +283,18 @@ person:
 ObjectFieldTemplate:
 
 ```php "/site/templates/contact.php"
-<?php $person = $page->person()->toObject(); ?>
+<?php if ($contact = $page->contact()->toObject()): ?>
 <dl>
+  <dt>Photo</dt>
+  <dd><?= $contact->photo()?->toFile()->crop(200) ?></dd>
   <dt>Name</dt>
-  <dd><?= $person->name() ?></dd>
+  <dd><?= $contact->name() ?></dd>
+  <dt>Email</dt>
+  <dd><?= $contact->email() ?></dd>
   <dt>Phone</dt>
-  <dd><?= $person->phone() ?></dd>
-  <dt>URL</dt>
-  <dd><?= $person->url() ?></dd>
-  <dt>Tags</dt>
-  <dd><?= $person->tags() ?></dd>
+  <dd><?= $contact->phone() ?></dd>
 </dl>
+<?php endif ?>
 ```
 
 ----
@@ -315,3 +315,52 @@ MigrationForPluginDevelopers:
     - Note that the plugin name in `index.php` is independent from the Composer package name (i.e. you can continue to use a different Composer package name like `vendor/kirby-someplugin`).
     - If your plugin contains plugin options, changing the plugin name would be a breaking change. If you want to keep your plugin name in `index.php` but the plugin name on [getkirby.com](http://getkirby.com/) differs, please send a pull request to the [getkirby.com repository](https://github.com/getkirby/getkirby.com) or let us know so we can update the site.
 - The update check only works if the plugin’s current version number is set in the `version` field of `composer.json`. Otherwise the message “Could not check for updates” is displayed.
+
+----
+
+UuidsInfo:
+
+With Kirby’s new UUID system, we are building reliable, unique IDs right into the core. Not just for pages, but for files and users. Unique IDs are stored in your content files and efficiently cached on demand.
+
+```php
+<?= $page->uuid() ?>
+⚓️ page://Eesj89FnbMzMMvs0
+
+<?= $file->uuid() ?>
+⚓️ file://VYnAL00UhvmOxq8J
+```
+----
+
+UuidsPermalinks:
+
+Pages and files now have their own permalink that will never change – even if you rename the slug or a filename. The permalinks will automatically redirect to the current URL of the page or file. They are also great shortlinks.
+
+```php
+<?= $page->permalink() ?>
+🔗 https://yoursite.com/@/page/Eesj89FnbMzMMvs0
+
+<?= $file->permalink() ?>
+🔗 https://yoursite.com/@/file/VYnAL00UhvmOxq8J
+```
+
+----
+
+UuidsPickerFields:
+
+All our picker fields now store UUIDs by default. Related pages and files can now safely be changed without breaking relationships.
+
+----
+
+UuidsContentFile:
+
+```
+Cover: file://VYnAL00UhvmOxq8J
+\----
+Author: user://e1UrRWjqFRiu7mWg
+\----
+Related:
+
+- page://hb38HvnQfm8HlQ6e
+- page://jchKH3EufbjC37KR
+- page://jb8i1Sl6cOQOdOE8
+```

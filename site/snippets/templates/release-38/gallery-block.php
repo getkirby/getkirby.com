@@ -16,13 +16,13 @@
     </div>
 
     <div class="release-box bg-light" style="--span: 2">
-      <figure style="--aspect-ratio: 1638/1126">
+      <figure style="--aspect-ratio: 1591/1137">
         <img src="<?= $page->image('gallery-block-1.png')?->url() ?>" loading="lazy" alt="The card design shows the new rounded corners that have been introduced throughout the Panel">
       </figure>
     </div>
 
     <div class="release-box bg-light" style="--span: 2">
-      <figure style="--aspect-ratio: 1646/720">
+      <figure style="--aspect-ratio: 1874/694">
         <img src="<?= $page->image('gallery-block-2.png')?->url() ?>" loading="lazy" alt="The card design shows the new rounded corners that have been introduced throughout the Panel">
       </figure>
     </div>
