@@ -9,6 +9,7 @@ use Kirby\Toolkit\Str;
 
 class PluginPage extends Page
 {
+    protected $latestTag = null;
 
     public function cache()
     {
@@ -35,7 +36,7 @@ class PluginPage extends Page
 
         if (Str::contains($url, 'github')) {
             if ($version) {
-                return $url . '/releases/tag/' . $version;
+                return $url . '/releases/tag/' . $this->tagPrefix() . $version;
             }
 
             return $url . '/releases/latest';
@@ -55,7 +56,7 @@ class PluginPage extends Page
 
         if (Str::contains($url, 'github')) {
             if ($version) {
-                return $url . '/archive/refs/tags/' . $version . '.zip';
+                return $url . '/archive/refs/tags/' . $this->tagPrefix() . $version . '.zip';
             }
 
             return rtrim(Str::replace($url, 'github.com', 'api.github.com/repos'), '/') . '/zipball';
@@ -110,55 +111,18 @@ class PluginPage extends Page
         return $this->images()->findBy('name', 'screenshot');
     }
 
-    public function version($onlyIfCached = false)
+    public function version(bool $onlyIfCached = false): string|null
     {
         if ($this->content()->version()->isNotEmpty()) {
             return $this->content()->version()->value();
         }
 
-        $repo = $this->repository();
-
-        if (Str::contains($repo, 'github') === false) {
-            return false;
+        if ($latestTag = $this->latestTag($onlyIfCached)) {
+            // normalize the version number to be without leading `v`
+            return ltrim($latestTag, 'vV');
         }
 
-        $cacheId = $this->cacheId('version');
-        $version = $this->cache()->get($cacheId);
-
-        if ($version === null) {
-
-            if ($onlyIfCached === true) {
-                return null;
-            }
-
-            $path = Url::path((string)$repo);
-            $headers = ['User-Agent' => 'Kirby'];
-            if ($key = option('github.key')) {
-                $headers['Authorization'] = 'token ' . $key;
-            }
-
-            $response = Remote::get('https://api.github.com/repos/' . $path . '/releases/latest', compact('headers'));
-
-            $version = $response->json()['tag_name'] ?? false;
-
-            // GitHub returns following HTTP response status codes:
-            // 200: releases found
-            // 404: no releases are found
-            if ($response->code() === 200) {
-                // caches for 3 hours if repository releases exists
-                $this->cache()->set($cacheId, $version, 180);
-
-                // remove plugins representation cache
-                $this->kirby()->cache('pages')->remove('plugins.json');
-            } else {
-                // keeps the cache of a non-release repository longer (one day) for performance
-                $this->cache()->set($cacheId, $version, 1440);
-            }
-        }
-
-        // normalize the version number to be
-        // without leading `v` character
-        return ltrim($version, 'vV');
+        return null;
     }
 
     public function toJson($onlyIfCached = false)
@@ -210,5 +174,77 @@ class PluginPage extends Page
         }
 
         return $data;
+    }
+
+    protected function latestTag(bool $onlyIfCached = false): string|null
+    {
+        if ($this->latestTag !== null) {
+            return $this->latestTag;
+        }
+
+        $repo = $this->repository();
+
+        if (Str::contains($repo, 'github') === false) {
+            return null;
+        }
+
+        $cacheId = $this->cacheId('latestTag');
+        $latestTag = $this->cache()->get($cacheId);
+
+        if ($latestTag === null) {
+
+            if ($onlyIfCached === true) {
+                return null;
+            }
+
+            $key = option('github.key');
+            if ($key === null) {
+                return null;
+            }
+
+            $path = Url::path((string)$repo);
+            $headers = [
+                'Authorization' => 'token ' . $key,
+                'User-Agent' => 'Kirby'
+            ];
+
+            $response = Remote::get('https://api.github.com/repos/' . $path . '/releases/latest', compact('headers'));
+
+            $latestTag = $response->json()['tag_name'] ?? false;
+
+            // GitHub returns following HTTP response status codes:
+            // 200: releases found
+            // 404: no releases are found
+            if ($response->code() === 200 && $latestTag) {
+                // caches for 3 hours if repository releases exists
+                $this->cache()->set($cacheId, $latestTag, 180);
+
+                // remove plugins representation cache
+                $this->kirby()->cache('pages')->remove('plugins.json');
+            } else {
+                // keeps the cache of a non-release repository longer (one day) for performance
+                $this->cache()->set($cacheId, $latestTag, 1440);
+            }
+        }
+
+        // normalize the return value
+        // (`false` is only needed to differentiate
+        // between non-existing cache data and errors)
+        if ($latestTag === false) {
+            return null;
+        }
+
+        return $this->latestTag = $latestTag;
+    }
+
+    protected function tagPrefix(): string
+    {
+        $latestTag = $this->latestTag(true);
+
+        if (Str::startsWith($latestTag, 'v') === true) {
+            return 'v';
+        }
+
+        return '';
     }
 }
