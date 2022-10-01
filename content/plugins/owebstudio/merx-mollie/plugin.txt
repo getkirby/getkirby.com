@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/mollie-merx
 
 ----
 
+Changes: https://owebstudio.com/kirby/plugins/mollie-merx/changelog#{{ version }}
+
+----
+
 Version: 1.2.2
 
 ----

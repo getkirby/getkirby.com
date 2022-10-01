@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/plates
 
 ----
 
+Changes: https://owebstudio.com/kirby/plugins/plates/changelog#{{ version }}
+
+----
+
 Version: 1.1.3
 
 ----

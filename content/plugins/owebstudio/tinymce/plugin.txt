@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/tinymce-editor
 
 ----
 
+Changes: https://owebstudio.com/kirby/plugins/tinymce-editor/changelog#{{ version }}
+
+----
+
 Version: 1.1.2
 
 ----

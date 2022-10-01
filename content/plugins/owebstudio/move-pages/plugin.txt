@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/move-pages
 
 ----
 
+Changes: https://owebstudio.com/kirby/plugins/move-pages/changelog#{{ version }}
+
+----
+
 Version: 2.1.1
 
 ----

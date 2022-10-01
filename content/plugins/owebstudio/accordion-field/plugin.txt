@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/accordion-field
 
 ----
 
+Changes: https://owebstudio.com/kirby/plugins/accordion-field/changelog#{{ version }}
+
+----
+
 Version: 1.3.13
 
 ----

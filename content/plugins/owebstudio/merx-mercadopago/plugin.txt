@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/mercado-pago-merx
 
 ----
 
+Changes: https://owebstudio.com/kirby/plugins/mercado-pago-merx/changelog#{{ version }}
+
+----
+
 Version: 1.1.6
 
 ----

@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/pwa-progressive-web-app
 
 ----
 
+Changes: https://owebstudio.com/kirby/plugins/pwa-progressive-web-app/changelog#{{ version }}
+
+----
+
 Version: 1.0.2
 
 ----

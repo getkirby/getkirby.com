@@ -6,6 +6,10 @@ Download: https://owebstudio.com/kirby/plugins/instagram-feed
 
 ----
 
+Changes: https://owebstudio.com/kirby/plugins/instagram-feed/changelog#{{ version }}
+
+----
+
 Version: 1.1.0
 
 ----
