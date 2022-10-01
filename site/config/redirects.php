@@ -62,6 +62,7 @@ return [
     'docs/toolkit/(:all?)'            => 'docs/reference/$1',
     'made-with-kirby-and-love'        => 'love',
     'docs/guide/installation'         => 'docs/guide/quickstart',
+    'docs/guide/blueprints/tabs'      => 'docs/guide/blueprints/layout#tabs',
     'docs/cookbook/migration/sites'   => 'docs/cookbook/setup/migrate-site',
     'docs/cookbook/migration/files'   => 'docs/cookbook/setup/migrate-files',
     'docs/cookbook/migration/users'   => 'docs/cookbook/setup/migrate-users',
