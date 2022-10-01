@@ -1,0 +1,29 @@
+Title: Unique IDs
+
+----
+
+Intro: With Kirby’s unique IDs, we can build persistant relations between pages, files or users while sticking with the power and flexibility of a file-based CMS.
+
+----
+
+Text:
+
+(image: uuids.png)
+
+## What are UUIDs?
+
+## How to use them
+
+### In your blueprints
+
+```yaml
+```
+
+### In your templates
+
+```php
+```
+
+## Permanent URLs
+
+## Caching

@@ -1,4 +1,4 @@
-Title: Query Language
+Title: Query language
 
 ----
 

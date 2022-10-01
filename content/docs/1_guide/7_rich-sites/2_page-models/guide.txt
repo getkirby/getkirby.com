@@ -1,8 +1,8 @@
-Title: Page Models
+Title: Page models
 
 ----
 
-Intro: Page models extend Kirby's default page object. Methods that you define in a page model are available everywhere in Kirby where you call a page of the extended type.
+Intro: Page models extend Kirby's default (class: Kirby\Cms\Page text: $page) object. Methods that you define in a page model are available everywhere in Kirby where you call a page of the extended type.
 
 ----
 
@@ -10,9 +10,7 @@ Text:
 
 ## Introduction
 
-Page models can be registered (link: docs/reference/plugins/extensions/page-models text: in a plugin) or created in the `/site/models` folder.
-
-A page model definition is a PHP file with the same name as the template of the page you want to extend.
+Page models can be registered (link: docs/reference/plugins/extensions/page-models text: in a plugin) or created in the `/site/models` folder. A page model definition is a PHP file with the same name as the template of the page you want to extend.
 
 
 | Template | Page model |
