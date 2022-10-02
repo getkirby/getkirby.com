@@ -74,6 +74,8 @@ Fixes:
 - Uploaded XML files are no longer blocked because they contain links to external domains [#4553](https://github.com/getkirby/kirby/pull/4553)
 - The Panel now suppresses error dialog when redirecting to logout [#4614](https://github.com/getkirby/kirby/pull/4614)
 - We brought back the default slot for `k-items` [#4635](https://github.com/getkirby/kirby/pull/4635)
+- When the structure field is used with limit, the index number now shows correctly [#4695](https://github.com/getkirby/kirby/issues/4695)
+- The Panel now uses the correct favicon in dark mode [#4691](https://github.com/getkirby/kirby/pull/4691)
 
 **Core**
 - Calling a `$file` method inside a custom `file::url` component no longer causes an infinite loop [#4274](https://github.com/getkirby/kirby/pull/4274)
