@@ -22,7 +22,7 @@
     <div class="release-text-box" style="background: var(--color-light); --span: 3">
       <h3>In your blueprints</h3>
       <div class="prose">
-        <p>The object field definition is very similar to a structure field. You can define any set of fields for the object with the fields option.</p>
+        <p>The object field definition is very similar to a structure field. You can define any set of fields for the object with the <code>fields</code> option.</p>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
     <div class="release-text-box" style="background: var(--color-light); --span: 3">
       <h3>In your templates</h3>
       <div class="prose">
-        <p>The result is stored as yaml in the content file and can be used in your templates with the new <code>$field->toObject()</code> method.</p>
+        <p>The result is stored as YAML in the content file and can be used in your templates with the new <code>$field->toObject()</code> method.</p>
       </div>
     </div>
 
