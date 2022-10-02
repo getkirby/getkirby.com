@@ -37,6 +37,7 @@
         <p>Our new update check in the enhanced system view makes it easy to stay informed about the version and security status of Kirby and your installed plugins.</p>
         <p>While feature updates are not always needed for finished sites, keeping an eye on security issues and important security messages is really important to keep your sites secure and healthy.</p>
         <p>The new update check brings this information and more right into the Panel so you can get a quick overview of the status of your site.</p>
+        <p>Fine-tuning the behavior is really simple:</p>
       </div>
     </div>
     <div class="release-code-box" style="grid-area: box2">

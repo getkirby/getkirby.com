@@ -12,7 +12,7 @@
 
   <div class="columns" style="--columns: 6">
     <div class="release-text-box" style="background: var(--color-light); --span: 3">
-      <h3>Reliabilty built-in</h3>
+      <h3>Reliability built-in</h3>
       <div class="prose">
         <?= $page->uuidsInfo()->kt() ?>
       </div>
