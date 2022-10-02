@@ -32,13 +32,13 @@ https://site.com/@/page/OPJmmoAT1gGocMW
 Enhancements:
 
 #### Better error messages for blocks and layout fields [Nolt/313](https://kirby.nolt.io/313)
-![image](https://user-images.githubusercontent.com/3788865/191568958-d316fe04-914d-475b-b4b4-a29051dba721.png)
+(image: errors-blocks.png)
 
 #### The error dialog now displays multiple error lines per field [#4629](https://github.com/getkirby/kirby/pull/4629)
-![image](https://user-images.githubusercontent.com/3788865/191569050-689c96df-9581-4f94-9a22-a5515219ab86.png)
+(image: errors-multiple.png)
 
 #### System view: display "-" for empty plugin table cells [#4444](https://github.com/getkirby/kirby/pull/4444)
-![image](https://user-images.githubusercontent.com/3788865/191569109-bc19cc82-2026-4f90-a701-b246c07d9af5.png)
+(image: system-dashes.png)
 
 #### Easily translate options via an i18n key [#3955](https://github.com/getkirby/kirby/pull/3955)
 ```yaml
