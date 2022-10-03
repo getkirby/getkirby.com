@@ -38,6 +38,10 @@ You can access the page's files using handy methods for each common file type:
 
 Other file types are of course also supported.
 
+<info>
+When you are using `.txt` files for your content (as it is the default), you cannot upload other `.txt` files as they will be mistaken for content files. You can configure this via the (link: docs/reference/system/options/content#content-file-extension text: `content.extension` config option).
+</info>
+
 ## Site files
 
 Files cannot only be uploaded to a page, but also to the site object, i.e. directly into the `/content` folder. To upload images to the site object in the Panel, you have to create a files section in the `site.yml` blueprint.
