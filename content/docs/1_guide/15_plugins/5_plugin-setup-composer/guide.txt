@@ -37,8 +37,9 @@ Composer will now install the library to your `vendor` directory and add the lib
 {
     "name": "getkirby/pluginkit",
     "description": "Kirby Example Plugin",
-    "type": "kirby-plugin",
     "license": "MIT",
+    "type": "kirby-plugin",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "Your Name",
@@ -106,8 +107,9 @@ First step is to add the classes and files to load to your plugin's `composer.js
 {
     "name": "getkirby/pluginkit",
     "description": "Kirby Example Plugin",
-    "type": "kirby-plugin",
     "license": "MIT",
+    "type": "kirby-plugin",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "Your Name",
@@ -115,7 +117,8 @@ First step is to add the classes and files to load to your plugin's `composer.js
         }
     ],
     "require": {
-        "getkirby/composer-installer": "^1.1"
+        "getkirby/composer-installer": "^1.1",
+        "superwoman/superlibrary": "^5.0"
     },
     "autoload": {
         "psr-4": {

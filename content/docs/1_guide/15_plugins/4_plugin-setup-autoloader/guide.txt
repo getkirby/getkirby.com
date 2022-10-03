@@ -30,12 +30,14 @@ The most efficient way to load PHP classes is to use an autoloader. It will dyna
 
 ## How to use an autoloader in your plugins
 
-Kirby ships with the (link: docs/reference/templates/helpers/load text: `load` helper), which is a super simple class autoloader.
+Kirby ships with the `F::loadClasses()` method, which is a super simple class autoloader.
 
 You can call it in your plugin's `index.php` with the list of your classes to load:
 
 ```php "index.php"
-load([
+use Kirby\Filesystem\F;
+
+F::loadClasses([
     'superwoman\\superplugin\\superclass' => 'src/Superclass.php'
 ], __DIR__);
 ```

@@ -21,7 +21,7 @@ Before we get started, let's take a look at the common plugin installation metho
 
 As you can see, each installation method has its own special requirements. But don't worry, all of our plugin setup tutorials are designed with all three methods in mind.
 
-It's important that your published plugin supports *all three* methods, as each of them has advantages and disadvantages. Depending on the personal preference of plugin users and their use-case and project requirements, a different method will be best for them. By supporting all three methods, you can increase your audience by quite a bit. That being said: If your plugin was just built for your own use, you don't need to care about any of this and only need to support the method(s) you personally use.
+It's important that your published plugin supports *all three* methods, as each of them has advantages and disadvantages. Depending on the personal preference of plugin users and their use case and project requirements, a different method will be best for them. By supporting all three methods, you can increase your audience by quite a bit. That being said: If your plugin was just built for your own use, you don't need to care about any of this and only need to support the method(s) you personally use.
 
 So let's get started with the basic steps you need to take care of for published plugins.
 
@@ -79,8 +79,9 @@ The most basic form for a Kirby plugin looks like this:
 {
     "name": "getkirby/pluginkit",
     "description": "Kirby Example Plugin",
-    "type": "kirby-plugin",
     "license": "MIT",
+    "type": "kirby-plugin",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "Your Name",
@@ -95,12 +96,11 @@ The most basic form for a Kirby plugin looks like this:
 
 - The `name` field is required and will later determine the name under which your plugin is available for installation via Composer.
 - The fields `description`, `license` and `authors` are metadata fields. The contents of those fields are not important for plugin installation, but will show up in different places, like on [Packagist](https://packagist.org).
+- The `version` field is used by Kirby's update check. It should always be updated to the latest version of your plugin. Composer recommends to omit this field for published Composer packages, however this only applies to packages that are only ever installed via Composer. Once your plugin is installed via ZIP download or Git submodule, Kirby can only know the current plugin version from this field.
 - The `type` and `require` fields are required for the correct installation of your plugin. By defining the package type as `kirby-plugin`, our `getkirby/composer-installer` package will know that your plugin needs to be installed to the `site/plugins` directory. For that to work, the `getkirby/composer-installer` package needs to be loaded explicitly.
 
 <warning>
 *Both* the `type` field and the `getkirby/composer-installer` dependency are **required** for your plugin to work, otherwise it won't be loaded correctly by Kirby.
-
-Do *not* use the `composer/installers` package, it does not fully support Kirby 3 plugins. Our own `getkirby/composer-installer` was designed with this tutorial in mind.
 </warning>
 
 The Composer installer will install your plugin to `site/plugins/{{ name }}` by default, so in this example to `site/plugins/pluginkit`. If your Composer package name differs from the name of your plugin (e.g. if it is `superwoman/kirby-plugin-superplugin`), you can override the plugin name in your `composer.json`:
@@ -141,4 +141,5 @@ Once your plugin is ready, you can publish it with the following steps:
 1. Push your code to your Git repository.
 2. Create a Git tag with the version number of your release.
 3. Publish your plugin on [Packagist](https://packagist.org) to enable installation via Composer (only needed once, Packagist will pick up new Git tags automatically after that).
-4. If you want to advertise your plugin in the [plugin directory](https://github.com/getkirby/getkirby.com/tree/main/content/plugins) on our (link: https://getkirby.com/plugins text: getkirby.com website), fork the (link: https://github.com/getkirby/getkirby.com text: getkirby.com repo), add the required pages for your plugin, and make a pull request. Or tell everybody about it on the (link: https://forum.getkirby.com text: forum) in the plugins category.
+4. If you want to advertise your plugin in the [plugin directory](https://github.com/getkirby/getkirby.com/tree/main/content/plugins) on our (link: https://getkirby.com/plugins text: getkirby.com website), fork the (link: https://github.com/getkirby/getkirby.com text: getkirby.com repo), add the required pages for your plugin, and make a pull request.
+5. Tell everybody about it on the (link: https://forum.getkirby.com text: forum) in the plugins category.
