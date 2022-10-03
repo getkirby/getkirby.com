@@ -32,7 +32,7 @@ return [
 ];
 ```
 
-This is useful if you only serve your site on a single domain. All URLs will be generated based on the hard-coded base URL, no matter the environment.
+This is useful if you only serve your site on a single domain. All URLs will be generated based on the hard-coded base URL, no matter the environment. We recommend to use this variant for best possible security.
 
 You can also set relative URLs without a host:
 
@@ -46,7 +46,7 @@ return [
 
 In most setups, you will have multiple different allowed base URLs, e.g. for production, staging and development.
 
-If you set the `url` option to a list of allowed URLs, your Kirby installation will automatically pick the right one based on `HTTP_HOST`, `HTTP_FORWARDED`, `HTTP_X_FORWARDED_HOST` or `SERVER_NAME` (whatever is provided) and will make sure to send an error on an invalid host. This is perfect when you cannot fully trust your server configurations on various environments or you work with a reverse proxy.
+If you set the `url` option to a list of allowed URLs, your Kirby installation will automatically pick the right one based on `HTTP_HOST`, `HTTP_FORWARDED`, `HTTP_X_FORWARDED_HOST` or `SERVER_NAME` (whatever is provided) and will make sure to send an error on an invalid host. This is perfect when you work with a reverse proxy in production but still want to allow other domains for testing.
 
 ```php
 return [
@@ -59,6 +59,12 @@ return [
 ```
 
 You can also define base URLs with subfolders here and the subfolders will be validated too.
+
+<warning>
+If you define an allowlist, any of the allowed domains can be used by setting the `Host`, `Forwarded` or `X-Forwarded-*` request headers. If your server doesn't filter these headers, attackers will be able to make Kirby behave like it's running on any of the allowed domains. This can be critical if you use domain-specific config files like `config.example.test.php` to set options that should not be set in production (like the `debug` option).
+
+To prevent such attacks, either ensure that your server filters the mentioned request headers or use an URL override for the production deployment ([see below](#url-override-for-the-production-deployment)).
+</warning>
 
 ## Wildcard option
 
@@ -95,5 +101,29 @@ return [
 ```
 
 <info>
-To ensure security, Kirby loads the domain-specific config files based on the `url` option in the main config file. So even if you set the `url` option again in the domain-specific config file, please make sure that the main config file allows the domain at all – otherwise your domain-specific config is never loaded and will not take effect.
+To ensure security, Kirby loads the domain-specific config files based on the `url` option in the main config file and the `env.php` file (if it exists). So even if you set the `url` option again in the domain-specific config file, please make sure that the main config file allows the domain at all – otherwise your domain-specific config is never loaded and will not take effect.
 </info>
+
+## URL override for the production deployment
+
+To protect against attacks when an allowlist is used, we recommend to pin the specific domain for your production site in the `env.php` config file:
+
+```php "site/config/config.php"
+return [
+  'url' => [
+    'https://example.com',
+    'https://staging.example.com',
+    'http://localhost'
+  ]
+];
+```
+
+```php "site/config/env.php"
+return [
+  'url' => 'https://example.com'
+];
+```
+
+By adding the `env.php` file only on the production server (e.g. during the deployment), Kirby will allow any of the allowed domains on the testing servers, but only allow the production domain on the production server.
+
+Pinning the URL with the `env.php` file also ensures that Kirby will never load any other domain-specific config file.
