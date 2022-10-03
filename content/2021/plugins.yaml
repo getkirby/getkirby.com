@@ -120,10 +120,10 @@
 - plugins/schnti/cachebuster
 - plugins/schnti/cookie
 - plugins/schnti/video
-- plugins/sebastiangreger/climatestrike
-- plugins/sebastiangreger/commentions
-- plugins/sebastiangreger/selfauth
-- plugins/sebastiangreger/sendmentions
+- plugins/sgkirby/climatestrike
+- plugins/sgkirby/commentions
+- plugins/sgkirby/selfauth
+- plugins/sgkirby/sendmentions
 - plugins/steirico/custom-add-fields
 - plugins/steirico/visual-image-crop-field
 - plugins/sylvainjule/annotator
