@@ -1,0 +1,130 @@
+Intro: Fine-tunes the update check
+
+----
+
+Text:
+
+## Update check for Kirby
+
+Kirby's update check suggests both security updates and feature updates by default.
+
+### Security-only mode
+
+In security-only mode, Kirby will only suggest the minimum possible security update. If your installed version is not affected by known vulnerabilities, no updates will be suggested:
+
+```php
+<?php
+
+return [
+    'updates' => [
+        'kirby' => 'security'
+    ]
+];
+```
+
+### Disabled checks
+
+You can also disable the update checks for Kirby entirely:
+
+```php
+<?php
+
+return [
+    'updates' => [
+        'kirby' => false
+    ]
+];
+```
+
+<warning>
+Note that Kirby will no longer display security warnings in this mode. If you disable the update check, we strongly recommend to keep an eye on the news in (link: https://chat.getkirby.com/ text: Discord) or on (link: https://twitter.com/getkirby text: Twitter) to keep your installation secure.
+</warning>
+
+## Update check for plugins
+
+All installed plugins are checked for updates by default.
+
+### Configuration for all plugins
+
+You can disable the update check for all plugins like this:
+
+```php
+<?php
+
+return [
+    'updates' => [
+        'plugins' => false
+    ]
+];
+```
+
+### Configuration by plugin
+
+You can also customize the behavior for each plugin using wildcards. This is useful if you use custom or private plugins that are not published on the Kirby website:
+
+```php
+<?php
+
+return [
+    'updates' => [
+        'plugins' => [
+            'yourcustom/plugin' => false,
+            'another-vendor/*'  => false
+        ]
+    ]
+];
+```
+
+Any plugin that isn't matched by the configured list will have its update checks enabled. If you want to default to a disabled update check, you can configure the option like this:
+
+```php
+<?php
+
+return [
+    'updates' => [
+        'plugins' => [
+            '*'           => false,
+            'some/plugin' => true,
+            'vendor/*'    => true
+        ]
+    ]
+];
+```
+
+## Disable all update checks
+
+You can disable any kind of update or security check for both Kirby and plugins like this:
+
+```php
+<?php
+
+return [
+    'updates' => false
+];
+```
+
+If you want to keep the security checks for Kirby but disable update checks for plugins, use:
+
+```php
+<?php
+
+return [
+    'updates' => 'security'
+];
+```
+
+## Custom update check endpoint
+
+The update and security checks request their raw data from our CDN at `https://assets.getkirby.com`.
+
+If you want to use your own proxy or custom update check endpoint, you can override that base URL:
+
+```php
+<?php
+
+Kirby\Cms\System\UpdateStatus::$host = 'https://your-url.com';
+
+return [
+    // ...
+];
+```
