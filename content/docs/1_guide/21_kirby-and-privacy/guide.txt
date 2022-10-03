@@ -41,20 +41,20 @@ To protect the Panel login against brute-force attacks, Kirby temporarily stores
 
 ### `csrf()` helper
 
-If you use the (link: docs/reference/templates/helpers/csrf text: `csrf` helper), Kirby will create a session cookie so that the helper can validate the CSRF token in a later request.
+If you use the (link: docs/reference/templates/helpers/csrf text: `csrf()` helper), Kirby will create a session cookie so that the helper can validate the CSRF token in a later request. This session cookie is required to enable the protection against CSRF attacks.
 
 ### Licensing
 
-To register your license, the Panel connects to our licensing server **once** to verify your license. When you register your license, the following information is transmitted to the server:
+To register your license, the Kirby backend connects to our licensing server **once** to verify your license. When you register your license, the following information is transmitted to the server:
 
-- the entered license key
-- the email address connected to the license key
-- the index URL (domain and path) of the Kirby installation
+- the entered license key,
+- the email address connected to the license key and
+- the index URL (domain and path) of the Kirby installation.
 
 No other personal or site data is transmitted to our server.
 
 <info>
-If you don't want the Panel to connect to our server, you can register your site manually and download license files directly from (link: https://licenses.getkirby.com text: licenses.getkirby.com).
+If you don't want Kirby to connect to our server, you can register your site manually and download license files directly from (link: https://licenses.getkirby.com text: licenses.getkirby.com).
 </info>
 
 ### Update checks
@@ -89,6 +89,6 @@ Your sites also process personal data once a contact form is submitted, a blog c
 
 Data might also get stored and processed by your hosting provider. What sort of data they store and process depends on your contract with the hosting provider.
 
-****
+## Questions?
 
 If you have any further technical questions about Kirby and privacy, do not hesitate to contact us via the (link: https://forum.getkirby.com text: Kirby forum).
