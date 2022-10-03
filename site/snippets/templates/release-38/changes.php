@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div class="release-padded-box bg-light">
+    <div id="changes-deprecated" class="release-padded-box bg-light">
       <h3 class="h3 mb-6">Deprecated</h3>
       <div class="prose text-sm">
         <?= $page->deprecated()->kt() ?>
