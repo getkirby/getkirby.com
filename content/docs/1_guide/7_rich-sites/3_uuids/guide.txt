@@ -12,18 +12,37 @@ Text:
 
 ## What are UUIDs?
 
+Kirby is built on (link: docs/guide/content/introduction text: just files and folders) which is great for flexibility in structuring your content, performance and rapid development. But since our folder structure also defines the URLs and paths, we can encounter situations where we need to reference another page reliably - but as soon as the folder structure changes, our reference does not work anymore. So what can we do?
+
+Kirby ships with UUIDs built in - universally unique identifiers - for pages, files and users. They look something like `page://Eesj89FnbMzMMvs0` and can be used in many parts of the system to identify a specific page, file or user. When using a UUID for your reference, those ties to other pages won't break when the folder structure changes.
+
+<success>
+Native support for UUIDs was released with Kirby 3.8
+</success>
+
+
 ## How to use them
 
 ### In your blueprints
 
 ```yaml
+venue:
+  type: select
+  options:
+    type: query
+    query: page('venues').children
+    value: "{{ page.uuid }}"
 ```
 
 ### In your templates
 
 ```php
+$page->uuid()
 ```
 
 ## Permanent URLs
 
-## Caching
+```html
+<a href="<?= $page->permalink() ?>">Permalink</a>
+```
+
