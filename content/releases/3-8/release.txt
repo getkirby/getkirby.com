@@ -95,6 +95,8 @@ Fixes:
 ----
 Breaking:
 
+(docs: releases/breaking-changes vars: version=8)
+
 - Kirby 3.8.0 requires a minimum of PHP 8.0.
 - `uuid` and `permalink` cannot be used as field name or custom method for any page, file, user or site anymore. Content fields can only be accessed via e.g. `$model->content()->get('permalink')`.
 - The first-level URL path `@` is now blocked.
