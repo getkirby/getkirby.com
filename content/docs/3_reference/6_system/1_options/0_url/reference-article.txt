@@ -1,4 +1,4 @@
-Intro: Set the base URL for the site.
+Intro: Sets the base URL for the site
 
 ----
 
