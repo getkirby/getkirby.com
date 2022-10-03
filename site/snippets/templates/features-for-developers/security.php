@@ -16,7 +16,7 @@
       <h3 class="font-bold"><a href="/security">A good track record &rarr;</a></h3>
       <div class="prose text-sm">
         <p>Kirby is constantly audited by security researchers for big client projects. We are very transparent with their findings and possible security incidents. You can find past security incidents on our security page.</p>
-        <p>Our response time for security patches is normally within 24 hours. We react immediately and communicate issues clearly and openly to our community.</p>
+        <p>Our response time for vulnerability reports is normally within 24 hours. We react immediately and communicate issues clearly and openly to our community.</p>
       </div>
     </article>
     <article class="p-6 bg-light">
