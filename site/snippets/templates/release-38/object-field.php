@@ -37,7 +37,7 @@
     <div class="release-text-box" style="background: var(--color-light); --span: 3">
       <h3>In your templates</h3>
       <div class="prose">
-        <p>The result is stored as YAML in the content file and can be used in your templates with the new <code>$field->toObject()</code> method.</p>
+        <p>The result is stored as YAML in the content file and can be used in your templates with the new <a class="type-link" href="/docs/reference/templates/field-methods/to-object"><code class="type type-method">$field->toObject()</code></a> method.</p>
       </div>
     </div>
 
