@@ -8,7 +8,7 @@
 
   <div class="columns mb-6" style="--columns: 3">
 
-    <div class="release-text-box" style="background: var(--color-light)">
+    <div class="release-text-box">
       <h3>Better settings</h3>
       <div class="prose">
         The gallery block features new ratio, crop and caption fields.
@@ -27,7 +27,7 @@
       </figure>
     </div>
 
-    <div class="release-text-box" style="background: var(--color-light)">
+    <div class="release-text-box">
       <h3>Better preview</h3>
       <div class="prose">
         The gallery block preview displays images according to the selected ratio for an even more realistic preview experience.

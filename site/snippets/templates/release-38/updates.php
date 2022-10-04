@@ -27,7 +27,7 @@
 
   <div class="v38-updates-grid">
 
-    <figure class="release-box bg-light" style="--aspect-ratio: 1488/836; grid-area: figure">
+    <figure class="release-box bg-light" style="--aspect-ratio: 2473/1594; grid-area: figure">
       <img src="<?= $page->image('updates.png')?->url() ?>" loading="lazy" alt="The system view now shows available updates for Kirby and installed plugins">
     </figure>
 

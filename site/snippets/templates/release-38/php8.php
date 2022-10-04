@@ -14,7 +14,7 @@
       </div>
     </figure>
 
-    <div class="release-text-box" style="background: var(--color-light)">
+    <div class="release-text-box">
       <h3>There’s no time to dwell in the past</h3>
       <div class="prose">
         <p>Kirby has already supported PHP 8.0 and 8.1 right after their release. PHP&nbsp;8 not only brings an incredible performance boost but also language features that really move Kirby forward.</p>

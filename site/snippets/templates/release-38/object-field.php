@@ -8,16 +8,20 @@
 
   <div class="columns" style="--columns: 6">
 
-    <figure class="release-box bg-light" style="--aspect-ratio: 2751/1402; --span: 4">
-      <img src="<?= $page->image('object-field.png')?->url() ?>" loading="lazy" alt="The new object field">
+    <figure class="release-box bg-light" style="--aspect-ratio: 2751/1402; --span: 6">
+      <img src="<?= $page->image('object-field-1.png')?->url() ?>" loading="lazy" alt="The new object field opens in a new drawer to edit fields comfortably">
     </figure>
 
-    <div class="release-text-box" style="--span: 2">
+    <div class="release-text-box" style="background: var(--color-white); --span: 2">
       <h3>Objectively awesome</h3>
       <div class="prose">
         The new object field allows to create data objects. This is super handy for more complex settings, isolated entities or nested data.
       </div>
     </div>
+
+    <figure class="release-box bg-light" style="--aspect-ratio: 1794/497; --span: 4">
+      <img src="<?= $page->image('object-field-2.png')?->url() ?>" loading="lazy" alt="The new object field shows data in a very compact way">
+    </figure>
 
     <div class="release-text-box" style="background: var(--color-light); --span: 3">
       <h3>In your blueprints</h3>
