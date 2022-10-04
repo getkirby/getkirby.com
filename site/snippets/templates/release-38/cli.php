@@ -1,4 +1,4 @@
-<section id="php8" class="mb-42">
+<section id="cli" class="mb-42">
 
   <?php snippet('hgroup', [
     'title'    => 'Kirby CLI',
