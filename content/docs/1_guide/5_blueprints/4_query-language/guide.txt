@@ -61,8 +61,9 @@ In this example we use the query language to fetch options for a select field. Y
 mySelect:
   label: My Select Box
   type: select
-  options: query
-  query: site.children.listed
+  options:
+    type: query
+    query: site.children.listed
 ```
 
 #### 2. To create string templates
@@ -85,17 +86,18 @@ In various field types (tags, select, multiselect, checkboxes, radio, files, pag
 tags:
     label: Tags
     type: tags
-    options: query
-    query:
-      fetch: page.siblings
+    options:
+      type: query
+      query: page.siblings
       text: " {{ page.title }}"
       value: "{{ page.uri }}"
 
 mySelect:
   label: My Select Box
   type: select
-  options: query
-  query: site.children.listed.template('note') # get all children with the note template
+  options:
+    type: query
+    query: site.children.listed.template('note') # get all children with the note template
 
 ```
 
@@ -178,11 +180,11 @@ Property access (`parent.property`) will behave like this:
 mySelect:
   label: My Select Box
   type: select
-  options: query
-  query:
-    fetch: site.taxonomy.split
-    text: "{{ arrayItem.value.upper }}"
-    value: "{{ arrayItem.value.slug }}"
+  options:
+    type: query
+    query: site.taxonomy.split
+    text: "{{ item.value.upper }}"
+    value: "{{ item.value.slug }}"
 ```
 
 ### Structure items
@@ -191,11 +193,11 @@ mySelect:
 mySelect:
   label: My Select Box
   type: select
-  options: query
-  query:
-    fetch: site.contactoptions.toStructure
-    text: "{{ structureItem.name }}"
-    value: "{{ structureItem.twitter }}"
+  options:
+    type: query
+    query: site.contactoptions.toStructure
+    text: "{{ item.name }}"
+    value: "{{ item.twitter }}"
 ```
 
 ### Pages
@@ -204,9 +206,9 @@ mySelect:
 mySelect:
   label: My Select Box
   type: select
-  options: query
-  query:
-    fetch: site.children.published
+  options:
+    type: query
+    query: site.children.published
     text: "{{ page.year }} - {{ page.title.upper }}"
     value: "{{ page.slug }}"
 ```
@@ -218,9 +220,9 @@ mySelect:
 mySelect:
   label: My Select Box
   type: select
-  options: query
-  query:
-    fetch: site.files
+  options:
+    type: query
+    query: site.files
     text: "{{ file.name }}"
     value: "{{ file.filename }}"
 ```
@@ -231,9 +233,9 @@ mySelect:
 mySelect:
   label: My Select Box
   type: select
-  options: query
-  query:
-    fetch: kirby.users.filterBy("role", "client")
+  options:
+    type: query
+    query: kirby.users.filterBy("role", "client")
     text: "{{ user.email }}"
     value: "{{ user.id }}"
 ```
@@ -244,9 +246,9 @@ mySelect:
 mySelect:
   label: My Select Box
   type: select
-  options: query
-  query:
-    fetch: page.text.toBlocks.filterBy("type", "heading")
+  options:
+    type: query
+    query: page.text.toBlocks.filterBy("type", "heading")
     text: "{{ block.text }}"
     value: "{{ block.id }}"
 ```

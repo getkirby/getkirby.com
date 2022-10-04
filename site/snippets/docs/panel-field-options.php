@@ -9,8 +9,9 @@ fields:
   category:
     label: Category
     type: <?= $field . PHP_EOL ?>
-    options: query
-    query: site.children.published
+    options:
+      type: query
+      query: site.children.published
 ```
 
 The example above will turn all published main pages of the site into options. The title of each page will be used as the text of the option and the page id will be used as the stored value.
@@ -44,15 +45,15 @@ query: site.index.pluck("tags", ",", true)
 
 ### Custom text and value
 
-To customize the displayed text or the stored value, you can be more specific when defining the query: The `query` option gets three suboptions, where `fetch` takes over the options query. `text` and `value` can be defined with the help of our string template language to get exactly what you want as the  result.
+To customize the displayed text or the stored value, you can be more specific when defining the query: `text` and `value` can be defined with the help of our string template language to get exactly what you want as the result.
 
 ```yaml
 category:
   label: Category
   type: <?= $field . PHP_EOL ?>
-  options: query
-  query:
-    fetch: site.children.published
+  options:
+    type: query
+    query: site.children.published
     text: "{{ page.year }}"
     value: "{{ page.slug }}"
 ```
@@ -63,9 +64,9 @@ As in the example above, all custom fields of a page can be accessed. You can ev
 category:
   label: Category
   type: <?= $field . PHP_EOL ?>
-  options: query
-  query:
-    fetch: site.children.published
+  options:
+    type: query
+    query: site.children.published
     text: "{{ page.year }} - {{ page.title.upper }}"
     value: "{{ page.slug }}"
 ```
@@ -94,21 +95,22 @@ With a query it is not only possible to fetch options from pages, users, files o
 category:
   label: Category
   type: <?= $field . PHP_EOL ?>
-  options: query
-  query: site.taxonomy.split
+  options:
+    type: query
+    query: site.taxonomy.split
 ```
 
-Of course you get the same flexibility with those array values, to modify the result text and stored value. Each item in the array will automatically be converted into an object with a `key` and `value` property. Those properties are regular Kirby content fields and you can use all (link: docs/reference/templates/field-methods text: field methods) to work with them further. Items in the array need to be referenced as `arrayItem`
+Of course you get the same flexibility with those array values, to modify the result text and stored value. Each item in the array will automatically be converted into an object with a `key` and `value` property. Those properties are regular Kirby content fields and you can use all (link: docs/reference/templates/field-methods text: field methods) to work with them further. Items in the array need to be referenced as `item`
 
 ```yaml
 category:
   label: Category
   type: <?= $field . PHP_EOL ?>
-  options: query
-  query:
-    fetch: site.taxonomy.split
-    text: "{{ arrayItem.value.upper }}"
-    value: "{{ arrayItem.value.slug }}"
+  options:
+    type: query
+    query: site.taxonomy.split
+    text: "{{ item.value.upper }}"
+    value: "{{ item.value.slug }}"
 ```
 
 ### A custom separator
@@ -119,8 +121,9 @@ If the values in a field are separated by something other than a comma, you can 
 category:
   label: Category
   type: <?= $field . PHP_EOL ?>
-  options: query
-  query: page.categories.split(";")
+  options:
+    type: query
+    query: page.categories.split(";")
 ```
 
 ### Options from structure field
@@ -142,33 +145,34 @@ twitter:
       type: text
 ```
 
-We can fetch the fields by using the keyword `structureItem`:
+We can fetch the fields by using the keyword `item`:
 
 ```yaml
 category:
   label: Category
   type: <?= $field . PHP_EOL ?>
-  options: query
-  query:
-    fetch: site.contactoptions.toStructure
-    text: "{{ structureItem.name }}"
-    value: "{{ structureItem.twitter }}"
+  options:
+    type: query
+    query: site.contactoptions.toStructure
+    text: "{{ item.name }}"
+    value: "{{ item.twitter }}"
 ```
 
 
 ## Options via API
 
-If the option queries are not enough or you need to pluck an external source for option data, you can use the API setting.
+If the option queries are not enough or you need to pluck an external source for option data, you can use the API type.
 
 ```yaml
 category:
   label: Category
   type: <?= $field . PHP_EOL ?>
-  options: api
-  api: https://your-options-api.com/options.json
+  options:
+    type: api
+    url: https://your-options-api.com/options.json
 ```
 
-By default, the API setting expects that the JSON endpoint returns an option array as shown above in the manual option setting.
+By default, the API type expects that the JSON endpoint returns an option array as shown above in the manual option setting.
 
 You can be much more specific with the endpoint though and describe which kind of data to fetch and what to convert to text and value - pretty much as with the option queries.
 
@@ -194,18 +198,18 @@ This can be done with our template language:
 category:
   label: Category
   type: <?= $field . PHP_EOL ?>
-  options: api
-  api:
+  options:
+    type: api
     url: https://example.com/companies.json
-    fetch: Companies
+    query: Companies
     text: "{{ item.name }}"
     value: "{{ item.name.slug }}"
 ```
 
-With the `fetch` attribute we can define where to start in the JSON document. This can even go down nested structures or sort entries:
+With the `query` attribute we can define where to start in the JSON document. This can even go down nested structures or sort entries:
 
 ```yaml
-fetch: Companies.sortBy("name", "desc")
+query: Companies.sortBy("name", "desc")
 ```
 
 The JSON document is turned into a Kirby structure and thus can be queried and manipulated just like any other data within Kirby.
@@ -269,16 +273,16 @@ This would produce the following PHP array of options:
 
 Instead of hard-coding an absolute URL into your blueprint, it's often better to have more control over the API URL. Especially when you are working with different environments (ie. local, staging, production)
 
-The URL option of the API setup can also be modified by using the string template language:
+The URL option of the API type can also be modified by using the string template language:
 
 ```yaml
 category:
   label: Category
   type: <?= $field . PHP_EOL ?>
-  options: api
-  api:
+  options:
+    type: api
     url: "{{ site.url }}/my-api/companies.json"
-    fetch: Companies
+    query: Companies
     text: "{{ item.name }}"
     value: "{{ item.name.slug }}"
 ```

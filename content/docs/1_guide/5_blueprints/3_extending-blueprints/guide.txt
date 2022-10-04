@@ -79,9 +79,9 @@ fields:
     type: users
   tags:
     type: tags
-    options: query
-    query:
-      fetch: site.tags.toStructure.sortBy("name", "asc")
+    options:
+      type: query
+      query: site.tags.toStructure.sortBy("name", "asc")
       text: "{{ structureItem.name }}"
       value: "{{ structureItem.value }}"
 ```
