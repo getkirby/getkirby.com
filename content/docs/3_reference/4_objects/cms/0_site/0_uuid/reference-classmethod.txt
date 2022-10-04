@@ -1,0 +1,7 @@
+Guide: uuids
+
+----
+
+Intro:
+
+Returns the site's Unique ID which is always `site://`.

@@ -1,0 +1,7 @@
+Guide: uuids
+
+----
+
+Intro:
+
+Returns the page's Unique ID.

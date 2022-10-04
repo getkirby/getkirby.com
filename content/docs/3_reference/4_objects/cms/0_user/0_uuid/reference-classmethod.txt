@@ -1,0 +1,7 @@
+Guide: uuids
+
+----
+
+Intro:
+
+Returns the user's Unique ID.

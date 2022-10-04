@@ -15,7 +15,7 @@
     <div class="release-text-box" style="background: var(--color-white); --span: 2">
       <h3>Objectively awesome</h3>
       <div class="prose">
-        The new object field allows to create data objects. This is super handy for more complex settings, isolated entities or nested data.
+        <?= $page->objectFieldInfo()->kt() ?>
       </div>
     </div>
 
