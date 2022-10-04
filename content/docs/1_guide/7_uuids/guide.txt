@@ -2,6 +2,10 @@ Title: Unique IDs
 
 ----
 
+Description: Build persistant relations between pages, files or users
+
+----
+
 Intro: With Kirby’s unique IDs, we can build persistant relations between pages, files or users while sticking with the power and flexibility of a file-based CMS.
 
 ----
