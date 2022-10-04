@@ -30,14 +30,14 @@ Always use full sentences (except in lists).
 
 We use a lot of names and terms on the site. Usage of those names should be consistent. We follow this set of rules:
 
-- Everything that is a "trademark" of some sorts is written like intended by the author.
-  `Composer`, `GitHub`, `HTTP Basic auth`, `JavaScript`, `Markdown`, `MySQL`, `SmartyPants`, `SQLite`, `Vue.js`, `YouTube`, `Whoops`
+- Everything that is a "trademark" of some sorts is written like intended by the author:
+  > Composer, GitHub, HTTP Basic auth, JavaScript, Markdown, MySQL, SmartyPants, SQLite, Vue.js, YouTube, Whoops
 - Our own names are written like this:
-  `Kirby`, `Panel`, `KirbyTag`, `KirbyTags`, `KirbyText`, `Starterkit`, `Plainkit`, `Pluginkit`
-- Acronyms are always written like they are commonly used (typically all-caps).
-  `API`, `CSS`, `HTTP`, `JS`, `REST`, `SQL`, `URL`, `YAML`
-- Everything that is not a trademark/name or acronym is lowercased (if not at the beginning of a sentence). This also applies to terms that have a "special" meaning in Kirby, but are not listed above.
-  `template`, `snippet`, `blueprint`, `field method`, …
+  > Kirby, Panel, KirbyTag, KirbyTags, KirbyText, Starterkit, Plainkit, Pluginkit
+- Acronyms are always written like they are commonly used (typically all-caps):
+  > API, CSS, HTTP, JS, REST, SQL, URL, YAML
+- Everything that is not a trademark/name or acronym is lowercased (if not at the beginning of a sentence). This also applies to terms that have a "special" meaning in Kirby, but are not listed above:
+  > template, snippet, blueprint, field method, …
 
 
 ## Formatting & Structure
