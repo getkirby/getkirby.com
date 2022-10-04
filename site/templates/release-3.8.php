@@ -28,7 +28,7 @@
   }
 
   .release-text-box {
-    background: var(--color-white);
+    background: var(--color-light);
   }
 
   .release-padded-box h3,
@@ -66,6 +66,7 @@
   <?php snippet('templates/release-38/updates') ?>
   <?php snippet('templates/release-38/php8') ?>
   <?php snippet('templates/release-38/object-field') ?>
+  <?php snippet('templates/release-38/cli') ?>
   <?php snippet('templates/release-38/gallery-block') ?>
   <?php snippet('templates/release-38/changes') ?>
   <?php snippet('templates/release-38/migration') ?>

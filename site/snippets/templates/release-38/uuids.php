@@ -11,19 +11,19 @@
   </figure>
 
   <div class="columns" style="--columns: 6">
-    <div class="release-text-box" style="background: var(--color-light); --span: 3">
+    <div class="release-text-box" style="--span: 3">
       <h3>Reliability built-in</h3>
       <div class="prose">
         <?= $page->uuidsInfo()->kt() ?>
       </div>
     </div>
-    <div class="release-text-box" style="background: var(--color-light); --span: 3">
+    <div class="release-text-box" style="--span: 3">
       <h3>Permalinks</h3>
       <div class="prose">
         <?= $page->uuidsPermalinks()->kt() ?>
       </div>
     </div>
-    <div class="release-text-box" style="background: var(--color-light); --span: 2">
+    <div class="release-text-box" style="--span: 2">
       <h3>Updated picker fields</h3>
       <div class="prose">
         <?= $page->uuidsPickerFields()->kt() ?>
