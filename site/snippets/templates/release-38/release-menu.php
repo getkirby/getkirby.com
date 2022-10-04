@@ -4,6 +4,7 @@
     <li><a href="#updates">Update checks</a></li>
     <li><a href="#php8">PHP 8+</a></li>
     <li><a href="#object-field">Object field</a></li>
+    <li><a href="#cli">CLI</a></li>
     <li><a href="#gallery-block">Gallery block</a></li>
     <li><a href="#changes">Changelog</a></li>
     <li><a href="#migration">Migration</a></li>
