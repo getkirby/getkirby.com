@@ -1,7 +1,7 @@
 <section id="php8" class="mb-42">
 
   <?php snippet('hgroup', [
-    'title'    => 'PHP 8+',
+    'title'    => '<del style="color: var(--color-red-600)">PHP 7.4+</del>&nbsp;&nbsp;PHP 8+',
     'subtitle' => 'Use the potential of a modern PHP environment',
     'mb'       => 12
   ]) ?>
