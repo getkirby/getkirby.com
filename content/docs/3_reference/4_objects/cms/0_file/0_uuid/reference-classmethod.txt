@@ -1,0 +1,7 @@
+Guide: uuids
+
+----
+
+Intro:
+
+Return the fle's Unique ID.

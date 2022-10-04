@@ -231,6 +231,18 @@ Deprecated:
 
 ----
 
+UpdatesInfo:
+
+Our new update check in the enhanced system view makes it easy to stay informed about the version and security status of Kirby and your installed plugins.
+
+While feature updates are not always needed for finished sites, keeping an eye on security issues and important security messages is really important to keep your sites secure and healthy.
+
+The new update check brings this information and more right into the Panel so you can get a quick overview of the status of your site.
+
+(link: docs/reference/system/options/updates text: Fine-tuning the behavior) is really simple:
+
+----
+
 UpdatesConfig:
 
 ```php
@@ -256,6 +268,12 @@ return [
   ]
 ];
 ```
+
+----
+
+ObjectFieldInfo:
+
+The (link: docs/reference/panel/fields/object text: new object field) allows to create data objects. This is super handy for more complex settings, isolated entities or nested data.
 
 ----
 
@@ -298,7 +316,7 @@ ObjectFieldTemplate:
 
 UuidsInfo:
 
-With Kirby’s new UUID system, we are building reliable, unique IDs right into the core. Not just for pages, also for files and users. Unique IDs are stored in your content files and efficiently cached on demand for fast lookup.
+With (link: docs/guide/uuids text: Kirby’s new UUID system), we are building reliable, unique IDs right into the core. Not just for pages, also for files and users. Unique IDs are stored in your content files and efficiently cached on demand for fast lookup.
 
 ```php
 <?= $page->uuid() ?>
@@ -311,7 +329,7 @@ With Kirby’s new UUID system, we are building reliable, unique IDs right into 
 
 UuidsPermalinks:
 
-Pages and files now have their own permalink that will never change – even if you rename the slug or a filename. The permalinks will automatically redirect to the current URL of the page or file. They are also great shortlinks.
+Pages and files now have their (link: docs/guide/uuids#permanent-urls text: own permalink) that will never change – even if you rename the slug or a filename. The permalinks will automatically redirect to the current URL of the page or file. They are also great shortlinks.
 
 ```php
 <?= $page->permalink() ?>
