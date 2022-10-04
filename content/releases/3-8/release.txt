@@ -67,6 +67,7 @@ Fixes:
 - We brought back the default slot for `k-items` [#4635](https://github.com/getkirby/kirby/pull/4635)
 - When the structure field is used with limit, the index number now shows correctly [#4695](https://github.com/getkirby/kirby/issues/4695)
 - The Panel now uses the correct favicon in dark mode [#4691](https://github.com/getkirby/kirby/pull/4691)
+- Reduced impact of frequent lock requests on the server load [#4741](https://github.com/getkirby/kirby/pull/4741)
 
 **Core**
 - Calling a `$file` method inside a custom `file::url` component no longer causes an infinite loop [#4274](https://github.com/getkirby/kirby/pull/4274)
@@ -79,6 +80,7 @@ Fixes:
 - Language routes that return a falsy value are only called once now [#4305](https://github.com/getkirby/kirby/pull/4305)
 - `$translation->exists()` now works for virtual pages [#4674](https://github.com/getkirby/kirby/pull/4674)
 - Database queries can now filter by `'AND'` and `'OR'` as actual values (via `->where()`, `->andWhere()` and `->orWhere()`) [#4668](https://github.com/getkirby/kirby/pull/4668)
+- Prevent race condition errors for `Dir::make()` [#4745](https://github.com/getkirby/kirby/issues/4745)
 
 ----
 Breaking:
