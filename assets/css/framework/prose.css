@@ -1,5 +1,5 @@
 :root {
-  --prose-code-bg: rgba(0,0,0, .1);
+  --prose-code-bg: rgba(0, 0, 0, 0.1);
   --prose-pre-bg: var(--color-black);
   --prose-size: var(--text-xl);
   --prose-color-text: var(--color-gray-700);
@@ -72,7 +72,6 @@
   margin-top: 1.5em;
 }
 
-
 /* Lists */
 .prose li::marker {
   color: var(--prose-color-highlight);
@@ -95,7 +94,7 @@
 }
 .prose ol > li {
   list-style: decimal-leading-zero;
-  padding-left: .25em;
+  padding-left: 0.25em;
 }
 .prose ol > li::marker {
   font-variant-numeric: tabular-nums;
@@ -155,9 +154,9 @@
 .prose :not(pre) > code {
   font-family: var(--font-mono);
   display: inline-flex;
-  font-size: .825em;
+  font-size: 0.825em;
   max-width: 100%;
-  padding: 0 .5em;
+  padding: 0 0.5em;
   border-radius: 3px;
   background: var(--prose-code-bg);
   color: var(--prose-color-highlight);
@@ -178,13 +177,18 @@
 }
 .prose > blockquote p {
   border-left: 2px solid #000;
-  padding-left: .75rem;
+  padding-left: 0.75rem;
   max-width: 20em;
   font-size: 1.25em;
   line-height: var(--leading-snug);
   color: var(--prose-color-highlight);
 }
-
+.prose li > blockquote {
+  margin: 0.5em 0;
+  font-size: 0.85em;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--color-gray-300);
+}
 
 /** Horizontal Rule **/
 .hr {
@@ -252,7 +256,7 @@
   position: absolute;
 }
 .since::before {
-  top: calc(.75rem - 1px);
+  top: calc(0.75rem - 1px);
   left: -1.5rem;
   bottom: 0;
   border: 1px solid var(--color-gray-300);
@@ -260,7 +264,7 @@
   width: 1.5rem;
 }
 .since[open]::after {
-  bottom: -.5rem;
+  bottom: -0.5rem;
   left: 0;
   width: 1px;
   margin-top: -1px;
@@ -269,7 +273,7 @@
 }
 .since:not([open])::after {
   content: "• • •";
-  bottom: -.825rem;
+  bottom: -0.825rem;
   color: var(--color-gray-300);
   left: 0;
 }
@@ -283,7 +287,7 @@
   background: var(--color-light);
   border: 1px solid var(--color-gray-300);
   border-radius: 3rem;
-  margin-left: -.75rem;
+  margin-left: -0.75rem;
 }
 .since summary.new {
   background: var(--color-yellow-400);
