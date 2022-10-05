@@ -8,12 +8,16 @@
       "box2";
   }
 
-  @media screen and (min-width: 45rem) {
+  @media screen and (min-width: 60rem) {
     .v38-updates-grid {
       grid-template-columns: 1fr 1fr;
       grid-template-areas: "figure figure"
         "box1 box2";
     }
+  }
+
+  .v38-updates-grid .release-code-box .code-toolbar {
+    height: 100%;
   }
 </style>
 
