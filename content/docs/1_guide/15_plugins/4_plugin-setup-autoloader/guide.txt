@@ -35,8 +35,6 @@ Kirby ships with the `F::loadClasses()` method, which is a super simple class au
 You can call it in your plugin's `index.php` with the list of your classes to load:
 
 ```php "index.php"
-use Kirby\Filesystem\F;
-
 F::loadClasses([
     'superwoman\\superplugin\\superclass' => 'src/Superclass.php'
 ], __DIR__);
