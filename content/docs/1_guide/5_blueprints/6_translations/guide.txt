@@ -72,6 +72,18 @@ fields:
           de: Fotografie
 ```
 
+<since v="3.8.0">
+You can also use (link: docs/guide/languages/custom-language-variables text: custom language variables) via the `*` key:
+
+```yaml
+options:
+  architecture:
+    *: category.architecture
+  photography:
+    *: category.photography
+```
+</since>
+
 ## Text of headline, info or help text
 
 ```yaml
