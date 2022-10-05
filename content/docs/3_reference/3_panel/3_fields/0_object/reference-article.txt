@@ -1,0 +1,108 @@
+Title: Object
+
+----
+
+Intro:
+
+Structured object input, which stores properties as YAML.
+
+----
+
+Guide: blueprints/fields
+
+----
+
+Text:
+
+The new object field allows to create data objects. This is handy for more complex settings, isolated entities or nested data.
+
+A typical example would be contact data for an author in a blog article, multiple layout settings for images in your template, custom settings for a theme, SEO configuration etc.
+
+(image: object.png)
+
+## Example
+
+```yaml
+fields:
+  contact:
+    type: object
+    fields:
+      photo:
+        type: files
+      name:
+        type: text
+      email:
+        type: email
+      phone:
+        type: tel
+```
+
+Such an object will be stored in the content file like this:
+
+```yaml
+contact:
+  photo:
+    - file://hb38HvnQfm8HlQ6e
+  name: Nandi Peters
+  email: nandi@example.com
+  phone: 1234 5678
+```
+
+## Field properties
+
+(field-options: object)
+
+## Fields
+
+You can define any number of fields and use the same (link: docs/reference/panel/fields text: field types listed):
+
+(reference: panel/fields)
+
+## Default values
+
+You can set default values for an object field which will prepopulate the field when a new page is created.
+
+```yaml
+fields:
+  contact:
+    type: object
+    default:
+      name: Nandi Peters
+      email: nandi@example.com
+      phone: 1234 5678
+    fields:
+      photo:
+        type: files
+      name:
+        type: text
+      email:
+        type: email
+      phone:
+        type: tel
+```
+
+## How to use in templates/snippets
+
+To access a object field in your templates, you can use the [`toObject()`](/docs/reference/templates/field-methods/to-object) method.
+
+Let's say we wanted to render the `contact` data from above in a template:
+
+```php
+<?php if ($contact = $page->contact()->toObject()): ?>
+<dl>
+  <dt>Photo</dt>
+  <dd><?= $contact->photo()?->toFile()->crop(200) ?></dd>
+  <dt>Name</dt>
+  <dd><?= $contact->name() ?></dd>
+  <dt>Email</dt>
+  <dd><?= $contact->email() ?></dd>
+  <dt>Phone</dt>
+  <dd><?= $contact->phone() ?></dd>
+</dl>
+<?php endif ?>
+```
+
+<info>
+If you nest object fields inside another object field, block field or structure field, you have to call the `toObject()` method on the nested fields as well and then access the nested object properties like above.
+</info>
+
