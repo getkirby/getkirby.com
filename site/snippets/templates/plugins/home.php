@@ -30,8 +30,8 @@
   'columns' => 2,
   'plugins' => [
     'plugins/lukasleitsch/blade',
-    'plugins/mgfagency/twig',
-    'plugins/clicktonext/plates',
+    'plugins/amteich/twig',
+    'plugins/owebstudio/plates',
     'plugins/bnomei/handlebars',
   ]
 ]) ?>

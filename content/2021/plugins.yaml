@@ -85,7 +85,7 @@
 - plugins/medienbaecker/cropselect
 - plugins/medienbaecker/likes
 - plugins/medienbaecker/modules
-- plugins/mgfagency/twig
+- plugins/amteich/twig
 - plugins/michnhokn/cookie-banner
 - plugins/mullema/date-format
 - plugins/mullema/image-clip
