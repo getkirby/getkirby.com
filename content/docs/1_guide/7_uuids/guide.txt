@@ -1,12 +1,12 @@
-Title: Unique IDs
+Title: Unique IDs & Permalinks
 
 ----
 
-Description: Build persistant relations between pages, files or users
+Description: Build persistent relations between pages, files or users
 
 ----
 
-Intro: With Kirby’s unique IDs, we can build persistant relations between pages, files or users while sticking with the power and flexibility of a file-based CMS.
+Intro: Kirby’s unique IDs make it easy to refer to any page, file or user, no matter where on the site they are stored. Use them to build persistent and reliable relations for links, embedding and more – even after moving or renaming the target.
 
 ----
 
@@ -16,18 +16,45 @@ Text:
 
 ## What are UUIDs?
 
-Kirby is built on (link: docs/guide/content/introduction text: just files and folders) which is great for flexibility in structuring your content, performance and rapid development. But since our folder structure also defines the URLs and paths, we can encounter situations where we need to reference another page reliably - but as soon as the folder structure changes, our reference does not work anymore. So what can we do?
+Kirby is built on (link: docs/guide/content/introduction text: just files and folders), which is great for flexibility in structuring your content, performance and rapid development. Referring to a page or file from elsewhere by its file path works, but makes the site structure pretty rigid and takes away a lot of the flexibility of the content structure. Because as soon as a page or file gets renamed or moved, its file path changes – and immediately the reference to it will break.
 
-Kirby ships with UUIDs built in - universally unique identifiers - for pages, files and users. They look something like `page://Eesj89FnbMzMMvs0` and can be used in many parts of the system to identify a specific page, file or user. When using a UUID for your reference, those ties to other pages won't break when the folder structure changes.
+UUIDs (universally unique identifiers) are an additional way to refer to any model in Kirby – be it a page, a file or a user. UUIDs look something like `page://Eesj89FnbMzMMvs0`. In contrast to file paths, UUIDs never change. They are randomly generated when the model gets first created. It is so unlikely that two models ever share the same UUID that they can be considered unique (in fact, it will take millions of years to reach a 1% probability of a collision on any given site). These properties make UUIDs the ideal candidate for robust and persistent references.
+
+UUIDs can be used in many parts of the system to identify a specific page, file or user. When using a UUID for your reference, those ties to other pages won't break when the folder structure changes.
 
 <success>
-Native support for UUIDs was released with Kirby 3.8
+Native support for UUIDs was released with Kirby 3.8.
 </success>
-
 
 ## How to use them
 
-### In your blueprints
+UUIDs are supported throughout the system wherever a model gets selected or queried.
+
+### In picker fields
+
+The `files`, `pages` and `users` fields support UUIDs out of the box. Every page or file that you select will be referenced by its UUID automatically (unless you disable the UUID mode with the field's `store` property).
+
+Let's consider an example blueprint with various picker fields:
+
+(image: pickers.png)
+
+The resulting content file will look like this:
+
+```
+Cover: file://VYnAL00UhvmOxq8J
+\----
+Author: user://e1UrRWjqFRiu7mWg
+\----
+Related:
+
+- page://hb38HvnQfm8HlQ6e
+- page://jchKH3EufbjC37KR
+- page://jb8i1Sl6cOQOdOE8
+```
+
+### In option fields
+
+Option fields can also be configured to store the UUIDs, much like the picker fields:
 
 ```yaml
 venue:
@@ -40,13 +67,22 @@ venue:
 
 ### In your templates
 
-```php
-$page->uuid()
-```
+All of Kirby's PHP methods and helpers support querying by UUID. This includes:
+
+- Helper functions such as `page()` and `url()`
+- Field methods such as `->toFiles()`, `->toPages()` and `->toUsers()`
+- Collection methods like `$pages->find()`
+
+Kirby will handle the lookup for you. It will also automatically detect if you are passing a file path or UUID (every UUID starts with a URI protocol like `page://`).
 
 ## Permanent URLs
 
-```html
+Because UUIDs never change and are unique across the site, they are perfect for permanent shortlinks (permalinks) that can be used for sharing.
+
+The path of permalinks in Kirby always begins with the `@` sign, for example `https://example.com/@/page/hb38HvnQfm8HlQ6e`.
+
+You can access the permalink with the `$model->permalink()` method:
+
+```php
 <a href="<?= $page->permalink() ?>">Permalink</a>
 ```
-
