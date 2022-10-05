@@ -1,4 +1,4 @@
-<!-- <div class="mb-6">
+<div class="mb-6">
   <div class="container">
     <?php snippet('layouts/topbar', [
       'icon'   => '🚀',
@@ -8,7 +8,7 @@
       'active' => $page->is('releases/3-8')
     ]) ?>
   </div>
-</div> -->
+</div>
 
 <header class="header mb-24">
   <?php snippet('layouts/skipper') ?>
