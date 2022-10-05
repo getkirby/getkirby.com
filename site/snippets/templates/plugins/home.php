@@ -7,7 +7,6 @@
     'plugins/fabianmichael/markdown-field',
     'plugins/sylvainjule/color-palette',
     'plugins/belugachris/navigation',
-    'plugins/oblikstudio/json-field',
     'plugins/sylvainjule/locator',
     'plugins/sylvainjule/illustrated-radio',
   ]
