@@ -293,3 +293,38 @@ With this simple addition, the API URL will always refer to the main URL of the 
 url: "{{ kirby.option('optionApiUrl') }}/companies.json"
 ```
 
+## Translating options
+
+You can provide different translations of your options' text that are shown depending on the user's Panel language:
+
+```yaml
+options:
+  summer:
+    en: Summer
+    de: Sommer
+  autumn:
+    en: Fall
+    de: Herbst
+  winter:
+    en: Winter
+    de: Winter
+  spring:
+    en: spring
+    de: Frühling
+```
+
+<since v="3.8.0">
+If you prefer to use (link: docs/guide/languages/custom-language-variables text: custom language variables), you can do that via the `*` key:
+
+```yaml
+options:
+  summer:
+    *: season.summer
+  autumn:
+    *: season.autumn
+  winter:
+    *: season.winter
+  spring:
+    *: season.spring
+```
+</since>
