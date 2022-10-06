@@ -4,6 +4,8 @@ Subtitle: Rhampholeon
 ----
 Version: 3.8
 ----
+ogimage: opengraph.png
+----
 Link: https://github.com/getkirby/kirby/releases/tag/3.8.0
 ----
 Features:
