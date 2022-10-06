@@ -1,0 +1,42 @@
+Title: Commands
+
+----
+
+Text:
+
+You can register new commands for the (link: https://github.com/getkirby/cli text: Kirby CLI) in your plugins with the `commands` extension.
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('your/plugin', [
+  'commands' => [
+    'your-plugin:test' => [
+      'command' => function ($cli) {
+        $cli->success('My first plugin command')
+      }
+    ]
+  ]
+]);
+```
+
+Once your plugin is installed, the command can be executed with …
+
+```
+kirby your-plugin:test
+```
+
+## Namespaces
+
+We recommend to use such a namespace as in the example above.
+
+```
+your-plugin:test
+your-plugin:another-task
+```
+
+Otherwise you might run into collisions with other commands from plugins. Core, local and global commands in the CLI always get registered first. If there's a command with the same name, your plugin command will be ignored.
+
+## CLI Documentation
+
+Please check out the CLI docs to find out how to create your commands, work with arguments and more.
+
+<https://github.com/getkirby/cli>
