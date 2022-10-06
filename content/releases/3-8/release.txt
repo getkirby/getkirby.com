@@ -21,6 +21,24 @@ Features:
 - Support for a new `site/config/env.php` file for options that are specific to a deployment: It can override all options from `config.php` and from the config files specific to hostname and server IP address. It can also override the `url` option and control which hostname-specific files will be loaded. [#4580](https://github.com/getkirby/kirby/pull/4580)
 - New (class: Kirby\Cache\Cache method: getOrSet text:$cache->getOrSet($key, $callback, $minutes)) method: Retrieves the value from cache if possible, if not via callback function and adds it to the cache [#4627](https://github.com/getkirby/kirby/pull/4627)
 - New (class: Kirby\Cache\Cache method: enabled text: $cache->enabled()) method to check if the cache is ready to store values [#4661](https://github.com/getkirby/kirby/pull/4661)
+- New option to disable the output from `$kirby->render()` via `$_ENV['KIRBY_RENDER'] = false`
+- New `commands` root which is set to `site/commands` by default
+- New ability to define CLI commands in Kirby plugins:
+
+```php
+<?php
+
+Kirby::plugin('getkirby/commander', [
+    'commands' => [
+        'commander' => [
+            'command' => function ($cli) {
+                $cli->success('Nice command!');
+            }
+        ]
+    ]
+]);
+
+```
 
 ----
 Enhancements:
@@ -103,6 +121,7 @@ Breaking:
 - `$translation->exists()` now returns `true` for translations without an actual content file but where an content array has been provided
 - The deprecated `master` branch of the Kirby repository was deleted. If you install Kirby via Git, e.g. as a submodule, please use the `main` branch instead.
 - Database queries: subsequent `->where()` clauses don't support passing the mode (`AND`|`OR`) as last parameter anymore, but will interpret these as actual values to filter against. Use `->andWhere()` or `->orWhere()` instead. [#4668](https://github.com/getkirby/kirby/pull/4668)
+- `Helpers::handleErrors()`'s 2nd parameter now only determines whether the error is suppressed, its 3rd parameter defines what is returned when an error is suppressed
 
 **Removed deprecated code [#4478](https://github.com/getkirby/kirby/pull/4478) [#4515](https://github.com/getkirby/kirby/pull/4515)**
 
@@ -224,6 +243,14 @@ options:
 - Support for default caches (via `Core::caches()`) [#4535](https://github.com/getkirby/kirby/pull/4535)
 - `Kirby\Database\Query`: New third parameter `$mode` for `->filterQuery()`  [#4564](https://github.com/getkirby/kirby/pull/4564)
 - Added a new `Option` namespace with refactored options classes [#4624](https://github.com/getkirby/kirby/pull/4624)
+- New syntax for `Helpers::handleErrors()`:
+```php
+Helpers::handleErrors(
+    fn () => // error to suppress,
+    fn (int $errno, string $errstr): bool => // condition when to suppress error
+    $value // return value for when the error is suppressed
+);
+```
 
 ----
 Deprecated:
