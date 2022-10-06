@@ -1,0 +1,28 @@
+Text:
+
+## Disabling the render method
+
+`$kirby->render()` can be disabled temporarily by setting
+
+```php
+$_ENV['KIRBY_RENDER'] = false;
+```
+
+This needs to be set before `$kirby->render()` is called.
+
+As an example, this is used by the (link: https://github.com/getkirby/cli text: Kirby CLI) to load the `index.php` without getting any output. This way, the CLI can access the correct `$kirby` instance with all custom roots and options.
+
+If one of your independent PHP scripts need access to the `$kirby` instance in a similar way, you can require the `index.php` like this …
+
+```php "/example.php"
+<?php
+
+$_ENV['KIRBY_RENDER'] = false;
+
+// Kirby will not render anything
+require __DIR__ . '/index.php';
+
+// You get full access to the $kirby object
+// with all custom settings
+dump($kirby);
+```
