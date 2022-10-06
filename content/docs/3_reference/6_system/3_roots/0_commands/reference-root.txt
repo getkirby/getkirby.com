@@ -1,0 +1,5 @@
+Title: commands
+
+----
+
+Intro: The directory where all your custom (link: https://github.com/getkirby/cli text: Kirby CLI) commands are stored.
