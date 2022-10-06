@@ -15,7 +15,7 @@
   'columns' => 2,
   'plugins' => [
     'plugins/adspectus/date-extended',
-    'plugins/mullema/date-format'
+    'plugins/mullema/k3-date-format'
   ]
 ]) ?>
 

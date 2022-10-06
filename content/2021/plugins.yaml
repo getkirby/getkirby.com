@@ -87,9 +87,9 @@
 - plugins/medienbaecker/modules
 - plugins/amteich/twig
 - plugins/michnhokn/cookie-banner
-- plugins/mullema/date-format
-- plugins/mullema/image-clip
-- plugins/mullema/panel-view-extended
+- plugins/mullema/k3-date-format
+- plugins/mullema/k3-image-clip
+- plugins/mullema/k3-panel-view-extended
 - plugins/mzur/form
 - plugins/mzur/uniform
 - plugins/oblik/git
