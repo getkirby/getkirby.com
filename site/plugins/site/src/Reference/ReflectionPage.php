@@ -7,6 +7,7 @@ use Kirby\Cms\Field;
 use Kirby\Cms\Page;
 use Kirby\Cms\Template;
 use Kirby\Reference\Types;
+use ReflectionUnionType;
 
 abstract class ReflectionPage extends Page
 {
@@ -137,7 +138,7 @@ abstract class ReflectionPage extends Page
 
     public function isImmutable(): bool
     {
-        return strpos($this->returns(), 'static') !== false || 
+        return strpos($this->returns(), 'static') !== false ||
                strpos($this->returns(), 'self') !== false;
     }
 
@@ -164,7 +165,7 @@ abstract class ReflectionPage extends Page
             ]
         ];
     }
-    
+
     /**
      * Get the name of this entry
      *
@@ -184,7 +185,7 @@ abstract class ReflectionPage extends Page
      */
     public function onGitHub(string $path = ''): Field
     {
-        
+
         if (empty($path) === false) {
             $url  = option('github.url') . '/kirby/tree/' . App::version();
             $url .= '/' . $path;
@@ -223,9 +224,9 @@ abstract class ReflectionPage extends Page
             } else {
                 $doc = null;
             }
-        
+
             if ($type = $parameter->getType()) {
-                $type = $type->getName();
+                $type = $this->typeName($type);
             } elseif ($doc) {
                 $type = (string)$doc->getType();
             }
@@ -235,7 +236,7 @@ abstract class ReflectionPage extends Page
             $optional = false;
 
             if ($parameter->isOptional() === true) {
-                
+
                 if ($parameter->isDefaultValueAvailable()) {
                     $default = $parameter->getDefaultValue();
                     $default = var_export($default, true);
@@ -244,7 +245,7 @@ abstract class ReflectionPage extends Page
                 } else {
                     $default = 'null';
                 }
-                
+
                 $optional  = true;
                 $param    .= ' = ' . $default;
             }
@@ -275,6 +276,21 @@ abstract class ReflectionPage extends Page
         return false;
     }
 
+    public function typeName($type): string
+    {
+        if ($type instanceof ReflectionUnionType) {
+            $types = [];
+
+            foreach ($type->getTypes() as $reflectionType) {
+                $types[] = $reflectionType->getName();
+            }
+
+            return implode('|', $types);
+        }
+
+        return $type->getName();
+    }
+
     public function returns(): ?string
     {
         if ($this->returns !== false) {
@@ -284,8 +300,9 @@ abstract class ReflectionPage extends Page
         if ($reflection = $this->reflection()) {
             // First, try to get return type from reflection
             if ($reflection->hasReturnType() === true) {
+
                 $type = $reflection->getReturnType();
-                $name = $type->getName();
+                $name = $this->typeName($type);
 
                 if ($type->allowsNull() === true) {
                     $name =  $name . '|null';
@@ -305,7 +322,7 @@ abstract class ReflectionPage extends Page
 
         return $this->returns = null;
     }
-    
+
 
     /**
      * Returns a string of all return types
@@ -315,7 +332,7 @@ abstract class ReflectionPage extends Page
     public function returnType(): ?string
     {
         if ($return = $this->returns()) {
-            return Types::factory($return, $this); 
+            return Types::factory($return, $this);
         }
 
         return null;
@@ -337,11 +354,11 @@ abstract class ReflectionPage extends Page
 
         return parent::since();
     }
-    
+
     /**
      * If a dedicated template exist, use it.
      * Otherwise fall back to `reference-article` template.
-     * 
+     *
      * @return \Kirby\Cms\Template
      */
     public function template(): Template
@@ -350,7 +367,7 @@ abstract class ReflectionPage extends Page
         if ($this->intendedTemplate() === parent::template()) {
             return parent::template();
         }
-        
+
         return $this->kirby()->template('reference-article');
     }
 
