@@ -4,7 +4,7 @@
   'title'   => 'Panel',
   'layout'  => 'hero',
   'plugins' => [
-    'plugins/microman/form-block'
+    'plugins/microman/formblock'
   ]
 ]) ?>
 

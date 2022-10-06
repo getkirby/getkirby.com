@@ -71,7 +71,7 @@
   'layout'  => 'cards',
   'plugins' => [
     'plugins/jongacnik/fields-block',
-    'plugins/microman/form-block',
+    'plugins/microman/formblock',
     'plugins/microman/grid-block',
   ]
 ]) ?>

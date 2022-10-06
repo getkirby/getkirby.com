@@ -75,7 +75,7 @@ You create custom block types from the same three components. If you don't need 
 Our community of Kirby developers have created cool blocks field plugins, so make sure to check them out:
 
 - (link: plugins/microman/map text: Map-Suite: A geolocation field & map block)
-- (link: plugins/microman/form-block text: Form block: Create forms easily from building blocks)
+- (link: plugins/microman/formblock text: Form block: Create forms easily from building blocks)
 - (link: plugins/microman/grid-block text: Grid block: Use layouts right within any blocks field)
 - (link: plugins/jongacnik/fields-block text: Fields block: Kirby block preview plugin to directly render block fields, allowing for inline editing)
 - (link: plugins/adspectus/feedreader text: FeedReader: Integrate a feed using a block)
@@ -83,7 +83,7 @@ Our community of Kirby developers have created cool blocks field plugins, so mak
 
 ## Already made your own?
 
-Don't hesitate to (link: docs/guide/plugins/plugin-setup-basic#publish-your-plugin text: share them with the world). 
+Don't hesitate to (link: docs/guide/plugins/plugin-setup-basic#publish-your-plugin text: share them with the world).
 
 ## More
 
