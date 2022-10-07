@@ -1,15 +1,3 @@
-<div class="mb-6">
-  <div class="container">
-    <?php snippet('layouts/topbar', [
-      'icon'   => '🚀',
-      'title'  => 'Kirby 3.7 is here!',
-      'button' => 'Learn more',
-      'link'   => '/releases/3.7',
-      'active' => $page->is('releases/3-7')
-    ]) ?>
-  </div>
-</div>
-
 <header class="header mb-24">
   <?php snippet('layouts/skipper') ?>
   <div class="container">

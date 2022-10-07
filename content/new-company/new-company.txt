@@ -1,7 +1,0 @@
-Title: Our new team company
-
-----
-
-OgImage: opengraph.jpg
-
-

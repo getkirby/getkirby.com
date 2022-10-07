@@ -1,5 +1,0 @@
-Caption:
-
-**Custom Block types**
-
-Use our built-in block types or create your own blocks. It's as simple as writing a bit of YAML to get started.

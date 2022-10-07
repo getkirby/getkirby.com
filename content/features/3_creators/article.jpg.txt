@@ -1,5 +1,0 @@
-Template: content-type
-----
-Caption: Article
-----
-Text: Kirby offers a perfect, distraction-free writing interface for your articles with the brand-new blocks field.
