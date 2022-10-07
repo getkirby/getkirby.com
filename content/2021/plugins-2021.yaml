@@ -4,8 +4,6 @@
 - plugins/bnomei/boost
 - plugins/bnomei/htmlpurifier
 - plugins/bnomei/mailjet
-- plugins/bnomei/page-memcached
-- plugins/bnomei/page-sqlite
 - plugins/bnomei/pageviewcounter
 - plugins/bnomei/php-cachedriver
 - plugins/bnomei/plopfile

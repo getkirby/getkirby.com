@@ -3,7 +3,7 @@
   'icon'    => 'lock',
   'title'   => 'Panel',
   'layout'  => 'hero',
-  'plugins' => ['plugins/bnomei/doctor']
+  'plugins' => []
 ]) ?>
 
 <?php snippet('templates/plugins/section', [

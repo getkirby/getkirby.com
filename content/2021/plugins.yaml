@@ -6,11 +6,8 @@
 - plugins/benediktengel/google-calendar
 - >
   plugins/blankogmbh/git-commit-and-push-content
-- plugins/bnomei/autoid
-- plugins/bnomei/bolt
 - plugins/bnomei/cloudconvert
 - plugins/bnomei/content-security-policy
-- plugins/bnomei/doctor
 - plugins/bnomei/dotenv
 - plugins/bnomei/feed
 - plugins/bnomei/field-ecco
@@ -25,7 +22,6 @@
 - plugins/bnomei/random
 - plugins/bnomei/redirects
 - plugins/bnomei/robots-txt
-- plugins/bnomei/srcset
 - plugins/bnomei/stopwatch
 - plugins/bvdputte/autopublish
 - plugins/bvdputte/bettersearch
