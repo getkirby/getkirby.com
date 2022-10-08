@@ -4,7 +4,7 @@ Title: Email with attachments
 
 Text:
 
-This recipe extends the (link: text: basic contact form) example, but this time the user can attach some files. As an example we use a job application form.
+This recipe extends the (link: https://getkirby.com/docs/cookbook/forms/basic-contact-form text: basic contact form) example, but this time the user can attach some files. As an example we use a job application form.
 
 To follow this example, your content structure should look like this:
 
