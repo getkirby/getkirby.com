@@ -2,6 +2,10 @@ Title: Blocks
 
 ----
 
+Guide: page-builder
+
+----
+
 Intro:
 
 The (glossary: Panel) offers a wide range of default block types that you can use in blocks and layout fields to create rich content.
