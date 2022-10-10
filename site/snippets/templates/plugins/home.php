@@ -18,7 +18,7 @@
   'title'   => 'SEO',
   'layout'  => 'hero',
   'plugins' => [
-    'plugins/diesdasdigital/metaknight'
+    'plugins/diesdasdigital/meta-knight'
   ]
 ]) ?>
 
