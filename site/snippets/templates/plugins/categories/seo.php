@@ -1,10 +1,13 @@
 <?php snippet('templates/plugins/section', [
   'id'      => 'panel',
   'icon'    => 'seo',
+  'hero'    => true,
   'title'   => 'Panel',
-  'layout'  => 'hero',
+  'layout'  => 'cards',
+  'columns' => 2,
   'plugins' => [
-    'plugins/diesdasdigital/metaknight'
+    'plugins/diesdasdigital/meta-knight',
+    'plugins/fabianmichael/meta',
   ]
 ]) ?>
 
