@@ -1,0 +1,18 @@
+Title: Meta
+
+----
+
+Repository: https://github.com/fabianmichael/kirby-meta
+
+----
+
+Category: seo
+
+----
+
+Subcategory: panel
+
+----
+
+Description: All-in-one solution to all of your SEO/OpenGraph/JSON-LD/sitemap.xml needs.
+
