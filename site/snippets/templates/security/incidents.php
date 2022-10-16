@@ -6,16 +6,12 @@
 .security-incidents th {
   font-size: var(--text-sm);
 }
-
-.affected-column {
-  width: 17%;
-}
 </style>
 
 <div class="table security-incidents">
   <table>
     <tr>
-      <th class="affected-column">Affected</th>
+      <th>Affected</th>
       <th class="w-100%">Description</th>
       <th>Severity</th>
       <th>CVE ID</th>
@@ -24,7 +20,7 @@
     <?php foreach ($incidents as $incident): ?>
     <tr>
       <td>
-        <?= $incident->affected()->escape() ?>
+        <?= str_replace(['||', ' - '], ['<br>', '&nbsp;-&nbsp;'], $incident->affected()->escape()) ?>
       </td>
       <td>
         <?= $incident->description() ?>
