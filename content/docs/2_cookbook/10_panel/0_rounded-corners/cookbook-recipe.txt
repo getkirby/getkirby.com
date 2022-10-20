@@ -50,6 +50,6 @@ return [
 And that's it. Visit the Panel, refresh your browser and enjoy the sharp edges.
 
 <info>
-The name of the custom CSS file and it's location is totally up to you.
+The name of the custom CSS file and its location is totally up to you.
 </info>
 
