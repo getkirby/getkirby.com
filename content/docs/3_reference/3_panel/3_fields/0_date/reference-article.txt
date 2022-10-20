@@ -85,7 +85,7 @@ Keep in mind that the full date is still [stored in the content file](#how-to-us
 
 ## Time settings
 
-To enable time imput, set the `time` option to `true`:
+To enable time input, set the `time` option to `true`:
 
 ```yaml
 fields:
