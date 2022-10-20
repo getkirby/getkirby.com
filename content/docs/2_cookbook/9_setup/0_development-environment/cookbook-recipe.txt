@@ -6,7 +6,7 @@ Text:
 
 The easiest way to start testing and developing with Kirby is in a local development environment: you can easily edit your files locally, immediately see changes in the browser, and deploy your site on a public server when you are ready.
 
-Kirby has only very few (link: text: server requirements), and you have therefore many options when choosing the development environment that is right for you–no matter if you want to develop on a Mac, Windows or Linux.
+Kirby has only very few (link: docs/guide/quickstart#requirements text: server requirements), and you have therefore many options when choosing the development environment that is right for you–no matter if you want to develop on a Mac, Windows or Linux.
 
 
 ## MAMP or MAMP Pro
