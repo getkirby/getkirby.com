@@ -70,6 +70,7 @@ You can define any number of fields and use the same (link: docs/reference/panel
 You can set default values for structure fields which will prepopulate the field:
 
 ```yaml
+fields:
   emails:
     label: Emails
     type: structure
