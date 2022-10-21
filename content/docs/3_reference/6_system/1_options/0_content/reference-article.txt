@@ -69,7 +69,7 @@ return [
 <since v="3.8.1">
 ## Disable UUIDs
 
-If you don't need (link: docs/guide/uuids text: UUIDs) in your projects, you can disable it with the `content.uuid` option.
+If you don't need (link: docs/guide/uuids text: UUIDs) in your projects, you can disable them with the `content.uuid` option.
 
 ```php
 return [
