@@ -62,9 +62,9 @@ fields:
     type: writer
     inline: true
     marks:
-        - bold
-        - italic
-        - strike
+      - bold
+      - italic
+      - strike
 ```
 
 (image: writer.png)
