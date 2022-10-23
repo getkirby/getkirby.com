@@ -109,16 +109,8 @@ image: page.image.findBy("name", "cover")
 You can use the image of each subpage `files` field as preview image:
 
 ```yaml
-image: page.my_files_field.toFile
+image: page.myFilesField.toFile
 ```
-
-<info>
-Note that if you have `multiple: true`, be sure to query only one image:
-
-```yaml
-image: page.my_multiple_files_field.first.toFile
-```
-</info>
 
 You can find more example how you can use the query language in the (link: docs/guide/blueprints/query-language text: guide).
 
