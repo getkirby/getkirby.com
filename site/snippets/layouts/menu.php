@@ -14,7 +14,6 @@
           <li><a href="/features/clients">For clients & agencies</a></li>
           <li><hr /></li>
           <li><a href="/love">Showcase</a></li>
-          <li><a class="is-external" href="https://kirby.nolt.io/roadmap">Roadmap</a></li>
           <li><a class="is-external" href="https://github.com/getkirby/kirby/releases">Releases</a></li>
         </ul>
       </li>

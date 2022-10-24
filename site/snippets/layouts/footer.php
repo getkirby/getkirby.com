@@ -36,7 +36,6 @@
               <li><a href="/features/creators">For content creators</a></li>
               <li><a href="/features/clients">For clients & agencies</a></li>
               <li><a href="/love">Showcase</a></li>
-              <li><a href="https://kirby.nolt.io/roadmap">Roadmap</a></li>
               <li><a href="https://github.com/getkirby/kirby/releases">Releases</a></li>
 
             </ul>
