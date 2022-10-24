@@ -104,15 +104,15 @@ The default (preview) image is the first image in the folder. You can configure 
 image: page.image.findBy("name", "cover")
 ```
 
-### Preview image from page files field
+### Preview image from files field of subpage
 
-You can use the image of each subpage `files` field as preview image:
+You can use the image of each subpage's `files` field as preview image:
 
 ```yaml
 image: page.myFilesField.toFile
 ```
 
-You can find more example how you can use the query language in the (link: docs/guide/blueprints/query-language text: guide).
+For more examples of how to use the query language, see the (link: docs/guide/blueprints/query-language text: guide).
 
 
 ### Preview image from assets folder
