@@ -276,6 +276,22 @@ Incidents:
     severity: medium
     cve: CVE-2022-36037
     cvss: CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:L/A:N/E:U/RL:O
+-
+    affected: "3.5.0 - 3.5.8.1 || 3.6.0 - 3.6.6.1 || 3.7.0 - 3.7.5 || 3.8.0"
+    fixed: 3.5.8.2, 3.6.6.2, 3.7.5.1, 3.8.1
+    description: "User enumeration in the code-based login and password reset forms"
+    link: https://github.com/getkirby/kirby/security/advisories/GHSA-43qq-qw4x-28f8
+    severity: medium
+    cve: CVE-2022-39314
+    cvss: CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N/E:P/RL:O/RC:C
+-
+    affected: "<=3.5.8.1 || 3.6.0 - 3.6.6.1 || 3.7.0 - 3.7.5 || 3.8.0"
+    fixed: 3.5.8.2, 3.6.6.2, 3.7.5.1, 3.8.1
+    description: "User enumeration in the brute force protection"
+    link: https://github.com/getkirby/kirby/security/advisories/GHSA-c27j-76xg-6x4f
+    severity: medium
+    cve: CVE-2022-39315
+    cvss: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N/E:U/RL:O/RC:C
 
 ----
 

@@ -191,3 +191,27 @@ A challenge will be skipped if it isn't available in general or for the user who
 The `email` challenge is always available as it doesn't need additional configuration (only in some cases the SMTP options). It is also enabled by default if no custom priorities are defined.
 
 If none of the configured challenges is available, Kirby will "fake" the last configured challenge to avoid leaking security-relevant information (e.g. whether the user exists). In debug mode, there will be a clear error message instead.
+
+## Auth debugging
+
+Any errors during authentication (e.g. invalid email address, wrong password or code, rate limit, errors during code generation or sending...) are by default hidden from the user. The user only gets the message "Invalid login" or "Invalid code". This prevents various attacks such as user enumeration (where an attacker would be able find out which users are registered on a site).
+
+The real errors are logged to PHP's error log. They can be used to find the actual source of a login failure.
+
+If you don't have access to the PHP error log, you can **temporarily** enable auth debugging to send the real errors to the user:
+
+```php
+<?php
+
+return [
+    'auth' => [
+        'debug' => true
+    ]
+];
+```
+
+<alert>
+Make sure to disable the `auth.debug` mode in production! Displaying auth errors on a public server can be a serious security risk because they could leak information to attackers.
+
+In a production environment, please use the PHP error log to debug issues wherever possible.
+</alert>
