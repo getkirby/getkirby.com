@@ -364,8 +364,8 @@ In a new folder, e.g. `~/docker-example-2` create a new `Dockerfile`. This time,
 ### Dockerfile
 
 ```Dockerfile "~/docker-example-2/Dockerfile"
-# Use offical ubuntu:20.04 image
-FROM ubuntu:22.10
+# Use latest offical ubuntu image
+FROM ubuntu:latest
 
 # Set timezone environment variable
 ENV TZ=Europe/Berlin
@@ -505,8 +505,8 @@ Then copy the `default.conf` file from the last example into the new folder.
 Next to the `starterkit` folder, create a new Dockerfile. Our Dockerfile looks slightly different than before. This time, we don't need to install Git in the container, and we remove the steps that cloned the Starterkit and the commands that changed the files and directories ownership. With that done, our Dockerfile now looks like this:
 
 ```Dockerfile "~/docker-example-3/Dockerfile"
-# Use offical ubuntu:20.04 image
-FROM ubuntu:20.04
+# Use latest offical ubuntu image
+FROM ubuntu:latest
 
 # Set timezone
 ENV TZ=Europe/Berlin
