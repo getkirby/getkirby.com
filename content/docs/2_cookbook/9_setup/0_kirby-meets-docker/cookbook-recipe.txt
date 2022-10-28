@@ -365,7 +365,7 @@ In a new folder, e.g. `~/docker-example-2` create a new `Dockerfile`. This time,
 
 ```Dockerfile "~/docker-example-2/Dockerfile"
 # Use offical ubuntu:20.04 image
-FROM ubuntu:20.04
+FROM ubuntu:22.10
 
 # Set timezone environment variable
 ENV TZ=Europe/Berlin
