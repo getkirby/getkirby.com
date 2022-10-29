@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "getkirby.com",
+  "short_name": "getkirby",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#efefef",
+  "icons": [{
+    "src": "asstes/images/favicon.png",
+    "sizes": "32x32",
+    "type": "image/png"
+  }, {
+    "src": "assets/images/favicon.svg",
+    "sizes": "36x42",
+    "type": "image/svg"
+  }]
+}

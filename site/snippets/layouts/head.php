@@ -53,6 +53,7 @@ extract([
 <link rel="mask-icon" href="<?= url('/assets/images/safari-mask-icon.svg') ?>" color="#000">
 <link href="<?= url('releases.rss') ?>" rel="alternate" type="application/rss+xml" title="Kirby Releases" />
 <link href="<?= url('kosmos.rss') ?>" rel="alternate" type="application/rss+xml" title="Kirby Kosmos Archive" />
+<link rel="manifest" href="<?= url('app.webmanifest') ?>" />
 
 <?= $meta->robots() ?>
 <?= $meta->jsonld() ?>
