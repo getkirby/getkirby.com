@@ -26,7 +26,7 @@ The team behind the Git client Tower have free learning resources on Git. If you
 
 ## About this tutorial
 
-Kirby 3 is now developed using a single Git repository, which is hosted on [GitHub](https://github.com/getkirby/kirby). Not only can you follow our development process and contribute your own ideas and code changes there, but you can also use the repository as a Git submodule.
+Kirby is developed using a single Git repository, which is hosted on [GitHub](https://github.com/getkirby/kirby). Not only can you follow our development process and contribute your own ideas and code changes there, but you can also use the repository as a Git submodule.
 
 This tutorial describes one of several ways you can install and update Kirby. See (link: docs/guide/installation text: the overview page) for all supported ways.
 
@@ -137,3 +137,24 @@ git pull
 ```
 
 Then stage and commit your changes like above. This way, you can easily switch between the `develop` and the `main` branches.
+
+### Updating to a specific version
+
+It is also possible to update to a specific version, for example a security patch:
+
+```bash
+# change into the submodule
+cd kirby
+
+# update to a specific version
+git fetch --tags     # [1]
+git checkout 3.x.y   # [2]
+```
+
+Command `[1]` fetches all the latest changes from GitHub, including all Git tags (which are used to point versions to their commits). The command `[2]` then looks for the provided version in the tag list and checks out the commit for that version.
+
+Staging and committing works just the same as in the previous examples.
+
+<info>
+If you check out a tag, Git will warn you that your repo is in a "detached HEAD" state. This is expected and just means that you are not on a branch but a specific commit.
+</info>
