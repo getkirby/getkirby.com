@@ -1,0 +1,18 @@
+Title: Heroicons
+
+----
+
+Repository: https://github.com/adamkiss/kirby-icons-heroicons
+
+----
+
+Category: media
+
+----
+
+Subcategory: images
+
+----
+
+Description: Plugin that provides heroicons as snippets to embed, customisable with a class argument.
+
