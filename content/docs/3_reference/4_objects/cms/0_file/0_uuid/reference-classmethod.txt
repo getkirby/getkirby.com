@@ -4,4 +4,4 @@ Guide: uuids
 
 Intro:
 
-Return the fle's Unique ID.
+Return the file's Unique ID.
