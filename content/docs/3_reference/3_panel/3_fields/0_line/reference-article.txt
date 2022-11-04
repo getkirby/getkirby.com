@@ -33,16 +33,16 @@ fields:
 
   …
 
-  line-a:
+  lineA:
     type: line
 
   …
 
-  line-b:
+  lineB:
     type: line
 
   …
 
-  line-c:
+  lineC:
     type: line
 ```
