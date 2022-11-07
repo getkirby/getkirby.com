@@ -29,6 +29,8 @@ content/
 
 We can put the (file: animals.csv) directly inside this folder to make it nice and clean to read data from that file. You could even provide an uploader for this in the panel later, so your content editors can update the csv file whenever they have a fresh export with updated data.
 
+The .csv file should use a semicolon separator and not a comma separator
+
 ## Reading from the CSV
 
 To convert the CSV from the file to a PHP array we are going to use a little `csv()` helper function. This function is stored in a small plugin. It takes the absolute path to the csv file and returns a nice and clean array.
