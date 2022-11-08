@@ -16,6 +16,10 @@ Text:
 
 In this example we are going to read a list of (dummy) animals from a (file: animals.csv text: CSV file) and create virtual pages for each animal.
 
+<info>
+Note: For this example we are using a `.csv`file where fields are separated by a semi-colon. If you are using other separators in your own file, change the separator parameter when calling the `csv()` method below accordingly.
+</info>
+
 ## The parent content folder
 
 Let's create an animals folder for our site, which is used as the parent for all animal subpages.
@@ -28,8 +32,6 @@ content/
 ```
 
 We can put the (file: animals.csv) directly inside this folder to make it nice and clean to read data from that file. You could even provide an uploader for this in the panel later, so your content editors can update the csv file whenever they have a fresh export with updated data.
-
-The .csv file should use a semicolon separator and not a comma separator
 
 ## Reading from the CSV
 
