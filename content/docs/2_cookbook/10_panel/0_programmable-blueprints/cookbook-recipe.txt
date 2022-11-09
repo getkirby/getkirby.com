@@ -393,7 +393,7 @@ use Kirby\Toolkit\I18n;
 
 return [
     'label' => [
-      'en' => 'Category,
+      'en' => 'Category',
       'de' => 'Kategorie'
     ],
     'options' => [
