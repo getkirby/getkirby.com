@@ -125,4 +125,45 @@ We define a Base model, and assign it to different page model names.
 
 <info>
 In a real world example, your class would most probably go into a separate file.
+
+```php "/site/plugins/your-plugin/index.php"
+<?php
+
+require __DIR__ . '/models/BasePage.php';
+
+use Kirby\Cms\App as Kirby;
+
+Kirby::plugin('cookbook/shared-templates', [
+    'templates' => [
+        'jobs'   => __DIR__ . '/templates/grid.php',
+        'events' => __DIR__ . '/templates/grid.php',
+        'news'   => __DIR__ . '/templates/grid.php',
+        //…
+    ],
+    'controllers' => [
+        'jobs'   => require __DIR__ . '/controllers/grid.php',
+        'events' => require __DIR__ . '/controllers/grid.php',
+        'news'   => require __DIR__ . '/controllers/grid.php',
+        // …
+    ],
+    'pageModels' => [
+        'jobs'   => 'BasePage',
+        'events' => 'BasePage',
+        'news'   => 'BasePage',
+        // ...
+    ],
+]);
+```
+
+```php "/site/plugins/your-plugin/models/BasePage.php"
+<?php
+
+class BasePage extends Page
+{
+  public function helloWorld()
+  {
+    return 'Hello World';
+  }
+}
+```
 </info>
