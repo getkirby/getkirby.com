@@ -99,7 +99,7 @@ The pages are now accessible in the template and you can loop through them like 
 
 ## The child page template
 
-For the children themselves, you can create their own `review.php` template to access more defails:
+For the children themselves, you can create their own `review.php` template to access more details:
 
 ```php "/site/templates/review.php"
 <?php snippet('header') ?>

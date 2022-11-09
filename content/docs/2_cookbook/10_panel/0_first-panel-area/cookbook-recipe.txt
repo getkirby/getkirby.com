@@ -169,7 +169,7 @@ All that's left now, is create the component for our API data. Kirby's ready to 
   <k-inside>
     <k-view class="k-moviereview-view">
       <k-header>Movie reviews</k-header>
-      <k-items v-if="reviews.length" :layout="layout" :size="size">
+      <k-items v-if="reviews.length" :items="reviews" :layout="layout" :size="size">
         <k-item
           v-for="(review, index) in reviews"
           :layout="layout"
@@ -204,7 +204,7 @@ All that's left now, is create the component for our API data. Kirby's ready to 
 With the `v-if` directive we check if the `reviews` array has any items and if so, we loop through the items (`v-for="(review, index) in reviews"`) and create a card item for it. Otherwise (`v-else`), we just display a note:
 
 ```html
-<k-items v-if="reviews.length" :layout="layout" :size="size">
+<k-items v-if="reviews.length" :items="reviews" :layout="layout" :size="size">
   <k-item
     v-for="(review, index) in reviews"
     layout="cards"
@@ -240,7 +240,7 @@ moviereviews/
   src/
     index.js
     components/
-      MovieReview.vue
+      MovieReviews.vue
 ```
 
 ## Where to go from here
