@@ -50,6 +50,10 @@ return [
 ];
 ```
 
+<warning>
+In PHP 8.1 and later, strftime (and gmstrftime) are deprecated, and using them emits a deprecation notice. These functions will be removed in PHP 9.0. Find out more about this deprecation and learn about the (link: https://php.watch/versions/8.1/strftime-gmstrftime-deprecated text: replacements for strftime).
+</warning>
+
 <info>
 If you change the date handler you have to adjust all the date format strings in your templates. Find out more about the (link: https://www.php.net/manual/en/function.strftime.php text: strftime date formatting syntax)
 </info>
