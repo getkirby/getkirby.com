@@ -124,5 +124,5 @@ Kirby::plugin('cookbook/shared-templates', [
 We define a Base model, and assign it to different page model names. 
 
 <info>
-In a real world example, your class would most probably go into a separate file.
+In a real world example, your class would most probably go into a separate file, for details see the (link: docs/reference/plugins/extensions/page-models text: page models reference).
 </info>
