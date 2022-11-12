@@ -20,7 +20,7 @@ Description: A plugin for the Uniform plugin implementing the Cloudflare Turnsti
 
 Example:
 
-```html+php
+```php
 <form action="<?= $page->url() ?>" method="post">
     <!-- ... -->
 
