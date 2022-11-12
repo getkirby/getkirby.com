@@ -42,24 +42,31 @@ We suggest that you stick to the format `YYYY-MM-DD HH:MM:SS` (i.e. `2018-11-21 
 
 ## Custom date handler
 
-PHP's date function is great, but if you work on multi-language sites and you need to translate dates, the `strftime` function is actually more powerful. You can change the date handler in your config.
+PHP's date function is great, but if you work on multi-language sites and you need to translate dates, the `IntlDateFormatter` PHP class provided through our `intl` date handler is the way to go. You can change the date handler in your config.
 
 ```php "/site/config/config.php"
 return [
-    'date.handler' => 'strftime'
+    'date.handler' => 'intl'
 ];
 ```
 
 <info>
-If you change the date handler you have to adjust all the date format strings in your templates. Find out more about the (link: https://www.php.net/manual/en/function.strftime.php text: strftime date formatting syntax)
+If you change the date handler, you have to adjust existing date format strings in your templates. Find out more about (link: https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax text: ICU Date formats)
 </info>
 
 In your template …
 
 ```php
-<?= $page->published()->toDate('%d.%m.%Y') ?>
+<?= $page->published()->toDate('EEEE, MMMM d, YYYY') ?>
 ```
 
+Instead of passing a format string, you can also pass an `IntlDateFormatter` object as argument to the `toDate()` method:
+
+```php
+<?=  $page->published()->toDate(new IntlDateFormatter( "de_DE", IntlDateFormatter::FULL, IntlDateFormatter::SHORT, 'Europe/Berlin')); ?>
+```
+
+For details, see the (link: https://www.php.net/manual/de/class.intldateformatter.php text: `IntlDateFormatter` PHP class)
 ----
 
 Description: Use dates in your content files and output different date formats.
