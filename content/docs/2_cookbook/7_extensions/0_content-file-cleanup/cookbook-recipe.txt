@@ -10,12 +10,11 @@ This script cleans up your page or file content files. It compares fields in the
 
 You can use the script with a pages or a files collection. By default, the script below runs through the complete pages index. Adapt `$collection` as required. It is not recommended to run through the complete index of a large site or through thousands of files because you might run into a timeout.
 
-You can also set the fields to ignore in the `$ignore` array. By default the `title` and `slug` (for pages) as well as `template` and `sort` (for files) fields are ignored.
-
+You can also set the fields to ignore in the `$ignore` array. By default, we ignore the following fields: `uuid`, for pages `title` and `slug` and for files `template` and `sort`.
 
 Create a new `cleanup.php` file in your site root and copy the script code into it.
 
-Then run the script with http://yourdomain.com/cleanup.php. **Delete the script when done.**
+Then run the script with http://yourdomain.com/cleanup.php. You can also run the script on the command line or put the code into a route if you cannot call a PHP script in your browser. **Delete the script when done.**
 
 <warning>
 Before you use this script, make sure you have a backup of your project.
@@ -45,7 +44,7 @@ $kirby->impersonate('kirby');
 $collection = $kirby->site()->index();
 
 // set the fields to be ignored
-$ignore = ['title', 'slug', 'template', 'sort'];
+$ignore = ['uuid', 'title', 'slug', 'template', 'sort'];
 
 // call the script for all languages if multilang
 if ($kirby->multilang() === true) {
@@ -83,9 +82,7 @@ function cleanUp($collection, $ignore = null, string $lang = null) {
         if (count($fieldsToBeDeleted) > 0) {
 
             // flip keys and values and set new values to null
-            $data = array_map(function($value) {
-                return null;
-            }, array_flip($fieldsToBeDeleted));
+            $data = array_map(fn ($value) => null, array_flip($fieldsToBeDeleted));
 
             // try to update the page with the data
             try {
