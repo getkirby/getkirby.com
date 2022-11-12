@@ -26,4 +26,32 @@ Kirby::plugin('my/pageModels', [
 ]);
 ```
 
-For details see (link:docs/guide/templates/page-models text:  page models in the guide).
+In a real world example, you would usually put the class in a separate file, e.g. `/models/BlogPage.php` in your plugin folder:
+
+
+```php "/site/plugins/page-models/models/BlogPage.php"
+<?php
+
+class BlogPage extends Page
+{
+	// your custom page methods
+}
+```
+
+And then load it in your plugin's `index.php`:
+
+```php "/site/plugins/page-models/index.php"
+<?php
+
+load([
+    'BlogPage' => 'models/BlogPage.php',
+], __DIR__);
+
+Kirby::plugin('my/pageModels', [
+	'pageModels' => [
+		'blog' => 'BlogPage'
+	]
+]);
+```
+
+For details see (link:docs/guide/templates/page-models text: page models in the guide).
