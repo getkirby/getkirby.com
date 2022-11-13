@@ -204,4 +204,4 @@ imagedestroy($canvas);
 
 <warning>
 Make sure that all paths to fonts and files as well as fieldnames used actually exist in your installation, otherwise this will not work as expected.
-</warning
+</warning>
