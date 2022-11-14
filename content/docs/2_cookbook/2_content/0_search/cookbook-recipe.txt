@@ -29,7 +29,7 @@ Create a new `search.php` template file in `/site/templates`. The search templat
 <?php snippet('header') ?>
 
 <form>
-  <input type="search" title="Search" name="q" value="<?= html($query) ?>">
+  <input type="search" aria-label="Search" name="q" value="<?= html($query) ?>">
   <input type="submit" value="Search">
 </form>
 
