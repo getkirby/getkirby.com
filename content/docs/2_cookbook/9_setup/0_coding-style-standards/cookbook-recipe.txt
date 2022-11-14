@@ -77,7 +77,7 @@ The most popular tools are
 - (link: https://github.com/squizlabs/PHP_CodeSniffer text: PHP CodeSniffer)
 
 
-While researching for this recipe, I also found another interesting tool, (link: https://github.com/symplify/easy-coding-standard text: Easy Coding Standard), which lets us combine the rules of the two tools mentioned above, which can be very useful in certain situations. Check it out if this sounds interesting to you, we won't cover it here.
+While doing research for this recipe, I also found another interesting tool, (link: https://github.com/symplify/easy-coding-standard text: Easy Coding Standard). It lets us combine the rules of the two tools mentioned above, which can be very useful in certain situations. Check it out if this sounds interesting to you, we won't cover it here.
 
 Let's start with installing these tools one after the other via Composer.
 
@@ -114,7 +114,7 @@ php-cs-fixer -h
 ### Fixing issues
 
 <info>
-I recommend to put the Starterkit/your project under version control, that way, you can keep track of the changes applied by the tools and easily undo them again.
+I recommend to put the Starterkit/your project under version control. That way, you can keep track of the changes applied by the tools and easily undo them again.
 </info>
 
 Let's see how we can use PHP CS Fixer on our code. While the Starterkit is not the ideal code base for our recipe, it is good enough to understand what the tools can do for us and how they work. 
@@ -219,7 +219,7 @@ If you are curious what the configuration file looks like that we use for the Ki
 
 There are multiple extensions tagged with PHP CS Fixer in the VS Code plugin list, but let's use the one from the official documentation. In VS Code, search for (link: https://github.com/junstyle/vscode-php-cs-fixer text: "junstyle php cs fixer") and install it.
 
-Once the plugin is installed, we have to make some configuration settings. Click on the cog icon and select  `Extension Settings` from the context menu. Make sure that the `Execute PHP CS Fixer on save` option is enabled.
+Once the plugin is installed, we have to set some configuration settings. Click on the cog icon and select  `Extension Settings` from the context menu. Make sure that the `Execute PHP CS Fixer on save` option is enabled.
 
 Your `settings.json` should then have the following entries for the extension:
 
