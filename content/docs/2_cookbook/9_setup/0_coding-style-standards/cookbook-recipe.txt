@@ -24,7 +24,7 @@ If you want to follow along with this recipe, make sure you have:
 - A web server with a (link: https://getkirby.com/try text: Kirby Starterkit). You can also use your own project or plugin.
 - (link: https://getcomposer.org/ text: Composer) installed on your machine (or in a (link: https://dev.to/texe/composer-in-docker-3f15 text: Docker container)).
 - The IDE related parts will cover VS Code and PHPStorm, if you don't use any of these, just skip those parts.
-- Optional: Git for version control (if you put the StarterKit/your test project under version control, you can easily undo all changes we introduce in the following).
+- Optional: Git for version control (if you put the Starterkit/your test project under version control, you can easily undo all changes we introduce in the following).
 
 I also assume that you are familiar with using a terminal (i.e. you can navigate to a folder and execute commands).
 
@@ -69,7 +69,7 @@ However, old habits die hard (especially when working in different contexts), an
 
 ## Tools
 
-I will skip IDE-specific plugins and concentrate on tools which can be used IDE-independent and which also allow us to automate things in the long run.
+I will skip IDE-specific plugins and concentrate on tools which can be used IDE-independently and which also allow us to automate things in the long run.
 
 The most popular tools are
 
@@ -100,12 +100,12 @@ This will add the package to your global `.composer/vendor` folder.
 <info>
 If you want to remove the tool again later, you can do so with
 
-```bach
+```bash
 composer global remove friendsofphp/php-cs-fixer
 ```
 </info>
 
-We test if installation was successful by calling `php-cs-fixer` with the `-h` option which will show us some help text:
+We test if installation was successful by calling `php-cs-fixer` with the `-h` option, which will show us some help text:
 
 ```bash
 php-cs-fixer -h
@@ -410,7 +410,7 @@ It would be too much to cover these automation options in this recipe. So we lea
 ### PHP coding standards
 
 - (link: https://medium.com/swlh/some-of-the-most-followed-php-standards-and-coding-styles-7abcf7d34a5e text: Some of the most followed PHP Standards and Coding-styles)
-- (link: https://stefanzweifel.io/posts/run-prettier-or-php-cs-fixer-with-github-actions text: Run Prettier or PHP CS Fixer with GitHub actions)
+- (link: https://stefanzweifel.io/posts/run-prettier-or-php-cs-fixer-with-github-actions text: Run Prettier or PHP CS Fixer with GitHub Actions)
 
 ### PHP CS Fixer
 
@@ -425,7 +425,3 @@ It would be too much to cover these automation options in this recipe. So we lea
 - (link: https://github.com/squizlabs/PHP_CodeSniffer/wiki text: CodeSniffer wiki)
 - (link: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-Ruleset text: Annotated ruleset)
 - (link: https://edorian.github.io/php-coding-standard-generator/#phpcs text: Ruleset generator)
-
-
-
-
