@@ -58,7 +58,7 @@ The introduction to the PSR-12 standard states its intention like this:
 
 > …the intent of this specification is to reduce cognitive friction when scanning code from different authors. It does so by enumerating a shared set of rules and expectations about how to format PHP code.
 
-Since the PSR guidelines don't specify rules for all situations, frameworks like (link: https://symfony.com/doc/current/contributing/code/standards.html text: Symfony) or (link: text: Laravel) or Kirby usually add their own rules on top.
+Since the PSR guidelines don't specify rules for all situations, frameworks like (link: https://symfony.com/doc/current/contributing/code/standards.html text: Symfony) or (link: https://laravel.com/docs/master/contributions#coding-style text: Laravel) or Kirby usually add their own rules on top.
 
 It is worth noting that in addition to those mentioned above there are other standards like (link: https://pear.php.net/manual/en/standards.php text: PEAR) or (link: https://zf2-docs.readthedocs.io/en/latest/ref/coding.standard.html text: Zend).
 
