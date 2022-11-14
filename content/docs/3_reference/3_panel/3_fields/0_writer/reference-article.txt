@@ -44,6 +44,8 @@ fields:
     inline: true
 ```
 
+In `inline` mode, all nodes (see below) are disabled.
+
 ## Choosing available marks
 
 The writer field supports the following marks by default:
@@ -86,8 +88,6 @@ fields:
 ```
 
 (image: writer-extended.png)
-
-Note that nodes are automatically disabled when `inline: true`.
 
 ## How to use in templates/snippets
 
