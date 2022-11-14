@@ -61,7 +61,9 @@ class ReviewsPage extends Page
                     'date'     => $review->publication_date,
                     'link'     => $review->link->url,
                     'linkText' => $review->link->suggested_link_text,
-                    'cover'    => $review->multimedia->src
+                    'cover'    => $review->multimedia->src,
+                    'uuid'     => Uuid::generate(),
+
                 ]
             ];
         }
@@ -73,6 +75,12 @@ class ReviewsPage extends Page
 </info>
 Replace `api-key` with the API key you got for your app.
 </info>
+
+<warning>
+Unless you have disabled UUIDs in your config, you have to pass a `uuid` field in the content array to prevent Kirby from generating the page in the file system when the `$page->uuid()` method is called.
+
+If you generate the UUIDs automatically like in the example above, they will change at every load. However, if you want to reference your virtual pages anywhere with their UUID, make sure to use a unique string that does not change.
+</warning>
 
 Using the `Remote::get()` method, you connect to the API and fetch the results. Within the foreach loop, you feed the results into the `$pages` array and finally pass it all to the `Pages::factory()` method.
 

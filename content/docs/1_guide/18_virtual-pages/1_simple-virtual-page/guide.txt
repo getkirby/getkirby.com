@@ -30,7 +30,8 @@ return [
                     'content' => [
                         'title' => 'This is not a real page',
                         'date'  => '2019-05-01',
-                        'text'  => 'The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.'
+                        'text'  => 'The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.',
+                        'uuid'  => Uuid::generate(),
                     ]
                 ]);
           }
@@ -38,6 +39,12 @@ return [
     ]
 ];
 ```
+
+<warning>
+Unless you have disabled UUIDs in your config, you have to pass a `uuid` field in the content array to prevent Kirby from generating the page in the file system when the `$page->uuid()` method is called.
+
+If you generate the UUIDs automatically like in the example above, they will change at every load. However, if you want to reference your virtual pages anywhere with their UUID, make sure to use a unique string that does not change.
+</warning>
 
 Create a `virtual.php` template to output the content of the virtual page:
 
@@ -84,7 +91,8 @@ return [
                             'content' => [
                                 'title' => 'This is not a real page',
                                 'date'  => '2019-05-01',
-                                'text'  => 'The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.'
+                                'text'  => 'The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.',
+                                'uuid'  => UUID::generate(),
                             ]
                         ],
                         'de' => [

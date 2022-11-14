@@ -93,6 +93,8 @@ class CommentsPage extends Kirby\Cms\Page
                 'content'  => [
                     'text'  => $comment->text(),
                     'user'  => $comment->user(),
+                    'uuid'  => Uuid::generate(),
+
                 ]
             ];
         }
@@ -103,6 +105,12 @@ class CommentsPage extends Kirby\Cms\Page
 ```
 
 Here we re-define the `children()` method of the `Page` class to return the comments from the database as children pages.
+
+<warning>
+Unless you have disabled UUIDs in your config, you have to pass a `uuid` field in the content array to prevent Kirby from generating the page in the file system when the `$page->uuid()` method is called.
+
+If you generate the UUIDs automatically like in the example above, they will change at every load. However, if you want to reference your virtual pages anywhere with their UUID, make sure to use a unique string that does not change.
+</warning>
 
 ## Accessing the comments in the template
 With this page model in place, we can now access our comments as children of the `comments` page in our template:

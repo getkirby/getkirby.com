@@ -67,7 +67,8 @@ class RssfeedPage extends Page {
                         'link'        => $item['link'] ?? '',
                         'text'        => $item['contentencoded'] ?? '',
                         'categories'  => isset($item['category']) ? implode(',', $item['category']) : '',
-                        'author'      => $item['dccreator'] ?? ''
+                        'author'      => $item['dccreator'] ?? '',
+                        'uuid'        => Uuid::generate(),
                     ]
                 ];
             }
@@ -79,6 +80,13 @@ class RssfeedPage extends Page {
 
 }
 ```
+
+<warning>
+Unless you have disabled UUIDs in your config, you have to pass a `uuid` field in the content array to prevent Kirby from generating the page in the file system when the `$page->uuid()` method is called.
+
+If you generate the UUIDs automatically like in the example above, they will change at every load. However, if you want to reference your virtual pages anywhere with their UUID, make sure to use a unique string that does not change.
+</warning>
+
 
 ## The template
 
