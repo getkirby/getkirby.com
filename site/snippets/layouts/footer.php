@@ -69,6 +69,7 @@
               <li><a href="https://feedback.getkirby.com">Feedback</a></li>
               <li><a href="https://forum.getkirby.com">Support forum</a></li>
               <li><a href="https://chat.getkirby.com">Discord chat</a></li>
+              <li><a href="https://mastodon.social/@getkirby">Mastodon</a></li>
               <li><a href="https://twitter.com/getkirby">Twitter</a></li>
               <li><a href="https://instagram.com/getkirby">Instagram</a></li>
             </ul>

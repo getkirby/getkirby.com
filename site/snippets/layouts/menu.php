@@ -44,6 +44,7 @@
           <li><a class="is-external" href="https://feedback.getkirby.com">Feedback</a></li>
           <li><a class="is-external" href="https://forum.getkirby.com">Support forum</a></li>
           <li><a class="is-external" href="https://chat.getkirby.com">Discord chat</a></li>
+          <li><a class="is-external" href="https://mastodon.social/@getkirby">Mastodon</a></li>
           <li><a class="is-external" href="https://twitter.com/getkirby">Twitter</a></li>
           <li><a class="is-external" href="https://instagram.com/getkirby">Instagram</a></li>
         </ul>
