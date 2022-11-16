@@ -61,6 +61,7 @@
               <li><a href="/themes">Themes</a></li>
               <li><a href="/kosmos">Newsletter</a></li>
               <li><a href="/buzz">Buzz</a></li>
+              <li><a href="https://hub.getkirby.com">License Hub</a></li>
             </ul>
           </li>
           <li>
