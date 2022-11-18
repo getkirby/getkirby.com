@@ -66,10 +66,15 @@
 .prose * + p,
 .prose * + ol,
 .prose * + ul,
+.prose > * + details,
 .prose * + .screencast,
 .prose * + .since,
 .prose * + .table {
   margin-top: 1.5em;
+}
+
+.prose > details[open] summary {
+  margin-bottom: .75rem;
 }
 
 /* Lists */

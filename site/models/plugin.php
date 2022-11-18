@@ -237,6 +237,17 @@ class PluginPage extends Page
         return $this->latestTag = $latestTag;
     }
 
+    public function license()
+    {
+        $license = $this->content()->get('license')->yaml();
+
+        if (empty($license) === true) {
+            return $license;
+        }
+
+        return new Obj($license);
+    }
+
     protected function tagPrefix(): string
     {
         $latestTag = $this->latestTag(true);
