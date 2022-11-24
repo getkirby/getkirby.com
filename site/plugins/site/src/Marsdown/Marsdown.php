@@ -310,7 +310,7 @@ class Marsdown extends ParsedownExtra
 
         if (!$Block) return;
 
-        $slug  = Str::slug(Str::unhtml($Block['element']['handler']['argument']));
+        $slug  = Str::slug(Str::unhtml($this->text($Block['element']['handler']['argument'])));
         $level = $Block['element']['name'];
 
         switch ($level) {
