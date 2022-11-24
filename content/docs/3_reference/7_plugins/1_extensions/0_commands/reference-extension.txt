@@ -4,14 +4,20 @@ Title: Commands
 
 Text:
 
+<info>
+This feature of the Kirby CLI is currently in development. You need the latest develop branch version of `getkirby/cli`.
+</info>
+
 You can register new commands for the (link: https://github.com/getkirby/cli text: Kirby CLI) in your plugins with the `commands` extension.
 
 ```php "/site/plugins/your-plugin/index.php"
 Kirby::plugin('your/plugin', [
   'commands' => [
     'your-plugin:test' => [
+      'description' => 'Nice command',
+      'args' => [],
       'command' => function ($cli) {
-        $cli->success('My first plugin command')
+        $cli->success('My first plugin command');
       }
     ]
   ]
