@@ -70,9 +70,9 @@ The pages section has multiple options to control what kind of pages should be d
 
 (section-options: pages)
 
-## Headline
+## Label
 
-The headline will be displayed above the pages section. You can pass a simple headline as a string or you can provide translations for multiple languages, if you have an international editing team.
+The label will be displayed above the pages section. You can pass a simple label as a string or you can provide translations for multiple languages, if you have an international editing team.
 
 ### Single language
 
@@ -82,7 +82,7 @@ label: Articles
 
 ### Multiple languages
 ```yaml
-headline:
+label:
   en: Articles
   de: Artikel
   es: Artículos
@@ -90,7 +90,7 @@ headline:
 
 ### Placeholders
 
-You can inject information from the current page into the headline with template placeholders using our (link: docs/guide/blueprints/query-language text: query language).
+You can inject information from the current page into the label with template placeholders using our (link: docs/guide/blueprints/query-language text: query language).
 
 ```yaml
 label: "Articles for {{ page.title }}"
