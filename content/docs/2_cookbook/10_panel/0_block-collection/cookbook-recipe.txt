@@ -697,7 +697,7 @@ panel.plugin("cookbook/block-factory", {
         "cardType": {
           handler (value) {
            if(value === 'page' && this.pageId) {
-            this.$api.get('pages/' + this.pageId.replace('/', '+')).then(page => {
+            this.$api.get('pages/' + this.pageId.replaceAll('/', '+')).then(page => {
               this.text = page.content.text.replace(/(<([^>]+)>)/gi, "") || this.text;
             });
            } else if(value === 'manual') {
@@ -710,7 +710,7 @@ panel.plugin("cookbook/block-factory", {
         "page": {
           handler (value) {
            if(this.cardType === 'page' && this.pageId) {
-            this.$api.get('pages/' + this.pageId.replace('/', '+')).then(page => {
+            this.$api.get('pages/' + this.pageId.replaceAll('/', '+')).then(page => {
               this.text = page.content.text.replace(/(<([^>]+)>)/gi, "") || this.text;
             });
            } else if(value === 'manual') {
