@@ -13,7 +13,7 @@ Text:
 Kirby tries to register its helper functions in PHP's global namespace. This can lead to conflicts when you or a plugin you are using is including other libraries that try to register their own functions globally with same names, e.g. `dump()`. Kirby will throw an error when it detects this - so that this doesn't happen without your notice.
 </warning>
 
-To deactivate one of Kirby's helper functions globally, you need to set a specific constant in your `index.php` to `true`, e.g.
+To deactivate one of Kirby's helper functions globally, you need to set a specific constant in your `index.php` to `false`, e.g.
 
 ```php "/index.php"
 <?php
