@@ -10,7 +10,7 @@ Changes: https://owebstudio.com/kirby/plugins/google-translate/changelog#{{ vers
 
 ----
 
-Version: 1.0.0
+Version: 1.0.1
 
 ----
 
