@@ -149,7 +149,7 @@ class Checkout
             'quantity'          => $volume,
             'quantity_variable' => false,
             'prices'            => $prices,
-            'custom_message'    => $discount . '% off standard price!'
+            //'custom_message'    => $discount . '% off standard price!'
         ];
 
         $response = Remote::post('https://vendors.paddle.com/api/2.0/product/generate_pay_link', [
