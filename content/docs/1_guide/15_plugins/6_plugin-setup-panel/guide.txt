@@ -28,7 +28,7 @@ Note: Composer is not required to follow this tutorial.
 
 ## Introducing kirbyup
 
-For our development and production process, we use a bundler called (link: https://github.com/johannschopplich/kirbyup text: kirbyup). It is tailored for Kirby Panel plugins, utilizing [Vite](https://vitejs.dev) under the hood, and works right of the box. It will help to compile Vue's single file components, convert SASS in your style blocks, minify your code when you build your plugin and more.
+For our development and production process, we use a bundler called (link: https://github.com/johannschopplich/kirbyup text: kirbyup). It is tailored for Kirby Panel plugins, utilizing [Vite](https://vitejs.dev) under the hood, and works right out of the box. It will help to compile Vue's single file components, convert SASS in your style blocks, minify your code when you build your plugin and more.
 
 You don't even have to install kirbyup. When running your first npm command, kirbyup will be remotely fetched and available for all subsequent commands. The initial package fetching might take a moment.
 
