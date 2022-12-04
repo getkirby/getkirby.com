@@ -11,6 +11,12 @@ file.replace:before,"Kirby\Cms\File $file, Kirby\Filesystem\File $upload",trigge
 file.replace:after,"Kirby\Cms\File $newFile, Kirby\Cms\File $oldFile",trigger,
 file.update:before,"Kirby\Cms\File $file, array $values, array $strings",trigger,
 file.update:after,"Kirby\Cms\File $newFile, Kirby\Cms\File $oldFile",trigger,
+language.create:before,"array $input, Kirby\Cms\Language $language",trigger,
+language.create:after,"array $input, Kirby\Cms\Language $language",trigger,
+language.delete:before,"Kirby\Cms\Language $language",trigger,
+language.delete:after,"Kirby\Cms\Language $language",trigger,
+language.update:before,"Kirby\Cms\Language $language, array $input",trigger,
+language.update:after,"Kirby\Cms\Language $newLanguage, Kirby\Cms\Language $oldLanguage, array $input",trigger,
 kirbytags:before,"string $text, array $data, array $options",apply,$text
 kirbytags:after,"string $text, array $data, array $options",apply,$text
 kirbytext:before,"string $text",apply,$text
@@ -31,6 +37,8 @@ page.delete:before,"Kirby\Cms\Page $page, bool $force",trigger,
 page.delete:after,"bool $status, Kirby\Cms\Page $page",trigger,
 page.duplicate:before,"Kirby\Cms\Page $originalPage, array $input, array $options",trigger,
 page.duplicate:after,"Kirby\Cms\Page $duplicatePage, Kirby\Cms\Page $originalPage",trigger,
+page.render:before,"string $contentType, array $data, Kirby\Cms\Page $page",apply,$data
+page.render:after,"string $contentType, array $data, string $html, Kirby\Cms\Page $page",apply,$html
 page.update:before,"Kirby\Cms\Page $page, array $values, array $strings",trigger,
 page.update:after,"Kirby\Cms\Page $newPage, Kirby\Cms\Page $oldPage",trigger,
 route:before,"Kirby\Http\Route $route, string $path, string $method",trigger,
