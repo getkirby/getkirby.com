@@ -3,14 +3,14 @@ Text:
 ## Example
 
 ```html
-<k-dropdown-tem>
+<k-dropdown>
   <k-button @click="$refs.dropdown.toggle()">Menu</k-button>
   <k-dropdown-content ref="dropdown">
     <k-dropdown-item>Option A</k-dropdown-item>
     <k-dropdown-item>Option B</k-dropdown-item>
     <k-dropdown-item>Option C</k-dropdown-item>
   </k-dropdown-content>
-</k-dropdown-tem>
+</k-dropdown>
 ```
 
 ## Items
