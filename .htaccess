@@ -22,6 +22,10 @@ RewriteEngine on
 #
 # RewriteBase /
 
+# redirect www to non-www
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
 # redirect http to https
 RewriteCond %{HTTP_HOST} ^[a-z0-9]+.getkirby.com
 RewriteCond %{HTTPS} !=on
