@@ -7,14 +7,16 @@ $data = [
   'username' => 'Homer',
   'fname'    => 'Homer',
   'lname'    => 'Simpson',
-  'email'    => 'home@simpsonscom'
+  'email'    => 'home@simpsonscom',
+  'gender'   => 'male'
 ];
 
 $rules = [
   'username' => array('required'),
-  'fname'    => array('required', 'max' => 2),
-  'lname'    => array('required', 'min' => 20),
-  'email'    => array('required', 'email')
+  'fname'    => array('required', 'minLength' => 3),
+  'lname'    => array('required', 'maxLength' => 30),
+  'email'    => array('required', 'email'),
+  'gender'   => array('in', array(array('male', 'female', 'non-binary', 'not specified')))
 ];
 
 $messages = [
@@ -31,6 +33,14 @@ if($invalid = invalid($data, $rules, $messages)) {
 ```
 
 You can change these rules based on the type of data you want to obtain and use (link: docs/reference/system/validators text: Kirby's validators) or your own (link: docs/reference/plugins/extensions/validators text: custom validators).
+
+The syntax for the `$rules` array supports the following variants:
+
+- To use a validator without parameters, use the validator name as the array value: `array('required')`
+- To pass additional parameters to a validator, use the validator's name as the array key, and the parameter(s) as the value.
+  - Scalar values can be passed directly: `array('maxLength' => 20)`
+  - You can pass multiple parameters to the validator as an array: `array('between' => [10, 100])`
+  - To pass an array as a single parameter, use a nested array: `array('in' => array(array('foo', 'bar')))`
 
 You can also separately define a message for each validation rule:
 
