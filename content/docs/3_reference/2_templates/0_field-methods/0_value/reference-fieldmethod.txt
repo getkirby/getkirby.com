@@ -3,5 +3,5 @@ Text:
 ## Example
 
 ```php
-<?= $page->text()->value()  ?>
+<?= $page->text()->value() ?>
 ```
