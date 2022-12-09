@@ -12,11 +12,11 @@ $data = [
 ];
 
 $rules = [
-  'username' => array('required'),
-  'fname'    => array('required', 'minLength' => 3),
-  'lname'    => array('required', 'maxLength' => 30),
-  'email'    => array('required', 'email'),
-  'gender'   => array('in', array(array('male', 'female', 'non-binary', 'not specified')))
+  'username' => ['required'],
+  'fname'    => ['required', 'minLength' => 3],
+  'lname'    => ['required', 'maxLength' => 30],
+  'email'    => ['required', 'email'],
+  'gender'   => ['in', [['male', 'female', 'non-binary', 'not specified']]]
 ];
 
 $messages = [
@@ -36,11 +36,14 @@ You can change these rules based on the type of data you want to obtain and use 
 
 The syntax for the `$rules` array supports the following variants:
 
-- To use a validator without parameters, use the validator name as the array value: `array('required')`
+- To use a validator without parameters, use the validator name as the array value: `['required']`
 - To pass additional parameters to a validator, use the validator's name as the array key, and the parameter(s) as the value.
-  - Scalar values can be passed directly: `array('maxLength' => 20)`
-  - You can pass multiple parameters to the validator as an array: `array('between' => array(10, 100))`
-  - To pass an array as a single parameter, use a nested array: `array('in' => array(array('foo', 'bar')))`
+  - Scalar values can be passed directly:  
+  `['maxLength' => 20]`
+  - You can pass multiple parameters to the validator as an array:  
+  `['between' => [10, 100]]`
+  - To pass an array as a single parameter, use a nested array:  
+  `['in' => [['foo', 'bar']]]`
 
 You can also separately define a message for each validation rule:
 
