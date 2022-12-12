@@ -9,10 +9,10 @@ While the (link: docs/reference/templates/field-methods/yaml text: `yaml` method
 Title: My page
 \----
 Accounts:
-  - name: Twitter
-    url: http://twitter.com/getkirby
+  - name: Mastodon
+    url: https://mastodon.social/@getkirby
   - name: GitHub
-    url: http://github.com/getkirby
+    url: https://github.com/getkirby
 ```
 ### Template
 

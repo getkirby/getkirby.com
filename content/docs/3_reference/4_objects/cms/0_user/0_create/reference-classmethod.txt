@@ -18,7 +18,7 @@ $newUser = User::create([
   'language'  => 'en',
   'password'  => 'topSecret',
   'content'   => [
-    'twitter'   => '@getkirby',
+    'mastodon'  => 'https://mastodon.social/@getkirby',
     'position'  => 'founder'
   ]
 ]);

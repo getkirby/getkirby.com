@@ -37,7 +37,7 @@ return [
 ```
 
 <warning>
-Note that Kirby will no longer display security warnings in this mode. If you disable the update check, we strongly recommend to keep an eye on the news in (link: https://chat.getkirby.com/ text: Discord) or on (link: https://twitter.com/getkirby text: Twitter) to keep your installation secure.
+Note that Kirby will no longer display security warnings in this mode. If you disable the update check, we strongly recommend to keep an eye on the news in (link: https://chat.getkirby.com/ text: Discord) or on (link: https://mastodon.social/@getkirby text: our fediverse account) to keep your installation secure.
 </warning>
 
 ## Update check for plugins

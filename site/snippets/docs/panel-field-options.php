@@ -133,29 +133,29 @@ To fetch options from a structure field, you can use the `toStructure` method an
 Assuming we have a structure field like this:
 
 ```yaml
-twitter:
-  label: Follow the Kirby Team on Twitter …
+fediverse:
+  label: Follow the Kirby Team in the fediverse …
   type: structure
   fields:
     name:
       label: Team Member
       type: text
-    twitter:
-      label: Twitter Username
-      type: text
+    fediverse:
+      label: Fediverse URL
+      type: url
 ```
 
 We can fetch the fields by using the keyword `item`:
 
 ```yaml
-category:
-  label: Category
+contact:
+  label: Contact person
   type: <?= $field . PHP_EOL ?>
   options:
     type: query
     query: site.contactoptions.toStructure
     text: "{{ item.name }}"
-    value: "{{ item.twitter }}"
+    value: "{{ item.fediverse }}"
 ```
 
 

@@ -39,11 +39,11 @@ columns:
       website:
         label: Website
         type: url
-      twitter:
-        label: Twitter
-        type: text
-        icon: twitter
-        placeholder: @username
+      fediverse:
+        label: Fediverse URL
+        type: url
+        icon: mastodon
+        placeholder: https://example.com/@username
       instagram:
         label: Instagram
         type: text
@@ -66,11 +66,11 @@ sections:
         label: Website
         type: url
         width: 1/3
-      twitter:
-        label: Twitter
-        type: text
-        icon: twitter
-        placeholder: @username
+      fediverse:
+        label: Fediverse URL
+        type: url
+        icon: mastodon
+        placeholder: https://example.com/@username
         width: 1/3
       instagram:
         label: Instagram
@@ -85,4 +85,3 @@ sections:
 ```
 
 (image: files.png)
-

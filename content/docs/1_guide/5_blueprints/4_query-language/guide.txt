@@ -197,7 +197,7 @@ mySelect:
     type: query
     query: site.contactoptions.toStructure
     text: "{{ item.name }}"
-    value: "{{ item.twitter }}"
+    value: "{{ item.handle }}"
 ```
 
 ### Pages

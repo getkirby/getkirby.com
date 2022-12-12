@@ -6,8 +6,8 @@
         <p class="font-bold mb-1">Kirby</p>
         <p class="mb-1">The CMS that adapts to any project. Made for developers, designers, creators and clients.</p>
         <nav aria-label="Kirby on the web" class="social">
-          <a title="Twitter" rel="me" href="https://twitter.com/getkirby">
-            <?= icon('twitter') ?>
+          <a title="Mastodon" rel="me" href="https://mastodon.social/@getkirby">
+            <?= icon('mastodon') ?>
           </a>
           <a title="Github" rel="me" href="https://github.com/getkirby">
             <?= icon('github') ?>
@@ -23,9 +23,6 @@
           </a>
           <a title="LinkedIn" rel="me" href="https://linkedin.com/company/getkirby">
             <?= icon('linkedin') ?>
-          </a>
-          <a title="Mastodon" rel="me" href="https://mastodon.social/@getkirby">
-            <?= icon('mastodon') ?>
           </a>
         </nav>
       </div>
@@ -71,7 +68,6 @@
               <li><a href="https://forum.getkirby.com">Support forum</a></li>
               <li><a href="https://chat.getkirby.com">Discord chat</a></li>
               <li><a href="https://mastodon.social/@getkirby">Mastodon</a></li>
-              <li><a href="https://twitter.com/getkirby">Twitter</a></li>
               <li><a href="https://instagram.com/getkirby">Instagram</a></li>
             </ul>
           </li>

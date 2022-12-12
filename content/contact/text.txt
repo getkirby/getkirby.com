@@ -19,8 +19,8 @@ Böhmer Weg 22
 <mail@getkirby.com>
 <https://getkirby.com>
 
-**Follow Kirby on Twitter:**
-<https://twitter.com/getkirby>
+**Follow Kirby in the fediverse:**
+<https://mastodon.social/@getkirby>
 
 **Registry court:**
 Amtsgericht Mannheim, HRA 710522 (commercial registry)

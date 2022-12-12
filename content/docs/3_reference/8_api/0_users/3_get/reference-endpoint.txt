@@ -46,7 +46,7 @@ Response:
             "city": "Gotham",
             "country": "Neverland",
             "website": "https://edith.or",
-            "twitter": "https://twitter.com/getkirby",
+            "fediverse": "https://mastodon.social/@getkirby",
             "bio": "Great person"
         },
         "email": "edith@getkirby.com",
