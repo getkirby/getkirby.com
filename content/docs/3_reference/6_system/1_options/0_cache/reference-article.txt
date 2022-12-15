@@ -51,3 +51,16 @@ You can also set a registered custom cache driver here. Check out the plugin ref
 Make sure the selected cache driver is enabled on/supported by your server.
 </info>
 
+## Options for other cache types
+
+The examples above set the options for the `pages` cache. You can use the same option structure for other caches, e.g. the `uuid` cache:
+
+```php
+return [
+  'cache' => [
+    'uuid' => [
+      'type' => 'memcached'
+    ]
+  ]
+];
+```
