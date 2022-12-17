@@ -35,7 +35,7 @@ Snippet                     | In your template
 `/site/snippets/footer.php` | `<?php snippet('footer') ?>`
 
 <info>
-If you want to organize snippets in subfolders, you can do so. In that case, you have to pass the path to the snippet to the snippet function.
+If you want to organize snippets in subfolders, you can do so. In that case, you have to pass the path to the snippet to the snippet function:
 </info>
 
 
@@ -143,22 +143,21 @@ With the above code, `/site/snippets/mysnippet.php` will receive a title variabl
 <?= $title ?>
 ```
 
-## Snippet alternatives
+<since v="3.9.0">
+<info>
+Snippets always receive the following variables from Kirby:
 
-You can define an array of snippet alternatives if the first snippet cannot be found:
+| Variable | Type                       | Value                                       |
+| -------- | -------------------------- | ------------------------------------------- |
+| `$data`  | `array`                    | Data as passed to the snippet               |
+| `$slot`  | `Kirby\Template\Slot|null` | Contents of the `default` slot if it exists |
+| `$slots` | `Kirby\Template\Slots`     | Collection of all slots                     |
 
-```php
-<?php snippet(['snippet1', 'snippet2', 'snippet3']) ?>
-```
+You can read more about the slots feature below.
+</info>
+</since>
 
-This is useful if you want to provide fallbacks for a snippet based on page input, in case the snippet does not exist:
-
-```php
-<?php snippet(['articles/' . $page->postType(), 'articles/default']) ?>
-```
-
-
-## Real life example: list of blog articles
+### Real life example: list of blog articles
 
 **The template**
 
@@ -170,7 +169,7 @@ This is useful if you want to provide fallbacks for a snippet based on page inpu
   <h1>Blog</h1>
 
   <?php foreach($page->children() as $article): ?>
-  <?php snippet('article', ['article' => $article]); ?>
+  <?php snippet('article', ['article' => $article]) ?>
   <?php endforeach ?>
 
 </main>
@@ -191,14 +190,214 @@ In this example, we pass the `$article` variable (which is a page object) to the
 </article>
 ```
 
+**Pro tip**
+
+Because the variable name inside the template and snippet is the same, we can use PHP's `compact()` function to make the code shorter. This is especially useful if you want to pass multiple variables with their current name:
+
+```php
+<?php snippet('article', compact('article')) ?>
+```
+
+The `compact()` function takes the variable values from the current scope and compacts them into an array. So it's the same as writing `['article' => $article]`.
+
+<since v="3.9.0">
+## Passing slots to snippets
+
+Data variables are useful if you want to pass whole objects (like the page object in the example above) or other values that you have already stored in variables.
+
+Sometimes, passing data isn't enough, for example when you want to pass full code blocks into snippets and output them inside the snippet. For this you can use snippets with slots:
+
+```php
+<?php snippet('article', slots: true) ?>
+  <?php slot('header') ?>
+    <h1>This is the title</h1>
+  <?php endslot() ?>
+
+  <?php slot('body') ?>
+    <p>This is some body text</p>
+  <?php endslot() ?>
+<?php endsnippet() ?>
+```
+
+The contents of each slot are captured and passed to the snippet in the `$slots` variable:
+
+```php "/site/snippets/article.php"
+<article>
+  <?php if ($header = $slots->header()): ?>
+  <header>
+    <?= $header ?>
+  </header>
+  <?php endif ?>
+  
+  <?= $slots->body() ?>
+</article>
+```
+
+The names `header` and `body` are just examples. You can use as many slots as you like and give them names that fit your use case. Every slot that isn't passed from the template will be set to `null`.
+
+### Default slot
+
+Code that is printed directly between the `snippet()` and `endsnippet()` calls is captured into the default slot:
+
+```php
+<?php snippet('button', slots: true) ?>
+  This is the button text.
+<?php endsnippet() ?>
+```
+
+The default slot can be accessed with the `$slot` variable or with `$slots->default()`:
+
+```php "/site/snippets/button.php"
+<button>
+<?= $slot ?>
+</button>
+```
+
+You can combine the `default` slot with named slots by calling the `slot()` function without a name:
+
+```php
+<?php snippet('form', slots: true) ?>
+  <?php slot() ?>
+    <label for="email">Email address:</label>
+    <input type="email" id="email" name="email">
+  <?php endslot() ?>
+
+  <?php slot('submit') ?>
+    <input type="submit" value="Subscribe">
+  <?php endslot() ?>
+<?php endsnippet() ?>
+```
+
+```php "/site/snippets/form.php"
+<form action="" method="POST">
+  <?= $slot ?>
+
+  <?php if ($submit = $slots->submit()): ?>
+  <?= $submit ?>
+  <?php else: ?>
+  <input type="submit" value="Submit">
+  <?php endif ?>
+</form>
+```
+
+### Layout snippets
+If a snippet is still open at the end of the template, Kirby automatically closes it. This can be used for layout snippets, i.e. snippets that contain a base layout that is shared between templates:
+
+```php
+<?php snippet('layout', slots: true) ?>
+
+<?php slot('footer') ?>
+This is a custom footer.
+<?php endslot() ?>
+
+<?php slot() ?>
+<h2>And this is the main content</h2>
+<p>With some text.</p>
+<?php endslot() ?>
+```
+
+```php "/site/snippets/layout.php"
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="<?= $site->description() ?>">
+  <meta name="keywords" content="<?= $site->keywords() ?>">
+  <title>
+    <?= $page->title() ?> | <?= $site->title() ?>
+  </title>
+</head>
+<body>
+
+  <header>
+    <h1>
+      <a href="<?= $site->url() ?>">
+        <?= $site->title() ?>
+      </a>
+    </h1>
+  </header>
+
+  <main>
+    <?= $slot ?>
+  </main>
+
+  <footer>
+    <?php if ($footer = $slots->footer()): ?>
+    <?= $footer ?>
+    <?php else: ?>
+    <p class="copyright"><?= $site->copyright() ?></p>
+    <?php endif ?>
+  </footer>
+
+</body>
+</html>
+```
+
+### Combining slots with data
+
+If you want to pass a variable in addition to slots, you can combine slots with the `$data` parameter:
+
+```php
+<?php snippet('button', ['class' => 'large'], slots: true) ?>
+  This is the button text.
+<?php endsnippet() ?>
+```
+
+```php "/site/snippets/button.php"
+<button class="<?= $class ?>">
+<?= $slot ?>
+</button>
+```
+
+### Nesting snippets
+
+You can nest snippets (with slots and/or data) inside slots of other snippets:
+
+```php
+<?php snippet('article', slots: true) ?>
+  <?php slot('body') ?>
+    <p>This is some body text</p>
+
+    <?php snippet('figure', ['image' => $page->image()]) ?>
+
+    <?php snippet('button', slots: true) ?>
+      This is a button.
+    <?php endsnippet() ?>
+  <?php endslot() ?>
+<?php endsnippet() ?>
+```
+</since>
+
+## Snippet alternatives
+
+You can define an array of snippet alternatives if the first snippet cannot be found:
+
+```php
+<?php snippet(['snippet1', 'snippet2', 'snippet3']) ?>
+```
+
+This is useful if you want to provide fallbacks for a snippet based on page input, in case the snippet does not exist:
+
+```php
+<?php snippet(['articles/' . $page->postType(), 'articles/default']) ?>
+```
+
 ## Assigning a snippet to a variable
 
 The (helper: snippet) function has a third, optional parameter of type `boolean`. If set to `true`, Kirby returns the parsed content instead of directly echoing it. With this option, snippets can be used in a variety of situations, not just inside page templates:
 
 ```php
-$emailBody = snippet('email', ['data' => $data], true);
+$emailBody = snippet('email', $data, true);
 ```
 
+<since v="3.9.0">
+If you use the `slots` parameter, the `snippet()` helper always returns the snippet object. In this case you can use the `$snippet->render()` method to pass the slots to the snippet, render the snippets contents and store them in a variable:
+
+```php
+$emailBody = snippet('email', $data, slots: true)->render(slots: [
+  'offer' => 'We have prepared a special deal just for you...'
+]);
+```
+</since>
 
 ## More information
 
