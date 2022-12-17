@@ -1,0 +1,21 @@
+Text:
+
+## Examples
+
+```php
+// single attributes
+Html::attr('style', 'color: red'); // style="color: red"
+Html::attr('selected', true);      // selected
+Html::attr('class', ['a', 'b']);   // class="a b"
+
+// multiple attributes
+Html::attr(['style' => 'color: red', 'selected' => true]); // style="color: red" selected
+Html::attr(['style' => 'color: red', 'selected']);         // style="color: red" selected
+
+// multiple attributes without sorting
+Html::attr(['style' => 'color: red', 'disabled'], false); // style="color: red" disabled
+```
+
+<since v="3.9.0">
+Support for the `Html::attr(['selected'])` syntax without value was added in Kirby 3.9.0.
+</since>
