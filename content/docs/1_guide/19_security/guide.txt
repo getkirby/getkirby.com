@@ -149,6 +149,14 @@ Never set the file permissions on your server too wide (777). Especially on a sh
 
 We are working on our own dedicated docs on secure file permissions, but you can find an excellent introduction into (link: http://www.smashingmagazine.com/2014/05/proper-wordpress-filesystem-permissions-ownerships text: secure file permissions for WordPress on Smashing Magazine). Those instructions can be applied to any Kirby installation as well.
 
+### Prevent logging of sensitive information
+
+Kirby logs errors to the PHP error log by default. This allows you to debug issues without having to enable the debug mode.
+
+However you should make sure that sensitive information like passwords is not included in logs. If you are using PHP 8.2 or newer, Kirby handles this automatically for you using PHP's `SensitiveParameter` feature.
+
+On older PHP versions, we recommend to disable parameter output in your logs by setting PHP's `zend.exception_ignore_args` option to `1` in your `php.ini`. But keep in mind that this will remove all parameter values from your logs, not just sensitive ones.
+
 ## Use good passwords
 
 Use very long passwords for the connection to your server and for your Panel logins! Try to convince your clients to use something more secure than `123456789` as well. Short passwords can be hacked by a brute-force attack within seconds. They are no longer a viable protection. Also make sure to use different passwords for different sites and tools. Never use the same password more than once. The Panel helps you with **long and secure password** suggestions on installation and in the user account management.
