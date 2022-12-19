@@ -10,4 +10,8 @@ Category: fields
 
 ----
 
-Description: Run jobs – like cleaning the cache – from within the Panel, PHP code or a cronjob
+Subcategory: devtools
+
+----
+
+Description: Run command – like cleaning the cache – from within the Panel via a customizable button, directly in PHP code or with a cronjob
