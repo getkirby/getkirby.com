@@ -6,7 +6,11 @@ Repository: https://github.com/bnomei/kirby3-dotenv
 
 ----
 
-Category: devtools
+Category: security
+
+----
+
+Subcategory: devtools
 
 ----
 
