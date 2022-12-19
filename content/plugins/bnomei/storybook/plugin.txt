@@ -1,0 +1,25 @@
+Title: Storybook
+
+----
+
+Repository: https://github.com/bnomei/kirby3-storybook
+
+----
+
+Category: dev-tools
+
+----
+
+Subcategory: templating
+
+----
+
+Description: Generate Storybook stories from snippets and templates
+
+----
+
+Example:
+
+```
+kirby storybook:watch
+```
