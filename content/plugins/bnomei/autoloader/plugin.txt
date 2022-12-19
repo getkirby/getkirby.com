@@ -15,3 +15,17 @@ Subcategory: plugin-development
 ----
 
 Description: Helper to automatically load various Kirby extensions in a plugin
+
+----
+
+Example:
+
+```php
+Kirby::plugin('bnomei/example', [
+    'blueprints' => autoloader(__DIR__)
+                      ->blueprints(),
+    'snippets' => autoloader(__DIR__)
+                      ->snippets(),
+    // other extensions
+]);
+```
