@@ -15,3 +15,18 @@ Subcategory: utilities
 ----
 
 Description: Adds support for Laravel collections to Kirby
+
+----
+
+Example:
+
+
+```php
+$mostPopularPage = $kirbyCollection
+    ->sortBy('viewcount')->last()
+    ->viewcount()->toInt();
+    
+// with collect plugin    
+$mostPopularPage = $kirbyCollection
+    ->collect()->max('content.viewcount');
+```    
