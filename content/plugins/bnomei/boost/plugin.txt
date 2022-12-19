@@ -14,17 +14,19 @@ Subcategory: caching
 
 ----
 
-Description: Boost the speed of Kirby by having content files of pages cached, with automatic unique ID, fast lookup and Tiny-URL.
+Description: Boost the speed of Kirby by having content files of pages cached and a fast lookup based on uuids
 
 ----
 
 Example:
 
 ```php
-// kirby core
-$page = page($somePageId);
-// faster
-$page = boost($somePageId);
-// fastest
-$page = boost($somePageDirUri);
+'bnomei.boost.cache' => [
+    'type'     => 'apcu',
+],
+'cache' => [
+    'uuid' => [
+        'type' => 'apcu',
+    ],
+],
 ```
