@@ -340,6 +340,11 @@ You often have to check for an existing object first, before you can use it. For
 
 We keep our template engine as simple and effective as possible, but we also don't want to lock you in. Our plugin system offers a simple way to embed your own template engine and there are plugins for Twig and other template engines available.
 
+## Further reading
+
+- (link: docs/cookbook/setup/coding-style-standards text: Coding style standards)
+- (link: docs/cookbook/setup/debugging-basics text: Basic error hunting & prevention)
+
 ----
 
 Description: Learn some PHP basics that make creating templates a breeze.
