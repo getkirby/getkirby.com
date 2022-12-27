@@ -54,10 +54,11 @@ Note that if you upload files to a page and want to use them later in the Panel,
 
 ## Uploading files via the Panel
 
-You can upload files via the Panel to pages that allow file uploads. To upload a file in the Panel, click on the `Add` button above the files section and select a file from your file system. If the file validates, it will be uploaded.
-
+You can upload files via the Panel to pages that allow file uploads. To upload a file in the Panel, click on the `Add` button above the files section and select a file from your file system.
 
 (image: files-section.jpg)
+
+Kirby will convert the filename of your uploaded file to ASCII characters. This ensures that the filename is URL-safe and can be accessed correctly. After the conversion, the file will be checked against Kirby's internal validation rules as well as against custom rules that were defined in the blueprint. If the file validates, it will be uploaded.
 
 ## Linking to files in your content
 
@@ -217,6 +218,3 @@ With Kirby's thumb engine, you can resize, crop and otherwise manipulate images.
 - (link: docs/cookbook/performance/responsive-images text: Responsive images)
 - (link: docs/reference/system/options/thumbs text: Thumb options)
 - (link: docs/reference/plugins/components/thumb text: Custom thumb components)
-
-
-
