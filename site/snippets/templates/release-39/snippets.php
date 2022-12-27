@@ -19,7 +19,7 @@
   <div class="columns" style="--columns: 3">
     <div class="release-text-box">
       <div class="prose">
-        Snippets with slots turn your PHP snippets into rich components. Pass full code blocks into a snippet and output them right in the middle of the snippet where you need them.
+        <a href="<?= url('docs/guide/templates/snippets#passing-slots-to-snippets') ?>">Snippets with slots</a> turn your PHP snippets into rich components. Pass full code blocks into a snippet and output them right in the middle of the snippet where you need them.
       </div>
     </div>
     <div class="release-text-box">
