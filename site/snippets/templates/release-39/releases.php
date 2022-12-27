@@ -72,7 +72,7 @@
       </div>
       <div class="release-text-box">
         <div class="prose">
-          The new KQL Playground gets you started with a set of example queries. Connected to our starterkit, you can play around with your own queries.
+          The new KQL Playground gets you started with a set of example queries. Connected to our Starterkit, you can play around with your own queries.
         </div>
       </div>
     </div>
