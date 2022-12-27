@@ -48,6 +48,8 @@ Fixes:
 ----
 Breaking:
 
+(docs: releases/breaking-changes vars: version=9)
+
 - `$kirby->impersonate()` doesn't bind the app instance to the `$callback` closure anymore. You can access the app instance with `App::instance()` or the `kirby()` helper. [#4944](https://github.com/getkirby/kirby/pull/4944)
 - The `snippet` core component receives an additional parameter `bool $slots` and needs to return `Kirby\Template\Snippet|string` for slot support. If you override the `snippet` component, please adapt the logic to the new core component. [#4910](https://github.com/getkirby/kirby/pull/4910)
 - `$kirby->snippet()` and the `snippet()` helper return `Kirby\Template\Snippet|string|null` [#4910](https://github.com/getkirby/kirby/pull/4910)

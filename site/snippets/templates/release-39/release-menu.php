@@ -5,6 +5,7 @@
     <li><a href="#php82">PHP 8.2</a></li>
     <li><a href="#releases">Satellite Releases</a></li>
     <li><a href="#changes">Changelog</a></li>
+    <li><a href="#migration">Migration</a></li>
     <li><a href="#contributors">Contributors</a></li>
   </ul>
 </nav>

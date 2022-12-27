@@ -67,6 +67,7 @@
   <?php snippet('templates/release-39/php82') ?>
   <?php snippet('templates/release-39/releases') ?>
   <?php snippet('templates/release-39/changes') ?>
+  <?php snippet('templates/release-39/migration') ?>
   <?php snippet('templates/release-39/contributors') ?>
   <?php snippet('templates/release-39/release-menu') ?>
 </article>
