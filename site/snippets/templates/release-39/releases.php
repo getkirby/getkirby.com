@@ -30,7 +30,7 @@
   ]) ?>
 
   <article id="cli" class="mb-24">
-    <h3 class="h6 mb-6">Kirby CLI 1.1.0</h3>
+    <h3 class="h6 mb-6"><a class="link" href="https://github.com/getkirby/cli/releases/tag/1.1.0">Kirby CLI 1.1.0</a></h3>
 
     <div class="columns" style="--columns: 3">
       <div class="release-text-box">
@@ -50,13 +50,13 @@
   </article>
 
   <article id="kql" class="mb-24">
-    <h3 class="h6 mb-6">Kirby KQL 2.0.0</h3>
+    <h3 class="h6 mb-6"><a class="link" href="https://github.com/getkirby/kql/releases/tag/2.0.0">Kirby KQL 2.0.0</a></h3>
 
     <figure class="kql-playground mb-6">
       <figcaption>
         <a href="https://kql.getkirby.com">https://kql.getkirby.com</a>
       </figcaption>
-      <img src="<?= image('kql.png')->url() ?>">
+      <a href="https://kql.getkirby.com"><img src="<?= image('kql.png')->url() ?>"></a>
     </figure>
 
     <div class="columns" style="--columns: 3">
@@ -79,7 +79,7 @@
   </article>
 
   <article id="kql">
-    <h3 class="h6 mb-6">Eleventykit 🎈</h3>
+    <h3 class="h6 mb-6"><a class="link" href="https://github.com/getkirby/eleventykit">Eleventykit</a> 🎈</h3>
 
     <div class="columns" style="--columns: 3">
       <div class="release-text-box">
