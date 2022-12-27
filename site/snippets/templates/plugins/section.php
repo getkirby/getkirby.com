@@ -1,4 +1,11 @@
-<?php $plugins = pages($plugins) ?>
+<?php
+
+$plugins = pages($plugins);
+if ($plugins->isEmpty() === true) {
+  return;
+}
+
+?>
 
 <section id="<?= $id ?>" class="mb-24">
   <?php snippet('templates/plugins/headline', [
