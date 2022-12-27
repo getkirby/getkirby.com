@@ -24,7 +24,7 @@
     </div>
     <div class="release-text-box">
       <div class="prose">
-        The contents of each slot are captured and passed to the snippet in the <code>$slots</code> variable. Snippet can have multiple slots and you can even combine slots with data variables.
+        The contents of each slot are captured and passed to the snippet in the <code>$slots</code> variable. Snippets can have multiple slots and you can even combine slots with data variables.
       </div>
     </div>
     <div class="release-text-box">
