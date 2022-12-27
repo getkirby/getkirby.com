@@ -19,17 +19,17 @@
   <div class="columns" style="--columns: 3">
     <div class="release-text-box">
       <div class="prose">
-        Donec id elit non mi porta gravida at eget metus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Aenean lacinia bibendum nulla sed consectetur. Nullam quis risus eget urna mollis ornare vel eu leo.
+        Snippets with slots turn your PHP snippets into rich components. Pass full code blocks into a snippet and output them right in the middle of the snippet where you need them.
       </div>
     </div>
     <div class="release-text-box">
       <div class="prose">
-        Donec id elit non mi porta gravida at eget metus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Aenean lacinia bibendum nulla sed consectetur. Nullam quis risus eget urna mollis ornare vel eu leo.
+        The contents of each slot are captured and passed to the snippet in the <code>$slots</code> variable. Snippet can have multiple slots and you can even combine slots with data variables.
       </div>
     </div>
     <div class="release-text-box">
       <div class="prose">
-        Donec id elit non mi porta gravida at eget metus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Aenean lacinia bibendum nulla sed consectetur. Nullam quis risus eget urna mollis ornare vel eu leo.
+        Use snippets with slots for simple components like buttons or even for full page layouts. You can nest snippets within slots of other snippets for full flexibility.
       </div>
     </div>
   </div>
