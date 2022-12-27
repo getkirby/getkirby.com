@@ -78,6 +78,24 @@
     </div>
   </article>
 
+  <article id="staticache" class="mb-24">
+    <h3 class="h6 mb-6"><a class="link" href="https://github.com/getkirby/staticache/releases/tag/1.0.0">Staticache 1.0.0</a></h3>
+
+    <div class="columns" style="--columns: 2">
+      <div class="release-text-box">
+        <div class="prose">
+          <p>Staticache is our alternative page cache plugin for Kirby that stores responses as fully static files. This helps you to increase your site performance even more.</p>
+          <p>With version 1.0.0 it is finally ready for prime time for a lot of common site setups. It now comes with support for multi-language sites and content representations as well as with a new mode that caches custom HTTP response headers as well.</p>
+        </div>
+      </div>
+      <div>
+        <div class="release-code-box">
+          <?= $page->staticacheConfig()->kt() ?>
+        </div>
+      </div>
+    </div>
+  </article>
+
   <article id="kql">
     <h3 class="h6 mb-6"><a class="link" href="https://github.com/getkirby/eleventykit">Eleventykit</a> 🎈</h3>
 

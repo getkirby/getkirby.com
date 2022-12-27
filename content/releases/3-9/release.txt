@@ -176,3 +176,20 @@ module.exports = async function () {
 
 }
 ```
+
+----
+
+StaticacheConfig:
+
+```php "/site/config/config.php"
+return [
+  'cache' => [
+    'pages' => [
+      'active'  => true,
+      'type'    => 'static',
+      'root'    => '/path/to/your/cache/root',
+      'comment' => '<!-- your custom cache comment -->',
+      'headers' => true
+    ]
+  ]
+];
