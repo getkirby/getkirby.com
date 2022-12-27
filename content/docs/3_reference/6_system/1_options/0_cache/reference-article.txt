@@ -20,6 +20,21 @@ return [
 ];
 ```
 
+## Cache prefix
+
+```php "/site/config/config.php"
+return [
+  'cache' => [
+    'pages' => [
+      'active' => true,
+      'prefix' => 'example.com/pages'
+    ]
+  ]
+];
+```
+
+You can read more about the cache prefix (link: docs/guide/cache#cache-drivers-and-options__cache-prefix text: in the guide).
+
 ## Cache driver
 
 Set a different cache driver, default is the file driver.

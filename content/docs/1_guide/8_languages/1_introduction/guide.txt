@@ -159,6 +159,24 @@ return [
 
 Make sure that both domains point to your Kirby site.
 
+<info>
+If you use different domains for each language together with Kirby's page cache, you need to override the cache prefix to ensure that the cache is cleared properly on content changes:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+  'cache' => [
+    'pages' => [
+      'active' => true,
+      'prefix' => '_pages'
+    ]
+  ]
+]
+```
+
+You can read more about the cache prefix in the (link: docs/guide/cache#cache-drivers-and-options__cache-prefix text: caching guide).
+</info>
 
 ## Detailed locale settings
 
