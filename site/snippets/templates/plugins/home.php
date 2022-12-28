@@ -29,7 +29,7 @@
   'layout'  => 'cardlets',
   'columns' => 2,
   'plugins' => [
-    'plugins/lukasleitsch/blade',
+    'plugins/leitsch/blade',
     'plugins/amteich/twig',
     'plugins/owebstudio/plates',
     'plugins/bnomei/handlebars',
