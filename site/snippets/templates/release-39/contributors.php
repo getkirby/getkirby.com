@@ -8,6 +8,7 @@
         'afbora',
         'bastianallgeier',
         'distantnative',
+        'hariom147',
         'lukasbestle',
       ] as $contributor): ?>
       <li class="inline-flex p-1">
