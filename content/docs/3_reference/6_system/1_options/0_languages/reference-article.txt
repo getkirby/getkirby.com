@@ -4,10 +4,28 @@ Intro: Enables language definitions via the Panel
 
 Text:
 
-## Example
+## Enable multi-lang feature in the Panel
+
+To allow users to define and switch languages from the Panel, you have to enable the feature: 
 
 ```php
 return [
     'languages' => true
 ];
 ```
+
+## Automatic language detection
+
+Kirby can detect the preferred language of the visitor. This has to be enabled in your config:
+
+```php "/site/config/config.php"
+return [
+    'languages' => [
+        'detect' => true
+  ]
+]
+```
+
+<warning>
+Using the [root URL for the default language](#language-specific-urls) will disable automatic language detection.
+</warning>
