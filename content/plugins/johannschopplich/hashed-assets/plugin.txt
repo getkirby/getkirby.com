@@ -22,4 +22,7 @@ Example:
 
 ```php
 <?= js('assets/js/main.js') ?>
+
+<!-- will become -->
+<script src="https://example.com/assets/js/main.9ad649fd.js"></script>
 ```
