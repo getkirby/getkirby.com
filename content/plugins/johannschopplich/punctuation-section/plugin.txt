@@ -14,4 +14,4 @@ Subcategory: section
 
 ----
 
-Description: A simple, customizable section for your Kirby project from which your clients can quickly copy commonly used characters to the clipboard.
+Description: Copy commonly used characters to your clipboard
