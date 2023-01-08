@@ -1,0 +1,14 @@
+Title: Stripe
+
+----
+
+Repository: https://github.com/tristantbg/kirby-stripe
+
+----
+
+Category: ecommerce, payments
+
+----
+
+Description: Connect to Stripe to easily create product checkouts and more.
+
