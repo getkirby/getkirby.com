@@ -172,7 +172,32 @@ category:
     url: https://your-options-api.com/options.json
 ```
 
-By default, the API type expects that the JSON endpoint returns an option array as shown above in the manual option setting.
+By default, the API type expects that the JSON endpoint returns an option array like this:
+
+```js
+{
+  "design": "Design",
+  "architecture": "Architecture",
+  "photography": "Photography",
+  "3d": "3D",
+  "web": "Web"
+}
+```
+
+The following structure is also supported:
+
+```js
+[
+  {
+    "key": "design",
+    "value": "Design"
+  },
+  {
+    "key": "architecture",
+    "value": "Architecture"
+  }
+]
+```
 
 You can be much more specific with the endpoint though and describe which kind of data to fetch and what to convert to text and value - pretty much as with the option queries.
 
@@ -180,7 +205,7 @@ You can be much more specific with the endpoint though and describe which kind o
 
 Let's assume that our JSON endpoint returns the following JSON:
 
-```json
+```js
 {
   "Companies": [
     {"name": "Apple"},
@@ -190,7 +215,7 @@ Let's assume that our JSON endpoint returns the following JSON:
 }
 ```
 
-As you can see, the format doesn't follow our expected option format at all. We first need to go down to the companies property and then somehow convert each company object into  text and value for the options.
+As you can see, the format doesn't follow our expected option format at all. We first need to go down to the companies property and then somehow convert each company object into text and value for the options.
 
 This can be done with our template language:
 
@@ -218,7 +243,7 @@ Afterwards the text and value setting can be modified by defining the template f
 
 Again, each item is being converted to a Kirby object and every property of the object is a typical Kirby field with all the available field methods. We can go pretty wild with this, if we want. Let's just assume we have a little bit more data for each company …
 
-```json
+```js
 {
   "Companies": [
     {

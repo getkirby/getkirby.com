@@ -149,7 +149,6 @@ Snippets always receive the following variables from Kirby:
 
 | Variable | Type                       | Value                                       |
 | -------- | -------------------------- | ------------------------------------------- |
-| `$data`  | `array`                    | Data as passed to the snippet               |
 | `$slot`  | `Kirby\Template\Slot|null` | Contents of the `default` slot if it exists |
 | `$slots` | `Kirby\Template\Slots`     | Collection of all slots                     |
 
