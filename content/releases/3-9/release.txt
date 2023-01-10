@@ -26,11 +26,19 @@ Enhancements:
 - `Dimensions::forSvg()` supports percentages and better viewport fallbacks [#4921](https://github.com/getkirby/kirby/pull/4921)
 - `Xml::attr()` and `Html::attr()` accept non-associative values (e.g. `Xml::attr(['attrA'])`), which get rendered like passing `true` (e.g. `attrA="attrA"`/`attrA`) [#4935](https://github.com/getkirby/kirby/pull/4935)
 - The `Dir::copy()` method now supports `false` as the argument for `$ignore`. In this mode, all files are copied, including those listed in the global `Dir::$ignore` list. [#4872](https://github.com/getkirby/kirby/pull/4872)
+- `F::move()` now ensures that the parent directory exists, which is consistent with `F::copy()` [#4943](https://github.com/getkirby/kirby/pull/4943)
+- `File::create()`, `$parent->createFile()` and `$file->replace()` support a new mode that moves the source file instead of copying it [#4943](https://github.com/getkirby/kirby/pull/4943)
 - Sensitive information like passwords is redacted in logs when using PHP 8.2+ [#4945](https://github.com/getkirby/kirby/pull/4945)
 
 ----
 Fixes:
 
+- Dynamic options for the select field (from API or query) are no longer displayed with double-escaping in the Panel [#4974](https://github.com/getkirby/kirby/pull/4974)
+- Options from API in options fields (e.g. select, checkboxes) now support simple key/value data like `{"key": "value"}` again [#4987](https://github.com/getkirby/kirby/pull/4987)
+- Using options from API in options fields (e.g. select, checkboxes) also works without the `query` setting again [#4985](https://github.com/getkirby/kirby/issues/4985)
+- Escaping quotes inside query arguments with `\"` and `\'` now behaves like it does in PHP (only the same type of quote used for the string can be escaped) [#4976](https://github.com/getkirby/kirby/pull/4976)
+- Uploaded files are deleted from the temporary directory after they have been successfully stored in the content directory. [#2476](https://github.com/getkirby/kirby/issues/2476)
+- The `page.changeSlug` hook now receives the correct `$languageCode` [#4983](https://github.com/getkirby/kirby/pull/4983)
 - Kirby queries: optional chaining on non-null values now works properly [#4901](https://github.com/getkirby/kirby/pull/4901)
 - Panel: load development icons file when in dev mode [#4900](https://github.com/getkirby/kirby/pull/4900)
 - Files field: for `store: id` only the name is stored again when the current model is the file's parent [#4870](https://github.com/getkirby/kirby/issues/4870)
@@ -71,16 +79,29 @@ Refactoring:
 - Improvements for `Toolkit\Silo` code quality [#4922](https://github.com/getkirby/kirby/pull/4922)
 - Improvements for `Toolkit\Controller` code quality [#4937](https://github.com/getkirby/kirby/pull/4937)
 - Improvements for `Toolkit\Iterator` code quality [#4938](https://github.com/getkirby/kirby/pull/4938)
+- Improvements for `Toolkit\Html` and `Toolkit\Xml` code quality [#4959](https://github.com/getkirby/kirby/pull/4959)
+- Improvements for `Toolkit\Str` code quality [#4961](https://github.com/getkirby/kirby/pull/4961)
+- Improvements for `Text` code quality [#4956](https://github.com/getkirby/kirby/pull/4956)
+- Improvements for `Blueprint` and `Option` code quality [#4974](https://github.com/getkirby/kirby/pull/4974)
 - Upgraded to Vite 4 and some other JS dependencies [#4912](https://github.com/getkirby/kirby/pull/4912)
 - Updated composer dependencies [#4946](https://github.com/getkirby/kirby/pull/4946)
 - PHP 8.2 prep: Fix dynamic properties in search component [#4888](https://github.com/getkirby/kirby/pull/4888)
 - PHP 8.2 prep: Parsedown - fix `mb_convert_encoding` deprecation [#4887](https://github.com/getkirby/kirby/pull/4887)
 - The `Kirby\Cms\Template` class moved to `Kirby\Template\Template`. An alias has been added. [#4910](https://github.com/getkirby/kirby/pull/4910)
 - Our unit tests now always trigger our own deprecation warnings, which allows us to find uses of deprecated code in our own code.
+- Use of the null coalescing assignment operator `??=` where possible [#4957](https://github.com/getkirby/kirby/pull/4957)
+- Use of `instanceof`, the `.=` operator, `array_key_exists()` and property defaults where possible [#4958](https://github.com/getkirby/kirby/pull/4958)
+- Nested `if` statements have been combined/removed [#4958](https://github.com/getkirby/kirby/pull/4958)
+- More of our PHPUnit tests use a temporary directory now to prevent tests from creating a stray `site` directory in the top-level of the project [#4973](https://github.com/getkirby/kirby/pull/4973)
+- Fixed type hints and docblocks throughout the codebase [#4971](https://github.com/getkirby/kirby/pull/4971)
+- Fixed broken link in the contribution guide [#4960](https://github.com/getkirby/kirby/pull/4960)
+- Our PHPUnit tests consistently use `assertSame` instead of `assertEquals` where possible and use more specific assertions (e.g. `assertTrue`, `assertNull`, `assertFileExists`, `assertArrayHasKey`) [#4975](https://github.com/getkirby/kirby/pull/4975)
+- Fixed ghost output during PHPUnit test runs [#4964](https://github.com/getkirby/kirby/pull/4964)
 
 ----
 Deprecated:
 
+- Manually passing `$slot` or `$slots` as data variables to snippets is deprecated. In a future Kirby version, those variables will be overridden with the `Slot` and `Slots` objects.
 - The `.k-offscreen` CSS class has been deprecated. Use `.sr-only` instead. [#4944](https://github.com/getkirby/kirby/pull/4944)
 - The `Toolkit\Query` class has been deprecated and will be removed in a future version. Use `Query\Query` instead. [#4944](https://github.com/getkirby/kirby/pull/4944)
 - Passing an empty string as value to `Xml::attr()` / `Html::attr()` has been deprecated and will throw a warning. In a future version, passing an empty string won't omit the attribute anymore but render it with an empty value. To omit the attribute, please pass `null`. [#4934](https://github.com/getkirby/kirby/pull/4934)
