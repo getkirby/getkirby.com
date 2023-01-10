@@ -481,16 +481,18 @@ sortBy: date desc title asc
 sortBy: status desc year desc
 ```
 
-<info>
-The `sortBy` option will automatically switch off manual sorting.
-</info>
-
 You can pass (link: https://www.php.net/manual/en/function.sort.php text: PHP sorting type flags), for example to make sorting work with special language specific characters.
 
 ```yaml
 sortBy: title SORT_LOCALE_STRING
 sortBy: title asc SORT_LOCALE_STRING
 ```
+
+<info>
+The `sortBy` option only has an effect on the display order inside this section in the Panel. Because all pages will always be sorted by the field/property you defined, manual drag and drop sorting inside the section is disabled.
+
+However each page can still have its own sorting number, which can be controlled via the page status dialog. If you don't need or want the custom sorting numbers, you need to disable them with the (link: docs/reference/panel/blueprints/page#sorting text: `num` option of the child page blueprint).
+</info>
 
 ### `flip`
 

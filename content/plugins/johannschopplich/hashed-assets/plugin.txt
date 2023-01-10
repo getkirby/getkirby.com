@@ -14,12 +14,15 @@ Subcategory: cachebusting
 
 ----
 
-Description: File name hashes support for the css() and js() helpers
+Description: File name hashes support for css() and js() helpers. Without rewrite rules!
 
 ----
 
 Example:
 
 ```php
-<script src="/js/main.9ad649fd.js">
+<?= js('assets/js/main.js') ?>
+
+<!-- will become -->
+<script src="/assets/js/main.9ad649fd.js"></script>
 ```

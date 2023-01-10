@@ -7,7 +7,7 @@
   'columns' => 2,
   'plugins' => [
     'plugins/ww/merx',
-    'plugins/tristanb/kirby-shopify',
+    'plugins/tristantbg/kirby-shopify',
     'plugins/hashandsalt/snipcart',
   ]
 ]) ?>

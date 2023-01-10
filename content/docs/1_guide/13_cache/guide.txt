@@ -15,12 +15,12 @@ You can enable Kirby's page cache in your `config.php` file with the `cache.page
 ```php "/site/config/config.php"
 return [
   'cache' => [
-      'pages' => [
-          'active' => true,
-          'ignore' => function ($page) {
-            return $page->title()->value() === 'Do not cache me';
-          }
-      ]
+    'pages' => [
+      'active' => true,
+      'ignore' => function ($page) {
+        return $page->title()->value() === 'Do not cache me';
+      }
+    ]
   ]
 ];
 ```
@@ -77,10 +77,39 @@ If your template code or a plugin you use rely on cookies or authentication but 
 
 ## Cache drivers and options
 
-### Using a different cache driver
+### Cache prefix
+
+Each cache has its own cache prefix or namespace. The prefix ensures that different caches don't collide with each other, even if they use the same underlying cache driver.
+
+By default, Kirby generates the cache prefix as the site's index URL and the cache's name. Here are some examples for the resulting prefixes:
+
+| Index URL | Cache name | Default prefix |
+| -- | -- | -- |
+| `example.com` | `pages` | `example.com/pages` |
+| `example.com:8080` | `pages` | `example.com_8080/pages` |
+| `sub.example.com/subfolder` | `pages` | `sub.example.com_subfolder/pages` |
+| `example.com` | `superwoman.superplugin` | `example.com/superwoman/superplugin` |
+
+If you run your site on multiple domains and want to share the cache between all domains, you can override the cache prefix like so:
 
 ```php "/site/config/config.php"
+return [
+  'cache' => [
+    'pages' => [
+      'active' => true,
+      'prefix' => 'example.com/pages'
+    ]
+  ]
+];
+```
 
+### Using a different cache driver
+
+The default cache driver is the file cache, which stores cached data in static files inside the `site/cache` directory.
+
+You can override the cache driver with the `type` option. Depending on the driver, you may need to define additional options:
+
+```php "/site/config/config.php"
 return [
   'cache' => [
     'pages' => [
@@ -88,7 +117,7 @@ return [
       'type'   => 'memcached',
       'host'   => 'localhost',
       'port'   => '11211',
-      'prefix'  => 'pages',
+      'prefix' => 'pages',
       'ignore' => function ($page) {
         return $page->id() === 'something';
       }
@@ -97,14 +126,19 @@ return [
 ];
 ```
 
+You can find the list of core cache drivers in the (link: docs/reference/system/options/cache#cache-driver text: reference).
 
-## Set up your own cache
+## Custom caches
+
+### Defining the cache
 
 If you want to create your own cache instance, you can just add it to the config like this:
 
 ```php "/site/config/config.php"
 return [
-  'cache.api' => true
+  'cache' => [
+    'api' => true
+  ]
 ];
 ```
 
@@ -114,7 +148,7 @@ This will again be a file cache instance and stores the cache files in `/site/ca
 
 You have the same extended options if needed and you can combine different cache types without hassle.
 
-## Using the cache
+### Using the cache
 
 As soon as you configured your cache in the config, you can start using it like this (for example in a controller):
 

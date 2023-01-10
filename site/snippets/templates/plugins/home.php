@@ -29,7 +29,7 @@
   'layout'  => 'cardlets',
   'columns' => 2,
   'plugins' => [
-    'plugins/lukasleitsch/blade',
+    'plugins/leitsch/blade',
     'plugins/amteich/twig',
     'plugins/owebstudio/plates',
     'plugins/bnomei/handlebars',
@@ -59,7 +59,7 @@
   'columns' => 2,
   'plugins' => [
     'plugins/ww/merx',
-    'plugins/tristanb/kirby-shopify',
+    'plugins/tristantbg/kirby-shopify',
     'plugins/hashandsalt/snipcart',
   ]
 ]) ?>

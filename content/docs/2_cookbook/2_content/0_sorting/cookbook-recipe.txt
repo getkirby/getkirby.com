@@ -6,7 +6,7 @@ Text:
 
 5, 4, 3, 2, 1…, sorting content is an everyday developer's task when dealing with all sorts of content collections: articles, events, images or similar data needs to be sorted, for example, by date or title, in descending or ascending order, or even by a more complicated sorting algorithm.
 
-Kirby's API comes with a built-in methods for sorting: the [sortBy()](docs/reference/objects/pages/sort-by) method. This method can be used with all sorts of collections (pages, files, users, roles, translations, structure field items etc.).
+Kirby's API comes with a built-in method for sorting: the [sortBy()](docs/reference/objects/pages/sort-by) method. This method can be used with all sorts of collections (pages, files, users, roles, translations, structure field items etc.).
 
 The `sortBy($field, $direction = 'desc', $method = SORT_REGULAR)` method accepts three parameters:
 
@@ -22,16 +22,52 @@ The direction of your sort order, either `desc` for descending, or `asc` for asc
 
 The method takes an optional third parameter, the sort flag. The default is `SORT_REGULAR`, but if you want to sort by numeric values, you can use `SORT_NUMERIC` or other (link: https://www.php.net/manual/en/function.sort.php#refsect1-function.sort-parameters text: sort flags) instead.
 
+<info>
+Kirby also provides a `sort()` method, which is an alias and does exactly the same as `sortBy()`. Use whichever you prefer.
+</info>
 
 ## Sorting by a single field
-Probably the use case most often needed is simple sorting of blog articles by date in reversed order, so that the most recent article appears first in the list:
+Let's assume you have a list of products, each with a price field. By default, the list should be sorted by price descending, with the most expensive product first:
+
+```php
+<?php
+// let's fetch all visible children from the products page and sort them by their price field
+$products = page('products')->children()->listed()->sortBy('price', 'desc');
+
+// let's loop through the collection and output the product name and price
+foreach($products as $product): ?>
+  <h2>
+    <?= $product->title()->html() ?>
+    <small>$<?= $product->price()->html() ?></small>
+  </h2>
+<?php endforeach ?>
+```
+
+Here, we pass two parameters to the `sortBy()` method: the field we want to use for sorting (`price`), and the sort order, here `desc`. If you don't pass a sort order parameter, the default is ascending order.
+
+An alternative would be to skip the second parameter and use Kirby's `flip()` method instead to achieve exactly the same as above (however a bit slower for large data sets):
+
+```php
+$products = page('products')->children()->listed()->sortBy('price')->flip();
+```
+
+## Sorting by multiple fields
+Sometimes, we don't want to limit sorting to a single field. Let's assume we wanted to sort a list of books by the authors' last and first names:
+
+```php
+$books = page('books')->children()->listed()->sortBy('lastname', 'asc', 'firstname', 'asc');
+```
+
+Here, we have pass two sort fields with their sort order as parameters. Authors will now be sorted by lastname first, then by firstname. You can add more criteria to sort by if necessary.
+
+## Sorting by date
+
+Another common use case for sorting is a list of blog articles sorted by date in reversed order, so that the most recent article appears first in the list. If your date field uses the default format `yyyy-mm-dd`, you can use the same syntax that we saw above:
 
 ```php
 <?php
 // let's fetch all visible children from the blog page and sort them by their date field
-$articles = page('blog')->children()->listed()->sortBy(function ($page) {
-  return $page->date()->toDate();
-}, 'desc');
+$articles = page('blog')->children()->listed()->sortBy('date', 'desc');
 
 // let's loop through the collection and output date and title
 foreach($articles as $article): ?>
@@ -40,28 +76,16 @@ foreach($articles as $article): ?>
 <?php endforeach ?>
 ```
 
-Here, we pass two parameters to the `sort()` method: the field we want to use for sorting (`date`), and the sort order, here `desc`. If you don't pass a sort order parameter, the default is ascending order.
-
-An alternative would be skip the second parameter and use Kirby's `flip()` method instead to achieve exactly the same as above:
-
-```php
-$articles = page('blog')->children()->listed()->sortBy(function ($page) {
-  return $page->date()->toDate();
-})->flip();
-```
-
-
-
-## Sorting by multiple fields
-Sometimes, we don't want to limit sorting to a single field. Let's assume we wanted to sort a list of books by the authors' last and first names:
+However this will break with different formats like `dd.mm.yyyy` as the sorting from left to right will then first sort by day, ignoring the year. In this case you can use a callback to parse each date into a common format (a timestamp) before they are sorted:
 
 ```php
 <?php
-$books = page('books')->children()->listed()->sortBy('lastname', 'asc', 'firstname', 'asc');
-?>
+$articles = page('blog')->children()->listed()->sortBy(function ($page) {
+  return $page->date()->toDate();
+}, 'desc');
 ```
 
-Here, we have pass two sort fields with their sort order as parameters. Authors will now be sorted by lastname first, then by firstname. You can add more criteria to sort by if necessary.
+Kirby will pass each page to the callback and will use the return value to determine the sorting order.
 
 ## Sorting structure field entries
 The same sorting methods outlined above can also be used with structure field entries - if you use the `toStructure()` method.
@@ -118,46 +142,42 @@ products:
     size:
       label: Size
       type: text
-
 ```
+
 Now, instead of numbers, our sizes field contains sizes like `S, M, L, XL, XXL` etc. Obviously, we cannot sort them alphabetically or otherwise, because they have no inherent order. So, what can we do? The solution here is to map a sorting value to every real value using the `map()` method.
 
 ```php
-<?php
 // fetch the products from the structure field
 $products = $page->products()->toStructure();
 
 // map an order field to each item of the collection
 $products = $products->map(function($item) {
+  // array that keeps the order of sizes
+  $sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
-    // array that maps every real value to a sorting number
-    $sizes = ['S'=>'0','M'=>'1','L'=>'2','XL'=>'3', 'XXL'=>'4'];
+  // get the order number from the array based on the item's size value
+  $item->order = array_search($item->size()->value(), $sizes);
 
-    //get the order number from the array based on the item's size value
-    $item->order = $sizes[$item->size()->value()];
-
-    return $item;
+  return $item;
 });
 
 // finally, sort by order
-
 $products = $products->sortBy('order', 'asc');
-
 ```
+
 Of course, we can write all that stuff a bit shorter:
 
 ```php
 $products = $page->products()->structure()->map(function($item) {
-    $sizes = ['S'=>'0','M'=>'1','L'=>'2','XL'=>'3', 'XXL'=>'4'];;
-    $item->order = $sizes[$item->size()->value()];
-    return $item;
+  $sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+  $item->order = array_search($item->size()->value(), $sizes);
+  return $item;
 })->sortBy('order', 'asc');
 
 dump($products);
 ```
 
 The `map()` method is really useful for all types of scenarios, so keep it in mind for next time you come across a problem that you can't solve with a simple sort.
-
 
 ## Sorting with Page Models
 

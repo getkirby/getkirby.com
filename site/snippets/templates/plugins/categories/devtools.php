@@ -1,6 +1,15 @@
 <?php snippet('templates/plugins/section', [
   'id'      => 'paper',
-  'icon'    => 'wand',
+  'icon'    => 'code',
+  'title'   => 'Commands for Kirby CLI',
+  'layout'  => 'cards',
+  'columns' => 2,
+  'plugins' => $plugins->filter('subcategory', 'cli')->pluck('id')
+]) ?>
+
+<?php snippet('templates/plugins/section', [
+  'id'      => 'paper',
+  'icon'    => 'code',
   'title'   => 'Debugging',
   'layout'  => 'hero',
   'columns' => 1,
@@ -9,7 +18,7 @@
 
 <?php snippet('templates/plugins/section', [
   'id'      => 'plugins',
-  'icon'    => 'wand',
+  'icon'    => 'code',
   'title'   => 'Plugin development',
   'layout'  => 'cards',
   'columns' => 3,
@@ -18,7 +27,7 @@
 
 <?php snippet('templates/plugins/section', [
   'id'      => 'paper',
-  'icon'    => 'wand',
+  'icon'    => 'code',
   'title'   => 'Logging',
   'layout'  => 'cards',
   'hero'    => true,
@@ -28,7 +37,7 @@
 
 <?php snippet('templates/plugins/section', [
   'id'      => 'utilities',
-  'icon'    => 'wand',
+  'icon'    => 'code',
   'title'   => 'Utilities',
   'layout'  => 'cards',
   'hero'    => true,

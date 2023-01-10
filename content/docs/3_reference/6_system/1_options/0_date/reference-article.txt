@@ -6,29 +6,39 @@ Text:
 
 ## Date handler
 
-Determine which PHP function is used to format dates for pages and files.
+Determines which PHP function is used to format dates for pages and files.
 
-Possible values: `date` | `strftime` | `intl` (since 3.6.5), (default: `date`)
+Possible values: `date` | `strftime` | `intl` (since 3.6.5) (default: `date`)
 
 ### `strftime`
 
 ```php
 return [
-    'date'  => [
-        'handler' => 'strftime'
-    ]
+  'date'  => [
+    'handler' => 'strftime'
+  ]
 ];
 ```
+
+<warning>
+The underlying `strftime()` function is deprecated since PHP 8.1. We strongly recommend new projects to use the `intl` handler instead.
+</warning>
 
 ### `intl`
 
 ```php
 return [
-    'date'  => [
-        'handler' => 'intl'
-    ]
+  'date'  => [
+    'handler' => 'intl'
+  ]
 ];
 ```
+
+<info>
+The `intl` handler requires the PHP `intl` extension.
+</info>
+
+## Date formats
 
 Note that the format syntax differs depending on date handler:
 

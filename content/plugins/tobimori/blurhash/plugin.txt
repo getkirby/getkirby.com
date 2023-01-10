@@ -1,0 +1,17 @@
+Title: BlurHash
+
+----
+
+Repository: https://github.com/tobimori/kirby-blurhash
+
+----
+
+Category: media
+
+----
+
+Subcategory: images
+
+----
+
+Description: Optimized image placeholders with the BlurHash algorithm

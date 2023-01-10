@@ -117,11 +117,14 @@ class Types
             return '';
         }
 
-        // Any type containing at least one whitespace or any character
-        // that cannot be part of a datatype, just return a plain
-        // code element.
-        if (preg_match('/^[^\\a-z0-9_\->:]+$/iu', $type) === 1) {
-            return '<code>' . ($text ?? $type) . '</code>';
+        // Any type containing at least one whitespace, any character
+        // or sequence that cannot be part of a datatype,
+        // just return a plain code element.
+        if (
+            preg_match('/^[^\\a-z0-9_\->:]+$/iu', $type) === 1 ||
+            preg_match('/\?[^a-z]/i', $type) === 1
+        ) {
+            return '<code>' . Html::encode($text ?? $type) . '</code>';
         }
 
         // handle nullable types
