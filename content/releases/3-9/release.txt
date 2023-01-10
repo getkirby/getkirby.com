@@ -12,7 +12,7 @@ Features:
 
 - Snippets with slots
 - Structure field improvements
-  - Delete all button [https://kirby.nolt.io/458](https://kirby.nolt.io/458)
+  - Delete all button [idea 458](https://kirby.nolt.io/458)
   - New add button below last row
   - Better pagination
 - PHP 8.2 support [#4890](https://github.com/getkirby/kirby/pull/4890)
@@ -22,7 +22,7 @@ Enhancements:
 
 - `Image\Image` uses its model's `alt` content field as fallback for rendering the `alt` attribute to better provide accessible defaults (we already did it for direct image objects, but now it also works for thumbs etc.) [#4915](https://github.com/getkirby/kirby/pull/4915)
 - Pages section: the status flag button’s tooltip now includes the non-customised label of the current status for better accessibility [#4928](https://github.com/getkirby/kirby/pull/4928)
-- The register dialog now displays an info field for which domain the license will be registered, including a warning when registering a local domain [#4930](https://github.com/getkirby/kirby/pull/4930)
+- The license registration dialog now displays an info field for which domain the license will be registered, including a warning when registering a local domain [#4930](https://github.com/getkirby/kirby/pull/4930)
 - `Dimensions::forSvg()` supports percentages and better viewport fallbacks [#4921](https://github.com/getkirby/kirby/pull/4921)
 - `Xml::attr()` and `Html::attr()` accept non-associative values (e.g. `Xml::attr(['attrA'])`), which get rendered like passing `true` (e.g. `attrA="attrA"`/`attrA`) [#4935](https://github.com/getkirby/kirby/pull/4935)
 - The `Dir::copy()` method now supports `false` as the argument for `$ignore`. In this mode, all files are copied, including those listed in the global `Dir::$ignore` list. [#4872](https://github.com/getkirby/kirby/pull/4872)
@@ -36,21 +36,21 @@ Fixes:
 - Dynamic options for the select field (from API or query) are no longer displayed with double-escaping in the Panel [#4974](https://github.com/getkirby/kirby/pull/4974)
 - Options from API in options fields (e.g. select, checkboxes) now support simple key/value data like `{"key": "value"}` again [#4987](https://github.com/getkirby/kirby/pull/4987)
 - Using options from API in options fields (e.g. select, checkboxes) also works without the `query` setting again [#4985](https://github.com/getkirby/kirby/issues/4985)
+- Writer: links now fully wrap inline styling instead of generating multiple link parts [#4866](https://github.com/getkirby/kirby/issues/4866)
+- Kirby queries: optional chaining on non-null values now works properly [#4901](https://github.com/getkirby/kirby/pull/4901)
 - Escaping quotes inside query arguments with `\"` and `\'` now behaves like it does in PHP (only the same type of quote used for the string can be escaped) [#4976](https://github.com/getkirby/kirby/pull/4976)
 - Uploaded files are deleted from the temporary directory after they have been successfully stored in the content directory. [#2476](https://github.com/getkirby/kirby/issues/2476)
-- The `page.changeSlug` hook now receives the correct `$languageCode` [#4983](https://github.com/getkirby/kirby/pull/4983)
-- Kirby queries: optional chaining on non-null values now works properly [#4901](https://github.com/getkirby/kirby/pull/4901)
-- Panel: load development icons file when in dev mode [#4900](https://github.com/getkirby/kirby/pull/4900)
-- Files field: for `store: id` only the name is stored again when the current model is the file's parent [#4870](https://github.com/getkirby/kirby/issues/4870)
-- Fixes prepending redundant `mailto:` in `k-link` [#4882](https://github.com/getkirby/kirby/pull/4882)
-- `Toolkit\Xml::attr()` is case-sensitive now [#4911](https://github.com/getkirby/kirby/pull/4911)
 - Fixed focus for checkboxes and radio input with no options [#4917](https://github.com/getkirby/kirby/pull/4917)
+- The `page.changeSlug` hook now receives the correct `$languageCode` [#4983](https://github.com/getkirby/kirby/pull/4983)
+- Files field: for `store: id` only the name is stored again when the current model is the file's parent [#4870](https://github.com/getkirby/kirby/issues/4870)
+- Fixed prepending redundant `mailto:` in `k-link` [#4882](https://github.com/getkirby/kirby/pull/4882)
+- `Toolkit\Xml::attr()` is case-sensitive now [#4911](https://github.com/getkirby/kirby/pull/4911)
 - Now treating paths with trailing dot as non-existing content representation [#4920](https://github.com/getkirby/kirby/pull/4920)
 - Fixed console errors for failed `lock`  request when deleting page with unsaved changes [#4919](https://github.com/getkirby/kirby/pull/4919)
 - Fixed error message for missing field type [#4929](https://github.com/getkirby/kirby/pull/4929)
 - `->words()` field method works as expected on `null` values [#4905](https://github.com/getkirby/kirby/pull/4905)
-- Writer: links now fully wrap inline styling instead of generating multiple link parts [#4866](https://github.com/getkirby/kirby/issues/4866)
 - Fixed false-positive blocked requests by ModSecurity (OWASP rules) [#4933](https://github.com/getkirby/kirby/pull/4933)
+- Panel: load development icons file when in dev mode [#4900](https://github.com/getkirby/kirby/pull/4900)
 - I18n: English translation had `February` set to `Feburary` [#4903](https://github.com/getkirby/kirby/pull/4903)
 
 ----
@@ -58,7 +58,7 @@ Breaking:
 
 (docs: releases/breaking-changes vars: version=9)
 
-- `$kirby->impersonate()` doesn't bind the app instance to the `$callback` closure anymore. You can access the app instance with `App::instance()` or the `kirby()` helper. [#4944](https://github.com/getkirby/kirby/pull/4944)
+- `$kirby->impersonate()` doesn't bind the app instance to the `$callback` closure anymore. You can access the app instance with `Kirby\Cms\App::instance()` or the `kirby()` helper. [#4944](https://github.com/getkirby/kirby/pull/4944)
 - The `snippet` core component receives an additional parameter `bool $slots` and needs to return `Kirby\Template\Snippet|string` for slot support. If you override the `snippet` component, please adapt the logic to the new core component. [#4910](https://github.com/getkirby/kirby/pull/4910)
 - `$kirby->snippet()` and the `snippet()` helper return `Kirby\Template\Snippet|string|null` [#4910](https://github.com/getkirby/kirby/pull/4910)
 - `Html::rel()` now consistently returns `null` instead of an empty string when no `rel` attribute is needed [#4948](https://github.com/getkirby/kirby/pull/4948)
@@ -66,7 +66,7 @@ Breaking:
 
 **Removed deprecated code**
 
-- Deprecated method `Kirby\Cms\App::server()` has been removed. Use `App::environment()` instead. [#4944](https://github.com/getkirby/kirby/pull/4944)
+- Deprecated method `Kirby\Cms\App::server()` has been removed. Use `Kirby\Cms\App::environment()` instead. [#4944](https://github.com/getkirby/kirby/pull/4944)
 
 ----
 Refactoring:
@@ -84,11 +84,11 @@ Refactoring:
 - Improvements for `Text` code quality [#4956](https://github.com/getkirby/kirby/pull/4956)
 - Improvements for `Blueprint` and `Option` code quality [#4974](https://github.com/getkirby/kirby/pull/4974)
 - Upgraded to Vite 4 and some other JS dependencies [#4912](https://github.com/getkirby/kirby/pull/4912)
-- Updated composer dependencies [#4946](https://github.com/getkirby/kirby/pull/4946)
+- Updated Composer dependencies [#4946](https://github.com/getkirby/kirby/pull/4946)
 - PHP 8.2 prep: Fix dynamic properties in search component [#4888](https://github.com/getkirby/kirby/pull/4888)
-- PHP 8.2 prep: Parsedown - fix `mb_convert_encoding` deprecation [#4887](https://github.com/getkirby/kirby/pull/4887)
+- PHP 8.2 prep: Fix `mb_convert_encoding()` deprecation in Parsedown [#4887](https://github.com/getkirby/kirby/pull/4887)
 - The `Kirby\Cms\Template` class moved to `Kirby\Template\Template`. An alias has been added. [#4910](https://github.com/getkirby/kirby/pull/4910)
-- Our unit tests now always trigger our own deprecation warnings, which allows us to find uses of deprecated code in our own code.
+- Our unit tests now always trigger our own deprecation warnings, which allows us to find uses of deprecated code in our own code. [#4948](https://github.com/getkirby/kirby/pull/4948)
 - Use of the null coalescing assignment operator `??=` where possible [#4957](https://github.com/getkirby/kirby/pull/4957)
 - Use of `instanceof`, the `.=` operator, `array_key_exists()` and property defaults where possible [#4958](https://github.com/getkirby/kirby/pull/4958)
 - Nested `if` statements have been combined/removed [#4958](https://github.com/getkirby/kirby/pull/4958)
@@ -101,10 +101,10 @@ Refactoring:
 ----
 Deprecated:
 
-- Manually passing `$slot` or `$slots` as data variables to snippets is deprecated. In a future Kirby version, those variables will be overridden with the `Slot` and `Slots` objects.
-- The `.k-offscreen` CSS class has been deprecated. Use `.sr-only` instead. [#4944](https://github.com/getkirby/kirby/pull/4944)
+- Manually passing `$slot` or `$slots` as data variables to snippets is deprecated. In a future Kirby version, those variables will be overridden with the `Slot` and `Slots` objects. [#4963](https://github.com/getkirby/kirby/pull/4963)
 - The `Toolkit\Query` class has been deprecated and will be removed in a future version. Use `Query\Query` instead. [#4944](https://github.com/getkirby/kirby/pull/4944)
 - Passing an empty string as value to `Xml::attr()` / `Html::attr()` has been deprecated and will throw a warning. In a future version, passing an empty string won't omit the attribute anymore but render it with an empty value. To omit the attribute, please pass `null`. [#4934](https://github.com/getkirby/kirby/pull/4934)
+- The `.k-offscreen` CSS class has been deprecated. Use `.sr-only` instead. [#4944](https://github.com/getkirby/kirby/pull/4944)
 
 ----
 
