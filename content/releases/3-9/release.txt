@@ -41,6 +41,7 @@ Fixes:
 - Escaping quotes inside query arguments with `\"` and `\'` now behaves like it does in PHP (only the same type of quote used for the string can be escaped) [#4976](https://github.com/getkirby/kirby/pull/4976)
 - Uploaded files are deleted from the temporary directory after they have been successfully stored in the content directory. [#2476](https://github.com/getkirby/kirby/issues/2476)
 - Fixed focus for checkboxes and radio input with no options [#4917](https://github.com/getkirby/kirby/pull/4917)
+- Fixed `undefined` error when paginating the structure field [#5000](https://github.com/getkirby/kirby/issues/5000)
 - The `page.changeSlug` hook now receives the correct `$languageCode` [#4983](https://github.com/getkirby/kirby/pull/4983)
 - Files field: for `store: id` only the name is stored again when the current model is the file's parent [#4870](https://github.com/getkirby/kirby/issues/4870)
 - Fixed prepending redundant `mailto:` in `k-link` [#4882](https://github.com/getkirby/kirby/pull/4882)
