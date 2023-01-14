@@ -1,0 +1,200 @@
+Title: Include frontend CSS/JS libraries
+
+----
+
+Published: 2023-01-15
+
+----
+
+Description: How to add CSS or JS files to your templates, for example to implement an image slider
+
+----
+
+Authors:
+
+- authors/sonja-broda
+
+----
+
+Text:
+
+## Prerequisites
+
+- A Kirby (link: https://getkirby.com/try text: Starterkit) installed and running.
+- Code editor to edit files
+
+## What we will be building
+
+Let's say you've downloaded and installed Kirby's Starterkit, everything is running fine, but instead of having a list of images on the album pages, you want an image slider/carousel.
+
+While a simple slider can be implemented with pure CSS, something more sophisticated usually means you need some kind of JavaScript, and if you don't want to develop that yourself, you'll usually fall back on an existing library.
+
+In this recipe, I'll show you how to add the CSS and script files that come with such a library to the Starterkit.
+
+We'll use (link: https://nickpiscitelli.github.io/Glider.js/ text: Glider.js) as an example, but the general steps are the same no matter which slider (or other) library you use:
+
+1. Download the library files
+2. Copy them to your project
+3. Include the CSS file in the `head` tag
+4. Include the JavaScript file in the `head` or before the closing body tag (as described in your library's documentation)
+5. Add the required HTML markup if necessary
+6. Initialize the script if necessary
+
+<info>
+Note: In this recipe, we assume that you are downloading the sample library; installing libraries via (link: https://www.npmjs.com/ text: npm) is not covered. Also, the library used here is just an example, which does not mean that I recommend using it in particular. Choose what you like best.
+</info>
+
+Ready?
+
+## Step by step
+
+**Step 1: Download files**
+
+Visit (link: https://nickpiscitelli.github.io/Glider.js/ text: Glider.js) and download the latest release using the download button.
+
+**Step 2: Copy files to project**
+
+Copy the unzipped folder into the `assets/js/` folder in the Starterkit, so that your file system now looks similar to this:
+
+```filesystem
+assets/
+  css/
+  js/
+    Glider.js-master/
+    index.js
+    lightbox.js
+    prism.js
+content/
+index.php
+kirby/
+site/
+```
+
+**Step 3: Add styles**
+
+Now let's add the CSS file included with the library in the `head` tag of our document.
+
+In your code editor, open the `site/snippets/header.php` file. Then we use the (link: docs/reference/templates/helpers/css text: `css()`) helper to create a link tag for the CSS file:
+
+```php "/site/snippets/header.php"
+<?php if ($page->intendedTemplate()->name() === 'album'): ?>
+<?= css('assets/js/Glider.js-master/glider.css') ?>
+<?php endif ?>
+```
+This will create the following `link` tag when rendered:
+
+```html
+<link href="https://yourdomain/assets/js/Glider.js-master/glider.css" rel="stylesheet">
+```
+
+**Step 4: Add script**
+
+Open the `site/snippets/footer.php` snippet. Right before the closing `/body` tag, we use the (link: docs/reference/templates/helpers/js text: `js()`) helper function to load the JavaScript file:
+
+```php "/site/snippets/footer.php"
+<?php if ($page->intendedTemplate()->name() === 'album'): ?>
+<?= js('assets/js/Glider.js-master/glider.js') ?>
+<?php endif ?>
+```
+
+This will creat the following `script` tag when rendered:
+
+```html
+<script src="https://yourdomain/assets/js/Glider.js-master/glider.js"></script>
+```
+
+The `css()/js()` helpers expect the path to the files as argument. If you put the folder somewhere else, adapt the path accordingly.
+
+<info>
+For our little example, we only want to load the files when the page is an `album` page, therefore I used the if statements. Remove them if you want to load them everywhere.
+</info>
+
+**Step 5: Adapt the markup**
+
+We have to change the markup in the `/site/templates/album.php` template a bit (basically removing/replacing classes to get rid of the original layout, change the image format), so that we end up with this template:
+
+```php "/site/templates/album.php"
+<?php snippet('header') ?>
+<article>
+  <?php snippet('intro') ?>
+  <div class="grid">
+    <div class="column" style="--columns: 4">
+      <div class="text">
+        <?= $page->text() ?>
+      </div>
+    </div>
+  <div class="column glider-contain" style="--columns: 8">
+    <ul class="glider">
+      <?php foreach ($gallery as $image): ?>
+      <li>
+        <a href="<?= $image->url() ?>">
+          <figure>
+            <img src="<?= $image->crop(800,400)->url() ?>" alt="<?= $image->alt()->esc() ?>">
+          </figure>
+        </a>
+      </li>
+      <?php endforeach ?>
+    </ul>
+    <button aria-label="Previous" class="glider-prev">«</button>
+    <button aria-label="Next" class="glider-next">»</button>
+    <div role="tablist" class="dots"></div>
+  </div>
+  </div>
+</article>
+<?php snippet('footer') ?>
+```
+
+**Step 6: Initialize the slider**
+
+As our last step, we have to add a `script` tag in the footer to initialize the slider after including the library:
+
+```php "/site/snippets/footer.php"
+<?php if ($page->intendedTemplate()->name() === 'album'): ?>
+    <?= js('assets/js/Glider.js-master/glider.js')) ?>
+    <script>
+      new Glider(document.querySelector('.glider'), {
+        slidesToShow: 1,
+        dots: '.dots',
+        draggable: true,
+        arrows: {
+          prev: '.glider-prev',
+          next: '.glider-next'
+        }
+      });
+    </script>
+<?php endif ?>
+```
+
+As a finale step, add the following lines to `/assets/css/templates/album.css` to get rid of the scroll bar.
+
+```css "/assets/css/templates/album.css"
+.glider {
+  overflow: hidden;
+}
+```
+
+And with this, we are done. Not particularly beautiful yet, but it works. Play around with the options to see what you can do with it. You will find this information in the documentation of the library.
+
+## A note on loading external libraries from CDN
+
+Frontend libraries often contain links to CDNs from which you can load the required CSS/JS files. While this has certain advantages (like a user might already have a popular library cached by the browser) , you have much more control when you load the files from your own server. See also (link: https://shkspr.mobi/blog/2020/10/please-stop-using-cdns-for-external-javascript-libraries/ text: Please stop using CDNs for external Javascript libraries).
+
+## Related documentation
+
+- (link: docs/reference/templates/helpers/js#example__autoloading-template-specific-script-files text: Template specific JS files)
+- (link: docs/reference/templates/helpers/css#example__autoloading-template-specific-css-files text: Template specific CSS files)
+- (link: docs/cookbook/templating/art-directed-blog-posts text: Art-directed blog posts)
+- (link: docs/cookbook/extensions/kirby-loves-cdn text: Kirby loves CDN)
+
+
+
+
+
+
+
+
+
+
+
+
+
