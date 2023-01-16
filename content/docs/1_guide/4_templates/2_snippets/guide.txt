@@ -202,6 +202,8 @@ The `compact()` function takes the variable values from the current scope and co
 <since v="3.9.0">
 ## Passing slots to snippets
 
+(screencast: https://www.youtube.com/watch?v=ASmy8mcBWqg title: Snippets with slots text: Check out our extensive screencast to learn more about snippets with slots.)
+
 Data variables are useful if you want to pass whole objects (like the page object in the example above) or other values that you have already stored in variables.
 
 Sometimes, passing data isn't enough, for example when you want to pass full code blocks into snippets and output them inside the snippet. For this you can use snippets with slots:
@@ -227,7 +229,7 @@ The contents of each slot are captured and passed to the snippet in the `$slots`
     <?= $header ?>
   </header>
   <?php endif ?>
-  
+
   <?= $slots->body() ?>
 </article>
 ```
