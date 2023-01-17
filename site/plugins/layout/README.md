@@ -1,33 +1,41 @@
-# Layout plugin for getkirby.com
+# Kirby Layouts plugin
 
-This plugin extends our templates with a powerful layout system. It's a temporary plugin. We plan to add this feature to Kirby's core.
+This plugin extends Kirby’s new snippets with slots and loads layout snippets from `site/layouts`
+
+**This version of the plugin requires Kirby 3.9.0 and helps to migrate from the old layout plugin to our new snippets. We recommend to use native snippets instead.**
 
 ## Installation
 
-For now, this plugin is only part of our website repository. 
+### Download
 
-1. Download the repo 
-2. Copy `/site/plugins/layout`
-3. Paste the layout folder in your `/site/plugins` folder
+Download and copy this repository to `/site/plugins/layouts`.
+
+### Git submodule
+
+```
+git submodule add https://github.com/getkirby/layouts.git site/plugins/layouts
+```
+
+### Composer
+
+```
+composer require getkirby/layouts
+```
 
 ## How it works
 
-You can create full HTML layouts in a new `/site/layouts` folder. Layouts can define slots, which will then be filled with content by templates. 
-
-### Layouts
-
-You can create as many layouts as you need in your `/site/layouts` folder. Start with a default.php layout that will be picked up if no layout name is specified in the template. 
+You can create full HTML layouts in a new `/site/layouts` folder. Layouts can define slots, which will then be filled with content by templates. Layouts are based on our new snippets with slots and work exactly the same way. The only difference is the folder location. You can learn more about our snippets with slots in our docs: http://getkirby.test/docs/guide/templates/snippets#passing-slots-to-snippets
 
 #### /site/layouts/default.php
+
 ```html
 <html>
-    <head>
-        <title><?= $page->title() ?></title>
-    </head>
-    <body>
-        <?php slot() ?>
-        <?php endslot() ?>
-    </body>
+	<head>
+		<title><?= $page->title() ?></title>
+	</head>
+	<body>
+		<?= $slot ?>
+	</body>
 </html>
 ```
 
@@ -45,16 +53,16 @@ You can create as many layouts as you need in your `/site/layouts` folder. Start
 To use a specific layout, you can pass its name to the `layout()` method.
 
 #### /site/layouts/blog.php
+
 ```html
 <html>
-    <head>
-        <title>Blog</title>
-    </head>
-    <body>
-        <h1>Blog</h1>
-        <?php slot() ?>
-        <?php endslot() ?>
-    </body>
+	<head>
+		<title>Blog</title>
+	</head>
+	<body>
+		<h1>Blog</h1>
+		<?= $slot ?>
+	</body>
 </html>
 ```
 
@@ -68,130 +76,28 @@ To use a specific layout, you can pass its name to the `layout()` method.
 
 ## Working with slots
 
-You can add as many different slots to your layout as you need. The default slot goes without a specific name. Every other slot needs a unique name. Slots in layouts can define default content, which will be rendered if the slot is not used in the template. 
+You can add as many different slots to your layout as you need. The default slot goes without a specific name. Every other slot needs a unique name. Slots in layouts can define default content, which will be rendered if the slot is not used in the template.
 
-#### /site/layouts/default.php
-```html
-<html>
-    <head>
-        <?php slot('head') ?>
-        <title>Blog</title>
-        <?php endslot() ?>
-    </head>
-    <body>        
-      <div class="page">        
+Read more: http://getkirby.test/docs/guide/templates/snippets#passing-slots-to-snippets
 
-        <header class="header">
-          <a href="/">Logo</a>          
-        </header>
+## What’s Kirby?
 
-        <div class="sidebar">
-          <?php slot('sidebar') ?>
-          <!-- default sidebar setup -->
-          <?php endslot() ?>
-        </div>
+- **[getkirby.com](https://getkirby.com)** – Get to know the CMS.
+- **[Try it](https://getkirby.com/try)** – Take a test ride with our online demo. Or download one of our kits to get started.
+- **[Documentation](https://getkirby.com/docs/guide)** – Read the official guide, reference and cookbook recipes.
+- **[Issues](https://github.com/getkirby/kirby/issues)** – Report bugs and other problems.
+- **[Feedback](https://feedback.getkirby.com)** – You have an idea for Kirby? Share it.
+- **[Forum](https://forum.getkirby.com)** – Whenever you get stuck, don't hesitate to reach out for questions and support.
+- **[Discord](https://chat.getkirby.com)** – Hang out and meet the community.
+- **[Mastodon](https://mastodon.social/@getkirby)** – Spread the word.
+- **[Instagram](https://www.instagram.com/getkirby/)** – Share your creations: #madewithkirby.
 
-        <main class="main">
-          <h1>Blog</h1>
-          <?php slot() ?>
-          <!-- this is the default slot -->
-          <?php endslot() ?>
-       </main>
-     </div>
-  </body>
-</html>
-```
+---
 
-Once the slots are defined, you can fill them from your template. If you use multiple slots, you must wrap content for each slot in the `slot` and `endslot` methods. 
+## License
 
-#### /site/templates/blog.php
-```html
-<?php slot('sidebar') ?>
-<nav>
-  <!-- a custom sidebar menu -->
-</nav>
-<?php endslot() ?>
+MIT
 
-<?php slot() ?>
-<!-- html for the default slot -->
-<?php endslot() ?>
-```
+## Credits
 
-### Working with snippets
-
-Kirby's template system stays exactly as you know it. You can still work with templates without layouts and you can also still use snippets – in your templates and in your layouts. 
-
-#### /site/layouts/default.php
-```html
-<html>
-    <head>
-        <?php slot('head') ?>
-        <title>Blog</title>
-        <?php endslot() ?>
-    </head>
-    <body>        
-      <div class="page">        
-
-        <?php snippet('header') ?>
-
-        <div class="sidebar">
-          <?php slot('sidebar') ?>
-          <?php snippet('sidebar') ?>
-          <?php endslot() ?>
-        </div>
-
-        <main class="main">
-          <h1>Blog</h1>
-          <?php slot() ?>
-          <!-- this is the default slot -->
-          <?php endslot() ?>
-       </main>
-     </div>
-  </body>
-</html>
-```
-
-### Global layout data
-
-You can pass global data to the layout method and make it available in every slot and snippet of your layout.
-
-#### /site/layouts/default.php
-```html
-<html>
-    <head>
-        <?php slot('head') ?>
-        <title><?= $title ?></title>
-        <?php endslot() ?>
-    </head>
-    <body>        
-      <div class="page">        
-
-        <?php snippet('header') ?>
-
-        <div class="sidebar">
-          <?php slot('sidebar') ?>
-          <?php snippet('sidebar') ?>
-          <?php endslot() ?>
-        </div>
-
-        <main class="main">
-          <h1>Blog</h1>
-          <?php slot() ?>
-          <!-- this is the default slot -->
-          <?php endslot() ?>
-       </main>
-     </div>
-  </body>
-</html>
-```
-
-#### /site/templates/blog.php
-```html
-<?php layout('blog', ['title' => 'Blog') ?>
-
-Some more content ...
-```
-
-## More
-
-Check out our layouts and templates for more inspiration. 
+- [Kirby Team](https://getkirby.com)

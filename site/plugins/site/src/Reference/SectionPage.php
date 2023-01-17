@@ -3,7 +3,6 @@
 namespace Kirby\Reference;
 
 use Kirby\Cms\Page;
-use Kirby\Cms\Template;
 
 abstract class SectionPage extends ReflectionPage
 {
@@ -25,7 +24,7 @@ abstract class SectionPage extends ReflectionPage
      *
      * @return \Kirby\Cms\Template
      */
-    public function template(): Template
+    public function template()
     {
         // If template exists, use it
         if ($this->intendedTemplate() === parent::template()) {

@@ -5,7 +5,6 @@ namespace Kirby\Reference;
 use Kirby\Cms\App;
 use Kirby\Cms\Field;
 use Kirby\Cms\Page;
-use Kirby\Cms\Template;
 use Kirby\Reference\Types;
 use ReflectionUnionType;
 
@@ -361,7 +360,7 @@ abstract class ReflectionPage extends Page
      *
      * @return \Kirby\Cms\Template
      */
-    public function template(): Template
+    public function template()
     {
         // If template exists, use it
         if ($this->intendedTemplate() === parent::template()) {

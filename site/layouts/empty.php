@@ -4,7 +4,6 @@
   <?php snippet('layouts/head') ?>
 </head>
 <body>
-  <?php slot() ?>
-  <?php endslot() ?>
+  <?= $slot ?>
 </body>
 </html>

@@ -1,7 +1,6 @@
 <?php
 
 use Kirby\Cms\Pages;
-use Kirby\Cms\Template;
 use Kirby\Data\Data;
 use Kirby\Toolkit\Dir;
 use Kirby\Toolkit\Str;
@@ -31,15 +30,15 @@ class ReferenceClassesPage extends SectionPage
         foreach (Dir::dirs($root) as $package) {
             // Add page and subpages for each namespace package
             $children[] = $this->namespace(
-                $name = ucfirst($package), 
-                $root . '/' . $package, 
+                $name = ucfirst($package),
+                $root . '/' . $package,
             );
 
             // Add class page and method subpages for all nested namespaces
             // (only supports one level below main, e.g. `Kirb\Cms\Foo\Bar`)
             foreach (Dir::dirs($root . '/' . $package) as $subpackage) {
                 $children[] = $this->namespace(
-                    $name . '\\' . ucfirst($subpackage), 
+                    $name . '\\' . ucfirst($subpackage),
                     $root . '/' . $package . '/' . $subpackage
                 );
             }
@@ -117,7 +116,7 @@ class ReferenceClassesPage extends SectionPage
     {
         $children = [];
 
-        // Loop through each class PHP file and 
+        // Loop through each class PHP file and
         // create as child page
         foreach (Dir::files($root) as $class) {
             $name  = ucfirst(basename($class, '.php'));
@@ -130,7 +129,7 @@ class ReferenceClassesPage extends SectionPage
             } catch (Throwable $e) {
                 $content = [];
             }
-            
+
             $children[] = [
                 'slug'     => $slug,
                 'model'    => 'reference-class',
@@ -156,7 +155,7 @@ class ReferenceClassesPage extends SectionPage
         $objects = page('docs/reference/objects');
         $tools   = page('docs/reference/tools');
         $ids     = array_merge(
-            $objects->menu()->yaml(), 
+            $objects->menu()->yaml(),
             $tools->menu()->yaml()
         );
 

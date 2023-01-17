@@ -3,7 +3,6 @@
 <head>
   <?php snippet('layouts/head') ?>
 <style>
-
     .plugins {
       --min: 15rem;
     }
@@ -52,9 +51,7 @@
         grid-template-columns: 4rem 1fr auto;
       }
     }
-
   </style>
-
 </head>
 <body>
   <?php snippet('layouts/header') ?>
@@ -62,8 +59,7 @@
     <div class="container">
       <div class="with-sidebar">
         <article class="mb-24">
-          <?php slot() ?>
-          <?php endslot() ?>
+          <?= $slot ?>
         </article>
         <?php snippet('templates/plugins/sidebar') ?>
       </div>

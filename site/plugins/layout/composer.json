@@ -1,0 +1,62 @@
+{
+	"name": "getkirby/layouts",
+	"description": "Kirby Layouts",
+	"license": "MIT",
+	"type": "kirby-plugin",
+	"version": "1.2.0",
+	"keywords": [
+		"kirby",
+		"cms",
+		"layouts",
+		"templates",
+		"slots",
+		"components"
+	],
+	"authors": [
+		{
+			"name": "Bastian Allgeier",
+			"email": "bastian@getkirby.com"
+		}
+	],
+	"homepage": "https://getkirby.com",
+	"support": {
+		"email": "support@getkirby.com",
+		"issues": "https://github.com/getkirby/layouts/issues",
+		"forum": "https://forum.getkirby.com",
+		"source": "https://github.com/getkirby/layouts"
+	},
+	"require": {
+		"php": ">=8.0.0 <8.2.0",
+		"getkirby/cms": ">=3.9.0",
+		"getkirby/composer-installer": "^1.2.1"
+	},
+	"config": {
+		"allow-plugins": {
+			"getkirby/composer-installer": true
+		},
+		"optimize-autoloader": true
+	},
+	"extra": {
+		"installer-name": "layouts",
+		"kirby-cms-path": false
+	},
+	"scripts": {
+		"analyze": [
+			"@analyze:composer",
+			"@analyze:psalm",
+			"@analyze:phpcpd",
+			"@analyze:phpmd"
+		],
+		"analyze:composer": "composer validate --strict --no-check-version --no-check-all",
+		"analyze:phpcpd": "phpcpd --fuzzy --exclude tests --exclude vendor .",
+		"analyze:phpmd": "phpmd . ansi phpmd.xml.dist --exclude 'tests/*,vendor/*'",
+		"analyze:psalm": "psalm",
+		"ci": [
+			"@fix",
+			"@analyze",
+			"@test"
+		],
+		"fix": "php-cs-fixer fix",
+		"test": "phpunit --stderr --coverage-html=tests/coverage"
+	}
+}

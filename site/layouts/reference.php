@@ -49,12 +49,13 @@
           <?php snippet('templates/reference/entry/meta') ?>
         </header>
 
-        <?php slot('toc') ?>
-        <?php snippet('toc') ?>
-        <?php endslot() ?>
+        <?php if ($toc = $slots->toc()): ?>
+          <?= $toc ?>
+        <?php else: ?>
+          <?php snippet('toc') ?>
+        <?php endif ?>
 
-        <?php slot() ?>
-        <?php endslot() ?>
+        <?= $slot ?>
 
         <?php snippet('templates/reference/footer') ?>
       </article>

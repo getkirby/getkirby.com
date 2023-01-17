@@ -1,4 +1,5 @@
 <?php layout('features') ?>
+
 <?php snippet('templates/features-for-clients/trust') ?>
 <?php snippet('templates/features-for-clients/voices') ?>
 <?php snippet('templates/features-for-clients/onboarding') ?>

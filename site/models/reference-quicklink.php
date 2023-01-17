@@ -2,7 +2,6 @@
 
 use Kirby\Cms\Field;
 use Kirby\Cms\Pages;
-use Kirby\Cms\Template;
 
 class ReferenceQuickLinkPage extends Page
 {
@@ -57,7 +56,7 @@ class ReferenceQuickLinkPage extends Page
 
         return $children;
     }
-    
+
     /**
      * Returns whether the referenced page is open
      *
@@ -69,7 +68,7 @@ class ReferenceQuickLinkPage extends Page
         return $link ? $link->isOpen() : false;
     }
 
-    public function template(): Template
+    public function template()
     {
         return $this->kirby()->template('link');
     }
@@ -77,13 +76,13 @@ class ReferenceQuickLinkPage extends Page
     public function title(): Field
     {
         $title = $this->content()->get('title');
-        
+
         if ($title->isNotEmpty()) {
             return $title;
         }
-        
+
         $link = $this->link()->toPage();
         return new Field($this, 'title', $link ? $link->title() : null);
     }
-    
+
 }

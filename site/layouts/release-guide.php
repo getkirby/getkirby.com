@@ -16,38 +16,48 @@
     <div class="container">
       <div class="with-sidebar">
         <article class="mb-24">
-          <?php slot('header') ?>
-          <header>
-            <h1 class="h1 mb-12"><?php slot('h1') ?><?= $page->title() ?><?php endslot() ?></h1>
-            <?php if ($page->intro()->isNotEmpty()): ?>
-            <div class="prose mb-12">
-              <p class="intro">
-                <?= $page->intro()->kti() ?>
-              </p>
-            </div>
-            <?php endif ?>
-          </header>
-          <?php endslot() ?>
-          <?php slot('toc') ?>
-          <?php snippet('toc') ?>
-          <?php endslot() ?>
+          <?php if ($header = $slots->header()): ?>
+            <?= $header ?>
+          <?php else: ?>
+            <header>
+              <h1 class="h1 mb-12"><?php slot('h1') ?><?= $page->title() ?><?php endslot() ?></h1>
+              <?php if ($page->intro()->isNotEmpty()): ?>
+              <div class="prose mb-12">
+                <p class="intro">
+                  <?= $page->intro()->kti() ?>
+                </p>
+              </div>
+              <?php endif ?>
+            </header>
+          <?php endif ?>
+
+          <?php if ($toc = $slots->toc()): ?>
+            <?= $toc ?>
+          <?php else: ?>
+            <?php snippet('toc') ?>
+          <?php endif ?>
+
           <div class="prose mb-24">
-            <?php slot() ?>
-            <?= $page->text()->kt() ?>
-            <?php endslot() ?>
+            <?= $slot ?? $page->text()->kt() ?>
           </div>
-          <?php slot('footer') ?>
-          <footer>
-            <?php snippet('layouts/github-edit') ?>
-          </footer>
-          <?php endslot() ?>
+
+          <?php if ($footer = $slots->footer()): ?>
+            <?= $toc ?>
+          <?php else: ?>
+            <footer>
+              <?php snippet('layouts/github-edit') ?>
+            </footer>
+          <?php endif ?>
         </article>
-        <?php slot('sidebar') ?>
+
+        <?php if ($sidebar = $slots->sidebar()): ?>
+          <?= $sidebar ?>
+        <?php else: ?>
           <?php snippet('sidebar', [
             'title' => 'Kirby',
             'menu'  => collection('kirby')
           ]) ?>
-        <?php endslot() ?>
+        <?php endif ?>
       </div>
     </div>
   </main>

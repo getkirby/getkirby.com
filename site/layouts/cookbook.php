@@ -9,14 +9,15 @@
     <div class="container">
       <div class="with-sidebar">
         <article class="mb-24">
-          <?php slot('hero') ?>
-          <header class="mb-12">
-            <h1 class="h1"><?php slot('h1') ?><?php endslot() ?></h1>
-          </header>
-          <?php endslot() ?>
+          <?php if ($hero = $slots->hero()): ?>
+            <?= $hero ?>
+          <?php else: ?>
+            <header class="mb-12">
+              <h1 class="h1"><?= $slots->h1() ?></h1>
+            </header>
+          <?php endif ?>
           <div class="mb-24">
-            <?php slot() ?>
-            <?php endslot() ?>
+            <?= $slot ?>
           </div>
           <footer>
             <?php snippet('layouts/github-edit') ?>

@@ -1,7 +1,6 @@
 <?php
 
 use Kirby\Cms\Field;
-use Kirby\Cms\Template;
 use Kirby\Reference\ReflectionPage;
 
 class ReferenceUrlPage extends ReflectionPage
@@ -27,7 +26,7 @@ class ReferenceUrlPage extends ReflectionPage
         return str_replace('{{ url }}', $this->slug(), $text);
     }
 
-    public function template(): Template
+    public function template()
     {
         return $this->kirby()->template('reference-system');
     }

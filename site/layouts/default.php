@@ -6,12 +6,13 @@
 <body>
   <?php snippet('layouts/header') ?>
   <main id="main" class="main">
-    <?php slot('container') ?>
-    <div class="container">
-      <?php slot() ?>
-      <?php endslot() ?>
-    </div>
-    <?php endslot() ?>
+    <?php if ($container = $slots->container()): ?>
+      <?= $container ?>
+    <?php else: ?>
+      <div class="container">
+        <?= $slot ?>
+      </div>
+    <?php endif ?>
   </main>
   <?php snippet('layouts/footer') ?>
 </body>
