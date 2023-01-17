@@ -1,16 +1,14 @@
-<?php if (1 === 2): ?>
 <div class="mb-6">
   <div class="container">
     <?php snippet('layouts/topbar', [
       'icon'   => '🚀',
-      'title'  => 'Kirby 3.8 is here!',
+      'title'  => 'Kirby 3.9 is here!',
       'button' => 'Learn more',
-      'link'   => '/releases/3.8',
-      'active' => $page->is('releases/3-8')
+      'link'   => '/releases/3.9',
+      'active' => $page->is('releases/3-9')
     ]) ?>
   </div>
 </div>
-<?php endif ?>
 
 <header class="header mb-24">
   <?php snippet('layouts/skipper') ?>
