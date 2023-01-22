@@ -1,0 +1,25 @@
+Title: Meintenance Mode
+
+----
+
+Repository: https://github.com/moritzebeling/kirby-maintenance
+
+----
+
+Category: devtools
+
+----
+
+Subcategory: utilities
+
+----
+
+Description: Switch your website to maintenance mode and it will only be visible to logged in users.
+
+----
+
+Example:
+
+```
+'maintenance' => true,
+```
