@@ -14,5 +14,13 @@ Subcategory:
 
 ----
 
-Description: Custom Kirby Panel button field to open or trigger URLs
+Description: Custom Kirby Panel button field to open or trigger URLs. Helpful if your content is visible or editable on other services/domains.
 
+----
+
+Example:
+
+```yml
+button:
+  url: "https://external.com/{{ page.slug }}"
+```
