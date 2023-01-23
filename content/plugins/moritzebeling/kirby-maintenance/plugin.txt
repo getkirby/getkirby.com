@@ -1,4 +1,4 @@
-Title: Meintenance Mode
+Title: Maintenance Mode
 
 ----
 
@@ -21,5 +21,5 @@ Description: Switch your website to maintenance mode and it will only be visible
 Example:
 
 ```
-'maintenance' => true,
+'maintenance' => true
 ```
