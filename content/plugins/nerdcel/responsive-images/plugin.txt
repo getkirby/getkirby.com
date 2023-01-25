@@ -2,10 +2,6 @@ Title: Responsive images
 
 ----
 
-Download: https://github.com/nerdcel/kirby3-responsive-images/archive/refs/heads/main.zip
-
-----
-
 Repository: https://github.com/nerdcel/kirby3-responsive-images
 
 ----
@@ -15,10 +11,6 @@ Category: panel
 ----
 
 Description: Manage responsive image settings within the Kirby3 panel.
-
-----
-
-Version: 1.0.1
 
 ----
 
