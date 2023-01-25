@@ -10,6 +10,10 @@ Category: panel
 
 ----
 
+Subcategory: images
+
+----
+
 Description: Manage responsive image settings within the Kirby3 panel.
 
 ----
