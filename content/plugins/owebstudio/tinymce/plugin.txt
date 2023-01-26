@@ -10,7 +10,7 @@ Changes: https://owebstudio.com/kirby/plugins/tinymce-editor/changelog#{{ versio
 
 ----
 
-Version: 1.1.2
+Version: 1.1.3
 
 ----
 
