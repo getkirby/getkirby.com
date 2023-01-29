@@ -13,6 +13,7 @@ return [
         'media'         => ['icon' => 'image', 'label' => 'Media'],
         'panel'         => ['icon' => 'panel', 'label' => 'Panel'],
         'performance'   => ['icon' => 'performance', 'label' => 'Performance'],
+        'search'        => ['icon' => 'search', 'label' => 'Search'],
         'security'      => ['icon' => 'lock', 'label' => 'Security'],
         'seo'           => ['icon' => 'seo', 'label' => 'SEO'],
         'social'        => ['icon' => 'user', 'label' => 'Social web'],
