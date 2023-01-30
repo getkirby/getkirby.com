@@ -8,6 +8,10 @@ Html::attr('style', 'color: red'); // style="color: red"
 Html::attr('selected', true);      // selected
 Html::attr('class', ['a', 'b']);   // class="a b"
 
+// single attribute from a field (that can possibly be empty);
+// the attribute will be omitted if the field is empty
+Html::attr('class', $page->classString()->or(null)->value());
+
 // multiple attributes
 Html::attr(['style' => 'color: red', 'selected' => true]); // style="color: red" selected
 Html::attr(['style' => 'color: red', 'selected']);         // style="color: red" selected
