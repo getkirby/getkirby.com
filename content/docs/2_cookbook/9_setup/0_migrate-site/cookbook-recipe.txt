@@ -453,7 +453,7 @@ The `popup: yes` property in a `link` KirbyTag becomes `target: _blank`:
 
 ### Filenames
 
-Media filenames starting with an underscore (e.g. `_dsc9876.jgg` are ignored in Kirby 3. You need to rename such files.
+Media filenames starting with an underscore (e.g. `_dsc9876.jpg`) are ignored in Kirby 3. You need to rename such files.
 
 ## Getting stuck?
 
