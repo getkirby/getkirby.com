@@ -84,7 +84,7 @@ $images = page('blog')
   ->images()
   ->filterBy('filename', '*=', 'cover-');
 
-// get all file types exept images
+// get all file types except images
 $files = page('blog')
   ->files()
   ->filterBy('type', '!=', 'image');
