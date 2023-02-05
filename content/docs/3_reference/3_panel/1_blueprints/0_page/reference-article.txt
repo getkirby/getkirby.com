@@ -135,7 +135,18 @@ The image options for pages can now be defined directly in their own blueprint. 
 ```yaml "site/blueprints/pages/note.yml"
 image:
   back: blue-200
+  query: page.cover.toFile()
   icon: 📝
+```
+This will fall back to the icon if the page has no images. If the `query` option is not set, the first image will be used.
+
+To force the icon if the page has images, set  the `query` option to `false`:
+
+```yaml "site/blueprints/pages/note.yml"
+image:
+  back: blue-200
+  icon: 📝
+  query: false
 ```
 
 ### Support for queries
