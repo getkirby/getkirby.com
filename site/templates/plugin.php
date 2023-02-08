@@ -110,11 +110,25 @@
   .plugin-installation input:focus {
     outline: 0;
   }
+
+  .documentation.prose > * {
+    max-width: 100%;
+  }
+
+  .documentation.prose > h1 {
+    margin-top: 4rem;
+  }
+
+
+  .documentation.prose figure.code {
+    margin-bottom: 1.2rem;
+  }
+
 </style>
 
 <article>
 
-  <header class="mb-<?= $page->text()->isNotEmpty() ? '24' : '42' ?>">
+  <header class="mb-<?= $documentation ? '24' : '42' ?>">
     <h1 class="h1 block mb-12"><?= $page->title() ?></h1>
     <div class="plugin-summary mb-12">
       <figure>
@@ -145,7 +159,7 @@
             </div>
           <?php endif ?>
         </div>
-        <figcaption class="prose text-xl color-black">
+        <figcaption class="prose text-xl color-black mb-12">
           <?= $page->description()->kt()->widont() ?>
         </figcaption>
       </figure>
@@ -232,10 +246,10 @@
 
   </header>
 
-  <?php if ($page->text()->isNotEmpty()) : ?>
+  <?php if ($documentation) : ?>
     <?php snippet('toc', ['title' => 'Documentation']) ?>
-    <div class="prose text-base mb-42">
-      <?= $page->text()->kt() ?>
+    <div class="prose documentation text-base mb-42">
+      <?= $documentation ?>
     </div>
   <?php endif ?>
 
