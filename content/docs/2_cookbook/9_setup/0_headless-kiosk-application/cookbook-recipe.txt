@@ -19,30 +19,30 @@ Text:
 
 ## Intro
 
-Kirby is very versatile and can be used for things that are a little bit out of the ordinary. Lets assume that you need to create a Kiosk application for use in a showroom or museum setting. The app should run on Desktop computers as well as Android Tablets and iPads. 
+Kirby is very versatile and can be used for things that are a little out of the ordinary. Let's assume that you need to create a Kiosk application for use in a showroom or museum setting. The app should run on Desktop computers as well as Android Tablets and iPads.
 
-The space the Kiosk will be used in has very patchy or no internet connection, so the application needs to be entirely self contained, and make no external internet calls at all.
+The space the Kiosk will be used in has very patchy or no internet connection, so the application needs to be entirely self-contained, and make no external internet calls at all.
 
-This cookbook will cover using Kirby to handle the content and imagery, and generating a static version via [11ty](https://www.11ty.dev/). From there we can use [Electron Builder](https://www.electron.build/) to generate the desktop versions, and [Capacitor](https://capacitorjs.com/) to create the mobile device apps.
+This recipe will cover using Kirby to handle the content and imagery, and generating a static version via [11ty](https://www.11ty.dev/). From there, we can use [Electron Builder](https://www.electron.build/) to generate the desktop versions, and [Capacitor](https://capacitorjs.com/) to create the mobile device apps.
 
 
-## Preperation
+## Preparation
 
 If you have not used Kirby headless before, please take a look at the [Going Headless cookbook](/docs/cookbook/setup/headless-getting-started) guide before continuing, as this will explain the basic principles.
 
 To keep this guide simple, we will be using data from the [Kirby KQL Sandbox](https://kql.getkirby.com/) which does not need any authentication. In reality, you will likely be using a local install of Kirby as a source for the data. 
 
-It would be safe to disable authentication if that is the case. If you are using a publicly accessable headless instance of Kirby, using authentication is strongly advised. Making use of [DotENV](https://www.npmjs.com/package/dotenv) is also recommended.
+It would be safe to disable authentication if that is the case. If you are using a publicly accessible headless instance of Kirby, using authentication is strongly advised. Making use of [DotENV](https://www.npmjs.com/package/dotenv) is also recommended.
 
 ## First steps
 
-To begin with, we will need setup [11ty](https://www.11ty.dev/) in accordance with the [documentation](https://www.11ty.dev/docs/). You can also use the [Kirby Eleventykit](https://github.com/getkirby/eleventykit) as a basis for this, which already has a simple connection setup. This guide assumes a basic understanding of 11ty.
+To begin with, we will need to set up [11ty](https://www.11ty.dev/) in accordance with the [documentation](https://www.11ty.dev/docs/). You can also use the [Kirby Eleventykit](https://github.com/getkirby/eleventykit) as a basis for this, which already has a simple connection setup. This guide assumes a basic understanding of 11ty.
 
 With that out the way, we can make a start with getting our data from Kirby and into 11ty.
 
 We will make a small site the pulls in the Photography section of the Starter Kit, along with the text and images to make a basic information site.
 
-In the `_data` folder create a `photography.js` file with the following code in it:
+In the `_data` folder, create a `photography.js` file with the following code in it:
 
 ```js
 const { $fetch } = require("ofetch");
@@ -78,7 +78,7 @@ module.exports = async function () {
 };
 ```
 
-This will enable us to generate a list of the photography pages on the main index.html file of project. You can do this by editing the `index.njk` file to contain the following:
+This will enable us to generate a list of the photography pages on the main `index.html` file of the project. You can do this by editing the `index.njk` file to contain the following:
 
 ```
 ---
@@ -105,11 +105,11 @@ permalink: /
 </ul>
 ```
 
-This uses the data pulled in from Kirby to generare a list of the available Photography articles. At this point (and after a little CSS!) we should have something like this in the browser:
+This uses the data pulled in from Kirby to generate a list of the available Photography articles. At this point (and after a little CSS!) we should have something like this in the browser:
 
 (image: image-list.jpg)
 
-So far so good. The next step is to create the individual post pages. We can do this with a little more [Nunjucks](https://mozilla.github.io/nunjucks/) in a photography subfolder. This will give us our sub pages based on the data coming in from Kirby.
+So far, so good. The next step is to create the individual post pages. We can do this with a little more [Nunjucks](https://mozilla.github.io/nunjucks/) in a photography subfolder. This will give us our subpages based on the data coming in from Kirby.
 
 ```
 ---
@@ -144,15 +144,15 @@ permalink: photography/{{ post.slug }}/index.html
 </article>
 ```
 
-So there we have the basics of our little site. We have made index page, allowing us to click through to the desired article and we have individual pages for each item. 11ty automatically generated all this from the JSON data provided to us by Kirby.
+So there we have the basics of our little site. We have made an index page, allowing us to click through to the desired article, and we have individual pages for each item. 11ty automatically generated all this from the JSON data provided to us by Kirby.
 
-This is just one small problem. We need this app to run offline, without making any external calls. if you take a close look at the URLs for the images, you can see they are infact being pulled in remotly:
+There is just one small problem. We need this app to run offline, without making any external calls. If you take a close look at the URLs for the images, you can see they are in fact being pulled in remotely:
 
 ```html
 <img src="https://kql.getkirby.com/media/pages/photography/landscape/5c061a39cb-1653485091/clouds-eat-mountain.jpg">
 ```
 
-We need to convert these into static assets within our projects file system, so that we can reference them from our code base rather then via a URL. Let's fix that!
+We need to convert these into static assets within our projects file system, so that we can reference them from our code base rather than via a URL. Let's fix that!
 
 ## Creating static image assets 
 
@@ -162,7 +162,7 @@ Setting up a custom [11ty shortcode](https://www.11ty.dev/docs/shortcodes/) will
 yarn add @11ty/eleventy-img
 ```
 
-Next, we need to update our `.eleventy.js` file to with a shortcode that will store the images locally and generate WebP & Avif versions for us at the same time.
+Next, we need to update our `.eleventy.js` file too with a shortcode that will store the images locally and generate WebP & AVIF versions for us at the same time.
 
 ```js
 const path = require("path");
@@ -204,22 +204,22 @@ module.exports = function (eleventyConfig) {
 
 ```
 
-Moving back to the Nunjuck's template for the index page, we adjust the loop the call on the Image shortcode:
+Moving back to the Nunjuck's template for the index page, we adjust the call on the image shortcode:
 
 ```
 {% image item.poster.url, "Image", 'home', "(max-width: 480px) 480px, (max-width: 960px) 960px, 100vw" %}
 ```
 
-The short code expects a src for the image, in this case we are feeding it a poster thumbnail image via `item.poster.url`. Next, we can set an Alt text value. Thridly, we can set a folder name to store the images in, using `/assets/images` as a base.
+The short code expects a `src for the image, in this case we are feeding it a poster thumbnail image via `item.poster.url`. Next, we can set an `alt` text value. Thirdly, we can set a folder name to store the images in, using `/assets/images` as a base.
 
-In this case the images will be generated in a `/assets/images/home` folder. Finally, we can pass a set of sizes to trigger the source set images.
+In this case, the images will be generated in an `/assets/images/home` folder. Finally, we can pass a set of sizes to trigger the source set images.
 
 The loop should now look like this:
 
 ```
 {% for item in photography %}
 <li>
-  <h2> <a href="/photography/{{ item.slug }}">{{ item.title }}</a> </h2>
+  <h2><a href="/photography/{{ item.slug }}">{{ item.title }}</a></h2>
   <a href="/photography/{{ item.slug }}">
     <figure>
       {% image item.poster.url, "Image", 'home', "(max-width: 480px) 480px, (max-width: 960px) 960px, 100vw" %}
@@ -229,7 +229,7 @@ The loop should now look like this:
 {% endfor %}
 ```
 
-If we build the project now, and take a look at the generated HTML we can see that we do indeed now have local images with absoloute URLS:
+If we build the project now, and take a look at the generated HTML, we can see that we do indeed now have local images with absolute URLS:
 
 ```html
 <picture>
@@ -244,7 +244,7 @@ At this stage, we currently have a site running statically, that could be deploy
 
 ## Desktop application
 
-### Preperation
+### Preparation
 
 Now for the exciting stuff. We need to do a little prep before we can generate our app, since we need to create some icons, and a background for the Apple DMG file.
 
@@ -264,9 +264,9 @@ We can run this through `electron-icon-builder` to generate all the different si
 electron-icon-builder --input=/Volumes/Server/Cookbooks/Kiosk/app/icons/src/camera.png --output=./icons/output --flatten
 ```
 
-For the DMG app backgrounds we need to create two images, one at 540 x 380 with a name of `background.tiff` and another at 1080 x 760 called `background@x2.tiff`. The latter will be used as on Retina macs, and the file names are important.
+For the DMG app backgrounds, we need to create two images, one at 540 x 380 with a name of `background.tiff` and another at 1080 x 760 called `background@x2.tiff`. The latter will be used on Retina macs, and the file names are important.
 
-Remember to leave room at the bottom of the image as this is where the install icons will sit. Store these images in the output folder with all the icons created in the previous step.
+Remember to leave room at the bottom of the image, as this is where the install icons will sit. Store these images in the output folder with all the icons created in the previous step.
 
 (image: app-backgrounds.jpg)
 
@@ -326,9 +326,9 @@ app.on("activate", function () {
 });
 ```
 
-This is a simple configuration for `electron`. The details of this code is outside of the scope of this article, but can be refered to in the Electron documentation if you wish to learn more.
+This is a simple configuration for `electron`. The details of this code are outside the scope of this article, but can be referred to in the Electron documentation if you wish to learn more.
 
-There are two parts of this you may wish to alter. Most browsers prevent the auto playing of video unless it is muted. The following line removes this restriction, allowing you to auto play video with sound on without requiring user input.
+There are two parts of this you may wish to alter. Most browsers prevent the auto-playing of video unless it is muted. The following line removes this restriction, allowing you to autoplay video with sound on without requiring user input.
 
 ```js
 app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required");
@@ -350,9 +350,9 @@ mainWindow = new BrowserWindow({
 });
 ```
 
-It is here that you can set the initial width and height of the application window, the favicon, as well as wether or not to show things like the address bar and status bar.
+It is here that you can set the initial width and height of the application window, the favicon, as well as whether to show things like the address bar and status bar.
 
-Finally, add the following to you package.json file:
+Finally, add the following to your `package.json file:
 
 ```json
 "main": "main.js",
@@ -403,9 +403,9 @@ It's finally moment of truth time! Let's add a couple of NPM scripts to `package
 "desktop": "yarn build && yarn electron-pack",
 ```
 
-Running `yarn desktop` will generate a desktop app depending on the the platform you are running the project on. If you are running on Windows, you will end up with a Windows installer in the `dist` folder. If you are on Apple silicon Mac you will end up with a DMG that will _only_ run on another Apple silicon Mac. Running `yarn macuniversal` will generate an app that will work on both Apple Silicon and Intel based Macs.
+Running `yarn desktop` will generate a desktop app depending on the platform you are running the project on. If you are running on Windows, you will end up with a Windows installer in the `dist` folder. If you are on Apple Silicon Mac you will end up with a DMG that will _only_ run on another Apple Silicon Mac. Running `yarn macuniversal` will generate an app that will work on both Apple Silicon and Intel based Macs.
 
-Run either `yarn desktop` or `yarn macuniversal` depending on the platform you are running on. If all goes well, you will find an excutable application inside the `dist` folder. In my case, I am running on Apple Silicon and successfully get a DMG file allowing me to install the app.
+Run either `yarn desktop` or `yarn macuniversal` depending on the platform you are running on. If all goes well, you will find an executable application inside the `dist` folder. In my case, I am running on Apple Silicon and successfully get a DMG file allowing me to install the app.
 
 (image: dmg.jpg)
 
@@ -415,11 +415,11 @@ After installing the app, we can finally see the result of all our hard work!
 
 ### Mobile applications
 
-So thats the desktop application finished up. Let's take things further now, and generate mobile applications for iOS and Android from the same source files.
+So that's the desktop application finished up. Let's take things further now, and generate mobile applications for iOS and Android from the same source files.
 
-#### Pre-requistes
+#### Prerequistes
 
-We will be using [Capacitor](https://capacitorjs.com/) to help us out with this, which in turn depends on Xcode and Android Studio. Please set these up in accordance with the [Capcitor environment setup](https://capacitorjs.com/docs/getting-started/environment-setup) and [installing Capacitor](https://capacitorjs.com/docs/getting-started) itself into your project before proceeding.
+We will be using [Capacitor](https://capacitorjs.com/) to help us out with this, which in turn depends on Xcode and Android Studio. Please set these up in accordance with the [Capacitor environment setup](https://capacitorjs.com/docs/getting-started/environment-setup) and [installing Capacitor](https://capacitorjs.com/docs/getting-started) itself into your project before proceeding.
 
 Secondly, we need to configure Capacitor. In the root of your project, create a `capacitor.config.ts` file, containing the following:
 
@@ -438,35 +438,35 @@ export default config;
 
 ### Android application
 
-Let's kick off with building the Android app. We need to add Capicitors Android package and the Android platform to make this happen.
+Let's kick off with building the Android app. We need to add Capacitors Android package and the Android platform to make this happen.
 
 ```
 yarn add @capacitor/android
 npx cap add android
 ```
 
-You will now find that an `Android` folder has been created in the root of your project, containg source code for your project. We can open this in Android studio with the following:
+You will now find that an `Android` folder has been created in the root of your project, containing source code for your project. We can open this in Android Studio with the following:
 
 ```
 npx cap open android
 ```
 
-The first time you do this, Android Studio should do a whole bunch of setting up due to the dependencies in the project. Just allow it to do it's thing, which may take some time depending on your machine. However, once done, opening the project again later should be much quicker.
+The first time you do this, Android Studio should do a bunch of setting up due to the dependencies in the project. Just allow it to do its thing, which may take some time depending on your machine. However, once done, opening the project again later should be much quicker.
 
-With an Emulator configured in Android studio, we can go ahead hit the green Play button on the main tool bar which will launch the project and allow us to preview it on an emulated device.
+With an Emulator configured in Android Studio, we can go ahead and hit the green Play button on the main toolbar, which will launch the project and allow us to preview it on an emulated device.
 
 (image: android.jpg)
 
 
 ### iOS application
 
-Next up is creating an iOs version. The process is quite similar. First we need to add the Capacitor iOs Package:
+Next up is creating an iOS version. The process is quite similar. First we need to add the Capacitor iOS Package:
 
 ```
-yarn add @capacitor/android
+yarn add @capacitor/ios
 ```
 
-Then generate the xCode project in a similar fashion as we did before:
+Then generate the Xcode project in a similar fashion as we did before:
 
 ```
 npx cap add ios
@@ -487,7 +487,4 @@ Finally, we can make generating the projects simpler by adding those commands to
 
 There we have it! We now have means to create desktop and mobile devices applications, whilst leaning on the power of Kirby and 11ty to do the heavy lifting. Where to now? 
 
-Whilst out of the scope of this guide, From here you can build the distributable files in XCode and Android Studio, and publish them via the respective app stores. I hope you found this guide useful and I would see what you make with this!
-
-
-
+Whilst out of the scope of this guide, from here you can build the distributable files in Xcode and Android Studio, and publish them via the respective app stores. I hope you found this guide useful, and I would like to see what you make with this!
