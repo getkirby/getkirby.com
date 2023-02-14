@@ -210,7 +210,7 @@ Moving back to the Nunjuck's template for the index page, we adjust the call on 
 {% image item.poster.url, "Image", 'home', "(max-width: 480px) 480px, (max-width: 960px) 960px, 100vw" %}
 ```
 
-The short code expects a `src for the image, in this case we are feeding it a poster thumbnail image via `item.poster.url`. Next, we can set an `alt` text value. Thirdly, we can set a folder name to store the images in, using `/assets/images` as a base.
+The short code expects a src for the image, in this case we are feeding it a poster thumbnail image via `item.poster.url`. Next, we can set an `alt` text value. Thirdly, we can set a folder name to store the images in, using `/assets/images` as a base.
 
 In this case, the images will be generated in an `/assets/images/home` folder. Finally, we can pass a set of sizes to trigger the source set images.
 
