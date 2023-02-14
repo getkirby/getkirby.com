@@ -352,7 +352,7 @@ mainWindow = new BrowserWindow({
 
 It is here that you can set the initial width and height of the application window, the favicon, as well as whether to show things like the address bar and status bar.
 
-Finally, add the following to your `package.json file:
+Finally, add the following to your `package.json` file:
 
 ```json
 "main": "main.js",
