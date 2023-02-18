@@ -39,7 +39,7 @@ Kirby::plugin('my-name/hello-world', [
 
 Each plugin must have a unique name. We follow the typical Composer package name scheme here, so your plugin name must follow the format `{your-name-or-alias}/{plugin-name}`.
 
-You are totally free to use whatever alias you like. Something like `superwoman/superplugin` is totally fine. The alias and plugin names must only contain characters from a-z and dashes though.
+You are totally free to use whatever alias you like. Something like `superwoman/superplugin` is totally fine. The alias and plugin names must only contain characters from a-z, numbers and dashes though.
 
 The plugin name can later be used to find a specific plugin:
 
