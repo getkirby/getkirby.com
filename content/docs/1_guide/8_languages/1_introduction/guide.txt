@@ -232,16 +232,17 @@ The `LC_ALL` locale should always be set as it is used as a default locale inter
 
 ## Language specific date handlers
 
-By default, Kirby uses PHP's `date` function to format dates for pages and files. `date()` does not respect locale settings and always creates English month and day names. You can  switch to `strftime()` as your primary date handler, which uses a different format for dates, but also supports translated month and day names. To switch the handler, add the following to your config:
+By default, Kirby uses PHP's `date` function to format dates for pages and files. `date()` does not respect locale settings and always creates English month and day names. You can switch to `intl` as your primary date handler, which uses a different format for dates, but also supports translated month and day names. To switch the handler, add the following to your config:
 
 ```php "/site/config/config.php"
 <?php
 
 return [
-  'date.handler'  => 'strftime',
+  'date.handler'  => 'intl',
 ];
 ```
 
+For available date format strings, see (link: https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax).
 
 ## Automatic language detection
 
