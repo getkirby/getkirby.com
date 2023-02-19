@@ -1,11 +1,23 @@
 Text:
 
-## Example
+## Examples
+
+### Basic usage
 
 ```php
 <?php if ($page->hasHeader()->toBool()): ?>
 <header>
   <!-- Your code here -->
+</header>
+<?php endif ?>
+```
+
+### With default
+
+```php
+<?php if ($page->hideHeader()->toBool(true)): ?>
+<header>
+  <!-- Your code here; printed even when the field is empty -->
 </header>
 <?php endif ?>
 ```

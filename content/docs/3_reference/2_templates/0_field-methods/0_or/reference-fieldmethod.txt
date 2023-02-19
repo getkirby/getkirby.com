@@ -1,7 +1,21 @@
 Text:
 
-## Example
+## Examples
+
+### Replace an empty field with another field
 
 ```php
 <meta name="description" content="<?= $page->description()->or($site->description()) ?>">
+```
+
+### Replace an empty field with a fixed string
+
+```php
+<meta name="description" content="<?= $page->description()->or('Default description') ?>">
+```
+
+### Replace an empty field with `null`
+
+```php
+<img <?= Html::attr(['width' => $file->displayWidth()->or(null)]) ?>>
 ```

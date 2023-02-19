@@ -8,6 +8,10 @@ Xml::attr('viewBox', '0 0 100 100'); // viewBox="0 0 100 100"
 Xml::attr('selected', true);         // selected="selected"
 Xml::attr('class', ['a', 'b']);      // class="a b"
 
+// single attribute from a field (that can possibly be empty);
+// the attribute will be omitted if the field is empty
+Xml::attr('class', $page->classString()->or(null)->value());
+
 // multiple attributes
 Xml::attr(['viewBox' => '0 0 100 100', 'selected' => true]); // viewBox="0 0 100 100" selected="selected"
 Xml::attr(['viewBox' => '0 0 100 100', 'selected']);         // viewBox="0 0 100 100" selected="selected"
