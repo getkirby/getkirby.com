@@ -4,41 +4,15 @@ Title: Hooks
 
 Intro:
 
-With hooks you can intercept all kinds of Kirby events to inject your own code, for example, react when a user uploads a file or when they save a page. See below for more (link: #details text: details).
+With hooks you can intercept all kinds of Kirby events to inject your own code, for example, react when a user uploads a file or when they save a page. See hook extension for more (link: docs/reference/plugins/extensions/hooks text: details).
 
 ----
 Text:
 
-## Details
-
-Hooks allow you to react on Kirby events like file uploads, page updates etc.
-
-<info>
-Hooks can execute code, but you can't return anything from them or redirect anywhere. If you try to, an error is thrown in the Panel.
-</info>
 
 
-Kirby provides two variants of each hook: `before` and `after` hooks.
 
-## `Before` hooks
 
-A `before` hook is triggered before an action is executed, i.e. before a page is actually updated, a file uploaded, a route called etc.
-
-Typical use cases for `before` hooks include:
-
-- Throw an error to prevent certain users from executing an action in general or under certain circumstances.
-- Store information in the session.
-- Log something before an action is executed.
-- …
-
-## `After` hooks
-
-An `after` hook is triggered right after the action was executed. Some typical use cases for these hooks are:
-
-- Automatically resize a huge image and save a smaller version instead.
-- Modify user entered information when a user saves the page.
-- Log something when an action is executed.
-- …
 
 
 
