@@ -9,6 +9,32 @@ Kirby fires a bunch of events when important things happen in the background. Fo
 
 Hooks are not restricted to Panel events, but are implemented  everywhere: hooks are called no matter if an event happens in the Panel, on the command line or in your own scripts.
 
+Kirby provides two variants of each hook: `before` and `after` hooks.
+
+### `Before` hooks
+
+A `before` hook is triggered before an action is executed, i.e. before a page is actually updated, a file uploaded, a route called etc.
+
+Typical use cases for `before` hooks include:
+
+- Throw an error to prevent certain users from executing an action in general or under certain circumstances.
+- Store information in the session.
+- Log something before an action is executed.
+- …
+
+### `After` hooks
+
+An `after` hook is triggered right after the action was executed. Some typical use cases for these hooks are:
+
+- Automatically resize a huge image and save a smaller version instead.
+- Modify user entered information when a user saves the page.
+- Log something when an action is executed.
+- …
+
+<info>
+Hooks can execute code, but you can't return anything from them or redirect anywhere. If you try to, an error is thrown in the Panel.
+</info>
+
 ## Available events
 
 (reference: plugins/hooks)
