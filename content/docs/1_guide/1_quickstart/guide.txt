@@ -68,6 +68,12 @@ When copying files to a remote server via (S)FTP, make sure to copy the `.htacce
     </table>
 </div>
 
+### Optional requirements
+
+- PHP `intl` module for the (link: docs/reference/system/options/date#date-handler__intl text: `intl` date handler) (support for international dates)
+- (link: https://imagemagick.org/ text: ImageMagick) if you want to use the (link: docs/reference/system/options/thumbs#thumbs-driver text: `im` thumbs driver). Note that the PHP `exec()` method must be enabled on your server in this case as well.
+
+
 The server OS must be POSIX compatible.
 
 If you want to use PHP's built-in server, you have to start it up with Kirby's router:
@@ -77,6 +83,8 @@ php -S localhost:8000 kirby/router.php
 ```
 
 Other servers (link: docs/reference/system/options/servers text: may work), but are not officially supported.
+
+
 
 ### Browsers for the Panel
 
