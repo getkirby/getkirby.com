@@ -2,7 +2,7 @@ Title: Twig Templates
 
 ----
 
-Repository: https://github.com/amteich/kirby-twig
+Repository: https://github.com/wearejust/kirby-twig
 
 ----
 
