@@ -12,12 +12,9 @@ Text:
 
 Kirby comes with a set of default KirbyTags for things like including images, links, dates or videos into text fields. **See (link: docs/reference/#kirbytags text: the full list of included KirbyTags)**.  
 
-
 ## How to use your own KirbyTag
 
-You can create and use a tag like (wikipedia:) in your panel's text-field. For this to work, you have to include a function ```->kirbytext()``` for every field in the template that you wish should support this tag.  **See (link: docs/guide/content/text-formatting#kirbytext text: parsing KirbyTags in your text)**.
-You can also use KirbyTags directly in your templates.
-
+You can create and use a tag like `(wikipedia:)` in text fields. For this to work, you have to include a function `->kirbytext()` for every field in the template that you wish should support this tag. You can also use KirbyTags directly in your templates. **See (link: docs/guide/content/text-formatting#kirbytext text: parsing KirbyTags in your text)**.
 
 ## How to create your own KirbyTag
 
