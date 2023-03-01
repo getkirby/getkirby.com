@@ -1,4 +1,4 @@
-Title: Kirby Favicon Plugin
+Title: Favicon
 
 ----
 
