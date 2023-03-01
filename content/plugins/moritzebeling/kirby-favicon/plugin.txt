@@ -1,0 +1,25 @@
+Title: Kirby Favicon Plugin
+
+----
+
+Repository: https://github.com/moritzebeling/kirby-favicon
+
+----
+
+Category: seo
+
+----
+
+Subcategory: utilities
+
+----
+
+Description: Favicon with minimal setup
+
+----
+
+Example:
+
+```
+assets/favicon/favicon.png
+```
