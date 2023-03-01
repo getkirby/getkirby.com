@@ -1,0 +1,18 @@
+Title: ImageMagick Extended
+
+----
+
+Repository: https://github.com/tobimori/kirby-magick-extended
+
+----
+
+Category: media
+
+----
+
+Subcategory: images
+
+----
+
+Description: Extend Kirby's built-in ImageMagick driver, work better with GIFs and APNGs
+

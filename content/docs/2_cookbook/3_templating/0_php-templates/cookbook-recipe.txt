@@ -283,7 +283,7 @@ Working with absolute URLs in templates is a nightmare. That's why Kirby has the
 
 In many situations you don't have to write a full if clause in your templates. There are shorter versions, which you should know about:
 
-#### Good
+#### Bad
 ```php
 <?php if ($page->hasChildren()): ?>
 Yay, children!
@@ -292,6 +292,7 @@ No children
 <?php endif ?>
 ```
 
+#### Good
 ```php
 <?= $page->hasChildren() ? 'Yay, children!' : 'No children' ?>
 ```

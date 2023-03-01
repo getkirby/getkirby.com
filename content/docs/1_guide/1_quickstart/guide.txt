@@ -58,10 +58,18 @@ When copying files to a remote server via (S)FTP, make sure to copy the `.htacce
             <td>
                 <ul>
                     <li>PHP 8.0, 8.1 or 8.2<br>(PHP 8.1 is recommended)</li>
-                    <li><code>mbstring</code> extension</li>
-                    <li><code>curl</code> extension</li>
+                    <li>Either the <code>gd</code> extension or ImageMagick (see below)</li>
                     <li><code>ctype</code> extension</li>
-                    <li><code>gd</code> extension</li>
+                    <li><code>curl</code> extension</li>
+                    <li><code>dom</code> extension</li>
+                    <li><code>filter</code> extension</li>
+                    <li><code>hash</code> extension</li>
+                    <li><code>iconv</code> extension</li>
+                    <li><code>json</code> extension</li>
+                    <li><code>libxml</code> extension</li>
+                    <li><code>mbstring</code> extension</li>
+                    <li><code>openssl</code> extension</li>
+                    <li><code>SimpleXML</code> extension</li>
                 </ul>
             </td>
         </tr>
@@ -69,6 +77,21 @@ When copying files to a remote server via (S)FTP, make sure to copy the `.htacce
 </div>
 
 The server OS must be POSIX compatible.
+
+### Recommended requirements
+
+- PHP `exif` extension for support for EXIF information from images
+- PHP `fileinfo` extension for improved MIME type detection for files
+- PHP `intl` extension for the (link: docs/reference/system/options/date#date-handler__intl text: `intl` date handler) (support for international dates) and localized number formatting
+
+### Optional requirements
+
+- (link: https://imagemagick.org/ text: ImageMagick) (`convert` binary) if you want to use the (link: docs/reference/system/options/thumbs#thumbs-driver text: `im` thumbs driver). Note that the PHP `exec()` method must be enabled on your server in this case as well.
+- PHP `apcu` extension for the Apcu cache driver
+- PHP `memcached` extension for the Memcached cache driver
+- PHP `PDO` extension for connecting to databases
+- PHP `zip` extension for ZIP archive file functions
+- PHP `zlib` extension for sanitization and validation of `.svgz` files
 
 If you want to use PHP's built-in server, you have to start it up with Kirby's router:
 

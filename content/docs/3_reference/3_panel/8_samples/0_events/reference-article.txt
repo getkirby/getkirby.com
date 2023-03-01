@@ -46,6 +46,10 @@ template: event
 empty: No events yet
 ```
 
+<warning>
+Make sure your events page isn't a draft anymore, otherwise the `site.find("events")` query won't be able to find it. For a draft, you could change the `parent` query to `kirby.page("events")`.
+</warning>
+
 ### Result
 
 (image: events.png)
