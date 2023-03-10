@@ -183,6 +183,8 @@ To update Kirby, download the latest version and replace the `kirby` folder.
 
 Make sure to delete the `media` folder. It will be automatically recreated.
 
+If you use any plugins, make sure to update them as well.
+
 That's it! Because Kirby does not use a database by default, you don't have to run any database migrations.
 
 <alert>
