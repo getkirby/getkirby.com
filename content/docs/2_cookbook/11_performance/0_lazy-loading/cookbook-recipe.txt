@@ -78,7 +78,7 @@ To implement browser-level lazy-loading, use the `loading` attribute with the va
     <img
         loading="lazy" alt="<?= $image->alt() ?>"
         src="<?= $image->thumb(['width' => 1280])->url() ?>"
-        srcset="<?= $image->srcset([320, 640, 960, 1280, 1600, 1920])->url() ?>"
+        srcset="<?= $image->srcset([320, 640, 960, 1280, 1600, 1920]) ?>"
         height="<?= $image->height() ?>"
         width="<?= $image->width() ?>"
     >
