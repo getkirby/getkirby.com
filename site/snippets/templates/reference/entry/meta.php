@@ -66,7 +66,10 @@ extract([
     </figure>
     <div class="box-text">
       <div class="font-bold">
-        Deprecated in <?= version($deprecated[0], '%s') ?>
+        Deprecated
+        <?php if ($version = $deprecated[0] ?? null): ?>
+        in <?= version($version, '%s') ?>
+        <?php endif ?>
       </div>
       <?php if (count($deprecated) > 1) : ?>
       <?= kti($deprecated[1]) ?>
