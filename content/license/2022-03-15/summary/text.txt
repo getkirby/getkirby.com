@@ -4,7 +4,11 @@ Title: New EULA: Summary of changes
 
 Intro:
 
-We based the changes to our license agreement (EULA) on feedback we received in the last months. Our goal is to give you and your clients more legal certainty. Nothing changes in practice for paid licenses, but now your rights are written in black and white. At the same time we have clarified ambiguous parts of the EULA. In particular, we have changed the following:
+On March 15, 2022, we switched to our (link: new-company text: new team company). In this switch, we needed to update the license agreement (EULA) and used the opportunity to incorporate feedback we received in the previous months.
+
+Our goal is to give you and your clients more legal certainty. Nothing changes in practice for paid licenses, but now your rights are written in black and white. At the same time we have clarified ambiguous parts of the EULA.
+
+In particular, we have changed the following:
 
 ----
 
