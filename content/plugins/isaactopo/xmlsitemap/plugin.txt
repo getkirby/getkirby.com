@@ -1,0 +1,17 @@
+Title: Multilanguage XML Sitemap
+
+----
+
+Repository: https://github.com/isaactopo/xmlsitemap
+
+----
+
+Category: seo
+
+----
+
+Similar: omz13/xmlsitemap
+
+----
+
+Description: Multilingual (or not) XML Sitemap generator. Options for Ignore/Include and Images
