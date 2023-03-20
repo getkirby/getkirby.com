@@ -7,23 +7,23 @@
       The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
     </h1>
 
-    <a href="https://pay.paddle.com/checkout/<?= $product ?>" target="_blank" title="Buy Kirby" class="pricing highlight bg-white shadow-xl">
+    <div class="pricing highlight bg-white shadow-xl">
       <?php if ($banner) : ?>
         <div>
           <p class="mb-6"><?= $banner->text() ?></p>
           <del class="invisible sale h6 color-gray-700" style="color: var(--color-purple-600)">€</del>
         </div>
       <?php endif ?>
-      <p class="h1 mb-3 price invisible"><span>€</span> per site</p>
+      <a href="https://pay.paddle.com/checkout/<?= $product ?>" target="_blank" class="h1 block mb-3 price invisible"><span>€</span> per site</a>
 
       <div class="columns" style="--columns: 2; --gap: var(--spacing-12)">
         <div class="flex flex-column justify-between">
           <p class="h6 mb-12 vat invisible">+ VAT if applicable</p>
           <p>
-            <span class="btn btn--filled mb-1">
+            <a href="https://pay.paddle.com/checkout/<?= $product ?>" target="_blank" class="btn btn--filled mb-1">
               <?= icon('cart') ?>
               Buy Kirby
-            </span>
+            </a>
           </p>
         </div>
         <div>
@@ -45,10 +45,16 @@
               <figure class="mr-3"><?= icon('check') ?></figure>
               No subscription
             </li>
+            <li>
+              <a class="flex items-center underline" href="<?= url('releases/4.0') ?>">
+                <figure class="mr-3"><?= icon('check') ?></figure>
+                v4 license included
+              </a>
+            </li>
           </ul>
         </div>
       </div>
-    </a>
+    </div>
   </div>
 
   <section class="mb-42">
