@@ -29,7 +29,7 @@ mark {
     </div>
   </div>
 
-  <div class="columns" style="--columns: 2; --gap: var(--spacing-12)">
+  <div class="columns mb-24" style="--columns: 2; --gap: var(--spacing-12)">
     <div>
       We are quite excited for Kirby 4, a great next step for our CMS, and we can’t wait to share it with you. We really appreciate your continued support and are looking forward to taking you along for the ride. Stay tuned for teasers and more information about the upcoming beta.
     </div>
@@ -52,6 +52,9 @@ mark {
       </ul>
     </div>
   </div>
+
+  <section>
+    <h2 class="h2 mb-6">Frequently asked questions</h2>
+    <?php snippet('faq') ?>
+  </section>
 </article>
-
-

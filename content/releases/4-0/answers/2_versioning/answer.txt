@@ -1,0 +1,9 @@
+Title: What happens with the versioning scheme?
+----
+Text:
+
+Kirby 3 follows a `{generation}.{major}.{minor}.{patch}` versioning scheme. With Kirby 4 we are moving to `{major}.{minor}.{patch}`. This means that:
+
+- Kirby will follow semantic versioning,
+- major versions will no longer be bound to automatic paid upgrades and
+- future versions will bring continuity and will be much more plannable for you and for us.
