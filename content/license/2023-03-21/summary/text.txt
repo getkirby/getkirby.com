@@ -4,7 +4,7 @@ Title: New EULA: Summary of changes
 
 Intro:
 
-On March 28, 2023, we made minor edits to our license agreement (EULA) based on community feedback we received in the last months.
+On March 21, 2023, we made minor edits to our license agreement (EULA) based on community feedback we received in the last months.
 
 As all changes are in your favor, the updated terms become binding by publication on the Kirby website for all licenses granted by or transferred to our new (link: new-company text: team company) Content Folder GmbH & Co. KG.
 

@@ -5,7 +5,7 @@ Title: Kirby End User License Agreement
 Validity:
 
 **Effective since:** Publication on the Kirby website on March 15, 2022
-**Superseded by:** Version (link: license/2023-03-28 text: 2023-03-28)
+**Superseded by:** Version (link: license/2023-03-21 text: 2023-03-21)
 
 ----
 

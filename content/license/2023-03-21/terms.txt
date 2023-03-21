@@ -4,14 +4,14 @@ Title: Kirby End User License Agreement
 
 Validity:
 
-**Effective since:** Publication on the Kirby website on March 28, 2023
+**Effective since:** Publication on the Kirby website on March 21, 2023
 This version applies to all licenses that were purchased on or after March 15, 2022 and to older licenses that were transferred to our new company Content Folder & Co. KG. Otherwise the version (link: license/2019-03-04 text: 2019-03-04) is still valid.
 
 ----
 
 Resources:
 
-(link: license/2023-03-28/summary text: Summary of changes)
+(link: license/2023-03-21/summary text: Summary of changes)
 
 ----
 
@@ -55,7 +55,7 @@ As Kirby is software and software is intangible, We don't sell it as such. Inste
 
 The license is **non-exclusive** (meaning that You are not the only one who We will issue a license) and **generally non-transferable** (meaning that the one who purchases the license is the licensee).
 
-On request, We will **transfer** a license to anyone who is also allowed to buy Kirby licenses by law and this Agreement. The new licensee will take over all rights and obligations from You at the moment We confirm the license transfer.
+On request, We will **transfer** a license to anyone who is also allowed to buy Kirby licenses by law and this Agreement. The new licensee will take over all rights and obligations of this Agreement from You at the moment We confirm the license transfer.
 
 We will also **reassign** a license to another Website domain and root directory of Your choice, provided that You confirm that the previous Website is no longer in operation and will not be operated with the same license in the future.
 
