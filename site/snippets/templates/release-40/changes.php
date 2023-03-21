@@ -9,7 +9,7 @@
       ],
       [
         'title' => 'Focus on your requests',
-        'text'  => 'Our feedback platform is full of amazing feature suggestions and requests and we are currently focusing on implementing highly requested features for this new version.<br><br>The Panel will see the most significant changes and many new exciting improvements. <br><br>While Kirby 4 isn’t going to be generation jump, we are confident that it will be a significant step for your projects.',
+        'text'  => 'Our <a class="link" href="https://feedback.getkirby.com">feedback platform</a> is full of amazing feature suggestions and requests and we are currently focusing on implementing highly requested features for this new version.<br><br>The Panel will see the most significant changes and many new exciting improvements. <br><br>While Kirby 4 isn’t going to be generation jump, we are confident that it will be a significant step for your projects.',
       ],
       [
         'title' => 'Compatibility',
