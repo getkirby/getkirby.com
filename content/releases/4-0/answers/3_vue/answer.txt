@@ -1,5 +1,0 @@
-Title: Will you switch to Vue 3 in Kirby 4?
-----
-Text:
-
-While we would love to already switch to Vue 3 in Kirby 4, we are still in the proccess of migrating. We started this process already with the launch of Vue 3 and found many obstacles that stop us from making the switch entirely. At this point, we would still break 90% of all Panel plugins with such a switch. That's why we decided against it. But we are constantly working on moving there and also did in the last 3.x releases. We plan to get this done in a future major release.

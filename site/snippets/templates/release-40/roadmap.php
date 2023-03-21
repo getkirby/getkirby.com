@@ -45,7 +45,7 @@
     </li>
     <li style="flex-grow: 4">
       <p class="h4">Open Beta</p>
-      <p class="font-mono text-xs">May 2012</p>
+      <p class="font-mono text-xs">May 2023</p>
     </li>
     <li style="flex-grow: 1">
       <p class="h4">Release</p>
