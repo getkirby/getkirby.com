@@ -1,3 +1,4 @@
+<?php if ($banner ?? false): ?>
 <div class="mb-6">
   <div class="container">
     <?php snippet('layouts/topbar', [
@@ -9,6 +10,7 @@
     ]) ?>
   </div>
 </div>
+<?php endif ?>
 
 <header class="header mb-24">
   <?php snippet('layouts/skipper') ?>

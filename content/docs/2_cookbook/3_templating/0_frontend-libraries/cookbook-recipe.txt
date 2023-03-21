@@ -150,7 +150,7 @@ As our last step, we have to add a `script` tag in the footer to initialize the 
 
 ```php "/site/snippets/footer.php"
 <?php if ($page->intendedTemplate()->name() === 'album'): ?>
-    <?= js('assets/js/Glider.js-master/glider.js')) ?>
+    <?= js('assets/js/Glider.js-master/glider.js') ?>
     <script>
       new Glider(document.querySelector('.glider'), {
         slidesToShow: 1,

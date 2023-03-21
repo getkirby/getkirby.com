@@ -1,0 +1,7 @@
+Title: What will happen with Kirby 3?
+----
+Text:
+
+Kirby 3 will receive security support for quite a while after the launch of Kirby 4. The launch of Kirby 4 will not mean that you have to rebuild all your old projects.
+
+The decision to build on the Kirby 3 architecture also means that you have a better chance for upgrades of old projects this time and we have a better chance to provide security support for Kirby 3 because it's not a completely different codebase.
