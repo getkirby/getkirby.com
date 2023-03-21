@@ -8,6 +8,10 @@ List, edit and upload files
 
 ----
 
+Guide: content/files
+
+----
+
 Text:
 
 The files section can be used to show any combination of files for the current page or any other page in your site.
@@ -243,6 +247,13 @@ If you want to display additional information for each file, like a caption, cat
 ```yaml
 info: "{{ file.dimensions }}"
 ```
+## Restricting uploads to certain file types
+
+If you want to restrict what types of files can be uploaded to the given section, assign a file template using the `template` property. In your file template, set the `accept` option. See the docs about (link: docs/reference/panel/blueprints/file#accept text: file blueprints).
+
+By default, Kirby supports (link: docs/guide/content/files#manually-uploading-files text: the following files types).
+
+To upload file types not supported out of the box by Kirby, you can (link: docs/reference/plugins/extensions/file-types text: register new file types with the `fileTypes` extension) in a plugin.
 
 ## Preview images
 
