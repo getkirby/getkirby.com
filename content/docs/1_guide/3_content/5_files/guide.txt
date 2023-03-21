@@ -24,7 +24,7 @@ Text:
 /content/projects/project-a/some-video.mp4
 ```
 
-### Supported file types
+## Supported file types
 
 You can access the page's files using handy methods for each common file type:
 
@@ -37,6 +37,8 @@ You can access the page's files using handy methods for each common file type:
 | Videos | avi, flv, m4v, mov, movie, mpe, mpg, mp4, ogg, ogv, swf, webm | `$page->videos()` |
 
 Other file types are of course also supported.
+
+To upload file types not supported out of the box by Kirby, you can (link: docs/reference/plugins/extensions/file-types text: register new file types with the `fileTypes` extension) in a plugin.
 
 <info>
 When you are using `.txt` files for your content (as it is the default), you cannot upload other `.txt` files as they will be mistaken for content files. You can configure this via the (link: docs/reference/system/options/content#content-file-extension text: `content.extension` config option).

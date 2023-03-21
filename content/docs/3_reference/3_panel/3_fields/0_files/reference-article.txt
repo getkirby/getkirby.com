@@ -8,7 +8,7 @@ A files select field that allows to select one or multiple related files
 
 ----
 
-Guide: blueprints/fields
+Guide: content/files
 
 ----
 
@@ -177,6 +177,12 @@ gallery:
 ### Restricting uploads to certain file types
 
 If you want to restrict what types of files can be uploaded to the given destination, assign a file template using the `uploads` property. In your file template, set the `accept` option. See the docs about (link: docs/reference/panel/blueprints/file#accept text: file blueprints).
+
+#### Supported file types
+
+By default, Kirby supports (link: docs/guide/content/files#manually-uploading-files text: the following files types).
+
+To upload file types not supported out of the box by Kirby, you can (link: docs/reference/plugins/extensions/file-types text: register new file types with the `fileTypes` extension) in a plugin.
 
 (docs: panel-picker-pagination field: files)
 
