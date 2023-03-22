@@ -3,3 +3,22 @@ Auth: files.create
 ----
 
 Properties: $props|Kirby\Cms\File
+
+----
+Text:
+
+## Example
+
+### Create new file from a local file path
+
+```php
+$file = $page->createFile([
+    'filename' => 'tree.jpg',
+    'template' => 'image',
+    'source'   => $kirby->root('assets'). '/images/' . 'tree.jpg',
+    'parent'   => $page,
+    'content'  => [
+        'alt' => 'Single tree on a field'
+    ],
+]);
+```
