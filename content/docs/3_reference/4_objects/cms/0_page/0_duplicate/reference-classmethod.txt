@@ -1,0 +1,24 @@
+Text:
+
+## The `$options` parameter
+
+|Name | Type
+|----|----
+|`title` | `string`
+|`children` | `bool`
+|`files` | `bool`
+
+## Example
+
+```php
+$duplicate = $page->duplicate(
+    $page->slug() . '-copy',
+    [
+        'title'    => 'New title',
+        'children' => true, // duplicate with children
+        'files'    => true, // duplicate with files
+    ],
+);
+```
+
+Duplicates are always created as draft pages.
