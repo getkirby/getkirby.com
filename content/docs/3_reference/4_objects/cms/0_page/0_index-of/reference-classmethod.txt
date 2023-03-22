@@ -1,0 +1,16 @@
+Text:
+
+## Example
+
+```php
+<?php $children = $page->children()->listed(); ?>
+<ul>
+  <?php foreach ($children as $child): ?>
+  <li class="<?php e(($child->indexOf($children) + 1) % 2, 'some-class', 'another-class') ?>">
+        <?= $child->title() ?>
+    </li>
+<?php endforeach ?>
+</ul>
+```
+
+This is just a constructed example. It's worth noting that for simple styling use, you could use CSS only.
