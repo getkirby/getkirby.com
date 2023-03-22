@@ -1,0 +1,30 @@
+Text:
+
+## The `$options` parameter
+
+|Name | Type
+|----|----
+|`slug` | `string`
+|`isDraft` | `bool`
+|`num` | `int`
+|`children` | `bool`
+|`files` | `bool`
+
+## Example
+
+```php
+
+$copy = $page->copy(
+    [
+        'slug'     => $page->slug() . '-' . time(),
+        'parent'   => page('blog'),
+        'children' => true, // copy children
+        'files'    => false, // don't copy files
+    ]
+);
+
+dump($copy);
+```
+
+
+Passing no parent or passing `null` as value for `parent` will copy the page as child of `$site`.
