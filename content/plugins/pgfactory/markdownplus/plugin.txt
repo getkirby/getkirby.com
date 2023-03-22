@@ -1,0 +1,16 @@
+Title: MarkdownPlus
+
+----
+
+Repository: https://github.com/pgfactory/markdownplus
+
+----
+
+Category: devtools
+
+----
+Description: 
+A small set of syntax extensions greatly expand expressiveness of Markdown.
+Helps where you'd need complex templates. 
+See dedicated Doc <a href='https://pagefactory.info/markdownplus'>https://pagefactory.info/markdownplus</a>
+
