@@ -1,0 +1,12 @@
+Text:
+
+## Example
+
+Filter all articles for the current author page:
+
+```php
+$postsForAuthor = page('blog')
+    ->children()
+    ->listed()
+    ->filter(fn ($child) => $child->author()->toPage()?->is($page));
+```
