@@ -76,7 +76,7 @@ Author:
 - XBdlwR1W
 ```
 <info>
-Note that since Kirby 3.3.0 Kirby stores the user ID instead of the user email so that the reference to the user is persistent even if the email changes. The user ID is a random string (folder name that contains the user related files) assigned to a user when the user is created.
+Note that since Kirby 3.8.0 Kirby stores the user UUID. The user UUID is a unique random string assigned to a user when the user is created. This recipe assumes that you haven't (link: docs/reference/system/options/content#uuid-generation text: disabled UUIDs in your config).
 </info>
 
 ## The article template
@@ -140,7 +140,7 @@ In that template you can fetch all authors from the articles and build a list ou
   // fetch all unique author ids from all articles
   $ids = $articles->pluck('author', '-', true);
   // get a list of all authors filtered by the ones with articles
-  $authors = $kirby->users()->filterBy('id', 'in', $ids);
+  $authors = $kirby->users()->filter(fn ($user) => in_array($user->uuid()->toString(), $ids, true));
 ?>
 
 <h1>Authors</h1>
@@ -155,8 +155,8 @@ In that template you can fetch all authors from the articles and build a list ou
     <?php endif ?>
       <ul class="articles">
       <?php
-        // filter all articles per author
-        $articles = $articles->filter(fn ($child) => in_array($author->id(), $child->author()->yaml()));
+        // filter articles by author
+        $articles = $articles->filter(fn ($child) => in_array($author->uuid()->toString(), $child->author()->yaml()));
         foreach($articles as $article): ?>
           <li><a href="<?= $article->url() ?>"><?= $article->title() ?></a></li>
         <?php endforeach ?>
