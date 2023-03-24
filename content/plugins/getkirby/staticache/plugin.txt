@@ -174,6 +174,13 @@ return [
 
 If you use a custom root and/or prefix, please modify the following server configuration examples accordingly.
 
+If your custom root is outside of the server's document root, users have been successful with these solutions:
+
+- Create a symbolic link (symlink) from your custom root to a path inside the document root. Then use the path inside the document root in the server configuration. For this to work, the server needs to be set up to follow symlinks.
+- In an Apache setup: Replace the `%{DOCUMENT_ROOT}` variable with the absolute path to your custom root on the server. E.g. `RewriteCond /var/www/yourPath/%{REQUEST_URI}/...`
+
+In any case, please ensure that your web server has read access to the cache files in your custom root, otherwise it will not be able to handle requests with the statically cached files.
+
 ### Web server integration
 
 This plugin will automatically generate and store the cache files, however you need to configure your web server to pick the files up and prefer them over a dynamic result from PHP.
@@ -252,9 +259,16 @@ To load the static cache files from PHP, please place the following code snippet
     return;
   }
 
+  // try to determine the content type from the static file
+  if ($mime = @mime_content_type($path)) {
+    header("Content-Type: $mime");
+  }
+
   die(file_get_contents($path));
 })();
 ```
+
+If you want to use the PHP loader, we recommend to use it together with header support (see below). Storing the headers increases performance by a bit and also gives you more accurate responses.
 
 ### Header support
 
@@ -290,7 +304,7 @@ Afterwards add the following block to your `.htaccess` file to make Apache use `
 
 **PHP loader:**
 
-Replace the last line of the loader function with this code:
+Replace the last six lines of the loader function with this code:
 
 ```php "index.php"
   // split the file into headers (before two line breaks) and body
