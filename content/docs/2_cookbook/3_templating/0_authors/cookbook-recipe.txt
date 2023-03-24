@@ -134,6 +134,9 @@ In that template you can fetch all authors from the articles and build a list ou
 ```php "/site/templates/authors.php"
 <?php snippet('header') ?>
 <?php
+  // fetch all listed articles from a page called blog
+  // adapt if your page is called differently
+  $articles = page('blog')->children()->listed();
   // fetch all unique author ids from all articles
   $ids = $articles->pluck('author', '-', true);
   // get a list of all authors filtered by the ones with articles
@@ -150,19 +153,14 @@ In that template you can fetch all authors from the articles and build a list ou
         <img src="<?= $avatar->url() ?>">
       </figure>
     <?php endif ?>
-    <?php if ($blog = page('blog')): ?>
       <ul class="articles">
       <?php
         // filter all articles per author
-          $articles = $blog->children()->listed()->filter(function($child) use($author){
-          return in_array($author->id(), $child->author()->yaml());
-        });
+        $articles = $articles->filter(fn ($child) => in_array($author->id(), $child->author()->yaml()));
         foreach($articles as $article): ?>
           <li><a href="<?= $article->url() ?>"><?= $article->title() ?></a></li>
         <?php endforeach ?>
       </ul>
-    <?php endif ?>
-
   </article>
 <?php endforeach ?>
 
