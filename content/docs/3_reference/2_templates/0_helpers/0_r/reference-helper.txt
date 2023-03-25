@@ -1,0 +1,9 @@
+Text:
+
+## Example
+
+The following example will print `odd`:
+
+```php
+<?php echo r((5 % 2 === 0), 'even', 'odd') ?>
+```

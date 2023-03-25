@@ -1,0 +1,21 @@
+Text:
+
+## Example
+
+Given a translation with a placeholder
+
+```php
+'translations' => [
+    'en' => [
+        'errors'  => 'There are { count } errors in the form.',
+    ],
+    // …
+],
+```
+
+Replace placeholder with given number
+
+```php
+echo tc('errors', 5);
+// There are 5 errors in the form.
+```

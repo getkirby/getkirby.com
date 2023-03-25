@@ -1,0 +1,25 @@
+Text:
+
+## Examples
+
+The `t()` helper returns a predefined translation string by key.
+
+Translations can be defined (link: docs/guide/languages/custom-language-variables text: in the language files) or (link: ocs/reference/plugins/extensions/translations text: in plugins).
+
+Get a translation string by key:
+
+```php
+<?= t('confirm') ?>
+```
+
+Use a fallback value if no translation exists:
+
+```php
+<?= t('confirm', 'Confirm') ?>
+```
+
+Force a particular locale:
+
+```php
+<?= t('confirm', 'Bestätigen', 'de') ?>
+```

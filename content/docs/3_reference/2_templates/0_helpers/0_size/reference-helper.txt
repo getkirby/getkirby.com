@@ -1,0 +1,33 @@
+Text:
+
+## Examples
+
+Number of elements in array:
+
+```php
+$array = ['a', 'b', 'c'];
+dump(size($array)); // 3
+```
+
+Length of string:
+
+```php
+$string = 'Kirby is great';
+dump(size($string)); //15
+```
+
+Value of number
+
+```php
+$number = 123456;
+dump(size($number)); // number
+```
+
+Number of pages
+
+```php
+$pages = $site->index();
+dump(size($pages)); // number of pages in collection
+```
+
+

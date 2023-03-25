@@ -31,3 +31,7 @@ You can define a fallback value if a parameter is not set:
 $tag  = param('tag', 'design');
 $year = param('year', 2018);
 ```
+
+## Further reading
+
+- (link: docs/cookbook/content/filtering-with-tags text: Filtering by tag)
