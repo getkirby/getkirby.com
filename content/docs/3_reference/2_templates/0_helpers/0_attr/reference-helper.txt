@@ -1,0 +1,11 @@
+Text:
+
+## Example
+
+```php
+<?php if ($image = $page->image()): ?>
+    <figure<?= attr(['class' => 'gallery', 'data-ratio' => '16/9'], ' ', ' ') ?>>
+        <img src="<?= $image->url() ?>" alt="<?= $image->alt() ?>">
+    </figure>
+<?php endif ?>
+```
