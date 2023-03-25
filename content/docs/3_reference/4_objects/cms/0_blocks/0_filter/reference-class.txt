@@ -1,0 +1,7 @@
+Text:
+
+## Example
+
+```php
+$blocks = $page->text()->toBlocks()->filter(fn ($block) => $block->hasMethod('customMethod'));
+```

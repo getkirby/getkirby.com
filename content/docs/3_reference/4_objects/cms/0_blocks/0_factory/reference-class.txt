@@ -1,0 +1,31 @@
+Text:
+
+## Example
+
+```php
+<?php
+$blocks = Kirby\Cms\Blocks::factory([
+    [
+        'content' => [
+            'text'  => 'Nice heading',
+            'level' => 'h2',
+        ],
+        'type'    => 'heading',
+    ],
+    [
+        'content' => [
+            'text' => 'Some text here',
+        ],
+        'type'    => 'text',
+    ],
+    [
+        'content' => [
+            'text'     => 'Time flies like an arrow; fruit flies like a banana',
+            'citation' => '<a href=\"https://en.wikipedia.org/wiki/Anthony_Oettinger\" rel=\"noopener noreferrer nofollow\">Anthony Oettinger</a>',
+        ],
+        'type' => 'quote',
+    ],
+]);
+
+echo $blocks;
+```

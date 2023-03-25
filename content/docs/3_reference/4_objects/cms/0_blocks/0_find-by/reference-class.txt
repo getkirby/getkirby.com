@@ -1,0 +1,11 @@
+Text:
+
+## Example
+
+Find blocks by attribute, e.g. type:
+
+```php
+$textBlock = $page->text()->toBlocks()->findBy('type', 'image');
+```
+
+Returns the first block of type `image` if it exists.
