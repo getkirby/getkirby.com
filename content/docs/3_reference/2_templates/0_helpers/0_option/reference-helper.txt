@@ -1,0 +1,15 @@
+Text:
+
+## Example
+
+Fetch an option by key from the config:
+
+```php
+$locale = option('locale', 'en');
+```
+
+Custom option
+
+```php
+$myCustomOption = option('customOption');
+```

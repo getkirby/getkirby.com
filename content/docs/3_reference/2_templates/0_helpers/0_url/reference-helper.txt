@@ -1,0 +1,21 @@
+Text:
+
+## Examples
+
+Generate a link to a page, e.g. search
+
+```php
+<a href="<?= url('search') ?>">Search</a>
+```
+
+Generate a link to a page with query string:
+
+```php
+<a href="<?= url('search', ['query' => ['q' => 'validators', 'area' => 'reference']]) ?>">Search</a>
+```
+
+Generate a link to a page with params:
+
+```php
+<a href="<?= url('blog', ['params' => ['category' => 'travel', 'tag' => 'beach']]) ?>">Search</a>
+```
