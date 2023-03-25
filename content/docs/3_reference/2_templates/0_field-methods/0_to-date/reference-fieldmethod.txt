@@ -19,4 +19,6 @@ Text:
 
 Check out PHP's date function docs for all available formatting options: https://www.php.net/manual/en/function.date.php.
 
-If you use the `strftime` date handler, the format syntax is different: https://www.php.net/manual/en/function.strftime.php.
+If you use the `intl` date handler for localized date strings, the format syntax is different: https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax.
+
+The `strftime` date handler is deprecated as of PHP 8.1, and should not be used for new projects.

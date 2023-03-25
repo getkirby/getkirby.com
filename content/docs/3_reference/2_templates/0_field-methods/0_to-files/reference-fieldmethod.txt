@@ -1,0 +1,9 @@
+Text:
+
+## Example
+
+```php
+<?php foreach ($page->gallery()->toFiles() as $image): ?>
+  <img src="<?= $image->url() ?>" alt="<?= $image->alt() ?>">
+<?php endif ?>
+```

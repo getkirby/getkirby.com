@@ -1,0 +1,20 @@
+Text:
+
+## Example
+
+This field method is intended for converting an `object` field to a content object.
+
+```php
+<?php if ($contact = $page->contact()->toObject()): ?>
+<dl>
+  <dt><?= Str::ucfirst($contact->photo()->key()) ?></dt>
+  <dd><?= $contact->photo()?->toFile()->crop(200) ?></dd>
+  <dt><?= Str::ucfirst($contact->name()->key()) ?></dt>
+  <dd><?= $contact->name() ?></dd>
+  <dt><?= Str::ucfirst($contact->email()->key()) ?></dt>
+  <dd><?= $contact->email() ?></dd>
+  <dt><?= Str::ucfirst($contact->phone()->key()) ?></dt>
+  <dd><?= $contact->phone() ?></dd>
+</dl>
+<?php endif ?>
+```

@@ -8,7 +8,7 @@ Text:
 ```kirbycontent
 Title: My great article
 \----
-Author: author@company.com
+Author: - user://hqq2mn9k
 ```
 
 ### Template

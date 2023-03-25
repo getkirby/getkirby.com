@@ -1,0 +1,26 @@
+Text:
+
+## Example
+
+Given the field contains string templates, use this method to replace them with values:
+
+Example text:
+
+```text
+Text: The company behind {{ product }} and the responsible data controller for this website is the {{ company }}.
+```
+
+```php
+<?= $page->text()->replace(
+    [
+        'company' => 'Content Folder GmbH & Co. KG',
+        'product' => 'Kirby CMS'
+    ]
+);
+```
+
+Will result in
+
+```
+The company behind Kirby CMS and the responsible data controller for this website is the Content Folder GmbH & Co. KG.
+```
