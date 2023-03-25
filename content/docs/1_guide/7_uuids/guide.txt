@@ -22,10 +22,6 @@ UUIDs (universally unique identifiers) are an additional way to refer to any mod
 
 UUIDs can be used in many parts of the system to identify a specific page, file or user. When using a UUID for your reference, those ties to other pages won't break when the folder structure changes.
 
-<success>
-Native support for UUIDs was released with Kirby 3.8.
-</success>
-
 ## How to use them
 
 UUIDs are supported throughout the system wherever a model gets selected or queried.
@@ -86,3 +82,7 @@ You can access the permalink with the `$model->permalink()` method:
 ```php
 <a href="<?= $page->permalink() ?>">Permalink</a>
 ```
+
+## Config settings
+
+You can modify the UUID format or completely disable UUIDs (link: docs/reference/system/options/content#uuid-generation text: using the `content.uuid` option in the config file).
