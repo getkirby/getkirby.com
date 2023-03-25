@@ -1,0 +1,12 @@
+Text:
+
+## Example
+
+Filter by type if type is given:
+
+```php
+$type  = get('type');
+
+$blocks = $blocks
+->when($type, fn ($type) => $this->filterBy('type', $type));
+```

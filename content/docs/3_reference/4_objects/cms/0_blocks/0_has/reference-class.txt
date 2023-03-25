@@ -1,0 +1,12 @@
+Text:
+
+## Example
+
+Check if a block exists
+
+```php
+<?php
+if ($page->text()->toBlocks()->has('b03f40c3-1dc5-4a89-8874-24f616f86e51')) {
+    echo 'Found the block by id';
+}
+```

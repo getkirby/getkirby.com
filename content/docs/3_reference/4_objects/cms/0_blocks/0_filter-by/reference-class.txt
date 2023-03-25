@@ -1,0 +1,9 @@
+Text:
+
+## Example
+
+Filter blocks by attribute, e.g. type:
+
+```php
+$textBlocks = $page->text()->toBlocks()->filterBy('type', 'text');
+```
