@@ -1,0 +1,9 @@
+Text:
+
+## Example
+
+```php
+<?php if ($asset = asset('assets/images/logo.svg')): ?>
+    <img src="<?= $asset->url() ?>" alt="">
+<?php endif ?>
+```

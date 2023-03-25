@@ -1,0 +1,11 @@
+Text:
+
+## Example
+
+`load()` is a shortcut for `F::loadClasses()`:
+
+```php
+load([
+'superwoman\\superplugin\\superclass' => 'src/Superclass.php'
+], __DIR__);
+```

@@ -1,0 +1,50 @@
+Text:
+
+## Example
+
+### With fallback if condition is false:
+
+```php
+<?php e(1 === 2, 'hell freezes over', 'everything is ok') ?>
+```
+
+### Only echo something when condition is true:
+```php
+<ul>
+<?php foreach($pages as $p): ?>
+    <li<?php e($p->isActive(), ' class="active"') ?>>
+        …
+    </li>
+<?php endforeach ?>
+</ul>
+```
+
+Note:
+`e()` is a function, therefore the parameters you pass to this function have already been evaluated when you pass them to the method. Trying to do something like the following will therefore throw an error:
+
+```php
+<?php e($site->find('not-existing'), $site->find('not-existing')->title(), "No title") ?>
+```
+
+For cases like this, you have the following options, depending on whether you need a fallback value or not:
+
+### if statement
+
+```php
+<?php if ($p = $site->find('not-existing')) {
+    echo $p->title();
+} else {
+    echo 'No title';
+}
+```
+
+### Ternary operator
+
+```php
+<?= ($p = $site->find('not-existing')) ? $p->title() : 'No title' ?>
+```
+### Null-safe operator
+
+```php
+<?= $site->find('not-existing')?->title() ?>
+```
