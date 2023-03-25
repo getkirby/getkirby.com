@@ -38,6 +38,10 @@ class RssfeedPage extends Page {
 
     public function children()
     {
+        if ($this->children instanceof Pages) {
+            return $this->children;
+        }
+
         $results = [];
         $pages   = [];
         
@@ -70,7 +74,7 @@ class RssfeedPage extends Page {
         }
         
         // create a Pages collection for the child pages
-        return Pages::factory($pages, $this);
+        return $this->children = Pages::factory($pages, $this);
     }
 
 }

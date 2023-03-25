@@ -78,6 +78,10 @@ class CommentsPage extends Kirby\Cms\Page
 {
     public function children()
     {
+        if ($this->children instanceof Pages) {
+            return $this->children;
+        }
+
         $comments = [];
 
         foreach (Db::select('comments') as $comment) {
@@ -93,7 +97,7 @@ class CommentsPage extends Kirby\Cms\Page
             ];
         }
 
-        return Pages::factory($comments, $this);
+        return $this->children = Pages::factory($comments, $this);
     }
 }
 ```

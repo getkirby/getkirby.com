@@ -44,14 +44,23 @@ However, if we now try to fetch these newly added images in the `animal.php` tem
 
 class AnimalsPage extends Page
 {
+    static $subpages = null;
 
     public function subpages()
     {
-        return Pages::factory($this->inventory()['children'], $this);
+        if (static::$subpages) {
+            return static::$subpages;
+        }
+
+        return static::$subpages = Pages::factory($this->inventory()['children'], $this);
     }
 
     public function children()
     {
+        if ($this->children instanceof Pages) {
+            return $this->children;
+        }
+
         $csv      = csv($this->root() . '/animals.csv', ';');
         $children = array_map(function ($animal) {
 
@@ -73,7 +82,7 @@ class AnimalsPage extends Page
             ];
         }, $csv);
 
-        return Pages::factory($children, $this);
+        return $this->children = Pages::factory($children, $this);
     }
 
 }
@@ -83,9 +92,13 @@ First, we add a new `subpages` method that creates a new Pages object from the p
 
 ```php
     public function subpages()
-    {
-        return Pages::factory($this->inventory()['children'], $this);
+{
+    if (static::$subpages) {
+        return static::$subpages;
     }
+
+    return static::$subpages = Pages::factory($this->inventory()['children'], $this);
+}
 ```
 This method will fetch all pages that actually exist in the filesystem.
 
