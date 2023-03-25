@@ -1,0 +1,5 @@
+Text:
+
+## Example
+
+See (link: docs/cookbook/templating/shared-controllers#setting-up-the-shared-controller text: Shared controllers)
