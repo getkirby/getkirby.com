@@ -1,9 +1,27 @@
 Text:
 
+## Details
+
+For validators, see (link: docs/reference/system/validators text: list of available validators). In addition, you can use (link: docs/reference/plugins/extensions/validators text: custom validators).
+
 ## Example
 
 ```php
 <?php if ($page->email()->isValid('email')): ?>
 The email address in the email field seems to be valid
+<?php endif ?>
+```
+
+Some validators require additional arguments:
+
+```php
+<?php if ($page->title()->isValid('maxLength', 45)): ?>
+The text length is valid
+<?php endif ?>
+```
+
+```php
+<?php if ($page->number()->isValid('between', 5, 10)): ?>
+The number is between 5 and 10
 <?php endif ?>
 ```

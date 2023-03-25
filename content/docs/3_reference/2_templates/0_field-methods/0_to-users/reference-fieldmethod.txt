@@ -1,0 +1,15 @@
+Text:
+
+
+## Example
+
+```php
+<ul class="authors">
+<?php foreach ($page->authors()->toUsers() as $author): ?>
+    <li>
+        <h2><?= $author->name() ?></h2>
+        <?= $author->bio()->kirbytext() ?>
+    </li>
+<?php endforeach ?>
+</ul>
+```

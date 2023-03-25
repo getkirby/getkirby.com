@@ -5,3 +5,5 @@ Text:
 ```php
 <?= $page->text()->smartypants() ?>
 ```
+
+See also (link: docs/reference/system/options/smartypants text: Configuring SmartyPants)
