@@ -34,6 +34,10 @@ class ReviewsPage extends Page
 {
     public function children()
     {
+        if ($this->children instanceof Pages) {
+            return $this->children;
+        }
+
         $results = [];
         $pages   = [];
         $apiKey  = 'put-your-api-key-here';
@@ -62,7 +66,7 @@ class ReviewsPage extends Page
             ];
         }
 
-        return Pages::factory($pages, $this);
+        return $this->children = Pages::factory($pages, $this);
     }
 }
 ```
