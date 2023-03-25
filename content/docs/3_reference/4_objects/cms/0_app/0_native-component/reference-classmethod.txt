@@ -1,0 +1,5 @@
+Text:
+
+## Example
+
+See (link:docs/cookbook/extensions/kirby-loves-cdn text: Kirby loves CDN)

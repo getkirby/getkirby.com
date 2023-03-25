@@ -1,1 +1,13 @@
 Guide: templates/collections
+
+----
+Text:
+
+## Example
+
+Call a predefined collection by key:
+
+```php
+$articles = $kirby->collection('blog');
+dump($articles);
+```
