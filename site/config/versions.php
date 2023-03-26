@@ -136,7 +136,7 @@ return [
         ],
     ],
     '3.9' => [
-        'title'       => 'Kirby ' . substr(Data::read(dirname(__DIR__, 2) . '/composer.json')['version'] ?? '', 0, 3),
+        'title'       => 'Kirby 3.9',
         'hasDocs'     => true,
         'mainVersion' => '3',
         'since'       => 'Jan 2023',
