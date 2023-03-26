@@ -21,4 +21,5 @@ return [
     'thumbs'    => [
         'driver' => 'im'
     ],
+    'versions'  => require __DIR__ . '/versions.php',
 ];
