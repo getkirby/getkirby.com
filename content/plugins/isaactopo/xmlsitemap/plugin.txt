@@ -14,4 +14,8 @@ Similar: omz13/xmlsitemap
 
 ----
 
+Published: 2023-03-25
+
+----
+
 Description: Multilingual (or not) XML Sitemap generator. Options for Ignore/Include and Images
