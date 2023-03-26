@@ -27,6 +27,7 @@ Here is an overview of all available permissions:
 title: Editor
 permissions:
   access:
+    account: true
     panel: true
     site: true
     languages: true
