@@ -58,4 +58,10 @@ return [
             ]);
         }
     ],
+    [
+        'pattern' => 'plugins/new',
+        'action'  => function () {
+            return page('plugins')->render(['filter' => 'published']);
+        }
+    ],
 ];

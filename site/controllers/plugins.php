@@ -1,6 +1,6 @@
 <?php
 
-return function($page) {
+return function($page, $filter) {
 
   $categories = option('plugins.categories');
   $category   = param('category');
@@ -17,22 +17,25 @@ return function($page) {
     $heading = $categories[$category]['label'];
 
   } else if ($category === 'all') {
-    $heading  = 'All plugins';
-    $category = 'all';
-    $plugins  = $page
-      ->children()
-      ->children()
-      ->sortBy('title', 'asc');
+      $heading  = 'All plugins';
+      $category = 'all';
+      $plugins  = $page
+          ->children()
+          ->children()
+          ->sortBy('title', 'asc');
+  } elseif ($filter) {
+      $heading = 'Newly added plugins';
+      $plugins = $page->grandChildren()->filterBy('isNew', true);
   } else {
     $category = null;
     $plugins  = new Pages();
   }
-
-  return [
+    return [
     'categories'      => $categories,
     'currentCategory' => $category,
     'heading'         => $heading,
     'plugins'         => $plugins,
+    'filter'          => $filter,
   ];
 
 };
