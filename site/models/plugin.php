@@ -258,4 +258,9 @@ class PluginPage extends Page
 
         return '';
     }
+
+    public function isNew(): bool
+    {
+        return $this->published()->toDate('U') > (time() - 4500000);
+    }
 }
