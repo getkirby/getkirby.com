@@ -127,10 +127,11 @@ The `permissions` option can be used to restrict access to certain actions for t
 
 | Option | Value |
 |----    | ---- |
+| `account` | `true`/`false` |
 | `panel` | `true`/`false` |
 | `users` | `true`/`false`|
 | `site` | `true`/`false` |
-| `settings`| `true`/`false` |
+| `system`| `true`/`false` |
 | `languages` | `true`/`false` |
 
 #### Example: Prevent accessing user management and settings
