@@ -1,0 +1,20 @@
+Title: Kirby 3.3
+
+----
+
+Version: 3.3
+
+----
+
+Description: The new Editor plugin left editing to a whole new level.
+
+----
+
+Cover: kirby-3-3.png
+
+----
+
+Priority: 0.8
+
+----
+Releasepage: https://github.com/getkirby/kirby/releases/tag/3.3.0
