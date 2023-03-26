@@ -138,6 +138,7 @@ return [
     '3.9' => [
         'title'       => 'Kirby 3.9',
         'hasDocs'     => true,
+        'title'       => 'Kirby 3.9',
         'mainVersion' => '3',
         'since'       => 'Jan 2023',
         'description' => 'is the latest version of Kirby. <br><strong class="color-black">Start new projects with this version!',
