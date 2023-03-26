@@ -1,5 +1,14 @@
 <?php layout() ?>
+<style>
 
+  .versionlist {
+    display: inline;
+  }
+
+  .versionlist:not(:last-child):after {
+    content: ',';
+  }
+</style>
 <article>
   <header class="h1 mb-24">
     <h1>Kirby keeps getting<br>better and better<h1>
@@ -36,9 +45,8 @@
             <div class="h3 mb-6">Further releases</div>
             <ul class="prose">
               <?php foreach ($minorReleases as $subRelease): ?>
-                <li class="mb-1">
+                <li class="versionlist">
                   <a href="https://github.com/getkirby/kirby/releases/tag/<?= $subRelease ?>"><?= $subRelease ?></a>
-
                 </li>
               <?php endforeach ?>
             </ul>
