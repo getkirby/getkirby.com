@@ -8,21 +8,19 @@
   <ul class="columns mb-24" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 3; --gap: var(--spacing-12)">
     <?php foreach ($page->children()->flip()->not(page('releases/4-0')) as $release) : ?>
       <li>
-        <header class="mb-3">
-          <a href="<?= $release->releasePage()->or($release->url()) ?>" class="h2 mb-1">
-            <?= $release->version() ?>
-          </a>
-        </header>
+        <a href="<?= $release->releasePage()->or($release->url()) ?>" class="block mb-1">
+          <header class="mb-3">
+            <h2 class="h2"><?= $release->version() ?></h2>
+          </header>
 
-        <div class=" color-gray-700 mb-12">
           <?php if ($cover = $release->cover()->toFile()): ?>
-            <figure class="border-top pt-6 mb-3">
+            <figure class="border-top pt-6 mb-6">
               <img src="<?= $release->cover()->toFile()->crop(400, 250)->url() ?>" class="bg-dark" style="aspect-ratio: 8/5" alt="Open graph image for the <?= $release->title() ?> release">
             </figure>
           <?php endif ?>
-        </div>
+        </a>
 
-        <div class=" color-gray-700 mb-6">
+        <div class="color-gray-700 mb-6">
           <p><?= $release->description() ?></p>
         </div>
         <div class="columns mb-6" style="--columns: 2">
@@ -32,7 +30,7 @@
           </a>
         </div>
         <div class="prose">
-          <div class="h5 mb-4">Further releases</div>
+          <div class="h5 mb-4 color-black">Further releases</div>
           <span class="text-base">
             <?= implode(', ', A::map(
               $kirby->option('versions')[$release->version()->value()]['subreleases'],
