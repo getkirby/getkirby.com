@@ -1,0 +1,20 @@
+Title: Kirby 3.2
+
+----
+
+Version: 3.2
+
+----
+
+Description: It's all about editing: content locking, conditional sections, duplicating pages…
+
+----
+
+Cover: kirby-3-2.png
+
+----
+
+Priority: 0.8
+
+----
+Releasepage: https://github.com/getkirby/kirby/releases/tag/3.2.0

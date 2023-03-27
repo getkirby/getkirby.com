@@ -8,6 +8,13 @@ ogimage: opengraph.png
 ----
 Link: https://github.com/getkirby/kirby/releases/tag/3.8.0
 ----
+Cover: - kirby-3-8.png
+
+----
+
+Description: Lost relations are a thing of the past with the new UUID and permalink features for pages, files and users.
+
+----
 Features:
 
 **Panel**
@@ -391,3 +398,4 @@ Related:
 - page://jchKH3EufbjC37KR
 - page://jb8i1Sl6cOQOdOE8
 ```
+

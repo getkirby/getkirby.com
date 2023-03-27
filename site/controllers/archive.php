@@ -3,7 +3,7 @@
 return function ($kirby) {
 
     return [
-        'versions' => $kirby->option('versions'),
+        'versions' => array_filter($kirby->option('versions'), fn ($item) => $item['hasDocs'] ?? null === true),
     ];
 
 };
