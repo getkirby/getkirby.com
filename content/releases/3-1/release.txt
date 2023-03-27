@@ -6,7 +6,7 @@ Version: 3.1
 
 ----
 
-Description: The Panel becomes much more powerful with conditional fields and an improved textarea field. Images get a `srcset? method for easy responsive images.
+Description: The Panel becomes much more powerful with conditional fields and an improved textarea field. Images get a <code>srcset</code> method for easy responsive images.
 
 ----
 

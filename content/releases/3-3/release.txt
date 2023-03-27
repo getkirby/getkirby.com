@@ -6,7 +6,7 @@ Version: 3.3
 
 ----
 
-Description: The new Editor plugin left editing to a whole new level.
+Description: The new Editor plugin lifted editing to a whole new level.
 
 ----
 

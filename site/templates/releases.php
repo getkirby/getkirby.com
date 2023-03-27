@@ -33,7 +33,7 @@
           <div class="h5 mb-4 color-black">Further releases</div>
           <span class="text-base">
             <?= implode(', ', A::map(
-              $kirby->option('versions')[$release->version()->value()]['subreleases'],
+              array_reverse($kirby->option('versions')[$release->version()->value()]['subreleases']),
               fn ($subRelease) => '<a href="https://github.com/getkirby/kirby/releases/tag/' . $subRelease . '">' . $subRelease . '</a>'
             )) ?>
           </span>
