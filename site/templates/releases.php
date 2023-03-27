@@ -17,7 +17,7 @@
         <div class=" color-gray-700 mb-12">
           <?php if ($cover = $release->cover()->toFile()): ?>
             <figure class="border-top pt-6 mb-3">
-              <?= $release->cover()->toFile()->crop(400) ?>
+              <img src="<?= $release->cover()->toFile()->crop(400, 250)->url() ?>" class="bg-dark" style="aspect-ratio: 8/5" alt="Open graph image for the <?= $release->title() ?> release">
             </figure>
           <?php endif ?>
         </div>
