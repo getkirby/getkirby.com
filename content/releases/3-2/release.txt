@@ -18,3 +18,10 @@ Priority: 0.8
 
 ----
 Releasepage: https://github.com/getkirby/kirby/releases/tag/3.2.0
+
+----
+Breaking:
+
+- Translations root deprecated and will be removed in 3.3. Use i18n:translations instead
+- File::model() does no longer return the parent model. Use File::parent() instead
+
