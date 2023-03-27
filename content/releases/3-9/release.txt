@@ -8,6 +8,12 @@ ogimage: opengraph.png
 ----
 Link: https://github.com/getkirby/kirby/releases/tag/3.9.0
 ----
+Cover: - kirby-3-9.png
+----
+
+Description: The new release takes templating to another level with snippet with slots. Our complete eco-system got an overhaul as well.
+
+----
 Features:
 
 - Snippets with slots

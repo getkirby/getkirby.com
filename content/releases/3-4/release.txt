@@ -1,0 +1,20 @@
+Title: Kirby 3.4
+
+----
+
+Version: 3.4
+
+----
+
+Description: A release that brings a lot of new features, like extensible search, big hook improvements and support for parenthesis in Kirbytags, yeah!
+
+----
+
+Cover: kirby-3-4.png
+
+----
+
+Priority: 0.8
+
+----
+Releasepage: https://github.com/getkirby/kirby/releases/tag/3.4.0
