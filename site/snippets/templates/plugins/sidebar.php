@@ -16,7 +16,7 @@
       </li>
       <li>
         <a href="/plugins/getkirby" <?= ariaCurrent($kirby->request()->path()->toString() === 'plugins/getkirby')  ?>>
-          <?= icon('kirby') ?> Team plugins
+          <?= icon('kirby') ?> Official plugins
         </a>
       </li>
       <li>
