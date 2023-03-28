@@ -1,0 +1,32 @@
+Title: Nuxt KQL
+
+----
+
+Repository: https://nuxt-kql.jhnn.dev
+
+----
+
+Category: headless
+
+----
+
+Subcategory: api
+
+----
+
+Description: Nuxt 3 module for Kirby's Query Language API
+
+----
+
+Example:
+
+```js
+const { data } = await useKql({
+  query: 'site',
+  select: {
+    title: true,
+    children: true,
+  },
+})
+
+```

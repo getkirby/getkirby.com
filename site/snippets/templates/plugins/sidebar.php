@@ -5,13 +5,18 @@
     <?php endslot() ?>
     <ul class="filters">
       <li>
-        <a href="/plugins" <?= ariaCurrent((!$currentCategory) && $kirby->request()->path()->toString() !== 'plugins/new') ?>>
+        <a href="/plugins" <?= ariaCurrent((!$currentCategory) && in_array($kirby->request()->path()->toString(), ['plugins/new', 'plugins/getkirby']) === false) ?>>
           <?= icon('star') ?> Featured
         </a>
       </li>
       <li>
         <a href="/plugins/category:all" <?= ariaCurrent($currentCategory === 'all') ?>>
           <?= icon('list') ?> All plugins
+        </a>
+      </li>
+      <li>
+        <a href="/plugins/getkirby" <?= ariaCurrent($kirby->request()->path()->toString() === 'plugins/getkirby')  ?>>
+          <?= icon('kirby') ?> Official plugins
         </a>
       </li>
       <li>
