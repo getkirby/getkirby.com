@@ -109,7 +109,7 @@ class Checkout
      * @param integer $discount
      * @return integer
      */
-    public function total(float $unit, int $volume, int $discount): int
+    public function total(float $unit, int $volume, int $discount): float
     {
         $price     = $unit * ((100 - $discount) / 100) * $volume;
         $nicePrice = floor($price / 5) * 5;
