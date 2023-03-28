@@ -1,10 +1,29 @@
-<?php layout('changelog') ?>
+<?php layout('article') ?>
 
-<?php slot('h1') ?>
-  <?= $page->title() ?>
+<?php slot('sidebar') ?>
+<nav aria-label="Changelog menu">
+  <div class="sidebar sticky" style="--top: var(--spacing-6)">
+    <p class="h1 color-gray-400 mb-12"><a href="/docs/changelog">Changelog</a>
+    </p>
+    <ul class="filters">
+      <?php foreach ($releases as $release): ?>
+        <li>
+          <a
+            href="<?= 'changelog#version-' . $release->version()->slug() ?>" <?= ariaCurrent($release->slug() === 'changelog') ?>>
+            <?= $release->title() ?>
+          </a>
+        </li>
+      <?php endforeach ?>
+
+    </ul>
+  </div>
+</nav>
 <?php endslot() ?>
-<?php slot() ?>
+<?php slot('header') ?>
 
+<header>
+  <h1 class="h1 mb-12"><?= $page->title() ?></h1>
+</header>
   <section>
     <?php foreach ($releases as $release): ?>
       <article class="mb-12" style="--span: 12">
@@ -40,3 +59,6 @@
     Full list of features of <a href="/releases"><span class="link">all releases</span> &rarr;</a>
   </footer>
 <?php endslot() ?>
+
+
+
