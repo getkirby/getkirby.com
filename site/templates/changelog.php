@@ -1,7 +1,7 @@
 <?php layout('changelog') ?>
 
 <?php slot('h1') ?>
-  Make 'n' break: <br>The unavoidable breaking changes
+  <?= $page->title() ?>
 <?php endslot() ?>
 <?php slot() ?>
 
