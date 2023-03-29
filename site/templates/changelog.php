@@ -3,7 +3,7 @@
 <?php slot('sidebar') ?>
 <nav aria-label="Changelog menu">
   <div class="sidebar sticky" style="--top: var(--spacing-6)">
-    <p class="h1 color-gray-400 mb-12"><a href="/docs/changelog">Changelog</a>
+    <p class="h1 color-gray-400 mb-12"><a href="/changelog">Changelog</a>
     </p>
     <ul class="filters">
       <?php foreach ($releases as $release): ?>
