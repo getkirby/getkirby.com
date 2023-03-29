@@ -227,3 +227,8 @@ return [
     ]
   ]
 ];
+
+----
+MigrationGuides:
+- releases/3-9/migration-sites
+- releases/3-9/migration-plugins
