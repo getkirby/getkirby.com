@@ -49,6 +49,16 @@
           </div>
         </div>
       <?php endif ?>
+      <?php if ($release->migrationGuides()->isNotEmpty()): ?>
+      <div class="mb-12">
+        <h3 class="h3 mb-6">Migration Guides</h3>
+        <ul>
+         <?php foreach ($release->migrationGuides()->toPages() as $link): ?>
+            <li><a href="<?= $link->url() ?>"><?= $link->title() ?></a></li>
+         <?php endforeach ?>
+        </ul>
+      </div>
+      <?php endif ?>
     </article>
   <?php endforeach ?>
 </section>
