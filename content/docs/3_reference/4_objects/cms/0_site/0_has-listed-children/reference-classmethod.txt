@@ -1,0 +1,13 @@
+Text: 
+
+## Example
+
+```php
+<?php if($site->hasListedChildren()): ?>
+    <nav>
+    <?php foreach ($site->children()->listed() as $child): ?>
+        <a href="<?= $child->url() ?>"><?= $child->title() ?></a>
+    <?php endforeach ?>
+    </nav>
+<?php endif ?>
+```

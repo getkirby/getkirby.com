@@ -1,0 +1,22 @@
+Text: 
+
+## Example
+
+Programmatically create a new page as child of the `$site` object.
+
+```php
+<?php
+
+$kirby->impersonate('kirby');
+
+$newPage = $site->createChild(
+    [
+        'slug'     => 'blog',
+        'template' => 'blog',
+        'isDraft'  => false,
+        'content'  => [
+            'title' => 'Blog',
+        ]
+    ]
+);
+```

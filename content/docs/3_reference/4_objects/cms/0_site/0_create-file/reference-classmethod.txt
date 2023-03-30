@@ -3,3 +3,26 @@ Auth: files.create
 ----
 
 Properties: $props|Kirby\Cms\File
+
+----
+Text:
+
+## Example
+
+```php
+<?php
+
+$kirby->impersonate('kirby');
+
+$newPage = $site->createFile(
+    [
+        'filename' => 'trees.jpg',
+        'parent'   => $site,
+        'source'   => $kirby->root('assets') . '/images/trees.jpg',
+        'template' => 'image',
+        'content' => [
+            'alt' => 'A beautiful flower',
+        ],
+    ]
+);
+````

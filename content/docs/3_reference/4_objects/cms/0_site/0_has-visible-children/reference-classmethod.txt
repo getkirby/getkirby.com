@@ -2,7 +2,7 @@ Text:
 
 ## Example
 
-```
+```php
 <?php if($site->hasVisibleChildren()): ?>
 There are visible children in /content.
 <?php endif ?>
