@@ -1,0 +1,13 @@
+Text:
+
+## Example
+
+```php
+<?php
+$newSite = $site->save(
+    [
+        'text' => 'Here is some text',
+        'info' => 'Some info text',
+    ]
+);
+```

@@ -1,1 +1,14 @@
 Auth: site.changeTitle
+
+----
+Text:
+
+## Example
+
+```php
+<?php
+$kirby->impersonate('kirby');
+
+$newSite = $site->changeTitle('My shiny new site title');
+echo $newSite->title();
+```

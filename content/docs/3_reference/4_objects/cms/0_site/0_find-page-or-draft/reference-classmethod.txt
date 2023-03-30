@@ -1,0 +1,10 @@
+Text: 
+
+## Example
+
+```php
+<?php
+
+dump($site->findPageOrDraft('notes/in-the-jungle-of-sumatra'));
+
+```

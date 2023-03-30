@@ -2,7 +2,7 @@ Text:
 
 ## Example
 
-```
+```php
 <?php if($site->hasCode()): ?>
 The /content folder contains code files.
 <?php endif ?>
