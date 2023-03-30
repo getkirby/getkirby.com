@@ -43,6 +43,12 @@
   </ul>
 
   <footer class="h2 max-w-xl">
-    Full list of <a href="https://github.com/getkirby/kirby/releases"><span class="link">all releases</span> &rarr;</a>
+    <div class="mb-6">
+      Full list of <a href="https://github.com/getkirby/kirby/releases"><span class="link">all releases</span> &rarr;</a>
+    </div>
+    <div class="h5">
+      All <a href="/changelog"><span class="link">breaking changes</span> since 3.0</a>
+    </div>
+
   </footer>
 </article>

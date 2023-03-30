@@ -33,7 +33,7 @@ foreach ($page->files() as $file) {
   $newFile = $file->update([
     'template' => 'gallery-image',
     // other metadata if required
-  ];
+  ]);
 }
 ```
 Note that `$file->update()` requires authentication.

@@ -2,6 +2,10 @@
   <div class="playground-header-title mb-24">
     <h1 class="h1">Kirby is the CMS<br>that adapts to you</h1>
     <nav class="auto-fit" style="--min: 9rem; --gap: var(--spacing-3); max-width: 24rem;">
+      <a class="btn btn--outlined" href="<?= '/releases/' . $kirbyVersion ?>">
+        <?= icon('spaceship') ?>
+        New in <?= $kirbyVersion ?>
+      </a>
       <a class="btn btn--filled" href="/try">
         <?= icon('download') ?>
         Try now

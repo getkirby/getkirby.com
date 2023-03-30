@@ -399,3 +399,7 @@ Related:
 - page://jb8i1Sl6cOQOdOE8
 ```
 
+----
+MigrationGuides:
+- releases/3-8/migration-sites
+- releases/3-8/migration-plugins
