@@ -1,4 +1,4 @@
-<?php if ($banner ?? false): ?>
+<?php if (1 === 2): ?>
 <div class="mb-6">
   <div class="container">
     <?php snippet('layouts/topbar', [
