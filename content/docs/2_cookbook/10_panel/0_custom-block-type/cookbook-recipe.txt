@@ -207,7 +207,7 @@ Inside the block snippet, you have access to the full `$block` (link: docs/refer
   <?php endif ?>
   <div class="audio-info">
     <h1 class="audio-title"><?= $block->title()->html() ?></h1>
-    <h2 class="audio-subtitle"><?= $block->subtitle()->html() ?></h1>
+    <h2 class="audio-subtitle"><?= $block->subtitle()->html() ?></h2>
     <div class="audio-description">
       <?= $block->description() ?>
     </div>
