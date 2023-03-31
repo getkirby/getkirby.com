@@ -166,7 +166,7 @@ In your `config.php`:
           }
           if($subPage) {
             $subPage->publish();
-            if(isset($build['num'])) $subPage->sort($build['num']);
+            if(isset($build['num'])) $subPage->changeSort($build['num']);
           }
 
          }
