@@ -1,0 +1,3 @@
+Title: Responsive images
+----
+Link: docs/cookbook/performance/responsive-images

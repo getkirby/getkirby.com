@@ -151,3 +151,13 @@ Be aware that not all browsers support the new formats yet.
 https://caniuse.com/webp
 https://caniuse.com/avif
 </warning>
+
+
+
+## Responsive images
+
+With Kirby's thumb engine, you can resize, crop and otherwise manipulate images. Here are the links to relevant resources:
+
+- (link: docs/cookbook/performance/responsive-images text: Responsive images)
+- (link: docs/reference/plugins/components/thumb text: Custom thumb components)
+

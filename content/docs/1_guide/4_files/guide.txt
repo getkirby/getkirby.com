@@ -1,0 +1,8 @@
+Title: Files
+
+----
+
+Description: All about working with files in Kirby: images, videos, documents, responsive images, thumbnails…
+----
+Intro:
+
