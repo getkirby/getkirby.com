@@ -1,0 +1,4 @@
+Title: Lazy-loading images
+
+----
+Link: docs/cookbook/performance/lazy-loading

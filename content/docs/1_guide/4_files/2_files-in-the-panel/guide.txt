@@ -1,0 +1,59 @@
+Title: Files in the Panel
+
+----
+Text:
+
+## Uploading files via the Panel
+
+Files can be uploaded to a page, the site or a user via the Panel using one of the following methods:
+
+1. A (link: docs/reference/panel/sections/files text: files section)
+2. A (link: docs/reference/panel/fields/files#upload-options text: files field). The files field is also used inside the (link: docs/reference/panel/blocks/image text: image) and (link: docs/reference/panel/blocks/gallery text: gallery) block types.
+3. A (link: docs/reference/panel/fields/textarea#file-upload-and-select text: textarea field)
+
+Depending on the context, as an editor you then click the `Add` button in a pages section, or select the upload option from the dropdown in a files or textarea field:
+
+** Files section**
+(image: files-section.jpg)
+
+** Files field**
+
+(image: files-field.jpg)
+
+** Textarea field**
+
+(image: textarea-field.jpg)
+
+Kirby will convert the filename of your uploaded file to ASCII characters. This ensures that the filename is URL-safe and can be accessed correctly. After the conversion, the file will be checked against Kirby's internal validation rules as well as against custom rules that were defined in the blueprint. If the file validates, it will be uploaded.
+
+## Meta data blueprints for the Panel
+
+Meta data fields for files to be used in the Panel are defined in (link: docs/reference/panel/blueprints/file text: file blueprints). They are stored in `/site/blueprints/files`.
+
+Depending on whether you use a files section or one of the fields to upload files, the way how you assign a file blueprints to a file, differs slightly, see field/section links at the top of this page for details.
+
+A typical files blueprint looks like this:
+
+```yaml
+title: Image
+
+accept:
+mime: image/jpeg, image/png, image/svg+xml
+
+fields:
+alt:
+label: Alt Text
+type: text
+width: 1/2
+required: true
+link:
+label: Link
+type: url
+width: 1/2
+caption:
+label: Caption
+type: textarea
+```
+
+For details of creating a file blueprint, see the (link: docs/reference/panel/blueprints/file text: files blueprint options)
+

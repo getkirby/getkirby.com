@@ -11,6 +11,8 @@ Intro: Pages can have any number and kind of images, videos, documents or other
 ----
 Text:
 
+For file handling via the Panel, see (link: docs/guide/files/files-in-the-panel text: Files in the Panel).
+
 ## Example page with files
 
 ```filesystem
@@ -54,13 +56,6 @@ You can add/upload files to a page manually by placing it into the corresponding
 
 Note that if you upload files to a page and want to use them later in the Panel, you have to define files sections in your blueprints. Otherwise, these files will not show up.
 
-## Uploading files via the Panel
-
-You can upload files via the Panel to pages that allow file uploads. To upload a file in the Panel, click on the `Add` button above the files section and select a file from your file system.
-
-(image: files-section.jpg)
-
-Kirby will convert the filename of your uploaded file to ASCII characters. This ensures that the filename is URL-safe and can be accessed correctly. After the conversion, the file will be checked against Kirby's internal validation rules as well as against custom rules that were defined in the blueprint. If the file validates, it will be uploaded.
 
 ## Linking to files in your content
 
@@ -170,53 +165,3 @@ Meta data is available from each (class: Kirby\Cms\File text: $file) object in
   </figure>
 <?php endif ?>
 ```
-
-## Meta data blueprints for the Panel
-
-Meta data fields for files to be used in the Panel are defined in file blueprints. They are stored in `/site/blueprints/files`.
-
-Meta data blueprints are assigned to a files section using the `template` option.
-
-A typical files blueprint looks like this:
-
-```yaml
-title: Image
-
-accept:
-  mime: image/jpeg, image/png, image/svg+xml
-
-fields:
-  alt:
-    label: Alt Text
-    type: text
-    width: 1/2
-    required: true
-  link:
-    label: Link
-    type: url
-    width: 1/2
-  caption:
-    label: Caption
-    type: textarea
-```
-
-### Title
-
-The title is required. It will appear in the file view to indicate the selected template for the current file. The template name can be used to filter files in your controllers/templates.
-
-### Options
-
-A meta data blueprint can contain different options to define what sort of files can be uploaded etc. For details see (link: docs/reference/panel/blueprints/file text: files blueprint options)
-
-### Fields
-
-Finally, a meta data blueprint can have a set of fields. You are free to define any number of fields and the same (link: docs/reference/panel/fields text: field types) as in page blueprints.
-
-## Thumbnails & responsive images
-
-With Kirby's thumb engine, you can resize, crop and otherwise manipulate images. Here are the links to relevant resources:
-
-- (link: docs/guide/templates/resize-images-on-the-fly text: Resize images on the fly)
-- (link: docs/cookbook/performance/responsive-images text: Responsive images)
-- (link: docs/reference/system/options/thumbs text: Thumb options)
-- (link: docs/reference/plugins/components/thumb text: Custom thumb components)
