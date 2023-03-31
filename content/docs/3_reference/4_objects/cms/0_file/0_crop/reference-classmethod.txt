@@ -14,3 +14,30 @@ if($image = $page->image()):
     echo $image->crop(300, 200, 70);
 endif;
 ```
+
+### Crop positions
+
+You can set from which position a file should be cropped. The following crop options are available:
+
+- `top left`
+- `top`
+- `top right`
+- `left`
+- `center`
+- `right`
+- `bottom left`
+- `bottom`
+- `bottom right`
+
+This is how to use the crop positions in your code:
+
+```php
+// quick and simple
+$image->crop(100, 200, 'top right');
+
+// more fine grained control
+$image->crop(100, 200, [
+'quality' => 70,
+'crop' => 'left'
+]);
+```
