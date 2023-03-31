@@ -1,0 +1,9 @@
+Text: 
+
+## Example
+
+```php
+<?php if($site->hasUnlistedChildren()): ?>
+There are unlisted (published, but not listed) children in /content.
+<?php endif ?>
+```

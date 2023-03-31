@@ -1,0 +1,13 @@
+Text: 
+
+## Example
+
+```php
+<?php foreach ($site->childrenAndDrafts() as $item) {
+   if ($item->isDraft()) {
+       echo $item->title() . ' is a draft';
+   }
+
+    echo $item->title() . ' is a published page';
+}
+```

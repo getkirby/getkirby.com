@@ -1,0 +1,10 @@
+Text: 
+
+## Example
+
+```php
+<?php
+
+dump($site->draft('notes/in-the-jungle-of-sumatra'));
+
+```

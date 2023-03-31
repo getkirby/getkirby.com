@@ -1,0 +1,9 @@
+Text: 
+
+## Example
+
+This example will return a pages collection when the page has children:
+
+```php
+<?php dump($page->query('page.children')) ?>
+```

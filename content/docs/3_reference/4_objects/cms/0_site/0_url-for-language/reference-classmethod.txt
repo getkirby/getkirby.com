@@ -4,14 +4,9 @@ If a $lang parameter is specified (multi-language site only), the specific langu
 
 ## Example
 
-### Fetching the base URL for the site
-
-```php
-<?= $site->url() ?>
-```
 
 ### Fetching the base URL for a language
 
 ```php
-<?= $site->url('en') ?>
+<?= $site->urlForLanguage('en') ?>
 ```
