@@ -1,4 +1,4 @@
-Title: Resizing & cropping images
+Title: Image thumbnails
 
 ----
 
@@ -8,63 +8,56 @@ Intro: Kirby's built-in thumbs creator lets you resize and crop any image on the
 
 Text:
 
-With Kirby's new Thumbnail API, thumbs are generated asynchronously. This makes thumb creation feel a lot faster and creates less memory issues, which could easily become an issue with many images or when creating many different images sizes to serve responsive images.
+With Kirby's Thumbnail API, thumbs are generated asynchronously. This makes thumb creation feel a lot faster and creates less memory issues, which could easily become an issue with many images or when creating many different images sizes to serve responsive images.
 
 A new set of plugin points can be used to hook into the thumbnail API or the thumbnail URLs, see (link: docs/reference/plugins/extensions/core-components text: core components).
 
 In a default setup, thumbnails are stored in the `/media` folder.
 
-## Resizing images
+## The `thumbs()` method
+
+With the thumbs method, you can perform multiple image manipulations at once: resizing, cropping, changing the image format, blurring and converting to grayscale, and blurring. If you wanted to do everything at once, the code would look like this:
+
+```php
+<img src="<?= $image->thumb(
+    [
+        'width'     => 300,
+        'height'    => 300,
+        'crop'      => 'center',
+        'format'    => 'webp',
+        'grayscale' => true,
+        'blur'      => 300,
+        'quality'   => 70,
+    ]
+)->url() ?>" alt="">
+```
+
+In the Reference: (link: docs/reference/objects/cms/file/thumb text: $file->thumb())
+
+## Shortcut methods
+
+Most of the time, you don't want to use all options though and on top, the thumb method is quite verbose. Luckily, Kirby comes with a set of  shortcuts methods: `resize()`, `crop()`, `grayscale()`, and `blur()`. Additionally, you can define default settings in your config file. But one step after the other.
+
+Here are some examples for using the shortcut methods, more details with all options in the Reference:
+
+### Resizing images
 
 ```php
 $image->resize(300);
-
 $image->resize(300, 200);
 ```
+In the Reference: (link: docs/reference/objects/cms/file/resize text: $file->resize())
 
-## Cropping images
-
-### Square
+### Cropping images
 
 ```php
 $image->crop(100);
-```
-
-### Crop by width and height
-
-```php
 $image->crop(100, 200);
 ```
 
-## Crop positions
+In the Reference: (link: docs/reference/objects/cms/file/crop text: $file->crop())
 
-You can set from which position a file should be cropped. The following crop options are available:
-
-- `top left`
-- `top`
-- `top right`
-- `left`
-- `center`
-- `right`
-- `bottom left`
-- `bottom`
-- `bottom right`
-
-This is how to use the crop positions in your code:
-
-```php
-// quick and simple
-$image->crop(100, 200, 'top right');
-
-// more fine grained control
-$image->crop(100, 200, [
-  'quality' => 70,
-  'crop' => 'left'
-]);
-```
-
-
-## Blur
+### Blur
 
 The `blur` method applies a blur filter to an image. You can modify the intensity of the blur effect by passing an integer. The default value is 10.
 
@@ -72,14 +65,16 @@ The `blur` method applies a blur filter to an image. You can modify the intensit
 $image->blur();
 $image->blur(30);
 ```
+In the Reference: (link: docs/reference/objects/cms/file/blur text: $file->blur())
 
-## Grayscale
+### Grayscale
 
 The grayscale method converts an image to grayscale.
 
 ```php
 $image->grayscale();
 ```
+In the Reference: (link: docs/reference/objects/cms/file/grayscale text: $file->grayscale())
 
 ## Configuring your thumbnails
 
@@ -91,26 +86,13 @@ return [
     'driver'    => 'im',
     'quality'   => 90,
     'bin'       => '/usr/local/bin/convert',
-    'interlace' => true
+    'interlace' => true,
+    'format'    => 'webp',
   ]
 ];
 ```
 
-You can set a default format option in your config file and convert all images unless you override the format option in the thumb method.
-
-```php "/site/config/config.php"
-<?php
-
-return [
-  'thumbs' => [
-    'format' => 'webp'
-  ]
-];
-```
-
-This is only recommended if you find yourself converting 90% of your files to that format anyway. Otherwise you will need to override the default quite a lot.
-
-(link: docs/reference/system/options/thumbs text: All thumbs options)
+In the Reference: (link: docs/reference/system/options/thumbs text: All thumbs options)
 
 ## Presets
 
@@ -127,7 +109,7 @@ return [
 ];
 ```
 
-Then you can use them e.g. in your templates:
+Then you can use these presets e.g. in your templates:
 
 ```php
 $file->thumb(); // for default preset
@@ -162,8 +144,6 @@ $image->srcset([
   '1200w' => ['width' => 1200, 'format' => 'webp']
 ])
 ```
-
-The GDLib/SimpleImage driver currently only supports `webp`, ImageMagick supports `webp` and `avif`.
 
 <warning>
 Be aware that not all browsers support the new formats yet.
