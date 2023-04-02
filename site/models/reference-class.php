@@ -5,6 +5,7 @@ use Kirby\Cms\Pages;
 use Kirby\Reference\DocBlock;
 use Kirby\Reference\SectionPage;
 use Kirby\Reference\Types;
+use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 use \ReferenceClassMethodPage as ReferenceClassMethod;
 
@@ -237,7 +238,12 @@ class ReferenceClassPage extends SectionPage
                 }
 
                 if ($type = $parameter->getType()) {
-                    $type = $type->getName();
+                    if ($type instanceof ReflectionUnionType) {
+                        $type = $type->getTypes();
+                    }
+                    $type = A::map(A::wrap($type), fn ($t) => $t->getName());
+                    $type = implode('|', $type);
+
                 } elseif ($doc) {
                     $type = (string)$doc->getParameters()[0]->getType();
                 }
