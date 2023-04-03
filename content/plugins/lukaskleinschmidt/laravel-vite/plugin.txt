@@ -1,0 +1,33 @@
+Title: Laravel Vite
+
+----
+
+Repository: https://github.com/lukaskleinschmidt/kirby-laravel-vite
+
+----
+
+Category: templating
+
+----
+
+Subcategory: assets
+
+----
+
+Description: Use the [laravel-vite-plugin](https://github.com/laravel/vite-plugin) in your Kirby application.
+
+----
+
+Example:
+
+```php
+<!doctype html>
+<head>
+  <?= vite([
+    'assets/css/app.css',
+    'assets/css/templates/{{ page.template }}.css',
+    'assets/js/app.js',
+    'assets/js/templates/{{ page.template }}.js',
+  ]) ?>
+</head>
+```
