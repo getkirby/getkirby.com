@@ -1,0 +1,36 @@
+Title: Types
+
+----
+
+Repository: https://github.com/lukaskleinschmidt/kirby-types
+
+----
+
+Category: devtools
+
+----
+
+Description: Additional and extended type hints for your IDE. Adds the `kirby types:create` command to your project.
+
+----
+
+Example:
+
+<style>
+@keyframes Blink {
+    to {
+        visibility: hidden;
+    }
+}
+</style>
+<div style="color: var(--color-gray-300); font-family: var(--font-mono); font-size: var(--text-xs); font-weight: var(--font-bold)">
+<span style="color: #16c60c">root@localhost:</span><span style="color: #3b78ff">~/app</span>$
+<span style="user-select: all">kirby types:create</span><span style="animation: Blink 1s steps(2, start) infinite">|</span><br>
+<br>
+<span style="color: #3b78ff">kirby-types v1.0.9</span> <span style="color: #16c60c">types:create</span><br>
+<span style="color: #16c60c">✓</span> added blueprints fields<br>
+<span style="color: #16c60c">✓</span> added custom methods<br>
+<span style="color: #16c60c">✓</span> added decorators<br>
+<span style="color: #16c60c">✓</span> added aliases<br>
+<span style="color: #16c60c">types helper created successfully</span>
+</div>
