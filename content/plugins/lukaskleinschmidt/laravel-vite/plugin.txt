@@ -14,6 +14,14 @@ Subcategory: assets
 
 ----
 
+Similar: arnoson/kirby-vite
+
+----
+
+Published: 2023-04-04
+
+----
+
 Description: Use the [laravel-vite-plugin](https://github.com/laravel/vite-plugin) in your Kirby application.
 
 ----

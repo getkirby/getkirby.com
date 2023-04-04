@@ -10,6 +10,10 @@ Category: devtools
 
 ----
 
+Published: 2023-04-04
+
+----
+
 Description: Additional and extended type hints for your IDE. Adds the `kirby types:create` command to your project.
 
 ----
