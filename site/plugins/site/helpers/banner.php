@@ -61,10 +61,18 @@ function banner(): ?Obj {
     // if a banner is currently active, the cache
     // will also expire when the active banner ends
     if ($banner !== null && $banner->endDate()) {
+        $endDate = $banner->endDate();
+
+        // if the text changes on the last day,
+        // expire one day before the end date
+        if ($banner->textLastDay()) {
+            $endDate -= 24 * 60 * 60;
+        }
+
         if (is_int($expires) === true) {
-            $expires = min($expires, $banner->endDate());
+            $expires = min($expires, $endDate);
         } else {
-            $expires = $banner->endDate();
+            $expires = $endDate;
         }
     }
 
