@@ -26,6 +26,14 @@ function banner(): ?Obj {
             $candidate['endDate'] = strtotime($candidate['endDate']) + 86400;
         }
 
+        // use a separate text on the end date if configured
+        if (
+            $candidate['endDate'] - time() < 24 * 60 * 60 &&
+            isset($candidate['textLastDay']) === true
+        ) {
+            $candidate['text'] = $candidate['textLastDay'];
+        }
+
         $candidate = new Obj($candidate);
 
         // the cache will expire once the *first* of the configured
