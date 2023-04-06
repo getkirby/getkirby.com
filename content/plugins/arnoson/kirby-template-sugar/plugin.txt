@@ -1,0 +1,17 @@
+Title: Kirby Template Sugar
+
+----
+
+Repository: https://github.com/arnoson/kirby-template-sugar
+
+----
+
+Category: templating
+
+----
+
+Subcategory: engine
+
+----
+
+Description: Syntactic sugar for Kirby templates that makes working with snippets and slots a breeze.
