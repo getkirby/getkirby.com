@@ -10,7 +10,7 @@ Changes: https://owebstudio.com/kirby/plugins/mollie-merx/changelog#{{ version }
 
 ----
 
-Version: 1.2.2
+Version: 1.3.0
 
 ----
 
