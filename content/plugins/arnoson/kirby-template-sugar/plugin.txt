@@ -14,4 +14,8 @@ Subcategory: engine
 
 ----
 
+Published: 2023-04-06
+
+----
+
 Description: Syntactic sugar for Kirby templates that makes working with snippets and slots a breeze.
