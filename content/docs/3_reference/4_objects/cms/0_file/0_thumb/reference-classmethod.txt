@@ -6,7 +6,17 @@ Text:
 
 ## Options
 
-You can use the following options in the options array (values are the default values):
+### Accepted types
+
+
+| Type | Value
+|---- | ----
+| null | Default preset from configuration if defined
+| string | Name of preset defined in configuration
+| array | See details below
+
+
+If you pass an array as options, you can use the following key/value pairs (values are the default values):
 
 ```php
 $options = [
