@@ -1,4 +1,4 @@
-Title: Read me first
+Title: About the docs
 
 ----
 
@@ -13,14 +13,12 @@ Intro: Guide, Reference, Cookbook, Search, where to find what and how to best us
 
 Text:
 
-Every user comes to a documentation with different expectations, background and prior knowledge. Ideally, Kirby or any other software/product would be self-explanatory, but that's a dream. It is equally a dream to make everyone happy, and consequently some of you will love this documentation and some of you will hate it, as our last survey clearly showed. But that's no excuse, and we will strive to improve it constantly.
-
 ## Parts of the documentation
 
 This documentation has <del>three</del> four parts:
 
 ### 1. Guide:
-That's where you currently are and where you should start when you are new to Kirby to get an overview on the system. The Guide is divided into topics, and is the place where beginners should start.
+That's where you currently are and where you should start when you are new to Kirby to get an overview on the system.
 
 The Guide starts with the most basic topics like installation, introduction to the Starterkit, content, templating and blueprints, and continues with more advanced stuff. It explains general concepts, contains basic examples and links to related documentation in the Reference or Cookbook.
 
@@ -79,7 +77,7 @@ Our example `thumb()` method is a good example for a method which accepts differ
 Next to the parameters, the return type is of utmost importance, because it signals to you what kind of data type a method returns, and therefore what you can do with the result of calling this method.
 
 <info>
-At this point, you might not understand all the examples given here, but you will find more details for each using the links.
+At this point, you might not understand all the examples given here, and the specifics of the used methods are not important yet and will be explained in later sections of the docs.
 </info>
 
 ### Strings
@@ -89,7 +87,6 @@ If a method returns a simple `string`, you can for example echo it, or use it in
 ```php
 <?= $page->url() ?>
 ```
-(link: docs/reference/objects/cms/page/url text: $page->url())
 
 ### Booleans
 
@@ -108,7 +105,6 @@ Such methods are usually used in conjunction with an if-statement (or a (link:ht
 <!-- do stuff -->
 <?php endif ?>
 ```
-(link: docs/reference/objects/cms/page/has-children text: $page->hasChildren())
 
 ### Numbers
 
@@ -124,7 +120,6 @@ Example for method which returns an integer:
 $count = A::count([15, 19, 105, 7]);
 var_dump($count); //int(4)
 ```
-(link: docs/reference/objects/toolkit/a/count text: A::count())
 
 Example for method which returns a floating point number:
 
@@ -133,7 +128,6 @@ Example for method which returns a floating point number:
 $result = A::average([15, 19, 105, 7], 2);
 dump($result); //float(36.5)
 ```
-(link: docs/reference/objects/toolkit/a/average text: A::average())
 
 ### Arrays
 
@@ -156,43 +150,26 @@ If a method returns an `array`, you can loop through the elements of the arrayâ€
 $contentArray = $page->readContent();
 dump($contentArray);
 ```
-(link: docs/reference/objects/cms/page/read-content text: $page->readContent())
 
 ### Objects
 
 Methods can also return objects. In the Kirby context these will mainly be Kirby objects, either of the parent class of the method, or another Kirby class (`Field`, `Content`, `Page`, `Pages`, `Structure`, to name just a few). If a method returns an object, you have access to the methods of this class. Sounds theoretical? Let's consider some examples.
 
-A typical thing you will do in Kirby is output a page title, using the `title()` Page method:
+A typical thing you will do in Kirby is to fetch a particular page by its `id`:
 
 ```php
-<?= $page->title() ?>
+<?php $p = $site->find('blog') ?>
 ```
 
-While this outputs a simple string when echoed, in reality, `$page->title()` returns a `Field` object. A Field object is an instance of the `Kirby\Cms\Field` class. And this field class has a number of methods, which you can find (link: docs/reference/objects/cms/field text: here) and (link: docs/reference/templates/field-methods text: here).
+The return type of this method will be a an object of the `Kirby\Cms\Page` class if the page exists. And this Page class has a number of methods, which you can find (link: docs/reference/objects/cms/page text: here).
 
-That means, you can call any of the methods listed on those pages on this `title()`  method:
+That means, you can call any of the methods listed on that page on the return type of this method:
 
 ```php
-<?php if ($page->title()->isNotEmpty()): ?>
-  <h1><?= $page->title() ?></h1>
+<?php if ($p = $site->find('blog')): ?>
+  <a href="<?= $p->url() ?>"><?= $p->title() ?></a>>
 <?php endif ?>
 ```
-
-```php
-<?php if ($page->title()->isValid('maxLength', 45)): ?>
-The title length is valid
-<?php endif ?>
-```
-
-<info>
-**Excursion:**
-
-How do you now that `$page->title()` returns a `Field` object, after all, there is no `title()` method mentioned anywhere in the docs?
-
-As a rule, any method you call on a Site/Page/User/File object and that is not a member method of the class, registered as extension method or in a model, returns a Field object.
-
-*Hint*: If you want to check what something returns, use a quick `dump()`.
-</info>
 
 If we return to our Reference example, the `$file->thumb()` method, we see that it can return two types of objects:
 
@@ -214,15 +191,8 @@ This return type applies when a method doesn't return anything. Typical examples
 
 ```php
 <?php
-$oldPage = page('about');
-$newPage = $oldPage->save([
-    'title' => 'Our company'
-]);
-// The `$page->save()` method doesn't trigger a hook, so we do this manually
-$kirby->trigger('page.changeTitle.after', ['newPage' => $newPage, 'oldPage' => $oldPage]);
+$kirby->user()->logout();
 ```
-
-(link: docs/reference/objects/cms/app/trigger text: $kirby->trigger())
 
 ## Exceptions
 
