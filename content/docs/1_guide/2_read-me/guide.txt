@@ -2,11 +2,11 @@ Title: Read me first
 
 ----
 
-Description: A quick overview about the different parts of the documentation
+Description: A quick overview on the different parts of the documentation
 
 ----
 
-Intro: Guide, Reference, Cookbook, Search, where to find what and how to best use it
+Intro: Guide, Reference, Cookbook, Search, where to find what and how to best use them
 
 ----
 
@@ -20,15 +20,14 @@ Every user comes to a documentation with different expectations, background and 
 This documentation has <del>three</del> four parts:
 
 ### 1. Guide:
-That's where you currently are and where you should start when you are new to Kirby to get an overview about the system. The Guide is divided into topics, and is the place where beginners should start.
+That's where you currently are and where you should start when you are new to Kirby to get an overview on the system. The Guide is divided into topics, and is the place where beginners should start.
 
 The Guide starts with the most basic topics like installation, introduction to the Starterkit, content, templating and blueprints, and continues with more advanced stuff. It explains general concepts, contains basic examples and links to related documentation in the Reference or Cookbook.
 
-
 ### 2. Reference
-The (link: docs/reference text: Reference) is mainly a huge listing of all classes, their methods and arguments in Kirby, but also includes all the details about blueprint settings, available extensions and the REST API.
+The (link: docs/reference text: Reference) lists all classes, their methods and arguments in Kirby, as well as all the details about blueprint settings, available extensions and the REST API.
 
-It also has examples at least for the most important everyday methods, and we keep adding more.
+It also has examples for the most important everyday methods, and we keep adding more.
 
 A large part of the Reference (all classes and their methods) is created automatically from the source code so that it is always complete and up-to-date. These automatically generated pages are then enriched with manually added examples. See details below.
 
@@ -36,9 +35,9 @@ A large part of the Reference (all classes and their methods) is created automat
 The (link: docs/cookbook text: Cookbook) is a growing collection of step-by-step recipes, categorized into several topics. These recipes can be short or extensive, depending on the subject they cover. Most recipes are written by the team, but you are invited to contribute your own knowledge. We try to link from the Cookbook to the relevant parts of the other docs and vice-versa where appropriate.
 
 ### 4. Search
-The search can be accessed via the button at the top right of each page or with the keyboard shortcut CMD+K. You can filter the search results by parts of the documentation with the dropdown:
-    (image: search-dropdown.png)
+The search can be accessed via the button at the top right of each page or with the keyboard shortcut <kbd>Ctrl/Cmd+K</kbd>. The dropdown allows you to filter the search results by parts of the documentation:
 
+(image: search-dropdown.png)
 
 ## A Reference page in detail
 
@@ -49,7 +48,7 @@ Let's look at a detailed Reference page to see how you can get the most of it.
 
 1. **Method name**: In our example, the method name is `thumb()`.
 2. **Brief explanation what the method does**: The `thumb()` method creates a thumbnail or modified version of the file.
-3. **A link to the Guide** where available that puts the method into a larger context. Here, the link goes to the (link: docs/guide/templates/resize-images-on-the-fly text: Resizing & cropping images) guide page.
+3. **A link to the Guide** where available that puts the method into a larger context. Here, the link points to the (link: docs/guide/templates/resize-images-on-the-fly text: Resizing & cropping images) guide page.
 4. **Link to the source code on GitHub**. If a method doesn't have in-depth explanations or examples, it can help to take a look at the source code. This is also useful if you want to modify a method in a model, for example.
 5. **Method signature**, i.e. method name, accepted parameters and data types of these parameters
 6. **Parameters** the methods accepts/expects together with their allowed types, see (link: #parameters text: parameters)
@@ -63,17 +62,17 @@ Not all of the above features may be present in each method description. Less us
 
 ## Parameters
 
-Many methods accept or require one or more parameters. These parameters need to be of a given data type (string, array, bool, null, object etc., see (link: #return-types text: return types below). If you pass a data type that is not allowed, PHP will complain with a TypeError.
+Many methods accept or require one or more parameters. These parameters need to be of a given data type (`string`, `array`, `bool`, `null`, `object` etc.), see (link: #return-types text: return types below). If you pass a data type that is not allowed, PHP will complain with a `TypeError`.
 
 For a list of all available data types in PHP see also: (link: https://www.php.net/manual/en/language.types.php text: Data types in PHP)
 
-Particularly when the expected parameter is of type array, you need to know which key/value pairs are expected within this array.
+Particularly when the expected parameter is of type `array`, you need to know which key/value pairs are expected within this array.
 
 Our example `thumb()` method is a good example for a method which accepts different data types for the only parameter. So let's look at this more closely. The `$options` parameter can have one of the following types:
 
 1. **Null**, or no parameter: If you don't pass a parameter, the (link: docs/reference/system/options/thumbs#presets text: default preset) from the configuration will be used.
 2. **String**: If you pass a string, this string must refer to a named preset in your configuration.
-3. **Array**: If you pass an array, this array can contain one or more of the key/value pairs described under "Options"
+3. **Array**: If you pass an array, this array can contain one or more of the key/value pairs described under "Options".
 
 ## Return types
 
@@ -85,7 +84,7 @@ At this point, you might not understand all the examples given here, but you wil
 
 ### Strings
 
-If a method returns a simple string, you can for example echo it, or use it in other contexts where a string is required as input:
+If a method returns a simple `string`, you can for example echo it, or use it in other contexts where a string is required as input:
 
 ```php
 <?= $page->url() ?>
@@ -94,7 +93,7 @@ If a method returns a simple string, you can for example echo it, or use it in o
 
 ### Booleans
 
-Many methods return a boolean, i.e. if something is true or false:
+Many methods return a boolean (`bool`), i.e. if something is true or false:
 
 ```php
 <?php
@@ -115,8 +114,8 @@ Such methods are usually used in conjunction with an if-statement (or a (link:ht
 
 PHP knows two types of numbers:
 
-- integer and
-- floating point numbers
+- integer (`int`) and
+- floating point numbers (`float`)
 
 Example for method which returns an integer:
 
@@ -138,7 +137,7 @@ dump($result); //float(36.5)
 
 ### Arrays
 
-If a method returns an array, you can loop through the element of the array…
+If a method returns an `array`, you can loop through the elements of the array…
 
 ```php
 <?php $contentArray = $page->readContent(); ?>
@@ -161,7 +160,7 @@ dump($contentArray);
 
 ### Objects
 
-Methods can also return objects, in the Kirby context these will mainly be Kirby objects, either of the parent class of the method, or another Kirby class (`Field`, `Content`, `Page`, `Pages`, `Structure`, to name just a few). If a method returns an object, you have access to the methods of this class. Sounds theoretical? Let's consider some examples.
+Methods can also return objects. In the Kirby context these will mainly be Kirby objects, either of the parent class of the method, or another Kirby class (`Field`, `Content`, `Page`, `Pages`, `Structure`, to name just a few). If a method returns an object, you have access to the methods of this class. Sounds theoretical? Let's consider some examples.
 
 A typical thing you will do in Kirby is output a page title, using the `title()` Page method:
 
@@ -169,7 +168,7 @@ A typical thing you will do in Kirby is output a page title, using the `title()`
 <?= $page->title() ?>
 ```
 
-While this outputs a simple string when echoed, in reality, `$page-title()` returns a `Field` object. A Field object is an instance of the `Kirby\Cms\Field` class. And this field class has a number of methods, which you can find (link: docs/reference/objects/cms/field text: here) and (link: docs/reference/templates/field-methods text: here).
+While this outputs a simple string when echoed, in reality, `$page->title()` returns a `Field` object. A Field object is an instance of the `Kirby\Cms\Field` class. And this field class has a number of methods, which you can find (link: docs/reference/objects/cms/field text: here) and (link: docs/reference/templates/field-methods text: here).
 
 That means, you can call any of the methods listed on those pages on this `title()`  method:
 
@@ -186,9 +185,9 @@ The title length is valid
 ```
 
 <info>
-Excursion:
+**Excursion:**
 
-How do you now that `$page->title()` returns a Field object, after all, there is no `title()` method mentioned anywhere in the docs?
+How do you now that `$page->title()` returns a `Field` object, after all, there is no `title()` method mentioned anywhere in the docs?
 
 As a rule, any method you call on a Site/Page/User/File object and that is not a member method of the class, registered as extension method or in a model, returns a Field object.
 
@@ -210,7 +209,7 @@ In any case, you can follow the return type links to find out what methods you c
 
 ### Void
 
-This return type applies, when a method doesn't return anything. Typical examples for such methods are class setter methods, but of course also other methods, for example:
+This return type applies when a method doesn't return anything. Typical examples for such methods are class setter methods, but of course also other methods, for example:
 
 
 ```php
@@ -237,9 +236,9 @@ If a method can throw an exception, you must be particularly careful, and wrap t
       'title' => 'New title',
       'text'  => 'Let\'s update this text',
     ]);
-  } catch (LogicException|InvalidArgumentException $e)
-  {
-    // do something here if an exception is thrown, what you do, is essentially up to you and depends on the context
+  } catch (LogicException|InvalidArgumentException $e) {
+    // do something here if an exception is thrown;
+    // what you do is essentially up to you and depends on the context
     echo 'An error occurred: ' . $e->getMessage();
   }
 ```
@@ -248,4 +247,4 @@ And with this, we hope you can get the most out of our documentation.
 
 ## Missing something?
 
-If you miss examples for a specific method or class, or run into any other issues with the documentation, please create an (link: https://github.com/getkirby/getkirby.com/issues text: issue in the getkirby.com repo on GitHub). Please be a specific as possible when reporting your issue, so that it becomes actionable.
+If you miss examples for a specific method or class, or run into any other issues with the documentation, please create an (link: https://github.com/getkirby/getkirby.com/issues text: issue in the getkirby.com repo on GitHub). The more specific you are when reporting your issue, the more actionable it is and the easier it becomes to fix the issue.
