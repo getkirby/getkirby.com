@@ -77,7 +77,7 @@ Our example `thumb()` method is a good example for a method which accepts differ
 Next to the parameters, the return type is of utmost importance, because it signals to you what kind of data type a method returns, and therefore what you can do with the result of calling this method.
 
 <info>
-At this point, you might not understand all the examples given here, and the specifics of the used methods are not important yet and will be explained in later sections of the docs.
+At this point, you might not understand all the examples given here. The specifics of the used methods are not important yet and will be explained in later sections of the docs.
 </info>
 
 ### Strings
@@ -163,7 +163,7 @@ A typical thing you will do in Kirby is to fetch a particular page by its `id`:
 
 The return type of this method will be a an object of the `Kirby\Cms\Page` class if the page exists. And this Page class has a number of methods, which you can find (link: docs/reference/objects/cms/page text: here).
 
-That means, you can call any of the methods listed on that page on the return type of this method:
+That means, you can call any of the methods listed on that page on the return value of this method:
 
 ```php
 <?php if ($p = $site->find('blog')): ?>
