@@ -74,6 +74,7 @@ return [
             'reference-ui',
             'reference-url',
             'reference-validator',
+            'reference-validators',
             'security',
             'text',
             'release',
