@@ -2,13 +2,9 @@ Intro: Overrides the defaults for requests to remote servers
 
 ----
 
-Since: 3.4.0
-
-----
-
 Text:
 
-This option defines global default values for all requests that are made with the `Kirby\Toolkit\Remote` class.
+This option defines global default values for all requests that are made with the `Kirby\Http\Remote` class.
 
 ## Example
 
