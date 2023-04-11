@@ -17,14 +17,14 @@ return function ($kirby) {
             $params['filters'] = 'area:' . $area;
         }
 
-        $results = algolia()->search($query, param('page') ?? 1, $params);
+        $results = algolia()->query($query, param('page') ?? 1, $params);
     }
 
     return [
         'results'    => $results ?? [],
-        'pagination' => isset($results) ? $results->pagination() : null,
+        'pagination' => $results?->pagination(),
         'query'      => html(strip_tags($query), false),
         'area'       => empty($area) ? null : $area,
-        'areas'      => option('search.areas')
+        'areas'      => $kirby->option('search.areas')
     ];
 };
