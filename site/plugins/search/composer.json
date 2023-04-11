@@ -6,7 +6,7 @@
     }
   },
   "require": {
-    "algolia/algoliasearch-client-php": "^2.7.3"
+    "algolia/algoliasearch-client-php": "^3.3.2"
   },
   "config": {
     "optimize-autoloader": true

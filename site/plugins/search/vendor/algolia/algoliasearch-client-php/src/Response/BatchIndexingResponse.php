@@ -22,7 +22,7 @@ final class BatchIndexingResponse extends AbstractResponse implements \Iterator,
         $this->index = $index;
     }
 
-    public function wait($requestOptions = array())
+    public function wait($requestOptions = [])
     {
         if (isset($this->index)) {
             foreach ($this->apiResponse as $response) {
@@ -41,31 +41,52 @@ final class BatchIndexingResponse extends AbstractResponse implements \Iterator,
      *
      * @return number of response from the API (number of batches sent)
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->apiResponse);
     }
 
+    /**
+     * @return mixed
+     */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->apiResponse[$this->key];
     }
 
+    /**
+     * @return void
+     */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         $this->key++;
     }
 
+    /**
+     * @return bool|float|int|mixed|string|null
+     */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->key;
     }
 
+    /**
+     * @return bool
+     */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return isset($this->apiResponse[$this->key]);
     }
 
+    /**
+     * @return void
+     */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         $this->key = 0;

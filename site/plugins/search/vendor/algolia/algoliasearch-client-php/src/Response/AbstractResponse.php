@@ -9,7 +9,7 @@ abstract class AbstractResponse implements \ArrayAccess
      */
     protected $apiResponse;
 
-    abstract public function wait($requestOptions = array());
+    abstract public function wait($requestOptions = []);
 
     /**
      * @return array The actual response from Algolia API
@@ -21,7 +21,10 @@ abstract class AbstractResponse implements \ArrayAccess
 
     /**
      * {@inheritdoc}
+     *
+     * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->apiResponse[$offset]);
@@ -29,7 +32,10 @@ abstract class AbstractResponse implements \ArrayAccess
 
     /**
      * {@inheritdoc}
+     *
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->apiResponse[$offset];
@@ -37,7 +43,10 @@ abstract class AbstractResponse implements \ArrayAccess
 
     /**
      * {@inheritdoc}
+     *
+     * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->apiResponse[$offset] = $value;
@@ -45,7 +54,10 @@ abstract class AbstractResponse implements \ArrayAccess
 
     /**
      * {@inheritdoc}
+     *
+     * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->apiResponse[$offset]);

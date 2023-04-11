@@ -5,12 +5,13 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Config\InsightsConfig;
 use Algolia\AlgoliaSearch\Insights\UserInsightsClient;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
+use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
 final class InsightsClient
 {
     /**
-     * @var \Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper
+     * @var ApiWrapperInterface
      */
     private $api;
 
@@ -19,7 +20,7 @@ final class InsightsClient
      */
     private $config;
 
-    public function __construct(ApiWrapper $api, InsightsConfig $config)
+    public function __construct(ApiWrapperInterface $api, InsightsConfig $config)
     {
         $this->api = $api;
         $this->config = $config;
@@ -57,14 +58,14 @@ final class InsightsClient
         return new UserInsightsClient($this, $userToken);
     }
 
-    public function sendEvent($event, $requestOptions = array())
+    public function sendEvent($event, $requestOptions = [])
     {
-        return $this->sendEvents(array($event), $requestOptions);
+        return $this->sendEvents([$event], $requestOptions);
     }
 
-    public function sendEvents($events, $requestOptions = array())
+    public function sendEvents($events, $requestOptions = [])
     {
-        $payload = array('events' => $events);
+        $payload = ['events' => $events];
 
         return $this->api->write('POST', api_path('/1/events'), $payload, $requestOptions);
     }

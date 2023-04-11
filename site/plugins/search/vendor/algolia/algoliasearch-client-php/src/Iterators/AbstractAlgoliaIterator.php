@@ -52,13 +52,13 @@ abstract class AbstractAlgoliaIterator implements \Iterator
      */
     abstract protected function formatHit(array $hit);
 
-    public function __construct($indexName, ApiWrapper $api, $requestOptions = array())
+    public function __construct($indexName, ApiWrapper $api, $requestOptions = [])
     {
         $this->indexName = $indexName;
         $this->api = $api;
-        $this->requestOptions = $requestOptions + array(
+        $this->requestOptions = $requestOptions + [
             'hitsPerPage' => 1000,
-        );
+        ];
 
         $this->fetchNextPage();
     }
@@ -68,6 +68,7 @@ abstract class AbstractAlgoliaIterator implements \Iterator
      *
      * @return array
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         $hit = $this->response['hits'][$this->batchKey];
@@ -78,6 +79,7 @@ abstract class AbstractAlgoliaIterator implements \Iterator
     /**
      * Move forward to next element.
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         $this->key++;
@@ -94,6 +96,7 @@ abstract class AbstractAlgoliaIterator implements \Iterator
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->key;
@@ -107,6 +110,7 @@ abstract class AbstractAlgoliaIterator implements \Iterator
      * @return bool the return value will be casted to boolean and then evaluated.
      *              Returns true on success or false on failure
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return isset($this->response['hits'][$this->batchKey]);
@@ -115,6 +119,7 @@ abstract class AbstractAlgoliaIterator implements \Iterator
     /**
      * Rewind the Iterator to the first element.
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         if (0 !== $this->key) {

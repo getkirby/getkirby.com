@@ -24,10 +24,10 @@ class Request implements RequestInterface
     private $uri;
 
     /** @var array Map of all registered headers, as original name => array of values */
-    private $headers = array();
+    private $headers = [];
 
     /** @var array Map of lowercase header name => original name at registration */
-    private $headerNames = array();
+    private $headerNames = [];
 
     /** @var string */
     private $protocol = '1.1';
@@ -45,7 +45,7 @@ class Request implements RequestInterface
     public function __construct(
         $method,
         $uri,
-        array $headers = array(),
+        array $headers = [],
         $body = null,
         $version = '1.1'
     ) {
@@ -67,6 +67,9 @@ class Request implements RequestInterface
         }
     }
 
+    /**
+     * @return string|null
+     */
     public function getRequestTarget()
     {
         if (null !== $this->requestTarget) {
@@ -84,6 +87,9 @@ class Request implements RequestInterface
         return $target;
     }
 
+    /**
+     * @return Request
+     */
     public function withRequestTarget($requestTarget)
     {
         if (preg_match('#\s#', $requestTarget)) {
@@ -96,11 +102,17 @@ class Request implements RequestInterface
         return $new;
     }
 
+    /**
+     * @return string
+     */
     public function getMethod()
     {
         return $this->method;
     }
 
+    /**
+     * @return Request
+     */
     public function withMethod($method)
     {
         $new = clone $this;
@@ -109,11 +121,17 @@ class Request implements RequestInterface
         return $new;
     }
 
+    /**
+     * @return Uri|UriInterface|string
+     */
     public function getUri()
     {
         return $this->uri;
     }
 
+    /**
+     * @return Request
+     */
     public function withUri(UriInterface $uri, $preserveHost = false)
     {
         if ($uri === $this->uri) {
@@ -130,6 +148,9 @@ class Request implements RequestInterface
         return $new;
     }
 
+    /**
+     * @return void
+     */
     private function updateHostFromUri()
     {
         $host = $this->uri->getHost();
@@ -150,14 +171,20 @@ class Request implements RequestInterface
         }
         // Ensure Host is the first header.
         // See: http://tools.ietf.org/html/rfc7230#section-5.4
-        $this->headers = array($header => array($host)) + $this->headers;
+        $this->headers = [$header => [$host]] + $this->headers;
     }
 
+    /**
+     * @return string
+     */
     public function getProtocolVersion()
     {
         return $this->protocol;
     }
 
+    /**
+     * @return Request
+     */
     public function withProtocolVersion($version)
     {
         if ($this->protocol === $version) {
@@ -169,36 +196,51 @@ class Request implements RequestInterface
         return $new;
     }
 
+    /**
+     * @return array
+     */
     public function getHeaders()
     {
         return $this->headers;
     }
 
+    /**
+     * @return bool
+     */
     public function hasHeader($header)
     {
         return isset($this->headerNames[strtolower($header)]);
     }
 
+    /**
+     * @return array|mixed
+     */
     public function getHeader($header)
     {
         $header = strtolower($header);
         if (!isset($this->headerNames[$header])) {
-            return array();
+            return [];
         }
         $header = $this->headerNames[$header];
 
         return $this->headers[$header];
     }
 
+    /**
+     * @return string
+     */
     public function getHeaderLine($header)
     {
         return implode(', ', $this->getHeader($header));
     }
 
+    /**
+     * @return Request
+     */
     public function withHeader($header, $value)
     {
         if (!is_array($value)) {
-            $value = array($value);
+            $value = [$value];
         }
         $value = $this->trimHeaderValues($value);
         $normalized = strtolower($header);
@@ -212,10 +254,13 @@ class Request implements RequestInterface
         return $new;
     }
 
+    /**
+     * @return Request
+     */
     public function withAddedHeader($header, $value)
     {
         if (!is_array($value)) {
-            $value = array($value);
+            $value = [$value];
         }
         $value = $this->trimHeaderValues($value);
         $normalized = strtolower($header);
@@ -231,6 +276,9 @@ class Request implements RequestInterface
         return $new;
     }
 
+    /**
+     * @return Request
+     */
     public function withoutHeader($header)
     {
         $normalized = strtolower($header);
@@ -244,6 +292,9 @@ class Request implements RequestInterface
         return $new;
     }
 
+    /**
+     * @return PumpStream|Stream|StreamInterface
+     */
     public function getBody()
     {
         if (!$this->stream) {
@@ -253,6 +304,9 @@ class Request implements RequestInterface
         return $this->stream;
     }
 
+    /**
+     * @return Request
+     */
     public function withBody(StreamInterface $body)
     {
         if ($body === $this->stream) {
@@ -264,12 +318,15 @@ class Request implements RequestInterface
         return $new;
     }
 
+    /**
+     * @return void
+     */
     private function setHeaders(array $headers)
     {
-        $this->headerNames = $this->headers = array();
+        $this->headerNames = $this->headers = [];
         foreach ($headers as $header => $value) {
             if (!is_array($value)) {
-                $value = array($value);
+                $value = [$value];
             }
             $value = $this->trimHeaderValues($value);
             $normalized = strtolower($header);
