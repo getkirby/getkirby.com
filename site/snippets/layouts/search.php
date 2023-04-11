@@ -27,6 +27,7 @@ form[data-fetching] .search-input figure svg:first-child {
 
   <dialog class="overlay search-dialog">
     <form class="relative bg-white shadow-xl" action="/search">
+      <!-- Input -->
       <div class="search-input relative flex items-stretch">
         <figure class="grid place-items-center">
           <?= icon('search') ?>
@@ -51,18 +52,22 @@ form[data-fetching] .search-input figure svg:first-child {
           <input name="area" type="hidden" value="<?= $area ?>">
         </nav>
       </div>
+
+      <!-- Results -->
       <div class="search-results">
         <ul></ul>
         <template>
           <li>
             <a class="leading-tight" href="">
               <strong class="search-title text-sm"></strong>
-              <small class="search-area" data-area=""></small>
-              <small class="search-link text-xs font-mono color-gray-700"></small>
+              <span class="search-area" data-area=""></span>
+              <span class="text-xs search-link font-mono color-gray-500"></span>
             </a>
           </li>
         </template>
       </div>
+
+      <!-- Footer -->
       <div class="search-footer flex flex-wrap items-center justify-between text-sm">
         <div class="search-more flex-shrink-0">
           <a class="hidden font-bold" href="/search">

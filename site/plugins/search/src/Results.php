@@ -2,7 +2,6 @@
 
 namespace Kirby\Search;
 
-// Kirby dependencies
 use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\Obj;
 use Kirby\Cms\Pagination;
@@ -16,8 +15,7 @@ use Kirby\Cms\Pagination;
  */
 class Results extends Collection
 {
-
-    static public function from(array $response): self
+    static public function from(array $response): static
     {
         // Convert the hits to Obj objects
         $hits = array_map(function ($hit) {
