@@ -2,10 +2,6 @@ Title: Panel search
 
 ----
 
-Since: 3.6.0
-
-----
-
 Text:
 
 (link: docs/reference/plugins/extensions/panel-areas text: Panel areas) also allow you to add your own search type to the Panel - next to pages, files and users - or even to overwrite these existing search implementations.

@@ -173,7 +173,6 @@ Property access (`parent.property`) will behave like this:
 - If the parent is an array, the respective array element will be returned.
 - Calling a property without any arguments (`parent.property()`) is equivalent to accessing the property.
 
-<since v="3.8.3">
 You can also use optional chaining, the ternary operator (`a ? b : c` or `a ?: c`) and the null coalescing operator (`??`):
 
 ```txt
@@ -181,7 +180,6 @@ page.cover.toFile?.url
 page.title.isNotEmpty ? page.title.lower : page.slug
 page.title.value ?? page.slug
 ```
-</since>
 
 ## Access different data types
 ### Array items

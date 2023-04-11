@@ -2,10 +2,6 @@ Title: Permissions
 
 ----
 
-Since: 3.4.0
-
-----
-
 Text:
 
 If you want to make the permissions for different actions of your plugin configurable by user role, you can register the available actions with the `permissions` extension.

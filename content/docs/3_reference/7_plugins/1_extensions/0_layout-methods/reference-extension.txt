@@ -2,10 +2,6 @@ Title: Layout methods
 
 ----
 
-Since: 3.6.0
-
-----
-
 Text:
 
 Layout methods are registered with the `layoutMethods` extension.

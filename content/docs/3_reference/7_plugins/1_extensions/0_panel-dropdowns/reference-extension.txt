@@ -1,11 +1,6 @@
 Title: Panel dropdowns
 
 ----
-
-Since: 3.6.0
-
-----
-
 Text:
 
 Our action dropdowns for pages, files and users are all loaded on request. This way, we can load and evaluate permissions individually from the API and then disable items in the dropdowns that should not be accessible.

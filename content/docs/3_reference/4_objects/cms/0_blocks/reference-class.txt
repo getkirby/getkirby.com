@@ -6,10 +6,6 @@ Class: Kirby\Cms\Blocks
 
 ----
 
-Since: 3.5.0
-
-----
-
 Text:
 
 ## What are blocks?

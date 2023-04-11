@@ -4,8 +4,6 @@ Info: GET|POST
 ----
 Intro: Search for pages (index)
 ----
-Since: 3.1.0
-----
 Text:
 
 ## Query parameters

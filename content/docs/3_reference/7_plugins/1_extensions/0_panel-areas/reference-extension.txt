@@ -2,10 +2,6 @@ Title:  Panel areas
 
 ----
 
-Since: 3.6.0
-
-----
-
 Text:
 
 Every part of the Panel is a separated area with routes, optional menu item, icon, breadcrumb label, access permissions, etc.

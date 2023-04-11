@@ -2,10 +2,6 @@ Title: Dumper
 
 ----
 
-Since: 3.3.0
-
-----
-
 Text:
 
 You can  override our `dump()` helper with your own implementation or an implementation from a framework.

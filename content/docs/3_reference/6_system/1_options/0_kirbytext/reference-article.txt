@@ -2,10 +2,6 @@ Intro: Configure the behavior of (glossary: KirbyText) and particular tags
 
 ----
 
-Since: 3.6.0
-
-----
-
 Text:
 
 ## &#x28;email: ..&#x29;

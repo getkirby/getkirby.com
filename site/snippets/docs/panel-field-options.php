@@ -338,7 +338,6 @@ options:
     de: Frühling
 ```
 
-<since v="3.8.0">
 If you prefer to use (link: docs/guide/languages/custom-language-variables text: custom language variables), you can do that via the `*` key:
 
 ```yaml
@@ -352,4 +351,3 @@ options:
   spring:
     *: season.spring
 ```
-</since>

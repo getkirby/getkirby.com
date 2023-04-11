@@ -1,7 +1,4 @@
-Since: 3.3.0
-
-----
-Text: 
+Text:
 
 ## Example
 

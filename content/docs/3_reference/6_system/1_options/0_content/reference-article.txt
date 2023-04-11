@@ -70,7 +70,6 @@ return [
 
 Kirby generates a (link: docs/guide/uuids text: unique alpha-numerical ID) for each new page and file by default.
 
-<since v="3.8.3">
 If you prefer the standard UUID v4 format, you can configure Kirby to generate those instead:
 
 ```php
@@ -84,9 +83,7 @@ return [
 <info>
 Please note that this setting only takes effect for newly generated UUIDs. Existing UUIDs stay unchanged to preserve references throughout your site.
 </info>
-</since>
 
-<since v="3.8.1">
 If you don't need UUIDs in your projects, you can disable them entirely:
 
 ```php
@@ -96,4 +93,3 @@ return [
   ]
 ];
 ```
-</since>

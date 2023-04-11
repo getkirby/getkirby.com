@@ -2,10 +2,6 @@ Title: table
 
 ----
 
-Since: 3.5.0
-
-----
-
 Intro: A table block based on the structure field
 
 ----

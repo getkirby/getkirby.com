@@ -2,8 +2,4 @@ Title: quote
 
 ----
 
-Since: 3.5.0
-
-----
-
 Intro: A quote with optional citation

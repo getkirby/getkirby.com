@@ -2,10 +2,6 @@ Title: Writer
 
 ----
 
-Since: 3.5.0
-
-----
-
 Intro:
 
 A simple WYSIWYG editor field for inline content with formats like bold, italic, etc.

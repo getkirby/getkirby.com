@@ -2,10 +2,6 @@ Title: List
 
 ----
 
-Since: 3.5.0
-
-----
-
 Intro:
 
 A simple WYSIWYG editor field for ordered and unordered lists

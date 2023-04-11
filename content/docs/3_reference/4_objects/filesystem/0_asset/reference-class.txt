@@ -5,10 +5,6 @@ Title: $asset
 Class: Kirby\Filesystem\Asset
 
 ----
-
-Since: 3.0.2
-
-----
 Text:
 
 ## Details

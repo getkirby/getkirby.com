@@ -2,8 +2,4 @@ Title: code
 
 ----
 
-Since: 3.5.0
-
-----
-
 Intro: An inline code block for code snippets and examples.

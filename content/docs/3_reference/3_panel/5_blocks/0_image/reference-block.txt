@@ -2,8 +2,4 @@ Title: image
 
 ----
 
-Since: 3.5.0
-
-----
-
 Intro: A single image

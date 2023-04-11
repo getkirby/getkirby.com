@@ -8,10 +8,6 @@ Layout field to create gaps in the field grid.
 
 ----
 
-Since: 3.4.1
-
-----
-
 Text:
 
 The `gap` field is a pure layout field that helps you organize your field grid visually by creating gaps in the field grid where necessary.

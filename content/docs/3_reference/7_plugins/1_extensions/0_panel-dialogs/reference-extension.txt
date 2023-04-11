@@ -2,10 +2,6 @@ Title: Panel dialogs
 
 ----
 
-Since: 3.6.0
-
-----
-
 Text:
 
 As part of your (link: docs/reference/plugins/extensions/panel-areas text: Panel area extension), you can also define custom dialogs for the Panel as well as extend or modify the Panel's default dialogs.
