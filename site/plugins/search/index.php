@@ -1,13 +1,13 @@
 <?php
 
-use Kirby\Search\Index;
+use Kirby\Search\Search;
 
 include __DIR__ . '/vendor/autoload.php';
 
 /**
  * Helper function that returns a Kirby\Search\Index instance
  */
-function algolia(): Index
+function algolia(): Search
 {
-    return Kirby\Search\Index::instance();
+    return Search::instance();
 }
