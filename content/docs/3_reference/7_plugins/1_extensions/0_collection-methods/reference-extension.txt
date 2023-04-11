@@ -2,10 +2,6 @@ Title: Collection methods
 
 ----
 
-Since: 3.4.0
-
-----
-
 Text:
 
 Collection methods are registered with the `collectionMethods` extension.

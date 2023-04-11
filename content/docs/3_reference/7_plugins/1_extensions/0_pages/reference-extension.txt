@@ -2,10 +2,6 @@ Title: Pages
 
 ----
 
-Since: 3.2.0
-
-----
-
 Text:
 
 With the `Pages` extension you can register pages from a plugin that do not physically exist in the file system.

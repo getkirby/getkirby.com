@@ -2,8 +2,4 @@ Title: markdown
 
 ----
 
-Since: 3.5.0
-
-----
-
 Intro: A plaintext HTML/markdown/kirbytext block. This is perfect to combine WYSIWYG content with custom HTML, Kirbytext or Markdown.

@@ -2,10 +2,6 @@ Title: File types
 
 ----
 
-Since: 3.6.0
-
-----
-
 Text:
 
 Kirby categorizes file types by extension and MIME type. We support a wide range of file types, but of course we cannot predefine them all. You can add your own file types to the system.

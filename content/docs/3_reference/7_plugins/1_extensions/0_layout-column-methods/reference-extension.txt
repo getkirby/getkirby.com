@@ -2,10 +2,6 @@ Title: Layout column methods
 
 ----
 
-Since: 3.6.0
-
-----
-
 Text:
 
 Layout column methods are registered with the `layoutColumnMethods` extension.

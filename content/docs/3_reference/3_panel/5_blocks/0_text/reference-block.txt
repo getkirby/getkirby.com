@@ -2,8 +2,4 @@ Title: text
 
 ----
 
-Since: 3.5.0
-
-----
-
 Intro: A simple text block with multiple paragraphs

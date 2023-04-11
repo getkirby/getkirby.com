@@ -2,10 +2,6 @@ Title: Blocks
 
 ----
 
-Since: 3.5.0
-
-----
-
 Intro:
 
 A visual editor for long-form text and modular pages

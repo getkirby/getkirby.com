@@ -2,10 +2,6 @@ Title: Layout
 
 ----
 
-Since: 3.5.0
-
-----
-
 Intro:
 
 A visual editor for complex multi-column layouts
