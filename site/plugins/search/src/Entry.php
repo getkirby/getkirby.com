@@ -164,7 +164,7 @@ class Entry
     ): string {
         $field = $this->page->$name();
 
-        if ($field instanceof Field) {
+        if ($field instanceof Field === false) {
             $field = new Field($this->page, $name, $field);
         }
 
