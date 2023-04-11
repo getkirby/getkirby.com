@@ -415,3 +415,29 @@ sections:
     type: files
     search: true
 ```
+
+## Fetching files in the frontend
+
+Through a section, you upload files to a page, either the current page or another parent page. Contrary to a files field, the file does not become part of the content, i.e. it is not referenced in the content file.
+
+If you assign a file template to a particular section, you can filter by this template when fetching files in the frontend.
+
+Assuming a files section like the following which uploads images to the current page and assigns a template called `gallery`:
+
+```yaml
+sections:
+  gallery:
+    type: files
+    template: gallery
+```
+
+You can then get fetch those files in the frontend like this:
+
+```php
+<?php $galleryImages = $page->images()->template('gallery'); ?>
+<ul>
+<?php foreach ($galleryImages as $image): ?>
+    <li><img src="<?= $image->url() ?>" alt="<?= $image->alt() ?>"></li>
+<?php endforeach ?>
+</ul>
+```
