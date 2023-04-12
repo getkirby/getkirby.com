@@ -73,15 +73,15 @@ class Entry
         $templates = $this->templates();
         $template  = $this->template();
 
-        // Quickly exclude a template
-        // Example: ['!project']
-        if (in_array('!' . $template, $templates, true) === true) {
-            return false;
+        // Quickly include a template
+        // Example: ['project']
+        if (in_array($template, $templates, true) === true) {
+            return true;
         }
 
-        // if template isn't listed, include it
+        // if template isn't listed, exclude it
         if (isset($templates[$template]) === false) {
-            return true;
+            return false;
         }
 
         $template = $templates[$template];
