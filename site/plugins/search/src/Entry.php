@@ -35,14 +35,13 @@ class Entry
         // get template-specific fields
         if ($templateFields = $templates[$template]['fields'] ?? null) {
             $templateFields = static::fieldsToUniformArray($templateFields);
+            $fields = array_merge($fields, $templateFields);
         }
 
-        $fields = array_merge($fields, $templateFields);
-
         // Make sure that the fields are sorted alphabetically for consistence
-        ksort($result);
+        ksort($fields);
 
-        return $result;
+        return $fields;
     }
 
     /**
@@ -74,15 +73,15 @@ class Entry
         $templates = $this->templates();
         $template  = $this->template();
 
-        // Quickly whitelist simple definitions
-        // Example: ['project']
-        if (in_array($template, $templates, true) === true) {
-            return true;
+        // Quickly exclude a template
+        // Example: ['!project']
+        if (in_array('!' . $template, $templates, true) === true) {
+            return false;
         }
 
-        // Sort out pages whose template is not defined
+        // if template isn't listed, include it
         if (isset($templates[$template]) === false) {
-            return false;
+            return true;
         }
 
         $template = $templates[$template];
@@ -93,17 +92,9 @@ class Entry
             return $template;
         }
 
-        // Skip every value that is not a boolean or array for consistency
-        if (is_array($template) === false) {
-            return false;
-        }
-
-        // Check for the custom filter function
-        // Example: ['project' => ['filter' => function($page) {...}]]
-        if ($filter = $template['filter'] ?? null) {
-            if (is_callable($filter) === true) {
-                return call_user_func($filter, $this->page) !== false;
-            }
+        // Closure
+        if (is_callable($template) === false) {
+            return $template($this->page);
         }
 
         // No rule was violated, the page is indexable

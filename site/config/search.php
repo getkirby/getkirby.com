@@ -1,5 +1,6 @@
 <?php
 
+use Kirby\Filesystem\F;
 use Kirby\Toolkit\Str;
 
 $key = trim(F::read(__DIR__ . '/keys/algolia.txt'));
@@ -10,44 +11,36 @@ if (empty($key) === true) {
 }
 
 return [
-    'areas' => [
-        'all'       => 'All pages',
-        'guide'     => 'Guide',
-        'reference' => 'Reference',
-        'cookbook'  => 'Cookbook',
-        'plugin'    => 'Plugin',
-        'kosmos'    => 'Kosmos'
-    ],
     'algolia' => [
         'app'   => 'S7OGBIAJTV',
         'key'   => $key,
         'index' => 'getkirby-3',
         'fields' => [
-            'template',
             'title',
-            'description' => function ($page) {
-                $field = $page->description()->or($page->intro());
-                return strip_tags($field->kti());
-            },
-            'text' => function($page) {
-                return strip_tags($page->text()->kti());
-            },
+            // 'blurb' => fn ($page) => strip_tags($page->blurb()->kti()),
+            'intro' => fn ($page) => strip_tags($page->description()->or($page->intro())->kti()),
             'area' => function ($page) {
                 if (Str::startsWith($page->id(), 'docs/reference') === true) {
                     return 'reference';
                 }
 
-                switch ($page->intendedTemplate()->name()) {
-                    case 'cookbook-recipe':
-                        return 'cookbook';
-                    case 'guide':
-                        return 'guide';
-                    case 'kosmos-issue':
-                        return 'kosmos';
-                    case 'plugin':
-                        return 'plugin';
-                }
-            }
+                return match ($page->intendedTemplate()->name()) {
+                    'cookbook-recipe' => 'cookbook',
+                    'guide'           => 'guide',
+                    'kosmos-issue'    => 'kosmos',
+                    'plugin'          => 'plugin',
+                    default           => null
+                };
+            },
+            // 'depth' => fn ($page) => $page->parents()->count(),
+            // 'handcrafted' => function ($page) {
+            //     if ($contentFile = $page->contentFile()) {
+            //         $content = F::read($contentFile);
+            //         return strlen($content);
+            //     }
+
+            //     return 0;
+            // },
         ],
         'templates' => [
             'cookbook-category',
@@ -80,5 +73,13 @@ return [
             'release',
             'release-35'
         ]
-    ]
+    ],
+    'areas' => [
+        'all'       => 'All pages',
+        'guide'     => 'Guide',
+        'reference' => 'Reference',
+        'cookbook'  => 'Cookbook',
+        'plugin'    => 'Plugin',
+        'kosmos'    => 'Kosmos'
+    ],
 ];

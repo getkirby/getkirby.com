@@ -30,7 +30,9 @@ class Index
     {
         return $this->entries ??= App::instance()->site()->index()->map(
             fn ($page) => new Entry($page, $this->search)
-        )->filterBy('isIndexable');
+        )->filter(
+            fn ($entry) => $entry->isIndexable()
+        );
     }
 
     /**
