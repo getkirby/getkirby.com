@@ -32,6 +32,17 @@ return [
 
 All endpoints are now available at `https://yourdomain.com/rest/`.
 
+## HTTP Basic Auth
+
+You can enable Basic Authentication for the API via the `basicAuth` config option:
+
+```php
+return [
+  'api' => [
+    'basicAuth' => true
+  ]
+];
+```
 
 ## Allow insecure requests
 
