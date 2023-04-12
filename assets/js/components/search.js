@@ -1,7 +1,3 @@
-const ALGOLIA_APP = "S7OGBIAJTV";
-const ALGOLIA_KEY = "d161a2f4cd2d69247c529a3371ad3050";
-const ALGOLIA_INDEX = "getkirby-3";
-
 export default class {
   constructor() {
     this.$btn = document.querySelectorAll(".search-button");
@@ -78,34 +74,28 @@ export default class {
 
   async fetch(q) {
     const params = {
-      query: q,
-      hitsPerPage: 5,
+      q,
+      limit: 5,
     };
 
     if (this.$area.value !== "all") {
-      params.filters = "area:" + this.$area.value;
+      params.area = this.$area.value;
     }
 
     // Call the Algolia API
     const response = await fetch(
-      `https://${ALGOLIA_APP}-dsn.algolia.net/1/indexes/${ALGOLIA_INDEX}/query`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Algolia-Application-Id": ALGOLIA_APP,
-          "X-Algolia-API-Key": ALGOLIA_KEY,
-        },
-        body: JSON.stringify(params),
-      }
+      "/search.json?" + new URLSearchParams(params).toString(),
+      { method: "GET" }
     );
-    const { hits, nbHits } = await response.json();
+    const { results, pagination } = await response.json();
+
+    console.log("/search.json?" + new URLSearchParams(params).toString());
 
     // Show View all item if there are any hits and
     // there are more hits than those displayed in the popup.
-    this.total = nbHits;
+    this.total = pagination.total;
 
-    return hits;
+    return results.data;
   }
 
   render() {

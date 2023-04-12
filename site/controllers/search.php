@@ -2,13 +2,13 @@
 
 return function ($kirby) {
 
-    $query = trim(get('q'));
-    $area  = trim(get('area'));
+    $query   = trim(get('q', ''));
+    $area    = trim(get('area', ''));
+    $results = null;
 
     if (empty($query) === false) {
-
         $params = [
-            'hitsPerPage'           => 50,
+            'hitsPerPage'           => (int)get('limit', 50),
             'attributesToHighlight' => false,
             'attributesToSnippet'   => '*'
         ];
