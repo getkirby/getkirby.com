@@ -2,6 +2,11 @@ Title: Fields
 
 ----
 
+
+Searchtitle: Panel Fields
+
+----
+
 Searchbyline: Overview of all Panel fields
 
 ----

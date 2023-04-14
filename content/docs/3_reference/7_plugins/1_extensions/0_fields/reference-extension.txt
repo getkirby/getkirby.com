@@ -2,6 +2,10 @@ Title: Fields
 
 ----
 
+Searchtitle: Custom Fields
+
+----
+
 Searchbyline: Create custom Panel fields
 
 ----
