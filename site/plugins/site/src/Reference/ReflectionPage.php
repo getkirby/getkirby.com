@@ -13,11 +13,11 @@ use Throwable;
 abstract class ReflectionPage extends Page
 {
 
-    protected DocBlock|false $docBlock;
-    protected array $parameters;
+    protected DocBlock|false|null $docBlock = null;
+    protected array|null $parameters = null;
     protected $reflection;
     protected string|false|null $returns = false;
-    protected array $throws;
+    protected array|null $throws = null;
 
     /**
      * Returns how this entry would be called in code
