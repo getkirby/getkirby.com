@@ -17,14 +17,14 @@ return [
         'index' => 'getkirby-3',
         'fields' => [
             'title' =>
-                fn ($page): string => $page->searchtitle()->or($page->title()),
+                fn ($page) => $page->searchtitle()->or($page->title()),
             'byline' =>
-                fn ($page): string => strip_tags($page->searchbyline()->kti()),
-            'intro' => function ($page): string {
+                fn ($page) => strip_tags($page->searchbyline()->kti()),
+            'intro' => function ($page) {
                 $html = $page->description()->or($page->intro())->kti();
                 return strip_tags($html);
             },
-            'area' => function ($page): string {
+            'area' => function ($page) {
                 if (Str::startsWith($page->id(), 'docs/reference') === true) {
                     return 'reference';
                 }
