@@ -14,7 +14,7 @@ return [
     'algolia' => [
         'app'   => 'S7OGBIAJTV',
         'key'   => $key,
-        'index' => 'sandbox',
+        'index' => 'getkirby-3',
         'fields' => [
             'title' =>
                 fn ($page) => strip_tags($page->searchtitle()->or($page->title())),
