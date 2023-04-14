@@ -61,7 +61,7 @@ form[data-fetching] .search-input figure svg:first-child {
             <a class="leading-snug" href="">
               <div>
                 <h3 class="search-title font-bold text-sm"></h3>
-                <div class="search-blurb text-xs color-gray-700"></div>
+                <div class="search-byline text-xs color-gray-700"></div>
                 <div class="search-link text-xs font-mono color-gray-500"></div>
               </div>
               <div class="search-area" data-area=""></div>

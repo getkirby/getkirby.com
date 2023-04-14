@@ -111,8 +111,8 @@ export default class {
 
       const label = node.querySelector(".search-title");
       label.innerHTML = result.title;
-      const blurb = node.querySelector(".search-blurb");
-      blurb.innerHTML = result.blurb ?? result.intro;
+      const byline = node.querySelector(".search-byline");
+      byline.innerHTML = result.byline ?? result.intro;
       const info = node.querySelector(".search-link");
       info.innerText = result.objectID;
 

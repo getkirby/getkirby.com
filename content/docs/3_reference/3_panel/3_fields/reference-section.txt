@@ -2,7 +2,7 @@ Title: Fields
 
 ----
 
-Searchblurb: Overview of all Panel fields
+Searchbyline: Overview of all Panel fields
 
 ----
 

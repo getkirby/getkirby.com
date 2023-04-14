@@ -18,8 +18,8 @@ return [
         'fields' => [
             'title' =>
                 fn ($page): string => $page->searchtitle()->or($page->title()),
-            'blurb' =>
-                fn ($page): string => strip_tags($page->searchblurb()->kti()),
+            'byline' =>
+                fn ($page): string => strip_tags($page->searchbyline()->kti()),
             'intro' => function ($page): string {
                 $html = $page->description()->or($page->intro())->kti();
                 return strip_tags($html);

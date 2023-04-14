@@ -77,8 +77,8 @@
         <a class="leading-snug" href="<?= url($result->objectID()) ?>">
           <div>
             <h2 class="font-bold"><?= $result->title() ?></h2>
-            <div class="search-blurb text-xs color-gray-700">
-              <?= $result->blurb() ?? $result->intro() ?>
+            <div class="search-byline text-xs color-gray-700">
+              <?= $result->byline() ?? $result->intro() ?>
             </div>
             <div class="search-link text-xs font-mono color-gray-500">
               <?= $result->objectID() ?>
