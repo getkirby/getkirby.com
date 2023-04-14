@@ -45,9 +45,11 @@ abstract class ReflectionPage extends Page
      */
     public function deprecated(): Field
     {
-        if ($tag = $this->docBlock()?->getTag('deprecated')) {
-            $value = $tag->getVersion() . '|' . $tag->getDescription();
-            return new Field($this, 'deprecated', $value);
+        if ($docBlock = $this->docBlock()) {
+            if ($tag = $docBlock->getTag('deprecated')) {
+                $value = $tag->getVersion() . '|' . $tag->getDescription();
+                return new Field($this, 'deprecated', $value);
+            }
         }
 
         return parent::deprecated();
@@ -109,7 +111,11 @@ abstract class ReflectionPage extends Page
      */
     public function isInternal(): bool
     {
-        return is_null($this->docBlock()?->getTag('internal')) === false;
+        if ($docBlock = $this->docBlock()) {
+            return is_null($docBlock->getTag('internal')) === false;
+        }
+
+        return false;
     }
 
     public function isMutable(): bool
@@ -312,9 +318,11 @@ abstract class ReflectionPage extends Page
      */
     public function since(): Field
     {
-        if ($tag = $this->docBlock()?->getTag('since')) {
-            $since = $tag->getVersion();
-            return new Field($this, 'since', $since ?? null);
+        if ($docBlock = $this->docBlock()) {
+            if ($tag = $docBlock->getTag('since')) {
+                $since = $tag->getVersion();
+                return new Field($this, 'since', $since ?? null);
+            }
         }
 
         return parent::since();
