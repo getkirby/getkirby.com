@@ -55,6 +55,8 @@ class DocBlock
                 return $param;
             }
         }
+
+        return null;
     }
 
     public function getReturnType(): Tag|null
