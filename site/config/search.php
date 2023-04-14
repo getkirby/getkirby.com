@@ -37,15 +37,24 @@ return [
                     default           => null
                 };
             },
-            // 'depth' => fn ($page) => $page->parents()->count(),
-            // 'handcrafted' => function ($page) {
-            //     if ($contentFile = $page->contentFile()) {
-            //         $content = F::read($contentFile);
-            //         return strlen($content);
-            //     }
-
-            //     return 0;
-            // },
+            'weight' => function ($page) {
+                return match ($page->intendedTemplate()->name()) {
+                    'guide',
+                    'cookbook-recipe'        => 2,
+                    'reference-classmethod',
+                    'reference-component',
+                    'reference-endpoint',
+                    'reference-fieldmethod',
+                    'reference-helper',
+                    'reference-hook',
+                    'reference-kirbytag',
+                    'reference-validator'    => 0.5,
+                    'referece-icon',
+                    'reference-root',
+                    'reference-url'          => 0.25,
+                    default                  => 1
+                };
+            }
         ],
         'templates' => [
             'cookbook-category',
