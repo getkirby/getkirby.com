@@ -17,7 +17,7 @@ return [
         'index' => 'getkirby-3',
         'fields' => [
             'title',
-            // 'blurb' => fn ($page) => strip_tags($page->blurb()->kti()),
+            'blurb' => fn ($page) => $page->blurb(),
             'intro' => fn ($page) => strip_tags($page->description()->or($page->intro())->kti()),
             'area' => function ($page) {
                 if (Str::startsWith($page->id(), 'docs/reference') === true) {
