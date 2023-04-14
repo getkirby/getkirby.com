@@ -161,7 +161,9 @@ class ReferenceClassPage extends SectionPage
     {
         if ($short !== true) {
             // get class name as defined in content file
-            return $this->class()->value() ?? 'Kirby\Toolkit\A';
+            return
+                $this->class()->value() ??
+                throw new Exception('Content file of "' . $this->id() . '" needs to define a "class" field');
         }
 
         // prefer content field `name`
