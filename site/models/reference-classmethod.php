@@ -10,16 +10,12 @@ use \ReferenceClassPage as ReferenceClass;
 
 class ReferenceClassMethodPage extends ReflectionPage
 {
-
-    protected $inherited;
+    protected string|null $inherited;
 
     public function call(string $call = null): string
     {
-        if ($call === null) {
-            $call = parent::call();
-        }
-
-        $class = $this->class(true);
+        $call ??= parent::call();
+        $class  = $this->class(true);
 
         if ($this->name() === '__construct') {
             return 'new ' . $class . Str::after($call, $this->slug());
@@ -71,13 +67,13 @@ class ReferenceClassMethodPage extends ReflectionPage
 
     public function inheritedFrom(): string|null
     {
-        if ($this->inherited !== null) {
+        if (isset($this->inherited) === true) {
             return $this->inherited;
         }
 
         if ($parent = $this->reflection()->getDeclaringClass()) {
             if ($parent->getName() === $this->parent()->name()) {
-                return null;
+                return $this->inherited = null;
             }
 
             if ($page = ReferenceClass::findByName($parent->getName())) {
@@ -87,7 +83,7 @@ class ReferenceClassMethodPage extends ReflectionPage
             return $this->inherited = $parent->getName();
         }
 
-        return null;
+        return $this->inherited = null;
     }
 
     /**
@@ -164,8 +160,7 @@ class ReferenceClassMethodPage extends ReflectionPage
 
     public function title(): Field
     {
-        $call = $this->call($this->name() . '()');
-        return parent::title()->value($call);
+        return parent::title()->value($this->call($this->name() . '()'));
     }
 
     protected function reflection(): ReflectionMethod

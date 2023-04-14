@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\Pages;
+use Kirby\Filesystem\F;
 use Kirby\Reference\SectionPage;
 
 class ReferenceIconsPage extends SectionPage
@@ -18,13 +19,8 @@ class ReferenceIconsPage extends SectionPage
         $svg      = new SimpleXMLElement($file);
 
         foreach ($svg->defs->children() as $symbol) {
-            $slug = str_replace('icon-', '', $symbol->attributes()->id);
-
-            if ($page = $pages->find($slug)) {
-                $content = $page->content()->toArray();
-            } else {
-                $content = [];
-            }
+            $slug    = str_replace('icon-', '', $symbol->attributes()->id);
+            $content = $pages->find($slug)?->content()->toArray() ?? [];
 
             $children[] = [
                 'slug'     => $slug,
@@ -37,7 +33,6 @@ class ReferenceIconsPage extends SectionPage
             ];
         }
 
-        return $this->children = Pages::factory($children, $this)
-            ->sortBy('slug');
+        return $this->children = Pages::factory($children, $this)->sortBy('slug');
     }
 }

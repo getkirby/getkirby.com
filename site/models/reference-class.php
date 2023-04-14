@@ -8,7 +8,7 @@ use Kirby\Reference\SectionPage;
 use Kirby\Reference\Types;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
-use \ReferenceClassMethodPage as ReferenceClassMethod;
+use ReferenceClassMethodPage as ReferenceClassMethod;
 
 class ReferenceClassPage extends SectionPage
 {
@@ -43,16 +43,10 @@ class ReferenceClassPage extends SectionPage
                 continue;
             }
 
-            $slug = Str::kebab($method->getName());
-
-            if ($page = $pages->find($slug)) {
-                $content = $page->content()->toArray();
-            } else {
-                $content = [];
-            }
-
+            $slug    = Str::kebab($method->getName());
             $isMagic = substr($slug, 0, 1) === '_';
             $num     = $isMagic ? null : 0;
+            $content = $pages->find($slug)?->content()->toArray() ?? [];
 
             // Ensure that constructor method is listed,
             // while other magic methods remain unlisted
@@ -67,7 +61,7 @@ class ReferenceClassPage extends SectionPage
                             $type instanceof ReflectionUnionType === false &&
                             $type->getName() === 'array'
                         ) {
-                            $content['properties'] = $content['properties'] ?? '$' . $parameter->getName();
+                            $content['properties'] ??= '$' . $parameter->getName();
                         }
                     }
                 }
@@ -84,14 +78,16 @@ class ReferenceClassPage extends SectionPage
         }
 
         // Create the actual class methods as children pages collection
-        $children = Pages::factory($children, $this)->filterBy('exists', true);
+        $children = Pages::factory($children, $this)
+                        ->filterBy('exists', true)
+                        ->filterBy('isInternal', false);
 
         // If the class is flagged as proxying another class,
         // get the proxied methods that are not covered by an
         // actual class method and add them
         if ($this->proxies()->isNotEmpty()) {
             foreach ($this->proxies()->yaml() as $proxy) {
-                $proxied = ReferenceClassMethod::proxied($proxy, $children);
+                $proxied  = ReferenceClassMethod::proxied($proxy, $children);
                 $children = $children->add($proxied);
             }
         }
@@ -184,7 +180,6 @@ class ReferenceClassPage extends SectionPage
 
         $reflection = $this->reflection();
 
-
         if (!$reflection) {
             return $this->props = [];
         }
@@ -203,16 +198,17 @@ class ReferenceClassPage extends SectionPage
             return $this->props = [];
         }
 
-        $properties = array_filter($reflection->getProperties(), function ($prop) use ($reflection) {
-            return $prop->getName() !== 'propertyData' &&
-                   $prop->isStatic() === false &&
-                   $reflection->hasMethod('set' . $prop->getName()) === true;
-        });
+        $properties = array_filter(
+            $reflection->getProperties(),
+            fn ($prop) =>
+                $prop->getName() !== 'propertyData' &&
+                $prop->isStatic() === false &&
+                $reflection->hasMethod('set' . $prop->getName()) === true
+            );
 
         $data = [];
 
         foreach ($properties as $prop) {
-
             $name        = $prop->getName();
             $description = null;
             $type        = null;
@@ -225,11 +221,11 @@ class ReferenceClassPage extends SectionPage
                 try {
                     $doc         = new DocBlock($method->getDocComment());
                     $description = (string)$doc->getSummary();
-                } catch (Throwable $e) {
+                } catch (Throwable) {
                     $doc = null;
                 }
 
-                if ($doc && $doc->getTag('internal')) {
+                if ($doc?->getTag('internal')) {
                     continue;
                 }
 
@@ -248,8 +244,6 @@ class ReferenceClassPage extends SectionPage
                     $type = Str::rtrim($type, '|null');
                 }
             }
-
-
 
             $type   = Types::factory($type ?? 'mixed', $this);
             $data[] = compact('name', 'required', 'type', 'description');
@@ -273,7 +267,9 @@ class ReferenceClassPage extends SectionPage
 
     public function searchbyline(): Field
     {
-        return parent::searchbyline()->value('Class <code>' . $this->class() . '</code>');
+        return parent::searchbyline()->value(
+            'Class <code>' . $this->class() . '</code>'
+        );
     }
 
     public function title(): Field

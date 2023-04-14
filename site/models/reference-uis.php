@@ -2,6 +2,7 @@
 
 use Kirby\Cms\Pages;
 use Kirby\Data\Data;
+use Kirby\Filesystem\F;
 use Kirby\Http\Remote;
 use Kirby\Reference\SectionPage;
 use Kirby\Toolkit\Str;
@@ -33,12 +34,10 @@ class ReferenceUisPage extends SectionPage
 
             // only include components that
             // have been flagged as public
-            $data = array_filter($data, function ($ui) {
-                return (
-                    isset($ui['tags']['internal']) === false ||
-                    $ui['tags']['internal'] === null
-                );
-            });
+            $data = array_filter(
+                $data,
+                fn ($ui) => ($ui['tags']['internal'] ?? null) === null
+            );
 
             $cache->set('ui', $data);
         }
@@ -47,14 +46,8 @@ class ReferenceUisPage extends SectionPage
         $children = [];
 
         foreach ($data as $ui) {
-            $slug = Str::kebab($ui['displayName']);
-
-            if ($page = $pages->find($slug)) {
-                $content = $page->content()->toArray();
-            } else {
-                $content = [];
-            }
-
+            $slug    = Str::kebab($ui['displayName']);
+            $content = $pages->find($slug)?->content()->toArray() ?? [];
             $content = array_merge([
                 'title'       => ucfirst(strtolower(trim(implode(' ',preg_split('/(?=[A-Z])/', $ui['displayName']))))),
                 'description' => $ui['description'],

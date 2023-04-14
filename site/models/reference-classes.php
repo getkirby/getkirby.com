@@ -26,7 +26,7 @@ class ReferenceClassesPage extends SectionPage
 
         foreach (Dir::dirs($root) as $package) {
             // Add page and subpages for each namespace package
-            $children[] = $this->namespace(
+            $children[] = $this->childrenForNamespace(
                 $name = ucfirst($package),
                 $root . '/' . $package,
             );
@@ -34,7 +34,7 @@ class ReferenceClassesPage extends SectionPage
             // Add class page and method subpages for all nested namespaces
             // (only supports one level below main, e.g. `Kirb\Cms\Foo\Bar`)
             foreach (Dir::dirs($root . '/' . $package) as $subpackage) {
-                $children[] = $this->namespace(
+                $children[] = $this->childrenForNamespace(
                     $name . '\\' . ucfirst($subpackage),
                     $root . '/' . $package . '/' . $subpackage
                 );
@@ -43,8 +43,10 @@ class ReferenceClassesPage extends SectionPage
 
         // Add listed shortlink for all pages defined in the
         // content file in the `menu` field
-        $quicklinks = ReferenceQuickLinkPage::childrenFromContentField($this->menu());
-        array_push($children, ...$quicklinks);
+        array_push(
+            $children,
+            ...ReferenceQuickLinkPage::childrenFromContentField($this->menu())
+        );
 
         // Add shortlink to overview and
         // class alias page as listed children
@@ -82,8 +84,10 @@ class ReferenceClassesPage extends SectionPage
      * Returns page props for namespace
      * with classes as children and methods as grandchildren
      */
-    protected function namespace(string $name, string $root): array
-    {
+    protected function childrenForNamespace(
+        string $name,
+        string $root
+    ): array {
         return [
             'slug'     => $slug = Str::slug($name),
             'template' => 'link',
@@ -93,7 +97,7 @@ class ReferenceClassesPage extends SectionPage
                 'title' => 'Kirby\\' . $name,
                 'link'  => 'docs/reference/objects#' . $slug
             ],
-            'children' => $this->classes($name, $root)
+            'children' => $this->childrenForClasses($name, $root)
         ];
     }
 
@@ -101,8 +105,10 @@ class ReferenceClassesPage extends SectionPage
      * Creates an array of page properties for all class files in the
      * provided root, assigning them to a provided namespace
      */
-    protected function classes(string $namespace, string $root): array
-    {
+    protected function childrenForClasses(
+        string $namespace,
+        string $root
+    ): array {
         $children = [];
 
         // Loop through each class PHP file and
@@ -115,23 +121,34 @@ class ReferenceClassesPage extends SectionPage
 
             try {
                 $content = Data::read($root . '/reference-class.txt');
-            } catch (Throwable $e) {
+            } catch (Throwable) {
                 $content = [];
             }
 
             $children[] = [
                 'slug'     => $slug,
-                'model'    => 'reference-class',
-                'template' => 'reference-class',
-                'num'      => 0,
                 'root'     => $root,
+                'model'    => 'reference-class',
                 'content'  => array_merge($content, [
                     'class' => $class
                 ])
             ];
         }
 
-        return $children;
+        // we need to create a Pages collection to properly filter
+        // pages (e.g. as non-internal); however, we need to pass the
+        // data on as array again to be consumable by the upper
+        // Pages::factory() call
+        return Pages::factory($children)
+            ->filterBy('isInternal', false)
+            ->toArray(fn ($page) => [
+                'slug'     => $page->slug(),
+                'root'     => $page->root(),
+                'model'    => 'reference-class',
+                'template' => 'reference-class',
+                'num'      => 0,
+                'content'  => $page->content()->toArray()
+            ]);
     }
 
     public function isActive(): bool

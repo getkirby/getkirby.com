@@ -8,7 +8,9 @@ class ReferenceUrlPage extends ReflectionPage
 {
     public function example(): Field
     {
-        return parent::example()->value('```php' . PHP_EOL . '<?= $kirby->url(\'' . $this->slug() . '\') ?>' . PHP_EOL . '```');
+        return parent::example()->value(
+            '```php' . PHP_EOL . '<?= $kirby->url(\'' . $this->slug() . '\') ?>' . PHP_EOL . '```'
+        );
     }
 
     public function metadata(): array

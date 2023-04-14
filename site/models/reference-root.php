@@ -8,7 +8,9 @@ class ReferenceRootPage extends ReflectionPage
 {
     public function example(): Field
     {
-        return parent::example()->value('```php' . PHP_EOL . '<?= $kirby->root(\'' . $this->slug() . '\') ?>' . PHP_EOL . '```');
+        return parent::example()->value(
+            '```php' . PHP_EOL . '<?= $kirby->root(\'' . $this->slug() . '\') ?>' . PHP_EOL . '```'
+        );
     }
 
     public function metadata(): array
@@ -33,6 +35,8 @@ class ReferenceRootPage extends ReflectionPage
 
     public function title(): Field
     {
-        return parent::title()->value('$kirby->root(\'' . $this->slug() . '\')');
+        return parent::title()->value(
+            '$kirby->root(\'' . $this->slug() . '\')'
+        );
     }
 }

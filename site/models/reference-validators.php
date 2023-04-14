@@ -18,22 +18,14 @@ class ReferenceValidatorsPage extends SectionPage
         $pages      = parent::children();
 
         foreach ($validators as $validator) {
-            $slug = Str::kebab($validator);
-
-            if ($page = $pages->find($slug)) {
-                $content = $page->content()->toArray();
-            } else {
-                $content = [];
-            }
-
             $children[] = [
-                'slug'     => $slug,
+                'slug'     => $slug = Str::kebab($validator),
                 'num'      => 0,
                 'model'    => 'reference-validator',
                 'template' => 'reference-validator',
                 'parent'   => $this,
                 'content'  => array_merge(
-                    $content,
+                    $pages->find($slug)?->content()->toArray() ?? [],
                     ['title' => $validator]
                 )
             ];

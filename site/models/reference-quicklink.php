@@ -12,12 +12,10 @@ class ReferenceQuickLinkPage extends Page
      */
     public function children(): Pages
     {
-        if ($this->children !== null) {
-            return $this->children;
-        }
-
-        $children = static::childrenFromContentField($this->menu());
-        return $this->children = Pages::factory($children, $this);
+        return $this->children ??= Pages::factory(
+            static::childrenFromContentField($this->menu()),
+            $this
+        );
     }
 
     /**
@@ -29,24 +27,20 @@ class ReferenceQuickLinkPage extends Page
 
         if ($field->isNotEmpty()) {
             foreach ($field->yaml() as $menu) {
-                // Add separator pages
-                if ($menu === '--') {
-                    $children[] = [
+                $children[] = match ($menu) {
+                    '--' => [
                         'slug'     => Str::random(3),
                         'template' => 'separator',
                         'num'      => 0
-                    ];
-                } else {
-                    $children[] = [
+                    ],
+                    default => [
                         'slug'     => basename($menu),
                         'model'    => 'reference-quicklink',
                         'template' => 'reference-quicklink',
                         'num'      => 0,
-                        'content'  => [
-                            'link'  => 'docs/reference/' . $menu
-                        ]
-                    ];
-                }
+                        'content'  => ['link'  => 'docs/reference/' . $menu]
+                    ]
+                };
             }
         }
 

@@ -20,25 +20,19 @@ class ReferenceFieldMethodsPage extends SectionPage
         );
 
         foreach ($methods as $name => $reflection) {
-            $slug = Str::kebab($name);
-
-            if ($page = $pages->find($slug)) {
-                $content = $page->content()->toArray();
-            } else {
-                $content = [];
-            }
-
             $children[] = [
-                'slug'     => $slug,
+                'slug'     => $slug = Str::kebab($name),
                 'num'      => 0,
                 'template' => 'reference-fieldmethod',
                 'model'    => 'reference-fieldmethod',
                 'parent'   => $this,
-                'content'  => $content
+                'content'  => $pages->find($slug)?->content()->toArray() ?? []
             ];
         }
 
-        return $this->children = Pages::factory($children, $this)->sortBy('title', 'asc');
+        return $this->children = Pages::factory($children, $this)
+            ->filterBy('isInternal', false)
+            ->sortBy('title', 'asc');
     }
 
     protected function getDynamicMethods(): array

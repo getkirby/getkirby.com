@@ -5,7 +5,6 @@ use Kirby\Reference\ReflectionPage;
 
 class ReferenceKirbytagPage extends ReflectionPage
 {
-
     public function attributes(): array
     {
         return $this->tag()['attr'];

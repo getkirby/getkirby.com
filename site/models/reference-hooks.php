@@ -15,14 +15,8 @@ class ReferenceHooksPage extends SectionPage
         $pages    = parent::children();
         $children = array_map(function ($hook) use ($pages) {
 
-            $slug = Str::slug($hook['Name']);
-
-            if ($page = $pages->find($slug)) {
-                $content = $page->content()->toArray();
-            } else {
-                $content = [];
-            }
-
+            $slug    = Str::slug($hook['Name']);
+            $content = $pages->find($slug)?->content()->toArray() ?? [];
             $content = array_merge([
                 'title'     => $hook['Name'],
                 'arguments' => implode(', ', Str::split($hook['Arguments'])),

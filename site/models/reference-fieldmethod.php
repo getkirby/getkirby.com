@@ -43,7 +43,7 @@ class ReferenceFieldMethodPage extends ReflectionPage
      */
     public function onGitHub(string $path = ''): Field
     {
-        if (is_a($this->reflection(), 'ReflectionMethod') === true) {
+        if ($this->reflection() instanceof ReflectionMethod) {
             return parent::onGitHub('src/Cms/Field.php');
         }
 
@@ -63,7 +63,7 @@ class ReferenceFieldMethodPage extends ReflectionPage
         // defined in `kirby/config/methods.php`. The reflection picks up this
         // parameter, however, we need to remove it from the list as it does not
         // actually get passed when calling the field method
-        if (isset($parameters[0]) && $parameters[0]['name'] === '$field') {
+        if (($parameters[0]['name'] ?? null) === '$field') {
             array_shift($parameters);
         }
 
