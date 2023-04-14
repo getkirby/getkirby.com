@@ -141,11 +141,9 @@ class ReferenceClassesPage extends SectionPage
 
     public static function isFeatured(string $page): bool
     {
-        $objects = page('docs/reference/objects');
-        $tools   = page('docs/reference/tools');
-        $ids     = array_merge(
-            $objects->menu()->yaml(),
-            $tools->menu()->yaml()
+        $ids = array_merge(
+            page('docs/reference/objects')->menu()->yaml(),
+            page('docs/reference/tools')->menu()->yaml()
         );
 
         foreach ($ids as $id) {

@@ -10,7 +10,7 @@ use Kirby\Cdn\Cachebuster;
 use Kirby\Cms\App;
 use Kirby\Cms\FileVersion;
 
-Kirby::plugin('getkirby/cdn', [
+App::plugin('getkirby/cdn', [
     'components'   => [
         'file::url' => function (App $kirby, $file): string {
             static $original;
@@ -19,16 +19,14 @@ Kirby::plugin('getkirby/cdn', [
                 return cdn($file);
             }
 
-            if ($original === null) {
-                $original = $kirby->nativeComponent('file::url');
-            }
+            $original ??= $kirby->nativeComponent('file::url');
 
             return $original($kirby, $file);
         },
         'file::version' => function (App $kirby, $file, $options) {
             static $original;
 
-            if (option('cdn', false) !== false) {
+            if ($kirby->option('cdn', false) !== false) {
                 $url = cdn($file, $options);
 
                 return new FileVersion([
@@ -39,9 +37,7 @@ Kirby::plugin('getkirby/cdn', [
                 ]);
             }
 
-            if ($original === null) {
-                $original = $kirby->nativeComponent('file::version');
-            }
+            $original ??= $kirby->nativeComponent('file::version');
 
             return $original($kirby, $file, $options);
         },
@@ -51,14 +47,12 @@ Kirby::plugin('getkirby/cdn', [
             if (preg_match('!assets\/!', $path ?? '')) {
                 $path = Cachebuster::path($path);
 
-                if (option('cdn', false) !== false) {
-                    return option('cdn.domain') . '/' . ltrim($path, '/');
+                if ($kirby->option('cdn', false) !== false) {
+                    return $kirby->option('cdn.domain') . '/' . ltrim($path, '/');
                 }
             }
 
-            if ($original === null) {
-                $original = $kirby->nativeComponent('url');
-            }
+            $original ??= $kirby->nativeComponent('url');
 
             return $original($kirby, $path, $options);
         },

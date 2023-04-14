@@ -2,6 +2,7 @@
 
 namespace Kirby\Meta;
 
+use Kirby\Cms\App;
 use Kirby\Cms\Responder;
 use Kirby\Http\Response;
 use Kirby\Toolkit\Tpl;
@@ -12,11 +13,11 @@ class SiteMeta
 
     public static function robots(): Responder
     {
-        $robots = 'User-agent: *' . PHP_EOL;
+        $robots  = 'User-agent: *' . PHP_EOL;
         $robots .= 'Allow: /' . PHP_EOL;
         $robots .= 'Sitemap: ' . url('sitemap.xml');
 
-        return kirby()
+        return App::instance()
             ->response()
             ->type('text')
             ->body($robots);
@@ -32,6 +33,7 @@ class SiteMeta
 
     public static function sitemap(): Response
     {
+        $kirby   = App::instance();
         $sitemap = [];
         $cache   = kirby()->cache('pages');
         $id      = 'sitemap.xml';
@@ -40,14 +42,14 @@ class SiteMeta
             $sitemap[] = '<?xml version="1.0" encoding="UTF-8"?>';
             $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-            $templates = option('meta.exclude.templates', []);
-            $pages     = option('meta.exclude.pages', []);
+            $templates = $kirby->option('meta.exclude.templates', []);
+            $pages     = $kirby->option('meta.exclude.pages', []);
 
-            if (is_callable($pages)) {
+            if (is_callable($pages) === true) {
                 $pages = $pages();
             }
 
-            foreach (site()->index() as $item) {
+            foreach ($kirby->site()->index() as $item) {
 
                 if (in_array($item->intendedTemplate()->name(), $templates) === true) {
                     continue;
@@ -72,7 +74,7 @@ class SiteMeta
             }
 
             $sitemap[] = '</urlset>';
-            $sitemap = implode(PHP_EOL, $sitemap);
+            $sitemap   = implode(PHP_EOL, $sitemap);
 
             $cache->set($id, $sitemap);
         }

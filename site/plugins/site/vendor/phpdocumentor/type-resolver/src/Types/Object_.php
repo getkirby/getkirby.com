@@ -16,6 +16,7 @@ namespace phpDocumentor\Reflection\Types;
 use InvalidArgumentException;
 use phpDocumentor\Reflection\Fqsen;
 use phpDocumentor\Reflection\Type;
+
 use function strpos;
 
 /**
@@ -29,8 +30,7 @@ use function strpos;
  */
 final class Object_ implements Type
 {
-    /** @var Fqsen|null */
-    private $fqsen;
+    private ?Fqsen $fqsen;
 
     /**
      * Initializes this object with an optional FQSEN, if not provided this object is considered 'untyped'.
@@ -52,12 +52,12 @@ final class Object_ implements Type
     /**
      * Returns the FQSEN associated with this object.
      */
-    public function getFqsen() : ?Fqsen
+    public function getFqsen(): ?Fqsen
     {
         return $this->fqsen;
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         if ($this->fqsen) {
             return (string) $this->fqsen;

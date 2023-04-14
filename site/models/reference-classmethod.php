@@ -57,8 +57,7 @@ class ReferenceClassMethodPage extends ReflectionPage
             // If has subsequent methods in the chain,
             // get return value and turn into class page
             if (count($methods) > 0) {
-                $return = $page->returnType();
-                $return = explode('|', $return)[0];
+                $return = explode('|', $page->returnType())[0];
                 $page   = ReferenceClass::findByName($return);
 
                 if ($page === null) {
@@ -127,7 +126,7 @@ class ReferenceClassMethodPage extends ReflectionPage
 
     public function parameters(): array
     {
-        if ($this->parameters !== null) {
+        if (isset($this->parameters) === true) {
             return $this->parameters;
         }
 
@@ -169,9 +168,12 @@ class ReferenceClassMethodPage extends ReflectionPage
         return parent::title()->value($call);
     }
 
-    protected function _reflection(): ReflectionMethod
+    protected function reflection(): ReflectionMethod
     {
-        return new ReflectionMethod($this->parent()->name(), $this->name());
+        return $this->reflection ??= new ReflectionMethod(
+            $this->parent()->name(),
+            $this->name()
+        );
     }
 
 }

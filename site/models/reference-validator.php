@@ -30,8 +30,8 @@ class ReferenceValidatorPage extends ReflectionPage
         return parent::onGitHub('src/Toolkit/V.php');
     }
 
-    protected function _reflection()
+    protected function reflection(): ReflectionFunction
     {
-        return new ReflectionFunction(V::$validators[$this->name()]);
+        return $this->reflection ??= new ReflectionFunction(V::$validators[$this->name()]);
     }
 }

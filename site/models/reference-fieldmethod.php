@@ -81,16 +81,20 @@ class ReferenceFieldMethodPage extends ReflectionPage
     /**
      * Helper for reflection object
      */
-    protected function _reflection(): ReflectionFunction|ReflectionMethod|null
+    protected function reflection(): ReflectionFunction|ReflectionMethod|null
     {
+        if (isset($this->reflection) === true) {
+            return $this->reflection;
+        }
+
         $key = strtolower($this->name());
 
         if (isset(Field::$methods[$key]) === true) {
-            return new ReflectionFunction(Field::$methods[$key]);
+            return $this->reflection = new ReflectionFunction(Field::$methods[$key]);
         }
 
         if (method_exists(Field::class, $this->name()) === true) {
-            return new ReflectionMethod(Field::class, $this->name());
+            return $this->reflection = new ReflectionMethod(Field::class, $this->name());
         }
 
         return null;

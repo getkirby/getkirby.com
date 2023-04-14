@@ -31,8 +31,7 @@ use phpDocumentor\Reflection\Type;
  */
 final class Collection extends AbstractList
 {
-    /** @var Fqsen|null */
-    private $fqsen;
+    private ?Fqsen $fqsen;
 
     /**
      * Initializes this representation of an array with the given Type or Fqsen.
@@ -47,7 +46,7 @@ final class Collection extends AbstractList
     /**
      * Returns the FQSEN associated with this object.
      */
-    public function getFqsen() : ?Fqsen
+    public function getFqsen(): ?Fqsen
     {
         return $this->fqsen;
     }
@@ -55,7 +54,7 @@ final class Collection extends AbstractList
     /**
      * Returns a rendered output of the Type as it would be used in a DocBlock.
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         $objectType = (string) ($this->fqsen ?? 'object');
 

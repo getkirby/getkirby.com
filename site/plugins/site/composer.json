@@ -6,7 +6,7 @@
     }
   },
   "require": {
-    "phpdocumentor/reflection-docblock": "^5.2.2",
+    "phpdocumentor/reflection-docblock": "^5.3.0",
     "caxy/php-htmldiff": "^0.1.14"
   },
   "config": {

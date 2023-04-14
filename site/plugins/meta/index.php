@@ -1,46 +1,36 @@
 <?php
 
+use Kirby\Cms\App;
 use Kirby\Meta\PageMeta;
 use Kirby\Meta\SiteMeta;
-use Kirby\Toolkit\Tpl;
 
 load([
     'kirby\\meta\\pagemeta' => __DIR__ . '/src/PageMeta.php',
     'kirby\\meta\\sitemeta' => __DIR__ . '/src/SiteMeta.php'
 ]);
 
-Kirby::plugin('kirby/meta', [
+App::plugin('kirby/meta', [
     'routes' => [
         [
             'pattern' => 'robots.txt',
-            'method' => 'ALL',
-            'action' => function () {
-                return SiteMeta::robots();
-            },
+            'method'  => 'ALL',
+            'action'  => fn () => SiteMeta::robots()
         ],
         [
             'pattern' => 'sitemap.xml',
-            'action' => function () {
-                return SiteMeta::sitemap();
-            }
+            'action'  => fn () => SiteMeta::sitemap()
         ],
         [
             'pattern' => 'open-search.xml',
-            'action' => function () {
-                return SiteMeta::search();
-            },
+            'action'  => fn () => SiteMeta::search()
         ],
         [
             'pattern' => '(:all)/opengraph.png',
-            'action' => function (string $id) {
-                return PageMeta::renderThumbnail($id);
-            },
+            'action'  => fn (string $id) => PageMeta::renderThumbnail($id)
         ]
     ],
     'pageMethods' => [
-        'meta' => function () {
-            return new PageMeta($this);
-        },
+        'meta'     => fn () => new PageMeta($this),
         'metaLead' => function ($root = null, $fallback = null) {
             $crumbs = $this->parents()->flip();
 
@@ -48,9 +38,10 @@ Kirby::plugin('kirby/meta', [
                 $crumbs = $crumbs->not($root->parents());
             }
 
-            $lead = implode(' / ', $crumbs->toArray(function ($p) {
-                return (string)$p->title();
-            }));
+            $lead = implode(
+                ' / ',
+                $crumbs->toArray(fn ($p) => (string)$p->title())
+            );
 
             if (empty($lead) === true) {
                 $lead = $fallback;

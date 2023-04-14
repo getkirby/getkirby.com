@@ -15,6 +15,7 @@ namespace phpDocumentor\Reflection\Types;
 use ArrayIterator;
 use IteratorAggregate;
 use phpDocumentor\Reflection\Type;
+
 use function array_key_exists;
 use function implode;
 
@@ -33,10 +34,9 @@ abstract class AggregatedType implements Type, IteratorAggregate
      * @psalm-allow-private-mutation
      * @var array<int, Type>
      */
-    private $types = [];
+    private array $types = [];
 
-    /** @var string */
-    private $token;
+    private string $token;
 
     /**
      * @param array<Type> $types
@@ -53,7 +53,7 @@ abstract class AggregatedType implements Type, IteratorAggregate
     /**
      * Returns the type at the given index.
      */
-    public function get(int $index) : ?Type
+    public function get(int $index): ?Type
     {
         if (!$this->has($index)) {
             return null;
@@ -65,7 +65,7 @@ abstract class AggregatedType implements Type, IteratorAggregate
     /**
      * Tests if this compound type has a type with the given index.
      */
-    public function has(int $index) : bool
+    public function has(int $index): bool
     {
         return array_key_exists($index, $this->types);
     }
@@ -73,7 +73,7 @@ abstract class AggregatedType implements Type, IteratorAggregate
     /**
      * Tests if this compound type contains the given type.
      */
-    public function contains(Type $type) : bool
+    public function contains(Type $type): bool
     {
         foreach ($this->types as $typePart) {
             // if the type is duplicate; do not add it
@@ -88,7 +88,7 @@ abstract class AggregatedType implements Type, IteratorAggregate
     /**
      * Returns a rendered output of the Type as it would be used in a DocBlock.
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return implode($this->token, $this->types);
     }
@@ -96,7 +96,7 @@ abstract class AggregatedType implements Type, IteratorAggregate
     /**
      * @return ArrayIterator<int, Type>
      */
-    public function getIterator() : ArrayIterator
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->types);
     }
@@ -104,9 +104,9 @@ abstract class AggregatedType implements Type, IteratorAggregate
     /**
      * @psalm-suppress ImpureMethodCall
      */
-    private function add(Type $type) : void
+    private function add(Type $type): void
     {
-        if ($type instanceof self) {
+        if ($type instanceof static) {
             foreach ($type->getIterator() as $subType) {
                 $this->add($subType);
             }

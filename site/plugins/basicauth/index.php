@@ -1,6 +1,8 @@
 <?php
 
-Kirby::plugin('getkirby/basicauth', [
+use Kirby\Cms\App;
+
+App::plugin('getkirby/basicauth', [
     'hooks' => [
         'route:before' => function () {
             $users = (array)option('basicauth.users', []);
@@ -11,7 +13,7 @@ Kirby::plugin('getkirby/basicauth', [
             }
 
             $validate = function () use ($users) {
-                $auth = kirby()->request()->auth();
+                $auth = App::instance()->request()->auth();
 
                 if (!$auth) {
                     return false;

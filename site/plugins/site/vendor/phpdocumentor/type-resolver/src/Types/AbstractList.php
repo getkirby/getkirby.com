@@ -48,15 +48,15 @@ abstract class AbstractList implements Type
     /**
      * Returns the type for the keys of this array.
      */
-    public function getKeyType() : Type
+    public function getKeyType(): Type
     {
         return $this->keyType ?? $this->defaultKeyType;
     }
 
     /**
-     * Returns the value for the keys of this array.
+     * Returns the type for the values of this array.
      */
-    public function getValueType() : Type
+    public function getValueType(): Type
     {
         return $this->valueType;
     }
@@ -64,7 +64,7 @@ abstract class AbstractList implements Type
     /**
      * Returns a rendered output of the Type as it would be used in a DocBlock.
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         if ($this->keyType) {
             return 'array<' . $this->keyType . ',' . $this->valueType . '>';

@@ -22,8 +22,7 @@ use phpDocumentor\Reflection\Type;
  */
 final class Expression implements Type
 {
-    /** @var Type */
-    protected $valueType;
+    protected Type $valueType;
 
     /**
      * Initializes this representation of an array with the given Type.
@@ -36,7 +35,7 @@ final class Expression implements Type
     /**
      * Returns the value for the keys of this array.
      */
-    public function getValueType() : Type
+    public function getValueType(): Type
     {
         return $this->valueType;
     }
@@ -44,7 +43,7 @@ final class Expression implements Type
     /**
      * Returns a rendered output of the Type as it would be used in a DocBlock.
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return '(' . $this->valueType . ')';
     }

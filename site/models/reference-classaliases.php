@@ -58,8 +58,7 @@ class ReferenceClassAliasesPage extends SectionPage
 
     public static function resolve(string $name): string
     {
-        $aliases = static::aliases();
-        return $aliases[Str::lower($name)] ?? $name;
+        return static::aliases()[Str::lower($name)] ?? $name;
 
     }
 

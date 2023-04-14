@@ -1,5 +1,6 @@
 <?php
 
+use Kirby\Cms\App;
 use Kirby\Http\Url;
 
 /**
@@ -18,25 +19,21 @@ function cdn($file, array $params = []): string
     if (empty($params) === false) {
         // Use the width as height if the height is not set
         if (empty($params['crop']) === false && $params['crop'] !== false) {
-            $params['height'] = $params['height'] ?? $params['width'];
+            $params['fit']      = true;
+            $params['height'] ??= $params['width'];
+            $params['crop']     = match ($params['crop']) {
+                'top'   =>  'fp,0,0',
+                default => 'smart'
+            };
 
-            if ($params['crop'] === 'top') {
-                $params['crop'] = 'fp,0,0';
-            } else {
-                $params['crop'] = 'smart';
-            }
-
-            $params['fit'] = true;
         } else {
-            if (isset($params['width']) && isset($params['height'])) {
-                $params['fit'] = 'inside';
-            } else {
-                $params['fit'] = true;
-            }
+            $params['v']       = $file->mediaHash();
             $params['enlarge'] = 0;
+            $params['fit']     = match (isset($params['width']) && isset($params['height'])) {
+                true => 'inside',
+                default => true
+            };
         }
-
-        $params['v'] = $file->mediaHash();
 
         $query = '?' . http_build_query($params);
     }
@@ -46,5 +43,5 @@ function cdn($file, array $params = []): string
     }
 
     $path = Url::path($file);
-    return option('cdn.domain') . '/' . $path . $query;
+    return App::instance()->option('cdn.domain') . '/' . $path . $query;
 }

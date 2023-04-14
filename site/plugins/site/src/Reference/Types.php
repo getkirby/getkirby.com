@@ -219,6 +219,7 @@ class Types
     {
         $argument = explode('=', $parameter);
         $argument = explode(' ', trim($argument[0]));
+
         return [
             'variable' => $argument[count($argument) - 1],
             'type'     => static::format($argument[count($argument) - 2] ?? '-')

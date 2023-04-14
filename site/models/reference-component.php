@@ -38,10 +38,10 @@ class ReferenceComponentPage extends ReflectionPage
         return parent::onGitHub('config/components.php');
     }
 
-    protected function _reflection(): ReflectionFunction|null
+    protected function reflection(): ReflectionFunction|null
     {
         if ($component = $this->component()) {
-            return new ReflectionFunction($component);
+            return $this->reflection ??= new ReflectionFunction($component);
         }
 
         return null;

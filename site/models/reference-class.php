@@ -286,9 +286,9 @@ class ReferenceClassPage extends SectionPage
         return parent::title()->value($title);
     }
 
-    protected function _reflection(): ReflectionClass
+    protected function reflection(): ReflectionClass
     {
-        return new ReflectionClass($this->name());
+        return $this->reflection ??= new ReflectionClass($this->name());
     }
 
 }

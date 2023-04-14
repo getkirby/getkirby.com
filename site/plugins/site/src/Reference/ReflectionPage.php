@@ -7,28 +7,30 @@ use Kirby\Cms\Field;
 use Kirby\Cms\Page;
 use Kirby\Reference\Types;
 use Kirby\Template\Template;
+use Kirby\Toolkit\A;
+use ReflectionClass;
+use ReflectionFunctionAbstract;
 use ReflectionUnionType;
+use Reflector;
 use Throwable;
 
 abstract class ReflectionPage extends Page
 {
-
-    protected DocBlock|false|null $docBlock = null;
-    protected array|null $parameters = null;
-    protected $reflection;
-    protected string|false|null $returns = false;
-    protected array|null $throws = null;
+    protected DocBlock|null $docBlock;
+    protected array $parameters;
+    protected Reflector $reflection;
+    protected string|null $returns;
+    protected array $throws;
 
     /**
      * Returns how this entry would be called in code
      */
     public function call(): string
     {
-        if ($reflection = $this->reflection()) {
+        if ($this->reflection() !== null) {
             $parameters = array_column($this->parameters(), 'export');
             $parameters = empty($parameters) ? '' : implode(', ', $parameters);
-
-            $call = $this->name() . '(' . $parameters . ')';
+            $call       = $this->name() . '(' . $parameters . ')';
 
             if ($return = $this->returnType()) {
                 $call .= ': ' . $return;
@@ -45,11 +47,9 @@ abstract class ReflectionPage extends Page
      */
     public function deprecated(): Field
     {
-        if ($docBlock = $this->docBlock()) {
-            if ($tag = $docBlock->getTag('deprecated')) {
-                $value = $tag->getVersion() . '|' . $tag->getDescription();
-                return new Field($this, 'deprecated', $value);
-            }
+        if ($tag = $this->docBlock()?->getTag('deprecated')) {
+            $value = $tag->getVersion() . '|' . $tag->getDescription();
+            return new Field($this, 'deprecated', $value);
         }
 
         return parent::deprecated();
@@ -58,21 +58,19 @@ abstract class ReflectionPage extends Page
     /**
      * Gets the DocBlock information
      */
-    public function docBlock(): DocBlock|false
+    public function docBlock(): DocBlock|null
     {
-        if ($this->docBlock !== null) {
+        if (isset($this->docBlock) === true) {
             return $this->docBlock;
         }
 
         if ($reflection = $this->reflection()) {
             try {
                 return $this->docBlock = new DocBlock($reflection->getDocComment());
-            } catch (Throwable) {
-                return $this->docBlock = false;
-            }
+            } catch (Throwable) {}
         }
 
-        return $this->docBlock = false;
+        return $this->docBlock = null;
     }
 
     /**
@@ -111,11 +109,7 @@ abstract class ReflectionPage extends Page
      */
     public function isInternal(): bool
     {
-        if ($docBlock = $this->docBlock()) {
-            return is_null($docBlock->getTag('internal')) === false;
-        }
-
-        return false;
+        return $this->docBlock()?->getTag('internal') !== null;
     }
 
     public function isMutable(): bool
@@ -134,7 +128,16 @@ abstract class ReflectionPage extends Page
      */
     public function line(): int|null
     {
-        return $this->reflection()?->getStartLine();
+        $reflection = $this->reflection();
+
+        if (
+            $reflection instanceof ReflectionClass ||
+            $reflection instanceof ReflectionFunctionAbstract
+        ) {
+            return $reflection->getStartLine();
+        }
+
+        return null;
     }
 
     public function metadata(): array
@@ -182,118 +185,104 @@ abstract class ReflectionPage extends Page
      */
     public function parameters(): array
     {
-        if ($this->parameters !== null) {
+        if (isset($this->parameters) === true) {
             return $this->parameters;
         }
 
         $reflection = $this->reflection();
-        $parameters = [];
 
-        if (!$reflection) {
-            return $this->parameters = $parameters;
-        }
+        if ($reflection instanceof ReflectionFunctionAbstract) {
+            return $this->parameters = A::map(
+                $reflection->getParameters(),
+                function ($parameter) {
+                    $name = $parameter->getName();
+                    $doc  = $this->docBlock()?->getParameter($name);
 
-        foreach ($reflection->getParameters() as $parameter) {
-            $name = $parameter->getName();
+                    if ($type = $parameter->getType()) {
+                        $type = $this->typeName($type);
+                    } elseif ($doc) {
+                        $type = (string)$doc->getType();
+                    }
 
-            if ($docBlock = $this->docBlock()) {
-                $doc = $docBlock->getParameter($name);
-            } else {
-                $doc = null;
-            }
+                    $param    = trim($type . ' $' . $name);
+                    $default  = null;
+                    $optional = false;
 
-            if ($type = $parameter->getType()) {
-                $type = $this->typeName($type);
-            } elseif ($doc) {
-                $type = (string)$doc->getType();
-            }
+                    if ($parameter->isOptional() === true) {
+                        if ($parameter->isDefaultValueAvailable()) {
+                            $default = $parameter->getDefaultValue();
+                            $default = var_export($default, true);
+                            $default = str_replace('NULL', 'null', $default);
+                            $default = str_replace('array (' . PHP_EOL . ')', '[ ]', $default);
+                        } else {
+                            $default = 'null';
+                        }
 
-            $param    = trim($type . ' $' . $name);
-            $default  = null;
-            $optional = false;
+                        $optional  = true;
+                        $param    .= ' = ' . $default;
+                    }
 
-            if ($parameter->isOptional() === true) {
-
-                if ($parameter->isDefaultValueAvailable()) {
-                    $default = $parameter->getDefaultValue();
-                    $default = var_export($default, true);
-                    $default = str_replace('NULL', 'null', $default);
-                    $default = str_replace('array (' . PHP_EOL . ')', '[ ]', $default);
-                } else {
-                    $default = 'null';
+                    return [
+                        'name'        => '$' . $name,
+                        'required'    => $optional === false,
+                        'type'        => Types::factory($type ?? 'mixed', $this),
+                        'default'     => $default,
+                        'description' => (string)$doc?->getDescription(),
+                        'export'      => $param
+                    ];
                 }
-
-                $optional  = true;
-                $param    .= ' = ' . $default;
-            }
-
-            $parameters[] = [
-                'name'        => '$' . $name,
-                'required'    => $optional === false,
-                'type'        => Types::factory($type ?? 'mixed', $this),
-                'default'     => $default,
-                'description' => $doc ? (string)$doc->getDescription() : null,
-                'export'      => $param
-            ];
+            );
         }
 
-        return $this->parameters = $parameters;
+        return $this->parameters = [];
     }
 
     /**
      * Creates the reflection object
      */
-    protected function reflection()
-    {
-        return $this->reflection ??= $this->_reflection();
-    }
-
-    protected function _reflection()
-    {
-        return false;
-    }
+   protected function reflection(): Reflector|null
+   {
+        return null;
+   }
 
     public function typeName($type): string
     {
         if ($type instanceof ReflectionUnionType) {
-            $types = [];
-
-            foreach ($type->getTypes() as $reflectionType) {
-                $types[] = $reflectionType->getName();
-            }
-
-            return implode('|', $types);
+            return implode('|', A::map(
+                $type->getTypes(),
+                fn ($type) => $type->getName()
+            ));
         }
 
         return $type->getName();
     }
 
-    public function returns(): ?string
+    public function returns(): string|null
     {
-        if ($this->returns !== false) {
+        if (isset($this->returns) === true) {
             return $this->returns;
         }
 
         if ($reflection = $this->reflection()) {
             // First, try to get return type from reflection
-            if ($reflection->hasReturnType() === true) {
+            if (
+                $reflection instanceof ReflectionFunctionAbstract &&
+                $reflection->hasReturnType() === true
+            ) {
 
                 $type = $reflection->getReturnType();
                 $name = $this->typeName($type);
 
                 if ($type->allowsNull() === true) {
-                    $name =  $name . '|null';
+                    $name .= '|null';
                 }
 
                 return $this->returns = $name;
             }
 
             // Otherwise, check DocBlock for return type
-            if ($docBlock = $this->docBlock()) {
-                if ($type = $docBlock->getReturnType()) {
-                    $type = trim((string)$type->getType());
-                    return $this->returns = $type;
-                }
+            if ($type = $this->docBlock()?->getReturnType()) {
+                return $this->returns = trim((string)$type->getType());
             }
         }
 
@@ -318,11 +307,8 @@ abstract class ReflectionPage extends Page
      */
     public function since(): Field
     {
-        if ($docBlock = $this->docBlock()) {
-            if ($tag = $docBlock->getTag('since')) {
-                $since = $tag->getVersion();
-                return new Field($this, 'since', $since ?? null);
-            }
+        if ($tag = $this->docBlock()?->getTag('since')) {
+            return new Field($this, 'since', $tag->getVersion());
         }
 
         return parent::since();
@@ -347,25 +333,12 @@ abstract class ReflectionPage extends Page
      */
     public function throws(): array
     {
-        if ($this->throws !== null) {
-            return $this->throws;
-        }
-
-        $throws     = [];
-        $reflection = $this->reflection();
-        $docBlock   = $this->docBlock();
-
-        if (!$reflection || !$docBlock) {
-            return $this->throws = $throws;
-        }
-
-        foreach ($docBlock->getTagsByName('throws') as $doc) {
-            $throws[] = [
+        return $this->throws ??= A::map(
+            $this->docBlock()?->getTagsByName('throws'),
+            fn ($doc) => [
                 'description' => $doc->getDescription(),
                 'type'        => ltrim($doc->getType(), '\\'),
-            ];
-        }
-
-        return $this->throws = $throws;
+            ]
+        );
     }
 }

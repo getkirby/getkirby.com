@@ -35,9 +35,9 @@ class ReferenceHelperPage extends ReflectionPage
         return parent::title()->value($this->name() . '()');
     }
 
-    protected function _reflection(): ReflectionFunction
+    protected function reflection(): ReflectionFunction
     {
-        return new ReflectionFunction($this->slug());
+        return $this->reflection ??= new ReflectionFunction($this->slug());
     }
 
 }

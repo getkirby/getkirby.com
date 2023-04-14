@@ -1,5 +1,6 @@
 <?php
 
+use Kirby\Cms\App;
 use Kirby\Http\Router;
 
 /**
@@ -17,7 +18,7 @@ use Kirby\Http\Router;
  * @license   MIT
  */
 
-Kirby::plugin('getkirby/redirects', [
+App::plugin('getkirby/redirects', [
     'hooks' => [
             'route:after' => function ($route, $path, $method, $result, $final) {
                     // only if call didn't match any route and is final
@@ -53,7 +54,7 @@ Kirby::plugin('getkirby/redirects', [
 
                         try {
                             return $router->call($path, $method);
-                        } catch (Throwable $e) {
+                        } catch (Throwable) {
                             return site()->errorPage();
                         }
                     }

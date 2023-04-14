@@ -66,8 +66,8 @@ class ReferenceKirbytagPage extends ReflectionPage
         return new Field($this, 'title', '&#40;' . $this->name() . ': …&#41;');
     }
 
-    protected function _reflection(): ReflectionFunction
+    protected function reflection(): ReflectionFunction
     {
-        return new ReflectionFunction($this->tag()['html']);
+        return $this->reflection ??= new ReflectionFunction($this->tag()['html']);
     }
 }

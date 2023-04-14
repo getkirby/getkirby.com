@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace phpDocumentor\Reflection\Types;
 
 use phpDocumentor\Reflection\Fqsen;
+use phpDocumentor\Reflection\PseudoType;
 use phpDocumentor\Reflection\Type;
 
 /**
@@ -21,10 +22,9 @@ use phpDocumentor\Reflection\Type;
  *
  * @psalm-immutable
  */
-final class ClassString implements Type
+final class ClassString extends String_ implements PseudoType
 {
-    /** @var Fqsen|null */
-    private $fqsen;
+    private ?Fqsen $fqsen;
 
     /**
      * Initializes this representation of a class string with the given Fqsen.
@@ -34,10 +34,15 @@ final class ClassString implements Type
         $this->fqsen = $fqsen;
     }
 
+    public function underlyingType(): Type
+    {
+        return new String_();
+    }
+
     /**
      * Returns the FQSEN associated with this object.
      */
-    public function getFqsen() : ?Fqsen
+    public function getFqsen(): ?Fqsen
     {
         return $this->fqsen;
     }
@@ -45,7 +50,7 @@ final class ClassString implements Type
     /**
      * Returns a rendered output of the Type as it would be used in a DocBlock.
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         if ($this->fqsen === null) {
             return 'class-string';

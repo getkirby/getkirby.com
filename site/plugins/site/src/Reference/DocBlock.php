@@ -3,12 +3,13 @@
 namespace Kirby\Reference;
 
 use Exception;
+use phpDocumentor\Reflection\DocBlock as BaseDocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
+use phpDocumentor\Reflection\DocBlock\Tag;
 
 class DocBlock
 {
-
-    protected $instance;
+    protected BaseDocBlock $instance;
 
     public function __construct(string $comment)
     {
@@ -17,36 +18,6 @@ class DocBlock
         }
 
         $this->instance = DocBlockFactory::createInstance()->create($comment);
-    }
-
-    public function getTag(string $name)
-    {
-        foreach ($this->getTags() as $tag) {
-            if (strtolower($tag->getName()) === strtolower($name)) {
-                return $tag;
-            }
-        }
-    }
-
-    public function getParameters(): array
-    {
-        return array_filter($this->getTags(), function ($tag) {
-            return $tag->getName() === 'param';
-        });
-    }
-
-    public function getParameter(string $name)
-    {
-        foreach ($this->getParameters() as $param) {
-            if (strtolower($param->getVariableName()) === strtolower($name)) {
-                return $param;
-            }
-        }
-    }
-
-    public function getReturnType()
-    {
-        return $this->getTag('return');
     }
 
     public function __call(string $method, array $args = [])
@@ -58,4 +29,36 @@ class DocBlock
         throw new Exception('Invalid doc block method: ' . $method);
     }
 
+    public function getTag(string $name): Tag|null
+    {
+        foreach ($this->getTags() as $tag) {
+            if (strtolower($tag->getName()) === strtolower($name)) {
+                return $tag;
+            }
+        }
+
+        return null;
+    }
+
+    public function getParameters(): array
+    {
+        return array_filter(
+            $this->getTags(),
+            fn ($tag) => $tag->getName() === 'param'
+        );
+    }
+
+    public function getParameter(string $name): Tag|null
+    {
+        foreach ($this->getParameters() as $param) {
+            if (strtolower($param->getVariableName()) === strtolower($name)) {
+                return $param;
+            }
+        }
+    }
+
+    public function getReturnType(): Tag|null
+    {
+        return $this->getTag('return');
+    }
 }
