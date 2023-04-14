@@ -16,7 +16,7 @@ class Checkout
     protected $sale;
     protected $vendorAuthCode;
     protected $vendorId;
-    protected $volume;
+    protected $volumes;
 
     /**
      * @param array $options
@@ -40,8 +40,6 @@ class Checkout
 
     /**
      * Returns all available discounts
-     *
-     * @return array
      */
     public function discounts(): array
     {
@@ -51,9 +49,6 @@ class Checkout
     /**
      * Returns price info based on the country
      * code or the IP address
-     *
-     * @param string|null $country
-     * @return array
      */
     public function info(string $country = null): array
     {
@@ -93,8 +88,6 @@ class Checkout
 
     /**
      * Returns the product id
-     *
-     * @return integer
      */
     public function product(): int
     {
@@ -103,11 +96,6 @@ class Checkout
 
     /**
      * Calculates the net total discount price
-     *
-     * @param float $unit
-     * @param integer $volume
-     * @param integer $discount
-     * @return integer
      */
     public function total(float $unit, int $volume, int $discount): float
     {
@@ -119,10 +107,6 @@ class Checkout
 
     /**
      * Creates a redirect URL for a custom volume discount checkout
-     *
-     * @param integer $volume
-     * @param string|null $country
-     * @return string
      */
     public function url(int $volume, string $country = null): string
     {
@@ -149,12 +133,15 @@ class Checkout
             'quantity'          => $volume,
             'quantity_variable' => false,
             'prices'            => $prices,
-            //'custom_message'    => $discount . '% off standard price!'
+            //'custom_message'  => $discount . '% off standard price!'
         ];
 
-        $response = Remote::post('https://vendors.paddle.com/api/2.0/product/generate_pay_link', [
-            'data' => $data
-        ]);
+        $response = Remote::post(
+            'https://vendors.paddle.com/api/2.0/product/generate_pay_link',
+            [
+                'data' => $data
+            ]
+        );
 
         $json = $response->json();
         $url  = $json['response']['url'] ?? null;
