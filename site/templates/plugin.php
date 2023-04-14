@@ -110,6 +110,10 @@
   .plugin-installation input:focus {
     outline: 0;
   }
+
+  .plugin-links .plugin-paid {
+    background: var(--color-aqua-200);
+  }
 </style>
 
 <article>
@@ -156,6 +160,12 @@
           <?php endif ?>
           <?= $author->title() ?>
         </a>
+
+        <?php if ($page->paid()->isTrue()) : ?>
+          <a class="plugin-paid btn" href="<?= $page->repository() ?>">
+            <span><?= icon('cart') ?></span> Paid plugin
+          </a>
+        <?php endif ?>
 
         <?php if ($page->installation()->isTrue()) : ?>
           <button class="btn" onclick="document.querySelector('#installation').showModal()">

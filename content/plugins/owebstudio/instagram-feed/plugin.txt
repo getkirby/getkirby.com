@@ -14,6 +14,10 @@ Version: 1.2.0
 
 ----
 
+Paid: true
+
+----
+
 Category: social
 
 ----

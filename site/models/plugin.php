@@ -91,94 +91,9 @@ class PluginPage extends Page
         return Nest::create($info, $this);
     }
 
-    public function logo(): File|null
+    public function isNew(): bool
     {
-        return $this->images()->findBy('name', 'logo');
-    }
-
-    public function metadata(): array
-    {
-        return [
-            'thumbnail' => [
-                'lead'  => 'Plugin',
-                'image' => $this->screenshot()
-            ]
-        ];
-    }
-
-    public function preview(): Field
-    {
-        return parent::preview()->or($this->example());
-    }
-
-    public function screenshot(): File|null
-    {
-        return $this->images()->findBy('name', 'screenshot');
-    }
-
-    public function version(bool $onlyIfCached = false): string|null
-    {
-        if ($this->content()->version()->isNotEmpty()) {
-            return $this->content()->version()->value();
-        }
-
-        if ($latestTag = $this->latestTag($onlyIfCached)) {
-            // normalize the version number to be without leading `v`
-            return ltrim($latestTag, 'vV');
-        }
-
-        return null;
-    }
-
-    public function toJson($onlyIfCached = false): array
-    {
-        $screenshot = $this->images()->findBy('name', 'screenshot');
-
-        $data = [
-            'title'  => $this->title()->value(),
-            'url'    => $this->url(),
-            'author' => [
-                'name' => $this->parent()->title()->value(),
-                'url'  => dirname($this->repository()),
-            ],
-            'repository'  => $this->repository()->value(),
-            'download'    => $this->download(),
-            'category'    => option('plugins.categories.' . $this->category() . '.label'),
-            'description' => $this->description()->value(),
-            'screenshot'  => $screenshot ? $screenshot->url() : null,
-        ];
-
-        // basic skeleton for the update check (can be extended later)
-        if ($version = $this->version($onlyIfCached)) {
-            $data += [
-                'latest'   => $version,
-                'versions' => [
-                    $version => [
-                        'description' => 'Latest release',
-                        'status'      => 'latest'
-                    ],
-                    '*' => [
-                        'description' => 'Actively supported',
-                        'latest'      => $version,
-                        'status'      => 'active-support'
-                    ]
-                ],
-                'urls' => [
-                    '*' => [
-                        // `{{ version }}` is a template placeholder for
-                        // the URL templates (so that the update check
-                        // can insert any version into the URLs)
-                        'changes'  => $this->changes('{{ version }}'),
-                        'download' => $this->download('{{ version }}'),
-                        'upgrade'  => $this->repository()->value(),
-                    ]
-                ],
-                'incidents' => [],
-                'messages'  => []
-            ];
-        }
-
-        return $data;
+        return $this->published()->toDate('U') > (time() - 4500000);
     }
 
     protected function latestTag(bool $onlyIfCached = false): string|null
@@ -253,6 +168,31 @@ class PluginPage extends Page
         return new Obj($license);
     }
 
+    public function logo(): File|null
+    {
+        return $this->images()->findBy('name', 'logo');
+    }
+
+    public function metadata(): array
+    {
+        return [
+            'thumbnail' => [
+                'lead'  => 'Plugin',
+                'image' => $this->screenshot()
+            ]
+        ];
+    }
+
+    public function preview(): Field
+    {
+        return parent::preview()->or($this->example());
+    }
+
+    public function screenshot(): File|null
+    {
+        return $this->images()->findBy('name', 'screenshot');
+    }
+
     protected function tagPrefix(): string
     {
         $latestTag = $this->latestTag(true);
@@ -264,8 +204,68 @@ class PluginPage extends Page
         return '';
     }
 
-    public function isNew(): bool
+    public function toJson($onlyIfCached = false): array
     {
-        return $this->published()->toDate('U') > (time() - 4500000);
+        $screenshot = $this->images()->findBy('name', 'screenshot');
+
+        $data = [
+            'title'  => $this->title()->value(),
+            'url'    => $this->url(),
+            'author' => [
+                'name' => $this->parent()->title()->value(),
+                'url'  => dirname($this->repository()),
+            ],
+            'repository'  => $this->repository()->value(),
+            'download'    => $this->download(),
+            'category'    => option('plugins.categories.' . $this->category() . '.label'),
+            'description' => $this->description()->value(),
+            'screenshot'  => $screenshot ? $screenshot->url() : null,
+        ];
+
+        // basic skeleton for the update check (can be extended later)
+        if ($version = $this->version($onlyIfCached)) {
+            $data += [
+                'latest'   => $version,
+                'versions' => [
+                    $version => [
+                        'description' => 'Latest release',
+                        'status'      => 'latest'
+                    ],
+                    '*' => [
+                        'description' => 'Actively supported',
+                        'latest'      => $version,
+                        'status'      => 'active-support'
+                    ]
+                ],
+                'urls' => [
+                    '*' => [
+                        // `{{ version }}` is a template placeholder for
+                        // the URL templates (so that the update check
+                        // can insert any version into the URLs)
+                        'changes'  => $this->changes('{{ version }}'),
+                        'download' => $this->download('{{ version }}'),
+                        'upgrade'  => $this->repository()->value(),
+                    ]
+                ],
+                'incidents' => [],
+                'messages'  => []
+            ];
+        }
+
+        return $data;
+    }
+
+    public function version(bool $onlyIfCached = false): string|null
+    {
+        if ($this->content()->version()->isNotEmpty()) {
+            return $this->content()->version()->value();
+        }
+
+        if ($latestTag = $this->latestTag($onlyIfCached)) {
+            // normalize the version number to be without leading `v`
+            return ltrim($latestTag, 'vV');
+        }
+
+        return null;
     }
 }

@@ -10,5 +10,9 @@ Category: ecommerce
 
 ----
 
+Paid: true
+
+----
+
 Description: A powerful toolkit to cre­ate your very own on­line shop. Start entirely from scratch or integrate a store into your ex­ist­ing Kirby web­site.
 
