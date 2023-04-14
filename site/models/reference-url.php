@@ -6,7 +6,6 @@ use Kirby\Template\Template;
 
 class ReferenceUrlPage extends ReflectionPage
 {
-
     public function example(): Field
     {
         return parent::example()->value('```php' . PHP_EOL . '<?= $kirby->url(\'' . $this->slug() . '\') ?>' . PHP_EOL . '```');
@@ -36,5 +35,4 @@ class ReferenceUrlPage extends ReflectionPage
     {
         return parent::title()->value('$kirby->url(\'' . $this->slug() . '\')');
     }
-
 }

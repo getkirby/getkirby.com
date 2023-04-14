@@ -2,6 +2,7 @@
 
 use Kirby\Cms\Pages;
 use Kirby\Reference\SectionPage;
+use Kirby\Toolkit\Str;
 
 class ReferenceFieldMethodsPage extends SectionPage
 {
@@ -14,7 +15,7 @@ class ReferenceFieldMethodsPage extends SectionPage
         $children = [];
         $pages    = parent::children();
         $methods  = array_merge(
-            $this->getDynamicMethods(), 
+            $this->getDynamicMethods(),
             $this->getNativeMethods()
         );
 
@@ -40,7 +41,7 @@ class ReferenceFieldMethodsPage extends SectionPage
         return $this->children = Pages::factory($children, $this)->sortBy('title', 'asc');
     }
 
-    protected function getDynamicMethods()
+    protected function getDynamicMethods(): array
     {
         $methods = (include $this->kirby()->root('kirby') . '/config/methods.php')($this->kirby());
 
@@ -51,7 +52,7 @@ class ReferenceFieldMethodsPage extends SectionPage
         return $methods;
     }
 
-    protected function getNativeMethods()
+    protected function getNativeMethods(): array
     {
         $methods    = [];
         $reflection = new ReflectionClass(Field::class);
@@ -66,5 +67,4 @@ class ReferenceFieldMethodsPage extends SectionPage
 
         return $methods;
     }
-    
 }

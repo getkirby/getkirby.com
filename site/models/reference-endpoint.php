@@ -5,8 +5,7 @@ use Kirby\Reference\ReflectionPage;
 
 class ReferenceEndpointPage extends ReflectionPage
 {
-
-    public function request()
+    public function request(): string
     {
         return $this->method() . ': ' . $this->title();
     }

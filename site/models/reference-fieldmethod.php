@@ -6,30 +6,27 @@ use Kirby\Reference\ReflectionPage;
 
 class ReferenceFieldMethodPage extends ReflectionPage
 {
-
     /**
      * Returns aliases for field method
-     *
-     * @return array
      */
     public function aliases(): array
     {
         return array_keys(Field::$aliases, $this->name());
     }
-    
+
     /**
      * Returns example how field method would be called
-     *
-     * @return string
      */
     public function call(): string
     {
         return '$field->' . parent::call();
     }
 
-    public static function findByName(string $name): ?ReferenceFieldMethodPage
-    {
-        return page('docs/reference/templates/field-methods')->find(Str::kebab($name));
+    public static function findByName(
+        string $name
+    ): ReferenceFieldMethodPage|null {
+        $methods = page('docs/reference/templates/field-methods');
+        return $methods->find(Str::kebab($name));
     }
 
     public function metadata(): array
@@ -40,11 +37,9 @@ class ReferenceFieldMethodPage extends ReflectionPage
             ]
         ]);
     }
-    
+
     /**
      * Returns the URL to the source code on GitHub
-     *
-     * @return \Kirby\Cms\Field
      */
     public function onGitHub(string $path = ''): Field
     {
@@ -57,16 +52,14 @@ class ReferenceFieldMethodPage extends ReflectionPage
 
     /**
      * Returns an array with all parameter info.
-     * Omits the inserted `$field` parameter from refleciton info as 
+     * Omits the inserted `$field` parameter from refleciton info as
      * it does not get passed on the call
-     * 
-     * @return array
      */
     public function parameters(): array
     {
         $parameters = parent::parameters();
 
-        // Kirby automatically inserts $field as first parameter on all methods 
+        // Kirby automatically inserts $field as first parameter on all methods
         // defined in `kirby/config/methods.php`. The reflection picks up this
         // parameter, however, we need to remove it from the list as it does not
         // actually get passed when calling the field method
@@ -76,11 +69,9 @@ class ReferenceFieldMethodPage extends ReflectionPage
 
         return $parameters;
     }
-    
+
     /**
      * Returns title based on field method call
-     *
-     * @return \Kirby\Cms\Field
      */
     public function title(): Field
     {
@@ -90,7 +81,7 @@ class ReferenceFieldMethodPage extends ReflectionPage
     /**
      * Helper for reflection object
      */
-    protected function _reflection()
+    protected function _reflection(): ReflectionFunction|ReflectionMethod|null
     {
         $key = strtolower($this->name());
 
@@ -101,6 +92,8 @@ class ReferenceFieldMethodPage extends ReflectionPage
         if (method_exists(Field::class, $this->name()) === true) {
             return new ReflectionMethod(Field::class, $this->name());
         }
+
+        return null;
     }
-    
+
 }

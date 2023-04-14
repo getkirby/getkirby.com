@@ -5,7 +5,6 @@ use Kirby\Reference\SectionPage;
 
 class ReferenceIconsPage extends SectionPage
 {
-
     public function children(): Pages
     {
         if ($this->children !== null) {
@@ -41,5 +40,4 @@ class ReferenceIconsPage extends SectionPage
         return $this->children = Pages::factory($children, $this)
             ->sortBy('slug');
     }
-
 }

@@ -5,7 +5,6 @@ use Kirby\Reference\SectionPage;
 
 class ReferenceEndpointsPage extends SectionPage
 {
-
     public function intro(): Field
     {
         return parent::intro()->value('/api/' . $this->slug());
@@ -20,5 +19,4 @@ class ReferenceEndpointsPage extends SectionPage
             ]
         ]);
     }
-
 }

@@ -5,14 +5,11 @@ use Kirby\Reference\ReflectionPage;
 
 class ReferenceComponentPage extends ReflectionPage
 {
+    static protected array $components;
 
-    static protected $components;
-
-    protected function component()
+    protected function component(): Closure|null
     {
-        if (static::$components === null) {
-            static::$components = require $this->kirby()->root('kirby') . '/config/components.php';
-        }
+        static::$components ??= require $this->kirby()->root('kirby') . '/config/components.php';
 
         return static::$components[$this->name()] ?? false;
     }
@@ -41,10 +38,12 @@ class ReferenceComponentPage extends ReflectionPage
         return parent::onGitHub('config/components.php');
     }
 
-    protected function _reflection()
+    protected function _reflection(): ReflectionFunction|null
     {
         if ($component = $this->component()) {
             return new ReflectionFunction($component);
         }
+
+        return null;
     }
 }

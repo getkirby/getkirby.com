@@ -6,7 +6,6 @@ use Kirby\Toolkit\Str;
 
 class ReferenceHooksPage extends SectionPage
 {
-
     public function children(): Pages
     {
         if ($this->children !== null) {
@@ -42,5 +41,4 @@ class ReferenceHooksPage extends SectionPage
 
         return $this->children = Pages::factory($children, $this);
     }
-
 }

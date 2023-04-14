@@ -1,20 +1,16 @@
 <?php
 
+use Kirby\Cms\Pages;
 use Kirby\Reference\SectionPage;
 use Kirby\Toolkit\Str;
 
 class ReferenceClassAliasesPage extends SectionPage
 {
-
-    protected static $aliases = null;
+    protected static array $aliases;
 
     protected static function aliases(): array
     {
-        if (static::$aliases !== null) {
-            return static::$aliases;
-        }
-
-        return static::$aliases = require kirby()->root('kirby') . '/config/aliases.php';
+        return static::$aliases ??= require kirby()->root('kirby') . '/config/aliases.php';
     }
 
     public function children(): Pages
@@ -62,7 +58,7 @@ class ReferenceClassAliasesPage extends SectionPage
 
     public static function resolve(string $name): string
     {
-        $aliases  = static::aliases();
+        $aliases = static::aliases();
         return $aliases[Str::lower($name)] ?? $name;
 
     }

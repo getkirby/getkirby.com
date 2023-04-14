@@ -1,8 +1,9 @@
 <?php
 
+use Kirby\Cms\Page;
+
 class KosmosIssuePage extends Page
 {
-    
     public function metadata(): array
     {
         return [

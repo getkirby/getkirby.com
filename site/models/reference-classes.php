@@ -8,12 +8,9 @@ use Kirby\Reference\SectionPage;
 
 class ReferenceClassesPage extends SectionPage
 {
-
     /**
      * Creates children collection by parsing the `src/` folder of
      * the Kirby core
-     *
-     * @return Pages
      */
     public function children(): Pages
     {
@@ -84,10 +81,6 @@ class ReferenceClassesPage extends SectionPage
     /**
      * Returns page props for namespace
      * with classes as children and methods as grandchildren
-     *
-     * @param string $name
-     * @param string $root
-     * @return array
      */
     protected function namespace(string $name, string $root): array
     {
@@ -107,10 +100,6 @@ class ReferenceClassesPage extends SectionPage
     /**
      * Creates an array of page properties for all class files in the
      * provided root, assigning them to a provided namespace
-     *
-     * @param string $namespace
-     * @param string $root
-     * @return array
      */
     protected function classes(string $namespace, string $root): array
     {

@@ -2,11 +2,12 @@
 
 use Kirby\Cms\Pages;
 use Kirby\Data\Data;
+use Kirby\Http\Remote;
 use Kirby\Reference\SectionPage;
+use Kirby\Toolkit\Str;
 
 class ReferenceUisPage extends SectionPage
 {
-
     public function children(): Pages
     {
         if ($this->children !== null) {
@@ -99,5 +100,4 @@ class ReferenceUisPage extends SectionPage
 
         return $this->children = Pages::factory($children, $this)->sortBy('title', 'asc');
     }
-
 }

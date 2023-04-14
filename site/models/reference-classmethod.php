@@ -1,9 +1,11 @@
 <?php
 
 use Kirby\Cms\Field;
+use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Reference\ReflectionPage;
 use Kirby\Reference\Types;
+use Kirby\Toolkit\Str;
 use \ReferenceClassPage as ReferenceClass;
 
 class ReferenceClassMethodPage extends ReflectionPage
@@ -40,7 +42,7 @@ class ReferenceClassMethodPage extends ReflectionPage
         return method_exists($this->class(), $this->name());
     }
 
-    public static function findByNames($page, array $methods): ?Page
+    public static function findByNames($page, array $methods): Page|null
     {
         // Until we reach end of methods chain
         while (count($methods) > 0) {
@@ -68,7 +70,7 @@ class ReferenceClassMethodPage extends ReflectionPage
         return $page;
     }
 
-    public function inheritedFrom(): ?string
+    public function inheritedFrom(): string|null
     {
         if ($this->inherited !== null) {
             return $this->inherited;
@@ -91,8 +93,6 @@ class ReferenceClassMethodPage extends ReflectionPage
 
     /**
      * Checks if this is a magic method
-     *
-     * @return boolean
      */
     public function isMagic(): bool
     {
@@ -101,16 +101,10 @@ class ReferenceClassMethodPage extends ReflectionPage
 
     /**
      * Checks if this is static
-     *
-     * @return boolean
      */
     public function isStatic(): bool
     {
-        if ($reflection = $this->reflection()) {
-            return $reflection->isStatic() === true;
-        }
-
-        return false;
+        return $this->reflection()?->isStatic() === true;
     }
 
     public function metadata(): array
@@ -153,19 +147,14 @@ class ReferenceClassMethodPage extends ReflectionPage
      *
      * @param string $source class name that is proxied
      * @param \Kirby\Cms\Pages $methods existing methods collection
-     * @return \Kirby\Cms\Pages
      */
     public static function proxied(string $source, Pages $methods): Pages
     {
         if ($proxy = ReferenceClass::findByName($source)) {
-            $toSlug = function ($p) {
-                return $p->slug();
-            };
-
             $proxied    = $proxy->children();
             $additional = array_diff(
-                $proxied->values($toSlug),
-                $methods->values($toSlug)
+                $proxied->values(fn ($p) => $p->slug()),
+                $methods->values(fn ($p) => $p->slug())
             );
 
             return $proxied->find(...$additional);
@@ -180,7 +169,7 @@ class ReferenceClassMethodPage extends ReflectionPage
         return parent::title()->value($call);
     }
 
-    protected function _reflection()
+    protected function _reflection(): ReflectionMethod
     {
         return new ReflectionMethod($this->parent()->name(), $this->name());
     }

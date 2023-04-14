@@ -1,15 +1,14 @@
 <?php
 
 use Kirby\Cms\Field;
+use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
+use Kirby\Toolkit\Str;
 
 class ReferenceQuickLinkPage extends Page
 {
-
     /**
      * Creates children collection from `menu` content field
-     *
-     * @return \Kirby\Cms\Pages
      */
     public function children(): Pages
     {
@@ -23,9 +22,6 @@ class ReferenceQuickLinkPage extends Page
 
     /**
      * Returns quicklinks children array for field values
-     *
-     * @param \Kirby\Cms\Field $field
-     * @return array
      */
     public static function childrenFromContentField(Field $field): array
     {
@@ -59,13 +55,10 @@ class ReferenceQuickLinkPage extends Page
 
     /**
      * Returns whether the referenced page is open
-     *
-     * @return bool
      */
     public function isOpen(): bool
     {
-        $link = $this->link()->toPage();
-        return $link ? $link->isOpen() : false;
+        return $this->link()->toPage()?->isOpen() ?? false;
     }
 
     public function template()

@@ -1,5 +1,6 @@
 <?php
 
+use Kirby\Cms\Page;
 
 class ReleasePage extends Page
 {
@@ -11,7 +12,7 @@ class ReleasePage extends Page
 
     public function intendedTemplate()
     {
-        return $this->intendedTemplate = $this->intendedTemplate ?? $this->kirby()->template('release-' . $this->content()->version());
+        return $this->intendedTemplate ??= $this->kirby()->template('release-' . $this->content()->version());
     }
 
     public function url($options = null): string

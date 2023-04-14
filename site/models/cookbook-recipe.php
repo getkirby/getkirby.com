@@ -1,9 +1,11 @@
 <?php
 
+use Kirby\Cms\Page;
+use Kirby\Cms\Pages;
+
 class CookbookRecipePage extends Page
 {
-
-    public function authors()
+    public function authors(): Pages
     {
         return parent::authors()->toPages();
     }

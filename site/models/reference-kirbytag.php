@@ -18,7 +18,7 @@ class ReferenceKirbytagPage extends ReflectionPage
     }
 
 
-    public function line(): ?int
+    public function line(): int|null
     {
         if ($reflection = $this->reflection()) {
             $line = $reflection->getStartLine();
@@ -51,7 +51,7 @@ class ReferenceKirbytagPage extends ReflectionPage
         return parent::onGitHub('config/tags.php');
     }
 
-    protected function tag()
+    protected function tag(): array|null
     {
         return static::tags()[$this->name()] ?? null;
     }
@@ -66,7 +66,7 @@ class ReferenceKirbytagPage extends ReflectionPage
         return new Field($this, 'title', '&#40;' . $this->name() . ': …&#41;');
     }
 
-    protected function _reflection()
+    protected function _reflection(): ReflectionFunction
     {
         return new ReflectionFunction($this->tag()['html']);
     }

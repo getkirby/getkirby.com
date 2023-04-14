@@ -1,17 +1,21 @@
 <?php
 
+use Kirby\Cache\Cache;
 use Kirby\Data\Data;
 use Kirby\Cms\Field;
 use Kirby\Cms\File;
 use Kirby\Cms\Page;
 use Kirby\Cms\Nest;
+use Kirby\Http\Remote;
+use Kirby\Http\Url;
+use Kirby\Toolkit\Obj;
 use Kirby\Toolkit\Str;
 
 class PluginPage extends Page
 {
     protected $latestTag = null;
 
-    public function cache()
+    public function cache(): Cache
     {
         return $this->kirby()->cache('plugins');
     }
@@ -21,12 +25,12 @@ class PluginPage extends Page
         return $this->id() . '/' . $section;
     }
 
-    public function card()
+    public function card(): File|null
     {
         return $this->images()->findBy('name', 'card');
     }
 
-    public function changes($version = null)
+    public function changes(string $version = null): string
     {
         if ($this->content()->has('changes')) {
             return $this->content()->get('changes')->value();
@@ -35,17 +39,18 @@ class PluginPage extends Page
         $url = $this->repository()->value();
 
         if (Str::contains($url, 'github')) {
-            if ($version) {
-                return $url . '/releases/tag/' . $this->tagPrefix() . $version;
-            }
+            $url .= '/releases';
 
-            return $url . '/releases/latest';
+            return match ($version) {
+                null    => $url . '/latest',
+                default => $url . '/tag/' . $this->tagPrefix() . $version
+            };
         }
 
         return $url;
     }
 
-    public function download($version = null)
+    public function download(string $version = null): string
     {
         if ($this->content()->has('download')) {
             return $this->content()->get('download')->value();
@@ -74,7 +79,7 @@ class PluginPage extends Page
         return $url;
     }
 
-    public function icon()
+    public function icon(): string
     {
         return option('plugins.categories.' . $this->category() . '.icon');
     }
@@ -86,7 +91,7 @@ class PluginPage extends Page
         return Nest::create($info, $this);
     }
 
-    public function logo()
+    public function logo(): File|null
     {
         return $this->images()->findBy('name', 'logo');
     }
@@ -106,7 +111,7 @@ class PluginPage extends Page
         return parent::preview()->or($this->example());
     }
 
-    public function screenshot(): ?File
+    public function screenshot(): File|null
     {
         return $this->images()->findBy('name', 'screenshot');
     }
@@ -125,7 +130,7 @@ class PluginPage extends Page
         return null;
     }
 
-    public function toJson($onlyIfCached = false)
+    public function toJson($onlyIfCached = false): array
     {
         $screenshot = $this->images()->findBy('name', 'screenshot');
 
@@ -188,7 +193,7 @@ class PluginPage extends Page
             return null;
         }
 
-        $cacheId = $this->cacheId('latestTag');
+        $cacheId   = $this->cacheId('latestTag');
         $latestTag = $this->cache()->get($cacheId);
 
         if ($latestTag === null) {
@@ -202,7 +207,7 @@ class PluginPage extends Page
                 return null;
             }
 
-            $path = Url::path((string)$repo);
+            $path    = Url::path((string)$repo);
             $headers = [
                 'Authorization' => 'token ' . $key,
                 'User-Agent' => 'Kirby'

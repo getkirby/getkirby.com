@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\Field;
+use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Reference\DocBlock;
 use Kirby\Reference\SectionPage;
@@ -11,14 +12,13 @@ use \ReferenceClassMethodPage as ReferenceClassMethod;
 
 class ReferenceClassPage extends SectionPage
 {
-
-    protected static $aliases;
+    protected static array $aliases;
 
     protected $props = null;
 
     public function alias(): Field
     {
-        static::$aliases = static::$aliases ?? require $this->kirby()->root('kirby') . '/config/aliases.php';
+        static::$aliases ??= require $this->kirby()->root('kirby') . '/config/aliases.php';
 
         $alias = array_search($this->name(), static::$aliases);
         $value = $alias !== false ? $alias : null;
@@ -111,7 +111,7 @@ class ReferenceClassPage extends SectionPage
 
     }
 
-    public static function findByName(string $class): ?Page
+    public static function findByName(string $class): Page|null
     {
         $class = ltrim($class, '\\');
         $class = ReferenceClassAliasesPage::resolve($class);
@@ -148,11 +148,7 @@ class ReferenceClassPage extends SectionPage
 
     public function isTrait(): bool
     {
-        if ($reflection = $this->reflection()) {
-            return $reflection->isTrait();
-        }
-
-        return false;
+        return $this->reflection()?->isTrait();
     }
 
     public function metadata(): array
@@ -290,7 +286,7 @@ class ReferenceClassPage extends SectionPage
         return parent::title()->value($title);
     }
 
-    protected function _reflection()
+    protected function _reflection(): ReflectionClass
     {
         return new ReflectionClass($this->name());
     }

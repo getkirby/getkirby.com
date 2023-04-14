@@ -1,9 +1,9 @@
 <?php
 
+use Kirby\Cms\Page;
 
 class ReferenceArticlePage extends Page
 {
-
     public function metadata(): array
     {
         return [
@@ -13,5 +13,4 @@ class ReferenceArticlePage extends Page
             ]
         ];
     }
-
 }

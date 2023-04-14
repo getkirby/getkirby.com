@@ -4,7 +4,6 @@ use Kirby\Reference\ReflectionPage;
 
 class ReferenceIconPage extends ReflectionPage
 {
-    
     public function metadata(): array
     {
         return array_replace_recursive(parent::metadata(), [
@@ -16,5 +15,4 @@ class ReferenceIconPage extends ReflectionPage
             ]
         ]);
     }
-    
 }

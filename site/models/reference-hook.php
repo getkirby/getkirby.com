@@ -5,8 +5,7 @@ use Kirby\Reference\ReflectionPage;
 
 class ReferenceHookPage extends ReflectionPage
 {
-
-    public function example()
+    public function example(): Field
     {
         $tab    = '    ';
         $args   = $this->arguments();
@@ -39,5 +38,4 @@ class ReferenceHookPage extends ReflectionPage
             ]
         ]);
     }
-
 }

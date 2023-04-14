@@ -6,7 +6,6 @@ use Kirby\Reference\ReflectionPage;
 
 class ReferenceValidatorPage extends ReflectionPage
 {
-
     public function call(): string
     {
         return 'V::' . parent::call();
@@ -35,5 +34,4 @@ class ReferenceValidatorPage extends ReflectionPage
     {
         return new ReflectionFunction(V::$validators[$this->name()]);
     }
-
 }

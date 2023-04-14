@@ -2,18 +2,19 @@
 
 use Kirby\Cms\Field;
 use Kirby\Reference\ReflectionPage;
+use Kirby\Toolkit\Str;
 
 class ReferenceHelperPage extends ReflectionPage
 {
-
     public function exists(): bool
     {
         return function_exists($this->slug());
     }
-    
-    public static function findByName(string $name): ?ReferenceHelperPage
+
+    public static function findByName(string $name): ReferenceHelperPage|null
     {
-        return page('docs/reference/templates/helpers')->find(Str::kebab($name));
+        $helpers = page('docs/reference/templates/helpers');
+        return $helpers->find(Str::kebab($name));
     }
     public function metadata(): array
     {
@@ -34,9 +35,9 @@ class ReferenceHelperPage extends ReflectionPage
         return parent::title()->value($this->name() . '()');
     }
 
-    protected function _reflection()
+    protected function _reflection(): ReflectionFunction
     {
         return new ReflectionFunction($this->slug());
     }
-    
+
 }

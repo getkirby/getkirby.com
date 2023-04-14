@@ -7,7 +7,6 @@ use Kirby\Reference\SectionPage;
 
 class ReferenceValidatorsPage extends SectionPage
 {
-
     public function children(): Pages
     {
         if ($this->children !== null) {
@@ -42,5 +41,4 @@ class ReferenceValidatorsPage extends SectionPage
 
         return $this->children = Pages::factory($children, $this);
     }
-
 }

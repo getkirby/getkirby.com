@@ -2,10 +2,10 @@
 
 use Kirby\Cms\Field;
 use Kirby\Cms\Page;
+use Kirby\Toolkit\Str;
 
 class SecurityPage extends Page
 {
-
     public function incidents()
     {
         return parent::incidents()->toStructure()->flip();
@@ -13,7 +13,9 @@ class SecurityPage extends Page
 
     public function incidentsTable()
     {
-        return snippet('templates/security/incidents', ['incidents' => $this->incidents()], true);
+        return snippet('templates/security/incidents', [
+            'incidents' => $this->incidents()
+        ], true);
     }
 
     public function messages()
@@ -23,7 +25,9 @@ class SecurityPage extends Page
 
     public function messagesTable()
     {
-        return snippet('templates/security/messages', ['messages' => $this->messages()], true);
+        return snippet('templates/security/messages', [
+            'messages' => $this->messages()
+        ], true);
     }
 
     protected function replace(Field $field, array $data = [])
@@ -67,7 +71,9 @@ class SecurityPage extends Page
 
     public function versionsTable()
     {
-        return snippet('templates/security/versions', ['versions' => $this->versions()], true);
+        return snippet('templates/security/versions', [
+            'versions' => $this->versions()
+        ], true);
     }
 
     public function text()
@@ -78,5 +84,4 @@ class SecurityPage extends Page
             'versions'  => $this->versionsTable()
         ]);
     }
-
 }

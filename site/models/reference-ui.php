@@ -1,12 +1,10 @@
 <?php
 
-use Kirby\Cms\App;
 use Kirby\Cms\Field;
 use Kirby\Reference\ReflectionPage;
 
 class ReferenceUiPage extends ReflectionPage
 {
-
     public function intro(): Field
     {
         return parent::intro()->value(html('<k-' . $this->slug() . '>'));
@@ -32,5 +30,4 @@ class ReferenceUiPage extends ReflectionPage
     {
         return parent::onGithub('panel/' . $this->source());
     }
-
 }
