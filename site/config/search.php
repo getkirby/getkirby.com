@@ -14,10 +14,10 @@ return [
     'algolia' => [
         'app'   => 'S7OGBIAJTV',
         'key'   => $key,
-        'index' => 'getkirby-3',
+        'index' => 'sandbox',
         'fields' => [
             'title' =>
-                fn ($page) => $page->searchtitle()->or($page->title()),
+                fn ($page) => strip_tags($page->searchtitle()->or($page->title())),
             'byline' =>
                 fn ($page) => strip_tags($page->searchbyline()->kti()),
             'intro' => function ($page) {
