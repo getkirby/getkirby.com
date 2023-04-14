@@ -85,8 +85,10 @@
 }
 
 .search-area[data-area] {
+  --area-color: var(--color-light);
+
   padding: var(--spacing-1) var(--spacing-2);
-  background: var(--area-color, --color-light);
+  background: var(--area-color);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   border-radius: var(--rounded-sm);
