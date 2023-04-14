@@ -16,8 +16,7 @@ return [
         'key'   => $key,
         'index' => 'getkirby-3',
         'fields' => [
-            'title' =>
-                fn ($page) => strip_tags($page->searchtitle()->or($page->title())),
+            'title',
             'byline' =>
                 fn ($page) => strip_tags($page->searchbyline()->kti()),
             'intro' => function ($page) {
