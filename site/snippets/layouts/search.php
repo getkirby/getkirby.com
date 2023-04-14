@@ -57,11 +57,14 @@ form[data-fetching] .search-input figure svg:first-child {
       <div class="search-results">
         <ul></ul>
         <template>
-          <li>
-            <a class="leading-tight" href="">
-              <strong class="search-title text-sm"></strong>
-              <span class="search-area" data-area=""></span>
-              <span class="text-xs search-link font-mono color-gray-500"></span>
+          <li class="search-result">
+            <a class="leading-snug" href="">
+              <div>
+                <h3 class="search-title font-bold text-sm"></h3>
+                <div class="search-blurb text-xs color-gray-700"></div>
+                <div class="search-link text-xs font-mono color-gray-500"></div>
+              </div>
+              <div class="search-area" data-area=""></div>
             </a>
           </li>
         </template>

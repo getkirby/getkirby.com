@@ -1,6 +1,11 @@
 Title: Fields
 
 ----
+
+Blurb: Create custom Panel fields
+
+----
+
 Text:
 
 ## What makes a field plugin?

@@ -111,6 +111,8 @@ export default class {
 
       const label = node.querySelector(".search-title");
       label.innerHTML = result.title;
+      const blurb = node.querySelector(".search-blurb");
+      blurb.innerHTML = result.blurb ?? result.intro;
       const info = node.querySelector(".search-link");
       info.innerText = result.objectID;
 
@@ -174,11 +176,13 @@ export default class {
 
   onKey(e) {
     if (e.key === "Escape") {
-      this.onEscape();
-    } else if (e.key === "ArrowDown") {
-      this.onArrowDown(e);
-    } else if (e.key === "ArrowUp") {
-      this.onArrowUp(e);
+      return this.onEscape();
+    }
+    if (e.key === "ArrowDown") {
+      return this.onArrowDown(e);
+    }
+    if (e.key === "ArrowUp") {
+      return this.onArrowUp(e);
     }
   }
 

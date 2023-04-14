@@ -52,6 +52,7 @@
 
   <article class="search-results-page" style="--span: 3">
 
+    <!-- No query: suggestions -->
     <?php if (empty($query)): ?>
     <h2 class="h1 mb-12">Suggestions …</h2>
     <div class="prose">
@@ -62,20 +63,28 @@
         <li><a href="<?= u('search') ?>?q=fields">Panel fields</a></li>
       </ul>
     </div>
-    <?php else: ?>
 
-    <h1 class="h1 mb-12"><?= $pagination->total() ?> Results</h1>
+    <!-- Query results -->
+    <?php else: ?>
+    <h1 class="h1 mb-12"><?= $pagination->total() ?> results</h1>
 
     <?php if ($pagination->total() === 0): ?>
     <p class="h2 max-w-xl mb-3">We couldn't find what you are looking for 😔<p>
     <?php else: ?>
     <ul class="search-results mb-6">
       <?php foreach ($results as $result): ?>
-      <li>
-        <a class="leading-tight" href="<?= url($result->objectID()) ?>">
-          <h2 class="font-bold"><?= $result->title() ?></h2>
-          <small class="search-area" data-area="<?= $result->area() ?>"><?= $areas[$result->area()] ?? '' ?></small>
-          <small class="text-xs font-mono color-gray-700"><?= $result->objectID() ?></small>
+      <li class="search-result">
+        <a class="leading-snug" href="<?= url($result->objectID()) ?>">
+          <div>
+            <h2 class="font-bold"><?= $result->title() ?></h2>
+            <div class="search-blurb text-xs color-gray-700">
+              <?= $result->blurb() ?? $result->intro() ?>
+            </div>
+            <div class="search-link text-xs font-mono color-gray-500">
+              <?= $result->objectID() ?>
+            </div>
+          </div>
+          <div class="search-area" data-area="<?= $result->area() ?>"><?= $areas[$result->area()] ?? '' ?></div>
         </a>
       </li>
       <?php endforeach ?>

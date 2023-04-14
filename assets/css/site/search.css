@@ -86,7 +86,7 @@
 
 .search-area[data-area] {
   padding: var(--spacing-1) var(--spacing-2);
-  background: var(--color-light);
+  background: var(--area-color, --color-light);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   border-radius: var(--rounded-sm);
@@ -95,25 +95,25 @@
   visibility: hidden;
 }
 .search-area[data-area="guide"] {
-  background: var(--color-yellow-400);
+  --area-color: var(--color-yellow-400);
 }
 .search-area[data-area="reference"] {
-  background: var(--color-blue-400);
+  --area-color: var(--color-blue-400);
 }
 .search-area[data-area="cookbook"] {
-  background: var(--color-purple-400);
+  --area-color: var(--color-purple-400);
 }
 .search-area[data-area="plugin"] {
-  background: var(--color-aqua-400);
+  --area-color: var(--color-aqua-400);
 }
 .search-area[data-area="kosmos"] {
-  background: var(--color-red-400);
+  --area-color: var(--color-red-400);
 }
 
-.search-results li {
+.search-result {
   border-bottom: 1px solid var(--color-light);
 }
-.search-results li a {
+.search-result a {
   display: grid;
   grid-column-gap: var(--spacing-6);
   grid-template-columns: minmax(0, 4fr) 1fr;
@@ -123,11 +123,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.search-results li a .search-area {
+.search-result .search-area {
   justify-self: end;
 }
-.search-results li a small {
-  display: block;
+.search-result div {
   min-width: 0;
   max-width: 100%;
   white-space: nowrap;
@@ -152,7 +151,7 @@
   margin-left: .75rem;
 }
 
-.search-results li:focus-within,
+.search-result:focus-within,
 .search-more:focus-within {
   outline: solid;
   outline: 5px auto -webkit-focus-ring-color;
