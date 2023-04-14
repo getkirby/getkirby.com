@@ -131,10 +131,10 @@ class Entry
             $data[$name] = match (true) {
                 // custom function
                 is_callable($method)
-                    => (string)$method($this->page),
+                    => $method($this->page),
                 // field method with/without parameters
                 is_string($method) || is_array($method)
-                    => (string)$this->toDataFromFieldMethod($name, $method),
+                    => $this->toDataFromFieldMethod($name, $method),
                 // no or invalid operation, convert to string
                 default
                     => (string)$this->page->$name()
