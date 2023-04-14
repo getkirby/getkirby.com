@@ -159,17 +159,15 @@ class ReferenceClassPage extends SectionPage
 
     public function name(bool $short = false): string
     {
-        if ($short === true) {
-            // prefer content field `name`
-            if ($this->content()->has('name')) {
-                return $this->content()->get('name')->value();
-            }
-
-            return $this->reflection()->getShortName();
+        if ($short !== true) {
+            // get class name as defined in content file
+            return $this->class()->value() ?? 'Kirby\Toolkit\A';
         }
 
-        // get class name as defined in content file
-        return $this->class()->value();
+        // prefer content field `name`
+        return
+            $this->content()->get('name')->value() ??
+            $this->reflection()->getShortName();
     }
 
     public function properties(): array

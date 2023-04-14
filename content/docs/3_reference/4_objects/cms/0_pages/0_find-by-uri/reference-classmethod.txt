@@ -1,7 +1,0 @@
-Text: 
-
-## Example
-
-```php
-<?= $page->children()->findByURI('some-page')->title() ?>
-```

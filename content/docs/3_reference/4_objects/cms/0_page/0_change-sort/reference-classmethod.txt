@@ -9,7 +9,7 @@ Text:
 ```php
 try {
 
-  page('invisible-page')->sort(12);
+  page('invisible-page')->changeSort(12);
   echo 'The page is now visible and has the sorting number 12';
 
 } catch(Exception $e) {
@@ -19,8 +19,3 @@ try {
 }
 
 ```
-
-
-## No parameter
-
-If the parameter `$num` is not specified, the result of `$page->num() will be returned instead.

@@ -11,12 +11,12 @@ class ReferenceComponentPage extends ReflectionPage
     {
         static::$components ??= require $this->kirby()->root('kirby') . '/config/components.php';
 
-        return static::$components[$this->name()] ?? false;
+        return static::$components[$this->name()] ?? null;
     }
 
     public function exists(): bool
     {
-        return $this->component() !== false;
+        return $this->component() !== null;
     }
 
     public function metadata(): array

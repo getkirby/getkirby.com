@@ -1,9 +1,0 @@
-Text: 
-
-## Example
-
-```php
-if($file = $page->file()) {
-    echo $file->extension();
-}
-```
