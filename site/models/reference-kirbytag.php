@@ -1,7 +1,6 @@
 <?php
 
 use Kirby\Cms\Field;
-use Kirby\Text\KirbyTag;
 use Kirby\Reference\ReflectionPage;
 
 class ReferenceKirbytagPage extends ReflectionPage
@@ -16,7 +15,6 @@ class ReferenceKirbytagPage extends ReflectionPage
     {
         return $this->tag() !== null;
     }
-
 
     public function line(): int|null
     {
