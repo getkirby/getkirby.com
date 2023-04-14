@@ -16,10 +16,15 @@ return [
         'key'   => $key,
         'index' => 'getkirby-3',
         'fields' => [
-            'title' => fn ($page) => $page->searchtitle()->or($page->title()),
-            'blurb' => fn ($page) => $page->searchblurb(),
-            'intro' => fn ($page) => strip_tags($page->description()->or($page->intro())->kti()),
-            'area' => function ($page) {
+            'title' =>
+                fn ($page): string => $page->searchtitle()->or($page->title()),
+            'blurb' =>
+                fn ($page): string => $page->searchblurb(),
+            'intro' => function ($page): string {
+                $html = $page->description()->or($page->intro())->kti();
+                return strip_tags($html);
+            },
+            'area' => function ($page): string {
                 if (Str::startsWith($page->id(), 'docs/reference') === true) {
                     return 'reference';
                 }
