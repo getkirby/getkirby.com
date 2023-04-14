@@ -277,7 +277,7 @@ class ReferenceClassPage extends SectionPage
 
     public function searchtitle(): Field
     {
-        return parent::searchtitle('Class <code>' . $this->class() . '</code>');
+        return parent::searchtitle()->value('Class <code>' . $this->class() . '</code>');
     }
 
     public function title(): Field
