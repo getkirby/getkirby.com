@@ -4,19 +4,12 @@ namespace Newstroll;
 
 class Groups
 {
-    public Newstroll $client;
-
-    public function __construct(Newstroll $client)
+    public function __construct(public Newstroll $client)
     {
-        $this->client = $client;
     }
 
-    public function list(
-        string $title = null
-    ): array
+    public function list(string $title = null): array
     {
-        return $this->client->get('group', [
-            'title' => $title
-        ]);
+        return $this->client->get('group', ['title' => $title]);
     }
 }

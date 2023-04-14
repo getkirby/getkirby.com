@@ -3,20 +3,17 @@
 namespace Newstroll;
 
 use Exception;
-use Kirby\Exception\NotFoundException;
 use Kirby\Http\Remote;
 
 class Newstroll
 {
     public string $url = 'https://api.newstroll.de';
-    public string $key;
 
-    public function __construct(string $key)
+    public function __construct(public string $key)
     {
-        $this->key = $key;
     }
 
-    public function delete(string $path, array $data = []): ?array
+    public function delete(string $path, array $data = []): array|null
     {
         return $this->request($path, [
             'method' => 'DELETE',
@@ -27,15 +24,13 @@ class Newstroll
     public function get(string $path, array $data = []): array
     {
         if (empty($data) === false) {
-            $path = $path . '?' . http_build_query($data);
+            $path .= '?' . http_build_query($data);
         }
 
-        return $this->request($path, [
-            'method' => 'GET',
-        ]);
+        return $this->request($path, ['method' => 'GET',]);
     }
 
-    public function groups()
+    public function groups(): Groups
     {
         return new Groups($this);
     }
@@ -56,11 +51,11 @@ class Newstroll
         ]);
     }
 
-    public function request(string $path, array $params = []): ?array
+    public function request(string $path, array $params = []): array|null
     {
         $response = Remote::request($this->url . '/' . $path, array_merge(
             [
-                'ca' => Remote::CA_SYSTEM,
+                'ca'      => Remote::CA_SYSTEM,
                 'headers' => [
                     'Authorization: Bearer ' . $this->key
                 ]
@@ -80,7 +75,7 @@ class Newstroll
         return $response->json();
     }
 
-    public function subscriptions()
+    public function subscriptions(): Subscriptions
     {
         return new Subscriptions($this);
     }

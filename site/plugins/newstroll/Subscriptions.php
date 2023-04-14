@@ -4,11 +4,8 @@ namespace Newstroll;
 
 class Subscriptions
 {
-    public Newstroll $client;
-
-    public function __construct(Newstroll $client)
+    public function __construct(public Newstroll $client)
     {
-        $this->client = $client;
     }
 
     public function create(
@@ -17,8 +14,7 @@ class Subscriptions
         string $status = 'pending',
         array $personalizations = [],
         bool $sendMail = true
-    ): array
-    {
+    ): array {
         return $this->client->post('subscription', array_merge($personalizations, [
             'email'     => $email,
             'groups_id' => $group,
@@ -27,7 +23,7 @@ class Subscriptions
         ]));
     }
 
-    public function delete(string $id): ?array
+    public function delete(string $id): array|null
     {
         return $this->client->delete('subscription/' . $id);
     }
@@ -43,8 +39,7 @@ class Subscriptions
         string $status = null,
         int $group = null,
         string $email = null
-    ): array
-    {
+    ): array {
         return $this->client->get('subscription', [
             'offset'    => $offset,
             'limit'     => $limit,
@@ -59,8 +54,7 @@ class Subscriptions
         string $status = null,
         array $personalizations = [],
         string $surname = null
-    ): array
-    {
+    ): array  {
         return $this->client->put('subscription/' . $id, array_merge($personalizations, [
             'status'  => $status,
             'surname' => $surname
