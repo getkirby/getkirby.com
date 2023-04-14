@@ -75,7 +75,7 @@ export default class {
   async fetch(q) {
     const params = {
       q,
-      limit: 5,
+      limit: 7,
     };
 
     if (this.$area.value !== "all") {
