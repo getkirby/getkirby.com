@@ -2,7 +2,7 @@ Title: Fields
 
 ----
 
-Blurb: Create custom Panel fields
+Searchblurb: Create custom Panel fields
 
 ----
 

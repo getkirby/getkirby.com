@@ -275,6 +275,11 @@ class ReferenceClassPage extends SectionPage
         return parent::onGitHub('src/' . $path . '.php');
     }
 
+    public function searchtitle(): string
+    {
+        return 'Class <code>' . $this->class() . '</code>';
+    }
+
     public function title(): Field
     {
         if ($this->content()->has('title')) {
