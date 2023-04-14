@@ -6,15 +6,14 @@ use Kirby\Toolkit\Obj;
  * Returns the currently active banner or
  * `null` if none is active;
  * sets the cache expiry appropriately
- *
- * @return \Kirby\Toolkit\Obj|null
  */
-function banner(): ?Obj {
+function banner(): Obj|null {
     $banners = option('banners', []);
 
     // grab the first active configured banner
     // checked from top to bottom
     $banner = $expires = null;
+
     foreach ($banners as $candidate) {
         // normalize the dates to timestamps
         if (is_string($candidate['startDate'] ?? null) === true) {

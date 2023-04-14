@@ -2,6 +2,7 @@
 
 use Kirby\Cms\Field;
 use Kirby\Reference\ReflectionPage;
+use Kirby\Template\Template;
 
 class ReferenceRootPage extends ReflectionPage
 {
@@ -26,7 +27,7 @@ class ReferenceRootPage extends ReflectionPage
         return str_replace('{{ root }}', $this->slug(), $text);
     }
 
-    public function template()
+    public function template(): Template
     {
         return $this->kirby()->template('reference-system');
     }

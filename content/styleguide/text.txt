@@ -80,7 +80,7 @@ We went one step further to also highlight and link method calls: for class meth
 This works either by parsing normal inline code:
 ```kirbytext
 Check out `$page->url()`.
-Or even `Kirby\Toolkit\F::exists()`
+Or even `Kirby\Filesystem\F::exists()`
 ```
 
 As you can see, (link: /docs/reference/objects/aliases text: class aliases) can be used in their short form. All other classes require fully-qualified names including namespace.
@@ -88,11 +88,11 @@ As you can see, (link: /docs/reference/objects/aliases text: class aliases) can 
 Since that might look a little odd, we have added some Kirbytags:
 
 ```kirbytext
-Check out &lpar;class: Kirby\Toolkit\F method: exists text: ->exists()).
-And then &lpar;method: Kirby\Toolkit\F::size text: $myFile->size()).
+Check out &lpar;class: Kirby\Filesystem\F method: exists text: ->exists()).
+And then &lpar;method: Kirby\Filesystem\F::size text: $myFile->size()).
 ```
 
-And it does work: (class: Kirby\Toolkit\F method: exists text: ->exists()) and (method: Kirby\Toolkit\F::size text: $myFile->size()).
+And it does work: (class: Kirby\Filesystem\F method: exists text: ->exists()) and (method: Kirby\Filesystem\F::size text: $myFile->size()).
 
 ### Headlines
 

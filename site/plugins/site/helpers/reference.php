@@ -4,7 +4,7 @@ use Kirby\Cms\Field;
 
 function csv(string $file): array
 {
-    $lines = file($file);
+    $lines    = file($file);
     $lines[0] = str_replace("\xEF\xBB\xBF", '', $lines[0]);
 
     $csv = array_map('str_getcsv', $lines);
@@ -23,7 +23,7 @@ function field($value): Field {
         return page()->customField();
     }
 
-    if (is_a($value, 'Kirby\Cms\Field') === false) {
+    if ($value instanceof Field === false) {
         $value = page()->customField()->value($value);
     }
 

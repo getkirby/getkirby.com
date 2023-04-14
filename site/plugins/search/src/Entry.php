@@ -70,11 +70,11 @@ class Entry
      */
     public function isIndexable(): bool
     {
-        if (method_exists($this->page, 'isSearchable') === true) {
-            if ($this->page->isSearchable() === false) {
-                return false;
-            }
-        }
+        // if (method_exists($this->page, 'isSearchable') === true) {
+        //     if ($this->page->isSearchable() === false) {
+        //         return false;
+        //     }
+        // }
 
         $templates = $this->templates();
         $template  = $this->template();

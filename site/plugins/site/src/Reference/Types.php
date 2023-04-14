@@ -17,16 +17,13 @@ class Types
 
     /**
      * Returns the proper CSS classes for type
-     *
-     * @param string $type
-     * @return string
      */
     public static function class(string $type): string
     {
         return 'type type-' . $type;
     }
 
-    public static function default(?string $value = null): string
+    public static function default(string $value = null): string
     {
         if ($value !== null) {
             return static::format($value);
@@ -57,12 +54,11 @@ class Types
     /**
      * Parses the string and tries to find and return a matching
      * reference page for the class, class method, field method or helper
-     *
-     * @param string $string
-     * @return ReferenceClassPage|ReferenceClassMethodPage|ReferenceFieldMethodPage|null
+
      */
-    public static function findReferencePage(string $string): ?Page
-    {
+    public static function findReferencePage(
+        string $string
+    ): ReferenceClassPage|ReferenceClassMethodPage|ReferenceFieldMethodPage|null {
         //:: or -> separating class and method
         $chain  = preg_split('/::|->/', $string);
         $class  = array_shift($chain);
@@ -88,14 +84,13 @@ class Types
             }
 
             // Clean up method names
-            $methods = array_map(function ($method) {
-                return preg_replace('/\(.*\)$/', '', $method);
-            }, $chain);
+            $methods = array_map(
+                fn ($method) => preg_replace('/\(.*\)$/', '', $method),
+                $chain
+            );
 
             // If method page can be found by chain, return that page
-            if ($page = ReferenceClassMethodPage::findByNames($page, $methods)) {
-                return $page;
-            }
+            return ReferenceClassMethodPage::findByNames($page, $methods);
         }
 
         return null;
@@ -106,13 +101,14 @@ class Types
      * matching CSS classes. Also links to Reference for classes or
      * class methods. Supports multiple types separated by | as well.
      *
-     * @param string|null $type
      * @param bool $withLink should the tag be linked (if possible) or not
      * @param string $text label text to use instead type
-     * @return string
      */
-    public static function format(?string $type = null, bool $withLink = true, ?string $text = null): string
-    {
+    public static function format(
+        string|null $type = null,
+        bool $withLink = true,
+        string|null $text = null
+    ): string {
         if($type === null || $type === '') {
             return '';
         }
@@ -141,9 +137,10 @@ class Types
                 return "<code>{$type}</code>";
             }
 
-            $types = array_map(function ($t) use ($withLink) {
-                return static::format($t, $withLink);
-            }, $types);
+            $types = array_map(
+                fn ($t) => static::format($t, $withLink),
+                $types
+            );
 
             return implode('<span class="px-1">|</span>', $types);
         }
@@ -187,7 +184,7 @@ class Types
             // Check if reference page for Kirby class
             // or class method exists
             if ($page = static::findReferencePage($type)) {
-                $class = is_a($page, ReferenceClassPage::class) === true ? 'object' : 'method';
+                $class = $page instanceof ReferenceClassPage ? 'object' : 'method';
                 $tag = static::tag($text, $class);
 
                 if ($withLink === true) {
@@ -217,9 +214,6 @@ class Types
 
     /**
      * Extracts variable and type from parameter definition
-     *
-     * @param string $parameter
-     * @return array
      */
     public static function parameter(string $parameter): array
     {
@@ -233,11 +227,8 @@ class Types
 
     /**
      * Returns required asteriks markup if required flag is true
-     *
-     * @param boolean $required
-     * @return string|null
      */
-    public static function required(bool $required): ?string
+    public static function required(bool $required): string|null
     {
         if ($required === true) {
             return '<span class="required-mark">*</span>';
@@ -248,12 +239,8 @@ class Types
 
     /**
      * Wraps the type string in code tag with matching CSS classes
-     *
-     * @param string $type
-     * @param string|null $class
-     * @return string
      */
-    public static function tag(string $type, ?string $class = null): string
+    public static function tag(string $type, string $class = null): string
     {
         return Html::tag('code', $type, [
             'class' => $class ? static::class($class) : null,

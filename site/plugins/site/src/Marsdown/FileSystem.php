@@ -2,7 +2,7 @@
 
 namespace Kirby\Marsdown;
 
-use Kirby\Toolkit\F;
+use Kirby\Filesystem\F;
 use Kirby\Toolkit\Str;
 
 class FileSystem
@@ -10,7 +10,7 @@ class FileSystem
     /**
      * File System Icons
      */
-    public static $types = [
+    public static array $types = [
         'readme'     => '/^(readme|license)\.?/i',
         'javascript' => ['js'],
         'css'        => ['css'],
@@ -25,7 +25,7 @@ class FileSystem
         'text'       => ['txt'],
     ];
 
-    protected static function getIconByFilename($filename): ?string
+    protected static function getIconByFilename(string $filename): string|null
     {
         if (in_array($filename, ['...', '…'])) {
             return null;
@@ -52,13 +52,13 @@ class FileSystem
         return $icon ?? 'file';
     }
 
-    public static function parse($text): string
+    public static function parse(mixed $text): string
     {
         return static::renderBlock(static::parseBlock($text));
     }
 
     // Source: http://stackoverflow.com/a/8882181
-    protected static function parseBlock($text): array
+    protected static function parseBlock(string $text): array
     {
 
         $indentation = '  ';
@@ -112,7 +112,7 @@ class FileSystem
         return $html;
     }
 
-    protected static function renderBlock($files, $level = 0): string
+    protected static function renderBlock(array $files, int $level = 0): string
     {
         $html = '<ul>';
 

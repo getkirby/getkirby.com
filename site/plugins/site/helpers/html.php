@@ -1,11 +1,14 @@
 <?php
 
+use Kirby\Toolkit\Html;
+use Kirby\Toolkit\Xml;
+
 function ariaCurrent(bool $condition, $type = true, string $prefix = ' ')
 {
     return $condition ? $prefix . attr(['aria-current' => $type]) : null;
 }
 
-function icon($name)
+function icon(string $name)
 {
     return svg('assets/icons/' . $name . '.svg');
 }
@@ -57,7 +60,7 @@ function img($file, array $props = [])
     return $img;
 }
 
-function json(array $data, bool $pretty = true) {
+function json(array $data, bool $pretty = true): string|false {
     if ($pretty === true) {
         return json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }

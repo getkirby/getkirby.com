@@ -5,9 +5,8 @@ namespace Kirby\Meta;
 use Kirby\Cms\Asset;
 use Kirby\Cms\Field;
 use Kirby\Cms\File;
+use Kirby\Filesystem\F;
 use Kirby\Http\Response;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\F;
 use Kirby\Toolkit\Html;
 use Kirby\Toolkit\Tpl;
 

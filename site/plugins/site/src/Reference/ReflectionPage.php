@@ -6,21 +6,21 @@ use Kirby\Cms\App;
 use Kirby\Cms\Field;
 use Kirby\Cms\Page;
 use Kirby\Reference\Types;
+use Kirby\Template\Template;
 use ReflectionUnionType;
+use Throwable;
 
 abstract class ReflectionPage extends Page
 {
 
-    protected $docBlock;
-    protected $parameters;
+    protected DocBlock|false $docBlock;
+    protected array $parameters;
     protected $reflection;
-    protected $returns = false;
-    protected $throws;
+    protected string|false|null $returns = false;
+    protected array $throws;
 
     /**
      * Returns how this entry would be called in code
-     *
-     * @return string
      */
     public function call(): string
     {
@@ -42,16 +42,12 @@ abstract class ReflectionPage extends Page
 
     /**
      * Returns deprecation information
-     *
-     * @return \Kirby\Cms\Field
      */
     public function deprecated(): Field
     {
-        if ($docBlock = $this->docBlock()) {
-            if ($tag = $docBlock->getTag('deprecated')) {
-                $value = $tag->getVersion() . '|' . $tag->getDescription();
-                return new Field($this, 'deprecated', $value);
-            }
+        if ($tag = $this->docBlock()?->getTag('deprecated')) {
+            $value = $tag->getVersion() . '|' . $tag->getDescription();
+            return new Field($this, 'deprecated', $value);
         }
 
         return parent::deprecated();
@@ -59,10 +55,8 @@ abstract class ReflectionPage extends Page
 
     /**
      * Gets the DocBlock information
-     *
-     * @return \Kirby\Reference\DocBlock|bool
      */
-    public function docBlock()
+    public function docBlock(): DocBlock|false
     {
         if ($this->docBlock !== null) {
             return $this->docBlock;
@@ -71,7 +65,7 @@ abstract class ReflectionPage extends Page
         if ($reflection = $this->reflection()) {
             try {
                 return $this->docBlock = new DocBlock($reflection->getDocComment());
-            } catch (Throwable $e) {
+            } catch (Throwable) {
                 return $this->docBlock = false;
             }
         }
@@ -81,13 +75,9 @@ abstract class ReflectionPage extends Page
 
     /**
      * Returns an intro description
-     *
-     * @return \Kirby\Cms\Field
      */
     public function intro(): Field
     {
-        $intro = null;
-
         // prefer intro defined in content file
         if ($this->content()->has('intro')) {
             return $this->content()->get('intro');
@@ -103,13 +93,11 @@ abstract class ReflectionPage extends Page
             }
         }
 
-        return new Field($this, 'intro', $intro);
+        return new Field($this, 'intro', $intro ?? null);
     }
 
     /**
      * Check if this has been deprecated
-     *
-     * @return boolean
      */
     public function isDeprecated(): bool
     {
@@ -118,16 +106,10 @@ abstract class ReflectionPage extends Page
 
     /**
      * Check if this is marked as internal
-     *
-     * @return boolean
      */
     public function isInternal(): bool
     {
-        if ($docBlock = $this->docBlock()) {
-            return is_null($docBlock->getTag('internal')) === false;
-        }
-
-        return false;
+        return is_null($this->docBlock()?->getTag('internal')) === false;
     }
 
     public function isMutable(): bool
@@ -143,16 +125,10 @@ abstract class ReflectionPage extends Page
 
     /**
      * Gets the line number where this starts in the code
-     *
-     * @return int|null
      */
-    public function line(): ?int
+    public function line(): int|null
     {
-        if ($reflection = $this->reflection()) {
-            return $reflection->getStartLine();
-        }
-
-        return null;
+        return $this->reflection()?->getStartLine();
     }
 
     public function metadata(): array
@@ -167,20 +143,18 @@ abstract class ReflectionPage extends Page
 
     /**
      * Get the name of this entry
-     *
-     * @return string
      */
     public function name(): string
     {
-        return preg_replace_callback('!-([a-z])!', function ($matches) {
-            return strtoupper($matches[1]);
-        }, $this->slug());
+        return preg_replace_callback(
+            '!-([a-z])!',
+            fn ($matches) => strtoupper($matches[1]),
+            $this->slug()
+        );
     }
 
     /**
      * Returns URL to the code on GitHub
-     *
-     * @return \Kirby\Cms\Field
      */
     public function onGitHub(string $path = ''): Field
     {
@@ -199,8 +173,6 @@ abstract class ReflectionPage extends Page
 
     /**
      * Returns an array with all parameter info
-     *
-     * @return array
      */
     public function parameters(): array
     {
@@ -267,7 +239,7 @@ abstract class ReflectionPage extends Page
      */
     protected function reflection()
     {
-        return $this->reflection = $this->reflection ?? $this->_reflection();
+        return $this->reflection ??= $this->_reflection();
     }
 
     protected function _reflection()
@@ -325,10 +297,8 @@ abstract class ReflectionPage extends Page
 
     /**
      * Returns a string of all return types
-     *
-     * @return string|null
      */
-    public function returnType(): ?string
+    public function returnType(): string|null
     {
         if ($return = $this->returns()) {
             return Types::factory($return, $this);
@@ -339,16 +309,12 @@ abstract class ReflectionPage extends Page
 
     /**
      * Returns in which version this entry was introduced
-     *
-     * @return \Kirby\Cms\Field
      */
     public function since(): Field
     {
-        if ($docBlock = $this->docBlock()) {
-            if ($tag = $docBlock->getTag('since')) {
-                $since = $tag->getVersion();
-                return new Field($this, 'since', $since ?? null);
-            }
+        if ($tag = $this->docBlock()?->getTag('since')) {
+            $since = $tag->getVersion();
+            return new Field($this, 'since', $since ?? null);
         }
 
         return parent::since();
@@ -357,10 +323,8 @@ abstract class ReflectionPage extends Page
     /**
      * If a dedicated template exist, use it.
      * Otherwise fall back to `reference-article` template.
-     *
-     * @return \Kirby\Cms\Template
      */
-    public function template()
+    public function template(): Template
     {
         // If template exists, use it
         if ($this->intendedTemplate() === parent::template()) {
@@ -372,8 +336,6 @@ abstract class ReflectionPage extends Page
 
      /**
      * Returns what exceptions can be thrown by this
-     *
-     * @return array
      */
     public function throws(): array
     {

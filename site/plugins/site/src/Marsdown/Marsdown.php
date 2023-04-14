@@ -26,7 +26,7 @@ class Marsdown extends ParsedownExtra
         $this->setBreaksEnabled(true);
     }
 
-    protected function parseAttributes($input)
+    protected function parseAttributes(string $input): array
     {
         $dom = new DomDocument();
         $dom->loadHtml("<html " . $input . "/>");
@@ -37,7 +37,7 @@ class Marsdown extends ParsedownExtra
         return $attributes;
     }
 
-    protected function blockColumns($Line, $Block = null)
+    protected function blockColumns(array $Line, array $Block = null)
     {
         if ($Line['text'] !== '(columns…)') {
             return;
@@ -50,7 +50,7 @@ class Marsdown extends ParsedownExtra
         ];
     }
 
-    protected function blockColumnsContinue($Line, $Block)
+    protected function blockColumnsContinue(array $Line, array $Block)
     {
         if ($Block['complete'] ?? false) {
             return;
@@ -65,7 +65,7 @@ class Marsdown extends ParsedownExtra
         return $Block;
     }
 
-    protected function blockColumnsComplete($Block)
+    protected function blockColumnsComplete(array $Block): array
     {
         $columns = Str::split($Block['columns']['html'], '++++');
 
@@ -86,7 +86,7 @@ class Marsdown extends ParsedownExtra
     /**
      * Parse Kirby's text boxes
      */
-    protected function blockBox($Line, $Block = null)
+    protected function blockBox(array $Line, array $Block = null)
     {
         if (preg_match('!<(success|info|warning|alert|since)(.*?)>!', $Line['text'], $matches)) {
 
@@ -117,7 +117,7 @@ class Marsdown extends ParsedownExtra
     /**
      * Add lines to the boxes
      */
-    protected function blockBoxContinue($Line, $Block)
+    protected function blockBoxContinue(array $Line, array $Block)
     {
         if ($Block['complete'] ?? false) {
             return;

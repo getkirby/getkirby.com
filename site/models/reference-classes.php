@@ -2,7 +2,7 @@
 
 use Kirby\Cms\Pages;
 use Kirby\Data\Data;
-use Kirby\Toolkit\Dir;
+use Kirby\Filesystem\Dir;
 use Kirby\Toolkit\Str;
 use Kirby\Reference\SectionPage;
 

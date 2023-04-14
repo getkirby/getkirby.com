@@ -2,9 +2,7 @@
 
 use Kirby\Cms\Section;
 use Kirby\Form\Field;
-use Kirby\Toolkit\Html;
 use Kirby\Toolkit\Str;
-use Kirby\Toolkit\Tpl;
 use Kirby\Reference\DocBlock;
 use Kirby\Reference\Types;
 
@@ -107,8 +105,6 @@ $tags['properties'] = [
         'additional'
     ],
     'html' => function ($tag) {
-        $name = $tag->value ?? '$props';
-
         if ($tag->class) {
             $page = ReferenceClassPage::findByName($tag->class);
         } else {
