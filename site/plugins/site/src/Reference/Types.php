@@ -56,7 +56,7 @@ class Types
      */
     public static function findReferencePage(
         string $string
-    ): ReferenceClassPage|ReferenceClassMethodPage|ReferenceFieldMethodPage|null {
+    ): ReferenceClassPage|ReferenceClassMethodPage|ReferenceFieldMethodPage|ReferenceHelperPage|null {
         //:: or -> separating class and method
         $chain  = preg_split('/::|->/', $string);
         $class  = array_shift($chain);
