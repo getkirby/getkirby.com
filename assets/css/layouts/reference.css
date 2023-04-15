@@ -25,7 +25,8 @@ html {
 }
 .reference-panels {
   --sidebar: 12rem;
-  --entries: 18rem;
+  --entries: 16rem;
+
   display: flex;
   flex-grow: 1;
   overflow: hidden;
@@ -72,7 +73,7 @@ html {
 @media screen and (min-width: 85rem) {
   .reference-panels {
     --sidebar: 14rem;
-    --entries: 20rem;
+    --entries: 18rem;
   }
   .reference-content {
     --px: var(--spacing-24);
