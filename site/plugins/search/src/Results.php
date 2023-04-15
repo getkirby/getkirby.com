@@ -5,6 +5,7 @@ namespace Kirby\Search;
 use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\Obj;
 use Kirby\Cms\Pagination;
+use Kirby\Toolkit\A;
 
 /**
  * Kirby Search Results
@@ -18,10 +19,8 @@ class Results extends Collection
     static public function from(array $response): static
     {
         // Convert the hits to Obj objects
-        $results = new static(array_map(
-            fn ($hit) => new Obj($hit),
-            $response['hits']
-        ));
+        $hits    = A::map($response['hits'], fn ($hit) => new Obj($hit));
+        $results = new static($hits);
 
         $results->pagination = new Pagination([
             'page'  => ($response['page'] ?? 0) + 1,

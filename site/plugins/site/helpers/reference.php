@@ -19,13 +19,15 @@ function csv(string $file): array
 }
 
 function field($value): Field {
-    if ($value === null) {
-        return page()->customField();
+    if ($value instanceof Field) {
+        return $value;
     }
 
-    if ($value instanceof Field === false) {
-        $value = page()->customField()->value($value);
+    $field = page()->customField();
+
+    if ($value !== null) {
+        return $field->value($value);
     }
 
-    return $value;
+    return $field;
 }

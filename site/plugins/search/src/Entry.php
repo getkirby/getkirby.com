@@ -2,8 +2,6 @@
 
 namespace Kirby\Search;
 
-use Closure;
-use Kirby\Cms\App;
 use Kirby\Cms\Field;
 use Kirby\Cms\Page;
 
@@ -169,8 +167,6 @@ class Entry
             return $field->$method();
         }
 
-        $args   = array_slice($method, 1);
-        $method = $method[0];
-        return $field->$method(...$args);
+        return $field->$method[0](...array_slice($method, 1));
     }
 }

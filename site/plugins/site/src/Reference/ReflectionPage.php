@@ -27,19 +27,18 @@ abstract class ReflectionPage extends Page
      */
     public function call(): string
     {
-        if ($this->reflection() !== null) {
-            $parameters = array_column($this->parameters(), 'export');
-            $parameters = empty($parameters) ? '' : implode(', ', $parameters);
-            $call       = $this->name() . '(' . $parameters . ')';
-
-            if ($return = $this->returnType()) {
-                $call .= ': ' . $return;
-            }
-
-            return $call;
+        if ($this->reflection() === null) {
+            return $this->slug();
         }
 
-        return $this->slug();
+        $params = array_column($this->parameters(), 'export');
+        $call   = $this->name() . '(' . implode(', ', $params) . ')';
+
+        if ($return = $this->returnType()) {
+            $call .= ': ' . $return;
+        }
+
+        return $call;
     }
 
     /**
@@ -48,8 +47,9 @@ abstract class ReflectionPage extends Page
     public function deprecated(): Field
     {
         if ($tag = $this->docBlock()?->getTag('deprecated')) {
-            $value = $tag->getVersion() . '|' . $tag->getDescription();
-            return new Field($this, 'deprecated', $value);
+            return parent::deprecated()->value(
+                $tag->getVersion() . '|' . $tag->getDescription()
+            );
         }
 
         return parent::deprecated();
@@ -64,13 +64,12 @@ abstract class ReflectionPage extends Page
             return $this->docBlock;
         }
 
-        if ($reflection = $this->reflection()) {
-            try {
-                return $this->docBlock = new DocBlock($reflection->getDocComment());
-            } catch (Throwable) {}
+        try {
+            $comment = $this->reflection()?->getDocComment();
+            return $this->docBlock = new DocBlock($comment);
+        } catch (Throwable) {
+            return $this->docBlock = null;
         }
-
-        return $this->docBlock = null;
     }
 
     /**
@@ -85,8 +84,7 @@ abstract class ReflectionPage extends Page
 
         // otherwise try to get summary from DocBlock in code
         if ($docBlock = $this->docBlock()) {
-            $intro = trim($docBlock->getSummary());
-            $intro = str_replace(PHP_EOL, ' ', $intro);
+            $intro = str_replace(PHP_EOL, ' ', trim($docBlock->getSummary()));
 
             if ($intro === '/') {
                 $intro = null;
@@ -101,7 +99,7 @@ abstract class ReflectionPage extends Page
      */
     public function isDeprecated(): bool
     {
-        return $this->deprecated()->isNotEmpty() === true;
+        return $this->deprecated()->isNotEmpty();
     }
 
     /**
@@ -167,7 +165,6 @@ abstract class ReflectionPage extends Page
      */
     public function onGitHub(string $path = ''): Field
     {
-
         if (empty($path) === false) {
             $url  = option('github.url') . '/kirby/tree/' . App::version();
             $url .= '/' . $path;
@@ -191,50 +188,50 @@ abstract class ReflectionPage extends Page
 
         $reflection = $this->reflection();
 
-        if ($reflection instanceof ReflectionFunctionAbstract) {
-            return $this->parameters = A::map(
-                $reflection->getParameters(),
-                function ($parameter) {
-                    $name = $parameter->getName();
-                    $doc  = $this->docBlock()?->getParameter($name);
-
-                    if ($type = $parameter->getType()) {
-                        $type = $this->typeName($type);
-                    } elseif ($doc) {
-                        $type = (string)$doc->getType();
-                    }
-
-                    $param    = trim($type . ' $' . $name);
-                    $default  = null;
-                    $optional = false;
-
-                    if ($parameter->isOptional() === true) {
-                        if ($parameter->isDefaultValueAvailable()) {
-                            $default = $parameter->getDefaultValue();
-                            $default = var_export($default, true);
-                            $default = str_replace('NULL', 'null', $default);
-                            $default = str_replace('array (' . PHP_EOL . ')', '[ ]', $default);
-                        } else {
-                            $default = 'null';
-                        }
-
-                        $optional  = true;
-                        $param    .= ' = ' . $default;
-                    }
-
-                    return [
-                        'name'        => '$' . $name,
-                        'required'    => $optional === false,
-                        'type'        => Types::factory($type ?? 'mixed', $this),
-                        'default'     => $default,
-                        'description' => (string)$doc?->getDescription(),
-                        'export'      => $param
-                    ];
-                }
-            );
+        if ($reflection instanceof ReflectionFunctionAbstract === false) {
+            return $this->parameters = [];
         }
 
-        return $this->parameters = [];
+        return $this->parameters = A::map(
+            $reflection->getParameters(),
+            function ($parameter) {
+                $name = $parameter->getName();
+                $doc  = $this->docBlock()?->getParameter($name);
+
+                if ($type = $parameter->getType()) {
+                     $this->typeName($type);
+                } elseif ($doc) {
+                    $type = (string)$doc->getType();
+                }
+
+                $param    = trim($type . ' $' . $name);
+                $default  = null;
+                $optional = false;
+
+                if ($parameter->isOptional() === true) {
+                    if ($parameter->isDefaultValueAvailable()) {
+                        $default = $parameter->getDefaultValue();
+                        $default = var_export($default, true);
+                        $default = str_replace('NULL', 'null', $default);
+                        $default = str_replace('array (' . PHP_EOL . ')', '[ ]', $default);
+                    } else {
+                        $default = 'null';
+                    }
+
+                    $optional  = true;
+                    $param    .= ' = ' . $default;
+                }
+
+                return [
+                    'name'        => '$' . $name,
+                    'required'    => $optional === false,
+                    'type'        => Types::factory($type ?? 'mixed', $this),
+                    'default'     => $default,
+                    'description' => (string)$doc?->getDescription(),
+                    'export'      => $param
+                ];
+            }
+        );
     }
 
     /**
@@ -248,10 +245,10 @@ abstract class ReflectionPage extends Page
     public function typeName($type): string
     {
         if ($type instanceof ReflectionUnionType) {
-            return implode('|', A::map(
-                $type->getTypes(),
-                fn ($type) => $type->getName()
-            ));
+            return implode(
+                '|',
+                A::map($type->getTypes(), fn ($type) => $type->getName())
+            );
         }
 
         return $type->getName();
@@ -269,7 +266,6 @@ abstract class ReflectionPage extends Page
                 $reflection instanceof ReflectionFunctionAbstract &&
                 $reflection->hasReturnType() === true
             ) {
-
                 $type = $reflection->getReturnType();
                 $name = $this->typeName($type);
 
@@ -308,7 +304,7 @@ abstract class ReflectionPage extends Page
     public function since(): Field
     {
         if ($tag = $this->docBlock()?->getTag('since')) {
-            return new Field($this, 'since', $tag->getVersion());
+            return parent::since()->value($tag->getVersion());
         }
 
         return parent::since();
@@ -320,9 +316,11 @@ abstract class ReflectionPage extends Page
      */
     public function template(): Template
     {
+        $template = parent::template();
+
         // If template exists, use it
-        if ($this->intendedTemplate() === parent::template()) {
-            return parent::template();
+        if ($this->intendedTemplate() === $template) {
+            return $template;
         }
 
         return $this->kirby()->template('reference-article');

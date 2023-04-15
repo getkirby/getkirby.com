@@ -3,12 +3,15 @@
 use Kirby\Toolkit\Html;
 use Kirby\Toolkit\Xml;
 
-function ariaCurrent(bool $condition, $type = true, string $prefix = ' ')
-{
+function ariaCurrent(
+    bool $condition,
+    mixed  $type = true,
+    string $prefix = ' '
+): string|null {
     return $condition ? $prefix . attr(['aria-current' => $type]) : null;
 }
 
-function icon(string $name)
+function icon(string $name): string|false
 {
     return svg('assets/icons/' . $name . '.svg');
 }
@@ -23,28 +26,24 @@ function img($file, array $props = [])
         return;
     }
 
-    if (empty($props['src']) === true) {
-        $src = $file->url();
-    } else {
-        $src = $file->thumb($props['src'])->url();
-    }
+    $src = match (empty($props['src'])) {
+        true    => $file->url(),
+        default => $file->thumb($props['src'])->url()
+    };
 
-    if (empty($props['srcset']) === true) {
-        $srcset = null;
-    } else {
-        $srcset = $file->srcset($props['srcset']);
-    }
+    $srcset = match (empty($props['srcset'])) {
+        true    => null,
+        default => $file->srcset($props['srcset'])
+    };
 
     if (($props['lazy'] ?? true) === true) {
         $loading = 'lazy';
-    } else {
-        $loading = null;
     }
 
     $img = '<img ' . attr([
         'alt'     => $props['alt'] ?? ' ',
         'class'   => $props['class'] ?? null,
-        'loading' => $loading,
+        'loading' => $loading ?? null,
         'src'     => $src,
         'srcset'  => $srcset,
     ]) . '>';

@@ -2,7 +2,7 @@
 
 namespace Kirby\Reference;
 
-use Kirby\Cms\Page;
+use Kirby\Toolkit\A;
 use Kirby\Toolkit\Html;
 use Kirby\Toolkit\Str;
 
@@ -25,28 +25,26 @@ class Types
 
     public static function default(string $value = null): string
     {
-        if ($value !== null) {
-            return static::format($value);
-        }
-
-        return '<span>–</span>';
+        return match ($value) {
+            null    => '<span>–</span>',
+            default => static::format($value)
+        };
     }
 
     public static function factory(string $string, $model): string
     {
-        $types = array_map(function ($type) use ($model) {
-
-            if ($type === 'static' || $type === '$this') {
-                return $model->parent()->class();
+        $types = A::map(
+            explode('|', $string),
+            fn ($type) => match ($type) {
+                'static',
+                '$this'
+                    => $model->parent()->class(),
+                'self'
+                    => $model->inheritedFrom() ?? $model->parent()->class(),
+                default
+                    => substr($type, 0, 1) === '\\' ? substr($type, 1) : $type
             }
-
-            if ($type === 'self') {
-                return $model->inheritedFrom() ?? $model->parent()->class();
-            }
-
-            return substr($type, 0, 1) === '\\' ? substr($type, 1) : $type;
-
-        }, explode('|', $string));
+        );
 
         return implode('|', array_unique($types));
     }
@@ -84,9 +82,9 @@ class Types
             }
 
             // Clean up method names
-            $methods = array_map(
-                fn ($method) => preg_replace('/\(.*\)$/', '', $method),
-                $chain
+            $methods = A::map(
+                $chain,
+                fn ($method) => preg_replace('/\(.*\)$/', '', $method)
             );
 
             // If method page can be found by chain, return that page
@@ -137,9 +135,9 @@ class Types
                 return "<code>{$type}</code>";
             }
 
-            $types = array_map(
-                fn ($t) => static::format($t, $withLink),
-                $types
+            $types = A::map(
+                $types,
+                fn ($t) => static::format($t, $withLink)
             );
 
             return implode('<span class="px-1">|</span>', $types);
@@ -185,12 +183,14 @@ class Types
             // or class method exists
             if ($page = static::findReferencePage($type)) {
                 $class = $page instanceof ReferenceClassPage ? 'object' : 'method';
-                $tag = static::tag($text, $class);
+                $tag   = static::tag($text, $class);
 
                 if ($withLink === true) {
-                    $tag = Html::a($page->url(), [$tag], [
-                        'class' => 'type-link'
-                    ]);
+                    $tag = Html::a(
+                        $page->url(),
+                        [$tag],
+                        ['class' => 'type-link']
+                    );
                 }
 
                 return $tag;
@@ -199,7 +199,8 @@ class Types
             // Some class that exists in PHP in the global namespace.
             // The second check is done to ensure correct case,
             // as `class_exists()` is not case-sensitive.
-            if (class_exists($type) === true &&
+            if (
+                class_exists($type) === true &&
                 (new ReflectionClass($type))->getName() === $type
             ) {
                 return static::tag($text, 'class');
@@ -231,11 +232,10 @@ class Types
      */
     public static function required(bool $required): string|null
     {
-        if ($required === true) {
-            return '<span class="required-mark">*</span>';
-        }
-
-        return null;
+        return match ($required) {
+            true    => '<span class="required-mark">*</span>',
+            default => null
+        };
     }
 
     /**
