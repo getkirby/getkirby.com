@@ -44,6 +44,8 @@ extract([
   new Search();
 </script>
 
+<?= js('assets/js/components/lightbox.js') ?>
+
 <?= css('assets/css/index.css') ?>
 
 <link rel="icon" type="image/png" href="<?= url('/assets/images/favicon.png') ?>">
