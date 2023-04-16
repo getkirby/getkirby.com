@@ -27,7 +27,7 @@ You can also get an object by calling the `Remote::request()echo ` method or one
 
 Instead of using `Remote::request()` with the request method defined in the `$params` array, you can use the HTTP method names as method:
 
-- `Remote::get()`, see (link: text: `$remote::get()`)
+- `Remote::get()`, see (link: docs/reference/objects/http/remote/get text: `$remote::get()`)
 - `Remote::post()`
 - `Remote::delete()`
 - `Remote::delete()`

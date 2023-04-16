@@ -7,7 +7,7 @@ Text:
 
 Default parameters:
 
-(docs: default-params)
+(docs: remote-class-default-params)
 
 
 ## Examples
