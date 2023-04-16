@@ -1,4 +1,4 @@
-Title: Lazy-loading images
+Title: Lazy-loading images (&nearr; Cookbook)
 
 ----
 Link: docs/cookbook/performance/lazy-loading
