@@ -1,13 +1,15 @@
 <?php
 
-return function ($kirby, $page) {
-    $storyId    = get('your') ?? 'company';
-    $story      = $page->find($storyId) ?? $page->find('company');
-    $storyImage = $story->images()->findBy('name', 'panel');
+use Kirby\Toolkit\Str;
 
-    return [
-        'story'        => $story,
-        'storyImage'   => $storyImage,
-        'kirbyVersion' => implode('.', array_slice(Str::split($kirby->version(), '.'), 0, 2)),
-    ];
+return function ($kirby, $page) {
+	$storyId    = get('your') ?? 'company';
+	$story      = $page->find($storyId) ?? $page->find('company');
+	$storyImage = $story->images()->findBy('name', 'panel');
+
+	return [
+		'story'        => $story,
+		'storyImage'   => $storyImage,
+		'kirbyVersion' => implode('.', array_slice(Str::split($kirby->version(), '.'), 0, 2)),
+	];
 };

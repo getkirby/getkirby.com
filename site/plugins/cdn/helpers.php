@@ -14,34 +14,34 @@ use Kirby\Http\Url;
  */
 function cdn($file, array $params = []): string
 {
-    $query = null;
+	$query = null;
 
-    if (empty($params) === false) {
-        // Use the width as height if the height is not set
-        if (empty($params['crop']) === false && $params['crop'] !== false) {
-            $params['fit']      = true;
-            $params['height'] ??= $params['width'];
-            $params['crop']     = match ($params['crop']) {
-                'top'   =>  'fp,0,0',
-                default => 'smart'
-            };
+	if (empty($params) === false) {
+		// Use the width as height if the height is not set
+		if (empty($params['crop']) === false && $params['crop'] !== false) {
+			$params['fit']      = true;
+			$params['height'] ??= $params['width'];
+			$params['crop']     = match ($params['crop']) {
+				'top'   =>  'fp,0,0',
+				default => 'smart'
+			};
 
-        } else {
-            $params['v']       = $file->mediaHash();
-            $params['enlarge'] = 0;
-            $params['fit']     = match (isset($params['width']) && isset($params['height'])) {
-                true => 'inside',
-                default => true
-            };
-        }
+		} else {
+			$params['v']       = $file->mediaHash();
+			$params['enlarge'] = 0;
+			$params['fit']     = match (isset($params['width']) && isset($params['height'])) {
+				true => 'inside',
+				default => true
+			};
+		}
 
-        $query = '?' . http_build_query($params);
-    }
+		$query = '?' . http_build_query($params);
+	}
 
-    if (is_object($file) === true) {
-        $file = $file->mediaUrl();
-    }
+	if (is_object($file) === true) {
+		$file = $file->mediaUrl();
+	}
 
-    $path = Url::path($file);
-    return App::instance()->option('cdn.domain') . '/' . $path . $query;
+	$path = Url::path($file);
+	return App::instance()->option('cdn.domain') . '/' . $path . $query;
 }

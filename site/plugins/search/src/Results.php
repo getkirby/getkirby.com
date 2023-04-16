@@ -16,18 +16,18 @@ use Kirby\Toolkit\A;
  */
 class Results extends Collection
 {
-    static public function from(array $response): static
-    {
-        // Convert the hits to Obj objects
-        $hits    = A::map($response['hits'], fn ($hit) => new Obj($hit));
-        $results = new static($hits);
+	static public function from(array $response): static
+	{
+		// Convert the hits to Obj objects
+		$hits    = A::map($response['hits'], fn ($hit) => new Obj($hit));
+		$results = new static($hits);
 
-        $results->pagination = new Pagination([
-            'page'  => ($response['page'] ?? 0) + 1,
-            'total' => $response['nbHits'] ?? 0,
-            'limit' => $response['hitsPerPage'] ?? 20,
-        ]);
+		$results->pagination = new Pagination([
+			'page'  => ($response['page'] ?? 0) + 1,
+			'total' => $response['nbHits'] ?? 0,
+			'limit' => $response['hitsPerPage'] ?? 20,
+		]);
 
-        return $results;
-    }
+		return $results;
+	}
 }

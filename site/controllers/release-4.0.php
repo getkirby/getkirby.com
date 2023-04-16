@@ -2,8 +2,8 @@
 
 return function ($page) {
 
-  return [
-    'questions' => $page->find('answers')->children(),
-  ];
+	return [
+		'questions' => $page->find('answers')->children(),
+	];
 
 };

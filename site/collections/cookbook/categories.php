@@ -1,5 +1,5 @@
 <?php
 
 return function () {
-    return page('docs/cookbook')->children()->listed();
+	return page('docs/cookbook')->children()->listed();
 };

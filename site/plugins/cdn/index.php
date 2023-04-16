@@ -3,7 +3,7 @@
 include_once __DIR__ . '/helpers.php';
 
 load([
-    'kirby\\cdn\\cachebuster' => __DIR__ . '/src/Cachebuster.php'
+	'kirby\\cdn\\cachebuster' => __DIR__ . '/src/Cachebuster.php'
 ]);
 
 use Kirby\Cdn\Cachebuster;
@@ -11,51 +11,51 @@ use Kirby\Cms\App;
 use Kirby\Cms\FileVersion;
 
 App::plugin('getkirby/cdn', [
-    'components'   => [
-        'file::url' => function (App $kirby, $file): string {
-            static $original;
+	'components'   => [
+		'file::url' => function (App $kirby, $file): string {
+			static $original;
 
-            if ($file->type() === 'image') {
-                return cdn($file);
-            }
+			if ($file->type() === 'image') {
+				return cdn($file);
+			}
 
-            $original ??= $kirby->nativeComponent('file::url');
+			$original ??= $kirby->nativeComponent('file::url');
 
-            return $original($kirby, $file);
-        },
-        'file::version' => function (App $kirby, $file, $options) {
-            static $original;
+			return $original($kirby, $file);
+		},
+		'file::version' => function (App $kirby, $file, $options) {
+			static $original;
 
-            if ($kirby->option('cdn', false) !== false) {
-                $url = cdn($file, $options);
+			if ($kirby->option('cdn', false) !== false) {
+				$url = cdn($file, $options);
 
-                return new FileVersion([
-                    'modifications' => $options,
-                    'original'      => $file,
-                    'root'          => $file->root(),
-                    'url'           => $url,
-                ]);
-            }
+				return new FileVersion([
+					'modifications' => $options,
+					'original'      => $file,
+					'root'          => $file->root(),
+					'url'           => $url,
+				]);
+			}
 
-            $original ??= $kirby->nativeComponent('file::version');
+			$original ??= $kirby->nativeComponent('file::version');
 
-            return $original($kirby, $file, $options);
-        },
-        'url' => function (App $kirby, $path, $options): string {
-            static $original;
+			return $original($kirby, $file, $options);
+		},
+		'url' => function (App $kirby, $path, $options): string {
+			static $original;
 
-            if (preg_match('!assets\/!', $path ?? '')) {
-                $path = Cachebuster::path($path);
+			if (preg_match('!assets\/!', $path ?? '')) {
+				$path = Cachebuster::path($path);
 
-                if ($kirby->option('cdn', false) !== false) {
-                    return $kirby->option('cdn.domain') . '/' . ltrim($path, '/');
-                }
-            }
+				if ($kirby->option('cdn', false) !== false) {
+					return $kirby->option('cdn.domain') . '/' . ltrim($path, '/');
+				}
+			}
 
-            $original ??= $kirby->nativeComponent('url');
+			$original ??= $kirby->nativeComponent('url');
 
-            return $original($kirby, $path, $options);
-        },
-    ]
+			return $original($kirby, $path, $options);
+		},
+	]
 
 ]);
