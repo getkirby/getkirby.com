@@ -1,0 +1,48 @@
+Text:
+
+## Example
+
+If the respons content is a JSON response, you can use the `$remote->json()` method to covert the content to an array or object.
+
+In this example, we get list of UK holidays from a freely accessible API and convert the JSON response to an array:
+
+```php
+<?php
+$response = Remote::get('https://www.gov.uk/bank-holidays.json');
+
+if ($response->code() === 200):
+    $data = $response->json();
+
+    foreach ($data as $item): ?>
+        <h2><?= $item['division'] ?></h2>
+        <ul>
+                <?php foreach ($item['events'] as $holiday): ?>
+              <li><?= $holiday['title'] . ' is on ' . $holiday['date'] ?></li>
+                <?php endforeach ?>
+        </ul>
+    <?php endforeach ?>
+<?php endif ?>
+```
+
+If you prefer to work with an object instead of an array, set the `$array` parameter to `false`. Here we get a list of historical US newspapers:
+
+```php
+<?php
+$response = Remote::get('https://chroniclingamerica.loc.gov/newspapers.json');
+
+if ($response->code() === 200):
+	$data = $response->json(false); ?>
+
+    <ul>
+        <?php foreach ($data->newspapers as $newspaper): ?>
+        <li><?= $newspaper->title ?></li>
+        <?php endforeach ?>
+    </ul>
+
+<?php endif ?>
+```
+
+
+
+
+
