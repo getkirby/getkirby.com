@@ -38,21 +38,21 @@ A typical files blueprint looks like this:
 title: Image
 
 accept:
-mime: image/jpeg, image/png, image/svg+xml
+  mime: image/jpeg, image/png, image/svg+xml
 
 fields:
-alt:
-label: Alt Text
-type: text
-width: 1/2
-required: true
-link:
-label: Link
-type: url
-width: 1/2
-caption:
-label: Caption
-type: textarea
+  alt:
+    label: Alt Text
+    type: text
+    width: 1/2
+    required: true
+  link:
+    label: Link
+    type: url
+    width: 1/2
+  caption:
+    label: Caption
+    type: textarea
 ```
 
 For details of creating a file blueprint, see the (link: docs/reference/panel/blueprints/file text: files blueprint options)
