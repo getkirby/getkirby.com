@@ -1,0 +1,58 @@
+Text:
+
+## Example
+
+```php
+<?php
+$response = Remote::get('http://placekitten.com/200/300');
+
+dump($response->info());
+
+/**
+ * Example dump result
+ * array:38 [▼
+"url" => "http://placekitten.com/200/300"
+"content_type" => null
+"http_code" => 200
+"header_size" => 776
+"request_size" => 85
+"filetime" => -1
+"ssl_verify_result" => 0
+"redirect_count" => 0
+"total_time" => 0.049741
+"namelookup_time" => 0.006713
+"connect_time" => 0.023869
+"pretransfer_time" => 0.023992
+"size_upload" => 0.0
+"size_download" => 9339.0
+"speed_download" => 187752.0
+"speed_upload" => 0.0
+"download_content_length" => 9339.0
+"upload_content_length" => 0.0
+"starttransfer_time" => 0.049533
+"redirect_time" => 0.0
+"redirect_url" => ""
+"primary_ip" => "188.114.96.3"
+"certinfo" => []
+"primary_port" => 80
+"local_ip" => "192.168.178.47"
+"local_port" => 51030
+"http_version" => 2
+"protocol" => 1
+"ssl_verifyresult" => 0
+"scheme" => "HTTP"
+"appconnect_time_us" => 0
+"connect_time_us" => 23869
+"namelookup_time_us" => 6713
+"pretransfer_time_us" => 23992
+"redirect_time_us" => 0
+"starttransfer_time_us" => 49533
+"total_time_us" => 49741
+"effective_method" => "GET"
+]
+ */
+```
+
+
+
+

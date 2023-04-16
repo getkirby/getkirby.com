@@ -1,0 +1,133 @@
+Text:
+
+## Params array
+
+Default parameters:
+
+(docs: default-params)
+
+## General examples
+
+### GET request
+
+```php
+<?php
+$targetPage = page('notes')->children()->first();
+
+$response = Remote::request(
+    'http://placekitten.com/200/300',
+    [
+	    'method' => 'GET',
+    ]
+);
+
+// Save content from request to file
+if ($response->code() === 200) {
+	F::write($targetPage->root() . '/kitten.jpg', $response->content());
+}
+```
+
+More example see (link: docs/reference/objects/http/remote/get text: `Remote::get()`)
+
+You can also find examples in other parts of our documentation:
+
+- (link: docs/guide/virtual-pages/content-from-api text: Virtual pages: Content from API)
+- (link: docs/guide/virtual-pages/content-from-rss-feed text: Virtual pages: Content from an RSS feed)
+- (link: docs/cookbook/panel/first-panel-area#setting-up-the-php-part text: My first Panel area)
+- (link: docs/cookbook/extensions/virtual-files#extra-images-from-unsplash-api text: Virtual files: Images from Unsplash API)
+
+## Kirby API Examples
+
+
+<info>
+Note that for the API examples to work, (link: docs/reference/system/options/api#http-basic-auth text: HTTP Basic auth) must be enabled in your config.
+
+If you are testing this locally without HTTPS enabled, you also have to set (link: docs/reference/system/options/api#allow-insecure-requests text: the `allowInsecure` config option).
+</info>
+
+#### GET request
+
+```php
+<?php
+$email    = 'test@example.com';
+$password = 'topsecret';
+
+$response = Remote::request('https://yoursite.com/api/pages/notes', [
+    'method' => 'GET',
+	'headers' => [
+		'Authorization: Basic ' . base64_encode($email . ':' . $password)
+	],
+]);
+
+if ($response->code() === 200) {
+	$data = json_decode($response->content())->data;
+	dump($data);
+}
+
+```
+
+#### POST request
+
+```php
+<?php
+$email    = 'test@example.com';
+$password = 'topsecret';
+$data     = [
+	'slug'     => Str::slug(Str::random(10, 'alpha')),
+	'template' => 'note',
+	'model'    => 'note',
+	'isDraft'  => false,
+	'content'  => [
+		'title' => Str::random(40, 'alpha'),
+	]
+];
+$request = Remote::request('https://yoursite.com/api/pages/notes/children', [
+	'method'  => 'POST',
+	'headers' => [
+		'Content-Type: application/json',
+        'Authorization: Basic ' . base64_encode($email . ':' . $password)
+	],
+	'data'    => json_encode($data),
+]);
+
+if ($request->code() !== 200) {
+	echo 'An error occurred: ' . $request->code();
+}
+```
+
+#### PATCH
+
+```php
+<?php
+$email    = 'test@example.com';
+$password = 'topsecret';
+$data     = [
+    'title' => Str::random(40, 'alpha'),
+];
+$response = Remote::request('https://yoursite.com/api/pages/notes+exploring-the-universe', [
+	'method'  => 'PATCH',
+	'headers' => [
+		'Content-Type: application/json',
+        'Authorization: Basic ' . base64_encode($email . ':' . $password)
+	],
+	'data'    => json_encode($data),
+]);
+
+dump($response);
+```
+#### DELETE
+
+```php
+<?php
+$email    = 'test@example.com';
+$password = 'topsecret';
+
+$response = Remote::request('https://yoursite.com/api/pages/notes+exploring-the-universe/files/dark-forest.jpg', [
+	'method'  => 'DELETE',
+	'headers' => [
+		'Authorization: Basic ' . base64_encode($email . ':' . $password)
+	],
+]);
+
+dump($response);
+```

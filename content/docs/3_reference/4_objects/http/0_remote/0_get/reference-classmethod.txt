@@ -1,0 +1,45 @@
+Text:
+
+`Remote::get()` is a shortcut for `Remote::request()` with method `GET`.
+
+## Params array
+
+
+Default parameters:
+
+(docs: default-params)
+
+
+## Examples
+
+In this example, we make a GET request to the free placekitten API, and write the content of the requested image to file:
+
+```php
+<?php
+$targetPage = page('home');
+$response    = Remote::get('http://placekitten.com/200/300');
+if ($response->code() === 200) {
+	F::write($targetPage->root() . '/kitten.jpg', $response->content());
+}
+```
+
+```php
+<?php
+$response = Remote::get('https://rickandmortyapi.com/api/character/108');
+if ($response->code() === 200): ?>
+    <?php $character = $response->json(); ?>
+    <dl>
+        <dt>Name</dt>
+        <dd><?= $character['name'] ?></dd>
+        <dt>Status</dt>
+        <dd><?= $character['status'] ?></dd>
+        <dt>Gender</dt>
+        <dd><?= $character['gender'] ?></dd>
+        <dt>Type</dt>
+        <dd><?= $character['type'] ?></dd>
+    </dl>
+<?php endif ?>
+```
+
+
+
