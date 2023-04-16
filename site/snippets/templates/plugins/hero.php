@@ -5,6 +5,9 @@
         <h4 class="color-white font-bold"><?= $plugin->title() ?></h4>
         <p class="block font-mono text-xs color-gray-500 mb-3">
           by <span class="color-white"><?= $plugin->parent()->title() ?></span>
+          <?php if ($plugin->paid()->isNotEmpty()) : ?>
+          &middot; <span class="plugin-paid">Paid</span>
+          <?php endif ?>
         </p>
         <div class="prose color-gray-400 text-sm">
           <?= $plugin->description() ?>

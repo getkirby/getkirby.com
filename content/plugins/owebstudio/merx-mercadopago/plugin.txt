@@ -14,7 +14,7 @@ Version: 1.1.6
 
 ----
 
-Paid: true
+Paid: https://owebstudio.com/kirby/plugins/mercado-pago-merx
 
 ----
 

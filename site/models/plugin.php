@@ -50,7 +50,7 @@ class PluginPage extends Page
         return $url;
     }
 
-    public function download(string $version = null): string
+    public function download(string $version = null): string|null
     {
         if ($this->content()->has('download')) {
             return $this->content()->get('download')->value();

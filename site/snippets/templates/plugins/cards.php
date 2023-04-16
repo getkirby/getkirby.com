@@ -34,7 +34,7 @@
             <h4 class="h5"><?= $plugin->title() ?></h4>
             <p class="font-mono text-xs color-gray-500 truncate">
               by <span class="color-black"><?= $plugin->parent()->title() ?></span>
-              <?php if ($plugin->paid()->isTrue()) : ?>
+              <?php if ($plugin->paid()->isNotEmpty()) : ?>
               &middot; <span class="plugin-paid">Paid</span>
               <?php endif ?>
             </p>

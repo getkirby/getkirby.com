@@ -112,7 +112,7 @@
   }
 
   .plugin-links .plugin-paid {
-    background: var(--color-aqua-200);
+    background: var(--color-purple-200);
   }
 </style>
 
@@ -161,8 +161,8 @@
           <?= $author->title() ?>
         </a>
 
-        <?php if ($page->paid()->isTrue()) : ?>
-          <a class="plugin-paid btn" href="<?= $page->repository() ?>">
+        <?php if ($page->paid()->isNotEmpty()) : ?>
+          <a class="plugin-paid btn" href="<?= $page->paid() ?>">
             <span><?= icon('cart') ?></span> Paid plugin
           </a>
         <?php endif ?>
