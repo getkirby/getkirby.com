@@ -18,22 +18,22 @@ class Search
 {
 	public Algolia $algolia;
 	public static Search $instance;
-    public Index $index;
-    public array $options = [];
+	public Index $index;
+	public array $options = [];
 
-    public function __construct()
-    {
-        $this->options = App::instance()->option('search.algolia', []);
+	public function __construct()
+	{
+		$this->options = App::instance()->option('search.algolia', []);
 
 		if (isset($this->options['app'], $this->options['key']) === false) {
-            throw new Exception('Please set your Algolia API credentials in the Kirby configuration.');
-        }
+			throw new Exception('Please set your Algolia API credentials in the Kirby configuration.');
+		}
 
-        $this->algolia = Algolia::create(
-            $this->options['app'],
-            $this->options['key']
-        );
-    }
+		$this->algolia = Algolia::create(
+			$this->options['app'],
+			$this->options['key']
+		);
+	}
 
 	public function index(): Index
 	{
@@ -41,39 +41,39 @@ class Search
 	}
 
 	/**
-     * Returns a singleton instance of the Search class
-     */
-    public static function instance(): static
-    {
-        return static::$instance ??= new static;
-    }
+	 * Returns a singleton instance of the Search class
+	 */
+	public static function instance(): static
+	{
+		return static::$instance ??= new static;
+	}
 
 	/**
-     * Sends a search query to Algolia and returns
-     * a paginated collection of results
-     *
-     * @param  string $query   Search query
-     * @param  int    $page    Pagination page to return (starts at 1, not 0!)
-     * @param  array  $options Search parameters to override the default settings
-     *  See https://www.algolia.com/doc/api-client/methods/search/
-     */
-    public function query(
-        string $query = null,
-        int $page = 1,
-        array $options = []
-    ): Results {
-        $defaults = $this->options['options'] ?? [];
-        $options  = array_merge($defaults, $options);
+	 * Sends a search query to Algolia and returns
+	 * a paginated collection of results
+	 *
+	 * @param  string $query   Search query
+	 * @param  int    $page    Pagination page to return (starts at 1, not 0!)
+	 * @param  array  $options Search parameters to override the default settings
+	 *  See https://www.algolia.com/doc/api-client/methods/search/
+	 */
+	public function query(
+		string $query = null,
+		int $page = 1,
+		array $options = []
+	): Results {
+		$defaults = $this->options['options'] ?? [];
+		$options  = array_merge($defaults, $options);
 
-        // Set the page parameter
-        // Algolia uses zero based page indexes while
-        // Kirby's pagination starts at 1
-        $options['page'] = $page ? $page - 1 : 0;
+		// Set the page parameter
+		// Algolia uses zero based page indexes while
+		// Kirby's pagination starts at 1
+		$options['page'] = $page ? $page - 1 : 0;
 
-        // Get results response
-        $response = $this->index()->index->search($query, $options);
+		// Get results response
+		$response = $this->index()->index->search($query, $options);
 
-        // Return collection of the results
-        return Results::from($response);
-    }
+		// Return collection of the results
+		return Results::from($response);
+	}
 }

@@ -15,158 +15,158 @@ use Kirby\Cms\Page;
  */
 class Entry
 {
-    public function __construct(
-        protected Page $page,
-        protected Search $search
-    )
-    {
-    }
+	public function __construct(
+		protected Page $page,
+		protected Search $search
+	)
+	{
+	}
 
-    protected function fields(): array
-    {
-        $fields    = $this->search->options['fields'] ?? ['title', 'url'];
-        $templates = $this->templates();
-        $template  = $this->template();
+	protected function fields(): array
+	{
+		$fields    = $this->search->options['fields'] ?? ['title', 'url'];
+		$templates = $this->templates();
+		$template  = $this->template();
 
-        $fields = static::fieldsToUniformArray($fields);
+		$fields = static::fieldsToUniformArray($fields);
 
-        // get template-specific fields
-        if ($templateFields = $templates[$template]['fields'] ?? null) {
-            $templateFields = static::fieldsToUniformArray($templateFields);
-            $fields = array_merge($fields, $templateFields);
-        }
+		// get template-specific fields
+		if ($templateFields = $templates[$template]['fields'] ?? null) {
+			$templateFields = static::fieldsToUniformArray($templateFields);
+			$fields = array_merge($fields, $templateFields);
+		}
 
-        // Make sure that the fields are sorted alphabetically for consistence
-        ksort($fields);
+		// Make sure that the fields are sorted alphabetically for consistence
+		ksort($fields);
 
-        return $fields;
-    }
+		return $fields;
+	}
 
-    /**
-     * Make sure the field's name is always the key,
-     * even if only a string in a non-associative array was given
-     */
-    protected static function fieldsToUniformArray(array $fields): array
-    {
-        $result = [];
+	/**
+	 * Make sure the field's name is always the key,
+	 * even if only a string in a non-associative array was given
+	 */
+	protected static function fieldsToUniformArray(array $fields): array
+	{
+		$result = [];
 
-        foreach($fields as $name => $props) {
-            if(is_int($name) === true) {
-                $name  = $props;
-                $props = null;
-            }
+		foreach($fields as $name => $props) {
+			if(is_int($name) === true) {
+				$name  = $props;
+				$props = null;
+			}
 
-            $result[$name] = $props;
-        }
+			$result[$name] = $props;
+		}
 
-        return $result;
-    }
+		return $result;
+	}
 
-    /**
-     * Checks if a specific page should be included in the Algolia index
-     * Uses the configuration option algolia.templates
-     */
-    public function isIndexable(): bool
-    {
-        // if (method_exists($this->page, 'isSearchable') === true) {
-        //     if ($this->page->isSearchable() === false) {
-        //         return false;
-        //     }
-        // }
+	/**
+	 * Checks if a specific page should be included in the Algolia index
+	 * Uses the configuration option algolia.templates
+	 */
+	public function isIndexable(): bool
+	{
+		// if (method_exists($this->page, 'isSearchable') === true) {
+		//     if ($this->page->isSearchable() === false) {
+		//         return false;
+		//     }
+		// }
 
-        $templates = $this->templates();
-        $template  = $this->template();
+		$templates = $this->templates();
+		$template  = $this->template();
 
-        // Quickly include a template
-        // Example: ['project']
-        if (in_array($template, $templates, true) === true) {
-            return true;
-        }
+		// Quickly include a template
+		// Example: ['project']
+		if (in_array($template, $templates, true) === true) {
+			return true;
+		}
 
-        // if template isn't listed, exclude it
-        if (isset($templates[$template]) === false) {
-            return false;
-        }
+		// if template isn't listed, exclude it
+		if (isset($templates[$template]) === false) {
+			return false;
+		}
 
-        $template = $templates[$template];
+		$template = $templates[$template];
 
-        // Check if the template is defined as a boolean
-        // Example: ['project' => true, 'contact' => false]
-        if (is_bool($template) === true) {
-            return $template;
-        }
+		// Check if the template is defined as a boolean
+		// Example: ['project' => true, 'contact' => false]
+		if (is_bool($template) === true) {
+			return $template;
+		}
 
-        // Closure
-        if (is_callable($template) === false) {
-            return $template($this->page);
-        }
+		// Closure
+		if (is_callable($template) === false) {
+			return $template($this->page);
+		}
 
-        // No rule was violated, the page is indexable
-        return true;
-    }
+		// No rule was violated, the page is indexable
+		return true;
+	}
 
-    /**
-     * Returns the template name of the page
-     */
-    protected function template(): string
-    {
-        return $this->page->intendedTemplate()->name();
-    }
+	/**
+	 * Returns the template name of the page
+	 */
+	protected function template(): string
+	{
+		return $this->page->intendedTemplate()->name();
+	}
 
-    /**
-     * Returns the config for templates from options
-     */
-    protected function templates(): array
-    {
-        return $this->search->options['templates'] ?? [];
-    }
+	/**
+	 * Returns the config for templates from options
+	 */
+	protected function templates(): array
+	{
+		return $this->search->options['templates'] ?? [];
+	}
 
-    /**
-     * Converts the page into a data array for Algolia
-     * Uses the configuration options algolia.fields and algolia.templates
-     */
-    public function toData(): array
-    {
-        $data = ['objectID' => $this->page->id()];
+	/**
+	 * Converts the page into a data array for Algolia
+	 * Uses the configuration options algolia.fields and algolia.templates
+	 */
+	public function toData(): array
+	{
+		$data = ['objectID' => $this->page->id()];
 
-        // loop through field definitions and generate
-        // actual field data to put into the index
-        foreach ($this->fields() as $name => $method) {
-            $data[$name] = match (true) {
-                // custom function
-                is_callable($method)
-                    => $method($this->page),
-                // field method with/without parameters
-                is_string($method) || is_array($method)
-                    => $this->toDataFromFieldMethod($name, $method),
-                // no or invalid operation, convert to string
-                default
-                    => (string)$this->page->$name()
-            };
-        }
+		// loop through field definitions and generate
+		// actual field data to put into the index
+		foreach ($this->fields() as $name => $method) {
+			$data[$name] = match (true) {
+				// custom function
+				is_callable($method)
+					=> $method($this->page),
+				// field method with/without parameters
+				is_string($method) || is_array($method)
+					=> $this->toDataFromFieldMethod($name, $method),
+				// no or invalid operation, convert to string
+				default
+					=> (string)$this->page->$name()
+			};
+		}
 
-        return $data;
-    }
+		return $data;
+	}
 
-    /**
-     * Resolves the field and its method to a result value
-     * to be included in the index for the field
+	/**
+	 * Resolves the field and its method to a result value
+	 * to be included in the index for the field
 
-     */
-    protected function toDataFromFieldMethod(
-        string $name,
-        string|array $method
-    ): string {
-        $field = $this->page->$name();
+	 */
+	protected function toDataFromFieldMethod(
+		string $name,
+		string|array $method
+	): string {
+		$field = $this->page->$name();
 
-        if ($field instanceof Field === false) {
-            $field = new Field($this->page, $name, $field);
-        }
+		if ($field instanceof Field === false) {
+			$field = new Field($this->page, $name, $field);
+		}
 
-        if (is_string($method) === true) {
-            return $field->$method();
-        }
+		if (is_string($method) === true) {
+			return $field->$method();
+		}
 
-        return $field->$method[0](...array_slice($method, 1));
-    }
+		return $field->$method[0](...array_slice($method, 1));
+	}
 }

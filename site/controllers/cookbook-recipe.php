@@ -1,7 +1,7 @@
 <?php
 
 return function ($page) {
-  return [
-    'authors' => $page->authors()
-  ];
+	return [
+		'authors' => $page->authors()
+	];
 };
