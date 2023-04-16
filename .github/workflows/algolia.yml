@@ -4,14 +4,14 @@ name: Update Algolia index
 on:
   push:
     branches:
-    - main
+      - main
     paths:
-    - .github/workflows/algolia.yml
-    - content/**.txt
-    - site/config/search.php
-    - site/models/**
-    - site/plugins/**
-    - scripts/algolia-index
+      - .github/workflows/algolia.yml
+      - content/**.txt
+      - site/config/search.php
+      - site/models/**
+      - site/plugins/**
+      - scripts/algolia-index
 
 jobs:
   algolia:
@@ -20,10 +20,10 @@ jobs:
 
     steps:
       - name: Cancel previous workflow runs
-        uses: styfle/cancel-workflow-action@0.9.1
+        uses: styfle/cancel-workflow-action@0.11.0
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Update the Algolia index
         run: scripts/algolia-index
