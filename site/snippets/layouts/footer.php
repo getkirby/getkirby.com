@@ -101,3 +101,5 @@
     </div>
   </div>
 </footer>
+
+<?= js('assets/js/components/lightbox.js') ?>
