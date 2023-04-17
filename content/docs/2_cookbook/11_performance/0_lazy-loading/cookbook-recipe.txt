@@ -394,7 +394,7 @@ And for the `picture` element, you cadd a `data-src` attribute on the `img` elem
         <img
             alt="<?= $image->alt() ?>"
             class="lazy"
-            data-src="<?= $image->resize(1280)->url()"
+            data-src="<?= $image->resize(1280)->url() ?>"
         >
     </picture>
 <?php endif; ?>
