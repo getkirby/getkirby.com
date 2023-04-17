@@ -30,7 +30,10 @@ Instead of using `Remote::request()` with the request method defined in the `$pa
 - `Remote::get()`, see (link: docs/reference/objects/http/remote/get text: `$remote::get()`)
 - `Remote::post()`
 - `Remote::delete()`
-- `Remote::delete()`
+- `Remote::patch()`
+- `Remote::put()`
+- `Remote::head()`
+
 
 This works, because the `Remote` class implements the `__callStatic` magic method, which makes sure to execute not explicitely defined static methods.
 
