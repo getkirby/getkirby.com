@@ -5,5 +5,5 @@
   <a href="/styleguide">our styleguide &rarr;</a>
 </p>
 <a href="<?= option('github.url') ?>/getkirby.com/<?= F::exists($page->contentFile()) ? 'edit/main/content/' . $page->diruri() . '/' . $page->intendedTemplate() . '.txt' : 'issues/new?template=reference.md' ?>" class="btn btn--outlined mb-3">
-  <?= icon('github') ?> Edit this page
+  <?= icon('github') ?> <?= F::exists($page->contentFile()) ? 'Edit this page' : 'Report an issue on this page' ?>
 </a>
