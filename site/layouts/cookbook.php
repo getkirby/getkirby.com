@@ -23,7 +23,11 @@
 						<?php snippet('layouts/github-edit') ?>
 					</footer>
 				</article>
-				<?php snippet('templates/cookbook/sidebar') ?>
+				<?php if ($sidebar = $slots->sidebar()): ?>
+					<?= $sidebar ?>
+				<?php else: ?>
+					<?php snippet('templates/cookbook/sidebar') ?>
+				<?php endif ?>
 			</div>
 		</div>
 	</main>
