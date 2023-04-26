@@ -5,6 +5,11 @@ Title: Routing
 Description: Use Kirby's router to modify URLs or provide extra functionality when the user calls an given URI pattern.
 
 ----
+
+Category: Configuration
+
+----
+
 Text:
 
 When you create a new page in Kirby's content folder, this folder creates a new URL, for example, the page `/content/projects/project-a` will be available at `https://yourdomain.com/projects/project-a`. So when the user types that URL into the browser's address bar, the project page will be rendered.

@@ -10,6 +10,9 @@ Intro: Kirby’s unique IDs make it easy to refer to any page, file or user, no 
 
 ----
 
+Category: Data & Frontend
+
+----
 Text:
 
 (image: uuids.png)

@@ -6,5 +6,8 @@ Description: How to set up and work with multi-language websites and how to tran
 
 ----
 
+Category: Configuration
+
+----
 Text:
 

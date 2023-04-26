@@ -2,8 +2,13 @@
 
 <div class="mb-36">
   <h1 class="h1 mb-12">Guide</h1>
-  <ul class="guides auto-fill auto-rows-fr mb-12" style="--min: 16rem; --gap: var(--spacing-12)">
-    <?php foreach ($page->children()->listed() as $guide): ?>
+	<?php $categories = $page->children()->listed()->pluck('category', ',', true);
+	?>
+	<?php foreach ($categories as $category): ?>
+	<h2 class="h2 mb-12" style="font-size: var(--text-4xl)"><?= $category ?></h2>
+  <ul class="guides auto-fill auto-rows-fr mb-24" style="--min: 16rem; --gap: var(--spacing-12)">
+    <?php $filtered = $page->children()->filterBy('category', '==', $category);
+		foreach ($filtered as $guide): ?>
     <li>
       <article>
         <a class="block" href="<?= $guide->url() ?>">
@@ -13,7 +18,7 @@
             </figure>
           <?php endif ?>
           <div class="border-top pt-3">
-            <h2 class="h2 mb-3"><?= $guide->title() ?></h2>
+            <h3 class="h2 mb-3"><?= $guide->title() ?></h3>
             <p class="color-gray-700"><?= $guide->description() ?></p>
           </div>
         </a>
@@ -21,6 +26,7 @@
     </li>
     <?php endforeach ?>
   </ul>
+	<?php endforeach ?>
 </div>
 
 <footer class="h2 max-w-xl">

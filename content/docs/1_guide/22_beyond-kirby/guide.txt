@@ -6,6 +6,9 @@ Description: Learn about the different ways to use Kirby as a content source for
 
 ----
 
+Category: Extending Kirby
+
+----
 Text:
 
 ## Decoupling responsibilities

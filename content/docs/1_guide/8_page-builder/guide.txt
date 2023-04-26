@@ -6,6 +6,10 @@ Description: Create rich content or even complete page layouts right from the Pa
 
 ----
 
+Category: Data & Frontend
+
+----
+
 Text:
 
 (image: blocks.png)

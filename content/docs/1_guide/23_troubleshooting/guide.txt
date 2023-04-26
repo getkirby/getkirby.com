@@ -8,3 +8,6 @@ Description: We try to make using Kirby as straight forward as possible. But som
 ----
 
 Text:
+
+----
+Category: Preparing the stage

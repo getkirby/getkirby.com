@@ -6,6 +6,9 @@ Description: Connect to a database and query results.
 
 ----
 
+Category: Extending Kirby
+
+----
 Text:
 
 As Kirby is a file-based CMS with content stored in text files, you don't need a database. However, if you want to integrate data stored in a database into your site or if you want to export data from a database into your Kirby website, we got you covered.

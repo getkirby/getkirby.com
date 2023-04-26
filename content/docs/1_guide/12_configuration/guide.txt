@@ -5,6 +5,11 @@ Title: Configuration
 Description: Almost every aspect of Kirby can be controlled and configured to do exactly what you need it to do.
 
 ----
+
+Category: Configuration
+
+----
+
 Text:
 
 ## The `config.php`
@@ -171,7 +176,7 @@ By setting different options in those config files, you get a very flexible syst
 <info>
 Note that the settings in the standard `config.php` file are always used. If you need different settings in another environment, you will have to override those settings in the domain specific configuration file (or only set those options in your domain specific config file).
 
-General settings for all environments should be included in the standard `config.php` file to avoid code duplication. 
+General settings for all environments should be included in the standard `config.php` file to avoid code duplication.
 </info>
 
 ### Deployment configuration
