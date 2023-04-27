@@ -167,6 +167,8 @@ class Entry
 			return $field->$method();
 		}
 
-		return $field->$method[0](...array_slice($method, 1));
+		$args   = array_slice($method, 1);
+        $method = $method[0];
+        return $field->$method(...$args);
 	}
 }
