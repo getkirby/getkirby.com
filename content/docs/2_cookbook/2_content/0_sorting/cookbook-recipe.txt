@@ -20,7 +20,7 @@ The direction of your sort order, either `desc` for descending, or `asc` for asc
 
 **method**
 
-The method takes an optional third parameter, the sort flag. The default is `SORT_REGULAR`, but if you want to sort by numeric values, you can use `SORT_NUMERIC` or other (link: https://www.php.net/manual/en/function.sort.php#refsect1-function.sort-parameters text: sort flags) instead.
+The method takes an optional third parameter, the sort flag. The default is `SORT_NATURAL | SORT_FLAG_CASE`, but if you want to sort by numeric values, you can use `SORT_NUMERIC` or other (link: https://www.php.net/manual/en/function.sort.php#refsect1-function.sort-parameters text: sort flags) instead. You can also use `SORT_LOCALE_STRING` to sort according to the configured (link: docs/reference/system/options/locale text: locale settings) (or the language's locale settings if you use a multi-language setup).
 
 <info>
 Kirby also provides a `sort()` method, which is an alias and does exactly the same as `sortBy()`. Use whichever you prefer.
