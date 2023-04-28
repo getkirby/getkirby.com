@@ -6,9 +6,9 @@ Text:
 
 5, 4, 3, 2, 1…, sorting content is an everyday developer's task when dealing with all sorts of content collections: articles, events, images or similar data needs to be sorted, for example, by date or title, in descending or ascending order, or even by a more complicated sorting algorithm.
 
-Kirby's API comes with a built-in method for sorting: the [sortBy()](docs/reference/objects/pages/sort-by) method. This method can be used with all sorts of collections (pages, files, users, roles, translations, structure field items etc.).
+Kirby's API comes with a built-in method for sorting: the [sortBy()](/docs/reference/objects/pages/sort-by) method. This method can be used with all sorts of collections (pages, files, users, roles, translations, structure field items etc.).
 
-The `sortBy($field, $direction = 'desc', $method = SORT_REGULAR)` method accepts three parameters:
+The `sortBy($field, $direction = 'desc', $method = SORT_NATURAL | SORT_FLAG_CASE)` method accepts three parameters:
 
 **$field**
 
@@ -20,7 +20,7 @@ The direction of your sort order, either `desc` for descending, or `asc` for asc
 
 **method**
 
-The method takes an optional third parameter, the sort flag. The default is `SORT_NATURAL | SORT_FLAG_CASE`, but if you want to sort by numeric values, you can use `SORT_NUMERIC` or other (link: https://www.php.net/manual/en/function.sort.php#refsect1-function.sort-parameters text: sort flags) instead. You can also use `SORT_LOCALE_STRING` to sort according to the configured (link: docs/reference/system/options/locale text: locale settings) (or the language's locale settings if you use a multi-language setup).
+The method takes an optional third parameter, the sort flag. The default is `SORT_NATURAL | SORT_FLAG_CASE` (human natural case-insensitive sorting), but you can override this e.g. with `SORT_NUMERIC` when sorting numbers or with `SORT_LOCALE_STRING` to sort according to the configured (link: docs/reference/system/options/locale text: locale settings) (or the language's locale settings if you use a multi-language setup). PHP also supports other (link: https://www.php.net/manual/en/function.sort.php#refsect1-function.sort-parameters text: sort flags) you can use.
 
 <info>
 Kirby also provides a `sort()` method, which is an alias and does exactly the same as `sortBy()`. Use whichever you prefer.
