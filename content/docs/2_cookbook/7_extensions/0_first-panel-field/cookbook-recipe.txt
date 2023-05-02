@@ -23,7 +23,7 @@ You can install the (link: https://github.com/getkirby/pluginkit/tree/4-panel te
 
 Let's start by creating a new folder in the `plugins` folder called `doifield`. Inside this folder, we create a `package.json` file with the contents copied from the Pluginkit example mentioned above.
 
-```js "/site/plugins/moviereviews/package.json"
+```js "/site/plugins/doifield/package.json"
 {
   "scripts": {
     "dev": "npx -y kirbyup src/index.js --watch",
@@ -313,7 +313,7 @@ The input field we replace with a `k-input` component and add the `theme` prop t
 ```html "site/plugins/doifield/src/components/fields/DoiField.vue"
 <template>
   <k-field class="k-doi-field" :label="label">
-    <k-input theme="field" type="text" name="textfield" :value="value" @input="onInput">
+    <k-input theme="field" type="text" name="textfield" :value="value" @input="onInput"/>
   </k-field>
 </template>
 ```
@@ -367,7 +367,7 @@ Whatever the user types into the blueprint, is automatically passed on to the fr
       type="text" 
       name="textfield" 
       :value="value"
-      @input="onInput">
+      @input="onInput"/>
   </k-field>
 </template>
 
@@ -433,7 +433,7 @@ We can achieve this by stealing the template code from the `url` field, it's jus
 </template>
 ```
 
-What's new here? With the `v-if` directive, we define that the button is only shown if the `link` prop is set to `true`, which it is by default (we can disable this via the blueprint). In the `link` pro, we prepend a hard-wired URL to the field value. We could make this more dynamic by introducing a new property if we wanted, but we leave it as is.
+What's new here? With the `v-if` directive, we define that the button is only shown if the `link` prop is set to `true`, which it is by default (we can disable this via the blueprint). In the `link` prop, we prepend a hard-wired URL to the field value. We could make this more dynamic by introducing a new property if we wanted, but we leave it as is.
 
 We still have to define the new props `link` and `icon`. This time, they look a bit different, because we add on object with the type and a default value.
 

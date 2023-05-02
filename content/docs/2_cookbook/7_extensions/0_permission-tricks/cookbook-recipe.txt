@@ -51,6 +51,8 @@ echo $kirby->render();
 
 After Kirby is loaded, we check the user role of the current user and then assign a different blueprint folder for each user role or multiple user roles.
 
+The new blueprint folders `blueprints-client` and `blueprints-editor` are created next to the default `blueprints` folder. The original blueprints will be used for all other user roles not handled above.
+
 ### Possible downsides
 
 You need to maintain and keep in sync multiple complete blueprint sets. It might make sense to use symlinks to reuse blueprint parts across sets. Also, Kirby is loaded twice to make this work.
@@ -81,15 +83,29 @@ Kirby::plugin('cookbook/role-blueprints', [
 ]);
 ```
 
+The plugin folder structure in this example will look like this:
+
+```filesystem
+plugins/
+  role-blueprints/
+    blueprints/
+      pages/
+        client/
+          home.yml
+        home.yml
+    index.php
+
+```
 This approach works for all types of blueprints, so you could do this even for individual sections used in your blueprints if necessary.
 
+
+<warning>
+Make sure to remove the `home.yml` (or whatever blueprint you are overriding in your blueprint) from the `site/blueprints/` folder, otherwise the blueprint in that folder would overwrite your plugin blueprints!
+</warning>
 ### Possible downsides
 
 You have to maintain multiple blueprints for a page type.
 
-<warning>
-Make sure to not override blueprints registered in the plugin by putting blueprints with the same name into the `/site/blueprints/pages` folder.
-</warning>
 
 ## Override the `isReadable()` method in a page model
 
@@ -123,11 +139,11 @@ class NotePage extends Page
 {
   public function isReadable(): bool
   {
-    if (($user = $this->author()->toUser()) && $user->is($this->kirby()->user()) || 
+    if (($user = $this->author()->toUser()) && $user->is($this->kirby()->user()) ||
         $this->kirby()->user()->isAdmin()) {
       return true;
     }
-    
+
     return false;
   }
 }

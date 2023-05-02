@@ -7,147 +7,147 @@ use Kirby\Toolkit\Str;
 
 class FileSystem
 {
-    /**
-     * File System Icons
-     */
-    public static array $types = [
-        'readme'     => '/^(readme|license)\.?/i',
-        'javascript' => ['js'],
-        'css'        => ['css'],
-        'html'       => ['html', 'htm', 'xhtml'],
-        'font'       => ['woff', 'woff2', 'ttf', 'otf', 'eot'],
-        'code'       => ['json'],
-        'yaml'       => ['yaml'],
-        'markdown'   => ['md', 'mdown', 'markdown'],
-        'git'        => ['git', 'gitattributes', 'gitignore', 'gitmodules'],
-        'php'        => ['php'],
-        'yaml'       => ['yml'],
-        'text'       => ['txt'],
-    ];
+	/**
+	 * File System Icons
+	 */
+	public static array $types = [
+		'readme'     => '/^(readme|license)\.?/i',
+		'javascript' => ['js'],
+		'css'        => ['css'],
+		'html'       => ['html', 'htm', 'xhtml'],
+		'font'       => ['woff', 'woff2', 'ttf', 'otf', 'eot'],
+		'code'       => ['json'],
+		'yaml'       => ['yaml'],
+		'markdown'   => ['md', 'mdown', 'markdown'],
+		'git'        => ['git', 'gitattributes', 'gitignore', 'gitmodules'],
+		'php'        => ['php'],
+		'yaml'       => ['yml'],
+		'text'       => ['txt'],
+	];
 
-    protected static function getIconByFilename(string $filename): string|null
-    {
-        if (in_array($filename, ['...', '…'])) {
-            return null;
-        }
+	protected static function getIconByFilename(string $filename): string|null
+	{
+		if (in_array($filename, ['...', '…'])) {
+			return null;
+		}
 
-        $extension = F::extension($filename);
-        $icon      = F::type($filename);
+		$extension = F::extension($filename);
+		$icon      = F::type($filename);
 
-        foreach (static::$types as $type => $extensions) {
-            if (
-                (
-                    is_string($extensions) === true &&
-                    preg_match($extensions, $filename)
-                ) || (
-                    is_array($extensions) === true &&
-                    in_array($extension, $extensions)
-                )
-            ) {
-                $icon = $type;
-                break;
-            }
-        }
+		foreach (static::$types as $type => $extensions) {
+			if (
+				(
+					is_string($extensions) === true &&
+					preg_match($extensions, $filename)
+				) || (
+					is_array($extensions) === true &&
+					in_array($extension, $extensions)
+				)
+			) {
+				$icon = $type;
+				break;
+			}
+		}
 
-        return $icon ?? 'file';
-    }
+		return $icon ?? 'file';
+	}
 
-    public static function parse(mixed $text): string
-    {
-        return static::renderBlock(static::parseBlock($text));
-    }
+	public static function parse(mixed $text): string
+	{
+		return static::renderBlock(static::parseBlock($text));
+	}
 
-    // Source: http://stackoverflow.com/a/8882181
-    protected static function parseBlock(string $text): array
-    {
+	// Source: http://stackoverflow.com/a/8882181
+	protected static function parseBlock(string $text): array
+	{
 
-        $indentation = '  ';
+		$indentation = '  ';
 
-        $result = [];
-        $path   = [];
+		$result = [];
+		$path   = [];
 
-        foreach (explode("\n", $text) as $line) {
-            // get depth and label
-            $depth = 0;
+		foreach (explode("\n", $text) as $line) {
+			// get depth and label
+			$depth = 0;
 
-            while (substr($line, 0, strlen($indentation)) === $indentation) {
-                $depth += 1;
-                $line = substr($line, strlen($indentation));
-            }
+			while (substr($line, 0, strlen($indentation)) === $indentation) {
+				$depth += 1;
+				$line = substr($line, strlen($indentation));
+			}
 
-            // truncate path if needed
-            while ($depth < sizeof($path)) {
-                array_pop($path);
-            }
+			// truncate path if needed
+			while ($depth < sizeof($path)) {
+				array_pop($path);
+			}
 
-            // keep label (at depth)
-            $path[$depth] = $line;
+			// keep label (at depth)
+			$path[$depth] = $line;
 
-            // traverse path and add label to result
-            $parent =& $result;
+			// traverse path and add label to result
+			$parent =& $result;
 
-            foreach ($path as $depth => $key) {
-                if (!isset($parent[$key])) {
-                    $parent[$line] = array();
-                    break;
-                }
+			foreach ($path as $depth => $key) {
+				if (!isset($parent[$key])) {
+					$parent[$line] = array();
+					break;
+				}
 
-                $parent =& $parent[$key];
-            }
-        }
+				$parent =& $parent[$key];
+			}
+		}
 
-        // return
-        return $result;
-    }
+		// return
+		return $result;
+	}
 
-    protected static function renderLabel(string $name, ?string $type = null): string
-    {
-        $html  = '<span role="presentation" class="filesystem-label" data-type="' . $type . '">';
-        if ($type !== null) {
-            $html .= icon($type);
-        }
-        $html .= $name;
-        $html .= '</span>';
+	protected static function renderLabel(string $name, ?string $type = null): string
+	{
+		$html  = '<span role="presentation" class="filesystem-label" data-type="' . $type . '">';
+		if ($type !== null) {
+			$html .= icon($type);
+		}
+		$html .= $name;
+		$html .= '</span>';
 
-        return $html;
-    }
+		return $html;
+	}
 
-    protected static function renderBlock(array $files, int $level = 0): string
-    {
-        $html = '<ul>';
+	protected static function renderBlock(array $files, int $level = 0): string
+	{
+		$html = '<ul>';
 
-        foreach ($files as $filename => $children) {
+		foreach ($files as $filename => $children) {
 
-            $hasChildren = count($children) > 0;
-            $isFolder    = Str::endsWith($filename, '/');
-            $icon        = static::getIconByFilename($filename);
+			$hasChildren = count($children) > 0;
+			$isFolder    = Str::endsWith($filename, '/');
+			$icon        = static::getIconByFilename($filename);
 
-            $html .= '<li>';
+			$html .= '<li>';
 
-            if ($isFolder) {
-                $filename = preg_replace('/\/$/', '', $filename);
-                $icon     = $hasChildren ? 'folder-expanded' : 'folder-collapsed';
+			if ($isFolder) {
+				$filename = preg_replace('/\/$/', '', $filename);
+				$icon     = $hasChildren ? 'folder-expanded' : 'folder-collapsed';
 
-                if ($hasChildren) {
-                    $html .= '<details open>';
-                    $html .= '<summary>' . static::renderLabel($filename, $icon) . '</summary>';
-                    $html .= static::renderBlock($children, $level + 1);
-                    $html .= '</details>';
-                    continue;
-                }
+				if ($hasChildren) {
+					$html .= '<details open>';
+					$html .= '<summary>' . static::renderLabel($filename, $icon) . '</summary>';
+					$html .= static::renderBlock($children, $level + 1);
+					$html .= '</details>';
+					continue;
+				}
 
-            }
+			}
 
-            $html .= static::renderLabel($filename, $icon);
-            $html .= '</li>';
+			$html .= static::renderLabel($filename, $icon);
+			$html .= '</li>';
 
-        }
+		}
 
-        $html .= '</ul>';
+		$html .= '</ul>';
 
-        return $html;
+		return $html;
 
-    }
+	}
 
 }
 

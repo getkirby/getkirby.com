@@ -18,6 +18,8 @@ Using Kirby's router, you can quickly create a new page from a route pattern:
 ```php "/site/config/config.php"
 <?php
 
+use Kirby\Uuid\Uuid;
+
 return [
     'routes' => [
         [
@@ -73,6 +75,8 @@ It's also possible to create a multi-language version of this page, by adding th
 
 ```php "/site/config/config.php"
 <?php
+
+use Kirby\Uuid\Uuid;
 
 return [
     'languages' => true,

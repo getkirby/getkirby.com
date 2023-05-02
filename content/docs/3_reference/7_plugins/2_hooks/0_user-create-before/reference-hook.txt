@@ -1,0 +1,20 @@
+Details:
+
+## Example
+
+Prevent users with a specific role from creating new users with the same role:
+
+```php
+<?php
+return [
+  'hooks' => [
+    'user.create:before' => function (Kirby\Cms\User $user, array $input) {
+      if ($user->role()->name() === 'editor' && kirby()->user()->role()->name() === 'editor') {
+        throw new ErrorException('Sorry! You can only create users with the "client" role');
+      }
+    }
+  ]
+];
+```
+
+The `$user` parameter refers to the newly created `Kirby\Cms\User` object (not the currently logged-in user, which we get via `kirby()->user()`). The `$input` array contains the form data (name, email, passsword, language, role, model).

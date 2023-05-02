@@ -66,6 +66,8 @@ We are using a new page model for the animals page, which will read from the csv
 ```php "/site/models/animals.php"
 <?php
 
+use Kirby\Uuid\Uuid;
+
 class AnimalsPage extends Page
 {
 

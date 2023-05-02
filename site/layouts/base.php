@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <?php snippet('layouts/head') ?>
+	<?php snippet('layouts/head') ?>
 </head>
 <body>
-  <?= $slot ?>
+	<?= $slot ?>
 </body>
 </html>

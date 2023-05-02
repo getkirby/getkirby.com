@@ -30,6 +30,8 @@ In the `Reviews` page model, we redefine the `children()` method to get the subp
 ```php "/site/models/reviews.php"
 <?php
 
+use Kirby\Uuid\Uuid;
+
 class ReviewsPage extends Page
 {
     public function children()

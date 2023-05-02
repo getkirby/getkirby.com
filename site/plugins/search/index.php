@@ -9,5 +9,5 @@ include __DIR__ . '/vendor/autoload.php';
  */
 function algolia(): Search
 {
-    return Search::instance();
+	return Search::instance();
 }

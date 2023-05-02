@@ -74,6 +74,8 @@ We can now convert these database entries to children of the comments parent. To
 ```php "/site/models/comments.php"
 <?php
 
+use Kirby\Uuid\Uuid;
+
 class CommentsPage extends Kirby\Cms\Page
 {
     public function children()
@@ -265,11 +267,18 @@ fields:
 ### Extended `comments.php` model
 
 ```php "/site/models/comments.php"
+<?php
+
+use Kirby\Uuid\Uuid;
 
 class CommentsPage extends Kirby\Cms\Page
 {
     public function children()
     {
+		    if ($this->children instanceof Pages) {
+            return $this->children;
+        }
+				
         $comments = [];
 
         foreach (Db::select('comments') as $comment) {
@@ -283,12 +292,14 @@ class CommentsPage extends Kirby\Cms\Page
                     'title'  => $comment->title() ?? 'New Comment',
                     'text'   => $comment->text(),
                     'user'   => $comment->user(),
-                    'status' => is_null($comment->status()) ? 'draft' : $comment->status()
+                    'status' => is_null($comment->status()) ? 'draft' : $comment->status(),
+										'uuid'  => Uuid::generate(),
+
                 ]
             ];
         }
 
-        return Pages::factory($comments, $this);
+        return $this->children = Pages::factory($comments, $this);
     }
 }
 ```
