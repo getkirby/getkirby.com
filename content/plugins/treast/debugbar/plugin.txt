@@ -18,6 +18,10 @@ Description: PHP Debug Bar for KirbyCMS
 
 ----
 
+Published: 2023-05-02
+
+----
+
 Example:
 
 ```php
