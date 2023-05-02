@@ -34,6 +34,8 @@ To fetch the virtual children, we create a new `Rssfeed` page model which will r
 ```php "/site/models/rssfeed.php"
 <?php
 
+use Kirby\Uuid\Uuid;
+
 class RssfeedPage extends Page {
 
     public function children()
