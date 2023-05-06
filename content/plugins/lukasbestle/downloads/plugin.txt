@@ -1,0 +1,17 @@
+Title: Downloads Block
+
+----
+
+Repository: https://github.com/lukasbestle/kirby-downloads
+
+----
+
+Category: panel
+
+----
+
+Subcategory: block
+
+----
+
+Description: Embed a list of downloads from a central storage page with filters and search
