@@ -15,3 +15,7 @@ Subcategory: block
 ----
 
 Description: Embed a list of downloads from a central storage page with filters and search
+
+----
+
+Published: 2023-05-06
