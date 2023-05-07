@@ -1,4 +1,4 @@
-Text: 
+Text:
 
 ## Example
 
@@ -17,7 +17,7 @@ endif;
 
 ### Crop positions
 
-You can set from which position a file should be cropped. The following crop options are available:
+You can define from which side or corner a file should be cropped. The following crop options are available:
 
 - `top left`
 - `top`
