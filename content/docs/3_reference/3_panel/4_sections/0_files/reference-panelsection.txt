@@ -431,7 +431,7 @@ sections:
     template: gallery
 ```
 
-You can then get fetch those files in the frontend like this:
+You can then fetch those files in the frontend like this:
 
 ```php
 <?php $galleryImages = $page->images()->template('gallery'); ?>

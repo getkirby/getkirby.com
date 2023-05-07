@@ -2,7 +2,7 @@ Title: Image thumbnails
 
 ----
 
-Intro: Kirby's built-in thumbs creator lets you resize and crop any image on the fly in your templates. You can not only resize and crop images from the content folder, but also from the assets folder directly.
+Intro: Kirby's built-in thumb creator lets you resize and crop any image on the fly in your templates. You can not only resize and crop images from the content folder, but also from the assets folder directly.
 
 ----
 
@@ -10,13 +10,13 @@ Text:
 
 With Kirby's Thumbnail API, thumbs are generated asynchronously. This makes thumb creation feel a lot faster and creates less memory issues, which could easily become an issue with many images or when creating many different images sizes to serve responsive images.
 
-A new set of plugin points can be used to hook into the thumbnail API or the thumbnail URLs, see (link: docs/reference/plugins/extensions/core-components text: core components).
+A new set of plugin extensions can be used to hook into the thumbnail API or the thumbnail URLs, see (link: docs/reference/plugins/extensions/core-components text: core components).
 
 In a default setup, thumbnails are stored in the `/media` folder.
 
-## The `thumbs()` method
+## The `thumb()` method
 
-With the thumbs method, you can perform multiple image manipulations at once: resizing, cropping, changing the image format, blurring and converting to grayscale, and blurring. If you wanted to do everything at once, the code would look like this:
+With the thumb method, you can perform multiple image manipulations at once: resizing, cropping, changing the image format, converting to grayscale, and blurring. If you wanted to do everything at once, the code would look like this:
 
 ```php
 <img src="<?= $image->thumb(
@@ -36,7 +36,7 @@ In the Reference: (link: docs/reference/objects/cms/file/thumb text: $file->thum
 
 ## Shortcut methods
 
-Most of the time, you don't want to use all options though and on top, the thumb method is quite verbose. Luckily, Kirby comes with a set of  shortcuts methods: `resize()`, `crop()`, `grayscale()`, and `blur()`. Additionally, you can define default settings in your config file. But one step after the other.
+Most of the time, you don't want to use all options though. On top, the thumb method is quite verbose. Luckily, Kirby comes with a set of  shortcuts methods: `resize()`, `crop()`, `grayscale()`, and `blur()`. Additionally, you can define default settings in your config file. But one step after the other.
 
 Here are some examples for using the shortcut methods, more details with all options in the Reference:
 
@@ -160,4 +160,3 @@ With Kirby's thumb engine, you can resize, crop and otherwise manipulate images.
 
 - (link: docs/cookbook/performance/responsive-images text: Responsive images)
 - (link: docs/reference/plugins/components/thumb text: Custom thumb components)
-
