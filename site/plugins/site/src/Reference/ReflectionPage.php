@@ -31,8 +31,9 @@ abstract class ReflectionPage extends Page
 			return $this->slug();
 		}
 
-		$params = array_column($this->parameters(), 'export');
-		$call   = $this->name() . '(' . implode(', ', $params) . ')';
+		$parameters = array_column($this->parameters(), 'export');
+		$parameters = empty($parameters) ? '' : implode(', ', $parameters);
+		$call       = $this->name() . '(' . $parameters . ')';
 
 		if ($return = $this->returnType()) {
 			$call .= ': ' . $return;
@@ -47,9 +48,8 @@ abstract class ReflectionPage extends Page
 	public function deprecated(): Field
 	{
 		if ($tag = $this->docBlock()?->getTag('deprecated')) {
-			return parent::deprecated()->value(
-				$tag->getVersion() . '|' . $tag->getDescription()
-			);
+			$value = $tag->getVersion() . '|' . $tag->getDescription();
+            return new Field($this, 'deprecated', $value);
 		}
 
 		return parent::deprecated();
@@ -64,12 +64,13 @@ abstract class ReflectionPage extends Page
 			return $this->docBlock;
 		}
 
-		try {
-			$comment = $this->reflection()?->getDocComment();
-			return $this->docBlock = new DocBlock($comment);
-		} catch (Throwable) {
-			return $this->docBlock = null;
+		if ($reflection = $this->reflection()) {
+            try {
+                return $this->docBlock = new DocBlock($reflection->getDocComment());
+            } catch (Throwable) {}
 		}
+
+		return $this->docBlock = null;
 	}
 
 	/**
@@ -84,7 +85,8 @@ abstract class ReflectionPage extends Page
 
 		// otherwise try to get summary from DocBlock in code
 		if ($docBlock = $this->docBlock()) {
-			$intro = str_replace(PHP_EOL, ' ', trim($docBlock->getSummary()));
+			$intro = trim($docBlock->getSummary());
+            $intro = str_replace(PHP_EOL, ' ', $intro);
 
 			if ($intro === '/') {
 				$intro = null;
@@ -316,11 +318,9 @@ abstract class ReflectionPage extends Page
 	 */
 	public function template(): Template
 	{
-		$template = parent::template();
-
 		// If template exists, use it
-		if ($this->intendedTemplate() === $template) {
-			return $template;
+		 if ($this->intendedTemplate() === parent::template()) {
+            return parent::template();
 		}
 
 		return $this->kirby()->template('reference-article');

@@ -1,0 +1,17 @@
+Intro: Enables the Symfony YAML parser
+
+----
+
+Since: 3.9.4
+
+----
+
+Text:
+
+You can set the `yaml.handler` option to enable the Symfony YAML parser, which will replace the Spyc YAML parser in one of the next major releases. For now, the Spyc YAML parser is the default.
+
+```php
+return [
+	'yaml.handler' => 'symfony'
+];
+```

@@ -5,4 +5,5 @@ return [
 	'cdn' => [
 		'domain' => 'https://assets.getkirby.com',
 	],
+	'debug' => false
 ];

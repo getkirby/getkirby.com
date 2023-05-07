@@ -23,7 +23,7 @@ class DocBlock
 	public function __call(string $method, array $args = [])
 	{
 		if (method_exists($this->instance, $method) === true) {
-			return $this->instance->$method(...$args);
+            return call_user_func_array([$this->instance, $method], $args);
 		}
 
 		throw new Exception('Invalid doc block method: ' . $method);

@@ -1,0 +1,17 @@
+Title: ThumbHash
+
+----
+
+Repository: https://github.com/tobimori/kirby-thumbhash
+
+----
+
+Category: media
+
+----
+
+Subcategory: images
+
+----
+
+Description: Smarter image placeholders with the ThumbHash algorithm – supports transparency!
