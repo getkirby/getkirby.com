@@ -1,4 +1,4 @@
-Guide: /files/resize-images-on-the-fly#presets
+Guide: files/resize-images-on-the-fly
 
 ----
 
@@ -39,7 +39,7 @@ $options = [
 ];
 ```
 
-You can define presets of options in your `config.php`. (link: docs/reference/system/options/thumbs text: Learn more ›)
+You can define presets of options in your `config.php`. (link: docs/reference/system/options/thumbs#presets text: Learn more ›)
 
 ## Examples
 
