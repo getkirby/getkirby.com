@@ -39,7 +39,7 @@ $options = [
 ];
 ```
 
-You can define presets of options in your `config.php`. (link: docs/guide/templates/resize-images-on-the-fly#presets text: Learn more ›)
+You can define presets of options in your `config.php`. (link: docs/reference/system/options/thumbs text: Learn more ›)
 
 ## Examples
 
