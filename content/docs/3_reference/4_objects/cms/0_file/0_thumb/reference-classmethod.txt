@@ -1,4 +1,4 @@
-Guide: templates/resize-images-on-the-fly
+Guide: /docs/guide/files/resize-images-on-the-fly#presets
 
 ----
 
