@@ -18,6 +18,10 @@ Description: Automatically reload the frontend when content changes are saved in
 
 ----
 
+Published: 2023-05-10
+
+----
+
 License:
 
 name: MIT license
