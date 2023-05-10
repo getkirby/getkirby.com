@@ -1,0 +1,32 @@
+Title: Visual Block Selector
+
+----
+
+Repository: https://github.com/junohamburg/kirby-visual-block-selector
+
+----
+
+Category: panel
+
+----
+
+Subcategory: enhancement
+
+----
+
+Description: A customized block selector that displays a preview image for each block.
+
+----
+
+License:
+
+name: MIT license
+url: https://github.com/junohamburg/kirby-visual-block-selector/blob/main/LICENSE.md
+
+----
+
+Installation: true
+
+----
+
+Composer: junohamburg/kirby-visual-block-selector
