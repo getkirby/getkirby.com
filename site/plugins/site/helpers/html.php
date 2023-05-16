@@ -46,6 +46,8 @@ function img($file, array $props = [])
 		'loading' => $loading ?? null,
 		'src'     => $src,
 		'srcset'  => $srcset,
+		'width'   => $file->width(),
+		'height'  => $file->height()
 	]) . '>';
 
 	if (empty($props['lightbox']) === false && $props['lightbox'] !== false) {
