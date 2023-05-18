@@ -2,6 +2,10 @@ Title: Unique IDs & Permalinks
 
 ----
 
+Keywords: uuid, uuids
+
+----
+
 Description: Build persistent relations between pages, files or users
 
 ----
