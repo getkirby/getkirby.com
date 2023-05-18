@@ -70,7 +70,7 @@ Kirby stores media files in the same folder as the page content instead of putti
 
 Kirby works with all types of media files and allows you to store meta data for each file in the same flexible way you can store information for pages.
 
-(link: docs/guide/content/files text: Read more ›)
+(link: docs/guide/files text: Read more ›)
 
 ## Text formatting
 
