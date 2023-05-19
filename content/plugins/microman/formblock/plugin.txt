@@ -14,8 +14,4 @@ Subcategory: block
 
 ----
 
-Paid: https://license.microman.ch/?product=801346
-
-----
-
 Description: This form plugin for Kirby offers you maximum flexibility and usability. It can be used as a block where needed. Even multiple times per page. With the integrated mailview field you can display requests allover the panel.

@@ -1,0 +1,21 @@
+Title: Components
+
+----
+
+Repository: https://github.com/youngcut/kirby-components
+
+----
+
+Category: performance
+
+----
+
+Demo: https://www.youtube.com/watch?v=1ycWtWRL1hQ
+
+----
+
+Subcategory: panel
+
+----
+
+Description: No more switching between snippets and blueprints folders. Bring them to a common place and keep the overview.
