@@ -1,0 +1,19 @@
+Title: Search View
+
+----
+
+Subtitle: Deliver results
+
+----
+
+Intro: New Panel view for complete list of search results
+
+----
+
+Github: https://github.com/getkirby/v4/pull/192
+
+----
+
+Text:
+
+(image: search-view.png)

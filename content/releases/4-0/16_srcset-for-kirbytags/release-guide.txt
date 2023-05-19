@@ -1,0 +1,39 @@
+Title: Srcset Support In Image Tags
+
+----
+
+Subtitle:
+
+----
+
+Intro: Image KirbyTag now supports `srcset` attribute
+
+----
+
+Nolt: 112
+
+----
+
+Github:
+
+----
+
+Text:
+
+## With absolute sizes
+
+```kirbytext
+(\image: foo.jpg srcset: 200, 300)
+```
+
+## With a config srcset name
+
+https://getkirby.com/docs/reference/system/options/thumbs#srcsets
+
+```kirbytext
+(\image: foo.jpg srcset: album)
+```
+
+## With config defaults
+
+https://getkirby.com/docs/reference/system/options/kirbytext#image

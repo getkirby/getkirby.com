@@ -1,0 +1,25 @@
+Title: Panel UI Improvements
+
+----
+
+Subtitle:
+
+----
+
+Intro:
+
+----
+
+Text:
+
+## New Icons
+
+We've added new icons to our Panel iconset
+
+- `clear`
+- `split`
+- `merge`
+
+## More to come …
+
+

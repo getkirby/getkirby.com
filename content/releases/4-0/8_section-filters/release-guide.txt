@@ -1,0 +1,49 @@
+Title: Section Filters
+
+----
+
+Subtitle: Filter pages and files
+
+----
+
+Intro: Pages and files sections support a new query option to filter pages and files by our query string syntax. Sorting will be disabled for sections with a query.
+
+----
+
+Github: https://github.com/getkirby/v4/pull/9
+
+----
+
+Nolt: 73
+
+----
+
+Example:
+
+```yaml
+expensive:
+  extends: sections/products
+  label: Expensive
+  query: page.childrenAndDrafts.filter('price', '>', '99')
+cheap:
+  extends: sections/products
+  label: Cheap
+  query: page.childrenAndDrafts.filter('price', '<=', '99')
+```
+
+----
+
+Text:
+
+```yaml
+expensive:
+  extends: sections/products
+  label: Expensive
+  query: page.childrenAndDrafts.filter('price', '>=', '100')
+cheap:
+  extends: sections/products
+  label: Cheap
+  query: page.childrenAndDrafts.filter('price', '<=', '99')
+```
+
+(image: section-filters.png)

@@ -1,0 +1,81 @@
+Title: Color Field
+
+----
+
+Subtitle: Color me surprised
+
+----
+
+Intro: Welcoming the new `color` field with support for `hex`, `rgb` and `hsl` modern CSS notation
+
+----
+
+Example:
+
+```yaml
+color:
+  type: color
+  options:
+    "Sunny rays": "#F8B195"
+    "First-love blush": "#F67280"
+    "Cherry blossom": "#C06C84"
+    "Morning gloom": "#6C5B7B"
+    "Midnight rain": "#355C7D"
+```
+
+----
+
+Text:
+
+## Usage
+
+```yaml
+color:
+	type: color
+	format: hsl #supports hex (default), rgb, hsl
+```
+
+(image: color-field.png)
+
+## Pre-defined options
+
+Allows to add a list of pre-defined colors that will be shown as one-click options in the Panel
+
+
+```yaml
+color:
+	type: color
+  options:
+    - "#f8b195"
+		- "#f67280"
+		- "#c06c84"
+		- "#6c5b7b"
+		- "#355c7d"
+```
+
+(image: color-field-options.png)
+
+If you name the colors, their name is shown in the Panel as well
+
+```yaml
+color:
+	type: color
+  options:
+    "Sunny rays": "#F8B195"
+    "First-love blush": "#F67280"
+    "Cherry blossom": "#C06C84"
+    "Morning gloom": "#6C5B7B"
+    "Midnight rain": "#355C7D"
+```
+
+(image: color-field-names.png)
+
+## Modes
+
+`mode` option to show everything with `picker`, only the `input`, or only the `options`
+
+(image: color-field-modes.png)
+
+## Alpha
+
+`alpha` option (default: false) to activate alpha transparency support

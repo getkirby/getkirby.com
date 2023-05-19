@@ -1,0 +1,22 @@
+Title: Uploader
+
+----
+
+Subtitle: Load it all up
+
+----
+
+Intro: The new upload dialog offers the option to edit and preview files before the upload.
+
+----
+
+Github:
+
+- https://github.com/getkirby/v4/pull/195
+
+----
+
+Text:
+
+(image: uploader.png)
+

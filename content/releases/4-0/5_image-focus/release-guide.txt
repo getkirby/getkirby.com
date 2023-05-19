@@ -1,0 +1,35 @@
+Title: Image Focus
+
+----
+
+Subtitle: Focus Pocus
+
+----
+
+Intro:
+
+----
+
+Github:
+
+- https://github.com/getkirby/v4/pull/106
+- https://github.com/getkirby/v4/pull/106
+
+----
+
+Nolt: 118
+
+----
+
+Text:
+
+- Cropping with focal point
+- Set focal point via Panel
+
+(image: image-focus.png)
+
+- Or directly in the content file:
+
+```js
+Focus: 70% 30%
+```

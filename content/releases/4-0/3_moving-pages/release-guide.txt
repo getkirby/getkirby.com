@@ -1,0 +1,27 @@
+Title: Moving Pages
+
+----
+
+Subtitle: I like to move it, move it
+
+----
+
+Intro: Pages can finally be moved to a new parent page.
+
+----
+
+Nolt: 44
+
+----
+
+Github: https://github.com/getkirby/v4/pull/11
+
+----
+
+Text:
+
+The move dialog lets you pick a new parent page and will make sure that the page can only be moved if the page type is allowed there as well.
+
+(image: move-dropdown.png)
+
+(image: move-dialog.png)

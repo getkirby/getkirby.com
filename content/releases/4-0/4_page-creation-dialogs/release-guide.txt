@@ -1,0 +1,65 @@
+Title: Page Creation Dialogs
+
+----
+
+Subtitle: We are not creationists, but this is great
+
+----
+
+Intro: You can now customize the create dialog for a new page by adding fields.
+
+----
+
+Github:
+
+- https://github.com/getkirby/v4/pull/25
+- https://github.com/getkirby/v4/pull/198
+
+----
+
+Nolt: 102
+
+----
+
+Example:
+
+```yaml
+title: Product
+create:
+  title:
+    label: Product name
+  fields:
+    - price
+    - brand
+  redirect: false
+```
+
+----
+
+Text:
+
+## Configuration
+
+```yaml
+title: Product
+create:
+  title:
+    label: Product name
+  fields:
+    - price
+    - brand
+  redirect: false
+```
+
+(image: page-creation-dialog.png)
+
+## Custom Page Creation Status
+
+You can now also define a status for your newly created pages.
+
+```yaml
+create:
+  status: listed
+```
+
+(image: page-creation-status.png)

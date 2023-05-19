@@ -1,0 +1,22 @@
+Title: Changeable File Templates
+
+----
+
+Subtitle:
+
+----
+
+Intro: File template can now be changed to any template listed by its parent in a files section or field
+
+----
+
+Github: https://github.com/getkirby/v4/pull/21
+
+----
+
+Nolt: 259
+
+----
+
+Text:
+

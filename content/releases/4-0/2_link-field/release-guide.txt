@@ -1,0 +1,50 @@
+Title: Link Field
+
+----
+
+Subtitle: Links to anything
+
+----
+
+Intro: The new link field can be used to create links to external websites, internal pages, files, email address and telephone numbers. It also upgrades the link dialogs for the writer and textarea fields.
+
+----
+
+Github: https://github.com/getkirby/v4/pull/201
+
+----
+
+Nolt:
+
+- 268
+- 250
+
+----
+
+Example:
+
+```yaml
+fields:
+  link:
+    type: link
+```
+
+----
+
+Text:
+
+## Setup
+
+```yaml
+fields:
+  link:
+    type: link
+```
+
+## Links to pages
+
+(image: page-link.png)
+
+## Links to files
+
+(image: file-link.png)

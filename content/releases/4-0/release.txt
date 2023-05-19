@@ -1,6 +1,6 @@
-title: Kirby 4 Roadmap
+title: Kirby 4
 ----
-Subtitle: Roadmap
+Subtitle: Alpha 1
 ----
 Version: 4.0
 ----

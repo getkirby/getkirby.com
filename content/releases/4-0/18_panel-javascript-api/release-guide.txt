@@ -1,0 +1,82 @@
+Title: Panel Javascript API
+
+----
+
+Subtitle:
+
+----
+
+Intro:
+
+----
+
+Text:
+
+## Uploads
+
+The new `panel.upload` JS module adds simple commands to pick files from the system file picker, open the new file dialog and handle uploads to the server.
+
+```js
+// opens the system file picker
+panel.upload.pick(options);
+
+// opens the upload dialog
+panel.upload.open(options)
+
+// selects additional files (needs a FileList)
+panel.upload.select(files)
+
+// removes a file from the upload queue
+panel.upload.remove(fileId);
+
+// starts the upload of all files in the queue
+panel.upload.start();
+
+// closes the upload dialog and clears the queue
+panel.upload.close();
+
+// resets the queue
+panel.upload.reset();
+```
+
+## New Components
+
+- `<k-code>`
+- `<k-dialog-body>`
+- `<k-dialog-box>`
+- `<k-dialog-buttons>`
+- `<k-dialog-fields>`
+- `<k-dialog-footer>`
+- `<k-dialog-form>`
+- `<k-dialog-notification>`
+- `<k-dialog-search>`
+- `<k-dialog-text>`
+- `<k-notification>`
+- `<k-drawer-body>`
+- `<k-drawer-fields>`
+- `<k-drawer-header>`
+- `<k-drawer-notification>`
+- `<k-drawer-tabs>`
+- `<k-tree>`
+- `<k-page-tree>`
+- `<k-browser>`
+- `<k-file-browser>`
+
+## New helpers
+
+- `$helper.focus(element)`
+- `$helper.object.length(object)`
+- `$helper.string.isEmpty(string)`
+- `$helper.url.base`
+- `$helper.url.buildQuery`
+- `$helper.url.buildUrl`
+- `$helper.url.isAbsolute`
+- `$helper.url.isSameOrigin`
+- `$helper.url.isUrl`
+- `$helper.url.makeAbsolute`
+- `$helper.url.toObject`
+
+## New js error classes
+
+- `RequestError`
+- `JsonRequestError`
