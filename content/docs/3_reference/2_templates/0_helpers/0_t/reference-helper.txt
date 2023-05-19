@@ -4,7 +4,7 @@ Text:
 
 The `t()` helper returns a predefined translation string by key.
 
-Translations can be defined (link: docs/guide/languages/custom-language-variables text: in the language files) or (link: ocs/reference/plugins/extensions/translations text: in plugins).
+Translations can be defined (link: docs/guide/languages/custom-language-variables text: in the language files) or (link: docs/reference/plugins/extensions/translations text: in plugins).
 
 Get a translation string by key:
 
