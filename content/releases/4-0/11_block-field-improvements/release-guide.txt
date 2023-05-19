@@ -51,6 +51,22 @@ fieldsBlock:
 
 ----
 
+Shortcuts:
+
+| Action | Shortcut |
+| - | - |
+| Remove block | `meta + backspace` |
+| Move focus up | `meta + arrow up` |
+| Move focus down | `meta + arrow down` |
+| Move block up | `meta + shift + arrow up` |
+| Move block down | `meta + shift + arrow down` |
+| Extend selection up | `meta + alt + arrow up` |
+| Extend selection down | `meta + alt + arrow down` |
+| Split block | `meta + enter` |
+| Merge block | `meta + J` |
+
+----
+
 Text:
 
 ## Field Preview

@@ -7,7 +7,7 @@
 		],
 		[
 			'text' => 'Docs',
-			'link' => '/docs',
+			'link' => $page->docs()->or('/docs'),
 			'icon' => 'book',
 			'style' => 'outlined'
 		]

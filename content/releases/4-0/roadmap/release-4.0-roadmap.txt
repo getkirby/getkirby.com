@@ -1,7 +1,0 @@
-title: Kirby 4 Roadmap
-----
-Subtitle: Roadmap
-----
-Version: 4.0
-----
-ogimage: opengraph.png
