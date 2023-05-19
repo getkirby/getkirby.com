@@ -61,36 +61,41 @@
     <p class="h1 color-gray-600"><?= $page->subtitle() ?></p>
   </div>
 
-	<?php snippet('cta', [
-		'center'  => false,
-		'mb'      => 0,
-		'buttons' => [
-			[
-				'text' => 'Try now',
-				'link' => $page->link(),
-				'icon' => 'download'
-			],
-			[
-				'text' => 'Docs',
-				'link' => $page->children()->listed()->first()->url(),
-				'icon' => 'book',
-				'style' => 'outlined'
-			],
-		]
-	]) ?>
+  <?php snippet('templates/releases/cta', [
+    'options' => ['center' => false, 'mb' => 0]
+  ]) ?>
 </header>
 
 <article class="release-wrapper">
-	<figure class="release-box mb-24 p-12 bg-black">
+	<figure class="release-box mb-6 p-12 bg-black">
 		<?= $page->image('chameleon.png') ?>
 	</figure>
 
-	<?php foreach ($page->children()->listed() as $section): ?>
+	<?php snippet('templates/release-40/gist') ?>
+	<?php snippet('templates/release-40/roadmap') ?>
+
+	<?php foreach ($sections as $section): ?>
   <?php snippet([
 		'templates/release-40/' . $section->slug(),
 		'templates/release-40/section'
 	], ['section' => $section]) ?>
 	<?php endforeach ?>
+
+	<?php snippet('templates/release-40/versioning') ?>
+
+  <section id="faq" class="mb-42">
+    <?php snippet('templates/features/intro', [
+      'title' => 'Frequently asked questions',
+      'text'  => 'We are getting a lot of questions after our announcement and already tried to answer most of them here. We will keep collecting questions from the community here and try to answer them as transparently as possible. Let us know on Discord or in the Forum if you have additional questions.'
+    ]) ?>
+    <?php snippet('faq') ?>
+  </section>
+
+	<?php snippet('templates/release-40/changes') ?>
+
+	<?php snippet('templates/releases/get-started') ?>
+  <?php snippet('templates/release-40/release-menu') ?>
+
 </article>
 
 <?= js('assets/js/templates/release.js') ?>

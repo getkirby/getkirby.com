@@ -1,0 +1,20 @@
+Title: Bug Fixes
+
+----
+
+Subtitle:
+
+----
+
+Text:
+
+- Removed flickering from `k-pagination` when navigating
+- Fixed name of default blueprints to `pages/default` and `files/default` [#43](https://github.com/getkirby/v4/pull/43)
+- Blocks: batch selection allows deselecting blocks
+- Blocks: batch selection gets deselected on Escape key
+- Fixed i18n translate issues, e.g. for the user blueprint title [#4869](https://github.com/getkirby/kirby/issues/4869)
+- Writer field: Email mark toolbar button title is properly translated now [#78](https://github.com/getkirby/v4/pull/78)
+- Empty required Writer field now shows proper invalid styling in Panel [#83](https://github.com/getkirby/v4/pull/83)
+- UUIDs are less often generated when not needed to be generated [#154](https://github.com/getkirby/v4/pull/154)
+- Kirby queries now differentiate between integers and floats as arguments [#182](https://github.com/getkirby/v4/pull/182)
+- Kirby no longer hides errors in the response class when the response is converted to a string: [#5027](https://github.com/getkirby/kirby/issues/5027#issuecomment-1446830047)

@@ -1,0 +1,24 @@
+Title: Deprecated
+
+----
+
+Subtitle:
+
+----
+
+Text:
+
+#### Core
+
+- `Panel\Mode::imagePlaceholder()`: Use `Image\Image::placeholder()` instead
+
+#### Panel
+
+- `this.$events`: Use `this.$panel.events` instead.
+- `this.$panel.events.$on`: Use `this.$panel.events.on` instead
+- `this.$panel.events.$off`: Use `this.$panel.events.off` instead
+- `this.$panel.events.$emit`: Use `this.$panel.events.emit` instead
+- `this.$store.dispatch("isLoading")`: Use `this.$panel.isLoading` instead
+- `this.$translation`: Use `this.$panel.translation` instead
+- `this.$store.dispatch("dialog")` is deprecated. Use `this.$panel.dialog.open` and `this.$panel.dialog.close` instead [#163](https://github.com/getkirby/v4/pull/163)
+- `this.$store.dispatch("drag", drag)` has been deprecated. Use `this.$panel.drag = drag` instead [#171](https://github.com/getkirby/v4/pull/171)

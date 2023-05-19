@@ -81,6 +81,8 @@
 
   <?php snippet('hgroup', [
     'title'    => 'New Versioning Scheme',
+		'subtitle' => 'Semantic Versioning',
+		'mb'       => 12
   ]) ?>
 
   <div class="columns" style="--columns: 2">
