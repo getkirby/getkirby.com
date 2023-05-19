@@ -447,7 +447,7 @@ sections:
 
 ### `gallery-image.yml` file blueprint
 
-```yaml "/site/plugins/virtual-gallery/blueprints/files/gallery.yml"
+```yaml "/site/plugins/virtual-gallery/blueprints/files/gallery-image.yml"
 title: Gallery Image
 
 columns:
