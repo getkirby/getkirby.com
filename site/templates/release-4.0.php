@@ -48,9 +48,14 @@
       padding: var(--spacing-12);
     }
   }
+
+
+.btn {
+	border-radius: var(--rounded);
+}
 </style>
 
-<header class="mb-36 flex items-end justify-between release-header">
+<header class="mb-12 flex items-end justify-between release-header">
   <div>
     <h1 class="h1"><?= $page->title() ?></h1>
     <p class="h1 color-gray-600"><?= $page->subtitle() ?></p>
@@ -76,6 +81,10 @@
 </header>
 
 <article class="release-wrapper">
+	<figure class="release-box mb-24 p-12 bg-black">
+		<?= $page->image('chameleon.png') ?>
+	</figure>
+
 	<?php foreach ($page->children()->listed() as $section): ?>
   <?php snippet([
 		'templates/release-40/' . $section->slug(),
