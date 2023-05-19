@@ -1,0 +1,37 @@
+Title: Layout Field Improvements
+
+----
+
+Subtitle:
+
+----
+
+Intro:
+
+----
+
+Github: https://github.com/getkirby/v4/pull/16
+
+----
+
+Nolt:
+
+- 522
+- 370
+
+----
+
+Text:
+
+## Change layout
+
+(video: change-layout-1.mp4)
+(video: change-layout-2.mp4)
+
+## Copy and paste
+
+Copy single or all layouts and paste them into other layout fields
+
+(image: copy-all.png)
+
+(image: copy-and-paste.png)

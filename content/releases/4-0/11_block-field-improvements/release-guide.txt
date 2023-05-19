@@ -1,0 +1,143 @@
+Title: Block Field Improvements
+
+----
+
+Subtitle: Our best field is now 20% bester
+
+----
+
+Intro:
+
+----
+
+Github:
+
+- https://github.com/getkirby/v4/issues/72
+
+----
+
+Nolt:
+
+- 216
+- 203
+- 443
+
+----
+
+FieldPreviewExample:
+
+```yaml
+fieldsBlock:
+  type: blocks
+  fieldsets:
+    foo:
+      wysiwyg: true
+      preview: fields
+      tabs:
+        main:
+          fields:
+            title:
+              type: text
+            blocky:
+              type: blocks
+            subtitle:
+              type: text
+            description:
+              type: writer
+        settings:
+          label: Settings
+          fields: # ...
+```
+
+----
+
+Text:
+
+## Field Preview
+
+New `fields` block type available for previews
+
+(image: field-preview.png)
+
+```yaml
+fieldsBlock:
+  type: blocks
+  fieldsets:
+    - heading
+    - text
+    foo:
+      wysiwyg: true
+      preview: fields
+      tabs:
+        main:
+          label: Main
+          fields:
+            title:
+              type: text
+              placeholder: Title
+            blocky:
+              type: blocks
+            subtitle:
+              type: text
+              placeholder: Subtitle
+            description:
+              type: writer
+              icon: text
+              inline: true
+              placeholder: Description
+              marks:
+                - bold
+                - italic
+        settings:
+          label: Settings
+          fields:
+            controls:
+              type: toggle
+              text: Show controls?
+              width: 1/2
+              default: true
+            autoplay:
+              type: toggle
+              text: autoplay
+              width: 1/2
+              default: false
+
+```
+
+## Heading Block Improvements
+
+Display and edit heading level inline 
+
+(image: heading-level.png)
+
+Uses toggles field inside drawer for heading level
+
+(image: heading-level-toggles.png)
+
+## New Keyboard shortcuts
+
+Enhanced keyboard shorts to react on both, meta (Cmd) and Ctrl, keys
+
+- New shortcut to remove selected block `meta + backspace`
+- New shortcut to move focus up/down `meta + arrow up/down`
+- Improved shortcut to move blocks up/down `meta + shift + arrow up/down`
+- New shortcuts to extend selection up/down: `Cmd + Alt + Arrow up/down`
+- New shortcuts `Cmd + Enter` to split, `Cmd + J` to merge
+
+## Block Splitting
+
+(video: splitting-1.mov)
+
+(video: splitting-2.mov)
+
+- Splitting and merging of supported blocks (text, list and heading)
+- New option buttons to split or merge (only shown when supported)
+- Enter in headline block appends new text block when cursor at end
+- Text block with `inline: true` for text field will split directly on Enter (Shift + Enter does hard line break)
+- Custom blocks can support splitting by implementing a `split()` method that emits `split` event and passes an array of two content states (for each of the splitted blocks); and merging by implementing a `merge()` method that receives an array of blocks (which it then needs to use to update itself, all but the first block will automatically removed afterwards)
+
+## Ccollapse blocks while dragging
+
+Large block collapses when dragged for easier handling
+
+(video: blocks-collapse.mp4)

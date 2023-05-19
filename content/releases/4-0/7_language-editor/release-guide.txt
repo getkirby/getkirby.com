@@ -1,0 +1,24 @@
+Title: Language Editor
+
+----
+
+Subtitle: No longer lost in translation
+
+----
+
+Intro: The new language view offers a great way to add custom language variables and configure available languages for your site.
+
+----
+
+Github: https://github.com/getkirby/v4/pull/190
+
+----
+
+Nolt: 514
+
+----
+
+Text:
+
+(image: language-view.png)
+

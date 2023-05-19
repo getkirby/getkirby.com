@@ -18,19 +18,19 @@ return [
 		}
 	],
 	[
-		'pattern' => 'releases/(:num)\-(:num)',
+		'pattern' => 'releases/(:num)\-(:any)',
 		'action'  => function ($generation, $major) {
 			return go('releases/' . $generation . '.' . $major);
 		}
 	],
 	[
-		'pattern' => 'releases/(:num)\.(:num)',
+		'pattern' => 'releases/(:num)\.(:any)',
 		'action'  => function ($generation, $major) {
 			return page('releases/' . $generation . '-' . $major);
 		}
 	],
 	[
-		'pattern' => 'releases/(:num)\.(:num)/(:all?)',
+		'pattern' => 'releases/(:num)\.(:any)/(:all?)',
 		'action'  => function ($generation, $major, $path) {
 			return page('releases/' . $generation . '-' . $major . '/' . $path);
 		}
