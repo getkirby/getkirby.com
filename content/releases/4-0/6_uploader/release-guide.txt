@@ -2,11 +2,15 @@ Title: Uploader
 
 ----
 
-Subtitle: Load it all up
+Subtitle: Uploading files the smart way
 
 ----
 
 Intro: The new upload dialog offers the option to edit and preview files before the upload.
+
+----
+
+Teaser: Screenshot-123.jpg? Meaningless file names are now a thing of the past. With the preview and edit options in the new dialog, the file upload experience has become much more intelligent.
 
 ----
 

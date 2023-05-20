@@ -2,11 +2,19 @@ Title: Default Page Model
 
 ----
 
-Subtitle:
+Subtitle: Set a new page standard
 
 ----
 
 Intro:
+
+----
+
+Teaser:
+
+The default page model kicks in, when there is specific model for a page.
+
+Of course, other models can extend the default page model, too.
 
 ----
 

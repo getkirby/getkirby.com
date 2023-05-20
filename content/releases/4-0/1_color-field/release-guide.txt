@@ -6,7 +6,11 @@ Subtitle: Color me surprised
 
 ----
 
-Intro: Welcoming the new `color` field with support for `hex`, `rgb` and `hsl` modern CSS notation
+Intro: The new `color` field comes with support for `hex`, `rgb` and `hsl` modern CSS notation.
+
+----
+
+Teaser: Color in all its facets: Multiple color notations, color picker, pre-defined colors, custom color names and transparency. You can't get more color than that.
 
 ----
 

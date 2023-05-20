@@ -10,6 +10,10 @@ Intro: The new language view offers a great way to add custom language variables
 
 ----
 
+Teaser: Each language got its own view now. Easily configure your languages or edit language variables right from the Panel. Easy, right?
+
+----
+
 Github: https://github.com/getkirby/v4/pull/190
 
 ----
