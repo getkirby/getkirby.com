@@ -2,11 +2,15 @@ Title: Custom Textarea Buttons
 
 ----
 
-Subtitle:
+Subtitle: Bring your own
 
 ----
 
 Intro:
+
+----
+
+Teaser: Missing that one special button for your custom text markup? Just make it.
 
 ----
 

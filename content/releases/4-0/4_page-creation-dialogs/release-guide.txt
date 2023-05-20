@@ -2,11 +2,19 @@ Title: Page Creation Dialogs
 
 ----
 
-Subtitle: We are not creationists, but this is great
+Subtitle: Faster, better page creation
 
 ----
 
-Intro: You can now customize the create dialog for a new page by adding fields.
+Intro: You can customize the create dialog for a new page by adding fields, changing the label or the title field and disable the automatic redirect to the new page.
+
+----
+
+Teaser:
+
+Customize the page creation dialog to your needs.
+
+Give the title a fitting label, add new fields or disable redirecting to the new page.
 
 ----
 

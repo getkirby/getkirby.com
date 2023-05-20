@@ -2,11 +2,15 @@ Title: Changeable File Templates
 
 ----
 
-Subtitle:
+Subtitle: Change is in the air
 
 ----
 
 Intro: File template can now be changed to any template listed by its parent in a files section or field
+
+----
+
+Teaser: Change file templates to any allowed template defined by its parent in a files section or field.
 
 ----
 
