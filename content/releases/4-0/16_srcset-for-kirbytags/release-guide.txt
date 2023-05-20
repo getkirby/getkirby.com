@@ -4,6 +4,9 @@ Title: Srcset In Image Tag
 
 Subtitle: Image tag goes responsive
 
+----
+
+Category: core
 
 ----
 

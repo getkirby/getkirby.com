@@ -6,7 +6,9 @@ Subtitle: Filter pages and files
 
 ----
 
-Intro: Pages and files sections support a new query option to filter pages and files by our query string syntax. Sorting will be disabled for sections with a query.
+Category: panel
+
+----
 
 Intro: Pages and files sections support a query option to filter pages and files using our query string syntax. Sorting will be disabled for sections with a query.
 

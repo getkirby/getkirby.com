@@ -7,6 +7,11 @@ Subtitle: Link to anything
 ----
 
 Intro: The new link field can be used to create links to external URLs, internal pages, files, email addresses and telephone numbers. It also upgrades the link dialogs for the writer and textarea fields.
+
+----
+
+Category: field
+
 ----
 
 Teaser:
