@@ -6,6 +6,10 @@ Subtitle: Set a new page standard
 
 ----
 
+Category: core
+
+----
+
 Intro:
 
 ----

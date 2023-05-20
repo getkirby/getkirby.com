@@ -6,6 +6,10 @@ Subtitle: Deliver results
 
 ----
 
+Category: views
+
+----
+
 Intro: New Panel view for complete list of search results
 
 ----

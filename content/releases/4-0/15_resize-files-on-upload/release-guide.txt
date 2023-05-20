@@ -6,6 +6,10 @@ Subtitle: Say no to huge files
 
 ----
 
+Category: files
+
+----
+
 Intro: Optimize/resize images directly after upload
 
 ----
