@@ -1,7 +1,7 @@
 <div class="columns" style="--columns: 4">
 	<div class="flex flex-column">
 		<div class="release-padded-box flex-grow bg-light mb-6">
-			<?= $section->intro()->kt() ?>
+			<?= $section->teaser()->kt() ?>
 		</div>
 		<figure class="release-box">
 			<?= $section->image('dropdown.png') ?>
