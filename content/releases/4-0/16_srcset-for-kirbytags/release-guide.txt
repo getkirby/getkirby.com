@@ -10,7 +10,7 @@ Category: core
 
 ----
 
-Intro: Image KirbyTag now supports `srcset` attribute
+Intro: The `image` KirbyTag now supports the `srcset` attribute.
 
 ----
 
