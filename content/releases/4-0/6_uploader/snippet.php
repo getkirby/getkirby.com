@@ -4,7 +4,7 @@
 	</figure>
 	<div class="flex flex-column">
 		<div class="release-padded-box flex-grow bg-light">
-			<?= $section->intro()->kt() ?>
+			<?= $section->teaser()->kt() ?>
 		</div>
 	</div>
 </div>
