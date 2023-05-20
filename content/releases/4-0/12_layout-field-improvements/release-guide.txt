@@ -2,7 +2,7 @@ Title: Layout Field Improvements
 
 ----
 
-Subtitle:
+Subtitle: Copy & Change
 
 ----
 
@@ -11,6 +11,10 @@ Category: editing
 ----
 
 Intro:
+
+----
+
+Teaser: More flexibility: Simply change a layout, and copy one or all layouts into other layout fields.
 
 ----
 
