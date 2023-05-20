@@ -45,11 +45,11 @@ text:
 
 (image: toolbar.png)
 
-`marks` and `nodes` control what is shown in the toolbar. This is different to the same-named top-level options which  define if the marks/nodes are actually installed/used. So one could, e.g. have the code mark be supported by pasting etc. - but hide it from the toolbar.
+`marks` and `nodes` control what is shown in the toolbar, while the top-level options of the same name define if the marks/nodes are actually supported. So you could, for example, support the code mark for pasting, but hide it from the toolbar.
 
 ## Set heading levels
 
-You can now set the available heading levels in the writer field with the new `headings` option [https://kirby.nolt.io/372](https://kirby.nolt.io/372) [#18](https://github.com/getkirby/v4/pull/18)
+You can set the available heading levels in the writer field with the new `headings` option [https://kirby.nolt.io/372](https://kirby.nolt.io/372) [#18](https://github.com/getkirby/v4/pull/18)
 
 ```yaml
 fields:
