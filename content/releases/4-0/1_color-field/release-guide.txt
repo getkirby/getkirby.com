@@ -47,7 +47,7 @@ color:
 
 ## Pre-defined options
 
-Allows to add a list of pre-defined colors that will be shown as one-click options in the Panel
+Allows adding a list of pre-defined colors that are shown as one-click options in the Panel.
 
 
 ```yaml
@@ -63,7 +63,7 @@ color:
 
 (image: color-field-options.png)
 
-If you name the colors, their name is shown in the Panel as well
+If you name the colors, their name is shown in the Panel as well.
 
 ```yaml
 color:
@@ -80,10 +80,24 @@ color:
 
 ## Modes
 
-`mode` option to show everything with `picker`, only the `input`, or only the `options`
+With the `mode` option you control which elements of the color field are available. Possible values:
+
+| Option   | Description |
+| ------   | ----------- |
+|`picker`  | show everything (default)|
+|`input`   | show only the input |
+|`options` | show only options |
 
 (image: color-field-modes.png)
 
 ## Alpha
 
-`alpha` option (default: false) to activate alpha transparency support
+Use the `alpha` option (default: false) to activate alpha transparency support:
+
+```yaml
+color:
+  type: color
+  alpha: true
+```
+
+
