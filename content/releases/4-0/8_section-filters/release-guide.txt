@@ -8,6 +8,12 @@ Subtitle: Filter pages and files
 
 Intro: Pages and files sections support a new query option to filter pages and files by our query string syntax. Sorting will be disabled for sections with a query.
 
+Intro: Pages and files sections support a query option to filter pages and files using our query string syntax. Sorting will be disabled for sections with a query.
+
+----
+
+Teaser: Filter pages and files by any criteria: The pages and files sections now come with support for our powerful query string syntax.
+
 ----
 
 Github: https://github.com/getkirby/v4/pull/9

@@ -10,6 +10,10 @@ Intro: Pages can finally be moved to a new parent page.
 
 ----
 
+Teaser: Created a page in the wrong place or made up your mind? Just move it to a new parent!
+
+----
+
 Nolt: 44
 
 ----

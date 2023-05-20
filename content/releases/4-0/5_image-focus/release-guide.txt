@@ -10,6 +10,11 @@ Intro:
 
 ----
 
+
+Teaser: Never cut off the most important part of your images again. Set a focus point and let your images shine in all their beauty.
+
+----
+
 Github:
 
 - https://github.com/getkirby/v4/pull/106

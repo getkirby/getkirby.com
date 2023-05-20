@@ -2,7 +2,7 @@ Title: Optimize Files On Upload
 
 ----
 
-Subtitle:
+Subtitle: Say no to huge files
 
 ----
 

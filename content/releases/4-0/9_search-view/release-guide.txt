@@ -10,6 +10,10 @@ Intro: New Panel view for complete list of search results
 
 ----
 
+Teaser: The larger your website, the more important becomes search. With Kirby's new search view, searching in the Panel has become a breeze.
+
+----
+
 Github: https://github.com/getkirby/v4/pull/192
 
 ----
