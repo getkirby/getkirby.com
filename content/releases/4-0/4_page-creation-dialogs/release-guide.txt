@@ -61,6 +61,10 @@ create:
 
 (image: page-creation-dialog.png)
 
+<info>
+The list of allowed fields inside the dialog is limited to field types that don't open their own dialog. This excludes the following field types: blocks, color, files, layout, link, object, pages, structure,users, as well as custom fields.
+</info>
+
 ## Custom Page Creation Status
 
 You can now also define a status for your newly created pages.
