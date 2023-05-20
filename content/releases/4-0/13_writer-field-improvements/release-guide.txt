@@ -2,7 +2,7 @@ Title: Writer Field Improvements
 
 ----
 
-Subtitle: My own writing styles
+Subtitle: Writing in style
 
 ----
 
@@ -11,6 +11,10 @@ Category: editing
 ----
 
 Intro:
+
+----
+
+Teaser: Nothing left to wish for. With custom marks and nodes for your own style, customizable heading levels and a character counter, you have full control about your writing.
 
 ----
 

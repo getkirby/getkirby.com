@@ -14,8 +14,7 @@ Intro:
 
 ----
 
-Teaser:
-
+Teaser: So many new goodies for your editing experience: Field preview, split & merge, keyboard shortcuts, and more control about heading levels.
 ----
 
 Github:
@@ -160,7 +159,7 @@ Enhanced keyboard shorts to react on both, meta (Cmd) and Ctrl, keys
 - Text block with `inline: true` for text field will split directly on Enter (Shift + Enter does hard line break)
 - Custom blocks can support splitting by implementing a `split()` method that emits `split` event and passes an array of two content states (for each of the splitted blocks); and merging by implementing a `merge()` method that receives an array of blocks (which it then needs to use to update itself, all but the first block will automatically removed afterwards)
 
-## Ccollapse blocks while dragging
+## Collapse blocks while dragging
 
 Large block collapses when dragged for easier handling
 
