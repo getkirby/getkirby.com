@@ -24,7 +24,7 @@ Github: https://github.com/getkirby/v4/pull/20
 
 Text:
 
-File blueprints can now set resize and crop settings, which will be applied directly after the upload. This is great to avoid huge original files in the content folder.
+File blueprints can now set resize and crop settings, which will be applied directly after upload. This is great to prevent huge original files in the content folder.
 
 ```yaml
 title: Image
@@ -34,4 +34,4 @@ create:
   crop: true
 ```
 
-This feature also adds a new `$file->manipulate(array $options)`. It takes the usual resizing and crop options of Kirby's image processing API and replaces the original file with the resized version.
+This feature also adds a new `$file->manipulate(array $options)` method. It accepts the same resizing and crop options of Kirby's image processing API (see [`$file->thumb()`](/docs/reference/objects/cms/file/thumb) method) and replaces the original file with the resized version.
