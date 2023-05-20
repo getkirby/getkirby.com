@@ -10,7 +10,7 @@ Category: core
 
 ----
 
-Intro:
+Intro: The DefaultPage class is the standard for all pages that don't have a specific page model.
 
 ----
 
@@ -32,4 +32,17 @@ Github: https://github.com/getkirby/v4/pull/10
 
 Text:
 
-You can now define a DefaultPage class in your plugin or in `/site/models/default.php`. This model will be loaded whenever no other model is defined for the current page type.
+You can define a DefaultPage class in a plugin or in `/site/models/default.php`. This model will be loaded when no other model is defined for the current page type.
+
+```php "/site/models/default.php"
+<?php
+
+use Kirby\Cms\Page;
+
+class DefaultPage extends Page
+{
+	// your custom methods
+}
+```
+
+Other page models can extend this default model. For this to work reliably, define the `DefaultPage` class in a plugin.
