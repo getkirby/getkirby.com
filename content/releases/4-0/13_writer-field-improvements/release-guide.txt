@@ -6,6 +6,10 @@ Subtitle: My own writing styles
 
 ----
 
+Category: editing
+
+----
+
 Intro:
 
 ----

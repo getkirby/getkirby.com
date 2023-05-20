@@ -6,6 +6,10 @@ Subtitle: Color me surprised
 
 ----
 
+Category: field
+
+----
+
 Intro: The new `color` field comes with support for `hex`, `rgb` and `hsl` modern CSS notation.
 
 ----

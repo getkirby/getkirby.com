@@ -6,6 +6,10 @@ Subtitle: Change is in the air
 
 ----
 
+Category: files
+
+----
+
 Intro: File template can now be changed to any template listed by its parent in a files section or field
 
 ----

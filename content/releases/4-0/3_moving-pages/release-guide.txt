@@ -6,6 +6,10 @@ Subtitle: I like to move it, move it
 
 ----
 
+Category: panel
+
+----
+
 Intro: Pages can finally be moved to a new parent page.
 
 ----

@@ -6,6 +6,10 @@ Subtitle: No longer lost in translation
 
 ----
 
+Category: views
+
+----
+
 Intro: The new language view offers a great way to add custom language variables and configure available languages for your site.
 
 ----

@@ -6,6 +6,10 @@ Subtitle: Bring your own
 
 ----
 
+Category: editing
+
+----
+
 Intro:
 
 ----
