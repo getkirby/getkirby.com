@@ -180,7 +180,7 @@ If you want to restrict what types of files can be uploaded to the given destina
 
 #### Supported file types
 
-By default, Kirby supports (link: docs/guide/content/files#manually-uploading-files text: the following files types).
+By default, Kirby supports (link: docs/guide/files/files#supported-file-types text: the following files types).
 
 To upload file types not supported out of the box by Kirby, you can (link: docs/reference/plugins/extensions/file-types text: register new file types with the `fileTypes` extension) in a plugin.
 
