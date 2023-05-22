@@ -14,7 +14,7 @@ Teaser:
 
 Customize the page creation dialog to your needs.
 
-Give the title a fitting label, add new fields or disable redirecting to the new page.
+Give the title a fitting label, add new fields or disable redirecting to the new page. Did we mention you can also set the page status now?
 
 ----
 
