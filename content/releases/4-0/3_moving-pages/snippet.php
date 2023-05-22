@@ -1,10 +1,10 @@
 <div class="columns" style="--columns: 4">
-	<div class="flex flex-column">
-		<div class="release-padded-box flex-grow bg-light mb-6">
-			<?= $section->teaser()->kt() ?>
+	<div class="columns" style="--columns: 1">
+		<div class="release-text-box flex-grow">
+			<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 		</div>
-		<figure class="release-box">
-			<?= $section->image('dropdown.png') ?>
+		<figure class="release-padded-box bg-light">
+			<img src="<?= $section->image('dropdown.png')->url() ?>" class="shadow-xl">
 		</figure>
 	</div>
 	<figure class="release-box bg-light shadow-xl" style="--span: 3">

@@ -3,10 +3,10 @@
 		<?= $section->image('page-creation-dialog.png') ?>
 	</figure>
 	<div class="flex flex-column">
-		<div class="release-padded-box flex-grow bg-light mb-6">
-			<?= $section->teaser()->kt() ?>
+		<div class="release-text-box flex-grow mb-6">
+			<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 		</div>
-		<figure class="release-box">
+		<figure class="release-code-box text-lg">
 			<?= $section->example()->kt() ?>
 		</figure>
 	</div>

@@ -14,7 +14,7 @@ Category: files
 
 ----
 
-Teaser: Screenshot-123.jpg? Meaningless file names are now a thing of the past. With the preview and edit options in the new dialog, the file upload experience has become much more intelligent.
+Teaser: Screenshot-123.jpg? With the preview and edit options in the new dialog, meaningless file names are now a thing of the past. Use the new blueprint options to optimize uploads before they land on the server.
 
 ----
 
@@ -24,7 +24,35 @@ Github:
 
 ----
 
+Optimize:
+
+```yaml
+title: Image
+
+# Optimize on upload
+create:
+  width: 500
+  height: 500
+  crop: true
+```
+
+
+----
+
 Text:
 
 (image: uploader.png)
 
+## Optimize Files On Upload
+
+File blueprints can now set resize and crop settings, which will be applied directly after the upload. This is great to avoid huge original files in the content folder.
+
+```yaml
+title: Image
+create:
+  width: 500
+  height: 500
+  crop: true
+```
+
+This feature also adds a new `$file->manipulate(array $options)`. It takes the usual resizing and crop options of Kirby's image processing API and replaces the original file with the resized version.

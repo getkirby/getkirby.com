@@ -1,15 +1,11 @@
-<div class="columns" style="--columns: 4">
-	<div style="--span: 3">
-		<figure class="release-box bg-light shadow-xl mb-6">
-			<?= $section->image('section-filters.png') ?>
-		</figure>
-		<figure class="release-code-box" style="--span: 3">
-			<?= $section->example()->kt() ?>
-		</figure>
+<div class="columns" style="--columns: 5">
+	<figure class="release-box bg-light" style="--span:5">
+		<?= $section->image('section-filters.png') ?>
+	</figure>
+	<div class="release-text-box" style="--span: 2">
+		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 	</div>
-	<div class="flex flex-column">
-		<div class="release-padded-box flex-grow bg-light">
-			<?= $section->teaser()->kt() ?>
-		</div>
-	</div>
+	<figure class="release-code-box text-lg" style="--span: 3">
+		<?= $section->example()->kt() ?>
+	</figure>
 </div>

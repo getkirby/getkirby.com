@@ -30,6 +30,29 @@ Github: https://github.com/getkirby/v4/pull/10
 
 ----
 
+Example:
+
+```php "/site/models/default.php"
+<?php
+
+use Kirby\Cms\Page;
+
+class DefaultPage extends Page {
+
+    /**
+     * This method is now available for all pages
+     * unless they have their own page model.
+     */
+    public function myCustomMethod(): string
+    {
+        return 'Hello world';
+    }
+}
+```
+
+
+----
+
 Text:
 
 You can now define a DefaultPage class in your plugin or in `/site/models/default.php`. This model will be loaded whenever no other model is defined for the current page type.

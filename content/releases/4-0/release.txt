@@ -1,6 +1,6 @@
 title: Kirby 4
 ----
-Subtitle: Alpha 1
+Subtitle: Alpha
 ----
 Version: 4.0
 ----

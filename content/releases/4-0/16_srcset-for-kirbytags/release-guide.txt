@@ -26,6 +26,22 @@ Github:
 
 ----
 
+Example1:
+
+```kirbytext
+(\image: alanis-moresrcset.jpg srcset: 200, 300)
+```
+
+----
+
+Example2:
+
+```kirbytext
+(\image: alanis-moresrcset.jpg srcset: artist)
+```
+
+----
+
 Text:
 
 ## With absolute sizes

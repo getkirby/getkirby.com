@@ -1,15 +1,16 @@
 <div class="columns" style="--columns: 3">
-	<figure class="release-padded-box bg-light" style="--span: 2">
+	<figure class="release-padded-box bg-light flex items-center" style="--span: 2">
 		<?= $section->image('file-link.png') ?>
 	</figure>
-	<div class="flex flex-column">
-		<div class="release-padded-box flex-grow bg-light mb-6">
-			<?= $section->teaser()->kt() ?>
+	<div class="columns" style="--columns: 1">
+		<div class="release-text-box flex-grow">
+			<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 		</div>
-		<figure class="release-code-box p-6">
-			<div>
-				<?= $section->example()->kt() ?>
-			</div>
+		<figure class="release-padded-box bg-light flex" style="align-items: flex-end; padding-right: 0; padding-bottom: 0">
+			<?= $section->image('link-types.png') ?>
+		</figure>
+		<figure class="release-code-box text-lg">
+			<?= $section->example()->kt() ?>
 		</figure>
 	</div>
 </div>

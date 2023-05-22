@@ -1,0 +1,53 @@
+Title: Alpha
+
+----
+
+Subtitle: We are not done yet …
+
+----
+
+Intro: This is the very first public test version of Kirby 4. Now it's time for you to get involved. We need your honest feedback and your eagle eyes to find bugs.
+
+----
+
+Warning:
+
+This version is very likely buggy.
+That's why we call it alpha :)
+
+**Do not use it in production!**
+
+----
+
+More:
+
+----
+
+Teaser:
+
+This is the very first public test version of Kirby 4. Now it's time for you to get involved. We need your (link: https://github.com/getkirby/kirby/issues text: honest feedback and your eagle eyes to find bugs). We plan to build more features in the next weeks. You can follow our process on (link: https://chat.getkirby.com text: Discord).
+
+----
+
+Text:
+
+## Not stable yet
+
+<warning>
+It should be clear from the alpha label, but this version is not meant for production yet. If you want to use it, you use it at your own risk!
+</warning>
+
+## More features to come
+
+We still have a pretty long list of things we are working on. We will freeze features before the summer break.
+
+## How to report issues?
+
+Please use our Github repo to report issues and add [v4] to the issue title.
+<https://github.com/getkirby/kirby/issues>
+
+## Feedback from plugin developers
+
+- How are your plugins doing? We still have plenty of time to fix regressions and soften breaking changes.
+- How do you like the new Panel JS API?
+- Give our new APIs for writer and textarea extensions a try!

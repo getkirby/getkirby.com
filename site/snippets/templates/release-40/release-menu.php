@@ -1,6 +1,5 @@
 <nav class="release-menu">
   <ul class="font-mono text-sm pt-6 sticky" style="--top: var(--spacing-2)">
-    <li><a href="#gist">Alpha</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
 
 		<?php foreach ($sections as $section): ?>

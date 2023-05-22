@@ -74,13 +74,11 @@
 	<?php snippet('templates/release-40/gist') ?>
 	<?php snippet('templates/release-40/roadmap') ?>
 
-	<?php foreach ($sections->groupBy('category') as $category => $categorySections): ?>
-		<?php foreach ($categorySections as $section): ?>
+	<?php foreach ($sections as $section): ?>
 		<?php snippet([
 			'templates/release-40/' . $section->slug(),
 			'templates/release-40/section'
 		], ['section' => $section]) ?>
-		<?php endforeach ?>
 	<?php endforeach ?>
 
 	<?php snippet('templates/release-40/versioning') ?>

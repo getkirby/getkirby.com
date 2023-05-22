@@ -1,10 +1,8 @@
-<div class="columns" style="--columns: 4">
-	<div class="flex flex-column">
-		<div class="release-padded-box flex-grow bg-light">
-			<?= $section->teaser()->kt() ?>
-		</div>
+<div class="columns" style="--columns: 3">
+	<div class="release-text-box flex-grow">
+		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 	</div>
-	<figure class="release-box bg-light shadow-xl" style="--span: 3">
+	<figure class="release-box bg-light shadow-xl" style="--span: 2">
 		<?= $section->image('search-view.png') ?>
 	</figure>
 </div>
