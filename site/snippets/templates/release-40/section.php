@@ -3,7 +3,7 @@
 		<?php snippet('hgroup', [
 			'title'    => $section->title(),
 			'subtitle' => $section->subtitle(),
-			'mb'       => 12
+			'mb'       => 6
 		]) ?>
 
 		<?php require_once $snippet ?>

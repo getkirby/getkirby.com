@@ -1,6 +1,25 @@
-<section id="gist" class="mb-42">
+<style>
+.v4-intro-columns {
+	--columns: 1;
+}
+
+@media screen and (min-width: 60rem) {
+	.v4-intro-columns {
+		--columns: 3;
+	}
+	.v4-intro-header {
+		--span: 3;
+	}
+}
+</style>
+
+<section id="intro" class="mb-42">
 	<h2 class="sr-only">The gist of it</h2>
-	<div class="columns" style="--columns: 3">
+	<div class="v4-intro-columns columns">
+		<figure class="v4-intro-header release-box p-12 bg-black">
+			<?= $page->image('chameleon.png') ?>
+		</figure>
+
 		<div class="p-6 bg-white shadow-xl rounded">
 			<h2 class="font-bold mb-3">Kirby 4 will launch in 2023</h2>
 			<p>We are very excited to announce the <mark>first test version</mark> for Kirby&nbsp;4 with many great user-facing features and improvements. We want share our progress with you out in the open in the coming weeks. Final release of <mark>v4 is scheduled for later this summer.</mark> 🚀</p>

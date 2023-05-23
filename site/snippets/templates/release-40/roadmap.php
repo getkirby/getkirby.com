@@ -37,20 +37,16 @@
   <?php snippet('templates/features/intro', [
   'title'    => 'Roadmap',
 	'intro'    => 'ETA for Kirby 4',
-  'text'     => 'We roughly plan with the following schedule for v4.<br>The success of the alpha & beta and your input will determine the final release date.'
+  'text'     => 'We roughly plan with the following schedule for v4. The success of the alpha & beta and your input will determine the final release date.'
   ]) ?>
   <ul class="roadmap flex justify-between mb-24">
     <li style="flex-grow: 1">
-      <p class="h4">Announcement</p>
-      <p class="font-mono text-xs">March 2023</p>
-    </li>
-    <li style="flex-grow: 1">
-      <p class="h4">Open Alpha</p>
+      <p class="h4">Alpha</p>
       <p class="font-mono text-xs">May 2023</p>
     </li>
-    <li style="flex-grow: 1">
-      <p class="h4">Open Beta</p>
-      <p class="font-mono text-xs">June/July 2023</p>
+    <li style="flex-grow: 2">
+      <p class="h4">Beta</p>
+      <p class="font-mono text-xs">July 2023</p>
     </li>
     <li style="flex-grow: 1">
       <p class="h4">Release</p>

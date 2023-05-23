@@ -3,52 +3,43 @@
 <?= css('assets/css/layouts/releases.css') ?>
 
 <style>
-  .release-box,
-  .release-code-box,
-  .release-padded-box,
-  .release-text-box {
-    border-radius: .5rem;
-    overflow: hidden;
-    z-index: 1;
-  }
+.release-box,
+.release-code-box,
+.release-padded-box,
+.release-text-box {
+	border-radius: .5rem;
+	overflow: hidden;
+	z-index: 1;
+}
 
-  .release-code-box {
-    display: grid;
-    align-items: stretch;
-    background: var(--color-black);
-  }
+.release-code-box {
+	display: grid;
+	align-items: stretch;
+	background: var(--color-black);
+}
 
-  .release-code-box .code-toolbar {
-    display: grid;
-  }
+.release-code-box .code-toolbar {
+	display: grid;
+}
 
-  .release-padded-box,
-  .release-text-box {
-    padding: var(--spacing-6);
-  }
+.release-padded-box,
+.release-text-box {
+	padding: var(--spacing-8);
+}
 
-  .release-text-box {
-    background: var(--color-light);
-  }
+.release-text-box {
+	background: var(--color-light);
+}
 
-  .release-padded-box h3,
-  .release-text-box h3 {
-    font-weight: var(--font-bold);
-    font-size: var(--text-lg);
-  }
+.release-padded-box h3,
+.release-text-box h3 {
+	font-weight: var(--font-bold);
+	font-size: var(--text-lg);
+}
 
-  .release-text-box .prose {
-    font-size: var(--text-lg);
-  }
-
-  @media screen and (min-width: 60rem) {
-
-    .release-text-box,
-    .release-padded-box {
-      padding: var(--spacing-12);
-    }
-  }
-
+.release-text-box .prose {
+	font-size: var(--text-lg);
+}
 
 .btn {
 	border-radius: var(--rounded);
@@ -60,18 +51,13 @@
     <h1 class="h1"><?= $page->title() ?></h1>
     <p class="h1 color-gray-600"><?= $page->subtitle() ?></p>
   </div>
-
   <?php snippet('templates/releases/cta', [
     'options' => ['center' => false, 'mb' => 0]
   ]) ?>
 </header>
 
 <article class="release-wrapper">
-	<figure class="release-box mb-6 p-12 bg-black">
-		<?= $page->image('chameleon.png') ?>
-	</figure>
-
-	<?php snippet('templates/release-40/gist') ?>
+	<?php snippet('templates/release-40/intro') ?>
 	<?php snippet('templates/release-40/roadmap') ?>
 
 	<?php foreach ($sections as $section): ?>

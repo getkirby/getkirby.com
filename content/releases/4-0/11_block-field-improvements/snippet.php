@@ -1,5 +1,5 @@
 <div class="columns" style="--columns: 12">
-	<figure class="release-padded-box bg-light" style="--span: 8">
+	<figure class="release-padded-box bg-light grid place-items-center" style="--span: 8">
 		<?= $section->image('field-preview.png') ?>
 	</figure>
 	<div class="release-code-box p-6 flex-grow bg-light" style="--span: 4">
