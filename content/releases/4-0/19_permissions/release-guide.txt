@@ -28,6 +28,13 @@ Text:
 
 ## New `access` and `list` page permissions
 
+### Changes
+
+- `read` option will deprecated in v5
+- `access` option is about accessibility
+- `list` option is about visibility (picker and sections)
+- `access` and `list` permissions depend on the read option until v5
+
 ### Meaning
 
 ```yaml
