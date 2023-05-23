@@ -16,7 +16,7 @@ Intro:
 
 Teaser:
 
-The default page model kicks in, when there is specific model for a page.
+The default page model kicks in when there is no specific model for a page.
 
 Of course, other models can extend the default page model, too.
 
