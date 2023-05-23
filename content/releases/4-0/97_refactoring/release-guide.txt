@@ -6,16 +6,24 @@ Subtitle:
 
 ----
 
+Github:
+
+- https://github.com/getkirby/v4/pull/43
+- https://github.com/getkirby/v4/pull/189
+- https://github.com/getkirby/v4/pull/82
+
+----
+
 Text:
 
 #### Core
 
-- Removed `config/blueprints` directory with dead block blueprints and moved default blueprints for site, page and file to in-code arrays in `Core::blueprints()` [#43](https://github.com/getkirby/v4/pull/43)
-- Throw proper errors when thumbnails cannot be generated [#189](https://github.com/getkirby/v4/pull/189)
+- Removed `config/blueprints` directory with dead block blueprints and moved default blueprints for site, page and file to in-code arrays in `Core::blueprints()`
+- Throw proper errors when thumbnails cannot be generated 
 
 #### Panel
 
-- Cleaned up `k-toolbar` component [#82](https://github.com/getkirby/v4/pull/82)
+- Cleaned up `k-toolbar` component
 - Drawer Component Structure
 ```html
 <k-overlay type="drawer">

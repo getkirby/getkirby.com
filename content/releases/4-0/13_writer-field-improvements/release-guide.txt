@@ -23,6 +23,16 @@ Nolt:
 
 ----
 
+Github:
+
+- https://github.com/getkirby/v4/issues/80
+- https://github.com/getkirby/v4/pull/18
+- https://github.com/getkirby/v4/pull/83
+- https://github.com/getkirby/v4/pull/88
+- https://github.com/getkirby/v4/pull/79
+
+----
+
 Teaser: Nothing left to wish for. With custom marks and nodes for your own style, customizable heading levels and a character counter, you have full control about your writing.
 
 ----
@@ -119,7 +129,7 @@ Text:
 
 ## Better toolbar
 
-New `toolbar` option [#80](https://github.com/getkirby/v4/issues/80)
+New `toolbar` option
 
 ```yaml
 text:
@@ -146,7 +156,7 @@ text:
 
 ## Set heading levels
 
-You can set the available heading levels in the writer field with the new `headings` option [#18](https://github.com/getkirby/v4/pull/18)
+You can set the available heading levels in the writer field with the new `headings` option
 
 ```yaml
 fields:
@@ -160,11 +170,9 @@ fields:
 
 ## Counter
 
-Added new `minlength`, `maxlength` and counter options, same behavior as for the `textarea` field. [#83](https://github.com/getkirby/v4/pull/83)
+Added new `minlength`, `maxlength` and counter options, same behavior as for the `textarea` field.
 
 ## `sub` and `sup` marks
-
-[**#88**](https://github.com/getkirby/v4/pull/88)
 
 ```yaml
 fields:
@@ -182,7 +190,7 @@ fields:
 
 ### Custom marks + nodes extension
 
-- New `writerNodes` Panel extension [#79](https://github.com/getkirby/v4/pull/79)
-- New `writerMarks` Panel extension [#79](https://github.com/getkirby/v4/pull/79)
+- New `writerNodes` Panel extension
+- New `writerMarks` Panel extension
 
-The defined object extends [https://github.com/getkirby/v4/blob/v4-develop/panel/src/components/Forms/Writer/Mark.js](https://github.com/getkirby/v4/blob/v4-develop/panel/src/components/Forms/Writer/Mark.js) [https://github.com/getkirby/v4/blob/v4-develop/panel/src/components/Forms/Writer/Node.js](https://github.com/getkirby/v4/blob/v4-develop/panel/src/components/Forms/Writer/Mark.js)  and thus can make use of the same extension layer our default marks use.
+The defined object extends `/kirby/panel/src/components/Forms/Writer/Mark.js`, `/kirby/panel/src/components/Forms/Writer/Node.js` and thus can make use of the same extension layer our default marks use.
