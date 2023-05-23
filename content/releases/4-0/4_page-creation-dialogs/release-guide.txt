@@ -40,7 +40,7 @@ create:
     - price
     - brand
   redirect: false
-	status: listed
+  status: listed
 ```
 
 ----
