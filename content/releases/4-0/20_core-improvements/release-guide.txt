@@ -14,10 +14,14 @@ Intro:
 
 ----
 
+Nolt: 237
+
+----
+
 Text:
 
 - New `File::blueprints()` method that collects valid blueprints from the files sections and files fields of the parent model [#44](https://github.com/getkirby/v4/pull/44)
-- Fields can now define `'hidden' => true` (component notation) or `::isHidden(): bool` (class-based) to make them non-rendering [https://kirby.nolt.io/237](https://kirby.nolt.io/237) [#91](https://github.com/getkirby/v4/pull/91)
+- Fields can now define `'hidden' => true` (component notation) or `::isHidden(): bool` (class-based) to make them non-rendering [#91](https://github.com/getkirby/v4/pull/91)
 - New `File::changeTemplate()` method
 - New file permissions for `changeTemplate`
 - New `file.changeTemplate` hooks
