@@ -1,0 +1,53 @@
+Title: New Permissions
+
+----
+
+Subtitle:
+
+----
+
+Category: other
+
+----
+
+Intro:
+
+----
+
+Nolt: 124
+
+----
+
+Github:
+
+- https://github.com/getkirby/v4/pull/111
+
+----
+
+Text:
+
+## New `access` and `list` page permissions
+
+### Meaning
+
+```yaml
+access: false # not accessible, not listed
+list: false   # accessible, not listed
+read: false   # not accessible, not listed
+```
+
+### Sample Usage
+
+```yaml
+# Orders page is no accessible and no visible for all roles except admins.
+
+title: Orders
+
+options:
+  access:
+    *: false
+    admin: true
+  list:
+    *: false
+    admin: true
+```
