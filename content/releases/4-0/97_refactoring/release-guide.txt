@@ -11,6 +11,16 @@ Github:
 - https://github.com/getkirby/v4/pull/43
 - https://github.com/getkirby/v4/pull/189
 - https://github.com/getkirby/v4/pull/82
+- https://github.com/getkirby/v4/pull/47
+- https://github.com/getkirby/v4/pull/48
+- https://github.com/getkirby/v4/pull/51
+- https://github.com/getkirby/v4/pull/52
+- https://github.com/getkirby/v4/pull/53
+- https://github.com/getkirby/v4/pull/54
+- https://github.com/getkirby/v4/pull/55
+- https://github.com/getkirby/v4/pull/56
+- https://github.com/getkirby/v4/pull/155
+- https://github.com/getkirby/v4/pull/156
 
 ----
 
@@ -18,8 +28,10 @@ Text:
 
 #### Core
 
-- Removed `config/blueprints` directory with dead block blueprints and moved default blueprints for site, page and file to in-code arrays in `Core::blueprints()`
 - Throw proper errors when thumbnails cannot be generated 
+- Removed `config/blueprints` directory with dead block blueprints and moved default blueprints for site, page and file to in-code arrays in `Kirby\Cms\Core::blueprints()`
+- Removed `Kirby\Toolkit\Properties` trait from `Kirby\Api\Api`, `Kirby\Cms\Api`, `Kirby\Email\Email`,  `Kirby\Email\Body`, `Kirby\Cms\Auth\Status`, `Kirby\Cms\App`, `Kirby\Cms\ContentTranslation`, `Kirby\Cms\ModelWithContent`, `Kirby\Toolkit\Pagination` , `Kirby\Http\Uri` , `Kirby\Cms\FileVersion`, `Kirby\Filesystem\Asset`, `Kirby\Filesystem\File`, `Kirby\Image\Image` classes and `Kirby\Filesystem\IsFile` trait
+- `Kirby\Cms\Language`, `Kirby\Cms\Plugin`, `Kirby\Cms\Role` and `Kirby\Cms\StructureObject` don't extend `Kirby\Cms\Model` (and thus also don't use the `Kirby\Toolkit\Properties` trait) anymore
 
 #### Panel
 
