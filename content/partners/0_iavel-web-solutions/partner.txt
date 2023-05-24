@@ -1,0 +1,53 @@
+Title: IAVEL Web Solutions
+
+----
+
+Subtitle: Developer
+
+----
+
+Package: solo
+
+----
+
+Website: https://iavel.hu
+
+----
+
+Location: Budapest, Hungary
+
+----
+
+Contactlink: hello@iavel.hu
+
+----
+
+Discordhandle: cselex#4436
+
+----
+
+Languages: English & Hungarian
+
+----
+
+Description:
+
+My goal is to create pages that help businesses operate.
+I chose Kirby CMS because it has the potential to create faster, company-tailored and secure pages.
+
+----
+
+Expertise:
+
+- Magazine page
+- Company page
+- Blog page
+- Landing page
+
+----
+
+Uuid: g5EExEU8S2xKpAzu
+
+----
+
+Text: 

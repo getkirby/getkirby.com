@@ -1,0 +1,17 @@
+Title: maff.be
+
+----
+
+Client: MAFF
+
+----
+
+Link: https://maff.be
+
+----
+
+Uuid: cAAXeUyR1LiMSZZr
+
+----
+
+Text: 

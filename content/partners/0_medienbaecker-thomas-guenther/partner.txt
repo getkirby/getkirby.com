@@ -1,0 +1,41 @@
+Title: Medienbäcker Thomas Günther
+
+----
+
+Subtitle: Developer
+
+----
+
+Package: solo
+
+----
+
+Website: https://www.medienbaecker.com/
+
+----
+
+Location: Hornberg, Germany
+
+----
+
+Expertise:
+
+- Highly individual development
+- Custom Kirby plugins
+- Engaging interaction design
+- Creative animations
+- Search engine optimization
+- Accessibility
+
+----
+
+Description:
+
+Growing up as a baker's son in Germany, I was exposed to the art of crafting and creating at a young age. Over 15 years ago, I began exploring the world of website design and development, combining my creative flair with effective functionality.
+
+In 2013, I discovered Kirby and instantly fell in love. After working at several advertising agencies, I finally dared to take the step into self-employment. In fact, Kirby 2 was the main reason I started freelancing because I was confident that I could build any project with it — no matter how complex.
+
+----
+
+Pluginpage: /plugins/medienbaecker
+

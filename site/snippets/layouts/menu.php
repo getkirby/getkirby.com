@@ -48,6 +48,7 @@
           <li><a class="is-external" href="https://instagram.com/getkirby">Instagram</a></li>
         </ul>
       </li>
+      <li><a class="partners" href="/partners">Partners</a></li>
     </ul>
     <ul class="menu-1 menu-steps">
       <li><a href="/try">Try</a></li>
