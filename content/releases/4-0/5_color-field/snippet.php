@@ -36,12 +36,18 @@
 		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="v4-color-hero release-padded-box bg-light grid place-items-center">
-		<?= $section->image('color-field-names.png') ?>
+		<?php snippet('templates/release-40/image', [
+			'alt' => 'The new color field with the color picker dropdown and predefined colors with names',
+			'img' => $section->image('color-field-names.png')
+		]) ?>
 	</figure>
 	<figure class="v4-color-code release-code-box text-lg">
 		<?= $section->example()->kt() ?>
 	</figure>
 	<figure class="v4-color-modes release-box bg-light flex-grow grid place-items-center p-6">
-		<?= $section->image('color-field-modes.png') ?>
+		<?php snippet('templates/release-40/image', [
+			'alt' => 'The color field can be simplified to show a set of predefined colors instead of offering a color picker',
+			'img' => $section->image('color-field-modes.png')
+		]) ?>
 	</figure>
 </div>

@@ -20,7 +20,10 @@
 
 <div class="v4-file-template-columns">
 	<figure class="release-box bg-light" style="grid-area: view">
-		<?= $section->image('change-template.png') ?>
+		<?php snippet('templates/release-40/image', [
+			'alt'   => 'The new dialog to change the template of a file.',
+			'img'   => $section->image('change-template.png'),
+		]) ?>
 	</figure>
 	<div class="release-text-box" style="grid-area: teaser">
 		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>

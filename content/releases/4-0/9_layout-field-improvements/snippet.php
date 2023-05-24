@@ -42,6 +42,10 @@
 	</figure>
 
 	<div class="release-padded-box bg-light" style="grid-area: dropdown">
-		<img src="<?= $section->image('copy-and-paste-dropdown.png')->url() ?>" class="rounded shadow-xl">
+		<?php snippet('templates/release-40/image', [
+			'alt'   => 'New copy, paste and change layout options in the layout dropdown',
+			'img'   => $section->image('copy-and-paste-dropdown.png'),
+			'class' => 'rounded shadow-xl'
+		]) ?>
 	</div>
 </div>

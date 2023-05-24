@@ -1,12 +1,52 @@
-<div class="columns mb-6" style="--columns: 12">
-	<div class="release-text-box" style="--span: 4">
+<style>
+.v4-writer-columns {
+	display: grid;
+	gap: var(--spacing-6);
+	grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 60rem) {
+	.v4-writer-columns {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media screen and (min-width: 70rem) {
+	.v4-writer-columns {
+		grid-template-columns: 2fr 1fr;
+	}
+	.v4-writer-columns.reverse {
+		grid-template-columns: 1fr 2fr;
+	}
+}
+
+@media screen and (min-width: 80rem) {
+	.v4-writer-columns {
+		grid-template-columns: 3fr 1fr;
+	}
+	.v4-writer-columns.reverse {
+		grid-template-columns: 1fr 3fr;
+	}
+}
+</style>
+
+<div class="v4-writer-columns reverse mb-6">
+	<div class="release-text-box">
 		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 	</div>
 	<div class="release-padded-box bg-light" style="--span: 8">
-		<?= $section->image('writer.png') ?>
+		<?php snippet('templates/release-40/image', [
+			'alt'   => 'The updated writer field with the new toolbar option that resembles the fixed toolbar of the textarea',
+			'img'   => $section->image('writer.png'),
+		]) ?>
 	</div>
+</div>
+<div class="v4-writer-columns mb-6">
 	<div class="release-box bg-light" style="--span: 8">
-		<?= $section->image('internal-links.png') ?>
+		<?php snippet('templates/release-40/image', [
+			'alt'   => 'The link picker for the writer now also features the new link field',
+			'img'   => $section->image('internal-links.png'),
+		]) ?>
 	</div>
 	<div class="release-text-box" style="--span: 4">
 		<div class="prose text-lg">

@@ -20,7 +20,10 @@
 
 <div class="v4-language-columns">
 	<figure class="release-box bg-light" style="grid-area: view">
-		<?= $section->image('language-view.png') ?>
+		<?php snippet('templates/release-40/image', [
+			'alt'   => 'The new language view with general information about the language and the new language variable editor.',
+			'img'   => $section->image('language-view.png'),
+		]) ?>
 	</figure>
 	<div class="release-text-box" style="grid-area: teaser">
 		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>

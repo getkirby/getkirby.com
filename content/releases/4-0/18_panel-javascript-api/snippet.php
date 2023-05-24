@@ -29,6 +29,9 @@
 		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 	</div>
 	<div class="release-box shadow-xl bg-light" style="grid-area: view">
-		<?= $section->image('console.png') ?>
+		<?php snippet('templates/release-40/image', [
+			'alt'   => 'All major Panel features can now be controlled directly from your browser console',
+			'img'   => $section->image('console.png'),
+		]) ?>
 	</div>
 </div>

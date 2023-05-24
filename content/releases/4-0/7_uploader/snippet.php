@@ -38,7 +38,10 @@
 
 <div class="v4-uploader-columns">
 	<figure class="v4-uploader-dialog release-box bg-light shadow-xl" style="grid-area: dialog">
-		<?= $section->image('uploader.png') ?>
+		<?php snippet('templates/release-40/image', [
+			'alt' => 'The new upload dialog with four images, ready to be uploaded. Each file has a new input to change the filename before the file gets uploaded.',
+			'img' => $section->image('uploader.png')
+		]) ?>
 	</figure>
 	<div class="release-text-box" style="grid-area: teaser">
 		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>

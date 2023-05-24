@@ -7,9 +7,6 @@
 		"teaser"
 		"dropdown"
 }
-.v4-move-dropdown {
-	padding: 10%;
-}
 
 @media screen and (min-width: 32rem) {
 	.v4-move-columns {
@@ -37,13 +34,20 @@
 </style>
 
 <div class="v4-move-columns">
-	<figure class="v4-move-hero release-box bg-light shadow-xl" style="grid-area: dialog">
-		<?= $section->image('move-dialog.png') ?>
+	<figure class="v4-move-hero release-box bg-black shadow-xl" style="grid-area: dialog">
+		<?php snippet('templates/release-40/image', [
+			'alt' => 'A new parent for the page can be picked with our brand new page tree dialog',
+			'img' => $section->image('move-dialog.png')
+		]) ?>
 	</figure>
 	<div class="release-text-box" style="grid-area: teaser">
 		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 	</div>
-	<figure class="v4-move-dropdown release-box bg-light" style="grid-area: dropdown">
-		<img src="<?= $section->image('dropdown.png')->url() ?>" class="shadow-xl">
+	<figure class="v4-move-dropdown release-padded-box bg-light" style="grid-area: dropdown">
+		<?php snippet('templates/release-40/image', [
+			'alt'   => 'The page dropdowns have been extended with the new Move page option',
+			'img'   => $section->image('dropdown.png'),
+			'class' => 'shadow-xl'
+		]) ?>
 	</figure>
 </div>
