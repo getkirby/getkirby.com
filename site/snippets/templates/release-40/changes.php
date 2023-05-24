@@ -8,18 +8,23 @@
 
 	<div class="columns" style="--columns: 2; --gap: var(--spacing-6); grid-template-rows: masonry">
 		<div class="release-padded-box bg-light">
-			<h3 class="h3 mb-6">Enhancements</h3>
+			<h3 class="h3 mb-6">Core improvements</h3>
 			<div class="prose text-sm mb-12">
-				<?= $page->find('enhancements')->text()->kt() ?>
+				<?= $page->find('core-improvements')->text()->kt() ?>
 			</div>
 
-			<h3 class="h3 mb-6">Bug fixes</h3>
+			<h3 class="h3 mb-6">Panel improvements</h3>
 			<div class="prose text-sm">
-				<?= $page->find('bug-fixes')->text()->kt() ?>
+				<?= $page->find('panel-improvements')->text()->kt() ?>
 			</div>
 		</div>
 
 		<div class="release-padded-box bg-light">
+			<h3 class="h3 mb-6">Bug fixes</h3>
+			<div class="prose text-sm mb-12">
+				<?= $page->find('bug-fixes')->text()->kt() ?>
+			</div>
+
 			<h3 class="h3 mb-6">Refactoring</h3>
 			<div class="prose text-sm">
 				<?= $page->find('refactoring')->text()->kt() ?>

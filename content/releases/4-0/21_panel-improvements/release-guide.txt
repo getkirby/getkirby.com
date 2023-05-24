@@ -24,12 +24,11 @@ Github: https://github.com/getkirby/v4/pull/96
 
 Text:
 
-## Dialogs for fields
+#### Dialogs for fields
 
 Fields can now define their own dialogs on the backend.
 
-### Fields with array definition
-
+-  Fields with array definition:
 ```php
 return [
   'props' => [
@@ -46,9 +45,9 @@ return [
   }
 ];
 ```
+<br>
 
-### Field Classes
-
+- Field classes:
 ```php
 class MyField extends FieldClass
 {
@@ -83,7 +82,7 @@ In a field component, the dialog can be opened by using the field endpoint:
 this.$dialog(this.endpoints.field + "/delete")
 ```
 
-## New Icons
+#### New Icons
 
 We've added new icons to our Panel iconset
 
@@ -91,7 +90,7 @@ We've added new icons to our Panel iconset
 - `split`
 - `merge`
 
-## New Components
+#### New Components
 
 - `<k-code>`
 - `<k-dialog-body>`
@@ -114,7 +113,7 @@ We've added new icons to our Panel iconset
 - `<k-browser>`
 - `<k-file-browser>`
 
-## New helpers
+#### New helpers
 
 - `$helper.focus(element)`
 - `$helper.object.length(object)`
@@ -128,11 +127,11 @@ We've added new icons to our Panel iconset
 - `$helper.url.makeAbsolute`
 - `$helper.url.toObject`
 
-## New js error classes
+#### New js error classes
 
 - `RequestError`
 - `JsonRequestError`
 
-## More to come …
+#### More to come …
 
 We are not done here …

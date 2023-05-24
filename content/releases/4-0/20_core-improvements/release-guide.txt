@@ -22,6 +22,7 @@ Github:
 
 - https://github.com/getkirby/v4/pull/44
 - https://github.com/getkirby/v4/pull/91
+- https://github.com/getkirby/v4/pull/48
 
 ----
 
@@ -32,3 +33,4 @@ Text:
 - New `File::changeTemplate()` method
 - New file permissions for `changeTemplate`
 - New `file.changeTemplate` hooks
+- New `Kirby\Email\Email::toArray()` and `Kirby\Email\Body::toArray()` methods
