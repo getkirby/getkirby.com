@@ -49,8 +49,8 @@ Text:
 - `I18n::translate()`: If `$fallback` is an array and neither the array `$key` nor the array `$fallback` have a matching entry for the locale, the first element of the `$key` array  will now be returned (not anymore the one from `$fallback`). If `$fallback` is a string, it will be considered with priority over both of these.
 - If overwriting the `hidden` field, it must return `'hidden' => true` now
 - `Kirby\Uuid\Uuid` is now an abstract class, child classes need to implement the `id` method
-- `Kirby\Uuid\Uuid::key()` can now also return `null` if the new `$generate` parameter isn't passed as `true` and no UUID has been yet generated for the model
-- Errors are no longer hidden when a response is converted to a string, which could be seen as a breaking change.
+- `Kirby\Uuid\Uuid::key()` can now also return `null` if the new `$generate` parameter isn't passed as `true` and no UUID has yet been generated for the model
+- Errors are no longer hidden when a response is converted to a string
 - `Kirby\Cms\ModelWithContent` doesn't extend `Kirby\Cms\Model` anymore.
 - Removed the `::clone()` method from `Kirby\Cms\Auth\Status`, `Kirby\Http\Uri`, `Kirby\Cms\FileVersion`, `Kirby\Filesystem\Asset`, `Kirby\Filesystem\File`, `Kirby\Image\Image`, `Kirby\Cms\Plugin`, `Kirby\Cms\Role`, `Kirby\Cms\StructureObject` and `Kirby\Cms\ContentTranslation` classes
 - Removed the `::hardcopy()` method from `Kirby\Api\Api`, `Kirby\Cms\Api`,`Kirby\Email\Email`, `Kirby\Email\Body`, `Kirby\Cms\Auth\Status`, `Kirby\Toolkit\Pagination`, `Kirby\Http\Uri`, `Kirby\Cms\FileVersion`, `Kirby\Filesystem\Asset`, `Kirby\Filesystem\File`, `Kirby\Image\Image`, `Kirby\Cms\Role`, `Kirby\Cms\StructureObject` and `Kirby\Cms\ContentTranslation` classes
@@ -60,7 +60,7 @@ Text:
 
 #### Panel
 
-- `this.$library.autosize` has been removed, wrap `<textarea>` elements instead inside `<k-autosize>` element
+- `this.$library.autosize` has been removed, wrap `<textarea>` elements inside `<k-autosize>` element instead.
 - Defining the footer slot in `<k-dialog>` will no longer wrap the slot content in the `<footer>` element. This can now be more flexibly handled by using `<k-dialog-footer>` inside the slot.
 - The form drawer no longer automatically closes on submit. This is introducing the same behaviour as in dialogs. Auto-closing might often not be the intended result of submitting the form and it's easier to close it manually in a submit handler than to re-open it again.
 - `this.$store.state.isLoading` is no longer available. You can now use `window.panel.isLoading` or `this.$panel.isLoading` in Vue components to access the current loading state.

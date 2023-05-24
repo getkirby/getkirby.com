@@ -10,7 +10,7 @@ Category: panel
 
 ----
 
-Intro: Pages and files sections support a query option to filter pages and files using our query string syntax. Sorting will be disabled for sections with a query.
+Intro: Pages and files sections support a query option to filter pages and files using our query string syntax. Manual sorting will be disabled for sections with a query.
 
 ----
 

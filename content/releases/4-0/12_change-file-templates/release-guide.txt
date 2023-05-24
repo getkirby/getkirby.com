@@ -14,7 +14,7 @@ Category: files
 
 ----
 
-Intro: File template can now be changed to any template listed by its parent in a files section or field
+Intro: The file template can now be changed to any template listed by its parent in a files section or field.
 
 ----
 

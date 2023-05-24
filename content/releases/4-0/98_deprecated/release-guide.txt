@@ -18,7 +18,7 @@ Text:
 
 #### Core
 
-- `Kirby\Cms\Model`
+- `Kirby\Cms\Model` in favor of `Kirby\Cms\ModelWithContent`
 - `Kirby\Email\Email::clone()` and `Kirby\Email\Body::clone()`
 
 #### Panel

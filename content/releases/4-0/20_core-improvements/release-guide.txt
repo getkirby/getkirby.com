@@ -30,7 +30,7 @@ Text:
 
 #### Support for UUIDs in URL helper
 
-You can now simply pass a page UUID or a file UUID to the `url()` helper and it will be converted to the actual URL.
+You can now pass a page UUID or a file UUID to the `url()` helper and it will be converted to the actual URL:
 
 ```php
 <?= url('page://abcd') ?>

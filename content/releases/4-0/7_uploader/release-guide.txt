@@ -14,7 +14,7 @@ Category: files
 
 ----
 
-Teaser: Screenshot-123.jpg? With the preview and edit options in the new dialog, meaningless file names are now a thing of the past. Use the new blueprint options to optimize uploads before they land on the server.
+Teaser: Screenshot-123.jpg? With the preview and edit options in the new upload dialog, meaningless file names are now a thing of the past. Use the new blueprint options to optimize uploads before they land on the server.
 
 ----
 
@@ -55,4 +55,4 @@ create:
   crop: true
 ```
 
-This feature also adds a new `$file->manipulate(array $options)`. It takes the usual resizing and crop options of Kirby's image processing API and replaces the original file with the resized version.
+This feature also adds a new `$file->manipulate(array $options)` method. It takes the usual resizing and crop options of Kirby's image processing API and replaces the original file with the resized version.

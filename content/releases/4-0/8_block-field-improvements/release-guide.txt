@@ -82,7 +82,7 @@ Splitting:
 - Split and merge text, list and headings
 - New option buttons to split or merge
 - Press enter at the end of a headline to append a new text block
-- Text block with `inline: true` for text field will split directly on Enter (Shift + Enter does hard line break)
+- Text block with `inline: true` for text field will split directly on Enter (`Shift + Enter` creates a hard line break)
 - Custom blocks can support splitting by implementing a `split` method
 
 ----
@@ -167,9 +167,9 @@ Enhanced keyboard shorts to react on both Meta (`Cmd`) and `Ctrl` keys:
 (video: splitting-2.mov)
 
 - Splitting and merging of supported blocks (text, list and heading)
-- New option buttons to split or merge (only shown when supported)
-- Enter in headline block appends new text block when cursor at end
-- Text block with `inline: true` for text field will split directly on Enter (Shift + Enter does hard line break)
+- New option buttons to split or merge (only displayed when supported)
+- Enter in headline block appends new text block when cursor is at the end
+- Text block with `inline: true` for text field will split directly on `Enter` (`Shift + Enter` creates a hard line break)
 - Custom blocks can support splitting by implementing a `split()` method that emits a `split` event and passes an array of two content states (for each of the splitted blocks); and merging by implementing a `merge()` method that receives an array of blocks (which it then needs to use to update itself, all but the first block will automatically be removed afterwards)
 
 ## Collapse blocks while dragging
