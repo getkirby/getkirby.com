@@ -7,7 +7,11 @@ return [
 	],
 	'pages' => [
 		'active' => true,
-		'type'   => 'apcu'
+		'type'   => 'apcu',
+		'ignore' => [
+			'love',
+			'partners'
+		]
 	],
 	'plugins' => [
 		'active' => true,
