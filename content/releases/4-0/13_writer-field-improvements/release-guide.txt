@@ -95,9 +95,9 @@ LengthExample:
 fields:
   text:
     type: writer
-      minlength: 10
-      maxlength: 360
-      counter: false
+    minlength: 10
+    maxlength: 360
+    counter: false
 ```
 
 ----
@@ -187,12 +187,12 @@ fields:
       - sup
 ```
 
-### Clear formats
+## Clear formats
 
 - New writer field mark that clears all formatting marks (of the default ones all but email and link). 
 - New `clear` icon
 
-### Custom marks + nodes extension
+## Custom marks + nodes extension
 
 - New `writerNodes` Panel extension
 - New `writerMarks` Panel extension

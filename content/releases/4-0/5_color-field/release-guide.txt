@@ -39,8 +39,8 @@ Text:
 
 ```yaml
 color:
-	type: color
-	format: hsl #supports hex (default), rgb, hsl
+  type: color
+  format: hsl # supports hex (default), rgb, hsl
 ```
 
 (image: color-field.png)
@@ -52,13 +52,13 @@ Allows adding a list of pre-defined colors that are shown as one-click options i
 
 ```yaml
 color:
-	type: color
+  type: color
   options:
     - "#f8b195"
-		- "#f67280"
-		- "#c06c84"
-		- "#6c5b7b"
-		- "#355c7d"
+    - "#f67280"
+    - "#c06c84"
+    - "#6c5b7b"
+    - "#355c7d"
 ```
 
 (image: color-field-options.png)
@@ -67,7 +67,7 @@ If you name the colors, their name is shown in the Panel as well.
 
 ```yaml
 color:
-	type: color
+  type: color
   options:
     "Sunny rays": "#F8B195"
     "First-love blush": "#F67280"
@@ -99,5 +99,3 @@ color:
   type: color
   alpha: true
 ```
-
-

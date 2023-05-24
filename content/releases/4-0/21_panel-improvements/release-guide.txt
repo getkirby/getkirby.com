@@ -28,7 +28,7 @@ Text:
 
 Fields can now define their own dialogs on the backend.
 
--  Fields with array definition:
+- Fields with array definition:
 ```php
 return [
   'props' => [
@@ -84,7 +84,7 @@ this.$dialog(this.endpoints.field + "/delete")
 
 #### New Icons
 
-We've added new icons to our Panel iconset
+We've added new icons to our Panel iconset:
 
 - `clear`
 - `split`

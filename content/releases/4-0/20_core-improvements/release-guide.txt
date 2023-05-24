@@ -41,13 +41,13 @@ This will also work for other URL methods like. `$field->toUrl()`, `Url:to()`, e
 
 #### Support for UUIDs in API calls
 
-You can now use UUIDs in API calls to request pages and files. https://github.com/getkirby/kirby/issues/4769
+You can now use UUIDs in API calls to request pages and files. [#4769](https://github.com/getkirby/kirby/issues/4769)
 
 ```
 /api/pages/@$pageUUID
 ```
 
-The UUIDs must be passed without scheme, but a prefixed @ I.e.
+The UUIDs must be passed without scheme, but a prefixed `@`. I.e.:
 
 ```
 // Nope
@@ -57,7 +57,7 @@ The UUIDs must be passed without scheme, but a prefixed @ I.e.
 /api/pages/@abcd
 ```
 
-File routes can also handle file UUIDs for files and parents
+File routes can also handle file UUIDs for files and parents:
 
 ```
 /api/pages/@$pageUUID/files/$filename

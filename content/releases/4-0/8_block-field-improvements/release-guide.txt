@@ -65,15 +65,15 @@ Shortcuts:
 
 | Action | Shortcut |
 | - | - |
-| Remove block | `meta + backspace` |
-| Move focus up | `meta + ⭡` |
-| Move focus down | `meta + ⭣` |
-| Move block up | `meta + shift + ⭡` |
-| Move block down | `meta + shift + ⭣` |
-| Extend selection up | `meta + alt + ⭡` |
-| Extend selection down | `meta + alt + ⭣` |
-| Split block | `meta + enter` |
-| Merge block | `meta + J` |
+| Remove block | `Meta + Backspace` |
+| Move focus up | `Meta + ↑` |
+| Move focus down | `Meta + ↓` |
+| Move block up | `Meta + Shift + ↑` |
+| Move block down | `Meta + Shift + ↓` |
+| Extend selection up | `Meta + Alt + ↑` |
+| Extend selection down | `Meta + Alt + ↓` |
+| Split block | `Meta + Enter` |
+| Merge block | `Meta + J` |
 
 ----
 
@@ -91,7 +91,7 @@ Text:
 
 ## Field Preview
 
-New `fields` block type available for previews
+New `fields` block type available for previews:
 
 (image: field-preview.png)
 
@@ -146,7 +146,7 @@ Display and edit heading level inline 
 
 (image: heading-level.png)
 
-Uses toggles field inside drawer for heading level
+Uses toggles field inside drawer for heading level:
 
 (image: heading-level-toggles.png)
 
@@ -154,11 +154,11 @@ Uses toggles field inside drawer for heading level
 
 Enhanced keyboard shorts to react on both Meta (`Cmd`) and `Ctrl` keys:
 
-- New shortcut to remove selected block `meta + backspace`
-- New shortcut to move focus up/down `meta + arrow up/down`
-- Improved shortcut to move blocks up/down `meta + shift + arrow up/down`
-- New shortcuts to extend selection up/down: `Cmd + Alt + Arrow up/down`
-- New shortcuts `Cmd + Enter` to split, `Cmd + J` to merge
+- New shortcut to remove selected block: `Meta + Backspace`
+- New shortcut to move focus up/down: `Meta + arrow up/down`
+- Improved shortcut to move blocks up/down: `Meta + Shift + arrow up/down`
+- New shortcut to extend selection up/down: `Meta + Alt + arrow up/down`
+- New shortcuts `Meta + Enter` to split, `Meta + J` to merge
 
 ## Block Splitting
 
@@ -174,6 +174,6 @@ Enhanced keyboard shorts to react on both Meta (`Cmd`) and `Ctrl` keys:
 
 ## Collapse blocks while dragging
 
-Large block collapses when dragged for easier handling
+Large blocks collapse when dragged for easier handling:
 
 (video: blocks-collapse.mp4)

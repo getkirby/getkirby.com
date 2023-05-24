@@ -41,8 +41,8 @@ Example:
 
 use Kirby\Cms\Page;
 
-class DefaultPage extends Page {
-
+class DefaultPage extends Page
+{
     /**
      * This method is now available for all pages
      * unless they have their own page model.
@@ -66,8 +66,8 @@ You can now define a `DefaultPage` class in your plugin or in `/site/models/def
 
 use Kirby\Cms\Page;
 
-class DefaultPage extends Page {
-
+class DefaultPage extends Page
+{
     /**
      * This method is now available for all pages
      * unless they have their own page model.

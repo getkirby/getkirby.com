@@ -499,4 +499,3 @@ panel.view.set(state);
 panel.view.url();
 panel.view.validateState(state);
 ```
-
