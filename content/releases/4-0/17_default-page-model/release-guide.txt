@@ -1,4 +1,4 @@
-Title: Default Page Model
+Title: Default page model
 
 ----
 

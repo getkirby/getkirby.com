@@ -1,4 +1,4 @@
-Title: Custom Textarea Buttons
+Title: Custom textarea buttons
 
 ----
 

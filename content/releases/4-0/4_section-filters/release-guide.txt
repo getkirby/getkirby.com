@@ -1,4 +1,4 @@
-Title: Section Filters
+Title: Section filters
 
 ----
 

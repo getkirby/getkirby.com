@@ -1,4 +1,4 @@
-Title: Language Editor
+Title: Language editor
 
 ----
 

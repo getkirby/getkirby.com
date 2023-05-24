@@ -1,4 +1,4 @@
-Title: Srcset In Image Tag
+Title: Srcset in image tag
 
 ----
 

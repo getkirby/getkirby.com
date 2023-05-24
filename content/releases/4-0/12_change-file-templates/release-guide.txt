@@ -1,4 +1,4 @@
-Title: Changeable File Templates
+Title: Changeable file templates
 
 ----
 

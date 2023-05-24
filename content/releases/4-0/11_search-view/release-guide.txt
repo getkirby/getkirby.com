@@ -1,4 +1,4 @@
-Title: Search View
+Title: Search view
 
 ----
 
