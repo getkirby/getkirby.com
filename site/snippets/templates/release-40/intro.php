@@ -19,7 +19,7 @@
 		<figure class="v4-intro-header release-box p-12 bg-black">
 			<?php snippet('templates/release-40/image', [
 				'alt'   => 'Kirby 4 Chameleon',
-				'img'   => $section->image('chameleon.png'),
+				'img'   => $page->image('chameleon.png'),
 			]) ?>
 		</figure>
 
