@@ -19,3 +19,18 @@ Description: Embed a list of downloads from a central storage page with filters 
 ----
 
 Published: 2023-05-06
+
+----
+
+License:
+
+name: MIT license
+url: https://github.com/lukasbestle/kirby-downloads/blob/main/LICENSE.md
+
+----
+
+Installation: true
+
+----
+
+Composer: lukasbestle/kirby-downloads
