@@ -2,6 +2,10 @@ Title: Changeable file templates
 
 ----
 
+Menu: File templates
+
+----
+
 Subtitle: Change is in the air
 
 ----

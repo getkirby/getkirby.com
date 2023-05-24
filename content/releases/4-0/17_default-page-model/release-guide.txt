@@ -2,6 +2,10 @@ Title: Default page model
 
 ----
 
+Menu: Default model
+
+----
+
 Subtitle: Set a new page standard
 
 ----

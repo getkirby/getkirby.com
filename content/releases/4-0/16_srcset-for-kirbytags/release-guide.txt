@@ -2,6 +2,10 @@ Title: Srcset in image tag
 
 ----
 
+Menu: Srcset in tags
+
+----
+
 Subtitle: Image tag goes responsive
 
 ----

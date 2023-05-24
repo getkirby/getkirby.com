@@ -2,6 +2,10 @@ Title: Page creation dialogs
 
 ----
 
+Menu: Page dialog
+
+----
+
 Subtitle: Faster, better page creation
 
 ----

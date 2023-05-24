@@ -2,6 +2,10 @@ Title: Panel JavaScript API
 
 ----
 
+Menu: Panel JS API
+
+----
+
 Subtitle: Remote control
 
 ----

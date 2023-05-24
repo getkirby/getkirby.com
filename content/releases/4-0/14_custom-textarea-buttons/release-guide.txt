@@ -2,6 +2,10 @@ Title: Custom textarea buttons
 
 ----
 
+Menu: Textarea buttons
+
+----
+
 Subtitle: Bring your own
 
 ----
