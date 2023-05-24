@@ -17,7 +17,10 @@
 	<h2 class="sr-only">The gist of it</h2>
 	<div class="v4-intro-columns columns">
 		<figure class="v4-intro-header release-box p-12 bg-black">
-			<?= $page->image('chameleon.png') ?>
+			<?php snippet('templates/release-40/image', [
+				'alt'   => 'Kirby 4 Chameleon',
+				'img'   => $section->image('chameleon.png'),
+			]) ?>
 		</figure>
 
 		<div class="p-6 bg-white shadow-xl rounded">
