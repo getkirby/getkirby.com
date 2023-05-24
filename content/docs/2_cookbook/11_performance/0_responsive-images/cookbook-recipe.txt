@@ -130,7 +130,7 @@ If you are wondering now why you should use this longer syntax when both return 
 <?php if ($image = $page->image('flower-power.jpg')): ?>
     <img
         alt="<?= $image->alt() ?>"
-        src="<?= $image->thumb(['width' => 300, 'height' => 300, 'quality' => 80, 'crop' => center, 'quality' => 80])->url() ?>"
+        src="<?= $image->thumb(['width' => 300, 'height' => 300, 'quality' => 80, 'crop' => 'center', 'quality' => 80])->url() ?>"
         srcset="<?= $image->srcset(
             [
                 '300w'  => ['width' => 300, 'height' => 300, 'crop' => 'center', 'quality' => 80],
