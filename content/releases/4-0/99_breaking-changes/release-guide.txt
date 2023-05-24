@@ -65,3 +65,6 @@ Text:
 - `this.$store.state.isLoading` is no longer available. You can now use `window.panel.isLoading` or `this.$panel.isLoading` in Vue components to access the current loading state.
 - `this.$store.state.dialog` is no longer available. Use `this.$panel.dialog` instead.
 - Removed `this.$store.state.drag`, use `window.panel.drag`/`this.$panel.drag` instead
+- `k-button` , `k-link`, `k-headline` and `k-content-item`only emit the `click` event. For other native events, use the `.native` event listener modifier
+- Native events (e.g. `click`, `dbclick`) need the `.native` modifier now when used on `k-block` and `k-block-title`
+- Need to use `.native` modifier for all previous event listeners on `k-box,` `k-image`

@@ -21,6 +21,7 @@ Github:
 - https://github.com/getkirby/v4/pull/56
 - https://github.com/getkirby/v4/pull/155
 - https://github.com/getkirby/v4/pull/156
+- https://github.com/getkirby/v4/pull/131
 
 ----
 
@@ -54,3 +55,5 @@ Text:
 	- `<k-overlay type="drawer">`
 	- `<k-overlay>`
 	An overlay without a type will use the default overlay portal.Seperating them into different portals gives us more control over z-index and layering of elements.
+- Removed `v-model` from `k-form` and `k-fieldset`
+- Removed `$listeners` usage from `k-draggable`, `k-button` and subcomponents, `k-link`, `k-headline`, `k-form`, `k-block`, `k-block-title`, `k-box`, `k-image`, `k-content-item`
