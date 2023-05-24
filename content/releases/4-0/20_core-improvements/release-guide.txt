@@ -28,9 +28,54 @@ Github:
 
 Text:
 
+#### Support for UUIDs in URL helper
+
+You can now simply pass a page UUID or a file UUID to the `url()` helper and it will be converted to the actual URL.
+
+```php
+<?= url('page://abcd') ?>
+<?= url('file://abcd') ?>
+```
+
+This will also work for other URL methods like. `$field->toUrl()`, `Url:to()`, etc.
+
+#### Support for UUIDs in API calls
+
+You can now use UUIDs in API calls to request pages and files. https://github.com/getkirby/kirby/issues/4769
+
+```
+/api/pages/@$pageUUID
+```
+
+The UUIDs must be passed without scheme, but a prefixed @ I.e.
+
+```
+// Nope
+/api/pages/page://abcd
+
+// Yes
+/api/pages/@abcd
+```
+
+File routes can also handle file UUIDs for files and parents
+
+```
+/api/pages/@$pageUUID/files/$filename
+/api/pages/@$pageUUID/files/@$fileUUID
+```
+
+In addition to that there are new direct UUID file routes:
+
+```
+/api/files/@$fileUUID
+```
+
+#### More improvements
+
 - New `File::blueprints()` method that collects valid blueprints from the files sections and files fields of the parent model
 - Fields can now define `'hidden' => true` (component notation) or `::isHidden(): bool` (class-based) to make them non-rendering 
 - New `File::changeTemplate()` method
 - New file permissions for `changeTemplate`
 - New `file.changeTemplate` hooks
 - New `Kirby\Email\Email::toArray()` and `Kirby\Email\Body::toArray()` methods
+- New `Kirby\Exception\AuthException` class

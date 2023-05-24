@@ -56,6 +56,7 @@ Text:
 - Removed the `::hardcopy()` method from `Kirby\Api\Api`, `Kirby\Cms\Api`,`Kirby\Email\Email`, `Kirby\Email\Body`, `Kirby\Cms\Auth\Status`, `Kirby\Toolkit\Pagination`, `Kirby\Http\Uri`, `Kirby\Cms\FileVersion`, `Kirby\Filesystem\Asset`, `Kirby\Filesystem\File`, `Kirby\Image\Image`, `Kirby\Cms\Role`, `Kirby\Cms\StructureObject` and `Kirby\Cms\ContentTranslation` classes
 - Removed `::site()` method from  `Kirby\Cms\Plugin`, `Kirby\Cms\Role` and `Kirby\Cms\StructureObject` classes
 - Removed `::kirby()` method from `Kirby\Cms\Role` and `Kirby\Cms\StructureObject` classes
+- Unauthenticated API and Panel calls now return a correct 401 HTTP code instead of 403.
 
 #### Panel
 
