@@ -27,25 +27,27 @@ Github:
 
 Text:
 
+#### Removed deprecated code
+
+- `Kirby\Form\Options`, `Kirby\Form\OptionsApi` and `Kirby\Form\OptionsQuery` classes have been removed. Use `Kirby\Option\Options`, `Kirby\Option\OptionsApi` or `Kirby\Option\OptionsQuery` instead.
+- `Kirby\Toolkit\Query` class has been removed. Use `Kirby\Query\Query` instead.
+- Passing the `$slot` or `$slots` variables to snippets was deprecated and support has now finally been removed.
+
 #### Core
 
-- The method name `File::manipulate()` is no longer available for custom File methods as it’s now a core method.
-- Deprecated `Form\Options`, `Form\OptionsApi` and `Form\OptionsQuery` classes removed. Use `Option\Options`, `Option\OptionsApi` or `Option\OptionsQuery` instead.
-- Deprecated `Toolkit\Query` class has been removed. Use `Query\Query` instead.
+- When thumb generation fails, the image API now throws an error and no longer loads the original image.
+- Files: `manipulate` and `focus` are now used by core methods. They are no longer available for custom file methods and content fields with these names can only be accessed via e.g. `$file->content()->get('focus')`.
 - `I18n::translate()`: If `$fallback` is an array and neither the array `$key` nor the array `$fallback` have a matching entry for the locale, the first element of the `$key` array  will now be returned (not anymore the one from `$fallback`). If `$fallback` is a string, it will be considered with priority over both of these.
 - If overwriting the `hidden` field, it must return `'hidden' => true` now
-- Files: `focus` field and file method are now restricted for this use
 - `Kirby\Uuid\Uuid` is now an abstract class, child classes need to implement the `id` method
 - `Kirby\Uuid\Uuid::key()` can now also return `null` if the new `$generate` parameter isn't passed as `true` and no UUID has been yet generated for the model
-- Passing the `$slot` or `$slots` variables to snippets was deprecated and support has now finally been removed.
 - Errors are no longer hidden when a response is converted to a string, which could be seen as a breaking change.
-- When thumb generation fails, the image API now throws an error and no longer loads the original image.
 
 #### Panel
 
 - `this.$library.autosize` has been removed, wrap `<textarea>` elements instead inside `<k-autosize>` element
 - Defining the footer slot in `<k-dialog>` will no longer wrap the slot content in the `<footer>` element. This can now be more flexibly handled by using `<k-dialog-footer>` inside the slot.
-- The Form drawer no longer automatically closes on submit. This is introducing the same behaviour as in dialogs. Auto-closing might often not be the intended result of submitting the form and it's easier to close it manually in a submit handler than to re-open it again.
+- The form drawer no longer automatically closes on submit. This is introducing the same behaviour as in dialogs. Auto-closing might often not be the intended result of submitting the form and it's easier to close it manually in a submit handler than to re-open it again.
 - `this.$store.state.isLoading` is no longer available. You can now use `window.panel.isLoading` or `this.$panel.isLoading` in Vue components to access the current loading state.
 - `this.$store.state.dialog` is no longer available. Use `this.$panel.dialog` instead.
-- Removed `this.$store.state.drag`, use `window.panle.drag`/`this.$panel.drag` instead
+- Removed `this.$store.state.drag`, use `window.panel.drag`/`this.$panel.drag` instead
