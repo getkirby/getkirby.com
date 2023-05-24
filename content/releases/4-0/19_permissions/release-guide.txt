@@ -30,10 +30,10 @@ Text:
 
 ### Changes
 
-- `read` option will deprecated in v5
+- `read` option will be deprecated in Kirby 5
 - `access` option is about accessibility
 - `list` option is about visibility (picker and sections)
-- `access` and `list` permissions depend on the read option until v5
+- `access` and `list` permissions depend on the read option until Kirby 5
 
 ### Meaning
 
@@ -46,7 +46,7 @@ read: false   # not accessible, not listed
 ### Sample Usage
 
 ```yaml
-# Orders page is no accessible and no visible for all roles except admins.
+# Orders page is not accessible and not visible for all roles except admins.
 
 title: Orders
 

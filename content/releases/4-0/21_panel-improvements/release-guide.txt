@@ -127,7 +127,7 @@ We've added new icons to our Panel iconset
 - `$helper.url.makeAbsolute`
 - `$helper.url.toObject`
 
-#### New js error classes
+#### New JS error classes
 
 - `RequestError`
 - `JsonRequestError`

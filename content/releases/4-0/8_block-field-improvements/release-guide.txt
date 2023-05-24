@@ -152,7 +152,7 @@ Uses toggles field inside drawer for heading level
 
 ## New Keyboard shortcuts
 
-Enhanced keyboard shorts to react on both, meta (Cmd) and Ctrl, keys
+Enhanced keyboard shorts to react on both Meta (`Cmd`) and `Ctrl` keys:
 
 - New shortcut to remove selected block `meta + backspace`
 - New shortcut to move focus up/down `meta + arrow up/down`
@@ -170,7 +170,7 @@ Enhanced keyboard shorts to react on both, meta (Cmd) and Ctrl, keys
 - New option buttons to split or merge (only shown when supported)
 - Enter in headline block appends new text block when cursor at end
 - Text block with `inline: true` for text field will split directly on Enter (Shift + Enter does hard line break)
-- Custom blocks can support splitting by implementing a `split()` method that emits `split` event and passes an array of two content states (for each of the splitted blocks); and merging by implementing a `merge()` method that receives an array of blocks (which it then needs to use to update itself, all but the first block will automatically removed afterwards)
+- Custom blocks can support splitting by implementing a `split()` method that emits a `split` event and passes an array of two content states (for each of the splitted blocks); and merging by implementing a `merge()` method that receives an array of blocks (which it then needs to use to update itself, all but the first block will automatically be removed afterwards)
 
 ## Collapse blocks while dragging
 

@@ -10,7 +10,7 @@ Category: views
 
 ----
 
-Intro: New Panel view for complete list of search results
+Intro: New Panel view for a complete list of search results
 
 ----
 

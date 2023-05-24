@@ -133,7 +133,7 @@ Text:
 
 ## Better toolbar
 
-New `toolbar` option
+New `toolbar` option:
 
 ```yaml
 text:
@@ -152,7 +152,7 @@ text:
 
 ```
 
-`inline` control the position/style of the toolbar.
+`inline` controls the position/style of the toolbar:
 
 (image: toolbar.png)
 
@@ -160,7 +160,7 @@ text:
 
 ## Set heading levels
 
-You can set the available heading levels in the writer field with the new `headings` option
+You can set the available heading levels in the writer field with the new `headings` option:
 
 ```yaml
 fields:

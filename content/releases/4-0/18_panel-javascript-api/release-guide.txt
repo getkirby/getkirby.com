@@ -69,13 +69,13 @@ panel.title = "My title";
 
 ### Methods
 ```js
-// sends a panel get request
+// sends a Panel GET request
 panel.get(url, options = {});
 
-// sends a get request and sets the state
+// sends a GET request and sets the state
 panel.open(url, options = {});
 
-// sends a post request
+// sends a POST request
 panel.post(url, options = {});
 
 // full redirect to a different URL
@@ -87,19 +87,19 @@ panel.request(url, options = {});
 // sends a search request
 panel.search(type, query);
 
-// overwrites the panel state
+// overwrites the Panel state
 panel.set(state);
 
-// returns the full panel state including all modules
+// returns the full Panel state including all modules
 panel.state();
 
-// URL builder for panel URLs
+// URL builder for Panel URLs
 panel.url(url = "", query = {}, origin);
 ```
 
 ## `panel.api`
 
-Provides global access to API requests
+Provides global access to API requests.
 
 ### Methods
 
@@ -421,7 +421,7 @@ panel.upload.reset();
 // selects additional files (needs a FileList)
 panel.upload.select(files)
 
-// overwrite the upload state
+// overwrites the upload state
 panel.upload.set(state);
 
 // starts the upload of all files in the queue
@@ -430,7 +430,7 @@ panel.upload.start();
 // returns the current state
 panel.upload.state();
 
-// validate a new state object for the upload
+// validates a new state object for the upload
 panel.upload.validateState(state);
 ```
 
