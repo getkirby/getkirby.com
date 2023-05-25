@@ -37,7 +37,7 @@
 	<figure class="v4-move-hero release-box bg-black shadow-xl" style="grid-area: dialog">
 		<?php snippet('templates/release-40/image', [
 			'alt' => 'A new parent for the page can be picked with our brand new page tree dialog',
-			'img' => $section->image('move-dialog.png')
+			'img' => $section->image('move-dialog.png')->resize(1400)
 		]) ?>
 	</figure>
 	<div class="release-text-box" style="grid-area: teaser">
@@ -46,7 +46,7 @@
 	<figure class="v4-move-dropdown release-padded-box bg-light" style="grid-area: dropdown">
 		<?php snippet('templates/release-40/image', [
 			'alt'   => 'The page dropdowns have been extended with the new Move page option',
-			'img'   => $section->image('dropdown.png'),
+			'img'   => $section->image('dropdown.png')->resize(330),
 			'class' => 'shadow-xl'
 		]) ?>
 	</figure>

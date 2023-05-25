@@ -31,7 +31,7 @@
 	<div class="release-box shadow-xl bg-light" style="grid-area: view">
 		<?php snippet('templates/release-40/image', [
 			'alt'   => 'All major Panel features can now be controlled directly from your browser console',
-			'img'   => $section->image('console.png'),
+			'img'   => $section->image('console.png')->resize(1600),
 		]) ?>
 	</div>
 </div>

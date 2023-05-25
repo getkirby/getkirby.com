@@ -2,7 +2,8 @@
 
 return [
 	'thumbs' => [
-		'bin' => '/usr/local/bin/convert'
+		'driver' => 'gd'
+		// 'bin' => '/usr/local/bin/convert'
 	],
 	'hub' => [
 		'url' => 'https://hub.getkirby.test'

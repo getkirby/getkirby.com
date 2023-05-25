@@ -20,7 +20,7 @@
 	<figure class="release-box bg-light shadow-xl" style="grid-area: figure">
 		<?php snippet('templates/release-40/image', [
 			'alt' => 'The focus point for images can now be set directly in the file view. Drop a marker on the most relevant point in the image to always crop around a custom center point.',
-			'img' => $section->image('image-focus.png')
+			'img' => $section->image('image-focus.png')->resize(1800)
 		]) ?>
 	</figure>
 	<div class="release-text-box" style="grid-area: teaser">

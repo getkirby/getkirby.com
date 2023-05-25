@@ -31,7 +31,7 @@
 	<figure class="release-padded-box bg-light grid place-items-center v4-block-columns-main">
 		<?php snippet('templates/release-40/image', [
 			'alt' => 'The new field preview for blocks lets you edit block content directly in form fields instead of a live block preview',
-			'img' => $section->image('field-preview.png')
+			'img' => $section->image('field-preview.png')->resize(1400)
 		]) ?>
 	</figure>
 	<div class="release-code-box p-6 flex-grow bg-light">
@@ -44,14 +44,14 @@
 		<h3 class="mb-6">Display and edit headings level inline</h3>
 		<?php snippet('templates/release-40/image', [
 			'alt' => 'The heading level is now displayed right next to the heading and can be used to change the level on the fly',
-			'img' => $section->image('heading-level.png')
+			'img' => $section->image('heading-level.png')->resize(1000)
 		]) ?>
 	</figure>
 	<figure class="release-padded-box bg-light">
 		<h3 class="mb-6">New toggles inside the drawer</h3>
 		<?php snippet('templates/release-40/image', [
 			'alt' => 'The heading level can also be set with the new toggles in the block drawer',
-			'img' => $section->image('heading-level-toggles.png')
+			'img' => $section->image('heading-level-toggles.png')->resize(1000)
 		]) ?>
 	</figure>
 </div>
@@ -75,7 +75,7 @@
 		<h3 class="mb-6">Minimized blocks while dragging</h3>
 		<?php snippet('templates/release-40/image', [
 			'alt' => 'Blocks are now minimized while you drag them around. This makes it easier to sort blocks with long content.',
-			'img' => $section->image('collapse.png')
+			'img' => $section->image('collapse.png')->resize(1400)
 		]) ?>
 	</figure>
 

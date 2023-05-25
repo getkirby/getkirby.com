@@ -37,7 +37,7 @@
 	<div class="release-padded-box bg-light" style="--span: 8">
 		<?php snippet('templates/release-40/image', [
 			'alt'   => 'The updated writer field with the new toolbar option that resembles the fixed toolbar of the textarea',
-			'img'   => $section->image('writer.png'),
+			'img'   => $section->image('writer.png')->resize(1600),
 		]) ?>
 	</div>
 </div>
@@ -45,7 +45,7 @@
 	<div class="release-box bg-light" style="--span: 8">
 		<?php snippet('templates/release-40/image', [
 			'alt'   => 'The link picker for the writer now also features the new link field',
-			'img'   => $section->image('internal-links.png'),
+			'img'   => $section->image('internal-links.png')->resize(1600),
 		]) ?>
 	</div>
 	<div class="release-text-box" style="--span: 4">

@@ -40,7 +40,7 @@
 	<figure class="v4-uploader-dialog release-box bg-light shadow-xl" style="grid-area: dialog">
 		<?php snippet('templates/release-40/image', [
 			'alt' => 'The new upload dialog with four images, ready to be uploaded. Each file has a new input to change the filename before the file gets uploaded.',
-			'img' => $section->image('uploader.png')
+			'img' => $section->image('uploader.png')->resize(1600)
 		]) ?>
 	</figure>
 	<div class="release-text-box" style="grid-area: teaser">

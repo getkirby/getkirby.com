@@ -22,7 +22,7 @@
 	<figure class="release-box bg-light shadow-xl" style="grid-area: view">
 		<?php snippet('templates/release-40/image', [
 			'alt'   => 'The new search view with a long list of results for a file search.',
-			'img'   => $section->image('search-view.png'),
+			'img'   => $section->image('search-view.png')->resize(1600),
 		]) ?>
 	</figure>
 	<div class="release-text-box" style="grid-area: teaser">

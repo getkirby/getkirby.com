@@ -38,7 +38,7 @@
 	<figure class="v4-color-hero release-padded-box bg-light grid place-items-center">
 		<?php snippet('templates/release-40/image', [
 			'alt' => 'The new color field with the color picker dropdown and predefined colors with names',
-			'img' => $section->image('color-field-names.png')
+			'img' => $section->image('color-field-names.png')->resize(850)
 		]) ?>
 	</figure>
 	<figure class="v4-color-code release-code-box text-lg">
@@ -47,7 +47,7 @@
 	<figure class="v4-color-modes release-box bg-light flex-grow grid place-items-center p-6">
 		<?php snippet('templates/release-40/image', [
 			'alt' => 'The color field can be simplified to show a set of predefined colors instead of offering a color picker',
-			'img' => $section->image('color-field-modes.png')
+			'img' => $section->image('color-field-modes.png')->resize(470)
 		]) ?>
 	</figure>
 </div>

@@ -45,7 +45,7 @@
 	<figure class="v4-link-hero release-padded-box bg-light flex items-center" style="grid-area: hero">
 		<?php snippet('templates/release-40/image', [
 			'alt' => 'Our new link field with the new file browser',
-			'img' => $section->image('file-link.png')
+			'img' => $section->image('file-link.png')->resize(1200)
 		]) ?>
 	</figure>
 	<figure class="v4-link-code release-code-box text-lg" style="grid-area: code">

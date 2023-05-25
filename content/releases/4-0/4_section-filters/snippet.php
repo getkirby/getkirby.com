@@ -2,7 +2,7 @@
 	<figure class="release-box bg-light" style="--span:5">
 		<?php snippet('templates/release-40/image', [
 			'alt' => 'An example for a shop with filtered products by price range',
-			'img' => $section->image('section-filters.png')
+			'img' => $section->image('section-filters.png')->resize(1800)
 		]) ?>
 	</figure>
 	<div class="release-text-box" style="--span: 2">
