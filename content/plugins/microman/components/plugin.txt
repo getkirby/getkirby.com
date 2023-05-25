@@ -23,3 +23,7 @@ Paid: https://license.microman.ch/?product=829857
 ----
 
 Description: No more switching between snippets and blueprints folders. Bring them to a common place and keep the overview.
+
+----
+
+Published: 2023-05-17
