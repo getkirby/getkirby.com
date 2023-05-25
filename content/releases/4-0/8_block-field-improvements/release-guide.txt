@@ -162,9 +162,9 @@ Enhanced keyboard shorts to react on both Meta (`Cmd`) and `Ctrl` keys:
 
 ## Block Splitting
 
-(video: splitting-1.mov)
+(video: splitting-1.mp4)
 
-(video: splitting-2.mov)
+(video: splitting-2.mp4)
 
 - Splitting and merging of supported blocks (text, list and heading)
 - New option buttons to split or merge (only displayed when supported)
