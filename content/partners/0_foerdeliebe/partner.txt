@@ -1,0 +1,49 @@
+Title: foerdeliebe
+
+----
+
+Subtitle: Web development with ♥
+
+----
+
+Package: team
+
+----
+
+Website: https://foerdeliebe.com
+
+----
+
+Location: Leer (Ostfriesland), Germany
+
+----
+
+Contactlink: mailto:moin@foerdeliebe.com
+
+----
+
+Languages: German & English
+
+----
+
+Description: We are a young company with a focus on close customer contact with ten years of experience with Kirby projects.
+
+----
+
+Expertise:
+
+- Custom Kirby implementations
+- Website design
+- Kirby extensions
+- SEO counseling
+- UX counseling
+- SolidJS
+- Tailwind CSS
+
+----
+
+Uuid: HV3x256gkO7W9cjd
+
+----
+
+Text: 
