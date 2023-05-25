@@ -6,6 +6,10 @@ Repository: https://github.com/youngcut/kirby-form-block-suite
 
 ----
 
+Paid: https://license.microman.ch/?product=801346
+
+----
+
 Category: panel
 
 ----
