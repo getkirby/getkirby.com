@@ -1,5 +1,4 @@
-<a href="<?= $partner->url() ?>"
-	 class="<?= $partner->isBlurred() ? 'blurred' : '' ?>">
+<a href="<?= $partner->url() ?>">
 	<article>
 		<h3 class="h3 truncate flex mb-3 items-center">
 			<span class="mr-3"
