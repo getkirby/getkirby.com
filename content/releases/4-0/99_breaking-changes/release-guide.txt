@@ -44,6 +44,7 @@ Text:
 
 #### Core
 
+- We have added more native PHP type hints throughout the system. When eextending core classes, this might require you to update your method  to include those type hints as well.
 - When thumb generation fails, the image API now throws an error and no longer loads the original image.
 - Files: `manipulate` and `focus` are now used by core methods. They are no longer available for custom file methods and content fields with these names can only be accessed via e.g. `$file->content()->get('focus')`.
 - `I18n::translate()`: If `$fallback` is an array and neither the array `$key` nor the array `$fallback` have a matching entry for the locale, the first element of the `$key` array  will now be returned (not anymore the one from `$fallback`). If `$fallback` is a string, it will be considered with priority over both of these.
