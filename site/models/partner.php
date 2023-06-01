@@ -39,8 +39,19 @@ class PartnerPage extends Page
 		return parent::me()->value($this->isSoloPartner() ? 'me' : 'us');
 	}
 
+	public function metadata(): array
+	{
+		return [
+			'ogimage' => $this->card()
+		];
+	}
+
 	public function my(): Field
 	{
 		return parent::my()->value($this->isSoloPartner() ? 'my' : 'our');
 	}
+
+
+
+
 }

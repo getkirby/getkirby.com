@@ -1,8 +1,11 @@
 <a href="<?= $partner->url() ?>">
 	<article>
-		<h3 class="h3 truncate flex mb-3 items-center">
-			<span class="mr-3"
+		<p class="flex items-center text-xs" style="gap: var(--spacing-1)">
+			<?= ucfirst(str_replace('+', '', $partner->package())) ?>
+			<span class="mr-1"
 						title="Certified Kirby Partner"><?= icon('verified') ?></span>
+		</p>
+		<h3 class="h3 truncate flex mb-3 items-center">
 			<?= $partner->title() ?>
 		</h3>
 		<figure>
