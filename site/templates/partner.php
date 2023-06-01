@@ -7,7 +7,7 @@
   --row-gap: var(--spacing-12);
 }
 
-.partner-card {
+.partner-intro {
   --span-lg: 2;
   --span-md: 3;
 }
@@ -40,59 +40,63 @@
 </header>
 
 <div class="partner-grid columns mb-24">
-  <div class="partner-card">
-    <figure style="--aspect-ratio: 3/2;" class="mb-3">
-      <?php if ($image = $page->card()): ?>
-        <?= $image->resize(1600) ?>
-      <?php elseif ($image = $page->avatar()): ?>
-        <span class="p-6 bg-light">
-          <img class="shadow-xl bg-white" style="width: auto; height: 100%;" src="<?= $image->url() ?>">
-        </span>
-      <?php endif ?>
-    </figure>
-  </div>
+	<div class="partner-intro">
+		<div class="mb-24">
+			<figure style="--aspect-ratio: 3/2;" class="mb-3">
+				<?php if ($image = $page->card()): ?>
+					<?= $image->resize(1600) ?>
+				<?php elseif ($image = $page->avatar()): ?>
+					<span class="p-6 bg-light">
+						<img class="shadow-xl bg-white" style="width: auto; height: 100%;" src="<?= $image->url() ?>">
+					</span>
+				<?php endif ?>
+			</figure>
+		</div>
+
+		<div>
+			<h2 class="h2 mb-6">About <?= $page->me() ?> </h2>
+			<div class="prose text-base">
+				<?= $page->description()->kt() ?>
+			</div>
+		</div>
+	</div>
 
   <div class="partner-info">
-    <div class="font-mono text-sm mb-12">
-      <?php if ($page->isPlusPartner()): ?>
-      <p class="inline-flex py-1 px-3 rounded items-center mb-6" style="background: var(--color-yellow-400)">
-        <span class="mr-3"><?= icon('verified') ?></span>
-        Certified Kirby Partner
-      </p>
-      <?php endif ?>
-			<p class="text-sm"><?= ucfirst(str_replace('+', '', $page->package())) ?></p>
-      <p class="color-gray-600 truncate">
-        <?= $page->location() ?>
-      </p>
-      <p>
-        <a class="link" href="<?= $page->website() ?>">
-          <?= $page->website()->shorturl() ?>
-        </a>
-      </p>
-      <?php if ($page->languages()->isNotEmpty()): ?>
-      <p class="flex items-center" style="gap: var(--spacing-3); margin-top: var(--spacing-10)">
-        <?= icon('globe') ?>
-				<span class="color-gray-600"><?= ucfirst($page->i()) ?> speak <?= $page->languages() ?></span>
-      </p>
-      <?php endif ?>
-    </div>
+		<div class="sticky" style="--top: var(--spacing-12)">
+			<div class="font-mono text-sm mb-12">
+				<?php if ($page->isPlusPartner()): ?>
+				<p class="inline-flex py-1 px-3 rounded items-center mb-6" style="background: var(--color-yellow-400)">
+					<span class="mr-3"><?= icon('verified') ?></span>
+					Certified Kirby Partner
+				</p>
+				<?php endif ?>
+				<p class="text-sm"><?= ucfirst(str_replace('+', '', $page->package())) ?></p>
+				<p class="color-gray-600 truncate">
+					<?= $page->location() ?>
+				</p>
+				<p>
+					<a class="link" href="<?= $page->website() ?>">
+						<?= $page->website()->shorturl() ?>
+					</a>
+				</p>
+				<?php if ($page->languages()->isNotEmpty()): ?>
+				<p class="flex items-center" style="gap: var(--spacing-3); margin-top: var(--spacing-10)">
+					<?= icon('globe') ?>
+					<span class="color-gray-600"><?= ucfirst($page->i()) ?> speak <?= $page->languages() ?></span>
+				</p>
+				<?php endif ?>
+			</div>
 
-    <div class="partner-expertise">
-      <h2 class="h2 mb-6"><?= ucfirst($page->my()) ?> expertise</h2>
-      <div class="prose text-base mb-6">
-        <?= $page->expertise()->kt() ?>
-      </div>
-      <a class="btn btn--filled" href="<?= $page->contactlink()->or($page->website()) ?>">
-        <?= icon('mail') ?> Contact
-      </a>
-    </div>
-  </div>
-</div>
-
-<div class="mb-24">
-  <h2 class="h2 mb-6">About <?= $page->me() ?> </h2>
-  <div class="prose text-base">
-    <?= $page->description()->kt() ?>
+			<div class="partner-expertise">
+				<h2 class="h2 mb-6"><?= ucfirst($page->my()) ?> expertise</h2>
+				<div class="prose text-base mb-6">
+					<?= $page->expertise()->kt() ?>
+				</div>
+				<a class="btn btn--filled" href="<?= $page->contactlink()->or($page->website()) ?>">
+					<?= icon('mail') ?> Contact
+				</a>
+			</div>
+		</div>
   </div>
 </div>
 
