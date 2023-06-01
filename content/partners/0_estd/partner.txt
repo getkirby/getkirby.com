@@ -1,0 +1,53 @@
+Title: Estd
+
+----
+
+Subtitle: Development Agency
+
+----
+
+Package: team
+
+----
+
+Website: https://estd.dev/
+
+----
+
+Location: Dublin, Ireland
+
+----
+
+Discordhandle: smngy#4290
+
+----
+
+Languages: English
+
+----
+
+Description:
+
+Estd is the development offshoot of the Dublin-based design agency (link: https://www.poststudio.ie/ text: Post Studio). We are a collective of design-sensitive, detail-oriented designers and developers. We dovetail with companies and design agencies to offer efficient, effective and accessible website development services.
+
+We aim to listen to and understand each project's unique challenges and technical needs and provide practical and affordable digital solutions tailored to your project.
+
+----
+
+Expertise:
+
+- Website & Interaction Design
+- Prototyping
+- Front End Development
+- Kirby Integration
+- Ecommerce (Merx / Shopify / Snipcart / Custom)
+- Performance Optimisation
+- Web Hosting
+
+----
+
+Uuid: MFSYrNFGgeGl9f80
+
+----
+
+Text: 

@@ -18,7 +18,7 @@ Location: Budapest, Hungary
 
 ----
 
-Contactlink: hello@iavel.hu
+Contactlink: mailto:hello@iavel.hu
 
 ----
 
@@ -50,4 +50,4 @@ Uuid: g5EExEU8S2xKpAzu
 
 ----
 
-Text: 
+Text:
