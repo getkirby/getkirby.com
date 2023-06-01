@@ -1,0 +1,57 @@
+Title: Luca Bertaiola
+
+----
+
+Subtitle: Web designer & developer
+
+----
+
+Package: solo
+
+----
+
+Website: https://luglio7.com/en
+
+----
+
+Location: Verona, Italy
+
+----
+
+Contactlink: mailto:luca@luglio7.com
+
+----
+
+Discordhandle: luglio7#8965
+
+----
+
+Languages: Italian & English
+
+----
+
+Description:
+
+My name is Luca Bertaiola.
+I'm a web designer & developer from Verona with more than 10 years of experience.
+
+I design and build websites geared toward functionality and a functional and innovative aesthetic.
+
+Do not hesitate to contact me about any possible Kirby project.
+
+----
+
+Expertise:
+
+- UX / Web design
+- Front end development
+- Back end development (Kirby, Wordpress)
+- Ecommerce (Kirby, Shopify)
+
+----
+
+Uuid: hUtH1uW4kHb9VDhF
+
+----
+
+Text: 
