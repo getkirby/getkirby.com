@@ -137,24 +137,26 @@
 <?php endif ?>
 
 <!-- Plugins -->
-<?php if ($plugins = $page->pluginpage()->toPage()): ?>
+<?php if ($plugins = $page->plugins()): ?>
   <div class="text-lg mb-24">
     <h2 class="h2 mb-12"><?= ucfirst($page->my()) ?> Kirby Plugins</h2>
     <section class="mb-12">
-    <?php if ($plugins->children()->count() === 1): ?>
+    <?php if ($plugins->count() === 1 || $plugins->count() === 4): ?>
       <?php snippet('templates/plugins/hero', [
-        'plugins' => $plugins->children()->limit(1)
-      ]) ?>
-    <?php else: ?>
-      <?php snippet('templates/plugins/cards', [
-        'plugins' => $plugins->children()->limit($page->isPlusPartner() ? 6 : 3),
-        'columns' => $plugins->children()->count() > 2 ? 3 : 2,
-        'gap'     => 24
+        'plugins' => $hero = $plugins->limit(1)
       ]) ?>
     <?php endif ?>
+		<?php snippet('templates/plugins/cards', [
+			'plugins' => $plugins->not($hero ?? null),
+			'columns' => 3,
+			'gap'     => 24
+		]) ?>
     </section>
     <footer class="mb-6">
-      <a class="btn btn--filled" href="<?= $plugins->url() ?>">
+      <a
+				class="btn btn--filled"
+				href="<?= $plugins->first()->parent()->url() ?>"
+			>
         <?= icon('flash') ?> Visit <?= $page->my() ?> plugins page
       </a>
     </footer>

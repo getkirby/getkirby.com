@@ -51,7 +51,13 @@ class PartnerPage extends Page
 		return parent::my()->value($this->isSoloPartner() ? 'my' : 'our');
 	}
 
+	public function plugins(): Pages|null
+	{
+		if (parent::plugins()->isNotEmpty() === true)
+		{
+			return parent::plugins()->toPages();
+		}
 
-
-
+		return $this->pluginpage()->toPage()?->children()->limit(6);
+	}
 }
