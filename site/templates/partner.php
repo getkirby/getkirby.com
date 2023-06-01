@@ -60,6 +60,7 @@
         Certified Kirby Partner
       </p>
       <?php endif ?>
+			<p class="text-sm"><?= ucfirst(str_replace('+', '', $page->package())) ?></p>
       <p class="color-gray-600 truncate">
         <?= $page->location() ?>
       </p>
@@ -69,8 +70,9 @@
         </a>
       </p>
       <?php if ($page->languages()->isNotEmpty()): ?>
-      <p class="color-gray-600" style="margin-top: var(--spacing-3)">
-        <?= ucfirst($page->i()) ?> speak <?= $page->languages() ?>
+      <p class="flex items-center" style="gap: var(--spacing-3); margin-top: var(--spacing-10)">
+        <?= icon('globe') ?>
+				<span class="color-gray-600"><?= ucfirst($page->i()) ?> speak <?= $page->languages() ?></span>
       </p>
       <?php endif ?>
     </div>
