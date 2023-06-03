@@ -9,7 +9,7 @@
 
 @media screen and (min-width: 50rem) {
 	.partner-grid {
-		grid-template-columns: 1fr auto;
+		grid-template-columns: 1fr 1fr;
 		grid-auto-rows: auto auto;
 		grid-template-areas:
 			"hero hero"

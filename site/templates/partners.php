@@ -25,13 +25,10 @@
 		}
 	}
 
-	@media screen and (min-width: 50rem) {
+	@media screen and (min-width: 60rem) {
 		.partners-plus {
 			--columns: 3;
 		}
-	}
-
-	@media screen and (min-width: 60rem) {
 		.partners {
 			--columns: 3;
 		}
