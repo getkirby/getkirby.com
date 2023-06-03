@@ -27,12 +27,12 @@ gallery:
 card:
     label: Priority listing
     help: Your entry is prominently displayed at the top of the partners list with a certification badge, large image and description.
-leads:
-    label: Project leads
-    help: Get access to our private project leads channel on Discord.
 network:
     label: Partner network
     help: Get access to our private partner network channel on Discord.
+leads:
+    label: Project leads
+    help: Get access to our private project leads channel on Discord.
 promotion:
     label: Promotion
     help: You are displayed as partner in our forum and on Discord. You also get access to our official partner badges that you can use on your own website and on social media.
