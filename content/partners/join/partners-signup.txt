@@ -26,7 +26,7 @@ gallery:
     help: Present your favourite client projects on your profile page.
 card:
     label: Priority listing
-    help: Your entry is prominently displayed at the top of the partners list with a certification badge and a large image.
+    help: Your entry is prominently displayed at the top of the partners list with a certification badge, large image and description.
 leads:
     label: Project leads
     help: Get access to our private project leads channel on Discord.
