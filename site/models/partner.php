@@ -55,7 +55,9 @@ class PartnerPage extends Page
 	{
 		if (parent::plugins()->isNotEmpty() === true)
 		{
-			return parent::plugins()->toPages();
+			$plugins = parent::plugins()->toPages();
+
+            return $plugins->isNotEmpty() ? $plugins : null;
 		}
 
 		return $this->pluginpage()->toPage()?->children()->limit(6);
