@@ -2,31 +2,38 @@
 
 <style>
 .partner-grid {
-  --columns: 3;
+	--columns: 1;
   --column-gap: var(--spacing-24);
   --row-gap: var(--spacing-12);
 }
 
-.partner-intro {
-  --span-lg: 2;
-  --span-md: 3;
+@media screen and (min-width: 50rem) {
+	.partner-grid {
+		grid-template-columns: 1fr 1fr;
+		grid-auto-rows: auto auto;
+		grid-template-areas:
+			"hero hero"
+			"main side"
+	}
+
+	.partner-hero {
+		grid-area: hero;
+	}
+	.partner-intro {
+		grid-area: main;
+	}
+	.partner-info {
+		grid-area: side;
+	}
 }
 
-.partner-info {
-  --span-lg: 1;
-  --span-md: 3;
-}
-
-@media screen and (min-width: 40rem) and (max-width: 71.99rem) {
-  .partner-info {
-    display: grid;
-    grid-column-gap: var(--column-gap);
-    grid-template-columns: 1fr auto;
-  }
-
-  .partner-expertise {
-    order: -1;
-  }
+@media screen and (min-width: 64rem) {
+	.partner-grid {
+		grid-template-columns: 2fr 1fr;
+		grid-template-areas:
+			"hero side"
+			"main side"
+	}
 }
 </style>
 
@@ -40,28 +47,21 @@
 </header>
 
 <div class="partner-grid columns mb-24">
-	<div class="partner-intro">
-		<div class="mb-24">
-			<figure style="--aspect-ratio: 3/2;" class="mb-3">
-				<?php if ($image = $page->card()): ?>
-					<?= $image->resize(1600) ?>
-				<?php elseif ($image = $page->avatar()): ?>
-					<span class="p-6 bg-light">
-						<img class="shadow-xl bg-white" style="width: auto; height: 100%;" src="<?= $image->url() ?>">
-					</span>
-				<?php endif ?>
-			</figure>
-		</div>
+	<figure style="--aspect-ratio: 3/2;" class="partner-hero mb-3">
+		<?php if ($image = $page->card()): ?>
+			<?= $image->resize(1600) ?>
+		<?php elseif ($image = $page->avatar()): ?>
+			<span class="p-6 bg-light">
+				<img
+					src="<?= $image->url() ?>"
+					class="shadow-xl bg-white"
+					style="width: auto; height: 100%;"
+				>
+			</span>
+		<?php endif ?>
+	</figure>
 
-		<div>
-			<h2 class="h2 mb-6">About <?= $page->me() ?> </h2>
-			<div class="prose text-base">
-				<?= $page->description()->kt() ?>
-			</div>
-		</div>
-	</div>
-
-  <div class="partner-info">
+	<div class="partner-info">
 		<div class="sticky" style="--top: var(--spacing-12)">
 			<div class="font-mono text-sm mb-12">
 				<?php if ($page->isPlusPartner()): ?>
@@ -70,7 +70,10 @@
 					Certified Kirby Partner
 				</p>
 				<?php endif ?>
-				<p class="text-sm"><?= ucfirst(str_replace('+', '', $page->package())) ?></p>
+
+				<p class="text-sm">
+					<?= ucfirst(str_replace('+', '', $page->package())) ?>
+				</p>
 				<p class="color-gray-600 truncate">
 					<?= $page->location() ?>
 				</p>
@@ -80,9 +83,14 @@
 					</a>
 				</p>
 				<?php if ($page->languages()->isNotEmpty()): ?>
-				<p class="flex items-center" style="gap: var(--spacing-3); margin-top: var(--spacing-10)">
+				<p
+					class="flex items-center"
+					style="gap: var(--spacing-3); margin-top: var(--spacing-10)"
+				>
 					<?= icon('globe') ?>
-					<span class="color-gray-600"><?= ucfirst($page->i()) ?> speak <?= $page->languages() ?></span>
+					<span class="color-gray-600">
+						<?= ucfirst($page->i()) ?> speak <?= $page->languages() ?>
+					</span>
 				</p>
 				<?php endif ?>
 			</div>
@@ -92,12 +100,22 @@
 				<div class="prose text-base mb-6">
 					<?= $page->expertise()->kt() ?>
 				</div>
-				<a class="btn btn--filled" href="<?= $page->contactlink()->or($page->website()) ?>">
+				<a
+					href="<?= $page->contactlink()->or($page->website()) ?>"
+					class="btn btn--filled"
+				>
 					<?= icon('mail') ?> Contact
 				</a>
 			</div>
 		</div>
   </div>
+
+	<div class="partner-intro">
+		<h2 class="h2 mb-6">About <?= $page->me() ?> </h2>
+		<div class="prose text-base">
+			<?= $page->description()->kt() ?>
+		</div>
+	</div>
 </div>
 
 <!-- Projects -->
