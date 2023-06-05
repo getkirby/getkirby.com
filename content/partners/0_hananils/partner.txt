@@ -26,7 +26,11 @@ Contactlink: mailto:buero@hananils.de
 
 ----
 
-Pluginpage: /plugins/hananils
+Plugins:
+- /plugins/hananils/typographer
+- /plugins/hananils/colors
+- /plugins/hananils/date-methods
+- /plugins/hananils/titles
 
 ----
 
