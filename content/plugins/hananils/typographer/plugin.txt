@@ -2,10 +2,6 @@ Title: Typographer
 
 ----
 
-Uuid: WlIBqgwiQONlQJ7m
-
-----
-
 Repository: https://github.com/hananils/kirby-typographer
 
 ----
