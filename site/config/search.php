@@ -24,6 +24,9 @@ return [
 				$html = $page->description()->or($page->intro())->kti();
 				return strip_tags($html);
 			},
+			'text' => function($page) {
+                return strip_tags($page->text()->kti());
+            },
 			'area' => function ($page) {
 				if (Str::startsWith($page->id(), 'docs/reference') === true) {
 					return 'reference';
