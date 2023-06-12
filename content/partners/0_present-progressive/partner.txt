@@ -43,11 +43,12 @@ We believe in the power of enduring partnerships. This commitment lets us contin
 
 Expertise:
 
-- Website design
-- Custom Kirby projects
-- UX Design
-- UI Design
-- Vue.js
+- One-stop custom Kirby projects
+- Website concept and design
+- Screen design (UX/UI)
+- Web development (frontend/backend)
+- Plugin development
+- Vue.js / Symfony / Alpine.js / Tailwind CSS
 - Brand design
 
 ----
