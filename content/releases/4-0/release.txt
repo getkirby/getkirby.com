@@ -8,4 +8,4 @@ ogimage: opengraph.png
 ----
 Docs: /releases/4.0/alpha
 ----
-Link: https://github.com/getkirby/kirby/archive/refs/tags/4.0.0-alpha.2.zip
+Link: https://github.com/getkirby/kirby/archive/refs/tags/4.0.0-alpha.3.zip
