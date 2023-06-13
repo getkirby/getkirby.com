@@ -31,11 +31,6 @@ Example:
 ```php
 <!doctype html>
 <head>
-  <?= vite([
-    'assets/css/app.css',
-    'assets/css/templates/{{ page.template }}.css',
-    'assets/js/app.js',
-    'assets/js/templates/{{ page.template }}.js',
-  ]) ?>
+  <?= vite(['assets/css/app.css', 'assets/js/app.js']) ?>
 </head>
 ```

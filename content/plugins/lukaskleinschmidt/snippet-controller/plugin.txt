@@ -21,9 +21,3 @@ Example:
 ├─ 📄 header.controller.php
 └─ 📄 header.php
 ```
-
-```php
-return [
-    'title' => site()->title(),
-];
-```
