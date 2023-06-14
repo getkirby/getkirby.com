@@ -2,6 +2,12 @@
 
 return [
 	[
+		'pattern' => '.well-known/security.txt',
+		'action'  => function () {
+			go('security.txt');
+		}
+	],
+	[
 		'pattern' => 'hooks/clean',
 		'method'  => 'GET|POST',
 		'action'  => function () {
