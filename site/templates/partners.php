@@ -72,7 +72,7 @@
 		<?php endforeach ?>
 	</section>
 
-	<section class="partners columns mb-42"
+	<section class="partners columns"
 					 style="--column-gap: var(--spacing-24); --row-gap: var(--spacing-12)">
 		<?php foreach ($standard as $partner) : ?>
 			<?php snippet('templates/partners/partner', ['partner' => $partner]) ?>
