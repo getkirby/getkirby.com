@@ -18,4 +18,4 @@ Description: Optimized image placeholders with the BlurHash algorithm
 
 ----
 
-Published: 2023-05-07
+Published: 2023-01-07
