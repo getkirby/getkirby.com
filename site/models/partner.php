@@ -95,4 +95,9 @@ class PartnerPage extends Page
 	{
 		return parent::type()->value($this->isSoloPartner() ? 'solo' : 'team');
 	}
+
+	public function typeLabel(): Field
+	{
+		return parent::typeLabel()->value(ucfirst($this->type()));
+	}
 }
