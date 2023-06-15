@@ -1,7 +1,12 @@
-<a href="<?= $partner->url() ?>">
+<a
+	href="<?= $partner->url() ?>"
+	data-region="<?= $partner->region() ?>"
+	data-languages="<?= implode(',', $partner->languages()->split(',')) ?>"
+	data-type="<?= $partner->typeLabel() ?>"
+>
 	<article>
 		<p class="flex items-center text-xs" style="gap: var(--spacing-1)">
-			<?= ucfirst($partner->type()) ?>
+			<?= $partner->typeLabel() ?>
 			<span class="mr-1"
 						title="Certified Kirby Partner"><?= icon('verified') ?></span>
 		</p>

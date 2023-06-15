@@ -1,0 +1,33 @@
+.select {
+	display: grid;
+	align-items: center;
+	grid-template-areas: "select";
+}
+
+.select select {
+	appearance: none;
+	background-color: transparent;
+	color: var(--btn-color);
+	border: 2px solid var(--btn-bg);
+	border-radius: 0;
+	font-family: var(--font-mono);
+	font-size: var(--text-sm);
+	line-height: inherit;
+	padding: 0.5rem 2rem 0.5rem 0.8rem;
+}
+
+/* Allows positioning of the chevron */
+.select select, .select::after {
+	grid-area: select;
+}
+
+/* Chevron */
+.select::after {
+	content: "";
+	background-color: var(--btn-bg);
+	clip-path: polygon(0 25%, 20% 25%, 50% 55%, 80% 25%, 100% 25%, 50% 75%);
+	height: 0.8rem;
+	width: 0.8rem;
+	justify-self: end;
+	margin-right: 0.7rem;
+}
