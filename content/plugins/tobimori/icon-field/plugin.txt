@@ -1,0 +1,22 @@
+Title: Icon Field
+
+----
+
+Repository: https://github.com/tobimori/kirby-icon-field
+
+----
+
+Category: fields
+
+----
+
+Subcategory:
+
+----
+
+Description: A simple Icon field for Kirby - throw your Icon pack in a folder, add the field to your blueprints and you're good to go.
+
+
+----
+
+Published: 2023-06-15
