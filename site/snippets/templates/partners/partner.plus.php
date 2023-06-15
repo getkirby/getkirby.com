@@ -1,7 +1,7 @@
 <a href="<?= $partner->url() ?>">
 	<article>
 		<p class="flex items-center text-xs" style="gap: var(--spacing-1)">
-			<?= ucfirst(str_replace('+', '', $partner->package())) ?>
+			<?= ucfirst($partner->type()) ?>
 			<span class="mr-1"
 						title="Certified Kirby Partner"><?= icon('verified') ?></span>
 		</p>

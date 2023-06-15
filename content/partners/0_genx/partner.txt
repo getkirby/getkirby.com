@@ -30,7 +30,7 @@ Pluginpage: /plugins/genxbe
 
 ----
 
-Languages: English & Dutch
+Languages: English, Dutch
 
 ----
 

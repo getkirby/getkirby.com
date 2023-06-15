@@ -30,7 +30,7 @@ Pluginpage: /plugins/tobimori
 
 ----
 
-Languages: English & German
+Languages: English, German
 
 ----
 

@@ -89,7 +89,7 @@
 				>
 					<?= icon('globe') ?>
 					<span class="color-gray-600">
-						<?= ucfirst($page->i()) ?> speak <?= $page->languages() ?>
+						<?= ucfirst($page->i()) ?> speak <?= $page->languages(true) ?>
 					</span>
 				</p>
 				<?php endif ?>

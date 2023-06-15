@@ -22,7 +22,7 @@ Contactlink: https://www.feuerwasser.de/kirby
 
 ----
 
-Languages: German & English
+Languages: German, English
 
 ----
 

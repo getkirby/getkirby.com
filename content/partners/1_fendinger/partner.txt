@@ -22,7 +22,7 @@ Pluginpage: /plugins/fendinger
 
 ----
 
-Languages: German & English
+Languages: German, English
 
 ----
 

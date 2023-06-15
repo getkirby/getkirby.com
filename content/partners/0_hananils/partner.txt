@@ -34,7 +34,7 @@ Plugins:
 
 ----
 
-Languages: German & English
+Languages: German, English
 
 ----
 
