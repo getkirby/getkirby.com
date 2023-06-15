@@ -14,7 +14,11 @@ Website: https://ziski.de
 
 ----
 
-Location: Erfurt, Thüringen, Germany
+Location: Erfurt, Germany
+
+----
+
+Region: Europe
 
 ----
 

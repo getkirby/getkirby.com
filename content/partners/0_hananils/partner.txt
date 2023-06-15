@@ -22,6 +22,10 @@ Location: Braunschweig, Germany
 
 ----
 
+Region: Europe
+
+----
+
 Contactlink: mailto:buero@hananils.de
 
 ----

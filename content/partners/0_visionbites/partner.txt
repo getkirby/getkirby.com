@@ -18,6 +18,10 @@ Location: Munich, Germany
 
 ----
 
+Region: Europe
+
+----
+
 Summary: Your full service Kirby agency in the heart of Munich: Strategy, Design & Code.
 
 ----

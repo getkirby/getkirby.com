@@ -18,6 +18,10 @@ Location: Stuttgart, Germany
 
 ----
 
+Region: Europe
+
+----
+
 Languages: German, English
 
 ----

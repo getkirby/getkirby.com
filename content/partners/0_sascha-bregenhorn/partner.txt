@@ -18,6 +18,10 @@ Location: Münster, Germany
 
 ----
 
+Region: Europe
+
+----
+
 Contactlink: mailto:hi@n2.studio
 
 ----

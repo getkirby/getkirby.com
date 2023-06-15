@@ -18,6 +18,10 @@ Location: Ulm, Germany
 
 ----
 
+Region: Europe
+
+----
+
 Pluginpage: /plugins/fendinger
 
 ----

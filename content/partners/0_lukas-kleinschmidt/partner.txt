@@ -22,6 +22,10 @@ Location: Aachen, Germany
 
 ----
 
+Region: Europe
+
+----
+
 Summary: Experienced web developer with in-depth PHP knowledge. Specialized in custom shop systems, applications, and websites.
 
 ----

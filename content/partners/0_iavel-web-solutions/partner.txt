@@ -18,6 +18,10 @@ Location: Budapest, Hungary
 
 ----
 
+Region: Europe
+
+----
+
 Contactlink: mailto:hello@iavel.hu
 
 ----

@@ -18,6 +18,10 @@ Location: Hornberg, Germany
 
 ----
 
+Region: Europe
+
+----
+
 Languages: German, English
 
 ----

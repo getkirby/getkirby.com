@@ -18,6 +18,10 @@ Location: Antwerp, Belgium
 
 ----
 
+Region: Europe
+
+----
+
 Summary: GeNx is a creative / digital studio specialised in web hosting, webdesign, web development and creating creative and digital solutions — Based in Antwerp, Belgium.
 
 ----

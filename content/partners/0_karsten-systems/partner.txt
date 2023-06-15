@@ -18,6 +18,10 @@ Location: Brno, Czech Republic
 
 ----
 
+Region: Europe
+
+----
+
 Pluginpage: /plugins/floriankarsten/
 
 ----

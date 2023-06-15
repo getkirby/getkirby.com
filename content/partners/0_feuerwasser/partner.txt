@@ -18,6 +18,10 @@ Location: Wiesloch, Germany
 
 ----
 
+Region: Europe
+
+----
+
 Contactlink: https://www.feuerwasser.de/kirby
 
 ----

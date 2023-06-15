@@ -18,6 +18,10 @@ Location: Leipzig, Germany
 
 ----
 
+Region: Europe
+
+----
+
 Summary: Building marvelous web experiences at the intersection of design & development - together with selected agencies, promising early-stage startups and purpose-driven businesses.
 
 ----

@@ -18,6 +18,10 @@ Location: Verona, Italy
 
 ----
 
+Region: Europe
+
+----
+
 Contactlink: mailto:luca@luglio7.com
 
 ----

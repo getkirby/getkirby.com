@@ -18,6 +18,10 @@ Location: Hamburg, Germany
 
 ----
 
+Region: Europe
+
+----
+
 Languages: German, English
 
 ----

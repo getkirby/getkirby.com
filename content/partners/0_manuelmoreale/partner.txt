@@ -18,6 +18,10 @@ Location: Udine, Italy
 
 ----
 
+Region: Europe
+
+----
+
 Summary: I am a freelance developer and designer with a deep love for minimalism, simplicity, good design, and clean typography.
 
 ----

@@ -18,6 +18,10 @@ Location: Antwerp, Belgium
 
 ----
 
+Region: Europe
+
+----
+
 Contactlink: https://heave.be/en/contact
 
 ----
