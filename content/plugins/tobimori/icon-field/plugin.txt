@@ -20,3 +20,18 @@ Description: A simple Icon field for Kirby - throw your Icon pack in a folder, a
 ----
 
 Published: 2023-06-15
+
+----
+
+License:
+
+name: MIT license
+url: https://github.com/tobimori/kirby-icon-field/blob/main/LICENSE
+
+----
+
+Installation: true
+
+----
+
+Composer: tobimori/kirby-icon-field
