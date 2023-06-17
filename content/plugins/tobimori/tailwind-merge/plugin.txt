@@ -10,10 +10,6 @@ Category: templating
 
 ----
 
-Subcategory: images
-
-----
-
 Published: 2023-06-17
 
 ----
