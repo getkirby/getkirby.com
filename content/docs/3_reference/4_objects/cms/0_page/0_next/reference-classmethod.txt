@@ -13,7 +13,7 @@ Text:
 ```php
 <?php
 $collection = $page->siblings()->listed()->sortBy('date', 'desc');
-if($next = $page->next($collection): ?>
+if($next = $page->next($collection)): ?>
 <a href="<?= $next->url() ?>">next page</a>
 <?php endif ?>
 ```
