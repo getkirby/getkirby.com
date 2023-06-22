@@ -68,7 +68,7 @@ Field names still need to be unique, no matter if they are displayed at the same
 </info>
 
 <info>
-Only “and“ conditions are currently possible, so all conditions need to be fulfilled to display the field. For more complicated cases, a (link: https://getkirby.com/plugins/rasteiner/whenquery text: third-party plugin) is available.
+Only “and“ conditions are currently possible, so all conditions need to be fulfilled to display the field. For more complicated cases, a (link: https://github.com/rasteiner/k3-whenquery text: third-party plugin) is available.
 </info>
 
 ## Validating fields
