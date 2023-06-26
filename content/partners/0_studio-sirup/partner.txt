@@ -1,0 +1,57 @@
+Title: Studio Sirup
+
+----
+
+Subtitle: Digital Design Studio
+
+----
+
+Package: solo+
+
+----
+
+Website: https://sirup.studio
+
+----
+
+Location: Zürich, Schweiz
+
+----
+
+Summary: STUDIO SIRUP is a Digital Design Studio operating in Zurich. I	play within the fields of Digital Art Direction, Websites, Interactive Design and 3D animation.
+
+----
+
+Languages: English, German, Swiss German
+
+----
+
+Description:
+
+STUDIO SIRUP is a small, independent design practice, initially founded by André Rothfuchs and Matthias Wyler. Today, Matthias Wyler has taken the helm as the sole proprietor of the studio, which specializes in comprehensive design solutions, spanning both print and interactive domains. His expertise includes creating exceptional books, exhibitions, publications, brand identities, and websites for an array of clients, from cultural institutions to businesses and individuals.
+
+At SIRUP, Matthias champions an efficient design methodology for developing and executing digital platforms. His approach, grounded in both scientific and historical foundations, harmoniously fuses time-tested concepts and technologies with fresh ideas and strategies.
+
+----
+
+Expertise:
+
+- Kirby Web Development
+- UI & Web Design
+- Playful interaction design
+- Interactive User Experiences
+- Multilingual Websites
+- Accessibility
+- Hosting, Support & Maintenance
+
+----
+
+Region: Europe
+
+----
+
+Uuid: KDu3cOsBCQblEibo
+
+----
+
+Text: 
