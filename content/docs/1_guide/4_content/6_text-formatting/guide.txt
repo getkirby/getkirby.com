@@ -46,7 +46,7 @@ You'd love to have a special tag for embedding cat pictures from [http://placek
 
 ## Writer field
 
-The (link: ocs/reference/panel/fields/writer text: Writer field) type is a simple WYSIWYG editor field for basic nodes like headlines and lists, as well as inline content with formats like bold, italic, etc.
+The (link: docs/reference/panel/fields/writer text: Writer field) type is a simple WYSIWYG editor field for basic nodes like headlines and lists, as well as inline content with formats like bold, italic, etc.
 
 ## Blocks & Layout
 
