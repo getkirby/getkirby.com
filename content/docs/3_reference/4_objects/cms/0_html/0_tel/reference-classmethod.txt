@@ -1,0 +1,11 @@
+Text:
+
+## Limitations
+
+The `Html::link()` method strips out any non-numeric characters in the provided phone number (except the plus sign for international phone numbers). This is done to ensure a safe and reliable behavior of the resulting link.
+
+If you need to add parameters or formatting to the `tel` URI (according to [RFC 3966](https://www.rfc-editor.org/rfc/rfc3966)), please use the `Html::link()` method that otherwise works the same:
+
+```php
+Html::link('tel:+1-416-123-4567;ext=890', '+1 416-123-4567 ext. 890');
+```
