@@ -68,7 +68,7 @@ use Kirby\Image\Darkroom\ImageMagick;
 
 class PdfPreview extends ImageMagick
 {
-    public static $types = null;
+    public static array $types = [];
 
     /**
      * Set the colorspace
@@ -106,6 +106,7 @@ class PdfPreview extends ImageMagick
     {
         return [
             'bin'        => kirby()->option('thumbs.bin'),
+            'colorspace' => false,
             'density'    => 150,
             'flatten'    => true,
             'format'     => 'jpg',
@@ -159,7 +160,7 @@ class PdfPreview extends ImageMagick
      */
     public function process(string $file, array $options = []): array
     {
-        $options   = $this->options();
+        $options   = $this->options($options);
         $command   = [];
         $command[] = $this->convert($file, $options);
         $command[] = $this->colorspace($file, $options);
