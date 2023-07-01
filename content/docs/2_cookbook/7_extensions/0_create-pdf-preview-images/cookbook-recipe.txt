@@ -320,7 +320,7 @@ As options you can pass the same options as before.
 The method returns a new `Kirby\Cms\File` object, which means that we can call Kirby's thumbnail methods on it as well.
 
 ```php
-<?php if ($pdf = $page->files('myflyer.pdf')): ?>
+<?php if ($pdf = $page->file('myflyer.pdf')): ?>
   <img src="<?= $pdf->preview()->url() ?>" alt="">
 <?php endif; ?>
 ```
@@ -328,7 +328,7 @@ The method returns a new `Kirby\Cms\File` object, which means that we can call K
 Or by passing parameters to the method:
 
 ```php
-<?php if ($pdf = $page->files('myflyer.pdf')): ?>
+<?php if ($pdf = $page->file('myflyer.pdf')): ?>
   <img src="<?= $pdf->preview(['density' => 600, 'quality' => 100, 'format' => 'webp'])->url() ?>" alt="">
 <?php endif; ?>
 ```
