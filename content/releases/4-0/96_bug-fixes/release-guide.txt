@@ -28,3 +28,6 @@ Text:
 - UUIDs are less often generated when not needed to be generated
 - Kirby queries now differentiate between integers and floats as arguments
 - Kirby no longer hides errors in the response class when the response is converted to a string: [#5027](https://github.com/getkirby/kirby/issues/5027#issuecomment-1446830047)
+- Files field upload: use `upload.parent` for mime check [#5245](https://github.com/getkirby/kirby/issues/5245)
+- `$field->toUrl()` will return null on empty fields [#5259](https://github.com/getkirby/kirby/issues/5259)
+- Users field does not anymore use a default if none set

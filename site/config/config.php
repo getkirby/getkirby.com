@@ -19,7 +19,7 @@ return [
 	'search'    => require __DIR__ . '/search.php',
 	'hub'       => require __DIR__ . '/hub.php',
 	'thumbs'    => [
-		'driver' => 'im'
+		// 'driver' => 'im'
 	],
 	'versions'  => require __DIR__ . '/versions.php',
 ];

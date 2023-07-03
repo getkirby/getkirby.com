@@ -82,10 +82,16 @@ In a field component, the dialog can be opened by using the field endpoint:
 this.$dialog(this.endpoints.field + "/delete")
 ```
 
+### More improvements
+- Pages section: new `templatesIgnore` option [#5322](https://github.com/getkirby/kirby/pull/5322)
+- Users field: set `default: true` to always use the currently logged in user as default
+
+
 #### New Icons
 
 We've added new icons to our Panel iconset:
 
+- `anchor`
 - `clear`
 - `split`
 - `merge`

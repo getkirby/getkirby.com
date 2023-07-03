@@ -41,3 +41,11 @@ Text:
 ```js
 Focus: 70% 30%
 ```
+
+## En-/disable setting focus in Panel
+
+By default, setting the focus point in the Panel is enabled for all viewable images with a Panel preview and disabled for all other files. You can change this via the `focus` option in the file's blueprint:
+
+```yaml "site/blueprints/files/image.yml"
+focus: false
+```

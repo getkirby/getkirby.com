@@ -58,9 +58,20 @@ Text:
 - Removed `::site()` method from  `Kirby\Cms\Plugin`, `Kirby\Cms\Role` and `Kirby\Cms\StructureObject` classes
 - Removed `::kirby()` method from `Kirby\Cms\Role` and `Kirby\Cms\StructureObject` classes
 - Unauthenticated API and Panel calls now return a correct 401 HTTP code instead of 403.
+- Registering a default block model now needs to be done with the key `default`, not `Kirby\Cms\Block`
+- `new Structure()`/`new StructureObject()` don't work anymore as before. Use `Structure::factory()`/`StructureObject::factory()` instead.
+- Structure object IDs aren't simply their collection index numbers anymore but receive a `Str::uuid()` as blocks do
+- `Items::factory()` and all inheriting classes throw an exception now if malformed data is passed
+- Users field doesn't automatically uses the current user as default, add `default: true` to keep this functionality
+- Blocks: Removed keyboard shortcut to move block focus up/down
+- Extending the internal `$model->contentFile()`, `$model->contentFiles()`, `$model->contentFileDirectory()`, `$model->contentFileExtension()`, `$model->contentFileName()`, `$model->readContent()` and `$model->writeContent()` methods in a page model will no longer have an effect as these methods are no longer called by the core. Please extend the new `Kirby\Content\PlainTextContentStorageHandler` class instead and return an instance of your custom class from `$model->storage()`. Please note that the interface of `PlainTextContentStorageHandler` is internal and may change in the future.
+- The `$translations->start()` and `$translations->stop()` methods were no longer in use and have been removed. Content files are automatically converted by the Language class.
+- `$languages->codes()` now returns `['default']` for single language installations.
 
 #### Panel
 
+- Removed `this.$config.search` from Panel
+- Area `search` plugins receive two additional arguments for their query callback: `$limit` and `$page` to be used to paginate the results. They should then return an array with entries results and pagination. #5191
 - `this.$library.autosize` has been removed, wrap `<textarea>` elements inside `<k-autosize>` element instead.
 - Defining the footer slot in `<k-dialog>` will no longer wrap the slot content in the `<footer>` element. This can now be more flexibly handled by using `<k-dialog-footer>` inside the slot.
 - The form drawer no longer automatically closes on submit. This is introducing the same behaviour as in dialogs. Auto-closing might often not be the intended result of submitting the form and it's easier to close it manually in a submit handler than to re-open it again.

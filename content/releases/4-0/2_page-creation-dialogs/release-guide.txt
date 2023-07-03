@@ -66,6 +66,14 @@ create:
 
 (image: page-creation-dialog.png)
 
+### Supported field types
+
+Currently only some field types are supported (checkboxes, date, email, info, line, link, list, number, multiselect, radio, range, select, slug, tags, tel, text, toggles, time, url). Custom field types are disabled by default. To enable them, add your field type name to:
+
+```php
+Kirby\Panel\PageCreateDialog::$fieldTypes[] = 'yourFieldType'
+```
+
 ## Custom Page Creation Status
 
 You can now also define a status for your newly created pages.

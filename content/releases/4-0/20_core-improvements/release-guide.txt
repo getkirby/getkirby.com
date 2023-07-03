@@ -72,6 +72,8 @@ In addition to that there are new direct UUID file routes:
 
 #### More improvements
 
+- Extensions to add custom methods for structures and structure objects
+- New `App::models()` method that returns a generator for each model (site, files, pages and users) of the site
 - New `File::blueprints()` method that collects valid blueprints from the files sections and files fields of the parent model
 - Fields can now define `'hidden' => true` (component notation) or `::isHidden(): bool` (class-based) to make them non-rendering 
 - New `File::changeTemplate()` method

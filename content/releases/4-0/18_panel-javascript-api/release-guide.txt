@@ -69,6 +69,9 @@ panel.title = "My title";
 
 ### Methods
 ```js
+// logs (and optionally displays) error message
+panel.error(error, openNotification = true);
+
 // sends a Panel GET request
 panel.get(url, options = {});
 

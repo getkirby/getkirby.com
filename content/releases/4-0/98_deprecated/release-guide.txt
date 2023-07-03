@@ -20,6 +20,9 @@ Text:
 
 - `Kirby\Cms\Model` in favor of `Kirby\Cms\ModelWithContent`
 - `Kirby\Email\Email::clone()` and `Kirby\Email\Body::clone()`
+- Use `Page::isAccessible()` instead of `Page::isReadable()`
+- `query` should not be used anymore for custom API endpoints, it will be used for the Kql plugin/core implementation
+- Internal `$model->contentFile()`, `$model->contentFiles()`, `$model->contentFileDirectory()`, `$model->contentFileExtension()` and `$model->contentFileName()` methods have been deprecated and will be removed in v5.
 
 #### Panel
 
