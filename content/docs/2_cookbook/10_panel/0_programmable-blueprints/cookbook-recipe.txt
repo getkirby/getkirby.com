@@ -592,7 +592,7 @@ $basicBlueprint['sections']['basicMeta']['fields'] = array_merge($fields, [
     ]
 ]);
 
-return $basic_blueprint;
+return $basicBlueprint;
 ```
 
 First, we read the file we want to extend into an array with `Data::read()`.
