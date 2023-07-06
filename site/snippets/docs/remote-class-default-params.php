@@ -4,7 +4,7 @@
 | basicAuth | `string` | `null` | User name and password to use for the `Authorization` header (formatted as `USERNAME:PASSWORD`)
 | body | `bool` | `true` | When `true` returns transfer as string instead of outputting it directly
 | ca | `int|bool|string` | `Remote::CA_INTERNAL` | TLS CA to use, (link: docs/reference/system/options/remote#configuring-the-list-of-allowed-certificate-authorities-cas-for-https-requests text: see details)
-| data | `array` | `[]`  | The data to be sent with the request
+| data | `array|string` | `[]`  | The data to be sent with the request
 | encoding | `string` | `utf-8` | Accepted values: `null`, `''`, `identity`, `gzip`, `br`
 | file | `string` | `null` | Path to file to be uploaded
 | headers | `array` | `[]` | Array of headers to be sent with the request
