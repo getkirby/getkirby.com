@@ -7,7 +7,7 @@ Text:
 ```php "/site/plugins/urls/index.php"
 Kirby::plugin('my/urls', [
   'components' => [
-    'url' => function (Kirby $kirby, string $path, array $options = []): string {
+    'url' => function (Kirby $kirby, string $path, ?array $options = []): string {
         $original = $kirby->nativeComponent('url');
         return $original($kirby, $path, $options);
     }
