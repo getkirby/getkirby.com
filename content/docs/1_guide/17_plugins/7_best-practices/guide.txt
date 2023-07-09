@@ -79,10 +79,10 @@ Always add a composer.json file with basic information about your plugin, includ
             "email": "superwoman@example.com"
         }
     ],
-    "support": [
-      "docs": "https://github.com/yourname/yourplugin/blob/main/README.md",
-      "source": "https://github.com/yourname/yourplugin"
-    ]
+	  "support": {
+	    "docs": "https://github.com/yourname/yourplugin/blob/main/README.md",
+	    "source": "https://github.com/yourname/yourplugin"
+	  }
 }
 ```
 Kirby uses the links in the `homepage`, `support.docs` or `support.source` fields to create a link to your plugin in the Panel's System view. If a `homepage` link is given, this is used, otherwise Kirby falls back to `support.docs` and `support.source` in this order.
