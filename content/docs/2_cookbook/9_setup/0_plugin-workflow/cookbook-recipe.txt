@@ -159,7 +159,7 @@ If everything was successful, remove the `echo` line from the `bootstrap.php` sc
 
 ## Tests
 
-You should check the (link: https://phpunit.de/getting-started/phpunit-8.html text: PHPUnit documentation) to learn how to write tests. We are going to do the same thing here, basically. Create `tests/suites/MyTest.php` and put the following inside:
+You should check the (link: https://phpunit.de/getting-started/phpunit-10.html text: PHPUnit documentation) to learn how to write tests. We are going to do the same thing here, basically. Create `tests/suites/PluginTest.php` and put the following inside:
 
 ```php
 <?php
