@@ -32,6 +32,18 @@ Kirby::plugin('your/plugin', [
 ]);
 ```
 
+<info>
+Because of a limitation in Parsedown, the Markdown parser currently used by Kirby, the HTML code you return from your tag should not contain extraneous whitespace, e.g. a line break directly after the tag name of an HTML tag. Otherwise your tag output may be escaped by Parsedown.
+
+If your tag output is messed up, please check if your returned HTML code contains code like this:
+
+```html
+<figure
+  class="something"
+>
+```
+</info>
+
 ## Outsourcing code to separate file
 
 ```php "/site/plugins/your-plugin/index.php"
@@ -91,9 +103,7 @@ Kirby::plugin('your/plugin', [
         'class'
       ],
       'html' => function($tag) {
-
         return '<a class="' . $tag->class . '" href="http://wikipedia.org">Wikipedia</a>';
-
       }
     ]
   ]
@@ -156,7 +166,6 @@ $tag->option('some.option')
 $tag->type()
 // returns the name of the KirbyTag
 ```
-
 
 ## KirbyTag hooks
 
