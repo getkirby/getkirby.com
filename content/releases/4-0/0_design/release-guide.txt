@@ -1,0 +1,10 @@
+Title: New design
+
+----
+
+Subtitle: A complete makeover
+
+----
+
+Teaser: This is the very first public test version of Kirby 4. Now it's time for you to get involved. We need your honest feedback and your eagle eyes to find bugs.
+
