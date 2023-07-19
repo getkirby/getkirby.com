@@ -12,7 +12,7 @@ Editors:
 - Full width layout
 - New save button position
 - Completely overhauled keyboard accessibility
-- Less affordance for buttons
+- Greater affordance for buttons
 - Clear focus styles for every element
 - Lots of improvements to the responsiveness
 - Improved scroll behaviour
