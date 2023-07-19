@@ -46,11 +46,11 @@
     </li>
     <li style="flex-grow: 2">
       <p class="h4">Beta</p>
-      <p class="font-mono text-xs">July 2023</p>
+      <p class="font-mono text-xs">Summer 2023</p>
     </li>
     <li style="flex-grow: 1">
       <p class="h4">Release</p>
-      <p class="font-mono text-xs">Late summer 2023</p>
+      <p class="font-mono text-xs">Early Autumn 2023</p>
     </li>
     <li></li>
   </ul>

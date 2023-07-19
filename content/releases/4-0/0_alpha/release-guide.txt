@@ -6,7 +6,7 @@ Subtitle: We are not done yet …
 
 ----
 
-Intro: This is the very first public test version of Kirby 4. Now it's time for you to get involved. We need your honest feedback and your eagle eyes to find bugs.
+Intro: This is still a public alpha version of Kirby 4 - things are still moving and changing. Now it's time for you to get involved. We need your honest feedback and your eagle eyes to find bugs.
 
 ----
 
@@ -25,7 +25,7 @@ More:
 
 Teaser:
 
-This is the very first public test version of Kirby 4. Now it's time for you to get involved. We need your (link: https://github.com/getkirby/kirby/issues text: honest feedback and your eagle eyes to find bugs). We plan to build more features in the next weeks. You can follow our process on (link: https://chat.getkirby.com text: Discord).
+This is still a public alpha version of Kirby 4 - things are still moving and changing. Now it's time for you to get involved. We need your (link: https://github.com/getkirby/kirby/issues text: honest feedback and your eagle eyes to find bugs). We plan to build more features in the next weeks. You can follow our process on (link: https://chat.getkirby.com text: Discord).
 
 ----
 
