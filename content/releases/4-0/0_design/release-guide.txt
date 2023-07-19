@@ -28,3 +28,40 @@ Developers:
 - Additional icons
 - Improved component responsiveness
 - Full control through the new Panel JS API (see below)
+
+----
+
+Text:
+
+## For editors
+
+- New collapsible sidebar menu
+- Full width layout
+- New save button position
+- Completely overhauled keyboard accessibility
+- Less affordance for buttons
+- Clear focus styles for every element
+- Lots of improvements to the responsiveness
+- Improved scroll behaviour
+
+## For developers
+
+- New color scheme
+- New customization options for the main menu
+- New system for customizations through CSS properties
+- New UI components
+- Additional icons
+- Improved component responsiveness
+- Full control through the new Panel JS API (see below)
+
+## Screenshots
+
+(image: article.png)
+(image: blog.png)
+(image: dialogs.png)
+(image: drawer.png)
+(image: file.png)
+(image: open-menu.png)
+(image: shop.png)
+(image: site.png)
+(image: system.png)
