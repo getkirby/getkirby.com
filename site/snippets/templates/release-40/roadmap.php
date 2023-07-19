@@ -40,11 +40,11 @@
   'text'     => 'We roughly plan with the following schedule for v4. The success of the alpha & beta and your input will determine the final release date.'
   ]) ?>
   <ul class="roadmap flex justify-between mb-24">
-    <li style="flex-grow: 1">
+    <li style="flex-grow: 2">
       <p class="h4">Alpha</p>
       <p class="font-mono text-xs">May 2023</p>
     </li>
-    <li style="flex-grow: 2">
+    <li style="flex-grow: 1">
       <p class="h4">Beta</p>
       <p class="font-mono text-xs">Summer 2023</p>
     </li>
