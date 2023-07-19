@@ -2,9 +2,29 @@ Title: New design
 
 ----
 
-Subtitle: A complete makeover
+Subtitle: Not just some fresh paint
 
 ----
 
-Teaser: This is the very first public test version of Kirby 4. Now it's time for you to get involved. We need your honest feedback and your eagle eyes to find bugs.
+Editors:
 
+- New collapsible sidebar menu
+- Full width layout
+- New save button position
+- Completely overhauled keyboard accessibility
+- Less affordance for buttons
+- Clear focus styles for every element
+- Lots of improvements to the responsiveness
+- Improved scroll behaviour
+
+----
+
+Developers:
+
+- New color scheme
+- New customization options for the main menu
+- New system for customizations through CSS properties
+- New UI components
+- Additional icons
+- Improved component responsiveness
+- Full control through the new Panel JS API (see below)
