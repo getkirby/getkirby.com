@@ -23,7 +23,7 @@ Kirby::plugin('your/plugin', [
 
 Kirby will now recognize `m4p` files by filename and by MIME type. `$file->type()` will now return `video` for such files and they will also be included in the `$page->videos()` collection. Of course you can now also find them by using `$page->files()->filterBy('type', 'video')`.
 
-`type` can be `audio`, `code`, `document`, `image` and `video` (see (link: docs/guide/content/files#example-page-with-files__supported-file-types text: Kirby file types)). For the `mime` attribute, you can explore (link: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types text: a list of common MIME types).
+`type` can be `audio`, `code`, `document`, `image` and `video` (see (link: docs/guide/files/files#supported-file-types text: Kirby file types)). For the `mime` attribute, you can explore (link: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types text: a list of common MIME types).
 
 ## Image processing
 
