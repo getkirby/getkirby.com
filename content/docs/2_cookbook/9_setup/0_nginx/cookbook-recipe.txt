@@ -28,7 +28,7 @@ But this convenience comes at a cost: speed. All these `.htaccess` files have to
 
 Instead, it needs to be configured through a single, global config file. Most of the time, the config file also needs to be adjusted to the very specific server setup and operating system. Where Apache uses modules to include PHP, Nginx also does this in its global config file. This means that there is no single config file that works out of the box, which could be shipped with Kirby. So the process of configuring Nginx might seem a little bit more intimidating to beginners. However, it's really not that difficult and requires only about 20 lines of configuration to get Kirby (or most other PHP applications) running on Nginx.
 
-The main config file for Nginx is typically found in the main Nginx folder and called `nginx/nginx.conf`. We don't need to edit this file, but it's still very interesting to look at. Towards the end it will typically include files from `nginx/conf.d/*.conf`. So to get started with your Kirby site, you can either create a new file like `nginx/conf.d/kirby.conf` or just edit the default file `nginx/conf.d/default.conf`.
+The main config file for Nginx is typically found in the main Nginx folder and called `nginx/nginx.conf`. We don't need to edit this file, but it's still very interesting to look at. Towards the end it will typically include other files from `nginx/conf.d/*.conf`. So to get started with your Kirby site, you can either create a new file like `nginx/conf.d/kirby.conf` or just edit the default file `nginx/conf.d/default.conf`.
 
 
 ## Contexts and Directives
@@ -51,6 +51,12 @@ server {
     try_files $uri $uri/ /index.php$is_args$args;
   }
 
+  rewrite ^/(content|site|kirby)/(.*)$ /error last;
+
+  location ~ /\. {
+    deny all;
+  }
+
   location ~* \.php$ {
     try_files $uri =404;
     fastcgi_pass php:9000; # Adjust to your setup
@@ -69,18 +75,21 @@ server {
   listen 8080;
 ```
 With the server context, we're creating a new virtual server for our Kirby site, which we're going to configure with all the following directives, which are indented by one level. With the `listen` directive, we're telling Nginx on which port it should listen. This directive is optional – if you omit it, Nginx will listen on the default port 80.
+<br/>
 
 ```
 index index.php index.html;
 ```
 
 The [`index` directive](http://nginx.org/en/docs/http/ngx_http_index_module.html) contains the names of files, which Nginx will try to serve if the given request path does not directly match a file in the web root. Typically we want the `index.php` file to have a higher priority than the `index.html` file.
+<br/>
 
 ```
 server_name localhost;
 ```
 
 The [`server_name` directive](http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name) tells Nginx, which requests it should accept for the given virtual server. This needs to be adjusted to your setup. If you're running Nginx locally, you probably want this to be `localhost`, and if you're running it on the web, it should contain your domain name, e.g. `server_name www.mykirbysite.com`. You can also put down multiple server names, for example with and without `www` (`server_name www.mykirbysite.com mykirbysite.com;`). You can also use any invalid `server_name` like `_` to create a "catch-all" server, which will accept all connections (you should not do this for security reasons).
+<br/>
 
 
 ```
@@ -88,6 +97,8 @@ root /usr/share/nginx/html;
 ```
 
 This is a very [important directive](http://nginx.org/en/docs/http/ngx_http_core_module.html#root), as it tells Nginx where your web root is located. The files in the given directory will be served by Nginx. This should typically be the base folder of your Kirby project folder, or you should copy/extract the content of the Kirby repo/ZIP file to this location.
+<br/>
+
 
 ```
 location / {
@@ -96,6 +107,19 @@ location / {
 ```
 
 This block is extremly important, and probably the most "unique" part about this Nginx config. Without this block, links and images in Kirby will not work properly. Kirby uses a so called "front controller", which means that all requests to the Kirby site need to go [through a single entrance point](https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/#front-controller-pattern-web-apps) (which is `index.php`). Kirby will internally forward/handle the requests to the proper place. If you're trying to request a nested page somewhere deep in your content folder (like `photography/trees`), it does not exist on the file system, so the request needs to go to `index.php`. The `try_files` directive tells Nginx what files it should serve if there is no direct match for the given path. By adding `/index.php$is_args$args` to this list, we make sure that every request goes to the Kirby front controller if there is no corresponding file on the file system.
+<br/>
+
+
+```
+rewrite ^/(content|site|kirby)/(.*)$ /error last;
+
+location ~ /\. {
+  deny all;
+}
+```
+We don't want Nginx to serve any raw files from the `content`, `site` or `kirby` folders, in accordance with the [Security cookbook article](https://getkirby.com/docs/guide/security). The content of these folders will still be used by the PHP interpreter but the content and source code files will not be accessible for the website visitors.
+Also we don't allow to access any hidden files or folders, starting with `.` from our filesystem, e.g. `.git`-related files or `.htaccess` files, which are not relevant for Nginx and might reveal sensitive information.
+<br/>
 
 
 ```
@@ -109,13 +133,15 @@ This [`location` block](http://nginx.org/en/docs/http/ngx_http_core_module.html#
 - `php$` the dollar sign at the end of php means that php needs to be at the end of a path (e.g. it will match `/my/folder/index.php` but not `/my/folder/index.php/morestuff`
 
 The following line `try_files $uri =404;` is very important, and [often missing in Nginx tutorials](https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/#check-if-file-exists). It makes sure that only existing files will be interpreted by PHP. If this is missing, PHP will do some crazy stuff to find a file matching this request, which may result in security problems.
+<br/>
 
 
 ```
 fastcgi_pass php:9000;
 ```
 
-This is the line that does the [handover to the PHP interpreter](http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_pass). We're using the FastCGI interface for this handover. It is the modern and most performant approach to connect a web server with a backend-interpreter like PHP. The `fastcgi_pass` takes a network address or unix socket to a PHP-FPM process. So this setting depends on your specific setup. If you're using docker, you can just put down the name of your FPM container. If you're running PHP-FPM on the same system.,you can use localhost followed by the port number.
+This is the line that does the [handover to the PHP interpreter](http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_pass). We're using the FastCGI interface for this handover. It is the modern and most performant approach to connect a web server with a backend-interpreter like PHP. The `fastcgi_pass` takes a network address or unix socket to a PHP-FPM process. So this setting depends on your specific setup. If you're using docker, you can just put down the name of your FPM container. If you're running PHP-FPM on the same system, you can use `localhost` followed by the port number.
+<br/>
 
 
 ```
@@ -126,3 +152,6 @@ fastcgi_param SERVER_PORT 8080;
 ```
 
 Including `fastcgi.conf` will properly set some global PHP variables like `SCRIPT_NAME`, which the PHP process needs. Now there's only three of them that we need to set manually starting with `fastcgi_split_path_info`. This directive needs to contain a regular expression with two capture groups. The first group will become the `$fastcgi_script_name` variable, and the second capture group will become `$fastcgi_path_info`. We're only interested in the second variable, which we'll use in the next line to set the `PATH_INFO` variable correctly. The last line is only necessary, if your Nginx is running on a different port than the one that is really exposed to the outside (e.g. if you run Nginx in a Docker container with an internal Port 80, but the port is mapped to 8080 on the host). Kirby uses this variable to create internal links – so if this is not set correctly, internal links won't work.
+
+## TLS certificates and Let's Encrypt
+These days, typically you want to use your Kirby website with a proper TLS certificate, which comes for free through Let's Encrypt. Managed webhosting products usually come with their own Admin interface to obtain a certificate. However, if you need to do this manually via the command line (e.g. you're running a full server instead of a webhosting product), you should use `certbot` – which is a handy little command line tool that will obtain the certificate for you and also **automatically adjust your Nginx config accordingly**. However this part is not specific to Kirby – so any given [set of instructions](https://certbot.eff.org/instructions) for the usage of Let's Encrypt with Nginx and certbot should work.
