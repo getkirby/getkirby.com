@@ -29,7 +29,7 @@ Kirby's current version number is stored in `/kirby/composer.json` in the versio
 <?= kirby()->version() ?>
 ```
 
-<info>Make sure to never show the version number publicly in one of your templates as that may give attackers valuable information about your site.</info>
+<info>Make sure to never output the version number publicly in one of your templates as that may give attackers valuable information about your site.</info>
 
 ### Never use end-of-life versions
 
@@ -91,14 +91,15 @@ Kirby protects against file uploads with the extensions `.php*`, `.phar*` and `.
 
 ### Block access to sensitive folders and files
 
-Kirby's default `.htaccess` file for Apache comes with a set of predefined rules to block external access to certain files and folders in order to secure them. If you run your own `.htaccess` file with your own set of rules, or if you use another server architecture such as Nginx, make sure to block the same files and folders with your setup.
+Kirby's default `.htaccess` file for Apache comes with a set of predefined rules to block external access to certain files and folders in order to secure them. If you run your own `.htaccess` file with your own set of rules, or if you use another server architecture such as nginx, make sure to block the same files and folders with your setup.
 
 #### Text files in your `content` folder
 
-All text files within the `content` folder should not be accessible from the outside. Kirby's `.htaccess` file uses the following rule to achieve this:
+All files within the `content` folder should not be accessible from the outside. Kirby's `.htaccess` file uses the following rule to achieve this:
 
 ```bash
-RewriteRule ^content/(.*)\.(txt|md|mdown)$ index.php [L]
+# block all files in the content folder from being accessed directly
+RewriteRule ^content/(.*) index.php [L]
 ```
 
 Check if this rule works in your setup by browsing to one of your content text files (e.g. http://yourdomain.com/content/site.txt). If your setup is correct, you should be redirected to the error page.
@@ -108,6 +109,7 @@ Check if this rule works in your setup by browsing to one of your content text f
 All your files within the `site` folder must be protected as well. Kirby's rule for this is:
 
 ```bash
+# block all files in the site folder from being accessed directly
 RewriteRule ^site/(.*) index.php [L]
 ```
 
@@ -118,6 +120,7 @@ You can check if this block works by browsing to http://yourdomain.com/site/conf
 Last but not least your `kirby` folder must be protected as well. Here's the rule:
 
 ```bash
+# block direct access to Kirby and the Panel sources
 RewriteRule ^kirby/(.*) index.php [L]
 ```
 
@@ -141,6 +144,19 @@ Check if your provider/system administrator has disabled (link: https://wiki.apa
 
 ```
 Options -Indexes
+```
+
+### Disable MIME type detection
+
+If a file has an unknown file type, the Apache server does not attach a `Content-Type` header to the file response by default. Browsers then try to auto-detect the file type, which can cause vulnerabilities from malicious file uploads.
+
+We recommend to configure your server to serve unknown file types with the harmless `text/plain` type. You should also disable content type sniffing to prevent browsers from detecting a different content type than intended:
+
+```bash
+# serve files as plain text if the actual content type is not known
+# (hardens against attacks from malicious file uploads)
+Header set Content-Type "text/plain" "expr=-z %{CONTENT_TYPE}"
+Header set X-Content-Type-Options "nosniff"
 ```
 
 ### Restrict file permissions
