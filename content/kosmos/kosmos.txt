@@ -2,7 +2,7 @@ Title: Kirby Kosmos
 
 ----
 
-Description: Our montly newsletter with news about news about plugins, themes, new versions and other interesting findings from all over the web.
+Description: Our monthly newsletter with news about news about plugins, themes, new versions and other interesting findings from all over the web.
 
 ----
 
