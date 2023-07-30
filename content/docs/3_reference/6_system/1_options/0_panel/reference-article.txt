@@ -28,8 +28,7 @@ return [
 
 It's recommended to remove this setting after the installation on your remote server is complete.
 
-
-## Moving the Panel to a different URL
+## Move the Panel to a different URL
 
 If you want to add a little bit of additional security to your site and hide the Panel behind a different URL, you can set the URL slug in your config.
 
@@ -42,7 +41,6 @@ return [
 ```
 
 Your Panel is now accessible at http://yourdomain.com/super-secret-admin-area
-
 
 ## Custom Panel CSS
 
@@ -153,23 +151,49 @@ You can define custom callback functions (`pageDragText` or `fileDragText`) for 
 ```php
 return [
   'panel' => [
-        'kirbytext' => [
-            'fileDragText' => function(\Kirby\Cms\File $file, $url) {
-                if($file->extension() === 'jpg') {
-                    return sprintf('(\screenshot: %s)', $url);
-                }
+    'kirbytext' => [
+      'fileDragText' => function(\Kirby\Cms\File $file, $url) {
+        if($file->extension() === 'jpg') {
+          return sprintf('(\screenshot: %s)', $url);
+        }
 
-                if($file->type() === 'video') {
-                    return sprintf('(\video: %s loop: true)', $url);
-                }
+        if($file->type() === 'video') {
+          return sprintf('(\video: %s loop: true)', $url);
+        }
 
-                return null;
-            },
-            'pageDragText' => function (\Kirby\Cms\Page $page) {
-                return sprintf('Check out this great page: %s', $page->url());
-            },
-
-        ],
+        return null;
+      },
+      'pageDragText' => function (\Kirby\Cms\Page $page) {
+        return sprintf('Check out this great page: %s', $page->url());
+      },
     ],
+  ],
 ];
 ```
+
+<since v="3.9.6.1">
+## Allow frame embedding
+
+The Panel sets the `Content-Security-Policy: frame-ancestors 'none'` header by default. This protects against clickjacking attacks by preventing embedding in frames on other pages.
+
+If you need to embed the Panel into another page or site, you can customize this header:
+
+```php
+return [
+  'panel' => [
+    // allow frame embedding from the same domain
+    'frameAncestors' => true,
+
+    // allow frame embedding from the same *and* from the specified domains
+    'frameAncestors' => ['*.example.com', 'https://example.com'],
+
+    // allow frame embedding on any domain (not recommended)
+    'frameAncestors' => '*',
+  ]
+];
+```
+
+<warning>
+Only allow embedding if you fully control the domains you allowlisted. Otherwise your site may be vulnerable against clickjacking attacks. Read more at [OWASP](https://owasp.org/www-community/attacks/Clickjacking).
+</warning>
+</since>
