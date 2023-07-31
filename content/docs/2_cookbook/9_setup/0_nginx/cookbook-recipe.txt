@@ -31,9 +31,8 @@ Instead, it needs to be configured through a single, global config file. Most of
 The main config file for Nginx is typically found in the main Nginx folder and called `nginx/nginx.conf`. We don't need to edit this file, but it's still very interesting to look at. Towards the end it will typically include other files from `nginx/conf.d/*.conf`. So to get started with your Kirby site, you can either create a new file like `nginx/conf.d/kirby.conf` or just edit the default file `nginx/conf.d/default.conf`.
 
 <info>
-Webserver configuration is a very big topic and there are many things to consider for every individual use case. We can only offer a **starting point** for a good config and we can't cover every aspect in this article. So this article will skipe some performance aspects like compression, because it will make a Nginx config very long and its parameters are very much dependent on your server capabilities and resources. If you're interested in this kind of optimization, you can check out this [repository of very good Nginx config examples](https://github.com/h5bp/server-configs-nginx).
+Web server configuration is a very big topic and there are many things to consider for every individual use case. We can only offer a **starting point** for a good config and we can't cover every aspect in this article. So this article will skip some performance aspects like compression, because it will make a Nginx config very long and its parameters are very much dependent on your server capabilities and resources. If you're interested in this kind of optimization, you can check out this [repository of very good Nginx config examples](https://github.com/h5bp/server-configs-nginx).
 </info>
-
 
 ## Contexts and Directives
 Generally speaking, an Nginx config file consists of contexts and directives. A directive is a special keyword, followed by one or multiple values (e.g. `server_name localhost;`) and ends with a semicolon. A context is a group and a scope for these directives (e.g. `server {...}`). The order of directives can matter in some cases, so try to stick to the example where possible.
@@ -122,11 +121,11 @@ This block is extremly important, and probably the most "unique" part about this
 
 
 ```
-  rewrite ^\/(content|site|kirby)/(.*)$ /error last;
-  rewrite ^\/\.(?!well-known\/) /error last;
+rewrite ^\/(content|site|kirby)/(.*)$ /error last;
+rewrite ^\/\.(?!well-known\/) /error last;
 ```
 We don't want Nginx to serve any raw files from the `content`, `site` or `kirby` folders, in accordance with the [Security cookbook article](https://getkirby.com/docs/guide/security). The content of these folders will still be used by the PHP interpreter but the content and source code files will not be accessible for the website visitors.
-Also we don't allow to access any hidden files or folders, starting with `.` – except files in the `.well-known` folder, which is a common place for domain verification (e.g. when using Letsencrypt) or other sensible metadata. Other hidden folders like `.git` or `.htaccess` should not be served, because they are not relevant for Nginx and might reveal sensitive information.
+Also we don't allow to access any hidden files or folders, starting with `.` – except files in the `.well-known` folder, which is a common place for domain verification (e.g. when using Let's Encrypt) or other sensible metadata. Other hidden files and folders like `.git` or `.htaccess` should not be served, because they are not relevant for Nginx and might reveal sensitive information.
 <br/>
 
 
