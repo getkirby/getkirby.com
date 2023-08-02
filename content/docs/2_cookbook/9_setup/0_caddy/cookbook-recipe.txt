@@ -2,7 +2,7 @@ Title: Running Kirby on a Caddy v2 web server
 
 ----
 
-Published: 2023-08-01
+Published: 2023-08-03
 
 ----
 
@@ -22,11 +22,11 @@ Text:
 
 ## Caddy: No support for `.htaccess`
 
-Just like Nginx the Caddy webserver does not use the famous and project-specific `.htaccess` files that Kirby ships with. So instead of using this file, you'll have to configure the webserver manually through a special configuration file called `Caddyfile`.
+Just like Nginx the Caddy webserver does not use the famous and project-specific `.htaccess` files that Kirby ships with. So instead of using this file, you'll have to configure the webserver manually through a special configuration file called `Caddyfile`. This file should typically be placed next to the Caddy executable, or its location can be passed in, when Caddy is called.
 
 
 ## Configuration via Caddyfile
-Caddy uses its own [configuration file format and syntax](https://caddyserver.com/docs/caddyfile/concepts). These Caddyfiles are typically very short and efficient and allow you to configure a webserver with very little content. This is also due to the fact that Caddy uses a lot of very good and modern defaults compared to older webservers like Apache. Therefore Caddy makes ist very easy to host websites with very little configuration and TLS comes right out of the box.
+Caddy uses its own [configuration file format and syntax](https://caddyserver.com/docs/caddyfile/concepts). These Caddyfiles are typically very short and efficient and allow you to configure a webserver with very little content. This is also due to the fact that Caddy uses a lot of very good and modern defaults compared to older webservers like Apache. Therefore Caddy makes ist very easy to host websites with very little configuration and something like TLS only requires a single line in a Caddy configuration.
 
 <info>
 Web server configuration is a very big topic and there are many things to consider for every individual use case. We can only offer a **starting point** for a good config and we can't cover every aspect in this article. So this article will not cover every aspect of webserver configuration (e.g. performance-related optimizations).
