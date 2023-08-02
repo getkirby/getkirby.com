@@ -1,0 +1,124 @@
+Title: Running Kirby on a Caddy v2 web server
+
+----
+
+Published: 2023-08-01
+
+----
+
+Description: How to configure the popular and simple Caddy v2 web server to run a Kirby website.
+
+----
+
+Authors:
+
+- authors/moritz-stueckler
+
+----
+
+Text:
+
+[Kirby states](https://getkirby.com/docs/guide/quickstart) that it is able to run on many different web servers. However, in reality it is mostly Apache and sometimes Nginx which are being used as webservers to run Kirby on. But there is also another, modern and very easy-to-configure alternative in the webserver world: [Caddy v2](https://caddyserver.com/v2).
+
+## Caddy: No support for `.htaccess`
+
+Just like Nginx the Caddy webserver does not use the famous and project-specific `.htaccess` files that Kirby ships with. So instead of using this file, you'll have to configure the webserver manually through a special configuration file called `Caddyfile`.
+
+
+## Configuration via Caddyfile
+Caddy uses its own [configuration file format and syntax](https://caddyserver.com/docs/caddyfile/concepts). These Caddyfiles are typically very short and efficient and allow you to configure a webserver with very little content. This is also due to the fact that Caddy uses a lot of very good and modern defaults compared to older webservers like Apache. Therefore Caddy makes ist very easy to host websites with very little configuration and TLS comes right out of the box.
+
+<info>
+Web server configuration is a very big topic and there are many things to consider for every individual use case. We can only offer a **starting point** for a good config and we can't cover every aspect in this article. So this article will not cover every aspect of webserver configuration (e.g. performance-related optimizations).
+</info>
+
+## Boilerplate config
+
+```
+(common) {
+	php_fastcgi php:9000 # Adjust to your setup
+	tls name@user.com # Adjust to your setup
+	file_server
+}
+
+(kirby) {
+	@blocked {
+		path *.txt *.md /content/* /site/* /kirby/* /.*
+	}
+	redir @blocked /
+}
+
+:80 { # Adjust to your setup
+	import common
+	import kirby
+	root * /usr/share/caddy # Adjust to your setup
+}
+
+```
+
+## Line-by-line explanation
+
+```
+(common) {
+	...
+}
+
+(kirby) {
+	...
+}
+```
+We're creating two custom **snippets** here with the names `common` and `kirby`. Snippets are blocks of configuration directives, which we can later reference and reuse. It's good style to put application-specific settings into their own snippets to know why given settings were initially put in place. So we're splitting our settings into a `common` snippet and `kirby` snippet.
+<br/>
+
+```
+php_fastcgi php:9000
+```
+
+This is the line that does the [handover to the PHP interpreter](https://caddyserver.com/docs/caddyfile/directives/php_fastcgi). We're using the modern FastCGI interface for this handover. The `php_fastcgi` directive takes a network address or unix socket as a parameter, where a PHP-FPM process is listening and waiting for scripts to be run. So this setting depends on your specific setup. If you're using docker, you can just put down the name and port of your FPM container (e.g. `php:9000`). If you're running PHP-FPM on the same system, you can use `localhost` followed by the port number.
+This directive also comes with a lot of good default values for PHP-specific configuration values (e.g. it automatically sets `try_files` to contain an `index.php` file – so a request gets forwarded to PHP when there is no file with a specific name)
+<br/>
+
+```
+tls name@user.com
+```
+
+This directive will take care of your TLS certificate. If you want to use a free certificate from Let's Encrypt, just enter your E-Mail address here and you're done. If you want to run your Kirby page locally, just use `tls internal` for a self-signed certificate.
+<br/>
+
+
+```
+file_server
+```
+
+This directive will make sure Caddy serves all static assets, e.g. all of the JavaScript, font files, icons, images, etc. Without this directive, only PHP files would be served/interpreted.
+<br/>
+
+
+```
+@blocked {
+	path *.txt *.md /content/* /site/* /kirby/* /.*
+}
+redir @blocked /
+```
+
+Here we are defining a custom matcher – which is a statement that we can then use in multiple locations as an argument for other directives. Our matcher is called `@blocked` – because we're defining paths which should not be accessible by website visitors: all raw txt/md files and everything in the `content`, `site` or `kirby` folders, as well as hidden files. In the following line, we're redirecting all these requests to the home page of our site.
+<br/>
+
+
+```
+:80 {
+	...
+}
+```
+This is a site block, which is the top level component of a Caddyfile. The block begins with the address of our server. We're just defining a port number (80) here, which means that our server will listen on all its interfaces. Instead you can also put an IP address or a domain name here, depending on your server setup.
+<br/>
+
+
+```
+import common
+import kirby
+root * /usr/share/caddy
+```
+
+Here, we're importing/using the two snippets we defined earlier. Also we're setting the root folder for this server, which should point to the absolute filesystem path, where your Kirby files are located.
+<br/>
