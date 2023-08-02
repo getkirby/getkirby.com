@@ -40,7 +40,7 @@ Kirby::plugin('my/plugin', [
         'blocks' => function ($limit = null) {
             $blocks = [];
 
-            foreach ($layout->columns() as $column) {
+            foreach ($this->columns() as $column) {
                 foreach ($column->blocks() as $block) {
                     $blocks[] = $block->toArray();
                 }
