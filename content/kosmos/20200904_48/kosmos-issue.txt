@@ -96,7 +96,7 @@ Should new links open in a new window at all? This is a question that is often d
 
 ## Tools
 
-[Vectornator](https://www.vectornator.io/) is a vector graphic design software for Mac, iPad and iPhone. It's currently free, but as in many other cases, it's probably not going to stay that way or go away.
+[Linearity Curve](https://linearity.io/) is a vector graphic design software for Mac, iPad and iPhone. It's currently free, but as in many other cases, it's probably not going to stay that way or go away.
 
 [Kool Report](https://www.koolreport.com/) is an open-source PHP Reporting Framework for faster and easier data report delivery.
 
