@@ -108,8 +108,8 @@ return function ($page) {
 
   return [
       'limit'      => $limit,
-      'projects'   => $projects,  
-      'pagination' => $projects->pagination(),  
+      'projects'   => $projects,
+      'pagination' => $projects->pagination(),
     ];
 };
 ```
@@ -130,7 +130,7 @@ This content representation will be available at the url `localhost/photography.
 <?php
 
 return function ($page) {
-  
+
   $limit      = 4;
   $projects   = $page->children()->listed()->paginate($limit);
   $pagination = $projects->pagination();
@@ -202,7 +202,7 @@ const button  = document.querySelector('.load-more');
 let page      = parseInt(element.getAttribute('data-page'));
 
 const fetchProjects = async () => {
-  let url = `${window.location.href.split('#')[0]}.json/page:${page}`;
+  let url = `${window.location.href.split('#')[0]}.json/page:${page}`; // see info
   try {
     const response       = await fetch(url);
     const { html, more } = await response.json();
@@ -222,6 +222,8 @@ If you use the JSON representations on the homepage, make sure to add `home` to 
 ```js
 let url = `${window.location.href}home.json/page:${page}`;
 ```
+
+**Windows users**: Use a semi-colon instead of a colon for the `page` parameter separator: `page;${page}`.
 </info>
 First we define a set of variables that we need for fetching the projects later on:
 
