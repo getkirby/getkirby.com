@@ -37,6 +37,7 @@ permissions:
     create: true
     changeName: true
     delete: true
+		move: true
     read: true
     replace: true
     update: true
@@ -51,6 +52,7 @@ permissions:
     create: true
     delete: true
     duplicate: true
+		move: true
     preview: true
     read: true
     sort: true
