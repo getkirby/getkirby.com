@@ -58,3 +58,8 @@ options:
     *: false
     admin: true
 ```
+
+## Permissions for new features
+
+- New `changeTemplate` permission for files
+- New `move` permission for pages
