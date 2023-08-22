@@ -14,5 +14,5 @@ Subcategory: podcasts
 
 ----
 
-Description: Run your own podcast with Kirby! Handle episodes right in the panel, create feeds for all popular "podcatchers", track downloads and integrate a player in your site.
+Description: Podcaster is a complete solution for publishing your podcast. Podcaster has you covered with simple and easy feed management, detailed analytics and a customizable player
 
