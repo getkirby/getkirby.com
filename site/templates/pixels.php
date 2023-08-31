@@ -501,23 +501,13 @@
   }
 
   .editor-toolbar .select {
-    position: relative;
     background: var(--color-white);
-    padding: .25rem .5rem;
-  }
-
-  .editor-toolbar .select::after {
-    content: " ";
   }
 
   .editor-toolbar .select select {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    background: none;
-    padding: 0 .25rem;
-    appearance: none;
-    cursor: pointer;
+		border: none;
+		font-family: inherit;
+    padding: 0.25rem 2rem 0.25rem 0.5rem;
   }
 
   .editor-toolbar input[type="range"] {
