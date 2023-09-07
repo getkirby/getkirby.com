@@ -1,11 +1,11 @@
 title: Kirby 4
 ----
-Subtitle: Alpha
+Subtitle: Beta
 ----
 Version: 4.0
 ----
 ogimage: opengraph.png
 ----
-Docs: /releases/4.0/alpha
+Docs: /releases/4.0/beta
 ----
-Link: https://github.com/getkirby/kirby/archive/refs/tags/4.0.0-alpha.7.zip
+Link: https://github.com/getkirby/kirby/archive/refs/tags/4.0.0-beta.1.zip

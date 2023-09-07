@@ -1,0 +1,48 @@
+Title: Beta
+
+----
+
+Subtitle: We are not done yet …
+
+----
+
+Intro: This is still a public beta version of Kirby 4 - things might not be 100% stable yet. Now it's time for you to get involved. We need your honest feedback and your eagle eyes to find bugs.
+
+----
+
+Warning:
+
+This version might have bugs and compatibility issues with plugins. That's why we call it beta :)
+
+**Do not use it in production!**
+
+----
+
+More:
+
+----
+
+Teaser:
+
+This is still a publicbeta version of Kirby 4 - things might not be 100% stable yet. Now it's time for you to get involved. We need your (link: https://github.com/getkirby/kirby/issues text: honest feedback and your eagle eyes to find bugs). You can follow our process on (link: https://chat.getkirby.com text: Discord).
+
+----
+
+Text:
+
+## Not stable yet
+
+<warning>
+It should be clear from the beta label, but this version is not meant for production yet. If you want to use it, you use it at your own risk!
+</warning>
+
+## How to report issues?
+
+Please use our Github repo to report issues and add [v4] to the issue title.
+<https://github.com/getkirby/kirby/issues>
+
+## Feedback from plugin developers
+
+- How are your plugins doing? We still have time to fix regressions and soften breaking changes.
+- How do you like the new Panel JS API?
+- Give our new APIs for writer and textarea extensions a try!
