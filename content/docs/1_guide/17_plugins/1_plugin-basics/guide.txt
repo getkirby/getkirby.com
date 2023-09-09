@@ -162,18 +162,6 @@ Each asset in the `assets` folder of your plugin will be available at `/media/pl
 
 The URL path is constructed with the name from your plugin definition and has nothing to do with the folder name of the plugin.
 
-### Timestamps
-
-Kirby will automatically add timestamps to each asset URL to enable cache busting out of the box. This means that assets will automatically be refreshed when a user installs an updated version of your plugin.
-
-### Example
-
-Asset folder
-: `/site/plugins/superplugin/assets/fields/myfield.js`
-
-Public URL
-: `/media/plugins/superwoman/superplugin/fields/myfield.1520265293.js`
-
 ## Plugin options
 
 Your plugins can define their own set of options:
