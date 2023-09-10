@@ -2,11 +2,11 @@ Title: Git-based FTP-deployment
 
 ----
 
-Published: 2023-08-21
+Published: 2023-09-10
 
 ----
 
-Description: A step by step guide for deploying Kirby projects via Github actions and FTP to staging and production environments
+Description: A step-by-step guide for deploying Kirby projects via GitHub actions and FTP to staging and production environments
 
 ----
 
@@ -20,7 +20,7 @@ Text:
 
 ## Introduction
 
-This is a step by step guide for FTP-deployment with development, staging and production server. We use a development environment on our local machine. Deployment to staging and production server is triggered via GitHub actions and published via FTP.
+This is a step-by-step guide for FTP-deployment to development, staging and production servers. We use a development environment on our local machine. Deployment to the staging and production servers is triggered via GitHub actions and published via FTP.
 
 
 
@@ -28,16 +28,16 @@ This is a step by step guide for FTP-deployment with development, staging and pr
 - **Local running Kirby project**
     First of all, we need a running Kirby project on your local machine. If you need help setting up a local environment, I recommend Sonja's guide: (link:https://getkirby.test/docs/cookbook/setup/development-environment text: Local development environment). I use (link:https://laravel.com/docs/valet text:Laravel valet) on my MacBook, but it's up to you to choose a solution that works best for you.
 - **Web server for staging**
-    Second, we need a running web server for staging, e.g. *staging.example.com*. The requirements are very low. It can be a web hosting starter package at any hoster of your choice. Only FTP access is needed and the FTP path should be the root directory of the web server. SSH is not required.
+    Second, we need a running web server for staging, e.g. *staging.example.com*. The requirements are very low. It can be a web hosting starter package with a hoster of your choice. Only FTP access is needed, and the FTP path should be the root directory of the web server. SSH is not required.
 - **Web server for production**
-    A running web server for production is also needed, e.g. *www.example.com*. The requirements are identical to the staging requirements.
+    A running web server for production is also needed, e.g. *www.example.com*. The requirements are identical to the  requirements for staging.
 - **Terminal**
     To run our Git commands, we need a local terminal window with (link: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git text: Git) installed locally and a little command line knowledge.
 - **(link:https://github.com/ text:GitHub) account**
     Last but not least, we need an active GitHub account. A free plan is sufficient.
 
 <info>
-We use GitHub for our deployment due to its popularity. Alternatively, you can use (link:https://.gitlab.com/ text:Gitlab) as a hosted service or self-installed as well.
+We use GitHub for our deployment due to its popularity. Alternatively, you can use (link:https://.gitlab.com/ text:Gitlab) as a hosted service or self-installed.
 </info>
 
 
@@ -47,9 +47,9 @@ For better understanding, we will use Git commands in the command line. We only 
 
 
 ### Create an empty repository
-First we create an empty repository via (link:https://github.com/new text:GitHub web interface) and clone it to our local machine into the directory `~/Projects/example`.
+First we create an empty repository via the (link:https://github.com/new text:GitHub web interface) and clone it to our local machine into the directory `~/Projects/example`.
 
-Open a terminal window, change to the directory `~/Projects/example` and invoke the following git command.
+Open a terminal window, change to the directory `~/Projects/example` and invoke the following Git command.
 ```bash
 git clone https://github.com/chrfickinger/example.git ~/Projects/example
 ```
@@ -86,7 +86,7 @@ git push
 ```
 
 
-The git queue should now be clear again and all files should have been pushed to GitHub. You can check the empty queue by firing up the `git status` command again. The result should be empty.
+The Git queue should now be clear again and all files should have been pushed to GitHub. You can check the empty queue by firing up the `git status` command again. The result should be empty.
 
 ```bash
 git status -s
@@ -176,7 +176,7 @@ jobs:
           password: your staging ftp-password
           protocol: ftps
 ```
-Now all we need to do is commit and push that file to GitHub, and we have a fully functional action that will automatically deploy your files to our staging environment once they are pushed to GitHub.
+Now all we need to do is commit and push that file to GitHub, and we have a fully functional action that will automatically deploy your files to your staging environment once they are pushed to GitHub.
 
 
 ### Commit and push the file
@@ -194,20 +194,20 @@ git push
 Once the file is pushed to GitHub the action starts immediately. You can check the running workflow under the Actions tab of your GitHub project.
 
 <warning>
-The initial deployment takes a long time, it can take up to 60 minutes depending of the size of your project.  The first run creates a `.ftp-deploy-sync-state.json` file on the staging server. Once this file is available, a run takes only a few seconds.
+The initial deployment can take a while, depending on the size of your project, it can take up to 60 minutes.  During the first run, a file called `.ftp-deploy-sync-state.json` will be created on the staging server. Once this file is available, subsequents runs will only take a few seconds.
 </warning>
 
 
 
 
 ## Deployment to production
-Typically, the staging server is used to preview and test your latest code changes. After approval by your customer (or by you), the updated files can be deployed to our production environment.
+Typically, the staging server is used to preview and test your latest code changes. After approval by your customer (or by you), the updated files can be deployed to your production environment.
 
 
 ### The workflow file
 Let's create a workflow file for production now: `~/Projects/example/.github/workflows/production.yml`
 
-We again give it a meaningful name, e.g. *Production Deployment*, and we define when the action should take place. In our example, the action is executed whenever we set a `tag` in our repository and push the `tag` to GitHub.
+We again give it a meaningful name, e.g. *Production Deployment*, and specify when the action should be executed. In our example, the action is executed whenever we set a `tag` in our repository and push the `tag` to GitHub.
 
 ```yml
 name: Production Deployment
@@ -217,7 +217,7 @@ on:
       - '*'
 ```
 
-We also still need to update the FTP settings.
+We also need to update the FTP settings.
 
 ```yml
 steps:
