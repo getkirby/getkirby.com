@@ -8,13 +8,14 @@ Providing the same content on different URLs is usually considered problematic b
 
 ## Enforce trailing slash
 
-The rule to enforce a trailing slash has to be placed after line #36 in the default `.htaccess` provided with Kirby's Starterkit, and you have to exempt the API and the Panel from the rule to prevent breaking the Panel.
+The rule to enforce a trailing slash has to be placed after line #36 in the default `.htaccess` provided with Kirby's Starterkit. You have to exempt the API and the Panel from the rule to prevent breaking the Panel and the media folder to prevent breaking media files and thumbs.
 
 ``` ".htaccess"
 # force trailing slash
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !^/api
 RewriteCond %{REQUEST_URI} !^/panel
+RewriteCond %{REQUEST_URI} !^/media
 RewriteRule ^(.*[^/])$ /$1/ [L,R=301]
 ```
 
