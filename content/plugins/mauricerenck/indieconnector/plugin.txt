@@ -14,5 +14,5 @@ Subcategory: indieweb
 
 ----
 
-Description: IndieConnector receives and sends Webmentions. It can also post to Mastodon when a new page is published and act like a ActivityPub Instance (using fed.bridby).
+Description: IndieConnector receives and sends Webmentions. It can also post to Mastodon when a new page is published and act like a ActivityPub Instance (using fed.brid.gy).
 
