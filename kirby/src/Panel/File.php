@@ -3,6 +3,7 @@
 namespace Kirby\Panel;
 
 use Kirby\Cms\File as CmsFile;
+use Kirby\Cms\ModelWithContent;
 use Kirby\Filesystem\Asset;
 use Kirby\Toolkit\I18n;
 use Throwable;
@@ -19,6 +20,11 @@ use Throwable;
  */
 class File extends Model
 {
+	/**
+	 * @var \Kirby\Cms\File
+	 */
+	protected ModelWithContent $model;
+
 	/**
 	 * Breadcrumb array
 	 */
@@ -41,10 +47,12 @@ class File extends Model
 				break;
 			case 'page':
 				/** @var \Kirby\Cms\Page $parent */
-				$breadcrumb = $this->model->parents()->flip()->values(fn ($parent) => [
-					'label' => $parent->title()->toString(),
-					'link'  => $parent->panel()->url(true),
-				]);
+				$breadcrumb = $this->model->parents()->flip()->values(
+					fn ($parent) => [
+						'label' => $parent->title()->toString(),
+						'link'  => $parent->panel()->url(true),
+					]
+				);
 		}
 
 		// add the file
@@ -65,8 +73,10 @@ class File extends Model
 	 * @internal
 	 * @param string|null $type (`auto`|`kirbytext`|`markdown`)
 	 */
-	public function dragText(string|null $type = null, bool $absolute = false): string
-	{
+	public function dragText(
+		string|null $type = null,
+		bool $absolute = false
+	): string {
 		$type = $this->dragTextType($type);
 		$url  = $this->model->filename();
 		$file = $this->model->type();
@@ -76,14 +86,17 @@ class File extends Model
 		// for markdown notation or the UUID for Kirbytext (since
 		// Kirbytags support can resolve UUIDs directly)
 		if ($absolute === true) {
-			$url   = $type === 'markdown' ? $this->model->permalink() : $this->model->uuid();
+			$url = match ($type) {
+				'markdown' => $this->model->permalink(),
+				default    => $this->model->uuid()
+			};
+
 			// if UUIDs are disabled, fall back to URL
 			$url ??= $this->model->url();
 		}
 
-
-		if ($dragTextFromCallback = $this->dragTextFromCallback($type, $url)) {
-			return $dragTextFromCallback;
+		if ($callback = $this->dragTextFromCallback($type, $url)) {
+			return $callback;
 		}
 
 		if ($type === 'markdown') {
@@ -104,9 +117,9 @@ class File extends Model
 	 */
 	public function dropdown(array $options = []): array
 	{
-		$file = $this->model;
-
-		$defaults = $file->kirby()->request()->get(['view', 'update', 'delete']);
+		$file     = $this->model;
+		$request  = $file->kirby()->request();
+		$defaults = $request->get(['view', 'update', 'delete']);
 		$options  = array_merge($defaults, $options);
 
 		$permissions = $this->options(['preview']);
@@ -131,15 +144,7 @@ class File extends Model
 			'disabled' => $this->isDisabledDropdownOption('changeName', $options, $permissions)
 		];
 
-		$result[] = [
-			'click'    => 'replace',
-			'icon'     => 'upload',
-			'text'     => I18n::translate('replace'),
-			'disabled' => $this->isDisabledDropdownOption('replace', $options, $permissions)
-		];
-
 		if ($view === 'list') {
-			$result[] = '-';
 			$result[] = [
 				'dialog'   => $url . '/changeSort',
 				'icon'     => 'sort',
@@ -147,6 +152,22 @@ class File extends Model
 				'disabled' => $this->isDisabledDropdownOption('update', $options, $permissions)
 			];
 		}
+
+		$result[] = [
+			'dialog'   => $url . '/changeTemplate',
+			'icon'     => 'template',
+			'text'     => I18n::translate('file.changeTemplate'),
+			'disabled' => $this->isDisabledDropdownOption('changeTemplate', $options, $permissions)
+		];
+
+		$result[] = '-';
+
+		$result[] = [
+			'click'    => 'replace',
+			'icon'     => 'upload',
+			'text'     => I18n::translate('replace'),
+			'disabled' => $this->isDisabledDropdownOption('replace', $options, $permissions)
+		];
 
 		$result[] = '-';
 		$result[] = [
@@ -259,6 +280,40 @@ class File extends Model
 	}
 
 	/**
+	 * Whether focus can be added in Panel view
+	 */
+	public function isFocusable(): bool
+	{
+		// blueprint option
+		$option = $this->model->blueprint()->focus();
+		// fallback to whether the file is viewable
+		// (images should be focusable by default, others not)
+		$option ??= $this->model->isViewable();
+
+		if ($option === false) {
+			return false;
+		}
+
+		// ensure that user can update content file
+		if ($this->options()['update'] === false) {
+			return false;
+		}
+
+		$kirby = $this->model->kirby();
+
+		// ensure focus is only added when editing primary/only language
+		if (
+			$kirby->multilang() === false ||
+			$kirby->languages()->count() === 0 ||
+			$kirby->language()->isDefault() === true
+		) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Returns an array of all actions
 	 * that can be performed in the Panel
 	 *
@@ -297,7 +352,8 @@ class File extends Model
 		$id   = $this->model->id();
 
 		if (empty($params['model']) === false) {
-			$parent   = $this->model->parent();
+			$parent = $this->model->parent();
+
 			// if the file belongs to the current parent model,
 			// store only name as ID to keep its path relative to the model
 			$id       = $parent === $params['model'] ? $name : $id;
@@ -324,13 +380,6 @@ class File extends Model
 	{
 		$file       = $this->model;
 		$dimensions = $file->dimensions();
-		$siblings   = $file->templateSiblings()->sortBy(
-			'sort',
-			'asc',
-			'filename',
-			'asc'
-		);
-
 
 		return array_merge(
 			parent::props(),
@@ -352,12 +401,13 @@ class File extends Model
 					'url'        => $file->url(),
 				],
 				'preview' => [
-					'image'   => $this->image([
+					'focusable' => $this->isFocusable(),
+					'image'     => $this->image([
 						'back'  => 'transparent',
 						'ratio' => '1/1'
 					], 'cards'),
-					'url'     => $url = $file->previewUrl(),
-					'details' => [
+					'url'       => $url = $file->previewUrl(),
+					'details'   => [
 						[
 							'title' => I18n::translate('template'),
 							'text'  => $file->template() ?? '—'

@@ -70,9 +70,7 @@ class Collection extends BaseCollection
 	 * This takes care of Component validation and of setting
 	 * the collection prop on each object correctly.
 	 *
-	 * @param string $id
 	 * @param object $object
-	 * @return void
 	 */
 	public function __set(string $id, $object): void
 	{
@@ -130,7 +128,6 @@ class Collection extends BaseCollection
 	/**
 	 * Find a single element by an attribute and its value
 	 *
-	 * @param string $attribute
 	 * @param mixed $value
 	 * @return mixed|null
 	 */
@@ -192,7 +189,6 @@ class Collection extends BaseCollection
 	 * is in the collection
 	 *
 	 * @param string|object $key
-	 * @return bool
 	 */
 	public function has($key): bool
 	{
@@ -209,7 +205,6 @@ class Collection extends BaseCollection
 	 * or ids and then search accordingly.
 	 *
 	 * @param string|object $needle
-	 * @return int|false
 	 */
 	public function indexOf($needle): int|false
 	{
@@ -258,13 +253,14 @@ class Collection extends BaseCollection
 		$this->pagination = Pagination::for($this, ...$arguments);
 
 		// slice and clone the collection according to the pagination
-		return $this->slice($this->pagination->offset(), $this->pagination->limit());
+		return $this->slice(
+			$this->pagination->offset(),
+			$this->pagination->limit()
+		);
 	}
 
 	/**
 	 * Returns the parent model
-	 *
-	 * @return \Kirby\Cms\Model
 	 */
 	public function parent()
 	{
@@ -301,7 +297,6 @@ class Collection extends BaseCollection
 	 * offset, limit, search and paginate on the collection.
 	 * Any part of the query is optional.
 	 *
-	 * @param array $arguments
 	 * @return static
 	 */
 	public function query(array $arguments = [])
@@ -344,13 +339,11 @@ class Collection extends BaseCollection
 
 	/**
 	 * Searches the collection
-	 *
-	 * @param string|null $query
-	 * @param array $params
-	 * @return self
 	 */
-	public function search(string $query = null, $params = [])
-	{
+	public function search(
+		string $query = null,
+		string|array $params = []
+	): static {
 		return Search::collection($this, $query, $params);
 	}
 
@@ -358,9 +351,6 @@ class Collection extends BaseCollection
 	 * Converts all objects in the collection
 	 * to an array. This can also take a callback
 	 * function to further modify the array result.
-	 *
-	 * @param \Closure|null $map
-	 * @return array
 	 */
 	public function toArray(Closure $map = null): array
 	{

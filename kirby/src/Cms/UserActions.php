@@ -27,11 +27,8 @@ trait UserActions
 {
 	/**
 	 * Changes the user email address
-	 *
-	 * @param string $email
-	 * @return static
 	 */
-	public function changeEmail(string $email)
+	public function changeEmail(string $email): static
 	{
 		$email = trim($email);
 
@@ -53,11 +50,8 @@ trait UserActions
 
 	/**
 	 * Changes the user language
-	 *
-	 * @param string $language
-	 * @return static
 	 */
-	public function changeLanguage(string $language)
+	public function changeLanguage(string $language): static
 	{
 		return $this->commit('changeLanguage', ['user' => $this, 'language' => $language], function ($user, $language) {
 			$user = $user->clone([
@@ -77,11 +71,8 @@ trait UserActions
 
 	/**
 	 * Changes the screen name of the user
-	 *
-	 * @param string $name
-	 * @return static
 	 */
-	public function changeName(string $name)
+	public function changeName(string $name): static
 	{
 		$name = trim($name);
 
@@ -131,11 +122,8 @@ trait UserActions
 
 	/**
 	 * Changes the user role
-	 *
-	 * @param string $role
-	 * @return static
 	 */
-	public function changeRole(string $role)
+	public function changeRole(string $role): static
 	{
 		return $this->commit('changeRole', ['user' => $this, 'role' => $role], function ($user, $role) {
 			$user = $user->clone([
@@ -162,14 +150,13 @@ trait UserActions
 	 * 4. sends the after hook
 	 * 5. returns the result
 	 *
-	 * @param string $action
-	 * @param array $arguments
-	 * @param \Closure $callback
-	 * @return mixed
 	 * @throws \Kirby\Exception\PermissionException
 	 */
-	protected function commit(string $action, array $arguments, Closure $callback)
-	{
+	protected function commit(
+		string $action,
+		array $arguments,
+		Closure $callback
+	): mixed {
 		if ($this->isKirby() === true) {
 			throw new PermissionException('The Kirby user cannot be changed');
 		}
@@ -183,13 +170,12 @@ trait UserActions
 
 		$result = $callback(...$argumentValues);
 
-		if ($action === 'create') {
-			$argumentsAfter = ['user' => $result];
-		} elseif ($action === 'delete') {
-			$argumentsAfter = ['status' => $result, 'user' => $old];
-		} else {
-			$argumentsAfter = ['newUser' => $result, 'oldUser' => $old];
-		}
+		$argumentsAfter = match ($action) {
+			'create' => ['user' => $result],
+			'delete' => ['status' => $result, 'user' => $old],
+			default  => ['newUser' => $result, 'oldUser' => $old]
+		};
+
 		$kirby->trigger('user.' . $action . ':after', $argumentsAfter);
 
 		$kirby->cache('pages')->flush();
@@ -198,11 +184,8 @@ trait UserActions
 
 	/**
 	 * Creates a new User from the given props and returns a new User object
-	 *
-	 * @param array|null $props
-	 * @return static
 	 */
-	public static function create(array $props = null)
+	public static function create(array $props = null): static
 	{
 		$data = $props;
 
@@ -254,8 +237,6 @@ trait UserActions
 
 	/**
 	 * Returns a random user id
-	 *
-	 * @return string
 	 */
 	public function createId(): string
 	{
@@ -280,7 +261,6 @@ trait UserActions
 	/**
 	 * Deletes the user
 	 *
-	 * @return bool
 	 * @throws \Kirby\Exception\LogicException
 	 */
 	public function delete(): bool
@@ -307,8 +287,6 @@ trait UserActions
 
 	/**
 	 * Read the account information from disk
-	 *
-	 * @return array
 	 */
 	protected function readCredentials(): array
 	{
@@ -325,24 +303,20 @@ trait UserActions
 
 	/**
 	 * Reads the user password from disk
-	 *
-	 * @return string|false
 	 */
-	protected function readPassword()
+	protected function readPassword(): string|false
 	{
 		return F::read($this->passwordFile());
 	}
 
 	/**
 	 * Updates the user data
-	 *
-	 * @param array|null $input
-	 * @param string|null $languageCode
-	 * @param bool $validate
-	 * @return static
 	 */
-	public function update(array $input = null, string $languageCode = null, bool $validate = false)
-	{
+	public function update(
+		array $input = null,
+		string $languageCode = null,
+		bool $validate = false
+	): static {
 		$user = parent::update($input, $languageCode, $validate);
 
 		// set auth user data only if the current user is this user
@@ -359,9 +333,6 @@ trait UserActions
 	/**
 	 * This always merges the existing credentials
 	 * with the given input.
-	 *
-	 * @param array $credentials
-	 * @return bool
 	 */
 	protected function updateCredentials(array $credentials): bool
 	{
@@ -375,9 +346,6 @@ trait UserActions
 
 	/**
 	 * Writes the account information to disk
-	 *
-	 * @param array $credentials
-	 * @return bool
 	 */
 	protected function writeCredentials(array $credentials): bool
 	{

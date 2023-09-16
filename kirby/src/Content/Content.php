@@ -1,14 +1,16 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Kirby\Content;
 
+use Kirby\Cms\Blueprint;
+use Kirby\Cms\ModelWithContent;
 use Kirby\Form\Form;
 
 /**
  * The Content class handles all fields
  * for content from pages, the site and users
  *
- * @package   Kirby Cms
+ * @package   Kirby Content
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier
@@ -18,39 +20,29 @@ class Content
 {
 	/**
 	 * The raw data array
-	 *
-	 * @var array
 	 */
-	protected $data = [];
+	protected array $data = [];
 
 	/**
 	 * Cached field objects
 	 * Once a field is being fetched
 	 * it is added to this array for
 	 * later reuse
-	 *
-	 * @var array
 	 */
-	protected $fields = [];
+	protected array $fields = [];
 
 	/**
 	 * A potential parent object.
 	 * Not necessarily needed. Especially
 	 * for testing, but field methods might
 	 * need it.
-	 *
-	 * @var Model
 	 */
-	protected $parent;
+	protected ModelWithContent|null $parent;
 
 	/**
 	 * Magic getter for content fields
-	 *
-	 * @param string $name
-	 * @param array $arguments
-	 * @return \Kirby\Cms\Field
 	 */
-	public function __call(string $name, array $arguments = [])
+	public function __call(string $name, array $arguments = []): Field
 	{
 		return $this->get($name);
 	}
@@ -58,12 +50,13 @@ class Content
 	/**
 	 * Creates a new Content object
 	 *
-	 * @param array|null $data
-	 * @param object|null $parent
 	 * @param bool $normalize Set to `false` if the input field keys are already lowercase
 	 */
-	public function __construct(array $data = [], $parent = null, bool $normalize = true)
-	{
+	public function __construct(
+		array $data = [],
+		ModelWithContent $parent = null,
+		bool $normalize = true
+	) {
 		if ($normalize === true) {
 			$data = array_change_key_case($data, CASE_LOWER);
 		}
@@ -75,9 +68,9 @@ class Content
 	/**
 	 * Same as `self::data()` to improve
 	 * `var_dump` output
+	 * @codeCoverageIgnore
 	 *
 	 * @see self::data()
-	 * @return array
 	 */
 	public function __debugInfo(): array
 	{
@@ -86,9 +79,6 @@ class Content
 
 	/**
 	 * Converts the content to a new blueprint
-	 *
-	 * @param string $to
-	 * @return array
 	 */
 	public function convertTo(string $to): array
 	{
@@ -99,11 +89,21 @@ class Content
 		// blueprints
 		$old       = $this->parent->blueprint();
 		$subfolder = dirname($old->name());
-		$new       = Blueprint::factory($subfolder . '/' . $to, $subfolder . '/default', $this->parent);
+		$new       = Blueprint::factory(
+			$subfolder . '/' . $to,
+			$subfolder . '/default',
+			$this->parent
+		);
 
 		// forms
-		$oldForm = new Form(['fields' => $old->fields(), 'model' => $this->parent]);
-		$newForm = new Form(['fields' => $new->fields(), 'model' => $this->parent]);
+		$oldForm = new Form([
+			'fields' => $old->fields(),
+			'model'  => $this->parent
+		]);
+		$newForm = new Form([
+			'fields' => $new->fields(),
+			'model'  => $this->parent
+		]);
 
 		// fields
 		$oldFields = $oldForm->fields();
@@ -128,8 +128,6 @@ class Content
 
 	/**
 	 * Returns the raw data array
-	 *
-	 * @return array
 	 */
 	public function data(): array
 	{
@@ -138,8 +136,6 @@ class Content
 
 	/**
 	 * Returns all registered field objects
-	 *
-	 * @return array
 	 */
 	public function fields(): array
 	{
@@ -152,11 +148,8 @@ class Content
 	/**
 	 * Returns either a single field object
 	 * or all registered fields
-	 *
-	 * @param string|null $key
-	 * @return \Kirby\Cms\Field|array
 	 */
-	public function get(string $key = null)
+	public function get(string $key = null): Field|array
 	{
 		if ($key === null) {
 			return $this->fields();
@@ -173,9 +166,6 @@ class Content
 
 	/**
 	 * Checks if a content field is set
-	 *
-	 * @param string $key
-	 * @return bool
 	 */
 	public function has(string $key): bool
 	{
@@ -184,8 +174,6 @@ class Content
 
 	/**
 	 * Returns all field keys
-	 *
-	 * @return array
 	 */
 	public function keys(): array
 	{
@@ -196,14 +184,11 @@ class Content
 	 * Returns a clone of the content object
 	 * without the fields, specified by the
 	 * passed key(s)
-	 *
-	 * @param string ...$keys
-	 * @return static
 	 */
-	public function not(...$keys)
+	public function not(string ...$keys): static
 	{
 		$copy = clone $this;
-		$copy->fields = null;
+		$copy->fields = [];
 
 		foreach ($keys as $key) {
 			unset($copy->data[strtolower($key)]);
@@ -215,10 +200,8 @@ class Content
 	/**
 	 * Returns the parent
 	 * Site, Page, File or User object
-	 *
-	 * @return \Kirby\Cms\Model
 	 */
-	public function parent()
+	public function parent(): ModelWithContent|null
 	{
 		return $this->parent;
 	}
@@ -226,10 +209,9 @@ class Content
 	/**
 	 * Set the parent model
 	 *
-	 * @param \Kirby\Cms\Model $parent
 	 * @return $this
 	 */
-	public function setParent(Model $parent)
+	public function setParent(ModelWithContent $parent): static
 	{
 		$this->parent = $parent;
 		return $this;
@@ -239,7 +221,6 @@ class Content
 	 * Returns the raw data array
 	 *
 	 * @see self::data()
-	 * @return array
 	 */
 	public function toArray(): array
 	{
@@ -250,12 +231,12 @@ class Content
 	 * Updates the content and returns
 	 * a cloned object
 	 *
-	 * @param array|null $content
-	 * @param bool $overwrite
 	 * @return $this
 	 */
-	public function update(array $content = null, bool $overwrite = false)
-	{
+	public function update(
+		array $content = null,
+		bool $overwrite = false
+	): static {
 		$content = array_change_key_case((array)$content, CASE_LOWER);
 		$this->data = $overwrite === true ? $content : array_merge($this->data, $content);
 

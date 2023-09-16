@@ -25,6 +25,16 @@ class UserUuid extends Uuid
 	 */
 	public Identifiable|null $model;
 
+	/*
+	 * Returns the user ID
+	 * (we can rely in this case that the Uri was filled
+	 * with the model ID on initiation)
+	 */
+	public function id(): string
+	{
+		return $this->uri->host();
+	}
+
 	/**
 	 * Generator for all users
 	 *
@@ -46,7 +56,7 @@ class UserUuid extends Uuid
 	/**
 	 * Pretends to fill cache - we don't need it in cache
 	 */
-	public function populate(): bool
+	public function populate(bool $force = false): bool
 	{
 		return true;
 	}
