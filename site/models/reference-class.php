@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Cms\Field;
 use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
+use Kirby\Content\Field;
 use Kirby\Reference\DocBlock;
 use Kirby\Reference\SectionPage;
 use Kirby\Reference\Types;

@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\Field;
+use Kirby\Content\Field;
 use Kirby\Cms\Page;
 use Kirby\Toolkit\Str;
 

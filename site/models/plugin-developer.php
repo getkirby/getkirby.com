@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Cms\Field;
 use Kirby\Cms\File;
 use Kirby\Cms\Page;
+use Kirby\Content\Field;
 
 class PluginDeveloperPage extends Page
 {

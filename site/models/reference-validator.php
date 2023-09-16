@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\Field;
+use Kirby\Content\Field;
 use Kirby\Toolkit\V;
 use Kirby\Reference\ReflectionPage;
 

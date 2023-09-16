@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\Field;
+use Kirby\Content\Field;
 
 function csv(string $file): array
 {

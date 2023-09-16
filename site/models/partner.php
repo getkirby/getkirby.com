@@ -1,10 +1,9 @@
 <?php
 
-use Kirby\Cms\Field;
 use Kirby\Cms\File;
-use Kirby\Cms\Files;
 use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
+use Kirby\Content\Field;
 use Kirby\Toolkit\Str;
 
 class PartnerPage extends Page

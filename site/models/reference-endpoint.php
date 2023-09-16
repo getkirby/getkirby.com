@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\Field;
+use Kirby\Content\Field;
 use Kirby\Reference\ReflectionPage;
 
 class ReferenceEndpointPage extends ReflectionPage

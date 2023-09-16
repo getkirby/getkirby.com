@@ -3,7 +3,7 @@
 namespace Kirby\Meta;
 
 use Kirby\Cms\Asset;
-use Kirby\Cms\Field;
+use Kirby\Content\Field;
 use Kirby\Cms\File;
 use Kirby\Filesystem\F;
 use Kirby\Http\Response;

@@ -1,8 +1,9 @@
 <?php
 
-use Kirby\Cms\Field;
+use Kirby\Content\Field;
 use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
+use Kirby\Template\Template;
 use Kirby\Toolkit\Str;
 
 class ReferenceQuickLinkPage extends Page
@@ -55,7 +56,7 @@ class ReferenceQuickLinkPage extends Page
 		return $this->link()->toPage()?->isOpen() ?? false;
 	}
 
-	public function template()
+	public function template(): Template
 	{
 		return $this->kirby()->template('link');
 	}

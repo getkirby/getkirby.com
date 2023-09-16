@@ -2,7 +2,7 @@
 
 namespace Kirby\Search;
 
-use Kirby\Cms\Field;
+use Kirby\Content\Field;
 use Kirby\Cms\Page;
 
 /**

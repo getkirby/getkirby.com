@@ -3,7 +3,7 @@
 namespace Kirby\Reference;
 
 use Kirby\Cms\App;
-use Kirby\Cms\Field;
+use Kirby\Content\Field;
 use Kirby\Cms\Page;
 use Kirby\Reference\Types;
 use Kirby\Template\Template;
