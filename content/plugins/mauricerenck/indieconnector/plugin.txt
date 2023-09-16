@@ -14,5 +14,5 @@ Subcategory: indieweb
 
 ----
 
-Description: A webmention handler. Receives webmentions and propagates them via Kirby hook so your site or other plugins can subscribe to them.
+Description: IndieConnector receives and sends Webmentions. It can also post to Mastodon when a new page is published and act like a ActivityPub Instance (using fed.bridby).
 
