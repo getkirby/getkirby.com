@@ -55,6 +55,8 @@ $image->crop(100);
 $image->crop(100, 200);
 ```
 
+Kirby will automatically use a (link: docs/reference/panel/blueprints/file#en-disable-setting-focus-in-panel text: focus point) set for the image when set, otherwise use the default thumb settings.
+
 In the Reference: (link: docs/reference/objects/cms/file/crop text: $file->crop())
 
 ### Blur

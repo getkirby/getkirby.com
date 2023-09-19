@@ -63,3 +63,7 @@ if($image = $page->image()):
     ])->html();
 endif;
 ```
+
+<info>
+If a (link: docs/reference/panel/blueprints/file text: focal point) is set, this focal point will automatically be used when the crop option is set to `true`. If you use a custom crop position, this will overwrite the focal point set in the file metadata.
+</info>
