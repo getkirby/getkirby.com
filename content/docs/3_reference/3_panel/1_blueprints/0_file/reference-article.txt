@@ -84,6 +84,7 @@ accept:
 | `orientation` | `landscape`/`square`/`portrait` |
 | `type` | comma-separated `string` or `array` |
 
+
 You can combine the `extension`, `mime` and `type` checks. If more than one of these three options is set, all constraints need to match for a file to be valid.
 
 If you don't set the `mime` option, the valid MIME types for the frontend upload input are auto-detected from the configured `extension` or `type` options. You can however override this behavior by setting the `mime` option as well, for example to define MIME types that are compatible with all browsers while still protecting the uploads based on the extension and/or file type:
@@ -113,6 +114,20 @@ accept:
 <warning>
 Please only allow all uploads if all Panel users can be trusted completely as it will be possible to upload files that could be used to attack the server or the visitors' browsers.
 </warning>
+
+<since v="4.0.0">
+## En-/disable setting focus in Panel
+
+By default, setting the focus point in the Panel is enabled for all viewable images with a Panel preview and disabled for all other files.
+
+When a focus point is set, it will be used automatically when you crop an image.
+
+You can change this via the `focus` option in the file's blueprint:
+
+```yaml "site/blueprints/files/image.yml"
+focus: false
+```
+</since>
 
 ## Image options
 
@@ -157,7 +172,6 @@ image:
 image:
   back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);"
 ```
-
 
 ## Options
 

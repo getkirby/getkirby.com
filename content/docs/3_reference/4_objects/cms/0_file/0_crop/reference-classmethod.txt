@@ -17,6 +17,11 @@ endif;
 
 ### Crop positions
 
+<info>
+If a (link: docs/reference/panel/blueprints/file text: focal point) is set, this focal point will automatically be used when cropping an image. If you use one of the following focal points when cropping, this will overwrite the focal point set in the file metadata.
+</info>
+
+
 You can define from which side or corner a file should be cropped. The following crop options are available:
 
 - `top left`
@@ -41,3 +46,4 @@ $image->crop(100, 200, [
 'crop' => 'left'
 ]);
 ```
+
