@@ -85,6 +85,7 @@ num: '{{ page.created.toDate("YmdHi") }}'
 <info>
 If you use a sorting scheme other than default sorting by number, i.e. automatic sorting, manual sorting in the Panel will be disabled.
 </info>
+
 ## Statuses
 
 With the `status` option, you define the page statuses you want to allow for the page. You can also change their label and description. This option gives you a lot of flexibility how you want to use page status in your website.
@@ -113,6 +114,36 @@ status:
     label: Published
     text: The article is online and listed in the blog
 ```
+<since v="4.0.0">
+## Page creation dialog
+
+You can customize the page creation dialog that pops up when you create a new page. You can add fields, change the label of the title field, disable the automatic redirect to the new page and set its status.
+
+```yaml
+title: Product
+create:
+  title:
+    label: Product name
+  fields:
+    - price
+    - brand
+  redirect: false
+  status: listed
+```
+
+(image: page-creation-dialog.png)
+The button label changes depending on the status option set:
+
+(image: page-creation-status.png)
+
+### Supported field types
+
+Currently, the list of supported field types in the dialog is limited to checkboxes, date, email, info, line, link, list, number, multiselect, radio, range, select, slug, tags, tel, text, toggles, time, url. Custom field types are disabled by default. To enable them, add your field type name to:
+
+```php
+Kirby\Panel\PageCreateDialog::$fieldTypes[] = 'yourFieldType'
+```
+</since>
 
 ## Icon
 
