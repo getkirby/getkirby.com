@@ -67,7 +67,7 @@ return [
 ];
 ```
 
-You can now test the sitemap of your Kirby site by visiting `http://yourdomain.com/sitemap.xml` `http://yourdomain.com/sitemap`. The second route redirects to the first.
+You can now test the sitemap of your Kirby site by visiting `http://yourdomain.com/sitemap.xml` or `http://yourdomain.com/sitemap`. The second route redirects to the first.
 
 
 ## Excluding pages from your sitemap
