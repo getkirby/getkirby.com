@@ -25,6 +25,7 @@ The extra rules for the Panel are not needed if you want to enforce URLs without
 
 ``` ".htaccess"
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^/media
 RewriteRule ^(.*)/$ /$1 [L,R=301]
 ```
 
