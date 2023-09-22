@@ -15,9 +15,6 @@ $results = $page->search('my awesome search')->listed()->filterBy('template', 'a
 // add pagination to the search results
 $results = $page->search('my awesome search')->paginate(20);
 
-// search in certain fields only
-$results = $page->search('my awesome search', 'title|text');
-
 // search for full words only
 $results = $page->search('my awesome->search', ['words' => true]);
 
