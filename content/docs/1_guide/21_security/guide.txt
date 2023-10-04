@@ -75,7 +75,9 @@ If you do not use HTTPS, your login information and all other data will be submi
 
 ### Use the latest stable PHP version
 
-Many providers unfortunately still offer very old PHP versions which are no longer maintained. Do yourself and your site a favor and always **update to the latest stable PHP version**. This comes with additional security and often performance benefits. If your provider does not provide a new and stable PHP version, it's a good sign to switch to a better provider.
+Many providers unfortunately still offer very old PHP versions which are no longer maintained. Do yourself and your site a favor and always **update to the latest stable PHP version** that is supported by your Kirby version. This comes with additional security and often performance benefits. If your provider does not provide a new and stable PHP version, it's a good sign to switch to a better provider.
+
+If you cannot update to the latest stable PHP version supported by Kirby, make sure to use a PHP version that has security support at the minimum. So-called "end of life" versions receive no security updates and may be vulnerable. You should **never** run your site on an end-of-life version of PHP.
 
 You can check which PHP versions are still supported on the (link: https://php.net/supported-versions.php text: PHP website).
 
