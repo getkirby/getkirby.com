@@ -113,6 +113,12 @@ All fields MAY use the following placeholders in the URL templates that are dyna
 
 The `changes` and `download` fields MUST use the `{{ version }}` placeholder.
 
+## `Php` field
+
+The `Php` field contains the end-of-life dates of each major PHP release according to https://www.php.net/supported-versions.php. They can be used to warn users who use an unsupported version.
+
+The key of each entry MUST be set to a string of the major PHP release. The value MUST be set to a ISO 8601 date value.
+
 ## `Incidents` field
 
 The `Incidents` field lists all past security incidents (vulnerabilities in Kirby). It allows to check if a particular version is affected by known vulnerabilities. If this is the case, it points to more information and the version(s) that fixed the vulnerability.
@@ -211,6 +217,17 @@ Urls:
 1.*:
     changes: https://github.com/getkirby-v1/starterkit/releases/tag/{{ version }}
     upgrade: https://getkirby.com/releases/{{ latestMajor }}
+
+----
+
+Php:
+
+# End-of-life dates for each major PHP version
+# according to https://www.php.net/supported-versions.php
+
+"8.0": 2023-11-26
+"8.1": 2024-11-25
+"8.2": 2025-12-08
 
 ----
 
