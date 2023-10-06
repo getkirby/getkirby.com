@@ -54,7 +54,7 @@ This loops through all pages of the entire site (the `true` boolean in [`index()
 Of course this could also be limited to any subset of pages, e.g. to specifically target all articles that are children of a hypothetical `blog` page:
 
 ```php
-$collection = page('blog')->childrenAndDrafts()->filterBy('template', 'article')`;
+$collection = page('blog')->childrenAndDrafts()->filterBy('template', 'article');
 ```
 
 All that counts is that the `$collection` variable has to be a [Pages collection](https://getkirby.com/docs/reference/objects/cms/pages).

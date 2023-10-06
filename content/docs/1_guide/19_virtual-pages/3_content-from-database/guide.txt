@@ -78,7 +78,7 @@ use Kirby\Uuid\Uuid;
 
 class CommentsPage extends Kirby\Cms\Page
 {
-    public function children()
+    public function children(): Pages
     {
         if ($this->children instanceof Pages) {
             return $this->children;
@@ -181,7 +181,7 @@ The `CommentPage` model would need to overwrite the `writeContent()` and `readCo
 class CommentPage extends Kirby\Cms\Page
 {
 
-    public function writeContent(array $data, string $languageCode = null): bool
+    public function writeContent(array $data, string|null $languageCode = null): bool
     {
         unset($data['title']);
 
@@ -273,7 +273,7 @@ use Kirby\Uuid\Uuid;
 
 class CommentsPage extends Kirby\Cms\Page
 {
-    public function children()
+    public function children(): Pages
     {
 		    if ($this->children instanceof Pages) {
             return $this->children;
@@ -319,7 +319,7 @@ The model for a single comment needs more significant changes:
 
 class CommentPage extends Kirby\Cms\Page
 {
-    public function changeSlug(string $slug, string $languageCode = null)
+    public function changeSlug(string $slug, string|null $languageCode = null): static
     {
         // always sanitize the slug
         $slug = Str::slug($slug);
@@ -335,7 +335,7 @@ class CommentPage extends Kirby\Cms\Page
         return $this;
     }
 
-    protected function changeStatusToDraft()
+    protected function changeStatusToDraft(): static
     {
         $data['status'] = 'null';
 
@@ -346,7 +346,7 @@ class CommentPage extends Kirby\Cms\Page
         return $this;
     }
 
-    protected function changeStatusToListed(int $position = null)
+    protected function changeStatusToListed(int|null $position = null): static
     {
         // create a sorting number for the page
         $num = $this->createNum($position);
@@ -369,7 +369,7 @@ class CommentPage extends Kirby\Cms\Page
         return $this;
     }
 
-    protected function changeStatusToUnlisted()
+    protected function changeStatusToUnlisted(): static
     {
         if ($this->status() === 'unlisted') {
             return $this;
@@ -386,7 +386,7 @@ class CommentPage extends Kirby\Cms\Page
         return $this;
     }
 
-    public function changeTitle(string $title, string $languageCode = null)
+    public function changeTitle(string $title, string|null $languageCode = null): static
     {
         $data['title'] = $title;
 
@@ -408,7 +408,7 @@ class CommentPage extends Kirby\Cms\Page
         return in_array($this->content()->status(), ['listed', 'unlisted']) === false;
     }
 
-    public function writeContent(array $data, string $languageCode = null): bool
+    public function writeContent(array $data, string|null $languageCode = null): bool
     {
         unset($data['title']);
 

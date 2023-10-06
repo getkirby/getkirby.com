@@ -14,25 +14,25 @@ Text:
 
 ```yaml "/site/blueprints/pages/events.yml"
 title: Events
-preset: pages
 icon: 📅
 
 options:
-  url: false
-  status: false
+  changeSlug: false
+  changeStatus: false
   delete: false
 
-drafts:
-  extends: sections/events
-  label: Unpublished events
+sections:
+  drafts:
+    extends: sections/events
+    label: Unpublished events
 
-unlisted:
-  extends: sections/events
-  label: Unlisted events
+  unlisted:
+    extends: sections/events
+    label: Unlisted events
 
-listed:
-  extends: sections/events
-  label: Published events
+  listed:
+    extends: sections/events
+    label: Published events
 ```
 
 ### Predefined section for reusage
@@ -59,33 +59,39 @@ Make sure your events page isn't a draft anymore, otherwise the `site.find("even
 
 ```yaml "/site/blueprints/pages/event.yml"
 title: Event
-preset: page
-pages: false
 icon: 📅
 num: "{{ page.from.toDate('Ymd') }}"
 
-fields:
-  from:
-    label: Start
-    type: date
-    width: 1/2
-    default: today
-  to:
-    label: End
-    type: date
-    width: 1/2
-    default: today + 1day
-  location:
-    label: Location
-    type: text
-    width: 1/2
-  link:
-    label: Link
-    type: url
-    width: 1/2
-  text:
-    label: Description
-    type: textarea
+columns:
+  main:
+    width: 2/3
+    fields:
+      from:
+        label: Start
+        type: date
+        width: 1/2
+        default: today
+      to:
+        label: End
+        type: date
+        width: 1/2
+        default: today + 1day
+      location:
+        label: Location
+        type: text
+        width: 1/2
+      link:
+        label: Link
+        type: url
+        width: 1/2
+      text:
+        label: Description
+        type: textarea
+  sidebar:
+    width: 1/3
+    sections:
+      files:
+        type: files
 ```
 
 ### Result
