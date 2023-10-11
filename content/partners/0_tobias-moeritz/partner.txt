@@ -54,7 +54,7 @@ Kirby CMS enables me to develop exceptional, scalable websites that can be tailo
 
 My approach to most Kirby sites is to provide the most flexibility needed by utilizing the Blocks or Layout editor for most pages, connected with a Content-first strategy that offer a flexible way to edit structured content. With its plugin system, I can take the extra mile and extend Kirby with custom functionality, connect your site to third-parties or make the editing experience just a little bit better.
 
-Want a technical deep-dive? Take a look at [my Kirby Baukasten starterkit](https://github.com/coralic/kirby-baukasten), which serves as the battle-tested foundation for all of my projects.
+Want a technical deep-dive? Take a look at [my Kirby Baukasten starterkit](https://github.com/tobimori/kirby-baukasten), which serves as the battle-tested foundation for all of my projects.
 
 ## Say hi!
 Interested in working with me? Or just a Nigerian prince that wants to make me rich? Send me a message at [kirby@moeritz.io](mailto:kirby@moeritz.io).
