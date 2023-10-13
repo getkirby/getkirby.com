@@ -21,7 +21,7 @@ Text:
 
 Using Kirby headless can have many benefits, from security & performance to integrating content into apps and other systems. 
 
-This guide will explain how to set Kirby up for headless use on a basic level. This is a pre-curser guide before you move on to pulling data into another system.
+This guide will explain how to set Kirby up for headless use on a basic level. This is a pre-cursor guide before you move on to pulling data into another system.
 
 ## Assumptions
 
