@@ -166,6 +166,7 @@ With options, you can control all the file actions that should or should not be 
 | Option | Value | Added in |
 | ------ | ----- | -------- |
 | `changeName` | `true`/`false` | |
+| `changeTemplate` | `true`/`false` | |
 | `delete` | `true`/`false` | |
 | `read` | `true`/`false` | Kirby 3.4.0 |
 | `replace` | `true`/`false` | |
