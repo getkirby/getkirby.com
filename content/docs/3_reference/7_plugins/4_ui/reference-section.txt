@@ -1,4 +1,4 @@
-Title: UI Kit
+Title: Panel UI
 
 ----
 
