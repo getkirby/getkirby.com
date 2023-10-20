@@ -1,0 +1,5 @@
+Title: PHP end of life
+
+----
+
+Link: docs/guide/security#secure-your-server__use-the-latest-stable-php-version

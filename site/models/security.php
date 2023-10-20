@@ -30,6 +30,11 @@ class SecurityPage extends Page
 		], true);
 	}
 
+	public function php()
+	{
+		return parent::php()->yaml();
+	}
+
 	protected function replace(Field $field, array $data = [])
 	{
 		$noVulns = null;

@@ -155,9 +155,9 @@
 
         <h4 class="mb-3" style="color: var(--color-purple-400)">Example roadmap</h4>
         <ul>
-          <li>4.0.0: late summer 2023</li>
-          <li>5.0.0: late summer 2024</li>
-          <li>6.0.0: late summer 2025</li>
+          <li>4.0.0: autumn 2023</li>
+          <li>5.0.0: autumn 2024</li>
+          <li>6.0.0: autumn 2025</li>
         </ul>
       </div>
     </div>

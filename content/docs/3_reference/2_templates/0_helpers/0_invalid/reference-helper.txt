@@ -16,7 +16,7 @@ $rules = [
   'fname'    => ['required', 'minLength' => 3],
   'lname'    => ['required', 'maxLength' => 30],
   'email'    => ['required', 'email'],
-  'gender'   => ['in', [['male', 'female', 'non-binary', 'not specified']]]
+  'gender'   => ['in' => [['male', 'female', 'non-binary', 'not specified']]]
 ];
 
 $messages = [
