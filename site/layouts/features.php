@@ -41,9 +41,9 @@
 									'icon' => 'download'
 								],
 								[
-									'text'  => 'Guide',
+									'text'  => 'Docs',
 									'link'  => '/docs/guide',
-									'icon'  => 'flash',
+									'icon'  => 'book',
 									'style' => 'outlined'
 								]
 							]

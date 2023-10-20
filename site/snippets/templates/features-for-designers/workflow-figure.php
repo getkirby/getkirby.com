@@ -24,7 +24,7 @@
   left: 100%;
 }
 .workflow svg * {
-  stroke: var(--color-gray-400);
+  fill: var(--color-gray-400);
 }
 </style>
 
@@ -37,7 +37,7 @@
   </li>
   <li style="margin-left: 60%">
     <figure>
-      <?= image('paper.svg')->read() ?>
+      <?= image('pen.svg')->read() ?>
       <figcaption class="badge" style="color: var(--color-blue-400)">Concept</figaption>
     </figure>
   </li>
@@ -67,7 +67,7 @@
   </li>
   <li style="margin-left: 60%">
     <figure>
-      <?= image('browser.svg')->read() ?>
+      <?= image('rocket.svg')->read() ?>
       <figcaption class="badge" style="color: var(--color-yellow-300)">Shipping</figaption>
     </figure>
   </li>

@@ -18,7 +18,7 @@ button {
   font-size: var(--text-sm);
   color: var(--btn-color);
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 1.5px solid transparent;
   border-radius: var(--rounded-xs);
   font-family: var(--font-mono);
   white-space: nowrap;

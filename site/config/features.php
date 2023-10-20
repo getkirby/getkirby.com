@@ -23,7 +23,7 @@ return [
 	],
 	'languages' => [
 		'text' => 'Languages',
-		'icon' => 'outline/globe',
+		'icon' => 'outline/translate',
 		'link' => '/features/creators#internationalisation'
 	],
 	'users' => [
@@ -83,12 +83,12 @@ return [
 	],
 	'authentication' => [
 		'text' => 'Authentication',
-		'icon' => 'outline/users',
+		'icon' => 'outline/fingerprint',
 		'link' => '/docs/guide/authentication'
 	],
 	'virtual-pages' => [
 		'text' => 'Virtual pages',
-		'icon' => 'outline/360deg',
+		'icon' => 'outline/virtual',
 		'link' => '/docs/guide/virtual-pages'
 	],
 	'hooks' => [
