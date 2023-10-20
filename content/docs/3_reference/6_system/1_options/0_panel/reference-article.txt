@@ -171,7 +171,6 @@ return [
 ];
 ```
 
-<since v="3.9.6.1">
 ## Allow frame embedding
 
 The Panel sets the `Content-Security-Policy: frame-ancestors 'none'` header by default. This protects against clickjacking attacks by preventing embedding in frames on other pages.
@@ -196,4 +195,3 @@ return [
 <warning>
 Only allow embedding if you fully control the domains you allowlisted. Otherwise your site may be vulnerable against clickjacking attacks. Read more at [OWASP](https://owasp.org/www-community/attacks/Clickjacking).
 </warning>
-</since>

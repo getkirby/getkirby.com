@@ -5,6 +5,7 @@ Text:
 ```php
 // single attributes
 Xml::attr('viewBox', '0 0 100 100'); // viewBox="0 0 100 100"
+Xml::attr(['selected']);             // selected="selected"
 Xml::attr('selected', true);         // selected="selected"
 Xml::attr('class', ['a', 'b']);      // class="a b"
 
@@ -19,7 +20,3 @@ Xml::attr(['viewBox' => '0 0 100 100', 'selected']);         // viewBox="0 0 100
 // multiple attributes without sorting
 Xml::attr(['viewBox' => '0 0 100 100', 'stroke' => 'red'], false); // viewBox="0 0 100 100" stroke="red"
 ```
-
-<since v="3.9.0">
-Support for the `Xml::attr(['selected'])` syntax without value was added in Kirby 3.9.0.
-</since>

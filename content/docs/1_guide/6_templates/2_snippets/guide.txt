@@ -143,7 +143,6 @@ With the above code, `/site/snippets/mysnippet.php` will receive a title variabl
 <?= $title ?>
 ```
 
-<since v="3.9.0">
 <info>
 Snippets always receive the following variables from Kirby:
 
@@ -154,7 +153,6 @@ Snippets always receive the following variables from Kirby:
 
 You can read more about the slots feature below.
 </info>
-</since>
 
 ### Real life example: list of blog articles
 
@@ -199,7 +197,6 @@ Because the variable name inside the template and snippet is the same, we can us
 
 The `compact()` function takes the variable values from the current scope and compacts them into an array. So it's the same as writing `['article' => $article]`.
 
-<since v="3.9.0">
 ## Passing slots to snippets
 
 (screencast: https://www.youtube.com/watch?v=ASmy8mcBWqg title: Snippets with slots text: Check out our extensive screencast to learn more about snippets with slots.)
@@ -366,7 +363,6 @@ You can nest snippets (with slots and/or data) inside slots of other snippets:
   <?php endslot() ?>
 <?php endsnippet() ?>
 ```
-</since>
 
 ## Snippet alternatives
 
@@ -390,7 +386,6 @@ The (helper: snippet) function has a third, optional parameter of type `boolean`
 $emailBody = snippet('email', $data, true);
 ```
 
-<since v="3.9.0">
 If you use the `slots` parameter, the `snippet()` helper always returns the snippet object. In this case you can use the `$snippet->render()` method to pass the slots to the snippet, render the snippets contents and store them in a variable:
 
 ```php
@@ -398,7 +393,6 @@ $emailBody = snippet('email', $data, slots: true)->render(slots: [
   'offer' => 'We have prepared a special deal just for you...'
 ]);
 ```
-</since>
 
 ## More information
 
