@@ -1,5 +1,0 @@
-Text:
-
-<warning>
-This old icon name will be replaced with a clearer alternative in an upcoming version. Use (link: docs/reference/panel/icons/text-left text: `text-left`) instead.
-</warning>

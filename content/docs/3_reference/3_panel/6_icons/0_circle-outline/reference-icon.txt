@@ -1,0 +1,1 @@
+Deprecated: 4.0.0|This old icon name will be removed in an upcoming version. Use (link: docs/reference/panel/icons/circle text: `circle`) instead.
