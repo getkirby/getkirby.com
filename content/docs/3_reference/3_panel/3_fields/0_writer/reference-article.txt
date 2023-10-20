@@ -67,6 +67,10 @@ fields:
 
 (image: writer.png)
 
+<info>
+You can extend Kirby to (link: docs/reference/plugins/extensions/writer-marks-nodes text: include custom marks).
+</info>
+
 ## Format/node options
 
 Apart from paragraph nodes, the writer field supports headings and lists. You can fine-tune the writer field from your blueprint by defining the available block formats (nodes).
@@ -84,6 +88,10 @@ fields:
 ```
 
 (image: writer-extended.png)
+
+<info>
+You can extend Kirby to (link: docs/reference/plugins/extensions/writer-marks-nodes text: include custom nodes).
+</info>
 
 ## How to use in templates/snippets
 

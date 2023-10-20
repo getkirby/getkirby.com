@@ -1,0 +1,100 @@
+Title: Writer marks/nodes
+
+----
+
+Since: 4.0.0
+
+----
+Text:
+
+The Writer is our rich-text editor powering the (link: docs/reference/panel/fields/writer text: writer field) and (link: docs/reference/panel/fields/list text: list field) but also the (link: docs/reference/panel/blocks/text text: text) and (link: docs/reference/panel/blocks/heading text: heading blocks), among others. In your plugin, you can add custom marks and nodes to enhance and customize the editing experience of those fields and blocks.
+
+<info>
+The Writer is built on top of (link: https://prosemirror.net/ text: ProseMirror). When diving deeper into your project, you will probably also need to consult the ProseMirror documentation for all details.
+</info>
+
+## Custom marks
+A mark is a "a piece of information that can be attached to a node, such as it being emphasized, in code font, or a link" – e.g. our default marks include bold, strike, sub, sup etc.
+
+A custom mark automatically extends our (link: https://github.com/getkirby/kirby/blob/main/panel/src/components/Forms/Writer/Mark.js text: JavaScript `Mark` class) that functions as thin layer over the raw ProseMirror implementation. You can start building your mark from there:
+
+```js "/site/plugins/your-plugin/index.js"
+window.panel.plugin("your/plugin", {
+  writerMarks: {
+    highlight: {
+      get button() {
+        return {
+          icon: "palette",
+          label: window.panel.$t("color")
+        }
+      },
+
+      commands() {
+        return () => this.toggle()
+      },
+
+      get name() {
+        return "highlight"
+      },
+
+      get schema() {
+        return {
+          parseDOM: [{ tag: "mark" }],
+          toDOM: () => ["mark", 0]
+        }
+      }
+    }
+  }
+});
+```
+
+You can also take a look at the (link: https://github.com/getkirby/kirby/blob/main/panel/src/components/Forms/Writer/Marks text: implementation of the default marks).
+
+## Custom nodes
+A node represents some structured content in ProseMirror's document tree. Often this is rather seen as blocks, where marks are rather inline. Our default marks include the normal text paragraph, unordered/ordered lists, headings etc.
+
+A custom node automatically extends our (link: https://github.com/getkirby/kirby/blob/main/panel/src/components/Forms/Writer/Node.js text: JavaScript `Node` class) that functions as thin layer over the raw ProseMirror implementation. You can start building your node from there:
+
+```js "/site/plugins/your-plugin/index.js"
+window.panel.plugin("your/plugin", {
+  writerNodes: {
+    quote: {
+      get button() {
+        return {
+          icon: "quote",
+          label: window.panel.$t("field.blocks.quote.name"),
+        };
+      }
+
+      commands({ type, utils }) {
+        return () => utils.toggleWrap(type);
+      }
+
+      get name() {
+        return "quote";
+      }
+
+      get schema() {
+        return {
+          content: "block+",
+          group: "block",
+          defining: true,
+          draggable: false,
+          parseDOM: [
+            {
+              tag: "blockquote"
+            }
+          ],
+          toDOM: () => ["blockquote", 0]
+        };
+      }
+    }
+  }
+});
+```
+
+You can also take a look at the (link: https://github.com/getkirby/kirby/blob/main/panel/src/components/Forms/Writer/Nodes text: implementation of the default nodes).
+
+## Using custom marks/nodes in your fields
+
+Learn how to (link: docs/reference/panel/fields/writer#choosing-available-marks text: activate your custom mark or node). This also works for blocks, when you extend or overwrite e.g. the (link: docs/reference/panel/blocks/text#default-files__blueprint text: text blocks' blueprint) to add the right options to the block's text field (which is a writer type field by default).
