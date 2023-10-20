@@ -5,15 +5,9 @@ use Kirby\Template\Template;
 
 class ReleasePage extends Page
 {
-
-	public function contentFileName(string|null $languageCode = null): string
+	public function template(): Template
 	{
-		return 'release';
-	}
-
-	public function intendedTemplate(): Template
-	{
-		return $this->intendedTemplate ??= $this->kirby()->template('release-' . $this->content()->version());
+		return $this->template ??= $this->kirby()->template('release-' . $this->content()->version());
 	}
 
 	public function url($options = null): string
