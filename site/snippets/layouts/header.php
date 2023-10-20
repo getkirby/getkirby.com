@@ -1,9 +1,9 @@
 <div class="mb-6">
   <div class="container">
     <?php snippet('layouts/topbar', [
-      'icon'   => '🌱',
-      'title'  => 'The next big step: Kirby 4 Beta',
-      'button' => 'Learn more',
+      'icon'   => '🚀',
+      'title'  => 'A new era: Kirby 4',
+      'button' => 'Get to know',
       'link'   => '/releases/4.0',
       'active' => $page->is('releases/4-0')
     ]) ?>
