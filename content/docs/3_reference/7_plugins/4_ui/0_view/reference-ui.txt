@@ -1,3 +1,0 @@
-Text:
-
-<info>View components should never be nested</info>

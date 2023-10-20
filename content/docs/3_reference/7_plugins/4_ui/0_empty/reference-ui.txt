@@ -1,9 +1,0 @@
-Text:
-
-## Events
-
-You can bind any events to the component
-
-```html
-<k-empty icon="image" @click="addFirst">No images yet</k-empty>
-```

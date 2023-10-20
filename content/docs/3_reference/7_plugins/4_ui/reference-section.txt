@@ -1,0 +1,12 @@
+Title: UI Kit
+
+----
+
+Intro:
+
+Our Panel is based on Vue and has its own UI component kit. You can use and extend all our components in your Panel plugins for a super fast and consistent developer experience.
+
+----
+
+Text:
+
