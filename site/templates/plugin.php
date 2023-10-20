@@ -112,7 +112,7 @@
   }
 
   .plugin-links .plugin-paid {
-    background: var(--color-purple-200);
+    background: var(--color-purple-300);
   }
 </style>
 

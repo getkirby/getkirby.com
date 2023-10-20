@@ -1,22 +1,6 @@
 :root {
-  --color-backdrop: rgba(0,0,0, .6);
-  --color-black: #000;
-  --color-light: var(--color-gray-200);
-  --color-white: #fff;
-
-  --container-padding: var(--spacing-4);
-
-  --color-gray-100: #F7F7F7;
-  --color-gray-200: #EFEFEF;
-  --color-gray-300: #DDDDDD;
-  --color-gray-400: #CCCCCC;
-  --color-gray-500: #999999;
-  --color-gray-600: #777777;
-  --color-gray-700: #595959;
-  --color-gray-800: #3E3E3E;
-  --color-gray-900: #292929;
-
   --container: 90rem;
+  --container-padding: var(--spacing-4);
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-mono: "SFMono-Regular", Consolas, Liberation Mono, Menlo, Courier, monospace;

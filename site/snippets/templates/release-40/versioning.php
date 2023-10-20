@@ -14,7 +14,7 @@
   color: var(--color-red-500);
 }
 .diff-table.new {
-  color: var(--color-green-400);
+  color: var(--color-green-500);
 }
 
 .diff-table th,
@@ -146,14 +146,14 @@
     </div>
     <div class="release-code-box p-12 font-mono color-white">
       <div>
-        <h4 class="mb-3" style="color: var(--color-purple-400)">Key points</h4>
+        <h4 class="mb-3" style="color: var(--color-purple-500)">Key points</h4>
         <ul class="mb-12">
           <li>Kirby will follow <a class="underline" href="https://semver.org/">semantic versioning</a></li>
           <li>Major versions will no longer be automatically bound to paid upgrades</li>
           <li>Major versions will be released on a yearly cycle to bring continuity and planning security.</li>
         </ul>
 
-        <h4 class="mb-3" style="color: var(--color-purple-400)">Example roadmap</h4>
+        <h4 class="mb-3" style="color: var(--color-purple-500)">Example roadmap</h4>
         <ul>
           <li>4.0.0: autumn 2023</li>
           <li>5.0.0: autumn 2024</li>

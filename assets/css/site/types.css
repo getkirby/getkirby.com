@@ -5,28 +5,28 @@
   text-decoration: none !important;
 }
 .type.type-string {
-  background: var(--color-green-300);
+  background: var(--color-green-400);
 }
 .type.type-int {
-  background: var(--color-orange-300);
+  background: var(--color-orange-400);
 }
 .type.type-float,
 .type.type-number {
-  background: var(--color-red-300);
+  background: var(--color-red-400);
 }
 .type.type-bool,
 .type.type-boolean {
-  background: var(--color-purple-300);
+  background: var(--color-purple-400);
 }
 .type.type-array {
-  background: var(--color-aqua-300);
+  background: var(--color-aqua-400);
 }
 .type.type-object,
 .type.type-class {
-  background: var(--color-yellow-300);
+  background: var(--color-yellow-400);
 }
 .type.type-method {
-  background: var(--color-blue-300);
+  background: var(--color-blue-400);
 }
 .box--info .type.type-method {
   background: var(--color-blue-400);

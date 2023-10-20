@@ -1,9 +1,9 @@
 :root {
   --box-default: var(--color-light);
-  --box-alert: var(--color-red-300);
-  --box-info: var(--color-blue-300);
-  --box-success: var(--color-green-300);
-  --box-warning: var(--color-orange-300);
+  --box-alert: var(--color-red-400);
+  --box-info: var(--color-blue-400);
+  --box-success: var(--color-green-400);
+  --box-warning: var(--color-orange-400);
 }
 
 .box {

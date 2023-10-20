@@ -2,8 +2,8 @@
 
 <style>
 :root {
-  --box-info: var(--color-blue-300);
-  --box-warning: var(--color-yellow-300);
+  --box-info: var(--color-blue-400);
+  --box-warning: var(--color-yellow-400);
 }
 
 </style>

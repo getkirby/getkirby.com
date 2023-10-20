@@ -55,7 +55,7 @@
   }
 
   .packages .plus {
-    color: var(--color-purple-700);
+    color: var(--color-purple-600);
   }
 
   .packages .empty {

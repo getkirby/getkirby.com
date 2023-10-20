@@ -97,19 +97,19 @@
   visibility: hidden;
 }
 .search-area[data-area="guide"] {
-  --area-color: var(--color-yellow-400);
+  --area-color: var(--color-yellow-500);
 }
 .search-area[data-area="reference"] {
-  --area-color: var(--color-blue-400);
+  --area-color: var(--color-blue-500);
 }
 .search-area[data-area="cookbook"] {
-  --area-color: var(--color-purple-400);
+  --area-color: var(--color-purple-500);
 }
 .search-area[data-area="plugin"] {
-  --area-color: var(--color-aqua-400);
+  --area-color: var(--color-aqua-500);
 }
 .search-area[data-area="kosmos"] {
-  --area-color: var(--color-red-400);
+  --area-color: var(--color-red-500);
 }
 
 .search-result {

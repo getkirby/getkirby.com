@@ -1,12 +1,12 @@
 .filesystem {
   --border: #3c3c3c;
-  --icon-aqua: var(--color-aqua-400);
-  --icon-blue: var(--color-blue-400);
-  --icon-green: var(--color-green-400);
-  --icon-orange: var(--color-orange-400);
-  --icon-purple: var(--color-purple-400);
-  --icon-red: var(--color-red-400);
-  --icon-yellow: var(--color-yellow-400);
+  --icon-aqua: var(--color-aqua-500);
+  --icon-blue: var(--color-blue-500);
+  --icon-green: var(--color-green-500);
+  --icon-orange: var(--color-orange-500);
+  --icon-purple: var(--color-purple-500);
+  --icon-red: var(--color-red-500);
+  --icon-yellow: var(--color-yellow-500);
   --gradient: linear-gradient(var(--border), var(--border));
   padding: var(--spacing-4);
   background: var(--color-black);
