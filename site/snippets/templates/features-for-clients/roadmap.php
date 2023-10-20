@@ -40,11 +40,11 @@
     'text'  => 'We know how important it is that you can trust your content management system not to vanish the next day. That’s why we build our business on a sustainable model with a reliable roadmap. Kirby has been around and profitable for over a decade. We plan for the next decade.'
   ]) ?>
   <ul class="roadmap flex justify-between mb-24">
-    <li style="flex-grow: 0.75">
+    <li style="flex-grow: 1">
       <p class="h2">beta</p>
       <p class="font-mono text-xs">early 2011</p>
     </li>
-    <li style="flex-grow: 1.5">
+    <li style="flex-grow: 2">
       <p class="h2">1.0</p>
       <p class="font-mono text-xs">January 2012</p>
     </li>
