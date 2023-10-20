@@ -10,3 +10,6 @@ Our Panel is based on Vue and has its own UI component kit. You can use and exte
 
 Text:
 
+<info>
+We're relaunching the UI docs in a new way and will publish detailed information soon on how to get your hands on them.
+</info>

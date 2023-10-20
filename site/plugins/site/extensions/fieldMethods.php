@@ -9,11 +9,6 @@ return [
 	'shortUrl' => function ($field) {
 		return $field->value(fn ($value) => Url::short(Url::base($value)));
 	},
-	'stripBreaks' => function ($field) {
-		return $field->value(
-			fn ($value) => preg_replace("$\r|\n$", ' ', $value ?? '')
-		);
-	},
 	'stripGlossary' => function ($field) {
 		return $field->value(
 			fn ($value) => str_replace('(glossary:', '(plain:',  $value ?? '')
