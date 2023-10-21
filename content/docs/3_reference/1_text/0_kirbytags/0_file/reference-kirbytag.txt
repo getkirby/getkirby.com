@@ -10,7 +10,21 @@ Intro: Creates a download link for any file
 
 Text:
 
-## Examples and options
+| Attribute | Description | Default |
+|---- | ---- | ---- |
+| class | The class which is added to file link | `null` |
+| download | The download attribute that is added to file link | `true` |
+| rel | The rel attribute that is added to file link | `null` |
+| target | The target attribute that is added to file link | `null` |
+| text | The text that is added to file link | `null` |
+| title | The title attribute that is added to file link | `null` |
+
+### Attribute defaults from config
+
+You can customize the defaults of this tag's attributes via the (link: docs/reference/system/options/kirbytext#file text: `kirbytext.file` config option).
+
+
+## Examples
 
 ### Download link with filename as text
 

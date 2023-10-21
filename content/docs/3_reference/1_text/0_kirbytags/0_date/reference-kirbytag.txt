@@ -10,7 +10,8 @@ Intro: Adds a dynamic date to the text
 
 Text:
 
-## Examples and options:
+
+## Examples and options
 
 ### Current year
 

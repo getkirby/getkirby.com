@@ -10,7 +10,26 @@ Intro: Embeds an image
 
 Text:
 
-## Examples and options:
+| Attribute | Description | Default |
+|---- | ---- | ---- |
+| alt | The alt attribute that is added to img element | `null` |
+| caption | The caption | `null` |
+| class | The class which is added to figure element | `null` |
+| height | The height which is added to img element | `null` |
+| imgclass | The class which is added to img element | `null` |
+| linkclass | The class which is added to link element | `null` |
+| rel | The rel attribute that is added to link element | `null` |
+| srcset | The srcset attribute that is added to link element | `null` |
+| target | The target attribute that is added to link element | `null` |
+| title | The title attribute that is added to img element | `null` |
+| width | The height which is added to img element | `null` |
+
+### Attribute defaults from config
+
+You can customize the defaults of this tag's attributes via the (link: docs/reference/system/options/kirbytext#image text: `kirbytext.image` config option).
+
+
+## Examples
 
 ### Image of the current page
 
@@ -108,3 +127,18 @@ Text:
 (\image: myawesomepicture.jpg width: 500 height: 300)
 ```
 
+<since v="4.0.0">
+### Image with `srcset` with absolut sizes
+
+```kirbytext
+(\image: foo.jpg srcset: 200, 300)
+```
+
+### Image with `srcset` from a config srcset name
+
+Use srcset defaults you defined in the (link: docs/reference/system/options/thumbs#srcsets text: `thumbs` config option):
+
+```kirbytext
+(\image: foo.jpg srcset: album)
+```
+</since>

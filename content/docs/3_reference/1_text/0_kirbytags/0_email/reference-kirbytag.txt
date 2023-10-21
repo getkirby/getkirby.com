@@ -10,9 +10,22 @@ Intro: Creates an email address link
 
 Text:
 
-Kirby will automatically encode your email addresses, so they won't be that easily parsed and misused by spam bots.
+| Attribute | Description | Default |
+|---- | ---- | ---- |
+| class | The class which is added to email link | `null` |
+| rel | The rel attribute that is added to email link | `null` |
+| target | The target attribute that is added to email link | `null` |
+| text | The text that is added to email link | `null` |
+| title | The title attribute that is added to email link | `null` |
 
-## Examples and options
+<success>Kirby will automatically encode your email addresses, so they won't be that easily parsed and misused by spam bots.</success>
+
+### Attribute defaults from config
+
+You can customize the defaults of this tag's attributes via the (link: docs/reference/system/options/kirbytext#email text: `kirbytext.email` config option).
+
+
+## Examples
 
 ### Email without link text
 

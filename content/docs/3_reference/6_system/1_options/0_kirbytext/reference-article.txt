@@ -10,25 +10,18 @@ Text:
 return [
   'kirbytext' => [
     'email' => [
-      'class' => 'email',
-      'rel' => 'nofollow',
+      'class'  => 'email',
+      'rel'    => 'nofollow',
       'target' => '_blank',
-      'text' => 'Write Us',
-      'title' => 'Email'
+      'text'   => 'Write Us',
+      'title'  => 'Email'
     ]
   ]
 ];
 ```
 
-### Options
+See the (link: docs/reference/text/kirbytags/email text: email tag's reference) for details.
 
-| Attribute | Description | Default |
-|---- | ---- | ---- |
-| class | The default class which is added to email link | `null` |
-| rel | The default rel attribute that is added to email link | `null` |
-| target | The default target attribute that is added to email link | `null` |
-| text | The default text that is added to email link | `null` |
-| title | The default title attribute that is added to email link | `null` |
 
 ## &#x28;file: ..&#x29;
 
@@ -36,27 +29,19 @@ return [
 return [
   'kirbytext' => [
     'file' => [
-      'class' => 'file',
+      'class'    => 'file',
       'download' => true,
-      'rel' => 'nofollow',
-      'target' => '_blank',
-      'text' => 'Download',
-      'title' => 'Filename'
+      'rel'      => 'nofollow',
+      'target'   => '_blank',
+      'text'     => 'Download',
+      'title'    => 'Filename'
     ]
   ]
 ];
 ```
 
-### Options
+See the (link: docs/reference/text/kirbytags/file text: file tag's reference) for details.
 
-| Attribute | Description | Default |
-|---- | ---- | ---- |
-| class | The default class which is added to file link | `null` |
-| download | The default download attribute that is added to file link | `true` |
-| rel | The default rel attribute that is added to file link | `null` |
-| target | The default target attribute that is added to file link | `null` |
-| text | The default text that is added to file link | `null` |
-| title | The default title attribute that is added to file link | `null` |
 
 ## &#x28;gist: ..&#x29;
 
@@ -70,11 +55,8 @@ return [
 ];
 ```
 
-### Options
+See the (link: docs/reference/text/kirbytags/gist text: gist tag's reference) for details.
 
-| Attribute | Description | Default |
-|---- | ---- | ---- |
-| file | Load a specific file as default | `null` |
 
 ## &#x28;image: ..&#x29;
 
@@ -82,35 +64,22 @@ return [
 return [
   'kirbytext' => [
     'image' => [
-      'alt' => 'This is an awesome picture',
-      'caption' => 'I took this image in the park',
-      'class' => 'floated',
-      'height' => 600,
-      'imgclass' => 'myimage',
+      'alt'       => 'This is an awesome picture',
+      'caption'   => 'I took this image in the park',
+      'class'     => 'floated',
+      'height'    => 600,
+      'imgclass'  => 'myimage',
       'linkclass' => 'myimage',
-      'rel' => 'gallery',
-      'target' => '_blank',
-      'title' => 'This is an awesome picture ',
-      'width' => 800,
+      'rel'       => 'gallery',
+      'target'    => '_blank',
+      'title'     => 'This is an awesome picture ',
+      'width'     => 800,
     ]
   ]
 ];
 ```
 
-### Options
-
-| Attribute | Description | Default |
-|---- | ---- | ---- |
-| alt | The default alt attribute that is added to img element | `null` |
-| caption | The default caption | `null` |
-| class | The default class which is added to figure element | `null` |
-| height | The default height which is added to img element | `null` |
-| imgclass | The default class which is added to img element | `null` |
-| linkclass | The default class which is added to link element | `null` |
-| rel | The default rel attribute that is added to link element | `null` |
-| target | The default target attribute that is added to link element | `null` |
-| title | The default title attribute that is added to img element | `null` |
-| width | The default height which is added to img element | `null` |
+See the (link: docs/reference/text/kirbytags/image text: image tag's reference) for details.
 
 ## &#x28;link: ..&#x29;
 
@@ -118,29 +87,19 @@ return [
 return [
   'kirbytext' => [
     'link' => [
-      'class' => 'mylink',
-      'lang' => 'de',
-      'rel' => 'nofollow',
-      'role' => 'button',
+      'class'  => 'mylink',
+      'lang'   => 'de',
+      'rel'    => 'nofollow',
+      'role'   => 'button',
       'target' => '_blank',
-      'title' => 'Wikipedia',
-      'text' => 'Wikipedia',
+      'title'  => 'Wikipedia',
+      'text'   => 'Wikipedia',
     ]
   ]
 ];
 ```
 
-### Options
-
-| Attribute | Description | Default |
-|---- | ---- | ---- |
-| class | The default class which is added to link element | `null` |
-| lang | The default language for link to a page in another language (only on multi-language sites) | `null` |
-| rel | The default rel attribute that is added to link element | `null` |
-| role | The default role attribute that is added to link element | `null` |
-| target | The default target attribute that is added to link element | `null` |
-| title | The default title attribute that is added to link element | `null` |
-| text | The default text that is added to link element | `null` |
+See the (link: docs/reference/text/kirbytags/link text: link tag's reference) for details.
 
 ## &#x28;tel: ..&#x29;
 
@@ -149,48 +108,16 @@ return [
   'kirbytext' => [
     'tel' => [
       'class' => 'phone',
-      'rel' => 'nofollow',
-      'text' => 'call us',
+      'rel'   => 'nofollow',
+      'text'  => 'call us',
       'title' => 'This is my phone number',
     ]
   ]
 ];
 ```
 
-### Options
+See the (link: docs/reference/text/kirbytags/tel text: tel tag's reference) for details.
 
-| Attribute | Description | Default |
-|---- | ---- | ---- |
-| class | The default class which is added to link element | `null` |
-| rel | The default rel attribute that is added to link element | `null` |
-| title | The default title attribute that is added to link element | `null` |
-| text | The default text that is added to link element | `null` |
-
-## &#x28;twitter: ..&#x29;
-
-```php
-return [
-  'kirbytext' => [
-    'twitter' => [
-      'class' => 'twitter',
-      'rel' => 'nofollow',
-      'target' => '_blank',
-      'text' => 'follow us on Twitter',
-      'title' => 'follow us on Twitter',
-    ]
-  ]
-];
-```
-
-### Options
-
-| Attribute | Description | Default |
-|---- | ---- | ---- |
-| class | The default class which is added to link element | `null` |
-| rel | The default rel attribute that is added to link element | `null` |
-| target | The default target attribute that is added to link element | `null` |
-| title | The default title attribute that is added to link element | `null` |
-| text | The default text that is added to link element | `null` |
 
 ## &#x28;video: ..&#x29;
 
@@ -199,16 +126,16 @@ return [
   'kirbytext' => [
     'video' => [
       'autoplay' => true,
-      'caption' => 'This is a really nice video',
+      'caption'  => 'This is a really nice video',
       'controls' => true,
-      'class' => 'video',
-      'height' => 200,
-      'loop' => true,
-      'muted' => true,
-      'poster' => 'cover.jpg',
-      'preload' => 'auto',
-      'style' => 'border: 3px solid red;'
-      'width' => 300,
+      'class'    => 'video',
+      'height'   => 200,
+      'loop'     => true,
+      'muted'    => true,
+      'poster'   => 'cover.jpg',
+      'preload'  => 'auto',
+      'style'    => 'border: 3px solid red;'
+      'width'    => 300,
 
       'options'  => [
         'youtube' => [
@@ -220,19 +147,10 @@ return [
 ];
 ```
 
-### Options
+See the (link: docs/reference/text/kirbytags/video text: video tag's reference) for details.
+
+In addition to the regular attributes, the config allows to specify the `options` default attribute:
 
 | Attribute | Description | Default |
 |---- | ---- | ---- |
-| autoplay | The default autoplay which is added to video element (only for local and remote videos) | `false` |
-| caption | The default caption | `null` |
-| controls | The default controls which is added to video element (only for local and remote videos) | `true` |
-| class | The default class which is added to iframe and video elements | `video` |
-| height | The default height that is added to iframe and video elements | `null` |
-| loop | The default loop which is added to video element (only for local and remote videos) | `true` |
-| muted | The default muted which is added to video element (only for local and remote videos) | `true` |
-| poster | The default poster attribute specifies an image to be shown while the video is downloading (only for local and remote videos) | `true` |
-| preload | The default option that the video should be loaded when the page loads (only for local and remote videos) | `null` |
-| style | The default style that is added to iframe and video elements | `null` |
-| width | The default width that is added to iframe and video elements | `null` |
-| options | The default options for video providers | `[]` |
+| options | The options for video providers | `[]` |

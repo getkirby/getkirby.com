@@ -10,7 +10,16 @@ Intro: Embeds a GitHub Gist by URL
 
 Text:
 
-## Examples and options:
+| Attribute | Description | Default |
+|---- | ---- | ---- |
+| file | Load a specific file as default | `null` |
+
+### Attribute defaults from config
+
+You can customize the defaults of this tag's attributes via the (link: docs/reference/system/options/kirbytext#gist text: `kirbytext.gist` config option).
+
+
+## Examples
 
 ### Gist by URL
 

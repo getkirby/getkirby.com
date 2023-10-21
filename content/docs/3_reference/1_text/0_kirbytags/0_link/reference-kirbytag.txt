@@ -10,7 +10,23 @@ Intro: Creates a link
 
 Text:
 
-## Examples and options:
+
+| Attribute | Description | Default |
+|---- | ---- | ---- |
+| class | The class which is added to link element | `null` |
+| lang | The language for link to a page in another language (only on multi-language sites) | `null` |
+| rel | The rel attribute that is added to link element | `null` |
+| role | The role attribute that is added to link element | `null` |
+| target | The target attribute that is added to link element | `null` |
+| title | The title attribute that is added to link element | `null` |
+| text | The text that is added to link element | `null` |
+
+### Attribute defaults from config
+
+You can customize the defaults of this tag's attributes via the (link: docs/reference/system/options/kirbytext#link text: `kirbytext.link` config option).
+
+
+## Examples
 
 ### Link with link text
 
