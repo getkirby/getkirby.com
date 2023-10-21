@@ -2,6 +2,10 @@ Title: Response types
 
 ----
 
+Guide: routing
+
+----
+
 Intro: Routes can return different response types as listed below.
 
 ----
