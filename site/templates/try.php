@@ -64,7 +64,7 @@
         evaluate it as long as you need. How? <a class="color-black link" href="/docs/guide/quickstart">Get up and running …</a>
       </p>
 
-      <div class="columns shadow-2xl bg-light" style="--columns: 1; --columns-lg: 2; --gap: var(--spacing-2px)">
+      <div class="columns shadow-2xl bg-light overflow-hidden rounded" style="--columns: 1; --columns-lg: 2; --gap: var(--spacing-2px)">
         <article class="p-6 bg-white">
           <h2 class="font-bold mb-1">Starterkit</h2>
           <p class="mb-6">Fully annotated sample site for everyone who wants to learn about Kirby's capabilities. </p>

@@ -26,10 +26,10 @@ img {
 
 .border {
   position: relative;
-  border: 2px solid var(--color-black);
+  border: 1.5px solid var(--color-black);
 }
 .border-top {
-  border-top: 2px solid var(--color-black);
+  border-top: 1.5px solid var(--color-black);
 }
 
 .color-gray-400 {

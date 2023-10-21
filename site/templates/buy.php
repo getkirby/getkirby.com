@@ -7,7 +7,7 @@
       The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
     </h1>
 
-    <div class="pricing highlight bg-white shadow-xl">
+    <div class="pricing highlight bg-white shadow-xl rounded">
       <?php if ($banner) : ?>
         <div>
           <p class="mb-6"><?= $banner->text() ?></p>
@@ -59,7 +59,7 @@
 
   <section class="mb-42">
     <h2 class="h2 mb-6">Volume discounts</h2>
-    <div class="columns" style="--columns-md: 2; --columns: 4; --gap: var(--spacing-1)">
+    <div class="columns rounded overflow-hidden" style="--columns-md: 2; --columns: 4; --gap: var(--spacing-1)">
       <?php foreach ($discounts as $volume => $discount) : ?>
         <a class="block p-12 bg-light text-center" target="_blank" href="/buy/checkout/<?= $volume ?>" data-discount="<?= $discount ?>" data-volume="<?= $volume ?>">
           <article>

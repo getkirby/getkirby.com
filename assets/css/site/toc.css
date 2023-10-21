@@ -1,3 +1,7 @@
+.toc .badge {
+	border-radius: var(--rounded-sm);
+	border-end-start-radius: 0;
+}
 .toc ol {
   padding-top: var(--spacing-4);
   padding-left: var(--spacing-12);
