@@ -416,7 +416,33 @@ By default, the current page is being used as the parent to find children for th
 ```yaml
 parent: site.find("blog")
 ```
+<since v="4.0.0">
+### `query`
 
+The pages section supports a query option to filter the pages that are shown in a section using our (link: docs/guide/blueprints/introduction#query-language text: query string syntax). Manual sorting will be disabled for sections with a query.
+
+```yaml
+videoPosts:
+  type: pages
+  label: Video posts
+  query: page.childrenAndDrafts.filterBy('category', 'video')
+  template: article
+
+otherPosts:
+  type: pages
+  label: Other posts
+  query: page.childrenAndDrafts.filterBy('category', '!=', 'video')
+	template: article
+```
+The query option cannot only be used in the context of a single page, but you can also query the complete site index if that makes sense, for example in `site.yml`:
+
+```yaml
+siteIndex:
+	type: pages
+	query: site.index(true).notIn(['error'])
+	create: default
+```
+</since>
 ### Status
 
 You can filter the list of pages by their status. The available status values are
