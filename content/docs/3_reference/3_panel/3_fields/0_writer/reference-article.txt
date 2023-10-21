@@ -16,7 +16,7 @@ Text:
 
 (image: writer.png)
 
-## Example
+#### Example
 
 ```yaml
 fields:
@@ -29,20 +29,7 @@ fields:
 
 (field-options: writer)
 
-## Inline mode
-
-By default, the writer field will supports multiple paragraphs (`<p>`). In inline mode, hitting enter will create breaks instead of creating a new paragraph.
-
-```yaml
-fields:
-  text:
-    type: writer
-    inline: true
-```
-
-In `inline` mode, all nodes (see below) are disabled.
-
-## Choosing available marks
+## Marks
 
 The writer field supports the following marks by default:
 
@@ -53,6 +40,12 @@ The writer field supports the following marks by default:
 - `code`
 - `link`
 - `email`
+
+<since v="4.0.0">
+- `sub`
+- `sup`
+- `clear`
+</since>
 
 ```yaml
 fields:
@@ -71,7 +64,7 @@ fields:
 You can extend Kirby to (link: docs/reference/plugins/extensions/writer-marks-nodes text: include custom marks).
 </info>
 
-## Format/node options
+## Nodes
 
 Apart from paragraph nodes, the writer field supports headings and lists. You can fine-tune the writer field from your blueprint by defining the available block formats (nodes).
 
@@ -92,6 +85,60 @@ fields:
 <info>
 You can extend Kirby to (link: docs/reference/plugins/extensions/writer-marks-nodes text: include custom nodes).
 </info>
+
+<since v="4.0.0">
+## Toolbar
+
+The `toolbar` option allows you to customize the writer's toolbar:
+
+```yaml
+text:
+  type: writer
+  marks:
+    - bold
+    - italic
+    - link
+    - code
+  toolbar:
+    inline: false
+    marks:
+      - bold
+      - "|"
+      - link
+```
+
+- `inline` attaches the toolbar to the top of the field (instead of the floating pill style)
+- `marks` and `nodes` control which marks and nodes are shown in the toolbar. Make sure that the ones you want to include are actually active and not excluded in the top-level `marks` and `nodes` options (see above). The top-level options define which ones are supported, the toolbar-level options what is shown as buttons in the toolbar. For example, you might want to support the code mark for pasting, but hide it from the toolbar.
+</since>
+
+## Inline mode
+
+By default, the writer field will supports multiple paragraphs (`<p>`). In inline mode, hitting enter will create breaks instead of creating a new paragraph.
+
+```yaml
+fields:
+  text:
+    type: writer
+    inline: true
+```
+
+In `inline` mode, all nodes (see above) are disabled.
+
+<since v="4.0.0">
+## Heading levels
+
+You can set the available heading levels in the writer field with the `headings` option:
+
+```yaml
+fields:
+  text:
+    type: writer
+    headings:
+      - 2
+      - 3
+      - 4
+```
+</since>
 
 ## How to use in templates/snippets
 
