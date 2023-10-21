@@ -65,7 +65,5 @@ $lastPage = $pages->last();
 ### Sort pages
 
 ```php
-$sorted = $pages->sortBy(function ($page) {
-  return $page->date()->toDate();
-}, 'desc');
+$sorted = $pages->sortBy(fn ($page) => $page->date()->toDate(), 'desc');
 ```

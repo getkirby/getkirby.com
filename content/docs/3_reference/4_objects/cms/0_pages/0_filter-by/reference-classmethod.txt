@@ -1,4 +1,4 @@
-Text: 
+Text:
 
 ## Example
 
@@ -7,14 +7,14 @@ Text:
 $items = $page->children()->filterBy('draft', 'yes');
 
 // fetch children with a date in the past
-$items = $page->children()->filter(function ($child) {
-  return $child->date()->toDate() < time();
-});
+$items = $page->children()->filter(
+	fn ($child) => $child->date()->toDate() < time()
+);
 
 // fetch children with a date in the future
-$items = $page->children()->filter(function ($child) {
-  return $child->date()->toDate() > time();
-});
+$items = $page->children()->filter(
+	fn ($child) => $child->date()->toDate() > time()
+);
 
 // fetch any page with a project template
 $items = $site->index()->filterBy('template', 'project');

@@ -50,9 +50,7 @@ With the above example, you only get results that fit a single value. You can fi
 // get all pages with a date after now
 $collection = page('blog')
   ->children()
-  ->filter(function ($child) {
-    return $child->date()->toDate() > time();
-  });
+  ->filter(fn ($child) => $child->date()->toDate() > time());
 
 // get all pages with a title that starts with "A" or a number
 $collection = page('blog')
@@ -164,9 +162,9 @@ You can achieve the same with the `filter($callback)` method:
 ```php
 $collection = page('events')
   ->children()
-  ->filter(function ($p) {
-    return $p->template() != 'concert' && $p->template() != 'exhibition';
-  });
+  ->filter(
+		fn ($p) => $p->template() != 'concert' && $p->template() != 'exhibition'
+	);
 ```
 
 Or you can use the `not in` filter:
@@ -221,9 +219,7 @@ If you have a date field but want to filter by year, you can use a filter with a
 $year     = date('Y');
 $articles = page('blog')
   ->children()
-  ->filter(function ($page) use ($year) {
-    return $page->date()->toDate('Y') === $year;
-  });
+  ->filter(fn ($page) => $page->date()->toDate('Y') === $year);
 ```
 
 ### Multiple date fields
@@ -233,9 +229,9 @@ Events often have `startdate` and `enddate` date fields. To filter events that e
 ```php
 $events = page('events')
   ->children()
-  ->filter(function ($child) {
-    return $child->startdate()->toDate() > time() || $child->enddate()->toDate() > time();
-  });
+  ->filter(
+		fn ($child) => $child->startdate()->toDate() > time() || $child->enddate()->toDate() > time()
+		);
 ```
 
 With two little changes to the above code, you can fetch all current events, that is events that have already started but not ended yet:
@@ -243,9 +239,9 @@ With two little changes to the above code, you can fetch all current events, tha
 ```php
 $events = page('events')
   ->children()
-  ->filter(function ($child) {
-    return $child->startdate()->toDate() > time() && $child->enddate()->toDate() < time();
-  });
+  ->filter(
+		fn ($child) => $child->startdate()->toDate() > time() && $child->enddate()->toDate() < time()
+  );
 
 ```
 ## Filtering by the `pages`, `files` or `users` field

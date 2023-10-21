@@ -1,22 +1,22 @@
-Text: 
+Text:
 
 ## Example
 
 ```php
 // fetch children with a title starting with 'Project'
-$items = $page->children()->filter(function ($child) {
-  return str::startsWith($child->title(), 'Project');
-});
+$items = $page->children()->filter(
+	fn ($child) => Str::startsWith($child->title(), 'Project')
+);
 
 // fetch children with more than 2 images
-$items = $page->children()->filter(function ($child) {
-  return $child->images()->count() > 2;
-});
+$items = $page->children()->filter(
+	fn ($child) => $child->images()->count() > 2
+);
 
 // fetch visible children which have visible children
-$items = $page->children()->listed()->filter(function ($child) {
-  return $child->hasListedChildren();
-});
+$items = $page->children()->listed()->filter(
+	fn ($child) => $child->hasListedChildren()
+);
 ```
 
 ## More information

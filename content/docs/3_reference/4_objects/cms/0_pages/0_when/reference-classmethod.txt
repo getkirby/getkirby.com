@@ -10,15 +10,9 @@ $color = get('color');
 $fit   = get('fit');
 
 $products = $page->children()
-    ->when($size, function ($size) {
-        return $this->filterBy('size', $size);
-    })
-    ->when($color, function ($color) {
-        return $this->filterBy('color', $color);
-    })
-    ->when($price, function ($fit) {
-        return $this->filterBy('style', $fit);
-    });
+    ->when($size, fn ($size) => $this->filterBy('size', $size))
+    ->when($color, fn ($color) => $this->filterBy('color', $color))
+    ->when($price, fn ($fit) => $this->filterBy('style', $fit));
 ```
 
 With a fallback if the first parameter does not evaluate to `true`:
@@ -26,9 +20,9 @@ With a fallback if the first parameter does not evaluate to `true`:
 ```php
 $sortBy = false;
 $articles = $page->children()
-    ->when($sortBy, function ($sortBy) {
-        return $this->sortBy($sortBy);
-    }, function () {
-        return $this->sortBy('title');
-    });
+    ->when(
+			$sortBy,
+			fn ($sortBy) => $this->sortBy($sortBy),
+			fn () => $this->sortBy('title')
+		);
 ```

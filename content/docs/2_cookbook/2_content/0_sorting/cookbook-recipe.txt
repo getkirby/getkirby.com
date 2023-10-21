@@ -80,9 +80,10 @@ However this will break with different formats like `dd.mm.yyyy` as the sorting 
 
 ```php
 <?php
-$articles = page('blog')->children()->listed()->sortBy(function ($page) {
-  return $page->date()->toDate();
-}, 'desc');
+$articles = page('blog')->children()->listed()->sortBy(
+	fn ($page) => $page->date()->toDate(),
+	'desc'
+);
 ```
 
 Kirby will pass each page to the callback and will use the return value to determine the sorting order.
@@ -114,9 +115,7 @@ Let's fetch the events, sort them by date and loop through them to output their 
 ```php
 <?php
 $events = page('events')->events()->toStructure();
-$sortedEvents = $events->sortBy(function ($page) {
-  return $page->date()->toDate();
-}, 'asc');
+$sortedEvents = $events->sortBy(fn ($page) => $page->date()->toDate(), 'asc');
 
 foreach($sortedEvents as $event): ?>
   <span><?= $event->date()->toDate('Y-m-d') ?></span>
