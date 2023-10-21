@@ -58,3 +58,9 @@ Once the user enters the code you requested with the (class: Kirby\Cms\Auth  met
 ```php
 $kirby->auth()->verifyChallenge(string $code);
 ```
+
+## Further reading
+
+- (link: docs/cookbook/security/access-restriction text:
+Restricting access to your site)
+- (link: docs/cookbook/forms/user-registration#frontend-login-with-code text: User sign‑up)
