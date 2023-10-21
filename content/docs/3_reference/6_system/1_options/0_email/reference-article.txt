@@ -2,6 +2,9 @@ Intro: Set options for Kirby's built-in email class
 
 ----
 
+Guide: email
+
+----
 Text:
 
 ## Email presets

@@ -1,4 +1,8 @@
-Title: Options
+Title: Config options
+
+----
+
+Guide: configuration
 
 ----
 
