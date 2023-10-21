@@ -8,9 +8,9 @@ Guide: templates/page-models
 
 Text:
 
-Page models are registered with the `PageModels` extension.
+Page models are registered with the `pageModels` extension.
 
-Page models extend Kirby's default page object. Methods that you define in a page model are available everywhere in Kirby where you call a page of the extended type.
+Page models extend Kirby's default `Page` object. Methods that you define in a page model are available everywhere in Kirby where you call a page of the extended type.
 
 
 ```php "/site/plugins/page-models/index.php"
@@ -21,7 +21,7 @@ class BlogPage extends Page
 
 Kirby::plugin('my/pageModels', [
 	'pageModels' => [
-		'blog' => 'BlogPage'
+		'blog' => BlogPage::class
 	]
 ]);
 ```
@@ -49,9 +49,9 @@ load([
 
 Kirby::plugin('my/pageModels', [
 	'pageModels' => [
-		'blog' => 'BlogPage'
+		'blog' => BlogPage::class
 	]
 ]);
 ```
 
-For details see (link:docs/guide/templates/page-models text: page models in the guide).
+For details on how to use page models, see (link:docs/guide/templates/page-models text: our guide on page models).

@@ -33,7 +33,7 @@ class ProjectPage extends Page {
   // all methods of the Page class are inherited and can be overridden here now.
 }
 ```
-This page model will be loaded every time Kirby encounters a page of the given type (so project in this example), whether it is in a template, a snippet or anywhere else.
+This page model will be loaded every time Kirby encounters a page of the given type (so `project` in this example), whether it is in a template, a snippet or anywhere else.
 
 <info>
 If your template name contains dashes or underscores, these have to be ignored when naming your page model class. That means, both `my-template.php` and `my_template.php` will become:
@@ -47,13 +47,37 @@ class MyTemplatePage extends Page {
 The filenames of the model files themselves will keep the dash or underscore.
 </info>
 
+<since v="4.0.0">
+## Default page model
+
+If you want to extend all pages that don't have any specific model, you can define a `DefaultPage` class. This model will be loaded whenever no other model is defined for the current page type.
+
+```php "/site/models/default.php"
+<?php
+
+use Kirby\Cms\Page;
+
+class DefaultPage extends Page
+{
+    /**
+     * This method is now available for all pages
+     * unless they have their own page model.
+     */
+    public function myCustomMethod(): string
+    {
+        return 'Hello world';
+    }
+}
+```
+</since>
+
 ## Page models in the wild
 
-A page model can be used for example to fetch a cover image for a project page. Fetching the right image in the template or snippet can be a couple of lines of code. It is cleaner to seperate this functionality into a page model.
+Let's look at a typical use case pf page models: A page model can be used for example to fetch a cover image for a project page. Fetching the right image in the template or snippet can be a couple of lines of code, bloating up your templates and making them harder to read and work with. It is cleaner to seperate this functionality into a page model.
 
-## The page model
+### The model
 
-The page model will make a method called `cover()` available for all your project pages. It will return the cover image, so you don't have to fetch it in the template code.
+We create a page model that will make a method called `cover()` available for all your project pages. It will return the cover image, so you don't have to fetch it in the template code:
 
 ```php "/site/models/project.php"
 <?php
@@ -65,7 +89,7 @@ class ProjectPage extends Page {
 ```
 Note, that we use `$this` where we would usually use `$page` elsewhere in Kirby, because we refer to the extended page class in this case.
 
-## In your templates
+### In your templates
 
 With such a page model you can now use the new cover method throughout all templates, snippets and controllers:
 
@@ -83,13 +107,13 @@ With such a page model you can now use the new cover method throughout all templ
 </ul>
 ```
 
-By creating the model and the cover method you don't have to repeat this code in every single snippet and template in which you are dealing with projects. The cover method in this case is pretty short and simple, but imagine this with more complex queries for images or other data. As an additional benefit you can make changes that are reflected throughout all your templates and snippets in a single file.
+By creating the model and the cover method, you don't have to repeat this code in every single snippet and template in which you are dealing with projects. The cover method in this case is pretty short and simple, but imagine this with more complex queries for images or other data. As an additional benefit, you can make changes that are reflected throughout all your templates and snippets in a single file.
 
-## Overriding the Page class
+## Overriding the `Page` class
 
 It is also possible to override the functionality of Kirby's `Page` class. Be careful with this as it is possible to change Kirby's behaviour in unwanted ways!
 
-A simple unintrusive example is to sort all images differently by default.
+A simple unintrusive example is to sort all images differently by default:
 
 ```php "/site/models/project.php"
 <?php
@@ -100,8 +124,8 @@ class ProjectPage extends Page {
   }
 }
 ```
-By calling `parent::images()` in this example, we can refer to the original image method in Kirby's default `Page` class in order to simply extend its functionality.
+By calling `parent::images()` in this example, we can refer to the original image method in Kirby's default `Page` class in order to extend its functionality.
 
 ## Page model plugins
 
-You can define page models in plugins to reuse them in other projects or to share them with the community. (link: docs/reference/plugins/extensions/page-models text: Learn more about page model plugins).
+You can define page models in the `site/models` folder as shown above, but also inside a plugin to reuse them in other projects or to share them with the community. (link: docs/reference/plugins/extensions/page-models text: Learn more about page model plugins).
