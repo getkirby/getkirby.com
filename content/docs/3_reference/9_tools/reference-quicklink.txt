@@ -13,6 +13,7 @@ Menu:
 - objects/cms/html
 - objects/toolkit/i18n
 - objects/filesystem/mime
+- objects/image/qr-code
 - objects/query/query
 - objects/toolkit/str
 - objects/toolkit/tpl
