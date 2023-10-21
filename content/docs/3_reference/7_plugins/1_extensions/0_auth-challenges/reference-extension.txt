@@ -75,7 +75,7 @@ class CustomChallenge extends Challenge
 
 Kirby::plugin('superwoman/custom-challenge', [
     'authChallenges' => [
-        'custom' => 'Superwoman\CustomChallenge'
+        'custom' => CustomChallenge::class
     ],
     'translations' => [
         'en' => [

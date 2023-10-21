@@ -18,7 +18,7 @@ class EditorUser extends User
 
 Kirby::plugin('my/plugin', [
     'userModels' => [
-        'editor' => 'EditorUser'
+        'editor' => EditorUser::class
     ],
 ]);
 ```
