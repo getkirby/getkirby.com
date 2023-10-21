@@ -329,6 +329,25 @@ By default, the current page is being used as the parent to find files for the l
 ```yaml
 parent: site.find("galleries").first
 ```
+<since v="4.0.0">
+### `query`
+
+The files section supports a query option to filter files using our (link: docs/guide/blueprints/introduction#query-language text: query string syntax). Manual sorting will be disabled for sections with a query.
+
+```yaml
+images:
+  type: files
+  label: Images
+  query: page.images
+	uploads: image
+documents:
+  type: files
+  label: Documents
+  query: page.documents
+	uploads: document
+```
+
+</since>
 
 ### Template
 
@@ -337,6 +356,8 @@ You can define which template each file in the list must have. This `template` o
 ```yaml
 template: cover
 ```
+
+In combination with the `query` property, use the `uploads` option to set the file blueprint that will be assigned at upload.
 
 ## Sorting
 
