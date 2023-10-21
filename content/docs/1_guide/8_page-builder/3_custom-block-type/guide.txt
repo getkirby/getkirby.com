@@ -1,30 +1,14 @@
-Title: Creating a custom block type from scratch
+Title: Custom block type from scratch
 
 ----
 
-
-Published: 2021-03-01
-
-----
-
-Description: A step-by-step guide to creating custom blocks with a preview using the example of an audio block with a poster and some additional settings.
-
-----
-
-Thumbnail: audio-block-final-states.png
-
-----
-
-Authors:
-
-- authors/sonja-broda
-- authors/bastian-allgeier
+Intro: A step-by-step guide to creating a custom block with a preview using the example of an audio block with a poster and some additional settings.
 
 ----
 
 Text:
 
-Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with quite a few (link: docs/reference/panel/blocks text: default block types) that are great for most purposes and can be customized to your needs. But you probably wouldn't be reading this if you wouldn't be striving for more, and this recipe will hopefully be a great first step into your bright future as a custom block type developer 😉.
+Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with quite a few (link: docs/reference/panel/blocks text: default block types) that are great for most purposes and can be customized to your needs. But you probably wouldn't be reading this if you wouldn't be striving for more, and this guide will hopefully be a great first step into your bright future as a custom block type developer 😉.
 
 ## Prerequisites
 
@@ -403,7 +387,7 @@ We also need a `package.json` next to `index.php` with the following content:
 }
 ```
 
-This file tells the (link: https://github.com/johannschopplich/kirbyup text: kirbyup) bundler which files to compile. Since our plugin setup is always the same in our documentation, it's the same file we also use in our other Panel related plugin recipes.
+This file tells the (link: https://github.com/johannschopplich/kirbyup text: kirbyup) bundler which files to compile. Since our plugin setup is always the same in our documentation, it's the same file we also use in our Panel related plugin recipes.
 
 You don't have to install kirbyup locally or globally, since it will be fetched remotely once when running your first command. This may take a short amount of time.
 

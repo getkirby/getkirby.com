@@ -1,25 +1,18 @@
-Title: Block factory: Creating your own blocks collection
+Title: More block examples
 
 ----
 
-Published: 2021-05-08
+Intro: Start your own block collection based on examples in this guide
 
 ----
 
-Description: Start your own block collection based on examples in this recipe
-
-----
-
-Authors: - authors/sonja-broda
-
-----
 Text:
 
-Custom block types for Kirby can be anything from very simple to rather complex. In this recipe, we will create a little collection of blocks that are not overly complicated.
+Custom block types for Kirby can be anything from very simple to rather complex. In this guide, we will create a little collection of blocks that are not overly complicated.
 
 All block types will live in a single plugin, and we will build them without using a build process.
 
-Since the styling is very much up to you and your project, we'll keep styling very basic in these examples. You can find the `index.css` file with all styles at the end of this recipe.
+Since the styling is very much up to you and your project, we'll keep styling very basic in these examples. You can find the `index.css` file with all styles at the end of this guide.
 
 ## General plugin setup
 
@@ -90,7 +83,7 @@ As you can see, a basic preview is no more than a simple Vue template.
 With this general structure in place, our blocks factory is ready to produce any number of new blocks.
 
 <info>
-For each of the following examples, don't forget to register the snippets and blueprints in the `index.php` file as outlined above. You can find the full `index.php` at the end of this recipe.
+For each of the following examples, don't forget to register the snippets and blueprints in the `index.php` file as outlined above. You can find the full `index.php` at the end of this guide.
 </info>
 
 <warning>
@@ -856,7 +849,7 @@ panel.plugin("cookbook/block-factory", {
 
 ## Complete `index.php`
 
-Here is the complete `index.php` with all registered blueprints and examples introduced in this recipe:
+Here is the complete `index.php` with all registered blueprints and examples introduced in this guide:
 
 ```php "/site/plugins/block-factory/index.php"
 
