@@ -34,3 +34,5 @@ Text:
 - `this.$translation`: Use `this.$panel.translation` instead
 - `this.$store.dispatch("dialog")` is deprecated. Use `this.$panel.dialog.open` and `this.$panel.dialog.close` instead
 - `this.$store.dispatch("drag", drag)` has been deprecated. Use `this.$panel.drag = drag` instead
+- `k-dropdown` was deprecated. Use `k-dropdown-content` as standalone instead.
+- `k-calendar-input` replaces `k-calendar`. `k-calendar` is still available but only as deprecated alias.

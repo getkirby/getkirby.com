@@ -14,11 +14,11 @@ Category: editing
 
 ----
 
-Intro:
+Teaser: Missing that one special button for your custom text markup? Make one.
 
 ----
 
-Teaser: Missing that one special button for your custom text markup? Make one.
+Link: docs/reference/plugins/extensions/textarea-buttons
 
 ----
 
@@ -35,43 +35,12 @@ Example:
 ```js "/site/plugins/acme-textarea"
 panel.plugin("acme/textarea", {
   textareaButtons: {
-    marquee: {
-      label: "Marquee",
+    highlight: {
+      label: "Highlight",
       icon: "wand",
-      command(input, selection) {
-        this.command("insert", (input, selection) => {
-          return "<marquee>" + selection + "</marquee>";
-        });
-      },
+      click: () => this.command("toggle", "<mark>", "</mark>")
       shortcut: "m"
     }
   },
 });
 ```
-
-----
-
-Text:
-
-```js
-panel.plugin("getkirby/custom-textarea-buttons", {
-  textareaButtons: {
-    marquee: {
-      label: "Marquee",
-      icon: "wand",
-      command(input, selection) {
-        this.command("insert", (input, selection) => {
-          if (["<marquee>", "</marquee>"].some(tag => selection.includes(tag))) {
-            return selection.replace(/\<marquee\>|\<\/marquee\>/g, '');
-          }
-
-          return "<marquee>" + selection + "</marquee>";
-        });
-      },
-      shortcut: "m"
-    }
-  },
-});
-```
-
-(video: custom-buttons.mp4)

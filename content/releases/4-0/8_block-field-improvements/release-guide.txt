@@ -95,50 +95,7 @@ New `fields` block type available for previews:
 
 (image: field-preview.png)
 
-```yaml
-fieldsBlock:
-  type: blocks
-  fieldsets:
-    - heading
-    - text
-    foo:
-      wysiwyg: true
-      preview: fields
-      tabs:
-        main:
-          label: Main
-          fields:
-            title:
-              type: text
-              placeholder: Title
-            blocky:
-              type: blocks
-            subtitle:
-              type: text
-              placeholder: Subtitle
-            description:
-              type: writer
-              icon: text
-              inline: true
-              placeholder: Description
-              marks:
-                - bold
-                - italic
-        settings:
-          label: Settings
-          fields:
-            controls:
-              type: toggle
-              text: Show controls?
-              width: 1/2
-              default: true
-            autoplay:
-              type: toggle
-              text: autoplay
-              width: 1/2
-              default: false
-
-```
+(link: docs/reference/plugins/extensions/blocks#quick-and-easy-fields-preview text: → Learn more)
 
 ## Heading Block Improvements
 

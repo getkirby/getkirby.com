@@ -118,6 +118,12 @@ We've added new icons to our Panel iconset:
 - `<k-page-tree>`
 - `<k-browser>`
 - `<k-file-browser>`
+- `k-alpha-input`
+- `k-hue-input`
+- `k-color-frame`
+- `k-coloroptions-input`
+- `k-colorname-input`
+- `k-search-input
 
 #### New helpers
 
@@ -132,11 +138,26 @@ We've added new icons to our Panel iconset:
 - `$helper.url.isUrl`
 - `$helper.url.makeAbsolute`
 - `$helper.url.toObject`
+- `$library.colors`
 
 #### New JS error classes
 
 - `RequestError`
 - `JsonRequestError`
+
+#### And so much More
+
+We've tweaked the Panel extensively with too many improvements to name them all. But here are some more:
+
+- Text fields: new `font: monospace` option
+- `panel.css` and `panel.js` config options now also support arrays with multiple entries as well as absolute URLs
+- `k-pagination` always can be navigated by keys (no extra prop needed anymore)
+- Notifications: support for custom icons
+- `k-tag` supports an image/icon frame
+- Improved focus styles for links and the flag preview in tables
+- Improved text overflow behavior for links in tables
+- New `disabled property` for the `k-options-dropdown` component
+- New `selected` prop for `k-button` to set the `aria-selected` attribute
 
 #### More to come …
 

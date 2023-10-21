@@ -197,4 +197,4 @@ fields:
 - New `writerNodes` Panel extension
 - New `writerMarks` Panel extension
 
-The defined object extends `/kirby/panel/src/components/Forms/Writer/Mark.js`, `/kirby/panel/src/components/Forms/Writer/Node.js` and thus can make use of the same extension layer our default marks use.
+(link: docs/reference/plugins/extensions/writer-marks-nodes text: → Learn more)
