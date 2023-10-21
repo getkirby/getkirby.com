@@ -10,7 +10,7 @@ Block methods are registered with the `blockMethods` extension.
 
 **For a full (link: docs/reference/objects/cms/block text: list of default block methods), please check out the Reference.**
 
-<info>Be aware that - contrary to (link: docs/reference/plugins/extensions/block-models text: block models) - custom block methods cannot override default block methods.</info>
+<warning>Be aware that - contrary to (link: docs/reference/plugins/extensions/block-models text: block models) - custom block methods cannot override default block methods.</warning>
 
 ## Custom block methods vs. block models
 

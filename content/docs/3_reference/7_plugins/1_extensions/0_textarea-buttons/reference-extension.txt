@@ -13,10 +13,10 @@ You can add your custom (link: docs/reference/panel/fields/textarea text: textar
 ```js "site/plugins/your-plugin/index.js"
 panel.plugin("getkirby/custom-textarea-buttons", {
   textareaButtons: {
-    marquee: {
-      label: "Marquee",
+    highlight: {
+      label: "Highlight",
       icon: "wand",
-      click: () => this.command("toggle", "<marquee>", "</marquee>")
+      click: () => this.command("toggle", "<mark>", "</mark>")
       shortcut: "m",
     },
   }

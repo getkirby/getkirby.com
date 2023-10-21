@@ -10,7 +10,7 @@ Blocks methods are registered with the `blocksMethods` extension.
 
 **For a full (link: docs/reference/objects/cms/blocks text: list of default blocks methods), please check out the Reference.**
 
-<info>Be aware that you cannot override these default blocks methods with any custom blocks method.</info>
+<warning>Be aware that you cannot override these default blocks methods with any custom blocks method.</warning>
 
 ## Getting started
 
