@@ -6,6 +6,10 @@ Description: Learn about how to secure your Kirby installation on your server.
 
 ----
 
+Category: Privacy & Security
+
+----
+
 Text:
 
 

@@ -6,4 +6,7 @@ Description: Learn everything about Kirby's user management and permissions.
 
 ----
 
+Category: configuration
+
+----
 Text:

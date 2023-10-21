@@ -3,3 +3,7 @@ Title: Configuring the Panel
 ----
 
 Description: How to create forms for the Panel and access blueprints on the frontend.
+
+----
+
+Category: Data & Frontend

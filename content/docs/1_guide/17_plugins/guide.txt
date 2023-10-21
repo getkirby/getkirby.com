@@ -6,3 +6,6 @@ Description: Kirby starts simple, but it can handle highly advanced setups and s
 
 ----
 Text:
+
+----
+Category: Extending Kirby

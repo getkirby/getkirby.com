@@ -9,6 +9,10 @@ Intro: All you need to know to get Kirby up and running: Installation, requireme
 
 ----
 
+Category: Preparing the stage
+
+----
+
 Text:
 
 

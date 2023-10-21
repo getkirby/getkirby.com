@@ -6,3 +6,6 @@ Description: All about working with files in Kirby: images, videos, documents, r
 ----
 Intro:
 
+----
+
+Category: Data & Frontend

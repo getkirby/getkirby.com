@@ -9,6 +9,11 @@ Description: How to use built-in classes and helpers to send emails from within 
 Intro: Kirby has a built-in email engine, which can be used to send notifications to your users, replies to filled in contact forms and more.
 
 ----
+
+Category: Configuration
+
+----
+
 Text:
 
 ## Simple
