@@ -78,6 +78,8 @@ fields:
       - email
 ```
 
+You can add your (link: docs/reference/plugins/extensions/textarea-buttons text: custom textarea buttons) in a plugin.
+
 ## File upload and select
 
 (image: file-selector.png)

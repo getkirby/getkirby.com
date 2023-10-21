@@ -8,8 +8,9 @@ return function ($kirby, $page) {
 	$storyImage = $story->images()->findBy('name', 'panel');
 
 	return [
-		'story'        => $story,
-		'storyImage'   => $storyImage,
-		'kirbyVersion' => implode('.', array_slice(Str::split($kirby->version(), '.'), 0, 2)),
+		'stories'    => $page->children()->listed(),
+		'story'      => $story,
+		'storyImage' => $storyImage,
+		'version'    => implode('.', array_slice(Str::split($kirby->version(), '.'), 0, 2)),
 	];
 };

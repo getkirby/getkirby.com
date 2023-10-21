@@ -5,3 +5,11 @@ Title: Icons
 Intro:
 
 Kirby comes with a set of icons that you can use in blueprints and extensions.
+
+----
+
+Text:
+
+<info>
+You can add your (link: docs/reference/plugins/extensions/icons text: custom icons) in a plugin.
+</info>

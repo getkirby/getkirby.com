@@ -2,9 +2,9 @@
   <div class="playground-header-title mb-24">
     <h1 class="h1">Kirby is the CMS<br>that adapts to you</h1>
     <nav class="auto-fit" style="--min: 9rem; --gap: var(--spacing-3); max-width: 24rem;">
-      <a class="btn btn--outlined" href="<?= '/releases/' . $kirbyVersion ?>">
-        <?= icon('success') ?>
-        New in <?= $kirbyVersion ?>
+      <a class="btn btn--outlined" href="<?= '/releases/' . $version ?>">
+        <?= icon('spaceship') ?>
+        New in <?= $version ?>
       </a>
       <a class="btn btn--filled" href="/try">
         <?= icon('download') ?>
@@ -33,8 +33,8 @@
       </figure>
       <div class="playground-header-menu">
         <ul class="font-mono text-sm pt-6 sticky" style="--top: var(--spacing-2)">
-          <?php foreach ($page->children()->listed() as $option) : ?>
-            <li><a <?php e($story === $option, 'aria-current="true"') ?> href="?your=<?= $option->slug() ?>"><?= $option->title() ?></a></li>
+          <?php foreach ($stories as $option) : ?>
+					<li><a <?php e($story === $option, 'aria-current="true"') ?> href="?your=<?= $option->slug() ?>"><?= $option->title() ?></a></li>
           <?php endforeach ?>
           <li><a class="font-bold more" href="/love">Your ideas &rarr;</a></li>
         </ul>

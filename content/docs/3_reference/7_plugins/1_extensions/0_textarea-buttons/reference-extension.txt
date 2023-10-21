@@ -1,0 +1,62 @@
+Title: Textarea buttons
+
+----
+
+Since: 4.0.0
+
+----
+
+Text:
+
+You can add your custom (link: docs/reference/panel/fields/textarea text: textarea) button in a plugin via the `textareaButtons` extension:
+
+```js "site/plugins/your-plugin/index.js"
+panel.plugin("getkirby/custom-textarea-buttons", {
+  textareaButtons: {
+    marquee: {
+      label: "Marquee",
+      icon: "wand",
+      click: () => this.command("toggle", "<marquee>", "</marquee>")
+      shortcut: "m",
+    },
+  }
+});
+```
+
+Each button should specifya `label`, an (link: docs/reference/panel/icons text: `icon`) as well as a `click` handler.
+
+### `click` handler
+
+This function is called when your button is clicked. You can add any code you want, but most likely you want to use the `this.command(name, ...args)` helper functions to trigger changes in the textarea input. The following commands are supported
+
+| Command name | Description | Arguments |
+|-|-|-|
+| `dialog` | Opens a dialog component | `string` dialog name |
+| `insert` | Inserts the given text at the current selection | `string` `func` text |
+| `prepend` | Prepends the given text to the current selection | `string` `func` text |
+| `toggle` | Toggles wrapping of the current selection | `string` `func` before,<br>`string` `func` after (optional) |
+| `upload` | Opens the file upload dialog | |
+| `wrap` | Wraps the current selection with the given text | `string` `func` before,<br>`string` `func` after (optional) |
+
+All arguments that can be a callback function themselves, will be called with two parameters:
+- `input` reference to textarea input Vue component
+- `selection` currently selected text
+
+For example, the default ordered list button triggers the following command
+
+```js
+this.command("insert", (input, selection) =>
+  selection
+    .split("\n")
+    .map((line, index) => index + 1 + ". " + line)
+    .join("\n")
+)
+```
+
+## Shortcut
+
+Each button can also define a `shortcut` which will trigger the button's `click` handler when the shortcut is pressed together with the `Cmd`/`Ctrl` key inside the textarea.
+
+## Use in the field
+
+Your new textare button won't automatically be included in the textarea's toolbar. To add it, (link: docs/reference/panel/fields/textarea#toolbar__customizing-the-toolbar text: use the `buttons` option).
