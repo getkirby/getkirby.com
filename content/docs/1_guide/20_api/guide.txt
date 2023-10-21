@@ -4,3 +4,6 @@ Title: API
 
 Description: The Rest API offers full access to all data within Kirby and can be used by your future app built on top of Kirby.
 
+----
+
+Category: Extending Kirby
