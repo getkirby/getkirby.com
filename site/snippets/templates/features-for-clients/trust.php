@@ -30,7 +30,7 @@
 
   </div>
 
-  <ul class="trust-in-brands columns auto-rows-fr" style="--columns-sm: 2; --columns-md: 3; --columns: 3; --gap: var(--spacing-1)">
+  <ul class="trust-in-brands columns auto-rows-fr rounded overflow-hidden" style="--columns-sm: 2; --columns-md: 3; --columns: 3; --gap: var(--spacing-1)">
     <?php foreach(page('home/clients')->children()->listed()->shuffle() as $client): ?>
     <li class="bg-light p-6 flex items-center justify-center">
       <?= $client->image()->read() ?>

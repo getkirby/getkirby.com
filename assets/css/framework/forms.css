@@ -9,7 +9,7 @@
 	background-color: transparent;
 	color: var(--btn-color);
 	border: 1.5px solid var(--btn-bg);
-	border-radius: 0;
+	border-radius: var(--rounded);
 	font-family: var(--font-mono);
 	font-size: var(--text-sm);
 	line-height: inherit;

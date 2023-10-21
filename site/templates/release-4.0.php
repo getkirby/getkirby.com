@@ -41,10 +41,6 @@
 		font-size: var(--text-lg);
 	}
 
-	.btn {
-		border-radius: var(--rounded);
-	}
-
 	mark {
 		background: var(--color-yellow-300);
 	}

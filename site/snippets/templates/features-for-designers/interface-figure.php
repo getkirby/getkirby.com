@@ -5,8 +5,10 @@
     grid-template-rows: repeat(4, min-content);
     grid-gap: clamp(var(--spacing-2px), 1.5vw, var(--spacing-6));
   }
-  .ingrid figure {
+  .ingrid img {
     background: var(--color-light);
+		border-radius: var(--rounded);
+		overflow: hidden;
   }
 </style>
 

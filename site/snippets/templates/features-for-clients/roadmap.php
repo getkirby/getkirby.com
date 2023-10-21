@@ -63,7 +63,7 @@
     <li></li>
   </ul>
 
-  <ul class="columns" style="--columns: 3; --gap: var(--spacing-1)">
+  <ul class="columns rounded overflow-hidden" style="--columns: 3; --gap: var(--spacing-1)">
     <?php foreach ([
       [
         'title' => 'Future-proof',

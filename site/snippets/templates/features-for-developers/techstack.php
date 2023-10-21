@@ -5,7 +5,7 @@
     'subtitle' => 'Performant, well-tested and cost-effective',
   ]) ?>
 
-  <div class="columns text-sm" style="--columns-md: 2; --columns: 4; --gap: var(--spacing-1)">
+  <div class="columns text-sm overflow-hidden rounded" style="--columns-md: 2; --columns: 4; --gap: var(--spacing-1)">
     <article class="p-6 bg-light">
       <figure class="mb-6" style="height: 3rem">
         <?= image('php.svg')->read() ?>

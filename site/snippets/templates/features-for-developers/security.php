@@ -5,7 +5,7 @@
     'subtitle' => 'A pro-active policy and good track record'
   ]) ?>
 
-  <div class="columns" style="--columns-md: 1; --columns: 3; --gap: var(--spacing-1)">
+  <div class="columns rounded overflow-hidden" style="--columns-md: 1; --columns: 3; --gap: var(--spacing-1)">
     <article class="p-6 bg-light">
       <h3 class="font-bold">A secure foundation</h3>
       <div class="prose text-sm">

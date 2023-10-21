@@ -9,25 +9,25 @@
     <ul class="columns font-mono text-sm" style="--columns: 2; --columns-sm: 2;">
       <li>
         <a class="flex items-center" href="https://mastodon.social/@getkirby">
-          <figure class="mr-3 iconbox color-white bg-black" style="--size: 3rem"><?= icon('mastodon') ?></figure>
+          <figure class="mr-3 iconbox color-white bg-black rounded" style="--size: 3rem"><?= icon('mastodon') ?></figure>
           Mastodon
         </a>
       </li>
       <li>
         <a class="flex items-center" href="https://youtube.com/kirbycasts">
-          <figure class="mr-3 iconbox color-white bg-black" style="--size: 3rem"><?= icon('youtube') ?></figure>
+          <figure class="mr-3 iconbox color-white bg-black rounded" style="--size: 3rem"><?= icon('youtube') ?></figure>
           Screencasts
         </a>
       </li>
       <li>
         <a class="flex items-center" href="https://chat.getkirby.com">
-          <figure class="mr-3 iconbox color-white bg-black" style="--size: 3rem"><?= icon('discord') ?></figure>
+          <figure class="mr-3 iconbox color-white bg-black rounded" style="--size: 3rem"><?= icon('discord') ?></figure>
           Discord
         </a>
       </li>
       <li>
         <a class="flex items-center" href="https://instagram.com/getkirby" style="--icon: var(--color-blue-300)">
-          <figure class="mr-3 iconbox color-white bg-black" style="--size: 3rem"><?= icon('instagram') ?></figure>
+          <figure class="mr-3 iconbox color-white bg-black rounded" style="--size: 3rem"><?= icon('instagram') ?></figure>
           Instagram
         </a>
       </li>

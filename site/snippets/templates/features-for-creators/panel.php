@@ -15,7 +15,7 @@
   </div>
 
   <?php if ($images = $page->images()->template('content-type')): ?>
-  <ul class="auto-fill highlight bg-dark" style="--min: 12rem; --gap: var(--spacing-12);">
+  <ul class="auto-fill highlight bg-dark rounded" style="--min: 12rem; --gap: var(--spacing-12);">
     <?php foreach ($images as $image): ?>
     <li>
       <a data-lightbox="panel" href="<?= $image->resize(1800, 1800)->url() ?>">

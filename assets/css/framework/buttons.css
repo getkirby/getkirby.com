@@ -19,7 +19,7 @@ button {
   color: var(--btn-color);
   cursor: pointer;
   border: 1.5px solid transparent;
-  border-radius: var(--rounded-xs);
+  border-radius: var(--rounded);
   font-family: var(--font-mono);
   white-space: nowrap;
   background: none;

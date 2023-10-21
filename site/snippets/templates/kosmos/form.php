@@ -1,4 +1,4 @@
-<form action="https://newsletter.getkirby.com/app/sub/" method="post" class="kosmos-form highlight bg-light">
+<form action="https://newsletter.getkirby.com/app/sub/" method="post" class="kosmos-form highlight bg-light rounded">
   <div class="kosmos-fields">
     <input type="hidden" name="gruppe" value="<?= option('newstroll.list') ?>">
     <div class="kosmos-field">

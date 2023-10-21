@@ -16,7 +16,7 @@ extract([
       'icon' => 'outline/spaceship',
       'link' => '/'
     ] ?>
-    <li class="bg-white overflow-hidden">
+    <li class="bg-white overflow-hidden rounded">
       <a class="block py-6 color-gray-700" href="<?= $feature['link'] ?>">
         <figure class="flex items-center flex-column justify-center">
           <span class="mb-3"><?= icon($feature['icon']) ?></span>
