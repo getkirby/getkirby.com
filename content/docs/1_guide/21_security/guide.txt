@@ -1,4 +1,4 @@
-Title: Security
+Title: Secure your project
 
 ----
 

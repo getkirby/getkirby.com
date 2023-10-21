@@ -1,4 +1,4 @@
-Title: Files
+Title: Managing files
 
 ----
 

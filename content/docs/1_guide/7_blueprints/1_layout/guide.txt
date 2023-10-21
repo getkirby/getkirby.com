@@ -1,4 +1,4 @@
-Title: Layout
+Title: Structuring blueprints
 ----
 
 Intro: With blueprints you can create highly customized layouts that display the perfect interface for any type of data.
