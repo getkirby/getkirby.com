@@ -71,18 +71,18 @@ accept:
 	orientation: landscape
 ```
 
-| Option | Value | Added in |
-| ------ | ----- | -------- |
-| `extension` | comma-separated `string` or `array` | Kirby 3.5.0 |
-| `mime` | e.g. `image/jpeg`, comma-separated or `array` | |
-| `maxheight` | `int` in `px` | |
-| `maxsize` | `int` in `bytes` | |
-| `maxwidth` | `int` in `px` | |
-| `minheight` | `int` in `px` | |
-| `minsize` | `int` in `bytes` | |
-| `minwidth` | `int` in `px` | |
-| `orientation` | `landscape`/`square`/`portrait` | |
-| `type` | comma-separated `string` or `array` | Kirby 3.5.0 |
+| Option | Value |
+| ------ | ----- |
+| `extension` | comma-separated `string` or `array` |
+| `mime` | e.g. `image/jpeg`, comma-separated or `array` |
+| `maxheight` | `int` in `px` |
+| `maxsize` | `int` in `bytes` |
+| `maxwidth` | `int` in `px` |
+| `minheight` | `int` in `px` |
+| `minsize` | `int` in `bytes` |
+| `minwidth` | `int` in `px` |
+| `orientation` | `landscape`/`square`/`portrait` |
+| `type` | comma-separated `string` or `array` |
 
 You can combine the `extension`, `mime` and `type` checks. If more than one of these three options is set, all constraints need to match for a file to be valid.
 
@@ -163,13 +163,13 @@ image:
 
 With options, you can control all the file actions that should or should not be available for this particular file type. The option dropdown for files will adjust accordingly.
 
-| Option | Value | Added in |
-| ------ | ----- | -------- |
-| `changeName` | `true`/`false` | |
-| `delete` | `true`/`false` | |
-| `read` | `true`/`false` | Kirby 3.4.0 |
-| `replace` | `true`/`false` | |
-| `update` | `true`/`false` | |
+| Option | Value |
+| ------ | ----- |
+| `changeName` | `true`/`false` |
+| `delete` | `true`/`false` |
+| `read` | `true`/`false` |
+| `replace` | `true`/`false` |
+| `update` | `true`/`false` |
 
 (docs: permissions/option-permissions)
 

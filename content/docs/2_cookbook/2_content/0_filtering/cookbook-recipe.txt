@@ -199,10 +199,6 @@ $files = $kirby
 
 ### Filtering from - to
 
-<info>
-The `date ...` filters were added in Kirby 3.4.0.
-</info>
-
 For a simple from - to filtering of dates, you can string together two `filterBy()` methods as seen above:
 
 ```php

@@ -95,7 +95,7 @@ You can define the columns that are shown in the table. This is especially usefu
 | `align` | `left`, `center`, `right` | Set text alignment
 | `before`| `string` | Set text to prepend value
 | `after` | `string` | Set text to append value
-| `mobile` | `true` | Set visible in mobile view (since v3.6.0)
+| `mobile` | `true` | Set visible in mobile view
 
 ### Example
 

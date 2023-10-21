@@ -39,7 +39,7 @@ The list field supports the following marks by default:
 - `strike`
 - `code`
 - `link`
-- `email` (since v3.6.0)
+- `email`
 
 ```yaml
 fields:
