@@ -8,11 +8,15 @@ Intro:
 
 Text:
 
-The default preview for custom blocks is nice, but it can be even better! You can create your own Vue component to render previews for your blocks directly in the blocks editor. You can even make them editable.
+Kirby ships with a number of (link: docs/reference/panel/blocks text: default blocks), but the (link: docs/reference/panel/fields/blocks text: blocks field) really shines when you start adding your own custom blocks.
 
-## Simple preview
 
-The easiest way to get started with block previews is a Vue component that only generates a bit of HTML for the block.
+
+The default preview for custom blocks is nice, but it can be even better! You can create your own (glossary: Vue) component to render previews for your blocks directly in the blocks editor. You can even make them editable. Or you take it beyond previews and add the frontend HTML output for your block as well. We will look into these different ways of extending Kirby with custom blocks.
+
+## Static preview
+
+The easiest way to get started with block previews is a (glossary: Vue) component that only generates a bit of HTML for the block.
 
 Let's use a custom call to action button block as example for this plugin guide:
 
@@ -37,9 +41,7 @@ By default, such custom blocks will all use a generic block preview including th
 
 (image: editing.png)
 
-### Plugin setup
-
-Create a new folder called `/site/plugins/button` and add an `index.php`, `index.css` and an `index.js`
+To get started, create a new folder called `/site/plugins/button` and add an `index.php`, `index.css` and an `index.js`
 
 ### index.php
 
@@ -105,7 +107,7 @@ Instead of the generic preview, we will now see a much more visual representatio
 
 (image: custom-preview.png)
 
-## WYSIWYG editing
+## Preview with WYSIWYG editing
 
 The button preview in the example above is static and will only change when you open the block drawer and start editing the fields.
 
@@ -189,7 +191,7 @@ To wrap this up, we need to adjust our CSS file a bit to make it work with the i
 }
 ```
 
-## Single file components
+### Single file components
 
 All examples above are written in plain JS. You don't need a build process to create such preview plugins. But if you want to go further and use Vue's brilliant single file components, you need to look into our (link: docs/guide/plugins/plugin-setup-panel text: pluginkit) for Panel plugins that comes with a full build process and parses Vue single file components. You can then switch the example above to a single file component in no time:
 
@@ -242,6 +244,43 @@ panel.plugin("your-project/button-block", {
 <info>
 When using single file components, you store your CSS directly with the component. You can get rid of the index.css in that case.
 </info>
+
+<since v="4.0.0">
+## Quick and easy: Fields preview
+
+Sometimes, you don't want to add a fully customised preview for a block, but would like the block to show more than just the headline in the list of blocks.
+
+For this you can use the built-in `preview: fields` option (either with or without `wysiwyg: true`) which will show the blocks fields right in the preview. No need to open the drawer anymore, it even supports showing tabs.
+
+```yml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      button:
+        wysiwyg: true
+        preview: fields
+        tabs:
+          main:
+            label: Main
+            fields:
+              label:
+                type: text
+              color:
+                type: color
+              url:
+                type: url
+          settings:
+            label: Settings
+            fields:
+              target:
+                type: text
+              class:
+                type: text
+```
+
+(image: fields-preview.png class: screenshot)
+</since>
 
 ## Full block plugins
 
