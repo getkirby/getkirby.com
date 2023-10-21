@@ -57,7 +57,7 @@ When copying files to a remote server via (S)FTP, make sure to copy the `.htacce
             </td>
             <td>
                 <ul>
-                    <li>PHP 8.0, 8.1 or 8.2<br>(PHP 8.1 is recommended)</li>
+                    <li>PHP 8.1, 8.2 or 8.3<br>(PHP 8.2 is recommended)</li>
                     <li>Either the <code>gd</code> extension or ImageMagick (see below)</li>
                     <li><code>ctype</code> extension</li>
                     <li><code>curl</code> extension</li>
@@ -187,8 +187,8 @@ If you use any plugins, make sure to update them as well.
 
 That's it! Because Kirby does not use a database by default, you don't have to run any database migrations.
 
-<alert>
-Kirby uses the following follow [Semantic Versioning](https://semver.org) scheme:
+<warning>
+Kirby uses the [Semantic Versioning](https://semver.org) scheme:
 {major}.{minor}(.{patch})
 
 **Major releases** (e.g 4.0 to 5.0) may contain breaking changes and deprecations. In such a case, you might have to update your code and plugins used in your installation. You can find breaking changes of a new release in the changelogs. If you are updating from older versions, multiple changelogs may apply. Always read them carefully to identify potential issues.
@@ -196,7 +196,7 @@ Kirby uses the following follow [Semantic Versioning](https://semver.org) scheme
 **Minor and patch releases** (e.g. 4.1 to 4.2 or 4.1 to 4.1.1) can generally be applied without changes to your site code.
 
 In any case, please never update a live website directly on the server. Test updates locally first to see if something breaks.
-</alert>
+</warning>
 
 ### Updating Kirby with the advanced methods
 

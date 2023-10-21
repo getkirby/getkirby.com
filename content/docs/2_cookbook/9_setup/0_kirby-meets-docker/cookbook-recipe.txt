@@ -103,7 +103,7 @@ Let's use one of the images available on Docker Hub to quickly spin up Kirby's S
 Create a new folder somewhere in your file system, e.g. `~/docker-example-1` (where `~` stands for your user folder), and inside that newly created folder create a file called `Dockerfile` (exactly like this: with a capital D and no extension).
 
 ```Dockerfile "~/docker-example-1/Dockerfile"
-FROM webdevops/php-apache-dev:8.0
+FROM webdevops/php-apache-dev:8.1
 RUN apt-get update && apt-get install -y git
 RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /app
 ```
@@ -111,10 +111,10 @@ RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /app
 A Dockerfile is a simple text file with instructions that tell Docker which steps to perform to create a Docker image. In most cases you will start from an existing Docker image (i.e. some Linux distribution). This is done using the `FROM` keyword that always goes on the first line of the Dockerfile. In our example:
 
 ```Dockerfile
-FROM webdevops/php-apache-dev:8.0
+FROM webdevops/php-apache-dev:8.1
 ```
 
-As mentioned above, this image has everything we need to run Kirby (and a lot of stuff we don't need). `webdevops/php-apache-dev` refers to the namespace and repo on Docker Hub, and `8.0` is the tag of the image we want to use in this example. Just on a side note, there are many different variations of this image available with different PHP versions etc.
+As mentioned above, this image has everything we need to run Kirby (and a lot of stuff we don't need). `webdevops/php-apache-dev` refers to the namespace and repo on Docker Hub, and `8.1` is the tag of the image we want to use in this example. Just on a side note, there are many different variations of this image available with different PHP versions etc.
 
 In the next line, we use
 
@@ -144,7 +144,7 @@ docker build -t docker-starterkit .
 
 This command builds an image from the Dockerfile in the current path with the repo name `docker-starterkit`. Don't forget the dot at the end, it provides the context where the code (in this case only the Dockerfile itself) is located, i.e. the current directory.
 
-When we run this command, Docker will download the specified image `webdevops/php-apache-dev:8.0` from Docker Hub if it doesn't exist locally yet. In future iterations the local copy of the image will be used.
+When we run this command, Docker will download the specified image `webdevops/php-apache-dev:8.1` from Docker Hub if it doesn't exist locally yet. In future iterations the local copy of the image will be used.
 
 Let's learn another command. With…
 
@@ -213,7 +213,7 @@ For our first example, we used an unofficial (yet well documented) image from Do
 Let's change the Dockerfile a bit by running one more command that changes the file ownership for the app folder:
 
 ```Docker "~/docker-example-1/Dockerfile"
-FROM webdevops/php-apache-dev:8.0
+FROM webdevops/php-apache-dev:8.1
 RUN apt-get update && apt-get install -y git
 RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /app
 RUN chown -R application:application /app/
@@ -262,9 +262,9 @@ This will output a lot of information about the container, the part that interes
       "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
       "PHP_LDFLAGS=-Wl,-O1 -pie",
       "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F",
-      "PHP_VERSION=8.0.3",
-      "PHP_URL=https://www.php.net/distributions/php-8.0.3.tar.xz",
-      "PHP_ASC_URL=https://www.php.net/distributions/php-8.0.3.tar.xz.asc",
+      "PHP_VERSION=8.1.3",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.3.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.3.tar.xz.asc",
       "PHP_SHA256=c9816aa9745a9695672951eaff3a35ca5eddcb9cacf87a4f04b9fb1169010251",
       "TERM=xterm",
       "LANG=C.UTF-8",
@@ -876,7 +876,7 @@ Instead of setting up a form, we simply add a route that tries to send an email 
       } catch (Exception $e) {
           return new Kirby\Http\Response($e->getMessage(), 'text/plain');
       }
-      
+
       return new Kirby\Http\Response('Message successfully sent', 'text/plain', 200);
     }
   ],
