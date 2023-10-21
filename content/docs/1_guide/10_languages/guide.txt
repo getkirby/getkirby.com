@@ -1,4 +1,4 @@
-Title: Languages
+Title: Multi-language configuration
 
 ----
 

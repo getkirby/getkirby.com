@@ -1,4 +1,4 @@
-Title: Blueprints
+Title: Configuring the Panel
 
 ----
 

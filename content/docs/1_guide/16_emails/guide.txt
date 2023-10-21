@@ -1,4 +1,4 @@
-Title: Emails
+Title: Sending emails
 
 ----
 
