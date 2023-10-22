@@ -1,0 +1,66 @@
+Title: Link
+
+----
+
+Since: 4.0.0
+
+----
+
+Guide: blueprints/fields
+
+----
+
+Intro: Use the link field  to create links to external URLs, internal pages, files, email addresses and telephone numbers. The link field is also used in the link dialogs of the writer and textarea fields.
+
+----
+
+Text:
+
+## Setup
+
+```yaml
+fields:
+  link:
+    type: link
+```
+
+## Available link types:
+
+- `url`
+- `page`
+- `file`
+- `email`
+- `tel`
+- `anchor`
+- `custom`
+
+## Link to pages
+
+(image: page-link.png)
+
+If an icon has been defined in the page's blueprint, it will be used in the page selector.
+
+
+## Link to files
+
+(image: file-link.png)
+
+
+## Limit link types
+
+```yaml
+fields:
+  link:
+    type: link
+    options:
+      - page
+      - anchor
+```
+
+## Use in templates/snippets
+
+Use the `toUrl()` method to convert any type of link to a valid URL:
+
+```php
+<a href="<?= $page->link()->toUrl() ?>"><?= $page->link() ?></a>
+```
