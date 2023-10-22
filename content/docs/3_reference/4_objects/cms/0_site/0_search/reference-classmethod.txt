@@ -1,4 +1,4 @@
-Text: 
+Text:
 
 ## Parameter options
 
@@ -32,3 +32,7 @@ $results = $site->search('my awesome->search', ['words' => true]);
 // feed the search with a get parameter -> http://yourdomain.com/?q=awesome
 $results = $site->search(get('q'));
 ```
+
+## More information
+
+(link: docs/cookbook/content/search text: Setting up a search page)
