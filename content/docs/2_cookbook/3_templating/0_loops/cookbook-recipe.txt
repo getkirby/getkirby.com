@@ -21,7 +21,7 @@ In this example, we build a very basic menu for all listed main pages in the con
 </nav>
 ```
 
-As you can see, this is just a matter of seven lines of code. As soon as you want to get some more control over each item in the loop, it can get quickly get more complex.
+As you can see, this is just a matter of seven lines of code. As soon as you want to get some more control over each item in the loop, it can quickly get very complex.
 
 
 ## Anatomy of a set of pages
