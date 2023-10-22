@@ -2,7 +2,7 @@ Title: Custom language variables
 
 ----
 
-Description: Learn how to define translatable variables, which can be used to translate fixed parts in your templates like buttons.
+Description: Define translatable variables, which can be used to translate fixed strings in your templates like buttons, form labels etc.
 
 ----
 
@@ -12,11 +12,17 @@ Intro: When working with a multi-language site, you often need language-specific
 
 Text:
 
-Language variables are added as an array of key/value pairs in your language definition files in `/site/languages`.
+## Where to store language variables
+
+Language variables can be stored in two places in Kirby:
+
+1. As an array of key/value pairs in your language definition files in `/site/languages`
+2. As an array of key/value pairs in a plugin using the (link: docs/reference/plugins/extensions/translations text: `translations` extension)
+
+Those arrays can contain as many custom variables as you need.
 
 
-Those files can contain as many custom variables as you need.
-
+## Manually adding translations in language definition files
 
 ```php "/site/languages/en.php"
 <?php
@@ -54,6 +60,23 @@ return [
   ]
 ];
 ```
+<since v="4.0.0">
+## Language editor in the Panel
+
+Once you have added one or more languages, you can start adding translation variables via the Language editor. Visit the language you want to edit. You can now add language variables as key/value pairs. These variables will also be stored in the language definition files.
+
+(image: language-view.png)
+
+Access to the language editor can be restricted via (link: text: permissions)
+
+<info>
+Language variables that you add in other languages than the default language will be stored in the default language as well. Language variables added in the default language will only be stored once translated.
+</info>
+
+If you stored your language variables in separate files as described in (link: docs/cookbook/i18n/language-variables text: this cookbook recipe) they will be read by the Panel, but then moved to the language definition files.
+
+**Core translation variables and translation variables from plugins are ignored and cannot be overwritten via the Panel.**
+</since>
 
 ## Using language variables in your template
 
