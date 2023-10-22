@@ -77,7 +77,7 @@ In the template, we can use it like this to render each menu with its headline:
       </ul>
     </nav>
     <?php endif ?>
-    
+
   <?php endforeach ?>
 <?php endif ?>
 ```
@@ -86,7 +86,7 @@ We loop through the structure items and create a new `nav` tag for each menu. In
 
 ## Mixed menu I
 
-What if we want mix external links with Kirby pages in our menu? We can also achieve this with a structure field.
+What if we want mix external links with Kirby pages in our menu? We can also achieve this with a structure field in combination with the link field:
 
 ```yaml
 mixedMenu:
@@ -95,22 +95,14 @@ mixedMenu:
     linkTitle:
       type: text
       label: Menu item title
-    isExternal:
-      type: toggle
-    pageLink:
-      type: pages
-      label: Page link
-      max: 1
-      when:
-        isExternal: false
-    externalLink:
-      type: url
-      label: External URL
-      when:
-        isExternal: true
+    link:
+      type: link
+      label: Link
+      options:
+        - page
+        - url
 ```
-
-Here, we show the `pageLink` field to select a page if `isExternal` is false, and the `externalLink` field if `isExternal` is set to true. For both types of links the editor can also set a custom title.
+The (link: docs/reference/panel/fields/link type: text: link field) allows us to add different kinds of links via a single field type. Here we limit the options to page links and external URLs, but if you want, you can allow other options.
 
 In the template:
 
@@ -120,18 +112,14 @@ In the template:
 <nav>
   <ul>
     <?php foreach ($menuItems as $menuItem) : ?>
-    <?php if ($pageLink = $menuItem->pageLink()->toPage()) : ?>
-    <li><a href="<?= $pageLink->url() ?>"><?= $menuItem->linkTitle()->or($pageLink->title()) ?></a></li>
-    <?php elseif ($menuItem->externalLink()->isNotEmpty()) : ?>
-      <li><a href="<?= $menuItem->externalLink() ?>"><?= $menuItem->linkTitle()->or(Url::short($menuItem->externalLink()->value())) ?></a></li>
-      <?php endif ?>
+      <li><a href="<?= $menuItem->link()->toUrl() ?>"><?= $menuItem->linkTitle()->or($menuItem->link()->html()) ?></a></li>
     <?php endforeach ?>
   </ul>
 </nav>
 <?php endif ?>
 ```
 
-In our template, we loop through all items and check if the provided link is a page or an URL. We render the title from the structure item if it is given, otherwise we fall back to the page title for a page link or to the shortened URL for external links.
+In our template, we loop through all items and convert the link field value to a valid URL. We render the title from the structure item if it is given, otherwise we fall back to the link field value. It might make sense to require the `linkTitle` to prevent rendering page UUIDs as anchor text.
 
 ## Two-level custom menu
 
@@ -162,7 +150,7 @@ The `mainMenu` pages field is limited to `max: 1` pages, whereas the `subMenu` f
 We can now render this menu in the template like this:
 
 ```php
-<?php 
+<?php
 $menu = $site->menu()->toStructure();
 if ($menu->isNotEmpty()) : ?>
 <nav>
@@ -225,23 +213,15 @@ Inside this field, we (link: docs/guide/blueprints/extending-blueprints#reusing-
 ```yaml "/site/blueprints/fields/menufields.yml"
 type: group
 fields:
-  isExternal:
-    type: toggle
-    label: External link?
   linkTitle:
     type: text
     label: Link title
-  pageLink:
+  link:
     label: Page link
-    type: pages
-    max: 1
-    when:
-      isExternal: false
-  externalLink:
-    type: url
-    label: External link
-    when:
-      isExternal: true
+    type: link
+    options:
+      - page
+      - url
 ```
 
 This example allows us to have conditional external links both on the first and on the second levels of the menu. Editors can also add an optional link title.
@@ -261,22 +241,14 @@ Inside the snippet, we recursively call the snippet for the submenu items:
 
 ```php "site/snippets/menuitem-list.php"
 <ul>
-  <?php foreach ($items as $item) : ?>
-
-    <?php if ($pageLink = $item->pageLink()->toPage()) : ?>
-    <li><a href="<?= $pageLink->url() ?>"><?= $item->linkTitle()->or($pageLink->title()) ?></a>
-    <?php elseif ($item->externalLink()->isNotEmpty()) : ?>
-    <li><a href="<?= $item->externalLink() ?>"><?= $item->linkTitle()->or(Url::short($item->externalLink()->value())) ?></a>
-    <?php endif ?>
-
-    <?php $subMenuItems = $item->subMenu()->toStructure(); ?>
-
-    <?php if ($item->hasSubmenu()->isTrue() && $subMenuItems->isNotempty()) : ?>
-    <?php snippet('menuitem-list', ['items' => $subMenuItems]) ?>
-    <?php endif ?>
-    </li>
-
-  <?php endforeach ?>
+	<?php foreach ($items as $item) : ?>
+		<li><a href="<?= $item->link()->toUrl() ?>"><?= $item->linkTitle()->or($item->link()->html()) ?></a>
+			<?php $subMenuItems = $item->subMenu()->toStructure(); ?>
+			<?php if ($item->hasSubmenu()->isTrue() && $subMenuItems->isNotempty()) : ?>
+				<?php snippet('menuitem-list', ['items' => $subMenuItems]) ?>
+			<?php endif ?>
+		</li>
+	<?php endforeach ?>
 </ul>
 ```
 
