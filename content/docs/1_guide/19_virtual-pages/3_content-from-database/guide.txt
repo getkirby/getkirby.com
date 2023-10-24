@@ -180,18 +180,16 @@ The `CommentPage` model would need to overwrite the `writeContent()` and `readCo
 
 class CommentPage extends Kirby\Cms\Page
 {
-
     public function writeContent(array $data, string|null $languageCode = null): bool
     {
         unset($data['title']);
 
         if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
             return Db::update('comments', $data, ['slug' => $this->slug()]);
-        } else {
-            $data['slug'] = $this->slug();
-            return Db::insert('comments', $data);
         }
 
+        $data['slug'] = $this->slug();
+        return Db::insert('comments', $data);
     }
 
     public function delete(bool $force = false): bool
@@ -203,7 +201,6 @@ class CommentPage extends Kirby\Cms\Page
     {
         return $this->text()->excerpt(100)->or('New comment');
     }
-
 }
 ```
 
@@ -282,7 +279,6 @@ class CommentsPage extends Kirby\Cms\Page
         $comments = [];
 
         foreach (Db::select('comments') as $comment) {
-
             $comments[] = [
                 'slug'     => $comment->slug(),
                 'num'      => $comment->status() === 'listed' ? 0 : null,
@@ -294,7 +290,6 @@ class CommentsPage extends Kirby\Cms\Page
                     'user'   => $comment->user(),
                     'status' => is_null($comment->status()) ? 'draft' : $comment->status(),
 										'uuid'  => Uuid::generate(),
-
                 ]
             ];
         }
@@ -324,14 +319,12 @@ class CommentPage extends Kirby\Cms\Page
         // always sanitize the slug
         $slug = Str::slug($slug);
 
-
         $data['slug'] = $slug;
 
         if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
-            if (Db::update('comments', $data, ['slug' => $this->slug()])) {
-                return $this;
-            };
+            Db::update('comments', $data, ['slug' => $this->slug()]);
         }
+
         return $this;
     }
 
@@ -340,7 +333,7 @@ class CommentPage extends Kirby\Cms\Page
         $data['status'] = 'null';
 
         if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
-            return Db::update('comments', $data, ['slug' => $this->slug()]);
+            Db::update('comments', $data, ['slug' => $this->slug()]);
         }
 
         return $this;
@@ -359,7 +352,7 @@ class CommentPage extends Kirby\Cms\Page
         $data['status'] = 'listed';
 
         if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
-            return Db::update('comments', $data, ['slug' => $this->slug()]);
+            Db::update('comments', $data, ['slug' => $this->slug()]);
         }
 
         if ($this->blueprint()->num() === 'default') {
@@ -378,7 +371,7 @@ class CommentPage extends Kirby\Cms\Page
         $data['status'] = 'unlisted';
 
         if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
-            return Db::update('comments', $data, ['slug' => $this->slug()]);
+            Db::update('comments', $data, ['slug' => $this->slug()]);
         }
 
         $this->resortSiblingsAfterUnlisting();
@@ -391,10 +384,9 @@ class CommentPage extends Kirby\Cms\Page
         $data['title'] = $title;
 
         if ($comment = Db::first('comments', '*', ['slug' => $this->slug()])) {
-            if (Db::update('comments', $data, ['slug' => $this->slug()])) {
-                return $this;
-            };
+            Db::update('comments', $data, ['slug' => $this->slug()]);
         }
+
         return $this;
     }
 
@@ -418,9 +410,7 @@ class CommentPage extends Kirby\Cms\Page
             $data['slug'] = $this->slug();
             return Db::insert('comments', $data);
         }
-
     }
-
 }
 ```
 
@@ -433,7 +423,6 @@ We have to override all methods that are needed for changing the status and the 
 - `changeTitle()`
 
 Since we now have an explicit title field, we add the `changeTitle()` method and remove the `title()` method from the model, because that is no longer necessary.
-
 
 <info>
 When overriding Kirby's default methods in your models, your methods must use the same function syntax, i.e. parameters, type hints, return types, and return type declarations must be identical.
