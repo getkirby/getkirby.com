@@ -82,7 +82,7 @@ This directive also comes with a lot of good default values for PHP-specific con
 tls name@user.com
 ```
 
-This directive will take care of your TLS certificate. If you want to use a free certificate from Let's Encrypt, just enter your E-Mail address here and you're done. If you want to run your Kirby page locally, just use `tls internal` for a self-signed certificate.
+This directive will take care of your TLS certificate. If you want to use a free certificate from Let's Encrypt, just enter your email address here and you're done. If you want to run your Kirby site locally, use `tls internal` for a self-signed certificate.
 <br/>
 
 
