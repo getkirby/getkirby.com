@@ -22,7 +22,7 @@ Kirby is compatible with (link: docs/guide/quickstart text: many different web s
 
 ## Caddy: No support for `.htaccess`
 
-Just like Nginx the Caddy webserver does not use the famous and project-specific `.htaccess` files that Kirby ships with. So instead of using this file, you'll have to configure the webserver manually through a special configuration file called `Caddyfile`. This file should typically be placed next to the Caddy executable, or its location can be passed in, when Caddy is called.
+Just like Nginx the Caddy webserver does not use the famous and project-specific `.htaccess` files that Kirby ships with. So instead of using this file, you'll have to configure the webserver manually through a special configuration file called `Caddyfile`. Caddy tries to load this file from the current directory, so run Caddy from the same folder that contains your `Caddyfile` or pass the path manually with `caddy run --config /path/to/Caddyfile`.
 
 
 ## Configuration via Caddyfile
