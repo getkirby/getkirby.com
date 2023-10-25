@@ -18,7 +18,7 @@ Authors:
 
 Text:
 
-[Kirby states](https://getkirby.com/docs/guide/quickstart) that it is able to run on many different web servers. However, in reality it is mostly Apache and sometimes Nginx which are being used as webservers to run Kirby on. But there is also another, modern and very easy-to-configure alternative in the webserver world: [Caddy v2](https://caddyserver.com/v2).
+Kirby is compatible with (link: docs/guide/quickstart text: many different web servers). However, in reality it is mostly Apache and sometimes Nginx which are being used as webservers to run Kirby on. But there is also another, modern and very easy-to-configure alternative in the webserver world: [Caddy v2](https://caddyserver.com/v2).
 
 ## Caddy: No support for `.htaccess`
 
