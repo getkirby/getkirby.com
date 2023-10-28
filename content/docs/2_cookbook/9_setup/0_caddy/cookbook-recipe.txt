@@ -2,7 +2,7 @@ Title: Running Kirby on a Caddy v2 web server
 
 ----
 
-Published: 2023-08-03
+Published: 2023-10-28
 
 ----
 
@@ -18,15 +18,15 @@ Authors:
 
 Text:
 
-Kirby is compatible with (link: docs/guide/quickstart text: many different web servers). However, in reality it is mostly Apache and sometimes Nginx which are being used as webservers to run Kirby on. But there is also another, modern and very easy-to-configure alternative in the webserver world: [Caddy v2](https://caddyserver.com/v2).
+Kirby is compatible with (link: docs/guide/quickstart text: many different web servers). However, in reality it is mostly Apache and sometimes nginx which are being used as webservers to run Kirby on. But there is also another, modern and very easy-to-configure alternative in the webserver world: [Caddy v2](https://caddyserver.com/v2).
 
 ## Caddy: No support for `.htaccess`
 
-Just like Nginx the Caddy webserver does not use the famous and project-specific `.htaccess` files that Kirby ships with. So instead of using this file, you'll have to configure the webserver manually through a special configuration file called `Caddyfile`. Caddy tries to load this file from the current directory, so run Caddy from the same folder that contains your `Caddyfile` or pass the path manually with `caddy run --config /path/to/Caddyfile`.
-
+Just like nginx, the Caddy webserver does not use the famous and project-specific `.htaccess` files that Kirby ships with. So instead of using this file, you'll have to configure the webserver manually through a special configuration file called `Caddyfile`. Caddy tries to load this file from the current directory, so run Caddy from the same folder that contains your `Caddyfile` or pass the path manually with `caddy run --config /path/to/Caddyfile`.
 
 ## Configuration via Caddyfile
-Caddy uses its own [configuration file format and syntax](https://caddyserver.com/docs/caddyfile/concepts). These Caddyfiles are typically very short and efficient and allow you to configure a webserver with very little content. This is also due to the fact that Caddy uses a lot of very good and modern defaults compared to older webservers like Apache. Therefore Caddy makes ist very easy to host websites with very little configuration and something like TLS only requires a single line in a Caddy configuration.
+
+Caddy uses its own [configuration file format and syntax](https://caddyserver.com/docs/caddyfile/concepts). These Caddyfiles are typically very short and efficient and allow you to configure a webserver with a low number of lines. This is also due to the fact that Caddy uses a lot of very good and modern defaults compared to older webservers like Apache. Therefore Caddy makes it very easy to host websites with very little configuration and something like TLS only requires a single line in a Caddy configuration.
 
 <info>
 Web server configuration is a very big topic and there are many things to consider for every individual use case. We can only offer a **starting point** for a good config and we can't cover every aspect in this article. So this article will not cover every aspect of webserver configuration (e.g. performance-related optimizations).
@@ -74,15 +74,15 @@ We're creating two custom **snippets** here with the names `common` and `kirby`.
 php_fastcgi php:9000
 ```
 
-This is the line that does the [handover to the PHP interpreter](https://caddyserver.com/docs/caddyfile/directives/php_fastcgi). We're using the modern FastCGI interface for this handover. The `php_fastcgi` directive takes a network address or unix socket as a parameter, where a PHP-FPM process is listening and waiting for scripts to be run. So this setting depends on your specific setup. If you're using docker, you can just put down the name and port of your FPM container (e.g. `php:9000`). If you're running PHP-FPM on the same system, you can use `localhost` followed by the port number.
-This directive also comes with a lot of good default values for PHP-specific configuration values (e.g. it automatically sets `try_files` to contain an `index.php` file – so a request gets forwarded to PHP when there is no file with a specific name)
+This is the line that does the [handover to the PHP interpreter](https://caddyserver.com/docs/caddyfile/directives/php_fastcgi). We're using the modern FastCGI interface for this handover. The `php_fastcgi` directive takes a network address or unix socket as a parameter, where a PHP-FPM process is listening and waiting for scripts to be run. So this setting depends on your specific setup. If you're using Docker, you can set the name and port of your FPM container (e.g. `php:9000`). If you're running PHP-FPM on the same system, you can use `localhost` followed by the port number.
+The `php_fastcgi` directive also comes with a lot of good default values for PHP-specific configuration values (e.g. it automatically sets `try_files` to look for an `index.php` file – so a request gets forwarded to PHP when there is no file with a specific name)
 <br/>
 
 ```
 tls name@user.com
 ```
 
-This directive will take care of your TLS certificate. If you want to use a free certificate from Let's Encrypt, just enter your email address here and you're done. If you want to run your Kirby site locally, use `tls internal` for a self-signed certificate.
+This directive will take care of your TLS certificate. If you want to use a free certificate from Let's Encrypt, enter your email address here and you're done. If you want to run your Kirby site locally, use `tls internal` for a self-signed certificate.
 <br/>
 
 
@@ -106,11 +106,11 @@ Here we are defining a custom matcher – which is a statement that we can then 
 
 
 ```
-:80 {
+mydomain.com {
 	...
 }
 ```
-This is a site block, which is the top level component of a Caddyfile. The block begins with the address of our server. We're just defining a port number (80) here, which means that our server will listen on all its interfaces. Instead you can also put an IP address or a domain name here, depending on your server setup.
+This is a site block, which is the top level component of a Caddyfile. The block begins with the address of our server. We're defining the domain so that Caddy can route incoming requests to the site and generate a certificate for it. Instead you can also put an IP address or a port number here (like `:80`), depending on your server setup.
 <br/>
 
 
@@ -121,4 +121,3 @@ root * /usr/share/caddy
 ```
 
 Here, we're importing/using the two snippets we defined earlier. Also we're setting the root folder for this server, which should point to the absolute filesystem path, where your Kirby files are located.
-<br/>
