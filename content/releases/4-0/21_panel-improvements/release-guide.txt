@@ -89,12 +89,7 @@ this.$dialog(this.endpoints.field + "/delete")
 
 #### New Icons
 
-We've added new icons to our Panel iconset:
-
-- `anchor`
-- `clear`
-- `split`
-- `merge`
+We've added new icons to our Panel iconset: `anchor`, `clear`, `lab`, `merge` and `split`.
 
 #### New Components
 
