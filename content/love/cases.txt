@@ -11,7 +11,3 @@ Priority: 0.8
 ----
 
 Changefreq: daily
-
-----
-
-Link: https://www.kirbysites.com/
