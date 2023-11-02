@@ -19,4 +19,28 @@ Text:
 
 (image: totp.png)
 
+Time-based one-time codes (TOTP) are now supported for two-factor authentication and will be used, when activated for the use, instead one-time codes via email:
 
+```php "site/config/config.php"
+<?php
+return [
+  'auth' => [
+    'methods' => [
+      'password' => ['2fa' => true]
+    ]
+  ]
+];
+```
+
+Each user can set up TOTP in the account view in the Panel, adding their secret key to their authenticator app.
+
+## QR codes
+As a side benefit to adding TOTP support, QR code generation is now directly built into Kirby:
+
+```php
+$qr = new Kirby\Image\QrCode('https://getkirby.com');
+$qr->toSvg(color: '#ff00ff');
+$qr->toDataUri(color: '#ff00ff');
+
+$page->myLinkField()->toQrCode()->toSvg();
+```
