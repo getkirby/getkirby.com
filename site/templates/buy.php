@@ -31,7 +31,7 @@
 
 		<div class="columns" style="--columns: 2; --gap: var(--spacing-3)">
 	    <div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
-				<header>
+				<header class="mb-6">
 					<h2>Basic</h2>
 					<a href="https://pay.paddle.com/checkout/824338" target="_blank" class="h2 block mb-3">
 						<k-price product="824338">€99</k-price> per site
@@ -50,7 +50,7 @@
 			</div>
 
 	    <div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
-				<header>
+				<header class="mb-6">
 					<h2>Enterprise</h2>
 					<a href="https://pay.paddle.com/checkout/824340" target="_blank" class="h2 block mb-3">
 						<k-price product="824340">€399</k-price> per site
