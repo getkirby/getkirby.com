@@ -1,74 +1,88 @@
 <?php layout() ?>
 
+
 <article>
-  <div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: 3rem">
+  <div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-6)">
 
-    <h1 class="h1 max-w-xl">
-      The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
-    </h1>
+		<div>
+			<h1 class="h1 max-w-xl mb-24">
+				The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
+			</h1>
+			<ul class="text-lg">
+				<li class="flex items-center">
+					<figure class="mr-3"><?= icon('check') ?></figure>
+					No subscription
+				</li>
+				<li class="flex items-center">
+					<figure class="mr-3"><?= icon('check') ?></figure>
+					3 years of free upgrades
+				</li>
+				<li class="flex items-center">
+					<figure class="mr-3"><?= icon('check') ?></figure>
+					All features included
+				</li>
+				<li class="flex items-center">
+					<figure class="mr-3"><?= icon('check') ?></figure>
+					No hidden costs
+				</li>
+			</ul>
 
-    <div class="pricing highlight bg-white shadow-xl rounded">
-      <?php if ($banner) : ?>
-        <div>
-          <p class="mb-6"><?= $banner->text() ?></p>
-          <del class="invisible sale h6 color-gray-700" style="color: var(--color-purple-600)">€</del>
-        </div>
-      <?php endif ?>
-      <a href="https://pay.paddle.com/checkout/<?= $product ?>" target="_blank" class="h1 block mb-3 price invisible"><span>€</span> per site</a>
+		</div>
 
-      <div class="columns" style="--columns: 2; --gap: var(--spacing-12)">
-        <div class="flex flex-column justify-between">
-          <p class="h6 mb-12 vat invisible">+ VAT if applicable</p>
-          <p>
-            <a href="https://pay.paddle.com/checkout/<?= $product ?>" target="_blank" class="btn btn--filled mb-1">
-              <?= icon('cart') ?>
-              Buy Kirby
-            </a>
-          </p>
-        </div>
-        <div>
-          <p class="h6 mb-3">Let's keep it simple</p>
-          <ul class="text-lg">
-            <li class="flex items-center">
-              <figure class="mr-3"><?= icon('check') ?></figure>
-              One price
-            </li>
-            <li class="flex items-center">
-              <figure class="mr-3"><?= icon('check') ?></figure>
-              All features
-            </li>
-            <li class="flex items-center">
-              <figure class="mr-3"><?= icon('check') ?></figure>
-              No hidden fees
-            </li>
-            <li class="flex items-center">
-              <figure class="mr-3"><?= icon('check') ?></figure>
-              No subscription
-            </li>
-            <li>
-              <a class="flex items-center underline" href="<?= url('releases/4.0') ?>">
-                <figure class="mr-3"><?= icon('check') ?></figure>
-                v4 license included
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+		<div class="columns" style="--columns: 2; --gap: var(--spacing-3)">
+	    <div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
+				<header>
+					<h2>Basic</h2>
+					<a href="https://pay.paddle.com/checkout/824338" target="_blank" class="h2 block mb-3">
+						<k-price product="824338">€99</k-price> per site
+					</a>
+					<p class="text-sm color-gray-700">A discounted license for smaller websites and apps</p>
+				</header>
+				<footer>
+					<p class="text-sm mb-3"><i class="color-gray-700">Revenue Limit</i><br>Less than €1M per year</p>
+					<p>
+						<a href="https://pay.paddle.com/checkout/824338" target="_blank" class="btn btn--filled mb-1 w-100%">
+							<?= icon('cart') ?>
+							Buy Basic
+						</a>
+					</p>
+				</footer>
+			</div>
+
+	    <div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
+				<header>
+					<h2>Enterprise</h2>
+					<a href="https://pay.paddle.com/checkout/824340" target="_blank" class="h2 block mb-3">
+						<k-price product="824340">€399</k-price> per site
+					</a>
+					<p class="text-sm color-gray-700">Suitable for large organisations with mission-critical projects</p>
+				</header>
+
+				<footer>
+					<p class="text-sm mb-3"><i class="color-gray-700">Revenue Limit</i><br>No limit</p>
+					<p>
+						<a href="https://pay.paddle.com/checkout/824340" target="_blank" class="btn btn--filled mb-1 w-100%">
+							<?= icon('cart') ?>
+							Buy Enterprise
+						</a>
+					</p>
+				</footer>
+			</div>
+		</div>
   </div>
 
   <section class="mb-42">
     <h2 class="h2 mb-6">Volume discounts</h2>
-    <div class="columns rounded overflow-hidden" style="--columns-md: 2; --columns: 4; --gap: var(--spacing-1)">
+    <div class="columns rounded overflow-hidden" style="--columns-md: 2; --columns: 4; --gap: var(--spacing-3)">
       <?php foreach ($discounts as $volume => $discount) : ?>
-        <a class="block p-12 bg-light text-center" target="_blank" href="/buy/checkout/<?= $volume ?>" data-discount="<?= $discount ?>" data-volume="<?= $volume ?>">
+        <a class="block p-12 bg-light rounded text-center" target="_blank" href="/buy/checkout/<?= $volume ?>" data-discount="<?= $discount ?>" data-volume="<?= $volume ?>">
           <article>
             <h3 class="mb-3 font-mono text-sm"><?= $volume ?> licenses</h3>
             <?php if ($banner): ?>
               <del class="invisible discounted-list-price h6" style="color: var(--color-purple-600)">€</del>
             <?php endif ?>
             <p class="h2 mb-6 discounted-price">&nbsp;</p>
-            <p class="btn btn--filled font-bold">
+            <p class="btn btn--filled">
               <?= icon('cart') ?>
               Save <?= $discount ?>%<?php if ($banner): ?> on top<?php endif ?>!
             </p>
@@ -82,7 +96,7 @@
             <span class="block">&nbsp;</span>
           <?php endif ?>
           <p class="h2 mb-6 discounted-price">Contact us</p>
-          <p class="btn btn--outlined font-bold">
+          <p class="btn btn--outlined">
             <?= icon('user') ?>
             Support
           </p>
@@ -142,12 +156,19 @@
 </article>
 
 <script type="text/javascript">
-  function paddle_price(data) {
-    const product = data.response.products[0];
-    const currency = product.currency;
-    const currentPrice = product.price.net;
-    const listPrice = product.list_price.net;
-    const isSale = currentPrice !== listPrice;
+
+class Price extends HTMLElement {
+
+	constructor() {
+		super();
+
+		this.id = this.getAttribute("product");
+		this.product = window.paddle.products.find(({ product_id}) => product_id == this.id);
+		this.currency = this.product.currency;
+		this.price = this.product.list_price.net;
+	}
+
+	connectedCallback() {
 
     // Try to use formatter with narrow currency symbol,
     // fall back to normal symbol if not supported by browser
@@ -155,7 +176,7 @@
     try {
       formatter = new Intl.NumberFormat("en", {
         style: "currency",
-        currency,
+        currency: this.currency,
         currencyDisplay: "narrowSymbol",
         minimumFractionDigits: 0
       });
@@ -165,46 +186,20 @@
       }
       formatter = new Intl.NumberFormat("en", {
         style: "currency",
-        currency,
+        currency: this.currency,
         minimumFractionDigits: 0
       });
     }
 
-    const $price = document.querySelector(".price");
-    const $vat = document.querySelector(".vat");
-    const $sale = document.querySelector(".sale");
+		this.innerHTML = formatter.format(this.price);
+	}
 
-    $price.firstElementChild.innerText = formatter.format(currentPrice);
-    $price.classList.remove("invisible");
-    $vat.classList.remove("invisible");
+}
 
-    const packagePrice = (price, discount, volume) => {
-      price = price * ((100 - discount) / 100) * volume;
-      return Math.floor(price / 5) * 5;
-    };
+function paddle_price(data) {
+	window.paddle = data.response;
+	customElements.define("k-price", Price);
+}
 
-    Array.from(document.querySelectorAll("[data-discount]")).forEach(discountBox => {
-      const volume = parseInt(discountBox.getAttribute("data-volume"));
-      const discount = parseInt(discountBox.getAttribute("data-discount"));
-      const nicePrice = packagePrice(currentPrice, discount, volume);
-
-      discountBox.querySelector(".discounted-price").innerText = formatter.format(nicePrice);
-
-      if (isSale) {
-        const listPriceElement = discountBox.querySelector(".discounted-list-price");
-        const listPriceForPackage = packagePrice(listPrice, discount, volume);
-
-        listPriceElement.innerHTML = formatter.format(listPriceForPackage);
-        listPriceElement.classList.remove("invisible");
-      }
-
-    });
-
-    if (isSale) {
-      $sale.innerHTML = formatter.format(listPrice);
-      $sale.classList.remove("invisible");
-    }
-  }
 </script>
-
-<script src="https://checkout.paddle.com/api/2.0/prices?product_ids=<?= $product ?>&callback=paddle_price"></script>
+<script src="https://checkout.paddle.com/api/2.0/prices?product_ids=824338,824340&callback=paddle_price"></script>
