@@ -13,7 +13,7 @@
           <li><a href="/features/creators">For content creators</a></li>
           <li><a href="/features/clients">For clients & agencies</a></li>
           <li><hr /></li>
-          <li><a href="/love">Showcase</a></li>
+          <li><a class="is-external" href="https://www.kirbysites.com/">Showcase</a></li>
           <li><a href="/releases">Releases</a></li>
         </ul>
       </li>
@@ -53,7 +53,7 @@
     <ul class="menu-1 menu-steps">
       <li><a href="/try">Try</a></li>
       <li>
-        <a href="/love">
+        <a href="https://www.kirbysites.com/">
           <?= icon('heart') ?>
         </a>
       </li>

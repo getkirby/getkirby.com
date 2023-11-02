@@ -35,7 +35,7 @@
               <li><a href="/features/designers">For designers</a></li>
               <li><a href="/features/creators">For content creators</a></li>
               <li><a href="/features/clients">For clients & agencies</a></li>
-              <li><a href="/love">Showcase</a></li>
+              <li><a href="https://www.kirbysites.com/">Showcase</a></li>
               <li><a href="/releases">Releases</a></li>
 
             </ul>
