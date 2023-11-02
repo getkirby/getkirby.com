@@ -1,167 +1,167 @@
 :root {
-  --menu-dropdown-bg: var(--color-black);
-  --menu-dropdown-color: var(--color-white);
+	--menu-dropdown-bg: var(--color-black);
+	--menu-dropdown-color: var(--color-white);
 }
 
 /** All sizes **/
 .menu a,
 .menu label {
-  padding: 0.5rem 0.75rem;
-  display: block;
-  line-height: var(--leading-none);
-  white-space: nowrap;
+	padding: 0.5rem 0.75rem;
+	display: block;
+	line-height: var(--leading-none);
+	white-space: nowrap;
 }
 .menu nav {
-  display: flex;
+	display: flex;
 }
 
 /** Try > Love > Buy **/
 .menu-steps a {
-  position: relative;
-  font-weight: var(--font-bold);
-  display: flex;
-  align-items: center;
+	position: relative;
+	font-weight: var(--font-bold);
+	display: flex;
+	align-items: center;
 }
 .menu-steps a::after {
-  position: absolute;
-  right: -0.125rem;
-  content: "\203A";
-  font-weight: 400;
+	position: absolute;
+	right: -0.125rem;
+	content: "\203A";
+	font-weight: 400;
 }
 .menu-steps li:last-child a::after {
-  display: none;
+	display: none;
 }
 .menu-steps svg * {
-  fill: currentColor;
+	fill: currentColor;
 }
 
 /** Menu Toggle **/
 .menu input {
-  position: absolute;
-  visibility: hidden;
-  width: 0;
-  height: 0;
-  opacity: 0;
+	position: absolute;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+	opacity: 0;
 }
 .menu-toggle {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .menu-2 .is-external {
-  position: relative;
-  padding-right: 3rem;
+	position: relative;
+	padding-right: 3rem;
 }
 .menu-2 .is-external::after {
-  position: absolute;
-  content: "→";
-  top: 50%;
-  right: 0.75rem;
-  transform: translateY(-50%) rotate(-45deg);
-  color: var(--color-gray-400);
+	position: absolute;
+	content: "→";
+	top: 50%;
+	right: 0.75rem;
+	transform: translateY(-50%) rotate(-45deg);
+	color: var(--color-gray-400);
 }
 
 /** Small **/
 @media screen and (max-width: 60rem) {
-  .menu nav {
-    position: absolute;
-    top: 100%;
-    width: 100%;
-    max-width: 18rem;
-    right: 0.5rem;
-    display: none;
-    padding: var(--spacing-3);
-    background: var(--menu-dropdown-bg);
-    color: var(--menu-dropdown-color);
-    font-size: var(--text-sm);
-    flex-direction: column;
-    border-radius: var(--rounded-xs);
-    box-shadow: var(--shadow-xl);
-    z-index: 3;
-  }
-  .menu input:checked ~ nav {
-    display: flex;
-  }
-  .menu ul {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-  }
-  .menu-1 > .has-submenu > a {
-    font-weight: var(--font-bold);
-  }
-  .menu-2 a {
-    opacity: 0.75;
-    padding-left: var(--spacing-6);
-  }
-  .menu-steps {
-    display: flex;
-    align-items: center;
-  }
+	.menu nav {
+		position: absolute;
+		top: 100%;
+		width: 100%;
+		max-width: 18rem;
+		right: 0.5rem;
+		display: none;
+		padding: var(--spacing-3);
+		background: var(--menu-dropdown-bg);
+		color: var(--menu-dropdown-color);
+		font-size: var(--text-sm);
+		flex-direction: column;
+		border-radius: var(--rounded-xs);
+		box-shadow: var(--shadow-xl);
+		z-index: 3;
+	}
+	.menu input:checked ~ nav {
+		display: flex;
+	}
+	.menu ul {
+		padding-top: 0.25rem;
+		padding-bottom: 0.25rem;
+	}
+	.menu-1 > .has-submenu > a {
+		font-weight: var(--font-bold);
+	}
+	.menu-2 a {
+		opacity: 0.75;
+		padding-left: var(--spacing-6);
+	}
+	.menu-steps {
+		display: flex;
+		align-items: center;
+	}
 }
 
 /** Large **/
 @media screen and (min-width: 60rem) {
-  .menu input,
-  .menu label {
-    display: none;
-  }
-  .menu-1 {
-    display: flex;
-    align-items: center;
-  }
-  .menu-1 > li {
-    position: relative;
-  }
-  .menu-1 > .has-submenu > a {
-    padding-right: 1.75rem;
-  }
-  .menu-1 > .has-submenu > a::after {
-    content: "\203A";
-    position: absolute;
-    margin-top: -0.4rem;
-    right: 0.75rem;
-    top: 50%;
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
-  }
-  .menu-2 {
-    position: absolute;
-    display: none;
-    top: 100%;
-    left: 50%;
-    z-index: 1;
-    transform: translateX(-50%);
-    background: var(--menu-dropdown-bg);
-    color: var(--menu-dropdown-color);
-    padding-top: 0.375rem;
-    padding-bottom: 0.375rem;
-    border-radius: var(--rounded-xs);
-    box-shadow: var(--shadow-xl);
-  }
-  .menu-2 a {
-    padding: 0.375rem 1rem;
-    font-size: var(--text-sm);
-  }
-  .menu-2 hr {
-    margin: var(--spacing-2) var(--spacing-3);
-    border-top: 1px solid var(--color-gray-800);
-  }
-  .menu-2::before {
-    --arrow: var(--spacing-1);
-    position: absolute;
-    top: calc(var(--arrow) * -1);
-    left: 50%;
-    transform: translateX(-50%);
-    content: "";
-    border-bottom: var(--arrow) solid var(--menu-dropdown-bg);
-    border-left: var(--arrow) solid transparent;
-    border-right: var(--arrow) solid transparent;
-  }
-  .menu-1 > li:focus .menu-2,
-  .menu-1 > li:focus-within .menu-2,
-  .menu-1 > li:hover .menu-2 {
-    display: block;
-  }
-  .menu-steps {
-    margin: 0 0.75rem;
-  }
+	.menu input,
+	.menu label {
+		display: none;
+	}
+	.menu-1 {
+		display: flex;
+		align-items: center;
+	}
+	.menu-1 > li {
+		position: relative;
+	}
+	.menu-1 > .has-submenu > a {
+		padding-right: 1.75rem;
+	}
+	.menu-1 > .has-submenu > a::after {
+		content: "\203A";
+		position: absolute;
+		margin-top: -0.4rem;
+		right: 0.75rem;
+		top: 50%;
+		-webkit-transform: rotate(90deg);
+		transform: rotate(90deg);
+	}
+	.menu-2 {
+		position: absolute;
+		display: none;
+		top: 100%;
+		left: 50%;
+		z-index: 1;
+		transform: translateX(-50%);
+		background: var(--menu-dropdown-bg);
+		color: var(--menu-dropdown-color);
+		padding-top: 0.375rem;
+		padding-bottom: 0.375rem;
+		border-radius: var(--rounded);
+		box-shadow: var(--shadow-xl);
+	}
+	.menu-2 a {
+		padding: 0.375rem 1rem;
+		font-size: var(--text-sm);
+	}
+	.menu-2 hr {
+		margin: var(--spacing-2) var(--spacing-3);
+		border-top: 1px solid var(--color-gray-800);
+	}
+	.menu-2::before {
+		--arrow: var(--spacing-1);
+		position: absolute;
+		top: calc(var(--arrow) * -1);
+		left: 50%;
+		transform: translateX(-50%);
+		content: "";
+		border-bottom: var(--arrow) solid var(--menu-dropdown-bg);
+		border-left: var(--arrow) solid transparent;
+		border-right: var(--arrow) solid transparent;
+	}
+	.menu-1 > li:focus .menu-2,
+	.menu-1 > li:focus-within .menu-2,
+	.menu-1 > li:hover .menu-2 {
+		display: block;
+	}
+	.menu-steps {
+		margin: 0 0.75rem;
+	}
 }
