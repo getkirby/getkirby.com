@@ -46,7 +46,7 @@
 	}
 </style>
 
-<header class="mb-12 flex items-end justify-between release-header">
+<header class="mb-36 flex items-end justify-between release-header">
 	<div>
 		<h1 class="h1"><?= $page->title() ?></h1>
 		<p class="h1 color-gray-600"><?= $page->subtitle() ?></p>
@@ -57,9 +57,6 @@
 </header>
 
 <article class="release-wrapper">
-	<?php snippet('templates/release-40/intro') ?>
-	<?php snippet('templates/release-40/roadmap') ?>
-
 	<?php foreach ($sections as $section) : ?>
 		<?php snippet([
 			'templates/release-40/' . $section->slug(),
