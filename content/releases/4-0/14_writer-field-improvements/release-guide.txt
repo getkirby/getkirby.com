@@ -172,11 +172,9 @@ fields:
       - 4
 ```
 
-## Counter
+## New marks
 
-Added new `minlength`, `maxlength` and counter options, same behavior as for the `textarea` field.
-
-## `sub` and `sup` marks
+### `sub` and `sup` marks
 
 ```yaml
 fields:
@@ -187,14 +185,11 @@ fields:
       - sup
 ```
 
-## Clear formats
+### Clear formats
+New writer field mark `clear` that removes all formatting marks (of the default marks all but email and link). 
 
-- New writer field mark that clears all formatting marks (of the default ones all but email and link). 
-- New `clear` icon
+## Counter
+New `minlength`, `maxlength` and `counter` options that share the same behavior as in the `textarea` field.
 
 ## Custom marks + nodes extension
-
-- New `writerNodes` Panel extension
-- New `writerMarks` Panel extension
-
-(link: docs/reference/plugins/extensions/writer-marks-nodes text: → Learn more)
+New `writerNodes` and `writerMarks` Panel extension: (link: docs/reference/plugins/extensions/writer-marks-nodes text: Learn more)
