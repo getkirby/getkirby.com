@@ -180,38 +180,6 @@ If you don’t want the Panel to connect to our server, registration via the Pan
 5. Rename the downloaded file to `.license` (without extensions).
 6. Place it in the `/site/config/` folder of your Kirby installation.
 
-
-## Updates
-
-To update Kirby, download the latest version and replace the `kirby` folder.
-
-Make sure to delete the `media` folder. It will be automatically recreated.
-
-If you use any plugins, make sure to update them as well.
-
-That's it! Because Kirby does not use a database by default, you don't have to run any database migrations.
-
-<warning>
-Kirby uses the [Semantic Versioning](https://semver.org) scheme:
-{major}.{minor}(.{patch})
-
-**Major releases** (e.g 4.0 to 5.0) may contain breaking changes and deprecations. In such a case, you might have to update your code and plugins used in your installation. You can find breaking changes of a new release in the changelogs. If you are updating from older versions, multiple changelogs may apply. Always read them carefully to identify potential issues.
-
-**Minor and patch releases** (e.g. 4.1 to 4.2 or 4.1 to 4.1.1) can generally be applied without changes to your site code.
-
-In any case, please never update a live website directly on the server. Test updates locally first to see if something breaks.
-</warning>
-
-### Updating Kirby with the advanced methods
-
-If you used one of the advanced installation methods, you can also use them to update Kirby:
-
-- (link: docs/cookbook/setup/composer#updating-kirby text: Update via Composer)
-- (link: docs/cookbook/setup/git#updating-kirby text: Update of the Git submodule)
-
-### Upgrade from Kirby 2
-If you want to upgrade an existing Kirby 2 installation, make sure to follow all the steps from our (link: docs/cookbook/setup/migrate-site text: Kirby 2 upgrade) recipe.
-
 ## Where to go from here
 
 (columns…)

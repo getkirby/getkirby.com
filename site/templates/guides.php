@@ -20,7 +20,7 @@
 			<?php foreach ($guides as $guide): ?>
 				<li class="bg-light rounded p-6">
 					<article>
-						<a href="<?= $guide->url() ?>">
+						<a class="block" href="<?= $guide->url() ?>">
 							<h3 class="flex font-bold items-center mb-3" style="gap: .5rem">
 								<?= $guide->images()->findBy('extension', 'svg')?->read() ?> <?= $guide->title() ?>
 							</h3>

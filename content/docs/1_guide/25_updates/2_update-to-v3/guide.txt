@@ -1,0 +1,12 @@
+Title: Update to v3
+
+----
+
+Description:
+
+----
+Text:
+
+### Upgrade from Kirby 2
+
+If you want to upgrade an existing Kirby 2 installation, make sure to follow all the steps from our (link: docs/cookbook/setup/migrate-site text: Kirby 2 upgrade) recipe.
