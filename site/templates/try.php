@@ -29,7 +29,7 @@
         You are one click away from your personal demo. Explore the Panel and get to know Kirby with our six example projects.
       </p>
 
-      <button aria-label="Start the demo" class="block rounded w-100% mb-6">
+      <button aria-label="Start the demo" class="block rounded shadow-2xl w-100% mb-6">
         <?php if ($image = image('home/company/panel.png')): ?>
         <figure class="bg-light" style="--aspect-ratio: <?= $image->width() ?>/<?= $image->height() ?>">
           <?= img($image, [
