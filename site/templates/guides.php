@@ -1,27 +1,30 @@
 <?php layout() ?>
 
+<style>
+.guides h3 svg {
+	width: 18px;
+	height: 18px;
+}
+</style>
+
+
 <div class="mb-36">
 
   <h1 class="h1 mb-24">Guide</h1>
 	<?php foreach (collection('guides')->group('category') as $category => $guides): ?>
-	<section>
+	<section class="mb-24">
 		<header>
-			<h2 class="h2 mb-24" style="font-size: var(--text-4xl)"><?= option('categories')[$category] ?? ucfirst($category) ?></h2>
+			<h2 class="h6 mb-6"><?= option('categories')[$category] ?? ucfirst($category) ?></h2>
 		</header>
-		<ul class="guides auto-fill auto-rows-fr mb-24" style="--min: 16rem; --gap: var(--spacing-12)">
+		<ul class="guides auto-fill auto-rows-fr" style="--min: 16rem; --gap: var(--spacing-3)">
 			<?php foreach ($guides as $guide): ?>
-				<li>
+				<li class="bg-light rounded p-6">
 					<article>
-						<a class="block" href="<?= $guide->url() ?>">
-							<?php if ($svg = $guide->images()->findBy('extension', 'svg')): ?>
-								<figure class="mb-3" style="--size: 4rem">
-									<?= $svg->read() ?>
-								</figure>
-							<?php endif ?>
-							<div class="border-top pt-3">
-								<h3 class="h2 mb-3"><?= $guide->title() ?></h3>
-								<p class="color-gray-700"><?= $guide->description() ?></p>
-							</div>
+						<a href="<?= $guide->url() ?>">
+							<h3 class="flex font-bold items-center mb-3" style="gap: .5rem">
+								<?= $guide->images()->findBy('extension', 'svg')?->read() ?> <?= $guide->title() ?>
+							</h3>
+							<p class="color-gray-700"><?= $guide->description() ?></p>
 						</a>
 					</article>
 				</li>
