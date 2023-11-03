@@ -6,7 +6,7 @@
   </header>
 
   <ul class="columns mb-24" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 3; --gap: var(--spacing-12)">
-    <?php foreach ($page->children()->flip()->not(page('releases/4-0')) as $release) : ?>
+    <?php foreach ($page->children()->flip() as $release) : ?>
       <li>
         <a href="<?= $release->releasePage()->or($release->url()) ?>" class="block mb-1">
           <header class="mb-3">
