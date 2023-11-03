@@ -65,6 +65,12 @@ return [
 		}
 	],
 	[
+		'pattern' => 'plugins/v4',
+		'action'  => function () {
+			return page('plugins')->render(['filter' => 'v4']);
+		}
+	],
+	[
 		'pattern' => 'plugins/new',
 		'action'  => function () {
 			return page('plugins')->render(['filter' => 'published']);

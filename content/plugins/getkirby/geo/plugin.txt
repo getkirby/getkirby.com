@@ -29,6 +29,10 @@ Composer: getkirby/geo
 
 ----
 
+Versions: 3,4
+
+----
+
 Example:
 
 ```php

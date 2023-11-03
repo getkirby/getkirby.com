@@ -22,8 +22,14 @@ return function($page, $filter) {
 			$heading  = 'All plugins';
 			$category = 'all';
 			$plugins  = $page
-					->children()
-					->children()
+					->grandChildren()
+					->sortBy('title', 'asc');
+	} else if ($filter === 'v4') {
+			$heading  = 'Kirby 4 plugins';
+			$category = 'v4';
+			$plugins  = $page
+					->grandChildren()
+					->filter('versions', '*=', '4')
 					->sortBy('title', 'asc');
 	} elseif ($filter) {
 			$heading = 'Newly added plugins';

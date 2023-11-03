@@ -29,6 +29,10 @@ Composer: getkirby/staticache
 
 ----
 
+Versions: 3,4
+
+----
+
 Example:
 
 ```php
