@@ -42,6 +42,7 @@ class Page extends ModelWithContent
 
 	/**
 	 * All registered page methods
+	 * @todo Remove when support for PHP 8.2 is dropped
 	 */
 	public static array $methods = [];
 
@@ -845,7 +846,7 @@ class Page extends ModelWithContent
 			return null;
 		}
 
-		return Str::date($modified, $format, $handler ?? $this->kirby()->option('date.handler', 'date'));
+		return Str::date($modified, $format, $handler);
 	}
 
 	/**

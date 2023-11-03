@@ -6,6 +6,7 @@ use Closure;
 use DateTime;
 use Exception;
 use IntlDateFormatter;
+use Kirby\Cms\App;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Query\Query;
 use Throwable;
@@ -280,6 +281,16 @@ class Str
 	}
 
 	/**
+	 * Converts a camel-case string to kebab-case
+	 *
+	 * @param string $value The string to convert
+	 */
+	public static function camelToKebab(string $value = null): string
+	{
+		return static::lower(preg_replace('!([a-z0-9])([A-Z])!', '$1-$2', $value));
+	}
+
+	/**
 	 * Checks if a str contains another string
 	 */
 	public static function contains(
@@ -299,12 +310,13 @@ class Str
 	 * Convert timestamp to date string
 	 * according to locale settings
 	 *
-	 * @param string $handler date, intl or strftime
+	 * @param 'date'|'intl'|'strftime'|null $handler Custom date handler or `null`
+	 *                                               for the globally configured one
 	 */
 	public static function date(
 		int|null $time = null,
 		string|IntlDateFormatter $format = null,
-		string $handler = 'date'
+		string|null $handler = null
 	): string|int|false {
 		if (is_null($format) === true) {
 			return $time;
@@ -313,6 +325,13 @@ class Str
 		// $format is an IntlDateFormatter instance
 		if ($format instanceof IntlDateFormatter) {
 			return $format->format($time ?? time());
+		}
+
+		// automatically determine the handler from global configuration
+		// if an app instance is already running; otherwise fall back to
+		// `date` for backwards-compatibility
+		if ($handler === null) {
+			$handler = App::instance(null, true)?->option('date.handler') ?? 'date';
 		}
 
 		// `intl` handler
@@ -548,6 +567,18 @@ class Str
 	}
 
 	/**
+	 * Convert a kebab case string to camel case.
+	 */
+	public static function kebabToCamel(string $value = null): string
+	{
+		return ucfirst(preg_replace_callback(
+			'/-(.)/',
+			fn ($matches) => strtoupper($matches[1]),
+			$value ?? ''
+		));
+	}
+
+	/**
 	 * A UTF-8 safe version of strlen()
 	 */
 	public static function length(string $string = null): int
@@ -647,6 +678,8 @@ class Str
 				'alpha'      => static::pool(['alphaLower', 'alphaUpper']),
 				'num'        => range(0, 9),
 				'alphanum'   => static::pool(['alpha', 'num']),
+				'base32'     => array_merge(static::pool('alphaUpper'), range(2, 7)),
+				'base32hex'  => array_merge(range(0, 9), range('A', 'V')),
 				default      => []
 			};
 		}

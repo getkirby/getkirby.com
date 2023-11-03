@@ -36,6 +36,7 @@ class User extends ModelWithContent
 
 	/**
 	 * All registered user methods
+	 * @todo Remove when support for PHP 8.2 is dropped
 	 */
 	public static array $methods = [];
 
@@ -479,7 +480,6 @@ class User extends ModelWithContent
 		$modifiedContent = $this->storage()->modified('published', $languageCode);
 		$modifiedIndex   = F::modified($this->root() . '/index.php');
 		$modifiedTotal   = max([$modifiedContent, $modifiedIndex]);
-		$handler       ??= $this->kirby()->option('date.handler', 'date');
 
 		return Str::date($modifiedTotal, $format, $handler);
 	}
@@ -540,7 +540,7 @@ class User extends ModelWithContent
 	 */
 	public function passwordTimestamp(): int|null
 	{
-		$file = $this->passwordFile();
+		$file = $this->secretsFile();
 
 		// ensure we have the latest information
 		// to prevent cache attacks
@@ -618,6 +618,15 @@ class User extends ModelWithContent
 	protected function rules(): UserRules
 	{
 		return new UserRules();
+	}
+
+	/**
+	 * Reads a specific secret from the user secrets file on disk
+	 * @since 4.0.0
+	 */
+	public function secret(string $key): mixed
+	{
+		return $this->readSecrets()[$key] ?? null;
 	}
 
 	/**
@@ -736,9 +745,20 @@ class User extends ModelWithContent
 	}
 
 	/**
-	 * Returns the path to the password file
+	 * @deprecated 4.0.0 Use `->secretsFile()` instead
+	 * @codeCoverageIgnore
 	 */
 	protected function passwordFile(): string
+	{
+		return $this->secretsFile();
+	}
+
+	/**
+	 * Returns the path to the file containing
+	 * all user secrets, including the password
+	 * @since 4.0.0
+	 */
+	protected function secretsFile(): string
 	{
 		return $this->root() . '/.htpasswd';
 	}

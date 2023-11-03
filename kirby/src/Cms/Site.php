@@ -305,11 +305,7 @@ class Site extends ModelWithContent
 		string|null $format = null,
 		string|null $handler = null
 	): int|string {
-		return Dir::modified(
-			$this->root(),
-			$format,
-			$handler ?? $this->kirby()->option('date.handler', 'date')
-		);
+		return Dir::modified($this->root(), $format, $handler);
 	}
 
 	/**
@@ -407,7 +403,7 @@ class Site extends ModelWithContent
 	/**
 	 * Search all pages in the site
 	 */
-	public function search(string|null $query = null, array $params = []): Pages
+	public function search(string|null $query = null, string|array $params = []): Pages
 	{
 		return $this->index()->search($query, $params);
 	}

@@ -47,6 +47,10 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         array (
             'Composer\\Semver\\' => 16,
         ),
+        'B' => 
+        array (
+            'Base32\\' => 7,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -99,6 +103,10 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         array (
             0 => __DIR__ . '/..' . '/composer/semver/src',
         ),
+        'Base32\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/christian-riesen/base32/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -119,6 +127,8 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
     );
 
     public static $classMap = array (
+        'Base32\\Base32' => __DIR__ . '/..' . '/christian-riesen/base32/src/Base32.php',
+        'Base32\\Base32Hex' => __DIR__ . '/..' . '/christian-riesen/base32/src/Base32Hex.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Composer\\Semver\\Comparator' => __DIR__ . '/..' . '/composer/semver/src/Comparator.php',
         'Composer\\Semver\\CompilingMatcher' => __DIR__ . '/..' . '/composer/semver/src/CompilingMatcher.php',
@@ -163,6 +173,7 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Cms\\Auth\\Challenge' => __DIR__ . '/../..' . '/src/Cms/Auth/Challenge.php',
         'Kirby\\Cms\\Auth\\EmailChallenge' => __DIR__ . '/../..' . '/src/Cms/Auth/EmailChallenge.php',
         'Kirby\\Cms\\Auth\\Status' => __DIR__ . '/../..' . '/src/Cms/Auth/Status.php',
+        'Kirby\\Cms\\Auth\\TotpChallenge' => __DIR__ . '/../..' . '/src/Cms/Auth/TotpChallenge.php',
         'Kirby\\Cms\\Block' => __DIR__ . '/../..' . '/src/Cms/Block.php',
         'Kirby\\Cms\\BlockConverter' => __DIR__ . '/../..' . '/src/Cms/BlockConverter.php',
         'Kirby\\Cms\\Blocks' => __DIR__ . '/../..' . '/src/Cms/Blocks.php',
@@ -225,6 +236,7 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Cms\\Permissions' => __DIR__ . '/../..' . '/src/Cms/Permissions.php',
         'Kirby\\Cms\\Picker' => __DIR__ . '/../..' . '/src/Cms/Picker.php',
         'Kirby\\Cms\\Plugin' => __DIR__ . '/../..' . '/src/Cms/Plugin.php',
+        'Kirby\\Cms\\PluginAsset' => __DIR__ . '/../..' . '/src/Cms/PluginAsset.php',
         'Kirby\\Cms\\PluginAssets' => __DIR__ . '/../..' . '/src/Cms/PluginAssets.php',
         'Kirby\\Cms\\R' => __DIR__ . '/../..' . '/src/Cms/R.php',
         'Kirby\\Cms\\Responder' => __DIR__ . '/../..' . '/src/Cms/Responder.php',
@@ -358,6 +370,11 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Panel\\File' => __DIR__ . '/../..' . '/src/Panel/File.php',
         'Kirby\\Panel\\Home' => __DIR__ . '/../..' . '/src/Panel/Home.php',
         'Kirby\\Panel\\Json' => __DIR__ . '/../..' . '/src/Panel/Json.php',
+        'Kirby\\Panel\\Lab\\Category' => __DIR__ . '/../..' . '/src/Panel/Lab/Category.php',
+        'Kirby\\Panel\\Lab\\Docs' => __DIR__ . '/../..' . '/src/Panel/Lab/Docs.php',
+        'Kirby\\Panel\\Lab\\Example' => __DIR__ . '/../..' . '/src/Panel/Lab/Example.php',
+        'Kirby\\Panel\\Lab\\Snippet' => __DIR__ . '/../..' . '/src/Panel/Lab/Snippet.php',
+        'Kirby\\Panel\\Lab\\Template' => __DIR__ . '/../..' . '/src/Panel/Lab/Template.php',
         'Kirby\\Panel\\Menu' => __DIR__ . '/../..' . '/src/Panel/Menu.php',
         'Kirby\\Panel\\Model' => __DIR__ . '/../..' . '/src/Panel/Model.php',
         'Kirby\\Panel\\Page' => __DIR__ . '/../..' . '/src/Panel/Page.php',
@@ -369,6 +386,8 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Panel\\Search' => __DIR__ . '/../..' . '/src/Panel/Search.php',
         'Kirby\\Panel\\Site' => __DIR__ . '/../..' . '/src/Panel/Site.php',
         'Kirby\\Panel\\User' => __DIR__ . '/../..' . '/src/Panel/User.php',
+        'Kirby\\Panel\\UserTotpDisableDialog' => __DIR__ . '/../..' . '/src/Panel/UserTotpDisableDialog.php',
+        'Kirby\\Panel\\UserTotpEnableDialog' => __DIR__ . '/../..' . '/src/Panel/UserTotpEnableDialog.php',
         'Kirby\\Panel\\View' => __DIR__ . '/../..' . '/src/Panel/View.php',
         'Kirby\\Parsley\\Element' => __DIR__ . '/../..' . '/src/Parsley/Element.php',
         'Kirby\\Parsley\\Inline' => __DIR__ . '/../..' . '/src/Parsley/Inline.php',
@@ -422,6 +441,8 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Toolkit\\Properties' => __DIR__ . '/../..' . '/src/Toolkit/Properties.php',
         'Kirby\\Toolkit\\Silo' => __DIR__ . '/../..' . '/src/Toolkit/Silo.php',
         'Kirby\\Toolkit\\Str' => __DIR__ . '/../..' . '/src/Toolkit/Str.php',
+        'Kirby\\Toolkit\\SymmetricCrypto' => __DIR__ . '/../..' . '/src/Toolkit/SymmetricCrypto.php',
+        'Kirby\\Toolkit\\Totp' => __DIR__ . '/../..' . '/src/Toolkit/Totp.php',
         'Kirby\\Toolkit\\Tpl' => __DIR__ . '/../..' . '/src/Toolkit/Tpl.php',
         'Kirby\\Toolkit\\V' => __DIR__ . '/../..' . '/src/Toolkit/V.php',
         'Kirby\\Toolkit\\View' => __DIR__ . '/../..' . '/src/Toolkit/View.php',

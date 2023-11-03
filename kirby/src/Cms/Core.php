@@ -7,6 +7,7 @@ use Kirby\Cache\FileCache;
 use Kirby\Cache\MemCached;
 use Kirby\Cache\MemoryCache;
 use Kirby\Cms\Auth\EmailChallenge;
+use Kirby\Cms\Auth\TotpChallenge;
 use Kirby\Form\Field\BlocksField;
 use Kirby\Form\Field\LayoutField;
 
@@ -58,6 +59,7 @@ class Core
 		return [
 			'account'      => $this->root . '/areas/account.php',
 			'installation' => $this->root . '/areas/installation.php',
+			'lab'          => $this->root . '/areas/lab.php',
 			'languages'    => $this->root . '/areas/languages.php',
 			'login'        => $this->root . '/areas/login.php',
 			'logout'       => $this->root . '/areas/logout.php',
@@ -74,7 +76,8 @@ class Core
 	public function authChallenges(): array
 	{
 		return [
-			'email' => EmailChallenge::class
+			'email' => EmailChallenge::class,
+			'totp'  => TotpChallenge::class,
 		];
 	}
 

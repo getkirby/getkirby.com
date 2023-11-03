@@ -42,6 +42,7 @@ class File extends ModelWithContent
 
 	/**
 	 * All registered file methods
+	 * @todo Remove when support for PHP 8.2 is dropped
 	 */
 	public static array $methods = [];
 
@@ -492,7 +493,6 @@ class File extends ModelWithContent
 		$file     = $this->modifiedFile();
 		$content  = $this->modifiedContent($languageCode);
 		$modified = max($file, $content);
-		$handler ??= $this->kirby()->option('date.handler', 'date');
 
 		return Str::date($modified, $format, $handler);
 	}
