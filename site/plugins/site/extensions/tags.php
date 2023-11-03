@@ -175,7 +175,7 @@ $tags['class'] = $tags['method'] = [
 		'text'
 	],
 	'html' => function ($tag) {
-		$type = $tag->value;
+		$type = rtrim($tag->value, '()');
 		$text = $tag->attr('text');
 
 		// (class: foo method: bar)
@@ -188,6 +188,8 @@ $tags['class'] = $tags['method'] = [
 				$text = $name . '->' . $tag->attr('method') . '()';
 			}
 		}
+
+		$text ??= $type . '()';
 
 		return Types::format($type, true, trim($text));
 	}

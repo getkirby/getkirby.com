@@ -30,7 +30,7 @@ Text:
 
 #### QR code generation
 
-Kirby' new `Kirby\Image\QrCode` class, `qr()` helper function and `->toQrCode()` field method allow you to create QR codes right out of the box:
+Kirby' new `Kirby\Image\QrCode` class, (helper: qr) helper function and (method: $field->toQrCode text: ->toQrCode()) field method allow you to create QR codes right out of the box:
 
 ```php
 $qr = new Kirby\Image\QrCode('https://getkirby.com');
@@ -45,14 +45,14 @@ $page->myLinkField()->toQrCode()->toSvg();
 
 #### Support for UUIDs in URL helper
 
-You can now pass a page UUID or a file UUID to the `url()` helper and it will be converted to the actual URL:
+You can now pass a page UUID or a file UUID to the (helper: url) helper and it will be converted to the actual URL:
 
 ```php
 <?= url('page://abcd') ?>
 <?= url('file://abcd') ?>
 ```
 
-This will also work for other URL methods like. `$field->toUrl()`, `Url:to()`, etc.
+This will also work for other URL methods like. (method: $field->toUrl), (class: Kirby\Cms\Url method: to text: Url:to()), etc.
 
 #### Support for UUIDs in API calls
 
@@ -85,8 +85,53 @@ In addition to that there are new direct UUID file routes:
 /api/files/@$fileUUID
 ```
 
+### Better plugin asset handling
+- New `Kirby\Cms\Plugin::assets()` and `Kirby\Cms\Plugin::asset($assetName)` methods
+- New `Kirby\Cms\PluginAsset` object with many methods, e.g. `$plugin->asset('styles.css')->url()`
+- Plugin asset media url contains a modification timestamp to easily cachebust (e.g. https://getkirby.com/media/plugins/getkirby/test-plugin/2375797551-472389240/styles.css)
+- (helper: css) and (helper: js) helpers support passing plugin and plugin assets objects to include all assets of the plugin
+
+```php
+css([
+  'assets/css/index.css',
+  $kirby->plugin('foo/bar')
+]);
+
+css([
+  'assets/css/index.css',
+  $kirby->plugin('foo/bar')->assets(),
+]);
+
+css([
+  'assets/css/index.css',
+  $kirby->plugin('foo/bar')->asset('styles.css'),
+]);
+```
+
+### New `SymmetricCrypto` class
+`Kirby\Toolkit\SymmetricCrypto` is a user-friendly and safe abstraction for symmetrical authenticated encryption using the PHP `sodium` extension
+
+```php
+use Kirby\Toolkit\SymmetricCrypto;
+
+// encryption/decryption with a password
+$crypto     = new SymmetricCrypto(password: 'super secure');
+$ciphertext = $crypto->encrypt('a very confidential string');
+$plaintext  = $crypto->decrypt($ciphertext);
+
+// encryption with a random key
+$crypto     = new SymmetricCrypto();
+$ciphertext = $crypto->encrypt('a very confidential string');
+$secretKey  = $crypto->secretKey();
+
+// encryption/decryption with a previously generated key
+$crypto     = new SymmetricCrypto(secretKey: $secretKey);
+$ciphertext = $crypto->encrypt('a very confidential string');
+$plaintext  = $crypto->decrypt($ciphertext);
+```
+
 ### New `LazyValue` class
-Allows to protect a closure function from being called by other code that is testing for `instanceof Closure`.
+`Kirby\Toolkit\LazyValue` allows to protect a closure function from being called by other code that is testing for `instanceof Closure`.
 
 ```php
 $value = new LazyValue(fn ($a, $b, $c) => 'please protect me');
@@ -110,11 +155,16 @@ if ($value instanceof LazyValue) {
 #### More improvements
 
 - Extensions to add custom methods for structures and structure objects
-- New `App::models()` method that returns a generator for each model (site, files, pages and users) of the site
-- New `File::blueprints()` method that collects valid blueprints from the files sections and files fields of the parent model
+- New `Kirby\Toolkit\Str::camelToKebab()` method
+- New `Kirby\Cms\App::models()` method that returns a generator for each model (site, files, pages and users) of the site
+- New `Kirby\Cms\File::blueprints()` method that collects valid blueprints from the files sections and files fields of the parent model
 - Fields can now define `'hidden' => true` (component notation) or `::isHidden(): bool` (class-based) to make them non-rendering 
-- New `File::changeTemplate()` method
+- New `Kirby\Cms\File::changeTemplate()` method
 - New file permissions for `changeTemplate`
 - New `file.changeTemplate` hooks
+- New `Kirby\Filesystem\F::safeExtension()` method
+- New `Kirby\Filesystem\F::safeBasename()` method
+- `Kirby\Toolkit\Str::date()` and its dependents (e.g. `Kirby\Filesystem\F::modified()`, `Kirby\Filesystem\File::modified()`, `Kirby\Filesystem\Dir::modified()`) now respect the globally configured date handler
+- New `$date->formatWithHandler()` method for Kirby date objects that allows to use different date handlers or even the globally configured one (default).
 - New `Kirby\Email\Email::toArray()` and `Kirby\Email\Body::toArray()` methods
 - New `Kirby\Exception\AuthException` class

@@ -31,19 +31,15 @@ Github:
 - https://github.com/getkirby/v4/pull/47
 - https://github.com/getkirby/v4/pull/48
 - https://github.com/getkirby/v4/pull/52
+- https://github.com/getkirby/kirby/pull/5774
 
 ----
 
 Text:
 
-#### Removed deprecated code
-
-- `Kirby\Form\Options`, `Kirby\Form\OptionsApi` and `Kirby\Form\OptionsQuery` classes have been removed. Use `Kirby\Option\Options`, `Kirby\Option\OptionsApi` or `Kirby\Option\OptionsQuery` instead.
-- `Kirby\Toolkit\Query` class has been removed. Use `Kirby\Query\Query` instead.
-- Passing the `$slot` or `$slots` variables to snippets was deprecated and support has now finally been removed.
-
 #### Core
 
+- Kirby 4 requires at least PHP 8.1 and supports up to PHP 8.3.
 - When impersonating the almighty `kirby` user, any permission check will succeed even if permission has been disabled for regular admins.
 - We have added more native PHP type hints throughout the system. When extending core classes, this might require you to update your method  to include those type hints as well.
 - When thumb generation fails, the image API now throws an error and no longer loads the original image.
@@ -87,3 +83,8 @@ Text:
 - `k-pagination` doesn't support setting custom labels/titles via `nextLabel`, `prevLabel` or `pageLabel`
 - Removed deprecated `DS` constant. Use `/` instead.
 
+#### Removed deprecated code
+
+- `Kirby\Form\Options`, `Kirby\Form\OptionsApi` and `Kirby\Form\OptionsQuery` classes have been removed. Use `Kirby\Option\Options`, `Kirby\Option\OptionsApi` or `Kirby\Option\OptionsQuery` instead.
+- `Kirby\Toolkit\Query` class has been removed. Use `Kirby\Query\Query` instead.
+- Passing the `$slot` or `$slots` variables to snippets was deprecated and support has now finally been removed.
