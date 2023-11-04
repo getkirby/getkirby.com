@@ -1,4 +1,4 @@
-Title: Login methods
+Title: Panel login
 
 ----
 
@@ -8,9 +8,11 @@ Intro: Kirby allows login with email and password and passwordless via a login c
 
 Text:
 
-## Available methods
+## Available login methods
 
-Kirby comes with three login methods you can choose from:
+Kirby comes with three login methods. If you don't configure anything, login via password is the default. Passwordless login needs to be enabled explicitely.
+
+The login methods are defined in the `config.php` file. Learn more in the (link: docs/reference/system/options/auth#login-methods text: reference).
 
 1. **Password (`password`)**
 The user gets a login form with email and password fields. It is also possible to combine the password with a second factor or step (for example a code sent via email).
@@ -21,15 +23,26 @@ Here, the login form only has an email field. Instead of logging in with the use
 3. **Password reset (`password-reset`)**
 This method is very similar to the passwordless login, but the purpose is different: After logging in with the code, the user will be redirected to the (link: docs/guide/authentication/password-reset-form text: password reset form). After confirming the new password, the user is redirected to the Panel dashboard.
 
-<info>
-You can learn more about how to configure the login methods in the (link: docs/reference/system/options/auth#login-methods text: reference).
-</info>
+## Limiting how long a code is valid
 
-If you don't configure the login methods, Kirby will enable the `password` method by default. Passwordless login via a code is only possible if you enable it in the configuration.
+You can customize how long generated login/password reset code is valid, see (link:
+docs/reference/system/options/auth#authentication-challenges__code-timeout text: Code timeout).
 
-## Email Templates
+## Password reset
 
-You can overwrite our standard email templates for code verification and password reset by placing the following email templates in `/site/templates/emails/auth`:
+For the password reset feature there is a (link: docs/guide/authentication/password-reset-form text: password reset form)  on its own dedicated page.
+
+## Second factor authentication (2FA)
+
+Kirby supports 2FA via email codes, or one-time time-based codes (TOTP), see (link: text: second factor authentication)
+
+## Setting the sender and subject for login related emails
+
+You can customize the sender email, sender name and subject of login related emails (login via code, password reset and 2FA via email), see (link: docs/reference/system/options/auth#authentication-challenges__email-options text: Email options).
+
+## Customize email text
+
+When you enable login via code or password reset, Kirby sends an email to the user. You can customize those standard email templates by placing the following email templates into `/site/templates/emails/auth`:
 
 ### Login via code
 

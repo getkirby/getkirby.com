@@ -1,6 +1,6 @@
 Title: Frontend login
 ----
-Intro: You can access Kirby's login logic from your templates and controllers, which allows you to use all of Kirby's login methods for frontend login forms. 
+Intro: You can access Kirby's login logic from your templates and controllers, which allows you to use all of Kirby's login methods for frontend login forms.
 ----
 Text:
 
