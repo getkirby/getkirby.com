@@ -180,6 +180,7 @@ With options, you can control all the file actions that should or should not be 
 | Option | Value |
 | ------ | ----- |
 | `changeName` | `true`/`false` |
+| `changeTemplate` | `true`/`false` since v4.0.0 |
 | `delete` | `true`/`false` |
 | `read` | `true`/`false` |
 | `replace` | `true`/`false` |

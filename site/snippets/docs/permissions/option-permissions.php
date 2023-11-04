@@ -15,3 +15,17 @@ options:
     *: false
     editor: true
 ```
+<since v="4.0.0">
+Controlling accessibility for roles.
+
+```yaml
+# Page is not accessible and not visible for all roles except admins.
+options:
+  access:
+    *: false
+    admin: true
+  list:
+    *: false
+    admin: true
+```
+</since>

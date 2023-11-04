@@ -145,6 +145,36 @@ Kirby\Panel\PageCreateDialog::$fieldTypes[] = 'yourFieldType'
 ```
 </since>
 
+
+
+## Options
+
+With options, you can control all the page actions that should or should not be available for this particular page type. The option dropdown for pages will adjust accordingly.
+
+
+| Option | Value | Description
+|----    | ---- | ---- |
+| `access`| `true`/`false` | page is not accessible and not listed (since v4.0.0)
+| `changeSlug` | `true`/`false` |
+| `changeStatus` | `true`/`false` |
+| `changeTemplate` | `false` or list of allowed template |
+| `changeTitle` | `true`/`false` |
+| `create` | `true`/`false` |
+| `delete` | `true`/`false` |
+| `duplicate` | `true`/`false` |
+| `list`| `true`/`false` | page is accessible but not listed (since v4.0.0)
+| `move`| `true`/`false` | since v4.0.0
+| `preview` | `true`/`false`/template string (see below) |
+| `read` | `true`/`false` | page is not accessible and not listed (will be deprecated in Kirby 5)
+| `sort` | `true`/`false` |
+| `update` | `true`/`false` |
+
+(docs: permissions/option-permissions)
+
+<info>
+Different option values per role currently don't work for the `changeTemplate` option (which takes a fixed list of allowed templates) or the `preview` option. These two options can only be controlled for all roles at once.
+</info>
+
 ## Icon
 
 The icon can either be one of our (link: docs/reference/panel/icons text: own icons) or an emoji. Icons appear in page lists when no preview image is available.
@@ -213,32 +243,6 @@ image:
 image:
   back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)"
 ```
-
-
-## Options
-
-With options, you can control all the page actions that should or should not be available for this particular page type. The option dropdown for pages will adjust accordingly.
-
-
-| Option | Value |
-|----    | ---- |
-| `changeSlug` | `true`/`false` |
-| `changeStatus` | `true`/`false` |
-| `changeTemplate` | `false` or list of allowed template |
-| `changeTitle` | `true`/`false` |
-| `create` | `true`/`false` |
-| `delete` | `true`/`false` |
-| `duplicate` | `true`/`false` (since v3.2.0)|
-| `preview` | `true`/`false`/template string (see below) |
-| `read` | `true`/`false` |
-| `sort` | `true`/`false` |
-| `update` | `true`/`false` |
-
-(docs: permissions/option-permissions)
-
-<info>
-Different option values per role currently don't work for the `changeTemplate` option (which takes a fixed list of allowed templates) or the `preview` option. These two options can only be controlled for all roles at once.
-</info>
 
 ## Preview
 

@@ -36,6 +36,7 @@ permissions:
   files:
     create: true
     changeName: true
+    changeTemplate: true
     delete: true
     read: true
     replace: true
@@ -44,12 +45,15 @@ permissions:
     create: true
     delete: true
   pages:
+    access: true
     changeSlug: true
     changeStatus: true
     changeTemplate: true
     changeTitle: true
     create: true
     delete: true
+    list: true
+    move: true
     duplicate: true
     preview: true
     read: true
