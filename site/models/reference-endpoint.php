@@ -7,7 +7,7 @@ class ReferenceEndpointPage extends ReflectionPage
 {
 	public function request(): string
 	{
-		return $this->method() . ': ' . $this->title();
+		return $this->info() . ': ' . $this->title();
 	}
 
 	public function metadata(): array
@@ -22,6 +22,8 @@ class ReferenceEndpointPage extends ReflectionPage
 
 	public function title(): Field
 	{
-		return parent::title()->value('/api' . parent::title());
+		return parent::title()->value(
+			'<code>' . $this->info() . '</code> /api' . parent::title()
+		);
 	}
 }
