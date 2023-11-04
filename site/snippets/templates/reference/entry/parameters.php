@@ -43,6 +43,7 @@ extract([
       <?php foreach ($rows as $row): ?>
       <tr>
         <td>
+					<?= $row['variadic'] ? '...' : null ?>
           <?= $row['name'] ?>
           <?= Types::required($row['required']) ?>
         </td>

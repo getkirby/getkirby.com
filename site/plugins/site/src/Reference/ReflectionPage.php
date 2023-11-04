@@ -32,7 +32,7 @@ abstract class ReflectionPage extends Page
 		}
 
 		$parameters = array_column($this->parameters(), 'export');
-		$parameters = empty($parameters) ? '' : implode(', ', $parameters);
+		$parameters = implode(', ', $parameters);
 		$call       = $this->name() . '(' . $parameters . ')';
 
 		if ($return = $this->returnType()) {
@@ -206,7 +206,13 @@ abstract class ReflectionPage extends Page
 					$type = (string)$doc->getType();
 				}
 
-				$param    = trim($type . ' $' . $name);
+				$export = '$' . $name;
+
+				if ($parameter->isVariadic() === true) {
+					$export = '...' . $export;
+				}
+
+				$export   = trim($type . ' ' . $export);
 				$default  = null;
 				$optional = false;
 
@@ -221,16 +227,17 @@ abstract class ReflectionPage extends Page
 					}
 
 					$optional  = true;
-					$param    .= ' = ' . $default;
+					$export   .= ' = ' . $default;
 				}
 
 				return [
 					'name'        => '$' . $name,
-					'required'    => $optional === false,
-					'type'        => Types::factory($type ?? 'mixed', $this),
 					'default'     => $default,
 					'description' => (string)$doc?->getDescription(),
-					'export'      => $param
+					'export'      => $export,
+					'required'    => $optional === false,
+					'type'        => Types::factory($type ?? 'mixed', $this),
+					'variadic'    => $parameter->isVariadic()
 				];
 			}
 		);
