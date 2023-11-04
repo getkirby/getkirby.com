@@ -57,3 +57,14 @@ fields:
 
 For details of creating a file blueprint, see the (link: docs/reference/panel/blueprints/file text: files blueprint options)
 
+<since v="4.0.0">
+## Change file template
+
+You can change the file template currently assigned to a file to any template that is available for files in the file parent (sections, fields, textareas)
+
+(image: file-template.png)
+
+<warning>
+Changing the file's template will remove content for fields that don't match in type. If the new template defines certain rules, e.g. image dimensions, those will also be applied irreversibly. Use with caution.
+</warning>
+</since>
