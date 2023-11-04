@@ -16,7 +16,10 @@ return [
     'search' => 'pages',
     // define new search endpoints
     'searches' => [
-        'pages' => function (string $query, int $limit = 10) {
+        'pages' => [
+					'label'  => 'Pages',
+					'icon'   => 'page',
+					'query'  => function (string $query, int $limit = 10) {
             $results = [];
             $pages   = site()->search($query)->limit($limit);
 
@@ -65,7 +68,7 @@ Kirby::plugin('your-plugin/todos', [
             'searches' => [
                 'todos' => [
                     'label' => 'Todos',
-                    'icon' => 'check',
+                    'icon'  => 'check',
                     'query' => function () {
                         // search for $todos here.
                         $results = [];
