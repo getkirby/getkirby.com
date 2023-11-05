@@ -32,10 +32,10 @@ You enable TOTP as second-factor authentication method in your users account, wh
 
 Here are some popular two-factor authentication applications:
 
-- (link: https://authy.com/download/ text: Authy (Android, iOS, MacOS, Windows)
-- (link: text: Google Authenticator (Android, iOS)
+- (link: https://authy.com/download/ text: Authy (Android, iOS, MacOS, Windows))
+- (link: text: Google Authenticator (Android, iOS))
 - (link: https://apps.microsoft.com/detail/microsoft-authenticator text: Microsoft Authenticator (Android, iOS))
-- (link: https://freeotp.github.io/ text: FreeOTP (Android, iOS)
+- (link: https://freeotp.github.io/ text: FreeOTP (Android, iOS))
 
 ### Enabling TOTP for your account
 
