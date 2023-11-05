@@ -30,9 +30,7 @@ Text:
 
 The move dialog lets you pick a new parent page and will make sure that the page can only be moved if the page type is allowed there as well.
 
-<info>
-So far, the dialog shows all available pages in the page tree. We are aware that this isn't the perfect UX to move pages yet. But we wanted to have this ready for the alpha and plan to simplify the process of picking a new parent
-</info>
+(link: docs/guide/content/publishing-workflow#moving-pages text: → Learn more)
 
 ### New option in the page dropdown
 

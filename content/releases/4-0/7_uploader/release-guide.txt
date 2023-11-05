@@ -45,7 +45,7 @@ Text:
 
 ## Optimize Files On Upload
 
-File blueprints can now set resize and crop settings, which will be applied directly after the upload. This is great to avoid huge original files in the content folder.
+File blueprints can now set resize and crop settings, which will be applied directly after the upload. This is great to avoid huge original files in the content folder. (link: docs/reference/panel/blueprints/file#optimize-uploaded-images text: → Learn more)
 
 ```yaml
 title: Image

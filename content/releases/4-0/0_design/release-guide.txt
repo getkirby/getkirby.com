@@ -24,8 +24,8 @@ Developers:
 - New color scheme
 - New customization options for the main menu
 - New system for customizations through CSS properties
+- New icon set
 - New UI components
-- Additional icons
 - Improved component responsiveness
 - Full control through the new Panel JS API (see below)
 
@@ -47,10 +47,10 @@ Text:
 ## For developers
 
 - New color scheme
-- New customization options for the main menu
+- New (link: docs/reference/system/options/panel#panel-menu text: customization options for the main menu)
 - New system for customizations through CSS properties
 - New UI components
-- Additional icons
+- New (link: docs/reference/panel/icons text: icon set)
 - Improved component responsiveness
 - Full control through the new Panel JS API (see below)
 
