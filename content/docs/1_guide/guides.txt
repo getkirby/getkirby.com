@@ -8,7 +8,7 @@ Description: Get an overview of all topics covered by Kirby’s documentation.
 
 Thumbnail:
   -
-  image: outline/book.svg
+  image: book.svg
 
 ----
 

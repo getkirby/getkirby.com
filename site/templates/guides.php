@@ -1,15 +1,6 @@
 <?php layout() ?>
 
-<style>
-.guides h3 svg {
-	width: 18px;
-	height: 18px;
-}
-</style>
-
-
 <div class="mb-36">
-
   <h1 class="h1 mb-24">Guide</h1>
 	<?php foreach (collection('guides')->group('category') as $category => $guides): ?>
 	<section class="mb-24">

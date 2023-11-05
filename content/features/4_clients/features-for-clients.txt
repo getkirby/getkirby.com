@@ -7,7 +7,7 @@ Description: From specialized to high-traffic: Kirby scales to match the popular
 Thumbnail:
   -
   lead: The CMS built
-  image: outline/thumb.svg
+  image: thumb.svg
 ----
 Benefits:
 

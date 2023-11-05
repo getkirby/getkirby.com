@@ -8,7 +8,7 @@ Description: Extend the possibilities of your Kirby installation with plugins fr
 
 Thumbnail:
   -
-  image: outline/3d.svg
+  image: 3d.svg
 
 ----
 

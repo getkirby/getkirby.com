@@ -3,7 +3,16 @@ extract([
   'features' => $features ?? array_fill(0, 3, array_fill(0, 5, 'foo'))
 ])
 ?>
-<section id="more" class="mb-24">
+
+<style>
+.features-more svg {
+	width: 32px;
+	height: 32px;
+	fill: var(--color-black);
+}
+</style>
+
+<section id="more" class="features-more mb-24">
   <?php snippet('hgroup', [
     'title'    => 'And so much more',
     'subtitle' => 'Kirby is packed with features that empower you to build amazing sites.',
@@ -13,7 +22,7 @@ extract([
     <?php foreach ($features as $feature): ?>
     <?php $feature = option('features')[$feature] ?? [
       'text' => $feature,
-      'icon' => 'outline/spaceship',
+      'icon' => 'spaceship',
       'link' => '/'
     ] ?>
     <li class="bg-white overflow-hidden rounded">

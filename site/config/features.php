@@ -3,107 +3,107 @@
 return [
 	'panel' => [
 		'text' => 'The Panel',
-		'icon' => 'outline/panel',
+		'icon' => 'panel',
 		'link' => '/features/creators#panel'
 	],
 	'field-blocks' => [
 		'text' => 'Blocks field',
-		'icon' => 'outline/blocks',
+		'icon' => 'blocks',
 		'link' => '/features/creators#editing'
 	],
 	'field-layout' => [
 		'text' => 'Layouts',
-		'icon' => 'outline/blocks',
+		'icon' => 'blocks',
 		'link' => '/features/designers#layouts'
 	],
 	'plugins' => [
 		'text' => 'Plugins',
-		'icon' => 'outline/3d',
+		'icon' => '3d',
 		'link' => '/features/developers#plugins'
 	],
 	'languages' => [
 		'text' => 'Languages',
-		'icon' => 'outline/translate',
+		'icon' => 'translate',
 		'link' => '/features/creators#internationalisation'
 	],
 	'users' => [
 		'text' => 'Users',
-		'icon' => 'outline/users',
+		'icon' => 'users',
 		'link' => '/docs/guide/users'
 	],
 	'files' => [
 		'text' => 'Just files & folders',
-		'icon' => 'outline/content',
+		'icon' => 'content',
 		'link' => '/features/developers#files-and-folders'
 	],
 	'assets' => [
 		'text' => 'Assets',
-		'icon' => 'outline/link',
+		'icon' => 'link',
 		'link' => '/features/creators#assets'
 	],
 	'headless' => [
 		'text' => 'Go headless',
-		'icon' => 'outline/cloud',
+		'icon' => 'cloud',
 		'link' => '/features/developers#headless'
 	],
 	'templates' => [
 		'text' => 'Templating',
-		'icon' => 'outline/components',
+		'icon' => 'components',
 		'link' => '/features/developers#templating'
 	],
 	'publish-workflow' => [
 		'text' => 'Publishing',
-		'icon' => 'outline/thumb',
+		'icon' => 'thumb',
 		'link' => '/docs/guide/content/publishing-workflow'
 	],
 	'routes' => [
 		'text' => 'Routing',
-		'icon' => 'outline/directions',
+		'icon' => 'directions',
 		'link' => '/docs/guide/routing'
 	],
 	'cache' => [
 		'text' => 'Caching',
-		'icon' => 'outline/database',
+		'icon' => 'database',
 		'link' => '/docs/guide/cache'
 	],
 	'email' => [
 		'text' => 'Emailing',
-		'icon' => 'outline/email',
+		'icon' => 'mail',
 		'link' => '/docs/guide/emails'
 	],
 	'docs' => [
 		'text' => 'Extensive docs',
-		'icon' => 'outline/book',
+		'icon' => 'book',
 		'link' => '/docs'
 	],
 	'cookbook' => [
 		'text' => 'Cookbook',
-		'icon' => 'outline/bookmark',
+		'icon' => 'bookmark',
 		'link' => '/docs/cookbook'
 	],
 	'authentication' => [
 		'text' => 'Authentication',
-		'icon' => 'outline/fingerprint',
+		'icon' => 'fingerprint',
 		'link' => '/docs/guide/authentication'
 	],
 	'virtual-pages' => [
 		'text' => 'Virtual pages',
-		'icon' => 'outline/virtual',
+		'icon' => 'virtual',
 		'link' => '/docs/guide/virtual-pages'
 	],
 	'hooks' => [
 		'text' => 'Hooks',
-		'icon' => 'outline/hook',
+		'icon' => 'hook',
 		'link' => '/docs/reference/plugins/extensions/hooks'
 	],
 	'content-representations' => [
 		'text' => 'Content representations',
-		'icon' => 'outline/json',
+		'icon' => 'json',
 		'link' => '/docs/guide/templates/content-representations'
 	],
 	'multi-site' => [
 		'text' => 'Multi-site setup',
-		'icon' => 'outline/hierarchy',
+		'icon' => 'hierarchy',
 		'link' => '/docs/cookbook/setup/multisite'
 	],
 ];
