@@ -4,8 +4,13 @@ Title: Managing files
 
 Description: All about working with files in Kirby: images, videos, documents, responsive images, thumbnails…
 ----
+
 Intro:
 
 ----
 
 Category: Data & Frontend
+
+----
+
+Icon: image

@@ -10,6 +10,10 @@ Category: Data & Frontend
 
 ----
 
+Icon: panel
+
+----
+
 Text:
 
 (image: blocks.png)

@@ -10,6 +10,10 @@ Category: Privacy & Security
 
 ----
 
+Icon: lock
+
+----
+
 Text:
 
 

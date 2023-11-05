@@ -2,9 +2,9 @@
 
 namespace Kirby\Meta;
 
-use Kirby\Cms\Asset;
 use Kirby\Content\Field;
 use Kirby\Cms\File;
+use Kirby\Filesystem\Asset;
 use Kirby\Filesystem\F;
 use Kirby\Http\Response;
 use Kirby\Toolkit\Html;
@@ -247,15 +247,10 @@ class PageMeta {
 
 			// If image is still a string and not a file object yet,
 			// try to find image in the page's files
-			if ($data['image'] ?? null) {
-				if (is_string($data['image']) === true) {
-					$image = $page->file($data['image']);
-
-					if ($image === null) {
-						$image = new Asset('assets/icons/' . $data['image']);
-					}
-
-					$data['image'] = $image;
+			if ($img = $data['image'] ?? null) {
+				if (is_string($img) === true) {
+					$data['image']   = $page->file($img);
+					$data['image'] ??= new Asset('assets/icons/' . $img);
 				}
 			}
 		}
@@ -350,7 +345,7 @@ class PageMeta {
 				$im->setResolution(460, 460);
 				$im->readImageBlob($svg);
 				$im->setImageFormat('jpeg');
-				$im->resizeImage($box, $box, imagick::FILTER_LANCZOS, 1);
+				$im->resizeImage($box, $box, Imagick::FILTER_LANCZOS, 1);
 				$data = $im->getImageBlob();
 				$image = imagecreatefromstring($data);
 				$y = $height - imagesy($image) - $margin - 10;

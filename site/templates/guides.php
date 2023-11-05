@@ -22,7 +22,7 @@
 					<article>
 						<a class="block" href="<?= $guide->url() ?>">
 							<h3 class="flex font-bold items-center mb-3" style="gap: .5rem">
-								<?= $guide->images()->findBy('extension', 'svg')?->read() ?> <?= $guide->title() ?>
+								<?= icon($guide->icon()->or('book')) ?> <?= $guide->title() ?>
 							</h3>
 							<p class="color-gray-700"><?= $guide->description() ?></p>
 						</a>

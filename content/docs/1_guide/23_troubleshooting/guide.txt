@@ -4,10 +4,14 @@ Title: Troubleshooting
 
 Description: We try to make using Kirby as straight forward as possible. But sometimes you just get stuck and we want to help you out of it as fast as possible.
 
-
 ----
 
 Text:
 
 ----
+
 Category: Preparing the stage
+
+----
+
+Icon: support

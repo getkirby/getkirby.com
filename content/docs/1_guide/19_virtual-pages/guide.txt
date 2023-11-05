@@ -10,6 +10,10 @@ Category: Data & Frontend
 
 ----
 
+Icon: virtual
+
+----
+
 Intro:
 
 With virtual pages, you can combine Kirby's file-based architecture with content from APIs, databases, excel sheets or any other source that's readable with PHP.

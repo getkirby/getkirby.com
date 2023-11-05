@@ -9,6 +9,11 @@ Description: Use Kirby's page cache or set up your own cache wherever you need i
 Category: Configuration
 
 ----
+
+Icon: database
+
+----
+
 Text:
 
 ## Caching pages

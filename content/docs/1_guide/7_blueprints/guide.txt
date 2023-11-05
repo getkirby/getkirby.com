@@ -7,3 +7,7 @@ Description: How to create forms for the Panel and access blueprints on the fron
 ----
 
 Category: Data & Frontend
+
+----
+
+Icon: layout

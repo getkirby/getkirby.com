@@ -10,6 +10,11 @@ Description: Things you need to know about Kirby in terms of privacy and GDPR co
 Category: Privacy & Security
 
 ----
+
+Icon: privacy
+
+----
+
 Text:
 
 With this guide, we want to give you the necessary technical information to make it easier for you to comply with privacy regulations in your country (e.g. the GDPR in the European Union).

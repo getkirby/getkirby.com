@@ -10,6 +10,10 @@ Category: configuration
 
 ----
 
+Icon: preferences
+
+----
+
 Text:
 
 ## The `config.php`

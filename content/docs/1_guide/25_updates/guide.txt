@@ -10,6 +10,11 @@ Description: Keep your installations up to date and learn how to migrate from ol
 Category: Maintenance
 
 ----
+
+Icon: refresh
+
+----
+
 Text:
 
 To update Kirby, download the latest version and replace the `kirby` folder.

@@ -10,8 +10,11 @@ Intro: Guide, Reference, Cookbook, Search, where to find what and how to best us
 
 ----
 
-
 Category: Preparing the stage
+
+----
+
+Icon: book
 
 ----
 
