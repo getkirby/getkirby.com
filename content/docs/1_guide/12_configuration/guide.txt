@@ -10,7 +10,7 @@ Category: configuration
 
 ----
 
-Icon: preferences
+Icon: settings
 
 ----
 

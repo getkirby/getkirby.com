@@ -65,27 +65,27 @@
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-	'id'      => 'blocks',
-	'icon'    => 'widget',
-	'title'   => 'Blocks',
-	'layout'  => 'cards',
-	'plugins' => [
-		'plugins/jongacnik/fields-block',
-		'plugins/microman/formblock',
-		'plugins/microman/grid-block',
-	]
+  'id'      => 'blocks',
+  'icon'    => 'layout',
+  'title'   => 'Blocks',
+  'layout'  => 'cards',
+  'plugins' => [
+    'plugins/jongacnik/fields-block',
+    'plugins/microman/formblock',
+    'plugins/microman/grid-block',
+  ]
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-	'icon'    => 'widget',
-	'id'      => 'extensions',
-	'title'   => 'Panel Extensions',
-	'layout'  => 'cards',
-	'columns' => 2,
-	'plugins' => [
-		'plugins/gearsdigital/localizer-for-kirby',
-		'plugins/distantnative/retour',
-		'plugins/lukasbestle/versions',
-		'plugins/michnhokn/logger'
-	]
+  'icon'    => 'layout',
+  'id'      => 'extensions',
+  'title'   => 'Panel Extensions',
+  'layout'  => 'cards',
+  'columns' => 2,
+  'plugins' => [
+    'plugins/gearsdigital/localizer-for-kirby',
+    'plugins/distantnative/retour',
+    'plugins/lukasbestle/versions',
+    'plugins/michnhokn/logger'
+  ]
 ]) ?>
