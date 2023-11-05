@@ -52,9 +52,9 @@ return [
   'panel' => [
     'menu' => [
       'site' => [
-        'label' = 'Overview'
+        'label' => 'Overview'
       ],
-      '-'
+      '-',
       'notes' => [
         'icon'  => 'pen',
         'label' => 'Notes',
