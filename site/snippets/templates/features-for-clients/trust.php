@@ -1,8 +1,9 @@
 <style>
 .trust-in-brands svg {
-	width: 100%;
-	max-height: 4.5rem;
-	max-width: 9rem;
+  width: 100%;
+	height: auto;
+  max-height: 4.5rem;
+  max-width: 9rem;
 }
 </style>
 

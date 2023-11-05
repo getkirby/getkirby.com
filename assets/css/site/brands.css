@@ -16,8 +16,9 @@
 	}
 }
 .brands svg {
-	width: 100%;
-	max-height: 2rem;
+  width: 100%;
+	height: auto;
+  max-height: 2rem;
 }
 .brands .joyent svg {
 	max-height: 1.375rem;
