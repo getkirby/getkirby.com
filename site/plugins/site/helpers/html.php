@@ -17,7 +17,10 @@ function icon(string $name): string|false
 		return $svg;
 	}
 
-	if ($panel = svg('kirby/panel/dist/img/icons.svg')) {
+	static $panel;
+	$panel ??= svg('kirby/panel/dist/img/icons.svg');
+
+	if ($panel) {
 		if (preg_match('/<symbol[^>]*id="icon-' . $name . '"[^>]*viewBox="(.*?)"[^>]*>(.*?)<\/symbol>/s', $panel, $matches)) {
 			return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="' . $matches[1] . '">' . $matches[2] . '</svg>';
 		}
