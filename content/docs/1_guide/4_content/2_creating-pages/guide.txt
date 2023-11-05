@@ -21,12 +21,21 @@ Click on the "Add" button in the top right corner of a pages section. Every new 
 
 (image: Bildschirmfoto2018-07-05um14.34.45.png)
 
-Drafts are stored in a `_drafts` subfolder for every page. These drafts are only accessible when you are logged in. 
+Drafts are stored in a `_drafts` subfolder for every page. These drafts are only accessible when you are logged in.
 
 
 <info>
 If you want to automatically publish new pages created via the Panel, you can set up a (link: docs/reference/system/options/hooks text: `page.create:after` hook) in your `config.php` file.
 </info>
+
+## Duplicate existing pages
+
+In the Panel, new pages can also be created by duplicating existing pages. This is great if you want to reuse parts of the content.
+
+To do so, select "Settings" > "Duplicate". In the duplicate dialog, you can edit the title and URL slug, and decide if you want to copy all files as well. When done, confirm with the "Duplicate button". By default, Kirby adds "copy" to title and slug.
+
+
+(image: duplicate-page.png)
 
 ## Creating published pages manually
 
