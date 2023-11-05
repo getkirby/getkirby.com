@@ -89,7 +89,11 @@ Some providers unfortunately still support alternative file extensions or even o
 
 Once an executable file gets on your server (e.g. via file upload in the Panel), this file can be executed simply by accessing its URL. Because the executed script has full access to your files, such attacks can have devastating consequences.
 
-Kirby protects against file uploads with the extensions `.php*`, `.phar*` and `.phtml*` by default (which includes deprecated extensions like `.php5`). Please make sure that your web server does not execute files with any other file extension.
+Kirby protects against file uploads with the extensions `.php*`, `.phar*` and `.pht*` by default (which includes deprecated extensions like `.php5`). Please make sure that your web server does not execute files with any other file extension.
+
+<since v="3.9.8">
+The check for the `.pht*` extension was added in Kirby 3.9.8. Previously we checked for `.phtml*`.
+</since>
 
 ### Block access to sensitive folders and files
 
