@@ -58,6 +58,8 @@
 	background-color: var(--color-gray-800);
 }
 .code-toolbar button > svg {
-	margin-right: var(--spacing-1);
-	fill: var(--color-white);
+	width: 12px;
+	height: 12px;
+  margin-right: var(--spacing-1);
+  fill: var(--color-white);
 }
