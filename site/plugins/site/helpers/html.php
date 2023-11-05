@@ -13,7 +13,17 @@ function ariaCurrent(
 
 function icon(string $name): string|false
 {
-	return svg('assets/icons/' . $name . '.svg');
+	if ($svg = svg('assets/icons/' . $name . '.svg')) {
+		return $svg;
+	}
+
+	if ($panel = svg('kirby/panel/dist/img/icons.svg')) {
+		if (preg_match('/<symbol[^>]*id="icon-' . $name . '"[^>]*>(.*)<\/symbol>/s', $panel, $matches)) {
+			return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">' . $matches[1] . '</svg>';
+		}
+	}
+
+	return false;
 }
 
 function img($file, array $props = [])
