@@ -13,6 +13,7 @@ use Kirby\Toolkit\Str;
 
 class PluginPage extends Page
 {
+	protected $info = null;
 	protected $latestTag = null;
 
 	public function cache(): Cache
@@ -84,11 +85,56 @@ class PluginPage extends Page
 		return option('plugins.categories.' . $this->category() . '.icon');
 	}
 
-	public function info()
+	public function info(bool $onlyIfCached = false)
 	{
-		$info = Data::read($this->file('composer.json')->root());
+		if ($this->info !== null) {
+			return $this->info;
+		}
 
-		return Nest::create($info, $this);
+		$cacheId = $this->cacheId('info');
+		$info    = $this->cache()->get($cacheId) ?? false;
+
+		if ($info === false) {
+			if ($onlyIfCached === true) {
+				return null;
+			}
+
+			$repo = $this->repository();
+
+			if (Str::contains($repo, 'github') === true) {
+				$url = $repo->value() . '/raw/HEAD/composer.json';
+			} else {
+				$url = $this->composerUrl()->value();
+			}
+
+			if ($url) {
+				try {
+					$info = Data::read($url);
+				} catch (\Exception) {
+					// $info is still false
+				}
+			}
+
+			if ($info) {
+				// caches for 3 hours if we got a file
+				$this->cache()->set($cacheId, $info, 180);
+
+				// remove plugins representation cache
+				$this->kirby()->cache('pages')->remove('plugins.json');
+			} else {
+				// keeps the cache of an unsuccessful response longer (one day) for performance
+				$this->cache()->set($cacheId, $info, 1440);
+			}
+		}
+
+		// normalize the return value
+		// (`false` is only needed to differentiate
+		// between non-existing cache data and errors)
+		if ($info === false) {
+			return null;
+		}
+
+		return $this->info = Nest::create($info, $this);
 	}
 
 	public function isNew(): bool
