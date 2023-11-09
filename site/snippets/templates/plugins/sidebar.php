@@ -34,7 +34,7 @@
 			</li>
 			<li class="compatibility">
 				<?php foreach ($versions as $key => $version): ?>
-					<a href="/plugins/version:<?= $key ?>" <?= ariaCurrent($version === $key) ?>><?= $key ?></a>
+					<a href="/plugins/version:<?= $key ?>" <?= ariaCurrent($currentVersion === $key) ?>><?= $key ?></a>
 				<?php endforeach ?>
 			</li>
       <!-- <li>

@@ -54,7 +54,7 @@ return function ($kirby, $page, $filter) {
 		'heading' => $heading,
 		'plugins' => $plugins,
 		'filter' => $filter,
-		'version' => $version,
+		'currentVersion' => $version,
 		'versions' => $versions,
 	];
 
