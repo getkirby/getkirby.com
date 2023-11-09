@@ -16,7 +16,7 @@
 .revenue {
 	position: relative;
 	font-size: var(--text-sm);
-	margin-top: 1rem;
+	margin-top: 1.25rem;
 	margin-bottom: 3rem;
 }
 .revenue summary {
