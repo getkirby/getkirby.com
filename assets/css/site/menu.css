@@ -165,3 +165,12 @@
 		margin: 0 0.75rem;
 	}
 }
+
+/* Versions */
+li.compatibility a {
+	display: inline-block;
+}
+
+li.compatibility a:not(:last-child)::after {
+	content: ',';
+}

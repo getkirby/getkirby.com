@@ -1,5 +1,6 @@
 <?php
 
+use Composer\Semver\Semver;
 use Kirby\Cache\Cache;
 use Kirby\Content\Field;
 use Kirby\Cms\File;
@@ -49,6 +50,15 @@ class PluginPage extends Page
 		}
 
 		return $url;
+	}
+
+	public function compatible(): array|null
+	{
+		if ($this->versions()->isEmpty()) {
+			return null;
+		}
+
+		return array_filter([3, 4], fn($version) => Semver::satisfies($version .'.100', $this->versions()->value()));
 	}
 
 	public function download(string $version = null): string|null

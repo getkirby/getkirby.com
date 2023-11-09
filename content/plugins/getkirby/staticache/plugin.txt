@@ -29,7 +29,7 @@ Composer: getkirby/staticache
 
 ----
 
-Versions: 3,4
+Versions: ^3.8 || ^4.0
 
 ----
 

@@ -23,15 +23,20 @@
         </a>
       </li>
       <li>
-        <a href="/plugins/v4" <?= ariaCurrent($kirby->request()->path()->toString() === 'plugins/v4') ?>>
-          <?= icon('flash') ?> Kirby 4
-        </a>
-      </li>
-      <li>
         <a href="/plugins/getkirby" <?= ariaCurrent($kirby->request()->path()->toString() === 'plugins/getkirby')  ?>>
           <?= icon('kirby') ?> Official
         </a>
       </li>
+			<li>
+				<a href="#" <?= ariaCurrent(empty($version) === false) ?>>
+					<?= icon('flash') ?> Compatibility
+				</a>
+			</li>
+			<li class="compatibility">
+				<?php foreach ($versions as $key => $version): ?>
+					<a href="/plugins/version:<?= $key ?>" <?= ariaCurrent($version === $key) ?>><?= $key ?></a>
+				<?php endforeach ?>
+			</li>
       <!-- <li>
         <a href="/plugins/new" <?= ariaCurrent($kirby->request()->path()->toString() === 'plugins/new') ?>>
           <?= icon('flash') ?> New

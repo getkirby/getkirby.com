@@ -159,3 +159,20 @@
   outline: solid;
   outline: 5px auto -webkit-focus-ring-color;
 }
+
+
+/* compatibility badges */
+.compatibility span {
+	display: inline-block;
+	font-size: .75em;
+	border-radius: .25rem;
+	padding: .1rem .25rem;
+}
+
+.compatibility span[data-version="3"] {
+	background-color: var(--color-yellow-500);
+}
+
+.compatibility span[data-version="4"] {
+	background-color: var(--color-purple-500);
+}

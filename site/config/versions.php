@@ -67,6 +67,7 @@ return [
 	'3.5' => [
 		'title'       => 'Kirby 3.5',
 		'hasDocs'     => true,
+		'hasFilter'   => true,
 		'mainVersion' => '3',
 		'since'       => 'Dec 2020 - Nov 2021',
 		'description' => 'is not the most current version of Kirby and should not be used for new projects.',
@@ -92,6 +93,7 @@ return [
 	'3.6' => [
 		'title'       => 'Kirby 3.6',
 		'hasDocs'     => true,
+		'hasFilter'   => true,
 		'mainVersion' => '3',
 		'since'       => 'Nov 2021 - June 2022',
 		'description' => 'is not the most current version of Kirby and should not be used for new projects.',
@@ -115,6 +117,7 @@ return [
 	'3.7' => [
 		'title'       => 'Kirby 3.7',
 		'hasDocs'     => true,
+		'hasFilter'   => true,
 		'mainVersion' => '3',
 		'since'       => 'June 2022 - Oct 2022',
 		'description' => 'is not the most current version of Kirby and should not be used for new projects.',
@@ -135,6 +138,7 @@ return [
 		],
 	],
 	'3.8' => [
+		'hasFilter'   => true,
 		'subreleases' => [
 			'3.8.1',
 			'3.8.1.1',
@@ -148,7 +152,7 @@ return [
 	'3.9' => [
 		'title'       => 'Kirby 3.9',
 		'hasDocs'     => true,
-		'title'       => 'Kirby 3.9',
+		'hasFilter'   => true,
 		'mainVersion' => '3',
 		'since'       => 'Jan 2023',
 		'link'        => 'https://getkirby.com/docs',
@@ -167,7 +171,7 @@ return [
 	'4.0' => [
 		'title'       => 'Kirby 4.0',
 		'hasDocs'     => true,
-		'title'       => 'Kirby 4.0',
+		'hasFilter'   => true,
 		'mainVersion' => '4',
 		'since'       => 'Dec 2023',
 		'description' => 'is the latest version of Kirby. <br><strong class="color-black">Start new projects with this version!',

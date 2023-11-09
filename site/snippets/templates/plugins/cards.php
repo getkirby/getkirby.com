@@ -39,9 +39,16 @@
               <?php endif ?>
             </p>
           </header>
-          <div class="prose text-sm">
+          <div class="prose text-sm mb-3">
             <?= $plugin->description()->excerpt(140) ?>
           </div>
+					<?php if ($compatible = $plugin->compatible()): ?>
+						<div class="compatibility">
+							<?php foreach ($compatible as $version): ?>
+								<span data-version="<?= $version ?>">K<?= $version ?></span>
+							<?php endforeach ?>
+						</div>
+					<?php endif ?>
         </div>
       </article>
     </a>

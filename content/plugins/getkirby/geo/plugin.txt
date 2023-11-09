@@ -29,7 +29,7 @@ Composer: getkirby/geo
 
 ----
 
-Versions: 3,4
+Versions: ^3.3 || ^4.0
 
 ----
 

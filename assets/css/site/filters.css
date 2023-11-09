@@ -6,6 +6,7 @@
 }
 .filters svg {
   margin-right: var(--spacing-3);
+	width: 18px;
 }
 .filters hr {
   margin: var(--spacing-3) 0;
