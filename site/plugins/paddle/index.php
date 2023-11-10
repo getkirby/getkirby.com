@@ -32,8 +32,8 @@ class Checkout
 		$this->discounts      = $options['discounts'] ?? [];
 		$this->product        = $options['product'];
 		$this->sale           = $options['sale'] ?? false;
-		$this->vendorAuthCode = $options['vendorAuthCode'] ?? null;
-		$this->vendorId       = $options['vendorId'] ?? null;
+		$this->vendorAuthCode = $options['vendorAuthCode'] ?? option('keys.paddle.auth');
+		$this->vendorId       = $options['vendorId'] ?? option('keys.paddle.id');
 		$this->volumes        = array_keys($this->discounts);
 
 	}

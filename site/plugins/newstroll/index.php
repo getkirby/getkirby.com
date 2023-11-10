@@ -8,6 +8,6 @@ load([
 
 function newstroll()
 {
-	return new Newstroll\Newstroll(option('newstroll.key'));
+	return new Newstroll\Newstroll(option('keys.newstroll'));
 }
 

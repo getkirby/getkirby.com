@@ -1,19 +1,10 @@
 <?php
 
-use Kirby\Filesystem\F;
 use Kirby\Toolkit\Str;
-
-$key = trim(F::read(__DIR__ . '/keys/algolia.txt'));
-
-if (empty($key) === true) {
-	// use the search-only API key
-	$key = 'd161a2f4cd2d69247c529a3371ad3050';
-}
 
 return [
 	'algolia' => [
 		'app'   => 'S7OGBIAJTV',
-		'key'   => $key,
 		'index' => 'getkirby-3',
 		'fields' => [
 			'title',
