@@ -82,7 +82,7 @@
 					<a href="https://pay.paddle.com/checkout/824338" target="_blank" class="h2 block mb-3">
 						<k-price product="824338">€99</k-price> per site
 					</a>
-					<p class="text-sm color-gray-700">A discounted license for smaller websites and apps</p>
+					<p class="text-sm color-gray-700">A discounted license for individuals, small teams and side projects</p>
 				</header>
 
 				<details class="revenue">
@@ -128,7 +128,7 @@
 					<a href="https://pay.paddle.com/checkout/824340" target="_blank" class="h2 block mb-3">
 						<k-price product="824340">€399</k-price> per site
 					</a>
-					<p class="text-sm color-gray-700">Suitable for large organisations with mission-critical projects</p>
+					<p class="text-sm color-gray-700">Suitable for larger organizations with mission-critical projects</p>
 				</header>
 
 				<details class="revenue">
