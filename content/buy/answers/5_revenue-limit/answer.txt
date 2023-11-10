@@ -1,0 +1,14 @@
+Title: Can you tell me more about the revenue limit?
+----
+Text:
+
+With an enterprise license, you don't have a revenue limit and you can simply ignore this.
+
+The basic license covers projects for companies and organisations with a yearly revenue of less than € 1 million.
+
+Revenue means net sales. Should you not have any sales (e.g. as a non-profit), the ongoing funding is relevant instead.
+
+If you are building a website for a client (as a freelancer or agency), we don't care about your revenue, but about the revenue of your client.
+
+We only care about the revenue at the time of purchase. If your company becomes more successful within the next 3 years and crosses the limit, we are really happy for you, but you don't need to get a different license.
+

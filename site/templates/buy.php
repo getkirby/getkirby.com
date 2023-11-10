@@ -205,11 +205,6 @@
     <p class="font-mono text-sm text-center pt-3">+ VAT if applicable.</p>
   </section>
 
-  <section class="mb-42">
-    <h2 class="h2 mb-6">Frequently asked questions</h2>
-    <?php snippet('faq') ?>
-  </section>
-
   <section class="mb-42 columns columns--reverse" style="--columns: 2; --gap: var(--spacing-12)">
     <div>
       <h2 class="h2 mb-6">For a good cause?</h2>
@@ -246,6 +241,11 @@
         </li>
       <?php endforeach ?>
     </ul>
+  </section>
+
+  <section class="mb-42">
+    <h2 class="h2 mb-6">Frequently asked questions</h2>
+    <?php snippet('faq') ?>
   </section>
 
   <footer class="h2 max-w-xl">
