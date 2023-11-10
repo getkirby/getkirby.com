@@ -69,7 +69,18 @@ class Price
 		$price = $this->regular();
 
 		if ($sale = option('buy.sale')) {
-			$price  = static::round($price * $sale);
+			if (is_numeric($sale) === true) {
+				return static::round($price * $sale);
+			}
+
+			if (is_array($sale) === true) {
+				if (
+					strtotime($sale['start']) >= time() &&
+					strtotime($sale['end']) <= time()
+				) {
+					return static::round($price * $sale['discount']);
+				}
+			}
 		}
 
 		return $price;
