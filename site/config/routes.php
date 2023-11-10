@@ -1,5 +1,8 @@
 <?php
 
+use Buy\Product;
+use Kirby\Cms\Page;
+
 return [
 	[
 		'pattern' => '.well-known/security.txt',
@@ -42,11 +45,54 @@ return [
 		}
 	],
 	[
-		'pattern' => 'buy/checkout/(:any)',
-		'action'  => function($volume) {
+		'pattern' => 'buy/prices/(:any)',
+		'action' => function (string $currency) {
+			$volume = [];
+
+			foreach (option('buy.volume') as $v => $discount) {
+				$volume[$v] = Product::Basic->price($currency)->volume($v);
+			}
+
+			return json_encode([
+				'basic'      => Product::Basic->price($currency)->sale(),
+				'enterprise' => Product::Enterprise->price($currency)->sale(),
+				'volume'     => $volume
+			]);
+		}
+	],
+	[
+		'pattern' => 'buy/(:any)/(:any)',
+		'action' => function (string $product, string $currency) {
 			try {
-				$checkout = new Kirby\Paddle\Checkout();
-				go($checkout->url($volume));
+				$product = Product::from($product);
+				$prices  = [
+					'EUR:'          . $product->price('EUR')->sale(),
+					$currency . ':' . $product->price($currency)->sale(),
+				];
+
+				go($product->checkout(['prices' => $prices]));
+			} catch (Throwable $e) {
+				die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
+			}
+		},
+	],
+	[
+		'pattern' => 'buy/volume/(:any)/(:num)/(:any)',
+		'action'  => function(string $product, int $volume, string $currency) {
+			try {
+				$product  = Product::from($product);
+				$prices  = [
+					'EUR:'          . $product->price('EUR')->volume($volume),
+					$currency . ':' . $product->price($currency)->volume($volume),
+				];
+
+				$url = $product->checkout([
+					'prices'            => $prices,
+					'quantity'          => $volume,
+					'quantity_variable' => false,
+				]);
+
+				go($url);
 			} catch (Throwable $e) {
 				die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
 			}

@@ -84,8 +84,10 @@
 	    <div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
 				<header>
 					<h2>Basic</h2>
-					<a href="https://pay.paddle.com/checkout/824338" target="_blank" class="h2 block mb-3">
-						<k-price product="824338">€99</k-price> per site
+					<a href="/buy/basic/" target="_blank" class="checkout-link h2 block mb-3">
+						<k-price product="basic">
+							€<?= Buy\Product::Basic->price()->sale() ?>
+						</k-price> per site
 					</a>
 					<p class="text-sm color-gray-700">A discounted license for individuals, small teams and side projects</p>
 				</header>
@@ -119,7 +121,7 @@
 
 				<footer>
 					<p>
-						<a href="https://pay.paddle.com/checkout/824338" target="_blank" class="btn btn--filled mb-1 w-100%">
+						<a href="/buy/basic/" target="_blank" class="checkout-link btn btn--filled mb-1 w-100%">
 							<?= icon('cart') ?>
 							Buy Basic
 						</a>
@@ -130,8 +132,10 @@
 	    <div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
 				<header>
 					<h2>Enterprise</h2>
-					<a href="https://pay.paddle.com/checkout/824340" target="_blank" class="h2 block mb-3">
-						<k-price product="824340">€399</k-price> per site
+					<a href="/buy/enterprise/" target="_blank" class="checkout-link h2 block mb-3">
+						<k-price product="enterprise">
+							€<?= Buy\Product::Enterprise->price()->sale() ?>
+						</k-price> per site
 					</a>
 					<p class="text-sm color-gray-700">Suitable for larger organizations with mission-critical projects</p>
 				</header>
@@ -164,7 +168,7 @@
 
 				<footer>
 					<p>
-						<a href="https://pay.paddle.com/checkout/824340" target="_blank" class="btn btn--filled mb-1 w-100%">
+						<a href="/buy/enterprise/" target="_blank" class="checkout-link btn btn--filled mb-1 w-100%">
 							<?= icon('cart') ?>
 							Buy Enterprise
 						</a>
@@ -179,13 +183,17 @@
     <h2 class="h2 mb-6">Volume discounts</h2>
     <div class="columns rounded overflow-hidden" style="--columns-md: 2; --columns: 4; --gap: var(--spacing-3)">
       <?php foreach ($discounts as $volume => $discount) : ?>
-        <a class="block p-12 bg-light rounded text-center" target="_blank" href="/buy/checkout/<?= $volume ?>" data-discount="<?= $discount ?>" data-volume="<?= $volume ?>">
+        <a class="checkout-link block p-12 bg-light rounded text-center" target="_blank" href="/buy/volume/basic/<?= $volume ?>/">
           <article>
             <h3 class="mb-3 font-mono text-sm"><?= $volume ?> licenses</h3>
             <?php if ($banner): ?>
               <del class="invisible discounted-list-price h6" style="color: var(--color-purple-600)">€</del>
             <?php endif ?>
-            <p class="h2 mb-6 discounted-price">&nbsp;</p>
+            <p class="h2 mb-6 discounted-price">
+							<k-price product="volume" index="<?= $volume ?>">
+								€<?= Buy\Product::Basic->price()->volume($volume) ?>
+							</k-price>
+						</p>
             <p class="btn btn--filled">
               <?= icon('cart') ?>
               Save <?= $discount ?>%<?php if ($banner): ?> on top<?php endif ?>!
@@ -270,9 +278,13 @@ class Price extends HTMLElement {
 		super();
 
 		this.id = this.getAttribute("product");
-		this.product = window.paddle.products.find(({ product_id}) => product_id == this.id);
-		this.currency = this.product.currency;
-		this.price = this.product.list_price.net;
+		this.index = this.getAttribute("index");
+		this.currency = window.currency;
+		this.price = window.prices[this.id];
+
+		if (this.index) {
+			this.price = this.price[this.index];
+		}
 	}
 
 	connectedCallback() {
@@ -303,18 +315,25 @@ class Price extends HTMLElement {
 
 }
 
-function paddle_price(data) {
-	window.paddle = data.response;
-	customElements.define("k-price", Price);
-}
+async function paddle_price(data) {
+	window.currency = data.response.products[0].currency;
 
-document.addEventListener("click", (event) => {
-	[...document.querySelectorAll("details")].forEach(details => {
-		if (details.contains(event.target) === false) {
-			details.removeAttribute("open");
+	const response = await fetch("/buy/prices/" + window.currency);
+	window.prices  = await response.json();
+
+	customElements.define("k-price", Price);
+
+	for (const link of [...document.querySelectorAll(".checkout-link")]) {
+		link.href += window.currency;
+	}
+
+	document.addEventListener("click", (event) => {
+		for (const details of [...document.querySelectorAll("details")]) {
+			if (details.contains(event.target) === false) {
+				details.removeAttribute("open");
+			}
 		}
 	});
-});
-
+}
 </script>
-<script src="https://checkout.paddle.com/api/2.0/prices?product_ids=824338,824340&callback=paddle_price"></script>
+<script src="https://checkout.paddle.com/api/2.0/prices?product_ids=824338&callback=paddle_price"></script>
