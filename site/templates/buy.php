@@ -326,14 +326,14 @@ async function paddle_price(data) {
 	for (const link of [...document.querySelectorAll(".checkout-link")]) {
 		link.href += window.currency;
 	}
-
-	document.addEventListener("click", (event) => {
-		for (const details of [...document.querySelectorAll("details")]) {
-			if (details.contains(event.target) === false) {
-				details.removeAttribute("open");
-			}
-		}
-	});
 }
+
+document.addEventListener("click", (event) => {
+	for (const details of [...document.querySelectorAll("details")]) {
+		if (details.contains(event.target) === false) {
+			details.removeAttribute("open");
+		}
+	}
+});
 </script>
 <script src="https://checkout.paddle.com/api/2.0/prices?product_ids=824338&callback=paddle_price"></script>
