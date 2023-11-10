@@ -39,7 +39,7 @@ function customerVerify(string $email, string $hash, bool $hasData, bool $hasNew
 	];
 
 	$query    = http_build_query($data);
-	$checksum = hash_hmac('sha256', $query, option('hub.key'));
+	$checksum = hash_hmac('sha256', $query, option('keys.hub'));
 
 	if ($email && $hash && $hash === $checksum) {
 		return true;

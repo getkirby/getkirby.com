@@ -163,7 +163,7 @@ class PluginPage extends Page
 				return null;
 			}
 
-			$key = option('github.key');
+			$key = option('keys.github');
 			if ($key === null) {
 				return null;
 			}

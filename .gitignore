@@ -65,7 +65,7 @@ Icon
 # Config
 # ------
 
-/site/config/keys/*
+/site/config/keys.php
 
 # Accounts
 # ---------------

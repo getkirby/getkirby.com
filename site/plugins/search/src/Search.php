@@ -31,7 +31,8 @@ class Search
 
 		$this->algolia = Algolia::create(
 			$this->options['app'],
-			$this->options['key']
+			// use the search-only API key as fallback
+			option('keys.algolia', 'd161a2f4cd2d69247c529a3371ad3050')
 		);
 	}
 

@@ -11,7 +11,7 @@ return [
 		'pattern' => 'hooks/clean',
 		'method'  => 'GET|POST',
 		'action'  => function () {
-			$key = trim(F::read(__DIR__ . '/keys/hooks.txt'));
+			$key = option('keys.hooks');
 
 			if (empty($key) === false && get('key') === $key) {
 				kirby()->cache('pages')->flush();
