@@ -183,23 +183,23 @@
     <h2 class="h2 mb-6">Volume discounts</h2>
     <div class="columns rounded overflow-hidden" style="--columns-md: 2; --columns: 4; --gap: var(--spacing-3)">
       <?php foreach ($discounts as $volume => $discount) : ?>
-        <a class="checkout-link block p-12 bg-light rounded text-center" target="_blank" href="/buy/volume/basic/<?= $volume ?>/">
+        <div class="block p-12 bg-light rounded text-center" >
           <article>
             <h3 class="mb-3 font-mono text-sm"><?= $volume ?> licenses</h3>
             <?php if ($banner): ?>
               <del class="invisible discounted-list-price h6" style="color: var(--color-purple-600)">€</del>
             <?php endif ?>
             <p class="h2 mb-6 discounted-price">
-							<k-price product="volume" index="<?= $volume ?>">
-								€<?= Buy\Product::Basic->price()->volume($volume) ?>
-							</k-price>
+							Save <?= $discount ?>%<?php if ($banner): ?> on top<?php endif ?>!
 						</p>
-            <p class="btn btn--filled">
-              <?= icon('cart') ?>
-              Save <?= $discount ?>%<?php if ($banner): ?> on top<?php endif ?>!
-            </p>
+            <a target="_blank" href="/buy/volume/basic/<?= $volume ?>/" class="checkout-link btn btn--filled mb-3">
+              <?= icon('cart') ?> Basic
+						</a>
+						<a target="_blank" href="/buy/volume/enterprise/<?= $volume ?>/" class="checkout-link btn btn--filled">
+              <?= icon('cart') ?> Enterprise
+						</a>
           </article>
-        </a>
+				</div>
       <?php endforeach ?>
       <a class="block p-12 bg-light text-center" href="mailto:support@getkirby.com">
         <article>

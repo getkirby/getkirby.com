@@ -47,16 +47,9 @@ return [
 	[
 		'pattern' => 'buy/prices/(:any)',
 		'action' => function (string $currency) {
-			$volume = [];
-
-			foreach (option('buy.volume') as $v => $discount) {
-				$volume[$v] = Product::Basic->price($currency)->volume($v);
-			}
-
 			return json_encode([
 				'basic'      => Product::Basic->price($currency)->sale(),
-				'enterprise' => Product::Enterprise->price($currency)->sale(),
-				'volume'     => $volume
+				'enterprise' => Product::Enterprise->price($currency)->sale()
 			]);
 		}
 	],
