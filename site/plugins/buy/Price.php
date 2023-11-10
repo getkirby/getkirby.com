@@ -84,14 +84,14 @@ class Price
 	}
 
 	/**
-	 * Gets the total price for the given volume
+	 * Gets the price for a single license
+	 * at the given volume
 	 */
 	public function volume(int $volume): float
 	{
 		$price    = $this->sale();
 		$discount = option('buy.volume')[$volume];
 		$price   *= (1 - ($discount / 100));
-		$price   *= $volume;
 		return round($price, 2);
 	}
 }
