@@ -11,20 +11,23 @@ class Sale
 
 	public function __construct()
 	{
-		$this->start  = strtotime(option('buy.sale.start', '1970-01-01'));
+		$options = option('buy.sale', []);
+		$this->start  = strtotime($options['start'] ?? '1970-01-01');
 		// the end date is inclusive, add one day
-		$this->end    = strtotime(option('buy.sale.end', '1970-01-01')) + 86400;
-		$this->factor = option('buy.sale.factor', 1);
+		$this->end    = strtotime($options['end'] ?? '1970-01-01') + 86400;
+		$this->factor = $options['factor'] ?? 1;
 	}
 
 	/**
-	 * Gets the end date as formatted string
+	 * Returns the end date as formatted string
 	 */
 	public function ends(): string
 	{
 		return match (true) {
-			$this->end - time() < 24 * 60 * 60 => '<strong>today</strong> (midnight UTC)',
-			default                            => date('M jS', $this->end),
+			$this->end - time() < 24 * 60 * 60
+				=> '<strong>today</strong> (midnight UTC)',
+			default
+				=> date('M jS', $this->end),
 		};
 	}
 
@@ -58,15 +61,11 @@ class Sale
 	}
 
 	/**
-	 * Gets the current sale factor (1 = no sale)
+	 * Returns the current sale factor (1 = no sale)
 	 */
 	public function factor(): float
 	{
-		if ($this->isActive() === true) {
-			return $this->factor;
-		}
-
-		return 1;
+		return $this->isActive() ? $this->factor : 1;
 	}
 
 	/**
@@ -78,7 +77,7 @@ class Sale
 	}
 
 	/**
-	 * Gets the percentage of the current sale (0-100, without %)
+	 * Returns the percentage of the current sale (0-100, without %)
 	 */
 	public function percentage(): int
 	{
@@ -86,7 +85,7 @@ class Sale
 	}
 
 	/**
-	 * Gets the sale banner text
+	 * Returns the text for the sale banner
 	 */
 	public function text(): string
 	{
