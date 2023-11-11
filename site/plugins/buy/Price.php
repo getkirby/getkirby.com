@@ -76,7 +76,8 @@ class Price
 		$price = $this->regular();
 
 		if ($sale->isActive() === true) {
-			return round($price * $sale->factor());
+			$price *= 1 - $sale->discount() / 100;
+			return round($price);
 		}
 
 		return $price;
