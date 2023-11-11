@@ -88,7 +88,7 @@
 				<details class="revenue">
 					<summary><span>Revenue limit: <strong>€1M / year</strong></span> <?= icon('info') ?></summary>
 					<div>
-						<p>Your revenue or funding is less than <strong>€1&nbsp;million</strong> in the <strong>last 12 months</strong></p>
+						<p>Your revenue or funding is less than <strong>€1&nbsp;million</strong> in the <strong>last 12 months</strong>.</p>
 						<p>If you build a website for a client, the limit has to fit the revenue of your client.</p>
 					</div>
 				</details>
