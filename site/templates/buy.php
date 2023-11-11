@@ -63,6 +63,13 @@
 	color: var(--color-yellow-500);
 }
 
+.sale {
+	color: var(--color-purple-600);
+}
+.strikethrough {
+	text-decoration: line-through;
+}
+
 @media (max-width: 40rem) {
 	.causes li:not(:first-child) {
 		display: none;
@@ -75,20 +82,36 @@
   <div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-6)">
 
 		<div>
-			<h1 class="h1 max-w-xl mb-24">
+			<h1 class="h1 max-w-xl mb-12">
 				The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
 			</h1>
+
+			<?php if ($sale->isActive()): ?>
+				<div class="h2 sale">
+				Save <?= $sale->percentage() ?>% on all licenses until <?= date('d M', strtotime($sale->end)) ?>
+				</div>
+			<?php endif ?>
 		</div>
 
 		<div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
 	    <div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
 				<header>
-					<h2>Basic</h2>
+					<h2>
+						Basic
+
+						<?php if ($sale->isActive()): ?>
+						<k-price product="basic" price="regular" class="sale strikethrough">
+							€<?= Buy\Product::Basic->price()->regular() ?>
+						</k-price>
+						<?php endif ?>
+					</h2>
+
 					<a href="/buy/basic/" target="_blank" class="checkout-link h2 block mb-3">
-						<k-price product="basic">
+						<k-price product="basic" price="sale">
 							€<?= Buy\Product::Basic->price()->sale() ?>
 						</k-price> per site
 					</a>
+
 					<p class="text-sm color-gray-700">A discounted license for individuals, small teams and side projects</p>
 				</header>
 
@@ -131,12 +154,22 @@
 
 	    <div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
 				<header>
-					<h2>Enterprise</h2>
+					<h2>
+						Enterprise
+
+						<?php if ($sale->isActive()): ?>
+						<k-price product="enterprise" price="regular" class="sale strikethrough">
+							€<?= Buy\Product::Enterprise->price()->regular() ?>
+						</k-price>
+						<?php endif ?>
+					</h2>
+
 					<a href="/buy/enterprise/" target="_blank" class="checkout-link h2 block mb-3">
-						<k-price product="enterprise">
+						<k-price product="enterprise" price="sale">
 							€<?= Buy\Product::Enterprise->price()->sale() ?>
 						</k-price> per site
 					</a>
+
 					<p class="text-sm color-gray-700">Suitable for larger organizations with mission-critical projects</p>
 				</header>
 
@@ -185,12 +218,11 @@
       <?php foreach ($discounts as $volume => $discount) : ?>
         <div class="block p-12 bg-light rounded text-center" >
           <article>
-            <h3 class="mb-3 font-mono text-sm"><?= $volume ?> licenses</h3>
-            <?php if ($banner): ?>
-              <del class="invisible discounted-list-price h6" style="color: var(--color-purple-600)">€</del>
-            <?php endif ?>
-            <p class="h2 mb-6 discounted-price">
-							Save <?= $discount ?>%<?php if ($banner): ?> on top<?php endif ?>!
+            <h3 class="mb-3 font-mono text-sm">
+							Save <?= $discount ?>%<?php if ($sale->isActive()): ?><span class="sale"> on top</span><?php endif ?>!
+						</h3>
+						<p class="h2 mb-6">
+							<?= $volume ?> licenses
 						</p>
             <a target="_blank" href="/buy/volume/basic/<?= $volume ?>/" class="checkout-link btn btn--filled mb-3">
               <?= icon('cart') ?> Basic
@@ -204,10 +236,7 @@
       <a class="block p-12 bg-light text-center" href="mailto:support@getkirby.com">
         <article>
           <h3 class="mb-3 font-mono text-sm">Custom packages</h3>
-          <?php if ($banner): ?>
-            <span class="block">&nbsp;</span>
-          <?php endif ?>
-          <p class="h2 mb-6 discounted-price">Contact us</p>
+          <p class="h2 mb-6">Contact us</p>
           <p class="btn btn--outlined">
             <?= icon('user') ?>
             Support
@@ -277,14 +306,10 @@ class Price extends HTMLElement {
 	constructor() {
 		super();
 
-		this.id = this.getAttribute("product");
-		this.index = this.getAttribute("index");
+		this.product = this.getAttribute("product");
+		this.price = this.getAttribute("price");
 		this.currency = window.currency;
-		this.price = window.prices[this.id];
-
-		if (this.index) {
-			this.price = this.price[this.index];
-		}
+		this.price = window.prices[this.product][this.price];
 	}
 
 	connectedCallback() {

@@ -2,8 +2,8 @@
 
 return function ($page) {
 	return [
-		'banner'    => banner(),
 		'discounts' => option('buy.volume'),
+		'sale'      => new Buy\Sale(),
 		'questions' => $page->find('answers')->children()
 	];
 };

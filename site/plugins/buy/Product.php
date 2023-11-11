@@ -52,4 +52,28 @@ enum Product: string
     {
         return new Price($this , $currency);
     }
+
+	/**
+	 * Returns the sale price multiplier when on sale,
+	 * otherwise false
+	 */
+	public function sale(): float|false
+	{
+		if ($sale = option('buy.sale')) {
+			if (is_numeric($sale) === true) {
+				return $sale;
+			}
+
+			if (is_array($sale) === true) {
+				if (
+					strtotime($sale['start']) <= time() &&
+					strtotime($sale['end']) >= time()
+					) {
+					return $sale['factor'];
+				}
+			}
+		}
+
+		return false;
+	}
 }

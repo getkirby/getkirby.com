@@ -48,8 +48,14 @@ return [
 		'pattern' => 'buy/prices/(:any)',
 		'action' => function (string $currency) {
 			return json_encode([
-				'basic'      => Product::Basic->price($currency)->sale(),
-				'enterprise' => Product::Enterprise->price($currency)->sale()
+				'basic' => [
+					'regular' => Product::Basic->price($currency)->regular(),
+					'sale'    => Product::Basic->price($currency)->sale(),
+				],
+				'enterprise' => [
+					'regular' => Product::Enterprise->price($currency)->regular(),
+					'sale'    => Product::Enterprise->price($currency)->sale()
+				]
 			]);
 		}
 	],
