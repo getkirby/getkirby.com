@@ -67,10 +67,11 @@ class Price
 	 */
 	public function sale(): int
 	{
+		$sale  = new Sale();
 		$price = $this->regular();
 
-		if ($sale = $this->product->sale()) {
-			return static::round($price * $sale);
+		if ($sale->isActive() === true) {
+			return static::round($price * $sale->factor());
 		}
 
 		return $price;

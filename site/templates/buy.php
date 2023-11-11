@@ -77,18 +77,17 @@
 }
 </style>
 
-
 <article>
   <div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-6)">
 
 		<div>
-			<h1 class="h1 max-w-xl mb-12">
+			<h1 class="h1 max-w-xl mb-24">
 				The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
 			</h1>
 
 			<?php if ($sale->isActive()): ?>
 				<div class="h2 sale">
-				Save <?= $sale->percentage() ?>% on all licenses until <?= date('d M', strtotime($sale->end)) ?>
+					<?= $sale->text() ?>
 				</div>
 			<?php endif ?>
 		</div>

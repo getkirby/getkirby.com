@@ -6,7 +6,6 @@ header('X-Content-Type-Options: nosniff');
 
 return [
 	'api'        => false,
-	'banners'    => require __DIR__ . '/banners.php',
 	'buy'        => require __DIR__ . '/buy.php',
 	'categories' => require __DIR__ . '/categories.php',
 	'debug'      => true,
