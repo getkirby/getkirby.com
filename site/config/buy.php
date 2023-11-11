@@ -13,7 +13,11 @@ return [
 		'nudge'   => 249,
 		'regular' => 399,
 	],
-	'sale' => false,
+	'sale' => [
+		'start'  => '2023-11-01',
+		'end'    => '2023-11-15',
+		'factor' => 0.8
+	],
 	'volume' => [
 		5  => 5,
 		10 => 10,
