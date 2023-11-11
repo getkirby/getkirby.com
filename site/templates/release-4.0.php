@@ -66,13 +66,13 @@
 
 	<?php snippet('templates/release-40/versioning') ?>
 
-	<section id="faq" class="mb-42">
+	<!-- <section id="faq" class="mb-42">
 		<?php snippet('templates/features/intro', [
 			'title' => 'Frequently asked questions',
 			'text'  => 'We are getting a lot of questions after our announcement and already tried to answer most of them here. We will keep collecting questions from the community here and try to answer them as transparently as possible. Let us know on Discord or in the Forum if you have additional questions.'
 		]) ?>
 		<?php snippet('faq') ?>
-	</section>
+	</section> -->
 
 	<?php snippet('templates/release-40/changes') ?>
 
