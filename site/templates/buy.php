@@ -243,7 +243,6 @@
         </article>
       </a>
     </div>
-    <p class="font-mono text-sm text-center pt-3">+ VAT if applicable.</p>
   </section>
 
   <section class="mb-42 columns columns--reverse" style="--columns: 2; --columns-md: 1; --gap: var(--spacing-24)">
