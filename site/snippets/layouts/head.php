@@ -46,6 +46,10 @@ extract([
 
 <?= js('assets/js/components/lightbox.js') ?>
 
+<?php if($page->id() === 'buy'): ?>
+<link rel="preload" href="https://checkout.paddle.com/api/2.0/prices?product_ids=824338&callback=paddle_price" as="script" />
+<?php endif ?>
+
 <?= css('assets/css/index.css') ?>
 
 <link rel="icon" type="image/png" href="<?= url('/assets/images/favicon.png') ?>">
