@@ -2,7 +2,6 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-require __DIR__ . '/helpers/banner.php';
 require __DIR__ . '/helpers/html.php';
 require __DIR__ . '/helpers/reference.php';
 
