@@ -1,10 +1,10 @@
-Title: What happens when the 3 years of free updates are over?
+Title: What happens when the 3 years of updates are over?
 ----
 Text:
 
-When you reach the end of your free update period, you have two choices:
+When you reach the end of your license's update period, you have two choices:
 
-1. You can buy another 3 years of free updates. This will not happen automatically though. We leave it up to you.
-2. You can keep the latest included version up and running for as long as you like at no extra costs.
+1. You can buy an upgrade of your license, adding additional years of free updates. This will not happen automatically though. We leave it up to you to decide.
+2. Otherwise, you can keep using the latest Kirby version that was released during the 3 years and keep it running for as long as you like at no extra costs. Only when you'd want to use newer releases with new features and improvements, you'll need to upgrade your license and go with option 1.
 
-You can also pause and get another round of free updates any time later. Technically, this would probably count as third choice.
+You can also pause and upgrade to another round of updates any time later. Technically, this would probably count as a third choice.
