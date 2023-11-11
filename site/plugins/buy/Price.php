@@ -3,6 +3,7 @@
 namespace Buy;
 
 use Kirby\Data\Data;
+use Kirby\Toolkit\A;
 
 class Price
 {
@@ -100,9 +101,20 @@ class Price
 	 */
 	public function volume(int $volume): float
 	{
-		$price    = $this->sale();
-		$discount = option('buy.volume')[$volume];
-		$price   *= (1 - ($discount / 100));
+		$price = $this->sale();
+
+		// sort discounts by largest package first
+		$discounts = option('buy.volume');
+		krsort($discounts);
+
+		// find highest possible discount for given volume
+		$discount = A::find(
+			$discounts,
+			fn ($discount, $count) => $count <= $volume
+		);
+
+		$price *= 1 - $discount / 100;
+
 		return round($price, 2);
 	}
 }
