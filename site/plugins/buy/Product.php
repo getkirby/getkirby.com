@@ -50,6 +50,11 @@ enum Product: string
 	 */
 	public function price(string $currency = 'EUR'): Price
     {
+		// really ensure that we have a valid currency
+		if (empty($currency) === true) {
+			$currency = 'EUR';
+		}
+
         return new Price($this , $currency);
     }
 }

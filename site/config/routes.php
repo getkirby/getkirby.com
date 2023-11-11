@@ -64,9 +64,10 @@ return [
 		'action' => function (string $product, string $currency) {
 			try {
 				$product = Product::from($product);
+				$price   = $product->price($currency);
 				$prices  = [
-					'EUR:'          . $product->price('EUR')->sale(),
-					$currency . ':' . $product->price($currency)->sale(),
+					'EUR:'                 . $product->price('EUR')->sale(),
+					$price->currency . ':' . $price->sale(),
 				];
 
 				go($product->checkout(['prices' => $prices]));
@@ -79,10 +80,11 @@ return [
 		'pattern' => 'buy/volume/(:any)/(:num)/(:any)',
 		'action'  => function(string $product, int $volume, string $currency) {
 			try {
-				$product  = Product::from($product);
+				$product = Product::from($product);
+				$price   = $product->price($currency);
 				$prices  = [
-					'EUR:'          . $product->price('EUR')->volume($volume),
-					$currency . ':' . $product->price($currency)->volume($volume),
+					'EUR:'                 . $product->price('EUR')->volume($volume),
+					$price->currency . ':' . $price->volume($volume),
 				];
 
 				$url = $product->checkout([
