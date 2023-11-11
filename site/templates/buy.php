@@ -63,6 +63,11 @@
 	color: var(--color-yellow-500);
 }
 
+@media (max-width: 40rem) {
+	.causes li:not(:first-child) {
+		display: none;
+	}
+}
 </style>
 
 
@@ -205,48 +210,51 @@
     <p class="font-mono text-sm text-center pt-3">+ VAT if applicable.</p>
   </section>
 
-  <section class="mb-42 columns columns--reverse" style="--columns: 2; --gap: var(--spacing-12)">
+  <section class="mb-42 columns columns--reverse" style="--columns: 2; --columns-md: 1; --gap: var(--spacing-24)">
     <div>
-      <h2 class="h2 mb-6">For a good cause?</h2>
-      <div class="prose mb-12">
-        <p>We care about a better society and the future of our planet. We support students, educational projects, social and environmental organizations, charities and non-profits with free&nbsp;licenses.</p>
+
+      <h2 class="h2 mb-6">For a good cause? <mark>It's free.</mark></h2>
+      <div class="prose mb-6">
+        <p>We care about a better society and the future of our planet. We support <mark>students, educational projects, social and environmental organizations, charities and non-profits</mark> with free&nbsp;licenses.</p>
       </div>
-      <a class="btn btn--filled" href="mailto:support@getkirby.com">
+
+      <a class="btn btn--filled mb-12" href="mailto:support@getkirby.com">
         <?= icon('heart') ?>
         Contact us
       </a>
-    </div>
-    <ul class="columns" style="--columns: 2; --gap: var(--spacing-12);">
-      <?php foreach (collection('causes')->shuffle()->limit(2) as $case) : ?>
-        <li>
-          <a href="<?= $case->link()->toUrl() ?>">
-            <figure>
-              <span class="block shadow-2xl mb-3" style="--aspect-ratio: 3/4">
-                <?= img($image = $case->image(), [
-                  'alt' => 'Screenshot of the ' . $image->alt() . ' website',
-                  'src' => [
-                    'width' => 300
-                  ],
-                  'srcset' => [
-                    '1x' => 400,
-                    '2x' => 800,
-                  ]
-                ]) ?>
-              </span>
-              <figcaption class="text-sm">
-                <?= $case->title() ?>
-              </figcaption>
-            </figure>
-          </a>
-        </li>
-      <?php endforeach ?>
-    </ul>
-  </section>
 
-  <section class="mb-42">
-    <h2 class="h2 mb-6">Frequently asked questions</h2>
-    <?php snippet('faq') ?>
-  </section>
+			<ul class="columns causes" style="--columns: 2; --gap: var(--spacing-12);">
+				<?php foreach (collection('causes')->shuffle()->limit(2) as $case) : ?>
+					<li>
+						<a href="<?= $case->link()->toUrl() ?>">
+							<figure>
+								<span class="block shadow-2xl mb-3" style="--aspect-ratio: 3/4">
+									<?= img($image = $case->image(), [
+										'alt' => 'Screenshot of the ' . $image->alt() . ' website',
+										'src' => [
+											'width' => 300
+										],
+										'srcset' => [
+											'1x' => 400,
+											'2x' => 800,
+										]
+									]) ?>
+								</span>
+								<figcaption class="text-sm">
+									<?= $case->title() ?>
+								</figcaption>
+							</figure>
+						</a>
+					</li>
+				<?php endforeach ?>
+			</ul>
+		</div>
+
+		<div>
+			<h2 class="h2 mb-6">Frequently asked questions</h2>
+			<?php snippet('faq') ?>
+		</div>
+	</section>
 
   <footer class="h2 max-w-xl">
     Manage your existing licenses on our <a href="https://licenses.getkirby.com"><span class="link">license&nbsp;server</span> &rarr;</a>
