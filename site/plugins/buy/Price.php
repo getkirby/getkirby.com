@@ -14,8 +14,13 @@ class Price
 		public readonly string $currency = 'EUR'
 	) {
 		$rates = Data::read(__DIR__ . '/rates.json');
-		$this->rate = $rates[$currency];
 
+		if (isset($rates[$currency]) === true) {
+			$this->rate = $rates[$currency];
+		} else {
+			$this->rate     = $rates['EUR'];
+			$this->currency = 'EUR';
+		}
 	}
 
 	/**
