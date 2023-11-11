@@ -76,7 +76,7 @@ class Price
 		$price = $this->regular();
 
 		if ($sale->isActive() === true) {
-			return static::round($price * $sale->factor());
+			return round($price * $sale->factor());
 		}
 
 		return $price;
