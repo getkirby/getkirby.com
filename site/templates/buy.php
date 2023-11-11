@@ -69,6 +69,9 @@
 .strikethrough {
 	text-decoration: line-through;
 }
+.loading {
+	color: var(--color-gray-600);
+}
 
 @media (max-width: 40rem) {
 	.causes li:not(:first-child) {
@@ -99,14 +102,14 @@
 						Basic
 
 						<?php if ($sale->isActive()): ?>
-						<k-price product="basic" price="regular" class="sale strikethrough">
+						<k-price product="basic" price="regular" class="loading sale strikethrough">
 							€<?= Buy\Product::Basic->price()->regular() ?>
 						</k-price>
 						<?php endif ?>
 					</h2>
 
 					<a href="/buy/basic/" target="_blank" class="checkout-link h2 block mb-3">
-						<k-price product="basic" price="sale">
+						<k-price product="basic" price="sale" class="loading">
 							€<?= Buy\Product::Basic->price()->sale() ?>
 						</k-price> per site
 					</a>
@@ -157,14 +160,14 @@
 						Enterprise
 
 						<?php if ($sale->isActive()): ?>
-						<k-price product="enterprise" price="regular" class="sale strikethrough">
+						<k-price product="enterprise" price="regular" class="loading sale strikethrough">
 							€<?= Buy\Product::Enterprise->price()->regular() ?>
 						</k-price>
 						<?php endif ?>
 					</h2>
 
 					<a href="/buy/enterprise/" target="_blank" class="checkout-link h2 block mb-3">
-						<k-price product="enterprise" price="sale">
+						<k-price product="enterprise" price="sale" class="loading">
 							€<?= Buy\Product::Enterprise->price()->sale() ?>
 						</k-price> per site
 					</a>
@@ -334,6 +337,7 @@ class Price extends HTMLElement {
     }
 
 		this.innerHTML = formatter.format(this.price);
+		this.classList.remove("loading");
 	}
 
 }
