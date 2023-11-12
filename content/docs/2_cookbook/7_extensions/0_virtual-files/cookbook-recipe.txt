@@ -531,7 +531,7 @@ Let’s leverage this possibility to create thumbs for our images by modifiying 
 In our example above, the `thumb()` method simply returned the file object. Now we can modify the method to instead return an instance of the same class, but with a modified URL if supported options are passed in the options array.
 
 ```php "/site/plugins/virtual-files/models/virtual-file.php"
-public function thumb($options = null)
+public function thumb($options = null): FileVersion
 {
   $query          = null;
   $options['w']   = $options['width'] ?? $options['w'] ?? null;
@@ -606,6 +606,7 @@ And since we are at it, we might as well add some methods to retrieve the `width
 <?php
 
 use Kirby\Cms\File;
+use Kirby\Cms\FileVersion;
 use Kirby\Image\Dimensions;
 
 class VirtualFile extends File
@@ -617,7 +618,7 @@ class VirtualFile extends File
   {
     $this->dimensions = new Dimensions($props['width'] ?? 0, $props['height'] ?? 0);
 
-    return parent::__construct($props);
+    parent::__construct($props);
   }
 
   public function width(): int
