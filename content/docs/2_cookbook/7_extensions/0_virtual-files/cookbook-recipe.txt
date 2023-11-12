@@ -96,10 +96,10 @@ Let’s continue with creating the page model that overwrites the original `file
 use Kirby\Cms\Page;
 use Kirby\Cms\Files;
 
-class PhotosPage extends Page 
+class PhotosPage extends Page
 {
 
-  public function files()
+  public function files(): Files
   {
     if ($this->files !== null) {
       return $this->files;
@@ -157,7 +157,7 @@ We also want a template to render the files on the frontend. For the purposes of
     <?php foreach($page->files() as $file): ?>
       <li><?= $file ?></li>
     <?php endforeach ?>
-  </div>
+  </ul>
 </article>
 <?php snippet('footer') ?>
 ```
@@ -305,9 +305,9 @@ use Kirby\Cms\Files;
 use Kirby\Http\Remote;
 use Kirby\Toolkit\Str;
 
-class PhotosPage extends Page 
+class PhotosPage extends Page
 {
-  public function files()
+  public function files(): Files
   {
     // use the cached array if available
     if ($this->files !== null) {
@@ -463,9 +463,9 @@ use Kirby\Cms\Files;
 use Kirby\Http\Remote;
 use Kirby\Toolkit\Str;
 
-class PhotosPage extends Page 
+class PhotosPage extends Page
 {
-  public function files()
+  public function files(): Files
   {
     // use the cached array if available
     if ($this->files !== null) {
@@ -476,11 +476,11 @@ class PhotosPage extends Page
     $results         = [];
     $files           = [];
     $request         = Remote::get('https://api.unsplash.com/photos/?client_id=' . option('unsplash.apikey'));
- 
+
     if ($request->code() === 200) {
       $results = $request->json(false);
     }
-  
+
     // create a files array from the data
     if (!empty($results)) {
       foreach ($results as $result) {
@@ -498,7 +498,7 @@ class PhotosPage extends Page
         ];
       }
     }
-  
+
     // loop through the files array
     foreach ($files as $file) {
       // create a new VirtualFile object for each item
@@ -528,7 +528,7 @@ Let’s leverage this possibility to create thumbs for our images by modifiying 
 
 ### Modifying the `thumb()` method
 
-In our example above, the `thumb()` method simply returned the file object. Now we can modify the method to instead return an instance of the same class, but with a modified URL if supported options are passed in the options array. 
+In our example above, the `thumb()` method simply returned the file object. Now we can modify the method to instead return an instance of the same class, but with a modified URL if supported options are passed in the options array.
 
 ```php "/site/plugins/virtual-files/models/virtual-file.php"
 public function thumb($options = null)
@@ -538,7 +538,7 @@ public function thumb($options = null)
   $options['h']   = $options['height'] ?? $options['h'] ?? null;
   $options['fit'] = isset($options['crop']) ? 'crop' : $options['fit'] ?? null;
   $options['dpr'] = $options['dpr'] ?? 1; // set default to 2 if you want a higher device pixel ratio by default
-  
+
   unset($options['width'], $options['height'], $options['crop']);
 
   if (empty($options) === false) {
@@ -617,7 +617,7 @@ class VirtualFile extends File
   {
     $this->dimensions = new Dimensions($props['width'] ?? 0, $props['height'] ?? 0);
 
-    return parent::__construct($props),
+    return parent::__construct($props);
   }
 
   public function width(): int
@@ -655,7 +655,7 @@ if (!empty($results)) {
       'url'      => $result->urls->raw,
       'template' => 'virtual-file',
       'parent'   => $this,
-      'width'    => (int)$result->width ?? 0, 
+      'width'    => (int)$result->width ?? 0,
       'height'   => (int)$result->height ?? 0,
       'content'  => [
         'alt'          => $result->alt_description ?? $result->description,
