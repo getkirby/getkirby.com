@@ -12,7 +12,7 @@ return [
 	'features'   => require __DIR__ . '/features.php',
 	'github'     => ['url' => 'https://github.com/getkirby'],
 	'hub'        => ['url' => 'https://hub.getkirby.com'],
-	'keys'       => require __DIR__ . '/keys.php',
+	'keys'       => file_exists(__DIR__ . '/keys.php') ? require __DIR__ . '/keys.php' : require __DIR__ . '/keys.sample.php',
 	'meta'       => require __DIR__ . '/meta.php',
 	'newstroll'  => ['list' => 110866],
 	'paddle'     => require __DIR__ . '/paddle.php',
