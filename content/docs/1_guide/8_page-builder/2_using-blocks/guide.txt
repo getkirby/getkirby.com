@@ -1,0 +1,161 @@
+Title: Using the blocks field
+
+----
+
+Intro: How to use the blocks field: Add, edit, duplicate etc.
+
+----
+
+Text:
+
+## Block UI overview
+
+(image: add-button-with-dropdown.png caption: Add button above blocks field with dropdown to delete all or copy all blocks and paste option to paste blocks from HTML)
+(image: context-menu.png caption: Context menu shown when block is active)
+(image: context-menu-drop-down.png caption: Drop-down with block options from context menu)
+
+## Add block
+
+To add a new block, when…
+
+**…no block is active:**
+
+1. Click/tap the `Add` button above the blocks field.
+2. Then select a block type.
+
+The new block is inserted at the end.
+
+**…at the end of the blocks field:**
+
+1. Click/tap the `+` button below the blocks field.
+2. Then select a block type.
+
+The new block is inserted at the end.
+
+**…inside an active block**
+
+1. Click/tap the `+` button from the context menu
+2. Then select a block type.
+
+The new block is inserted after the active block.
+
+To add a new block after or before the currently active block,
+
+1. Click/tap the `…` button
+2. Then select `Insert before` or `Insert after`.
+
+## Edit block
+
+Some blocks can be edited inline, i.e. without opening the drawer (for example, the text block). Other blocks can only be edited with when the drawer is open. Sometimes, some fields in a block can be edited inline, while other fields in a block are only accessible in the drawer.
+
+**Blocks that can be edited inline**
+1. Put the cursor at the position where you want to make edits.
+2. Start typing.
+
+**Blocks or fields in blocks that need editing in the drawer**
+
+1. Select the block to edit.
+2. Click/tap the `Edit` icon.
+
+With some block types (image, video…), you can open the drawer by double-clicking the block.
+
+## Remove one or multiple blocks
+
+To remove the selected block(s), click/tap the trash icon or use the keyboard shortcut `Meta + Backspace`
+
+## Change block type
+
+1. Click/tap the `…` button
+2. Select `Change type` from the dropdown menu.
+3. Select the new block type.
+
+## Change block position
+
+To change the position of the active block,
+1. Click/tap and hold the button with the hand icon.
+2. Drag the block to its new position.
+
+<since v="4.0.0">
+Or use the following keyboard shortcuts:
+
+To move the block up: Meta + Shift + arrow up
+To move the block down: Meta + Shift + arrow down
+</since>
+
+## Hide block
+
+1. Select the block to hide.
+2. Click/tap the `…` button from the context menu.
+3. Select `Hide` from the dropdown menu.
+
+## Duplicate block
+
+1. Select the block to duplicate.
+2. Click/tap the `…` button from the context menu.
+3. Select `Duplicate` from the dropdown menu.
+
+The duplicated block is inserted after the selected block.
+
+## Copy block(s)
+
+** Single block**
+1. Select the block to copy.
+2. Click/tap the `…` button from the context menu.
+3. Select `Copy` from the dropdown menu.
+
+**Multiple blocks**
+1. Select the blocks to copy.
+2. Click/tap the `Copy` button from the context menu.
+
+## Paste blocks
+
+**When no block is selected**
+
+1. Click/tap the three dots next to the `Add` button above the field.
+2. Select `Paste`.
+3. Insert the copied blocks.
+
+**When a block is selected**
+1. Click/tap the `…` button from the context menu.
+2. Select `Paste after`.
+
+
+<since v="4.0.0">
+## Split & merge blocks
+
+To split an existing block into two blocks,
+1. Move the cursor to the position where you want to split the blocks,
+2. Split with keyboard shortcut `Meta + Enter` or select `Split` from the dropdown menu.
+
+To merge blocks
+1. Select the blocks to merge.
+2. Merge with keyboard shortcut `Meta + J` or click/tap the `Merge` button.
+
+</since>
+
+## Copy all blocks
+
+1. Click/tap the `…` button above the blocks field.
+2. Select `Copy all`.
+
+## Delete all blocks
+
+1. Click/tap the `…` button above the blocks field.
+2. Select `Delete all`.
+
+<since v="4.0.0">
+## Overview keyboard shortcuts
+
+Enhanced keyboard shortcuts that work with both Meta (Cmd) and Ctrl keys:
+
+Shortcut | Description |
+| ---- | ---- |
+| Meta + Backspace | Remove selected block |
+| Meta + arrow up/down | Move focus up/down |
+| Meta + Shift + arrow up/down | Move blocks up/down |
+| Meta + Alt + arrow up/down | Extend selection up/down |
+| Meta + Enter | Split blocks |
+| Meta + J | Merge blocks |
+|Meta + V | Import blocks/layouts from your clipboard |
+</since>
+
