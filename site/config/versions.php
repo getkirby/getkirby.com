@@ -135,6 +135,13 @@ return [
 		],
 	],
 	'3.8' => [
+		'title'       => 'Kirby 3.8',
+		'hasDocs'     => true,
+		'mainVersion' => '3',
+		'since'       => 'Oct 2022 - Jan 2023',
+		'description' => 'is not the most current version of Kirby and should not be used for new projects.',
+		'link'        => 'https://v38.getkirby.com',
+		'repo'        => 'https://github.com/getkirby',
 		'subreleases' => [
 			'3.8.1',
 			'3.8.1.1',
