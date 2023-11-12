@@ -256,7 +256,7 @@ In your template code, you can now render the preview for the given PDF based on
   <?php foreach ($page->documents()->filterBy('extension', 'pdf') as $document): ?>
     <li>
       <a href="<?= $document->url() ?>">
-        <?php if ($preview = $page->images()->findBy('name', $document->filename())): ?>
+        <?php if ($preview = $page->images()->findBy('name', $document->name())): ?>
           <img src="<?= $preview->resize(200)->url() ?>" alt="">
         <?php endif; ?>
       </a>
