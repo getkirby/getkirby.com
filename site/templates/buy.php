@@ -89,7 +89,7 @@
 			</h1>
 
 			<?php if ($sale->isActive()): ?>
-				<div class="h2 sale">
+				<div class="h2 sale mb-12">
 					<?= $sale->text() ?>
 				</div>
 			<?php endif ?>
