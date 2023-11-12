@@ -1,5 +1,0 @@
-Template: content-type
-----
-Caption: Company
-----
-Text: Set up the dashboard for your company. Give editors quick access to the most important data.

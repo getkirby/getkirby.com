@@ -5,6 +5,8 @@ header('X-XSS-Protection: 1; mode=block');
 header('X-Content-Type-Options: nosniff');
 
 return [
+    'archived'  => true,
+    'home'      => 'docs',
     'api'       => false,
     'banners'   => require __DIR__ . '/banners.php',
     'debug'     => true,
