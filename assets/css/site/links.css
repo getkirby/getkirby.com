@@ -1,5 +1,5 @@
 .filters a[aria-current],
-.prose a,
+.prose a:where(:not(.btn)),
 .toc a,
 .sidebar ul a[aria-current],
 .playground-header-menu a[aria-current],

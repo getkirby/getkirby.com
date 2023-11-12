@@ -1,26 +1,31 @@
 <?php
 extract([
-  'since'  => $page->since(),
-  'alias'  => $page->alias(),
-  'auth'   => $page->auth(),
-  'guide'  => $page->guide(),
-  'source' => $source ?? $page->onGitHub()
+  'since'    => $page->since(),
+  'alias'    => $page->alias(),
+  'auth'     => $page->auth(),
+  'guide'    => $page->guide(),
+  'source'   => $source ?? $page->onGitHub(),
+	'hasClass' => $page instanceof ReferenceClassPage || (
+		$page instanceof ReferenceClassmethodPage &&
+		$page->name() === '__construct'
+	),
 ]);
 ?>
 
+<?php if(
+	$since->isNotEmpty() ||
+	$hasClass ||
+	$alias->isNotEmpty() ||
+	$auth->isNotEmpty() ||
+	$guide->isNotEmpty() ||
+	$source->isNotEmpty()
+): ?>
 <ul class="reference-meta">
-
   <?php if ($since->isNotEmpty()): ?>
   <li class="since">Since <?= version($since) ?></li>
   <?php endif ?>
 
-  <?php if (
-    is_a($page, ReferenceClassPage::class) === true ||
-    (
-      is_a($page, ReferenceClassmethodPage::class) === true &&
-      $page->name() === '__construct'
-    )
-  ): ?>
+  <?php if ($hasClass): ?>
   <li>Full class name: <code><?= $page->class() ?></code></li>
   <?php endif ?>
 
@@ -54,8 +59,8 @@ extract([
     </a>
   </li>
   <?php endif ?>
-
 </ul>
+<?php endif ?>
 
 <?php if ($page->deprecated()->isNotEmpty()): ?>
 <?php $deprecated = $page->deprecated()->split('|') ?>

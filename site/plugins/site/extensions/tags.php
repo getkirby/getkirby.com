@@ -22,7 +22,7 @@ $tags['snippet'] = [
  */
 $tags['icon'] = [
 	'html' => function ($tag) {
-		return '<svg width="16" height="16"><use href="#icon-' . $tag->value() . '" /></svg>';
+		return '<svg width="18" height="18"><use href="#icon-' . $tag->value() . '" /></svg>';
 	}
 ];
 
