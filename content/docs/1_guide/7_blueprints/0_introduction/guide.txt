@@ -38,6 +38,12 @@ The Panel layouts for  `site`, `pages`, `files` and `users` all get their own bl
 The start page (Dashboard) of the Panel is defined in the `/site/blueprints/site.yml` blueprint.
 </info>
 
+## Fields
+
+With fields you can break up your content into digestible chunks and structure it according to your content model, rather than storing everything in a huge text field. You can add as many fields of different field types as you need.
+
+(link: docs/guide/blueprints/fields text: Learn more about fields…)
+
 ## Layout
 
 When your project requires more elaborate setups, you can be the interface designer. You decide which features are needed for each type of page, file or user and how to arrange them in (link: docs/guide/blueprints/tabs text: tabs), (link: docs/guide/blueprints/layout#defining-columns text: columns) and (link: docs/guide/blueprints/layout#adding-sections text: sections).
@@ -45,12 +51,6 @@ When your project requires more elaborate setups, you can be the interface desig
 (image: tabs.png)
 
 (link: docs/guide/blueprints/layout text: Learn more about layouts…)
-
-## Fields
-
-With fields you can break up your content into digestable chunks and structure it according to your content model, rather than storing everything in a huge text field. You can add as many fields of different field types as you need.
-
-(link: docs/guide/blueprints/fields text: Learn more about fields…)
 
 ## Query language
 

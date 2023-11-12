@@ -7,6 +7,31 @@ Intro: With blueprints you can create highly customized layouts that display the
 
 Text:
 
+## Just some fields
+
+The most simple setup of a blueprint is a form with just a few fields. For this setup, you can add fields using the `fields` keyword, then add your fields underneath with proper indentation:
+
+(image: fields.png)
+
+```yaml
+title: My blueprint
+
+fields:
+  headline:
+    label: Headline
+    type: text
+  text:
+    label: Text
+    type: textarea
+```
+
+For more sophisticated setups, you can use sections, columns and tabs to create nice layouts.
+
+
+<info>
+While you can use just the `fields` keyword either like above in the blueprint, but also in columns or tabs, if you want to mix sections and fields inside the same blueprint, column or tab (see below), you need to wrap your fields inside a `fields` section.
+</info>
+
 ## Columns
 
 (image: columns.png)
@@ -17,7 +42,7 @@ A blueprint layout is made up of columns, and each column can hold any number of
 
 You can combine those section types in any way you like and also use multiple sections with the same type in a single blueprint layout.
 
-For one page type you might need a list of all subpages, files and a few form elements, whereas for the next page type you just need subpages or a gallery. With sections, all this is possible.
+For some page types you might need a list of all subpages, files and a few form elements, whereas for other page types you just need subpages or a gallery. With sections, all this is possible.
 
 (screencast: https://www.youtube.com/watch?v=rVcg4SlAh-A title: A closer look at pages sections text: Show subpages as cards or list, add additional info for each page, control the card design – there are hardly any limits.)
 
@@ -77,7 +102,8 @@ columns:
 
 
 ## Adding sections
-Once you have set up your base column layout, the fun part begins and you can now add some sections.
+Once you have set up your base column layout, the fun part begins, and you can now add some sections.
+
 
 ```yaml
 title: My blueprint
@@ -191,23 +217,6 @@ sections:
     status: listed
 ```
 
-## Just some fields
-
-(image: fields.png)
-
-Some blueprint types don't even need sections at all and a simple form is enough. In this case you can make your blueprints even shorter and add the fields definition directly without defining sections or columns.
-
-```yaml
-title: My blueprint
-
-fields:
-  headline:
-    label: Headline
-    type: text
-  text:
-    label: Text
-    type: textarea
-```
 
 ## Adapt all to your needs
 
@@ -252,7 +261,6 @@ columns:
 If this isn't yet enough ways and space for you to structure your sections and fields, move on with…
 
 ## Tabs
-
 
 When your blueprints get more complex, splitting up your view into multiple tabs helps to keep them organized. Tabs are basically wrappers around regular blueprint layouts. Check out (link: #columns text: how to create layouts) before you get started with tabs.
 
