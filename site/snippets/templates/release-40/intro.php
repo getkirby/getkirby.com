@@ -24,8 +24,8 @@
 		</figure>
 
 		<div class="p-6 bg-white shadow-xl rounded">
-			<h2 class="font-bold mb-3">Kirby 4 will launch in 2023</h2>
-			<p>We are very excited to announce the <mark>first test version</mark> for Kirby&nbsp;4 with many great user-facing features and improvements. We want share our progress with you out in the open in the coming weeks. Final release of <mark>v4 is scheduled for later this year.</mark> 🚀</p>
+			<h2 class="font-bold mb-3">Kirby 4 will launch soon</h2>
+			<p>We are very excited to announce the <mark>first release candidate</mark> for Kirby&nbsp;4 with many great user-facing features and improvements. After an extensive alpha and beta phase with fantastic feedback from the community, we are finally getting ready. 🚀</p>
 		</div>
 		<div class="p-6 bg-white shadow-xl rounded">
 			<h2 class="font-bold mb-3">All licenses purchased in 2023 qualify as Kirby&nbsp;4 licenses</h2>
