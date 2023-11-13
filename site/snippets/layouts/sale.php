@@ -3,7 +3,7 @@ $sale = new Buy\Sale();
 ?>
 
 <?php if ($page->id() !== 'buy' && $sale->isActive() === true): ?>
-<aside class="banner text-sm">
+<aside class="banner text-sm rounded shadow-xl">
   <a href="<?= url('buy') ?>"><?= $sale->text() ?></a>
 </aside>
 
