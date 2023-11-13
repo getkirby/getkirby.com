@@ -9,11 +9,6 @@
 				</a>
 			</li>
 			<li>
-				<a aria-label="New recipes" href="/docs/cookbook/new"<?= ariaCurrent($page->slug() === 'new') ?>>
-					<?= icon('flash') ?> New
-				</a>
-			</li>
-			<li>
 				<button class="search-button" type="button" data-area="cookbook">
 					<?= icon('search') ?> Search
 				</button>
