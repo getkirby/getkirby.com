@@ -209,6 +209,10 @@
           </dialog>
         <?php endif ?>
 
+				<a class="btn" href="<?= $download ?>">
+          <span><?= icon('download') ?></span> Download
+        </a>
+
         <?php if ($page->repository()->isNotEmpty()) : ?>
           <a class="btn" href="<?= $page->repository() ?>">
             <span><?= icon('github') ?></span> Source
@@ -232,10 +236,6 @@
             <span><?= icon('file') ?></span> <?= $page->license()->name() ?>
           </a>
         <?php endif ?>
-
-        <a class="btn" href="<?= $download ?>">
-          <span><?= icon('download') ?></span> Download
-        </a>
 
         <a class="btn" href="<?= url('releases') ?>" title="Supports Kirby versions <?= $page->versions() ?>">
           <span><?= icon('kirby') ?></span>
