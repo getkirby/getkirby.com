@@ -2,6 +2,10 @@ Title: Video
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/HashandSalt/kirby3-video
 
 ----
@@ -19,3 +23,7 @@ Example:
 ```kirbytext
 (vidembed: video.mp4 poster: poster.jpg)
 ```
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: HoneHome
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/omz13/kirby3-honehome
 
 ----
@@ -24,3 +28,7 @@ fields:
     options: query
     query: site.children.visible
 ```
+
+----
+
+Versions: 3

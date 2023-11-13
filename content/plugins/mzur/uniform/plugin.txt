@@ -2,6 +2,10 @@ Title: Uniform
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/mzur/kirby-uniform
 
 ----
@@ -28,3 +32,7 @@ $form = new Form([
     ],
 ]);
 ```
+
+----
+
+Versions: 3

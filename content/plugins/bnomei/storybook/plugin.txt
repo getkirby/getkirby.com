@@ -2,6 +2,10 @@ Title: Storybook
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-storybook
 
 ----
@@ -23,3 +27,7 @@ Example:
 ```
 kirby storybook:watch
 ```
+
+----
+
+Versions: 3

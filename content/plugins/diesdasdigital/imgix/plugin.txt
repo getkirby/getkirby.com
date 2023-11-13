@@ -2,6 +2,10 @@ Title: Imgix
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/diesdasdigital/kirby-3-imgix
 
 ----
@@ -15,3 +19,7 @@ Subcategory: images
 ----
 
 Description: If this plugin gets activated, it will serve all images via imgix.
+
+----
+
+Versions: 3

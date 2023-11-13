@@ -2,6 +2,10 @@ Title: Entity Field
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/OblikStudio/kirby-entity-field
 
 ----
@@ -16,4 +20,6 @@ Subcategory: structured-content
 
 Description: Allows you to add other fields to it with the intention of scoping them. It works like a Structure with one entry but with much cleaner UI.
 
+----
 
+Versions: 3

@@ -2,6 +2,10 @@ Title: Recurr
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/HashandSalt/kirby-recurr
 
 ----
@@ -25,3 +29,7 @@ $datelist = $site->recurr(
     '2022-10-11'
 );
 ```
+
+----
+
+Versions: 3

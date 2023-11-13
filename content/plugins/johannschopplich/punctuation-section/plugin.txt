@@ -2,6 +2,10 @@ Title: Punctuation Section
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/johannschopplich/kirby-punctuation-section
 
 ----
@@ -15,3 +19,7 @@ Subcategory: section
 ----
 
 Description: Copy commonly used characters to your clipboard
+
+----
+
+Versions: 3

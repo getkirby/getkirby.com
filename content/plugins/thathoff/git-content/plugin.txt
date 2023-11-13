@@ -2,6 +2,10 @@ Title: Git Content
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/thathoff/kirby-git-content
 
 ----
@@ -11,3 +15,7 @@ Category: versioning
 ----
 
 Description: Automatic commit and push of content changes made via the Panel to a git repository
+
+----
+
+Versions: 3

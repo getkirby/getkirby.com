@@ -2,6 +2,10 @@ Title: SEO
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/HashandSalt/kirby3-seo
 
 ----
@@ -23,3 +27,7 @@ Example:
 ```php
 <?php snippet('seo/meta') ?>
 ```
+
+----
+
+Versions: 3

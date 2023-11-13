@@ -2,6 +2,10 @@ Title: Upload Extended
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/Werbschaft/kirby-upload-extended
 
 ----
@@ -17,6 +21,7 @@ Subcategory: images
 Description: More options when uploading files like name changes, resizing via Kirby or compression and optional resizing via TinyPNG.
 
 ----
+
 Example:
 
 ```php
@@ -28,3 +33,7 @@ return [
   ]
 ];
 ```
+
+----
+
+Versions: 3

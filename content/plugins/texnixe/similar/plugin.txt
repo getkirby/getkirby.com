@@ -2,6 +2,10 @@ Title: Similar
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/texnixe/kirby3-similar
 
 ----
@@ -26,3 +30,6 @@ foreach ($page->similar($options) as $p) {
 }
 ```
 
+----
+
+Versions: 3

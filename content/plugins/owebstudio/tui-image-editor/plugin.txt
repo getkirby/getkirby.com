@@ -2,6 +2,10 @@ Title: Image Editor Field
 
 ----
 
+Text: 
+
+----
+
 Download: https://owebstudio.com/kirby/plugins/image-editor-field
 
 ----
@@ -27,3 +31,7 @@ Subcategory: images
 ----
 
 Description: Full-featured photo image editor using canvas for Kirby 3. It is really easy, and it comes with great filters.
+
+----
+
+Versions: 3

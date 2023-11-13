@@ -2,6 +2,10 @@ Title: Highlighter
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/johannschopplich/kirby-highlighter
 
 ----
@@ -28,3 +32,7 @@ fields:
     fieldsets:
       - code
 ```
+
+----
+
+Versions: 3

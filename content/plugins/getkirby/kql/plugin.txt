@@ -2,56 +2,6 @@ Title: Kirby Query Language (KQL)
 
 ----
 
-Repository: https://github.com/getkirby/kql
-
-----
-
-Category: headless
-
-----
-
-Subcategory: api
-
-----
-
-Description: Kirby's Query Language API combines the flexibility of Kirby's data structures, the power of GraphQL and the simplicity of REST.
-
-----
-
-License:
-
-name: MIT license
-url: https://github.com/getkirby/kql/blob/main/LICENSE.md
-
-----
-
-Demo: https://kql.getkirby.com
-
-----
-
-Installation: true
-
-----
-
-Composer: getkirby/kql
-
-----
-
-Example:
-
-```js
-{
-    "query": "page('photography').children",
-    "select": {
-        "url": true,
-        "title": true,
-        "text": "page.text.markdown"
-    }
-}
-```
-
-----
-
 Text:
 
 ## Example
@@ -988,3 +938,56 @@ KQL only offers access to data in your site. It does not support any mutations. 
 
 - [nuxt-kql](https://nuxt-kql.jhnn.dev): A Nuxt 3 module for KQL.
 
+----
+
+Repository: https://github.com/getkirby/kql
+
+----
+
+Category: headless
+
+----
+
+Subcategory: api
+
+----
+
+Description: Kirby's Query Language API combines the flexibility of Kirby's data structures, the power of GraphQL and the simplicity of REST.
+
+----
+
+License:
+
+name: MIT license
+url: https://github.com/getkirby/kql/blob/main/LICENSE.md
+
+----
+
+Demo: https://kql.getkirby.com
+
+----
+
+Installation: true
+
+----
+
+Composer: getkirby/kql
+
+----
+
+Example:
+
+```js
+{
+    "query": "page('photography').children",
+    "select": {
+        "url": true,
+        "title": true,
+        "text": "page.text.markdown"
+    }
+}
+```
+
+----
+
+Versions: 3

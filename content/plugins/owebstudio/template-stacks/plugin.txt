@@ -2,6 +2,10 @@ Title: Template Stacks
 
 ----
 
+Text: 
+
+----
+
 Download: https://owebstudio.com/kirby/plugins/template-stacks
 
 ----
@@ -19,3 +23,7 @@ Category: templating
 ----
 
 Description: Template stacks allows you to push to named stacks which can be rendered somewhere else in another snippet or template.
+
+----
+
+Versions: 3

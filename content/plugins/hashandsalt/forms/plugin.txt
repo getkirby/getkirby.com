@@ -2,6 +2,10 @@ Title: Forms
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/HashandSalt/kirby3-forms
 
 ----
@@ -26,3 +30,7 @@ Example:
     <?= input('text', 'name') ?>
 </div>
 ```
+
+----
+
+Versions: 3

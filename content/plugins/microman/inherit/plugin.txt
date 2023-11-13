@@ -2,6 +2,10 @@ Title: Kirby Inherit
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/youngcut/kirby-inherit
 
 ----
@@ -23,3 +27,7 @@ Example:
 ```php
 <?= $page->myfield()->inherit() ?>
 ```
+
+----
+
+Versions: 3

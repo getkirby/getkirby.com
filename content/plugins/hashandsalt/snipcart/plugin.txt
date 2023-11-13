@@ -2,6 +2,10 @@ Title: Snipcart
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/HashandSalt/kirby3-snipcart
 
 ----
@@ -12,3 +16,6 @@ Category: ecommerce
 
 Description: Helps integrate Snipcart into a Kirby site
 
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: AWS CloudFront invalidations
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/Liftric/kirby-cloudfront-invalidations
 
 ----
@@ -16,3 +20,6 @@ Subcategory: cdn
 
 Description: Kirby plugin which triggers AWS CloudFront invalidations automatically.
 
+----
+
+Versions: 3

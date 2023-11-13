@@ -2,6 +2,10 @@ Title: Pageview Counter
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-pageviewcounter
 
 ----
@@ -19,3 +23,7 @@ Example:
 ```php
 <?= $page->counterImage() ?>
 ```
+
+----
+
+Versions: 3

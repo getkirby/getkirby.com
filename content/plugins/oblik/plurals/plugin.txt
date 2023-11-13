@@ -2,6 +2,10 @@ Title: Plurals
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/OblikStudio/kirby-plurals
 
 ----
@@ -26,3 +30,7 @@ tp('place', ['position' => 1]);
 tp('cookies', ['start' => 3, 'end' => 4]);
 // 3-4 cookies
 ```
+
+----
+
+Versions: 3

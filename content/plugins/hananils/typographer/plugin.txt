@@ -2,6 +2,10 @@ Title: Typographer
 
 ----
 
+Text: 
+
+----
+
 Uuid: WlIBqgwiQONlQJ7m
 
 ----
@@ -19,3 +23,7 @@ Description: Typographer is a plugin for Kirby 3 to apply microtypographic rules
 ----
 
 Published: 2023-06-05
+
+----
+
+Versions: 3

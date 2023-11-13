@@ -2,6 +2,10 @@ Title: Date Methods
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/hananils/kirby-date-methods
 
 ----
@@ -23,3 +27,7 @@ $page
   ->modify('+1 month')
   ->format('Y-m-d');
 ```
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: Memsource
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/OblikStudio/kirby-memsource
 
 ----
@@ -16,4 +20,6 @@ Subcategory: integration
 
 Description: This plugin allows you to translate your entire site content in the powerful TMS Memsource
 
+----
 
+Versions: 3

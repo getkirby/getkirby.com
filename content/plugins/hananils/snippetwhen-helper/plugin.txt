@@ -2,6 +2,10 @@ Title: snippetWhen Helper
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/hananils/kirby-snippetwhen-helper
 
 ----
@@ -19,3 +23,7 @@ Example:
 ```php
 snippetWhen('article', $category->isNotEmpty())
 ```
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: Color Extractor
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/sylvainjule/kirby-colorextractor
 
 ----
@@ -15,3 +19,7 @@ Subcategory: colors
 ----
 
 Description: Extract the dominant / average color from any image
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: Link Field
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/OblikStudio/kirby-link-field
 
 ----
@@ -16,4 +20,6 @@ Subcategory: navigation
 
 Description: Kirby field for links of any kind - external, page, file, email, phone. Has settings for text, popup true/false, and hash.
 
+----
 
+Versions: 3

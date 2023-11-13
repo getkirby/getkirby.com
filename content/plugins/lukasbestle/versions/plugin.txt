@@ -2,6 +2,10 @@ Title: Versions
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/lukasbestle/kirby-versions
 
 ----
@@ -30,3 +34,7 @@ Installation: true
 ----
 
 Composer: lukasbestle/kirby-versions
+
+----
+
+Versions: 3

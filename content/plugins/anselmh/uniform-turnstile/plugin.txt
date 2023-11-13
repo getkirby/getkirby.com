@@ -2,6 +2,10 @@ Title: Turnstile for Uniform
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/anselmh/kirby-uniform-turnstile
 
 ----
@@ -30,3 +34,7 @@ Example:
 </form>
 <?= turnstileScript() ?>
 ```
+
+----
+
+Versions: 3

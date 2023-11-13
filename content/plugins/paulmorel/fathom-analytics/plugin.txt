@@ -2,6 +2,10 @@ Title: Fathom Analytics
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/PaulMorel/kirby3-fathom-analytics
 
 ----
@@ -16,3 +20,6 @@ Subcategory: dashboard
 
 Description: Integrates the privacy first website analytics Fathom Analytics dashboard to the panel and provides the tracking code for your templates.
 
+----
+
+Versions: 3

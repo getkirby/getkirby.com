@@ -2,6 +2,10 @@ Title: Debug Bar
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/Treast/kirby-debugbar
 
 ----
@@ -31,3 +35,7 @@ Example:
     $site->logger()->error('This is an error');
 ?>
 ```
+
+----
+
+Versions: 3

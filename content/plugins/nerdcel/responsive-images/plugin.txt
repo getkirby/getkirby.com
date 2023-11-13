@@ -2,6 +2,10 @@ Title: Responsive images
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/nerdcel/kirby3-responsive-images
 
 ----
@@ -24,3 +28,7 @@ To render the image, use the following helper in your template:
 ```php
 <?php responsiveImage('slug', $image, 'additional-css-classes') ?>
 ```
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: Google Translate
 
 ----
 
+Text: 
+
+----
+
 Download: https://owebstudio.com/kirby/plugins/google-translate
 
 ----
@@ -27,3 +31,7 @@ Subcategory: integration
 ----
 
 Description: Google Translate integration for Kirby 3.
+
+----
+
+Versions: 3

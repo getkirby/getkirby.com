@@ -2,6 +2,10 @@ Title: Tracker
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/hananils/kirby-tracker
 
 ----
@@ -30,3 +34,7 @@ Example:
   </li>
 <?php endforeach ?>
 ```
+
+----
+
+Versions: 3

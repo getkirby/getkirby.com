@@ -2,6 +2,10 @@ Title: Posthog
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-posthog
 
 ----
@@ -27,3 +31,7 @@ posthog()->capture([...]);
 // output JS tracking script
 snippet('posthog');
 ```
+
+----
+
+Versions: 3

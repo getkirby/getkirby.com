@@ -2,6 +2,10 @@ Title: Visual Image Crop Field
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/steirico/kirby-plugin-image-crop-field
 
 ----
@@ -16,3 +20,6 @@ Subcategory: images
 
 Description: This plugin provides a field for cropping images visually and very flexibly.
 
+----
+
+Versions: 3

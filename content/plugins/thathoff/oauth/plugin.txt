@@ -2,6 +2,10 @@ Title: OAuth 2.0
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/thathoff/kirby-oauth
 
 ----
@@ -15,3 +19,7 @@ Subcategory: authentication
 ----
 
 Description: Interface to use OAuth 2.0 providers for user authentication
+
+----
+
+Versions: 3

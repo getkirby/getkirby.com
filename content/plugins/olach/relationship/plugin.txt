@@ -2,6 +2,10 @@ Title: Relationship field
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/olach/kirby3-relationship
 
 ----
@@ -16,3 +20,6 @@ Subcategory: structured-content
 
 Description: The Relationship field allows you to select and sort multiple items from a list
 
+----
+
+Versions: 3

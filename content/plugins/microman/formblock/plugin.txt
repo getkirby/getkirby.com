@@ -2,6 +2,10 @@ Title: Form Block Suite
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/youngcut/kirby-form-block-suite
 
 ----
@@ -23,3 +27,7 @@ Description: This form plugin for Kirby offers you maximum flexibility and usabi
 ----
 
 Published: 2022-11-27
+
+----
+
+Versions: 3

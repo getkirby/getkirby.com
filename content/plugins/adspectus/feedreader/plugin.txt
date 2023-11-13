@@ -2,6 +2,10 @@ Title: FeedReader
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/Adspectus/k3-feedreader
 
 ----
@@ -26,3 +30,7 @@ $feed = new FeedReader($url);
 
 dump($feed->articles());
 ```
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: PWA (Progressive Web App)
 
 ----
 
+Text: 
+
+----
+
 Download: https://owebstudio.com/kirby/plugins/pwa-progressive-web-app
 
 ----
@@ -23,3 +27,7 @@ Subcategory: pwa
 ----
 
 Description: Turns your Kirby website into a PWA: progressive web app.
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: Custom Add Fields
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/steirico/kirby-plugin-custom-add-fields
 
 ----
@@ -12,3 +16,6 @@ Category: panel
 
 Description: This plugin allows to define the fields shown on Kirby's page add dialog in the corresponding page's blueprint.
 
+----
+
+Versions: 3

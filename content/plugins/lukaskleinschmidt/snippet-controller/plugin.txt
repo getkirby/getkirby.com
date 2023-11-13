@@ -2,6 +2,10 @@ Title: Snippet Controller
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/lukaskleinschmidt/kirby-snippet-controller
 
 ----
@@ -21,3 +25,7 @@ Example:
 ├─ 📄 header.controller.php
 └─ 📄 header.php
 ```
+
+----
+
+Versions: 3

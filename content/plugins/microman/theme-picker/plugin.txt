@@ -2,6 +2,10 @@ Title: Theme Picker
 
 ----
 
+Text: 
+
+----
+
 Download: https://license.microman.ch/?product=812567
 
 ----
@@ -19,3 +23,7 @@ Subcategory: colors
 ----
 
 Description: The Kirby Theme Picker plugin allows you, to select a set of stylings which comes from your a blueprint or a struct.
+
+----
+
+Versions: 3

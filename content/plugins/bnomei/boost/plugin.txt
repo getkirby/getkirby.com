@@ -2,6 +2,10 @@ Title: Boost
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-boost
 
 ----
@@ -30,3 +34,7 @@ Example:
     ],
 ],
 ```
+
+----
+
+Versions: 3

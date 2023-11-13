@@ -2,6 +2,10 @@ Title: Instagram Feed
 
 ----
 
+Text: 
+
+----
+
 Download: https://owebstudio.com/kirby/plugins/instagram-feed
 
 ----
@@ -31,3 +35,7 @@ Description: Instagram feed on your Kirby website!
 ----
 
 Similar: plugins/genxbe/instagram
+
+----
+
+Versions: 3

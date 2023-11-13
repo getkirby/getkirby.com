@@ -2,6 +2,10 @@ Title: Collect
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-collect
 
 ----
@@ -20,7 +24,6 @@ Description: Adds support for Laravel collections to Kirby
 
 Example:
 
-
 ```php
 $mostPopularPage = $kirbyCollection
     ->sortBy('viewcount')->last()
@@ -29,4 +32,8 @@ $mostPopularPage = $kirbyCollection
 // with collect plugin    
 $mostPopularPage = $kirbyCollection
     ->collect()->max('content.viewcount');
-```    
+```
+
+----
+
+Versions: 3

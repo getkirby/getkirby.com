@@ -2,6 +2,10 @@ Title: Autoresize
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/medienbaecker/kirby-autoresize
 
 ----
@@ -30,3 +34,7 @@ return [
     ]
 ];
 ```
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: Chopper
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/HashandSalt/chopper
 
 ----
@@ -23,3 +27,7 @@ Example:
 ```php
 <?= $page->text()->chopper(20) ?>
 ```
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: Fontselector
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-fontselector
 
 ----
@@ -15,3 +19,7 @@ Subcategory: enhancements
 ----
 
 Description: Select font family and font weight with two synced fields
+
+----
+
+Versions: 3

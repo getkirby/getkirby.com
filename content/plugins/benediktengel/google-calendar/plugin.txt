@@ -2,6 +2,10 @@ Title: Google Calendar
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/benediktengel/google-calendar-plugin
 
 ----
@@ -16,3 +20,6 @@ Subcategory: calendar
 
 Description: Display your Google Calendar entries as list on your website
 
+----
+
+Versions: 3

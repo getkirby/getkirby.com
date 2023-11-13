@@ -2,6 +2,10 @@ Title: Postmark
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-postmark
 
 ----
@@ -15,3 +19,7 @@ Subcategory: emails
 ----
 
 Description: Send transactional E-Mail with Postmark
+
+----
+
+Versions: 3

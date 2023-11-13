@@ -2,6 +2,10 @@ Title: Monolog
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-monolog
 
 ----
@@ -26,3 +30,7 @@ monolog()->info('test-' . time()), [
     'page'  => $page->id()
 ]);
 ```
+
+----
+
+Versions: 3

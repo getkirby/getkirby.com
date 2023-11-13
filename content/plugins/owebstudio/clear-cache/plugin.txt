@@ -2,6 +2,10 @@ Title: Clear Cache
 
 ----
 
+Text: 
+
+----
+
 Download: https://owebstudio.com/kirby/plugins/clear-cache
 
 ----
@@ -23,3 +27,7 @@ Subcategory: panel
 ----
 
 Description: Clean temporary files and folders such as cache, media, .lock and .logins on your website.
+
+----
+
+Versions: 3

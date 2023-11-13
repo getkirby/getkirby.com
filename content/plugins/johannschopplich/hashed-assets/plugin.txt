@@ -2,6 +2,10 @@ Title: Hashed Assets
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/johannschopplich/kirby-hashed-assets
 
 ----
@@ -26,3 +30,7 @@ Example:
 <!-- will become -->
 <script src="/assets/js/main.9ad649fd.js"></script>
 ```
+
+----
+
+Versions: 3

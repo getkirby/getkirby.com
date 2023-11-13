@@ -2,6 +2,10 @@ Title: Methods Folder
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/hananils/kirby-methods-folder
 
 ----
@@ -28,3 +32,7 @@ site
   └ site.php
   └ user.php
 ```
+
+----
+
+Versions: 3

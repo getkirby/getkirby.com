@@ -2,6 +2,10 @@ Title: Mailjet
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-mailjet
 
 ----
@@ -15,3 +19,7 @@ Subcategory: emails
 ----
 
 Description: Send transactional SMS, transactional E-Mail and Campaigns with Mailjet
+
+----
+
+Versions: 3
