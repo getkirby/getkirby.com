@@ -21,11 +21,7 @@
             &middot; <span class="plugin-paid">Paid</span>
             <?php endif ?>
           </p>
-					<ul class="flex font-mono text-xs" style="gap: .5rem">
-						<?php foreach($plugin->versions()->split() as $version): ?>
-						<li class="px-1 rounded bg-light">K<?= $version ?></li>
-						<?php endforeach ?>
-					</ul>
+					<?php snippet('templates/plugins/versions', ['plugin' => $plugin]) ?>
         </div>
       </article>
     </a>

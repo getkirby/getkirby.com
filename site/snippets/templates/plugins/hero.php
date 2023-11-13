@@ -15,11 +15,7 @@
           <?= $plugin->description() ?>
         </div>
 
-				<ul class="flex font-mono text-xs" style="gap: .5rem">
-					<?php foreach($plugin->versions()->split() as $version): ?>
-					<li class="px-1 rounded bg-black">K<?= $version ?></li>
-					<?php endforeach ?>
-				</ul>
+				<?php snippet('templates/plugins/versions', ['plugin' => $plugin, 'bg' => 'black']) ?>
       </div>
       <div style="--span: 2">
         <?php if ($image = $plugin->card() ?? $plugin->image()) : ?>
