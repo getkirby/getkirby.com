@@ -1,17 +1,25 @@
 <?php foreach ($plugins as $plugin) : ?>
   <article class="mb-6">
     <a href="<?= $plugin->url() ?>" class="bg-dark shadow-xl color-gray-400 rounded overflow-hidden shadow columns" style="--columns: 3; --gap: 0">
-      <div class="p-6">
-        <h4 class="color-white font-bold"><?= $plugin->title() ?></h4>
-        <p class="block font-mono text-xs color-gray-500 mb-3">
-          by <span class="color-white"><?= $plugin->parent()->title() ?></span>
-          <?php if ($plugin->paid()->isNotEmpty()) : ?>
-          &middot; <span class="plugin-paid">Paid</span>
-          <?php endif ?>
-        </p>
-        <div class="prose color-gray-400 text-sm">
+      <div class="p-6 flex flex-column justify-between">
+				<header>
+					<h4 class="color-white font-bold"><?= $plugin->title() ?></h4>
+					<p class="block font-mono text-xs color-gray-500 mb-3">
+						by <span class="color-white"><?= $plugin->parent()->title() ?></span>
+						<?php if ($plugin->paid()->isNotEmpty()) : ?>
+						&middot; <span class="plugin-paid">Paid</span>
+						<?php endif ?>
+					</p>
+				</header>
+        <div class="prose color-gray-400 text-sm mb-3 flex-grow">
           <?= $plugin->description() ?>
         </div>
+
+				<ul class="flex font-mono text-xs" style="gap: .5rem">
+					<?php foreach($plugin->versions()->split() as $version): ?>
+					<li class="px-1 rounded bg-black">K<?= $version ?></li>
+					<?php endforeach ?>
+				</ul>
       </div>
       <div style="--span: 2">
         <?php if ($image = $plugin->card() ?? $plugin->image()) : ?>
