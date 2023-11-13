@@ -1,7 +1,7 @@
 <div class="columns" style="--columns: <?= $columns ?? 3 ?>; --gap: var(--spacing-6)">
   <?php foreach ($plugins as $plugin) : ?>
     <a class="block bg-white rounded overflow-hidden shadow" href="<?= $plugin->url() ?>">
-      <article>
+      <article class="flex flex-column" style="height: 100%">
         <figure class="bg-light">
           <?php if ($card = $plugin->card()) : ?>
             <img src="<?= $card->url() ?>" style="--aspect-ratio: 2/1; object-fit: contain;">
@@ -29,7 +29,7 @@
             </span>
           <?php endif ?>
         </figure>
-        <div class="p-6">
+        <div class="flex-grow flex flex-column p-6">
           <header class="mb-3">
             <h4 class="h5"><?= $plugin->title() ?></h4>
             <p class="font-mono text-xs color-gray-500 truncate">
@@ -39,9 +39,14 @@
               <?php endif ?>
             </p>
           </header>
-          <div class="prose text-sm">
+          <div class="prose flex-grow text-sm mb-6">
             <?= $plugin->description()->excerpt(140) ?>
           </div>
+					<ul class="flex font-mono text-xs" style="gap: .5rem">
+						<?php foreach($plugin->versions()->split() as $version): ?>
+						<li class="px-1 rounded bg-light">K<?= $version ?></li>
+						<?php endforeach ?>
+					</ul>
         </div>
       </article>
     </a>

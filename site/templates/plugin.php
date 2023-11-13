@@ -237,6 +237,12 @@
           <span><?= icon('download') ?></span> Download
         </a>
 
+        <a class="btn" href="<?= url('releases') ?>">
+          <span><?= icon('code') ?></span>
+					Versions:
+					<?= $page->versions() ?>
+        </a>
+
       </nav>
     </div>
 
