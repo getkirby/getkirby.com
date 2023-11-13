@@ -78,18 +78,30 @@
 		display: none;
 	}
 }
+
+.volume-toggles {
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+}
+.volume-toggles label {
+	display: flex;
+	align-items: center;
+	gap: .5rem;
+	cursor: pointer;
+}
 </style>
 
 <article>
   <div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-6)">
 
 		<div>
-			<h1 class="h1 max-w-xl mb-24">
+			<h1 class="h1 max-w-xl mb-6">
 				The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
 			</h1>
 
 			<?php if ($sale->isActive()): ?>
-				<div class="h2 sale mb-12">
+				<div class="h3 sale mb-12">
 					<?= $sale->text() ?>
 				</div>
 			<?php endif ?>
@@ -102,14 +114,14 @@
 						Basic
 
 						<?php if ($sale->isActive()): ?>
-						<k-price product="basic" price="regular" class="loading sale strikethrough">
+						<k-price product="basic" price="regular" class="loading px-1 color-gray-700 strikethrough">
 							€<?= Buy\Product::Basic->price()->regular() ?>
 						</k-price>
 						<?php endif ?>
 					</h2>
 
 					<a href="/buy/basic/" target="_blank" class="checkout-link h2 block mb-3">
-						<k-price product="basic" price="sale" class="loading">
+						<k-price product="basic" price="sale" class="sale loading">
 							€<?= Buy\Product::Basic->price()->sale() ?>
 						</k-price> per site
 					</a>
@@ -125,24 +137,7 @@
 					</div>
 				</details>
 
-				<ul class="checklist mb-6">
-					<li>
-						<?= icon('check') ?>
-						No subscription
-					</li>
-					<li>
-						<?= icon('check') ?>
-						3 years of free upgrades
-					</li>
-					<li>
-						<?= icon('check') ?>
-						All features included
-					</li>
-					<li>
-						<?= icon('check') ?>
-						No hidden costs
-					</li>
-				</ul>
+				<?php snippet('templates/buy/checklist') ?>
 
 				<footer>
 					<p>
@@ -160,14 +155,14 @@
 						Enterprise
 
 						<?php if ($sale->isActive()): ?>
-						<k-price product="enterprise" price="regular" class="loading sale strikethrough">
+						<k-price product="enterprise" price="regular" class="loading px-1 color-gray-700 strikethrough">
 							€<?= Buy\Product::Enterprise->price()->regular() ?>
 						</k-price>
 						<?php endif ?>
 					</h2>
 
 					<a href="/buy/enterprise/" target="_blank" class="checkout-link h2 block mb-3">
-						<k-price product="enterprise" price="sale" class="loading">
+						<k-price product="enterprise" price="sale" class="sale loading">
 							€<?= Buy\Product::Enterprise->price()->sale() ?>
 						</k-price> per site
 					</a>
@@ -182,24 +177,7 @@
 					</div>
 				</details>
 
-				<ul class="checklist mb-6">
-					<li>
-						<?= icon('check') ?>
-						No subscription
-					</li>
-					<li>
-						<?= icon('check') ?>
-						3 years of free upgrades
-					</li>
-					<li>
-						<?= icon('check') ?>
-						All features included
-					</li>
-					<li>
-						<?= icon('check') ?>
-						No hidden costs
-					</li>
-				</ul>
+				<?php snippet('templates/buy/checklist') ?>
 
 				<footer>
 					<p>
@@ -210,50 +188,74 @@
 					</p>
 				</footer>
 			</div>
-			<p class="text-xs text-center font-mono mb-6 color-gray-700" style="--span: 2">Prices + VAT if applicable. By purchasing Kirby, you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a></p>
+			<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">Prices + VAT if applicable. By purchasing Kirby, you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a></p>
 		</div>
   </div>
 
   <section class="mb-42">
-    <h2 class="h2 mb-6">Volume discounts</h2>
-    <div class="columns rounded overflow-hidden" style="--columns-md: 2; --columns: 4; --gap: var(--spacing-3)">
-      <?php foreach ($discounts as $volume => $discount) : ?>
-        <div class="block p-12 bg-light rounded text-center" >
-          <article>
-            <h3 class="mb-3 font-mono text-sm">
-							Save <?= $discount ?>%<?php if ($sale->isActive()): ?><span class="sale"> on top</span><?php endif ?>!
-						</h3>
-						<p class="h2 mb-6">
-							<?= $volume ?> licenses
+		<form class="volume-discounts" method="POST" target="_blank" action="<?= url('buy/volume') ?>">
+			<input type="hidden" name="currency" value="EUR">
+			<header class="flex items-baseline justify-between mb-6">
+				<h2 class="h2">Volume discounts</h2>
+				<fieldset>
+					<legend class="sr-only">License Type</legend>
+					<div class="volume-toggles">
+						<label><input type="radio" name="product" value="basic" checked> Basic</label>
+						<label><input type="radio" name="product" value="enterprise"> Enterprise</label>
+					</div>
+				</fieldset>
+			</header>
+			<div class="columns rounded overflow-hidden" style="--columns-md: 2; --columns: 4; --gap: var(--spacing-3)">
+				<?php foreach ($discounts as $volume => $discount) : ?>
+					<div class="block p-12 bg-light rounded text-center" >
+						<article>
+							<h3 class="mb text-sm">
+								<?= $volume ?> licenses
+							</h3>
+							<div class="mb-6">
+								<p class="h2">
+									Save <?= $discount ?>%
+								</p>
+								<?php if ($sale->isActive()): ?>
+									<p class="sale text-sm">on top!</p>
+								<?php endif ?>
+							</div>
+
+							<button class="checkout-link btn btn--filled mb-3" name="volume" value="<?= $volume ?>">
+								<?= icon('cart') ?> Buy now
+							</button>
+						</article>
+					</div>
+				<?php endforeach ?>
+				<a class="block p-12 bg-light text-center" href="mailto:support@getkirby.com">
+					<article>
+						<h3 class="text-sm">Custom packages</h3>
+
+						<div class="mb-6">
+							<p class="h2">
+								Contact us
+							</p>
+							<?php if ($sale->isActive()): ?>
+								<p class="sale">&nbsp;</p>
+							<?php endif ?>
+						</div>
+
+						<p class="btn btn--outlined">
+							<?= icon('user') ?>
+							Support
 						</p>
-            <a target="_blank" href="/buy/volume/basic/<?= $volume ?>/" class="checkout-link btn btn--filled mb-3">
-              <?= icon('cart') ?> Basic
-						</a>
-						<a target="_blank" href="/buy/volume/enterprise/<?= $volume ?>/" class="checkout-link btn btn--filled">
-              <?= icon('cart') ?> Enterprise
-						</a>
-          </article>
-				</div>
-      <?php endforeach ?>
-      <a class="block p-12 bg-light text-center" href="mailto:support@getkirby.com">
-        <article>
-          <h3 class="mb-3 font-mono text-sm">Custom packages</h3>
-          <p class="h2 mb-6">Contact us</p>
-          <p class="btn btn--outlined">
-            <?= icon('user') ?>
-            Support
-          </p>
-        </article>
-      </a>
-    </div>
+					</article>
+				</a>
+			</div>
+		</form>
   </section>
 
-  <section class="mb-42 columns columns--reverse" style="--columns: 2; --columns-md: 1; --gap: var(--spacing-24)">
+  <section class="mb-42 columns columns--reverse" style="--columns: 2; --columns-md: 1; --gap: var(--spacing-36)">
     <div>
 
-      <h2 class="h2 mb-6">For a good cause? <mark>It's free.</mark></h2>
+      <h2 class="h2 mb-6">For a good cause? <mark class="px-1 rounded">It’s free.</mark></h2>
       <div class="prose mb-6">
-        <p>We care about a better society and the future of our planet. We support <mark>students, educational projects, social and environmental organizations, charities and non-profits</mark> with free&nbsp;licenses.</p>
+        <p>We care about a better society and the future of our planet. We support <strong>students, educational projects, social and environmental organizations, charities and non-profits</strong> with free&nbsp;licenses.</p>
       </div>
 
       <a class="btn btn--filled mb-12" href="mailto:support@getkirby.com">
@@ -353,6 +355,8 @@ async function paddle_price(data) {
 	for (const link of [...document.querySelectorAll(".checkout-link")]) {
 		link.href += window.currency;
 	}
+
+	document.querySelector("input[name=currency]").value = window.currency;
 }
 
 document.addEventListener("click", (event) => {
