@@ -20,11 +20,6 @@
         </a>
       </li>
       <li>
-        <a href="/plugins/new" <?= ariaCurrent($kirby->request()->path()->toString() === 'plugins/new') ?>>
-          <?= icon('flash') ?> New
-        </a>
-      </li>
-      <li>
         <button class="search-button" type="button" data-area="plugin">
           <?= icon('search') ?> Search
         </button>
