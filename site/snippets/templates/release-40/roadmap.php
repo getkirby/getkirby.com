@@ -37,7 +37,6 @@
   <?php snippet('templates/features/intro', [
   'title'    => 'Roadmap',
 	'intro'    => 'ETA for Kirby 4',
-  'text'     => 'We roughly plan with the following schedule for v4. The success of the beta and your input will determine the final release date.'
   ]) ?>
   <ul class="roadmap flex justify-between mb-24">
     <li style="flex-grow: 2">

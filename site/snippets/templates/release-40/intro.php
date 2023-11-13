@@ -33,7 +33,7 @@
 		</div>
 		<div class="p-6 bg-white shadow-xl rounded">
 			<h2 class="font-bold mb-3">Upgrades</h2>
-			<p>Kirby 4 will be built upon the healthy code base we established for Kirby 3. <mark>Upgrades will be comparable to a 3.x release.</mark> While we stay on the same architecture, this new version will bring many long-awaited features and is going to move your projects forward.</p>
+			<p>Kirby 4 is built upon the healthy code base we established for Kirby 3. <mark>Upgrades will be comparable to a 3.x release.</mark> While we stay on the same architecture, this new version brings many long-awaited features and is going to move your projects forward.</p>
 		</div>
 	</div>
 </section>
