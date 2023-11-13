@@ -1,20 +1,21 @@
 <?php declare(strict_types = 1);
 
-namespace PHPStan\PhpDocParser\Ast\Type;
+namespace PHPStan\PhpDocParser\Ast\PhpDoc\Doctrine;
 
+use PHPStan\PhpDocParser\Ast\Node;
 use PHPStan\PhpDocParser\Ast\NodeAttributes;
 use function implode;
 
-class ObjectShapeNode implements TypeNode
+class DoctrineArray implements Node
 {
 
 	use NodeAttributes;
 
-	/** @var ObjectShapeItemNode[] */
+	/** @var list<DoctrineArrayItem> */
 	public $items;
 
 	/**
-	 * @param ObjectShapeItemNode[] $items
+	 * @param list<DoctrineArrayItem> $items
 	 */
 	public function __construct(array $items)
 	{
@@ -23,9 +24,9 @@ class ObjectShapeNode implements TypeNode
 
 	public function __toString(): string
 	{
-		$items = $this->items;
+		$items = implode(', ', $this->items);
 
-		return 'object{' . implode(', ', $items) . '}';
+		return '{' . $items . '}';
 	}
 
 }

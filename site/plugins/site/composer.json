@@ -1,15 +1,15 @@
 {
-  "name": "getkirby/site",
-  "autoload": {
-    "psr-4": {
-      "Kirby\\": "src/"
-    }
-  },
-  "require": {
-    "phpdocumentor/reflection-docblock": "^5.3.0",
-    "caxy/php-htmldiff": "^0.1.14"
-  },
-  "config": {
-    "optimize-autoloader": true
-  }
+	"name": "getkirby/site",
+	"autoload": {
+		"psr-4": {
+			"Kirby\\": "src/"
+		}
+	},
+	"require": {
+		"phpdocumentor/reflection-docblock": "^5.3.0",
+		"caxy/php-htmldiff": "^0.1.15"
+	},
+	"config": {
+		"optimize-autoloader": true
+	}
 }

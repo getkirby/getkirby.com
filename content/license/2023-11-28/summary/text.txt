@@ -1,0 +1,22 @@
+Title: EULA for Kirby 4: Summary of changes
+
+----
+
+Intro:
+
+On November 28, 2023, we made edits to our license agreement (EULA) to align it to the licenses for Kirby 4.
+
+The updated terms are binding for all newly purchased licenses.
+
+In particular, we have changed the following:
+
+----
+
+Text:
+
+- The updated license terms now feature a Summary section for easier understanding.
+- License changes align with Kirby 4+, introducing a new license model which covers free updates for three years after activating the license.
+- The revised terms introduce license tiers (e.g., Basic and Enterprise) with qualification matching upon purchase, upgrade, or license transfer.
+- The relationship between the licensee and clients (e.g. an agency creating websites for other companies) is better reflected in the terms.
+- A commitment to security support is incorporated, guaranteeing three years of support for every major release.
+- A new provision outlines the intent to release Kirby as FOSS in case of discontinuation of further maintenance.

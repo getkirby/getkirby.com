@@ -50,6 +50,7 @@ class HtmlDiffConfig
         'a' => '[[REPLACE_A]]',
         'img' => '[[REPLACE_IMG]]',
         'pre' => '[[REPLACE_PRE]]',
+        'picture' => '[[REPLACE_PICTURE]]',
     );
 
     /**
@@ -76,6 +77,11 @@ class HtmlDiffConfig
      * @var null|string
      */
     protected $purifierCacheLocation = null;
+
+    /**
+     * @var bool
+     */
+    protected $spaceMatching = false;
 
     /**
      * @return HtmlDiffConfig
@@ -439,6 +445,22 @@ class HtmlDiffConfig
     public function getPurifierCacheLocation()
     {
         return $this->purifierCacheLocation;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSpaceMatching()
+    {
+        return $this->spaceMatching;
+    }
+
+    /**
+     * @param bool $keepNewLines
+     */
+    public function setSpaceMatching($spaceMatching)
+    {
+        $this->spaceMatching = $spaceMatching;
     }
 
     /**

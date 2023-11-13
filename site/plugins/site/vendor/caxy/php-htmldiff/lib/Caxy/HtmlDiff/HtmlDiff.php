@@ -333,6 +333,8 @@ class HtmlDiff extends AbstractDiff
             return $this->diffElementsByAttribute($oldText, $newText, 'href', 'a');
         } elseif ($this->isImagePlaceholder($placeholder)) {
             return $this->diffElementsByAttribute($oldText, $newText, 'src', 'img');
+        } elseif ($this->isPicturePlaceholder($placeholder)) {
+           return $this->diffPicture($oldText, $newText);
         }
 
         return $this->diffElements($oldText, $newText, $stripWrappingTags);
@@ -392,6 +394,23 @@ class HtmlDiff extends AbstractDiff
 
         return $diff->build();
     }
+
+    /**
+     * @param string $oldText
+     * @param string $newText
+     *
+     * @return string
+     */
+    protected function diffPicture($oldText, $newText) {
+        if ($oldText !== $newText) {
+            return sprintf(
+                '%s%s',
+                $this->wrapText($oldText, 'del', 'diffmod'),
+                $this->wrapText($newText, 'ins', 'diffmod')
+            );
+        }
+        return $this->diffElements($oldText, $newText);
+  }
 
     protected function diffElementsByAttribute($oldText, $newText, $attribute, $element)
     {
@@ -473,6 +492,11 @@ class HtmlDiff extends AbstractDiff
     public function isImagePlaceholder($text)
     {
         return $this->isPlaceholderType($text, 'img');
+    }
+
+    public function isPicturePlaceholder($text)
+    {
+        return $this->isPlaceholderType($text, 'picture');
     }
 
     /**
@@ -584,7 +608,7 @@ class HtmlDiff extends AbstractDiff
 
     protected function wrapText(string $text, string $tagName, string $cssClass) : string
     {
-        if (trim($text) === '') {
+        if (!$this->config->isSpaceMatching() && trim($text) === '') {
             return '';
         }
 
