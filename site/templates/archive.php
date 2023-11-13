@@ -17,7 +17,7 @@
           <h2 class="h2 border-top pt-3"><?= $version['title'] ?></h2>
         </header>
         <div class="color-gray-700 mb-12">
-          <p><?= $version['title'] . ' ' . $version['description']?> </p>
+          <p><?= $version['title'] . ' ' . ($version['description'] ?? null) ?> </p>
         </div>
         <div class="columns" style="--columns: 2">
           <a aria-label="Visit the <?= $version['title'] ?> docs" href="<?= $version['link'] ?>" class="btn <?= $version === end($versions) ? 'btn--filled' : 'btn--outlined' ?>">
