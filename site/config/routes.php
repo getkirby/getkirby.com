@@ -77,6 +77,34 @@ return [
 		},
 	],
 	[
+		'pattern' => 'buy/volume',
+		'method'  => 'POST',
+		'action'  => function() {
+			$product  = get('product', 'basic');
+			$currency = get('currency', 'EUR');
+			$volume   = get('volume', 5);
+
+			try {
+				$product = Product::from($product);
+				$price   = $product->price($currency);
+				$prices  = [
+					'EUR:'                 . $product->price('EUR')->volume($volume),
+					$price->currency . ':' . $price->volume($volume),
+				];
+
+				$url = $product->checkout([
+					'prices'            => $prices,
+					'quantity'          => $volume,
+					'quantity_variable' => false,
+				]);
+
+				go($url);
+			} catch (Throwable $e) {
+				die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
+			}
+		}
+	],
+	[
 		'pattern' => 'buy/volume/(:any)/(:num)/(:any)',
 		'action'  => function(string $product, int $volume, string $currency) {
 			try {
