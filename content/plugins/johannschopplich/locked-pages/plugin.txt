@@ -2,6 +2,10 @@ Title: Locked Pages
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/johannschopplich/kirby-locked-pages
 
 ----
@@ -24,3 +28,7 @@ Example:
 fields:
   security: fields/locked-pages
 ```
+
+----
+
+Versions: 3

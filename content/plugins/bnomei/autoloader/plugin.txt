@@ -2,6 +2,10 @@ Title: Autoloader
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/autoloader-for-kirby
 
 ----
@@ -29,3 +33,7 @@ Kirby::plugin('bnomei/example', [
     // other extensions
 ]);
 ```
+
+----
+
+Versions: 3

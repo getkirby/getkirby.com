@@ -1,4 +1,9 @@
 Title: Subtitler
+
+----
+
+Text: 
+
 ----
 
 Repository: https://github.com/sylvainjule/kirby-subtitler
@@ -14,3 +19,7 @@ Subcategory: videos
 ----
 
 Description: Kirby field for synchronizing content with audio/video files
+
+----
+
+Versions: 3

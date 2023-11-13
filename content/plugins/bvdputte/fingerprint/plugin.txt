@@ -1,4 +1,8 @@
-title: Fingerprint
+Title: Fingerprint
+
+----
+
+Text: 
 
 ----
 
@@ -23,3 +27,7 @@ Example:
 ```php
 href="styles.db5796ea5bf2.css"
 ```
+
+----
+
+Versions: 3

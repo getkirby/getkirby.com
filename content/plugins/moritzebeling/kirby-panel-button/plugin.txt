@@ -2,6 +2,10 @@ Title: Panel Button Field
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/moritzebeling/kirby-panel-button
 
 ----
@@ -24,3 +28,7 @@ Example:
 button:
   url: "https://external.com/{{ page.slug }}"
 ```
+
+----
+
+Versions: 3

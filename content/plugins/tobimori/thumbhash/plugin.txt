@@ -2,6 +2,10 @@ Title: ThumbHash
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/tobimori/kirby-thumbhash
 
 ----
@@ -19,3 +23,7 @@ Description: Smarter image placeholders with the ThumbHash algorithm – support
 ----
 
 Published: 2023-05-07
+
+----
+
+Versions: 3

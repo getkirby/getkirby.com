@@ -1,4 +1,8 @@
-title: Content Security Policy
+Title: Content Security Policy
+
+----
+
+Text: 
 
 ----
 
@@ -25,3 +29,7 @@ return [
         ...
     ]
 ];
+
+----
+
+Versions: 3

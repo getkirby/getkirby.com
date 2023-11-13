@@ -2,6 +2,10 @@ Title: TinyMCE
 
 ----
 
+Text: 
+
+----
+
 Download: https://owebstudio.com/kirby/plugins/tinymce-editor
 
 ----
@@ -23,3 +27,7 @@ Subcategory: editing
 ----
 
 Description: Integrates the powerful TinyMCE 5 wysiwyg editor into Kirby 3.
+
+----
+
+Versions: 3

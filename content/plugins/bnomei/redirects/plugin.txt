@@ -2,6 +2,10 @@ Title: Redirects
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-redirects
 
 ----
@@ -25,3 +29,7 @@ sections:
   redirects:
     extends: plugin-redirects3xx
 ```
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: Kirbylog
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/johannschopplich/kirbylog
 
 ----
@@ -23,3 +27,7 @@ Example:
 ```php
 kirbylog('Something happened', 'error');
 ```
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: Accordion Field
 
 ----
 
+Text: 
+
+----
+
 Download: https://owebstudio.com/kirby/plugins/accordion-field
 
 ----
@@ -27,3 +31,7 @@ Subcategory: structured-content
 ----
 
 Description: Collapses the content below headlines in Panel for Kirby 3.
+
+----
+
+Versions: 3

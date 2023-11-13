@@ -2,52 +2,6 @@ Title: Tailwind Merge
 
 ----
 
-Repository: https://github.com/tobimori/kirby-tailwind-merge
-
-----
-
-Category: templating
-
-----
-
-Published: 2023-06-17
-
-----
-
-Description: Intelligently merge Tailwind classes without style conflicts in your Kirby templates
-
-----
-
-License:
-
-name: MIT license
-url: https://github.com/tobimori/kirby-tailwind-merge/blob/main/LICENSE
-
-----
-
-Installation: true
-
-----
-
-Composer: tobimori/kirby-tailwind-merge
-
-----
-
-Example:
-
-```php
-// site/snippets/component.php
-<div <?= merge('h-full w-full bg-neutral-100', $class) ?>></div>
-
-// site/templates/default.php
-<?php snippet('component', ['class' => 'w-1/2']) ?>
-
-// output
-<div class="h-full bg-neutral-100 w-1/2"></div>
-```
-
-----
-
 Text:
 
 ## Usage
@@ -112,3 +66,52 @@ return [
 ];
 ```
 
+----
+
+Repository: https://github.com/tobimori/kirby-tailwind-merge
+
+----
+
+Category: templating
+
+----
+
+Published: 2023-06-17
+
+----
+
+Description: Intelligently merge Tailwind classes without style conflicts in your Kirby templates
+
+----
+
+License:
+
+name: MIT license
+url: https://github.com/tobimori/kirby-tailwind-merge/blob/main/LICENSE
+
+----
+
+Installation: true
+
+----
+
+Composer: tobimori/kirby-tailwind-merge
+
+----
+
+Example:
+
+```php
+// site/snippets/component.php
+<div <?= merge('h-full w-full bg-neutral-100', $class) ?>></div>
+
+// site/templates/default.php
+<?php snippet('component', ['class' => 'w-1/2']) ?>
+
+// output
+<div class="h-full bg-neutral-100 w-1/2"></div>
+```
+
+----
+
+Versions: 3

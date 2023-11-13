@@ -2,6 +2,10 @@ Title: Components
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/youngcut/kirby-components
 
 ----
@@ -27,3 +31,7 @@ Description: No more switching between snippets and blueprints folders. Bring th
 ----
 
 Published: 2023-05-17
+
+----
+
+Versions: 3

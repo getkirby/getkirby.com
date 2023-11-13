@@ -2,6 +2,10 @@ Title: ImageMagick Extended
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/tobimori/kirby-magick-extended
 
 ----
@@ -20,3 +24,6 @@ Published: 2023-02-26
 
 Description: Extend Kirby's built-in ImageMagick driver, work better with GIFs and APNGs
 
+----
+
+Versions: 3

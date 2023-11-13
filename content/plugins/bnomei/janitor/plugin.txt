@@ -2,6 +2,10 @@ Title: Janitor
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-janitor
 
 ----
@@ -15,3 +19,7 @@ Subcategory: devtools
 ----
 
 Description: Run command – like cleaning the cache – from within the Panel via a customizable button, directly in PHP code or with a cronjob
+
+----
+
+Versions: 3

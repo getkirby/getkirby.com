@@ -2,6 +2,10 @@ Title: Random
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-random
 
 ----
@@ -19,3 +23,7 @@ Example:
 ```php
 <?= $page->random('words', 'lorem', 5) ?>
 ```
+
+----
+
+Versions: 3

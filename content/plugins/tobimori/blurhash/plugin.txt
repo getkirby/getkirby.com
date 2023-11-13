@@ -2,6 +2,10 @@ Title: BlurHash
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/tobimori/kirby-blurhash
 
 ----
@@ -19,3 +23,7 @@ Description: Optimized image placeholders with the BlurHash algorithm
 ----
 
 Published: 2023-01-07
+
+----
+
+Versions: 3

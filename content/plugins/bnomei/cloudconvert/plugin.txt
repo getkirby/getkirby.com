@@ -2,6 +2,10 @@ Title: CloudConvert
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-cloudconvert
 
 ----
@@ -16,3 +20,6 @@ Subcategory: images
 
 Description: Plugin to convert your files to other file types (i.e. mov to animated gif), using cloudconvert.com
 
+----
+
+Versions: 3

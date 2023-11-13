@@ -2,6 +2,10 @@ Title: Plausible
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/rowdyrabouw/kirby3-plausible
 
 ----
@@ -19,3 +23,7 @@ Description: Displays simple and useful web analytics from Plausible directly in
 ----
 
 Similar: plugins/floriankarsten/plausible
+
+----
+
+Versions: 3

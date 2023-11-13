@@ -2,6 +2,10 @@ Title: List Methods
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/hananils/kirby-list-methods
 
 ----
@@ -26,3 +30,7 @@ $pages->toList();
 // using the filename
 $files->toList();
 ```
+
+----
+
+Versions: 3

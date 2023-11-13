@@ -2,6 +2,10 @@ Title: Related
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/texnixe/kirby3-related
 
 ----
@@ -26,3 +30,6 @@ foreach ($page->related($options) as $p) {
 }
 ```
 
+----
+
+Versions: 3

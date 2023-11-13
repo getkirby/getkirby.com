@@ -2,6 +2,10 @@ Title: Meta Tags
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/wearejust/kirby-meta-tags
 
 ----
@@ -28,3 +32,7 @@ Example:
   </head>
   ...
 ```
+
+----
+
+Versions: 3

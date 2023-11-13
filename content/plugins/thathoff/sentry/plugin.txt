@@ -2,6 +2,10 @@ Title: Sentry
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/thathoff/kirby-sentry
 
 ----
@@ -15,3 +19,7 @@ Subcategory: logging
 ----
 
 Description: Sentry real-time crash reporting for Kirby CMS sites
+
+----
+
+Versions: 3

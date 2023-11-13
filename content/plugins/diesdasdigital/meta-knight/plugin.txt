@@ -2,6 +2,10 @@ Title: MetaKnight
 
 ----
 
+Text: 
+
+----
+
 Documentation: https://metaknight.diesdas.digital
 
 ----
@@ -19,3 +23,7 @@ Subcategory: panel
 ----
 
 Description: Win every SEO fight. MetaKnight is a handy SEO plugin for the flat-file CMS Kirby. It has mighty powers.
+
+----
+
+Versions: 3

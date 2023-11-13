@@ -2,6 +2,10 @@ Title: Types
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/lukaskleinschmidt/kirby-types
 
 ----
@@ -30,3 +34,7 @@ Example:
 <span style="color: var(--color-green-500)">✓</span> added aliases<br>
 <span style="color: var(--color-green-500)">types helper created successfully</span>
 </div>
+
+----
+
+Versions: 3

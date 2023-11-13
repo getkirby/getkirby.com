@@ -2,6 +2,10 @@ Title: Feeds
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/omz13/kirby3-feeds
 
 ----
@@ -26,3 +30,7 @@ return [
   'omz13.feeds.firehose' => 'articles',
 ];
 ```
+
+----
+
+Versions: 3

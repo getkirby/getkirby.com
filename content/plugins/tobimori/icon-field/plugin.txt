@@ -2,6 +2,10 @@ Title: Icon Field
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/tobimori/kirby-icon-field
 
 ----
@@ -10,12 +14,11 @@ Category: fields
 
 ----
 
-Subcategory:
+Subcategory: 
 
 ----
 
 Description: A simple Icon field for Kirby - throw your Icon pack in a folder, add the field to your blueprints and you're good to go.
-
 
 ----
 
@@ -35,3 +38,7 @@ Installation: true
 ----
 
 Composer: tobimori/kirby-icon-field
+
+----
+
+Versions: 3

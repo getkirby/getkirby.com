@@ -2,6 +2,10 @@ Title: HTML Purifier
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-htmlpurifier
 
 ----
@@ -19,3 +23,7 @@ Example:
 ```php
 <?= $page->myfield()->htmlPurify() ?>
 ```
+
+----
+
+Versions: 3

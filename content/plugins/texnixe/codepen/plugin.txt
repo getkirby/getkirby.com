@@ -2,6 +2,10 @@ Title: CodePen Tag
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/texnixe/kirby3-codepen
 
 ----
@@ -19,3 +23,7 @@ Example:
 ```kirbytext
 (codepen: jwGBh)
 ```
+
+----
+
+Versions: 3

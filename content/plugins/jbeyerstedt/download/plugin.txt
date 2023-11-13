@@ -2,6 +2,10 @@ Title: Download Tag
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/jbeyerstedt/kirby-kirbytag-download
 
 ----
@@ -19,3 +23,7 @@ Example:
 ```kirbytext
 (download: flyer.pdf text: our beautiful products)
 ```
+
+----
+
+Versions: 3

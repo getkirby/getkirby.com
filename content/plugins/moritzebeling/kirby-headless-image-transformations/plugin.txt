@@ -2,6 +2,10 @@ Title: Headless Image Transformations
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/moritzebeling/kirby-headless-image-transformations
 
 ----
@@ -30,3 +34,7 @@ thumbs/image.jpg
       &height=640
       &crop=true
 ```
+
+----
+
+Versions: 3

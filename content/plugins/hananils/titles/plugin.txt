@@ -2,6 +2,10 @@ Title: Tiles
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/hananils/kirby-tiles
 
 ----
@@ -15,3 +19,7 @@ Subcategory: images
 ----
 
 Description: Tiles is a plugin to serve basic vector map tiles (.mbtiles). The plugin provides routes for styles, tilejson and vector tiles that can be used with Maplibre or similar.
+
+----
+
+Versions: 3

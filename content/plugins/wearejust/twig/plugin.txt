@@ -2,6 +2,10 @@ Title: Twig Templates
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/wearejust/kirby-twig
 
 ----
@@ -16,3 +20,6 @@ Subcategory: engine
 
 Description: Add support for Twig templates to your Kirby installation
 
+----
+
+Versions: 3

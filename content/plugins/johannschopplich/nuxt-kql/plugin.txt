@@ -2,6 +2,10 @@ Title: Nuxt KQL
 
 ----
 
+Text: 
+
+----
+
 Repository: https://nuxt-kql.jhnn.dev
 
 ----
@@ -30,3 +34,7 @@ const { data } = await useKql({
 })
 
 ```
+
+----
+
+Versions: 3

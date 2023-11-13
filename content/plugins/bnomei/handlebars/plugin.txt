@@ -2,6 +2,10 @@ Title: Handlebars Templates
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-handlebars
 
 ----
@@ -26,3 +30,7 @@ Example:
   {{ page.text }}
 </article>
 ```
+
+----
+
+Versions: 3

@@ -2,49 +2,6 @@ Title: CLI
 
 ----
 
-Repository: https://github.com/getkirby/cli
-
-----
-
-Category: devtools
-
-----
-
-Subcategory: utilities
-
-----
-
-Description: The Kirby command line interface helps to simplify common tasks with your Kirby installations.
-
-----
-
-License:
-
-name: MIT license
-url: https://github.com/getkirby/cli/blob/main/LICENSE
-
-----
-
-Installation: true
-
-----
-
-Composer: getkirby/cli
-
-----
-
-Example:
-
-```bash
-- kirby install
-- kirby install:kit
-- kirby install:repo
-- kirby make:blueprint
-- kirby make:collection
-- kirby make:command
-```
-----
-
 Text:
 
 # Kirby CLI
@@ -313,5 +270,50 @@ return [
 ];
 ```
 
+----
 
+Repository: https://github.com/getkirby/cli
 
+----
+
+Category: devtools
+
+----
+
+Subcategory: utilities
+
+----
+
+Description: The Kirby command line interface helps to simplify common tasks with your Kirby installations.
+
+----
+
+License:
+
+name: MIT license
+url: https://github.com/getkirby/cli/blob/main/LICENSE
+
+----
+
+Installation: true
+
+----
+
+Composer: getkirby/cli
+
+----
+
+Example:
+
+```bash
+- kirby install
+- kirby install:kit
+- kirby install:repo
+- kirby make:blueprint
+- kirby make:collection
+- kirby make:command
+```
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: Map-Suite
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/youngcut/kirby-map
 
 ----
@@ -15,3 +19,7 @@ Subcategory: maps
 ----
 
 Description: Geolocation field & map block: All you need for a map on your website.
+
+----
+
+Versions: 3

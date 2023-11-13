@@ -2,6 +2,10 @@ Title: Type Methods
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/hananils/kirby-type-methods
 
 ----
@@ -22,3 +26,7 @@ $object->isUser();
 $object->isFile();
 $page->isType('article');
 ```
+
+----
+
+Versions: 3

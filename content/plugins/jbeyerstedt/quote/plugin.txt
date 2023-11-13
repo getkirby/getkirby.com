@@ -2,6 +2,10 @@ Title: Quote Tag
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/jbeyerstedt/kirby-kirbytag-quote
 
 ----
@@ -19,3 +23,7 @@ Example:
 ```kirbytext
 (quote: Awesome quote author: A. Einstein)
 ```
+
+----
+
+Versions: 3

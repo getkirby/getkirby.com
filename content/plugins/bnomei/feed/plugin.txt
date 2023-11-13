@@ -2,6 +2,10 @@ Title: Feed and Sitemap
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-feed
 
 ----
@@ -26,3 +30,7 @@ page('blog')->children()->feed([
     'link'        => 'blog'
 ]);
 ```
+
+----
+
+Versions: 3

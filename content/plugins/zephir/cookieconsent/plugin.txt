@@ -2,6 +2,10 @@ Title: Cookieconsent
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/zephir/kirby-cookieconsent
 
 ----
@@ -14,10 +18,16 @@ Subcategory: privacy
 
 ----
 
-Description: Integrates the [orestbida/cookieconsent](https://github.com/orestbida/cookieconsent) JS plugin into Kirby 3.
+Description:
+
+Integrates the [orestbida/cookieconsent](https://github.com/orestbida/cookieconsent) JS plugin into Kirby 3.
 Comes with two pre-configured types (simple / customizable) to get you started quickly, and can be extended with all the original options.
 Supports multilingual websites.
 
 ----
 
 Published: 2023-07-11
+
+----
+
+Versions: 3

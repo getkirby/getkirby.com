@@ -2,6 +2,10 @@ Title: Vips thumbnail
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/floriankarsten/kirby3-vipsthumbnail
 
 ----
@@ -27,3 +31,7 @@ return [
   ]
 ];
 ```
+
+----
+
+Versions: 3

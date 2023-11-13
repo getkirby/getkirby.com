@@ -2,6 +2,10 @@ Title: Fragments
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/genxbe/k3-fragments
 
 ----
@@ -21,3 +25,7 @@ Example:
 <?= __('label.name') ?>
 <?= __('Copyright {{year}}', ['year' => '2022']) ?>
 ```
+
+----
+
+Versions: 3

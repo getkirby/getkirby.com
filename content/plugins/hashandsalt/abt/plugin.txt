@@ -2,6 +2,10 @@ Title: ABT
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/HashandSalt/kirby3-abt
 
 ----
@@ -16,3 +20,6 @@ Subcategory: ab-testing
 
 Description: This plugin lets you serve a subpage to page A as if it was page A, to 50% of the visitors.
 
+----
+
+Versions: 3

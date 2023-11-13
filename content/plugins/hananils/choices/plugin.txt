@@ -2,6 +2,10 @@ Title: Choices
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/hananils/kirby-choices
 
 ----
@@ -25,3 +29,7 @@ foreach ($page->fruits()->toChoices() as $fruit) {
     echo $fruit;
 }
 ```
+
+----
+
+Versions: 3

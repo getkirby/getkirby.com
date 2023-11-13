@@ -1,4 +1,8 @@
-Title: Goat Counter 
+Title: Goat Counter
+
+----
+
+Text: 
 
 ----
 
@@ -16,3 +20,6 @@ Subcategory: dashboard
 
 Description: Simple plugin providing Goat Counter iframe panel view and a simple frontend snippet.
 
+----
+
+Versions: 3

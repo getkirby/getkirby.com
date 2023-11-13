@@ -1,4 +1,8 @@
-title: Autopublish
+Title: Autopublish
+
+----
+
+Text: 
 
 ----
 
@@ -28,3 +32,6 @@ autounpublish:
   time: true
 ```
 
+----
+
+Versions: 3

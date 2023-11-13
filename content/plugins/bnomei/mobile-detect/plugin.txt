@@ -2,6 +2,10 @@ Title: Mobile Detect
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-mobile-detect
 
 ----
@@ -20,3 +24,7 @@ Example:
 <?php if ($page->isMobile()): ?>
   Nice mobile phone!
 <?php endif ?>
+
+----
+
+Versions: 3

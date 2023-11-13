@@ -2,6 +2,10 @@ Title: Plates
 
 ----
 
+Text: 
+
+----
+
 Download: https://owebstudio.com/kirby/plugins/plates
 
 ----
@@ -23,3 +27,7 @@ Subcategory: engine
 ----
 
 Description: Plates native PHP template engine/system for Kirby 3.
+
+----
+
+Versions: 3

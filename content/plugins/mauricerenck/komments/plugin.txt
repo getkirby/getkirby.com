@@ -2,6 +2,10 @@ Title: Komments
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/mauricerenck/komments
 
 ----
@@ -19,3 +23,7 @@ Description: A webmention enabled comment plugin. Receive comments and webmentio
 ----
 
 Featured: false
+
+----
+
+Versions: 3

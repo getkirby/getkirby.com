@@ -2,6 +2,10 @@ Title: Podcaster
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/mauricerenck/kirby-podcaster
 
 ----
@@ -16,3 +20,6 @@ Subcategory: podcasts
 
 Description: Podcaster is a complete solution for publishing your podcast. Podcaster has you covered with simple and easy feed management, detailed analytics and a customizable player
 
+----
+
+Versions: 3

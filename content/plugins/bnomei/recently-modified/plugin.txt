@@ -2,6 +2,10 @@ Title: Recently Modified
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-recently-modified
 
 ----
@@ -22,3 +26,7 @@ sections:
     type: recentlymodified
     headline: Your Recently Modified Pages
 ```
+
+----
+
+Versions: 3

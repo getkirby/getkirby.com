@@ -2,6 +2,10 @@ Title: Favicon
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/moritzebeling/kirby-favicon
 
 ----
@@ -27,3 +31,7 @@ Example:
 ```
 assets/favicon/favicon.png
 ```
+
+----
+
+Versions: 3

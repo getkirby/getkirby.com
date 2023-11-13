@@ -2,6 +2,10 @@ Title: Lapse
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-lapse
 
 ----
@@ -42,3 +46,7 @@ $data = lapse(
     }
 ); // expires when any timestamp changes
 ```
+
+----
+
+Versions: 3

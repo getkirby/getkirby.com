@@ -2,6 +2,10 @@ Title: Merx
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/wagnerwagner/merx
 
 ----
@@ -16,3 +20,6 @@ Paid: https://merx.wagnerwagner.de/buy
 
 Description: A powerful toolkit to cre­ate your very own on­line shop. Start entirely from scratch or integrate a store into your ex­ist­ing Kirby web­site.
 
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: Event Calendar
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/mzur/kirby-calendar-plugin
 
 ----
@@ -15,3 +19,7 @@ Subcategory: calendar
 ----
 
 Description: A plugin for the Kirby CMS to easily implement an event calendar.
+
+----
+
+Versions: 3

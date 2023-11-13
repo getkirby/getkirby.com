@@ -2,6 +2,10 @@ Title: Yasumi
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/HashandSalt/kirby3-yasumi
 
 ----
@@ -19,3 +23,7 @@ Example:
 ```php
 $site->holidays('France', 2022);
 ```
+
+----
+
+Versions: 3

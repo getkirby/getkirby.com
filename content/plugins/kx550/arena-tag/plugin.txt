@@ -2,6 +2,10 @@ Title: Are.na Tag
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/kx550/kirby3-arena
 
 ----
@@ -19,3 +23,7 @@ Example:
 ```kirbytext
 (arena: tim-duvendack/aesthetics-1483967740)
 ```
+
+----
+
+Versions: 3

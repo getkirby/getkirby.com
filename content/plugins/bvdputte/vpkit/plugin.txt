@@ -1,4 +1,8 @@
-title: Virtual pages helper kit
+Title: Virtual pages helper kit
+
+----
+
+Text: 
 
 ----
 
@@ -25,3 +29,7 @@ Example:
     ]
 ]
 ```
+
+----
+
+Versions: 3

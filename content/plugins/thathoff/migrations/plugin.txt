@@ -2,12 +2,15 @@ Title: Migrations
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/thathoff/kirby-migrations
 
 ----
 
 Category: devtools
-
 
 ----
 
@@ -31,3 +34,7 @@ class MigrationTest extends Migration
     }
 }
 ```
+
+----
+
+Versions: 3

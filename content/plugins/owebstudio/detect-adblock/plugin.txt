@@ -2,6 +2,10 @@ Title: Detect Adblock
 
 ----
 
+Text: 
+
+----
+
 Download: https://owebstudio.com/kirby/plugins/detect-adblock
 
 ----
@@ -27,3 +31,7 @@ Example:
 ```php
 <?php snippet('detect-adblock') ?>
 ```
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: Block Preview Fields
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/junohamburg/kirby-block-preview-fields
 
 ----
@@ -21,6 +25,7 @@ Description: A block preview that directly displays the block fields, including 
 Published: 2023-05-10
 
 ----
+
 License:
 
 name: MIT license
@@ -33,3 +38,7 @@ Installation: true
 ----
 
 Composer: junohamburg/kirby-block-preview-fields
+
+----
+
+Versions: 3

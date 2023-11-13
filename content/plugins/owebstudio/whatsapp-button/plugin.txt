@@ -2,6 +2,10 @@ Title: WhatsApp Button
 
 ----
 
+Text: 
+
+----
+
 Download: https://owebstudio.com/kirby/plugins/whatsapp-button
 
 ----
@@ -23,3 +27,7 @@ Subcategory: social
 ----
 
 Description: Simple floating WhatsApp button plugin for Kirby 3.
+
+----
+
+Versions: 3

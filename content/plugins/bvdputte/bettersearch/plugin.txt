@@ -1,4 +1,8 @@
-title: Better Search
+Title: Better Search
+
+----
+
+Text: 
 
 ----
 
@@ -20,3 +24,6 @@ Example:
 $pages->bettersearch($string, $options)
 ```
 
+----
+
+Versions: 3

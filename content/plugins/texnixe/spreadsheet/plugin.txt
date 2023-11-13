@@ -2,6 +2,10 @@ Title: Spreadsheet
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/texnixe/kirby3-spreadsheet
 
 ----
@@ -19,3 +23,7 @@ Example:
 ```kirbytext
 (spreadsheet: pricelist.xlxs)
 ```
+
+----
+
+Versions: 3

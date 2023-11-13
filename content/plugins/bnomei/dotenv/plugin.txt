@@ -2,6 +2,10 @@ Title: DotEnv
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-dotenv
 
 ----
@@ -27,3 +31,7 @@ Example:
 ```php
 env('APP_DEBUG');
 ```
+
+----
+
+Versions: 3

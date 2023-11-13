@@ -2,6 +2,10 @@ Title: Retour
 
 ----
 
+Text: (image: screenshot.png)
+
+----
+
 Repository: https://github.com/distantnative/retour-for-kirby
 
 ----
@@ -33,6 +37,4 @@ Description: Add and manage redirects based on rules, supporting wildcards and H
 
 ----
 
-Text:
-
-(image: screenshot.png)
+Versions: 3

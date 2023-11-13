@@ -2,6 +2,10 @@ Title: Route Attributes
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/presprog/kirby-route-attributes
 
 ----
@@ -24,3 +28,7 @@ return #[Get('/hello')] function () {
     return '<h1>Hello world!</h1>';
 };
 ```
+
+----
+
+Versions: 3

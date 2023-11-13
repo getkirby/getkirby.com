@@ -2,6 +2,10 @@ Title: Form
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/mzur/kirby-form
 
 ----
@@ -32,3 +36,7 @@ $form = new Form([
 ----
 
 Similar: plugins/mzur/uniform
+
+----
+
+Versions: 3

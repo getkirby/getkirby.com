@@ -2,6 +2,10 @@ Title: Queue
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bvdputte/kirby-queue
 
 ----
@@ -25,3 +29,7 @@ $job   = kqJob([
 
 $queue->addJob($job);
 ```
+
+----
+
+Versions: 3

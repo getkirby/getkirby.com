@@ -2,6 +2,10 @@ Title: QR Code
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/bnomei/kirby3-qrcode
 
 ----
@@ -21,3 +25,7 @@ fields:
   # current page
   qrcode: qrcode
 ```
+
+----
+
+Versions: 3

@@ -2,6 +2,10 @@ Title: Column Block
 
 ----
 
+Text: 
+
+----
+
 Repository: https://github.com/youngcut/kirby-column-blocks
 
 ----
@@ -15,3 +19,7 @@ Subcategory: block
 ----
 
 Description: Use columns in block fields based on the layout field! Supports Paste and Drag&Drop!
+
+----
+
+Versions: 3
