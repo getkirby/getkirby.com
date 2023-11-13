@@ -237,10 +237,9 @@
           <span><?= icon('download') ?></span> Download
         </a>
 
-        <a class="btn" href="<?= url('releases') ?>">
-          <span><?= icon('code') ?></span>
-					Versions:
-					<?= $page->versions() ?>
+        <a class="btn" href="<?= url('releases') ?>" title="Supports Kirby versions <?= $page->versions() ?>">
+          <span><?= icon('kirby') ?></span>
+					Supports v<?= $page->versions() ?>
         </a>
 
       </nav>
