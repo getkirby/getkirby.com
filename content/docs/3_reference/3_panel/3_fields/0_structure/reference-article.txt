@@ -4,7 +4,7 @@ Title: Structure
 
 Intro:
 
-Structured data input, which stores data in a field as YAML.
+Structured data input, which stores data as YAML.
 
 ----
 
@@ -55,6 +55,8 @@ addresses:
   city:   The capitol of the Bahamas
 ```
 
+If you need to store a single object instead of a list of objects, take a look at the (link: docs/reference/panel/fields/object text: object field).
+
 ## Field properties
 
 (field-options: structure)
@@ -64,6 +66,10 @@ addresses:
 You can define any number of fields and use the same (link: docs/reference/panel/fields text: field types listed):
 
 (reference: panel/fields)
+
+<info>
+Each field value is stored like in a normal Kirby content file. This means that all field types are supported, however all of their values are converted to strings. For most fields there is no difference, but fields with structured data will *not* be nested inside the same YAML data structure. This ensures broad compatibility.
+</info>
 
 ## Default values
 
@@ -249,5 +255,3 @@ If you nest structure fields inside a structure field, you have to call the `toS
 ## More information
 
 (link: docs/cookbook/content/structured-field-content text: Structured field content)
-
-
