@@ -71,7 +71,7 @@ If an icon has been defined in the page's blueprint, it will be used in the page
 fields:
   link:
     type: link
-		options:
-			- page
-			- anchor
+    options:
+      - page
+      - anchor
 ```
