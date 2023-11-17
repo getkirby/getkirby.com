@@ -5,7 +5,7 @@ Title: Kirby End User License Agreement
 Validity:
 
 **Effective since:** Publication on the Kirby website on March 21, 2023
-This version applies to all licenses that were purchased on or after March 15, 2022 and to older licenses that were transferred to our new company Content Folder & Co. KG. Otherwise the version (link: license/2019-03-04 text: 2019-03-04) is still valid.
+This version applies to all licenses that were purchased between March 15, 2022 and November 27, 2023. It also applies to older licenses that were transferred to our new company Content Folder & Co. KG. Otherwise the version (link: license/2019-03-04 text: 2019-03-04) is still valid.
 
 ----
 
