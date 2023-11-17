@@ -14,7 +14,7 @@ Guide: blueprints/fields
 
 Text:
 
-The new object field allows to create data objects. This is handy for more complex settings, isolated entities or nested data.
+The object field allows to create data objects. This is handy for more complex settings, isolated entities or nested data.
 
 A typical example would be contact data for an author in a blog article, multiple layout settings for images in your template, custom settings for a theme, SEO configuration etc.
 
@@ -48,6 +48,8 @@ contact:
   phone: 1234 5678
 ```
 
+If you need to store a list of multiple objects, take a look at the (link: docs/reference/panel/fields/structure text: structure field).
+
 ## Field properties
 
 (field-options: object)
@@ -57,6 +59,10 @@ contact:
 You can define any number of fields and use the same (link: docs/reference/panel/fields text: field types listed):
 
 (reference: panel/fields)
+
+<info>
+Each field value is stored like in a normal Kirby content file. This means that all field types are supported, however all of their values are converted to strings. For most fields there is no difference, but structured fields will *not* be nested inside the same YAML data structure. This ensures broad compatibility.
+</info>
 
 ## Default values
 
@@ -105,4 +111,3 @@ Let's say we wanted to render the `contact` data from above in a template:
 <info>
 If you nest object fields inside another object field, block field or structure field, you have to call the `toObject()` method on the nested fields as well and then access the nested object properties like above.
 </info>
-
