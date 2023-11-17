@@ -264,10 +264,27 @@ function toOptions(array $props) {
 			$default = 'false';
 		}
 
+		$type = $parameter->getType();
+		$parameterType = null;
+
+		if ($type) {
+			if ($type instanceof ReflectionUnionType) {
+				$parameterTypes = [];
+
+				foreach ($type->getTypes() as $unionType) {
+					$parameterTypes[] = $unionType->getName();
+				}
+
+				$parameterType = join('|', $parameterTypes);
+			} else {
+				$parameterType = $type->getName();
+			}
+		}
+
 		$table[$attr] = [
 			'name'        => $attr,
 			'required'    => $parameter->isOptional() !== true,
-			'type'        => $parameter->getType() ? $parameter->getType()->getName() : null,
+			'type'        => $parameterType,
 			'default'     => $default,
 			'description' => $comment,
 		];
