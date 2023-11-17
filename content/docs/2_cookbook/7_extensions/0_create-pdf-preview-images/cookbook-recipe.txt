@@ -28,6 +28,7 @@ The requirements are the same as for using Kirby's (link: docs/reference/system/
 - ImageMagick must be installed on your server.
 - Calling PHP's `exec()` method must not be disabled.
 - If the ImageMagic convert binary is not correctly linked, you might have to (link: docs/reference/system/options/thumbs#thumbs-driver__additional-options-for-the-imagemagick-driver text: set the path to the `convert` binary) in your config.
+- Gostscript is needed
 
 ## Setting up the plugin
 
@@ -226,20 +227,21 @@ load([
 ], __DIR__);
 
 Kirby::plugin('cookbook/pdfpreview', [
-    'hooks' => [
-        'file.create:after' => function ($file) {
-            // only create preview for PDF files
-            if ($file->mime() === 'application/pdf') {
-                $options    = [
-                    'quality'    => 100,
-                    'page'       => 0,
-                    'density'    => 300,
-                ];
-                $darkroom = new PdfPreview();
-                $darkroom->process($file->root(), $options);
-            }
-        }
-    ],
+	  'hooks' => [
+	    'file.create:after' => function ($file) {
+	      // only create preview for PDF files
+	      if ($file->mime() === 'application/pdf') {
+	        $options    = [
+	          'quality'    => 100,
+	          'page'       => 0,
+	          'density'    => 300,
+	          'colorspace' => false,
+	        ];
+	        $darkroom = new PdfPreview($options);
+	        $darkroom->process($file->root(), $options);
+	      }
+	    }
+	  ],
     'fileMethods' => []
 ]);
 ```
