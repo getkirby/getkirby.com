@@ -143,7 +143,7 @@ columns:
 
 ### Result
 
-(image: columns-screen-1.png)
+(image: sidebar-right.png)
 
 You can probably already see how flexible this is. By slightly changing the columns, we can change the interface drastically.
 
@@ -158,16 +158,34 @@ columns:
   sidebar:
     width: 1/3
     sections:
-      # a list of subpages …
-      # a list of files …
+
+      # a list of subpages
+      pages:
+        type: pages
+        label: Subpages
+
+      # a list of files
+      files:
+        type: files
+        label: Files
 
   # main
   main:
     width: 2/3
     sections:
-      # a simple form …
+
+      # a simple form
+      content:
+        type: fields
+        fields:
+          headline:
+            label: Headline
+            type: text
+          text:
+            label: Text
+            type: textarea
 ```
-(image: columns-screen-2.png)
+(image: sidebar-left.png)
 
 ### Two Sidebars
 
@@ -177,25 +195,43 @@ title: My blueprint
 columns:
 
   # sidebar left
-  sidebar_left:
+  left:
     width: 1/4
     sections:
-      # a list of subpages …
+
+      # a list of subpages
+      pages:
+        type: pages
+        label: Subpages
+        template: default
 
   # main
   main:
-    width: 2/4
+    width: 1/2
     sections:
-      # a simple form …
+
+      # a simple form
+      content:
+        type: fields
+        fields:
+          headline:
+            label: Headline
+            type: text
+          text:
+            label: Text
+            type: textarea
 
   # sidebar right
-  sidebar_right:
+  right:
     width: 1/4
     sections:
-      # a list of files …
+      # a list of files
+      files:
+        type: files
+        label: Files
 ```
 
-(image: columns-screen-3.png)
+(image: sidebar-both.png)
 
 ## Single-column layouts
 
@@ -290,7 +326,7 @@ tabs:
       # layout
 ```
 
-(image: tabs-screen.png)
+(image: sidebar-right-and-tabs.png)
 
 ### Full example
 
@@ -306,7 +342,7 @@ tabs:
     columns:
 
       # main
-      left:
+      main:
         width: 2/3
         sections:
 
@@ -322,7 +358,7 @@ tabs:
                 type: textarea
 
       # sidebar
-      right:
+      sidebar:
         width: 1/3
         sections:
 
