@@ -13,16 +13,16 @@ Files can be uploaded to a page, the site or a user via the Panel using one of t
 
 Depending on the context, as an editor you then click the `Add` button in a pages section, or select the upload option from the dropdown in a files or textarea field:
 
-** Files section**
-(image: files-section.jpg)
+### Files section
+(image: files-section.png)
 
-** Files field**
+### Files field
 
-(image: files-field.jpg)
+(image: files-field.png)
 
-** Textarea field**
+### Textarea field
 
-(image: textarea-field.jpg)
+(image: textarea-field.png)
 
 Kirby will convert the filename of your uploaded file to ASCII characters. This ensures that the filename is URL-safe and can be accessed correctly. After the conversion, the file will be checked against Kirby's internal validation rules as well as against custom rules that were defined in the blueprint. If the file validates, it will be uploaded.
 

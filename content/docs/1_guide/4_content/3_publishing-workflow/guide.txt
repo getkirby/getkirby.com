@@ -24,7 +24,7 @@ You can deactivate content locking via the (link: docs/reference/system/options/
 
 When you edit pages, files or user accounts in the Panel, you will see an "unsaved changes" icon in the topbar. This overview of unsaved changes makes it a lot easier to keep track of content that is still work-in-progress.
 
-(image: unsaved-changes.png)
+(image: changes.png)
 
 ## Page states
 Kirby's page states give you full control over your publishing workflow. They allows you to define access to content, to filter content by status criteria and much more.
@@ -51,13 +51,13 @@ In your blueprints for the Panel, you can (link: docs/reference/panel/blueprints
 
 To publish a draft in the Panel, click on the "Draft" button with the red status icon in the toolbar or go to "Settings" > "Change status".
 
-(image: Bildschirmfoto2018-07-05um14.30.12.png)
+(image: draft.png)
 
 <warning>
 You can only publish a draft in the Panel if all required fields are filled in and all validations have passed.
 </warning>
 
-(image: Bildschirmfoto2018-07-05um14.31.59.png)
+(image: validation.png)
 
 ### In the content folder
 
