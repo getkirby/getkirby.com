@@ -16,6 +16,8 @@ Text:
 
 The slug field creates a text input that automatically sanitizes the typed value with our built-in sluggify method. It's perfect if you want to create IDs or class names for HTML elements or paths for files or URLs.
 
+(image: slug.png)
+
 ## Example
 
 ```yaml

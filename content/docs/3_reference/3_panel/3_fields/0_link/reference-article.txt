@@ -16,7 +16,9 @@ Intro: Use the link field  to create links to external URLs, internal pages, fil
 
 Text:
 
-## Setup
+(image: link.png)
+
+## Example
 
 ```yaml
 fields:

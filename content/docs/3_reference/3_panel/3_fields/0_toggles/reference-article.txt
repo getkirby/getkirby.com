@@ -14,7 +14,7 @@ Text:
 
 The toggles field lets you select between different states.
 
-(image: toggles-labels-icons.png)
+(image: toggles.png)
 
 ## Example
 

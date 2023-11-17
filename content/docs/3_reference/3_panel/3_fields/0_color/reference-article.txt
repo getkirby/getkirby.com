@@ -20,7 +20,7 @@ color:
   format: hsl # supports hex (default), rgb, hsl
 ```
 
-(image: color-field.png)
+(image: color.png)
 
 ## Pre-defined options
 
