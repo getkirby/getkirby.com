@@ -149,8 +149,8 @@
         <h4 class="mb-3" style="color: var(--color-purple-500)">Key points</h4>
         <ul class="mb-12">
           <li>Kirby now follows <a class="underline" href="https://semver.org/">semantic versioning</a></li>
-          <li>Licenses <a class="underline" href="<?= url('license/2023-11-28/summary#new-licensing-model') ?>">include three years of feature updates</a></li>
           <li>Major versions will be released on a yearly cycle to bring continuity and planning security.</li>
+          <li>Licenses <a class="underline" href="<?= url('license/2023-11-28/summary#new-licensing-model') ?>">include three years of feature updates</a></li>
         </ul>
 
         <h4 class="mb-3" style="color: var(--color-purple-500)">Example roadmap</h4>
