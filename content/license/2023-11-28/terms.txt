@@ -35,10 +35,10 @@ This section summarizes the most important conditions of this Agreement to give 
 
 - With your purchase you obtain a license. A license allows you to use Kirby according to this Agreement.
 - Each project (defined by its URL) needs its own license. You need to purchase the right license for your project and/or client. You can find our license variants on https://getkirby.com/buy. In some explicitly listed cases, you can use Kirby without having to purchase a license.
-- Each license includes any Kirby version that gets released within 3 years from the date when you first activated your license. We also provide free security updates for older versions that may protect your project beyond 3 years.
-- After those 3 years, you can continue to use Kirby for your project with any of these versions as long as you want.
+- Each license includes any Kirby version that gets released within three years from the date when you first activated your license. We also provide free security updates for older versions that may protect your project beyond three years.
+- After those three years, you can continue to use Kirby for your project with any of these versions as long as you want.
 - To use any newer version released after this time, you will need to upgrade your license.
-- Upgrading your license extends the timeframe for an additional 3 years during which you can use new releases. You can perform the upgrade at any time.
+- Upgrading your license extends the timeframe for an additional three years during which you can use new releases. You can perform the upgrade at any time.
 - You have the right to transfer or reassign a license to another person or project if needed.
 - There are some restrictions for use of Kirby that you can find below.
 
@@ -102,7 +102,7 @@ If the Website is created for a Client, You need to make sure that the **Client 
 
 If You purchase licenses **in advance**, You need to ensure to only use the license(s) for projects that satisfy the requirements for the selected license variant(s).
 
-We **reserve the right to verify** at any time after the purchase whether You, the Website and (if applicable) the Client are Qualified. Changes to the situation of You, the Website or the Client as well as changes to the published information on Our **"**Buy**"** page after the purchase or after the assignment to a Client do *not* take effect on an existing license unless You upgrade the license.
+We **reserve the right to verify** at any time after the purchase whether You, the Website and (if applicable) the Client are Qualified. Changes to the situation of You, the Website or the Client as well as changes to the published information on Our **"**Buy**"** page after the purchase or after the assignment to a Client do *not* take effect on an existing license unless You upgrade the license or We transfer or reassign the license on Your request.
 
 ## Free Licenses
 
@@ -242,7 +242,7 @@ For each Major Generation, We aim to provide **security support for three (3) ye
 With each vulnerability, We aim to publish the security advisory and security updates for all supported Major Generations at the same time.
 
 <info>
-You can find detailed information on our currently supported versions in our (link: https://getkirby.com/security text: public security policy).
+You can find up-to-date information on our currently supported versions in our (link: https://getkirby.com/security text: public security policy).
 </info>
 
 We reserve the right to **limit technical support for free licenses**.
