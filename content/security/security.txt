@@ -161,26 +161,30 @@ Versions:
 >={{ noVulnerabilities }}:
     status: no-vulnerabilities
     description: No known vulnerabilities
-3.9.*:
+4.*:
     status: active-support
     description: Actively supported
     latest: {{ latest }}
+3.9.*:
+    status: security-support
+    description: Security support until December 1, 2025
+    latest: 3.9.8
 3.8.*:
     status: security-support
-    description: Security support
-    latest: {{ latest }}
+    description: Security support until December 1, 2024
+    latest: 3.9.8
 3.7.*:
     status: security-support
-    description: Security support
-    latest: {{ latest }}
+    description: Security support until June 26, 2024
+    latest: 3.9.8
 3.6.*:
     status: security-support
     description: Security support until June 26, 2024
-    latest: {{ latest }}
+    latest: 3.9.8
 3.* <3.6:
     status: end-of-life
     description: Not supported (end of life) since November 15, 2023
-    latest: {{ latest }}
+    latest: 3.9.8
 2.*:
     status: end-of-life
     description: Not supported (end of life) since January 1, 2021
