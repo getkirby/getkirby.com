@@ -13,7 +13,7 @@ return [
 ```
 
 <alert>
-Make sure to disable `debug` mode in production! Displaying PHP errors on a public server can be a serious security risk: 
+Make sure to disable `debug` mode in production! Displaying PHP errors on a public server can be a serious security risk:
 
 - Error messages are displayed with detailed information about the code structure (e.g. file path, class, method)
 - With Whoops enabled, there will be even more detailed information about the code structure
@@ -22,3 +22,21 @@ In a production environment, always log errors to your PHP error logs.
 </alert>
 
 (screencast: https://www.youtube.com/watch?v=GrBbuwRSuMA title: Debug mode text: Kirby's debug mode is super helpful for finding mistakes in your templates, snippets or other parts of your project.)
+
+To avoid accidentally enabling debugging in production, but to still be able to use it in certain situations, you have different options:
+
+- Disable `debug` in `config.php` and only enable it in in the config for your local/staging setup, see (link: text: docs/guide/configuration#the-config-php__using-multiple-config-files text: Multiple config files)
+- Use conditions for the `debug` option in `config.php`, e.g. based on server name or logged in users
+    ```php
+    'debug' => str_ends_with($_SERVER['SERVER_NAME'] ?? '', '.test') || @$_SERVER['SERVER_NAME'] === 'localhost', // enable debug for domains that end on ".test"
+    ```
+
+    ```php
+    'ready' => function ($kirby) {
+        return [
+            'debug' => kirby()->user() && kirby()->user()->role()->isAdmin()
+        ];
+    }
+    ```
+
+See also: (link: docs/cookbook/debugging-basics text: Debugging basics)
