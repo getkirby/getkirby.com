@@ -24,7 +24,7 @@
       <a aria-label="Download the <?= $plugin->title() ?> plugin" href="<?= $plugin->download() ?>" class="iconbox bg-light"><?= icon('download') ?></a>
 
       <?php if ($plugin->repository()->isNotEmpty()): ?>
-      <a aria-label="Github repository of the <?= $plugin->title() ?> plugin" class="iconbox bg-light" href="<?= $plugin->repository() ?>">
+      <a aria-label="GitHub repository of the <?= $plugin->title() ?> plugin" class="iconbox bg-light" href="<?= $plugin->repository() ?>">
         <?= icon('github') ?>
       </a>
       <?php endif ?>

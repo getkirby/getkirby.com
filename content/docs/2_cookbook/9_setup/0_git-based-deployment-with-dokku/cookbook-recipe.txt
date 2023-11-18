@@ -78,7 +78,7 @@ Pay attention to the domain name on the last line. For example if your domain is
 
 You can create as many apps as you want. In the case of our tutorial, we will create two apps named `live` and `dev` to show how we are able to run multiple apps/sites on one server and deploy to them independently.
 
-Dokku commands typically follow a syntax such as 
+Dokku commands typically follow a syntax such as
 ```
 dokku primary_command:secondary_command app_name variables
 ````
@@ -366,7 +366,7 @@ You should now be able to visit your sites with valid encryption certificates: h
 
 The certificates should automatically renew, but should you ever have to do so manually you can run `dokku letsencrypt:auto-renew`
 
-## Bonus: Deployment with Github Actions
+## Bonus: Deployment with GitHub Actions
 If you are using (link: https://www.github.com text: GitHub), you can connect this to your deployment via (link: https://github.com/features/actions text: GitHub Actions). With this, you are able to deploy to GitHub, which will in turn deploy to your dokku instance.
 
 Go ahead and create a new GitHub repository and add a remote accordingly. For the purposes of this tutorial, I will create a repository called `kirby-dokku-example` and push everything up to GitHub.

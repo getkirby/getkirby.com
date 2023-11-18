@@ -9,7 +9,7 @@
           <a title="Mastodon" rel="me" href="https://mastodon.social/@getkirby">
             <?= icon('mastodon') ?>
           </a>
-          <a title="Github" rel="me" href="https://github.com/getkirby">
+          <a title="GitHub" rel="me" href="https://github.com/getkirby">
             <?= icon('github') ?>
           </a>
           <a title="Instagram" rel="me" href="https://instagram.com/getkirby">
@@ -101,4 +101,3 @@
     </div>
   </div>
 </footer>
-

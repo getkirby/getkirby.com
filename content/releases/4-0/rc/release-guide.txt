@@ -38,7 +38,7 @@ While this version should be stable, there might still be some smaller glitches.
 
 ## How to report issues?
 
-Please use our Github repo to report issues and add [v4] to the issue title. <https://github.com/getkirby/kirby/issues>
+Please use our GitHub repo to report issues and add [v4] to the issue title. <https://github.com/getkirby/kirby/issues>
 
 ## Feedback from plugin developers
 

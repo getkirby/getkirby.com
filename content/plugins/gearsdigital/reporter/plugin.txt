@@ -14,6 +14,4 @@ Subcategory: section
 
 ----
 
-Description: Enables editors or clients to submit tasks, bugs and ideas to Github, Gitlab or Bitbucket or by E-Mail, straight out of the Panel!
-
-
+Description: Enables editors or clients to submit tasks, bugs and ideas to GitHub, Gitlab or Bitbucket or by E-Mail, straight out of the Panel!
