@@ -177,13 +177,9 @@ Versions:
     status: security-support
     description: Security support until June 26, 2024
     latest: {{ latest }}
-3.5.*:
-    status: security-support
-    description: Security support until November 15, 2023
-    latest: {{ latest }}
-3.* <3.5:
+3.* <3.6:
     status: end-of-life
-    description: Not supported (end of life) since November 16, 2021
+    description: Not supported (end of life) since November 15, 2023
     latest: {{ latest }}
 2.*:
     status: end-of-life
