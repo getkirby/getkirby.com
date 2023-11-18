@@ -29,14 +29,6 @@ fields:
 
 (field-options: slug)
 
-## How to use in templates/snippets
-
-```php
-<div class="<?= $page->className() ?>">
-  <!-- -->
-</div>
-```
-
 ## Sync option
 
 You can sync the slug field with another field. Whenever the editor types something into the synced field, the slug field will update with a sluggified version of the input:
@@ -48,7 +40,21 @@ fields:
     type: slug
     sync: title
 ```
+<info>
+Please note that when your field to sync uses camelCase, you still have to reference the field with all lowercase letters:
 
+```yaml
+fields:
+  sectionHeadline:
+    type: text
+  id:
+    label: Id
+    type: slug
+    sync: sectionheadline
+```
+
+The same applies for the `wizard` option below.
+</info>
 
 ## Wizard option
 
@@ -77,4 +83,27 @@ fields:
     type: slug
     sync: title
     allow: _
+```
+
+<info>
+The slug field also works within blocks or structure field items to sync fields within a block/structure field item.
+```yaml
+fields:
+  structure:
+  type: structure
+  fields:
+    text:
+      type: text
+    slug:
+      type: slug
+      sync: text
+</info>
+
+
+## How to use in templates/snippets
+
+```php
+<div class="<?= $page->className() ?>">
+	<!-- -->
+</div>
 ```
