@@ -24,7 +24,7 @@
             <?= icon('book') ?>
             Docs
           </a>
-          <a aria-label="The Kirby <?= $version['mainVersion'] ?> repository on Github" href="<?= $version['repo'] ?>" class="btn <?= $version === end($versions) ? 'btn--filled' : 'btn--outlined' ?>">
+          <a aria-label="The Kirby <?= $version['mainVersion'] ?> repository on GitHub" href="<?= $version['repo'] ?>" class="btn <?= $version === end($versions) ? 'btn--filled' : 'btn--outlined' ?>">
             <?= icon('github') ?>
             Source
           </a>

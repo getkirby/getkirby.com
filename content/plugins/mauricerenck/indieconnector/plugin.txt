@@ -22,4 +22,12 @@ Description: IndieConnector receives and sends Webmentions. It can also post to 
 
 ----
 
-Versions: 3
+Installation: true
+
+----
+
+Composer: mauricerenck/indieconnector
+
+----
+
+Versions: 3, 4

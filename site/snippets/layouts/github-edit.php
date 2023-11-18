@@ -1,7 +1,7 @@
 <hr class="hr mb-6">
 
 <p class="prose text-sm mb-6 max-w-xs">
-  Did you find an error? Help us improve our docs and edit this page on Github. Make sure to check out
+  Did you find an error? Help us improve our docs and edit this page on GitHub. Make sure to check out
   <a href="/styleguide">our styleguide &rarr;</a>
 </p>
 

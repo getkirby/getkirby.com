@@ -14,7 +14,7 @@ Despite the sceptics, Kirby made €600 in its first months and €14.000 in its
 
 ## Nobody will pay for this (Part 2)
 
-While Shaun Inman kept the source code for his apps behind closed doors, I wanted the same transparency open-source projects offered. Therefore, I put the entire source code for Kirby on Github. Seemingly madness. Why would anyone pay for it, when they can simply download it? The first versions of Kirby even came without a license check. But it worked. There were always enough customers who understood the principle of investing in enjoyable software. This principle still works for us today and has generated a very loyal customer base.
+While Shaun Inman kept the source code for his apps behind closed doors, I wanted the same transparency open-source projects offered. Therefore, I put the entire source code for Kirby on GitHub. Seemingly madness. Why would anyone pay for it, when they can simply download it? The first versions of Kirby even came without a license check. But it worked. There were always enough customers who understood the principle of investing in enjoyable software. This principle still works for us today and has generated a very loyal customer base.
 
 ## The Panel
 
@@ -68,4 +68,3 @@ Authentication was handled through Twitter. Over the years, thousands of threads
 I was really impressed by the performance of the file system and pleased by that first forum version. After all, my focus was on Kirby and not the forum itself. I never questioned the effects on the community. Conversations weren’t really working well and overall engagement was pretty poor.
 
 When we switched from our self-made mess to (link: https://discourse.org text: Discourse) in 2015, the community really took off. Support requests via email were instantly cut in half. It’s sometimes not very clever to build your own tools, when your focus should be on your main product.
-
