@@ -23,3 +23,8 @@ Installation: true
 ----
 
 Composer: mauricerenck/indieconnector
+
+
+----
+
+Versions: 3, 4

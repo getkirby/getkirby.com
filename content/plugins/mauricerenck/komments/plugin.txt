@@ -14,7 +14,7 @@ Subcategory: indieweb
 
 ----
 
-Description: A webmention enabled comment plugin. Receive comments and webmentions. Spam protection and a moderation panel view included. Kirby 4 ready.
+Description: A webmention enabled comment plugin. Receive comments and webmentions. Spam protection and a moderation panel view included.
 
 ----
 
@@ -27,3 +27,9 @@ Installation: true
 ----
 
 Composer: mauricerenck/komments
+
+
+----
+
+Versions: 3, 4
+
