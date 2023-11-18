@@ -14,7 +14,7 @@ Subcategory: podcasts
 
 ----
 
-Description: Podcaster is a complete solution for publishing your podcast. Podcaster has you covered with simple and easy feed management, detailed analytics and a customizable player. Kirby 4 ready.
+Description: Podcaster is a complete solution for publishing your podcast. Podcaster has you covered with simple and easy feed management, detailed analytics and a customizable player.
 
 ----
 
@@ -23,3 +23,7 @@ Installation: true
 ----
 
 Composer: mauricerenck/podcaster
+
+----
+
+Versions: 3, 4
