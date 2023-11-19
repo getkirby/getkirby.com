@@ -21,12 +21,10 @@ Kosmos-Subscription: on
 
 Text:
 
-With the start of the Kirby 4 beta phase, we are more and more
-approaching the final release of Kirby 4, so it's time for an update.
+With the start of the Kirby 4 beta phase, we are more and more approaching the final release of Kirby 4, so it's time for an update.
 
 
 ## New releases
-
 
 Last week, we released [Kirby 3.9.7](https://github.com/getkirby/kirby/releases/tag/3.9.7) with a new feature that allows you to mask variables that are displayed when showing errors with Whoops, as well as some enhancements and bug fixes.
 
@@ -35,27 +33,17 @@ And at the end of September, we released the [second beta of Kirby 4](https://gi
 
 ## Introducing a new license scheme for Kirby 4
 
-With the upcoming release of Kirby 4 in autumn, we will introduce a new
-license scheme that not only focuses on the longevity of Kirby, but also
-on you, our community. Here are the basics in a nutshell:
+With the upcoming release of Kirby 4 in autumn, we will introduce a new license scheme that not only focuses on the longevity of Kirby, but also on you, our community. Here are the basics in a nutshell:
 
-* The regular license price remains at 99 € despite the high inflation
-rate.
+* The regular license price remains at 99 € despite the high inflation rate.
 
-* For larger companies and organizations with a yearly revenue or
-funding of 1 million € and more, the license will cost 399 €.
+* For larger companies and organizations with a yearly revenue or funding of 1 million € and more, the license will cost 399 €.
 
-* Both licenses come with all of Kirby's features and can be used with
-the included versions indefinitely (i.e. they don't expire).
+* Both licenses come with all of Kirby's features and can be used with the included versions indefinitely (i.e. they don't expire).
 
-* We will continue to support students, educational projects, social
-and environmental organizations, charities and non-profits with free
-licenses.
+* We will continue to support students, educational projects, social and environmental organizations, charities and non-profits with free licenses.
 
-* Your license will cover all major releases within 3 years of
-activation. This means that regardless of when you purchase your
-license, the 3-year period only starts when you publish and register
-your website.
+* Your license will cover all major releases within 3 years of activation. This means that regardless of when you purchase your license, the 3-year period only starts when you publish and register your website.
 
 
 [Read more about the new license prices and conditions](https://forum.getkirby.com/t/news-about-our-v4-pricing-model/29661).
@@ -63,15 +51,9 @@ your website.
 
 ## Say hello to our brand-new UI lab
 
-The UI lab is a hidden layer that will be directly accessible in the
-Panel at /panel/lab.The Lab includes interactive examples of all our
-components, libraries and of our design system. Every component has its
-own docs' drawer with documented props, slots and more. The source code
-of every example can be inspected, and you can even add your own test
-examples.
+The UI lab is a hidden layer that will be directly accessible in the Panel at `/panel/lab`. The Lab includes interactive examples of all our components, libraries and of our design system. Every component has its own docs' drawer with documented props, slots and more. The source code of every example can be inspected, and you can even add your own test examples.
 
-The UI lab will ship with the upcoming Beta 3 of Kirby 4. Some
-impressions to wet your mouth:
+The UI lab will ship with the upcoming Beta 3 of Kirby 4. Some impressions to wet your mouth:
 
 (columns…)
 
@@ -122,7 +104,7 @@ We are also planning to release a Kirby 3.10 version with PHP 8.3 support (while
 
 ## Kirby plugins
 
-[Kirby PDF](https://github.com/maxchene/kirby-pdf)is planned as a wrapper around multiple PDF engines to create PDF documents from HTML. Currently, however, it only supports the WkHtmlToPdf library.
+[Kirby PDF](https://github.com/maxchene/kirby-pdf) is planned as a wrapper around multiple PDF engines to create PDF documents from HTML. Currently, however, it only supports the WkHtmlToPdf library.
 
 [Kirby Typesense](https://github.com/maxchene/kirby3-typesense) allows you to index your Kirby website in [Typesense](https://typesense.org/) an open source alternative to services like Algolia, to provide full text search.
 
@@ -135,7 +117,7 @@ We are also planning to release a Kirby 3.10 version with PHP 8.3 support (while
 
 ## Kirby Buzz
 
-Kev Quirk writes about his [experiences while migrating his blog to Kirby](https://kevquirk.com/migrating-this-blog-to-kirby)
+Kev Quirk writes about his [experiences while migrating his blog to Kirby](https://kevquirk.com/migrating-this-blog-to-kirby).
 
 Eddi Dale [compared the file sizes of multiple PHP-based CMS'es](https://www.eddiedale.com/blog/cms-filesize-comparisons/) Guess who won!
 
