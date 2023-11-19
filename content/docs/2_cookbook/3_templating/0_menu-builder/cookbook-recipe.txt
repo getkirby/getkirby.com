@@ -4,7 +4,7 @@ Title: Menu builders
 
 Text:
 
-(image: menu-builders.jpg)
+(image: menu-builder.png)
 
 In our (link: docs/cookbook/templating/menus text: menus recipe), we show how to build several types of menus with Kirby. However, those examples work with main pages and their children and have their limits when it comes to building more flexible menus where the depth of a page is not important or where you need multiple menus with selected pages.
 
