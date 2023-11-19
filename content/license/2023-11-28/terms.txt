@@ -76,7 +76,7 @@ Installing Kirby on or using it for a Public Site requires a (link: buy text: pa
 
 As Kirby is software and software is intangible, We don't sell it as such. Instead, this Agreement grants a license for each purchase to install and use a single instance of Kirby on a **specific Website**. Additional Kirby licenses must be purchased in order to install and use Kirby on **additional Websites**.
 
-The license is **non-exclusive** (meaning that You are not the only one who We will issue a license) and **generally non-transferable** (meaning that the one who purchases the license is the licensee).
+The license is **non-exclusive** (meaning that You are not the only one to whom We will issue a license) and **generally non-transferable** (meaning that the one who purchases the license is the licensee).
 
 On request, We will **transfer** a license to anyone who would be allowed and Qualified to purchase the license by law and this Agreement. The new licensee will take over all rights and obligations of this Agreement from You at the moment We confirm the license transfer.
 
