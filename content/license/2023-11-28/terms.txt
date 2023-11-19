@@ -102,7 +102,7 @@ If the Website is created for a Client, You need to make sure that the **Client 
 
 If You purchase licenses **in advance**, You need to ensure to only use the license(s) for projects that satisfy the requirements for the selected license variant(s).
 
-We **reserve the right to verify** at any time after the purchase whether You, the Website and (if applicable) the Client are Qualified. Changes to the situation of You, the Website or the Client as well as changes to the published information on Our **"**Buy**"** page after the purchase or after the assignment to a Client do *not* take effect on an existing license unless You upgrade the license or We transfer or reassign the license on Your request.
+We **reserve the right to verify** at any time after the purchase whether You, the Website and (if applicable) the Client are Qualified. Changes to the situation of You, the Website or the Client as well as changes to the published information on Our "Buy" page after the purchase or after the assignment to a Client do *not* take effect on an existing license unless You upgrade the license or We transfer or reassign the license on Your request.
 
 ## Free Licenses
 
