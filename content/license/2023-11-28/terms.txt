@@ -50,7 +50,7 @@ Before we get started with the conditions of the Agreement, let's define the ter
 
 - When we refer to **"You"**, we mean the licensee. Before purchasing Kirby, that's the individual or company that has downloaded and/or installed Kirby for a Development Installation, Private Installation or Extension Demo. When used for a Public Site, the licensee is the individual or company that has purchased the Kirby license. If you work on a client project and have purchased the Kirby license for your client, you (and *not* the client) are the licensee.
 - When we refer to **"We"**/**"Us"**/**"Our"**, we mean the licensor, the Content Folder GmbH & Co. KG. You can find Our company and contact information on Our (link: contact text: contact page).
-- "**Client**" is the individual or company on whose behalf You create or work on a Website. This only applies if the client is not the licensee.
+- **"Client"** is the individual or company on whose behalf You create or work on a Website. This only applies if the client is not the licensee.
 - A **"Website"** is a single Kirby project that is defined by its domain name and root directory (e.g. `https://sub.example.com` or `https://example.com/example/`). Each (sub)domain and root directory is a separate Website, even if the projects are related in any way. Exception: If You use the cross-domain multi-language feature with the same `content` folder, these domains count as the same Website.
   You may use Kirby as a headless backend or as a static site generator. In these cases the Website is defined by the domain and root directory of the user- or visitor-facing frontend(s).
 - A **"Development Installation"** is a Website that is installed purely for the purposes of development and client preview. It must only be accessible by a restricted number of users (like on a personal computer, on a server in a network with restricted access or when protecting a staging website with a password that only a restricted number of users know).
@@ -59,14 +59,14 @@ Before we get started with the conditions of the Agreement, let's define the ter
 - A **"Public Site"** is a Website that is *neither* a Development Installation, a Private Installation nor an Extension Demo.
 - A **"Minor Release"** is a stable Kirby release which adds smaller new features, minor functionality enhancements or bug fixes. This class of release is identified by the change of the revision to the right of the first decimal point, e.g. 4.1 to 4.2, 4.X.1 to 4.X.2.
 - A **"Major Release"** is a stable Kirby release which incorporates major new features or enhancements that increase or change the core functionality of Kirby to a larger extent. It may also deprecate existing parts of the Source Code or change them in a breaking way. This class of release is identified by the change of the revision to the left of the first decimal point, e.g. 4.X to 5.0.
-- A "**Major Generation**" is defined as all releases that share the revision to the left of the first decimal point, e.g. 4.0.0, 4.0.X, 4.X.0 and 4.X.X.
+- A **"Major Generation"** is defined as all releases that share the revision to the left of the first decimal point, e.g. 4.0.0, 4.0.X, 4.X.0 and 4.X.X.
 - The **"Source Code"** is defined as the contents of all files that are provided with Kirby and that make Kirby work. This includes (but is not limited to) all PHP, JavaScript, JSON, HTML and CSS files as well as all related image and other media files.
-- The "**Activation Date**" determines the included updates. It is defined like this:
+- The **"Activation Date"** determines the included updates. It is defined like this:
 	- For a newly purchased license, it is the date when the license was first activated for use with a Public Site.
 	- When You upgrade an already activated license, it is the date on which the upgrade was performed in Our license hub. If the license is still within the Included Updates Period, the Activation Date of the upgrade license will be set to the end of the Included Updates Period of the existing license.
 	- When You upgrade a license that had *not* been activated before, the upgrade license adopts the unactivated state of the existing license. The Activation Date is set on first activation for use with a Public Site.
-- The "**Included Updates Period**" is the time span of three (3) years after the Activation Date.
-- Licensees (You), Clients and Websites are "**Qualified**" if they satisfy the purchase requirements from the ["Order Process" section](#order-process) of this Agreement.
+- The **"Included Updates Period"** is the time span of three (3) years after the Activation Date.
+- Licensees (You), Clients and Websites are **"Qualified"** if they satisfy the purchase requirements from the ["Order Process" section](#order-process) of this Agreement.
 
 Every time you see one of these capitalized terms in the following text, it has the meaning that has been explained above.
 
