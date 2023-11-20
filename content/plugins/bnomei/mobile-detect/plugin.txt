@@ -2,7 +2,7 @@ Title: Mobile Detect
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -27,4 +27,4 @@ Example:
 
 ----
 
-Versions: 3
+Versions: 3,4

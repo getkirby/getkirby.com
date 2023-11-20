@@ -2,7 +2,7 @@ Title: Redirects
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -32,4 +32,4 @@ sections:
 
 ----
 
-Versions: 3
+Versions: 3,4

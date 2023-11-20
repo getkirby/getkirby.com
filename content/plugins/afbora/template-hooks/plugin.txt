@@ -2,7 +2,7 @@ Title: Template hooks
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -29,4 +29,4 @@ Example:
 
 ----
 
-Versions: 3
+Versions: 3,4

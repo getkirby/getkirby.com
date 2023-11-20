@@ -2,7 +2,7 @@ Title: Plopfile
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -30,4 +30,4 @@ plop snippet $ slideshow
 
 ----
 
-Versions: 3
+Versions: 3,4

@@ -2,7 +2,7 @@ Title: Multilanguage XML Sitemap
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -26,4 +26,4 @@ Description: Multilingual (or not) XML Sitemap generator. Options for Ignore/Inc
 
 ----
 
-Versions: 3
+Versions: 3,4
