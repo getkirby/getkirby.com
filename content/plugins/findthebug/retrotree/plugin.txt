@@ -2,7 +2,7 @@ Title: Retrotree Section
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -22,4 +22,4 @@ Description: Retrotree is a section plugin to display pages in real retro tree f
 
 ----
 
-Versions: 3
+Versions: 3,4

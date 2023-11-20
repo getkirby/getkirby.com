@@ -2,7 +2,7 @@ Title: SQLite Cache Driver
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -22,4 +22,4 @@ Description: SQLite based Cache-Driver
 
 ----
 
-Versions: 3
+Versions: 3,4

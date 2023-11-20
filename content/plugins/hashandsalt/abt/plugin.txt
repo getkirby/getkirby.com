@@ -2,7 +2,7 @@ Title: ABT
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -22,4 +22,4 @@ Description: This plugin lets you serve a subpage to page A as if it was page A,
 
 ----
 
-Versions: 3
+Versions: 3,4

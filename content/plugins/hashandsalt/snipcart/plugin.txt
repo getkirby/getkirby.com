@@ -2,7 +2,7 @@ Title: Snipcart
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -18,4 +18,4 @@ Description: Helps integrate Snipcart into a Kirby site
 
 ----
 
-Versions: 3
+Versions: 3,4

@@ -2,7 +2,7 @@ Title: Collect
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -28,12 +28,12 @@ Example:
 $mostPopularPage = $kirbyCollection
     ->sortBy('viewcount')->last()
     ->viewcount()->toInt();
-    
-// with collect plugin    
+
+// with collect plugin
 $mostPopularPage = $kirbyCollection
     ->collect()->max('content.viewcount');
 ```
 
 ----
 
-Versions: 3
+Versions: 3,4
