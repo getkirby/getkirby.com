@@ -1,9 +1,0 @@
-Title: Julie Ng
-----
-Link: https://twitter.com/jng5/status/199608333215342595
-----
-Text: Really loving how flexible Kirby is. The documentation is also really thorough and fab.
-----
-Bio: Developer at Microsoft
-----
-Website: http://julie.io/

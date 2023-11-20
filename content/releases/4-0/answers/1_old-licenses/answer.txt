@@ -1,8 +1,0 @@
-Title: What happens with licenses purchased before 2023?
-----
-Text:
-
-We really appreciate the support of everyone who uses our volume discounts to purchase licenses in advance and we don't want to break the trust that comes with such purchases.
-
-All unused v3 licenses, which have not been activated before 1.1.2023 will be upgraded to v4 for free as well.
-
