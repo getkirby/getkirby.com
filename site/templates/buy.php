@@ -188,7 +188,7 @@
 					</p>
 				</footer>
 			</div>
-			<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">Prices + VAT if applicable. By purchasing Kirby, you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a></p>
+			<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a></p>
 		</div>
   </div>
 
@@ -297,7 +297,7 @@
 	</section>
 
   <footer class="h2 max-w-xl">
-    Manage your existing licenses on our <a href="https://licenses.getkirby.com"><span class="link">license&nbsp;server</span> &rarr;</a>
+    Manage your existing licenses in our <a href="https://hub.getkirby.com"><span class="link">license&nbsp;hub</span> &rarr;</a>
   </footer>
 
 </article>

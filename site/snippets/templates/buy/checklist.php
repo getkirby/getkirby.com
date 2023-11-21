@@ -5,7 +5,7 @@
 	</li>
 	<li>
 		<?= icon('check') ?>
-		3 years of free upgrades
+		3 years of feature updates
 	</li>
 	<li>
 		<?= icon('check') ?>
