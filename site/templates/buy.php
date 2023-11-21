@@ -29,6 +29,9 @@
 	padding: .25rem .75rem;
 	padding-right: .5rem;
 }
+.revenue summary::-webkit-details-marker {
+	display: none;
+}
 .revenue summary svg {
 	color: var(--color-yellow-700);
 	margin-top: 1px;
