@@ -2,6 +2,10 @@ Title: Time-based, one-time passwords
 
 ----
 
+Menu: TOTP login
+
+----
+
 Subtitle: Making your Panel even more secure
 
 ----
