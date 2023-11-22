@@ -165,21 +165,21 @@ Kirby's control panel (aka. the Panel) comes without any pre-installed accounts.
 For security reasons, you cannot install the Panel on a public server by default. To allow this, you can enable the (link: docs/reference/system/options/panel#allow-the-panel-to-be-installed-on-a-remote-server text: `panel.install` option):
 </warning>
 
-## Purchase license & register your installation
+## Purchase license & activate your installation
 
-Once you publish your website, you need to (link: buy text: purchase a Kirby license). We will send you a unique license code for your domain. You can register your installation with the following steps.
+Once you publish your website, you need to (link: buy text: purchase a Kirby license). We will send you a unique license code for your domain. You can activate your license with the following steps:
 
 1. Open the Panel at `http://yourdomain.com/panel` and log in.
-2. Click on "Register" at the top.
+2. Click on "Activate" on the bottom left.
 3. Enter your license code and your email address and press "Ok".
 
 ### Without using the Panel
 
 If you don’t want the Panel to connect to our server, registration via the Panel fails, or you are not using the Panel at all, you can download your license files directly from our licenses website:
 
-1. Visit (link: https://licenses.getkirby.com).
+1. Visit (link: https://hub.getkirby.com).
 2. Log in with the email you used when you purchased the license and any order number.
-3. In the list of your licenses, click on the key you want to register.
+3. In the list of your licenses, click on the key you want to activate.
 4. Use the "Download license file" button to download the license file.
 5. Rename the downloaded file to `.license` (without extensions).
 6. Place it in the `/site/config/` folder of your Kirby installation.
