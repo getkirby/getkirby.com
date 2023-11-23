@@ -83,4 +83,3 @@ create:
   status: listed
 ```
 
-(image: page-creation-status.png)

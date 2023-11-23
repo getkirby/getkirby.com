@@ -1,6 +1,6 @@
 <div class="columns" style="--columns: 2">
 	<figure class="release-box bg-light shadow-xl" style="--span: 2">
-		<?= $section->image('blog.png')->resize(1600) ?>
+		<?= $section->image('company.png')->resize(1600) ?>
 	</figure>
 
 	<div class="release-text-box prose text-base">

@@ -56,12 +56,9 @@ Text:
 
 ## Screenshots
 
-(image: article.png)
 (image: blog.png)
-(image: dialogs.png)
-(image: drawer.png)
-(image: file.png)
-(image: open-menu.png)
-(image: shop.png)
-(image: site.png)
-(image: system.png)
+(image: company.png)
+(image: microsite.png)
+(image: products.png)
+(image: projects.png)
+(image: writing.png)

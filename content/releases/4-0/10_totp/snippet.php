@@ -32,7 +32,7 @@
 		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 	</div>
 
-	<figure class="release-padded-box bg-dark color-white grid place-items-center" style="grid-area: screenshot">
+	<figure class="release-box color-white grid place-items-center" style="grid-area: screenshot">
 		<?php snippet('templates/release-40/image', [
 			'alt'   => 'Time-based one-time passwords in Kirby 4',
 			'img'   => $section->image('totp.png')->resize(1500),
