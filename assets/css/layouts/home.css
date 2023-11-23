@@ -90,8 +90,6 @@
 }
 .playground-header-figure-wrapper {
   display: block;
-  box-shadow: var(--shadow-2xl);
-	border: 1px solid var(--color-gray-300);
   background: var(--color-light);
   overflow: hidden;
   transition: all 0.2s;
