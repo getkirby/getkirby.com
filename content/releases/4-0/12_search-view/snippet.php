@@ -12,6 +12,7 @@
 @media screen and (min-width: 60rem) {
 	.v4-search-columns {
 		grid-template-columns: 2fr 1fr;
+		grid-template-rows: 1fr auto;
 		grid-template-areas:
 			"view teaser"
 			"view dialog"
