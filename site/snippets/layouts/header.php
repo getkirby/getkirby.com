@@ -2,7 +2,7 @@
   <div class="container">
     <?php snippet('layouts/topbar', [
       'icon'   => '🌱',
-      'title'  => 'The next big step: Kirby 4 RC.1',
+      'title'  => 'The next big step: Kirby 4 RC.2',
       'button' => 'Learn more',
       'link'   => '/releases/4.0',
       'active' => $page->is('releases/4-0')
