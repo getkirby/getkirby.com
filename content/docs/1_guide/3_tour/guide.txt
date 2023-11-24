@@ -110,7 +110,7 @@ A typical Kirby template looks like this:
 
 Kirby's web interface is called the (glossary: Panel). You can find it at `yourdomain.com/panel`.
 
-(image: panel.jpg)
+(image: starterkit.png)
 
 While you can manage your site 100% in the file system, the Panel makes it a lot more comfortable to add new pages, edit content or upload files. In the background it will do all the hard work of creating folders and files for you.
 
