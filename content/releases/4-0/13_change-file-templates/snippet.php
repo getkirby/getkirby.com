@@ -10,7 +10,7 @@
 
 @media screen and (min-width: 60rem) {
 	.v4-file-template-columns {
-		grid-template-columns: 1fr 3fr;
+		grid-template-columns: 1fr 2fr;
 		grid-template-areas:
 			"teaser view"
 		;
