@@ -1,6 +1,7 @@
 <figure>
   <?= img('assets.png', [
     'alt' => 'A screenshot of an image gallery in the Panel',
+		'class' => 'rounded',
     'lightbox' => true,
     'src' => [
       'width' => 1000,

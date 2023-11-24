@@ -1,6 +1,7 @@
 <figure class="mb-6">
   <?= img('translations.png', [
     'alt' => 'A screenshot of the translation switcher',
+		'class' => 'rounded',
     'lightbox' => 'i18n',
     'src' => [
       'width' => 1000,
@@ -19,6 +20,7 @@
 <figure>
   <?= img('languages.png', [
     'alt' => 'A screenshot of the language manager',
+		'class' => 'rounded',
     'lightbox' => 'i18n',
     'src' => [
       'width' => 1000,

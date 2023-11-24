@@ -1,6 +1,7 @@
 <figure>
   <?= img('layouts.png', [
     'alt' => 'A screenshot of our layouts field',
+		'class' => 'rounded',
     'lightbox' => true,
     'src' => [
       'width' => 1000,

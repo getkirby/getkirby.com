@@ -1,7 +1,7 @@
 <figure>
   <?= img('panel.png', [
     'alt' => 'A screenshot of the Panel',
-    'class' => 'shadow-2xl',
+    'class' => 'rounded',
     'lightbox' => true,
     'src' => [
       'width'  => 1000,
