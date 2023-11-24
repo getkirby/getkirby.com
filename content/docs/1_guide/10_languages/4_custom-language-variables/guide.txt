@@ -65,7 +65,7 @@ return [
 
 Once you have added one or more languages, you can start adding translation variables via the Language editor. Visit the language you want to edit. You can now add language variables as key/value pairs. These variables will also be stored in the language definition files.
 
-(image: language-view.png)
+(image: language.png)
 
 Access to the language editor can be restricted via (link: text: permissions)
 

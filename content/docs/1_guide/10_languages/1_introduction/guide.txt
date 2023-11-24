@@ -78,13 +78,13 @@ If you don't use the Panel, you have to add the language extension to your text 
 
 After enabling languages in your config as described above, you can find the language setup on the Panel in the "Language" view.
 
-(image: language-view.png)
+(image: languages.png)
 
 The languages view is only visible in the menu when you switch to a multi-language setup. It features the same language editor from previous versions.
 
 To add the first/a new language, click on "Add a new language" and add the language name, code, direction and PHP locale string.
 
-(image: panel-adding-languages.png)
+(image: language-create-dialog.png)
 
 Once the default language is defined, you can add more languages as secondary languages. The Panel automatically renames all existing content and file meta data files and includes the language extension.
 
@@ -92,9 +92,10 @@ Once the default language is defined, you can add more languages as secondary la
 
 The Panel offers options to delete and edit a language. You can access them by clicking on the menu icon (three dots):
 
-(image: delete-language.png)
+(image: language-dropdown.png)
 
-*Edit*: Change the name, locale or reading direction of the language.
+*Edit*: Go to the language view to add and edit custom language variables.
+*Settings*: Change the name, locale or reading direction of the language.
 *Delete*: Delete the language.
 
 <warning>
