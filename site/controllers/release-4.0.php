@@ -6,7 +6,6 @@ return function ($page) {
 	});
 
 	return [
-		'questions' => $page->find('answers')->children(),
-		'sections'  => $sections,
+		'sections' => $sections,
 	];
 };

@@ -31,6 +31,7 @@ $tags['icon'] = [
  */
 $tags['image'] = [
 	'attr' => [
+		'alt',
 		'caption',
 		'link',
 		'title',

@@ -2,20 +2,6 @@ Title: Bug fixes
 
 ----
 
-Subtitle:
-
-----
-
-Github:
-
-- https://github.com/getkirby/v4/pull/43
-- https://github.com/getkirby/v4/pull/78
-- https://github.com/getkirby/v4/pull/83
-- https://github.com/getkirby/v4/pull/154
-- https://github.com/getkirby/v4/pull/182
-
-----
-
 Text:
 
 - Removed flickering from `k-pagination` when navigating

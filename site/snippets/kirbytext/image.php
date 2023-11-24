@@ -1,6 +1,7 @@
 <?php
 
 extract([
+  'alt'     => $alt ?? null,
   'class'   => $class ?? null,
   'file'    => $file ?? null,
   'link'    => $link ?? null,
@@ -12,7 +13,7 @@ echo Html::figure(
     Html::a($link ?? $file->url(),
       [
         img($file, [
-          'alt' => $file->alt()->or($caption),
+          'alt' => $alt ?? $file->alt()->or($caption),
           'src' => [
             'width' => 960
           ],

@@ -2,18 +2,6 @@ Title: Deprecated
 
 ----
 
-Subtitle:
-
-----
-
-Github:
-
-- https://github.com/getkirby/v4/pull/163
-- https://github.com/getkirby/v4/pull/171
-- https://github.com/getkirby/v4/pull/159
-
-----
-
 Text:
 
 #### Core

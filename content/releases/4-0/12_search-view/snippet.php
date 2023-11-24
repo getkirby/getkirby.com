@@ -6,13 +6,15 @@
 	grid-template-areas:
 		"view"
 		"teaser"
+		"dialog"
 }
 
 @media screen and (min-width: 60rem) {
 	.v4-search-columns {
-		grid-template-columns: 3fr 1fr;
+		grid-template-columns: 2fr 1fr;
 		grid-template-areas:
 			"view teaser"
+			"view dialog"
 		;
 	}
 }
@@ -28,4 +30,10 @@
 	<div class="release-text-box" style="grid-area: teaser">
 		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 	</div>
+	<figure class="release-box bg-light" style="grid-area: dialog">
+		<?php snippet('templates/release-40/image', [
+			'alt' => 'Dropdown with all available link types (URL, Page, File, Email and Phone Number)',
+			'img' => $section->image('search-dialog.png')
+		]) ?>
+	</figure>
 </div>

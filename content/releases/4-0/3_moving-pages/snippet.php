@@ -11,6 +11,7 @@
 @media screen and (min-width: 32rem) {
 	.v4-move-columns {
 		grid-template-columns: 2fr 3fr;
+		grid-template-rows: 1fr auto;
 		grid-template-areas:
 			"dialog dialog"
 			"dropdown teaser"
@@ -46,7 +47,7 @@
 	<figure class="v4-move-dropdown release-padded-box bg-light" style="grid-area: dropdown">
 		<?php snippet('templates/release-40/image', [
 			'alt'   => 'The page dropdowns have been extended with the new Move page option',
-			'img'   => $section->image('dropdown.png')->resize(330),
+			'img'   => $section->image('move-dropdown.png')->resize(330),
 			'class' => 'shadow-xl'
 		]) ?>
 	</figure>

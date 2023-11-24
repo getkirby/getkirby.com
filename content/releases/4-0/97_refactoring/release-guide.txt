@@ -2,29 +2,6 @@ Title: Refactoring
 
 ----
 
-Subtitle:
-
-----
-
-Github:
-
-- https://github.com/getkirby/v4/pull/43
-- https://github.com/getkirby/v4/pull/189
-- https://github.com/getkirby/v4/pull/82
-- https://github.com/getkirby/v4/pull/47
-- https://github.com/getkirby/v4/pull/48
-- https://github.com/getkirby/v4/pull/51
-- https://github.com/getkirby/v4/pull/52
-- https://github.com/getkirby/v4/pull/53
-- https://github.com/getkirby/v4/pull/54
-- https://github.com/getkirby/v4/pull/55
-- https://github.com/getkirby/v4/pull/56
-- https://github.com/getkirby/v4/pull/155
-- https://github.com/getkirby/v4/pull/156
-- https://github.com/getkirby/v4/pull/131
-
-----
-
 Text:
 
 #### Core

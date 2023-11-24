@@ -1,8 +1,0 @@
-Title: What will Kirby’s future licensing model look like?
-----
-Text:
-
-- No subscription
-- One-time purchase that allows to keep using the purchased version
-- Updates to a reasonable amount of new major versions will be included with each purchase
-- More details to be announced

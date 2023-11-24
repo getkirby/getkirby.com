@@ -1,0 +1,70 @@
+Title: Block field improvements
+
+----
+
+Menu: Block field
+
+----
+
+Subtitle: Our best field is now 25% bester
+
+----
+
+Teaser: So many new goodies for your editing experience: Field preview, split & merge, keyboard shortcuts, and more control about heading levels.
+
+----
+
+FieldPreviewExample:
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      demo:
+        wysiwyg: true
+        preview: fields
+        tabs:
+          main:
+            fields:
+              title:
+                type: text
+              subtitle:
+                type: text
+              description:
+                type: writer
+          settings:
+            label: Settings
+            fields: # ...
+```
+
+----
+
+Shortcuts:
+
+| Action | Shortcut |
+| - | - |
+| Remove block | `Meta + Backspace` |
+| Move focus up | `Meta + ↑` |
+| Move focus down | `Meta + ↓` |
+| Move block up | `Meta + Shift + ↑` |
+| Move block down | `Meta + Shift + ↓` |
+| Extend selection up | `Meta + Alt + ↑` |
+| Extend selection down | `Meta + Alt + ↓` |
+| Split block | `Meta + Enter` |
+| Merge block | `Meta + J` |
+
+----
+
+Splitting:
+
+- Split and merge text, list and headings
+- New option buttons to split or merge
+- Press enter at the end of a headline to append a new text block
+- Text block with `inline: true` for text field will split directly on Enter (`Shift + Enter` creates a hard line break)
+- Custom blocks can support splitting by implementing a `split` method
+
+----
+
+Link: /docs/reference/panel/fields/blocks
+

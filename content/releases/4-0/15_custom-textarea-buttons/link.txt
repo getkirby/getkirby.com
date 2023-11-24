@@ -1,0 +1,34 @@
+Title: Custom textarea buttons
+
+----
+
+Menu: Textarea buttons
+
+----
+
+Subtitle: Bring your own
+
+----
+
+Teaser: Missing that one special button for your custom text markup? Make one.
+
+----
+
+Link: /docs/reference/plugins/extensions/textarea-buttons
+
+----
+
+Example:
+
+```js "/site/plugins/acme-textarea"
+panel.plugin("acme/textarea", {
+  textareaButtons: {
+    highlight: {
+      label: "Highlight",
+      icon: "wand",
+      click: () => this.command("toggle", "<mark>", "</mark>")
+      shortcut: "m"
+    }
+  },
+});
+```

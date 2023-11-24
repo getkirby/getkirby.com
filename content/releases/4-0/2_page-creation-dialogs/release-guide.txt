@@ -10,26 +10,11 @@ Subtitle: Faster, better page creation
 
 ----
 
-Intro: You can customize the create dialog for a new page by adding fields, changing the label or the title field and disable the automatic redirect to the new page.
-
-----
-
 Teaser:
 
 Customize the page creation dialog to your needs.
 
 Give the title a fitting label, add new fields or disable redirecting to the new page. Did we mention you can also define the initial page status after creation now?
-
-----
-
-Github:
-
-- https://github.com/getkirby/v4/pull/25
-- https://github.com/getkirby/v4/pull/198
-
-----
-
-Nolt: 102
 
 ----
 
@@ -49,37 +34,4 @@ create:
 
 ----
 
-Text:
-
-## Configuration
-
-```yaml
-title: Product
-create:
-  title:
-    label: Product name
-  fields:
-    - price
-    - brand
-  redirect: false
-```
-
-(image: page-creation-dialog.png)
-
-### Supported field types
-
-Currently only some field types are supported (checkboxes, date, email, info, line, link, list, number, multiselect, radio, range, select, slug, tags, tel, text, toggles, time, url). Custom field types are disabled by default. To enable them, add your field type name to:
-
-```php
-Kirby\Panel\PageCreateDialog::$fieldTypes[] = 'yourFieldType'
-```
-
-## Custom Page Creation Status
-
-You can now also define a status for your newly created pages.
-
-```yaml
-create:
-  status: listed
-```
-
+Link: /docs/reference/panel/blueprints/page#page-creation-dialog
