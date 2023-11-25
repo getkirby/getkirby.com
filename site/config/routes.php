@@ -70,7 +70,7 @@ return [
 					$price->currency . ':' . $price->sale(),
 				];
 
-				go($product->checkout(['prices' => $prices]));
+				go($product->checkout('buy', ['prices' => $prices]));
 			} catch (Throwable $e) {
 				die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
 			}
@@ -92,7 +92,7 @@ return [
 					$price->currency . ':' . $price->volume($volume),
 				];
 
-				$url = $product->checkout([
+				$url = $product->checkout('buy', [
 					'prices'            => $prices,
 					'quantity'          => $volume,
 					'quantity_variable' => false,
@@ -115,7 +115,7 @@ return [
 					$price->currency . ':' . $price->volume($volume),
 				];
 
-				$url = $product->checkout([
+				$url = $product->checkout('buy', [
 					'prices'            => $prices,
 					'quantity'          => $volume,
 					'quantity_variable' => false,

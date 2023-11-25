@@ -2,11 +2,11 @@
 
 return [
 	'basic' => [
-		'id'      => 824338,
+		'product' => 824338,
 		'regular' => 99,
 	],
   	'enterprise' => [
-		'id'      => 824340,
+		'product' => 824340,
 		'regular' => 399,
 	],
 	'sale' => [
