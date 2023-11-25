@@ -183,7 +183,6 @@ Note that the settings in the standard `config.php` file are always used. If you
 General settings for all environments should be included in the standard `config.php` file to avoid code duplication.
 </info>
 
-<since v="3.9.8">
 ### CLI configuration
 
 If you are using Kirby with a command-line interface (or CLI for short), for example with the (link: plugins/getkirby/cli text: Kirby CLI) or with a custom script, you can define specific config overrides in a separate file:
@@ -193,7 +192,6 @@ If you are using Kirby with a command-line interface (or CLI for short), for exa
 ```
 
 The CLI-specific config file works like a host-specific config file in that it can override anything you put into your standard `config.php`.
-</since>
 
 ### Deployment configuration
 
