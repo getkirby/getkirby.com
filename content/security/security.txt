@@ -22,10 +22,14 @@ Please follow our (link: docs/guide/security text: security guide) to keep your 
 
 ## Reporting a Vulnerability
 
-If you have spotted a vulnerability in Kirby's core or the Panel, please make sure to let us know immediately. We take any report very seriously and we will react as soon as possible.
+If you have spotted a vulnerability in Kirby's core or the Panel, please make sure to let us know immediately. We appreciate your efforts to responsibly disclose your findings, and will make every effort to acknowledge your contributions.
 
-You can always write us directly at **<security@getkirby.com>**.
+You can always contact us directly at **<security@getkirby.com>**.
 If you want to encrypt your message, our GPG key is (link: pgp.asc text: 6E6B 057A F491 FFAD 363F  6F49 9101 10FA A459 E120).
+
+You can also use the [security advisory form on GitHub](https://github.com/getkirby/kirby/security/advisories/new) to securely and privately report a vulnerability to us.
+
+We will send you a response as soon as possible and will keep you informed on our progress towards a fix and announcement.
 
 <warning>
 Please do *not* write to us publicly, e.g. in the forum, on Discord or in a GitHub issue. A public report can give attackers valuable time to exploit the issue before it is fixed.
