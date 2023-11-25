@@ -66,9 +66,10 @@
 
 	<?php snippet('templates/release-40/versioning') ?>
 	<?php snippet('templates/release-40/changes') ?>
-	<?php snippet('templates/releases/get-started') ?>
+	<?php snippet('templates/release-40/contributors') ?>
 	<?php snippet('templates/release-40/release-menu') ?>
-
 </article>
+
+<?php snippet('templates/releases/get-started') ?>
 
 <?= js('assets/js/templates/release.js') ?>
