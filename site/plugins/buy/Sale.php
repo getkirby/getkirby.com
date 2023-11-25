@@ -2,7 +2,6 @@
 
 namespace Buy;
 
-
 class Sale
 {
 	public readonly string $start;
@@ -12,13 +11,14 @@ class Sale
 	public function __construct()
 	{
 		$options = option('buy.sale', []);
-		$this->start    = strtotime($options['start'] ?? '1970-01-01');
-		// the end date is inclusive, add one day
-		$this->end      = strtotime($options['end'] ?? '1970-01-01') + 86400;
+
+		// calculate timestamps in UTC, even if the server uses a different timezone
+		$this->start    = strtotime(($options['start'] ?? '1970-01-01') . ' 00:00Z');
+		$this->end      = strtotime(($options['end'] ?? '9999-01-01') . ' 24:00Z');
 		$this->discount = $options['discount'] ?? 0;
 	}
 
-		/**
+	/**
 	 * Returns the current sale discount (0 = no sale / 100 = for free)
 	 */
 	public function discount(): int
@@ -71,17 +71,18 @@ class Sale
 	}
 
 	/**
-	 * Wheether Kirby is currently in a sale
+	 * Whether Kirby is currently in a sale
 	 */
 	public function isActive(): bool
 	{
 		return time() >= $this->start && time() <= $this->end;
 	}
+
 	/**
 	 * Returns the text for the sale banner
 	 */
 	public function text(): string
 	{
-		return '🛍 &nbsp; <strong>Save  '. $this->discount() . '%</strong> until ' . $this->ends();
+		return '🛍 &nbsp; <strong>Save  ' . $this->discount() . '%</strong> until ' . $this->ends();
 	}
 }

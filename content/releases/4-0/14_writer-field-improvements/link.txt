@@ -104,3 +104,6 @@ panel.plugin("acme/writer", {
 
 Link: /docs/reference/panel/fields/writer
 
+----
+
+PluginLink: /docs/reference/plugins/extensions/writer-marks-nodes
