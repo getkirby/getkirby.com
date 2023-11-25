@@ -72,7 +72,7 @@
 	<div class="release-text-box">
 		<div class="prose text-lg">
 			<?= $section->pluginTeaser()->kt() ?>
-			<p><a href="<?= $section->url() ?>">Read more …</a></p>
+			<p><a href="<?= $section->pluginLink() ?>">Read more …</a></p>
 		</div>
 	</div>
 	<div class="release-code-box text-lg">

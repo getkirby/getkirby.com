@@ -25,4 +25,4 @@ cheap:
 
 ----
 
-Link: /docs/reference/panel/sections/pages#filtering-pages
+Link: /docs/reference/panel/sections/pages#filtering-pages__query

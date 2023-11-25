@@ -10,9 +10,8 @@ Subtitle: Copy & Change
 
 ----
 
-Teaser: More flexibility: Simply change a layout, and copy one or all layouts into other layout fields.
+Teaser: More flexibility: Easily change a layout, and copy one or all layouts into other layout fields.
 
 ----
 
 Link: /docs/reference/panel/fields/layout
-
