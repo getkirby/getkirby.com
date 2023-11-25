@@ -1,5 +1,5 @@
 <article>
-  <a class="bg-black block leading-tight" href="<?= $issue->url() ?>">
+  <a class="bg-black block leading-tight rounded overflow-hidden" href="<?= $issue->url() ?>">
     <figure>
       <p class="bg-black" style="--aspect-ratio: 16/9">
         <?= img($issue->image(), [
