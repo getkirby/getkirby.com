@@ -2,7 +2,6 @@
 
 namespace Buy;
 
-
 class Sale
 {
 	public readonly string $start;
@@ -18,7 +17,7 @@ class Sale
 		$this->discount = $options['discount'] ?? 0;
 	}
 
-		/**
+	/**
 	 * Returns the current sale discount (0 = no sale / 100 = for free)
 	 */
 	public function discount(): int
@@ -71,17 +70,18 @@ class Sale
 	}
 
 	/**
-	 * Wheether Kirby is currently in a sale
+	 * Whether Kirby is currently in a sale
 	 */
 	public function isActive(): bool
 	{
 		return time() >= $this->start && time() <= $this->end;
 	}
+
 	/**
 	 * Returns the text for the sale banner
 	 */
 	public function text(): string
 	{
-		return '🛍 &nbsp; <strong>Save  '. $this->discount() . '%</strong> until ' . $this->ends();
+		return '🛍 &nbsp; <strong>Save  ' . $this->discount() . '%</strong> until ' . $this->ends();
 	}
 }
