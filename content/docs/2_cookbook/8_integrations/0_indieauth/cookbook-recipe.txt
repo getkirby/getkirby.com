@@ -20,7 +20,7 @@ Text:
 
 ## Introduction
 
-To log in to a site or service, you often have two choices: Either log in with a social media account like a Twitter, GitHub or Google account or register with your email address.
+To log in to a site or service, you often have two choices: Either log in with a social media account like a Mastodon, GitHub or Google account or register with your email address.
 
 Social media services may go away some day – you don't control their domain. So it may happen that you are at some point locked out from the site or service, you were logging in to with that social media account. On the other hand, this method is quite easy.
 Email addresses (at least on your own domain) stay the same. But registering with an email address is complicated and takes quite long.
@@ -40,7 +40,7 @@ The big advantage: The site you are logging in to only stores your domain name. 
 The name "RelMeAuth" comes from the `rel="me"` attribute. It looks like this:
 
 ```html
-<a rel="me" href="https://twitter.com/example">Find me on Twitter</a>
+<a rel="me" href="https://mastodon.social/example">Find me on Mastodon</a>
 ```
 
 As you can see, the only difference to a normal link is the `rel="me"` attribute that allows the IndieAuth service to find the links to your social media profiles.
@@ -48,7 +48,7 @@ As you can see, the only difference to a normal link is the `rel="me"` attribute
 If a visible link to your profiles doesn't make sense on your homepage, the alternative is an invisible `<link>` tag:
 
 ```html
-<link rel="me" href="https://twitter.com/example">
+<link rel="me" href="https://mastodon.social/example">
 ```
 
 Let's add some to our `/site/snippets/header.php` snippet:
@@ -61,7 +61,7 @@ Let's add some to our `/site/snippets/header.php` snippet:
 
   <title><?= $site->title() ?> | <?= $page->title() ?></title>
 
-  <link rel="me" href="https://twitter.com/example">
+  <link rel="me" href="https://mastodon.social/example">
   <link rel="me" href="https://github.com/example">
   <link rel="me" href="https://facebook.com/example">
 </head>

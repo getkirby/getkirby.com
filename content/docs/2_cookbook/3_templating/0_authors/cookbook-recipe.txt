@@ -24,8 +24,8 @@ fields:
     website:
       label: Website
       type: url
-    twitter:
-        label : Twitter account
+    mastodon:
+        label : Mastodon account
         type: text
 ```
 
@@ -109,7 +109,7 @@ You can now fetch the author data in the article template. This is just a basic 
 
       <ul>
         <li><a href="<?= $author->website() ?>">Website</a></li>
-        <li><a href="<?= $author->twitter() ?>">Twitter</a></li>
+        <li><a href="<?= $author->mastodon() ?>">Mastodon</a></li>
       </ul>
 
     </aside>

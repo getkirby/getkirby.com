@@ -8,19 +8,13 @@ The plugin looks for metadata in a page's content file (e.g. article.txt). If th
 
 ## Available keys
 
-**Description:** The description field is used for search engines as a plain meta tag and additionally added as an OpenGraph meta tag, which is used by social media networks like e.g. Facebook or Twitter.
+**Description:** The description field is used for search engines as a plain meta tag and additionally added as an OpenGraph meta tag, which is used by social media networks like e.g. Mastodon or LinkedIn.
 
 **Thumbnail:** The thumbnail for sharing the page in a social network. See below for all options.
-
-**Twittercard:** Is "summary_large_image" by default. Set this to "summary", if you don’t want to display a large preview image.
 
 **Robots:** Generates the "robots" meta tag, that gives specifix instructions to crawlers. By default, this tag is not preset, unless a default value is defined in `site.txt`. Use a value, that you would also use if you wrote the markup directly (e.g. `noindex, nofollow`)
 
 **Title and Ogtitle:** By default, the metadata plugin will use the page’s `title` field. You can override this by defining an `ogtitle` field for a specific page. The `ogtitle` will then be used for OpenGraph metadata instead of the page title.
-
-**Twittersite:** The twitter account, which the site belongs to.
-
-**Twittercreator:** The twitter account, who created the current page.
 
 **Priority:** The priority for telling search engines about the importance of pages of your site. Must be a float value between 0.0 and 1.0. This value will not fall back to `site.txt`, but rather use 0.5 as default.
 

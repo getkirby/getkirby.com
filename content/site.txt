@@ -6,16 +6,4 @@ Description: Kirby is the content management system that adapts to any project. 
 
 ----
 
-Twittersite: @getkirby
-
-----
-
-Twittercreator: @getkirby
-
-----
-
-Twittercard: summary_large_image
-
-----
-
 OgImage: opengraph.png

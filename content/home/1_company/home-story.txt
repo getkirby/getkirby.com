@@ -57,7 +57,7 @@ Api:
 ```yaml
 {
   "site": {
-    "title": "H&C", "twitter": "@h-and-c", "instagram": "@h-and-c"
+    "title": "H&C", "mastodon": "@h-and-c@h-and-c.social", "instagram": "@h-and-c"
   },
   "projects": [
     { "title": "Creatious Labs.", "url": "/projects/creatious-labs" },
