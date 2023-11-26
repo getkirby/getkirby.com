@@ -22,7 +22,7 @@ fields:
 
 ### Result
 
-(image: default.png)
+(image: file-default.png)
 
 ## File blueprint with two column layout
 
@@ -40,7 +40,7 @@ columns:
             label: Caption
             type: textarea
             size: medium
-  sidebar:          
+  sidebar:
     width: 1/2
     sections:
       meta:
@@ -74,13 +74,13 @@ If you only need fields, you can simplify this example as below where we only us
 
 ### Result
 
-(image: image.png)
+(image: file-two-columns.png)
 
 ## File blueprint with `accept` option
 
 The accept option in this example limit file uploads to `.jpg` and `.png` images.
 
-```yaml 
+```yaml
 title: Cover
 
 accept:
@@ -104,7 +104,3 @@ fields:
     label: Caption
     type: textarea
 ```
-
-### Result
-
-(image: cover.png)
