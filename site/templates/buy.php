@@ -170,7 +170,7 @@
 						</k-price> per site
 					</a>
 
-					<p class="text-sm color-gray-700">Suitable for larger organizations with mission-critical projects</p>
+					<p class="text-sm color-gray-700">Suitable for larger companies and organizations</p>
 				</header>
 
 				<details class="revenue">
