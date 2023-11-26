@@ -14,24 +14,65 @@
         <label class="label">Presets</label>
         <div class="select">
           <select @input="setPreset">
-            <option v-for="(preset, id) in presets" :value="id">{{ preset.label }}</option>
+            <option
+							v-for="(preset, id) in presets"
+							:value="id"
+						>
+							{{ preset.label }}
+						</option>
           </select>
         </div>
       </div>
       <div class="field">
         <label class="label">Dimensions</label>
         <div class="columns" style="--columns: 2; --gap: var(--spacing-1)">
-          <input class="input" type="number" min="100" v-model="settings.width" placeholder="width">
-          <input class="input" type="number" min="100" v-model="settings.height" placeholder="height">
+          <input
+						class="input"
+						type="number"
+						min="100"
+						v-model="settings.width"
+						placeholder="width"
+					>
+          <input
+						class="input"
+						type="number"
+						min="100"
+						v-model="settings.height"
+						placeholder="height"
+					>
         </div>
       </div>
       <div class="field">
         <label class="label">Margins</label>
         <div class="columns" style="--columns: 2; --gap: var(--spacing-1)">
-          <input class="input" type="number" min="0" v-model="settings.mt" placeholder="top">
-          <input class="input" type="number" min="0" v-model="settings.mr" placeholder="right">
-          <input class="input" type="number" min="0" v-model="settings.mb" placeholder="bottom">
-          <input class="input" type="number" min="0" v-model="settings.ml" placeholder="left">
+          <input
+						class="input"
+						type="number"
+						min="0"
+						v-model="settings.mt"
+						placeholder="top"
+					>
+          <input
+						class="input"
+						type="number"
+						min="0"
+						v-model="settings.mr"
+						placeholder="right"
+					>
+          <input
+						class="input"
+						type="number"
+						min="0"
+						v-model="settings.mb"
+						placeholder="bottom"
+					>
+          <input
+						class="input"
+						type="number"
+						min="0"
+						v-model="settings.ml"
+						placeholder="left"
+					>
         </div>
       </div>
       <div class="columns" style="--columns: 2; --gap: var(--spacing-1)">
@@ -51,7 +92,13 @@
       <div class="field">
         <label class="label">Background</label>
         <div class="colors">
-          <button v-for="color in colors" type="button" :aria-selected="settings.background === color" :style="'--color:' + color" @click="settings.background = color">
+          <button
+						v-for="color in colors"
+						type="button"
+						:aria-selected="settings.background === color"
+						:style="'--color:' + color"
+						@click="settings.background = color"
+					>
             <span></span>
           </button>
         </div>
@@ -108,7 +155,13 @@
       }">
 
       <header class="editor-header">
-        <div class="editor-headline" :style="{ fontWeight: settings.fontWeight }">
+        <div
+					class="editor-headline"
+					:style="{
+						color: settings.color,
+						fontWeight: settings.fontWeight
+					}"
+				>
           <input v-model="settings.headline">
         </div>
         <div v-if="settings.logo" class="editor-logo"><?= icon('icon') ?></div>
@@ -307,7 +360,10 @@
     ...defaults,
     ...presets.social,
     get color() {
-      if (this.background === colors[0] || this.background === colors[1]) {
+      if (
+				this.background === colors.white ||
+				this.background === colors.light
+			) {
         return "black";
       }
 
