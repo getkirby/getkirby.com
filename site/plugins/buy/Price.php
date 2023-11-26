@@ -77,7 +77,11 @@ class Price
 
 		if ($sale->isActive() === true) {
 			$price *= 1 - $sale->discount() / 100;
-			return round($price);
+
+			// use the pretty rounding if possible, but ensure that
+			// the price is never higher than the mathematical sale
+			// price from the discount percentage we promise
+			return min(static::round($price), floor($price));
 		}
 
 		return $price;
