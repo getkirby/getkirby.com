@@ -80,7 +80,7 @@ Did you know you cannot just have virtual pages in a Kirby installation, but als
 ++++
 
 ### Block Factory
-A recipe full of [example block types](https://getkirby.com/docs/cookbook/panel/block-collection) like accordions, text boxes, cards, and nested blocks.
+A recipe full of [example block types](https://getkirby.com/docs/guide/page-builder/block-examples) like accordions, text boxes, cards, and nested blocks.
 
 (…columns)
 
