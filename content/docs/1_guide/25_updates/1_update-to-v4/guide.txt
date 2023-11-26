@@ -53,6 +53,16 @@ The Panel in Kirby 4 supports the following modern browser versions:
 
 This guide highlights some of the key changes required when upgrading to Kirby 4. There can be further smaller breaking changes affecting your specific project. Please have a look at the (link: releases/4.0/#breaking-changes text: full list of breaking changes).
 
+### License upgrade
+
+Kirby 4 is a major release and requires a license upgrade. Licenses for Kirby 4+ (link: license/2023-11-28/summary text: include free feature updates for three years).
+
+All Kirby 3 licenses that had not been activated before Jan 1, 2023 can be upgraded to the new licensing model for free.
+
+For everyone else, we offer an attractive upgrade price, no matter if you have a license for Kirby 1, Kirby 2 or Kirby 3.
+
+You can perform the upgrade directly from the Kirby 4 Panel of your site or via our (link: https://hub.getkirby.com text: license hub).
+
 ### Compatible plugins
 
 To see which of the plugins you use already supports Kirby 4, have a look at this (link: plugins/v4 text: list of v4 compatible plugins).
