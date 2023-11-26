@@ -74,7 +74,7 @@ class PageMeta {
 					'url' => url(),
 					'logo' => url('/assets/images/kirby-signet.svg'),
 					'sameAs' => [
-						'https://twitter.com/getkirby',
+						'https://mastodon.social/@getkirby',
 						'https://instagram.com/getkirby',
 					],
 				],
@@ -151,11 +151,6 @@ class PageMeta {
 			$meta['description']  = $description->excerpt(160);
 		}
 
-		$twitterCard = $this->get('twittercard', true);
-		if ($twitterCard->isNotEmpty()) {
-			$meta['twitter:card'] = $twitterCard->value();
-		}
-
 		// Image
 		if ($thumbnail = $this->thumbnail()) {
 			$og['og:image'] = url($thumbnail->url());
@@ -163,19 +158,6 @@ class PageMeta {
 			if ($thumbnail->alt()->isNotEmpty()) {
 				$og['og:image:alt'] = $thumbnail->alt()->value();
 			}
-		} else if ($meta['twitter:card'] === 'summary_large_image') {
-			$meta['twitter:card'] = 'summary';
-		}
-
-		// Twitter settings
-		$twitterSite = $this->get('twittersite', true);
-		if ($twitterSite->isNotEmpty()) {
-			$meta['twitter:site'] = $twitterSite->value();
-		}
-
-		$twitterCreator = $this->get('twittercreator', true);
-		if ($twitterCreator->isNotEmpty()) {
-			$meta['twitter:creator'] = $twitterCreator->value();
 		}
 
 		return Tpl::load(__DIR__ . '/templates/social.php', compact('meta', 'og'));

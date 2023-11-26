@@ -153,9 +153,9 @@ As you can see this will give you a lot more control and structure for your cont
 ### A list of profiles
 
 ```yaml
-Twitter:
-  Username: bastianallgeier
-  Link:     http://twitter.com/bastianallgeier
+Mastodon:
+  Username: @bastianallgeier@mastodon.social
+  Link:     https://mastodon.social/@bastianallgeier
 Zootool:
   Username: bastian
   Link:     http://zootool.com/bastian
