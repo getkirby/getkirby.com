@@ -10,7 +10,7 @@ Show beautiful stats for your site or shop: revenues, orders, likes, views, etc.
 
 Text:
 
-(image: stats.png)
+(image: stats-section.png)
 
 ## Example
 
