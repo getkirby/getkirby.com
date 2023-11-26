@@ -154,7 +154,7 @@ As you can see this will give you a lot more control and structure for your cont
 
 ```yaml
 Mastodon:
-  Username: @bastianallgeier@mastodon.social
+  Username: "@bastianallgeier@mastodon.social"
   Link:     https://mastodon.social/@bastianallgeier
 Zootool:
   Username: bastian
