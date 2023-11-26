@@ -7,7 +7,7 @@ return [
 	],
   	'enterprise' => [
 		'product' => 824340,
-		'regular' => 399,
+		'regular' => 349,
 	],
 	'sale' => [
 		'start'    => '2023-11-01',
