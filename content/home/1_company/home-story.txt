@@ -54,7 +54,7 @@ PhoneImage: agency.jpg
 
 Api:
 
-```yaml
+```json
 {
   "site": {
     "title": "H&C", "mastodon": "@h-and-c@h-and-c.social", "instagram": "@h-and-c"
