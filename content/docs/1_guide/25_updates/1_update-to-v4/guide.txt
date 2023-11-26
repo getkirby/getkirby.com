@@ -51,6 +51,8 @@ The Panel in Kirby 4 supports the following modern browser versions:
 
 ## For site developers
 
+This guide highlights some of the key changes required when upgrading to Kirby 4. There can be further smaller breaking changes affecting your specific project. Please have a look at the (link: releases/4.0/#breaking-changes text: full list of breaking changes).
+
 ### PHP type hints
 
 We have added a lot more (link: https://www.php.net/manual/en/language.types.declarations.php text: PHP type hints) throughout the system (e.g. for paramters, what methods return). This strictness really reduces the risk of errors in our PHP code. As consequence, when extending core classes, e.g. in a custom page model, you will have to add some of these type hints to your code as well.

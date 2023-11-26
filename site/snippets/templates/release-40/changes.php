@@ -43,6 +43,7 @@
 		</div>
 
 		<div class="release-padded-box bg-light">
+			<a id="breaking-changes"></a>
 			<h3 class="h3 mb-6">Breaking changes</h3>
 			<div class="prose text-sm">
 				<?= $page->find('breaking-changes')->text()->kt() ?>
