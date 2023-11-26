@@ -12,7 +12,7 @@ Text:
 
 With the fields section you can create flexible forms for your pages. Add all fields in a single fields section or combine multiple sections to achieve more intuitive (glossary: Panel) layouts.
 
-(image: fields.png)
+(image: fields-section.png)
 
 ## Example
 
@@ -117,7 +117,8 @@ When the field setup gets too complex, you can also spread forms over multiple t
 Here's an example how to move the meta information for the article above into another tab.
 
 #### Content Tab
-(image: fields-in-tabs-1.png)
+
+(image: fields-in-tabs.png)
 
 #### Info Tab
 (image: fields-in-tabs-2.png)
