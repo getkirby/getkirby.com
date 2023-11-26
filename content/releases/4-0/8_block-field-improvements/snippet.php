@@ -64,8 +64,8 @@
 	</div>
 
 	<figure class="release-padded-box bg-dark color-white grid place-items-center">
-		<video controls class="rounded shadow-xl" style="width: 100%; --span: 2">
-			<source src="<?= $section->file('splitting-1.mp4')->url() ?>" type="video/mp4" autoplay>
+		<video controls autoplay class="rounded shadow-xl" style="width: 100%; --span: 2">
+			<source src="<?= $section->file('splitting.mp4')->url() ?>" type="video/mp4">
 		</video>
 	</figure>
 </div>

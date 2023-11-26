@@ -36,8 +36,8 @@
 	</div>
 
 	<figure class="v4-layout-video release-padded-box bg-dark color-white grid place-items-center" style="grid-area: video">
-		<video controls class="rounded shadow-xl" style="width: 100%">
-			<source src="<?= $section->file('change-layout-1.mp4')->url() ?>" type="video/mp4" autoplay>
+		<video controls autoplay class="rounded shadow-xl" style="width: 100%">
+			<source src="<?= $section->file('change-layout.mp4')->url() ?>" type="video/mp4">
 		</video>
 	</figure>
 
