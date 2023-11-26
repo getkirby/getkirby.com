@@ -132,7 +132,7 @@ Kirby 4 adds a new core file method: `$file->manipulate()`.  This means, that yo
 
 ### Users field
 
-The `users` field doesn't automatically use the current user as default anymore. Add default: true to keep this functionality:
+The `users` field doesn't automatically use the current user as default anymore. Add `default: true` to keep this functionality:
 
 ```yaml
 author:
@@ -145,6 +145,8 @@ author:
 ### Panel: new look
 
 The v4 Panel comes with a fresh look. Using core UI components in your plugins will help to automatically adapt your plugins to this new look. But we have also opened up (link: https://lab.getkirby.com/public/lab/basics/design text: our design system), so you can make use of it as we do.
+
+We have also replaced our icon set with the open-source [Remix Icon library](https://remixicon.com). If your plugin uses custom icons, check if Kirby now ships with icons that fit to your use case. Kirby doesn't ship the full Remix set, so you may also want to take a look at their site and pick new icons from there that fit with the rest of Kirby's new icons.
 
 ### UI docs and lab
 

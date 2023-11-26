@@ -14,4 +14,4 @@ Teaser: Our new Panel JavaScript API gives you access to the most important Pane
 
 ----
 
-Link: /docs/reference/plugins/ui
+Link: /docs/guide/updates/update-to-v4#for-plugin-developers__new-panel-javascript-api
