@@ -2,7 +2,7 @@ Title: Autoresize
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -37,4 +37,4 @@ return [
 
 ----
 
-Versions: 3
+Versions: 3,4

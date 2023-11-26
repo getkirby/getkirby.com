@@ -2,7 +2,7 @@ Title: Relationship field
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -22,4 +22,4 @@ Description: The Relationship field allows you to select and sort multiple items
 
 ----
 
-Versions: 3
+Versions: 3,4

@@ -2,7 +2,7 @@ Title: PWA (Progressive Web App)
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -30,4 +30,4 @@ Description: Turns your Kirby website into a PWA: progressive web app.
 
 ----
 
-Versions: 3
+Versions: 3,4

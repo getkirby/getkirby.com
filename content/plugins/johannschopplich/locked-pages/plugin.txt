@@ -2,7 +2,7 @@ Title: Locked Pages
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -31,4 +31,8 @@ fields:
 
 ----
 
-Versions: 3
+Similar: kerli81/secured-pages
+
+----
+
+Versions: 3,4

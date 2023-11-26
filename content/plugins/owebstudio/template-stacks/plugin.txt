@@ -2,7 +2,7 @@ Title: Template Stacks
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -26,4 +26,4 @@ Description: Template stacks allows you to push to named stacks which can be ren
 
 ----
 
-Versions: 3
+Versions: 3,4

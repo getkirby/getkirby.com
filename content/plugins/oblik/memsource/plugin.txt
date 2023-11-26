@@ -2,7 +2,7 @@ Title: Memsource
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -22,4 +22,4 @@ Description: This plugin allows you to translate your entire site content in the
 
 ----
 
-Versions: 3
+Versions: 3,4
