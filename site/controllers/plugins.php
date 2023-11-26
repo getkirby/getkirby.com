@@ -24,9 +24,9 @@ return function($page, $filter) {
 			$plugins  = $page
 					->grandChildren()
 					->sortBy('title', 'asc');
-	} else if ($filter === 'v4') {
+	} else if ($filter === 'k4') {
 			$heading  = 'Kirby 4 plugins';
-			$category = 'v4';
+			$category = 'k4';
 			$plugins  = $page
 					->grandChildren()
 					->filter('versions', '*=', '4')

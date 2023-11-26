@@ -1,4 +1,4 @@
-Title: Update to v4
+Title: Update to Kirby 4
 
 ----
 
@@ -65,7 +65,7 @@ You can perform the upgrade directly from the Kirby 4 Panel of your site or via 
 
 ### Compatible plugins
 
-To see which of the plugins you use already support Kirby 4, have a look at this (link: plugins/v4 text: list of Kirby 4 compatible plugins).
+To see which of the plugins you use already support Kirby 4, have a look at this (link: plugins/k4 text: list of Kirby 4 compatible plugins).
 
 ### Core features replacing plugins
 

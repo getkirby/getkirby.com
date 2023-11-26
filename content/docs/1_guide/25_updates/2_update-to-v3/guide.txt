@@ -1,4 +1,4 @@
-Title: Update to v3
+Title: Update to Kirby 3
 
 ----
 

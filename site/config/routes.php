@@ -140,9 +140,9 @@ return [
 		}
 	],
 	[
-		'pattern' => 'plugins/v4',
+		'pattern' => 'plugins/k4',
 		'action'  => function () {
-			return page('plugins')->render(['filter' => 'v4']);
+			return page('plugins')->render(['filter' => 'k4']);
 		}
 	],
 	[
