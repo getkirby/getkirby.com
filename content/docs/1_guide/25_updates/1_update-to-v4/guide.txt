@@ -48,3 +48,51 @@ The Panel in Kirby 4 supports the following modern browser versions:
         </tr>
     </table>
 </div>
+
+## For site developers
+
+### PHP type hints
+
+We have added a lot more (link: https://www.php.net/manual/en/language.types.declarations.php text: PHP type hints) throughout the system (e.g. for paramters, what methods return). This strictness really reduces the risk of errors in our PHP code. As consequence, when extending core classes, e.g. in a custom page model, you will have to add some of these type hints to your code as well.
+
+A common example for an error you could see with your v3 code in v4 is
+
+```
+Declaration of BlogPage::children() must be compatible with Kirby\Cms\Page::children(): Kirby\Cms\Pages
+```
+
+What this means is that you have a custom page `blog` model that overwrites the default `children()` method, e.g.
+
+```php
+class BlogPage extends Page
+{
+	public function children()
+	{
+		// ...
+	}
+```
+
+What the error message is expressin is that it misses the return type for a `Pages` object, which we have added to the core. To fix the error message, you have to add this type hint to your code as well:
+
+```php
+use Kirby\Cms\Pages;
+
+class BlogPage extends Page
+{
+	public function children(): Pages
+	{
+		// ...
+	}
+```
+
+Depending on what of the core code you extend in your site, you might run into similar error messages. Have a close look at the error message and it will tell you which part is affected, so that you can compare it with the core code and spot what type hints need to be added.
+
+### Permissions of almighty `kirby` user
+
+```php
+$kirby->impersonate('kirby')
+```
+
+In v3, the almighty `kirby` user wasn't that almighty but still restricted by the permissions of the admin role. In v4, it is truly almighty and not bound to any restrictions. Use where needed with caution.
+
+## For plugin developers
