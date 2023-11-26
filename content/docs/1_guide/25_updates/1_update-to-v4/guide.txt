@@ -21,7 +21,7 @@ Kirby 4 requires PHP 8.1, 8.2 or 8.3. You can check your current PHP version in 
 
 (image: system-view.png)
 
-If you see **PHP 8.1.\*, PHP 8.2\* or PHP 8.3.\***, you are already good to go.
+If you see **PHP 8.1.\*, PHP 8.2.\* or PHP 8.3.\***, you are already good to go.
 
 If you see **PHP 7.\* or PHP 8.0.\***, you need to update your server. Most hosting providers allow changing the PHP version from the admin backend. We recommend to switch to PHP 8.2 because this version is already compatible with Kirby 3.9 and will (link: https://www.php.net/supported-versions.php text: receive security updates for two more years), so you won't have to do another PHP migration until then.
 
@@ -183,7 +183,7 @@ Note that your plugin will not support Kirby 4.0 if it is affected by a breaking
 
 The v4 Panel comes with a fresh look. Using core UI components in your plugins will help to automatically adapt your plugins to this new look. But we have also opened up (link: https://lab.getkirby.com/public/lab/basics/design text: our design system), so you can make use of it as we do.
 
-We have also replaced our icon set with the open-source [Remix Icon library](https://remixicon.com). If your plugin uses custom icons, check if Kirby now ships with icons that fit to your use case. Kirby doesn't ship the full Remix set, so you may also want to take a look at their site and pick new icons from there that fit with the rest of Kirby's new icons.
+We have also replaced our icon set with the open-source [Remix Icon library](https://remixicon.com). If your plugin uses custom icons, check if Kirby now ships with icons that fit your use case. Kirby doesn't ship the full Remix set, so you may also want to take a look at their site and pick new icons from there that fit with the rest of Kirby's new icons.
 
 ### UI docs and lab
 
