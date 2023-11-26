@@ -12,12 +12,12 @@ Text:
 
 A pages section can be used to show children of the current page or of any other **single** parent page in your site. It also the standard way for adding new pages to the selected parent page if the (link: #filtering-pages text: selected `status` option) allows it.
 
-(image: pages.png)
+(image: pages-section.png)
 
 ## Example
 
 ```yaml
-title: Blog
+title: Shop
 
 sections:
 
@@ -25,20 +25,18 @@ sections:
     label: Drafts
     type: pages
     status: draft
-    templates: article
+    templates: product
 
   published:
-    label: Published Articles
+    label: Published Products
     type: pages
     status: listed
-    templates: article
+    templates: product
 ```
 
 (screencast: https://www.youtube.com/watch?v=rVcg4SlAh-A title: A closer look at pages sections text: Show subpages as cards or list, add additional info for each page, control the card design – there are hardly any limits.)
 
 <info>
-<p>A pages section can be filtered by template and by status, but its members cannot be filtered using a query. If you need to query pages, a (link: docs/reference/panel/fields/pages text: pages field) or a (link: docs/reference/plugins/extensions/sections text: custom section plugin) might be an alternative.</p>
-
 <p>Sections do not store anything in the content file, which means that you cannot fetch content from a section in your templates like you would from field content.</p>
 </info>
 
@@ -108,7 +106,7 @@ The `list` layout is perfect for more text-heavy pages, like articles, link list
 layout: list
 ```
 
-(image: list.png)
+(image: pages-section-list.png)
 
 ### Cards layout
 
@@ -118,17 +116,17 @@ The `card` layout is great for media-heavy pages, like galleries, products, proj
 layout: cards
 ```
 
-(image: cards.png)
+(image: pages-section-cards.png)
 
 (docs: sections/cardlets)
 
-(image: cardlets.png)
+(image: pages-section-cardlets.png)
 
 ### Table layout
 
 The table layout has the highest information density. Columns can be fully customized and make it perfect if you need to show multiple values at once for better overview and scannability.
 
-(image: table.png)
+(image: pages-section-table.png)
 
 ```yaml
 layout: table
@@ -568,7 +566,7 @@ min: 2
 
 ## Search
 
-(image: search.png)
+(image: pages-section-search.png)
 
 Section search is disabled by default. You can use the `search` option to enable it.
 
