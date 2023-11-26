@@ -40,7 +40,7 @@ The big advantage: The site you are logging in to only stores your domain name. 
 The name "RelMeAuth" comes from the `rel="me"` attribute. It looks like this:
 
 ```html
-<a rel="me" href="https://mastodon.social/example">Find me on Mastodon</a>
+<a rel="me" href="https://mastodon.social/@example">Find me on Mastodon</a>
 ```
 
 As you can see, the only difference to a normal link is the `rel="me"` attribute that allows the IndieAuth service to find the links to your social media profiles.
