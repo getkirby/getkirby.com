@@ -126,6 +126,9 @@ $kirby->impersonate('kirby')
 
 In v3, the almighty `kirby` user wasn't that almighty but still restricted by the permissions of the admin role. In v4, it is truly almighty and not bound to any restrictions. Use where needed with caution.
 
+### New core file method and reserved files field
+
+Kirby 4 adds a new core file method: `$file->manipulate()`.  This means, that you can no longer use this method name for custom file methods. Also, the `focus` field name is now reserved by Kirby for file meta data. If you are using this field name in your file meta data or for custom file methods, please need to rename those files or methods.
 
 ## For plugin developers
 
