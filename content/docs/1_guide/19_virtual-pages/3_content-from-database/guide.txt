@@ -197,7 +197,7 @@ class CommentPage extends Kirby\Cms\Page
         return Db::delete('comments', ['slug' => $this->slug()]);
     }
 
-    public function title(): Kirby\Cms\Field
+    public function title(): Kirby\Content\Field
     {
         return $this->text()->excerpt(100)->or('New comment');
     }
