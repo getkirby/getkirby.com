@@ -98,3 +98,17 @@ $kirby->impersonate('kirby')
 In v3, the almighty `kirby` user wasn't that almighty but still restricted by the permissions of the admin role. In v4, it is truly almighty and not bound to any restrictions. Use where needed with caution.
 
 ## For plugin developers
+
+### Panel: new look
+
+The v4 Panel comes in a fresh look. Using core UI components will help you to automatically fit in with your plugins. But we have also opened up (link: https://lab.getkirby.com/public/lab/basics/design text: our design system), so you can make use of it as we do.
+
+### UI docs and lab
+
+The Panel UI components have been a pain point in v3 as they often were quite undocumented and unstable. v4 takes a big step here by introducing (link: https://lab.getkirby.com/public/lab/docs text: live Panel UI docs) as well as a (link: https://lab.getkirby.com/public/lab text: Lab with many examples) how to use the components. This has helped us to mature our components and will allow us to handle breaking changes of UI components with the same caution as how we've already treated them in the PHP backend.
+
+When migrating from v3 to v4 with your plugins, you might encounter situations where previous usage of UI components broke. Please take a look at the Lab examples and feel free to reach out to the team to set them up for v4.
+
+### New `panel` JavaScript API
+
+We added a new Panel JavaScript API that gives you access to the most important Panel features: Control dialogs, drawers, notifications and more from your plugins, your custom panel.js or even the console. Explore (link: https://lab.getkirby.com/public/lab/internals/panel text: examples of the various interfaces) in the Lab.
