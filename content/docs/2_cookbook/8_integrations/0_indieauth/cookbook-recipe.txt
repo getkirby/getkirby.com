@@ -48,7 +48,7 @@ As you can see, the only difference to a normal link is the `rel="me"` attribute
 If a visible link to your profiles doesn't make sense on your homepage, the alternative is an invisible `<link>` tag:
 
 ```html
-<link rel="me" href="https://mastodon.social/example">
+<link rel="me" href="https://mastodon.social/@example">
 ```
 
 Let's add some to our `/site/snippets/header.php` snippet:
