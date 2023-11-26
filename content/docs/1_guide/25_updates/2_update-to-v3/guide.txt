@@ -2,11 +2,483 @@ Title: Update to v3
 
 ----
 
-Description:
+Description: Learn how to upgrade an existing project to Kirby 3.
 
 ----
 Text:
 
-### Upgrade from Kirby 2
+Kirby 3 comes with a wealth of new features and changes under the hood. In this guide we go through the steps necessary to upgrade your existing Kirby 2 site to Kirby 3 step by step.
 
-If you want to upgrade an existing Kirby 2 installation, make sure to follow all the steps from our (link: docs/cookbook/setup/migrate-site text: Kirby 2 upgrade) recipe.
+<info>
+This guide was initially written for upgrading from Kirby 2 to version 3.0. Over the years, newer v3 versions have been released with their own breaking changes etc.
+
+If you are planning to upgrade from Kirby 2 to a higher v3 verison, e.g. 3.9, please also make sure to read the individual migration notes in addition:
+- (link: https://github.com/getkirby/kirby/releases/tag/3.2.0 text: Release notes 3.2)
+- (link: https://github.com/getkirby/kirby/releases/tag/3.3.0 text: Release notes 3.3)
+- (link: https://github.com/getkirby/kirby/releases/tag/3.4.0 text: Release notes 3.4)
+- (link: releases/3.5 text: Release notes 3.5)
+- (link: releases/3.6 text: Release notes 3.6)
+- (link: releases/3.7 text: Release notes 3.7)
+- (link: releases/3.8/migration-sites text: Migrate site) and (link: releases/3.8/migration-plugins text: migrate plugins) to 3.8
+- (link: releases/3.9/migration-sites text: Migrate site) and (link: releases/3.9/migration-plugins text: migrate plugins) to 3.9
+</info>
+
+
+## Requirements and installation
+
+<warning>
+While we hope upgrading to version 3 will be rather smooth for you, there are always things that can go wrong during such a process. We urge you to **make a backup** of your Kirby 2 site in any case.
+</warning>
+
+### Dropped support for PHP < 8.0
+
+Kirby 3 now requires PHP 8.0+. Please check if your server supports this PHP version before upgrading.
+
+<info>
+PHP version support has changed since Kirby 3 was originally released. Because old PHP versions don't receive bugfix or even security updates after a few years, Kirby only supports recent PHP versions. You can find the currently compatible PHP versions (link: docs/guide/quickstart#requirements text: in the requirements).
+</info>
+
+### No Kirby CLI support
+
+The Kirby CLI is no longer compatible with Kirby 3. Kirby and extensions can instead be installed (link: docs/guide/installation text: manually), with (link: docs/cookbook/setup/git text: Git) or with (link: docs/cookbook/setup/composer text: Composer).
+
+
+## Folder and file structure
+
+### Replace core files and folders
+
+1. Replace the old `/kirby` folder with the new `/kirby`folder.
+2. The old `index.php` is no longer compatible. Replace it with the new one.
+3. If you are on an Apache server, replace the old `.htaccess` file with the new one. On other servers, change your server configuration accordingly.
+
+### Delete the `thumbs` folder
+
+Thumbnails and other media files are now located in `/media` and no longer in the `/thumbs` folder. Removing it should be enough. Thumbnails will be recreated in the `/media` folder automatically afterwards.
+
+### New number separator for folders: underscore
+
+To fix many of the sorting number issues in Kirby 2, we changed the ordering number separator of the content folder names from
+
+```filesystem
+1-projects/
+```
+
+to
+
+```filesystem
+1_projects/
+```
+
+To change the sorting numbers of all your content folders, put the following script into your document root next to the `index.php` and run it with `http://yourdomain.com/upgrade.php`. Delete this file afterwards.
+
+```php "/upgrade.php"
+<?php
+
+require __DIR__ . '/kirby/bootstrap.php';
+
+Kirby\Cms\System::upgradeContent(__DIR__ . '/content');
+```
+
+<info>
+If calling such an external script doesn't work in your environment, you can instead add a route in your `site/config/config.php file and open the route path in your browser:
+
+```php "site/config/config.php"
+'routes' => [
+    [
+        'pattern' => 'upgrade',
+        'action'  => function() {
+            return Kirby\Cms\System::upgradeContent(kirby()->root('content'));
+        }
+    ]
+]
+```
+While this might return the error page, it will still do the job.
+</info>
+
+### Migrate files' metadata
+Read (link: docs/guide/updates/update-to-v3/files text: how to migrate the metadata of your existing files to Kirby 3).
+
+### Delete accounts and avatars
+
+The Kirby 2 accounts and avatars are not compatible with Kirby 3. Please delete your `/site/accounts` and `assets/avatars` folders and install accounts from scratch. If that is not an option, because you have too many accounts, make sure to read the (link: docs/guide/updates/update-to-v3/users text: user account migration) guide.
+
+### License
+
+Kirby 3 requires a license file instead of the K2 config setting. The license file will be generated when you enter your license information in the (glossary: Panel). You should remove the K2 config setting.
+
+### Custom folder setup
+
+The (link: docs/guide/configuration#custom-folder-setup text: custom folder setup) is no longer done in `site.php` but in your `index.php`.
+
+## Panel
+
+### Remove `/panel` folder
+
+The Panel folder has been integrated into the `/kirby` folder to make updates easier. Therefore, the old Panel folder has to be removed.
+
+### Move and adapt page blueprints
+
+(glossary: blueprint text: Page blueprints) are no longer located in `/site/blueprints`, but in `/site/blueprints/pages`. Moving them to the subdirectory should be enough as a first step. The `site.yml` blueprint remains in `/site/blueprints`.
+
+<info>
+If you are updating from an early Kirby 2 version and still use `.php` files for your blueprints, change the file extension to `.yml` and remove the PHP code from the top of the files.
+</info>
+
+<warning>
+Before you run any page update scripts or update pages via the Panel, make sure to remove the title field from all your blueprints. Otherwise, the title will be removed.
+</warning>
+
+### Remove subpage and file settings from blueprints
+
+The old subpage and file settings are no longer compatible with Kirby 3. Files are now added via files sections, subpages via pages sections, and files get their own blueprints with meta data:
+
+- (link: docs/reference/panel/sections/pages text: Pages sections)
+- (link: docs/reference/panel/sections/files text: Files sections)
+- (link: docs/guide/content/files text: File meta data)
+
+The fields will work as before but you might want to restructure them to leverage the (link: docs/guide/blueprints/layout text: new layout features) sections, columns and tabs that give you much more control over the look of forms in the Panel.
+
+### Sort numbering of subpages
+
+The `num` blueprint option to set the numbering scheme for pages is no longer set in the parent page blueprint, but in the page blueprint to which the numbering is actually applied. Details: (link: docs/reference/panel/blueprints/page text: General blueprint options)
+
+### Remove blueprint-based subpage builder
+
+The option to auto-create subpages via a blueprint setting no longer exists. You can use a (link: docs/reference/plugins/hooks/page-create-after text: `page.create:after` hook) to achieve the same instead. In fact, you can even define a custom blueprint setting that completely recreates this functionality using Kirby's new `$page->blueprint()` method.
+
+In your blueprint:
+
+```yaml
+subpage_builder:
+  - title: Gallery
+    uid: gallery
+    template: gallery
+    num: 1
+  - title: Info
+    uid: info
+    num: 2
+    template: info
+```
+
+In your `config.php`:
+
+```php "/site/config.php"
+'hooks' => [
+  'page.create:after' => function ($page) {
+    $builder = $page->blueprint()->subpage_builder();
+    if(!empty($builder)) {
+
+      foreach($builder as $build) {
+        $missing = A::missing($build, array('title', 'template', 'uid'));
+        if(!empty($missing)) continue;
+          try {
+            $subPage = $page->createChild([
+              'content'  => ['title' => $build['title']],
+              'slug'     => $build['uid'],
+              'template' => $build['template'],
+            ]);
+
+          } catch (Exception $error) {
+            throw new Exception($error);
+          }
+          if($subPage) {
+            $subPage->publish();
+            if(isset($build['num'])) $subPage->changeSort($build['num']);
+          }
+
+         }
+    }
+
+  }
+]
+```
+
+### Rename field `readonly` option
+
+The option to make a field readonly (`readonly: true`)  has been replaced with the `disabled` property: `disabled: true`. Change your blueprints accordingly.
+
+### Remove invalid field types
+
+The following field types no longer exist and have to be replaced:
+
+- `user` field &rarr; (link: docs/reference/panel/fields/users text: `users` field)
+- `page` field &rarr; (link: docs/reference/panel/fields/pages text: `pages` field)
+- `image` field &rarr; (link: docs/reference/panel/fields/files text: `files` field)
+- `checkbox` field &rarr; (link: docs/reference/panel/fields/toggle text: `toggle` field)
+- `datetime` field &rarr; (link: docs/reference/panel/fields/date text: `date` field) with `time` option
+
+Also remove or update custom field types, see (link: #plugins-and-extensions text: plugins and extensions).
+
+When moving from the old `user`, `page` and `image` fields to the Kirby 3 `users`, `pages` and `files` fields, keep in mind that the new fields store their data in `yaml` format.
+
+### Dashboard and widgets
+
+The Kirby 2 Dashboard no longer exists in Kirby 3. With the Dashboard, Panel widgets are gone. Widgets can be replaced with (link: docs/reference/plugins/extensions/sections text: custom Panel sections).
+
+## Configuration
+
+### Syntax changes
+
+In addition to `Config::set()`, the standard way of adding options is now to use a `return` statement that returns an array of options:
+
+```php "/site/config/config.php"
+<?php
+return [
+    'debug'  => true,
+    'someOtherSetting' => 'something'
+];
+```
+
+These options can be called with `$kirby->option('someSetting')`.
+
+### Removed or changed config options
+
+- The `ssl` config option has been removed. This should be handled in your `.htaccess` file or in your server configuration.
+
+- `panel.session.timeout`/`panel.session.lifetime` are now handled via the (link: docs/reference/system/options/session text: session options).
+
+
+## Frontend
+
+### Date method
+
+The special `date()` method has been removed, because it lead to confusions. It must be replace with the `toDate()` field method.
+
+```php
+<?= $page->date('Y-m-d') ?>
+```
+becomes
+
+```php
+<?= $page->date()->toDate('Y-m-d') ?>
+```
+This now works with all date fields, no matter what the date field is called.
+
+### `Kirbytext()` helper
+
+When rendering Kirbytext in your templates, replace occurrences of the `kirbytext()` helper that convert field values from
+
+```php
+<?= kirbytext($page->somefield()) ?>
+```
+
+with
+
+```php
+<?= $page->somefield()->kirbytext() ?>
+```
+
+You can continue to use the `kirbytext()` helper with strings that contain Kirbytext.
+
+### Custom routes
+
+Custom routes starting with the string `api` will not work anymore, because `api` is now reserved by Kirby, unless you change the API slug to something else, see (link: docs/reference/system/options/api text: API configuration).
+
+### Accessing arguments from the router in controllers
+
+The ways to (link: docs/guide/templates/controllers#arguments-from-the-router text: access arguments from the router) has changed from
+
+```php
+<?php
+
+return function ($site, $pages, $page, $args) {
+
+  // $args contains all arguments from the current route
+
+};
+```
+
+to
+
+```php
+<?php
+
+return function ($kirby) {
+
+  $args = $kirby->route()->arguments();
+    // contains all arguments from the current route
+
+};
+```
+
+In your route, you can also pass all arguments explicitly to the `->render()` method to make them directly accessible in the controller. (link: docs/guide/templates/controllers#arguments-from-page-render-in-route text: Read more ›)
+
+### Page status
+
+Filter methods like `visible()`, `invisible()` and related pages methods have been replaced with (link: docs/reference/objects/pages/listed text: `listed`)/(link: docs/reference/objects/pages/unlisted text: `unlisted`)/(link: docs/reference/objects/pages/published text: `published`) and related methods.
+
+### KirbyText pre/post filters
+
+(link: docs/reference/plugins/hooks/kirbytext-before text: KirbyText pre) and (link: docs/reference/plugins/hooks/kirbytext-after text: KirbyText post) filters now have to be registered as hooks.
+
+
+### Sending email
+
+Email is now sent using PHPMailer. The way to set email presets and to send email has completely changed, check out the (link: docs/guide/emails text: docs)
+
+
+### Remove route filters
+
+Route filters do no longer exist. Instead you can hook into the route event using (link: docs/guide/routing#before-and-after-hooks text: the `route:before` and `route:after` hooks).
+
+
+### Authentication for frontend stuff
+
+In Kirby 3, authentication and permissions are now integrated in every method of the Kirby API. You can no longer just call `$page->delete()` for example without an authenticated user. That means the user must either be logged  in or you need another way to authenticate.
+
+To keep it simple to use the internal APIs to do all sorts of things programmatically and especially when you bootstrap Kirby in your own external script, there is now a way to impersonate an existing users or to create a temporary admin, who can do all those awesome things:
+
+#### Impersonating an existing user
+
+```php
+<?php
+
+require 'kirby/bootstrap.php'; // this is  only required in external scripts
+
+// impersonating an existing user
+$kirby = new Kirby([
+    'users' => [
+        [
+            'email' => 'bastian@getkirby.com',
+            'role'  => 'admin'
+        ]
+    ]
+]);
+
+$kirby->impersonate('bastian@getkirby.com');
+$kirby->page('some/page')->delete();
+````
+
+#### Impersonating the `kirby` super user
+
+```php
+<?php
+
+require 'kirby/bootstrap.php'; // this is  only required in external scripts
+
+$kirby = kirby();
+$kirby->impersonate('kirby');
+$kirby->page('some/page')->delete();
+```
+
+
+### Various method changes
+
+- `$pagination->items()` was removed, use `$pagination->total()` or `$pagination->pages()`
+- `Tpl::load()` doesn't accept a third argument anymore
+- the `excerpt()` helper method has been removed and the parameters for the `$field->excerpt()` method have changed
+- `$page->tinyurl()` was removed
+
+## Multi-language installation
+
+### Defining languages
+
+(link: docs/guide/languages/introduction text: Languages) are now defined in the `/site/languages` folder, not in your `/site/config.php`file anymore. Users can now add or remove new languages through the Panel, if the (link: docs/reference/system/options/languages text: `languages` option) is enabled in the config settings.
+
+### Accessing languages
+
+Use `$kirby->languages()` instead of `$site->languages()`.
+
+### Fetching language variables
+
+(link: docs/guide/languages/custom-language-variables text: Language variables) are no longer fetched via `l()/l::get()` but via the `t()` helper.
+
+## Users and permissions
+
+### Migrate users
+Read (link: docs/guide/updates/update-to-v3/users text: how to migrate your existing users to Kirby 3).
+
+### User roles
+
+User roles can no longer be defined in the config settings, but solely (link: docs/guide/users/roles text: by adding user blueprints).
+
+### Permissions
+
+(link: docs/guide/users/permissions text: User permissions) are now defined in `.yml` files, not `.php` files like in Kirby 2. Also, the available permissions have changed to make them easier to implement. On the other hand that means that currently some functionality for fine-grained control of user access is not available.
+
+### Accessing the `$user` object
+
+The user object is no longer accessed via the `$site` but via the `$kirby` object. All references to `$site->user()` have to be replaced by `$kirby->user()`.
+
+
+## Toolkit
+
+The toolkit has been completely rewritten, new methods have been added, others removed. Some classes have been removed from the toolkit and moved into their own packages, see list below:
+
+
+| Toolkit class  |  Replacement |
+|---|---|
+| `Bitmask` | <code></code>  |
+| `Brick`  | (link: docs/reference/tools/html text: `Kirby\Toolkit\Html`)  |
+| `C` | <code></code> |
+| `Cache`  | `Kirby\Cache`  |
+| `Cookie`  | (link: docs/reference/tools/cookie text: `Kirby\Http\Cookie`)  |
+| `Crypt`  | <code></code> |
+| `Data`  | (link: docs/reference/tools/data text: `Kirby\Data`)  |
+| `Database`  | `Kirby\Database`  |
+| `Db`  | `Kirby\Database\Db`  |
+| `Detect` | `Kirby\CMS\System` |
+| `Dimensions`  | `Kirby\Image\Dimensions`  |
+| `Email`  | (link: docs/reference/@#email text: `Kirby\Email`) |
+| `Embed`   |  (link: docs/reference/templates/helpers text: YouTube, Vimeo and Gist helpers) |
+| `Error`  | `Kirby\Exception`  |
+| `ErrorReporting`  | `Kirby\Exception`  |
+| `Exif`  | `Kirby\Image\Exif`  |
+| `Folder`  | <code></code> |
+| `Header` | (link: docs/reference/tools/header text: `Kirby\Http\Header`) |
+| `I`  | `Kirby\Toolkit\Iterator` |
+| `L`  | `Kirby\Toolkit\I18n`  |
+| `Media`  | `Kirby\Image`  |
+| `Password`  | <code></code> |
+| `R`  | (link: docs/reference/objects/request text: `Kirby\Http\Request`)  |
+| `Redirect`  | `Kirby\Http\Response\Redirect`  |
+| `Remote`  | `Kirby\Http\Remote`  |
+| `Response`  | `Kirby\Http\Response`  |
+| `Router`  | `Kirby\Http\Router`  |
+| `S`  | `Kirby\Session`  |
+| `Server`  | (link: docs/reference/tools/server text: `Kirby\Http\Server`)  |
+| `Sql`  | `Kirby\Database\Sql`  |
+| `System`  | <code></code>  |
+| `Thumb`  | `Kirby\Image`  |
+| `Timer`  | <code></code> |
+| `Toolkit`  | <code></code>  |
+| `Upload`  | `Kirby\Api`  |
+| `Url`  | `Kirby\Http\Url`  |
+| `Visitor`  | `Kirby\Http\Visitor`  |
+| `YAML`  | (link: docs/reference/tools/data text: `Kirby\Data\Yaml`)  |
+
+The Toolkit classes are now in the  `Kirby\Toolkit` namespace.
+
+## Plugins and Extensions
+
+Kirby 2 sites with a lot of plugins will require the most effort. Plugins have to be moved to our new (link: docs/guide/plugins/plugin-basics text: plugin syntax). Many plugins developers have already converted their plugins to Kirby 3. Some plugins might no longer be necessary, because their functionality is covered by native Kirby 3 features. Other plugins might not have been ported yet.
+
+As a first step you have to remove your plugins so that your site doesn't break. This means removing the plugin folders, but also removing custom fields from blueprints and removing functionality that is added through these plugins.
+
+As a next step, replace old plugins with new ones where available and/or port your own plugins with the help of our (link: docs/guide/plugins text: guides).
+
+For plugin developers, read (link: docs/guide/updates/update-to-v3/plugins text: how to migrate your plugin to Kirby 3).
+
+### KirbyTags
+
+(link: docs/reference/plugins/extensions/kirbytags text: KirbyTags) are now defined in a plugin file.
+
+## Miscellaneous
+
+### Kirbytext properties
+
+The `popup: yes` property in a `link` KirbyTag becomes `target: _blank`:
+
+```kirbytext
+(\link: http://wikipedia.org text: Wikipedia target: _blank)
+```
+
+### Filenames
+
+Media filenames starting with an underscore (e.g. `_dsc9876.jpg`) are ignored in Kirby 3. You need to rename such files.
+
+## Getting stuck?
+
+If you run into any kind of upgrade issue, please help us by letting us know [in the forum](https://forum.getkirby.com) or by creating a ticket: [https://github.com/getkirby/kirby/issues](https://github.com/getkirby/kirby/issues)
+
+Please only create tickets if you are pretty sure it is a Kirby issue.

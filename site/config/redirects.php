@@ -55,19 +55,22 @@ return [
 
 
 	// 2019 - Legacy
-	'blog/kosmos-(:any)'              => 'kosmos/$1',
-	'docs/cheatsheet'                 => 'docs/reference',
-	'docs/cheatsheet/(:all?)'         => 'docs/reference/$1',
-	'docs/toolkit'                    => 'docs/reference',
-	'docs/toolkit/(:all?)'            => 'docs/reference/$1',
-	'made-with-kirby-and-love'        => 'love',
-	'docs/guide/installation'         => 'docs/guide/quickstart',
-	'docs/guide/blueprints/tabs'      => 'docs/guide/blueprints/layout#tabs',
-	'docs/cookbook/migration/sites'   => 'docs/cookbook/setup/migrate-site',
-	'docs/cookbook/migration/files'   => 'docs/cookbook/setup/migrate-files',
-	'docs/cookbook/migration/users'   => 'docs/cookbook/setup/migrate-users',
-	'docs/cookbook/migration/plugins' => 'docs/cookbook/setup/migrate-plugins',
-
+	'blog/kosmos-(:any)'                  => 'kosmos/$1',
+	'docs/cheatsheet'                     => 'docs/reference',
+	'docs/cheatsheet/(:all?)'             => 'docs/reference/$1',
+	'docs/toolkit'                        => 'docs/reference',
+	'docs/toolkit/(:all?)'                => 'docs/reference/$1',
+	'made-with-kirby-and-love'            => 'love',
+	'docs/guide/installation'             => 'docs/guide/quickstart',
+	'docs/guide/blueprints/tabs'          => 'docs/guide/blueprints/layout#tabs',
+	'docs/cookbook/migration/sites'       => 'docs/cookbook/setup/migrate-site',
+	'docs/cookbook/migration/files'       => 'docs/cookbook/setup/migrate-files',
+	'docs/cookbook/migration/users'       => 'docs/cookbook/setup/migrate-users',
+	'docs/cookbook/migration/plugins'     => 'docs/cookbook/setup/migrate-plugins',
+	'docs/cookbook/setup/migrate-site'    => 'docs/guide/updates/update-to-v3',
+	'docs/cookbook/setup/migrate-files'   => 'docs/guide/updates/update-to-v3/files',
+	'docs/cookbook/setup/migrate-users'   => 'docs/guide/updates/update-to-v3/users',
+	'docs/cookbook/setup/migrate-plugins' => 'docs/guide/updates/update-to-v3/plugins',
 
 	// Fuyyz finder
 	'docs/reference/(:any)/(:all?)' => function ($group, $path = null) {

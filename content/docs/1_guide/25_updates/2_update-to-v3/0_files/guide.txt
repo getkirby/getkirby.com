@@ -1,4 +1,8 @@
-Title: How to migrate file metadata
+Title: How to migrate file metadata to Kirby 3
+
+----
+
+Intro: Update your file meta data for Kirby 3.
 
 ----
 
@@ -132,10 +136,3 @@ Then run this script with http://yourdomain.com/update-metadata.php. Delete the 
 You can adapt this script to your needs or use it multiple times for different sets of files with different templates.
 </info>
 
-----
-
-Description: Update your file meta data for Kirby 3.
-
-----
-
-Authors: - authors/sonja-broda
