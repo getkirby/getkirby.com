@@ -13,8 +13,9 @@ echo Html::figure(
     Html::a($link ?? $file->url(),
       [
         img($file, [
-          'alt' => $alt ?? $file->alt()->or($caption),
-          'src' => [
+          'alt'   => $alt ?? $file->alt()->or($caption),
+					'class' => 'rounded',
+          'src'   => [
             'width' => 960
           ],
         ])
