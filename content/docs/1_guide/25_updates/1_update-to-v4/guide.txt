@@ -2,8 +2,49 @@ Title: Update to v4
 
 ----
 
-Description:
+Intro: Learn how to upgrade a Kirby 3 project to Kirby 4.
 
 ----
+
 Text:
 
+
+<warning>
+While we try to make sure, upgrading to Kirby 4 will be rather smooth for you, there are always things that can go wrong during such a process. Please **make a backup** of your site in any case.
+</warning>
+
+## Requirements
+
+#### PHP
+Kirby 4 now requires PHP 8.1+. Please check if your server supports this PHP version before upgrading.
+
+#### Browser support of the Panel
+
+The Panel in Kirby 4 supports the following modern browser versions:
+
+<div class="table">
+    <table>
+        <tr>
+            <th>Desktop</th>
+            <th>Mobile</th>
+        </tr>
+        <tr>
+            <td class="prose">
+                <ul>
+                    <li>Firefox 110+</li>
+                    <li>Chrome 106+</li>
+                    <li>Safari 15+</li>
+                    <li>Edge 106+</li>
+                    <li>Opera 94+</li>
+                </ul>
+            </td>
+            <td class="prose">
+                <ul>
+                    <li>Mobile Safari 15+</li>
+                    <li>Android Browser 117+</li>
+                    <li>Chrome for Android 117+</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</div>
