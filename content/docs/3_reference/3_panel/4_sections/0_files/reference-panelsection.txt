@@ -16,7 +16,7 @@ Text:
 
 The files section can be used to show any combination of files for the current page or any other page in your site.
 
-(image: files.png)
+(image: files-section.png)
 
 ## Example
 
@@ -96,7 +96,7 @@ The `list` layout is perfect for file types without thumbnails like PDFs, excel 
 layout: list
 ```
 
-(image: list.png)
+(image: files-section.png)
 
 ### Cards layout
 
@@ -106,17 +106,17 @@ The `card` layout is great for all kinds of images.
 layout: cards
 ```
 
-(image: cards.png)
+(image: files-section-cards.png)
 
 (docs: sections/cardlets)
 
-(image: cardlets.png)
+(image: files-section-cardlets.png)
 
 ### Table layout
 
 The table layout has the highest information density. Columns can be fully customized and make it perfect if you need to show multiple values at once for better overview and scannability.
 
-(image: table.png)
+(image: files-section-table.png)
 
 ```yaml
 layout: table
