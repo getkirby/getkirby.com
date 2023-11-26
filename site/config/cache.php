@@ -3,11 +3,11 @@
 return [
 	'diffs' => [
 		'active' => true,
-		'type'   => 'apcu'
+		'type'   => 'file'
 	],
 	'pages' => [
 		'active' => true,
-		'type'   => 'apcu',
+		'type'   => 'file',
 		'ignore' => [
 			'love',
 			'partners'
@@ -15,10 +15,10 @@ return [
 	],
 	'plugins' => [
 		'active' => true,
-		'type'   => 'apcu'
+		'type'   => 'file'
 	],
 	'reference' => [
 		'active' => true,
-		'type'   => 'apcu'
+		'type'   => 'file'
 	]
 ];
