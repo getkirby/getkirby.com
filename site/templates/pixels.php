@@ -4,13 +4,6 @@
   <nav class="editor-toolbar">
     <div v-cloak>
       <div class="field">
-        <label class="label">Image</label>
-        <div class="upload">
-          <p>Select …</p>
-          <input type="file" accept="image/*" @input="onUpload">
-        </div>
-      </div>
-      <div class="field">
         <label class="label">Presets</label>
         <div class="select">
           <select @input="setPreset">
@@ -21,6 +14,73 @@
 							{{ preset.label }}
 						</option>
           </select>
+        </div>
+      </div>
+			<div class="field">
+        <label class="label">Headline</label>
+        <input class="input" type="text" v-model="settings.headline">
+      </div>
+      <div class="columns mb-3" style="--columns: 2; --gap: var(--spacing-1)">
+        <div class="field">
+          <label class="label">Logo</label>
+          <div class="checkbox">
+            <input type="checkbox" name="logo" v-model="settings.logo">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Browser</label>
+          <div class="checkbox">
+            <input type="checkbox" name="browser" v-model="settings.browser">
+          </div>
+        </div>
+      </div>
+			<div class="field">
+        <label class="label">Image</label>
+        <div class="upload">
+          <p>Select …</p>
+          <input type="file" accept="image/*" @input="onUpload">
+        </div>
+      </div>
+			<div class="field">
+        <label class="label">Image scale</label>
+        <div class="range">
+          <input type="range" v-model="settings.scale" min="100" max="250">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Image alignment</label>
+        <ul class="inputs columns" style="--columns: 3">
+          <li v-for="position in positions">
+            <label><input type="radio" v-model="settings.position" :value="position"> {{ position.arrow }}</label>
+          </li>
+        </ul>
+      </div>
+			<div class="columns" style="--columns: 2; --gap: var(--spacing-1)">
+        <div class="field">
+          <label class="label">Shadow</label>
+          <div class="checkbox">
+            <input type="checkbox" name="shadow" v-model="settings.shadow">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Rounded corners</label>
+          <div class="checkbox">
+            <input type="checkbox" name="rounded" v-model="settings.rounded">
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Background</label>
+        <div class="colors">
+          <button
+						v-for="color in colors"
+						type="button"
+						:aria-selected="settings.background === color"
+						:style="'--color:' + color"
+						@click="settings.background = color"
+					>
+            <span></span>
+          </button>
         </div>
       </div>
       <div class="field">
@@ -73,66 +133,6 @@
 						v-model="settings.ml"
 						placeholder="left"
 					>
-        </div>
-      </div>
-      <div class="columns" style="--columns: 2; --gap: var(--spacing-1)">
-        <div class="field">
-          <label class="label">Shadow</label>
-          <div class="checkbox">
-            <input type="checkbox" name="shadow" v-model="settings.shadow">
-          </div>
-        </div>
-        <div class="field">
-          <label class="label">Rounded corners</label>
-          <div class="checkbox">
-            <input type="checkbox" name="rounded" v-model="settings.rounded">
-          </div>
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">Background</label>
-        <div class="colors">
-          <button
-						v-for="color in colors"
-						type="button"
-						:aria-selected="settings.background === color"
-						:style="'--color:' + color"
-						@click="settings.background = color"
-					>
-            <span></span>
-          </button>
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">Image scale</label>
-        <div class="range">
-          <input type="range" v-model="settings.scale" min="100" max="250">
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">Image alignment</label>
-        <ul class="inputs columns" style="--columns: 3">
-          <li v-for="position in positions">
-            <label><input type="radio" v-model="settings.position" :value="position"> {{ position.arrow }}</label>
-          </li>
-        </ul>
-      </div>
-      <div class="field">
-        <label class="label">Headline</label>
-        <input class="input" type="text" v-model="settings.headline">
-      </div>
-      <div class="columns mb-3" style="--columns: 2; --gap: var(--spacing-1)">
-        <div class="field">
-          <label class="label">Logo</label>
-          <div class="checkbox">
-            <input type="checkbox" name="logo" v-model="settings.logo">
-          </div>
-        </div>
-        <div class="field">
-          <label class="label">Browser</label>
-          <div class="checkbox">
-            <input type="checkbox" name="browser" v-model="settings.browser">
-          </div>
         </div>
       </div>
       <button class="btn" @click="exportImage">
