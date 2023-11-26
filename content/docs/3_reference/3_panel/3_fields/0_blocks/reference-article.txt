@@ -204,7 +204,35 @@ Kirby's built-in blocktypes are not enough? Create your own! Check out our exten
 - (link: docs/guide/page-builder/block-examples text: Block factory: Creating your own blocks collection)
 - (link: docs/cookbook/panel/nested-blocks text: Nested blocks)
 
+<since v="4.0.0">
+## Block preview type `field`
 
+Instead of manually creating previews for blocks types, you can use the `fields` preview type to display the fields together with their content.
+
+(image: field-preview.png)
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      demo:
+        wysiwyg: true
+        preview: fields
+        tabs:
+          main:
+           fields:
+             title:
+               type: text
+             subtitle:
+               type: text
+             description:
+               type: writer
+          settings:
+            label: Settings
+            fields: # ...
+```
+</since>
 ## Extending core blocks
 
 From modifying the output to how they are previewed in the Panel, you can also overwrite Kirby's built-in block types:
