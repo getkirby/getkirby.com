@@ -130,6 +130,16 @@ In v3, the almighty `kirby` user wasn't that almighty but still restricted by th
 
 Kirby 4 adds a new core file method: `$file->manipulate()`.  This means, that you can no longer use this method name for custom file methods. Also, the `focus` field name is now reserved by Kirby for file meta data. If you are using this field name in your file meta data or for custom file methods, please need to rename those files or methods.
 
+### Users field
+
+The `users` field doesn't automatically use the current user as default anymore. Add default: true to keep this functionality:
+
+```yaml
+author:
+  type: users
+  default: true
+```
+
 ## For plugin developers
 
 ### Panel: new look
