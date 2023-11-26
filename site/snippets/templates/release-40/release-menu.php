@@ -5,5 +5,6 @@
 		<?php endforeach ?>
     <li><a href="#versioning">Versioning Scheme</a></li>
     <li><a href="#changes">Changelog</a></li>
+    <li><a href="#migration">Migration</a></li>
   </ul>
 </nav>

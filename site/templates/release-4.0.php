@@ -66,6 +66,7 @@
 
 	<?php snippet('templates/release-40/versioning') ?>
 	<?php snippet('templates/release-40/changes') ?>
+	<?php snippet('templates/release-40/migration') ?>
 	<?php snippet('templates/release-40/release-menu') ?>
 </article>
 
