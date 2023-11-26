@@ -1,7 +1,7 @@
 <section id="migration" class="mb-42">
 
 	<?php snippet('hgroup', [
-		'title' => 'Migration from older versions',
+		'title' => 'Migration from previous versions',
 		'mb'    => 12
 	]) ?>
 
