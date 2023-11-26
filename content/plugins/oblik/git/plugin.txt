@@ -2,7 +2,7 @@ Title: Git
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -22,4 +22,4 @@ Description: Kirby plugin for updating content in the Panel via Git
 
 ----
 
-Versions: 3
+Versions: 3,4

@@ -2,7 +2,7 @@ Title: Fathom Analytics
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -22,4 +22,4 @@ Description: Integrates the privacy first website analytics Fathom Analytics das
 
 ----
 
-Versions: 3
+Versions: 3,4

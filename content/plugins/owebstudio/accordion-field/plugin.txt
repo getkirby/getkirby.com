@@ -2,7 +2,7 @@ Title: Accordion Field
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -14,7 +14,7 @@ Changes: https://owebstudio.com/kirby/plugins/accordion-field/changelog#{{ versi
 
 ----
 
-Version: 1.3.13
+Version: 2.0.0
 
 ----
 
@@ -34,4 +34,4 @@ Description: Collapses the content below headlines in Panel for Kirby 3.
 
 ----
 
-Versions: 3
+Versions: 3,4

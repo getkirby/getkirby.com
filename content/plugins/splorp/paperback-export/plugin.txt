@@ -2,7 +2,7 @@ Title: Paperback Export
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -30,4 +30,4 @@ yoursite.com/export/paperback
 
 ----
 
-Versions: 3
+Versions: 3,4
