@@ -24,13 +24,13 @@ fields:
     width: 1/4
   featured:
     type: toggle
-    width: 1/4 
-    text:  
+    width: 1/4
+    text:
       - "no"
       - "yes"
 ```
 
-(image: gap-field.png)
+(image: gap.png)
 
 With conditional fields:
 
