@@ -53,6 +53,25 @@ The Panel in Kirby 4 supports the following modern browser versions:
 
 This guide highlights some of the key changes required when upgrading to Kirby 4. There can be further smaller breaking changes affecting your specific project. Please have a look at the (link: releases/4.0/#breaking-changes text: full list of breaking changes).
 
+### Compatible plugins
+
+To see which of the plugins you use already supports Kirby 4, have a look at this (link: plugins/v4 text: list of v4 compatible plugins).
+
+### Core features replacing plugins
+
+Kirby 4 includes some features natively that so far were provided by plugins. For some sites, this wil allow them to remove the plugin and rely purely on the native feature. It's important that you carefully check whether the core features really covers the full extend of what your project requires. Otherwise, sticking with the plugin might still be the necessary choice.
+
+- (link: docs/reference/panel/fields/link text: Link field)
+- (link: docs/reference/panel/fields/color text: Color field)
+- (link: ocs/guide/content/publishing-workflow#moving-pages text: Moving pages in the Panel)
+- (link: docs/reference/panel/blueprints/file#optimize-uploaded-images text: Optimize images on upload)
+- (link: docs/guide/files/files#setting-a-focus-point text: Setting an image focus point)
+- (link: docs/reference/plugins/extensions/blocks#quick-and-easy-fields-preview text: Fields preview for blocks)
+- (link: docs/reference/panel/blueprints/page#page-creation-dialog text: Custom fields in the page create dialog)
+- (link: docs/reference/panel/sections/pages#filtering-pages__query text: Query support for pages and files sections)
+- (link: docs/guide/languages/custom-language-variables#language-editor-in-the-panel text: Translate i18n strings in the Panel)
+- (link: docs/reference/objects/image/qr-code text: Generate a QR code)
+
 ### PHP type hints
 
 We have added a lot more (link: https://www.php.net/manual/en/language.types.declarations.php text: PHP type hints) throughout the system (e.g. for paramters, what methods return). This strictness really reduces the risk of errors in our PHP code. As consequence, when extending core classes, e.g. in a custom page model, you will have to add some of these type hints to your code as well.
@@ -96,6 +115,7 @@ $kirby->impersonate('kirby')
 ```
 
 In v3, the almighty `kirby` user wasn't that almighty but still restricted by the permissions of the admin role. In v4, it is truly almighty and not bound to any restrictions. Use where needed with caution.
+
 
 ## For plugin developers
 
