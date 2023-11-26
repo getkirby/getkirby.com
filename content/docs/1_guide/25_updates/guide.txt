@@ -33,6 +33,8 @@ Kirby uses the [Semantic Versioning](https://semver.org) scheme:
 
 **Minor and patch releases** (e.g. 4.1 to 4.2 or 4.1 to 4.1.1) can generally be applied without changes to your site code.
 
+Note that the major version of Kirby 3 was the second number (e.g. the major version of Kirby 3.9.0 is 9). So e.g. updates from Kirby 3.8 to Kirby 3.9 also came with breaking changes.
+
 In any case, please never update a live website directly on the server. Test updates locally first to see if something breaks.
 </warning>
 
@@ -42,4 +44,3 @@ If you used one of the advanced installation methods, you can also use them to u
 
 - (link: docs/cookbook/setup/composer#updating-kirby text: Update via Composer)
 - (link: docs/cookbook/setup/git#updating-kirby text: Update of the Git submodule)
-
