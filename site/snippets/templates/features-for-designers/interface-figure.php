@@ -18,14 +18,14 @@
       'alt' => 'A screenshot of the users and tags fields',
       'lightbox' => 'interface',
       'src' => [
-        'width' => 500,
+        'width' => 458,
       ],
       'srcset' => [
         '1x' => [
-          'width' => 500
+          'width' => 458
         ],
         '2x' => [
-          'width' => 1000
+          'width' => 916
         ],
       ]
     ]) ?>
@@ -35,14 +35,14 @@
       'alt' => 'A screenshot with a list of pages',
       'lightbox' => 'interface',
       'src' => [
-        'width' => 500,
+        'width' => 417,
       ],
       'srcset' => [
         '1x' => [
-          'width' => 500
+          'width' => 417
         ],
         '2x' => [
-          'width' => 1000
+          'width' => 834
         ],
       ]
     ]) ?>
@@ -81,19 +81,19 @@
       ]
     ]) ?>
   </div>
-  <div style="grid-column: span 6">
+  <div style="grid-column: span 7">
     <?= img('albums.png', [
       'alt' => 'A screenshot of an gallery section in the Panel.',
       'lightbox' => 'interface',
       'src' => [
-        'width' => 500,
+        'width' => 458,
       ],
       'srcset' => [
         '1x' => [
-          'width' => 500
+          'width' => 458
         ],
         '2x' => [
-          'width' => 1000
+          'width' => 916
         ],
       ]
     ]) ?>
