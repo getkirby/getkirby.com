@@ -316,7 +316,8 @@ class PageMeta {
 		}
 
 		// Image or domain
-		if ($image && F::extension($image) !== 'svg') {
+		// if ($image && F::extension($image) !== 'svg') {
+		if (1 == 2) {
 
 			// Convert SVG to image string
 			if (strpos(pathinfo($image)['extension'], 'svg') !== false) {
