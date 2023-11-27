@@ -2,7 +2,7 @@ Title: Update to Kirby 4
 
 ----
 
-Intro: Learn how to upgrade a Kirby 3 project to Kirby 4.
+Intro: Learn how to upgrade a Kirby 3 project to (link: releases/4.0 text: Kirby 4).
 
 ----
 
