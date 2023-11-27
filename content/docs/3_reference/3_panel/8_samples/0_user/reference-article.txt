@@ -51,7 +51,7 @@ columns:
         placeholder: username
 ```
 
-(image: contact.png)
+(image: user-contact.png)
 
 ## User files
 
@@ -84,4 +84,4 @@ sections:
     layout: cards
 ```
 
-(image: files.png)
+(image: user-files.png)
