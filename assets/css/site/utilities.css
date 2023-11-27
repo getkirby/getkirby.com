@@ -28,6 +28,9 @@ img {
 .bg-dark {
 	background: var(--color-dark);
 }
+.bg-yellow {
+	background: var(--color-yellow-400);
+}
 
 .border {
 	position: relative;
