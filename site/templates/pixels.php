@@ -84,6 +84,44 @@
         </div>
       </div>
       <div class="field">
+        <label class="label">Pattern</label>
+        <div class="select">
+          <select @input="setPattern">
+            <option value="">
+							-
+						</option>
+            <option
+							v-for="pattern in patterns"
+							:value="pattern"
+							:selected="pattern === settings.pattern"
+						>
+							{{ pattern }}
+						</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Text Color</label>
+        <div class="colors">
+          <button
+						type="button"
+						:aria-selected="settings.color === 'white'"
+						:style="'--color: white'"
+						@click="settings.color = 'white'"
+					>
+            <span></span>
+          </button>
+          <button
+						type="button"
+						:aria-selected="settings.color === 'black'"
+						:style="'--color: black'"
+						@click="settings.color = 'black'"
+					>
+            <span></span>
+          </button>
+        </div>
+      </div>
+      <div class="field">
         <label class="label">Dimensions</label>
         <div class="columns" style="--columns: 2; --gap: var(--spacing-1)">
           <input
@@ -148,11 +186,13 @@
     </div>
 
     <div v-cloak class="editor-canvas" :style="{
-        background: settings.background,
+        backgroundColor: settings.background,
         width: settings.width + 'px',
         height: settings.height + 'px',
         color: settings.color
       }">
+
+			<div v-if="settings.pattern" class="editor-pattern" :style="{backgroundImage: `url(/assets/patterns/${settings.pattern}.jpg)`}"></div>
 
       <header class="editor-header">
         <div
@@ -217,7 +257,7 @@
   window.addEventListener("dragleave", preventDefault, false);
   window.addEventListener("drop", preventDefault, false);
 
-  const placeholder = "https://source.unsplash.com/random";
+  const placeholder = "/assets/pixels/panel.png";
 
   const colors = {
     white: "var(--color-white)",
@@ -275,15 +315,28 @@
     },
   };
 
+	const patterns = [
+		"lagoon",
+		"pinkblue",
+		"purple",
+		"rainforest",
+		"sea",
+		"space"
+	];
+
   const presets = {
     social: {
       label: "Social media image",
-      background: colors.dark,
-      headline: "Headline …",
+      background: colors.black,
+      headline: "Kirby: The CMS that adapts to you",
+			color: "white",
       logo: true,
-      mt: 12,
+      mt: 10,
       mr: 6,
       ml: 6,
+      width: 1200,
+      height: 630,
+			pattern: "pinkblue",
       rounded: true,
       shadow: true
     },
@@ -341,6 +394,7 @@
   const defaults = {
     background: colors.white,
     browser: false,
+		color: "white",
     headline: null,
     image: placeholder,
     logo: false,
@@ -348,6 +402,7 @@
     mr: 0,
     mb: 0,
     ml: 0,
+		pattern: null,
     position: positions.topCenter,
     rounded: false,
     scale: 100,
@@ -359,16 +414,6 @@
   const settings = reactive({
     ...defaults,
     ...presets.social,
-    get color() {
-      if (
-				this.background === colors.white ||
-				this.background === colors.light
-			) {
-        return "black";
-      }
-
-      return "white";
-    },
     get corners() {
       if (this.rounded === false) {
         return {};
@@ -411,6 +456,7 @@
 
   createApp({
     colors,
+		patterns,
     placeholder,
     positions,
     presets,
@@ -456,6 +502,9 @@
 
       reader.readAsDataURL(file);
     },
+		setPattern(event) {
+			this.settings.pattern = event.target.value;
+		},
     setPreset(event) {
       const newSettings = {
         ...defaults,
@@ -606,9 +655,17 @@
 
   .editor-canvas {
     position: relative;
-    background: var(--color-light);
+    background-color: var(--color-light);
     overflow: hidden;
     color: var(--color-white);
+  }
+
+  .editor-pattern {
+    position: absolute;
+		inset: 0;
+		background-size: cover;
+		background-position: center center;
+		opacity: .625;
   }
 
   .editor-header {
@@ -623,14 +680,15 @@
   }
 
   .editor-headline {
-    font-weight: 300;
-    font-size: var(--text-4xl);
+    font-weight: 600;
+    font-size: 3rem;
     flex-grow: 1;
     margin-right: 1.5rem;
   }
 
   .editor-headline input {
     font: inherit;
+		font-weight: 400;
     background: none;
     color: currentColor;
     width: 100%;
@@ -641,7 +699,7 @@
   }
 
   .editor-logo svg {
-    --size: 3.5rem;
+    --size: 4rem;
     width: var(--size);
     height: var(--size);
   }
@@ -663,7 +721,7 @@
   }
 
   .editor-image[data-shadow="true"] {
-    filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.2));
+    filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.5));
   }
 
   .editor-browser {
