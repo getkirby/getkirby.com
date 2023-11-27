@@ -1,34 +1,7 @@
 <style>
-.v4-design-columns {
-	display: grid;
-	gap: var(--spacing-6);
-	grid-template-columns: 1fr;
-}
-.v4-design-columns + .v4-design-columns {
-	margin-top: var(--spacing-6);
-}
-
-@media screen and (min-width: 60rem) {
-	.v4-design-columns {
-		grid-template-columns: 1fr 1fr;
-	}
-}
-
-@media screen and (min-width: 80rem) {
-	.v4-design-columns {
-		grid-template-columns: 3fr 1fr;
-	}
-	.v4-design-columns.equal {
-		grid-template-columns: 1fr 1fr;
-	}
-	.v4-design-columns.reverse {
-		grid-template-columns: 1fr 3fr;
-	}
-}
-
 .v4-design-features {
 	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 	gap: var(--spacing-1);
 	margin-bottom: var(--spacing-6);
 }
@@ -51,6 +24,13 @@
 	height: 24px;
 	color: var(--color-black);
 }
+
+@media screen and (min-width: 80rem) {
+	.v4-design-features {
+		grid-template-columns: repeat(5, 1fr);
+	}
+}
+
 
 </style>
 
