@@ -16,6 +16,6 @@ Text:
 - Kirby no longer hides errors in the response class when the response is converted to a string: [#5027](https://github.com/getkirby/kirby/issues/5027#issuecomment-1446830047)
 - Files field upload: use `upload.parent` for mime check [#5245](https://github.com/getkirby/kirby/issues/5245)
 - `$field->toUrl()` will return null on empty fields [#5259](https://github.com/getkirby/kirby/issues/5259)
-- Users field does not anymore use a default if none set
+- Users field does not use a default anymore if none set
 - The "Session ... is currently read-only because it was accessed via an old session" error is circumvented when the PHP `sodium` extension is available
-- Removed the error boundary from `<k-fieldset>` The error boundary kills the entire field/input if an error occurs, which is way too aggressive and also makes it more difficult to handle errors properly.
+- Removed the error boundary from `<k-fieldset>`; the error boundary kills the entire field/input if an error occurs, which is way too aggressive and also makes it more difficult to handle errors properly.

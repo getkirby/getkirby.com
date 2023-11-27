@@ -26,43 +26,41 @@ Text:
 
 #### Dialogs for fields
 
-Fields can now define their own dialogs on the backend.
+Fields can now define their own dialogs on the backend:
 
 - Fields with array definition:
-```php
-return [
-  'props' => [
-    // ...
-  ],
-  'dialogs' => function () {
-    return [
-      [
-        'pattern' => 'delete',
-        'load' => function () {},
-        'submit' => function () {},
-      ]
-    ];
-  }
-];
-```
-<br>
-
+  ```php
+  return [
+    'props' => [
+      // ...
+    ],
+    'dialogs' => function () {
+      return [
+        [
+          'pattern' => 'delete',
+          'load' => function () {},
+          'submit' => function () {},
+        ]
+      ];
+    }
+  ];
+  ```
 - Field classes:
-```php
-class MyField extends FieldClass
-{
-  public function dialogs(): array
+  ```php
+  class MyField extends FieldClass
   {
-    return [
-      [
-        'pattern' => 'delete',
-        'load' => function () {},
-        'submit' => function () {},
-      ]
-    ];
+    public function dialogs(): array
+    {
+      return [
+        [
+          'pattern' => 'delete',
+          'load' => function () {},
+          'submit' => function () {},
+        ]
+      ];
+    }
   }
-}
-```
+  ```
 
 The route patterns for field dialogs are automatically prefixed with the following scheme:
 
@@ -83,6 +81,8 @@ this.$dialog(this.endpoints.field + "/delete")
 ```
 
 ### More improvements
+- Improved focus styles for links and the flag preview in tables
+- Improved text overflow behavior for links in tables
 - Pages section: new `templatesIgnore` option [#5322](https://github.com/getkirby/kirby/pull/5322)
 - Users field: set `default: true` to always use the currently logged in user as default
 - New items size `full`
@@ -153,8 +153,5 @@ We've tweaked the Panel extensively with too many improvements to name them all.
 - `k-pagination` always can be navigated by keys (no extra prop needed anymore)
 - Notifications: support for custom icons
 - `k-tag` supports an image/icon frame
-- Improved focus styles for links and the flag preview in tables
-- Improved text overflow behavior for links in tables
-- New `disabled property` for the `k-options-dropdown` component
-- New `selected` prop for `k-button` to set the `aria-selected` attribute
-
+- New `disabled` property for the `k-options-dropdown` component
+- New `selected` property for `k-button` to set the `aria-selected` attribute

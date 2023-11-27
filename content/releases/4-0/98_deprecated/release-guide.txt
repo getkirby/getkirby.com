@@ -6,10 +6,10 @@ Text:
 
 #### Core
 
-- `Kirby\Cms\Model` in favor of `Kirby\Cms\ModelWithContent`
+- `Kirby\Cms\Model`: Use `Kirby\Cms\ModelWithContent` instead
 - `Kirby\Email\Email::clone()` and `Kirby\Email\Body::clone()`
-- Use `Page::isAccessible()` instead of `Page::isReadable()`
-- `query` should not be used anymore for custom API endpoints, it will be used for the Kql plugin/core implementation
+- `Page::isReadable()`: Use `Page::isAccessible()` instead
+- The name `query` should not be used for custom API endpoints anymore, it will be used for the Kql plugin/core implementation
 - Internal `$model->contentFile()`, `$model->contentFiles()`, `$model->contentFileDirectory()`, `$model->contentFileExtension()` and `$model->contentFileName()` methods have been deprecated and will be removed in v5.
 
 #### Panel
@@ -20,7 +20,7 @@ Text:
 - `this.$panel.events.$emit`: Use `this.$panel.events.emit` instead
 - `this.$store.dispatch("isLoading")`: Use `this.$panel.isLoading` instead
 - `this.$translation`: Use `this.$panel.translation` instead
-- `this.$store.dispatch("dialog")` is deprecated. Use `this.$panel.dialog.open` and `this.$panel.dialog.close` instead
-- `this.$store.dispatch("drag", drag)` has been deprecated. Use `this.$panel.drag = drag` instead
-- `k-dropdown` was deprecated. Use `k-dropdown-content` as standalone instead.
-- `k-calendar-input` replaces `k-calendar`. `k-calendar` is still available but only as deprecated alias.
+- `this.$store.dispatch("dialog")`: Use `this.$panel.dialog.open` and `this.$panel.dialog.close` instead
+- `this.$store.dispatch("drag", drag)`: Use `this.$panel.drag = drag` instead
+- `k-dropdown`: Use `k-dropdown-content` as standalone instead
+- `k-calendar` was renamed to `k-calendar-input`; `k-calendar` is still available but only as deprecated alias.

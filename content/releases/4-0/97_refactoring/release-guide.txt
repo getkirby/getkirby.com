@@ -19,24 +19,23 @@ Text:
 #### Panel
 
 - Cleaned up `k-toolbar` component
-- Drawer Component Structure
-```html
-<k-overlay type="drawer">
-	<form class="k-drawer" method="dialog">
-		<k-drawer-notification />
-		<k-drawer-header />
-		<k-drawer-body>
-			<k-drawer-fields />
-		</k-drawer-body>
-	</form>
-</k-overlay>
-```
-
-- Portals: Dialogs, Drawers and other Overlays are now seperated into different portals. This is done by setting the overlay type:
+- New drawer component structure:
+  ```html
+  <k-overlay type="drawer">
+    <form class="k-drawer" method="dialog">
+      <k-drawer-notification />
+      <k-drawer-header />
+      <k-drawer-body>
+        <k-drawer-fields />
+      </k-drawer-body>
+    </form>
+  </k-overlay>
+  ```
+- Portals: Dialogs, Drawers and other Overlays are now separated into different portals. This is done by setting the overlay type:
 	- `<k-overlay type="dialog">`
 	- `<k-overlay type="drawer">`
 	- `<k-overlay>`
-	An overlay without a type will use the default overlay portal. Separating them into different portals gives us more control over z-index and layering of elements.
+	An overlay without a type will use the default overlay portal. Separating them into different portals gives us more control over `z-index` and layering of elements.
 - Removed `v-model` from `k-form` and `k-fieldset`
 - Removed `$listeners` usage from `k-draggable`, `k-button` and subcomponents, `k-link`, `k-headline`, `k-form`, `k-block`, `k-block-title`, `k-box`, `k-image`, `k-content-item`
 - Made `k-bubble` more flexible

@@ -30,7 +30,7 @@ Text:
 
 #### QR code generation
 
-Kirby' new `Kirby\Image\QrCode` class, (helper: qr) helper function and (method: $field->toQrCode text: ->toQrCode()) field method allow you to create QR codes right out of the box:
+Kirby's new `Kirby\Image\QrCode` class, (helper: qr) helper function and (method: $field->toQrCode text: ->toQrCode()) field method allow you to create QR codes right out of the box:
 
 ```php
 $qr = new Kirby\Image\QrCode('https://getkirby.com');
@@ -42,7 +42,6 @@ $page->myLinkField()->toQrCode()->toSvg();
 
 ```
 
-
 #### Support for UUIDs in URL helper
 
 You can now pass a page UUID or a file UUID to the (helper: url) helper and it will be converted to the actual URL:
@@ -52,7 +51,7 @@ You can now pass a page UUID or a file UUID to the (helper: url) helper and it w
 <?= url('file://abcd') ?>
 ```
 
-This will also work for other URL methods like. (method: $field->toUrl), (class: Kirby\Cms\Url method: to text: Url:to()), etc.
+This will also work for other URL methods like (method: $field->toUrl), (class: Kirby\Cms\Url method: to text: Url:to()), etc.
 
 #### Support for UUIDs in API calls
 
@@ -85,10 +84,10 @@ In addition to that there are new direct UUID file routes:
 /api/files/@$fileUUID
 ```
 
-### Better plugin asset handling
+#### Better plugin asset handling
 - New `Kirby\Cms\Plugin::assets()` and `Kirby\Cms\Plugin::asset($assetName)` methods
 - New `Kirby\Cms\PluginAsset` object with many methods, e.g. `$plugin->asset('styles.css')->url()`
-- Plugin asset media url contains a modification timestamp to easily cachebust (e.g. https://getkirby.com/media/plugins/getkirby/test-plugin/2375797551-472389240/styles.css)
+- Plugin asset media url contains a modification timestamp to easily cachebust (e.g. `/media/plugins/getkirby/test-plugin/2375797551-472389240/styles.css`)
 - (helper: css) and (helper: js) helpers support passing plugin and plugin assets objects to include all assets of the plugin
 
 ```php
@@ -108,8 +107,8 @@ css([
 ]);
 ```
 
-### New `SymmetricCrypto` class
-`Kirby\Toolkit\SymmetricCrypto` is a user-friendly and safe abstraction for symmetrical authenticated encryption using the PHP `sodium` extension
+#### New `SymmetricCrypto` class
+`Kirby\Toolkit\SymmetricCrypto` is a user-friendly and safe abstraction for symmetrical authenticated encryption using the PHP `sodium` extension:
 
 ```php
 use Kirby\Toolkit\SymmetricCrypto;
@@ -130,7 +129,7 @@ $ciphertext = $crypto->encrypt('a very confidential string');
 $plaintext  = $crypto->decrypt($ciphertext);
 ```
 
-### New `LazyValue` class
+#### New `LazyValue` class
 `Kirby\Toolkit\LazyValue` allows to protect a closure function from being called by other code that is testing for `instanceof Closure`.
 
 ```php
@@ -152,13 +151,13 @@ if ($value instanceof LazyValue) {
 }
 ```
 
-#### More improvements
+### More improvements
 
 - Extensions to add custom methods for structures and structure objects
 - New `Kirby\Toolkit\Str::camelToKebab()` method
 - New `Kirby\Cms\App::models()` method that returns a generator for each model (site, files, pages and users) of the site
 - New `Kirby\Cms\File::blueprints()` method that collects valid blueprints from the files sections and files fields of the parent model
-- Fields can now define `'hidden' => true` (component notation) or `::isHidden(): bool` (class-based) to make them non-rendering 
+- Fields can now define `'hidden' => true` (component notation) or `::isHidden(): bool` (class-based) to make them non-rendering
 - New `Kirby\Cms\File::changeTemplate()` method
 - New file permissions for `changeTemplate`
 - New `file.changeTemplate` hooks
