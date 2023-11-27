@@ -35,16 +35,17 @@
 .v4-design-features li {
 	background: var(--color-light);
 	border-radius: var(--spacing-2);
-	padding: var(--spacing-6) var(--spacing-3);
-	display: flex;
-	flex-direction: column;
-	gap: .5rem;
-	align-items: center;
 	font-size: var(--text-xs);
 	font-family: var(--font-mono);
+	color: var(--color-text-dimmed);
+}
+.v4-design-features :where(li, a) {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: .5rem;
 	justify-content: center;
 	text-align: center;
-	color: var(--color-text-dimmed);
 }
 .v4-design-features svg {
 	width: 24px;
@@ -60,44 +61,56 @@
 
 <ul class="v4-design-features">
 	<li>
-		<?= icon('menu') ?>
-		New menu
+		<a href="/docs/reference/system/options/panel#panel-menu" class="py-6 px-3">
+			<?= icon('menu') ?>
+			New menu
+		</a>
 	</li>
-	<li>
+	<li class="py-6 px-3">
 		<?= icon('artboard') ?>
 		Full-width layout
 	</li>
-	<li>
+	<li class="py-6 px-3">
 		<?= icon('keyboard') ?>
 		A11y improvements
 	</li>
 	<li>
-		<?= icon('fingerprint') ?>
-		New button design
+		<a href="https://lab.getkirby.com/public/lab/components/buttons" class="py-6 px-3">
+			<?= icon('fingerprint') ?>
+			New button design
+		</a>
 	</li>
 	<li>
-		<?= icon('palette') ?>
-		New color scheme
+		<a href="https://lab.getkirby.com/public/lab/basics/design/colors" class="py-6 px-3">
+			<?= icon('palette') ?>
+			New color scheme
+		</a>
 	</li>
 	<li>
-		<?= icon('pencil-ruler') ?>
-		New icons
+		<a href="/docs/reference/panel/icons" class="py-6 px-3">
+			<?= icon('pencil-ruler') ?>
+			New icons
+		</a>
 	</li>
-	<li>
+	<li class="py-6 px-3">
 		<?= icon('save') ?>
 		Redesigned save bar
 	</li>
-	<li>
+	<li class="py-6 px-3">
 		<?= icon('window') ?>
 		Better responsiveness
 	</li>
 	<li>
-		<?= icon('paint-brush') ?>
-		Refreshed UI components
+		<a href="https://lab.getkirby.com/public/lab" class="py-6 px-3">
+			<?= icon('paint-brush') ?>
+			Refreshed UI components
+		</a>
 	</li>
 	<li>
-		<?= icon('plugin') ?>
-		New UI plugin options
+		<a href="https://lab.getkirby.com/public/lab/internals/panel" class="py-6 px-3">
+			<?= icon('plugin') ?>
+			New UI plugin options
+		</a>
 	</li>
 </ul>
 
