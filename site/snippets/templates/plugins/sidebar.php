@@ -17,11 +17,12 @@
           <?= icon('list') ?> All
         </a>
       </li>
-      <li>
+      <!-- Skip featured plugins for now …
+			<li>
         <a href="/plugins" <?= ariaCurrent((!$currentCategory) && in_array($kirby->request()->path()->toString(), ['plugins/new', 'plugins/getkirby']) === false) ?>>
           <?= icon('star') ?> Featured
         </a>
-      </li>
+      </li> -->
       <li>
         <a href="/plugins/k4" <?= ariaCurrent($kirby->request()->path()->toString() === 'plugins/k4') ?>>
           <?= icon('flash') ?> Kirby 4

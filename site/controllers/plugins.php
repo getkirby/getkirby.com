@@ -37,6 +37,8 @@ return function($page, $filter) {
 	} else {
 		$category = null;
 		$plugins  = new Pages();
+
+		go('plugins/k4');
 	}
 		return [
 		'categories'      => $categories,
