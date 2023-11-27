@@ -7,7 +7,7 @@
       The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
     </h1>
 
-    <p class="h2" style="color: var(--color-yellow-700)">
+    <p class="h2" style="color: var(--color-purple-800)">
 			We will be right back…
 		</p>
   </div>
