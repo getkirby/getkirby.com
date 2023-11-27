@@ -42,13 +42,15 @@ $page->myLinkField()->toQrCode()->toSvg();
 
 ```
 
-#### Support for UUIDs in URL helper
+#### Support for UUIDs and permalinks in URL helper
 
-You can now pass a page UUID or a file UUID to the (helper: url) helper and it will be converted to the actual URL:
+You can now pass a page UUID, a file UUID or a permalink to the (helper: url) helper and it will be converted to the actual URL:
 
 ```php
 <?= url('page://abcd') ?>
 <?= url('file://abcd') ?>
+<?= url('/@/page/abcd') ?>
+<?= url('/@/file/abcd') ?>
 ```
 
 This will also work for other URL methods like (method: $field->toUrl), (class: Kirby\Cms\Url method: to text: Url:to()), etc.
@@ -85,6 +87,7 @@ In addition to that there are new direct UUID file routes:
 ```
 
 #### Better plugin asset handling
+- New `assets` plugin extension that allows plugins to specify assets from custom paths and with a wider range of extensions than previously supported
 - New `Kirby\Cms\Plugin::assets()` and `Kirby\Cms\Plugin::asset($assetName)` methods
 - New `Kirby\Cms\PluginAsset` object with many methods, e.g. `$plugin->asset('styles.css')->url()`
 - Plugin asset media url contains a modification timestamp to easily cachebust (e.g. `/media/plugins/getkirby/test-plugin/2375797551-472389240/styles.css`)
@@ -153,13 +156,17 @@ if ($value instanceof LazyValue) {
 
 ### More improvements
 
+- New `$field->permalinksToUrls()` method for writer fields
 - Extensions to add custom methods for structures and structure objects
 - New `Kirby\Toolkit\Str::camelToKebab()` method
+- `Str::template()` supports single and double curly braces as start/end delimiters by default
+- `Xml::attr()`: Support passing an empty string as value to generate an attribute with an empty value
 - New `Kirby\Cms\App::models()` method that returns a generator for each model (site, files, pages and users) of the site
 - New `Kirby\Cms\File::blueprints()` method that collects valid blueprints from the files sections and files fields of the parent model
 - Fields can now define `'hidden' => true` (component notation) or `::isHidden(): bool` (class-based) to make them non-rendering
+- New `languages.variables` config option to disable managing translations in the Panel
 - New `Kirby\Cms\File::changeTemplate()` method
-- New file permissions for `changeTemplate`
+- New file permissions for `changeTemplate`, `access` and `list`
 - New `file.changeTemplate` hooks
 - New `Kirby\Filesystem\F::safeExtension()` method
 - New `Kirby\Filesystem\F::safeBasename()` method
@@ -167,3 +174,7 @@ if ($value instanceof LazyValue) {
 - New `$date->formatWithHandler()` method for Kirby date objects that allows to use different date handlers or even the globally configured one (default).
 - New `Kirby\Email\Email::toArray()` and `Kirby\Email\Body::toArray()` methods
 - New `Kirby\Exception\AuthException` class
+- Dom: New `allowHostRelativeUrls` sanitization option (`true` by default) to perform less strict checks when the HTML `<base>` element is used
+- Dom: Custom sanitization callbacks for attributes, elements and the doctype now also receive the `$options` array
+- Sane: New `$isExternal` mode specifically for external files that may be accessed directly
+- More detailed security policy for GitHub

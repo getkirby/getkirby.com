@@ -8,13 +8,16 @@ Text:
 
 - Kirby 4 requires at least PHP 8.1 and supports up to PHP 8.3.
 - When impersonating the almighty `kirby` user, any permission check will succeed even if permission has been disabled for regular admins.
+- The `twitter` KirbyTag and helper have been removed. Use the legacy plugin if you still rely on these: [legacy-twitter.zip](https://github.com/getkirby/kirby/files/11992344/legacy-twitter.zip)
 - We have added more native PHP type hints throughout the system. When extending core classes, this might require you to update your method to include those type hints as well.
 - Users field doesn't automatically use the current user as default, add `default: true` to keep this functionality.
 - When thumb generation fails, the image API now throws an error and no longer loads the original image.
 - Files: `manipulate` and `focus` are now used by core methods. They are no longer available for custom file methods and content fields with these names can only be accessed via e.g. `$file->content()->get('focus')`.
 - `I18n::translate()`: If `$fallback` is an array and neither the array `$key` nor the array `$fallback` have a matching entry for the locale, the first element of the `$key` array  will now be returned (not anymore the one from `$fallback`). If `$fallback` is a string, it will be considered with priority over both of these.
+- Passing an empty string as value to `Xml::attr()` no longer omits the attribute but generates an attribute with an empty value.
 - If overwriting the `hidden` field, it must return `'hidden' => true` now.
 - Removed deprecated `DS` constant. Use `/` instead.
+- When sanitizing DOM objects (e.g. in the writer field, but not during the sanitization/validation of uploaded files), host-relative URLs that point outside the site root are now allowed as the use of the HTML `<base>` element is assumed for sites in a subfolder. To revert to the old, strict behavior, set the `allowHostRelativeUrls` option to `false`.
 - Renamed parameter of `::group()` method of all collection classes to `$caseInsensitive`
 - Errors are no longer hidden when a response is converted to a string.
 - The `$translations->start()` and `$translations->stop()` methods were no longer in use and have been removed. Content files are automatically converted by the `Language` class.
@@ -32,13 +35,15 @@ Text:
 - `new Structure()`/`new StructureObject()` don't work anymore as before. Use `Structure::factory()`/`StructureObject::factory()` instead.
 - `Kirby\Cms\Items::factory()` and all inheriting classes throw an exception now if malformed data is passed.
 - Extending the internal `$model->contentFile()`, `$model->contentFiles()`, `$model->contentFileDirectory()`, `$model->contentFileExtension()`, `$model->contentFileName()`, `$model->readContent()` and `$model->writeContent()` methods in a page model will no longer have an effect as these methods are no longer called by the core. Please extend the new `Kirby\Content\PlainTextContentStorageHandler` class instead and return an instance of your custom class from `$model->storage()`. Please note that the interface of `PlainTextContentStorageHandler` is internal and may change in the future.
+- New `$isExternal` argument for the `Kirby\Sane\Handler::sanitize()` and `Kirby\Sane\Handler::validate()` methods that custom Sane handlers need to implement; it allows to differentiate between strings from external files that may be accessed directly and strings that will end up directly on the page.
 
 #### Panel
 
 - Blocks: Removed keyboard shortcut to move block focus up/down
+- Removed `road-sign` icon
+- The icons `circle`, `heart` and `star` are now named `circle-filled`, `heart-filled` and `star-filled`
 - Removed `this.$config.search` from Panel
 - Area `search` plugins receive two additional arguments for their query callback: `$limit` and `$page` to be used to paginate the results. They should then return an array with entries results and pagination. [#5191](https://github.com/getkirby/kirby/pull/5191)
-- `this.$library.autosize` has been removed, wrap `<textarea>` elements inside `<k-autosize>` element instead.
 - Defining the footer slot in `<k-dialog>` will no longer wrap the slot content in the `<footer>` element. This can now be more flexibly handled by using `<k-dialog-footer>` inside the slot.
 - The form drawer no longer automatically closes on submit. This is introducing the same behaviour as in dialogs. Auto-closing might often not be the intended result of submitting the form and it's easier to close it manually in a submit handler than to re-open it again.
 - `this.$store.state.isLoading` is no longer available. You can now use `window.panel.isLoading` or `this.$panel.isLoading` in Vue components to access the current loading state.
@@ -48,6 +53,9 @@ Text:
 - Native events (e.g. `click`, `dbclick`) need the `.native` modifier now when used on `k-block` and `k-block-title`
 - Need to use `.native` modifier for all previous event listeners on `k-box` and `k-image`
 - `k-pagination` doesn't support setting custom labels/titles via `nextLabel`, `prevLabel` or `pageLabel`
+- `k-range` was removed and replaced by `k-alpha-range` and `k-hue-range`
+- `k-choice` has been removed. Use `k-choice-input` instead.
+- The unused theme prop has been removed from `k-choice-input`
 
 #### Removed deprecated code
 

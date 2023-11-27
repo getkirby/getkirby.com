@@ -19,3 +19,6 @@ Text:
 - Users field does not use a default anymore if none set
 - The "Session ... is currently read-only because it was accessed via an old session" error is circumvented when the PHP `sodium` extension is available
 - Removed the error boundary from `<k-fieldset>`; the error boundary kills the entire field/input if an error occurs, which is way too aggressive and also makes it more difficult to handle errors properly.
+- `App::multilang()` and `App::defaultLanguage()` are correctly updated on changes to language data [#5342](https://github.com/getkirby/kirby/issues/5342)
+- Prevent unnecessary runs in `Language::update()` when updating the default language
+- Block title: certain HTML characters are now properly unescaped in the label [#5346](https://github.com/getkirby/kirby/issues/5346)

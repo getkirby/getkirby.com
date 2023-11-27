@@ -6,6 +6,8 @@ Text:
 
 #### Core
 
+- Files in a plugin's `assets` directory are now always assumed to be public, independent of their file extension. If your plugin needs to store other files in the assets directory, please use the new `assets` extension to explicitly define the public assets.
+- Passing a single space as value to `Xml::attr()` (with the intention to generate an attribute with an empty value) has been deprecated in favor of passing an empty string.
 - `Kirby\Cms\Model`: Use `Kirby\Cms\ModelWithContent` instead
 - `Kirby\Email\Email::clone()` and `Kirby\Email\Body::clone()`
 - `Page::isReadable()`: Use `Page::isAccessible()` instead
@@ -14,6 +16,8 @@ Text:
 
 #### Panel
 
+- Custom icons using a 16x16 viewbox have been deprecated. In an upcoming version, Kirby will only support custom icons with a 24x24 viewbox by default. If you want to continue using icons with a different viewport, please wrap them in an `<svg>` element with the corresponding `viewBox` attribute.
+- Icons `circle-outline`, `heart-outline` and `star-outline`: Use `circle`, `heart` and `star` instead.
 - `this.$events`: Use `this.$panel.events` instead.
 - `this.$panel.events.$on`: Use `this.$panel.events.on` instead
 - `this.$panel.events.$off`: Use `this.$panel.events.off` instead

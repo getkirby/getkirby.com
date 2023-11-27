@@ -80,9 +80,32 @@ In a field component, the dialog can be opened by using the field endpoint:
 this.$dialog(this.endpoints.field + "/delete")
 ```
 
+#### Customization of the layout selector
+
+The layout selector is now customizable with the `size` (`small`, `medium`, `large`, `huge`) and `columns` options via the new `selector` prop:
+
+```yaml
+layout:
+  type: layout
+  layouts:
+    ...
+  selector:
+    # `small`, `medium`, `large` or `huge`
+    size: huge
+    columns: 6
+```
+
 ### More improvements
+
+- Disabled buttons can receive focus (tab) which allows them to be read out by screenreaders
+- Structure fields don’t disregard content changes anymore when clicking outside the form (now drawer)
+- Correct autofocus handling for blocks, layout, structure, picker fields and dropdowns
 - Improved focus styles for links and the flag preview in tables
+- All minified panel assets now add `.min` to the filename. This will avoid auto-minification in Cloudflare and possibly other environments.
 - Improved text overflow behavior for links in tables
+- Increase the font size for help text in sections and fields
+- The multiselect and tag dropdowns now offer more space to not cut off longer options
+- Slug field: respect custom slug allow from Str
 - Pages section: new `templatesIgnore` option [#5322](https://github.com/getkirby/kirby/pull/5322)
 - Users field: set `default: true` to always use the currently logged in user as default
 - New items size `full`
@@ -148,6 +171,9 @@ We've added new icons to our Panel iconset: `anchor`, `clear`, `lab`, `merge` an
 
 We've tweaked the Panel extensively with too many improvements to name them all. But here are some more:
 
+- Load Panel area views dynamically with the new `when` prop
+- Each Panel area can now define additional requests for simple data endpoints or actions
+- Syntax highlighting in the `k-code` with Prism
 - Text fields: new `font: monospace` option
 - `panel.css` and `panel.js` config options now also support arrays with multiple entries as well as absolute URLs
 - `k-pagination` always can be navigated by keys (no extra prop needed anymore)

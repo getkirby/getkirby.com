@@ -15,9 +15,11 @@ Text:
   - Moved the `Content`, `ContentTranslation` and `Field` classes into the new namespace (compatibility aliases are provided for now)
   - New internal `ContentStorage` class that currently holds more of the storage related business logic
   - New internal `ContentStorageHandler` interface and internal `PlainTextContentStorageHandler` class to bundle all low-level content logic in one place
+- Whoops is now generally disabled during PHPUnit test runs to reduce memory usage during tests
 
 #### Panel
 
+- More frontend unit tests
 - Cleaned up `k-toolbar` component
 - New drawer component structure:
   ```html
@@ -39,3 +41,5 @@ Text:
 - Removed `v-model` from `k-form` and `k-fieldset`
 - Removed `$listeners` usage from `k-draggable`, `k-button` and subcomponents, `k-link`, `k-headline`, `k-form`, `k-block`, `k-block-title`, `k-box`, `k-image`, `k-content-item`
 - Made `k-bubble` more flexible
+- Use the Vue object syntax for dynamic `:style` attributes to enhance the robustness and security
+- Reduce JS forEach usage
