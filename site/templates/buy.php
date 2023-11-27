@@ -299,7 +299,7 @@
 		</div>
 	</section>
 
-  <footer class="h2 max-w-xl">
+  <footer class="h2">
     Manage your existing licenses in our <a href="https://hub.getkirby.com"><span class="link">license&nbsp;hub</span> &rarr;</a>
   </footer>
 
