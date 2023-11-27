@@ -103,7 +103,7 @@ Kirby 4 contains some features out of the box that were previously provided by p
 - (link: docs/guide/files/files#setting-a-focus-point text: Setting an image focus point)
 - (link: docs/reference/plugins/extensions/blocks#quick-and-easy-fields-preview text: Fields preview for blocks)
 - (link: docs/reference/panel/blueprints/page#page-creation-dialog text: Custom fields in the page create dialog)
-- (link: https://github.com/texnixe/k3-filesdisplay-section text: Query support for pages and files sections)
+- (link: docs/reference/panel/sections/pages#filtering-pages__query text: Query support for pages and files sections)
 - (link: docs/guide/languages/custom-language-variables#language-editor-in-the-panel text: Translate i18n strings in the Panel)
 - (link: docs/reference/objects/image/qr-code text: Generate a QR code)
 
