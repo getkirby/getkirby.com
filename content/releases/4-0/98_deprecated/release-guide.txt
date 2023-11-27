@@ -11,14 +11,14 @@ Text:
 - `Kirby\Cms\Model`: Use `Kirby\Cms\ModelWithContent` instead
 - `Kirby\Email\Email::clone()` and `Kirby\Email\Body::clone()`
 - `Page::isReadable()`: Use `Page::isAccessible()` instead
-- The name `query` should not be used for custom API endpoints anymore, it will be used for the Kql plugin/core implementation
+- The name `query` should not be used for custom API endpoints anymore, it will be used for the Kirby QL (KQL) plugin/core implementation
 - Internal `$model->contentFile()`, `$model->contentFiles()`, `$model->contentFileDirectory()`, `$model->contentFileExtension()` and `$model->contentFileName()` methods have been deprecated and will be removed in v5.
 
 #### Panel
 
 - Custom icons using a 16x16 viewbox have been deprecated. In an upcoming version, Kirby will only support custom icons with a 24x24 viewbox by default. If you want to continue using icons with a different viewport, please wrap them in an `<svg>` element with the corresponding `viewBox` attribute.
-- Icons `circle-outline`, `heart-outline` and `star-outline`: Use `circle`, `heart` and `star` instead.
-- `this.$events`: Use `this.$panel.events` instead.
+- Icons `circle-outline`, `heart-outline` and `star-outline`: Use `circle`, `heart` and `star` instead
+- `this.$events`: Use `this.$panel.events` instead
 - `this.$panel.events.$on`: Use `this.$panel.events.on` instead
 - `this.$panel.events.$off`: Use `this.$panel.events.off` instead
 - `this.$panel.events.$emit`: Use `this.$panel.events.emit` instead

@@ -91,7 +91,7 @@ In addition to that there are new direct UUID file routes:
 - New `Kirby\Cms\Plugin::assets()` and `Kirby\Cms\Plugin::asset($assetName)` methods
 - New `Kirby\Cms\PluginAsset` object with many methods, e.g. `$plugin->asset('styles.css')->url()`
 - Plugin asset media url contains a modification timestamp to easily cachebust (e.g. `/media/plugins/getkirby/test-plugin/2375797551-472389240/styles.css`)
-- (helper: css) and (helper: js) helpers support passing plugin and plugin assets objects to include all assets of the plugin
+- (helper: css) and (helper: js) helpers support passing plugin and plugin assets objects to include all assets of the plugin:
 
 ```php
 css([
@@ -133,7 +133,7 @@ $plaintext  = $crypto->decrypt($ciphertext);
 ```
 
 #### New `LazyValue` class
-`Kirby\Toolkit\LazyValue` allows to protect a closure function from being called by other code that is testing for `instanceof Closure`.
+`Kirby\Toolkit\LazyValue` allows to protect a closure function from being called by other code that is testing for `instanceof Closure`:
 
 ```php
 $value = new LazyValue(fn ($a, $b, $c) => 'please protect me');

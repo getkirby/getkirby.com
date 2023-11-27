@@ -14,10 +14,9 @@ Text:
 - When thumb generation fails, the image API now throws an error and no longer loads the original image.
 - Files: `manipulate` and `focus` are now used by core methods. They are no longer available for custom file methods and content fields with these names can only be accessed via e.g. `$file->content()->get('focus')`.
 - `I18n::translate()`: If `$fallback` is an array and neither the array `$key` nor the array `$fallback` have a matching entry for the locale, the first element of the `$key` array  will now be returned (not anymore the one from `$fallback`). If `$fallback` is a string, it will be considered with priority over both of these.
-- Passing an empty string as value to `Xml::attr()` no longer omits the attribute but generates an attribute with an empty value.
 - If overwriting the `hidden` field, it must return `'hidden' => true` now.
 - Removed deprecated `DS` constant. Use `/` instead.
-- When sanitizing DOM objects (e.g. in the writer field, but not during the sanitization/validation of uploaded files), host-relative URLs that point outside the site root are now allowed as the use of the HTML `<base>` element is assumed for sites in a subfolder. To revert to the old, strict behavior, set the `allowHostRelativeUrls` option to `false`.
+- When sanitizing DOM objects (e.g. in the writer field, but not during the sanitization/validation of uploaded files), host-relative URLs that point outside the site root are now allowed as the use of the HTML `<base>` element is assumed for sites in a subfolder. To revert to the old, strict behavior, set Sane's `allowHostRelativeUrls` option to `false`.
 - Renamed parameter of `::group()` method of all collection classes to `$caseInsensitive`
 - Errors are no longer hidden when a response is converted to a string.
 - The `$translations->start()` and `$translations->stop()` methods were no longer in use and have been removed. Content files are automatically converted by the `Language` class.
@@ -41,7 +40,7 @@ Text:
 
 - Blocks: Removed keyboard shortcut to move block focus up/down
 - Removed `road-sign` icon
-- The icons `circle`, `heart` and `star` are now named `circle-filled`, `heart-filled` and `star-filled`
+- The icons `circle`, `heart` and `star` are now named `circle-filled`, `heart-filled` and `star-filled`.
 - Removed `this.$config.search` from Panel
 - Area `search` plugins receive two additional arguments for their query callback: `$limit` and `$page` to be used to paginate the results. They should then return an array with entries results and pagination. [#5191](https://github.com/getkirby/kirby/pull/5191)
 - Defining the footer slot in `<k-dialog>` will no longer wrap the slot content in the `<footer>` element. This can now be more flexibly handled by using `<k-dialog-footer>` inside the slot.
@@ -53,12 +52,13 @@ Text:
 - Native events (e.g. `click`, `dbclick`) need the `.native` modifier now when used on `k-block` and `k-block-title`
 - Need to use `.native` modifier for all previous event listeners on `k-box` and `k-image`
 - `k-pagination` doesn't support setting custom labels/titles via `nextLabel`, `prevLabel` or `pageLabel`
-- `k-range` was removed and replaced by `k-alpha-range` and `k-hue-range`
+- `k-range` was removed and replaced by `k-alpha-range` and `k-hue-range`.
 - `k-choice` has been removed. Use `k-choice-input` instead.
-- The unused theme prop has been removed from `k-choice-input`
+- The unused theme prop has been removed from `k-choice-input`.
 
 #### Removed deprecated code
 
-- `Kirby\Form\Options`, `Kirby\Form\OptionsApi` and `Kirby\Form\OptionsQuery` classes have been removed. Use `Kirby\Option\Options`, `Kirby\Option\OptionsApi` or `Kirby\Option\OptionsQuery` instead.
-- `Kirby\Toolkit\Query` class has been removed. Use `Kirby\Query\Query` instead.
+- The `Kirby\Form\Options`, `Kirby\Form\OptionsApi` and `Kirby\Form\OptionsQuery` classes have been removed. Use `Kirby\Option\Options`, `Kirby\Option\OptionsApi` or `Kirby\Option\OptionsQuery` instead.
+- The `Kirby\Toolkit\Query` class has been removed. Use `Kirby\Query\Query` instead.
 - Passing the `$slot` or `$slots` variables to snippets was deprecated and support has now finally been removed.
+- Passing an empty string as value to `Xml::attr()` (deprecated in Kirby 3.9) no longer omits the attribute but generates an attribute with an empty value.
