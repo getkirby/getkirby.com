@@ -41,7 +41,7 @@
         <?php endif ?>
       </td>
       <td>
-        <?php if (empty($incident['cvss']) === false): ?>
+        <?php if (empty($incident['cve']) === false): ?>
         <a class="whitespace-nowrap" href="https://nvd.nist.gov/vuln/detail/<?= $incident['cve'] ?>"><?= $incident['cve'] ?></a>
         <?php else: ?>
         CVE ID pending
