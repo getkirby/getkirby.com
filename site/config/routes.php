@@ -45,8 +45,8 @@ return [
 		}
 	],
 	[
-		'pattern' => 'buy/prices/(:any)',
-		'action' => function (string $currency) {
+		'pattern' => 'buy/prices/(:any?)',
+		'action' => function (string $currency = 'EUR') {
 			return json_encode([
 				'basic' => [
 					'regular' => Product::Basic->price($currency)->regular(),
