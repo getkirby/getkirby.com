@@ -60,8 +60,8 @@ return [
 		}
 	],
 	[
-		'pattern' => 'buy/(:any)/(:any)',
-		'action' => function (string $product, string $currency) {
+		'pattern' => 'buy/(:any)/(:any?)',
+		'action' => function (string $product, string $currency = 'EUR') {
 			try {
 				$product = Product::from($product);
 				$price   = $product->price($currency);
