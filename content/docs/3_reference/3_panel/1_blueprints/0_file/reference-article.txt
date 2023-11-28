@@ -137,10 +137,10 @@ In your file blueprints you can set resize and crop settings, which will be appl
 
 ```yaml "site/blueprints/files/image.yml"
 title: Image
-  create:
-    width: 500
-    height: 500
-    crop: true
+create:
+	width: 500
+	height: 500
+	crop: true
 ```
 </since>
 ## Image options
