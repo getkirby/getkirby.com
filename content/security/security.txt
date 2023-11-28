@@ -214,7 +214,7 @@ Urls:
 # - `{{ version }}`: A version in the version range of the entry's key
 # - `{{ current }}`: The current Kirby version of the installation
 
-3.*:
+">= 3.0.0":
     changes: https://github.com/getkirby/kirby/releases/tag/{{ version }}
     download: https://github.com/getkirby/kirby/archive/refs/tags/{{ version }}.zip
     upgrade: https://getkirby.com/releases/{{ latestMajor }}
