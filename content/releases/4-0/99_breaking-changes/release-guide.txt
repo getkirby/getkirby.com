@@ -12,16 +12,16 @@ Text:
 - We have added more native PHP type hints throughout the system. When extending core classes, this might require you to update your method to include those type hints as well.
 - Users field doesn't automatically use the current user as default, add `default: true` to keep this functionality.
 - When thumb generation fails, the image API now throws an error and no longer loads the original image.
-- Files: `manipulate` and `focus` are now used by core methods. They are no longer available for custom file methods and content fields with these names can only be accessed via e.g. `$file->content()->get('focus')`.
+- Files: `manipulate` is now a core method and `focus` a reserved field by the core. These names are no longer available for custom file methods. Previous content fields with these names can only be accessed via e.g. `$file->content()->get('manipulate')`.
 - `I18n::translate()`: If `$fallback` is an array and neither the array `$key` nor the array `$fallback` have a matching entry for the locale, the first element of the `$key` array  will now be returned (not anymore the one from `$fallback`). If `$fallback` is a string, it will be considered with priority over both of these.
 - If overwriting the `hidden` field, it must return `'hidden' => true` now.
 - Removed deprecated `DS` constant. Use `/` instead.
 - When sanitizing DOM objects (e.g. in the writer field, but not during the sanitization/validation of uploaded files), host-relative URLs that point outside the site root are now allowed as the use of the HTML `<base>` element is assumed for sites in a subfolder. To revert to the old, strict behavior, set Sane's `allowHostRelativeUrls` option to `false`.
 - Renamed parameter of `::group()` method of all collection classes to `$caseInsensitive`
-- Errors are no longer hidden when a response is converted to a string.
+- Errors are no longer hidden when a `Response` is converted to a string.
 - The `$translations->start()` and `$translations->stop()` methods were no longer in use and have been removed. Content files are automatically converted by the `Language` class.
 - `$languages->codes()` now returns `['default']` for single language installations.
-- `Panel\Assets::custom()` now returns an array.
+- `Kirby\Panel\Assets::custom()` now returns an array.
 - `Kirby\Uuid\Uuid` is now an abstract class, child classes need to implement the `id` method.
 - `Kirby\Uuid\Uuid::key()` can now also return `null` if the new `$generate` parameter isn't passed as `true` and no UUID has yet been generated for the model.
 - `Kirby\Cms\ModelWithContent` doesn't extend `Kirby\Cms\Model` anymore.
@@ -31,7 +31,7 @@ Text:
 - Removed `::kirby()` method from `Kirby\Cms\Role` and `Kirby\Cms\StructureObject` classes
 - Unauthenticated API and Panel calls now return a correct 401 HTTP code instead of 403.
 - Registering a default block model now needs to be done with the key `default`, not `Kirby\Cms\Block`.
-- `new Structure()`/`new StructureObject()` don't work anymore as before. Use `Structure::factory()`/`StructureObject::factory()` instead.
+- `new Kirby\Cms\Structure()`/`new Kirby\Cms\StructureObject()` don't work anymore as before. Use `Kirby\Cms\Structure::factory()`/`Kirby\Cms\StructureObject::factory()` instead.
 - `Kirby\Cms\Items::factory()` and all inheriting classes throw an exception now if malformed data is passed.
 - Extending the internal `$model->contentFile()`, `$model->contentFiles()`, `$model->contentFileDirectory()`, `$model->contentFileExtension()`, `$model->contentFileName()`, `$model->readContent()` and `$model->writeContent()` methods in a page model will no longer have an effect as these methods are no longer called by the core. Please extend the new `Kirby\Content\PlainTextContentStorageHandler` class instead and return an instance of your custom class from `$model->storage()`. Please note that the interface of `PlainTextContentStorageHandler` is internal and may change in the future.
 - New `$isExternal` argument for the `Kirby\Sane\Handler::sanitize()` and `Kirby\Sane\Handler::validate()` methods that custom Sane handlers need to implement; it allows to differentiate between strings from external files that may be accessed directly and strings that will end up directly on the page.
