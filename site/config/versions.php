@@ -1,7 +1,5 @@
 <?php
 
-use Kirby\Data\Data;
-
 return [
 	'1' => [
 		'title'       => 'Kirby 1',

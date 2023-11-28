@@ -34,15 +34,19 @@
             New in <?= $release->version() ?>
           </a>
         </div>
+				<?php
+				$subreleases = $kirby->option('versions')[$release->version()->value()]['subreleases'];
+				if (count($subreleases) > 0) :
+				?>
         <div class="prose">
           <div class="h5 mb-4 color-black">Further releases</div>
           <span class="text-base">
-            <?= implode(', ', A::map(
-              array_reverse($kirby->option('versions')[$release->version()->value()]['subreleases']),
-              fn ($subRelease) => '<a href="https://github.com/getkirby/kirby/releases/tag/' . $subRelease . '">' . $subRelease . '</a>'
+            <?= implode(', ', A::map(array_reverse($subreleases),
+              fn ($subrelease) => '<a href="https://github.com/getkirby/kirby/releases/tag/' . $subrelease . '">' . $subrelease . '</a>'
             )) ?>
           </span>
         </div>
+				<?php endif ?>
       </li>
     <?php endforeach ?>
   </ul>
