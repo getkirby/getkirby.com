@@ -14,10 +14,13 @@ The following "areas" are installed by default:
 
 - `account`
 - `installation` (only active if no user is defined)
+- `lab`
+- `languages`
 - `login` (only active if no user is logged in)
 - `logout`
-- `settings`
+- `search`
 - `site`
+- `system`
 - `users`
 
 ## Area definition
