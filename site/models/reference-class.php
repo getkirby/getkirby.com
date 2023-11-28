@@ -55,7 +55,7 @@ class ReferenceClassPage extends SectionPage
 
 				// Automatially activate $props support for
 				// constructur classmethod pages
-				if ($parameter = $method->getParameters()[0]) {
+				if ($parameter = ($method->getParameters()[0] ?? null)) {
 					if ($type = $parameter->getType()) {
 						if (
 							$type instanceof ReflectionUnionType === false &&
