@@ -18,16 +18,16 @@
     <?php foreach ($messages as $message): ?>
     <tr>
       <td>
-        <?= $message->content()->get('kirby')->escape() ?>
+        <?= Str::escape($message['content']['kirby']) ?>
       </td>
       <td>
-        <?= $message->php()->escape() ?>
+        <?= Str::escape($message['php']) ?>
       </td>
       <td>
-        <?= $message->text() ?>
+        <?= $message['text'] ?>
 
-        <?php if ($message->link()->isNotEmpty()): ?>
-        <a class="whitespace-nowrap" href="<?= $message->link() ?>">Read more ›</a>
+        <?php if (empty($message['link']) === false): ?>
+        <a class="whitespace-nowrap" href="<?= $message['link'] ?>">Read more ›</a>
         <?php endif ?>
       </td>
     </tr>

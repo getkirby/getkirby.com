@@ -22,14 +22,14 @@
     <tr>
       <td><?= esc($version) ?></td>
       <td>
-        <?= match ($entry->status()->value()) {
+        <?= match ($entry['status']) {
           'latest', 'no-vulnerabilities', 'active-support' => '✅',
           'security-support' => '⚠️',
           'end-of-life' => '❌',
           default => '❓️'
         } ?>
       </td>
-      <td class="w-100%"><?= $entry->description() ?></td>
+      <td class="w-100%"><?= $entry['description'] ?></td>
     </tr>
     <?php endforeach ?>
   </table>
