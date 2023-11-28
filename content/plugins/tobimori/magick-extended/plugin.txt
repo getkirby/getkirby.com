@@ -2,7 +2,7 @@ Title: ImageMagick Extended
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -26,4 +26,4 @@ Description: Extend Kirby's built-in ImageMagick driver, work better with GIFs a
 
 ----
 
-Versions: 3
+Versions: 3,4
