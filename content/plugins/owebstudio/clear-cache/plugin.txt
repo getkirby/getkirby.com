@@ -2,7 +2,7 @@ Title: Clear Cache
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -30,4 +30,4 @@ Description: Clean temporary files and folders such as cache, media, .lock and .
 
 ----
 
-Versions: 3
+Versions: 3,4

@@ -2,7 +2,7 @@ Title: MarkdownPlus
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -21,9 +21,9 @@ Published: 2023-03-25
 Description:
 
 A small set of syntax extensions greatly expand expressiveness of Markdown.
-Helps where you'd need complex templates. 
+Helps where you'd need complex templates.
 See dedicated Doc <a href='https://pagefactory.info/markdownplus'>https://pagefactory.info/markdownplus</a>
 
 ----
 
-Versions: 3
+Versions: 3,4

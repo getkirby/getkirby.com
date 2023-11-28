@@ -2,7 +2,7 @@ Title: Podcaster
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -30,4 +30,4 @@ Composer: mauricerenck/podcaster
 
 ----
 
-Versions: 3, 4
+Versions: 3,4

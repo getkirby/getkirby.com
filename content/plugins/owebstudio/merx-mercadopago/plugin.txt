@@ -2,7 +2,7 @@ Title: Mercado Pago for Merx
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -34,4 +34,4 @@ Description: Mercado Pago payment gateway for Kirby 3 Merx plugin.
 
 ----
 
-Versions: 3
+Versions: 3,4
