@@ -26,7 +26,7 @@ class Search
 		$this->options = App::instance()->option('search.algolia', []);
 		$this->options['key'] = App::instance()->option('keys.algolia');
 
-		if (isset($this->options['app'], $this->options['key']) === false) {
+		if (isset($this->options['app']) === false) {
 			throw new Exception('Please set your Algolia API credentials in the Kirby configuration.');
 		}
 
