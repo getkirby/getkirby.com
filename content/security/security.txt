@@ -169,30 +169,30 @@ Versions:
     status: active-support
     description: Actively supported
     latest: {{ latest }}
-3.10.*:
-    status: security-support
-    description: Security support until December 1, 2025
-    latest: 3.10.0
+# 3.10.*:
+#     status: security-support
+#     description: Security support until December 1, 2025
+#     latest: 3.10.0
 3.9.*:
     status: security-support
     description: Security support until December 1, 2025
-    latest: 3.10.0
+    latest: 3.9.8
 3.8.*:
     status: security-support
     description: Security support until December 1, 2024
-    latest: 3.10.0
+    latest: 3.9.8
 3.7.*:
     status: security-support
     description: Security support until June 26, 2024
-    latest: 3.10.0
+    latest: 3.9.8
 3.6.*:
     status: security-support
     description: Security support until June 26, 2024
-    latest: 3.10.0
+    latest: 3.9.8
 3.* <3.6:
     status: end-of-life
     description: Not supported (end of life) since November 15, 2023
-    latest: 3.10.0
+    latest: 3.9.8
 2.*:
     status: end-of-life
     description: Not supported (end of life) since January 1, 2021
@@ -214,7 +214,7 @@ Urls:
 # - `{{ version }}`: A version in the version range of the entry's key
 # - `{{ current }}`: The current Kirby version of the installation
 
-3.*:
+">= 3.0.0":
     changes: https://github.com/getkirby/kirby/releases/tag/{{ version }}
     download: https://github.com/getkirby/kirby/archive/refs/tags/{{ version }}.zip
     upgrade: https://getkirby.com/releases/{{ latestMajor }}

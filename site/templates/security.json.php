@@ -1,19 +1,12 @@
 <?php
 
-$idFilter = function ($entry) {
-    $entry = $entry->toArray();
-    unset($entry['id']);
-
-    return $entry;
-};
-
 $data = [
     'latest'    => $kirby->version(),
-    'versions'  => $page->versions()->toArray($idFilter),
-    'urls'      => $page->urls()->toArray($idFilter),
+    'versions'  => $page->versions(),
+    'urls'      => $page->urls(),
     'php'       => $page->php(),
-    'incidents' => array_values($page->incidents()->toArray($idFilter)),
-    'messages'  => array_values($page->messages()->toArray($idFilter))
+    'incidents' => array_values($page->incidents()),
+    'messages'  => array_values($page->messages())
 ];
 
 // keep the data in the client cache for a day,
