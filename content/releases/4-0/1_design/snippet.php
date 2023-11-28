@@ -95,7 +95,7 @@
 </ul>
 
 <figure class="release-box bg-light grid place-items-center">
-	<video controls autoplay class="rounded shadow-xl" style="width: 100%; --span: 2">
+	<video controls autoplay muted class="rounded shadow-xl" style="width: 100%; --span: 2">
 		<source src="<?= $section->file('panel.mp4')->url() ?>" type="video/mp4">
 	</video>
 </figure>
