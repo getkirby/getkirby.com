@@ -24,16 +24,17 @@ class Search
 	public function __construct()
 	{
 		$this->options = App::instance()->option('search.algolia', []);
-		$this->options['key'] = App::instance()->option('keys.algolia');
 
 		if (isset($this->options['app']) === false) {
 			throw new Exception('Please set your Algolia API credentials in the Kirby configuration.');
 		}
 
+		// use the search-only API key as fallback
+		$this->options['key'] = App::instance()->option('keys.algolia', 'd161a2f4cd2d69247c529a3371ad3050');
+
 		$this->algolia = Algolia::create(
 			$this->options['app'],
-			// use the search-only API key as fallback
-			option('keys.algolia', 'd161a2f4cd2d69247c529a3371ad3050')
+			$this->options['key']
 		);
 	}
 
