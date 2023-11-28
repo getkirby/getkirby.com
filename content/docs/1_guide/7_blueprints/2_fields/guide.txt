@@ -119,7 +119,7 @@ text:
 
 ## Field shortcuts
 
-For simple fields that are only used **once** per blueprint , you can use a shortcut. Set the field type as key and `true` as the value:
+For simple fields that are only used **once** per blueprint, you can use a shortcut. Set the field type as key and `true` as the value:
 
 ```yaml
 fields:
