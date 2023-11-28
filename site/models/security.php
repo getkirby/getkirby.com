@@ -6,9 +6,9 @@ use Kirby\Toolkit\Str;
 
 class SecurityPage extends Page
 {
-	public function incidents()
+	public function incidents(): array
 	{
-		return parent::incidents()->toStructure()->flip();
+		return array_reverse(parent::incidents()->yaml());
 	}
 
 	public function incidentsTable()
@@ -18,9 +18,9 @@ class SecurityPage extends Page
 		], true);
 	}
 
-	public function messages()
+	public function messages(): array
 	{
-		return parent::messages()->toStructure()->flip();
+		return array_reverse(parent::messages()->yaml());
 	}
 
 	public function messagesTable()
@@ -30,19 +30,23 @@ class SecurityPage extends Page
 		], true);
 	}
 
-	public function php()
+	public function php(): array
 	{
 		return parent::php()->yaml();
 	}
 
-	protected function replace(Field $field, array $data = [])
+	protected function replace(Field $field, array $data = []): Field
 	{
 		$noVulns = null;
 
-		// latest `fixed` version in the incident list = no newer known vulnerabilities
+		// latest `fixed` version in the incident list =
+		// no newer known vulnerabilities
 		foreach ($this->incidents() as $incident) {
-			foreach ($incident->fixed()->split(',') as $fixed) {
-				if ($noVulns === null || version_compare($fixed, $noVulns, '>')) {
+			foreach (Str::split($incident['fixed']) as $fixed) {
+				if (
+					$noVulns === null ||
+					version_compare($fixed, $noVulns, '>')
+				) {
 					$noVulns = $fixed;
 				}
 			}
@@ -64,14 +68,14 @@ class SecurityPage extends Page
 		return $field;
 	}
 
-	public function urls()
+	public function urls(): array
 	{
-		return $this->replace(parent::urls())->toStructure();
+		return $this->replace(parent::urls())->yaml();
 	}
 
-	public function versions()
+	public function versions(): array
 	{
-		return $this->replace(parent::versions())->toStructure();
+		return $this->replace(parent::versions())->yaml();
 	}
 
 	public function versionsTable()
@@ -81,7 +85,7 @@ class SecurityPage extends Page
 		], true);
 	}
 
-	public function text()
+	public function text(): Field
 	{
 		return $this->replace(parent::text(), [
 			'incidents' => $this->incidentsTable(),
