@@ -20,31 +20,35 @@
     <?php foreach ($incidents as $incident): ?>
     <tr>
       <td>
-        <?= str_replace(['||', ' - '], ['<br>', '&nbsp;-&nbsp;'], $incident->affected()->escape()) ?>
+        <?= str_replace(
+					['||', ' - '],
+					['<br>', '&nbsp;-&nbsp;'],
+					Str::esc($incident['affected'])
+				) ?>
       </td>
       <td>
-        <?= $incident->description() ?>
+        <?= $incident['description'] ?>
 
-        <?php if ($incident->link()->isNotEmpty()): ?>
-        <a class="whitespace-nowrap" href="<?= $incident->link() ?>">Read more ›</a>
+        <?php if (empty($incident['link']) === false): ?>
+        <a class="whitespace-nowrap" href="<?= $incident['link'] ?>">Read more ›</a>
         <?php endif ?>
       </td>
       <td>
-        <?php if ($incident->cvss()->isNotEmpty()): ?>
-        <a href="https://www.first.org/cvss/calculator/3.1#<?= $incident->cvss() ?>"><?= $incident->severity() ?></a>
+        <?php if (empty($incident['cvss']) === false): ?>
+        <a href="https://www.first.org/cvss/calculator/3.1#<?= $incident['cvss'] ?>"><?= $incident['severity'] ?></a>
         <?php else: ?>
-        <?= $incident->severity() ?>
+        <?= $incident['severity'] ?>
         <?php endif ?>
       </td>
       <td>
-        <?php if ($incident->cve()->isNotEmpty()): ?>
-        <a class="whitespace-nowrap" href="https://nvd.nist.gov/vuln/detail/<?= $incident->cve() ?>"><?= $incident->cve() ?></a>
+        <?php if (empty($incident['cvss']) === false): ?>
+        <a class="whitespace-nowrap" href="https://nvd.nist.gov/vuln/detail/<?= $incident['cve'] ?>"><?= $incident['cve'] ?></a>
         <?php else: ?>
         CVE ID pending
         <?php endif ?>
       </td>
       <td>
-        <?php foreach ($incident->fixed()->split(',') as $version): ?>
+        <?php foreach (Str::split($incident['fixed']) as $version): ?>
         <?php $major = Str::before($version, '.'); $majorOrg = $major !== '3' ? '-v' . $major : '' ?>
         <a href="https://github.com/getkirby<?= $majorOrg ?>/kirby/releases/tag/<?= $version ?>">
           <?= $version ?>
