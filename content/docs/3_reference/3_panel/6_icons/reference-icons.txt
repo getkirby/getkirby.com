@@ -4,7 +4,7 @@ Title: Icons
 
 Intro:
 
-Kirby comes with a set of icons that you can use in blueprints and extensions.
+Kirby comes with a set of icons that you can use in blueprints and extensions. They are based on the (link: https://remixicon.com text: Remix Icon) set.
 
 ----
 
