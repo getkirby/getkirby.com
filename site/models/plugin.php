@@ -31,7 +31,7 @@ class PluginPage extends Page
 		return $this->images()->findBy('name', 'card');
 	}
 
-	public function changes(string $version = null): string
+	public function changes(string $version = null): string|null
 	{
 		if ($this->content()->has('changes')) {
 			return $this->content()->get('changes')->value();

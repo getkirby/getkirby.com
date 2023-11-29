@@ -38,7 +38,9 @@ return function($page, $filter) {
 		$category = null;
 		$plugins  = new Pages();
 
-		go('plugins/k4');
+		if ($this->request()->url()->path()->first() !== 'plugins.json') {
+			go('plugins/k4');
+		}
 	}
 		return [
 		'categories'      => $categories,
