@@ -2,7 +2,7 @@ Title: Using fields
 
 ----
 
-Intro: Blueprint fields are an essential part of the configuration and have very powerful options.
+Intro: Fields are an essential part of the configuration and have very powerful options.
 
 ----
 
@@ -22,7 +22,7 @@ You can choose the names for your fields freely, but there are two limitations:
 You can still use field names that conflict with (link: docs/reference/objects/page text: native page methods). But you will have to call such a field via the `$page->content()->image()` method. We recommend prefixing your field names instead.
 </info>
 
-## Available Blueprint fields
+## Available fields
 
 (reference: panel/fields)
 
