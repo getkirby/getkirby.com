@@ -6,6 +6,8 @@ Text:
 
 With the `icons` extension, you can register additional icons for use in the Panel.
 
+The default icons are based on the (link: https://remixicon.com text: Remix Icon) set which you can also use for finding matching ones for your custom icons.
+
 ## Example
 
 As always, you first have to register the Plugin in a plugin folder's `index.php`.
@@ -36,4 +38,16 @@ title: Page blueprint with new icon
 icon: my-icon
 
 # other stuff
+```
+
+## Viewbox
+
+Kirby assumes that all icons are based on a `0 0 24 24` viewbox. If your SVG is based on a different viewbox, you can include the wrapping `<svg>` tag to specifc the viewbox.
+
+```js "/site/plugins/icons/index.js"
+panel.plugin('my/icons', {
+  icons: {
+    'my-icon': '<svg viewBox="0 0 18 18"><path d="M7,3V13H5v2H8a1,1,0,0,0,1-1V4h2V2H8A1,1,0,0,0,7,3Z" /><circle cx="2" cy="14" r="2" /><polygon points="12 0 12 6 16 3 12 0" /></svg>'
+  }
+});
 ```
