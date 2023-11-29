@@ -60,6 +60,25 @@ return [
 		}
 	],
 	[
+		// TODO: Temporary test, remove this route again
+		'pattern' => 'buy/currency-test',
+		'action'  => function () {
+			$visitor = \Buy\Paddle::visitor();
+			$rates = Data::read(dirname(__DIR__) . '/plugins/buy/rates.json');
+
+			$body = 'Detected IP:       ' . (\Buy\Visitor::ip() ?? 'N/A') . "\n" .
+				'Detected country:  ' . ($visitor->country() ?? 'N/A') . "\n" .
+				'Detected currency: ' . $visitor->currency() . "\n" .
+				'Detected rate:     ' . $visitor->conversionRate() . ' (hardcoded for this currency: ' . $rates[$visitor->currency()] . ")\n" .
+				'Status:            ' . ($visitor->error() ?? 'OK') . "\n\n" .
+				'Example price:     ' . $visitor->currencySign() . "123\n" .
+				'Revenue limit:     ' . $visitor->revenueLimit(1000000);
+
+
+			return new \Kirby\Http\Response($body, 'text/plain');
+		}
+	],
+	[
 		'pattern' => 'buy/(:any)/(:any?)',
 		'action' => function (string $product, string $currency = 'EUR') {
 			try {
