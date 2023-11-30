@@ -68,6 +68,14 @@ enum Product: string
 	}
 
 	/**
+	 * Returns the unconverted EUR price for a regular purchase
+	 */
+	public function rawPrice(): float
+	{
+		return option('buy.' . $this->value . '.regular');
+	}
+
+	/**
 	 * Returns the Paddle upgrade product ID
 	 */
 	public function upgradeId(bool $free = false): int
