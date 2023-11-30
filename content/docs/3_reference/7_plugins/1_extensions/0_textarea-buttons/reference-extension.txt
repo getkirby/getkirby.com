@@ -16,18 +16,26 @@ panel.plugin("getkirby/custom-textarea-buttons", {
     highlight: {
       label: "Highlight",
       icon: "wand",
-      click: () => this.command("toggle", "<mark>", "</mark>")
+      click: function () {
+        this.command("toggle", "<mark>", "</mark>")
+      },
       shortcut: "m",
     },
   }
 });
 ```
 
-Each button should specifya `label`, an (link: docs/reference/panel/icons text: `icon`) as well as a `click` handler.
+Each button should specify a `label`, an (link: docs/reference/panel/icons text: `icon`) as well as a `click` handler.
 
 ### `click` handler
 
-This function is called when your button is clicked. You can add any code you want, but most likely you want to use the `this.command(name, ...args)` helper functions to trigger changes in the textarea input. The following commands are supported
+This function is called when your button is clicked. You can add any code you want, but most likely you want to use the `this.command(name, ...args)` helper functions to trigger changes in the textarea input.
+
+<warning>
+Don't use arrow function syntax such as `click: () => `. We cannot rebind `this` inside of an arrow function and you won't have access to the `this.command` helper.
+</warning>
+
+The following commands are supported:
 
 | Command name | Description | Arguments |
 |-|-|-|
