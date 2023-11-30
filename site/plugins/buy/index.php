@@ -3,6 +3,7 @@
 use Kirby\Cms\App;
 
 load([
+	'Buy\Paddle'  => __DIR__ . '/Paddle.php',
 	'Buy\Price'   => __DIR__ . '/Price.php',
 	'Buy\Product' => __DIR__ . '/Product.php',
 	'Buy\Sale'    => __DIR__ . '/Sale.php',

@@ -2,9 +2,6 @@
 
 namespace Buy;
 
-use Exception;
-use Kirby\Http\Remote;
-
 enum Product: string
 {
 	case Basic 	    = 'basic';
@@ -23,27 +20,7 @@ enum Product: string
 			'free'    => $this->upgradeId(true),
 		};
 
-		$data   = [
-			'vendor_id'         => option('keys.paddle.id'),
-			'vendor_auth_code'  => option('keys.paddle.auth'),
-			'product_id'        => $product,
-			'expires'           => date('Y-m-d', strtotime('+1 day')),
-			'quantity_variable' => false,
-			'quantity'          => 1,
-			...$payload
-		];
-
-		$response = Remote::post(
-			'https://vendors.paddle.com/api/2.0/product/generate_pay_link',
-			['data' => $data]
-		);
-		$data = $response->json(false);
-
-		if ($data->success) {
-			return $data->response->url;
-		}
-
-		throw new Exception($data->error->message);
+		return Paddle::checkout($product, $payload);
 	}
 
 	/**
