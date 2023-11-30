@@ -2,25 +2,49 @@
 
 namespace Buy;
 
+use Exception;
 use Kirby\Data\Data;
 use Kirby\Toolkit\A;
 
 class Price
 {
+	public readonly string $currency;
 	public readonly float $rate;
 
 	public function __construct(
 		public readonly Product $product,
-		public readonly string $currency = 'EUR'
+		string|null $currency = null,
+		float|null $rate = null
 	) {
-		$rates = Data::read(__DIR__ . '/rates.json');
+		if ($currency === 'EUR') {
+			// allow missing rate as it's always 1
+			if ($rate === null) {
+				$rate = 1.0;
+			}
 
-		if (isset($rates[$currency]) === true) {
-			$this->rate = $rates[$currency];
-		} else {
-			$this->rate     = $rates['EUR'];
-			$this->currency = 'EUR';
+			// every other rate is invalid
+			// because of hardcoded EUR prices
+			if ($rate !== 1.0) {
+				throw new Exception('Conversion rate for EUR must be 1.0');
+			}
 		}
+
+		// currency and rate always need to both not be passed
+		// or passed together, one alone won't work
+		if ($currency === null xor $rate === null) {
+			throw new Exception('Passing just one of currency or rate is not supported');
+		}
+
+		// dynamically determine from Paddle
+		if ($rate === null) {
+			$visitor = Paddle::visitor();
+
+			$currency = $visitor->currency();
+			$rate     = $visitor->rate();
+		}
+
+		$this->currency = $currency;
+		$this->rate     = $rate;
 	}
 
 	/**

@@ -8,6 +8,7 @@ load([
 	'Buy\Product' => __DIR__ . '/Product.php',
 	'Buy\Sale'    => __DIR__ . '/Sale.php',
 	'Buy\Upgrade' => __DIR__ . '/Upgrade.php',
+	'Buy\Visitor' => __DIR__ . '/Visitor.php',
 ]);
 
 App::plugin('getkirby/buy', []);

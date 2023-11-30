@@ -4,9 +4,13 @@ namespace Buy;
 
 use Exception;
 use Kirby\Http\Remote;
+use Throwable;
 
 class Paddle
 {
+	// cache
+	protected static Visitor $visitor;
+
 	/**
 	 * Generates a custom checkout link and returns the checkout URL
 	 *
@@ -62,5 +66,68 @@ class Paddle
 		}
 
 		throw new Exception($data['error']['message'] ?? 'Unknown error');
+	}
+
+	/**
+	 * Determines the country, currency and conversion rate information
+	 * for the visitor via the Paddle price API
+	 *
+	 * @param string|null $country Override for a country code (used for testing)
+	 */
+	public static function visitor(string|null $country = null): Visitor
+	{
+		// cache for the entire request as the IP won't change
+		if (isset(static::$visitor) === true) {
+			return static::$visitor;
+		}
+
+		try {
+			$product = Product::Basic;
+
+			$options = [
+				'data' => [
+					'product_ids' => $product->productId()
+				],
+
+				// fast timeout to avoid letting the user wait too long
+				'timeout' => 1
+			];
+
+			if ($country !== null) {
+				$options['data']['customer_country'] = $country;
+			} else {
+				$ip = Visitor::ip();
+
+				// if we only have a local IP, don't bother
+				// requesting dynamic information from Paddle
+				if ($ip === null) {
+					return static::$visitor = Visitor::createFromError('No visitor IP available');
+				}
+
+				$options['data']['customer_ip'] = $ip;
+			}
+
+			$response = static::request(
+				endpoint: 'prices',
+				method: 'GET',
+				subdomain: 'checkout',
+				options: $options
+			);
+
+			$paddleProduct = $response['products'][0];
+
+			return static::$visitor = Visitor::create(
+				country: $response['customer_country'],
+				currency: $paddleProduct['currency'],
+
+				// calculate conversion rate from the EUR price;
+				// requires that the EUR price matches between the site and Paddle admin
+				rate: $paddleProduct['list_price']['net'] / $product->rawPrice()
+			);
+		} catch (Throwable $e) {
+			// on any kind of error, use the EUR prices as a fallback
+			// to avoid a broken buy page and checkout
+			return static::$visitor = Visitor::createFromError($e->getMessage());
+		}
 	}
 }

@@ -26,14 +26,9 @@ enum Product: string
 	/**
 	 * Returns the price object for the product
 	 */
-	public function price(string $currency = 'EUR'): Price
+	public function price(string|null $currency = null, float|null $rate = null): Price
 	{
-		// really ensure that we have a valid currency
-		if (empty($currency) === true) {
-			$currency = 'EUR';
-		}
-
-		return new Price($this, $currency);
+		return new Price($this, $currency, $rate);
 	}
 
 	/**
