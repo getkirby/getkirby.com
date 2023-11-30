@@ -147,7 +147,7 @@ class Visitor
 
 		// if the site is served via Cloudflare, use the proxied IP header
 		if (option('cloudflare', false) === true) {
-			return $env->get('CF_CONNECTING_IP', '');
+			return $env->get('CF-Connecting-IP', '');
 		}
 
 		// otherwise use the direct IP header
