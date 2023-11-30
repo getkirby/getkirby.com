@@ -1,0 +1,21 @@
+Title: Tempate Attributes
+
+----
+
+Text:
+
+----
+
+Repository: https://github.com/fabianmichael/kirby-template-attributes
+
+----
+
+Category: templating
+
+----
+
+Description: Vue.js/Laravel-Blade-like attribute API for snippets and templates.
+
+----
+
+Versions: 3,4
