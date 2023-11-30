@@ -28,7 +28,7 @@ The requirements are the same as for using Kirby's (link: docs/reference/system/
 - ImageMagick must be installed on your server.
 - Calling PHP's `exec()` method must not be disabled.
 - If the ImageMagic convert binary is not correctly linked, you might have to (link: docs/reference/system/options/thumbs#thumbs-driver__additional-options-for-the-imagemagick-driver text: set the path to the `convert` binary) in your config.
-- Gostscript is needed
+- Ghostscript is needed
 
 ## Setting up the plugin
 
