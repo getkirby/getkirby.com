@@ -61,7 +61,9 @@ class Price
 	 */
 	public function regular(): int
 	{
-		return $this->convert($this->product->rawPrice());
+		return $this->convert(
+			option('buy.' . $this->product->value . '.regular')
+		);
 	}
 
 	/**
