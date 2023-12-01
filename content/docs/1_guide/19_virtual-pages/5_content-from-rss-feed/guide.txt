@@ -38,7 +38,7 @@ use Kirby\Uuid\Uuid;
 
 class RssfeedPage extends Page {
 
-    public function children()
+    public function children(): Pages
     {
         if ($this->children instanceof Pages) {
             return $this->children;
