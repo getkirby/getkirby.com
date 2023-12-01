@@ -30,7 +30,7 @@ class Price
 	public function convert(int $price): int
 	{
 		$price *= $this->rate;
-		return static::round($price);
+		return $this->round($price);
 	}
 
 	/**
@@ -45,11 +45,28 @@ class Price
 	 * Rounds a price to the nearest pretty price
 	 * (ending in -5 or -9)
 	 */
-	public static function round(float $price): int
+	public function round(float $price): int
 	{
-		$price = round($price / 5) * 5;
+		// if the currency is strong, only round
+		// the price to full units as "pretty"
+		// rounding would change the price a lot
+		if ($this->rate < 0.5) {
+			return round($price);
+		}
 
-		if ($price % 10 === 0) {
+		// calculate the order of magnitude of the
+		// currency compared to EUR
+		$length     = strlen((int)$this->rate);
+		$firstDigit = ((string)$this->rate)[0];
+		$magnitude  = pow(10, $firstDigit >= 5 ? $length : $length - 1);
+
+		// apply "pretty" rounding so that for EUR
+		// the rounding is applied on the last place
+		// and for a currency with 10x higher prices
+		// on the second-last place
+		$price = round($price / 5 / $magnitude) * 5 * $magnitude;
+
+		if ($price % max($magnitude, 10) === 0) {
 			$price -= 1;
 		}
 
@@ -81,7 +98,7 @@ class Price
 			// use the pretty rounding if possible, but ensure that
 			// the price is never higher than the mathematical sale
 			// price from the discount percentage we promise
-			return min(static::round($price), floor($price));
+			return min($this->round($price), floor($price));
 		}
 
 		return $price;
