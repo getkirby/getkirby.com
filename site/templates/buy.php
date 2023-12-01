@@ -72,6 +72,10 @@
 .strikethrough {
 	text-decoration: line-through;
 }
+.currency-sign {
+	font-size: var(--text-xl);
+	padding-right: 0.25em;
+}
 k-price-info:not(.loaded) {
 	color: var(--color-gray-600);
 }
@@ -125,7 +129,7 @@ k-price-info:not(.loaded) {
 					</h2>
 
 					<a href="/buy/basic" target="_blank" class="h2 block mb-3">
-						<k-price-info key="currency-sign" class="sale">€</k-price-info><!--
+						<k-price-info key="currency-sign-trimmed" class="sale currency-sign">€</k-price-info><!--
 						--><k-price-info key="basic-sale" class="sale"><?= Buy\Product::Basic->price('EUR')->sale() ?></k-price-info>
 						per site
 					</a>
@@ -167,7 +171,7 @@ k-price-info:not(.loaded) {
 					</h2>
 
 					<a href="/buy/enterprise" target="_blank" class="h2 block mb-3">
-						<k-price-info key="currency-sign" class="sale">€</k-price-info><!--
+						<k-price-info key="currency-sign-trimmed" class="sale currency-sign">€</k-price-info><!--
 						--><k-price-info key="enterprise-sale" class="sale"><?= Buy\Product::Enterprise->price('EUR')->sale() ?></k-price-info>
 						per site
 					</a>

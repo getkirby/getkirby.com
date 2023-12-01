@@ -56,13 +56,14 @@ return [
 			$visitor    = Paddle::visitor();
 
 			return json_encode([
-				'basic-regular'      => $basic->price()->regular(),
-				'basic-sale'         => $basic->price()->sale(),
-				'enterprise-regular' => $enterprise->price()->regular(),
-				'enterprise-sale'    => $enterprise->price()->sale(),
-				'currency-sign'      => $visitor->currencySign(),
-				'revenue-limit'      => $visitor->currency() !== 'EUR' ? ' (' . $visitor->revenueLimit(1000000) . ')' : '',
-				'status'             => $visitor->error() ?? 'OK'
+				'basic-regular'         => $basic->price()->regular(),
+				'basic-sale'            => $basic->price()->sale(),
+				'enterprise-regular'    => $enterprise->price()->regular(),
+				'enterprise-sale'       => $enterprise->price()->sale(),
+				'currency-sign'         => $visitor->currencySign(),
+				'currency-sign-trimmed' => rtrim($visitor->currencySign(), ' '),
+				'revenue-limit'         => $visitor->currency() !== 'EUR' ? ' (' . $visitor->revenueLimit(1000000) . ')' : '',
+				'status'                => $visitor->error() ?? 'OK'
 			], JSON_UNESCAPED_UNICODE);
 		}
 	],
