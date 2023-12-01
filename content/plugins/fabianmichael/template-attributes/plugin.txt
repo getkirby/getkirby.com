@@ -1,4 +1,4 @@
-Title: Tempate Attributes
+Title: Template Attributes
 
 ----
 
@@ -19,3 +19,17 @@ Description: Vue.js/Laravel-Blade-like attribute API for snippets and templates.
 ----
 
 Versions: 3,4
+
+----
+
+Example:
+
+```php
+<button <?= attributes([
+	'type' => $type ?? 'button',
+	'class' => [
+		'btn',
+		'btn--large' => $size === 'large'
+	],
+ ])->merge($attr ?? []) ?>>
+```
