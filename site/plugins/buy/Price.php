@@ -34,14 +34,6 @@ class Price
 	}
 
 	/**
-	 * Converts a price back into EUR
-	 */
-	public function euros(int $price): float
-	{
-		return $price / $this->rate;
-	}
-
-	/**
 	 * Rounds a price to the nearest pretty price
 	 * (ending in -5 or -9)
 	 */
