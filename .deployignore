@@ -13,4 +13,5 @@ package.json
 postcss.config.js
 README.md
 scripts
+scripts/**
 uglify.json
