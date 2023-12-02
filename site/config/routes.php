@@ -1,6 +1,7 @@
 <?php
 
 use Buy\Product;
+use Buy\Paddle;
 use Kirby\Cms\Page;
 
 return [
@@ -45,26 +46,32 @@ return [
 		}
 	],
 	[
-		'pattern' => 'buy/prices/(:any?)',
-		'action' => function (string $currency = 'EUR') {
+		'pattern' => 'buy/prices',
+		'action' => function () {
+			// uncomment to test a specific country
+			// Buy\Paddle::visitor(country: 'US');
+
+			$basic      = Product::Basic;
+			$enterprise = Product::Enterprise;
+			$visitor    = Paddle::visitor();
+
 			return json_encode([
-				'basic' => [
-					'regular' => Product::Basic->price($currency)->regular(),
-					'sale'    => Product::Basic->price($currency)->sale(),
-				],
-				'enterprise' => [
-					'regular' => Product::Enterprise->price($currency)->regular(),
-					'sale'    => Product::Enterprise->price($currency)->sale()
-				]
-			]);
+				'basic-regular'      => $basic->price()->regular(),
+				'basic-sale'         => $basic->price()->sale(),
+				'enterprise-regular' => $enterprise->price()->regular(),
+				'enterprise-sale'    => $enterprise->price()->sale(),
+				'currency-sign'      => $visitor->currencySign(),
+				'revenue-limit'      => $visitor->currency() !== 'EUR' ? ' (' . $visitor->revenueLimit(1000000) . ')' : '',
+				'status'             => $visitor->error() ?? 'OK'
+			], JSON_UNESCAPED_UNICODE);
 		}
 	],
 	[
-		'pattern' => 'buy/(:any)/(:any?)',
-		'action' => function (string $product, string $currency = 'EUR') {
+		'pattern' => 'buy/(:any)',
+		'action' => function (string $product) {
 			try {
 				$product = Product::from($product);
-				$price   = $product->price($currency);
+				$price   = $product->price();
 				$prices  = [
 					'EUR:'                 . $product->price('EUR')->sale(),
 					$price->currency . ':' . $price->sale(),
@@ -81,12 +88,11 @@ return [
 		'method'  => 'POST',
 		'action'  => function() {
 			$product  = get('product', 'basic');
-			$currency = get('currency', 'EUR');
 			$volume   = get('volume', 5);
 
 			try {
 				$product = Product::from($product);
-				$price   = $product->price($currency);
+				$price   = $product->price();
 				$prices  = [
 					'EUR:'                 . $product->price('EUR')->volume($volume),
 					$price->currency . ':' . $price->volume($volume),
@@ -105,11 +111,11 @@ return [
 		}
 	],
 	[
-		'pattern' => 'buy/volume/(:any)/(:num)/(:any)',
-		'action'  => function(string $product, int $volume, string $currency) {
+		'pattern' => 'buy/volume/(:any)/(:num)',
+		'action'  => function(string $product, int $volume) {
 			try {
 				$product = Product::from($product);
-				$price   = $product->price($currency);
+				$price   = $product->price();
 				$prices  = [
 					'EUR:'                 . $product->price('EUR')->volume($volume),
 					$price->currency . ':' . $price->volume($volume),
