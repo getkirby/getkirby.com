@@ -8,7 +8,7 @@ Text:
 
 - Kirby 4 requires at least PHP 8.1 and supports up to PHP 8.3.
 - When impersonating the almighty `kirby` user, any permission check will succeed even if permission has been disabled for regular admins.
-- The `twitter` KirbyTag and helper have been removed. Use the legacy plugin if you still rely on these: (file: legacy-twitter.zip)
+- The `twitter` icon, KirbyTag and helper have been removed. Use the legacy plugin if you still rely on these: (file: legacy-twitter.zip)
 - We have added more native PHP type hints throughout the system. When extending core classes, this might require you to update your method to include those type hints as well.
 - Users field doesn't automatically use the current user as default, add `default: true` to keep this functionality.
 - When thumb generation fails, the image API now throws an error and no longer loads the original image.
