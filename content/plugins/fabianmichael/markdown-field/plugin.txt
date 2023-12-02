@@ -2,7 +2,7 @@ Title: Markdown Field
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -22,4 +22,4 @@ Description: A highly customizable text editor with syntax highlighting for both
 
 ----
 
-Versions: 3
+Versions: 3,4

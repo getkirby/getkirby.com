@@ -2,7 +2,7 @@ Title: Block Preview Fields
 
 ----
 
-Text: 
+Text:
 
 ----
 
