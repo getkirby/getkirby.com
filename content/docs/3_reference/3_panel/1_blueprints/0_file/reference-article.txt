@@ -91,7 +91,7 @@ If you don't set the `mime` option, the valid MIME types for the frontend upload
 
 ```yaml
 accept:
-    mime: image/*
+	mime: image/*
 	type: image
 ```
 
@@ -106,9 +106,9 @@ accept: true
 
 # or:
 accept:
-    mime: null
-    orientation: square
-    ...
+  mime: null
+  orientation: square
+  ...
 ```
 
 <warning>
