@@ -42,8 +42,8 @@ The title can be translated by passing an array of translations with the matchin
 
 ```yaml
 title:
-	en: Project Image
-	de: Projekt Bild
+  en: Project Image
+  de: Projekt Bild
 ```
 
 ##  Accept
@@ -66,9 +66,9 @@ accept: image/jpeg, image/png
 
 ```yaml
 accept:
-	extension: jpg, png
-	maxheight: 200
-	orientation: landscape
+  extension: jpg, png
+  maxheight: 200
+  orientation: landscape
 ```
 
 | Option | Value |
@@ -91,8 +91,8 @@ If you don't set the `mime` option, the valid MIME types for the frontend upload
 
 ```yaml
 accept:
-	mime: image/*
-	type: image
+  mime: image/*
+  type: image
 ```
 
 In this example, Kirby will generate a file upload input with an `accept="image/*"` attribute and will then validate both the MIME type and the detected file type on the server after the file is uploaded.
@@ -138,9 +138,9 @@ In your file blueprints you can set resize and crop settings, which will be appl
 ```yaml "site/blueprints/files/image.yml"
 title: Image
 create:
-	width: 500
-	height: 500
-	crop: true
+  width: 500
+  height: 500
+  crop: true
 ```
 </since>
 ## Image options
