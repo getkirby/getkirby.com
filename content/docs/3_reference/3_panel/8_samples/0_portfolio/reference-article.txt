@@ -26,6 +26,14 @@ listed:
   layout: cards
 ```
 
+### File cover blueprint
+
+We'll create a `cover` blueprint file for the project to reference a certain image as being more special than just an image. This will be useful since we'll be able to specify what image will represent the project.
+
+```yaml "/site/blueprints/files/cover.yml"
+extends: files/image
+```
+
 ### Reusable projects section
 
 ```yaml "/site/blueprints/sections/projects.yml"
