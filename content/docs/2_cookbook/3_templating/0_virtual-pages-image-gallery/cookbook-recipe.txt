@@ -119,7 +119,7 @@ In a (glossary: model), we can however overwrite this method and thus change wha
 
 class GalleryPage extends Page
 {
-  public function children()
+  public function children(): Kirby\Cms\Pages
   {
     $images = [];
 
@@ -185,7 +185,7 @@ How do we get the images back? We need another page model for the child pages th
 
 class GalleryImagePage extends Page
 {
-  public function image(?string $filename = null)
+  public function image(string $filename = null): Kirby\Cms\File|null
   {
     if (!$filename) {
       return $this->parent()->images()->template('gallery-image')->findBy('name', $this->slug());
@@ -269,7 +269,7 @@ Since we want to access the file meta data as if it was page data, we have to ma
 
 class GalleryPage extends Page
 {
-  public function children()
+  public function children(): Kirby\Cms\Pages
   {
     $images = [];
 
@@ -482,12 +482,12 @@ columns:
 ```php "/site/plugins/virtual-gallery/models/Gallery.php"
 <?php
 
-use Kirby\Cms\Page;
+use Kirby\Cms\File;use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 
 class GalleryPage extends Page
 {
-  public function children()
+  public function children(): Kirby\Cms\Pages
   {
     $images = [];
 
@@ -515,7 +515,7 @@ use Kirby\Cms\Page;
 
 class GalleryImagePage extends Page
 {
-  public function image(?string $filename = null)
+  public function image(string $filename = null): Kirby\Cms\File|null
   {
     if (!$filename) {
       return $this->parent()->images()->template('gallery-image')->findBy('name', $this->slug());
