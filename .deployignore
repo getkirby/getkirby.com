@@ -6,11 +6,12 @@
 .vscode
 .vscode/**
 node_modules
-node_modules/\*\*
+node_modules/**
 composer.json
 package-lock.json
 package.json
 postcss.config.js
 README.md
 scripts
+scripts/**
 uglify.json

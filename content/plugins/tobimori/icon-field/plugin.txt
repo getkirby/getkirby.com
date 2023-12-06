@@ -2,7 +2,7 @@ Title: Icon Field
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -14,7 +14,7 @@ Category: fields
 
 ----
 
-Subcategory: 
+Subcategory:
 
 ----
 
@@ -41,4 +41,4 @@ Composer: tobimori/kirby-icon-field
 
 ----
 
-Versions: 3
+Versions: 3,4

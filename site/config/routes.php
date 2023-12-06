@@ -68,7 +68,7 @@ return [
 		}
 	],
 	[
-		'pattern' => 'buy/(:any)',
+		'pattern' => 'buy/(enterprise|basic)',
 		'action' => function (string $product) {
 			try {
 				$product = Product::from($product);
@@ -106,7 +106,7 @@ return [
 		}
 	],
 	[
-		'pattern' => 'buy/volume/(:any)/(:num)',
+		'pattern' => 'buy/volume/(enterprise|basic)/(:num)',
 		'action'  => function(string $product, int $quantity) {
 			try {
 				$product = Product::from($product);
