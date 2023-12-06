@@ -60,7 +60,7 @@ return [
 		}
 	],
 	[
-		'pattern' => 'buy/(:any)/(:any?)',
+		'pattern' => 'buy/(enterprise|basic)/(:any?)',
 		'action' => function (string $product, string $currency = 'EUR') {
 			try {
 				$product = Product::from($product);
@@ -105,7 +105,7 @@ return [
 		}
 	],
 	[
-		'pattern' => 'buy/volume/(:any)/(:num)/(:any)',
+		'pattern' => 'buy/volume/(enterprise|basic)/(:num)/(:any)',
 		'action'  => function(string $product, int $volume, string $currency) {
 			try {
 				$product = Product::from($product);
