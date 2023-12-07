@@ -29,3 +29,22 @@ return [
 <warning>
 Using the [root URL for the default language](#language-specific-urls) will disable automatic language detection.
 </warning>
+
+<since v="4.0.0">
+## Disable language variable editing in Panel
+
+By default, users can add and edit language variables via the Panel. To prevent this, you can disable this feature:
+
+```php "/site/config/config.php"
+return [
+    'languages' => [
+        'variables' => false
+    ]
+]
+```
+
+<info>
+To disable the feature based on user role, use this config setting within the (link: docs/reference/system/options/ready text: `ready` config option)
+</info>
+</since>
+
