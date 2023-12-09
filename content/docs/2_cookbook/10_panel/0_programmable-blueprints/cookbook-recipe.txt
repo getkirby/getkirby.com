@@ -35,7 +35,6 @@ We don't have access to the current page object in the PHP blueprint files, and 
 ## Prerequisites
 
 - A running Kirby (link: https://github.com/getkirby/starterkit text: Starterkit)
-- The (link: https://github.com/rasteiner/k3-pagesdisplay-section text: Pages Display section plugin) installed, for the page sections example
 
 Let's start with a new plugin folder called `programmable-blueprints` in `/site/plugins/`. Inside that folder, let's create the obligatory `index.php` file, where we will register all blueprints for this recipe.
 
@@ -226,7 +225,7 @@ if ($page = page('notes')) {
     // create a new section array for each unique tag plucked from the children pages
     foreach ($page->children()->pluck('tags', ',', true) as $tag) {
         $sections['section_' . $tag] = [
-            'type'  => 'pagesdisplay',
+            'type'  => 'pages',
             'label' => 'Pages with tag ' . $tag,
             // note the required quotes around the `$tag` variable
             'query' => "page.children.filterBy('tags', '". $tag . "', ',')",
@@ -261,10 +260,6 @@ $yaml = [
 
 return $yaml;
 ```
-
-<info>
-As mentioned in the prerequistes, this example requires the Pages Display plugin.
-</info>
 
 To use this blueprint, remove the original `/site/blueprints/pages/notes.yml` file.
 
