@@ -265,7 +265,7 @@ To use this blueprint, remove the original `/site/blueprints/pages/notes.yml` fi
 
 As a result, we will end up with as many sections as we have tags (and in this example, there will be only one page per section, because all tags are only used once). For the screenshot I've reassigned the tags, so that the result looks less silly:
 
-(image: programmable-blueprints.png)
+(image: filtered-sections.png)
 
 <info>
 Note that we have set `changeSlug` to `false`, because the blueprint would stop working if the page was renamed. If you want to keep the option to change the slug, you can work with a page ID that doesn't change instead.
