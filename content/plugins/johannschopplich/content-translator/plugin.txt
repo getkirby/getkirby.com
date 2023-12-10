@@ -14,7 +14,7 @@ Category: i18n
 
 ----
 
-Description: Kirby Panel plugin to translate content at once with DeepL or other services
+Description: Panel plugin to translate content at once with DeepL or other services
 
 ----
 
