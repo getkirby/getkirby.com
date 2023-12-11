@@ -1,0 +1,14 @@
+Title: Kirby 4.0
+
+----
+
+Category: Release show
+
+----
+
+Text: Recording of the live stream from December 7, 2023. Bastian visited Marc to meet him, stream the demos and chat about the new features. See what is new Kirby 4.0
+
+----
+
+
+Video: https://www.youtube.com/watch?v=dYF8LlR2_r0
