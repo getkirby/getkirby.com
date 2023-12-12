@@ -6,7 +6,7 @@ Subtitle: Developer
 
 ----
 
-Package: solo
+Package: solo+
 
 ----
 
@@ -15,6 +15,10 @@ Website: https://www.medienbaecker.com/
 ----
 
 Location: Hornberg, Germany
+
+----
+
+Summary: Baker's son turned web developer, kneading pixels and code for 15+ years. I specialise in creating websites which are both highly accessible, yet engagingly fun to use.
 
 ----
 
