@@ -70,19 +70,15 @@ class Price
 			return round($price);
 		}
 
-		// calculate the order of magnitude of the
-		// currency compared to EUR
-		$length     = strlen((int)$this->rate);
-		$firstDigit = ((string)$this->rate)[0];
-		$magnitude  = pow(10, $firstDigit >= 5 ? $length : $length - 1);
+		$step = $this->step();
 
 		// apply "pretty" rounding so that for EUR
 		// the rounding is applied on the last place
 		// and for a currency with 10x higher prices
 		// on the second-last place
-		$price = round($price / 5 / $magnitude) * 5 * $magnitude;
+		$price = round($price / 5 / $step) * 5 * $step;
 
-		if ($price % max($magnitude, 10) === 0) {
+		if ($price % max($step, 10) === 0) {
 			$price -= 1;
 		}
 
@@ -116,6 +112,18 @@ class Price
 		}
 
 		return $price;
+	}
+
+	/**
+	 * Calculates the order of magnitude of
+	 * the currency compared to EUR
+	 */
+	public function step(): int
+	{
+		$length     = strlen((int)$this->rate);
+		$firstDigit = ((string)$this->rate)[0];
+
+		return pow(10, $firstDigit >= 5 ? $length : $length - 1);
 	}
 
 	/**

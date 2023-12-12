@@ -6,7 +6,7 @@ Text:
 
 ----
 
-Repository: https://nuxt-kql.jhnn.dev
+Repository: https://nuxt-kql.byjohann.dev
 
 ----
 
@@ -29,8 +29,8 @@ const { data } = await useKql({
   query: 'site',
   select: {
     title: true,
-    children: true,
-  },
+    children: true
+  }
 })
 
 ```

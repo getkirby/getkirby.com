@@ -335,7 +335,7 @@ class PriceInfo extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this.innerText = this.value;
+		this.textContent = this.value;
 		this.classList.add("loaded");
 	}
 }

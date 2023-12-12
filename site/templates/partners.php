@@ -174,7 +174,7 @@ document.querySelectorAll('.partners-filters select').forEach((select) => {
 		});
 
 		// display number of results
-		document.querySelector('.partners-results-count').innerText = numVisible;
+		document.querySelector('.partners-results-count').textContent = numVisible;
 		document.querySelector('.partners-results-plural').style.display = numVisible === 1 ? 'none' : null;
 		document.querySelector('.partners-no-results').style.display = numVisible > 0 ? 'none' : null;
 
