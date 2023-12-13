@@ -27,13 +27,14 @@ function cdn($file, array $params = []): string
 			};
 
 		} else {
-			$params['v']       = $file->mediaHash();
 			$params['enlarge'] = 0;
 			$params['fit']     = match (isset($params['width']) && isset($params['height'])) {
 				true => 'inside',
 				default => true
 			};
 		}
+
+		$params['v'] = $file->mediaHash();
 
 		$query = '?' . http_build_query($params);
 	}
