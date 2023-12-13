@@ -18,7 +18,7 @@ Subcategory: optimization
 
 ----
 
-Description: Enable minify HTML output for Kirby 3.
+Description: Enable minify HTML output for Kirby 3 and 4.
 
 ----
 
