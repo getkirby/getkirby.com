@@ -1,0 +1,34 @@
+Title: Tidy HTML
+
+----
+
+Text:
+
+----
+
+Repository: https://github.com/dgsiegel/kirby-tidy-html
+
+----
+
+Category: templating
+
+----
+
+Description: Tidy HTML output for Kirby
+
+----
+
+Example:
+
+```php
+return [
+    'dgsiegel.kirby-tidy-html' => [
+        'enabled' => true,
+        'options' => [...]
+    ]
+];
+```
+
+----
+
+Versions: 3,4
