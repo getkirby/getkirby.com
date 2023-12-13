@@ -10,7 +10,8 @@ return [
 		'type'   => 'file',
 		'ignore' => [
 			'love',
-			'partners'
+			'partners',
+			'themes'
 		]
 	],
 	'plugins' => [
