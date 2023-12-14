@@ -48,17 +48,17 @@ class Search
 	 */
 	public static function instance(): static
 	{
-		return static::$instance ??= new static;
+		return static::$instance ??= new static();
 	}
 
 	/**
 	 * Sends a search query to Algolia and returns
 	 * a paginated collection of results
 	 *
-	 * @param  string $query   Search query
-	 * @param  int    $page    Pagination page to return (starts at 1, not 0!)
-	 * @param  array  $options Search parameters to override the default settings
-	 *  See https://www.algolia.com/doc/api-client/methods/search/
+	 * @param string $query Search query
+	 * @param int $page Pagination page to return (starts at 1, not 0!)
+	 * @param array $options Search parameters to override the default settings
+	 *                       See https://www.algolia.com/doc/api-client/methods/search/
 	 */
 	public function query(
 		string $query = null,

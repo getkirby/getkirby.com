@@ -1,3 +1,3 @@
 <figure class="bg-black rounded">
-  <?= $page->filesystem()->kt() ?>
+	<?= $page->filesystem()->kt() ?>
 </figure>

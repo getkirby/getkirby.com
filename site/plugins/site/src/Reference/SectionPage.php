@@ -28,8 +28,8 @@ abstract class SectionPage extends ReflectionPage
 	public function template(): Template
 	{
 		// If template exists, use it
-   		if ($this->intendedTemplate() === parent::template()) {
-            return parent::template();
+		if ($this->intendedTemplate() === parent::template()) {
+			return parent::template();
 		}
 
 		return $this->kirby()->template('reference-section');

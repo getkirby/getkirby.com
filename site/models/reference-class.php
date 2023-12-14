@@ -36,8 +36,7 @@ class ReferenceClassPage extends SectionPage
 		$reflection = $this->reflection();
 		$methods    = $reflection->getMethods();
 
-		foreach ($methods as $method)
-		{
+		foreach ($methods as $method) {
 			// Don't include protected or private methods
 			if ($method->isPublic() === false) {
 				continue;
@@ -79,8 +78,8 @@ class ReferenceClassPage extends SectionPage
 
 		// Create the actual class methods as children pages collection
 		$children = Pages::factory($children, $this)
-						->filterBy('exists', true)
-						->filterBy('isInternal', false);
+			->filterBy('exists', true)
+			->filterBy('isInternal', false);
 
 		// If the class is flagged as proxying another class,
 		// get the proxied methods that are not covered by an
@@ -95,9 +94,12 @@ class ReferenceClassPage extends SectionPage
 		// Return children pages collection sorted by slug,
 		// but making sure `__construct` goes first
 		return $this->children = $children->sortBy(
-			'isMagic', 'desc',
-			'slug', 'asc',
-		SORT_NATURAL);
+			'isMagic',
+			'desc',
+			'slug',
+			'asc',
+			SORT_NATURAL
+		);
 	}
 
 	public function exists(): bool
@@ -123,7 +125,7 @@ class ReferenceClassPage extends SectionPage
 		if (count($class) > 2) {
 			$namespace = implode('//', array_slice($class, 1, -1));
 			$class     = array_slice($class, -1)[0];
-			$id        = Str::slug($namespace) . '/' .  Str::kebab($class);
+			$id        = Str::slug($namespace) . '/' . Str::kebab($class);
 
 			if ($page = page($objects . '/' . $id)) {
 				if ($page->intendedTemplate()->name() === 'link') {
@@ -185,7 +187,7 @@ class ReferenceClassPage extends SectionPage
 		}
 
 		$traits = [];
-		$getTraits = function ($class) use(&$getTraits, &$traits) {
+		$getTraits = function ($class) use (&$getTraits, &$traits) {
 			if ($class->getParentClass() !== false) {
 				$getTraits($class->getParentClass());
 			}
@@ -204,7 +206,7 @@ class ReferenceClassPage extends SectionPage
 				$prop->getName() !== 'propertyData' &&
 				$prop->isStatic() === false &&
 				$reflection->hasMethod('set' . $prop->getName()) === true
-			);
+		);
 
 		$data = [];
 

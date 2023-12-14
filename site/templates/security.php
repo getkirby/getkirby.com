@@ -1,1 +1,1 @@
-<?php include __DIR__ . '/text.php' ?>
+<?php include __DIR__ . '/text.php';

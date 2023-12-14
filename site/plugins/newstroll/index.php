@@ -10,4 +10,3 @@ function newstroll()
 {
 	return new Newstroll\Newstroll(option('keys.newstroll'));
 }
-

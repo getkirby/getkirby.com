@@ -18,10 +18,10 @@
 			<div class="prose">
 				<?= kirbytext(
 					'<info>' .
-					'If you are updating from Kirby 3.8 or older, please first perform each major update step by step. ' .
-					'Please refer to the changelogs of (link: releases/3.5 text: Kirby 3.5), (link: releases/3.6 text: Kirby 3.6), ' .
-					'(link: releases/3.7 text: Kirby 3.7), (link: releases/3.8 text: Kirby 3.8) and (link: releases/3.9 text: Kirby 3.9) for details.' .
-					'</info>'
+								'If you are updating from Kirby 3.8 or older, please first perform each major update step by step. ' .
+								'Please refer to the changelogs of (link: releases/3.5 text: Kirby 3.5), (link: releases/3.6 text: Kirby 3.6), ' .
+								'(link: releases/3.7 text: Kirby 3.7), (link: releases/3.8 text: Kirby 3.8) and (link: releases/3.9 text: Kirby 3.9) for details.' .
+								'</info>'
 				) ?>
 			</div>
 		</div>

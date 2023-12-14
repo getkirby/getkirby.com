@@ -1,12 +1,12 @@
 <?php
 
 $data = [
-    'latest'    => $kirby->version(),
-    'versions'  => $page->versions(),
-    'urls'      => $page->urls(),
-    'php'       => $page->php(),
-    'incidents' => array_values($page->incidents()),
-    'messages'  => array_values($page->messages())
+	'latest'    => $kirby->version(),
+	'versions'  => $page->versions(),
+	'urls'      => $page->urls(),
+	'php'       => $page->php(),
+	'incidents' => array_values($page->incidents()),
+	'messages'  => array_values($page->messages())
 ];
 
 // keep the data in the client cache for a day,

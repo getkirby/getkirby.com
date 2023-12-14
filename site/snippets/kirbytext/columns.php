@@ -1,5 +1,5 @@
 <?php foreach ($columns as $column): ?>
-  <div>
-    <?= kt($column) ?>
-  </div>
+	<div>
+		<?= kt($column) ?>
+	</div>
 <?php endforeach ?>

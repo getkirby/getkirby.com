@@ -2,18 +2,17 @@
 
 namespace Kirby\Meta;
 
-use Kirby\Content\Field;
+use Imagick;
 use Kirby\Cms\File;
+use Kirby\Content\Field;
 use Kirby\Filesystem\Asset;
 use Kirby\Filesystem\F;
 use Kirby\Http\Response;
 use Kirby\Toolkit\Html;
 use Kirby\Toolkit\Tpl;
 
-use Imagick;
-
-class PageMeta {
-
+class PageMeta
+{
 	protected $page;
 	protected $metadata = [];
 
@@ -21,7 +20,8 @@ class PageMeta {
 		'robots' => true,
 	];
 
-	public function __construct($page) {
+	public function __construct($page)
+	{
 		$this->page = $page;
 
 		// Get metadata from page model
@@ -217,12 +217,12 @@ class PageMeta {
 			if (is_string($yaml) === true) {
 				$data['image'] = $yaml;
 
-			/**
-			 * thumnail:
-			 *   -
-			 *   lead: Something interesting
-			 *   image: image.png
-			 */
+				/**
+				 * thumnail:
+				 *   -
+				 *   lead: Something interesting
+				 *   image: image.png
+				 */
 			} else {
 				$data = array_merge($data, $yaml);
 			}
@@ -347,7 +347,9 @@ class PageMeta {
 			// Set size (auto with max-width)
 			$w = imagesx($image);
 			$max = $width - (3 * $margin) - imagesx($logo);
-			if ($w > $max) $w = $max;
+			if ($w > $max) {
+				$w = $max;
+			}
 			$h = (imagesy($image) / imagesx($image)) * $w;
 			imagecopyresampled(
 				$canvas,

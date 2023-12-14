@@ -1,10 +1,10 @@
 <?php
 
 use Kirby\Cache\Cache;
-use Kirby\Content\Field;
 use Kirby\Cms\File;
-use Kirby\Cms\Page;
 use Kirby\Cms\Nest;
+use Kirby\Cms\Page;
+use Kirby\Content\Field;
 use Kirby\Data\Data;
 use Kirby\Http\Remote;
 use Kirby\Http\Url;

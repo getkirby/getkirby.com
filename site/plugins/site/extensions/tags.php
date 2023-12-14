@@ -2,9 +2,9 @@
 
 use Kirby\Cms\Section;
 use Kirby\Form\Field;
-use Kirby\Toolkit\Str;
 use Kirby\Reference\DocBlock;
 use Kirby\Reference\Types;
+use Kirby\Toolkit\Str;
 
 $tags = [];
 
@@ -141,9 +141,9 @@ $tags['plain'] = [
 ];
 
 /**
-* (docs: some-snippet)
-* Injects shared doc snippets from site/snippets/docs
-*/
+ * (docs: some-snippet)
+ * Injects shared doc snippets from site/snippets/docs
+ */
 $tags['docs'] = [
 	'attr' => [
 		'field',
@@ -215,7 +215,8 @@ $tags['helper'] = [
  * @return array
  * @todo refactor/deprecate
  */
-function toOptions(array $props) {
+function toOptions(array $props)
+{
 
 	$table = [];
 

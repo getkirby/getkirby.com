@@ -9,7 +9,7 @@ function csv(string $file): array
 
 	$csv = array_map('str_getcsv', $lines);
 
-	array_walk($csv, function(&$a) use ($csv) {
+	array_walk($csv, function (&$a) use ($csv) {
 		$a = array_combine($csv[0], $a);
 	});
 
@@ -18,7 +18,8 @@ function csv(string $file): array
 	return $csv;
 }
 
-function field($value): Field {
+function field($value): Field
+{
 	if ($value instanceof Field) {
 		return $value;
 	}

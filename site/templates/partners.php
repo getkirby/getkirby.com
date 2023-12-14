@@ -1,62 +1,62 @@
 <?php layout() ?>
 
 <style>
-	.partners-header {
-		display: flex;
-		flex-direction: column;
-		gap: var(--spacing-8);
-	}
+.partners-header {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-8);
+}
+.partners-header nav {
+	--min: 9rem;
+	--gap: var(--spacing-3);
+	max-width: 26rem;
+}
+
+.partners-filter-selects {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing-3);
+}
+
+.partners-results {
+	margin-top: 0.5rem;
+}
+
+.partners, .partners-plus {
+	--columns: 2;
+}
+
+@media screen and (max-width: 35rem) {
 	.partners-header nav {
-		--min: 9rem;
-		--gap: var(--spacing-3);
+		grid-template-columns: 1fr;
+	}
+	.partners-filter-selects {
 		max-width: 26rem;
 	}
-
-	.partners-filter-selects {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--spacing-3);
+	.partners-filters .select {
+		width: 100%;
 	}
-
-	.partners-results {
-		margin-top: 0.5rem;
+	.partners {
+		--columns: 1;
 	}
+}
 
-	.partners, .partners-plus {
-		--columns: 2;
+@media screen and (min-width: 60rem) {
+	.partners-plus {
+		--columns: 3;
 	}
+	.partners {
+		--columns: 3;
+	}
+}
 
-	@media screen and (max-width: 35rem) {
-		.partners-header nav {
-			grid-template-columns: 1fr;
-		}
-		.partners-filter-selects {
-			max-width: 26rem;
-		}
-		.partners-filters .select {
-			width: 100%;
-		}
-		.partners {
-			--columns: 1;
-		}
+@media screen and (min-width: 70rem) {
+	.partners-header {
+		align-items: flex-end;
+		flex-direction: row;
+		justify-content: space-between;
 	}
-
-	@media screen and (min-width: 60rem) {
-		.partners-plus {
-			--columns: 3;
-		}
-		.partners {
-			--columns: 3;
-		}
-	}
-
-	@media screen and (min-width: 70rem) {
-		.partners-header {
-			align-items: flex-end;
-			flex-direction: row;
-			justify-content: space-between;
-		}
-	}
+}
 </style>
 
 <article>

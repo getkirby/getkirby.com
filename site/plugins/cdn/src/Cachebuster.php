@@ -3,7 +3,6 @@
 namespace Kirby\Cdn;
 
 use Kirby\Cms\App;
-use Kirby\Filesystem\F;
 
 class Cachebuster
 {

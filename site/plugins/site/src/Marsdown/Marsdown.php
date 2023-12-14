@@ -9,7 +9,6 @@ use ParsedownExtra;
 
 class Marsdown extends ParsedownExtra
 {
-
 	protected $lastH2;
 
 	/**
@@ -29,7 +28,7 @@ class Marsdown extends ParsedownExtra
 	protected function parseAttributes(string $input): array
 	{
 		$dom = new DomDocument();
-		$dom->loadHtml("<html " . $input . "/>");
+		$dom->loadHtml('<html ' . $input . '/>');
 		$attributes = [];
 		foreach ($dom->documentElement->attributes as $name => $attr) {
 			$attributes[$name] = $attr->value;
@@ -111,7 +110,7 @@ class Marsdown extends ParsedownExtra
 			return $Block;
 		}
 
-		return;
+		return null;
 	}
 
 	/**
@@ -308,7 +307,9 @@ class Marsdown extends ParsedownExtra
 	{
 		$Block = parent::blockHeader($Line);
 
-		if (!$Block) return;
+		if (!$Block) {
+			return;
+		}
 
 		$slug  = Str::slug(Str::unhtml($this->text($Block['element']['handler']['argument'])));
 		$level = $Block['element']['name'];

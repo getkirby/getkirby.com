@@ -24,11 +24,11 @@ return [
 	'docs/reference/objects/(:any)/(:all)' => function ($class, $method) {
 		if ($class === 'kirby') {
 			$class = 'cms/app';
-		} else if ($class === 'request') {
+		} elseif ($class === 'request') {
 			$class = 'http/request';
-		} else if ($class === 'session') {
+		} elseif ($class === 'session') {
 			$class = 'session/session-data';
-		} else  {
+		} else {
 			$class = 'cms/' . $class;
 		}
 
@@ -76,7 +76,7 @@ return [
 	'docs/reference/(:any)/(:all?)' => function ($group, $path = null) {
 		$pages = page('docs/reference')->grandChildren()->listed();
 		if ($page = $pages->findBy('uid', $group)) {
-			return $page->id() . '/'. $path;
+			return $page->id() . '/' . $path;
 		}
 
 		return 'error';

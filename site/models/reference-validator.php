@@ -1,8 +1,8 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Toolkit\V;
 use Kirby\Reference\ReflectionPage;
+use Kirby\Toolkit\V;
 
 class ReferenceValidatorPage extends ReflectionPage
 {

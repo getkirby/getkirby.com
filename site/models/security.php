@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Content\Field;
 use Kirby\Cms\Page;
+use Kirby\Content\Field;
 use Kirby\Toolkit\Str;
 
 class SecurityPage extends Page

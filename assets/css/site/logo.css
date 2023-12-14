@@ -1,11 +1,11 @@
 .logo {
-  display: flex;
-  padding: var(--spacing-3);
+	display: flex;
+	padding: var(--spacing-3);
 }
 .logo svg {
-  display: flex;
+	display: flex;
 }
 
 .logo + .version.archived .link {
-  text-decoration-color: var(--color-gray-400);
+	text-decoration-color: var(--color-gray-400);
 }

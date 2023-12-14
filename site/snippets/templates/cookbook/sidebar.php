@@ -1,4 +1,3 @@
-
 <nav aria-label="Cookbook menu">
 	<div class="cookbook-sidebar sticky" style="--top: var(--spacing-6)">
 		<p class="h1 color-gray-400 mb-12"><a href="/docs/cookbook">Cookbook</a></p>

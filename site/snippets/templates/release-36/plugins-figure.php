@@ -1,3 +1,3 @@
 <figure class="bg-black rounded">
-  <?= $page->area()->kt() ?>
+	<?= $page->area()->kt() ?>
 </figure>

@@ -84,15 +84,15 @@ class FileSystem
 			$path[$depth] = $line;
 
 			// traverse path and add label to result
-			$parent =& $result;
+			$parent = &$result;
 
 			foreach ($path as $depth => $key) {
 				if (!isset($parent[$key])) {
-					$parent[$line] = array();
+					$parent[$line] = [];
 					break;
 				}
 
-				$parent =& $parent[$key];
+				$parent = &$parent[$key];
 			}
 		}
 

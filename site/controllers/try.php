@@ -1,6 +1,6 @@
 <?php
 
-return function($kirby, $page) {
+return function ($kirby, $page) {
 
 	$statusMessage  = $statusType = $statusIcon = null;
 	$statusMessages = [

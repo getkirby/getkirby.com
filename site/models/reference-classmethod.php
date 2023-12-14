@@ -6,7 +6,7 @@ use Kirby\Content\Field;
 use Kirby\Reference\ReflectionPage;
 use Kirby\Reference\Types;
 use Kirby\Toolkit\Str;
-use \ReferenceClassPage as ReferenceClass;
+use ReferenceClassPage as ReferenceClass;
 
 class ReferenceClassMethodPage extends ReflectionPage
 {

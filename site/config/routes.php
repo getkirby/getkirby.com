@@ -1,7 +1,7 @@
 <?php
 
-use Buy\Product;
 use Buy\Paddle;
+use Buy\Product;
 use Kirby\Cms\Page;
 
 return [
@@ -74,7 +74,7 @@ return [
 				$product = Product::from($product);
 				$price   = $product->price();
 				$prices  = [
-					'EUR:'                 . $product->price('EUR')->sale(),
+					'EUR:' . $product->price('EUR')->sale(),
 					$price->currency . ':' . $price->sale(),
 				];
 
@@ -87,7 +87,7 @@ return [
 	[
 		'pattern' => 'buy/volume',
 		'method'  => 'POST',
-		'action'  => function() {
+		'action'  => function () {
 			$product  = get('product', 'basic');
 			$quantity = get('volume', 5);
 
@@ -95,7 +95,7 @@ return [
 				$product = Product::from($product);
 				$price   = $product->price();
 				$prices  = [
-					'EUR:'                 . $product->price('EUR')->volume($quantity),
+					'EUR:' . $product->price('EUR')->volume($quantity),
 					$price->currency . ':' . $price->volume($quantity),
 				];
 
@@ -107,12 +107,12 @@ return [
 	],
 	[
 		'pattern' => 'buy/volume/(enterprise|basic)/(:num)',
-		'action'  => function(string $product, int $quantity) {
+		'action'  => function (string $product, int $quantity) {
 			try {
 				$product = Product::from($product);
 				$price   = $product->price();
 				$prices  = [
-					'EUR:'                 . $product->price('EUR')->volume($quantity),
+					'EUR:' . $product->price('EUR')->volume($quantity),
 					$price->currency . ':' . $price->volume($quantity),
 				];
 

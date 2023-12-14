@@ -5,4 +5,3 @@
 <?php snippet('templates/features-for-clients/onboarding') ?>
 <?php snippet('templates/features-for-clients/why') ?>
 <?php snippet('templates/features-for-clients/roadmap') ?>
-

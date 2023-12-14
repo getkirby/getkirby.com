@@ -100,7 +100,7 @@ k-price-info:not(.loaded) {
 </style>
 
 <article>
-  <div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-6)">
+	<div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-6)">
 
 		<div>
 			<h1 class="h1 max-w-xl mb-6">
@@ -115,7 +115,7 @@ k-price-info:not(.loaded) {
 		</div>
 
 		<div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
-	    <div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
+			<div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
 				<header>
 					<h2>
 						Basic
@@ -157,7 +157,7 @@ k-price-info:not(.loaded) {
 				</footer>
 			</div>
 
-	    <div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
+			<div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
 				<header>
 					<h2>
 						Enterprise
@@ -199,9 +199,9 @@ k-price-info:not(.loaded) {
 			</div>
 			<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a></p>
 		</div>
-  </div>
+	</div>
 
-  <section class="mb-42">
+	<section class="mb-42">
 		<form class="volume-discounts" method="POST" target="_blank" action="<?= url('buy/volume') ?>">
 			<header class="flex items-baseline justify-between mb-6">
 				<h2 class="h2">Volume discounts</h2>
@@ -256,20 +256,20 @@ k-price-info:not(.loaded) {
 				</a>
 			</div>
 		</form>
-  </section>
+	</section>
 
-  <section class="mb-42 columns columns--reverse" style="--columns: 2; --columns-md: 1; --gap: var(--spacing-36)">
-    <div>
+	<section class="mb-42 columns columns--reverse" style="--columns: 2; --columns-md: 1; --gap: var(--spacing-36)">
+		<div>
 
-      <h2 class="h2 mb-6">For a good cause? <mark class="px-1 rounded">It’s free.</mark></h2>
-      <div class="prose mb-6">
-        <p>We care about a better society and the future of our planet. We support <strong>students, educational projects, social and environmental organizations, charities and non-profits</strong> with free&nbsp;licenses.</p>
-      </div>
+			<h2 class="h2 mb-6">For a good cause? <mark class="px-1 rounded">It’s free.</mark></h2>
+			<div class="prose mb-6">
+				<p>We care about a better society and the future of our planet. We support <strong>students, educational projects, social and environmental organizations, charities and non-profits</strong> with free&nbsp;licenses.</p>
+			</div>
 
-      <a class="btn btn--filled mb-12" href="mailto:support@getkirby.com">
-        <?= icon('heart') ?>
-        Contact us
-      </a>
+			<a class="btn btn--filled mb-12" href="mailto:support@getkirby.com">
+				<?= icon('heart') ?>
+				Contact us
+			</a>
 
 			<ul class="columns causes" style="--columns: 2; --gap: var(--spacing-12);">
 				<?php foreach (collection('causes')->shuffle()->limit(2) as $case) : ?>
@@ -304,9 +304,9 @@ k-price-info:not(.loaded) {
 		</div>
 	</section>
 
-  <footer class="h2">
-    Manage your existing licenses in our <a href="https://hub.getkirby.com"><span class="link">license&nbsp;hub</span> &rarr;</a>
-  </footer>
+	<footer class="h2">
+		Manage your existing licenses in our <a href="https://hub.getkirby.com"><span class="link">license&nbsp;hub</span> &rarr;</a>
+	</footer>
 
 </article>
 

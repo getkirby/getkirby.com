@@ -9,16 +9,16 @@
 <?php snippet('templates/features-for-developers/plugins') ?>
 <?php snippet('templates/features-for-developers/support') ?>
 <?php snippet('templates/features/more', [
-  'features' => [
-    'routes',
-    'cache',
-    'email',
-    'languages',
-    'publish-workflow',
-    'authentication',
-    'virtual-pages',
-    'hooks',
-    'content-representations',
-    'multi-site'
-  ]
+	'features' => [
+		'routes',
+		'cache',
+		'email',
+		'languages',
+		'publish-workflow',
+		'authentication',
+		'virtual-pages',
+		'hooks',
+		'content-representations',
+		'multi-site'
+	]
 ]) ?>

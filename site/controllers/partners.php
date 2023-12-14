@@ -1,7 +1,7 @@
 <?php
 
 return function ($kirby, $page) {
-    $partners = $page->children()->listed()->shuffle();
+	$partners = $page->children()->listed()->shuffle();
 
 	$filters = [
 		'languages' => [
@@ -29,10 +29,10 @@ return function ($kirby, $page) {
 		$filters[$field]['options'] = $options;
 	}
 
-    return [
+	return [
 		'filters'  => $filters,
 		'partners' => $partners,
-        'plus'     => $partners->filterBy('isPlusPartner', true),
-        'standard' => $partners->filterBy('isPlusPartner', false),
-    ];
+		'plus'     => $partners->filterBy('isPlusPartner', true),
+		'standard' => $partners->filterBy('isPlusPartner', false),
+	];
 };

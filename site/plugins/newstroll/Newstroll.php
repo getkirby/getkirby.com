@@ -27,7 +27,7 @@ class Newstroll
 			$path .= '?' . http_build_query($data);
 		}
 
-		return $this->request($path, ['method' => 'GET',]);
+		return $this->request($path, ['method' => 'GET']);
 	}
 
 	public function groups(): Groups

@@ -1,9 +1,9 @@
 <?php
 
 use Kirby\Cms\Pages;
+use Kirby\Reference\SectionPage;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\V;
-use Kirby\Reference\SectionPage;
 
 class ReferenceValidatorsPage extends SectionPage
 {

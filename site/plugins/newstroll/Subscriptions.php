@@ -54,7 +54,7 @@ class Subscriptions
 		string $status = null,
 		array $personalizations = [],
 		string $surname = null
-	): array  {
+	): array {
 		return $this->client->put('subscription/' . $id, array_merge($personalizations, [
 			'status'  => $status,
 			'surname' => $surname

@@ -5,7 +5,7 @@ use Kirby\Reference\ReflectionPage;
 
 class ReferenceComponentPage extends ReflectionPage
 {
-	static protected array $components;
+	protected static array $components;
 
 	protected function component(): Closure|null
 	{

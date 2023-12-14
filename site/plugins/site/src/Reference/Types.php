@@ -6,15 +6,14 @@ use Kirby\Toolkit\A;
 use Kirby\Toolkit\Html;
 use Kirby\Toolkit\Str;
 
-use \ReferenceClassPage;
-use \ReferenceClassMethodPage;
-use \ReferenceFieldMethodPage;
-use \ReferenceHelperPage;
+use ReferenceClassMethodPage;
+use ReferenceClassPage;
+use ReferenceFieldMethodPage;
+use ReferenceHelperPage;
 use ReflectionClass;
 
 class Types
 {
-
 	/**
 	 * Returns the proper CSS classes for type
 	 */
@@ -42,7 +41,7 @@ class Types
 				'self'
 					=> $model->inheritedFrom() ?? $model->parent()->class(),
 				default
-					=> substr($type, 0, 1) === '\\' ? substr($type, 1) : $type
+				=> substr($type, 0, 1) === '\\' ? substr($type, 1) : $type
 			}
 		);
 
@@ -52,7 +51,6 @@ class Types
 	/**
 	 * Parses the string and tries to find and return a matching
 	 * reference page for the class, class method, field method or helper
-
 	 */
 	public static function findReferencePage(
 		string $string

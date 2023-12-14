@@ -1,63 +1,63 @@
 .code {
-  background: var(--prose-pre-bg);
-  border-radius: var(--rounded);
-  color: var(--color-gray-300);
+	background: var(--prose-pre-bg);
+	border-radius: var(--rounded);
+	color: var(--color-gray-300);
 }
 .code figcaption {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  border-bottom: 1px solid var(--color-gray-800);
-  padding: var(--spacing-2) var(--spacing-3);
+	font-family: var(--font-mono);
+	font-size: var(--text-sm);
+	border-bottom: 1px solid var(--color-gray-800);
+	padding: var(--spacing-2) var(--spacing-3);
 }
 .code pre {
-  padding: 1.5em;
-  line-height: var(--leading-relaxed);
-  font-size: 0.825em;
-  font-family: var(--font-mono);
+	padding: 1.5em;
+	line-height: var(--leading-relaxed);
+	font-size: 0.825em;
+	font-family: var(--font-mono);
 }
 .code figcaption,
 .code pre {
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
 }
 .code pre code {
-  font: inherit;
+	font: inherit;
 }
 
 .code-toolbar {
-  position: relative;
+	position: relative;
 }
 .code-toolbar .toolbar {
-  position: absolute;
-  bottom: var(--spacing-3);
-  right: var(--spacing-3);
-  opacity: 0;
-  transition: opacity 0.2s;
+	position: absolute;
+	bottom: var(--spacing-3);
+	right: var(--spacing-3);
+	opacity: 0;
+	transition: opacity 0.2s;
 }
 .code-toolbar:hover .toolbar {
-  opacity: 1;
+	opacity: 1;
 }
 [data-no-copy] .code-toolbar .toolbar {
-  opacity: 0;
+	opacity: 0;
 }
 .code-toolbar button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: var(--spacing-1) var(--spacing-2);
-  background-color: var(--color-black);
-  color: var(--color-gray-500);
-  font-size: var(--text-xs);
-  cursor: pointer;
-  transition: background-color 0.2s;
-  border-radius: var(--rounded-sm);
-  outline: none;
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding: var(--spacing-1) var(--spacing-2);
+	background-color: var(--color-black);
+	color: var(--color-gray-500);
+	font-size: var(--text-xs);
+	cursor: pointer;
+	transition: background-color 0.2s;
+	border-radius: var(--rounded-sm);
+	outline: none;
 }
 .code-toolbar button:hover {
-  background-color: var(--color-gray-800);
+	background-color: var(--color-gray-800);
 }
 .code-toolbar button > svg {
-  margin-right: var(--spacing-1);
-  fill: var(--color-white);
+	margin-right: var(--spacing-1);
+	fill: var(--color-white);
 }

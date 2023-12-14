@@ -2,7 +2,7 @@
 
 use Kirby\Cms\Pages;
 
-return function($page, $filter) {
+return function ($page, $filter) {
 
 	$categories = option('plugins.categories');
 	$category   = param('category');
@@ -18,22 +18,22 @@ return function($page, $filter) {
 		$plugins = $plugins->filterBy('category', $category);
 		$heading = $categories[$category]['label'];
 
-	} else if ($category === 'all') {
-			$heading  = 'All plugins';
-			$category = 'all';
-			$plugins  = $page
-					->grandChildren()
-					->sortBy('title', 'asc');
-	} else if ($filter === 'k4') {
-			$heading  = 'Kirby 4 plugins';
-			$category = 'k4';
-			$plugins  = $page
-					->grandChildren()
-					->filter('versions', '*=', '4')
-					->sortBy('title', 'asc');
+	} elseif ($category === 'all') {
+		$heading  = 'All plugins';
+		$category = 'all';
+		$plugins  = $page
+			->grandChildren()
+			->sortBy('title', 'asc');
+	} elseif ($filter === 'k4') {
+		$heading  = 'Kirby 4 plugins';
+		$category = 'k4';
+		$plugins  = $page
+			->grandChildren()
+			->filter('versions', '*=', '4')
+			->sortBy('title', 'asc');
 	} elseif ($filter) {
-			$heading = 'Newly added plugins';
-			$plugins = $page->grandChildren()->filterBy('isNew', true);
+		$heading = 'Newly added plugins';
+		$plugins = $page->grandChildren()->filterBy('isNew', true);
 	} else {
 		$category = null;
 		$plugins  = new Pages();
@@ -42,7 +42,7 @@ return function($page, $filter) {
 			go('plugins/k4');
 		}
 	}
-		return [
+	return [
 		'categories'      => $categories,
 		'currentCategory' => $category,
 		'heading'         => $heading,

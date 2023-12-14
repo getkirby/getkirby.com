@@ -3,8 +3,8 @@
 use Kirby\Cms\Pages;
 use Kirby\Data\Data;
 use Kirby\Filesystem\Dir;
-use Kirby\Toolkit\Str;
 use Kirby\Reference\SectionPage;
+use Kirby\Toolkit\Str;
 
 class ReferenceClassesPage extends SectionPage
 {
