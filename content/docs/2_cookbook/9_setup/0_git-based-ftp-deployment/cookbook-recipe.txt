@@ -37,7 +37,7 @@ This is a step-by-step guide for FTP-deployment to development, staging and prod
     Last but not least, we need an active GitHub account. A free plan is sufficient.
 
 <info>
-We use GitHub for our deployment due to its popularity. Alternatively, you can use (link:https://.gitlab.com/ text:Gitlab) as a hosted service or self-installed.
+We use GitHub for our deployment due to its popularity. Alternatively, you can use (link:https://gitlab.com/ text:Gitlab) as a hosted service or self-installed.
 </info>
 
 
