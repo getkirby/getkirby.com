@@ -35,9 +35,9 @@ class Sale
 			$this->end - time() < 24 * 60 * 60
 				=> '<strong>today</strong> (midnight UTC)',
 			default
-				// the end date is inclusive (midnight of next day),
-				// subtract one to show the correct date
-				=> date('M jS', $this->end - 1),
+			// the end date is inclusive (midnight of next day),
+			// subtract one to show the correct date
+			=> date('M jS', $this->end - 1),
 		};
 	}
 

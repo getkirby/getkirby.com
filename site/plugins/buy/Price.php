@@ -3,7 +3,6 @@
 namespace Buy;
 
 use Exception;
-use Kirby\Data\Data;
 use Kirby\Toolkit\A;
 
 class Price
