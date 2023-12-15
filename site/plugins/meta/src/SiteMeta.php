@@ -34,7 +34,7 @@ class SiteMeta
 	{
 		$kirby   = App::instance();
 		$sitemap = [];
-		$cache   = kirby()->cache('pages');
+		$cache   = $kirby->cache('pages');
 		$id      = 'sitemap.xml';
 
 		if (!$sitemap = $cache->get($id)) {

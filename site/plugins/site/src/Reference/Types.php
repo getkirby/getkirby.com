@@ -66,6 +66,7 @@ class Types
 			if (strtolower($class) === 'field') {
 				return ReferenceFieldMethodPage::findByName($chain[0]);
 			}
+
 			if (strtolower($class) === 'helper') {
 				return ReferenceHelperPage::findByName($chain[0]);
 			}
@@ -171,7 +172,7 @@ class Types
 			return static::tag($type, $implied[$type]);
 		}
 
-		$text = $text ?? $type;
+		$text ??= $type;
 
 		// Assume, it’s a class or class method name
 		// (starting with a letter, \ or $)

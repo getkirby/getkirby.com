@@ -24,7 +24,8 @@ App::plugin('getkirby/redirects', [
 			if ($final === true && empty($result) === true) {
 
 				// load redirects definition
-				$root      = kirby()->root('config');
+				$kirby     = App::instance();
+				$root      = $kirby->root('config');
 				$redirects = require $root . '/redirects.php';
 
 				// turn redirects into routes array
@@ -54,7 +55,7 @@ App::plugin('getkirby/redirects', [
 				try {
 					return $router->call($path, $method);
 				} catch (Throwable) {
-					return site()->errorPage();
+					return $kirby->site()->errorPage();
 				}
 			}
 		}

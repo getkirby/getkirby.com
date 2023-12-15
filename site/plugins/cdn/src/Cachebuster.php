@@ -20,7 +20,7 @@ class Cachebuster
 		$kirby = App::instance();
 		$root  = $kirby->root('index') . '/' . $path;
 
-		if (file_exists($root)) {
+		if (file_exists($root) === true) {
 			$version = static::version($root, $path);
 			$path = $path . '?v=' . $version;
 		}

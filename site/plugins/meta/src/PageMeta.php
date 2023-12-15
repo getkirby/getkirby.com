@@ -4,26 +4,25 @@ namespace Kirby\Meta;
 
 use Imagick;
 use Kirby\Cms\File;
+use Kirby\Cms\Page;
 use Kirby\Content\Field;
 use Kirby\Filesystem\Asset;
-use Kirby\Filesystem\F;
 use Kirby\Http\Response;
 use Kirby\Toolkit\Html;
 use Kirby\Toolkit\Tpl;
 
 class PageMeta
 {
-	protected $page;
-	protected $metadata = [];
+	protected array $metadata = [];
 
 	public $defaults = [
 		'robots' => true,
 	];
 
-	public function __construct($page)
+	public function __construct(
+		protected Page $page
+	)
 	{
-		$this->page = $page;
-
 		// Get metadata from page model
 		if (method_exists($this->page, 'metadata') === true) {
 			$this->metadata = $this->page->metadata();
@@ -52,7 +51,7 @@ class PageMeta
 
 		// From site as fallback...
 		if ($fallback === true) {
-			$fallback = site()->content()->get($key);
+			$fallback = $this->page->site()->content()->get($key);
 
 			if ($fallback->exists()) {
 				return $fallback;
@@ -69,10 +68,10 @@ class PageMeta
 			'@context' => 'https://schema.org',
 			'@graph' => [
 				[
-					'@type' => 'Organization',
-					'name' => 'Kirby',
-					'url' => url(),
-					'logo' => url('/assets/images/kirby-signet.svg'),
+					'@type'  => 'Organization',
+					'name'   => 'Kirby',
+					'url'    => url(),
+					'logo'   => url('/assets/images/kirby-signet.svg'),
 					'sameAs' => [
 						'https://mastodon.social/@getkirby',
 						'https://instagram.com/getkirby',
@@ -80,11 +79,11 @@ class PageMeta
 				],
 				[
 					'@type' => 'WebSite',
-					'url' => url(),
+					'url'   => url(),
 					'potentialAction' => [
 						[
-							'@type' => 'SearchAction',
-							'target' => url('search') . '?q={search_term_string}',
+							'@type'       => 'SearchAction',
+							'target'      => url('search') . '?q={search_term_string}',
 							'query-input' => 'required name=search_term_string',
 						],
 					],
@@ -100,7 +99,7 @@ class PageMeta
 		return Html::tag('link', null, [
 			'rel'   => 'search',
 			'type'  => 'application/opensearchdescription+xml',
-			'title' => site()->title(),
+			'title' => $this->page->site()->title(),
 			'href'  => url('/open-search.xml'),
 		]) . PHP_EOL;
 	}
@@ -118,13 +117,13 @@ class PageMeta
 
 		if ($robots->isNotEmpty()) {
 			$html[] = Html::tag('meta', null, [
-				'name' => 'robots',
+				'name'    => 'robots',
 				'content' => $robots->value(),
 			]);
 		}
 
 		$html[] = Html::tag('link', null, [
-			'rel' => 'canonical',
+			'rel'  => 'canonical',
 			'href' => $this->page->url(),
 		]);
 
@@ -136,7 +135,7 @@ class PageMeta
 		$html = [];
 		$meta = [];
 		$og   = [];
-		$site = site();
+		$site = $this->page->site();
 
 		// Basic OpenGraph tags
 		$og['og:site_name'] = $site->title()->value();
@@ -160,7 +159,10 @@ class PageMeta
 			}
 		}
 
-		return Tpl::load(__DIR__ . '/templates/social.php', compact('meta', 'og'));
+		return Tpl::load(
+			__DIR__ . '/templates/social.php',
+			compact('meta', 'og')
+		);
 	}
 
 	public function thumbnail(): ?File

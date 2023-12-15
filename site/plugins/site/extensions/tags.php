@@ -12,9 +12,7 @@ $tags = [];
  * (snippet: snippet/to/render/the/children)
  */
 $tags['snippet'] = [
-	'html' => function ($tag) {
-		return snippet($tag->value(), [], true);
-	}
+	'html' => fn ($tag) => snippet($tag->value(), [], true)
 ];
 
 /**
@@ -135,9 +133,7 @@ $tags['properties'] = [
  */
 $tags['plain'] = [
 	'attr' => ['text'],
-	'html' => function ($tag) {
-		return $tag->text ?? $tag->value;
-	}
+	'html' => fn ($tag) => $tag->text ?? $tag->value
 ];
 
 /**
@@ -186,7 +182,7 @@ $tags['class'] = $tags['method'] = [
 			if ($text === null) {
 				$parts = Str::split($tag->attr('class'), '\\');
 				$name  = array_pop($parts);
-				$text = $name . '->' . $tag->attr('method') . '()';
+				$text  = $name . '->' . $tag->attr('method') . '()';
 			}
 		}
 

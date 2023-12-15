@@ -194,7 +194,10 @@ class Marsdown extends ParsedownExtra
 
 		$infostring = trim(str_replace("\t", ' ', substr($Line['text'], $openerLength)), ' ');
 
-		if (strpos($infostring, ' ') === false && strpos($infostring, '`') !== false) {
+		if (
+			strpos($infostring, ' ') === false &&
+			strpos($infostring, '`') !== false
+		) {
 			// abort parsing of block, if code block does not
 			// have a caption, but language string contains
 			// a backtick to match the behavior of vanilla
