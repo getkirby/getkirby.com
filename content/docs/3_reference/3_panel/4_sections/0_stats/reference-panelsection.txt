@@ -89,6 +89,24 @@ stats:
       info: +112.5%
 ```
 
+<since v="4.1.0">
+
+### Icons
+
+You can set a small icon next to the label 
+
+```yaml
+stats:
+  type: stats
+  reports:
+    - label: Revenue
+      value: €29,682
+			icon: cart
+      info: +112.5%
+```
+
+</since>
+
 ### Links
 
 Reports can have a link to a source or more details. Links can be absolute or relative.
