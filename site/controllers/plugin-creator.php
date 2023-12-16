@@ -1,6 +1,8 @@
 <?php
 
-return function ($page) {
+use Kirby\Cms\Page;
+
+return function (Page $page) {
 	return [
 		'templates' => json_encode([
 			'gitattributes' => $page->file('gitattributes.md')->read(),

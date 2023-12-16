@@ -1,6 +1,8 @@
 <?php
 
-return function ($kirby, $page) {
+use Kirby\Cms\Page;
+
+return function (Page $page) {
 	$partners = $page->children()->listed()->shuffle();
 
 	$filters = [
@@ -24,8 +26,14 @@ return function ($kirby, $page) {
 
 	// collect all possible options, alphabetically sorted
 	foreach ($filters as $field => $config) {
-		$options  = $partners->pluck($config['field'] ?? $field, $config['multiple'] ? ',' : null, true);
+		$options = $partners->pluck(
+			$config['field'] ?? $field,
+			$config['multiple'] ? ',' : null,
+			true
+		);
+
 		sort($options, SORT_STRING);
+
 		$filters[$field]['options'] = $options;
 	}
 

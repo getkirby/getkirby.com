@@ -1,9 +1,12 @@
 <?php
 
-return function ($kirby) {
+use Kirby\Cms\App;
 
+return function (App $kirby) {
 	return [
-		'versions' => array_filter($kirby->option('versions'), fn ($item) => $item['hasDocs'] ?? null === true),
+		'versions' => array_filter(
+			$kirby->option('versions'),
+			fn ($item) => $item['hasDocs'] ?? null === true
+		)
 	];
-
 };

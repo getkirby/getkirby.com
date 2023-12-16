@@ -1,7 +1,8 @@
 <?php
 
-return function ($kirby) {
+use Kirby\Cms\App;
 
+return function (App $kirby) {
 	$query   = trim(get('q', ''));
 	$area    = trim(get('area', ''));
 	$results = null;

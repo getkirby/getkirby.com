@@ -1,11 +1,11 @@
 <?php
 
-return function ($page) {
-	$sections = $page->children()->listed()->filter(function ($section) {
-		return file_exists($section->root() . '/snippet.php') === true;
-	});
+use Kirby\Cms\Page;
 
+return function (Page $page) {
 	return [
-		'sections' => $sections,
+		'sections' => $page->children()->listed()->filter(
+			fn ($section) => file_exists($section->root() . '/snippet.php')
+		),
 	];
 };

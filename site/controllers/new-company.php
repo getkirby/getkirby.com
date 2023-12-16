@@ -1,5 +1,6 @@
 <?php
 
+use Kirby\Cms\Page;
 use Kirby\Http\Remote;
 
 function customerSubscribe(string $email, bool $hasNewsletter): bool
@@ -16,8 +17,12 @@ function customerSubscribe(string $email, bool $hasNewsletter): bool
 	}
 }
 
-function customerTransfer(string $email, string $hash, bool $hasData, bool $hasNewsletter): bool
-{
+function customerTransfer(
+	string $email,
+	string $hash,
+	bool $hasData,
+	bool $hasNewsletter
+): bool {
 	$response = Remote::post(option('hub.url') . '/consent', [
 		'data' => [
 			'email'         => $email,
@@ -30,8 +35,12 @@ function customerTransfer(string $email, string $hash, bool $hasData, bool $hasN
 	return $response->code() === 200;
 }
 
-function customerVerify(string $email, string $hash, bool $hasData, bool $hasNewsletter): bool
-{
+function customerVerify(
+	string $email,
+	string $hash,
+	bool $hasData,
+	bool $hasNewsletter
+): bool {
 	$data = [
 		'email'         => $email,
 		'hasData'       => $hasData,
@@ -49,7 +58,7 @@ function customerVerify(string $email, string $hash, bool $hasData, bool $hasNew
 }
 
 
-return function ($page) {
+return function (Page $page) {
 	$email         = (string)get('email');
 	$hash          = (string)get('hash');
 	$hasData       = (bool)get('hasData');

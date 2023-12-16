@@ -1,10 +1,12 @@
 <?php
 
+use Kirby\Cms\App;
+use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 
-return function ($page, $filter) {
+return function (App $kirby, Page $page, $filter) {
 
-	$categories = option('plugins.categories');
+	$categories = $kirby->option('plugins.categories');
 	$category   = param('category');
 	$heading    = 'Featured';
 
@@ -42,6 +44,7 @@ return function ($page, $filter) {
 			go('plugins/k4');
 		}
 	}
+
 	return [
 		'categories'      => $categories,
 		'currentCategory' => $category,
