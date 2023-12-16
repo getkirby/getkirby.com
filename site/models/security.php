@@ -57,11 +57,12 @@ class SecurityPage extends Page
 		// extract the part before the second dot
 		preg_match('/^(\w+\.\w+)\./', $latest, $matches);
 
-		$data = array_merge([
+		$data = [
 			'latest'            => $latest,
 			'latestMajor'       => $matches[1],
-			'noVulnerabilities' => $noVulns
-		], $data);
+			'noVulnerabilities' => $noVulns,
+			...$data
+		];
 
 		$field->value = Str::template($field->value, $data);
 

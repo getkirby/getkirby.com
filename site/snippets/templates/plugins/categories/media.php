@@ -22,12 +22,10 @@
 	'layout'  => 'cards',
 	'columns' => 2,
 	'hero'    => true,
-	'plugins' => array_merge(
-		[
-			'plugins/sylvainjule/embed',
-			'plugins/hashandsalt/video'
-		],
-		$plugins->filter('subcategory', 'videos')->pluck('id'),
-	)
+	'plugins' => [
+		'plugins/sylvainjule/embed',
+		'plugins/hashandsalt/video',
+		...$plugins->filter('subcategory', 'videos')->pluck('id'),
+	]
 ]) ?>
 

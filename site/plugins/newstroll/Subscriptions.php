@@ -15,12 +15,13 @@ class Subscriptions
 		array $personalizations = [],
 		bool $sendMail = true
 	): array {
-		return $this->client->post('subscription', array_merge($personalizations, [
+		return $this->client->post('subscription', [
+			...$personalizations,
 			'email'     => $email,
 			'groups_id' => $group,
 			'status'    => $status,
 			'sendMail'  => $sendMail
-		]));
+		]);
 	}
 
 	public function delete(string $id): array|null
@@ -55,9 +56,10 @@ class Subscriptions
 		array $personalizations = [],
 		string $surname = null
 	): array {
-		return $this->client->put('subscription/' . $id, array_merge($personalizations, [
+		return $this->client->put('subscription/' . $id, [
+			...$personalizations,
 			'status'  => $status,
 			'surname' => $surname
-		]));
+		]);
 	}
 }

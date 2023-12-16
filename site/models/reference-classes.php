@@ -129,9 +129,10 @@ class ReferenceClassesPage extends SectionPage
 				'slug'     => $slug,
 				'root'     => $root,
 				'model'    => 'reference-class',
-				'content'  => array_merge($content, [
+				'content'  => [
+					...$content,
 					'class' => $class
-				])
+				]
 			];
 		}
 
@@ -158,10 +159,10 @@ class ReferenceClassesPage extends SectionPage
 
 	public static function isFeatured(string $page): bool
 	{
-		$ids = array_merge(
-			page('docs/reference/objects')->menu()->yaml(),
-			page('docs/reference/tools')->menu()->yaml()
-		);
+		$ids = [
+			...page('docs/reference/objects')->menu()->yaml(),
+			...page('docs/reference/tools')->menu()->yaml()
+		];
 
 		foreach ($ids as $id) {
 			if (Str::endsWith($page, $id)) {

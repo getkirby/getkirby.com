@@ -53,26 +53,20 @@ class Newstroll
 
 	public function request(string $path, array $params = []): array|null
 	{
-		$response = Remote::request($this->url . '/' . $path, array_merge(
-			[
-				'ca'      => Remote::CA_SYSTEM,
-				'headers' => [
-					'Authorization: Bearer ' . $this->key
-				]
+		$response = Remote::request($this->url . '/' . $path, [
+			'ca'      => Remote::CA_SYSTEM,
+			'headers' => [
+				'Authorization: Bearer ' . $this->key
 			],
-			$params
-		));
+			...$params
+		]);
 
-		switch ($response->code()) {
-			case 404:
-				throw new Exception('The entry could not be found');
-			case 422:
-				throw new Exception('Email is blacklisted or not valid');
-			case 500:
-				throw new Exception('Unable to process request');
-		}
-
-		return $response->json();
+		return match ($response->code()) {
+			404     => throw new Exception('The entry could not be found'),
+			422     => throw new Exception('Email is blacklisted or not valid'),
+			500     => throw new Exception('Unable to process request'),
+			default => $response->json()
+		};
 	}
 
 	public function subscriptions(): Subscriptions

@@ -65,8 +65,10 @@ class Search
 		int $page = 1,
 		array $options = []
 	): Results {
-		$defaults = $this->options['options'] ?? [];
-		$options  = array_merge($defaults, $options);
+		$options = [
+			...$this->options['options'] ?? [],
+			...$options
+		];
 
 		// Set the page parameter
 		// Algolia uses zero based page indexes while

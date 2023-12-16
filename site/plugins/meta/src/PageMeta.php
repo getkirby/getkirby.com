@@ -226,7 +226,7 @@ class PageMeta
 				 *   image: image.png
 				 */
 			} else {
-				$data = array_merge($data, $yaml);
+				$data = [...$data, ...$yaml];
 			}
 
 			// If image is still a string and not a file object yet,

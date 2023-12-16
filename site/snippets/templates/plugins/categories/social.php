@@ -14,12 +14,10 @@
 	'layout'  => 'cards',
 	'columns' => 4,
 	'hero'    => true,
-	'plugins' => array_merge(
-		[
-			'plugins/sylvainjule/embed'
-		],
-		$plugins->filter('subcategory', 'social')->filter('similar', '')->pluck('id')
-	)
+	'plugins' => [
+		'plugins/sylvainjule/embed',
+		...$plugins->filter('subcategory', 'social')->filter('similar', '')->pluck('id')
+	]
 ]) ?>
 
 

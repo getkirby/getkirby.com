@@ -31,8 +31,10 @@ class Entry
 
 		// get template-specific fields
 		if ($templateFields = $templates[$template]['fields'] ?? null) {
-			$templateFields = static::fieldsToUniformArray($templateFields);
-			$fields = array_merge($fields, $templateFields);
+			$fields = [
+				...$fields,
+				...static::fieldsToUniformArray($templateFields)
+			];
 		}
 
 		// Make sure that the fields are sorted alphabetically for consistence

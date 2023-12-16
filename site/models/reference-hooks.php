@@ -16,13 +16,13 @@ class ReferenceHooksPage extends SectionPage
 		$children = array_map(function ($hook) use ($pages) {
 
 			$slug    = Str::slug($hook['Name']);
-			$content = $pages->find($slug)?->content()->toArray() ?? [];
-			$content = array_merge([
+			$content = [
 				'title'     => $hook['Name'],
 				'arguments' => implode(', ', Str::split($hook['Arguments'])),
 				'type'      => $hook['Type'],
-				'return'    => $hook['Return'] ?? null
-			], $content);
+				'return'    => $hook['Return'] ?? null,
+				...$pages->find($slug)?->content()->toArray() ?? []
+			];
 
 			return [
 				'slug'     => $slug,

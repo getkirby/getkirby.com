@@ -113,7 +113,7 @@ $tags['properties'] = [
 		$rows = $tag->attr('rows') ?? $page->properties();
 
 		if ($additional = $tag->attr('additional')) {
-			$rows = array_merge($rows, $additional);
+			$rows = [...$rows, ...$additional];
 			array_multisort(array_column($rows, 'name'), SORT_ASC, $rows);
 		}
 
@@ -148,10 +148,11 @@ $tags['docs'] = [
 	'html' => function ($tag) {
 		parse_str($tag->attr('vars', ''), $vars);
 
-		$data = array_merge([
+		$data = [
 			'page'  => $tag->parent(),
-			'field' => $tag->attr('field')
-		], $vars);
+			'field' => $tag->attr('field'),
+			...$vars
+		];
 
 		$snippet = snippet('docs/' . $tag->value, $data, true);
 

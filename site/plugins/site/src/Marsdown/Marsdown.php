@@ -373,7 +373,8 @@ class Marsdown extends ParsedownExtra
 		$Excerpt = parent::inlineCode($Excerpt);
 
 		if ($Excerpt !== null) {
-			return array_merge($Excerpt, [
+			return [
+				...$Excerpt,
 				'element' => [
 					'nonNestables' => ['Code'],
 					'handler' => [
@@ -382,7 +383,7 @@ class Marsdown extends ParsedownExtra
 						'destination' => 'elements'
 					]
 				],
-			]);
+			];
 		}
 	}
 

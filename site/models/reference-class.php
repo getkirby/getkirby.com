@@ -192,7 +192,7 @@ class ReferenceClassPage extends SectionPage
 				$getTraits($class->getParentClass());
 			}
 
-			$traits = array_merge($traits, $class->getTraitNames());
+			$traits = [...$traits, ...$class->getTraitNames()];
 		};
 		$getTraits($reflection);
 

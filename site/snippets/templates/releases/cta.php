@@ -1,6 +1,6 @@
 <?php
 
-snippet('cta', array_merge([
+snippet('cta', [
 	'buttons' => [
 		[
 			'text' => 'Docs',
@@ -13,5 +13,6 @@ snippet('cta', array_merge([
 			'link' => $page->link(),
 			'icon' => 'download'
 		],
-	]
-], $options ?? []));
+	],
+	...$options ?? []
+]);
