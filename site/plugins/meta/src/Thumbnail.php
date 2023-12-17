@@ -135,7 +135,8 @@ class Thumbnail
 
 	protected function addPattern(): void
 	{
-		$pattern = static::PATTERNS[array_rand(static::PATTERNS)];
+		$seed    = abs(crc32($this->id));
+		$pattern = static::PATTERNS[$seed % count(static::PATTERNS)];
 		$root    = dirname(__DIR__, 4) . '/assets/patterns';
 		$pattern = imagecreatefromjpeg($root . '/' . $pattern . '.jpg');
 		$width   = imagesx($this->canvas);
@@ -147,8 +148,8 @@ class Thumbnail
 			$pattern,
 			0,
 			0,
-			mt_rand(0, imagesx($pattern) - $width),
-			mt_rand(0, imagesy($pattern) - $height),
+			$seed % (imagesx($pattern) - $width),
+			$seed % (imagesy($pattern) - $height),
 			$width,
 			$height
 		);
