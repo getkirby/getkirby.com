@@ -16,4 +16,3 @@ Benefits:
 Thumbnail:
   -
   lead: The CMS built
-  image: bulb.svg

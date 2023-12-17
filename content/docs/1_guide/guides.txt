@@ -6,12 +6,6 @@ Description: Get an overview of all topics covered by Kirby’s documentation.
 
 ----
 
-Thumbnail:
-  -
-  image: book.svg
-
-----
-
 Structure:
 
 Get started:

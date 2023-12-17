@@ -3,10 +3,12 @@
 use Kirby\Cms\App;
 use Kirby\Meta\PageMeta;
 use Kirby\Meta\SiteMeta;
+use Kirby\Meta\Thumbnail;
 
 load([
-	'kirby\\meta\\pagemeta' => __DIR__ . '/src/PageMeta.php',
-	'kirby\\meta\\sitemeta' => __DIR__ . '/src/SiteMeta.php'
+	'kirby\\meta\\pagemeta'  => __DIR__ . '/src/PageMeta.php',
+	'kirby\\meta\\sitemeta'  => __DIR__ . '/src/SiteMeta.php',
+	'kirby\\meta\\thumbnail' => __DIR__ . '/src/Thumbnail.php',
 ]);
 
 App::plugin('kirby/meta', [
@@ -26,7 +28,7 @@ App::plugin('kirby/meta', [
 		],
 		[
 			'pattern' => '(:all)/opengraph.png',
-			'action'  => fn (string $id) => PageMeta::renderThumbnail($id)
+			'action'  => fn (string $id) => (new Thumbnail($id))->response()
 		]
 	],
 	'pageMethods' => [
