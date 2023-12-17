@@ -236,7 +236,7 @@ class PluginPage extends Page
 
 	public function screenshot(): File|null
 	{
-		return $this->images()->findBy('name', 'screenshot');
+		return $this->images()->findBy('name', 'screenshot') ?? $this->card();
 	}
 
 	protected function tagPrefix(): string
