@@ -305,7 +305,7 @@ class Thumbnail
 
 		$length = strlen($this->title);
 		$size   = $length < 24 ? 62 : 54;
-		$title  = wordwrap($this->title, $size > 60 ? 15 : 20, "\n");
+		$title  = wordwrap($this->title, $size > 60 ? 17 : 22, "\n");
 
 		[$x, $y] = imagefttext(
 			$this->canvas,
