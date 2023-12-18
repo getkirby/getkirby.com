@@ -8,7 +8,7 @@ $sale = new Buy\Sale();
 </aside>
 
 <?php
-// set the cache expiry to end of sale
+// expire the cache when the sale banner/prices change
 $sale->expires();
-	?>
+?>
 <?php endif ?>
