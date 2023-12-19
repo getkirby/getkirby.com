@@ -1,0 +1,3 @@
+- PHP 8.3
+- PHP 8.2 (recommended)
+- PHP 8.1

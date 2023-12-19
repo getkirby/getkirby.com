@@ -1,0 +1,12 @@
+- Either the `gd` extension or `ImageMagick` (see below)
+- `ctype`
+- `curl`
+- `dom`
+- `filter`
+- `hash`
+- `iconv`
+- `json`
+- `libxml`
+- `mbstring`
+- `openssl`
+- `SimpleXML`

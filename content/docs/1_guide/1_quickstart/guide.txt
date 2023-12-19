@@ -42,103 +42,19 @@ When copying files to a remote server via (S)FTP, make sure to copy the `.htacce
 
 ## Requirements
 
-<div class="table">
-    <table>
-        <tr>
-            <th>Web server</th>
-            <th>PHP</th>
-        </tr>
-        <tr>
-            <td>
-                <p>Any of the following:</p>
-                <ul>
-                    <li>Apache 2</li>
-                    <li>Nginx</li>
-                    <li>LiteSpeed</li>
-                    <li>Caddy</li>
-                </ul>
+### Web Server
 
-                <p>Server Features:</p>
-                <ul>
-                    <li>URL rewriting</li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li>PHP 8.1, 8.2 or 8.3<br>(PHP 8.2 is recommended)</li>
-                    <li>Either the <code>gd</code> extension or ImageMagick (see below)</li>
-                    <li><code>ctype</code> extension</li>
-                    <li><code>curl</code> extension</li>
-                    <li><code>dom</code> extension</li>
-                    <li><code>filter</code> extension</li>
-                    <li><code>hash</code> extension</li>
-                    <li><code>iconv</code> extension</li>
-                    <li><code>json</code> extension</li>
-                    <li><code>libxml</code> extension</li>
-                    <li><code>mbstring</code> extension</li>
-                    <li><code>openssl</code> extension</li>
-                    <li><code>SimpleXML</code> extension</li>
-                </ul>
-            </td>
-        </tr>
-    </table>
-</div>
+(docs: requirements/server)
 
-The server OS must be POSIX compatible.
+### PHP Version
 
-### Recommended requirements
+(docs: requirements/php-versions)
 
-- PHP `exif` extension for support for EXIF information from images
-- PHP `fileinfo` extension for improved MIME type detection for files
-- PHP `intl` extension for the (link: docs/reference/system/options/date#date-handler__intl text: `intl` date handler) (support for international dates) and localized number formatting
-
-### Optional requirements
-
-- (link: https://imagemagick.org/ text: ImageMagick) (`convert` binary) if you want to use the (link: docs/reference/system/options/thumbs#thumbs-driver text: `im` thumbs driver). Note that the PHP `exec()` method must be enabled on your server in this case as well.
-- PHP `apcu` extension for the Apcu cache driver
-- PHP `memcached` extension for the Memcached cache driver
-- PHP `PDO` extension for connecting to databases
-- PHP `zip` extension for ZIP archive file functions
-- PHP `zlib` extension for sanitization and validation of `.svgz` files
-
-If you want to use PHP's built-in server, you have to start it up with Kirby's router:
-
-```php
-php -S localhost:8000 kirby/router.php
-```
-
-Other servers (link: docs/reference/system/options/servers text: may work), but are not officially supported.
+Kirby needs a pretty standard set of PHP extensions. See the full list of required, recommended and optional (link: docs/reference/system/requirements#php-extensions text: PHP extensions)
 
 ### Browsers for the Panel
 
-Kirby does not modify the output of your site's templates and thus has no effect on the browser requirements for your site's frontend. However, the Panel is built on modern browser features and has a couple browser requirements which need to be met by your site's editors
-
-<div class="table">
-    <table>
-        <tr>
-            <th>Desktop</th>
-            <th>Mobile</th>
-        </tr>
-        <tr>
-            <td class="prose">
-                <ul>
-                    <li>Firefox 110+</li>
-                    <li>Chrome 106+</li>
-                    <li>Safari 15+</li>
-                    <li>Edge 106+</li>
-                    <li>Opera 94+</li>
-                </ul>
-            </td>
-            <td class="prose">
-                <ul>
-                    <li>Mobile Safari 15+</li>
-                    <li>Android Browser 117+</li>
-                    <li>Chrome for Android 117+</li>
-                </ul>
-            </td>
-        </tr>
-    </table>
-</div>
+(docs: requirements/browsers)
 
 ### Alternative ways to install Kirby
 
