@@ -84,15 +84,15 @@ class FileSystem
 			$path[$depth] = $line;
 
 			// traverse path and add label to result
-			$parent =& $result;
+			$parent = &$result;
 
 			foreach ($path as $depth => $key) {
-				if (!isset($parent[$key])) {
-					$parent[$line] = array();
+				if (isset($parent[$key]) === false) {
+					$parent[$line] = [];
 					break;
 				}
 
-				$parent =& $parent[$key];
+				$parent = &$parent[$key];
 			}
 		}
 
@@ -103,9 +103,11 @@ class FileSystem
 	protected static function renderLabel(string $name, ?string $type = null): string
 	{
 		$html  = '<span role="presentation" class="filesystem-label" data-type="' . $type . '">';
+
 		if ($type !== null) {
 			$html .= icon($type);
 		}
+
 		$html .= $name;
 		$html .= '</span>';
 

@@ -2,7 +2,6 @@
 
 namespace Buy;
 
-use Exception;
 use Kirby\Cms\App;
 use Kirby\Toolkit\Str;
 
@@ -12,7 +11,7 @@ class Visitor
 	 * Supported currencies with their currency sign (prefixed to the amount);
 	 * currencies not listed here will automatically fall back to EUR
 	 */
-	const CURRENCIES = [
+	public const CURRENCIES = [
 		'ARS' => 'ARS ',
 		'AUD' => 'A$',
 		'BRL' => 'R$',

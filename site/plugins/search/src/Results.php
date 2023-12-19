@@ -2,10 +2,10 @@
 
 namespace Kirby\Search;
 
-use Kirby\Toolkit\Collection;
-use Kirby\Toolkit\Obj;
 use Kirby\Cms\Pagination;
 use Kirby\Toolkit\A;
+use Kirby\Toolkit\Collection;
+use Kirby\Toolkit\Obj;
 
 /**
  * Kirby Search Results
@@ -16,7 +16,7 @@ use Kirby\Toolkit\A;
  */
 class Results extends Collection
 {
-	static public function from(array $response): static
+	public static function from(array $response): static
 	{
 		// Convert the hits to Obj objects
 		$hits    = A::map($response['hits'], fn ($hit) => new Obj($hit));

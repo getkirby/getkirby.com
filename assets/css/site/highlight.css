@@ -1,9 +1,9 @@
 .highlight {
-  padding: var(--spacing-6);
+	padding: var(--spacing-6);
 }
 
 @media screen and (min-width: 30rem) {
-  .highlight {
-    padding: var(--spacing-12);
-  }
+	.highlight {
+		padding: var(--spacing-12);
+	}
 }

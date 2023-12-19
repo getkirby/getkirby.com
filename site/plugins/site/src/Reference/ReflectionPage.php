@@ -3,9 +3,8 @@
 namespace Kirby\Reference;
 
 use Kirby\Cms\App;
-use Kirby\Content\Field;
 use Kirby\Cms\Page;
-use Kirby\Reference\Types;
+use Kirby\Content\Field;
 use Kirby\Template\Template;
 use Kirby\Toolkit\A;
 use ReflectionClass;
@@ -49,7 +48,7 @@ abstract class ReflectionPage extends Page
 	{
 		if ($tag = $this->docBlock()?->getTag('deprecated')) {
 			$value = $tag->getVersion() . '|' . $tag->getDescription();
-            return new Field($this, 'deprecated', $value);
+			return new Field($this, 'deprecated', $value);
 		}
 
 		return parent::deprecated();
@@ -65,9 +64,10 @@ abstract class ReflectionPage extends Page
 		}
 
 		if ($reflection = $this->reflection()) {
-            try {
-                return $this->docBlock = new DocBlock($reflection->getDocComment());
-            } catch (Throwable) {}
+			try {
+				return $this->docBlock = new DocBlock($reflection->getDocComment());
+			} catch (Throwable) {
+			}
 		}
 
 		return $this->docBlock = null;
@@ -86,7 +86,7 @@ abstract class ReflectionPage extends Page
 		// otherwise try to get summary from DocBlock in code
 		if ($docBlock = $this->docBlock()) {
 			$intro = trim($docBlock->getSummary());
-            $intro = str_replace(PHP_EOL, ' ', $intro);
+			$intro = str_replace(PHP_EOL, ' ', $intro);
 
 			if ($intro === '/') {
 				$intro = null;
@@ -201,7 +201,7 @@ abstract class ReflectionPage extends Page
 				$doc  = $this->docBlock()?->getParameter($name);
 
 				if ($type = $parameter->getType()) {
-					 $this->typeName($type);
+					$this->typeName($type);
 				} elseif ($doc) {
 					$type = (string)$doc->getType();
 				}
@@ -246,10 +246,10 @@ abstract class ReflectionPage extends Page
 	/**
 	 * Creates the reflection object
 	 */
-   protected function reflection(): Reflector|null
-   {
+	protected function reflection(): Reflector|null
+	{
 		return null;
-   }
+	}
 
 	public function typeName($type): string
 	{
@@ -326,14 +326,14 @@ abstract class ReflectionPage extends Page
 	public function template(): Template
 	{
 		// If template exists, use it
-		 if ($this->intendedTemplate() === parent::template()) {
-            return parent::template();
+		if ($this->intendedTemplate() === parent::template()) {
+			return parent::template();
 		}
 
 		return $this->kirby()->template('reference-article');
 	}
 
-	 /**
+	/**
 	 * Returns what exceptions can be thrown by this
 	 */
 	public function throws(): array

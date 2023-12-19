@@ -1,10 +1,10 @@
 <?php
 
 use Kirby\Cache\Cache;
-use Kirby\Content\Field;
 use Kirby\Cms\File;
-use Kirby\Cms\Page;
 use Kirby\Cms\Nest;
+use Kirby\Cms\Page;
+use Kirby\Content\Field;
 use Kirby\Data\Data;
 use Kirby\Http\Remote;
 use Kirby\Http\Url;
@@ -223,7 +223,7 @@ class PluginPage extends Page
 	{
 		return [
 			'thumbnail' => [
-				'lead'  => 'Plugin',
+				'lead'  => 'Kirby Plugin',
 				'image' => $this->screenshot()
 			]
 		];
@@ -236,7 +236,7 @@ class PluginPage extends Page
 
 	public function screenshot(): File|null
 	{
-		return $this->images()->findBy('name', 'screenshot');
+		return $this->images()->findBy('name', 'screenshot') ?? $this->card();
 	}
 
 	protected function tagPrefix(): string

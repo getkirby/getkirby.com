@@ -1,6 +1,6 @@
 <?php
 extract([
-  'inherited' => $page->inheritedFrom() ?? null
+	'inherited' => $page->inheritedFrom() ?? null
 ]);
 ?>
 <?php if ($inherited): ?>

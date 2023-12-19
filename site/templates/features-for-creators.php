@@ -5,4 +5,3 @@
 <?php snippet('templates/features-for-creators/layouts') ?>
 <?php snippet('templates/features-for-creators/assets') ?>
 <?php snippet('templates/features-for-creators/i18n') ?>
-

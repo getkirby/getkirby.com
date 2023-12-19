@@ -2,6 +2,9 @@
 
 namespace Buy;
 
+use DateTime;
+use DateTimeZone;
+
 class Sale
 {
 	public readonly string $start;
@@ -31,14 +34,20 @@ class Sale
 	 */
 	public function ends(): string
 	{
-		return match (true) {
-			$this->end - time() < 24 * 60 * 60
-				=> '<strong>today</strong> (midnight UTC)',
-			default
-				// the end date is inclusive (midnight of next day),
-				// subtract one to show the correct date
-				=> date('M jS', $this->end - 1),
-		};
+		if ($this->end - time() <= 24 * 60 * 60) {
+			return '<strong>today</strong> (midnight UTC)';
+		}
+
+		// ensure to always display the date in UTC
+		// to avoid wrong dates in wrong server time zones
+		$dateTime = new DateTime();
+		$dateTime->setTimezone(new DateTimeZone('UTC'));
+
+		// the end date is inclusive (midnight of next day),
+		// subtract one to show the correct date
+		$dateTime->setTimestamp($this->end - 1);
+
+		return $dateTime->format('M jS');
 	}
 
 	/**
@@ -48,11 +57,11 @@ class Sale
 	 */
 	public function expires(): void
 	{
-		$expires = null;
+		$expires = [];
 
 		// the cache will expire once the sale will start
 		if ($this->start > time()) {
-			$expires = $this->start;
+			$expires[] = $this->start;
 		}
 
 		// if a banner is currently active, the cache
@@ -60,14 +69,21 @@ class Sale
 		if ($this->isActive() === true) {
 			// expire one day before the end date,
 			// so the text can change on the last day
-			$end     = $this->end - 24 * 60 * 60;
-			$expires = match ($expires) {
-				null    => $end,
-				default => min($expires, $end),
-			};
+			if ($this->end - time() > 24 * 60 * 60) {
+				$expires[] = $this->end - 24 * 60 * 60;
+			}
+
+			// in any case throw away the cache *after*
+			// the sale has ended to remove the banners
+			$expires[] = $this->end + 1;
 		}
 
-		kirby()->response()->expires($expires);
+		if (empty($expires) === true) {
+			return;
+		}
+
+		// expire the cache on the next opportunity
+		kirby()->response()->expires(min($expires));
 	}
 
 	/**

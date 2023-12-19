@@ -5,7 +5,7 @@ use Kirby\Toolkit\Xml;
 
 function ariaCurrent(
 	bool $condition,
-	mixed  $type = true,
+	mixed $type = true,
 	string $prefix = ' '
 ): string|null {
 	return $condition ? $prefix . attr(['aria-current' => $type]) : null;
@@ -61,7 +61,8 @@ function img($file, array $props = [])
 	return $img;
 }
 
-function json(array $data, bool $pretty = true): string|false {
+function json(array $data, bool $pretty = true): string|false
+{
 	if ($pretty === true) {
 		return json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 	}
@@ -78,7 +79,8 @@ function version(string $version, string $format = '%s'): string
 }
 
 if (function_exists('xml') === false) {
-	function xml($value) {
+	function xml($value)
+	{
 		return Xml::encode($value);
 	}
 }

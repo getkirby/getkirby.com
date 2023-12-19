@@ -49,7 +49,8 @@ class Index
 	/**
 	 * Returns the number of indexable pages/entries
 	 */
-	public function count(): int {
+	public function count(): int
+	{
 		return $this->entries()->count();
 	}
 }

@@ -1,23 +1,21 @@
 <?php
 
-return function ($page) {
+use Kirby\Cms\Page;
 
-	if ($page->slug() === 'new') {
-		$recipes = page('docs/cookbook')
-			->children()
-			->listed()
-			->children()
-			->listed()
-			->filterBy('isNew', true);
-	} else {
-		$recipes = $page
-			->children()
-			->listed()
-			->sortBy('published', 'desc');
-	}
-
+return function (Page $page) {
 	return [
-		'recipes' => $recipes
-	];
+		'recipes' => match ($page->slug()) {
+			'new' => page('docs/cookbook')
+				->children()
+				->listed()
+				->children()
+				->listed()
+				->filterBy('isNew', true),
 
+			default => $page
+				->children()
+				->listed()
+				->sortBy('published', 'desc')
+		}
+	];
 };

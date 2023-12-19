@@ -80,11 +80,10 @@ class PartnerPage extends Page
 
 	public function plugins(): Pages|null
 	{
-		if (parent::plugins()->isNotEmpty() === true)
-		{
+		if (parent::plugins()->isNotEmpty() === true) {
 			$plugins = parent::plugins()->toPages();
 
-            return $plugins->isNotEmpty() ? $plugins : null;
+			return $plugins->isNotEmpty() ? $plugins : null;
 		}
 
 		return $this->pluginpage()->toPage()?->children()->limit(6);

@@ -1,6 +1,8 @@
 <?php
 
-return function ($page) {
+use Kirby\Cms\Page;
+
+return function (Page $page) {
 
 	if ($page->text()->isEmpty() && $page->hasChildren()) {
 		go($page->children()->first()->url());
@@ -9,5 +11,4 @@ return function ($page) {
 	return [
 		'guide' => $page,
 	];
-
 };

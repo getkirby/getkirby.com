@@ -2,9 +2,9 @@
 
 use Kirby\Cms\Section;
 use Kirby\Form\Field;
-use Kirby\Toolkit\Str;
 use Kirby\Reference\DocBlock;
 use Kirby\Reference\Types;
+use Kirby\Toolkit\Str;
 
 $tags = [];
 
@@ -12,9 +12,7 @@ $tags = [];
  * (snippet: snippet/to/render/the/children)
  */
 $tags['snippet'] = [
-	'html' => function ($tag) {
-		return snippet($tag->value(), [], true);
-	}
+	'html' => fn ($tag) => snippet($tag->value(), [], true)
 ];
 
 /**
@@ -115,7 +113,7 @@ $tags['properties'] = [
 		$rows = $tag->attr('rows') ?? $page->properties();
 
 		if ($additional = $tag->attr('additional')) {
-			$rows = array_merge($rows, $additional);
+			$rows = [...$rows, ...$additional];
 			array_multisort(array_column($rows, 'name'), SORT_ASC, $rows);
 		}
 
@@ -135,15 +133,13 @@ $tags['properties'] = [
  */
 $tags['plain'] = [
 	'attr' => ['text'],
-	'html' => function ($tag) {
-		return $tag->text ?? $tag->value;
-	}
+	'html' => fn ($tag) => $tag->text ?? $tag->value
 ];
 
 /**
-* (docs: some-snippet)
-* Injects shared doc snippets from site/snippets/docs
-*/
+ * (docs: some-snippet)
+ * Injects shared doc snippets from site/snippets/docs
+ */
 $tags['docs'] = [
 	'attr' => [
 		'field',
@@ -152,10 +148,11 @@ $tags['docs'] = [
 	'html' => function ($tag) {
 		parse_str($tag->attr('vars', ''), $vars);
 
-		$data = array_merge([
+		$data = [
 			'page'  => $tag->parent(),
-			'field' => $tag->attr('field')
-		], $vars);
+			'field' => $tag->attr('field'),
+			...$vars
+		];
 
 		$snippet = snippet('docs/' . $tag->value, $data, true);
 
@@ -186,7 +183,7 @@ $tags['class'] = $tags['method'] = [
 			if ($text === null) {
 				$parts = Str::split($tag->attr('class'), '\\');
 				$name  = array_pop($parts);
-				$text = $name . '->' . $tag->attr('method') . '()';
+				$text  = $name . '->' . $tag->attr('method') . '()';
 			}
 		}
 
@@ -215,7 +212,8 @@ $tags['helper'] = [
  * @return array
  * @todo refactor/deprecate
  */
-function toOptions(array $props) {
+function toOptions(array $props)
+{
 
 	$table = [];
 

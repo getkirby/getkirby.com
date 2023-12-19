@@ -9,7 +9,6 @@ use ParsedownExtra;
 
 class Marsdown extends ParsedownExtra
 {
-
 	protected $lastH2;
 
 	/**
@@ -29,7 +28,7 @@ class Marsdown extends ParsedownExtra
 	protected function parseAttributes(string $input): array
 	{
 		$dom = new DomDocument();
-		$dom->loadHtml("<html " . $input . "/>");
+		$dom->loadHtml('<html ' . $input . '/>');
 		$attributes = [];
 		foreach ($dom->documentElement->attributes as $name => $attr) {
 			$attributes[$name] = $attr->value;
@@ -111,7 +110,7 @@ class Marsdown extends ParsedownExtra
 			return $Block;
 		}
 
-		return;
+		return null;
 	}
 
 	/**
@@ -195,7 +194,10 @@ class Marsdown extends ParsedownExtra
 
 		$infostring = trim(str_replace("\t", ' ', substr($Line['text'], $openerLength)), ' ');
 
-		if (strpos($infostring, ' ') === false && strpos($infostring, '`') !== false) {
+		if (
+			strpos($infostring, ' ') === false &&
+			strpos($infostring, '`') !== false
+		) {
 			// abort parsing of block, if code block does not
 			// have a caption, but language string contains
 			// a backtick to match the behavior of vanilla
@@ -308,7 +310,9 @@ class Marsdown extends ParsedownExtra
 	{
 		$Block = parent::blockHeader($Line);
 
-		if (!$Block) return;
+		if (!$Block) {
+			return;
+		}
 
 		$slug  = Str::slug(Str::unhtml($this->text($Block['element']['handler']['argument'])));
 		$level = $Block['element']['name'];
@@ -369,7 +373,8 @@ class Marsdown extends ParsedownExtra
 		$Excerpt = parent::inlineCode($Excerpt);
 
 		if ($Excerpt !== null) {
-			return array_merge($Excerpt, [
+			return [
+				...$Excerpt,
 				'element' => [
 					'nonNestables' => ['Code'],
 					'handler' => [
@@ -378,7 +383,7 @@ class Marsdown extends ParsedownExtra
 						'destination' => 'elements'
 					]
 				],
-			]);
+			];
 		}
 	}
 

@@ -1,18 +1,15 @@
 <?php
 
 use Kirby\Cms\App;
+use Kirby\Cms\File;
 use Kirby\Http\Url;
 
 /**
  * Helper function for image modifications via KeyCDN.
  * Takes a path string to a file or a `\Kirby\Cms\File` object
  * as well as an array of KeyCDN image optimization parameters
- *
- * @param string|\Kirby\Cms\File $file
- * @param array $params
- * @return string
  */
-function cdn($file, array $params = []): string
+function cdn(string|File $file, array $params = []): string
 {
 	$query = null;
 
@@ -28,8 +25,8 @@ function cdn($file, array $params = []): string
 
 		} else {
 			$params['enlarge'] = 0;
-			$params['fit']     = match (isset($params['width']) && isset($params['height'])) {
-				true => 'inside',
+			$params['fit']     = match (isset($params['width'], $params['height'])) {
+				true    => 'inside',
 				default => true
 			};
 		}

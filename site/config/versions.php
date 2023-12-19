@@ -10,7 +10,7 @@ return [
 		'link'        => 'https://k1.getkirby.com',
 		'repo'        => 'https://github.com/getkirby-v1',
 	],
-	'2' =>[
+	'2' => [
 		'title'       => 'Kirby 2',
 		'hasDocs'     => true,
 		'mainVersion' => '2',

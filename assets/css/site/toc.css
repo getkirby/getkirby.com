@@ -3,22 +3,22 @@
 	border-end-start-radius: 0;
 }
 .toc ol {
-  padding-top: var(--spacing-4);
-  padding-left: var(--spacing-12);
-  border-left: 2px solid var(--color-black);
-  font-size: var(--text-xl);
+	padding-top: var(--spacing-4);
+	padding-left: var(--spacing-12);
+	border-left: 2px solid var(--color-black);
+	font-size: var(--text-xl);
 }
 .toc li {
-  list-style: decimal-leading-zero;
-  padding-left: .25em;
+	list-style: decimal-leading-zero;
+	padding-left: .25em;
 }
 .toc li::marker {
-  font-variant-numeric: tabular-nums;
-  font-weight: var(--font-bold);
-  font-size: var(--text-xs);
-  font-family: var(--font-mono);
-  color: var(--color-black);
+	font-variant-numeric: tabular-nums;
+	font-weight: var(--font-bold);
+	font-size: var(--text-xs);
+	font-family: var(--font-mono);
+	color: var(--color-black);
 }
 .toc a {
-  display: inline-flex;
+	display: inline-flex;
 }

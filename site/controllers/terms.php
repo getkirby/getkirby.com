@@ -1,15 +1,19 @@
 <?php
 
 use Caxy\HtmlDiff\HtmlDiff;
+use Kirby\Cms\App;
+use Kirby\Cms\Page;
 
-return function ($kirby, $page) {
+return function (App $kirby, Page $page) {
 	// redirect from the parent to the latest version
-	$latestChild = $page->children()->last();
-	if ($latestChild?->intendedTemplate()->name() === 'terms') {
-		return go($latestChild, 302);
+	$latest = $page->children()->last();
+
+	if ($latest?->intendedTemplate()->name() === 'terms') {
+		return go($latest, 302);
 	}
 
 	$introDiff = $textDiff = null;
+
 	if (get('diff') !== null && $page->hasPrev()) {
 		// try to get the diff from cache
 		$prevPage = $page->prev();

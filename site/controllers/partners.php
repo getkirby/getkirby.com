@@ -1,7 +1,9 @@
 <?php
 
-return function ($kirby, $page) {
-    $partners = $page->children()->listed()->shuffle();
+use Kirby\Cms\Page;
+
+return function (Page $page) {
+	$partners = $page->children()->listed()->shuffle();
 
 	$filters = [
 		'languages' => [
@@ -24,15 +26,21 @@ return function ($kirby, $page) {
 
 	// collect all possible options, alphabetically sorted
 	foreach ($filters as $field => $config) {
-		$options  = $partners->pluck($config['field'] ?? $field, $config['multiple'] ? ',' : null, true);
+		$options = $partners->pluck(
+			$config['field'] ?? $field,
+			$config['multiple'] ? ',' : null,
+			true
+		);
+
 		sort($options, SORT_STRING);
+
 		$filters[$field]['options'] = $options;
 	}
 
-    return [
+	return [
 		'filters'  => $filters,
 		'partners' => $partners,
-        'plus'     => $partners->filterBy('isPlusPartner', true),
-        'standard' => $partners->filterBy('isPlusPartner', false),
-    ];
+		'plus'     => $partners->filterBy('isPlusPartner', true),
+		'standard' => $partners->filterBy('isPlusPartner', false),
+	];
 };

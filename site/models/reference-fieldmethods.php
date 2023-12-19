@@ -14,10 +14,10 @@ class ReferenceFieldMethodsPage extends SectionPage
 
 		$children = [];
 		$pages    = parent::children();
-		$methods  = array_merge(
-			$this->getDynamicMethods(),
-			$this->getNativeMethods()
-		);
+		$methods  = [
+			...$this->getDynamicMethods(),
+			...$this->getNativeMethods()
+		];
 
 		foreach ($methods as $name => $reflection) {
 			$children[] = [

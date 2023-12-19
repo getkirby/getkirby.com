@@ -1,9 +1,9 @@
 .skipper {
-  position: absolute;
-  left: -100%;
-  z-index: 1;
+	position: absolute;
+	left: -100%;
+	z-index: 1;
 }
 .skipper:focus-visible {
-  top: var(--spacing-1);
-  left: var(--spacing-1);
+	top: var(--spacing-1);
+	left: var(--spacing-1);
 }

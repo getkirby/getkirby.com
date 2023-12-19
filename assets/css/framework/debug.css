@@ -1,20 +1,20 @@
 .debug .container::before,
 .debug .container::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: var(--spacing-6);
-  bottom: 0;
-  background: red;
-  opacity: .5;
+	content: "";
+	position: absolute;
+	top: 0;
+	width: var(--spacing-6);
+	bottom: 0;
+	background: red;
+	opacity: .5;
 }
 .debug .container::before {
-  left: 0;
+	left: 0;
 }
 .debug .container::after {
-  right: 0;
+	right: 0;
 }
 
 .todo {
-  outline: 1px solid red;
+	outline: 1px solid red;
 }

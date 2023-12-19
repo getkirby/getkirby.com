@@ -104,7 +104,7 @@ It uses Kirby's [query language (KQL)](https://github.com/getkirby/kql) to fetch
 
 ## Kirby in the wild
 
-(image: metaorganism.png)
+(image: 1_metaorganism.png)
 
 [Meet the Metaorganism](https://metaorganism.app/): Headless Kirby CMS using content representations
 

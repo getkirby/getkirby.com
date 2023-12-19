@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Content\Field;
 use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
+use Kirby\Content\Field;
 use Kirby\Template\Template;
 use Kirby\Toolkit\Str;
 

@@ -1,1 +1,1 @@
-<?php go($page->link()) ?>
+<?php go($page->link());

@@ -1,38 +1,38 @@
 <?php snippet('templates/plugins/section', [
-  'id'      => 'block',
-  'icon'    => 'forms',
-  'title'   => 'Panel',
-  'layout'  => 'hero',
-  'plugins' => [
-    'plugins/microman/formblock'
-  ]
+	'id'      => 'block',
+	'icon'    => 'forms',
+	'title'   => 'Panel',
+	'layout'  => 'hero',
+	'plugins' => [
+		'plugins/microman/formblock'
+	]
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'templating',
-  'icon'    => 'forms',
-  'title'   => 'Templating',
-  'layout'  => 'cards',
-  'columns' => 2,
-  'plugins' => $plugins->filter('subcategory', 'templating')->filter('similar', '')->pluck('id')
+	'id'      => 'templating',
+	'icon'    => 'forms',
+	'title'   => 'Templating',
+	'layout'  => 'cards',
+	'columns' => 2,
+	'plugins' => $plugins->filter('subcategory', 'templating')->filter('similar', '')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'emails',
-  'icon'    => 'forms',
-  'title'   => 'Email sending',
-  'layout'  => 'cards',
-  'columns' => 2,
-  'plugins' => $plugins->filter('subcategory', 'emails')->pluck('id')
+	'id'      => 'emails',
+	'icon'    => 'forms',
+	'title'   => 'Email sending',
+	'layout'  => 'cards',
+	'columns' => 2,
+	'plugins' => $plugins->filter('subcategory', 'emails')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [
-  'id'      => 'utilities',
-  'icon'    => 'forms',
-  'title'   => 'Utilities',
-  'layout'  => 'cards',
-  'columns' => 2,
-  'plugins' => [
-    'plugins/bnomei/htmlpurifier'
-  ]
+	'id'      => 'utilities',
+	'icon'    => 'forms',
+	'title'   => 'Utilities',
+	'layout'  => 'cards',
+	'columns' => 2,
+	'plugins' => [
+		'plugins/bnomei/htmlpurifier'
+	]
 ]) ?>

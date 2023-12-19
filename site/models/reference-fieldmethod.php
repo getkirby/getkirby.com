@@ -1,8 +1,8 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Toolkit\Str;
 use Kirby\Reference\ReflectionPage;
+use Kirby\Toolkit\Str;
 
 class ReferenceFieldMethodPage extends ReflectionPage
 {

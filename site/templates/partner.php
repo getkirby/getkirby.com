@@ -3,8 +3,8 @@
 <style>
 .partner-grid {
 	--columns: 1;
-  --column-gap: var(--spacing-24);
-  --row-gap: var(--spacing-12);
+	--column-gap: var(--spacing-24);
+	--row-gap: var(--spacing-12);
 }
 
 @media screen and (min-width: 50rem) {
@@ -38,12 +38,12 @@
 </style>
 
 <header class="mb-12">
-  <h1 class="h1 mb-1">
-    <?= $page->title() ?>
-  </h1>
-  <p class="text-sm color-gray-600 font-mono">
-    <?= $page->subtitle() ?>
-  </p>
+	<h1 class="h1 mb-1">
+		<?= $page->title() ?>
+	</h1>
+	<p class="text-sm color-gray-600 font-mono">
+		<?= $page->subtitle() ?>
+	</p>
 </header>
 
 <div class="partner-grid columns mb-24">
@@ -108,7 +108,7 @@
 				</a>
 			</div>
 		</div>
-  </div>
+	</div>
 
 	<div class="partner-intro">
 		<h2 class="h2 mb-6">About <?= $page->me() ?> </h2>
@@ -120,63 +120,63 @@
 
 <!-- Projects -->
 <?php if ($page->children()->isNotEmpty()): ?>
-  <div class="text-lg mb-24">
-    <h2 class="h2 mb-12"><?= ucfirst($page->my()) ?> Kirby Projects</h2>
-    <section>
-      <div class="columns" style="--columns: 3; --gap: var(--spacing-24)">
-        <?php foreach ($page->children() as $project) : ?>
-          <article>
+	<div class="text-lg mb-24">
+		<h2 class="h2 mb-12"><?= ucfirst($page->my()) ?> Kirby Projects</h2>
+		<section>
+			<div class="columns" style="--columns: 3; --gap: var(--spacing-24)">
+				<?php foreach ($page->children() as $project) : ?>
+					<article>
 
-            <figure>
-              <a href="<?= $project->link() ?>" target="_blank">
-                <div style="--aspect-ratio: 3/4" class="bg-light mb-6">
-                  <?php if ($image = $project->image()): ?>
-                    <?= $image->name() === 'example' ? $image : $image->resize(800) ?>
-                  <?php endif ?>
-                </div>
-                <figcaption class="font-mono text-sm mb-3">
-                  <h3 class="h6 truncate link">
-                    <?= $project->title() ?>
-                  </h3>
-                  <?php if ($project->client()->isNotEmpty()): ?>
-                  <p class="color-gray-600">
-                    Client: <?= $project->client() ?>
-                  </p>
-                  <?php endif ?>
-                </figcaption>
-              </a>
-            </figure>
+						<figure>
+							<a href="<?= $project->link() ?>" target="_blank">
+								<div style="--aspect-ratio: 3/4" class="bg-light mb-6">
+									<?php if ($image = $project->image()): ?>
+										<?= $image->name() === 'example' ? $image : $image->resize(800) ?>
+									<?php endif ?>
+								</div>
+								<figcaption class="font-mono text-sm mb-3">
+									<h3 class="h6 truncate link">
+										<?= $project->title() ?>
+									</h3>
+									<?php if ($project->client()->isNotEmpty()): ?>
+									<p class="color-gray-600">
+										Client: <?= $project->client() ?>
+									</p>
+									<?php endif ?>
+								</figcaption>
+							</a>
+						</figure>
 
-          </article>
-        <?php endforeach ?>
-      </div>
-    </section>
-  </div>
+					</article>
+				<?php endforeach ?>
+			</div>
+		</section>
+	</div>
 <?php endif ?>
 
 <!-- Plugins -->
 <?php if ($plugins = $page->plugins()): ?>
-  <div class="text-lg mb-24">
-    <h2 class="h2 mb-12"><?= ucfirst($page->my()) ?> Kirby Plugins</h2>
-    <section class="mb-12">
-    <?php if ($plugins->count() === 1 || $plugins->count() === 4): ?>
-      <?php snippet('templates/plugins/hero', [
-        'plugins' => $hero = $plugins->limit(1)
-      ]) ?>
-    <?php endif ?>
+	<div class="text-lg mb-24">
+		<h2 class="h2 mb-12"><?= ucfirst($page->my()) ?> Kirby Plugins</h2>
+		<section class="mb-12">
+		<?php if ($plugins->count() === 1 || $plugins->count() === 4): ?>
+			<?php snippet('templates/plugins/hero', [
+				'plugins' => $hero = $plugins->limit(1)
+			]) ?>
+		<?php endif ?>
 		<?php snippet('templates/plugins/cards', [
 			'plugins' => $plugins->not($hero ?? null),
 			'columns' => 3,
 			'gap'     => 24
 		]) ?>
-    </section>
-    <footer class="mb-6">
-      <a
+		</section>
+		<footer class="mb-6">
+			<a
 				class="btn btn--filled"
 				href="<?= $plugins->first()->parent()->url() ?>"
 			>
-        <?= icon('flash') ?> Visit <?= $page->my() ?> plugins page
-      </a>
-    </footer>
-  </div>
+				<?= icon('flash') ?> Visit <?= $page->my() ?> plugins page
+			</a>
+		</footer>
+	</div>
 <?php endif ?>

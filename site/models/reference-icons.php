@@ -19,17 +19,16 @@ class ReferenceIconsPage extends SectionPage
 		$svg      = new SimpleXMLElement($file);
 
 		foreach ($svg->defs->children() as $symbol) {
-			$slug    = str_replace('icon-', '', $symbol->attributes()->id);
-			$content = $pages->find($slug)?->content()->toArray() ?? [];
-
+			$slug       = str_replace('icon-', '', $symbol->attributes()->id);
 			$children[] = [
 				'slug'     => $slug,
 				'template' => 'reference-icon',
 				'model'    => 'reference-icon',
 				'num'      => 0,
-				'content'  => array_merge([
-					'intro' => '&lt;k-icon type="' . $slug . '"&gt;'
-				], $content)
+				'content'  => [
+					'intro' => '&lt;k-icon type="' . $slug . '"&gt;',
+					...$pages->find($slug)?->content()->toArray() ?? []
+				]
 			];
 		}
 

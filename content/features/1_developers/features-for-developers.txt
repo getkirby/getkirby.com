@@ -7,7 +7,6 @@ Description: A powerful platform: Kirby is built with flexibility and extensibil
 Thumbnail:
   -
   lead: The CMS built
-  image: console.svg
 ----
 Benefits:
 

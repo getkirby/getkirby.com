@@ -1,6 +1,6 @@
 <?php
 extract([
-  'meta' => $page->meta()
+	'meta' => $page->meta()
 ]);
 ?>
 
@@ -21,27 +21,27 @@ extract([
 <link rel="modulepreload" href="<?= url('/assets/js/components/search.js') ?>">
 
 <?php if (option('cdn', false) !== false) : ?>
-  <link rel="dns-prefetch" href="<?= option('cdn.domain') ?>">
-  <link rel="preconnect" href="<?= option('cdn.domain') ?>">
+	<link rel="dns-prefetch" href="<?= option('cdn.domain') ?>">
+	<link rel="preconnect" href="<?= option('cdn.domain') ?>">
 <?php endif ?>
 
 <script type="module">
-  window.debounce = (callback, delay) => {
-    let timeout;
-    return () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(callback, delay);
-    }
-  }
+	window.debounce = (callback, delay) => {
+		let timeout;
+		return () => {
+			clearTimeout(timeout);
+			timeout = setTimeout(callback, delay);
+		}
+	}
 
-  import "<?= url('/assets/js/polyfills/dialog.js') ?>";
-  import Code from "<?= url('/assets/js/components/code.js') ?>";
-  import Menu from "<?= url('/assets/js/components/menu.js') ?>";
-  import Search from "<?= url('/assets/js/components/search.js') ?>";
+	import "<?= url('/assets/js/polyfills/dialog.js') ?>";
+	import Code from "<?= url('/assets/js/components/code.js') ?>";
+	import Menu from "<?= url('/assets/js/components/menu.js') ?>";
+	import Search from "<?= url('/assets/js/components/search.js') ?>";
 
-  new Code();
-  new Menu();
-  new Search();
+	new Code();
+	new Menu();
+	new Search();
 </script>
 
 <?= js('assets/js/components/lightbox.js') ?>

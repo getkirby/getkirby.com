@@ -1,5 +1,5 @@
 <?php layout('reference') ?>
 
 <div class="prose">
-  <?= $page->text()->kt() ?>
+	<?= $page->text()->kt() ?>
 </div>

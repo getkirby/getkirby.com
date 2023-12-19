@@ -5,7 +5,7 @@ return [
 		'product' => 824338,
 		'regular' => 99,
 	],
-  	'enterprise' => [
+	'enterprise' => [
 		'product' => 824340,
 		'regular' => 349,
 	],

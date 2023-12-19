@@ -1,1 +1,1 @@
-<?php go($page->parent()->url()) ?>
+<?php go($page->parent()->url());

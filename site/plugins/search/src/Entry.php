@@ -2,8 +2,8 @@
 
 namespace Kirby\Search;
 
-use Kirby\Content\Field;
 use Kirby\Cms\Page;
+use Kirby\Content\Field;
 
 /**
  * Represents an entry (page) to be indexed
@@ -18,8 +18,7 @@ class Entry
 	public function __construct(
 		protected Page $page,
 		protected Search $search
-	)
-	{
+	) {
 	}
 
 	protected function fields(): array
@@ -32,8 +31,10 @@ class Entry
 
 		// get template-specific fields
 		if ($templateFields = $templates[$template]['fields'] ?? null) {
-			$templateFields = static::fieldsToUniformArray($templateFields);
-			$fields = array_merge($fields, $templateFields);
+			$fields = [
+				...$fields,
+				...static::fieldsToUniformArray($templateFields)
+			];
 		}
 
 		// Make sure that the fields are sorted alphabetically for consistence
@@ -141,7 +142,7 @@ class Entry
 					=> $this->toDataFromFieldMethod($name, $method),
 				// no or invalid operation, convert to string
 				default
-					=> (string)$this->page->$name()
+				=> (string)$this->page->$name()
 			};
 		}
 
@@ -151,7 +152,6 @@ class Entry
 	/**
 	 * Resolves the field and its method to a result value
 	 * to be included in the index for the field
-
 	 */
 	protected function toDataFromFieldMethod(
 		string $name,
@@ -168,7 +168,7 @@ class Entry
 		}
 
 		$args   = array_slice($method, 1);
-        $method = $method[0];
-        return $field->$method(...$args);
+		$method = $method[0];
+		return $field->$method(...$args);
 	}
 }

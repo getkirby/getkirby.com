@@ -1,3 +1,5 @@
-<?php snippet('templates/plugins/cards', [
-  'plugins' => $plugins
-]) ?>
+<?php
+
+snippet('templates/plugins/cards', [
+	'plugins' => $plugins
+]);

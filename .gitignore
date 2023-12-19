@@ -7,6 +7,7 @@ Icon
 # Temporary files
 # ---------------
 
+/.php-cs-fixer.cache
 /media/*
 !/media/index.html
 /node_modules/

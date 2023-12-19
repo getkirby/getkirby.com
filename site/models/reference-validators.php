@@ -1,9 +1,9 @@
 <?php
 
 use Kirby\Cms\Pages;
+use Kirby\Reference\SectionPage;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\V;
-use Kirby\Reference\SectionPage;
 
 class ReferenceValidatorsPage extends SectionPage
 {
@@ -24,10 +24,10 @@ class ReferenceValidatorsPage extends SectionPage
 				'model'    => 'reference-validator',
 				'template' => 'reference-validator',
 				'parent'   => $this,
-				'content'  => array_merge(
-					$pages->find($slug)?->content()->toArray() ?? [],
-					['title' => $validator]
-				)
+				'content'  => [
+					...$pages->find($slug)?->content()->toArray() ?? [],
+					'title' => $validator
+				]
 			];
 		}
 

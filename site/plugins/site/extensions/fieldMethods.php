@@ -11,7 +11,7 @@ return [
 	},
 	'stripGlossary' => function ($field) {
 		return $field->value(
-			fn ($value) => str_replace('(glossary:', '(plain:',  $value ?? '')
+			fn ($value) => str_replace('(glossary:', '(plain:', $value ?? '')
 		);
 	},
 	'toToc' => function ($field, string $headline = 'h2') {

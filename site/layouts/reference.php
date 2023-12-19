@@ -102,9 +102,9 @@
 		scrollToActive() {
 			<?php
 			$reference = page('docs/reference');
-			$reference = $reference->parents()->add($reference);
-			$sidebar   = $page->parents()->not($reference)->last() ?? $reference;
-			?>
+	$reference = $reference->parents()->add($reference);
+	$sidebar   = $page->parents()->not($reference)->last() ?? $reference;
+	?>
 
 			const data = {
 				sidebar: 0,

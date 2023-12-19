@@ -15,4 +15,3 @@ Benefits:
 Thumbnail:
   -
   lead: The CMS built
-  image: panel.svg

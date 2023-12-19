@@ -3,70 +3,70 @@
 <?= css('assets/css/layouts/releases.css') ?>
 
 <header class="mb-36 flex items-end justify-between release-header">
-  <div>
-    <h1 class="h1"><?= $page->title() ?></h1>
-    <p class="h1 color-gray-600">Jungle Calumma</p>
-  </div>
+	<div>
+		<h1 class="h1"><?= $page->title() ?></h1>
+		<p class="h1 color-gray-600">Jungle Calumma</p>
+	</div>
 
-  <?php snippet('templates/releases/cta', [
-    'options' => ['center' => false, 'mb' => 0]
-  ]) ?>
+	<?php snippet('templates/releases/cta', [
+		'options' => ['center' => false, 'mb' => 0]
+	]) ?>
 </header>
 
 <article class="release-wrapper">
-  <div class="release-notes">
-    <?php snippet('templates/release-36/blocks') ?>
-    <?php snippet('templates/release-36/cardlets') ?>
-    <?php snippet('templates/release-36/image-formats') ?>
-    <?php snippet('templates/release-36/image-options') ?>
-    <?php snippet('templates/release-36/views') ?>
-    <?php snippet('templates/release-36/fiber') ?>
-    <?php snippet('templates/release-36/plugins') ?>
-    <?php snippet('templates/release-36/icons') ?>
+	<div class="release-notes">
+		<?php snippet('templates/release-36/blocks') ?>
+		<?php snippet('templates/release-36/cardlets') ?>
+		<?php snippet('templates/release-36/image-formats') ?>
+		<?php snippet('templates/release-36/image-options') ?>
+		<?php snippet('templates/release-36/views') ?>
+		<?php snippet('templates/release-36/fiber') ?>
+		<?php snippet('templates/release-36/plugins') ?>
+		<?php snippet('templates/release-36/icons') ?>
 
-    <section id="changes" class="h2 mb-42 max-w-xl">
-      <h2 class="mb-12">This release is big</h2>
-      <ul class="mb-12 color-gray-600">
-        <li>&rarr; 7 months of work</li>
-        <li>&rarr; 1293 commits</li>
-        <li>&rarr; 471 closed issues and pull requests</li>
-        <li>&rarr; And the update from Kirby 3.5 is free!</li>
-      </ul>
-      <p class="mb-12">
-        Ready to read the full changelog?
-        <br>
-        Here we go …
-      </p>
-    </section>
+		<section id="changes" class="h2 mb-42 max-w-xl">
+			<h2 class="mb-12">This release is big</h2>
+			<ul class="mb-12 color-gray-600">
+				<li>&rarr; 7 months of work</li>
+				<li>&rarr; 1293 commits</li>
+				<li>&rarr; 471 closed issues and pull requests</li>
+				<li>&rarr; And the update from Kirby 3.5 is free!</li>
+			</ul>
+			<p class="mb-12">
+				Ready to read the full changelog?
+				<br>
+				Here we go …
+			</p>
+		</section>
 
-    <?php snippet('templates/release-36/changes/panel') ?>
-    <?php snippet('templates/release-36/changes/templating') ?>
-    <?php snippet('templates/release-36/changes/plugins') ?>
-    <?php snippet('templates/release-36/changes/security') ?>
-    <?php snippet('templates/release-36/changes/core') ?>
-    <?php snippet('templates/release-36/stats') ?>
-  </div>
-  <?php snippet('templates/release-36/release-menu') ?>
+		<?php snippet('templates/release-36/changes/panel') ?>
+		<?php snippet('templates/release-36/changes/templating') ?>
+		<?php snippet('templates/release-36/changes/plugins') ?>
+		<?php snippet('templates/release-36/changes/security') ?>
+		<?php snippet('templates/release-36/changes/core') ?>
+		<?php snippet('templates/release-36/stats') ?>
+	</div>
+	<?php snippet('templates/release-36/release-menu') ?>
 </article>
 
 <?php snippet('templates/releases/get-started') ?>
 
 <script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const id = entry.target.getAttribute('id');
-        if (entry.intersectionRatio > 0) {
-          document.querySelector(`nav.release-menu li a[href="#${id}"]`)?.setAttribute('aria-current', 'true');
-        } else {
-          document.querySelector(`nav.release-menu li a[href="#${id}"]`)?.removeAttribute('aria-current');
-        }
-      });
-    });
+	window.addEventListener('DOMContentLoaded', () => {
+		const observer = new IntersectionObserver(entries => {
+			entries.forEach(entry => {
+				const id = entry.target.getAttribute('id');
+				if (entry.intersectionRatio > 0) {
+					document.querySelector(`nav.release-menu li a[href="#${id}"]`)?.setAttribute('aria-current', 'true');
+				} else {
+					document.querySelector(`nav.release-menu li a[href="#${id}"]`)?.removeAttribute('aria-current');
+				}
+			});
+		});
 
-    // Track all sections that have an `id` applied
-    document.querySelectorAll('section[id]').forEach((section) => {
-      observer.observe(section);
-    });
-  });
+		// Track all sections that have an `id` applied
+		document.querySelectorAll('section[id]').forEach((section) => {
+			observer.observe(section);
+		});
+	});
 </script>
