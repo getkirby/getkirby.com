@@ -19,7 +19,7 @@ class CookbookRecipePage extends Page
 	{
 		return [
 			'thumbnail' => [
-				'lead'  => 'Cookbook',
+				'lead'  => 'Kirby Cookbook',
 				'title' => $this->title()
 			]
 		];

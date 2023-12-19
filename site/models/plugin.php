@@ -223,7 +223,7 @@ class PluginPage extends Page
 	{
 		return [
 			'thumbnail' => [
-				'lead'  => 'Plugin',
+				'lead'  => 'Kirby Plugin',
 				'image' => $this->screenshot()
 			]
 		];
