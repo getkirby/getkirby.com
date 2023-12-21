@@ -46,7 +46,7 @@ class DefaultBlock extends Block
 
 Kirby::plugin('my/blockModels', [
     'blockModels' => [
-        'Kirby\\Cms\\Block' => DefaultBlock::class,
+        'default' => DefaultBlock::class,
     ]
 ]);
 ```
