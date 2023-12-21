@@ -38,14 +38,14 @@ Art direction is more complex and we will only touch on it briefly. However, thi
 To further boost performance, we'll also learn how to use modern image formats (such as WebP or AVIF) wherever possible, as these often offer smaller file sizes without sacrificing quality.
 
 
-## Factors that determine the ideal image size
+## Determine the ideal image size
 
 Four factors determine the  "perfect" image size:
 
-- **Viewport**: The current size of the browser window
-- **Device Pixel Ratio (DPR)**: The ratio between physical pixels and logical pixels (note that media queries respond to a device's logical pixels)
-- **Image dimensions**: the physical dimensions of the image
-- **Size at which the image will be rendered**: In a page layout, an image might span the full viewport or just a portion of it
+1. **Viewport**: The current size of the browser window
+2. **Device Pixel Ratio (DPR)**: The ratio between physical pixels and logical pixels (note that media queries respond to a device's logical pixels)
+3. **Image dimensions**: the physical dimensions of the image
+4. **Size at which the image will be rendered**: In a page layout, an image might span the full viewport or just a portion of it
 
 While the browser knows the viewport and DPR of the current device, the other two factors are known only to us, the developers or designers. We therefore need to provide this information so that the browser can select the correct image.
 
@@ -57,7 +57,7 @@ $idealImageSize = $viewportWidth / $sizeAtWhichImageWillBeRendered * $dpr
 
 For a device with a logical viewport width of 390 pixels and a DPR of 3, an image covering the entire width of the viewport would have an ideal size of 1170 pixels.
 
-## How to make images responsive
+## Make images responsive
 
 Let's start with looking at a standard `img` element: It has a `src` attribute that points to a single image version.
 
@@ -255,6 +255,34 @@ Note that the **order** of these rules is important, as the browser will apply t
 </info>
 
 With this information, the browser is now ready to do its calculations: With a viewport of 1200px and a DPR of 2, the browser now chooses the 600px image (300px rendered image size multiplied by 2), while without the sizes attribute it would use the largest image we provide in this example, 1800px.
+
+<since v="4.0.0">
+## Set a focus point
+
+When creating different sizes and ratios of your images, it can be important to make sure that the essential items of the images don't get cut off or stay in the center of the image.
+
+You can pass a general focus area in your template code to the `->srcset()` method, like
+
+```php
+<?= $image->srcset(
+  [
+    '1x'  => ['width' => 150, 'height' => 150, 'crop' => 'center'],
+    '2x'  => ['width' => 300, 'height' => 300, 'crop' => 'center']
+  ]
+)?>
+```
+
+However, often you might want to have more fine-grained control over where the focus should be in your image. For that, you can (link: https://getkirby.com/docs/guide/files/files#setting-a-focus-point text: set a focus point for each image) in the Panel and/or content file, and tell Kirby to use this focus point for cropping:
+
+```php
+<?= $image->srcset(
+  [
+    '1x'  => ['width' => 150, 'height' => 150, 'crop' => true],
+    '2x'  => ['width' => 300, 'height' => 300, 'crop' => true]
+  ]
+)?>
+```
+</since>
 
 ## Testing screen sizes in the browser
 

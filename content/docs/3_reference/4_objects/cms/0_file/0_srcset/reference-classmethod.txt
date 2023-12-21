@@ -24,19 +24,19 @@ The `$sizes` parameter also accepts an associated array of options:
 ```php
 $image->srcset([
     '1x' => [
-        'width' => 38,
+        'width'  => 38,
         'height' => 38,
-        'crop' => 'center'
+        'crop'   => 'center'
     ],
     '2x' => [
-        'width' => 76,
+        'width'  => 76,
         'height' => 76,
-        'crop' => 'center'
+        'crop'   => 'center'
     ],
     '3x' => [
-        'width' => 152,
+        'width'  => 152,
         'height' => 152,
-        'crop' => 'center'
+        'crop'   => 'center'
     ]
 ]);
 ```
@@ -50,6 +50,27 @@ $image->srcset([
   '1200w' => ['width' => 1200, 'format' => 'webp']
 ])
 ```
+
+<since v="4.0.0">
+### Crop around focus point
+
+Instead of passing a general crop area like `'center'`, you can set the `crop` option to `true` and Kirby will use each (link: docs/guide/files/files#setting-a-focus-point text: image's focus point):
+
+```php
+$image->srcset([
+    '1x' => [
+        'width'  => 38,
+        'height' => 38,
+        'crop'   => true
+    ],
+    '2x' => [
+        'width'  => 76,
+        'height' => 76,
+        'crop'   => true
+    ]
+]);
+```
+</since>
 
 ## Define presets
 
