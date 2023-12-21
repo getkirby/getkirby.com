@@ -17,9 +17,15 @@ Cover: kirby-3-3.png
 Priority: 0.8
 
 ----
+
+Link: https://github.com/getkirby/kirby/releases/tag/3.3.0
+
+----
+
 Releasepage: https://github.com/getkirby/kirby/releases/tag/3.3.0
 
 ----
+
 Breaking:
 
 - The pagination object is now immutable and all setters are disabled by default #1887
@@ -27,6 +33,7 @@ Breaking:
 - The `v-tab` directive is no longer available. Tabbable elements should use the `tab` mixin
 
 ----
+
 Deprecated:
 
 ### Deprecated methods
@@ -52,6 +59,3 @@ We've also added deprecation warnings to additional core methods. You will run i
 - `Page::isVisible` (use `Page::isListed` instead)
 - `Site::hasInvisibleChildren` (use `Site::hasUnlistedChildren` instead)
 - `Site::hasVisibleChildren` (use `Site::hasListedChildren` instead)
-
-
-
