@@ -148,4 +148,4 @@ If you need help with the new version, please visit the forum: https://forum.get
 
 ## How to upgrade Kirby 2
 
-For those of you who want to migrate your Kirby 2 site, we've created an (link: docs/cookbook/setup/migrate-site text: upgrade guide).
+For those of you who want to migrate your Kirby 2 site, we've created an (link: docs/guide/updates/update-to-v3 text: upgrade guide).
