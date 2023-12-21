@@ -35,7 +35,8 @@
 					<li><hr /></li>
 					<li><a href="/kosmos">Newsletter</a></li>
 					<li><a href="/buzz">Buzz</a></li>
-
+					<li><hr /></li>
+					<li><a class="is-external" href="https://hub.getkirby.com">License Hub</a></li>
 				</ul>
 			</li>
 			<li class="has-submenu">
