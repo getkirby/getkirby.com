@@ -16,10 +16,10 @@
 					<?php if ($cover = $release->cover()->toFile()): ?>
 						<figure class="border-top pt-6 mb-6">
 							<img srcset="<?= $cover->srcset([
-								'384w' => ['width' => 384, 'height' => 240, 'crop' => 'center'],
-								'768w' => ['width' => 768, 'height' => 480, 'crop' => 'center'],
-								'1055w' => ['width' => 1055, 'height' => 659, 'crop' => 'center'],
-								'2110w' => ['width' => 2100, 'height' => 1318, 'crop' => 'center']
+								'384w' => ['width' => 384, 'height' => 240, 'crop' => 'top'],
+								'768w' => ['width' => 768, 'height' => 480, 'crop' => 'top'],
+								'1055w' => ['width' => 1055, 'height' => 659, 'crop' => 'top'],
+								'2110w' => ['width' => 2100, 'height' => 1318, 'crop' => 'top']
 							]) ?>" sizes="(max-width: 1150px) 90vw, 384px" class="bg-dark" style="aspect-ratio: 8/5" alt="Cover image for the <?= $release->title() ?> release">
 						</figure>
 					<?php endif ?>
