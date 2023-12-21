@@ -17,11 +17,16 @@ Cover: kirby-3-4.png
 Priority: 0.8
 
 ----
+
+Link: https://github.com/getkirby/kirby/releases/tag/3.4.0
+
+----
+
 Releasepage: https://github.com/getkirby/kirby/releases/tag/3.4.0
 
 ----
-Breaking:
 
+Breaking:
 
 To ensure proper nesting, Kirby relies on the plugin option default values defined in the plugin using the [`options` extension](https://getkirby.com/docs/reference/plugins/extensions/options). If your plugin uses a nested structure in the option defaults, the defaults need to be [changed to use the dot notation](https://getkirby.com/docs/reference/plugins/extensions/options#registering-options).
 
