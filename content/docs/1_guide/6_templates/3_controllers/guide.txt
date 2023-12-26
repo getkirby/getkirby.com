@@ -16,6 +16,7 @@ Text:
 ## TL;DR
 
 - Use a controller for the logic of your templates.
+- Any data returned by a controller’s function is available everywhere in the corresponding template.
 - A controller must have the same file name as the corresponding template file.
 - Save controllers in `/site/controllers`.
 
