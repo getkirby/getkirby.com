@@ -26,4 +26,13 @@ Example:
 
 ----
 
+Preview:
+
+```kirbytext
+(svg: file.svg wrapper: figure)
+```
+
+
+----
+
 Versions: 3,4
