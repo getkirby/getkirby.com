@@ -31,7 +31,7 @@ function cdn(string|File $file, array $params = []): string
 			};
 		}
 
-		$params['v'] = $file->mediaHash();
+		$params['v'] = $file->mediaHash() . '-1';
 
 		$query = '?' . http_build_query($params);
 	}
