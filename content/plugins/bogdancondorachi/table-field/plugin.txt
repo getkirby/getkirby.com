@@ -1,0 +1,33 @@
+Title: Table Field
+
+----
+
+Text:
+
+----
+
+Repository: https://github.com/bogdancondorachi/kirby-table-field
+
+----
+
+Category: fields
+
+----
+
+Subcategory: structured-content
+
+----
+
+Installation: true
+
+----
+
+Composer: bogdancondorachi/kirby-table-field
+
+----
+
+Description: The table field makes possible to effortlessly create and manage tables within the panel. You can easily tailor tables to their specific needs, enhancing the efficiency and management of data presentation.
+
+----
+
+Versions: 4
