@@ -31,3 +31,7 @@ Description: The table field makes possible to effortlessly create and manage ta
 ----
 
 Versions: 4
+
+----
+
+Published: 2024-01-03
