@@ -67,9 +67,7 @@
 				<h1 class="h1 mb-6">Find a Kirby partner to trust with your next
 					project</h1>
 				<p class="text-xl leading-snug color-gray-700">
-					Our curated partners know Kirby inside out and have a wide range of
-					experience in web development. Find trusted developers from all over the
-					world and rest assured that there is always someone you can turn to.
+					<?= $page->description() ?>
 				</p>
 			</div>
 			<nav class="auto-fit items-center">
