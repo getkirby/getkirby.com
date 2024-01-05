@@ -18,6 +18,13 @@ Subcategory: structured-content
 
 ----
 
+License:
+
+name: MIT License
+url: https://github.com/bogdancondorachi/kirby-table-field/blob/main/LICENSE
+
+----
+
 Installation: true
 
 ----
@@ -30,7 +37,7 @@ Description: The table field makes possible to effortlessly create and manage ta
 
 ----
 
-Versions: 4
+Versions: 3,4
 
 ----
 
