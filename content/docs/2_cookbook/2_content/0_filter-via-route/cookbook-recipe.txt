@@ -158,7 +158,7 @@ return function ($page) {
 };
 ```
 
-Here we use the `urldecode()`d page slug as our filter value.
+Here we use the `urldecode()`d page slug as our filter value.
 
 ### Template
 
