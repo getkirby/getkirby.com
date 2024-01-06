@@ -134,14 +134,7 @@ class Visitor
 	public static function ip(): string|null
 	{
 		$env = App::instance()->environment();
-
-		// if the site is served via Cloudflare, use the proxied IP header
-		if (option('cloudflare', false) === true) {
-			return $env->get('HTTP_CF_CONNECTING_IP', null);
-		}
-
-		// otherwise use the direct IP header
-		$ip = $env->get('REMOTE_ADDR', null);
+		$ip  = $env->get('REMOTE_ADDR', null);
 
 		// ignore local IPs as we cannot determine the country from them
 		if (
