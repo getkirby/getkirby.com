@@ -9,17 +9,6 @@ return [
 	'debug'      => true,
 	'features'   => require __DIR__ . '/features.php',
 	'github'     => ['url' => 'https://github.com/getkirby'],
-	'hooks' => [
-		'route:after' => function (Route $route, string $path, string $method, mixed $result, bool $final) {
-			if ($final === true) {
-				header('X-Frame-Options: sameorigin');
-				header('X-XSS-Protection: 1; mode=block');
-				header('X-Content-Type-Options: nosniff');
-			}
-
-			return $result;
-		}
-	],
 	'hub'        => ['url' => 'https://hub.getkirby.com'],
 	'keys'       => file_exists(__DIR__ . '/keys.php') ? require __DIR__ . '/keys.php' : require __DIR__ . '/keys.sample.php',
 	'meta'       => require __DIR__ . '/meta.php',
