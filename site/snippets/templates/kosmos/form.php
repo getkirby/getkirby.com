@@ -17,7 +17,7 @@
 		</div>
 		<div class="kosmos-field">
 			<button class="btn btn--filled w-100%">
-				<?= icon('flash') ?>
+				<?= icon('bolt') ?>
 				Subscribe
 			</button>
 		</div>

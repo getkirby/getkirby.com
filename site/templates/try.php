@@ -51,7 +51,7 @@
 			</button>
 
 			<button class="btn btn--filled">
-				<?= icon('flash') ?>
+				<?= icon('bolt') ?>
 				Start Demo
 			</button>
 		</form>

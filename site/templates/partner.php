@@ -104,7 +104,7 @@
 					href="<?= $page->contactlink()->or($page->website()) ?>"
 					class="btn btn--filled"
 				>
-					<?= icon('mail') ?> Contact
+					<?= icon('email') ?> Contact
 				</a>
 			</div>
 		</div>
@@ -175,7 +175,7 @@
 				class="btn btn--filled"
 				href="<?= $plugins->first()->parent()->url() ?>"
 			>
-				<?= icon('flash') ?> Visit <?= $page->my() ?> plugins page
+				<?= icon('bolt') ?> Visit <?= $page->my() ?> plugins page
 			</a>
 		</footer>
 	</div>

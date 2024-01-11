@@ -72,7 +72,7 @@
 			</div>
 			<nav class="auto-fit items-center">
 				<a class="btn btn--filled" href="https://airtable.com/shrfCqUxq5L3GyhIb">
-					<?= icon('mail') ?>
+					<?= icon('email') ?>
 					Post your project
 				</a>
 				<a class="btn btn--outlined" href="/partners/join">
