@@ -18,7 +18,7 @@ function icon(string $name): string|false
 		return $svg;
 	}
 
-	return '<svg><use xlink:href="/assets/icons/icons.svg#icon-' . $name . '"></use></svg>';
+	return '<svg><use xlink:href="/assets/icons.svg#icon-' . $name . '"></use></svg>';
 }
 
 function img($file, array $props = [])
