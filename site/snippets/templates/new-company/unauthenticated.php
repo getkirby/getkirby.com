@@ -40,7 +40,7 @@
 			</div>
 			<p class="text-sm mb-12">We won't ever spam you! You can unsubscribe at any&nbsp;time.</p>
 			<input type="hidden" name="gruppe" value="<?= option('newstroll.list') ?>">
-			<button type="submit" class="btn btn--filled"><?= icon('flash') ?> Subscribe</button>
+			<button type="submit" class="btn btn--filled"><?= icon('bolt') ?> Subscribe</button>
 		</footer>
 	</form>
 </div>

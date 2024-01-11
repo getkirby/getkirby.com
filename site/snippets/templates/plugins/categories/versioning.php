@@ -1,7 +1,7 @@
 <?php
 
 snippet('templates/plugins/section', [
-  'icon'    => 'layout',
+  'icon'    => 'dashboard',
   'id'      => 'git',
   'title'   => 'Panel extensions',
   'layout'  => 'cards',
@@ -12,7 +12,7 @@ snippet('templates/plugins/section', [
 ?>
 
 <?php snippet('templates/plugins/section', [
-  'icon'    => 'layout',
+  'icon'    => 'dashboard',
   'id'      => 'git',
   'title'   => 'Hooks',
   'layout'  => 'cards',

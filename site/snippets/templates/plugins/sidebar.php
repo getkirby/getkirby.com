@@ -14,7 +14,7 @@
 			</li>
 			<li>
 				<a href="/plugins/category:all" <?= ariaCurrent($currentCategory === 'all') ?>>
-					<?= icon('list') ?> All
+					<?= icon('list-bullet') ?> All
 				</a>
 			</li>
 			<!-- Skip featured plugins for now …
@@ -25,7 +25,7 @@
 			</li> -->
 			<li>
 				<a href="/plugins/k4" <?= ariaCurrent($kirby->request()->path()->toString() === 'plugins/k4') ?>>
-					<?= icon('flash') ?> Kirby 4
+					<?= icon('bolt') ?> Kirby 4
 				</a>
 			</li>
 			<li>

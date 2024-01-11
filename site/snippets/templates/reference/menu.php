@@ -1,6 +1,6 @@
 <div class="reference-menu">
   <button class="btn">
-    <?= icon('layout') ?> Reference
+    <?= icon('dashboard') ?> Reference
   </button>
 
 	<?php if ($page->hasEntries()): ?>

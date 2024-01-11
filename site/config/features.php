@@ -18,7 +18,7 @@ return [
 	],
 	'plugins' => [
 		'text' => 'Plugins',
-		'icon' => '3d',
+		'icon' => 'box',
 		'link' => '/features/developers#plugins'
 	],
 	'languages' => [
@@ -68,7 +68,7 @@ return [
 	],
 	'email' => [
 		'text' => 'Emailing',
-		'icon' => 'mail',
+		'icon' => 'email',
 		'link' => '/docs/guide/emails'
 	],
 	'docs' => [
@@ -103,7 +103,7 @@ return [
 	],
 	'multi-site' => [
 		'text' => 'Multi-site setup',
-		'icon' => 'hierarchy',
+		'icon' => 'sitemap',
 		'link' => '/docs/cookbook/setup/multisite'
 	],
 ];

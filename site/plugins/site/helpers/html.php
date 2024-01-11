@@ -18,25 +18,7 @@ function icon(string $name): string|false
 		return $svg;
 	}
 
-	// fall back to Panel icons
-	static $panel;
-	$panel ??= svg('kirby/panel/dist/img/icons.svg');
-
-	if ($panel) {
-		// find the icon in the Panel sprite
-		if (preg_match('/<symbol[^>]*id="icon-' . $name . '"[^>]*viewBox="(.*?)"[^>]*>(.*?)<\/symbol>/s', $panel, $matches)) {
-
-			//  resolve <use> tags to full inline SVG
-			if (preg_match('/<use href="#icon-(.*?)"[^>]*?>/s', $matches[2], $use)) {
-				return icon($use[1]);
-			}
-
-			// return the icon with the correct viewBox
-			return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="' . $matches[1] . '">' . $matches[2] . '</svg>';
-		}
-	}
-
-	return false;
+	return '<svg><use xlink:href="/assets/icons/icons.svg#icon-' . $name . '"></use></svg>';
 }
 
 function img($file, array $props = [])

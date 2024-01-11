@@ -113,7 +113,7 @@ mark {
 			</p>
 
 			<?php if ($page->hasPrev() && $textDiff): ?>
-			<a href="<?= $page->url() ?>" class="btn btn--outlined"><?= icon('flash') ?> Show just this version</a>
+			<a href="<?= $page->url() ?>" class="btn btn--outlined"><?= icon('bolt') ?> Show just this version</a>
 			<?php elseif ($page->hasPrev()): ?>
 			<a href="<?= $page->url() ?>?diff" class="btn btn--outlined"><?= icon('forms') ?> Compare with previous version</a>
 			<?php endif ?>

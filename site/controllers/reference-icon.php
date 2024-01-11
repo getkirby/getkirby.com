@@ -2,7 +2,7 @@
 
 return function () {
 	return [
-		'sizes'  => [16, 32, 64],
+		'sizes'  => [18, 36, 72],
 		'colors' => ['Black', 'White']
 	];
 };
