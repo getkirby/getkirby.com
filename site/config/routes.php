@@ -146,4 +146,11 @@ return [
 			return page('plugins')->render(['filter' => 'published']);
 		}
 	],
+	[
+		'pattern' => 'assets/icons.svg',
+		'action'  => function () {
+			$body = F::read(kirby()->root('panel') . '/dist/img/icons.svg');
+			return new Response($body, 'image/svg+xml');
+		}
+	],
 ];
