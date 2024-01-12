@@ -16,7 +16,7 @@ Raw JSON data is returned from the server and rendered on the client-side. This 
 
 ## Support the project
 
-> This plugin is provided free of charge & published under the permissive MIT License. If you use it in a commercial project, please consider to [sponsor me on GitHub](https://github.com/sponsors/tobimori) to support further development and continued maintenance of Kirby SEO.
+> This plugin is provided free of charge & published under the permissive MIT License. If you use it in a commercial project, please consider to [sponsor me on GitHub](https://github.com/sponsors/tobimori) to support further development and continued maintenance of Kirby Inertia.
 
 ## Credits
 
