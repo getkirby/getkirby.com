@@ -8,6 +8,7 @@
 	'plugins' => [
 		'plugins/diesdasdigital/meta-knight',
 		'plugins/fabianmichael/meta',
+		'plugins/tobimori/seo',
 	]
 ]) ?>
 
