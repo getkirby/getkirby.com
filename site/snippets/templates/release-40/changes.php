@@ -6,7 +6,7 @@
 		'mb'    => 12
 	]) ?>
 
-	<div class="columns" style="--columns: 2; --gap: var(--spacing-6); grid-template-rows: masonry">
+	<div class="columns mb-6" style="--columns: 2; --gap: var(--spacing-6); grid-template-rows: masonry">
 		<div class="release-padded-box bg-light">
 			<h3 class="h3 mb-6">Core improvements</h3>
 			<div class="prose text-sm mb-12">
@@ -51,5 +51,7 @@
 		</div>
 
 	</div>
+
+	<p><small>QR Code® is a registered trademark of DENSO WAVE INCORPORATED.</small></p>
 
 </section>
