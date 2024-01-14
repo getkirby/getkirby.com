@@ -225,7 +225,7 @@
 					</a>
 				<?php endif ?>
 
-				<?php if ($version = $page->version()) : ?>
+				<?php if ($version) : ?>
 					<a class="btn" href="<?= $download ?>">
 						<span><?= icon('git') ?></span> <?= $version ?>
 					</a>
