@@ -17,9 +17,10 @@ return function (App $kirby, Page $page) {
 	}
 
 	return [
+		'version'         => $version = $page->version(),
 		'categories'      => $kirby->option('plugins.categories'),
 		'currentCategory' => $page->category(),
-		'download'        => $page->download(),
+		'download'        => $page->download($version),
 		'author'          => $page->parent(),
 		'authorPlugins'   => $page->siblings(false),
 		'relatedPlugins'  => $related
