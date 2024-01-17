@@ -66,3 +66,36 @@ Use the `toUrl()` method to convert any type of link to a valid URL:
 ```php
 <a href="<?= $page->link()->toUrl() ?>"><?= $page->link() ?></a>
 ```
+
+## Adding target, link text etc.
+
+Adding a target, link text, class names etc. are not supported by the link field. However, there is a much more flexible and extensible way of adding such data to your links: Wrapping the link field within an object field.
+
+```yaml
+fields:
+  linkObject:
+    type: object
+    fields:
+      link:
+        type: link
+      linkText:
+         type: text
+      target:
+        type: toggle
+        text: Open in new window?
+      classnames:
+         type: text
+```
+
+Then create a snippet that you can re-use across your site for all such wrapped link fields. Here is a basic example for you to extend according to your requirements:
+
+```php
+<?php $linkObject = $page->linkObject()->toObject(); ?>
+<a
+    href="<?= $linkObject->link()->toUrl() ?>"
+    <?= $linkObject->target()->toBool() === true ? 'target="_blank"' : '' ?>
+    <?= $linkObject->classnames()->isNotEmpty() ? 'class="' . $linkObject->classnames() . '"' : '' ?>
+>
+  <?= $linkObject->linkText()->or($linkObject->link()) ?>
+</a>
+```
