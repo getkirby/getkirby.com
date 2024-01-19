@@ -14,7 +14,7 @@ Category: Configuration
 
 ----
 
-Icon: mail
+Icon: email
 
 ----
 
