@@ -17,7 +17,8 @@ enum Product: string
 		$product = match ($type) {
 			'buy'     => $this->productId(),
 			'upgrade' => $this->upgradeId(),
-			'free'    => $this->upgradeId(true),
+			'convert' => $this->upgradeId('convert'),
+			'free'    => $this->upgradeId('free'),
 		};
 
 		return Paddle::checkout($product, $payload);
@@ -50,11 +51,12 @@ enum Product: string
 	/**
 	 * Returns the Paddle upgrade product ID
 	 */
-	public function upgradeId(bool $free = false): int
+	public function upgradeId(string|null $type = null): int
 	{
-		return match ($free) {
-			true    => option('buy.' . $this->value . '.free'),
-			default => option('buy.' . $this->value . '.upgrade')
+		return match ($type) {
+			'free'    => option('buy.' . $this->value . '.free'),
+			'convert' => option('buy.' . $this->value . '.convert'),
+			default   => option('buy.' . $this->value . '.upgrade')
 		};
 	}
 }
