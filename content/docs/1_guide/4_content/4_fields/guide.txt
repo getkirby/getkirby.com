@@ -44,10 +44,18 @@ There are (link: plugins/category:panel text: several plugins) with custom field
 
 ## Naming fields
 
-In general, you are free to name your fields like you want to, but there are two limitations:
+In general, you are free to name your fields freely, but there are some limitations:
 
-1. You can only use alphanumeric characters and underscores in field names.
-2. If you use field names that are also used by native Kirby methods, your field names will conflict with Kirby's existing methods, e.g. if you give your field the name "image", it will conflict with Kirby's `$page->image()` method. If you still want to use this name for the field, you will have to call these fields differently in your templates. For details please refer to (link: docs/guide/templates/basics text: the template docs).
+1. You can only use alphanumeric characters (a-z, A-Z, 0-9) and underscores in field names, so no dashes or special characters.
+2. Field names may conflict with Kirby's native methods. If you name a field `image` for example, it will conflict with the native `$page->image()` method.
+3. You may not use a field named `title` directly in a page blueprint, unless it is nested within another field (structure field, object field, blocks field).
+
+To be on the safe side with your field names, you have two options:
+
+1. Always prefix your field names, for example with your initials: `xy_myfieldName`.
+2. Render your field names in your templates via the content object, i.e. instead of the shortcut `$page->myFieldName()` use `$page->content()->get('myFieldName'), compare (link: #accessing-fields-in-templates text: Accessing fields in templates) below.
+
+For details see also  (link: docs/guide/templates/basics text: the template docs).
 
 ## Accessing fields in templates
 
@@ -59,6 +67,17 @@ Field content is accessible in your templates via the field's name:
 <?= $page->date()->toDate('Y-m-d') ?>
 ```
 The methods that are chained to the name of the field are field methods that allow you to modify the field content in multiple ways. You can find a full list of available field methods in the (link: docs/reference/templates/field-methods text: Reference).
+
+<info>
+Some technical background: Fields are part of the (link: docs/reference/objects/content/content text: Content object) which is returned when calling `$page->content()`, so the longer, standard way of accessing a field would be:
+
+```php
+<?= $page->content()->get('title') ?>
+```
+
+However, Kirby uses the magic (link: https://github.com/getkirby/kirby/blob/a537a4d95c8db03ecaf3ebfd5c6a7747357fde7c/src/Cms/Page.php#L154 text: `__call`) method in the Page class to resolve these shortcuts via the field name, as shown above. This magic methods makes sure that native methods always take precedence over your content field names to make sure Kirby works as expected. And this is also the reason why conflicting field names will not work with these shortcuts.
+</info>
+
 
 ## Further reading
 
