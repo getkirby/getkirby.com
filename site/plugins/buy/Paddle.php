@@ -4,6 +4,7 @@ namespace Buy;
 
 use Exception;
 use Kirby\Http\Remote;
+use Kirby\Toolkit\Str;
 use Throwable;
 
 class Paddle
@@ -27,6 +28,9 @@ class Paddle
 			'quantity'          => 1,
 			...$payload
 		];
+
+		// normalize the passthrough param to a JSON string
+		$data['passthrough'] = Passthrough::factory($data['passthrough'] ?? null)->toJson();
 
 		$response = static::request(
 			endpoint: 'product/generate_pay_link',

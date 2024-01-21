@@ -57,6 +57,15 @@ class Price
 	}
 
 	/**
+	 * Gets the additional optional donation amount
+	 * per transaction in the customer currency
+	 */
+	public function donation(): int
+	{
+		return $this->convert(option('buy.donation.customerAmount'));
+	}
+
+	/**
 	 * Rounds a price to the nearest pretty price
 	 * (ending in -5 or -9)
 	 */
@@ -75,13 +84,18 @@ class Price
 		// the rounding is applied on the last place
 		// and for a currency with 10x higher prices
 		// on the second-last place
-		$price = round($price / 5 / $step) * 5 * $step;
+		$rounded = round($price / 5 / $step) * 5 * $step;
 
-		if ($price % max($step, 10) === 0) {
-			$price -= 1;
+		if ($rounded % max($step, 10) === 0) {
+			$rounded -= 1;
 		}
 
-		return max(0, $price);
+		// ensure that the price is never rounded to zero
+		if ($rounded < 1) {
+			return round($price);
+		}
+
+		return max(0, $rounded);
 	}
 
 	/**

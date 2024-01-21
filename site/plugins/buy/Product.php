@@ -49,6 +49,18 @@ enum Product: string
 	}
 
 	/**
+	 * Returns a label for the revenue limit
+	 */
+	public function revenueLimit(): string|null
+	{
+		return match ($this) {
+			static::Basic      => 'Revenue limit: €1M / year.',
+			static::Enterprise => 'This license does not have a revenue limit.',
+			default            => null
+		};
+	}
+
+	/**
 	 * Returns the Paddle upgrade product ID
 	 */
 	public function upgradeId(string|null $type = null): int
