@@ -10,6 +10,7 @@ return function (Page $page) {
 
 	return [
 		'discounts' => option('buy.volume'),
+		'donation'  => option('buy.donation'),
 		'sale'      => $sale,
 		'questions' => $page->find('answers')->children()
 	];

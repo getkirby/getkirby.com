@@ -1,6 +1,7 @@
 <?php
 
 use Buy\Paddle;
+use Buy\Passthrough;
 use Buy\Product;
 use Kirby\Cms\Page;
 
@@ -70,15 +71,37 @@ return [
 	[
 		'pattern' => 'buy/(enterprise|basic)',
 		'action' => function (string $product) {
+			$donate = get('donate') === 'true';
+
 			try {
-				$product = Product::from($product);
-				$price   = $product->price();
+				$product     = Product::from($product);
+				$price       = $product->price();
+				$message     = $product->revenueLimit();
+				$passthrough = new Passthrough(teamDonation: option('buy.donation.teamAmount'));
+
+				$eurPrice       = $product->price('EUR')->sale();
+				$localizedPrice = $price->sale();
+
+				if ($donate === true) {
+					$customerDonation = option('buy.donation.customerAmount');
+					$eurPrice       += $customerDonation;
+					$localizedPrice += $price->convert($customerDonation);
+
+					$passthrough->customerDonation = $customerDonation;
+
+					$message .= ' We will donate an additional €' . $customerDonation . ' to ' . option('buy.donation.charity') . '. Thank you for your donation!';
+				}
+
 				$prices  = [
-					'EUR:' . $product->price('EUR')->sale(),
-					$price->currency . ':' . $price->sale(),
+					'EUR:' . $eurPrice,
+					$price->currency . ':' . $localizedPrice,
 				];
 
-				go($product->checkout('buy', compact('prices')));
+				go($product->checkout('buy', [
+					'passthrough'    => $passthrough,
+					'custom_message' => $message,
+					'prices'         => $prices,
+				]));
 			} catch (Throwable $e) {
 				die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
 			}
@@ -90,16 +113,39 @@ return [
 		'action'  => function () {
 			$product  = get('product', 'basic');
 			$quantity = get('volume', 5);
+			$donate   = get('donate') === 'true';
 
 			try {
-				$product = Product::from($product);
-				$price   = $product->price();
+				$product     = Product::from($product);
+				$price       = $product->price();
+				$message     = $product->revenueLimit();
+				$passthrough = new Passthrough(teamDonation: option('buy.donation.teamAmount') * $quantity);
+
+				$eurPrice       = $product->price('EUR')->volume($quantity);
+				$localizedPrice = $price->volume($quantity);
+
+				if ($donate === true) {
+					// only a single donation for the purchase, not for each license
+					$customerDonation = option('buy.donation.customerAmount');
+					$eurPrice       += $customerDonation / $quantity;
+					$localizedPrice += $price->convert($customerDonation) / $quantity;
+
+					$passthrough->customerDonation = $customerDonation;
+
+					$message .= ' We will donate an additional €' . $customerDonation . ' to ' . option('buy.donation.charity') . '. Thank you for your donation!';
+				}
+
 				$prices  = [
-					'EUR:' . $product->price('EUR')->volume($quantity),
-					$price->currency . ':' . $price->volume($quantity),
+					'EUR:' . $eurPrice,
+					$price->currency . ':' . $localizedPrice,
 				];
 
-				go($product->checkout('buy', compact('prices', 'quantity')));
+				go($product->checkout('buy', [
+					'passthrough'    => $passthrough,
+					'custom_message' => $message,
+					'prices'         => $prices,
+					'quantity'       => $quantity,
+				]));
 			} catch (Throwable $e) {
 				die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
 			}

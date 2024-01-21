@@ -103,13 +103,29 @@ k-price-info:not(.loaded) {
 	<div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-6)">
 
 		<div>
-			<h1 class="h1 max-w-xl mb-6">
+			<h1 class="h1 max-w-xl mb-12">
 				The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
 			</h1>
 
 			<?php if ($sale->isActive()): ?>
-				<div class="h3 sale mb-12">
+				<div class="h3 sale mb-6">
 					<?= $sale->text() ?>
+				</div>
+			<?php endif ?>
+
+			<?php if ($donation['customerAmount'] > 0): ?>
+				<h2 class="h3 sale mb-3">💗 &nbsp; Support a good cause</h2>
+
+				<div class="prose text-base max-w-xl mb-12">
+					<p class="mb-6">
+						For every license purchase we donate €<?= $donation['teamAmount'] ?> to
+						<a rel="noopener noreferrer" target="_blank" href="<?= $donation['link'] ?>"><?= $donation['charity'] ?></a> <?= $donation['purpose'] ?>.
+					</p>
+
+					<label class="p-3 bg-yellow-light color-black rounded block">
+						<input type="checkbox" name="donate-checkbox" class="mr-3">
+						Donate an additional €<?= $donation['customerAmount'] ?> 💛
+					</label>
 				</div>
 			<?php endif ?>
 		</div>
@@ -128,7 +144,7 @@ k-price-info:not(.loaded) {
 						<?php endif ?>
 					</h2>
 
-					<a href="/buy/basic" target="_blank" class="h2 block mb-3">
+					<a href="/buy/basic" target="_blank" class="buy-link h2 block mb-3">
 						<k-price-info key="currency-sign-trimmed" class="sale currency-sign">€</k-price-info><!--
 						--><k-price-info key="basic-sale" class="sale"><?= Buy\Product::Basic->price('EUR')->sale() ?></k-price-info>
 						per site
@@ -149,7 +165,7 @@ k-price-info:not(.loaded) {
 
 				<footer>
 					<p>
-						<a href="/buy/basic" target="_blank" class="btn btn--filled mb-1 w-100%">
+						<a href="/buy/basic" target="_blank" class="buy-link btn btn--filled mb-1 w-100%">
 							<?= icon('cart') ?>
 							Buy Basic
 						</a>
@@ -170,7 +186,7 @@ k-price-info:not(.loaded) {
 						<?php endif ?>
 					</h2>
 
-					<a href="/buy/enterprise" target="_blank" class="h2 block mb-3">
+					<a href="/buy/enterprise" target="_blank" class="buy-link h2 block mb-3">
 						<k-price-info key="currency-sign-trimmed" class="sale currency-sign">€</k-price-info><!--
 						--><k-price-info key="enterprise-sale" class="sale"><?= Buy\Product::Enterprise->price('EUR')->sale() ?></k-price-info>
 						per site
@@ -190,7 +206,7 @@ k-price-info:not(.loaded) {
 
 				<footer>
 					<p>
-						<a href="/buy/enterprise" target="_blank" class="btn btn--filled mb-1 w-100%">
+						<a href="/buy/enterprise" target="_blank" class="buy-link btn btn--filled mb-1 w-100%">
 							<?= icon('cart') ?>
 							Buy Enterprise
 						</a>
@@ -203,6 +219,7 @@ k-price-info:not(.loaded) {
 
 	<section class="mb-42">
 		<form class="volume-discounts" method="POST" target="_blank" action="<?= url('buy/volume') ?>">
+			<input type="hidden" name="donate">
 			<header class="flex items-baseline justify-between mb-6">
 				<h2 class="h2">Volume discounts</h2>
 				<fieldset>
@@ -317,6 +334,20 @@ document.addEventListener("click", (event) => {
 		if (details.contains(event.target) === false) {
 			details.removeAttribute("open");
 		}
+	}
+});
+
+// propagate customer donation checkbox to links and the volume form
+document.querySelector("[name='donate-checkbox']").addEventListener("change", (event) => {
+	let formValue = "", queryString = "";
+	if (event.target.checked === true) {
+		formValue   = "true";
+		queryString = "?donate=true";
+	}
+
+	document.querySelector("[name='donate']").value = formValue;
+	for (const buyLink of [...document.querySelectorAll(".buy-link")]) {
+		buyLink.search = queryString;
 	}
 });
 
