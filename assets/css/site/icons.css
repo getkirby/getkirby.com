@@ -1,5 +1,8 @@
 :where(svg) {
 	fill: currentColor;
+}
+
+:where(svg[viewBox="0 0 24 24"]) {
 	width: 18px;
 	height: 18px;
 }
