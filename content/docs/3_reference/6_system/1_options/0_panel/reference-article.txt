@@ -60,7 +60,7 @@ return [
         'label' => 'Notes',
         'link'  => 'pages/notes',
         'current' => function (string $current): bool {
-          $path = App::instance()->request()->path()->toString();
+          $path = Kirby\Cms\App::instance()->request()->path()->toString();
           return Str::contains($path, 'pages/notes');
         }
       ],
@@ -88,7 +88,7 @@ When you add a menu entry that links to a page or file, you probably also want t
 		// the links of all your custom menu entries
 		$links = ['pages/notes', 'pages/albums'];
 
-		$path  = App::instance()->request()->path();
+		$path  = Kirby\Cms\App::instance()->request()->path();
 		return A::every($links, fn ($link) => Str::contains($path, $link))
   },
 ],
