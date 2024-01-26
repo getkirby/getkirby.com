@@ -9,7 +9,7 @@ class ReferenceRootPage extends ReflectionPage
 	public function example(): Field
 	{
 		return parent::example()->value(
-			'```php' . PHP_EOL . '<?= $kirby->root(\'' . $this->slug() . '\') ?>' . PHP_EOL . '```'
+			'```php' . PHP_EOL . '<?= $kirby->root(\'' . parent::title() . '\') ?>' . PHP_EOL . '```'
 		);
 	}
 
@@ -25,7 +25,7 @@ class ReferenceRootPage extends ReflectionPage
 	public function setup(): string
 	{
 		$text = $this->parent()->custom()->kt()->value();
-		return str_replace('{{ root }}', $this->slug(), $text);
+		return str_replace('{{ root }}', parent::title(), $text);
 	}
 
 	public function template(): Template
