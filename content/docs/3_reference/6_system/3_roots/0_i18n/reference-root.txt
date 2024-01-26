@@ -1,0 +1,5 @@
+Title: i18n
+
+----
+
+Intro: Returns the root of the i18n (core languages) folder.

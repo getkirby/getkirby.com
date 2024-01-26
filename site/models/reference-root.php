@@ -36,7 +36,7 @@ class ReferenceRootPage extends ReflectionPage
 	public function title(): Field
 	{
 		return parent::title()->value(
-			'$kirby->root(\'' . $this->slug() . '\')'
+			'$kirby->root(\'' . parent::title() . '\')'
 		);
 	}
 }
