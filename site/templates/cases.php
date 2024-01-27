@@ -31,11 +31,11 @@ html {
 		<div>
 			<h2>You built something with Kirby?</h2>
 			<p class="color-white">
-				Share your work in our <a class="link" href="https://forum.getkirby.com/t/made-with-kirby-and-3/83">forum</a>
+				Share your work with <mark class="px-1 rounded">#MadeWithKirby</mark> around the web or in our <a class="link" href="https://forum.getkirby.com/t/made-with-kirby-and-3/83">forum</a>
 			</p>
 		</div>
 		<div>
-			Find more amazing sites and panel setups on
+			Find more amazing sites and Panel setups on
 			<a class="color-white link" href="https://kirbysites.com">kirbysites.com</a>
 		</div>
 	</footer>
