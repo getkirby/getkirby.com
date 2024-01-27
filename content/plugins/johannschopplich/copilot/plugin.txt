@@ -18,7 +18,7 @@ Subcategory: section
 
 ----
 
-Description: AI-powered content generation with fields, images and PDFs context support
+Description: AI-powered content generation with field, image and PDF context support
 
 ----
 
