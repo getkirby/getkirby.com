@@ -19,8 +19,9 @@
   'id'      => 'sections',
   'icon'    => 'dashboard',
   'title'   => 'Sections',
+	'hero'    => true,
   'layout'  => 'cards',
-  'plugins' => $plugins->filter('subcategory', 'section')->pluck('id')
+  'plugins' => $plugins->filter('subcategory', 'section')->sortBy('sort', 'desc', 'title', 'asc')->pluck('id')
 ]) ?>
 
 <?php snippet('templates/plugins/section', [

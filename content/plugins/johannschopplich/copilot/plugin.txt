@@ -18,6 +18,10 @@ Subcategory: section
 
 ----
 
+Sort: 1000
+
+----
+
 Description: AI-powered content generation with field, image and PDF context support
 
 ----
