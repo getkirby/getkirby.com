@@ -1,0 +1,25 @@
+Title: Copilot
+
+----
+
+Text:
+
+----
+
+Repository: https://github.com/johannschopplich/kirby-copilot
+
+----
+
+Category: panel
+
+----
+
+Subcategory: section
+
+----
+
+Description: AI-powered content generation with fields, images and PDFs context support
+
+----
+
+Versions: 4
