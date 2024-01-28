@@ -2,7 +2,8 @@
 	fill: currentColor;
 }
 
-:where(svg[viewBox="0 0 24 24"]) {
+:where(svg[viewBox="0 0 24 24"]),
+:where(svg[viewBox="0 0 16 16"]) {
 	width: 18px;
 	height: 18px;
 }
