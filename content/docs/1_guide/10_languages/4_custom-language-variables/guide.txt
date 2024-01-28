@@ -67,7 +67,7 @@ Once you have added one or more languages, you can start adding translation vari
 
 (image: language.png)
 
-Access to the language editor can be restricted via (link: text: permissions)
+Access to the language editor can be restricted via (link:/docs/guide/users/permissions text:permissions)
 
 <info>
 Language variables that you add in other languages than the default language will be stored in the default language as well. Language variables added in the default language will only be stored once translated.
