@@ -14,15 +14,15 @@ class FileSystem
 		'readme'     => '/^(readme|license)\.?/i',
 		'javascript' => ['js'],
 		'css'        => ['css'],
+		'database'   => ['yml', 'yaml'],
 		'html'       => ['html', 'htm', 'xhtml'],
 		'font'       => ['woff', 'woff2', 'ttf', 'otf', 'eot'],
 		'code'       => ['json'],
-		'yaml'       => ['yaml'],
 		'markdown'   => ['md', 'mdown', 'markdown'],
 		'git'        => ['git', 'gitattributes', 'gitignore', 'gitmodules'],
 		'php'        => ['php'],
-		'yaml'       => ['yml'],
 		'text'       => ['txt'],
+		'vue'        => ['vue'],
 	];
 
 	protected static function getIconByFilename(string $filename): string|null
