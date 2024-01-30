@@ -47,7 +47,7 @@ In your `config.php`, connect to the database:
 
 return [
     'db' => [
-        'host'     => '127.0.0',
+        'host'     => '127.0.0.1',
         'database' => 'kirby',
         'user'     => 'root',
         'password' => 'root',
@@ -275,7 +275,7 @@ class CommentsPage extends Kirby\Cms\Page
 		    if ($this->children instanceof Pages) {
             return $this->children;
         }
-				
+
         $comments = [];
 
         foreach (Db::select('comments') as $comment) {
