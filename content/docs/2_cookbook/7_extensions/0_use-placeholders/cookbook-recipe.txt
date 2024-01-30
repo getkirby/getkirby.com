@@ -10,7 +10,6 @@ Placeholders are a powerful way to include repeatedly used text snippets like co
 
 By default, such placeholders are wrapped in double curly braces like this:
 
-
 ```kirbytext
 Text:
 
@@ -57,7 +56,7 @@ With this in place, we can pass this array to the `Str::template()` method:
 
 
 ```php
-<?= Str::template($page->text()->kt(), option('placeholders', [])) ?>
+<?= Str::template($page->text()->kt(), option('placeholders')) ?>
 ```
 
 Now, if we want to add additional placeholders, we can do that in the config.
@@ -68,7 +67,7 @@ But hey, this is still quite limited.
 
 Maybe your editors would prefer to have control over the types of placeholders they need and what they should be replaced with. A structure field lends itself well to this purpose, and the `site.yml` blueprint is a good place to define site-wide placeholders.
 
-```yaml
+```yaml "/site/blueprints/site.yml"
 placeholders:
   label: Text replacements
   type: structure
@@ -85,7 +84,7 @@ placeholders:
         The replacement text is the text that will replace your keyholders.
 ```
 
-To get the array of options from this field, we create a `toOptions()` (link: docs/reference/plugins/extensions/field-methods text: field method) in a plugin:
+To get an array of options from this field, we create a `toOptions()` (link: docs/reference/plugins/extensions/field-methods text: field method) in a plugin:
 
 ```php "/site/plugins/placeholders/index.php"
 
@@ -147,8 +146,6 @@ Kirby::plugin('cookbook/placeholders', [
 ]);
 ```
 
-
-
 ## Wrapping the replacement code in a hook
 
 We can automate it even more, though. A hook replaces all the placeholders automatically, so that we don't even have to call our method in templates anymore:
@@ -165,6 +162,27 @@ Kirby::plugin('cookbook/placeholders', [
     ]
 ]);
 ```
+
+For cases that don't use `kirbytext()` (layout field, blocks field, writer field etc-), you can apply a `page.render:after` hook instead that replaces your placeholders all over your site in the rendered HTML, independent of the type of field where the placeholder is used:
+
+```php "/site/plugins/placeholders/index.php"
+<?php
+
+Kirby::plugin('cookbook/placeholders', [
+    'hooks' => [
+        'page.render:after' => function (string $contentType, string $html) {
+            if ($contentType !== 'html') {
+                return $html;
+            }
+
+            return Str::template($html, site()->placeholders()->toOptions());
+
+        },
+    ]
+]);
+```
+
+The `replace()` field method is no longer needed when we use this hook.
 
 ## The final plugin
 
@@ -201,6 +219,7 @@ Kirby::plugin('cookbook/placeholders', [
             return $result;
         }
     ],
+    // Don't use both hooks but only one as required, remove or comment the one you don't need
     'hooks' => [
         'kirbytags:before' => function ($text) {
 
@@ -218,7 +237,14 @@ Kirby::plugin('cookbook/placeholders', [
             $options = array_merge($defaults, $options);
 
             return Str::template($text, $options);
-        }
+        },
+       'page.render:after' => function (string $contentType, string $html) {
+            if ($contentType !== 'html') {
+                return $html;
+            }
+
+            return Str::template($html, site()->placeholders()->toOptions());
+        },
     ]
 ]);
 ```
