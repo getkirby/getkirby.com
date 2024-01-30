@@ -136,6 +136,22 @@ The button label changes depending on the status option set:
 
 (image: page-creation-status.png)
 
+<since v="4.1.0">
+### Automatic title and slug
+
+The page create dialog also allows you to automatically generate title and/or slug instead of allowing the user to edit them manually. To do so, please define the `title` and/or `slug` suboption as a string template:
+
+```yaml
+create:
+  title: "{{ page.location }} – {{ page.date.toDate('M Y') }}"
+  slug: "{{ page.location.slug }}-{{ page.date.toDate('Y-m-d') }}"
+```
+
+Custom fields from the create dialog will be accessible as Kirby query starting with `page` (in this example the fields `location` and `date`). Moreover you can also use queries accessing information not specific to the page (throught the `kirby` or `site` entry point).
+
+If title and slug are generated automatically and there are no custom fields defined for the page creation dialog, the dialog will be skipped and the page immediately created.
+</since>
+
 ### Supported field types
 
 Currently, the list of supported field types in the dialog is limited to checkboxes, date, email, info, line, link, list, number, multiselect, radio, range, select, slug, tags, tel, text, toggles, time, url. Custom field types are disabled by default. To enable them, add your field type name to:
