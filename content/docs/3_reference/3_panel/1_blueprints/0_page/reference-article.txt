@@ -139,7 +139,7 @@ The button label changes depending on the status option set:
 <since v="4.1.0">
 ### Automatic title and slug
 
-The page create dialog also allows you to automatically generate title and/or slug instead of allowing the user to edit them manually. To do so, please define the `title` and/or `slug` suboption as a string template:
+The page create dialog also allows you to automatically generate title and/or slug instead of allowing the user to edit them manually. To do so, define the `title` and/or `slug` suboption as a string template:
 
 ```yaml
 create:
@@ -147,9 +147,9 @@ create:
   slug: "{{ page.location.slug }}-{{ page.date.toDate('Y-m-d') }}"
 ```
 
-Custom fields from the create dialog will be accessible as Kirby query starting with `page` (in this example the fields `location` and `date`). Moreover you can also use queries accessing information not specific to the page (throught the `kirby` or `site` entry point).
+Custom fields from the create dialog will be accessible as Kirby query starting with `page` (in this example the fields `location` and `date`). Moreover, you can also use queries to access information not specific to the page (through the `kirby` or `site` entry point).
 
-If title and slug are generated automatically and there are no custom fields defined for the page creation dialog, the dialog will be skipped and the page immediately created.
+If title and slug are generated automatically and no custom fields are defined for the page creation dialog, the dialog will be skipped and the page is created immediately.
 </since>
 
 ### Supported field types
