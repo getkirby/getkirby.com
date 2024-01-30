@@ -34,7 +34,7 @@ In the template:
 <nav>
   <ul>
     <?php foreach ($menu as $menuItem) : ?>
-    <li><a href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a></li>
+    <li><a <?php e($menuItem->isOpen(), 'aria-current="page"') ?> href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a></li>
     <?php endforeach ?>
   </ul>
 </nav>
@@ -72,7 +72,7 @@ In the template, we can use it like this to render each menu with its headline:
       <h4><?= $menu->menuHeadline()->html() ?></h4>
       <ul>
         <?php foreach ($menuItems as $menuItem) : ?>
-          <li><a href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a></li>
+          <li><a <?php e($menuItem->isOpen(), 'aria-current="page"') ?> href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a></li>
         <?php endforeach ?>
       </ul>
     </nav>
@@ -112,7 +112,7 @@ In the template:
 <nav>
   <ul>
     <?php foreach ($menuItems as $menuItem) : ?>
-      <li><a href="<?= $menuItem->link()->toUrl() ?>"><?= $menuItem->linkTitle()->or($menuItem->link()->html()) ?></a></li>
+      <li><a <?= ($p = $menuItem->link()->toPage()) && $p->isOpen() ? 'aria-current="page"' : '' ?> href="<?= $menuItem->link()->toUrl() ?>"><?= $menuItem->linkTitle()->or($menuItem->link()->html()) ?></a></li>
     <?php endforeach ?>
   </ul>
 </nav>
@@ -157,7 +157,7 @@ if ($menu->isNotEmpty()) : ?>
   <ul>
     <?php foreach ($menu as $item): ?>
       <?php if ($mainMenuItem = $item->mainMenu()->toPage()) : ?>
-      <li><a href="<?= $mainMenuItem->url() ?>"><?= $mainMenuItem->title() ?></a>
+      <li><a <?php e($mainMenuItem->isOpen(), 'aria-current="page"') ?> href="<?= $mainMenuItem->url() ?>"><?= $mainMenuItem->title() ?></a>
       <?php endif ?>
       <?php $subMenu = $item->subMenu()->toPages(); ?>
       <?php if ($item->hasSubmenu()->isTrue() && $subMenu->isNotEmpty()) : ?>
