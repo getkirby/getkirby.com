@@ -12,6 +12,12 @@ Intro: The `color` field supports multiple color notations, color picker, pre-de
 
 Text:
 
+(image: color.png)
+
+## Field properties
+
+(field-options: color)
+
 ## Usage
 
 ```yaml
@@ -20,9 +26,39 @@ color:
   format: hsl # supports hex (default), rgb, hsl
 ```
 
-(image: color.png)
 
-## Pre-defined options
+### In templates/snippets
+
+```php
+<?= $page->color()->escape('css') ?>
+```
+
+## Alpha
+
+Use the `alpha` option (default: false) to activate alpha transparency support:
+
+```yaml
+color:
+  type: color
+  alpha: true
+```
+
+## Modes
+
+With the `mode` option you control which elements of the color field are available. Possible values:
+
+| Option   | Description |
+| ------   | ----------- |
+|`picker`  | show everything (default)|
+|`input`   | show only the input |
+|`options` | show only options |
+
+(image: color-field-modes.png)
+
+
+## Options
+
+### Pre-defined options
 
 Allows adding a list of pre-defined colors that are shown as one-click options in the Panel.
 
@@ -46,39 +82,112 @@ If you name the colors, their name is shown in the Panel as well.
 color:
   type: color
   options:
-    "Sunny rays": "#F8B195"
-    "First-love blush": "#F67280"
-    "Cherry blossom": "#C06C84"
-    "Morning gloom": "#6C5B7B"
-    "Midnight rain": "#355C7D"
+    "#F8B195": "Sunny rays"
+    "#F67280": "First-love blush"
+    "#C06C84": "Cherry blossom"
+    "#6C5B7B": "Morning gloom"
+    "#355C7D": "Midnight rain"
 ```
 
 (image: color-field-names.png)
 
-## Modes
+<since v="4.1.0">
+### Dynamic options
 
-With the `mode` option you control which elements of the color field are available. Possible values:
+Our options (link: docs/guide/blueprints/query-language text: query syntax) offers a very powerful way of to add an automatically generated option lists to a color field.
 
-| Option   | Description |
-| ------   | ----------- |
-|`picker`  | show everything (default)|
-|`input`   | show only the input |
-|`options` | show only options |
-
-(image: color-field-modes.png)
-
-## Alpha
-
-Use the `alpha` option (default: false) to activate alpha transparency support:
 
 ```yaml
-color:
+myColorField:
   type: color
-  alpha: true
+  options:
+    type: query
+    query: kirby.option('my.colors')
 ```
 
-## Use in templates/snippets
+The example above will get the color options from the `my.colors` config entry, which could look like:
 
-```php
-<?= $page->color()->escape('css') ?>
+```php "site/config/config.php"
+// only values
+return [
+	'my' => [
+		'colors' => [
+			'#3e3e3e',
+			'#aaa',
+			'#ddd',
+		]
+	]
+];
+
+// values -> labels
+return [
+	'my' => [
+		'colors' => [
+			'#3e3e3e' => 'Color A' ,
+			'#aaa'    => 'Color B',
+			'#ddd'    => 'Color C',
+		]
+	]
+];
 ```
+
+You can start at the `site`, current `page`, `users` collection or the `kirby` instance to run your query.
+
+#### Custom value and label
+
+To customize the stored value and displayed label, you can be more specific when defining the query: `text` and `value` can be defined with the help of our string template language to get exactly what you want as the result.
+
+```yaml
+myColorField:
+  type: color
+  options:
+    type: query
+    query: kirby.option('my.colors')
+    text: "{{ item.name }}"
+    value: "{{ item.hex }}"
+```
+
+```php "site/config/config.php"
+return [
+	'my' => [
+		'colors' => [
+			[
+				'name' => 'Color A',
+				'hex   => '#3e3e3e',
+			],
+			[
+				'name' => 'Color B',
+				'hex   => '#aaa',
+			],
+			[
+				'name' => 'Color C',
+				'hex   => '#ddd',
+			]
+		]
+	]
+];
+```
+
+### Options via API
+
+If the option queries are not enough or you need to pluck an external source for option data, you can use the API type.
+
+```yaml
+myColorField:
+  type: color
+  options:
+    type: api
+    url: https://your-options-api.com/colors.json
+```
+
+By default, the API type expects that the JSON endpoint returns an option array like this:
+
+```js
+{
+	"#3e3e3e": "Color A" ,
+	"#aaa": "Color B",
+	"#ddd":"Color C"
+}
+```
+</since>
+
