@@ -103,6 +103,21 @@ stats:
       link: /revenue
 ```
 
+<since v="4.1.0">
+### Icons
+
+You can add an (link: docs/reference/panel/icons text: icon) for each report:
+
+```yaml
+stats:
+  type: stats
+  reports:
+    - label: Revenue
+      value: €29,682
+      icon: store
+```
+</since>
+
 ### Themes
 
 You can colorize the info value with the theme option. Available themes are:
