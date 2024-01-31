@@ -265,6 +265,25 @@ $kirby->email([
 ]);
 ```
 
+It can be useful to add embedded images:
+
+```php "/site/templates/emails/email.html.php"
+<img src="cid:image">
+<!-- Email content -->
+```
+
+```php
+$kirby->email([
+    // …
+		'template' => 'email',
+    'beforeSend' => function ($mailer) {
+        $mailer->AddEmbeddedImage($image, 'image', 'image.png', 'base64', 'image/png');
+
+        return $mailer;
+    }
+]);
+```
+
 The `beforeSend` callback can also be added as [preset](#email-presets).
 
 ## More information
