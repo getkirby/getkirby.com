@@ -1,0 +1,49 @@
+Name: Timo Rychert
+
+----
+
+Place: Hamburg
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Expertise: Websites with a twist, Backend & Frontend UI, Creative Coding
+
+----
+
+Latitude: 53.550341
+
+----
+
+Longitude: 10.000654
+
+----
+
+Discord: trych
+
+----
+
+Email: mail@trych.dev
+
+----
+
+Forum: trych
+
+----
+
+Mastodon: @trych@mastodon.social
+
+----
+
+Website: https://trych.dev

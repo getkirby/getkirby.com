@@ -1,0 +1,33 @@
+Name: Viktoria Dietz
+
+----
+
+Business: Grommas Dietz
+
+----
+
+Place: Bremen
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Agency/Studio/Team
+
+----
+
+Expertise: Graphic design, typography, web design
+
+----
+
+Latitude: 53.07582
+
+----
+
+Longitude: 8.807165

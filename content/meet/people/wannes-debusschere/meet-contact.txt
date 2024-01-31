@@ -1,0 +1,49 @@
+Name: Wannes Debusschere
+
+----
+
+Business: E-xperience LAB
+
+----
+
+Place: Sintra
+
+----
+
+Country: Portugal
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Agency/Studio/Team
+
+----
+
+Expertise: Website and Webapplications (Laravel)
+
+----
+
+Latitude: 38.79846
+
+----
+
+Longitude: -9.3881
+
+----
+
+Discord: wdebusschere
+
+----
+
+Email: wannes@e-xperience.pt
+
+----
+
+Forum: wdebusschere
+
+----
+
+Website: https://www.e-xperience.pt

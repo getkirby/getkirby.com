@@ -1,0 +1,33 @@
+Name: Valentin Bachem
+
+----
+
+Place: Heidelberg
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups
+
+----
+
+Latitude: 49.4121677
+
+----
+
+Longitude: 8.7112746
+
+----
+
+Forum: HDValentin
+
+----
+
+Mastodon: @hdvalentin@rheinneckar.social
+
+----
+
+Website: https://www.vbachem.de

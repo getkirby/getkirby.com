@@ -1,0 +1,53 @@
+Name: Sascha Bregenhorn
+
+----
+
+Business: n2.Studio
+
+----
+
+Place: Münster
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Expertise: Design + Frontend Development
+
+----
+
+Latitude: 51.96251
+
+----
+
+Longitude: 7.625188
+
+----
+
+Discord: saschafrommars
+
+----
+
+Email: hi@n2.studio
+
+----
+
+Forum: saschabregenhorn
+
+----
+
+Mastodon: @SaschaFromMars@mstdn.social
+
+----
+
+Website: https://www.n2.studio

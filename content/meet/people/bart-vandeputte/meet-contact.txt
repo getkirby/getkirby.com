@@ -1,0 +1,37 @@
+Name: Bart Vandeputte
+
+----
+
+Place: Beselare
+
+----
+
+Country: Belgium
+
+----
+
+Interests: Meetups
+
+----
+
+Latitude: 50.84815
+
+----
+
+Longitude: 3.024421
+
+----
+
+Discord: bartvdputte
+
+----
+
+Email: mail@bartvandeputte.be
+
+----
+
+Forum: bvdputte
+
+----
+
+Mastodon: @bvdputte@mastodon.social

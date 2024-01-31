@@ -1,0 +1,49 @@
+Name: Johann Schopplich
+
+----
+
+Place: Leipzig
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Expertise: Kirby Headless, KQL, Nuxt
+
+----
+
+Latitude: 51.340632
+
+----
+
+Longitude: 12.374733
+
+----
+
+Discord: johannschopplich
+
+----
+
+Email: mail@johannschopplich.com
+
+----
+
+Forum: johannschopplich
+
+----
+
+Mastodon: @johannschopplich@det.social
+
+----
+
+Website: https://johannschopplich.com

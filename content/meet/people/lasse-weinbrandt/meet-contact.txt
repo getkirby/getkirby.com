@@ -1,0 +1,45 @@
+Name: Lasse Weinbrandt
+
+----
+
+Place: Hamburg
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Expertise: Besides programming I am a somewhat professional musician, so helping out people from culture, arts and music is a personal mission for me. But I try to be as versatile as possible and adapt to every challenge.
+
+----
+
+Latitude: 53.550341
+
+----
+
+Longitude: 10.000654
+
+----
+
+Discord: lassereinboeng
+
+----
+
+Email: lasseweinbrandt@gmail.com
+
+----
+
+Forum: lassereinboeng
+
+----
+
+Website: https://lasseweinbrandt.dev

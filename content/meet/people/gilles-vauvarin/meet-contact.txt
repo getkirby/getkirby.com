@@ -1,0 +1,45 @@
+Name: Gilles Vauvarin
+
+----
+
+Business: Pixenjoy
+
+----
+
+Partner: Partner
+
+----
+
+Place: Montréal
+
+----
+
+Country: Canada
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Expertise: Front and Back (Kirby CMS)
+
+----
+
+Latitude: 45.503182
+
+----
+
+Longitude: -73.569807
+
+----
+
+Discord: gillesvauvarin
+
+----
+
+Website: https://pixenjoy.com

@@ -1,0 +1,41 @@
+Name: Oliver Mayer
+
+----
+
+Business: Werbschaft GmbH
+
+----
+
+Place: Bisingen
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups
+
+----
+
+Latitude: 48.31202
+
+----
+
+Longitude: 8.916367
+
+----
+
+Discord: werbschaft
+
+----
+
+Email: oliver.mayer@werbschaft.de
+
+----
+
+Forum: oli1
+
+----
+
+Website: https://werbschaft.de

@@ -1,0 +1,37 @@
+Name: Maarten Van Herendael
+
+----
+
+Business: Heave
+
+----
+
+Partner: Partner
+
+----
+
+Place: Antwerp
+
+----
+
+Country: Belgium
+
+----
+
+Interests: Meetups
+
+----
+
+Latitude: 51.22111
+
+----
+
+Longitude: 4.399708
+
+----
+
+Email: maarten@heave.be
+
+----
+
+Website: https://heave.be

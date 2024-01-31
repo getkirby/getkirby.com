@@ -1,0 +1,45 @@
+Name: Tom Streeter
+
+----
+
+Business: Crankybear Media
+
+----
+
+Place: Burlington, Kentucky
+
+----
+
+Country: USA
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Latitude: 39.02756
+
+----
+
+Longitude: -84.724113
+
+----
+
+Discord: tom.streeter
+
+----
+
+Email: tom@crankybearmedia.com
+
+----
+
+Forum: tom_streeter
+
+----
+
+Mastodon: @tom_streeter@mastodon.beer

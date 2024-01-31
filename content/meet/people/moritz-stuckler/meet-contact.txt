@@ -1,0 +1,45 @@
+Name: Moritz Stückler
+
+----
+
+Business: bitbetter GmbH
+
+----
+
+Place: Hamburg
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Agency/Studio/Team
+
+----
+
+Latitude: 53.550341
+
+----
+
+Longitude: 10.000654
+
+----
+
+Discord: preya2k
+
+----
+
+Email: moritz@bitbetter.de
+
+----
+
+Mastodon: @preya@mastodon.social
+
+----
+
+Website: https://bitbetter.de

@@ -1,0 +1,41 @@
+Name: verkruemelt
+
+----
+
+Place: Lüdenscheid
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Expertise: MS-SQL, LDAP, Datamanagement, (Frickeln & Pfuschen)
+
+----
+
+Latitude: 51.2161882
+
+----
+
+Longitude: 7.6333602
+
+----
+
+Discord: verkruemelt
+
+----
+
+Email: verkruemelt@gmail.com
+
+----
+
+Forum: verkruemelt
+
+----
+
+Website: https://shutupserver.de/

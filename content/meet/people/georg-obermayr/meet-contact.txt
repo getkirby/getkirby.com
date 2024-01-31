@@ -1,0 +1,45 @@
+Name: Georg Obermayr
+
+----
+
+Business: schalk&friends
+
+----
+
+Place: Munich
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups
+
+----
+
+Latitude: 48.1365601
+
+----
+
+Longitude: 11.5772753
+
+----
+
+Discord: georgobermayr
+
+----
+
+Email: info@georgobermayr.com
+
+----
+
+Forum: georgobermayr
+
+----
+
+Mastodon: @georgobermayr@techhub.social
+
+----
+
+Website: https://georgobermayr.com

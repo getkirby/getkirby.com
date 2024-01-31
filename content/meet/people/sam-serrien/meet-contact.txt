@@ -1,0 +1,45 @@
+Name: Sam Serrien
+
+----
+
+Business: GeNx
+
+----
+
+Partner: Certified Partner
+
+----
+
+Place: Antwerp
+
+----
+
+Country: Belgium
+
+----
+
+Interests: Collaboration,Meetups
+
+----
+
+Type: Freelancer
+
+----
+
+Expertise: Backend developer
+
+----
+
+Latitude: 51.22111
+
+----
+
+Longitude: 4.399708
+
+----
+
+Discord: samzzi
+
+----
+
+Website: https://genx.be

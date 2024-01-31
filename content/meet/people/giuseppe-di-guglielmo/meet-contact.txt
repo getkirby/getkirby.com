@@ -1,0 +1,37 @@
+Name: Giuseppe Di Guglielmo
+
+----
+
+Business: Von Wilhelm
+
+----
+
+Place: Zürich
+
+----
+
+Country: Switzerland
+
+----
+
+Interests: Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Latitude: 47.369733
+
+----
+
+Longitude: 8.541096
+
+----
+
+Email: hello@vonwilhelm.ch
+
+----
+
+Website: https://vonwilhelm.ch

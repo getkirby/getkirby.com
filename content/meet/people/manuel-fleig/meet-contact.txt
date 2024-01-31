@@ -1,0 +1,41 @@
+Name: Manuel Fleig
+
+----
+
+Place: Stuttgart
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Expertise: Design, Art Direction, Web Development, Photography
+
+----
+
+Latitude: 48.778449
+
+----
+
+Longitude: 9.180013
+
+----
+
+Email: mf@manuelfleig.com
+
+----
+
+Forum: mafleig
+
+----
+
+Website: https://manuelfleig.com

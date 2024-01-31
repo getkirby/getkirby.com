@@ -15,6 +15,7 @@
 					<li><hr /></li>
 					<li><a href="/love">Showcase</a></li>
 					<li><a href="/releases">Releases</a></li>
+					<li><a class="is-external" href="https://feedback.getkirby.com">Feedback</a></li>
 				</ul>
 			</li>
 			<li class="has-submenu">
@@ -42,10 +43,12 @@
 			<li class="has-submenu">
 				<a href="https://chat.getkirby.com">Community</a>
 				<ul class="menu-2">
-					<li><a class="is-external" href="https://feedback.getkirby.com">Feedback</a></li>
+					<li><a href="/meet">Get together</a></li>
 					<li><a class="is-external" href="https://forum.getkirby.com">Support forum</a></li>
 					<li><a class="is-external" href="https://chat.getkirby.com">Discord chat</a></li>
+					<li><hr /></li>
 					<li><a class="is-external" href="https://mastodon.social/@getkirby">Mastodon</a></li>
+					<li><a class="is-external" href="https://www.linkedin.com/company/getkirby">LinkedIn</a></li>
 					<li><a class="is-external" href="https://instagram.com/getkirby">Instagram</a></li>
 				</ul>
 			</li>

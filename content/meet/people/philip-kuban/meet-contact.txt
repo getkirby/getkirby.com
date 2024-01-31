@@ -1,0 +1,49 @@
+Name: Philip Kuban
+
+----
+
+Business: visionbites GmbH
+
+----
+
+Partner: Certified Partner
+
+----
+
+Place: Munich
+
+----
+
+Country: Germany
+
+----
+
+Interests: Collaboration,Meetups
+
+----
+
+Type: Agency/Studio/Team
+
+----
+
+Latitude: 48.1365601
+
+----
+
+Longitude: 11.5772753
+
+----
+
+Discord: re_phil
+
+----
+
+Email: kuban@visionbites.de
+
+----
+
+Mastodon: @the_re_phil@mastodon.social
+
+----
+
+Website: https://www.visionbites.de/

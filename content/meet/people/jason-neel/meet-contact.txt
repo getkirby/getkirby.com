@@ -1,0 +1,33 @@
+Name: Jason Neel
+
+----
+
+Place: Morgantown, WV
+
+----
+
+Country: United States
+
+----
+
+Interests: Meetups
+
+----
+
+Expertise:
+
+----
+
+Latitude: 39.629681
+
+----
+
+Longitude: -79.955944
+
+----
+
+Mastodon: @JasonNeel@mastodon.social
+
+----
+
+Website: https://jasonneel.com

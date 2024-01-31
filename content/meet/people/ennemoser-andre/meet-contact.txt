@@ -1,0 +1,41 @@
+Name: Ennemoser André
+
+----
+
+Business: AE Webdesign
+
+----
+
+Place: Merano
+
+----
+
+Country: Italy
+
+----
+
+Interests: Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Expertise: Programming of small to large Kirby projects
+
+----
+
+Latitude: 46.669555
+
+----
+
+Longitude: 11.159418
+
+----
+
+Email: info@ae-webdesign.com
+
+----
+
+Website: https://www.ae-webdesign.com

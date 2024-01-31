@@ -1,0 +1,33 @@
+Name: Jonas Feige
+
+----
+
+Place: Frankfurt a.M.
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups
+
+----
+
+Latitude: 50.110644
+
+----
+
+Longitude: 8.682092
+
+----
+
+Discord: jonas
+
+----
+
+Email: jonas.feige@hey.com
+
+----
+
+Website: coding.jonasfeige.com

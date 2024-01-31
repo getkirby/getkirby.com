@@ -1,0 +1,37 @@
+Name: Loris Birkemeyer
+
+----
+
+Place: Strasbourg
+
+----
+
+Country: France
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Expertise: Web Developer
+
+----
+
+Latitude: 48.5834833
+
+----
+
+Longitude: 7.7468476
+
+----
+
+Discord: loristewis
+
+----
+
+Email: loris.birkemeyer@icloud.com

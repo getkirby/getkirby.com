@@ -1,0 +1,29 @@
+Name: Marc Thiele
+
+----
+
+Business: beyond tellerrand
+
+----
+
+Place: Krefeld
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups
+
+----
+
+Latitude: 51.333121
+
+----
+
+Longitude: 6.562334
+
+----
+
+Website: https://marcthiele.com

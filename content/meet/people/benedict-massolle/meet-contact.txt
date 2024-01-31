@@ -1,0 +1,57 @@
+Name: Benedict Massolle
+
+----
+
+Business: Present Progressive
+
+----
+
+Partner: Partner
+
+----
+
+Place: Essen
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Agency/Studio/Team
+
+----
+
+Expertise: Screen Design, Web Development
+
+----
+
+Latitude: 51.458224
+
+----
+
+Longitude: 7.015817
+
+----
+
+Discord: bmssll
+
+----
+
+Email: bm@presentprogressive.de
+
+----
+
+Forum: benzin
+
+----
+
+Mastodon: @bemas@mastodon.social
+
+----
+
+Website: https://www.presentprogressive.de

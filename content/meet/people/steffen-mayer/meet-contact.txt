@@ -1,0 +1,29 @@
+Name: Steffen Mayer
+
+----
+
+Place: Hamburg
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Agency/Studio/Team
+
+----
+
+Latitude: 53.550341
+
+----
+
+Longitude: 10.000654
+
+----
+
+Website: https://steffen-mayer.com

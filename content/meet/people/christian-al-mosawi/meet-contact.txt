@@ -1,0 +1,57 @@
+Name: Christian Al-Mosawi
+
+----
+
+Business: Present Progressive
+
+----
+
+Partner: Partner
+
+----
+
+Place: Düsseldorf
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Agency/Studio/Team
+
+----
+
+Expertise: Design & frontend development
+
+----
+
+Latitude: 51.225402
+
+----
+
+Longitude: 6.776314
+
+----
+
+Discord: chrisalmo
+
+----
+
+Email: ca@presentprogressive.de
+
+----
+
+Forum: chris_pp
+
+----
+
+Mastodon: @chrisalmo@mastodon.social
+
+----
+
+Website: https://presentprogressive.de

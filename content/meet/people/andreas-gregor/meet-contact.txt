@@ -1,0 +1,45 @@
+Name: Andreas Gregor
+
+----
+
+Business: AndreasGregorDesign
+
+----
+
+Place: Munich
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Agency/Studio/Team
+
+----
+
+Expertise: UX Design, Art Direction, Web Development, Photography
+
+----
+
+Latitude: 48.1365601
+
+----
+
+Longitude: 11.5772753
+
+----
+
+Discord: RedTukan
+
+----
+
+Email: info@andreasgregor.com
+
+----
+
+Website: https://andreasgregor.com

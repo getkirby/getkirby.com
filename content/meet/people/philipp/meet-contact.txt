@@ -1,0 +1,41 @@
+Name: Philipp
+
+----
+
+Place: Potsdam
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups
+
+----
+
+Latitude: 52.400931
+
+----
+
+Longitude: 13.05914
+
+----
+
+Discord: philtre_
+
+----
+
+Email: mail@philipptrenz.de
+
+----
+
+Forum: philipptrenz
+
+----
+
+Mastodon: @philipptrenz@mastodon.social
+
+----
+
+Website: https://philipptrenz.de

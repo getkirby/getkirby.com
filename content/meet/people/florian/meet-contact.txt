@@ -1,0 +1,37 @@
+Name: Florian
+
+----
+
+Business: Social Muse Media
+
+----
+
+Place: Toronto/Newmarket
+
+----
+
+Country: Canada
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Latitude: 44.1151286
+
+----
+
+Longitude: -79.5724453
+
+----
+
+Email: florian@socialmusemedia.com
+
+----
+
+Website: https://socialmusemedia.com

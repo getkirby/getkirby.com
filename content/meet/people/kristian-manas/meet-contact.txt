@@ -1,0 +1,53 @@
+Name: Kristian Maňas
+
+----
+
+Business: Karsten Systems
+
+----
+
+Partner: Partner
+
+----
+
+Place: Brno
+
+----
+
+Country: Czech Republic
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Agency/Studio/Team
+
+----
+
+Expertise: UX, Typography, bad humor, Kirby
+
+----
+
+Latitude: 49.1938775
+
+----
+
+Longitude: 16.606107
+
+----
+
+Discord: iskrisis
+
+----
+
+Email: mail@kristianmanas.com
+
+----
+
+Forum: iskrisis
+
+----
+
+Website: https://kristianmanas.com

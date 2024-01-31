@@ -1,0 +1,37 @@
+Name: Philip Marnef
+
+----
+
+Business: Bureau Marnef
+
+----
+
+Place: Antwerp
+
+----
+
+Country: Belgium
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Expertise: Design and development, mostly for the Arts sector
+
+----
+
+Latitude: 51.22111
+
+----
+
+Longitude: 4.399708
+
+----
+
+Website: https://bureaumarnef.be

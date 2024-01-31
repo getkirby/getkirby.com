@@ -1,0 +1,37 @@
+Name: Gilbert Nigg
+
+----
+
+Place: Zürich
+
+----
+
+Country: Switzerland
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Agency/Studio/Team
+
+----
+
+Latitude: 47.369733
+
+----
+
+Longitude: 8.541096
+
+----
+
+Email: hello@gilles.ch
+
+----
+
+Forum: Gilles
+
+----
+
+Website: https://www.gilles.ch

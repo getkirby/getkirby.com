@@ -1,0 +1,53 @@
+Name: Eddie Dale
+
+----
+
+Business: Vasser AS
+
+----
+
+Place: Hannover
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Agency/Studio/Team
+
+----
+
+Expertise: CMS based websites for small to medium large norwegian clients.
+
+----
+
+Latitude: 52.374478
+
+----
+
+Longitude: 9.738553
+
+----
+
+Discord: eddie_vasser
+
+----
+
+Email: eddie@vasser.no
+
+----
+
+Forum: eddie
+
+----
+
+Mastodon: @eddiedale@mastodon.social
+
+----
+
+Website: https://www.eddiedale.com

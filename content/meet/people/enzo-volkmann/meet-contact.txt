@@ -1,0 +1,45 @@
+Name: Enzo Volkmann
+
+----
+
+Business: volkmann design code
+
+----
+
+Place: Kassel
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Expertise: Mainly developing web-apps with Angular/Node/Postgres. Just starting out with Kirby for the website-business, I was formerly working with Angular or Svelte in this area.
+
+----
+
+Latitude: 51.315455
+
+----
+
+Longitude: 9.49241
+
+----
+
+Discord: enzovolkmann_56171
+
+----
+
+Email: enzo@volkmann.dev
+
+----
+
+Website: https://volkmann.dev

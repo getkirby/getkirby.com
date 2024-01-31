@@ -1,0 +1,41 @@
+Name: Nico Hoffmann
+
+----
+
+Business: Kirby CMS core team
+
+----
+
+Place: Berlin
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups
+
+----
+
+Type: Core team
+
+----
+
+Latitude: 52.5170365
+
+----
+
+Longitude: 13.3888599
+
+----
+
+Discord: distantnative
+
+----
+
+Mastodon: @distantnative@chaos.social
+
+----
+
+Forum: distantnative

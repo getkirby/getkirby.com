@@ -1,0 +1,29 @@
+Name: Flo Kosiol
+
+----
+
+Business: 3st kommunikation
+
+----
+
+Place: Mainz
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups
+
+----
+
+Latitude: 49.9992213
+
+----
+
+Longitude: 8.2756036
+
+----
+
+Website: https://flokosiol.de

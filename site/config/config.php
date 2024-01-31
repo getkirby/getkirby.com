@@ -1,7 +1,5 @@
 <?php
 
-use Kirby\Http\Route;
-
 return [
 	'api'        => false,
 	'buy'        => require __DIR__ . '/buy.php',
@@ -21,4 +19,8 @@ return [
 		// 'driver' => 'im'
 	],
 	'versions'   => require __DIR__ . '/versions.php',
+	'content' => [
+		'locking' => false,
+		'uuid'    => false
+	],
 ];

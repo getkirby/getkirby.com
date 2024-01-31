@@ -1,0 +1,45 @@
+Name: Jonas Rebmann
+
+----
+
+Place: Bremen
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Expertise: design driven websites and creative coding
+
+----
+
+Latitude: 53.07582
+
+----
+
+Longitude: 8.807165
+
+----
+
+Discord: jonas_rebmann
+
+----
+
+Email: kontakt@jonasrebmann.de
+
+----
+
+Instagram: jonas_rebmann
+
+----
+
+Website: https://jonasrebmann.de

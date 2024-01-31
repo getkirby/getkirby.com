@@ -1,0 +1,53 @@
+Name: Thomas Günther
+
+----
+
+Business: Medienbäcker
+
+----
+
+Partner: Partner
+
+----
+
+Place: Hornberg (near Freiburg)
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups,Collaboration
+
+----
+
+Type: Freelancer
+
+----
+
+Latitude: 49.20778
+
+----
+
+Longitude: 9.99641
+
+----
+
+Discord: thomasguenther
+
+----
+
+Email: mail@medienbaecker.com
+
+----
+
+Forum: thguenther
+
+----
+
+Mastodon: @medienbaecker@mastodon.social
+
+----
+
+Website: https://medienbaecker.com
