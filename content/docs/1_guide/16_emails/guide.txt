@@ -279,7 +279,7 @@ $kirby->email([
     'beforeSend' => function ($mailer) {
 				// $image should return file path
 				$image = asset('assets/images/logo.png')->root();
-        $mailer->AddEmbeddedImage($image, 'image', 'image.png', 'base64', 'image/png');
+        $mailer->AddEmbeddedImage($image, 'image', $image->filename(), 'base64', $image->mime());
 
         return $mailer;
     }
