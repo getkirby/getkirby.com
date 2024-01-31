@@ -2,7 +2,7 @@ Title: OAuth 2.0
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -22,4 +22,4 @@ Description: Interface to use OAuth 2.0 providers for user authentication
 
 ----
 
-Versions: 3
+Versions: 3,4
