@@ -7,7 +7,7 @@
 					<div class="mb-3">
 						<p class="h6 mb-1 flex align-center justify-between">
 							<?= $recipe->parent()->title() ?>
-							<?php if ($recipe->isNew()): ?><span aria-hidden="true" style="color: var(--color-yellow-500)"><?= icon('flash') ?></span><?php endif ?>
+							<?php if ($recipe->isNew()): ?><span aria-hidden="true" style="color: var(--color-yellow-500)"><?= icon('bolt') ?></span><?php endif ?>
 						</p>
 						<h2 class="h2 border-top pt-3">
 							<?= $recipe->title() ?>

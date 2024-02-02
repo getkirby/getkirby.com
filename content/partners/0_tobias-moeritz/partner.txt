@@ -81,3 +81,12 @@ Uuid: my524jZfcX9Zob80
 ----
 
 Text:
+
+----
+
+Plugins:
+- /plugins/tobimori/seo
+- /plugins/tobimori/icon-field
+- /plugins/tobimori/thumbhash
+- /plugins/tobimori/tailwind-merge
+

@@ -1,0 +1,5 @@
+Title: i18n:translations
+
+----
+
+Intro: Returns the root of the i18n:translations (core translations) folder.

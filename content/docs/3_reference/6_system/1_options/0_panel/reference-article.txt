@@ -60,7 +60,7 @@ return [
         'label' => 'Notes',
         'link'  => 'pages/notes',
         'current' => function (string $current): bool {
-          $path = App::instance()->request()->path()->toString();
+          $path = Kirby\Cms\App::instance()->request()->path()->toString();
           return Str::contains($path, 'pages/notes');
         }
       ],
@@ -80,14 +80,16 @@ When creating your own entry, include an `icon` and `label` as well as either a 
 <info>
 Note that you need to explicitly list all items you want in the menu. Custom menu entries will not automatically be merged with the default ones.
 
-When you add a menu entry that links to a page, you also have to redefine the `current` option for the `site` item, otherwise `site` will be active as well:
+When you add a menu entry that links to a page or file, you probably also want to overwrite the `current` callback for the `site` item, otherwise your menu entry as well as the `site` entry will be active at the same time:
 
 ```php
 'site' => [
-  'label' => 'Overview',
   'current' => function (): bool {
-    $path = App::instance()->request()->path()->toString();
-    return Str::contains($path, 'pages/about');
+		// the links of all your custom menu entries
+		$links = ['pages/notes', 'pages/albums'];
+
+		$path  = Kirby\Cms\App::instance()->request()->path();
+		return A::every($links, fn ($link) => Str::contains($path, $link))
   },
 ],
 ```

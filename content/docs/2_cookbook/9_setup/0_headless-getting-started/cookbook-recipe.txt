@@ -68,7 +68,7 @@ If you visit `https://headless.test/api/query` in a browser you should get the f
 
 ```
 
-This means the connection is working, however we have not yet authenticated so we are recieving a 403 error. At this point, it is useful to use a tool designed to help test APIs. We will use [Insomonia](https://insomnia.rest/) for the next steps.
+This means the connection is working, however we have not yet authenticated so we are recieving a 403 error. At this point, it is useful to use a tool designed to help test APIs. We will use [Insomnia](https://insomnia.rest/) for the next steps.
 
 Set the user credentials under the Basic dropdown and set the query to POST using the local url to the headless system, for example: `https://headless.test/api/query`
 

@@ -18,6 +18,10 @@ form:not([data-fetching]) .search-input figure svg:last-child {
 form[data-fetching] .search-input figure svg:first-child {
 	display: none;
 }
+
+.search-footer svg {
+	width: auto;
+}
 </style>
 
 <div class="search">

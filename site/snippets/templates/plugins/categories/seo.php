@@ -6,6 +6,7 @@
 	'layout'  => 'cards',
 	'columns' => 2,
 	'plugins' => [
+		'plugins/tobimori/seo',
 		'plugins/diesdasdigital/meta-knight',
 		'plugins/fabianmichael/meta',
 	]

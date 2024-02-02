@@ -1,5 +1,12 @@
 <?php layout() ?>
 
+<style>
+#logo svg {
+	width: 100%;
+	height: 42px;
+}
+</style>
+
 <article>
 	<header class="max-w-xl mb-24">
 		<h1 class="h1 mb-12">Download logos and screenshots for use in digital and print media</h1>
@@ -14,7 +21,7 @@
 			<li>
 				<a href="<?= $logo->url() ?>" download>
 					<figure>
-						<p class="block p-6 mb-3 bg-light"><?= $logo->read() ?></p>
+						<p class="block p-6 mb-3 bg-light rounded"><?= $logo->read() ?></p>
 						<figcaption class="h6">
 							<?= $logo->filename() ?>
 							<small class="color-gray-700"><?= $logo->niceSize() ?></small>
@@ -30,7 +37,7 @@
 		<ul class="columns" style="--columns: 2; --gap: var(--spacing-12)">
 			<?php foreach ($page->images()->filterBy('extension', 'png') as $screenshot): ?>
 			<li>
-				<a aria-label="Download the Panel screenshot" class="block bg-light" href="<?= $screenshot->url() ?>" style="--aspect-ratio: <?= $screenshot->width() . '/' . $screenshot->height() ?>" download>
+				<a aria-label="Download the Panel screenshot" class="block bg-light rounded overflow-hidden" href="<?= $screenshot->url() ?>" style="--aspect-ratio: <?= $screenshot->width() . '/' . $screenshot->height() ?>" download>
 					<?= img($screenshot, [
 						'alt' => 'A panel screenshot',
 						'class' => 'shadow-2xl',

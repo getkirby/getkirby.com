@@ -14,7 +14,7 @@ Category: Configuration
 
 ----
 
-Icon: mail
+Icon: email
 
 ----
 
@@ -250,18 +250,38 @@ You can get access to the underlying PHPMailer instance via the `beforeSend` cal
 
 ```php
 $kirby->email([
-    // …
-    'beforeSend' => function ($mailer) {
-        $mailer->SMTPOptions = [
-            'ssl' => [
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-                'allow_self_signed' => true
-            ]
-        ];
+  // …
+  'beforeSend' => function ($mailer) {
+    $mailer->SMTPOptions = [
+      'ssl' => [
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+      ]
+    ];
 
-        return $mailer;
-    }
+    return $mailer;
+  }
+]);
+```
+
+It can be useful to add embedded images:
+
+```php "/site/templates/emails/email.html.php"
+<img src="cid:image">
+<!-- Email content -->
+```
+
+```php
+$kirby->email([
+  // …
+  'template' => 'email',
+  'beforeSend' => function ($mailer) {
+    $image = asset('assets/images/logo.png');
+    $mailer->AddEmbeddedImage($image->root(), 'image', $image->filename(), 'base64', $image->mime());
+
+    return $mailer;
+  }
 ]);
 ```
 

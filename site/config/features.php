@@ -18,7 +18,7 @@ return [
 	],
 	'plugins' => [
 		'text' => 'Plugins',
-		'icon' => '3d',
+		'icon' => 'box',
 		'link' => '/features/developers#plugins'
 	],
 	'languages' => [
@@ -33,12 +33,12 @@ return [
 	],
 	'files' => [
 		'text' => 'Just files & folders',
-		'icon' => 'content',
+		'icon' => 'tag',
 		'link' => '/features/developers#files-and-folders'
 	],
 	'assets' => [
 		'text' => 'Assets',
-		'icon' => 'link',
+		'icon' => 'url',
 		'link' => '/features/creators#assets'
 	],
 	'headless' => [
@@ -48,7 +48,7 @@ return [
 	],
 	'templates' => [
 		'text' => 'Templating',
-		'icon' => 'components',
+		'icon' => 'dashboard',
 		'link' => '/features/developers#templating'
 	],
 	'publish-workflow' => [
@@ -68,7 +68,7 @@ return [
 	],
 	'email' => [
 		'text' => 'Emailing',
-		'icon' => 'mail',
+		'icon' => 'email',
 		'link' => '/docs/guide/emails'
 	],
 	'docs' => [
@@ -93,7 +93,7 @@ return [
 	],
 	'hooks' => [
 		'text' => 'Hooks',
-		'icon' => 'hook',
+		'icon' => 'anchor',
 		'link' => '/docs/reference/plugins/extensions/hooks'
 	],
 	'content-representations' => [
@@ -103,7 +103,7 @@ return [
 	],
 	'multi-site' => [
 		'text' => 'Multi-site setup',
-		'icon' => 'hierarchy',
+		'icon' => 'sitemap',
 		'link' => '/docs/cookbook/setup/multisite'
 	],
 ];

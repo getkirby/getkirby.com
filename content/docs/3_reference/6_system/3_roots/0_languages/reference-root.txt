@@ -1,0 +1,5 @@
+Title: languages
+
+----
+
+Intro: Returns the root of the languages folder.

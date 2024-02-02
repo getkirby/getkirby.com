@@ -205,7 +205,7 @@ Kirby's built-in blocktypes are not enough? Create your own! Check out our exten
 - (link: docs/cookbook/panel/nested-blocks text: Nested blocks)
 
 <since v="4.0.0">
-## Block preview type `field`
+## Block preview type `fields`
 
 Instead of manually creating previews for blocks types, you can use the `fields` preview type to display the fields together with their content.
 

@@ -7,7 +7,7 @@ return [
 		'ecommerce'     => ['icon' => 'cart', 'label' => 'E-commerce'],
 		'fields'        => ['icon' => 'input', 'label' => 'Fields'],
 		'forms'         => ['icon' => 'forms', 'label' => 'Forms'],
-		'headless'      => ['icon' => 'api', 'label' => 'Headless'],
+		'headless'      => ['icon' => 'integration', 'label' => 'Headless'],
 		'i18n'          => ['icon' => 'globe', 'label' => 'Internationalization'],
 		'devtools'      => ['icon' => 'code', 'label' => 'Dev tools'],
 		'media'         => ['icon' => 'image', 'label' => 'Media'],

@@ -145,5 +145,5 @@ return [
 		'action'  => function () {
 			return page('plugins')->render(['filter' => 'published']);
 		}
-	],
+	]
 ];

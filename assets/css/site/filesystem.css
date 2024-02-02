@@ -82,8 +82,9 @@
 }
 
 .filesystem [data-type="javascript"],
+.filesystem [data-type="vue"],
 .filesystem [data-type="html"],
-.filesystem [data-type="yaml"] {
+.filesystem [data-type="database"] {
 	--icon: var(--icon-orange);
 }
 

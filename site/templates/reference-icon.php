@@ -32,19 +32,21 @@ figure.icon {
 	background: var(--color-light);
 }
 figure.icon[data-bg="white"] {
-	fill: var(--color-white);
 	background: var(--color-black);
 }
-svg[data-size="16"] {
-	width: 1rem;
-	height: 1rem;
+figure.icon[data-bg="white"] svg {
+	fill: var(--color-white);
 }
-svg[data-size="32"] {
-	width: 2rem;
-	height: 2rem;
+svg[data-size="18"] {
+	width: 18px;
+	height: 18px;
 }
-svg[data-size="64"] {
-	width: 4rem;
-	height: 4rem;
+svg[data-size="36"] {
+	width: 36px;
+	height: 36px;
+}
+svg[data-size="72"] {
+	width: 72px;
+	height: 72px;
 }
 </style>

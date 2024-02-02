@@ -41,7 +41,7 @@ $kirby->impersonate('kirby');
 $models = $kirby->models();
 
 // set the fields to be ignored
-$ignore = ['uuid', 'title', 'slug', 'template', 'sort', 'focus];
+$ignore = ['uuid', 'title', 'slug', 'template', 'sort', 'focus'];
 
 foreach ($models as $model) {
 	// call the script for all languages if multilang

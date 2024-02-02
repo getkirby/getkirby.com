@@ -23,6 +23,10 @@
 	margin-left: -.75rem;
 	left: 100%;
 }
+.workflow svg {
+		width: 64px;
+		height: 64px;
+	}
 .workflow svg * {
 	stroke: var(--color-gray-300);
 }

@@ -1,0 +1,5 @@
+Title: i18n:rules
+
+----
+
+Intro: Returns the root of the i18n:rules (core rules) folder.

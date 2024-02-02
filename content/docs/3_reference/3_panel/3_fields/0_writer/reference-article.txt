@@ -47,6 +47,8 @@ The writer field supports the following marks by default:
 - `clear`
 </since>
 
+The special mark `|` can be used to separate marks in the toolbar by a vertical line.
+
 ```yaml
 fields:
   text:
@@ -55,6 +57,7 @@ fields:
     marks:
       - bold
       - italic
+      - '|'
       - strike
 ```
 

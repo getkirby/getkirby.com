@@ -4,7 +4,7 @@
 		<ul class="filters">
 			<li>
 				<a href="/docs/cookbook"<?= ariaCurrent($page->slug() === 'cookbook') ?>>
-					<?= icon('list') ?> All recipes
+					<?= icon('list-bullet') ?> All recipes
 				</a>
 			</li>
 			<li>

@@ -3,6 +3,10 @@
 		display: block;
 		width: clamp(10rem, 75%, 15rem);
 	}
+	.v39-php82 svg {
+		width: 100%;
+		height: auto;
+	}
 </style>
 
 <section id="php82" class="mb-42 v39-php82">

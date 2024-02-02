@@ -169,7 +169,7 @@
 
 				<?php if ($page->installation()->isTrue()) : ?>
 					<button class="btn" onclick="document.querySelector('#installation').showModal()">
-						<span><?= icon('flash') ?></span> Install
+						<span><?= icon('bolt') ?></span> Install
 					</button>
 
 					<dialog class="plugin-installation" id="installation" onclick="if (event.target === this) this.close()">
@@ -225,7 +225,7 @@
 					</a>
 				<?php endif ?>
 
-				<?php if ($version = $page->version()) : ?>
+				<?php if ($version) : ?>
 					<a class="btn" href="<?= $download ?>">
 						<span><?= icon('git') ?></span> <?= $version ?>
 					</a>

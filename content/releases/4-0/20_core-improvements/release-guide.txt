@@ -28,9 +28,9 @@ Github:
 
 Text:
 
-#### QR code generation
+#### QR Code generation
 
-Kirby's new `Kirby\Image\QrCode` class, (helper: qr) helper function and (method: $field->toQrCode text: ->toQrCode()) field method allow you to create QR codes right out of the box:
+Kirby's new `Kirby\Image\QrCode` class, (helper: qr) helper function and (method: $field->toQrCode text: ->toQrCode()) field method allow you to create QR Codes right out of the box:
 
 ```php
 $qr = new Kirby\Image\QrCode('https://getkirby.com');
@@ -39,7 +39,6 @@ $qr->toDataUri(color: '#ff00ff');
 
 qr('https://getkirby.com')->toSvg();
 $page->myLinkField()->toQrCode()->toSvg();
-
 ```
 
 #### Support for UUIDs and permalinks in URL helper

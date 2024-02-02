@@ -34,7 +34,7 @@ For the password reset feature there is a (link: docs/guide/authentication/passw
 
 ## Second factor authentication (2FA)
 
-Kirby supports 2FA via email codes, or one-time time-based codes (TOTP), see (link: text: second factor authentication)
+Kirby supports 2FA via email codes, or one-time time-based codes (TOTP), see (link: docs/guide/authentication/2fa text: second factor authentication)
 
 ## Setting the sender and subject for login related emails
 

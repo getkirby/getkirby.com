@@ -2,7 +2,7 @@ Title: Sentry
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -22,4 +22,4 @@ Description: Sentry real-time crash reporting for Kirby CMS sites
 
 ----
 
-Versions: 3
+Versions: 3,4

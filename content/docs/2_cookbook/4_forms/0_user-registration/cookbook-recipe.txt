@@ -191,7 +191,7 @@ return function ($kirby) {
                         // create the authentication challenge
                         try {
                             $status = $kirby->auth()->createChallenge($user->email(), false, 'login');
-                            go('login');
+                            go('panel/login');
                         } catch (PermissionException $e) {
                             $errors[] = $e->getMessage();
                         }
@@ -236,7 +236,7 @@ go('panel/login');
 to…
 
 ```php
-go('login')`;
+go('login');
 ```
 
 and create a new `login` page with a content file called `login.txt`.

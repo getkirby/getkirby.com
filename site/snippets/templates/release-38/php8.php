@@ -11,6 +11,11 @@
 		width: clamp(10rem, 75%, 15rem);
 	}
 
+	.v38-php8-grid svg {
+		width: 100%;
+		height: auto;
+	}
+
 	@media screen and (min-width: 45rem) {
 		.v38-php8-grid {
 			grid-template-columns: 1fr 1fr;
