@@ -26,16 +26,12 @@ Example:
 
 ----
 
-<<<<<<< HEAD
-=======
 Preview:
 
 ```kirbytext
 (svg: file.svg wrapper: figure)
 ```
 
-
 ----
 
->>>>>>> 315cf68a9e7684ad56c24ab85b9362b30037b199
 Versions: 3,4
