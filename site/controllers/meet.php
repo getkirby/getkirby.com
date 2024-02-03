@@ -14,7 +14,7 @@ function getLngLat(string $address): array
 	return  $json->features[0]->center;
 }
 
-function createContactGithubPr(): string
+function createContactGithubPr(Page $page): string
 {
 	$name      = get('name');
 	$business  = get('business');
@@ -103,9 +103,14 @@ Linkedin: $linkedin
 
 EOD;
 
-	$repo    = 'getkirby/playground-meet-api';
-	$slug    = Str::kebab($name);
-	$branch  = Github::createBranch($repo, 'meet/' . $slug . '-' . time());
+	$repo = 'getkirby/playground-meet-api';
+	$slug = Str::kebab($name);
+
+	while ($page->find('people/' . $slug)) {
+		$slug .= '-' . rand(0, 9);
+	}
+
+	$branch = Github::createBranch($repo, 'meet/' . $slug . '-' . time());
 
 	Github::createFile(
 		$repo,
@@ -125,7 +130,7 @@ return function (App $kirby, Page $page) {
 	// if form is submitted, create a GitHub PR
 	if ($kirby->request()->is('POST') && get('submit')) {
 		try {
-			$pr      = createContactGithubPr();
+			$pr      = createContactGithubPr($page);
 			$message = [
 				'type' => 'success',
 				'text' => "Thank you for your submission. We will review your entry and add it as soon as possible: <a href='$pr' class='link'>track the progress</a>."
