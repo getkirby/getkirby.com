@@ -20,7 +20,7 @@ function createContactGithubPr(): string
 	$business  = get('business');
 	$place     = get('place');
 	$country   = get('country');
-	$interests = get('interests');
+	$interests = implode(',', get('interests'));
 	$expertise = get('expertise');
 	$type      = get('type');
 	$website   = get('website');

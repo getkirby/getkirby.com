@@ -27,8 +27,14 @@
 		<div class="field">
 			<label class="label">Interested in in</label>
 			<div class="checkbox">
-				<label class="label"><input type="checkbox" name="interests" value="Meetups">Meetups</label>
-				<label class="label"><input type="checkbox" name="interests" value="Collaboration">Collaboration</label>
+				<label class="label">
+					<input type="checkbox" name="interests[]" value="Meetups">
+					Meetups
+				</label>
+				<label class="label">
+					<input type="checkbox" name="interests[]" value="Collaboration">
+					Collaboration
+				</label>
 			</div>
 		</div>
 		<div class="field">
