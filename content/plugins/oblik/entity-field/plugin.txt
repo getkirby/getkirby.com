@@ -2,7 +2,7 @@ Title: Entity Field
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -19,6 +19,10 @@ Subcategory: structured-content
 ----
 
 Description: Allows you to add other fields to it with the intention of scoping them. It works like a Structure with one entry but with much cleaner UI.
+
+----
+
+Archived: 2024-02-04
 
 ----
 

@@ -242,6 +242,13 @@
 					Supports <?= implode(', ', array_map(fn ($item) => 'K' . $item, explode(',', $page->versions()))) ?>
 				</a>
 
+				<?php if($page->archived()->isNotEmpty()): ?>
+				<a class="btn btn--yellow" href="<?= url('releases') ?>" title="This plugin is archived and no longer maintained">
+					<span><?= icon('alert') ?></span>
+					The plugin is archived
+				</a>
+				<?php endif ?>
+
 			</nav>
 		</div>
 

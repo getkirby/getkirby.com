@@ -43,3 +43,7 @@ button {
 .btn--filled svg {
 	color: var(--color-yellow-600);
 }
+.btn--yellow {
+	background: var(--color-yellow-400) !important;
+	color: var(--color-black); !important;
+}
