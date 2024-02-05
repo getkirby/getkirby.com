@@ -21,10 +21,10 @@
 				<input class="input" type="text" id="place" name="place" placeholder="Place" required>
 
 				<select class="input" id="country" name="country" required>
-					<option>Select a country …</option>
+					<option value="">Select a country …</option>
 					<hr>
 					<?php foreach ($countries as $countryCode => $countryName): ?>
-					<option value="<?= $countryCode ?>"><?= $countryName ?></option>
+					<option value="<?= $countryName ?>"><?= $countryName ?></option>
 					<?php endforeach ?>
 				</select>
 			</div>

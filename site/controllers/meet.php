@@ -2,16 +2,17 @@
 
 use Kirby\Cms\App;
 use Kirby\Cms\Page;
+use Kirby\Data\Data;
 use Kirby\Github\Github;
+use Kirby\Http\Remote;
 use Kirby\Toolkit\Str;
 
 function getLngLat(string $address): array
 {
-	$mapbox	 = kirby()->option('keys.mapbox');
-	$address = urlencode($address);
-	$json    = file_get_contents("https://api.mapbox.com/geocoding/v5/mapbox.places/$address.json?access_token=" . $mapbox);
-	$json    = json_decode($json);
-	return  $json->features[0]->center;
+	$mapbox	  = kirby()->option('keys.mapbox');
+	$address  = urlencode($address);
+	$response = Remote::get("https://api.mapbox.com/geocoding/v5/mapbox.places/$address.json?access_token=" . $mapbox);
+	return  $response->json()['features'][0]['center'];
 }
 
 function createContactGithubPr(Page $page): string
@@ -34,74 +35,25 @@ function createContactGithubPr(Page $page): string
 
 	[$longitude, $latitude] = getLngLat($place . ', ' . $country);
 
-	$content = <<<EOD
-Name: $name
-
-----
-
-Business: $business
-
-----
-
-Type: $type
-
-----
-
-Place: $place
-
-----
-
-Country: $country
-
-----
-
-Latitude: $latitude
-
-----
-
-Longitude: $longitude
-
-----
-
-Interests: $interests
-
-----
-
-Expertise: $expertise
-
-----
-
-Website: $website
-
-----
-
-Email: $email
-
-----
-
-Forum: $forum
-
-----
-
-Github: $github
-
-----
-
-Discord: $discord
-
-----
-
-Instagram: $instagram
-
-----
-
-Mastodon: $mastodon
-
-----
-
-Linkedin: $linkedin
-
-EOD;
+	$content = Data::encode([
+		'Name'      => $name,
+		'Business'  => $business,
+		'Type'      => $type,
+		'Place'     => $place,
+		'Country'   => $country,
+		'Latitude'  => $latitude,
+		'Longitude' => $longitude,
+		'Interests' => $interests,
+		'Expertise' => $expertise,
+		'Website'   => $website,
+		'Email'     => $email,
+		'Forum'     => $forum,
+		'Github'    => $github,
+		'Discord'   => $discord,
+		'Instagram' => $instagram,
+		'Mastodon'  => $mastodon,
+		'Linkedin'  => $linkedin,
+	], 'txt');
 
 	$repo = 'getkirby/playground-meet-api';
 	$slug = Str::kebab($name);
@@ -128,7 +80,7 @@ return function (App $kirby, Page $page) {
 	$message = null;
 
 	// if form is submitted, create a GitHub PR
-	if ($kirby->request()->is('POST') && get('submit')) {
+	if ($kirby->request()->is('POST')) {
 		try {
 			$pr      = createContactGithubPr($page);
 			$message = [
