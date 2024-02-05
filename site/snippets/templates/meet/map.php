@@ -13,6 +13,14 @@
 <style>
 #map {
 	height: 90dvh;
+	max-height: 45rem;
+}
+
+.map-container {
+	box-shadow: var(--shadow-xl);
+	border: 1px solid var(--color-border);
+	padding: 2px;
+	border-radius: .375rem;
 }
 
 .map-container > button {
@@ -25,7 +33,6 @@
 }
 
 .leaflet-popup-content-wrapper {
-	border-radius: var(--rounded);
 	box-shadow: var(--shadow);
 }
 
