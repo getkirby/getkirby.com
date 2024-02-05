@@ -26,11 +26,11 @@ Type: Freelancer
 
 ----
 
-Latitude: 49.20778
+Latitude: 48.21068
 
 ----
 
-Longitude: 9.99641
+Longitude: 8.23275
 
 ----
 
