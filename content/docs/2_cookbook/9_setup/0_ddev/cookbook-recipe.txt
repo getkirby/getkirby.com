@@ -52,10 +52,10 @@ If you already have a existing Kirby project (Starterkit or your own project), y
     ddev config --php-version=8.3 --omit-containers=db
     ```
 &nbsp;
-    You can run `ddev config` without any options, in that case the default config settings are used. Here, however, we tell DDEV 
+    You can run `ddev config` without any options, in that case the default config settings are used. Here, however, we tell DDEV
       * that we want to use PHP 8.3 (which is the most current actively supported PHP version at the time of writing). If you want to run on another version, adapt this flag accordingly.
       * that we want to omit spinning up a database container. Since Kirby is a flat file system that doesn't rely on a database, we don't need this container.
-       
+
     After you have run this command, you will find a `.ddev` folder inside your project folder. You might want to take a peak at the `config.yml` file in that folder. This gives you an idea of available config options and includes detailed explanations.
 
 
@@ -87,14 +87,14 @@ That was quick, right?
 Alternatively, we can create a new Kirby project from scratch. Here are the steps:
 
 1. Create a new project folder and use the `cd` command to navigate into it.
-   2. Inside the project folder, run the following commands one after the other:
+2. Inside the project folder, run the following commands one after the other:
 
-      ```bash
-      ddev config --php-version=8.3 --omit-containers=db
-      ddev start
-      ddev composer create getkirby/starterkit
-      ddev launch
-      ```
+	```bash
+ddev config --php-version=8.3 --omit-containers=db
+ddev start
+ddev composer create getkirby/starterkit
+ddev launch
+	```
 
    &nbsp;
    Only the third command is new, the other three we have already used above. With `ddev composer` we execute a composer command within the web container. `ddev composer create` is a special command that is adapted from `composer create-project`. Here we create a new Kirby Starterkit project in the current directory.
@@ -151,9 +151,9 @@ Note that each project on your computer must use different ports, or you will ru
 </info>
 ## Server configuration
 
-By default, DDEV runs on Nginx. The default Nginx configuration will usually work fine with Kirby. However, it does not protect the `content`, `site` or `kirby` folders, like Kirby's `.htaccess` configuration does for Apache. 
+By default, DDEV runs on Nginx. The default Nginx configuration will usually work fine with Kirby. However, it does not protect the `content`, `site` or `kirby` folders, like Kirby's `.htaccess` configuration does for Apache.
 
-In a development environment, this should not be a problem. If you want to protect your folders nonetheless, you can change the default Nginx configuration. 
+In a development environment, this should not be a problem. If you want to protect your folders nonetheless, you can change the default Nginx configuration.
 
 In `.ddev/nginx_full/nginx-site.conf` delete the line
 
