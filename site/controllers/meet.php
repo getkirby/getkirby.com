@@ -98,6 +98,7 @@ return function (App $kirby, Page $page) {
 	return [
 		'countries' => option('countries'),
 		'events'    => $page->find('events')->children(),
+		'gallery'   => $page->find('gallery')->images()->sortBy('sort'),
 		'message'   => $message,
 		'people'    => $page->find('people')->children()
 	];

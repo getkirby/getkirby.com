@@ -35,7 +35,7 @@
 
 		<h2 class="h2 mb-6">Shake it like a polaroid picture</h2>
 		<ul class="album-gallery">
-			<?php foreach ($page->images()->sortBy('sort') as $image): ?>
+			<?php foreach ($gallery as $image): ?>
 			<li>
 				<figure class="img" style="--w:<?= $image->width() ?>;--h:<?= $image->height() ?>">
 					<img src="<?= $image->resize(800)->url() ?>" alt="<?= $image->alt()->esc() ?>">
