@@ -144,8 +144,9 @@ return function (App $kirby, Page $page) {
 	}
 
 	return [
-		'message' => $message,
-		'events'  => $page->find('events')->children(),
-		'people'  => $page->find('people')->children()
+		'countries' => option('countries'),
+		'events'    => $page->find('events')->children(),
+		'message'   => $message,
+		'people'    => $page->find('people')->children()
 	];
 };

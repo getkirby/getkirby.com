@@ -19,7 +19,14 @@
 			<label class="label" for="place">Located in <abbr title="Required">*</abbr></label>
 			<div class="columns" style="--columns: 2; --gap: var(--spacing-1)">
 				<input class="input" type="text" id="place" name="place" placeholder="Place" required>
-				<input class="input" type="text" name="country" placeholder="Country" required>
+
+				<select class="input" id="country" name="country" required>
+					<option>Select a country …</option>
+					<hr>
+					<?php foreach ($countries as $countryCode => $countryName): ?>
+					<option value="<?= $countryCode ?>"><?= $countryName ?></option>
+					<?php endforeach ?>
+				</select>
 			</div>
 		</div>
 		<div class="field">
