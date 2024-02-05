@@ -1,0 +1,49 @@
+Name: Bastian Allgeier
+
+----
+
+Business: Kirby CMS core team
+
+----
+
+Place: Neckargemünd
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups
+
+----
+
+Type: Core team
+
+----
+
+Latitude: 49.38899
+
+----
+
+Longitude: 8.7959
+
+----
+
+Discord: bastianallgeier
+
+----
+
+Email: bastian@getkirby.com
+
+----
+
+Website: https://getkirby.com
+
+----
+
+Mastodon: @bastian@mastodon.social
+
+----
+
+Forum: bastianallgeier
