@@ -10,32 +10,26 @@ return function (App $kirby, Page $page, $filter) {
 	$category   = param('category');
 	$heading    = 'Featured';
 
+	// get all plugins
+	$plugins = $page
+		->grandChildren()
+		->filter('archived', '')
+		->sortBy('title', 'asc');
+
+
 	if ($category && array_key_exists($category, $categories) === true) {
-		$plugins = $page
-			->children()
-			->children()
-			->filterBy('recommended', '')
-			->sortBy('title', 'asc');
-
-		$plugins = $plugins->filterBy('category', $category);
 		$heading = $categories[$category]['label'];
-
+		$plugins = $plugins->filter('recommended', '')->filter('category', $category);
 	} elseif ($category === 'all') {
 		$heading  = 'All plugins';
 		$category = 'all';
-		$plugins  = $page
-			->grandChildren()
-			->sortBy('title', 'asc');
 	} elseif ($filter === 'k4') {
 		$heading  = 'Kirby 4 plugins';
 		$category = 'k4';
-		$plugins  = $page
-			->grandChildren()
-			->filter('versions', '*=', '4')
-			->sortBy('title', 'asc');
+		$plugins  = $plugins->filter('versions', '*=', '4');
 	} elseif ($filter) {
 		$heading = 'Newly added plugins';
-		$plugins = $page->grandChildren()->filterBy('isNew', true);
+		$plugins = $plugins->filter('isNew', true);
 	} else {
 		$category = null;
 		$plugins  = new Pages();

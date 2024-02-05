@@ -114,6 +114,11 @@
 .plugin-links .plugin-paid {
 	background: var(--color-purple-300);
 }
+
+.btn--yellow {
+	background: var(--color-yellow-400) !important;
+	color: var(--color-black);
+}
 </style>
 
 <article>
@@ -245,7 +250,7 @@
 				<?php if($page->archived()->isNotEmpty()): ?>
 				<a class="btn btn--yellow" href="<?= url('releases') ?>" title="This plugin is archived and no longer maintained">
 					<span><?= icon('alert') ?></span>
-					The plugin is archived
+					Archived
 				</a>
 				<?php endif ?>
 
