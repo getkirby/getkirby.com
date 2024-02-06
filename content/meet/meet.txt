@@ -2,7 +2,7 @@ Title: Meetups
 
 ----
 
-Description: Connect with fellow Kirby developers around the globe or get together in person at a local meetup. Or check out our community map to see who lives nearby and is up to meet or collaborate.
+Description: Connect with other Kirby developers around the world or meet face-to-face at a local meetup. Check out our community map to see who lives nearby for a get-together or to work together.
 
 ----
 
