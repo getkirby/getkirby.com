@@ -533,8 +533,10 @@ So what are the main take-aways from the above?
 - (link: https://css-tricks.com/a-guide-to-the-responsive-images-syntax-in-html/ text: A Guide to the Responsive Images Syntax in HTML)
 - (link: https://cloudinary.com/blog/introducing_intelligent_responsive_image_breakpoints_solutions text: Introducting responsive breakpoint solutions)
 
+----
 
+----
 
-
+Tags: responsive design, performance
 
 

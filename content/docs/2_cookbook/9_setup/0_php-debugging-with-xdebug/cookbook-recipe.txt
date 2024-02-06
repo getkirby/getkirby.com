@@ -314,3 +314,6 @@ Description: Xdebug helps you track down errors in your PHP scripts. In this rec
 ----
 
 Authors: - authors/sonja-broda
+
+----
+Tags: development, debugging

@@ -162,3 +162,7 @@ Including `fastcgi.conf` will properly set some global PHP variables like `SCRIP
 
 ## TLS certificates and Let's Encrypt
 These days, typically you want to use your Kirby website with a proper TLS certificate, which comes for free through Let's Encrypt. Managed webhosting products usually come with their own Admin interface to obtain a certificate. However, if you need to do this manually via the command line (e.g. you're running a full server instead of a webhosting product), you should use `certbot` – which is a handy little command line tool that will obtain the certificate for you and also **automatically adjust your Nginx config accordingly**. However this part is not specific to Kirby – so any given [set of instructions](https://certbot.eff.org/instructions) for the usage of Let's Encrypt with Nginx and certbot should work.
+
+----
+
+Tags: deployment, development, webserver

@@ -241,3 +241,7 @@ Description: When developing, debugging helps identify errors more easily.
 ----
 
 Authors: - authors/sonja-broda
+
+----
+
+Tags: development, debugging

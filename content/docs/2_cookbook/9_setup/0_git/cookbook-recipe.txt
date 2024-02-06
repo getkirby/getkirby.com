@@ -158,3 +158,7 @@ Staging and committing works just the same as in the previous examples.
 <info>
 If you check out a tag, Git will warn you that your repo is in a "detached HEAD" state. This is expected and just means that you are not on a branch but a specific commit.
 </info>
+
+----
+
+Tags: development, deployment, version control
