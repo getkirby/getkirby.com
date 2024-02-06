@@ -49,7 +49,6 @@ class MeetEventsPage extends Page
 
 	protected function getDataFromApi(): array
 	{
-		return [];
 		$data = Remote::get(
 			'https://canary.discord.com/api/v10/guilds/' . $this->kirby()->option('keys.discord.guild') . '/scheduled-events',
 			[
