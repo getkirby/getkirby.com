@@ -23,7 +23,7 @@ html {
 
 	<div class="mb-12">
 		<?php snippet('templates/cases/cases', [
-			'cases' => collection('cases')->shuffle()
+			'cases' => collection('cases')->shuffle()->limit(30)
 		]) ?>
 	</div>
 
