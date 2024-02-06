@@ -14,10 +14,6 @@ Interests: Meetups,Collaboration
 
 ----
 
-Expertise: MS-SQL, LDAP, Datamanagement, (Frickeln & Pfuschen)
-
-----
-
 Latitude: 51.2161882
 
 ----

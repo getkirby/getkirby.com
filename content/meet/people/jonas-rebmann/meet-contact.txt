@@ -18,10 +18,6 @@ Type: Freelancer
 
 ----
 
-Expertise: design driven websites and creative coding
-
-----
-
 Latitude: 53.07582
 
 ----

@@ -18,10 +18,6 @@ Type: Freelancer
 
 ----
 
-Expertise: Websites with a twist, Backend & Frontend UI, Creative Coding
-
-----
-
 Latitude: 53.550341
 
 ----

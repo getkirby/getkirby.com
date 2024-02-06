@@ -22,10 +22,6 @@ Type: Freelancer
 
 ----
 
-Expertise: Mainly developing web-apps with Angular/Node/Postgres. Just starting out with Kirby for the website-business, I was formerly working with Angular or Svelte in this area.
-
-----
-
 Latitude: 51.315455
 
 ----

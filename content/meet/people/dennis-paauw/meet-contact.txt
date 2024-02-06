@@ -22,10 +22,6 @@ Type: Agency/Studio/Team
 
 ----
 
-Expertise: Concept, strategy, branding, design, development and marketing
-
-----
-
 Latitude: 52.0768851
 
 ----

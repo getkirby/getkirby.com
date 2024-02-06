@@ -22,10 +22,6 @@ Type: Agency/Studio/Team
 
 ----
 
-Expertise: Graphic design, typography, web design
-
-----
-
 Latitude: 53.07582
 
 ----

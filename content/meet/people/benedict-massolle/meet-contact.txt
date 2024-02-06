@@ -26,10 +26,6 @@ Type: Agency/Studio/Team
 
 ----
 
-Expertise: Screen Design, Web Development
-
-----
-
 Latitude: 51.458224
 
 ----

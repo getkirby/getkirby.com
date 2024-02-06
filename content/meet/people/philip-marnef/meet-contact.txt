@@ -22,10 +22,6 @@ Type: Freelancer
 
 ----
 
-Expertise: Design and development, mostly for the Arts sector
-
-----
-
 Latitude: 51.22111
 
 ----

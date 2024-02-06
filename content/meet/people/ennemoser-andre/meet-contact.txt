@@ -22,10 +22,6 @@ Type: Freelancer
 
 ----
 
-Expertise: Programming of small to large Kirby projects
-
-----
-
 Latitude: 46.669555
 
 ----

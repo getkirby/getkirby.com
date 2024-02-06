@@ -26,10 +26,6 @@ Type: Agency/Studio/Team
 
 ----
 
-Expertise: Design & frontend development
-
-----
-
 Latitude: 51.225402
 
 ----

@@ -18,10 +18,6 @@ Type: Freelancer
 
 ----
 
-Expertise: Web Developer
-
-----
-
 Latitude: 48.5834833
 
 ----

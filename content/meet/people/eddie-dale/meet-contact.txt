@@ -22,10 +22,6 @@ Type: Agency/Studio/Team
 
 ----
 
-Expertise: CMS based websites for small to medium large norwegian clients.
-
-----
-
 Latitude: 52.374478
 
 ----

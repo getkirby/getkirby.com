@@ -26,10 +26,6 @@ Type: Freelancer
 
 ----
 
-Expertise: Front and Back (Kirby CMS)
-
-----
-
 Latitude: 45.503182
 
 ----

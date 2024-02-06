@@ -22,10 +22,6 @@ Type: Freelancer
 
 ----
 
-Expertise: Front-end. Server Ops. Media production.
-
-----
-
 Latitude: -33.854816
 
 ----

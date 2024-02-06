@@ -181,11 +181,7 @@ const markers = L.markerClusterGroup({
 		</div>
 	</header>
 
-	<?php if ($person->expertise()->isNotEmpty()): ?>
-	<div class="mb-3"><?= $person->expertise()->kti() ?></div>
-	<?php endif ?>
-
-	<aside>
+	<aside class="mb-1">
 		<?php foreach ($person->interests()->split() as $interest): ?>
 		<kbd><?= $interest ?></kbd>
 		<?php endforeach ?>

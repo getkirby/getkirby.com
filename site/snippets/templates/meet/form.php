@@ -42,10 +42,6 @@
 				</label>
 			</div>
 		</div>
-		<div class="field">
-			<label class="label" for="expertise">Expertise</label>
-			<textarea class="input" rows="5" id="expertise" name="expertise"></textarea>
-		</div>
 		<div class="field mb-6">
 			<label class="label">Contact details</label>
 			<div class="columns" style="--columns: 2; --gap: var(--spacing-1)">

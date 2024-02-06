@@ -26,10 +26,6 @@ Type: Freelancer
 
 ----
 
-Expertise: Backend developer
-
-----
-
 Latitude: 51.22111
 
 ----

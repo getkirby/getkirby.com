@@ -22,10 +22,6 @@ Type: Freelancer
 
 ----
 
-Expertise: Design + Frontend Development
-
-----
-
 Latitude: 51.96251
 
 ----

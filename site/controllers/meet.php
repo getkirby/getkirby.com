@@ -22,7 +22,6 @@ function createContactGithubPr(Page $page): string
 	$place     = get('place');
 	$country   = get('country');
 	$interests = implode(',', get('interests'));
-	$expertise = get('expertise');
 	$type      = get('type');
 	$website   = get('website');
 	$email	   = get('email');
@@ -44,7 +43,6 @@ function createContactGithubPr(Page $page): string
 		'Latitude'  => $latitude,
 		'Longitude' => $longitude,
 		'Interests' => $interests,
-		'Expertise' => $expertise,
 		'Website'   => $website,
 		'Email'     => $email,
 		'Forum'     => $forum,

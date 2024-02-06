@@ -26,10 +26,6 @@ Type: Agency/Studio/Team
 
 ----
 
-Expertise: Web and print design
-
-----
-
 Latitude: 52.264658
 
 ----
