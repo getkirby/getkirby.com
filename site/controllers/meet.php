@@ -26,7 +26,7 @@ function createContactGithubPr(Page $page): string
 	$forum	   = get('forum');
 	$github    = get('github');
 	$discord   = get('discord');
-	$instagram = get('instagram');
+	$instagram = ltrim(get('instagram'), '@');
 	$mastodon  = get('mastodon');
 	$linkedin  = get('linkedin');
 
