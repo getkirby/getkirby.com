@@ -2,7 +2,7 @@ Name: Ahmet Bora
 
 ----
 
-Business: Kirby CMS core team
+Business: Kirby core team
 
 ----
 

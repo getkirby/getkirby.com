@@ -110,20 +110,34 @@
 
 	<script>
 	const map = L.map('map', { scrollWheelZoom: false }).setView([40, 5], 2);
-	L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+
+	const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 		subdomains: 'abcd',
 		minZoom: 2,
-		maxZoom: 8
+		maxZoom: 10
 	}).addTo(map);
 
+	const iconCommunity = L.DivIcon.extend({
+		options: {
+			className: "marker",
+			html: `<?= icon('user') ?>`,
+			iconSize: [16, 16],
+			iconAnchor: [8, 8],
+			popupAnchor: [0, -8]
+		}
+	});
 
-	const icon = L.divIcon({
-		className: "marker",
-		html: `<?= icon('icon') ?>`,
-		iconSize: [16, 16],
-		iconAnchor: [8, 8],
-		popupAnchor: [0, -8]
+	const iconPartner = iconCommunity.extend({
+		options: {
+			html: `<?= icon('verified') ?>`,
+		}
+	});
+
+	const iconTeam = iconCommunity.extend({
+		options: {
+			html: `<?= icon('icon') ?>`,
+		}
 	});
 
 	const markers = L.markerClusterGroup({
@@ -136,7 +150,11 @@
 		markers.addLayer(
 			L.marker(
 				[<?= $person->latitude() ?>, <?= $person->longitude() ?>],
-				{ icon }
+				{ icon: new <?= match (true) {
+					$person->type() == 'Core team'   => 'iconTeam',
+					$person->partner()->isNotEmpty() => 'iconPartner',
+					default                          => 'iconCommunity'
+				} ?> }
 			).bindPopup(
 				`
 	<div class="p-3 <?= $person->partner()->isNotEmpty() ? 'partner' : '' ?> <?= $person->type() == 'Core team' ? 'team' : '' ?>">
@@ -145,7 +163,10 @@
 
 			<?php if ($person->partner()->isNotEmpty()): ?>
 			<div class="flex text-xs">
-				<?= icon('verified') ?>
+				<?= match ($person->partner()->value()) {
+					'Certified Partner' => icon('verified'),
+					default             => icon('verified')
+				 } ?>
 				<?= $person->partner() ?>
 			</div>
 			<?php endif ?>
@@ -163,7 +184,7 @@
 			<?php endif ?>
 
 			<div class="flex text-xs">
-				<?= icon('mappin') ?>
+				<?= icon('map') ?>
 				<?= $person->place() ?>, <?= $person->country() ?>
 			</div>
 		</header>

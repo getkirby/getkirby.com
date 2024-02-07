@@ -2,7 +2,7 @@ Name: Nico Hoffmann
 
 ----
 
-Business: Kirby CMS core team
+Business: Kirby core team
 
 ----
 
@@ -22,11 +22,11 @@ Type: Core team
 
 ----
 
-Latitude: 52.5170365
+Latitude: 52.4947
 
 ----
 
-Longitude: 13.3888599
+Longitude: 13.3495
 
 ----
 

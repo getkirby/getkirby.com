@@ -2,7 +2,7 @@ Name: Bastian Allgeier
 
 ----
 
-Business: Kirby CMS core team
+Business: Kirby core team
 
 ----
 
