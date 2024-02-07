@@ -2,7 +2,7 @@
 
 <style>
 .topbar {
-	border-bottom-color: var(--color-white);
+	border-bottom-color: rgba(255,255,255, .1);
 }
 .header,
 .footer h6 {
