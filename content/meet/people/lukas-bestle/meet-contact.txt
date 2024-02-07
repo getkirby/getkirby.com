@@ -1,0 +1,45 @@
+Name: Lukas Bestle
+
+----
+
+Business: Kirby CMS core team
+
+----
+
+Place: Reutlingen
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups
+
+----
+
+Type: Core team
+
+----
+
+Latitude: 48.483334
+
+----
+
+Longitude: 9.216667
+
+----
+
+Discord: lukasbestle
+
+----
+
+Email: lukas@getkirby.com
+
+----
+
+Website: https://getkirby.com
+
+----
+
+Forum: lukasbestle

@@ -1,0 +1,45 @@
+Name: Ahmet Bora
+
+----
+
+Business: Kirby CMS core team
+
+----
+
+Place: İstanbul
+
+----
+
+Country: Türkiye
+
+----
+
+Interests: Meetups
+
+----
+
+Type: Core team
+
+----
+
+Latitude: 41.0203937
+
+----
+
+Longitude: 28.8863547
+
+----
+
+Discord: ahmetbora
+
+----
+
+Email: ahmet@getkirby.com
+
+----
+
+Website: https://getkirby.com
+
+----
+
+Forum: ahmetbora

@@ -1,0 +1,45 @@
+Name: Sonja Broda
+
+----
+
+Business: Kirby CMS core team
+
+----
+
+Place: Mainz
+
+----
+
+Country: Germany
+
+----
+
+Interests: Meetups
+
+----
+
+Type: Core team
+
+----
+
+Latitude: 49.992863
+
+----
+
+Longitude: 8.247253
+
+----
+
+Discord: sonjabroda
+
+----
+
+Email: sonja@getkirby.com
+
+----
+
+Website: https://getkirby.com
+
+----
+
+Forum: texnixe

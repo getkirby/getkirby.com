@@ -44,6 +44,7 @@
 				<a href="https://chat.getkirby.com">Community</a>
 				<ul class="menu-2">
 					<li><a href="/meet">Get together</a></li>
+					<li><hr /></li>
 					<li><a class="is-external" href="https://forum.getkirby.com">Support forum</a></li>
 					<li><a class="is-external" href="https://chat.getkirby.com">Discord chat</a></li>
 					<li><hr /></li>
