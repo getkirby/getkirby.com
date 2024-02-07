@@ -263,7 +263,7 @@ k-price-info:not(.loaded) {
 
 			<h2 class="h2 mb-6">For a good cause? <mark class="px-1 rounded">It’s free.</mark></h2>
 			<div class="prose mb-6">
-				<p>We care about a better society and the future of our planet. We support <strong>students, educational projects, social and environmental organizations, charities and non-profits</strong> with free&nbsp;licenses.</p>
+				<p>We care about a better society and the future of our planet. We offer free&nbsp;licenses for <strong>students, selected educational projects, social and environmental organizations, charities and non-profits</strong> with insufficient funding.</p>
 			</div>
 
 			<a class="btn btn--filled mb-12" href="mailto:support@getkirby.com">
