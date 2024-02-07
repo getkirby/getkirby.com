@@ -1,10 +1,10 @@
-<section>
+<section class="mb-24">
 	<h2 class="h2 mb-6">Shake it like a polaroid picture</h2>
 	<ul class="album-gallery">
 		<?php foreach ($gallery as $image): ?>
 		<li>
-			<figure class="img" style="--w:<?= $image->width() ?>;--h:<?= $image->height() ?>">
-				<img src="<?= $image->resize(800)->url() ?>" alt="<?= $image->alt()->esc() ?>">
+			<figure class="img rounded-xl overflow-hidden" style="--w:<?= $image->width() ?>;--h:<?= $image->height() ?>">
+				<img src="<?= $image->resize(800)->url() ?>" alt="<?= $image->alt()->esc() ?>" loading="lazy">
 			</figure>
 		</li>
 		<?php endforeach ?>
