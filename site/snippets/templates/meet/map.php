@@ -6,7 +6,7 @@
 			class="btn btn--filled"
 			onclick="document.querySelector('#form').showModal()"
 		>
-			<?= icon('account') ?>
+			<?= icon('icon-outline') ?>
 			Add yourself
 		</button>
 	</header>
@@ -121,7 +121,7 @@
 	const iconCommunity = L.DivIcon.extend({
 		options: {
 			className: "marker",
-			html: `<?= icon('user') ?>`,
+			html: `<?= icon('icon-outline') ?>`,
 			iconSize: [16, 16],
 			iconAnchor: [8, 8],
 			popupAnchor: [0, -8]
@@ -130,13 +130,13 @@
 
 	const iconPartner = iconCommunity.extend({
 		options: {
-			html: `<?= icon('verified') ?>`,
+			html: `<?= icon('icon-blank') ?>`,
 		}
 	});
 
 	const iconTeam = iconCommunity.extend({
 		options: {
-			html: `<?= icon('icon') ?>`,
+			html: `<?= icon('icon-fill') ?>`,
 		}
 	});
 
@@ -165,7 +165,7 @@
 			<div class="flex text-xs">
 				<?= match ($person->partner()->value()) {
 					'Certified Partner' => icon('verified'),
-					default             => icon('verified')
+					default             => icon('icon-blank')
 				 } ?>
 				<?= $person->partner() ?>
 			</div>
@@ -174,7 +174,7 @@
 			<?php if ($person->business()->isNotEmpty()): ?>
 			<div class="flex text-xs">
 				<?= match ($person->type()->value) {
-					'Core team'          => icon('star'),
+					'Core team'          => icon('icon-fill'),
 					'Freelancer'         => icon('user'),
 					'Agency/Studio/Team' => icon('users'),
 					default              => icon('store')
