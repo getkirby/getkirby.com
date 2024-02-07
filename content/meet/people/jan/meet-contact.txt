@@ -23,11 +23,3 @@ Latitude: 55.953346
 ----
 
 Longitude: -3.188375
-
-----
-
-Email: jan@internatives.co.uk
-
-----
-
-Website: https://www.internatives.co.uk

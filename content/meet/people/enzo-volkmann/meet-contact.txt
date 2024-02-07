@@ -31,11 +31,3 @@ Longitude: 9.49241
 ----
 
 Discord: enzovolkmann_56171
-
-----
-
-Email: enzo@volkmann.dev
-
-----
-
-Website: https://volkmann.dev

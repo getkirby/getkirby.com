@@ -23,7 +23,3 @@ Latitude: 51.340632
 ----
 
 Longitude: 12.374733
-
-----
-
-Email: marco.geue@siteklick.de

@@ -27,11 +27,3 @@ Latitude: 44.1151286
 ----
 
 Longitude: -79.5724453
-
-----
-
-Email: florian@socialmusemedia.com
-
-----
-
-Website: https://socialmusemedia.com

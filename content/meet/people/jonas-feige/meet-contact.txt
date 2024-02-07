@@ -23,11 +23,3 @@ Longitude: 8.682092
 ----
 
 Discord: jonas
-
-----
-
-Email: jonas.feige@hey.com
-
-----
-
-Website: coding.jonasfeige.com

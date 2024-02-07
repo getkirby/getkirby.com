@@ -23,7 +23,3 @@ Latitude: 49.9992213
 ----
 
 Longitude: 8.2756036
-
-----
-
-Website: https://flokosiol.de

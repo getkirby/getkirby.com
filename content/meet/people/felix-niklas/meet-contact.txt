@@ -6,6 +6,10 @@ Place: Berlin
 
 ----
 
+Partner: Partner
+
+----
+
 Country: Germany
 
 ----

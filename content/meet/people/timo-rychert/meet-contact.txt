@@ -30,16 +30,8 @@ Discord: trych
 
 ----
 
-Email: mail@trych.dev
-
-----
-
 Forum: trych
 
 ----
 
 Mastodon: @trych@mastodon.social
-
-----
-
-Website: https://trych.dev

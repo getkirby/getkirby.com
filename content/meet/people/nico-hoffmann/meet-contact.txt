@@ -39,3 +39,11 @@ Mastodon: @distantnative@chaos.social
 ----
 
 Forum: distantnative
+
+----
+
+Website: https://getkirby.com
+
+----
+
+Email: nico@getkirby.com

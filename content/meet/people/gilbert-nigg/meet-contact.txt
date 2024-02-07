@@ -26,12 +26,4 @@ Longitude: 8.541096
 
 ----
 
-Email: hello@gilles.ch
-
-----
-
 Forum: Gilles
-
-----
-
-Website: https://www.gilles.ch

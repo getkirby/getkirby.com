@@ -25,12 +25,4 @@ Longitude: 9.180013
 
 ----
 
-Email: mf@manuelfleig.com
-
-----
-
 Forum: mafleig
-
-----
-
-Website: https://manuelfleig.com

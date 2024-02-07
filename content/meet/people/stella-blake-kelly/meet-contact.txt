@@ -27,11 +27,3 @@ Latitude: -33.854816
 ----
 
 Longitude: 151.216454
-
-----
-
-Email: hello@cartisanmaps.io
-
-----
-
-Website: https://cartisan.io
