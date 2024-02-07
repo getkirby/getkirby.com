@@ -78,4 +78,9 @@
 </style>
 
 <script>
+document.querySelector('#form').addEventListener('click', function (event) {
+	if (event.target === this) {
+		this.close();
+	}
+});
 </script>
