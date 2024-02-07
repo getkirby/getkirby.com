@@ -237,7 +237,7 @@ echo $kirby->render();
 
 In our Starterkit, we offer a flat setup that installs all folders directly in the document root of your server. This is not always the best solution, but it's the solution that is most compatible with all types of hosting.
 
-Some websites have sensitive files that must not be served by the webserver (nginx, apache, etc) but instead must be served securely by the application (Kirby). For proper security, this means the sensitive files must not be hosted in the document root, but instead must be outside the reach of the webserver. The common way to do this is to put directories of sensitive files one level *above* the document root (at the same level as the document root) so that the webserver cannot accidentlly serve them.
+Some websites have sensitive files that must not be served by the webserver (Nginx, Apache, etc) but instead must be served securely by the application (Kirby). For proper security, this means the sensitive files must not be hosted in the document root, but instead must be outside the reach of the webserver. The common way to do this is to put directories of sensitive files one level *above* the document root (at the same level as the document root) so that the webserver cannot accidentlly serve them.
 
 #### index.php
 
