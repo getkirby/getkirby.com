@@ -1,0 +1,14 @@
+Title: devslove.it
+
+----
+
+Category: Podcast
+
+----
+
+Text: Bastian talked to Dominik and Alexander from the devslove.it podcast about Kirby and how to develop a Content Management System. 🎧
+
+----
+
+
+Link: http://podcast.devslove.it
