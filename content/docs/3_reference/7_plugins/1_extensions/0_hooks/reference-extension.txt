@@ -72,6 +72,23 @@ Kirby::plugin('your/plugin', [
 ]);
 ```
 
+If you want to register more than one function to a hook, you can simple pass an array of functions:
+
+```php
+Kirby::plugin('your/plugin', [
+    'hooks' => [
+        'page.delete:before' => [
+					 function ($page) {
+            	// do something before a page gets deleted
+        	 },
+					 function ($page) {
+            	// do something else before a page gets deleted
+        	 }
+				],
+    ]
+]);
+```
+
 ### Wildcard hooks
 
 If you want to register the same hook for multiple events, you can register a wildcard hook (either in your config or in a plugin):
