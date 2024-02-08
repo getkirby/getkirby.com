@@ -22,7 +22,7 @@ Text:
 | srcset | The srcset attribute that is added to link element | `null` |
 | target | The target attribute that is added to link element | `null` |
 | title | The title attribute that is added to img element | `null` |
-| width | The height which is added to img element | `null` |
+| width | The width which is added to img element | `null` |
 
 ### Attribute defaults from config
 
