@@ -129,12 +129,29 @@
 	<script>
 	const map = L.map('map', { scrollWheelZoom: false }).setView([40, 5], 2);
 
-	const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 		subdomains: 'abcd',
 		minZoom: 2,
 		maxZoom: 10
 	}).addTo(map);
+
+	const labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+		subdomains: 'abcd',
+		minZoom: 6,
+		maxZoom: 10,
+		opacity: 0.4
+	});
+
+	map.on('zoom', () => {
+    const zoom = map.getZoom();
+
+    if (zoom > 6) {
+        return labels.addTo(map);
+    }
+
+    return labels.removeFrom(map);
+});
 
 	const icon = L.divIcon({
 		className: 'marker',
