@@ -28,7 +28,6 @@ return function (App $kirby, Page $page) {
 	}
 
 	$user = [
-		...$oauth->user(),
 		'business'  => '',
 		'country'   => '',
 		'discord'   => '',
@@ -39,26 +38,27 @@ return function (App $kirby, Page $page) {
 		'name'      => '',
 		'mastodon'  => '',
 		'place'     => '',
+		...($oauth->user() ?? []),
 	];
 
 	// normalize the user
 	$user = match ($oauth->provider()) {
 		'discord' => [
 			...$user,
-			'business' => $oauth->user()['company']     ?? '',
-			'discord'  => $oauth->user()['username']    ?? '',
-			'name'     => $oauth->user()['global_name'] ?? '',
+			'business' => $user['company']     ?? '',
+			'discord'  => $user['username']    ?? '',
+			'name'     => $user['global_name'] ?? '',
+			...get()
 		],
 		'github' => [
 			...$user,
-			'business' => $oauth->user()['company'] ?? '',
-			'github'   => $oauth->user()['login']   ?? '',
-			'name'     => $oauth->user()['name']    ?? '',
+			'business' => $user['company'] ?? '',
+			'github'   => $user['login']   ?? '',
+			'name'     => $user['name']    ?? '',
+			...get()
 		],
-		default => null
+		default => $user
 	};
-
-	$user = [...$user, ...get()];
 
 	return [
 		'events'  => $page->find('events')->children(),
