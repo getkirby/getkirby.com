@@ -14,5 +14,15 @@ return [
 	'paddle'    => [
 		'id'   => 1,
 		'auth' => '',
+	],
+	'oauth' => [
+		'discord' => [
+            'clientId'     => '',
+            'clientSecret' => '',
+		],
+        'github' => [
+            'clientId'     => '',
+            'clientSecret' => '',
+        ]
 	]
 ];

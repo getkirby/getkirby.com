@@ -1,0 +1,43 @@
+{
+	"name": "getkirby/oauth",
+	"description": "Kirby OAuth plugin",
+	"license": "MIT",
+	"version": "1.0.0",
+	"keywords": [
+		"kirby",
+		"cms",
+		"oauth",
+		"github"
+	],
+	"homepage": "https://getkirby.com",
+	"support": {
+		"email": "support@getkirby.com",
+		"issues": "https://github.com/getkirby/cli/issues",
+		"forum": "https://forum.getkirby.com",
+		"source": "https://github.com/getkirby/cli"
+	},
+	"authors": [
+		{
+			"name": "Kirby Team",
+			"email": "support@getkirby.com",
+			"homepage": "https://getkirby.com"
+		}
+	],
+    "require": {
+        "league/oauth2-client": "^2.6",
+        "league/oauth2-github": "^3.0",
+		"php": ">=8.0.0 <=8.3.0",
+		"wohali/oauth2-discord-new": "^1.2"
+  },
+	"autoload": {
+		"psr-4": {
+			"Kirby\\": "src/"
+		}
+	},
+	"config": {
+		"optimize-autoloader": true
+	},
+	"scripts": {
+		"fix": "php-cs-fixer fix"
+	}
+}

@@ -8,18 +8,15 @@
 		</p>
 	</header>
 
-	<?php if ($message): ?>
-	<aside class="block box box--<?= $message['type'] ?> mb-12">
-		<?php snippet('kirbytext/box', [
-			'type' => $message['type'],
-			'text' => $message['text']
-		]) ?>
-	</aside>
-	<?php endif ?>
-
 	<?php snippet('templates/meet/events', ['events' => $events]) ?>
 	<?php snippet('templates/meet/map', ['people' => $people]) ?>
+
+	<?php if ($oauth->isLoggedIn()): ?>
 	<?php snippet('templates/meet/form') ?>
+	<?php else: ?>
+	<?php snippet('templates/meet/login') ?>
+	<?php endif ?>
+
 	<?php snippet('templates/meet/how-to') ?>
 	<?php snippet('templates/meet/gallery', ['gallery' => $gallery]) ?>
 </article>

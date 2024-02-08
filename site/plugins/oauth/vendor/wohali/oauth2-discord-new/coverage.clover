@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1508109845">
+  <project timestamp="1508109845">
+    <package name="Wohali\OAuth2\Client\Provider">
+      <file name="/home/joant/oauth2-discord-new/src/Provider/Discord.php">
+        <class name="Discord" namespace="Wohali\OAuth2\Client\Provider">
+          <metrics complexity="8" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="20" coveredelements="20"/>
+        </class>
+        <line num="38" type="method" name="getBaseAuthorizationUrl" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="40" type="stmt" count="3"/>
+        <line num="50" type="method" name="getBaseAccessTokenUrl" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="52" type="stmt" count="4"/>
+        <line num="62" type="method" name="getResourceOwnerDetailsUrl" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="64" type="stmt" count="1"/>
+        <line num="75" type="method" name="getScopeSeparator" visibility="protected" complexity="1" crap="1" count="3"/>
+        <line num="77" type="stmt" count="3"/>
+        <line num="88" type="method" name="getDefaultScopes" visibility="protected" complexity="1" crap="1" count="2"/>
+        <line num="91" type="stmt" count="2"/>
+        <line num="92" type="stmt" count="2"/>
+        <line num="93" type="stmt" count="2"/>
+        <line num="94" type="stmt" count="2"/>
+        <line num="96" type="stmt" count="2"/>
+        <line num="107" type="method" name="checkResponse" visibility="protected" complexity="2" crap="2" count="3"/>
+        <line num="109" type="stmt" count="3"/>
+        <line num="110" type="stmt" count="1"/>
+        <line num="112" type="stmt" count="2"/>
+        <line num="121" type="method" name="createResourceOwner" visibility="protected" complexity="1" crap="1" count="1"/>
+        <line num="123" type="stmt" count="1"/>
+        <metrics loc="125" ncloc="59" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="20" coveredelements="20"/>
+      </file>
+      <file name="/home/joant/oauth2-discord-new/src/Provider/DiscordResourceOwner.php">
+        <class name="DiscordResourceOwner" namespace="Wohali\OAuth2\Client\Provider">
+          <metrics complexity="8" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="17" coveredelements="17"/>
+        </class>
+        <line num="35" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="37" type="stmt" count="1"/>
+        <line num="38" type="stmt" count="1"/>
+        <line num="45" type="method" name="getId" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="47" type="stmt" count="1"/>
+        <line num="55" type="method" name="getUsername" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="57" type="stmt" count="1"/>
+        <line num="65" type="method" name="getDiscriminator" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="67" type="stmt" count="1"/>
+        <line num="75" type="method" name="getAvatarHash" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="77" type="stmt" count="1"/>
+        <line num="85" type="method" name="getVerified" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="87" type="stmt" count="1"/>
+        <line num="95" type="method" name="getEmail" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="97" type="stmt" count="1"/>
+        <line num="105" type="method" name="toArray" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="107" type="stmt" count="1"/>
+        <metrics loc="109" ncloc="53" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="17" coveredelements="17"/>
+      </file>
+    </package>
+    <package name="Wohali\OAuth2\Client\Provider\Exception">
+      <file name="/home/joant/oauth2-discord-new/src/Provider/Exception/DiscordIdentityProviderException.php">
+        <class name="DiscordIdentityProviderException" namespace="Wohali\OAuth2\Client\Provider\Exception">
+          <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
+        </class>
+        <line num="29" type="method" name="clientException" visibility="public" complexity="2" crap="2" count="1"/>
+        <line num="31" type="stmt" count="1"/>
+        <line num="32" type="stmt" count="1"/>
+        <line num="33" type="stmt" count="1"/>
+        <line num="34" type="stmt" count="1"/>
+        <line num="45" type="method" name="fromResponse" visibility="protected" complexity="1" crap="1" count="1"/>
+        <line num="47" type="stmt" count="1"/>
+        <metrics loc="49" ncloc="22" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
+      </file>
+    </package>
+    <metrics files="3" loc="283" ncloc="134" classes="3" methods="17" coveredmethods="17" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="27" elements="44" coveredelements="44"/>
+  </project>
+</coverage>

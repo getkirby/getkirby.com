@@ -2,13 +2,33 @@
 
 	<header class="flex justify-between items-center mb-6">
 		<h2 class="h2">Community map</h2>
-		<button
-			class="btn btn--filled"
-			onclick="document.querySelector('#form').showModal()"
-		>
-			<?= icon('account') ?>
-			Add yourself
-		</button>
+
+		<?php if ($oauth->isLoggedIn() === false) : ?>
+			<button
+				class="btn btn--filled"
+				onclick="document.querySelector('#login').showModal()"
+			>
+				<?= icon('account') ?>
+				Add me
+			</button>
+		<?php else : ?>
+		<div class="flex items-center" style="gap: var(--spacing-3)">
+			<button
+				class="btn btn--filled"
+				onclick="document.querySelector('#form').showModal()"
+			>
+				<?= icon('account') ?>
+				Add me
+			</button>
+			<a
+				class="btn btn--filled"
+				href="/oauth/logout"
+			>
+				<?= icon('logout') ?>
+				Log out
+			</a>
+		</div>
+		<?php endif ?>
 	</header>
 
 	<div class="map rounded-xl" id="map"></div>

@@ -6,17 +6,18 @@ use Kirby\Community\Member;
 
 return function (App $kirby, Page $page) {
 	$message = null;
+	$oauth = oauth();
 
 	// if form is submitted, create a GitHub PR
 	if ($kirby->request()->is('POST')) {
 		try {
-			$input   = array_map('trim', get());
-			$member  = Member::create(...$input);
-			$pr      = $member->pr();
+			$input  = array_map('trim', get());
+			$member = Member::create(...$input);
+			$pr     = $member->pr();
 
 			$message = [
 				'type' => 'success',
-				'text' => "Thank you for your submission. We will review your entry and add it as soon as possible: <a href='$pr' class='link'>track the progress</a>."
+				'pr'   => $pr
 			];
 		} catch (Throwable $e) {
 			$message = [
@@ -26,11 +27,45 @@ return function (App $kirby, Page $page) {
 		}
 	}
 
+	$user = [
+		...$oauth->user(),
+		'business'  => '',
+		'country'   => '',
+		'discord'   => '',
+		'forum'     => '',
+		'github'    => '',
+		'instagram' => '',
+		'linkedin'  => '',
+		'name'      => '',
+		'mastodon'  => '',
+		'place'     => '',
+	];
+
+	// normalize the user
+	$user = match ($oauth->provider()) {
+		'discord' => [
+			...$user,
+			'business' => $oauth->user()['company']     ?? '',
+			'discord'  => $oauth->user()['username']    ?? '',
+			'name'     => $oauth->user()['global_name'] ?? '',
+		],
+		'github' => [
+			...$user,
+			'business' => $oauth->user()['company'] ?? '',
+			'github'   => $oauth->user()['login']   ?? '',
+			'name'     => $oauth->user()['name']    ?? '',
+		],
+		default => null
+	};
+
+	$user = [...$user, ...get()];
+
 	return [
-		'countries' => option('countries'),
-		'events'    => $page->find('events')->children(),
-		'gallery'   => $page->find('gallery')->images()->sortBy('sort'),
-		'message'   => $message,
-		'people'    => $page->find('people')->children()
+		'events'  => $page->find('events')->children(),
+		'gallery' => $page->find('gallery')->images()->sortBy('sort'),
+		'message' => $message,
+		'oauth'   => $oauth,
+		'people'  => $page->find('people')->children(),
+		'user'    => $user
 	];
 };
