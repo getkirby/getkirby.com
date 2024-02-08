@@ -20,8 +20,8 @@ class Github
 			])
 		]);
 
-		if ($response->code() !== 200) {
-			throw Exception('Failed to create branch');
+		if ($response->code() !== 200 && $response->code() !== 201) {
+			throw new Exception('Failed to create branch');
 		}
 
 		return $response;
@@ -42,8 +42,8 @@ class Github
 			])
 		]);
 
-		if ($response->code() !== 200) {
-			throw Exception('Failed to create file');
+		if ($response->code() !== 200 && $response->code() !== 201) {
+			throw new Exception('Failed to create file');
 		}
 
 		return $response;
@@ -62,8 +62,8 @@ class Github
 			])
 		]);
 
-		if ($response->code() !== 200) {
-			throw Exception('Failed to create pull request');
+		if ($response->code() !== 200 && $response->code() !== 201) {
+			throw new Exception('Failed to create pull request');
 		}
 
 		return $response;
