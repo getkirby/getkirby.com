@@ -85,6 +85,11 @@
 	.marker-cluster span {
 		line-height: 2rem;
 	}
+	.leaflet-marker-icon svg {
+		width: 8px;
+		height: 8px;
+		fill: var(--color-gray-800);
+	}
 
 	.marker-cluster-small {
 		background-color: hsl(var(--color-blue-hs), var(--color-blue-l-300), 0.6);
@@ -118,26 +123,12 @@
 		maxZoom: 10
 	}).addTo(map);
 
-	const iconCommunity = L.DivIcon.extend({
-		options: {
-			className: "marker",
-			html: `<?= icon('icon-outline') ?>`,
-			iconSize: [16, 16],
-			iconAnchor: [8, 8],
-			popupAnchor: [0, -8]
-		}
-	});
-
-	const iconPartner = iconCommunity.extend({
-		options: {
-			html: `<?= icon('icon-blank') ?>`,
-		}
-	});
-
-	const iconTeam = iconCommunity.extend({
-		options: {
-			html: `<?= icon('icon-fill') ?>`,
-		}
+	const icon = L.divIcon({
+		className: 'marker',
+		html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path></svg>`,
+		iconSize: [8, 8],
+		iconAnchor: [4, 4],
+		popupAnchor: [0, 0]
 	});
 
 	const markers = L.markerClusterGroup({
@@ -150,11 +141,7 @@
 		markers.addLayer(
 			L.marker(
 				[<?= $person->latitude() ?>, <?= $person->longitude() ?>],
-				{ icon: new <?= match (true) {
-					$person->type() == 'Core team'   => 'iconTeam',
-					$person->partner()->isNotEmpty() => 'iconPartner',
-					default                          => 'iconCommunity'
-				} ?> }
+				{ icon }
 			).bindPopup(
 				`
 	<div class="p-3 <?= $person->partner()->isNotEmpty() ? 'partner' : '' ?> <?= $person->type() == 'Core team' ? 'team' : '' ?>">
