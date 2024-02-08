@@ -29,19 +29,6 @@
 				</select>
 			</div>
 		</div>
-		<div class="field">
-			<label class="label">Interested in in</label>
-			<div class="columns" style="--columns: 2; gap: var(--spacing-1)">
-				<label class="checkbox">
-					<input type="checkbox" name="interests[]" value="Meetups">
-					Meetups
-				</label>
-				<label class="checkbox">
-					<input type="checkbox" name="interests[]" value="Collaboration">
-					Collaboration
-				</label>
-			</div>
-		</div>
 		<div class="field mb-6">
 			<label class="label">Contact details</label>
 			<div class="columns" style="--columns: 2; --gap: var(--spacing-1)">

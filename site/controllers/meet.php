@@ -21,7 +21,6 @@ function createContactGithubPr(Page $page): string
 	$business  = get('business');
 	$place     = get('place');
 	$country   = get('country');
-	$interests = implode(',', get('interests'));
 	$type      = get('type');
 	$forum	   = get('forum');
 	$github    = get('github');
@@ -40,7 +39,6 @@ function createContactGithubPr(Page $page): string
 		'Country'   => $country,
 		'Latitude'  => $latitude,
 		'Longitude' => $longitude,
-		'Interests' => $interests,
 		'Forum'     => $forum,
 		'Github'    => $github,
 		'Discord'   => $discord,

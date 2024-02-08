@@ -10,10 +10,6 @@ Country: Austria
 
 ----
 
-Interests: Meetups
-
-----
-
 Latitude: 48.2083537
 
 ----

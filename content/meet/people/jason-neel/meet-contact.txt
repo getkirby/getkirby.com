@@ -10,14 +10,6 @@ Country: United States
 
 ----
 
-Interests: Meetups
-
-----
-
-Expertise:
-
-----
-
 Latitude: 39.629681
 
 ----

@@ -14,10 +14,6 @@ Country: UK
 
 ----
 
-Interests: Meetups
-
-----
-
 Latitude: 55.953346
 
 ----

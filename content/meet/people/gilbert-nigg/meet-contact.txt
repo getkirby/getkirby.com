@@ -10,10 +10,6 @@ Country: Switzerland
 
 ----
 
-Interests: Meetups,Collaboration
-
-----
-
 Type: Agency/Studio/Team
 
 ----

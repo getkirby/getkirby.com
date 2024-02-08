@@ -10,10 +10,6 @@ Country: Germany
 
 ----
 
-Interests: Meetups,Collaboration
-
-----
-
 Type: Agency/Studio/Team
 
 ----

@@ -14,10 +14,6 @@ Country: Germany
 
 ----
 
-Interests: Meetups
-
-----
-
 Latitude: 48.31202
 
 ----

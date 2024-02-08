@@ -14,10 +14,6 @@ Country: Netherlands
 
 ----
 
-Interests: Meetups
-
-----
-
 Latitude: 52.0768851
 
 ----

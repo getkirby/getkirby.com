@@ -6,7 +6,7 @@
 			class="btn btn--filled"
 			onclick="document.querySelector('#form').showModal()"
 		>
-			<?= icon('icon-outline') ?>
+			<?= icon('account') ?>
 			Add yourself
 		</button>
 	</header>
@@ -42,13 +42,6 @@
 	}
 	.leaflet-popup-content a {
 		color: var(--color-text);
-	}
-	.leaflet-popup-content kbd {
-		font-size: 0.65rem;
-		padding: var(--spacing-1);
-		border-radius: var(--rounded-xs);
-		background: var(--color-back);
-		margin-inline-end: var(--spacing-2);
 	}
 	.leaflet-popup-content .flex {
 		gap: var(--spacing-2);
@@ -145,42 +138,34 @@
 			).bindPopup(
 				`
 	<div class="p-3 <?= $person->partner()->isNotEmpty() ? 'partner' : '' ?> <?= $person->type() == 'Core team' ? 'team' : '' ?>">
-		<header class="mb-3">
-			<h4 class="h5"><?= $person->name() ?></h4>
+		<h4 class="h5"><?= $person->name() ?></h4>
 
-			<?php if ($person->partner()->isNotEmpty()): ?>
-			<div class="flex text-xs">
-				<?= match ($person->partner()->value()) {
-					'Certified Partner' => icon('verified'),
-					default             => icon('icon-blank')
-				 } ?>
-				<?= $person->partner() ?>
-			</div>
-			<?php endif ?>
-
-			<?php if ($person->business()->isNotEmpty()): ?>
-			<div class="flex text-xs">
-				<?= match ($person->type()->value) {
-					'Core team'          => icon('icon-fill'),
-					'Freelancer'         => icon('user'),
-					'Agency/Studio/Team' => icon('users'),
-					default              => icon('store')
+		<?php if ($person->partner()->isNotEmpty()): ?>
+		<div class="flex text-xs">
+			<?= match ($person->partner()->value()) {
+				'Certified Partner' => icon('verified'),
+				default             => icon('icon-blank')
 				} ?>
-				<?= $person->business() ?>
-			</div>
-			<?php endif ?>
+			<?= $person->partner() ?>
+		</div>
+		<?php endif ?>
 
-			<div class="flex text-xs">
-				<?= icon('map') ?>
-				<?= $person->place() ?>, <?= $person->country() ?>
-			</div>
-		</header>
+		<?php if ($person->business()->isNotEmpty()): ?>
+		<div class="flex text-xs">
+			<?= match ($person->type()->value) {
+				'Core team'          => icon('icon-fill'),
+				'Freelancer'         => icon('user'),
+				'Agency/Studio/Team' => icon('users'),
+				default              => icon('store')
+			} ?>
+			<?= $person->business() ?>
+		</div>
+		<?php endif ?>
 
-		<aside class="mb-1">
-			<?php foreach ($person->interests()->split() as $interest): ?>
-			<kbd><?= $interest ?></kbd>
-			<?php endforeach ?>
-		</aside>
+		<div class="flex text-xs">
+			<?= icon('map') ?>
+			<?= $person->place() ?>, <?= $person->country() ?>
+		</div>
 	</div>
 
 	<?php if ($person->hasPlatforms()): ?>

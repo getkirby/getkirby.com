@@ -14,10 +14,6 @@ Country: India
 
 ----
 
-Interests: Meetups,Collaboration
-
-----
-
 Type: Agency/Studio/Team
 
 ----

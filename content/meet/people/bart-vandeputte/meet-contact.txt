@@ -10,10 +10,6 @@ Country: Belgium
 
 ----
 
-Interests: Meetups
-
-----
-
 Latitude: 50.84815
 
 ----
