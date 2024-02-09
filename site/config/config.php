@@ -1,11 +1,10 @@
 <?php
 
-use Kirby\Http\Route;
-
 return [
 	'api'        => false,
 	'buy'        => require __DIR__ . '/buy.php',
 	'categories' => require __DIR__ . '/categories.php',
+	'countries'  => require __DIR__ . '/countries.php',
 	'debug'      => true,
 	'features'   => require __DIR__ . '/features.php',
 	'github'     => ['url' => 'https://github.com/getkirby'],
@@ -21,4 +20,8 @@ return [
 		// 'driver' => 'im'
 	],
 	'versions'   => require __DIR__ . '/versions.php',
+	'content' => [
+		'locking' => false,
+		'uuid'    => false
+	],
 ];
