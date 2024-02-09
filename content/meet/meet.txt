@@ -8,7 +8,10 @@ Description: Connect with other Kirby developers around the world or meet face-t
 
 Howto:
 
-1. **It doesn't need to be big:** whether a small get-together at the local pub or hosting in the office of an agency. What counts is to get together with likeminded people. Start small.
-2. **Think about how to spend the time.** What do you prefer? Just chatting with other developers about Kirby, work and life? Sharing lessons learned from projects in short presentations?
-3. **Spread the word.** Let the community know about your event. (email: mail@getkirby.com text: Send us an email) or share it on (link: https://chat.getkirby.com text: Discord class: link) and we will help promote it.
-4. **Take photos.** Not a must and nobody who doesn't like it should be forced to. We really love to see some snaps when people from the community get together. If everyone feels comfortable with it, let us see your happy faces.
+
+1. **It doesn't have to be anything big:** a small get-together at the local pub or an event in an agency's office. What matters is to meet like-minded people. Start small.
+2. **Use the community map to find people nearby.** Maybe get in touch with one or two. Hosting a meetup together can take some pressure off yourself.
+3. **Think about how to spend your time.** What do you prefer? Just chatting with other developers about Kirby, work and life? Sharing lessons learned from projects in short presentations?
+4. **Spread the word.** Let the community know about your event. Share it on (link: https://chat.getkirby.com text: Discord class: link) and the Kirby team will help you promote it.
+5. **Take photos.** Not a must, and nobody should be forced to do so. Of course, we'd love to see some snaps of your meetings, if everyone feels comfortable with it.
+
