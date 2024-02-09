@@ -1,5 +1,5 @@
 <?php if ($events->count() > 0): ?>
-<section class="mb-24">
+<section class="events mb-24">
 	<header class="flex justify-between items-center mb-6">
 		<h2 class="h2">Upcoming events</h2>
 		<a
@@ -25,3 +25,13 @@
 	</ul>
 	<?php endif ?>
 </section>
+
+<style>
+@media (max-width: 40rem) {
+	.events header {
+		flex-direction: column;
+		gap: 1rem;
+		align-items: flex-start;
+	}
+}
+</style>
