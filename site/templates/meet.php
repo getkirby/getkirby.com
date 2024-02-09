@@ -9,14 +9,6 @@
 	</header>
 
 	<?php snippet('templates/meet/events', ['events' => $events]) ?>
-	<?php snippet('templates/meet/map', ['people' => $people]) ?>
-
-	<?php if ($oauth->isLoggedIn()): ?>
-	<?php snippet('templates/meet/form') ?>
-	<?php else: ?>
-	<?php snippet('templates/meet/login') ?>
-	<?php endif ?>
-
 	<?php snippet('templates/meet/how-to') ?>
 	<?php snippet('templates/meet/gallery', ['gallery' => $gallery]) ?>
 </article>

@@ -146,24 +146,4 @@ return [
 			return page('plugins')->render(['filter' => 'published']);
 		}
 	],
-	[
-		'pattern' => 'oauth/login/(:any)',
-		'action'  => function (string $provider) {
-			oauth()->login(
-				provider: $provider,
-				clientId: option('keys.oauth.' . $provider . '.clientId'),
-				clientSecret: option('keys.oauth.' . $provider . '.clientSecret'),
-				redirectUri: url('/oauth/login/' . $provider)
-			);
-
-			go('/meet#add');
-		}
-	],
-	[
-		'pattern' => 'oauth/logout',
-		'action'  => function () {
-			oauth()->logout();
-			go('/meet');
-		}
-	],
 ];

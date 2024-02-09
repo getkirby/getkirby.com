@@ -41,7 +41,7 @@
 				</ul>
 			</li>
 			<li class="has-submenu">
-				<a href="https://chat.getkirby.com">Community</a>
+				<a href="/meet">Community</a>
 				<ul class="menu-2">
 					<li><a href="/meet">Get together</a></li>
 					<li><hr /></li>
