@@ -17,7 +17,7 @@
 			<a href="<?= $event->link() ?>" class="flex items-center justify-between bg-white p-3 rounded shadow">
 				<h3 class="font-bold"><?= $event->title() ?></h3>
 				<p class="color-gray-700">
-					<?= $event->date()->toDate('D j M, H:i') ?>
+					<?= date('D j M, H:i', strtotime('+1 hour', $event->date()->toTimestamp())) ?>
 				</p>
 			</a>
 		</li>
