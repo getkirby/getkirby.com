@@ -5,7 +5,7 @@ Features:
 
 #### Image formats
 
-- **WebP & AVIF support:** With increasingly better browser support for WebP and AVIF on the horizon, optimizing images has become a lot easier. Our image processing engine now supports both formats. (link: docs/guide/templates/resize-images-on-the-fly#image-formats text: Learn more ›)
+- **WebP & AVIF support:** With increasingly better browser support for WebP and AVIF on the horizon, optimizing images has become a lot easier. Our image processing engine now supports both formats. (link: docs/guide/files/resize-images-on-the-fly#image-formats text: Learn more ›)
 
 ```php
 <?= $image->thumb(['width' => 200, 'format' => 'webp']) ?>
