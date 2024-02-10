@@ -17,12 +17,16 @@ Icon: spaceship
 
 ----
 
+Screencast:
+
+(screencast: https://www.youtube.com/watch?v=EDVYjxWMecc title: How to install Kirby in 5 minutes text: We are using PHP's built-in server to create a simple local development environment.)
+
+----
+
 Text:
 
 
-If you stumbled over Kirby recently, take the chance and get you hands on our (link: /try text: instant online demo). Ready to dive into the code and start your first own project? Let's get right to it…
-
-(screencast: https://www.youtube.com/watch?v=EDVYjxWMecc title: How to install Kirby in 5 minutes text: We are using PHP's built-in server to create a simple local development environment.)
+Want to explore Kirby a bit without installing anything first? Check out our (link: /try text: instant online demo).
 
 ## Download and installation
 
@@ -148,3 +152,7 @@ If you encounter any problems, make sure to check our (link: docs/guide/troubles
 The community in the (link: https://forum.getkirby.com/ text: Kirby Forum) is always there to help out whenever you get stuck. It's likely that someone already had the same problem, so using the search function might uncover a solution within seconds. If you can't find a helpful topic, drop us your question.
 
 (…columns)
+
+----
+
+HideToc: true

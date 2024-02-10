@@ -6,9 +6,13 @@ Intro: It often happens that we need the same set of pages or files in multiple 
 
 ----
 
-Text:
+Screencast:
 
 (screencast: https://www.youtube.com/watch?v=FKw3pNOvVBs title: Collections text: Create custom collections of pages (projects, products, blog articles, etc.) and reuse them across your site without repeating yourself.)
+
+----
+
+Text:
 
 ## Define a collection
 

@@ -10,6 +10,12 @@ Thumbnail:  tabs.png
 
 ----
 
+Screencast:
+
+(screencast: https://www.youtube.com/watch?v=yK3gNjWU_5s title: Your first blueprints text: The heart and soul of your Kirby installation: Learn how to create a fully customized admin interface for every page type.)
+
+----
+
 Text:
 
 ## TL;DR
@@ -17,9 +23,6 @@ Text:
 - Blueprints are stored in `/site/blueprints`.
 - Blueprints configure the Panel layout of the site, pages, files and users.
 - Create your own layouts with tabs, columns and sections.
-
-(screencast: https://www.youtube.com/watch?v=yK3gNjWU_5s title: Your first blueprints text: The heart and soul of your Kirby installation: Learn how to create a fully customized admin interface for every page type.)
-
 
 ## Blueprint types
 

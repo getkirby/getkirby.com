@@ -22,7 +22,7 @@ Text:
 
 ## Parts of the documentation
 
-This documentation has <del>three</del> four parts:
+This documentation has four parts:
 
 ### 1. Guide:
 That's where you currently are and where you should start when you are new to Kirby to get an overview on the system.

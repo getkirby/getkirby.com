@@ -18,10 +18,13 @@ Icon: map
 
 ----
 
-Text:
+Screencast:
 
 (screencast: https://www.youtube.com/watch?v=lLQZd64uvPs title: Feel at home in your Kirby installation text: Getting started with Kirby? Let's explore our Starterkit and see where to find stuff.)
 
+----
+
+Text:
 
 ## A peek under the hood: Kirby's folder structure
 
@@ -182,3 +185,7 @@ Kirby has a built-in page cache that makes slow pages with a lot of content supe
 Yes, you read that right. Even though Kirby is a file-based CMS, you can connect parts of it to a MySQL or SQLite database.
 
 (link: docs/guide/virtual-pages/content-from-database text: Learn more ›)
+
+----
+
+Hidetoc: true

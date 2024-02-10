@@ -2,6 +2,11 @@ Title: Debugging
 
 ----
 
+Screencast:
+
+(screencast: https://www.youtube.com/watch?v=GrBbuwRSuMA title: Debug mode text: Kirby's debug mode is super helpful for finding mistakes in your templates, snippets or other parts of your project.)
+
+----
 Text:
 
 ## Debug mode
@@ -11,7 +16,7 @@ Kirby honours your PHP error logging settings by default. If you've switched off
 Especially on your local machine, we recommend to switch on error logging in your `php.ini`. Kirby also has a (link: /docs/reference/system/options/debug text: built-in option) which tries to enforce this:
 
 ```php "/site/config/config.php"
-<?php 
+<?php
 return [
     'debug' => true
 ];
@@ -20,7 +25,7 @@ return [
 Add this to `/site/config/config.php` in order to show errors immediately.
 
 <alert>
-Make sure to disable `debug` mode in production! Displaying PHP errors on a public server can be a serious security risk: 
+Make sure to disable `debug` mode in production! Displaying PHP errors on a public server can be a serious security risk:
 
 - Error messages are displayed with detailed information about the code structure (e.g. file path, class, method)
 - With Whoops enabled, there will be even more detailed information about the code structure
@@ -29,7 +34,6 @@ Make sure to disable `debug` mode in production! Displaying PHP errors on a publ
 In a production environment, always log errors to your PHP error logs.
 </alert>
 
-(screencast: https://www.youtube.com/watch?v=GrBbuwRSuMA title: Debug mode text: Kirby's debug mode is super helpful for finding mistakes in your templates, snippets or other parts of your project.)
 
 ## var_dump
 
