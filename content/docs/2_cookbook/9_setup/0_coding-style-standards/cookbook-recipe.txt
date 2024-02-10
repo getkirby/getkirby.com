@@ -425,3 +425,6 @@ It would be too much to cover these automation options in this recipe. So we lea
 - (link: https://github.com/squizlabs/PHP_CodeSniffer/wiki text: CodeSniffer wiki)
 - (link: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-Ruleset text: Annotated ruleset)
 - (link: https://edorian.github.io/php-coding-standard-generator/#phpcs text: Ruleset generator)
+
+----
+Tags: development

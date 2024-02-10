@@ -14,7 +14,7 @@ Category: text
 
 ----
 
-Description: Kirbytag to wrap text in HTML <kbd> elements including a custom textareaButton for Kirby 4 and sample CSS for styling.
+Description: Kirbytag to wrap text in HTML `<kbd>` elements including a custom textareaButton for Kirby 4 and sample CSS for styling.
 
 ----
 

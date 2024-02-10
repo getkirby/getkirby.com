@@ -5,6 +5,10 @@ return [
 		'active' => true,
 		'type'   => 'file'
 	],
+	'meet' => [
+		'active' => true,
+		'type'   => 'file'
+	],
 	'pages' => [
 		'active' => true,
 		'type'   => 'file',

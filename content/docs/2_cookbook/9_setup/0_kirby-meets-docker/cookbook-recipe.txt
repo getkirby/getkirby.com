@@ -958,3 +958,6 @@ In this recipe, our focus was on giving you a hands-on approach to using Docker 
 ## Thank you
 
 Thanks to (link: https://forum.getkirby.com/u/adspectus/ text: Uwe Gehring) for testing that everything works as expected and for his valuable advice.
+
+----
+Tags: development, local development environment

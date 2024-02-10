@@ -121,3 +121,7 @@ root * /usr/share/caddy
 ```
 
 Here, we're importing/using the two snippets we defined earlier. Also we're setting the root folder for this server, which should point to the absolute filesystem path, where your Kirby files are located.
+
+----
+
+Tags: webserver, deployment, development

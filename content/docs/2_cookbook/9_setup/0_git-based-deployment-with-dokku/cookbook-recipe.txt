@@ -437,3 +437,7 @@ By setting up different workflows, you could choose to set up certain branches t
 - The buildpacks are very minimal, if you want a text editor included inside your container, create a file named `apt-packages` at the root of the repository and add the necessary packages, for example `vim-tiny`. You will also need to install the (link: https://github.com/dokku-community/dokku-apt text: dokku-apt plugin).
 - You can view the nginx/server logs on an app with `dokku logs <appname>`
 - If you are having issues, try turning (link: https://dokku.com/docs/getting-started/troubleshooting/#trace-mode text: trace mode) on with `dokku trace:on`. The output will be significantly more verbose, but may help you pinpoint issues that are otherwise hidden.
+
+----
+
+Tags: deployment

@@ -18,8 +18,9 @@ return [
 			$key = option('keys.hooks');
 
 			if (empty($key) === false && get('key') === $key) {
-				kirby()->cache('pages')->flush();
 				kirby()->cache('diffs')->flush();
+				kirby()->cache('meet')->flush();
+				kirby()->cache('pages')->flush();
 				kirby()->cache('plugins')->flush();
 				kirby()->cache('reference')->flush();
 			}
@@ -145,5 +146,5 @@ return [
 		'action'  => function () {
 			return page('plugins')->render(['filter' => 'published']);
 		}
-	]
+	],
 ];

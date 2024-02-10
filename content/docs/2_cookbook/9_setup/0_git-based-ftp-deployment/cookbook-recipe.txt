@@ -288,3 +288,7 @@ Once the tag is pushed to GitHub, the production workflow starts immediately to 
 
 ##Conclusion
 Now you have a complete guide for a modern staging/production deployment solution with very low server requirements. This guide can be extended in many different directions. Have fun using it.
+
+----
+
+Tags: deployment

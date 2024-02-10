@@ -53,7 +53,7 @@ Let's look at a detailed Reference page to see how you can get the most of it.
 
 1. **Method name**: In our example, the method name is `thumb()`.
 2. **Brief explanation what the method does**: The `thumb()` method creates a thumbnail or modified version of the file.
-3. **A link to the Guide** where available that puts the method into a larger context. Here, the link points to the (link: docs/guide/templates/resize-images-on-the-fly text: Resizing & cropping images) guide page.
+3. **A link to the Guide** where available that puts the method into a larger context. Here, the link points to the (link: docs/guide/files/resize-images-on-the-fly text: Resizing & cropping images) guide page.
 4. **Link to the source code on GitHub**. If a method doesn't have in-depth explanations or examples, it can help to take a look at the source code. This is also useful if you want to modify a method in a model, for example.
 5. **Method signature**, i.e. method name, accepted parameters and data types of these parameters
 6. **Parameters** the methods accepts/expects together with their allowed types, see (link: #parameters text: parameters)

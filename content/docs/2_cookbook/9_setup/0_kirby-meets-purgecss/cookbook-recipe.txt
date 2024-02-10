@@ -153,3 +153,6 @@ Description: A walkthrough on how to install and use PurgeCSS with Kirby.
 ----
 
 Authors: - authors/manuel-steinberg
+
+----
+Tags: development, deployment, performance

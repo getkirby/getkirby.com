@@ -2,7 +2,7 @@
 
 <style>
 .topbar {
-	border-bottom-color: var(--color-white);
+	border-bottom-color: rgba(255,255,255, .1);
 }
 .header,
 .footer h6 {
@@ -19,25 +19,21 @@ html {
 
 <article>
 
-	<h1 class="h1 mb-12 color-white">Made with&nbsp;Kirby</h1>
+	<header class="mb-24">
+		<h1 class="h1 mb-6 color-white">Made with&nbsp;Kirby</h1>
+
+		<div class="text-xl leading-snug max-w-xl">
+			<p>
+				You built something with Kirby? Share it with <span class="color-white">#madeWithKirby</span> on social media or in our <a class="link" href="https://forum.getkirby.com/t/made-with-kirby-and-3/83">forum</a>.
+				Find more inspiring sites and Panel setups on <a class="link" href="https://kirbysites.com">kirbysites.com</a>.
+			</p>
+		</div>
+	</header>
 
 	<div class="mb-12">
 		<?php snippet('templates/cases/cases', [
 			'cases' => collection('cases')->shuffle()
 		]) ?>
 	</div>
-
-	<footer class="h2 columns" style="--columns-sm: 1; --columns-md: 1; --columns: 2; --gap: var(--spacing-12)">
-		<div>
-			<h2>You built something with Kirby?</h2>
-			<p class="color-white">
-				Share your work with <mark class="px-1 rounded">#MadeWithKirby</mark> around the web or in our <a class="link" href="https://forum.getkirby.com/t/made-with-kirby-and-3/83">forum</a>
-			</p>
-		</div>
-		<div>
-			Find more amazing sites and Panel setups on
-			<a class="color-white link" href="https://kirbysites.com">kirbysites.com</a>
-		</div>
-	</footer>
 
 </article>

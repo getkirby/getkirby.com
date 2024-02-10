@@ -25,7 +25,7 @@ We analyse, create & build.
 
 ----
 
-Contactlink: christian.haeringer@acb.studio
+Contactlink: mailto:christian.haeringer@acb.studio
 
 ----
 

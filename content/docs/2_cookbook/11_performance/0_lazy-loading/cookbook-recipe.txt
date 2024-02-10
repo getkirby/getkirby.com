@@ -472,3 +472,8 @@ As a fallback for browsers that don't support native lazy-loading, or if you nee
 - (link: https://imagekit.io/blog/lazy-loading-images-complete-guide/ text: Lazy loading guide)
 - (link: https://web.dev/browser-level-image-lazy-loading/ text: Browser-level image lazy loading)
 - (link: https://developer.mozilla.org/en-US/docs/Web/Performance/Lazy_loading text: MDN Lazy loading)
+
+
+----
+
+Tags: performance

@@ -6,6 +6,7 @@ use Kirby\Cms\Nest;
 use Kirby\Cms\Page;
 use Kirby\Content\Field;
 use Kirby\Data\Data;
+use Kirby\Github\Github;
 use Kirby\Http\Remote;
 use Kirby\Http\Url;
 use Kirby\Toolkit\Obj;
@@ -163,19 +164,7 @@ class PluginPage extends Page
 				return null;
 			}
 
-			$key = option('keys.github');
-			if ($key === null) {
-				return null;
-			}
-
-			$path    = Url::path((string)$repo);
-			$headers = [
-				'Authorization' => 'token ' . $key,
-				'User-Agent' => 'Kirby'
-			];
-
-			$response = Remote::get('https://api.github.com/repos/' . $path . '/releases/latest', compact('headers'));
-
+			$response  = Github::release($repo);
 			$latestTag = $response->json()['tag_name'] ?? false;
 
 			// GitHub returns following HTTP response status codes:

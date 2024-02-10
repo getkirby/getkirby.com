@@ -1,0 +1,74 @@
+.dialog[open] {
+	font-size: var(--text-sm);
+	margin: auto;
+	background: var(--color-light);
+	width: 50rem;
+	box-shadow: var(--shadow-2xl);
+	border-radius: var(--rounded);
+}
+
+.dialog::backdrop {
+	background: rgba(0, 0, 0, .7);
+}
+
+body:has(.dialog[open]) {
+	overflow: hidden;
+}
+
+.dialog-form .field+.field {
+	margin-top: var(--spacing-6);
+}
+
+.dialog-form .label {
+	display: block;
+	font-weight: var(--font-bold);
+	margin-bottom: var(--spacing-2);
+}
+
+.dialog-form .label abbr {
+	text-decoration: none;
+	color: var(--color-red-500);
+	margin-left: .125rem;
+	display: none;
+}
+
+.dialog-form .field:has(*:invalid) .label abbr {
+	display: inline;
+}
+
+.dialog-form .input {
+	height: 2.25rem;
+	background: var(--color-white);
+	padding: var(--spacing-2);
+	border-radius: var(--rounded-sm);
+	box-shadow: 0px 0px 0px 1px var(--color-border);
+}
+
+.dialog-form select.input {
+	appearance: none;
+}
+
+.dialog-form .checkbox {
+	height: 2.25rem;
+	display: flex;
+	align-items: center;
+	color: var(--color-black);
+	padding: var(--spacing-2) var(--spacing-3);
+	background: var(--color-white);
+	border-radius: var(--rounded-sm);
+	box-shadow: 0px 0px 0px 1px var(--color-border);
+	gap: var(--spacing-3);
+	cursor: pointer;
+}
+
+.dialog .buttons {
+	margin-top: var(--spacing-8);
+	display: flex;
+	gap: .75rem;
+}
+
+.dialog .buttons .btn {
+	flex-basis: 50%;
+	flex-grow: 1;
+}
+
