@@ -24,6 +24,11 @@
 							<?php endif ?>
 						</header>
 					<?php endif ?>
+					<?php if ($screencast = $slots->screencast()): ?>
+						<?= $screencast ?>
+					<?php else: ?>
+						<?php snippet('screencast') ?>
+					<?php endif ?>
 
 					<?php if ($toc = $slots->toc()): ?>
 						<?= $toc ?>
