@@ -6,6 +6,12 @@ Intro: Files and folders are Kirby's primary data source in which you can organi
 
 ----
 
+Screencast:
+
+(screencast: https://www.youtube.com/watch?v=zUPqqrhbcR8 title: The content folder text: The heart and soul of your Kirby installation: Let's learn how to create pages and add content with simple text files and folders. )
+
+----
+
 Text:
 
 ## Files and folders
@@ -16,7 +22,6 @@ If you create a folder called `blog` as direct child of the `content` folder, it
 
 Page folders can serve as pages in their own right, i.e. only contain the content from their own folder, or they can serve as data containers for their parents, or they can be used in other parts of the project.
 
-(screencast: https://www.youtube.com/watch?v=zUPqqrhbcR8 title: The content folder text: The heart and soul of your Kirby installation: Let's learn how to create pages and add content with simple text files and folders. )
 
 All content you create in the backend can also just serve as a data store, ready to be consumed in your SPA or other types of media.
 

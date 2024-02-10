@@ -11,6 +11,12 @@ Intro: Templates should contain as little code as possible to separate logic and
 
 ----
 
+Screencast:
+
+(screencast: https://www.youtube.com/watch?v=Im2bx2WytPc title: Stay in control with controllers text: Controllers are a great way to move logic for your templates into a separate file.)
+
+----
+
 Text:
 
 ## TL;DR
@@ -20,7 +26,6 @@ Text:
 - A controller must have the same file name as the corresponding template file.
 - Save controllers in `/site/controllers`.
 
-(screencast: https://www.youtube.com/watch?v=Im2bx2WytPc title: Stay in control with controllers text: Controllers are a great way to move logic for your templates into a separate file.)
 
 ## The controllers directory
 

@@ -14,6 +14,12 @@ Intro: Snippets are smaller blocks of code that you can reuse across templates. 
 
 ----
 
+Screencast:
+
+(screencast: https://www.youtube.com/watch?v=CTOoDE9z-WA title: Make your life easier with snippets text: A great way to clean up your templates and reuse parts of your templates multiple times.)
+
+----
+
 Text:
 
 ## Use cases
@@ -21,8 +27,6 @@ Text:
 Typical examples in the Starterkit are the `header.php`, `footer.php` and `menu.php` snippets that are used in every template.
 
 Snippets are stored in the `/site/snippets` folder and like templates, they have the extension `.php`.
-
-(screencast: https://www.youtube.com/watch?v=CTOoDE9z-WA title: Make your life easier with snippets text: A great way to clean up your templates and reuse parts of your templates multiple times.)
 
 ## Using snippets
 

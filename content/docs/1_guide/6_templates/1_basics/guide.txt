@@ -16,6 +16,12 @@ Templates contain the HTML for your pages, spiced up with some PHP to dynamicall
 
 ----
 
+Screencast:
+
+(screencast: https://www.youtube.com/watch?v=bmz6NYUNWPk title: Your first template text: Connect the content from your content folder with your static HTML and bring your pages to life.)
+
+----
+
 Text:
 
 ## TL;DR
@@ -24,7 +30,6 @@ Text:
 - To create a new template for a page, create a .php file with a filename that matches the filename of the content file
 - You can use the `$page`, `$site` and `$pages` variables to easily access the content of your pages/site
 
-(screencast: https://www.youtube.com/watch?v=bmz6NYUNWPk title: Your first template text: Connect the content from your content folder with your static HTML and bring your pages to life.)
 
 ## Naming your templates
 

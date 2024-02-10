@@ -6,10 +6,13 @@ Intro: Fields are an essential part of the configuration and have very powerful 
 
 ----
 
-Text:
+Screencasts:
 
 (screencast: https://www.youtube.com/watch?v=cOUmDlvsPaE title: Fun with fields text: Learn how to create intuitive blueprints for your editors, how to create field layouts, inline help and more.)
 
+----
+
+Text:
 
 ## Naming fields
 
