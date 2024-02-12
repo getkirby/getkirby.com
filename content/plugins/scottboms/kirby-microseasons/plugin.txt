@@ -14,10 +14,6 @@ Category: dates
 
 ----
 
-Subcategory: utilities
-
-----
-
 Description: Kirby plugin that will render the current Japanese micro season in a template. Includes various configuration options.
 
 ----
@@ -30,4 +26,4 @@ Example:
 
 ----
 
-Versions: 4
+Versions: 3,4

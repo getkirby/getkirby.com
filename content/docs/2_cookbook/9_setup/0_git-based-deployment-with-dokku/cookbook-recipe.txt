@@ -33,9 +33,11 @@ According to the (link: https://dokku.com/docs/getting-started/installation/#wha
 
 Behind the scenes, Dokku makes use of Docker containerization to run any number of applications on your server. It allows you to essentially create your own PaaS or something like (link: https://www.heroku.com/ text: Heroku) where you can deploy and manage your apps. In fact, Dokku will make use of the official (link: https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-php text: Heroku PHP Buildpack) to run your Kirby site.
 
+For the most recent Dokku installation requirements/commands, please double check https://dokku.com/docs/getting-started/installation/
+
 ## Prerequisites and Requirements
 - Access to cloud servers such as (link: https://www.hetzner.com/ text: Hetzner) or (link: https://digitalocean.com text: Digital Ocean)
-- A fresh installation of Ubuntu 18.04/20.04 x64, Debian 9+ x64 or CentOS 7 x64 (experimental) with the FQDN set
+- A fresh installation of Ubuntu 20.04/22.04 x64, Debian 10+ x64 or CentOS 7 x64 (experimental) with the FQDN set
 - At least 1 GB of system memory. (link: https://dokku.com/docs/getting-started/advanced-installation/#vms-with-less-than-1gb-of-memory text: Workaround for less than 1GB)
 - Basic familiarity with Linux and the command line
 - (link: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git text: Git) and (link: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos text: composer) installed locally
@@ -57,8 +59,8 @@ Start a fresh cloud server instance (in my case, I will be using Ubuntu 20.04 x6
 ```bash
 # ON SERVER
 # for debian systems, installs Dokku via apt-get
-wget https://raw.githubusercontent.com/dokku/dokku/v0.26.6/bootstrap.sh;
-sudo DOKKU_TAG=v0.26.6 bash bootstrap.sh
+wget -NP . https://dokku.com/install/v0.33.5/bootstrap.sh
+sudo DOKKU_TAG=v0.33.5 bash bootstrap.sh
 ```
 
 Then connect your SSH key (i.e. the public key on your local machine, or wherever you plan to deploy from) and set up the domain accordingly.
