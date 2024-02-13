@@ -29,6 +29,30 @@ Kirby::plugin('my/blockModels', [
 ]);
 ```
 
+You may also load your model class from a different file. Be aware you have to add the file to the classloader manually:
+
+```php "/site/plugins/block-models/models/heading.php"
+class HeadingBlock extends Block
+{
+    public function toHtml(): string
+    {
+        return '<h1>Custom HTML for headings</h1>';
+    }
+}
+```
+
+```php "/site/plugins/index.php"
+load([
+    'HeadingBlock' => __DIR__ . '/models/heading.php'
+]);
+
+Kirby::plugin('my/blockModels', [
+    'blockModels' => [
+        'heading' => HeadingBlock::class
+    ]
+]);
+```
+
 ## Overwriting the default block class
 
 You can also overwrite the default `Kirby\Cms\Block` model with a custom class.
