@@ -144,3 +144,7 @@ Description: Create different templates for different kinds of content.
 ----
 
 Authors: - authors/sonja-broda
+
+----
+
+Tags: blogging

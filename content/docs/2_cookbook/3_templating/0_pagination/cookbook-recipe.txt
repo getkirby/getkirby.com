@@ -131,3 +131,7 @@ Description: Use pagination to divide content into a list of digestible chunks.
 ----
 
 Authors: - authors/bastian-allgeier
+
+----
+
+Tags: pagination, collections

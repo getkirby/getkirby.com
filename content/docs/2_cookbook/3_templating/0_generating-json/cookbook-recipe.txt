@@ -253,3 +253,7 @@ Description: Create a JSON representation of your blog content in Kirby.
 ----
 
 Authors: - authors/bastian-allgeier
+
+----
+
+Tags: content representations

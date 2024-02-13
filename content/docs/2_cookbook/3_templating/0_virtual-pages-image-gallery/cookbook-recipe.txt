@@ -611,3 +611,7 @@ Description: Create virtual pages from a set of uploaded images and their meta d
 ----
 
 Authors: - authors/sonja-broda
+
+----
+
+Tags: virtual pages

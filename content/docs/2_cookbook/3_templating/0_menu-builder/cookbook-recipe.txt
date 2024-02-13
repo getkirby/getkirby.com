@@ -270,3 +270,7 @@ Description: Create custom menus from the Panel leveraging the power of the page
 ----
 
 Authors: - authors/sonja-broda
+
+----
+
+Tags: navigation, menu

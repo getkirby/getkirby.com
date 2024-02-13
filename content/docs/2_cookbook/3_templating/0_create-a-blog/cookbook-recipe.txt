@@ -296,3 +296,7 @@ Description: Set up a blog system with an overview, articles, tags, feeds and mo
 ----
 
 Authors: - authors/bastian-allgeier
+
+----
+
+Tags: blogging

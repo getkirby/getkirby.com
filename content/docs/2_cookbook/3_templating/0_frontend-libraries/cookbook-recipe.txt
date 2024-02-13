@@ -187,8 +187,9 @@ Frontend libraries often contain links to CDNs from which you can load the requi
 - (link: docs/cookbook/extensions/kirby-loves-cdn text: Kirby loves CDN)
 
 
+----
 
-
+Tags: assets
 
 
 

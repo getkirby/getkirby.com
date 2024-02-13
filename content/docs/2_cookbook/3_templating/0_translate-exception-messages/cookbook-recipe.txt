@@ -88,3 +88,6 @@ Then use this option in your code:
 Kirby\Toolkit\I18n::$locale = option('locale');
 ```
 
+----
+
+Tags: i18n

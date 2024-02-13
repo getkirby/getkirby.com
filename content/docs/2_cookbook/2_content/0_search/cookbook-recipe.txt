@@ -149,3 +149,7 @@ Description: Learn how to build a simple search for your site or sections of you
 ----
 
 Authors: - authors/bastian-allgeier
+
+----
+
+Tags: collections, search

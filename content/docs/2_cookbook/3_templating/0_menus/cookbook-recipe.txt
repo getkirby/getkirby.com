@@ -298,3 +298,7 @@ Description: Create any kind of menu you need for your project.
 ----
 
 Authors: - authors/bastian-allgeier
+
+----
+
+Tags: navigation, menu

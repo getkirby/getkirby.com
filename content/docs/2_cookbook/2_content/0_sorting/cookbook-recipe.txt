@@ -252,3 +252,6 @@ Description: Use Kirby's API to sort your content by all sorts of criteria.
 ----
 
 Authors: - authors/sonja-broda
+
+----
+Tags: collections, sorting

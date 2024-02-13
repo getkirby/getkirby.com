@@ -53,3 +53,6 @@ Description: Create a previous/next navigation for your site.
 ----
 
 Authors: - authors/sonja-broda
+
+----
+Tags: navigation

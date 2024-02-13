@@ -337,3 +337,7 @@ Description: Add a load more button to your listings and append items via Ajax.
 ----
 
 Authors: - authors/sonja-broda
+
+----
+
+Tags: ajax

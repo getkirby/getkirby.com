@@ -57,16 +57,16 @@ fields:
     label: Category
     type: select
     options:
-      "Design": 
+      "Design":
         en: Design
         de: Design
       "Architecture":
         en: Architecture
         de: Architektur
-      "Photography": 
+      "Photography":
         en: Photography
         de: Fotografie
-      "3D": 
+      "3D":
         en: 3D
         de: 3D
       "Web design":
@@ -117,7 +117,7 @@ return [
         'en_US'
     ],
     'name' => 'English',
-    'translations' => [      
+    'translations' => [
         'design'       => 'Design',
         'architecture' => 'Architecture',
         'photography'  => 'Photography',
@@ -196,3 +196,7 @@ Description: Get text labels for your option values from fields
 ----
 
 Authors: - authors/sonja-broda
+
+----
+
+Tags: i18n

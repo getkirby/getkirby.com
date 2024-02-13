@@ -176,7 +176,7 @@ Here we use the `urldecode()`d page slug as our filter value.
             </ul>
         </article>
     <?php endforeach ?>
-<?php else : ?>    
+<?php else : ?>
     <div>No results for tag <?= $tag ?></div>
 <?php endif ?>
 <?php snippet('footer') ?>
@@ -193,3 +193,8 @@ Published: 2019-04-23
 ----
 
 Authors: - authors/sonja-broda
+
+----
+----
+Tags: filtering
+Tags: filtering

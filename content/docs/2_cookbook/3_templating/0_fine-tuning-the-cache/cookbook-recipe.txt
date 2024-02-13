@@ -4,7 +4,7 @@ Title: Quicktip: Fine-tuning cache settings
 
 Text:
 
-(link: docs/guide/cache text: Cache options) are set via the `config.php` file. To prevent caching for certain pages, we can use the `ignore` option and either provide a list of page IDs to be ignored, or a callback function that returns a boolean for more control. 
+(link: docs/guide/cache text: Cache options) are set via the `config.php` file. To prevent caching for certain pages, we can use the `ignore` option and either provide a list of page IDs to be ignored, or a callback function that returns a boolean for more control.
 
 However, we can use this callback to make excluding pages from the cache much more dynamic without having to return to the `config` file every time we made some changes that require the cache settings to be adapted.
 
@@ -101,3 +101,7 @@ Description: Control caching from a blueprint option or a field
 ----
 
 Authors: - authors/sonja-broda
+
+----
+
+Tags: caching

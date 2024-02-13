@@ -84,12 +84,12 @@ class Book
     {
         return $this->publisher;
     }
-    
+
     public function getIsbn(): string
     {
         return $this->isbn;
     }
-      
+
     public function getType(): string
     {
         return $this->type;
@@ -114,7 +114,7 @@ class Book
     {
         $this->publisher = $publisher;
     }
-    
+
     public function setIsbn(string $isbn): void
     {
         $this->isbn = $isbn;
@@ -124,7 +124,7 @@ class Book
     {
         $this->type = $type;
     }
-    
+
     public function isEbook(): bool
     {
         return $this->type === 'ebook';
@@ -143,7 +143,7 @@ For starters, we define our new `Book` class with the keyword `class`. Inside th
 
 #### Visibility
 
-Class properties (variables and constants) and methods can have different (link: https://www.php.net/manual/en/language.oop5.visibility.php text: visibility statuses): private, protected or public. 
+Class properties (variables and constants) and methods can have different (link: https://www.php.net/manual/en/language.oop5.visibility.php text: visibility statuses): private, protected or public.
 
 We define a protected property with `protected` followed by the property name, e.g. `protected $author`. The properties of a class usually should not be public to prevent users from assigning unexpected values.
 
@@ -258,7 +258,7 @@ Once you are ready, let's produce a deliberate error again with this code:
 ```php "/book/index.php"
 // …
 $book = null;
-echo $book->getAuthor(); 
+echo $book->getAuthor();
 ```
 The result: "Fatal error: Uncaught Error: Call to a member function getAuthor() on null".
 
@@ -307,7 +307,7 @@ But enough theory, let's just try it out with a little help of more coffee, and 
 class Ebook extends Book
 {
   protected $format;
-  
+
   public function setFormat($format): void
   {
     $this->format = $format;
@@ -337,7 +337,7 @@ var_dump($ebook);
 
 We can now start adding additional methods or modify the existing ones, remove the `type` property from the `Book` class because that's not needed anymore… But I leave that to you to play around with: practice makes perfect, as the saying goes.
 
-Have you ever created a Page model in Kirby? A Page model is exactly such an extended version of the original `Page` class, where you can add your custom page methods or overwrite the existing ones. 
+Have you ever created a Page model in Kirby? A Page model is exactly such an extended version of the original `Page` class, where you can add your custom page methods or overwrite the existing ones.
 ## Namespaces
 
 In larger applications, we often make use of third party libraries so as not having to reinvent the wheel.
@@ -424,7 +424,7 @@ namespace Cookbook\Books;
 
 class Book
 {
-  
+
   // ... other code
 
   public static function create($title, $author)
@@ -486,3 +486,6 @@ Description: Understanding classes, objects, member functions and common pitfall
 ----
 
 Authors: - authors/sonja-broda
+
+----
+Tags: php

@@ -4,7 +4,7 @@ Title: Quicktip: Don't repeat the same query multiple times
 
 Text:
 
-Modularizing your code into resusable chunks to keep things organized and not repeat yourself is an important coding paradigm.
+Modularizing your code into reusable chunks to keep things organized and not repeat yourself is an important coding paradigm.
 
 However, what is true for the big picture, is also true for the smaller chunks of code we produce daily in our templates.
 
@@ -134,3 +134,6 @@ Description: "Don't repeat yourself" (DRY) is a coding paradigm that when not he
 ----
 
 Authors: - authors/sonja-broda
+
+----
+Tags: templates

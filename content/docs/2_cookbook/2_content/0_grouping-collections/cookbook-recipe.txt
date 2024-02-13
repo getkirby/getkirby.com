@@ -159,3 +159,7 @@ Description: Group collections like articles, events or files by various criteri
 ----
 
 Authors: - authors/sonja-broda
+
+----
+
+Tags: collections

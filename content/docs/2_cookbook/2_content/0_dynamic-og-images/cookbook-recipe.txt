@@ -136,7 +136,7 @@ For example, a colored rectangle:
 
 ```php "/site/templates/article.png.php"
 $brandColor = imagecolorallocate($canvas, 246, 211, 85);
-    
+
 imagefilledrectangle($canvas, 100, 100, 115, 525, $brandColor);
 ```
 
@@ -205,3 +205,6 @@ imagedestroy($canvas);
 <warning>
 Make sure that all paths to fonts and files as well as fieldnames used actually exist in your installation, otherwise this will not work as expected.
 </warning>
+
+----
+Tags: media, content representations

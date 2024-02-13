@@ -181,3 +181,7 @@ Description: Tie pages to a person. Create an author system for your blog posts.
 ----
 
 Authors: - authors/sonja-broda
+
+----
+
+Tags: blogging

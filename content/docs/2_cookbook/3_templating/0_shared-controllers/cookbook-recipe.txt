@@ -208,3 +208,6 @@ return function ($page, $pages, $site, $kirby) {
 
 };
 ```
+
+----
+Tags: controllers, templates

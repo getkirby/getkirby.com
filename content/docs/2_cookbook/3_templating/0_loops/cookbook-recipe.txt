@@ -215,3 +215,6 @@ Description: Foreach loops are control structures useful in many contexts.
 ----
 
 Authors: - authors/sonja-broda
+
+----
+Tags: php, collections

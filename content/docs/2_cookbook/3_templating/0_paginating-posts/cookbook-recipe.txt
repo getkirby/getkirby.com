@@ -149,3 +149,7 @@ Description: Split long post into separate pages with pagination
 ----
 
 Authors: - authors/sonja-broda
+
+----
+
+Tags: pagination, blogging

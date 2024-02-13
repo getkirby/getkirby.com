@@ -353,3 +353,6 @@ Description: Learn some PHP basics that make creating templates a breeze.
 ----
 
 Authors: - authors/sonja-broda
+
+----
+Tags: php

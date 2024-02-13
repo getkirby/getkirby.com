@@ -302,3 +302,6 @@ Description: Filter pages, files and users with Kirby's extensive filtering meth
 ----
 
 Authors: - authors/sonja-broda
+
+----
+Tags: collections, filtering

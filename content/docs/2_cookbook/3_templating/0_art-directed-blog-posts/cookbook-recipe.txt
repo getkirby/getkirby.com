@@ -65,3 +65,7 @@ Description: Add custom CSS and JavaScript to style individual pages without the
 Authors:
 
 - authors/bastian-allgeier
+
+----
+
+Tags: styling
