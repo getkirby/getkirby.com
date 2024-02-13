@@ -41,7 +41,7 @@ class HeadingBlock extends Block
 }
 ```
 
-```php "/site/plugins/index.php"
+```php "/site/plugins/block-models/index.php"
 load([
     'HeadingBlock' => __DIR__ . '/models/heading.php'
 ]);
