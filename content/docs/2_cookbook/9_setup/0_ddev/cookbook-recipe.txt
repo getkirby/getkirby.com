@@ -143,7 +143,7 @@ return [
 You can now access the site via `http://<ip>:8080` from anywhere in your local network. Replace `<ip>` with the IP of your computer in your local network, for example `http://192.168.178.12:8080`.
 
 
-The best option seems to be to set `url` to '/' for this use case, so that links to assets etc. still work. However, when doing this, the Panel is not installable out of the box, see (link: #panel-not-installable text: below).
+The best option seems to be to set `url` to '/' for this use case, so that links to assets etc. still work. However, when doing this, the Panel is not installable out of the box, see (link: #troubleshooting__panel-not-installable text: below).
 
 
 <info>
@@ -218,12 +218,12 @@ Make sure that you have no other webserver/services running on port 80/443. Mayb
 
 ### Panel not installable
 
-In Kirby versions prior to v4.0.3, DDEV domains were not treated as local. If you are on an older version and get an error message when trying to access the Panel, and when making the domain accessible across your network as set out above, set `'panel.install' => true` in `/site/config/config.php`, or better still in an (link: text: environment specific config file).
+In Kirby versions prior to v4.0.3, DDEV domains were not treated as local. If you are on an older version and get an error message when trying to access the Panel, and when making the domain accessible across your network as set out above, set `'panel.install' => true` in `/site/config/config.php`, or better still in an (link: docs/guide/configuration#multi-environment-setup text: environment specific config file).
 
 
 Other DDEV issues? Head over to the (link: https://ddev.readthedocs.io/en/stable/users/usage/troubleshooting/ text: DDEV troubleshooting guide).
 
-Other Kirby related issues: Ask us (link: forum.getkirby.com text: on the forum).
+Other Kirby related issues: Ask us (link: https://forum.getkirby.com text: on the forum).
 
 ----
 
