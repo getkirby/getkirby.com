@@ -436,7 +436,7 @@ Additionally, you can overwrite the `$page->url()` in a (link: docs/guide/templa
 
 ## Accessing parameters and query strings
 
-Query strings and parameters cannot be part of a route pattern. However, you can passed parameters or query strings with Kirby's `param()` and `get()` helpers inside a route:
+Query strings and parameters cannot be part of a route pattern. However, you can get passed parameters or query strings with Kirby's `param()` and `get()` helpers inside a route:
 
 
 ```php "/site/config/config.php"
