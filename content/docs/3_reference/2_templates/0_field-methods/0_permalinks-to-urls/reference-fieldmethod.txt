@@ -1,0 +1,7 @@
+Text:
+
+## Warning
+
+<warning>
+  This method is still experimental! You can use it to solve potential problems with permalinks already, but it might change in the future.
+</warning>
