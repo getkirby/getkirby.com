@@ -133,7 +133,7 @@ Always pass the correct context to the `esc()` helper and field methods, otherwi
 
 ### Escaping KirbyText
 
-As KirbyText is an extension of (glossary: markdown), it also supports raw HTML:
+As KirbyText is an extension of (glossary: markdown), it also supports raw HTML and allows the insertion of malicious JavaScript links:
 
 ```kirbytext
 ## Nice headline
@@ -141,12 +141,14 @@ As KirbyText is an extension of (glossary: markdown), it also supports raw HTML:
 This is a paragraph with **some formatting**.
 
 <script>alert('And here comes something malicious.')</script>
+
+This [link is also malicious](javascript:alert(1)).
 ```
 
 If you can't trust your KirbyText content but do want to allow formatting, you can enable the Markdown safe mode:
 
 ```php
-<?= $page()->kirbytext(['markdown' => ['safeMode' => true]]) ?>
+<?= $page->text()->kirbytext(['markdown' => ['safe' => true]]) ?>
 ```
 
 This will create the following output:
@@ -155,6 +157,7 @@ This will create the following output:
 <h2>Nice headline</h2>
 <p>This is a paragraph with <strong>some formatting</strong>.</p>
 <p>&lt;script&gt;alert('And here comes something malicious.')&lt;/script&gt;</p>
+<p>This <a href="javascript%3Aalert(1)">link is also malicious</a>.</p>
 ```
 
 You can globally enable Markdown safe mode with the (link: docs/reference/system/options/markdown#safe-mode-markdown-safe text: `markdown.safe` option).
