@@ -10,7 +10,7 @@ Guide: blueprints/fields
 
 ----
 
-Intro: Use the link field  to create links to external URLs, internal pages, files, email addresses and telephone numbers. The link field is also used in the link dialogs of the writer and textarea fields.
+Intro: Use the link field to create links to external URLs, internal pages, files, email addresses and telephone numbers. The link field is also used in the link dialogs of the writer and textarea fields.
 
 ----
 
@@ -30,7 +30,7 @@ fields:
     type: link
 ```
 
-## Available link types:
+## Available link types
 
 - `url`
 - `page`
@@ -40,19 +40,35 @@ fields:
 - `anchor`
 - `custom`
 
+<since v="4.1.1">
+<info>
+The `custom` link type is not enabled by default as it cannot validate the entered URL. See the (link: #custom-link-type text: section on the custom link type below) for more.
+</info>
+</since>
+
 ## Link to pages
 
 (image: page-link.png)
 
 If an icon has been defined in the page's blueprint, it will be used in the page selector.
 
-
 ## Link to files
 
 (image: file-link.png)
 
+## Custom link type
 
-## Limit link types
+The `custom` link type allows to enter arbitrary links, e.g. relative links or deeplinks to external apps with custom protocols.
+
+Because of its flexibility, Kirby cannot know whether the entered link is valid and safe. It is therefore your responsibility to check if the link conforms to the format for your use case.
+
+<alert>
+Using the `custom` link type without additional validation or sanitization can lead to security attacks such as cross-site scripting (XSS). Only enable this link type if you have adequate protections in place or if such protections are not needed in your use case.
+</alert>
+
+## Customize allowed link types
+
+With the `options` property you can customize the link types offered by the field:
 
 ```yaml
 fields:
@@ -73,7 +89,7 @@ Use the `toUrl()` method to convert any type of link to a valid URL:
 
 ## Adding target, link text etc.
 
-Adding a target, link text, class names etc. are not supported by the link field. However, there is a much more flexible and extensible way of adding such data to your links: Wrapping the link field within an object field.
+The link field does one job and one job only: It stores a link. If you need additional metadata such as a target, link text, class names etc., you can wrap the link field within an object field:
 
 ```yaml
 fields:
