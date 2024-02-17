@@ -6,6 +6,9 @@
 .security-incidents th {
 	font-size: var(--text-sm);
 }
+.security-incidents .column-fixed a {
+	white-space: nowrap;
+}
 </style>
 
 <div class="table security-incidents">
@@ -47,7 +50,7 @@
 				CVE ID pending
 				<?php endif ?>
 			</td>
-			<td>
+			<td class="column-fixed">
 				<?php foreach (Str::split($incident['fixed']) as $version): ?>
 				<?php $major = Str::before($version, '.');
 					$majorOrg = $major !== '3' ? '-v' . $major : '' ?>
