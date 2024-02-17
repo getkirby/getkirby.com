@@ -53,7 +53,7 @@
 			<td class="column-fixed">
 				<?php foreach (Str::split($incident['fixed']) as $version): ?>
 				<?php $major = Str::before($version, '.');
-					$majorOrg = $major !== '3' ? '-v' . $major : '' ?>
+					$majorOrg = $major < 3 ? '-v' . $major : '' ?>
 				<a href="https://github.com/getkirby<?= $majorOrg ?>/kirby/releases/tag/<?= $version ?>">
 					<?= $version ?>
 				</a>
