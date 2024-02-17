@@ -145,11 +145,38 @@ The page create dialog also allows you to automatically generate title and/or sl
 create:
   title: "{{ page.location }} – {{ page.date.toDate('M Y') }}"
   slug: "{{ page.location.slug }}-{{ page.date.toDate('Y-m-d') }}"
+  fields:
+    - location
+    - date
 ```
 
-Custom fields from the create dialog will be accessible as Kirby query starting with `page` (in this example the fields `location` and `date`). Moreover, you can also use queries to access information not specific to the page (through the `kirby` or `site` entry point).
+Note that the page fields you want to query within the string template need to be in the list of fields within the create option (in this example, `location` and `date`), and those fields need to be present in the page blueprint itself.
 
-If title and slug are generated automatically and no custom fields are defined for the page creation dialog, the dialog will be skipped and the page is created immediately.
+However, you can also query information not specific to the current page through the `kirby` or `site` entry points.
+
+This means, you could, for example, create a custom site method that returns the current Unix timestamp, and use that in your string template:
+
+```yaml
+create:
+  title: "{{ site.time }}"
+  slug: "{{ site.time }}"
+```
+
+And in a plugin, define the method
+
+```php "/site/plugins/custom-methods/index.php"
+<?php
+
+Kirby::plugin('getkirby/custom-methods', [
+  'siteMethods' => [
+    'time' => function() {
+      return time();
+    }
+  ]
+]);
+
+```
+If title and slug are generated automatically, and no custom fields are defined for the page creation dialog, the dialog will be skipped and the page is created immediately.
 </since>
 
 ### Supported field types
