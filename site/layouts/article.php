@@ -39,6 +39,9 @@
 					<div class="prose mb-24">
 						<?= $slot ?? $page->text()->kt() ?>
 					</div>
+					<?php if ($prevNext = $slots->prevNext()): ?>
+						<?= $prevNext ?>
+					<?php endif ?>
 
 					<?php if ($footer = $slots->footer()): ?>
 						<?= $footer ?>
