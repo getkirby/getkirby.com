@@ -93,7 +93,7 @@
 			</a>
 		</li>
 		<li class="bg-dark p-6">
-			<a class="block" href="https://youtube.com/kirbycasts">
+			<a class="block" href="https://videos.getkirby.com">
 				<span class="block text-2xl" style="color: var(--color-red-500)">1,100</span>
 				<span class="font-mono text-xs"> Youtube subscribers</span>
 			</a>

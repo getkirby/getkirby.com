@@ -2,7 +2,7 @@
 	<div class="columns" style="--columns-sm: 1; --columns-md: 2; --columns-lg: 1; --column-gap: var(--spacing-12)">
 		<?php snippet('hgroup', [
 			'title' => $title ?? 'Join the Kirby community!',
-			'subtitle' => 'Subscribe to our <a class="link" href="/kosmos">monthly newsletter</a>. Enter our <a class="link" href="https://chat.getkirby.com">Discord chat</a>. Watch the <a class="link" href="https://youtube.com/kirbycasts">screencasts</a>. Follow us in the <a class="link" href="https://mastodon.social/@getkirby">fediverse</a> and on <a class="link" href="https://instagram.com/getkirby">Instagram</a> for the latest updates.',
+			'subtitle' => 'Subscribe to our <a class="link" href="/kosmos">monthly newsletter</a>. Enter our <a class="link" href="https://chat.getkirby.com">Discord chat</a>. Watch the <a class="link" href="https://videos.getkirby.com">screencasts</a>. Follow us in the <a class="link" href="https://mastodon.social/@getkirby">fediverse</a> and on <a class="link" href="https://instagram.com/getkirby">Instagram</a> for the latest updates.',
 			'mb' => 3
 		]) ?>
 
@@ -14,7 +14,7 @@
 				</a>
 			</li>
 			<li>
-				<a class="flex items-center" href="https://youtube.com/kirbycasts">
+				<a class="flex items-center" href="https://videos.getkirby.com">
 					<figure class="mr-3 iconbox color-white bg-black rounded" style="--size: 3rem"><?= icon('youtube') ?></figure>
 					Screencasts
 				</a>

@@ -17,7 +17,7 @@ After the 3.5 release, we decided to make a website sprint and release a new sit
 Within just two months, we hit three different milestones by accident.
 
 ✅ 1000 (link: https://github.com/getkirby/kirby text: PRs for Kirby 3)
-✅ 1000 (link: https://youtube.com/kirbycasts text: YouTube Subscribers)
+✅ 1000 (link: https://videos.getkirby.com text: YouTube Subscribers)
 ✅ 1000 (link: https://chat.getkirby.com text: Discord Users)
 
 The number of PRs is a great benchmark for the consistency and quality that we managed to get into our workflow after Kirby 2. I think it's the number I'm most proud of. The team is doing an amazing job here.

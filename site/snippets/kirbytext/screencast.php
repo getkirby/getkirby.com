@@ -1,6 +1,6 @@
 <article class="screencast mb-6 bg-black color-white grid">
 	<header class="p-6">
-		<a href="https://youtube.com/kirbycasts" class="h6 block mb-3">Screencast</a>
+		<a href="https://videos.getkirby.com" class="h6 block mb-3">Screencast</a>
 		<h2 class="h2 color-white"><?= $title ?></h2>
 		<?php if ($text ?? null): ?>
 		<p class="text-base color-gray-400"><?= widont($text) ?></p>

@@ -24,7 +24,7 @@
 					<li><a href="/docs/guide">Guide</a></li>
 					<li><a href="/docs/cookbook">Cookbook</a></li>
 					<li><a href="/docs/reference">Reference</a></li>
-					<li><a class="is-external" href="https://youtube.com/kirbycasts">Screencasts</a></li>
+					<li><a class="is-external" href="https://videos.getkirby.com">Screencasts</a></li>
 					<li><a href="/docs/glossary">Glossary</a></li>
 				</ul>
 			</li>

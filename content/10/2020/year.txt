@@ -50,9 +50,9 @@ To convert requests into a pretty decent (link: https://roadmap.getkirby.com tex
 
 ## Kirby Casts
 
-The private live streams for the Kirby Next supporters really started to grow on me. Plans for a YouTube channel had been lying around in the drawer for a long time. But it still took yet another year until we finally opened (link: https://youtube.com/kirbycasts text: our own YouTube channel) and I started to record the first videos. Kris from the design studio (link: https://floriankarsten.com/ text: Florian Karsten) helped me with a little logo animation and the first thumbnail designs. I tried to get into a weekly uploading schedule, which worked for quite a while until the pandemic lockdowns started and home schooling broke my streak. New videos are planned for this year!
+The private live streams for the Kirby Next supporters really started to grow on me. Plans for a YouTube channel had been lying around in the drawer for a long time. But it still took yet another year until we finally opened (link: https://videos.getkirby.com text: our own YouTube channel) and I started to record the first videos. Kris from the design studio (link: https://floriankarsten.com/ text: Florian Karsten) helped me with a little logo animation and the first thumbnail designs. I tried to get into a weekly uploading schedule, which worked for quite a while until the pandemic lockdowns started and home schooling broke my streak. New videos are planned for this year!
 
-(image: kirbycasts.png caption: Finally a YouTube channel! link: https://youtube.com/kirbycasts)
+(image: kirbycasts.png caption: Finally a YouTube channel! link: https://videos.getkirby.com)
 
 ## Blocks
 

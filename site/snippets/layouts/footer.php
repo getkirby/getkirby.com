@@ -15,7 +15,7 @@
 					<a title="Instagram" rel="me" href="https://instagram.com/getkirby">
 						<?= icon('instagram') ?>
 					</a>
-					<a title="Youtube" rel="me" href="https://youtube.com/kirbycasts">
+					<a title="Youtube" rel="me" href="https://videos.getkirby.com">
 						<?= icon('youtube') ?>
 					</a>
 					<a title="Discord" rel="me" href="https://chat.getkirby.com">
@@ -46,7 +46,7 @@
 							<li><a href="/docs/guide">Guide</a></li>
 							<li><a href="/docs/cookbook">Cookbook</a></li>
 							<li><a href="/docs/reference">Reference</a></li>
-							<li><a href="https://youtube.com/kirbycasts">Screencasts</a></li>
+							<li><a href="https://videos.getkirby.com">Screencasts</a></li>
 							<li><a href="/docs/glossary">Glossary</a></li>
 							<li><a href="/docs/archive">Archive</a></li>
 						</ul>
