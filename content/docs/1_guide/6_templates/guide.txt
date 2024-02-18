@@ -6,7 +6,7 @@ Description: How to use Kirby's template system and API to build any kind of tem
 
 ----
 
-Category: Data & Frontend
+Category: Creating your site
 
 ----
 

@@ -9,7 +9,7 @@ Intro:
 
 ----
 
-Category: Data & Frontend
+Category: Creating your site
 
 ----
 

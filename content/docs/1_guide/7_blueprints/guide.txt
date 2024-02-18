@@ -1,4 +1,4 @@
-Title: Configuring the Panel
+Title: Panel
 
 ----
 
@@ -6,7 +6,7 @@ Description: How to create forms for the Panel and access blueprints on the fron
 
 ----
 
-Category: Data & Frontend
+Category: Creating your site
 
 ----
 

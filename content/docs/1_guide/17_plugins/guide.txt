@@ -1,4 +1,4 @@
-Title: Extending Kirby
+Title: Plugins
 
 ----
 
