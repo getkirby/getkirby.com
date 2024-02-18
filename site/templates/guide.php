@@ -7,5 +7,8 @@
 	'menu'          => collection('guides'),
 	'hasCategories' => true,
 ]) ?>
+<?php endslot() ?>
 
+<?php slot('prevNext') ?>
+<?php snippet('layouts/prevnext') ?>
 <?php endslot() ?>
