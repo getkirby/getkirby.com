@@ -1,4 +1,4 @@
-Title: Beyond Kirby
+Title: Headless & Integrations
 
 ----
 

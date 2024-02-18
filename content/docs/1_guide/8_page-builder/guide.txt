@@ -6,7 +6,7 @@ Description: Create rich content or even complete page layouts right from the Pa
 
 ----
 
-Category: Data & Frontend
+Category: Creating your site
 
 ----
 

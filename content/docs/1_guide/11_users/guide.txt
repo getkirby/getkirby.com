@@ -1,4 +1,4 @@
-Title: Panel users & permissions
+Title: Users & permissions
 
 ----
 

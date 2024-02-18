@@ -6,7 +6,7 @@ Description: In Kirby, you can integrate data from any data source and use them 
 
 ----
 
-Category: Data & Frontend
+Category: Creating your site
 
 ----
 

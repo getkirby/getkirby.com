@@ -1,4 +1,4 @@
-Title: Creating content
+Title: Managing content
 
 ----
 
@@ -6,7 +6,7 @@ Description: Learn how to create pages and how to fill them with content.
 
 ----
 
-Category: Data & Frontend
+Category: Creating your site
 
 ----
 

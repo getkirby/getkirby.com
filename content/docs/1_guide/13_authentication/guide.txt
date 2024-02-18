@@ -1,4 +1,4 @@
-Title: Authentication & Sessions
+Title: Login & Sessions
 
 ----
 
