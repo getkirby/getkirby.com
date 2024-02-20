@@ -1,0 +1,14 @@
+Title: What does the **revenue limit for Kirby Basic** mean?
+----
+Text:
+
+The **Basic license** at its reduced price is only available for projects of individuals, companies and organizations that don't exceed a **yearly revenue or funding of € 1 million**.
+
+If you exceed this limit, you need to purchase an **Enterprise license** at regular price which features **no revenue limit**.
+
+Revenue means all net sales, not profit, you made through any means and not just limited to the website itself. Should you not have any sales (e.g. as a foundation or association), your ongoing funding/yearly budget is considered instead.
+
+
+If you are building a website for a client (as a freelancer or agency), it is not about your revenue, but about the revenue of your client as the end-customer.
+
+We only care about the revenue at the time of purchase. If your company becomes more successful within the next 3 years and crosses the limit, we are really happy for you. You don't need to get a different license though. We don't ask you to look into the future – that's too hard. Only when you purchase an upgrade at a later time, we will ask you to consider if your project then needs a different license.
