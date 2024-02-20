@@ -18,7 +18,6 @@ html {
 </style>
 
 <article>
-
 	<header class="mb-24">
 		<h1 class="h1 mb-6 color-white">Made with&nbsp;Kirby</h1>
 
@@ -30,9 +29,11 @@ html {
 		</div>
 	</header>
 
-	<div class="mb-12">
+	<div class="mb-36">
 		<?php snippet('templates/cases/cases', [
 			'cases' => collection('cases')->shuffle()
 		]) ?>
 	</div>
+
+	<?php snippet('templates/home/brands') ?>
 </article>
