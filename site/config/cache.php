@@ -15,7 +15,8 @@ return [
 		'ignore' => [
 			'love',
 			'partners',
-			'themes'
+			'themes',
+			'features-for-clients'
 		]
 	],
 	'plugins' => [

@@ -35,5 +35,4 @@ html {
 			'cases' => collection('cases')->shuffle()
 		]) ?>
 	</div>
-
 </article>
