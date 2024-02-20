@@ -8,7 +8,7 @@
 			</h1>
 
 			<p class="text-xl leading-snug color-gray-700">
-				Explore our online demo or download Kirby and try it out yourself to see how it fits your project. Ready to launch? <a class="color-black link" href="/buy">Buy a license.</a>
+				Explore our online demo, or download Kirby and try it out yourself. Ready to launch? <a class="color-black link" href="/buy">Buy a license.</a>
 			</p>
 		</div>
 
