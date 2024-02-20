@@ -16,6 +16,8 @@ Icon: database
 
 Text:
 
+(screencast: https://youtu.be/EVVORXaZThU title: Faster with caching text: Learn how Kirby can help you to keep even your more complex sites with lots of content performant.)
+
 ## Caching pages
 
 You can enable Kirby's page cache in your `config.php` file with the `cache.pages` option:
