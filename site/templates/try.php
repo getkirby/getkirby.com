@@ -2,9 +2,15 @@
 
 <article>
 	<header class="mb-24">
-		<h1 class="h1">
-			Try Kirby
-		</h1>
+		<div class="max-w-xl">
+			<h1 class="h1 mb-6">
+				Try Kirby
+			</h1>
+
+			<p class="text-xl leading-snug color-gray-700">
+				Explore our online demo or download Kirby and try it out yourself to see how it fits your project. Ready to launch? <a class="color-black link" href="/buy">Buy a license.</a>
+			</p>
+		</div>
 
 		<?php if ($statusMessage): ?>
 		<aside class="pt-6">
@@ -18,7 +24,7 @@
 		<?php endif ?>
 	</header>
 
-	<div class="columns mb-42" style="--columns: 1; --columns-lg: 2; --gap: var(--spacing-24)">
+	<div class="columns mb-36" style="--columns: 1; --columns-lg: 2; --gap: var(--spacing-24)">
 
 		<form id="demo" class="demo mb-6" action="https://<?= r(param('demo') === 'staging', 'staging.') ?>trykirby.com" method="post">
 			<h2 class="h2 mb-6">
