@@ -2,7 +2,7 @@
 .trust-in-brands svg {
   width: 100%;
 	height: auto;
-  max-height: 4.5rem;
+  max-height: 3.5rem;
   max-width: 9rem;
 }
 </style>
@@ -11,7 +11,7 @@
 	<div>
 		<?php snippet('templates/features/intro', [
 			'title' => 'Trusted by brands world-wide',
-			'text'  => 'Tech, automobile, energy, food, fashion, health: leading brands around the world use Kirby for their digital solutions. Editorial systems, intranet solutions, factory terminals, mobile apps or just good old websites. They are in good hands with Kirby.'
+			'text'  => 'Tech, art, education, automobile, energy, food, fashion, health: leading brands around the world use Kirby for their digital solutions. Editorial systems, intranet solutions, factory terminals, mobile apps or just good old websites. They are in good hands with Kirby.'
 		]) ?>
 
 		<ul class="columns" style="--columns-sm: 3; --columns: 3">
@@ -20,11 +20,11 @@
 				<span class="font-mono text-xs"> sites</span>
 			</li>
 			<li>
-				<span class="block text-2xl">4400+</span>
+				<span class="block text-2xl">6500+</span>
 				<span class="font-mono text-xs"> forum users</span>
 			</li>
 			<li>
-				<span class="block text-2xl">2100+</span>
+				<span class="block text-2xl">2400+</span>
 				<span class="font-mono text-xs"> discord users</span>
 			</li>
 		</ul>
@@ -32,7 +32,7 @@
 	</div>
 
 	<ul class="trust-in-brands columns auto-rows-fr rounded overflow-hidden" style="--columns-sm: 2; --columns-md: 3; --columns: 3; --gap: var(--spacing-1)">
-		<?php foreach(page('home/clients')->children()->listed()->shuffle() as $client): ?>
+		<?php foreach(collection('brands')->limit(9) as $client): ?>
 		<li class="bg-light p-6 flex items-center justify-center">
 			<?= $client->image()->read() ?>
 		</li>

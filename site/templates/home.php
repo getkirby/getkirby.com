@@ -11,11 +11,11 @@
 	</div>
 
 	<div class="mb-56">
-		<?php snippet('templates/home/voices') ?>
+		<?php snippet('templates/home/brands') ?>
 	</div>
 
 	<div class="mb-56">
-		<?php snippet('templates/home/brands') ?>
+		<?php snippet('templates/home/voices') ?>
 	</div>
 
 	<div class="mb-42">
