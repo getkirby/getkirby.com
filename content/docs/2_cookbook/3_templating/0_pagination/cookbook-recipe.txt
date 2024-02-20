@@ -4,6 +4,9 @@ Title: Pagination
 
 Text:
 
+(screencast: https://youtu.be/p1JhCpSRvlc title: Pagination text: Learn how to create a simple navigation to jump between pages in a matter of minutes.)
+
+
 The time will come when we have more than just a few articles or projects in our blog/projects list and we can't show them all on one page.
 
 This is a simple example for a list of articles for a blog:
