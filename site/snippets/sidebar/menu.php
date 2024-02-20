@@ -4,7 +4,7 @@ extract([
 ])
 ?>
 
-<ul class="sidebar-menu-1">
+<ul class="sidebar-menu-1 <?= $marginBottom ?? '' ?>">
 	<?php foreach ($menu as $menuItem): ?>
 	<li data-id="<?= $menuItem->id() ?>">
 		<?php if ($menuItem->hasListedChildren()): ?>
