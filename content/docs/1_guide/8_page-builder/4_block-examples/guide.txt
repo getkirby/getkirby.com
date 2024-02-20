@@ -93,7 +93,7 @@ Note that custom block types don't show up in your `blocks` and `layout` fields 
 
 ```yaml
 fields:
-  blocks:
+  custom blocks:
     type: blocks
     fieldsets:
       - accordion
