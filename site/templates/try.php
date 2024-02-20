@@ -97,6 +97,7 @@
 		<?php snippet('faq') ?>
 	</section>
 
+	<?php snippet('templates/home/brands') ?>
 </article>
 
 <dialog id="loader" class="overlay">
