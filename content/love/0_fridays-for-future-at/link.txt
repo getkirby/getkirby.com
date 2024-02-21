@@ -4,3 +4,6 @@ Title: Fridays For Future Austria
 
 Link: https://fridaysforfuture.at/
 
+----
+
+Cause: true
