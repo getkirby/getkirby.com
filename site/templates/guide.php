@@ -9,6 +9,6 @@
 ]) ?>
 <?php endslot() ?>
 
-<?php slot('prevNext') ?>
+<?php slot('prevnext') ?>
 <?php snippet('layouts/prevnext', ['siblings' => page('docs/guide')->index()->listed()]) ?>
 <?php endslot() ?>
