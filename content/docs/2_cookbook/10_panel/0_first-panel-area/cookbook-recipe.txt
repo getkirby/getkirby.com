@@ -28,7 +28,7 @@ For the purposes of this recipe, we assume you have read the (link: docs/guide/p
 You can install the (link: https://github.com/getkirby/pluginkit/tree/4-panel text: Pluginkit) as a basis or create the file structure we need manually, that's up to you. Also, it doesn't matter if you use the Plainkit or the Starterkit as a starting point.
 </info>
 
-Let's start by creating a new folder in the `plugins folder, which we will call `moviereviews`. Inside this folder, we first create a `package.json` file with the contents copied from the Pluginkit example mentioned above.
+Let's start by creating a new folder in the `plugins` folder, which we will call `moviereviews`. Inside this folder, we first create a `package.json` file with the contents copied from the Pluginkit example mentioned above.
 
 ```js "/site/plugins/moviereviews/package.json"
 {
