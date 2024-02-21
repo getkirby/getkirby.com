@@ -4,9 +4,12 @@
 		<a href="<?= $link ?? '#' ?>"><?= $title ?></a>
 	</p>
 	<?php endif ?>
-	<?php if ($hasCategories ?? false): ?>
-		<?php snippet('sidebar/menu-grouped', ['menu' => $menu]) ?>
-	<?php else: ?>
-		<?php snippet('sidebar/menu', ['menu' => $menu]) ?>
-	<?php endif ?>
+
+	<div class="sidebar-wrapper">
+		<?php if ($hasCategories ?? false): ?>
+			<?php snippet('sidebar/menu-grouped', ['menu' => $menu]) ?>
+		<?php else: ?>
+			<?php snippet('sidebar/menu', ['menu' => $menu]) ?>
+		<?php endif ?>
+	</div>
 </nav>
