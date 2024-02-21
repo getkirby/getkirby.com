@@ -8,6 +8,13 @@ return function ($kirby) {
 		'klimaliste-berlin',
 		'natucate',
 		'strassenfeger',
-		'teteenlair'
+		'teteenlair',
+		'klimadashboard',
+		'viseta',
+		'nowar',
+		'throughpositiveeyes',
+		'gobanyo',
+		'ppks',
+		'adunare'
 	]);
 };
