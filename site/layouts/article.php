@@ -39,8 +39,9 @@
 					<div class="prose mb-24">
 						<?= $slot ?? $page->text()->kt() ?>
 					</div>
-					<?php if ($prevNext = $slots->prevNext()): ?>
-						<?= $prevNext ?>
+
+					<?php if ($prevnext = $slots->prevnext()): ?>
+						<?= $prevnext ?>
 					<?php endif ?>
 
 					<?php if ($footer = $slots->footer()): ?>
@@ -50,6 +51,7 @@
 							<?php snippet('layouts/github-edit') ?>
 						</footer>
 					<?php endif ?>
+
 				</article>
 
 				<?php if ($sidebar = $slots->sidebar()): ?>
