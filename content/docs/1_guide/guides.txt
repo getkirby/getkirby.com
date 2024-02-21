@@ -6,33 +6,4 @@ Description: Get an overview of all topics covered by Kirby’s documentation.
 
 ----
 
-Structure:
-
-Get started:
-    - quickstart
-    - tour
-    - troubleshooting
-Basics:
-    - content
-    - templates
-    - blueprints
-    - languages
-    - users
-Advanced:
-    - configuration
-    - authentication
-    - routing
-    - cache
-    - emails
-    - database
-Pro:
-    - virtual-pages
-    - api
-    - plugins
-Security:
-    - security
-    - kirby-and-privacy
-
-----
-
 Priority: 0.9
