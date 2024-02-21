@@ -1,0 +1,25 @@
+.prevnext {
+	display: flex;
+	margin-bottom: var(--spacing-24);
+	gap: var(--spacing-6);
+}
+.prevnext a {
+	flex-grow: 1;
+	flex-basis: 50%;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--color-border);
+	padding: var(--spacing-6);
+	border-radius: var(--rounded);
+}
+.prevnext-next {
+	align-items: flex-end;
+	text-align: right;
+}
+.prevnext-label {
+	font-size: var(--text-xs);
+	color: var(--color-gray-700);
+}
+.prevnext-title {
+	font-size: var(--text-lg);
+}
