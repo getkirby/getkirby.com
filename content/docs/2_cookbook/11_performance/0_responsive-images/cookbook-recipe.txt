@@ -217,7 +217,7 @@ Our HTML for such a scenario could look like this:
             flower-power-600.jpg 600w,
             flower-power-900.jpg 900w,
             flower-power-1200.jpg 1200w,
-            flower-flower-1800.jpg 1800w"
+            flower-power-1800.jpg 1800w"
     sizes="(min-width: 1200px) 25vw,
             (min-width: 900px) 33vw,
             (min-width: 600px) 50vw,
