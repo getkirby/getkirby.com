@@ -19,8 +19,10 @@
 }
 .album-gallery li {
   display: block;
-  margin-bottom: 1.5rem;
   break-inside: avoid;
+}
+.album-gallery li:not(:last-child) {
+  margin-bottom: 1.5rem;
 }
 @media screen and (min-width: 60rem) {
   .album-gallery {
