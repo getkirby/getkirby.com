@@ -32,7 +32,7 @@ function icon(string $name): string|false
 			}
 
 			// return the icon with the correct viewBox
-			return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="' . $matches[1] . '">' . $matches[2] . '</svg>';
+			return '<svg data-type="' . $name . '" xmlns="http://www.w3.org/2000/svg" viewBox="' . $matches[1] . '">' . $matches[2] . '</svg>';
 		}
 	}
 

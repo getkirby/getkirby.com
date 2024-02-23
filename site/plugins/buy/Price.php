@@ -57,6 +57,24 @@ class Price
 	}
 
 	/**
+	 * Gets the additional optional donation amount
+	 * per license in the customer currency
+	 */
+	public function customerDonation(): int
+	{
+		return $this->convert(option('buy.donation.customerAmount'));
+	}
+
+	/**
+	 * Gets the team donation amount
+	 * per license in the customer currency
+	 */
+	public function teamDonation(): int
+	{
+		return $this->convert(option('buy.donation.teamAmount'));
+	}
+
+	/**
 	 * Rounds a price to the nearest pretty price
 	 * (ending in -5 or -9)
 	 */
@@ -75,13 +93,25 @@ class Price
 		// the rounding is applied on the last place
 		// and for a currency with 10x higher prices
 		// on the second-last place
-		$price = round($price / 5 / $step) * 5 * $step;
+		$rounded = round($price / 5 / $step) * 5 * $step;
 
-		if ($price % max($step, 10) === 0) {
-			$price -= 1;
+		// if that brought us to zero, round by one place fewer
+		if ($rounded < 1 && $step >= 10) {
+			$step /= 10;
+			$rounded = round($price / 5 / $step) * 5 * $step;
 		}
 
-		return max(0, $price);
+		if ($rounded % max($step, 10) === 0) {
+			$rounded -= 1;
+		}
+
+		// fall back to the original price if we ended up at zero
+		// (relevant for currencies with `$step = 1`)
+		if ($rounded < 1) {
+			return round($price);
+		}
+
+		return $rounded;
 	}
 
 	/**

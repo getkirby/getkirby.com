@@ -9,14 +9,26 @@ return [
 		'product' => 824340,
 		'regular' => 349,
 	],
+	'revenueLimit' => 1000000,
 	'sale' => [
-		'start'    => '2023-11-28',
-		'end'      => '2023-12-18',
+		'start'    => '2023-02-22',
+		'end'      => '2023-02-24',
 		'discount' => 20
+	],
+	'quantities' => [
+		'min' => 1,
+		'max' => 100,
 	],
 	'volume' => [
 		5  => 5,
 		10 => 10,
 		15 => 15
+	],
+	'donation' => [
+		'teamAmount'     => 0,
+		'customerAmount' => 0,
+		'charity' => 'Amadeu Antonio Foundation',
+		'purpose' => 'for their work on reinforcing a democratic civil society',
+		'link'    => 'https://www.amadeu-antonio-stiftung.de/en/'
 	]
 ];

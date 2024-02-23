@@ -25,6 +25,18 @@ enum Product: string
 	}
 
 	/**
+	 * Returns the human-readable label for the buy page
+	 */
+	public function label(): string
+	{
+		return match ($this) {
+			static::Basic      => 'Basic',
+			static::Enterprise => 'Enterprise',
+			default            => null
+		};
+	}
+
+	/**
 	 * Returns the price object for the product
 	 */
 	public function price(string|null $currency = null, float|null $rate = null): Price
@@ -49,6 +61,27 @@ enum Product: string
 	}
 
 	/**
+	 * Ensures that the quantity is in the valid range
+	 */
+	public static function restrictQuantity(int $quantity): int
+	{
+		$quantity = max($quantity, option('buy.quantities.min'));
+		return min($quantity, option('buy.quantities.max'));
+	}
+
+	/**
+	 * Returns a label for the revenue limit
+	 */
+	public function revenueLimit(): string|null
+	{
+		return match ($this) {
+			static::Basic      => 'Revenue limit: ' . RevenueLimit::approximation() . ' / year.',
+			static::Enterprise => 'This license does not have a revenue limit.',
+			default            => null
+		};
+	}
+
+	/**
 	 * Returns the Paddle upgrade product ID
 	 */
 	public function upgradeId(string|null $type = null): int
@@ -59,4 +92,13 @@ enum Product: string
 			default   => option('buy.' . $this->value . '.upgrade')
 		};
 	}
+
+	/**
+	 * Returns the machine-readable enum value
+	 */
+	public function value(): string
+	{
+		return $this->value;
+	}
+
 }

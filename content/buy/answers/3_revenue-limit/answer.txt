@@ -2,7 +2,7 @@ Title: What does the **revenue limit for Kirby Basic** mean?
 ----
 Text:
 
-The **Basic license** at its reduced price is only available for projects of individuals, companies and organizations that don't exceed a **yearly revenue or funding of € 1 million**.
+The **Basic license** at its reduced price is only available for projects of individuals, companies and organizations that don't exceed a **yearly revenue or funding of (revenue-limit: verbose)**.
 
 If you exceed this limit, you need to purchase an **Enterprise license** at regular price which features **no revenue limit**.
 

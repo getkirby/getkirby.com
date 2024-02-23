@@ -7,3 +7,13 @@
 	width: 18px;
 	height: 18px;
 }
+
+svg[data-type="loader"] {
+	animation: Spin 1.5s linear infinite;
+}
+
+@keyframes Spin {
+	100% {
+		transform: rotate(360deg);
+	}
+}

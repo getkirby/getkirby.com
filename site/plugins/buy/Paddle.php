@@ -4,6 +4,7 @@ namespace Buy;
 
 use Exception;
 use Kirby\Http\Remote;
+use Kirby\Toolkit\Str;
 use Throwable;
 
 class Paddle
@@ -27,6 +28,9 @@ class Paddle
 			'quantity'          => 1,
 			...$payload
 		];
+
+		// normalize the passthrough param to a JSON string
+		$data['passthrough'] = Passthrough::factory($data['passthrough'] ?? null)->toJson();
 
 		$response = static::request(
 			endpoint: 'product/generate_pay_link',
@@ -122,7 +126,10 @@ class Paddle
 
 				// calculate conversion rate from the EUR price;
 				// requires that the EUR price matches between the site and Paddle admin
-				rate: $paddleProduct['list_price']['net'] / $product->rawPrice()
+				rate: $paddleProduct['list_price']['net'] / $product->rawPrice(),
+
+				// calculate VAT rate, rounded to four decimal places to avoid float mishaps
+				vatRate: round($paddleProduct['list_price']['tax'] / $paddleProduct['list_price']['net'] * 10000) / 10000,
 			);
 		} catch (Throwable $e) {
 			// on any kind of error, use the EUR prices as a fallback

@@ -1,6 +1,10 @@
 <?php layout() ?>
 
 <style>
+article[data-loading] .price[data-sale] {
+	color: var(--color-gray-600)
+}
+
 .checklist {
 	font-size: var(--text-sm);
 }
@@ -66,251 +70,78 @@
 	color: var(--color-yellow-500);
 }
 
-.sale {
-	color: var(--color-purple-600);
+.price {
+	display: inline-flex;
+	align-items: baseline;
+	gap: 0.3rem;
 }
-.strikethrough {
+.price[data-regular] {
+	color: var(--color-gray-700);
 	text-decoration: line-through;
 }
-.currency-sign {
+.price[data-sale] {
+	color: var(--color-purple-600);
+}
+.price[data-sale] .currency-sign {
 	font-size: var(--text-xl);
-	padding-right: 0.25em;
-}
-k-price-info:not(.loaded) {
-	color: var(--color-gray-600);
 }
 
-@media (max-width: 40rem) {
-	.causes li:not(:first-child) {
-		display: none;
-	}
-}
-
-.volume-toggles {
-	display: flex;
-	align-items: center;
-	gap: 1.5rem;
-}
-.volume-toggles label {
-	display: flex;
-	align-items: center;
-	gap: .5rem;
-	cursor: pointer;
+[v-cloak] {
+	display: none;
 }
 </style>
 
-<article>
-	<div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-6)">
+<article v-scope data-loading @mounted="mounted">
+	<?php snippet('templates/buy/checkout') ?>
 
-		<div>
-			<h1 class="h1 max-w-xl mb-6">
-				The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
-			</h1>
+	<div v-else>
+		<div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-3)">
+			<div>
+				<h1 class="h1 max-w-xl mb-12">
+					The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
+				</h1>
 
-			<?php if ($sale->isActive()): ?>
-				<div class="h3 sale mb-12">
-					<?= $sale->text() ?>
-				</div>
-			<?php endif ?>
-		</div>
-
-		<div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
-			<div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
-				<header>
-					<h2>
-						Basic
-
-						<?php if ($sale->isActive()): ?>
-						<span class="px-1 color-gray-700 strikethrough">
-							<k-price-info key="currency-sign">€</k-price-info><!--
-							--><k-price-info key="basic-regular"><?= Buy\Product::Basic->price('EUR')->regular() ?></k-price-info>
-						</span>
-						<?php endif ?>
-					</h2>
-
-					<a href="/buy/basic" target="_blank" class="h2 block mb-3">
-						<k-price-info key="currency-sign-trimmed" class="sale currency-sign">€</k-price-info><!--
-						--><k-price-info key="basic-sale" class="sale"><?= Buy\Product::Basic->price('EUR')->sale() ?></k-price-info>
-						per site
-					</a>
-
-					<p class="text-sm color-gray-700">A discounted license for individuals, small teams and side projects</p>
-				</header>
-
-				<details class="revenue">
-					<summary><span>Revenue limit: <strong>€1M / year</strong></span> <?= icon('info') ?></summary>
-					<div>
-						<p>Your revenue or funding is less than <strong>€1&nbsp;million<k-price-info key="revenue-limit"></k-price-info></strong> in the <strong>last 12 months</strong>.</p>
-						<p>If you build a website for a client, the limit has to fit the revenue of your client.</p>
+				<?php if ($sale->isActive()): ?>
+					<div class="h3 sale mb-6">
+						<?= $sale->text() ?>
 					</div>
-				</details>
-
-				<?php snippet('templates/buy/checklist') ?>
-
-				<footer>
-					<p>
-						<a href="/buy/basic" target="_blank" class="btn btn--filled mb-1 w-100%">
-							<?= icon('cart') ?>
-							Buy Basic
-						</a>
-					</p>
-				</footer>
+				<?php endif ?>
 			</div>
-
-			<div class="pricing p-6 bg-white shadow-xl rounded flex flex-column justify-between">
-				<header>
-					<h2>
-						Enterprise
-
-						<?php if ($sale->isActive()): ?>
-						<span class="px-1 color-gray-700 strikethrough">
-							<k-price-info key="currency-sign">€</k-price-info><!--
-							--><k-price-info key="enterprise-regular"><?= Buy\Product::Enterprise->price('EUR')->regular() ?></k-price-info>
-						</span>
-						<?php endif ?>
-					</h2>
-
-					<a href="/buy/enterprise" target="_blank" class="h2 block mb-3">
-						<k-price-info key="currency-sign-trimmed" class="sale currency-sign">€</k-price-info><!--
-						--><k-price-info key="enterprise-sale" class="sale"><?= Buy\Product::Enterprise->price('EUR')->sale() ?></k-price-info>
-						per site
-					</a>
-
-					<p class="text-sm color-gray-700">Suitable for larger companies and organizations</p>
-				</header>
-
-				<details class="revenue">
-					<summary><span>Revenue limit: <strong>No limit</strong></span> <?= icon('info') ?></summary>
-					<div>
-						This license does not have a revenue limit.
-					</div>
-				</details>
-
-				<?php snippet('templates/buy/checklist') ?>
-
-				<footer>
-					<p>
-						<a href="/buy/enterprise" target="_blank" class="btn btn--filled mb-1 w-100%">
-							<?= icon('cart') ?>
-							Buy Enterprise
-						</a>
-					</p>
-				</footer>
+			<div class="columns" style="--columns: 2; --gap: var(--spacing-3)">
+				<?php snippet('templates/buy/product', [
+					'product'     => $basic,
+					'description' => 'A discounted license for individuals, small teams and side projects',
+					'limit'       => $revenueLimitShort . '/ year',
+				]) ?>
+				<?php snippet('templates/buy/product', [
+					'product'     => $enterprise,
+					'description' => 'Suitable for larger companies and organizations',
+					'limit'       => 'No limit'
+				]) ?>
+				<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">
+					Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a>
+				</p>
 			</div>
-			<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a></p>
 		</div>
+		<?php snippet('templates/buy/volume-discounts') ?>
 	</div>
 
-	<section class="mb-42">
-		<form class="volume-discounts" method="POST" target="_blank" action="<?= url('buy/volume') ?>">
-			<header class="flex items-baseline justify-between mb-6">
-				<h2 class="h2">Volume discounts</h2>
-				<fieldset>
-					<legend class="sr-only">License Type</legend>
-					<div class="volume-toggles">
-						<label><input type="radio" name="product" value="basic" checked> Basic</label>
-						<label><input type="radio" name="product" value="enterprise"> Enterprise</label>
-					</div>
-				</fieldset>
-			</header>
-			<div class="columns rounded overflow-hidden" style="--columns-md: 2; --columns: 4; --gap: var(--spacing-3)">
-				<?php foreach ($discounts as $volume => $discount) : ?>
-					<div class="block p-12 bg-light rounded text-center" >
-						<article>
-							<h3 class="mb text-sm">
-								<?= $volume ?> licenses
-							</h3>
-							<div class="mb-6">
-								<p class="h2">
-									Save <?= $discount ?>%
-								</p>
-								<?php if ($sale->isActive()): ?>
-									<p class="sale text-sm">on top!</p>
-								<?php endif ?>
-							</div>
-
-							<button class="btn btn--filled mb-3" name="volume" value="<?= $volume ?>">
-								<?= icon('cart') ?> Buy now
-							</button>
-						</article>
-					</div>
-				<?php endforeach ?>
-				<a class="block p-12 bg-light text-center" href="mailto:support@getkirby.com">
-					<article>
-						<h3 class="text-sm">Custom packages</h3>
-
-						<div class="mb-6">
-							<p class="h2">
-								Contact us
-							</p>
-							<?php if ($sale->isActive()): ?>
-								<p class="sale">&nbsp;</p>
-							<?php endif ?>
-						</div>
-
-						<p class="btn btn--outlined">
-							<?= icon('user') ?>
-							Support
-						</p>
-					</article>
-				</a>
-			</div>
-		</form>
-	</section>
-
 	<section class="mb-42 columns columns--reverse" style="--columns: 2; --columns-md: 1; --gap: var(--spacing-36)">
-		<div>
-
-			<h2 class="h2 mb-6">For a good cause? <mark class="px-1 rounded">It’s free.</mark></h2>
-			<div class="prose mb-6">
-				<p>We care about a better society and the future of our planet. We offer free&nbsp;licenses for <strong>students, selected educational projects, social and environmental organizations, charities and non-profits</strong> with insufficient funding.</p>
-			</div>
-
-			<a class="btn btn--filled mb-12" href="mailto:support@getkirby.com">
-				<?= icon('heart') ?>
-				Contact us
-			</a>
-
-			<ul class="columns causes" style="--columns: 2; --gap: var(--spacing-12);">
-				<?php foreach (collection('causes')->shuffle()->limit(2) as $case) : ?>
-					<li>
-						<a href="<?= $case->link()->toUrl() ?>">
-							<figure>
-								<span class="block shadow-2xl mb-3" style="--aspect-ratio: 3/4">
-									<?= img($image = $case->image(), [
-										'alt' => 'Screenshot of the ' . $image->alt() . ' website',
-										'src' => [
-											'width' => 300
-										],
-										'srcset' => [
-											'1x' => 400,
-											'2x' => 800,
-										]
-									]) ?>
-								</span>
-								<figcaption class="text-sm">
-									<?= $case->title() ?>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-				<?php endforeach ?>
-			</ul>
-		</div>
-
-		<div>
-			<h2 class="h2 mb-6">Frequently asked questions</h2>
-			<?php snippet('faq') ?>
-		</div>
+		<?php snippet('templates/buy/good-cause') ?>
+		<?php snippet('templates/buy/faq') ?>
 	</section>
 
 	<footer class="h2">
 		Manage your existing licenses in our <a href="https://hub.getkirby.com"><span class="link">license&nbsp;hub</span> &rarr;</a>
 	</footer>
-
 </article>
 
 <script type="module">
+import {
+	createApp,
+	reactive
+} from '<?= url('assets/js/libraries/petite-vue.js') ?>';
+
 // close price details on clicks outside the details
 document.addEventListener("click", (event) => {
 	for (const details of [...document.querySelectorAll("details")]) {
@@ -320,33 +151,205 @@ document.addEventListener("click", (event) => {
 	}
 });
 
-class PriceInfo extends HTMLElement {
-	constructor() {
-		super();
+// countries which require a postal code
+const postalCodeCountries = [
+	"AU",
+	"CA",
+	"FR",
+	"DE",
+	"IN",
+	"IT",
+	"NL",
+	"ES",
+	"GB",
+	"US"
+];
 
-		this.key = this.getAttribute("key");
-		this.value = window.priceInfo[this.key];
+createApp({
+	// props dynamically populated by the backend
+	locale: {
+		country: "",
+		currency: "€",
+		prices: {
+			basic: {
+				regular: <?= $basic->price('EUR')->sale() ?>,
+				sale: <?= $basic->price('EUR')->sale() ?>,
+			},
+			donation: {
+				customer: <?= $basic->price('EUR')->customerDonation() ?>,
+				team: <?= $basic->price('EUR')->teamDonation() ?>,
+			},
+			enterprise: {
+				regular: <?= $enterprise->price('EUR')->sale() ?>,
+				sale: <?= $enterprise->price('EUR')->sale() ?>,
+			}
+		},
+		revenueLimit: "",
+		status: null,
+		vatRate: 0,
+	},
 
-		// format price values
-		if (Number.isFinite(this.value) === true) {
-			const formatter = new Intl.NumberFormat("en");
-			this.value = formatter.format(this.value);
+	// user-generated props
+	personalInfo: {
+		city: "",
+		company: "",
+		country: "",
+		donate: false,
+		email: "",
+		newsletter: false,
+		postalCode: "",
+		state: "",
+		street: "",
+		vatId: "",
+	},
+
+	// dynamic props
+	checkoutIsActive: <?= get('checkout') === 'new' ? 'true' : 'false' ?>,
+	checkoutIsOpen: false,
+	isFetchingPrices: false,
+	isProcessing: false,
+	product: "basic",
+	quantity: 1,
+
+	// computed
+	get discountRate() {
+		<?php foreach ($discountsReversed as $minimum => $rate): ?>
+		if (this.quantity >= <?= $minimum ?>) {
+			return <?= $rate ?>;
 		}
+		<?php endforeach ?>
+
+		return 0;
+	},
+	get discountAmount() {
+		const factor = this.discountRate / 100;
+		return this.netLicenseAmount * factor * -1;
+	},
+	get donationText() {
+		return "Donate an additional " + this.locale.currency + this.locale.prices.donation.customer + " per license 💛";
+	},
+	get donationAmount() {
+		return this.personalInfo.donate ? (this.locale.prices.donation.customer * this.quantity) : 0;
+	},
+	get needsPostalCode() {
+		return postalCodeCountries.includes(this.personalInfo.country);
+	},
+	get netLicenseAmount() {
+		return this.price * this.quantity;
+	},
+	get price() {
+		return this.locale.prices[this.product].sale;
+	},
+	get subtotal() {
+		return this.netLicenseAmount + this.donationAmount + this.discountAmount;
+	},
+	get totalAmount() {
+		return this.subtotal + this.vatAmount;
+	},
+	get vatAmount() {
+		const rate = this.vatIdExists ? 0 : this.locale.vatRate;
+		return this.subtotal * rate;
+	},
+	get vatIdExists() {
+		return this.locale.vatRate > 0 && this.personalInfo.vatId?.length > 0;
+	},
+
+	// methods
+	amount(amount) {
+		if (Number.isFinite(amount) === true) {
+			const formatter = new Intl.NumberFormat("en", {
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			});
+			return this.locale.currency + formatter.format(amount);
+		}
+	},
+	amountDisplay(amount) {
+		if (Number.isFinite(amount) === true) {
+			const formatter = new Intl.NumberFormat("en");
+			return formatter.format(amount);
+		}
+	},
+	async changeCountry(event) {
+		this.locale               = await this.fetchPrices(this.personalInfo.country);
+		this.personalInfo.country = this.locale.country;
+
+		window.localStorage.setItem("country", this.locale.country);
+	},
+	closeCheckout() {
+		this.checkoutIsOpen = false;
+
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	},
+	async fetchPrices(country) {
+		if (this.isFetchingPrices === true) {
+			return;
+		}
+
+		this.isFetchingPrices = true;
+
+		const query = country ? "?" + new URLSearchParams({
+			country: country,
+		}) : "";
+
+		// fetch prices with options that allow using the preloaded response
+		const response = await fetch("/buy/prices" + query, {
+			method: "GET",
+			credentials: "include",
+			mode: "no-cors",
+		});
+
+		this.isFetchingPrices = false;
+
+		return await response.json();
+	},
+	async mounted() {
+		const country = window.localStorage.getItem("country") ?? this.locale.country;
+
+		this.locale               = await this.fetchPrices(country);
+		this.personalInfo.country = this.locale.country;
+
+		document.querySelector("article[data-loading]").removeAttribute("data-loading");
+
+		// stop checkout processing on unload
+		window.addEventListener("pagehide", (e) => {
+			this.isProcessing = false;
+		});
+	},
+	async openCheckout(product, quantity = 1, event) {
+		if (this.checkoutIsActive === false) {
+			return;
+		}
+
+		event?.preventDefault();
+
+		this.product = product;
+		this.quantity = quantity;
+		this.checkoutIsOpen = true;
+
+		await this.$nextTick();
+
+		const y = document.querySelector("#checkout").getBoundingClientRect().top + window.scrollY;
+
+		window.scroll({
+			top: y - 32,
+			behavior: "smooth",
+		});
+
+		document.querySelector("input[name=email]").focus({ preventScroll: true });
+	},
+	restrictQuantity(event) {
+		// allow an empty input...
+		if (this.quantity !== "") {
+			// ...but otherwise prevent values outside of the valid range
+			this.quantity = Math.max(Math.min(this.quantity, event.target.max), event.target.min);
+		}
+	},
+	submit() {
+		this.isProcessing = true;
 	}
-
-	connectedCallback() {
-		this.textContent = this.value;
-		this.classList.add("loaded");
-	}
-}
-
-// fetch with options that allow using the preloaded response
-const response = await fetch("<?= url('buy/prices') ?>", {
-	method: "GET",
-	credentials: "include",
-	mode: "no-cors",
-});
-window.priceInfo = await response.json();
-
-customElements.define("k-price-info", PriceInfo);
+}).mount();
 </script>

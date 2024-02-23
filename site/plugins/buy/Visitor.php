@@ -46,6 +46,7 @@ class Visitor
 	protected function __construct(
 		public readonly string $currency,
 		public readonly float $rate,
+		public readonly float|null $vatRate = null,
 		public readonly string|null $country = null,
 		public readonly string|null $error = null
 	) {
@@ -56,12 +57,14 @@ class Visitor
 	 *
 	 * @param string $currency Currency code
 	 * @param float $rate Currency conversion rate from EUR
+	 * @param float|null $vatRate VAT rate for the country on top of the net price if available
 	 * @param string|null $country Two-character ISO country code if available
 	 * @param string|null $error Error message if an error occurred during currency detection
 	 */
 	public static function create(
 		string $currency,
 		float $rate,
+		float|null $vatRate = null,
 		string|null $country = null,
 		string|null $error = null
 	): static {
@@ -78,7 +81,7 @@ class Visitor
 			$error = 'Invalid conversion rate "' . $rate . '" for currency EUR';
 		}
 
-		return new static($currency, $rate, $country, $error);
+		return new static($currency, $rate, $vatRate, $country, $error);
 	}
 
 	/**
@@ -165,29 +168,19 @@ class Visitor
 	 * Returns the formatted approximate revenue limit
 	 * in the user's currency
 	 *
-	 * @param int $revenueLimit Limit in EUR to convert
+	 * @param bool $verbose Whether to use long suffixes
 	 */
-	public function revenueLimit(int $revenueLimit): string
+	public function revenueLimit(bool $verbose = false): string
 	{
-		$converted = $revenueLimit * $this->rate;
+		return RevenueLimit::approximation($this, $verbose);
+	}
 
-		// shorten to three digits with K/M/B suffix
-		$suffix = '';
-		if ($converted >= 1000000000) {
-			$converted /= 1000000000;
-			$suffix = 'B';
-		} elseif ($converted >= 1000000) {
-			$converted /= 1000000;
-			$suffix = 'M';
-		} elseif ($converted >= 1000) {
-			$converted /= 1000;
-			$suffix = 'K';
-		}
-
-		// use two significant digits because it's just an approximation
-		$digits    = strlen(round($converted));
-		$converted = round($converted, -$digits + 2);
-
-		return '~ ' . $this->currencySign() . $converted . $suffix;
+	/**
+	 * Returns the VAT rate for the country on top
+	 * of the net price if available
+	 */
+	public function vatRate(): float|null
+	{
+		return $this->vatRate;
 	}
 }

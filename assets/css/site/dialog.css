@@ -15,6 +15,11 @@ body:has(.dialog[open]) {
 	overflow: hidden;
 }
 
+.dialog-form {
+	position: relative;
+	accent-color: var(--color-blue-700);
+}
+
 .dialog-form .field+.field {
 	margin-top: var(--spacing-6);
 }
@@ -25,14 +30,14 @@ body:has(.dialog[open]) {
 	margin-bottom: var(--spacing-2);
 }
 
-.dialog-form .label abbr {
+.dialog-form label abbr {
 	text-decoration: none;
-	color: var(--color-red-500);
+	color: var(--color-red-600);
 	margin-left: .125rem;
 	display: none;
 }
 
-.dialog-form .field:has(*:invalid) .label abbr {
+.dialog-form .field:has(*:invalid) label abbr {
 	display: inline;
 }
 
@@ -43,13 +48,17 @@ body:has(.dialog[open]) {
 	border-radius: var(--rounded-sm);
 	box-shadow: 0px 0px 0px 1px var(--color-border);
 }
+.dialog-form :where(input:not([type=checkbox], [type=radio]), select):focus {
+	outline: 2px solid var(--color-blue-700);
+}
 
-.dialog-form select.input {
+.dialog-form select {
 	appearance: none;
+	font-size: inherit;
 }
 
 .dialog-form .checkbox {
-	height: 2.25rem;
+	min-height: 2.25rem;
 	display: flex;
 	align-items: center;
 	color: var(--color-black);
@@ -71,4 +80,3 @@ body:has(.dialog[open]) {
 	flex-basis: 50%;
 	flex-grow: 1;
 }
-
