@@ -62,7 +62,10 @@ class MeetEventsPage extends Page
 		);
 
 		$data = $data->json();
-		$data = array_filter($data, fn ($event) => $event['entity_type'] === 3);
+		$data = array_filter(
+			$data,
+			fn ($event) => ($event['entity_type'] ?? null) === 3
+		);
 
 		usort(
 			$data,
