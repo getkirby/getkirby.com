@@ -110,7 +110,7 @@ article[data-loading] .price[data-sale] {
 			<div class="columns" style="--columns: 2; --gap: var(--spacing-3)">
 				<?php snippet('templates/buy/product', [
 					'product'     => $basic,
-					'description' => 'A discounted license for individuals, small teams and side projects',
+					'description' => 'A discounted license for individuals and small teams',
 					'limit'       => $revenueLimitShort . '/ year',
 				]) ?>
 				<?php snippet('templates/buy/product', [

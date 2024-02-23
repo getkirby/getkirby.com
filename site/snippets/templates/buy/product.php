@@ -29,14 +29,13 @@
 		<div>
 			<?php if ($product === Buy\Product::Basic): ?>
 			<p>
-				Your revenue or funding is less than <strong><?= $revenueLimitVerbose ?><span v-cloak v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span></strong>
-				in the <strong>last 12 months</strong>.
+				You qualify to use a Basic license as long as your overall revenue/funding (not profit) was less than <strong><?= $revenueLimitVerbose ?><span v-cloak v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span></strong> in the <strong>last 12 months</strong>.
 			</p>
 			<p>
-				If you build a website for a client, the limit has to fit the revenue of your client.
+				If you build a website for a client, the limit applies to the revenue of your client.
 			</p>
 			<?php else: ?>
-			This license does not have a revenue limit.
+			This license does not have any revenue limit.
 			<?php endif ?>
 		</div>
 	</details>
