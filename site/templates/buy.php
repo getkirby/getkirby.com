@@ -339,7 +339,7 @@ createApp({
 			behavior: "smooth",
 		});
 
-		document.querySelector("input[name=email]").focus({ preventScroll: true });
+		document.querySelector("input[name=quantity]").focus({ preventScroll: true });
 	},
 	restrictQuantity(event) {
 		// allow an empty input...
