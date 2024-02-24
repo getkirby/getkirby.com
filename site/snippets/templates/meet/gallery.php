@@ -4,7 +4,7 @@
 		<?php foreach ($gallery as $image): ?>
 		<li>
 			<figure class="img rounded-xl overflow-hidden" style="--w:<?= $image->width() ?>;--h:<?= $image->height() ?>">
-				<img src="<?= $image->resize(800)->url() ?>" alt="<?= $image->alt()->esc() ?>" loading="lazy">
+				<img src="<?= $image->resize(800)->url() ?>" alt="<?= $image->title()->esc() ?>" loading="lazy">
 			</figure>
 		</li>
 		<?php endforeach ?>
@@ -24,9 +24,14 @@
 .album-gallery li:not(:last-child) {
   margin-bottom: 1.5rem;
 }
-@media screen and (min-width: 60rem) {
+@media screen and (min-width: 40rem) {
   .album-gallery {
     columns: 2;
+  }
+}
+@media screen and (min-width: 60rem) {
+  .album-gallery {
+    columns: 3;
   }
 }
 </style>
