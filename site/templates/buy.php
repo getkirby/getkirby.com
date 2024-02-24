@@ -204,7 +204,6 @@ createApp({
 	},
 
 	// dynamic props
-	checkoutIsActive: true,
 	checkoutIsOpen: false,
 	isFetchingPrices: false,
 	isProcessing: false,
@@ -319,13 +318,7 @@ createApp({
 			this.isProcessing = false;
 		});
 	},
-	async openCheckout(product, quantity = 1, event) {
-		if (this.checkoutIsActive === false) {
-			return;
-		}
-
-		event?.preventDefault();
-
+	async openCheckout(product, quantity = 1) {
 		this.product = product;
 		this.quantity = quantity;
 		this.checkoutIsOpen = true;

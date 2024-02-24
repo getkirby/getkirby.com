@@ -40,7 +40,7 @@
 							<?php endif ?>
 						</div>
 
-						<button class="btn btn--filled mb-3" @click="openCheckout(product, <?= $volume ?>, $event)" name="volume" value="<?= $volume ?>">
+						<button class="btn btn--filled mb-3" @click.prevent="openCheckout(product, <?= $volume ?>)" name="volume" value="<?= $volume ?>">
 							<?= icon('cart') ?> Buy now
 						</button>
 					</article>
