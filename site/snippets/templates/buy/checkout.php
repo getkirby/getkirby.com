@@ -214,8 +214,10 @@
 						<tr>
 							<th>
 								<div class="inputs">
-									<input type="number" name="quantity" value="1" required min="<?= option('buy.quantities.min') ?>" max="<?= option('buy.quantities.max') ?>" step="1" v-model="quantity" @input="restrictQuantity">
-									<select required name="product" v-model="product" value="<?= $basic->value() ?>">
+									<label class="sr-only" for="quantity">Quantity</label>
+									<input id="quantity" type="number" name="quantity" value="1" required min="<?= option('buy.quantities.min') ?>" max="<?= option('buy.quantities.max') ?>" step="1" v-model="quantity" @input="restrictQuantity">
+									<label class="sr-only" for="product">Product</label>
+									<select id="product" required name="product" v-model="product" value="<?= $basic->value() ?>">
 										<option value="<?= $basic->value() ?>" selected>Kirby <?= $basic->label() ?></option>
 										<option value="<?= $enterprise->value() ?>">Kirby <?= $enterprise->label() ?></option>
 									</select>
