@@ -11,7 +11,7 @@
 			<?php endif ?>
 		</h2>
 
-		<a href="/buy/basic" @click="openCheckout('<?= $product->value() ?>', 1, $event)" target="_blank" class="h2 block mb-3">
+		<a href="/buy/basic" @click.prevent="openCheckout('<?= $product->value() ?>', 1)" target="_blank" class="h2 block mb-3">
 			<span class="price" data-sale>
 				<span class="currency-sign" v-text="locale.currency.trim()">€</span>
 				<span class="amount" v-text="amountDisplay(locale.prices.<?= $product->value() ?>.sale)"><?= $product->price('EUR')->sale() ?></span>
@@ -44,7 +44,7 @@
 
 	<footer>
 		<p>
-			<a href="/buy/<?= $product->value() ?>" @click="openCheckout('<?= $product->value() ?>', 1, $event)" target="_blank" class="btn btn--filled mb-1 w-100%">
+			<a href="/buy/<?= $product->value() ?>" @click.prevent="openCheckout('<?= $product->value() ?>', 1)" target="_blank" class="btn btn--filled mb-1 w-100%">
 				<?= icon('cart') ?>
 				Buy <?= $product->label() ?>
 			</a>
