@@ -25,8 +25,8 @@ return [
 		15 => 15
 	],
 	'donation' => [
-		'teamAmount'     => 0,
-		'customerAmount' => 0,
+		'teamAmount'     => 1,
+		'customerAmount' => 1,
 		'charity' => 'Amadeu Antonio Foundation',
 		'purpose' => 'for their work on reinforcing a democratic civil society',
 		'link'    => 'https://www.amadeu-antonio-stiftung.de/en/'
