@@ -23,17 +23,17 @@
 
 		<form class="dialog-form" method="post" action="<?= $page->url() ?>#add" class="p-6 bg-light">
 			<div class="field">
-				<label class="label" for="name">Name <abbr title="Required">*</abbr></label>
+				<label class="label" for="name">Name <abbr title="Required" aria-hidden>*</abbr></label>
 				<input class="input" type="text" id="name" name="name" minlength="1" maxlength="100" required value="<?= esc($user['name']) ?>">
 			</div>
 			<div class="field">
 				<div class="columns" style="--columns: 2; gap: var(--spacing-3)">
 					<div>
-						<label class="label" for="place">Place <abbr title="Required">*</abbr></label>
+						<label class="label" for="place">Place <abbr title="Required" aria-hidden>*</abbr></label>
 						<input class="input" type="text" id="place" name="place" minlength="2" maxlength="100" placeholder="Gotham City" required value="<?= esc($user['place']) ?>">
 					</div>
 					<div>
-						<label class="label" for="country">Country <abbr title="Required">*</abbr></label>
+						<label class="label" for="country">Country <abbr title="Required" aria-hidden>*</abbr></label>
 						<input class="input" type="text" id="country" name="country" minlength="2" maxlength="100" placeholder="Narnia" required value="<?= esc($user['country']) ?>">
 					</div>
 				</div>

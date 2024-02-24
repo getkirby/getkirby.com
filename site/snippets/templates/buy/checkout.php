@@ -277,13 +277,13 @@
 						<legend>Your details</legend>
 						<div class="fields">
 							<div class="field">
-								<label class="label" for="email">Email <abbr title="Required">*</abbr></label>
+								<label class="label" for="email">Email <abbr title="Required" aria-hidden>*</abbr></label>
 								<input id="email" name="email" class="input" type="email" required v-model="personalInfo.email" placeholder="mail@example.com">
 							</div>
 
 							<div class="fieldgroup">
 								<div class="field">
-									<label class="label" for="country">Country <abbr title="Required">*</abbr></label>
+									<label class="label" for="country">Country <abbr title="Required" aria-hidden>*</abbr></label>
 									<select id="country" name="country" required autocomplete="country" class="input" v-model="personalInfo.country" @change="changeCountry">
 										<?php foreach ($countries as $countryCode => $countryName): ?>
 										<option value="<?= $countryCode ?>"><?= $countryName ?></option>
@@ -291,7 +291,7 @@
 									</select>
 								</div>
 								<div v-if="needsPostalCode" class="field">
-									<label class="label" for="postalCode">Postal Code <abbr title="Required">*</abbr></label>
+									<label class="label" for="postalCode">Postal Code <abbr title="Required" aria-hidden>*</abbr></label>
 									<input id="postalCode" name="postalCode" class="input" autocomplete="postal-code" :required="needsPostalCode" v-model="personalInfo.postalCode" type="text">
 								</div>
 							</div>
@@ -307,22 +307,22 @@
 							</div>
 
 							<div class="field" v-if="vatIdExists">
-								<label class="label" for="company">Company <abbr title="Required">*</abbr></label>
+								<label class="label" for="company">Company <abbr title="Required" aria-hidden>*</abbr></label>
 								<input id="company" name="company" placeholder="Company name …" autocomplete="organization" class="input" type="text" v-model="personalInfo.company" :required="vatIdExists">
 							</div>
 
 							<div class="field" v-if="vatIdExists">
-								<label class="label" for="street">Street <abbr title="Required">*</abbr></label>
+								<label class="label" for="street">Street <abbr title="Required" aria-hidden>*</abbr></label>
 								<input id="street" name="street" class="input" type="text" v-model="personalInfo.street" :required="vatIdExists">
 							</div>
 
 							<div class="field" v-if="vatIdExists">
-								<label class="label" for="city">Town/City <abbr title="Required">*</abbr></label>
+								<label class="label" for="city">Town/City <abbr title="Required" aria-hidden>*</abbr></label>
 								<input id="city" name="city" class="input" type="text" v-model="personalInfo.city" :required="vatIdExists">
 							</div>
 
 							<div class="field" v-if="vatIdExists">
-								<label class="label" for="state">State/County <abbr title="Required">*</abbr></label>
+								<label class="label" for="state">State/County <abbr title="Required" aria-hidden>*</abbr></label>
 								<input id="state" name="state" class="input" type="text" v-model="personalInfo.state" :required="vatIdExists">
 							</div>
 						</div>
@@ -339,7 +339,7 @@
 					<div v-if="product === '<?= $basic->value() ?>'" class="field">
 						<label class="font-bold flex items-center" style="gap: var(--spacing-2)">
 							<input id="limit" type="checkbox" name="limit" required>
-							<span>Confirm the revenue limit <abbr title="Required">*</abbr></span>
+							<span>Confirm the revenue limit <abbr title="Required" aria-hidden>*</abbr></span>
 						</label>
 						<p class="help">
 							End customers must not exceed an annual revenue/funding of
