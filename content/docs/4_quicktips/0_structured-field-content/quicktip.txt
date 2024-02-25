@@ -1,4 +1,4 @@
-Title: Structured field content
+Title: Structured content
 
 ----
 
@@ -14,7 +14,7 @@ Authors: - authors/bastian-allgeier
 
 ----
 
-Tags: panel
+Tags: panel, structure field
 
 ----
 

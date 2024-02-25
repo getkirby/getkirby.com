@@ -1,4 +1,4 @@
-Title: Simple share buttons
+Title: Share buttons
 
 ----
 

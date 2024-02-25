@@ -1,4 +1,4 @@
-Title: Don't repeat the same query multiple times
+Title: Keep code dry
 
 ----
 

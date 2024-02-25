@@ -1,4 +1,4 @@
-Title: Update file template/metadata
+Title: Update file metadata
 
 ----
 

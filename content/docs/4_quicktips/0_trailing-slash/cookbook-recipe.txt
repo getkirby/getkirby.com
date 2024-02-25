@@ -1,4 +1,4 @@
-Title: To slash or not to slash
+Title: Add/prevent trailing slash
 
 ----
 

@@ -1,4 +1,4 @@
-Title: Translate exception messages in frontend
+Title: Translate exception messages
 
 ----
 
