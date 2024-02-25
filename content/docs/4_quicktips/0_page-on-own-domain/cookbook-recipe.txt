@@ -1,4 +1,4 @@
-Title: Serving a page on its own domain
+Title: Serve page on own domain
 
 ----
 

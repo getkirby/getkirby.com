@@ -1,4 +1,4 @@
-Title: Examples for customizing the Panel
+Title: Customize Panel
 
 ----
 

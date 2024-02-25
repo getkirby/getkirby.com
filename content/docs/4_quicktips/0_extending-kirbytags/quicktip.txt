@@ -1,4 +1,4 @@
-Title: Reusing KirbyTags in custom tags
+Title: Reusing KirbyTags
 
 ----
 

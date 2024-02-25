@@ -1,4 +1,4 @@
-Title: Using placeholders in language strings
+Title: Placeholders in language strings
 
 ----
 

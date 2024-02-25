@@ -1,4 +1,4 @@
-Title: Filtering by language
+Title: Filter by language
 
 ----
 

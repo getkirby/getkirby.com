@@ -1,4 +1,4 @@
-Title: Custom homepage title
+Title: Homepage title
 
 ----
 

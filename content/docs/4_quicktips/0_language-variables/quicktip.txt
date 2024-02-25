@@ -1,4 +1,4 @@
-Title: Flexible language variables
+Title: Language variables
 
 ----
 
