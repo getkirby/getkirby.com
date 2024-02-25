@@ -6,7 +6,7 @@ Published: 2022-05-29
 
 ----
 
-Description: Boost your website's performance with resized images that adapt to all screen sizes and save bandwidth
+Description: Boost your site's performance with images that adapt to all screen sizes
 
 ----
 

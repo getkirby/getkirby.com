@@ -1,4 +1,4 @@
-Title: The power of placeholders
+Title: Placeholders
 
 ----
 

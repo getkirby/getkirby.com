@@ -1,4 +1,20 @@
-Title: To bundle or not to bundle: differences of creating plugins with or without a build process
+Title: Plugins with/without a build process
+
+----
+
+Published: 2021-03-05
+
+----
+
+Description: Build Panel extensions without a build process.
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: plugin, build process, vite
 
 ----
 
@@ -448,15 +464,3 @@ panel.plugin('cookbook/audio-block', {
 ## Conclusion
 
 While it is possible to bypass the extra complexity a build process introduces into our workflow, this way of creating Panel blocks or other Panel extension has its limits. With more complex logic and templates, it easily gets messy, and particularly if you want to have more than one extension in a single plugin.
-
-----
-
-Published: 2021-03-05
-
-----
-
-Description: Using bundlers like kirbyup is not for everyone. Here we show how you can build Panel extensions without a build process.
-
-----
-
-Authors: - authors/sonja-broda

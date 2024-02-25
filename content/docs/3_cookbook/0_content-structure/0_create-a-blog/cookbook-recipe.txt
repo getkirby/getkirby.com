@@ -1,4 +1,4 @@
-Title: Creating a Kirby-powered blog
+Title: Creating a blog
 
 ----
 

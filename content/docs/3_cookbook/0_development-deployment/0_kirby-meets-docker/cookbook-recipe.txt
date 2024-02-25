@@ -6,7 +6,7 @@ Published: 2021-05-02
 
 ----
 
-Description: Getting started with Docker for development: Quickly spin up Kirby in a Docker container, bind local directories and add other services like MailHog
+Description: Get started with Docker as development environment
 
 ----
 

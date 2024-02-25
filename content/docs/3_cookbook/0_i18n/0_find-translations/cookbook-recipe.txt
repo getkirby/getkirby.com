@@ -1,4 +1,4 @@
-Title: Find translations in your code
+Title: Finding translations
 
 ----
 
@@ -6,7 +6,7 @@ Published: 2020-09-22
 
 ----
 
-Description: Find and collect all your translations used with the t() helper function in your code.
+Description: Search your code for all translations used with the t() helper function
 
 ----
 

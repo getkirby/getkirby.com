@@ -1,4 +1,4 @@
-Title: Headless kiosk application
+Title: Headless kiosk app
 
 ----
 

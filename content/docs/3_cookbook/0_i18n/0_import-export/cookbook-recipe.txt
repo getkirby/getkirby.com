@@ -1,4 +1,4 @@
-Title: Import and export translations
+Title: Import/export translations
 
 ----
 

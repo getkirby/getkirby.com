@@ -1,4 +1,4 @@
-Title: Protecting files behind a firewall
+Title: Protecting files
 
 ----
 
@@ -6,7 +6,7 @@ Published: 2021-05-23
 
 ----
 
-Description: Creating a download section with restricted access for authorized users
+Description: Restrict access to a files download section to authorized users
 
 ----
 

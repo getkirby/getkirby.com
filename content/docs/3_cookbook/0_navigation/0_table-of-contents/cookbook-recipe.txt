@@ -1,5 +1,19 @@
-Title: Of anchors and ToCs, part 1
+Title: Anchors and ToCs
 
+----
+
+Published: 01.06.2020
+
+----
+
+Description: Auto-replace headlines with anchors and generate in-page navigation
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+Tags: navigation
 ----
 
 Text:
@@ -351,17 +365,3 @@ The last step is to overwrite the default heading block snippet and add an `id` 
 <?php /** @var \Kirby\Cms\Block $block */ ?>
 <<?= $level = $block->level()->or('h2') ?> id="<?= Str::slug($block->text()) ?>"><?= $block->text() ?></<?= $level ?>>
 ```
-----
-
-Published: 01.06.2020
-
-----
-
-Description: Auto-replace headlines with anchors and generate a table of contents
-
-----
-
-Authors: - authors/sonja-broda
-
-----
-Tags: navigation

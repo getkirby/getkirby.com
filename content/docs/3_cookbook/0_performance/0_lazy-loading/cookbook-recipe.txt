@@ -2,7 +2,7 @@ Title: Image lazy-loading
 
 ----
 
-Description: Lazy-loading strategies to improve the performance of your site
+Description: Lazy-loading strategies to improve your site's performance
 
 ----
 

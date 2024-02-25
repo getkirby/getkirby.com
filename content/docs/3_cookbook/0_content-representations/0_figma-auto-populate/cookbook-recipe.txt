@@ -1,4 +1,4 @@
-Title: Populate Figma designs with Kirby data
+Title: Populate Figma designs
 
 ----
 
@@ -6,7 +6,7 @@ Published: 2022-05-09
 
 ----
 
-Description: Using a JSON representation to auto-populate your Figma designs with content from your Kirby installation
+Description: Using JSON representations to auto-populate your Figma designs
 
 ----
 

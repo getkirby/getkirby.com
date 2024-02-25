@@ -1,4 +1,4 @@
-Title: Generating JSON with Kirby
+Title: Generating JSON
 
 ----
 

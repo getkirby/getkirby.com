@@ -1,4 +1,4 @@
-Title: Filter collections by tags
+Title: Filtering with tags
 
 ----
 

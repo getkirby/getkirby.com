@@ -1,4 +1,4 @@
-Title: User sign-up
+Title: User registration
 
 ----
 

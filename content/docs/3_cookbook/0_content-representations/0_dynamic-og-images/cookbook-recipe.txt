@@ -1,4 +1,4 @@
-Title: Using content representations to create OG images
+Title: Creating OG images
 
 ----
 

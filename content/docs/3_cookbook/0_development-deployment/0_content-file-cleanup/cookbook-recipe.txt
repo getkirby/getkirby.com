@@ -1,4 +1,4 @@
-Title: Cleaning up content files
+Title: Content clean-up
 
 ----
 

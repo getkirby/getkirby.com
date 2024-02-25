@@ -1,4 +1,4 @@
-Title: Plugin test workflow with PHPUnit
+Title: Plugin testing with PHPUnit
 ----
 
 Published: 2019-06-26

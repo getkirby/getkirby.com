@@ -1,4 +1,4 @@
-Title: First steps to start debugging with Xdebug
+Title: Debugging with Xdebug
 
 ----
 
@@ -6,7 +6,7 @@ Published: 2021-01-04
 
 ----
 
-Description: Xdebug helps you track down errors in your PHP scripts. In this recipe, we will set it up with VS Code.
+Description: Xdebug helps you track down errors in your PHP scripts.
 
 ----
 

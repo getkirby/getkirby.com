@@ -2,7 +2,7 @@ Title: Coding style standards
 
 ----
 
-Description: Set up coding style standards and fix violations automatically with configurable tools that are easy to implement.
+Description: Fix coding style violations automatically with easy-to-implement, configurable tools
 
 ----
 

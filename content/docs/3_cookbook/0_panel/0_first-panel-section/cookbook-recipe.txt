@@ -1,8 +1,8 @@
-Title: My first Panel section
+Title: Custom Panel section
 
 ----
 
-Description: Let's build a custom Panel section
+Description: Building very basic custom Panel section for a link list
 
 ----
 

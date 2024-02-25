@@ -6,7 +6,7 @@ Published: 2021-06-06
 
 ----
 
-Description: This is an example of how to build a nested block including live panel preview and output snippets for the website.
+Description: Building a nested block with live panel preview
 
 ----
 

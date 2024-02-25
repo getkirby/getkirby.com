@@ -1,4 +1,4 @@
-Title: My first Panel area
+Title: Basic Panel area
 
 ----
 
