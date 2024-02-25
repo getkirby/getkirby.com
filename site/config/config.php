@@ -14,6 +14,7 @@ return [
 	'newstroll'  => ['list' => 110866],
 	'panel'      => false,
 	'plugins'    => require __DIR__ . '/plugins.php',
+	'cookbook'   => require __DIR__ . '/cookbook.php',
 	'routes'     => require __DIR__ . '/routes.php',
 	'search'     => require __DIR__ . '/search.php',
 	'thumbs'     => [
@@ -25,3 +26,5 @@ return [
 		'uuid'    => false
 	],
 ];
+
+
