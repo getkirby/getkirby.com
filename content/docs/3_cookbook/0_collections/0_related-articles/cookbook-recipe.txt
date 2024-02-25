@@ -1,0 +1,86 @@
+Title: Related articles
+
+----
+
+Description: Build relations between articles using YAML content and the pages field.
+
+----
+
+Thumbnail: related.png
+
+----
+
+Authors: - authors/bastian-allgeier
+
+----
+Tags: collections, relations
+
+----
+
+Text:
+
+With **(glossary: yaml text: YAML) content** and the **pages field** you can easily link information on your site with other sources in Kirby. All examples below are based on the (link: docs/guide/installation#installation text: Starterkit).
+
+## In your content files
+
+Add a new field to any of your content files to which you'd like to add related pages:
+
+```kirbycontent "/content/2_notes/20180625_a-night-in-the-forest/note.txt"
+Title: A night in the forest
+\----
+Text: Some insightful text for the audience
+\----
+Related:
+
+- notes/across-the-ocean
+- notes/in-the-jungle-of-sumatra
+```
+
+You are free to name the field that contains the related pages however you like, as long as you take care of using the right variable in the template later.
+
+Add any number of related pages with the (glossary: yaml text: YAML) syntax. To link pages, store their URI (the URL without your domain) in the content file. Since the URI is unique, Kirby will always be able to find the right page, even if you change its content or its sorting number. You have to be careful, however, if you change the location of a page or its folder name.
+
+<info>If you don't want to add and edit the entries manually in the content file, make sure to (link: #in-the-panel text: set up the Panel) accordingly.</info>
+
+## In your templates
+
+Accessing those related posts in your templates could look like this:
+
+```php "/site/templates/note.php"
+<?php
+$related = $page->related()->toPages();
+if ($related->count() > 0):
+?>
+  <h2>Related</h2>
+  <ul>
+    <?php foreach($related as $article): ?>
+    <li>
+      <a href="<?= $article->url() ?>">
+        <?= $article->title() ?>
+      </a>
+    </li>
+    <?php endforeach ?>
+  </ul>
+<?php endif ?>
+```
+
+We use the field method (method: $field::toPages text: ->toPages()) to convert the (glossary: yaml text: YAML) list of page ids from the field to a pages collection. After that we can iterate over the pages collection and use the familiar (link: docs/guide/templates/php-api text: Kirby PHP API).
+
+
+## In the Panel
+
+If you use the (glossary: panel), you have to add the `related` field to your (glossary: blueprint text: blueprint). The **(link: docs/reference/panel/fields/pages text: pages field)** offers a great way to select one or more related articles.
+
+
+```yaml "/site/blueprints/pages/note.yml"
+  related:
+    label: Related articles
+    type: pages
+    query: page.siblings(false)
+```
+
+We use the `query` option to display all sibling pages of the current page in the list. By passing `false` to the `$page->siblings()` method, we exclude the current page from the list – we don't want the article itself to be a related article. (link: docs/guide/blueprints/query-language text: Learn more) about our query syntax.
+
+(image: related.png)
+
+

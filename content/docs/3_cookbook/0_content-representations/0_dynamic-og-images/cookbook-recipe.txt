@@ -1,0 +1,212 @@
+Title: Using content representations to create OG images
+
+----
+
+Published: 2022-11-13
+
+----
+
+Description: Dynamic creation of Open Graph images for social sharing
+
+----
+
+Authors: - authors/manuel-Steinberg
+
+----
+
+Tags: media, content representations
+
+----
+
+Text:
+
+Have you ever wondered why some links when shared on social media have a link preview and some do not? The magic behind this is the Open Graph protocol, and this recipe provides a boilerplate to easily create OG images for your Kirby website with content representations.
+
+## Open Graph introduction
+
+The (link: https://ogp.me/ text: Open Graph protocol) was originally created by Meta (formerly Facebook). The protocol enables any web page to become a rich object in a (link: https://en.wikipedia.org/wiki/Social_graph text: social graph). For instance, this is used on Social Media to standardize the use of metadata within a webpage to represent the content of a page.
+
+### HTML markup
+
+The basic HTML markup within the `<head>` element looks like the following:
+
+```html
+<meta property="og:site_name" content="Kirby CMS">
+<meta property="og:url" content="https://getkirby.com/docs/cookbook/content/dynamic-og-images">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Using content representations to create OG images">
+<meta property="og:description" content="Dynamic creation of Open Graph images for social sharing">
+<meta property="og:image" content="https://getkirby.com/docs/cookbook/content/dynamic-og-images/opengraph.png">
+```
+
+### Image preview
+
+The code snippet above is the same as the one that used for this cookbook recipe, and when you share it on social media, the link preview will look something like this:
+
+(image: kirby-opengraph.png caption: Open Graph image generated from getkirby.com website)
+
+
+## Content representations
+
+While the above example works great on the (link: https://getkirby.com/ text: Kirby CMS website) with a custom plugin ((link: https://github.com/getkirby/getkirby.com/blob/main/site/plugins/meta/src/PageMeta.php text: check it out on GitHub)), a simplified approach is to use content representations to generate these OG images. This approach works well if you only need custom OG images for a single page type.
+
+<info>
+There is a great (link: https://getkirby.com/docs/guide/templates/content-representations text: guide about **content representations**) you should check out first.
+</info>
+
+## Requirements
+
+<warning>
+Using content representations for OG image generation will only work if you use a dedicated template, e.g. for your blog articles.
+</warning>
+
+See the (link: https://getkirby.com/docs/guide/templates/basics text: templates guide) in case you are not familar with templates yet.
+
+```filesystem
+site/
+  templates/
+    article.php
+    note.php
+    default.php
+```
+
+<success>
+In case you are already using template files and your filesystem looks like the example above you are good to go!
+</success>
+
+## Setup
+
+First, create a new content representations template file, e.g. `article.png.php`. This allows you to create various OG images with `.png` extension for the given template.
+
+```filesystem
+site/
+  templates/
+    article.php
+    article.png.php
+    note.php
+```
+
+## Image rendering
+
+There are tons of possibilities now to create and manipulate images with PHP. Check out the (link: https://www.php.net/manual/en/ref.image.php text: GD and Image Functions) of PHP. The only limit is your creativity!
+
+1. Let's start with defining the canvas size for the image:
+
+```php "/site/templates/article.png.php"
+$canvas = imagecreatetruecolor(1200, 628);
+```
+
+<warning>
+The recommended aspect ratio for an OG image is 1.91:1, but many tutorials out there refer to a format of 1200x630 pixels. However, 1200x628 yields a closer aspect ratio and is therefore preferred.
+</warning>
+
+2. Define some variables, e.g. for colors or fonts:
+
+```php "/site/templates/article.png.php"
+$backgroundColor = imagecolorallocate($canvas, 255, 255, 255); // white
+$textColor       = imagecolorallocate($canvas, 66, 66, 66);
+$fontFile        = './assets/fonts/oswald.ttf';
+```
+
+3. Set the background color:
+
+```php "/site/templates/article.png.php"
+imagefill($canvas, 0, 0, $backgroundColor);
+```
+
+4. Print the page title to the image:
+
+```php "/site/templates/article.png.php"
+$title  = $page->title()->toString();
+$title  = wordwrap($title, 30); // default value for third parameter $break = "\n"
+
+imagefttext($canvas, 50, 0, 150, 185, $textColor, $fontFile, $title);
+```
+
+5. Finally, return the `.png` image:
+
+```php "/site/templates/article.png.php"
+imagepng($canvas);
+imagedestroy($canvas); // This function has no effect. Before PHP 8.0.0, this function was used to close the resource.
+```
+
+The basic OG image using only text will look like this:
+
+(image: textonly-opengraph.png caption: Open Graph image with only text generated with content representations)
+
+### Add more flavor to the image
+
+For example, a colored rectangle:
+
+```php "/site/templates/article.png.php"
+$brandColor = imagecolorallocate($canvas, 246, 211, 85);
+
+imagefilledrectangle($canvas, 100, 100, 115, 525, $brandColor);
+```
+
+And a logo:
+
+```php "/site/templates/article.png.php"
+$logoFile = './assets/kirby-logo.png';
+$logo     = imagecreatefrompng($logoFile);
+
+imagecopyresampled($canvas, $logo, 975, 400, 0, 0, imagesx($logo), imagesy($logo), imagesx($logo), imagesy($logo));
+```
+
+(image: flavour-opengraph.png caption: Open Graph image generated with content representations)
+
+### Finally, adjust the markup of your HTML `head`
+
+```php
+<meta property="og:site_name" content="<?= $site->title()->html() ?>">
+<meta property="og:url" content="<?= $page->url() ?>">
+<meta property="og:type=" content="website">
+<meta property="og:title" content="<?= $page->title()->html() ?>">
+<meta property="og:description" content="<?= $page->description()->html() ?>">
+<meta property="og:image:type" content="image/png">
+
+<!-- Use og:image for your template or a fallback image -->
+<meta property="og:image" content="<?= e($page->template()->name() === 'article', $page->url() . '.png', 'https://yourdomain.tld/opengraph.png') ?>">
+```
+
+## Full template code
+
+```php "/site/templates/article.png.php"
+<?php
+// Define canvas size
+$canvas = imagecreatetruecolor(1200, 628);
+
+// Define colors
+$brandColor      = imagecolorallocate($canvas, 246, 211, 85);
+$backgroundColor = imagecolorallocate($canvas, 255, 255, 255);
+$textColor       = imagecolorallocate($canvas, 66, 66, 66);
+
+// Set background
+imagefill($canvas, 0, 0, $backgroundColor);
+
+// Draw rectangle
+imagefilledrectangle($canvas, 100, 100, 115, 525, $brandColor);
+
+// Path to .ttf font file
+$fontFile = './assets/fonts/arial.ttf';
+
+// Write page title to canvas
+$title  = $page->title()->toString();
+$title  = wordwrap($title, 30);
+imagefttext($canvas, 50, 0, 150, 185, $textColor, $fontFile, $title);
+
+// Place logo in the corner
+$logoFile = './assets/kirby-logo.png';
+$logo     = imagecreatefrompng($logoFile);
+
+imagecopyresampled($canvas, $logo, 975, 400, 0, 0, imagesx($logo), imagesy($logo), imagesx($logo), imagesy($logo));
+
+// Output image to the browser
+imagepng($canvas);
+imagedestroy($canvas);
+```
+
+<warning>
+Make sure that all paths to fonts and files as well as fieldnames used actually exist in your installation, otherwise this will not work as expected.
+</warning>
+

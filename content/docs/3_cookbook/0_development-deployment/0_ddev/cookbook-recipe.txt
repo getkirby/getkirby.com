@@ -1,0 +1,231 @@
+Title: Kirby meets DDEV
+
+----
+
+Published: 2024-02-04
+
+----
+
+Description: Set up a local development environment for Kirby with DDEV in no time.
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: development, development environment
+
+----
+
+Text:
+
+(link: https://ddev.com/ text: DDEV) is an increasingly popular Docker-based development tool that allows you to quickly set up and manage local development environments for different projects on Linux, Mac, or Windows.
+
+So basically, it provides a Docker environment without you having to know anything about using Docker, unless you want to configure your own services.
+
+
+## Requirements
+
+1. DDEV uses (link: https://www.docker.com/ text: Docker) to create and manage local development environments, therefore you need Docker installed on your computer. If you don't have Docker yet, head over to the DDEV website, where you can find installation instructions for different (link: https://ddev.readthedocs.io/en/stable/users/install/docker-installation/ text: Docker providers) recommended for your operating system.
+2. You can use an existing project, or download/clone a Kirby Starterkit. We will also show how to install the Starterkit via DDEV.
+3. Make sure you don't have any other services running on port 80, so stop your current webserver if its using this port.
+
+## Install DDEV
+
+Once Docker is installed on your system, you are ready to install DDEV. There are different ways to do this depending on your operating system. DDEV provides detailed (link: https://ddev.com/get-started/ text: installation instructions) for each operating system. Simply follow these instructions and then head back here.
+
+Once DDEV is installed and running, setting up a project is done with a few quick steps.
+
+**TL;DR**
+1. Clone or download the code for your project.
+2. `cd` into the project directory and run `ddev config` to initialize a DDEV project.
+3. Run `ddev start` to spin up the project.
+4. Run `ddev launch` to open your project in a browser.
+
+But let's go through these general steps in a little more detail and see how we can customize them for our needs.
+
+## Starting from an existing project
+
+If you already have a existing Kirby project (Starterkit or your own project), you can use that. Note that if you have a public folder setup, the configuration is a bit different, see (link: #public-folder-setup text: Public folder setup).
+
+1. Open a shell window and navigate into your project directory with the `cd` command.
+2. Before you can spin up a new DDEV project, initialize the DDEV environment with the `ddev config` command. In the project directory run:
+
+    ```bash
+    ddev config --php-version=8.3 --omit-containers=db
+    ```
+&nbsp;
+    You can run `ddev config` without any options, in that case the default config settings are used. Here, however, we tell DDEV
+      * that we want to use PHP 8.3 (which is the most current actively supported PHP version at the time of writing). If you want to run on another version, adapt this flag accordingly.
+      * that we want to omit spinning up a database container. Since Kirby is a flat file system that doesn't rely on a database, we don't need this container.
+
+    After you have run this command, you will find a `.ddev` folder inside your project folder. You might want to take a peak at the `config.yml` file in that folder. This gives you an idea of available config options and includes detailed explanations.
+
+
+3. Next, run
+
+    ```bash
+    ddev start
+    ```
+
+   DDEV now creates the configured containers. When done, you will see a success message like:
+
+   ```bash
+   All project containers are now ready.
+   Successfully started <yourfoldername>
+   Project can be reached at http://<yourfoldername>.ddev.site http://127.0.0.1:51312
+   ```
+&nbsp;
+
+4. And that's it, your site is now accessible at `https://<foldername>.ddev.site` in your browser, where `<foldername>` refers to the folder in which you ran the above commands. Launch the site with:
+
+    ```bach
+    ddev launch
+    ```
+
+That was quick, right?
+
+## Spinning up a fresh Starterkit via composer command
+
+Alternatively, we can create a new Kirby project from scratch. Here are the steps:
+
+1. Create a new project folder and use the `cd` command to navigate into it.
+2. Inside the project folder, run the following commands one after the other:
+
+	```bash
+ddev config --php-version=8.3 --omit-containers=db
+ddev start
+ddev composer create getkirby/starterkit
+ddev launch
+	```
+
+   &nbsp;
+   Only the third command is new, the other three we have already used above. With `ddev composer` we execute a composer command within the web container. `ddev composer create` is a special command that is adapted from `composer create-project`. Here we create a new Kirby Starterkit project in the current directory.
+
+<warning>
+Running the `ddev composer create` command will delete everything in the current composer root, so be very careful where you run this command!
+</warning>
+
+## Public folder setup
+
+When possible, we recommend a (link: docs/guide/configuration#custom-folder-setup__public-and-private-folder-setup text: public folder setup) to move all files that need not be publicly accessible out of the doc root for enhanced security.
+
+If you already have a public folder set the `docroot` flag to the name of your public folder, e.g. `public`:
+
+```bash
+ddev config --docroot=public && ddev restart
+```
+
+If you don't have a public folder setup yet, run:
+
+```bash
+ddev config --docroot=public --create-docroot && ddev restart
+```
+
+This command will create a new `public` folder. Then move all your assets, and the `index.php` into the `public` folder. Modify the `index.php` as described in our (link: docs/guide/configuration#custom-folder-setup__public-and-private-folder-setup text: public folder documentation).
+
+
+## Accessing your project on other devices
+
+By default, the `<foldername>.ddev.site` domain is only accessible on your local computer. To access the site from other devices on your network, you can configure the project's `host_webserver_port` to a port that does not conflict with already used ports on your system.
+
+```bash
+ddev config --host-webserver-port=8080 --bind-all-interfaces && ddev restart
+```
+This will configure the host-bound port to 8080 and allow it to bind to all network interfaces. Anyone on your local network can access this project’s ports.
+
+Afterwards, you need to set the `url` property in Kirby's config file
+
+```php "/site/config/config"
+<?php
+return [
+   //… other settings
+   'url' => '/'
+];
+```
+You can now access the site via `http://<ip>:8080` from anywhere in your local network. Replace `<ip>` with the IP of your computer in your local network, for example `http://192.168.178.12:8080`.
+
+
+The best option seems to be to set `url` to '/' for this use case, so that links to assets etc. still work. However, when doing this, the Panel is not installable out of the box, see (link: #troubleshooting__panel-not-installable text: below).
+
+
+<info>
+Note that each project on your computer must use different ports, or you will run into port conflicts. Ports 80 and 443 are typically reserved by DDEV.
+</info>
+## Server configuration
+
+By default, DDEV runs on Nginx. The default Nginx configuration will usually work fine with Kirby. However, it does not protect the `content`, `site` or `kirby` folders, like Kirby's `.htaccess` configuration does for Apache.
+
+In a development environment, this should not be a problem. If you want to protect your folders nonetheless, you can change the default Nginx configuration.
+
+In `.ddev/nginx_full/nginx-site.conf` delete the line
+
+```
+#ddev-generated
+```
+
+And add the line:
+
+```
+rewrite ^\/(content|site|kirby)/(.*)$ /error last;
+```
+After each change, run `ddev restart` to apply the changes.
+
+### Using Apache
+
+If your production environment runs on Apache, you might want to run your development environment on Apache as well. You can change the webserver type with the `--webserver-type` flag during initialization:
+
+```bash
+ddev config --webserver-type=apache-fpm && ddev restart
+```
+
+## MailPit: Catch email locally
+
+One of the hard parts when testing forms with sending email is that it often doesn't work as expected, emails are not sent or don't arrive.
+
+Luckily, DDEV comes with MailPit already built-in, so you can test your forms locally with ease.
+
+Launch the MailPit web interface with:
+
+```bash
+ddev launch -m
+```
+The try (link: https://getkirby.com/docs/guide/emails#simple text: sending an email) to check if it works. Make sure you don't have any SMTP transport settings configured in your `config.php`.
+
+More information in the (link: https://ddev.readthedocs.io/en/stable/users/usage/developer-tools/#email-capture-and-review-mailpit text: Email Capture docs).
+
+## XDebug
+
+If you are used to use step debugging or profiling with xDebug, you will be glad to hear that it is built-in. For performance reasons, xDebug is disabled by default and you need to enable it first, then configure you IDE accordingly.
+
+Refer to the (link: https://ddev.readthedocs.io/en/stable/users/debugging-profiling/step-debugging/ text: DDEV debugging and profiling docs) for details. These include detailed instructions for PHPStorm and VS Code.
+
+## A note on performance
+
+Especially on Mac and Windows, running larger or multiple projects can become a bottleneck. Check out the tips and tricks (link: https://ddev.readthedocs.io/en/stable/users/install/performance/ text: to improve DDEV performance).
+
+## DDEV config settings
+
+Above, we have used the `ddev config` command with different flags to set config options. It is worth noting that you can also change these settings manually in the `.ddev/config.yaml` file. Just remember to run `ddev restart` to apply any changes made to the configuration.
+
+## Troubleshooting
+
+### Used ports
+
+When you get the following error message
+
+> Failed to start <projectfolder>: unable to listen on required ports, port 80 is already in use,
+Troubleshooting suggestions at https://ddev.readthedocs.io/en/stable/users/basics/troubleshooting/#unable-listen
+
+Make sure that you have no other webserver/services running on port 80/443. Maybe you are just testing DDEV as an alternative to your MAMP, Valet, Herd… development environments. So stop those webservers before you start up DDEV.
+
+### Panel not installable
+
+In Kirby versions prior to v4.0.3, DDEV domains were not treated as local. If you are on an older version and get an error message when trying to access the Panel, and when making the domain accessible across your network as set out above, set `'panel.install' => true` in `/site/config/config.php`, or better still in an (link: docs/guide/configuration#multi-environment-setup text: environment specific config file).
+
+
+Other DDEV issues? Head over to the (link: https://ddev.readthedocs.io/en/stable/users/usage/troubleshooting/ text: DDEV troubleshooting guide).
+
+Other Kirby related issues: Ask us (link: https://forum.getkirby.com text: on the forum).
+

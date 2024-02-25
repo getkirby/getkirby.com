@@ -1,0 +1,188 @@
+Title: Going beyond Kirby's permissions features
+
+----
+
+Published: 2020-06-21
+
+----
+
+Description: Find out about ways to fine-tune and go beyond Kirby's built-in permission system in the Panel
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: users, permissions
+
+----
+
+Text:
+
+Kirby has basically three ways to limit what users can do in the Panel:
+
+1. Create user roles with (link: docs/guide/users/permissions text: permissions for this role).
+2. Limit these role permissions (link: docs/guide/users/permissions#specific-permissions-in-page-file-user-or-site-options text: on a per-blueprint basis).
+3. In additon to the last two options, you can also use `before` hooks to say "no no" to users if they try to do something they are not supposed to do.
+
+If all of the above is not enough, there are other ways to put users in their place.
+
+## Completely different blueprint sets per user (role)
+
+### When is this useful
+The method we show here is useful if you really need a completely different form setup for different user roles, because some roles are not supposed to read or edit certain parts of a blueprint on a tab or even down to the field level.
+
+This implementation gives you absolute freedom, and you are not even limited to roles, but could create blueprint sets for individual users.
+
+### How does it work
+
+This method leverages (link: docs/guide/configuration#custom-folder-setup text: Kirby's custom folder setup feature).
+
+```php "index.php"
+
+require __DIR__ . '/kirby/bootstrap.php';
+
+$kirby = new Kirby();
+
+$currentUser = $kirby->user();
+
+if ( $currentUser && $currentUser->role()->name() === 'editor' ):
+   $kirby = new Kirby([
+       'roots' => [
+           'blueprints' => __DIR__ . '/site/blueprints-editor',
+       ],
+   ]);
+
+elseif ( $currentUser && $currentUser->role()->name() === 'client' ):
+   $kirby = new Kirby([
+       'roots' => [
+           'blueprints' => __DIR__ . '/site/blueprints-client',
+       ],
+   ]);
+endif;
+
+echo $kirby->render();
+```
+
+After Kirby is loaded, we check the user role of the current user and then assign a different blueprint folder for each user role or multiple user roles.
+
+The new blueprint folders `blueprints-client` and `blueprints-editor` are created next to the default `blueprints` folder. The original blueprints will be used for all other user roles not handled above.
+
+### Possible downsides
+
+You need to maintain and keep in sync multiple complete blueprint sets. It might make sense to use symlinks to reuse blueprint parts across sets. Also, Kirby is loaded twice to make this work.
+
+## Load single different blueprints per user (role)
+
+### When is this useful
+
+This method is useful if Kirby's default permission rules work for most blueprints and there are only one or very few where you need more control.
+
+### How does it work
+
+This implementation registers blueprints in a plugin, for example, a custom `home.yml` for clients, and a general `home.yml` for all other user roles.
+
+```php "/site/plugins/role-blueprints/index.php"
+<?php
+
+if(($user = kirby()->user()) && $user->role()->name() === 'client') {
+    $dir = __DIR__ . '/blueprints/pages/client/home.yml';
+} else {
+    $dir = __DIR__ . '/blueprints/pages/home.yml';
+}
+
+Kirby::plugin('cookbook/role-blueprints', [
+    'blueprints' => [
+        'pages/home' => $dir
+    ]
+]);
+```
+
+The plugin folder structure in this example will look like this:
+
+```filesystem
+plugins/
+  role-blueprints/
+    blueprints/
+      pages/
+        client/
+          home.yml
+        home.yml
+    index.php
+
+```
+This approach works for all types of blueprints, so you could do this even for individual sections used in your blueprints if necessary.
+
+
+<warning>
+Make sure to remove the `home.yml` (or whatever blueprint you are overriding in your blueprint) from the `site/blueprints/` folder, otherwise the blueprint in that folder would overwrite your plugin blueprints!
+</warning>
+### Possible downsides
+
+You have to maintain multiple blueprints for a page type.
+
+
+## Override the `isReadable()` method in a page model
+
+### When is this useful
+
+This method is useful if you want to limit read access to individual pages in the Panel that use the same blueprint.
+
+Typical usecase: Editors should only be able to have access to a single parent page and the subpages they have created, not to siblings created by another user. So you are no longer limited to user roles.
+
+### How does it work
+
+To make this work, the subpage blueprints needs to have a field that stores the current user when the page is created. In this example, we modify the `author` field in the `/site/blueprints/pages/note.yml` template in the (link: https://getkirby.com/try text: Starterkit) and disable it so that it cannot be changed.
+
+```yaml
+author:
+  type: users
+  label: Author
+	default: true
+  disabled: true
+```
+
+Now, whenever a user creates a new `note` page, the user is automatically stored.
+
+The second step is the page model. Create a new file `/site/models/note.php` with the following code:
+
+```php "/site/models/note.php"
+<?php
+
+use Kirby\Cms\Page;
+
+class NotePage extends Page
+{
+  public function isReadable(): bool
+  {
+    if (($user = $this->author()->toUser()) && $user->is($this->kirby()->user()) ||
+        $this->kirby()->user()->isAdmin()) {
+      return true;
+    }
+
+    return false;
+  }
+}
+```
+
+In this model we check if the current user is stored in the `author` field or is an admin user. If the condition is true, they can access the page, otherwise they cannot.
+
+### Possible downsides
+
+Since we cannot use a static variable like in the original method, this might have some performance implications.
+
+## Use the Bouncer plugin
+
+### When is this useful
+
+This plugin is useful if you want to restrict access of a user role to a specific page or pages (and its children) in the Panel.
+
+### How does it work
+
+Install the (link: https://github.com/sylvainjule/kirby-bouncer text: Bouncer plugin) and follow the instructions in the documentation.
+
+### Possible downsides
+
+See the (link: https://github.com/sylvainjule/kirby-bouncer#3-disclaimer text: plugin's disclaimer). Limited to user roles.
+

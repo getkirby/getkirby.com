@@ -1,9 +1,0 @@
-Title: Screencasts
-
-----
-
-Link: https://videos.getkirby.com
-
-----
-
-Priority: 0.9

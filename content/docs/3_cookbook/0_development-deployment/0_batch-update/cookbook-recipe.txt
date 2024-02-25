@@ -1,0 +1,401 @@
+Title: Batch updating content
+
+----
+
+Published: 2021-09-20
+
+----
+
+Description: Flexible and reliable updates to large amounts of content
+
+----
+
+Authors: - authors/sebastian-greger
+
+----
+
+Tags: development
+
+----
+
+Text:
+
+Updating fields or manipulating files across a potentially large amount of content is a common task, in particular when working with an existing site. As Kirby does not use a database that would provide global search-and-replace operations, we have to work with loops that come with great flexibility but also certain limitations.
+
+This recipe provides an extendable boilerplate route to comfortably update large amounts of content or files.
+
+<warning>
+Whenever running batch operations on content, make sure to create a full backup first.
+</warning>
+
+## It all starts with a simple loop
+
+Before addressing more advanced examples and related challenges, let's have a look at the barebone workflow:
+
+```php
+// the collection of pages to update
+$collection = site()->index(true);
+
+// looping over each item in the collection
+foreach($collection as $page) {
+
+    // read the current value
+    $oldValue = $page->content()->myfield()->value();
+
+    // manipulate the value; e.g. add a prefix
+    $newValue = 'Prefix ' . $oldValue;
+
+    // update the content file
+    $page->update([
+        'myfield' => $newValue
+    ]);
+
+}
+```
+
+This loops through all pages of the entire site (the `true` boolean in [`index()`](https://getkirby.com/docs/reference/objects/cms/site/index) includes drafts as well), adds a prefix to every page's field `myfield` and saves that to the file system.
+
+Of course this could also be limited to any subset of pages, e.g. to specifically target all articles that are children of a hypothetical `blog` page:
+
+```php
+$collection = page('blog')->childrenAndDrafts()->filterBy('template', 'article');
+```
+
+All that counts is that the `$collection` variable has to be a [Pages collection](https://getkirby.com/docs/reference/objects/cms/pages).
+
+## A (temporary) route to trigger the batch loop
+
+While we could create a dedicated plugin for this purpose or temporarily hack it into a controller or template, a clean and easy way is to create a route in the site's config file:
+
+```php "/site/config.php"
+<?php
+
+return [
+    'routes' => [
+        [
+            'pattern' => 'batch-update-content',
+            'action' => function () {
+
+                // authorized personnel only
+                if (kirby()->user() && kirby()->user()->isAdmin()) {
+
+                    // defining the loop
+                    $collection = site()->index(true);
+                    foreach($collection as $page) {
+
+                        // read, manipulate, update
+                        $oldValue = $page->content()->myfield()->value();
+                        $newValue = 'Prefix ' . $oldValue;
+                        $page->update([
+                            'myfield' => $newValue
+                        ]);
+
+                    }
+                }
+            }
+        ],
+    ]
+];
+```
+
+Now our update loop can be triggered using the URL `mydomain.com/batch-update-content`. This includes a check to verify admin status; the route will fail unless logged in.
+
+<warning>
+It is a good idea to delete or comment-out this route when done, to keep things clean and safe.
+</warning>
+
+On multi-language sites, we have to specify a language both on read and write. `$page->content()->myfield()->value()` becomes `$page->content('en')->myfield()->value()` to retrieve the desired content, and `$page->update(['myfield' => $newValue])` receives an additional second argument with the target language: `$page->update(['myfield' => $newValue], 'en')`.
+
+<info>
+All code samples in this recipe are templates to start with, leaving out additional checks for missing fields etc. To avoid runtime errors, consider adding clauses like `if ($page->content()->has('myfield'))` while crafting your custom update loops.
+</info>
+
+## Advanced batch processing
+
+The `foreach` loop in above code is our workhorse, and can be adjusted to pretty much any scriptable update task at hand:
+
+### Updating structure fields
+
+While the first example deals with the one-dimensional case of prefixing a string in a text field, [structure fields](https://getkirby.com/docs/reference/panel/fields/structure) require a few extra lines of code, as their content is stored in YAML format:
+
+```php
+foreach($collection as $page) {
+
+    // turn current value into an array
+    $oldValue = $page->content()->myfield()->yaml();
+
+    // change some fields inside the array (NB. the ampersand)
+    foreach ($oldValue as &$item) {
+        $item['myvariable'] = 'Prefix ' . $item['myvariable'];
+    }
+
+    // turn back into YAML and update the content file
+    $newValue = Data::encode($oldValue, 'yaml');
+    $page->update([
+        'myfield' => $newValue
+    ]);
+
+}
+```
+
+### Changing a tag field
+
+Similarly we can search-and-replace an existing tag ([tags fields](https://getkirby.com/docs/reference/panel/fields/tags) store a comma-separated list) with a new version of it:
+
+```php
+foreach($collection as $page) {
+
+    // split comma-separated string into an array
+    $oldValue = $page->content()->myfield()->split();
+
+    // change some fields inside the array (NB. the ampersand)
+    foreach ($oldValue as &$tag) {
+        if ($tag == 'oldtag') {
+            $tag = 'newtag';
+        }
+    }
+
+    // turn back into CSV string and update the content file
+    $newValue = A::join($oldValue, ', ');
+    $page->update([
+        'myfield' => $newValue
+    ]);
+
+}
+```
+
+The `split()` method similarly applies when dealing with a [multiselect](https://getkirby.com/docs/reference/panel/fields/multiselect) field.
+
+### Updating content within blocks
+
+When dealing with contents in a blocks field, we have to create a modified clone of the original Blocks object and replace the field's value with that (see also [this recipe](https://getkirby.com/docs/cookbook/templating/update-blocks-programmatically) to see the underlying principle).
+
+```php
+foreach($collection as $page) {
+
+    // loop over each block in the blocks field
+    foreach ($page->content()->myfield()->toBlocks() as $block) {
+
+        // store the current values
+        $old = $block->toArray();
+
+        // target specific blocks only (e.g. only block type `text`)
+        if ($block->type() === 'text') {
+
+            // manipulate the desired value in the content array
+            $old['content']['text'] = str_replace('OldBrand', 'NewBrand', $old['content']['text']);
+        }
+
+        // add block to the clone
+        $new[] = new Kirby\Cms\Block($old);
+
+    }
+
+    // create the cloned Blocks object from the array of blocks
+    $blocks = new Kirby\Cms\Blocks($new ?? []);
+
+    // update the content file
+    $page->update([
+        'text' => $blocks->toArray()
+    ]);
+
+}
+```
+
+Similarly, we could change other attributes of Blocks objects; for instance we could manipulate the `$old['type']` variable to convert all blocks of type `text` into a (hypothetical) custom block type `mytext`, etc.
+
+### Updating files
+
+The same logic can be used to loop over files and do something with them. For example, we could loop over all attached files of template `image` and resize them to a maximum width of 2000 pixels.
+
+```php
+foreach($collection as $page) {
+
+    // within each page, we loop over the applicable files
+    $files = $page->files()->filterBy('template', 'image');
+    foreach($files as $file) {
+
+        // check if this file can and needs to be resized
+        if($file->isResizable() && $file->width() > 2000) {
+
+            // good to catch errors when working with files
+            try {
+
+                // overwrite the original file with resized version
+                kirby()->thumb($file->root(), $file->root(), [
+                    'width' => 2000
+                ]);
+
+            } catch (Exception $e) {
+                throw new Exception($e->getMessage());
+            }
+        }
+
+    }
+
+}
+```
+
+For compatibility with the next iteration in this recipe's code, we loop over each page's images while looping through all pages; of course the script could also be rewritten to directly deal with a collection of files:
+
+```php
+$collection = $site->index(true)->files()->filterBy('template', 'image');
+```
+
+This would make the second `foreach` loop obsolete as `$page` would already be a file, not a page, object.
+
+<info>
+The sky is the limit: within the loop, we could even access an API, retrieve data from a database, deal with complex blocks, alter layout fields' data, etc.
+</info>
+
+## Dealing with script timeouts
+
+While straightforward in theory, running such loops over a great amount of pages or files may eventually lead to server timeouts. While we sometimes have control over adjusting the cutoff time in the server configuration or may be able to trigger long-running scripts on the PHP command line, a robust way of updating content is to process the batch in a staggered process.
+
+For this purpose, we introduce a `$offset` index, contained in the route's URL, in combination with a `$limit` variable, and extend the routing script to repeatedly call itself until done:
+
+```php "/site/config.php"
+<?php
+
+return [
+    'routes' => [
+        [
+            // NB. the optional numeric variable; default is 0
+            'pattern' => 'batch-update-content/(:num?)',
+            'action' => function ($offset = 0) {
+
+                if (kirby()->user() && kirby()->user()->isAdmin()) {
+
+                    // set the amount of items processed at once
+                    $limit = 25;
+
+                    // define the batch to be modified
+                    $collection = site()->index(true);
+
+                    // pick the applicable pages from the collection
+                    $pages = $collection->offset($offset)->limit($limit);
+
+                    // loop over this slice of the collection
+                    foreach($pages as $page) {
+
+                        // read, manipulate, update
+                        $oldValue = $page->content()->myfield()->value();
+                        $newValue = 'Prefix ' . $oldValue;
+                        $page->update([
+                            'myfield' => $newValue
+                        ]);
+
+                    }
+
+                    // increase the offset by the processed amount
+                    $offset += $limit;
+
+                    // exit when done...
+                    if ($offset > sizeof($list)) {
+                        return 'Done.';
+                    }
+
+                    // ...or process the next batch
+                    return '<!DOCTYPE html><title>' . $offset . '</title><script>window.location.replace("/batch-update-content/' . $offset . '")</script>';
+
+                }
+            }
+        ],
+    ]
+];
+```
+
+This is a suitable approach for dealing with updates on sites with up to several thousands of pages (performance may vary; depending largely on the host system). Every time the script has processed a batch, the browser is instructed to load a new URL (with the new offset included), hence avoiding excessive execution times.
+
+<info>
+While using Kirby's `go()` function instead of returning some minimum valid HTML5 calling `window.location.replace` in JavaScript may seem more straightforward, browsers would detect an endless loop and exit; hence we have to use this frontend hack.
+</info>
+
+## A version for really big amounts of pages
+
+We might still run into timeout or memory issues, if the indexed amount of pages is very large. This is due to `$site->index()` having to crawl through the entire content store every time the route is calling itself.
+
+To mitigate this problem, we can keep the collection to be processed in a log file and then process it in small chunks, so `index()` is only called on the first run:
+
+```php "/site/config.php"
+<?php
+
+return [
+    'routes' => [
+        [
+            'pattern' => 'batch-update-content/(:num?)',
+            'action' => function ($offset = 0) {
+
+                if (kirby()->user() && kirby()->user()->isAdmin()) {
+
+                    $limit = 25;
+
+                    // log file goes into the `logs` directory
+                    $logfile = kirby()->root('logs') . '/batch-update-content.yml';
+
+                    // read list of IDs from logfile...
+                    $list = F::read($logfile);
+
+                    // ...or build it from the index
+                    if ($list == null) {
+
+                        $collection = site()->index(true);
+
+                        // write the list into the logfile in YAML format
+                        $list = Data::encode($collection->keys(), 'yaml');
+                        F::write($logfile, $list);
+
+                    }
+
+                    // the list of pages is now always in YAML format
+                    $list = Data::decode($list, 'yaml');
+
+                    // pick the applicable IDs from the list
+                    $listsegment = array_slice($list, $offset, $limit);
+
+                    // turn IDs into a collection to loop over
+                    $pages = new Pages();
+                    foreach ($listsegment as $pageid) {
+                        $pages->add(kirby()->page($pageid));
+                    }
+
+                    foreach($pages as $page) {
+
+                        $oldValue = $page->content()->myfield()->value();
+                        $newValue = 'Prefix ' . $oldValue;
+                        $page->update([
+                            'myfield' => $newValue
+                        ]);
+
+                    }
+
+                    $offset += $limit;
+
+                    if ($offset > sizeof($list)) {
+
+                        // delete the list when done
+                        F::remove($logfile);
+
+                        return 'Done.';
+
+                    }
+
+                    return '<!DOCTYPE html><title>' . $offset . '</title><script>window.location.replace("/batch-update-content/' . $offset . '")</script>';
+
+                }
+            }
+        ],
+    ]
+];
+```
+
+Only the page IDs applicable for the current run are turned into a Pages collection (this is important, as creating large Pages collections from IDs is another potential bottleneck on content-heavy sites). Finally, the script cleans up after itself.
+
+## Voilá – your Swiss Army knife for content updates
+
+Now we hold a universal boilerplate for any kind of batch updates, without server timeout worries. To adapt to different use cases, all we need to change are:
+
+* the `$collection` variable's definition to control what pages to process, and
+* the code contained within the `foreach` loop as outlined in the examples above.
+
+The ideal value for `$limit` has to be determined through trial-and-error – a safe value of 25, even 100 or more, should be fine for most tasks altering content fields; if pages have large amounts of files attached and when manipulating those files rather than just content fields, a much lower number may be advised (for example resizing images can be a time-consuming process and quickly hit the 30 or 60 second timeout threshold on some shared hosting environments).

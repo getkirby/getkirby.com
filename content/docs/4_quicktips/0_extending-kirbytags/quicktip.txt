@@ -1,0 +1,118 @@
+Title: Reusing KirbyTags in custom tags
+
+----
+
+Description: Extend existing KirbyTags in custom tags with less hassle.
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: kirbytext
+
+----
+
+Text:
+
+Sometimes, you may want to extend an existing (glossary: KirbyTag) in a custom KirbyTag, for example, to add attributes or to modify the HTML output.
+
+To prevent having to copy the complete code, you can reuse parts of the original tag. With…
+
+```php
+Kirby\Text\KirbyTag::$types['image']
+````
+
+…you get access to the original `image` KirbyTag.
+
+With…
+
+```php
+Kirby\Text\KirbyTag::$types['image']['attr'],
+```
+
+…you have access to the original attributes.
+
+And with…
+
+```php
+Kirby\Text\KirbyTag::$types['image']['html'],
+```
+
+…to the original HTML.
+
+Using the following code we can thus reuse the attributes array and put a wrapper around the original HTML.
+
+```php "/site/plugins/custom-tags/index.php"
+<?php
+
+$originalTag = Kirby\Text\KirbyTag::$types['image'];
+Kirby::plugin('your/plugin', [
+    'tags' => [
+        'custom-image' => [
+            'attr' => $originalTag['attr'],
+
+            'html' => function($tag) use ($originalTag) {
+
+                $image =  $originalTag['html'];
+                $markup = $image($tag);
+
+                $html = '<div class="imagewrapper">' . $markup . '</div>';
+
+                return $html;
+            }
+        ]
+    ]
+]);
+```
+
+We can also extend the attributes array by merging it with new attributes, and replace parts of the original HTML using string replacement:
+
+```php "/site/plugins/custom-tags/index.php"
+<?php
+
+$originalTag = Kirby\Text\KirbyTag::$types['image'];
+Kirby::plugin('your/plugin', [
+    'tags' => [
+        'imageset' => [
+            'attr' => array_merge(
+                $originalTag['attr'],
+                [
+                    'srcset'
+                ]),
+
+            'html' => function($tag) use ($originalTag)  {
+
+                $file = $tag->file($tag->value());
+                $srcset = $tag->srcset ? explode(',', $tag->srcset): null;
+                $result = $originalTag['html']($tag);
+
+                if (! $file === true || is_null($srcset) === true) {
+                    return $result;
+                }
+
+                $pattern = '/<img.*?>/i';
+
+                // build a new image tag with the srcset
+                $image = Html::img($tag->src, [
+                    'width'  => $tag->width,
+                    'height' => $tag->height,
+                    'class'  => $tag->imgclass,
+                    'title'  => $tag->title,
+                    'alt'    => $tag->alt ?? ' ',
+                    'srcset' => $file->srcset($srcset),
+                ]);
+
+                // replace the old image tag
+                $result = preg_replace($pattern, $image , $result);
+
+                return $result;
+            }
+        ]
+    ]
+]);
+```
+<info>
+If you store the original tag in a variable outside the plugin wrapper like in the examples, you can override the original tag by using the same tag name instead of the custom names.
+</info>

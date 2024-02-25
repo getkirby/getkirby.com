@@ -1,0 +1,232 @@
+Title: Going Headless
+
+----
+
+Description: Prepare Kirby for headless use.
+
+----
+
+Published: 2022-05-18
+
+----
+
+Authors:
+- authors/james-steel
+
+----
+
+Tags: headless, KQL, api
+
+----
+
+Text:
+
+## Intro
+
+Using Kirby headless can have many benefits, from security & performance to integrating content into apps and other systems.
+
+This guide will explain how to set Kirby up for headless use on a basic level. This is a pre-cursor guide before you move on to pulling data into another system.
+
+## Assumptions
+
+We will start out with a fresh copy of the Starter Kit installed using Composer. You can find instructions for this in the [Kirby meets Composer](https://getkirby.com/docs/cookbook/setup/composer) guide.
+
+To work locally, you will also need a local web server capable of using SSL such as Laraval Valet or MAMP.
+
+We will also be working with the [KQL Plugin](https://github.com/getkirby/kql), giving us a lot of flexability in fetching data from Kirby. Please ensure you have this installed before proceeding.
+
+## Enabling BasicAuth
+
+With those preliminaries out the way, we can get on with some fun stuff!
+
+The first thing we need to do is enable BasicAuth in the Kirby config.
+
+```php "/site/config/config.php"
+return [
+    'api' => [
+        'basicAuth' => true
+    ]
+];
+```
+
+This allows use to make authenticated requests in order to retreive data from Kirby. To do so, you will need a user account and a valid password. I prefer to use a dedicated user account for the API. Whilst it is possible to use your own user account credentials, a dedicated account means the API connection won't break if you change or reset your password.
+
+## Testing the connection
+
+We should now be able to make POST requests to the API. I called my local domain `headless.test`. You will need to adjust the following examples to use the local domain you are using.
+
+If you visit `https://headless.test/api/query` in a browser you should get the following response:
+
+```JSON
+{
+  "status": "error",
+  "message": "Unauthenticated",
+  "code": 403,
+  "exception": "Kirby\\Exception\\PermissionException",
+  "key": "error.permission",
+  "file": "authentication.php",
+  "line": 14,
+  "details": [],
+  "route": "query"
+}
+
+```
+
+This means the connection is working, however we have not yet authenticated so we are recieving a 403 error. At this point, it is useful to use a tool designed to help test APIs. We will use [Insomnia](https://insomnia.rest/) for the next steps.
+
+Set the user credentials under the Basic dropdown and set the query to POST using the local url to the headless system, for example: `https://headless.test/api/query`
+
+(image: basicAuthInsomnia.png)
+
+We should now be getting a default response back. We haven't actually made any KQL queries yet, so Kirby will fall back to giving a basic listing of the sites children, as you can see below.
+
+```JSON
+{
+	"code": 200,
+	"result": {
+		"children": [
+			"photography",
+			"notes",
+			"about",
+			"error",
+			"home",
+			"sandbox"
+		],
+		"drafts": [],
+		"files": [],
+		"title": "Mægazine",
+		"url": "https:\/\/headless.test"
+	},
+	"status": "ok"
+}
+```
+
+## First KQL query
+
+Let's do something a little more exciting. Under the Query tab in Insomnia, we can add a line of KQL to get all the children of the "Notes" page.
+
+(image: notesInsomnia.png)
+
+The KQL for this is `page('notes').children`, which should yield the following response:
+
+```JSON
+{
+	"code": 200,
+	"result": [
+		"notes\/through-the-desert",
+		"notes\/chasing-waterfalls",
+		"notes\/a-night-in-the-forest",
+		"notes\/across-the-ocean",
+		"notes\/himalaya-and-back",
+		"notes\/exploring-the-universe"
+	],
+	"status": "ok"
+}
+```
+
+So far so good. Let's try something a little more complicated. Say for example we want to get all the images from the first child in the photography section. Change the query to the following:
+
+```
+page('photography').children.first.images
+```
+
+We should now get a list of just those images:
+
+```
+{
+	"code": 200,
+	"result": [
+		"photography\/trees\/cheesy-autumn.jpg",
+		"photography\/trees\/last-tree-standing.jpg",
+		"photography\/trees\/monster-trees-in-the-fog.jpg",
+		"photography\/trees\/sharewood-forest.jpg",
+		"photography\/trees\/stay-in-the-car.jpg"
+	],
+	"status": "ok"
+}
+```
+
+At this point, have some fun trying out a few other queries. You'll find this is quite a powerful way to get data out of Kirby.
+
+## Simple Usage
+
+So far we have only made requests and looked at the kind of responses we can get back. It would be great to use it in a practical example. Let's have a go at getting the data displayed in the browser.
+
+Create a new folder and start a new Conposer project using the following command, and supply the answers required to generate the project:
+
+```bash
+composer init
+```
+
+Once generated, install [Guzzle](https://docs.guzzlephp.org/en/stable/) via Composer. This package will help us make the connections to the headless Kirby installation from PHP.
+
+```bash
+composer require guzzlehttp/guzzle
+```
+
+From there create an empty `index.php` in the root of the project. Add the following code to it:
+
+
+
+```PHP
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use GuzzleHttp\Client;
+
+$client = new GuzzleHttp\Client();
+
+$api = 'https://headless.test/api/query';
+
+// Create a POST request with Guzzle using KQL
+$response = $client->request('POST', $api, [
+    'verify' => false,
+    'auth' => ['xxx', 'xxx'],
+    'json' => [
+        'query' => 'page("photography").children',
+
+        'select' => [
+            'url' => true,
+            'title' => true,
+            'text' => 'page.text.markdown',
+            'images' => [
+                'query' => 'page.images',
+                'select' => [
+                    'url' => true
+                ],
+            ],
+        ],
+    ],
+
+]);
+
+// Handle the incoming data
+$body = $response->getBody();
+$data = json_decode($body);
+$posts = $data->result->data;
+
+// Loop over the result
+foreach ($posts as $post) {
+    echo '<h1>' . $post->title . '</h1>';
+    echo $post->text;
+    $images = $post->images;
+    foreach ($images as $image) {
+        echo  '<img width="150" src="' . $image->url . '"/>';
+    }
+}
+```
+Be sure to fill in your credentials in the auth line:
+
+```PHP
+'auth' => ['xxx', 'xxx'],
+```
+
+You should now be able visit it in a browser after mapping it to a local test domain. It will generate a simple list of the pages and content in the Photography pages, complete with the images that belong to each page.
+
+(image: simpletest.jpg)
+
+
+## Closing
+
+Whilst this simple example isn't terribly pretty, it will hopefully get you started with using Kirby as a headless CMS. Have a go at changing the query to see what else you can display! From here there are quite a lot possibilites. This guide is just the tip of the iceberg and should give you the basis to start exploring.

@@ -1,0 +1,202 @@
+Title: Fetching field options
+
+----
+
+Published: 2019-05-11
+
+----
+
+Description: Get text labels for your option values from fields
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: i18n, blueprints
+
+----
+
+Text:
+
+A typical select field with a set of predefined options looks like this:
+
+```yaml
+fields:
+  category:
+    label: Category
+    type: select
+    options:
+      design: Design
+      architecture: Architecture
+      photography: Photography
+      3d: 3D
+      web: Web design
+```
+
+Each option has a value that is stored in the content file and a text label that is displayed for the user in the (glossary: Panel).
+
+The advantage of this setup is that your text label can change without affecting the stored value and can be translated depending on the user's language.
+
+If you output the field content in your templates, however, you usually don't want to render the raw saved value, but rather some modified representation, in many cases the text label you assigned in the blueprint.
+
+Let's look at different ways to achieve this.
+
+## Simple field setup
+
+You could, of course, use a simple field setup like this:
+
+
+```yaml
+fields:
+  category:
+    label: Category
+    type: select
+    options:
+      - Design
+      - Architecture
+      - Photography
+      - 3D
+      - Web design
+```
+
+In this case, what is shown to the user in the Panel and what is stored in the content file will be exactly the same. This works fine as long as you don't want to translate the text label or provide any context information.
+
+## Field setup with translations
+
+With a more complex version of that setup, you can still save the desired output value but display translated text labels:
+
+```yaml
+fields:
+  category:
+    label: Category
+    type: select
+    options:
+      "Design":
+        en: Design
+        de: Design
+      "Architecture":
+        en: Architecture
+        de: Architektur
+      "Photography":
+        en: Photography
+        de: Fotografie
+      "3D":
+        en: 3D
+        de: 3D
+      "Web design":
+        en: Web design
+        de: Webdesign
+```
+
+But all this is not very versatile and only makes sense in a single language installation. Therefore, let's see how we can stick with the first setup above and still get a more useful output than the key as value.
+
+## A "category map"
+
+A typical solution is to set up a "category map" in your `config.php` where you connect values to output strings:
+
+```php "/site/config/config.php"
+<?php
+return [
+    'category-map' => [
+        'design'       => 'Design',
+        'architecture' => 'Architecture',
+        'photography'  => 'Photography',
+        '3d'           => '3D',
+        'web'          => 'Web design'
+    ]
+]
+```
+You can name this array whatever you like, of course, to reflect what it contains.
+
+In your template, you can fetch the value from this array like this:
+
+```php
+<?= option('category-map')[$page->category()->value()] ?? ucfirst($page->category()->html()) ?>
+```
+
+If the value doesn't exist in the array, we fall back to an uppercased version of the field value.
+
+## Multi-language `translations` array
+
+In a multi-language installation, you can store your key/value fields in the `translations` array in your language files:
+
+```php "/site/languages/en.php"
+<?php
+
+return [
+    'code' => 'en',
+    'default' => true,
+    'direction' => 'ltr',
+    'locale' => [
+        'en_US'
+    ],
+    'name' => 'English',
+    'translations' => [
+        'design'       => 'Design',
+        'architecture' => 'Architecture',
+        'photography'  => 'Photography',
+        '3d'           => '3D',
+        'web'          => 'Web design'
+    ],
+    'url' => '/'
+];
+```
+
+And then fetch the value using the `t()` helper:
+
+```php
+<?= t($page->category()->value(), ucfirst($page->category()->html())) ?>
+```
+Again, we use a fallback for values that do not exist in the `translations` array.
+
+## Fetching values from blueprint
+
+The last two versions are already much more versatile, but you might end up defining the same sets of key/value arrays in your blueprints and then again in the `config.php or language files.
+
+Instead, you can also read the options' text labels directly from the blueprint.
+
+```php
+<?php
+$field = $page->blueprint()->field('category');
+$value = $page->category()->value();
+
+// single language
+echo $field['options'][$value] ?? $value;
+
+// multilang
+echo $field['options'][$value][$kirby->language()->code()] ?? $value;
+```
+
+We add the fallback value here just in case someone stores a value from outside of the Panel.
+
+You can find more examples how to access information from blueprints in our (link: docs/cookbook/templating/blueprints-in-frontend text: "Using blueprints in the frontend") recipe.
+
+The same principles can be applied to other fields that use options like the `radio` field, the `multiselect` field, the `tags` field or the `checkboxes` field.
+
+To finish this, let's have a look at how to handle multiple options stored as a comma separated list, for example from the `multiselect` field.
+
+Field setup:
+
+```yaml
+fields:
+  category:
+    label: Category
+    type: multiselect
+    options:
+      design: Design
+      architecture: Architecture
+      photography: Photography
+      3d: 3D
+      web: Web design
+```
+
+```php
+<?php
+$field = $page->blueprint()->field('category');
+$categories = $page->category()->split(',');
+foreach ($categories as $category) {
+    echo $field['options'][$category] ?? html($category);
+}
+```

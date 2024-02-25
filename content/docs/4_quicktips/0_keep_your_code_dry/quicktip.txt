@@ -1,0 +1,139 @@
+Title: Don't repeat the same query multiple times
+
+----
+
+Text:
+
+Modularizing your code into reusable chunks to keep things organized and not repeat yourself is an important coding paradigm.
+
+However, what is true for the big picture, is also true for the smaller chunks of code we produce daily in our templates.
+
+Here is a simple example of what happens quite often:
+
+We define a variable in our controller and pass it to the template:
+
+```php "/site/controllers/blog.php"
+<?php
+
+return function($page) {
+  $articles = $page->articles()->listed();
+  return [
+    'articles' => $articles,
+  ];
+};
+```
+
+And then in the template:
+
+```php "/site/templates/blog.php"
+<?php
+foreach($page->articles()->listed() as $article) {
+  echo $article->title();
+}
+?>
+```
+
+What's wrong here? And why is this a problem? Although we defined the variable in the controller, we do not use it in the template, but perform the same query again as before in the controller.
+
+This means that Kirby has to perform the same query twice instead of using the result stored in the `$articles` variable.
+
+Furthermore, this often results in unexpected behaviour. Consider this example:
+
+```php "/site/controllers/blog.php"
+<?php
+
+return function($page) {
+  $articles = $page->articles()->listed();
+  if($tag = param('tag')) {
+    $articles = $articles->filter('tags', $tag, ',');
+  }
+  return [
+    'articles' => $articles,
+  ];
+};
+```
+
+If we now use the same template code as in the example above, we will probably be surprised why the filter doesn't work. So if this happens, check if you haven't made a new unfiltered query in the template.
+
+Our template should therefore look like this:
+
+```php "/site/temlates/blog.php"
+<?php
+foreach($articles as $article) {
+  echo $article->title();
+}
+?>
+```
+
+Let's consider another example from our cookbook, the (link: docs/cookbook/templating/menus text: treemenu snippet) in an extended version with many additional conditional attributes:
+
+```php
+<?php if (!isset($subpages)) $subpages = $site->children(); ?>
+
+<?php foreach ($subpages->listed() as $p) : ?>
+
+  <li class="depth-<?= $p->depth() ?><?= $p->depth() === 1 ? ' nav-item ' . $p->pageRootClass() : '' ?>
+    <?= $p->hasListedChildren() && $p->depth() < 2 ? ' dropdown ' : '' ?>
+    <?= $p->hasListedChildren() ? ' has-dimmer ' : '' ?>">
+    <a class="nav-link<?= $p->depth() > 1 ? ' dropdown-item ' : '' ?>
+        <?= !$p->isActive() ? '' : ' active ' ?>
+        <?= $p->hasListedChildren() && !$p->depth() < 2 ? ' dropdown-toggle ' : ' icon-arrow ' ?>" href="<?= $p->url() ?>">
+      <?= $p->title() ?>
+    </a>
+    <?php if ($p->hasListedChildren() && $p->depth() < 3) : ?>
+      <ul id="dropdown-<?= md5($p->url()) ?>" class="dropdown-menu
+      <?= $p->hasListedChildren() && $p->depth() >= 2 ? ' submenu ' : '' ?>">
+        <?php snippet('treemenu', ['subpages' => $p->children()]); ?>
+      </ul>
+    <?php endif ?>
+  </li>
+<?php endforeach ?>
+```
+
+This is a rather simple example but if we look closely, the same two queries for `$p->hasChildren()` and `$p->depth()` are used over and over again. The fact that this treemenu snippet works recursively, i.e. the snippet calls itself again for each level, makes this even worse. If the queries were more performance relevant here, for example a more complex database query, this would quickly add up, and the result could be a serious performance issue that is aggravated with each level in the recursion.
+
+We should therefore fix this and store the result of the queries in variables first, then replace the repeated queries with these variables:
+
+```php
+<?php if (!isset($subpages)) $subpages = $site->children(); ?>
+
+<?php foreach ($subpages->listed() as $p) : ?>
+  <?php
+  $depth             = $p->depth();
+  $hasListedChildren = $p->hasListedChildren()
+  ?>
+  <li class="depth-<?= $depth ?><?= $depth === 1 ? ' nav-item ' . $p->pageRootClass() : '' ?>
+    <?= $hasListedChildren && $depth < 2 ? ' dropdown ' : '' ?>
+    <?= $hasListedChildren ? ' has-dimmer ' : '' ?>">
+    <a class="nav-link<?= $depth > 1 ? ' dropdown-item ' : '' ?>
+    <?= $p->isActive() ? ' active' : '' ?>
+    <?= $hasListedChildren && !$depth < 2 ? ' dropdown-toggle ' : ' icon-arrow ' ?>" href="<?= $p->url() ?>">
+      <?= $p->title() ?>
+    </a>
+    <?php if ($hasListedChildren && $depth < 3) : ?>
+      <ul id="dropdown-<?= md5($p->url()) ?>" class="dropdown-menu<?= $hasListedChildren && $depth >= 2 ? ' submenu ' : '' ?>">
+        <?php snippet('treemenu', ['subpages' => $p->children()]); ?>
+      </ul>
+    <?php endif ?>
+  </li>
+<?php endforeach ?>
+```
+
+## Takeaway
+
+Always store query results in variables when they are used multiple times. This improves your overall performance, keeps your code DRY and easier to read, and prevents unexpected results.
+
+----
+
+Published: 2021-01-09
+
+----
+
+Description: "Don't repeat yourself" (DRY) is a coding paradigm that when not heeded can seriously harm performance.
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+Tags: templates

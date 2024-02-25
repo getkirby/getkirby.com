@@ -1,0 +1,366 @@
+Title: Creating preview images for PDF files
+
+----
+
+Published: 2022-02-27
+
+----
+
+Description: Display a nice auto-generated image when linking to PDF flyers, booklets etc.
+
+----
+
+Authors:
+
+- authors/sonja-broda
+
+----
+
+Tags: media, extensions
+
+----
+
+Text:
+
+This recipe is for you if you have a download section for PDF files like flyers or booklets and want to output a nice thumbnail for the download link instead of the filename or a an icon. Using a hook or a custom file method, we can auto-generate preview images either at file upload or on the fly.
+
+For this purpose, we are going to use the (link: https://imagemagick.org/ text: ImageMagick) command line tool, as it allows us to convert single pages or a complete PDF document to images. And the cool thing is that we can leverage Kirby's ImageMagick class and extend it for our purposes.
+
+## Requirements
+
+The requirements are the same as for using Kirby's (link: docs/reference/system/options/thumbs#thumbs-driver text: `im` thumb driver), namely:
+
+- ImageMagick must be installed on your server.
+- Calling PHP's `exec()` method must not be disabled.
+- If the ImageMagic convert binary is not correctly linked, you might have to (link: docs/reference/system/options/thumbs#thumbs-driver__additional-options-for-the-imagemagick-driver text: set the path to the `convert` binary) in your config.
+
+## Setting up the plugin
+
+Let's start with creating a plugin folder `/pdfpreview` in `/site/plugins` and add the obligatory `index.php` with the Kirby plugin wrapper:
+
+```php "/site/plugins/pdfpreview/index.php"
+<?php
+
+use Kirby\Cms\App as Kirby;
+
+Kirby::plugin('cookbook/pdfpreview', [
+  'hooks'       => [],
+  'fileMethods' => [],
+]);
+```
+
+## Extend ImageMagick class
+
+Our next step is to extend Kirby's `ImageMagick` class, which is a great starting point for our own. When using the `im` driver for thumbs, Kirby calls ImageMagick's `convert` binary via PHP's `exec()` method. The `convert` command to create a preview from a PDF looks like this in its most basic form.
+
+```bash
+convert <filepath> <outputfile>
+```
+
+However, without any option settings, the output is usually not very great.
+
+The `process()` function of the `Kirby\Image\Darkroom\ImageMagick` class creates this command from the given options and then calls `exec()` with this command as parameter. We will modify this method in our new extended class.
+
+Create a new subfolder `classes` and inside it a PHP class file named `PdfPreview.php` with the folling code:
+
+```php "/site/plugins/pdfpreview/classes/PdfPreview.php"
+<?php
+
+namespace cookbook\pdfPreview;
+
+use Exception;
+use Kirby\Image\Darkroom\ImageMagick;
+
+class PdfPreview extends ImageMagick
+{
+    public static array $types = [];
+
+    /**
+     * Set the colorspace
+     *
+     * @param string $file
+     * @param array $options
+     * @return string
+     */
+    protected function colorspace(string $file, array $options)
+    {
+        if ($options['colorspace'] !== false) {
+            return '-colorspace ' . $options['colorspace'];
+        }
+    }
+
+    /**
+     * Creates the convert command with the right path to the binary file
+     *
+     * @param string $file
+     * @param array $options
+     * @return string
+     */
+    protected function convert(string $file, array $options): string
+    {
+        $file = isset($options['page']) ? sprintf('%s[%s]', $file, $options['page']) : $file;
+        return sprintf($options['bin'] . $this->density($file, $options) . ' "%s"', $file);
+    }
+
+    /**
+     * Returns additional default parameters for imagemagick
+     *
+     * @return array
+     */
+    protected function defaults(): array
+    {
+        return [
+            'bin'        => kirby()->option('thumbs.bin'),
+            'colorspace' => false,
+            'density'    => 150,
+            'flatten'    => true,
+            'format'     => 'jpg',
+            'quality'    => 90,
+            'grayscale'  => false,
+            'resize'     => false,
+        ];
+    }
+
+    /**
+     * Set density
+     * Note: the density option must be set before the filename as it determines at what resolution the PDF is rendered
+     *
+     * @param string $file
+     * @param array $options
+     * @return string
+     */
+    protected function density(string $file, array $options)
+    {
+        if ($options['density'] !== false) {
+            return ' -density ' . $options['density'];
+        }
+    }
+
+    /**
+     * Flatten output
+     *
+     * @param string $file
+     * @param array $options
+     * @return string
+     */
+    protected function flatten(string $file, array $options)
+    {
+        if ($options['flatten'] !== false) {
+            return ' -flatten ';
+        }
+    }
+
+    protected function options(array $options = []): array{
+        return array_merge($this->settings, $options);
+    }
+
+    /**
+     * Creates and runs the full imagemagick command
+     * to process the image
+     *
+     * @param string $file
+     * @param array $options
+     * @return array
+     * @throws \Exception
+     */
+    public function process(string $file, array $options = []): array
+    {
+        $options   = $this->options($options);
+        $command   = [];
+        $command[] = $this->convert($file, $options);
+        $command[] = $this->colorspace($file, $options);
+        $command[] = $this->quality($file, $options);
+        $command[] = $this->flatten($file, $options);
+        $command[] = $this->save($file, $options);
+
+        // remove all null values and join the parts
+        $command = implode(' ', array_filter($command));
+
+        // try to execute the command
+        exec($command, $output, $return);
+
+        // log broken commands
+        if ($return !== 0) {
+            throw new Exception('The imagemagick convert command could not be executed: ' . $command);
+        }
+
+        return $options;
+    }
+}
+```
+
+In this class we bascially modify the (link: docs/reference/objects/image-darkroom/image-magick/process text: `process()` method) to apply the parameters we need to convert `.pdf` files and add some methods that return the options we need, in particular the `density` option.
+
+Back in our `index.php`, we load the new class via the (link: docs/reference/templates/helpers/load text: `load()` helper):
+
+```php "/site/plugins/pdfpreview/index.php"
+<?php
+
+use Kirby\Cms\App as Kirby;
+use Kirby\Cms\File;
+
+load([
+    'cookbook\\pdfpreview\\pdfpreview' => 'classes/PdfPreview.php'
+], __DIR__);
+
+Kirby::plugin('cookbook/pdfpreview', [
+  'hooks'       => [],
+  'fileMethods' => [],
+]);
+```
+
+We are all set to use the new class.
+
+## Create preview image via a hook
+
+In our first example, we create the preview image when a user uploads a PDF through the Panel and store it next to the PDF file in the page folder.
+
+For this purpose, we register a `file.create:after` hook within the `hooks` extension we added in the `index.php` earlier. Within this hook, we will create a new instance of the `PdfPreview` class and then call the `process()` method to generate the preview image.
+
+```php "/site/plugins/pdfpreview/index.php"
+<?php
+
+use cookbook\pdfpreview\PdfPreview;
+use Kirby\Cms\App as Kirby;
+use Kirby\Cms\File;
+use Kirby\Filesystem\F;
+use Kirby\Exception\Exception;
+
+load([
+    'cookbook\\pdfpreview\\pdfpreview' => 'classes/PdfPreview.php'
+], __DIR__);
+
+Kirby::plugin('cookbook/pdfpreview', [
+    'hooks' => [
+        'file.create:after' => function ($file) {
+            // only create preview for PDF files
+            if ($file->mime() === 'application/pdf') {
+                $options    = [
+                    'quality'    => 100,
+                    'page'       => 0,
+                    'density'    => 300,
+                ];
+                $darkroom = new PdfPreview();
+                $darkroom->process($file->root(), $options);
+            }
+        }
+    ],
+    'fileMethods' => []
+]);
+```
+Set the options as required, for the available options see the `default()` method in the `PdfPreview` class.
+
+<info>
+Since we are not creating thumbs but images in the content folder, you can still call Kirby's thumbnail methods on the preview file, as you can see in the example below.
+</info>
+
+In your template code, you can now render the preview for the given PDF based on the filename:
+
+```php
+<ul>
+  <?php foreach ($page->documents()->filterBy('extension', 'pdf') as $document): ?>
+    <li>
+      <a href="<?= $document->url() ?>">
+        <?php if ($preview = $page->images()->findBy('name', $document->name())): ?>
+          <img src="<?= $preview->resize(200)->url() ?>" alt="">
+        <?php endif; ?>
+      </a>
+    </li>
+  <?php endforeach; ?>
+</ul>
+```
+## Create preview image with a file method
+
+Our second option is to create the image "on the fly" when the file method we will create is called. Using a file method is much more versatile, because you can pass options as parameters and you only create the preview files when needed.
+
+```php "/site/plugins/pdfpreview/index.php"
+<?php
+
+use cookbook\pdfpreview\PdfPreview;
+use Kirby\Cms\App as Kirby;
+use Kirby\Cms\File;
+use Kirby\Filesystem\F;
+use Kirby\Exception\Exception;
+
+load([
+    'cookbook\\pdfpreview\\pdfpreview' => 'classes/PdfPreview.php'
+], __DIR__);
+
+Kirby::plugin('cookbook/pdfpreview', [
+    'hooks' => [
+        // …hook code here
+    ],
+    'fileMethods' => [
+        'preview' => function (array $options = [], bool $force = false): File {
+            // only create preview for PDF files
+            if ($this->mime() !== 'application/pdf') {
+                throw new Exception('File is not a PDF file');
+            }
+            // force page
+            $options['page'] ??= 0;
+            $extension   = $options['format'] ?? 'jpg';
+            $previewName = $this->name() . '.' . $extension;
+            $outputPath  = $this->root() . '.' . $extension;
+            // only create the file if `$force` is set to true or
+            // it doesn't exist yet or the PDF file is newer than the preview image
+            if ($force === true || !F::exists($outputPath) || (F::modified($outputPath) < $this->modified())) {
+                // create a new PdfPreview instance
+                $darkRoom = new PdfPreview();
+                $darkRoom->process($this->root(), $options);
+            }
+            // return a new File object
+            return new File([
+                'filename' => $previewName,
+                'parent'   => $this->parent(),
+            ]);
+        }
+    ]
+]);
+```
+
+Our `preview()` file method accepts two parameters: an `$options` array and a boolean `$force` which determines if the file should be recreated when the method is called.
+
+As options you can pass the same options as before.
+
+The method returns a new `Kirby\Cms\File` object, which means that we can call Kirby's thumbnail methods on it as well.
+
+```php
+<?php if ($pdf = $page->file('myflyer.pdf')): ?>
+  <img src="<?= $pdf->preview()->url() ?>" alt="">
+<?php endif; ?>
+```
+
+Or by passing parameters to the method:
+
+```php
+<?php if ($pdf = $page->file('myflyer.pdf')): ?>
+  <img src="<?= $pdf->preview(['density' => 600, 'quality' => 100, 'format' => 'webp'])->url() ?>" alt="">
+<?php endif; ?>
+```
+
+Since the method returns a `Kirby\Cms\File` object, we can also create thumbs:
+
+```php
+<?php if ($pdf = $page->file('myflyer.pdf')): ?>
+  <img src="<?= $pdf->preview()->resize(200)->url() ?>" alt="">
+<?php endif; ?>
+```
+
+That's it. Feels free to optimize the above code as required.
+
+## More information
+
+- (link: docs/reference/plugins/extensions/file-methods text: Custom file methods)
+- (link: docs/reference/plugins/hooks text: Hooks)
+
+
+
+
+
+
+
+
+
+
+
+

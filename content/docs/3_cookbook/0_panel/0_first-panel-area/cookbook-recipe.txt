@@ -1,0 +1,259 @@
+Title: My first Panel area
+
+----
+
+Description: Create your first custom Panel view from scratch
+
+----
+
+Published: 2023-12-10
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: panel
+
+----
+
+Text:
+
+For our very first (link: docs/reference/plugins/extensions/panel-areas text: Panel area), we will query a third-party REST API and display the results in a nice card layout:
+
+(image: movie-reviews-card-view.png)
+
+As an example API, we will be using the (link: https://developer.nytimes.com/docs/articlesearch-product/1/overview text: NYT Article Search API), for which you need an API key. Feel free to use any other API or data from a database. Of course, if you do so, you will have to adapt the code where necessary.
+
+<info>
+For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup).
+
+You can install the (link: https://github.com/getkirby/pluginkit/tree/4-panel text: Pluginkit) as a basis or create the file structure we need manually, that's up to you. Also, it doesn't matter if you use the Plainkit or the Starterkit as a starting point.
+</info>
+
+Let's start by creating a new folder in the `plugins folder, which we will call `moviereviews`. Inside this folder, we first create a `package.json` file with the contents copied from the Pluginkit example mentioned above.
+
+```js "/site/plugins/moviereviews/package.json"
+{
+  "scripts": {
+    "dev": "npx -y kirbyup src/index.js --watch",
+    "build": "npx -y kirbyup src/index.js"
+  }
+}
+```
+
+This will take care of compiling our source files into an `index.js` file in the root of our `moviereviews` plugin folder.
+
+## Setting up the PHP part
+
+The most important stuff for our new area happens in the PHP part. Inside the `moviereviews` folder, we create an `index.php` with the Kirby plugin wrapper. And inside this wrapper, we define the new area:
+
+```php "/site/plugins/moviereviews/index.php"
+<?php
+
+Kirby::plugin('cookbook/moviereviews', [
+  'areas' => [
+    'moviereviews' => function ($kirby) {
+      return [
+        'label' => 'NYT Movie reviews',
+        'icon'  => 'video',
+        'menu'  => true,
+        'link'  => 'moviereviews',
+        'views' => [
+          [
+            // the Panel patterns must not start with 'panel/',
+            // the `panel` slug is automatically prepended.
+            'pattern' => 'moviereviews',
+            'action'  => function () {
+
+              // get movie reviews from API
+              $reviews = [];
+              $apikey  = 'your API key';
+
+              // Make a request to the NYT Search API, filtering by movie reviews
+              $request = Remote::get('https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name%3A%22Movies%22%20AND%20type_of_material%3A%22Review%22&sort=newest&page=0&api-key=' . $apikey);
+              if ($request->code() === 200) {
+                  $reviews = $request->json(false)->results;
+              }
+
+              return [
+                  // the Vue component can be defined in the
+                  // `index.js` of your plugin
+                  'component' => 'moviereviews',
+
+                  // the document title for the current view
+                  'title' => 'NYT Movie reviews',
+
+                  // props are directly available in the Vue components
+                  // play around with setting the props to something else, e.g. use cardlets instead of cards etc.
+                  'props' => [
+                    'reviews' => $reviews,
+                    'size'    => 'small',
+                    'layout'  => 'cards',
+                  ],
+              ];
+            }
+          ]
+        ]
+      ];
+    }
+  ],
+]);
+```
+
+We define a new (link: docs/reference/plugins/extensions/panel-areas text: area) inside the `areas` array. Within that array, the `views` array contains the different routes that belong to the area. Here we only define one main view.
+
+Each route returns an array which will be injected into our Vue app. The array controls the Vue component, the props for the component, and the settings for the current view (like breadcrumb, title, active search type etc.).
+
+In our example, we set the component (`moviereviews`), the document title and the props.
+
+Inside the `moviereviews` route, we also fetch the data from the API and pass it to the props using the `Remote::get()` method. Don't forget to insert your API key!
+
+If you want to inspect the structure of the returned json data, you can open the API URL in your browser or use a REST API client like (link: https://insomnia.rest/ text: Insomnia) or similar.
+
+## Create the view component
+
+Next, we create a new folder called `/src` inside our `moviereviews` folder. Inside the `src` folder, we create an `index.js` file.
+
+```js "/site/plugins/moviereviews/src/index.js"
+import MovieReviews from "./components/MovieReviews.vue";
+
+panel.plugin("cookbook/moviereviews", {
+  components: {
+    moviereviews: MovieReviews,
+  },
+});
+```
+
+In this file, we register the `moviereviews` component we define in our `index.php`. The view itself will be defined in the `components` subfolder and called `MovieReviews.vue`.
+
+## `MovieReviews` single file component
+
+Inside `MovieReviews.vue`, we use Kirby's `k-inside`, `k-view` and `k-header` components for our basic view setup. You can find more information about these components in the (link: https://lab.getkirby.com text: UI Lab)
+
+```html "/site/plugins/moviereviews/src/components/MovieReviews.vue"
+<template>
+  <k-inside>
+    <k-view class="k-moviereview-view">
+      <k-header>Movie reviews</k-header>
+    </k-view>
+  </k-inside>
+</template>
+
+<script>
+  export default {
+    props: {
+      layout: String,
+      reviews: Array,
+      size: String,
+    },
+  };
+</script>
+```
+
+Within the script tags, we set up the same props we already defined in our `index.php`.
+
+## Compile and check
+
+Now let's run
+
+```
+npm run dev
+```
+
+in our plugin folder, and kirbyup will compile an `index.js` in the `moviereviews` folder.
+
+If all went well, we will now see a new menu entry in the Panel dropdown navigation, and when we click on it, we can visit the newly created view that's still empty at this time.
+
+(image: movie-reviews-empty.png)
+
+## A component for our data
+
+All that's left now, is create the component for our API data. Kirby's ready to use Vue components make this really easy. For a nice cards layout, we use the `k-items` and `k-item` components.
+
+```html "/site/plugins/moviereviews/src/components/MovieReviews.vue"
+<template>
+  <k-inside>
+    <k-view class="k-moviereview-view">
+      <k-header>Movie reviews</k-header>
+      <k-items v-if="reviews.length" :items="reviews" :layout="layout" :size="size">
+        <k-item
+            v-for="(review, index) in reviews"
+            :layout="layout"
+            :key="index"
+            :link="review.web_url"
+            :text="review.abstract"
+            :image="{
+            cover: true,
+            back: 'blue-200',
+            src: 'https://nytimes.com/' + review.multimedia[0].url,
+          }"
+            target="_blank"
+        />
+      </k-items>
+      <div v-else>No items available</div>
+    </k-view>
+  </k-inside>
+</template>
+
+<script>
+export default {
+  props: {
+    layout: String,
+    reviews: Array,
+    size: String,
+  },
+};
+</script>
+```
+
+With the `v-if` directive we check if the `reviews` array has any items and if so, we loop through the items (`v-for="(review, index) in reviews"`) and create a card item for it. Otherwise (`v-else`), we just display a note:
+
+```html
+<k-items v-if="reviews.length" :items="reviews" :layout="layout" :size="size">
+  <k-item
+    v-for="(review, index) in reviews"
+    :layout="layout"
+    :key="index"
+    :link="review.web_url"
+    :text="review.abstract"
+    :image="{
+      cover: true,
+      back: 'blue-200',
+      src: 'https://nytimes.com/' + review.multimedia[0].url,
+    }"
+    target="_blank"
+  />
+</k-items>
+```
+
+## Building your plugin
+
+Once you are happy with your plugin, you can create minified and optimized versions of the `index.js` and `index.css` with …
+
+```
+npm run build
+```
+
+## Final folder structure
+
+```filesystem
+moviereviews/
+  index.js
+  package.json
+  src/
+    index.js
+    components/
+      MovieReviews.vue
+```
+
+## Where to go from here
+
+To get more familiar with how this all plays together, play around a bit. Try to get other data in, e.g. from a database, a .csv file, another API or try to fetch some data from your Kirby installation. Adjust the data provider route as needed. Or simply change the layout to cardlets like in this screenshot:
+
+(image: movie-reviews-cardlets.png)
+
+To go further, check the (link: docs/cookbook/panel/advanced-panel-area text: advanced Panel area cookbook).
+
+

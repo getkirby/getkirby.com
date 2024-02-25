@@ -1,0 +1,479 @@
+Title: Image lazy-loading
+
+----
+
+Description: Lazy-loading strategies to improve the performance of your site
+
+----
+
+Published: 2022-04-18
+
+----
+
+Authors:
+
+- authors/sonja-broda
+
+----
+
+Tags: media, performance
+
+----
+
+Text:
+
+## What is lazy loading?
+
+Images and other media files are usually large in size and contribute the largest part to a website's payload. When you visit a website that doesn't implement lazy-loading, the browser loads every single resource on the opened page, regardless of whether the user ever scrolls down to view such off-screen content.
+
+The richer the content on the page, the more stuff will likely be loaded unnecessarily and the longer the user has to wait until the page loads. This is a big waste of resources in terms of data transfer, processing time, and memory usage. But it also affects the overall user experience and performance of your website, and therefore also hurts from a SEO perspective. Taken together, all these factors are ultimately bad for your business and for the environment.
+
+Lazy-loading of resources, on the contrary, delays the loading of below-the-fold resources until they are actually needed, i.e., until the user scrolls near them, which results in a much smaller initial payload and improved performance.
+
+Lazy-loading is therefore a best practice, especially on websites with a lot of (media) content. While we'll mainly focus on image loading in this recipe, it's worth noting that lazy loading can be applied to just about any resource on a page: HTML, stylesheets, JavaScript, images, videos, or iframes.
+
+And the good news is that lazy-loading is pretty easy to implement. In the next sections, we'll look at our options.
+
+<info>
+For images, lazy-loading should always be accompanied by image optimization, the use of modern image formats, and a responsive image strategy to generally reduce the amount of data that needs to be loaded when requesting these resources.
+</info>
+
+## How does lazy loading work?
+
+When you visit a page, and as you begin to scroll down, at some point as you approach an image below the fold, usually a placeholder (e.g. a low quality image or solid color block) appears in the viewport, which is then replaced by the final image. Whether you will actually ever see the placeholder depends on multiple factors like the number of images that have to be loaded, your network speed or when the replacement actually takes place.
+
+Until recently, the only way to implement a lazy-loading strategy was through JavaScript. While older libraries listen to scroll or resize events to determine if an element is visible within the browser's viewport, newer ones leverage the (link: https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver  text: IntersectionObserver API).
+
+With native support for lazy-loading images in modern browsers, we now have more options that can also be combined. So let's look at how to implement different options and their pros and cons.
+
+## Ways to implement lazy loading
+
+There are several ways to implement lazy-loading on your website. So what are the decisive factors for preferring one solution over the other? They boil down to these:
+
+- The browsers you need to support
+- The type of resource you want to lazy-load
+- The amount of control you need over the lazy-loading behavior
+
+## Browser-level lazy-loading
+
+The easiest way to implement lazy-loading is by leveraging what is often referred to as "Native Lazy Loading", a browser feature which is supported in most up-to-date browsers at the time of writing this recipe, albeit with varying support (some browsers like Firefox currently only support images). Check out (link: https://caniuse.com text: Caniuse.com) for details.
+
+### The `loading` attribute
+
+To implement browser-level lazy-loading, use the `loading` attribute with the value set to `lazy` on the `img` element. This attribute tells the browser when it should start loading the resource.
+
+**Simple example**
+
+```php
+<?php if ($image = $page->image()): ?>
+    <img
+        loading="lazy" alt="<?= $image->alt() ?>"
+        src="<?= $image->url() ?>"
+        height="<?= $image->height() ?>"
+        width="<?= $image->width() ?>"
+    >
+<?php endif ?>
+```
+
+**Responsive images with `srcset`**
+
+```php
+<?php if ($image = $page->image()): ?>
+    <img
+        loading="lazy" alt="<?= $image->alt() ?>"
+        src="<?= $image->thumb(['width' => 1280])->url() ?>"
+        srcset="<?= $image->srcset([320, 640, 960, 1280, 1600, 1920]) ?>"
+        height="<?= $image->height() ?>"
+        width="<?= $image->width() ?>"
+    >
+<?php endif ?>
+```
+
+**With `picture` element**
+
+When using the `picture` element, the `loading` attribute only needs to be set on the fallback `img` element:
+
+```php
+<?php if ($image = $page->image()): ?>
+    <picture>
+        <source srcset="<?= $image->thumb(['width' => 1280, 'format' => 'avif'])->url() ?>" type="image/avif">
+        <source srcset="<?= $image->thumb(['width' => 1280, 'format' => 'webp'])->url() ?>" type="image/webp">
+        <img
+            loading="lazy"
+            src="<?= $image->thumb(['width' => 1280, 'format' => 'jpg', 'quality' => 80])->url() ?>"
+            height="<?= $image->height() ?>"
+            width="<?= $image->width() ?>"
+        >
+    </picture>
+<?php endif; ?>
+```
+
+This works, because the image is displayed by the `img` element, while the `source` elements only provide the  options the browser will choose from.
+
+Browsers that don't support the `loading` attribute will ignore it, so you can use it as progressive enhancement. There is also a (link: https://github.com/mfranzke/loading-attribute-polyfill text: polyfill) avaliable or you use one of the JavaScript libraries we will introduce below as a fallback.
+
+
+### Loading attribute values
+
+The `loading` attribute supports three values that determine when a resource should be loaded:
+
+- `lazy`: Used to defer fetching a resource until some conditions are met.
+- `eager`: Used to fetch a resource immediately; the default state.
+- `auto` (only Chrome, not part of the (link: https://html.spec.whatwg.org/multipage/urls-and-fetching.html#lazy-loading-attributes text: specification)): Let the browser determine when to load the resource, same as not using the attribute at all.
+
+When exactly a resource is loaded depends on the distance-from-viewport thresholds, which are not fixed and depend on browser engine and connection speed and may be subject to change in the future (see for example (link: https://web.dev/browser-level-image-lazy-loading/#improved-data-savings-and-distance-from-viewport-thresholds text: Google lazy-loading article).
+
+### Pros and cons
+
+The charme of this approach is that you don't have to write custom code or add a JavaScript library. Additionally, browser-level lazy-loading works even if JavaScript is disabled client-side.
+
+But there are also some downsides:
+
+- Browser-level lazy-loading is limited to images and iframes (depending on browser support) and not supported by older browsers.
+- Browser implementation determines the distance threshold, that is when exactly the resource is loaded, therefore you have no control over this behavior.
+- Lazy-loading for background images is not supported.
+
+
+### Testing
+
+Because of these thresholds, images are loaded rather early while they are still quite a bit out of the visible area, so they will usually be loaded when a user reaches a lazy-loaded image. Especially on a fast internet connection, you will therefore hardly be able to notice when exactly the images are loaded.
+
+But you can check what is loaded and when if you open the network tab in your browser's developer tools. Create a page with multiple (full-width) images below each other, then open the page in the browser with the network tab open. Set the filter to only view images to make it easier. Then observe how images below-the-fold are loaded one by one as you scroll down.
+
+It's also interesting to see how different browser engines behave and also how the behavior changes (for example in Chrome) when you enable network throttling.
+
+For your convenience, I created a (link: text: testsite on GitHub) with some examples for the different techniques introduced in this recipe.
+
+
+## Lazysizes
+
+One popular JavaScript library is (link: https://github.com/aFarkas/Lazysizes text: Lazysizes). Lazysizes does not only support lazy-loading of resources like images, iframes, scripts, widget, etc. it also helps with implementing responsive images. The library has been around for 7 years and is under active development at the time of writing.
+
+### Setup
+
+1. Download the (link: http://afarkas.github.io/lazysizes/lazysizes.min.js text: script) and put it into `/assets/js`.
+2. Load it using the `js()` helper function:
+```html
+<?= js('assets/js/lazysizes.min.js') ?>
+```
+Adapt the path to the file if you put it in another location.
+
+You can include this script at the end of the body element before any blocking elements or in the head after any blocking elements, see (link: should then be placed before any other blocking elements (i.e.: script(s)) at the end of the body or after any blocking elements (i.e.: scripts, stylesheets) in the head to load the crucial content as fast possible text: as described in the documentation).
+
+
+And that's it. The script doesn't need to be initialized but works by adding a class and data attributes to your markup, as we will see in the following examples.
+
+### Markup
+
+For the most basic markup, you replace the `src` attribute of an image element with a `data-src` attribute:
+
+```php
+<?php if ($image = $page->image()): ?>
+    <img
+        alt="<?= $image->alt() ?>"
+        class="lazyload"
+        data-src="<?= $image->resize(1280)->url() ?>"
+        height="<?= $image->resize(1280)->height() ?>"
+        width="<?= $image->resize(1280)->width() ?>"
+    >
+<?php endif ?>
+```
+
+Note that with this basic markup, users won't see any images if they have JavaScript disabled, therefore setting a low quality image with the `src` attribute is a way to prevent that.
+
+```php
+<?php if ($image = $page->image()): ?>
+    <img
+        alt="<?= $image->alt() ?>"
+        class="lazyload"
+        data-src="<?= $image->resize(1280)->url() ?>"
+        src="<?= $image->thumb(['width' => 1280, 'quality' => 30]) ?>"
+        height="<?= $image->height() ?>"
+        width="<?= $image->width() ?>"
+    >
+<?php endif ?>
+```
+
+The downside of this approach is that you actually load two images, the low quality one and the final one.
+
+An alternative could be to add a `<noscript>` element with a link to the image instead of using a `src` attribute:
+
+```html
+<noscript><a href="<?= $image->url() ?>">View image</a></noscript>
+```
+
+If you modify the test page (see above) to use Lazysizes instead of browser-level lazy-loading and open the network tab in your browser's dev tools again, you can observe if and how the behavior is different from native lazy-loading.
+
+#### Responsive images
+
+Lazysizes also works with responsive images by replacing `srcset` with `data-srcset`. To make it really easy, we set `data-sizes` to `auto` to leave it to Lazysizes to do the calculations for us.
+
+```php
+<?php if ($image = $page->image()): ?>
+    <img
+        alt="<?= $image->alt()?>"
+        class="lazyload"
+        data-sizes="auto"
+        data-src="<?= $image->resize(1280)->url() ?>"
+        data-srcset="<?= $image->srcset([320, 640, 960, 1280, 1600, 1920]) ?>"
+        height="<?= $image->height() ?>"
+        width="<?= $image->width() ?>"
+    >
+<?php endif ?>
+```
+
+With `data-sizes="auto"`, Lazysizes will make sure that the best-fitting image is used depending on how much screen-space the image is actually using.
+
+Play around with the settings and observe the results in your developer tools.
+
+#### Picture element
+
+For the `picture` element, add the `lazyload` class to the `img` element and use data-srcset on your `source` and the `img` element:
+
+```php
+<?php if ($image = $page->image()): ?>
+    <picture>
+        <source data-srcset="<?= $image->thumb(['width' => 1280, 'format' => 'avif'])->url() ?>" type="image/avif">
+        <source data-srcset="<?= $image->thumb(['width' => 1280, 'format' => 'webp'])->url() ?>" type="image/webp">
+        <img
+            alt="<?= $image->alt() ?>"
+            class="lazyload"
+            data-src="<?= $image->thumb(['width' => 1280, 'format' => 'jpg', 'quality' => 80])->url() ?>"
+            height="<?= $image->height() ?>"
+            width="<?= $image->width() ?>"
+        >
+    </picture>
+<?php endif; ?>
+```
+
+See the (link: http://afarkas.github.io/lazysizes/#examples text: examples) and the (link: https://github.com/aFarkas/lazysizes/blob/gh-pages/README.md text: documentation) of the library for more details and configuration options. There are also a few plugins available to lazyload other resources like background images, videos etc.
+
+
+## Lozad.js
+
+(link: https://github.com/ApoorvSaxena/lozad.js/ text: Lozad.js) is less than half the size of Lazysizes (1.25 kB minified & gzipped), and uses the IntersectionObserver API for lazy-loading. Since browser support for the IntersectionObserver API is more limited, you need a (link: https://www.npmjs.com/package/intersection-observer text: polyfill) for browsers that don't support it.
+
+### Setup
+
+1. Download the script and include it just before the closing body tag (adapt path as needed):
+```php
+<?= js('assets/js/lozad.min.js') ?>
+```
+
+2. Then initialize the script:
+```js
+<script>
+ // lazy loads elements with default selector ".lozad"
+const observer = lozad();
+observer.observe();
+</script>
+```
+
+    If you want to reuse our previous Lazysizes examples without changing the class attribute, you can use a different selector when initializing the script:
+```js
+lozad('.lazyload').observe()
+```
+
+### Markup
+
+The markup is similar to Lazysizes: you add a (configurable) class attribute with value `lozad` and a `data-src` attribute with the image url.
+
+#### Simple image
+```php
+<?php if ($image = $page->image()): ?>
+    <img
+        alt="<?= $image->alt() ?>"
+        class="lozad"
+        data-src="<?= $image->resize(1280)->url() ?>"
+        height="<?= $image->height() ?>"
+        width="<?= $image->width() ?>"
+    >
+<?php endif ?>
+```
+
+#### Responsive images
+
+Lozad also supports responsive images with the `data-srcset` attribute just like Lazysizes:
+
+```php
+<?php if ($image = $page->image()): ?>
+    <img
+        alt="<?= $image->alt()?>"
+        class="lozad"
+        data-src="<?= $image->resize(1280)->url() ?>"
+        data-srcset="<?= $image->srcset([320, 640, 960, 1280, 1600, 1920]) ?>"
+        height="<?= $image->height() ?>"
+        width="<?= $image->width() ?>"
+    >
+<?php endif ?>
+```
+
+However, since Lozad doesn't support auto-sizes like Lazysizes does, you will have to (link: https://getkirby.com/docs/reference/objects/cms/file/srcset text: set sizes on the srcset options) yourself if the images aren't used full-screen. We will cover responsive images in detail in a future recipe.
+
+#### Picture tag
+
+To make Lozad work with the `picture` element, you have to set a minimum height and a display type other than `inline`, otherwise the IntersectionObserver will not detect it:
+
+```php
+<?php if ($image = $page->image()): ?>
+    <picture class="lozad" style="display: block; min-height: 1rem;">
+        <source srcset="<?= $image->thumb(['width' => 1280, 'format' => 'webp'])->url() ?>" type="image/webp">
+        <source srcset="<?= $image->thumb(['width' => 1280, 'format' => 'jpg'])->url() ?>" type="image/jpg">
+        <!-- NO img element -->
+        <!-- For disabled JS you can set <noscript><img src="path/to/someimage.jpg" alt=""></noscript> -->
+    </picture>
+<?php endif; ?>
+```
+
+Note that the `img` element is not added.
+
+<info>
+The min height on the `picture` tag should be set to a value that equals the actual height of the image. Setting it to `1rem` as in the example will likely result in all images being loaded at once. It might therefore make sense to set this value via JS.
+
+A more modern approach would involve setting the aspect-ratio CSS property on the picture tag and then absolute position the img element inside it.
+</info>
+
+You can find all options and more examples in the (link: https://www.npmjs.com/package/lozad text: documentation).
+
+## Vanilla lazyload
+
+The third library I'd like to introduce here is (link: https://github.com/verlok/vanilla-lazyload text: Vanilla Lazyload). Compared to the other two mentioned above it's probably a lesser known. Like Lozad, it relies on the IntersectionObserver API, with a size of 2.4 kB minified and gzipped it takes a middle position. The library has extensive documentation and a lot of examples for different use cases. It supports images, animated SVGs, videos and iframes, responsive images and can enable native lazy-loading.
+
+### Setup
+
+1. Download and include the script before the closing `body` tag:
+```php
+<?= js('assets/js/lazyload.min.js') ?>
+```
+2. Initialize the script
+```js
+<script>
+var lazyLoadInstance = new LazyLoad({
+    // Your custom settings go here
+});
+</script>
+```
+
+### Markup
+
+The markup is the same as in the previous example in that you use the `data-src` and `data-srcset` attributes:
+
+#### Simple image
+
+```php
+<?php if ($image = $page->image()): ?>
+    <img
+        alt="<?= $image->alt() ?>"
+        class="lazy"
+        height="<?= $image->height() ?>"
+        data-src="<?= $image->resize(1280)->url() ?>"
+        width="<?= $image->width() ?>"
+    >
+<?php endif ?>
+```
+
+#### Responsive images
+
+```php
+<?php if ($image = $page->image()): ?>
+    <img
+        alt="<?= $image->alt()?>"
+        class="lazy"
+        data-src="<?= $image->resize(1280)->url() ?>"
+        data-srcset="<?= $image->srcset([320, 640, 960, 1280, 1600, 1920]) ?>"
+        height="<?= $image->height() ?>"
+        width="<?= $image->width() ?>"
+    >
+<?php endif ?>
+```
+#### Picture tag
+
+And for the `picture` element, you cadd a `data-src` attribute on the `img` element and a `data-srcset` attribute on the `source` element.:
+
+```php
+<?php if ($image = $page->image()): ?>
+    <picture>
+        <source data-srcset="<?= $image->thumb(['width' => 1280, 'format' => 'avif'])->url() ?>" type="image/avif">
+        <source data-srcset="<?= $image->thumb(['width' => 1280, 'format' => 'webp'])->url() ?>" type="image/webp">
+        <img
+            alt="<?= $image->alt() ?>"
+            class="lazy"
+            data-src="<?= $image->resize(1280)->url() ?>"
+        >
+    </picture>
+<?php endif; ?>
+```
+
+As placeholder, you can again fall back to a a low quality image in the `src` attribute of the `img` element or use another placeholder strategy.
+
+## Library as polyfill for native lazy-loading
+
+You can use any of the above libraries as fallback to native lazy-loading in unsupporting browsers. This works with the following pattern:
+
+1. Replace `src` attribute with `data-src` attribute and add `loading` attribute on below-the-fold images:
+```php
+<?php if ($image = $page->image()): ?>
+    <img
+        alt="<?= $image->alt() ?>"
+        class="lazyload"
+        data-src="<?= $image->resize(1280)->url() ?>"
+        loading="lazy"
+        height="<?= $image->height() ?>"
+        width="<?= $image->width() ?>"
+    >
+<?php endif ?>
+```
+1. Use a little script to replace the `data-src` attribute with a `src` attribute for browsers that support the `loading` attribute, otherwise load the fallback library and initiate it.
+```js
+<script>
+  if ('loading' in HTMLImageElement.prototype) {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    images.forEach(img => {
+      img.src    = img.dataset.src;
+      img.srcset = img.dataset.srcset;
+    });
+  } else {
+    // Otherwise load Lazysizes
+    const script = document.createElement('script');
+    script.src = "<?= url('assets/js/lazysizes.min.js') ?>";
+    document.body.appendChild(script);
+  }
+</script>
+```
+
+Use with caution if you use placeholder images in a `src` attribute. The `loading` attribute interferes, since all `data-src` attributes will be converted to `src` once this script loads and would therefore overwrite all placeholder images. If the final images are loaded slower than the user scrolls, the user will see blank space instead.
+
+Lazysizes also has a (link: https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/native-loading text: native loading extension) that automatically uses native lazy-loading if available and otherwise falls back to the library's functionality.
+
+Note that the same approach can also be implemented with the other libraries.
+
+## Lazy-loading: dos and don'ts
+
+- It is generally recommended to avoid using lazy-loading on critical, above-the-fold content that should load as fast as possible. Since what is above-the-fold changes with the devices your website visitors are viewing your website/app with, it is a good idea to be rather generous when trying to determine this imaginary line. On a mobile device, maybe only the first image is in the viewport on first load, on a large desktop monitor, however, there might be quite a few critical images.
+- Use a placeholder strategy for your images and videos to prevent layout shifts as content is loaded on demand.
+- Images should include dimension attributes. Without dimensions specified, layout shifts can occur, which are more noticeable on pages that take some time to load. Layout shifts are not only bad from a user's experience point of view, but also for performance, because the browser has to recalculate the layout. Reserving space for the images can, for example, be achieved by setting a width and height attribute on the `img` element, or by setting the `aspect-ratio` CSS property on a containing element and then absolute positioning the image inside.
+
+## Testsite
+
+I created a (link: https://github.com/texnixe/lazyloading-testsite text: little testsite) with the examples in this recipe. While clicking through the different pages you can compare how the different approaches vary in how many images they load inititially and thus how the initial payload and loading speed differs.
+
+The examples are all implemented with the default settings as in the examples in this recipe. For more options/config settings see the documentation of each library.
+
+## Conclusion
+
+As we have seen, lazy-loading only requires very small changes to our usual markup and is therefore quickly implemented. The gain in performance, however, is huge, so there is really no reason at all not to do it.
+
+If you can live with supporting modern browsers and your site is not very image heavy, it will probably suffice to implement native lazy-loading as progressive enhancement, ideally in conjunction with optimized images and modern image formats.
+
+As a fallback for browsers that don't support native lazy-loading, or if you need more control over the behavior or want to support other resources like videos as well, use a lazy-loading library.
+
+
+## More information
+
+- (link: https://github.com/texnixe/lazyloading-testsite text: Example repo)
+- (link: https://github.com/johannschopplich/kirby-blurry-placeholder text: Blurry image placeholders Kirby plugin) with optional lazy-loading
+- (link: https://jmperezperez.com/svg-placeholders/ text: Using SVG as placeholders — More Image Loading Techniques)
+- (link: https://imagekit.io/blog/lazy-loading-images-complete-guide/ text: Lazy loading guide)
+- (link: https://web.dev/browser-level-image-lazy-loading/ text: Browser-level image lazy loading)
+- (link: https://developer.mozilla.org/en-US/docs/Web/Performance/Lazy_loading text: MDN Lazy loading)
+

@@ -1,5 +1,0 @@
-Title: Extensions
-
-----
-
-Icon: wand

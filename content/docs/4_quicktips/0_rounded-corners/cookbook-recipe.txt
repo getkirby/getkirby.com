@@ -1,0 +1,59 @@
+Title: Remove rounded corners
+
+----
+
+Published: 2022-07-09
+
+----
+
+Description: If you don't like the slightly rounded corners of Kirby's new Panel design, here's how to revert this change
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: panel
+
+----
+
+Text:
+
+With custom CSS, you can style Kirby's Panel to your liking or your branding. As we introduce more and more CSS variables, this becomes even easier with every Kirby version.
+
+In Kirby 3.7, the Panel got a subtle visual overhaul with slightly rounded corners for a fresh and friendlier look and feel. While we are sure that these changes are very welcome, it's easy to revert to the old look.
+
+Here's how in three steps:
+
+1. In your `/site/config/config.php`, register your custom Panel stylesheet, e.g
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    // …other setting
+    'panel' => [
+        'css' => 'assets/css/panel.css'
+    ]
+];
+```
+
+2. Create the file `panel.css` in the given path
+3. Add the following styles to this file:
+
+```css "/assets/css/panel.css"
+:root {
+  --rounded-xs: 0;
+  --rounded-sm: 0;
+  --rounded: 0;
+  --rounded-md: 0;
+}
+```
+
+And that's it. Visit the Panel, refresh your browser and enjoy the sharp edges.
+
+<info>
+The name of the custom CSS file and its location is totally up to you.
+</info>
+

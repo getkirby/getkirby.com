@@ -1,0 +1,352 @@
+Title: Nested blocks
+
+----
+
+Published: 2021-06-06
+
+----
+
+Description: This is an example of how to build a nested block including live panel preview and output snippets for the website.
+
+----
+
+Authors: - authors/christian-fickinger
+
+----
+
+Tags: panel, blocks, content
+
+----
+
+Text:
+
+This is an example of how to build a nested block including a live panel preview and output snippets for the website. In our example we are creating a FAQ block, which allows us to add nested question/answer blocks within it. The block is built as a standalone plugin and can be extended and modified to your own needs. The example is based on a blank Kirby installation (v.3.5+) and everything is explained step by step.
+
+(image: nested-blocks.jpg)
+
+## Preparation
+
+First we prepare our Kirby config file to enable custom blocks. We keep the Kirby default blocks grouped, and separate our new custom blocks for a better overview.
+
+```php "/site/config/config.php"
+return [
+  'blocks' => [
+    'fieldsets' => [
+      'custom' => [
+        'label' => 'Custom blocks',
+        'type' => 'group',
+        'fieldsets' => [
+          'faq'
+        ]
+      ],
+      'kirby' => [
+        'label' => 'Kirby blocks',
+        'type' => 'group',
+        'fieldsets' => [
+          'heading',
+          'text',
+          'list',
+          'quote',
+          'image',
+          'video',
+          'code',
+          'markdown'
+        ]
+      ]
+    ]
+  ]
+];
+```
+
+The blocks field can now be used without adding the new FAQ block type manually:
+
+```yaml "/site/blueprints/pages/default.yaml"
+title: Page
+fields:
+  blocks:
+    type: blocks
+```
+
+## Blueprints
+
+Now let's create the blueprint for the FAQ block itself, and the blueprint for the nested block with a question and answer field.
+
+<info>
+The name of the block (`faq` in our example) must be unique and must not already be used by Kirby (e.g. `heading`, `text`, etc.). If the name is already in use, you can simply add a prefix or suffix to it (e.g. `my_custom_faq`).
+</info>
+
+### FAQ blueprint
+
+The first blueprint defines our FAQ block. Besides our new nested block we use an additional `text` field and a `writer` field in our example.
+
+```yaml "/site/plugins/faq-block/blueprints/blocks/faq.yml"
+name: FAQ
+icon: star
+fields:
+  headline:
+    type: text
+  text:
+    type: writer
+  blocks:
+    type: blocks
+    fieldsets:
+      - faqItem
+```
+
+### Question/answer blueprint (nested)
+
+The second blueprint defines the nested block with the `question` and the `answer` fields. Hereafter we call this block `faqItem`.
+
+```yaml "/site/plugins/faq-block/blueprints/blocks/faqItem.yml"
+name: Question / Answer
+icon: box
+fields:
+  question:
+    type: text
+    placeholder: Your question …
+  answer:
+    type: writer
+    placeholder: Your answer …
+```
+
+## Output
+
+Now we build the output snippets for the website. We need a snippet for the `faq` block and a snippet for the `faqItem` block.
+
+### Default template
+
+For completeness, we also show the `default` template here, which can be used to render our newly created `faq` block.
+
+```php "/site/templates/default.php"
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+    <h1><?= $page->title() ?></h1>
+    <?= $page->blocks()->toBlocks(); ?>
+</body>
+</html>
+```
+
+### FAQ snippet
+
+The first output snippet is for the FAQ block. We show `headline` and `text` of this block as usual and we call the nested block(s) as follows.
+
+```php "/site/plugins/faq-block/snippets/blocks/faq.php"
+<div class="faq">
+  <h2><?= $block->headline() ?></h2>
+  <p><?= $block->text() ?></p>
+  <dl>
+    <?= $block->blocks()->toBlocks() ?>
+  </dl>
+</div>
+```
+
+### Question/answer snippet
+
+The second snippet defines the output of the nested question/answer block.
+
+```php "/site/plugins/faq-block/snippets/blocks/faqItem.php"
+<dt><?= $block->question() ?></dt>
+<dd><?= $block->answer() ?></dd>
+```
+
+## The plugin
+
+Now let's create the plugin itself. The plugin needs only two files to work: `index.php` and `index.js`. An optional file `index.css` allows individual stylesheets for the preview.
+
+### `index.php`
+
+In the `index.php` file we register our blueprints and output snippets, respectively for the FAQ block (`faq`) and the question/answer block (`faqItem`).
+
+```php "/site/plugins/faq-block/index.php"
+<?php
+
+Kirby::plugin('your-project/faq-block', [
+    'blueprints' => [
+        'blocks/faq'      => __DIR__ . '/blueprints/blocks/faq.yml',
+        'blocks/faqItem'  => __DIR__ . '/blueprints/blocks/faqItem.yml'
+    ],
+    'snippets'   => [
+        'blocks/faq'      => __DIR__ . '/snippets/blocks/faq.php',
+        'blocks/faqItem'  => __DIR__ . '/snippets/blocks/faqItem.php'
+    ]
+]);
+```
+
+### `index.js`
+
+The `index.js` file handles the previews inside the Panel. We define a template for `faq` and `faqItem`.
+
+```js "/site/plugins/faq-block/index.js"
+panel.plugin('your-project/faq-block', {
+  blocks: {
+    faq: {
+      template: `
+        <div @dblclick="open" class="faq">
+          <h2>{{ content.headline }}</h2>
+          <div v-html="content.text"></div>
+          <dl v-for="item in content.blocks">
+            <dt v-html="item.content.question"></dt>
+            <dd v-html="item.content.answer"></dt>
+          </dl>
+        </div>
+      `
+    },
+    faqItem: {
+      template: `
+        <div>
+          <strong>
+            <k-input
+              v-bind="field('question')"
+              :value="content.question"
+              @input="update({ question: $event })">
+            </k-input>
+          </strong>
+          <p>
+            <k-writer
+              v-bind="field('answer')"
+              :value="content.answer"
+              @input="update({ answer: $event })">
+            </k-writer>
+          </p>
+        </div>
+      `
+    }
+  }
+});
+```
+
+### `index.css`
+
+The `.css` file is optional and can be used to style the preview for the block (and the nested blocks if needed).
+
+```css "/site/plugins/faq-block/index.css"
+/**
+ * This is just an example
+ * Add your individual css code here
+ */
+
+.faq {
+  padding: 1.5rem;
+  background: #fef3c7;
+}
+.faq h2 {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+.faq h2 + div {
+  color: #da7c0d;
+}
+.faq dl {
+  padding: 20px 0 0;
+}
+.faq dl dt {
+  font-weight: bold;
+}
+.faq dl dd {
+  font-style: italic;
+}
+```
+
+## Summary
+
+**That's it!** Now you have a fully functional example of how nested blocks are working. Add your own fields and styles to your block as you like.
+
+The following files are used in our example:
+
+```filesystem "/site/plugins/faq-block"
+blueprints/
+  blocks/
+    faq.yml
+    faqItem.yml
+snippets/
+  blocks/
+    faq.php
+    faqItem.php
+index.css
+index.js
+index.php
+```
+
+Feel free to download all needed files here: (file: example.zip text: Nested blocks example).
+
+## Advanced usage
+
+In some cases it is necessary to pass collected values from the parent block to the nested block, if you need different (nested) HTML markup depending on which option is selected. This is actually pretty simple if you know how. The next step explains how to extend nested blocks with additional layouts.
+
+(image: nested-blocks-advanced.jpg)
+
+### Blueprints
+First let's change the blueprints with the new requirements. We add a select field `layout` to our FAQ block and offer two layout variants for it.
+
+```yaml "/site/plugins/faq-block/blueprints/blocks/faq.yml"
+name: FAQ
+icon: star
+fields:
+  layout:
+    type: select
+    empty: false
+    options:
+      v1: "Layout 1: Columns with description"
+      v2: "Layout 2: Grid with icons"
+  headline:
+    type: text
+  text:
+    type: writer
+  blocks:
+    type: blocks
+    fieldsets:
+      - faqItem
+```
+
+Now we modify the output snippets with our new requirements.
+
+### FAQ snippet
+We can deliver different HTML markup depending on which version we are in by checking the `layout` value.
+
+```php
+if ($block->layout()->value() == 'v1'):
+
+  // HTML markup for layout version 1
+
+elseif ($block->layout()->value() == 'v2'):
+
+  // HTML markup for layout version 2
+
+endif;
+```
+Now we call the nested block within each version as follows. It is important to pass the selected `layout` to the nested block, if we want to use different HTML markup for each version.
+
+```php
+foreach ($block->blocks()->toBlocks() as $nestedBlock):
+
+  snippet('blocks/' . $nestedBlock->type(),[
+    'block' => $nestedBlock,
+    'layout' => $block->layout()->value()
+  ]);
+
+endforeach;
+```
+
+### Question/answer snippet
+
+By passing the layout value from the parent block, we can use it via `$data['layout']` in the nested block now. We just need to check the value and can deliver different HTML output for each version.
+
+```php "/site/plugins/faq-block/snippets/blocks/faqItem.php"
+if ($data['layout'] == 'v1'):
+
+  // Nested HTML markup for layout version 1
+
+elseif ($data['layout'] == 'v2'):
+
+  // Nested HTML markup for layout version 2
+
+endif;
+```
+
+
+### Conclusion
+Now you can create your own layouts regardless of the HTML markup you need. As a content creator you have the full flexibility to duplicate complete blocks, change the layout and compare which version fits better to your needs.
+
+(image: preview.jpg)

@@ -1,0 +1,284 @@
+Title: Replacing Kirby's core classes
+
+----
+
+Description: Extend core classes like the Kirby or site classes
+
+----
+
+Published: 2022-03-27
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: extending Kirby
+
+----
+
+Text:
+
+There are already (link: docs/guide/plugins/plugin-types text: a lot of ways you can customize Kirby) by adding custom methods, overwrite core components, extend the Page class with your own model, and a whole lot more.
+
+But there are also situations where you might want to overwrite certain parts of the core classes for which there is no existing extension yet. For example, to create virtual pages as children of the `Site` object or virtual users, or to simply add new methods to those classes.
+
+In this recipe, we will explore how we can achieve this.
+
+<info>
+Since we are touching core functionality here, make sure you understand what you are doing and how it might affect other parts of the code, so as not to break anything.
+</info>
+
+## Requirements
+
+- Kirby (link: try text: Starterkit or Plainkit)
+- Basic understanding of Object Oriented Programming is helpful but not required. Also see link at the end of this recipe.
+
+## Replace the App class
+
+There are basically two steps to replacing the `Kirby\Cms\App` aka `Kirby` class:
+
+1. Create new class in a plugin
+2. Replace Kirby with new class in your project's main `index.php`
+
+### Create `CustomKirby` class
+
+Let's start with the first step. Create a new plugin folder, e.g., `extend-core-classes` in `/site/plugins` with the obligatory `index.php`.
+
+Inside this new plugin folder, create a folder called `classes` and then inside this `/classes` folder a new file, `CustomKirby.php`, so that our file structure looks like this:
+
+```filesystem
+plugins/
+  extend-core-classes/
+    classes/
+      CustomKirby.php
+    index.php
+```
+
+Inside the `CustomKirby.php` file, we create the new class:
+
+```php "/site/plugins/extend-core-classes/classes/CustomKirby.php"
+<?php
+// give it a namespace, not required but good practice
+namespace cookbook\core;
+
+// import App class
+// (so that we don't have to use fully-qualified class names all over the place)
+use Kirby\Cms\App as Kirby;
+
+class CustomKirby extends Kirby
+{
+    // custom code
+}
+```
+
+### Replace class in main `index.php`
+
+To make our installation use the new class, we have to replace the `Kirby` class with our `CustomKirby` class in the `index.php` file at the root of our installation:
+
+```php "/index.php"
+<?php
+
+// require Kirby's bootstrap file
+require __DIR__ . '/kirby/bootstrap.php';
+
+// require the CustomKirby class
+require __DIR__ . '/site/plugins/extend-core-classes/classes/CustomKirby.php';
+
+// import class
+use cookbook\core\CustomKirby;
+
+echo (new CustomKirby)->render();
+```
+
+And that's it. Let's do a quick test. If you head over to a template and…
+
+```php
+dump($kirby);
+```
+
+…you will see that `$kirby` now refers to our new `CustomKirby` class.
+
+This new class inherits all methods and properties from the parent `Kirby\Cms\App` class, so at this point, this doesn't really impact Kirby's functionality at all yet.
+
+We can now start extending our new class, for example with a custom method:
+
+```php "/site/plugins/extend-core-classes/classes/CustomKirby.php"
+<?php
+
+namespace cookbook\core;
+
+use Kirby\Cms\App as Kirby;
+
+class CustomKirby extends Kirby
+{
+    public function sayHello()
+    {
+        return 'Hello world';
+    }
+}
+```
+
+Back in our template, when we now use the new method
+
+```php
+<?php
+
+echo $kirby->sayHello();
+```
+
+it will print `Hello world` as expected. Cool, we have extended the parent class with new custom functionality, however basic the example actually is.
+
+Having replaced the `Kirby` class now opens up all sort of possibilities like being able to replace other core classes like the `Site` or `Users` classes etc.
+
+## Replace the `Site` class
+
+To be able to overwrite the `Site` class, we have to hook into the `Kirby` class and overwrite the `site()` and `setSite()` methods.
+
+As above, we first create a custom Site class skeleton inside the `classes` folder:
+
+```php "/site/plugins/extend-core-classes/classes/CustomSite.php"
+<?php
+
+namespace cookbook\core;
+
+use Kirby\Cms\Site;
+
+class CustomSite extends Site
+{
+    // custom code here
+}
+```
+
+Then we register the class in our plugin's `index.php`, so it gets loaded when requested:
+
+```php "/site/plugins/extend-core-classes/index.php"
+<?php
+
+load([
+    'cookbook\\core\\CustomSite' => 'classes/CustomSite.php',
+], __DIR__);
+```
+
+With this in place, we are ready to replace the `Site` object in the above-mentioned two methods with our `CustomSite` class.
+
+```php "/site/plugins/extend-core-classes/classes/CustomSite.php"
+<?php
+
+namespace cookbook\core;
+
+// import classes
+use Kirby\Cms\App as Kirby;
+use cookbook\core\CustomSite;
+
+class CustomKirby extends Kirby
+{
+    /**
+     * Sets a custom Site object
+     *
+     * @param Site|array|null $site
+     * @return $this
+     */
+    protected function setSite($site = null)
+    {
+        if (is_array($site) === true) {
+            $site = new CustomSite($site + [ // instantiate new custom site model here
+                'kirby' => $this
+            ]);
+        }
+
+        $this->site = $site;
+        return $this;
+    }
+
+    /**
+     * Initializes and returns the (custom) Site object
+     *
+     * @return \Kirby\Cms\Site
+     */
+    public function site()
+    {
+        return $this->site = $this->site ?? new CustomSite([
+            'errorPageId' => $this->options['error'] ?? 'error',
+            'homePageId'  => $this->options['home']  ?? 'home',
+            'kirby'       => $this,
+            'url'         => $this->url('index'),
+        ]);
+    }
+}
+```
+You can verify this works by dumping
+
+```php
+dump($kirby->site());
+```
+
+in a template.
+
+We are now ready to add custom methods to the `CustomSite` class or overwrite existing ones.
+
+If you landed here, you are probably familiar with how you can add (link: docs/guide/virtual-pages text: virtual pages) from a database or other data source in Kirby by creating a Page model and overwriting the `children()` method. The virtual children in these examples are always children of a given page that actually exists as a folder in your file system.
+
+But let's assume you wanted to add virtual pages as children of the Site object. Well, now you can. Let's try.
+
+In the `CustomSite` class, let's add a `children()` method.
+
+```php "/site/plugins/extend-core-classes/classes/CustomSite.php"
+<?php
+
+namespace cookbook\core;
+
+use Kirby\Cms\Site;
+use Kirby\Cms\Pages;
+
+class CustomSite extends Site
+{
+    /**
+     * Add virtual children to existing children
+     */
+    public function children() {
+        // get existing children
+        $children = parent::children();
+
+        // set up virtual pages as array
+        $pages = [
+            [
+                'slug'     => 'login',
+                'template' => 'login',
+                'model'    => 'login',
+                'content'  => [
+                    'title' => 'Login',
+                    'text'  => 'Some content here'
+                ],
+            ],
+            [
+                'slug'     => 'shop',
+                'template' => 'shop',
+                'model'    => 'shop',
+                'content'  => [
+                    'title' => 'Shop',
+                    'text'  => 'Some content here'
+                ],
+            ],
+        ];
+        // pass virtual children data to the Pages::factory() methods
+        $virtualChildren = Pages::factory($pages, $this);
+        // return merged collection
+        return $children->merge($virtualChildren);
+    }
+}
+```
+
+Visit those pages in your browser to check if it works as expected. Since we haven't created any specific templates yet, the `default.php` template will be used to output the content of those pages at the moment.
+
+In the example above, we created the `$pages` array manually, but the data for these pages can also come from an API or database like in the virtual pages guide examples mentioned above.
+
+This intro should put you into a good starting position to explore yourself what you can do with it. Whenever you have questions, let's discuss them on the (link: https://forum.getkirby.com text: forum)
+
+## More information
+
+- (link: docs/cookbook/templating/understanding-oop text: A brief intro to object oriented programming in PHP)
+- (link: docs/guide/virtual-pages text: Virtual pages)
+
+
