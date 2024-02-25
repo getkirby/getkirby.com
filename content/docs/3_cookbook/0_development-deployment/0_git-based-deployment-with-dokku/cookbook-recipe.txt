@@ -1,4 +1,4 @@
-Title: Git-based deployment with Dokku
+Title: Deployment with Dokku
 
 ----
 

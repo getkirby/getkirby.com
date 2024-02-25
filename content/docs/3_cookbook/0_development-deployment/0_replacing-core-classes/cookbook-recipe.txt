@@ -1,4 +1,4 @@
-Title: Replacing Kirby's core classes
+Title: Replacing core classes
 
 ----
 

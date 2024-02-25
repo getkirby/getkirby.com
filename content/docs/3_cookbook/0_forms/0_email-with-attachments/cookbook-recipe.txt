@@ -1,8 +1,8 @@
-Title: Email with attachments
+Title: Forms with attachments
 
 ----
 
-Description: Send an email with attachments from form input.
+Description: Sending email with attachments from form input.
 
 ----
 

@@ -1,4 +1,4 @@
-Title: Email contact form
+Title: Contact form
 
 ----
 

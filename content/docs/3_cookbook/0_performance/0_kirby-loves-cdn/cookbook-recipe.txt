@@ -2,7 +2,7 @@ Title: Kirby loves CDN
 
 ----
 
-Description: Set up custom components to deliver assets and files through a CDN.
+Description: Deliver assets and files through a CDN.
 
 ----
 

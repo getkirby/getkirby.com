@@ -1,8 +1,20 @@
-Title: My first Panel field
+Title: Custom Panel field
 
 ----
 
-Tags: panel
+Description: Create a custom Panel field from scratch
+
+----
+
+Published: 2020-02-10
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: panel, field
 
 ----
 Text:
@@ -474,14 +486,4 @@ Voilà, our new doi field is ready for use.
 
 (image: doifield-8.jpg)
 
-----
 
-Description: Create your first custom Panel field from scratch
-
-----
-
-Published: 2020-02-10
-
-----
-
-Authors: - authors/sonja-broda

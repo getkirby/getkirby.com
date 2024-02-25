@@ -1,4 +1,5 @@
-Title: Local development environment
+Title: Local dev environment
+
 ----
 
 Description: Find the development environment that fits your needs.

@@ -1,4 +1,4 @@
-Title: A variant to using Kirby for multiple sites
+Title: Alternative multisite setup
 
 ----
 
@@ -6,7 +6,7 @@ Published: 2020-01-15
 
 ----
 
-Description: An alternative approach for running multiple sites from the same Kirby installation.
+Description: Using symlinks to run multiple sites from the same Kirby installation.
 
 ----
 
@@ -24,7 +24,7 @@ Text:
 
 In (link: docs/cookbook/setup/multisite text: this recipe) a scenario for running multiple sites via the same Kirby setup has been presented. The proposed setup makes use of the fact that you need only one `/kirby` folder where the heart of Kirby is beating. However, it is also based on the assumption that you have only one virtual (or even real) webserver host from where your various sites will be served. The `index.php` at the root of your installation in this scenario works like a dispatcher and therefore needs some modification.
 
-Even though the proposed setup is easy to accomplish, some might dislike the fact of running multiple websites from one webserver host - amongst others. Instead, one might prefer one virtual host per site, which has the advantage that - from a webservers perspective - you have clearly seperated installations and configurations for each site. Moreover it provides the ability to extend the capabilities of single hosts while narrowing down others, depending on your needs. Last not least you can enable or disable single hosts without affecting the others.
+Even though the proposed setup is easy to accomplish, some might dislike the fact of running multiple websites from one webserver host - amongst others. Instead, you might prefer one virtual host per site, which has the advantage that - from a webserver's perspective - you have clearly seperated installations and configurations for each site. Moreover it provides the ability to extend the capabilities of single hosts while narrowing down others, depending on your needs. Last not least you can enable or disable single hosts without affecting the others.
 
 Hence, here is an alternative approach of a multisite Kirby installation, which provides several additional advantages.
 
@@ -34,7 +34,7 @@ The following setup was tested on Linux OS (Ubuntu 18.04 and Debian 9) together 
 
 ## In the filesystem
 
-The proposed filesystem layout in (link: docs/cookbook/setup/multisite text: the above mentioned recipe) looks like this:
+The proposed filesystem layout in (link: docs/cookbook/setup/multisite text: the above-mentioned recipe) looks like this:
 
 ```filesystem
   kirby/
@@ -92,7 +92,7 @@ Let's change that to a setup in which every website is served by a dedicated web
 
 Fellow Kirby administrators will notice nothing new besides two Kirby installations side-by-side.
 
-However, we can move the `/kirby` folder to a location outside of all document roots and replace it with a symbolic link which points to the moved `kirby` folder:
+However, we can move the `/kirby` folder to a location outside all document roots and replace it with a symbolic link which points to the moved `kirby` folder:
 
 ```filesystem
 /srv/www/

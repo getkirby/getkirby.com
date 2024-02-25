@@ -1,8 +1,8 @@
-Title: Using blueprints in the frontend
+Title: Accessing blueprints
 
 ----
 
-Description: Access blueprints and use this data to control your logic.
+Description: Use data from blueprints to control your template logic
 
 ----
 

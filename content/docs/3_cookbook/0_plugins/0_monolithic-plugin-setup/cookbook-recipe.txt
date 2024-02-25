@@ -1,4 +1,22 @@
-Title: Monolithic Plugin Setup
+Title: Monolithic plugin setup
+
+----
+
+Published: 2020-05-08
+
+----
+
+Description: Plugin workflow to develop and test a plugin from the same Git repository
+
+----
+
+Authors:
+
+- authors/hristiyan-dodov
+
+----
+
+Tags: plugin, workflow
 
 ----
 
@@ -188,16 +206,3 @@ We managed to create a setup where we can develop and view our plugin from the s
 
 To get started right away with the same setup, use [this template repository](https://github.com/OblikStudio/kirby-plugin).
 
-----
-
-Published: 2020-05-08
-
-----
-
-Description: Set up a plugin workflow that allows you to both develop and test your plugin from the same Git repository.
-
-----
-
-Authors:
-
-- authors/hristiyan-dodov

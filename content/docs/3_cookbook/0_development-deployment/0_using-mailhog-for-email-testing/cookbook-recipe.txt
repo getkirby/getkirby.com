@@ -1,7 +1,7 @@
-Title: Using MailHog for local email testing
+Title: Email testing
 ----
 
-Description: Make email testing a breeze with the right tools for the task
+Description: MailHog and similar tools make email testing a breeze
 
 ----
 

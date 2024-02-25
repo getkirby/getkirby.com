@@ -1,4 +1,4 @@
-Title: Programmable blueprints
+Title: PHP-based blueprints
 
 ----
 

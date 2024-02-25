@@ -1,4 +1,4 @@
-Title: Git-based FTP-deployment
+Title: Git-based FTP-deploys
 
 ----
 
@@ -6,7 +6,7 @@ Published: 2023-09-10
 
 ----
 
-Description: A step-by-step guide for deploying Kirby projects via GitHub actions and FTP to staging and production environments
+Description: Deploy Kirby projects via GitHub actions and FTP to staging and production
 
 ----
 

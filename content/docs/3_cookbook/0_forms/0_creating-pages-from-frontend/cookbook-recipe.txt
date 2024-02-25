@@ -1,4 +1,4 @@
-Title: Creating pages from frontend
+Title: Create pages from frontend
 
 ----
 
@@ -6,7 +6,7 @@ Published: 2019-05-11
 
 ----
 
-Description: Create pages from user input on the front end, e.g. from an event registration form.
+Description: Create pages from an event registration form
 
 ----
 

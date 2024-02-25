@@ -1,4 +1,4 @@
-Title: Kirby templates 101
+Title: PHP templating
 
 ----
 

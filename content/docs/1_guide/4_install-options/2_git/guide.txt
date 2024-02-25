@@ -1,4 +1,4 @@
-Title: Kirby meets Git
+Title: Install via Git
 
 ----
 
@@ -13,10 +13,6 @@ Description: Install and update Kirby via Git
 Authors:
 
 - authors/bastian-allgeier
-
-----
-
-Tags: development, updating
 
 ----
 

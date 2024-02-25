@@ -1,4 +1,4 @@
-Title: Creating preview images for PDF files
+Title: Preview images for PDFs
 
 ----
 

@@ -1,4 +1,4 @@
-Title: Include frontend CSS/JS libraries
+Title: Including CSS/JS libraries
 
 ----
 
@@ -6,7 +6,7 @@ Published: 2023-01-15
 
 ----
 
-Description: How to add CSS or JS files to your templates, for example to implement an image slider
+Description: How to add CSS or JS files to your templates
 
 ----
 

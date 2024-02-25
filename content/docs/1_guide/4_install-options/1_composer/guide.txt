@@ -1,4 +1,4 @@
-Title: Kirby meets Composer
+Title: Install via Composer
 
 ----
 
@@ -24,7 +24,7 @@ Text:
 
 ## About this tutorial
 
-This tutorial describes one of several ways you can install and update Kirby. See (link: docs/guide/installation text: the overview page) for all supported ways.
+This guide describes one of several ways you can install and update Kirby. See (link: docs/guide/installation text: the overview page) for all supported ways.
 
 ## Installing Composer
 
@@ -57,7 +57,7 @@ It is [generally recommended](https://getcomposer.org/doc/faqs/should-i-commit-t
 ...
 ```
 
-## Switching an existing Kirby 3 site to a Composer setup
+## Switching an existing Kirby 4 site to a Composer setup
 
 If you have an existing site and want to use Composer with it, that's possible as well.
 
@@ -66,7 +66,7 @@ The Composer magic is all contained in the `composer.json` file. The most basic 
 ```js "composer.json"
 {
   "require": {
-    "getkirby/cms": "^3.0"
+    "getkirby/cms": "^4.0"
   },
   "config": {
     "optimize-autoloader": true
@@ -87,7 +87,7 @@ If you want to use a different location for the `kirby` directory, you can chang
 ```js "composer.json"
 {
   "require": {
-    "getkirby/cms": "^3.0"
+    "getkirby/cms": "^4.0"
   },
   "config": {
     "optimize-autoloader": true

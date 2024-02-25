@@ -1,4 +1,20 @@
-Title: Menu builders
+Title: Menu builder
+
+----
+
+Published: 2019-11-15
+
+----
+
+Description: Create custom menus from the Panel using different field types
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: navigation, menu
 
 ----
 
@@ -258,19 +274,3 @@ As always, this is just a basic collection of ideas that you can extend for your
 
 
 Instead of using conditional fields for page links vs. external links, you could also use the (link: https://github.com/OblikStudio/kirby-link-field text: link field plugin).
-
-----
-
-Published: 2019-11-15
-
-----
-
-Description: Create custom menus from the Panel leveraging the power of the pages and the structure field
-
-----
-
-Authors: - authors/sonja-broda
-
-----
-
-Tags: navigation, menu

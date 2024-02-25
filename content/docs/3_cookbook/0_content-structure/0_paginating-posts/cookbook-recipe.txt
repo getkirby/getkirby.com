@@ -1,4 +1,4 @@
-Title: Paginating long posts
+Title: Paginating posts
 
 ----
 

@@ -6,7 +6,7 @@ Published: 2021-08-09
 
 ----
 
-Description: A walkthrough on how to install and use PurgeCSS with Kirby.
+Description: A walkthrough on how to install and use PurgeCSS with Kirby
 
 ----
 

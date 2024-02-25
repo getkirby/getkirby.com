@@ -2,7 +2,7 @@ Title: Advanced Panel area
 
 ----
 
-Description: Create an editable product list as custom Panel area, complete with dialogs, dropdowns and search.
+Description: Panel area with editable list, complete with dialogs, dropdowns and search
 
 ----
 

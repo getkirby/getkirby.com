@@ -1,4 +1,4 @@
-Title: A brief intro to object oriented programming in PHP
+Title: OOP in PHP
 
 ----
 
@@ -6,7 +6,7 @@ Published: 2021-01-11
 
 ----
 
-Description: Understanding classes, objects, member functions and common pitfalls
+Description: Learn the basics of object oriented programming in PHP
 
 ----
 

@@ -1,4 +1,4 @@
-Title: Uploading files from frontend
+Title: Uploading files
 
 ----
 

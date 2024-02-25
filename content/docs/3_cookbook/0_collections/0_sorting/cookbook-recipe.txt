@@ -1,4 +1,4 @@
-Title: Sorting
+Title: Sorting collections
 
 ----
 

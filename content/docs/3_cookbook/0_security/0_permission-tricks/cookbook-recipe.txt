@@ -1,4 +1,4 @@
-Title: Going beyond Kirby's permissions features
+Title: Extending permissions
 
 ----
 
@@ -6,7 +6,7 @@ Published: 2020-06-21
 
 ----
 
-Description: Find out about ways to fine-tune and go beyond Kirby's built-in permission system in the Panel
+Description: Fine-tune and go beyond Kirby's built-in permission system in the Panel
 
 ----
 

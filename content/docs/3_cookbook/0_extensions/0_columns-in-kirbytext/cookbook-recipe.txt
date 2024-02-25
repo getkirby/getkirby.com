@@ -1,4 +1,4 @@
-Title: Columns in Kirbytext
+Title: Kirbytext columns
 
 ----
 
