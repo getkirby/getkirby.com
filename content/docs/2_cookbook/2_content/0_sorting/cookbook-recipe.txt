@@ -149,34 +149,29 @@ Now, instead of numbers, our sizes field contains sizes like `S, M, L, XL, XXL` 
 // fetch the products from the structure field
 $products = $page->products()->toStructure();
 
-// map an order field to each item of the collection
-$products = $products->map(function($item) {
   // array that keeps the order of sizes
   $sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
-  // get the order number from the array based on the item's size value
-  $item->order = array_search($item->size()->value(), $sizes);
-
-  return $item;
-});
-
-// finally, sort by order
-$products = $products->sortBy('order', 'asc');
+  // sort products by order number based on the item’s size value
+  $producs = $producs->sort(
+    // get the order number from the array
+    fn ($item) => array_search($item->size()->value(), $sizes),
+    SORT_ASC
+  );
 ```
 
 Of course, we can write all that stuff a bit shorter:
 
 ```php
-$products = $page->products()->structure()->map(function($item) {
-  $sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-  $item->order = array_search($item->size()->value(), $sizes);
-  return $item;
-})->sortBy('order', 'asc');
+$products = $page->products()->structure()->sort(
+  fn ($item) => array_search($item->size()->value(), $sizes),
+  SORT_ASC
+);
 
 dump($products);
 ```
 
-The `map()` method is really useful for all types of scenarios, so keep it in mind for next time you come across a problem that you can't solve with a simple sort.
+Passing a callback function to the `sort()` method is really usefull for all types of scenarios, so keep it in mind for next time you come across a problem that you can't solve with a simple sort.
 
 ## Sorting with Page Models
 
