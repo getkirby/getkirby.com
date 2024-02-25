@@ -1,0 +1,101 @@
+Title: Local development environment
+----
+
+Description: Find the development environment that fits your needs.
+
+----
+
+Published: 2019-04-15
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: development environment, tools
+
+----
+
+Text:
+
+The easiest way to start testing and developing with Kirby is in a local development environment: you can easily edit your files locally, immediately see changes in the browser, and deploy your site on a public server when you are ready.
+
+Kirby has only very few (link: docs/guide/quickstart#requirements text: server requirements), and you have therefore many options when choosing the development environment that is right for you–no matter if you want to develop on a Mac, Windows or Linux.
+
+
+## MAMP or MAMP Pro
+(link: https://www.mamp.info/en/mamp/ text: MAMP) (free) and (link: https://www.mamp.info/en/mamp-pro/ text: MAMP Pro) (paid) are available for both Mac and Windows. They are a good solution if you prefer a GUI interface. Both MAMP and MAMP Pro come with Apache, up-to-date versions of PHP and all the modules you need for Kirby already installed.
+
+MAMP Pro allows you to create a host for each project, use Nginx instead of Apache, and some other useful features.
+
+Once MAMP is installed, the default folder to put your Kirby folder into is the `programs/MAMP/htdocs` folder (Mac) or the `C:\MAMP\htdocs` folder (Windows). By default, you can then access the project under `http://localhost:8888/project-folder-name`.
+
+We found loading websites on MAMP slow on OS X Mojave. A majority of the Kirby team has therefore switched to Laravel Valet (see below).
+
+
+## XAMPP
+
+(link: https://www.apachefriends.org/index.html text: XAMPP) is similar to MAMP, free, and available for Mac, Windows and Linux.
+
+In a default installation, the web root folder is located under `programs/XAMPP/htdocs` on a Mac or `C:\XAMPP\htdocs` on Windows. XAMPP is probably the most popular GUI tool used on Windows/Linux.
+
+## WAMP
+
+(link: http://www.wampserver.com/en/ text: WAMP) is an open source tool with a GUI interface for Windows only.
+
+## PHP's built-in server
+
+If a recent PHP version that (link: docs/guide/quickstart#requirements text: supports Kirby) is already installed on your system and you are fine using the command line, you can spin up PHP's built-in server from the command line, specifying the `kirby/router.php` file to use Kirby's router.
+
+```bash
+cd ~/path-to-your-kirby-project
+php -S localhost:8000 kirby/router.php
+```
+
+You should now be able to reach your local server at http://localhost:8000.
+
+While using the built-in server works fine for many use cases, you might sometimes run into issues. We therefore don't really recommend this environment.
+
+## Laravel Valet
+
+(link: https://laravel.com/docs/8.x/valet text: Laravel Valet) is a minimalist development environment for Mac. It requires you to install PHP directly onto your local machine. Valet supports Kirby out of the box. Check it out if you want a fast development environment for Kirby and are not afraid of the command line.
+
+Once Valet is (link: https://laravel.com/docs/8.x/valet#installation text: installed), you're ready to start (link: https://laravel.com/docs/8.x/valet#serving-sites text: serving sites) using the `park` or `link` commands.
+
+The beauty of Valet is that is detects every folder you put into your parked sites folder, which is then automatically deployed to `http://project-name.test` without you having to set up hosts manually. It also supports `https` out of the box.
+
+<info>
+There's also a (link: https://github.com/cretueusebiu/valet-windows text: Windows fork) of Laravel Valet and also some tutorials on the web. Since we are not on Windows, we can't tell if that works with Kirby out of the box or if you need a custom driver.
+</info>
+
+## Laravel Herd
+(link:https://herd.laravel.com text:Laravel Herd) is a one click PHP development environment with zero dependencies for macOS, running out of the box without any hassles. According to its self description it is the fastest environment around.
+Sites can be configured via a GUI or command line just like Laravel valet. Different PHP versions can be used for all your sites and sharing of local sites is also possible via (link:https://expose.dev text:Expose).
+
+
+## Valet+
+
+(link: https://github.com/weprovide/valet-plus text: Valet+) is a third-party fork of Laravel Valet. The principle is the same as outlined above, but as its name suggest, Valet+ comes with some additional features like PHP version switching or Xdebug on/off mode, which you can check out in the documentation.
+
+
+## Vagrant + Virtual Box
+
+(link: https://www.vagrantup.com/ text: Vagrant) is a command line tool for building and managing virtual machine environments in a single workflow. It supports  (link: https://www.virtualbox.org  text: VirtualBox), a free, cross-platform virtualization solution, but also works with other virtualization products.
+
+It provides a virtual development environment where you don't have to install a server, PHP, database or other development tools on your local computer. The advantage of this solution is that you can install a box that resembles your deployment environment as closely as possible.
+
+Follow their (link: https://www.vagrantup.com/intro/getting-started/index text: Getting Started guide) to get up and running.
+
+## Laragon
+
+(link: https://laragon.org text: Laragon) is a portable, isolated development environment for Windows only. It supports different PHP versions, Apache or Nginx, and different types of databases. You can also share your projects with the outside using Ngrok.
+
+## Laravel Homestead
+
+(link: https://laravel.com/docs/5.8/homestead text: Laravel Homestead) is an official, pre-packaged Vagrant box and provides a full-featured virtual development environment, that doesn't require you to install PHP, a web server, or any other server software on your computer. Homestead runs on Windows, Mac, or Linux systems.
+
+## DDEV
+
+(link: https://ddev.com/ text: DDEV) is an increasingly popular Docker-based development environment, that's quickly easy set up on Mac, Linux and Windows. It doesn't require any Docker knowledge unless you have special requirements.
+

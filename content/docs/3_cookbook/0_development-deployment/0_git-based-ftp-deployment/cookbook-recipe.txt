@@ -1,0 +1,295 @@
+Title: Git-based FTP-deployment
+
+----
+
+Published: 2023-09-10
+
+----
+
+Description: A step-by-step guide for deploying Kirby projects via GitHub actions and FTP to staging and production environments
+
+----
+
+Authors:
+
+- authors/christian-fickinger
+
+----
+
+Tags: deployment, git
+
+----
+
+Text:
+
+## Introduction
+
+This is a step-by-step guide for FTP-deployment to development, staging and production servers. We use a development environment on our local machine. Deployment to the staging and production servers is triggered via GitHub actions and published via FTP.
+
+
+
+## Requirements and Prerequisites
+- **Local running Kirby project**
+    First of all, we need a running Kirby project on your local machine. If you need help setting up a local environment, I recommend Sonja's guide: (link: /docs/cookbook/setup/development-environment text: Local development environment). I use (link:https://laravel.com/docs/valet text:Laravel valet) on my MacBook, but it's up to you to choose a solution that works best for you.
+- **Web server for staging**
+    Second, we need a running web server for staging, e.g. *staging.example.com*. The requirements are very low. It can be a web hosting starter package with a hoster of your choice. Only FTP access is needed, and the FTP path should be the root directory of the web server. SSH is not required.
+- **Web server for production**
+    A running web server for production is also needed, e.g. *www.example.com*. The requirements are identical to the  requirements for staging.
+- **Terminal**
+    To run our Git commands, we need a local terminal window with (link: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git text: Git) installed locally and a little command line knowledge.
+- **(link:https://github.com/ text:GitHub) account**
+    Last but not least, we need an active GitHub account. A free plan is sufficient.
+
+<info>
+We use GitHub for our deployment due to its popularity. Alternatively, you can use (link:https://gitlab.com/ text:Gitlab) as a hosted service or self-installed.
+</info>
+
+
+## Setting up a Git repository
+
+For better understanding, we will use Git commands in the command line. We only need a handful of Git commands for this tutorial and it helps to understand the steps better, especially if Git is new to you. Of course, you can also use a graphical Git tool, such as (link:https://www.sourcetreeapp.com/ text:SourceTree) or (link:https://www.sublimemerge.com/ text:Sublime Merge).
+
+
+### Create an empty repository
+First we create an empty repository via the (link:https://github.com/new text:GitHub web interface) and clone it to our local machine into the directory `~/Projects/example`.
+
+Open a terminal window, change to the directory `~/Projects/example` and invoke the following Git command.
+```bash
+git clone https://github.com/chrfickinger/example.git ~/Projects/example
+```
+*Please replace `chrfickinger/example.git` with the url of your project.*
+
+
+### Copy your project files
+Now we can copy (or move) all our kirby project files into the named directory, change to the project folder again and fire up a `git status` command to list the newly added files.
+
+```bash
+# change to your project directory ...
+cd ~/Projects/example
+
+# ... and list all (uncommited) files for control
+git status -s
+```
+
+<info>
+`git status` somewhere in your project directory can always be used to check if there are new (uncommitted) files in your project. The `-s` parameter is just for a shorter, more compact output.
+</info>
+
+
+### Commit and push your changes
+
+```bash
+# Mark all files to add to your repository
+git add -A
+
+# Commit all marked files to your local repository
+git commit -a -m "My first commit"
+
+# Push the latest version to GitHub
+git push
+```
+
+
+The Git queue should now be clear again and all files should have been pushed to GitHub. You can check the empty queue by firing up the `git status` command again. The result should be empty.
+
+```bash
+git status -s
+```
+
+
+## Deployment to staging
+Whenever we push something to GitHub, we want GitHub to FTP the changes to our staging system. To make this happen, we need a workflow file. The file and its folders need to be placed in the root of your project `~/Projects/example`. Create a folder called `.github` with a subfolder called `workflows` and a yml file called `staging.yml` in it.
+
+It should look like this: `~/Projects/example/.github/workflows/staging.yml`. This file contains all necessary information for the GitHub action.
+
+<warning>
+For ease of understanding, we use only one branch named `main` in our repository. Of course, the guide can be extended by any branches.
+</warning>
+
+### The workflow file
+Let's check the workflow file `staging.yml` now!
+
+First we give it a meaningful `name` e.g. *Staging Deployment* and then we define when the action should take place. In our example the action will be executed whenever something is pushed into the `main` branch.
+
+```yml
+name: Staging Deployment
+on:
+  push:
+    branches: [ main ]
+```
+Now some basic information about the environment where the workflow runs.
+
+```yml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+````
+`Steps` define, what kind of action(s) run on GitHub. There are a lot of (link:https://github.com/actions text:predefined actions) out there. We actually only need two actions for our deployment.
+
+The first action is a checkout action
+
+```yml
+steps:
+  - uses: actions/checkout@v3
+    with:
+      fetch-depth: 2
+```
+
+and the second action is the (link:https://github.com/SamKirkland/FTP-Deploy-Action text:FTP-Deploy-Action) by (link:https://github.com/SamKirkland text:SamKirkland).
+You just need to replace the access data with the FTP data of your staging server.
+
+```yml
+steps:
+  - name: FTP Deployment
+    uses: SamKirkland/FTP-Deploy-Action@4.3.3
+    with:
+      server: staging.example.com
+      username: your staging ftp-user
+      password: your staging ftp-password
+      protocol: ftps
+```
+<info>
+There are a bunch of (link:https://github.com/SamKirkland/FTP-Deploy-Action#settings text:configuration settings) coming with this FTP-Deploy-Action. We only use very basic settings for our example.
+</info>
+
+
+Finally we end up with the following file:
+```yml
+name: Staging Deployment
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - name: FTP Deployment
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: staging.example.com
+          username: your staging ftp-user
+          password: your staging ftp-password
+          protocol: ftps
+```
+Now all we need to do is commit and push that file to GitHub, and we have a fully functional action that will automatically deploy your files to your staging environment once they are pushed to GitHub.
+
+
+### Commit and push the file
+
+```bash
+# Mark staging.yml to add to your repository
+git add .github/workflows/staging.yml
+
+# Commit the file to your local repository
+git commit .github/workflows/staging.yml -m "My staging workflow"
+
+# and push the file to GitHub
+git push
+```
+Once the file is pushed to GitHub the action starts immediately. You can check the running workflow under the Actions tab of your GitHub project.
+
+<warning>
+The initial deployment can take a while, depending on the size of your project, it can take up to 60 minutes.  During the first run, a file called `.ftp-deploy-sync-state.json` will be created on the staging server. Once this file is available, subsequents runs will only take a few seconds.
+</warning>
+
+
+
+
+## Deployment to production
+Typically, the staging server is used to preview and test your latest code changes. After approval by your customer (or by you), the updated files can be deployed to your production environment.
+
+
+### The workflow file
+Let's create a workflow file for production now: `~/Projects/example/.github/workflows/production.yml`
+
+We again give it a meaningful name, e.g. *Production Deployment*, and specify when the action should be executed. In our example, the action is executed whenever we set a `tag` in our repository and push the `tag` to GitHub.
+
+```yml
+name: Production Deployment
+on:
+  push:
+    tags:
+      - '*'
+```
+
+We also need to update the FTP settings.
+
+```yml
+steps:
+  - name: FTP Deployment
+    uses: SamKirkland/FTP-Deploy-Action@4.3.3
+    with:
+      server: www.example.com
+      username: your production ftp-user
+      password: your production ftp-password
+      protocol: ftps
+```
+The rest of the file can be the same as in the staging workflow file.
+We end up with the following file:
+```yml
+name: Production Deployment
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - name: FTP Deployment
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: www.example.com
+          username: your production ftp-user
+          password: your production ftp-password
+          protocol: ftps
+```
+
+### Commit and push the file
+
+```bash
+# Mark production.yml to add to your repository
+git add .github/workflows/production.yml
+
+# Commit the file to your local repository
+git commit .github/workflows/production.yml -m "My production workflow"
+
+# and push the file to GitHub
+git push
+```
+Once the file is pushed to GitHub, the action waits for any incoming `tags` in your repository.
+
+### Tag your repository
+We just need to set a `tag` now and push it to GitHub.
+
+```bash
+# Define a new tag ...
+git tag v0.1
+
+# ... and push it to GitHub
+git push origin --tags
+```
+
+Once the tag is pushed to GitHub, the production workflow starts immediately to FTP the files to the production target.
+<info>
+`Tags` can also be set via GitHub web interface as well. Pushing to GitHub is then omitted.
+</info>
+
+##Conclusion
+Now you have a complete guide for a modern staging/production deployment solution with very low server requirements. This guide can be extended in many different directions. Have fun using it.
+

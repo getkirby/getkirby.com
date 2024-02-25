@@ -2,6 +2,16 @@
 
 <?php slot('h1') ?>
 <?= $page->title()->widont() ?>
+
+<?php endslot() ?>
+<?php slot('tags') ?>
+
+<div class="mb-6">
+	<span>Tags:</span>
+		<?php foreach ($page->tags()->split(',') as $tag): ?>
+			<a href="<?= page('docs/cookbook')->url() . '/tags/' . Str::slug($tag) ?>"><?= $tag ?></a>
+		<?php endforeach ?>
+</div>
 <?php endslot() ?>
 
 <?php slot() ?>

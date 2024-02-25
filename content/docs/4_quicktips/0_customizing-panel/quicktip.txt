@@ -1,0 +1,100 @@
+Title: Examples for customizing the Panel
+
+----
+
+Tags: panel
+
+----
+Text:
+
+We can change many aspects of the look and feel of the (glossary: panel text: Panel) by adding a custom Panel stylesheet and overriding the default styles.
+
+To do so, register your custom stylesheet in your `config.php`, for example:
+
+```php "/site/config/config.php"
+return [
+  'panel' => [
+    'css' => 'assets/css/custom-panel.css'
+  ]
+];
+```
+
+Once this is set up, we can target the elements we want to modify via their selectors and apply our custom styles.
+
+In this recipe, we will shift the focus a little, and look at how we can actually extend default Panel elements by adding a property to a blueprint and the styling this element.
+
+## Info sections/fields
+
+By default, the `info` field and the `info` section have 4 themes: `info`, `positive`, `negative` and no theme.
+
+But since Kirby adds the property value we pass to the `theme` property into the `data-theme` attribute of the element, we can use this behavior to create any theme we need.
+
+Let's add a `warning` theme as an example.
+
+In your blueprint, add an `info` field and give it a `theme` property with a value `warning`:
+
+```yaml
+fields:
+  info:
+    theme: warning
+    text: This is a warning message
+```
+
+The resulting HTML will look like this:
+
+```html
+<div data-theme="warning" class="k-box">
+  <div class="k-text">
+    <p>This is a warning message</p>
+  </div>
+</div>
+```
+
+We can now style this field in our custom styleheet:
+
+```css "/assets/css/custom-panel.css"
+.k-box[data-theme="warning"] {
+  background: #f5d8a1;
+  border-left: 2px solid #f0c674;
+}
+```
+
+## Custom field/section image backgrounds
+
+The available backgrounds for image cards in the Panel, defined via the `back` option, are: `pattern`, `black` and `white`.
+
+Again, we can leverage the fact that Kirby adds the value we pass to the `back` option to the `data-back` attribute:
+
+```yaml
+sections:
+  pages:
+    type: pages
+    layout: cards
+    image:
+      query: page.images.findBy("name", "cover")
+      cover: true
+      ratio: 1/1
+      back: custom
+```
+
+As before, we can use this attribute as selector in our stylesheet:
+
+```css "/assets/css/custom-panel.css"
+[data-back="custom"] span {
+  background: #B294BB;
+}
+```
+
+In the same way, you can modify other elements that get their `data` attributes via blueprint settings, like the card size.
+
+----
+
+Published: 2020-09-01
+
+----
+
+Description: Style Panel elements via blueprint settings and custom CSS
+
+----
+
+Authors: - authors/sonja-broda

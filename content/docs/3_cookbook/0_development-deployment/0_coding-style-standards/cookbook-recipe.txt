@@ -1,0 +1,432 @@
+Title: Coding style standards
+
+----
+
+Description: Set up coding style standards and fix violations automatically with configurable tools that are easy to implement.
+
+----
+
+Published: 2022-11-13
+
+----
+
+Authors:
+
+- authors/sonja-broda
+
+----
+
+Tags: development, coding
+
+----
+
+Text:
+
+## Prerequisites
+
+If you want to follow along with this recipe, make sure you have:
+
+- A web server with a (link: https://getkirby.com/try text: Kirby Starterkit). You can also use your own project or plugin.
+- (link: https://getcomposer.org/ text: Composer) installed on your machine (or in a (link: https://dev.to/texe/composer-in-docker-3f15 text: Docker container)).
+- The IDE related parts will cover VS Code and PHPStorm, if you don't use any of these, just skip those parts.
+- Optional: Git for version control (if you put the Starterkit/your test project under version control, you can easily undo all changes we introduce in the following).
+
+I also assume that you are familiar with using a terminal (i.e. you can navigate to a folder and execute commands).
+
+## Why are coding (style) standards important?
+
+If you're the only person writing code or writing for yourself, this may not be a big deal, but if you want to share your code with the world, or you are collaborating in a team, adhering to coding standards becomes increasingly important.
+
+
+Just imagine multiple developers working on the same code base, and everyone using their own style preferences: Some use spaces for indentation some tabs, some prefer long form arrays some short form, some name their variables and functions using snake_case, some use camelCase, some prefer Yoda style comparisons, some don't. And the list goes on. I've seen it all to often: you quickly end up with hideous and messy code.
+
+The disadvantages of mixing different coding styles (leaving aesthetics aside) are obvious:
+
+- Higher cognitive load when trying to understand such code
+- Increased likelihood of introducing errors as a result
+
+When working in a team, the hardest part is probably to get everyone to agree on a common standard and then stick to it, even if you don't agree with all your team's decisions. For the sake of code readability, it pays to compromise.
+
+The good new is: Once you have you tool of choice set up, you can easily unify your complete code base with a single command.
+
+<info>
+While the focus of this recipe is on PHP and tools for automating this for PHP, the same approach can be applied to other programming languages in your tech stack.
+</info>
+
+## PHP coding style standards
+
+Let's briefly introduce some PHP coding standards.
+
+The FIG (Framework Interoperability Group) is an organisation that defines basic standards for PHP code, the (link: https://www.php-fig.org/psr/ text: PSR guidelines). Over the years, variations of the basic PSR-1 standard have evolved. At the time of writing, (link: https://www.php-fig.org/psr/psr-12/ text: PSR-12) is the current recommended coding style standard. It has superseded the former PSR-2 standard. All major PHP frameworks have adopted these standards as a basis, and the Kirby core code is also based on PSR-12.
+
+The introduction to the PSR-12 standard states its intention like this:
+
+> …the intent of this specification is to reduce cognitive friction when scanning code from different authors. It does so by enumerating a shared set of rules and expectations about how to format PHP code.
+
+Since the PSR guidelines don't specify rules for all situations, frameworks like (link: https://symfony.com/doc/current/contributing/code/standards.html text: Symfony) or (link: https://laravel.com/docs/master/contributions#coding-style text: Laravel) or Kirby usually add their own rules on top.
+
+It is worth noting that in addition to those mentioned above there are other standards like (link: https://pear.php.net/manual/en/standards.php text: PEAR) or (link: https://zf2-docs.readthedocs.io/en/latest/ref/coding.standard.html text: Zend).
+
+While there are good reasons to adhere to an official standard, you may agree to deviate from these "official" standards and implement your own. Either way, the most important thing is that you agree on rules and find ways to enforce them.
+
+However, old habits die hard (especially when working in different contexts), and if we had to fix every violation manually, it would be very frustrating and a big waste of time. Time we could spend programming or enjoying or lives, and this is where helpful tools come in that do this job for us.
+
+
+## Tools
+
+I will skip IDE-specific plugins and concentrate on tools which can be used IDE-independently and which also allow us to automate things in the long run.
+
+The most popular tools are
+
+- (link: https://cs.symfony.com/ text: PHP CS Fixer)
+- (link: https://github.com/squizlabs/PHP_CodeSniffer text: PHP CodeSniffer)
+
+
+While doing research for this recipe, I also found another interesting tool, (link: https://github.com/symplify/easy-coding-standard text: Easy Coding Standard). It lets us combine the rules of the two tools mentioned above, which can be very useful in certain situations. Check it out if this sounds interesting to you, we won't cover it here.
+
+Let's start with installing these tools one after the other via Composer.
+
+## PHP CS Fixer
+
+Symfony's (link: https://cs.symfony.com/ text: PHP Coding Standards Fixer) is widely used, has many configuration options and dedicated plugins for VS Code, PHPStorm, Sublime Text and a few more IDEs.
+
+### Installation
+
+PHP CS Fixer can be installed both globally or locally in your project. It's totally up to you, but we will install it globally in this recipe to make our lives easier.
+
+Open a terminal and type the following command:
+
+```bash
+composer global require friendsofphp/php-cs-fixer
+```
+
+This will add the package to your global `.composer/vendor` folder.
+
+<info>
+If you want to remove the tool again later, you can do so with
+
+```bash
+composer global remove friendsofphp/php-cs-fixer
+```
+</info>
+
+We test if installation was successful by calling `php-cs-fixer` with the `-h` option, which will show us some help text:
+
+```bash
+php-cs-fixer -h
+```
+
+### Fixing issues
+
+<info>
+I recommend to put the Starterkit/your project under version control. That way, you can keep track of the changes applied by the tools and easily undo them again.
+</info>
+
+Let's see how we can use PHP CS Fixer on our code. While the Starterkit is not the ideal code base for our recipe, it is good enough to understand what the tools can do for us and how they work.
+
+The default command to actually fix some code would be:
+
+```bash
+php-cs-fixer fix /path/to/code
+```
+
+This command would fix all issues in all files in the specified folder. We do a dry run first that doesn't actually make any changes, just to see what would be fixed in the `/site` folder.
+
+In your terminal, go to the root of your Kirby Starterkit (`cd path/to/your/starterkit`), then type:
+
+```bash
+php-cs-fixer fix site --dry-run --rules=@PSR12 --diff
+```
+
+These are the options and arguments explained in detail:
+
+`fix`: Fixes a directory or a file
+`site`: directory to fix
+`--dry-run`: Only show changes without actually applying them
+`--rules`: Rules to apply, here PSR12
+`--diff`: Show before/after differences
+
+The output of this command will look something like this (shortened):
+
+```bash
+Loaded config default.
+   1) site/snippets/blocks/image.php
+      ---------- begin diff ----------
+--- /Users/sonja/sites/fixer-kit/site/snippets/blocks/image.php
++++ /Users/sonja/sites/fixer-kit/site/snippets/blocks/image.php
+@@ -31,9 +31,9 @@
+ }
+
+ if ($ratio !== 'auto') {
+-  $ratio = Str::split($ratio, '/');
+-  $w = $ratio[0] ?? 1;
+-  $h = $ratio[1] ?? 1;
++    $ratio = Str::split($ratio, '/');
++    $w = $ratio[0] ?? 1;
++    $h = $ratio[1] ?? 1;
+ }
+
+ $attrs = attr([
+
+      ----------- end diff -----------
+```
+<info>
+Since the Starterkit is subject to change over time, the output might be different at the time you are reading this.
+</info>
+
+The information the output gives us means that the indentation of the code would be changed. To actually apply the suggested changes, call the command again, this time without the `dry-run` parameter.
+
+Ok, great. However, having to remember a command with all options and parameters and typing them into the command line will get tedious pretty quick.
+
+### Configuration file
+
+Therefore, our next step will be to set up a configuration file.
+
+In the root of your project, create a new file called `.php-cs-fixer.dist.php`. You can find more about the configuration in the (link: https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/master/doc text: PHP CS Fixer documentation).
+
+In order to trigger some changes in the code and see how powerful this is, we'll add some rules in addition to the `PSR-12` standard:
+
+```php ".php-cs-fixer.dist.php"
+<?php
+
+// define which files should be analyzed
+$finder = PhpCsFixer\Finder::create()
+    ->exclude(__DIR__ . '/site/plugins')
+    ->in(__DIR__ . '/site')
+;
+
+$config = new PhpCsFixer\Config();
+return $config
+    ->setRules([
+        '@PSR12' => true,
+        'array_syntax' => ['syntax' => 'long'],
+    ])
+    ->setRiskyAllowed(true)
+    ->setFinder($finder)
+;
+```
+
+These rules are only for demonstration purposes. You can undo them later using Git.
+
+Now let's call PHP CS Fixer again, this time without the `--dry-run` and `--rules` options.
+
+```bash
+php-cs-fixer fix --diff
+```
+
+As you can see, once you have your rules in place, you can easily apply your standards over the complete code base with a single command. Isn't that cool?
+
+<info>
+If you are curious what the configuration file looks like that we use for the Kirby source code, you can check it out (link:https://github.com/getkirby/kirby/blob/main/.php-cs-fixer.dist.php text: in the Kirby repo).
+</info>
+
+### Usage with VS Code
+
+There are multiple extensions tagged with PHP CS Fixer in the VS Code plugin list, but let's use the one from the official documentation. In VS Code, search for (link: https://github.com/junstyle/vscode-php-cs-fixer text: "junstyle php cs fixer") and install it.
+
+Once the plugin is installed, we have to set some configuration settings. Click on the cog icon and select  `Extension Settings` from the context menu. Make sure that the `Execute PHP CS Fixer on save` option is enabled.
+
+Your `settings.json` should then have the following entries for the extension:
+
+```js
+"php-cs-fixer.onsave": true,
+"php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
+```
+
+All other settings will come from our configuration file. Your code should now get fixed according to the set rules whenever you save a PHP file.
+
+<info>
+Note that this extension comes with its own PHP CS Fixer executable, so it doesn't use the one we installed via Composer.
+</info>
+
+### Usage with PHPStorm
+
+If you use PHPStorm as your IDE, go to *Preferences > PHP > Quality Tools*. Then under PHP CS Fixer, check the *ON* checkbox, leave the configuration at System PHP and click on the three dots. Then select the path to the PHP CS Fixer executable in your user's Composer vendor folder which we installed earlier.
+
+Under *Options > Ruleset*, select *Custom* and then your `.php-cs-fixer.dist.php` configuration file.
+
+(image: phpcsfixer-phpstorm.png)
+
+Next, still in Preferences, go to *Editor > Inspections > PHP > Quality Tools*, click on `PHP CS Fixer inspection`. In the inspections window, enable` PHP CS Fixer validation` if not yet enabled.
+
+PHPStorm will now automatically highlight any PHP CS Fixer issues and offer to fix the complete file you are currently editing. Of course, you can also fix all files.
+
+---
+
+For other supported IDEs, check out the links to available plugins in the PHP CS Fixer documentation which you can find below.
+
+
+## CodeSniffer
+
+The second tool we will look into, is (link: https://github.com/squizlabs/PHP_CodeSniffer text: PHP_CodeSniffer). It comes with two PHP scripts:
+
+- The `phpcs` script tokenizes PHP, JavaScript and CSS files to **detect** violations of a defined coding standard, while
+- the `phpcbf` script will actually **correct** all violations that it can fix automatically.
+
+For CodeSniffer there are also plugins for several IDEs, and PHPStorm supports it out of the box. But one step after the other.
+
+### Installation
+
+Again, we install globally via Composer:
+
+```bash
+composer global require squizlabs/php_codesniffer
+```
+
+Let's test if we can use it by calling it with the `-h` option to show the help:
+
+```bash
+phpcs -h
+```
+
+### Basic usage
+
+#### Checking your code
+
+<info>
+To test these commands, either undo the changes introduced through PHP CS Fixer, or use a fresh Starterkit.
+</info>
+
+To check for coding style violations, we use the `phpcs` script…
+
+either on a single file
+
+```bash
+phpcs /path/to/my-php-script.php
+```
+
+… or on a complete directory
+
+```bash
+phpcs /path/to/directory
+```
+
+To test against PSR-12, we use the `--standard` option set to the desired ruleset:
+
+```bash
+phpcs --standard=PSR12 /path/to/directory
+```
+
+#### Fixing your code
+
+To actually fix all fixable coding style violations, we use the `phpcbf` command
+
+```bash
+phpcbf --standard=PSR12 /path/to/directory
+```
+
+### Configuration
+
+As mentioned above, Codesniffer needs an `.xml` configuration file. Let's create `.phpcs.xml` with some basic rules:
+
+```xml
+<?xml version="1.0"?>
+<ruleset
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="./vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
+    <arg name="basepath" value="."/>
+    <arg name="cache" value=".phpcs-cache"/>
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
+    <arg name="parallel" value="80"/>
+
+    <!-- Show progress -->
+    <arg value="p"/>
+
+    <!-- Paths to check -->
+    <file>site</file>
+     <exclude-pattern>site/plugins/*</exclude-pattern>
+
+    <!-- Include all rules from PSR-12 Coding Standard -->
+    <rule ref="PSR12"/>
+
+    <rule ref="Generic.Arrays.DisallowShortArraySyntax"/>
+</ruleset>
+```
+With this file in place, we can now call the script without any arguments:
+
+```bash
+phpcs
+```
+
+Here is some example output for a single file:
+
+```bash
+FILE: site/controllers/album.php
+\-----------------------------------------------------------------------------------------------
+FOUND 3 ERRORS AFFECTING 3 LINES
+\-----------------------------------------------------------------------------------------------
+  1 | ERROR | [x] Header blocks must be separated by a single blank line
+ 10 | ERROR | [x] Header blocks must be separated by a single blank line
+ 19 | ERROR | [x] Function closing brace must go on the next line following the body; found 1
+    |       |     blank lines before brace
+\-----------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 3 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+\-----------------------------------------------------------------------------------------------
+
+Time: 107ms; Memory: 6MB
+```
+
+This tells us that there are three issues, and that all issues marked with an `x` can be fixed automatically when we call the `phpcbf` script.
+
+Let's do this:
+
+```bash
+phpcbf
+```
+
+### Usage with VS Code
+
+In VS Code, install the (link: https://marketplace.visualstudio.com/items?itemName=shevaua.phpcs text: `phpcs` extension).
+
+Once the extension is installed, click on the settings cog and select *Extension settings*. Optionally, add the path to the phpcs executable.
+
+### Usage with PHPStorm
+
+Integrating CodeSniffer with PHPStorm works basically the same way as with PHP CS Fixer with the only difference that this time you have to select both the path  to the `phpcs` and the `phpcbf` executable.
+
+## Comparing results
+
+The results we get from both tools with the above rules are similar, while not exactly the same. The differences are mainly due to CodeSniffer applying blank lines in some places while PHP CS Fixer doesn't.
+
+In any case, we can configure each of these tools with very fine-grained rules to our liking. Consult the documentation and other resources linked below to find out more.
+
+## Where to go from here: Automation
+
+The approaches we have seen above are all nice and well and work fine for a single disciplined user.
+
+But things we have to do manually are easily forgotten. And while IDEs do a good job when fixing stuff automatically when saving, your IDE might not support the chosen tool, or external code contributors are not familiar with setting up these tools.
+
+So the question is: how can we prevent that badly styled code ever lands in our repos with the least friction? The answer is: automation.
+
+We can implement automatic checks at different stages in the lifecycle (i.e. before code is staged or committed, before it is pushed, before it is merged) and either reject it or fix it automatically where possible.
+
+There are at least two approaches:
+
+- (link: https://githooks.com/ text: Git hooks)
+- CI/CD pipelines (for example (link: https://docs.github.com/en/actions text: GitHub actions) or (link: https://docs.gitlab.com/ee/ci/ text: GitLab CI/CD)
+
+It would be too much to cover these automation options in this recipe. So we leave it for a future one.
+
+
+## Resources
+
+### PHP coding standards
+
+- (link: https://medium.com/swlh/some-of-the-most-followed-php-standards-and-coding-styles-7abcf7d34a5e text: Some of the most followed PHP Standards and Coding-styles)
+- (link: https://stefanzweifel.io/posts/run-prettier-or-php-cs-fixer-with-github-actions text: Run Prettier or PHP CS Fixer with GitHub Actions)
+
+### PHP CS Fixer
+
+- (link: https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/master/doc/custom_rules.rst text: How to create custom rules)
+- (link: https://mlocati.github.io/php-cs-fixer-configurator text: PHP CS Fixer configurator): Nice third party overview of rules
+- (link: https://laravel-news.com/sharing-php-cs-fixer-rules-across-projects-and-teams text: Sharing PHP CS Fixer rules across projects and teams)
+- (link: https://www.jetbrains.com/help/phpstorm/using-php-cs-fixer.html text: Using PHP CS Fixer in PHPStorm)
+
+### Codesniffer
+
+- (link: https://gist.github.com/topazas/057ef1cf4fd412e8c8e866e5ba5119bc text: CodeSniffer ruleset)
+- (link: https://github.com/squizlabs/PHP_CodeSniffer/wiki text: CodeSniffer wiki)
+- (link: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-Ruleset text: Annotated ruleset)
+- (link: https://edorian.github.io/php-coding-standard-generator/#phpcs text: Ruleset generator)

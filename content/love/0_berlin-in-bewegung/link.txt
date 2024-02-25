@@ -4,6 +4,3 @@ Title: Berlin in Bewegung
 
 Link: https://www.berlin-in-bewegung.de/
 
-----
-
-Cause: true

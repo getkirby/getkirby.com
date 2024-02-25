@@ -1,0 +1,98 @@
+Title: The media folder
+
+----
+
+Description: Understanding the advantages of the media folder and how to serve files from the content folder if you prefer.
+
+----
+
+Published: 2022-04-02
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Text:
+
+The `/media` folder is the place from which Kirby serves all Panel assets (stylesheets, JavaScript files and images) and thumbs generated through the Panel for preview images as well as the thumbs that are created through your template code.
+
+Additionally, Kirby copies all media files that you upload to the `/content` folder into the media folder.
+
+There are several reasons for this architectural decision:
+
+- Unless you are on shared hosting, you can move the content folder outside the doc root for more security, so that it is not accessible publicly, while files that need to be accessible can be accessed through the public media folder.
+- With the content folder out of the doc root or access to the content folder blocked through server settings, you can prevent access to files through permissions.
+- The hashed folder names allow heavy caching configurations on the server with far-future expiry times.
+- By proxying the calls to files in general it is also possible to create plugins that move the files entirely off the server (e.g. to S3) and fetch them from there. Or to use a service like Imgix or Cloudinary instead of Kirby's media API.
+- More stable files URLs that are not affected by changing sorting numbers of the page folders they live in.
+
+Of course this means that all files are duplicated and use double the space on the server. However, storage space is usually not an issue today.
+
+If you don't like this behaviour, or run into storage issues on media heavy sites, you can create a little plugin that allows you to continue to serve your files from the content folder, either altogether or in parts.
+
+Inside the `/plugins` folder, create a new folder called `/file-component` and an `index.php` inside it.
+
+```php "/site/plugins/file-component/index.php"
+<?php
+
+// import App class
+use Kirby\Cms\App as Kirby;
+
+Kirby::plugin('cookbook/file-component', [
+  'components' => [
+    'file::url' => function (Kirby $kirby, $file) {
+        return $kirby->url() . '/content/' . $file->parent()->diruri() . '/' . $file->filename();
+    },
+  ]
+]);
+```
+
+Before we can test this, we have to do one additional step. The default `.htaccess` file included with Kirby's Starter- and PlainKits blocks direct access to the `content` folder with this line:
+
+```
+# block all files in the content folder from being accessed directly
+RewriteRule ^content/(.*) index.php [L]
+```
+
+You therefore have to remove or comment this line to make the plugin work.
+
+With this plugin in place, your files will no longer be copied to the media folder but be served from the `/content` folder instead. Files will now be served with a URL like `https://example.com/content/1_photography/1_trees/monster-trees-in-the-fog.jpg`.
+
+
+You can also decide to serve only parts of your files from the `/content` folder while all other files are still served from the media folder:
+
+```php "/site/plugins/file-component/index.php"
+<?php
+
+// import App class
+use Kirby\Cms\App as Kirby;
+
+Kirby::plugin('cookbook/file-component', [
+  'components' => [
+    'file::url' => function (Kirby $kirby, $file) {
+        // serve videos from content folder
+        if ($file->type() === 'video') {
+            return $kirby->url() . '/content/' . $file->parent()->diruri() . '/' . $file->filename();
+        // while all other files are served from the media folder
+        } else {
+            return $file->mediaUrl();
+        }
+
+    },
+  ]
+]);
+```
+In the example, we serve only video files from the `/content` folder while all other files are still copied to the `/media` folder.
+
+The conditions here are up to you, instead of filtering by file type, you can for example do this based on template.
+
+
+## Further reading
+
+- (link: docs/cookbook/security/files-firewall text: Protecting files behind a firewall)
+
+
+
+

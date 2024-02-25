@@ -1,0 +1,83 @@
+Title: Using placeholders in language strings
+
+----
+
+Text:
+
+Translations in language files usually look like this:
+
+```php "/site/languages/en.php"
+<?php
+
+return [
+  'code'         => 'en',
+  'default'      => false,
+  'direction'    => 'ltr',
+  'locale'       => 'en_US',
+  'name'         => 'English',
+  'translations' => [
+    'file.success'   => 'The file was successfully updated.',
+    'file.max.error' => 'You can only upload 5 files.',
+    'business.hours' => 'Our business hours are from 9 to 5.'
+  ]
+];
+```
+
+But what if you need more flexibility, if you want to add string parts dynamically, e.g. a number, a link, or the name of the file in the above example?
+
+Placeholders to the rescue:
+
+```php "/site/languages/en.php"
+<?php
+
+return [
+  'code'         => 'en',
+  'default'      => false,
+  'direction'    => 'ltr',
+  'locale'       => 'en_US',
+  'name'         => 'English',
+  'translations' => [
+    'file.success'   => 'The file {filename} was successfully uploaded.',
+    'file.max.error' => 'You can only upload {max} files.',
+    'business.hours' => 'Our business hours are from {from} to {to}.'
+  ]
+];
+```
+
+In your code, you can now access the translation strings and replace your placeholders using the [`I18n::template()` method](/docs/reference/tools/i18n/template) like this:
+
+```php
+echo I18n::template('file.success', null, [
+    'filename' => $file->filename()
+]);
+// Result: "The file some-image.jpg was successfully uploaded."
+
+$max = 3;
+
+echo I18n::template('file.max.error', null, [
+    'max' => $max
+]);
+// Result: "You can only upload 3 files."
+
+$from = 8;
+$to   = 20;
+
+echo I18n::template('business.hours', null, [
+    'from' => $from,
+    'to'   => $to
+]);
+
+// Result: "Our business hours are from 8 to 20."
+```
+
+----
+
+Description: Make language translations more powerful with placeholders.
+
+----
+
+Published: 2019-04-07
+
+----
+
+Authors: - authors/sonja-broda

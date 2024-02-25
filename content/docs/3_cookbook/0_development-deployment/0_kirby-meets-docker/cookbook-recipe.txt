@@ -1,0 +1,963 @@
+Title: Kirby meets Docker
+
+----
+
+Published: 2021-05-02
+
+----
+
+Description: Getting started with Docker for development: Quickly spin up Kirby in a Docker container, bind local directories and add other services like MailHog
+
+----
+
+Authors:
+
+- authors/sonja-broda
+
+----
+
+Tags: deployment, development environment, docker
+
+----
+Text:
+
+(image: moby-logo.png)
+
+## The problem
+
+When you develop a website or–more generally speaking—an application, you usually do this on your own computer in the context of a desktop operating system (macOS, Windows or Linux) using some sort of (link: docs/cookbook/setup/development-environment text: development environment) installed on this computer. However, when you deploy your application to production, it will often run on a different operating system, with different settings and maybe different versions of other dependencies (e.g. Composer, Node.js, bundlers etc.). These differences between environments often cause problems, and what runs without issues on your machine might not run on your colleague's machine or the production server.
+
+Or, let's say you want to test and evaluate a new application. Maybe it has a long list of dependencies that you don't have installed on your machine. Do you really want to install all that stuff on your or all the evaluation team's laptops just to find out that it's not the right tool for the job? In the end, your computer is cluttered with stuff that you'll never need again.
+
+These and other use cases are where Docker comes into play.
+
+On a side note: Many services and tools like CI/CD pipelines today rely on Docker containers, so having a good understanding of how containers work is pretty useful.
+
+## Prerequisites
+
+- Docker and Docker Compose must be installed on your computer (see below where to go for instructions)
+- You are willing to enter a few commands on the command line
+- Basic familiarity with Linux and shell scripting is helpful for easier understanding but not required to follow along
+- A text/code editor, e.g. VS Code or similar
+
+## Disclaimer
+
+This recipe has been tested on macOS Big Sur and Ubuntu 20.04.
+
+## What is Docker?
+
+When we use the term (link: https://www.docker.com/ text: Docker) in this recipe, we actually refer to the Docker Engine that is developed by Docker Inc. In the wider sense, Docker is a full platform that does not only provide the Docker Engine but also the Docker Hub as a registry, Docker Swarm and a whole universe of services around it.
+
+Basically, the Docker Engine provides a way to package and distribute applications or services. Docker encapsulates these applications together with their dependencies in images. Docker will take these images and run them as containerized applications. This not only eliminates the need to install services like a web server, a database server, etc. on your host computer, it also lets you install other dependencies in the version that is needed for your application. The company itself claims on their website: "Docker makes development efficient and predictable". The Docker software runs on Linux, Mac or Windows, in the Cloud or even on IoT devices.
+
+In this recipe, containerizing an application will mean that we take the Starterkit, install it in an image together with a web server and the PHP engine, and in a matter of seconds we are ready to spin up an instance of this Starterkit without having to install any of the requirements needed to run it (apart from Docker, of course)—no web server, no PHP, no other dependencies that we might need for our development purposes. And that's what we will do in this recipe in some variations. Along the way we will learn the difference between images and containers, some Docker commands and also some basics of installing stuff in a Linux file system.
+
+## Getting ready: Install Docker & Docker Compose
+
+Before we can start, you will have to install the Docker Engine on your computer. We won't be going into this in this recipe, because you can follow the official documentation, which you can find here for your OS:
+
+- (link: https://docs.docker.com/engine/install/ text: Linux)
+- (link: https://docs.docker.com/docker-for-mac/install/ text: macOS)
+- (link: https://docs.docker.com/docker-for-windows/install/ text: Windows)
+
+Or if you prefer video instructions, head down to the list of resources at the end of this recipe.
+
+You will also have to install (link: https://docs.docker.com/compose/install/ text: Docker Compose), because it greatly facilitates running multiple containers with different services, and we will of course have examples of using Docker Compose in this recipe.
+
+## Warm up
+
+Ok, so you have successfully installed Docker and Docker Compose on your system and the engine is up and running. For a little warm up, let's just check which Docker version is installed on your system.
+
+Open a terminal and type
+
+```bash
+docker -v
+```
+
+This will output the installed Docker version.
+
+With…
+
+```bash
+docker-compose -v
+```
+
+…we get the currently installed Docker Compose version.
+
+
+Perfect! With `docker` and `docker-compose` you have learned the two basic commands that will guide us through the rest of this recipe.
+
+## Docker Hub
+
+The (link: https://hub.docker.com/ text: Docker Hub) is a service provided by Docker where you can find Docker images for all sorts of applications or share yours with the world. It's a so-called registry. We will usually base our own images on one of the images we can find there. You don't need an account to browse or use images, this is only necessary if you want to upload your own images to the Docker Hub.
+
+<info>
+You can upload your images into public and private repositories on Docker Hub. While you can have an unlimited number of public repositories with a free account, you need a paid subscription if you need more than one private repository. It is worth noting that the Docker Hub is not the only registry for Docker images. Alternatives are for example (link: https://github.com/features/packages text: GitHub Packages), the (link: https://docs.gitlab.com/ee/user/packages/container_registry/ text: GitLab Container Registry) or (link: https://aws.amazon.com/ecr/?nc1=h_ls text: Amazon ECR).
+</info>
+
+When using Docker images from Docker Hub, you can usually rely on the official images from trusted sources that are well documented and tested (their Dockerfiles are a great learning resource!). Of course, there are also great non-official images, but you should be more careful here, particularly if the images are not documented or maintained. Since anyone can publish anything there, you never know what you get.
+
+## Example 1: Spin up Kirby in a container
+
+Let's use one of the images available on Docker Hub to quickly spin up Kirby's Starterkit. To do that, we use an image that already has an operating system, an Apache web server and PHP installed. We only clone the Starterkit into the image, build it and spin up the container, all in a few lines of code.
+
+### Create Dockerfile
+
+Create a new folder somewhere in your file system, e.g. `~/docker-example-1` (where `~` stands for your user folder), and inside that newly created folder create a file called `Dockerfile` (exactly like this: with a capital D and no extension).
+
+```Dockerfile "~/docker-example-1/Dockerfile"
+FROM webdevops/php-apache-dev:8.1
+RUN apt-get update && apt-get install -y git
+RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /app
+```
+
+A Dockerfile is a simple text file with instructions that tell Docker which steps to perform to create a Docker image. In most cases you will start from an existing Docker image (i.e. some Linux distribution). This is done using the `FROM` keyword that always goes on the first line of the Dockerfile. In our example:
+
+```Dockerfile
+FROM webdevops/php-apache-dev:8.1
+```
+
+As mentioned above, this image has everything we need to run Kirby (and a lot of stuff we don't need). `webdevops/php-apache-dev` refers to the namespace and repo on Docker Hub, and `8.1` is the tag of the image we want to use in this example. Just on a side note, there are many different variations of this image available with different PHP versions etc.
+
+In the next line, we use
+
+```Dockerfile
+RUN apt-get update && apt-get install -y git
+```
+
+`RUN` is a keyword that tells Docker to execute commands. The commands we actually execute here are standard Linux commands that install packages, here we only install Git.
+
+<info>
+The tools (and thus the commands) used to install packages differ in different Linux distributions, here the base OS is Debian and the command `apt-get`.
+</info>
+
+Finally, we clone the Starterkit into the `/app` folder, which serves as the web root of the base image we use for our little adventure with:
+
+```Dockerfile
+RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /app
+```
+
+### Build image
+
+From this Dockerfile we can now build our own image. In the terminal, `cd` into the folder that contains your Dockerfile (if you followed the suggested naming that will be `~/docker-example-1`) and run:
+
+```bash
+docker build -t docker-starterkit .
+```
+
+This command builds an image from the Dockerfile in the current path with the repo name `docker-starterkit`. Don't forget the dot at the end, it provides the context where the code (in this case only the Dockerfile itself) is located, i.e. the current directory.
+
+When we run this command, Docker will download the specified image `webdevops/php-apache-dev:8.1` from Docker Hub if it doesn't exist locally yet. In future iterations the local copy of the image will be used.
+
+Let's learn another command. With…
+
+```bash
+docker images
+```
+
+…we get a list of all local images. You should get an output similar to this with the new `docker-starterkit` image:
+
+```bash
+REPOSITORY         TAG    IMAGE ID       CREATED          SIZE
+docker-starterkit  latest afcbcc660571   14 seconds ago   1.14GB
+```
+
+As you can see, we now have a repository called `docker-starterkit` with an image that was automatically tagged as `latest` because we didn't provide a tag when building the image.
+
+Depending on whether or not you have used Docker before, you might of course have additional images in your list.
+
+### Run container
+
+Back in the terminal, let's start a container from this image with:
+
+```bash
+docker run --name mycontainer -p 80:80 docker-starterkit
+```
+
+`docker run` (or `docker container run`) tells Docker to start a container from the `docker-starterkit` image. With `-p 80:80` we bind the local port 80 to port 80 in the container (which is the default web server port). With `--name mycontainer` we give our container a name, otherwise Docker would create a random name for it.
+
+<info>
+If you get an error at this point saying "Error response from daemon: Ports are not available: listen tcp 0.0.0.0:80: bind: address already in use.", your local port 80 is already in use, probably by a local web server (Apache, MAMP, XAMPP, Valet or whatever). You can then either stop that web server or use another port for the container, e.g. `-p 8080:80` or whatever is currently not used on your host computer.
+</info>
+
+Now visit `http://localhost` (add the port if you don't use port 80) in your browser, and you should see Kirby's Starterkit up and running. Isn't that cool? Three lines of code and a terminal command and we have the Starterkit running in the browser.
+
+However, when trying to access the Panel, we will get an error message, because the web server user is not allowed to create any folders and files in the container with the current settings. So back to the drawing board.
+
+### Stop and remove container
+
+Let's stop the running container again by pressing `Ctrl+C` in the terminal where the container is running in the foreground. If this doesn't work or alternatively, you can open a new terminal tab or window and run `docker stop mycontainer`.
+
+We can check that the container is really stopped with…
+
+```bash
+docker ps -a
+```
+
+…which will show a list of all containers with their status, here "Exited 4 seconds ago".
+
+```bash
+CONTAINER ID IMAGE             COMMAND                CREATED        STATUS               PORTS  NAMES
+a3eeca5803ae docker-starterkit "/entrypoint supervi…" 26 seconds ago Exited 4 seconds ago        mycontainer
+```
+
+Now remove the container with
+
+```bash
+docker rm mycontainer
+```
+
+<info>
+For our first example, we used an unofficial (yet well documented) image from Docker Hub for ease of use. As already mentioned above, it is usually recommended to stick with official Docker images where possible, and when using unofficial Docker images, make sure that they are well documented and maintained.
+</info>
+
+### Modifying the Dockerfile
+
+Let's change the Dockerfile a bit by running one more command that changes the file ownership for the app folder:
+
+```Docker "~/docker-example-1/Dockerfile"
+FROM webdevops/php-apache-dev:8.1
+RUN apt-get update && apt-get install -y git
+RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /app
+RUN chown -R application:application /app/
+```
+
+Then build the image again…
+
+```
+docker build -t docker-starterkit .
+```
+
+…and start a new container
+
+```bash
+docker run --name mycontainer -p 80:80 docker-starterkit
+```
+
+Let's see if we can install and access the Panel now. Visit `http://localhost/panel`. Yay!
+
+Ok, so how do we know that we can use the `/app` folder as our web root and how do we know that we have to use the `application` user and group?
+
+### Inspecting images and containers
+
+One way to get this information is through the documentation that comes with these images. In case of `webdevops/php-apache-dev` you can find it here: https://dockerfile.readthedocs.io/en/latest/content/DockerImages/dockerfiles/php-apache-dev.html
+
+Another way is by inspecting the image:
+
+```bash
+docker image inspect docker-starterkit
+```
+
+or the running container:
+
+```bash
+docker container inspect mycontainer
+```
+
+This will output a lot of information about the container, the part that interests us can be found in the `ENV` section down where it say `APPLICATION_USER` etc.:
+
+```bash
+"Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PHP_INI_DIR=/usr/local/etc/php",
+      "PHP_EXTRA_CONFIGURE_ARGS=--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi",
+      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+      "PHP_LDFLAGS=-Wl,-O1 -pie",
+      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F",
+      "PHP_VERSION=8.1.3",
+      "PHP_URL=https://www.php.net/distributions/php-8.1.3.tar.xz",
+      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.3.tar.xz.asc",
+      "PHP_SHA256=c9816aa9745a9695672951eaff3a35ca5eddcb9cacf87a4f04b9fb1169010251",
+      "TERM=xterm",
+      "LANG=C.UTF-8",
+      "LC_ALL=C.UTF-8",
+      "DOCKER_CONF_HOME=/opt/docker/",
+      "LOG_STDOUT=",
+      "LOG_STDERR=",
+      "APPLICATION_USER=application",
+      "APPLICATION_GROUP=application",
+      "APPLICATION_PATH=/app",
+      "APPLICATION_UID=1000",
+      "APPLICATION_GID=1000",
+      "PHP_SENDMAIL_PATH=/usr/sbin/sendmail -t -i",
+      "COMPOSER_VERSION=2",
+      "WEB_DOCUMENT_ROOT=/app",
+      "WEB_DOCUMENT_INDEX=index.php",
+      "WEB_ALIAS_DOMAIN=*.vm",
+      "WEB_PHP_TIMEOUT=600",
+      "WEB_PHP_SOCKET=127.0.0.1:9000",
+      "WEB_NO_CACHE_PATTERN=\\.(css|js|gif|png|jpg|svg|json|xml)$"
+  ],
+```
+
+### Interacting with the container
+
+While the container is running, we can start another process in the container. Open a new terminal window or tab and type the following command:
+
+```bash
+docker exec -it mycontainer /bin/bash
+```
+
+With this command we open an interactive bash in the container and will see a command prompt like this `root@a3eeca5803ae:/#`, where the number refers to the container ID.
+
+We can now inspect the filesystem inside the container, install software etc.
+
+If you type…
+
+```bash
+ls -la /app
+```
+
+…at the command prompt, you will see that the Starterkit is installed in this folder as we would have expected after putting it there in our Dockerfile. You could now make changes to the content or template files via the command line and they would be reflected in the browser as long as the container exists. You can also use the Panel to make content changes like you normally would: experiment as much as you want.
+
+While using a container interactively like this can be done for the sake of studying, this is not what you would do in a production environment.
+
+Feel free to poke around, you can't really break anything. Because as soon as we remove the container, all the changes that took place inside the container's file system will be lost forever. We will later see how we can use volumes and bind mounts to persist our data.
+### Cleaning up
+
+Before we continue, let's stop the running container with `Ctrl-C` (or `docker stop mycontainer` from another terminal tab/window). We also remove the container and image completely. We can do that with the following commands we know by now:
+
+Remove container:
+
+```bash
+docker rm mycontainer
+```
+
+Remove image:
+
+```bash
+docker rmi docker-starterkit
+```
+
+Instead of the names of the container/image you can also use the IDs (or the first few characters of an ID) with these commands.
+
+## Background: What is an image?
+
+Let's take a quick look at what a Docker image actually is. A Docker image is basically a *read-only* template for a container. It consists of a number of layers, of which the base layer always consists of the operating system files, e.g Debian or Ubuntu or Alpine etc. On top of this base layer we find the files needed to run an application. In our example, these different layers include the Apache web server, PHP and finally our Starterkit.
+
+We can inspect the image with
+
+```bash
+docker image inspect docker-starterkit
+```
+
+The output of this command will provide us with quite a bit of information about the image. The information that interests us at the moment is the number of layers. The new image now contains 23 layers, 3 of which we added to the base image with the three `RUN` commands in our Dockerfile.
+
+Every content change we make to the image adds a new layer.
+
+## Background: What are containers?
+
+Containers are basically an instance of a Docker image, or in more technical terms a writable layer on top of a read-only Docker image. While each container gets its own root file system of an underlying operating system, and runs its own processes and users etc., they are not an operating system but rely on the kernel of the host machine. That is why Linux containers only run on a Linux host, and Windows containers on a Windows host, and where Linux containers are used on a Mac or Windows machine this happens via virtualization.
+
+Containers have a life cycle (create, stop, restart, remove) and as such are ephemeral (they exist as long as they are needed) and immutable (i.e. changes inside a container only exist during their lifespan).
+
+From a single image, you can create as many containers as you want.
+
+When a container needs to perform write processes, it doesn't change the underlying image (remember, an image is read-only), but copies the files that need to be changed from the image into the writable layer and makes the changes on these copies.
+
+So much for theory.
+
+## Example 2: A new image
+
+Before we start persisting data, let's go one step back. We initially said that one of the advantages of using Docker is that we can fully control the environment in which our application is running. For our purposes, let's say we want that to mean that we try to build an image that as closely resembles the environment of our production server as possible, from the underlying OS to the web server with its modules and the identical PHP version with all the necessary extensions.
+
+In a new folder, e.g. `~/docker-example-2` create a new `Dockerfile`. This time, we will also start with an existing image from Docker Hub, but one that only contains the operating system base we want to use. The rest we install ourselves. Since it's pretty popular, we will use Ubuntu as our Docker OS of choice.
+
+### Dockerfile
+
+```Dockerfile "~/docker-example-2/Dockerfile"
+# Use latest offical ubuntu image
+FROM ubuntu:latest
+
+# Set timezone environment variable
+ENV TZ=Europe/Berlin
+
+# Set geographic area using above variable
+# This is necessary, otherwise building the image doesn't work
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Remove annoying messages during package installation
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Install packages: web server Apache, PHP and extensions
+RUN apt-get update && apt-get install --no-install-recommends -y \
+  apache2 \
+  apache2-utils \
+  ca-certificates \
+  git \
+  php \
+  libapache2-mod-php \
+  php-curl \
+  php-dom \
+  php-gd \
+  php-intl \
+  php-json \
+  php-mbstring \
+  php-xml \
+  php-zip && \
+  apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Copy virtual host configuration from current path onto existing 000-default.conf
+COPY default.conf /etc/apache2/sites-available/000-default.conf
+
+# Remove default content (existing index.html)
+RUN rm /var/www/html/*
+
+# Clone the Kirby Starterkit
+RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /var/www/html
+
+# Fix files and directories ownership
+RUN chown -R www-data:www-data /var/www/html/
+
+# Activate Apache modules headers & rewrite
+RUN a2enmod headers rewrite
+
+# Tell container to listen to port 80 at runtime
+EXPOSE 80
+
+# Start Apache web server
+CMD [ "/usr/sbin/apache2ctl", "-DFOREGROUND" ]
+```
+
+Some of this you will recognize from the first exercise, keywords like `FROM` and `RUN`. All other explanations are in the comments. You find a list of the most important Dockerfile keywords (link: #list-of-dockerfile-keywords text: at the end of this recipe).
+
+This time, we not only install Git, but also an Apache web server and PHP with some extensions.
+
+The Apache web server comes with a default `index.html` in the `/var/www/html` folder and a default configuration. We copy our own virtual host configuration file (see below) into the container with the `COPY` keyword, remove the `index.html` file, and clone the starterkit into `/var/www/html` folder instead. Afterwards, we need to fix the files and directories ownership in `/var/www/html` in order to let the web server create and modify files and directories (e.g. to create files in the media folder or a Panel accounts in `/site/accounts`).
+
+<info>
+`a2enmod` is a script that allows you to enable Apache modules. If you have never installed an Apache server on Linux yourself, such commands might not be familiar. You can find more about Apache commands in the (link: https://httpd.apache.org/docs/2.4/ text: Apache documentation).
+</info>
+
+With the `EXPOSE` instruction we inform Docker that the container listens on the specified network port at runtime. And finally we use `CMD` to tell Docker which command to run when a container is created from this image—here we start the Apache web server with the command `apache2ctl`.
+
+### Apache config file
+
+Before we can start building the image, we need to create a basic server configuration file to replace the default one. Create the file `default.conf` next to the Dockerfile with the following content:
+
+```Apache Conf "~/docker-example-2/default.conf"
+<VirtualHost *:80>
+    ServerName localhost
+    # Set the document root
+    DocumentRoot "/var/www/html"
+  <Directory "/var/www/html">
+    # Allow overriding the default configuration via `.htaccess`
+    AllowOverride All
+  </Directory>
+</VirtualHost>
+```
+### Build
+
+With this config file in place, we can start building the image as before.
+
+<info>
+Make sure your have stopped and removed the running container from the previous exercise before continuing.
+</info>
+
+```bash
+docker build -t docker-starterkit .
+```
+
+To practice your newly learned skills, you might for example inspect this new image to check how many layers it's got or to get other information about this image.
+
+Once the image is ready, you can start a new container from this image as before, this time we use the `-d` option to run the container in detached mode, so that we can continue to work in the same terminal tab.
+
+```bash
+docker run -d --name mycontainer -p 80:80 docker-starterkit
+```
+<info>
+If you run into an error at this point, make sure you have stopped and removed the old container, and then try again.
+</info>
+
+Visit `http://localhost` again in your browser and if all went well, the Starterkit is up and running again.
+
+### Cleaning up again
+
+If you are happy and done, stop and remove the container again:
+
+```bash
+docker stop mycontainer
+docker rm mycontainer
+```
+
+## Example 3: Sharing a filesystem
+
+While the above examples were nice for playing around with the Starterkit, we are still an important step away from our mission, because currently we cannot persist our data locally.
+
+In this example, we will work with a local Starterkit that we then bind mount into the container. The rationale here is to use an installation of Kirby on our host computer instead of in the container which will persist even if the container is removed.
+
+Create a new folder in your file system, e.g. `docker-example-3`.
+
+### Local Starterkit
+
+Let's grab a copy of Kirby's Starterkit.
+
+If you have Git installed on your computer, type the following in your terminal:
+
+```bash
+cd docker-example-3
+git clone https://github.com/getkirby/starterkit.git
+```
+
+If you don't have Git or don't want to use it, (link: https://github.com/getkirby/starterkit/archive/main.zip text: download a Starterkit) and put the unzipped folder into the newly created `docker-example-3` folder. Rename the folder with the Starterkit from `starterkit-main` to `starterkit`.
+
+Then copy the `default.conf` file from the last example into the new folder.
+### Dockerfile
+
+Next to the `starterkit` folder, create a new Dockerfile. Our Dockerfile looks slightly different than before. This time, we don't need to install Git in the container, and we remove the steps that cloned the Starterkit and the commands that changed the files and directories ownership. With that done, our Dockerfile now looks like this:
+
+```Dockerfile "~/docker-example-3/Dockerfile"
+# Use latest offical ubuntu image
+FROM ubuntu:latest
+
+# Set timezone
+ENV TZ=Europe/Berlin
+
+# Set geographic area using above variable
+# This is necessary, otherwise building the image doesn't work
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Remove annoying messages during package installation
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Install packages: web server & PHP plus extensions
+RUN apt-get update && apt-get install -y \
+  apache2 \
+  apache2-utils \
+  ca-certificates \
+  php \
+  libapache2-mod-php \
+  php-curl \
+  php-dom \
+  php-gd \
+  php-intl \
+  php-json \
+  php-mbstring \
+  php-xml \
+  php-zip && \
+  apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Copy virtual host configuration from current path onto existing 000-default.conf
+COPY default.conf /etc/apache2/sites-available/000-default.conf
+
+# Remove default content (existing index.html)
+RUN rm /var/www/html/*
+
+# Activate Apache modules headers & rewrite
+RUN a2enmod headers rewrite
+
+# Change web server's user id to match local user, replace with your local user id
+RUN usermod --uid 1001 www-data
+
+# Tell container to listen to port 80 at runtime
+EXPOSE 80
+
+# Start Apache web server
+CMD [ "/usr/sbin/apache2ctl", "-DFOREGROUND" ]
+```
+
+Apart from the stuff that we removed, there is one new line which needs an explanation.
+
+We have seen in our first example above that the Panel didn't run in the container when the web server user didn't have the correct rights to write files to the filesystem in the container.
+
+In this example, this gets even worse, because we will mount our local files created with our local user into the container. But we still want the web server user in the container (`www-data`) to be able to change the files we create or modify in our host directory as local user, and vice versa we want to be able to modify files that the web server user in the container creates.
+
+There are several ways to tackle this problem, the easiest of which is probably to run the web server in the container with the same numerical userid (UID) as our local user. For this, we need to find out the numerical id of our local user and modify the web server user in the image accordingly.
+
+To get the UID of our local user we run the command `id -u` in our shell. On my Ubuntu computer I will get `1001` for the UID and this value will go into the command:
+
+```Dockerfile
+# Change web server's IDs to match local user, replace with your local user and group IDs
+RUN usermod --uid 1001 www-data
+```
+
+This will change the web server's UID to match that of our local user.
+
+At this point, your folder structure should look like this:
+
+```filesystem
+docker-example-3/
+  starterkit/
+  default.conf
+  Dockerfile
+```
+
+Now it is time to build the image with:
+
+```bash
+docker build -t docker-starterkit .
+```
+
+and to start the container.
+
+But wait, there is one thing missing: We need to tell the container about the shared filesystem. Because there is no way to do this when building the image, we have to extend our `docker run` command to start the container:
+
+```bash
+docker run -d --name mycontainer -p 80:80 \
+  --mount type=bind,source=$(pwd)/starterkit,destination=/var/www/html \
+  docker-starterkit
+```
+
+The `source` and `destination` parameters need an absolute pathname, and since the `starterkit` directory is in our working directory, we can use the output of the command `pwd` here.
+
+#### Parametrizing the local UID
+
+Before we continue to the last example, let's reconsider the Dockerfile command which we used to change the web server's UID. Remember that this change goes into the image, and the image is read-only. In most cases, you will want to share your carefully created image with others who want to work with it on their computers. Chances are they will run into trouble because their UID is different from yours.
+
+Therefore, we should move this command out of the build process into the process of starting a container. And we surely should not hard-code the values for the UID. Again, we have multiple options to accomplish this. The one we want to use here is an `ENTRYPOINT` command in our Dockerfile. So lets exchange the line
+
+```Dockerfile
+RUN usermod --uid 1001 www-data
+```
+
+with
+
+```Dockerfile
+COPY entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["entrypoint.sh"]
+```
+
+You already know the `COPY` command we used to copy files into the image, but the `ENTRYPOINT` command is new. Similar to the `CMD` command we got to know earlier, an `ENTRYPOINT` allows you to define commands that are executed at runtime of the container.
+
+Both commands can be used individually or together, and both can be overwritten at runtime. But there are a few differences between both commands to be aware of, which we will not cover here. If you want to know more, check out the (link: https://docs.docker.com/reference/ text: Docker reference).
+
+For our purposes here, it should suffice to know that the `ENTRYPOINT` command will execute the executable script we pass to it.
+
+Our `entrypoint.sh` file is a little executable script which we have to create now with the following content:
+
+```bash "~/docker-example-3/entrypoint.sh"
+#!/bin/bash
+
+set -e -u
+
+[[ $USERID ]] && usermod --uid "${USERID}" www-data
+
+exec "$@"
+```
+
+When you have created this file, head back to your terminal and make it executable with
+
+```bash
+chmod +x entrypoint.sh
+```
+
+What will this script do? It will change the UID of the `www-data` user in the container to the value of the host user (our local user) by picking up the environment variable that we pass to the container upon start-up.
+
+Passing environment variables from the host to the container can also be done in various ways, here we will utilize a file which contains the variable and its value. To accomplish this, we can use the same commands as above to find out the value for our local user, but this time we will create a file which contains this value as environment variable in `var=value` format:
+
+In your terminal, `cd` into the `docker-example-3` folder and type the following command:
+
+```bash
+echo -e "USERID=$(id -u)" > id.env
+```
+
+This command will get the ID with the `id -u` command we already used above, and output it into a file. The resulting `id.env` file will look similar to this, only with your UID, which might differ from mine.
+
+```
+USERID=1001
+```
+
+At this point, your folder structure should look like this:
+
+```filesystem
+docker-example-3/
+  starterkit/
+  default.conf
+  Dockerfile
+  entrypoint.sh
+  id.env
+```
+
+After stopping and removing the previous container we build a new image, start a new container and see what happens:
+
+```bash
+docker build -t docker-starterkit .
+docker run -d --name mycontainer -p 80:80 \
+  --mount type=bind,source=$(pwd)/starterkit,destination=/var/www/html \
+  --env-file id.env docker-starterkit
+```
+
+At this point, you can start making changes locally, view them in the browser and they will of course still be there in your filesystem even after you remove the container again.
+
+## Example 4: Docker Compose
+
+As we have seen in the last example, the `docker run` command is getting more complicated as we add more features. Things get even worse when we want to run multiple containers that interact with each other. We could still achieve this with a Dockerfile for each service and a `docker run` command that glues them all together. But this gets cumbersome pretty quick. Docker Compose to the rescue.
+
+### What is Docker Compose?
+
+With (link: https://docs.docker.com/compose/ text: Docker Compose) we can define and run multi-container applications.
+
+Using Docker Compose gives us the advantage to start and stop multiple containers with a single command, to define dependencies between such containers, to define the network in which these containers run and more, all in a single `.yml` file that contains a few simple commands.
+
+For example, if you were to use a CMS that required a database, you would start a web server in one container, and a MySQL database in a second container and maybe also phpMyAdmin in a third. Or you could spin up a tool like (link: https://github.com/mailhog/MailHog text: MailHog) in a container that would catch emails sent from forms for local testing. And this last option is exactly what we want to do here.
+
+### Create docker-compose.yml file
+
+Let's start with a single service, the web server, and just rebuild what we have done so far. Create a file called `docker-compose.yml` with the following code:
+
+```yaml "~/docker-example-4/docker-compose.yml"
+version: '3'
+services:
+  webserver:
+    build: .
+    image: docker-starterkit
+    container_name: webserver
+    ports:
+      - "80:80"
+    volumes:
+      - ./starterkit:/var/www/html/
+    env_file:
+      - ./id.env
+```
+
+### `docker-compose.yml` explained
+
+A `docker-compose.yml` file always starts with the Docker Compose version number. The current minor version at the time of writing this recipe is 3.8.
+
+After that, the next top level keyword is `services`, which is followed by an indented list of named services. The names of these services are arbitrary, but of course it makes sense to give them names that indicate their purpose. In the file above, we currently have only one service called `webserver`.
+
+Each service container can either be created from an existing image using the `image` keyword, or from a Dockerfile using the `build` keyword, as in our example. The dot indicates that we want to use the Dockerfile contained in the current path. Here the additional `image` keyword defines the name of our image (`docker-starterkit`).
+
+We also give our container the name `webserver` using the `container_name` keyword for easy reference.
+
+With the `ports` keyword, we map the host's port to the port in the container like we did above when we used the `docker run` command. Again, you can change the local port if port 80 is already in use.
+
+With `volumes`, we mount our local `starterkit` folder into the web root of the container, which is `/var/www/html`.
+
+And with `env_file`, we pass the environment variables via the `id.env` file like before.
+
+You can find more information about the Docker Compose file syntax in the (link: https://docs.docker.com/compose/compose-file/ text: Docker Compose file reference).
+
+As you may have noticed, we did not use the full path to the starterkit folder (or the command substitution `pwd`) like before. Docker Compose is able to expand relative paths and environment variables by its own. Let's verify this with
+
+```bash
+docker-compose config
+```
+
+This will output the contents of the `docker-compose.yml` file with the expanded file paths and environment variables:
+
+```yaml
+services:
+  webserver:
+    build:
+      context: /Users/sonja/dockerstuff/docker-example-3
+    container_name: webserver
+    environment:
+      USERID: '1001'
+    image: docker-starterkit
+    ports:
+    - published: 80
+      target: 80
+    volumes:
+    - /Users/sonja/dockerstuff/docker-example-3/starterkit:/var/www/html:rw
+version: '3'
+```
+
+We also need all the other files from `docker-example-3`, which you can just copy into the new folder.
+
+Your folder structure should now look like this:
+
+```filesystem
+docker-example-4/
+  starterkit/
+  default.conf
+  Dockerfile
+  docker-compose.yml
+  entrypoint.sh
+  id.env
+```
+
+That was a lot of new stuff, but we are finally in a position to start this whole thing up. Ready?
+
+### Start container
+
+In a terminal, in the `docker-example-4` folder, run the command
+
+```bash
+docker-compose up -d
+```
+
+This will try to start up the container. The `-d` parameter means that the service runs in detached mode in the background.
+
+Now try and visit `http://localhost` in your browser and celebrate if everything works as expected. You can now make changes locally in the Starterkit and they will be picked up by the container. Of course, any changes you will make locally will be preserved.
+
+When you are done poking around, stop and remove the container again with:
+
+```bash
+docker-compose down
+```
+
+Note that unlike `docker stop`, `docker-compose down` not only stops but also removes the container. You can verify this with `docker ps -a`.
+
+We've come a long way by now. As our last exercise with Docker, let's add another service that we can then use together with Kirby to test sending emails from forms, for example.
+
+
+### Add MailHog service
+
+MailHog is a tool that intercepts outgoing mail, see our (link: docs/cookbook/forms/using-mailhog-for-email-testing text: MailHog recipe). All that we have to change to make this work is the `docker-compose.yml` file:
+
+```yaml
+version: '3'
+services:
+  webserver:
+    build: .
+    image: docker-starterkit
+    container_name: kirbyserver
+    ports:
+      - "80:80"
+    volumes:
+      - ./starterkit:/var/www/html/
+    env_file:
+      - ./id.env
+  mailhog:
+      container_name: mailhog
+      image: mailhog/mailhog:latest
+      restart: always
+      hostname: mailhog
+      ports:
+        - "1025:1025"
+        - "8025:8025"
+```
+
+We give the `mailhog` service an alias with `hostname: mailhog`, so that we can use this name when setting the email transport configuration for Kirby in the next step.
+
+When we now start up the containers again with…
+
+```bash
+docker-compose up -d
+```
+
+…Docker will pull the latest MailHog image and start up both containers.
+
+<info>
+If you get an error message because your local ports 1025 and 8025 are used by other services, you can of course change them to something else.
+</info>
+
+If you now visit `localhost:8025` (or another port you've chosen) in a browser, the MailHog web interface should load and be ready to serve as an inbox for your locally sent mail once we have set up the email transport configuration.
+
+### Sending mail
+
+Let's quickly test if we can use the MailHog container to intercept mail we send from our Starterkit.
+
+#### Add transport configuration in `config.php`
+
+In our config file, we need to add the following (link: docs/reference/system/options/email#email-transport text: email transport) configuration inside the return array:
+
+
+```php "/site/config/config.php"
+'email' => [
+  'transport' => [
+    'type' => 'smtp',
+    // use the hostname defined in the docker compose file
+    'host' => 'mailhog',
+    // the ports needs to be the port inside the container,
+    // i.e. 1025 no matter what you use locally
+    'port' => 1025,
+    'security' => false,
+  ]
+],
+```
+
+Instead of setting up a form, we simply add a route that tries to send an email just to test that everything works as expected:
+
+```php "/site/config/config.php"
+'routes' => [
+  [
+    'pattern' => 'send-me-an-email',
+    'action'  => function() {
+      try {
+        kirby()->email([
+          'from' => 'welcome@supercompany.com',
+          'to'   => [
+            'someone@gmail.com',
+            'numbertwo@gmail.com'
+          ],
+          'subject' => 'Welcome!',
+          'body' => 'It\'s super to have you with us',
+        ]);;
+      } catch (Exception $e) {
+          return new Kirby\Http\Response($e->getMessage(), 'text/plain');
+      }
+
+      return new Kirby\Http\Response('Message successfully sent', 'text/plain', 200);
+    }
+  ],
+],
+```
+
+In your browser, visit `http://localhost/send-me-an-email`. Once the email is successfully sent, you should see it arrive in the MailHog inbox at `http://localhost:8025`.
+
+I had originally planned to throw a database and phpMyAdmin into the mix, but since this recipe already got quite long, I leave it to you to work that out for yourself if you need it, or we will cover it in another recipe if your are interested.
+
+### Extra: Access the website with a hostname other than localhost
+
+From using other development environments, you are probably used to run a web application under a local domain name rather than localhost, for example `kirbydocker.test`. This step is purely optional and requires that you make changes to your `hosts` file. If you can't be bothered, just skip this chapter.
+
+To use a domain name, we have to modify the `default.conf` file from the last example a little and replace `localhost` with `kirbydocker.test`:
+
+```Apache Conf "~/docker-example-4/default.conf"
+<VirtualHost *:80>
+    ServerName kirbydocker.test
+    DocumentRoot "/var/www/html"
+  <Directory "/var/www/html">
+    AllowOverride All
+  </Directory>
+</VirtualHost>
+```
+To make the domain name work, you have to modify the `/etc/hosts` file on your computer. Open the file as root user (sudo) and add the following line:
+
+```
+127.0.0.1 kirbydocker.test
+```
+<info>
+On Windows, this file is located at `C:\Windows\System32\drivers\etc\hosts`.
+</info>
+
+Once the changes are saved, the image rebuilt and a new container started, you should be able to access your containerized Starterkit in the browser with `http://kirbydocker.test`.
+## List of Dockerfile keywords
+
+| Keyword | Description |
+|----     | ----        |
+| ADD | Copies files into the filesystem of the image |
+| ARG | The ARG instruction defines a variable that users can pass to the builder at build-time with the docker build command using the `--build-arg <varname>=<value>` flag. |
+| CMD | Default setting for an executing container. Can be a command or a parameter for a command defined with ENTRYPOINT. |
+| COPY | Copies files or directories from the given path into the filesystem of the image at the given destination |
+| ENTRYPOINT | Allows you to configure a container that will run as an executable |
+| ENV | Sets an environment variable. The value assigned to the variable will be in the environment for all subsequent instructions in the build stage. |
+| EXPOSE | Informs Docker that the container listens on the specified network ports at runtime |
+| FROM | Sets the base image from which to create the new image |
+| LABEL | Adds metadata to an image |
+| RUN | Executes the given command |
+| USER | Sets the user name (or UID) and optionally the user group (or GID) to use when running the image and for any RUN, CMD and ENTRYPOINT instructions that follow it in the Dockerfile |
+| VOLUME | Creates a mount point with the specified name and marks it as holding externally mounted volumes from native host or other containers |
+| WORKDIR | Sets the working directory for any RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow it in the Dockerfile |
+
+More in the (link: https://docs.docker.com/engine/reference/builder/ text: Dockerfile reference).
+
+## Docker commands used in this recipe
+
+- `docker build`: Builds an image
+- `docker run`: Starts a container with the given parameters
+- `docker stop <container>`: Stops the given container(s), you can pass a container name or ID
+- `docker ps -a`: Lists all containers, regardless of their status
+- `docker images`: Shows all available images
+- `docker rmi <imagename/id>`: Removes the given image(s)
+- `docker inspect <image_or_container-name>`: Inspects an image or container
+
+## Where to go from here
+
+In this recipe, our focus was on giving you a hands-on approach to using Docker as an optional development environment while leaving out most of the technical background. If you want to dive deeper into all the possibilities containers offer, here are some resources that might prove helpful:
+
+- (link: https://www.youtube.com/watch?v=YFl2mCHdv24 text: Learn Docker in 12 Minutes) gives you a very brief overview of what Docker is, great for the big picture in a few minutes.
+- (link: https://www.pluralsight.com/courses/getting-started-docker text: Getting started with Docker) is a great introduction to Docker for beginners, while the (link: https://app.pluralsight.com/library/courses/docker-deep-dive-update/table-of-contents text: Docker Deep Dive) by the same author goes deeper and also covers swarm orchestration and enterprise tooling. Both courses require a paid Pluralsight membership, but you can get 200 minutes free, which should be enough to work through the first one.
+- (link: https://www.youtube.com/watch?v=fqMOX6JJhGo text: Docker Tutorial for beginners) is a free video tutorial on YouTube.
+- (link: https://www.docker.com/101-tutorial text: Docker 101 Tutorial)
+- (link: https://labs.play-with-docker.com/ text: Play with Docker) is an interactive browser-based playground to experiment with Docker.
+- (link: https://linuxhandbook.com/container-lifecycle-docker-commands/ text: Docker Commands for Managing Container Lifecycle)
+- (link: https://docker-handbook.farhan.dev/ text: Docker Handbook)
+- Not to forget (link: https://docs.docker.com/reference/ text: the official Docker reference), which can be a bit daunting for beginners though.
+
+## Thank you
+
+Thanks to (link: https://forum.getkirby.com/u/adspectus/ text: Uwe Gehring) for testing that everything works as expected and for his valuable advice.

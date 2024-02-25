@@ -1,5 +1,0 @@
-Title: Content
-
-----
-
-Icon: folder-collapsed

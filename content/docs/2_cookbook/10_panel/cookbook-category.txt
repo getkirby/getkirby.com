@@ -1,3 +1,0 @@
-Title: Panel
-----
-Icon: panel

@@ -1,0 +1,164 @@
+Title: Kirby meets Git
+
+----
+
+Published: 2019-01-08
+
+----
+
+Description: Install and update Kirby via Git
+
+----
+
+Authors:
+
+- authors/bastian-allgeier
+
+----
+
+Tags: development, updating
+
+----
+
+Text:
+
+## What is Git?
+
+[Git](https://en.wikipedia.org/wiki/Git_%28software%29) is currently the most popular version control system for any kind of software project. A version control system is a bit like a time machine for your code that makes it possible to follow all the changes you've made, work together on the same code in a team and revert mistakes during the development process.
+
+The team behind the Git client Tower have free learning resources on Git. If you are starting out and would like to learn more about version control with Git, check them out: <https://www.git-tower.com/learn/>
+
+## About this tutorial
+
+Kirby is developed using a single Git repository, which is hosted on [GitHub](https://github.com/getkirby/kirby). Not only can you follow our development process and contribute your own ideas and code changes there, but you can also use the repository as a Git submodule.
+
+This tutorial describes one of several ways you can install and update Kirby. See (link: docs/guide/installation text: the overview page) for all supported ways.
+
+## Starting a new project
+
+The easiest way to install Kirby is the [Starterkit](https://github.com/getkirby/starterkit). It can be installed with a single line in the terminal. Navigate to the place where you want to install Kirby and clone the Starterkit code with:
+
+```bash
+git clone https://github.com/getkirby/starterkit.git your-project
+```
+
+You will now have a full Starterkit installation in the `your-project` folder. If you point your web server at it, you should already be able to access your site in the web browser.
+
+## Setting up Kirby as a Git submodule
+
+If you want to be able to update Kirby automatically using Git, you now need to install Kirby as a Git submodule. Run the following commands to do this:
+
+```bash
+# navigate to the project folder
+cd your-project
+
+# remove the kirby directory as it will be replaced in the next step
+rm -R kirby
+git add kirby
+
+# install the submodule
+git submodule add https://github.com/getkirby/kirby.git kirby
+
+# commit the changes
+git commit -m "Setup Kirby as a submodule"
+```
+
+The latest version of Kirby is now installed as a Git submodule.
+
+You can of course do all of those steps in a graphical Git tool if you prefer. We recommend [Tower](https://www.git-tower.com/) for macOS and Windows, but there are of course several other tools you can use.
+
+## Updating Kirby
+
+If you want to update Kirby to the latest version, all you need to do is to update the submodule like this:
+
+```bash
+# change into the submodule
+cd kirby
+
+# update to the latest version
+git checkout main   # [1]
+git pull            # [2]
+```
+
+Command `[1]` ensures that the submodule is on the `main` branch of the Kirby repo. This branch always receives the latest released and stable Kirby version. The command `[2]` then fetches all changes from GitHub and updates the code.
+
+Now you only need to commit the changes to your repo:
+
+```bash
+# change back into the main project folder
+cd ..
+
+# add the updated Kirby submodule and commit
+git add kirby
+git commit -m "Update Kirby"
+```
+
+### Automating updates with a simple script
+
+If you don't want to type all this every time you want to update Kirby, you can add the commands to a simple bash script to make updating even easier:
+
+```bash "/update.sh"
+#!/bin/bash
+
+# change to the kirby directory
+cd "$(dirname "$0")/kirby"
+
+# update to the latest version
+git checkout main
+git pull
+
+# change back into the main project folder
+cd ..
+
+# add the updated Kirby submodule and commit
+git add kirby
+git commit -m "Update Kirby"
+```
+
+Save this in the root directory of your site as `update.sh`. Make it executable with
+
+```bash
+chmod +x update.sh
+```
+
+From now on you can update your installation with a single line:
+
+```bash
+./update.sh
+```
+
+### Using the latest development version
+
+If you want to checkout the development branch to test the latest features, you can do it in the same way:
+
+```bash
+# change into the submodule
+cd kirby
+
+# update to the development version
+git checkout develop
+git pull
+```
+
+Then stage and commit your changes like above. This way, you can easily switch between the `develop` and the `main` branches.
+
+### Updating to a specific version
+
+It is also possible to update to a specific version, for example a security patch:
+
+```bash
+# change into the submodule
+cd kirby
+
+# update to a specific version
+git fetch --tags     # [1]
+git checkout 3.x.y   # [2]
+```
+
+Command `[1]` fetches all the latest changes from GitHub, including all Git tags (which are used to point versions to their commits). The command `[2]` then looks for the provided version in the tag list and checks out the commit for that version.
+
+Staging and committing works just the same as in the previous examples.
+
+<info>
+If you check out a tag, Git will warn you that your repo is in a "detached HEAD" state. This is expected and just means that you are not on a branch but a specific commit.
+</info>

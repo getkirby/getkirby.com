@@ -1,0 +1,137 @@
+Title: Pagination
+
+----
+
+Text:
+
+The time will come when we have more than just a few articles or projects in our blog/projects list and we can't show them all on one page.
+
+This is a simple example for a list of articles for a blog:
+
+```php
+<?php foreach ($page->children()->listed()->flip() as $article): ?>
+
+<article>
+  <h1><?= $article->title() ?></h1>
+  <p><?= $article->text()->excerpt(300) ?></p>
+  <a href="<?= $article->url() ?>">Read more…</a>
+</article>
+
+<?php endforeach ?>
+```
+
+We need to modify that slightly to get the last 10 articles and then add pagination to it:
+
+```php
+<?php foreach($articles = $page->children()->listed()->flip()->paginate(10) as $article): ?>
+
+...
+
+<?php endforeach ?>
+
+```
+
+We paginate the list of articles with `->paginate(10)`. This automatically will limit the number of recent articles to ten and it will also attach a handy pagination object to the set of pages.
+
+By creating a new variable `$articles`, we can access the pagination later in the template.
+
+If you already got more than 10 articles you should now just see the last 10 on your blog page. In the next step we will add a `older posts | newer posts` navigation to the bottom of our page, by using the new pagination object and its methods, which have been attached to the `$articles` variable.
+
+Add this below your foreach loop:
+
+```php
+<?php if ($articles->pagination()->hasPages()): ?>
+<nav class="pagination">
+
+  <?php if ($articles->pagination()->hasNextPage()): ?>
+  <a class="next" href="<?= $articles->pagination()->nextPageURL() ?>">
+    ‹ older posts
+  </a>
+  <?php endif ?>
+
+  <?php if ($articles->pagination()->hasPrevPage()): ?>
+  <a class="prev" href="<?= $articles->pagination()->prevPageURL() ?>">
+    newer posts ›
+  </a>
+  <?php endif ?>
+
+</nav>
+<?php endif ?>
+
+```
+
+With `$articles->pagination()->hasPages()` we can check if there are enough articles at all, so it makes sense to show the pagination.
+
+With `$articles->pagination()->hasNextPage()` we can check if there's a next page and with `$articles->pagination()->hasPrevPage()` we can check if there's a previous page. By using those if clauses we can make sure
+that we don't show navigation links if not necessary.
+
+The pagination object also provides some simple methods, which will build URLs for the previous and next pages for you:
+
+```php
+<a href="<?= $articles->pagination()->nextPageURL() ?>">
+
+...
+
+<a href="<?= $articles->pagination()->prevPageURL() ?>">
+
+```
+
+Both will automatically attach `/page:2` for example to your url.
+
+
+## Range pagination with a link for each page
+
+```php
+<ul>
+  <?php foreach ($list = $page->children()->paginate(10) as $item): ?>
+  <li><!-- item html --></li>
+  <?php endforeach ?>
+</ul>
+
+<?php $pagination = $list->pagination() ?>
+<nav>
+  <ul>
+
+    <?php if ($pagination->hasPrevPage()): ?>
+    <li>
+      <a href="<?= $pagination->prevPageURL() ?>">‹</a>
+    </li>
+    <?php else: ?>
+    <li>
+      <span>‹</span>
+    </li>
+    <?php endif ?>
+
+    <?php foreach ($pagination->range(10) as $r): ?>
+    <li>
+      <a<?= $pagination->page() === $r ? ' aria-current="page"' : '' ?> href="<?= $pagination->pageURL($r) ?>">
+        <?= $r ?>
+      </a>
+    </li>
+    <?php endforeach ?>
+
+    <?php if ($pagination->hasNextPage()): ?>
+    <li>
+      <a href="<?= $pagination->nextPageURL() ?>">›</a>
+    </li>
+    <?php else: ?>
+    <li>
+      <span>›</span>
+    </li>
+    <?php endif ?>
+
+  </ul>
+</nav>
+```
+
+----
+
+Description: Use pagination to divide content into a list of digestible chunks.
+
+----
+
+Authors: - authors/bastian-allgeier
+
+----
+
+Tags: navigation, collections

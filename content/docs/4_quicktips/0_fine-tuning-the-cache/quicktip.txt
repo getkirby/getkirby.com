@@ -1,0 +1,107 @@
+Title: Fine-tuning cache settings
+
+----
+
+
+Published: 2020-01-25
+
+----
+
+Description: Control caching from a blueprint option or a field
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: caching
+
+----
+Text:
+
+(link: docs/guide/cache text: Cache options) are set via the `config.php` file. To prevent caching for certain pages, we can use the `ignore` option and either provide a list of page IDs to be ignored, or a callback function that returns a boolean for more control.
+
+However, we can use this callback to make excluding pages from the cache much more dynamic without having to return to the `config` file every time we made some changes that require the cache settings to be adapted.
+
+## Using a blueprint option
+
+As already mentioned in our the (link: docs/cookbook/extensions/subpage-builder text: subpage builder recipe), we can use custom options in our (glossary: blueprint text: blueprints), which we can then query via the [`$page->blueprint()`](/docs/reference/objects/page/blueprint) method.
+
+### Page blueprint
+
+In our blueprint, we add a `cache` option like this:
+
+```yaml
+title: Blueprint title
+
+options:
+  cache: false
+```
+
+### In `config.php`
+
+In our config file, we can now check if the `cache` option is set or not and return the negated value or default to `false`.
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    //...other settings
+    'cache' => [
+        'pages' => [
+            'active' => true,
+            'ignore' => function ($page) {
+                $options = $page->blueprint()->options();
+                return isset($options['cache']) ? !$options['cache'] : false;
+            }
+        ]
+    ]
+];
+```
+
+## Using a field
+
+While the above solution provides flexibility for developers, this is usually out of the control of editors and does not apply to single pages but to entire page types (i.e. pages sharing the same blueprint).
+
+However, using a similar concept, we can leave it to the editor to decide whether or not to cache a page by adding a toggle (or checkbox field) to the page blueprint.
+
+### Page blueprint
+
+```yaml
+
+title: Blueprint title
+
+fields:
+  cache:
+    type: toggle
+    default: false
+    text: Exclude from cache?
+```
+
+### In `config.php`
+
+In our `config.php`, we now query the field value:
+
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    //...other settings
+    'cache' => [
+        'pages' => [
+            'active' => true,
+            'ignore' => function ($page) {
+                return $page->cache()->toBool();
+            }
+        ]
+    ]
+];
+```
+
+<info>
+These two approaches can also be combined to allow editors to override default blueprint settings, for example if they add a form to a page that then needs to be excluded from the cache.
+</info>
+
+Thanks to (link: http://denhoff.com/ text: Markus Denhoff) for sharing the idea with the blueprint option.

@@ -1,0 +1,491 @@
+Title: Email with attachments
+
+----
+
+Description: Send an email with attachments from form input.
+
+----
+
+Published: 2019-05-17
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: forms, email
+
+----
+
+Text:
+
+This recipe extends the (link: docs/cookbook/forms/basic-contact-form text: basic contact form) example, but this time the user can attach some files. As an example we use a job application form.
+
+To follow this example, your content structure should look like this:
+
+```filesystem
+content/
+    1_jobs/
+        1_job-a/
+            job.txt
+        2_job-b/
+            job.txt
+        3_job-c/
+            job.txt
+        jobs.txt
+    2_applications/
+        applications.txt
+    success/
+        success.txt
+    ...
+```
+
+We also need the following files:
+
+- an (glossary: template text: applications template) with the form snippet
+- the application form (glossary: snippet text: snippet)
+- the (glossary: controller text: controller) that handles the form logic
+- a plain text or an HTML email (glossary: template text: template)
+- two templates for the `jobs` overview page and its subpages (see the demo download below)
+
+The workflow is like this:
+
+When users visit a job page, they can click on a link that leads to the application form. The link contains the reference that is then prefilled in the form's reference field. Users can however change this field input if they decide they would rather apply for another job (or if they visit the `applications` page directly).
+
+<info>
+With this setup, we keep the application process away from the job listings and can put it behind a login wall if needed. Instead of handling the applications on a general applications form like in this example, you could also show the form on every job page.
+</info>
+
+## The job application page
+
+(link: docs/guide/content/creating-pages text: Create) an `applications` page with an `applications.txt` content file. For our means, we only need the title in the content file, the rest is up to you.
+
+For use in the Panel, you can create a (glossary: blueprint text: blueprint) for the page. We will skip this step here.
+
+## The `applications.php` template
+
+The template contains the form and will display error messages if something goes wrong. To keep the `applications.php` template clean, we include the form as a snippet.
+
+
+```php "/site/templates/applications.php"
+
+<?php snippet('header') ?>
+    <main class="main">
+        <h1><?= $page->title()->html() ?></h1>
+
+        <?php
+        // if the form input is not valid, show a list of alerts
+        if ($alerts) : ?>
+        <div class="alert">
+            <ul>
+            <?php foreach ($alerts as $message): ?>
+            <li><?= kirbytext($message) ?></li>
+            <?php endforeach ?>
+            </ul>
+        </div>
+        <?php endif ?>
+        <?php snippet('application-form') ?>
+    </main>
+
+<?php snippet('footer') ?>
+```
+
+## The form snippet
+
+```php "/site/snippets/application-form.php"
+<form class="application-form" method="post" action="<?= $page->url() ?>" enctype="multipart/form-data">
+    <div class="honey">
+        <label for="website">Website <abbr title="required">*</abbr></label>
+        <input type="website" id="website" name="website">
+    </div>
+    <div class="form-element">
+        <label for="name">
+            Name <abbr title="required">*</abbr>
+        </label>
+        <input type="text" id="name" name="name" value="<?= esc($data['name'] ?? '', 'attr') ?>" required>
+    </div>
+    <div class="form-element">
+        <label for="email">
+            Email <abbr title="required">*</abbr>
+        </label>
+        <input type="email" id="email" name="email" value="<?= esc($data['email'] ?? '', 'attr') ?>" required>
+    </div>
+    <div class="form-element">
+        <label for="reference">
+            Job reference number <abbr title="required">*</abbr>
+        </label>
+        <input type="text" id="reference" name="reference" value="<?= esc($data['reference'] ?? get('reference') ?? '', 'attr') ?>" required>
+    </div>
+    <div class="form-element">
+        <label for="message">
+            Message <abbr title="required">*</abbr>
+        </label>
+        <textarea id="message" name="message" required><?= esc($data['message'] ?? '') ?></textarea>
+    </div>
+    <div class="form-element">
+      <label for="file">Upload your documents
+        <span class="help">Max. 3 PDF files (max. file size 2MB each)</span>
+      </label>
+      <input name="file[]" type="file" multiple required>
+    </div>
+    <input type="submit" name="submit" value="Submit">
+</form>
+```
+
+The form snippet contains some form fields (`name`, `email`, `reference`, `message`, `file`) and a honeypot field to ensure a minimum level of spam bot protection.
+
+The honeypot field needs to be positioned off the screen via CSS. Therefore add these styles to your stylesheet (you can change the class and styling).
+
+```css
+.honeypot {
+    position: absolute;
+    left: -9999px;
+}
+```
+
+Note that since we want to upload files, we have to set the encoding type attribute to `enctype="multipart/form-data"`.
+
+Because the `$data` and `$alert` variables get controlled by user input, it is important to escape the text to protect against (link: docs/guide/templates/escaping text: XSS vulnerabilities).
+
+## The controller
+
+The controller handles our form validation logic.
+
+```php "/site/controllers/applications.php"
+<?php
+return function($kirby, $page) {
+
+    if ($kirby->request()->is('POST') && get('submit')) {
+
+        // initialize variables
+        $alerts      = null;
+        $attachments = [];
+
+        // check the honeypot
+        if (empty(get('website')) === false) {
+            go($page->url());
+            exit;
+        }
+
+        // get the data and validate the other form fields
+        $data = [
+            'name'      => get('name'),
+            'email'     => get('email'),
+            'reference' => get('reference'),
+            'message'   => get('message')
+        ];
+
+        $rules = [
+            'name'      => ['required', 'min' => 3],
+            'email'     => ['required', 'email'],
+            'reference' => ['required', 'in' => [page('jobs')->children()->listed()->pluck('reference', ',')]],
+            'message'   => ['required', 'min' => 10, 'max' => 3000],
+        ];
+
+        $messages = [
+            'name'      => 'Please enter a valid name.',
+            'email'     => 'Please enter a valid email address.',
+            'reference' => 'Please enter a valid reference.',
+            'message'   => 'Please enter a text between 10 and 3000 characters.'
+        ];
+
+        // some of the data is invalid
+        if ($invalid = invalid($data, $rules, $messages)) {
+            $alerts = $invalid;
+        }
+
+        // get the uploads
+        $uploads = $kirby->request()->files()->get('file');
+
+        // we want no more than 3 files
+        if (count($uploads) > 3) {
+            $alerts[] = 'You may only upload up to 3 files.';
+        }
+
+        // loop through uploads and check if they are valid
+        foreach ($uploads as $upload) {
+            // make sure the user uploads at least one file
+            if ($upload['error'] === 4) {
+                $alerts[] = 'You have to attach at least one file';
+            //  make sure there are no other errors
+            } elseif ($upload['error'] !== 0) {
+                $alerts[] = 'The file could not be uploaded';
+            // make sure the file is not larger than 2MB…
+            } elseif ($upload['size'] > 2000000)  {
+                $alerts[] = $upload['name'] . ' is larger than 2 MB';
+            // …and the file is a PDF
+            } elseif ($upload['type'] !== 'application/pdf') {
+                $alerts[] = $upload['name'] . ' is not a PDF';
+            // all valid, try to rename the temporary file
+            } else {
+                $name     = $upload['tmp_name'];
+                $tmpName  = pathinfo($name);
+                // sanitize the original filename
+                $filename = $tmpName['dirname']. '/'. F::safeName($upload['name']);
+
+                if (rename($upload['tmp_name'], $filename)) {
+                    $name = $filename;
+                }
+                // add the files to the attachments array
+                $attachments[] = $name;
+            }
+        }
+
+        // the data is fine, let's send the email with attachments
+        if (empty($alerts)) {
+            try {
+                $kirby->email([
+                    'template' => 'email',
+                    'from'     => 'yourcontactform@yourcompany.com',
+                    'replyTo'  => $data['email'],
+                    'to'       => 'you@yourcompany.com',
+                    'subject'     => esc($data['name']) . ' applied for job ' . esc($data['reference']),
+                    'data'        => [
+                        'message'   => esc($data['message']),
+                        'name'      => esc($data['name']),
+                        'reference' => esc($data['reference'])
+                    ],
+                    'attachments' => $attachments
+                ]);
+            } catch (Exception $error) {
+                // we only display a general error message, for debugging use `$error->getMessage()`
+                $alerts[] = "The email could not be sent";
+            }
+
+            // no exception occurred, let's send a success message
+            if (empty($alerts) === true) {
+                // store reference and name in the session for use on the success page
+                $kirby->session()->set([
+                    'reference' => esc($data['reference']),
+                    'name'      => esc($data['name'])
+                ]);
+                // redirect to the success page
+                go('success');
+            }
+        }
+    }
+
+    // return data to template
+    return [
+        'alerts' => $alerts ?? null,
+        'data'   => $data   ?? false,
+    ];
+};
+```
+
+Let's go through the most important steps here in detail. The rest is commented in the code snippet.
+
+### Validate input data
+
+In our controller, the form evaluation starts once we receive a `POST` request. First, we check if a bot got trapped in our honeypot. In this case, we send him back to the page and stop script execution.
+
+Next, we check if all form fields have been filled in according to our validation rules using the [`invalid()` helper](/docs/reference/templates/helpers/invalid):
+
+```php
+$rules = [
+    'name'      => ['required', 'min' => 3],
+    'email'     => ['required', 'email'],
+    'reference' => ['required', 'in' => [page('jobs')->children()->listed()->pluck('reference', ',')]],
+    'message'   => ['required', 'min' => 10, 'max' => 3000],
+];
+```
+
+- All fields are required and must be filled out.
+- The `email` field must contain a valid email address.
+- The `name` field must be at least 3 characters long.
+- The `message` field must be between 10 and 3000 characters.
+- The `reference` field must be a valid reference from one of the `jobs` subpages
+
+You can change these rules depending on the type of data you want to obtain and use (link: docs/reference/system/validators text: Kirby's validators) or (link: docs/reference/plugins/extensions/validators text: your own custom validators) to make sure you get the desired data.
+
+### Validate uploaded files
+
+We then handle the file submissions. We fetch the uploaded file(s) with `$kirby->request()->files()->get('file')`, where `file` is the name of our input field. If the user tries to upload more than 3 files, we add a message to the `$alerts` array.
+
+```php
+// get the uploads
+$uploads = $kirby->request()->files()->get('file');
+
+// no more than 3 files
+if (count($uploads) > 3) {
+    $alerts[] = 'You may only upload up to 3 files.';
+}
+```
+
+Then we loop through the files array and check for each upload if it is valid:
+
+- We check the `$upload['error']` value to make sure that we have at least one upload and no other error occurred
+- We check the file size to make sure that the file is not larger than allowed
+- We check if the uploaded is a PDF
+
+As the last step in this loop we rename the temporary upload name to a sanitized version of the original file name.
+
+```php
+// loop through uploads and check if they are valid
+foreach ($uploads as $upload) {
+    // make sure the user uploads at least one file
+    if ($upload['error'] === 4) {
+        $alerts[] = 'You have to attach at least one file';
+    // make sure there are no other errors
+    } elseif ($upload['error'] !== 0) {
+        $alerts[] = 'The file could not be uploaded';
+    // make sure files are not larger than 2 MB…
+    } elseif ($upload['size'] > 2000000)  {
+        $alerts[] = $upload['name'] . ' is larger than 2 MB';
+    // …and the file is a PDF
+    } elseif ($upload['type'] !== 'application/pdf') {
+        $alerts[] = $upload['name'] . ' is not a PDF';
+    // all valid, try to rename the temporary file
+    } else {
+        $name     = $upload['tmp_name'];
+        $tmpName  = pathinfo($name);
+        // sanitize the original filename
+        $filename = $tmpName['dirname']. '/'. F::safeName($upload['name']);
+
+        if (rename($upload['tmp_name'], $filename)) {
+            $name = $filename;
+        }
+        // add the files to the attachments array
+        $attachments[] = $name;
+    }
+}
+```
+
+## Send email
+
+If all went well, we try to send the email together with the file attachments in a `try - catch` block.
+
+```php
+// the data is fine, let's send the email with attachments
+if (empty($alerts)) {
+    try {
+        $kirby->email([
+            'template' => 'email',
+            'from'     => 'yourcontactform@yourcompany.com',
+            'replyTo'  => $data['email'],
+            'to'       => 'you@yourcompany.com',
+            'subject'     => esc($data['name']) . ' applied for job ' . esc($data['reference']),
+            'data'        => [
+                'message'   => esc($data['message']),
+                'name'      => esc($data['name']),
+                'reference' => esc($data['reference'])
+            ],
+            'attachments' => $attachments
+        ]);
+    } catch (Exception $error) {
+        // we only display a general error message, for debugging use `$error->getMessage()`
+        $alerts[] = "The email could not be sent";
+    }
+    //...
+}
+```
+
+If the email was sent, we store the user's name and the job reference number in the session and redirect the user to the `success` page.
+
+```php
+// no exception occurred, let's send a success message
+if (empty($alerts) === true) {
+    // store reference and name in the session for use on the success page
+    $kirby->session()->set([
+        'reference' => esc($data['reference']),
+        'name'      => esc($data['name'])
+    ]);
+    // redirect to the success page
+    go('success');
+}
+```
+
+## The email templates
+
+In our [`$kirby->email()` method](/docs/reference/objects/kirby/email) above, we defined a template we want to use to send the email. In this example, we use a template called `email`, which is stored in `/site/templates/emails`.
+
+We can use both a plain text template and/or an HTML version. You can read more about this in the (link: docs/guide/emails text: email guide).
+
+Here are the two email templates:
+
+### The plain text template
+
+The plain text template gets the extension `.php`.
+
+```php "/site/templates/emails/email.php"
+Hello,
+
+<?= $message ?>
+
+Yours sincerely,
+<?= $name ?>
+```
+
+### The HTML template
+
+The HTML template gets the extension `html.php`.
+
+```php "/site/templates/emails/email.html.php"
+Hello,
+
+<p><?= $message ?></p>
+
+<p>Yours sincerely,</p>
+<p><?= $name ?></p>
+```
+
+Both templates are kept very simple. Kirby provides the variables we defined in the `data` array ready to be used in the email templates as `$text` and `$sender`. You can of course change them to your liking.
+
+## The success page
+
+The success content file contains placeholders for the applicant's name and the job reference number:
+
+```kirbycontent
+Title: Success
+\----
+Text:
+
+Hello {{ name }},
+Thank you for applying as **{{ job }}**.
+
+We will be in touch shortly.
+
+Your HR department
+```
+
+### A plugin to replace the placeholders
+
+In the plugin, we replace the name and event placeholders in the text with the data we stored in the session.
+
+```php "/site/plugins/applications/index.php"
+<?php
+
+Kirby::plugin('jobkit/application', [
+    'hooks' => [
+        'kirbytags:after' => function ($text, $data, $options) {
+            $session = kirby()->session();
+
+            if ($job = $session->get('reference')) {
+                if ($page = page('jobs')->children()->findBy('reference', urldecode($job))) {
+                    $title = $page->title() . ' - Reference ' . $job;
+                }
+            }
+
+            return Str::template($text, [
+                'job'   => $title ?? '',
+                'name'  => $session->get('name') ?? ''
+            ]);
+        }
+    ],
+]);
+```
+
+## Download the demo
+
+For a working example, download the (file: jobkit.zip text: demo "Jobkit").
+
+
+## Extending the example
+
+You can of course extend this example:
+
+- Progressively enhance with JavaScript validation.
+- Integrate other field types.
+- …
+

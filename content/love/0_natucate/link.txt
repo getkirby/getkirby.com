@@ -4,6 +4,3 @@ Title: Natucate
 
 Link: https://www.natucate.com/
 
-----
-
-Cause: true

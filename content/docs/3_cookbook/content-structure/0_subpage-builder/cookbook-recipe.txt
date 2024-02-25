@@ -1,0 +1,218 @@
+Title: Subpage builder
+
+----
+
+Published: 2019-05-13
+
+----
+
+Description: Auto-generate subpages when you create a new page
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: automation, hook
+
+----
+
+Text:
+
+If you want to auto-create a given set of subpages every time you create a particular page, you can achieve this with a `page.create:after` hook. To make it more versatile, you can define a custom blueprint setting that leverages Kirby's new `$page->blueprint()` method. We will take you step by step through an example based on the (link: docs/guide/installation#installation text: Starterkit).
+
+Let's say every time you create a new `note` page (in the Panel or programmatically), you want to create two subpages: `gallery` and `info`.
+
+## Blueprint settings
+
+Add the custom option `subpage_builder` to the `note.yml` blueprint in the Starterkit:
+
+```yaml "/site/blueprints/pages/note.yml"
+title: Note
+num: date
+icon: 📖
+
+subpage_builder:
+  - title: Gallery
+    uid: gallery
+    template: gallery
+    num: 1
+  - title: Info
+    uid: info
+    num: 2
+    template: info
+
+columns:
+  - width: 2/3
+    fields:
+      text:
+        type: textarea
+        size: large
+
+  - width: 1/3
+    sections:
+      subpages:
+        type: pages
+        templates:
+          - gallery
+          - info
+      meta:
+        type: fields
+        fields:
+          date:
+            type: date
+            time: true
+            default: now
+          author:
+            type: users
+          tags: true
+          gallery:
+            type: pages
+            query: site.find("photography").children
+            multiple: false
+            info: "{{ page.images.count }} image(s)"
+            empty: "No gallery selected"
+            image:
+              cover: true
+            help: Place the {{ gallery }} tag anywhere in your text to add the selected gallery
+
+```
+
+As you can see above, we also added a pages section for the subpages.
+
+## The hook
+Now we need a (link: docs/reference/plugins/extensions/hooks text: hook) that is called each time a page is created.
+
+We can define it within the `return` array of our `config.php`:
+
+```php "/site/config/config.php"
+'hooks' => [
+    'page.create:after' => function ($page) {
+        buildPageTree($page);
+    }
+]
+```
+
+Within the hook's callback function, we call a function called `buildPageTree()` with the newly created `$page` as first parameter. We will define that function in a plugin.
+
+## The plugin
+
+The `buildPageTree()` function is a recursive function that builds new subpages as long as the blueprint has a subpage builder setting with valid values.
+
+```php "/site/plugins/treebuilder/index.php"
+<?php
+
+function buildPageTree($page) {
+
+    // get the subpage_builder definition from the blueprint
+    $builder = $page->blueprint()->subpage_builder();
+
+    // if any is set…
+    if (empty($builder) === false) {
+
+        // …loop through each page to be built
+        foreach($builder as $build) {
+
+            // check if all necessary fields have been defined
+            // in subpage_builder
+            $missing = A::missing($build, ['title', 'template', 'uid']);
+
+            // if any is missing, skip
+            if (empty($missing) === false) {
+                continue;
+            }
+
+            try {
+                // the parent itself is created as a draft
+                $subPage = $page->createChild([
+                    'content'  => [
+                        'title' => $build['title']
+                    ],
+                    'slug'     => $build['uid'],
+                    'template' => $build['template'],
+                ]);
+            } catch (Exception $error) {
+                throw new Exception($error);
+            }
+
+            // publish the subpages, so that they are published
+            // when the parent is published
+            if ($subPage) {
+
+                // call the function recursively
+                buildPageTree($subPage);
+
+                // publish subpages and sort
+                $subPage->publish();
+
+                if (isset($build['num']) === true) {
+                    $subPage->changeSort($build['num']);
+                }
+            }
+        }
+    }
+}
+```
+
+In this example, all subpages in the tree are automatically published. That way, they will be published together with the parent without any further interaction.
+
+## Creating subpages if the pages already exists
+
+The workflow we outlined above works with a `page.create:after` hook, so when a new page is created. But what if you want to restructure your site and add those subpages after (some) of the pages already exist.
+
+There are several ways to deal with this:
+
+### Using a `page.update:after` hook
+
+We can call the `buildPageTree()` method in a `page.update:after` hook to create the subpages when a page is updated.
+
+
+```php "/site/config/config.php"
+'hooks' => [
+    'page.update:after' => function ($newPage) {
+        if ($newPage->children()->isEmpty()) {
+          buildPageTree($newPage);
+        }
+    }
+]
+```
+
+Depending on whether the page can have other subpages, you might have to adapt the condition.
+
+In many cases, waiting for a page to be updated is not ideal, though.
+
+### Using a `route:after` hook
+
+We can use a `route.after` hook to call the `buildPageTree()` method when a page is visited rather then updated. This is usually more useful, because you would have to visit a page anyway to access the subpages:
+
+```php "/site/config/config.php"
+'hooks' => [
+    'route:after' => function ($route, $path, $method) {
+        $uid = explode('/', $path);
+        $uid = end($uid);
+        $uid = str_replace('+', '/', $uid);
+        $page = kirby()->page($uid);
+
+        if ($page && $page->children()->isEmpty()) {
+            buildPageTree($page);
+        }
+    },
+]
+```
+As before, you might have to adapt the condition.
+
+### Programmatically call the method
+
+In a plugin, or for one time use even in a template, we can call the `buildPageTree()` method on all pages that don't have children yet:
+
+```php
+<?php
+foreach (page('notes')->childrenAndDrafts()->filterBy('hasChildren', false) as $note) {
+    kirby()->impersonate('kirby');
+    buildPageTree($note);
+}
+```
+
+Again, this is only an example and your conditions may be different.
+

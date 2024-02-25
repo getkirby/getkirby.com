@@ -1,0 +1,302 @@
+Title: How we built getkirby.com
+
+----
+
+Published: 2019-01-22
+
+----
+
+Description: Learn more about the hidden gems and secrets in our own website.
+
+----
+
+Authors:
+
+- authors/bastian-allgeier
+
+----
+
+Tags: development
+
+----
+
+Text:
+
+The Kirby website plays a very special role for us and has two main objectives: One is presenting Kirby and its features to the world and doing a good job to generate happy customers and hopefully some sales. The other is providing Kirby’s documentation––the part that has always been way more complex than the rest.
+
+(image: home.jpg)
+
+In this article, I want to focus on all the hidden gems and secrets we built into this site to make our lives easier while maintaining the documentation and to give you better and more reliable docs.
+
+****
+
+When we set out to create a new site for Kirby 3, we wanted to avoid repeating the mistakes we made with our old documentation that was built and maintained mainly by hand. That process was always error-prone and time-consuming.
+
+With the new Kirby version that comes with so many changes under the hood, we knew it would be too much effort to update everything manually. Fortunately, our new version has a very special feature we used to solve this…
+
+## Virtual pages
+
+While Kirby's main data source is still files and folders, you can now mix regular pages with content coming from a database, CSV file, API or anything else that PHP can parse. In our case, a huge part of our reference is generated directly from PHP reflections and other bits of magic.
+
+### Pages from PHP reflections
+
+"What are PHP reflections?" you might ask. PHP has (link: https://www.php.net/manual/en/book.reflection.php text: a built-in set of classes) that you can use to inspect your own code. If you want to know more details about a certain PHP class, for example, you can do the following:
+
+```php
+$reflection = new ReflectionClass('MyClass');
+
+foreach ($reflection->getMethods() as $method) {
+  var_dump($method->getName());
+}
+```
+
+Reflections have many handy little features such as getting the visibility of a method, a list of arguments, the return type and even access to the doc blocks in your code.
+
+To document our main classes (i.e. (link: docs/reference/objects/site text: $site), (link: docs/reference/objects/page  text: $page), (link: docs/reference/objects/file  text: $file)) and their methods, we use this feature inside a (link: docs/guide/templates/page-models text: page model) to create automatic subpages for each method.
+
+In our reference, we use regular pages to add each documented class:
+
+```filesystem
+docs/
+  reference/
+    objects/
+      file/
+        class.txt
+      page/
+        class.txt
+      site/
+        class.txt
+```
+
+Each `class.txt` contains the full name of the class we want to document:
+
+```kirbycontent
+Class: Kirby\Cms\Page
+\----
+```
+
+The class pages have their own page model. This page model overwrites the default children method to fetch subpages from the reflection.
+
+```php "/site/models/class.php"
+class ClassPage extends Page
+{
+
+    public function reflection()
+    {
+        return new ReflectionClass($this->class()->value());
+    }
+
+    public function children()
+    {
+        $methods  = $this->reflection()->getMethods();
+        $children = [];
+
+        foreach ($methods as $method) {
+            $children[] = [
+                'slug'     => Str::kebab($method->getName()),
+                'model'    => 'method',
+                'template' => 'method',
+                'parent'   => $this,
+            ];
+        }
+
+        return Pages::factory($children, $this);
+    }
+
+}
+```
+
+Children are created as an array that we then pass to the `Pages::factory()` method. That's pretty much all you have to do to create virtual subpages that are not necessarily located in the file system.
+
+Those subpages are first-class citizens in Kirby and everything around them will work. You can filter or sort them, routing works out of the box, templates will work, etc. (link: docs/reference/objects/page/num text: Here's an example of such a virtual page).
+
+Here, we define that each subpage automatically gets a new `MethodPage` model. We use this model to fetch more information about each class method and to inject it into the template (arguments, method call, return type, etc.) You could nest this indefinitely if you want and combine it again with real pages in the file system. The possibilities are endless.
+
+We use the same technique for our (link: docs/reference/templates/helpers text: helpers), (link: docs/reference/system/validators text: validators), (link: docs/reference/templates/field-methods text: field methods) and (link: docs/reference text: more).
+
+### Pages from an SVG file
+
+Ok, it may sound weird, but you can actually create pages from an SVG icon sprite. As SVG is just XML, PHP can parse it. We wanted to document the icon set we use in the Panel to make it available for all plugin developers. That icon set is updated constantly with new icons and we wanted to reflect those changes in the docs without too much work.
+
+(image: icons.jpg)
+
+To document our icon set, the reference has an icons page with an `icons.txt`
+
+```filesystem
+docs/
+  reference/
+    icons/
+      icons.txt
+```
+
+Like the `ClassPage` and `MethodPage` models there are also `IconsPage` and `IconPage` models. The `IconsPage` model fetches all icons from the sprite and the `IconPage` model injects additional information from the sprite into its template.
+
+Our icon sprite for the panel looks like this:
+```xml
+<svg xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="icon-account" viewBox="0 0 16 16">
+      <!-- svg code for the account icon -->
+    </symbol>
+    <!-- more symbols … -->
+  </defs>
+</svg>
+```
+
+Here is the code for the `IconsPage` model:
+
+```php "/site/models/icons.php"
+
+class IconsPage extends Page
+{
+
+    public function svg()
+    {
+        return F::read($this->kirby()->root('panel') . '/dist/img/icons.svg');
+    }
+
+    public function children()
+    {
+        $svg      = new SimpleXMLElement($this->svg());
+        $children = [];
+
+        foreach ($svg->defs->children() as $symbol) {
+            $children[] = [
+                'slug'     => str_replace('icon-', '', $symbol->attributes()->id),
+                'template' => 'icon',
+                'model'    => 'icon',
+                'num'      => 0
+            ];
+        }
+
+        return Pages::factory($children, $this)->sortBy('slug');
+    }
+
+}
+```
+
+As you can see in the example above, the model takes the contents of the SVG directly from the panel dist files inside the kirby folder. So the icon documentation stays up to date as long as we keep our Kirby installation updated. Generating the subpages from the sprite is then a matter of parsing the SVG, looping through all symbols and passing the details to the `Pages::factory()`.
+
+### Automatic FTW
+
+Combining regular pages with such automated content generators has worked really great for us so far. Additionally, we can combine our auto-generated content with hand-written content to make it less technical and provide real-life examples, while making sure that tiny details are always correct.
+
+When things like arguments or return types are not correctly documented, we instantly know we need to fix this in our source code. That elevates our documentation to a real-time code quality tool.
+
+## Syntax highlighting
+
+Fabian spent a lot of time improving the syntax highlighter of our code examples. We use (link: https://prismjs.com/ text: prism.js) for the highlighting part and Fabian added quite a few enhancements to the Markdown parser (Parsedown) to implement more features for code blocks.
+
+We now have syntax highlighting for HTML, PHP, JS, CSS, JSON, YAML, and our own Kirby field syntax in text files.
+
+```kirbycontent
+title: Hello world
+\----
+text: Lorem ipsum …
+```
+
+Every code block has a copy button and we can inject the filename in a small toolbar above the example, showing you where to put the examples in your installations.
+
+```php "/site/templates/default.php"
+<?php snippet('header') ?>
+
+<!-- your code -->
+
+<?php snippet('footer') ?>
+```
+
+My favorite is the new filesystem block Fabian created. We used to document structures in the filesystem with screenshots, which was never user-friendly and hard to keep updated and consistent:
+
+```filesystem
+content/
+  projects/
+    project-a/
+      project.txt
+      example.jpg
+      download.pdf
+      code.js
+      styles.css
+      data.json
+```
+
+We can create those examples in our text files like this:
+
+```
+```filesystem
+content/
+  projects/
+    project-a/
+      project.txt
+      example.jpg
+      download.pdf
+      code.js
+      styles.css
+      data.json
+```
+
+The code detects folders and files automatically and adds icons that match the file type. I’m seriously in love with Fabian’s work here.
+
+## Our new glossary
+
+Some of you might have noticed that we have a new (link: docs/glossary text: glossary) in our docs menu. We wanted a simple page where newcomers can learn about the terms we use. A term like `blueprint` is confusing without further context. But a glossary is often ignored or not very helpful when you stumble upon such a term while reading the docs. That’s why we looked for a way to inject our short explanations from the glossary into any page without too much distraction.
+
+Fabian created a popup-bubble system that pulls in the description for a term as soon as we use the &lpar;`glossary: blueprint`&rpar; KirbyTag in our text.
+
+Here's an example: (glossary: blueprint)
+
+We still have to use these more often in our docs, but it's great to have such a tool at hand. Especially if it help to avoid detours in articles about other topics.
+
+## A new checkout
+
+Those of you who already purchased or upgraded a license met our new checkout powered by (link: http://paddle.com text: Paddle). After seven years with FastSpring, we decided to move forward and give Paddle a chance. Not an easy decision. FastSpring has been very reliable over all those years and their support was absolutely amazing. But we were never happy with the user experience of their checkout process. It always felt old and sluggish and we got many complaints from our customers. Paddle feels a lot closer to a modern checkout system like Stripe and we hope that it simplifies the process of buying licenses and makes it more enjoyable for you.
+
+## Our stack
+
+### Server
+
+Finally, a few words on our setup. We use a 4GB (link: https://www.linode.com/?r=64097ab6f175feee46523de8b645cb1cb45d15e0 text: Linode) VPS to run this site, just as we did for the old website. We use Nginx as our favorite server, PHP 7.2 with opcache enabled and APCU as our page cache engine. ((link: docs/guide/cache text: Kirby has a built-in APCU driver))
+
+### KeyCDN
+We host all our assets on (link: https://www.keycdn.com/ text: KeyCDN) with a tiny little KeyCDN plugin:
+
+```php
+<?php
+
+Kirby::plugin('getkirby/keycdn', [
+    'components' => [
+        'url' => function ($kirby, $path, $options) {
+            $original = $kirby->nativeComponent('url');
+
+            if (preg_match('!assets!', $path)) {
+                $path = Cachebuster::path($path);
+
+                if (option('keycdn', false) !== false) {
+                    return option('keycdn.domain') . '/' . $path;
+                }
+            }
+
+            return $original($kirby, $path, $options);
+        }
+    ]
+]);
+```
+
+The plugin also takes care of optimizing images. Check out the (link: https://github.com/getkirby/getkirby.com/blob/main/site/plugins/cdn/index.php text: source code) if you are interested in learning more about it.
+
+### Algolia
+
+We still trust in (link: https://algolia.com text: Algolia) for our search. They have been great over the last years and we get a very powerful search with very little effort. We re-index our content whenever we push updates to the server. This way we can make sure that the search index is always up to date.
+
+### Deployment
+
+Whenever we push changes to our (link: https://github.com/getkirby/getkirby.com text: main branch on GitHub), (link: https://deployhq.com text: DeployHQ) picks those changes up and deploys them to our server. This workflow is the fastest for us as a team and we can all work remotely on different parts of the site and iterate quickly over issues.
+
+## Get involved
+
+We try to keep everything as tidy and complete as possible. If you find anything that's not correct or missing, please let us know: https://github.com/getkirby/getkirby.com/issues
+
+You can even fix issues yourself if you like. **We appreciate all pull requests!**
+
+## It's all there
+
+If you are looking for more details about the implementations mentioned above, feel free to dive into our code and content and check out how we built it: https://github.com/getkirby/getkirby.com

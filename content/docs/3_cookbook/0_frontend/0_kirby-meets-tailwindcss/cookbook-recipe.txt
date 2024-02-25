@@ -1,0 +1,165 @@
+Title: Kirby meets Tailwind CSS
+
+----
+
+Published: 2021-08-09
+
+----
+
+Description: A walkthrough on how to install and use Tailwind CSS with Kirby.
+
+----
+
+Authors:
+- authors/christian-fickinger
+- authors/anselm-hannemann
+
+----
+
+Tags: CSS, integrations
+
+----
+
+Text:
+
+This is a walkthrough on how to install and use Tailwind CSS V3 with Kirby.
+
+
+## Preparation
+Before we start, you need to install Node.js for the build process on your client machine (or on the machine where you want to use Tailwind CSS). The latest version, which also includes npm (Node package management) can be downloaded from the (link: https://nodejs.org/en/download/ text: official Node.js website). You can test successful installation by opening a terminal window and typing the following two commands:
+
+```bash
+node --version
+```
+```bash
+npm --version
+```
+
+We use a Kirby (link: try text: Starterkit or Plainkit) to get started, and create a new `/src` folder in the project's root, so that our folder structure looks like this.
+
+
+
+```filesystem
+.htaccess
+composer.json
+content/
+index.php
+kirby/
+media/
+README.md
+site/
+src/
+```
+
+## Configuration
+Also in the projects's root, we create a `package.json` file which controls the build process. This file contains two build scripts, one for development (*watch*) and one for live mode (*build*).
+
+```js "/package.json"
+{
+    "name": "projectname",
+	"scripts": {
+		"watch": "npx tailwindcss -i ./src/css/tailwind.css -o ./assets/css/styles.css --content './site/**/*.php' -w",
+        "build": "npx tailwindcss -i ./src/css/tailwind.css -o ./assets/css/styles.css --content './site/**/*.php' -m"
+	}
+}
+```
+
+
+### Explanation
+Use `watch` to observe changes and generate a CSS file on change
+Use `build` to generate a final minified CSS file
+
+- `-i ./src/css/tailwind.css`: input file with Tailwind's css classes
+- `-o ../assets/css/styles.css`: output file which will be generated
+- `--content '../site/**/*.php'`: folder to watch for Tailwind's classes
+- `-w`: defines watch mode
+- `-m`: minify output file
+
+
+
+## CSS Styles
+
+After creating the build configuration, we create a subfolder `/css` in the `/src` folder and inside that folder a file called `tailwind.css`. Inside that file we use the `@tailwind` directive to inject Tailwind’s `base`, `components`, and `utilities` styles.
+```css "/src/css/tailwind.css"
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Our `/src` folder should look like follows and we are ready to install Tailwind CSS.
+```filesystem
+src/
+  css/
+    tailwind.css
+```
+
+
+## Install Tailwind CSS
+Open the terminal window again (and leave it open), change to the project folder and type the following command:
+```bash
+npm install tailwindcss@latest
+```
+By executing the command above a `node_modules` folder with the required dependencies and the file `package-lock.json` will be automatically created in the project root.
+
+
+
+## Config Tailwind CSS (optional)
+If you want to customize your Tailwind installation, you can create an additional config file `tailwind.config.js` in the project root. This file will then be automatically processed at build time if it exists.
+
+
+```js "/tailwind.config.js"
+module.exports = {
+  darkMode: 'class',
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
+}
+```
+<info>More details on how to customize Tailwind CSS can be found on the (link: https://tailwindcss.com/docs/configuration text: in the Tailwind CSS docs).</info>
+
+
+## Build
+Now we have a fully functional basic setup and are ready to generate our CSS file. Make sure you are in the project root folder and start the `watch` or the `build` script as follows:
+
+Use `watch` to observe changes and generate a CSS file on every change:
+```bash
+npm run watch
+```
+
+Use `build` to generate a final minified CSS file:
+```bash
+npm run build
+```
+
+Both scripts scan all php files inside the `/site` folder for Tailwind CSS classes and write them to the CSS file `styles.css`.
+
+<info>
+If it doesn't exist, the `/assets/` folder structure will be created by the script automatically.
+</info>
+
+All that's left to do is link to this file in your HTML `head` tag:
+
+```php
+<?= css('assets/css/styles.css') ?>
+```
+
+## Limitations
+
+Writer or other output generating fields won’t work well with this solution so far. As TailwindCSS expects all HTML to have styling classes, the output of these Kirby fields will be completely unstyled (not bold/italic, etc). With the use of the official Tailwind CSS Typography plugin there is a easy way to set the required classes for the Kirby fields and output them to the template.
+
+The official [Tailwind CSS Typography plugin](https://tailwindcss.com/docs/typography-plugin) provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML you don’t control, like HTML rendered from Markdown, or pulled from a CMS.
+
+### Workarounds without the Tailwind CSS Typography plugin
+
+One way to work around this would be to have a separate stylesheet for these cases that define all the output cases again, this time not in Tailwind style but classic CSS:
+```
+b, strong {
+    font-weight: bold;
+}
+```
+
+Another solution would be to create your own additional rendering of the fields. This has the advantage that you can use TailwindCSS and nothing else for the page styling but the disadvantage of creating your own output renderer. You need to inject the classes via Regular Expressions that match the allowed HTML tags, for example [by using KirbyText hooks](https://getkirby.com/docs/cookbook/extensions/kirbytext-hooks) like `kirbytext:after`.
+
+

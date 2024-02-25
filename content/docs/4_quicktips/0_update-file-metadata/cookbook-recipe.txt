@@ -1,0 +1,147 @@
+Title: Update file template/metadata
+
+----
+
+Published: 2021-06-11
+
+----
+
+Description: Learn how to update file metadata programmatically
+
+----
+
+Authors:
+
+- authors/sonja-broda
+
+----
+
+Text:
+
+Updating (link: docs/guide/content/files#adding-meta-data-to-your-files text: file metadata), and particularly the template that is stored for a file, is a task that comes up ever so often. Because you forgot to assign a file template in the first place or because you later changed your mind and want to assign a different template to some file types or whatever.
+
+Since the file template assigned to a file is stored in the file metadata file (i.e. the text file that is created for each uploaded file), this is what we have to update when we want to newly assign or change the file template or any other metadata.
+
+## Basic code
+
+The method we need to update a file’s metadata is [`$file->update()`](/docs/reference/objects/cms/file/update), so the basic code to update all files of a page looks like this (assuming for the moment that we are using this code in a page template or controller):
+
+```php
+<?php
+$kirby->impersonate('kirby');
+foreach ($page->files() as $file) {
+  $newFile = $file->update([
+    'template' => 'gallery-image',
+    // other metadata if required
+  ]);
+}
+```
+Note that `$file->update()` requires authentication.
+
+However, we can improve this code to get an array of error messages in case updating fails for any of the files:
+
+```php
+<?php
+$result = $kirby->impersonate('kirby', function () use ($page) {
+  $messages = [];
+  foreach ($page->files() as $file) {
+    try {
+      $newFile = $file->update([
+        'template' => 'gallery-image',
+        // other metadata if required
+      ]);
+    } catch (Exception $e) {
+      $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
+    }
+  }
+  return $messages;
+});
+
+dump($result);
+```
+
+## Multi-language sites
+
+The above script will only update the default language metadata if you have a multi-language site. If we want to update all languages, we need to loop through the languages for each file and pass the language code as second parameter to the `update` method:
+
+```php
+<?php
+$data = ['template' => 'gallery-hug'];
+$result = $kirby->impersonate('kirby', function () use ($page, $data) {
+  $messages = [];
+  foreach ($page->files() as $file) {
+    try {
+      // if we have a multi-language site, we loop through all languages
+      if ($this->multilang() === true) {
+        $languages = $this->languages();
+        foreach ($languages as $language) {
+          $newFile = $file->update($data, $language->code());
+        }
+      } else {
+        $newFile = $file->update($data);
+      }
+    } catch (Exception $e) {
+      $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
+    }
+  }
+  return $messages;
+});
+dump($result);
+```
+
+## Files method
+
+For a one-off update of a bunch of files the above code in a template will do fine. If we want to prepared to do this more often, a files method would come in handy, wouldn't it?
+
+
+In a plugin, lets create a new files method that takes a data array as argument and then does the same as the code above.
+
+```php "/site/plugins/update-metadata/index.php"
+<?php
+Kirby::plugin('cookbook/update-metadata', [
+  'filesMethods' => [
+    'update' => function (array $data) {
+      $messages = [];
+      $kirby    = kirby();
+      foreach ($this as $file) {
+        try {
+          if ($kirby->multilang() === true) {
+            $languages = $kirby->languages();
+            foreach ($languages as $language) {
+              $newFile = $file->update($data, $language->code());
+            }
+          } else {
+            $newFile = $file->update($data);
+          }
+        } catch (Exception $e) {
+          $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
+        }
+      }
+      return $messages;
+    }
+  ],
+]);
+```
+
+We can then call this method on a collection of files anywhere like this:
+
+```php
+<?php
+// update all files of all subpages of the current page
+$result = $kirby->impersonate('kirby', function () use ($page) {
+  return $page->index()->files()->update([
+    'template' => 'gallery-image',
+    // more metadata if required
+  ]);
+});
+dump($result);
+```
+
+<info>
+Of course, you can filter your files collection by extension, type, parent or whatever other criteria might apply to your use case.
+</info>
+
+## Related recipes
+
+- (link: docs/cookbook/extensions/content-file-cleanup text: Cleaning up content files)
+- (link: docs/cookbook/setup/migrate-files text: Migrate file metadata)

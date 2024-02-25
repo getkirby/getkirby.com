@@ -239,4 +239,16 @@ return [
 			return page('plugins')->render(['filter' => 'published']);
 		}
 	],
+	[
+		'pattern' => 'docs/cookbook/tags/(:any)',
+		'action'  => function ($tag) {
+			return page('docs/cookbook')->render(['tag' => $tag]);
+		}
+	],
+	[
+		'pattern' => 'docs/quicktips/tags/(:any)',
+		'action'  => function ($tag) {
+			return page('docs/quicktips')->render(['tag' => $tag]);
+		}
+	],
 ];
