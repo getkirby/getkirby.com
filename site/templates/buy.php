@@ -204,7 +204,7 @@ createApp({
 	},
 
 	// dynamic props
-	checkoutIsActive: <?= get('checkout') === 'new' ? 'true' : 'false' ?>,
+	checkoutIsActive: true,
 	checkoutIsOpen: false,
 	isFetchingPrices: false,
 	isProcessing: false,
