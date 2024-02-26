@@ -153,15 +153,15 @@ return [
 		'colors' => [
 			[
 				'name' => 'Color A',
-				'hex   => '#3e3e3e',
+				'hex'   => '#3e3e3e',
 			],
 			[
 				'name' => 'Color B',
-				'hex   => '#aaa',
+				'hex'   => '#aaa',
 			],
 			[
 				'name' => 'Color C',
-				'hex   => '#ddd',
+				'hex'   => '#ddd',
 			]
 		]
 	]
