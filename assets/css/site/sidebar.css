@@ -1,10 +1,5 @@
 .sidebar {
-	position: relative;
 	font-size: var(--text-base);
-}
-.sidebar-wrapper {
-	position: sticky;
-	top: var(--spacing-6);
 }
 .sidebar ul a {
 	font-weight: var(--font-bold);
@@ -51,11 +46,6 @@
 .sidebar .sidebar-group > h2 {
 	font-weight: var(--font-bold);
 	font-size: var(--text-sm);
-	margin-bottom: var(--spacing-1);
-}
-.sidebar .sidebar-group {
-	border-bottom: 1px solid var(--color-border);
-	margin-bottom: var(--spacing-6);
 }
 .sidebar .sidebar-group ul a {
 	font-weight: var(--font-normal);
@@ -63,5 +53,13 @@
 }
 
 .sidebar .sidebar-group li {
-	margin-bottom: .125rem;
+	margin-bottom: 0rem;
+}
+
+.sidebar .sidebar-group .sidebar-menu-2 li>a {
+	font-size: var(--text-xs);
+}
+.sidebar .sidebar-group .sidebar-menu-2 {
+	padding-top: .25rem;
+	padding-bottom: .25rem;
 }
