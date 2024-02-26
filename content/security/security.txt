@@ -386,7 +386,7 @@ Incidents:
     description: 'Cross-site scripting (XSS) in the link field "Custom" type'
     link: https://github.com/getkirby/kirby/security/advisories/GHSA-63h4-w25c-3qv4
     severity: medium
-    cve: null
+    cve: CVE-2024-27087
     cvss: CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:L/I:L/A:N/E:U/RL:O/RC:R
 
 ----
