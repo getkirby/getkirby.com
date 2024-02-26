@@ -5,11 +5,9 @@
 	</p>
 	<?php endif ?>
 
-	<div class="sidebar-wrapper">
-		<?php if ($hasCategories ?? false): ?>
-			<?php snippet('sidebar/menu-grouped', ['menu' => $menu]) ?>
-		<?php else: ?>
-			<?php snippet('sidebar/menu', ['menu' => $menu]) ?>
-		<?php endif ?>
-	</div>
+	<?php if ($hasCategories ?? false): ?>
+		<?php snippet('sidebar/menu-grouped', ['menu' => $menu]) ?>
+	<?php else: ?>
+		<?php snippet('sidebar/menu', ['menu' => $menu]) ?>
+	<?php endif ?>
 </nav>
