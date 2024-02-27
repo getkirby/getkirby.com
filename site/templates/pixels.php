@@ -6,7 +6,7 @@
 			<div class="field">
 				<label class="label">Presets</label>
 				<div class="select">
-					<select @input="setPreset">
+					<select @input="setPreset" v-model="settings.preset">
 						<option
 							v-for="(preset, id) in presets"
 							:value="id"
@@ -185,7 +185,7 @@
 			<p>Exporting …</p>
 		</div>
 
-		<div v-cloak class="editor-canvas" :style="{
+		<div v-cloak class="editor-canvas" :data-preset="settings.preset" :style="{
 				backgroundColor: settings.background,
 				width: settings.width + 'px',
 				height: settings.height + 'px',
@@ -202,7 +202,7 @@
 						fontWeight: settings.fontWeight
 					}"
 				>
-					<input v-model="settings.headline">
+					{{ settings.headline }}
 				</div>
 				<div v-if="settings.logo" class="editor-logo"><?= icon('icon') ?></div>
 			</header>
@@ -326,6 +326,7 @@
 
 	const presets = {
 		social: {
+			preset: "social",
 			label: "Social media image",
 			background: colors.black,
 			headline: "Kirby: The CMS that adapts to you",
@@ -340,7 +341,26 @@
 			rounded: true,
 			shadow: true
 		},
+		kosmos: {
+			preset: "kosmos",
+			label: "Kosmos Banner",
+			background: colors.black,
+			headline: "Kirby",
+			image: false,
+			color: "white",
+			logo: true,
+			mt: 0,
+			mr: 0,
+			ml: 0,
+			mb: 0,
+			width: 960,
+			height: 160,
+			pattern: "pinkblue",
+			rounded: false,
+			shadow: false
+		},
 		instagram: {
+			preset: "instagram",
 			label: "Instagram",
 			background: colors.dark,
 			mt: 6,
@@ -353,6 +373,7 @@
 			shadow: true,
 		},
 		viewPlugin: {
+			preset: "viewPlugin",
 			label: "Panel view plugin",
 			background: colors.gray,
 			mt: 6,
@@ -361,6 +382,7 @@
 			shadow: true
 		},
 		fieldPlugin: {
+			preset: "fieldPlugin",
 			label: "Panel field plugin",
 			background: colors.light,
 			mt: 4,
@@ -370,10 +392,12 @@
 			shadow: false
 		},
 		fullscreen: {
+			preset: "fullscreen",
 			label: "Fullscreen",
 			background: colors.gray,
 		},
 		logo: {
+			preset: "logo",
 			label: "Plugin logo",
 			background: colors.white,
 			mt: 1,
@@ -384,6 +408,7 @@
 			height: 128
 		},
 		showcase: {
+			preset: "showcase",
 			label: "Showcase",
 			background: colors.gray,
 			width: 600,
@@ -404,6 +429,7 @@
 		ml: 0,
 		pattern: null,
 		position: positions.topCenter,
+		preset: null,
 		rounded: false,
 		scale: 100,
 		shadow: false,
@@ -509,7 +535,6 @@
 			const newSettings = {
 				...defaults,
 				...presets[event.target.value],
-				image: this.settings.image,
 			};
 
 			Object.keys(newSettings).forEach(key => {
@@ -686,18 +711,6 @@
 		margin-right: 1.5rem;
 	}
 
-	.editor-headline input {
-		font: inherit;
-		font-weight: 400;
-		background: none;
-		color: currentColor;
-		width: 100%;
-	}
-
-	.editor-headline input:focus {
-		outline: none;
-	}
-
 	.editor-logo svg {
 		--size: 4rem;
 		width: var(--size);
@@ -788,4 +801,22 @@
 		font-weight: var(--font-bold);
 		border-radius: var(--rounded);
 	}
+
+
+ 	[data-preset="kosmos"] .editor-header {
+		justify-content: center;
+		inset: 0;
+		gap: 1.5rem;
+	}
+	[data-preset="kosmos"] .editor-headline {
+		flex-grow: 0;
+		width: max-content;
+		order: 2;
+		font-weight: 700 !important;
+	}
+	[data-preset="kosmos"] .editor-headline input {
+		appearance: none;
+		width: 12rem !important;
+	}
+
 </style>
