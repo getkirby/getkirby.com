@@ -4,7 +4,7 @@ Title: Files
 
 Intro:
 
-A 'files' 'select' field that allows selecting one or multiple related files
+A files select field that allows selecting one or multiple related files
 
 ----
 
@@ -14,7 +14,7 @@ Guide: content/files
 
 Text:
 
-The 'files' field allows you to select one or more files.
+The files field allows you to select one or more files.
 
 (image: files.png)
 
@@ -59,7 +59,7 @@ fields:
 
 ## Layout
 
-You can switch between the `list` and `cards` layouts. The default is a `list` layout.
+You can switch between `list` and `cards` layouts. Default is `list` layout.
 
 ```yaml
 fields:
@@ -85,7 +85,7 @@ You can use all file types available in Kirby here (`images`, `documents`, `vide
 
 ### Querying files from other pages
 
-You can get as complex as you like, e.g. 'get all images from all children of the `photography` page that use the `cover` template:
+You can get as complex as you like, e.g. get all images from all children of the `photography` page that use the `cover` template:
 
 ```yaml
 gallery:
@@ -122,7 +122,7 @@ image:
 
 ### `back`
 
-Set an image background behind the image, which will show if 'cover' is not set to true as explained above.
+Set an image background behind the image, which will show if cover is not set to true as explained above.
 Options: `pattern (default)`, `black`, `white`
 ```yaml
 
@@ -134,7 +134,7 @@ image:
 
 ### No image
 
-Don't want to see an image preview? Set the image options to 'false' if you don't want to show an image, which will show an icon instead:
+Don't want to see an image preview? Set the image options to `false` if you don't want to show an image, which reveals an icon instead:
 
 ```yml
 image: false
@@ -142,7 +142,7 @@ image: false
 
 ## Upload options
 
-By default, the files field allows you to upload files. You can define the `Add` button behavior with the `uploads` option: When clicking on the `Add` button, you can either 'select a file' and/or 'upload a file' (which is then automatically selected).
+By default, the files field allows you to upload files. You can define the `Add` button behavior with the `uploads` option: When clicking on the `Add` button, you can either select a file and/or upload a file (which is then automatically selected).
 
 ### Prevent uploading
 
@@ -156,7 +156,7 @@ gallery:
 
 ### Destination and template
 
-By default, all files will be uploaded to the current page without any predefined template. But with the additional options, you can 'fetch files from anywhere', 'upload them to a specific page', or even control which file template should be assigned by default:
+By default, all files will be uploaded to the current page without any predefined template. But with the additional options, you can fetch files from anywhere, upload them to a specific page, or even control which file template should be assigned by default:
 
 ```yaml
 gallery:
@@ -176,7 +176,7 @@ gallery:
 
 ### Restricting uploads to certain file types
 
-To restrict what types of files can be uploaded to the given destination, assign a file 'template' using the `uploads` property, and in your file template, set the `accept` option. For more information see the docs about (link: docs/reference/panel/blueprints/file#accept text: file blueprints).
+To restrict what types of files can be uploaded to the given destination, assign a file template using the `uploads` property, and in your file template, set the `accept` option. For more information see the docs about (link: docs/reference/panel/blueprints/file#accept text: file blueprints).
 
 #### Supported file types
 
