@@ -4,7 +4,7 @@ Title: Files
 
 Intro:
 
-A files select field that allows to select one or multiple related files
+A 'files' 'select' field that allows selecting one or multiple related files
 
 ----
 
@@ -14,7 +14,7 @@ Guide: content/files
 
 Text:
 
-The files field allows you to select one or more files.
+The 'files' field allows you to select one or more files.
 
 (image: files.png)
 
@@ -59,7 +59,7 @@ fields:
 
 ## Layout
 
-You can switch between `list` and `cards` layout. Default is `list` layout.
+You can switch between the `list` and `cards` layouts. The default is a `list` layout.
 
 ```yaml
 fields:
@@ -71,7 +71,7 @@ fields:
 
 ## Querying files
 
-The `query` option let's you limit the set of files to be included. When not set, it defaults to all files of the current page.
+The `query` option lets you limit the set of files that can be included. When not set, it defaults to all files of the current page.
 
 ### Limit the set to images
 
@@ -81,11 +81,11 @@ gallery:
   query: page.images
 ```
 
-You can use all file types available in Kirby here (`images`, `documents`, `videos`, `audio` and `code`).
+You can use all file types available in Kirby here (`images`, `documents`, `videos`, `audio`, and `code`).
 
 ### Querying files from other pages
 
-You can get as complex as you like, e.g. get all images of all children of the `photography` page that use the `cover` template:
+You can get as complex as you like, e.g. 'get all images from all children of the `photography` page that use the `cover` template:
 
 ```yaml
 gallery:
@@ -93,17 +93,26 @@ gallery:
   query: site.find('photography').children.images.filterBy('template', 'cover')
 ```
 
-You can find more example how you can use the query language in the (link: docs/guide/blueprints/query-language text: guide).
+You can find more examples of how you can use the query language in the (link: docs/guide/blueprints/query-language text: guide).
 
 ## Image options
 
 <info>
-Apart from showing no image, all image options only apply in card layout, not in list layout.
+Apart from showing no image, any image options you use will only apply to the 'card' layout, but not to the 'list' layout.
 </info>
+
+### `ratio`
+
+A freely selectable image aspect ratio for various image styles such as movie trailers, movie posters, or simply portrait, landscape, square, etc.
+
+```yaml
+image:
+  ratio: 16/9
+```
 
 ### `cover`
 
-Whether or not the image will cover the available space.
+Whether or not the image will fill (cover) the available image space and not show banding for images that don't match your chosen image aspect ratio.
 Options: `true`, `false (default)`
 
 ```yaml
@@ -111,18 +120,9 @@ image:
   cover: true
 ```
 
-### `ratio`
-
-A freely selectable image ratio
-
-```yaml
-image:
-  ratio: 16/9
-```
-
 ### `back`
 
-Set an image background.
+Set an image background behind the image, which will show if 'cover' is not set to true as explained above.
 Options: `pattern (default)`, `black`, `white`
 ```yaml
 
@@ -134,7 +134,7 @@ image:
 
 ### No image
 
-Set the image options to false if you don't want to show an image but an icon instead:
+Don't want to see an image preview? Set the image options to 'false' if you don't want to show an image, which will show an icon instead:
 
 ```yml
 image: false
@@ -142,11 +142,11 @@ image: false
 
 ## Upload options
 
-By default, the files field allows you to upload files. You can define the `Add` button behavior with the `uploads` option: When clicking on the `Add` button, you can either select a file and/or upload a file (which is then automatically selected).
+By default, the files field allows you to upload files. You can define the `Add` button behavior with the `uploads` option: When clicking on the `Add` button, you can either 'select a file' and/or 'upload a file' (which is then automatically selected).
 
 ### Prevent uploading
 
-You can set the `uploads` property to `false` to prevent file uploads:
+You can alternatively set the `uploads` property to `false` to prevent any file uploads:
 
 ```yaml
 gallery:
@@ -156,7 +156,7 @@ gallery:
 
 ### Destination and template
 
-By default all files will be uploaded to the current page and without a predefined template. With the additional options you can fetch files from anywhere and upload them to a specific page. You can also control which file template should be assigned by default:
+By default, all files will be uploaded to the current page without any predefined template. But with the additional options, you can 'fetch files from anywhere', 'upload them to a specific page', or even control which file template should be assigned by default:
 
 ```yaml
 gallery:
@@ -176,13 +176,13 @@ gallery:
 
 ### Restricting uploads to certain file types
 
-If you want to restrict what types of files can be uploaded to the given destination, assign a file template using the `uploads` property. In your file template, set the `accept` option. See the docs about (link: docs/reference/panel/blueprints/file#accept text: file blueprints).
+To restrict what types of files can be uploaded to the given destination, assign a file 'template' using the `uploads` property, and in your file template, set the `accept` option. For more information see the docs about (link: docs/reference/panel/blueprints/file#accept text: file blueprints).
 
 #### Supported file types
 
-By default, Kirby supports (link: docs/guide/files/files#supported-file-types text: the following files types).
+By default, Kirby supports (link: docs/guide/files/files#supported-file-types text: several files types).
 
-To upload file types not supported out of the box by Kirby, you can (link: docs/reference/plugins/extensions/file-types text: register new file types with the `fileTypes` extension) in a plugin.
+To upload additional file types, you could (link: docs/reference/plugins/extensions/file-types text: register new file types with the `fileTypes` extension) in a plugin.
 
 (docs: panel-picker-pagination field: files)
 
@@ -200,7 +200,7 @@ To convert a single file to a file object, use the [`toFile()`](/docs/reference/
 
 ### Multiple files
 
-To convert multiple files to a files collection, use the [`toFiles()`](/docs/reference/templates/field-methods/to-files) method:
+To work with or reference multiple files, create the group of files using the [`toFiles()`](/docs/reference/templates/field-methods/to-files) method:
 
 ```php
 <?php
