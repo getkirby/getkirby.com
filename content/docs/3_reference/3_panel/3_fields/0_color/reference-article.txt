@@ -6,7 +6,7 @@ Since: 4.0.0
 
 ----
 
-Intro: The `color` field supports multiple color notations, color picker, pre-defined colors, custom color names and transparency.
+Intro: The `color` field supports multiple color notations, a color picker, pre-defined colors, custom color names, and transparency.
 
 ----
 
@@ -94,7 +94,7 @@ color:
 <since v="4.1.0">
 ### Dynamic options
 
-Our options (link: docs/guide/blueprints/query-language text: query syntax) offers a very powerful way of to add an automatically generated option lists to a color field.
+Our options (link: docs/guide/blueprints/query-language text: query syntax) offer a powerful way of adding automatically-generated option lists to a color field.
 
 
 ```yaml
@@ -123,7 +123,7 @@ return [
 return [
 	'my' => [
 		'colors' => [
-			'#3e3e3e' => 'Color A' ,
+			'#3e3e3e' => 'Color A',
 			'#aaa'    => 'Color B',
 			'#ddd'    => 'Color C',
 		]
@@ -131,7 +131,7 @@ return [
 ];
 ```
 
-You can start at the `site`, current `page`, `users` collection or the `kirby` instance to run your query.
+You can start at the `site`, current `page`, `users` collection, or the `kirby` instance to run your query.
 
 #### Custom value and label
 
@@ -184,9 +184,9 @@ By default, the API type expects that the JSON endpoint returns an option array 
 
 ```js
 {
-	"#3e3e3e": "Color A" ,
+	"#3e3e3e": "Color A",
 	"#aaa": "Color B",
-	"#ddd":"Color C"
+	"#ddd": "Color C"
 }
 ```
 </since>
