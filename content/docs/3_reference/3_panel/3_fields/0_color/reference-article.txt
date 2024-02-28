@@ -94,7 +94,7 @@ color:
 <since v="4.1.0">
 ### Dynamic options
 
-Our options (link: docs/guide/blueprints/query-language text: query syntax) offer a powerful way of adding automatically-generated option lists to a color field.
+Our options (link: docs/guide/blueprints/query-language text: query syntax) offer a powerful way of adding automatically generated option lists to a color field.
 
 
 ```yaml
