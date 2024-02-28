@@ -221,13 +221,13 @@ fields:
         preview: fields
         tabs:
           main:
-           fields:
-             title:
-               type: text
-             subtitle:
-               type: text
-             description:
-               type: writer
+            fields:
+              title:
+                type: text
+              subtitle:
+                type: text
+              description:
+                type: writer
           settings:
             label: Settings
             fields: # ...
