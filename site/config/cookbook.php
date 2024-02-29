@@ -2,7 +2,7 @@
 
 return [
 	'categories' => [
-		'collections'             => ['pattern' => 'lagoon'],
+		'collections'             => ['pattern' => 'beach'],
 		'content-representations' => ['pattern' => 'lava'],
 		'content-structure'       => ['pattern' => 'blobs'],
 		'development-deployment'  => ['pattern' => 'beach'],
