@@ -136,6 +136,8 @@ The button label changes depending on the status option set:
 
 (image: page-creation-status.png)
 
+(screencast: https://youtu.be/rC9Up05WVnI title: Page creation dialog text: An example how to customize the page creation dialog for building a bookmark tool.)
+</since>
 <since v="4.1.0">
 ### Automatic title and slug
 

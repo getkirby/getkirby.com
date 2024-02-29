@@ -576,3 +576,5 @@ sections:
     type: pages
     search: true
 ```
+
+(screencast: https://youtu.be/rC9Up05WVnI title: Build a bookmark tool text: An example how to build a nice overview with the table layout in the pages section showing all relevant columns.)
