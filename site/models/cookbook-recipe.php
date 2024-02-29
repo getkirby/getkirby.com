@@ -24,4 +24,12 @@ class CookbookRecipePage extends Page
 			]
 		];
 	}
+
+	public function pattern(): string
+	{
+		$slug = $this->parent()->slug();
+		$path = '/assets/patterns/';
+
+		return $path . ($this->kirby()->option('cookbook.categories')[$slug]['pattern'] ?? 'lagoon') . '.jpg';
+	}
 }
