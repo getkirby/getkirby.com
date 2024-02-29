@@ -14,9 +14,13 @@ Icon: database
 
 ----
 
-Text:
+Screencast:
 
 (screencast: https://youtu.be/EVVORXaZThU title: Faster with caching text: Learn how Kirby can help you to keep even your more complex sites with lots of content performant.)
+
+----
+
+Text:
 
 ## Caching pages
 
