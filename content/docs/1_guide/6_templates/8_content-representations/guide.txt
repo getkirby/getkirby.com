@@ -6,6 +6,12 @@ Intro: Content representations allow you to output the content in different form
 
 ----
 
+Screencast:
+
+(screencast: https://www.youtube.com/watch?v=LoN2n1jjCuc title: Your content in different formats text: Be it JSON for your frontend, to use Kirby as an API or an automatic RSS feed.)
+
+----
+
 Text:
 
 ## Creating a representation
