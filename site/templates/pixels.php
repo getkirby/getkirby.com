@@ -316,12 +316,24 @@
 	};
 
 	const patterns = [
+		"beach",
+		"beetroot",
+		"blobs",
+		"darkness",
+		"deepsea",
+		"dragon",
+		"gold",
 		"lagoon",
+		"lava",
 		"pinkblue",
 		"purple",
 		"rainforest",
 		"sea",
-		"space"
+		"sky",
+		"space",
+		"turmoil",
+		"viscera",
+		""
 	];
 
 	const presets = {
