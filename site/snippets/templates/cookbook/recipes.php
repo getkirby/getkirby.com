@@ -1,6 +1,6 @@
 <ul class="auto-fill auto-rows-fr" style="--min: 16rem; --column-gap: var(--spacing-12); --row-gap: var(--spacing-24)">
 	<?php foreach ($recipes as $recipe): ?>
-	<li style="background-image: url(<?= $recipe->pattern() ?>) background-size: cover; background-repeat: no-repeat; padding: 0 0  0 1.2rem">
+	<li style="background-image: url('<?= $recipe->pattern() ?>'); background-size: cover; background-repeat: no-repeat; padding-left: 1.2rem">
 		<article style="background-color: white; padding: 1rem; height: 100%">
 			<a class="block pt-1" href="<?= $recipe->url() ?>">
 				<figure class="mb-3">
