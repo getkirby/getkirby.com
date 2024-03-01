@@ -2,22 +2,22 @@
 
 return [
 	'categories' => [
-		'collections'             => ['pattern' => 'beach'],
-		'content-representations' => ['pattern' => 'lava'],
-		'content-structure'       => ['pattern' => 'blobs'],
-		'development-deployment'  => ['pattern' => 'beach'],
-		'extensions'              => ['pattern' => 'gold'],
-		'forms'                   => ['pattern' => 'purple'],
-		'frontend'                => ['pattern' => 'pinkblue'],
-		'headless'                => ['pattern' => 'rainforest'],
-		'i18n'                    => ['pattern' => 'space'],
-		'integrations'            => ['pattern' => 'sea'],
-		'navigation'              => ['pattern' => 'sky'],
-		'panel'                   => ['pattern' => 'sky'], //
-		'performance'             => ['pattern' => 'sky'], //
+		'collections'             => ['pattern' => 'abyss'],
+		'content-representations' => ['pattern' => 'beach'],
+		'content-structure'       => ['pattern' => 'beetroot'],
+		'development-deployment'  => ['pattern' => 'purple'],
+		'extensions'              => ['pattern' => 'darkness'],
+		'forms'                   => ['pattern' => 'deepsea'],
+		'frontend'                => ['pattern' => 'dragon'],
+		'headless'                => ['pattern' => 'gold'],
+		'i18n'                    => ['pattern' => 'lagoon'],
+		'integrations'            => ['pattern' => 'lava'],
+		'navigation'              => ['pattern' => 'pinkblue'],
+		'panel'                   => ['pattern' => 'blobs'], //
+		'performance'             => ['pattern' => 'sea'], //
 		'php'                     => ['pattern' => 'sky'], //
-		'plugins'                 => ['pattern' => 'sky'], //
-		'security'                => ['pattern' => 'sky'], //
-		'mixed'                   => ['pattern' => 'sky'], //
+		'plugins'                 => ['pattern' => 'viscera'], //
+		'security'                => ['pattern' => 'turmoil'], //
+		'mixed'                   => ['pattern' => 'rainforest'], //
 	],
 ];
