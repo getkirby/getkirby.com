@@ -1,16 +1,24 @@
-<menu>
+<nav role="tablist">
 	<?php foreach ($tabs as $key => $tab): ?>
 	<button
-		:aria-current="current === '<?= $key ?>'"
+		:aria-selected="current === '<?= $key ?>'"
+		aria-controls="tabs-<?= $id ?>-<?= $key ?>"
+		id="tabs-<?= $id ?>-<?= $key ?>-label"
+		role="tab"
 		@click="current = '<?= $key ?>'"
 	>
 		<?= $tab['title'] ?>
 	</button>
 	<?php endforeach ?>
-</menu>
+</nav>
 
 <?php foreach ($tabs as $key => $tab): ?>
-<div v-show="current === '<?= $key ?>'">
+<div
+	v-show="current === '<?= $key ?>'"
+	aria-labelledby="tabs-<?= $id ?>-<?= $key ?>-label"
+	id="tabs-<?= $id ?>-<?= $key ?>"
+	role="tabpanel"
+>
 	<?= $tab['content'] ?>
 </div>
 <?php endforeach ?>
