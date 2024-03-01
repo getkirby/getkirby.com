@@ -316,6 +316,7 @@
 	};
 
 	const patterns = [
+		"abyss",
 		"beach",
 		"beetroot",
 		"blobs",
@@ -333,7 +334,6 @@
 		"space",
 		"turmoil",
 		"viscera",
-		""
 	];
 
 	const presets = {
