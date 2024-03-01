@@ -328,3 +328,82 @@ Before updating your Kirby installation, always create a backup before changing 
 <alert>
 This is really dangerous. Better know what you are doing.
 </alert>
+
+## KirbyText groupings
+
+We've added some custom directives to our custom Parsedown parser Marsdown that allow us to group content in various ways.
+
+## Columns
+
+You can split your content into a two-column grid by wrapping the group with `(columns…)` and `(…columns)`. To separate each column, use `++++` as divider:
+
+```kirbytext
+&lpar;columns…)
+
+Column 1
+
+++++
+
+Column 2
+
+&lpar;…columns)
+```
+
+#### Example
+
+(columns…)
+
+Column 1
+
+++++
+
+Column 2
+
+(…columns)
+
+
+## Tabs
+
+Similarly, you can organize content in tabs by wrapping it in `(tabs)` and `(tabs)`. Each content section that should create its own tab needs to start with `=== ` followed by the tab title:
+
+```kirbytext
+&lpar;tabs…)
+=== Tab title 1
+Tab content 1
+
+=== Tab title 2
+Tab content 2
+
+=== Tab title 3
+Tab content 3
+&lpar;…tabs)
+```
+
+#### Example
+
+(tabs…)
+=== Tab title 1
+Tab content 1
+
+=== Tab title 2
+Tab content 2
+
+=== Tab title 3
+Tab content 3
+(…tabs)
+
+## Since version
+
+To signal that content refers to a specific Kirby version or that the feature was only added in a specific version, wrap the content in a `<since>` tag:
+
+<figure class="code">
+  <pre><code class="language-markdown">&lt;since v="4.0.0"&gt;
+A feature that got added in Kirby 4.0.0
+&lt;/since&gt;</code></pre>
+</figure>
+
+#### Example
+
+<since v="4.0.0">
+A feature that got added in Kirby 4.0.0
+</since>

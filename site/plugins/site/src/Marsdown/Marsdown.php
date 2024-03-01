@@ -20,7 +20,7 @@ class Marsdown extends ParsedownExtra
 
 		// register the new box type
 		$this->BlockTypes['<'] = ['Box'] + $this->BlockTypes['<'];
-		$this->BlockTypes['('] = ['Columns'];
+		$this->BlockTypes['('] = ['Groups'];
 
 		$this->setBreaksEnabled(true);
 	}
@@ -36,37 +36,47 @@ class Marsdown extends ParsedownExtra
 		return $attributes;
 	}
 
-	protected function blockColumns(array $Line, array $Block = null)
+	protected function blockGroups(array $Line, array $Block = null)
 	{
-		if ($Line['text'] !== '(columns…)') {
-			return;
+		if (preg_match('!^\((columns|tabs)…\)$!', $Line['text'], $matches)) {
+			return [
+				'group' => [
+					'type' => $matches[1],
+					'html' => null
+				]
+			];
 		}
-
-		return [
-			'columns' => [
-				'html' => null
-			]
-		];
 	}
 
-	protected function blockColumnsContinue(array $Line, array $Block)
+	protected function blockGroupsContinue(array $Line, array $Block)
 	{
 		if ($Block['complete'] ?? false) {
 			return;
 		}
 
-		if ($Line['text'] === '(…columns)') {
-			$Block['complete'] = true;
-		} else {
-			$Block['columns']['html'] .= "\n\n" . $Line['body'];
+		if (preg_match('!^\(…(columns|tabs)\)$!', $Line['text'])) {
+			return [
+				...$Block,
+				'complete' => true
+			];
 		}
+
+		$Block['group']['html'] .= "\n\n" . $Line['body'];
 
 		return $Block;
 	}
 
-	protected function blockColumnsComplete(array $Block): array
+	protected function blockGroupsComplete(array $Block): array
 	{
-		$columns = Str::split($Block['columns']['html'], '++++');
+		return match ($Block['group']['type']) {
+			'columns' => $this->blockGroupsColumnsComplete($Block),
+			'tabs'    => $this->blockGroupsTabsComplete($Block),
+		};
+	}
+
+	protected function blockGroupsColumnsComplete(array $Block): array
+	{
+		$columns = Str::split($Block['group']['html'], '++++');
 
 		return [
 			'element' => [
@@ -77,6 +87,29 @@ class Marsdown extends ParsedownExtra
 				],
 				'rawHtml' => snippet('kirbytext/columns', [
 					'columns' => $columns
+				], true),
+			]
+		];
+	}
+
+	protected function blockGroupsTabsComplete(array $Block): array
+	{
+		preg_match_all('!=== (.*)!', $Block['group']['html'], $titles);
+		$contents = preg_split('!=== .*!', $Block['group']['html']);
+		$tabs     = array_map(
+			fn ($content, $title) => [
+				'title'   => $title,
+				'content' => kirbytext($content)
+			],
+			array_slice($contents, 1),
+			$titles[1]
+		);
+
+		return [
+			'element' => [
+				'name' => 'div',
+				'rawHtml' => snippet('kirbytext/tabs', [
+					'tabs' => $tabs ?? []
 				], true),
 			]
 		];

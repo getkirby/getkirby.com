@@ -10,5 +10,7 @@
 <?php endslot() ?>
 
 <?php slot('prevnext') ?>
-<?php snippet('layouts/prevnext', ['siblings' => page('docs/guide')->index()->listed()]) ?>
+<?php snippet('layouts/prevnext', [
+	'siblings' => page('docs/guide')->index()->listed()
+]) ?>
 <?php endslot() ?>
