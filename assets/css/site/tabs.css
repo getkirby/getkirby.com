@@ -4,18 +4,18 @@
 	border-radius: var(--rounded);
 }
 
-.tabs menu {
+.tabs nav {
 	display: flex;
 }
 
-.tabs menu button {
+.tabs nav button {
 	position: relative;
 	padding: var(--spacing-2) var(--spacing-3);
 	font-size: var(--text-xs);
 	overflow: visible;
 }
 
-.tabs menu button[aria-current="true"]::after {
+.tabs nav button[aria-selected="true"]::after {
 	position: absolute;
 	content: "";
 	height: 2px;
@@ -24,7 +24,7 @@
 	background: currentColor;
 }
 
-.tabs menu button:not([aria-current="true"]):hover {
+.tabs nav button:not([aria-selected="true"]):hover {
 	opacity: 0.75;
 }
 
