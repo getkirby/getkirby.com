@@ -123,6 +123,7 @@ To make this work, the subpage blueprints needs to have a field that stores the 
 author:
   type: users
   label: Author
+	default: true
   disabled: true
 ```
 
