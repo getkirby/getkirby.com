@@ -18,8 +18,11 @@ use Kirby\Http\Response;
 class Thumbnail
 {
 	const PATTERNS = [
+		'abyss',
 		'beach',
 		'blobs',
+		'darkness',
+		'deepsea',
 		'lagoon',
 		'lava',
 		'pinkblue',
@@ -27,7 +30,9 @@ class Thumbnail
 		'rainforest',
 		'sea',
 		'sky',
-		'space'
+		'space',
+		'turmoil',
+		'viscera'
 	];
 
 	protected GdImage $canvas;
