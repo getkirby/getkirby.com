@@ -105,11 +105,18 @@ class Marsdown extends ParsedownExtra
 			$titles[1]
 		);
 
+		$id = Str::random(3);
+
 		return [
 			'element' => [
 				'name' => 'div',
+				'attributes' => [
+					'class' => 'tabs',
+					'id'    => 'tabs-' . $id
+				],
 				'rawHtml' => snippet('kirbytext/tabs', [
-					'tabs' => $tabs ?? []
+					'id'   => $id,
+					'tabs' => $tabs,
 				], true),
 			]
 		];
