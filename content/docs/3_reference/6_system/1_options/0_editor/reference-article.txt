@@ -1,0 +1,44 @@
+Intro: Sets the editor for the debugger
+
+----
+
+Text:
+
+When your debug mode is enabled, you can set your editor to quickly open the file in which the error appeared.
+
+(video: error.mp4)
+
+```php
+return [
+	'debug'  => true,
+	'editor' => 'vscode'
+];
+```
+
+The following editors are supported:
+
+| shortcut | Editor |
+| - | - |
+| `emacs`| Emacs |
+| `idea`| IDEA |
+| `macvim`| MacVim |
+| `phpstorm`| PhpStorm |
+| `sublime`| Sublime Text |
+| `textmate`| Textmate |
+| `xdebug`| xdebug |
+| `vscode`| VSCode |
+| `atom`| Atom |
+| `espresso`| Espresso |
+| `netbeans`| Netbeans |
+
+<alert>
+Make sure to disable `debug` mode in production! Displaying PHP errors on a public server can be a serious security risk:
+
+- Error messages are displayed with detailed information about the code structure (e.g. file path, class, method)
+- With Whoops enabled, there will be even more detailed information about the code structure
+
+In a production environment, always log errors to your PHP error logs.
+</alert>
+
+(link: docs/reference/system/options/debug text: Learn more about the debug mode …)
+
