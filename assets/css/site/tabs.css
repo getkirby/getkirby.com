@@ -1,0 +1,33 @@
+.tabs {
+	margin-block: var(--spacing-6);
+	border: 1px solid var(--color-border);
+	border-radius: var(--rounded);
+}
+
+.tabs menu {
+	display: flex;
+}
+
+.tabs menu button {
+	position: relative;
+	padding: var(--spacing-2) var(--spacing-3);
+	font-size: var(--text-xs);
+	overflow: visible;
+}
+
+.tabs menu button[aria-current="true"]::after {
+	position: absolute;
+	content: "";
+	height: 2px;
+	inset-inline: 0;
+	bottom: -1px;
+	background: currentColor;
+}
+
+.tabs menu button:not([aria-current="true"]):hover {
+	opacity: 0.75;
+}
+
+.tabs > div {
+	padding: var(--spacing-6);
+}

@@ -37,8 +37,9 @@
 @import "site/screencast.css";
 @import "site/search.css";
 @import "site/sidebar.css";
-@import "site/types.css";
+@import "site/tabs.css";
 @import "site/toc.css";
+@import "site/types.css";
 @import "site/voice.css";
 @import "site/with-sidebar.css";
 @import "site/utilities.css";
