@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 	<?php snippet('layouts/head') ?>
+	<?= css('assets/css/layouts/article.css') ?>
 </head>
 <body>
 	<?php snippet('layouts/header') ?>
-	<main id="main" class="main">
+	<main id="main" class="main article">
 		<div class="container">
 			<div class="with-sidebar">
 				<article class="mb-24">

@@ -1,3 +1,8 @@
+.toc {
+	margin-top: var(--spacing-12);
+	margin-bottom: var(--spacing-16);
+}
+
 .toc .badge {
 	border-radius: var(--rounded-sm);
 	border-end-start-radius: 0;
@@ -10,7 +15,7 @@
 }
 .toc li {
 	list-style: decimal-leading-zero;
-	padding-left: .25em;
+	padding-left: 0.25em;
 }
 .toc li::marker {
 	font-variant-numeric: tabular-nums;

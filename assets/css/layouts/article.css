@@ -1,0 +1,3 @@
+.article .h1 {
+	--text-h1: var(--text-4xl);
+}

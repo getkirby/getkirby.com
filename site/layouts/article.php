@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 	<?php snippet('layouts/head') ?>
+	<?= css('assets/css/layouts/article.css') ?>
 </head>
 <body>
 	<?php snippet('layouts/header') ?>
-	<main id="main" class="main">
+	<main id="main" class="main article">
 		<div class="container">
 			<div class="with-sidebar">
 				<article class="mb-24">
@@ -14,7 +15,9 @@
 						<?= $header ?>
 					<?php else: ?>
 						<header>
-							<h1 class="h1 mb-12"><?php slot('h1') ?><?= $page->title() ?><?php endslot() ?></h1>
+							<h1 class="h1 mb-12">
+								<?php slot('h1') ?><?= $page->title() ?><?php endslot() ?>
+							</h1>
 							<?php if ($page->intro()->isNotEmpty()): ?>
 							<div class="prose mb-12">
 								<p class="intro">
