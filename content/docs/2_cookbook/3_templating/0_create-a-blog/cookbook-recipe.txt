@@ -279,7 +279,6 @@ To manage your blog and write articles in the (glossary: panel), you will need t
 
 ## Further reading
 
-- (link: docs/cookbook/text/dates text: How to add a date to your articles)
 - (link: docs/cookbook/content/filtering-with-tags text: How to add tags to your articles)
 - (link: docs/cookbook/templating/pagination text: How to add pagination to your blog)
 - (link: docs/cookbook/templating/previous-next text: How to add a prev/next switcher to your articles)
