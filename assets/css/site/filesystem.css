@@ -8,13 +8,14 @@
 	--icon-red: var(--color-red-500);
 	--icon-yellow: var(--color-yellow-500);
 	--gradient: linear-gradient(var(--border), var(--border));
+
 	padding: var(--spacing-4);
 	background: var(--color-black);
 	color: var(--color-gray-100);
 	font-family: var(--font-mono);
 	line-height: var(--leading-relaxed);
 	border-radius: var(--rounded);
-	font-size: var(--text-base);
+	font-size: 0.875em;
 	overflow-x: auto;
 	overflow-y: hidden;
 	-webkit-overflow-scrolling: touch;
@@ -56,11 +57,13 @@
 
 /* Filesystem Lines */
 .filesystem li li {
-	background: var(--gradient) 0.4375rem 0/0.0625rem 100% no-repeat, var(--gradient) 0.4375rem 0.75em/0.5rem 0.0625rem no-repeat;
+	background: var(--gradient) 0.4375rem 0/0.0625rem 100% no-repeat,
+		var(--gradient) 0.4375rem 0.75em/0.5rem 0.0625rem no-repeat;
 	padding-left: 1.625rem;
 }
 .filesystem li li:last-child {
-	background: var(--gradient) 0.4375rem 0/0.0625rem 0.75em no-repeat, var(--gradient) 0.4375rem 0.75em/0.5rem 0.0625rem no-repeat;
+	background: var(--gradient) 0.4375rem 0/0.0625rem 0.75em no-repeat,
+		var(--gradient) 0.4375rem 0.75em/0.5rem 0.0625rem no-repeat;
 }
 
 /* Filesystem icons */
