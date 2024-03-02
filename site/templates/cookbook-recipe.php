@@ -16,19 +16,23 @@
 		<header class="prose mb-6">
 			<h2><?= $authors->count() > 1 ? 'Authors' : 'Author' ?></h2>
 		</header>
-		<ul class="auto-fill" style="--min: 12rem; --max: 14rem">
+		<ul class="columns" style="--columns: 1; --gap: 1.5rem">
 			<?php foreach ($authors as $author): ?>
-			<li>
-				<figure class="block bg-white p-6 shadow-2xl">
-					<p class="mb-3" style="--aspect-ratio: 1/1"><?= $author->image()->crop(400) ?></p>
-					<figcaption class="flex-grow text-sm leading-tight">
+			<li class="max-w-xl bg-light rounded overflow-hidden shadow-lg">
+				<figure class="columns" style="--columns: 7; --gap: 0">
+					<div style="--aspect-ratio: 1/1; --span: 2">
+						<?= $author->image()->crop(400) ?>
+					</div>
+					<figcaption class="p-6 text-sm leading-tight" style="--span: 5">
 						<div class="mb-6">
-							<p class="font-bold"><?= $author->title() ?></p>
+							<p class="h4 font-bold"><?= $author->title() ?></p>
 							<p class="mb-1 color-gray-700"><?= $author->bio() ?></p>
 
 							<?php if ($author->website()->isNotEmpty()): ?>
 							<a href="<?= $author->website() ?>">
-								<p class="font-mono link"><?= $author->website()->shortUrl() ?></p>
+								<p class="font-mono link">
+									<?= $author->website()->shortUrl() ?>
+								</p>
 							</a>
 							<?php endif ?>
 						</div>
