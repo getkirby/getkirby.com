@@ -18,6 +18,10 @@ Tags: development environment, tools
 
 ----
 
+Category: Preparing the stage
+
+----
+
 Text:
 
 The easiest way to start testing and developing with Kirby is in a local development environment: you can easily edit your files locally, immediately see changes in the browser, and deploy your site on a public server when you are ready.
@@ -74,6 +78,7 @@ There's also a (link: https://github.com/cretueusebiu/valet-windows text: Window
 (link:https://herd.laravel.com text:Laravel Herd) is a one click PHP development environment with zero dependencies for macOS, running out of the box without any hassles. According to its self description it is the fastest environment around.
 Sites can be configured via a GUI or command line just like Laravel valet. Different PHP versions can be used for all your sites and sharing of local sites is also possible via (link:https://expose.dev text:Expose).
 
+(screencast: https://www.youtube.com/watch?v=Mb_-bo77IPc title: One minute install with Laravel Herd)
 
 ## Valet+
 
@@ -99,4 +104,6 @@ Follow their (link: https://www.vagrantup.com/intro/getting-started/index text: 
 ## DDEV
 
 (link: https://ddev.com/ text: DDEV) is an increasingly popular Docker-based development environment, that's quickly easy set up on Mac, Linux and Windows. It doesn't require any Docker knowledge unless you have special requirements.
+
+Check out our (link: docs/cookbook/development-deployment/ddev text: Kirby meets DDEV cookbook recipe)
 
