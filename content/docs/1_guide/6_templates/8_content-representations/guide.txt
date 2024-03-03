@@ -108,3 +108,12 @@ Kirby::plugin('your/feed', [
 ```
 
 Controllers and templates from plugins get overridden automatically if they exist in the `templates` or `controllers` directories. You can use this behavior to provide default setups in a plugin and still give the option to overwrite them individually if needed.
+
+## Examples for using content representations
+
+Our cookbook features multiple examples for using content representation for different use cases:
+
+- (link: docs/cookbook/content-representations/load-more-with-ajax text: Load more with ajax)
+- (link: docs/cookbook/content-representations/dynamic-og-images text: Creating OG images)
+- (link: docs/cookbook/content-representations/figma-auto-populate text: Populate Figma designs)
+- (link: docs/cookbook/content-representations/generating-json text: Generating JSON)
