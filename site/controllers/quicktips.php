@@ -6,6 +6,7 @@ return function (Page $page, $tag) {
 
 	$quicktips = $page->children()->listed()->sortBy('title');
 	$tags      = $page->children()->listed()->pluck('tags', ',', true);
+	sort($tags);
 
 	if ($tag) {
 		$quicktips = $quicktips->filter(function($tip) use($tag) {
