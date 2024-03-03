@@ -14,7 +14,7 @@ Authors: - authors/isaac-bordons
 
 ----
 
-Tags: panel, css
+Tags: panel, styling
 
 ----
 

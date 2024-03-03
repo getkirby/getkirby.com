@@ -14,7 +14,7 @@ Authors: - authors/bastian-allgeier
 
 ----
 
-Tags: panel, structure field
+Tags: fields
 
 ----
 

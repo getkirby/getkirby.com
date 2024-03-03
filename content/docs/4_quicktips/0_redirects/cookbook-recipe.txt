@@ -2,9 +2,23 @@ Title: Editable redirects
 
 ----
 
+Description: Redirect visitors to external resources.
+
+----
+
+Authors:
+
+- authors/nico-hoffmann
+
+----
+
+Tags: routing
+
+----
+
 Text:
 
-Imagine you are building a new website for your client, but they already have their blog on (link: http://www.tumblr.com/ text: Tumblr) and they use (link: https://www.zendesk.com text: zendesk) to provide support for their world famous product. Of course, they want to have both a "Blog" and a "Support" link in their main menu and they want to be able to sort the menu items and maybe rename them later. At a later point in time, they might switch from Desk.com to another service, so these links have to be editable.
+Imagine you are building a new website for your client, but they already have their blog on (link: http://www.tumblr.com/ text: Tumblr) and they use (link: https://www.zendesk.com text: zendesk) to provide support for their world-famous product. Of course, they want to have both a "Blog" and a "Support" link in their main menu and they want to be able to sort the menu items and maybe rename them later. At a later point in time, they might switch from Desk.com to another service, so these links have to be editable.
 
 Redirects are the way to solve this problem.
 
@@ -98,12 +112,3 @@ return [
 ];
 ```
 
-----
-
-Description: Redirect visitors to external resources.
-
-----
-
-Authors:
-
-- authors/nico-hoffmann

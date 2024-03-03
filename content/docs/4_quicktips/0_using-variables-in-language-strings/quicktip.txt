@@ -2,6 +2,22 @@ Title: Placeholders in language strings
 
 ----
 
+Description: Make language translations more powerful with placeholders.
+
+----
+
+Published: 2019-04-07
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: i18n, placeholders
+
+----
+
 Text:
 
 Translations in language files usually look like this:
@@ -69,15 +85,3 @@ echo I18n::template('business.hours', null, [
 
 // Result: "Our business hours are from 8 to 20."
 ```
-
-----
-
-Description: Make language translations more powerful with placeholders.
-
-----
-
-Published: 2019-04-07
-
-----
-
-Authors: - authors/sonja-broda

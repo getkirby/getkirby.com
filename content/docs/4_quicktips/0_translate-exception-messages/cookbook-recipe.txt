@@ -15,6 +15,10 @@ Authors:
 
 ----
 
+Tags: i18n
+
+----
+
 Text:
 
 When you have use cases like creating pages or users from the frontend programmatically, you might run into the issue that exceptions messages are always output in English in a single language site, even though Kirby provides translations for these messages.

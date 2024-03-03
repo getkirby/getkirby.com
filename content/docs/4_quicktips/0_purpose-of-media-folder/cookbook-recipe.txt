@@ -14,6 +14,10 @@ Authors: - authors/sonja-broda
 
 ----
 
+Tags: panel, styling
+
+----
+
 Text:
 
 The `/media` folder is the place from which Kirby serves all Panel assets (stylesheets, JavaScript files and images) and thumbs generated through the Panel for preview images as well as the thumbs that are created through your template code.
