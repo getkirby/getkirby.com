@@ -78,7 +78,3 @@ Some technical background: Fields are part of the (link: docs/reference/objects/
 However, Kirby uses the magic (link: https://github.com/getkirby/kirby/blob/a537a4d95c8db03ecaf3ebfd5c6a7747357fde7c/src/Cms/Page.php#L154 text: `__call`) method in the Page class to resolve these shortcuts via the field name, as shown above. This magic methods makes sure that native methods always take precedence over your content field names to make sure Kirby works as expected. And this is also the reason why conflicting field names will not work with these shortcuts.
 </info>
 
-
-## Further reading
-
-Also make sure to check out our Cookbook recipe on (link: docs/cookbook/text/custom-fields text: custom content fields).

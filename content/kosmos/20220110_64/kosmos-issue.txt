@@ -35,9 +35,9 @@ How did you get to know Kirby and when, what was your first ever Kirby project, 
 
 ## Cookbook
 
-Alan Woo wrote a new recipe about [Git-based deployment with Dokku](https://getkirby.com/docs/cookbook/setup/git-based-deployment-with-dokku), something I always wanted to try out and never got round to. With this recipe, you get up and running in no time.
+Alan Woo wrote a new recipe about [Git-based deployment with Dokku](https://getkirby.com/docs/cookbook/development-deployment/git-based-deployment-with-dokku), something I always wanted to try out and never got round to. With this recipe, you get up and running in no time.
 
-Blueprints for Panel forms are usually static YAML files. While this is totally fine for most use cases, there are some situations where you might wish there was a more dynamic way of creating blueprints. And there is: Learn [how to create dynamic blueprints](https://getkirby.com/docs/cookbook/panel/programmable-blueprints) for different use cases with our new recipe.
+Blueprints for Panel forms are usually static YAML files. While this is totally fine for most use cases, there are some situations where you might wish there was a more dynamic way of creating blueprints. And there is: Learn [how to create dynamic blueprints](https://getkirby.com/docs/cookbook/development-deployment/programmable-blueprints) for different use cases with our new recipe.
 
 ## Kirby Plugins
 
@@ -75,7 +75,7 @@ Move code between repositories with [Copybara](https://github.com/google/copybar
 
 ## PHP
 
-The [PHPUnit Watcher](https://github.com/spatie/phpunit-watcher) automatically reruns PHPUnit tests when your source code changes. If you are interested to learn how you can integrate PHPUnit testing in your plugins, reminder that there is a [cookbook recipe](https://getkirby.com/docs/cookbook/setup/plugin-workflow) for that.
+The [PHPUnit Watcher](https://github.com/spatie/phpunit-watcher) automatically reruns PHPUnit tests when your source code changes. If you are interested to learn how you can integrate PHPUnit testing in your plugins, reminder that there is a [cookbook recipe](https://getkirby.com/docs/cookbook/plugins/plugin-workflow) for that.
 
 List of [static analysis and code style tools](https://meh.dev/php-static-analysis-tools) for PHP.
 

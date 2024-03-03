@@ -256,7 +256,7 @@ The `$kirby->response()` object provides several other methods to customize the 
 
 ## More information
 
-- (link: docs/cookbook/templating/custom-post-types text: Custom post types)
-- (link: docs/cookbook/templating/php-templates text: Kirby templates 101)
-- (link: docs/cookbook/setup/debugging-basics text: Basic error hunting & prevention)
-- (link: docs/cookbook/templating/one-pager text: One-pager site)
+- (link: docs/cookbook/content-structure/custom-post-types text: Custom post types)
+- (link: docs/cookbook/php/php-templates text: Kirby templates 101)
+- (link: docs/cookbook/php/debugging-basics text: Basic error hunting & prevention)
+- (link: docs/cookbook/content-structure/one-pager text: One-pager site)

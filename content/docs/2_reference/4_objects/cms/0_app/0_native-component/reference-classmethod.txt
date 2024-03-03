@@ -2,4 +2,4 @@ Text:
 
 ## Example
 
-See (link:docs/cookbook/extensions/kirby-loves-cdn text: Kirby loves CDN)
+See (link:docs/cookbook/performance/kirby-loves-cdn text: Kirby loves CDN)

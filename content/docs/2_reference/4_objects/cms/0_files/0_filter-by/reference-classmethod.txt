@@ -1,4 +1,4 @@
-Text: 
+Text:
 
 ## Values for `$args`
 
@@ -30,4 +30,4 @@ $files = $page->files()->filterBy('template', true);
 
 ## More information
 
-(link: docs/cookbook/content/filtering text: Filtering compendium)
+(link: docs/cookbook/collections/filtering text: Filtering compendium)

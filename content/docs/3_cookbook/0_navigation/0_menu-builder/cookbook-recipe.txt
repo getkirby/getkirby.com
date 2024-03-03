@@ -22,7 +22,7 @@ Text:
 
 (image: menu-builder.png)
 
-In our (link: docs/cookbook/templating/menus text: menus recipe), we show how to build several types of menus with Kirby. However, those examples work with main pages and their children and have their limits when it comes to building more flexible menus where the depth of a page is not important or where you need multiple menus with selected pages.
+In our (link: docs/cookbook/navigation/menus text: menus recipe), we show how to build several types of menus with Kirby. However, those examples work with main pages and their children and have their limits when it comes to building more flexible menus where the depth of a page is not important or where you need multiple menus with selected pages.
 
 In this recipe, we will look how we can build such custom menus where editors can pick the pages they want to include in a menu, or how we can even include external links.
 

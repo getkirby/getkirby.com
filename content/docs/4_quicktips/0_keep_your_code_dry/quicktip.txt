@@ -65,7 +65,7 @@ foreach($articles as $article) {
 ?>
 ```
 
-Let's consider another example from our cookbook, the (link: docs/cookbook/templating/menus text: treemenu snippet) in an extended version with many additional conditional attributes:
+Let's consider another example from our cookbook, the (link: docs/cookbook/navigation/menus text: treemenu snippet) in an extended version with many additional conditional attributes:
 
 ```php
 <?php if (!isset($subpages)) $subpages = $site->children(); ?>

@@ -258,4 +258,4 @@ foreach($relatedPages as $relatedPage): ?>
 
 ## More information
 
-(link: docs/cookbook/content/related-articles text: Related articles)
+(link: docs/cookbook/collections/related-articles text: Related articles)

@@ -9,7 +9,7 @@
 		[
 			'title' => 'Media API',
 			'text'  => 'Kirby comes with async image processing. Resize, crop and convert your images on the fly. Make sure that every visitor gets the perfect image size.',
-			'link' => '/docs/guide/templates/resize-images-on-the-fly',
+			'link' => '/docs/guide/files/resize-images-on-the-fly',
 			'image' => '<div class="prose">' . $page->assets()->kt() . '</div>'
 		],
 		[

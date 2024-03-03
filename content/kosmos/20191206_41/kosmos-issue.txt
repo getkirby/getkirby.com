@@ -74,7 +74,7 @@ Wrap this in a plugin and define your replacements via the Panel or in your `con
 
 **Menus**
 
-There are many ways to build menus in Kirby just using code. But often, editors have a need to create custom menus via the Panel. Our [Menu Builder recipe](https://getkirby.com/docs/cookbook/templating/menu-builder)shows you several ways to achieve this.
+There are many ways to build menus in Kirby just using code. But often, editors have a need to create custom menus via the Panel. Our [Menu Builder recipe](https://getkirby.com/docs/cookbook/navigation/menu-builder)shows you several ways to achieve this.
 
 **Panel views**
 

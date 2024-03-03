@@ -42,7 +42,7 @@ Kirby will automatically load the controller for your template if it can find on
 
 You can also use a general site controller called `site.php` which you put into your `/site/controllers` folder like any other page controller. Such a general site controller is useful if multiple templates share the same logic, while they don't need any template specific logic. It works like a normal page controller but will only be applied to templates that do not have a specific page controller. It will *not* be loaded in addition to a template-specific controller.
 
-If you want to share logic between multiple templates and still add template specific logic in a dedicated page controller, check out the (link: docs/cookbook/templating/shared-controllers text: Shared controllers recipe).
+If you want to share logic between multiple templates and still add template specific logic in a dedicated page controller, check out the (link: docs/cookbook/development-deployment/shared-controllers text: Shared controllers recipe).
 
 
 ## Creating a controller
@@ -213,4 +213,4 @@ The properties defined in the `$data` array are exposed to **templates** as glob
 
 ## More information
 
-(link: docs/cookbook/templating/shared-controllers text: Shared controllers)
+(link: docs/cookbook/development-deployment/shared-controllers text: Shared controllers)

@@ -168,7 +168,7 @@ The `split()` method similarly applies when dealing with a [multiselect](https:/
 
 ### Updating content within blocks
 
-When dealing with contents in a blocks field, we have to create a modified clone of the original Blocks object and replace the field's value with that (see also [this recipe](https://getkirby.com/docs/cookbook/templating/update-blocks-programmatically) to see the underlying principle).
+When dealing with contents in a blocks field, we have to create a modified clone of the original Blocks object and replace the field's value with that (see also [this recipe](https://getkirby.com/docs/quicktips/update-blocks-programmatically) to see the underlying principle).
 
 ```php
 foreach($collection as $page) {

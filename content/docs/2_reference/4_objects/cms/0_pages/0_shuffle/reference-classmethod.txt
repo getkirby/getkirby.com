@@ -1,4 +1,4 @@
-Text: 
+Text:
 
 ## Example
 
@@ -17,4 +17,4 @@ Text:
 
 ## More information
 
-(link: docs/cookbook/content/random-content text: Random content)
+(link: docs/cookbook/collections/random-content text: Random content)

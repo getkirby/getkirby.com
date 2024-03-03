@@ -51,9 +51,9 @@ The [FeedReader plugin](https://getkirby.com/plugins/adspectus/feedreader) provi
 
 ## Cookbook recipes
 
-Learn how to share templates, controllers, and page models between pages with different blueprints with our new cookbook recipe [Different blueprints — same template](https://getkirby.com/docs/cookbook/templating/different-blueprints-same-template).
+Learn how to share templates, controllers, and page models between pages with different blueprints with our new cookbook recipe [Different blueprints — same template](https://getkirby.com/docs/quicktips/different-blueprints-same-template).
 
-[Kirby meets Tailwind CSS](https://getkirby.com/docs/cookbook/setup/kirby-meets-tailwindcss): A short introduction to getting up and running with Tailwind CSS in your Kirby website by Christian Fickinger.
+[Kirby meets Tailwind CSS](https://getkirby.com/docs/cookbook/frontend/kirby-meets-tailwindcss): A short introduction to getting up and running with Tailwind CSS in your Kirby website by Christian Fickinger.
 
 ## Kirby in the wild 2
 

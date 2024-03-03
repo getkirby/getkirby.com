@@ -14,7 +14,7 @@ Text:
 
 In this example, let us look at how we can combine "virtual" content with content from the file system.
 
-We will extend the (link: docs/guide/virtual-pages/content-from-csv text: Content from a spreadsheet) example with content we actually add in the `content` folder, let's say because we want to add an image to each animal and some additional content.
+We will extend the (link: docs/guide/virtual-content/content-from-csv text: Content from a spreadsheet) example with content we actually add in the `content` folder, let's say because we want to add an image to each animal and some additional content.
 
 To this end, we add new subpages to the `/animals` parent page, using the same slugs that we generated in the `animals.php` model.
 
@@ -31,7 +31,7 @@ content/
             potus-flavus.jpg
         0_sauromalus-obesus/
             animal.txt
-            sauromalus-obesus.jpg    
+            sauromalus-obesus.jpg
 ```
 <info>
 Make sure to prepend the folder number, because we also use the number in our model.
@@ -142,7 +142,7 @@ And finally, we modify our subpage template to fetch the additonal content:
     <div class="animal-picture">
         <?= $image ?>
     </div>
-  <?php endif ?>  
+  <?php endif ?>
   <div class="animal-description">
     <?= $page->description()->kt() ?>
     <?= $page->habitat()->kt() ?>

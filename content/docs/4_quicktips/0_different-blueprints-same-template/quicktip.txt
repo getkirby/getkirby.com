@@ -1,4 +1,4 @@
-Title: Different blueprints — same template
+Title: Sharing templates across blueprints
 
 ----
 

@@ -15,4 +15,4 @@ $newBlock = new Kirby\Cms\Block([
 $blocks = $blocks->add($newBlock);
 ```
 
-See also (link: docs/cookbook/templating/update-blocks-programmatically text: Add blocks to a blocks field programmatically).
+See also (link: docs/quicktips/update-blocks-programmatically text: Add blocks to a blocks field programmatically).

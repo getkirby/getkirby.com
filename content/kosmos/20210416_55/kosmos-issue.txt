@@ -60,7 +60,7 @@ A new kid on the blocks: True to its name, the [Accordion Block](https://github.
 
 ++++
 
-Our latest addition to the cookbook shows you [how to create virtual pages from images in a parent page](https://getkirby.com/docs/cookbook/templating/virtual-pages-image-gallery). Show files with their metadata as if they were pages.
+Our latest addition to the cookbook shows you [how to create virtual pages from images in a parent page](https://getkirby.com/docs/guide/virtual-content/virtual-pages-image-gallery). Show files with their metadata as if they were pages.
 
 (…columns)
 

@@ -400,6 +400,6 @@ $emailBody = snippet('email', $data, slots: true)->render(slots: [
 
 ## More information
 
-- (link: docs/cookbook/templating/menus text: Menus)
-- (link: docs/cookbook/templating/previous-next text: Previous / Next navigation)
-- (link: docs/cookbook/templating/pagination text: Pagination)
+- (link: docs/cookbook/navigation/menus text: Menus)
+- (link: docs/cookbook/navigation/previous-next text: Previous / Next navigation)
+- (link: docs/cookbook/navigation/pagination text: Pagination)

@@ -64,11 +64,11 @@ Florian Ziegler writes about his [experiences with using Kirby for the first tim
 
 ## Cookbook recipes
 
-A recipe many have been waiting for: Moritz Stückler explains [how to create a Nginx configuration file](https://getkirby.com/docs/cookbook/setup/nginx) that works with Kirby step-by-step.
+A recipe many have been waiting for: Moritz Stückler explains [how to create a Nginx configuration file](https://getkirby.com/docs/cookbook/development-deployment/nginx) that works with Kirby step-by-step.
 
 [Files firewall](https://getkirby.com/docs/cookbook/security/files-firewall): Create a download section and protect your files from being accessed by unauthorized visitors. Can be combined with [access restrictions](https://getkirby.com/docs/cookbook/security/access-restriction) to parts of your site.
 
-Christian Fickinger contributed a recipe about [how to create nested blocks](https://getkirby.com/docs/cookbook/panel/nested-blocks), using the example of a FAQ section with question/answer blocks.
+Christian Fickinger contributed a recipe about [how to create nested blocks](https://getkirby.com/docs/cookbook/content-structure/nested-blocks), using the example of a FAQ section with question/answer blocks.
 
 Did you know you cannot just have virtual pages in a Kirby installation, but also virtual files? Learn how with our new [Virtual Files recipe](https://getkirby.com/docs/cookbook/extensions/virtual-files).
 
@@ -124,7 +124,7 @@ Sean Boots on [strategies to avoid vendor-lock-in](https://sboots.ca/2021/05/12/
 
 [Flat Data](https://octo.github.com/projects/flat-data) is an experiment that explores how to work with datasets in git repositories on GitHub and versioning them.
 
-[Notion](https://www.notion.so/), the notes & collaboration tool, now got an [API](https://developers.notion.com/) (currently in beta), which allows you to integrate your Notion data in other tools (e.g. [Virtual pages](https://getkirby.com/docs/guide/virtual-pages) in Kirby).
+[Notion](https://www.notion.so/), the notes & collaboration tool, now got an [API](https://developers.notion.com/) (currently in beta), which allows you to integrate your Notion data in other tools (e.g. [Virtual pages](https://getkirby.com/docs/guide/virtual-content) in Kirby).
 
 [JavaScript Notes for beginners](https://wesbos.com/javascript) from Wes Bos.
 

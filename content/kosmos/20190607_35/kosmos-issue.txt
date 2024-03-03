@@ -62,7 +62,7 @@ We have added quite a few new recipes to our cookbook:
 
 - [Subpage builder](https://getkirby.com/docs/cookbook/extensions/subpage-builder): With the subpage builder, you can auto-generate subpages recursively when you create a new page.
 
-- [Fetching field options:](https://getkirby.com/docs/cookbook/templating/fetching-field-options) This recipe answers an often asked question: how to fetch the text labels from your fields' options.
+- [Fetching field options:](https://getkirby.com/docs/cookbook/i18n/fetching-field-options) This recipe answers an often asked question: how to fetch the text labels from your fields' options.
 
 - [Cleaning up content files](https://getkirby.com/docs/cookbook/extensions/content-file-cleanup): During development, you often restructure content, so that you end up with unused fields in your content files. This recipe shows how to remove this clutter.
 

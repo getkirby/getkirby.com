@@ -29,4 +29,3 @@ $filtered = $page->children()->filterby('intendedTemplate', 'article');
 ## Further Reading
 
 - (link: docs/guide/templates/basics text: Templates)
-- (link: docs/cookbook/setup/kirby-in-a-nutshell#all-files-and-folders Text: Kirby in a nutshell: files and folders)

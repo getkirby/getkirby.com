@@ -26,7 +26,7 @@ Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with
 ## Useful links
 - (link: docs/guide/plugins/plugin-basics#kirby-plugin-one-ring-to-rule-them-all text: Registering extensions)
 - (link: docs/reference/plugins/extensions/blocks text: Block previews)
-- (link: docs/cookbook/panel/to-bundle-or-not-to-bundle text: To bundle or not to bundle: differences of creating plugins with or without a build process)
+- (link: docs/cookbook/plugins/to-bundle-or-not-to-bundle text: To bundle or not to bundle: differences of creating plugins with or without a build process)
 
 
 ## What we will be building
@@ -370,7 +370,7 @@ Theoretically, we could now go ahead and put all our methods and the complete te
 
 But that gets a bit tedious for more complex block previews. We can make our lives a lot easier with single file components.
 
-Feel free to stop here and relax if your blocks don't require more than that. Or head over to our (link: docs/cookbook/panel/to-bundle-or-not-to-bundle text: To bundle or not to bundle: differences of creating plugins with or without a build process) recipe to learn how to create our complete example without a build process.
+Feel free to stop here and relax if your blocks don't require more than that. Or head over to our (link: docs/cookbook/plugins/to-bundle-or-not-to-bundle text: To bundle or not to bundle: differences of creating plugins with or without a build process) recipe to learn how to create our complete example without a build process.
 
 ## `index.js` with single file component
 

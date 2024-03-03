@@ -34,7 +34,7 @@ Although life usually slows down a bit during the summer months and Bastian was 
 
 ## Kirby docs
 
-Our docs have a new chapter about [Kirby & Privacy](https://getkirby.com/docs/guide/kirby-and-privacy). Check it out when you are about to finalize your privacy page. And we extended our Virtual Pages guide with an example of [integrating content from an RSS feed](https://getkirby.com/docs/guide/virtual-pages/content-from-rss-feed).
+Our docs have a new chapter about [Kirby & Privacy](https://getkirby.com/docs/guide/kirby-and-privacy). Check it out when you are about to finalize your privacy page. And we extended our Virtual Pages guide with an example of [integrating content from an RSS feed](https://getkirby.com/docs/guide/virtual-content/content-from-rss-feed).
 
 ## Annotated Starterkit
 

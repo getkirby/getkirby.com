@@ -22,7 +22,7 @@ Tags: media, content
 
 Text:
 
-With Kirby, you can merge and aggregate all sorts of content from different sources. This does not only (link: docs/guide/virtual-pages text: work for pages) that you can create from APIs, spreadsheets or databases, but also for files. In this recipe, we will look into two options how we can implement this (and briefly mention another alternative without actually implementing it).
+With Kirby, you can merge and aggregate all sorts of content from different sources. This does not only (link: docs/guide/virtual-content text: work for pages) that you can create from APIs, spreadsheets or databases, but also for files. In this recipe, we will look into two options how we can implement this (and briefly mention another alternative without actually implementing it).
 
 Note that while the two options discussed in this recipe focus on images, it would work just as well for other file types.
 
@@ -32,7 +32,7 @@ Note that while the two options discussed in this recipe focus on images, it wou
 
 - A running Kirby installation: (link: try text: Plainkit or Starterkit)
 - A code editor
-- Basic understand of (link: docs/cookbook/templating/understanding-oop text: Object Oriented Programming) is helpful for a better understanding of the second example
+- Basic understand of (link: docs/cookbook/php/understanding-oop text: Object Oriented Programming) is helpful for a better understanding of the second example
 
 Ready? Let’s get going…
 
@@ -691,5 +691,5 @@ In this recipe we explored two different ways to handle completely virtual files
 
 - (link: docs/guide/templates/page-models text: Page models)
 - (link: docs/reference/plugins/components/file-urls text: `file::url`) and (link: docs/reference/plugins/components/file-version text: `file::version`) components
-- (link: docs/guide/virtual-pages text: Virtual pages)
+- (link: docs/guide/virtual-content text: Virtual pages)
 - (link: docs/cookbook/extensions/kirby-loves-cdn text: Kirby loves CDN)

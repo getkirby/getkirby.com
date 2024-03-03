@@ -22,7 +22,7 @@ Tags: configuration, deployment, multisite
 
 Text:
 
-In (link: docs/cookbook/setup/multisite text: this recipe) a scenario for running multiple sites via the same Kirby setup has been presented. The proposed setup makes use of the fact that you need only one `/kirby` folder where the heart of Kirby is beating. However, it is also based on the assumption that you have only one virtual (or even real) webserver host from where your various sites will be served. The `index.php` at the root of your installation in this scenario works like a dispatcher and therefore needs some modification.
+In (link: docs/quicktips/multisite text: this recipe) a scenario for running multiple sites via the same Kirby setup has been presented. The proposed setup makes use of the fact that you need only one `/kirby` folder where the heart of Kirby is beating. However, it is also based on the assumption that you have only one virtual (or even real) webserver host from where your various sites will be served. The `index.php` at the root of your installation in this scenario works like a dispatcher and therefore needs some modification.
 
 Even though the proposed setup is easy to accomplish, some might dislike the fact of running multiple websites from one webserver host - amongst others. Instead, you might prefer one virtual host per site, which has the advantage that - from a webserver's perspective - you have clearly seperated installations and configurations for each site. Moreover it provides the ability to extend the capabilities of single hosts while narrowing down others, depending on your needs. Last not least you can enable or disable single hosts without affecting the others.
 
@@ -34,7 +34,7 @@ The following setup was tested on Linux OS (Ubuntu 18.04 and Debian 9) together 
 
 ## In the filesystem
 
-The proposed filesystem layout in (link: docs/cookbook/setup/multisite text: the above-mentioned recipe) looks like this:
+The proposed filesystem layout in (link: docs/quicktips/multisite text: the above-mentioned recipe) looks like this:
 
 ```filesystem
   kirby/
@@ -196,5 +196,5 @@ Want to switch `my-site.com` back to Kirby 3.3.1? You know how easy this is by y
 
 ## Licenses for your multi-site
 
-Of course, like explained in (link: docs/cookbook/setup/multisite#licenses-for-your-multi-site text: this recipe), you need a license for each of your sites.
+A multi-site always needs a license per domain just like a standard setup. See the (link: license text: Kirby license terms)
 

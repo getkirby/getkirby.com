@@ -132,7 +132,7 @@ More information:
 
 - (link: docs/reference/panel/styling text: Styling the Panel)
 - (link: docs/reference/plugins/ui#colors text: All CSS properties)
-- (link: docs/cookbook/panel/customizing-panel text: Examples for customizing the Panel)
+- (link: docs/quicktips/customizing-panel text: Examples for customizing the Panel)
 
 Instead of adding it to your `config.php`, CSS to be applied globally in the Panel can also be added via a plugin: if an `index.css` file is present in the root folder of a plugin, it will be automatically loaded into the Panel.
 

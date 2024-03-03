@@ -35,4 +35,4 @@ $items = $page->children()->filterBy('tag', 'development', ';');
 
 ## More information
 
-(link: docs/cookbook/content/filtering text: Filtering compendium)
+(link: docs/cookbook/collections/filtering text: Filtering compendium)

@@ -48,9 +48,9 @@ The first in a hopefully long list of custom blocks for the new blocks field: A 
 
 ### Cookbook recipes
 
-If you want to get a basic understanding of objects and classes in Kirby, check out our new [Understanding OOP recipe](https://getkirby.com/docs/cookbook/templating/understanding-oop).
+If you want to get a basic understanding of objects and classes in Kirby, check out our new [Understanding OOP recipe](https://getkirby.com/docs/cookbook/php/understanding-oop).
 
-[Load more with Ajax](https://getkirby.com/docs/cookbook/templating/ajax-load-more): Long on the wishlist, the popular recipe has been brought back for Kirby 3 with a new approach and free from jQuery.
+[Load more with Ajax](https://getkirby.com/docs/cookbook/content-representations/ajax-load-more): Long on the wishlist, the popular recipe has been brought back for Kirby 3 with a new approach and free from jQuery.
 
 ## More Kirby
 

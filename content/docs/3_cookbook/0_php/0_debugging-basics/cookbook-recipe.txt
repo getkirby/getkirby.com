@@ -236,7 +236,7 @@ if (!empty($tags)) {
 
 You might also be interested in checking out some PHP debugging tools.
 
-- (link: https://xdebug.org text: Xdebug) (also see our (link: docs/cookbook/setup/php-debugging-with-xdebug text: recipe about Xdebug))
+- (link: https://xdebug.org text: Xdebug) (also see our (link: docs/cookbook/php/php-debugging-with-xdebug text: recipe about Xdebug))
 - (link: https://addons.mozilla.org/de/firefox/addon/firephp/ text: FirePHP)
 - (link: https://craig.is/writing/chrome-logger text: Chrome Logger, formerly known as ChromePHP)
 - (link:https://myray.app/ text: Ray), (link: https://getkirby.com/plugins/genxbe/ray text: Ray plugin for Kirby)
@@ -244,4 +244,4 @@ You might also be interested in checking out some PHP debugging tools.
 
 ## Further reading
 
-(link: docs/cookbook/setup/php-debugging-with-xdebug text: First steps to start debugging with Xdebug)
+(link: docs/cookbook/php/php-debugging-with-xdebug text: First steps to start debugging with Xdebug)

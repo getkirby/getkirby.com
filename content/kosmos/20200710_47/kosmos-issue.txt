@@ -85,7 +85,7 @@ Sebastian Greger wrote a great recipe about [conditionally disabling the page ca
 
 When Kirby's built-in permission features are a bit too limiting for your use case, check out [these tips & tricks](https://getkirby.com/docs/cookbook/extensions/permission-tricks).
 
-[To slash or not to slash](https://getkirby.com/docs/cookbook/setup/trailing-slash), that's up to you, but in our new recipe, we show you how.
+[To slash or not to slash](https://getkirby.com/docs/quicktips/trailing-slash), that's up to you, but in our new recipe, we show you how.
 
 ## CSS
 

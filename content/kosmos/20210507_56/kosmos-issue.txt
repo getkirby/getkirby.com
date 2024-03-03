@@ -48,7 +48,7 @@ Fetch Instagram photos without the need for app approval. The [Kirby Instagram p
 
 [Simple Staging](https://github.com/floriankarsten/simple-staging) is a plugin job for the [Janitor plugin](https://github.com/bnomei/kirby3-janitor/) and provides a simple staging setup via PHP or rsync (still beta).
 
-## Cookbook recipe 
+## Cookbook recipe
 
 (columns…)
 
@@ -58,7 +58,7 @@ Fetch Instagram photos without the need for app approval. The [Kirby Instagram p
 
 ### Kirby meets Docker
 
-[Get started with Docker for development](https://getkirby.com/docs/cookbook/setup/kirby-meets-docker): Quickly spin up Kirby's Starterkit in a Docker container, bind local directories and add other services like MailHog.
+[Get started with Docker for development](https://getkirby.com/docs/cookbook/development-deployment/kirby-meets-docker): Quickly spin up Kirby's Starterkit in a Docker container, bind local directories and add other services like MailHog.
 
 (…columns)
 

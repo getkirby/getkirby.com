@@ -79,7 +79,7 @@ If you are a fan of WYSIWYG editors, you will be happy about this new kid on the
 
 ## Cookbook
 
-Isaac Bordons contributed a recipe about [branding the Panel](https://getkirby.com/docs/cookbook/panel/panel-branding).
+Isaac Bordons contributed a recipe about [branding the Panel](https://getkirby.com/quicktips/panel-branding).
 
 There are already [a lot of ways to customize Kirby](https://getkirby.com/docs/guide/plugins/plugin-types), but if you want to go one step further, you can override Kirby's core classes to bend Kirby even more to your use cases. Our [new recipe shows you how](https://getkirby.com/docs/cookbook/extensions/replacing-core-classes).
 

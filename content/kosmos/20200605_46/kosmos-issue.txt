@@ -41,7 +41,7 @@ class NotePage extends Page
 {
   public function isReadable(): bool
   {
-    if (($user = $this->author()->toUser()) && $user->is($this->kirby()->user()) || 
+    if (($user = $this->author()->toUser()) && $user->is($this->kirby()->user()) ||
         $this->kirby()->user()->isAdmin()) {
           return true;
     }
@@ -100,7 +100,7 @@ Convert and transform WordPress WXR RSS export files into a new Kirby 3 site wit
 
 Add anchors and a Table of Contents to your Kirby pages with a little help from our brand-new [Of anchors and ToCs, part 1](https://getkirby.com/docs/cookbook/extensions/table-of-contents) recipe.
 
-Great stuff: [Learn how to set up a plugin workflow](https://getkirby.com/docs/cookbook/setup/monolithic-plugin-setup) that allows you to both develop and test your plugin from the same Git repository with Hristiyan Dodov's recipe.
+Great stuff: [Learn how to set up a plugin workflow](https://getkirby.com/docs/cookbook/plugins/monolithic-plugin-setup) that allows you to both develop and test your plugin from the same Git repository with Hristiyan Dodov's recipe.
 
 ## Other Kirby stuff
 

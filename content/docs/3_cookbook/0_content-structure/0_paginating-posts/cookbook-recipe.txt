@@ -151,5 +151,5 @@ Instead of using manual page breaks, you could split your text by other criteria
 
 Or you could add a little table of contents on each page.
 
-You can also extend the pagination navigation and add a numbered link for each page, making use of the `$pagination->range()` method. You can find an example in our (link: docs/cookbook/templating/pagination text: pagination recipe).
+You can also extend the pagination navigation and add a numbered link for each page, making use of the `$pagination->range()` method. You can find an example in our (link: docs/cookbook/navigation/pagination text: pagination recipe).
 

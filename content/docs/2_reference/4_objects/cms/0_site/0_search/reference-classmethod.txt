@@ -35,4 +35,4 @@ $results = $site->search(get('q'));
 
 ## More information
 
-(link: docs/cookbook/content/search text: Setting up a search page)
+(link: docs/cookbook/collections/search text: Setting up a search page)

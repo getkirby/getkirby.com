@@ -74,7 +74,7 @@ Learn [how to implement frontend user-registration](https://getkirby.com/docs/co
 
 Would you like to create nice preview images for your download section of PDF files on the fly? Then check out our [recipe](https://getkirby.com/docs/cookbook/extensions/create-pdf-preview-images).
 
-If you ever need to [translate exception messages on the frontend](https://getkirby.com/docs/cookbook/templating/translate-exception-messages), our quick tip recipe has you covered.
+If you ever need to [translate exception messages on the frontend](https://getkirby.com/docs/quicktips/translate-exception-messages), our quick tip recipe has you covered.
 
 
 ## A new newsletter service

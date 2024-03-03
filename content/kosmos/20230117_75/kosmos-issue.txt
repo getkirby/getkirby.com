@@ -121,7 +121,7 @@ Separate your snippet logic from the presentation part with the [Kirby Snippet C
 
 ## Cookbook recipes
 
-We added a new cookbook recipe for beginners: [How to add frontend libraries to your Kirby site](https://getkirby.com/docs/cookbook/templating/frontend-libraries).
+We added a new cookbook recipe for beginners: [How to add frontend libraries to your Kirby site](https://getkirby.com/docs/quicktips/frontend-libraries).
 
 
 ## This & that

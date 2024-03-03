@@ -73,7 +73,7 @@ Access to the language editor can be restricted via (link:/docs/guide/users/perm
 Language variables that you add in other languages than the default language will be stored in the default language as well. Language variables added in the default language will only be stored once translated.
 </info>
 
-If you stored your language variables in separate files as described in (link: docs/cookbook/i18n/language-variables text: this cookbook recipe) they will be read by the Panel, but then moved to the language definition files.
+If you stored your language variables in separate files as described in (link: docs/quicktips/language-variables text: this cookbook recipe) they will be read by the Panel, but then moved to the language definition files.
 
 **Core translation variables and translation variables from plugins are ignored and cannot be overwritten via the Panel.**
 </since>
@@ -97,5 +97,5 @@ You can provide a fallback if the language variable is not defined:
 
 Check out the following cookbook recipes to find out how to make language variables more flexible:
 
-- (link: docs/cookbook/i18n/language-variablestext: Flexible language variables)
-- (link: docs/cookbook/i18n/using-variables-in-language-stringstext: Using placeholders in language strings)
+- (link: docs/quicktips/language-variables text: Flexible language variables)
+- (link: docs/quicktips/using-variables-in-language-strings text: Using placeholders in language strings)

@@ -89,7 +89,7 @@ return [
 	'virtual-pages' => [
 		'text' => 'Virtual pages',
 		'icon' => 'virtual',
-		'link' => '/docs/guide/virtual-pages'
+		'link' => '/docs/guide/virtual-content'
 	],
 	'hooks' => [
 		'text' => 'Hooks',
@@ -104,6 +104,6 @@ return [
 	'multi-site' => [
 		'text' => 'Multi-site setup',
 		'icon' => 'sitemap',
-		'link' => '/docs/cookbook/setup/multisite'
+		'link' => '/docs/quicktips/multisite'
 	],
 ];
