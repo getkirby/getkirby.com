@@ -45,7 +45,10 @@ Once DDEV is installed and running, setting up a project is done with a few quic
 
 But let's go through these general steps in a little more detail and see how we can customize them for our needs.
 
-## Starting from an existing project
+## Different use cases
+
+(tabs…)
+=== Existing project
 
 If you already have a existing Kirby project (Starterkit or your own project), you can use that. Note that if you have a public folder setup, the configuration is a bit different, see (link: #public-folder-setup text: Public folder setup).
 
@@ -55,7 +58,7 @@ If you already have a existing Kirby project (Starterkit or your own project), y
     ```bash
     ddev config --php-version=8.3 --omit-containers=db
     ```
-&nbsp;
+
     You can run `ddev config` without any options, in that case the default config settings are used. Here, however, we tell DDEV
       * that we want to use PHP 8.3 (which is the most current actively supported PHP version at the time of writing). If you want to run on another version, adapt this flag accordingly.
       * that we want to omit spinning up a database container. Since Kirby is a flat file system that doesn't rely on a database, we don't need this container.
@@ -76,7 +79,7 @@ If you already have a existing Kirby project (Starterkit or your own project), y
    Successfully started <yourfoldername>
    Project can be reached at http://<yourfoldername>.ddev.site http://127.0.0.1:51312
    ```
-&nbsp;
+
 
 4. And that's it, your site is now accessible at `https://<foldername>.ddev.site` in your browser, where `<foldername>` refers to the folder in which you ran the above commands. Launch the site with:
 
@@ -86,32 +89,33 @@ If you already have a existing Kirby project (Starterkit or your own project), y
 
 That was quick, right?
 
-## Spinning up a fresh Starterkit via composer command
+=== Using composer command
 
 Alternatively, we can create a new Kirby project from scratch. Here are the steps:
 
 1. Create a new project folder and use the `cd` command to navigate into it.
 2. Inside the project folder, run the following commands one after the other:
 
-	```bash
-ddev config --php-version=8.3 --omit-containers=db
-ddev start
-ddev composer create getkirby/starterkit
-ddev launch
-	```
+   ```bash
+   ddev config --php-version=8.3 --omit-containers=db
+   ddev start
+   ddev composer create getkirby/starterkit
+   ddev launch
+   ```
 
-   &nbsp;
-   Only the third command is new, the other three we have already used above. With `ddev composer` we execute a composer command within the web container. `ddev composer create` is a special command that is adapted from `composer create-project`. Here we create a new Kirby Starterkit project in the current directory.
+
+      Only the third command is new, the other three we have already used above. With `ddev composer` we execute a composer command within the web container. `ddev composer create` is a special command that is adapted from `composer create-project`. Here we create a new Kirby Starterkit project in the current directory.
 
 <warning>
 Running the `ddev composer create` command will delete everything in the current composer root, so be very careful where you run this command!
 </warning>
 
-## Public folder setup
+=== Public folder setup
 
 When possible, we recommend a (link: docs/guide/configuration#custom-folder-setup__public-and-private-folder-setup text: public folder setup) to move all files that need not be publicly accessible out of the doc root for enhanced security.
 
 If you already have a public folder set the `docroot` flag to the name of your public folder, e.g. `public`:
+
 
 ```bash
 ddev config --docroot=public && ddev restart
@@ -125,6 +129,7 @@ ddev config --docroot=public --create-docroot && ddev restart
 
 This command will create a new `public` folder. Then move all your assets, and the `index.php` into the `public` folder. Modify the `index.php` as described in our (link: docs/guide/configuration#custom-folder-setup__public-and-private-folder-setup text: public folder documentation).
 
+(…tabs)
 
 ## Accessing your project on other devices
 
