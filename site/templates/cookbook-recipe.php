@@ -20,7 +20,6 @@
 		)
 	);
 	?>
-
 <?php endslot() ?>
 
 <?php slot('authors') ?>
