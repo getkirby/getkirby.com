@@ -16,7 +16,7 @@
 			<li><hr class="hr"></li>
 			<?php foreach ($tags as $tag): ?>
 			<li>
-				<a aria-label="<?= $tag ?> recipes" href="<?= $page->url() . '/tags/' . Str::slug($tag) ?>"<?= ariaCurrent($tag === Uri::current()->path()->last()) ?>>
+				<a aria-label="<?= $tag ?> recipes" href="<?= page('docs/quicktips')->url(). '/tags/' . Str::slug($tag) ?>"<?= ariaCurrent($tag === Uri::current()->path()->last()) ?>>
 					 <?= Str::ucFirst($tag) ?>
 				</a>
 			</li>
