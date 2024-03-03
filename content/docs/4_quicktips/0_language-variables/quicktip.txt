@@ -2,6 +2,10 @@ Title: Language variables
 
 ----
 
+Tags: i18n
+
+----
+
 Text:
 
 The "standard" way to (link: docs/guide/languages/custom-language-variables text: store language variables) in Kirby is to define an array of language variables in the language file itself, e.g. `/site/languages/de.php`.

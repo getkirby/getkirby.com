@@ -14,6 +14,10 @@ Authors: - authors/sonja-broda
 
 ----
 
+Tags: templates
+
+----
+
 Text:
 
 Content files, blueprints, templates and controllers in Kirby are all connected through their filenames: a content file `blogarticle.txt` will use the `blogarticle.yml` file when it is opened in the Panel, and will be rendered with the `blogarticle.php` template in the frontend using an `blogarticle.php` controller to load the logic if available.

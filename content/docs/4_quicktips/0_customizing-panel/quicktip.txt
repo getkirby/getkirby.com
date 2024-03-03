@@ -2,7 +2,7 @@ Title: Customize Panel
 
 ----
 
-Tags: panel
+Tags: panel, styling
 
 ----
 Text:

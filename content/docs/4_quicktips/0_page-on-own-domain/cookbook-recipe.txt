@@ -1,4 +1,15 @@
 Title: Serve page on own domain
+----
+
+Description: Serve a single page of your site on its own separate domain.
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: configuration
 
 ----
 
@@ -38,10 +49,4 @@ return [
 - You can call a (link: docs/guide/templates/page-models text: page model) for the `blog` page to make sure to render the correct URL in your navigation
 - You might want to refine this basic example if you need to make subpages work for this page
 
-----
 
-Description: Serve a single page of your site on its own separate domain.
-
-----
-
-Authors: - authors/sonja-broda

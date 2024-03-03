@@ -16,6 +16,10 @@ Authors:
 
 ----
 
+Tags: files
+
+----
+
 Text:
 
 Updating (link: docs/guide/content/files#adding-meta-data-to-your-files text: file metadata), and particularly the template that is stored for a file, is a task that comes up ever so often. Because you forgot to assign a file template in the first place or because you later changed your mind and want to assign a different template to some file types or whatever.

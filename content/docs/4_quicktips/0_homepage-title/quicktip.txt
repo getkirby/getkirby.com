@@ -1,4 +1,8 @@
-Title: Homepage title
+Title: HTML title tag
+
+----
+
+Tags: templates
 
 ----
 

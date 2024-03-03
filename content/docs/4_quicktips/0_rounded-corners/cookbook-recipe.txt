@@ -14,7 +14,7 @@ Authors: - authors/sonja-broda
 
 ----
 
-Tags: panel
+Tags: panel, styling
 
 ----
 

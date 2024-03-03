@@ -2,6 +2,10 @@ Title: Add/prevent trailing slash
 
 ----
 
+Tags: configuration
+
+----
+
 Text:
 
 Providing the same content on different URLs is usually considered problematic because of duplicate content and reduced crawl efficiency. It therefore makes sense to enforce either URLs with a trailing slash or without, i.e. have one redirect to the other.
