@@ -1,8 +1,8 @@
-Title: Virtual pages
+Title: Virtual content
 
 ----
 
-Description: In Kirby, you can integrate data from any data source and use them as if they were real Kirby pages, including creating and editing their content in the Panel.
+Description: In Kirby, you can integrate data from any data source and use them as if they were real Kirby pages or files, including creating and editing their content in the Panel.
 
 ----
 
@@ -16,7 +16,7 @@ Icon: virtual
 
 Intro:
 
-With virtual pages, you can combine Kirby's file-based architecture with content from APIs, databases, excel sheets or any other source that's readable with PHP.
+Using virtual content, you can combine Kirby's file-based architecture with content from APIs, databases, excel sheets or any other source that's readable with PHP.
 
 ----
 
