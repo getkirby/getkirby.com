@@ -1,0 +1,68 @@
+Title: Custom folder setup
+
+----
+Text:
+
+
+Kirby lets you adjust its default folder setup. Every path to a system-relevant directory is called root in Kirby. All roots can be configured when Kirby is initialized, which normally happens in your `index.php`.
+
+Here is an example in which the site and content folders are renamed.
+
+```php "/index.php"
+<?php
+
+include __DIR__ . '/kirby/bootstrap.php';
+
+$kirby = new Kirby([
+	'roots' => [
+		'index'   => __DIR__,
+		'site'    => __DIR__ . '/project',
+		'content' => __DIR__ . '/data'
+	]
+]);
+
+echo $kirby->render();
+```
+
+## All configurable roots
+
+(reference: system/roots)
+
+## Public and private folder setup
+
+In our Starterkit, we offer a flat setup that installs all folders directly in the document root of your server. This is not always the best solution, but it's the solution that is most compatible with all types of hosting.
+
+Some websites have sensitive files that must not be served by the webserver (Nginx, Apache, etc) but instead must be served securely by the application (Kirby). For proper security, this means the sensitive files must not be hosted in the document root, but instead must be outside the reach of the webserver. The common way to do this is to put directories of sensitive files one level *above* the document root (at the same level as the document root) so that the webserver cannot accidentlly serve them.
+
+### index.php
+
+The key to this setup is the `index.php` in the `public` folder:
+
+```php "/public/index.php"
+<?php
+
+include __DIR__ . '/../kirby/vendor/autoload.php';
+
+$kirby = new Kirby([
+    'roots' => [
+        'index'    => __DIR__,
+        'base'     => $base    = dirname(__DIR__),
+        'content'  => $base . '/content',
+        'site'     => $base . '/site',
+        'storage'  => $storage = $base . '/storage',
+        'accounts' => $storage . '/accounts',
+        'cache'    => $storage . '/cache',
+        'sessions' => $storage . '/sessions',
+    ]
+]);
+
+echo $kirby->render();
+```
+
+<info>
+Note that the path to `/vendor/autoload.php` might vary depending on your setup, for example when you install Kirby with Composer.
+</info>
+
+###  Shared storage folder
+
+This example does not only use a public folder setup, it also places accounts, cache and sessions folders in a shared storage folder. This can be a useful pattern to keep track of those additional folders that need to be writable by Kirby.

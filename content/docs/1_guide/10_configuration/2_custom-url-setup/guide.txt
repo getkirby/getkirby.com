@@ -1,0 +1,30 @@
+Title: Custom URL setup
+
+----
+Text:
+
+If you want to serve media and assets from other domains than your main domain, you can define custom URLs for all public facing folders.
+
+This allows you to store your media or assets in other locations on your server or even on a CDN.
+
+Your custom URLs can be configured when Kirby is initialized, which normally happens in your `index.php`. In the example below, custom URLs are set for the `media` and `assets` folders:
+
+```php "/index.php"
+<?php
+
+include __DIR__ . '/kirby/bootstrap.php';
+
+$kirby = new Kirby([
+	'urls' => [
+		'index'  => 'https://getkirby.com',
+		'media'  => 'https://media.getkirby.com',
+		'assets' => 'https://assets.getkirby.com',
+	]
+]);
+
+echo $kirby->render();
+```
+
+### All configurable URLs
+
+(reference: system/urls)
