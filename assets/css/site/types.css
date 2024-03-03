@@ -21,6 +21,9 @@
 .type.type-array {
 	background: var(--color-aqua-400);
 }
+.type.type-null {
+	background: var(--color-gray-300);
+}
 .type.type-object,
 .type.type-class {
 	background: var(--color-yellow-400);
