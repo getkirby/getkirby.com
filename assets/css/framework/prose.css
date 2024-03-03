@@ -161,7 +161,7 @@
 	display: inline-flex;
 	font-size: 0.825em;
 	max-width: 100%;
-	padding: 0 0.5em;
+	padding-inline: 0.375rem;
 	border-radius: 3px;
 	background: var(--prose-code-bg);
 	color: var(--prose-color-highlight);
