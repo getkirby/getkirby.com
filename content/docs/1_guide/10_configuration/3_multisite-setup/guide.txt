@@ -12,7 +12,8 @@ Authors: - authors/sonja-broda
 
 ----
 
-Tags: configuration
+
+Category: configuration
 
 ----
 
@@ -22,7 +23,7 @@ You can run multiple sites via the same Kirby setup. This can help you maintain 
 
 ## Custom folder and URL setup
 
-A multi-site setup extends Kirby’s possibility to define your (link: docs/guide/configuration#custom-folder-setup text: custom folder setup) and (link: docs/guide/configuration#custom-url-setup text: custom URL setup).
+A multi-site setup extends Kirby’s features to define your (link: docs/guide/configuration#custom-folder-setup text: custom folder setup) and (link: docs/guide/configuration#custom-url-setup text: custom URL setup).
 
 ## Setting up your multisite
 
@@ -113,3 +114,7 @@ $kirby = new Kirby([
 ## Licenses for your multi-site
 
 Even when running multiple sites through the same setup and code, you need a license for each of these sites: A single license is valid for a single Kirby installation, running on a single domain. If you add additional installations (i.e. under additional subdomains or subfolders) you need to (link: buy text: purchase licenses) for each of those installations.
+
+## Further reading
+
+You can also set up a multi-site environment via symlinks, see (link: docs/cookbook/development-deployment/multisite-variant text: Alternative multisite setup).
