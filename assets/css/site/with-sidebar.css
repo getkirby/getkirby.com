@@ -4,15 +4,21 @@
 		grid-gap: 3rem;
 		grid-template-columns: repeat(4, 1fr);
 	}
-	.with-sidebar > :first-child {
+	.with-sidebar > :last-child {
 		grid-column-start: 2;
 		grid-column-end: -1;
 	}
-	.with-sidebar > :last-child {
-		grid-row-start: 1;
-		grid-column-start: 1;
-	}
 	.with-sidebar > article {
 		width: 100%;
+	}
+
+	.with-sidebar .sidebar-mobile-navigate {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 48rem) {
+	.with-sidebar .sidebar :where(.h1, .sidebar-group, ul) {
+		display: none;
 	}
 }

@@ -8,8 +8,16 @@
 	<main id="main" class="main">
 		<div class="container">
 			<div class="with-sidebar">
-				<article class="mb-24">
+				<?php if ($sidebar = $slots->sidebar()): ?>
+					<?= $sidebar ?>
+				<?php else: ?>
+					<?php snippet('sidebar', [
+						'title' => 'Kirby',
+						'menu'  => collection('kirby')
+					]) ?>
+				<?php endif ?>
 
+				<article class="mb-24">
 					<?php if ($header = $slots->header()): ?>
 						<?= $header ?>
 					<?php else: ?>
@@ -51,17 +59,7 @@
 							<?php snippet('layouts/github-edit') ?>
 						</footer>
 					<?php endif ?>
-
-				</article>
-
-				<?php if ($sidebar = $slots->sidebar()): ?>
-					<?= $sidebar ?>
-				<?php else: ?>
-					<?php snippet('sidebar', [
-						'title' => 'Kirby',
-						'menu'  => collection('kirby')
-					]) ?>
-				<?php endif ?>
+				</article
 			</div>
 		</div>
 	</main>
