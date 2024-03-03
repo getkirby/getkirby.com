@@ -28,8 +28,12 @@ Text:
 
 Want to explore Kirby a bit without installing anything first? Check out our (link: /try text: instant online demo).
 
-## Download and installation
+## Installing Kirby
 
+You can install Kirby in a few quick steps in different ways.
+
+(tabs…)
+=== Manual
 1. We provide two downloadable kits for you to get started with.
 
 (docs: kits)
@@ -38,7 +42,61 @@ Want to explore Kirby a bit without installing anything first? Check out our (li
 3. Visit your new Kirby site in your browser at `yourdomain.com`
 4. Visit the (glossary: Panel) at `yourdomain.com/panel`
 
+
+=== Kirby CLI
+
+You can install a Kirby Starterkit via the (link: https://github.com/getkirby/cli text: Kirby CLI) as follows:
+
+1. Starterkit
+```bash
+kirby install:kit Starterkit
+```
+
+2. Plainkit
+```bash
+kirby install:kit Plainkit
+```
+
+In both cases you will be prompted to specify a folder name to install into.
+
+More information about installing and updating Kirby via the CLI in our (link: docs/guide/install-guide/cli text: installation guide).
+
+=== Composer
+
+(link: https://getcomposer.org text: Composer) is a dependency manager for PHP. If you have never used Composer before, follow the instruction on the (link: https://getcomposer.org/doc/00-intro.md text: Composer website).
+
+In a terminal window, navigate to the place where you want to install Kirby. Then run one of the following commands to create a new project based on the Starterkit or Plainkit.
+
+1. Installing the Starterkit
+```bash
+composer create-project getkirby/starterkit project-folder
+```
+
+1. Installing the Plainkit
+```bash
+composer create-project getkirby/plainkit project-folder
+```
+More information about installing and updating Kirby via Composer in our (link: docs/guide/install-guide/composer text: installation guide).
+
+=== Git
+
+In a terminal window, navigate to the place where you want to install Kirby. Then run one of the following commands to create a new project based on the Starterkit or Plainkit.
+
+1. Installing the Starterkit
+```bash
+git clone https://github.com/getkirby/starterkit project-folder
+```
+
+1. Installing the Plainkit
+```bash
+git clone https://github.com/getkirby/plainkit project-folder
+```
+More information about installing and updating Kirby via Git in our (link: docs/guide/install-guide/git text: installation guide).
+
+(…tabs)
+
 (image: starterkit.png)
+
 
 <info>
 When copying files to a remote server via (S)FTP, make sure to copy the `.htaccess` file as well. By default, files starting with a dot are invisible in the filesystem, so make sure enable the display of invisible files before copying.
@@ -60,14 +118,10 @@ Kirby needs a pretty standard set of PHP extensions. See the full list of requir
 
 (docs: requirements/browsers)
 
-### Alternative ways to install Kirby
+### Local development environment
 
-There are alternative installation methods for advanced users who prefer to install and update Kirby using commands on the command line or in their version control tool. Check them out and use whichever method you prefer.
 
-- (link: docs/cookbook/setup/composer text: Installation via Composer)
-- (link: docs/cookbook/setup/git text: Installation as Git submodule)
-
-If you don't have a local development environment yet and don't know what to use, check out our (link: docs/cookbook/setup/development-environment text: Local development environment) recipe.
+If you don't have a local development environment yet and don't know what to use, check out our (link: docs/guide/development-environment text: Local development environment) recipe.
 
 ### Installation guides for webhosts
 Some providers have created dedicated guides how to install Kirby on their servers. If you are with one of these providers, keep on reading:
@@ -110,11 +164,6 @@ If you don’t want the Panel to connect to our server, registration via the Pan
 
 ### (link: docs/guide/tour text: A tour around the house)
 Now that you have successfully installed Kirby on your server, it's time to explore your new CMS. Get yourself a cup of tea (or whatever you like most) and go on a (link: docs/guide/tour text: tour to explore the Starterkit) with us.
-
-++++
-
-### (link: docs/cookbook/setup/kirby-in-a-nutshell text: Kirby in a nutshell)
-Get (link: docs/cookbook/setup/kirby-in-a-nutshell text: a concise overview) of how Kirby works and what to keep in mind when you start your project. It's all about what you wish you had known when you started your first Kirby project.
 
 ++++
 
