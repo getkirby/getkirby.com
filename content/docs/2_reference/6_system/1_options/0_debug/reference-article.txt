@@ -39,4 +39,4 @@ To avoid accidentally enabling debugging in production, but to still be able to 
     }
     ```
 
-See also: (link: docs/cookbook/debugging-basics text: Debugging basics)
+See also: (link: docs/cookbook/php/debugging-basics text: Debugging basics)

@@ -57,7 +57,7 @@ Websites created with Kirby out in the wild are always a great source of inspira
 
 ## Kirby Cookbook
 
-- Style Panel elements via blueprint settings and custom CSS with our [recipe](https://getkirby.com/docs/cookbook/panel/customizing-panel).
+- Style Panel elements via blueprint settings and custom CSS with our [recipe](https://getkirby.com/docs/quicktips/customizing-panel).
 
 - Sebastian Greger shows you [how to set up selective page caching](https://getkirby.com/docs/cookbook/setup/selective-page-cache).
 
@@ -75,9 +75,9 @@ In his article [PHP code typing with Kirby CMS](https://fvsch.com/kirby-typing),
 
 While not tracking visitors at all is obviously the best way to protect your visitor's privacy, sometimes you probably have good reasons to do so. So here are some open-source, self-hosted alternatives to the omnipresent Matomo platform that let you keep full control of the data and offer more privacy for your website visitors:
 
-- [Umami](https://umami.is/): Requires a server with node.js installed. 
-- [Open Web Analytics](http://www.openwebanalytics.com/): PHP-based application. 
-- [Shynet](https://github.com/milesmcc/shynet): Python-based application (not for everyone, they say themselves), no cookie. 
+- [Umami](https://umami.is/): Requires a server with node.js installed.
+- [Open Web Analytics](http://www.openwebanalytics.com/): PHP-based application.
+- [Shynet](https://github.com/milesmcc/shynet): Python-based application (not for everyone, they say themselves), no cookie.
 - [Fathom](https://github.com/usefathom/fathom): Needs Go and npm installed on the server. Uses anonymous cookie.
 
 Do you use any of these tools? Share your experiences on the forum.

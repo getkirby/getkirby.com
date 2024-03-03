@@ -101,7 +101,7 @@ columns:
 
 ## Cookbook
 
-If you want to find out more about creating a Kirby-powered blog, read our (link: docs/cookbook/templating/create-a-blog text: full cookbook recipe).
+If you want to find out more about creating a Kirby-powered blog, read our (link: docs/cookbook/content-structure/create-a-blog text: full cookbook recipe).
 
 
 

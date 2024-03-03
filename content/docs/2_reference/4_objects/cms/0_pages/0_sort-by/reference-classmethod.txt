@@ -1,4 +1,4 @@
-Text: 
+Text:
 
 ## Example
 
@@ -19,4 +19,4 @@ It's also possible to sort by more than one field:
 $articles = page('notes')->children()->sortBy('date', 'desc', 'time', 'asc');
 ```
 
-For more complex sorting examples, check out our (link: docs/cookbook/content/sorting text: "Sorting" recipe)
+For more complex sorting examples, check out our (link: docs/cookbook/collections/sorting text: "Sorting" recipe)

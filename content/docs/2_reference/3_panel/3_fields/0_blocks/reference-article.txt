@@ -202,7 +202,7 @@ Kirby's built-in blocktypes are not enough? Create your own! Check out our exten
 - (link: docs/reference/plugins/extensions/blocks text: Custom block types)
 - (link: docs/guide/page-builder/custom-block-type text: Creating a custom block type from scratch)
 - (link: docs/guide/page-builder/block-examples text: Block factory: Creating your own blocks collection)
-- (link: docs/cookbook/panel/nested-blocks text: Nested blocks)
+- (link: docs/cookbook/content-structure/nested-blocks text: Nested blocks)
 
 <since v="4.0.0">
 ## Block preview type `fields`

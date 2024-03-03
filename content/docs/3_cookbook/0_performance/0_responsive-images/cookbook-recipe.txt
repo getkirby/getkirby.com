@@ -27,7 +27,7 @@ On many websites, images account for the majority of the overall weight of the p
 
 Responsive image strategies aim to deliver the right image to browsers on different devices and viewports, so they look equally good on a large desktop or a tiny smartwatch. But more importantly, our pages load faster, make users happier, lead to better performance metrics, and ultimately even help our climate because fewer resources are wasted.
 
-When we combine responsive images with modern image formats and (link: docs/cookbook/templating/lazy-loading text: lazy-loading) for off-screen images, the payload of our (initial) page will decrease tremendously.
+When we combine responsive images with modern image formats and (link: docs/cookbook/performance/lazy-loading text: lazy-loading) for off-screen images, the payload of our (initial) page will decrease tremendously.
 
 Kirby does not come with responsive images implemented out-of-the-box. We have to implement them ourselves.  However, Kirby provides us with the tools we need to implement them. You will soon see why a one-size-fits-all solution makes no sense at all.
 

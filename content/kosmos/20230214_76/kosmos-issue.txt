@@ -74,7 +74,7 @@ The [Kirby Theme Picker](https://license.microman.ch/?product=812567) plugin all
 
 ## Cookbook
 
-James Steel contributes another headless recipe: [Headless kiosk application with Kirby and 11ty](https://getkirby.com/docs/cookbook/setup/headless-kiosk-application), which includes creating desktop and mobile apps.
+James Steel contributes another headless recipe: [Headless kiosk application with Kirby and 11ty](https://getkirby.com/docs/cookbook/headless/headless-kiosk-application), which includes creating desktop and mobile apps.
 
 
 ## Tools

@@ -418,7 +418,7 @@ We still have the `products()` helper function in our `index.php` and some rough
 
 Such a model class will help us to write and organize all the code that it needs to work with products and validate user input.
 
-If you are not familiar with object oriented programming in PHP yet, you should follow (link: /docs/cookbook/templating/understanding-oop text: Sonja's excellent introduction).
+If you are not familiar with object oriented programming in PHP yet, you should follow (link: /docs/cookbook/php/understanding-oop text: Sonja's excellent introduction).
 
 The example class is pretty long, but fully documented. You can either read through the code and comments or copy and paste it into your version and keep scrolling.
 

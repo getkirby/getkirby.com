@@ -22,7 +22,7 @@ Text:
 
 ## What is Xdebug and why use it?
 
-In our (link: docs/cookbook/setup/debugging-basics text: Basic error hunting & prevention) recipe, we introduced some functions like `var_dump()`, `print_r()` or `error_log()` to help debug your variables in PHP. While these functions are usually helpful for taking a quick look at the output of your variables, they are not useful for evaluating these variables at runtime, analyzing stack traces or setting breakpoints.
+In our (link: docs/cookbook/php/debugging-basics text: Basic error hunting & prevention) recipe, we introduced some functions like `var_dump()`, `print_r()` or `error_log()` to help debug your variables in PHP. While these functions are usually helpful for taking a quick look at the output of your variables, they are not useful for evaluating these variables at runtime, analyzing stack traces or setting breakpoints.
 
 This is where Xdebug comes in, a PHP extension that provides debugging and profiling capabilities, which will finally speed up your development process, help you write better code and facilitate refactoring. With Xdebug, you can break code execution at any point, follow code execution step by step right from the beginning, and inspect all variables during a request.
 

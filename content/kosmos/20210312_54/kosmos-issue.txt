@@ -67,7 +67,7 @@ Add a floating button with links to services like Twitter, WhatsApp etc. to your
 
 ## Cookbook recipes
 
-Our new cookbook recipe [Creating a custom block type from scratch](https://getkirby.com/docs/guide/page-builder/custom-block-type) covers all the steps necessary to create a feature-rich block type complete with a preview for audio files. With [To bundle or not to bundle](https://getkirby.com/docs/cookbook/panel/to-bundle-or-not-to-bundle) there's an accompanying recipe that shows you how you can build the same block without the pains of a build process if you want, even if you lose the simplicity and power of single file components.
+Our new cookbook recipe [Creating a custom block type from scratch](https://getkirby.com/docs/guide/page-builder/custom-block-type) covers all the steps necessary to create a feature-rich block type complete with a preview for audio files. With [To bundle or not to bundle](https://getkirby.com/docs/cookbook/plugins/to-bundle-or-not-to-bundle) there's an accompanying recipe that shows you how you can build the same block without the pains of a build process if you want, even if you lose the simplicity and power of single file components.
 
 (image: audio-block-type-recipe.png)
 

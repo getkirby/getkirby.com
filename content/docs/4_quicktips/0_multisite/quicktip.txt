@@ -12,6 +12,10 @@ Authors: - authors/sonja-broda
 
 ----
 
+Tags: configuration
+
+----
+
 Text:
 
 You can run multiple sites via the same Kirby setup. This can help you maintain your sites as you only need to keep a single setup updated.

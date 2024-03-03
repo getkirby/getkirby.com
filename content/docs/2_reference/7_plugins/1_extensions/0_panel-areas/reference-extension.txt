@@ -362,4 +362,4 @@ Area | View name
 ## More information
 
 - (link: docs/cookbook/panel/first-panel-area text: My first Panel area)
-- (link: docs/cookbook/panel/advanced-panel-areatext: Advanced Panel area)
+- (link: docs/cookbook/panel/advanced-panel-area text: Advanced Panel area)

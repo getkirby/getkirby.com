@@ -2,7 +2,7 @@ Title: Grouping collections
 
 ----
 
-Description: Group collections like articles, events or files by various criteria.
+Description: Group pages, files, or users by various criteria.
 
 ----
 
@@ -16,7 +16,7 @@ Tags: collections, grouping
 
 Text:
 
-Often, we want to group pages or files by various criteria, for example, print a list of blog posts grouped by year, group upcoming events by month, a list of authors by character in the alphabeth, a set of images by photographer and so on. With Kirby's [`groupBy()`](/docs/reference/objects/pages/group-by) and [`group($callback`)](docs/reference/objects/pages/group) methods, this is pretty easy.
+Often, we want to group pages or files by various criteria, for example, print a list of blog posts grouped by year, group upcoming events by month, a list of authors by character in the alphabeth, a set of images by photographer and so on. With Kirby's [`groupBy()`](/docs/reference/objects/pages/group-by) and [`group($callback`)](/docs/reference/objects/pages/group) methods, this is pretty easy.
 
 Let's look at some examples to fuel your imagination.
 
@@ -115,7 +115,7 @@ $groupedItems = page('events')->children()->listed()->map(function($p) {
 })->groupBy('eventDate');
 ```
 
-In this example we want to group our items by a combination of two date fields, `from` and `to`. We use the [`map()` method](docs/reference/objects/pages/map) with a callback to create a "virtual" field called `eventDate`, then we pass this field to the `groupBy()` method.
+In this example we want to group our items by a combination of two date fields, `from` and `to`. We use the [`map()` method](/docs/reference/objects/pages/map) with a callback to create a "virtual" field called `eventDate`, then we pass this field to the `groupBy()` method.
 
 
 ### Grouping files

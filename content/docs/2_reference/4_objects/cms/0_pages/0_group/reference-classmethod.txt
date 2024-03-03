@@ -1,4 +1,4 @@
-Text: 
+Text:
 
 ## Example
 
@@ -11,4 +11,4 @@ $groups = $page->children()->sortBy('title', 'asc')->group(function($item) {
 
 ## More information
 
-(link: docs/cookbook/content/grouping-collections text: Grouping collections)
+(link: docs/cookbook/collections/grouping-collections text: Grouping collections)

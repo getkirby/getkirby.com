@@ -113,15 +113,15 @@ Schedule automatic publishing of page drafts at a certain date+time with the [Au
 
 The (link: docs/cookbook text: Cookbook) is the place on our website where you find a collection of solutions you can build with Kirby with step by step explanations how to build them. Here are our recent additions:
 
-Uwe Gehring introduces an [alternative setup for multi-site Kirby installations](https://getkirby.com/docs/cookbook/setup/multisite-variant) with an easy way to switch between Kirby versions.
+Uwe Gehring introduces an [alternative setup for multi-site Kirby installations](https://getkirby.com/docs/cookbook/development-deployment/multisite-variant) with an easy way to switch between Kirby versions.
 
-Based on an idea shared by Markus Denhoff, I wrote a little recipe [how to fine-tune page cache exclusions](https://getkirby.com/docs/cookbook/templating/fine-tuning-the-cache) dynamically.
+Based on an idea shared by Markus Denhoff, I wrote a little recipe [how to fine-tune page cache exclusions](https://getkirby.com/docs/quicktip/fine-tuning-the-cache) dynamically.
 
 When faced with choosing the right KirbyText/KirbyTags hook for a task, it is [important to know when they are called](https://getkirby.com/docs/cookbook/extensions/kirbytext-hooks).
 
-Manuel Moreale presents his solution to [share controllers across multiple templates](https://getkirby.com/docs/cookbook/templating/shared-controllers).
+Manuel Moreale presents his solution to [share controllers across multiple templates](https://getkirby.com/docs/cookbook/development-deployment/shared-controllers).
 
-Learn how to [create your first custom Panel field](https://getkirby.com/docs/cookbook/extensions/first-panel-field) with our new step-by-step recipe.
+Learn how to [create your first custom Panel field](https://getkirby.com/docs/cookbook/panel/first-panel-field) with our new step-by-step recipe.
 
 **Do you want to share your Kirby solution with the community?** Get a free Kirby license for every approved cookbook recipe. Contact us if you want to contribute!
 

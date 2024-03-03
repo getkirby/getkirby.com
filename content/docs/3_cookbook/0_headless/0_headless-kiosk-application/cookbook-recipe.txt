@@ -36,7 +36,7 @@ This recipe will cover using Kirby to handle the content and imagery, and genera
 
 ## Preparation
 
-If you have not used Kirby headless before, please take a look at the [Going Headless cookbook](/docs/cookbook/setup/headless-getting-started) guide before continuing, as this will explain the basic principles.
+If you have not used Kirby headless before, please take a look at the [Going Headless cookbook](/docs/cookbook/headless/headless-getting-started) guide before continuing, as this will explain the basic principles.
 
 To keep this guide simple, we will be using data from the [Kirby KQL Sandbox](https://kql.getkirby.com/) which does not need any authentication. In reality, you will likely be using a local install of Kirby as a source for the data.
 

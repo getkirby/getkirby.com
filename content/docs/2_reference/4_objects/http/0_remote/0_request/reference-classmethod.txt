@@ -31,8 +31,8 @@ More example see (link: docs/reference/objects/http/remote/get text: `Remote::ge
 
 You can also find examples in other parts of our documentation:
 
-- (link: docs/guide/virtual-pages/content-from-api text: Virtual pages: Content from API)
-- (link: docs/guide/virtual-pages/content-from-rss-feed text: Virtual pages: Content from an RSS feed)
+- (link: docs/guide/virtual-content/content-from-api text: Virtual pages: Content from API)
+- (link: docs/guide/virtual-content/content-from-rss-feed text: Virtual pages: Content from an RSS feed)
 - (link: docs/cookbook/panel/first-panel-area#setting-up-the-php-part text: My first Panel area)
 - (link: docs/cookbook/extensions/virtual-files#extra-images-from-unsplash-api text: Virtual files: Images from Unsplash API)
 

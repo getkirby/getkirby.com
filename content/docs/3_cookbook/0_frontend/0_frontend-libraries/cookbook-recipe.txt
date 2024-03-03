@@ -183,7 +183,7 @@ Frontend libraries often contain links to CDNs from which you can load the requi
 
 - (link: docs/reference/templates/helpers/js#example__autoloading-template-specific-script-files text: Template specific JS files)
 - (link: docs/reference/templates/helpers/css#example__autoloading-template-specific-css-files text: Template specific CSS files)
-- (link: docs/cookbook/templating/art-directed-blog-posts text: Art-directed blog posts)
+- (link: docs/quicktips/art-directed-blog-posts text: Art-directed blog posts)
 - (link: docs/cookbook/extensions/kirby-loves-cdn text: Kirby loves CDN)
 
 

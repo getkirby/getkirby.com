@@ -6,7 +6,7 @@ Published: 2023-10-28
 
 ----
 
-Description: How to configure the Caddy web server to run a Kirby website.
+Description: How to configure the popular and simple Caddy v2 web server to run a Kirby website.
 
 ----
 
@@ -125,4 +125,3 @@ root * /usr/share/caddy
 ```
 
 Here, we're importing/using the two snippets we defined earlier. Also we're setting the root folder for this server, which should point to the absolute filesystem path, where your Kirby files are located.
-

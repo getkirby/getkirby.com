@@ -218,7 +218,7 @@ in a template.
 
 We are now ready to add custom methods to the `CustomSite` class or overwrite existing ones.
 
-If you landed here, you are probably familiar with how you can add (link: docs/guide/virtual-pages text: virtual pages) from a database or other data source in Kirby by creating a Page model and overwriting the `children()` method. The virtual children in these examples are always children of a given page that actually exists as a folder in your file system.
+If you landed here, you are probably familiar with how you can add (link: docs/guide/virtual-content text: virtual pages) from a database or other data source in Kirby by creating a Page model and overwriting the `children()` method. The virtual children in these examples are always children of a given page that actually exists as a folder in your file system.
 
 But let's assume you wanted to add virtual pages as children of the Site object. Well, now you can. Let's try.
 
@@ -278,7 +278,7 @@ This intro should put you into a good starting position to explore yourself what
 
 ## More information
 
-- (link: docs/cookbook/templating/understanding-oop text: A brief intro to object oriented programming in PHP)
-- (link: docs/guide/virtual-pages text: Virtual pages)
+- (link: docs/cookbook/php/understanding-oop text: A brief intro to object oriented programming in PHP)
+- (link: docs/guide/virtual-content text: Virtual pages)
 
 

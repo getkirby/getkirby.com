@@ -1,4 +1,4 @@
-Text: 
+Text:
 
 ## Examples
 
@@ -34,4 +34,4 @@ $year = param('year', 2018);
 
 ## Further reading
 
-- (link: docs/cookbook/content/filtering-with-tags text: Filtering by tag)
+- (link: docs/cookbook/collections/filtering-with-tags text: Filtering by tag)

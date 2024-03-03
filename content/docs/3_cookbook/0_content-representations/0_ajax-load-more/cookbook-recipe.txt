@@ -31,7 +31,7 @@ When creating a portfolio, blog or image gallery webpage, we often want to show 
 
 We will base this recipe off the photography page in Kirby's Starterkit which lists a number of subpages with an image and a title.
 
-Kirby's (link: docs/cookbook/templating/pagination text: pagination class) will help us break up the projects into digestible chunks and make the logic pretty straightforward.
+Kirby's (link: docs/cookbook/navigation/pagination text: pagination class) will help us break up the projects into digestible chunks and make the logic pretty straightforward.
 
 ## HTML Template
 

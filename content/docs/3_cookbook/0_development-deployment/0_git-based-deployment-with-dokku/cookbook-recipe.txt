@@ -24,7 +24,7 @@ Text:
 
 ## Introduction
 
-In the vein of the (link: /docs/cookbook/setup/kirby-meets-docker text: Kirby Meets Docker Recipe), (link: https://dokku.com/ text: Dokku) allows you to containerize and run multiple apps/domains on a single server, manage deployments with git and easily manage domains and certificates with Let’s Encrypt. Dokku can be very helpful for the following reasons:
+In the vein of the (link: /docs/cookbook/development-deployment/kirby-meets-docker text: Kirby Meets Docker Recipe), (link: https://dokku.com/ text: Dokku) allows you to containerize and run multiple apps/domains on a single server, manage deployments with git and easily manage domains and certificates with Let’s Encrypt. Dokku can be very helpful for the following reasons:
 
 1. Zero-downtime deployment with git
 2. Easily manage multiple apps/domains/certificates on one server
@@ -325,7 +325,7 @@ dokku domains:report
 
 When you are satisfied with your domains, set up A records through your DNS management to point to the server's IP address. If you don't have a domain name, you could try a service like (link: https://freedns.afraid.org/ text: FreeDNS).
 
-In the worst case, you could also (link: https://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/ text: edit your hosts file) so you can test without using a domain/DNS. This would allow you to visit the page without SSL, but will prevent you from using Let’s Encrypt or making the site available to others.
+In the worst case, you could also (link: https://www.howtogeek.com/27350/beginner-geek-how-to-edit-your-hosts-file/ text: edit your hosts file) so you can test without using a domain/DNS. This would allow you to visit the page without SSL, but will prevent you from using Let’s Encrypt or making the site available to others.
 
 Once complete, you should be able to visit your sites without encryption. Open your browser and try visiting the pages.
 

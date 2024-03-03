@@ -66,7 +66,7 @@ $userFiles = $user->files();
 ```
 
 <info>
-To keep the examples short, we don't [check if the (user) object exists](docs/cookbook/templating/php-templates#and-one-last-trick) in the examples above. In your code, you should always do that.
+To keep the examples short, we don't [check if the (user) object exists](docs/cookbook/php/php-templates#and-one-last-trick) in the examples above. In your code, you should always do that.
 </info>
 
 

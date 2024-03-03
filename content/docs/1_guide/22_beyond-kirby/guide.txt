@@ -72,7 +72,7 @@ As the JSON templates are custom-built by you, they are by design customized to 
 ### Documentation
 
 - (link: docs/guide/templates/content-representations text: Content representations)
-- (link: docs/cookbook/templating/generating-json text: Generating JSON)
+- (link: docs/cookbook/content-representations/generating-json text: Generating JSON)
 
 ## REST API
 
@@ -135,6 +135,6 @@ The different methods can even be combined, or you can use headless mode in addi
 
 Here are a few more resources that can help you get started or give you more ideas for implementing your own solutions. We will update this list on an ongoing basis.
 
-- (link: docs/cookbook/setup/headless-getting-started text: Going Headless recipe)
+- (link: docs/cookbook/headless/headless-getting-started text: Going Headless recipe)
 - (link: https://github.com/johannschopplich/kirby-headless-starter text: Kirby Headless Starter)
 - (link: https://github.com/johannschopplich/kirby-vue3-starterkit text: Kirby Vue Starterkit)

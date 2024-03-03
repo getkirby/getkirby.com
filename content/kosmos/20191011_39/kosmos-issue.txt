@@ -86,7 +86,7 @@ Creating HTML emails is hard. [Can I Email…](https://www.caniemail.com) is a c
 
 ## PHP
 
-[Unit testing with PHPUnit](https://www.youtube.com/watch?v=k9ak_rv9X0Y) is a beginner's video series introducing Test-Driven Development with PHPUnit. The videos are not 100% up-to-date with the latest version of PHPUnit, so there are some minor glitches, but you will get a solid foundation of what you can do with PHPUnit before diving into [unit-testing your plugins](https://getkirby.com/docs/cookbook/setup/plugin-workflow).
+[Unit testing with PHPUnit](https://www.youtube.com/watch?v=k9ak_rv9X0Y) is a beginner's video series introducing Test-Driven Development with PHPUnit. The videos are not 100% up-to-date with the latest version of PHPUnit, so there are some minor glitches, but you will get a solid foundation of what you can do with PHPUnit before diving into [unit-testing your plugins](https://getkirby.com/docs/cookbook/plugins/plugin-workflow).
 
 ## CSS
 
@@ -116,5 +116,5 @@ The [Data Detox Kit](https://datadetoxkit.org/en/home) collects tips to regain c
 
 ## Quote of the month
 
-> "JS is the web's CO2, and we should start asking why the biggest polluters aren't cleaning up their respective acts. Loudly. Insistently. Even when that's uncomfortable." 
+> "JS is the web's CO2, and we should start asking why the biggest polluters aren't cleaning up their respective acts. Loudly. Insistently. Even when that's uncomfortable."
 [Alex Russell](https://twitter.com/slightlylate/status/1180086025651195905?s=20)

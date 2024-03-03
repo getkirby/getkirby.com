@@ -52,9 +52,9 @@ Check keywords and get term suggestions with [Kirby Seobility](https://github.co
 
 ## Cookbook
 
-Considerably improve your site's performance with lazy-loading. Our [new cookbook recipe introduces different options](https://getkirby.com/docs/cookbook/templating/lazy-loading).
+Considerably improve your site's performance with lazy-loading. Our [new cookbook recipe introduces different options](https://getkirby.com/docs/cookbook/performance/lazy-loading).
 
-Why does Kirby use a separate media folder to store files? An [explainer](https://getkirby.com/docs/cookbook/setup/purpose-of-media-folder).
+Why does Kirby use a separate media folder to store files? An [explainer](https://getkirby.com/docs/quicktips/purpose-of-media-folder).
 
 
 ## About Kirby

@@ -36,7 +36,7 @@ Last Tuesday we published [Kirby 3.2.1-rc1](https://github.com/getkirby/kirby/re
 
 Our developers published a few very interesting plugins:
 
-With [Kirby Reporter](https://github.com/gearsdigital/kirby-reporter), users can report issues they find in your web project directly from Kirby's Panel. Currently works with GitHub, GitLab and Bitbucket Cloud. 
+With [Kirby Reporter](https://github.com/gearsdigital/kirby-reporter), users can report issues they find in your web project directly from Kirby's Panel. Currently works with GitHub, GitLab and Bitbucket Cloud.
 
 The template language aficionados among you will be happy to hear there is now support for the Blade template language with [Kirby Blade](https://github.com/afbora/kirby-blade).
 
@@ -48,7 +48,7 @@ The [Better Rest plugin](https://github.com/robinscholz/better-rest) exposes the
 
 ## Kirby Cookbook recipes
 
-Hristiyan Dodov wrote a cookbook recipe that explains [how to set up multiple plugins with PHPUnit testing](https://getkirby.com/docs/cookbook/setup/plugin-workflow) under a single Kirby installation.
+Hristiyan Dodov wrote a cookbook recipe that explains [how to set up multiple plugins with PHPUnit testing](https://getkirby.com/docs/cookbook/plugins/plugin-workflow) under a single Kirby installation.
 
 Do you want to share your Kirby insights with the community as well? We will be happy to publish your recipes!
 

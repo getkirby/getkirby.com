@@ -75,7 +75,7 @@ Run migrations when deploying your Kirby site with the [Migrations plugin](https
 
 Kirby provides several ways to run in "headless" mode, from using the REST API to simple routes. Our new [Beyond Kirby](https://getkirby.com/docs/guide/beyond-kirby) guide introduces these approaches and gives recommendation for their use.
 
-James Steel gets you started with [Going headless](https://getkirby.com/docs/cookbook/setup/headless-getting-started), an introduction to using Kirby's REST API in conjunction with the [KQL plugin](https://github.com/getkirby/kql).
+James Steel gets you started with [Going headless](https://getkirby.com/docs/cookbook/headless/headless-getting-started), an introduction to using Kirby's REST API in conjunction with the [KQL plugin](https://github.com/getkirby/kql).
 
 On most websites, images account for the majority of the overall weight of the page and therefore have a heavy impact on performance. Our new cookbook recipe shows you [how to implement responsive images](https://getkirby.com/docs/cookbook/performance/responsive-images) in Kirby and boost your websites' performance.
 

@@ -62,13 +62,13 @@ Cache bust your assets without using query strings with a little help from the [
 
 ## Cookbook recipes
 
-Do you want to get better at debugging your PHP code and leave `var_dump()` behind? Then check out our new step-by-step recipe [how to get Xdebug up and running](https://getkirby.com/docs/cookbook/setup/php-debugging-with-xdebug) together with VS Code.
+Do you want to get better at debugging your PHP code and leave `var_dump()` behind? Then check out our new step-by-step recipe [how to get Xdebug up and running](https://getkirby.com/docs/cookbook/php/php-debugging-with-xdebug) together with VS Code.
 
-If you want to store content in the new Blocks field from the frontend, the [Update blocks programmatically](https://getkirby.com/docs/cookbook/templating/update-blocks-programmatically) recipe will come in handy.
+If you want to store content in the new Blocks field from the frontend, the [Update blocks programmatically](https://getkirby.com/docs/quicktips/update-blocks-programmatically) recipe will come in handy.
 
 Delivering your assets and files using a Content Delivery Network (CDN) made easy with [Kirby loves CDN](https://getkirby.com/docs/cookbook/extensions/kirby-loves-cdn).
 
-[Keep your code dry](https://getkirby.com/docs/cookbook/templating/keep_your_code_dry) has some tips how to increase your code's performance and circumvent typical traps.
+[Keep your code dry](https://getkirby.com/docs/quicktips/keep_your_code_dry) has some tips how to increase your code's performance and circumvent typical traps.
 
 ## Privacy
 

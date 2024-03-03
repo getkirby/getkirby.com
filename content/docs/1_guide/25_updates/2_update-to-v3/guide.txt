@@ -40,7 +40,7 @@ PHP version support has changed since Kirby 3 was originally released. Because o
 
 ### No Kirby CLI support
 
-The Kirby CLI is no longer compatible with Kirby 3. Kirby and extensions can instead be installed (link: docs/guide/installation text: manually), with (link: docs/cookbook/setup/git text: Git) or with (link: docs/cookbook/setup/composer text: Composer).
+The Kirby CLI is no longer compatible with Kirby 3. Kirby and extensions can instead be installed (link: docs/guide/installation text: manually), with (link: docs/guide/install-guide/git text: Git) or with (link: docs/guide/install-guide/composer text: Composer).
 
 
 ## Folder and file structure

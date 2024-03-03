@@ -38,7 +38,7 @@ content/
     blog.txt
 ```
 
-Please read the (link: docs/cookbook/templating/create-a-blog text: article about how to build a blog with Kirby), if this seems weird to you.
+Please read the (link: docs/cookbook/content-structure/create-a-blog text: article about how to build a blog with Kirby), if this seems weird to you.
 
 ## Content representation for the blog
 

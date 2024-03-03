@@ -31,17 +31,17 @@ One week later than usual after the Easter break, but here we are again. The dev
 ++++
 
 ## Virtual Pages
-Combine Kirby's file-based architecture with content from any source and edit it in the Panel. Read our [new guide section about virtual pages](https://getkirby.com/docs/guide/virtual-pages) that finally highlights this Kirby 3 feature the way it deserves.
+Combine Kirby's file-based architecture with content from any source and edit it in the Panel. Read our [new guide section about virtual pages](https://getkirby.com/docs/guide/virtual-content) that finally highlights this Kirby 3 feature the way it deserves.
 
 (…columns)
 
 Our cookbook also has some new tips and solutions, among them:
 
-- Popular options for setting up a [local development environment](https://getkirby.com/docs/cookbook/setup/development-environment) 
+- Popular options for setting up a [local development environment](https://getkirby.com/docs/guide/development-environment)
 
-- [Paginating long posts](https://getkirby.com/docs/cookbook/templating/paginating-posts) 
+- [Paginating long posts](https://getkirby.com/docs/cookbook/navigation/paginating-posts)
 
-- [Filtering via routes](https://getkirby.com/docs/cookbook/content/filter-via-route)
+- [Filtering via routes](https://getkirby.com/docs/cookbook/collections/filter-via-route)
 
 Also, the cookbook section now has better filtering options which will hopefully make it easier for you to find what you need.
 

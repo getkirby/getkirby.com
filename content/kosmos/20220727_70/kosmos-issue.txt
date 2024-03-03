@@ -57,8 +57,8 @@ You can always find the current support status in our [security policy](https://
 
 ## Kirby in the wild
 
-(image: naturally-made.jpeg)    
-[Nutramaxx Food GmbH](https://naturallymade.com) 
+(image: naturally-made.jpeg)
+[Nutramaxx Food GmbH](https://naturallymade.com)
 
 
 ## Kirby plugins
@@ -72,7 +72,7 @@ Feed plugin](https://clicktonext.com/plugins/instagram-feed).
 
 ## Cookbook & docs
 
-Kirby 3.7 brought a subtle update of the Panel design with slightly rounded corners. If you prefer the former edgy look, here's [how to get rid of those rounded corners with 4 lines of CSS](https://getkirby.com/docs/cookbook/panel/rounded-corners).
+Kirby 3.7 brought a subtle update of the Panel design with slightly rounded corners. If you prefer the former edgy look, here's [how to get rid of those rounded corners with 4 lines of CSS](https://getkirby.com/docs/quicktips/rounded-corners).
 
 You said it's hard to find that Kirby has a page builder. We listened, and here is our [intro guide to the blocks and layout fields](https://getkirby.com/docs/guide/page-builder) to find your way around.
 

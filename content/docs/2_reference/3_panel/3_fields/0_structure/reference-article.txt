@@ -254,4 +254,4 @@ If you nest structure fields inside a structure field, you have to call the `toS
 
 ## More information
 
-(link: docs/cookbook/content/structured-field-content text: Structured field content)
+(link: docs/cookbook/content-structure/structured-field-content text: Structured field content)

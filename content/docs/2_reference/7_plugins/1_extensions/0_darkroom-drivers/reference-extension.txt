@@ -2,7 +2,7 @@ Title: Darkroom driver
 
 ----
 
-Guide: templates/resize-images-on-the-fly
+Guide: files/resize-images-on-the-fly
 
 ----
 

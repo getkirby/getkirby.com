@@ -63,7 +63,7 @@ If you want, you can wrap this code in a custom method. Keep in mind that this d
 
 ## Kirby Docs
 
-We enhanced the [Virtual Pages guide](https://getkirby.com/docs/guide/virtual-pages) with a more detailed database example, content locking docs and a chapter about merging local data with data from other content sources.
+We enhanced the [Virtual Pages guide](https://getkirby.com/docs/guide/virtual-content) with a more detailed database example, content locking docs and a chapter about merging local data with data from other content sources.
 
 ## Kirby in the wild
 

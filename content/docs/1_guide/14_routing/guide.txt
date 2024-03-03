@@ -464,4 +464,4 @@ return [
 
 ## More information
 
-(link: docs/cookbook/content/filter-via-route text: Filtering via routes)
+(link: docs/cookbook/collections/filter-via-route text: Filtering via routes)

@@ -358,6 +358,6 @@ We keep our template engine as simple and effective as possible, but we also don
 
 ## Further reading
 
-- (link: docs/cookbook/setup/coding-style-standards text: Coding style standards)
-- (link: docs/cookbook/setup/debugging-basics text: Basic error hunting & prevention)
+- (link: docs/cookbook/development-deployment/coding-style-standards text: Coding style standards)
+- (link: docs/cookbook/php/debugging-basics text: Basic error hunting & prevention)
 

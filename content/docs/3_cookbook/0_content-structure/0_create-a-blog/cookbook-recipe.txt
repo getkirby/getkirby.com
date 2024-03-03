@@ -291,11 +291,11 @@ To manage your blog and write articles in the (glossary: panel), you will need t
 
 ## Further reading
 
-- (link: docs/cookbook/content/filtering-with-tags text: How to add tags to your articles)
-- (link: docs/cookbook/templating/pagination text: How to add pagination to your blog)
-- (link: docs/cookbook/templating/previous-next text: How to add a prev/next switcher to your articles)
-- (link: docs/cookbook/templating/generating-json text: How to add a feed to your articles)
-- (link: docs/cookbook/content/search text: How to add a search to your blog)
-- (link: docs/cookbook/templating/art-directed-blog-posts text: How to art-direct your articles)
-- (link: docs/cookbook/templating/custom-post-types text: How to add custom post types to your blog)
-- (link: docs/cookbook/content/related-articles text: How to add related posts to your articles)
+- (link: docs/cookbook/collections/filtering-with-tags text: How to add tags to your articles)
+- (link: docs/cookbook/navigation/pagination text: How to add pagination to your blog)
+- (link: docs/cookbook/navigation/previous-next text: How to add a prev/next switcher to your articles)
+- (link: docs/cookbook/content-representations/generating-json text: How to add a feed to your articles)
+- (link: docs/cookbook/collections/search text: How to add a search to your blog)
+- (link: docs/quicktips/art-directed-blog-posts text: How to art-direct your articles)
+- (link: docs/cookbook/content-structure/custom-post-types text: How to add custom post types to your blog)
+- (link: docs/cookbook/collections/related-articles text: How to add related posts to your articles)

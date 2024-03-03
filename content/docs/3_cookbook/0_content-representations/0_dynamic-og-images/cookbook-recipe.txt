@@ -32,11 +32,11 @@ The basic HTML markup within the `<head>` element looks like the following:
 
 ```html
 <meta property="og:site_name" content="Kirby CMS">
-<meta property="og:url" content="https://getkirby.com/docs/cookbook/content/dynamic-og-images">
+<meta property="og:url" content="https://getkirby.com/docs/cookbook/content-representations/dynamic-og-images">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Using content representations to create OG images">
 <meta property="og:description" content="Dynamic creation of Open Graph images for social sharing">
-<meta property="og:image" content="https://getkirby.com/docs/cookbook/content/dynamic-og-images/opengraph.png">
+<meta property="og:image" content="https://getkirby.com/docs/cookbook/content-representations/dynamic-og-images/opengraph.png">
 ```
 
 ### Image preview

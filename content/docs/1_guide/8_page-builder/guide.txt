@@ -65,5 +65,5 @@ Already made your own? Don't hesitate to (link: docs/guide/plugins/plugin-setup-
 
 ### Read on
 
-- (link: docs/cookbook/setup/kirby-meets-tailwindcss text: Kirby meets Tailwind, includes solutions how to make Tailwind work with (inline) HTML elements in blocks)
+- (link: docs/cookbook/frontend/kirby-meets-tailwindcss text: Kirby meets Tailwind, includes solutions how to make Tailwind work with (inline) HTML elements in blocks)
 
