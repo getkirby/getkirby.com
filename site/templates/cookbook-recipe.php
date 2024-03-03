@@ -1,26 +1,29 @@
 <?php layout('cookbook') ?>
 
 <?php slot('h1') ?>
-<?= $page->title()->widont() ?>
-
+	<?= $page->title()->widont() ?>
 <?php endslot() ?>
-<?php slot('tags') ?>
 
-<div class="mb-6">
-	<span>Tags:</span>
-		<?php foreach ($page->tags()->split(',') as $tag): ?>
-			<a href="<?= page('docs/cookbook')->url() . '/tags/' . Str::slug($tag) ?>"><?= $tag ?></a>
-		<?php endforeach ?>
-</div>
-<?php endslot() ?>
 
 <?php slot() ?>
-
 	<?php snippet('toc', ['title' => 'In this recipe']) ?>
 	<div class="prose mb-24">
 		<?= $page->text()->kt() ?>
 	</div>
 
+
+<div class="mb-6 text-sm">
+	<?= implode('',
+		array_map(
+			fn ($tag) => Html::a(page('docs/cookbook')->url() . '/tags/' . Str::slug($tag), $tag, ['class' => 'type type-null mr-3 p-1']),
+			$page->tags()->split(',')
+		)
+	);
+	?>
+
+<?php endslot() ?>
+
+<?php slot('authors') ?>
 	<?php if ($authors->count()): ?>
 	<section id="authors">
 		<header class="prose mb-6">
