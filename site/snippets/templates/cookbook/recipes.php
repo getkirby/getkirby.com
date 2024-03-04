@@ -1,22 +1,22 @@
-<ul class="auto-fill auto-rows-fr" style="--min: 16rem; --column-gap: var(--spacing-12); --row-gap: var(--spacing-24)">
+<ul class="auto-fill auto-rows-fr" style="--min: 16rem; --gap: var(--spacing-6)">
 	<?php foreach ($recipes as $recipe): ?>
-	<li style="background-image: url('<?= $recipe->pattern() ?>'); background-size: cover; background-repeat: no-repeat; padding-left: 1.2rem">
-		<article style="background-color: white; padding: 1rem; height: 100%">
-			<a class="block pt-1" href="<?= $recipe->url() ?>">
+	<li>
+		<article class="rounded shadow" style="background-image: url('<?= $recipe->pattern() ?>'); background-size: cover; background-repeat: no-repeat; height: 100%">
+			<a class="block bg-white p-3" href="<?= $recipe->url() ?>" style="height: 100%; margin-left: var(--spacing-5)">
 				<figure class="mb-3">
 					<div class="mb-3">
-						<p class="h6 mb-1 flex align-center justify-between">
+						<p class="text-xs font-mono mb-1 flex align-center justify-between">
 							<?= $recipe->parent()->title() ?>
 							<?php if ($recipe->isNew()): ?>
 								<span aria-hidden="true" style="color: var(--color-yellow-500)"><?= icon('bolt') ?></span>
 							<?php endif ?>
 						</p>
-						<h2 class="h2 border-top pt-3">
+						<h2 class="h3 border-top pt-3">
 							<?= $recipe->title() ?>
 						</h2>
 					</div>
 				</figure>
-				<p class="color-gray-700"><?= $recipe->description()->widont() ?></p>
+				<p class="color-gray-700 text-sm"><?= $recipe->description()->widont() ?></p>
 			</a>
 		</article>
 	</li>
