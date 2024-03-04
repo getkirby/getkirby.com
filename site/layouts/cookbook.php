@@ -12,7 +12,7 @@
 					<?php if ($hero = $slots->hero()): ?>
 						<?= $hero ?>
 					<?php else: ?>
-						<header class="mb-6">
+						<header class="mb-12">
 							<h1 class="h1"><?= $slots->h1() ?></h1>
 						</header>
 					<?php endif ?>
