@@ -36,17 +36,17 @@ Languages: English, Hungarian
 
 Description:
 
-My goal is to create pages that help businesses operate.
-I chose Kirby CMS because it has the potential to create faster, company-tailored and secure pages.
+My goal is to make the delivered project easy to manage for the client and the user.
+I avoid selfish planning and programming, I only use tried and tested solutions in your project.
 
 ----
 
 Expertise:
 
-- Magazine page
-- Company page
-- Blog page
-- Landing page
+- Kirby Web Development
+- UI & Web Design
+- Custom Kirby Plugins
+- Consulting
 
 ----
 
