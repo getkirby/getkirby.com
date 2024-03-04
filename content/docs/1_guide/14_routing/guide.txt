@@ -270,6 +270,22 @@ return [
 ];
 ```
 
+If you want your route to match every language, you may use `*` as a placeholder. The langugae code will be passed to the action callback as first argument:
+
+```php
+return [
+    'routes' => [
+        [
+            'pattern' => '(:any)',
+            'language' => '*',
+            'action' => function ($language, $slug) {
+							// The first argument will always be the language code, e.g. 'en'
+            }
+        ],
+    ]
+];
+```
+
 To make sure that translated slugs are automatically handled by Kirby, you can set a page scope:
 
 ```php
