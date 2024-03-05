@@ -6,6 +6,10 @@ Intro: Page models extend Kirby's default (class: Kirby\Cms\Page text: $page) ob
 
 ----
 
+Screencast: (screencast: https://www.youtube.com/watch?v=z5DS2njIvDs title: Models: Superpowers for your pages)
+
+----
+
 Text:
 
 ## Introduction
