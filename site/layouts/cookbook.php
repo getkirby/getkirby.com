@@ -16,9 +16,6 @@
 							<h1 class="h1"><?= $slots->h1() ?></h1>
 						</header>
 					<?php endif ?>
-					<?php if ($tags = $slots->tags()): ?>
-						<?= $tags ?>
-					<?php endif ?>
 					<div class="mb-24">
 						<?= $slot ?>
 					</div>
