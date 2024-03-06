@@ -12,13 +12,18 @@
 		width: 100%;
 	}
 
-	.with-sidebar .sidebar-mobile-navigate {
+	.with-sidebar .sidebar-mobile-select {
 		display: none;
 	}
 }
 
 @media screen and (max-width: 48rem) {
-	.with-sidebar .sidebar :where(.h1, .sidebar-group, ul) {
+	.with-sidebar .sidebar .h1 {
+		font-size: var(--text-2xl);
+		margin-bottom: var(--spacing-3);
+	}
+
+	.with-sidebar .sidebar :where(.sidebar-group, ul) {
 		display: none;
 	}
 }
