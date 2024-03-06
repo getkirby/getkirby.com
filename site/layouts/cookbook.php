@@ -8,6 +8,12 @@
 	<main id="main" class="main">
 		<div class="container">
 			<div class="with-sidebar">
+				<?php if ($sidebar = $slots->sidebar()): ?>
+					<?= $sidebar ?>
+				<?php else: ?>
+					<?php snippet('templates/cookbook/sidebar') ?>
+				<?php endif ?>
+
 				<article class="mb-24">
 					<?php if ($hero = $slots->hero()): ?>
 						<?= $hero ?>
@@ -23,11 +29,6 @@
 						<?php snippet('layouts/github-edit') ?>
 					</footer>
 				</article>
-				<?php if ($sidebar = $slots->sidebar()): ?>
-					<?= $sidebar ?>
-				<?php else: ?>
-					<?php snippet('templates/cookbook/sidebar') ?>
-				<?php endif ?>
 			</div>
 		</div>
 	</main>
