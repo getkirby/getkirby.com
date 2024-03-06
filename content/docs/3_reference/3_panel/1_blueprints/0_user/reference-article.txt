@@ -173,6 +173,7 @@ permissions:
 | `create` | `true`/`false` |
 | `delete` | `true`/`false` |
 | `duplicate` | `true`/`false` |
+| `move` | `true`/`false` |
 | `preview` | `true`/`false` |
 | `read` | `true`/`false` |
 | `sort` | `true`/`false` |
