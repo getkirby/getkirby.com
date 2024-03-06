@@ -240,6 +240,32 @@ return [
 		}
 	],
 	[
+		'pattern' => 'docs/cookbook/(:any)/(:any)',
+		'action'  => function ($category, $slug) {
+			if ($category === 'tags') {
+				$this->next();
+			}
+
+			$page = page('docs/cookbook/' . $category . '/' . $slug);
+
+			if ($page) {
+				return $page;
+			}
+
+			$page = page('docs/cookbook')->grandChildren()->findBy('slug', $slug);
+			
+			if (!$page) {
+				$page = page('docs/quicktips/' . $slug);
+			}
+
+			if (!$page) {
+				$page = page('error');
+			}
+
+			return go($page);
+		}
+	],
+	[
 		'pattern' => 'docs/cookbook/tags/(:any)',
 		'action'  => function ($tag) {
 			return page('docs/cookbook')->render(['tag' => $tag]);
