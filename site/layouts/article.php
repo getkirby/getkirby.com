@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 	<?php snippet('layouts/head') ?>
-	<?= css('assets/css/layouts/article.css') ?>
 </head>
 <body>
 	<?php snippet('layouts/header') ?>

@@ -38,7 +38,7 @@
 		<div id="main" class="reference-content reference-panel">
 			<article>
 				<header class="mb-12">
-					<h1 class="h1 mb-12"><?= $page->title() ?></h1>
+					<h1 class="h1 mb-6"><?= $page->title() ?></h1>
 					<?php if ($page->intro()->isNotEmpty()): ?>
 					<div class="prose mb-12">
 						<div class="intro color-gray-700">
