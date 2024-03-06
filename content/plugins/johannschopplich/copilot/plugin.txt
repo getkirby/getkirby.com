@@ -4,6 +4,22 @@ Title: Copilot
 
 Text:
 
+## Features
+
+- 🦙 **Multi-model**: Use OpenAI GPT models or Mistral AI models to generate content.
+- 🧱 **Blocks support**: Generate content for blocks fields.
+- 🌞 **Customizable prompts**: Tailor AI responses with user and system instructions.
+- 🎀 **Context-aware responses**: Include context from other fields with placeholders in user prompts to improve content relevance.
+- 🛎️ **Playground**: Try out the plugin's features with an [interactive live demo](https://kirbycopilot.com/playground).
+
+## Getting started
+
+[Visit the website](https://kirbycopilot.com) to get started with Kirby Copilot.
+
+----
+
+Documentation: https://kirbycopilot.com
+
 ----
 
 Repository: https://github.com/johannschopplich/kirby-copilot
@@ -22,7 +38,7 @@ Sort: 1000
 
 ----
 
-Description: AI-powered content generation with field, image and PDF context support
+Description: AI-powered content generation with support for images and PDFs as context
 
 ----
 
