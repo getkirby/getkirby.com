@@ -1,4 +1,4 @@
-Title: Running Kirby on a Caddy v2 web server
+Title: Running Kirby on a Caddy web server
 
 ----
 
@@ -6,7 +6,7 @@ Published: 2023-10-28
 
 ----
 
-Description: How to configure the popular and simple Caddy v2 web server to run a Kirby website.
+Description: How to configure the popular and simple Caddy web server to run a Kirby website.
 
 ----
 
@@ -18,7 +18,7 @@ Authors:
 
 Text:
 
-Kirby is compatible with (link: docs/guide/quickstart text: many different web servers). However, in reality it is mostly Apache and sometimes nginx which are being used as webservers to run Kirby on. But there is also another, modern and very easy-to-configure alternative in the webserver world: [Caddy v2](https://caddyserver.com/v2).
+Kirby is compatible with (link: docs/guide/quickstart text: many different web servers). However, in reality it is mostly Apache and sometimes nginx which are being used as webservers to run Kirby on. But there is also another, modern and very easy-to-configure alternative in the webserver world: [Caddy](https://caddyserver.com).
 
 ## Caddy: No support for `.htaccess`
 

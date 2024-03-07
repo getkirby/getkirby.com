@@ -5,7 +5,7 @@
 </head>
 <body>
 	<?php snippet('layouts/header') ?>
-	<main id="main" class="main">
+	<main id="main" class="main article">
 		<div class="container">
 			<div class="with-sidebar">
 				<?php if ($sidebar = $slots->sidebar()): ?>

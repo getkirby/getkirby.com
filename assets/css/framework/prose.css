@@ -1,7 +1,7 @@
 :root {
 	--prose-code-bg: rgba(0, 0, 0, 0.1);
 	--prose-pre-bg: var(--color-black);
-	--prose-size: var(--text-xl);
+	--prose-size: var(--text-lg);
 	--prose-color-text: var(--color-gray-700);
 	--prose-color-highlight: var(--color-black);
 }
@@ -70,7 +70,7 @@
 .prose * + .screencast,
 .prose * + .since,
 .prose * + .table {
-	margin-top: 1.5em;
+	margin-top: 1em;
 }
 
 .prose > details[open] summary {
@@ -129,27 +129,27 @@
 	scroll-margin-top: var(--spacing-6);
 }
 .prose h2 {
-	font-size: 1.625em;
+	font-size: 1.5em;
 	line-height: 1.15em;
 }
 .prose * + h2 {
-	margin-top: 3em;
+	margin-top: 2.5em;
 }
 .prose h3 {
 	font-size: 1.25em;
 }
 .prose * + h3 {
-	margin-top: 3em;
+	margin-top: 2.25em;
 }
 .prose h2 + h3 {
-	margin-top: 1.5em;
+	margin-top: 1em;
 }
 .prose h4 {
 	font-size: 1em;
 	font-weight: var(--font-normal);
 }
 .prose * + h4 {
-	margin-top: 3em;
+	margin-top: 2em;
 }
 .prose h4 + * {
 	margin-top: var(--spacing-3);
@@ -161,7 +161,7 @@
 	display: inline-flex;
 	font-size: 0.825em;
 	max-width: 100%;
-	padding: 0 0.5em;
+	padding-inline: 0.375rem;
 	border-radius: 3px;
 	background: var(--prose-code-bg);
 	color: var(--prose-color-highlight);
@@ -184,7 +184,7 @@
 	border-left: 2px solid #000;
 	padding-left: 0.75rem;
 	max-width: 20em;
-	font-size: 1.25em;
+	font-size: 1.2em;
 	line-height: var(--leading-snug);
 	color: var(--prose-color-highlight);
 }
@@ -229,9 +229,8 @@
 	height: auto;
 	max-width: 100%;
 }
-.prose figure.image {
-	margin-top: 3rem;
-	margin-bottom: 3rem;
+.prose figure:is(.image, .video) {
+	margin-block: 2.5rem;
 }
 .prose .image a {
 	display: inline-block;
@@ -246,10 +245,6 @@
 }
 
 /* Video */
-.prose figure.video {
-	margin-top: 3rem;
-	margin-bottom: 3rem;
-}
 .prose figure.video video {
 	width: auto;
 	height: auto;
