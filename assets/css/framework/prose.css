@@ -219,7 +219,8 @@
 .prose h6,
 .prose .box,
 .prose .code,
-.prose .filesystem {
+.prose .filesystem,
+.prose .tabs {
 	max-width: 42rem;
 }
 

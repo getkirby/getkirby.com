@@ -6,6 +6,7 @@
 
 .tabs nav {
 	display: flex;
+	overflow-x: auto;
 }
 
 .tabs nav button {
@@ -13,6 +14,7 @@
 	padding: var(--spacing-2) var(--spacing-3);
 	font-size: var(--text-xs);
 	overflow: visible;
+	white-space: nowrap;
 }
 
 .tabs nav button[aria-selected="true"]::after {
@@ -20,7 +22,7 @@
 	content: "";
 	height: 2px;
 	inset-inline: 0;
-	bottom: -1px;
+	bottom: 0;
 	background: currentColor;
 }
 
