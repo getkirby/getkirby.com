@@ -2,7 +2,7 @@ Title: Locator
 
 ----
 
-Text: 
+Text:
 
 ----
 
@@ -22,4 +22,4 @@ Description: A simple map & geolocation field, built on top of open-source servi
 
 ----
 
-Versions: 3
+Versions: 3,4
