@@ -21,10 +21,6 @@ Tags: forms, users
 
 Text:
 
-## Requirements
-
-The first example requires at least Kirby 3.6.2, while the second example works with 3.6.x and higher.
-
 ## Intro
 
 To implement a (frontend) user registration in your Kirby project, you can leverage Kirby's authentication features. To achieve this, we are going to implement the following steps:

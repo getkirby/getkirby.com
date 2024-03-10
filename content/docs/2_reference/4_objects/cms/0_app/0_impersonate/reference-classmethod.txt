@@ -9,7 +9,7 @@ Text:
 There are four options for the `$who` parameter:
 - a username (impersonates the specific user with their permissions)
 - `'kirby'` (impersonates the allmighty user with full permissions)
-- `'nobody'` (disables the currently logged in user, added in Kirby 3.5.0)
+- `'nobody'` (disables the currently logged in user)
 - `null` (resets the impersonation)
 
 ## Example

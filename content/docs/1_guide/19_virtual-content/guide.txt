@@ -26,7 +26,7 @@ Text:
 
 Since Kirby is a flat-file CMS, pages that make up your website usually exist as files and folders in the filesystem. This has many advantages: your web project can be version controlled, you don't have to deal with a database, it's easy to make backups, you can manually edit your content if you want, and last not least, it's also very fast.
 
-With the new architecture in Kirby 3 you can now combine our native, file-based pages with pages from any other data source – from databases, external APIs, Excel sheets – you name them.
+With Kirby's architecture you can combine native, file-based pages with pages from any other data source – from databases, external APIs, Excel sheets – you name them.
 
 <info>
 We refer to any page that does not exist in the content folder as "virtual&nbsp;page".

@@ -154,21 +154,21 @@ So far, the new solution provides nothing new compared to the old solution, desp
 
 What's more, we can now switch between different versions of Kirby with a few keystrokes.
 
-Let's suppose that we want to run `my-site.com` with Kirby 3.3.1, but `my-shop.com` with Kirby 3.3.2. All we need to do is put the `/kirby` folder of every version into a folder of its own, and point the `/kirby` symlinks to the respective folder:
+Let's suppose that we want to run `my-site.com` with Kirby 4.0.1, but `my-shop.com` with Kirby 4.1.1. All we need to do is put the `/kirby` folder of every version into a folder of its own, and point the `/kirby` symlinks to the respective folder:
 
 ```filesystem
 /srv/www/
-  kirby-3.3.1/
-  kirby-3.3.2/
+  kirby-4.0.1/
+  kirby-4.1.1/
   my-site.com/
-    kirby -> /srv/www/kirby-3.3.1
+    kirby -> /srv/www/kirby-4.0.1
     content/
     media/
     site/
     assets/
     index.php
   my-shop.com/
-    kirby -> /srv/www/kirby-3.3.2
+    kirby -> /srv/www/kirby-4.1.1
     content/
     media/
     site/
@@ -179,20 +179,20 @@ Let's suppose that we want to run `my-site.com` with Kirby 3.3.1, but `my-shop.c
 These symbolic links are created like this:
 
 ```bash
-user@host:/srv/www/my-site.com $ ln -s /srv/www/kirby-3.3.1 kirby
-user@host:/srv/www/my-shop.com $ ln -s /srv/www/kirby-3.3.2 kirby
+user@host:/srv/www/my-site.com $ ln -s /srv/www/kirby-4.0.1 kirby
+user@host:/srv/www/my-shop.com $ ln -s /srv/www/kirby-4.1.1 kirby
 ```
 
-Now, when we want to upgrade `my-site.com` from Kirby 3.3.1 to Kirby 3.3.2, all we need to do is to change the symlink in `my-site.com` - actually without even stopping and starting the webserver:
+Now, when we want to upgrade `my-site.com` from Kirby 4.0.1 to Kirby 4.1.1, all we need to do is to change the symlink in `my-site.com` - actually without even stopping and starting the webserver:
 
 ```bash
 user@host:/srv/www/my-site.com $ rm kirby
-user@host:/srv/www/my-site.com $ ln -s /srv/www/kirby-3.3.2 kirby
+user@host:/srv/www/my-site.com $ ln -s /srv/www/kirby-4.1.1 kirby
 ```
 
 And we are done!
 
-Want to switch `my-site.com` back to Kirby 3.3.1? You know how easy this is by your own now.
+Want to switch `my-site.com` back to Kirby 4.0.1? You know how easy this is by your own now.
 
 ## Licenses for your multi-site
 
