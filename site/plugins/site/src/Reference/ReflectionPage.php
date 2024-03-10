@@ -308,12 +308,19 @@ abstract class ReflectionPage extends Page
 	}
 
 	/**
-	 * Returns in which version this entry was introduced
+	 * Returns in which version this entry was introduced;
+	 * ignore any versions but the current major version
 	 */
 	public function since(): Field
 	{
+
 		if ($tag = $this->docBlock()?->getTag('since')) {
-			return parent::since()->value($tag->getVersion());
+			$since   = $tag->getVersion();
+			$current = $this->kirby()->version();
+
+			if ((int)$since == (int)$current) {
+				return parent::since()->value($since);
+			}
 		}
 
 		return parent::since();
