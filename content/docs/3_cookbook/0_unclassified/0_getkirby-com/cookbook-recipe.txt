@@ -30,7 +30,7 @@ In this article, I want to focus on all the hidden gems and secrets we built int
 
 ****
 
-When we set out to create a new site for Kirby 3, we wanted to avoid repeating the mistakes we made with our old documentation that was built and maintained mainly by hand. That process was always error-prone and time-consuming.
+When we set out to create a new site for Kirby, we wanted to avoid repeating the mistakes we made with our old documentation that was built and maintained mainly by hand. That process was always error-prone and time-consuming.
 
 With the new Kirby version that comes with so many changes under the hood, we knew it would be too much effort to update everything manually. Fortunately, our new version has a very special feature we used to solve this…
 

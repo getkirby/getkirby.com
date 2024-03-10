@@ -9,7 +9,7 @@
 		<article class="p-6 bg-light">
 			<h3 class="font-bold">A secure foundation</h3>
 			<div class="prose text-sm">
-				<p>Kirby 3 is built on a modern, secure stack with state-of-the-art PHP and Vue.js at its core. We follow OWASP standards closely for everything we build. Our file-based architecture eliminates one of the main attack vectors of content management systems – SQL injections. Kirby can easily be set up to run without an admin interface or external API for even tighter security on your production server.
+				<p>Kirby is built on a modern, secure stack with state-of-the-art PHP and Vue.js at its core. We follow OWASP standards closely for everything we build. Our file-based architecture eliminates one of the main attack vectors of content management systems – SQL injections. Kirby can easily be set up to run without an admin interface or external API for even tighter security on your production server.
 			</div>
 		</article>
 		<article class="p-6 bg-light">

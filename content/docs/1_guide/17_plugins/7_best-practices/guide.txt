@@ -141,7 +141,7 @@ If it is free but you want people to donate, add a link to the platform where yo
 
 ## Promote your plugin
 
-- Create an new topic in the (link: https://forum.getkirby.com/c/plugins/kirby-3/ text: Kirby 3 plugins category on the forum), ping @texnixe to make sure she'll mention it in the next Kosmos issue.
+- Create an new topic in the (link: https://forum.getkirby.com/c/plugins text: plugins category on the forum), ping @texnixe to make sure she'll mention it in the next Kosmos issue.
 - Submit it to the (link: /plugins text: Kirby plugins directory), currently either by making a PR to the (link: https://github.com/getkirby/getkirby.com text: getkirby.com repo) or by creating an issue, but we will add a submit form in the future.
 - Tweet it mentioning @getkirby.
 - …
