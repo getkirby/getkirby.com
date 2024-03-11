@@ -14,7 +14,7 @@ Text:
 
 ## Set up the language
 
-The first step is to specify the reading direction when (link: docs/guide/languages/introduction text: setting up languages). To do so, add a `direction` entry to your language array with a value of `rtl` for right-to-left or `ltr` for left-to-right (default).
+The first step is to specify the reading direction when (link: docs/guide/languages text: setting up languages). To do so, add a `direction` entry to your language array with a value of `rtl` for right-to-left or `ltr` for left-to-right (default).
 
 ```php "/site/languages/ar.php"
 <?php

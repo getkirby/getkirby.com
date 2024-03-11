@@ -23,7 +23,7 @@ content/
 ```
 
 <info>
-The added language code must match the code in your (link: ./introduction#adding-languages text: languages setup).
+The added language code must match the code in your (link: /docs/guide/languages#adding-languages text: languages setup).
 </info>
 
 Make sure you always have a text file for your default language. Otherwise Kirby will not be able to provide a fallback for missing translations.
