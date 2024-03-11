@@ -51,7 +51,7 @@ Option | Value
 
 ### Excluding pages using a page model
 
-If you need even more detailed control over which pages are cached or ignored, you can use (link: docs/guide/templates/page-models text: page models) with an override of the (link: docs/reference/objects/cms/page/is-cacheable text: `$page->isCacheable()`) method:
+If you need even more detailed control over which pages are cached or ignored, you can use (link: docs/guide/templates/page-models text: page models) with an override of the (method: $page->isCacheable()) method:
 
 ```php
 <?php
