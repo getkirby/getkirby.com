@@ -44,8 +44,9 @@
 						<p class="font-bold mb-1">Docs</p>
 						<ul class="footer-menu-2">
 							<li><a href="/docs/guide">Guide</a></li>
-							<li><a href="/docs/cookbook">Cookbook</a></li>
 							<li><a href="/docs/reference">Reference</a></li>
+							<li><a href="/docs/cookbook">Cookbook</a></li>
+							<li><a href="/docs/quicktips">Quicktips</a></li>
 							<li><a href="https://videos.getkirby.com">Screencasts</a></li>
 							<li><a href="/docs/glossary">Glossary</a></li>
 							<li><a href="/docs/archive">Archive</a></li>
