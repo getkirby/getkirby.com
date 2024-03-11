@@ -11,8 +11,8 @@ return [
 	],
 	'revenueLimit' => 1000000,
 	'sale' => [
-		'start'    => '2023-02-22',
-		'end'      => '2023-02-24',
+		'start'    => '2024-03-11',
+		'end'      => '2024-03-25',
 		'discount' => 20
 	],
 	'quantities' => [
