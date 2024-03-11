@@ -1,7 +1,7 @@
 <ul class="auto-fill auto-rows-fr" style="--min: 16rem; --gap: var(--spacing-6)">
 	<?php foreach ($recipes as $recipe): ?>
 	<li>
-		<article class="rounded shadow" style="background-image: url('<?= $recipe->pattern() ?>'); background-size: cover; background-repeat: no-repeat; height: 100%">
+		<article class="rounded shadow" style="background-image: url('<?= $recipe->pattern() ?>'); background-position: top left; background-repeat: no-repeat; height: 100%">
 			<a class="block bg-white p-3" href="<?= $recipe->url() ?>" style="height: 100%; margin-left: var(--spacing-5)">
 				<figure class="mb-3">
 					<div class="mb-3">

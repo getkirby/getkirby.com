@@ -36,7 +36,7 @@
 	<li>
 		<article>
 			<a class="quicktip-title" href="<?= $tip->url() ?>">
-				<h2 class="link">
+				<h2>
 					<?= $tip->title() ?>
 				</h2>
 			</a>
