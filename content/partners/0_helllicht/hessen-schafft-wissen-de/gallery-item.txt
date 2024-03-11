@@ -2,7 +2,7 @@ Title: hessen-schafft-wissen.de
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: uskVz74QfdEN6ltG
 
 ----
 
-Text: 
+Text:

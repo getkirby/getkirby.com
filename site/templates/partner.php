@@ -138,9 +138,9 @@
 									<h3 class="h6 truncate link">
 										<?= $project->title() ?>
 									</h3>
-									<?php if ($project->client()->isNotEmpty()): ?>
+									<?php if ($project->info()->isNotEmpty()): ?>
 									<p class="color-gray-600">
-										Client: <?= $project->client() ?>
+										<?= $project->info() ?>
 									</p>
 									<?php endif ?>
 								</figcaption>

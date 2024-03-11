@@ -2,7 +2,7 @@ Title: gleif.org
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: tvqQBlv5fNhypqnv
 
 ----
 
-Text: 
+Text:

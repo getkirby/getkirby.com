@@ -2,7 +2,7 @@ Title: durchgedreht24.de
 
 ----
 
-Client: durchgedreht 24 Kurzfilmfestverein
+Info: Client: durchgedreht 24 Kurzfilmfestverein
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: YynxTRAw8ZeOT5UO
 
 ----
 
-Text: 
+Text:

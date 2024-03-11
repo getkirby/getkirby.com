@@ -2,7 +2,7 @@ Title: jeffreyroekens.com
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: yXdhbXqjcriQXSrA
 
 ----
 
-Text: 
+Text:

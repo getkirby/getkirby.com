@@ -2,7 +2,7 @@ Title: n2.studio
 
 ----
 
-Client: n2.Studio
+Info: Client: n2.Studio
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: osY0pfRAVphXi1Mc
 
 ----
 
-Text: 
+Text:

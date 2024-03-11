@@ -2,7 +2,7 @@ Title: nobelundjosef.de
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: dscbJFzQ3C9akovX
 
 ----
 
-Text: 
+Text:

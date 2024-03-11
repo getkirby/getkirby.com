@@ -2,7 +2,7 @@ Title: arenaofchange.de
 
 ----
 
-Client: FC Bayern München
+Info: Client: FC Bayern München
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: uvafmkLUX7gEGxSS
 
 ----
 
-Text: 
+Text:

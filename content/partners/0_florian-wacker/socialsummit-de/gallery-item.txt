@@ -2,7 +2,7 @@ Title: socialsummit.de
 
 ----
 
-Client: neues handeln
+Info: Client: neues handeln
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: pGarOa6HUq4g5rvd
 
 ----
 
-Text: 
+Text:

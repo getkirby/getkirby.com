@@ -2,7 +2,7 @@ Title: dieneue-charite.de
 
 ----
 
-Client: Charité – Universitätsmedizin Berlin
+Info: Client: Charité – Universitätsmedizin Berlin
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: VgzRq8SAyOyipprp
 
 ----
 
-Text: 
+Text:

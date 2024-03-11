@@ -2,7 +2,7 @@ Title: fishermansfriend.com
 
 ----
 
-Client: Fisherman’s Friend
+Info: Client: Fisherman’s Friend
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: kcXUTbwZ3fnUufqW
 
 ----
 
-Text: 
+Text:

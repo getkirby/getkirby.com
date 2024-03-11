@@ -2,7 +2,7 @@ Title: drigani.com
 
 ----
 
-Client: Fond studio
+Info: Client: Fond studio
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: 3nAf79Z7uQ9BHXoP
 
 ----
 
-Text: 
+Text:

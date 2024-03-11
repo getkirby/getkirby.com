@@ -2,7 +2,7 @@ Title: gelecta.it
 
 ----
 
-Client: Fond studio
+Info: Client: Fond studio
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: 58Idq2WhFl3iBnSU
 
 ----
 
-Text: 
+Text:

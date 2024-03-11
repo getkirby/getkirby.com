@@ -2,7 +2,7 @@ Title: izzieklaarvoordeklas.be
 
 ----
 
-Client: JBC
+Info: Client: JBC
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: Hw2zjNuN73aGXUWQ
 
 ----
 
-Text: 
+Text:

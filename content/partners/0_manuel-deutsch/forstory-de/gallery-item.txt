@@ -2,7 +2,7 @@ Title: forstory.de
 
 ----
 
-Client: forStory GmbH
+Info: Client: forStory GmbH
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: LdkZMccBBopPngpu
 
 ----
 
-Text: 
+Text:

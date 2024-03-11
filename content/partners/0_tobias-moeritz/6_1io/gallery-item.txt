@@ -2,7 +2,7 @@ Title: 1io.com
 
 ----
 
-Client: 1iO BRANDGUARDIAN GmbH
+Info: Client: 1iO BRANDGUARDIAN GmbH
 
 ----
 

@@ -2,7 +2,7 @@ Title: richtiggut.bauhaus.info
 
 ----
 
-Client: BAUHAUS AG
+Info: Client: BAUHAUS AG
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: h3fadvCvr3TmT4pQ
 
 ----
 
-Text: 
+Text:

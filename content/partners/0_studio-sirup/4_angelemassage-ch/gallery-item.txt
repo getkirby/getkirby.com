@@ -2,7 +2,7 @@ Title: angelemassage.ch
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: g0rYj0RNntwz7SvK
 
 ----
 
-Text: 
+Text:

@@ -2,7 +2,7 @@ Title: kwz-hd.de
 
 ----
 
-Client: Kinderwunschzentrum Heidelberg
+Info: Client: Kinderwunschzentrum Heidelberg
 
 ----
 
@@ -10,8 +10,8 @@ Link: https://kwz-hd.de
 
 ----
 
-Uuid: 
+Uuid:
 
 ----
 
-Text: 
+Text:

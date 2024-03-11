@@ -2,7 +2,7 @@ Title: grimshaw.foundation
 
 ----
 
-Client: Patrick Fry Studio
+Info: Client: Patrick Fry Studio
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: WNwc13RUuyHqD4gF
 
 ----
 
-Text: 
+Text:

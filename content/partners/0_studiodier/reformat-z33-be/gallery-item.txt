@@ -2,7 +2,7 @@ Title: reformat.z33.be
 
 ----
 
-Client: Z33
+Info: Client: Z33
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: b9vRujjjhDEfPPZH
 
 ----
 
-Text: 
+Text:

@@ -2,7 +2,7 @@ Title: stiftungbraunschweigerland.de
 
 ----
 
-Client: Stiftung Braunschweiger Land
+Info: Client: Stiftung Braunschweiger Land
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: B394KRgxeGLNcntq
 
 ----
 
-Text: 
+Text:

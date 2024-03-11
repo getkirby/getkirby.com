@@ -2,7 +2,7 @@ Title: fruchtwasserkapitaen.de
 
 ----
 
-Client: Der Fruchtwasser Kapitän
+Info: Client: Der Fruchtwasser Kapitän
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: ita86m9i5PIwbl3w
 
 ----
 
-Text: 
+Text:

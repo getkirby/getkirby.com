@@ -2,7 +2,7 @@ Title: leseclubfestival.com
 
 ----
 
-Client: Junge Literaturvermittlung e.V.
+Info: Client: Junge Literaturvermittlung e.V.
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: DNvgLoWPRALXiin1
 
 ----
 
-Text: 
+Text:
