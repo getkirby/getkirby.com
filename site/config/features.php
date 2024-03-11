@@ -104,6 +104,6 @@ return [
 	'multi-site' => [
 		'text' => 'Multi-site setup',
 		'icon' => 'sitemap',
-		'link' => '/docs/quicktips/multisite'
+		'link' => '/docs/guide/configuration/multisite-setup'
 	],
 ];

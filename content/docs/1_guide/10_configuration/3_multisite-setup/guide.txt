@@ -1,8 +1,6 @@
 Title: Multisite configuration
 
-
 ----
-
 
 Description: Run multiple sites from the same Kirby installation.
 
@@ -11,7 +9,6 @@ Description: Run multiple sites from the same Kirby installation.
 Authors: - authors/sonja-broda
 
 ----
-
 
 Category: configuration
 

@@ -34,7 +34,7 @@ The following setup was tested on Linux OS (Ubuntu 18.04 and Debian 9) together 
 
 ## In the filesystem
 
-The proposed filesystem layout in (link: docs/quicktips/multisite text: the above-mentioned recipe) looks like this:
+The proposed filesystem layout in (link: /docs/guide/configuration/multisite-setup text: the above-mentioned recipe) looks like this:
 
 ```filesystem
   kirby/
