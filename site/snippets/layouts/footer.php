@@ -1,6 +1,9 @@
 <footer class="footer text-sm">
 	<div class="container mb-24">
+		<?php if ($separator ?? true): ?>
 		<hr class="hr mb-6">
+		<?php endif ?>
+
 		<div class="columns" style="--columns-sm: 1; --columns-md: 1; --columns: 2; --gap: var(--spacing-12)">
 			<div class="footer-info mb-6">
 				<p class="font-bold mb-1">Kirby</p>
