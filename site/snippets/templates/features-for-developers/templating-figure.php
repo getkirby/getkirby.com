@@ -18,7 +18,7 @@
 		<?= $page->twigTemplate()->kt() ?>
 	</div>
 	<div class="font-mono text-xs color-gray-700">
-		<a href="/plugins/amteich/twig"><strong class="font-normal color-black link">Kirby Twig plugin</strong> by Christian Zehetner</a>
+		<a href="/plugins/wearejust/twig"><strong class="font-normal color-black link">Kirby Twig plugin</strong> by wearejust</a>
 	</div>
 </div>
 <div id="blade" data-template class="hidden">
