@@ -14,7 +14,7 @@ Text:
 
 ## What makes a field plugin?
 
-Our Kirby panel is built with (glossary: vue) and speaks to our (link: docs/guide/api/introduction text: REST API). Your field plugin needs to consist out of **three parts**:
+Our Kirby panel is built with (glossary: vue) and speaks to our (link: docs/guide/api text: REST API). Your field plugin needs to consist out of **three parts**:
 
 - PHP code for the REST API: `index.php`
 - Vue code for the panel: `index.js`

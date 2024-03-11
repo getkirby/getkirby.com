@@ -35,7 +35,7 @@ Kirby::plugin('my/api', [
 
 Your new endpoint is now available at `https://yourdomain.com/api/my-endpoint` and will return a json encoded version of the returned array.
 
-The endpoint is automatically protected with the same authentication layer as our own endpoints. It will also move when you (link: docs/guide/api/introduction#custom-api-location text: change the API slug).
+The endpoint is automatically protected with the same authentication layer as our own endpoints. It will also move when you (link: docs/guide/api#custom-api-location text: change the API slug).
 
 ### Access to `$kirby`
 

@@ -2,7 +2,7 @@ Title: Data
 
 ----
 
-Intro: Once you start (link: docs/guide/api/introduction#further-customize-the-api text: customizing the API) and adding your own API endpoints, there is a lot to know about how to interact with data in the callback functions.
+Intro: Once you start (link: docs/guide/api#further-customize-the-api text: customizing the API) and adding your own API endpoints, there is a lot to know about how to interact with data in the callback functions.
 
 ----
 
