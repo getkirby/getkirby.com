@@ -28,7 +28,7 @@ Text:
 
 ## What are UUIDs?
 
-Kirby is built on (link: docs/guide/content/introduction text: just files and folders), which is great for flexibility in structuring your content, performance and rapid development. Referring to a page or file from elsewhere by its file path works, but makes the site structure pretty rigid and takes away a lot of the flexibility of the content structure. Because as soon as a page or file gets renamed or moved, its file path changes – and immediately the reference to it will break.
+Kirby is built on (link: docs/guide/content text: just files and folders), which is great for flexibility in structuring your content, performance and rapid development. Referring to a page or file from elsewhere by its file path works, but makes the site structure pretty rigid and takes away a lot of the flexibility of the content structure. Because as soon as a page or file gets renamed or moved, its file path changes – and immediately the reference to it will break.
 
 UUIDs (universally unique identifiers) are an additional way to refer to any model in Kirby – be it a page, a file or a user. UUIDs look something like `page://Eesj89FnbMzMMvs0`. In contrast to file paths, UUIDs never change. They are randomly generated when the model gets first created. It is so unlikely that two models ever share the same UUID that they can be considered unique (in fact, it will take millions of years to reach a 1% probability of a collision on any given site). These properties make UUIDs the ideal candidate for robust and persistent references.
 
