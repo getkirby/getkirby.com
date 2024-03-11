@@ -18,7 +18,7 @@
 		<?php snippet('templates/home/voices') ?>
 	</div>
 
-	<div class="mb-42">
+	<div class="mb-24">
 		<?php snippet('templates/home/updates') ?>
 	</div>
 </article>

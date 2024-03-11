@@ -8,7 +8,7 @@
 	]) ?>
 </div>
 
-<header class="header mb-24">
+<header class="header">
 	<?php snippet('layouts/skipper') ?>
 	<div class="container">
 		<div class="header-content relative flex items-center">
