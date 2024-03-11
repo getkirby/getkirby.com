@@ -5,6 +5,7 @@ Title: Get up and running
 Description: All you need to know to get Kirby up and running: Installation, requirements and updates.
 
 ----
+
 Intro: All you need to know to get Kirby up and running: Installation, requirements and updates.
 
 ----
@@ -42,6 +43,9 @@ You can install Kirby in a few quick steps in different ways.
 3. Visit your new Kirby site in your browser at `yourdomain.com`
 4. Visit the (glossary: Panel) at `yourdomain.com/panel`
 
+<info>
+When copying files to a remote server via (S)FTP, make sure to copy the `.htaccess` file as well. By default, files starting with a dot are invisible in the filesystem, so make sure enable the display of invisible files before copying.
+</info>
 
 === Kirby CLI
 
@@ -97,10 +101,17 @@ More information about installing and updating Kirby via Git in our (link: docs/
 
 (image: starterkit.png)
 
+#### Local development environment
 
-<info>
-When copying files to a remote server via (S)FTP, make sure to copy the `.htaccess` file as well. By default, files starting with a dot are invisible in the filesystem, so make sure enable the display of invisible files before copying.
-</info>
+If you don't have a local development environment yet and don't know what to use, check out our guide for a (link: docs/guide/quickstart/development-environment text: local development environment).
+
+#### Installation guides for webhosts
+Some providers have created dedicated guides how to install Kirby on their servers. If you are with one of these providers, keep on reading:
+- (link: https://lab.uberspace.de/guide_kirby.html text: Installation on Uberspace)
+- (link: https://help.fortrabbit.com/install-kirby text: Installation on fortrabbit)
+- (link: https://www.rosehosting.com/blog/how-to-install-kirby-cms-on-ubuntu-18-04/ text: Installation on RoseHosting)
+- (link: https://www.alwaysdata.com/en/marketplace/kirby/ text: Installation on alwaysdata (from Marketplace))
+
 
 ## Requirements
 
@@ -118,18 +129,6 @@ Kirby needs a pretty standard set of PHP extensions. See the full list of requir
 
 (docs: requirements/browsers)
 
-### Local development environment
-
-
-If you don't have a local development environment yet and don't know what to use, check out our (link: docs/guide/development-environment text: Local development environment) recipe.
-
-### Installation guides for webhosts
-Some providers have created dedicated guides how to install Kirby on their servers. If you are with one of these providers, keep on reading:
-- (link: https://lab.uberspace.de/guide_kirby.html text: Installation on Uberspace)
-- (link: https://help.fortrabbit.com/install-kirby text: Installation on fortrabbit)
-- (link: https://www.rosehosting.com/blog/how-to-install-kirby-cms-on-ubuntu-18-04/ text: Installation on RoseHosting)
-- (link: https://www.alwaysdata.com/en/marketplace/kirby/ text: Installation on alwaysdata (from Marketplace))
-
 
 ## Create your first account
 
@@ -143,12 +142,13 @@ For security reasons, you cannot install the Panel on a public server by default
 
 Once you publish your website, you need to (link: buy text: purchase a Kirby license). We will send you a unique license code for your domain. You can activate your license with the following steps:
 
+(tabs…)
+=== In the Panel
 1. Open the Panel at `http://yourdomain.com/panel` and log in.
 2. Click on "Activate" on the bottom left.
 3. Enter your license code and your email address and press "Ok".
 
-### Without using the Panel
-
+=== Without using the Panel
 If you don’t want the Panel to connect to our server, registration via the Panel fails, or you are not using the Panel at all, you can download your license files directly from our licenses website:
 
 1. Visit (link: https://hub.getkirby.com).
@@ -157,6 +157,7 @@ If you don’t want the Panel to connect to our server, registration via the Pan
 4. Use the "Download license file" button to download the license file.
 5. Rename the downloaded file to `.license` (without extensions).
 6. Place it in the `/site/config/` folder of your Kirby installation.
+(…tabs)
 
 ## Where to go from here
 
