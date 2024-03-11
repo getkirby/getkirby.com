@@ -2,7 +2,7 @@ Title: hfrc.org
 
 ----
 
-Client: Hamburg Financial Research Center
+Info: Client: Hamburg Financial Research Center
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: go1CQI2Yaf8B76NO
 
 ----
 
-Text: 
+Text:

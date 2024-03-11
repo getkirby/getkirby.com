@@ -2,7 +2,7 @@ Title: screenproducersireland.com
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: E4pfgXEBJiEuhHSV
 
 ----
 
-Text: 
+Text:

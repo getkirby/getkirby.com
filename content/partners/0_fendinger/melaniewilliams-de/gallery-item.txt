@@ -2,7 +2,7 @@ Title: melaniewilliams.de
 
 ----
 
-Client: Melanie Williams Mediation & Coaching
+Info: Client: Melanie Williams Mediation & Coaching
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: yrbChhsYZaYJUIBe
 
 ----
 
-Text: 
+Text:

@@ -2,7 +2,7 @@ Title: gemeinschaftspraxis-kaiserplatz.de
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: RD4F80QsZ5iPUQBM
 
 ----
 
-Text: 
+Text:

@@ -2,7 +2,7 @@ Title: visualjournal.it
 
 ----
 
-Client: Aesse Studio
+Info: Client: Aesse Studio
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: tA3mq2acJczg0Hj4
 
 ----
 
-Text: 
+Text:

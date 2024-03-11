@@ -2,7 +2,7 @@ Title: maisonpollet.com
 
 ----
 
-Client: Broc & Chic
+Info: Client: Broc & Chic
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: 1fhkoCCsHCwMIvMN
 
 ----
 
-Text: 
+Text:

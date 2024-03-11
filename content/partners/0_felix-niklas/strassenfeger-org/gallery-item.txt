@@ -2,7 +2,7 @@ Title: strassenfeger.org
 
 ----
 
-Client: Studio Hoekstra
+Info: Client: Studio Hoekstra
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: kiE0UQGLfuN6kx9E
 
 ----
 
-Text: 
+Text:

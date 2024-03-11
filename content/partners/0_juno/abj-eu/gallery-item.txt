@@ -2,7 +2,7 @@ Title: abj.eu
 
 ----
 
-Client: abj Architekt:innen
+Info: Client: abj Architekt:innen
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: q21V9aDXqYED9Kmd
 
 ----
 
-Text: 
+Text:

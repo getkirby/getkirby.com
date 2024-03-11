@@ -2,7 +2,7 @@ Title: andreasthaler.de
 
 ----
 
-Client: Andreas Thaler GmbH & Co. KG
+Info: Client: Andreas Thaler GmbH & Co. KG
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: Wikun6njWuE6dKgL
 
 ----
 
-Text: 
+Text:

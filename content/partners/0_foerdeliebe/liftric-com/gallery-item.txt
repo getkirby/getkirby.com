@@ -2,7 +2,7 @@ Title: liftric.com
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: Yzjsg4G68TmOfQAa
 
 ----
 
-Text: 
+Text:

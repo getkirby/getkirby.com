@@ -2,7 +2,7 @@ Title: tommasocalabro.com
 
 ----
 
-Client: Fond studio
+Info: Client: Fond studio
 
 ----
 
@@ -10,4 +10,4 @@ Link: https://tommasocalabro.com/
 
 ----
 
-Text: 
+Text:

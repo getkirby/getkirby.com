@@ -2,7 +2,7 @@ Title: k-review.com
 
 ----
 
-Client: UNIGE, HES-SO
+Info: Client: UNIGE, HES-SO
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: NXzgwDVzYioZ0Gwu
 
 ----
 
-Text: 
+Text:

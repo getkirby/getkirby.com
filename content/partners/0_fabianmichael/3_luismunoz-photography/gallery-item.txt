@@ -2,7 +2,7 @@ Title: luismunoz.photography
 
 ----
 
-Client: Luis Muñoz
+Info: Client: Luis Muñoz
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: y3MZQuk0tfbgLvhk
 
 ----
 
-Text: 
+Text:

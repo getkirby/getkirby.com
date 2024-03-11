@@ -2,7 +2,7 @@ Title: fraseba.de
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: 4JpJecBDGmSaADx4
 
 ----
 
-Text: 
+Text:

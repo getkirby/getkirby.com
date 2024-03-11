@@ -2,7 +2,7 @@ Title: eye-studio.it
 
 ----
 
-Client: EYE Srl
+Info: Client: EYE Srl
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: 83m8MV5wusdlIyZI
 
 ----
 
-Text: 
+Text:

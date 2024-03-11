@@ -2,7 +2,7 @@ Title: signalfoundry.com
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: aH3LmQFChzIjcBtz
 
 ----
 
-Text: 
+Text:

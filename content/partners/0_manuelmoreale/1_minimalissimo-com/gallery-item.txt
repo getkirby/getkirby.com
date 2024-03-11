@@ -2,7 +2,7 @@ Title: minimalissimo.com
 
 ----
 
-Client: Minimalissimo Ltd
+Info: Client: Minimalissimo Ltd
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: VVuLmzUuVxeFlSbA
 
 ----
 
-Text: 
+Text:

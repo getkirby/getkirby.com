@@ -2,7 +2,7 @@ Title: kaarisma.de
 
 ----
 
-Client: KAARISMA Recruitment GmbH
+Info: Client: KAARISMA Recruitment GmbH
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: OUMBYUDnY0IJTQxZ
 
 ----
 
-Text: 
+Text:

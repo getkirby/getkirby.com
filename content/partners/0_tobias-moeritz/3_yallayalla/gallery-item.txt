@@ -2,7 +2,7 @@ Title: yallayalla.studio
 
 ----
 
-Client: Yalla Yalla! GbR
+Info: Client: Yalla Yalla! GbR
 
 ----
 

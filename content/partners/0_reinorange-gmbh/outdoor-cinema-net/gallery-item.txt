@@ -2,7 +2,7 @@ Title: outdoor-cinema.net
 
 ----
 
-Client: Moving Adventures Medien GmbH
+Info: Client: Moving Adventures Medien GmbH
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: vkOHGTpezpIx8JNE
 
 ----
 
-Text: 
+Text:

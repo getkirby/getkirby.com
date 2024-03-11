@@ -2,7 +2,7 @@ Title: stiftung-amm.de
 
 ----
 
-Client: Stiftung Atelier Manfred Mayerle
+Info: Client: Stiftung Atelier Manfred Mayerle
 
 ----
 

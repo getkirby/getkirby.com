@@ -2,7 +2,7 @@ Title: timepiece.hu
 
 ----
 
-Client:  Timepiece
+Info: Client:  Timepiece
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: 5U80jKgcx7lImw5T
 
 ----
 
-Text: 
+Text:

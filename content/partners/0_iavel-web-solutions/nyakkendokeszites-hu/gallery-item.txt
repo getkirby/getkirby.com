@@ -2,7 +2,7 @@ Title: nyakkendokeszites.hu
 
 ----
 
-Client: Angello Kft.
+Info: Client: Angello Kft.
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: 5U80jKgcx7lImw5T
 
 ----
 
-Text: 
+Text:

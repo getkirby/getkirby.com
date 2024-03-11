@@ -2,7 +2,7 @@ Title: meine-erde.de
 
 ----
 
-Client: Meine Erde/Circulum Vitae GmbH
+Info: Client: Meine Erde/Circulum Vitae GmbH
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: moqrcVrPsSqDNC56
 
 ----
 
-Text: 
+Text:

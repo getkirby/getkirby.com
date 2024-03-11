@@ -2,7 +2,7 @@ Title: dock11-berlin.de
 
 ----
 
-Client: DOCK ART Gmbh
+Info: Client: DOCK ART Gmbh
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: ujhzk1Qvt6SonnMB
 
 ----
 
-Text: 
+Text:
