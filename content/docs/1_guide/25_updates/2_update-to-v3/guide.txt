@@ -373,7 +373,7 @@ $kirby->page('some/page')->delete();
 
 ### Defining languages
 
-(link: docs/guide/languages/introduction text: Languages) are now defined in the `/site/languages` folder, not in your `/site/config.php`file anymore. Users can now add or remove new languages through the Panel, if the (link: docs/reference/system/options/languages text: `languages` option) is enabled in the config settings.
+(link: docs/guide/languages text: Languages) are now defined in the `/site/languages` folder, not in your `/site/config.php`file anymore. Users can now add or remove new languages through the Panel, if the (link: docs/reference/system/options/languages text: `languages` option) is enabled in the config settings.
 
 ### Accessing languages
 
