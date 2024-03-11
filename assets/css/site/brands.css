@@ -17,15 +17,21 @@
 	}
 }
 .brands svg {
-  width: 100%;
+	width: 100%;
 	height: auto;
-  max-height: 2.5rem;
+	max-height: 2.5rem;
 }
 .brands .amd svg {
 	max-height: 2.25rem;
 }
 .brands .eurowings svg {
-	margin-top: -.5rem;
+	margin-top: -0.5rem;
+}
+.brands .fc-bayern-munich svg {
+	max-height: 4.5rem;
+}
+.brands .fishermans-friend svg {
+	max-height: 4.25rem;
 }
 .brands .fraport svg {
 	max-height: 2.75rem;
@@ -38,7 +44,7 @@
 	max-height: 4rem;
 }
 .brands .nyt svg {
-	margin-top: .25rem;
+	margin-top: 0.25rem;
 }
 .brands .obs svg {
 	max-height: 5rem;
