@@ -83,9 +83,14 @@ html {
 	}
 }
 
+/* Footers */
 .reference-footer {
-	padding-top: 9rem;
+	padding-top: var(--spacing-36);
 }
+.reference-content .footer .container {
+	padding: var(--spacing-20) 0 0;
+}
+
 .reference-entries a {
 	position: relative;
 	overflow: hidden;

@@ -35,31 +35,30 @@
 		<?php snippet('templates/reference/entries') ?>
 		<?php endif ?>
 
-		<div id="main" class="reference-content reference-panel">
-			<article>
-				<header class="mb-12">
-					<h1 class="h1 mb-6"><?= $page->title() ?></h1>
-					<?php if ($page->intro()->isNotEmpty()): ?>
-					<div class="prose mb-12">
-						<div class="intro color-gray-700">
-							<?= $page->intro()->kt() ?>
-						</div>
+		<article id="main" class="reference-content reference-panel">
+			<header class="mb-12">
+				<h1 class="h1 mb-6"><?= $page->title() ?></h1>
+				<?php if ($page->intro()->isNotEmpty()): ?>
+				<div class="prose mb-12">
+					<div class="intro color-gray-700">
+						<?= $page->intro()->kt() ?>
 					</div>
-					<?php endif ?>
-					<?php snippet('templates/reference/entry/meta') ?>
-				</header>
-
-				<?php if ($toc = $slots->toc()): ?>
-					<?= $toc ?>
-				<?php else: ?>
-					<?php snippet('toc') ?>
+				</div>
 				<?php endif ?>
+				<?php snippet('templates/reference/entry/meta') ?>
+			</header>
 
-				<?= $slot ?>
+			<?php if ($toc = $slots->toc()): ?>
+				<?= $toc ?>
+			<?php else: ?>
+				<?php snippet('toc') ?>
+			<?php endif ?>
 
-				<?php snippet('templates/reference/footer') ?>
-			</article>
-		</div>
+			<?= $slot ?>
+
+			<?php snippet('templates/reference/footer') ?>
+			<?php snippet('layouts/footer', ['separator' => false]) ?>
+		</article>
 	</main>
 
 	<script>
@@ -159,6 +158,5 @@
 	import  { Menu } from "<?= url('/assets/js/layouts/reference.js') ?>";
 	new Menu();
 	</script>
-
 </body>
 </html>
