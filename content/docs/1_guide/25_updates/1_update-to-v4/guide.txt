@@ -31,9 +31,9 @@ Before you change the PHP version in production, please ensure that your site co
 In any case, we recommend to change the PHP version on a testing or staging server first and verify that everything still works as expected. Performing the PHP update before the Kirby update to 4.0 will make the migration easier.
 </warning>
 
-Kirby has supported PHP 8.2 since Kirby 3.9.0. So updating your PHP version won't break the Kirby core if you are using a Kirby version that is newer than that.
+Kirby has supported PHP 8.1 since Kirby 3.6.1 and PHP 8.2 since Kirby 3.9.0. So updating your PHP version won't break the Kirby core if you are using a Kirby version that is newer than that.
 
-However your installed plugins and your site code may be affected by breaking changes in PHP itself. You can find out more about this in the official migration guides for (link: https://www.php.net/manual/en/migration82.php text: PHP 8.1 to 8.2) and (link: https://www.php.net/manual/en/migration83.php text: PHP 8.2 to 8.3).
+However your installed plugins and your site code may be affected by breaking changes in PHP itself. You can find out more about this in the official migration guides for (link: https://www.php.net/manual/en/migration81.php text: PHP 8.0 to 8.1), (link: https://www.php.net/manual/en/migration82.php text: PHP 8.1 to 8.2) and (link: https://www.php.net/manual/en/migration83.php text: PHP 8.2 to 8.3).
 
 #### Browser support of the Panel
 
