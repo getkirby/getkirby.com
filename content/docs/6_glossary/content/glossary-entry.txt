@@ -6,4 +6,4 @@ Entry:
 Content can refer either to the content folder or to anything within the content folder: text files, media files or metadata files.
 
 ----
-Link: docs/guide/content/introduction
+Link: docs/guide/content
