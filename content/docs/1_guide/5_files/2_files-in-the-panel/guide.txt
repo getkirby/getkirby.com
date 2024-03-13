@@ -3,7 +3,7 @@ Title: Files in the Panel
 ----
 Text:
 
-## Uploading files via the Panel
+## Managing files in the Panel
 
 Files can be uploaded to a page, the site or a user via the Panel using one of the following methods:
 
@@ -13,16 +13,33 @@ Files can be uploaded to a page, the site or a user via the Panel using one of t
 
 Depending on the context, as an editor you then click the `Add` button in a pages section, or select the upload option from the dropdown in a files or textarea field:
 
-### Files section
+(tabs…)
+
+=== Files section
+
+A (link: docs/reference/panel/sections/files text: files section) helps you manage the files belonging to pages or the site: upload, delete, sort and replace. A files section does not store anything in your content file!
 (image: files-section.png)
 
-### Files field
+=== Files field
+
+A (link: docs/reference/panel/fields/files text: files field) allows you to select one or multiple files out the ones queried as options. The selected file references are stored in the content file of the model in which the field is used. The files field also offers the option to upload files.
 
 (image: files-field.png)
 
-### Textarea field
+=== Textarea field
+
+The (link: docs/reference/panel/fields/textarea#file-upload-and-select text: textarea field) has an upload option to quickly upload files you want to link to in your content.
 
 (image: textarea-field.png)
+(…tabs)
+
+## Deleting files
+
+Files can be deleted via the delete option in a files section, or via the file view.
+
+Note that if you unselect a file in a **files field**, this file is not deleted from the parent model.
+
+## File names
 
 Kirby will convert the filename of your uploaded file to ASCII characters. This ensures that the filename is URL-safe and can be accessed correctly. After the conversion, the file will be checked against Kirby's internal validation rules as well as against custom rules that were defined in the blueprint. If the file validates, it will be uploaded.
 
@@ -36,9 +53,9 @@ The upload dialog allows you to preview and edit the filenames of the files to u
 In your file blueprints, you can also set (link: docs/reference/panel/blueprints/file text: options for optimizing uploaded files). These options will be applied directly after upload, and they are a great way to avoid huge original files in the content folder.
 </since>
 
-## Meta data blueprints for the Panel
+## File blueprints
 
-Meta data fields for files to be used in the Panel are defined in (link: docs/reference/panel/blueprints/file text: file blueprints). They are stored in `/site/blueprints/files`.
+Metadata fields for files to be used in the Panel are defined in (link: docs/reference/panel/blueprints/file text: file blueprints). They are stored in `/site/blueprints/files`.
 
 Depending on whether you use a files section or one of the fields to upload files, the way how you assign a file blueprints to a file, differs slightly, see field/section links at the top of this page for details.
 
@@ -65,7 +82,7 @@ fields:
     type: textarea
 ```
 
-For details of creating a file blueprint, see the (link: docs/reference/panel/blueprints/file text: files blueprint options)
+For details of creating a file blueprint, see the (link: docs/reference/panel/blueprints/file text: file blueprint options)
 
 <since v="4.0.0">
 ## Change file template
