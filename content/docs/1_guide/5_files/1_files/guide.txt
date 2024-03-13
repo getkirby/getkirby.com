@@ -1,4 +1,4 @@
-Title: Files
+Title: Overview
 
 ----
 
@@ -6,14 +6,26 @@ Description: Every page in your Kirby installation has its own set of files. Lea
 
 ----
 
-Intro: Pages can have any number and kind of images, videos, documents or other files. Those files are stored directly in the page's folder.
+Intro: Pages and the site object can have any number and kind of images, videos, documents or other files.
 
 ----
 Text:
 
 For file handling via the Panel, see (link: docs/guide/files/files-in-the-panel text: Files in the Panel).
 
-## Example page with files
+<info>
+This guide is about files that are stored within the `/content` folder only. Files outside of the content folder can also be used, but need to be handled as (link: docs/reference/objects/panel/assets text: `Assets`).
+</info>
+
+## Where are files stored?
+
+Files can belong either to
+
+- the `Site` object: in this case, they are stored directly in the `/content` folder next to the `site.txt` file.
+- a `Page` object: in this case, they are stored inside a page folder within `/content`.
+
+
+### Folder structure for a page with files
 
 ```filesystem
 /content/projects/project-a/
@@ -25,18 +37,28 @@ For file handling via the Panel, see (link: docs/guide/files/files-in-the-panel 
 /content/projects/project-a/project-data.xls
 /content/projects/project-a/some-video.mp4
 ```
+### Folder structure for site files
+
+```filesystem
+/content/image-1.jpg
+/content/image-2.jpg
+/content/image-3.jpg
+/content/document-1.pdf
+/content/data.xls
+/content/some-video.mp4
+```
 
 ## Supported file types
 
-You can access the page's files using handy methods for each common file type:
+You can access files using handy methods for each common file type:
 
-| Type | Extensions | API Method |
-| ---- | ---------- | ---------- |
-| Audio | aif, aiff, m4a, midi, mp3, wav | `$page->audio()` |
-| Code | css, js, json, java, htm, html, php, rb, py, scss, xml, yaml, yml | `$page->code()` |
-| Documents | csv, doc, docx, dotx, indd, md, mdown, pdf, ppt, pptx, rtf, txt, xl, xls, xlsx, xltx | `$page->documents()` |
-| Images | ai, avif, bmp, gif, eps, ico, j2k, jp2, jpeg, jpg, jpe, png, ps, psd, svg, tif, tiff, webp | `$page->images()` |
-| Videos | avi, flv, m4v, mov, movie, mpe, mpg, mp4, ogg, ogv, swf, webm | `$page->videos()` |
+| Type | Extensions | API Method                       |
+| ---- | ---------- |----------------------------------|
+| Audio | aif, aiff, m4a, midi, mp3, wav | `$page->audio()`/`$site->audio()`|
+| Code | css, js, json, java, htm, html, php, rb, py, scss, xml, yaml, yml | `$page->code()`/`$site->code()`|
+| Documents | csv, doc, docx, dotx, indd, md, mdown, pdf, ppt, pptx, rtf, txt, xl, xls, xlsx, xltx | `$page->documents()`/`$site->documents()`|
+| Images | ai, avif, bmp, gif, eps, ico, j2k, jp2, jpeg, jpg, jpe, png, ps, psd, svg, tif, tiff, webp | `$page->images()`/`$site->images()` |
+| Videos | avi, flv, m4v, mov, movie, mpe, mpg, mp4, ogg, ogv, swf, webm | `$page->videos()`/`$site->videos()` |
 
 Other file types are of course also supported.
 
@@ -46,16 +68,12 @@ To upload file types not supported out of the box by Kirby, you can (link: docs/
 When you are using `.txt` files for your content (as it is the default), you cannot upload other `.txt` files as they will be mistaken for content files. You can configure this via the (link: docs/reference/system/options/content#content-file-extension text: `content.extension` config option).
 </info>
 
-## Site files
-
-Files cannot only be uploaded to a page, but also to the site object, i.e. directly into the `/content` folder. To upload images to the site object in the Panel, you have to create a files section in the `site.yml` blueprint.
 
 ## Manually uploading files
 
-You can add/upload files to a page manually by placing it into the corresponding page folder.
+You can add/upload files to a page/the site manually by placing them into the corresponding folders.
 
-Note that if you upload files to a page and want to use them later in the Panel, you have to define files sections in your blueprints. Otherwise, these files will not show up.
-
+Note that if you upload files you later want to use in the Panel, you have to define (link: docs/reference/panel/sections/files text: files sections) in your blueprints. Otherwise, these files will not show up.
 
 ## Linking to files in your content
 
