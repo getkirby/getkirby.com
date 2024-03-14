@@ -4,11 +4,6 @@ use Kirby\Cms\Page;
 
 class GuidePage extends Page
 {
-	public function isChapter(): bool
-	{
-		return $this->text()->isEmpty() && $this->hasChildren();
-	}
-
 	public function metadata(): array
 	{
 		return [
