@@ -166,7 +166,7 @@ class PdfPreview extends ImageMagick
     public function process(string $file, array $options = []): array
     {
         $options   = $this->options($options);
-        $command   = [];
+        $command   = ['convert'];
         $command[] = $this->convert($file, $options);
         $command[] = $this->colorspace($file, $options);
         $command[] = $this->quality($file, $options);
