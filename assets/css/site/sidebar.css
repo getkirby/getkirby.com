@@ -65,9 +65,32 @@
 }
 
 .sidebar-mobile-select {
+	position: relative;
+	display: flex;
+	flex-grow: 1;
+}
+.sidebar-mobile-select label {
+	display: flex;
+	justify-content: space-between;
+	flex-grow: 1;
+	align-items: center;
+	font-size: var(--text-sm);
+	padding: var(--spacing-2);
+	line-height: 1;
+}
+.sidebar-mobile-select select {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+	appearance: none;
+	font-size: var(--text-sm);
 	width: 100%;
-	padding: var(--spacing-1);
-	background: var(--color-light);
-	border-radius: var(--rounded);
-	margin-bottom: var(--spacing-12);
+	height: 100%;
+	cursor: pointer;
+}
+.sidebar-mobile-select:has(select:focus-visible) {
+	outline: 2px auto;
 }
