@@ -29,8 +29,6 @@ When you edit pages, files or user accounts in the Panel, you will see an "unsav
 ## Page states
 Kirby's page states give you full control over your publishing workflow. They allows you to define access to content, to filter content by status criteria and much more.
 
-
-
 Let's look at what the three states mean again before we go into details:
 
 | Page state | Description |
@@ -47,7 +45,8 @@ In your blueprints for the Panel, you can (link: docs/reference/panel/blueprints
 
 ## Publishing drafts
 
-### In the Panel
+(tabs…)
+=== In the Panel
 
 To publish a draft in the Panel, click on the "Draft" button with the red status icon in the toolbar or go to "Settings" > "Change status".
 
@@ -59,7 +58,7 @@ You can only publish a draft in the Panel if all required fields are filled in a
 
 (image: validation.png)
 
-### In the content folder
+=== In the content folder
 
 To publish a draft manually in your content folder, drag it from the `_drafts` folder to the parent directory:
 
@@ -76,15 +75,19 @@ To publish a draft manually in your content folder, drag it from the `_drafts` f
 ```
 This will make the page `unlisted`. You can make it `listed` and apply sorting by prepending a number. Optionally, you can then delete the `_drafts` folder if it's no longer needed or just leave it in place.
 
+(…tabs)
+
+
 ### Drafts in your templates
 
-Drafts are not included in `$page->children()` collections. If you have to access them in your templates, you can use the `$page->drafts()` method.
+Drafts are not included in `$page->children()` collections. If you have to access them in your templates, you can use the `$page->drafts()` method, or if you want to get both children and drafts, use `$page->childrenAndDrafts()`.
 
 ## Listed pages
 
 Listed pages are public pages with a sorting number in their content folder. You can choose between three different numbering schemes, depending on what is most useful for the type of page.
 
-### Manual sorting
+(tabs…)
+=== Manual sorting
 
 For a basic menu, a list of projects or any other non-alphabetical list you often need manual sorting. Manual sorting is applied by prepending a number followed by an underscore:
 
@@ -94,7 +97,7 @@ For a basic menu, a list of projects or any other non-alphabetical list you ofte
 3_dont-look-at-this-one/
 ```
 
-### Date-based sorting
+=== Date-based sorting
 
 For blogs, events or anything else that is date-based, the date can be prepended as the sorting number, also followed by an underscore:
 
@@ -103,7 +106,7 @@ For blogs, events or anything else that is date-based, the date can be prepended
 20181212_really-bad-at-regular-blogging/
 ```
 
-### Alphabetical sorting
+=== Alphabetical sorting
 
 To sort pages alphabetically, 0 is prepended as the sorting number in the file system:
 
@@ -112,6 +115,7 @@ To sort pages alphabetically, 0 is prepended as the sorting number in the file s
 0_bear/
 0_camel/
 ```
+(…tabs)
 
 ## Unlisted pages
 
@@ -124,6 +128,7 @@ only-access-via-url/
 <info>
 If you publish pages that are only intended as data containers but should not be accessible via their URL, you can use (link: docs/guide/routing text: Kirby's router) to prevent access to such pages.
 </info>
+
 
 <since v="4.0.0">
 ## Moving pages
