@@ -1,8 +1,32 @@
 <nav aria-label="Plugins menu">
-	<div class="sticky" style="--top: var(--spacing-6)">
-		<?php slot('hero') ?>
-		<p class="h1 mb-12 color-gray-400"><a href="/plugins">Plugins</a></p>
-		<?php endslot() ?>
+	<div class="sidebar sticky" style="--top: var(--spacing-6)">
+		<header class="sidebar-header mb-12">
+			<?php slot('hero') ?>
+			<p class="h1 color-gray-400">
+				<a href="/plugins">Plugins</a>
+			</p>
+			<?php endslot() ?>
+
+			<div class="sidebar-mobile-select">
+				<label for="mobile-menu">
+					Select a category …
+					<?= icon('angle-down') ?>
+				</label>
+
+				<select
+					id="mobile-menu"
+					onchange="window.location.href = this.value"
+				>
+					<option disabled selected>Select a category …</option>
+						<?php foreach ($categories as $categoryId => $category) : ?>
+						<option value="/plugins/category:<?= $categoryId ?>"">
+							<?= $category['label'] ?>
+						</option>
+						<?php endforeach ?>
+				</select>
+			</div>
+		</header>
+
 		<ul class="filters">
 			<li>
 				<button class="search-button" type="button" data-area="plugin">
