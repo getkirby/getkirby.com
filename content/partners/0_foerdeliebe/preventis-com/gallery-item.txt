@@ -2,7 +2,7 @@ Title: preventis.com
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: O8jVXSFgzvrX4aNL
 
 ----
 
-Text: 
+Text:

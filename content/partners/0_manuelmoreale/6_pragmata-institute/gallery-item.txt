@@ -2,7 +2,7 @@ Title: pragmata.institute
 
 ----
 
-Client: Esploratori dello spazio
+Info: Client: Esploratori dello spazio
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: EkTR1eNb5Kfy9kRN
 
 ----
 
-Text: 
+Text:

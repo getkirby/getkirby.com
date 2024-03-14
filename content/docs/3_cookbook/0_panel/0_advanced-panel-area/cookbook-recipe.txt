@@ -26,7 +26,7 @@ Text:
 
 Among other use cases, Panel areas are a great way to show and edit data that is not bound to Kirby pages, real or virtual, for example a product list from a JSON file or database.
 
-This recipe is based on the products area demo Bastian presented during the (link: https://www.youtube.com/watch?v=QgCMc89rdNY text: 3.6 product launch), but we will extend it a bit.
+This recipe is based on the products area demo presented during the (link: https://www.youtube.com/watch?v=QgCMc89rdNY text: 3.6 product launch), but we will extend it a bit.
 
 <info>
 For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup) and are familiar with the (link: docs/reference/plugins/extensions/panel-areas text: basic Panel area setup).

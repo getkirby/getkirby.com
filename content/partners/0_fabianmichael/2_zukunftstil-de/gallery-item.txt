@@ -2,7 +2,7 @@ Title: zukunftstil.de
 
 ----
 
-Client: zukunftStil
+Info: Client: zukunftStil
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: v6woQt097miUa3Dw
 
 ----
 
-Text: 
+Text:

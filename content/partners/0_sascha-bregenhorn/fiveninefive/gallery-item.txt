@@ -2,7 +2,7 @@ Title: fiveninefive.com
 
 ----
 
-Client: 595° Solutions
+Info: Client: 595° Solutions
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: iuMLzKay0Vj5iKZo
 
 ----
 
-Text: 
+Text:

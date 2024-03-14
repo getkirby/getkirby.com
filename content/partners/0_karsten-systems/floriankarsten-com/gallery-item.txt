@@ -2,7 +2,7 @@ Title: floriankarsten.com
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: TPkbv55RhcO5tGWp
 
 ----
 
-Text: 
+Text:

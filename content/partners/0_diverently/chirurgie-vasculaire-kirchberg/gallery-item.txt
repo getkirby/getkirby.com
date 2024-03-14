@@ -2,7 +2,7 @@ Title: chirurgievasculaire.lu
 
 ----
 
-Client: Chirurgie Vasculaire Kirchberg
+Info: Client: Chirurgie Vasculaire Kirchberg
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: KWqChCpUT3VM1XYI
 
 ----
 
-Text: 
+Text:

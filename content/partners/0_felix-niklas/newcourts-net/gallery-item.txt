@@ -2,7 +2,7 @@ Title: newcourts.net
 
 ----
 
-Client: Studio Marek Polewski
+Info: Client: Studio Marek Polewski
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: 2wpCJ3G0EVet3JqH
 
 ----
 
-Text: 
+Text:

@@ -20,7 +20,7 @@ Intro:
 
 Controllers are an excellent tool to keep your templates and blueprints clean and "logic free". For better or worse, a controller is tied to a specific template and this can sometimes be a problem when we want to share the same data across all our templates.
 
-Luckily for us, creating a shared controller is an easy task in Kirby 3.
+Luckily for us, creating a shared controller is an easy task in Kirby.
 
 ----
 

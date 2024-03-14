@@ -57,7 +57,7 @@ It is [generally recommended](https://getcomposer.org/doc/faqs/should-i-commit-t
 ...
 ```
 
-## Switching an existing Kirby 4 site to a Composer setup
+## Switching an existing Kirby site to a Composer setup
 
 If you have an existing site and want to use Composer with it, that's possible as well.
 
@@ -136,7 +136,7 @@ If you prefer to have the CMS installed to the `vendor` directory, you can disab
 ```js "composer.json"
 {
   "require": {
-    "getkirby/cms": "^3.0"
+    "getkirby/cms": "^4.0"
   },
   "config": {
     "optimize-autoloader": true
@@ -177,7 +177,7 @@ By changing the Kirby version in your `composer.json`, you can make Composer ins
 
 ### Installing plugins with Composer
 
-Many Kirby 3 plugins also support installation via Composer. As you now have a Composer setup, you only need to add them to your `composer.json` file and run `composer update`. This will automatically install the plugins to the `site/plugins` directory for you.
+Many Kirby plugins also support installation via Composer. As you now have a Composer setup, you only need to add them to your `composer.json` file and run `composer update`. This will automatically install the plugins to the `site/plugins` directory for you.
 
 Alternatively, you can run `composer require <plugin-name>`, which will install the plugin and add it to your `composer.json` for you.
 
@@ -190,7 +190,7 @@ If your `plugins` directory is in a non-standard location, you can change it lik
 ```js "composer.json"
 {
   "require": {
-    "getkirby/cms": "^3.0",
+    "getkirby/cms": "^4.0",
     "superwoman/superplugin": "^1.0"
   },
   "config": {

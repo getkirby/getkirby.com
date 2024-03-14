@@ -2,7 +2,7 @@ Title: ayurveda-offenburg.de
 
 ----
 
-Client: Ayurvedazentrum Offenburg gGmbH
+Info: Client: Ayurvedazentrum Offenburg gGmbH
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: eVgvmWc9ZwhofRR7
 
 ----
 
-Text: 
+Text:

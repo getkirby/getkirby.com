@@ -2,7 +2,7 @@ Title: ecologyofcolour.be
 
 ----
 
-Client: KASK School of Arts
+Info: Client: KASK School of Arts
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: eVfLMMy7RAChCdxJ
 
 ----
 
-Text: 
+Text:

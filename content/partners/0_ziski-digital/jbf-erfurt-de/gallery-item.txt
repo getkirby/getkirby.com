@@ -2,7 +2,7 @@ Title: jbf-erfurt.de
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: y4xsJCp4ydlj83zn
 
 ----
 
-Text: 
+Text:

@@ -2,7 +2,7 @@ Title: honorez.eu
 
 ----
 
-Client: Honorez
+Info: Client: Honorez
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: n4WxMNbSTNGincr1
 
 ----
 
-Text: 
+Text:

@@ -222,7 +222,7 @@ The example below uses glossary entry’s title as text:
 You can also add a custom text (useful for adding the tooltip to conjugated words):
 
 ```kirbytext
-The &lpar;glossary: Panel text: Panel’s) interface has been completely re-designed for Kirby 3.
+The &lpar;glossary: Panel text: Panel’s) interface has been completely re-designed.
 ```
 
 #### Example

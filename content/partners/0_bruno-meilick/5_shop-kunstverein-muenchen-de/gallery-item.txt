@@ -2,7 +2,7 @@ Title: shop.kunstverein-muenchen.de
 
 ----
 
-Client: Kunstverein München
+Info: Client: Kunstverein München
 
 ----
 

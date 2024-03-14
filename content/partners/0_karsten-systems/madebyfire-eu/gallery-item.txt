@@ -2,7 +2,7 @@ Title: madebyfire.eu
 
 ----
 
-Client: Moravian Gallery
+Info: Client: Moravian Gallery
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: zfMtsiSHL4c8bc9D
 
 ----
 
-Text: 
+Text:

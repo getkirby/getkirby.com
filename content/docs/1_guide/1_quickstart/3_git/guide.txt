@@ -148,7 +148,7 @@ cd kirby
 
 # update to a specific version
 git fetch --tags     # [1]
-git checkout 3.x.y   # [2]
+git checkout 4.x.y   # [2]
 ```
 
 Command `[1]` fetches all the latest changes from GitHub, including all Git tags (which are used to point versions to their commits). The command `[2]` then looks for the provided version in the tag list and checks out the commit for that version.

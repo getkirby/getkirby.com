@@ -2,7 +2,7 @@ Title: so-use.de
 
 ----
 
-Client: SO'USE/Horeca Digital System GmbH
+Info: Client: SO'USE/Horeca Digital System GmbH
 
 ----
 

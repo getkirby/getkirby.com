@@ -2,7 +2,7 @@ Title: ijustlovebreakfast.be
 
 ----
 
-Client: I just love breakfast
+Info: Client: I just love breakfast
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: V1bsYifBi7Tjhjmm
 
 ----
 
-Text: 
+Text:

@@ -28,7 +28,7 @@ Category: Product design
 
 &minus;---
 
-Client: beauty-box
+Info: Client: beauty-box
 
 &minus;---
 

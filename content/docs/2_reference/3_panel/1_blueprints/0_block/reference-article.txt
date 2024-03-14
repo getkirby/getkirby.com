@@ -1,0 +1,80 @@
+Title: Block blueprint
+
+----
+
+Intro: Block blueprints are located in `/site/blueprints/blocks` and control the setup and form fields for a block type.
+
+----
+
+Guide: blueprints/introduction
+
+----
+
+Text:
+
+## Blueprints for built-in block types
+
+You can find all original blueprints for the default blocks in the subfolders of the `/kirby/config/blocks` folder or in the docs (link:docs/reference/panel/blocks text: for each block type).
+
+You can modify each default block type setup by creating a block YAML file with the same name in the `/site/blueprints/blocks` folder.
+
+## Blueprints for custom block types
+
+Blueprints for custom block types can be registered (link: docs/reference/plugins/extensions/blueprints text: via a plugin) or be placed into `/site/blueprints/blocks`.
+
+## Blueprint properties
+
+### `name`
+
+The name of the block as it will appear in the block selector, and in the block preview if no custom preview is created.
+
+### `label`
+
+You can use the `label` property to refer to a field in your block. The label is displayed in addition to the block name in the default (if no custom preview is used). Note that you can only refer to fields that return a simple string or number value (such as text, textarea, number, date, select), not to fields that return an array (tags, multiselect, pages, files...)
+
+### `icon`
+
+The icon for the block as it will appear in the block selector, and in the block preview if no custom preview is created.
+
+### `wysiwyg`
+
+The `wysiwyg` option controls if the drawer is opened by default or not. Enable it to allow enabling inline editing.`
+
+### `preview`
+
+Name of the Panel (link: docs/reference/plugins/extensions/blocks text: preview) for the block. If you do not create a custom preview, you can either use an existing preview that matches the content or set the value to `fields` to display the block fields inline.
+
+### tabs
+
+You can arrange the fields of the blocks in tabs, e.g. to separate content fields from settings fields.
+
+### fields
+
+Any fields you want to use in your block for content or settings. You can use any (link: docs/reference/panel/fields text: built-in fields) or your own or third party custom fields.
+
+## Full example blueprint
+
+```yaml
+name: Custom block
+icon: info
+label: "{{ title }}"
+wysiwyg: true
+preview: fields
+tabs:
+  content:
+    fields:
+      title:
+        type: text
+      description:
+        type: writer
+  settings:
+    fields:
+      background:
+        type: color
+      icon:
+        type: select
+        options:
+          - alert
+          - info
+          - lab
+```

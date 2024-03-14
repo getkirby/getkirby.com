@@ -2,7 +2,7 @@ Title: walterauer.at
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: vmBecXZsDqmJFB4B
 
 ----
 
-Text: 
+Text:

@@ -2,7 +2,7 @@ Title: hcmap.net
 
 ----
 
-Client: Ed Barcelon
+Info: Client: Ed Barcelon
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: GeJI0hHVk5XQkEZL
 
 ----
 
-Text: 
+Text:

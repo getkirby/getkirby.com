@@ -2,7 +2,7 @@ Title: gali-izard.arch.ethz.ch
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: 5AX6f4RT5SZDOiYj
 
 ----
 
-Text: 
+Text:

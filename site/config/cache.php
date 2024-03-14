@@ -14,10 +14,11 @@ return [
 		'type'   => 'file',
 		'ignore' => [
 			'buy',
+			'features-for-clients',
+			'home',
 			'love',
 			'partners',
 			'themes',
-			'features-for-clients'
 		]
 	],
 	'plugins' => [

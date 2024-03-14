@@ -2,7 +2,7 @@ Title: vultus.sk
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: vRw3NZRTO3Ps2qFE
 
 ----
 
-Text: 
+Text:

@@ -2,7 +2,7 @@ Title: sippelshof.de
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: 1uvwhy8RcsiOwKW3
 
 ----
 
-Text: 
+Text:

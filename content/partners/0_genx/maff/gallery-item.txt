@@ -2,7 +2,7 @@ Title: maff.be
 
 ----
 
-Client: MAFF
+Info: Client: MAFF
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: cAAXeUyR1LiMSZZr
 
 ----
 
-Text: 
+Text:

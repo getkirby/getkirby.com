@@ -2,7 +2,7 @@ Title: red-monkeys.de
 
 ----
 
-Client: Red Monkeys GmbH
+Info: Client: Red Monkeys GmbH
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: zWhkrAUmmFGuNRTN
 
 ----
 
-Text: 
+Text:

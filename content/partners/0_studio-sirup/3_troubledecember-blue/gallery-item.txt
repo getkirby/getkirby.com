@@ -2,7 +2,7 @@ Title: troubledecember.blue
 
 ----
 
-Client: 
+Info:
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: pnmsCjZ7rovXnfHS
 
 ----
 
-Text: 
+Text:
