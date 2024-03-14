@@ -4,13 +4,11 @@
 <?php snippet('sidebar', [
 	'title'         => 'Guide',
 	'link'          => '/docs/guide',
-	'menu'          => collection('guides'),
+	'menu'          => $menu,
 	'hasCategories' => true,
 ]) ?>
 <?php endslot() ?>
 
 <?php slot('prevnext') ?>
-<?php snippet('layouts/prevnext', [
-	'siblings' => page('docs/guide')->index()->listed()
-]) ?>
+<?php snippet('layouts/prevnext', ['siblings' => $prevnext]) ?>
 <?php endslot() ?>
