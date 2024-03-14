@@ -18,9 +18,21 @@
 }
 
 @media screen and (max-width: 48rem) {
-	.with-sidebar .sidebar .h1 {
-		font-size: var(--text-2xl);
-		margin-bottom: var(--spacing-3);
+	.with-sidebar .sidebar-header {
+		display: flex;
+		align-items: center;
+		background: var(--color-light);
+		border-radius: var(--rounded);
+	}
+	.with-sidebar .sidebar-header .h1 {
+		font-weight: var(--font-semibold);
+		font-size: var(--text-sm);
+		color: var(--color-black);
+		margin-bottom: 0;
+	}
+	.with-sidebar .sidebar-header .h1 a {
+		border-right: 1px solid var(--color-border);
+		padding: var(--spacing-2);
 	}
 
 	.with-sidebar .sidebar :where(.sidebar-group, ul) {
