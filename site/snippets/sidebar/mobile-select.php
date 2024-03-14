@@ -1,6 +1,6 @@
 <div class="sidebar-mobile-select">
 	<label for="mobile-menu">
-		Select a page …
+		<?= $placeholder ?? 'Select a page …' ?>
 		<?= icon('angle-down') ?>
 	</label>
 
@@ -8,18 +8,24 @@
 		id="mobile-menu"
 		onchange="window.location.href = this.value"
 	>
-		<option disabled selected>Select a page …</option>
+		<option disabled selected><?= $placeholder ?? 'Select a page …' ?></option>
 		<?php if ($hasCategories ?? false): ?>
 			<?php foreach ($menu as $category => $items): ?>
 				<optgroup
 					label="<?= option('categories')[$category] ?? ucfirst($category) ?>"
 				>
-					<?php snippet('sidebar/mobile-options', ['items' => $items]) ?>
+					<?php snippet('sidebar/mobile-options', [
+						'items'    => $items,
+						'children' => $children ?? true
+					]) ?>
 				</optgroup>
 			<?php endforeach ?>
 
 		<?php else: ?>
-			<?php snippet('sidebar/mobile-options', ['items' => $menu]) ?>
+			<?php snippet('sidebar/mobile-options', [
+				'items'    => $menu,
+				'children' => $children ?? true
+			]) ?>
 		<?php endif ?>
 	</select>
 </div>
