@@ -451,7 +451,7 @@ The Toolkit classes are now in the  `Kirby\Toolkit` namespace.
 
 ## Plugins and Extensions
 
-Kirby 2 sites with a lot of plugins will require the most effort. Plugins have to be moved to our new (link: docs/guide/plugins/plugin-basics text: plugin syntax). Many plugins developers have already converted their plugins to Kirby 3. Some plugins might no longer be necessary, because their functionality is covered by native Kirby 3 features. Other plugins might not have been ported yet.
+Kirby 2 sites with a lot of plugins will require the most effort. Plugins have to be moved to our new (link: docs/guide/plugins text: plugin syntax). Many plugins developers have already converted their plugins to Kirby 3. Some plugins might no longer be necessary, because their functionality is covered by native Kirby 3 features. Other plugins might not have been ported yet.
 
 As a first step you have to remove your plugins so that your site doesn't break. This means removing the plugin folders, but also removing custom fields from blueprints and removing functionality that is added through these plugins.
 

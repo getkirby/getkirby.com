@@ -71,7 +71,7 @@ SECURITY.md
 
 ## The `composer.json`
 
-The `composer.json` file is the most important configuration file for your plugin. It enables users to install your plugin with Composer and also provides (link: docs/guide/plugins/plugin-basics#plugin-information text: useful metadata in the Kirby installation).
+The `composer.json` file is the most important configuration file for your plugin. It enables users to install your plugin with Composer and also provides (link: docs/guide/plugins#plugin-information text: useful metadata in the Kirby installation).
 
 The most basic form for a Kirby plugin looks like this:
 
@@ -126,7 +126,7 @@ Composer supports [many additional configuration options](https://getcomposer.or
 
 Now let's get to the actual code of your plugin.
 
-The entry point for your plugin is the `index.php` file. You can read more about this file in the (link: docs/guide/plugins/plugin-basics text: Plugin Basics).
+The entry point for your plugin is the `index.php` file. You can read more about this file in the (link: docs/guide/plugins text: Plugin Basics).
 
 Your plugin may have any number of additional code files. How to load them dynamically is described in the tutorial for the (link: docs/guide/plugins/plugin-setup-autoloader text: plugin setup with autoloader).
 
