@@ -25,6 +25,10 @@ Repository: https://github.com/johannschopplich/kirby-seo-audit
 
 ----
 
+Paid: https://kirbyseo.com/buy
+
+----
+
 Category: seo
 
 ----
