@@ -1,18 +1,17 @@
 <nav aria-label="Cookbook menu">
 	<div class="sidebar cookbook-sidebar sticky" style="--top: var(--spacing-6)">
-		<p class="h1 color-gray-400 mb-12"><a href="/docs/cookbook">Cookbook</a></p>
+		<header class="sidebar-header mb-12">
+			<p class="h1 color-gray-400">
+				<a href="/docs/cookbook">Cookbook</a>
+			</p>
 
-		<select
-			class="sidebar-mobile-select"
-			onchange="window.location.href = this.value"
-		>
-			<option disabled selected>Select a category</option>
-				<?php foreach (collection('cookbook/categories') as $category): ?>
-				<option value="<?= $category->url() ?>">
-					&nbsp;&nbsp;&nbsp;<?= $category->title() ?>
-				</option>
-				<?php endforeach ?>
-		</select>
+			<?php snippet('sidebar/mobile-select', [
+				'menu'          => collection('cookbook/categories'),
+				'children'      => false,
+				'hasCategories' => false,
+				'placeholder'   => 'Select a category …'
+			]) ?>
+		</header>
 
 		<ul class="filters">
 			<li>

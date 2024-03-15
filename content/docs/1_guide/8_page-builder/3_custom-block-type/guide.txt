@@ -14,7 +14,7 @@ Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with
 
 - A Kirby (link: docs/guide/quickstart#download-and-installation text: Plainkit or Starterkit) for testing
 - A code editor
-- Basic understanding (link: docs/guide/plugins/plugin-basics text: how to create plugins in Kirby)
+- Basic understanding (link: docs/guide/plugins text: how to create plugins in Kirby)
 - For the single file approach, Node 14+ and (link: https://github.com/johannschopplich/kirbyup text: kirbyup). But don't worry, we also show you how to build this block without such a build process (see link below).
 - Probably a big pot of hot coffee and a cool head. We are going to dive deep.
 
@@ -24,7 +24,7 @@ Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with
 - (file: mr-pod.jpg text: A sample podcast cover)
 
 ## Useful links
-- (link: docs/guide/plugins/plugin-basics#kirby-plugin-one-ring-to-rule-them-all text: Registering extensions)
+- (link: docs/guide/plugins#kirby-plugin-one-ring-to-rule-them-all text: Registering extensions)
 - (link: docs/reference/plugins/extensions/blocks text: Block previews)
 - (link: docs/cookbook/plugins/to-bundle-or-not-to-bundle text: To bundle or not to bundle: differences of creating plugins with or without a build process)
 

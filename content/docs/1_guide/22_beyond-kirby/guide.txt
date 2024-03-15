@@ -94,7 +94,7 @@ Using the REST API is the way to go if you want to modify data.
 
 ### Documentation
 
-- (link: docs/guide/api/introduction text: Using the REST API)
+- (link: docs/guide/api text: Using the REST API)
 - (link: docs/guide/api/authentication text: REST API authentication method)
 - (link: docs/reference/api text: API endpoint reference)
 - (link: docs/reference/plugins/extensions/api text: Custom API endpoints and data providers)

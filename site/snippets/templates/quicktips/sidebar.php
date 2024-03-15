@@ -1,7 +1,32 @@
 <?php use Kirby\Http\Uri; ?>
 <nav aria-label="Cookbook menu">
-	<div class="cookbook-sidebar sticky" style="--top: var(--spacing-6)">
-		<p class="h1 color-gray-400 mb-12"><a href="/docs/cookbook">Quicktips</a></p>
+	<div class="sidebar cookbook-sidebar sticky" style="--top: var(--spacing-6)">
+		<header class="sidebar-header mb-12">
+			<p class="h1 color-gray-400">
+				<a href="/docs/quicktips">Quicktips</a>
+			</p>
+
+			<div class="sidebar-mobile-select">
+				<label for="mobile-menu">
+					Select a tag …
+					<?= icon('angle-down') ?>
+				</label>
+
+				<select
+					id="mobile-menu"
+					onchange="window.location.href = this.value"
+				>
+					<option disabled selected>Select a tag …</option>
+						<?php foreach ($tags as $tag): ?>
+						<option value="<?= page('docs/quicktips')->url(). '/tags/' . Str::slug($tag) ?>">
+							<?= Str::ucFirst($tag) ?>
+						</option>
+						<?php endforeach ?>
+				</select>
+			</div>
+		</header>
+
+
 		<ul class="filters">
 			<li>
 				<a href="/docs/quicktips"<?= ariaCurrent(Uri::current()->path()->last() === 'quicktips') ?>>

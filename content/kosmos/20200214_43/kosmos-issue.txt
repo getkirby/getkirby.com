@@ -42,7 +42,7 @@ Bauhaus is one of the largest DIY store chains in Europe. [Richtig gut](https://
 
 ++++
 
-[OBS Studio](https://obsproject.com) is a free and open-source cross-platform streaming and recording software. The website is available in 16 languages built with (link: docs/guide/languages/introduction text: Kirby's multi-language feature).
+[OBS Studio](https://obsproject.com) is a free and open-source cross-platform streaming and recording software. The website is available in 16 languages built with (link: docs/guide/languages text: Kirby's multi-language feature).
 
 ++++
 

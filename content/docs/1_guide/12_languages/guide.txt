@@ -10,9 +10,277 @@ Category: Configuration
 
 ----
 
-Icon: translate
-
-----
-
 Text:
+
+With Kirby you can:
+
+- Define any number of languages for your site.
+- Add new languages from the Panel.
+- Set a different default language from the Panel.
+- Use custom language variables to define string translations, for example for buttons, forms, options.
+- Define custom language URLs.
+- RTL languages are supported too.
+
+## Enabling the multi-lang feature in the Panel
+
+To allow your users to define and switch languages from the Panel, you first have to enable it in `/site/config/config.php`:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'languages' => true,
+];
+```
+
+## Adding languages
+
+<warning>
+The first language must always be defined as the default language. Make sure to **only define one default language**.
+
+If your site already has content, make sure to set your first language to the language of this content.
+</warning>
+
+(tabs…)
+=== Manually
+
+New language definitions are created in the `/site/languages` folder. To add a new language, create a new PHP file with a filename consisting of the language code of the new language and the extension `.php`.
+
+For example, to add English as a new language:
+
+```php "/site/languages/en.php"
+<?php
+
+return [
+  'code' => 'en',
+  'default' => true,
+  'direction' => 'ltr',
+  'locale' => 'en_US',
+  'name' => 'English',
+];
+```
+
+Repeat for every new language you want to use.
+
+<warning>
+If you don't use the Panel, you have to add the language extension to your text files manually. The language extension is **mandatory**, otherwise Kirby will not work as expected.
+</warning>
+
+
+=== Via the Panel
+
+After enabling languages in your config as described above, you can find the language setup on the Panel in the "Language" view.
+
+(image: languages.png)
+
+The languages view is only visible in the menu when you switch to a multi-language setup. It features the same language editor from previous versions.
+
+To add the first/a new language, click on "Add a new language" and add the language name, code, direction and PHP locale string.
+
+(image: language-create-dialog.png)
+
+Once the default language is defined, you can add more languages as secondary languages. The Panel automatically renames all existing content and file meta data files and includes the language extension.
+(…tabs)
+
+<info>
+If you encounter issues with functions like `strftime` that depend on the locale setting, you might have to add a suffix to the locale code that specifies the encoding format. Depending on your operating system and setup, try adding e.g. `.utf-8` to your locale codes. Some operating systems however use different notations such as `.UTF-8` or `.UTF8`.
+
+You can list all available locales on your system by typing `locale -a` on the command line.
+</info>
+
+## Manage languages in the Panel
+
+The Panel offers options to delete and edit a language. You can access them by clicking on the menu icon (three dots):
+
+(image: language-dropdown.png)
+
+*Edit*: Go to the language view to add and edit custom language variables.
+*Settings*: Change the name, locale or reading direction of the language.
+*Delete*: Delete the language.
+
+<warning>
+If you delete a language, all of its content files are deleted. This can even result in all your content being deleted if you delete the wrong language.
+</warning>
+
+## Language specific URLs
+
+By default, the URL of your site changes and the language code is added to the URL. If you want to keep the root URL for the default language, you can set the URL manually using the `url` option:
+
+```php "/site/languages/en.php"
+<?php
+
+return [
+    'code' => 'en',
+    'default' => true,
+    'direction' => 'ltr',
+    'locale' => [
+        'LC_ALL' => 'en_GB'
+    ],
+    'name' => 'English',
+    'translations' => [
+
+    ],
+    'url' => '/'
+];
+```
+
+<info>
+Using the root URL for the default language will disable [automatic language detection](#automatic-language-detection).
+</info>
+
+## A separate domain for each language
+
+Kirby supports cross-domain multi-language sites. You can define the domain for each language like this:
+
+```php "/site/languages/en.php"
+<?php
+
+return [
+  'code' => 'en',
+  'default' => true,
+  'direction' => 'ltr',
+  'locale' => 'en_US',
+  'name' => 'English',
+  'url' => 'https://example.com'
+];
+```
+
+```php "/site/languages/de.php"
+<?php
+
+return [
+  'code' => 'de',
+  'default' => false,
+  'direction' => 'ltr',
+  'locale' => 'de_DE',
+  'name' => 'Deutsch',
+  'url' => 'https://example.de'
+];
+```
+
+Make sure that both domains point to your Kirby site.
+
+### Caching when using a domain per language
+
+If you use a different domain for each language together with Kirby's page cache, you need to override the cache prefix to ensure that the cache is cleared properly on content changes:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+  'cache' => [
+    'pages' => [
+      'active' => true,
+      'prefix' => '_pages'
+    ]
+  ]
+]
+```
+
+You can read more about the cache prefix in the (link: docs/guide/cache#cache-drivers-and-options__cache-prefix text: caching guide).
+
+## Fine-tune locale settings
+
+If you need more control over your locale settings for each language, you can pass an array of [locales](https://www.php.net/manual/en/function.setlocale.php#refsect1-function.setlocale-parameters):
+
+```php "/site/languages/en.php"
+<?php
+
+return [
+  'code' => 'en',
+  'default' => true,
+  'direction' => 'ltr',
+  'name' => 'English',
+  'url' => '/',
+  'locale'  => [
+    LC_ALL      => 'en_US.utf8',
+    LC_COLLATE  => 'en_US.utf8',
+    LC_MONETARY => 'en_US.utf8',
+    LC_NUMERIC  => 'en_US.utf8',
+    LC_TIME     => 'en_US.utf8',
+    LC_MESSAGES => 'en_US.utf8',
+    LC_CTYPE    => 'en_US.utf8'
+  ]
+];
+```
+
+```php "/site/languages/de.php"
+<?php
+
+return [
+  'code' => 'de',
+  'default' => false,
+  'direction' => 'ltr',
+  'name' => 'Deutsch',
+  'url' => 'de',
+  'locale'  => [
+    LC_ALL      => 'de_DE.utf8',
+    LC_COLLATE  => 'de_DE.utf8',
+    LC_MONETARY => 'de_DE.utf8',
+    LC_NUMERIC  => 'de_DE.utf8',
+    LC_TIME     => 'de_DE.utf8',
+    LC_MESSAGES => 'de_DE.utf8',
+    LC_CTYPE    => 'de_DE.utf8'
+  ]
+];
+```
+
+This is useful if specific locales need to be set to a different value.
+
+<info>
+The `LC_ALL` locale should always be set as it is used as a default locale internally in the Kirby core. Other locales can be set to override the default `LC_ALL` locale for specific use-cases.
+</info>
+
+## Language-specific date handlers
+
+By default, Kirby uses PHP's `date` function to format dates for pages and files. `date()` does not respect locale settings and always creates English month and day names. You can switch to `intl` as your primary date handler, which uses a different format for dates, but also supports translated month and day names. To switch the handler, add the following to your config:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+  'date.handler'  => 'intl',
+];
+```
+
+For available date format strings, see (link: https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax).
+
+## Automatic language detection
+
+Kirby can detect the preferred language of the visitor. This has to be enabled in your config:
+
+```php "/site/config/config.php"
+return [
+  'languages.detect' => true
+]
+```
+
+<warning>
+Using the [root URL for the default language](#language-specific-urls) will disable automatic language detection.
+</warning>
+
+
+## Language-specific typography
+
+See (link: docs/reference/system/options/smartypants text: SmartyPants config option)
+
+## Language-specific slug rules
+
+
+Kirby's slug generator has language specific rules that improve the quality of created slugs in the Panel drastically. If you have certain preferences, you can define your own rules for each language in the language files:
+
+```php "/site/languages/de.php"
+<?php
+
+return [
+  'code' => 'de',
+  'default' => false,
+  'direction' => 'ltr',
+  'locale' => 'de_DE',
+  'name' => 'Deutsch',
+  'slugs' => [
+    'ß' => 'sz'
+  ]
+];
+```
 

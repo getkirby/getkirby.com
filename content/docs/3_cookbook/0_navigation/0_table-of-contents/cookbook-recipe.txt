@@ -21,7 +21,7 @@ Text:
 A Table of Contents (ToC) gives readers a quick overview of the contents of a page and allows accessing specific parts quickly.
 
 ## Prerequisites
-Being familiar with (link: docs/guide/plugins/plugin-basics text: registering extensions in Kirby) and a basic understanding of PHP will be useful.
+Being familiar with (link: docs/guide/plugins text: registering extensions in Kirby) and a basic understanding of PHP will be useful.
 
 To follow along, (link: docs/guide/quickstart#download-and-installation text: install a Kirby Starterkit), create a `/site/plugins/toc` folder with an `index.php` inside and add some headlines in a textarea field, for example in one of the subpages of the `/content/notes` page.
 

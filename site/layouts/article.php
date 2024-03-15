@@ -46,9 +46,15 @@
 						<?php snippet('toc') ?>
 					<?php endif ?>
 
-					<div class="prose mb-24">
-						<?= $slot ?? $page->text()->kt() ?>
-					</div>
+					<?php if ($slot || $page->text()->isNotEmpty()): ?>
+						<div class="prose mb-24">
+							<?= $slot ?? $page->text()->kt() ?>
+						</div>
+					<?php endif ?>
+
+					<?php if ($resources = $slots->resources()): ?>
+						<?= $resources ?>
+					<?php endif ?>
 
 					<?php if ($prevnext = $slots->prevnext()): ?>
 						<?= $prevnext ?>

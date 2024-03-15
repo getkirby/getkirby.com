@@ -58,10 +58,10 @@
 	<main id="main" class="main">
 		<div class="container">
 			<div class="with-sidebar">
+				<?php snippet('templates/plugins/sidebar') ?>
 				<article class="mb-24">
 					<?= $slot ?>
 				</article>
-				<?php snippet('templates/plugins/sidebar') ?>
 			</div>
 		</div>
 	</main>
