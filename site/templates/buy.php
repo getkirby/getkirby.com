@@ -21,7 +21,7 @@ article[data-loading] .price[data-sale] {
 	position: relative;
 	font-size: var(--text-sm);
 	margin-top: 1.25rem;
-	margin-bottom: 3rem;
+	margin-bottom: var(--spacing-16);
 }
 .revenue summary {
 	background: var(--color-yellow-300);
@@ -29,7 +29,7 @@ article[data-loading] .price[data-sale] {
 	border-radius: 2rem;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	gap: var(--spacing-2);
 	padding: .25rem .75rem;
 	padding-right: .5rem;
 }
@@ -70,6 +70,37 @@ article[data-loading] .price[data-sale] {
 	color: var(--color-yellow-500);
 }
 
+.product[data-product="basic"] {
+	border: 1px solid var(--color-gray-250);
+}
+.product[data-product="basic"] .price[data-sale] {
+	color: var(--color-yellow-700);
+}
+.product[data-product="basic"] .btn {
+	background: var(--color-gray-250);
+	border-color: var(--color-gray-250);
+}
+
+
+.product[data-product="enterprise"] {
+	background: var(--color-white);
+	box-shadow: var(--shadow-xl);
+}
+
+.product[data-product="enterprise"] .revenue summary {
+	background: var(--color-green-200);
+	color: var(--color-green-900);
+}
+.product[data-product="enterprise"] .revenue summary svg {
+	color: var(--color-green-700);
+}
+.product[data-product="enterprise"] .btn svg {
+	color: var(--color-green-600);
+}
+.product[data-product="enterprise"] .price[data-sale] {
+	color: var(--color-green-700);
+}
+
 .price {
 	display: inline-flex;
 	align-items: baseline;
@@ -97,25 +128,28 @@ article[data-loading] .price[data-sale] {
 	<div v-else>
 		<div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-3)">
 			<div>
-				<h1 class="h1 max-w-xl mb-12">
+				<h1 class="h1 max-w-xl mb-6">
 					The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
 				</h1>
 
-				<?php if ($sale->isActive()): ?>
+				<!-- <?php if ($sale->isActive()): ?>
 					<div class="h3 sale mb-6">
 						<?= $sale->text() ?>
 					</div>
-				<?php endif ?>
+				<?php endif ?> -->
+
+				<?php snippet('templates/buy/checklist') ?>
+
 			</div>
-			<div class="columns" style="--columns: 2; --gap: var(--spacing-3)">
+			<div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
 				<?php snippet('templates/buy/product', [
 					'product'     => $basic,
-					'description' => 'A discounted license for individuals and small teams',
+					'description' => 'A discounted license for individuals and small teams with a <mark><a class="" href="">total annual revenue of less than €1 million*</a></mark>',
 					'limit'       => $revenueLimitShort . '/ year',
 				]) ?>
 				<?php snippet('templates/buy/product', [
 					'product'     => $enterprise,
-					'description' => 'Suitable for larger companies and organizations',
+					'description' => 'The standard license for companies and organizations of any size. <mark style="background-color: var(--color-green-300)"><a href="">No&nbsp;revenue limit</a></mark>',
 					'limit'       => 'No limit'
 				]) ?>
 				<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">

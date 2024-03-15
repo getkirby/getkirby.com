@@ -5,11 +5,10 @@
 <?php endslot() ?>
 
 <?php slot('sidebar') ?>
-
 <?php snippet('templates/quicktips/sidebar') ?>
 <?php endslot() ?>
-<?php slot('tags') ?>
 
+<?php slot('tags') ?>
 <div class="mb-6">
 	<span>Tags:</span>
 		<?php foreach ($page->tags()->split(',') as $tag): ?>

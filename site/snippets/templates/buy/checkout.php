@@ -106,21 +106,34 @@
 	font-weight: var(--font-bold);
 }
 
-.checkout-preview tr.total td {
-	color: var(--color-purple-600);
+.checkout[data-product="enterprise"] {
+	--color-price: var(--color-green-300);
+	--color-text: var(--color-green-900);
+	--color-back: var(--color-green-400);
+	--color-back-disabled: var(--color-green-300);
+	--color-icon: var(--color-green-600);
+	--color-icon-donation: var(--color-green-700);
 }
 
-.checkout .btn.btn--filled {
-	background: var(--color-purple-400) !important;
-	border-color: var(--color-purple-400);
-	color: var(--color-purple-900) !important;
+.checkout[data-product="basic"] {
+	--color-price: var(--color-yellow-300);
+	--color-text: var(--color-yellow-900);
+	--color-back: var(--color-yellow-400);
+	--color-back-disabled: var(--color-yellow-300);
+	--color-icon: var(--color-yellow-600);
+	--color-icon-donation: var(--color-yellow-700);
 }
-.checkout .btn.btn--filled[disabled] {
-	background: var(--color-purple-300) !important;
-	border-color: var(--color-purple-300);
+
+.checkout .donation svg {
+	color: var(--color-icon-donation);
 }
+
+.checkout-preview tr.total td mark {
+	background: var(--color-price);
+}
+
 .checkout .btn.btn--filled svg {
-	color: var(--color-purple-900) !important;
+	color: var(--color-icon) !important;
 }
 
 .checkout-fieldset {
@@ -204,7 +217,7 @@
 }
 </style>
 
-<div id="checkout" class="checkout mb-42" v-cloak v-if="checkoutIsOpen">
+<div id="checkout" class="checkout mb-42" v-cloak :data-product="product" v-if="checkoutIsOpen">
 	<div class="dialog" :inert="isFetchingPrices || isProcessing">
 		<form class="dialog-form" action="<?= url('buy') ?>" method="POST" @submit="submit">
 			<div class="checkout-preview">
@@ -248,7 +261,7 @@
 							<th>
 								Total
 							</th>
-							<td>{{ amount(totalAmount) }}</td>
+							<td><mark>{{ amount(totalAmount) }}</mark></td>
 						</tr>
 					</table>
 				</div>
@@ -260,10 +273,10 @@
 						For every purchased license we donate <span class="whitespace-nowrap">€<?= $donation['teamAmount'] ?></span><span class="whitespace-nowrap" v-if="locale.currency !== '€'" v-text="' (~ ' + locale.currency + locale.prices.donation.team + ')'"></span> to
 						<a class="underline" rel="noopener noreferrer" target="_blank" href="<?= $donation['link'] ?>"><?= $donation['charity'] ?></a> <?= $donation['purpose'] ?>.
 					</p>
-					<label class="checkbox">
+					<label class="checkbox donation">
 						<input id="donate" type="checkbox" name="donate" v-model="personalInfo.donate">
 						<?php if ($donation['customerAmount'] === $donation['teamAmount']): ?>
-						Match our donation 💛
+						Match our donation <?= icon('heart') ?>
 						<?php else: ?>
 						<span v-text="donationText">Donate an additional €<?= $donation['customerAmount'] ?> per license 💛</span>
 						<?php endif ?>
@@ -342,8 +355,8 @@
 							<span>Confirm the revenue limit <abbr title="Required" aria-hidden>*</abbr></span>
 						</label>
 						<p class="help">
-							End customers must not exceed an annual revenue/funding of
-							<strong><?= $revenueLimitVerbose ?><span v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span></strong>
+							<mark>End customers must not exceed an annual revenue/funding of
+							<strong><?= $revenueLimitVerbose ?><span v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span></strong></mark>
 							to be eligible for this license.
 							<button type="button" class="underline" @click="product = '<?= $enterprise->value() ?>'">Switch to Enterprise</button> to remove the revenue limit.
 						</p>
