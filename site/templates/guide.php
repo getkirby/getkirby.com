@@ -12,7 +12,9 @@
 <?php slot('resources') ?>
 <?php if ($resources->count() > 0): ?>
 <aside class="mb-24">
-	<h2 class="h2 mb-6">Additional resources</h2>
+	<?php if ($page->text()->isNotEmpty()): ?>
+		<h2 class="h2 mb-6">Additional resources</h2>
+	<?php endif ?>
 	<ul>
 		<?php foreach ($resources as $resource): ?>
 		<li class="mb-3 bg-light rounded p-3">
