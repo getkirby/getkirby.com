@@ -20,8 +20,9 @@ return function (Page $page) {
 	}
 
 	return [
-		'guide'    => $page,
-		'menu'     => $menu,
-		'prevnext' => $prevnext->filterBy('isChapter', false)
+		'guide'     => $page,
+		'menu'      => $menu,
+		'resources' => $page->resources()->toPages(),
+		'prevnext'  => $prevnext->filterBy('isChapter', false)
 	];
 };

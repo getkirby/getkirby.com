@@ -1,7 +1,0 @@
-Title: Resources
-
-----
-
-Resources:
-- docs/cookbook/performance/responsive-images
-- docs/cookbook/performance/lazy-loading

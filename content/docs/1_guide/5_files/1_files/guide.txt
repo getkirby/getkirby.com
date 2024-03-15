@@ -199,3 +199,9 @@ Meta data is available from each (class: Kirby\Cms\File text: $file) object in
   </figure>
 <?php endif ?>
 ```
+
+----
+
+Resources:
+- docs/cookbook/performance/responsive-images
+- docs/cookbook/performance/lazy-loading
