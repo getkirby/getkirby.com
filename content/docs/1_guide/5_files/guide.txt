@@ -5,12 +5,208 @@ Title: Managing files
 Description: All about working with files in Kirby: images, videos, documents, responsive images, thumbnails…
 ----
 
-Intro:
-
-----
-
 Category: Creating your site
 
 ----
 
-Icon: image
+Intro: Pages and the site object can have any number and kind of images, videos, documents or other files.
+
+----
+
+Text:
+
+For file handling via the Panel, see (link: docs/guide/files/files-in-the-panel text: Files in the Panel).
+
+<info>
+This guide is about files that are stored within the `/content` folder only. Files outside of the content folder can also be used, but need to be handled as (link: docs/reference/objects/panel/assets text: `Assets`).
+</info>
+
+## Where are files stored?
+
+Files can belong either to
+
+- the `Site` object: in this case, they are stored directly in the `/content` folder next to the `site.txt` file.
+- a `Page` object: in this case, they are stored inside a page folder within `/content`.
+
+
+### Folder structure for a page with files
+
+```filesystem
+/content/projects/project-a/
+/content/projects/project-a/project.txt
+/content/projects/project-a/image-1.jpg
+/content/projects/project-a/image-2.jpg
+/content/projects/project-a/image-3.jpg
+/content/projects/project-a/project-info.pdf
+/content/projects/project-a/project-data.xls
+/content/projects/project-a/some-video.mp4
+```
+### Folder structure for site files
+
+```filesystem
+/content/image-1.jpg
+/content/image-2.jpg
+/content/image-3.jpg
+/content/document-1.pdf
+/content/data.xls
+/content/some-video.mp4
+```
+
+## Supported file types
+
+You can access files using handy methods for each common file type:
+
+| Type | Extensions | API Method                       |
+| ---- | ---------- |----------------------------------|
+| Audio | aif, aiff, m4a, midi, mp3, wav | `$page->audio()`/`$site->audio()`|
+| Code | css, js, json, java, htm, html, php, rb, py, scss, xml, yaml, yml | `$page->code()`/`$site->code()`|
+| Documents | csv, doc, docx, dotx, indd, md, mdown, pdf, ppt, pptx, rtf, txt, xl, xls, xlsx, xltx | `$page->documents()`/`$site->documents()`|
+| Images | ai, avif, bmp, gif, eps, ico, j2k, jp2, jpeg, jpg, jpe, png, ps, psd, svg, tif, tiff, webp | `$page->images()`/`$site->images()` |
+| Videos | avi, flv, m4v, mov, movie, mpe, mpg, mp4, ogg, ogv, swf, webm | `$page->videos()`/`$site->videos()` |
+
+Other file types are of course also supported.
+
+To upload file types not supported out of the box by Kirby, you can (link: docs/reference/plugins/extensions/file-types text: register new file types with the `fileTypes` extension) in a plugin.
+
+<info>
+When you are using `.txt` files for your content (as it is the default), you cannot upload other `.txt` files as they will be mistaken for content files. You can configure this via the (link: docs/reference/system/options/content#content-file-extension text: `content.extension` config option).
+</info>
+
+
+## Manually uploading files
+
+You can add/upload files to a page/the site manually by placing them into the corresponding folders.
+
+Note that if you upload files you later want to use in the Panel, you have to define (link: docs/reference/panel/sections/files text: files sections) in your blueprints. Otherwise, these files will not show up.
+
+## Linking to files in your content
+
+Files can be linked or embedded in any field with KirbyTags or used in templates to build complex galeries, download sections, etc.
+
+## Rendering files in your templates
+
+Kirby provides many ways to render files in your templates. Here are some examples:
+
+### Fetching all images of a page
+
+```php
+<?php foreach($page->images() as $file): ?>
+	<img src="<?= $file->url() ?>">
+<?php endforeach ?>
+```
+
+### Fetching a single file
+
+```php
+<?php if($file = $page->file()): ?>
+<?= $file->filename() ?>
+<?php endif ?>
+```
+
+### Fetching files from site
+
+```php
+<?php foreach($site->images() as $file): ?>
+	<img src="<?= $file->url() ?>">
+<?php endforeach ?>
+```
+
+### Fetching all images from subpages
+
+```php
+<?php foreach($page->children()->images() as $file): ?>
+	<img src="<?= $file->url() ?>">
+<?php endforeach ?>
+```
+
+### Filter images by template
+
+```php
+<?php foreach($page->images()->template('gallery') as $file): ?>
+	<img src="<?= $file->url() ?>">
+<?php endforeach ?>
+```
+
+These are just some basic examples to give you an idea. You can filter and find files by type, template, by their meta data etc. More information on the available file and files methods in the (link: docs/reference/objects/file text: Reference).
+
+<success>
+The default sorting order of files is based on their order in the file system. To retrieve files in the order they appear in the Panel, you can use `$files->sortBy('sort')`, where `sort` is the field that stores the sorting number from the Panel.
+</success>
+
+## Adding meta data to your files
+
+A meta data file is stored next to the file and named after the following pattern:
+
+```
+{filename}.txt
+```
+
+Some examples:
+
+| Media file    | Meta data file    |
+| ----------    | --------------    |
+| lake.jpg      | lake.jpg.txt      |
+| infosheet.pdf | infosheet.pdf.txt |
+| numbers.xls   | numbers.xls.txt   |
+
+
+Meta data files follow the same scheme for fields like the main text files for pages. Like with pages, the number of fields is not limited. The possibilities to add meta data to files are endless.
+
+<since v="4.0.0">
+## Setting a focus point
+
+Never cut off the most important part of your images again (link: docs/guide/files/resize-images-on-the-fly#shortcut-methods__cropping-images text: when cropping an image). Set a focus point and let your images shine in all their beauty.
+
+You can add a focus point manually directly in the file's metadata file:
+
+```kirbycontent "could-be-hawaii.jpg.txt"
+Focus: 30.5% 70%
+```
+
+Or you use the focus feature via the Panel:
+
+(image: image-focus.png alt: Screenshot of our focus point interface in the Panel)
+</since>
+
+## Example meta data file
+
+```kirbycontent "lake.jpg.txt"
+Title: A day at the lake
+\----
+Caption: We spent an entire day at the lake. The weather was nice.
+\----
+Photographer: Ansel Adams' cat
+```
+
+Meta data files are automatically added or deleted when the associated file is added or deleted via the Panel.
+
+<warning>
+When you delete a file manually from the file system, be sure to delete its meta data file, too, otherwise Kirby will not find the right blueprint/template and the page will not render properly.
+</warning>
+
+## Accessing meta data in templates
+
+Meta data is available from each (class: Kirby\Cms\File text: $file) object in your templates and snippets.
+
+```php "project.php"
+<?php if($file = $page->image('lake.jpg')): ?>
+  <figure>
+    <img src="<?= $file->url() ?>" alt="<?= $file->title() ?>">
+    <figcaption>
+      <span class="caption">
+        <?= $file->caption() ?>
+      </span>
+      <span class="photographer">
+        <?= $file->photographer() ?>
+      </span>
+    </figcaption>
+  </figure>
+<?php endif ?>
+```
+
+----
+
+Resources:
+- docs/cookbook/performance/responsive-images
+- docs/cookbook/performance/lazy-loading
+
