@@ -1,0 +1,16 @@
+title: Kirby 3.10
+----
+Subtitle:
+----
+Version: 3.10
+----
+ogimage: opengraph.png
+----
+Link: https://github.com/getkirby/kirby/releases/tag/3.10.0
+----
+Cover: - kirby-3-10.png
+----
+
+Text:
+
+The latest stable release of Kirby 3 is Kirby 3.9.8, which has support for PHP 8.0 until PHP 8.2. But we cannot offer support for PHP 8.3 without dropping support for PHP 8.0, due to version restrictions in our dependencies. So we decided to introduce this additional release, which adds support for PHP 8.3 (and nothing else) but also drops support for 8.0, while still keeping Kirby 3.9.8 around with the support for PHP 8.0. Depending on your hosting requirements, you can now choose between either Kirby 3.9.8 or Kirby 3.10.0.
