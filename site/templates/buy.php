@@ -132,11 +132,11 @@ article[data-loading] .price[data-sale] {
 					The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
 				</h1>
 
-				<!-- <?php if ($sale->isActive()): ?>
+				<?php if ($sale->isActive()): ?>
 					<div class="h3 sale mb-6">
 						<?= $sale->text() ?>
 					</div>
-				<?php endif ?> -->
+				<?php endif ?>
 
 				<?php snippet('templates/buy/checklist') ?>
 
