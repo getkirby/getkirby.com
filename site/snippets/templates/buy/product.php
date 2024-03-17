@@ -33,7 +33,7 @@
 			<div>
 				<?php if ($product === Buy\Product::Basic): ?>
 				<p>
-					You qualify to use a Basic license as long as your overall revenue/funding (not profit) was less than <strong><?= $revenueLimitVerbose ?><span v-cloak v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span></strong> in the <strong>last 12 months</strong>.
+					You qualify to use a Basic license as long as your overall revenue/funding (not profit) was less than <strong><?= $revenueLimit ?><span v-cloak v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span></strong> in the <strong>last 12 months</strong>.
 				</p>
 				<p>
 					If you build a website for a client, the limit applies to the revenue of your client.

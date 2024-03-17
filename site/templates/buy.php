@@ -81,18 +81,13 @@ article[data-loading] .price[data-sale] {
 	border-color: var(--color-gray-250);
 }
 
-
 .product[data-product="enterprise"] {
 	background: var(--color-white);
 	box-shadow: var(--shadow-xl);
 }
 
-.product[data-product="enterprise"] .revenue summary {
-	background: var(--color-green-200);
-	color: var(--color-green-900);
-}
-.product[data-product="enterprise"] .revenue summary svg {
-	color: var(--color-green-700);
+.product[data-product="enterprise"] .description mark {
+	background: var(--color-green-300);
 }
 .product[data-product="enterprise"] .btn svg {
 	color: var(--color-green-600);
@@ -109,9 +104,6 @@ article[data-loading] .price[data-sale] {
 .price[data-regular] {
 	color: var(--color-gray-700);
 	text-decoration: line-through;
-}
-.price[data-sale] {
-	color: var(--color-purple-600);
 }
 .price[data-sale] .currency-sign {
 	font-size: var(--text-xl);
@@ -143,14 +135,12 @@ article[data-loading] .price[data-sale] {
 			</div>
 			<div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
 				<?php snippet('templates/buy/product', [
-					'product'     => $basic,
-					'description' => 'A discounted license for individuals and small teams with a <mark><a class="" href="">total annual revenue of less than €1 million*</a></mark>',
-					'limit'       => $revenueLimitShort . '/ year',
-				]) ?>
-				<?php snippet('templates/buy/product', [
 					'product'     => $enterprise,
 					'description' => 'The standard license for companies and organizations of any size. <mark style="background-color: var(--color-green-300)"><a href="">No&nbsp;revenue limit</a></mark>',
-					'limit'       => 'No limit'
+				]) ?>
+				<?php snippet('templates/buy/product', [
+					'product'     => $basic,
+					'description' => 'A discounted license for individuals and small teams with a <mark><a href="">total annual revenue of less than ' . $revenueLimit . '*</a></mark>',
 				]) ?>
 				<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">
 					Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a>
