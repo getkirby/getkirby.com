@@ -19,26 +19,9 @@ article[data-loading] .price[data-sale] {
 
 .revenue {
 	position: relative;
-	font-size: var(--text-sm);
-	margin-top: 1.25rem;
-	margin-bottom: var(--spacing-16);
-}
-.revenue summary {
-	background: var(--color-yellow-300);
-	color: var(--color-yellow-900);
-	border-radius: 2rem;
-	display: flex;
-	align-items: center;
-	gap: var(--spacing-2);
-	padding: .25rem .75rem;
-	padding-right: .5rem;
 }
 .revenue summary::-webkit-details-marker {
 	display: none;
-}
-.revenue summary svg {
-	color: var(--color-yellow-700);
-	margin-top: 1px;
 }
 .revenue div {
 	position: absolute;
@@ -136,11 +119,13 @@ article[data-loading] .price[data-sale] {
 			<div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
 				<?php snippet('templates/buy/product', [
 					'product'     => $enterprise,
-					'description' => 'The standard license for companies and organizations of any size. <mark style="background-color: var(--color-green-300)"><a href="">No&nbsp;revenue limit</a></mark>',
+					'description' => 'The standard license for companies and organizations of any size.',
+					'limit'       => 'No&nbsp;revenue limit.'
 				]) ?>
 				<?php snippet('templates/buy/product', [
 					'product'     => $basic,
-					'description' => 'A discounted license for individuals and small teams with a <mark><a href="">total annual revenue of less than ' . $revenueLimit . '*</a></mark>',
+					'description' => 'A discounted license for individuals and small teams with a',
+					'limit'       => 'total annual revenue of less than ' . $revenueLimit . '*'
 				]) ?>
 				<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">
 					Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a>
