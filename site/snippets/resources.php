@@ -5,12 +5,12 @@
 			More information
 		</h2>
 	<?php endif ?>
-	<ul>
+	<ul class="columns" style="--columns: 2; --columns-md: 1; gap: var(--spacing-1); grid-auto-rows: auto">
 		<?php foreach ($resources as $resource): ?>
-		<li class="mb-3 bg-light rounded p-3">
+		<li class="bg-light rounded p-6">
 			<a href="<?= $resource->url() ?>">
-				<h3 class="h4"><?= $resource->title() ?></h3>
-				<p class="color-gray-700"><?= $resource->description() ?></p>
+				<h3 class="font-bold link"><?= $resource->title() ?></h3>
+				<p class="color-gray-700 text-sm"><?= $resource->description() ?></p>
 			</a>
 		</li>
 		<?php endforeach ?>
