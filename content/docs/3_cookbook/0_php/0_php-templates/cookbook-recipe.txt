@@ -2,9 +2,6 @@ Title: PHP templating
 
 ----
 
-
-----
-
 Description: Learn some PHP basics that make creating templates a breeze.
 
 ----
