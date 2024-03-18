@@ -9,6 +9,10 @@
 ]) ?>
 <?php endslot() ?>
 
+<?php slot('resources') ?>
+<?php snippet('resources', ['resources' => $resources]) ?>
+<?php endslot() ?>
+
 <?php slot('prevnext') ?>
 <?php snippet('layouts/prevnext', ['siblings' => $prevnext]) ?>
 <?php endslot() ?>
