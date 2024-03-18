@@ -54,8 +54,6 @@
 
 					<?php if ($resources = $slots->resources()): ?>
 						<?= $resources ?>
-					<?php elseif ($resources = $page->resources()->toPages()): ?>
-						<?php snippet('resources', ['resources' => $resources]) ?>
 					<?php endif ?>
 
 					<?php if ($prevnext = $slots->prevnext()): ?>
