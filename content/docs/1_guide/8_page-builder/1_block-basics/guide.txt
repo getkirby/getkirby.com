@@ -39,7 +39,7 @@ fields:
   blocks:
     type: blocks
     fieldsets:
-      heading:
+      - type: heading
         extends: blocks/heading
         fields:
           customId:
@@ -62,7 +62,7 @@ fields:
   blocks:
     type: blocks
     fieldsets:
-      heading:
+      - type: heading
         extends: blocks/heading
         fields:
           level:
@@ -82,7 +82,7 @@ fields:
   blocks:
     type: blocks
     fieldsets:
-      heading:
+      - type: heading
         extends: blocks/heading
         tabs:
           content:
@@ -154,7 +154,7 @@ fields:
     fieldsets:
       - heading
       - text
-      button:
+      - type: button
         name: Button
         icon: bolt
         fields:
@@ -183,7 +183,7 @@ fields:
     fieldsets:
       - heading
       - text
-      button:
+      - type: button
         name: Button
         icon: bolt
         label: "{{ text }}"
@@ -227,7 +227,7 @@ fields:
     fieldsets:
       - heading
       - text
-      button:
+      - type: button
         name: Button
         icon: bolt
         tabs:
