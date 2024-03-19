@@ -6,6 +6,10 @@ Intro: Learn the basics of modifying our core blocks and creating your own from 
 
 ----
 
+Screencast: (screencast: https://www.youtube.com/watch?v=XbFoF92ZoyY title: Custom blocks)
+
+----
+
 Text:
 
 ## What makes a block?
