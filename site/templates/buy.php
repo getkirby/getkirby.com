@@ -20,6 +20,9 @@ article[data-loading] .price[data-sale] {
 .revenue {
 	position: relative;
 }
+.revenue summary {
+	list-style: none;
+}
 .revenue summary::-webkit-details-marker {
 	display: none;
 }
