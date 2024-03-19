@@ -355,7 +355,7 @@
 							<span>Confirm the revenue limit <abbr title="Required" aria-hidden>*</abbr></span>
 						</label>
 						<p class="help">
-							<mark>End customers must not exceed an annual revenue/funding of
+							<mark>End customers must not exceed a total annual revenue/funding of
 							<strong><?= $revenueLimit ?><span v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span></strong></mark>
 							to be eligible for this license.
 							<button type="button" class="underline" @click="product = '<?= $enterprise->value() ?>'">Switch to Enterprise</button> to remove the revenue limit.
