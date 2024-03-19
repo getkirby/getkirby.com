@@ -27,7 +27,7 @@ article[data-loading] .price[data-sale] {
 	position: absolute;
 	top: 100%;
 	left: 50%;
-	width: 20rem;
+	width: 21rem;
 	transform: translateX(-50%);
 	background: black;
 	color: white;
