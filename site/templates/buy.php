@@ -85,11 +85,13 @@ article[data-loading] .price[data-sale] {
 .price {
 	display: inline-flex;
 	align-items: baseline;
-	gap: 0.3rem;
 }
 .price[data-regular] {
 	color: var(--color-gray-700);
 	text-decoration: line-through;
+}
+.price[data-sale] {
+	gap: 0.3rem;
 }
 .price[data-sale] .currency-sign {
 	font-size: var(--text-xl);
