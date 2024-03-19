@@ -21,7 +21,7 @@
 
 		<?php if ($product === Buy\Product::Basic): ?>
 		<details class="revenue text-sm color-gray-700">
-			<summary><?= $description ?> <mark class="underline"><?= $limit ?></mark></summary>
+			<summary><?= $description ?> <mark><?= $limit ?> &rarr;</mark></summary>
 			<div>
 				<p>
 					You may use the discounted Basic license if your total revenue/funding (not profit!) in the <strong>last 12 months</strong> was below <strong><?= $revenueLimit ?><span v-cloak v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span></strong>.

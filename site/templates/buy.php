@@ -125,7 +125,7 @@ article[data-loading] .price[data-sale] {
 				<?php snippet('templates/buy/product', [
 					'product'     => $basic,
 					'description' => 'A discounted license for individuals and small teams with a',
-					'limit'       => 'total annual revenue of less than ' . $revenueLimit . '*'
+					'limit'       => 'total annual revenue of less than ' . $revenueLimit
 				]) ?>
 				<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">
 					Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a>
