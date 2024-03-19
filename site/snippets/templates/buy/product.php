@@ -24,7 +24,7 @@
 			<summary><?= $description ?> <mark><?= $limit ?> &rarr;</mark></summary>
 			<div>
 				<p>
-					You may use the discounted Basic license if your total revenue/funding (not profit!) in the <strong>last 12 months</strong> was below <strong><?= $revenueLimit ?><span v-cloak v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span></strong>.
+					You may use the discounted Basic license if your total revenue/funding (not profit) in the <strong>last 12 months</strong> was below <strong><?= $revenueLimit ?><span v-cloak v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span></strong>.
 				</p>
 				<p>
 					If the website is for a client, the limit applies to the client's total revenue/funding.
