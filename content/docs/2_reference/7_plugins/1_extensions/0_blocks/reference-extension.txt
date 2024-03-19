@@ -27,7 +27,7 @@ fields:
     fieldsets:
       - heading
       - text
-      button:
+      - type: button
         name: Button
         icon: bolt
         fields:
@@ -257,7 +257,7 @@ fields:
   blocks:
     type: blocks
     fieldsets:
-      button:
+      - type: button
         wysiwyg: true
         preview: fields
         tabs:
