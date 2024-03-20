@@ -1,0 +1,216 @@
+Title: Custom plugins
+
+----
+
+Category: Extending kirby
+
+----
+Text:
+
+## Plugin architecture
+
+Kirby comes with a very powerful but yet simple-to-start plugin architecture. A plugin is a simple folder with a bunch of PHP files. This would be the simplest form:
+```filesystem
+site/plugins/my-plugin/index.php
+```
+
+Kirby automatically loads all plugins from folders within `/site/plugins` and tries to find an `index.php`.
+
+Plugins can also include an `index.css` and/or `index.js` file. These files are automatically loaded into the Panel. Even if your plugin does not contain any PHP code, we recommend to include the `index.php` file to [properly register your plugin in the system](#extensions__panel-only-plugins).
+
+If a plugin only contains an `index.css` and/or `index.js` file but no `index.php`, Kirby will load the plugin anonymously. This means that the name of your plugin cannot be properly displayed in the Panel's System view.
+
+Plugins that don't have any of the `index.php`, `index.css` or `index.js` files are not loaded by Kirby at all.
+
+## Simple vs. complex plugins
+
+If you only need some **helper functions or general PHP code**, you can define them in your `index.php`. These will then be loaded automatically.
+
+If you want to extend Kirby in more meaningful ways such as by **extending Kirby objects or components**, you need to use our `Kirby::plugin()` method to define all the parts that will be extended.
+
+## Kirby::plugin() — one ring to rule them all
+
+All plugins are registered with Kirby's static `Kirby::plugin()` method. It doesn't matter if you want to create just a simple (link: docs/reference/plugins/extensions/kirbytags text: KirbyTag plugin) or a (link: docs/reference/plugins/extensions/fields text: custom field) for the Panel. `Kirby::plugin()` is your way to go.
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('my-name/hello-world', [
+  …
+]);
+```
+
+### Plugin name
+
+Each plugin must have a unique name. We follow the typical Composer package name scheme here, so your plugin name must follow the format `{your-name-or-alias}/{plugin-name}`.
+
+You are totally free to use whatever alias you like. Something like `superwoman/superplugin` is totally fine. The alias and plugin names must only contain characters from a-z, numbers and dashes though.
+
+The plugin name can later be used to find a specific plugin:
+
+```php
+<?= $kirby->plugin('superwoman/superplugin')->version() ?>
+```
+
+It is also used to identify your plugin during the update check. If you publish your plugin, the name needs to match the path in our (link: plugins text: plugin repository). It does *not* need to match the Composer package name of your plugin.
+
+**Example:** If your Composer package name is `superwoman/kirby-superplugin`, the plugin name you pass to `Kirby::plugin()` should be `superwoman/superplugin` as above.
+
+## Extensions
+
+Your plugin can define any number of extensions for Kirby. Extensions can be blueprints, snippets, KirbyTags, fields and more.
+
+### A simple plugin
+
+You can start simple by extending just one thing…
+
+```php
+Kirby::plugin('superwoman/superplugin', [
+  'snippets' => [
+    'header' => __DIR__ . '/snippets/header.php'
+  ]
+]);
+```
+
+### A complex example
+
+…or get more complex by extending multiple parts at once.
+
+```php
+Kirby::plugin('superwoman/superplugin', [
+  'snippets' => [
+    'header' => __DIR__ . '/snippets/header.php'
+  ],
+  'templates' => [
+    'blog' => __DIR__ . '/templates/blog.php'
+  ],
+  'hooks' => [
+    'page.delete:before' => function () {
+      throw new Exception('Nope');
+    }
+  ]
+]);
+```
+
+Plugins can provide entire sets of multiple extensions that work together and form big parts of a site.
+
+Check out (link: docs/guide/plugins/plugin-types text: the list of all extension types).
+
+### Dynamic extensions
+
+If you need to register extensions based on a config option, site content or even the availability of other plugins, you can do this inside a (link: docs/reference/plugins/hooks/system-loadplugins-after text: `system.loadPlugins:after` hook).
+
+### Panel-only plugins
+
+If your plugin only defines Panel extensions or custom CSS for the Panel, your `index.php` only needs to define the name of your plugin and nothing else:
+
+```php
+Kirby::plugin('superwoman/superplugin', []);
+```
+
+<info>
+Please make sure to pass the empty array as the second argument. If you omit it, `Kirby::plugin()` will behave as a getter and your plugin will not be registered.
+</info>
+
+## Plugin information
+
+To store more information about your plugin, you can add a `composer.json` to your plugin folder. We recommend to use composer's `composer init` command to simplify this step. All information in the `composer.json` can later be queried from your plugin:
+
+```js "composer.json"
+{
+    "name": "superwoman/superplugin",
+    "description": "Superwoman Demo Plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Superwoman",
+            "email": "superwoman@example.com"
+        }
+    ]
+}
+```
+
+```php
+// somewhere in Kirby
+$kirby->plugin('superwoman/superplugin')->version();
+$kirby->plugin('superwoman/superplugin')->description();
+$kirby->plugin('superwoman/superplugin')->license();
+$kirby->plugin('superwoman/superplugin')->authors();
+// etc.
+```
+
+The fields in the example `composer.json` above are just the basic metadata fields. Composer is also a tool that's useful to install plugins. How to setup your plugin for that is explained in our (link: #setup-of-published-plugins text: plugin setup articles).
+
+Note that the `name` inside the `composer.json` file is only the name of the Composer package. If needed, it can differ from the name you give your plugin when registering it with `Kirby::plugin()`, which will be used when getting plugin data.
+
+## Recommended plugin folder structure
+
+If you create plugins with more than just one extension, we suggest the following folder structure within your plugin folder:
+
+```filesystem
+assets/
+blueprints/
+fields/
+snippets/
+tags/
+templates/
+```
+
+## Plugin assets
+
+Each plugin can have its own `assets` folder with any number of additional assets, such as images or CSS and JS files. Kirby will automatically take care to make those assets publicly available without needing to copy them to a specific folder.
+
+### Asset URLs
+
+Each asset in the `assets` folder of your plugin will be available at `/media/plugins/superwoman/superplugin/`.
+
+The URL path is constructed with the name from your plugin definition and has nothing to do with the folder name of the plugin.
+
+## Plugin options
+
+Your plugins can define their own set of options:
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('superwoman/superplugin', [
+  'options' => [
+    'apiKey' => 'default-api-key'
+  ]
+]);
+```
+
+The values which you set for those options will be the default values. They can be overridden in the config file of the site.
+
+Each of your plugin's options is automatically prefixed. The prefix is created from your plugin's name: `superwoman/superplugin` becomes `superwoman.superplugin`.
+
+This will avoid any collisions with core options or options from other plugins.
+
+Those options can be used anywhere in Kirby like this:
+
+```php
+$kirby->option('superwoman.superplugin.apiKey');
+
+```
+Or with the option helper:
+
+```php
+option('superwoman.superplugin.apiKey');
+```
+
+Options also need to be prefixed to be set in the config:
+
+```php "/site/config/config.php"
+return [
+  'superwoman.superplugin.apiKey' => 'my-custom-key'
+];
+```
+
+## Setup of published plugins
+
+If you want to publish your plugin, there are a few things you need to take care of to make installation of your plugin as simple as possible for your users.
+
+We have prepared several tutorials for different use-cases:
+
+- (link: docs/guide/plugins/plugin-setup-basic text: Basic plugin setup) **(start here)**
+- (link: docs/guide/plugins/plugin-setup-autoloader text: Plugin setup with an autoloader)
+- (link: docs/guide/plugins/plugin-setup-composer text: Plugin setup with Composer dependencies)
+- (link: docs/guide/plugins/plugin-setup-panel text: Plugin setup for Panel plugins)
+

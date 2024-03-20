@@ -131,3 +131,6 @@ mark {
 <?= $page->text()->kt() ?>
 <?php endif ?>
 <?php endslot() ?>
+
+<?php slot('resources') ?>
+<?php endslot() ?>

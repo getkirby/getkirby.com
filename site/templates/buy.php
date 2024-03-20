@@ -172,7 +172,7 @@ createApp({
 		currency: "€",
 		prices: {
 			basic: {
-				regular: <?= $basic->price('EUR')->sale() ?>,
+				regular: <?= $basic->price('EUR')->regular() ?>,
 				sale: <?= $basic->price('EUR')->sale() ?>,
 			},
 			donation: {
@@ -180,7 +180,7 @@ createApp({
 				team: <?= $basic->price('EUR')->teamDonation() ?>,
 			},
 			enterprise: {
-				regular: <?= $enterprise->price('EUR')->sale() ?>,
+				regular: <?= $enterprise->price('EUR')->regular() ?>,
 				sale: <?= $enterprise->price('EUR')->sale() ?>,
 			}
 		},

@@ -123,7 +123,7 @@ panel.plugin('yourname/todos', {
 
 Areas can define via the `menu` option whether by default the area should be displayed in the Panel menu.
 
-This option can also be a clsoure:
+This option can also be a closure:
 
 ```php
 'menu' => function ($areas, $permissions, $current): bool|array
@@ -305,7 +305,7 @@ The overwritten `k-users-view` component can now define its own props, which wil
 
 The `k-users-view` component uses the `k-inside` component as a basic wrapper. This will render the topbar, menu, etc. By not using this wrapper, you can create a fullscreen view that does not render any of the Panel UI elements.
 
-In this example, the list of users is just a basic unordered list, but of course this could be anything. A big table, custom cards, or whatever you need to show your users appropriately.
+In this example, the list of users is just a basic unordered list, but of course, this could be anything. A big table, custom cards, or whatever you need to show your users appropriately.
 
 The backend part of your overwritten view is now sending exactly what your component needs. If you find out that you want to send your users in alphabetical groups or every user object should also contain the Instagram follower count, go for it.
 

@@ -5,4 +5,6 @@ Title: Resources
 Resources:
 - docs/cookbook/performance/responsive-images
 - docs/cookbook/performance/lazy-loading
+- docs/cookbook/content-representations/dynamic-og-images
+- docs/cookbook/extensions/create-pdf-preview-images
 

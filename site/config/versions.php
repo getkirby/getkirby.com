@@ -156,7 +156,6 @@ return [
 	'3.9' => [
 		'title'       => 'Kirby 3.9',
 		'hasDocs'     => true,
-		'title'       => 'Kirby 3.9',
 		'mainVersion' => '3',
 		'since'       => 'Jan 2023 - Nov 2023',
 		'description' => 'is not the most current version of Kirby and should not be used for new projects.',
@@ -175,6 +174,18 @@ return [
 			'3.9.8.1',
 		]
 	],
+	'3.10' => [
+		'title'       => 'Kirby 3.10',
+		'hasDocs'     => false,
+		'mainVersion' => '3',
+		'since'       => 'Jan 2023 - Nov 2023',
+		'description' => 'is not the most current version of Kirby and should not be used for new projects.',
+		'link'        => 'https://github.com/getkirby/kirby/releases/tag/3.10.0',
+		'repo'        => 'https://github.com/getkirby',
+		'subreleases' => [
+			'3.10.0.1',
+		]
+	],
 	'4.0' => [
 		'title'       => 'Kirby 4.0',
 		'hasDocs'     => true,
@@ -190,6 +201,7 @@ return [
 			'4.0.3',
 			'4.1.0',
 			'4.1.1',
+			'4.1.2',
 		]
 	],
 ];

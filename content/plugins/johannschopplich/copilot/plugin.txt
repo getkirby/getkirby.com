@@ -22,7 +22,7 @@ Documentation: https://kirbycopilot.com
 
 ----
 
-Repository: https://github.com/johannschopplich/kirby-copilot
+Paid: https://kirbycopilot.com/buy
 
 ----
 

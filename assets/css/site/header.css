@@ -1,5 +1,8 @@
+.header {
+	margin-bottom: var(--spacing-20);
+}
 .header-content {
-	margin: 0 -.75rem;
+	margin: 0 -0.75rem;
 	padding: var(--spacing-3) 0;
 }
 
