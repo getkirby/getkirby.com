@@ -20,7 +20,7 @@ class RevenueLimit
 			// remove the Paddle currency conversion fee
 			// (not relevant for the revenue limit)
 			if ($visitor->currency() !== 'EUR') {
-					$value /= 1.02;
+				$value /= 1.02;
 			}
 	
 			return '~ ' . $visitor->currencySign() . static::formatMagnitude($value, $verbose);
