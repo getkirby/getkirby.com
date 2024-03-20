@@ -12,6 +12,7 @@ extract([
 			<summary>
 				<a <?= ariaCurrent($menuItem->isActive(), 'page') ?> href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a>
 			</summary>
+
 			<ul class="sidebar-menu-2">
 				<?php foreach ($menuItem->children()->listed() as $submenuItem): ?>
 				<li>
@@ -24,6 +25,7 @@ extract([
 				<?php endforeach ?>
 			</ul>
 		</details>
+
 		<?php else: ?>
 		<a <?= ariaCurrent($menuItem->isActive(), 'page') ?> href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a>
 		<?php endif ?>

@@ -1,9 +1,6 @@
 .sidebar {
 	font-size: var(--text-base);
 }
-.sidebar ul:not(.filters) a {
-	font-weight: var(--font-bold);
-}
 .sidebar ul a[aria-current] {
 	color: var(--color-black);
 }
