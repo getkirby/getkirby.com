@@ -126,10 +126,9 @@
 			<div class="columns" style="--columns: 3; --gap: var(--spacing-24)">
 				<?php foreach ($page->children() as $project) : ?>
 					<article>
-
 						<figure>
 							<a href="<?= $project->link() ?>" target="_blank">
-								<div style="--aspect-ratio: 3/4" class="bg-light mb-6">
+								<div style="--aspect-ratio: 3/4" class="bg-light mb-6 shadow-lg">
 									<?php if ($image = $project->image()): ?>
 										<?= $image->name() === 'example' ? $image : $image->resize(800) ?>
 									<?php endif ?>
@@ -146,7 +145,6 @@
 								</figcaption>
 							</a>
 						</figure>
-
 					</article>
 				<?php endforeach ?>
 			</div>
