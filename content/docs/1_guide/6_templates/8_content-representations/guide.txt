@@ -112,8 +112,7 @@ Controllers and templates from plugins get overridden automatically if they exis
 ## Examples for using content representations
 
 Our cookbook features multiple examples for using content representation for different use cases:
-
-- (link: docs/cookbook/content-representations/load-more-with-ajax text: Load more with ajax)
+- (link: docs/cookbook/content-representations/ajax-load-more text: Load more with ajax)
 - (link: docs/cookbook/content-representations/dynamic-og-images text: Creating OG images)
 - (link: docs/cookbook/content-representations/figma-auto-populate text: Populate Figma designs)
 - (link: docs/cookbook/content-representations/generating-json text: Generating JSON)

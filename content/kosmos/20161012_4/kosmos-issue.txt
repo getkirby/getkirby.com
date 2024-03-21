@@ -24,7 +24,7 @@ Another month has passed since our last Kosmos episode and we are super excited 
 
 Last week, with the release of (link: https://getkirby.com/changelog/kirby-2-4-0-beta-1 text: Kirby 2.4.0 beta), **Panel permissions** have finally made it into Kirby. And there are tons of other new features, enhancements, and improvements to discover. We are looking forward to your help and feedback to remove any issues before the final release.
 
-We've also written up two new cookbook recipes ([Ajax Form Validation](https://getkirby.com/docs/cookbook/ajax-form-validation) and [Ajax Load More](https://getkirby.com/docs/cookbook/ajax-load-more)) that make use of the new "Content Representations" feature. Try them out!
+We've also written up two new cookbook recipes ([Ajax Form Validation](https://getkirby.com/docs/cookbook/ajax-form-validation) and [Ajax Load More](https://getkirby.com/docs/cookbook/content-representations/ajax-load-more)) that make use of the new "Content Representations" feature. Try them out!
 
 ## Vote for Kirby – CMS Critic Awards
 

@@ -115,7 +115,7 @@ The (link: docs/cookbook text: Cookbook) is the place on our website where you f
 
 Uwe Gehring introduces an [alternative setup for multi-site Kirby installations](https://getkirby.com/docs/cookbook/development-deployment/multisite-variant) with an easy way to switch between Kirby versions.
 
-Based on an idea shared by Markus Denhoff, I wrote a little recipe [how to fine-tune page cache exclusions](https://getkirby.com/docs/quicktip/fine-tuning-the-cache) dynamically.
+Based on an idea shared by Markus Denhoff, I wrote a little recipe [how to fine-tune page cache exclusions](https://getkirby.com/docs/quicktips/fine-tuning-the-cache) dynamically.
 
 When faced with choosing the right KirbyText/KirbyTags hook for a task, it is [important to know when they are called](https://getkirby.com/docs/cookbook/extensions/kirbytext-hooks).
 
