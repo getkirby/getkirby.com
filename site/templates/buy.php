@@ -62,10 +62,6 @@ article[data-loading] .price[data-sale] {
 .product[data-product="basic"] .price[data-sale] {
 	color: var(--color-yellow-700);
 }
-.product[data-product="basic"] .btn {
-	background: var(--color-gray-250);
-	border-color: var(--color-gray-250);
-}
 
 .product[data-product="enterprise"] {
 	background: var(--color-white);
@@ -123,14 +119,14 @@ article[data-loading] .price[data-sale] {
 			</div>
 			<div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
 				<?php snippet('templates/buy/product', [
-					'product'     => $enterprise,
-					'description' => 'The standard license for companies and organizations of any size.',
-					'limit'       => 'No&nbsp;revenue limit.'
-				]) ?>
-				<?php snippet('templates/buy/product', [
 					'product'     => $basic,
 					'description' => 'A discounted license for individuals and small teams with a',
 					'limit'       => 'total annual revenue of less than ' . $revenueLimit
+				]) ?>
+				<?php snippet('templates/buy/product', [
+					'product'     => $enterprise,
+					'description' => 'The standard license for companies and organizations of any size.',
+					'limit'       => 'No&nbsp;revenue limit.'
 				]) ?>
 				<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">
 					Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a>
@@ -221,7 +217,7 @@ createApp({
 	checkoutIsOpen: false,
 	isFetchingPrices: false,
 	isProcessing: false,
-	product: "basic",
+	product: "enterprise",
 	quantity: 1,
 
 	// computed

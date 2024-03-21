@@ -10,10 +10,14 @@
 	gap: .5rem;
 	cursor: pointer;
 }
+
+.volume-discounts[data-product="enterprise"] .btn svg {
+	color: var(--color-green-600) !important;
+}
 </style>
 
-<section class="mb-42" id="volume-discounts">
-	<form class="volume-discounts" method="POST" target="_blank" action="<?= url('buy/volume') ?>">
+<section class="volume-discounts mb-42" id="volume-discounts" :data-product="product">
+	<form method="POST" target="_blank" action="<?= url('buy/volume') ?>">
 		<header class="flex items-baseline justify-between mb-6">
 			<h2 class="h2">Volume discounts</h2>
 			<fieldset>

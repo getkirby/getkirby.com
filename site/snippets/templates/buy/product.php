@@ -42,7 +42,7 @@
 
 	<footer>
 		<p>
-			<a href="/buy/<?= $product->value() ?>" @click.prevent="openCheckout('<?= $product->value() ?>', 1)" target="_blank" class="btn <?= $product === Buy\Product::Basic ? 'btn--outlined' : 'btn--filled' ?> mb-1 w-100%">
+			<a href="/buy/<?= $product->value() ?>" @click.prevent="openCheckout('<?= $product->value() ?>', 1)" target="_blank" class="btn btn--filled mb-1 w-100%">
 				<?= icon('cart') ?>
 				Buy <?= $product->label() ?>
 			</a>
