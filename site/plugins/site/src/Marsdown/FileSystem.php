@@ -60,12 +60,13 @@ class FileSystem
 	// Source: http://stackoverflow.com/a/8882181
 	protected static function parseBlock(string $text): array
 	{
+		$text        = trim($text);
 		$indentation = '  ';
 
 		$result = [];
 		$path   = [];
 
-		foreach (preg_split("$\n+$", trim($text)) as $line) {
+		foreach (preg_split("$\n+$", $text) as $line) {
 			// get depth and label
 			$depth = 0;
 
@@ -99,9 +100,11 @@ class FileSystem
 		return $result;
 	}
 
-	protected static function renderLabel(string $name, ?string $type = null): string
-	{
-		$html  = '<span role="presentation" class="filesystem-label" data-type="' . $type . '">';
+	protected static function renderLabel(
+		string $name,
+		string|null $type = null
+	): string {
+		$html = '<span role="presentation" class="filesystem-label" data-type="' . $type . '">';
 
 		if ($type !== null) {
 			$html .= icon($type);
@@ -113,12 +116,13 @@ class FileSystem
 		return $html;
 	}
 
-	protected static function renderBlock(array $files, int $level = 0): string
-	{
+	protected static function renderBlock(
+		array $files,
+		int $level = 0
+	): string {
 		$html = '<ul>';
 
 		foreach ($files as $filename => $children) {
-
 			$hasChildren = count($children) > 0;
 			$isFolder    = Str::endsWith($filename, '/');
 			$icon        = static::getIconByFilename($filename);
@@ -127,16 +131,20 @@ class FileSystem
 
 			if ($isFolder) {
 				$filename = preg_replace('/\/$/', '', $filename);
-				$icon     = $hasChildren ? 'folder-expanded' : 'folder-collapsed';
+				$icon     = match($hasChildren) {
+					true  => 'folder-expanded',
+					false => 'folder-collapsed',
+				};
 
 				if ($hasChildren) {
 					$html .= '<details open>';
-					$html .= '<summary>' . static::renderLabel($filename, $icon) . '</summary>';
+					$html .= '<summary>';
+					$html .= static::renderLabel($filename, $icon);
+					$html .= '</summary>';
 					$html .= static::renderBlock($children, $level + 1);
 					$html .= '</details>';
 					continue;
 				}
-
 			}
 
 			$html .= static::renderLabel($filename, $icon);
