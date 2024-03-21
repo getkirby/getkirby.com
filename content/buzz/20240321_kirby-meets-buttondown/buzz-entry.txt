@@ -1,0 +1,14 @@
+Title: Kirby + Buttondown
+
+----
+
+Category: Article
+
+----
+
+Text: In this article, Elliot Jay Stocks shares how he and Keir Whitaker integrated Elliot's fantastic Buttondown newsletter for type fans into his Kirby site.
+
+----
+
+
+Link: https://elliotjaystocks.com/blog/how-we-integrated-buttondown-and-kirby
