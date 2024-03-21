@@ -60,13 +60,12 @@ class FileSystem
 	// Source: http://stackoverflow.com/a/8882181
 	protected static function parseBlock(string $text): array
 	{
-
 		$indentation = '  ';
 
 		$result = [];
 		$path   = [];
 
-		foreach (explode("\n", $text) as $line) {
+		foreach (preg_split("$\n+$", trim($text)) as $line) {
 			// get depth and label
 			$depth = 0;
 
