@@ -27,8 +27,10 @@ Example:
 ```php
 $config = [
   'presprog.auto-file-templates' => [
-    'image' => 'my-image', // Every uploaded image will be assigne the `my-image` template
-    'video => true // Every uploaded video will be assigned the `video` template
+    // Every uploaded image will be assigned the `my-image` template
+    'image' => 'my-image',
+    // Every uploaded video will be assigned the `video` template 
+    'video => true
   ]
 ];
 ```
