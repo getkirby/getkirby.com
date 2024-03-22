@@ -282,6 +282,10 @@ class Thumbnail
 	 */
 	public function response(): Response|null
 	{
+		if ($this->page() === null) {
+			return new Response('Page not found', 'text/plain', 404);
+		}
+
 		// Create canvas
 		$this->canvas = imagecreatetruecolor($this->width, $this->height);
 
