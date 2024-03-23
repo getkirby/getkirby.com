@@ -11,7 +11,7 @@
 				<p>There are not many steps needed to migrate from Kirby 3.8 to Kirby 3.9. To ease the transition, we have compiled everything you need to know in migration guides:</p>
 
 				<p>
-					<a href=" <?= url('releases/3.9/migration-sites') ?>">Migration guide for site developers →</a><br>
+					<a href="<?= url('releases/3.9/migration-sites') ?>">Migration guide for site developers →</a><br>
 					<a href="<?= url('releases/3.9/migration-plugins') ?>">Migration guide for plugin developers →</a>
 				</p>
 			</div>

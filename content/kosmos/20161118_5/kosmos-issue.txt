@@ -24,7 +24,7 @@ Here we are back again with the 5th episode of Kirby Kosmos. Let's start with a 
 
 We just released the (link: https://getkirby.com/changelog/kirby-2-4-0 text: final version of Kirby 2.4.0). Have you got round to testing the new permissions and content representation features yet?
 
-Together with Kirby 2.4.0 we also published a (link: https://download.getkirby.com/ text: brand new Starterkit), which features an awesome, completely different design, and lots of changes under the hood to help you get your projects up and running with Kirby even easier. View the (link: https://getkirby.com/kits/starterkit/ text: live demo). You can read all about the design decisions and the development process (link: https://getkirby.com/blog/a-new-starterkit-for-kirby text: on our blog).
+Together with Kirby 2.4.0 we also published a (link: https://download.getkirby.com/ text: brand new Starterkit), which features an awesome, completely different design, and lots of changes under the hood to help you get your projects up and running with Kirby even easier. View the (link: https://starterkit.getkirby.com/ text: live demo). You can read all about the design decisions and the development process (link: https://getkirby.com/blog/a-new-starterkit-for-kirby text: on our blog).
 
 ## Powered by Kirby
 

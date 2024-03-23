@@ -142,7 +142,7 @@ But you can check what is loaded and when if you open the network tab in your br
 
 It's also interesting to see how different browser engines behave and also how the behavior changes (for example in Chrome) when you enable network throttling.
 
-For your convenience, I created a (link: text: testsite on GitHub) with some examples for the different techniques introduced in this recipe.
+For your convenience, I created a (link: https://github.com/texnixe/lazyloading-testsite text: testsite on GitHub) with some examples for the different techniques introduced in this recipe.
 
 
 ## Lazysizes

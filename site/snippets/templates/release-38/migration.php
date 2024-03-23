@@ -11,7 +11,7 @@
 				<p>To ease the transition, we have compiled everything you need to know in detailed migration guides:</p>
 
 				<p>
-					<a href=" <?= url('releases/3.8/migration-sites') ?>">Migration guide for site developers →</a><br>
+					<a href="<?= url('releases/3.8/migration-sites') ?>">Migration guide for site developers →</a><br>
 					<a href="<?= url('releases/3.8/migration-plugins') ?>">Migration guide for plugin developers →</a>
 				</p>
 			</div>
