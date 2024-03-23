@@ -20,7 +20,7 @@ Tags: plugin, build process, vite
 
 Text:
 
-In our (link: docs/guide/page-builder/custom-block-type text: Creating a custom block type from scratch) recipe, we built a custom block type using a single file component with a build process. Single file components are a reformatted way of writing regular JS components, with certain advantages. They keep your code clean and self-contained. Anything that belongs to a component is in a single file: the HTML template, the logic and the styles. But this comes at the price of having to use a bundler.
+In our (link: docs/guide/page-builder/complex-custom-block text: Creating a custom block type from scratch) recipe, we built a custom block type using a single file component with a build process. Single file components are a reformatted way of writing regular JS components, with certain advantages. They keep your code clean and self-contained. Anything that belongs to a component is in a single file: the HTML template, the logic and the styles. But this comes at the price of having to use a bundler.
 
 The final code from that recipe can be converted to a regular `index.js` with the steps below. Let's start with the code of the single file component from that recipe.
 
