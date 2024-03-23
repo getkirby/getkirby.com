@@ -105,18 +105,29 @@ $groups = $page->children()->listed()->group(function($article) {
 ```
 
 ## Combining methods for more complex grouping scenarios
-We can make things even more complex. Have a look at this example:
+We can make things even more complex. Let's say our page collection has a start date (`from`) and an end date (`to`), and we want to group all items with the same start and end date.
 
-```php
-$groupedItems = page('events')->children()->listed()->map(function($p) {
-    $p->eventDate = $p->from()->toDate('d.m.Y') . ' - ' . $p->to()->toDate('d.m.Y');
+For this case, we can either use a callbackback like above that returns the combined date, or we create a (link:docs/guide/templates/page-models text: page model) method called `eventDate`. In this case, let's use a page model.
 
-    return $p;
-})->groupBy('eventDate');
+Since our children use the `event` blueprint, we create a model called `EventPage`:
+
+
+```php "/site/models/event.php"
+<?php
+class EventPage extends Page
+{
+    public function eventDate()
+    {
+        return $this->from()->toDate('d.m.Y') . ' - ' . $this->to()->toDate('d.m.Y');
+    }
+}
 ```
 
-In this example we want to group our items by a combination of two date fields, `from` and `to`. We use the [`map()` method](/docs/reference/objects/pages/map) with a callback to create a "virtual" field called `eventDate`, then we pass this field to the `groupBy()` method.
+Now we can group by this method:
 
+```php
+$groupedItems = page('events')->children()->listed()->groupBy('eventDate');
+```
 
 ### Grouping files
 We can use both `group()` and `groupBy()` with files.

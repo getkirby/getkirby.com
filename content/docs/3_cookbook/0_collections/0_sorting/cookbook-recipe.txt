@@ -159,46 +159,22 @@ products:
       type: text
 ```
 
-Now, instead of numbers, our sizes field contains sizes like `S, M, L, XL, XXL` etc. Obviously, we cannot sort them alphabetically or otherwise, because they have no inherent order. So, what can we do? The solution here is to map a sorting value to every real value using the `map()` method.
+Now, instead of numbers, our sizes field contains sizes like `S, M, L, XL, XXL` etc. Obviously, we cannot sort them alphabetically or otherwise, because they have no inherent order. So, what can we do? The solution here is to pass a callback to the sort method:
 
 ```php
-// fetch the products from the structure field
-$products = $page->products()->toStructure();
+$sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
-// map an order field to each item of the collection
-$products = $products->map(function($item) {
-  // array that keeps the order of sizes
-  $sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-
-  // get the order number from the array based on the item's size value
-  $item->order = array_search($item->size()->value(), $sizes);
-
-  return $item;
-});
-
-// finally, sort by order
-$products = $products->sortBy('order', 'asc');
+$products = $page->products()->toStructure()->sort(
+  fn ($item) => array_search($item->size()->value(), $sizes),
+  SORT_ASC
+);
 ```
-
-Of course, we can write all that stuff a bit shorter:
-
-```php
-$products = $page->products()->structure()->map(function($item) {
-  $sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-  $item->order = array_search($item->size()->value(), $sizes);
-  return $item;
-})->sortBy('order', 'asc');
-
-dump($products);
-```
-
-The `map()` method is really useful for all types of scenarios, so keep it in mind for next time you come across a problem that you can't solve with a simple sort.
 
 ## Sorting with Page Models
 
 We cannot only use fields that exist in our content files for sorting. In fact, we can use all the methods the different collection classes (pages, files, etc.) provide (and that make sense to sort by). For example, you can sort by the template that is used by a page or file, if that makes sense for your use case. Or you can sort by a custom page model.
 
-Let's assume for a moment that we wanted to sort our project pages by the number of images they have. Kirby doesn't have a native method that counts our images. We could now use the `map()` method as outlined above, but we want to have some more fun and do something different now and create a (glossary: model text: Page Model) with a method that returns the number of images.
+Let's assume for a moment that we wanted to sort our project pages by the number of images they have. Kirby doesn't have a native method that counts our images. We could now use a callback like in the previous example, but I wnt to show you another trick:
 
 **The page model**
 
@@ -212,7 +188,7 @@ class ProjectPage extends Page {
 }
 
 ```
-I won't go into details with Page Models here. You can read more about how to create them (link: docs/guide/templates/page-models text: in the docs)
+I won't go into details with Page Models here. You can read more about them (link: docs/guide/templates/page-models text: in the docs)
 
 Now we can use this method to sort by:
 
