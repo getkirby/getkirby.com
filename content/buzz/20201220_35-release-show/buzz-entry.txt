@@ -6,7 +6,7 @@ Category: Release show
 
 ----
 
-Text: Bastian and Marc from beyond tellerrand decided to run a live show to celebrate and demonstrate the release of Kirby 3.5. 🙌
+Intro: Bastian and Marc from beyond tellerrand decided to run a live show to celebrate and demonstrate the release of Kirby 3.5. 🙌
 
 ----
 

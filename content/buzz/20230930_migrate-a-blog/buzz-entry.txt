@@ -2,7 +2,7 @@ Title: Migrate a blog to Kirby
 
 ----
 
-Category: Article
+Category: kevquirk.com
 
 ----
 

@@ -6,7 +6,7 @@ Category: Release show
 
 ----
 
-Text: Recording of the Kirby 4 launch live stream from December 7, 2023 with Bastian and Marc. See what's new in Kirby 4!
+Intro: Recording of the Kirby 4 launch live stream from December 7, 2023 with Bastian and Marc. See what's new in Kirby 4!
 
 ----
 

@@ -2,7 +2,7 @@
 
 <article class="buzz">
 	<header class="mb-24">
-		<h1 class="h1">What others say.<br>What we say.<br>The buzz.</h1>
+		<h1 class="h1">What we say.<br>What others say.<br>The buzz.</h1>
 	</header>
 
 	<div class="auto-fill mb-36" style="--min: 20rem; --gap: var(--spacing-12)">
