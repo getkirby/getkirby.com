@@ -30,7 +30,7 @@ Want to explore Kirby a bit without installing anything first? Check out our (li
 
 ## Installing Kirby
 
-You can install Kirby in a few quick steps in different ways.
+You can install Kirby in a few quick steps in different ways. More instructions on installing and updating Kirby can be found in our (link: docs/guide/install-guide text: detailed installation guides)
 
 (tabs…)
 === Manual
