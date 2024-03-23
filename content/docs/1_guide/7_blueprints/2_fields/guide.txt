@@ -144,6 +144,10 @@ fields:
       - c
 ```
 
+## Define once, reuse everywhere
+
+If you have field definitions with special settings that you want to use in multiple contexts, you can define them once and reuse them everywhere in your blueprints, see (link: docs/guide/blueprints/extending-blueprints#reusing-and-extending-single-fields text: Reusing field definitions).
+
 ## Custom fields
 
 You can extend this list with your own field types by creating a (link: docs/reference/plugins/extensions/fields text: field plugin).
