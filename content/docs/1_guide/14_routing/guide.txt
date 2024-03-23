@@ -244,13 +244,13 @@ In case of multi-language sites you must call the `$site->visit()` method in ord
 
 ### Language scope
 
-In multi-lang installations, you can set a language scope for the route:
+In multi-lang installations, you can set a language scope for your routes:
 
 ```php
 return [
     'routes' => [
         [
-            'pattern' => '(:any)',
+            'pattern' => 'test',
             'language' => 'en',
             'action' => function ($language, $slug) {
 
@@ -269,6 +269,46 @@ return [
     ]
 ];
 ```
+
+The above route will respond to a pattern like `example.com/test` (if `en` is the default language) or `example.com/en/test`. If `en` is **not** the default language, the route will only respond to `example.com/en/test`.
+
+If you call the above language-scoped route pattern using another language like `example.com/de/test`, the above route will not respond and show the error page instead.
+
+<info>
+In a multi-language context, routes are supposed to be called **with** the language code in the URL (unless it is the default language). Otherwise, `$language` will always refer to the default language.
+</info>
+
+If you don't set the language scope in a multi-language context, the above route will only respond to `example.com/test`, not to URLs that contain a language code.
+
+To make a route respond to all languages, you can set the language scope property to `*`.
+
+```php
+return [
+    'routes' => [
+        [
+            'pattern' => 'test',
+            'language' => '*',
+            'action' => function ($language, $slug) {
+
+                if (page($slug)) {
+                    return $this->next();
+                }
+
+                if ($page = page('notes/' . $slug)) {
+                    return $page;
+                }
+
+                return false;
+
+            }
+        ],
+    ]
+];
+```
+
+This route pattern will respond to `example.com/en/test`, `example.com/de/test` or whatever languages you have defined.
+
+### Page scope
 
 To make sure that translated slugs are automatically handled by Kirby, you can set a page scope:
 
@@ -289,6 +329,8 @@ return [
 ];
 ```
 In this example, we return the `notes` page with the filter data. In your controller, you can now (link: docs/guide/templates/controllers#arguments-from-page-render-in-route text: use this filter to return only the children with the given tag).
+
+Since we have set the language scope to `*`, this route will listen to all languages.
 
 ## `next()`
 
