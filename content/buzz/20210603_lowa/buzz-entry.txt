@@ -6,7 +6,7 @@ Category: Kirby in the wild
 
 ----
 
-Text: How does modern content management look like? Georg Obermayr shares how the well-known outdoor brand LOWA uses microservices architecture, driven by Kirby CMS, to turbocharge innovation.
+Intro: How does modern content management look like? Georg Obermayr shares how the well-known outdoor brand LOWA uses microservices architecture, driven by Kirby CMS, to turbocharge innovation.
 
 ----
 
