@@ -59,6 +59,7 @@
 		<div class="container">
 			<div class="with-sidebar">
 				<?php snippet('templates/plugins/sidebar') ?>
+
 				<article class="mb-24">
 					<?= $slot ?>
 				</article>
