@@ -1,4 +1,4 @@
-Title: Custom block type from scratch
+Title: Audio block example with preview
 
 ----
 

@@ -1,0 +1,155 @@
+Title: Customizing core blocks
+
+----
+
+Intro: Learn the basics of modifying our core blocks and creating your own from scratch
+
+----
+
+Screencast: (screencast: https://www.youtube.com/watch?v=eOoGMmQbre8 title: A closer look at the blocks field)
+
+----
+
+Text:
+
+## What makes a block?
+
+A block type is made up of three components:
+
+1. A block (glossary: blueprint text: blueprint) which tells Kirby which fields should be available in the block
+2. A (glossary: snippet text: snippet) to render the block content in the frontend
+3. An (optional) Panel preview for the WYSIWYG experience
+
+You can find the source files for the existing block types in the (link: docs/reference/panel/blocks text: documentation for each block type).
+
+With this knowledge, we can go ahead and either modify existing block types or create new ones.
+
+## Extending core blocks
+
+You can customize all existing block types to your needs in one or all of the following ways:
+
+1. Change how the block renders in the frontend by overwriting the snippet for the block
+2. Add or replace fields in a block type by overwriting the (glossary: blueprint) file for the block type. This will often go hand in hand with modifying the output as in point 1.
+3. Change how the block looks in the Panel by overwriting its preview.
+
+To modify a block, you can use the standard blueprints, snippets, and previews of each block type as a basis for your changes. (link: docs/guide/page-builder#core-blocks text: Read more…)
+
+Let's modifiy the heading block to see how that works.
+
+## Example: extending the heading block
+
+### Modifying the block blueprint
+
+Let's take the heading block and add a simple text field to add a custom ID for the heading
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      - type: heading
+        extends: blocks/heading
+        fields:
+          customId:
+            label: Custom ID
+            type: text
+```
+
+This will add the `customID` field below the default fields of the block.
+
+(image: custom-id.png)
+
+#### Extending existing fields in a block type
+
+Instead of only adding new fields, you can also adjust the field settings for the default fields of the block.
+
+Let's limit the number of heading levels for our heading block.
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      - type: heading
+        extends: blocks/heading
+        fields:
+          level:
+            options:
+              - h2
+              - h3
+```
+
+You can find all block fields and their settings in the (link: docs/reference/panel/blocks text: docs for each block).
+
+#### Adding tabs
+
+You can extend our core blocks with additional tabs. Be aware though that you need to recreate all default fields in this case, as tabs will replace the default fields.
+
+```yaml
+fields:
+  blocks:
+    type: blocks
+    fieldsets:
+      - type: heading
+        extends: blocks/heading
+        tabs:
+          content:
+            fields:
+              level:
+                type: select
+                empty: false
+                default: "h2"
+                width: 1/6
+                options:
+                  - h1
+                  - h2
+                  - h3
+              text:
+                type: writer
+                inline: true
+                width: 5/6
+              customId:
+                label: Custom ID
+                type: text
+          styles:
+            fields:
+              backgroundColor:
+                type: select
+                options:
+                  - red
+                  - green
+                  - blue
+              textColor:
+                type: select
+                options:
+                  - white
+                  - black
+```
+
+### Block snippets
+
+The HTML for each individual block is stored in its own block snippet. All our default block types bring their own snippets and can be overwritten. Block snippets are stored in `/site/snippets/blocks`
+
+As an example, if you want to overwrite the snippet for our heading block, you would create a snippet file called `/site/snippets/blocks/heading.php`
+
+#### The default heading snippet
+
+```php
+<<?= $level = $block->level()->or('h2') ?>>
+	<?= $block->text() ?>
+</<?= $level ?>>
+```
+
+#### Your customized version
+
+```php "/site/snippets/blocks/heading.php"
+<<?= $level = $block->level()->or('h2') ?> id="<?= $block->customId()->or($block->id()) ?>">
+	<?= $block->text() ?>
+</<?= $level ?>>
+```
+
+
+
+
+
+

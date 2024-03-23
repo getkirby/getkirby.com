@@ -47,27 +47,22 @@ Add `blocks` and `layout` fields to your blueprints like any other field type. C
 - (link: docs/reference/panel/fields/blocks text: Blocks field)
 - (link: docs/reference/panel/fields/layout text: Layout field)
 
-## Copy & paste
-
-You can paste content from documents and websites into a blocks field, and Kirby will try to convert them into blocks automatically. You can also select and copy multiple blocks between pages.
-
-
-## Made by others
-
-### Block related plugins
+## Third-party block plugins
 
 Our community of Kirby developers have created cool blocks field plugins, so make sure to check them out:
 
+- (link: plugins/lukasbestle/downloads text: Downloads block)
 - (link: plugins/microman/map text: Map-Suite: A geolocation field & map block)
 - (link: plugins/microman/formblock text: Form block: Create forms easily from building blocks)
 - (link: plugins/microman/grid-block text: Grid block: Use layouts right within any blocks field)
 - (link: plugins/jongacnik/fields-block text: Fields block: Kirby block preview plugin to directly render block fields, allowing for inline editing)
-- (link: plugins/adspectus/feedreader text: FeedReader: Integrate a feed using a block)
 - (link: plugins/johannschopplich/highlighter text: Highlighter: Syntax highlighting for code)
 
 Already made your own? Don't hesitate to (link: docs/guide/plugins/plugin-setup-basic#publish-your-plugin text: share them with the world).
 
-### Read on
+----
+Resources:
 
-- (link: docs/cookbook/frontend/kirby-meets-tailwindcss text: Kirby meets Tailwind, includes solutions how to make Tailwind work with (inline) HTML elements in blocks)
+- docs/cookbook/content-structure/nested-blocks
+- docs/cookbook/frontend/kirby-meets-tailwindcss
 

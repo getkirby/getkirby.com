@@ -59,6 +59,10 @@ Some blocks can be edited inline, i.e. without opening the drawer (for example, 
 
 With some block types (image, video…), you can open the drawer by double-clicking the block.
 
+## Copy & paste
+
+You can paste content from documents and websites into a blocks field, and Kirby will try to convert them into blocks automatically. You can also select and copy multiple blocks between pages.
+
 ## Remove one or multiple blocks
 
 To remove the selected block(s), click/tap the trash icon or use the keyboard shortcut `Meta + Backspace`

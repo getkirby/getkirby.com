@@ -1,4 +1,4 @@
-Title: More block examples
+Title: Custom block examples
 
 ----
 
