@@ -1,4 +1,4 @@
-Title: Updates
+Title: Upgrades
 
 ----
 
@@ -14,33 +14,3 @@ Category: Maintenance
 Icon: refresh
 
 ----
-
-Text:
-
-To update Kirby, download the latest version and replace the `kirby` folder.
-
-Make sure to delete the `media` folder. It will be automatically recreated.
-
-If you use any plugins, make sure to update them as well.
-
-That's it! Because Kirby does not use a database by default, you don't have to run any database migrations.
-
-<warning>
-Kirby uses the [Semantic Versioning](https://semver.org) scheme:
-{major}.{minor}(.{patch})
-
-**Major releases** (e.g 4.0 to 5.0) may contain breaking changes and deprecations. In such a case, you might have to update your code and plugins used in your installation. You can find breaking changes of a new release in the changelogs. If you are updating from older versions, multiple changelogs may apply. Always read them carefully to identify potential issues.
-
-**Minor and patch releases** (e.g. 4.1 to 4.2 or 4.1 to 4.1.1) can generally be applied without changes to your site code.
-
-Note that the major version of Kirby 3 was the second number (e.g. the major version of Kirby 3.9.0 is 9). So e.g. updates from Kirby 3.8 to Kirby 3.9 also came with breaking changes.
-
-In any case, please never update a live website directly on the server. Test updates locally first to see if something breaks.
-</warning>
-
-### Updating Kirby with the advanced methods
-
-If you used one of the advanced installation methods, you can also use them to update Kirby:
-
-- (link: docs/guide/install-guide/composer#updating-kirby text: Update via Composer)
-- (link: docs/guide/install-guide/git#updating-kirby text: Update of the Git submodule)

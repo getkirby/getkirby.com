@@ -1,4 +1,4 @@
-Title: Local dev environment
+Title: Choosing a local dev environment
 
 ----
 

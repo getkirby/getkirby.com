@@ -1,5 +1,0 @@
-Title: Install via Kirby CLI
-
-----
-Text:
-

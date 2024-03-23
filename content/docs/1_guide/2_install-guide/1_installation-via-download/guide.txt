@@ -1,0 +1,31 @@
+Title: Install & update via download
+
+----
+Text:
+
+## Installing a kit
+
+The most simple way to install Kirby without any additional tools is to download one of the existing Kits:
+
+- (link: https://download.getkirby.com/ text: Starterkit)
+- (link: https://github.com/getkirby/plainkit/archive/main.zip text: Plainkit):
+- (link: https://github.com/getkirby/dempkit/archive/main.zip text: Demokit)
+
+Once downloaded,
+
+2. Extract the contents of the ZIP file into your server's (glossary: document-root)
+3. Visit your new Kirby site in your browser at `yourdomain.com`
+4. Visit the (glossary: Panel) at `yourdomain.com/panel`
+
+## Updating your installation
+
+To update Kirby, download the Kirby version you want to upgrade to (link: https://github.com/getkirby/kirby/tags text: from GitHub) and replace the `kirby` folder with the extracted zip folder (make sure to rename the unzipped folder to `kirby``.
+
+Make sure to delete the `media` folder. It will be automatically recreated.
+
+**If you use any plugins, make sure to update them as well.**
+
+That's it! Because Kirby does not use a database by default, you don't have to run any database migrations.
+
+(docs: upgrade-warning)
+

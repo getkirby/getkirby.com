@@ -1,4 +1,4 @@
-Title: Install via Composer
+Title: Install & update via Composer
 
 ----
 
@@ -173,6 +173,8 @@ Composer will now look for the latest version that matches your version constrai
 
 By changing the Kirby version in your `composer.json`, you can make Composer install a different version of Kirby. Very useful is the special version `dev-develop`, which will install the current development version of Kirby straight from GitHub.
 
+(docs: upgrade-warning)
+
 ## Using Composer for Kirby plugins
 
 ### Installing plugins with Composer
@@ -205,3 +207,4 @@ If your `plugins` directory is in a non-standard location, you can change it lik
 ## Using Composer for other dependencies
 
 Of course, you can also install other dependencies like general PHP libraries this way. The libraries you install will automatically be available from your site's code, e.g. in your templates, controllers and models.
+

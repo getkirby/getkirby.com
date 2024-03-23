@@ -1,4 +1,4 @@
-Title: Get up and running
+Title: Quickstart
 
 ----
 
