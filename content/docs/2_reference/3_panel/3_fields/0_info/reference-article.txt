@@ -56,6 +56,13 @@ The info field is displayed as a blue info box. You can switch the theme with th
 - `info` (default)
 - `positive`
 - `negative`
+- `notice`
+- `warning`
+- `passive`
+- `text`
+- `dark`
+- `code`
+- `empty`
 
 ```yaml
 fields:
