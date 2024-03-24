@@ -19,7 +19,7 @@ Once downloaded,
 
 ## Updating your installation
 
-To update Kirby, download the Kirby version you want to upgrade to (link: https://github.com/getkirby/kirby/tags text: from GitHub) and replace the `kirby` folder with the extracted zip folder (make sure to rename the unzipped folder to `kirby``.
+To update Kirby, download the Kirby version you want to upgrade to (link: https://github.com/getkirby/kirby/tags text: from GitHub) and replace the `kirby` folder with the extracted zip folder (make sure to rename the unzipped folder to `kirby`.
 
 Make sure to delete the `media` folder. It will be automatically recreated.
 
