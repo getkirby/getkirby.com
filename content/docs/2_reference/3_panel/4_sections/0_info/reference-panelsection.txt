@@ -124,6 +124,23 @@ text: "{{ site.index.images.count }}"
 
 ## Themes
 
+By default, the info section is displayed as a blue info box. You can switch the theme with the `theme` option, to match the importance or meaning of the information.
+
+The following themes are available:
+
+- `info` (default)
+- `positive`
+- `positive`
+- `negative`
+- `negative`
+- `notice`
+- `warning`
+- `passive`
+- `text`
+- `dark`
+- `code`
+- `empty`
+
 ### info
 
 ```yaml
