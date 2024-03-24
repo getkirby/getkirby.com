@@ -81,10 +81,14 @@ columns:
 
   sidebar:
     width: 1/3
+    # here we add two sections: a meta fields section and a files section to upload files we can select from in the heroImage field
     sections:
       meta:
         type: fields
         fields:
+          heroImage:
+            type: files
+            max: 1
           date:
             type: date
             time: true
@@ -93,6 +97,8 @@ columns:
             type: users
           tags:
             type: tags
+      files:
+        type: files
 ```
 
 ### Result
