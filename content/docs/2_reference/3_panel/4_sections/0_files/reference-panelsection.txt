@@ -14,7 +14,14 @@ Guide: content/files
 
 Text:
 
-The files section can be used to show any combination of files for the current page or any other page in your site.
+The files section can be used to show any combination of files for the current page, any other page in your site or even all files of your site. Using a files section, you can execute the following operations on files (if not forbidden or impossible because of other settings):
+
+- upload files
+- replace a file
+- delete a file
+- rename a file
+- change the order number of files (if sorted manually)
+- change the template of a file
 
 (image: files-section.png)
 
