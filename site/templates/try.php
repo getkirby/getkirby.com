@@ -26,7 +26,7 @@
 
 	<div class="columns mb-36" style="--columns: 1; --columns-lg: 2; --gap: var(--spacing-24)">
 
-		<form id="demo" class="demo mb-6" action="https://<?= r(param('demo') === 'staging', 'staging.') ?>trykirby.com" method="post">
+		<form id="demo" class="demo mb-6" action="https://<?= r(param('demo') === 'staging', 'staging.') ?>de.trykirby.com" method="post">
 			<h2 class="h2 mb-6">
 				Instant online demo
 			</h2>
