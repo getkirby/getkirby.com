@@ -28,6 +28,25 @@ Text:
 
 Want to explore Kirby a bit without installing anything first? Check out our (link: /try text: instant online demo).
 
+## Requirements
+
+(tabs…)
+=== Web Server
+
+(docs: requirements/server)
+
+=== PHP Version
+
+(docs: requirements/php-versions)
+
+Kirby needs a pretty standard set of PHP extensions. See the full list of required, recommended and optional (link: docs/reference/system/requirements#php-extensions text: PHP extensions)
+
+=== Browsers for the Panel
+
+(docs: requirements/browsers)
+
+(…tabs)
+
 ## Installing Kirby
 
 You can install Kirby in a few quick steps in different ways. More instructions on installing and updating Kirby can be found in our (link: docs/guide/install-guide text: detailed installation guides)
@@ -102,33 +121,6 @@ More information about installing and updating Kirby via Git in our (link: docs/
 When copying files to a remote server via (S)FTP, make sure to copy the `.htaccess` file as well. By default, files starting with a dot are invisible in the filesystem, so make sure enable the display of invisible files before copying.
 </info>
 
-## Requirements
-
-### Web Server
-
-(docs: requirements/server)
-
-### PHP Version
-
-(docs: requirements/php-versions)
-
-Kirby needs a pretty standard set of PHP extensions. See the full list of required, recommended and optional (link: docs/reference/system/requirements#php-extensions text: PHP extensions)
-
-### Browsers for the Panel
-
-(docs: requirements/browsers)
-
-### Local development environment
-
-
-If you don't have a local development environment yet and don't know what to use, check out our (link: docs/guide/development-environment text: Local development environment) recipe.
-
-### Installation guides for webhosts
-Some providers have created dedicated guides how to install Kirby on their servers. If you are with one of these providers, keep on reading:
-- (link: https://lab.uberspace.de/guide_kirby.html text: Installation on Uberspace)
-- (link: https://help.fortrabbit.com/install-kirby text: Installation on fortrabbit)
-- (link: https://www.rosehosting.com/blog/how-to-install-kirby-cms-on-ubuntu-18-04/ text: Installation on RoseHosting)
-- (link: https://www.alwaysdata.com/en/marketplace/kirby/ text: Installation on alwaysdata (from Marketplace))
 
 
 ## Create your first account

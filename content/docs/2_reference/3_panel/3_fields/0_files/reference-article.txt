@@ -4,7 +4,7 @@ Title: Files
 
 Intro:
 
-A files select field that allows selecting one or multiple related files
+A files select field that allows you to select one or more files out of a given set. A reference to this file is stored in the content file.
 
 ----
 
@@ -14,7 +14,7 @@ Guide: files/files
 
 Text:
 
-The files field allows you to select one or more files.
+The files field is basically a select/multiselect field specialized to allow you to select one or more files out of a given set of options. A reference to the selected file(s) is stored in the content file of the respective model (page, user, file). A files field also allows you to upload files (not, however to delete or otherwise manipulate files, see also (link: docs/reference/sections/files-section text: files section)).
 
 (image: files.png)
 

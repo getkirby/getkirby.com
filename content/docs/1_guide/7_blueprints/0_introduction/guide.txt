@@ -49,7 +49,7 @@ With fields you can break up your content into digestible chunks and structure i
 
 ## Layout
 
-When your project requires more elaborate setups, you can be the interface designer. You decide which features are needed for each type of page, file or user and how to arrange them in (link: docs/guide/blueprints/tabs text: tabs), (link: docs/guide/blueprints/layout#defining-columns text: columns) and (link: docs/guide/blueprints/layout#adding-sections text: sections).
+When your project requires more elaborate setups, you can be the interface designer. You decide which features are needed for each type of page, file or user and how to arrange them in (link: docs/guide/blueprints/layout#tabs text: tabs), (link: docs/guide/blueprints/layout#columns text: columns) and (link: docs/guide/blueprints/layout#sections text: sections).
 
 (image: tabs.png)
 

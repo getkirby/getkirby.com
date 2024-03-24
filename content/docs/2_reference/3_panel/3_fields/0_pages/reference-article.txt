@@ -14,11 +14,15 @@ Guide: blueprints/fields
 
 Text:
 
-The pages field allows you to select one or more related pages. It has a handy navigator to go through the entire site tree and select the pages you want
+## What is the pages field?
+
+The pages field is basically a select/multiselect field specialized to allow you to select one or more pages out of a given set of options. A reference to the selected pages(s) is stored in the content file of the respective model (page, user, file). It has a handy navigator to go through the entire site tree and select the pages you want.
+
+Usage examples: Select related pages of the current page to show in a related pages widget on the frontend, select one or more articles to feature on the homepage, etc.
 
 (image: pages.png)
 
-## Example
+## Basic field definition
 
 ```yaml
 fields:

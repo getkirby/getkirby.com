@@ -10,7 +10,18 @@ List and edit subpages
 
 Text:
 
-A pages section can be used to show children of the current page or of any other **single** parent page in your site. It also the standard way for adding new pages to the selected parent page if the (link: #filtering-pages text: selected `status` option) allows it.
+## What is a pages section?
+
+A pages section lists the children of a given parent or a set of pages defined by a query. Pages sections also let you do the following operations (if not forbidden or impossible because of other settings):
+
+- create a new page
+- delete a page
+- change the status of a page
+- move a page
+- duplicate a page
+- change the page slug
+- change the page template
+- change the order number
 
 (image: pages-section.png)
 
