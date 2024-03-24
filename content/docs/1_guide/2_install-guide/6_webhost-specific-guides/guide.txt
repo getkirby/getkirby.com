@@ -1,0 +1,10 @@
+Title: Hosting specific installation guides
+
+----
+Text:
+
+Some providers have created dedicated guides how to install Kirby on their servers. If you are with one of these providers, keep on reading:
+- (link: https://lab.uberspace.de/guide_kirby.html text: Installation on Uberspace)
+- (link: https://help.fortrabbit.com/install-kirby text: Installation on fortrabbit)
+- (link: https://www.rosehosting.com/blog/how-to-install-kirby-cms-on-ubuntu-18-04/ text: Installation on RoseHosting)
+- (link: https://www.alwaysdata.com/en/marketplace/kirby/ text: Installation on alwaysdata (from Marketplace))
