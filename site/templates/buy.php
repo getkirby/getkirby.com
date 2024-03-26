@@ -6,7 +6,7 @@ article[data-loading] .price[data-sale] {
 }
 
 .checklist {
-	font-size: var(--text-sm);
+	font-size: var(--text-base);
 }
 .checklist li {
 	display: flex;
@@ -104,7 +104,7 @@ article[data-loading] .price[data-sale] {
 	<div v-else>
 		<div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-3)">
 			<div>
-				<h1 class="h1 max-w-xl mb-6">
+				<h1 class="h1 max-w-xl mb-12">
 					The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
 				</h1>
 
