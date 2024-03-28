@@ -20,7 +20,22 @@ return function (Page $page) {
 		};
 	}
 
+	$zones = $allowedHosts = ['zone1', 'zone2'];
+	foreach ($zones as $zone) {
+		$allowedHosts[] = 'staging.' . $zone;
+	}
+
+	if (in_array($demo = param('demo'), $allowedHosts) === true) {
+		$detectHost = false;
+		$host       = 'https://' . $demo . '.trykirby.com';
+	} else {
+		$detectHost = true;
+		$host       = 'https://zone1.trykirby.com';
+	}
+
 	return [
+		'detectHost'    => $detectHost,
+		'host'          => $host,
 		'questions'     => $page->find('answers')->children(),
 		'statusIcon'    => match($type) {
 			'warning' => 'warning',
@@ -28,6 +43,6 @@ return function (Page $page) {
 		},
 		'statusMessage' => $message,
 		'statusType'    => $type,
+		'zones'         => $zones
 	];
-
 };

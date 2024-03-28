@@ -26,7 +26,7 @@
 
 	<div class="columns mb-36" style="--columns: 1; --columns-lg: 2; --gap: var(--spacing-24)">
 
-		<form id="demo" class="demo mb-6" action="https://<?= r(param('demo') === 'staging', 'staging.') ?>zone1.trykirby.com" method="post">
+		<form id="demo" class="demo mb-6" action="<?= $host ?>" method="post">
 			<h2 class="h2 mb-6">
 				Instant online demo
 			</h2>
@@ -108,7 +108,72 @@
 </dialog>
 
 <script>
-document.querySelector(".demo").addEventListener("submit", (e) => {
+<?php if ($detectHost === true): ?>
+// select fastest demo server
+const zones = <?= json_encode($zones) ?>;
+const hosts = zones.reduce((acc, zone) => {
+	return {...acc, ["https://" + zone + ".trykirby.com"]: []}
+}, {});
+
+const resourceObserver = new PerformanceObserver((list) => {
+	for (const host in hosts) {
+		list.getEntriesByName(host + "/ping", "resource").forEach((resource) => {
+			hosts[host].push(resource.responseEnd - resource.connectStart);
+		});
+	}
+
+	processResultsIfReady();
+});
+resourceObserver.observe({type: "resource"});
+
+// perform three test requests per server to average them;
+// use a short timeout of 1 second so we have a quick decision
+const controller = new AbortController();
+const options    = {mode: "no-cors", signal: controller.signal};
+setTimeout(() => controller.abort(), 1000);
+for (const host in hosts) {
+	sendFetchRequest(host);
+	setTimeout(() => sendFetchRequest(host), 25);
+	setTimeout(() => sendFetchRequest(host), 50);
+}
+
+function sendFetchRequest(host) {
+	fetch(host + "/ping", options).catch(() => {
+		// request failed or timed out
+		hosts[host].push(1000);
+		processResultsIfReady();
+	});
+}
+
+function processResultsIfReady() {
+	// all hosts need to have three results
+	for (const host in hosts) {
+		if (hosts[host].length < 3) {
+			return;
+		}
+	}
+
+	// stop collecting events
+	resourceObserver.disconnect();
+
+	console.info("Got demo host results:", hosts);
+
+	// calculate the average for each host
+	const averages = {};
+	for (const host in hosts) {
+		averages[host] = hosts[host].reduce((a, b) => (a + b)) / hosts[host].length;
+	}
+
+	// find the host with the smallest value
+	const winner = Object.keys(averages).reduce((host, winner) => averages[winner] < averages[host] ? winner : host);
+	console.info("Deciding on host " + winner);
+
+	document.querySelector("#demo").action = winner;
+}
+<?php endif ?>
+
+// loading overlay when the demo form is submitted
+document.querySelector("#demo").addEventListener("submit", (e) => {
 	document.querySelector("#loader").show();
 	document.body.style.cursor = "progress";
 });
