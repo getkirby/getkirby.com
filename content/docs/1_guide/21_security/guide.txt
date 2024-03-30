@@ -101,7 +101,11 @@ Kirby protects against file uploads with the extensions `.php*`, `.phar*` and `.
 
 ### Block access to sensitive folders and files
 
-Kirby's default `.htaccess` file for Apache comes with a set of predefined rules to block external access to certain files and folders in order to secure them. If you run your own `.htaccess` file with your own set of rules, or if you use another server architecture such as nginx, make sure to block the same files and folders with your setup.
+As Kirby stores all site data (including content, configuration and accounts) in the file system, it is crucial to prevent access to those files via external HTTP requests to your server.
+
+The best protection is provided by a (link: docs/guide/configuration/custom-folder-setup#public-and-private-folder-setup text: public and private folder setup) that places all directories with sensitive data outside of the web root. This reliably prevents unauthorized access via HTTP requests. After the initial setup, it reduces the likelyness of an accidental misconfiguration that exposes sensitive data, which is why we recommend to always go for such a setup if possible.
+
+If you cannot control the location of the web root, a public and private folder setup may not be possible. To still protect your site in such cases, Kirby's default `.htaccess` file for Apache comes with a set of predefined rules to block external access to certain files and folders. If you run your own `.htaccess` file with your own set of rules, or if you use another server architecture such as nginx, make sure to block the same files and folders with your setup:
 
 #### Text files in your `content` folder
 
