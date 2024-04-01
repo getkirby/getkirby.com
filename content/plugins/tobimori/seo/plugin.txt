@@ -16,7 +16,7 @@ Text:
 
 ## Get started
 
-[Read the documentation](https://github.com/tobimori/kirby-seo/blob/main/docs/index.md) to get started with Kirby SEO.
+[Read the documentation](https://plugins.andkindness.com/seo/docs/get-started/feature-overview) to get started with Kirby SEO.
 
 ## Support the project
 

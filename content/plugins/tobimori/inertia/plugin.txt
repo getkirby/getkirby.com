@@ -12,7 +12,7 @@ Raw JSON data is returned from the server and rendered on the client-side. This 
 
 ## Usage
 
-[Read the documentation](https://github.com/tobimori/kirby-inertia/blob/main/README.md#usage) to get started with Kirby and Inertia.
+[Read the documentation](https://plugins.andkindness.com/inertia/docs/usage/what-is-inertia) to get started with Kirby and Inertia.
 
 ## Support the project
 
