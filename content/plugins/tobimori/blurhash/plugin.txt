@@ -4,6 +4,19 @@ Title: BlurHash
 
 Text:
 
+## Usage
+
+[Read the documentation](https://plugins.andkindness.com/blurhash/docs/get-started/what-is-blurhash) to get started with BlurHash.
+
+## Support the project
+
+> This plugin is provided free of charge & published under the permissive MIT License. If you use it in a commercial project, please consider to [sponsor me on GitHub](https://github.com/sponsors/tobimori) to support further development and continued maintenance of Kirby BlurHash.
+
+## License
+
+[MIT License](https://github.com/tobimori/kirby-blurhash/blob/main/LICENSE)
+Copyright © 2023-2024 Tobias Möritz
+
 ----
 
 Repository: https://github.com/tobimori/kirby-blurhash
@@ -18,11 +31,19 @@ Subcategory: images
 
 ----
 
-Description: Optimized image placeholders with the BlurHash algorithm
+Description: Generate compact placeholder images with the BlurHash algorithm
 
 ----
 
 Published: 2023-01-07
+
+----
+
+Installation: true
+
+----
+
+Composer: tobimori/kirby-blurhash
 
 ----
 
