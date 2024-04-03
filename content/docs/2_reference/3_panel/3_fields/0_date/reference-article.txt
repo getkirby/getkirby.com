@@ -158,7 +158,7 @@ This also works for `today`. Other relative settings like `tomorrow` or `yesterd
 
 ## How to use in templates/snippets
 
-The field stores its value in a standardized format in the content file: `Y-m-d` for only dates, `Y-m-d H:i:s` for date and time combined. To convert the value to a date object, use the [`toDate()`](/docs/reference/templates/field-methods/to-date) method.
+The field stores its value in a standardized format in the content file: `Y-m-d` for only dates, `Y-m-d H:i:s` for date and time combined. To convert the value to a date string or timestamp, use the [`toDate()`](/docs/reference/templates/field-methods/to-date) method.
 
 Without a date format, the `toDate()` field method renders a UNIX timestamp:
 
