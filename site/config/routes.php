@@ -277,4 +277,22 @@ return [
 			return page('docs/quicktips')->render(['tag' => $tag]);
 		}
 	],
+	[
+		'pattern' => 'docs/guide/(:any)/(:any)',
+		'action'  => function ($parent, $slug) {
+			if ($page = page('docs/guide/' . $parent . '/' . $slug)) {
+				return $page;
+			}
+
+			if ($page = page('docs/guide/' . $parent)) {
+				return $page;
+			}
+
+			if ($page = page('docs/guide')->grandChildren()->find($slug)) {
+				return $page;
+			}
+			
+			$this->next();
+		}
+	]
 ];
