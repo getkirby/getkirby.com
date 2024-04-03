@@ -240,6 +240,18 @@ return [
 		}
 	],
 	[
+		'pattern' => 'docs/cookbook/setup/(git|composer)',
+		'action'  => function ($slug) {
+			$page = page('docs/guide/install-guide/' . $slug);
+
+			if (!$page) {
+				$page = page('error');
+			}
+
+			return go($page);
+		}
+	],
+	[
 		'pattern' => 'docs/cookbook/(:any)/(:any)',
 		'action'  => function ($category, $slug) {
 			if ($category === 'tags') {
