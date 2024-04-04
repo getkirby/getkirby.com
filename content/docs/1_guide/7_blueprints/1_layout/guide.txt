@@ -74,8 +74,7 @@ sections:
     label: Pages
   files:
     type: files
-    label: Published pages
-    status: listed
+    label: Files
 ```
 
 === Pages & fields sections
