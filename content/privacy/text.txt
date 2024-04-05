@@ -22,6 +22,8 @@ Böhmer Weg 22
 Germany
 Email: **<support@getkirby.com>***
 
+Our general manager responsible for data protection is *Bastian Allgeier*.
+
 You can contact us any time via email or the postal address above, if you have questions about our privacy policy.
 
 ## How we collect data
@@ -30,20 +32,24 @@ This is an overview of how we handle your personal data. Please see the sections
 
 ### On this website
 
-https://getkirby.com
+https://getkirby.com (including subdomains not mentioned otherwise)
 
-We don't collect any personal data on our website except server logs. We use the following third parties to improve our website performance:
+We don't collect any personal data of our website visitors except server logs. We use the following third parties to improve our website performance:
 
 - KeyCDN:
-*To speed up access to our site across the globe and to minify our images*
+*To speed up access to our site across the globe and to reduce the image file size*
 - Algolia:
-*To provide a really good search experience for our site and docs*
+*To provide a really good search experience for our website and documentation*
+
+If you voluntarily contribute website content such as plugin profiles, cookbook recipes or an entry on our community map, we use the personal data in such content for display on this website according to the respective purpose.
+
+In our licensing hub we keep licensing information to enable license activations and upgrades and to check the license status of Kirby projects.
 
 [Read more ›](#website)
 
 ### Personal Demo
 
-The Personal Demo you can access from the (link: try text: Try page) stores a shortened hash of your IP address to protect against XSS attacks and to prevent the creation of too many demo instances per user.
+The Personal Demo you can access from the (link: try text: Try page) stores a shortened hash of your IP address to protect you against cross-site scripting attacks (known as XSS attacks) and to prevent the creation of too many demo instances per user.
 
 The demo server temporarily stores content that you enter in your demo instance. This data is completely deleted when the demo instance expires or when you delete your instance manually.
 
@@ -67,14 +73,27 @@ Our support forum is provided by Discourse. Your personal data in the forum is c
 
 [Read more ›](#support-forum)
 
+### Feedback Platform
+
+https://feedback.getkirby.com
+
+Our feedback platform is provided by Nolt. Your personal data on the feedback platform is collected on their servers.
+
+[Read more ›](#feedback-platform)
+
+### Emails
+
+All emails sent to and from the getkirby.com domain (except newsletters) are processed by our email hosting provider Fastmail.
+
+[Read more ›](#emails)
+
 ### Newsletter
 
 https://getkirby.com/kosmos
 
-If you sign up to our newsletter, your data is being collected by the German newsletter service Newstroll.
+If you sign up to our newsletter, your data is being collected by our newsletter service Newstroll.
 
 [Read more ›](#newsletter)
-
 
 ## Your rights
 
@@ -94,7 +113,11 @@ If there's any personal data about you that should be corrected by us, please le
 
 ### You have the right to withdraw your consent
 
-If you signed up to our forum or subscribed to our Kosmos newsletter you can always delete your forum account or unsubscribe from the newsletter at any time. You can do this on your own on the forum or with the unsubscribe button in our newsletters. But we are also happy to do this for you, if you want. Just let us know.
+If you subscribed to our Kosmos newsletter, you can unsubscribe at any time. You can do this on your own with the unsubscribe link in each of our newsletters. But we are also happy to do this for you if you want. Just let us know.
+
+If you created an account in our forum and no longer want to use it, we will anonymize your profile on your request. All your personal data (username, email address and user profile) will then be deleted. If you prefer to have all of your anonymized posts deleted as well, please let us know.
+
+The same applies to any personal website content you have contributed, such as plugin profiles, cookbook recipes or an entry on our community map. If you'd like us to remove your personal data in such content, please let us know.
 
 ### You have the right to port your data to another service
 
@@ -106,34 +129,62 @@ Please tell us first, so we have a chance to address your concerns. If we fail i
 
 ## Website
 
+### License information
+
+Our license hub at <https://hub.getkirby.com> keeps the information about Kirby licenses. We only store the information that is necessary to enable license activations and upgrades and to check the license status of Kirby projects. Specifically we store the customer's email address, the order number(s), the license type(s) and license code(s), the dates of purchase and first activation, the activated website domain(s) and upgrade status.
+
+We collect this data during the checkout and activation processes. We delete the data as soon as it is no longer needed for the mentioned purposes (for example when a license is terminated).
+
+The basis for data processing is Art. 6 (1) (b) GDPR, which allows the processing of data to fulfill a contract or for measures preliminary to a contract.
+
+### Contributed content
+
+If you voluntarily contribute website content such as plugin profiles, cookbook recipes or an entry on our community map, we use the personal data in such content for display on this website according to the respective purpose.
+
+We collect the content via clearly labeled forms on our website or via contributions to the website's source code. We delete your personal data on your request or as soon as the content is no longer relevant for its purpose.
+
+The basis for data processing is Art. 6 (1) (a) GDPR, which allows the processing of data with your consent.
+
 ### Cookies
 
-Our website **does not** set any cookies by default. Cookies are only set by the [shop](#shop) when visiting the "Buy" page or when using an affiliate link to visit our website.
+Our website **does not** set any cookies by default. Cookies are only set as first-party cookies by the [shop](#shop) when visiting the "Buy" page or when using an affiliate link to visit our website.
+
+The basis for data processing is Art. 6 (1) (f) GDPR, which allows the processing of data for the purposes of our legitimate interests, in this case to optimize the licensing experience.
 
 ### Analytics and tracking
 
 We **do not** use any trackers, social media buttons or analytics services on our website.
 
-### TLS encryption
+### TLS transport encryption
 
-This site uses TLS encryption for security reasons and to protect the transmission of confidential data. You can recognize an encrypted connection in your browser's address line when it changes from "http://" to "https://" and when the lock icon is displayed in your browser's address bar.
+This site uses TLS transport encryption to protect the transmission of sensitive data and prevent manipulation by eavesdroppers. You can recognize an encrypted connection in your browser's address line when it changes from "http://" to "https://" and when the lock icon is displayed in your browser's address bar.
 
-If TLS encryption is activated, the data you transfer to us cannot be read by third parties.
+If TLS transport encryption is activated, the data you transfer to us cannot be read by third parties.
 
 ### Hosting
 
-The server for our website is provided by
+The servers for our website are provided by:
 
-*Linode LLC
-249 Arch Street
-Philadelphia, Pennsylvania 19106
-USA*
+*Hetzner Online GmbH
+Industriestr. 25
+91710 Gunzenhausen
+Germany*
 
-Linode complies with GDPR. The server is located in their data center in **Frankfurt, Germany**. You can find their privacy policy here: <https://www.linode.com/privacy>
+Hetzner complies with GDPR. The servers are located in their data center in **Nuremberg, Germany**. You can find their privacy policy here: <https://www.hetzner.com/legal/privacy-policy/>
+
+We use the services of Ploi to manage our servers:
+
+*Ploi
+Amperestraat 16J, 3861NC
+Nijkerk
+Gelderland
+The Netherlands*
+
+Ploi complies with GDPR. You can find their privacy policy here: <https://ploi.io/privacy-policy>
 
 ### Server log files
 
-We automatically collect and store information that your browser transmits to us in "server log files" on our Linode server. These are:
+We automatically collect and store information that your browser transmits to us in "server log files" on our Hetzner servers. These are:
 
 - Browser type and browser version
 - Operating system used
@@ -144,7 +195,7 @@ We automatically collect and store information that your browser transmits to us
 
 This data will not be combined with data from other sources.
 
-The basis for data processing is Art. 6 (1) (f) GDPR, which allows the processing of data to fulfill a contract or for measures preliminary to a contract.
+The basis for data processing is Art. 6 (1) (f) GDPR, which allows the processing of data for the purposes of our legitimate interests, in this case to ensure network and information security.
 
 ### Third-party services
 
@@ -155,8 +206,8 @@ We use the following third-party services to improve the performance and usabili
 We use a content delivery network to provide faster access to our CSS, JavaScript, images and font files from anywhere around the world. Our CDN is provided by:
 
 *proinity LLC (KeyCDN)
-Faerberstrasse 9
-8832 Wollerau
+Reichenauweg 1
+8272 Ermatingen
 Switzerland*
 
 KeyCDN complies with GDPR. You can find their privacy policy here: <https://www.keycdn.com/privacy>
@@ -172,24 +223,33 @@ France*
 
 Algolia complies with GDPR. You can find their privacy policy here: <https://www.algolia.com/policies/privacy/>
 
-
 ## Personal Demo
 
 ### Cookies
 
-Like any Kirby website, the demo instances set a session cookie when you log in to the Panel.
+Like any Kirby website, the demo instances set a session cookie when you log in to the Panel. You can read more about this in our (link: docs/guide/kirby-and-privacy text: privacy guide).
 
-You can read more about this in our (link: docs/guide/kirby-and-privacy text: privacy guide).
+The demo server also sets a first-party cookie to remember your current demo instance to allow you to get back to your personal demo while it is active.
+
+We **do not** set cookies for any other purpose.
+
+The basis for data processing is Art. 6 (1) (b) GDPR, which allows the processing of data to fulfill a contract or for measures preliminary to a contract, in this case to ensure the functionality of the demo.
 
 ### IP address
 
-Our demo manager software at https://trykirby.com temporarily stores the IP address of the user who created the demo instance. We need it to protect against XSS attacks and to prevent the creation of too many demo instances per user.
+Our demo manager software at https://trykirby.com temporarily stores the IP address of the user who created the demo instance. We need it to protect you against cross-site scripting attacks (known as XSS attacks) and to prevent the creation of too many demo instances per user.
 
 Because the IP address is stored as a shortened hash only, we cannot convert it back to the actual IP address.
+
+The IP address is collected during the creation of the demo instance and deleted when the demo instances expires or when you delete your instance manually.
+
+The basis for data processing is Art. 6 (1) (f) GDPR, which allows the processing of data for the purposes of our legitimate interests, in this case to ensure network and information security.
 
 ### Content
 
 The demo server temporarily stores content that you enter in your demo instance. This data is completely deleted when the demo instance expires or when you delete your instance manually.
+
+The basis for data processing is Art. 6 (1) (b) GDPR, which allows the processing of data to fulfill a contract or for measures preliminary to a contract, in this case to ensure the functionality of the demo.
 
 ### Analytics and tracking
 
@@ -201,18 +261,30 @@ Like with our website, connections to the Personal Demo are always encrypted wit
 
 ### Hosting
 
-The server for the Personal Demo is provided by
+The servers for the Personal Demo are provided by:
 
-*Linode LLC
-249 Arch Street
-Philadelphia, Pennsylvania 19106
-USA*
+*Hetzner Online GmbH
+Industriestr. 25
+91710 Gunzenhausen
+Germany*
 
-Linode complies with GDPR. The server is located in their data center in **Frankfurt, Germany**. You can find their privacy policy here: <https://www.linode.com/privacy>
+Hetzner complies with GDPR. You can find Hetzner's privacy policy here: <https://www.hetzner.com/legal/privacy-policy/>
+
+To ensure good performance of the demo, we use multiple server zones, currently in **Nuremberg, Germany** and **Hillsboro, USA**. When you create a new demo instance, your web browser automatically selects the server with the lowest latency – commonly the server physically closest to you.
+
+We use the services of Ploi to manage our servers:
+
+*Ploi
+Amperestraat 16J, 3861NC
+Nijkerk
+Gelderland
+The Netherlands*
+
+Ploi complies with GDPR. You can find their privacy policy here: <https://ploi.io/privacy-policy>
 
 ### Server log files
 
-We automatically collect and store information that your browser transmits to us in "server log files" on our Linode server. These are:
+We automatically collect and store information that your browser transmits to us in "server log files" on our Hetzner servers. These are:
 
 - Browser type and browser version
 - Operating system used
@@ -224,8 +296,22 @@ We automatically collect and store information that your browser transmits to us
 
 This data will not be combined with data from other sources.
 
-The basis for data processing is Art. 6 (1) (f) GDPR, which allows the processing of data to fulfill a contract or for measures preliminary to a contract.
+The basis for data processing is Art. 6 (1) (f) GDPR, which allows the processing of data for the purposes of our legitimate interests, in this case to ensure network and information security.
 
+### Third-party services
+
+We use the following third-party service to improve the performance and usability of the Personal Demo:
+
+#### KeyCDN
+
+We use a content delivery network to provide faster access to our CSS, JavaScript, images and font files from anywhere around the world. Our CDN is provided by:
+
+*proinity LLC (KeyCDN)
+Reichenauweg 1
+8272 Ermatingen
+Switzerland*
+
+KeyCDN complies with GDPR. You can find their privacy policy here: <https://www.keycdn.com/privacy>
 
 ## Shop
 
@@ -237,7 +323,19 @@ Judd House
 London, EC1V 8BT
 United Kingdom*
 
-Paddle complies with GDPR. You need to agree to their terms of service and privacy policy whenever you buy a license. We don't store your billing data or history anywhere else. You can find Paddle's privacy policy and the addresses of Paddle's EU and USA branches here: https://paddle.com/privacy/
+Paddle complies with GDPR. You need to agree to their terms of service and privacy policy whenever you buy a license. We don't store your billing data anywhere else. You can find Paddle's privacy policy and the addresses of Paddle's EU and USA branches here: https://paddle.com/privacy/
+
+## Feedback Platform
+
+Our feedback platform is provided by Nolt:
+
+*Nolt Software Inc.
+6D - 7398 Yonge St. Unit # 320
+Thornhill, L4J 8J2
+Ontario
+Canada*
+
+Nolt is GDPR compliant. You can find the privacy policy of Nolt here: <https://nolt.io/help/privacy>
 
 ## Support Forum
 
@@ -245,13 +343,25 @@ Our support forum is running on an open-source forum software called Discourse a
 
 *M. Régis Hanol
 Civilized Discourse Construction Kit, Inc.
-<regis.hanol@discourse.org>
 78 Allée Primavera
 Centre UBIDOCA, 15232
+Pringy
 74370 Annecy
 France*
 
 The hosted Discourse forum is GDPR compliant. You can find the privacy policy of Discourse here: <https://meta.discourse.org/privacy>
+
+## Emails
+
+All emails sent to and from the getkirby.com domain (except newsletters) are processed by our email hosting provider Fastmail:
+
+*Fastmail Pty Ltd
+PO Box 234
+Collins Street West
+VIC 8007
+Australia*
+
+Fastmail is GDPR compliant. You can find the privacy policy of Fastmail here: <https://www.fastmail.com/privacy/>
 
 ## Newsletter
 
@@ -281,5 +391,5 @@ We try to keep our privacy policy as transparent and easy to understand as possi
 
 ## Updates
 
-We will constantly check and update this privacy policy if necessary.
-**Last update: March 15, 2022**
+We will regularly check and update this privacy policy if necessary.
+**Last update: April 4, 2024**

@@ -383,6 +383,10 @@ Use `$kirby->languages()` instead of `$site->languages()`.
 
 (link: docs/guide/languages/custom-language-variables text: Language variables) are no longer fetched via `l()/l::get()` but via the `t()` helper.
 
+### Translating page URLs
+
+The field name for translated URLs in content files has changed from `Url-key` to `Slug`.
+
 ## Users and permissions
 
 ### Migrate users

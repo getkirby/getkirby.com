@@ -5,10 +5,10 @@ Text:
 
 ## Installing a kit
 
-The most simple way to install Kirby without any additional tools is to download one of the existing Kits:
+The most simple way to install Kirby without any additional tools, is to download one of the existing Kits:
 
 - (link: https://download.getkirby.com/ text: Starterkit)
-- (link: https://github.com/getkirby/plainkit/archive/main.zip text: Plainkit):
+- (link: https://github.com/getkirby/plainkit/archive/main.zip text: Plainkit)
 - (link: https://github.com/getkirby/dempkit/archive/main.zip text: Demokit)
 
 Once downloaded,
