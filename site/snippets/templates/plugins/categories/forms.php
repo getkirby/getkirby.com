@@ -2,8 +2,11 @@
 	'id'      => 'block',
 	'icon'    => 'forms',
 	'title'   => 'Panel',
-	'layout'  => 'hero',
+	'hero' => true,
+	'layout'  => 'cards',
+	'columns' => 2,
 	'plugins' => [
+		'plugins/tobimori/dreamform',
 		'plugins/microman/formblock'
 	]
 ]) ?>

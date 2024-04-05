@@ -87,8 +87,8 @@ Text:
 ----
 
 Plugins:
+- /plugins/tobimori/dreamform
 - /plugins/tobimori/seo
 - /plugins/tobimori/icon-field
-- /plugins/tobimori/thumbhash
 - /plugins/tobimori/tailwind-merge
 
