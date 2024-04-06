@@ -64,15 +64,15 @@ window.panel.plugin("your/plugin", {
           icon: "quote",
           label: window.panel.$t("field.blocks.quote.name"),
         };
-      }
+      },
 
       commands({ type, utils }) {
         return () => utils.toggleWrap(type);
-      }
+      },
 
       get name() {
         return "quote";
-      }
+      },
 
       get schema() {
         return {
