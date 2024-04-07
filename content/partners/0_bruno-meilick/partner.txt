@@ -31,16 +31,16 @@ Summary: I graduated 2009 from Zurich University of the Arts as Bachelor in Inte
 ----
 
 Plugins:
+- /plugins/bnomei/klub
 - /plugins/bnomei/janitor
 - /plugins/bnomei/boost
 - /plugins/bnomei/storybook
 - /plugins/bnomei/recently-modified
-- /plugins/bnomei/utm
 - /plugins/bnomei/redirects
 
 ----
 
-Discordhandle: ludmon#9349
+Discordhandle: bnomei
 
 ----
 
