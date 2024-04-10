@@ -104,6 +104,7 @@ If the ImageMagick convert binary is not correctly linked, you can set the absol
 ```php
 return [
   'thumbs' => [
+    'driver' => 'im',
     'bin' => 'convert'
   ]
 ];
@@ -116,7 +117,25 @@ JPEGs can be set to interlace mode with this option
 ```php
 return [
   'thumbs' => [
+    'driver' => 'im',
     'interlace' => true
   ]
 ];
 ```
+
+<since v="4.2.0">
+#### `threads`
+
+If you are converting a lot of big images with ImageMagick it can get slow.
+
+Use this option to configure the threads ImageMagick can use to benefit from capable hardware. (default is 1)
+
+```php
+return [
+  'thumbs' => [
+    'driver' => 'im',
+    'threads' => 2
+  ]
+];
+```
+</since>
