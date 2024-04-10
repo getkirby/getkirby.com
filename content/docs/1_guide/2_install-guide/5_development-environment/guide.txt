@@ -71,6 +71,13 @@ While using the built-in server works fine for many use cases, you might sometim
 
 === Mac & Windows
 
+### Laravel Herd
+
+(link:https://herd.laravel.com text:Laravel Herd) is a one click PHP development environment with zero dependencies, running out of the box without any hassles. According to its self description it is the fastest environment around.
+Sites can be configured via a GUI or command line just like Laravel valet. Different PHP versions can be used for all your sites and sharing of local sites is also possible via (link:https://expose.dev text:Expose).
+
+(screencast: https://www.youtube.com/watch?v=Mb_-bo77IPc title: One minute install with Laravel Herd)
+
 ### MAMP or MAMP Pro
 
 (link: https://www.mamp.info/en/mamp/ text: MAMP) (free) and (link: https://www.mamp.info/en/mamp-pro/ text: MAMP Pro) (paid) are available for both Mac and Windows. They are a good solution if you prefer a GUI interface. Both MAMP and MAMP Pro come with Apache, up-to-date versions of PHP and all the modules you need for Kirby already installed.
@@ -79,18 +86,7 @@ MAMP Pro allows you to create a host for each project, use Nginx instead of Apac
 
 Once MAMP is installed, the default folder to put your Kirby folder into is the `programs/MAMP/htdocs` folder (Mac) or the `C:\MAMP\htdocs` folder (Windows). By default, you can then access the project under `http://localhost:8888/project-folder-name`.
 
-
 === Mac only
-
-### Laravel Herd
-
-(link:https://herd.laravel.com text:Laravel Herd) is a one click PHP development environment with zero dependencies, running out of the box without any hassles. According to its self description it is the fastest environment around.
-Sites can be configured via a GUI or command line just like Laravel valet. Different PHP versions can be used for all your sites and sharing of local sites is also possible via (link:https://expose.dev text:Expose).
-
-(screencast: https://www.youtube.com/watch?v=Mb_-bo77IPc title: One minute install with Laravel Herd)
-
-A Windows version is in the works.
-
 
 ### Laravel Valet
 
