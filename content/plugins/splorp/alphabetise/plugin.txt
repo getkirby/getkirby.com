@@ -1,0 +1,25 @@
+Title: Alphabetise
+
+----
+
+Text:
+
+----
+
+Repository: https://github.com/splorp/kirby-alphabetise
+
+----
+
+Category: templating
+
+----
+
+Subcategory: utilities
+
+----
+
+Description: Process a page or tag array and return a new array organized alphabetically or numerically with labeled subsections.
+
+----
+
+Versions: 3,4
