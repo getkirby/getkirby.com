@@ -300,7 +300,7 @@ Kirby::plugin('cookbook/pdfpreview', [
             $options['page'] ??= 0;
             $extension   = $options['format'] ?? 'jpg';
             $previewName = $this->name() . '.' . $extension;
-            $outputPath  = $this->root() . '.' . $extension;
+            $outputPath  = Str::replace($this->root(), '.pdf', '.' . $extension);
             // only create the file if `$force` is set to true or
             // it doesn't exist yet or the PDF file is newer than the preview image
             if ($force === true || !F::exists($outputPath) || (F::modified($outputPath) < $this->modified())) {
