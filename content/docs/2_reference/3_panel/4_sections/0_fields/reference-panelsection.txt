@@ -4,13 +4,13 @@ Title: Fields section
 
 Intro:
 
-Define forms for your content
+Organize form fields in your blueprints
 
 ----
 
 Text:
 
-With the fields section you can create flexible forms for your pages. Add all fields in a single fields section or combine multiple sections to achieve more intuitive (glossary: Panel) layouts.
+The fields section allows you to create flexible forms in your blueprints. You can put all fields into a single fields section, or combine multiple sections to achieve more intuitive (glossary: Panel) layouts.
 
 (image: fields-section.png)
 
@@ -34,6 +34,9 @@ sections:
         type: textarea
 ```
 
+<info>
+While the above simple example would work without using a fields section (see (link: docs/guide/blueprints/layout#only-fields text: blueprints guide), you must use a fields section if you want to combine fields with any other type of section (files section, info section, pages section, stats section).
+</info>
 ## Section shortcuts
 
 For simple sections that are only used once per blueprint, you can use shortcuts. In its most basic form, a `fields` section consists of the section type as name, and a set of fields:
