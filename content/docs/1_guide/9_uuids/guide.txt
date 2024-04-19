@@ -30,9 +30,23 @@ Text:
 
 Kirby is built on (link: docs/guide/content text: just files and folders), which is great for flexibility in structuring your content, performance and rapid development. Referring to a page or file from elsewhere by its file path works, but makes the site structure pretty rigid and takes away a lot of the flexibility of the content structure. Because as soon as a page or file gets renamed or moved, its file path changes – and immediately the reference to it will break.
 
-UUIDs (universally unique identifiers) are an additional way to refer to any model in Kirby – be it a page, a file or a user. UUIDs look something like `page://Eesj89FnbMzMMvs0`. In contrast to file paths, UUIDs never change. They are randomly generated when the model gets first created. It is so unlikely that two models ever share the same UUID that they can be considered unique (in fact, it will take millions of years to reach a 1% probability of a collision on any given site). These properties make UUIDs the ideal candidate for robust and persistent references.
+UUIDs (universally unique identifiers) are an additional way to refer to any model in Kirby – be it a page, a file or a user. 
 
-UUIDs can be used in many parts of the system to identify a specific page, file or user. When using a UUID for your reference, those ties to other pages won't break when the folder structure changes.
+UUIDs look something like this:
+
+- for a page: `page://Eesj89FnbMzMMvs0`. 
+- for a file: `file://nuvOLvWZZZWPSqxM`,
+- for a user: `user://yB6pFotK`
+
+Other than file paths, UUIDs never change. They are randomly generated when the model gets first created (via the Panel or programmatically). 
+
+It is so unlikely that two models ever share the same UUID that they can be considered unique (in fact, it will take millions of years to reach a 1% probability of a collision on any given site). These properties make UUIDs the ideal candidate for robust and persistent references.
+
+UUIDs can be used in many parts of the system to identify a specific page, file or user. When using a UUID for your reference, those ties to other pages or files won't break when the folder structure changes.
+
+<info>
+Kirby content can be produced via the Panel, or manually in the file system via a text editor. When you duplicate a page and its files via the Panel, a new UUID will be generated for those copied elements. **If you duplicate a page folder manually in the filesystem, however, you need to remove existing UUIDs, and either manually or programmatically add new ones, or let Kirby automatically create one the next time you open those pages or files in the Panel**.
+</info>
 
 ## How to use them
 
