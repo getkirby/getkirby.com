@@ -43,19 +43,24 @@ Web server configuration is a very big topic and there are many things to consid
 	php_fastcgi php:9000 # Adjust to your setup
 	tls name@user.com # Adjust to your setup
 	file_server
+	encode zstd gzip
 }
 
 (kirby) {
 	@blocked {
-		path *.txt *.md /content/* /site/* /kirby/* /.*
+		path /content/* /site/* /kirby/* /.*
 	}
-	redir @blocked /
+	error @blocked "Not found" 404
+	handle_errors {
+		rewrite * /error # This should reference your Kirby error page
+		import common
+	}
+	root * /usr/share/caddy # Adjust to your setup
 }
 
 mydomain.com { # Adjust to your setup
 	import common
 	import kirby
-	root * /usr/share/caddy # Adjust to your setup
 }
 
 ```
@@ -77,7 +82,6 @@ We're creating two custom **snippets** here with the names `common` and `kirby`.
 ```
 php_fastcgi php:9000
 ```
-
 This is the line that does the [handover to the PHP interpreter](https://caddyserver.com/docs/caddyfile/directives/php_fastcgi). We're using the modern FastCGI interface for this handover. The `php_fastcgi` directive takes a network address or unix socket as a parameter, where a PHP-FPM process is listening and waiting for scripts to be run. So this setting depends on your specific setup. If you're using Docker, you can set the name and port of your FPM container (e.g. `php:9000`). If you're running PHP-FPM on the same system, you can use `localhost` followed by the port number.
 The `php_fastcgi` directive also comes with a lot of good default values for PHP-specific configuration values (e.g. it automatically sets `try_files` to look for an `index.php` file – so a request gets forwarded to PHP when there is no file with a specific name)
 <br/>
@@ -85,7 +89,6 @@ The `php_fastcgi` directive also comes with a lot of good default values for PHP
 ```
 tls name@user.com
 ```
-
 This directive will take care of your TLS certificate. If you want to use a free certificate from Let's Encrypt, enter your email address here and you're done. If you want to run your Kirby site locally, use `tls internal` for a self-signed certificate.
 <br/>
 
@@ -93,21 +96,33 @@ This directive will take care of your TLS certificate. If you want to use a free
 ```
 file_server
 ```
-
 This directive will make sure Caddy serves all static assets, e.g. all of the JavaScript, font files, icons, images, etc. Without this directive, only PHP files would be served/interpreted.
+<br/>
+
+```
+encode zstd gzip
+```
+We'll enable compression to reduce the transfered file size. This will make your site faster and has been supported by all major browsers for many years.
 <br/>
 
 
 ```
 @blocked {
-	path *.txt *.md /content/* /site/* /kirby/* /.*
+	path /content/* /site/* /kirby/* /.*
 }
-redir @blocked /
+error @blocked "Not found" 404
 ```
-
-Here we are defining a custom matcher – which is a statement that we can then use in multiple locations as an argument for other directives. Our matcher is called `@blocked` – because we're defining paths which should not be accessible by website visitors: all raw txt/md files and everything in the `content`, `site` or `kirby` folders, as well as hidden files. In the following line, we're redirecting all these requests to the home page of our site.
+Here we are doing some Kirby-specific error handling. First, we're defining a custom matcher – which is a statement that we can then use in multiple locations as an argument for other directives. Our matcher is called `@blocked` – because we're defining paths which should not be accessible by website visitors: everything in the `content`, `site` or `kirby` folders, as well as hidden files. In the following line, we're returning a 404 HTTP error, when any of these files are being requested.
 <br/>
 
+```
+handle_errors {
+	rewrite * /error # This should reference your Kirby error page
+	import common
+}
+```
+The error we're returning from the line before will result in the browser showing an empty page – which is typically not what we want. Instead, we want to show Kirbys error page, which is served under the `/error` path by default. So we're rewriting all the requests coming into this error handler to the Kirby error page. And we also need the `common` block here, so PHP will be executed as well (because Kirbys error page is not a static HTML file, but is dynamically generated via PHP).
+<br/>
 
 ```
 mydomain.com {
@@ -123,5 +138,4 @@ import common
 import kirby
 root * /usr/share/caddy
 ```
-
 Here, we're importing/using the two snippets we defined earlier. Also we're setting the root folder for this server, which should point to the absolute filesystem path, where your Kirby files are located.
