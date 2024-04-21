@@ -54,8 +54,8 @@ class SecurityPage extends Page
 
 		$latest = $this->kirby()->version();
 
-		// extract the part before the second dot
-		preg_match('/^(\w+\.\w+)\./', $latest, $matches);
+		// extract the part before the first dot
+		preg_match('/^(\w+)\./', $latest, $matches);
 
 		$data = [
 			'latest'            => $latest,
