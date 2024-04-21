@@ -82,13 +82,17 @@ This marks a version range that receives functionality updates, enhancements and
 
 The `latest` field of the `active-support` entry MUST be set to the latest version that can be updated to for free from any version in the version range. It SHOULD be set to `{{ latest }}`, which will be auto-populated with the Kirby version of the getkirby.com site.
 
+The `initialRelease` field of the `active-support` entry SHOULD be set to a date value parseable by PHP that marks the date of initial license-relevant release of the major version if the major version follows the Kirby 4+ license model.
+
 #### `security-support`
 
 This marks a version range that only receives security updates.
 
 The `latest` field of the `security-support` entry MUST be set to the latest version that can be updated to for free from any version in the version range.
 
-`security-support` entries MAY have a `status-link` field that points to an URL with more information on the support status of this version range. The status link defaults to an empty value (no link).
+The `initialRelease` field of the `security-support` entry SHOULD be set to a date value parseable by PHP that marks the date of initial license-relevant release of the major version if the major version follows the Kirby 4+ license model.
+
+`security-support` entries MAY also have a `status-link` field that points to an URL with more information on the support status of this version range. The status link defaults to an empty value (no link).
 
 #### `end-of-life`
 
@@ -171,6 +175,7 @@ Versions:
     status: active-support
     description: Actively supported
     latest: {{ latest }}
+    initialRelease: 2023-11-28
 3.10.*:
     status: security-support
     description: Security support until December 1, 2025
