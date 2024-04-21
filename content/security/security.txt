@@ -217,10 +217,15 @@ Urls:
 # - `{{ latest }} `: Version number of latest release
 # - `{{ latestMajor }}`: Version number of latest release (major part only)
 # - `{{ noVulnerabilities }}`: Minimum version number without vulnerabilities
+# - `{{ releasePages }}`: Version constraint for all available release pages
 # Dynamic placeholders (filled by the client):
 # - `{{ version }}`: A version in the version range of the entry's key
 # - `{{ current }}`: The current Kirby version of the installation
 
+{{ releasePages }}:
+    changes: https://getkirby.com/releases/{{ version }}
+    download: https://github.com/getkirby/kirby/archive/refs/tags/{{ version }}.zip
+    upgrade: https://getkirby.com/releases/{{ latestMajor }}.0
 ">=3.0.0":
     changes: https://github.com/getkirby/kirby/releases/tag/{{ version }}
     download: https://github.com/getkirby/kirby/archive/refs/tags/{{ version }}.zip

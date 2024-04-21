@@ -57,10 +57,14 @@ class SecurityPage extends Page
 		// extract the part before the first dot
 		preg_match('/^(\w+)\./', $latest, $matches);
 
+		$versions = page('releases')->children()->pluck('version');
+		$releasePages = implode(' || ', array_map(fn ($version) => $version . '.0', $versions));
+
 		$data = [
 			'latest'            => $latest,
 			'latestMajor'       => $matches[1],
 			'noVulnerabilities' => $noVulns,
+			'releasePages'      => $releasePages,
 			...$data
 		];
 
