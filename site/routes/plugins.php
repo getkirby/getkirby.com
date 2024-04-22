@@ -16,13 +16,25 @@ return [
 	[
 		'pattern' => 'plugins.json',
 		'action'  => function () use($plugins) {
-			return Remote::get($plugins . '/plugins.json')->json();
+			$url = $plugins . '/plugins.json';
+
+			if (kirby()->request()->header('X-Pull') === 'KeyCDN') {
+				return Remote::get($url)->json();
+			}
+
+			go($url);
 		}
 	],
 	[
 		'pattern' => 'plugins/(:all).json',
 		'action'  => function (string $path) use($plugins) {
-			return Remote::get($plugins . '/' . $path . '.json')->json();
+			$url = $plugins . '/' . $path . '.json';
+
+			if (kirby()->request()->header('X-Pull') === 'KeyCDN') {
+				return Remote::get($url)->json();
+			}
+
+			go($url);
 		}
 	],
 	[
