@@ -42,7 +42,7 @@
 					<div class="prose flex-grow text-sm mb-6">
 						<?= $plugin->description()->excerpt(140) ?>
 					</div>
-					<?php snippet('templates/plugins/versions', ['plugin' => $plugin]) ?>
+					<?php snippet('templates/partners/plugin-versions', ['plugin' => $plugin]) ?>
 				</div>
 			</article>
 		</a>
