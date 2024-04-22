@@ -14,24 +14,12 @@ return [
 		'action'  => fn () => go($plugins . '/supports/4')
 	],
 	[
-		'pattern' => 'plugins/new',
-		'action'  => fn () => go($plugins . '/new')
-	],
-	[
 		'pattern' => 'plugins.json',
 		'action'  => fn () => go($plugins . '/plugins.json')
 	],
 	[
-		'pattern' => 'plugins/(:any)',
-		'action'  => fn ($developer) => go($plugins . '/' . $developer)
-	],
-	[
-		'pattern' => 'plugins/(:any)/(:any).json',
-		'action'  => fn (string $developer, string $plugin) => go($plugins . '/' . $developer . '/' . $plugin . '.json')
-	],
-	[
-		'pattern' => 'plugins/(:any)/(:any)',
-		'action'  => fn (string $developer, string $plugin) => go($plugins . '/' . $developer . '/' . $plugin)
+		'pattern' => 'plugins/(:all)',
+		'action'  => fn ($path) => go($plugins . '/' . $path)
 	],
 	[
 		'pattern' => 'plugins',
