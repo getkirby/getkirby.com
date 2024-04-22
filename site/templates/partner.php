@@ -158,11 +158,11 @@
 		<h2 class="h2 mb-12"><?= ucfirst($page->my()) ?> Kirby Plugins</h2>
 		<section class="mb-12">
 		<?php if ($plugins->count() === 1 || $plugins->count() === 4): ?>
-			<?php snippet('templates/plugins/hero', [
+			<?php snippet('templates/partners/plugin-hero', [
 				'plugins' => $hero = $plugins->limit(1)
 			]) ?>
 		<?php endif ?>
-		<?php snippet('templates/plugins/cards', [
+		<?php snippet('templates/partners/plugin-cards', [
 			'plugins' => $plugins->not($hero ?? null),
 			'columns' => 3,
 			'gap'     => 24

@@ -15,7 +15,7 @@
 					<?= $plugin->description() ?>
 				</div>
 
-				<?php snippet('templates/plugins/versions', ['plugin' => $plugin, 'bg' => 'black']) ?>
+				<?php snippet('templates/partners/plugin-versions', ['plugin' => $plugin, 'bg' => 'black']) ?>
 			</div>
 			<div style="--span: 2">
 				<?php if ($image = $plugin->card() ?? $plugin->image()) : ?>
