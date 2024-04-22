@@ -227,18 +227,7 @@ return [
 			]);
 		}
 	],
-	[
-		'pattern' => 'plugins/k4',
-		'action'  => function () {
-			return page('plugins')->render(['filter' => 'k4']);
-		}
-	],
-	[
-		'pattern' => 'plugins/new',
-		'action'  => function () {
-			return page('plugins')->render(['filter' => 'published']);
-		}
-	],
+	... require dirname(__DIR__) . '/routes/plugins.php',
 	[
 		'pattern' => 'docs/cookbook/setup/(git|composer)',
 		'action'  => function ($slug) {

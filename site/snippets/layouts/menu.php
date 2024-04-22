@@ -33,7 +33,7 @@
 			<li class="has-submenu">
 				<a href="/kosmos">Resources</a>
 				<ul class="menu-2">
-					<li><a href="/plugins">Plugins</a></li>
+					<li><a class="is-external" href="https://plugins.getkirby.com">Plugins</a></li>
 					<li><a href="/themes">Themes</a></li>
 					<li><hr /></li>
 					<li><a href="/kosmos">Newsletter</a></li>
