@@ -58,7 +58,7 @@
 					<li>
 						<p class="font-bold mb-1">Resources</p>
 						<ul class="footer-menu-2">
-							<li><a href="/plugins">Plugins</a></li>
+							<li><a href="https://plugins.getkirby.com">Plugins</a></li>
 							<li><a href="/themes">Themes</a></li>
 							<li><a href="/kosmos">Newsletter</a></li>
 							<li><a href="/buzz">Buzz</a></li>

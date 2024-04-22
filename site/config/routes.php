@@ -227,18 +227,7 @@ return [
 			]);
 		}
 	],
-	[
-		'pattern' => 'plugins/k4',
-		'action'  => function () {
-			return page('plugins')->render(['filter' => 'k4']);
-		}
-	],
-	[
-		'pattern' => 'plugins/new',
-		'action'  => function () {
-			return page('plugins')->render(['filter' => 'published']);
-		}
-	],
+	... require dirname(__DIR__) . '/routes/plugins.php',
 	[
 		'pattern' => 'docs/cookbook/setup/(git|composer)',
 		'action'  => function ($slug) {
@@ -265,7 +254,7 @@ return [
 			}
 
 			$page = page('docs/cookbook')->grandChildren()->findBy('slug', $slug);
-			
+
 			if (!$page) {
 				$page = page('docs/quicktips/' . $slug);
 			}
@@ -303,7 +292,7 @@ return [
 			if ($page = page('docs/guide')->grandChildren()->find($slug)) {
 				return $page;
 			}
-			
+
 			$this->next();
 		}
 	]
