@@ -22,7 +22,6 @@ return [
 				kirby()->cache('diffs')->flush();
 				kirby()->cache('meet')->flush();
 				kirby()->cache('pages')->flush();
-				kirby()->cache('plugins')->flush();
 				kirby()->cache('reference')->flush();
 			}
 
