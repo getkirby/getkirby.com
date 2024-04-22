@@ -265,7 +265,7 @@ return [
 			}
 
 			$page = page('docs/cookbook')->grandChildren()->findBy('slug', $slug);
-			
+
 			if (!$page) {
 				$page = page('docs/quicktips/' . $slug);
 			}
@@ -290,6 +290,12 @@ return [
 		}
 	],
 	[
+		'pattern' => 'cdn/info',
+		'action'  => function () {
+			return kirby()->request()->headers();
+		}
+	],
+	[
 		'pattern' => 'docs/guide/(:any)/(:any)',
 		'action'  => function ($parent, $slug) {
 			if ($page = page('docs/guide/' . $parent . '/' . $slug)) {
@@ -303,7 +309,7 @@ return [
 			if ($page = page('docs/guide')->grandChildren()->find($slug)) {
 				return $page;
 			}
-			
+
 			$this->next();
 		}
 	]
