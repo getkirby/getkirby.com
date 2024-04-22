@@ -15,7 +15,15 @@ return [
 	],
 	[
 		'pattern' => 'plugins.json',
-		'action'  => fn () => go($plugins . '/plugins.json')
+		'action'  => function () use($plugins) {
+			return Remote::get($plugins . '/plugins.json')->json();
+		}
+	],
+	[
+		'pattern' => 'plugins/(:all).json',
+		'action'  => function (string $path) use($plugins) {
+			return Remote::get($plugins . '/' . $path . '.json')->json();
+		}
 	],
 	[
 		'pattern' => 'plugins/(:all)',
