@@ -26,6 +26,8 @@ Plugins that don't have any of the `index.php`, `index.css` or `index.js` files 
 
 If you only need some **helper functions or general PHP code**, you can define them in your `index.php`. These will then be loaded automatically.
 
+(screencast: https://www.youtube.com/watch?v=PajT4qyE55c title: Where to put your helpers)
+
 If you want to extend Kirby in more meaningful ways such as by **extending Kirby objects or components**, you need to use our `Kirby::plugin()` method to define all the parts that will be extended.
 
 ## Kirby::plugin() — one ring to rule them all
