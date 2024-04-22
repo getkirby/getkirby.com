@@ -21,10 +21,6 @@ return [
 			'themes',
 		]
 	],
-	'plugins' => [
-		'active' => true,
-		'type'   => 'file'
-	],
 	'reference' => [
 		'active' => true,
 		'type'   => 'file'

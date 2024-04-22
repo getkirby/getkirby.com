@@ -4,6 +4,9 @@ use Kirby\Cms\File;
 use Kirby\Cms\Page;
 use Kirby\Content\Field;
 
+/**
+ * TODO: Remove when plugin content is no longer in the repo
+ */
 class PluginDeveloperPage extends Page
 {
 	public function avatar(): File|null
