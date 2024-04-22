@@ -20,4 +20,9 @@ class PluginDeveloperPage extends Page
 	{
 		return $this->github() . '.png?size=' . $size;
 	}
+
+	public function url($options = null): string
+	{
+		return 'https://plugins.getkirby.com/' . $this->slug();
+	}
 }

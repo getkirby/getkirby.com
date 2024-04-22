@@ -35,14 +35,14 @@ return [
 	],
 	[
 		'pattern' => 'plugins',
-		'action'  => function () {
+		'action'  => function () use ($plugins) {
 			$category = param('category');
 
 			if ($category && $category !== 'all') {
-				go('https://plugins.getkirby.com/topics/' . $category);
+				go($plugins . '/topics/' . $category);
 			}
 
-			go('https://plugins.getkirby.com');
+			go($plugins);
 		}
 	],
 ];

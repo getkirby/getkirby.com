@@ -4,7 +4,7 @@ snippet('templates/features/section', [
 	'id' => 'plugins',
 	'title' => 'Plugins',
 	'intro' => 'Endless options for projects without roadblocks',
-	'text'  => 'Say yes with confidence when the client asks for changes. Pretty much any aspect of Kirby can be extended - with <a href="/plugins">existing plugins</a> or custom solutions for your project.',
+	'text'  => 'Say yes with confidence when the client asks for changes. Pretty much any aspect of Kirby can be extended - with <a href="https://plugins.getkirby.com">existing plugins</a> or custom solutions for your project.',
 	'figure' => 'templates/features-for-developers/plugins-figure',
 	'reverse' => true,
 	'voice' => 'warchamp7',

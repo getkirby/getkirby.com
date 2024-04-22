@@ -18,7 +18,7 @@
 		<?= $page->twigTemplate()->kt() ?>
 	</div>
 	<div class="font-mono text-xs color-gray-700">
-		<a href="/plugins/wearejust/twig"><strong class="font-normal color-black link">Kirby Twig plugin</strong> by wearejust</a>
+		<a href="https://plugins.getkirby.com/wearejust/twig"><strong class="font-normal color-black link">Kirby Twig plugin</strong> by wearejust</a>
 	</div>
 </div>
 <div id="blade" data-template class="hidden">
@@ -26,7 +26,7 @@
 		<?= $page->bladeTemplate()->kt() ?>
 	</div>
 	<div class="font-mono text-xs color-gray-700">
-		<a href="/plugins/leitsch/blade"><strong class="font-normal color-black link">Kirby Blade plugin</strong> by Lukas Leitsch</a>
+		<a href="https://plugins.getkirby.com/leitsch/blade"><strong class="font-normal color-black link">Kirby Blade plugin</strong> by Lukas Leitsch</a>
 	</div>
 </div>
 
