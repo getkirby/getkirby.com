@@ -1,5 +1,8 @@
 <?php
 
+use Kirby\Http\Remote;
+use Kirby\Http\Response;
+
 $plugins = 'https://plugins.getkirby.com';
 
 return [
@@ -15,15 +18,7 @@ return [
 	],
 	[
 		'pattern' => 'plugins.json',
-		'action'  => function () use($plugins) {
-			$url = $plugins . '/plugins.json';
-
-			if (kirby()->request()->header('X-Pull') === 'KeyCDN') {
-				return Remote::get($url)->json();
-			}
-
-			go($url);
-		}
+		'action'  => fn () => go($plugins . '/plugins.json')
 	],
 	[
 		'pattern' => 'plugins/(:all).json',
@@ -31,7 +26,14 @@ return [
 			$url = $plugins . '/' . $path . '.json';
 
 			if (kirby()->request()->header('X-Pull') === 'KeyCDN') {
-				return Remote::get($url)->json();
+				return Response::json(
+					Remote::get($url)->json(), headers: [
+						// keep the data in the client cache for a day,
+						// but refresh the data in the CDN cache every half an hour;
+						// if getkirby.com is not reachable, continue to serve the data for two days
+						'Cache-Control' => 'max-age=86400, s-maxage=1800, stale-if-error=172800'
+					]
+				);
 			}
 
 			go($url);
