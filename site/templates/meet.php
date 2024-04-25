@@ -9,6 +9,7 @@
 	</header>
 
 	<?php snippet('templates/meet/events', ['events' => $events]) ?>
+	<?php snippet('templates/meet/map') ?>
 	<?php snippet('templates/meet/how-to') ?>
 	<?php snippet('templates/meet/gallery', ['gallery' => $gallery]) ?>
 </article>
