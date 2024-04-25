@@ -17,6 +17,7 @@ return [
 			'features-for-clients',
 			'home',
 			'love',
+			'meet',
 			'partners',
 			'themes',
 		]
