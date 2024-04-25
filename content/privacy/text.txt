@@ -65,15 +65,6 @@ Our shop is provided by Paddle. They collect the data about your purchases.
 
 [Read more ›](#shop)
 
-
-### Community map
-
-https://community.getkirby.com
-
-Our community map is loading external map data from CARTO, when you constent to load/open the map. By doing so, your IP address is shared with CARTO.
-
-[Read more ›](#community-map)
-
 ### Forum
 
 https://forum.getkirby.com
@@ -232,6 +223,19 @@ France*
 
 Algolia complies with GDPR. You can find their privacy policy here: <https://www.algolia.com/policies/privacy/>
 
+#### CARTO
+
+To display our community map, external map data is loaded from CARTO. We only load the map after you have consented to this data processing. By loading the external map data, your browser only sends your IP address, browser version and requested map area(s). This data is processed by:
+
+*CARTO
+307 5th Ave #9
+10016, New York
+United States*
+
+Your consent is stored within your local browser session so that subsequent requests within the same session directly load the community map. Once your session ended, new consent is required next time you want to load the map.
+
+CARTO complies with GDPR. You can find their privacy policy here: <https://carto.com/privacy>
+
 ## Personal Demo
 
 ### Cookies
@@ -333,17 +337,6 @@ London, EC1V 8BT
 United Kingdom*
 
 Paddle complies with GDPR. You need to agree to their terms of service and privacy policy whenever you buy a license. We don't store your billing data anywhere else. You can find Paddle's privacy policy and the addresses of Paddle's EU and USA branches here: https://paddle.com/privacy/
-
-## Community map
-
-To display our community map, external map data is loaded from CARTO, only after you have consented to it. By loading this external data, only your IP address is shared with CARTO.
-
-*CARTO
-307 5th Ave #9
-10016, New York
-United States*
-
-Your consent is stored within your session so that subsequent requests within the same session directly load the community map. Once your session ended, new consent is required nest time you want to load the map.
 
 ## Feedback Platform
 
