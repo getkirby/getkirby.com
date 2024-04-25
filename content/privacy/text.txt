@@ -223,6 +223,19 @@ France*
 
 Algolia complies with GDPR. You can find their privacy policy here: <https://www.algolia.com/policies/privacy/>
 
+#### CARTO
+
+To display our community map, external map data is loaded from CARTO. We only load the map after you have consented to this data processing. By loading the external map data, your browser only sends your IP address, browser version and requested map area(s). This data is processed by:
+
+*CARTO
+307 5th Ave #9
+10016, New York
+United States*
+
+Your consent is stored within your local browser session so that subsequent requests within the same session directly load the community map. Once your session ended, new consent is required next time you want to load the map.
+
+CARTO complies with GDPR. You can find their privacy policy here: <https://carto.com/privacy>
+
 ## Personal Demo
 
 ### Cookies
@@ -392,4 +405,4 @@ We try to keep our privacy policy as transparent and easy to understand as possi
 ## Updates
 
 We will regularly check and update this privacy policy if necessary.
-**Last update: April 4, 2024**
+**Last update: April 25, 2024**
