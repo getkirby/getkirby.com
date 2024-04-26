@@ -24,7 +24,7 @@
 				<span class="font-mono text-xs"> forum users</span>
 			</li>
 			<li>
-				<span class="block text-2xl">2400+</span>
+				<span class="block text-2xl">2500+</span>
 				<span class="font-mono text-xs"> discord users</span>
 			</li>
 		</ul>
