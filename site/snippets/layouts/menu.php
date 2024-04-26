@@ -49,6 +49,7 @@
 					<li><hr /></li>
 					<li><a class="is-external" href="https://forum.getkirby.com">Support forum</a></li>
 					<li><a class="is-external" href="https://chat.getkirby.com">Discord chat</a></li>
+					<li><a class="is-external" href="https://community.getkirby.com">Community map</a></li>
 					<li><hr /></li>
 					<li><a class="is-external" href="https://mastodon.social/@getkirby">Mastodon</a></li>
 					<li><a class="is-external" href="https://www.linkedin.com/company/getkirby">LinkedIn</a></li>

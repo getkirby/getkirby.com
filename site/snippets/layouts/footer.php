@@ -71,6 +71,7 @@
 							<li><a href="/meet">Get together</a></li>
 							<li><a href="https://forum.getkirby.com">Support forum</a></li>
 							<li><a href="https://chat.getkirby.com">Discord chat</a></li>
+							<li><a href="https://community.getkirby.com">Community map</a></li>
 							<li><a href="https://mastodon.social/@getkirby">Mastodon</a></li>
 							<li><a href="https://www.linkedin.com/company/getkirby">LinkedIn</a></li>
 							<li><a href="https://instagram.com/getkirby">Instagram</a></li>
