@@ -1,13 +1,23 @@
 <style>
 .map {
 	width: 100%;
-	aspect-ratio: 16/9;
 	border: 1px solid var(--color-border);
 	overflow: clip;
 }
 .map iframe {
 	width: 100%;
 	height: 100%;
+}
+
+@media screen and (max-width: 40rem) {
+	.map {
+		height: 60dvh;
+	}
+}
+@media screen and (min-width: 40rem) {
+	.map {
+		aspect-ratio: 16/9;
+	}
 }
 </style>
 
