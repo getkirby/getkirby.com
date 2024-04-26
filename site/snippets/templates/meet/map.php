@@ -1,11 +1,13 @@
 <style>
 .map {
 	width: 100%;
-	min-height: 40rem;
-	height: 85vh;
-	height: 85dvh;
+	aspect-ratio: 16/9;
 	border: 1px solid var(--color-border);
 	overflow: clip;
+}
+.map iframe {
+	width: 100%;
+	height: 100%;
 }
 </style>
 
@@ -24,7 +26,10 @@
 		</a>
 	</header>
 
-	<iframe class="map rounded" src="https://community.getkirby.com/map"></iframe>
+	<div class="map rounded mb-1">
+		<iframe src="https://community.getkirby.com/map"></iframe>
+	</div>
+	<p><a class="text-sm underline flex items-center" style="gap: var(--spacing-2)" href="https://community.getkirby.com" target="_blank"><?= icon('window') ?> community.getkirby.com</a></p>
 </section>
 
 
