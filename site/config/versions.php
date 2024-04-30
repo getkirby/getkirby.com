@@ -192,7 +192,7 @@ return [
 		'title'       => 'Kirby 4.0',
 		'mainVersion' => '4',
 		'since'       => 'Nov 2023',
-		'description' => 'is the latest version of Kirby. <br><strong class="color-black">Start new projects with this version!',
+		'description' => 'is the latest version of Kirby. <br><strong class="color-black">Start new projects with this version!</strong>',
 		'link'        => 'https://getkirby.com/docs',
 		'repo'        => 'https://github.com/getkirby',
 		'subreleases' => [
