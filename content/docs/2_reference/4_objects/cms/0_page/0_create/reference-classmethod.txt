@@ -20,3 +20,31 @@ $page = Page::create([
   ]
 ]);
 ```
+
+## `$props` array
+
+| Prop          | Value                              | Description                                               |
+|---------------|------------------------------------|-----------------------------------------------------------|
+| `content`     | `array`                            | Array of content fields                                   |
+| `draft`       | `bool`                             | Default `true`, set to `false` to create an unlisted page |
+| `num`         | `int`                              | Sort number for listed pages                              |
+| `parent`      | `Kirby\Cms\Page`/ `Kirby\Cms\Site` | The parent page or site                                   |
+| `slug`        | `string`                           | Page slug                                                 |
+| `template`    | `string`                           | Template to use for the page                              |
+| `translations`| `array`                            | The translations for multi-language sites                 |
+
+To create a listed page, set `draft` to `true` and then set the `num` property:
+
+```php
+$page = Page::create([
+    'parent'   => page('notes'),
+    'slug'     => 'a-new-note',
+    'draft'    => true,
+    'num'      => 0,
+    'template' => 'note',
+    'content'  => [
+        'title'  => 'A new note',
+        'author' => 'Homer Simpson'
+    ]
+]);
+```
