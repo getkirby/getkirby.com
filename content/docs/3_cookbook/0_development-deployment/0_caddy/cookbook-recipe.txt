@@ -54,13 +54,13 @@ Web server configuration is a very big topic and there are many things to consid
 		rewrite * /error # This should reference your Kirby error page
 		import common
 	}
-	root * /usr/share/caddy # Adjust to your setup
-	tls name@user.com # Adjust to your setup
 }
 
 mydomain.com { # Adjust to your setup
 	import common
 	import kirby
+	root * /usr/share/caddy # Adjust to your setup
+	tls name@user.com # Adjust to your setup
 }
 
 ```
