@@ -96,7 +96,7 @@ This directive will make sure Caddy serves all static assets, e.g. all of the Ja
 ```
 encode zstd gzip
 ```
-We'll enable compression to reduce the transfered file size. This will make your site faster and has been supported by all major browsers for many years.
+We'll enable compression to reduce the transferred file size. This will make your site faster and has been supported by all major browsers for many years.
 <br/>
 
 
