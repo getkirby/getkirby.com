@@ -20,3 +20,7 @@ Text:
 - (link: https://assbach.de/blog/kirby-learnings-part-5 text: Kirby Learnings: Part 5 – Custom Blocks)
 
 (image: hero.jpg)
+
+----
+
+ogimage: assbach.jpg
