@@ -115,7 +115,7 @@ handle_errors {
 	import common
 }
 ```
-The error we're returning from the line before will result in the browser showing an empty page – which is typically not what we want. Instead, we want to show Kirbys error page, which is served under the `/error` path by default. So we're rewriting all the requests coming into this error handler to the Kirby error page. And we also need the `common` block here, so PHP will be executed as well (because Kirbys error page is not a static HTML file, but is dynamically generated via PHP).
+The error we're returning from the line before will result in the browser showing an empty page – which is typically not what we want. Instead, we want to show Kirby's error page, which is served under the `/error` path by default. So we're rewriting all the requests coming into this error handler to the Kirby error page. And we also need the `common` block here, so PHP will be executed as well (because Kirby's error page is not a static HTML file, but is dynamically generated via PHP).
 <br/>
 
 ```
