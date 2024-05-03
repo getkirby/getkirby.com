@@ -153,7 +153,7 @@ Again, we use a fallback for values that do not exist in the `translations` arra
 
 ## Fetching values from blueprint
 
-The last two versions are already much more versatile, but you might end up defining the same sets of key/value arrays in your blueprints and then again in the `config.php or language files.
+The last two versions are already much more versatile, but you might end up defining the same sets of key/value arrays in your blueprints and then again in the `config.php` or language files.
 
 Instead, you can also read the options' text labels directly from the blueprint.
 
@@ -169,9 +169,9 @@ echo $field['options'][$value] ?? $value;
 echo $field['options'][$value][$kirby->language()->code()] ?? $value;
 ```
 
-We add the fallback value here just in case someone stores a value from outside of the Panel.
+We add the fallback value here just in case someone stores a value outside of the Panel.
 
-You can find more examples how to access information from blueprints in our (link: docs/cookbook/unclassified/blueprints-in-frontend text: "Using blueprints in the frontend") recipe.
+You can find more examples of how to access information from blueprints in our (link: docs/cookbook/unclassified/blueprints-in-frontend text: "Using blueprints in the frontend") recipe.
 
 The same principles can be applied to other fields that use options like the `radio` field, the `multiselect` field, the `tags` field or the `checkboxes` field.
 
