@@ -33,14 +33,23 @@ fields:
 
 ## Default values
 
-The default value of the user field is the current user. But you can change this default value to any existing user:
+You can set a user email or user UUID as default value:
 
 ```yaml
 fields:
   author:
     label: Author
     type: users
-    default: johndoe@company.com
+    default: johndoe@company.com # or user://H7jTLLW1
+```
+Or set the default to the current user by passing `true` as argument:
+
+```yaml
+fields:
+  author:
+    label: Author
+    type: users
+    default: true
 ```
 
 ## Limit selection
