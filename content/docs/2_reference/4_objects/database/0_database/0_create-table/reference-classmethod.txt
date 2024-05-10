@@ -1,0 +1,17 @@
+Text:
+
+## Example
+
+```php
+$database->createTable('product', [
+    'id'          => ['type' => 'id'],
+    'code'        => ['type' => 'varchar', 'size' => 50],
+    'description' => ['type' => 'varchar'],
+    'quantity'    => ['type' => 'int', 'unsigned' => false],
+    'price'       => ['type' => 'decimal', 'precision' => 12, 'decimal_places' => 4]
+]);
+```
+
+<since v="4.2.0">
+Newly added options are the `unsigned` option for integers and `size` option for varchars as well as the `float` and `decimal` types.
+</since>
