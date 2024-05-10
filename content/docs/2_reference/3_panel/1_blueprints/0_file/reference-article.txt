@@ -132,10 +132,9 @@ focus: false
 </since>
 
 <since v="4.0.0">
-## Optimize uploaded images
+## Optimize uploaded images: `create`
 
 In your file blueprints you can set resize and crop settings, which will be applied directly after the upload. This is great to avoid huge original files in the content folder.
-
 
 ```yaml "site/blueprints/files/image.yml"
 title: Image
@@ -144,10 +143,23 @@ create:
   height: 500
   crop: true
 ```
-</since>
-## Image options
 
-The image options for files can now be defined directly in their own blueprint. This significantly simplifies the setup of sections as they all inherit the image settings. You can still set image settings in sections the good old way if needed.
+### Convert image formats on upload
+
+The `create` option also allows you to define a target image format. Images uploaded in other formats (e.g. `.jpg` or `.png`) will be converted to the target format right after the upload.
+
+```yaml "site/blueprints/files/image.yml"
+create:
+  format: webp
+```
+
+If the file blueprint also accept non-image files, those will be skipped and their format/extension left untouched.
+</since>
+
+
+## `image` options
+
+The `image` options for files can now be defined directly in their own blueprint. This significantly simplifies the setup of sections as they all inherit the image settings. You can still set image settings in sections the good old way if needed.
 
 ```yaml "site/blueprints/files/document.yml"
 image:
