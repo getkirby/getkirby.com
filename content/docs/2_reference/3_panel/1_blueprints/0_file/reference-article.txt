@@ -85,9 +85,11 @@ accept:
 | `type` | comma-separated `string` or `array` |
 
 
-You can combine the `extension`, `mime` and `type` checks. If more than one of these three options is set, all constraints need to match for a file to be valid.
+You can combine the `extension`, `mime` and `type` checks. If a `mime` type is specified, the `extension` and `type` options are ignored for the browser. Extensions and types, however, are still used to validate an uploaded file on the server. All constraints need to match for a file to be valid.
 
-If you don't set the `mime` option, the valid MIME types for the frontend upload input are auto-detected from the configured `extension` or `type` options. You can however override this behavior by setting the `mime` option as well, for example to define MIME types that are compatible with all browsers while still protecting the uploads based on the extension and/or file type:
+If you don't set the `mime` option, the valid MIME types for the frontend upload input are auto-detected from the configured `extension` or `type` options as well as the default Kirby file types. If the intersection is empty, an empty string is used for the accept attribute in the uploader.
+
+You can however override this behavior by setting the `mime` option as well, for example to define MIME types that are compatible with all browsers while still protecting the uploads based on the extension and/or file type:
 
 ```yaml
 accept:
