@@ -174,6 +174,35 @@ modified: {
 }
 ```
 
+<since v="4.2.0">
+### API endpoints
+
+You can set up custom API endpoints for your section, if needed, by adding an `api` entry with a callback function that returns an array of endpoint definitions:
+
+```php
+'api' => function() {
+  return [
+    [
+      'pattern' => '/say-hello',
+      'action' => function () {
+        return [
+          'message' => 'Hello, World!'
+        ];
+      }
+    ]
+  ];
+}
+```
+
+With the route defined on the backend, you can now access it in the Panel with the `$api` helper methods:
+
+```js
+const response = await this.$api.get('/pages/blog+article-a/sections/sectionName/say-hello');
+```
+
+Note how the API pattern of your custom endpoint is prefixed by the path to the specific page it's used on as well as `/sections/` and the section name it is included in.
+</since>
+
 ## Vue component
 
 After finishing the PHP backend part of the section, we can now start developing the (glossary: vue) component. Although our Vue plugin API is really easy to read, it makes sense to check out the [Vue docs](https://vuejs.org/), if you have never worked with it.

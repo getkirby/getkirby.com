@@ -173,6 +173,33 @@ hello: {
   }
 ```
 
+### API endpoints
+
+You can set up custom API endpoints for your field, if needed, by adding an `api` entry with a callback function that returns an array of endpoint definitions:
+
+```php
+'api' => function() {
+  return [
+    [
+      'pattern' => '/say-hello',
+      'action' => function () {
+        return [
+          'message' => 'Hello, World!'
+        ];
+      }
+    ]
+  ];
+}
+```
+
+With the route defined on the backend, you can now access it in the Panel with the `$api` helper methods:
+
+```js
+const response = await this.$api.get('/pages/blog+article-a/fields/fieldName/say-hello');
+```
+
+Note how the API pattern of your custom endpoint is prefixed by the path to the specific page it's used on as well as `/fields/` and the field name it is included in.
+
 ## Vue component
 
 After finishing the PHP backend part of the field, we can now start developing the Vue component. Although our (glossary: vue) plugin API is really easy to read, it makes sense to check out the [Vue docs](https://vuejs.org/), if you have never worked with it.
