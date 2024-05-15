@@ -24,6 +24,12 @@
 .brands .amd svg {
 	max-height: 2.25rem;
 }
+.brands .arsenal svg {
+	max-height: 4.25rem;
+}
+.brands .bmj svg {
+	max-height: 3.5rem;
+}
 .brands .eurowings svg {
 	margin-top: -0.5rem;
 }
