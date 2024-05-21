@@ -51,16 +51,25 @@ If you get an error like this:
 PHP Fatal error: Cannot redeclare xxx() in /path/to/kirby/config/helpers.php on line xxx
 ```
 
-you are most likely using a library or framework together with Kirby that is unfortunately not supported. We are aware of the following libraries being incompatible with Kirby:
+you are most likely using a library or framework together with Kirby with functions that clash with Kirby's helper function (in particular `dump()` or `go()`. These come with packages such as:
 
 - Symfony VarDumper (redeclares the `dump()` function)
 - Swoole Framework (redeclares the `go()` function)
 
-Because two libraries cannot define the same functions, you can unfortunately not use any of these libraries/frameworks together with Kirby.
+To deactivate one of Kirby's helper functions globally, you need to set a specific constant in your `index.php` to `false`. The name of the corresponding constant is always `KIRBY_HELPER_` + name of the helper (uppercased). For example:
 
-If you didn't install any other library/framework on purpose, please verify if they come with one of the plugins you are using or if they are provided by your hosting provider. In any case Kirby will only work if the conflicting libraries are disabled/uninstalled.
 
-We may be able to fix this issue in the future by namespacing the helper functions that ship with Kirby, but this is unfortunately something that cannot be implemented in a backwards-compatible way. Sorry for the inconvenience!
+```php "/index.php"
+<?php
+
+define('KIRBY_HELPER_DUMP', false);
+
+require __DIR__ . '/kirby/bootstrap.php';
+
+echo (new Kirby)->render();
+```
+
+When you disable a helper function, it won't be registered anymore by Kirby. Make sure not to use the deactivated helper function in your code anymore, but rather use the corresponding (link: /docs/reference/objects text: class methods).
 
 ## Weird PHP syntax errors
 
