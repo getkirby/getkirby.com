@@ -108,6 +108,46 @@ return [
 ```
 </since>
 
+## Panel search
+
+You can customise both the default search type selected when opening the Panel search dialog as well as how many result items should be shown at once:
+
+```php "/site/config/config.php"
+return [
+  'panel' => [
+    'search' => [
+			'type'  => 'files'
+			'limit' => 5
+		]
+  ]
+];
+```
+## Default Panel language
+
+You can set the default Panel language that is used before a user logs in or when the user does not have a valid language configured:
+
+```php "/site/config/config.php"
+return [
+  'panel' => [
+    'language' => 'de'
+  ]
+];
+```
+
+If the Panel language is not configured, Kirby will default to English on single-language sites and the default content language on multi-language sites.
+
+## KirbyText/Markdown
+
+If false, the Panel formatting buttons and drag and drop for files and links will create regular (glossary: Markdown) instead of (glossary: kirbytag text: KirbyTags).
+
+```php "/site/config/config.php"
+return [
+  'panel' => [
+    'kirbytext' => false
+  ]
+];
+```
+
 ## Custom Panel CSS
 
 We have made the design of the Panel as usable, beautiful and reduced as possible so that you or your clients can fully concentrate on creating content. However, if you want to spice it up a little or adjust to your or your clients branding, you can do that with your own custom stylesheet file. Add it to your `config.php` file like this:
@@ -180,32 +220,6 @@ return [
         'url'  => 'assets/favicon.png',
       ]
     ]
-  ]
-];
-```
-
-## Default Panel language
-
-You can set the default Panel language that is used before a user logs in or when the user does not have a valid language configured:
-
-```php "/site/config/config.php"
-return [
-  'panel' => [
-    'language' => 'de'
-  ]
-];
-```
-
-If the Panel language is not configured, Kirby will default to English on single-language sites and the default content language on multi-language sites.
-
-## KirbyText/Markdown
-
-If false, the Panel formatting buttons and drag and drop for files and links will create regular (glossary: Markdown) instead of (glossary: kirbytag text: KirbyTags).
-
-```php "/site/config/config.php"
-return [
-  'panel' => [
-    'kirbytext' => false
   ]
 ];
 ```
