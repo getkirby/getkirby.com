@@ -264,60 +264,14 @@ To upload file types not supported out of the box by Kirby, you can (link: docs/
 
 ## Preview images
 
-The (preview) image for each item in the list is configured with the `image` option:
-
-### `cover`
-
-Whether or not the image will cover the available space.
-Options: `true`, `false (default)`
+The (preview) image for each item in the list is by default what is (link: docs/reference/panel/blueprints/file#image-options text: configured in the respective file blueprint). However, you can customize these further for your section with the (link: docs/reference/panel/blueprints/file#image-options text: same options) as in the file blueprint:
 
 ```yaml
+type: files
 image:
+  back: pattern
   cover: true
 ```
-
-#### Examples
-
-| `cover: true` | `cover: false` |
-| -   | -   |
-| (image: cover.png) | (image: no-cover.png) |
-
-### `ratio`
-
-A freely definable image ratio.
-
-```yaml
-image:
-  ratio: 16/9
-```
-
-#### Examples
-
-| `ratio: 2/3` | `ratio: 1/1` | `ratio: 3/2` | `ratio: 16/9` |
-| -   | -   | -   | -    |
-| (image: 2by3.png) | (image: 1by1.png) | (image: 3by2.png) | (image: 16by9.png) |
-
-<info>
-You are not limited to the example ratios above. In fact, Kirby calculates the ratio for you as long as you enter it in the format **`a/b`**
-</info>
-
-### `back`
-
-Set an image background.
-Options: `pattern (default)`, `black`, `white`
-```yaml
-
-image:
-  cover: true
-  ratio: 1/1
-  back: black
-```
-
-#### Examples
-
-| `back: pattern` | `back: black` | `back: white` |
-| -   | -   | -   |
-| (image: pattern.png) | (image: black.png) | (image: white.png) |
 
 ## Empty state
 

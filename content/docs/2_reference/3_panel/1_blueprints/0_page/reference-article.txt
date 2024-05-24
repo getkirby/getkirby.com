@@ -234,40 +234,100 @@ icon: page
 icon: 📚
 ```
 
-## Image options
+## `image` options
 
-The image options for pages can now be defined directly in their own blueprint. This significantly simplifies the setup of sections as they all inherit the image settings. You can still set image settings in sections the good old way if needed.
-
-```yaml "site/blueprints/pages/note.yml"
-image:
-  back: blue-200
-  query: page.cover.toFile()
-  icon: 📝
-```
-This will fall back to the icon if the page has no images. If the `query` option is not set, the first image will be used.
-
-To force the icon if the page has images, set  the `query` option to `false`:
+The (preview) `image` blueprint option defines how any page with this blueprint will be presented, e.g. in a pages section:
 
 ```yaml "site/blueprints/pages/note.yml"
-image:
-  back: blue-200
-  icon: 📝
-  query: false
+image: page.cover.toFile
 ```
 
-### Support for queries
+With the Kirby query syntax, it allows you to specify which image to use to preview this page. However, it doesn't need to stop there. You can also specify the background or what icon instead of an image to use.
 
-Panel preview image options now all support our powerful queries:
+### Show icon instead of image
 
-```yaml "site/blueprints/pages/note.yml"
-image:
-  back: "{{ page.myCustomBackColor }}"
+To display the icon set in the page blueprint or a default icon instead of a preview image, you can set the `image` option to `icon`:
+
+```yaml
+image: icon
 ```
 
-### Custom colors
-`back` and `color` options for Panel preview images now support shorthands for core CSS color variables as well as HEX codes or other native CSS color properties (e.g. even gradients):
+Or when defining other options, set the `query` option to `false`:
 
-#### CSS color property shorthands
+```yaml
+image:
+	back: blue
+	query: false
+```
+
+To show no image or icon at all, you can set the `image` option to `false`:
+
+```yaml
+image: false
+```
+
+### `query`
+
+When defying other image preview options, you can use the `query` option for setting which image to use. It defaults to `page.image`.
+
+```yaml
+image:
+  query: page.children.first.image
+```
+
+Make sure that the queries return the right format for each option. For example, the `query` option expects a `Kirby\Cms\File` object, so use `toFile` when necessary.
+
+#### Preview image from assets folder
+
+You can also provide an image from the assets folder via a page model or custom page method, for example as a fallback if the page has no images:
+
+```php "/site/models/album.php"
+<?php
+
+class AlbumPage extends Page
+{
+    public function previewImage()
+    {
+        if ($image = $this->images()->first()) {
+          return $image;
+        }
+        if (file_exists(kirby()->root('assets') . "/images/default.jpg")) {
+            return new Asset("assets/images/default.jpg");
+        }
+        return false;
+
+    }
+}
+```
+
+And then in your blueprint
+
+```yaml
+image: page.previewImage
+```
+
+### `back`
+
+Sets the image background.
+
+```yaml
+
+image:
+  query: page.image.findBy("name", "cover")
+  cover: true
+  ratio: 1/1
+  back: black
+```
+
+#### Examples
+
+| `back: pattern` | `back: black` | `back: white` |
+| -   | -   | -   |
+| (image: pattern.png) | (image: black.png) | (image: white.png) |
+
+
+#### Custom colors
+The `back` and `color` options for also support shorthands for the core CSS color variables as well as HEX codes or other native CSS color properties (e.g. even gradients).
 
 ```yaml
 image:
@@ -275,19 +335,69 @@ image:
 ```
 Check out the (link: docs/reference/plugins/ui#colors text: list of our color properties) for available options.
 
-#### Hex codes
-
 ```yaml
 image:
   back: "#ff0000"
 ```
 
-#### CSS rules
-
 ```yaml
 image:
   back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)"
 ```
+
+#### Support for queries
+
+This option also support our powerful queries:
+
+```yaml
+image:
+  back: "{{ page.myCustomBackColor }}"
+```
+
+### `color`
+
+Sets the icon color.
+
+```yaml
+image:
+  query: false
+  color: red-200
+```
+
+### `cover`
+
+Whether or not the image will cover the available space.
+Options: `true`, `false (default)`
+
+```yaml
+image:
+  cover: true
+```
+
+#### Examples
+
+| `cover: true` | `cover: false` |
+| -   | -   |
+| (image: cover.png) | (image: no-cover.png) |
+
+### `ratio`
+
+A freely selectable image ratio
+
+```yaml
+image:
+  ratio: 16/9
+```
+
+#### Examples
+
+| `ratio: 2/3` | `ratio: 1/1` | `ratio: 3/2` | `ratio: 16/9` |
+| -   | -   | -   | -    |
+| (image: 2by3.png) | (image: 1by1.png) | (image: 3by2.png) | (image: 16by9.png) |
+
+<info>
+You are not limited to the example ratios above. In fact, Kirby calculates the ratio for you as long as you enter it in the format **`a/b`**
+</info>
 
 ## Preview
 

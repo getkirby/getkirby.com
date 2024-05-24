@@ -159,27 +159,30 @@ If the file blueprint also accept non-image files, those will be skipped and the
 
 ## `image` options
 
-The `image` options for files can now be defined directly in their own blueprint. This significantly simplifies the setup of sections as they all inherit the image settings. You can still set image settings in sections the good old way if needed.
+The (preview) `image` blueprint option defines how any page with this blueprint will be presented, e.g. in a files section.
 
-```yaml "site/blueprints/files/document.yml"
+### `back`
+
+Sets the image background.
+
+```yaml
+
 image:
-  back: blue-200
-  icon: 📝
+  query: page.image.findBy("name", "cover")
+  cover: true
+  ratio: 1/1
+  back: black
 ```
 
-### Support for queries
+#### Examples
 
-Panel preview image options now all support our powerful queries:
+| `back: pattern` | `back: black` | `back: white` |
+| -   | -   | -   |
+| (image: pattern.png) | (image: black.png) | (image: white.png) |
 
-```yaml "site/blueprints/files/document.yml"
-image:
-  back: "{{ file.myCustomBackColor }}"
-```
 
-### Custom colors
-`back` and `color` options for Panel preview images now support shorthands for core CSS color variables as well as HEX codes or other native CSS color properties (e.g. even gradients):
-
-#### CSS color property shorthands
+#### Custom colors
+The `back` and `color` options for also support shorthands for the core CSS color variables as well as HEX codes or other native CSS color properties (e.g. even gradients).
 
 ```yaml
 image:
@@ -187,19 +190,69 @@ image:
 ```
 Check out the (link: docs/reference/plugins/ui#colors text: list of our color properties) for available options.
 
-#### Hex codes
-
 ```yaml
 image:
   back: "#ff0000"
 ```
 
-#### CSS rules
+```yaml
+image:
+  back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)"
+```
+
+#### Support for queries
+
+This option also support our powerful queries:
 
 ```yaml
 image:
-  back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);"
+  back: "{{ file.myCustomBackColor }}"
 ```
+
+### `color`
+
+Sets the icon color.
+
+```yaml
+image:
+  query: false
+  color: red-200
+```
+
+### `cover`
+
+Whether or not the image will cover the available space.
+Options: `true`, `false (default)`
+
+```yaml
+image:
+  cover: true
+```
+
+#### Examples
+
+| `cover: true` | `cover: false` |
+| -   | -   |
+| (image: cover.png) | (image: no-cover.png) |
+
+### `ratio`
+
+A freely selectable image ratio
+
+```yaml
+image:
+  ratio: 16/9
+```
+
+#### Examples
+
+| `ratio: 2/3` | `ratio: 1/1` | `ratio: 3/2` | `ratio: 16/9` |
+| -   | -   | -   | -    |
+| (image: 2by3.png) | (image: 1by1.png) | (image: 3by2.png) | (image: 16by9.png) |
+
+<info>
+You are not limited to the example ratios above. In fact, Kirby calculates the ratio for you as long as you enter it in the format **`a/b`**
+</info>
 
 ## Options
 
