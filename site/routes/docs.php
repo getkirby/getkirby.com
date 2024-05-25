@@ -51,6 +51,13 @@ return [
 			}
 
 			if (!$page) {
+				$page = page('docs/cookbook')
+					->grandChildren()
+					->listed()
+					->findBy('uid', $category . '/' . $slug);
+			}
+
+			if (!$page) {
 				$page = page('error');
 			}
 
