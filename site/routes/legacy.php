@@ -15,7 +15,11 @@ return [
 		'action'  => fn () => go('docs/guide/virtual-content/content-from-rss-feed')
 	],
 	[
-		'pattern' => 'docs/cookbook/content-representations/ajax-load-more',
-		'action'  => fn () => go('docs/cookbook/content-representations/load-more-with-ajax')
+		'pattern' => 'docs/cookbook/extensions/virtual-files',
+		'action'  => fn () => go('docs/guide/virtual-content/virtual-files')
+	],
+	[
+		'pattern' => 'docs/cookbook/content-representations/load-more-with-ajax',
+		'action'  => fn () => go('docs/cookbook/content-representations/ajax-load-more')
 	]
 ];
