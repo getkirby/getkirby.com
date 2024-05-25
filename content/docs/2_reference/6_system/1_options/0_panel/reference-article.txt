@@ -45,7 +45,7 @@ Your Panel is now accessible at http://yourdomain.com/super-secret-admin-area
 <since v="4.0.0">
 ## Panel menu
 
-You can customize what entries the Panel menu is showing and even add your own:
+You can customize what entries the Panel menu is showing and even add your own. Learn about (link: docs/reference/system/options/panel/panel-menu text: all the options to customize the Panel menu).
 
 ```php "/site/config/config.php"
 return [
@@ -54,55 +54,14 @@ return [
       'site' => [
         'label' => 'Overview'
       ],
-      '-',
       'notes' => [
         'icon'  => 'pen',
         'label' => 'Notes',
-        'link'  => 'pages/notes',
-        'current' => function (string $current): bool {
-          $path = Kirby\Cms\App::instance()->request()->path()->toString();
-          return Str::contains($path, 'pages/notes');
-        }
+        'link'  => 'pages/notes'
       ],
+      '-',
       'users'
     ]
-  ]
-];
-```
-
-This example shows the three ways you can define a menu entry:
-- Include a default Panel area by simply naming it (`users` in the example)
-- Extend a default Panel area by naming it and passing options that should overwrite the defaults (customizing the label for `site` in the example)
-- Create your own menu entry
-
-When creating your own entry, include an `icon` and `label` as well as either a `link` or `dialog`. The `current` callback can be used to add some logic for when the menu entry should be shown as the currently active one.
-
-<info>
-Note that you need to explicitly list all items you want in the menu. Custom menu entries will not automatically be merged with the default ones.
-
-When you add a menu entry that links to a page or file, you probably also want to overwrite the `current` callback for the `site` item, otherwise your menu entry as well as the `site` entry will be active at the same time:
-
-```php
-'site' => [
-  'current' => function (): bool {
-		// the links of all your custom menu entries
-		$links = ['pages/notes', 'pages/albums'];
-
-		$path  = Kirby\Cms\App::instance()->request()->path();
-		return A::every($links, fn ($link) => Str::contains($path, $link))
-  },
-],
-```
-
-</info>
-If you need to use the `$kirby` object to set up your menu entries, wrap the option in a closure:
-
-```php
-return [
-  'panel' => [
-    'menu' => function ($kirby) {
-      return [...]
-    }
   ]
 ];
 ```
