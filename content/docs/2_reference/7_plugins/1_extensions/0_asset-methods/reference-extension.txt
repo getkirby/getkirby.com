@@ -1,0 +1,29 @@
+Title: Asset methods
+
+----
+
+Text:
+
+Asset methods are registered with the `assetMethods` extension.
+
+They are used for all `Kirby/Filesystem/Asset` objects returned by the `asset()` helper whenever there is no built-in method with the same name.
+
+## Default asset methods
+
+**For a full (link: docs/reference/@/classes/cms/asset text: list of default asset methods), please check out the Reference.**
+
+<info>Be aware that you cannot override these default asset methods with any custom asset method.</info>
+
+## Getting started
+
+You can extend the set of defined asset methods in a plugin file.
+
+```php "/site/plugins/asset-methods/index.php"
+Kirby::plugin('my/plugin', [
+    'assetMethods' => [
+         'yourMethodName' => function () {
+            // ...
+        }
+    ]
+]);
+```
