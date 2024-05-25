@@ -87,9 +87,3 @@ Kirby::plugin('my/api', [
   ]
 ]);
 ```
-
-## Custom models
-Docs are coming soon…
-
-## Custom collections
-Docs are coming soon…
