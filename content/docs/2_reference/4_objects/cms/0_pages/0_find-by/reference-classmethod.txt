@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 <?= $page->children()->findBy('uid', 'some-page')->title() ?>

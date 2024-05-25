@@ -33,6 +33,19 @@ class ReferenceClassMethodPage extends ReflectionPage
 		return $this->parent()->name($short);
 	}
 
+	public function example(): Field
+	{
+		if ($this->content()->has('example')) {
+			return $this->content()->get('example');
+		}
+
+		if ($docBlock = $this->docBlock()) {
+			$example = trim($docBlock->getDescription());
+		}
+
+		return new Field($this, 'example', $example ?? null);
+	}
+
 	public function exists(): bool
 	{
 		return method_exists($this->class(), $this->name());

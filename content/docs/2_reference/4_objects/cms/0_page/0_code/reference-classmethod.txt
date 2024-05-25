@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 <?php foreach($page->code()->filterBy('extension', 'css') as $css): ?>
@@ -10,7 +8,7 @@ Text:
 
 ## What is a code file?
 
-Kirby considers the following file types as code: 
+Kirby considers the following file types as code:
 
 - js
 - css

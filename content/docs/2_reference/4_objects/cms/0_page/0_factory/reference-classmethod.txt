@@ -1,9 +1,7 @@
 Properties: $props
 
 ----
-Text:
-
-## Example
+Example:
 
 ```php
 $pageObject = Page::factory([

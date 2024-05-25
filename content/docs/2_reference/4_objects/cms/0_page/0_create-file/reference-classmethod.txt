@@ -5,9 +5,7 @@ Auth: files.create
 Properties: $props|Kirby\Cms\File
 
 ----
-Text:
-
-## Example
+Example:
 
 ### Create new file from a local file path
 

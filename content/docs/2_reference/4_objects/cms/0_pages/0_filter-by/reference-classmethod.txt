@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Example:
 
 ```php
 // fetch children with a field 'draft', which has the value 'yes'

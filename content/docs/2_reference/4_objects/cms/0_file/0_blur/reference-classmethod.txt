@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 if($image = $page->image()):
@@ -8,9 +6,7 @@ if($image = $page->image()):
 endif;
 ```
 
-
-
-## Blur Amount
+### Blur Amount
 
 You can modify the strength of the blur effect by passing an integer. The default value is 10.
 

@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Example:
 
 Find blocks by attribute, e.g. type:
 

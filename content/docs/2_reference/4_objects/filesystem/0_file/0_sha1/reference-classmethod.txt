@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Example:
 
 ```php
 $hashA = $fileA->sha1();

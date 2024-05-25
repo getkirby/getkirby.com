@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Example:
 
 ### Redirect to another page
 

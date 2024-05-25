@@ -2,9 +2,7 @@ Auth: files.update
 
 ----
 
-Text:
-
-## Example
+Example:
 
 (docs: immutable-objects)
 

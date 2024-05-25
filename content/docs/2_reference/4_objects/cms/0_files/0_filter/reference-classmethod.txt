@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Example:
 
 ```php
 // fetch files with a caption

@@ -2,9 +2,7 @@ Auth: pages.delete
 
 ----
 
-Text:
-
-## Example
+Example:
 
 ```php
 try {

@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 <?php if($avatar = $kirby->user('bastian@example.com')->avatar()): ?>

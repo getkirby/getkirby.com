@@ -2,9 +2,7 @@ Guide: emails
 
 ----
 
-Text:
-
-## Examples
+Example:s
 
 ## Basic example
 

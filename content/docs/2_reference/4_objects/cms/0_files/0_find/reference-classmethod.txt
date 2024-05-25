@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ### Fetch a single file
 

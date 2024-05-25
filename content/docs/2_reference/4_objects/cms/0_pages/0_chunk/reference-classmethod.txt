@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Example:
 
 E.g. create chunks of three items per chunk:
 

@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Example:
 
 ```php
 // return collection of pages grouped by the first character of their title field

@@ -1,6 +1,4 @@
-Text: 
-
-## Example structure
+Example: structure
 
 - blog
     - 2012

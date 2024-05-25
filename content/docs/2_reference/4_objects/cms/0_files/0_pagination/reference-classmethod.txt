@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 $files      = $page->files()->paginate(10);

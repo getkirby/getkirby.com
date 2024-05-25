@@ -1,6 +1,4 @@
-Text:
-
-## Examples
+Example:s
 
 Apply the filter method only if the first parameter evaluates to `true`:
 

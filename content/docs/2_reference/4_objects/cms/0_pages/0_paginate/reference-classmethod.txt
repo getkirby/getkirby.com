@@ -1,6 +1,4 @@
-Text: 
-
-## Examples
+Example:s
 
 ### `$arguments` is an option array
 
