@@ -8,9 +8,7 @@ $plugins = 'https://plugins.getkirby.com';
 return [
 	[
 		'pattern' => 'plugins/create',
-		'action'  => function () {
-			return page('plugins/create');
-		}
+		'action'  => fn () => page('plugins/create')
 	],
 	[
 		'pattern' => 'plugins/k4',
