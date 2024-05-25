@@ -294,9 +294,10 @@ The (preview) image for each item in the list is by default what is (link: docs/
 ```yaml
 type: pages
 image:
-  back: blue-200
   query: page.cover.toFile
   icon: 📝
+  back: blue-700
+	color: white
   cover: true
 ```
 

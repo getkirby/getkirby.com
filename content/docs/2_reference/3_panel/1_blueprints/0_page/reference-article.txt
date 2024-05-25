@@ -356,12 +356,18 @@ image:
 
 ### `color`
 
-Sets the icon color.
+Sets the icon color. Allows for the same shortcuts and query support as the `back` option.
 
 ```yaml
 image:
   query: false
   color: red-200
+```
+
+```yaml
+image:
+  query: false
+  color: "{{ page.myCustomIconColor }}"
 ```
 
 ### `cover`
