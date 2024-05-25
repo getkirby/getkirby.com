@@ -7,23 +7,6 @@ Guide: emails
 ----
 Text:
 
-## Email presets
-
-```php
-return [
-  'email' => [
-    'presets' => [
-      'contact' => [
-        'from'    => 'no-reply@supercompany.com',
-        'subject' => 'Thank you for your contact request',
-        'cc'      => 'marketing@supercompany.com',
-        'body'    => 'We will never reply'
-      ]
-    ]
-  ]
-];
-````
-
 ## Email transport
 
 ```php
@@ -55,8 +38,7 @@ return [
 ];
 ```
 
-
-## Email transport with authentication
+### Email transport with authentication
 
 ```php
 return [
@@ -73,3 +55,22 @@ return [
   ]
 ];
 ```
+
+## Email presets
+
+```php
+return [
+  'email' => [
+    'presets' => [
+      'contact' => [
+        'from'    => 'no-reply@supercompany.com',
+        'subject' => 'Thank you for your contact request',
+        'cc'      => 'marketing@supercompany.com',
+        'body'    => 'We will never reply'
+      ]
+    ]
+  ]
+];
+````
+
+Read the guide on (link: docs/guide/emails#presets text: how to use email presets).
