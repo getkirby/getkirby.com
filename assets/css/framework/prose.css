@@ -59,8 +59,6 @@
 .prose * + .code,
 .prose * + .columns,
 .prose * + .filesystem,
-.prose * + h4,
-.prose * + h5,
 .prose * + hr,
 .prose * + nav,
 .prose * + p,
@@ -145,14 +143,19 @@
 	margin-top: 1em;
 }
 .prose h4 {
-	font-size: 1em;
-	font-weight: var(--font-normal);
+	font-size: 1.1em;
 }
 .prose * + h4 {
 	margin-top: 2em;
 }
 .prose h4 + * {
 	margin-top: var(--spacing-3);
+}
+.prose h5 {
+	font-size: 1em;
+}
+.prose * + h5 {
+	margin-top: 2em;
 }
 
 /** Code **/
