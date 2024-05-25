@@ -32,7 +32,9 @@
 		</nav>
 
 		<?php if ($page->hasEntries()): ?>
-		<?php snippet('templates/reference/entries') ?>
+		<?php snippet('templates/reference/entries', [
+			'entries' => $entries ?? $page->siblings()->listed()
+		]) ?>
 		<?php endif ?>
 
 		<article id="main" class="reference-content reference-panel">
@@ -101,9 +103,9 @@
 		scrollToActive() {
 			<?php
 			$reference = page('docs/reference');
-	$reference = $reference->parents()->add($reference);
-	$sidebar   = $page->parents()->not($reference)->last() ?? $reference;
-	?>
+			$reference = $reference->parents()->add($reference);
+			$sidebar   = $page->parents()->not($reference)->last() ?? $reference;
+			?>
 
 			const data = {
 				sidebar: 0,
@@ -116,7 +118,7 @@
 			}
 
 			if (this.$entries) {
-				const entries = this.$entries.querySelector(`li[data-id="<?= $page->id() ?>"]`);
+				const entries = this.$entries.querySelector(`li[data-id="<?= ($entry ??$page)->id() ?>"]`);
 				if (entries) {
 					data.entries = entries.offsetTop - this.$entries.offsetTop;
 				}
