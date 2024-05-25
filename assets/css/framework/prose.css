@@ -57,10 +57,8 @@
 .prose * + blockquote,
 .prose * + .box,
 .prose * + .code,
-.prose * + .columns,
 .prose * + .filesystem,
 .prose * + hr,
-.prose * + nav,
 .prose * + p,
 .prose * + ol,
 .prose * + ul,
@@ -233,8 +231,11 @@
 	height: auto;
 	max-width: 100%;
 }
-.prose figure:is(.image, .video) {
-	margin-block: 2.5rem;
+.prose * + figure:is(.image, .video) {
+	margin-bottom: 2.5rem;
+}
+.prose * + figure:is(.image, .video) {
+	margin-top: 2.5rem;
 }
 .prose .image a {
 	display: inline-block;
@@ -257,13 +258,22 @@
 	border-radius: var(--rounded);
 }
 
+/* Columns */
+.prose * + .columns {
+	margin-top: 2.5rem;
+}
+
+.prose * + nav {
+	margin-top: 1.5rem;
+}
+
 /* Intro */
 .prose .intro {
 	line-height: var(--leading-tight);
 	font-size: var(--text-2xl);
 }
 
-/* since */
+/* Since */
 .since {
 	position: relative;
 	padding-bottom: 1.5rem;
