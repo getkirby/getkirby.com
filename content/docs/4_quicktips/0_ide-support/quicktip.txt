@@ -1,0 +1,75 @@
+Title: Improve IDE support
+
+----
+
+Tags: integrations
+
+----
+
+Text:
+
+Many code editors and IDEs offer support for code completion suggestions or showing meta information about your variables, method calls etc. To make the most use of it, your IDE needs to know what types your variables hold.
+
+## Templates and snippets
+
+Kirby exposes some general variables like `$page`, `$site` etc. to your templates as well as anything (link: docs/guide/templates/controllers text: returned in the page controller). Your IDE however does not automatically know what these variables stand for. You can change this by adding comments specifying their types:
+
+```php "site/templates/note.php"
+/** @var Kirby\Cms\App $kirby */
+/** @var Kirby\Cms\Site $site */
+/** @var Kirby\Cms\Page $page */
+
+foreach ($page->children() as $child) {
+	echo $child->id()
+}
+```
+
+Your IDE can now infer that `$child` is also a `Kirby\Cms\Page` object.
+
+
+## Controllers
+
+In your controllers, you can access the (link: docs/guide/templates/controllers#accessing-kirby-objects-in-your-controller text: standard Kirby objects as arguments) to your controller closure. By (link: https://www.php.net/manual/en/language.types.declarations.php text: type-hinting) them, your IDE can help you with completion suggestions etc.
+
+```php "site/controllers/note.php"
+<?php
+
+use Kirby\Cms\App;
+use Kirby\Cms\Page;
+use Kirby\Cms\Pages;
+use Kirby\Cms\Site;
+
+return function (Site $site, Page $page, Pages $pages, App $kirby) {
+    // ...
+}
+```
+
+## Page models
+
+Make sure to do the same for your custom page models:
+
+```php "site/models/note.php"
+<?php
+
+use Kirby\Cms\Page;
+
+class NotePage extends Page
+{
+	// ...
+}
+```
+
+
+----
+
+Published: 2024-05-27
+
+----
+
+Description: Supercharge your code editor for Kirby
+
+----
+
+Authors:
+
+- authors/nico-hoffmann
