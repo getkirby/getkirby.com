@@ -41,6 +41,8 @@ page.render:after,"string $contentType, array $data, string $html, Kirby\Cms\Pag
 page.render:before,"string $contentType, array $data, Kirby\Cms\Page $page",apply,$data
 page.update:after,"Kirby\Cms\Page $newPage, Kirby\Cms\Page $oldPage",trigger,
 page.update:before,"Kirby\Cms\Page $page, array $values, array $strings",trigger,
+panel.route:after,"Kirby\Http\Route $route, string $path, string $method, mixed $reponse",apply,$reponse
+panel.route:before,"Kirby\Http\Route $route, string $path, string $method",apply,$route
 route:after,"Kirby\Http\Route $route, string $path, string $method, mixed $result, bool $final",apply,$result
 route:before,"Kirby\Http\Route $route, string $path, string $method",trigger,
 site.changeTitle:after,"Kirby\Cms\Site $newSite, Kirby\Cms\Site $oldSite",trigger,
