@@ -23,7 +23,7 @@ fields:
   toggle:
     label: Include in menu?
     type: toggle
-    text: 
+    text:
       - "no"
       - "yes"
 ```
@@ -44,7 +44,7 @@ fields:
         de: Im Menü anzeigen?
 ```
 
-## Text toggle
+## Toggle text
 
 ```yaml
 fields:
@@ -60,7 +60,7 @@ fields:
 Note: The values `No` and `Yes` will not work out of the box as the YAML parser will interpret them as booleans. You need to quote them as `"No"` and `"Yes"`.
 </info>
 
-## Text toggle translated
+### Translated text
 
 ```yaml
 fields:
@@ -78,6 +78,17 @@ fields:
 ```
 
 The field content will either be 'true' or 'false'.
+
+### Text from query
+
+```yaml
+fields:
+  toggle:
+    label: Toggle
+    type: toggle
+    text: "{{ page.toggleText }}"
+
+```
 
 ## How to use in templates/snippet
 
