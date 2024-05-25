@@ -43,18 +43,19 @@ Text:
 - The icons `circle`, `heart` and `star` are now named `circle-filled`, `heart-filled` and `star-filled`.
 - Removed `this.$config.search` from Panel
 - Area `search` plugins receive two additional arguments for their query callback: `$limit` and `$page` to be used to paginate the results. They should then return an array with entries results and pagination. [#5191](https://github.com/getkirby/kirby/pull/5191)
+- `<k-header>` doesn't include tabs anymore by default. Use `<k-tabs>` separately.
 - Defining the footer slot in `<k-dialog>` will no longer wrap the slot content in the `<footer>` element. This can now be more flexibly handled by using `<k-dialog-footer>` inside the slot.
 - The form drawer no longer automatically closes on submit. This is introducing the same behaviour as in dialogs. Auto-closing might often not be the intended result of submitting the form and it's easier to close it manually in a submit handler than to re-open it again.
 - `this.$store.state.isLoading` is no longer available. You can now use `window.panel.isLoading` or `this.$panel.isLoading` in Vue components to access the current loading state.
 - `this.$store.state.dialog` is no longer available. Use `this.$panel.dialog` instead.
 - Removed `this.$store.state.drag`, use `window.panel.drag`/`this.$panel.drag` instead.
-- `k-button` , `k-link`, `k-headline` and `k-content-item` only emit the `click` event. For other native events, use the `.native` event listener modifier.
-- Native events (e.g. `click`, `dbclick`) need the `.native` modifier now when used on `k-block` and `k-block-title`
-- Need to use `.native` modifier for all previous event listeners on `k-box` and `k-image`
-- `k-pagination` doesn't support setting custom labels/titles via `nextLabel`, `prevLabel` or `pageLabel`
-- `k-range` was removed and replaced by `k-alpha-range` and `k-hue-range`.
-- `k-choice` has been removed. Use `k-choice-input` instead.
-- The unused theme prop has been removed from `k-choice-input`.
+- `<k-button>` , `<k-link>`, `<k-headline>` and `<k-content-item>` only emit the `click` event. For other native events, use the `.native` event listener modifier.
+- Native events (e.g. `click`, `dbclick`) need the `.native` modifier now when used on `<k-block>` and `<k-block-title>`
+- Need to use `.native` modifier for all previous event listeners on `<k-box` and `<k-image>`
+- `<k-pagination>` doesn't support setting custom labels/titles via `nextLabel`, `prevLabel` or `pageLabel`
+- `<k-range` was removed and replaced by `<k-alpha-range>` and `<k-hue-range>`.
+- `<k-choice>` has been removed. Use `<k-choice-input>` instead.
+- The unused theme prop has been removed from `<k-choice-input>`.
 
 #### Removed deprecated code
 
