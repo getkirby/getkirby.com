@@ -35,10 +35,6 @@ Text:
 
 When you open a page in the browser, Kirby reads the name of the text file to determine what template to use to render the page. If Kirby finds a template with the same name as the text file, it loads it and executes the code contained in it. If there is no matching template, the default template is used instead.
 
-<warning>
-Template names must be lowercase, for example `default.php` or `blog.php`.
-</warning>
-
 Here are some example of content file and template file counterparts:
 
 | Text file                               | Template                     |
@@ -48,11 +44,13 @@ Here are some example of content file and template file counterparts:
 | /content/projects/project-1/project.txt | /site/templates/project.php  |
 | /content/projects/project-2/project.txt | /site/templates/project.php  |
 
-## The default template
+Template names must be lowercase, for example `default.php` or `blog.php`.
+
+### The default template
 
 The default template is the only required template. It is called `default.php` and must exist in your `/site/templates` folder. When you get started with a completely new site you might want to start with just the default template as your foundation.
 
-## Shared templates
+### Shared templates
 
 Pages with the same or a similar content structure can share a single template. For example, all the notes subpages in the `/notes` page or the album subpages of the `/photography` page of the Starterkit share the same template called `note.php` and `album.php` respectively.
 
@@ -204,21 +202,15 @@ With
 ```php
 <?= $page->text() ?>
 ```
-we get the data from the text field of the page.
+we get the data from the text field of the page. The `html()` (glossary: field-method text: field method) is used to escape content.
+
+All fields we added to our page content files are accessible like this.
 
 <info>
-The `html()` (glossary: field-method text: field method) is used to escape content.
-</info>
-
-All fields we added to our page content files are now accessible like this.
-
-<info>
-
 Fieldnames are converted to lowercase and any punctuation is replaced with underscores as PHP does not support special characters in method names.
-
 </info>
 
-## A note on reserved words
+## Reserved words
 
 If you use field names in your text file, which are also used by native Kirby methods, e.g. "image", "videos", "audio", or "num", you cannot fetch the data like described above. To fetch the content of such fields, you have to use the `content()` method:
 
@@ -228,7 +220,7 @@ If you use field names in your text file, which are also used by native Kirby me
 | `Videos:`       | `$page->content()->videos()` |
 | `Audio:`        | `$page->content()->audio()`  |
 
-## Setting response types
+## Response types
 
 In your templates, you can set different response types depending on content.
 

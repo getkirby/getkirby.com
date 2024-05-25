@@ -35,12 +35,6 @@ return [
 
 ## Adding languages
 
-<warning>
-The first language must always be defined as the default language. Make sure to **only define one default language**.
-
-If your site already has content, make sure to set your first language to the language of this content.
-</warning>
-
 (tabs…)
 === Manually
 
@@ -52,18 +46,22 @@ For example, to add English as a new language:
 <?php
 
 return [
-  'code' => 'en',
-  'default' => true,
+  'code'      => 'en',
+  'default'   => true,
   'direction' => 'ltr',
-  'locale' => 'en_US',
-  'name' => 'English',
+  'locale'    => 'en_US',
+  'name'      => 'English',
 ];
 ```
 
 Repeat for every new language you want to use.
 
 <warning>
-If you don't use the Panel, you have to add the language extension to your text files manually. The language extension is **mandatory**, otherwise Kirby will not work as expected.
+The first language must always be defined as the default language. Make sure to **only define one default language**.
+
+If your site already has content, make sure to set your first language to the language of this content.
+
+When you don't use the Panel, you have to add the language extension to your text files manually. The language extension is **mandatory**, otherwise Kirby will not work as expected.
 </warning>
 
 

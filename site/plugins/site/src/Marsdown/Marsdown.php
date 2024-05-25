@@ -61,7 +61,12 @@ class Marsdown extends ParsedownExtra
 			];
 		}
 
-		$Block['group']['html'] .= "\n\n" . $Line['body'];
+		if (isset($Block['interrupted']) === true)  {
+        	$Block['group']['html'] .= "\n";
+        	unset($Block['interrupted']);
+        }
+
+		$Block['group']['html'] .= "\n" . $Line['body'];
 
 		return $Block;
 	}

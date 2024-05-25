@@ -214,7 +214,6 @@ $tags['helper'] = [
  */
 function toOptions(array $props)
 {
-
 	$table = [];
 
 	foreach ($props as $attr => $prop) {
@@ -287,7 +286,6 @@ function toOptions(array $props)
 			'default'     => $default,
 			'description' => $comment,
 		];
-
 	}
 
 	ksort($table);
