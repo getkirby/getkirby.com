@@ -22,9 +22,29 @@
 	</a>
 </div>
 
-<h2 class="pill mb-6"><span class="mr-3"><?= icon('book') ?></span>All recipes</h2>
+<?php if ($recipes->isNotEmpty()): ?>
+<section class="mb-24">
+	<h2 class="pill mb-6">
+		<span class="mr-3"><?= icon('book') ?></span>
+		All recipes
+	</h2>
 
-<?php snippet('templates/cookbook/recipes', [
-	'recipes' => $recipes
-]) ?>
+	<?php snippet('templates/cookbook/recipes', [
+		'recipes' => $recipes
+	]) ?>
+</section>
+<?php endif ?>
+
+<?php if ($quicktips->isNotEmpty()): ?>
+<section class="mb-24">
+	<h2 class="pill mb-6">
+		<span class="mr-3"><?= icon('book') ?></span>
+		All quicktips
+	</h2>
+
+	<?php snippet('templates/quicktips/quicktips', [
+		'quicktips' => $quicktips,
+	]) ?>
+</section>
+<?php endif ?>
 <?php endslot() ?>

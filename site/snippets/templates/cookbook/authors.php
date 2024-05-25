@@ -26,7 +26,7 @@
 						</div>
 
 						<a href="<?= $author->url() ?>">
-							<p class="link">&rarr; All their recipes</p>
+							<p class="link">&rarr; All their articles</p>
 						</a>
 					</figcaption>
 				</figure>
