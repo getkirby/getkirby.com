@@ -5,23 +5,19 @@ indent_style = tab
 indent_size = 2
 trim_trailing_whitespace = true
 
+[*.php]
+indent_size = 4
+insert_final_newline = true
+
+[site/{layouts,snippets,templates}/**.php]
+indent_size = 2
+
 [*.{css,scss,less,js,json,ts,sass,html,hbs,mustache,phtml,html.twig,md,yml}]
 insert_final_newline = true
 
 [*.md]
 indent_style = space
-indent_size = 4
 trim_trailing_whitespace = false
-
-[*.php]
-indent_size = 4
-insert_final_newline = true
-
-[site/templates/**.php]
-indent_size = 2
-
-[site/snippets/**.php]
-indent_size = 2
 
 [*.yml]
 indent_style = space

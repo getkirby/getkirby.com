@@ -4,7 +4,6 @@ namespace Buy;
 
 use Exception;
 use Kirby\Http\Remote;
-use Kirby\Toolkit\Str;
 use Throwable;
 
 class Paddle

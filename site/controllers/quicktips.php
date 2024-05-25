@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\Page;
+use Kirby\Toolkit\Str;
 
 return function (Page $page, $tag) {
 
@@ -10,7 +11,10 @@ return function (Page $page, $tag) {
 
 	if ($tag) {
 		$quicktips = $quicktips->filter(function($tip) use($tag) {
-			$tags = array_map(fn ($item) => Str::slug($item), $tip->tags()->split(','));
+			$tags = array_map(
+				fn ($item) => Str::slug($item),
+				$tip->tags()->split(',')
+			);
 			return in_array($tag, $tags, true);
 		});
 	}

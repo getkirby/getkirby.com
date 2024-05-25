@@ -17,12 +17,12 @@ return [
 	],
 	'oauth' => [
 		'discord' => [
-            'clientId'     => '',
-            'clientSecret' => '',
+			'clientId'     => '',
+			'clientSecret' => '',
 		],
-        'github' => [
-            'clientId'     => '',
-            'clientSecret' => '',
-        ]
+		'github' => [
+			'clientId'     => '',
+			'clientSecret' => '',
+		]
 	]
 ];
