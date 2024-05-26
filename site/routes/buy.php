@@ -3,6 +3,7 @@
 use Buy\Paddle;
 use Buy\Passthrough;
 use Buy\Product;
+use Kirby\Http\Response;
 
 return [
 	[
@@ -12,7 +13,7 @@ return [
 			$enterprise = Product::Enterprise;
 			$visitor    = Paddle::visitor(country: get('country'));
 
-			return json_encode([
+			$json = json_encode([
 				'status'   => $visitor->error() ?? 'OK',
 				'country'  => $visitor->country(),
 				'currency' => $visitor->currencySign(),
@@ -33,6 +34,13 @@ return [
 				'revenueLimit' => $visitor->currency() !== 'EUR' ? ' (' . $visitor->revenueLimit() . ')' : '',
 				'vatRate'      => $visitor->vatRate() ?? 0,
 			], JSON_UNESCAPED_UNICODE);
+
+			return Response::json(
+				$json,
+				headers: [
+					'Cache-Control' => 'no-store'
+				]
+			);
 		}
 	],
 	[
@@ -122,6 +130,7 @@ return [
 					$price->currency . ':' . $localizedPrice,
 				];
 
+				header('Cache-Control: no-store');
 				go($product->checkout('buy', compact('prices', 'passthrough')));
 			} catch (Throwable $e) {
 				die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
@@ -171,6 +180,7 @@ return [
 					$price->currency . ':' . $price->volume($quantity),
 				];
 
+				header('Cache-Control: no-store');
 				go($product->checkout('buy', compact('prices', 'quantity', 'passthrough')));
 			} catch (Throwable $e) {
 				die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
