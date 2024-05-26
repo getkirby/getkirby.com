@@ -64,14 +64,15 @@ You can access files using handy methods for each common file type:
 | Images | ai, avif, bmp, gif, eps, ico, j2k, jp2, jpeg, jpg, jpe, png, ps, psd, svg, tif, tiff, webp | `$page->images()`/`$site->images()` |
 | Videos | avi, flv, m4v, mov, movie, mpe, mpg, mp4, ogg, ogv, swf, webm | `$page->videos()`/`$site->videos()` |
 
-Other file types are of course also supported.
+Some file types (currently SVG and XML files) are validated on upload to block malicious files. You can customize the allowed file contents, see our reference for the (link: docs/reference/objects/sane/svg text: SVG) and (link: docs/reference/objects/sane/xml text: XML) classes.
 
-To upload file types not supported out of the box by Kirby, you can (link: docs/reference/plugins/extensions/file-types text: register new file types with the `fileTypes` extension) in a plugin.
+File types not listed above are of course also supported. To upload file types not supported out of the box by Kirby, you can (link: docs/reference/plugins/extensions/file-types text: register new file types with the `fileTypes` extension) in a plugin.
 
 <info>
 When you are using `.txt` files for your content (as it is the default), you cannot upload other `.txt` files as they will be mistaken for content files. You can configure this via the (link: docs/reference/system/options/content#content-file-extension text: `content.extension` config option).
-</info>
 
+There are also other file types that are blocked for security reasons, such as HTML and PHP files.
+</info>
 
 ## Manually uploading files
 
