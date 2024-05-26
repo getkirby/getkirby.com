@@ -36,6 +36,10 @@ Users are identified by their email address by default, but you can also assign 
 
 (image: change-role.png)
 
+<info>
+In order to be able to change user roles, you have to (link: docs/guide/users/roles text: create user roles) first.
+</info>
+
 ## Change user password
 
 Passwords must be at least 8 characters long. Make them as strong as possible! We recommend 32+ characters, highly random passwords and a password manager to keep track of them.
