@@ -135,11 +135,14 @@ For security reasons, you cannot install the Panel on a public server by default
 
 Once you publish your website, you need to (link: buy text: purchase a Kirby license). We will send you a unique license code for your domain. You can activate your license with the following steps:
 
+(tabs…)
+=== In the Panel
+
 1. Open the Panel at `http://yourdomain.com/panel` and log in.
 2. Click on "Activate" on the bottom left.
 3. Enter your license code and your email address and press "Ok".
 
-### Without using the Panel
+=== Without using the Panel
 
 If you don’t want the Panel to connect to our server, registration via the Panel fails, or you are not using the Panel at all, you can download your license files directly from our licenses website:
 
@@ -149,6 +152,8 @@ If you don’t want the Panel to connect to our server, registration via the Pan
 4. Use the "Download license file" button to download the license file.
 5. Rename the downloaded file to `.license` (without extensions).
 6. Place it in the `/site/config/` folder of your Kirby installation.
+
+(…tabs)
 
 ## Where to go from here
 
