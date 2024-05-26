@@ -1,0 +1,20 @@
+
+Class: Kirby\Sane\Svg
+
+----
+
+Text:
+
+## Allow additional attributes/tags
+
+By default, the sanitizer will strip any attributes or  tags that haven't been flagged as allowed (link: https://github.com/getkirby/kirby/blob/4.2.0/src/Sane/Svg.php#L37-L387 text: in the default lists).
+
+If you have a certain attribute or tag in your SVG files that should not be stripped, you can add those as follows:
+
+```php
+// <foo> tag
+Kirby\Sane\Svg::$allowedTags[] = 'foo';
+
+// `foo` attribute
+Kirby\Sane\Svg::$allowedAttrs[] = 'foo';
+```
