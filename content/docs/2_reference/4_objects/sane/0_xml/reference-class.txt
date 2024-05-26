@@ -1,0 +1,16 @@
+
+Class: Kirby\Sane\Xml
+
+----
+
+Text:
+
+## Restrict domains
+
+By default, the sanitizer allows any kind of domains included in the XML file as they can be pretty common in many XML-based formats.
+
+If you want to further restrict the allowed domains, you can set the following public attribute to a list of allowed domains:
+
+```php
+Kirby\Sane\Xml::$allowedDomains = ['https://getkirby.com'];
+```
