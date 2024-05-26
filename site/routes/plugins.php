@@ -23,7 +23,7 @@ return [
 		'action'  => function (string $path) use($plugins) {
 			$url = $plugins . '/' . $path . '.json';
 
-			if (kirby()->request()->header('X-Pull') === 'KeyCDN') {
+			if (kirby()->request()->header('X-Pull') === option('keys.keycdn')) {
 				return Response::json(
 					Remote::get($url)->json(), headers: [
 						// keep the data in the client cache for a day,
