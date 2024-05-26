@@ -20,11 +20,6 @@ extract([
 <link rel="modulepreload" href="<?= url('/assets/js/components/menu.js') ?>">
 <link rel="modulepreload" href="<?= url('/assets/js/components/search.js') ?>">
 
-<?php if (option('cdn', false) !== false) : ?>
-	<link rel="dns-prefetch" href="<?= option('cdn.domain') ?>">
-	<link rel="preconnect" href="<?= option('cdn.domain') ?>">
-<?php endif ?>
-
 <script type="module">
 	window.debounce = (callback, delay) => {
 		let timeout;

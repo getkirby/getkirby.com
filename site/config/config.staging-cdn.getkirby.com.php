@@ -2,6 +2,8 @@
 
 return [
 	'cache' => require __DIR__ . '/cache.php',
-	'cdn'   => false,
+	'cdn' => [
+		'domain' => 'https://staging-cdn.getkirby.com',
+	],
 	'debug' => false
 ];
