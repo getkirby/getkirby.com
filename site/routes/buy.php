@@ -38,7 +38,7 @@ return [
 			return Response::json(
 				$json,
 				headers: [
-					'Cache-Control' => 'no-store'
+					'Cache-Control' => 'max-age=10800, private'
 				]
 			);
 		}
