@@ -88,7 +88,9 @@ class Sale
 		}
 
 		// expire the cache on the next opportunity
-		kirby()->response()->expires(min($expires));
+		$timestamp = min($expires);
+		kirby()->response()->expires($timestamp);
+		kirby()->response()->header('Expires', gmdate('D, d M Y H:i:s T', $timestamp));
 	}
 
 	/**
