@@ -10,10 +10,15 @@ class Sale
 	public readonly int $start;
 	public readonly int $end;
 	public readonly int $discount;
+	protected static int $time;
 
 	public function __construct()
 	{
 		$options = option('buy.sale', []);
+
+		// ensure that all calls to methods of this class base their logic on the
+		// same timestamp to avoid off-by-one errors in the second of a date change
+		static::$time ??= time();
 
 		// calculate timestamps in UTC, even if the server uses a different timezone
 		$this->start    = strtotime(($options['start'] ?? '1970-01-01') . ' 00:00Z');
@@ -34,7 +39,7 @@ class Sale
 	 */
 	public function ends(): string
 	{
-		if ($this->end - time() <= 24 * 60 * 60) {
+		if ($this->end - static::$time <= 24 * 60 * 60) {
 			return '<strong>today</strong> (midnight UTC)';
 		}
 
@@ -60,7 +65,7 @@ class Sale
 		$expires = [];
 
 		// the cache will expire once the sale will start
-		if ($this->start > time()) {
+		if ($this->start > static::$time) {
 			$expires[] = $this->start;
 		}
 
@@ -69,7 +74,7 @@ class Sale
 		if ($this->isActive() === true) {
 			// expire one day before the end date,
 			// so the text can change on the last day
-			if ($this->end - time() > 24 * 60 * 60) {
+			if ($this->end - static::$time > 24 * 60 * 60) {
 				$expires[] = $this->end - 24 * 60 * 60;
 			}
 
@@ -91,7 +96,7 @@ class Sale
 	 */
 	public function isActive(): bool
 	{
-		return time() >= $this->start && time() <= $this->end;
+		return static::$time >= $this->start && static::$time <= $this->end;
 	}
 
 	/**
