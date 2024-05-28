@@ -48,8 +48,8 @@ class Sale
 		$dateTime = new DateTime();
 		$dateTime->setTimezone(new DateTimeZone('UTC'));
 
-		// the end date is inclusive (midnight of next day),
-		// subtract one to show the correct date
+		// the end date is the midnight of the next day,
+		// subtract one second to show the correct date
 		$dateTime->setTimestamp($this->end - 1);
 
 		return $dateTime->format('M jS');
@@ -78,9 +78,9 @@ class Sale
 				$expires[] = $this->end - 24 * 60 * 60;
 			}
 
-			// in any case throw away the cache *after*
-			// the sale has ended to remove the banners
-			$expires[] = $this->end + 1;
+			// in any case throw away the cache when the
+			// sale has ended to remove the banners
+			$expires[] = $this->end;
 		}
 
 		if (empty($expires) === true) {
@@ -96,7 +96,7 @@ class Sale
 	 */
 	public function isActive(): bool
 	{
-		return static::$time >= $this->start && static::$time <= $this->end;
+		return static::$time >= $this->start && static::$time < $this->end;
 	}
 
 	/**
