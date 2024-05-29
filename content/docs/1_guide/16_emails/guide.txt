@@ -238,7 +238,7 @@ return [
 ];
 ```
 
-Redad about more details/options of the (link: docs/reference/system/options/email#email-transport text: `email.transport` config option).
+Read about more details/options of the (link: docs/reference/system/options/email#email-transport text: `email.transport` config option).
 
 
 ## Access PHPMailer
