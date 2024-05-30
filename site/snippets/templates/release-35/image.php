@@ -1,6 +1,6 @@
 <figure>
 	<a href="<?= $image->url() ?>" data-lightbox>
-		<img src="<?= $image->url() ?>">
+		<img alt="<?= $alt ?? '' ?>" src="<?= $image->url() ?>">
 		<?php if ($image->caption()->isNotEmpty()): ?>
 		<figcaption class="text-xs font-mono pt-3">
 			<?= $image->caption() ?>

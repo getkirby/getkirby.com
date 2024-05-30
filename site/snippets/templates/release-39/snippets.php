@@ -15,7 +15,8 @@
 				'rel'            => 0,
 			]
 		], [
-			'loading' => 'lazy'
+			'loading' => 'lazy',
+			'title' => 'YouTube video demonstrating snippets with slots'
 		]) ?>
 	</figure>
 

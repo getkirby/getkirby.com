@@ -58,4 +58,4 @@ The private live streams for the Kirby Next supporters really started to grow on
 
 In December 2020, we released (link: releases/3.5 text: 3.5) with our brand new blocks and layout editors. A major milestone for editors.
 
-(image: blocks.png)
+(image: blocks.png alt: Screenshot of the blocks interface in the Panel)

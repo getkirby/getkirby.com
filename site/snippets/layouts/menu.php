@@ -61,7 +61,7 @@
 		<ul class="menu-1 menu-steps">
 			<li><a href="/try">Try</a></li>
 			<li>
-				<a href="/love">
+				<a href="/love" aria-label="Love">
 					<?= icon('heart') ?>
 				</a>
 			</li>
