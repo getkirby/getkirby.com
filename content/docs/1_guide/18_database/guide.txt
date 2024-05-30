@@ -21,7 +21,7 @@ As Kirby is a file-based CMS with content stored in text files, you don't need a
 Kirby comes with its own `Db` class that allows you to connect to a MySQL or SQLite database. The class also offers some handy shortcuts for querying tables.
 
 <info>
-This guide only describes the basics using the shortcuts of the `Db` class. If you want to dive deeper, check out the (link: docs/reference/@#database text: database reference).
+This guide only describes the basics using the shortcuts of the `Db` class. If you want to dive deeper, check out the (link: docs/reference/objects/database/database text: database reference).
 </info>
 
 ## Database connection
