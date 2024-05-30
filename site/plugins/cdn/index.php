@@ -3,10 +3,10 @@
 include_once __DIR__ . '/helpers.php';
 
 load([
-	'kirby\\cdn\\cachebuster' => __DIR__ . '/src/Cachebuster.php'
+	'kirby\\cdn\\optimizer' => __DIR__ . '/src/Optimizer.php'
 ]);
 
-use Kirby\Cdn\Cachebuster;
+use Kirby\Cdn\Optimizer;
 use Kirby\Cms\App;
 use Kirby\Cms\FileVersion;
 
@@ -45,10 +45,14 @@ App::plugin('getkirby/cdn', [
 			static $original;
 
 			if (preg_match('!assets\/!', $path ?? '')) {
-				$path = Cachebuster::path($path);
+				$cdn       = $kirby->option('cdn', false) !== false;
+				$optimizer = new Optimizer($cdn);
 
-				if ($kirby->option('cdn', false) !== false) {
-					return $kirby->option('cdn.domain') . '/' . ltrim($path, '/');
+				$path = ltrim($path, '/');
+				$path = $optimizer->cachebust($path);
+
+				if ($cdn === true) {
+					return $kirby->option('cdn.domain') . '/' . $path;
 				}
 			}
 
