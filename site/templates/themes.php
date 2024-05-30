@@ -29,7 +29,7 @@
 </div>
 
 <div class="p-container themes auto-fit mb-24">
-	<?php foreach ($page->grandChildren()->shuffle() as $theme) : ?>
+	<?php foreach ($themes = $page->grandChildren()->shuffle() as $theme) : ?>
 		<a href="<?= $theme->link() ?>">
 			<article>
 				<figure class="shadow-xl mb-3" style="--aspect-ratio: 3/2">
@@ -38,6 +38,7 @@
 						'src' => [
 							'width' => 600
 						],
+						'lazy' => $themes->indexOf($theme) > 2,
 						'srcset' => [
 							'1x' => 600,
 							'2x' => 1200,

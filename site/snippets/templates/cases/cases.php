@@ -9,6 +9,7 @@
 						'src' => [
 							'width' => 450
 						],
+						'lazy' => $cases->indexOf($case) > 2,
 						'srcset' => [
 							'1x' => 450,
 							'2x' => 900,
