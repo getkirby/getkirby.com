@@ -145,14 +145,14 @@
 		</div>
 		<div class="release-code-box p-12 font-mono color-white">
 			<div>
-				<h4 class="mb-3" style="color: var(--color-purple-500)">Key points</h4>
+				<h3 class="h4 mb-3" style="color: var(--color-purple-500)">Key points</h3>
 				<ul class="mb-12">
 					<li>Kirby now follows <a class="underline" href="https://semver.org/">semantic versioning</a></li>
 					<li>Major versions will be released on a yearly cycle to bring continuity and planning security.</li>
 					<li>Licenses <a class="underline" href="<?= url('license/2023-11-28/summary#new-licensing-model') ?>">include three years of feature updates</a></li>
 				</ul>
 
-				<h4 class="mb-3" style="color: var(--color-purple-500)">Example roadmap</h4>
+				<h3 class="h4 mb-3" style="color: var(--color-purple-500)">Example roadmap</h3>
 				<ul>
 					<li>4.0.0: late 2023</li>
 					<li>5.0.0: late 2024</li>
