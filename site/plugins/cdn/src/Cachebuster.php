@@ -6,11 +6,6 @@ use Kirby\Cms\App;
 
 class Cachebuster
 {
-	protected static function version(string $root, string $path): string
-	{
-		return dechex(filemtime($root));
-	}
-
 	public static function path(string $path): string
 	{
 		if (strpos($path, url()) === 0) {
@@ -21,7 +16,7 @@ class Cachebuster
 		$root  = $kirby->root('index') . '/' . $path;
 
 		if (file_exists($root) === true) {
-			$version = static::version($root, $path);
+			$version = filemtime($root);
 			$path = $path . '?v=' . $version;
 		}
 
