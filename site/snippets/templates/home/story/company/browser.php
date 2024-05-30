@@ -1,7 +1,7 @@
 <div class="text-sm">
 	H&C
 </div>
-<div class="text-sm color-gray-500 mb-3">
+<div class="text-sm color-gray-700 mb-3">
 	Digital Agency
 </div>
 

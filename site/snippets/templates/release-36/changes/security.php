@@ -8,14 +8,14 @@
 		<div class="columns" style="--columns: 2; --gap: var(--spacing-1)">
 			<div class="highlight bg-light">
 				<h3 class="h3 mb-6">Features</h3>
-				<div class="prose text-sm">
+				<div class="prose color-gray-800 text-sm">
 					<?= $section->features()->kt() ?>
 				</div>
 			</div>
 
 			<div class="highlight bg-light">
 				<h3 class="h3 mb-6">Breaking changes</h3>
-				<div class="prose text-sm">
+				<div class="prose color-gray-800 text-sm">
 					<?= $section->breaking()->kt() ?>
 				</div>
 			</div>

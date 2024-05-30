@@ -52,7 +52,7 @@ mark {
 	<?php endif ?>
 </header>
 
-<aside class="version-details prose mb-24">
+<aside class="version-details prose color-gray-800 mb-24">
 	<h2 id="version-details" class="h2 mb-6">
 		<a href="#version-details">Version Details</a>
 	</h2>

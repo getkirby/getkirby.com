@@ -52,6 +52,9 @@ img {
 .color-gray-700 {
 	color: var(--color-gray-700);
 }
+.color-gray-800 {
+	color: var(--color-gray-800);
+}
 
 .dimmed {
 	background: var(--color-black);
