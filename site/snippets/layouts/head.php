@@ -13,8 +13,6 @@ extract([
 
 <title><?= $page->isHomePage() ? $page->title() : $page->title() . ' | ' . $site->title() ?></title>
 
-<link rel="preload" href="<?= url('/assets/css/index.css') ?>" as="style">
-
 <?php if (option('cdn', false) !== false) : ?>
 	<link rel="dns-prefetch" href="<?= option('cdn.domain') ?>">
 	<link rel="preconnect" href="<?= option('cdn.domain') ?>">
