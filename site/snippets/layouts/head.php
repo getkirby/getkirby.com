@@ -24,7 +24,8 @@ extract([
 
 <?= css('assets/css/index.css') ?>
 <?= js('assets/js/index.js', [
-	'type' => 'module'
+	'async' => true,
+	'type'  => 'module'
 ]) ?>
 
 <link rel="icon" type="image/png" href="<?= url('/assets/images/favicon.png') ?>">
