@@ -91,14 +91,14 @@ Breaking:
 
 (docs: releases/breaking-changes vars: version=5)
 
-##### Required PHP Version
+#### Required PHP Version
 
 With this release **we drop support for PHP&nbsp;7.2**, which has reached end of life. But we also introduce support for the brand-new stable version of **PHP&nbsp;8.0**, which has been released on December 1st.
 
-##### Date field `format` option
+#### Date field `format` option
 3.5.0 is dropping the `format` option of the date field. This is a breaking change which we will (link: https://github.com/getkirby/kirby/issues/3026 text: reverse in 3.5.1).
 
-##### `accept` option for file blueprints
+#### `accept` option for file blueprints
 
 If no custom `accept` restrictions are defined in the file blueprint, Kirby will now limit the accepted uploads to the types `image`, `document`, `archive`, `audio` and `video` by default. This protects your sites against unexpected uploads like code files that could be used to attack the server or the visitor's browsers.
 
@@ -107,7 +107,7 @@ You can customize the accepted file types in the (link: docs/reference/panel/blu
 ----
 Deprecated:
 
-##### Removed methods
+#### Removed methods
 
 <warning>
 The following methods have been marked as deprecated since Kirby 3.0.0 and are now removed.
@@ -133,7 +133,7 @@ Removed | Use instead
 `$pages->invisible()` | `$pages->unlisted()`
 `$pages->visible()` | `$pages->listed()`
 
-##### Deprecated methods
+#### Deprecated methods
 
 <info>
 Deprecated methods will be removed in a future version. Please update your code accordingly.
