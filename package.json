@@ -1,18 +1,11 @@
 {
   "name": "getkirby.com",
   "description": "The entire getkirby.com website.",
-  "main": "index.js",
   "scripts": {
-    "build": "npm run css && npm run js",
-    "css": "postcss --replace assets/css/**",
-    "js": "uglifyjs-folder assets/js --output assets/js --each --extension .js --config-file uglify.json"
+    "build": "node ./build.mjs"
   },
   "devDependencies": {
-    "cssnano": "^5.0.6",
-    "postcss": "^8.3.5",
-    "postcss-cli": "^8.3.1",
-    "postcss-import": "^14.0.0",
-    "uglifyjs-folder": "^3.0.0"
+    "esbuild": "^0.21.4"
   },
   "repository": {
     "type": "git",
