@@ -13,6 +13,12 @@ function cdn(string|File $file, array $params = []): string
 {
 	$query = null;
 
+	if (is_object($file) === true) {
+		$file = $file->mediaUrl();
+	}
+
+	$path = Url::path($file);
+
 	if (empty($params) === false) {
 		// Use the width as height if the height is not set
 		if (empty($params['crop']) === false && $params['crop'] !== false) {
@@ -31,16 +37,8 @@ function cdn(string|File $file, array $params = []): string
 			};
 		}
 
-		// $params['v'] = $file->mediaHash() . '-1';
-		$params['v'] = 1;
-
 		$query = '?' . http_build_query($params);
 	}
 
-	if (is_object($file) === true) {
-		$file = $file->mediaUrl();
-	}
-
-	$path = Url::path($file);
 	return App::instance()->option('cdn.domain') . '/' . $path . $query;
 }
