@@ -1,6 +1,4 @@
 <style>
-@import url("/assets/css/site/dialog.css");
-
 .checkout .dialog {
 	position: relative;
 	border-radius: var(--rounded);
