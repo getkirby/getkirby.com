@@ -153,7 +153,7 @@
 		<li>
 			<a class="flex items-center" href="https://github.com/<?= $contributor ?>">
 				<?php if ($image = $page->image($contributor . '.png')): ?>
-				<img src="<?= $image->crop(64)->url() ?>" class="bg-black mr-3" style="width: 2rem; --aspect-ratio: 1/1">
+				<img alt="" src="<?= $image->crop(64)->url() ?>" class="bg-black mr-3" style="width: 2rem; --aspect-ratio: 1/1">
 				<?php endif ?>
 				<?= $contributor ?>
 			</a>
@@ -176,7 +176,8 @@
 						'rel'            => 0,
 					]
 				], [
-					'loading' => 'lazy'
+					'loading' => 'lazy',
+					'title' => 'YouTube video of the 3.6 release show'
 				]) ?>
 			</figure>
 			<header class="p-3">
@@ -194,7 +195,8 @@
 						'rel'            => 0,
 					]
 				], [
-					'loading' => 'lazy'
+					'loading' => 'lazy',
+					'title' => 'YouTube video of the Kirby in the Wild event'
 				]) ?>
 			</figure>
 			<header class="p-3">
@@ -224,7 +226,7 @@
 		<li>
 			<a class="flex items-center" href="<?= $author->website() ?>">
 				<?php if ($image = $author->image()): ?>
-				<img src="<?= $image->crop(64)->url() ?>" class="bg-black mr-3" style="width: 2rem; --aspect-ratio: 1/1">
+				<img alt="" src="<?= $image->crop(64)->url() ?>" class="bg-black mr-3" style="width: 2rem; --aspect-ratio: 1/1">
 				<?php endif ?>
 				<?= $author->title() ?>
 			</a>

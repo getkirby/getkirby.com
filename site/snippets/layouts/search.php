@@ -25,7 +25,7 @@ form[data-fetching] .search-input figure svg:first-child {
 </style>
 
 <div class="search">
-	<button class="search-button" type="button" data-area="<?= $area ?? 'all' ?>">
+	<button class="search-button" type="button" data-area="<?= $area ?? 'all' ?>" aria-label="Search">
 		<?= icon('search') ?>
 	</button>
 

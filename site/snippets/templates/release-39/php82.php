@@ -18,7 +18,7 @@
 	]) ?>
 
 	<figure class="release-box bg-dark p-24 color-white grid place-items-center">
-		<a href="https://www.php.net/releases/8.2/en.php">
+		<a href="https://www.php.net/releases/8.2/en.php" aria-label="PHP 8.2">
 			<?= image('php-8.2.svg')->read() ?>
 		</a>
 	</figure>

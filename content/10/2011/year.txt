@@ -26,11 +26,11 @@ A few weeks later, friends needed a website for their new design studio. I pitch
 
 I wasn’t sure what to make of this new side project. I was doing client work, and at the same time running a bookmark service called Zootool. With more than 100,000 users, Zootool was successful on the outside. But it was a money grave and I saw countless open-source projects fail because of the same dilemma: Not enough time and not enough financial stability for the maintainer to keep it going. I wasn’t ready for yet another time and/or money grave.
 
-(image: zootool.png)
+(image: zootool.png alt: Website of Zootool)
 
 I was a big fan of (link: https://shauninman.com/pendium/ text: Shaun Inman) – a designer and self-taught developer from the US. He was the creator of a fantastic little self-hosted analytics tool called (link: https://haveamint.com text: Mint) and an RSS reader called (link: https://feedafever.com/ text: Fever). The idea of selling neatly packaged web apps seemed really appealing but wasn’t very common. He sold his apps for $30 per license and seemed to be quite successful with this approach.
 
-(image: mint.png link: https://haveamint.com)
+(image: mint.png link: https://haveamint.com text: Website of Mint)
 
 So I spent the rest of 2011 building more early Kirby projects and testing the system with roughly 100 beta testers. I created a simple logo and a website and tried to figure out how to sell this thing online – wondering if anyone would ever buy it.
 
@@ -45,4 +45,3 @@ My favourite support email arrived shortly after the launch:
 > Is it true that I have to pay for Kirby?<br>If yes, you just lost a customer!
 
 I should have framed this.
-

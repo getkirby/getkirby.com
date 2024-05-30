@@ -32,7 +32,7 @@
 	<header class="h1 mb-24 text-center">
 		<h1 class="mb-12">10 years and counting …<h1>
 		<div class="w-full px-12">
-			<img class="mx-auto bg-black rounded shadow-xl" style="width: auto; --aspect-ratio: 2400/588" src="<?= image('versions.png')->url() ?>">
+			<img class="mx-auto bg-black rounded shadow-xl" style="width: auto; --aspect-ratio: 2400/588" src="<?= image('versions.png')->url() ?>" alt="Screenshots of the Panel of Kirby 1, 2 and 3 compared to each other">
 		</div>
 	</header>
 

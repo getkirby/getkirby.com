@@ -27,9 +27,9 @@
 			<?= $page->togglesWithLabelsAndIcons()->kt() ?>
 		</div>
 
-		<div class="release-box bg-light grid items-center" style="--span: 2" alt="The toggles can be just icons and have the label text as title attribute on the label in this case">
+		<div class="release-box bg-light grid items-center" style="--span: 2">
 			<figure style="--aspect-ratio: 800/500">
-				<img src="<?= ($image = $page->image('toggles-icons.png'))->url() ?>" loading="lazy">
+				<img src="<?= ($image = $page->image('toggles-icons.png'))->url() ?>" loading="lazy" alt="The toggles can be just icons and have the label text as title attribute on the label in this case">
 			</figure>
 		</div>
 

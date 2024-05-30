@@ -4,7 +4,7 @@
 			<article class="flex flex-column" style="height: 100%">
 				<figure class="bg-light">
 					<?php if ($card = $plugin->card()) : ?>
-						<img src="<?= $card->url() ?>" style="--aspect-ratio: 2/1; object-fit: contain;">
+						<img src="<?= $card->url() ?>" style="--aspect-ratio: 2/1; object-fit: contain;" alt="">
 					<?php elseif ($plugin->preview()->isNotEmpty()) : ?>
 						<div style="--aspect-ratio: 2/1; background: #000; overflow:hidden">
 							<div class="flex items-center justify-center <?= ($columns ?? 3) === 3 ? ' text-xs' : '' ?>">

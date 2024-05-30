@@ -37,9 +37,7 @@
 	</header>
 
 	<div class="map rounded mb-1">
-		<iframe src="https://community.getkirby.com/map"></iframe>
+		<iframe title="Community map" src="https://community.getkirby.com/map"></iframe>
 	</div>
 	<p><a class="text-sm underline flex items-center" style="gap: var(--spacing-2)" href="https://community.getkirby.com" target="_blank"><?= icon('window') ?> community.getkirby.com</a></p>
 </section>
-
-

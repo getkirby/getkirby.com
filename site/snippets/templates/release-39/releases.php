@@ -56,7 +56,7 @@
 			<figcaption>
 				<a href="https://kql.getkirby.com">https://kql.getkirby.com</a>
 			</figcaption>
-			<a href="https://kql.getkirby.com"><img src="<?= image('kql.png')->url() ?>"></a>
+			<a href="https://kql.getkirby.com"><img alt="Screenshot of the KQL playground" src="<?= image('kql.png')->url() ?>"></a>
 		</figure>
 
 		<div class="columns" style="--columns: 3">

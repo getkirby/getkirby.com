@@ -24,4 +24,4 @@ Those led to various private and public workshops in the following years, such a
 
 Then one day, we received an image from Net magazine. Their CMS survey went really well for us. We will not question their scientific methods.
 
-(image: netmag.jpg)
+(image: netmag.jpg alt: Page in the Net magazine with a pie chart, showing 5% market share of Kirby)
