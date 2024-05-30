@@ -6,6 +6,7 @@
 }
 
 .avatar {
+	color: var(--color-gray-800);
 	background: var(--color-light);
 	display: flex;
 	padding: .5rem;

@@ -10,7 +10,7 @@
 		<li class="bg-light rounded p-6">
 			<a href="<?= $resource->url() ?>">
 				<h3 class="font-bold link"><?= $resource->title() ?></h3>
-				<p class="color-gray-700 text-sm"><?= $resource->description() ?></p>
+				<p class="color-gray-800 text-sm"><?= $resource->description() ?></p>
 			</a>
 		</li>
 		<?php endforeach ?>

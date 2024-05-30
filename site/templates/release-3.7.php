@@ -21,6 +21,7 @@
 }
 .release-padded-box,
 .release-text-box {
+	color: var(--color-gray-800);
 	padding: var(--spacing-6);
 }
 .release-text-box {
@@ -30,6 +31,10 @@
 .release-text-box h3 {
 	font-weight: var(--font-bold);
 	font-size: var(--text-lg);
+}
+.release-padded-box .prose,
+.release-text-box .prose {
+	color: inherit;
 }
 .release-text-box .prose {
 	font-size: var(--text-lg);

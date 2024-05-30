@@ -232,42 +232,42 @@
 	<div class="columns" style="--gap: var(--spacing-12)">
 		<article style="--span: 4">
 			<h3 class="h3 mb-3">More new features</h3>
-			<div class="prose text-sm">
+			<div class="prose color-gray-800 text-sm">
 				<?= $page->features()->kt() ?>
 			</div>
 		</article>
 		<article style="--span: 4">
 			<h3 class="h3 mb-3">Enhancements</h3>
-			<div class="prose text-sm">
+			<div class="prose color-gray-800 text-sm">
 				<?= $page->enhancements()->kt() ?>
 			</div>
 		</article>
 		<article style="--span: 4">
 			<h3 class="h3 mb-3">Bug fixes</h3>
-			<div class="prose text-sm">
+			<div class="prose color-gray-800 text-sm">
 				<?= $page->bugs()->kt() ?>
 			</div>
 		</article>
 		<article style="--span: 12">
 			<h3 class="h3 mb-6">Breaking changes</h3>
 			<div class="columns" style="--columns: 2; --gap: var(--spacing-12)">
-				<div class="prose text-sm">
+				<div class="prose color-gray-800 text-sm">
 					<?= $page->breaking()->kt() ?>
 				</div>
-				<div class="prose text-sm">
+				<div class="prose color-gray-800 text-sm">
 					<?= $page->deprecated()->kt() ?>
 				</div>
 			</div>
 		</article>
 		<article style="--span: 6">
 			<h3 class="h3 mb-3">Stats</h3>
-			<div class="prose text-sm">
+			<div class="prose color-gray-800 text-sm">
 				<?= $page->stats()->kt() ?>
 			</div>
 		</article>
 		<article style="--span: 6">
 			<h3 class="h3 mb-3">Thank you</h3>
-			<div class="prose text-sm">
+			<div class="prose color-gray-800 text-sm">
 				<?= $page->thanks()->kt() ?>
 			</div>
 		</article>

@@ -8,42 +8,42 @@
 		<div class="columns" style="--columns: 2; --gap: var(--spacing-1)">
 			<div class="highlight bg-light">
 				<h3 class="h3 mb-6">Features</h3>
-				<div class="prose text-sm">
+				<div class="prose color-gray-800 text-sm">
 					<?= $section->features()->kt() ?>
 				</div>
 			</div>
 
 			<div class="highlight bg-light">
 				<h3 class="h3 mb-6">Enhancements</h3>
-				<div class="prose text-sm">
+				<div class="prose color-gray-800 text-sm">
 					<?= $section->enhancements()->kt() ?>
 				</div>
 			</div>
 
 			<div class="highlight bg-light">
 				<h3 class="h3 mb-6">Bug fixes</h3>
-				<div class="prose text-sm">
+				<div class="prose color-gray-800 text-sm">
 					<?= $section->fixes()->kt() ?>
 				</div>
 			</div>
 
 			<div class="highlight bg-light">
 				<h3 class="h3 mb-6">Breaking changes</h3>
-				<div class="prose text-sm">
+				<div class="prose color-gray-800 text-sm">
 					<?= $section->breaking()->kt() ?>
 				</div>
 			</div>
 
 			<div class="highlight bg-light">
 				<h3 class="h3 mb-6">Refactoring</h3>
-				<div class="prose text-sm">
+				<div class="prose color-gray-800 text-sm">
 					<?= $section->refactoring()->kt() ?>
 				</div>
 			</div>
 
 			<div class="highlight bg-light">
 				<h3 class="h3 mb-6">Deprecated</h3>
-				<div class="prose text-sm">
+				<div class="prose color-gray-800 text-sm">
 					<?= $section->deprecated()->kt() ?>
 				</div>
 			</div>

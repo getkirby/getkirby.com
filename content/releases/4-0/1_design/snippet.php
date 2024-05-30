@@ -10,7 +10,7 @@
 	border-radius: var(--spacing-2);
 	font-size: var(--text-xs);
 	font-family: var(--font-mono);
-	color: var(--color-text-dimmed);
+	color: var(--color-gray-800);
 }
 .v4-design-features :where(li, a) {
 	display: flex;
@@ -99,4 +99,3 @@
 		<source src="<?= $section->file('panel.mp4')->url() ?>" type="video/mp4">
 	</video>
 </figure>
-

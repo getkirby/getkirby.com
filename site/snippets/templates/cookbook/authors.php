@@ -14,7 +14,7 @@
 					<figcaption class="p-6 text-sm leading-tight" style="--span: 5">
 						<div class="mb-6">
 							<p class="h4 font-bold"><?= $author->title() ?></p>
-							<p class="mb-1 color-gray-700"><?= $author->bio() ?></p>
+							<p class="mb-1 color-gray-800"><?= $author->bio() ?></p>
 
 							<?php if ($author->website()->isNotEmpty()): ?>
 								<a href="<?= $author->website() ?>">

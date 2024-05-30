@@ -80,7 +80,7 @@
 						<div class="search-byline text-xs color-gray-700">
 							<?= $result->byline() ?? $result->intro() ?>
 						</div>
-						<div class="search-link text-xs font-mono color-gray-500">
+						<div class="search-link text-xs font-mono color-gray-600">
 							<?= $result->objectID() ?>
 						</div>
 					</div>
