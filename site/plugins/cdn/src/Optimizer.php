@@ -11,6 +11,27 @@ class Optimizer
 	}
 
 	/**
+	 * Replaces the file path with its dist equivalent
+	 * if it exists and if in CDN mode
+	 */
+	public function distPath(string $path): string
+	{
+		if ($this->cdn === false) {
+			return $path;
+		}
+
+		if (substr($path, 0, 7) === 'assets/') {
+			$distPath = 'assets/dist/' . substr($path, 7);
+
+			if (static::root($distPath) !== null) {
+				return $distPath;
+			}
+		}
+
+		return $path;
+	}
+
+	/**
 	 * Adds or injects the file modification time into
 	 * the path if the file exists
 	 */

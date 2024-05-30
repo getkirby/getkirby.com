@@ -49,6 +49,7 @@ App::plugin('getkirby/cdn', [
 				$optimizer = new Optimizer($cdn);
 
 				$path = ltrim($path, '/');
+				$path = $optimizer->distPath($path);
 				$path = $optimizer->cachebust($path);
 
 				if ($cdn === true) {
