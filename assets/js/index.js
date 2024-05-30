@@ -7,11 +7,12 @@ window.debounce = (callback, delay) => {
 };
 
 import "./polyfills/dialog.js";
-import "./components/lightbox.js";
 import Code from "./components/code.js";
+import Lightbox from "./components/lightbox.js";
 import Menu from "./components/menu.js";
 import Search from "./components/search.js";
 
 new Code();
+new Lightbox();
 new Menu();
 new Search();
