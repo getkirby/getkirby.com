@@ -21,6 +21,7 @@
 						'src' => [
 							'width' => 1280
 						],
+						'lazy' => false,
 						'srcset' => [
 							320,
 							640,

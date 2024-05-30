@@ -43,6 +43,7 @@
 						'src' => [
 							'width'  => 1000,
 						],
+						'lazy' => false,
 						'srcset' => [
 							'1x' => [
 								'width'  => 1000
