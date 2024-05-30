@@ -14,38 +14,14 @@ extract([
 <title><?= $page->isHomePage() ? $page->title() : $page->title() . ' | ' . $site->title() ?></title>
 
 <link rel="preload" href="<?= url('/assets/css/index.css') ?>" as="style">
-<link rel="modulepreload" href="<?= url('/assets/js/polyfills/dialog.js') ?>">
-<link rel="modulepreload" href="<?= url('/assets/js/components/code.js') ?>">
-<link rel="modulepreload" href="<?= url('/assets/js/components/lightbox.js') ?>">
-<link rel="modulepreload" href="<?= url('/assets/js/components/menu.js') ?>">
-<link rel="modulepreload" href="<?= url('/assets/js/components/search.js') ?>">
-
-<script type="module">
-	window.debounce = (callback, delay) => {
-		let timeout;
-		return () => {
-			clearTimeout(timeout);
-			timeout = setTimeout(callback, delay);
-		}
-	}
-
-	import "<?= url('/assets/js/polyfills/dialog.js') ?>";
-	import Code from "<?= url('/assets/js/components/code.js') ?>";
-	import Menu from "<?= url('/assets/js/components/menu.js') ?>";
-	import Search from "<?= url('/assets/js/components/search.js') ?>";
-
-	new Code();
-	new Menu();
-	new Search();
-</script>
-
-<?= js('assets/js/components/lightbox.js') ?>
-
 <?php if($page->id() === 'buy'): ?>
 <link rel="preload" href="<?= url('buy/prices') ?>" as="fetch" />
 <?php endif ?>
 
 <?= css('assets/css/index.css') ?>
+<?= js('assets/js/index.js', [
+	'type' => 'module'
+]) ?>
 
 <link rel="icon" type="image/png" href="<?= url('/assets/images/favicon.png') ?>">
 <link rel="icon" type="image/svg+xml" href="<?= url('/assets/images/favicon.svg') ?>">
