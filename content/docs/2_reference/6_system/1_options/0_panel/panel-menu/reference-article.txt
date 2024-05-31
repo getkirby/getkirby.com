@@ -14,9 +14,9 @@ To allow a very customized and intuitive Panel user interface for your editors, 
 
 ## Select which entries
 
-When you set the `panel.menu` option, all main menu entries will replaced by your configuration. You need to explicitly list all items you want in the menu.
+When you set the `panel.menu` option, all main menu entries will be replaced by your configuration. You need to explicitly list all items you want in the menu.
 
-You can include any default Panel area (`site`, `users`, `languages` and `system`) as well as (link: docs/reference/plugins/extensions/panel-areas text: your custom Panel areas) by naming them. The order in the config option determines their position on the menu.
+You can include any default Panel area (`site`, `users`, `languages` and `system`) as well as (link: docs/reference/plugins/extensions/panel-areas text: your custom Panel areas) by naming them. The order in the config option determines their position in the menu.
 
 ```php "/site/config/config.php"
 return [
@@ -37,7 +37,7 @@ The auth-related menu entries (changes, account and logout) as well as the searc
 
 ## Customize default entries
 
-If you don't just want to include the default Panel areas, you can extend/modify them by naming it and passing options that should overwrite the defaults (customizing the label for `site` in the example):
+If you don't just want to include the default Panel areas, you can extend/modify them by naming them and passing options that should overwrite the defaults (customizing the label for `site` in the example):
 
 ```php "/site/config/config.php"
 return [
@@ -53,7 +53,7 @@ return [
 
 ## Create your own entry
 
-When creating your own entry, include an `icon` and `label` as well as a `link` .
+When creating your own entry, include an `icon` and `label` as well as a `link`.
 
 ```php "/site/config/config.php"
 return [
@@ -72,7 +72,7 @@ return [
 
 ### Open dialogs and drawers
 
-Instead of a link you can also add either a `dialog` or `drawer` which will then be opened.
+Instead of a link, you can also add either a `dialog` or `drawer` which will then be opened.
 
 ```php
 'notes' => [
@@ -94,7 +94,7 @@ However, you can also use this to open core dialogs: We want to add a menu entry
 ]
 ```
 
-This will open the page create dialog specifically for a new note. With the query parameters we set the parent for the name page (`/pages/notes`) and reference a view (`site`) and a section (`notes`). These are needed for the dialog to function. You will need to have this notes section in your site blueprint. The menu entry basically mirrors the create button from that section.
+This will open the page create dialog specifically for a new note. With the query parameters, we set the parent for the name page (`/pages/notes`) and reference a view (`site`) and a section (`notes`). These are needed for the dialog to function. You will need to have this notes section in your site blueprint. The menu entry basically mirrors the create button from that section.
 
 ### Access `$kirby`
 
@@ -121,7 +121,7 @@ The `current` callback can be used to add some logic for when your menu entry sh
 	'label' => 'Notes',
 	'link'  => 'pages/notes',
 	'current' => function (string $current): bool {
-		$path = Kirby\Cms\App::instance()->request()->path()->toString();
+		$path = Kirby\Cms\App::instance()->path();
 		return Str::contains($path, 'pages/notes');
 	}
 ]
@@ -135,7 +135,7 @@ When you add a menu entry that links to a page or file, you probably also want t
 		// the links of all your custom menu entries
 		$links = ['pages/notes', 'pages/albums'];
 
-		$path  = Kirby\Cms\App::instance()->request()->path();
+		$path  = Kirby\Cms\App::instance()->path();
 		return A::every($links, fn ($link) => Str::contains($path, $link))
   },
 ],
