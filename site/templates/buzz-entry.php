@@ -2,7 +2,7 @@
 
 <header class="mb-12 max-w-xl">
 	<div class="text-sm mb-1 color-gray-600"><?= $page->category()->widont() ?></div>
-	<h1 class="h1 mb-12"><?= $page->title()->widont() ?></h1>
+	<h1 class="h1 mb-12"><?= $page->title() ?></h1>
 
 	<p class="text-xl leading-snug">
 		<?= $page->intro()->widont() ?>
