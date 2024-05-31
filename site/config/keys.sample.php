@@ -9,6 +9,7 @@ return [
 	'github'    => '',
 	'hooks'     => '',
 	'hub'       => '',
+	'keycdn'    => '',
 	'mapbox'    => '',
 	'newstroll' => '',
 	'paddle'    => [
