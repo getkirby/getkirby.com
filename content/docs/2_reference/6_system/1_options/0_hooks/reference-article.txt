@@ -4,6 +4,8 @@ Intro: Hook into Kirby events and execute your functions in the background
 
 Text:
 
+There are two ways to register hooks: (link: docs/reference/plugins/extensions/hooks text: In a plugin) or in your `config.php`:
+
 ```php "/site/config/config.php"
 return [
   'hooks' => [
@@ -13,11 +15,10 @@ return [
   ]
 ];
 ```
-## More information
 
-In addition to registering hooks in the `config` file, you can also register them in plugins. In the plugin docs you will also find more detailed information about hooks.
-
-(link: docs/reference/plugins/extensions/hooks text: Register hooks in plugin)
+<info>
+Find **(link: docs/reference/plugins/extensions/hooks text: more detailed information about hooks)** and their usage in the corresponding plugin docs.
+</info>
 
 ## Available hooks
 

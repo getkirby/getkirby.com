@@ -7,9 +7,9 @@ Text:
 
 Kirby fires a bunch of events when important things happen in the background. For example when a page is being created or deleted or a file gets uploaded. You can hook into those events and add your own functions that will be executed when those events happen.
 
-Hooks are not restricted to Panel events, but are implemented  everywhere: hooks are called no matter if an event happens in the Panel, on the command line or in your own scripts.
+Hooks are not restricted to Panel events, but are implemented everywhere: most hooks are called no matter if an event happens in the Panel, on the command line or in your own scripts.
 
-Kirby provides two variants of each hook: `before` and `after` hooks.
+For many hooks, Kirby provides two variants of each hook: `before` and `after` hooks.
 
 ### `Before` hooks
 
@@ -89,7 +89,7 @@ Kirby::plugin('your/plugin', [
 ]);
 ```
 
-### Wildcard hooks
+## Wildcard hooks
 
 If you want to register the same hook for multiple events, you can register a wildcard hook (either in your config or in a plugin):
 
