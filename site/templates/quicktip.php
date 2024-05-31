@@ -1,7 +1,7 @@
 <?php layout('cookbook') ?>
 
 <?php slot('h1') ?>
-<?= $page->title()->widont() ?>
+<?= $page->title() ?>
 <?php endslot() ?>
 
 <?php slot('sidebar') ?>
