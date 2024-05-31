@@ -15,13 +15,19 @@ Many code editors and IDEs offer support for code completion suggestions or show
 Kirby exposes some general variables like `$page`, `$site` etc. to your templates as well as anything (link: docs/guide/templates/controllers text: returned in the page controller). Your IDE however does not automatically know what these variables stand for. You can change this by adding comments specifying their types:
 
 ```php "site/templates/note.php"
-/** @var Kirby\Cms\App $kirby */
-/** @var Kirby\Cms\Site $site */
-/** @var Kirby\Cms\Page $page */
+<?php
+/**
+ * @var Kirby\Cms\App $kirby
+ * @var Kirby\Cms\Site $site
+ * @var Kirby\Cms\Page $page
+ */
+?>
 
-foreach ($page->children() as $child) {
-	echo $child->id()
-}
+<ul>
+  <?php foreach ($page->children() as $child): ?>
+  	<li><?= $child->title() ?></li>
+  <?php endforeach ?>
+</ul>
 ```
 
 Your IDE can now infer that `$child` is also a `Kirby\Cms\Page` object.
@@ -41,7 +47,7 @@ use Kirby\Cms\Site;
 
 return function (Site $site, Page $page, Pages $pages, App $kirby) {
     // ...
-}
+};
 ```
 
 ## Page models
@@ -62,7 +68,7 @@ class NotePage extends Page
 
 ----
 
-Published: 2024-05-27
+Published: 2024-06-03
 
 ----
 
