@@ -2,9 +2,7 @@ Auth: site.update
 
 ----
 
-Text:
-
-## Example
+Example:
 
 ```php
 try {

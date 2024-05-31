@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 <?php foreach($site->code()->filterBy('extension', 'css') as $css): ?>

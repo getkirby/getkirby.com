@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Example:
 
 ```php
 <h2>Random subpages</h2>

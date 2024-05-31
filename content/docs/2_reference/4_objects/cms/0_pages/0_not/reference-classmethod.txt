@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Example:
 
 Note that you have to pass the full [`id`](/docs/reference/objects/page/id) as parameter:
 

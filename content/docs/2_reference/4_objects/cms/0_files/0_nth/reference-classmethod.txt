@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 <?= $page->files()->nth(3)->filename() ?>

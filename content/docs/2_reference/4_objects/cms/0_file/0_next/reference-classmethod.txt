@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 if(($file = $page->file('my-file.pdf')) && $next = $file->next()):

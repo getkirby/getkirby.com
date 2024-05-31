@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 if($image = $page->image()):

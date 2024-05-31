@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Example:
 
 ```php
 <!-- group the collection by the field `category` -->

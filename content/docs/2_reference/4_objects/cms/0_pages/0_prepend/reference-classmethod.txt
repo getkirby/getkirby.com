@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 $collection = page('projects')->children()->limit(1);

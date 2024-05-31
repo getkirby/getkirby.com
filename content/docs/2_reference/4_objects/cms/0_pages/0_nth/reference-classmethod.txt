@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 // echo the title of the 4th subpage

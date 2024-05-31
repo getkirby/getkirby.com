@@ -1,9 +1,8 @@
 Guide: templates/collections
 
 ----
-Text:
 
-## Example
+Example:
 
 Call a predefined collection by key:
 

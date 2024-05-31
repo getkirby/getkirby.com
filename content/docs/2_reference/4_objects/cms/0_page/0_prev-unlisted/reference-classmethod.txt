@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 <?php if($prev = $page->prevUnlisted()): ?>

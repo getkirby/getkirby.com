@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 // goes through any subpage, subsubpage, etc. below $page and returns them by template

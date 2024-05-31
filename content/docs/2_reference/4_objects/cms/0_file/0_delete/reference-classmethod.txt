@@ -2,9 +2,7 @@ Auth: files.delete
 
 ----
 
-Text:
-
-## Example
+Example:
 
 ```php
 if($file = $page->file('old-file.pdf')) {

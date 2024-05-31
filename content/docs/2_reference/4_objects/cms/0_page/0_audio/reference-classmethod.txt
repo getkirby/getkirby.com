@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ```php
 <h2>Songs</h2>
@@ -13,7 +11,7 @@ Text:
 
 ## What is an audio file?
 
-Kirby considers the following file types as audio files: 
+Kirby considers the following file types as audio files:
 
 - mp3
 - m4a

@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 ### A custom title for the homepage
 

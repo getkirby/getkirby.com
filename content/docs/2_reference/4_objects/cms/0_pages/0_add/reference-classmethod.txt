@@ -1,6 +1,4 @@
-Text:
-
-## Examples
+Example:s
 
 ### Add single page by ID
 

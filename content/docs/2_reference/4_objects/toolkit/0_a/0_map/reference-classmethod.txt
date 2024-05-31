@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Example:
 
 ```php
 // why this weird, inconsistent argument order?

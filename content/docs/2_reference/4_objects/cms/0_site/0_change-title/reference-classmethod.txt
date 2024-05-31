@@ -1,9 +1,7 @@
 Auth: site.changeTitle
 
 ----
-Text:
-
-## Example
+Example:
 
 ```php
 <?php

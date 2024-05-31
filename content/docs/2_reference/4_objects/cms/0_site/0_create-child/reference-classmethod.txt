@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Example:
 
 Programmatically create a new page as child of the `$site` object.
 
