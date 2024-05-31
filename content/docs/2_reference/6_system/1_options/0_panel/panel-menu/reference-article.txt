@@ -6,10 +6,12 @@ Intro: Option to customize the Panel menu
 
 ----
 
+Since: 4.0.0
+
+----
+
 Text:
 
-
-<since v="4.0.0">
 To allow a very customized and intuitive Panel user interface for your editors, it can make sense to alter the entries displayed Panel menu. This can be done via the `panel.menu` config option.
 
 ## Select which entries
@@ -140,4 +142,3 @@ When you add a menu entry that links to a page or file, you probably also want t
   },
 ],
 ```
-</since>
