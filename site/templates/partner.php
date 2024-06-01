@@ -49,7 +49,21 @@
 <div class="partner-grid columns mb-24">
 	<figure style="--aspect-ratio: 3/2;" class="partner-hero mb-3">
 		<?php if ($image = $page->card()): ?>
-			<?= $image->resize(1600) ?>
+			<?= img($image, [
+				'alt' => '',
+				'src' => [
+					'width' => 1000
+				],
+				'lazy' => false,
+				'sizes' => '(max-width: 1020px) 90vw, 55vw',
+				'srcset' => [
+					300,
+					500,
+					768,
+					1000,
+					1536
+				]
+			]) ?>
 		<?php elseif ($image = $page->avatar()): ?>
 			<span class="p-6 bg-light">
 				<img
@@ -130,7 +144,19 @@
 							<a href="<?= $project->link() ?>" target="_blank">
 								<div style="--aspect-ratio: 3/4" class="bg-light mb-6 shadow-lg">
 									<?php if ($image = $project->image()): ?>
-										<?= $image->name() === 'example' ? $image : $image->resize(800) ?>
+										<?= $image->name() === 'example' ? $image : img($image, [
+											'alt' => '',
+											'src' => [
+												'width' => 702
+											],
+											'sizes' => '(max-width: 640px) 85vw, 25vw',
+											'srcset' => [
+												352,
+												550,
+												702,
+												1100,
+											]
+										]) ?>
 									<?php endif ?>
 								</div>
 								<figcaption class="font-mono text-sm mb-3">
