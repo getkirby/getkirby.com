@@ -1,0 +1,21 @@
+Guide: configuration
+
+----
+
+Text:
+
+## Example
+
+```php "site/config/config.php"
+
+return [
+	'my' => [
+		'option' => 'foo'
+	]
+];
+```
+
+```php
+$kirby->option('my.option') // 'foo'
+$kirby->option('another.option', 'my fallback') // 'my fallback'
+```

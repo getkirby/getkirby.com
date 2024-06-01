@@ -18,20 +18,18 @@ Text:
 
 ## The `config.php`
 
-General Kirby configuration settings and configuration settings for plugins go into `/site/config/config.php`. The config file contains a return statement with an array of config options:
+General Kirby configuration settings, configuration settings for plugins as well as custom configuration settings go into `/site/config/config.php`. The config file contains a return statement with an array of config options:
 
 ```php "/site/config/config.php"
 <?php
 
 return [
-    'debug'  => true,
+    'debug'            => true,
     'someOtherSetting' => 'something'
 ];
 ```
 
-<warning>
 Make sure to only use a single return statement in your `config.php` file (with all your options defined in that one return array).
-</warning>
 
 <warning>
 Since Kirby is not being fully initialized yet when reading the configuration, you cannot use the `$kirby` object or `kirby()` helper in the `config.php`.
@@ -104,6 +102,21 @@ Or with the `option` helper:
 
 ```php
   option('someOtherSetting');
+```
+
+You can use dot notation to access nested config options:
+
+```php "site/config/config.php"
+
+return [
+	'my' => [
+		'option' => 'foo'
+	]
+];
+```
+
+```php
+$kirby->option('my.option')
 ```
 
 ### Fallbacks
