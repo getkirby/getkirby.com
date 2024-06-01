@@ -1,0 +1,9 @@
+Guide: files/resize-images-on-the-fly#thumbnail-storage
+
+----
+
+Text:
+<br>
+<info>
+By default, the results depends on the full file system path. If you want to have reliable results independent of the environment, make sure to set (link: docs/reference/system/options/content#salt-for-drafts-and-media-files text: `content.salt` option).
+</info>
