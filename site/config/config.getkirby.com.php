@@ -3,7 +3,7 @@
 return [
 	'cache' => require __DIR__ . '/cache.php',
 	'cdn' => [
-		'domain' => 'https://assets.getkirby.com',
+		'domain' => 'https://getkirby.com',
 	],
 	'debug' => false
 ];

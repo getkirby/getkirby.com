@@ -13,11 +13,6 @@ extract([
 
 <title><?= $page->isHomePage() ? $page->title() : $page->title() . ' | ' . $site->title() ?></title>
 
-<?php if (option('cdn', false) !== false) : ?>
-	<link rel="dns-prefetch" href="<?= option('cdn.domain') ?>">
-	<link rel="preconnect" href="<?= option('cdn.domain') ?>">
-<?php endif ?>
-
 <?php if($page->id() === 'buy'): ?>
 <link rel="preload" href="<?= url('buy/prices') ?>" as="fetch" />
 <?php endif ?>
