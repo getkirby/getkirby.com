@@ -70,7 +70,7 @@ Let's consider another example from our cookbook, the (link: docs/cookbook/navig
 ```php
 <?php if (!isset($subpages)) $subpages = $site->children(); ?>
 
-<?php foreach ($subpages->listed() as $p) : ?>
+<?php foreach ($subpages->listed() as $p): ?>
 
   <li class="depth-<?= $p->depth() ?><?= $p->depth() === 1 ? ' nav-item ' . $p->pageRootClass() : '' ?>
     <?= $p->hasListedChildren() && $p->depth() < 2 ? ' dropdown ' : '' ?>
@@ -80,7 +80,7 @@ Let's consider another example from our cookbook, the (link: docs/cookbook/navig
         <?= $p->hasListedChildren() && !$p->depth() < 2 ? ' dropdown-toggle ' : ' icon-arrow ' ?>" href="<?= $p->url() ?>">
       <?= $p->title() ?>
     </a>
-    <?php if ($p->hasListedChildren() && $p->depth() < 3) : ?>
+    <?php if ($p->hasListedChildren() && $p->depth() < 3): ?>
       <ul id="dropdown-<?= md5($p->url()) ?>" class="dropdown-menu
       <?= $p->hasListedChildren() && $p->depth() >= 2 ? ' submenu ' : '' ?>">
         <?php snippet('treemenu', ['subpages' => $p->children()]); ?>
@@ -97,7 +97,7 @@ We should therefore fix this and store the result of the queries in variables fi
 ```php
 <?php if (!isset($subpages)) $subpages = $site->children(); ?>
 
-<?php foreach ($subpages->listed() as $p) : ?>
+<?php foreach ($subpages->listed() as $p): ?>
   <?php
   $depth             = $p->depth();
   $hasListedChildren = $p->hasListedChildren()
@@ -110,7 +110,7 @@ We should therefore fix this and store the result of the queries in variables fi
     <?= $hasListedChildren && !$depth < 2 ? ' dropdown-toggle ' : ' icon-arrow ' ?>" href="<?= $p->url() ?>">
       <?= $p->title() ?>
     </a>
-    <?php if ($hasListedChildren && $depth < 3) : ?>
+    <?php if ($hasListedChildren && $depth < 3): ?>
       <ul id="dropdown-<?= md5($p->url()) ?>" class="dropdown-menu<?= $hasListedChildren && $depth >= 2 ? ' submenu ' : '' ?>">
         <?php snippet('treemenu', ['subpages' => $p->children()]); ?>
       </ul>

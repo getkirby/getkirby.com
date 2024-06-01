@@ -46,10 +46,10 @@ In the template:
 
 ```php
 <?php $menu = $site->mainMenu()->toPages(); ?>
-<?php if ($menu->isNotEmpty()) : ?>
+<?php if ($menu->isNotEmpty()): ?>
 <nav>
   <ul>
-    <?php foreach ($menu as $menuItem) : ?>
+    <?php foreach ($menu as $menuItem): ?>
     <li><a <?php e($menuItem->isOpen(), 'aria-current="page"') ?> href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a></li>
     <?php endforeach ?>
   </ul>
@@ -79,15 +79,15 @@ In the template, we can use it like this to render each menu with its headline:
 
 ```php
 <?php $menus = $site->menus()->toStructure(); ?>
-<?php if ($menus->isNotEmpty()) : ?>
-  <?php foreach ($menus as $menu) : ?>
+<?php if ($menus->isNotEmpty()): ?>
+  <?php foreach ($menus as $menu): ?>
 
     <?php $menuItems = $menu->menuItems()->toPages(); ?>
-    <?php if ($menuItems->isNotEmpty()) : ?>
+    <?php if ($menuItems->isNotEmpty()): ?>
     <nav class="footer-menu">
       <h4><?= $menu->menuHeadline()->html() ?></h4>
       <ul>
-        <?php foreach ($menuItems as $menuItem) : ?>
+        <?php foreach ($menuItems as $menuItem): ?>
           <li><a <?php e($menuItem->isOpen(), 'aria-current="page"') ?> href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a></li>
         <?php endforeach ?>
       </ul>
@@ -124,10 +124,10 @@ In the template:
 
 ```php
 <?php $menuItems = $site->mixedMenu()->toStructure(); ?>
-<?php if ($menuItems->isNotEmpty()) : ?>
+<?php if ($menuItems->isNotEmpty()): ?>
 <nav>
   <ul>
-    <?php foreach ($menuItems as $menuItem) : ?>
+    <?php foreach ($menuItems as $menuItem): ?>
       <li><a <?= ($p = $menuItem->link()->toPage()) && $p->isOpen() ? 'aria-current="page"' : '' ?> href="<?= $menuItem->link()->toUrl() ?>"><?= $menuItem->linkTitle()->or($menuItem->link()->html()) ?></a></li>
     <?php endforeach ?>
   </ul>
@@ -168,17 +168,17 @@ We can now render this menu in the template like this:
 ```php
 <?php
 $menu = $site->menu()->toStructure();
-if ($menu->isNotEmpty()) : ?>
+if ($menu->isNotEmpty()): ?>
 <nav>
   <ul>
     <?php foreach ($menu as $item): ?>
-      <?php if ($mainMenuItem = $item->mainMenu()->toPage()) : ?>
+      <?php if ($mainMenuItem = $item->mainMenu()->toPage()): ?>
       <li><a <?php e($mainMenuItem->isOpen(), 'aria-current="page"') ?> href="<?= $mainMenuItem->url() ?>"><?= $mainMenuItem->title() ?></a>
       <?php endif ?>
       <?php $subMenu = $item->subMenu()->toPages(); ?>
-      <?php if ($item->hasSubmenu()->isTrue() && $subMenu->isNotEmpty()) : ?>
+      <?php if ($item->hasSubmenu()->isTrue() && $subMenu->isNotEmpty()): ?>
         <ul class="submenu-list">
-          <?php foreach ($subMenu as $subItem) : ?>
+          <?php foreach ($subMenu as $subItem): ?>
           <li><a href="<?= $subItem->url() ?>"><?= $subItem->title() ?></a></li>
           <?php endforeach ?>
         </ul>
@@ -246,7 +246,7 @@ Let's see how we can handle this field definition in our template. To keep our c
 
 ```php
 <?php $items = $site->nestedMenu()->toStructure() ?>
-<?php if ($items->isNotEmpty()) : ?>
+<?php if ($items->isNotEmpty()): ?>
 <nav>
   <?php snippet('menuitem-list', ['items' => $items]) ?>
 </nav>
@@ -257,10 +257,10 @@ Inside the snippet, we recursively call the snippet for the submenu items:
 
 ```php "site/snippets/menuitem-list.php"
 <ul>
-	<?php foreach ($items as $item) : ?>
+	<?php foreach ($items as $item): ?>
 		<li><a href="<?= $item->link()->toUrl() ?>"><?= $item->linkTitle()->or($item->link()->html()) ?></a>
 			<?php $subMenuItems = $item->subMenu()->toStructure(); ?>
-			<?php if ($item->hasSubmenu()->isTrue() && $subMenuItems->isNotempty()) : ?>
+			<?php if ($item->hasSubmenu()->isTrue() && $subMenuItems->isNotempty()): ?>
 				<?php snippet('menuitem-list', ['items' => $subMenuItems]) ?>
 			<?php endif ?>
 		</li>

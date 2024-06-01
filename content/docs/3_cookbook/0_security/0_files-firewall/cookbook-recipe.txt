@@ -81,7 +81,7 @@ We also want a `downloads.php` template to list the uploaded files.
 <section>
   <h1 class="h1"><?= $page->title()->html() ?></h1>
   <ul class="file-list">
-    <?php foreach( $page->files()->template('protected') as $file ) : ?>
+    <?php foreach($page->files()->template('protected') as $file): ?>
       <li><a href="<?= $file->url() ?>"><?= $file->filename() ?></a></li>
     <?php endforeach ?>
   </ul>
@@ -274,4 +274,3 @@ Kirby::plugin('cookbook/files-firewall', [
 With a few lines of code, we were able to set up a basic files firewall where authorized users can download files while access to these file is prohibited for all other users.
 
 As always, there are many ways to refine this basic setup with more sophisticated conditions or make it configurable via the Panel, but you now know where to start from. Happy coding!
-

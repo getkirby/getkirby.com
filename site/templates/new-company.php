@@ -241,14 +241,14 @@ mark {
 		</ul>
 	</header>
 
-	<?php if (get('thank') === 'you') : ?>
+	<?php if (get('thank') === 'you'): ?>
 		<?php snippet('templates/new-company/thank-you') ?>
-	<?php else : ?>
+	<?php else: ?>
 		<?php snippet('templates/new-company/intro') ?>
 
-		<?php if ($email) : ?>
+		<?php if ($email): ?>
 			<?php snippet('templates/new-company/authenticated') ?>
-		<?php else : ?>
+		<?php else: ?>
 			<?php snippet('templates/new-company/unauthenticated') ?>
 		<?php endif ?>
 

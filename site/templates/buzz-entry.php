@@ -9,7 +9,7 @@
 	</p>
 </header>
 
-<?php if ($page->video()->isNotEmpty()) : ?>
+<?php if ($page->video()->isNotEmpty()): ?>
 	<figure class="rounded overflow-hidden mb-12 shadow-lg" style="--aspect-ratio: 800/400">
 		<?= video($page->video(), [
 			'youtube' => [
@@ -31,5 +31,3 @@
 
 	<?php snippet('templates/cookbook/authors', ['authors' => $authors]) ?>
 </article>
-
-

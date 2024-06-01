@@ -577,7 +577,7 @@ In our template, we can now call the `thumb()` method with any supported paramet
 <article>
   <h1 class="h1"><?= $page->title()->html() ?></h1>
     <ul style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
-    <?php foreach($page->files() as $file) : ?>
+    <?php foreach($page->files() as $file): ?>
     <li><?= $file->thumb(['w' => 500, 'h' => 500, 'fit' => 'crop', 'dpr' => 2, 'fm' => 'webp'])?></li>
     <?php endforeach ?>
     </ul>

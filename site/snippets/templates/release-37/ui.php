@@ -66,7 +66,7 @@
 		<div class="release-text-box">
 			<h3 class="mb-6">New icons</h3>
 			<ul class="columns" style="--columns: 1; --gap: var(--spacing-3)">
-				<?php foreach ($page->icons()->yaml() as $icon) : ?>
+				<?php foreach ($page->icons()->yaml() as $icon): ?>
 					<li class="flex items-center font-mono text-xs">
 						<svg class="mr-3" width="16" height="16">
 							<use href="#icon-<?= $icon ?>" />

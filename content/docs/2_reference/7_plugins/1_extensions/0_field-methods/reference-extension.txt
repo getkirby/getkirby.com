@@ -115,7 +115,7 @@ Field methods can also be used to make if clauses easier or return info about a 
 ### **Example**
 
 ```php
-<?php if ($page->title()->hasQuotes()) : ?>
+<?php if ($page->title()->hasQuotes()): ?>
 The title is wrapped in quotes.
 <?php endif ?>
 ```

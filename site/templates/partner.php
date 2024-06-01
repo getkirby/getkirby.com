@@ -124,7 +124,7 @@
 		<h2 class="h2 mb-12"><?= ucfirst($page->my()) ?> Kirby Projects</h2>
 		<section>
 			<div class="columns" style="--columns: 3; --gap: var(--spacing-24)">
-				<?php foreach ($page->children() as $project) : ?>
+				<?php foreach ($page->children() as $project): ?>
 					<article>
 						<figure>
 							<a href="<?= $project->link() ?>" target="_blank">

@@ -41,7 +41,7 @@ Kirby::plugin('your/plugin', [
 Once defined, you can use the collection in your templates using the [`collection()` helper](../helpers/collection).
 
 ```php "/site/templates/blog.php"
-<?php foreach (collection('articles') as $article) : ?>
+<?php foreach (collection('articles') as $article): ?>
   Author: <?= $article->author() ?>
   ...
 <?php endforeach ?>

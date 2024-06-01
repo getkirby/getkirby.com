@@ -30,11 +30,11 @@ extract([
 				<th>Name</th>
 				<th>Type</th>
 
-				<?php if ($hasDefaults) : ?>
+				<?php if ($hasDefaults): ?>
 				<th>Default</th>
 				<?php endif ?>
 
-				<?php if ($hasDescriptions) : ?>
+				<?php if ($hasDescriptions): ?>
 				<th>Description</th>
 				<?php endif ?>
 			</tr>
@@ -49,11 +49,11 @@ extract([
 				</td>
 				<td><?= Types::format($row['type']) ?></td>
 
-				<?php if ($hasDefaults) : ?>
+				<?php if ($hasDefaults): ?>
 				<td data-label="Default:"><?= Types::default($row['default']) ?></td>
 				<?php endif ?>
 
-				<?php if ($hasDescriptions) : ?>
+				<?php if ($hasDescriptions): ?>
 				<td><?= kti($row['description']) ?></td>
 				<?php endif ?>
 			</tr>

@@ -244,7 +244,7 @@ Kirby::plugin('k-cookbook/toc', [
 The code for the snippet goes into `/site/plugins/toc/snippets/toc.php`:
 
 ```php "/site/plugins/toc/snippets/toc.php"
-<?php if ($headlines->isNotEmpty()) : ?>
+<?php if ($headlines->isNotEmpty()): ?>
   <nav class="toc">
 
     <h2>Table of Contents</h2>
@@ -319,7 +319,7 @@ fields:
 You could also only show the ToC if there is at least a given number of headlines by slightly modifying the `toc.php` snippet, for example, if there are at least 3 headlines:
 
 ```php "/site/plugins/toc/snippets/toc.php"
-<?php if ($headlines->count() >= 3) : ?>
+<?php if ($headlines->count() >= 3): ?>
   <nav class="toc">
 
     <h2>Table of Contents</h2>
@@ -346,7 +346,7 @@ $headlines = $page->text()->toBlocks()->filterBy('type', 'heading')->filterby('l
 Then create the ToC snippet like this:
 
 ```php "/site/plugins/toc/snippets/toc.php"
-<?php if ($headlines->count() >= 3) : ?>
+<?php if ($headlines->count() >= 3): ?>
   <nav class="toc">
     <h2>Table of Contents</h2>
     <ol>

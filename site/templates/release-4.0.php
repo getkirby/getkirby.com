@@ -63,7 +63,7 @@ mark {
 </header>
 
 <article class="release-wrapper">
-	<?php foreach ($sections as $section) : ?>
+	<?php foreach ($sections as $section): ?>
 		<?php snippet([
 			'templates/release-40/' . $section->slug(),
 			'templates/release-40/section'

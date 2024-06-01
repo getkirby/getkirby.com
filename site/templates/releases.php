@@ -6,7 +6,7 @@
 	</header>
 
 	<ul class="columns mb-24" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 3; --gap: var(--spacing-12)">
-		<?php foreach ($page->children()->flip() as $release) : ?>
+		<?php foreach ($page->children()->flip() as $release): ?>
 			<li>
 				<a href="<?= $release->releasePage()->or($release->url()) ?>" class="block mb-1">
 					<header class="mb-3">
@@ -35,7 +35,7 @@
 				</div>
 				<?php
 				$subreleases = $kirby->option('versions')[$release->version()->value()]['subreleases'];
-			if (count($subreleases) > 0) :
+			if (count($subreleases) > 0):
 				?>
 				<div class="prose">
 					<div class="h5 mb-4 color-black">Further releases</div>

@@ -46,7 +46,7 @@ foreach($years as $year => $itemsPerYear): ?>
     <ul>
       <?php
       // then we loop through all the items for each year
-      foreach($itemsPerYear as $item) : ?>
+      foreach($itemsPerYear as $item): ?>
       <li><?= $item->title() ?></li>
       <?php endforeach; ?>
     </ul>
@@ -75,7 +75,7 @@ $groupedItems = page('projects')->children()->listed()->group($callback);
 foreach($groupedItems as $year => $itemsPerYear): ?>
     <h2><?= $year ?></h2>
     <ul>
-      <?php foreach($itemsPerYear as $item) : ?>
+      <?php foreach($itemsPerYear as $item): ?>
       <li><?= $item->title() ?></li>
       <?php endforeach; ?>
     </ul>

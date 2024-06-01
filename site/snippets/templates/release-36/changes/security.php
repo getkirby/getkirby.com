@@ -1,4 +1,4 @@
-<?php if ($section = $page->find('changes/security')) : ?>
+<?php if ($section = $page->find('changes/security')): ?>
 	<section id="changes-security" class="mb-42">
 
 		<?php snippet('templates/features/intro', [

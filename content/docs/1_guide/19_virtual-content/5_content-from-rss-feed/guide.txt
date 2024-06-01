@@ -46,15 +46,15 @@ class RssfeedPage extends Page {
 
         $results = [];
         $pages   = [];
-        
+
         // use the URL of the feed you want to fetch
         $request = Remote::get('https://open.nytimes.com/feed');
-        
+
         // if the request was sucessfully, parse feed as $results
         if ($request->code() === 200) {
             $results = Xml::parse($request->content());
         }
-        
+
         // if we have any results, create the child page props for each result
         if (count($results) > 0) {
             foreach ($results['channel']['item'] as $item) {
@@ -75,7 +75,7 @@ class RssfeedPage extends Page {
                 ];
             }
         }
-        
+
         // create a Pages collection for the child pages
         return $this->children = Pages::factory($pages, $this);
     }
@@ -132,7 +132,7 @@ Each article will automatically get its own subpage. Routing will work out of th
     <header class="article-header">
       <h1><?= $page->title() ?></h1>
       <time><?= $page->date()->toDate('d F Y') ?></time>
-      <?php if ($page->categories()->isNotEmpty()) : ?>
+      <?php if ($page->categories()->isNotEmpty()): ?>
         <p class="tags"><?= $page->categories() ?></p>
       <?php endif ?>
     </header>

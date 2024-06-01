@@ -1,4 +1,3 @@
-
 Title: One pager
 
 ----
@@ -39,7 +38,7 @@ sections:
 
 ```php "/site/templates/one-page.php"
 <main>
-  <?php foreach ($page->children()->listed() as $part) : ?>
+  <?php foreach ($page->children()->listed() as $part): ?>
     <section class="<?= $part->intendedTemplate() ?>">
       <?php snippet($part->intendedTemplate(), compact('part')) ?>
     </section>
@@ -127,5 +126,3 @@ fields:
 ```
 
 (image: video.png)
-
-

@@ -120,7 +120,7 @@ Here is the complete template:
     <header class="note-header intro">
       <h1><?= $page->title() ?></h1>
       <time class="note-date"><?= $page->date()->toDate('d F Y') ?></time>
-      <?php if ($page->tags()->isNotEmpty()) : ?>
+      <?php if ($page->tags()->isNotEmpty()): ?>
       <p class="note-tags tags"><?= $page->tags() ?></p>
       <?php endif ?>
     </header>
@@ -152,4 +152,3 @@ Instead of using manual page breaks, you could split your text by other criteria
 Or you could add a little table of contents on each page.
 
 You can also extend the pagination navigation and add a numbered link for each page, making use of the `$pagination->range()` method. You can find an example in our (link: docs/cookbook/navigation/pagination text: pagination recipe).
-

@@ -1,9 +1,9 @@
-Text: 
+Text:
 
 ## Examples
 
 ```php
-<?php foreach($pages->files() as $file) : ?>
+<?php foreach($pages->files() as $file): ?>
   <img src="<?= $file->url() ?>">
 <?php endforeach ?>
 ```

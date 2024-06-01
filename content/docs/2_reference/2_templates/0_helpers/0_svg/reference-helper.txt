@@ -7,8 +7,7 @@ Text:
 In addition to a string parameter you can also add a file object:
 
 ```php
-<?php if ($file = $page->files()->filterBy('extension', 'svg')->first()) :?>
+<?php if ($file = $page->files()->filterBy('extension', 'svg')->first()): ?>
 <?= svg($file) ?>
 <?php endif ?>
 ```
-

@@ -29,7 +29,7 @@
 			</fieldset>
 		</header>
 		<div class="columns rounded overflow-hidden" style="--columns-md: 3; --columns: 3; --gap: var(--spacing-3)">
-			<?php foreach ($discounts as $volume => $discount) : ?>
+			<?php foreach ($discounts as $volume => $discount): ?>
 				<div class="block p-12 bg-light rounded text-center" >
 					<article>
 						<h3 class="mb text-sm">

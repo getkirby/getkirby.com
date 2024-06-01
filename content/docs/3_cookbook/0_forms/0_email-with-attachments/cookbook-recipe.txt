@@ -76,7 +76,7 @@ The template contains the form and will display error messages if something goes
 
         <?php
         // if the form input is not valid, show a list of alerts
-        if ($alerts) : ?>
+        if ($alerts): ?>
         <div class="alert">
             <ul>
             <?php foreach ($alerts as $message): ?>
@@ -488,4 +488,3 @@ You can of course extend this example:
 - Progressively enhance with JavaScript validation.
 - Integrate other field types.
 - …
-

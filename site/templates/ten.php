@@ -37,7 +37,7 @@
 		</div>
 	</header>
 
-	<?php foreach ($page->children() as $year) : ?>
+	<?php foreach ($page->children() as $year): ?>
 		<section id="<?= $year->slug() ?>" class="py-12 columns mb-12" style="--columns: 12">
 			<div style="--span: 2">
 				<datetime class="sticky link font-mono text-sm" style="--top: var(--spacing-12)">

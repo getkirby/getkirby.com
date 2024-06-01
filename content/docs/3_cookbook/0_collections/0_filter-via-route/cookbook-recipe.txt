@@ -177,21 +177,20 @@ Here we use the `urldecode()`d page slug as our filter value.
 
 ```php "/site/templates/tag.php"
 <?php snippet('header') ?>
-<?php if ($articles->isNotEmpty()) : ?>
-    <?php foreach ($articles as $article) : ?>
+<?php if ($articles->isNotEmpty()): ?>
+    <?php foreach ($articles as $article): ?>
         <article>
             <h2><?= $article->title()->html() ?></h2>
             <?= $article->text()->kt() ?>
             <ul>
-            <?php foreach ($page->tags()->split(',') as $tag) : ?>
+            <?php foreach ($page->tags()->split(',') as $tag): ?>
                 <li><a href="<?= page('blog')->url() . '/tag/' . esc($tag, 'url') ?>"><?= $tag ?></a></li>
             <?php endforeach ?>
             </ul>
         </article>
     <?php endforeach ?>
-<?php else : ?>
+<?php else: ?>
     <div>No results for tag <?= $tag ?></div>
 <?php endif ?>
 <?php snippet('footer') ?>
 ```
-

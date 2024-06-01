@@ -115,7 +115,7 @@ Additionally, we will display alerts if the user filled in the form incorrectly 
 
       <?php
       // if the form input is not valid, show a list of alerts
-      if ($alert) : ?>
+      if ($alert): ?>
       <div class="alert">
         <ul>
           <?php foreach ($alert as $message): ?>

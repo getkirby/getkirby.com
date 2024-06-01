@@ -34,7 +34,7 @@
 			</figure>
 			<div class="playground-header-menu">
 				<ul class="font-mono text-sm pt-6 sticky" style="--top: var(--spacing-2)">
-					<?php foreach ($stories as $option) : ?>
+					<?php foreach ($stories as $option): ?>
 					<li><a <?php e($story === $option, 'aria-current="true"') ?> href="?your=<?= $option->slug() ?>"><?= $option->title() ?></a></li>
 					<?php endforeach ?>
 					<li><a class="font-bold more" href="/love">Your ideas &rarr;</a></li>

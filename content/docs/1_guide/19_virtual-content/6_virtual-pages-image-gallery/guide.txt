@@ -221,7 +221,7 @@ We can now adjust the `gallery.php` template again:
   <?php foreach ($page->children() as $child): ?>
   <li class="column" style="--columns: 4">
     <a href="<?= $child->url() ?>">
-      <?php if ($image = $child->image()) : ?>
+      <?php if ($image = $child->image()): ?>
       <figure>
         <span class="img" style="--w:4;--h:5">
           <?= $image->crop(500,600) ?>
@@ -308,7 +308,7 @@ With the page model complete, let's set out to create a template for the childre
 ```php "/site/templates/gallery-image.php"
 <?php snippet('header') ?>
 
-<?php if ($image = $page->image()) : ?>
+<?php if ($image = $page->image()): ?>
   <a href="<?= $image->crop(1200, 600)->url() ?>" data-lightbox class="img margin-s" style="--w:2; --h:1">
     <?= $image ?>
   </a>
@@ -318,7 +318,7 @@ With the page model complete, let's set out to create a template for the childre
   <div class="grid">
     <div class="column" style="--columns:11; --gutter:1.5rem">
       <h1 class="h1 margin-m"><?= $page->title()->html() ?></h1>
-      <?php if ($page->subheading()->isNotEmpty()) : ?>
+      <?php if ($page->subheading()->isNotEmpty()): ?>
         <p class="h2 color-grey"><?= $page->subheading()->html() ?></p>
       <?php endif ?>
       <time datetime="<?= $page->date('c') ?>">Taken on <?= $page->date() ?></time>
@@ -329,14 +329,14 @@ With the page model complete, let's set out to create a template for the childre
     <div class="column" style="--columns:1">
       <nav class="blog-prevnext">
         <div class="grid" style="--gutter: 0.5rem;">
-          <?php if ($prev = $page->prev()) : ?>
+          <?php if ($prev = $page->prev()): ?>
             <a href="<?= $prev->url() ?>" class="column" style="--columns:6;text-align: right">&larr;</a>
-          <?php else : ?>
+          <?php else: ?>
             <span class="column color-grey" style="--columns:6; text-align: right">&larr;</span>
           <?php endif ?>
-          <?php if ($next = $page->next()) : ?>
+          <?php if ($next = $page->next()): ?>
             <a href="<?= $next->url() ?>" class="column" style="--columns:6; text-align: right">&rarr;</a>
-          <?php else : ?>
+          <?php else: ?>
             <span class="column color-grey" style="--columns:6; text-align: right;">&rarr;</span>
           <?php endif ?>
         </div>
@@ -549,7 +549,7 @@ class GalleryImagePage extends Page
   <?php foreach ($page->children() as $child): ?>
   <li class="column" style="--columns: 4">
     <a href="<?= $child->url() ?>">
-      <?php if ($image = $child->image()) : ?>
+      <?php if ($image = $child->image()): ?>
       <figure>
         <span class="img" style="--w:4;--h:5">
           <?= $image->crop(500,600) ?>
@@ -569,7 +569,7 @@ class GalleryImagePage extends Page
 ```php "/site/plugins/virtual-gallery/templates/gallery-image.php"
 <?php snippet('header') ?>
 
-<?php if ($image = $page->image()) : ?>
+<?php if ($image = $page->image()): ?>
   <a href="<?= $image->crop(1200, 600)->url() ?>" data-lightbox class="img margin-s" style="--w:2; --h:1">
     <?= $image ?>
   </a>
@@ -579,7 +579,7 @@ class GalleryImagePage extends Page
   <div class="grid">
     <div class="column" style="--columns:11; --gutter:1.5rem">
       <h1 class="h1 margin-m"><?= $page->title()->html() ?></h1>
-      <?php if ($page->subheading()->isNotEmpty()) : ?>
+      <?php if ($page->subheading()->isNotEmpty()): ?>
         <p class="h2 color-grey"><?= $page->subheading()->html() ?></p>
       <?php endif ?>
       <time datetime="<?= $page->date('c') ?>">Taken on <?= $page->date() ?></time>
@@ -590,14 +590,14 @@ class GalleryImagePage extends Page
     <div class="column" style="--columns:1">
       <nav class="blog-prevnext">
         <div class="grid" style="--gutter: 0.5rem;">
-          <?php if ($prev = $page->prev()) : ?>
+          <?php if ($prev = $page->prev()): ?>
             <a href="<?= $prev->url() ?>" class="column" style="--columns:6;text-align: right">&larr;</a>
-          <?php else : ?>
+          <?php else: ?>
             <span class="column color-grey" style="--columns:6; text-align: right">&larr;</span>
           <?php endif ?>
-          <?php if ($next = $page->next()) : ?>
+          <?php if ($next = $page->next()): ?>
             <a href="<?= $next->url() ?>" class="column" style="--columns:6; text-align: right">&rarr;</a>
-          <?php else : ?>
+          <?php else: ?>
             <span class="column color-grey" style="--columns:6; text-align: right;">&rarr;</span>
           <?php endif ?>
         </div>

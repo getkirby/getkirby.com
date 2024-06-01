@@ -11,7 +11,7 @@
 
 	<div class="bg-dark color-gray-400 highlight mb-42">
 		<ul class="columns" style="--columns: 4; --gap: var(--spacing-6)">
-			<?php foreach ($page->icons()->yaml() as $icon) : ?>
+			<?php foreach ($page->icons()->yaml() as $icon): ?>
 				<li class="flex items-center font-mono text-xs">
 					<svg class="mr-3" width="16" height="16" fill="#fff">
 						<use href="#icon-<?= $icon ?>" />

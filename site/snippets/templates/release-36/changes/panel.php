@@ -1,4 +1,4 @@
-<?php if ($section = $page->find('changes/panel')) : ?>
+<?php if ($section = $page->find('changes/panel')): ?>
 	<section id="changes-panel" class="mb-42">
 
 		<?php snippet('templates/features/intro', [

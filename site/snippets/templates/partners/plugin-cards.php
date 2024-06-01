@@ -3,9 +3,9 @@
 		<a class="block bg-white rounded overflow-hidden shadow" href="<?= $plugin->url() ?>">
 			<article class="flex flex-column" style="height: 100%">
 				<figure class="bg-light">
-					<?php if ($card = $plugin->card()) : ?>
+					<?php if ($card = $plugin->card()): ?>
 						<img src="<?= $card->url() ?>" style="--aspect-ratio: 2/1; object-fit: contain;" alt="">
-					<?php elseif ($plugin->preview()->isNotEmpty()) : ?>
+					<?php elseif ($plugin->preview()->isNotEmpty()): ?>
 						<div style="--aspect-ratio: 2/1; background: #000; overflow:hidden">
 							<div class="flex items-center justify-center <?= ($columns ?? 3) === 3 ? ' text-xs' : '' ?>">
 								<div class="shadow-xl" data-no-copy>
@@ -34,7 +34,7 @@
 						<h3 class="h5"><?= $plugin->title() ?></h3>
 						<p class="font-mono text-xs color-gray-600 truncate">
 							by <span class="color-black"><?= $plugin->parent()->title() ?></span>
-							<?php if ($plugin->paid()->isNotEmpty()) : ?>
+							<?php if ($plugin->paid()->isNotEmpty()): ?>
 							&middot; <span class="plugin-paid">Paid</span>
 							<?php endif ?>
 						</p>

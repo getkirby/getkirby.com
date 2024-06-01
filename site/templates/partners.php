@@ -110,14 +110,14 @@
 	</header>
 
 	<section class="partners-section partners-plus columns mb-42" style="--gap: var(--spacing-24)">
-		<?php foreach ($plus as $partner) : ?>
+		<?php foreach ($plus as $partner): ?>
 			<?php snippet('templates/partners/partner.plus', ['partner' => $partner]) ?>
 		<?php endforeach ?>
 	</section>
 
 	<section class="partners-section partners columns"
 					 style="--column-gap: var(--spacing-24); --row-gap: var(--spacing-12)">
-		<?php foreach ($standard as $partner) : ?>
+		<?php foreach ($standard as $partner): ?>
 			<?php snippet('templates/partners/partner', ['partner' => $partner]) ?>
 		<?php endforeach ?>
 	</section>

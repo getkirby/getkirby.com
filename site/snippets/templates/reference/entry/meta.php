@@ -76,7 +76,7 @@ extract([
 				in <?= version($version, '%s') ?>
 				<?php endif ?>
 			</div>
-			<?php if (count($deprecated) > 1) : ?>
+			<?php if (count($deprecated) > 1): ?>
 			<?= kti($deprecated[1]) ?>
 			<?php endif ?>
 		</div>

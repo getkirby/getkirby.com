@@ -1,4 +1,4 @@
-<?php if ($section = $page->find('changes/core')) : ?>
+<?php if ($section = $page->find('changes/core')): ?>
 	<section id="changes-core" class="mb-42">
 
 		<?php snippet('templates/features/intro', [

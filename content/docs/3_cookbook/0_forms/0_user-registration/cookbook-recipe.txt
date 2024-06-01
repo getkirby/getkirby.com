@@ -109,9 +109,9 @@ In its most minimal form, our registration template would just have a form with 
 
 <?php
 // if the form has errors, show a list of messages
-if (count($errors) > 0) : ?>
+if (count($errors) > 0): ?>
 <ul class="alert">
-    <?php foreach ($errors as $message) : ?>
+    <?php foreach ($errors as $message): ?>
         <li><?= kirbytext($message) ?></li>
     <?php endforeach ?>
 </ul>
@@ -409,13 +409,13 @@ To this purpose, we extend the navigation item in the header snippet as follows:
     <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a>
     <?php endforeach ?>
 
-    <?php if (!$kirby->user()) : ?>
+    <?php if (!$kirby->user()): ?>
     <?php foreach($site->children()->find('registration', 'login') as $item): ?>
         <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a>
     <?php endforeach ?>
     <?php endif ?>
 
-    <?php if ($kirby->user()) : ?>
+    <?php if ($kirby->user()): ?>
         <a href="<?= url('logout') ?>">Logout</a>
     <?php endif ?>
 
@@ -462,13 +462,13 @@ The first step is to add the current page id as parameter to the navigation link
     <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url() ?>"><?= $item->title()->html() ?></a>
     <?php endforeach ?>
 
-    <?php if (!$kirby->user()) : ?>
+    <?php if (!$kirby->user()): ?>
     <?php foreach($site->children()->find('registration', 'login') as $item): ?>
         <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url(['params' => ['cookbook.referrer' => $page->id()]]) ?>"><?= $item->title()->html() ?></a>
     <?php endforeach ?>
     <?php endif ?>
 
-    <?php if ($kirby->user()) : ?>
+    <?php if ($kirby->user()): ?>
         <a href="<?= url('logout', ['params' => ['referrer' => $page->id()]]) ?>">Logout</a>
     <?php endif ?>
 
@@ -567,6 +567,3 @@ That was it. Happy coding!
 - (link: docs/guide/authentication/password-reset-form text: Password reset)
 - (link: docs/cookbook/security/access-restriction text: Restricting access to your site)
 - (link: docs/cookbook/forms/using-mailhog-for-email-testing text: Using MailHog for local email testing)
-
-
-

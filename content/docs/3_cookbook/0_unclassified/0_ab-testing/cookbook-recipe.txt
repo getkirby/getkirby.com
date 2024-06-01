@@ -23,7 +23,7 @@ The idea for the plugin is to have a IP-based method to split visitors into two 
 The final plugin works like this in your templates and snippets:
 
 ```php
-<?php if (visitorgroup('a') === true) : ?>
+<?php if (visitorgroup('a') === true): ?>
 Some content for visitors in group a
 <?php else: ?>
 Some content for visitors in group b
@@ -159,4 +159,3 @@ And that's it! Our final plugin for A/B testing with Kirby.
 I went through this with very detailed little steps and the more experienced coders among you will probably be bored by now, but let me take this chance to encourage every Kirby user — PHP beginner or pro — to try writing your own code first, before looking for a plugin.
 
 I know there's this golden *"Don't reinvent the wheel"* rule, but most problems can be solved by just a little bit of code and along the way there's a good chance you might even learn something new. Take that chance. You will end up with much cleaner code and much more coding skills in the long run.
-

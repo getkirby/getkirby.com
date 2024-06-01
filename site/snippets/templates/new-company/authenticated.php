@@ -2,7 +2,7 @@
 <form id="form" method="POST" action="#form" class="form pt-6 mb-36">
 	<header class="mb-3 flex flex-wrap justify-between items-baseline">
 		<h2 class="h2 mb-3">Migrate your data</h2>
-		<?php if ($email) : ?>
+		<?php if ($email): ?>
 			<a href="<?= option('hub.url') ?>" class="form-account h6 mb-3 flex items-center">
 				<strong class="mr-3">Account</strong>
 				<figure class="mr-3"><?= icon('mail') ?></figure> <?= $email ?>
@@ -10,10 +10,10 @@
 		<?php endif ?>
 	</header>
 
-	<?php if (empty($error) === false) : ?>
+	<?php if (empty($error) === false): ?>
 		<div class="error">
 			<ul>
-				<?php foreach ($error as $e) : ?>
+				<?php foreach ($error as $e): ?>
 					<li><?= $e ?></li>
 				<?php endforeach ?>
 			</ul>
@@ -25,7 +25,7 @@
 			<div>
 				<h3 class="h3 mb-6">Licenses and purchase history</h3>
 				<div class="prose text-base">
-					<?php if ($hasData) : ?>
+					<?php if ($hasData): ?>
 						<p><mark>Please, migrate your licenses to <abbr title="Content Folder GmbH & Co. KG">our new company</abbr> and confirm that we may continue to access the same data.</mark></p>
 					<?php else: ?>
 						<p><mark>Nothing to do here. There are no licenses connected to your email address.</mark></p>
@@ -35,14 +35,14 @@
 			<div>
 				<h3 id="eula-changes" class="h3 mb-6">Revised license agreement</h3>
 				<div class="prose text-base">
-					<?php if ($hasData) : ?>
+					<?php if ($hasData): ?>
 						<p class="mb-6"><mark>We have adapted our license agreement to <abbr title="Content Folder GmbH & Co. KG">our new company</abbr> and clarified what it covers. Please, agree to our revised terms.</mark></p>
-					<?php elseif ($email) : ?>
+					<?php elseif ($email): ?>
 						<p class="mb-6"><mark>Nothing to do here. There are no licenses connected to your email address.</mark></p>
 					<?php endif ?>
 				</div>
 			</div>
-			<?php if ($hasData) : ?>
+			<?php if ($hasData): ?>
 				<footer>
 					<label class="checkbox">
 						<strong class="text-sm">
@@ -58,7 +58,7 @@
 			<div>
 				<h3 class="h3 mb-6">Kosmos subscription</h3>
 				<div class="prose text-base mb-12">
-					<?php if ($hasNewsletter) : ?>
+					<?php if ($hasNewsletter): ?>
 						<p><mark>We need your confirmation that you want to receive our monthly Kosmos newsletter from <abbr title="Content Folder GmbH & Co. KG">our new company</abbr> from now&nbsp;on.</mark></p>
 					<?php else: ?>
 						<p><mark>Receive our monthly newsletter issues. We won't ever spam you and you can unsubscribe at any given time.</mark></p>
