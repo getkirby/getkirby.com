@@ -95,10 +95,11 @@
 	transition: all 0.2s;
 }
 .playground-header-figure-wrapper img {
-	transition: all 0.1s;
+	transition: opacity 0.4s;
 }
 .playground-header-figure-wrapper.loading img {
 	opacity: 0;
+	transition: opacity 0.2s;
 }
 
 /** Mobile */
