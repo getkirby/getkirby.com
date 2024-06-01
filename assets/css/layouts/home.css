@@ -92,9 +92,9 @@
 	display: block;
 	background: var(--color-light);
 	overflow: hidden;
-	transition: all 0.2s;
 }
 .playground-header-figure-wrapper img {
+	opacity: 1;
 	transition: opacity 0.4s;
 }
 .playground-header-figure-wrapper.loading img {
