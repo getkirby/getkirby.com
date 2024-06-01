@@ -3,7 +3,7 @@
 <?php slot('sidebar') ?>
 <?php snippet('sidebar', [
 	'title'         => 'Guide',
-	'link'          => '/docs/guide',
+	'link'          => page('docs/guide')->menuUrl(),
 	'menu'          => $menu,
 	'hasCategories' => true,
 ]) ?>

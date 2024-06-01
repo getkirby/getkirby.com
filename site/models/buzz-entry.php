@@ -18,6 +18,11 @@ class BuzzEntryPage extends Page
 			Str::startsWith($url, $this->site()->url()) === false;
 	}
 
+	public function menuUrl(): string
+	{
+		return $this->url();
+	}
+
 	public function url($options = null): string
 	{
 		if ($this->link()->isNotEmpty() === true) {

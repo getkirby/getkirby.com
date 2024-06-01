@@ -1,3 +1,1 @@
-<?php
-
-go($page->src());
+<?php go($page->src());

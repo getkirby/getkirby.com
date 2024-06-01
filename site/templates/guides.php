@@ -1,1 +1,1 @@
-<?php go(collection('guides')->first());
+<?php go($page->menuUrl());
