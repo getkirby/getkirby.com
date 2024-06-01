@@ -37,12 +37,12 @@
 							'buttons' => [
 								[
 									'text' => 'Try now',
-									'link' => '/try',
+									'link' => page('try')->menuUrl(),
 									'icon' => 'download'
 								],
 								[
 									'text'  => 'Docs',
-									'link'  => '/docs/guide',
+									'link'  => page('docs/guide')->menuUrl(),
 									'icon'  => 'book',
 									'style' => 'outlined'
 								]

@@ -10,7 +10,7 @@ extract([
 		<?php if ($menuItem->hasListedChildren()): ?>
 		<details class="details" <?= $open || $menuItem->isOpen() ? 'open' : '' ?>>
 			<summary>
-				<a <?= ariaCurrent($menuItem->isActive(), 'page') ?> href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a>
+				<a <?= ariaCurrent($menuItem->isActiveInMenu(hasSubmenu: true), 'page') ?> href="<?= $menuItem->menuUrl() ?>"><?= $menuItem->title() ?></a>
 			</summary>
 
 			<ul class="sidebar-menu-2">
@@ -19,7 +19,7 @@ extract([
 					<?php if ($submenuItem->intendedTemplate()->name() === 'separator'): ?>
 					<hr>
 					<?php else: ?>
-					<a <?= ariaCurrent($submenuItem->isOpen(), 'page') ?> href="<?= $submenuItem->url() ?>"><?= $submenuItem->title() ?></a>
+					<a <?= ariaCurrent($submenuItem->isActiveInMenu(), 'page') ?> href="<?= $submenuItem->menuUrl() ?>"><?= $submenuItem->title() ?></a>
 					<?php endif ?>
 				</li>
 				<?php endforeach ?>
@@ -27,7 +27,7 @@ extract([
 		</details>
 
 		<?php else: ?>
-		<a <?= ariaCurrent($menuItem->isActive(), 'page') ?> href="<?= $menuItem->url() ?>"><?= $menuItem->title() ?></a>
+		<a <?= ariaCurrent($menuItem->isActiveInMenu(), 'page') ?> href="<?= $menuItem->menuUrl() ?>"><?= $menuItem->title() ?></a>
 		<?php endif ?>
 	</li>
 	<?php endforeach ?>

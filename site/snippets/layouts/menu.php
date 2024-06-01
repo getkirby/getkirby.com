@@ -6,46 +6,46 @@
 	<nav aria-label="Main menu">
 		<ul class="menu-1">
 			<li class="has-submenu">
-				<a href="/features/developers">The CMS</a>
+				<a href="<?= page('features/developers')->menuUrl() ?>">The CMS</a>
 				<ul class="menu-2">
-					<li><a href="/features/developers">For developers</a></li>
-					<li><a href="/features/designers">For designers</a></li>
-					<li><a href="/features/creators">For content creators</a></li>
-					<li><a href="/features/clients">For clients & agencies</a></li>
+					<li><a href="<?= page('features/developers')->menuUrl() ?>">For developers</a></li>
+					<li><a href="<?= page('features/designers')->menuUrl() ?>">For designers</a></li>
+					<li><a href="<?= page('features/creators')->menuUrl() ?>">For content creators</a></li>
+					<li><a href="<?= page('features/clients')->menuUrl() ?>">For clients & agencies</a></li>
 					<li><hr /></li>
-					<li><a href="/love">Showcase</a></li>
-					<li><a href="/releases">Releases</a></li>
+					<li><a href="<?= page('love')->menuUrl() ?>">Showcase</a></li>
+					<li><a href="<?= page('releases')->menuUrl() ?>">Releases</a></li>
 					<li><a class="is-external" href="https://feedback.getkirby.com">Feedback</a></li>
 				</ul>
 			</li>
 			<li class="has-submenu">
-				<a href="/docs/guide">Docs</a>
+				<a href="<?= page('docs/guide')->menuUrl() ?>">Docs</a>
 				<ul class="menu-2">
-					<li><a href="/docs/guide">Guide</a></li>
-					<li><a href="/docs/reference">Reference</a></li>
+					<li><a href="<?= page('docs/guide')->menuUrl() ?>">Guide</a></li>
+					<li><a href="<?= page('docs/reference')->menuUrl() ?>">Reference</a></li>
 
-					<li><a href="/docs/cookbook">Cookbook</a></li>
-					<li><a href="/docs/quicktips">Quicktips</a></li>
+					<li><a href="<?= page('docs/cookbook')->menuUrl() ?>">Cookbook</a></li>
+					<li><a href="<?= page('docs/quicktips')->menuUrl() ?>">Quicktips</a></li>
 					<li><a class="is-external" href="https://youtube.com/kirbycasts">Screencasts</a></li>
-					<li><a href="/docs/glossary">Glossary</a></li>
+					<li><a href="<?= page('docs/glossary')->menuUrl() ?>">Glossary</a></li>
 				</ul>
 			</li>
 			<li class="has-submenu">
-				<a href="/kosmos">Resources</a>
+				<a href="<?= page('kosmos')->menuUrl() ?>">Resources</a>
 				<ul class="menu-2">
 					<li><a class="is-external" href="https://plugins.getkirby.com">Plugins</a></li>
-					<li><a href="/themes">Themes</a></li>
+					<li><a href="<?= page('themes')->menuUrl() ?>">Themes</a></li>
 					<li><hr /></li>
-					<li><a href="/kosmos">Newsletter</a></li>
-					<li><a href="/buzz">Buzz</a></li>
+					<li><a href="<?= page('kosmos')->menuUrl() ?>">Newsletter</a></li>
+					<li><a href="<?= page('buzz')->menuUrl() ?>">Buzz</a></li>
 					<li><hr /></li>
 					<li><a class="is-external" href="https://hub.getkirby.com">License Hub</a></li>
 				</ul>
 			</li>
 			<li class="has-submenu">
-				<a href="/meet">Community</a>
+				<a href="<?= page('meet')->menuUrl() ?>">Community</a>
 				<ul class="menu-2">
-					<li><a href="/meet">Get together</a></li>
+					<li><a href="<?= page('meet')->menuUrl() ?>">Get together</a></li>
 					<li><hr /></li>
 					<li><a class="is-external" href="https://forum.getkirby.com">Support forum</a></li>
 					<li><a class="is-external" href="https://chat.getkirby.com">Discord chat</a></li>
@@ -56,17 +56,17 @@
 					<li><a class="is-external" href="https://instagram.com/getkirby">Instagram</a></li>
 				</ul>
 			</li>
-			<li><a class="partners" href="/partners">Partners</a></li>
+			<li><a class="partners" href="<?= page('partners')->menuUrl() ?>">Partners</a></li>
 		</ul>
 		<ul class="menu-1 menu-steps">
-			<li><a href="/try">Try</a></li>
+			<li><a href="<?= page('try')->menuUrl() ?>">Try</a></li>
 			<li>
-				<a href="/love" aria-label="Love">
+				<a href="<?= page('love')->menuUrl() ?>" aria-label="Love">
 					<?= icon('heart') ?>
 				</a>
 			</li>
 			<li>
-				<a href="/buy">Buy</a>
+				<a href="<?= page('buy')->menuUrl() ?>">Buy</a>
 			</li>
 		</ul>
 	</nav>
