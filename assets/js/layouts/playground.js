@@ -46,7 +46,8 @@ export class Playground {
 		this.$el
 			.querySelector(".playground-header-figure img")
 			.addEventListener("load", function () {
-				this.parentNode.classList.remove("loading");
+				// use next tick to avoid flickering issues
+				setTimeout(() => this.parentNode.classList.remove("loading"), 0);
 			});
 
 		// reactivate code highlighting
