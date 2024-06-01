@@ -6,9 +6,7 @@ use Kirby\Cms\Page;
 
 return function (App $kirby, Page $page) {
 	// redirect from the parent to the latest version
-	$latest = $page->children()->last();
-
-	if ($latest?->intendedTemplate()->name() === 'terms') {
+	if ($latest = $page->latestVersion()) {
 		return go($latest, 302);
 	}
 
