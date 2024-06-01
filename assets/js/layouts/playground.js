@@ -1,6 +1,4 @@
-
 export class Playground {
-
 	constructor() {
 		this.$el = document.querySelector(".playground");
 
@@ -11,34 +9,37 @@ export class Playground {
 				e.preventDefault();
 				this.switchTo(link);
 			}
-		})
+		});
 	}
 
-	switchTo(link) {
+	async switchTo(link) {
 		// fade out the old image
-		this.$el.querySelector(".playground-header-figure-wrapper").classList.add("loading");
+		this.$el
+			.querySelector(".playground-header-figure-wrapper")
+			.classList.add("loading");
 
-		setTimeout(async () => {
-			const response = await fetch(link);
-			const body     = await response.text();
-			const parser   = new DOMParser();
-			const doc      = parser.parseFromString(body, "text/html");
+		const response = await fetch(link);
+		const body = await response.text();
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(body, "text/html");
 
-			// hide the new image before it gets injected
-			doc.querySelector(".playground-header-figure-wrapper").classList.add("loading");
+		// hide the new image before it gets injected
+		doc
+			.querySelector(".playground-header-figure-wrapper")
+			.classList.add("loading");
 
-			// replace the playground
-			this.$el.innerHTML = doc.querySelector(".playground").innerHTML;
+		// replace the playground
+		this.$el.innerHTML = doc.querySelector(".playground").innerHTML;
 
-			// fade in the image on load
-			this.$el.querySelector(".playground-header-figure img").addEventListener("load", function () {
-				setTimeout(() => {
-					this.parentNode.classList.remove("loading");
-				}, 200);
+		// fade in the image on load
+		this.$el
+			.querySelector(".playground-header-figure img")
+			.addEventListener("load", async function () {
+				await new Promise((resolve) => setTimeout(resolve, 100));
+				this.parentNode.classList.remove("loading");
 			});
 
-			// reactivate code highlighting
-			Prism.highlightAll();
-		}, 200);
+		// reactivate code highlighting
+		Prism.highlightAll();
 	}
 }
