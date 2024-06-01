@@ -95,7 +95,7 @@
 	transition: all 0.2s;
 }
 .playground-header-figure-wrapper img {
-	transition: all 0.3s;
+	transition: all 0.1s;
 }
 .playground-header-figure-wrapper.loading img {
 	opacity: 0;
