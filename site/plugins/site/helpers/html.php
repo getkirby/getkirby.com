@@ -67,6 +67,7 @@ function img($file, array $props = [])
 		'alt'     => $props['alt'] ?? '',
 		'class'   => $props['class'] ?? null,
 		'loading' => $loading ?? null,
+		'sizes'   => $props['sizes'] ?? null,
 		'src'     => $src,
 		'srcset'  => $srcset,
 		'width'   => $file->width(),
