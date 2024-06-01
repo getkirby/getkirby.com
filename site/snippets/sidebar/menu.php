@@ -19,7 +19,7 @@ extract([
 					<?php if ($submenuItem->intendedTemplate()->name() === 'separator'): ?>
 					<hr>
 					<?php else: ?>
-					<a <?= ariaCurrent($submenuItem->isActiveInMenu(), 'page') ?> href="<?= $submenuItem->menuUrl() ?>"><?= $submenuItem->title() ?></a>
+					<a <?= ariaCurrent($submenuItem->isOpen(), 'page') ?> href="<?= $submenuItem->menuUrl() ?>"><?= $submenuItem->title() ?></a>
 					<?php endif ?>
 				</li>
 				<?php endforeach ?>
