@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Cms\Page;
+require_once __DIR__ . '/default.php';
 
-class ThemePage extends Page
+class ThemePage extends DefaultPage
 {
 	public function menuUrl(): string
 	{

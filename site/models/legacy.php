@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Cms\Page;
+require_once __DIR__ . '/default.php';
 
-class LegacyPage extends Page
+class LegacyPage extends DefaultPage
 {
 	public function menuUrl(): string
 	{

@@ -1,12 +1,13 @@
 <?php
 
-use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Http\Remote;
 use Kirby\Toolkit\Date;
 use Kirby\Toolkit\Str;
 
-class MeetEventsPage extends Page
+require_once __DIR__ . '/default.php';
+
+class MeetEventsPage extends DefaultPage
 {
 	public function children(): Pages
 	{

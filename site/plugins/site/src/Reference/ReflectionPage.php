@@ -2,8 +2,8 @@
 
 namespace Kirby\Reference;
 
+use DefaultPage;
 use Kirby\Cms\App;
-use Kirby\Cms\Page;
 use Kirby\Content\Field;
 use Kirby\Template\Template;
 use Kirby\Toolkit\A;
@@ -13,7 +13,7 @@ use ReflectionUnionType;
 use Reflector;
 use Throwable;
 
-abstract class ReflectionPage extends Page
+abstract class ReflectionPage extends DefaultPage
 {
 	protected DocBlock|null $docBlock;
 	protected array $parameters;

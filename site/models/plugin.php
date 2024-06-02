@@ -3,7 +3,6 @@
 use Kirby\Cache\Cache;
 use Kirby\Cms\File;
 use Kirby\Cms\Nest;
-use Kirby\Cms\Page;
 use Kirby\Content\Field;
 use Kirby\Data\Data;
 use Kirby\Github\Github;
@@ -12,10 +11,12 @@ use Kirby\Http\Url;
 use Kirby\Toolkit\Obj;
 use Kirby\Toolkit\Str;
 
+require_once __DIR__ . '/default.php';
+
 /**
  * TODO: Remove when plugin content is no longer in the repo
  */
-class PluginPage extends Page
+class PluginPage extends DefaultPage
 {
 	protected $info = null;
 	protected $latestTag = null;

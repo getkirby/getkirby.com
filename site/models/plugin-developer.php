@@ -1,13 +1,14 @@
 <?php
 
 use Kirby\Cms\File;
-use Kirby\Cms\Page;
 use Kirby\Content\Field;
+
+require_once __DIR__ . '/default.php';
 
 /**
  * TODO: Remove when plugin content is no longer in the repo
  */
-class PluginDeveloperPage extends Page
+class PluginDeveloperPage extends DefaultPage
 {
 	public function avatar(): File|null
 	{

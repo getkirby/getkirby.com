@@ -1,9 +1,10 @@
 <?php
 
-use Kirby\Cms\Page;
 use Kirby\Template\Template;
 
-class ReleasePage extends Page
+require_once __DIR__ . '/default.php';
+
+class ReleasePage extends DefaultPage
 {
 	public function template(): Template
 	{

@@ -1,12 +1,13 @@
 <?php
 
-use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
 use Kirby\Template\Template;
 use Kirby\Toolkit\Str;
 
-class ReferenceQuickLinkPage extends Page
+require_once __DIR__ . '/default.php';
+
+class ReferenceQuickLinkPage extends DefaultPage
 {
 	/**
 	 * Creates children collection from `menu` content field
