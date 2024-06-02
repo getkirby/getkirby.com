@@ -3,12 +3,13 @@
 include_once __DIR__ . '/helpers.php';
 
 load([
-	'kirby\\cdn\\optimizer' => __DIR__ . '/src/Optimizer.php'
+	'kirby\\cdn\\fileversion' => __DIR__ . '/src/FileVersion.php',
+	'kirby\\cdn\\optimizer'   => __DIR__ . '/src/Optimizer.php'
 ]);
 
+use Kirby\Cdn\FileVersion;
 use Kirby\Cdn\Optimizer;
 use Kirby\Cms\App;
-use Kirby\Cms\FileVersion;
 use Kirby\Cms\Url;
 
 App::plugin('getkirby/cdn', [
