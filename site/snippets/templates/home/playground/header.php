@@ -15,7 +15,11 @@
 	<div class="w-full">
 		<div class="playground-header-layout">
 			<figure class="playground-header-figure">
-				<span class="playground-header-figure-wrapper" style="--aspect-ratio: <?= $storyImage->width() . '/' . $storyImage->height() ?>">
+				<span
+					class="playground-header-figure-wrapper"
+					style="--aspect-ratio: <?= $storyImage->width() . '/' . $storyImage->height() ?>"
+					data-image="<?= $story->uid() . '/' . $storyImage->mediaHash() ?>"
+				>
 					<?= img($storyImage, [
 						'alt' => $storyImage->alt()->or('Panel screenshot for: ' . $story->title()),
 						'src' => [
@@ -35,7 +39,7 @@
 			<div class="playground-header-menu">
 				<ul class="font-mono text-sm pt-6 sticky" style="--top: var(--spacing-2)">
 					<?php foreach ($stories as $option): ?>
-					<li><a <?php e($story === $option, 'aria-current="true"') ?> href="?your=<?= $option->slug() ?>"><?= $option->title() ?></a></li>
+					<li><a <?php e($story === $option, 'aria-current="true"') ?> href="?your=<?= $option->slug() ?>" data-image="<?= $option->uid() . '/' . $option->images()->findBy('name', 'panel')->mediaHash() ?>"><?= $option->title() ?></a></li>
 					<?php endforeach ?>
 					<li><a class="font-bold more" href="/love">Your ideas &rarr;</a></li>
 				</ul>
