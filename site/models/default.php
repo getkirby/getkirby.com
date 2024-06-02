@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\Page;
+use Kirby\Toolkit\Str;
 
 class DefaultPage extends Page
 {
@@ -20,6 +21,21 @@ class DefaultPage extends Page
 
 		// otherwise use the menu URL for the comparison
 		return $this->menuUrl() === $currentPage?->menuUrl();
+	}
+
+	/**
+	 * Checks whether the page is the current page or one of its ancestors
+	 * in a menu context, considering redirects to other pages
+	 */
+	public function isOpen(): bool
+	{
+		$currentPage = $this->site()->page();
+
+		if (Str::startsWith($currentPage?->menuUrl(), $this->menuUrl() . '/') === true) {
+			return true;
+		}
+
+		return parent::isOpen();
 	}
 
 	/**
