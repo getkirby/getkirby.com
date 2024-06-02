@@ -8,7 +8,7 @@ class DefaultPage extends Page
 	 * Checks whether the page is the current page in a menu context,
 	 * considering redirects to other pages
 	 */
-	public function isActiveInMenu(bool $hasSubmenu = false): bool
+	public function isActive(bool $hasSubmenu = false): bool
 	{
 		$currentPage = $this->site()->page();
 
