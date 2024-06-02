@@ -6,6 +6,6 @@ class GlossaryEntryPage extends DefaultPage
 {
 	public function menuUrl(): string
 	{
-		return $this->link()->or($this->url())->value();
+		return $this->link()->toUrl() ?? $this->url();
 	}
 }

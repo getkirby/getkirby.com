@@ -51,7 +51,7 @@ class ReferenceQuickLinkPage extends DefaultPage
 
 	public function menuUrl(): string
 	{
-		return url($this->link()->value());
+		return $this->link()->toUrl();
 	}
 
 	public function template(): Template

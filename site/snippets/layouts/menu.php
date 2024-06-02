@@ -15,7 +15,7 @@
 							'For designers' => page('features/designers'),
 							'For content creators' => page('features/creators'),
 							'For clients & agencies' => page('features/clients'),
-							'hr',
+							'-',
 							'Showcase' => page('love'),
 							'Releases' => page('releases'),
 							'Feedback' => 'https://feedback.getkirby.com',
@@ -47,10 +47,10 @@
 						'items' => [
 							'Plugins' => 'https://plugins.getkirby.com',
 							'Themes' => page('themes'),
-							'hr',
+							'-',
 							'Newsletter' => page('kosmos'),
 							'Buzz' => page('buzz'),
-							'hr',
+							'-',
 							'License Hub' => 'https://hub.getkirby.com',
 						]
 					]) ?>
@@ -63,11 +63,11 @@
 						'externalClass' => 'is-external',
 						'items' => [
 							'Get together' => page('meet'),
-							'hr',
+							'-',
 							'Support forum' => 'https://forum.getkirby.com',
 							'Discord chat' => 'https://chat.getkirby.com',
 							'Community map' => 'https://community.getkirby.com',
-							'hr',
+							'-',
 							'Mastodon' => 'https://mastodon.social/@getkirby',
 							'LinkedIn' => 'https://www.linkedin.com/company/getkirby',
 							'Instagram' => 'https://instagram.com/getkirby',
