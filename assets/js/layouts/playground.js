@@ -12,6 +12,10 @@ export class Playground {
 		});
 	}
 
+	get image() {
+		return this.$el.querySelector(".playground-header-figure-wrapper img");
+	}
+
 	async loadHtml(link) {
 		const response = await fetch(link);
 		const body = await response.text();
@@ -64,9 +68,5 @@ export class Playground {
 
 	get wrapper() {
 		return this.$el.querySelector(".playground-header-figure-wrapper");
-	}
-
-	get image() {
-		return this.$el.querySelector(".playground-header-figure-wrapper img");
 	}
 }
