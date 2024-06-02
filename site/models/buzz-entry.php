@@ -1,10 +1,11 @@
 <?php
 
-use Kirby\Cms\Page;
 use Kirby\Content\Field;
 use Kirby\Toolkit\Str;
 
-class BuzzEntryPage extends Page
+require_once __DIR__ . '/default.php';
+
+class BuzzEntryPage extends DefaultPage
 {
 	public function blurb(): Field
 	{

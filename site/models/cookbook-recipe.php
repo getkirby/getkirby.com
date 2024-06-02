@@ -1,9 +1,10 @@
 <?php
 
-use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 
-class CookbookRecipePage extends Page
+require_once __DIR__ . '/default.php';
+
+class CookbookRecipePage extends DefaultPage
 {
 	public function authors(): Pages
 	{

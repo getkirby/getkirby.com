@@ -1,9 +1,10 @@
 <?php
 
-use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 
-class QuicktipPage extends Page
+require_once __DIR__ . '/default.php';
+
+class QuicktipPage extends DefaultPage
 {
 	public function authors(): Pages
 	{

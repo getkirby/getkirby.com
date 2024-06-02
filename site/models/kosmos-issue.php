@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Cms\Page;
+require_once __DIR__ . '/default.php';
 
-class KosmosIssuePage extends Page
+class KosmosIssuePage extends DefaultPage
 {
 	public function metadata(): array
 	{

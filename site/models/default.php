@@ -1,11 +1,15 @@
 <?php
 
-return [
+use Kirby\Cms\Page;
+
+class DefaultPage extends Page
+{
 	/**
 	 * Checks whether the page is the current page in a menu context,
 	 * considering redirects to other pages
 	 */
-	'isActiveInMenu' => function (bool $hasSubmenu = false) {
+	public function isActiveInMenu(bool $hasSubmenu = false): bool
+	{
 		$currentPage = $this->site()->page();
 
 		// catch cases where the menu URL points to a child
@@ -15,12 +19,15 @@ return [
 		}
 
 		// otherwise use the menu URL for the comparison
-		return $this->menuUrl() === $this->site()->page()?->url();
-	},
+		return $this->menuUrl() === $currentPage?->menuUrl();
+	}
 
 	/**
 	 * Final URL after redirects to be used in menus;
 	 * fallback if the page model doesn't override it
 	 */
-	'menuUrl' => fn () => $this->url()
-];
+	public function menuUrl(): string
+	{
+		return $this->url();
+	}
+}

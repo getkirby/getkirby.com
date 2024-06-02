@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Cms\Page;
+require_once __DIR__ . '/default.php';
 
-class ReleaseGuidePage extends Page
+class ReleaseGuidePage extends DefaultPage
 {
 	public function menuUrl(): string
 	{

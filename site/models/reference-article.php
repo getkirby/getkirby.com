@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Cms\Page;
+require_once __DIR__ . '/default.php';
 
-class ReferenceArticlePage extends Page
+class ReferenceArticlePage extends DefaultPage
 {
 	public function metadata(): array
 	{

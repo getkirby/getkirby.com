@@ -1,12 +1,13 @@
 <?php
 
 use Kirby\Cms\File;
-use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
 use Kirby\Toolkit\Str;
 
-class PartnerPage extends Page
+require_once __DIR__ . '/default.php';
+
+class PartnerPage extends DefaultPage
 {
 	public function avatar(): File|null
 	{
