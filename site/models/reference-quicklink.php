@@ -49,6 +49,11 @@ class ReferenceQuickLinkPage extends DefaultPage
 		return $children;
 	}
 
+	public function menuUrl(): string
+	{
+		return url($this->link()->value());
+	}
+
 	public function template(): Template
 	{
 		return $this->kirby()->template('link');
