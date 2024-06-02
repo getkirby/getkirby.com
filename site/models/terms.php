@@ -21,6 +21,6 @@ class TermsPage extends DefaultPage
 
 	public function menuUrl(): string
 	{
-		return $this->latestVersion()->url() ?? $this->url();
+		return $this->latestVersion()?->url() ?? $this->url();
 	}
 }
