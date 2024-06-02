@@ -87,17 +87,15 @@
 .playground-header-figure {
 	position: relative;
 	z-index: 1;
-}
-.playground-header-figure-wrapper {
-	display: block;
 	background: var(--color-light);
 	overflow: hidden;
 }
-.playground-header-figure-wrapper img {
+.playground-header-figure-wrapper {
+	display: block;
 	opacity: 1;
 	transition: opacity 0.4s;
 }
-.playground-header-figure-wrapper.loading img {
+.playground-header-figure-wrapper.loading {
 	opacity: 0;
 	transition: opacity 0.2s;
 }
@@ -134,7 +132,7 @@
 
 /** Large */
 @media screen and (min-width: 50rem) {
-	.playground-header-figure-wrapper {
+	.playground-header-figure {
 		border-top-right-radius: var(--spacing-2);
 		border-bottom-right-radius: var(--spacing-2);
 	}
@@ -142,7 +140,7 @@
 
 /** Huge */
 @media screen and (min-width: 110.1rem) {
-	.playground-header-figure-wrapper {
+	.playground-header-figure {
 		border-radius: var(--spacing-2);
 	}
 }
