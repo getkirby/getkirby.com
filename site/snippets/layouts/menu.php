@@ -9,7 +9,6 @@
 				<a href="<?= page('features/developers')->menuUrl() ?>">The CMS</a>
 				<ul class="menu-2">
 					<?php snippet('layouts/menu-items', [
-						'externalClass' => 'is-external',
 						'items' => [
 							'For developers' => page('features/developers'),
 							'For designers' => page('features/designers'),
@@ -27,7 +26,6 @@
 				<a href="<?= page('docs/guide')->menuUrl() ?>">Docs</a>
 				<ul class="menu-2">
 					<?php snippet('layouts/menu-items', [
-						'externalClass' => 'is-external',
 						'items' => [
 							'Guide' => page('docs/guide'),
 							'Reference' => page('docs/reference'),
@@ -43,7 +41,6 @@
 				<a href="<?= page('kosmos')->menuUrl() ?>">Resources</a>
 				<ul class="menu-2">
 					<?php snippet('layouts/menu-items', [
-						'externalClass' => 'is-external',
 						'items' => [
 							'Plugins' => 'https://plugins.getkirby.com',
 							'Themes' => page('themes'),
@@ -60,7 +57,6 @@
 				<a href="<?= page('meet')->menuUrl() ?>">Community</a>
 				<ul class="menu-2">
 					<?php snippet('layouts/menu-items', [
-						'externalClass' => 'is-external',
 						'items' => [
 							'Get together' => page('meet'),
 							'-',
