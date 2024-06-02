@@ -62,7 +62,7 @@ class ReferenceClassesPage extends SectionPage
 			'num'      => 1,
 			'content'  => [
 				'title' => 'All classes',
-				'link'  => '/docs/reference/objects'
+				'link'  => url('docs/reference/objects')
 			]
 		];
 
