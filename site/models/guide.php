@@ -1,7 +1,5 @@
 <?php
 
-require_once __DIR__ . '/default.php';
-
 class GuidePage extends DefaultPage
 {
 	public function isChapter(): bool

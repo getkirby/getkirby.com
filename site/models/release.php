@@ -2,8 +2,6 @@
 
 use Kirby\Template\Template;
 
-require_once __DIR__ . '/default.php';
-
 class ReleasePage extends DefaultPage
 {
 	public function template(): Template
