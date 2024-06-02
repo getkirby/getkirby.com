@@ -34,7 +34,7 @@ class LocalizedDatetimeElement extends HTMLElement {
 	}
 
 	format(datetime) {
-		return datetime.toLocaleString(undefined, {
+		return datetime.toLocaleString("en-US", {
 			weekday: "short",
 			day: "numeric",
 			month: "long",
