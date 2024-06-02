@@ -11,8 +11,6 @@ use Kirby\Http\Url;
 use Kirby\Toolkit\Obj;
 use Kirby\Toolkit\Str;
 
-require_once __DIR__ . '/default.php';
-
 /**
  * TODO: Remove when plugin content is no longer in the repo
  */

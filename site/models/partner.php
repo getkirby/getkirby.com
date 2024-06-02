@@ -5,8 +5,6 @@ use Kirby\Cms\Pages;
 use Kirby\Content\Field;
 use Kirby\Toolkit\Str;
 
-require_once __DIR__ . '/default.php';
-
 class PartnerPage extends DefaultPage
 {
 	public function avatar(): File|null

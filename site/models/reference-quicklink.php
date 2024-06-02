@@ -5,8 +5,6 @@ use Kirby\Content\Field;
 use Kirby\Template\Template;
 use Kirby\Toolkit\Str;
 
-require_once __DIR__ . '/default.php';
-
 class ReferenceQuickLinkPage extends DefaultPage
 {
 	/**

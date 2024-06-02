@@ -3,8 +3,6 @@
 use Kirby\Content\Field;
 use Kirby\Toolkit\Str;
 
-require_once __DIR__ . '/default.php';
-
 class SecurityPage extends DefaultPage
 {
 	public function incidents(): array

@@ -2,8 +2,6 @@
 
 use Kirby\Cms\Page;
 
-require_once __DIR__ . '/default.php';
-
 class TermsPage extends DefaultPage
 {
 	public function latestVersion(): Page|null

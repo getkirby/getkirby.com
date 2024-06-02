@@ -3,8 +3,6 @@
 use Kirby\Cms\File;
 use Kirby\Content\Field;
 
-require_once __DIR__ . '/default.php';
-
 /**
  * TODO: Remove when plugin content is no longer in the repo
  */
