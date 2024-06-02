@@ -152,11 +152,6 @@ class ReferenceClassesPage extends SectionPage
 			]);
 	}
 
-	public function isActive(bool $hasSubmenu = false): bool
-	{
-		return false;
-	}
-
 	public static function isFeatured(string $page): bool
 	{
 		$ids = [

@@ -49,14 +49,6 @@ class ReferenceQuickLinkPage extends DefaultPage
 		return $children;
 	}
 
-	/**
-	 * Returns whether the referenced page is open
-	 */
-	public function isOpen(): bool
-	{
-		return $this->link()->toPage()?->isOpen() ?? false;
-	}
-
 	public function template(): Template
 	{
 		return $this->kirby()->template('link');
