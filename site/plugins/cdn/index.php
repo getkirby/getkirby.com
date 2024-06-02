@@ -9,9 +9,22 @@ load([
 use Kirby\Cdn\Optimizer;
 use Kirby\Cms\App;
 use Kirby\Cms\FileVersion;
+use Kirby\Cms\Url;
 
 App::plugin('getkirby/cdn', [
 	'components'   => [
+		'css' => function (App $kirby, string $url, $options = null): string {
+			$header = $kirby->response()->header('Link') ?? '';
+
+			if (empty($header) === false) {
+				$header .= ', ';
+			}
+
+			$header .= '<' . Url::to($url) . '>; rel="preload"; as="style"';
+
+			$kirby->response()->header('Link', $header);
+			return $url;
+		},
 		'file::url' => function (App $kirby, $file): string {
 			static $original;
 
