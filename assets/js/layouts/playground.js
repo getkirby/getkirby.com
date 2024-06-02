@@ -28,8 +28,7 @@ export class Playground {
 
 	async switchTo(link) {
 		// fade out the old image
-		this.$el
-			.querySelector(".playground-header-figure-wrapper")
+		this.currentWrapper()
 			.classList.add("loading");
 
 		// since our CSS transition to fade out the image takes 200ms,
@@ -43,8 +42,7 @@ export class Playground {
 		this.$el.innerHTML = doc.querySelector(".playground").innerHTML;
 
 		// fade in the image once loaded
-		this.$el
-			.querySelector(".playground-header-figure img")
+		this.currentImg()
 			.addEventListener("load", function () {
 				// let the browser render the image first to reduce flickering issues
 				setTimeout(() => this.parentNode.classList.remove("loading"), 10);
@@ -52,5 +50,13 @@ export class Playground {
 
 		// reactivate code highlighting
 		Prism.highlightAll();
+	}
+
+	currentWrapper() {
+		return this.$el.querySelector(".playground-header-figure-wrapper");
+	}
+
+	currentImg() {
+		return this.$el.querySelector(".playground-header-figure-wrapper img");
 	}
 }
