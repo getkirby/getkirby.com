@@ -49,19 +49,24 @@ function img($file, array $props = [])
 		return;
 	}
 
-	$src = match (empty($props['src'])) {
-		true    => $file->url(),
-		default => $file->thumb($props['src'])->url()
-	};
+	if (empty($props['src']) === false) {
+		$thumb  = $file->thumb($props['src']);
+		$src    = $thumb->url();
+		$width  = $thumb->width();
+		$height = $thumb->height();
+	}
 
-	$srcset = match (empty($props['srcset'])) {
-		true    => null,
-		default => $file->srcset($props['srcset'])
-	};
+	if (empty($props['srcset']) === false) {
+		$srcset = $file->srcset($props['srcset']);
+	}
 
 	if (($props['lazy'] ?? true) === true) {
 		$loading = 'lazy';
 	}
+
+	$src    ??= $file->url();
+	$width  ??= $file->width();
+	$height ??= $file->height();
 
 	$img = '<img ' . attr([
 		'alt'     => $props['alt'] ?? '',
@@ -69,17 +74,21 @@ function img($file, array $props = [])
 		'loading' => $loading ?? null,
 		'sizes'   => $props['sizes'] ?? null,
 		'src'     => $src,
-		'srcset'  => $srcset,
-		'width'   => $file->width(),
-		'height'  => $file->height()
+		'srcset'  => $srcset ?? null,
+		'width'   => $width,
+		'height'  => $height
 	]) . '>';
 
 	if (empty($props['lightbox']) === false && $props['lightbox'] !== false) {
-		return Html::a($file->resize(1800, 1800)->url(), [$img], [
-			'class'         => 'block',
-			'style'         => '--aspect-ratio: ' . $file->width() . '/' . $file->height(),
-			'data-lightbox' => $props['lightbox']
-		]);
+		return Html::a(
+			$file->resize(1800, 1800)->url(),
+			[$img],
+			[
+				'class'         => 'block',
+				'style'         => '--aspect-ratio: ' . $width . '/' . $height,
+				'data-lightbox' => $props['lightbox']
+			]
+		);
 	}
 
 	return $img;
