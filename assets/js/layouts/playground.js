@@ -7,7 +7,7 @@ export class Playground {
 
 			if (link) {
 				e.preventDefault();
-				this.switchTo(link);
+				this.switchTo(link, e.target);
 			}
 		});
 	}
@@ -26,10 +26,16 @@ export class Playground {
 		return doc;
 	}
 
-	async switchTo(link) {
+	async switchTo(link, target) {
 		// fade out the old image
 		this.currentWrapper()
 			.classList.add("loading");
+
+		// preload the new image
+		const imgSource = this.currentImg()
+			.currentSrc
+			.replace(this.currentWrapper().dataset.image, target.dataset.image);
+		new Image().src = imgSource;
 
 		// since our CSS transition to fade out the image takes 200ms,
 		// ensure that we wait that long, even if the fetch request is faster
