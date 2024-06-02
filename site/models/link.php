@@ -6,6 +6,6 @@ class LinkPage extends DefaultPage
 {
 	public function menuUrl(): string
 	{
-		return url($this->link()->value());
+		return $this->link()->toUrl();
 	}
 }
