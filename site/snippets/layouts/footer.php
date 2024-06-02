@@ -34,57 +34,77 @@
 					<li>
 						<p class="font-bold mb-1">The CMS</p>
 						<ul class="footer-menu-2">
-							<li><a href="<?= page('features/developers')->menuUrl() ?>">For developers</a></li>
-							<li><a href="<?= page('features/designers')->menuUrl() ?>">For designers</a></li>
-							<li><a href="<?= page('features/creators')->menuUrl() ?>">For content creators</a></li>
-							<li><a href="<?= page('features/clients')->menuUrl() ?>">For clients & agencies</a></li>
-							<li><a href="<?= page('love')->menuUrl() ?>">Showcase</a></li>
-							<li><a href="<?= page('releases')->menuUrl() ?>">Releases</a></li>
-							<li><a href="https://feedback.getkirby.com">Feedback</a></li>
+							<?php snippet('layouts/menu-items', [
+								'items' => [
+									'For developers' => page('features/developers'),
+									'For designers' => page('features/designers'),
+									'For content creators' => page('features/creators'),
+									'For clients & agencies' => page('features/clients'),
+									'Showcase' => page('love'),
+									'Releases' => page('releases'),
+									'Feedback' => 'https://feedback.getkirby.com',
+								]
+							]) ?>
 						</ul>
 					</li>
 					<li>
 						<p class="font-bold mb-1">Docs</p>
 						<ul class="footer-menu-2">
-							<li><a href="<?= page('docs/guide')->menuUrl() ?>">Guide</a></li>
-							<li><a href="<?= page('docs/reference')->menuUrl() ?>">Reference</a></li>
-							<li><a href="<?= page('docs/cookbook')->menuUrl() ?>">Cookbook</a></li>
-							<li><a href="<?= page('docs/quicktips')->menuUrl() ?>">Quicktips</a></li>
-							<li><a href="https://videos.getkirby.com">Screencasts</a></li>
-							<li><a href="<?= page('docs/glossary')->menuUrl() ?>">Glossary</a></li>
-							<li><a href="<?= page('docs/archive')->menuUrl() ?>">Archive</a></li>
+							<?php snippet('layouts/menu-items', [
+								'items' => [
+									'Guide' => page('docs/guide'),
+									'Reference' => page('docs/reference'),
+									'Cookbook' => page('docs/cookbook'),
+									'Quicktips' => page('docs/quicktips'),
+									'Screencasts' => 'https://www.youtube.com/kirbycasts',
+									'Glossary' => page('docs/glossary'),
+									'Archive' => page('docs/archive'),
+								]
+							]) ?>
 						</ul>
 					</li>
 					<li>
 						<p class="font-bold mb-1">Resources</p>
 						<ul class="footer-menu-2">
-							<li><a href="https://plugins.getkirby.com">Plugins</a></li>
-							<li><a href="<?= page('themes')->menuUrl() ?>">Themes</a></li>
-							<li><a href="<?= page('kosmos')->menuUrl() ?>">Newsletter</a></li>
-							<li><a href="<?= page('buzz')->menuUrl() ?>">Buzz</a></li>
-							<li><a href="https://hub.getkirby.com">License Hub</a></li>
+							<?php snippet('layouts/menu-items', [
+								'items' => [
+									'Plugins' => 'https://plugins.getkirby.com',
+									'Themes' => page('themes'),
+									'Newsletter' => page('kosmos'),
+									'Buzz' => page('buzz'),
+									'License Hub' => 'https://hub.getkirby.com',
+								]
+							]) ?>
 						</ul>
 					</li>
 					<li>
 						<p class="font-bold mb-1">Community</p>
 						<ul class="footer-menu-2">
-							<li><a href="<?= page('meet')->menuUrl() ?>">Get together</a></li>
-							<li><a href="https://forum.getkirby.com">Support forum</a></li>
-							<li><a href="https://chat.getkirby.com">Discord chat</a></li>
-							<li><a href="https://community.getkirby.com">Community map</a></li>
-							<li><a href="https://mastodon.social/@getkirby">Mastodon</a></li>
-							<li><a href="https://www.linkedin.com/company/getkirby">LinkedIn</a></li>
-							<li><a href="https://instagram.com/getkirby">Instagram</a></li>
+							<?php snippet('layouts/menu-items', [
+								'items' => [
+									'Get together' => page('meet'),
+									'Support forum' => 'https://forum.getkirby.com',
+									'Discord chat' => 'https://chat.getkirby.com',
+									'Community map' => 'https://community.getkirby.com',
+									'Mastodon' => 'https://mastodon.social/@getkirby',
+									'LinkedIn' => 'https://www.linkedin.com/company/getkirby',
+									'Instagram' => 'https://instagram.com/getkirby',
+								]
+							]) ?>
 						</ul>
 					</li>
 					<li>
 						<p class="font-bold mb-1">Kirby</p>
 						<ul class="footer-menu-2">
-							<li><a href="<?= page('security')->menuUrl() ?>">Security</a></li>
-							<li><a href="<?= page('privacy')->menuUrl() ?>">Privacy</a></li>
-							<li><a href="<?= page('license')->menuUrl() ?>">License</a></li>
-							<li><a href="<?= page('press')->menuUrl() ?>">Presskit</a></li>
-							<li><a href="<?= page('contact')->menuUrl() ?>">Contact</a></li>
+							<?php snippet('layouts/menu-items', [
+								'items' => [
+									'Security' => page('security'),
+									'Privacy' => page('privacy'),
+									'License' => page('license'),
+									'Presskit' => page('press'),
+									'Contact' => page('contact'),
+								]
+							]) ?>
 						</ul>
 					</li>
 					<li>
