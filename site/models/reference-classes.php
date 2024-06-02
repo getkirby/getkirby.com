@@ -152,7 +152,7 @@ class ReferenceClassesPage extends SectionPage
 			]);
 	}
 
-	public function isActive(): bool
+	public function isActive(bool $hasSubmenu = false): bool
 	{
 		return false;
 	}

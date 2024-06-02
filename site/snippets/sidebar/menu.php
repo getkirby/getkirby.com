@@ -10,7 +10,7 @@ extract([
 		<?php if ($menuItem->hasListedChildren()): ?>
 		<details class="details" <?= $open || $menuItem->isOpen() ? 'open' : '' ?>>
 			<summary>
-				<a <?= ariaCurrent($menuItem->isActiveInMenu(hasSubmenu: true), 'page') ?> href="<?= $menuItem->menuUrl() ?>"><?= $menuItem->title() ?></a>
+				<a <?= ariaCurrent($menuItem->isActive(hasSubmenu: true), 'page') ?> href="<?= $menuItem->menuUrl() ?>"><?= $menuItem->title() ?></a>
 			</summary>
 
 			<ul class="sidebar-menu-2">
@@ -27,7 +27,7 @@ extract([
 		</details>
 
 		<?php else: ?>
-		<a <?= ariaCurrent($menuItem->isActiveInMenu(), 'page') ?> href="<?= $menuItem->menuUrl() ?>"><?= $menuItem->title() ?></a>
+		<a <?= ariaCurrent($menuItem->isActive(), 'page') ?> href="<?= $menuItem->menuUrl() ?>"><?= $menuItem->title() ?></a>
 		<?php endif ?>
 	</li>
 	<?php endforeach ?>
