@@ -17,7 +17,7 @@
 			<a href="<?= $event->link() ?>" class="flex items-center justify-between bg-white p-3 rounded shadow">
 				<h3 class="font-bold"><?= $event->title() ?></h3>
 				<p class="color-gray-700">
-					<?= $event->date()->toDate('D j M, H:i') ?> <?= $event->timezone() ?>
+					<localized-datetime><?= $event->date() ?></localized-datetime>
 				</p>
 			</a>
 		</li>
@@ -25,6 +25,30 @@
 	</ul>
 	<?php endif ?>
 </section>
+
+<script>
+class LocalizedDatetimeElement extends HTMLElement {
+  connectedCallback() {
+		this.utc = new Date(this.innerText);
+		this.innerText = this.format(this.utc);
+  }
+
+	format(datetime) {
+		return datetime.toLocaleString(undefined, {
+			weekday: "short",
+			day: "numeric",
+			month: "long",
+			year: "numeric",
+			hour12: false,
+			hour: "2-digit",
+			minute: "2-digit",
+			timeZoneName: "short"
+		})
+	}
+}
+
+customElements.define("localized-datetime", LocalizedDatetimeElement);
+</script>
 
 <style>
 @media (max-width: 40rem) {

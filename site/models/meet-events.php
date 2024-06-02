@@ -18,7 +18,6 @@ class MeetEventsPage extends Page
 		$events   = $this->getData();
 
 		foreach ($events as $event) {
-			$timezone   = 'CET';
 			$children[] = [
 				'slug'     => Str::kebab($event['name']),
 				'num'      => 0,
@@ -28,8 +27,7 @@ class MeetEventsPage extends Page
 				'content'  => [
 					'title'    => $event['name'],
 					'link'     => $event['entity_metadata']['location'],
-					'date'     => Date::optional($event['scheduled_start_time'])->setTimezone(new DateTimeZone($timezone))->format('Y-m-d H:i:s'),
-					'timezone' => $timezone
+					'date'     => Date::optional($event['scheduled_start_time'])->setTimezone(new DateTimeZone('UCT'))->format('Y-m-d\TH:i:s\Z'),
 				]
 			];
 		}
