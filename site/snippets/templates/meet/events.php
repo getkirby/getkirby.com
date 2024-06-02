@@ -29,7 +29,7 @@
 <script>
 class LocalizedDatetimeElement extends HTMLElement {
 	connectedCallback() {
-		this.utc = new Date(this.date);
+		this.utc = new Date(this.getAttribute("date"));
 		this.innerText = this.format(this.utc);
 	}
 
