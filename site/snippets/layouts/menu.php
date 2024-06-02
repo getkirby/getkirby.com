@@ -8,52 +8,71 @@
 			<li class="has-submenu">
 				<a href="<?= page('features/developers')->menuUrl() ?>">The CMS</a>
 				<ul class="menu-2">
-					<li><a href="<?= page('features/developers')->menuUrl() ?>">For developers</a></li>
-					<li><a href="<?= page('features/designers')->menuUrl() ?>">For designers</a></li>
-					<li><a href="<?= page('features/creators')->menuUrl() ?>">For content creators</a></li>
-					<li><a href="<?= page('features/clients')->menuUrl() ?>">For clients & agencies</a></li>
-					<li><hr /></li>
-					<li><a href="<?= page('love')->menuUrl() ?>">Showcase</a></li>
-					<li><a href="<?= page('releases')->menuUrl() ?>">Releases</a></li>
-					<li><a class="is-external" href="https://feedback.getkirby.com">Feedback</a></li>
+					<?php snippet('layouts/menu-items', [
+						'externalClass' => 'is-external',
+						'items' => [
+							'For developers' => page('features/developers'),
+							'For designers' => page('features/designers'),
+							'For content creators' => page('features/creators'),
+							'For clients & agencies' => page('features/clients'),
+							'hr',
+							'Showcase' => page('love'),
+							'Releases' => page('releases'),
+							'Feedback' => 'https://feedback.getkirby.com',
+						]
+					]) ?>
 				</ul>
 			</li>
 			<li class="has-submenu">
 				<a href="<?= page('docs/guide')->menuUrl() ?>">Docs</a>
 				<ul class="menu-2">
-					<li><a href="<?= page('docs/guide')->menuUrl() ?>">Guide</a></li>
-					<li><a href="<?= page('docs/reference')->menuUrl() ?>">Reference</a></li>
-
-					<li><a href="<?= page('docs/cookbook')->menuUrl() ?>">Cookbook</a></li>
-					<li><a href="<?= page('docs/quicktips')->menuUrl() ?>">Quicktips</a></li>
-					<li><a class="is-external" href="https://youtube.com/kirbycasts">Screencasts</a></li>
-					<li><a href="<?= page('docs/glossary')->menuUrl() ?>">Glossary</a></li>
+					<?php snippet('layouts/menu-items', [
+						'externalClass' => 'is-external',
+						'items' => [
+							'Guide' => page('docs/guide'),
+							'Reference' => page('docs/reference'),
+							'Cookbook' => page('docs/cookbook'),
+							'Quicktips' => page('docs/quicktips'),
+							'Screencasts' => 'https://www.youtube.com/kirbycasts',
+							'Glossary' => page('docs/glossary'),
+						]
+					]) ?>
 				</ul>
 			</li>
 			<li class="has-submenu">
 				<a href="<?= page('kosmos')->menuUrl() ?>">Resources</a>
 				<ul class="menu-2">
-					<li><a class="is-external" href="https://plugins.getkirby.com">Plugins</a></li>
-					<li><a href="<?= page('themes')->menuUrl() ?>">Themes</a></li>
-					<li><hr /></li>
-					<li><a href="<?= page('kosmos')->menuUrl() ?>">Newsletter</a></li>
-					<li><a href="<?= page('buzz')->menuUrl() ?>">Buzz</a></li>
-					<li><hr /></li>
-					<li><a class="is-external" href="https://hub.getkirby.com">License Hub</a></li>
+					<?php snippet('layouts/menu-items', [
+						'externalClass' => 'is-external',
+						'items' => [
+							'Plugins' => 'https://plugins.getkirby.com',
+							'Themes' => page('themes'),
+							'hr',
+							'Newsletter' => page('kosmos'),
+							'Buzz' => page('buzz'),
+							'hr',
+							'License Hub' => 'https://hub.getkirby.com',
+						]
+					]) ?>
 				</ul>
 			</li>
 			<li class="has-submenu">
 				<a href="<?= page('meet')->menuUrl() ?>">Community</a>
 				<ul class="menu-2">
-					<li><a href="<?= page('meet')->menuUrl() ?>">Get together</a></li>
-					<li><hr /></li>
-					<li><a class="is-external" href="https://forum.getkirby.com">Support forum</a></li>
-					<li><a class="is-external" href="https://chat.getkirby.com">Discord chat</a></li>
-					<li><a class="is-external" href="https://community.getkirby.com">Community map</a></li>
-					<li><hr /></li>
-					<li><a class="is-external" href="https://mastodon.social/@getkirby">Mastodon</a></li>
-					<li><a class="is-external" href="https://www.linkedin.com/company/getkirby">LinkedIn</a></li>
-					<li><a class="is-external" href="https://instagram.com/getkirby">Instagram</a></li>
+					<?php snippet('layouts/menu-items', [
+						'externalClass' => 'is-external',
+						'items' => [
+							'Get together' => page('meet'),
+							'hr',
+							'Support forum' => 'https://forum.getkirby.com',
+							'Discord chat' => 'https://chat.getkirby.com',
+							'Community map' => 'https://community.getkirby.com',
+							'hr',
+							'Mastodon' => 'https://mastodon.social/@getkirby',
+							'LinkedIn' => 'https://www.linkedin.com/company/getkirby',
+							'Instagram' => 'https://instagram.com/getkirby',
+						]
+					]) ?>
 				</ul>
 			</li>
 			<li><a class="partners" href="<?= page('partners')->menuUrl() ?>">Partners</a></li>
