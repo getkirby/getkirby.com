@@ -5,7 +5,7 @@ return [
 	'buy'        => require __DIR__ . '/buy.php',
 	'categories' => require __DIR__ . '/categories.php',
 	'countries'  => require __DIR__ . '/countries.php',
-	'debug'      => true,
+	'debug'      => false,
 	'features'   => require __DIR__ . '/features.php',
 	'github'     => ['url' => 'https://github.com/getkirby'],
 	'hub'        => ['url' => 'https://hub.getkirby.com'],

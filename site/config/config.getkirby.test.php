@@ -7,6 +7,7 @@ return [
 			'type'   => 'file'
 		],
 	],
+	'debug' => true,
 	'thumbs' => [
 		// 'bin' => '/usr/local/bin/convert'
 	],

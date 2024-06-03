@@ -5,6 +5,5 @@ return [
 	'cdn' => [
 		'domain' => 'https://assets-staging.getkirby.com',
 	],
-	'debug' => false,
 	'noindex' => true,
 ];
