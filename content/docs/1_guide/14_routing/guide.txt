@@ -14,6 +14,12 @@ Icon: directions
 
 ----
 
+Screencast:
+
+(screencast: https://youtu.be/5u7IF2j8UZ0 title: Learn how to use Kirby's built-in router to create custom routes for redirects, stable URLs, or even virtual pages.)
+
+----
+
 Text:
 
 When you create a new page in Kirby's content folder, this folder creates a new URL, for example, the page `/content/projects/project-a` will be available at `https://yourdomain.com/projects/project-a`. So when the user types that URL into the browser's address bar, the project page will be rendered.
