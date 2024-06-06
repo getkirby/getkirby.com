@@ -116,7 +116,7 @@
 				</section>
 			</div>
 
-			<a href="https://airtable.com/shrrNVO56SWhB7Ulq?prefill_Package=certified" class="btn btn--filled">
+			<a :href="link" target="_blank" class="btn btn--filled">
 				<?= icon('icon-blank') ?> Join for&nbsp;<strong>€{{ price }}</strong>
 			</a>
 		</div>
@@ -156,7 +156,7 @@
 				</section>
 			</div>
 
-			<a href="https://airtable.com/shrrNVO56SWhB7Ulq?prefill_Package=certified" class="btn btn--filled">
+			<a :href="link" target="_blank" class="btn btn--filled">
 				<?= icon('verified') ?> Join for&nbsp;<strong>€{{ price }}</strong>
 			</a>
 		</div>
@@ -199,6 +199,21 @@ createApp({
 		const people = this.personalInfo.people;
 
 		return this.prices[tier][people];
+	},
+	get link() {
+		const link = "https://airtable.com/appeeHREbUMMaZGRP/pag4FOyHuNDzqbbkv/form"
+		const params = new URLSearchParams();
+
+		params.append("prefill_Plan", this.personalInfo.tier);
+		params.append("prefill_People", this.personalInfo.people);
+		params.append("prefill_Title", this.personalInfo.title);
+		params.append("prefill_Subtitle", this.personalInfo.subtitle);
+		params.append("prefill_Location", this.personalInfo.location);
+		params.append("prefill_Location", this.personalInfo.location);
+		params.append("prefill_Description", this.personalInfo.description);
+		params.append("prefill_Currency", "EUR");
+
+		return link + "?" + params;
 	}
 }).mount();
 </script>
