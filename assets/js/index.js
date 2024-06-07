@@ -12,7 +12,9 @@ import Lightbox from "./components/lightbox.js";
 import Menu from "./components/menu.js";
 import Search from "./components/search.js";
 
-new Code();
-new Lightbox();
-new Menu();
-new Search();
+document.addEventListener("DOMContentLoaded", () => {
+	new Code();
+	new Lightbox();
+	new Menu();
+	new Search();
+});
