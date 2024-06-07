@@ -30,7 +30,7 @@
 	}
 }
 
-@media screen and (min-width: 100rem) {
+@media screen and (min-width: 80rem) {
 	.reference-content .screencast {
 		grid-template-columns: 1fr 2fr;
 	}
