@@ -4,6 +4,15 @@ namespace Kirby\Cdn;
 
 use Kirby\Cms\App;
 
+/**
+ * Helper class for dynamic asset URL optimization
+ *
+ * @package   Kirby Cdn
+ * @author    Lukas Bestle <lukas@getkirby.com>
+ * @link      https://getkirby.com
+ * @copyright Bastian Allgeier
+ * @license   https://opensource.org/licenses/MIT
+ */
 class Optimizer
 {
 	public function __construct(public readonly bool $cdn)
