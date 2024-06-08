@@ -12,9 +12,17 @@ import Lightbox from "./components/lightbox.js";
 import Menu from "./components/menu.js";
 import Search from "./components/search.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+function init() {
 	new Code();
 	new Lightbox();
 	new Menu();
 	new Search();
-});
+}
+
+if (document.readyState === "loading") {
+  // loading hasn't finished yet
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  // `DOMContentLoaded` has already fired
+  init();
+}
