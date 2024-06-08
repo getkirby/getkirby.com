@@ -35,20 +35,25 @@ class KeyCdn
 
 	protected static function resizeOrCrop(array $params): array
 	{
+		$query = [];
+
 		// Use the width as height if the height is not set
 		if (empty($params['crop']) === false && $params['crop'] !== false) {
-			$params['height'] ??= $params['width'];
-			$params['crop']     = match ($params['crop']) {
+			$query['width']  = $params['width'];
+			$query['height'] = $params['height'] ?? $params['width'];
+			$query['crop']   = match ($params['crop']) {
 				'top'   =>  'fp,0,0',
 				default => 'smart'
 			};
 		} else {
-			$params['enlarge'] = 0;
+			$query['width']   = $params['width'];
+			$query['enlarge'] = 0;
 			if (isset($params['width'], $params['height']) === true) {
-				$params['fit'] = 'inside';
+				$query['height'] = $params['height'];
+				$query['fit']    = 'inside';
 			}
 		}
 
-		return $params;
+		return $query;
 	}
 }
