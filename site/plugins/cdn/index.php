@@ -41,13 +41,10 @@ App::plugin('getkirby/cdn', [
 			static $original;
 
 			if ($kirby->option('cdn', false) !== false) {
-				$url = Image::url($file, $options);
-
 				return new FileVersion([
 					'modifications' => $options,
 					'original'      => $file,
 					'root'          => $file->root(),
-					'url'           => $url,
 				]);
 			}
 

@@ -20,6 +20,14 @@ class FileVersion extends BaseFileVersion
 {
 	protected Dimensions|null $dimensions = null;
 
+	public function __construct(array $props)
+	{
+		parent::__construct([
+			...$props,
+			'url' => Image::url($props['original'], $props['modifications'])
+		]);
+	}
+
 	public function dimensions(): Dimensions
 	{
 		if ($this->dimensions !== null) {
