@@ -60,8 +60,15 @@ function img($file, array $props = [])
 		$srcset = $file->srcset($props['srcset']);
 	}
 
+	$sizes = $props['sizes'] ?? null;
 	if (($props['lazy'] ?? true) === true) {
 		$loading = 'lazy';
+
+		// browser can determine the rendered size for lazy-loaded
+		// images if we haven't defined a manual `sizes` attribute
+		if ($srcset ?? null) {
+			$sizes ??= 'auto';
+		}
 	}
 
 	$src    ??= $file->url();
@@ -72,7 +79,7 @@ function img($file, array $props = [])
 		'alt'     => $props['alt'] ?? '',
 		'class'   => $props['class'] ?? null,
 		'loading' => $loading ?? null,
-		'sizes'   => $props['sizes'] ?? null,
+		'sizes'   => $sizes,
 		'src'     => $src,
 		'srcset'  => $srcset ?? null,
 		'width'   => $width,
