@@ -42,25 +42,14 @@ class Image
 		);
 		$params = $darkroom->preprocess($root, $params);
 
-		$query = '';
-		if (empty($params) === false) {
-			$query = '?' . http_build_query([
-				...static::resizeOrCrop($params),
-				...static::grayscale($params),
-				...static::progressive($params),
-				...static::blur($params),
-				...static::sharpen($params),
-			]);
-		}
-
-		return $kirby->option('cdn.domain') . '/' . $path . $query;
+		return $kirby->option('cdn.domain') . '/' . $path . static::query($params);
 	}
 
 	protected static function blur(array $params): array
 	{
 		if ($params['blur'] !== false) {
 			return [
-				'blur' => max(0.3, min(100, $params['blur']))	
+				'blur' => max(0.3, min(100, $params['blur']))
 			];
 		}
 
@@ -83,6 +72,21 @@ class Image
 		}
 
 		return [];
+	}
+
+	protected static function query(array $params): string
+	{
+		if (empty($params) === true) {
+			return '';
+		}
+
+		return '?' . http_build_query([
+			...static::resizeOrCrop($params),
+			...static::grayscale($params),
+			...static::progressive($params),
+			...static::blur($params),
+			...static::sharpen($params),
+		]);
 	}
 
 	protected static function resizeOrCrop(array $params): array
