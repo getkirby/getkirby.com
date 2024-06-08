@@ -27,8 +27,8 @@ class Image
 	public static function url(string|File $file, array $params = []): string
 	{
 		$kirby = App::instance();
+		$root  = $file;
 
-		$root = $file;
 		if (is_object($file) === true) {
 			$root = $file->root();
 			$file = $file->mediaUrl();
@@ -59,8 +59,9 @@ class Image
 	protected static function blur(array $params): array
 	{
 		if ($params['blur'] !== false) {
-			$blur = max(0.3, min(100, $params['blur']));
-			return compact('blur');
+			return [
+				'blur' => max(0.3, min(100, $params['blur']))	
+			];
 		}
 
 		return [];
@@ -126,8 +127,9 @@ class Image
 	protected static function sharpen(array $params): array
 	{
 		if (is_int($params['sharpen']) === true) {
-			$sharpen = max(0, min(100, $params['sharpen']));
-			return compact('sharpen');
+			return [
+				'sharpen' => max(0, min(100, $params['sharpen']))
+			];
 		}
 
 		return [];
