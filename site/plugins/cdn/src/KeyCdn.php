@@ -37,7 +37,6 @@ class KeyCdn
 	{
 		// Use the width as height if the height is not set
 		if (empty($params['crop']) === false && $params['crop'] !== false) {
-			$params['fit']      = true;
 			$params['height'] ??= $params['width'];
 			$params['crop']     = match ($params['crop']) {
 				'top'   =>  'fp,0,0',
@@ -45,10 +44,9 @@ class KeyCdn
 			};
 		} else {
 			$params['enlarge'] = 0;
-			$params['fit']     = match (isset($params['width'], $params['height'])) {
-				true    => 'inside',
-				default => true
-			};
+			if (isset($params['width'], $params['height']) === true) {
+				$params['fit'] = 'inside';
+			}
 		}
 
 		return $params;
