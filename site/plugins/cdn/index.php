@@ -4,10 +4,12 @@ include_once __DIR__ . '/helpers.php';
 
 load([
 	'kirby\\cdn\\fileversion' => __DIR__ . '/src/FileVersion.php',
+	'kirby\\cdn\\keycdn'      => __DIR__ . '/src/KeyCdn.php',
 	'kirby\\cdn\\optimizer'   => __DIR__ . '/src/Optimizer.php'
 ]);
 
 use Kirby\Cdn\FileVersion;
+use Kirby\Cdn\KeyCdn;
 use Kirby\Cdn\Optimizer;
 use Kirby\Cms\App;
 use Kirby\Cms\Url;
@@ -30,7 +32,7 @@ App::plugin('getkirby/cdn', [
 			static $original;
 
 			if ($file->type() === 'image') {
-				return cdn($file);
+				return KeyCdn::url($file);
 			}
 
 			$original ??= $kirby->nativeComponent('file::url');
@@ -41,7 +43,7 @@ App::plugin('getkirby/cdn', [
 			static $original;
 
 			if ($kirby->option('cdn', false) !== false) {
-				$url = cdn($file, $options);
+				$url = KeyCdn::url($file, $options);
 
 				return new FileVersion([
 					'modifications' => $options,
