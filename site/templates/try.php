@@ -41,16 +41,14 @@
 					<?= img($image, [
 						'alt' => 'A screenshot of the Panel',
 						'src' => [
-							'width'  => 1000,
+							'width' => 576,
 						],
 						'lazy' => false,
+						'sizes' => '(min-width: 1440px) 576px, (min-width: 1150px) 40vw, 90vw',
 						'srcset' => [
-							'1x' => [
-								'width'  => 1000
-							],
-							'2x' => [
-								'width'  => 1500
-							],
+							576,
+							1152,
+							2100,
 						]
 					]) ?>
 				</figure>

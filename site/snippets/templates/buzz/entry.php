@@ -13,7 +13,18 @@
 					'loading' => 'lazy'
 				]) ?>
 			<?php elseif ($img = $entry->image()): ?>
-				<?= $img->resize(800, 400) ?>
+				<?= img($img, [
+					'src' => [
+						'width' => 384
+					],
+					'lazy' => $lazy,
+					'sizes' => '(min-width: 1440px) 384px, (min-width: 1250px) 27vw, (min-width: 785px) 42vw, 88vw',
+					'srcset' => [
+						384,
+						768,
+						1200,
+					],
+				]) ?>
 			<?php endif ?>
 		</figure>
 

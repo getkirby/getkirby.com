@@ -8,9 +8,16 @@
 					 style="--columns: 4; --columns-sm: 4; --gap: var(--spacing-6)">
 		<figure style="--span: 1; --aspect-ratio: 1/1; overflow: hidden">
 			<?php if ($avatar = $partner->avatar()): ?>
-				<?= $avatar->resize(200) ?>
-			<?php elseif ($image = $partner->image()): ?>
-				<?= $image ?>
+				<?= img($avatar, [
+					'src' => [
+						'width' => 70
+					],
+					'sizes' => '(min-width: 1440px) 70px, (min-width: 960px) 5vw, (min-width: 640px) 8vw, 18vw',
+					'srcset' => [
+						70,
+						140,
+					]
+				]) ?>
 			<?php endif ?>
 		</figure>
 		<header style="--span: 3; --span-sm: 3">

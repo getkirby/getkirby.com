@@ -6,7 +6,7 @@
 	</header>
 
 	<ul class="columns mb-24" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 3; --gap: var(--spacing-12)">
-		<?php foreach ($page->children()->flip() as $release): ?>
+		<?php foreach ($releases = $page->children()->flip() as $release): ?>
 			<li>
 				<a href="<?= $release->releasePage()->or($release->url()) ?>" class="block mb-1">
 					<header class="mb-3">
@@ -14,12 +14,21 @@
 					</header>
 
 					<?php if ($cover = $release->cover()->toFile()): ?>
-						<figure class="border-top pt-6 mb-6">
-							<img srcset="<?= $cover->srcset([
-								'384w' => ['width' => 384, 'height' => 224, 'crop' => 'top'],
-								'768w' => ['width' => 768, 'height' => 448, 'crop' => 'top'],
-								'1200w' => ['width' => 1200, 'height' => 700, 'crop' => 'top'],
-							]) ?>" sizes="(max-width: 1150px) 90vw, 384px" class="bg-dark" style="aspect-ratio: 12/7" alt="Cover image for the <?= $release->title() ?> release">
+						<figure class="border-top mb-6" style="--aspect-ratio: 12/7">
+							<?= img($cover, [
+								'alt' => 'Cover image for the ' . $release->title() . ' release',
+								'src' => [
+									'width' => 384
+								],
+								'lazy' => $releases->indexOf($release) > 2,
+								'sizes' => '(min-width: 1320px) 384px, (min-width: 1150px) 30vw, 90vw',
+								'srcset' => [
+									'384w'  => ['width' => 384, 'height' => 224, 'crop' => 'top'],
+									'768w'  => ['width' => 768, 'height' => 448, 'crop' => 'top'],
+									'1200w' => ['width' => 1200, 'height' => 700, 'crop' => 'top'],
+								],
+								'class' => 'bg-dark'
+							]) ?>
 						</figure>
 					<?php endif ?>
 				</a>
