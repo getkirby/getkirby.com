@@ -35,7 +35,21 @@
 	]) ?>
 
 	<figure class="release-box mb-6" style="--aspect-ratio: 1558/688">
-		<img src="<?= $page->image('uuids.png')?->url() ?>" loading="lazy" alt="An illustration showing the new UUID system">
+		<?= img($page->image('uuids.png'), [
+			'alt' => 'An illustration showing the new UUID system',
+			'src' => [
+				'width' => 1248
+			],
+			'lazy' => false,
+			'sizes' => '(min-width: 1440px) 1248px, (min-width: 1150px) 86vw, 92vw',
+			'srcset' => [
+				200,
+				400,
+				800,
+				1248,
+				2496,
+			]
+		]) ?>
 	</figure>
 
 	<div class="columns mb-6" style="--columns-md: 1; --columns: 2">

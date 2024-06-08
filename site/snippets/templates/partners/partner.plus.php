@@ -16,11 +16,37 @@
 		<figure>
 			<div style="--aspect-ratio: 3/2" class="mb-3">
 				<?php if ($image = $partner->card()): ?>
-					<?= $image->resize(800) ?>
+					<?= img($image, [
+						'src' => [
+							'width' => 352
+						],
+						'lazy' => $lazy,
+						'sizes' => '(min-width: 1440px) 352px, (min-width: 960px) 37vw, (min-width: 640px) 40vw, 85vw',
+						'srcset' => [
+							352,
+							500,
+							550,
+							704,
+							1000,
+							1100
+						]
+					]) ?>
 				<?php elseif ($image = $partner->avatar()): ?>
 					<span class="p-6 bg-light">
-						<img class="shadow-xl bg-white" style="width: auto; height: 100%;"
-								 src="<?= $image->resize(650)->url() ?>">
+						<?= img($image, [
+							'src' => [
+								'width' => 187
+							],
+							'lazy' => $lazy,
+							'sizes' => '(min-width: 1440px) 187px, (min-width: 960px) 13vw, (min-width: 640px) 22vw, 48vw',
+							'srcset' => [
+								187,
+								374,
+								600,
+							],
+							'class' => 'shadow-xl bg-white',
+							'style' => 'width: auto; height: 100%;'
+						]) ?>
 					</span>
 				<?php endif ?>
 			</div>

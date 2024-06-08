@@ -111,7 +111,7 @@
 
 	<section class="partners-section partners-plus columns mb-42" style="--gap: var(--spacing-24)">
 		<?php foreach ($plus as $partner): ?>
-			<?php snippet('templates/partners/partner.plus', ['partner' => $partner]) ?>
+			<?php snippet('templates/partners/partner.plus', ['partner' => $partner, 'lazy' => $plus->indexOf($partner) > 2]) ?>
 		<?php endforeach ?>
 	</section>
 

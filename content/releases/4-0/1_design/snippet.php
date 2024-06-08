@@ -36,7 +36,20 @@
 </style>
 
 <figure class="release-box bg-light mb-6">
-	<?= $section->image('company.png')->resize(1600) ?>
+	<?= img($section->image('company.png'), [
+		'src' => [
+			'width' => 1248
+		],
+		'lazy' => false,
+		'sizes' => '(min-width: 1440px) 1248px, (min-width: 1150px) 86vw, 92vw',
+		'srcset' => [
+			200,
+			400,
+			800,
+			1248,
+			2496,
+		]
+	]) ?>
 </figure>
 
 <ul class="v4-design-features">

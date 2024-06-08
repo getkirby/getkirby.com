@@ -10,9 +10,14 @@
 							'width' => 450
 						],
 						'lazy' => $cases->indexOf($case) > 2,
+						'sizes' => '(min-width: 1320px) 352px, (min-width: 1150px) 27vw, (min-width: 640px) 45vw, 85vw',
 						'srcset' => [
-							'1x' => 450,
-							'2x' => 900,
+							352,
+							500,
+							550,
+							704,
+							1000,
+							1100
 						]
 					]) ?>
 				</figure>

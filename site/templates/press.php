@@ -39,18 +39,14 @@
 			<li>
 				<a aria-label="Download the Panel screenshot" class="block bg-light rounded overflow-hidden" href="<?= $screenshot->url() ?>" style="--aspect-ratio: <?= $screenshot->width() . '/' . $screenshot->height() ?>" download>
 					<?= img($screenshot, [
-						'alt' => 'A panel screenshot',
+						'alt' => 'A Panel screenshot',
 						'class' => 'shadow-2xl',
 						'src' => [
-							'width'  => 1000,
+							'width' => 600,
 						],
 						'srcset' => [
-							'1x' => [
-								'width'  => 1000
-							],
-							'2x' => [
-								'width'  => 1500
-							],
+							600,
+							1200,
 						]
 					]) ?>
 				</a>

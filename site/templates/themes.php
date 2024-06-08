@@ -39,9 +39,13 @@
 							'width' => 600
 						],
 						'lazy' => $themes->indexOf($theme) > 2,
+						'sizes' => '(min-width: 2400px) 20vw, (min-width: 1820px) 27vw, (min-width: 1150px) 40vw, (min-width: 960px) 43vw, 85vw',
 						'srcset' => [
-							'1x' => 600,
-							'2x' => 1200,
+							400,
+							670,
+							850,
+							1240,
+							1700
 						]
 					]) ?>
 				</figure>

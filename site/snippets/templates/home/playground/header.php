@@ -23,15 +23,18 @@
 					<?= img($storyImage, [
 						'alt' => $storyImage->alt()->or('Panel screenshot for: ' . $story->title()),
 						'src' => [
-							'width' => 1280
+							'width' => 1520
 						],
 						'lazy' => false,
+						'sizes' => '(min-width: 1760px) 1520px, (min-width: 800px) 85vw, 100vw',
 						'srcset' => [
 							320,
 							640,
+							800,
 							960,
-							1280,
-							1600
+							1520,
+							1600,
+							3040
 						]
 					]) ?>
 				</span>
