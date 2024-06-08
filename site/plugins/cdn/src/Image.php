@@ -8,7 +8,7 @@ use Kirby\Http\Url;
 use Kirby\Image\Darkroom;
 use Kirby\Image\Focus;
 
-class KeyCdn
+class Image
 {
 	/**
 	 * Generates a URL with KeyCDN image processing parameters
