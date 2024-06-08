@@ -9,6 +9,12 @@ use Kirby\Image\Dimensions;
  * Modified FileVersion class to provide the correct dimensions
  * for a thumb generated in the CDN context
  * where no actual thumb file can be measured
+ *
+ * @package   Kirby Cdn
+ * @author    Nico Hoffmann <nico@getkirby.com>
+ * @link      https://getkirby.com
+ * @copyright Bastian Allgeier
+ * @license   https://opensource.org/licenses/MIT
  */
 class FileVersion extends BaseFileVersion
 {
