@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cdn\KeyCdn;
+use Kirby\Cdn\Image;
 use Kirby\Cms\File;
 
 /**
@@ -10,5 +10,5 @@ use Kirby\Cms\File;
  */
 function cdn(string|File $file, array $params = []): string
 {
-	return KeyCdn::url($file, $params);
+	return Image::url($file, $params);
 }
