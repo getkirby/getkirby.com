@@ -5,6 +5,7 @@ namespace Kirby\Cdn;
 use Kirby\Cms\App;
 use Kirby\Cms\File;
 use Kirby\Http\Url;
+use Kirby\Image\Darkroom;
 
 class KeyCdn
 {
@@ -17,11 +18,19 @@ class KeyCdn
 	{
 		$kirby = App::instance();
 
+		$root = $file;
 		if (is_object($file) === true) {
+			$root = $file->root();
 			$file = $file->mediaUrl();
 		}
 
 		$path = Url::path($file);
+
+		$darkroom = Darkroom::factory(
+			'im',
+			$kirby->option('thumbs', [])
+		);
+		$params = $darkroom->preprocess($root, $params);
 
 		$query = '';
 		if (empty($params) === false) {
@@ -35,24 +44,22 @@ class KeyCdn
 
 	protected static function resizeOrCrop(array $params): array
 	{
-		$query = [];
+		$query = [
+			'width'  => $params['width'],
+			'height' => $params['height'],
+		];
 
-		// Use the width as height if the height is not set
-		if (empty($params['crop']) === false && $params['crop'] !== false) {
-			$query['width']  = $params['width'];
-			$query['height'] = $params['height'] ?? $params['width'];
-			$query['crop']   = match ($params['crop']) {
-				'top'   =>  'fp,0,0',
-				default => 'smart'
-			};
-		} else {
-			$query['width']   = $params['width'];
+		// simple resize
+		if ($params['crop'] === false) {
 			$query['enlarge'] = 0;
-			if (isset($params['width'], $params['height']) === true) {
-				$query['height'] = $params['height'];
-				$query['fit']    = 'inside';
-			}
+
+			return $query;
 		}
+
+		$query['crop'] = match ($params['crop']) {
+			'top'   =>  'fp,0,0',
+			default => 'smart'
+		};
 
 		return $query;
 	}
