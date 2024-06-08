@@ -13,7 +13,7 @@ use Kirby\Cms\App;
 use Kirby\Cms\Url;
 
 App::plugin('getkirby/cdn', [
-	'components'   => [
+	'components' => [
 		'css' => function (App $kirby, string $url, $options = null): string {
 			$header = $kirby->response()->header('Link') ?? '';
 
@@ -76,5 +76,4 @@ App::plugin('getkirby/cdn', [
 			return $original($kirby, $path, $options);
 		},
 	]
-
 ]);

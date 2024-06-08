@@ -5,13 +5,13 @@ use Kirby\Cms\File;
 use Kirby\Http\Url;
 
 /**
- * Helper function for image modifications via KeyCDN.
- * Takes a path string to a file or a `\Kirby\Cms\File` object
- * as well as an array of KeyCDN image optimization parameters
+ * Generates a URL with KeyCDN image processing parameters
+ * (https://www.keycdn.com/support/image-processing)
+ * based on a file URL or object and Kirby thumb params
  */
 function cdn(string|File $file, array $params = []): string
 {
-	$query = null;
+	$query = '';
 
 	if (is_object($file) === true) {
 		$file = $file->mediaUrl();
@@ -28,7 +28,6 @@ function cdn(string|File $file, array $params = []): string
 				'top'   =>  'fp,0,0',
 				default => 'smart'
 			};
-
 		} else {
 			$params['enlarge'] = 0;
 			$params['fit']     = match (isset($params['width'], $params['height'])) {
