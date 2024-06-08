@@ -1,7 +1,5 @@
 <?php
 
-include_once __DIR__ . '/helpers.php';
-
 load([
 	'kirby\\cdn\\fileversion' => __DIR__ . '/src/FileVersion.php',
 	'kirby\\cdn\\image'       => __DIR__ . '/src/Image.php',
