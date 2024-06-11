@@ -238,7 +238,6 @@ The size option controls the size of the report cards.
 
 Available sizes:
 
-- `tiny`
 - `small`
 - `medium`
 - `large`
