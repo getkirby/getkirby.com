@@ -114,10 +114,12 @@
 						<li><?= icon('alert') ?> 2 completed Kirby projects</li>
 					</ul>
 				</section>
+
+				<?php snippet('templates/partners-signup/price') ?>
 			</div>
 
 			<a :href="link" target="_blank" class="btn btn--filled">
-				<?= icon('icon-blank') ?> Join for&nbsp;<strong>€{{ price }}</strong>
+				<?= icon('icon-blank') ?> Apply now
 			</a>
 		</div>
 
@@ -147,17 +149,19 @@
 					</ul>
 				</section>
 
-				<section class="mb-12">
+				<section class="mb-6">
 					<h3 class="font-bold mb-1">Requirements</h3>
 					<ul class="requirements">
 						<li><?= icon('alert') ?> 4 completed Kirby projects</li>
 						<li><?= icon('alert') ?> 1 reviewed project</li>
 					</ul>
 				</section>
+
+				<?php snippet('templates/partners-signup/price') ?>
 			</div>
 
 			<a :href="link" target="_blank" class="btn btn--filled">
-				<?= icon('verified') ?> Join for&nbsp;<strong>€{{ price }}</strong>
+				<?= icon('verified') ?> Apply now
 			</a>
 		</div>
 	</div>
@@ -174,11 +178,11 @@ createApp({
 	// user-generated props
 	personalInfo: {
 		people: 1,
-		tier: "regular",
-		title: "Your company name",
-		subtitle: "Type of company",
-		location: "City, Country",
-		description: "Tell the audience about yourself in 140 characters or less. Describe your strengths as company and let them know why they should choose you."
+		tier: "certified",
+		title: "",
+		subtitle: "",
+		location: "",
+		description: ""
 	},
 	prices: {
 		regular: {

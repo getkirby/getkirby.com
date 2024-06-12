@@ -50,6 +50,13 @@
 	color: inherit;
 	width: 100%;
 }
+
+.partner-listing input::placeholder,
+.partner-listing textarea::placeholder {
+	color: inherit;
+	opacity: 1;
+}
+
 .partner-listing input:focus,
 .partner-listing textarea:focus {
 	position: relative;
@@ -92,10 +99,10 @@
 			Certified partner <?= icon('verified') ?>
 		</p>
 		<p class="partner-listing-label" v-else>
-			<input name="subtitle" type="text" v-model="personalInfo.subtitle">
+			<input name="subtitle" type="text" v-model="personalInfo.subtitle" placeholder="Type of company">
 		</p>
 		<h4 class="partner-listing-title h3">
-			<input name="title" type="text" v-model="personalInfo.title">
+			<input name="title" type="text" v-model="personalInfo.title" placeholder="Your company name">
 		</h4>
 	</header>
 	<figure class="partner-listing-image">
@@ -103,14 +110,14 @@
 	</figure>
 	<aside class="partner-listing-footer">
 		<p class="partner-listing-subtitle" v-if="personalInfo.tier === 'certified'">
-			<input name="subtitle" type="text" v-model="personalInfo.subtitle">
+			<input name="subtitle" type="text" v-model="personalInfo.subtitle" placeholder="Type of company">
 		</p>
 		<p class="partner-listing-location">
-			<input type="text" name="location" v-model="personalInfo.location">
+			<input type="text" name="location" v-model="personalInfo.location" placeholder="City, Country">
 		</p>
 	</aside>
 	<p class="partner-listing-description" v-if="personalInfo.tier === 'certified'">
-		<textarea name="description" rows="2" maxlength="140" v-model="personalInfo.description"></textarea>
+		<textarea name="description" rows="2" maxlength="140" v-model="personalInfo.description" placeholder="Tell the audience about yourself in 140 characters or less. Describe your strengths as company and let them know why they should choose you."></textarea>
 	</p>
 </article>
 
