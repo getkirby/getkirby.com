@@ -99,12 +99,12 @@
 				<section class="mb-6">
 					<h3 class="font-bold mb-1">What you get</h3>
 					<ul class="benefits">
-						<li><?= icon('check') ?> Your own customizable profile page</li>
-						<li><?= icon('check') ?> Exposure and traffic from getkirby.com</li>
-						<li><?= icon('check') ?> Project gallery with up to 3 projects</li>
-						<li><?= icon('check') ?> Access to the #partners channel on Discord</li>
-						<li><?= icon('check') ?> Direct, matchmaking leads</li>
-						<li><?= icon('check') ?> More visibility within the Kirby Community</li>
+						<li><?= icon('star') ?> Your own customizable profile page</li>
+						<li><?= icon('star') ?> Exposure and traffic from getkirby.com</li>
+						<li><?= icon('star') ?> Project gallery with up to 3 projects</li>
+						<li><?= icon('star') ?> Access to the #partners channel on Discord</li>
+						<li><?= icon('star') ?> Direct, matchmaking leads</li>
+						<li><?= icon('star') ?> More visibility within the Kirby Community</li>
 					</ul>
 				</section>
 
@@ -128,32 +128,32 @@
 				<section class="mb-6">
 					<h3 class="font-bold mb-1">What you get</h3>
 					<ul class="benefits">
-						<li><?= icon('check') ?> Your own customizable profile page</li>
-						<li><?= icon('check') ?> Exposure and traffic from getkirby.com</li>
-						<li><?= icon('check') ?> <span>Project gallery with up to <span class="extra">6 projects</span></span></li>
-						<li><?= icon('check') ?> Access to the #partners channel on Discord</li>
-						<li><?= icon('check') ?> Direct, matchmaking leads</li>
-						<li><?= icon('check') ?> More visibility within the Kirby Community</li>
+						<li><?= icon('star') ?> Your own customizable profile page</li>
+						<li><?= icon('star') ?> Exposure and traffic from getkirby.com</li>
+						<li><?= icon('star') ?> <span>Project gallery with up to <span class="extra">6 projects</span></span></li>
+						<li><?= icon('star') ?> Access to the #partners channel on Discord</li>
+						<li><?= icon('star') ?> Direct, matchmaking leads</li>
+						<li><?= icon('star') ?> More visibility within the Kirby Community</li>
 					</ul>
 				</section>
 
 				<section class="mb-6">
 					<h3 class="font-bold mb-1">Certified partner benefits</h3>
 					<ul class="benefits">
-						<li class="extra"><?= icon('check') ?> Certification, including official badges</li>
-						<li class="extra"><?= icon('check') ?> 10% discount on all licenses</li>
-						<li class="extra"><?= icon('check') ?> Detailed results of our review</li>
-						<li class="extra"><?= icon('check') ?> Priority listing</li>
-						<li class="extra"><?= icon('check') ?> Regular office hour calls with the Kirby core team</li>
-						<li class="extra"><?= icon('check') ?> Promotion on social media and in the Kosmos newsletter</li>
+						<li class="extra"><?= icon('star') ?> Certification, including official badges</li>
+						<li class="extra"><?= icon('star') ?> 10% discount on all licenses</li>
+						<li class="extra"><?= icon('star') ?> Detailed results of our review</li>
+						<li class="extra"><?= icon('star') ?> Priority listing</li>
+						<li class="extra"><?= icon('star') ?> Regular office hour calls with the Kirby core team</li>
+						<li class="extra"><?= icon('star') ?> Promotion on social media and in the Kosmos newsletter</li>
 					</ul>
 				</section>
 
 				<section class="mb-6">
 					<h3 class="font-bold mb-1">Requirements</h3>
 					<ul class="requirements">
-						<li><?= icon('alert') ?> 4 completed Kirby projects</li>
-						<li><?= icon('alert') ?> 1 reviewed project</li>
+						<li><?= icon('check') ?> 4 completed Kirby projects</li>
+						<li><?= icon('check') ?> 1 reviewed project</li>
 					</ul>
 				</section>
 
