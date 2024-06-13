@@ -1,0 +1,204 @@
+Title: Kirby 5 – alpha releases
+
+----
+
+Category: Next major version
+
+----
+
+Intro: Get a very first glimpse at Kirby's next major release and help us polish it until the end of the year.
+
+----
+
+Text:
+
+
+### What to expect
+
+As we have (link: releases/4.0#versioning text: switched to a new versioning scheme) with Kirby 4, the next major release of Kirby will be v5 and is expected for the end of 2024. v5 behaves to v4 a lot more than e.g. 3.8 to 3.7. It won't be such a massive step as v3 to v4 and therefore even easier to upgrade.
+
+We are sharing a very first alpha with you. But please treat it for what it is: a very first alpha. This means that this version is far from complete. More features will be added over the next few months, and other parts will change again.
+
+
+### How to contribute
+
+We would love to get your feedback. Try out the alpha with a fresh starterkit or locally with one of your projects. And help us find any bugs or regressions.
+
+
+Have a look at the (link: #breaking-changes text: breaking changes). An important one: v5 will require PHP 8.2.
+
+We recommend to not use this alpha version in a production project.
+
+## 🎉 First few features
+
+### Turn off the Panel lights
+
+As requested from many – whether as personal preference or for making the Panel more accessible with certain sight conditions – you are able to activate a dark theme for the Panel from your account view in v5. [#6299](https://github.com/getkirby/kirby/pull/6299)
+
+(image: dark-mode1.png)
+(image: dark-mode2.png)
+(image: dark-mode3.png)
+
+We do expect to receive a lot of feedback on this feature and that the exact styling will be fine-tuned in the following pre-releases based on your feedback.
+
+### Put a button in that header
+
+Kirby 5 adds a new extension that allows plugin developers to add custom view buttons [#6393](https://github.com/getkirby/kirby/pull/6393) to most views of the Panel (e.g. page, site, file, user, language). These buttons will can be added alongside the default buttons, such as the preview button or settings dropdown button.
+
+To add such a custom view button, you will first need to add your view button Vue component in your plugin's JavaScript file:
+
+```js
+panel.plugin("getkirby/custom-view-buttons", {
+	viewButtons: {
+		applause: {
+			template: `<k-button icon="heart" variant="filled" theme="love" size="sm" @click="applause">Applause</k-button>`,
+			methods: {
+				applause() {
+					alert("👏");
+				},
+			},
+		},
+	},
+});
+```
+
+With this in place, your custom view button needs to be added to the specific view. Kirby will not automatically add buttons to views. This ensures that you can customize which buttons to show, to hide default ones and specify the order.
+
+You can configure this globally for a view type, e.g. adding our example `applause` button to all page views:
+
+```php "site/config/config.php"
+return [
+	'panel' => [
+		'viewButtons' => [
+			'page' => ['preview', 'settings', 'applause', 'status']
+		]
+	]
+}
+```
+
+Or you configure the view buttons per blueprint:
+
+```yaml "site/blueprints/page/note.yml"
+buttons:
+  - preview
+  - settings
+  - applause
+  - status
+```
+
+## ✨ Enhancements
+
+- Improved support for IDE autocompletion and type hints for collection items (`$pages`, `$files`...) [#6391](https://github.com/getkirby/kirby/pull/6391#pullrequestreview-1999690640)
+- Radio and select fields: `default` prop supports Kirby queries [#6459](https://github.com/getkirby/kirby/pull/6459)
+- New `--color-l-min` and `--color-l-max` CSS properties [#6299](https://github.com/getkirby/kirby/pull/6299)
+- Relying front-end validation on native HTML invalid states [#6099](https://github.com/getkirby/kirby/pull/6099) [#6320](https://github.com/getkirby/kirby/pull/6320)
+    - Choice input: unselected choices get disabled when max is reached [#6343](https://github.com/getkirby/kirby/pull/6343)
+    - Added `<k-input-validator>` helper element to provide native form validation for complex/group inputs and fields [#6321](https://github.com/getkirby/kirby/pull/6321)
+- `site` controller data will now always be merged as default data with data from page template specific controllers.https://feedback.getkirby.com/422
+- Thumbnails don't need to be regenerated when page sorting changes [#6432](https://github.com/getkirby/kirby/pull/6432)
+- `<k-link>` (and subsequently `<k-button>` and `<k-dropdown-item>`) has a new `download` attribute to force direct download of a file
+
+
+## 🐛 Bug fixes
+
+- Headers with null as value are no longer added to JS API requests. [#6435](https://github.com/getkirby/kirby/pull/6435)
+- `$helper.object.clone` is no longer deprecated. Please use it instead of `structuredClone` as this might cause issues down the road with Vue 3. [#6479](https://github.com/getkirby/kirby/pull/6479)
+
+
+## 🚨 Breaking changes
+
+- Kirby requires at least PHP 8.2
+- Data/variables from your `site` controller will now be passed to all templates [#6412](https://github.com/getkirby/kirby/pull/6412)
+- PHP (return) type hints have been added to many collection methods. If you are extending any collection classes, you might need to add the same to your methods.
+- CSS attribute selectors must be written fully qualified (e.g. `[data-hidden="true"]` as only `[data-hidden]` can start matching also elements where that attribute is `false`) [#6109](https://github.com/getkirby/kirby/pull/6109)
+- While `<k-writer>` is still included as alias for <`k-writer-input`>, some use cases where you accessed the `<k-writer>` component via the `$refs` of `<k-writer-input>` have to be adapted [#6172](https://github.com/getkirby/kirby/pull/6172)
+- Select field: `empty` prop was removed. Use combination of `required`, `placeholder` and `default` to replicate functionality [#6459](https://github.com/getkirby/kirby/pull/6459)
+- `<k-draggable>`: the `move` callback function is receiving an event with an altered data structure
+- `<k-form>` and `<k-fieldset>` as well as many fields and inputs don't emit an `invalid` event anymore. Use native HTML invalid state of elements instead. [#6099](https://github.com/getkirby/kirby/pull/6099)
+- `novalidate` prop has been removed from all elements but `<k-form>` [#6099](https://github.com/getkirby/kirby/pull/6099)
+- Removed `hasErorrs` methods of `k-fieldset` [#6173](https://github.com/getkirby/kirby/pull/6173)
+- `Str::camel()`, `Str::camelToKebab()`, `Str::float()`, `Str::kebab()`, `Str::kebabToCamel()`, `Str::length()`, `Str::lower()`, `Str::safeTemplate()`, `Str::short()`, `Str::slug()`, `Str::snake()`, `Str::studly()`, `Str::substr()`, `Str::template()`, `Str::ucfirst()`, `Str::ucwords()`, `Str::unhtml()`, `Str::upper()` and `Str::widont()` can no longer be called without a value argument (passing a `null` value still works) [#6401](https://github.com/getkirby/kirby/pull/6401)
+- All content storage methods must now use the `VersionId` instead of a simple string. [#6436](https://github.com/getkirby/kirby/pull/6436)
+
+### Removed deprecated
+
+| Removed | Use instead |
+| --- | --- |
+| `<k-dialog>`:  `disabled`, `icon` and `theme` props. | `submit-button` prop |
+| `<k-dropdown>` | `<k-dropdown-content>` as standalone |
+| `<k-upload>` | `$panel.upload module` |
+| `<k-aspect-ratio>`  | `<k-frame>` |
+| `<k-bar>`: `left`, `right` and `center` slots  | default slot |
+| `<k-header>`: `left` and `right` slots | `buttons` slot  |
+| `<k-header>`: `tabs` prop |  standalone `<k-tabs>` |
+| `<k-view>` | - |
+| `<k-loader>` | `<k-icon type="loader" />`  |
+| `<k-progress>`: `set` method | `value` prop |
+| `<k-button-disabled>` | `<k-button :disabled="true">` |
+| `<k-button-link>`  | `<k-button link="...">` |
+| `<k-button-native>` | `<k-button>` |
+| `<k-headline>`: `size` prop | `tag` prop |
+| `<k-headline>`: `theme` prop | - |
+| `<k-text>`: `theme` prop  | - |
+| `<k-inside>` | `<k-panel-inside>` |
+| `<k-outside>` | `<k-panel-outside>` |
+| `<k-plugin-view>`  | - |
+| `$store.drawer`  | `$panel.drawer`  |
+| `$store.notification` | `$panel.notification` |
+| `$store.dialog()` | `$panel.dialog.open()` |
+| `$store.drag()` | `$panel.drag.start(type, data)` |
+| `$store.fatal()` | `$panel.notification.fatal()` |
+| `$store.isLoading()` | `$panel.isLoading` |
+| `$store.navigate()` | - |
+| `Kirby\Cms\Model` | - |
+| `Kirby\Cms\Properties` trait | PHP native named properties |
+| `Kirby\Cms\File::contentFileDirectory()` | - |
+| `Kirby\Cms\File::contentFileName()` | - |
+| `Kirby\Cms\ModelWithContent::contentFile()` | `$model->storage()->contentFile()` |
+| `Kirby\Cms\ModelWithContent::contentFiles()` | `$model->storage()->contentFiles()` |
+| `Kirby\Cms\ModelWithContent::contentFileDirectory()` | - |
+| `Kirby\Cms\ModelWithContent::contentFileName()` | - |
+| `Kirby\Cms\ModelWithContent::contentFileExtension()` | - |
+| `Kirby\Cms\Page::contentFileName()` | - |
+| `Kirby\Cms\Site::contentFileName()` | - |
+| `Kirby\Cms\User::contentFileName()` | - |
+
+## ☠️ Deprecated
+
+- `<k-writer>` will be removed in a future version. Use `<k-writer-input></k-writer-input>` instead [#6172](https://github.com/getkirby/kirby/pull/6172)
+- `--color-backdrop` CSS property has been deprecated. Use `--overlay-color-back` instead [#6299](https://github.com/getkirby/kirby/pull/6299)
+
+
+## ♻️ Refactored
+
+- `<k-writer>` has been merged into `<k-writer-input>` [#6172](https://github.com/getkirby/kirby/pull/6172)
+- Streamline input validation
+    - Use `<k-string-input>` for all text inputs [#6103](https://github.com/getkirby/kirby/pull/6103)
+    - `<k-slug-input>` is now built on top of `<k-string-input>` [#6320](https://github.com/getkirby/kirby/pull/6320)
+    - Stricter native URL validation for `<k-url-input>` [#6320](https://github.com/getkirby/kirby/pull/6320)
+    - Removed `vuelidate` library [#6099](https://github.com/getkirby/kirby/pull/6099)
+- Preparations for a move to Vue 3 in v6
+    - `<k-draggable>` is directly built on top of SortableJS now [#6387](https://github.com/getkirby/kirby/pull/6387)
+    - Replace Vue `$listeners` [#6107](https://github.com/getkirby/kirby/pull/6107)
+    - Use strict CSS selectors for boolean (data) attributes [#6109](https://github.com/getkirby/kirby/pull/6109)
+    - Explicitly added `$attrs.class` to components that disable inheriting attributes [#6332](https://github.com/getkirby/kirby/pull/6332)
+    - Use more modern PHP syntax and PHPUnit assertions where applicable [#6401](https://github.com/getkirby/kirby/pull/6401)
+- Improved class typing by adding `Stringable` interface to relevant classes [#6433](https://github.com/getkirby/kirby/pull/6433)
+- New `Kirby\Content\VersionId` class to represent versions [#6436](https://github.com/getkirby/kirby/pull/6436)
+- Refactored all content storage classes and models to use the new `VersionId` [#6436](https://github.com/getkirby/kirby/pull/6436)
+- Refactor `PlainTextStorageHandler` implementation [#6439](https://github.com/getkirby/kirby/pull/6439)
+- Remove option to pass `null` as language to internal `ContentStorageHandler::exists` method to avoid unwanted logic in handler methods. [#6439](https://github.com/getkirby/kirby/pull/6439)
+- New `Version` class which inherits the logic from the `ContentStorage` handler and replaces it.
+- New `Language::single()` method to create a Language placeholder object in single language installations [#6448](https://github.com/getkirby/kirby/pull/6448)
+- Use full language objects in `ContentStorageHandler` and `PlainTextContentStorageHandler` methods [#6448](https://github.com/getkirby/kirby/pull/6448)
+- Convert the `ContentStorageHandler` interface to an abstract class [#6449](https://github.com/getkirby/kirby/pull/6449)
+- Use "new" functions from PHP 8.0 [#6476](https://github.com/getkirby/kirby/pull/6476)
+    - `str_contains()`
+    - `str_starts_with()`
+    - `str_ends_with()`
+
+## 🧹 Housekeeping
+
+- Extended rule list for `php-cs-fixer` [#6398](https://github.com/getkirby/kirby/pull/6398)
+- Tests: DRY `$app` property [#6474](https://github.com/getkirby/kirby/pull/6474)
+- Replacing `get_class()` method with `::class` notation [#6475](https://github.com/getkirby/kirby/pull/6475)
