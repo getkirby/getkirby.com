@@ -1,0 +1,23 @@
+Intro: Defines the supported web servers
+
+----
+
+TODO: removed fully with v5
+
+----
+
+Text:
+
+<alert>
+The `servers` option has been removed from Kirby 4.3 – Kirby does not restrict the list of servers anymore.
+</alert>
+
+This option can be used if you are using another web server that is (link: docs/guide/quickstart#requirements text: not officially supported by Kirby). With the option you can whitelist the server for the Panel.
+
+## Example
+
+```php
+return [
+    'servers' => ['apache', 'symfony']
+];
+```
