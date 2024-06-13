@@ -19,7 +19,6 @@ As we have (link: releases/4.0#versioning text: switched to a new versioning sch
 
 We are sharing a very first alpha with you. But please treat it for what it is: a very first alpha. This means that this version is far from complete. More features will be added over the next few months, and other parts will change again.
 
-
 ### How to contribute
 
 We would love to get your feedback. Try out the alpha with a fresh starterkit or locally with one of your projects. And help us find any bugs or regressions.
@@ -28,6 +27,11 @@ We would love to get your feedback. Try out the alpha with a fresh starterkit or
 Have a look at the (link: #breaking-changes text: breaking changes). An important one: v5 will require PHP 8.2.
 
 We recommend to not use this alpha version in a production project.
+
+### And my license?
+
+With a Kirby Basic or Enterprise license v5 will be fully included in your three years of free upgrades, so no new license or upgrade needs to be purchased.
+
 
 ## 🎉 First few features
 
