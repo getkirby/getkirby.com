@@ -149,6 +149,31 @@ Kirby::plugin('example/dropdown', [
 ]);
 ```
 
+<since v="4.3.0">
+#### Listen for dropdown event
+
+When you need to react to your added dropdown entry, there is no direct way that you could listen for the event on the Vue dropdown component, since you don't have access to it. Instead, you can pass the `click` handler in the following way:
+
+```php
+$dropdown[] = [
+	'icon'  => 'share',
+	'text'  => 'Publish on Netlify',
+	'click' => [
+		'key'     => 'myEvent'
+		'global'  => true,
+		'payload' => [...]
+	]
+];
+```
+
+With this you can listen for your event globally:
+
+
+```js
+this.$events.on("myEvent", (payload) => {...});
+```
+</since>
+
 ### Reusing core code
 
 When you plan to extend a dropdown, you might want to fall back to Kirby's core behaviour in some cases. This can be done by loading the core code:
