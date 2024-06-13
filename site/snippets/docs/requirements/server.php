@@ -1,13 +1,7 @@
-- (link: https://httpd.apache.org/ text: Apache 2)
-- (link: https://www.nginx.com/ text: Nginx)
-- (link: https://www.litespeedtech.com/products/litespeed-web-server text: LiteSpeed)
-- (link: https://caddyserver.com/ text: Caddy)
-- (link: https://www.php.net/manual/en/features.commandline.webserver.php text: PHP Server)
+Apache works out of the box. (link: docs/cookbook/development-deployment/nginx text: nginx), (link: docs/cookbook/development-deployment/caddy text: Caddy) and (link: docs/cookbook/development-deployment/ddev text: DDEV) work with our Cookbook recipes. Other servers can be used by advanced users.
 
 If you want to use PHP's built-in server, you have to start it up with Kirby's router:
 
 ```php
 php -S localhost:8000 kirby/router.php
 ```
-
-Other servers (link: docs/reference/system/options/servers text: may work), but are not officially supported.
