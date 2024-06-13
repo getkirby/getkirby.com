@@ -56,6 +56,18 @@ It is also used to identify your plugin during the update check. If you publish 
 
 **Example:** If your Composer package name is `superwoman/kirby-superplugin`, the plugin name you pass to `Kirby::plugin()` should be `superwoman/superplugin` as above.
 
+<since v="4.3.0">
+### Named arguments
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin(
+	name: 'my-name/hello-world',
+	extends: [
+		…
+	]
+);
+</since>
+
 ## Extensions
 
 Your plugin can define any number of extensions for Kirby. Extensions can be blueprints, snippets, KirbyTags, fields and more.
@@ -143,6 +155,36 @@ $kirby->plugin('superwoman/superplugin')->authors();
 The fields in the example `composer.json` above are just the basic metadata fields. Composer is also a tool that's useful to install plugins. How to setup your plugin for that is explained in our (link: #setup-of-published-plugins text: plugin setup articles).
 
 Note that the `name` inside the `composer.json` file is only the name of the Composer package. If needed, it can differ from the name you give your plugin when registering it with `Kirby::plugin()`, which will be used when getting plugin data.
+
+<since v="4.3.0">
+### Named arguments
+
+Instead of providing all the information in the `composer.json` file, you can pass the same information also as `info` argument:
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin(
+	name: 'my-name/hello-world',
+	extends: [
+		…
+	],
+	info: [
+		'license' => 'MIT'
+	]
+);
+```
+
+Moreover, you can provide the version directly as `version` argument:
+
+```php
+Kirby::plugin(
+	name: 'my-name/hello-world',
+	extends: [
+		…
+	],
+	version: '1.0.0'
+);
+```
+</since>
 
 ## Recommended plugin folder structure
 
