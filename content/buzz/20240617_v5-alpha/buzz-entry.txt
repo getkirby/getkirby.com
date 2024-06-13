@@ -10,8 +10,16 @@ Intro: Get a very first glimpse at Kirby's next major release and help us polish
 
 ----
 
-Text:
+Cta:
 
+-
+	text: Download v5.0-alpha.1
+	link: https://github.com/getkirby/kirby/archive/refs/tags/5.0.0-alpha.1.zip
+	icon: download
+
+----
+
+Text:
 
 ### What to expect
 

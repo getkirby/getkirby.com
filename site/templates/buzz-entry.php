@@ -1,12 +1,22 @@
 <?php layout() ?>
 
 <header class="mb-12 max-w-xl">
-	<div class="text-sm mb-1 color-gray-600"><?= $page->category()->widont() ?></div>
+	<div class="text-sm mb-1 color-gray-600">
+		<?= $page->category()->widont() ?>
+	</div>
+
 	<h1 class="h1 mb-12"><?= $page->title() ?></h1>
 
-	<p class="text-xl leading-snug">
+	<p class="text-xl leading-snug mb-6">
 		<?= $page->intro()->widont() ?>
 	</p>
+
+	<?php if ($page->cta()->isNotEmpty()): ?>
+		<?php snippet('cta', [
+			'buttons' => $page->cta()->yaml(),
+			'center'  => false
+		]) ?>
+	<?php endif ?>
 </header>
 
 <?php if ($page->video()->isNotEmpty()): ?>
