@@ -14,6 +14,7 @@ Text:
 | caption | The caption | `null` |
 | controls | The controls which is added to video element (only for local and remote videos) | `true` |
 | class | The class which is added to iframe and video elements | `video` |
+| disablepictureinpicture | Whether the picture-in-picture feature is disabled for the video element | `false` |
 | height | The height that is added to iframe and video elements | `null` |
 | loop | The loop which is added to video element (only for local and remote videos) | `true` |
 | muted | The muted which is added to video element (only for local and remote videos) | `true` |
