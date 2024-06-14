@@ -147,9 +147,15 @@ The basis for data processing is Art. 6 (1) (a) GDPR, which allows the processin
 
 ### Cookies
 
-Our website **does not** set any cookies by default. Cookies are only set as first-party cookies by the [shop](#shop) when visiting the "Buy" page or when using an affiliate link to visit our website.
+Our website only sets cookies for the following purposes:
 
-The basis for data processing is Art. 6 (1) (f) GDPR, which allows the processing of data for the purposes of our legitimate interests, in this case to optimize the licensing experience.
+| Feature | Reason | Basis for data processing |
+| - | - | - |
+| License hub | To enable secure authentication | Art. 6 (1) (b) GDPR (to fulfill a contract or for measures preliminary to a contract) |
+| Our [shop](#shop) when visiting the "Buy" page | To optimize the licensing experience | Art. 6 (1) (f) GDPR (our legitimate interests) |
+| Visits to our website with an affiliate link | To attribute purchases to the correct affiliate | Art. 6 (1) (f) GDPR (our legitimate interests) |
+
+All cookies set and used on our website are first-party cookies. We **do not** set cookies for any other purpose.
 
 ### Analytics and tracking
 
@@ -405,4 +411,4 @@ We try to keep our privacy policy as transparent and easy to understand as possi
 ## Updates
 
 We will regularly check and update this privacy policy if necessary.
-**Last update: April 25, 2024**
+**Last update: June 14, 2024**
