@@ -102,9 +102,9 @@
 						<li><?= icon('star') ?> Your own customizable profile page</li>
 						<li><?= icon('star') ?> Exposure and traffic from getkirby.com</li>
 						<li><?= icon('star') ?> Project gallery with up to 3 projects</li>
-						<li><?= icon('star') ?> Access to the #partners channel on Discord</li>
-						<li><?= icon('star') ?> Direct, matchmaking leads</li>
-						<li><?= icon('star') ?> More visibility within the Kirby Community</li>
+						<li><?= icon('star') ?> Access to the Discord #partners channel</li>
+						<li><?= icon('star') ?> Directly matched client leads</li>
+						<li><?= icon('star') ?> More visibility within the Kirby community</li>
 					</ul>
 				</section>
 
@@ -131,8 +131,8 @@
 						<li><?= icon('star') ?> Your own customizable profile page</li>
 						<li><?= icon('star') ?> Exposure and traffic from getkirby.com</li>
 						<li><?= icon('star') ?> <span>Project gallery with up to <span class="extra">6 projects</span></span></li>
-						<li><?= icon('star') ?> Access to the #partners channel on Discord</li>
-						<li><?= icon('star') ?> Direct, matchmaking leads</li>
+						<li><?= icon('star') ?> Access to the Discord #partners channel</li>
+						<li><?= icon('star') ?> Directly matched client leads</li>
 						<li><?= icon('star') ?> More visibility within the Kirby Community</li>
 					</ul>
 				</section>
@@ -142,9 +142,9 @@
 					<ul class="benefits">
 						<li class="extra"><?= icon('star') ?> Certification, including official badges</li>
 						<li class="extra"><?= icon('star') ?> 10% discount on all licenses</li>
-						<li class="extra"><?= icon('star') ?> Detailed results of our review</li>
-						<li class="extra"><?= icon('star') ?> Priority listing</li>
 						<li class="extra"><?= icon('star') ?> Regular office hour calls with the Kirby core team</li>
+						<li class="extra"><?= icon('star') ?> Detailed results of our project review</li>
+						<li class="extra"><?= icon('star') ?> Priority listing in the directory</li>
 						<li class="extra"><?= icon('star') ?> Promotion on social media and in the Kosmos newsletter</li>
 					</ul>
 				</section>

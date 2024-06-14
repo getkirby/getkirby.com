@@ -2,8 +2,12 @@
 
 <article>
 
-	<header class="mb-12">
-		<h1 class="h1">Join the Kirby partner network</h1>
+	<header class="mb-12 max-w-xl">
+		<h1 class="h1 mb-6"><?= $page->title() ?></h1>
+
+		<p class="text-xl leading-snug color-gray-700">
+			<?= $page->description() ?>
+		</p>
 	</header>
 
 	<section class="mb-42">
