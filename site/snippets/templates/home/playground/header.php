@@ -26,7 +26,7 @@
 							'width' => 1520
 						],
 						'lazy' => false,
-						'sizes' => '(min-width: 1760px) 1520px, (min-width: 800px) 85vw, 100vw',
+						'sizes' => '(min-width: 1860px) 1520px, (min-width: 820px) calc(92.16vw - 176px), 100vw',
 						'srcset' => [
 							320,
 							640,

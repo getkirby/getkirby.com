@@ -21,7 +21,7 @@
 							'width' => 352
 						],
 						'lazy' => $lazy,
-						'sizes' => '(min-width: 1440px) 352px, (min-width: 960px) 37vw, (min-width: 640px) 40vw, 85vw',
+						'sizes' => '(min-width: 1520px) 352px, (min-width: 1160px) calc(27.35vw - 58px), (min-width: 960px) calc(33.33vw - 96px), (min-width: 640px) calc(50vw - 96px), (min-width: 480px) calc(100vw - 96px), 90vw',
 						'srcset' => [
 							352,
 							500,

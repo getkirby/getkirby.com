@@ -39,7 +39,7 @@
 							'width' => 600
 						],
 						'lazy' => $themes->indexOf($theme) > 2,
-						'sizes' => '(min-width: 2400px) 20vw, (min-width: 1820px) 27vw, (min-width: 1150px) 40vw, (min-width: 960px) 43vw, 85vw',
+						'sizes' => '(min-width: 2980px) calc(20vw - 115px), (min-width: 2400px) calc(25vw - 120px), (min-width: 1840px) calc(33.33vw - 128px), (min-width: 1160px) calc(50vw - 144px), (min-width: 960px) calc(50vw - 72px), (min-width: 480px) calc(100vw - 96px), 90vw',
 						'srcset' => [
 							400,
 							670,

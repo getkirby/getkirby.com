@@ -44,7 +44,7 @@
 							'width' => 576,
 						],
 						'lazy' => false,
-						'sizes' => '(min-width: 1440px) 576px, (min-width: 1150px) 40vw, 90vw',
+						'sizes' => '(min-width: 1520px) 576px, (min-width: 1160px) calc(41.18vw - 42px), (min-width: 480px) calc(100vw - 96px), 90vw',
 						'srcset' => [
 							576,
 							1152,
