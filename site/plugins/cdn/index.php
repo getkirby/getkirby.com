@@ -30,7 +30,7 @@ App::plugin('getkirby/cdn', [
 			static $original;
 
 			if ($file->type() === 'image') {
-				return Image::url($file);
+				return (new Image($file))->url();
 			}
 
 			$original ??= $kirby->nativeComponent('file::url');
