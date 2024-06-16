@@ -55,7 +55,7 @@
 					'width' => 1000
 				],
 				'lazy' => false,
-				'sizes' => '(max-width: 1020px) 90vw, 55vw',
+				'sizes' => '(min-width: 1520px) 768px, (min-width: 1160px) calc(55vw - 57px), (min-width: 1040px) calc(67vw - 132px), (min-width: 480px) calc(100vw - 96px), 90vw',
 				'srcset' => [
 					300,
 					500,
@@ -149,7 +149,7 @@
 											'src' => [
 												'width' => 702
 											],
-											'sizes' => '(max-width: 640px) 85vw, 25vw',
+											'sizes' => '(min-width: 1520px) 352px, (min-width: 1160px) calc(27.35vw - 58px), (min-width: 640px) calc(33.4vw - 97px), (min-width: 480px) calc(100vw - 96px), 90vw',
 											'srcset' => [
 												352,
 												550,

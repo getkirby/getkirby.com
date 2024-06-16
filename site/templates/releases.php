@@ -21,7 +21,7 @@
 									'width' => 384
 								],
 								'lazy' => $releases->indexOf($release) > 2,
-								'sizes' => '(min-width: 1320px) 384px, (min-width: 1150px) 30vw, 90vw',
+								'sizes' => '(min-width: 1520px) 384px, (min-width: 1160px) calc(27.35vw - 26px), (min-width: 480px) calc(100vw - 96px), 90vw',
 								'srcset' => [
 									'384w'  => ['width' => 384, 'height' => 224, 'crop' => 'top'],
 									'768w'  => ['width' => 768, 'height' => 448, 'crop' => 'top'],
