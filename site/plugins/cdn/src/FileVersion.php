@@ -22,9 +22,11 @@ class FileVersion extends BaseFileVersion
 
 	public function __construct(array $props)
 	{
+		$image = new Image($props['original'], $props['modifications']);
+
 		parent::__construct([
 			...$props,
-			'url' => Image::url($props['original'], $props['modifications'])
+			'url' => $image->url()
 		]);
 	}
 

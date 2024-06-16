@@ -19,100 +19,126 @@ use Kirby\Image\Focus;
  */
 class Image
 {
+	protected App $app;
+	protected array $options;
+	protected string $root;
+	protected string $url;
+
 	/**
-	 * Generates a URL with KeyCDN image processing parameters
-	 * (https://www.keycdn.com/support/image-processing)
-	 * based on a file URL or object and Kirby thumb params
+	 * @param string|\Kirby\Cms\File $file File path or object
+	 * @param array $options Kirby thumb options
 	 */
-	public static function url(string|File $file, array $params = []): string
-	{
-		$kirby = App::instance();
-		$root  = $file;
-
-		if (is_object($file) === true) {
-			$root = $file->root();
-			$file = $file->mediaUrl();
+	public function __construct(
+		string|File $file,
+		array $options = []
+	) {
+		if ($file instanceof File) {
+			$this->app  = $file->kirby();
+			$this->root = $file->root();
+			$this->url  = $file->mediaUrl();
+		} else {
+			$this->app  = App::instance();
+			$this->root = $this->app->root('index') . '/' . $file;
+			$this->url  = $file;
 		}
-
-		$path = Url::path($file);
 
 		$darkroom = Darkroom::factory(
 			'im',
-			$kirby->option('thumbs', [])
+			$this->app->option('thumbs', [])
 		);
-		$params = $darkroom->preprocess($root, $params);
 
-		return $kirby->option('cdn.domain') . '/' . $path . static::query($params);
+		$this->options = $darkroom->preprocess($this->root, $options);
 	}
 
-	protected static function blur(array $params): array
+	/**
+	 * Returns the relative path to the image
+	 */
+	public function path(): string
 	{
-		if ($params['blur'] !== false) {
+		return Url::path($this->url);
+	}
+
+	/**
+	 * Generates KeyCDN image processing parameters
+	 * (https://www.keycdn.com/support/image-processing)
+	 */
+	public function query(): string
+	{
+		if (empty($this->options) === true) {
+			return '';
+		}
+
+		return '?' . http_build_query([
+			...static::resizeOrCrop(),
+			...static::grayscale(),
+			...static::progressive(),
+			...static::blur(),
+			...static::sharpen(),
+		]);
+	}
+
+	/**
+	 * Generates a URL with KeyCDN image processing parameters
+	 * (https://www.keycdn.com/support/image-processing)
+	 */
+	public function url(): string
+	{
+		return $this->app->option('cdn.domain') . '/' . $this->path() . $this->query();
+	}
+
+	protected function blur(): array
+	{
+		if ($this->options['blur'] !== false) {
 			return [
-				'blur' => max(0.3, min(100, $params['blur']))
+				'blur' => max(0.3, min(100, $this->options['blur']))
 			];
 		}
 
 		return [];
 	}
 
-	protected static function grayscale(array $params): array
+	protected function grayscale(): array
 	{
-		if ($params['grayscale'] === true) {
+		if ($this->options['grayscale'] === true) {
 			return ['grayscale' => 1];
 		}
 
 		return [];
 	}
 
-	protected static function progressive(array $params): array
+	protected function progressive(): array
 	{
-		if ($params['interlace'] === true) {
+		if ($this->options['interlace'] === true) {
 			return ['progressive' => 1];
 		}
 
 		return [];
 	}
 
-	protected static function query(array $params): string
-	{
-		if (empty($params) === true) {
-			return '';
-		}
-
-		return '?' . http_build_query([
-			...static::resizeOrCrop($params),
-			...static::grayscale($params),
-			...static::progressive($params),
-			...static::blur($params),
-			...static::sharpen($params),
-		]);
-	}
-
-	protected static function resizeOrCrop(array $params): array
+	protected function resizeOrCrop(): array
 	{
 		$query = [
-			'width'  => $params['width'],
-			'height' => $params['height'],
+			'width'  => $this->options['width'],
+			'height' => $this->options['height'],
 		];
 
 		// simple resize
-		if ($params['crop'] === false) {
+		if ($this->options['crop'] === false) {
 			$query['enlarge'] = 0;
 
 			return $query;
 		}
 
 		// crop based on focus point
-		if (Focus::isFocalPoint($params['crop']) === true) {
-			$focus = Focus::parse($params['crop']);
+		if (Focus::isFocalPoint($this->options['crop']) === true) {
+			$focus = Focus::parse($this->options['crop']);
 			$query['crop'] = 'fp,' . $focus[0] . ',' . $focus[1];
 
 			return $query;
 		}
 
 		// translate the gravity option into something KeyCDN understands
-		$query['crop'] = match ($params['crop'] ?? null) {
+		$query['crop'] = match ($this->options['crop'] ?? null) {
 			'top left'     => 'fp,0,0',
 			'top'          => 'fp,0.5,0',
 			'top right'    => 'fp,1.0,0',
@@ -128,11 +154,11 @@ class Image
 		return $query;
 	}
 
-	protected static function sharpen(array $params): array
+	protected function sharpen(): array
 	{
-		if (is_int($params['sharpen']) === true) {
+		if (is_int($this->options['sharpen']) === true) {
 			return [
-				'sharpen' => max(0, min(100, $params['sharpen']))
+				'sharpen' => max(0, min(100, $this->options['sharpen']))
 			];
 		}
 
