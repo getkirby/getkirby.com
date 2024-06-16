@@ -26,11 +26,11 @@
 							'width'  => 240,
 						],
 						'srcset' => [
-							'1x' => [
+							'240w' => [
 								'crop'   => 'top',
 								'width'  => 240,
 							],
-							'2x' => [
+							'480w' => [
 								'crop'   => 'top',
 								'width'  => 480
 							],
@@ -43,11 +43,11 @@
 							'width'  => 60,
 						],
 						'srcset' => [
-							'1x' => [
+							'60w' => [
 								'crop'   => true,
 								'width'  => 60,
 							],
-							'2x' => [
+							'120w' => [
 								'crop'   => true,
 								'width'  => 120
 							],

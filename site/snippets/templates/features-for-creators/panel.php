@@ -35,12 +35,12 @@
 								'height' => 266,
 							],
 							'srcset' => [
-								'1x' => [
+								'400w' => [
 									'crop'   => 'top',
 									'width'  => 400,
 									'height' => 266,
 								],
-								'2x' => [
+								'800w' => [
 									'crop'   => 'top',
 									'width'  => 800,
 									'height' => 532,
