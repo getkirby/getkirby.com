@@ -4,6 +4,7 @@ namespace Kirby\Cdn;
 
 use Kirby\Cms\App;
 use Kirby\Cms\File;
+use Kirby\Filesystem\Asset;
 use Kirby\Http\Url;
 use Kirby\Image\Darkroom;
 use Kirby\Image\Focus;
@@ -25,14 +26,14 @@ class Image
 	protected string $url;
 
 	/**
-	 * @param string|\Kirby\Cms\File $file File path or object
+	 * @param string|\Kirby\Filesystem\Asset|\Kirby\Cms\File $file File path or object
 	 * @param array $options Kirby thumb options
 	 */
 	public function __construct(
-		string|File $file,
+		string|Asset|File $file,
 		array $options = []
 	) {
-		if ($file instanceof File) {
+		if (is_object($file) === true) {
 			$this->app  = $file->kirby();
 			$this->root = $file->root();
 			$this->url  = $file->mediaUrl();
