@@ -18,10 +18,7 @@ extract([
 <?php endif ?>
 
 <?= css('assets/css/index.css') ?>
-<?= js('assets/js/index.js', [
-	'async' => true,
-	'type'  => 'module'
-]) ?>
+<?= js('assets/js/index.js', ['type' => 'module']) ?>
 
 <link rel="icon" type="image/png" href="<?= url('/assets/images/favicon.png') ?>">
 <link rel="icon" type="image/svg+xml" href="<?= url('/assets/images/favicon.svg') ?>">
