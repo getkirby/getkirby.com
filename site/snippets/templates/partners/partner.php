@@ -12,6 +12,7 @@
 					'src' => [
 						'width' => 70
 					],
+					// sizes generated with https://ausi.github.io/respimagelint/
 					'sizes' => '(min-width: 1440px) 70px, (min-width: 960px) 5vw, (min-width: 640px) 8vw, 18vw',
 					'srcset' => [
 						70,
