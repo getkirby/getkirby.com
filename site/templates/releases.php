@@ -21,6 +21,7 @@
 									'width' => 384
 								],
 								'lazy' => $releases->indexOf($release) > 2,
+								// sizes generated with https://ausi.github.io/respimagelint/
 								'sizes' => '(min-width: 1520px) 384px, (min-width: 1160px) calc(27.35vw - 26px), (min-width: 480px) calc(100vw - 96px), 90vw',
 								'srcset' => [
 									'384w'  => ['width' => 384, 'height' => 224, 'crop' => 'top'],
