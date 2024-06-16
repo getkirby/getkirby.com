@@ -43,12 +43,12 @@
 						'height' => 400,
 					],
 					'srcset' => [
-						'1x' => [
+						'200w' => [
 							'crop'   => true,
 							'width'  => 200,
 							'height' => 400,
 						],
-						'2x' => [
+						'400w' => [
 							'crop'   => true,
 							'width'  => 400,
 							'height' => 800,

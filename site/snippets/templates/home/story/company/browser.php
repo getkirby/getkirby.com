@@ -13,12 +13,12 @@
 		'height' => 250,
 	],
 	'srcset' => [
-		'1x' => [
+		'500w' => [
 			'crop'   => true,
 			'width'  => 500,
 			'height' => 250,
 		],
-		'2x' => [
+		'750w' => [
 			'crop'   => true,
 			'width'  => 750,
 			'height' => 375,
@@ -40,12 +40,12 @@
 					'height' => 100,
 				],
 				'srcset' => [
-					'1x' => [
+					'150w' => [
 						'crop'   => true,
 						'width'  => 150,
 						'height' => 100,
 					],
-					'2x' => [
+					'300w' => [
 						'crop'   => true,
 						'width'  => 300,
 						'height' => 200,

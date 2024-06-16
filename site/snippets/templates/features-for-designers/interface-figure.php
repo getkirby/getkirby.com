@@ -18,15 +18,13 @@
 			'alt' => 'A screenshot of the users and tags fields',
 			'lightbox' => 'interface',
 			'src' => [
-				'width' => 458,
+				'width' => 276,
 			],
 			'srcset' => [
-				'1x' => [
-					'width' => 458
-				],
-				'2x' => [
-					'width' => 916
-				],
+				276,
+				400,
+				552,
+				800,
 			]
 		]) ?>
 	</div>
@@ -35,15 +33,13 @@
 			'alt' => 'A screenshot with a list of pages',
 			'lightbox' => 'interface',
 			'src' => [
-				'width' => 417,
+				'width' => 276,
 			],
 			'srcset' => [
-				'1x' => [
-					'width' => 417
-				],
-				'2x' => [
-					'width' => 834
-				],
+				276,
+				400,
+				552,
+				800,
 			]
 		]) ?>
 	</div>
@@ -52,15 +48,14 @@
 			'alt' => 'A screenshot of our layout field',
 			'lightbox' => 'interface',
 			'src' => [
-				'width' => 1000,
+				'width' => 576,
 			],
 			'srcset' => [
-				'1x' => [
-					'width' => 1000
-				],
-				'2x' => [
-					'width' => 2000
-				],
+				576,
+				800,
+				1152,
+				1600,
+				2000,
 			]
 		]) ?>
 	</div>
@@ -69,15 +64,11 @@
 			'alt' => 'A screenshot of our structure field to edit tabular data',
 			'lightbox' => 'interface',
 			'src' => [
-				'width' => 750,
+				'width' => 426,
 			],
 			'srcset' => [
-				'1x' => [
-					'width' => 750
-				],
-				'2x' => [
-					'width' => 1500
-				],
+				426,
+				852,
 			]
 		]) ?>
 	</div>
@@ -86,15 +77,11 @@
 			'alt' => 'A screenshot of an gallery section in the Panel.',
 			'lightbox' => 'interface',
 			'src' => [
-				'width' => 458,
+				'width' => 326,
 			],
 			'srcset' => [
-				'1x' => [
-					'width' => 458
-				],
-				'2x' => [
-					'width' => 916
-				],
+				326,
+				652,
 			]
 		]) ?>
 	</div>

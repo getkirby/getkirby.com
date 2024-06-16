@@ -25,10 +25,8 @@
 						'srcset' => [
 							352,
 							500,
-							550,
 							704,
 							1000,
-							1100
 						]
 					]) ?>
 				<?php elseif ($image = $partner->avatar()): ?>

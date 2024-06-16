@@ -14,11 +14,11 @@
 							'width' => 48
 						],
 						'srcset' => [
-							'1x' => [
+							'48w' => [
 								'crop' => true,
 								'width' => 48
 							],
-							'2x' => [
+							'96w' => [
 								'crop' => true,
 								'width' => 96
 							]

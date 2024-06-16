@@ -16,12 +16,12 @@
 					'height' => 80,
 				],
 				'srcset' => [
-					'1x' => [
+					'160w' => [
 						'crop'   => true,
 						'width'  => 160,
 						'height' => 80,
 					],
-					'2x' => [
+					'320w' => [
 						'crop'   => true,
 						'width'  => 320,
 						'height' => 160,

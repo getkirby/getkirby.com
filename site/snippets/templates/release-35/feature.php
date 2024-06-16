@@ -8,8 +8,8 @@
 				loading="lazy"
 				src="<?= $image->resize(600)->url() ?>"
 				srcset="<?= $image->srcset([
-					600  => '1x',
-					1200 => '2x'
+					600,
+					1200
 				]) ?>"
 				alt="<?= $headline ?>"
 			/>

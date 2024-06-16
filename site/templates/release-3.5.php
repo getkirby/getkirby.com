@@ -52,8 +52,8 @@
 				loading="lazy"
 				src="<?= $image->resize(700)->url() ?>"
 				srcset="<?= $image->srcset([
-					700 => '1x',
-					1400 => '2x'
+					700,
+					1400,
 				]) ?>"
 				alt="The new blocks field"
 			>
@@ -71,8 +71,8 @@
 				class="shadow-xl rounded"
 				src="<?= $image->resize(700)->url() ?>"
 				srcset="<?= $image->srcset([
-					700 => '1x',
-					1400 => '2x'
+					700,
+					1400,
 				]) ?>"
 				alt="The new layouts field"
 			>
