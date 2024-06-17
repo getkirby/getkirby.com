@@ -1,4 +1,4 @@
-Title: foerdeliebe
+Title: Deichrakete
 
 ----
 
@@ -10,7 +10,7 @@ Package: team
 
 ----
 
-Website: https://foerdeliebe.com
+Website: https://deichrakete.com/
 
 ----
 
@@ -22,7 +22,7 @@ Region: Europe
 
 ----
 
-Contactlink: mailto:moin@foerdeliebe.com
+Contactlink: mailto:moin@deichrakete.com
 
 ----
 
