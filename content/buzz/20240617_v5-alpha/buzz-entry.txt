@@ -29,17 +29,18 @@ We are sharing a very first alpha with you. But please treat it for what it is: 
 
 ### How to contribute
 
-We would love to get your feedback. Try out the alpha with a fresh starterkit or locally with one of your projects. And help us find any bugs or regressions.
+We would love to get your feedback. Try out the alpha with a fresh Starterkit or locally with one of your projects. And help us find any bugs or regressions.
 
 
 Have a look at the (link: #breaking-changes text: breaking changes). An important one: v5 will require PHP 8.2.
 
+<warning>
 We recommend to not use this alpha version in a production project.
+</warning>
 
 ### And my license?
 
-With a Kirby Basic or Enterprise license v5 will be fully included in your three years of free upgrades, so no new license or upgrade needs to be purchased.
-
+Kirby 5 will be a **free upgrade** for everyone with a Kirby Basic or Enterprise license for Kirby 4. Our new licenses include three years of major updates.
 
 ## 🎉 First few features
 
@@ -55,7 +56,7 @@ We do expect to receive a lot of feedback on this feature and that the exact sty
 
 ### Put a button in that header
 
-Kirby 5 adds a new extension that allows plugin developers to add custom view buttons [#6393](https://github.com/getkirby/kirby/pull/6393) to most views of the Panel (e.g. page, site, file, user, language). These buttons will can be added alongside the default buttons, such as the preview button or settings dropdown button.
+Kirby 5 adds a new extension that allows plugin developers to add custom view buttons to most views of the Panel (e.g. page, site, file, user, language). These buttons will can be added alongside the default buttons, such as the preview button or settings dropdown button. [#6393](https://github.com/getkirby/kirby/pull/6393)
 
 To add such a custom view button, you will first need to add your view button Vue component in your plugin's JavaScript file:
 
