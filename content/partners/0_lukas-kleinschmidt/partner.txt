@@ -10,7 +10,7 @@ Package: solo+
 
 ----
 
-Contactlink: mailto:contact@kleinschmidt.at
+Contactlink: mailto:kirby@kleinschmidt.mozmail.com
 
 ----
 
