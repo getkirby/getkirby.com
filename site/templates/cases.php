@@ -8,12 +8,15 @@
 .footer h6 {
 	color: var(--color-white);
 }
-.header .banner {
-	color: initial;
-}
 html {
 	background: var(--color-dark);
 	color: var(--color-gray-400);
+}
+
+@media screen and (min-width: 60rem) {
+	.header .banner {
+		color: initial;
+	}
 }
 </style>
 
