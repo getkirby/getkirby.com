@@ -367,7 +367,7 @@ To provide the browser with different image formats to choose from, we use the `
 
 As with the `img` element, we can use multiple images in the `srcset` attribute and use the `sizes` attribute to tell the browser which version to render and when.
 
-Let's look at the HTML version first to see what this actually looks:
+Let's look at the HTML version first to see what this actually looks like:
 
 ```html
 <picture>
