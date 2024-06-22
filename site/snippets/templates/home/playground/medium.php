@@ -7,19 +7,21 @@
 
 	<span class="hr-v hr-main"></span>
 
-	<figure role="img" aria-label="A browser window with an example website" class="playground-medium-browser bg-white shadow-2xl rounded-xl overflow-hidden">
-		<header class="p-3 flex">
-			<div class="dots mr-3">
-				<i></i>
-				<i></i>
-				<i></i>
+	<figure aria-label="A browser window with an example website" class="playground-medium-browser bg-white shadow-2xl rounded-xl overflow-hidden">
+		<div aria-hidden="true">
+			<header class="p-3 flex">
+				<div class="dots mr-3">
+					<i></i>
+					<i></i>
+					<i></i>
+				</div>
+				<div class="flex-grow text-center truncate text-xs bg-light mx-auto p-1 rounded">
+					<?= $story->browser()->or('yoursite.com') ?>
+				</div>
+			</header>
+			<div class="playground-medium-browser-body p-3 text-xl leading-tight">
+				<?php snippet('templates/home/story/' . $story->slug() . '/browser') ?>
 			</div>
-			<div class="flex-grow text-center truncate text-xs bg-light mx-auto p-1 rounded">
-				<?= $story->browser()->or('yoursite.com') ?>
-			</div>
-		</header>
-		<div class="playground-medium-browser-body p-3 text-xl leading-tight">
-			<?php snippet('templates/home/story/' . $story->slug() . '/browser') ?>
 		</div>
 	</figure>
 
@@ -29,8 +31,8 @@
 	<span class="hr-v" style="grid-column: 15; height: var(--spacing-12)"></span>
 	<span class="hr-v" style="grid-column: 21; height: var(--spacing-12)"></span>
 
-	<div role="img" aria-label="A phone with an example application" class="playground-medium-phone">
-		<div class="relative bg-white overflow-hidden shadow-2xl rounded-xl">
+	<div aria-label="A phone with an example application" class="playground-medium-phone">
+		<div aria-hidden="true" class="relative bg-white overflow-hidden shadow-2xl rounded-xl">
 			<header class="color-white leading-snug">
 				<p class="font-bold"><?= $story->phoneTitle() ?></p>
 				<p class="font-thin"><?= $story->phoneSubtitle() ?></p>
@@ -58,8 +60,8 @@
 			</figure>
 		</div>
 	</div>
-	<div role="img" aria-label="An example API response" class="playground-medium-api">
-		<div class="bg-black shadow-2xl rounded-xl" style="overflow: hidden">
+	<div aria-label="An example API response" class="playground-medium-api">
+		<div aria-hidden="true" class="bg-black shadow-2xl rounded-xl" style="overflow: hidden">
 			<?= $story->api()->kt() ?>
 		</div>
 	</div>
