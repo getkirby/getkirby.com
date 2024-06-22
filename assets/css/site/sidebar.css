@@ -5,15 +5,19 @@
 	color: var(--color-black);
 }
 
-.sidebar li {
-	margin-bottom: 0.25rem;
-}
-
 .sidebar .details {
 	margin-left: -1.75rem;
 }
 .sidebar .details summary::after {
-	margin-top: 0.25rem;
+	margin-top: 0.4rem;
+}
+.sidebar .sidebar-group .details summary::after {
+	margin-top: 0.27rem;
+}
+
+.sidebar ul a {
+	display: block;
+	padding: 0.125rem 0;
 }
 
 .sidebar-menu-2 {
@@ -55,6 +59,7 @@
 
 .sidebar .sidebar-group .sidebar-menu-2 li > a {
 	font-size: var(--text-xs);
+	padding: 0.25rem 0;
 }
 .sidebar .sidebar-group .sidebar-menu-2 {
 	padding-top: 0.25rem;
