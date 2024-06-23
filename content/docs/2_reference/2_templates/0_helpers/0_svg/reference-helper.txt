@@ -1,6 +1,6 @@
 Text:
 
-(screencast: https://www.youtube.com/watch?v=3ioaFfgDRDE title: Working with SVG text: Kirby has a few useful helpers to load and embed logos and icons in your site.)
+(screencast: https://www.youtube.com/watch?v=3ioaFfgDRDE cover: youtube.jpg title: Working with SVG text: Kirby has a few useful helpers to load and embed logos and icons in your site.)
 
 ## With `$file` object
 

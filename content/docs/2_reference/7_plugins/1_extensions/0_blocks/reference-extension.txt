@@ -12,7 +12,7 @@ Kirby ships with a number of (link: docs/reference/panel/blocks text: default bl
 
 The default preview for custom blocks is nice, but it can be even better! You can create your own (glossary: Vue) component to render previews for your blocks directly in the blocks editor. You can even make them editable. Or you take it beyond previews and add the frontend HTML output for your block as well. We will look into these different ways of extending Kirby with custom blocks.
 
-(screencast: https://youtu.be/hGhrJru-PQ8 text: A pretty extensive crash course in how to create a block preview plugin.)
+(screencast: https://youtu.be/hGhrJru-PQ8 cover: youtube.jpg text: A pretty extensive crash course in how to create a block preview plugin.)
 
 ## Static preview
 

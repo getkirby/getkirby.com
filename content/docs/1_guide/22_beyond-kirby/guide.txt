@@ -50,7 +50,7 @@ Sometimes, however, "headless" technologies are used for their own sake, for exa
 
 ## Content representations
 
-(screencast: https://youtu.be/LoN2n1jjCuc title: Your content in different formats text: Be it JSON for your frontend JavaScript library, to use Kirby as an API for other tools or an automatic RSS feed of your blog.)
+(screencast: https://youtu.be/LoN2n1jjCuc cover: youtube.jpg title: Your content in different formats text: Be it JSON for your frontend JavaScript library, to use Kirby as an API for other tools or an automatic RSS feed of your blog.)
 
 
 Content representations work like standard Kirby templates and are usually bound to a page type. They are a great way to create an API that provides exactly the data you need.
