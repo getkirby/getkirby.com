@@ -59,7 +59,7 @@ $tags['screencast'] = [
 	'html' => function ($tag) {
 		return snippet('kirbytext/screencast', [
 			'url'   => $tag->value,
-			'cover' => $tag->file($tag->cover),
+			'cover' => $tag->cover ? $tag->file($tag->cover) : $tag->file('youtube.jpg'),
 			'title' => $tag->title ?? null,
 			'text'  => $tag->text ?? null
 		], true);
