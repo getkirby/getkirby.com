@@ -10,7 +10,7 @@ content/
         _drafts/
             around-the-world/
               article.txt
-        20210131_exploring-the-universe/
+        20231116_exploring-the-universe/
             article.txt
             dark-forest.jpg
 ```
