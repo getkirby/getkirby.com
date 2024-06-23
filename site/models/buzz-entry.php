@@ -32,20 +32,14 @@ class BuzzEntryPage extends DefaultPage
 
 	public function url($options = null): string
 	{
+		if ($this->video()->isNotEmpty() === true) {
+			return $this->video()->value();
+		}
+
 		if ($this->link()->isNotEmpty() === true) {
 			return $this->link()->value();
 		}
 
 		return parent::url($options);
-	}
-
-	public function video(): Field
-	{
-		if (parent::video()->isNotEmpty() === true) {
-			$video = str_replace('www.youtube.com', 'www.youtube-nocookie.com', parent::video());
-			return parent::video()->value($video);
-		}
-
-		return parent::video();
 	}
 }
