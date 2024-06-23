@@ -4,7 +4,7 @@ Title: Debugging
 
 Screencast:
 
-(screencast: https://www.youtube.com/watch?v=GrBbuwRSuMA cover: youtube.jpg title: Debug mode text: Kirby's debug mode is super helpful for finding mistakes in your templates, snippets or other parts of your project.)
+(screencast: https://www.youtube.com/watch?v=GrBbuwRSuMA title: Debug mode text: Kirby's debug mode is super helpful for finding mistakes in your templates, snippets or other parts of your project.)
 
 ----
 Text:

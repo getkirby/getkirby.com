@@ -16,7 +16,7 @@ Category: Creating your site
 
 Screencast:
 
-(screencast: https://www.youtube.com/watch?v=zUPqqrhbcR8 cover: youtube.jpg title: The content folder text: The heart and soul of your Kirby installation: Let's learn how to create pages and add content with simple text files and folders. )
+(screencast: https://www.youtube.com/watch?v=zUPqqrhbcR8 title: The content folder text: The heart and soul of your Kirby installation: Let's learn how to create pages and add content with simple text files and folders. )
 
 
 ----
