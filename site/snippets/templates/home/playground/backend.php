@@ -9,7 +9,7 @@
 		<span class="hr-h"></span>
 		<div class="flex flex-grow items-center">
 			<?= image('php.svg')->read() ?>
-			<span class="px-3">+</span>
+			<span style="padding-left: var(--spacing-3); padding-right: var(--spacing-1);">+</span>
 			<?= image('vue.svg')->read() ?>
 		</div>
 	</div>
