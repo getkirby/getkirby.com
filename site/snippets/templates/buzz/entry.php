@@ -1,11 +1,21 @@
-<a href="<?= $entry->url() ?>" class="buzz-entry">
-	<article>
-		<figure class="rounded overflow-hidden mb-6 shadow-lg" style="--aspect-ratio: 800/400">
-			<?php if ($entry->video()->isNotEmpty()): ?>
+<?php if($entry->video()->isNotEmpty()): ?>
+	<div class="buzz-entry">
+		<article>
+			<figure class="rounded overflow-hidden mb-6 shadow-lg" style="--aspect-ratio: 800/400">
 				<?= video($entry->video(), $entry->image('youtube.jpg'), [], [
 					'loading' => 'lazy'
 				]) ?>
-			<?php elseif ($img = $entry->image()): ?>
+			</figure>
+
+			<a href="<?= $entry->url() ?>">
+				<?php snippet('templates/buzz/description', compact('entry')) ?>
+			</a>
+		</article>
+	</div>
+<?php elseif ($img = $entry->image()): ?>
+	<a href="<?= $entry->url() ?>" class="buzz-entry">
+		<article>
+			<figure class="rounded overflow-hidden mb-6 shadow-lg" style="--aspect-ratio: 800/400">
 				<?= img($img, [
 					'src' => [
 						'width' => 384
@@ -20,19 +30,9 @@
 						1200,
 					],
 				]) ?>
-			<?php endif ?>
-		</figure>
+			</figure>
 
-		<header class="mb-12">
-			<p class="font-mono text-xs mb-1">
-				<?php e($entry->isExternalLink(), '🔗') ?>
-				<?= $entry->category() ?>
-			</p>
-			<h2 class="h3 mb-3"><?= $entry->title()->widont() ?></h2>
-
-			<?php if ($entry->blurb()->isNotEmpty()): ?>
-				<p class="text-base color-gray-700"><?= $entry->blurb()->widont() ?></p>
-			<?php endif ?>
-		</header>
-	</article>
-</a>
+			<?php snippet('templates/buzz/description', compact('entry')) ?>
+		</article>
+	</a>
+<?php endif ?>
