@@ -31,7 +31,7 @@
 	display: block;
 	font-weight: normal;
 	color: var(--color-gray-700);
-	padding: 0.25rem 0;
+	padding: 0.3rem 0;
 }
 .sidebar-menu-2 li > hr {
 	width: 3rem;
