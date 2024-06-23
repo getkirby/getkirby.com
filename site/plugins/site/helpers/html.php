@@ -149,9 +149,9 @@ function video(
 	// get the iframe string from the core
 	$iframe = Html::youtube($privacyUrl, [
 		...$options['youtube'] ?? [],
-		'autoplay'       => 1,
-		'showinfo'       => 0,
-		'rel'            => 0,
+		'autoplay' => 1,
+		'showinfo' => 0,
+		'rel'      => 0,
 	], [
 		...$attr,
 		'referrerpolicy' => 'no-referrer'
