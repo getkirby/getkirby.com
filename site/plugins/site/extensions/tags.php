@@ -48,16 +48,18 @@ $tags['image'] = [
 ];
 
 /**
- * (screencast: https://www.youtube.com/watch?v=EDVYjxWMecc title: How to install Kirby in 5 minutes)
+ * (screencast: https://www.youtube.com/watch?v=EDVYjxWMecc cover: youtube.jpg title: How to install Kirby in 5 minutes)
  */
 $tags['screencast'] = [
 	'attr' => [
+		'cover',
 		'title',
 		'text',
 	],
 	'html' => function ($tag) {
 		return snippet('kirbytext/screencast', [
 			'url'   => $tag->value,
+			'cover' => $tag->file($tag->cover),
 			'title' => $tag->title ?? null,
 			'text'  => $tag->text ?? null
 		], true);

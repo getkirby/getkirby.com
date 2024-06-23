@@ -1,6 +1,9 @@
 <?php
 
+use Kirby\Cms\File;
 use Kirby\Toolkit\Html;
+use Kirby\Toolkit\Str;
+use Kirby\Toolkit\Tpl;
 use Kirby\Toolkit\Xml;
 
 function ariaCurrent(
@@ -117,6 +120,46 @@ function version(string $version, string $format = '%s'): string
 		option('github.url') . '/kirby/releases/tag/' . $version,
 		sprintf($format, $version)
 	);
+}
+
+/**
+ * Creates a privacy-friendly video embed via iframe for YouTube
+ */
+function video(
+	string $url,
+	File $cover,
+	array $options = [],
+	array $attr = [],
+): string|null {
+	if (Str::contains($url, 'vimeo', true) === true) {
+		throw new Exception('Vimeo support is not implemented');
+	}
+
+	// delegate local video support to the core implementation
+	if (Str::contains($url, 'youtu', true) === false) {
+		return Html::video($url, $options, $attr);
+	}
+
+	// normalize video URL for the fallback link
+	$url = str_replace('youtu.be/', 'www.youtube.com/watch?v=', $url);
+	$url = str_replace('www.youtube-nocookie.com', 'www.youtube.com', $url);
+
+	// but always use privacy mode for embedding
+	$privacyUrl = str_replace('www.youtube.com', 'www.youtube-nocookie.com', $url);
+
+	// get the iframe string from the core
+	$iframe = Html::youtube($privacyUrl, [
+		...$options['youtube'] ?? [],
+		'autoplay'       => 1,
+		'modestbranding' => 1,
+		'showinfo'       => 0,
+		'rel'            => 0,
+	], [
+		...$attr,
+		'referrerpolicy' => 'no-referrer'
+	]);
+
+	return Tpl::load(dirname(__DIR__) . '/snippets/video.php', compact('attr', 'iframe', 'url', 'cover'));
 }
 
 if (function_exists('xml') === false) {

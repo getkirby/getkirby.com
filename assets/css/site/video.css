@@ -1,0 +1,33 @@
+.video-embed {
+	position: relative;
+}
+
+.video-embed img {
+	height: 100%;
+	width: 100%;
+}
+
+.video-embed .play-button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 68px;
+	height: 48px;
+	margin-left: -34px;
+	margin-top: -24px;
+}
+
+.video-embed .text-overlay {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 1rem 1rem 0.75rem;
+	font-size: var(--text-xs);
+	background: linear-gradient(transparent, black);
+	color: var(--color-white);
+}
+
+.video-embed .text-overlay a {
+	color: var(--color-white);
+}
