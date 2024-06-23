@@ -1,6 +1,6 @@
 export default class {
 	constructor() {
-		document.querySelectorAll(".video-embed a").forEach((element) => {
+		document.querySelectorAll(".video-embed > a").forEach((element) => {
 			element.addEventListener("click", this.click);
 		});
 	}
