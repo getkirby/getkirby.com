@@ -27,15 +27,11 @@
 	padding-top: 0.375rem;
 	padding-bottom: 0.375rem;
 }
-.sidebar-menu-2 li {
-	margin-bottom: 0;
-}
 .sidebar-menu-2 li > a {
 	display: block;
 	font-weight: normal;
 	color: var(--color-gray-700);
-	padding-top: 0.25rem;
-	padding-bottom: 0.25rem;
+	padding: 0.25rem 0;
 }
 .sidebar-menu-2 li > hr {
 	width: 3rem;
@@ -53,13 +49,8 @@
 	font-size: var(--text-sm);
 }
 
-.sidebar .sidebar-group li {
-	margin-bottom: 0rem;
-}
-
 .sidebar .sidebar-group .sidebar-menu-2 li > a {
 	font-size: var(--text-xs);
-	padding: 0.25rem 0;
 }
 .sidebar .sidebar-group .sidebar-menu-2 {
 	padding-top: 0.25rem;
