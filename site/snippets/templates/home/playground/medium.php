@@ -7,7 +7,7 @@
 
 	<span class="hr-v hr-main"></span>
 
-	<figure aria-label="A browser window with an example website" class="playground-medium-browser bg-white shadow-2xl rounded-xl overflow-hidden">
+	<figure aria-label="A browser window showing a website created with Kirby" class="playground-medium-browser bg-white shadow-2xl rounded-xl overflow-hidden">
 		<div aria-hidden="true">
 			<header class="p-3 flex">
 				<div class="dots mr-3">
@@ -31,7 +31,7 @@
 	<span class="hr-v" style="grid-column: 15; height: var(--spacing-12)"></span>
 	<span class="hr-v" style="grid-column: 21; height: var(--spacing-12)"></span>
 
-	<div aria-label="A phone with an example application" class="playground-medium-phone">
+	<div aria-label="A phone showing a website created with Kirby" class="playground-medium-phone">
 		<div aria-hidden="true" class="relative bg-white overflow-hidden shadow-2xl rounded-xl">
 			<header class="color-white leading-snug">
 				<p class="font-bold"><?= $story->phoneTitle() ?></p>
@@ -60,7 +60,7 @@
 			</figure>
 		</div>
 	</div>
-	<div aria-label="An example API response" class="playground-medium-api">
+	<div aria-label="An example response from the Kirby API" class="playground-medium-api">
 		<div aria-hidden="true" class="bg-black shadow-2xl rounded-xl" style="overflow: hidden">
 			<?= $story->api()->kt() ?>
 		</div>
