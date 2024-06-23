@@ -1,6 +1,6 @@
 .filters a,
 .filters button {
-	display: flex;
+	display: flex !important; /* normal menus use display: block */
 	align-items: center;
 	margin-bottom: var(--spacing-1);
 }
