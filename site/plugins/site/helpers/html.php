@@ -151,7 +151,6 @@ function video(
 	$iframe = Html::youtube($privacyUrl, [
 		...$options['youtube'] ?? [],
 		'autoplay'       => 1,
-		'modestbranding' => 1,
 		'showinfo'       => 0,
 		'rel'            => 0,
 	], [
