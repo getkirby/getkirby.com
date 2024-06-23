@@ -23,8 +23,8 @@
 			<fieldset>
 				<legend class="sr-only">License Type</legend>
 				<div class="volume-toggles">
-					<label><input type="radio" name="product" value="<?= $basic->value() ?>" v-model="product" checked> <?= $basic->label() ?></label>
-					<label><input type="radio" name="product" value="<?= $enterprise->value() ?>" v-model="product"> <?= $enterprise->label() ?></label>
+					<label><input type="radio" name="product" value="<?= $basic->value() ?>" v-model="product"> <?= $basic->label() ?></label>
+					<label><input type="radio" name="product" value="<?= $enterprise->value() ?>" v-model="product" checked> <?= $enterprise->label() ?></label>
 				</div>
 			</fieldset>
 		</header>
