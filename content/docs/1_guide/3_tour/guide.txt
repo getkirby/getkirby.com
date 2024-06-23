@@ -20,7 +20,7 @@ Icon: map
 
 Screencast:
 
-(screencast: https://www.youtube.com/watch?v=lLQZd64uvPs title: Feel at home in your Kirby installation text: Getting started with Kirby? Let's explore our Starterkit and see where to find stuff.)
+(screencast: https://www.youtube.com/watch?v=lLQZd64uvPs cover: youtube.jpg title: Feel at home in your Kirby installation text: Getting started with Kirby? Let's explore our Starterkit and see where to find stuff.)
 
 ----
 

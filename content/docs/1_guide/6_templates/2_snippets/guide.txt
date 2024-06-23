@@ -16,7 +16,7 @@ Intro: Snippets are smaller blocks of code that you can reuse across templates. 
 
 Screencast:
 
-(screencast: https://www.youtube.com/watch?v=CTOoDE9z-WA title: Make your life easier with snippets text: A great way to clean up your templates and reuse parts of your templates multiple times.)
+(screencast: https://www.youtube.com/watch?v=CTOoDE9z-WA cover: youtube-snippets.jpg title: Make your life easier with snippets text: A great way to clean up your templates and reuse parts of your templates multiple times.)
 
 ----
 
@@ -203,7 +203,7 @@ The `compact()` function takes the variable values from the current scope and co
 
 ## Passing slots to snippets
 
-(screencast: https://www.youtube.com/watch?v=ASmy8mcBWqg title: Snippets with slots text: Check out our extensive screencast to learn more about snippets with slots.)
+(screencast: https://www.youtube.com/watch?v=ASmy8mcBWqg cover: youtube-slots.jpg title: Snippets with slots text: Check out our extensive screencast to learn more about snippets with slots.)
 
 Data variables are useful if you want to pass whole objects (like the page object in the example above) or other values that you have already stored in variables.
 

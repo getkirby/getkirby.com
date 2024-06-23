@@ -14,7 +14,7 @@ Icon: panel
 
 ----
 
-Screencast: (screencast: https://www.youtube.com/watch?v=eOoGMmQbre8 title: A closer look at the blocks field)
+Screencast: (screencast: https://www.youtube.com/watch?v=eOoGMmQbre8 cover: youtube.jpg title: A closer look at the blocks field)
 
 ----
 
