@@ -21,7 +21,7 @@ Make sure to disable `debug` mode in production! Displaying PHP errors on a publ
 In a production environment, always log errors to your PHP error logs.
 </alert>
 
-(screencast: https://www.youtube.com/watch?v=GrBbuwRSuMA cover: youtube.jpg title: Debug mode text: Kirby's debug mode is super helpful for finding mistakes in your templates, snippets or other parts of your project.)
+(screencast: https://www.youtube.com/watch?v=GrBbuwRSuMA title: Debug mode text: Kirby's debug mode is super helpful for finding mistakes in your templates, snippets or other parts of your project.)
 
 To avoid accidentally enabling debugging in production, but to still be able to use it in certain situations, you have different options:
 

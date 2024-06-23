@@ -13,7 +13,7 @@ Searchbyline: Create custom Panel fields
 
 Text:
 
-(screencast: https://www.youtube.com/watch?v=Xpd6NNX_EhY cover: youtube.jpg title: Field plugin crash course)
+(screencast: https://www.youtube.com/watch?v=Xpd6NNX_EhY title: Field plugin crash course)
 
 ## What makes a field plugin?
 

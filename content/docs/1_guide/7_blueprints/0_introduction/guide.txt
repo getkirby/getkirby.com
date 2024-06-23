@@ -12,7 +12,7 @@ Thumbnail:  tabs.png
 
 Screencast:
 
-(screencast: https://www.youtube.com/watch?v=yK3gNjWU_5s cover: youtube.jpg title: Your first blueprints text: The heart and soul of your Kirby installation: Learn how to create a fully customized admin interface for every page type.)
+(screencast: https://www.youtube.com/watch?v=yK3gNjWU_5s title: Your first blueprints text: The heart and soul of your Kirby installation: Learn how to create a fully customized admin interface for every page type.)
 
 ----
 

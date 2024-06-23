@@ -18,7 +18,7 @@ Templates contain the HTML for your pages, spiced up with some PHP to dynamicall
 
 Screencast:
 
-(screencast: https://www.youtube.com/watch?v=bmz6NYUNWPk cover: youtube.jpg title: Your first template text: Connect the content from your content folder with your static HTML and bring your pages to life.)
+(screencast: https://www.youtube.com/watch?v=bmz6NYUNWPk title: Your first template text: Connect the content from your content folder with your static HTML and bring your pages to life.)
 
 ----
 

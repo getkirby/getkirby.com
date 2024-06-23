@@ -38,5 +38,4 @@ With the object in place, we can now use the methods to create our pagination na
 <?php endif ?>
 ```
 
-(screencast: https://www.youtube.com/watch?v=p1JhCpSRvlc cover: youtube.jpg title: Pagination text: When a list of pages grows longer and longer you need to paginate it.)
-
+(screencast: https://www.youtube.com/watch?v=p1JhCpSRvlc title: Pagination text: When a list of pages grows longer and longer you need to paginate it.)

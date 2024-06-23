@@ -76,7 +76,7 @@ While using the built-in server works fine for many use cases, you might sometim
 (link:https://herd.laravel.com text:Laravel Herd) is a one click PHP development environment with zero dependencies, running out of the box without any hassles. According to its self description it is the fastest environment around.
 Sites can be configured via a GUI or command line just like Laravel valet. Different PHP versions can be used for all your sites and sharing of local sites is also possible via (link:https://expose.dev text:Expose).
 
-(screencast: https://www.youtube.com/watch?v=Mb_-bo77IPc cover: youtube.jpg title: One minute install with Laravel Herd)
+(screencast: https://www.youtube.com/watch?v=Mb_-bo77IPc title: One minute install with Laravel Herd)
 
 ### MAMP or MAMP Pro
 
