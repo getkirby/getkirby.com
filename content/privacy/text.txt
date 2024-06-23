@@ -229,6 +229,22 @@ France*
 
 Algolia complies with GDPR. You can find their privacy policy here: <https://www.algolia.com/policies/privacy/>
 
+#### YouTube
+
+We embed YouTube videos (for example screencasts) in relevant places on our site. YouTube is provided by:
+
+*Google Ireland Limited
+Gordon House
+Barrow Street
+Dublin 4
+Ireland*
+
+We use YouTube's privacy-enhanced mode that reduces the privacy impact according to YouTube's documentation. In addition, we only load videos after you have consented to this data processing by clicking on the video.
+
+Once a YouTube video is loaded, we cannot control the data processing carried out by Google/YouTube. They may store cookies or local storage data and use them for personalization. If you are logged in to YouTube, they may be able to link your visit to your personal profile.
+
+Google complies with GDPR. You can find their privacy policy here: <https://policies.google.com/privacy>
+
 #### CARTO
 
 To display our community map, external map data is loaded from CARTO. We only load the map after you have consented to this data processing. By loading the external map data, your browser only sends your IP address, browser version and requested map area(s). This data is processed by:
@@ -411,4 +427,4 @@ We try to keep our privacy policy as transparent and easy to understand as possi
 ## Updates
 
 We will regularly check and update this privacy policy if necessary.
-**Last update: June 14, 2024**
+**Last update: June 23, 2024**
