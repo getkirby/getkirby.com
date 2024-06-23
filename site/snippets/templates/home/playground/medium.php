@@ -31,7 +31,7 @@
 	<span class="hr-v" style="grid-column: 15; height: var(--spacing-12)"></span>
 	<span class="hr-v" style="grid-column: 21; height: var(--spacing-12)"></span>
 
-	<div aria-label="A phone showing a website created with Kirby" class="playground-medium-phone">
+	<figure aria-label="A phone showing a website created with Kirby" class="playground-medium-phone">
 		<div aria-hidden="true" class="relative bg-white overflow-hidden shadow-2xl rounded-xl">
 			<header class="color-white leading-snug">
 				<p class="font-bold"><?= $story->phoneTitle() ?></p>
@@ -59,13 +59,12 @@
 				]) ?>
 			</figure>
 		</div>
-	</div>
-	<div aria-label="An example response from the Kirby API" class="playground-medium-api">
+	</figure>
+	<figure aria-label="An example response from the Kirby API" class="playground-medium-api">
 		<div aria-hidden="true" class="bg-black shadow-2xl rounded-xl" style="overflow: hidden">
 			<?= $story->api()->kt() ?>
 		</div>
-	</div>
+	</figure>
 
 	<span class="hr-h hr-end" style="grid-column: 1/12;"></span>
-
 </section>
