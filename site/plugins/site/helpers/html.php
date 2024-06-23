@@ -3,7 +3,6 @@
 use Kirby\Cms\File;
 use Kirby\Toolkit\Html;
 use Kirby\Toolkit\Str;
-use Kirby\Toolkit\Tpl;
 use Kirby\Toolkit\Xml;
 
 function ariaCurrent(
@@ -158,7 +157,7 @@ function video(
 		'referrerpolicy' => 'no-referrer'
 	]);
 
-	return Tpl::load(dirname(__DIR__) . '/snippets/video.php', compact('attr', 'iframe', 'url', 'cover'));
+	return snippet('video', compact('attr', 'iframe', 'url', 'cover'), true);
 }
 
 if (function_exists('xml') === false) {
