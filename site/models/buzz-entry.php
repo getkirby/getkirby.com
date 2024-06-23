@@ -32,10 +32,6 @@ class BuzzEntryPage extends DefaultPage
 
 	public function url($options = null): string
 	{
-		if ($this->video()->isNotEmpty() === true) {
-			return $this->video()->value();
-		}
-
 		if ($this->link()->isNotEmpty() === true) {
 			return $this->link()->value();
 		}
