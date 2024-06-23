@@ -2,14 +2,7 @@
 	<article>
 		<figure class="rounded overflow-hidden mb-6 shadow-lg" style="--aspect-ratio: 800/400">
 			<?php if ($entry->video()->isNotEmpty()): ?>
-				<?= video($entry->video(), [
-					'youtube' => [
-						'controls'       => 0,
-						'modestbranding' => 1,
-						'showinfo'       => 0,
-						'rel'            => 0,
-					]
-				], [
+				<?= video($entry->video(), $entry->image('youtube.jpg'), [], [
 					'loading' => 'lazy'
 				]) ?>
 			<?php elseif ($img = $entry->image()): ?>

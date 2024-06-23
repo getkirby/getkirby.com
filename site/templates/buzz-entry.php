@@ -21,14 +21,7 @@
 
 <?php if ($page->video()->isNotEmpty()): ?>
 	<figure class="rounded overflow-hidden mb-12 shadow-lg" style="--aspect-ratio: 800/400">
-		<?= video($page->video(), [
-			'youtube' => [
-				'controls'       => 0,
-				'modestbranding' => 1,
-				'showinfo'       => 0,
-				'rel'            => 0,
-			]
-		], [
+		<?= video($page->video(), $page->image('youtube.jpg'), [], [
 			'loading' => 'lazy'
 		]) ?>
 	</figure>

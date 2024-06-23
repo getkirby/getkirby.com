@@ -7,14 +7,7 @@
 		<?php endif ?>
 	</header>
 	<figure class="video" style="--aspect-ratio: 16/9">
-		<?= video(str_replace('www.youtube.com', 'www.youtube-nocookie.com', $url), [
-			'youtube' => [
-				'controls'       => 0,
-				'modestbranding' => 1,
-				'showinfo'       => 0,
-				'rel'            => 0,
-			]
-		], [
+		<?= video($url, $cover, [], [
 			'loading' => 'lazy'
 		]) ?>
 	</figure>
