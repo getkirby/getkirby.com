@@ -11,12 +11,14 @@ import Code from "./components/code.js";
 import Lightbox from "./components/lightbox.js";
 import Menu from "./components/menu.js";
 import Search from "./components/search.js";
+import Video from "./components/video.js";
 
 function init() {
 	new Code();
 	new Lightbox();
 	new Menu();
 	new Search();
+	new Video();
 }
 
 if (document.readyState === "loading") {
