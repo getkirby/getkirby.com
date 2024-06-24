@@ -3,10 +3,11 @@
 	data-region="<?= $partner->region() ?>"
 	data-languages="<?= implode(',', $partner->languages()->split(',')) ?>"
 	data-type="<?= $partner->typeLabel() ?>"
+	data-people="<?= $partner->people() ?>"
 >
 	<article>
 		<p class="flex items-center text-xs" style="gap: var(--spacing-1)">
-			<?= $partner->typeLabel() ?>
+			Certified partner
 			<span class="mr-1"
 						title="Certified Kirby Partner"><?= icon('verified') ?></span>
 		</p>

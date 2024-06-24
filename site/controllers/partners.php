@@ -17,10 +17,10 @@ return function (App $kirby, Page $page) {
 			'default'  => 'All regions',
 			'multiple' => false
 		],
-		'type' => [
-			'label'    => 'Business type filter',
-			'default'  => 'All business types',
-			'field'    => 'typeLabel',
+		'people' => [
+			'label'    => 'Team size',
+			'default'  => 'Any team size',
+			'field'    => 'people',
 			'multiple' => false
 		],
 	];
