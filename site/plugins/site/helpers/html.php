@@ -126,7 +126,7 @@ function version(string $version, string $format = '%s'): string
  */
 function video(
 	string $url,
-	File $cover,
+	File $poster,
 	array $options = [],
 	array $attr = [],
 ): string|null {
@@ -157,7 +157,7 @@ function video(
 		'referrerpolicy' => 'no-referrer'
 	]);
 
-	return snippet('video', compact('attr', 'iframe', 'url', 'cover'), true);
+	return snippet('video', compact('attr', 'iframe', 'url', 'poster'), true);
 }
 
 if (function_exists('xml') === false) {

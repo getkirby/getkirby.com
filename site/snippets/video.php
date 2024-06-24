@@ -1,6 +1,6 @@
 <div class="video-embed">
 	<a href="<?= esc($url, 'attr') ?>" data-iframe="<?= esc($iframe, 'attr') ?>" aria-label="<?= $attr['title'] ?? 'YouTube video' ?>">
-		<?= img($cover, [
+		<?= img($poster, [
 			'src' => [
 				'width' => 616
 			],

@@ -48,20 +48,20 @@ $tags['image'] = [
 ];
 
 /**
- * (screencast: https://www.youtube.com/watch?v=EDVYjxWMecc cover: youtube.jpg title: How to install Kirby in 5 minutes)
+ * (screencast: https://www.youtube.com/watch?v=EDVYjxWMecc poster: youtube.jpg title: How to install Kirby in 5 minutes)
  */
 $tags['screencast'] = [
 	'attr' => [
-		'cover',
+		'poster',
 		'title',
 		'text',
 	],
 	'html' => function ($tag) {
 		return snippet('kirbytext/screencast', [
-			'url'   => $tag->value,
-			'cover' => $tag->cover ? $tag->file($tag->cover) : $tag->file('youtube.jpg'),
-			'title' => $tag->title ?? null,
-			'text'  => $tag->text ?? null
+			'url'    => $tag->value,
+			'poster' => $tag->poster ? $tag->file($tag->poster) : $tag->file('youtube.jpg'),
+			'title'  => $tag->title ?? null,
+			'text'   => $tag->text ?? null
 		], true);
 	}
 ];

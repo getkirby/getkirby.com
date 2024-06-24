@@ -7,7 +7,7 @@
 		<?php endif ?>
 	</header>
 	<figure class="video" style="--aspect-ratio: 16/9">
-		<?= video($url, $cover, [], [
+		<?= video($url, $poster, [], [
 			'loading' => 'lazy'
 		]) ?>
 	</figure>

@@ -45,7 +45,7 @@ sections:
     templates: product
 ```
 
-(screencast: https://www.youtube.com/watch?v=rVcg4SlAh-A cover: youtube-section.jpg title: A closer look at pages sections text: Show subpages as cards or list, add additional info for each page, control the card design – there are hardly any limits.)
+(screencast: https://www.youtube.com/watch?v=rVcg4SlAh-A poster: youtube-section.jpg title: A closer look at pages sections text: Show subpages as cards or list, add additional info for each page, control the card design – there are hardly any limits.)
 
 <info>
 <p>Sections do not store anything in the content file, which means that you cannot fetch content from a section in your templates like you would from field content.</p>
@@ -482,4 +482,4 @@ sections:
     search: true
 ```
 
-(screencast: https://youtu.be/rC9Up05WVnI cover: youtube-bookmarks.jpg title: Build a bookmark tool text: An example how to build a nice overview with the table layout in the pages section showing all relevant columns.)
+(screencast: https://youtu.be/rC9Up05WVnI poster: youtube-bookmarks.jpg title: Build a bookmark tool text: An example how to build a nice overview with the table layout in the pages section showing all relevant columns.)
