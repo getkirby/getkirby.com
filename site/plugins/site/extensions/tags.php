@@ -1,5 +1,6 @@
 <?php
 
+use Kirby\Cms\Html;
 use Kirby\Cms\Section;
 use Kirby\Form\Field;
 use Kirby\Reference\DocBlock;
@@ -414,8 +415,9 @@ $tags['video'] = [
 				);
 			}
 		} else {
-			$video = Html::video(
+			$video = video(
 				$tag->value,
+				$tag->poster ? $tag->file($tag->poster) : $tag->file('youtube.jpg'),
 				$tag->kirby()->option('kirbytext.video.options', []),
 				$attrs
 			);

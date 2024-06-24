@@ -6,7 +6,7 @@
 		<p class="text-base color-gray-400"><?= widont($text) ?></p>
 		<?php endif ?>
 	</header>
-	<figure class="video" style="--aspect-ratio: 16/9">
+	<figure class="video">
 		<?= video($url, $poster, [], [
 			'loading' => 'lazy'
 		]) ?>
