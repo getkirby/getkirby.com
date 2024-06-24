@@ -7,6 +7,6 @@ export default class {
 
 	click(e) {
 		e.preventDefault();
-		e.currentTarget.parentElement.outerHTML = e.currentTarget.dataset.iframe;
+		e.currentTarget.parentElement.innerHTML = e.currentTarget.dataset.iframe;
 	}
 }
