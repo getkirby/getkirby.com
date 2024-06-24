@@ -12,6 +12,8 @@ if (php_sapi_name() !== 'cli') {
   die();
 }
 
+define('KIRBY_HELPER_VIDEO', false);
+
 // load Kirby
 require __DIR__ . '/../kirby/bootstrap.php';
 
