@@ -77,6 +77,15 @@ class PartnerPage extends DefaultPage
 		return parent::my()->value($this->isSoloPartner() ? 'my' : 'our');
 	}
 
+	public function people(): string
+	{
+		if (parent::people()->isEmpty() === true) {
+			return parent::people()->value($this->isSoloPartner() ? '1' : '4+');
+		}
+
+		return parent::people();
+	}
+
 	public function plugins(): Pages|null
 	{
 		if (parent::plugins()->isNotEmpty() === true) {
