@@ -11,5 +11,5 @@ The requirements depend on the partnership plan you select (see in the box above
 - Link to your own website
 - Basic information about your business
 - Links to published client websites (depending on your partnership plan)
-- Provide access to the code of one published project (in the Plus plans)
+- Provide access to the code of one published project (in the Certified plans)
 - Once we accepted your application: Profile information (name, location, tagline, expertise, description, project links and cover image)

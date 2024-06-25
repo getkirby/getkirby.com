@@ -104,7 +104,7 @@
 						<li><?= icon('star') ?> Project gallery with up to 3 projects</li>
 						<li><?= icon('star') ?> Access to the Discord #partners channel</li>
 						<li><?= icon('star') ?> Directly matched client leads</li>
-						<li><?= icon('star') ?> More visibility within the Kirby community</li>
+						<li><?= icon('star') ?> More visibility within the Kirby Community</li>
 					</ul>
 				</section>
 

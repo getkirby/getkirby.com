@@ -2,4 +2,4 @@ Title: What is the right plan for me?
 ----
 Text:
 
-Our partner plans are based on how many people work in your company: are you a solo freelancer, a small studio or a full agency? The second distinction we make is between regular partners and certified partners, which are those who have had a published Kirby project reviewed in detail. These two tiers enjoy different benefits.
+Our partner plans are based on how many people work in your company: are you a solo freelancer, a small studio or a large agency? The second distinction we make is between regular partners and certified partners, which are those who have had a published Kirby project reviewed in detail. These two tiers enjoy different benefits.
