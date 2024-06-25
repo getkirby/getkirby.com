@@ -56,7 +56,7 @@ We do expect to receive a lot of feedback on this feature and that the exact sty
 
 ### Put a button in that header
 
-Kirby 5 adds a new extension that allows plugin developers to add custom view buttons to most views of the Panel (e.g. page, site, file, user, language). These buttons will can be added alongside the default buttons, such as the preview button or settings dropdown button. [#6393](https://github.com/getkirby/kirby/pull/6393)
+Kirby 5 adds a new extension that allows plugin developers to add custom view buttons to most views of the Panel (e.g. page, site, file, user, language). These buttons can be added alongside the default buttons, such as the preview button or settings dropdown button. [#6393](https://github.com/getkirby/kirby/pull/6393)
 
 To add such a custom view button, you will first need to add your view button Vue component in your plugin's JavaScript file:
 
