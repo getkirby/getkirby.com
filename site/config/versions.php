@@ -184,6 +184,7 @@ return [
 		'repo'        => 'https://github.com/getkirby',
 		'subreleases' => [
 			'3.10.0.1',
+			'3.10.1'
 		]
 	],
 	'4.0' => [
