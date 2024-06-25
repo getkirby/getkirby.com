@@ -2,6 +2,7 @@
 
 name: Update Algolia index
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
