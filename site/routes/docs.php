@@ -38,6 +38,11 @@ return [
 				$this->next();
 			}
 
+			// prevent duplicate content with invalid content representations
+			if (str_contains($slug, '.') === true) {
+				$this->next();
+			}
+
 			$page = page('docs/cookbook/' . $category . '/' . $slug);
 
 			if ($page) {
