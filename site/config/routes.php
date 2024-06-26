@@ -13,10 +13,6 @@ return [
 		'action'  => fn () => go('security.txt')
 	],
 	[
-		'pattern' => 'cdn/info',
-		'action'  => fn () => kirby()->request()->headers()
-	],
-	[
 		'pattern' => 'hooks/clean',
 		'method'  => 'GET|POST',
 		'action'  => function () {
