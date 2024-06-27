@@ -104,14 +104,14 @@
 						<li><?= icon('star') ?> Project gallery with up to 3 projects</li>
 						<li><?= icon('star') ?> Access to the Discord #partners channel</li>
 						<li><?= icon('star') ?> Directly matched client leads</li>
-						<li><?= icon('star') ?> More visibility within the Kirby Community</li>
+						<li><?= icon('star') ?> More visibility within the Kirby community</li>
 					</ul>
 				</section>
 
 				<section class="mb-6">
 					<h3 class="font-bold mb-1">Requirements</h3>
 					<ul class="requirements">
-						<li><?= icon('alert') ?> 2 completed Kirby projects</li>
+						<li><?= icon('check') ?> 2 completed Kirby projects</li>
 					</ul>
 				</section>
 
@@ -133,7 +133,7 @@
 						<li><?= icon('star') ?> <span>Project gallery with up to <span class="extra">6 projects</span></span></li>
 						<li><?= icon('star') ?> Access to the Discord #partners channel</li>
 						<li><?= icon('star') ?> Directly matched client leads</li>
-						<li><?= icon('star') ?> More visibility within the Kirby Community</li>
+						<li><?= icon('star') ?> More visibility within the Kirby community</li>
 					</ul>
 				</section>
 
