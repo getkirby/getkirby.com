@@ -90,7 +90,6 @@
 		"footer";
 	grid-row-gap: var(--spacing-3);
 }
-
 </style>
 
 <article class="partner-listing" :data-tier="personalInfo.tier">
@@ -120,4 +119,3 @@
 		<textarea name="description" rows="2" maxlength="140" v-model="personalInfo.description" placeholder="Tell the audience about yourself in 140 characters or less. Describe your strengths as company and let them know why they should choose you."></textarea>
 	</p>
 </article>
-
