@@ -3,7 +3,6 @@
 	data-region="<?= $partner->region() ?>"
 	data-languages="<?= implode(',', $partner->languages()->split(',')) ?>"
 	data-people="<?= $partner->people() ?>"
-	data-type="<?= $partner->typeLabel() ?>"
 >
 	<article class="columns items-center"
 					 style="--columns: 4; --columns-sm: 4; --gap: var(--spacing-6)">

@@ -2,7 +2,6 @@
 	href="<?= $partner->url() ?>"
 	data-region="<?= $partner->region() ?>"
 	data-languages="<?= implode(',', $partner->languages()->split(',')) ?>"
-	data-type="<?= $partner->typeLabel() ?>"
 	data-people="<?= $partner->people() ?>"
 >
 	<article>
