@@ -79,7 +79,7 @@
 	<div class="partner-info">
 		<div class="sticky" style="--top: var(--spacing-12)">
 			<div class="font-mono text-sm mb-12">
-				<?php if ($page->isPlusPartner()): ?>
+				<?php if ($page->isCertified()): ?>
 				<p class="inline-flex py-1 px-3 rounded items-center mb-6" style="background: var(--color-yellow-400)">
 					<span class="mr-3"><?= icon('verified') ?></span>
 					Certified Kirby Partner

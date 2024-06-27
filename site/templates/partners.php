@@ -22,7 +22,7 @@
 	margin-top: 0.5rem;
 }
 
-.partners, .partners-plus {
+.partners, .partners-certified {
 	--columns: 2;
 }
 
@@ -42,7 +42,7 @@
 }
 
 @media screen and (min-width: 60rem) {
-	.partners-plus {
+	.partners-certified {
 		--columns: 3;
 	}
 	.partners {
@@ -109,15 +109,15 @@
 		</nav>
 	</header>
 
-	<section class="partners-section partners-plus columns mb-42" style="--gap: var(--spacing-24)">
-		<?php foreach ($plus as $partner): ?>
-			<?php snippet('templates/partners/partner.plus', ['partner' => $partner, 'lazy' => $plus->indexOf($partner) > 2]) ?>
+	<section class="partners-section partners-certified columns mb-42" style="--gap: var(--spacing-24)">
+		<?php foreach ($certified as $partner): ?>
+			<?php snippet('templates/partners/partner.certified', ['partner' => $partner, 'lazy' => $certified->indexOf($partner) > 2]) ?>
 		<?php endforeach ?>
 	</section>
 
 	<section class="partners-section partners columns"
 					 style="--column-gap: var(--spacing-24); --row-gap: var(--spacing-12)">
-		<?php foreach ($standard as $partner): ?>
+		<?php foreach ($regular as $partner): ?>
 			<?php snippet('templates/partners/partner', ['partner' => $partner]) ?>
 		<?php endforeach ?>
 	</section>
