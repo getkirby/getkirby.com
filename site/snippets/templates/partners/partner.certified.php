@@ -6,9 +6,8 @@
 >
 	<article>
 		<p class="flex items-center text-xs" style="gap: var(--spacing-1)">
-			Certified partner
-			<span class="mr-1"
-						title="Certified Kirby Partner"><?= icon('verified') ?></span>
+			Certified Kirby Partner
+			<?= icon('verified') ?>
 		</p>
 		<h3 class="h3 truncate flex mb-3 items-center">
 			<?= $partner->title() ?>
