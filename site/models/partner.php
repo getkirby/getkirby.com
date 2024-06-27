@@ -96,14 +96,4 @@ class PartnerPage extends DefaultPage
 
 		return $this->pluginpage()->toPage()?->children()->limit(6);
 	}
-
-	public function type(): Field
-	{
-		return parent::type()->value($this->isSoloPartner() ? 'solo' : 'team');
-	}
-
-	public function typeLabel(): Field
-	{
-		return parent::typeLabel()->value(ucfirst($this->type()));
-	}
 }
