@@ -96,7 +96,7 @@
 <article class="partner-listing" :data-tier="personalInfo.tier">
 	<header class="partner-listing-header">
 		<p class="partner-listing-label" v-if="personalInfo.tier === 'certified'">
-			Certified partner <?= icon('verified') ?>
+			Certified Kirby Partner <?= icon('verified') ?>
 		</p>
 		<p class="partner-listing-label" v-else>
 			<input name="subtitle" type="text" v-model="personalInfo.subtitle" placeholder="Type of company">
