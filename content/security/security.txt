@@ -188,17 +188,9 @@ Versions:
     status: security-support
     description: Security support until December 1, 2024
     latest: 3.10.0.1
-3.7.*:
-    status: security-support
-    description: Security support until June 26, 2024
-    latest: 3.10.0.1
-3.6.*:
-    status: security-support
-    description: Security support until June 26, 2024
-    latest: 3.10.0.1
-3.* <3.6:
+3.* <3.8:
     status: end-of-life
-    description: Not supported (end of life) since November 15, 2023
+    description: Not supported (end of life) since June 27, 2024
     latest: 3.10.0.1
 2.*:
     status: end-of-life
