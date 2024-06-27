@@ -41,9 +41,9 @@ return function (App $kirby, Page $page) {
 	$kirby->response()->header('Cache-Control', 'max-age=1800, public');
 
 	return [
-		'filters'  => $filters,
-		'partners' => $partners,
-		'plus'     => $partners->filterBy('isPlusPartner', true),
-		'standard' => $partners->filterBy('isPlusPartner', false),
+		'filters'   => $filters,
+		'partners'  => $partners,
+		'certified' => $partners->filterBy('isCertified', true),
+		'regular'   => $partners->filterBy('isCertified', false),
 	];
 };

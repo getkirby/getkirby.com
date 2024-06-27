@@ -28,7 +28,7 @@ class PartnerPage extends DefaultPage
 		return parent::country()->value($location);
 	}
 
-	public function isPlusPartner(): bool
+	public function isCertified(): bool
 	{
 		return Str::endsWith($this->package(), '+');
 	}
