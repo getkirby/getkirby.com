@@ -4,8 +4,10 @@ namespace Buy;
 
 enum Product: string
 {
-	case Basic 	    = 'basic';
-	case Enterprise = 'enterprise';
+	case Basic            = 'basic';
+	case Enterprise       = 'enterprise';
+	case PartnerCertified = 'partner-certified';
+	case PartnerRegular   = 'partner-regular';
 
 	/**
 	 * Generates a checkout link for the product
@@ -30,9 +32,11 @@ enum Product: string
 	public function label(): string
 	{
 		return match ($this) {
-			static::Basic      => 'Basic',
-			static::Enterprise => 'Enterprise',
-			default            => null
+			static::Basic            => 'Basic',
+			static::Enterprise       => 'Enterprise',
+			static::PartnerCertified => 'Certified partnership',
+			static::PartnerRegular   => 'Regular partnership',
+			default                  => null
 		};
 	}
 
