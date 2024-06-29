@@ -64,7 +64,8 @@ img {
 	transform-style: preserve-3d;
 }
 
-input {
+input,
+textarea {
 	font: inherit;
 }
 

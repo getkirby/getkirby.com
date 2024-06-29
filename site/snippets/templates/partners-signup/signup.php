@@ -23,11 +23,6 @@
 	cursor: pointer;
 }
 
-.signup .label {
-	font-weight: var(--font-bold);
-	margin-bottom: var(--spacing-2);
-}
-
 .signup .benefits li,
 .signup .requirements li {
 	display: flex;
@@ -67,8 +62,17 @@
 	padding: var(--spacing-8);
 	background: white;
 }
-.signup .columns > div:last-child {
+.signup .columns .right-column {
 	background: rgba(255,255,255, .25);
+}
+
+.submit-buttons {
+	display: flex;
+	gap: 1rem;
+}
+
+.back-button {
+	flex-basis: 10rem;
 }
 
 [v-cloak] {
@@ -77,7 +81,7 @@
 </style>
 
 <div id="signup" class="signup bg-white rounded" v-scope @mounted="mounted">
-	<form action="<?= url('partners/join') ?>" method="POST" @submit="submit" class="columns" style="--columns: 2; gap: 0">
+	<form action="<?= url('partners/join') ?>" method="POST" @submit="submit" class="columns dialog-form" style="--columns: 2; gap: 0">
 		<div>
 			<fieldset class="mb-6">
 				<legend class="label">Partnership</legend>
@@ -106,7 +110,7 @@
 			</section>
 		</div>
 
-		<div class="flex flex-column justify-between">
+		<div class="flex flex-column justify-between right-column" v-if="view === 'info'">
 			<div>
 				<section class="mb-6">
 					<h3 class="font-bold mb-1">What you get</h3>
@@ -158,9 +162,75 @@
 				</section>
 			</div>
 
-			<button type="submit" class="btn btn--filled" :disabled="isProcessing">
-				<span v-if="isProcessing" v-cloak><?= icon('loader') ?></span><span v-else><?= icon('icon-arrow') ?></span> Apply now
+			<button type="button" class="btn btn--filled" @click="view = 'details'">
+				<?= icon('icon-arrow') ?> Apply now
 			</button>
+		</div>
+
+		<div class="flex flex-column justify-between right-column" v-if="view === 'details'" v-cloak>
+			<div>
+				<fieldset class="checkout-fieldset">
+					<legend>Your business</legend>
+					<div class="fields">
+						<div class="field">
+							<label class="label" for="website">Your website <abbr title="Required" aria-hidden>*</abbr></label>
+							<input id="website" name="website" class="input" type="url" required v-model="personalInfo.website" placeholder="https://example.com">
+						</div>
+
+						<div class="field">
+							<label class="label" for="projects">Projects <abbr title="Required" aria-hidden>*</abbr></label>
+							<input id="projects" name="projects" class="input" type="number" required :min="minimumProjects" v-model="personalInfo.projects" placeholder="42">
+						</div>
+					</div>
+					<span class="help">How many projects have you completed with Kirby? Can be approximate.</span>
+				</fieldset>
+
+				<div class="checkout-field field mb-6">
+					<label class="label" for="references">Reference Links <abbr title="Required" aria-hidden="">*</abbr></label>
+					<textarea id="references" name="references" class="input" :rows="minimumProjects + 1" required v-model="personalInfo.references" @input="validateReferences" placeholder="https://example.com"></textarea>
+					<span class="help">Please provide at least {{ minimumProjects }} links, with your best project first.</span>
+				</div>
+
+				<div class="checkout-field field mb-6" v-if="personalInfo.tier === 'certified'">
+					<label class="label" for="download">Download link to the review project</label>
+					<input id="download" name="download" class="input" type="url" v-model="personalInfo.downloadLink" placeholder="https://download.example.com/my-review-project.zip">
+					<span class="help">Leave this field empty if you want to give us access to GitHub etc. or provide the project otherwise. We will get in touch with you to coordinate access to the project.</span>
+				</div>
+
+				<fieldset class="checkout-fieldset">
+					<legend>Your contact information</legend>
+					<div class="fields">
+						<div class="field">
+							<label class="label" for="name">Your name <abbr title="Required" aria-hidden>*</abbr></label>
+							<input id="name" name="name" class="input" type="text" required v-model="personalInfo.name" placeholder="Jane Doe">
+						</div>
+
+						<div class="field">
+							<label class="label" for="email">Email <abbr title="Required" aria-hidden>*</abbr></label>
+							<input id="email" name="email" class="input" type="email" required v-model="personalInfo.email" placeholder="mail@example.com">
+						</div>
+						<div class="field">
+							<label class="label" for="discord">Discord name</label>
+							<input id="discord" name="discord" class="input" type="text" required v-model="personalInfo.discord" placeholder="janedoe">
+						</div>
+					</div>
+				</fieldset>
+
+				<div class="checkout-field field mb-6">
+					<label class="label" for="notes">Notes</label>
+					<textarea id="notes" name="notes" class="input" rows="2" v-model="personalInfo.notes"></textarea>
+				</div>
+			</div>
+
+			<div class="submit-buttons">
+				<button type="button" class="btn btn--outlined back-button" @click="view = 'info'">
+					Back
+				</button>
+
+				<button type="submit" class="btn btn--filled" :disabled="isProcessing">
+					<span v-if="isProcessing" v-cloak><?= icon('loader') ?></span><span v-else><?= icon('verified') ?></span> Submit application
+				</button>
+			</div>
 		</div>
 	</form>
 </div>
@@ -201,13 +271,31 @@ createApp({
 		businessName: "",
 		businessType: "",
 		location: "",
-		description: ""
+		description: "",
+
+		// business info
+		website: "",
+		projects: "",
+		references: "",
+		downloadLink: "",
+
+		// contact info
+		name: "",
+		email: "",
+		discord: "",
+
+		// notes
+		notes: "",
 	},
 
 	// dynamic props
 	isProcessing: false,
+	view: "info",
 
 	// computed
+	get minimumProjects() {
+		return this.personalInfo.tier === "certified" ? 4 : 2;
+	},
 	get price() {
 		const tier = this.personalInfo.tier;
 		const people = this.personalInfo.people;
@@ -247,5 +335,16 @@ createApp({
 	submit() {
 		this.isProcessing = true;
 	},
+	validateReferences(event) {
+		// count all non-empty lines
+		const lineCount = (event.target.value.match(/^\s*\S/gm) || []).length;
+
+		let error = "";
+		if (lineCount < this.minimumProjects) {
+			error = "Please provide at least " + this.minimumProjects + " links";
+		}
+
+		event.target.setCustomValidity(error);
+	}
 }).mount();
 </script>

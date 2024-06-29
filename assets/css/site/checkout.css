@@ -1,0 +1,71 @@
+.checkout-fieldset {
+	margin-bottom: var(--spacing-6);
+}
+.checkout-fieldset legend {
+	font-weight: var(--font-bold);
+	margin-bottom: var(--spacing-2);
+}
+.checkout-fieldset .fields {
+	border: 1px solid var(--color-border);
+	border-radius: var(--rounded);
+	overflow: clip;
+}
+.checkout-fieldset .field {
+	display: flex;
+	background: var(--color-white);
+	align-items: center;
+}
+.checkout-fieldset .field + .field {
+	margin-top: 0;
+	border-top: 1px solid var(--color-border);
+}
+
+.checkout-fieldset .label {
+	display: flex;
+	align-items: center;
+	height: 2.25rem;
+	flex-basis: 6.75rem;
+	flex-shrink: 0;
+	font-weight: var(--font-normal);
+	margin-bottom: 0;
+	white-space: nowrap;
+	background: rgba(0,0,0, .03);
+	padding: var(--spacing-2);
+}
+.checkout-fieldset .field .input {
+	box-shadow: none;
+	outline-offset: -2px;
+	width: 100%;
+	flex-grow: 1;
+}
+
+.checkout-fieldset .help, .checkout-field .help {
+	display: block;
+	margin-top: 0.3rem;
+	color: var(--color-gray-700);
+}
+
+.checkout-fieldset .fieldgroup {
+	border-top: 1px solid var(--color-border);
+}
+
+@media screen and (min-width: 70rem) {
+	.checkout-fieldset .fieldgroup {
+		display: flex;
+		align-items: center;
+		border-top: 1px solid var(--color-border);
+	}
+	.checkout-fieldset .fieldgroup .field {
+		border-top: 0;
+	}
+	.checkout-fieldset .fieldgroup .field:first-child {
+		flex-grow: 1;
+	}
+	.checkout-fieldset .fieldgroup .field:nth-child(2) {
+		flex-basis: 14rem;
+		border-left: 1px solid var(--color-border);
+	}
+	.checkout-fieldset .fieldgroup .field:nth-child(2) .label {
+		flex-basis: 6rem;
+	}
+}

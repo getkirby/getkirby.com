@@ -48,7 +48,11 @@ body:has(.dialog[open]) {
 	border-radius: var(--rounded-sm);
 	box-shadow: 0px 0px 0px 1px var(--color-border);
 }
-.dialog-form :where(input:not([type=checkbox], [type=radio]), select):focus {
+.dialog-form textarea.input {
+	height: auto;
+	resize: none;
+}
+.dialog-form :where(input:not([type=checkbox], [type=radio]), select, textarea):focus {
 	outline: 2px solid var(--color-blue-700);
 }
 
