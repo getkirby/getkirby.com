@@ -45,6 +45,16 @@
 	color: var(--color-yellow-700);
 }
 
+.signup .price {
+	display: inline-flex;
+	align-items: baseline;
+	gap: 0.2rem;
+}
+
+.signup .currency-sign {
+	font-size: var(--text-base);
+}
+
 .signup .btn {
 	width: 100%;
 }
@@ -138,8 +148,8 @@
 
 				<section class="mb-12">
 					<h3 class="font-bold">Price per year</h3>
-					<p class="text-xl mb-3">
-						<span v-text="locale.currency.trim()">€</span>
+					<p class="price text-xl mb-3">
+						<span v-text="locale.currency.trim()" class="currency-sign">€</span>
 						<span v-text="price"><?= $certified->price()->regular(1) ?></span>
 					</p>
 					<ul class="text-xs color-gray-700">
@@ -197,7 +207,10 @@ createApp({
 		const tier = this.personalInfo.tier;
 		const people = this.personalInfo.people;
 
-		return this.locale.prices[tier][people];
+		const price = this.locale.prices[tier][people];
+
+		const formatter = new Intl.NumberFormat("en");
+		return formatter.format(price);
 	},
 	get link() {
 		const link = "https://airtable.com/appeeHREbUMMaZGRP/pag4FOyHuNDzqbbkv/form"
