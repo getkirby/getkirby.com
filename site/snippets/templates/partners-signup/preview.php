@@ -45,24 +45,23 @@
 	color: var(--color-text-dimmed);
 }
 
-.partner-listing input,
-.partner-listing textarea {
-	font: inherit;
-	color: inherit;
+.partner-listing label {
+	position: relative;
+	display: block;
 	width: 100%;
 }
 
-.partner-listing input::placeholder,
-.partner-listing textarea::placeholder {
+.partner-listing input,
+.partner-listing textarea {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font: inherit;
 	color: inherit;
-	opacity: 1;
+	background: transparent;
+	width: 100%;
 }
 
-.partner-listing input:focus,
-.partner-listing textarea:focus {
-	position: relative;
-	z-index: 1;
-}
 .partner-listing textarea {
 	resize: none;
 }
@@ -99,10 +98,16 @@
 			Certified Kirby Partner <?= icon('verified') ?>
 		</p>
 		<p class="partner-listing-label" v-cloak v-else>
-			<input name="subtitle" type="text" v-model="personalInfo.subtitle" placeholder="Type of company">
+			<label>
+				<span :style="labelStyle(personalInfo.subtitle)">Type of company</span>
+				<input name="subtitle" type="text" v-model="personalInfo.subtitle">
+			</label>
 		</p>
 		<h4 class="partner-listing-title h3">
-			<input name="title" type="text" v-model="personalInfo.title" placeholder="Your company name">
+			<label>
+				<span :style="labelStyle(personalInfo.title)">Your company name</span>
+				<input name="title" type="text" v-model="personalInfo.title">
+			</label>
 		</h4>
 	</header>
 	<figure class="partner-listing-image">
@@ -110,13 +115,22 @@
 	</figure>
 	<aside class="partner-listing-footer">
 		<p class="partner-listing-subtitle" v-if="personalInfo.tier === 'certified'">
-			<input name="subtitle" type="text" v-model="personalInfo.subtitle" placeholder="Type of company">
+			<label>
+				<span :style="labelStyle(personalInfo.subtitle)">Type of company</span>
+				<input name="subtitle" type="text" v-model="personalInfo.subtitle">
+			</label>
 		</p>
 		<p class="partner-listing-location">
-			<input type="text" name="location" v-model="personalInfo.location" placeholder="City, Country">
+			<label>
+				<span :style="labelStyle(personalInfo.location)">City, Country</span>
+				<input name="location" type="text" v-model="personalInfo.location">
+			</label>
 		</p>
 	</aside>
 	<p class="partner-listing-description" v-if="personalInfo.tier === 'certified'">
-		<textarea name="description" rows="2" maxlength="140" v-model="personalInfo.description" placeholder="Tell the audience about yourself in 140 characters or less. Describe your strengths as company and let them know why they should choose you."></textarea>
+		<label>
+			<span :style="labelStyle(personalInfo.description)">Tell the audience about yourself in 140 characters or less. Describe your strengths as company and let them know why they should choose you.</span>
+			<textarea name="description" rows="2" maxlength="140" v-model="personalInfo.description"></textarea>
+		</label>
 	</p>
 </article>

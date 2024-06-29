@@ -226,6 +226,13 @@ createApp({
 
 		return await response.json();
 	},
+	labelStyle(value) {
+		if (value) {
+			return "opacity: 0";
+		}
+
+		return null;
+	},
 	async mounted() {
 		this.locale = await this.fetchPrices();
 
