@@ -13,8 +13,12 @@ extract([
 
 <title><?= $page->isHomePage() ? $page->title() : $page->title() . ' | ' . $site->title() ?></title>
 
-<?php if($page->id() === 'buy'): ?>
+<?php if($page->uri() === 'buy'): ?>
 <link rel="preload" href="<?= url('buy/prices') ?>" as="fetch" />
+<?php endif ?>
+
+<?php if($page->uri() === 'partners/join'): ?>
+<link rel="preload" href="<?= url('partners/join/prices') ?>" as="fetch" />
 <?php endif ?>
 
 <?= css('assets/css/index.css') ?>

@@ -76,7 +76,7 @@
 }
 </style>
 
-<div id="signup" class="signup bg-white rounded" v-scope>
+<div id="signup" class="signup bg-white rounded" v-scope @mounted="mounted">
 
 	<div class="columns" style="--columns: 2; gap: 0">
 
@@ -203,6 +203,8 @@ createApp({
 		location: "",
 		description: ""
 	},
+
+	// computed
 	get price() {
 		const tier = this.personalInfo.tier;
 		const people = this.personalInfo.people;
@@ -226,6 +228,21 @@ createApp({
 		params.append("prefill_Currency", "EUR");
 
 		return link + "?" + params;
-	}
+	},
+
+	// methods
+	async fetchPrices() {
+		// fetch prices with options that allow using the preloaded response
+		const response = await fetch("/partners/join/prices", {
+			method: "GET",
+			credentials: "include",
+			mode: "no-cors",
+		});
+
+		return await response.json();
+	},
+	async mounted() {
+		this.locale = await this.fetchPrices();
+	},
 }).mount();
 </script>
