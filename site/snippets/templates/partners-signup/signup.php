@@ -77,9 +77,7 @@
 </style>
 
 <div id="signup" class="signup bg-white rounded" v-scope @mounted="mounted">
-
-	<div class="columns" style="--columns: 2; gap: 0">
-
+	<form action="<?= url('partners/join') ?>" method="POST" @submit="submit" class="columns" style="--columns: 2; gap: 0">
 		<div>
 			<fieldset class="mb-6">
 				<legend class="label">Partnership</legend>
@@ -160,12 +158,11 @@
 				</section>
 			</div>
 
-			<a :href="link" target="_blank" class="btn btn--filled">
-				<?= icon('icon-arrow') ?> Apply now
-			</a>
+			<button type="submit" class="btn btn--filled" :disabled="isProcessing">
+				<span v-if="isProcessing" v-cloak><?= icon('loader') ?></span><span v-else><?= icon('icon-arrow') ?></span> Apply now
+			</button>
 		</div>
-	</div>
-
+	</form>
 </div>
 
 <script type="module">
@@ -204,6 +201,9 @@ createApp({
 		description: ""
 	},
 
+	// dynamic props
+	isProcessing: false,
+
 	// computed
 	get price() {
 		const tier = this.personalInfo.tier;
@@ -213,21 +213,6 @@ createApp({
 
 		const formatter = new Intl.NumberFormat("en");
 		return formatter.format(price);
-	},
-	get link() {
-		const link = "https://airtable.com/appeeHREbUMMaZGRP/pag4FOyHuNDzqbbkv/form"
-		const params = new URLSearchParams();
-
-		params.append("prefill_Plan", this.personalInfo.tier);
-		params.append("prefill_People", this.personalInfo.people);
-		params.append("prefill_Title", this.personalInfo.title);
-		params.append("prefill_Subtitle", this.personalInfo.subtitle);
-		params.append("prefill_Location", this.personalInfo.location);
-		params.append("prefill_Location", this.personalInfo.location);
-		params.append("prefill_Description", this.personalInfo.description);
-		params.append("prefill_Currency", "EUR");
-
-		return link + "?" + params;
 	},
 
 	// methods
@@ -243,6 +228,14 @@ createApp({
 	},
 	async mounted() {
 		this.locale = await this.fetchPrices();
+
+		// stop checkout processing on unload
+		window.addEventListener("pagehide", (e) => {
+			this.isProcessing = false;
+		});
+	},
+	submit() {
+		this.isProcessing = true;
 	},
 }).mount();
 </script>

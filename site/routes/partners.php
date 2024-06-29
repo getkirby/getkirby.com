@@ -41,4 +41,40 @@ return [
 			);
 		}
 	],
+	[
+		'pattern' => 'partners/join',
+		'method'  => 'POST',
+		'action' => function () {
+			$tier   = get('tier');
+			$people = max(1, min(4, (int)get('people')));
+
+			try {
+				$product = Product::from('partner-' . $tier);
+				$price   = $product->price();
+
+				$eurPrice       = $product->price('EUR')->regular($people);
+				$localizedPrice = $price->regular($people);
+
+				$prices  = [
+					'EUR:' . $eurPrice,
+					$price->currency . ':' . $localizedPrice,
+				];
+
+				$checkout = $product->checkout('buy', [
+					'expires' => date('Y-m-d', strtotime('+2 months')),
+					'prices'  => $prices,
+				]);
+
+				$query = [
+					'prefill_Plan'     => $tier,
+					'prefill_People'   => $people,
+					'prefill_Checkout' => $checkout,
+				];
+
+				go('https://airtable.com/appeeHREbUMMaZGRP/pag4FOyHuNDzqbbkv/form?' . http_build_query($query));
+			} catch (Throwable $e) {
+				die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
+			}
+		},
+	],
 ];
