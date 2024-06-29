@@ -193,10 +193,13 @@ createApp({
 
 	// user-generated props
 	personalInfo: {
+		// plan
 		people: 1,
 		tier: "certified",
-		title: "",
-		subtitle: "",
+
+		// listing fields
+		businessName: "",
+		businessType: "",
 		location: "",
 		description: ""
 	},

@@ -97,16 +97,16 @@
 		<p class="partner-listing-label" v-if="personalInfo.tier === 'certified'">
 			Certified Kirby Partner <?= icon('verified') ?>
 		</p>
-		<p class="partner-listing-label" v-cloak v-else>
+		<p v-cloak v-else>
 			<label>
-				<span :style="labelStyle(personalInfo.subtitle)">Type of company</span>
-				<input name="subtitle" type="text" v-model="personalInfo.subtitle">
+				<span :style="labelStyle(personalInfo.businessType)">Type of company</span>
+				<input name="businessType" type="text" v-model="personalInfo.businessType">
 			</label>
 		</p>
-		<h4 class="partner-listing-title h3">
+		<h4 class="h3">
 			<label>
-				<span :style="labelStyle(personalInfo.title)">Your company name</span>
-				<input name="title" type="text" v-model="personalInfo.title">
+				<span :style="labelStyle(personalInfo.businessName)">Your business name</span>
+				<input name="businessName" type="text" v-model="personalInfo.businessName">
 			</label>
 		</h4>
 	</header>
@@ -114,10 +114,10 @@
 		<?= icon('image') ?>
 	</figure>
 	<aside class="partner-listing-footer">
-		<p class="partner-listing-subtitle" v-if="personalInfo.tier === 'certified'">
+		<p v-if="personalInfo.tier === 'certified'">
 			<label>
-				<span :style="labelStyle(personalInfo.subtitle)">Type of company</span>
-				<input name="subtitle" type="text" v-model="personalInfo.subtitle">
+				<span :style="labelStyle(personalInfo.businessType)">Type of business</span>
+				<input name="businessType" type="text" v-model="personalInfo.businessType">
 			</label>
 		</p>
 		<p class="partner-listing-location">
