@@ -139,7 +139,8 @@
 				<section class="mb-12">
 					<h3 class="font-bold">Price per year</h3>
 					<p class="text-xl mb-3">
-						€<span v-text="price">499</span>
+						<span v-text="locale.currency.trim()">€</span>
+						<span v-text="price"><?= $certified->price()->regular(1) ?></span>
 					</p>
 					<ul class="text-xs color-gray-700">
 						<li>Price + VAT if applicable.</li>
@@ -164,6 +165,25 @@ import {
 } from '<?= url('assets/js/libraries/petite-vue.js') ?>';
 
 createApp({
+	// props dynamically populated by the backend
+	locale: {
+		currency: "€",
+		prices: {
+			regular: {
+				"1": <?= $regular->price()->regular(1) ?>,
+				"2": <?= $regular->price()->regular(2) ?>,
+				"3": <?= $regular->price()->regular(3) ?>,
+				"4+": <?= $regular->price()->regular(4) ?>,
+			},
+			certified: {
+				"1": <?= $certified->price()->regular(1) ?>,
+				"2": <?= $certified->price()->regular(2) ?>,
+				"3": <?= $certified->price()->regular(3) ?>,
+				"4+": <?= $certified->price()->regular(4) ?>,
+			}
+		},
+	},
+
 	// user-generated props
 	personalInfo: {
 		people: 1,
@@ -173,25 +193,11 @@ createApp({
 		location: "",
 		description: ""
 	},
-	prices: {
-		regular: {
-			"1": 99,
-			"2": 199,
-			"3": 299,
-			"4+": 399,
-		},
-		certified: {
-			"1": 499,
-			"2": 999,
-			"3": 1499,
-			"4+": 1999,
-		}
-	},
 	get price() {
 		const tier = this.personalInfo.tier;
 		const people = this.personalInfo.people;
 
-		return this.prices[tier][people];
+		return this.locale.prices[tier][people];
 	},
 	get link() {
 		const link = "https://airtable.com/appeeHREbUMMaZGRP/pag4FOyHuNDzqbbkv/form"
