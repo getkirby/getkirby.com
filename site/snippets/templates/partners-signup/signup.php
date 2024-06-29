@@ -123,7 +123,7 @@
 			</div>
 
 			<a :href="link" target="_blank" class="btn btn--filled">
-				<?= icon('icon-blank') ?> Apply now
+				<?= icon('icon-arrow') ?> Apply now
 			</a>
 		</div>
 
@@ -165,7 +165,7 @@
 			</div>
 
 			<a :href="link" target="_blank" class="btn btn--filled">
-				<?= icon('verified') ?> Apply now
+				<?= icon('icon-arrow') ?> Apply now
 			</a>
 		</div>
 	</div>
