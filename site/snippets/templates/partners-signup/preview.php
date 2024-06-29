@@ -93,12 +93,12 @@
 }
 </style>
 
-<article class="partner-listing" :data-tier="personalInfo.tier">
+<article class="partner-listing" data-tier="certified" :data-tier="personalInfo.tier">
 	<header class="partner-listing-header">
 		<p class="partner-listing-label" v-if="personalInfo.tier === 'certified'">
 			Certified Kirby Partner <?= icon('verified') ?>
 		</p>
-		<p class="partner-listing-label" v-else>
+		<p class="partner-listing-label" v-cloak v-else>
 			<input name="subtitle" type="text" v-model="personalInfo.subtitle" placeholder="Type of company">
 		</p>
 		<h4 class="partner-listing-title h3">

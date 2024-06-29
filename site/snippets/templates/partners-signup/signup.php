@@ -60,9 +60,13 @@
 .signup .columns > div:last-child {
 	background: rgba(255,255,255, .25);
 }
+
+[v-cloak] {
+	display: none !important;
+}
 </style>
 
-<div id="signup" class="signup bg-white rounded" v-scope v-cloak>
+<div id="signup" class="signup bg-white rounded" v-scope>
 
 	<div class="columns" style="--columns: 2; gap: 0">
 
@@ -71,14 +75,14 @@
 				<legend class="label">Partnership</legend>
 				<div class="radios">
 					<label><input type="radio" name="tier" v-model="personalInfo.tier" value="regular" /> Regular partner</label>
-					<label><input type="radio" name="tier" v-model="personalInfo.tier" value="certified" /> Certified partner</label>
+					<label><input type="radio" name="tier" v-model="personalInfo.tier" value="certified" checked /> Certified partner</label>
 				</div>
 			</fieldset>
 
 			<fieldset class="mb-6">
 				<legend class="label">How many people are in your company?</legend>
 				<div class="radios">
-					<label><input type="radio" name="people" v-model="personalInfo.people" value="1" /> 1</label>
+					<label><input type="radio" name="people" v-model="personalInfo.people" value="1" checked /> 1</label>
 					<label><input type="radio" name="people" v-model="personalInfo.people" value="2" /> 2</label>
 					<label><input type="radio" name="people" v-model="personalInfo.people" value="3" /> 3</label>
 					<label><input type="radio" name="people" v-model="personalInfo.people" value="4+" /> 4+</label>
@@ -94,7 +98,7 @@
 			</section>
 		</div>
 
-		<div class="flex flex-column justify-between p-12" v-if="personalInfo.tier === 'regular'">
+		<div class="flex flex-column justify-between p-12" v-cloak v-if="personalInfo.tier === 'regular'">
 			<div>
 				<section class="mb-6">
 					<h3 class="font-bold mb-1">What you get</h3>
