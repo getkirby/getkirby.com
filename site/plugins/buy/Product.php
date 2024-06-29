@@ -49,7 +49,7 @@ enum Product: string
 	 */
 	public function productId(): int
 	{
-		return option('buy.' . $this->value . '.product');
+		return option('buy.products.' . $this->value . '.product');
 	}
 
 	/**
@@ -57,7 +57,7 @@ enum Product: string
 	 */
 	public function rawPrice(): float
 	{
-		return option('buy.' . $this->value . '.regular');
+		return option('buy.products.' . $this->value . '.regular');
 	}
 
 	/**
@@ -87,9 +87,9 @@ enum Product: string
 	public function upgradeId(string|null $type = null): int
 	{
 		return match ($type) {
-			'free'    => option('buy.' . $this->value . '.free'),
-			'convert' => option('buy.' . $this->value . '.convert'),
-			default   => option('buy.' . $this->value . '.upgrade')
+			'free'    => option('buy.products.' . $this->value . '.free'),
+			'convert' => option('buy.products.' . $this->value . '.convert'),
+			default   => option('buy.products.' . $this->value . '.upgrade')
 		};
 	}
 
