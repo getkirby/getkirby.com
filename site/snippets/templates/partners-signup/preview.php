@@ -22,6 +22,7 @@
 	background: var(--color-green-200);
 	display: grid;
 	place-items: center;
+	height: 100%;
 }
 .partner-listing-image svg {
 	color: var(--color-green-400);
