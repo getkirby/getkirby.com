@@ -98,50 +98,22 @@
 			</section>
 		</div>
 
-		<div class="flex flex-column justify-between p-12" v-cloak v-if="personalInfo.tier === 'regular'">
+		<div class="flex flex-column justify-between">
 			<div>
 				<section class="mb-6">
 					<h3 class="font-bold mb-1">What you get</h3>
 					<ul class="benefits">
 						<li><?= icon('star') ?> Your own customizable profile page</li>
 						<li><?= icon('star') ?> Exposure and traffic from getkirby.com</li>
-						<li><?= icon('star') ?> Project gallery with up to 3 projects</li>
+						<li v-if="personalInfo.tier === 'certified'"><?= icon('star') ?> <span>Project gallery with up to <span class="extra">6 projects</span></span></li>
+						<li v-else v-cloak><?= icon('star') ?> Project gallery with up to 3 projects</li>
 						<li><?= icon('star') ?> Access to the Discord #partners channel</li>
 						<li><?= icon('star') ?> Directly matched client leads</li>
 						<li><?= icon('star') ?> More visibility within the Kirby community</li>
 					</ul>
 				</section>
 
-				<section class="mb-6">
-					<h3 class="font-bold mb-1">Requirements</h3>
-					<ul class="requirements">
-						<li><?= icon('check') ?> 2 completed Kirby projects</li>
-					</ul>
-				</section>
-
-				<?php snippet('templates/partners-signup/price') ?>
-			</div>
-
-			<a :href="link" target="_blank" class="btn btn--filled">
-				<?= icon('icon-arrow') ?> Apply now
-			</a>
-		</div>
-
-		<div class="flex flex-column justify-between" v-if="personalInfo.tier === 'certified'">
-			<div>
-				<section class="mb-6">
-					<h3 class="font-bold mb-1">What you get</h3>
-					<ul class="benefits">
-						<li><?= icon('star') ?> Your own customizable profile page</li>
-						<li><?= icon('star') ?> Exposure and traffic from getkirby.com</li>
-						<li><?= icon('star') ?> <span>Project gallery with up to <span class="extra">6 projects</span></span></li>
-						<li><?= icon('star') ?> Access to the Discord #partners channel</li>
-						<li><?= icon('star') ?> Directly matched client leads</li>
-						<li><?= icon('star') ?> More visibility within the Kirby community</li>
-					</ul>
-				</section>
-
-				<section class="mb-6">
+				<section class="mb-6" v-if="personalInfo.tier === 'certified'">
 					<h3 class="font-bold mb-1">Certified partner benefits</h3>
 					<ul class="benefits">
 						<li class="extra"><?= icon('star') ?> Certification, including official badges</li>
@@ -155,13 +127,26 @@
 
 				<section class="mb-6">
 					<h3 class="font-bold mb-1">Requirements</h3>
-					<ul class="requirements">
+					<ul class="requirements" v-if="personalInfo.tier === 'certified'">
 						<li><?= icon('check') ?> 4 completed Kirby projects</li>
 						<li><?= icon('check') ?> 1 reviewed project</li>
 					</ul>
+					<ul class="requirements" v-else v-cloak>
+						<li><?= icon('check') ?> 2 completed Kirby projects</li>
+					</ul>
 				</section>
 
-				<?php snippet('templates/partners-signup/price') ?>
+				<section class="mb-12">
+					<h3 class="font-bold">Price per year</h3>
+					<p class="text-xl mb-3">
+						€<span v-text="price">499</span>
+					</p>
+					<ul class="text-xs color-gray-700">
+						<li>Price + VAT if applicable.</li>
+						<li>You will be charged once your application has been accepted.</li>
+						<li>Your partnership will <em>not</em> automatically renew.</li>
+					</ul>
+				</section>
 			</div>
 
 			<a :href="link" target="_blank" class="btn btn--filled">
