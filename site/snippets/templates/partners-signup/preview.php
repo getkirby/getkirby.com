@@ -17,6 +17,7 @@
 	font-size: var(--text-xs);
 }
 .partner-listing-image {
+	position: relative;
 	grid-area: image;
 	aspect-ratio: var(--ratio);
 	background: var(--color-green-200);
@@ -28,6 +29,11 @@
 	color: var(--color-green-400);
 	width: 2rem;
 	height: 2rem;
+}
+.partner-listing-image span {
+	position: absolute;
+	bottom: 1rem;
+	color: var(--color-green-700);
 }
 
 .partner-listing-footer {
@@ -43,6 +49,10 @@
 	font-size: var(--text-base);
 	line-height: var(--leading-normal);
 	color: var(--color-text-dimmed);
+}
+
+.partner-listing .field+.field {
+	margin: 0;
 }
 
 .partner-listing label {
@@ -90,6 +100,11 @@
 		"footer";
 	grid-row-gap: var(--spacing-3);
 }
+
+.image-info {
+	padding: var(--spacing-3);
+	font-size: var(--text-sm);
+}
 </style>
 
 <article class="partner-listing" data-tier="certified" :data-tier="personalInfo.tier">
@@ -97,40 +112,43 @@
 		<p class="partner-listing-label" v-if="personalInfo.tier === 'certified'">
 			Certified Kirby Partner <?= icon('verified') ?>
 		</p>
-		<p v-cloak v-else>
+		<p class="field" v-cloak v-else>
 			<label>
-				<span :style="labelStyle(personalInfo.businessType)">Type of company</span>
-				<input name="businessType" type="text" v-model="personalInfo.businessType">
+				<span :style="labelStyle(personalInfo.businessType)">Type of company <abbr title="Required" aria-hidden>*</abbr></span>
+				<input name="businessType" :required="view === 'details'" type="text" v-model="personalInfo.businessType">
 			</label>
 		</p>
-		<h4 class="h3">
+		<h4 class="field h3">
 			<label>
-				<span :style="labelStyle(personalInfo.businessName)">Your business name</span>
-				<input name="businessName" type="text" v-model="personalInfo.businessName">
+				<span :style="labelStyle(personalInfo.businessName)">Your business name <abbr title="Required" aria-hidden>*</abbr></span>
+				<input name="businessName" :required="view === 'details'" type="text" v-model="personalInfo.businessName">
 			</label>
 		</h4>
 	</header>
 	<figure class="partner-listing-image">
 		<?= icon('image') ?>
+		<span v-if="personalInfo.tier === 'certified' && view === 'details'" v-cloak>We will ask you for an image once your application has been accepted.</span>
 	</figure>
 	<aside class="partner-listing-footer">
-		<p v-if="personalInfo.tier === 'certified'">
+		<p class="field" v-if="personalInfo.tier === 'certified'">
 			<label>
-				<span :style="labelStyle(personalInfo.businessType)">Type of business</span>
-				<input name="businessType" type="text" v-model="personalInfo.businessType">
+				<span :style="labelStyle(personalInfo.businessType)">Type of business <abbr title="Required" aria-hidden>*</abbr></span>
+				<input name="businessType" :required="view === 'details'" type="text" v-model="personalInfo.businessType">
 			</label>
 		</p>
-		<p class="partner-listing-location">
+		<p class="field partner-listing-location">
 			<label>
-				<span :style="labelStyle(personalInfo.location)">City, Country</span>
-				<input name="location" type="text" v-model="personalInfo.location">
+				<span :style="labelStyle(personalInfo.location)">City, Country <abbr title="Required" aria-hidden>*</abbr></span>
+				<input name="location" :required="view === 'details'" type="text" v-model="personalInfo.location">
 			</label>
 		</p>
 	</aside>
-	<p class="partner-listing-description" v-if="personalInfo.tier === 'certified'">
+	<p class="field partner-listing-description" v-if="personalInfo.tier === 'certified'">
 		<label>
 			<span :style="labelStyle(personalInfo.description)">Tell the audience about yourself in 140 characters or less. Describe your strengths as company and let them know why they should choose you.</span>
 			<textarea name="description" rows="2" maxlength="140" v-model="personalInfo.description"></textarea>
 		</label>
 	</p>
 </article>
+
+<p class="image-info" v-if="personalInfo.tier === 'regular' && view === 'details'" v-cloak>We will ask you for an image once your application has been accepted.</p>
