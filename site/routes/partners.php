@@ -12,6 +12,10 @@ return [
 			$certified = Product::PartnerCertified;
 			$visitor   = Paddle::visitor();
 
+			// spam protection honeytime
+			$timestamp  = time();
+			$timestamp .= ':' . hash_hmac('sha256', $timestamp, 'kirby');
+
 			$json = json_encode([
 				'status'   => $visitor->error() ?? 'OK',
 				'country'  => $visitor->country(),
@@ -30,6 +34,7 @@ return [
 						'4+' => $certified->price()->regular(4),
 					],
 				],
+				'timestamp' => $timestamp,
 			], JSON_UNESCAPED_UNICODE);
 
 			return Response::json(
