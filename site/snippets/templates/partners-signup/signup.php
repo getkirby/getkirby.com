@@ -216,7 +216,7 @@
 						</div>
 						<div class="field">
 							<label class="label" for="discord">Discord name</label>
-							<input id="discord" name="discord" class="input" type="text" required v-model="personalInfo.discord" placeholder="janedoe">
+							<input id="discord" name="discord" class="input" type="text" v-model="personalInfo.discord" placeholder="janedoe">
 						</div>
 					</div>
 				</fieldset>
