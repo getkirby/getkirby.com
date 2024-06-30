@@ -4,16 +4,30 @@ use Buy\Paddle;
 use Buy\Product;
 use Kirby\Cms\App;
 use Kirby\Cms\Page;
+use Kirby\Http\Remote;
 
 return function (App $kirby, Page $page) {
 	$statusMessage = $statusType = null;
 
 	if ($kirby->request()->is('POST') === true) {
-		$timestamp = explode(':', get('timestamp'));
-		$tier      = get('tier');
-		$people    = get('people');
-		$peopleNum = max(1, min(4, (int)$people));
-		$visitor   = Paddle::visitor();
+		$timestamp    = explode(':', get('timestamp'));
+		$people       = get('people');
+		$peopleNum    = max(1, min(4, (int)$people));
+		$tier         = get('tier');
+		$businessName = get('businessName');
+		$businessType = get('businessType');
+		$location     = get('location');
+		$description  = get('description');
+		$website      = get('website');
+		$address      = get('address');
+		$projects     = (int)get('projects');
+		$references   = get('references');
+		$downloadLink = get('downloadLink');
+		$name         = get('name');
+		$email        = get('email');
+		$discord      = get('discord');
+		$notes        = get('notes');
+		$visitor      = Paddle::visitor();
 
 		try {
 			// prevent submissions faster than 1 minute (spam protection)
@@ -42,18 +56,41 @@ return function (App $kirby, Page $page) {
 				'prices'  => $prices,
 			]);
 
-			$query = [
-				'prefill_Plan'     => $tier,
-				'prefill_People'   => $people,
-				'prefill_Price'    => $visitor->currencySign() . $localizedPrice,
-				'prefill_Checkout' => $checkout,
-				'hide_Plan'        => 'true',
-				'hide_People'      => 'true',
-				'hide_Price'       => 'true',
-				'hide_Checkout'    => 'true',
-			];
+			$response = Remote::post('https://api.airtable.com/v0/appeeHREbUMMaZGRP/tblrKOCF0cGAZmUQR', [
+				'data' => json_encode([
+					'fields' => [
+						'Name'                    => $businessName,
+						'Status'                  => 'Need to review',
+						'Plan'                    => $tier,
+						'People'                  => $people,
+						'Price'                   => $visitor->currencySign() . $localizedPrice,
+						'Checkout'                => $checkout,
+						'Business type'           => $businessType,
+						'Own website'             => $website,
+						'Contact person'          => $name,
+						'Email'                   => $email,
+						'Discord'                 => $discord,
+						'Listing location'        => $location,
+						'Address'                 => $address,
+						'Listing description'     => $description,
+						'Number of projects'      => $projects,
+						'References'              => $references,
+						'Review project download' => $downloadLink,
+						'Notes'                   => $notes,
+					]
+				]),
+				'headers' => [
+					'Authorization' => 'Bearer ' . option('keys.airtable'),
+					'Content-Type'  => 'application/json',
+				]
+			])->json();
 
-			go('https://airtable.com/appeeHREbUMMaZGRP/shrJ8YnBiGasgcO5F?' . http_build_query($query));
+			if (isset($response['error']) === true) {
+				throw new Exception($response['error']['message'] . '(' . $response['error']['type'] . ')');
+			}
+
+			$statusMessage = 'Thank you for your application! We will get in touch with you soon.';
+			$statusType    = 'success';
 		} catch (Throwable $e) {
 			$statusMessage = $e->getMessage();
 			$statusType    = 'alert';
