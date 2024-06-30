@@ -30,8 +30,13 @@
 .signup .benefits li,
 .signup .requirements li {
 	display: flex;
-	align-items: center;
+	align-items: baseline;
 	gap: var(--spacing-2);
+}
+.signup .benefits li .icon,
+.signup .requirements li .icon {
+	flex-shrink: 0;
+	height: 1em;
 }
 .signup .benefits li svg {
 	color: var(--color-green-700);
@@ -119,36 +124,36 @@
 				<section class="mb-6">
 					<h3 class="font-bold mb-1">What you get</h3>
 					<ul class="benefits">
-						<li><?= icon('star') ?> Your own customizable profile page</li>
-						<li><?= icon('star') ?> Exposure and traffic from getkirby.com</li>
-						<li v-if="personalInfo.tier === 'certified'"><?= icon('star') ?> <span>Project gallery with up to <span class="extra">6 projects</span></span></li>
-						<li v-else v-cloak><?= icon('star') ?> Project gallery with up to 3 projects</li>
-						<li><?= icon('star') ?> Access to the Discord #partners channel</li>
-						<li><?= icon('star') ?> Directly matched client leads</li>
-						<li><?= icon('star') ?> More visibility within the Kirby community</li>
+						<li><span class="icon"><?= icon('star') ?></span> Your own customizable profile page</li>
+						<li><span class="icon"><?= icon('star') ?></span> Exposure and traffic from getkirby.com</li>
+						<li v-if="personalInfo.tier === 'certified'"><span class="icon"><?= icon('star') ?></span> <span>Project gallery with up to <span class="extra">6 projects</span></span></li>
+						<li v-else v-cloak><span class="icon"><?= icon('star') ?></span> Project gallery with up to 3 projects</li>
+						<li><span class="icon"><?= icon('star') ?></span> Access to the Discord #partners channel</li>
+						<li><span class="icon"><?= icon('star') ?></span> Directly matched client leads</li>
+						<li><span class="icon"><?= icon('star') ?></span> More visibility within the Kirby community</li>
 					</ul>
 				</section>
 
 				<section class="mb-6" v-if="personalInfo.tier === 'certified'">
 					<h3 class="font-bold mb-1">Certified partner benefits</h3>
 					<ul class="benefits">
-						<li class="extra"><?= icon('star') ?> Certification, including official badges</li>
-						<li class="extra"><?= icon('star') ?> 10% discount on all licenses</li>
-						<li class="extra"><?= icon('star') ?> Regular office hour calls with the Kirby core team</li>
-						<li class="extra"><?= icon('star') ?> Detailed results of our project review</li>
-						<li class="extra"><?= icon('star') ?> Priority listing in the directory</li>
-						<li class="extra"><?= icon('star') ?> Promotion on social media and in the Kosmos newsletter</li>
+						<li class="extra"><span class="icon"><?= icon('star') ?></span> Certification, including official badges</li>
+						<li class="extra"><span class="icon"><?= icon('star') ?></span> 10% discount on all licenses</li>
+						<li class="extra"><span class="icon"><?= icon('star') ?></span> Regular office hour calls with the Kirby core team</li>
+						<li class="extra"><span class="icon"><?= icon('star') ?></span> Detailed results of our project review</li>
+						<li class="extra"><span class="icon"><?= icon('star') ?></span> Priority listing in the directory</li>
+						<li class="extra"><span class="icon"><?= icon('star') ?></span> Promotion on social media and in the Kosmos newsletter</li>
 					</ul>
 				</section>
 
 				<section class="mb-6">
 					<h3 class="font-bold mb-1">Requirements</h3>
 					<ul class="requirements" v-if="personalInfo.tier === 'certified'">
-						<li><?= icon('check') ?> 4 completed Kirby projects</li>
-						<li><?= icon('check') ?> 1 reviewed project</li>
+						<li><span class="icon"><?= icon('check') ?></span> 4 completed Kirby projects</li>
+						<li><span class="icon"><?= icon('check') ?></span> 1 reviewed project</li>
 					</ul>
 					<ul class="requirements" v-else v-cloak>
-						<li><?= icon('check') ?> 2 completed Kirby projects</li>
+						<li><span class="icon"><?= icon('check') ?></span> 2 completed Kirby projects</li>
 					</ul>
 				</section>
 
