@@ -186,7 +186,7 @@
 				</fieldset>
 
 				<div class="checkout-field field mb-6">
-					<label class="label" for="references">Reference Links <abbr title="Required" aria-hidden="">*</abbr></label>
+					<label class="label" for="references">Reference links <abbr title="Required" aria-hidden="">*</abbr></label>
 					<textarea id="references" name="references" class="input" :rows="minimumProjects + 1" required v-model="personalInfo.references" @input="validateReferences" placeholder="https://example.com"></textarea>
 					<span class="help">Please provide at least {{ minimumProjects }} links, with your best project first.</span>
 				</div>
