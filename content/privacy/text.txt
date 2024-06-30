@@ -41,6 +41,8 @@ We don't collect any personal data of our website visitors except server logs. W
 - Algolia:
 *To provide a really good search experience for our website and documentation*
 
+In addition, we use YouTube and CARTO to display videos and maps with your consent.
+
 If you voluntarily contribute website content such as plugin profiles, cookbook recipes or an entry on our community map, we use the personal data in such content for display on this website according to the respective purpose.
 
 In our licensing hub we keep licensing information to enable license activations and upgrades and to check the license status of Kirby projects.
@@ -56,6 +58,14 @@ The demo server temporarily stores content that you enter in your demo instance.
 Other personal data except server logs is not collected by the Personal Demo.
 
 [Read more ›](#personal-demo)
+
+### Partner Directory
+
+https://getkirby.com/partners
+
+Our partner directory connects our curated partners with those interested to build Kirby projects. To make this possible, we process personal data of our partners and interested people.
+
+[Read more ›](#partner-directory)
 
 ### Shop
 
@@ -252,7 +262,7 @@ To display our community map, external map data is loaded from CARTO. We only lo
 *CARTO
 307 5th Ave #9
 10016, New York
-United States*
+USA*
 
 Your consent is stored within your local browser session so that subsequent requests within the same session directly load the community map. Once your session ended, new consent is required next time you want to load the map.
 
@@ -348,6 +358,30 @@ Switzerland*
 
 KeyCDN complies with GDPR. You can find their privacy policy here: <https://www.keycdn.com/privacy>
 
+## Partner Directory
+
+We store and process information of businesses who have applied to become partners. This information may include personal data such as names, email addresses, social media handles and profile photos. We process this data to perform review and certification, to publish the partner listing and to keep track of the partnership term.
+
+We also store and process information of project leads submitted by interested people, which may contain personal data depending on the project request. We process this data to match the project requests to our partners.
+
+The basis for data processing is Art. 6 (1) (b) GDPR, which allows the processing of data to fulfill a contract or for measures preliminary to a contract.
+
+### Third-party services
+
+We use the following third-party for our partner directory:
+
+#### Airtable
+
+We use Airtable to manage partnerships and project requests:
+
+*Airtable
+799 Market St., 8th Floor
+San Francisco
+CA 94103
+USA*
+
+Airtable complies with GDPR. You can find their privacy policy here: <https://www.airtable.com/company/privacy>
+
 ## Shop
 
 Our order process is conducted by our online reseller (link: https://paddle.com text: Paddle.com). Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.
@@ -427,4 +461,4 @@ We try to keep our privacy policy as transparent and easy to understand as possi
 ## Updates
 
 We will regularly check and update this privacy policy if necessary.
-**Last update: June 23, 2024**
+**Last update: June 30, 2024**
