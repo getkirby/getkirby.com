@@ -178,6 +178,11 @@
 						</div>
 
 						<div class="field">
+							<label class="label" for="address">Address <abbr title="Required" aria-hidden>*</abbr></label>
+							<input id="address" name="address" class="input" type="text" required v-model="personalInfo.address" placeholder="123 Sesame Street, New York, NY 10011, USA">
+						</div>
+
+						<div class="field">
 							<label class="label" for="projects">Projects <abbr title="Required" aria-hidden>*</abbr></label>
 							<input id="projects" name="projects" class="input" type="number" required :min="minimumProjects" v-model="personalInfo.projects" placeholder="42">
 						</div>
@@ -275,6 +280,7 @@ createApp({
 
 		// business info
 		website: "",
+		address: "",
 		projects: "",
 		references: "",
 		downloadLink: "",
