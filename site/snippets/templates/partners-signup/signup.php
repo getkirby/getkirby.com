@@ -9,6 +9,10 @@
 	align-items: center;
 	gap: var(--spacing-1);
 }
+.signup .radios[data-view="details"] {
+	opacity: 0.5;
+	pointer-events: none;
+}
 .signup .radios label {
 	display: inline-flex;
 	flex-grow: 1;
@@ -85,19 +89,19 @@
 		<div>
 			<fieldset class="mb-6">
 				<legend class="label">Partnership</legend>
-				<div class="radios">
-					<label><input type="radio" name="tier" v-model="personalInfo.tier" value="regular" :disabled="view === 'details'" /> Regular partner</label>
-					<label><input type="radio" name="tier" v-model="personalInfo.tier" value="certified" :disabled="view === 'details'" checked /> Certified partner</label>
+				<div class="radios" :data-view="view">
+					<label><input type="radio" name="tier" v-model="personalInfo.tier" value="regular" :disabled="view === 'details' && personalInfo.tier !== 'regular'" /> Regular partner</label>
+					<label><input type="radio" name="tier" v-model="personalInfo.tier" value="certified" :disabled="view === 'details' && personalInfo.tier !== 'certified'" checked /> Certified partner</label>
 				</div>
 			</fieldset>
 
 			<fieldset class="mb-6">
 				<legend class="label">How many people are in your company?</legend>
-				<div class="radios">
-					<label><input type="radio" name="people" v-model="personalInfo.people" value="1" :disabled="view === 'details'" checked /> 1</label>
-					<label><input type="radio" name="people" v-model="personalInfo.people" value="2" :disabled="view === 'details'" /> 2</label>
-					<label><input type="radio" name="people" v-model="personalInfo.people" value="3" :disabled="view === 'details'" /> 3</label>
-					<label><input type="radio" name="people" v-model="personalInfo.people" value="4+" :disabled="view === 'details'" /> 4+</label>
+				<div class="radios" :data-view="view">
+					<label><input type="radio" name="people" v-model="personalInfo.people" value="1" :disabled="view === 'details' && personalInfo.people !== '1'" checked /> 1</label>
+					<label><input type="radio" name="people" v-model="personalInfo.people" value="2" :disabled="view === 'details' && personalInfo.people !== '2'" /> 2</label>
+					<label><input type="radio" name="people" v-model="personalInfo.people" value="3" :disabled="view === 'details' && personalInfo.people !== '3'" /> 3</label>
+					<label><input type="radio" name="people" v-model="personalInfo.people" value="4+" :disabled="view === 'details' && personalInfo.people !== '4+'" /> 4+</label>
 				</div>
 			</fieldset>
 
@@ -269,7 +273,7 @@ createApp({
 	// user-generated props
 	personalInfo: {
 		// plan
-		people: 1,
+		people: "1",
 		tier: "certified",
 
 		// listing fields
