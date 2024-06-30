@@ -2,7 +2,8 @@
 
 return [
 	'algolia'   => '',
-	'discord' => [
+	'airtable'  => '',
+	'discord'   => [
 		'bot'   => '',
 		'guild' => ''
 	],
@@ -10,11 +11,10 @@ return [
 	'hooks'     => '',
 	'hub'       => '',
 	'keycdn'    => '',
-	'mapbox'    => '',
 	'newstroll' => '',
 	'paddle'    => [
-		'id'   => 1,
-		'auth' => '',
+		'id'    => 1,
+		'auth'  => '',
 	],
 	'oauth' => [
 		'discord' => [
