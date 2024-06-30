@@ -23,17 +23,17 @@
 	background: var(--color-green-200);
 	display: grid;
 	place-items: center;
-	height: 100%;
 }
 .partner-listing-image svg {
 	color: var(--color-green-400);
 	width: 2rem;
-	height: 2rem;
+	height: 100%; /* Layout centering bug in Safari */
 }
 .partner-listing-image span {
 	position: absolute;
-	bottom: 1rem;
+	bottom: 0;
 	color: var(--color-green-700);
+	padding: 1rem;
 }
 
 .partner-listing-footer {
@@ -70,6 +70,7 @@
 	color: inherit;
 	background: transparent;
 	width: 100%;
+	height: 100%;
 }
 
 .partner-listing textarea {
