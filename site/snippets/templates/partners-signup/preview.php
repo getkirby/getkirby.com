@@ -116,7 +116,7 @@
 		</p>
 		<p class="field" v-cloak v-else>
 			<label>
-				<span :style="labelStyle(personalInfo.businessType)">Type of company <abbr title="Required" aria-hidden>*</abbr></span>
+				<span :style="labelStyle(personalInfo.businessType)">Type of business <abbr title="Required" aria-hidden>*</abbr></span>
 				<input name="businessType" :required="view === 'details'" type="text" v-model="personalInfo.businessType">
 			</label>
 		</p>
