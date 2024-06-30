@@ -9,12 +9,23 @@ return function (App $kirby, Page $page) {
 	$statusMessage = $statusType = null;
 
 	if ($kirby->request()->is('POST') === true) {
+		$timestamp = explode(':', get('timestamp'));
 		$tier      = get('tier');
 		$people    = get('people');
 		$peopleNum = max(1, min(4, (int)$people));
 		$visitor   = Paddle::visitor();
 
 		try {
+			// prevent submissions faster than 1 minute (spam protection)
+			if ($timestamp[0] > time() - 60) {
+				throw new Exception('To protect against spam, we block submissions faster than 1 minute. Please try again, sorry for the inconvenience.');
+			}
+
+			$timestampHash = hash_hmac('sha256', $timestamp[0], 'kirby');
+			if (hash_equals($timestampHash, $timestamp[1]) !== true) {
+				throw new Exception('Spam protection hash was manipulated');
+			}
+
 			$product = Product::from('partner-' . $tier);
 			$price   = $product->price();
 

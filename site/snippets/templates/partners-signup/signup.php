@@ -236,6 +236,7 @@
 					Back
 				</button>
 
+				<input type="hidden" name="timestamp" :value="locale.timestamp">
 				<button type="submit" class="btn btn--filled" :disabled="isProcessing">
 					<span v-if="isProcessing" v-cloak><?= icon('loader') ?></span><span v-else><?= icon('verified') ?></span> Submit application
 				</button>
@@ -268,6 +269,7 @@ createApp({
 				"4+": <?= $certified->price()->regular(4) ?>,
 			}
 		},
+		timestamp: "",
 	},
 
 	// user-generated props
