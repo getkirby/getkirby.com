@@ -71,6 +71,7 @@
 	background: transparent;
 	width: 100%;
 	height: 100%;
+	border-radius: var(--rounded-sm);
 }
 
 .partner-listing textarea {
