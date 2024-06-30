@@ -8,6 +8,17 @@
 		<p class="text-xl leading-snug color-gray-700">
 			<?= $page->description() ?>
 		</p>
+
+		<?php if ($statusMessage): ?>
+		<aside class="pt-6">
+			<div class="block box box--<?= $statusType ?>">
+				<?php snippet('kirbytext/box', [
+					'type' => $statusType,
+					'text' => $statusMessage
+				]) ?>
+			</div>
+		</aside>
+		<?php endif ?>
 	</header>
 
 	<section class="mb-42">
