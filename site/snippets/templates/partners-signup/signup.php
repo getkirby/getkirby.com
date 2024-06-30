@@ -201,8 +201,8 @@
 				</div>
 
 				<div class="checkout-field field mb-6" v-if="personalInfo.tier === 'certified'">
-					<label class="label" for="download">Download link to the review project</label>
-					<input id="download" name="download" class="input" type="url" v-model="personalInfo.downloadLink" placeholder="https://download.example.com/my-review-project.zip">
+					<label class="label" for="downloadLink">Download link to the review project</label>
+					<input id="downloadLink" name="downloadLink" class="input" type="url" v-model="personalInfo.downloadLink" placeholder="https://download.example.com/my-review-project.zip">
 					<span class="help">Leave this field empty if you want to give us access to GitHub etc. or provide the project otherwise. We will get in touch with you to coordinate access to the project.</span>
 				</div>
 
