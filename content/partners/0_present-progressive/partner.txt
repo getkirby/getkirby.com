@@ -10,6 +10,10 @@ Package: team
 
 ----
 
+People: 2
+
+----
+
 Website: https://presentprogressive.de?mtm_source=kirby&mtm_campaign=partners&mtm_content=profile&mtm_medium=organic
 
 ----
