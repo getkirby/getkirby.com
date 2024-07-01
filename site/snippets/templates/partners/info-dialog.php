@@ -15,7 +15,7 @@
 	place-items: center;
 	color: black;
 }
-.certified-banner {
+.badge-banner {
 	border-top-left-radius: var(--rounded);
 	border-top-right-radius: var(--rounded);
 	overflow: hidden;
@@ -27,28 +27,30 @@
 }
 </style>
 
-<dialog class="dialog" id="certification" style="width: 35rem" onclick="event.target === this && this.close()">
+<dialog class="dialog" id="infoDialog" style="width: 35rem" onclick="event.target === this && this.close()">
 	<form class="dialog-form relative" method="dialog">
-		<figure class="certified-banner">
-			<?= svg('assets/images/certified-partner-landscape.svg') ?>
+		<figure class="badge-banner">
+			<?= svg('assets/images/' . (($certified ?? true) ? 'certified-' : '') . 'partner-landscape.svg') ?>
 		</figure>
 
 		<div class="p-6">
 			<div class="prose text-base mb-6">
-				<h3>Our certification process</h3>
+				<h3>Our review process</h3>
 				<p>For each partner application, we perform a manual review with the help of testing tools. Our review includes checks for crucial web vitals and best practices in development, design and content structure.</p>
 				<p>The review of our Certified Kirby Partners goes beyond that. With access to the source code of a full project, we perform a detailed manual code review that allows us to look behind the scenes of the partner's work. Our certification includes the following aspects:</p>
 			</div>
 
 			<ul class="certified-checklist text-base">
-				<li><?= icon('verified') ?> Code quality</li>
-				<li><?= icon('verified') ?> Performance</li>
-				<li><?= icon('verified') ?> Privacy & Security</li>
-				<li><?= icon('verified') ?> Semantics & Accessibility</li>
-				<li><?= icon('verified') ?> Panel layout & Usability</li>
-				<li><?= icon('verified') ?> Responsiveness & Modularity</li>
-				<li><?= icon('verified') ?> Code documentation</li>
+				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Code quality</li>
+				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Performance</li>
+				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Privacy & Security</li>
+				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Semantics & Accessibility</li>
+				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Panel layout & Usability</li>
+				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Responsiveness & Modularity</li>
+				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Code documentation</li>
 			</ul>
+		</div>
+
 		<button class="dialog-cancel-button"><?= icon('cancel-small') ?></button>
 	</form>
 </dialog>
