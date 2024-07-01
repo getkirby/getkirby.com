@@ -107,19 +107,19 @@
 
 				<dl class="partner-meta">
 					<div>
-						<dt><?= icon('map') ?></dt>
+						<dt title="Location"><?= icon('map') ?></dt>
 						<dd><?= $page->location() ?></dd>
 					</div>
 					<?php if ($page->languages()->isNotEmpty()): ?>
 					<div>
-						<dt><?= icon('globe') ?></dt>
+						<dt title="Languages"><?= icon('globe') ?></dt>
 						<dd>
 							<?= ucfirst($page->i()) ?> speak <?= $page->languages(true) ?>
 						</dd>
 					</div>
 					<?php endif ?>
 					<div>
-						<dt><?= icon('url') ?></dt>
+						<dt title="Website"><?= icon('url') ?></dt>
 						<dd>
 							<a class="link" href="<?= $page->website() ?>">
 								<?= $page->website()->shorturl() ?>
