@@ -2,9 +2,9 @@ Title: What are the requirements to become a partner?
 ----
 Text:
 
-We curate our partner network and care about its quality. This is why we check every submission before the profile is added.
+We curate our partner network and care about its quality. This is why we check every application before the profile is added.
 
-The requirements depend on the partnership plan you select (see in the box above, depending on your selection). We will review your own site and the references you provide. We will also review your provided profile content (description and image). Your client references and code examples will only be used for the partnership review and will not be published without your consent.
+The requirements depend on the partnership tier you select (see in the box above, depending on your selection). We will review your own site and the references you provide. We will also review your provided profile content (description and image). Your client references and code examples will only be used for the partnership review and will not be published without your consent.
 
 **TL;DR:** You need to provide the following information to become a partner:
 
