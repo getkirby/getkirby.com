@@ -1,14 +1,15 @@
-<a
-	href="<?= $partner->url() ?>"
+<article
 	data-region="<?= $partner->region() ?>"
 	data-languages="<?= implode(',', $partner->languages()->split(',')) ?>"
 	data-people="<?= $partner->people() ?>"
 >
-	<article>
+	<button onclick="infoDialog.showModal()">
 		<p class="flex items-center text-xs" style="gap: var(--spacing-1)">
 			Certified Kirby Partner
 			<?= icon('verified') ?>
 		</p>
+	</button>
+	<a href="<?= $partner->url() ?>">
 		<h3 class="h3 truncate flex mb-3 items-center">
 			<?= $partner->title() ?>
 		</h3>
@@ -61,5 +62,5 @@
 		<div class="prose text-base">
 			<?= $partner->summary() ?>
 		</div>
-	</article>
-</a>
+	</a>
+</article>
