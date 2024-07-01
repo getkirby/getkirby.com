@@ -355,15 +355,12 @@ createApp({
 	switchToDetails() {
 		this.view = "details";
 
-		// focus the first empty field on the next tick
+		// wait for the next tick
 		setTimeout(() => {
-			for (const [field, value] of Object.entries(this.personalInfo)) {
-				if (field === "description") {
-					continue;
-				}
-
-				if (value === "") {
-					document.querySelector("[name='" + field + "']").focus();
+			// focus the first invalid field
+			for (const input of document.querySelector(".dialog-form").elements) {
+				if (input.checkValidity() !== true) {
+					input.focus();
 					return;
 				}
 			}
