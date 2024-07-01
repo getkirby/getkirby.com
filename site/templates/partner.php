@@ -79,7 +79,7 @@
 	<div class="partner-info">
 		<div class="sticky" style="--top: var(--spacing-12)">
 
-			<dialog class="dialog" id="certification" style="width: 35rem">
+			<dialog class="dialog" id="certification" style="width: 35rem" onclick="event.target === this && this.close()">
 				<style>
 				.dialog[open] {
 					overflow: visible;
