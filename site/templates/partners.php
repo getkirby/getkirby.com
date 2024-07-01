@@ -96,7 +96,7 @@
 						<option value="_all"><?= Escape::html($config['default']) ?></option>
 
 						<?php foreach ($config['options'] as $option): ?>
-						<option><?= Escape::html($option) ?></option>
+						<option value="<?= Escape::attr($option) ?>"><?= Escape::html($option) . ($config['suffix'] ?? '') ?></option>
 						<?php endforeach ?>
 					</select>
 				</div>

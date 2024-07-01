@@ -20,6 +20,7 @@ return function (App $kirby, Page $page) {
 		'people' => [
 			'label'    => 'Team size',
 			'default'  => 'Any team size',
+			'suffix'   => ' people',
 			'multiple' => false
 		],
 	];
