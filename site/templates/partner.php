@@ -101,7 +101,7 @@
 	<div class="partner-info">
 		<div class="sticky" style="--top: var(--spacing-12)">
 			<div class="font-mono text-sm mb-12">
-				<button class="partner-badge" onclick="certification.showModal()">
+				<button class="partner-badge" onclick="infoDialog.showModal()">
 					<?= svg('assets/images/' . ($page->isCertified() ? 'certified-' : '') . 'partner-landscape.svg') ?>
 				</button>
 
@@ -226,4 +226,4 @@
 	</div>
 <?php endif ?>
 
-<?php snippet('templates/partners/certified-dialog') ?>
+<?php snippet('templates/partners/info-dialog', ['certified' => $page->isCertified()]) ?>
