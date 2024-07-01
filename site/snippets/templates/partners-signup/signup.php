@@ -357,6 +357,9 @@ createApp({
 
 		// wait for the next tick
 		setTimeout(() => {
+			// (re)validate the references field when switching back and forth
+			this.validateReferences();
+
 			// focus the first invalid field
 			for (const input of document.querySelector(".dialog-form").elements) {
 				if (input.checkValidity() !== true) {
@@ -366,16 +369,18 @@ createApp({
 			}
 		}, 0);
 	},
-	validateReferences(event) {
+	validateReferences() {
+		const input = document.getElementById("references");
+
 		// count all non-empty lines
-		const lineCount = (event.target.value.match(/^\s*\S/gm) || []).length;
+		const lineCount = (input.value.match(/^\s*\S/gm) || []).length;
 
 		let error = "";
 		if (lineCount < this.minimumProjects) {
 			error = "Please provide at least " + this.minimumProjects + " links";
 		}
 
-		event.target.setCustomValidity(error);
+		input.setCustomValidity(error);
 	}
 }).mount();
 </script>
