@@ -171,7 +171,7 @@
 				</section>
 			</div>
 
-			<button type="button" class="btn btn--filled" @click="view = 'details'">
+			<button type="button" class="btn btn--filled" @click="switchToDetails">
 				<?= icon('icon-arrow') ?> Apply now
 			</button>
 		</div>
@@ -351,6 +351,23 @@ createApp({
 	},
 	submit() {
 		this.isProcessing = true;
+	},
+	switchToDetails() {
+		this.view = "details";
+
+		// focus the first empty field on the next tick
+		setTimeout(() => {
+			for (const [field, value] of Object.entries(this.personalInfo)) {
+				if (field === "description") {
+					continue;
+				}
+
+				if (value === "") {
+					document.querySelector("[name='" + field + "']").focus();
+					return;
+				}
+			}
+		}, 0);
 	},
 	validateReferences(event) {
 		// count all non-empty lines
