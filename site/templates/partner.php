@@ -35,6 +35,28 @@
 			"main side"
 	}
 }
+
+.partner-badge {
+	border-radius: var(--rounded);
+	overflow: hidden;
+	margin-bottom: var(--spacing-6);
+	background: #000;
+}
+.partner-badge svg {
+	height: 5rem;
+}
+
+.partner-meta div {
+	display: flex;
+	align-items: center;
+	gap: .5rem;
+}
+.partner-meta div + div {
+	margin-top: .25rem;
+}
+.partner-meta dd {
+	color: var(--color-gray-700);
+}
 </style>
 
 <header class="mb-12">
@@ -78,90 +100,11 @@
 
 	<div class="partner-info">
 		<div class="sticky" style="--top: var(--spacing-12)">
-
-			<dialog class="dialog" id="certification" style="width: 35rem" onclick="event.target === this && this.close()">
-				<style>
-				.dialog[open] {
-					overflow: visible;
-				}
-				.dialog-cancel-button {
-					position: absolute;
-					top: 0;
-					right: 0;
-					transform: translate(50%, -50%);
-					width: 1.375rem;
-					height: 1.375rem;
-					background: var(--color-light);
-					border-radius: 50%;
-					display: grid;
-					place-items: center;
-					color: black;
-				}
-				.certified-banner {
-					border-top-left-radius: var(--rounded);
-					border-top-right-radius: var(--rounded);
-					overflow: hidden;
-				}
-				.certified-checklist li {
-					display: flex;
-					align-items: center;
-					gap: .5rem;
-				}
-				</style>
-				<form class="dialog-form relative" method="dialog">
-					<figure class="certified-banner">
-						<?= svg('assets/images/certified-partner-landscape.svg') ?>
-					</figure>
-
-					<div class="p-6">
-						<div class="prose text-base mb-6">
-							<h3>Our certification process</h3>
-							<p>For each partner application, we perform a manual review with the help of testing tools. Our review includes checks for crucial web vitals and best practices in development, design and content structure.</p>
-							<p>The review of our Certified Kirby Partners goes beyond that. With access to the source code of a full project, we perform a detailed manual code review that allows us to look behind the scenes of the partner's work. Our certification includes the following aspects:</p>
-						</div>
-
-						<ul class="certified-checklist text-base">
-							<li><?= icon('verified') ?> Code quality</li>
-							<li><?= icon('verified') ?> Performance</li>
-							<li><?= icon('verified') ?> Privacy & Security</li>
-							<li><?= icon('verified') ?> Semantics & Accessibility</li>
-							<li><?= icon('verified') ?> Panel layout & Usability</li>
-							<li><?= icon('verified') ?> Responsiveness & Modularity</li>
-							<li><?= icon('verified') ?> Code documentation</li>
-						</ul>
-					<button class="dialog-cancel-button"><?= icon('cancel-small') ?></button>
-				</form>
-			</dialog>
-
 			<div class="font-mono text-sm mb-12">
-				<style>
-				.partner-badge {
-					border-radius: var(--rounded);
-					overflow: hidden;
-					margin-bottom: var(--spacing-6);
-					background: #000;
-				}
-				.partner-badge svg {
-					height: 5rem;
-				}
-				</style>
 				<button class="partner-badge" onclick="certification.showModal()">
 					<?= svg('assets/images/' . ($page->isCertified() ? 'certified-' : '') . 'partner-landscape.svg') ?>
 				</button>
 
-				<style>
-				.partner-meta div {
-					display: flex;
-					align-items: center;
-					gap: .5rem;
-				}
-				.partner-meta div + div {
-					margin-top: .25rem;
-				}
-				.partner-meta dd {
-					color: var(--color-gray-700);
-				}
-				</style>
 				<dl class="partner-meta">
 					<div>
 						<dt><?= icon('map') ?></dt>
@@ -282,3 +225,5 @@
 		</footer>
 	</div>
 <?php endif ?>
+
+<?php snippet('templates/partners/certified-dialog') ?>
