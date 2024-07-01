@@ -92,7 +92,7 @@ return [
 		'hasDocs'     => true,
 		'mainVersion' => '3',
 		'since'       => 'Nov 2021 - June 2022',
-		'description' => 'is not the most current version of Kirby and should not be used for new projects.',
+		'description' => 'has reached its end of life and is no longer supported by us.',
 		'link'        => 'https://v36.getkirby.com',
 		'repo'        => 'https://github.com/getkirby',
 		'subreleases' => [
@@ -116,7 +116,7 @@ return [
 		'hasDocs'     => true,
 		'mainVersion' => '3',
 		'since'       => 'June 2022 - Oct 2022',
-		'description' => 'is not the most current version of Kirby and should not be used for new projects.',
+		'description' => 'has reached its end of life and is no longer supported by us.',
 		'link'        => 'https://v37.getkirby.com',
 		'repo'        => 'https://github.com/getkirby',
 		'subreleases' => [
@@ -178,7 +178,7 @@ return [
 		'title'       => 'Kirby 3.10',
 		'hasDocs'     => true,
 		'mainVersion' => '3',
-		'since'       => 'Jan 2023 - Nov 2023',
+		'since'       => 'Nov 2023',
 		'description' => 'is not the most current version of Kirby and should not be used for new projects.',
 		'link'        => 'https://v39.getkirby.com/docs',
 		'repo'        => 'https://github.com/getkirby',
