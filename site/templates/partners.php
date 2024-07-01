@@ -190,3 +190,5 @@ document.querySelectorAll('.partners-filters select').forEach((select) => {
 	});
 });
 </script>
+
+<?php snippet('templates/partners/info-dialog') ?>
