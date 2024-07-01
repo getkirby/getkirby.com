@@ -41,13 +41,13 @@
 	<h1 class="h1 mb-1">
 		<?= $page->title() ?>
 	</h1>
-	<p class="text-sm color-gray-600 font-mono">
+	<p class="text-sm color-gray-700 font-mono">
 		<?= $page->subtitle() ?>
 	</p>
 </header>
 
 <div class="partner-grid columns mb-24">
-	<figure style="--aspect-ratio: 3/2;" class="partner-hero mb-3">
+	<figure style="--aspect-ratio: 3/2;" class="partner-hero rounded overflow-hidden mb-3">
 		<?php if ($image = $page->card()): ?>
 			<?= img($image, [
 				'alt' => '',
@@ -78,36 +78,111 @@
 
 	<div class="partner-info">
 		<div class="sticky" style="--top: var(--spacing-12)">
-			<div class="font-mono text-sm mb-12">
-				<?php if ($page->isCertified()): ?>
-				<p class="inline-flex py-1 px-3 rounded items-center mb-6" style="background: var(--color-yellow-400)">
-					<span class="mr-3"><?= icon('verified') ?></span>
-					Certified Kirby Partner
-				</p>
-				<?php endif ?>
 
-				<p class="text-sm">
-					<?= ucfirst(str_replace('+', '', $page->package())) ?>
-				</p>
-				<p class="color-gray-600 truncate">
-					<?= $page->location() ?>
-				</p>
-				<p>
-					<a class="link" href="<?= $page->website() ?>">
-						<?= $page->website()->shorturl() ?>
-					</a>
-				</p>
-				<?php if ($page->languages()->isNotEmpty()): ?>
-				<p
-					class="flex items-center"
-					style="gap: var(--spacing-3); margin-top: var(--spacing-10)"
-				>
-					<?= icon('globe') ?>
-					<span class="color-gray-600">
-						<?= ucfirst($page->i()) ?> speak <?= $page->languages(true) ?>
-					</span>
-				</p>
-				<?php endif ?>
+			<dialog class="dialog" id="certification" style="width: 25rem">
+				<style>
+				.dialog[open] {
+					overflow: visible;
+				}
+				.dialog-cancel-button {
+					position: absolute;
+					top: 0;
+					right: 0;
+					transform: translate(50%, -50%);
+					width: 1.375rem;
+					height: 1.375rem;
+					background: var(--color-light);
+					border-radius: 50%;
+					display: grid;
+					place-items: center;
+					color: black;
+				}
+				.certified-banner {
+					border-top-left-radius: var(--rounded);
+					border-top-right-radius: var(--rounded);
+					overflow: hidden;
+				}
+				.certified-checklist li {
+					display: flex;
+					align-items: center;
+					gap: .5rem;
+				}
+				</style>
+				<form class="dialog-form relative" method="dialog">
+					<figure class="certified-banner">
+						<?= svg('assets/images/certified-partner-landscape.svg') ?>
+					</figure>
+
+					<div class="p-6">
+						<div class="prose text-base mb-6">
+							<h3>Our certification process</h3>
+							<p>We review each partner application personally before adding a partner to our directory.</p>
+							<p>While we check all reference projects for basic web vitals, we thoroughly review projects for certified partners in detail. Here’s our criteria list for such a review:</p>
+						</div>
+
+						<ul class="certified-checklist text-base">
+							<li><?= icon('verified') ?> Code quality</li>
+							<li><?= icon('verified') ?> Performance</li>
+							<li><?= icon('verified') ?> Privacy & Security</li>
+							<li><?= icon('verified') ?> Semantics and A11y</li>
+							<li><?= icon('verified') ?> Panel layout & usability</li>
+							<li><?= icon('verified') ?> Responsiveness</li>
+						</ul>
+					<button class="dialog-cancel-button"><?= icon('cancel-small') ?></button>
+				</form>
+			</dialog>
+
+			<div class="font-mono text-sm mb-12">
+				<style>
+				.partner-badge {
+					border-radius: var(--rounded);
+					overflow: hidden;
+					margin-bottom: var(--spacing-6);
+					background: #000;
+				}
+				.partner-badge svg {
+					height: 5rem;
+				}
+				</style>
+				<button class="partner-badge" onclick="certification.showModal()">
+					<?= svg('assets/images/' . ($page->isCertified() ? 'certified-' : '') . 'partner-landscape.svg') ?>
+				</button>
+
+				<style>
+				.partner-meta div {
+					display: flex;
+					align-items: center;
+					gap: .5rem;
+				}
+				.partner-meta div + div {
+					margin-top: .25rem;
+				}
+				.partner-meta dd {
+					color: var(--color-gray-700);
+				}
+				</style>
+				<dl class="partner-meta">
+					<div>
+						<dt><?= icon('map') ?></dt>
+						<dd><?= $page->location() ?></dd>
+					</div>
+					<?php if ($page->languages()->isNotEmpty()): ?>
+					<div>
+						<dt><?= icon('globe') ?></dt>
+						<dd>
+							<?= ucfirst($page->i()) ?> speak <?= $page->languages(true) ?>
+						</dd>
+					</div>
+					<?php endif ?>
+					<div>
+						<dt><?= icon('url') ?></dt>
+						<dd>
+							<a class="link" href="<?= $page->website() ?>">
+								<?= $page->website()->shorturl() ?>
+							</a>
+						</dd>
+					</div>
+				</dl>
 			</div>
 
 			<div class="partner-expertise">
@@ -117,7 +192,7 @@
 				</div>
 				<a
 					href="<?= $page->contactlink()->or($page->website()) ?>"
-					class="btn btn--filled"
+					class="btn btn--outlined"
 				>
 					<?= icon('email') ?> Contact
 				</a>
