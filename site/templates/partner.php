@@ -79,7 +79,7 @@
 	<div class="partner-info">
 		<div class="sticky" style="--top: var(--spacing-12)">
 
-			<dialog class="dialog" id="certification" style="width: 25rem">
+			<dialog class="dialog" id="certification" style="width: 35rem">
 				<style>
 				.dialog[open] {
 					overflow: visible;
@@ -116,17 +116,18 @@
 					<div class="p-6">
 						<div class="prose text-base mb-6">
 							<h3>Our certification process</h3>
-							<p>We review each partner application personally before adding a partner to our directory.</p>
-							<p>While we check all reference projects for basic web vitals, we thoroughly review projects for certified partners in detail. Here’s our criteria list for such a review:</p>
+							<p>For each partner application, we perform a manual review with the help of testing tools. Our review includes checks for crucial web vitals and best practices in development, design and content structure.</p>
+							<p>The review of our Certified Kirby Partners goes beyond that. With access to the source code of a full project, we perform a detailed manual code review that allows us to look behind the scenes of the partner's work. Our certification includes the following aspects:</p>
 						</div>
 
 						<ul class="certified-checklist text-base">
 							<li><?= icon('verified') ?> Code quality</li>
 							<li><?= icon('verified') ?> Performance</li>
 							<li><?= icon('verified') ?> Privacy & Security</li>
-							<li><?= icon('verified') ?> Semantics and A11y</li>
-							<li><?= icon('verified') ?> Panel layout & usability</li>
-							<li><?= icon('verified') ?> Responsiveness</li>
+							<li><?= icon('verified') ?> Semantics & Accessibility</li>
+							<li><?= icon('verified') ?> Panel layout & Usability</li>
+							<li><?= icon('verified') ?> Responsiveness & Modularity</li>
+							<li><?= icon('verified') ?> Code documentation</li>
 						</ul>
 					<button class="dialog-cancel-button"><?= icon('cancel-small') ?></button>
 				</form>
