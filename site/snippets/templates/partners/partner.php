@@ -25,7 +25,7 @@
 			<p class="text-xs"><?= $partner->subtitle() ?></p>
 			<h3
 				class="h3 truncate"><?= $partner->excerptTitle()->or($partner->title()) ?></h3>
-			<p class="font-mono text-sm color-gray-600 truncate">
+			<p class="font-mono text-sm color-gray-700 truncate">
 				<?= $partner->location() ?>
 			</p>
 		</header>
