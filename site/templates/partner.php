@@ -224,4 +224,4 @@
 	</div>
 <?php endif ?>
 
-<?php snippet('templates/partners/info-dialog', ['certified' => $page->isCertified()]) ?>
+<?php if ($page->isCertified()) snippet('templates/partners/info-dialog') ?>

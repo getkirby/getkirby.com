@@ -44,7 +44,7 @@
 <dialog class="dialog" id="infoDialog" style="width: 35rem" onclick="event.target === this && this.close()">
 	<form id="infoDialogForm" class="dialog-form relative" method="dialog">
 		<figure class="badge-banner">
-			<?= svg('assets/images/' . (($certified ?? true) ? 'certified-' : '') . 'partner-landscape.svg') ?>
+			<?= svg('assets/images/certified-partner-landscape.svg') ?>
 		</figure>
 
 		<div class="p-6 dialog-body">
@@ -55,13 +55,13 @@
 			</div>
 
 			<ul class="certified-checklist text-base">
-				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Code quality</li>
-				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Performance</li>
-				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Privacy & Security</li>
-				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Semantics & Accessibility</li>
-				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Panel layout & Usability</li>
-				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Responsiveness & Modularity</li>
-				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Code documentation</li>
+				<li><?= icon('verified') ?> Code quality</li>
+				<li><?= icon('verified') ?> Performance</li>
+				<li><?= icon('verified') ?> Privacy & Security</li>
+				<li><?= icon('verified') ?> Semantics & Accessibility</li>
+				<li><?= icon('verified') ?> Panel layout & Usability</li>
+				<li><?= icon('verified') ?> Responsiveness & Modularity</li>
+				<li><?= icon('verified') ?> Code documentation</li>
 			</ul>
 		</div>
 	</form>
