@@ -93,10 +93,12 @@
 			<div class="font-mono text-sm mb-12">
 
 				<?php if ($page->isCertified()): ?>
-				<button class="inline-flex py-1 px-3 rounded items-center mb-6" style="gap: .5rem; background: var(--color-yellow-400)" onclick="infoDialog.showModal()">
+				<button class="inline-flex py-1 px-3 rounded items-center mb-6" style="gap: .5rem; background: var(--color-yellow-400); border: 1px solid transparent" onclick="infoDialog.showModal()">
 					<?= icon('verified') ?>
 					Certified Kirby Partner
 				</button>
+				<?php else: ?>
+				<p class="inline-flex py-1 px-3 rounded mb-6" style="border: 1px solid var(--color-gray-400)">Kirby Partner</p>
 				<?php endif ?>
 
 				<dl class="partner-meta">
