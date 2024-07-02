@@ -6,7 +6,11 @@ Subtitle: Digital Designer and Developer
 
 ----
 
-Package: solo
+Plan: regular
+
+----
+
+People: 1
 
 ----
 
@@ -60,4 +64,4 @@ Contactlink: mailto:frank@ziski.de
 
 ----
 
-Text: 
+Text:

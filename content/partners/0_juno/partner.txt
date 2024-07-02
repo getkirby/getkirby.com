@@ -6,7 +6,7 @@ Subtitle: Branding and Design Agency
 
 ----
 
-Package: team
+Plan: regular
 
 ----
 
@@ -67,4 +67,4 @@ Uuid: ByAYNdmtvRuMAttp
 
 ----
 
-Text: 
+Text:

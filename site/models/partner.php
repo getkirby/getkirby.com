@@ -30,12 +30,12 @@ class PartnerPage extends DefaultPage
 
 	public function isCertified(): bool
 	{
-		return Str::endsWith($this->package(), '+');
+		return $this->plan()->value() === 'certified';
 	}
 
 	public function isSoloPartner(): bool
 	{
-		return Str::startsWith($this->package(), 'solo');
+		return $this->people()->value() === '1';
 	}
 
 	public function i(): Field
@@ -77,18 +77,9 @@ class PartnerPage extends DefaultPage
 		return parent::my()->value($this->isSoloPartner() ? 'my' : 'our');
 	}
 
-	public function people(): string
-	{
-		if (parent::people()->isEmpty() === true) {
-			return parent::people()->value($this->isSoloPartner() ? '1' : '4+');
-		}
-
-		return parent::people();
-	}
-
 	public function peopleLabel(): string
 	{
-		if ($this->people() > 1) {
+		if ((int)$this->people()->value() > 1) {
 			return $this->people() . ' people';
 		}
 

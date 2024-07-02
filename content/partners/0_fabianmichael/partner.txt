@@ -6,7 +6,11 @@ Subtitle: Designer & Kirby Developer
 
 ----
 
-Package: solo+
+Plan: certified
+
+----
+
+People: 1
 
 ----
 
@@ -67,4 +71,4 @@ Uuid: MBrYhjEMxgF1NBtv
 
 ----
 
-Text: 
+Text:

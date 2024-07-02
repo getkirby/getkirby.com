@@ -6,7 +6,11 @@ Subtitle: Creative Frontend Developer, Consultant
 
 ----
 
-Package: solo
+Plan: regular
+
+----
+
+People: 1
 
 ----
 
@@ -61,4 +65,4 @@ Uuid: rLfONJ722bpjCRIN
 
 ----
 
-Text: 
+Text:

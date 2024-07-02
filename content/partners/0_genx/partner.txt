@@ -2,7 +2,11 @@ Title: GeNx
 
 ----
 
-Package: solo+
+Plan: certified
+
+----
+
+People: 1
 
 ----
 

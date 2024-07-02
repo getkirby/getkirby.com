@@ -6,7 +6,11 @@ Subtitle: Freelance Designer & Developer
 
 ----
 
-Package: solo
+Plan: regular
+
+----
+
+People: 1
 
 ----
 
@@ -46,4 +50,4 @@ Uuid: ALWxtAf5mxmduyBx
 
 ----
 
-Text: 
+Text:

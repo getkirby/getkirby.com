@@ -6,7 +6,7 @@ ExcerptTitle: Büro für Gestaltung
 
 ----
 
-Package: team
+Plan: regular
 
 ----
 

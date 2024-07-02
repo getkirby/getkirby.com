@@ -6,7 +6,11 @@ Subtitle: Designer and developer
 
 ----
 
-Package: solo
+Plan: regular
+
+----
+
+People: 1
 
 ----
 
@@ -50,4 +54,4 @@ Uuid: Fk0YkI54sMYqapIq
 
 ----
 
-Text: 
+Text:

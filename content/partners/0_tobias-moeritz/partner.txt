@@ -2,7 +2,11 @@ Title: Tobias Möritz
 
 ----
 
-Package: solo+
+Plan: certified
+
+----
+
+People: 1
 
 ----
 
@@ -91,4 +95,3 @@ Plugins:
 - /plugins/tobimori/seo
 - /plugins/tobimori/icon-field
 - /plugins/tobimori/tailwind-merge
-

@@ -6,7 +6,11 @@ Subtitle: Developer
 
 ----
 
-Package: solo
+Plan: regular
+
+----
+
+People: 1
 
 ----
 
@@ -54,4 +58,4 @@ Uuid: 3EERKku7n8M02IT6
 
 ----
 
-Text: 
+Text:
