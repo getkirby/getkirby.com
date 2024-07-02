@@ -2,11 +2,15 @@
 .dialog[open] {
 	overflow: visible;
 }
+.dialog:modal {
+	max-height: calc(100% - 2rem);
+	max-width: calc(100% - 2rem);
+}
 .dialog-form {
 	display: flex;
 	flex-direction: column;
 	overflow: scroll;
-	max-height: calc(100vh - 1.5rem);
+	max-height: calc(100vh - 2rem);
 }
 .dialog-body {
 	overflow: scroll;
