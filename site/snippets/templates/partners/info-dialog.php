@@ -9,11 +9,11 @@
 .dialog-form {
 	display: flex;
 	flex-direction: column;
-	overflow: scroll;
+	overflow-y: auto;
 	max-height: calc(100vh - 2rem);
 }
 .dialog-body {
-	overflow: scroll;
+	overflow-y: auto;
 }
 .dialog-cancel-button {
 	position: absolute;
