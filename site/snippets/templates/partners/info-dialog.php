@@ -2,6 +2,15 @@
 .dialog[open] {
 	overflow: visible;
 }
+.dialog-form {
+	display: flex;
+	flex-direction: column;
+	overflow: scroll;
+	max-height: calc(100vh - 1.5rem);
+}
+.dialog-body {
+	overflow: scroll;
+}
 .dialog-cancel-button {
 	position: absolute;
 	top: 0;
@@ -16,6 +25,7 @@
 	color: black;
 }
 .badge-banner {
+	flex-shrink: 0;
 	border-top-left-radius: var(--rounded);
 	border-top-right-radius: var(--rounded);
 	overflow: hidden;
@@ -28,12 +38,12 @@
 </style>
 
 <dialog class="dialog" id="infoDialog" style="width: 35rem" onclick="event.target === this && this.close()">
-	<form class="dialog-form relative" method="dialog">
+	<form id="infoDialogForm" class="dialog-form relative" method="dialog">
 		<figure class="badge-banner">
 			<?= svg('assets/images/' . (($certified ?? true) ? 'certified-' : '') . 'partner-landscape.svg') ?>
 		</figure>
 
-		<div class="p-6">
+		<div class="p-6 dialog-body">
 			<div class="prose text-base mb-6">
 				<h3>Our review process</h3>
 				<p>For each partner application, we perform a manual review with the help of testing tools. Our review includes checks for crucial web vitals and best practices in development, design and content structure.</p>
@@ -50,7 +60,6 @@
 				<li><?= icon(($certified ?? true) ? 'verified' : 'icon-blank') ?> Code documentation</li>
 			</ul>
 		</div>
-
-		<button class="dialog-cancel-button"><?= icon('cancel-small') ?></button>
 	</form>
+	<button form="infoDialogForm" class="dialog-cancel-button"><?= icon('cancel-small') ?></button>
 </dialog>
