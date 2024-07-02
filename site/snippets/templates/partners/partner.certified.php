@@ -54,7 +54,7 @@
 				<p>
 					<?= $partner->subtitle() ?>
 				</p>
-				<p class="color-gray-600">
+				<p class="color-gray-700">
 					<?= $partner->location() ?>
 				</p>
 			</figcaption>
