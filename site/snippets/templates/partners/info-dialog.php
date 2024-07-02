@@ -49,7 +49,7 @@
 
 		<div class="p-6 dialog-body">
 			<div class="prose text-base mb-6">
-				<h3>Our review process</h3>
+				<h3>Our certification process</h3>
 				<p>For each partner application, we perform a manual review with the help of testing tools. Our review includes checks for crucial web vitals and best practices in development, design and content structure.</p>
 				<p>The review of our Certified Kirby Partners goes beyond that. With access to the source code of a full project, we perform a detailed manual code review that allows us to look behind the scenes of the partner's work. Our certification includes the following aspects:</p>
 			</div>
