@@ -6,6 +6,10 @@ Subtitle: Development Agency
 
 ----
 
+People: 3
+
+----
+
 Package: team
 
 ----
@@ -54,4 +58,4 @@ Uuid: MFSYrNFGgeGl9f80
 
 ----
 
-Text: 
+Text:

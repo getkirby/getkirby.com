@@ -104,6 +104,10 @@
 						<dt title="Location"><?= icon('map') ?></dt>
 						<dd><?= $page->location() ?></dd>
 					</div>
+					<div>
+						<dt title="People"><?= icon('users') ?></dt>
+						<dd><?= $page->peopleLabel() ?></dd>
+					</div>
 					<?php if ($page->languages()->isNotEmpty()): ?>
 					<div>
 						<dt title="Languages"><?= icon('globe') ?></dt>

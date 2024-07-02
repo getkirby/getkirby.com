@@ -86,6 +86,15 @@ class PartnerPage extends DefaultPage
 		return parent::people();
 	}
 
+	public function peopleLabel(): string
+	{
+		if ($this->people() > 1) {
+			return $this->people() . ' people';
+		}
+
+		return '1 person';
+	}
+
 	public function plugins(): Pages|null
 	{
 		if (parent::plugins()->isNotEmpty() === true) {
