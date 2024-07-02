@@ -20,8 +20,10 @@ return function (App $kirby, Page $page) {
 		'people' => [
 			'label'    => 'Team size',
 			'default'  => 'Any team size',
-			'suffix'   => ' people',
-			'multiple' => false
+			'multiple' => false,
+			'text'     => function ($value) {
+				return $value == 1 ? '1 person' : $value . ' people';
+			}
 		],
 	];
 
