@@ -36,16 +36,6 @@
 	}
 }
 
-.partner-badge {
-	border-radius: var(--rounded);
-	overflow: hidden;
-	margin-bottom: var(--spacing-6);
-	background: #000;
-}
-.partner-badge svg {
-	height: 5rem;
-}
-
 .partner-meta div {
 	display: flex;
 	align-items: center;
@@ -101,9 +91,13 @@
 	<div class="partner-info">
 		<div class="sticky" style="--top: var(--spacing-12)">
 			<div class="font-mono text-sm mb-12">
-				<button class="partner-badge" onclick="infoDialog.showModal()">
-					<?= svg('assets/images/' . ($page->isCertified() ? 'certified-' : '') . 'partner-landscape.svg') ?>
+
+				<?php if ($page->isCertified()): ?>
+				<button class="inline-flex py-1 px-3 rounded items-center mb-6" style="gap: .5rem; background: var(--color-yellow-400)" onclick="infoDialog.showModal()">
+					<?= icon('verified') ?>
+					Certified Kirby Partner
 				</button>
+				<?php endif ?>
 
 				<dl class="partner-meta">
 					<div>
@@ -136,7 +130,7 @@
 				</div>
 				<a
 					href="<?= $page->contactlink()->or($page->website()) ?>"
-					class="btn btn--outlined"
+					class="btn btn--filled"
 				>
 					<?= icon('email') ?> Contact
 				</a>
