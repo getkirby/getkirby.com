@@ -6,11 +6,11 @@ Subtitle: Development Agency
 
 ----
 
-People: 3
+Plan: regular
 
 ----
 
-Package: team
+People: 3
 
 ----
 

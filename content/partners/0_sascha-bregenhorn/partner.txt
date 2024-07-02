@@ -2,7 +2,11 @@ Title: Sascha Bregenhorn
 
 ----
 
-Package: solo
+Plan: regular
+
+----
+
+People: 1
 
 ----
 

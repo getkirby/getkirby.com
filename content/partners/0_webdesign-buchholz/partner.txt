@@ -6,7 +6,11 @@ Subtitle: Web Designer & Developer
 
 ----
 
-Package: solo
+Plan: regular
+
+----
+
+People: 1
 
 ----
 

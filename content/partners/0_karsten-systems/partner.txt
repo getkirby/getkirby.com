@@ -6,7 +6,7 @@ Subtitle: Development & Design
 
 ----
 
-Package: team
+Plan: regular
 
 ----
 

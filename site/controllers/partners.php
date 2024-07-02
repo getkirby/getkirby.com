@@ -22,7 +22,7 @@ return function (App $kirby, Page $page) {
 			'default'  => 'Any team size',
 			'multiple' => false,
 			'text'     => function ($value) {
-				return $value == 1 ? '1 person' : $value . ' people';
+				return $value->value() === '1' ? '1 person' : $value . ' people';
 			}
 		],
 	];

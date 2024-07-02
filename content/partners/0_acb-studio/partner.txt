@@ -6,7 +6,7 @@ Subtitle: Sustainable digital products & services
 
 ----
 
-Package: team+
+Plan: certified
 
 ----
 

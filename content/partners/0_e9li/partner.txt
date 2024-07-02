@@ -6,7 +6,11 @@ Subtitle: Full-Stack Developer
 
 ----
 
-Package: solo
+Plan: regular
+
+----
+
+People: 1
 
 ----
 
@@ -24,9 +28,9 @@ Languages: German, English, Russian
 
 Description:
 
-I have been a full-stack developer since 1996 with a passion for developing web applications as well as iOS and macOS applications. 
+I have been a full-stack developer since 1996 with a passion for developing web applications as well as iOS and macOS applications.
 
-When I got to know Kirby, I immediately fell in love with its simplicity and flexibility. 
+When I got to know Kirby, I immediately fell in love with its simplicity and flexibility.
 
 I am looking forward to exciting projects.
 
@@ -50,4 +54,4 @@ Uuid: xkBdwyqVxyIWia2Q
 
 ----
 
-Text: 
+Text:

@@ -6,7 +6,11 @@ Subtitle: Jonas Marx - Web Developer and Musician
 
 ----
 
-Package: solo
+Plan: regular
+
+----
+
+People: 1
 
 ----
 
@@ -51,4 +55,4 @@ Uuid: UeHttUXJIANwkehk
 
 ----
 
-Text: 
+Text:

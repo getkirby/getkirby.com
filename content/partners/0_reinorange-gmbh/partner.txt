@@ -6,7 +6,7 @@ Subtitle: End-to-End Digital Excellence
 
 ----
 
-Package: team+
+Plan: certified
 
 ----
 
