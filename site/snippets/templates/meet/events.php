@@ -57,5 +57,10 @@ customElements.define("localized-datetime", LocalizedDatetimeElement);
 		gap: 1rem;
 		align-items: flex-start;
 	}
+	.events ul a {
+		flex-direction: column;
+		gap: var(--spaccing-1);
+		align-items: flex-start;
+	}
 }
 </style>

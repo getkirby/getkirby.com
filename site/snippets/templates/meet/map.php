@@ -10,6 +10,11 @@
 }
 
 @media screen and (max-width: 40rem) {
+	.map-section header {
+		flex-direction: column;
+		gap: 1rem;
+		align-items: flex-start;
+	}
 	.map {
 		height: 60dvh;
 	}
@@ -21,7 +26,7 @@
 }
 </style>
 
-<section class="mb-24">
+<section class="map-section mb-24">
 
 	<header class="flex justify-between items-center mb-6">
 		<h2 class="h2">Community map</h2>
