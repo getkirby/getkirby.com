@@ -15,7 +15,7 @@
 		</h3>
 		<figure>
 			<div style="--aspect-ratio: 2/1" class="mb-3">
-				<?php if ($image = $partner->card()): ?>
+				<?php if ($image = $partner->stripe() ?? $partner->card()): ?>
 					<?= img($image, [
 						'src' => [
 							'width' => 352

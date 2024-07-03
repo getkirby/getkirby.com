@@ -96,4 +96,9 @@ class PartnerPage extends DefaultPage
 
 		return $this->pluginpage()->toPage()?->children()->limit(6);
 	}
+
+	public function stripe(): File|null
+	{
+		return $this->images()->findBy('name', 'stripe');
+	}
 }
