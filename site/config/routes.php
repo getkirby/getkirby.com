@@ -37,5 +37,12 @@ return [
 				'title' => 'Pixels'
 			]
 		])
+	],
+	[
+		// blocks all requests to *.html and returns 404
+		'pattern' => '(:all)\.html',
+		'action'  => function ($all) {
+			return false;
+		}
 	]
 ];
