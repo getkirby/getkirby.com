@@ -1,8 +1,8 @@
-Title: Jaeger Coneco Baumanagement
+Title: Jaeger Coneco
 
 ----
 
-Client: Jaeger Coneco Baumanagement
+Client: Jaeger Coneco
 
 ----
 
