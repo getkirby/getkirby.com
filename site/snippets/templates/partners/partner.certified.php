@@ -14,7 +14,7 @@
 			<?= $partner->title() ?>
 		</h3>
 		<figure>
-			<div style="--aspect-ratio: 3/2" class="mb-3">
+			<div style="--aspect-ratio: 2/1" class="mb-3">
 				<?php if ($image = $partner->card()): ?>
 					<?= img($image, [
 						'src' => [
@@ -50,7 +50,7 @@
 					</span>
 				<?php endif ?>
 			</div>
-			<figcaption class="font-mono text-sm mb-6">
+			<figcaption class="font-mono text-sm mb-3">
 				<p>
 					<?= $partner->subtitle() ?>
 				</p>
@@ -59,7 +59,7 @@
 				</p>
 			</figcaption>
 		</figure>
-		<div class="prose text-base">
+		<div class="prose text-sm">
 			<?= $partner->summary() ?>
 		</div>
 	</a>
