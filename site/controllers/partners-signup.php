@@ -97,7 +97,7 @@ return function (App $kirby, Page $page) {
 		}
 	}
 
-	if ($renew = get('renew')) {
+	if ($renew = param('renew')) {
 		if ($renew = page('partners')->find($renew)) {
 			$people = $renew->people()->value();
 		}
