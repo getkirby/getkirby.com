@@ -126,7 +126,6 @@
 				<input
 					name="businessType"
 					:required="view === 'details'"
-					:disabled="renew"
 					type="text"
 					v-model="personalInfo.businessType"
 				>
@@ -140,7 +139,6 @@
 				<input
 					name="businessName"
 					:required="view === 'details'"
-					:disabled="renew"
 					type="text"
 					v-model="personalInfo.businessName"
 				>
@@ -165,7 +163,6 @@
 				<input
 					name="businessType"
 					:required="view === 'details'"
-					:disabled="renew"
 					type="text"
 					v-model="personalInfo.businessType"
 				>
@@ -179,7 +176,6 @@
 				<input
 					name="location"
 					:required="view === 'details'"
-					:disabled="renew"
 					type="text"
 					v-model="personalInfo.location"
 				>
@@ -196,7 +192,6 @@
 			</span>
 			<textarea
 				name="summary"
-				:disabled="renew"
 				rows="2"
 				maxlength="140"
 				v-model="personalInfo.summary"

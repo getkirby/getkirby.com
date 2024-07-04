@@ -3,13 +3,15 @@
 	data-languages="<?= implode(',', $partner->languages()->split(',')) ?>"
 	data-people="<?= $partner->people() ?>"
 >
-	<button onclick="infoDialog.showModal()">
+	<button type="button" onclick="infoDialog.showModal()">
 		<p class="flex items-center text-xs" style="gap: var(--spacing-1)">
 			Certified Kirby Partner
 			<?= icon('verified') ?>
 		</p>
 	</button>
+	<?php if ($placeholder ?? false !== true): ?>
 	<a href="<?= $partner->url() ?>">
+	<?php endif ?>
 		<h3 class="h3 truncate flex mb-3 items-center">
 			<?= $partner->title() ?>
 		</h3>
@@ -60,7 +62,9 @@
 			</figcaption>
 		</figure>
 		<div class="prose text-sm">
-			<?= $partner->summary() ?>
+			<?= $partner->summary()->or(($placeholder ?? false) ? 'Tell the audience about yourself in 140 characters or less. Describe your strengths as company and let them know why they should choose you.' : '') ?>
 		</div>
+	<?php if ($placeholder ?? false !== true): ?>
 	</a>
+	<?php endif ?>
 </article>

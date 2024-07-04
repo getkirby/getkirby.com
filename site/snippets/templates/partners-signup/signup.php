@@ -27,6 +27,11 @@
 	cursor: pointer;
 }
 
+.partner-listing-static {
+	background: var(--color-white);
+	padding: var(--spacing-3);
+}
+
 .signup .benefits li,
 .signup .requirements li {
 	display: flex;
@@ -176,7 +181,16 @@
 				<h3 class="label">Your listing</h3>
 
 				<div class="rounded bg-light" style="padding: 2px">
+					<?php if ($renew): ?>
+					<article class="partner-listing-static" v-if="personalInfo.tier === 'certified'">
+					<?php snippet('templates/partners/partner.certified', ['partner' => $renew, 'placeholder' => true, 'lazy' => false]) ?>
+					</article>
+					<article class="partner-listing-static" v-else v-cloak>
+					<?php snippet('templates/partners/partner', ['partner' => $renew, 'placeholder' => true]) ?>
+					</article>
+					<?php else: ?>
 					<?php snippet('templates/partners-signup/preview') ?>
+					<?php endif ?>
 				</div>
 			</section>
 		</div>
@@ -273,10 +287,10 @@ createApp({
 		tier: "certified",
 
 		// listing fields
-		businessName: "<?= $name ?? '' ?>",
-		businessType: "<?= $type ?? '' ?>",
-		location: "<?= $location ?? '' ?>",
-		summary: "<?= $summary ?? '' ?>",
+		businessName: "",
+		businessType: "",
+		location: "",
+		summary: "",
 
 		// business info
 		website: "",

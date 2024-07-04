@@ -25,8 +25,8 @@
 
 	<section class="mb-42">
 		<?php snippet('templates/partners-signup/signup', [
-			...$form,
-			'renew' => $renew
+			'people' => $people,
+			'renew'  => $renew
 		]) ?>
 	</section>
 

@@ -1,9 +1,11 @@
+<?php if ($placeholder ?? false !== true): ?>
 <a
 	href="<?= $partner->url() ?>"
 	data-region="<?= $partner->region() ?>"
 	data-languages="<?= implode(',', $partner->languages()->split(',')) ?>"
 	data-people="<?= $partner->people() ?>"
 >
+<?php endif ?>
 	<article class="columns items-center"
 					 style="--columns: 4; --columns-sm: 4; --gap: var(--spacing-6)">
 		<figure style="--span: 1; --aspect-ratio: 1/1; overflow: hidden">
@@ -30,4 +32,6 @@
 			</p>
 		</header>
 	</article>
+<?php if ($placeholder ?? false !== true): ?>
 </a>
+<?php endif ?>
