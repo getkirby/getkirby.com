@@ -46,7 +46,7 @@
 }
 
 .partner-listing-summary {
-	font-size: var(--text-base);
+	font-size: var(--text-sm);
 	line-height: var(--leading-normal);
 	color: var(--color-text-dimmed);
 }
@@ -95,7 +95,7 @@
 }
 
 .partner-listing[data-tier="certified"] {
-	--ratio: 3/2;
+	--ratio: 2/1;
 	grid-template-areas:
 		"header"
 		"image"
