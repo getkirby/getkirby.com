@@ -270,7 +270,7 @@ createApp({
 	personalInfo: {
 		// plan
 		people: "<?= $people ?? '1' ?>",
-		tier: "<?= $plan ?? 'certified' ?>",
+		tier: "certified",
 
 		// listing fields
 		businessName: "<?= $name ?? '' ?>",

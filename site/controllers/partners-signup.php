@@ -100,7 +100,6 @@ return function (App $kirby, Page $page) {
 	if ($renew = get('renew')) {
 		if ($renew = page('partners')->find($renew)) {
 			$form = [
-				'plan'     => $renew->plan(),
 				'people'   => $renew->people(),
 				'name'     => $renew->title(),
 				'type'     => $renew->subtitle(),
