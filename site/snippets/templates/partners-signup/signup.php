@@ -90,23 +90,85 @@
 </style>
 
 <div id="signup" class="signup bg-white rounded" v-scope @mounted="mounted">
-	<form action="<?= url('partners/join') ?>" method="POST" @submit="submit" class="columns dialog-form" style="--columns: 2; gap: 0">
+	<form
+		action="<?= url('partners/join') ?>"
+		method="POST"
+		@submit="submit"
+		class="columns dialog-form"
+		style="--columns: 2; gap: 0"
+	>
 		<div>
 			<fieldset class="mb-6">
 				<legend class="label">Partnership</legend>
 				<div class="radios" :data-view="view">
-					<label><input type="radio" name="tier" v-model="personalInfo.tier" value="regular" :disabled="view === 'details' && personalInfo.tier !== 'regular'" /> Regular partner</label>
-					<label><input type="radio" name="tier" v-model="personalInfo.tier" value="certified" :disabled="view === 'details' && personalInfo.tier !== 'certified'" checked /> Certified partner</label>
+					<label>
+						<input
+							type="radio"
+							name="tier"
+							v-model="personalInfo.tier"
+							value="regular"
+							:disabled="view === 'details' && personalInfo.tier !== 'regular'"
+						/>
+						Regular partner
+					</label>
+					<label>
+						<input
+							type="radio"
+							name="tier"
+							v-model="personalInfo.tier"
+							value="certified"
+							:disabled="view === 'details' && personalInfo.tier !== 'certified'"
+							checked
+						/>
+						Certified partner
+					</label>
 				</div>
 			</fieldset>
 
 			<fieldset class="mb-6">
 				<legend class="label">How many people are in your company?</legend>
 				<div class="radios" :data-view="view">
-					<label><input type="radio" name="people" v-model="personalInfo.people" value="1" :disabled="view === 'details' && personalInfo.people !== '1'" checked /> 1</label>
-					<label><input type="radio" name="people" v-model="personalInfo.people" value="2" :disabled="view === 'details' && personalInfo.people !== '2'" /> 2</label>
-					<label><input type="radio" name="people" v-model="personalInfo.people" value="3" :disabled="view === 'details' && personalInfo.people !== '3'" /> 3</label>
-					<label><input type="radio" name="people" v-model="personalInfo.people" value="4+" :disabled="view === 'details' && personalInfo.people !== '4+'" /> 4+</label>
+					<label>
+						<input
+							type="radio"
+							name="people"
+							v-model="personalInfo.people"
+							value="1"
+							:disabled="view === 'details' && personalInfo.people !== '1'"
+							checked
+						/>
+						1
+					</label>
+					<label>
+						<input
+							type="radio"
+							name="people"
+							v-model="personalInfo.people"
+							value="2"
+							:disabled="view === 'details' && personalInfo.people !== '2'"
+						/>
+						2
+					</label>
+					<label>
+						<input
+							type="radio"
+							name="people"
+							v-model="personalInfo.people"
+							value="3"
+							:disabled="view === 'details' && personalInfo.people !== '3'"
+						/>
+						3
+					</label>
+					<label>
+						<input
+							type="radio"
+							name="people"
+							v-model="personalInfo.people"
+							value="4+"
+							:disabled="view === 'details' && personalInfo.people !== '4+'"
+						/>
+						4+
+					</label>
 				</div>
 			</fieldset>
 
@@ -119,134 +181,58 @@
 			</section>
 		</div>
 
-		<div class="flex flex-column justify-between right-column" v-if="view === 'info'">
+		<div
+			v-if="view === 'info'"
+			class="flex flex-column justify-between right-column"
+		>
 			<div>
-				<section class="mb-6">
-					<h3 class="font-bold mb-1">What you get</h3>
-					<ul class="benefits">
-						<li><span class="icon"><?= icon('star') ?></span> Your own customizable profile page</li>
-						<li><span class="icon"><?= icon('star') ?></span> Exposure and traffic from getkirby.com</li>
-						<li v-if="personalInfo.tier === 'certified'"><span class="icon"><?= icon('star') ?></span> <span>Project gallery with up to <span class="extra">6 projects</span></span></li>
-						<li v-else v-cloak><span class="icon"><?= icon('star') ?></span> Project gallery with up to 3 projects</li>
-						<li><span class="icon"><?= icon('star') ?></span> Access to the Discord #partners channel</li>
-						<li><span class="icon"><?= icon('star') ?></span> Directly matched client leads</li>
-						<li><span class="icon"><?= icon('star') ?></span> More visibility within the Kirby community</li>
-					</ul>
-				</section>
-
-				<section class="mb-6" v-if="personalInfo.tier === 'certified'">
-					<h3 class="font-bold mb-1">Certified partner benefits</h3>
-					<ul class="benefits">
-						<li class="extra"><span class="icon"><?= icon('star') ?></span> Certification, including official badges</li>
-						<li class="extra"><span class="icon"><?= icon('star') ?></span> 10% discount on all licenses</li>
-						<li class="extra"><span class="icon"><?= icon('star') ?></span> Regular office hour calls with the Kirby core team</li>
-						<li class="extra"><span class="icon"><?= icon('star') ?></span> Detailed results of our project review</li>
-						<li class="extra"><span class="icon"><?= icon('star') ?></span> Priority listing in the directory</li>
-						<li class="extra"><span class="icon"><?= icon('star') ?></span> Promotion on social media and in the Kosmos newsletter</li>
-					</ul>
-				</section>
-
-				<section class="mb-6">
-					<h3 class="font-bold mb-1">Requirements</h3>
-					<ul class="requirements" v-if="personalInfo.tier === 'certified'">
-						<li><span class="icon"><?= icon('check') ?></span> 4 completed Kirby projects</li>
-						<li><span class="icon"><?= icon('check') ?></span> 1 reviewed project</li>
-					</ul>
-					<ul class="requirements" v-else v-cloak>
-						<li><span class="icon"><?= icon('check') ?></span> 2 completed Kirby projects</li>
-					</ul>
-				</section>
-
-				<section class="mb-12">
-					<h3 class="font-bold">Price per year</h3>
-					<p class="price text-xl mb-3">
-						<span v-text="locale.currency.trim()" class="currency-sign">€</span>
-						<span v-text="price"><?= $certified->price()->regular(1) ?></span>
-					</p>
-					<ul class="text-xs color-gray-700">
-						<li>Price + VAT if applicable.</li>
-						<li>You will be charged once your application has been accepted.</li>
-						<li>Your partnership will <em>not</em> automatically renew.</li>
-					</ul>
-				</section>
+				<?php snippet('templates/partners-signup/info') ?>
 			</div>
 
-			<button v-if="renew" type="submit" class="btn btn--filled" :disabled="isProcessing">
-				<span v-if="isProcessing" v-cloak><?= icon('loader') ?></span><span v-else><?= icon('verified') ?></span> Renew now
+			<button
+				v-if="renew"
+				:disabled="isProcessing"
+				type="submit"
+				class="btn btn--filled"
+			>
+				<span v-if="isProcessing" v-cloak><?= icon('loader') ?></span>
+				<span v-else><?= icon('verified') ?></span>
+				Renew now
 			</button>
-			<button v-else type="button" class="btn btn--filled" @click="switchToDetails">
+			<button
+				v-else
+				type="button"
+				class="btn btn--filled" @click="switchToDetails"
+			>
 				<?= icon('icon-arrow') ?> Apply now
 			</button>
 		</div>
 
-		<div class="flex flex-column justify-between right-column" v-if="view === 'details'" v-cloak>
-			<div>
-				<fieldset class="checkout-fieldset">
-					<legend>Your business</legend>
-					<div class="fields">
-						<div class="field">
-							<label class="label" for="website">Your website <abbr title="Required" aria-hidden>*</abbr></label>
-							<input id="website" name="website" class="input" type="url" required v-model="personalInfo.website" placeholder="https://example.com">
-						</div>
-
-						<div class="field">
-							<label class="label" for="address">Address <abbr title="Required" aria-hidden>*</abbr></label>
-							<input id="address" name="address" class="input" type="text" required v-model="personalInfo.address" placeholder="123 Sesame Street, New York, NY 10011, USA">
-						</div>
-
-						<div class="field">
-							<label class="label" for="projects">Projects <abbr title="Required" aria-hidden>*</abbr></label>
-							<input id="projects" name="projects" class="input" type="number" required :min="minimumProjects" v-model="personalInfo.projects" placeholder="42">
-						</div>
-					</div>
-					<span class="help">How many projects have you completed with Kirby? Can be approximate.</span>
-				</fieldset>
-
-				<div class="checkout-field field mb-6">
-					<label class="label" for="references">Reference links <abbr title="Required" aria-hidden="">*</abbr></label>
-					<textarea id="references" name="references" class="input" :rows="minimumProjects + 1" required v-model="personalInfo.references" @input="validateReferences" placeholder="https://example.com"></textarea>
-					<span class="help">Please provide at least {{ minimumProjects }} links, with your best project first.</span>
-				</div>
-
-				<div class="checkout-field field mb-6" v-if="personalInfo.tier === 'certified'">
-					<label class="label" for="downloadLink">Download link to the review project</label>
-					<input id="downloadLink" name="downloadLink" class="input" type="url" v-model="personalInfo.downloadLink" placeholder="https://download.example.com/my-review-project.zip">
-					<span class="help">Leave this field empty if you want to give us access to GitHub etc. or provide the project otherwise. We will get in touch with you to coordinate access to the project.</span>
-				</div>
-
-				<fieldset class="checkout-fieldset">
-					<legend>Your contact information</legend>
-					<div class="fields">
-						<div class="field">
-							<label class="label" for="name">Your name <abbr title="Required" aria-hidden>*</abbr></label>
-							<input id="name" name="name" class="input" type="text" required v-model="personalInfo.name" placeholder="Jane Doe">
-						</div>
-
-						<div class="field">
-							<label class="label" for="email">Email <abbr title="Required" aria-hidden>*</abbr></label>
-							<input id="email" name="email" class="input" type="email" required v-model="personalInfo.email" placeholder="mail@example.com">
-						</div>
-						<div class="field">
-							<label class="label" for="discord">Discord name</label>
-							<input id="discord" name="discord" class="input" type="text" v-model="personalInfo.discord" placeholder="janedoe">
-						</div>
-					</div>
-				</fieldset>
-
-				<div class="checkout-field field mb-6">
-					<label class="label" for="notes">Notes</label>
-					<textarea id="notes" name="notes" class="input" rows="2" v-model="personalInfo.notes"></textarea>
-				</div>
-			</div>
+		<div
+			v-if="view === 'details'"
+			v-cloak
+			class="flex flex-column justify-between right-column"
+		>
+			<?php snippet('templates/partners-signup/form') ?>
 
 			<div class="submit-buttons">
-				<button type="button" class="btn btn--outlined back-button" @click="view = 'info'">
+				<button
+					type="button"
+					class="btn btn--outlined back-button"
+					@click="view = 'info'"
+				>
 					Back
 				</button>
 
 				<input type="hidden" name="timestamp" :value="locale.timestamp">
-				<button type="submit" class="btn btn--filled" :disabled="isProcessing">
-					<span v-if="isProcessing" v-cloak><?= icon('loader') ?></span><span v-else><?= icon('verified') ?></span> Submit application
+				<button
+					:disabled="isProcessing"
+					type="submit"
+					class="btn btn--filled"
+				>
+					<span v-if="isProcessing" v-cloak><?= icon('loader') ?></span>
+					<span v-else><?= icon('verified') ?></span>
+					Submit application
 				</button>
 			</div>
 		</div>
