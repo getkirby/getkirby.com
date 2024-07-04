@@ -113,7 +113,7 @@
 				<?= icon('email') ?>
 				Post your project
 			</a>
-			<a class="btn btn--filled" href="/partners/join">
+			<a class="btn btn--filled" href="<?= url('partners/join') ?>">
 				<?= icon('verified') ?>
 				Become a partner
 			</a>
