@@ -140,7 +140,7 @@
 							v-model="personalInfo.people"
 							value="1"
 							:disabled="view === 'details' && personalInfo.people !== '1'"
-							checked
+							<?php if (($people ?? '1') === '1'): ?>checked<?php endif ?>
 						/>
 						1
 					</label>
@@ -151,6 +151,7 @@
 							v-model="personalInfo.people"
 							value="2"
 							:disabled="view === 'details' && personalInfo.people !== '2'"
+							<?php if (($people ?? '1') === '2'): ?>checked<?php endif ?>
 						/>
 						2
 					</label>
@@ -161,6 +162,7 @@
 							v-model="personalInfo.people"
 							value="3"
 							:disabled="view === 'details' && personalInfo.people !== '3'"
+							<?php if (($people ?? '1') === '3'): ?>checked<?php endif ?>
 						/>
 						3
 					</label>
@@ -171,6 +173,7 @@
 							v-model="personalInfo.people"
 							value="4+"
 							:disabled="view === 'details' && personalInfo.people !== '4+'"
+							<?php if (($people ?? '1') === '4+'): ?>checked<?php endif ?>
 						/>
 						4+
 					</label>
@@ -200,11 +203,11 @@
 			class="flex flex-column justify-between right-column"
 		>
 			<div>
-				<?php snippet('templates/partners-signup/info') ?>
+				<?php snippet('templates/partners-signup/info', ['people' => $people ?? 1]) ?>
 			</div>
 
+			<?php if ($renew): ?>
 			<button
-				v-if="renew"
 				:disabled="isProcessing"
 				type="submit"
 				class="btn btn--filled"
@@ -213,13 +216,14 @@
 				<span v-else><?= icon('verified') ?></span>
 				Renew now
 			</button>
+			<?php else: ?>
 			<button
-				v-else
 				type="button"
 				class="btn btn--filled" @click="switchToDetails"
 			>
 				<?= icon('icon-arrow') ?> Apply now
 			</button>
+			<?php endif ?>
 		</div>
 
 		<div
@@ -310,7 +314,6 @@ createApp({
 
 	// dynamic props
 	isProcessing: false,
-	renew: <?= $renew ? 'true' : 'false' ?>,
 	view: "info",
 
 	// computed

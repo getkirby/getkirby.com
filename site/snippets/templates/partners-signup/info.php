@@ -86,7 +86,7 @@
 	<h3 class="font-bold">Price per year</h3>
 	<p class="price text-xl mb-3">
 		<span v-text="locale.currency.trim()" class="currency-sign">€</span>
-		<span v-text="price"><?= $certified->price()->regular(1) ?></span>
+		<span v-text="price"><?= number_format($certified->price()->regular((int)($people ?? 1)), 0, '.', ',') ?></span>
 	</p>
 	<ul class="text-xs color-gray-700">
 		<li>Price + VAT if applicable.</li>
