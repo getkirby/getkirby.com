@@ -276,7 +276,7 @@ createApp({
 		businessName: "<?= $name ?? '' ?>",
 		businessType: "<?= $type ?? '' ?>",
 		location: "<?= $location ?? '' ?>",
-		description: "<?= $summary ?? '' ?>",
+		summary: "<?= $summary ?? '' ?>",
 
 		// business info
 		website: "",

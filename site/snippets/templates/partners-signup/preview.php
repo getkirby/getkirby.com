@@ -45,7 +45,7 @@
 	color: var(--color-text-dimmed);
 }
 
-.partner-listing-description {
+.partner-listing-summary {
 	font-size: var(--text-base);
 	line-height: var(--leading-normal);
 	color: var(--color-text-dimmed);
@@ -188,18 +188,18 @@
 	</aside>
 	<p
 		v-if="personalInfo.tier === 'certified'"
-		class="field partner-listing-description"
+		class="field partner-listing-summary"
 	>
 		<label>
-			<span :style="labelStyle(personalInfo.description)">
+			<span :style="labelStyle(personalInfo.summary)">
 				Tell the audience about yourself in 140 characters or less. Describe your strengths as company and let them know why they should choose you.
 			</span>
 			<textarea
-				name="description"
+				name="summary"
 				:disabled="renew"
 				rows="2"
 				maxlength="140"
-				v-model="personalInfo.description"
+				v-model="personalInfo.summary"
 			></textarea>
 		</label>
 	</p>
