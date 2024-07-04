@@ -31,9 +31,7 @@ return [
   'cache' => [
     'pages' => [
       'active' => true,
-      'ignore' => function ($page) {
-        return $page->title()->value() === 'Do not cache me';
-      }
+      'ignore' => fn ($page) => $page->title()->value() === 'Do not cache me'
     ]
   ]
 ];
@@ -132,9 +130,7 @@ return [
       'host'   => 'localhost',
       'port'   => '11211',
       'prefix' => 'pages',
-      'ignore' => function ($page) {
-        return $page->id() === 'something';
-      }
+      'ignore' => fn ($page) => $page->id() === 'something'
     ]
   ]
 ];
@@ -179,7 +175,6 @@ return function ($kirby) {
   }
 
   return compact('apiData');
-
 };
 ```
 

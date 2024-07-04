@@ -47,9 +47,7 @@ You can define arguments for a method like this:
 Kirby::plugin('my/plugin', [
     'collectionMethods' => [
          'toCustomArray' => function ($field) {
-            return $this->toArray(function ($item) use ($field) {
-                return $item->$field();
-            });
+            return $this->toArray(fn ($item) => $item->$field());
         }
     ]
 ]);

@@ -54,9 +54,9 @@ And there's a new [Sitemap plugin](https://gitlab.com/cre8ivclick/sitemapper) wi
 In a multi-language site, you can use `$page->translation($langCode)->exists()` to check if a translation file in the given language exists. You can also use this to filter pages by existing translation.
 
 ```php
-$translatedPages = $page->children()->filter(function($child) use($kirby) {
-    return $child->translation($kirby->language()->code())->exists();
-});
+$translatedPages = $page->children()->filter(
+	fn ($child) => $child->translation($kirby->language()->code())->exists()
+);
 ```
 
 If you want, you can wrap this code in a custom method. Keep in mind that this doesn't mean the page was actually translated. If you want to make sure that a page is fully translated, a checkbox or toggle field that marks a translation as ready for publication is the better option.

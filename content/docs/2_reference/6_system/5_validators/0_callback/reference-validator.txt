@@ -4,8 +4,9 @@ Text:
 ## In your code
 
 ```php
-V::callback(['green', 'blue'], function ($value) {
-  return count($value) === count(array_intersect($value, ['red', 'green', 'blue']));
-});
+V::callback(
+	['green', 'blue'],
+	fn ($value) => count($value) === count(array_intersect($value, ['red', 'green', 'blue']))
+);
 ```
 

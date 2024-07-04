@@ -4,19 +4,19 @@ Text:
 
 ```php
 // fetch files with a caption
-$files = $page->files()->filter(function($file) {
-  return $file->caption() != '';
-});
+$files = $page->files()->filter(
+	fn ($file) => $file->caption() != ''
+);
 
 // fetch files grouped by a gallery field
-$images = $page->images()->filter(function($image) {
-  return $image->gallery() == 'gallery-2';
-});
+$images = $page->images()->filter(
+	fn ($image) => $image->gallery() == 'gallery-2'
+);
 
 // fetch large files
-$largeFiles = $page->files()->filter(function($file) {
-  return $file->size() > (1024*1024*2);
-});
+$largeFiles = $page->files()->filter(
+	fn ($file) => $file->size() > (1024*1024*2)
+);
 ```
 
 ## More information

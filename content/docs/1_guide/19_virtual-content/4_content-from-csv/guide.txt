@@ -48,11 +48,11 @@ function csv(string $file, string $delimiter = ','): array
     $csv = array_map(function($d) use($delimiter) {
         return str_getcsv($d, $delimiter);
     }, $lines);
-    
+
     array_walk($csv, function(&$a) use ($csv) {
        $a = array_combine($csv[0], $a);
     });
-   
+
     array_shift($csv);
 
     return $csv;
@@ -78,21 +78,22 @@ class AnimalsPage extends Page
         }
 
         $csv      = csv($this->root() . '/animals.csv', ';');
-        $children = array_map(function ($animal) {
-            return [
-                'slug'     => Str::slug($animal['Scientific Name']),
-                'template' => 'animal',
-                'model'    => 'animal',
-                'num'      => 0,
-                'content'  => [
-                    'title'       => $animal['Scientific Name'],
-                    'commonName'  => $animal['Common Name'],
-                    'description' => $animal['Description'],
-                    'uuid'        => Uuid::generate(),
+        $children = A::map(
+				    $csv,
+				    fn ($animal) => [
+								'slug'     => Str::slug($animal['Scientific Name']),
+								'template' => 'animal',
+								'model'    => 'animal',
+								'num'      => 0,
+								'content'  => [
+										'title'       => $animal['Scientific Name'],
+										'commonName'  => $animal['Common Name'],
+										'description' => $animal['Description'],
+										'uuid'        => Uuid::generate(),
 
-                ]
-            ];
-        }, $csv);
+								]
+						]
+        );
 
         return $this->children = Pages::factory($children, $this);
     }

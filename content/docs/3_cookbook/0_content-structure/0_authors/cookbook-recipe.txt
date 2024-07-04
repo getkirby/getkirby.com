@@ -152,7 +152,9 @@ In that template you can fetch all authors from the articles and build a list ou
   // fetch all unique author ids from all articles
   $ids = $articles->pluck('author', '-', true);
   // get a list of all authors filtered by the ones with articles
-  $authors = $kirby->users()->filter(fn ($user) => in_array($user->uuid()->toString(), $ids, true));
+  $authors = $kirby->users()->filter(
+		fn ($user) => in_array($user->uuid()->toString(), $ids, true)
+	);
 ?>
 
 <h1>Authors</h1>

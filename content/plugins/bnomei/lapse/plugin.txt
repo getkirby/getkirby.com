@@ -26,9 +26,7 @@ Preview:
 
 ```php
 $key  = crc32($page->url());
-$data = lapse($key, function () {
-    return [1, 2, 3];
-});
+$data = lapse($key, fn () => [1, 2, 3]);
 ```
 
 ----
@@ -39,11 +37,9 @@ Example:
 $keyFromObjects = [$page, $page->files()];
 $data = lapse(
     $keyFromObjects, // will check modified
-    function () use ($page) {
-        return $page->files()->toArray(
-          fn ($file) => $file->niceSize()
-        );
-    }
+    fn () => $page->files()->toArray(
+		    fn ($file) => $file->niceSize()
+		)
 ); // expires when any timestamp changes
 ```
 

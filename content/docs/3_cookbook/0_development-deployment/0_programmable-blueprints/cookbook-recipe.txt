@@ -446,9 +446,10 @@ And create `/blueprints/sections/notes.php` with the following code:
 <?php
 
 $blueprints = kirby()->blueprints();
-$blueprints = array_filter($blueprints, function($blueprint) {
-    return in_array($blueprint, ['error', 'home', 'about']) === false;
-});
+$blueprints = array_filter(
+	$blueprints,
+	fn ($blueprint) => in_array($blueprint, ['error', 'home', 'about']) === false
+);
 
 return [
     'type'      => 'pages',
@@ -484,9 +485,10 @@ From `blueprints.php` we now only return an array of blueprints:
 <?php
 
 $blueprints = kirby()->blueprints();
-return array_filter($blueprints, function($blueprint) {
-    return in_array($blueprint, ['error', 'home', 'about']) === false;
-});
+return array_filter(
+		$blueprints,
+		fn ($blueprint) => in_array($blueprint, ['error', 'home', 'about']) === false
+);
 ```
 
 And load this array for example in the `notes.php` section:
