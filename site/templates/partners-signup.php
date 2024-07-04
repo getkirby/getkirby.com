@@ -11,12 +11,12 @@
 			<?= $page->description() ?>
 		</p>
 
-		<?php if ($statusMessage): ?>
+		<?php if ($message): ?>
 		<aside class="pt-6">
-			<div class="block box box--<?= $statusType ?>">
+			<div class="block box box--<?= $status ?>">
 				<?php snippet('kirbytext/box', [
-					'type' => $statusType,
-					'text' => $statusMessage
+					'type' => $status,
+					'text' => $message
 				]) ?>
 			</div>
 		</aside>

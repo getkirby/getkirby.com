@@ -99,6 +99,8 @@
 		style="--columns: 2; gap: 0"
 		@submit="submit"
 	>
+		<input type="hidden" name="timestamp" :value="locale.timestamp">
+
 		<div>
 			<fieldset class="mb-6">
 				<legend class="label">Partnership</legend>
@@ -237,7 +239,6 @@
 					Back
 				</button>
 
-				<input type="hidden" name="timestamp" :value="locale.timestamp">
 				<button
 					:disabled="isProcessing"
 					type="submit"

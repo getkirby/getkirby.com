@@ -12,12 +12,12 @@
 			</p>
 		</div>
 
-		<?php if ($statusMessage): ?>
+		<?php if ($message): ?>
 		<aside class="pt-6">
-			<a href="/try" class="block box box--<?= $statusType ?>">
+			<a href="/try" class="block box box--<?= $status ?>">
 				<?php snippet('kirbytext/box', [
-					'type' => $statusType,
-					'text' => $statusMessage
+					'type' => $status,
+					'text' => $message
 				]) ?>
 			</a>
 		</aside>

@@ -7,8 +7,6 @@ use Kirby\Cms\Page;
 use Kirby\Http\Remote;
 
 return function (App $kirby, Page $page) {
-	$statusMessage = $statusType = null;
-
 	if ($kirby->request()->is('POST') === true) {
 		$timestamp    = explode(':', get('timestamp'));
 		$people       = get('people');
@@ -89,11 +87,11 @@ return function (App $kirby, Page $page) {
 				throw new Exception($response['error']['message'] . '(' . $response['error']['type'] . ')');
 			}
 
-			$statusMessage = 'Thank you for your application! We will get in touch with you soon.';
-			$statusType    = 'success';
+			$status  = 'success';
+			$message = 'Thank you for your application! We will get in touch with you soon.';
 		} catch (Throwable $e) {
-			$statusMessage = $e->getMessage();
-			$statusType    = 'alert';
+			$status  = 'alert';
+			$message = $e->getMessage();
 		}
 	}
 
@@ -104,12 +102,12 @@ return function (App $kirby, Page $page) {
 	}
 
 	return [
-		'certified'     => Product::PartnerCertified,
-		'people'        => $people ?? null,
-		'questions'     => $page->find('answers')->children(),
-		'regular'       => Product::PartnerRegular,
-		'renew'         => $renew,
-		'statusMessage' => $statusMessage,
-		'statusType'    => $statusType,
+		'certified' => Product::PartnerCertified,
+		'message'   => $message ?? null,
+		'people'    => $people ?? null,
+		'questions' => $page->find('answers')->children(),
+		'regular'   => Product::PartnerRegular,
+		'renew'     => $renew ?? null,
+		'status'    => $status ?? null,
 	];
 };
