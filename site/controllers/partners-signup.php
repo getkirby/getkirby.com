@@ -97,10 +97,25 @@ return function (App $kirby, Page $page) {
 		}
 	}
 
+	if ($renew = get('renew')) {
+		if ($renew = page('partners')->find($renew)) {
+			$form = [
+				'plan'     => $renew->plan(),
+				'people'   => $renew->people(),
+				'name'     => $renew->title(),
+				'type'     => $renew->subtitle(),
+				'location' => $renew->location(),
+				'summary'  => $renew->summary(),
+			];
+		}
+	}
+
 	return [
 		'certified'     => Product::PartnerCertified,
+		'form'          => $form ?? [],
 		'questions'     => $page->find('answers')->children(),
 		'regular'       => Product::PartnerRegular,
+		'renew'         => $renew !== null,
 		'statusMessage' => $statusMessage,
 		'statusType'    => $statusType,
 	];

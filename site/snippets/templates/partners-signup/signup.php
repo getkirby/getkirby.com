@@ -171,7 +171,10 @@
 				</section>
 			</div>
 
-			<button type="button" class="btn btn--filled" @click="switchToDetails">
+			<button v-if="renew" type="submit" class="btn btn--filled" :disabled="isProcessing">
+				<span v-if="isProcessing" v-cloak><?= icon('loader') ?></span><span v-else><?= icon('verified') ?></span> Renew now
+			</button>
+			<button v-else type="button" class="btn btn--filled" @click="switchToDetails">
 				<?= icon('icon-arrow') ?> Apply now
 			</button>
 		</div>
@@ -280,14 +283,14 @@ createApp({
 	// user-generated props
 	personalInfo: {
 		// plan
-		people: "1",
-		tier: "certified",
+		people: "<?= $people ?? '1' ?>",
+		tier: "<?= $plan ?? 'certified' ?>",
 
 		// listing fields
-		businessName: "",
-		businessType: "",
-		location: "",
-		description: "",
+		businessName: "<?= $name ?? '' ?>",
+		businessType: "<?= $type ?? '' ?>",
+		location: "<?= $location ?? '' ?>",
+		description: "<?= $summary ?? '' ?>",
 
 		// business info
 		website: "",
@@ -307,6 +310,7 @@ createApp({
 
 	// dynamic props
 	isProcessing: false,
+	renew: <?= $renew ? 'true' : 'false' ?>,
 	view: "info",
 
 	// computed

@@ -117,13 +117,13 @@
 		<p class="field" v-cloak v-else>
 			<label>
 				<span :style="labelStyle(personalInfo.businessType)">Type of business <abbr title="Required" aria-hidden>*</abbr></span>
-				<input name="businessType" :required="view === 'details'" type="text" v-model="personalInfo.businessType">
+				<input name="businessType" :required="view === 'details'" :disabled="renew" type="text" v-model="personalInfo.businessType">
 			</label>
 		</p>
 		<h4 class="field h3">
 			<label>
 				<span :style="labelStyle(personalInfo.businessName)">Your business name <abbr title="Required" aria-hidden>*</abbr></span>
-				<input name="businessName" :required="view === 'details'" type="text" v-model="personalInfo.businessName">
+				<input name="businessName" :required="view === 'details'" :disabled="renew" type="text" v-model="personalInfo.businessName">
 			</label>
 		</h4>
 	</header>
@@ -135,20 +135,20 @@
 		<p class="field" v-if="personalInfo.tier === 'certified'">
 			<label>
 				<span :style="labelStyle(personalInfo.businessType)">Type of business <abbr title="Required" aria-hidden>*</abbr></span>
-				<input name="businessType" :required="view === 'details'" type="text" v-model="personalInfo.businessType">
+				<input name="businessType" :required="view === 'details'" :disabled="renew" type="text" v-model="personalInfo.businessType">
 			</label>
 		</p>
 		<p class="field partner-listing-location">
 			<label>
 				<span :style="labelStyle(personalInfo.location)">City, Country <abbr title="Required" aria-hidden>*</abbr></span>
-				<input name="location" :required="view === 'details'" type="text" v-model="personalInfo.location">
+				<input name="location" :required="view === 'details'" :disabled="renew" type="text" v-model="personalInfo.location">
 			</label>
 		</p>
 	</aside>
 	<p class="field partner-listing-description" v-if="personalInfo.tier === 'certified'">
 		<label>
 			<span :style="labelStyle(personalInfo.description)">Tell the audience about yourself in 140 characters or less. Describe your strengths as company and let them know why they should choose you.</span>
-			<textarea name="description" rows="2" maxlength="140" v-model="personalInfo.description"></textarea>
+			<textarea name="description" :disabled="renew" rows="2" maxlength="140" v-model="personalInfo.description"></textarea>
 		</label>
 	</p>
 </article>

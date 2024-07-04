@@ -3,7 +3,9 @@
 <article>
 
 	<header class="mb-12 max-w-xl">
-		<h1 class="h1 mb-6"><?= $page->title() ?></h1>
+		<h1 class="h1 mb-6">
+			<?= $renew ? 'Renew your membership' : $page->title() ?>
+		</h1>
 
 		<p class="text-xl leading-snug color-gray-700">
 			<?= $page->description() ?>
@@ -22,7 +24,10 @@
 	</header>
 
 	<section class="mb-42">
-		<?php snippet('templates/partners-signup/signup') ?>
+		<?php snippet('templates/partners-signup/signup', [
+			...$form,
+			'renew' => $renew
+		]) ?>
 	</section>
 
 	<section class="mb-42">
