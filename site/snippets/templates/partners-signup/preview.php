@@ -115,9 +115,12 @@
 	class="partner-listing"
 >
 	<header class="partner-listing-header">
-		<p class="partner-listing-label" v-if="personalInfo.tier === 'certified'">
-			Certified Kirby Partner <?= icon('verified') ?>
-		</p>
+		<button type="button" onclick="infoDialog.showModal()" v-if="personalInfo.tier === 'certified'">
+			<p class="flex items-center text-xs" style="gap: var(--spacing-1)">
+				Certified Kirby Partner
+				<?= icon('verified') ?>
+			</p>
+		</button>
 		<p class="field" v-cloak v-else>
 			<label>
 				<span :style="labelStyle(personalInfo.businessType)">

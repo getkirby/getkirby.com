@@ -36,3 +36,5 @@
 	</section>
 
 </article>
+
+<?php snippet('templates/partners/info-dialog') ?>

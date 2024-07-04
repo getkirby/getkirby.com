@@ -1,21 +1,21 @@
 <style>
-.dialog[open] {
+.info-dialog[open] {
 	overflow: visible;
 }
-.dialog:modal {
+.info-dialog:modal {
 	max-height: calc(100% - 2rem);
 	max-width: calc(100% - 2rem);
 }
-.dialog-form {
+.info-dialog-form {
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
 	max-height: calc(100vh - 2rem);
 }
-.dialog-body {
+.info-dialog-body {
 	overflow-y: auto;
 }
-.dialog-cancel-button {
+.info-dialog-cancel-button {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -41,13 +41,13 @@
 }
 </style>
 
-<dialog class="dialog" id="infoDialog" style="width: 35rem" onclick="event.target === this && this.close()">
-	<form id="infoDialogForm" class="dialog-form relative" method="dialog">
+<dialog class="dialog info-dialog" id="infoDialog" style="width: 35rem" onclick="event.target === this && this.close()">
+	<form id="infoDialogForm" class="info-dialog-form relative" method="dialog">
 		<figure class="badge-banner">
 			<?= svg('assets/images/certified-partner-landscape.svg') ?>
 		</figure>
 
-		<div class="p-6 dialog-body">
+		<div class="p-6 info-dialog-body">
 			<div class="prose text-base mb-6">
 				<h3>Our certification process</h3>
 				<p>For each partner application, we perform a manual review with the help of testing tools. Our review includes checks for crucial web vitals and best practices in development, design and content structure.</p>
@@ -65,5 +65,5 @@
 			</ul>
 		</div>
 	</form>
-	<button form="infoDialogForm" class="dialog-cancel-button"><?= icon('cancel-small') ?></button>
+	<button form="infoDialogForm" class="info-dialog-cancel-button"><?= icon('cancel-small') ?></button>
 </dialog>
