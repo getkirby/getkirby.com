@@ -4,7 +4,7 @@
 
 	<header class="mb-12 max-w-xl">
 		<h1 class="h1 mb-6">
-			<?= $renew ? 'Renew your membership' : $page->title() ?>
+			<?= $renew ? 'Renew your partnership' : $page->title() ?>
 		</h1>
 
 		<p class="text-xl leading-snug color-gray-700">
