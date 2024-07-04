@@ -32,14 +32,12 @@
 	padding: var(--spacing-3);
 }
 
-.signup .benefits li,
-.signup .requirements li {
+.signup :where(.benefits, .requirements) li {
 	display: flex;
 	align-items: baseline;
 	gap: var(--spacing-2);
 }
-.signup .benefits li .icon,
-.signup .requirements li .icon {
+.signup :where(.benefits, .requirements) li .icon {
 	flex-shrink: 0;
 	height: 1em;
 }
@@ -67,8 +65,7 @@
 .signup .btn {
 	width: 100%;
 }
-.signup .btn svg,
-.signup .btn strong {
+.signup .btn :where(svg, strong) {
 	color: var(--color-green-500);
 }
 
@@ -98,9 +95,9 @@
 	<form
 		action="<?= url('partners/join') ?>"
 		method="POST"
-		@submit="submit"
 		class="columns dialog-form"
 		style="--columns: 2; gap: 0"
+		@submit="submit"
 	>
 		<div>
 			<fieldset class="mb-6">
@@ -110,9 +107,9 @@
 						<input
 							type="radio"
 							name="tier"
-							v-model="personalInfo.tier"
+							v-model="form.tier"
 							value="regular"
-							:disabled="view === 'details' && personalInfo.tier !== 'regular'"
+							:disabled="view === 'details' && form.tier !== 'regular'"
 						/>
 						Regular partner
 					</label>
@@ -120,9 +117,9 @@
 						<input
 							type="radio"
 							name="tier"
-							v-model="personalInfo.tier"
+							v-model="form.tier"
 							value="certified"
-							:disabled="view === 'details' && personalInfo.tier !== 'certified'"
+							:disabled="view === 'details' && form.tier !== 'certified'"
 							checked
 						/>
 						Certified partner
@@ -137,9 +134,9 @@
 						<input
 							type="radio"
 							name="people"
-							v-model="personalInfo.people"
+							v-model="form.people"
 							value="1"
-							:disabled="view === 'details' && personalInfo.people !== '1'"
+							:disabled="view === 'details' && form.people !== '1'"
 							<?php if (($people ?? '1') === '1'): ?>checked<?php endif ?>
 						/>
 						1
@@ -148,9 +145,9 @@
 						<input
 							type="radio"
 							name="people"
-							v-model="personalInfo.people"
+							v-model="form.people"
 							value="2"
-							:disabled="view === 'details' && personalInfo.people !== '2'"
+							:disabled="view === 'details' && form.people !== '2'"
 							<?php if (($people ?? '1') === '2'): ?>checked<?php endif ?>
 						/>
 						2
@@ -159,9 +156,9 @@
 						<input
 							type="radio"
 							name="people"
-							v-model="personalInfo.people"
+							v-model="form.people"
 							value="3"
-							:disabled="view === 'details' && personalInfo.people !== '3'"
+							:disabled="view === 'details' && form.people !== '3'"
 							<?php if (($people ?? '1') === '3'): ?>checked<?php endif ?>
 						/>
 						3
@@ -170,9 +167,9 @@
 						<input
 							type="radio"
 							name="people"
-							v-model="personalInfo.people"
+							v-model="form.people"
 							value="4+"
-							:disabled="view === 'details' && personalInfo.people !== '4+'"
+							:disabled="view === 'details' && form.people !== '4+'"
 							<?php if (($people ?? '1') === '4+'): ?>checked<?php endif ?>
 						/>
 						4+
@@ -182,18 +179,10 @@
 
 			<section>
 				<h3 class="label">Your listing</h3>
-
 				<div class="rounded bg-light" style="padding: 2px">
-					<?php if ($renew): ?>
-					<article class="partner-listing-static" v-if="personalInfo.tier === 'certified'">
-					<?php snippet('templates/partners/partner.certified', ['partner' => $renew, 'placeholder' => true, 'lazy' => false]) ?>
-					</article>
-					<article class="partner-listing-static" v-else v-cloak>
-					<?php snippet('templates/partners/partner', ['partner' => $renew, 'placeholder' => true]) ?>
-					</article>
-					<?php else: ?>
-					<?php snippet('templates/partners-signup/preview') ?>
-					<?php endif ?>
+					<?php snippet('templates/partners-signup/preview', [
+						'renew' => $renew
+					]) ?>
 				</div>
 			</section>
 		</div>
@@ -203,7 +192,10 @@
 			class="flex flex-column justify-between right-column"
 		>
 			<div>
-				<?php snippet('templates/partners-signup/info', ['people' => $people ?? 1, 'renew' => $renew]) ?>
+				<?php snippet('templates/partners-signup/info', [
+					'people' => $people ?? 1,
+					'renew'  => $renew
+				]) ?>
 			</div>
 
 			<?php if ($renew): ?>
@@ -221,7 +213,8 @@
 				type="button"
 				class="btn btn--filled" @click="switchToDetails"
 			>
-				<?= icon('icon-arrow') ?> Apply now
+				<?= icon('icon-arrow') ?>
+				Apply now
 			</button>
 			<?php endif ?>
 		</div>
@@ -231,7 +224,9 @@
 			v-cloak
 			class="flex flex-column justify-between right-column"
 		>
-			<?php snippet('templates/partners-signup/form') ?>
+			<div>
+				<?php snippet('templates/partners-signup/form') ?>
+			</div>
 
 			<div class="submit-buttons">
 				<button
@@ -285,7 +280,7 @@ createApp({
 	},
 
 	// user-generated props
-	personalInfo: {
+	form: {
 		// plan
 		people: "<?= $people ?? '1' ?>",
 		tier: "certified",
@@ -318,11 +313,11 @@ createApp({
 
 	// computed
 	get minimumProjects() {
-		return this.personalInfo.tier === "certified" ? 4 : 2;
+		return this.form.tier === "certified" ? 4 : 2;
 	},
 	get price() {
-		const tier = this.personalInfo.tier;
-		const people = this.personalInfo.people;
+		const tier = this.form.tier;
+		const people = this.form.people;
 
 		const price = this.locale.prices[tier][people];
 

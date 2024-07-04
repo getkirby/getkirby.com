@@ -9,7 +9,7 @@
 			<span class="icon"><?= icon('star') ?></span>
 			Exposure and traffic from getkirby.com
 		</li>
-		<li v-if="personalInfo.tier === 'certified'">
+		<li v-if="form.tier === 'certified'">
 			<span class="icon"><?= icon('star') ?></span>
 			<span>Project gallery with up to <span class="extra">6 projects</span></span>
 		</li>
@@ -32,7 +32,7 @@
 	</ul>
 </section>
 
-<section class="mb-6" v-if="personalInfo.tier === 'certified'">
+<section class="mb-6" v-if="form.tier === 'certified'">
 	<h3 class="font-bold mb-1">Certified partner benefits</h3>
 	<ul class="benefits">
 		<li class="extra">
@@ -64,7 +64,7 @@
 
 <section class="mb-6">
 	<h3 class="font-bold mb-1">Requirements</h3>
-	<ul class="requirements" v-if="personalInfo.tier === 'certified'">
+	<ul class="requirements" v-if="form.tier === 'certified'">
 		<li>
 			<span class="icon"><?= icon('check') ?></span>
 			4 completed Kirby projects
