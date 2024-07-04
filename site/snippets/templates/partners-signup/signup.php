@@ -203,7 +203,7 @@
 			class="flex flex-column justify-between right-column"
 		>
 			<div>
-				<?php snippet('templates/partners-signup/info', ['people' => $people ?? 1]) ?>
+				<?php snippet('templates/partners-signup/info', ['people' => $people ?? 1, 'renew' => $renew]) ?>
 			</div>
 
 			<?php if ($renew): ?>

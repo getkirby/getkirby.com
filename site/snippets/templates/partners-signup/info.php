@@ -90,7 +90,9 @@
 	</p>
 	<ul class="text-xs color-gray-700">
 		<li>Price + VAT if applicable.</li>
+		<?php if (!$renew): ?>
 		<li>You will be charged once your application has been accepted.</li>
+		<?php endif ?>
 		<li>Your partnership will <em>not</em> automatically renew.</li>
 	</ul>
 </section>
