@@ -14,9 +14,9 @@
 
 	<?php if ($message): ?>
 	<aside class="mb-6">
-		<div class="block box box--<?= $status ?>">
+		<div class="block box box--alert">
 			<?php snippet('kirbytext/box', [
-				'type' => $status,
+				'type' => 'alert',
 				'text' => $message
 			]) ?>
 		</div>

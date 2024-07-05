@@ -67,7 +67,7 @@ return function (App $kirby, Page $page) {
 
 				$checkout = $product->checkout('buy', [
 					...$checkoutData,
-					'return_url' => url('partners/signup/success:renewed')
+					'return_url' => url('partners/join/success/partnership:renewed')
 				]);
 
 				go($checkout);
@@ -108,11 +108,9 @@ return function (App $kirby, Page $page) {
 				throw new Exception($response['error']['message'] . '(' . $response['error']['type'] . ')');
 			}
 
-			$status  = 'success';
-			$message = 'Thank you for your application! We will get in touch with you soon.';
+			go('partners/join/success');
 
 		} catch (Throwable $e) {
-			$status  = 'alert';
 			$message = $e->getMessage();
 		}
 	}
@@ -125,15 +123,6 @@ return function (App $kirby, Page $page) {
 		}
 	}
 
-	// success messages for Paddle checkout returns
-	if ($success = param('success')) {
-		$status  = 'success';
-		$message = match ($success) {
-			'renewed' => 'Thank your for renewing your partnership',
-			default   => 'We don\'t really know what was successful'
-		};
-	}
-
 	return [
 		'certified' => Product::PartnerCertified,
 		'message'   => $message ?? null,
@@ -142,6 +131,5 @@ return function (App $kirby, Page $page) {
 		'questions' => $page->find('answers')->children(),
 		'regular'   => Product::PartnerRegular,
 		'renew'     => $renew ?? null,
-		'status'    => $status ?? null,
 	];
 };
