@@ -1,6 +1,7 @@
 <?php
 
 use Buy\Paddle;
+use Buy\Passthrough;
 use Buy\Product;
 use Kirby\Cms\App;
 use Kirby\Cms\Page;
@@ -62,12 +63,15 @@ return function (App $kirby, Page $page) {
 			];
 
 			$checkoutData = [
-				'expires' => date('Y-m-d', strtotime('+2 months')),
-				'prices'  => $prices,
+				'expires'     => date('Y-m-d', strtotime('+2 months')),
+				'passthrough' => new Passthrough(multiplier: $peopleNum),
+				'prices'      => $prices,
 			];
 
 			// handle renewals
 			if ($renew) {
+				$checkoutData['passthrough']->partner = $renew->uid();
+
 				$checkout = $product->checkout('buy', [
 					...$checkoutData,
 					'return_url' => url('partners/join/success/partnership:renewed')
