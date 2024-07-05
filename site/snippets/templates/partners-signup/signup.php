@@ -108,20 +108,20 @@
 					<label>
 						<input
 							type="radio"
-							name="tier"
-							v-model="form.tier"
+							name="plan"
+							v-model="form.plan"
 							value="regular"
-							:disabled="view === 'details' && form.tier !== 'regular'"
+							:disabled="view === 'details' && form.plan !== 'regular'"
 						/>
 						Regular partner
 					</label>
 					<label>
 						<input
 							type="radio"
-							name="tier"
-							v-model="form.tier"
+							name="plan"
+							v-model="form.plan"
 							value="certified"
-							:disabled="view === 'details' && form.tier !== 'certified'"
+							:disabled="view === 'details' && form.plan !== 'certified'"
 							checked
 						/>
 						Certified partner
@@ -285,7 +285,7 @@ createApp({
 	form: {
 		// plan
 		people: "<?= $people ?? '1' ?>",
-		tier: "<?= $plan ?>",
+		plan: "<?= $plan ?>",
 
 		// listing fields
 		businessName: "",
@@ -315,13 +315,13 @@ createApp({
 
 	// computed
 	get minimumProjects() {
-		return this.form.tier === "certified" ? 4 : 2;
+		return this.form.plan === "certified" ? 4 : 2;
 	},
 	get price() {
-		const tier = this.form.tier;
+		const plan = this.form.plan;
 		const people = this.form.people;
 
-		const price = this.locale.prices[tier][people];
+		const price = this.locale.prices[plan][people];
 
 		const formatter = new Intl.NumberFormat("en");
 		return formatter.format(price);

@@ -1,6 +1,6 @@
 <?php if ($renew): ?>
 <article
-	v-if="form.tier === 'certified'"
+	v-if="form.plan === 'certified'"
 	class="partner-listing-static"
 >
 	<?php snippet('templates/partners/partner.certified', [
@@ -105,7 +105,7 @@
 	resize: none;
 }
 
-.partner-listing[data-tier="regular"] {
+.partner-listing[data-plan="regular"] {
 	align-items: center;
 	grid-template-columns: 4.5rem 1fr;
 	grid-template-areas:
@@ -113,15 +113,15 @@
 		"image footer";
 	grid-column-gap: var(--spacing-6);
 }
-.partner-listing[data-tier="regular"] .partner-listing-header {
+.partner-listing[data-plan="regular"] .partner-listing-header {
 	align-self: end;
 	margin-bottom: 2px;
 }
-.partner-listing[data-tier="regular"] .partner-listing-footer {
+.partner-listing[data-plan="regular"] .partner-listing-footer {
 	align-self: start;
 }
 
-.partner-listing[data-tier="certified"] {
+.partner-listing[data-plan="certified"] {
 	--ratio: 2/1;
 	grid-template-areas:
 		"header"
@@ -132,12 +132,12 @@
 </style>
 
 <article
-	:data-tier="form.tier"
-	data-tier="certified"
+	:data-plan="form.plan"
+	data-plan="certified"
 	class="partner-listing"
 >
 	<header class="partner-listing-header">
-		<button type="button" onclick="infoDialog.showModal()" v-if="form.tier === 'certified'">
+		<button type="button" onclick="infoDialog.showModal()" v-if="form.plan === 'certified'">
 			<p class="flex items-center text-xs" style="gap: var(--spacing-1)">
 				Certified Kirby Partner
 				<?= icon('verified') ?>
@@ -173,14 +173,14 @@
 	<figure class="partner-listing-image">
 		<?= icon('image') ?>
 		<span
-			v-if="form.tier === 'certified' && view === 'details'"
+			v-if="form.plan === 'certified' && view === 'details'"
 			v-cloak
 		>
 			We will ask you for an image once your application has been accepted.
 		</span>
 	</figure>
 	<aside class="partner-listing-footer">
-		<p class="field" v-if="form.tier === 'certified'">
+		<p class="field" v-if="form.plan === 'certified'">
 			<label>
 				<span :style="labelStyle(form.businessType)">
 					Type of business <abbr title="Required" aria-hidden>*</abbr>
@@ -208,7 +208,7 @@
 		</p>
 	</aside>
 	<p
-		v-if="form.tier === 'certified'"
+		v-if="form.plan === 'certified'"
 		class="field partner-listing-summary"
 	>
 		<label>
@@ -226,7 +226,7 @@
 </article>
 
 <p
-	v-if="form.tier === 'regular' && view === 'details'"
+	v-if="form.plan === 'regular' && view === 'details'"
 	v-cloak
 	class="partner-listing-image-info"
 >

@@ -72,7 +72,7 @@
 </div>
 
 <div
-	v-if="form.tier === 'certified'"
+	v-if="form.plan === 'certified'"
 	class="checkout-field field mb-6"
 >
 	<label class="label" for="downloadLink">
