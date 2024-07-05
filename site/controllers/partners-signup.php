@@ -54,20 +54,21 @@ return function (App $kirby, Page $page) {
 				$price->currency . ':' . $localizedPrice,
 			];
 
-			$checkout = $product->checkout('buy', [
-				'expires'    => date('Y-m-d', strtotime('+2 months')),
-				'prices'     => $prices,
-				'return_url' => match ($renew === null) {
-					true  => url('partners/signup/success:purchased'),
-					false => url('partners/signup/success:renewed')
-				}
-			]);
+			$checkoutData = [
+				'expires' => date('Y-m-d', strtotime('+2 months')),
+				'prices'  => $prices,
+			];
 
 			// handle renewals
 			if ($renew) {
 				if (!page('partners')->find($renew)) {
 					throw new Exception('Cannot renew partnership for unknown partner.');
 				}
+
+				$checkout = $product->checkout('buy', [
+					...$checkoutData,
+					'return_url' => url('partners/signup/success:renewed')
+				]);
 
 				go($checkout);
 				return;
@@ -82,7 +83,7 @@ return function (App $kirby, Page $page) {
 						'Plan'                    => $tier,
 						'People'                  => $people,
 						'Price'                   => $visitor->currencySign() . $localizedPrice,
-						'Checkout'                => $checkout,
+						'Checkout'                => $product->checkout('buy', $checkoutData),
 						'Business type'           => $businessType,
 						'Own website'             => $website,
 						'Contact person'          => $name,
@@ -128,7 +129,7 @@ return function (App $kirby, Page $page) {
 		$status  = 'success';
 		$message = match ($success) {
 			'renewed' => 'Thank your for renewing your partnership',
-			default   => 'Thank you for joining our partner network'
+			default   => 'We don\'t really know what was successful'
 		};
 	}
 
