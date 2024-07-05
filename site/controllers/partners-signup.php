@@ -7,11 +7,13 @@ use Kirby\Cms\Page;
 use Kirby\Http\Remote;
 
 return function (App $kirby, Page $page) {
+	// submitted form
 	if ($kirby->request()->is('POST') === true) {
+		$visitor      = Paddle::visitor();
 		$timestamp    = explode(':', get('timestamp'));
-		$people       = get('people');
-		$peopleNum    = max(1, min(4, (int)$people));
+		$people       = max(1, min(4, (int)get('people')));
 		$tier         = get('tier');
+
 		$businessName = get('businessName');
 		$businessType = get('businessType');
 		$location     = get('location');
@@ -25,7 +27,6 @@ return function (App $kirby, Page $page) {
 		$email        = get('email');
 		$discord      = get('discord');
 		$notes        = get('notes');
-		$visitor      = Paddle::visitor();
 
 		try {
 			// prevent submissions faster than 1 minute (spam protection)
@@ -34,15 +35,17 @@ return function (App $kirby, Page $page) {
 			}
 
 			$timestampHash = hash_hmac('sha256', $timestamp[0], 'kirby');
+
 			if (hash_equals($timestampHash, $timestamp[1]) !== true) {
 				throw new Exception('Spam protection hash was manipulated');
 			}
 
+			// generate checkout link
 			$product = Product::from('partner-' . $tier);
 			$price   = $product->price();
 
-			$eurPrice       = $product->price('EUR')->regular($peopleNum);
-			$localizedPrice = $price->regular($peopleNum);
+			$eurPrice       = $product->price('EUR')->regular($people);
+			$localizedPrice = $price->regular($people);
 
 			$prices  = [
 				'EUR:' . $eurPrice,
@@ -50,10 +53,20 @@ return function (App $kirby, Page $page) {
 			];
 
 			$checkout = $product->checkout('buy', [
-				'expires' => date('Y-m-d', strtotime('+2 months')),
-				'prices'  => $prices,
+				'expires'    => date('Y-m-d', strtotime('+2 months')),
+				'prices'     => $prices,
+				'return_url' => url('partners/signup')
 			]);
 
+			// handle renewals
+			if ($partner = get('renew')) {
+				if ($partner = page('partners')->find($partner)) {
+					go($checkout);
+					return;
+				}
+			}
+
+			// submit form values to Airtable
 			$response = Remote::post('https://api.airtable.com/v0/appeeHREbUMMaZGRP/tblrKOCF0cGAZmUQR', [
 				'data' => json_encode([
 					'fields' => [
@@ -89,12 +102,14 @@ return function (App $kirby, Page $page) {
 
 			$status  = 'success';
 			$message = 'Thank you for your application! We will get in touch with you soon.';
+
 		} catch (Throwable $e) {
 			$status  = 'alert';
 			$message = $e->getMessage();
 		}
 	}
 
+	// prefill form for renewals
 	if ($renew = param('renew')) {
 		if ($renew = page('partners')->find($renew)) {
 			$people = $renew->people()->value();

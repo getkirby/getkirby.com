@@ -201,6 +201,7 @@
 			</div>
 
 			<?php if ($renew): ?>
+			<input type="hidden" name="renew" value="<?= $renew ?>">
 			<button
 				:disabled="isProcessing"
 				type="submit"
