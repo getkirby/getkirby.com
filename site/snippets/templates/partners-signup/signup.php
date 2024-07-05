@@ -93,7 +93,7 @@
 
 <div v-scope id="signup" class="signup bg-white rounded" @mounted="mounted">
 	<form
-		action="<?= url('partners/join') ?>"
+		action="<?= $kirby->request()->url() ?>"
 		method="POST"
 		class="columns dialog-form"
 		style="--columns: 2; --columns-md: 1; gap: 0"
