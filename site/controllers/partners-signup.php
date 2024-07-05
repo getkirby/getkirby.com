@@ -11,7 +11,8 @@ return function (App $kirby, Page $page) {
 	if ($kirby->request()->is('POST') === true) {
 		$visitor      = Paddle::visitor();
 		$timestamp    = explode(':', get('timestamp'));
-		$people       = max(1, min(4, (int)get('people')));
+		$people       = get('people');
+		$peopleNum    = max(1, min(4, (int)$people));
 		$tier         = get('tier');
 		$renew        = get('renew');
 
@@ -45,8 +46,8 @@ return function (App $kirby, Page $page) {
 			$product = Product::from('partner-' . $tier);
 			$price   = $product->price();
 
-			$eurPrice       = $product->price('EUR')->regular($people);
-			$localizedPrice = $price->regular($people);
+			$eurPrice       = $product->price('EUR')->regular($peopleNum);
+			$localizedPrice = $price->regular($peopleNum);
 
 			$prices  = [
 				'EUR:' . $eurPrice,
