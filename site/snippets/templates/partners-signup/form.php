@@ -73,6 +73,7 @@
 
 <div
 	v-if="form.plan === 'certified'"
+	<?php if ($plan !== 'certified'): ?>v-cloak<?php endif ?>
 	class="checkout-field field mb-6"
 >
 	<label class="label" for="downloadLink">

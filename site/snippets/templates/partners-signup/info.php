@@ -10,11 +10,17 @@
 			<span class="icon"><?= icon('star') ?></span>
 			Exposure and traffic from getkirby.com
 		</li>
-		<li v-if="form.plan === 'certified'">
+		<li
+			v-if="form.plan === 'certified'"
+			<?php if ($plan !== 'certified'): ?>v-cloak<?php endif ?>
+		>
 			<span class="icon"><?= icon('star') ?></span>
 			<span>Project gallery with up to <span class="extra">6 projects</span></span>
 		</li>
-		<li v-else v-cloak>
+		<li
+			v-else
+			<?php if ($plan === 'certified'): ?>v-cloak<?php endif ?>
+		>
 			<span class="icon"><?= icon('star') ?></span>
 			Project gallery with up to 3 projects
 		</li>
@@ -32,12 +38,20 @@
 		</li>
 	</ul>
 
-	<p v-if="form.plan !== 'certified'" v-cloak class="text-xs color-gray-700">
+	<p
+		v-if="form.plan !== 'certified'"
+		<?php if ($plan === 'certified'): ?>v-cloak<?php endif ?>
+		class="text-xs color-gray-700"
+	>
 		More <?= $renew ? '<mark>new benefits</mark>' : 'benefits' ?> as <button class="underline" @click="form.plan = 'certified'">Certified partner</button>…
 	</p>
 </section>
 
-<section class="mb-6" v-if="form.plan === 'certified'">
+<section
+	v-if="form.plan === 'certified'"
+	<?php if ($plan !== 'certified'): ?>v-cloak<?php endif ?>
+	class="mb-6"
+>
 	<h3 class="font-bold mb-1">Certified partner benefits</h3>
 
 	<ul class="benefits">
@@ -71,7 +85,11 @@
 <section class="mb-6">
 	<h3 class="font-bold mb-1">Requirements</h3>
 
-	<ul v-if="form.plan === 'certified'" class="requirements">
+	<ul
+		v-if="form.plan === 'certified'"
+		<?php if ($plan !== 'certified'): ?>v-cloak<?php endif ?>
+		class="requirements"
+	>
 		<li>
 			<span class="icon"><?= icon('check') ?></span>
 			4 completed Kirby projects
@@ -81,7 +99,11 @@
 			1 reviewed project
 		</li>
 	</ul>
-	<ul v-else v-cloak class="requirements">
+	<ul
+		v-else
+		<?php if ($plan === 'certified'): ?>v-cloak<?php endif ?>
+		class="requirements"
+	>
 		<li>
 			<span class="icon"><?= icon('check') ?></span>
 			2 completed Kirby projects

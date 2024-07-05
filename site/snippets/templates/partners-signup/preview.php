@@ -1,6 +1,7 @@
 <?php if ($renew): ?>
 <article
 	v-if="form.plan === 'certified'"
+	<?php if ($plan !== 'certified'): ?>v-cloak<?php endif ?>
 	class="partner-listing-static"
 >
 	<?php snippet('templates/partners/partner.certified', [
@@ -11,7 +12,7 @@
 </article>
 <article
 	v-else
-	v-cloak
+	<?php if ($plan === 'certified'): ?>v-cloak<?php endif ?>
 	class="partner-listing-static"
 >
 	<?php snippet('templates/partners/partner', [

@@ -183,6 +183,7 @@
 				<h3 class="label">Your listing</h3>
 				<div class="rounded bg-light" style="padding: 2px">
 					<?php snippet('templates/partners-signup/preview', [
+						'plan'  => $plan,
 						'renew' => $renew
 					]) ?>
 				</div>
@@ -195,6 +196,7 @@
 		>
 			<div>
 				<?php snippet('templates/partners-signup/info', [
+					'plan'   => $plan,
 					'people' => $people ?? 1,
 					'renew'  => $renew
 				]) ?>
@@ -228,7 +230,7 @@
 			class="flex flex-column justify-between right-column"
 		>
 			<div>
-				<?php snippet('templates/partners-signup/form') ?>
+				<?php snippet('templates/partners-signup/form', ['plan' => $plan]) ?>
 			</div>
 
 			<div class="submit-buttons">
