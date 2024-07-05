@@ -13,6 +13,7 @@ return function (App $kirby, Page $page) {
 		$timestamp    = explode(':', get('timestamp'));
 		$people       = max(1, min(4, (int)get('people')));
 		$tier         = get('tier');
+		$renew        = get('renew');
 
 		$businessName = get('businessName');
 		$businessType = get('businessType');
@@ -55,15 +56,20 @@ return function (App $kirby, Page $page) {
 			$checkout = $product->checkout('buy', [
 				'expires'    => date('Y-m-d', strtotime('+2 months')),
 				'prices'     => $prices,
-				'return_url' => url('partners/signup')
+				'return_url' => match ($renew === null) {
+					true  => url('partners/signup/success:purchased'),
+					false => url('partners/signup/success:renewed')
+				}
 			]);
 
 			// handle renewals
-			if ($partner = get('renew')) {
-				if ($partner = page('partners')->find($partner)) {
-					go($checkout);
-					return;
+			if ($renew) {
+				if (!page('partners')->find($renew)) {
+					throw new Exception('Cannot renew partnership for unknown partner.');
 				}
+
+				go($checkout);
+				return;
 			}
 
 			// submit form values to Airtable
@@ -114,6 +120,15 @@ return function (App $kirby, Page $page) {
 		if ($renew = page('partners')->find($renew)) {
 			$people = $renew->people()->value();
 		}
+	}
+
+	// success messages for Paddle checkout returns
+	if ($success = param('success')) {
+		$status  = 'success';
+		$message = match ($success) {
+			'renewed' => 'Thank your for renewing your partnership',
+			default   => 'Thank you for joining our partner network'
+		};
 	}
 
 	return [
