@@ -96,7 +96,7 @@
 		action="<?= url('partners/join') ?>"
 		method="POST"
 		class="columns dialog-form"
-		style="--columns: 2; gap: 0"
+		style="--columns: 2; --columns-md: 1; gap: 0"
 		@submit="submit"
 	>
 		<input type="hidden" name="timestamp" :value="locale.timestamp">
