@@ -49,7 +49,7 @@ In 2013, I discovered Kirby and instantly fell in love. After working at several
 
 ----
 
-Pluginpage: medienbaecker
+Plugindeveloper: medienbaecker
 
 ----
 

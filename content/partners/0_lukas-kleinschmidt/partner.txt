@@ -30,7 +30,7 @@ Summary: Experienced web developer with in-depth PHP knowledge. Specialized in c
 
 ----
 
-Pluginpage: lukaskleinschmidt
+Plugindeveloper: lukaskleinschmidt
 
 ----
 

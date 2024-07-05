@@ -26,10 +26,6 @@ Contactlink: mailto:hallo@fabianmichael.de
 
 ----
 
-Pluginpage: fabianmichael
-
-----
-
 Languages: English, German
 
 ----

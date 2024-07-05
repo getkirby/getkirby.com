@@ -18,10 +18,6 @@ Location: Gosport, UK
 
 ----
 
-Pluginpage: hashandsalt
-
-----
-
 Plugins:
 
 - snipcart

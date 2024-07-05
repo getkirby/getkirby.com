@@ -30,7 +30,7 @@ Summary: I graduated 2009 from Zurich University of the Arts as Bachelor in Inte
 
 ----
 
-Pluginpage: bnomei
+Plugindeveloper: bnomei
 
 ----
 
