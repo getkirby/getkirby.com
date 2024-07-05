@@ -31,15 +31,22 @@ return function (App $kirby, Page $page) {
 		$notes        = get('notes');
 
 		try {
-			// prevent submissions faster than 1 minute (spam protection)
-			if ($timestamp[0] > time() - 60) {
-				throw new Exception('To protect against spam, we block submissions faster than 1 minute. Please try again, sorry for the inconvenience.');
+			if ($renew && !($renew = page('partners')->find($renew))) {
+				throw new Exception('Cannot renew partnership for unknown partner.');
 			}
 
-			$timestampHash = hash_hmac('sha256', $timestamp[0], 'kirby');
+			// prevent submissions faster than 1 minute (spam protection)
+			// (only needed for new applications because otherwise there will be a redirect to Paddle)
+			if (!$renew) {
+				if ($timestamp[0] > time() - 60) {
+					throw new Exception('To protect against spam, we block submissions faster than 1 minute. Please try again, sorry for the inconvenience.');
+				}
 
-			if (hash_equals($timestampHash, $timestamp[1]) !== true) {
-				throw new Exception('Spam protection hash was manipulated');
+				$timestampHash = hash_hmac('sha256', $timestamp[0], 'kirby');
+
+				if (hash_equals($timestampHash, $timestamp[1]) !== true) {
+					throw new Exception('Spam protection hash was manipulated');
+				}
 			}
 
 			// generate checkout link
@@ -61,10 +68,6 @@ return function (App $kirby, Page $page) {
 
 			// handle renewals
 			if ($renew) {
-				if (!page('partners')->find($renew)) {
-					throw new Exception('Cannot renew partnership for unknown partner.');
-				}
-
 				$checkout = $product->checkout('buy', [
 					...$checkoutData,
 					'return_url' => url('partners/join/success/partnership:renewed')
