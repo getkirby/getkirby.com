@@ -116,7 +116,7 @@
 	<p class="price text-xl mb-3">
 		<span v-text="locale.currency.trim()" class="currency-sign">€</span>
 		<span v-text="price">
-			<?= number_format($certified->price()->regular((int)($people ?? 1)), 0, '.', ',') ?>
+			<?= number_format(${$plan}->price()->regular((int)($people ?? 1)), 0, '.', ',') ?>
 		</span>
 	</p>
 	<ul class="text-xs color-gray-700">
