@@ -9,7 +9,7 @@
 			<?= icon('verified') ?>
 		</p>
 	</button>
-	<?php if ($placeholder ?? false !== true): ?>
+	<?php if (($placeholder ?? false) !== true): ?>
 	<a href="<?= $partner->url() ?>">
 	<?php endif ?>
 		<h3 class="h3 truncate flex mb-3 items-center">
@@ -64,7 +64,7 @@
 		<div class="prose text-sm">
 			<?= $partner->summary()->or(($placeholder ?? false) ? 'Short description about yourself in 140 characters or less: your strengths as company and why the audience should choose you.' : '') ?>
 		</div>
-	<?php if ($placeholder ?? false !== true): ?>
+	<?php if (($placeholder ?? false) !== true): ?>
 	</a>
 	<?php endif ?>
 </article>

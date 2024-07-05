@@ -1,4 +1,4 @@
-<?php if ($placeholder ?? false !== true): ?>
+<?php if (($placeholder ?? false) !== true): ?>
 <a
 	href="<?= $partner->url() ?>"
 	data-region="<?= $partner->region() ?>"
@@ -32,6 +32,6 @@
 			</p>
 		</header>
 	</article>
-<?php if ($placeholder ?? false !== true): ?>
+<?php if (($placeholder ?? false) !== true): ?>
 </a>
 <?php endif ?>
