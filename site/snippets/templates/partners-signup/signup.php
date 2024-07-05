@@ -112,6 +112,7 @@
 							v-model="form.plan"
 							value="regular"
 							:disabled="view === 'details' && form.plan !== 'regular'"
+							<?php if ($plan !== 'certified'): ?>checked<?php endif ?>
 						/>
 						Regular partner
 					</label>
@@ -122,7 +123,7 @@
 							v-model="form.plan"
 							value="certified"
 							:disabled="view === 'details' && form.plan !== 'certified'"
-							checked
+							<?php if ($plan === 'certified'): ?>checked<?php endif ?>
 						/>
 						Certified partner
 					</label>
