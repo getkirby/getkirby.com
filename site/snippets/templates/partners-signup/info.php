@@ -1,7 +1,7 @@
 <section class="mb-6">
 	<h3 class="font-bold mb-1">What you get</h3>
 
-	<ul class="benefits">
+	<ul class="benefits mb-3">
 		<li>
 			<span class="icon"><?= icon('star') ?></span>
 			Your own customizable profile page
@@ -31,6 +31,10 @@
 			More visibility within the Kirby community
 		</li>
 	</ul>
+
+	<p v-if="form.tier !== 'certified'" v-cloak class="text-xs color-gray-700">
+		More <?= $renew ? '<mark>new benefits</mark>' : 'benefits' ?> as <button class="underline" @click="form.tier = 'certified'">Certified partner</button>…
+	</p>
 </section>
 
 <section class="mb-6" v-if="form.tier === 'certified'">

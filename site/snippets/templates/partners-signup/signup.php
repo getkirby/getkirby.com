@@ -285,7 +285,7 @@ createApp({
 	form: {
 		// plan
 		people: "<?= $people ?? '1' ?>",
-		tier: "certified",
+		tier: "<?= $plan ?>",
 
 		// listing fields
 		businessName: "",

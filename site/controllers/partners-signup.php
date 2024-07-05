@@ -120,6 +120,7 @@ return function (App $kirby, Page $page) {
 	// prefill form for renewals
 	if ($renew = param('renew')) {
 		if ($renew = page('partners')->find($renew)) {
+			$plan   = $renew->plan()->value();
 			$people = $renew->people()->value();
 		}
 	}
@@ -137,6 +138,7 @@ return function (App $kirby, Page $page) {
 		'certified' => Product::PartnerCertified,
 		'message'   => $message ?? null,
 		'people'    => $people ?? null,
+		'plan'      => $plan ?? 'certified',
 		'questions' => $page->find('answers')->children(),
 		'regular'   => Product::PartnerRegular,
 		'renew'     => $renew ?? null,
