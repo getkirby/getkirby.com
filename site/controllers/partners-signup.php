@@ -13,7 +13,7 @@ return function (App $kirby, Page $page) {
 		$timestamp    = explode(':', get('timestamp'));
 		$people       = get('people');
 		$peopleNum    = max(1, min(4, (int)$people));
-		$tier         = get('tier');
+		$plan         = get('plan');
 		$renew        = get('renew');
 
 		$businessName = get('businessName');
@@ -43,7 +43,7 @@ return function (App $kirby, Page $page) {
 			}
 
 			// generate checkout link
-			$product = Product::from('partner-' . $tier);
+			$product = Product::from('partner-' . $plan);
 			$price   = $product->price();
 
 			$eurPrice       = $product->price('EUR')->regular($peopleNum);
@@ -80,7 +80,7 @@ return function (App $kirby, Page $page) {
 					'fields' => [
 						'Name'                    => $businessName,
 						'Status'                  => 'Need to review',
-						'Plan'                    => $tier,
+						'Plan'                    => $plan,
 						'People'                  => $people,
 						'Price'                   => $visitor->currencySign() . $localizedPrice,
 						'Checkout'                => $product->checkout('buy', $checkoutData),
