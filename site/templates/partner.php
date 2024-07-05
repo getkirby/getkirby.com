@@ -181,7 +181,7 @@
 <?php endif ?>
 
 <!-- Plugins -->
-<?php if ($plugins = $page->plugins()): ?>
+<?php if (($plugins = $page->plugins()) && $plugins->count() > 0): ?>
 	<div class="text-lg mb-24">
 		<h2 class="h2 mb-12"><?= ucfirst($page->my()) ?> Kirby Plugins</h2>
 		<section class="mb-12">

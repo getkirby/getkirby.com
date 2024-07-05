@@ -231,19 +231,13 @@
 </section>
 
 <section class="mb-42">
-	<h2 class="h3 mb-6"><?= $plugins2021->count() ?> new plugins in 2021</h2>
-	<ul class="columns" style="--columns-sm: 2; --columns-md: 2; --columns: 4; --gap: var(--spacing-6)">
-		<?php foreach ($plugins2021 as $plugin): ?>
+	<h2 class="h3 mb-6"><?= $plugins->count() ?> new plugins in 2021</h2>
+	<ul class="columns" style="--columns-sm: 2; --columns-md: 2; --columns: 4; --gap: var(--spacing-4)">
+		<?php foreach ($plugins as $plugin): ?>
 		<li>
 			<a class="flex items-center" href="<?= $plugin->url() ?>">
-				<figure class="iconbox bg-black color-white mr-3">
-					<?= icon($plugin->icon()) ?>
-				</figure>
 				<div class="truncate">
 					<h3 class="text-sm truncate"><?= $plugin->title() ?></h3>
-					<p class="block font-mono text-xs color-gray-500" style="white-space: nowrap">
-						by <span class="color-black inline-flex truncate"><?= $plugin->parent()->title() ?></span>
-					</p>
 				</div>
 			</a>
 		</li>

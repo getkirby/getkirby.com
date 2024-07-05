@@ -22,7 +22,7 @@ Contactlink: https://juno-hamburg.com/en?utm_source=kirby&utm_medium=organic&utm
 
 ----
 
-Pluginpage: /plugins/junohamburg
+Pluginpage: junohamburg
 
 ----
 
@@ -63,4 +63,4 @@ Uuid: ByAYNdmtvRuMAttp
 
 ----
 
-Text: 
+Text:

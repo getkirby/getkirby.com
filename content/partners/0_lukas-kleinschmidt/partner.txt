@@ -30,16 +30,16 @@ Summary: Experienced web developer with in-depth PHP knowledge. Specialized in c
 
 ----
 
-Pluginpage: /plugins/lukaskleinschmidt
+Pluginpage: lukaskleinschmidt
 
 ----
 
 Plugins:
-- /plugins/lukaskleinschmidt/types
-- /plugins/lukaskleinschmidt/laravel-vite
-- /plugins/lukaskleinschmidt/snippet-controller
-- /plugins/lukaskleinschmidt/resolve
-- /plugins/lukaskleinschmidt/terminal
+- types
+- laravel-vite
+- snippet-controller
+- resolve
+- terminal
 
 ----
 

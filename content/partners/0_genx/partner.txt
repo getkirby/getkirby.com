@@ -30,7 +30,7 @@ Contactlink: https://genx.be/en/contact
 
 ----
 
-Pluginpage: /plugins/genxbe
+Pluginpage: genxbe
 
 ----
 

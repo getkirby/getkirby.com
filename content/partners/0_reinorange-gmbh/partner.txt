@@ -26,7 +26,7 @@ Contactlink: mailto:info@reinorange.com
 
 ----
 
-Pluginpage: /plugins/thathoff
+Pluginpage: thathoff
 
 ----
 

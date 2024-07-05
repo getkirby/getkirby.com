@@ -1,8 +1,11 @@
 <?php
 
 use Kirby\Cms\File;
+use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
+use Kirby\Http\Remote;
+use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 
 class PartnerPage extends DefaultPage
@@ -79,13 +82,53 @@ class PartnerPage extends DefaultPage
 
 	public function plugins(): Pages|null
 	{
-		if (parent::plugins()->isNotEmpty() === true) {
-			$plugins = parent::plugins()->toPages();
+		$id = $this->pluginpage();
 
-			return $plugins->isNotEmpty() ? $plugins : null;
+		if ($id->isEmpty()) {
+			return null;
 		}
 
-		return $this->pluginpage()->toPage()?->children()->limit(6);
+		$url  = 'https://plugins.getkirby.com/' . $id;
+		$json = Remote::get($url . '.json')->json();
+
+		$developer = new Page([
+			'slug'    => $id,
+			'url'     => $url,
+			'content' => [
+				'title' => $json['name']
+			]
+		]);
+
+		if (parent::plugins()->isNotEmpty() === true) {
+			$plugins = A::map(
+				parent::plugins()->yaml(),
+				fn ($plugin) => $json['plugins']['developers/' . $id . '/' . $plugin] ?? null
+			);
+			$plugins = array_filter($plugins);
+		}
+
+		$plugins ??= A::slice($json['plugins'] ?? [], 0, 5);
+		$plugins   = A::map(
+			array_keys($plugins),
+			fn ($plugin) => new Page([
+				'slug'    => $plugin,
+				'parent'  => $developer,
+				'url'     => $plugins[$plugin]['url'],
+				'content' => [
+					'title'       => $plugins[$plugin]['title'],
+					'description' => $plugins[$plugin]['description'],
+					'example'     => $plugins[$plugin]['example'] ?? null
+				],
+				'files' => isset($plugins[$plugin]['card']) ? [
+					[
+						'filename' => basename($plugins[$plugin]['card']),
+						'url'      => $plugins[$plugin]['card']
+					]
+				] : []
+			])
+		);
+
+		return new Pages($plugins);
 	}
 
 	public function type(): Field

@@ -1,3 +1,0 @@
-Title: am-teich
-----
-Github: https://github.com/amteich

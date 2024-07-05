@@ -30,13 +30,17 @@ Summary: I graduated 2009 from Zurich University of the Arts as Bachelor in Inte
 
 ----
 
+Pluginpage: bnomei
+
+----
+
 Plugins:
-- /plugins/bnomei/klub
-- /plugins/bnomei/janitor
-- /plugins/bnomei/boost
-- /plugins/bnomei/storybook
-- /plugins/bnomei/recently-modified
-- /plugins/bnomei/redirects
+- klub
+- janitor
+- boost
+- storybook
+- recently-modified
+- redirects
 
 ----
 

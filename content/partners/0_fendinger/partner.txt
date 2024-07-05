@@ -22,7 +22,7 @@ Region: Europe
 
 ----
 
-Pluginpage: /plugins/fendinger
+Pluginpage: fendinger
 
 ----
 
@@ -57,4 +57,4 @@ Uuid: vlXpGZ7YR9WnXN02
 
 ----
 
-Text: 
+Text:
