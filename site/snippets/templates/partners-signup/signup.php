@@ -91,7 +91,7 @@
 }
 </style>
 
-<div id="signup" class="signup bg-white rounded" v-scope @mounted="mounted">
+<div v-scope id="signup" class="signup bg-white rounded" @mounted="mounted">
 	<form
 		action="<?= url('partners/join') ?>"
 		method="POST"

@@ -22,7 +22,9 @@ class PartnerPage extends DefaultPage
 		$location = $this->location()->value();
 
 		if ($position = mb_strrpos($location, ',')) {
-			return parent::country()->value(trim(Str::substr($location, $position + 1)));
+			return parent::country()->value(
+				trim(Str::substr($location, $position + 1))
+			);
 		}
 
 		return parent::country()->value($location);
@@ -51,13 +53,15 @@ class PartnerPage extends DefaultPage
 			return $languages;
 		}
 
-		$languagesString = $languages->value();
+		$string = $languages->value();
 
-		if ($lastComma = mb_strrpos($languagesString, ',')) {
-			$languagesString = mb_substr($languagesString, 0, $lastComma) . ' &' . mb_substr($languagesString, $lastComma + 1);
+		if ($lastComma = mb_strrpos($string, ',')) {
+			$string =
+				mb_substr($string, 0, $lastComma) . ' &' .
+				mb_substr($string, $lastComma + 1);
 		}
 
-		return $languages->value($languagesString);
+		return $languages->value($string);
 	}
 
 	public function me(): Field
@@ -79,7 +83,7 @@ class PartnerPage extends DefaultPage
 
 	public function peopleLabel(): string
 	{
-		if ((int)$this->people()->value() > 1) {
+		if ($this->people()->toInt() > 1) {
 			return $this->people() . ' people';
 		}
 
@@ -99,6 +103,6 @@ class PartnerPage extends DefaultPage
 
 	public function stripe(): File|null
 	{
-		return $this->images()->findBy('name', 'stripe');
+		return $this->images()->findBy('name', 'stripe') ?? $this->card();
 	}
 }

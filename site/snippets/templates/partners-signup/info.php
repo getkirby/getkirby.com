@@ -1,5 +1,6 @@
 <section class="mb-6">
 	<h3 class="font-bold mb-1">What you get</h3>
+
 	<ul class="benefits">
 		<li>
 			<span class="icon"><?= icon('star') ?></span>
@@ -34,6 +35,7 @@
 
 <section class="mb-6" v-if="form.tier === 'certified'">
 	<h3 class="font-bold mb-1">Certified partner benefits</h3>
+
 	<ul class="benefits">
 		<li class="extra">
 			<span class="icon"><?= icon('star') ?></span>
@@ -64,7 +66,8 @@
 
 <section class="mb-6">
 	<h3 class="font-bold mb-1">Requirements</h3>
-	<ul class="requirements" v-if="form.tier === 'certified'">
+
+	<ul v-if="form.tier === 'certified'" class="requirements">
 		<li>
 			<span class="icon"><?= icon('check') ?></span>
 			4 completed Kirby projects
@@ -74,7 +77,7 @@
 			1 reviewed project
 		</li>
 	</ul>
-	<ul class="requirements" v-else v-cloak>
+	<ul v-else v-cloak class="requirements">
 		<li>
 			<span class="icon"><?= icon('check') ?></span>
 			2 completed Kirby projects
@@ -86,7 +89,9 @@
 	<h3 class="font-bold">Price per year</h3>
 	<p class="price text-xl mb-3">
 		<span v-text="locale.currency.trim()" class="currency-sign">€</span>
-		<span v-text="price"><?= number_format($certified->price()->regular((int)($people ?? 1)), 0, '.', ',') ?></span>
+		<span v-text="price">
+			<?= number_format($certified->price()->regular((int)($people ?? 1)), 0, '.', ',') ?>
+		</span>
 	</p>
 	<ul class="text-xs color-gray-700">
 		<li>Price + VAT if applicable.</li>

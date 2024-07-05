@@ -59,6 +59,10 @@
 	color: var(--color-green-700);
 	padding: 1rem;
 }
+.partner-listing-image-info {
+	padding: var(--spacing-3);
+	font-size: var(--text-sm);
+}
 
 .partner-listing-footer {
 	font-family: var(--font-mono);
@@ -75,7 +79,7 @@
 	color: var(--color-text-dimmed);
 }
 
-.partner-listing .field+.field {
+.partner-listing .field + .field {
 	margin: 0;
 }
 
@@ -124,11 +128,6 @@
 		"image"
 		"footer";
 	grid-row-gap: var(--spacing-3);
-}
-
-.image-info {
-	padding: var(--spacing-3);
-	font-size: var(--text-sm);
 }
 </style>
 
@@ -229,7 +228,7 @@
 <p
 	v-if="form.tier === 'regular' && view === 'details'"
 	v-cloak
-	class="image-info"
+	class="partner-listing-image-info"
 >
 	We will ask you for an image once your application has been accepted.
 </p>

@@ -17,7 +17,7 @@
 		</h3>
 		<figure>
 			<div style="--aspect-ratio: 2/1" class="mb-3">
-				<?php if ($image = $partner->stripe() ?? $partner->card()): ?>
+				<?php if ($image = $partner->stripe()): ?>
 					<?= img($image, [
 						'src' => [
 							'width' => 352
@@ -62,7 +62,7 @@
 			</figcaption>
 		</figure>
 		<div class="prose text-sm">
-			<?= $partner->summary()->or(($placeholder ?? false) ? 'Tell the audience about yourself in 140 characters or less. Describe your strengths as company and let them know why they should choose you.' : '') ?>
+			<?= $partner->summary()->or(($placeholder ?? false) ? 'Short description about yourself in 140 characters or less: your strengths as company and why the audience should choose you.' : '') ?>
 		</div>
 	<?php if ($placeholder ?? false !== true): ?>
 	</a>
