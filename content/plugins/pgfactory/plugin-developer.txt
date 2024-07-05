@@ -1,5 +1,0 @@
-Title: Dieter Stokar
-
-----
-
-Github: https://github.com/pgfactory

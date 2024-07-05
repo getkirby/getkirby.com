@@ -30,11 +30,15 @@ Contactlink: mailto:buero@hananils.de
 
 ----
 
+Pluginpage: hananils
+
+----
+
 Plugins:
-- /plugins/hananils/typographer
-- /plugins/hananils/colors
-- /plugins/hananils/date-methods
-- /plugins/hananils/titles
+- typographer
+- colors
+- date-methods
+- titles
 
 ----
 

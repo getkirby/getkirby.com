@@ -18,16 +18,16 @@ Location: Gosport, UK
 
 ----
 
-Pluginpage: /plugins/hashandsalt
+Pluginpage: hashandsalt
 
 ----
 
 Plugins:
 
-- /plugins/hashandsalt/snipcart
-- /plugins/hashandsalt/video
-- /plugins/hashandsalt/chopper
-- /plugins/hashandsalt/seo
+- snipcart
+- video
+- chopper
+- seo
 
 ----
 

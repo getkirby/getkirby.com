@@ -26,10 +26,6 @@ Contactlink: mailto:hi@n2.studio
 
 ----
 
-Pluginpage:
-
-----
-
 Languages: German, English
 
 ----

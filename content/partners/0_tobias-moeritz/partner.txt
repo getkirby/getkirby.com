@@ -30,7 +30,7 @@ Contactlink: mailto:kirby@moeritz.io
 
 ----
 
-Pluginpage: /plugins/tobimori
+Pluginpage: tobimori
 
 ----
 
@@ -86,9 +86,13 @@ Text:
 
 ----
 
+Pluginpage: tobimori
+
+----
+
 Plugins:
-- /plugins/tobimori/dreamform
-- /plugins/tobimori/seo
-- /plugins/tobimori/icon-field
-- /plugins/tobimori/tailwind-merge
+- dreamform
+- seo
+- icon-field
+- tailwind-merge
 
