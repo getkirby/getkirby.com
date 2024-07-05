@@ -19,7 +19,7 @@ return function (App $kirby, Page $page) {
 		$businessName = get('businessName');
 		$businessType = get('businessType');
 		$location     = get('location');
-		$description  = get('description');
+		$summary      = get('summary');
 		$website      = get('website');
 		$address      = get('address');
 		$projects     = (int)get('projects');
@@ -91,7 +91,7 @@ return function (App $kirby, Page $page) {
 						'Discord'                 => $discord,
 						'Listing location'        => $location,
 						'Address'                 => $address,
-						'Listing description'     => $description,
+						'Listing description'     => $summary,
 						'Number of projects'      => $projects,
 						'References'              => $references,
 						'Review project download' => $downloadLink,
