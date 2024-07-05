@@ -10,18 +10,18 @@
 		<p class="text-xl leading-snug color-gray-700">
 			<?= $page->description() ?>
 		</p>
-
-		<?php if ($message): ?>
-		<aside class="pt-6">
-			<div class="block box box--<?= $status ?>">
-				<?php snippet('kirbytext/box', [
-					'type' => $status,
-					'text' => $message
-				]) ?>
-			</div>
-		</aside>
-		<?php endif ?>
 	</header>
+
+	<?php if ($message): ?>
+	<aside class="mb-6">
+		<div class="block box box--<?= $status ?>">
+			<?php snippet('kirbytext/box', [
+				'type' => $status,
+				'text' => $message
+			]) ?>
+		</div>
+	</aside>
+	<?php endif ?>
 
 	<section class="mb-42">
 		<?php snippet('templates/partners-signup/signup', [
