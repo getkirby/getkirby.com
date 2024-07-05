@@ -82,15 +82,15 @@ class PartnerPage extends DefaultPage
 
 	public function plugins(): Pages|null
 	{
-		$id = $this->pluginpage();
+		$id       = $this->plugindeveloper()->or($this->slug());
+		$url      = 'https://plugins.getkirby.com/' . $id;
+		$response = Remote::get($url . '.json');
 
-		if ($id->isEmpty()) {
+		if ($response->code() !== 200) {
 			return null;
 		}
 
-		$url  = 'https://plugins.getkirby.com/' . $id;
-		$json = Remote::get($url . '.json')->json();
-
+		$json      = $response->json();
 		$developer = new Page([
 			'slug'    => $id,
 			'url'     => $url,

@@ -22,7 +22,7 @@ Region: Europe
 
 ----
 
-Pluginpage: floriankarsten
+Plugindeveloper: floriankarsten
 
 ----
 

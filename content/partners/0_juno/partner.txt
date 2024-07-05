@@ -22,7 +22,7 @@ Contactlink: https://juno-hamburg.com/en?utm_source=kirby&utm_medium=organic&utm
 
 ----
 
-Pluginpage: junohamburg
+Plugindeveloper: junohamburg
 
 ----
 

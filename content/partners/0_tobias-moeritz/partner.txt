@@ -30,10 +30,6 @@ Contactlink: mailto:kirby@moeritz.io
 
 ----
 
-Pluginpage: tobimori
-
-----
-
 Languages: English, German
 
 ----
@@ -86,7 +82,7 @@ Text:
 
 ----
 
-Pluginpage: tobimori
+Plugindeveloper: tobimori
 
 ----
 

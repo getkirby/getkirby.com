@@ -22,10 +22,6 @@ Region: Europe
 
 ----
 
-Pluginpage: fendinger
-
-----
-
 Languages: German, English
 
 ----
