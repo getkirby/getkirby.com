@@ -50,11 +50,12 @@ return function (App $kirby, Page $page) {
 
 			// handle renewals
 			if ($renew) {
-				if (!($renew = page('partners')->find($renew))) {
+				$partner = page('partners')->find($renew);
+				if (!$partner) {
 					throw new Exception('Cannot renew partnership for unknown partner.');
 				}
 
-				$checkoutData['passthrough']->partner = $renew->uid();
+				$checkoutData['passthrough']->partner = $partner->uid();
 
 				$checkout = $product->checkout('buy', [
 					...$checkoutData,
@@ -113,7 +114,6 @@ return function (App $kirby, Page $page) {
 			}
 
 			go('partners/join/success');
-
 		} catch (Throwable $e) {
 			$message = $e->getMessage();
 		}
@@ -121,9 +121,9 @@ return function (App $kirby, Page $page) {
 
 	// prefill form for renewals
 	if ($renew = param('renew')) {
-		if ($renew = page('partners')->find($renew)) {
-			$plan   = $renew->plan()->value();
-			$people = $renew->people()->value();
+		if ($partner = page('partners')->find($renew)) {
+			$plan   = $partner->plan()->value();
+			$people = $partner->people()->value();
 		}
 	}
 
@@ -134,6 +134,6 @@ return function (App $kirby, Page $page) {
 		'plan'      => $plan ?? 'certified',
 		'questions' => $page->find('answers')->children(),
 		'regular'   => Product::PartnerRegular,
-		'renew'     => $renew ?? null,
+		'renew'     => $partner ?? null,
 	];
 };
