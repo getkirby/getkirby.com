@@ -32,44 +32,28 @@ return function (App $kirby, Page $page) {
 		$notes        = get('notes');
 
 		try {
-			if ($renew && !($renew = page('partners')->find($renew))) {
-				throw new Exception('Cannot renew partnership for unknown partner.');
-			}
-
-			// prevent submissions faster than 1 minute (spam protection)
-			// (only needed for new applications because otherwise there will be a redirect to Paddle)
-			if (!$renew) {
-				if ($timestamp[0] > time() - 60) {
-					throw new Exception('To protect against spam, we block submissions faster than 1 minute. Please try again, sorry for the inconvenience.');
-				}
-
-				$timestampHash = hash_hmac('sha256', $timestamp[0], 'kirby');
-
-				if (hash_equals($timestampHash, $timestamp[1]) !== true) {
-					throw new Exception('Spam protection hash was manipulated');
-				}
-			}
-
-			// generate checkout link
+			// generate checkout link data
 			$product = Product::from('partner-' . $plan);
 			$price   = $product->price();
 
 			$eurPrice       = $product->price('EUR')->regular($peopleNum);
 			$localizedPrice = $price->regular($peopleNum);
 
-			$prices  = [
-				'EUR:' . $eurPrice,
-				$price->currency . ':' . $localizedPrice,
-			];
-
 			$checkoutData = [
 				'expires'     => date('Y-m-d', strtotime('+2 months')),
 				'passthrough' => new Passthrough(multiplier: $peopleNum),
-				'prices'      => $prices,
+				'prices'      => [
+					'EUR:' . $eurPrice,
+					$price->currency . ':' . $localizedPrice,
+				]
 			];
 
 			// handle renewals
 			if ($renew) {
+				if (!($renew = page('partners')->find($renew))) {
+					throw new Exception('Cannot renew partnership for unknown partner.');
+				}
+
 				$checkoutData['passthrough']->partner = $renew->uid();
 
 				$checkout = $product->checkout('buy', [
@@ -79,6 +63,19 @@ return function (App $kirby, Page $page) {
 
 				go($checkout);
 				return;
+			}
+
+			// prevent submissions faster than 1 minute (spam protection)
+			// (only needed for new applications because otherwise
+			// there will be a redirect to Paddle)
+			if ($timestamp[0] > time() - 60) {
+				throw new Exception('To protect against spam, we block submissions faster than 1 minute. Please try again, sorry for the inconvenience.');
+			}
+
+			$timestampHash = hash_hmac('sha256', $timestamp[0], 'kirby');
+
+			if (hash_equals($timestampHash, $timestamp[1]) !== true) {
+				throw new Exception('Spam protection hash was manipulated');
 			}
 
 			// submit form values to Airtable
