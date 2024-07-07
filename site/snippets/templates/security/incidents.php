@@ -6,7 +6,7 @@
 .security-incidents th {
 	font-size: var(--text-sm);
 }
-.security-incidents .column-fixed a {
+.security-incidents .column-fixed * {
 	white-space: nowrap;
 }
 </style>
@@ -22,12 +22,14 @@
 		</tr>
 		<?php foreach ($incidents as $incident): ?>
 		<tr>
-			<td>
-				<?= str_replace(
-					['||', ' - '],
-					['<br>', '&nbsp;-&nbsp;'],
-					Str::esc($incident['affected'])
-				) ?>
+			<td class="column-fixed">
+				<span>
+					<?= str_replace(
+						['||', ' - '],
+						['</span><br><span>', '&nbsp;-&nbsp;'],
+						Str::esc($incident['affected'])
+					) ?>
+				</span>
 			</td>
 			<td>
 				<?= $incident['description'] ?>
@@ -36,16 +38,16 @@
 				<a class="whitespace-nowrap" href="<?= $incident['link'] ?>">Read more ›</a>
 				<?php endif ?>
 			</td>
-			<td>
+			<td class="whitespace-nowrap">
 				<?php if (empty($incident['cvss']) === false): ?>
 				<a href="https://www.first.org/cvss/calculator/3.1#<?= $incident['cvss'] ?>"><?= $incident['severity'] ?></a>
 				<?php else: ?>
 				<?= $incident['severity'] ?>
 				<?php endif ?>
 			</td>
-			<td>
+			<td class="whitespace-nowrap">
 				<?php if (empty($incident['cve']) === false): ?>
-				<a class="whitespace-nowrap" href="https://nvd.nist.gov/vuln/detail/<?= $incident['cve'] ?>"><?= $incident['cve'] ?></a>
+				<a href="https://nvd.nist.gov/vuln/detail/<?= $incident['cve'] ?>"><?= $incident['cve'] ?></a>
 				<?php else: ?>
 				CVE ID pending
 				<?php endif ?>
