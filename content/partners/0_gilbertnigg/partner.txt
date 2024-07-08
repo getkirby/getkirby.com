@@ -6,7 +6,7 @@ Subtitle: Web Developer
 
 ----
 
-Package: solo
+Plan: regular
 
 ----
 

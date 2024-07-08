@@ -25,20 +25,22 @@ class PartnerPage extends DefaultPage
 		$location = $this->location()->value();
 
 		if ($position = mb_strrpos($location, ',')) {
-			return parent::country()->value(trim(Str::substr($location, $position + 1)));
+			return parent::country()->value(
+				trim(Str::substr($location, $position + 1))
+			);
 		}
 
 		return parent::country()->value($location);
 	}
 
-	public function isPlusPartner(): bool
+	public function isCertified(): bool
 	{
-		return Str::endsWith($this->package(), '+');
+		return $this->plan()->value() === 'certified';
 	}
 
 	public function isSoloPartner(): bool
 	{
-		return Str::startsWith($this->package(), 'solo');
+		return $this->people()->value() === '1';
 	}
 
 	public function i(): Field
@@ -54,13 +56,15 @@ class PartnerPage extends DefaultPage
 			return $languages;
 		}
 
-		$languagesString = $languages->value();
+		$string = $languages->value();
 
-		if ($lastComma = mb_strrpos($languagesString, ',')) {
-			$languagesString = mb_substr($languagesString, 0, $lastComma) . ' &' . mb_substr($languagesString, $lastComma + 1);
+		if ($lastComma = mb_strrpos($string, ',')) {
+			$string =
+				mb_substr($string, 0, $lastComma) . ' &' .
+				mb_substr($string, $lastComma + 1);
 		}
 
-		return $languages->value($languagesString);
+		return $languages->value($string);
 	}
 
 	public function me(): Field
@@ -78,6 +82,15 @@ class PartnerPage extends DefaultPage
 	public function my(): Field
 	{
 		return parent::my()->value($this->isSoloPartner() ? 'my' : 'our');
+	}
+
+	public function peopleLabel(): string
+	{
+		if ($this->people()->toInt() > 1) {
+			return $this->people() . ' people';
+		}
+
+		return '1 person';
 	}
 
 	public function plugins(): Pages|null
@@ -131,13 +144,8 @@ class PartnerPage extends DefaultPage
 		return new Pages($plugins);
 	}
 
-	public function type(): Field
+	public function stripe(): File|null
 	{
-		return parent::type()->value($this->isSoloPartner() ? 'solo' : 'team');
-	}
-
-	public function typeLabel(): Field
-	{
-		return parent::typeLabel()->value(ucfirst($this->type()));
+		return $this->images()->findBy('name', 'stripe') ?? $this->card();
 	}
 }

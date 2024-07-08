@@ -6,7 +6,11 @@ Subtitle: Agentur für: grafik . web . design
 
 ----
 
-Package: team
+Plan: regular
+
+----
+
+People: 2
 
 ----
 
@@ -61,4 +65,4 @@ Uuid: F1sI4MET1tw2pNtX
 
 ----
 
-Text: 
+Text:

@@ -6,7 +6,11 @@ Subtitle: Full-Stack Developer
 
 ----
 
-Package: solo+
+Plan: certified
+
+----
+
+People: 1
 
 ----
 

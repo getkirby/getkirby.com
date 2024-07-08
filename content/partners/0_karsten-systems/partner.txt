@@ -6,7 +6,11 @@ Subtitle: Development & Design
 
 ----
 
-Package: team
+Plan: regular
+
+----
+
+People: 2
 
 ----
 

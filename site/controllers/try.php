@@ -3,7 +3,6 @@
 use Kirby\Cms\Page;
 
 return function (Page $page) {
-	$message  = $type = null;
 	$messages = [
 		'deleted'    => 'Your demo instance was deleted successfully. Thanks for trying out Kirby! You can create a new demo at any time.',
 		'not-found'  => 'The requested demo instance does not exist or has expired. Feel free to create a new instance.',
@@ -15,14 +14,14 @@ return function (Page $page) {
 
 	if ($status = (param('error') ?? param('status'))) {
 		$message = $messages[$status] ?? $messages['default'];
-		$type    = match($status) {
-			'deleted',
-			'referrer' => 'info',
-			default    => 'warning'
+		$status  = match($status) {
+			'deleted', 'referrer' => 'info',
+			default               => 'warning'
 		};
 	}
 
 	$zones = $allowedHosts = ['zone1', 'zone2'];
+
 	foreach ($zones as $zone) {
 		$allowedHosts[] = 'staging.' . $zone;
 	}
@@ -36,15 +35,11 @@ return function (Page $page) {
 	}
 
 	return [
-		'detectHost'    => $detectHost,
-		'host'          => $host,
-		'questions'     => $page->find('answers')->children(),
-		'statusIcon'    => match($type) {
-			'warning' => 'warning',
-			default   => 'check'
-		},
-		'statusMessage' => $message,
-		'statusType'    => $type,
-		'zones'         => $zones
+		'detectHost' => $detectHost,
+		'host'       => $host,
+		'message'    => $message ?? null,
+		'questions'  => $page->find('answers')->children(),
+		'status'     => $status ?? null,
+		'zones'      => $zones
 	];
 };

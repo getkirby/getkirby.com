@@ -2,47 +2,70 @@
 
 <style>
 .partners-header {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-8);
+	display: grid;
+	grid-template-areas:
+		"title"
+		"ctas"
+		"filters"
+		"results"
 }
-.partners-header nav {
-	--min: 9rem;
-	--gap: var(--spacing-3);
-	max-width: 26rem;
+.partners-title {
+	grid-area: title;
+	margin-bottom: var(--spacing-8);
 }
 
+.partners-ctas {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: end;
+	gap: var(--spacing-3);
+	grid-area: ctas;
+	margin-bottom: var(--spacing-12);
+}
+.partners-ctas .btn {
+	flex-grow: 1;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.partners-filters {
+	grid-area: filters;
+}
+.partners-filters-title {
+	margin-bottom: var(--spacing-2);
+	font-size: var(--text-sm);
+	font-weight: var(--font-bold);
+}
 .partners-filter-selects {
 	display: flex;
 	flex-wrap: wrap;
 	gap: var(--spacing-3);
 }
-
-.partners-results {
-	margin-top: 0.5rem;
+.partners-filters .select {
+	width: 100%;
+}
+.partners-filters .select select {
+	cursor: pointer;
 }
 
-.partners, .partners-plus {
+.partners-results {
+	grid-area: results;
+	padding-top: var(--spacing-2);
+}
+
+.partners, .partners-certified {
 	--columns: 2;
 }
 
 @media screen and (max-width: 35rem) {
-	.partners-header nav {
-		grid-template-columns: 1fr;
-	}
-	.partners-filter-selects {
-		max-width: 26rem;
-	}
-	.partners-filters .select {
-		width: 100%;
-	}
 	.partners {
 		--columns: 1;
 	}
 }
 
 @media screen and (min-width: 60rem) {
-	.partners-plus {
+	.partners-certified {
 		--columns: 3;
 	}
 	.partners {
@@ -50,40 +73,54 @@
 	}
 }
 
-@media screen and (min-width: 70rem) {
-	.partners-header {
-		align-items: flex-end;
-		flex-direction: row;
-		justify-content: space-between;
+@media screen and (min-width: 40rem) {
+	.partners-filters .select {
+		width: auto;
+		flex-grow: 1;
 	}
 }
+
+@media screen and (min-width: 65rem) {
+	.partners-header {
+		grid-template-columns: max-content 1fr max-content;
+		grid-template-areas:
+			"title title title"
+			"filters gap ctas"
+			"results results results"
+	}
+	.partners-ctas {
+		margin-bottom: 0;
+	}
+	.partners-filters-title {
+		display: none;
+	}
+}
+
 </style>
 
 <article>
 
-	<header class="mb-24">
-		<div class="partners-header mb-12">
-			<div class="max-w-xl">
-				<h1 class="h1 mb-6">Find a Kirby partner to trust with your next
-					project</h1>
-				<p class="text-xl leading-snug color-gray-700">
-					<?= $page->description() ?>
-				</p>
-			</div>
-			<nav class="auto-fit items-center">
-				<a class="btn btn--filled" href="https://airtable.com/shrfCqUxq5L3GyhIb">
-					<?= icon('email') ?>
-					Post your project
-				</a>
-				<a class="btn btn--outlined" href="/partners/join">
-					<?= icon('verified') ?>
-					Become a partner
-				</a>
-			</nav>
+	<header class="partners-header mb-24">
+		<div class="partners-title max-w-xl">
+			<h1 class="h1 mb-6">Find a Kirby partner to trust with your next project</h1>
+			<p class="text-xl leading-snug color-gray-700">
+				<?= $page->description() ?>
+			</p>
 		</div>
 
+		<nav class="partners-ctas">
+			<a class="btn btn--filled" href="https://airtable.com/shrfCqUxq5L3GyhIb">
+				<?= icon('email') ?>
+				Post your project
+			</a>
+			<a class="btn btn--filled" href="<?= url('partners/join') ?>">
+				<?= icon('verified') ?>
+				Become a partner
+			</a>
+		</nav>
+
 		<nav class="partners-filters">
-			<h2 class="skipper">Filters</h2>
+			<h2 class="partners-filters-title">Filter partners</h2>
 
 			<div class="partners-filter-selects auto-fit items-center">
 				<?php foreach ($filters as $field => $config): ?>
@@ -96,28 +133,34 @@
 						<option value="_all"><?= Escape::html($config['default']) ?></option>
 
 						<?php foreach ($config['options'] as $option): ?>
-						<option><?= Escape::html($option) ?></option>
+						<option value="<?= Escape::attr($option) ?>">
+							<?php if (isset($config['text']) === true): ?>
+								<?= Escape::html($config['text']($option)) ?>
+							<?php else: ?>
+								<?= Escape::html($option) ?>
+							<?php endif ?>
+						</option>
 						<?php endforeach ?>
 					</select>
 				</div>
 				<?php endforeach ?>
 			</div>
-
-			<p class="partners-results text-sm">
-				Displaying <span class="partners-results-count"><?= $partners->count() ?></span> result<span class="partners-results-plural">s</span>
-			</p>
 		</nav>
+
+		<p class="partners-results text-xs color-gray-700">
+			Displaying <span class="partners-results-count"><?= $partners->count() ?></span> result<span class="partners-results-plural">s</span>
+		</p>
 	</header>
 
-	<section class="partners-section partners-plus columns mb-42" style="--gap: var(--spacing-24)">
-		<?php foreach ($plus as $partner): ?>
-			<?php snippet('templates/partners/partner.plus', ['partner' => $partner, 'lazy' => $plus->indexOf($partner) > 2]) ?>
+	<section class="partners-section partners-certified columns mb-24" style="--gap: var(--spacing-20)">
+		<?php foreach ($certified as $partner): ?>
+			<?php snippet('templates/partners/partner.certified', ['partner' => $partner, 'lazy' => $certified->indexOf($partner) > 2]) ?>
 		<?php endforeach ?>
 	</section>
 
 	<section class="partners-section partners columns"
-					 style="--column-gap: var(--spacing-24); --row-gap: var(--spacing-12)">
-		<?php foreach ($standard as $partner): ?>
+					 style="--column-gap: var(--spacing-20); --row-gap: var(--spacing-12)">
+		<?php foreach ($regular as $partner): ?>
 			<?php snippet('templates/partners/partner', ['partner' => $partner]) ?>
 		<?php endforeach ?>
 	</section>
@@ -190,3 +233,5 @@ document.querySelectorAll('.partners-filters select').forEach((select) => {
 	});
 });
 </script>
+
+<?php snippet('templates/partners/info-dialog') ?>

@@ -4,8 +4,10 @@ namespace Buy;
 
 enum Product: string
 {
-	case Basic 	    = 'basic';
-	case Enterprise = 'enterprise';
+	case Basic            = 'basic';
+	case Enterprise       = 'enterprise';
+	case PartnerCertified = 'partner-certified';
+	case PartnerRegular   = 'partner-regular';
 
 	/**
 	 * Generates a checkout link for the product
@@ -30,9 +32,11 @@ enum Product: string
 	public function label(): string
 	{
 		return match ($this) {
-			static::Basic      => 'Basic',
-			static::Enterprise => 'Enterprise',
-			default            => null
+			static::Basic            => 'Basic',
+			static::Enterprise       => 'Enterprise',
+			static::PartnerCertified => 'Certified partnership',
+			static::PartnerRegular   => 'Regular partnership',
+			default                  => null
 		};
 	}
 
@@ -49,7 +53,7 @@ enum Product: string
 	 */
 	public function productId(): int
 	{
-		return option('buy.' . $this->value . '.product');
+		return option('buy.products.' . $this->value . '.product');
 	}
 
 	/**
@@ -57,7 +61,7 @@ enum Product: string
 	 */
 	public function rawPrice(): float
 	{
-		return option('buy.' . $this->value . '.regular');
+		return option('buy.products.' . $this->value . '.regular');
 	}
 
 	/**
@@ -87,9 +91,9 @@ enum Product: string
 	public function upgradeId(string|null $type = null): int
 	{
 		return match ($type) {
-			'free'    => option('buy.' . $this->value . '.free'),
-			'convert' => option('buy.' . $this->value . '.convert'),
-			default   => option('buy.' . $this->value . '.upgrade')
+			'free'    => option('buy.products.' . $this->value . '.free'),
+			'convert' => option('buy.products.' . $this->value . '.convert'),
+			default   => option('buy.products.' . $this->value . '.upgrade')
 		};
 	}
 

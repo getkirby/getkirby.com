@@ -6,7 +6,11 @@ Subtitle: GmbH
 
 ----
 
-Package: team
+Plan: regular
+
+----
+
+People: 4+
 
 ----
 
@@ -43,4 +47,4 @@ Uuid: OUqGTcQcPAWK0Wcq
 
 ----
 
-Text: 
+Text:

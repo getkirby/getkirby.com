@@ -49,11 +49,14 @@ class Price
 	/**
 	 * Converts a price from EUR to the given currency
 	 * and rounds it to the nearest pretty price
+	 *
+	 * @param bool $charm Whether prices will end in 5/9 (when true) 
+	 *                    or 0/5 (when false)
 	 */
-	public function convert(int $price): int
+	public function convert(int $price, bool $charm = true): int
 	{
 		$price *= $this->rate;
-		return $this->round($price);
+		return $this->round($price, $charm);
 	}
 
 	/**
@@ -77,8 +80,10 @@ class Price
 	/**
 	 * Rounds a price to the nearest pretty price
 	 * (ending in -5 or -9)
+	 *
+	 * @param bool $charm If `true`, price will end in 5 or 9, otherwise 0 or 5
 	 */
-	public function round(float $price): int
+	public function round(float $price, bool $charm = true): int
 	{
 		// if the currency is strong, only round
 		// the price to full units as "pretty"
@@ -101,7 +106,7 @@ class Price
 			$rounded = round($price / 5 / $step) * 5 * $step;
 		}
 
-		if ($rounded % max($step, 10) === 0) {
+		if ($charm === true && $rounded % max($step, 10) === 0) {
 			$rounded -= 1;
 		}
 
@@ -116,10 +121,23 @@ class Price
 
 	/**
 	 * Gets the regular price for the product
+	 *
+	 * @param int $multiplier Optional price multiplier (used for partner products)
 	 */
-	public function regular(): int
+	public function regular(int $multiplier = 1): int
 	{
-		return $this->convert($this->product->rawPrice());
+		$rawPrice = $this->product->rawPrice();
+
+		if ($multiplier > 1) {
+			// first use the base price without 9 ending
+			// (avoids jumps between 5 and 9 for multiplied prices)
+			$price = $multiplier * $this->convert($rawPrice, false);
+
+			// now round the final sum to the nearest pretty price
+			return $this->round($price);
+		}
+
+		return $this->convert($rawPrice);
 	}
 
 	/**

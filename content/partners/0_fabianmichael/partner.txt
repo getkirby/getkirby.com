@@ -6,7 +6,11 @@ Subtitle: Designer & Kirby Developer
 
 ----
 
-Package: solo+
+Plan: certified
+
+----
+
+People: 1
 
 ----
 

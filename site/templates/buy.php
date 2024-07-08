@@ -200,7 +200,7 @@ createApp({
 	},
 
 	// user-generated props
-	personalInfo: {
+	form: {
 		city: "",
 		company: "",
 		country: "",
@@ -238,10 +238,10 @@ createApp({
 		return "Donate an additional " + this.locale.currency + this.locale.prices.donation.customer + " per license 💛";
 	},
 	get donationAmount() {
-		return this.personalInfo.donate ? (this.locale.prices.donation.customer * this.quantity) : 0;
+		return this.form.donate ? (this.locale.prices.donation.customer * this.quantity) : 0;
 	},
 	get needsPostalCode() {
-		return postalCodeCountries.includes(this.personalInfo.country);
+		return postalCodeCountries.includes(this.form.country);
 	},
 	get netLicenseAmount() {
 		return this.price * this.quantity;
@@ -260,7 +260,7 @@ createApp({
 		return this.subtotal * rate;
 	},
 	get vatIdExists() {
-		return this.locale.vatRate > 0 && this.personalInfo.vatId?.length > 0;
+		return this.locale.vatRate > 0 && this.form.vatId?.length > 0;
 	},
 
 	// methods
@@ -280,8 +280,8 @@ createApp({
 		}
 	},
 	async changeCountry(event) {
-		this.locale               = await this.fetchPrices(this.personalInfo.country);
-		this.personalInfo.country = this.locale.country;
+		this.locale       = await this.fetchPrices(this.form.country);
+		this.form.country = this.locale.country;
 
 		window.localStorage.setItem("country", this.locale.country);
 	},
@@ -319,7 +319,7 @@ createApp({
 		const country = window.localStorage.getItem("country") ?? this.locale.country;
 
 		this.locale               = await this.fetchPrices(country);
-		this.personalInfo.country = this.locale.country;
+		this.form.country = this.locale.country;
 
 		document.querySelector("article[data-loading]").removeAttribute("data-loading");
 

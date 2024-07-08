@@ -35,19 +35,31 @@
 			"main side"
 	}
 }
+
+.partner-meta div {
+	display: flex;
+	align-items: center;
+	gap: .5rem;
+}
+.partner-meta div + div {
+	margin-top: .25rem;
+}
+.partner-meta dd {
+	color: var(--color-gray-700);
+}
 </style>
 
 <header class="mb-12">
 	<h1 class="h1 mb-1">
 		<?= $page->title() ?>
 	</h1>
-	<p class="text-sm color-gray-600 font-mono">
+	<p class="text-sm color-gray-700 font-mono">
 		<?= $page->subtitle() ?>
 	</p>
 </header>
 
 <div class="partner-grid columns mb-24">
-	<figure style="--aspect-ratio: 3/2;" class="partner-hero mb-3">
+	<figure style="--aspect-ratio: 3/2;" class="partner-hero rounded overflow-hidden mb-3">
 		<?php if ($image = $page->card()): ?>
 			<?= img($image, [
 				'alt' => '',
@@ -79,35 +91,42 @@
 	<div class="partner-info">
 		<div class="sticky" style="--top: var(--spacing-12)">
 			<div class="font-mono text-sm mb-12">
-				<?php if ($page->isPlusPartner()): ?>
-				<p class="inline-flex py-1 px-3 rounded items-center mb-6" style="background: var(--color-yellow-400)">
-					<span class="mr-3"><?= icon('verified') ?></span>
+
+				<?php if ($page->isCertified()): ?>
+				<button class="inline-flex py-1 px-3 rounded items-center mb-6" style="gap: .5rem; background: var(--color-yellow-400); border: 1px solid transparent" onclick="infoDialog.showModal()">
+					<?= icon('verified') ?>
 					Certified Kirby Partner
-				</p>
+				</button>
+				<?php else: ?>
+				<p class="inline-flex py-1 px-3 rounded mb-6" style="border: 1px solid var(--color-gray-400)">Kirby Partner</p>
 				<?php endif ?>
 
-				<p class="text-sm">
-					<?= ucfirst(str_replace('+', '', $page->package())) ?>
-				</p>
-				<p class="color-gray-600 truncate">
-					<?= $page->location() ?>
-				</p>
-				<p>
-					<a class="link" href="<?= $page->website() ?>">
-						<?= $page->website()->shorturl() ?>
-					</a>
-				</p>
-				<?php if ($page->languages()->isNotEmpty()): ?>
-				<p
-					class="flex items-center"
-					style="gap: var(--spacing-3); margin-top: var(--spacing-10)"
-				>
-					<?= icon('globe') ?>
-					<span class="color-gray-600">
-						<?= ucfirst($page->i()) ?> speak <?= $page->languages(true) ?>
-					</span>
-				</p>
-				<?php endif ?>
+				<dl class="partner-meta">
+					<div>
+						<dt title="Location"><?= icon('map') ?></dt>
+						<dd><?= $page->location() ?></dd>
+					</div>
+					<div>
+						<dt title="People"><?= icon('users') ?></dt>
+						<dd><?= $page->peopleLabel() ?></dd>
+					</div>
+					<?php if ($page->languages()->isNotEmpty()): ?>
+					<div>
+						<dt title="Languages"><?= icon('globe') ?></dt>
+						<dd>
+							<?= ucfirst($page->i()) ?> speak <?= $page->languages(true) ?>
+						</dd>
+					</div>
+					<?php endif ?>
+					<div>
+						<dt title="Website"><?= icon('url') ?></dt>
+						<dd>
+							<a class="link" href="<?= $page->website() ?>">
+								<?= $page->website()->shorturl() ?>
+							</a>
+						</dd>
+					</div>
+				</dl>
 			</div>
 
 			<div class="partner-expertise">
@@ -206,3 +225,5 @@
 		</footer>
 	</div>
 <?php endif ?>
+
+<?php if ($page->isCertified()) snippet('templates/partners/info-dialog') ?>

@@ -2,4 +2,6 @@ Title: What is the right plan for me?
 ----
 Text:
 
-The Solo plans are the right choice if you work as a solo freelance developer/designer. As a team or agency with multiple developers/designers, choose one of the Team plans.
+We offer two partner plans: Regular and Certified. Certified partners are those who have had a published Kirby project reviewed in detail. Our two partner plans enjoy different benefits.
+
+Both plans are priced based on how many people work in your business: are you a solo freelancer, a small studio or a large agency?

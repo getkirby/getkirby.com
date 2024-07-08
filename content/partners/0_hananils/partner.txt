@@ -6,7 +6,11 @@ ExcerptTitle: Büro für Gestaltung
 
 ----
 
-Package: team
+Plan: regular
+
+----
+
+People: 2
 
 ----
 

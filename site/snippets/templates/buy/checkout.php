@@ -134,71 +134,6 @@
 	color: var(--color-icon) !important;
 }
 
-.checkout-fieldset {
-	margin-bottom: var(--spacing-6);
-}
-.checkout-fieldset legend {
-	font-weight: var(--font-bold);
-	margin-bottom: var(--spacing-2);
-}
-.checkout-fieldset .fields {
-	border: 1px solid var(--color-border);
-	border-radius: var(--rounded);
-	overflow: clip;
-}
-.checkout-fieldset .field {
-	display: flex;
-	background: var(--color-white);
-	align-items: center;
-}
-.checkout-fieldset .field + .field {
-	margin-top: 0;
-	border-top: 1px solid var(--color-border);
-}
-
-.checkout-fieldset .label {
-	display: flex;
-	align-items: center;
-	height: 2.25rem;
-	flex-basis: 6.75rem;
-	flex-shrink: 0;
-	font-weight: var(--font-normal);
-	margin-bottom: 0;
-	white-space: nowrap;
-	background: rgba(0,0,0, .03);
-	padding: var(--spacing-2);
-}
-.checkout-fieldset .field .input {
-	box-shadow: none;
-	outline-offset: -2px;
-	width: 100%;
-	flex-grow: 1;
-}
-
-.checkout-fieldset .fieldgroup {
-	border-top: 1px solid var(--color-border);
-}
-
-@media screen and (min-width: 70rem) {
-	.checkout-fieldset .fieldgroup {
-		display: flex;
-		align-items: center;
-		border-top: 1px solid var(--color-border);
-	}
-	.checkout-fieldset .fieldgroup .field {
-		border-top: 0;
-	}
-	.checkout-fieldset .fieldgroup .field:first-child {
-		flex-grow: 1;
-	}
-	.checkout-fieldset .fieldgroup .field:nth-child(2) {
-		flex-basis: 14rem;
-		border-left: 1px solid var(--color-border);
-	}
-	.checkout-fieldset .fieldgroup .field:nth-child(2) .label {
-		flex-basis: 6rem;
-	}
-}
 .checkout button[type="reset"] {
 	position: absolute;
 	right: -.5rem;
@@ -243,7 +178,7 @@
 							</th>
 							<td>{{ amount(discountAmount) }}</td>
 						</tr>
-						<tr v-if="personalInfo.donate">
+						<tr v-if="form.donate">
 							<th>
 								Your donation
 							</th>
@@ -272,7 +207,7 @@
 						<a class="underline" rel="noopener noreferrer" target="_blank" href="<?= $donation['link'] ?>"><?= $donation['charity'] ?></a> <?= $donation['purpose'] ?>.
 					</p>
 					<label class="checkbox donation">
-						<input id="donate" type="checkbox" name="donate" v-model="personalInfo.donate">
+						<input id="donate" type="checkbox" name="donate" v-model="form.donate">
 						<?php if ($donation['customerAmount'] === $donation['teamAmount']): ?>
 						Match our donation <?= icon('heart') ?>
 						<?php else: ?>
@@ -289,13 +224,13 @@
 						<div class="fields">
 							<div class="field">
 								<label class="label" for="email">Email <abbr title="Required" aria-hidden>*</abbr></label>
-								<input id="email" name="email" class="input" type="email" required v-model="personalInfo.email" placeholder="mail@example.com">
+								<input id="email" name="email" class="input" type="email" required v-model="form.email" placeholder="mail@example.com">
 							</div>
 
 							<div class="fieldgroup">
 								<div class="field">
 									<label class="label" for="country">Country <abbr title="Required" aria-hidden>*</abbr></label>
-									<select id="country" name="country" required autocomplete="country" class="input" v-model="personalInfo.country" @change="changeCountry">
+									<select id="country" name="country" required autocomplete="country" class="input" v-model="form.country" @change="changeCountry">
 										<?php foreach ($countries as $countryCode => $countryName): ?>
 										<option value="<?= $countryCode ?>"><?= $countryName ?></option>
 										<?php endforeach ?>
@@ -303,7 +238,7 @@
 								</div>
 								<div v-if="needsPostalCode" class="field">
 									<label class="label" for="postalCode">Postal Code <abbr title="Required" aria-hidden>*</abbr></label>
-									<input id="postalCode" name="postalCode" class="input" autocomplete="postal-code" :required="needsPostalCode" v-model="personalInfo.postalCode" type="text">
+									<input id="postalCode" name="postalCode" class="input" autocomplete="postal-code" :required="needsPostalCode" v-model="form.postalCode" type="text">
 								</div>
 							</div>
 						</div>
@@ -314,34 +249,34 @@
 						<div class="fields">
 							<div class="field">
 								<label class="label" for="vatId">VAT ID</label>
-								<input id="vatId" name="vatId" class="input" type="text" v-model="personalInfo.vatId">
+								<input id="vatId" name="vatId" class="input" type="text" v-model="form.vatId">
 							</div>
 
 							<div class="field" v-if="vatIdExists">
 								<label class="label" for="company">Company <abbr title="Required" aria-hidden>*</abbr></label>
-								<input id="company" name="company" placeholder="Company name …" autocomplete="organization" class="input" type="text" v-model="personalInfo.company" :required="vatIdExists">
+								<input id="company" name="company" placeholder="Company name …" autocomplete="organization" class="input" type="text" v-model="form.company" :required="vatIdExists">
 							</div>
 
 							<div class="field" v-if="vatIdExists">
 								<label class="label" for="street">Street <abbr title="Required" aria-hidden>*</abbr></label>
-								<input id="street" name="street" class="input" type="text" v-model="personalInfo.street" :required="vatIdExists">
+								<input id="street" name="street" class="input" type="text" v-model="form.street" :required="vatIdExists">
 							</div>
 
 							<div class="field" v-if="vatIdExists">
 								<label class="label" for="city">Town/City <abbr title="Required" aria-hidden>*</abbr></label>
-								<input id="city" name="city" class="input" type="text" v-model="personalInfo.city" :required="vatIdExists">
+								<input id="city" name="city" class="input" type="text" v-model="form.city" :required="vatIdExists">
 							</div>
 
 							<div class="field" v-if="vatIdExists">
 								<label class="label" for="state">State/County <abbr title="Required" aria-hidden>*</abbr></label>
-								<input id="state" name="state" class="input" type="text" v-model="personalInfo.state" :required="vatIdExists">
+								<input id="state" name="state" class="input" type="text" v-model="form.state" :required="vatIdExists">
 							</div>
 						</div>
 					</fieldset>
 
 					<div class="field">
 						<label class="font-bold flex items-center" style="gap: var(--spacing-2)">
-							<input id="newsletter" type="checkbox" name="newsletter" v-model="personalInfo.newsletter">
+							<input id="newsletter" type="checkbox" name="newsletter" v-model="form.newsletter">
 							Subscribe to our Kosmos newsletter
 						</label>
 						<p class="help">We won't ever spam you! You can unsubscribe at any time. <a class="underline" target="_blank" href="<?= url('kosmos') ?>">Learn more about Kosmos…</a></p>

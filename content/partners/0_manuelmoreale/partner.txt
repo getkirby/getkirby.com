@@ -6,7 +6,11 @@ Subtitle: Developer and Designer
 
 ----
 
-Package: solo+
+Plan: certified
+
+----
+
+People: 1
 
 ----
 
@@ -65,4 +69,4 @@ Uuid: oMQaiZGGSyyxKZTd
 
 ----
 
-Text: 
+Text:

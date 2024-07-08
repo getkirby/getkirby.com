@@ -6,7 +6,11 @@ Subtitle: Web design studio
 
 ----
 
-Package: solo
+Plan: regular
+
+----
+
+People: 1
 
 ----
 
@@ -52,4 +56,4 @@ Uuid: usSQcs0piAXYjepX
 
 ----
 
-Text: 
+Text:

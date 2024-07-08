@@ -17,11 +17,13 @@ return function (App $kirby, Page $page) {
 			'default'  => 'All regions',
 			'multiple' => false
 		],
-		'type' => [
-			'label'    => 'Business type filter',
-			'default'  => 'All business types',
-			'field'    => 'typeLabel',
-			'multiple' => false
+		'people' => [
+			'label'    => 'Team size',
+			'default'  => 'Any team size',
+			'multiple' => false,
+			'text'     => function ($value) {
+				return $value->value() === '1' ? '1 person' : $value . ' people';
+			}
 		],
 	];
 
@@ -42,9 +44,9 @@ return function (App $kirby, Page $page) {
 	$kirby->response()->header('Cache-Control', 'max-age=1800, public');
 
 	return [
-		'filters'  => $filters,
-		'partners' => $partners,
-		'plus'     => $partners->filterBy('isPlusPartner', true),
-		'standard' => $partners->filterBy('isPlusPartner', false),
+		'filters'   => $filters,
+		'partners'  => $partners,
+		'certified' => $partners->filterBy('isCertified', true),
+		'regular'   => $partners->filterBy('isCertified', false),
 	];
 };

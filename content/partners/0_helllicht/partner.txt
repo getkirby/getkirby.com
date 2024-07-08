@@ -6,7 +6,11 @@ Subtitle: Digital Agency
 
 ----
 
-Package: team+
+Plan: certified
+
+----
+
+People: 4+
 
 ----
 
@@ -62,4 +66,4 @@ Uuid: 7o3bFtKc91TTKirR
 
 ----
 
-Text: 
+Text:

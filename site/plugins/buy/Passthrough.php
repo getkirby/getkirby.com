@@ -9,6 +9,8 @@ class Passthrough
 	public function __construct(
 		public string|null $license = null,
 		public bool $gratitude = false,
+		public int $multiplier = 1,
+		public string|null $partner = null,
 		public int $customerDonation = 0,
 		public int $teamDonation = 0
 	) {
@@ -52,6 +54,8 @@ class Passthrough
 		return json_encode([
 			'license'          => $this->license,
 			'gratitude'        => $this->gratitude,
+			'multiplier'       => $this->multiplier,
+			'partner'          => $this->partner,
 			'customerDonation' => $this->customerDonation,
 			'teamDonation'     => $this->teamDonation,
 		]);

@@ -6,7 +6,11 @@ Subtitle: Digital Agency
 
 ----
 
-Package: team+
+Plan: certified
+
+----
+
+People: 4+
 
 ----
 

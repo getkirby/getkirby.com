@@ -1,13 +1,23 @@
 <?php
 
 return [
-	'basic' => [
-		'product' => 824338,
-		'regular' => 99,
-	],
-	'enterprise' => [
-		'product' => 824340,
-		'regular' => 349,
+	'products' => [
+		'basic' => [
+			'product' => 824338,
+			'regular' => 99,
+		],
+		'enterprise' => [
+			'product' => 824340,
+			'regular' => 349,
+		],
+		'partner-certified' => [
+			'product' => 822284,
+			'regular' => 499,
+		],
+		'partner-regular' => [
+			'product' => 824333,
+			'regular' => 99,
+		],
 	],
 	'revenueLimit' => 1000000,
 	'sale' => [

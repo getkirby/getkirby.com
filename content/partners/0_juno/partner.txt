@@ -6,7 +6,11 @@ Subtitle: Branding and Design Agency
 
 ----
 
-Package: team
+Plan: regular
+
+----
+
+People: 4+
 
 ----
 

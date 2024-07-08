@@ -6,7 +6,11 @@ Subtitle: Web development with ♥
 
 ----
 
-Package: team
+Plan: regular
+
+----
+
+People: 2
 
 ----
 
@@ -50,4 +54,4 @@ Uuid: HV3x256gkO7W9cjd
 
 ----
 
-Text: 
+Text:

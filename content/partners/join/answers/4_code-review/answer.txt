@@ -2,9 +2,9 @@ Title: What do I need to keep in mind for the code review project?
 ----
 Text:
 
-The project you submit for code review (only for the Solo+/Team+ plans) must meet the following requirements:
+The project you submit for code review (only for Certified partners) must meet the following requirements:
 
-- The project must be a Kirby 3 or 4 project.
+- The project must be a Kirby 3 or (ideally) 4 project.
 - The project must be a published project that is available via a public URL for performance testing.
 - The project must include steps for local installation and must contain all data required to run the project without errors.
 - For privacy reasons, the project should not contain user accounts; if it does contain accounts, provide information which account can be used for testing.

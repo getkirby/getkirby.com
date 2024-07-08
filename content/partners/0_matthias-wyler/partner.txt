@@ -6,7 +6,11 @@ Subtitle: Digital Design Studio
 
 ----
 
-Package: solo+
+Plan: certified
+
+----
+
+People: 1
 
 ----
 
@@ -54,7 +58,7 @@ Uuid: KDu3cOsBCQblEibo
 
 ----
 
-Text: 
+Text:
 
 ----
 Contactlink: mailto:kirby@matthiaswyler.com

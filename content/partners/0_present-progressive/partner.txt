@@ -6,7 +6,11 @@ Subtitle: Design Studio
 
 ----
 
-Package: team
+Plan: regular
+
+----
+
+People: 2
 
 ----
 
@@ -61,4 +65,4 @@ Uuid: 9zwHYUg5P7fxbada
 
 ----
 
-Text: 
+Text:

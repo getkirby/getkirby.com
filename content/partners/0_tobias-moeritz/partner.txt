@@ -2,7 +2,11 @@ Title: Tobias Möritz
 
 ----
 
-Package: solo+
+Plan: certified
+
+----
+
+People: 1
 
 ----
 
