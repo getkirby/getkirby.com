@@ -61,7 +61,7 @@
 		</li>
 		<li class="extra">
 			<span class="icon"><?= icon('star') ?></span>
-			10% discount on all licenses
+			10% discount on all new licenses
 		</li>
 		<li class="extra">
 			<span class="icon"><?= icon('star') ?></span>
