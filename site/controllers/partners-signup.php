@@ -5,13 +5,14 @@ use Buy\Passthrough;
 use Buy\Product;
 use Kirby\Cms\App;
 use Kirby\Cms\Page;
+use Kirby\Honey\Time;
 use Kirby\Http\Remote;
 
 return function (App $kirby, Page $page) {
 	// submitted form
 	if ($kirby->request()->is('POST') === true) {
 		$visitor      = Paddle::visitor();
-		$timestamp    = explode(':', get('timestamp'));
+		$timestamp    = get('timestamp');
 		$people       = get('people');
 		$peopleNum    = max(1, min(4, (int)$people));
 		$plan         = get('plan');
@@ -69,15 +70,7 @@ return function (App $kirby, Page $page) {
 			// prevent submissions faster than 1 minute (spam protection)
 			// (only needed for new applications because otherwise
 			// there will be a redirect to Paddle)
-			if ($timestamp[0] > time() - 60) {
-				throw new Exception('To protect against spam, we block submissions faster than 1 minute. Please try again, sorry for the inconvenience.');
-			}
-
-			$timestampHash = hash_hmac('sha256', $timestamp[0], 'kirby');
-
-			if (hash_equals($timestampHash, $timestamp[1]) !== true) {
-				throw new Exception('Spam protection hash was manipulated');
-			}
+			Time::validate($timestamp);
 
 			// submit form values to Airtable
 			$response = Remote::post('https://api.airtable.com/v0/appeeHREbUMMaZGRP/tblrKOCF0cGAZmUQR', [
