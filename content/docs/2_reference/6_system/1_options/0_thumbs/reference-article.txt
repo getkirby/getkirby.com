@@ -19,7 +19,7 @@ return [
 ];
 ```
 
-To be used with the `$file->thumb()` method. (link: docs/reference/objects/file/thumb text: Learn more ›)
+To be used with the `$file->thumb()` method. (link: docs/reference/objects/cms/file/thumb text: Learn more ›)
 
 ## Srcsets
 
@@ -38,7 +38,7 @@ return [
 ];
 ```
 
-To be used with the `$file->srcset()` method. (link: docs/reference/objects/file/srcset text: Learn more ›)
+To be used with the `$file->srcset()` method. (link: docs/reference/objects/cms/file/srcset text: Learn more ›)
 
 ## Auto-orient
 
