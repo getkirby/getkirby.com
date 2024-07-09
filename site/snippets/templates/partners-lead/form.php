@@ -88,7 +88,7 @@
 
 					<div v-if="isBusiness" class="field">
 						<label class="label" for="company">
-							Company
+							Company <abbr title="Required" aria-hidden>*</abbr>
 						</label>
 						<input
 							id="company"
@@ -123,19 +123,18 @@
 			</div>
 
 			<div class="checkout-field field">
-				<label class="label" for="project">
-					Project description <abbr title="Required" aria-hidden="">*</abbr>
+				<label class="label" for="language">
+					Language
 				</label>
-				<textarea
-					id="project"
-					name="project"
+				<input
+					id="language"
+					name="language"
 					class="input"
-					rows="4"
-					v-model="form.project"
-					required
-				></textarea>
+					type="text"
+					v-model="form.language"
+				>
 				<span class="help">
-					Describe your project as detailed as possible.
+					In which language(s) do you prefer to communicate?
 				</span>
 			</div>
 		</div>
@@ -143,21 +142,21 @@
 		<div
 			class="flex flex-column justify-between"
 		>
-			<div>
+			<div class="mb-6">
 				<div class="checkout-field field mb-6">
-					<label class="label" for="partner">
-						Type of partner <abbr title="Required" aria-hidden="">*</abbr>
+					<label class="label" for="project">
+						Project description <abbr title="Required" aria-hidden="">*</abbr>
 					</label>
 					<textarea
-						id="partner"
-						name="partner"
+						id="project"
+						name="project"
 						class="input"
-						rows="2"
-						v-model="form.partner"
+						rows="4"
+						v-model="form.project"
 						required
 					></textarea>
 					<span class="help">
-						Whether you prefer a freelancer, an agency, a developer or designer etc.
+						Describe your project as detailed as possible.
 					</span>
 				</div>
 
@@ -205,21 +204,20 @@
 					</p>
 				</fieldset>
 
-				<div
-					class="checkout-field field"
-				>
-					<label class="label" for="language">
-						Language
+				<div class="checkout-field field mb-6">
+					<label class="label" for="partner">
+						Type of partner <abbr title="Required" aria-hidden="">*</abbr>
 					</label>
 					<input
-						id="language"
-						name="language"
+						id="partner"
+						name="partner"
 						class="input"
 						type="text"
-						v-model="form.language"
+						v-model="form.partner"
+						required
 					>
 					<span class="help">
-						In which language(s) do you prefer to communicate?
+						Whether you prefer a freelancer, an agency, a developer or designer etc.
 					</span>
 				</div>
 			</div>
