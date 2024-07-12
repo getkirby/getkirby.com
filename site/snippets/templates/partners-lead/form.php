@@ -177,6 +177,7 @@
 							class="input"
 							rows="4"
 							v-model="form.project"
+							placeholder="What are you building? What do you expect to be delivered? Are there any deadlines? The more details, the better."
 							required
 						></textarea>
 					</div>
@@ -234,7 +235,7 @@
 
 				<div class="checkout-field field mb-6">
 					<label class="label" for="partner">
-						What kind of partner do you need? <abbr title="Required" aria-hidden="">*</abbr>
+						Type of project partner needed</abbr>
 					</label>
 					<input
 						id="partner"
@@ -242,7 +243,6 @@
 						class="input"
 						type="text"
 						v-model="form.partner"
-						required
 					>
 					<span class="help">
 						Whether you prefer a freelancer, an agency, a developer or designer etc.
