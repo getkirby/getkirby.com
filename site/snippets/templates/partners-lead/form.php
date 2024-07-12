@@ -147,14 +147,16 @@
 					<label class="label" for="project">
 						Project description <abbr title="Required" aria-hidden="">*</abbr>
 					</label>
-					<textarea
-						id="project"
-						name="project"
-						class="input"
-						rows="4"
-						v-model="form.project"
-						required
-					></textarea>
+					<div :data-value="form.project" class="autogrow">
+						<textarea
+							id="project"
+							name="project"
+							class="input"
+							rows="4"
+							v-model="form.project"
+							required
+						></textarea>
+					</div>
 					<span class="help">
 						Describe your project as detailed as possible.
 					</span>

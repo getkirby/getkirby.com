@@ -1,0 +1,22 @@
+/* Autogrowing textarea */
+.autogrow {
+	display: grid;
+}
+
+.autogrow::after {
+	content: attr(data-value) " ";
+	white-space: pre-wrap;
+	visibility: hidden;
+}
+.autogrow > textarea {
+	resize: none;
+	overflow: hidden;
+}
+.autogrow > textarea,
+.autogrow::after {
+	padding: var(--spacing-2);
+	border-radius: var(--rounded-sm);
+	font: inherit;
+
+	grid-area: 1 / 1 / 2 / 2;
+}
