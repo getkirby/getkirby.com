@@ -21,6 +21,26 @@
 	background: rgba(200, 200, 200, .1);
 }
 
+.lead .radios {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	border: 1px solid var(--color-border);
+	border-radius: var(--rounded);
+	overflow: hidden;
+}
+.lead .radios label {
+	display: flex;
+	gap: var(--spacing-2);
+	align-items: center;
+	background: white;
+	padding: var(--spacing-2);
+}
+
+.lead .radios + .fields {
+	margin-top: var(--spacing-2)
+}
+
 [v-cloak] {
 	display: none !important;
 }
@@ -50,6 +70,7 @@
 							class="input"
 							type="text"
 							v-model="form.name"
+							placeholder="Jane Doe"
 							required
 						>
 					</div>
@@ -64,6 +85,7 @@
 							class="input"
 							type="email"
 							v-model="form.email"
+							placeholder="mail@example.com"
 							required
 						>
 					</div>
@@ -96,6 +118,7 @@
 							class="input"
 							type="text"
 							v-model="form.company"
+							placeholder="Awesome Inc."
 							required
 						>
 					</div>
@@ -164,29 +187,32 @@
 
 				<fieldset class="checkout-fieldset">
 					<legend>Project budget</legend>
-					<div class="fields">
-						<div class="field">
-							<label class="label" for="budget">
-								Status <abbr title="Required" aria-hidden>*</abbr>
-							</label>
-							<select
-								id="budget"
-								name="budget"
-								class="input"
-								v-model="form.budget"
-								required
-							>
-								<option value="known">I already have a budget in mind</option>
-								<option value="unknown">Help me determine what budget my project requires</option>
-							</select>
-						</div>
 
-						<div
-							v-if="form.budget === 'known'"
-							class="field"
-						>
+					<div class="radios">
+						<label>
+							<input
+								type="radio"
+								name="budget"
+								v-model="form.budget"
+								value="known"
+							/>
+							I already have a budget in mind
+						</label>
+						<label>
+							<input
+								type="radio"
+								name="budget"
+								v-model="form.budget"
+								value="unknown"
+							/>
+							Help me determine what budget my project requires
+						</label>
+					</div>
+
+					<div v-if="form.budget === 'known'" v-cloak class="fields">
+						<div class="field">
 							<label class="label" for="budget_available">
-								Amount <abbr title="Required" aria-hidden>*</abbr>
+								Budget <abbr title="Required" aria-hidden>*</abbr>
 							</label>
 							<input
 								id="budget_available"
@@ -208,7 +234,7 @@
 
 				<div class="checkout-field field mb-6">
 					<label class="label" for="partner">
-						Type of partner <abbr title="Required" aria-hidden="">*</abbr>
+						What kind of partner do you need? <abbr title="Required" aria-hidden="">*</abbr>
 					</label>
 					<input
 						id="partner"
