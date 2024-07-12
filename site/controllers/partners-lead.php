@@ -11,7 +11,6 @@ return function (App $kirby, Page $page) {
 		try {
 			Time::validate(get('timestamp'));
 		} catch (Exception $e) {
-			$status  = 'alert';
 			$message = $e->getMessage();
 		}
 
@@ -31,20 +30,9 @@ return function (App $kirby, Page $page) {
 		$kirby->email([
 			'from'     => 'partners@getkirby.com',
 			'fromName' => 'Kirby Team',
-			'to'       => $email,
-			'subject'  => 'Your Kirby project request',
-			'template' => 'partner-lead-response',
-			'data'     => [
-				'name' => $name
-			]
-		]);
-
-		$kirby->email([
-			'from'     => 'partners@getkirby.com',
-			'fromName' => 'Kirby Team',
 			'to'       => 'partners@getkirby.com',
 			'subject'  => 'New project lead',
-			'template' => 'partner-lead-request',
+			'template' => 'partner-lead',
 			'data'     => [
 				'name'     => $name,
 				'email'    => $email,
@@ -58,14 +46,12 @@ return function (App $kirby, Page $page) {
 			]
 		]);
 
-		$status  = 'success';
-		$message = 'Project has been posted';
+		go('partners/lead/success');
 	}
 
 	return [
 		'message'   => $message ?? null,
 		'questions' => $page->find('answers')->children(),
-		'status'    => $status ?? null,
 		'timestamp' => Time::get()
 	];
 };
