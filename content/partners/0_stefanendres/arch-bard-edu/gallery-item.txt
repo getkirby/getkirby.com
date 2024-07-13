@@ -1,0 +1,13 @@
+Title: arch.bard.edu
+
+----
+
+Info: Portfolio for Dept. of Architecture, Bard College New York, US
+
+----
+
+Link: https://arch.bard.edu/
+
+----
+
+Uuid: b54IGz9LZILRm6kW

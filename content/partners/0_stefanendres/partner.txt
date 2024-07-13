@@ -1,0 +1,64 @@
+Title: stefanendres.com
+
+----
+
+Subtitle: Designer, Fullstack Developer and Digital Art-Director
+
+----
+
+Plan: regular
+
+----
+
+People: 1
+
+----
+
+
+Website: https://stefanendres.com
+
+----
+
+Location: Nuremberg, Germany
+
+----
+
+Summary: [stefanendres.com](https://www.stefanendres.com/) is designing, directing and developing. [stefanendres.com](https://www.stefanendres.com/) creates identities and experiences, custom tools and products for browsers, screens and devices.
+
+----
+
+Contactlink: mailto:info@stefanendres.com
+
+----
+
+Languages: English, German, French
+
+----
+
+Description: [stefanendres.com](https://www.stefanendres.com/) is designing, directing and developing. [stefanendres.com](https://www.stefanendres.com/) creates identities and experiences, custom tools and products for browsers, screens and devices. [stefanendres.com](https://www.stefanendres.com/) supports artists, designers, institutes and organizations to grasp web technologies and grow online. [stefanendres.com](https://www.stefanendres.com/) operates internationally on a freelance basis or in close [collaborations](https://www.stefanendres.com/bio) right now.
+
+----
+
+Expertise:
+
+- Creation of Commercial as well as Experimental Experiences
+- Visual Strategy & Creative Direction
+- Interface Design & Interaction Design
+- Full Stack Web Development
+    - Rapid Frontend & Backend Development
+    - Extreme Customization
+    - Rendering & Performance Optimization
+    - Strong focus on Accessibility and SEO
+    - API and E-Commerce Integration
+    - Neural Search Integration
+- Institutional Teaching in applied and artistic contexts
+- Mediation between Design and Code
+- [Read more here](https://stefanendres.com/bio/)
+
+----
+
+Region: Europe
+
+----
+
+Uuid: CoA8CCdj148j9ojx
