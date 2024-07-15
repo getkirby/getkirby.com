@@ -62,23 +62,21 @@ Description:
 
 With a background in Software Development and a Bachelor's degree in Interaction Design from ZHdK (Switzerland, 2009), I focused on Web Development early in my career. I now live in central Ireland with my wife and four kids.
 
-**Kirby Mastery**
+### Kirby Mastery
 
 I've been part of the Kirby community since 2015, working on over 50 projects using Kirby for websites and custom tools. I create many free plugins because I believe in open source for education and code stability.
 
-**Front- and Backend Development**
+### Front- and Backend Development
 
-Bridging the gap. As a freelancer and agency employee, I’ve planned and created websites, often serving as the bridge between designers and developers.
+**Bridging the gap.** As a freelancer and agency employee, I’ve planned and created websites, often serving as the bridge between designers and developers.
 
-Less is more. As a minimalist, I make websites fast, lean, and user-friendly for visitors and editors. I use various coding techniques and caching layers to speed things up, customize workflows with Panel extensions, and provide Web UX Design consulting.
+**Less is more.** As a minimalist, I make websites fast, lean, and user-friendly for visitors and editors. I use various coding techniques and caching layers to speed things up, customize workflows with Panel extensions, and provide Web UX Design consulting.
 
-Think first, act later. I excel in projects with complex setups involving large datasets, multiple data sources, or integrations with external services. I approach these challenges with solid planning, Test-Driven Development, and collaboration with other professionals when needed.
+**Think first, act later.** I excel in projects with complex setups involving large datasets, multiple data sources, or integrations with external services. I approach these challenges with solid planning, Test-Driven Development, and collaboration with other professionals when needed.
 
-All or parts. While I prefer working on projects from start to finish, you can hire me for specific tasks, like importing data from a database or optimizing your existing website’s performance.
+**All or parts.** While I prefer working on projects from start to finish, you can hire me for specific tasks, like importing data from a database or optimizing your existing website’s performance.
 
-**Klub Plugin**
-
-I offer a paid extension to Kirby CMS called Klub, which supports paywalls, memberships, and subscriptions.
+**Klub Plugin.** I offer a paid extension to Kirby CMS called Klub, which supports paywalls, memberships, and subscriptions.
 
 ----
 
