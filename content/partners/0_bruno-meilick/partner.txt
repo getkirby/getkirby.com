@@ -30,7 +30,7 @@ Region: Europe
 
 ----
 
-Summary: I graduated 2009 from Zurich University of the Arts as Bachelor in Interaction Design, specialized in Webdevelopment and mainly work as freelancer for design agencies.
+Summary: I graduated in 2009 from Zurich University of the Arts with a Bachelor's degree in Interaction Design, specializing in Web Development. I mainly work as a freelancer for design agencies, creating efficient web solutions.
 
 ----
 
@@ -60,32 +60,40 @@ Description:
 
 ### Bruno Meilick
 
-With my background as a trained Software Developer and graduated Bachelor in Interaction Design ZHdK (Switzerland, 2009), I specialized in Web-Development early in my career. I live on the West Coast of Ireland with my wife and four kids.
+With a background in Software Development and a Bachelor's degree in Interaction Design from ZHdK (Switzerland, 2009), I focused on Web Development early in my career. I now live in central Ireland with my wife and four kids.
 
-### Kirby mastery
-Since I joined the Kirby community back in 2015, I have created more than 50 projects utilizing Kirby for websites and custom tools. I create many free plugins because I believe in open source for educational purposes and as a means of code stability.
+**Kirby Mastery**
 
-### Front- and Backend Development
+I've been part of the Kirby community since 2015, working on over 50 projects using Kirby for websites and custom tools. I create many free plugins because I believe in open source for education and code stability.
 
-**Way and Bridge.** During my work as a hired freelancer or employee of design agencies, I was planning and creating websites as well as acting as middle between designers and developers.
+**Front- and Backend Development**
 
-**Less is more.** Being a minimalist at heart I focus on making websites fast, lean and easy to use for both the visitors and the editors. I apply various coding tricks and layers of caches to speed things up, map client workflows to custom Panel extensions or can consult you on Web UX Design.
+Bridging the gap. As a freelancer and agency employee, I’ve planned and created websites, often serving as the bridge between designers and developers.
 
-**Think first, act later.** Projects with complex setups like with a lot of data, multiple data sources or connections/export to external services are right up my alley of expertise. I tackle them with a solid plan, Test Driven Development and when needed joining up with other designers/developers.
+Less is more. As a minimalist, I make websites fast, lean, and user-friendly for visitors and editors. I use various coding techniques and caching layers to speed things up, customize workflows with Panel extensions, and provide Web UX Design consulting.
 
-**All or Parts. **While I do prefer working on projects from start to finish you can also hire me to add custom implementations like importing data from a database or to improve the performance of your existing website.
+Think first, act later. I excel in projects with complex setups involving large datasets, multiple data sources, or integrations with external services. I approach these challenges with solid planning, Test-Driven Development, and collaboration with other professionals when needed.
+
+All or parts. While I prefer working on projects from start to finish, you can hire me for specific tasks, like importing data from a database or optimizing your existing website’s performance.
+
+**Klub Plugin**
+
+I offer a paid extension to Kirby CMS called Klub, which supports paywalls, memberships, and subscriptions.
 
 ----
 
 Expertise:
 
-- Custom Kirby implementations
-- Performance optimizations
-- Webshop/payment integrations
-- Custom styled newsletter/emails
-- Import/export of data
-- Kirby extensions
-- PHP, Alpine.js, Tailwind.css
+- Performance optimisations
+- Unit and Browser testing
+- A/B testing, feature flags
+- Import/export/migration of data
+- Webshop/payment and subscriptions
+- Newsletter and transactional email
+- Responsive, custom styled emails
+- Relational Databases and MongoDB
+- PHP, Alpine.js, Tailwind CSS
+- CI/CD
 
 ----
 
