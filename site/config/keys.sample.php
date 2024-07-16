@@ -7,6 +7,7 @@ return [
 		'bot'   => '',
 		'guild' => ''
 	],
+	'fastmail'  => '',
 	'github'    => '',
 	'hooks'     => '',
 	'hub'       => '',
