@@ -2,20 +2,26 @@ Text:
 
 ## Example
 
-Given a translation with a placeholder
+Given a translation with a placeholder. You can define the translation as an array for different counts.
 
 ```php
 'translations' => [
     'en' => [
-        'errors'  => 'There are { count } errors in the form.',
+        'errors'  => ['There are no errors', 'There is { count } error.', 'There are { count } errors.'],
     ],
     // …
 ],
 ```
 
-Replace placeholder with given number
+Replace placeholder with given number.
 
 ```php
+echo tc('errors', 0);
+// There are no errors.
+
+echo tc('errors', 1);
+// There is 1 error.
+
 echo tc('errors', 5);
-// There are 5 errors in the form.
+// There are 5 errors.
 ```
