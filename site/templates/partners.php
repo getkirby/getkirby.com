@@ -109,7 +109,7 @@
 		</div>
 
 		<nav class="partners-ctas">
-			<a class="btn btn--filled" href="https://airtable.com/shrfCqUxq5L3GyhIb">
+			<a class="btn btn--filled" href="<?= url('partners/lead') ?>">
 				<?= icon('email') ?>
 				Post your project
 			</a>
