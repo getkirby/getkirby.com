@@ -138,7 +138,6 @@
 					class="input"
 					rows="2"
 					v-model="form.contact"
-					required
 				></textarea>
 				<span class="help">
 					How do you want to be contacted? Please provide any additional contact details such as a phone number.
