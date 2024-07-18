@@ -46,6 +46,10 @@ Expertise:
 
 ----
 
+Plugindeveloper: jakub-pelak
+
+----
+
 Uuid: ALWxtAf5mxmduyBx
 
 ----
