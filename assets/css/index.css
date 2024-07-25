@@ -1,4 +1,15 @@
-@import "framework/colors.css";
+@import "config/colors.css";
+@import "config/font-family.css";
+@import "config/font-size.css";
+@import "config/font-weight.css";
+@import "config/height.css";
+@import "config/opacity.css";
+@import "config/pattern.css";
+@import "config/rounded.css";
+@import "config/shadow.css";
+@import "config/spacing.css";
+@import "config/z-index.css";
+
 @import "framework/variables.css";
 @import "framework/reset.css";
 @import "framework/buttons.css";

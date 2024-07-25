@@ -182,10 +182,14 @@ html {
 	align-items: center;
 	font-family: var(--font-mono);
 	font-size: var(--text-xs);
-	background: var(--prose-code-bg);
+	background: var(--color-gray-300);
 	padding: var(--spacing-1) 0.375rem;
 	border-radius: var(--rounded-sm);
 	color: inherit;
+}
+
+.reference-meta :not(.since) a:hover {
+	filter: brightness(97%);
 }
 
 .reference-meta svg {
