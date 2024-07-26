@@ -2,11 +2,11 @@ Title: Present Progressive
 
 ----
 
-Subtitle: Design Studio
+Subtitle: Digital Design Studio
 
 ----
 
-Plan: regular
+Plan: certified
 
 ----
 
@@ -27,6 +27,10 @@ Region: Europe
 ----
 
 Discordhandle: @bemas, @chris-almo
+
+----
+
+Plugindeveloper: presprog
 
 ----
 
@@ -52,12 +56,11 @@ We believe in the power of enduring partnerships. This commitment lets us contin
 Expertise:
 
 - One-stop custom Kirby projects
-- Website concept and design
+- Website concept, design and development
 - Screen design (UX/UI)
-- Web development (frontend/backend)
-- Plugin development
+- Web application development (front-end and back-end)
+- Custom Kirby plugins
 - Vue.js / Symfony / Alpine.js / Tailwind CSS
-- Brand design
 
 ----
 
