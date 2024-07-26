@@ -77,7 +77,7 @@ return function (App $kirby, Page $page) {
 				'data' => json_encode([
 					'fields' => [
 						'Name'                    => $businessName,
-						'Status'                  => 'Need to review',
+						'Status'                  => 'Send notification of receipt',
 						'Plan'                    => $plan,
 						'People'                  => $people,
 						'Price'                   => $visitor->currencySign() . $localizedPrice,
@@ -119,7 +119,9 @@ return function (App $kirby, Page $page) {
 			$people = $partner->people()->value();
 		}
 	}
-
+	/**
+	 * @var Page|null $renew
+	 */
 	return [
 		'certified' => Product::PartnerCertified,
 		'message'   => $message ?? null,
