@@ -161,7 +161,9 @@
 				<?php foreach ($page->children() as $project): ?>
 					<article>
 						<figure>
+							<?php if ($project->link()->isNotEmpty()): ?>
 							<a href="<?= $project->link() ?>" target="_blank">
+							<?php endif ?>
 								<div style="--aspect-ratio: 3/4" class="bg-light mb-6 shadow-lg">
 									<?php if ($image = $project->image()): ?>
 										<?= $image->name() === 'example' ? $image : img($image, [
@@ -181,7 +183,7 @@
 									<?php endif ?>
 								</div>
 								<figcaption class="font-mono text-sm mb-3">
-									<h3 class="h6 truncate link">
+									<h3 class="h6 truncate <?= e($project->link()->isNotEmpty(), 'link') ?>">
 										<?= $project->title() ?>
 									</h3>
 									<?php if ($project->info()->isNotEmpty()): ?>
@@ -190,7 +192,9 @@
 									</p>
 									<?php endif ?>
 								</figcaption>
+							<?php if ($project->link()->isNotEmpty()): ?>
 							</a>
+							<?php endif ?>
 						</figure>
 					</article>
 				<?php endforeach ?>

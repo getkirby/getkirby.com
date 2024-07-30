@@ -2,7 +2,7 @@ Title: blogvoyage.cc
 
 ----
 
-Client:
+Info: Client: Personal side project
 
 ----
 
@@ -14,4 +14,4 @@ Uuid: bkuwqbW7VQ0XoD52
 
 ----
 
-Text: 
+Text:
