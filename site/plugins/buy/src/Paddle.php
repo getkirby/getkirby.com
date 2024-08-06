@@ -37,6 +37,7 @@ class Paddle
 			'expires'           => date('Y-m-d', strtotime('+1 day')),
 			'quantity_variable' => false,
 			'quantity'          => 1,
+			'discountable'      => (new Sale)->isActive() ? 0 : 1,
 			...$payload
 		];
 
