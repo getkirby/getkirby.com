@@ -1,5 +1,0 @@
-Title: Joyent
-
-----
-
-MaxHeight: 1.5rem;

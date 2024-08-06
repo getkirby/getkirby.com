@@ -1,0 +1,9 @@
+Title: New York Times
+
+----
+
+Featured: true
+
+----
+
+Top: 0.25rem

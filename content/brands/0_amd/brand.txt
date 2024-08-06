@@ -1,0 +1,9 @@
+Title: AMD
+
+----
+
+Featured: true
+
+----
+
+Height: 2.25rem

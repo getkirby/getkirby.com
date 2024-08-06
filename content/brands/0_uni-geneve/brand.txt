@@ -1,0 +1,13 @@
+Title: Université de Genève
+
+----
+
+Tag: edu
+
+----
+
+Height: 3.5rem
+
+----
+
+Top: 0.75rem

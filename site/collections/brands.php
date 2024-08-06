@@ -1,5 +1,5 @@
 <?php
 
 return function () {
-	return page('home/clients')->children()->listed()->shuffle();
+	return page('brands')->children()->listed()->shuffle();
 };

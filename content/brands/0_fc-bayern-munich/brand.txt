@@ -1,0 +1,12 @@
+Title: FC Bayern München
+
+----
+
+Featured: true
+
+----
+
+Tag: sport
+----
+
+Height: 4.25rem

@@ -3,6 +3,7 @@
 use Kirby\Cms\Page;
 
 return [
+	...require dirname(__DIR__) . '/routes/brands.php',
 	...require dirname(__DIR__) . '/routes/buy.php',
 	...require dirname(__DIR__) . '/routes/docs.php',
 	...require dirname(__DIR__) . '/routes/legacy.php',

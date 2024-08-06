@@ -1,0 +1,9 @@
+Title: Seattle Art Museum
+
+----
+
+Featured: true
+
+----
+
+Tag: art

@@ -32,10 +32,11 @@
 	</div>
 
 	<ul class="trust-in-brands columns auto-rows-fr rounded overflow-hidden" style="--columns-sm: 2; --columns-md: 3; --columns: 3; --gap: var(--spacing-1)">
-		<?php foreach(collection('brands')->limit(9) as $client): ?>
-		<li class="bg-light p-6 flex items-center justify-center">
-			<?= $client->image()->read() ?>
-		</li>
+		<?php foreach(collection('brands/featured')->limit(9) as $brand): ?>
+		<?php snippet('brand', [
+			'brand' => $brand,
+			'class' => 'bg-light p-6 flex items-center justify-center'
+		]) ?>
 		<?php endforeach ?>
 	</ul>
 

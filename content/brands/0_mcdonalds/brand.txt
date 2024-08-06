@@ -1,0 +1,5 @@
+Title: McDonald's
+
+----
+
+Featured: true

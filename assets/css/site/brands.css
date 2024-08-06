@@ -1,5 +1,6 @@
 .brands {
 	--columns: 2;
+
 	display: grid;
 	grid-template-columns: repeat(var(--columns), 1fr);
 	grid-row-gap: var(--spacing-12);
@@ -13,57 +14,11 @@
 }
 @media screen and (min-width: 54rem) {
 	.brands {
-		--columns: 6;
+		--columns: var(--brands-columns, 6);
 	}
 }
 .brands svg {
 	width: 100%;
 	height: auto;
 	max-height: 2.5rem;
-}
-.brands .amd svg {
-	max-height: 2.25rem;
-}
-.brands .arsenal svg {
-	max-height: 4rem;
-}
-.brands .bmj svg {
-	max-height: 3.5rem;
-}
-.brands .eurowings svg {
-	margin-top: -0.5rem;
-}
-.brands .fc-bayern-munich svg {
-	max-height: 4.25rem;
-}
-.brands .fishermans-friend svg {
-	max-height: 4rem;
-}
-.brands .fraport svg {
-	max-height: 2.75rem;
-}
-.brands .joyent svg {
-	max-height: 1.375rem;
-	margin-top: 4px;
-}
-.brands .lmu svg {
-	max-height: 4rem;
-}
-.brands .nyt svg {
-	margin-top: 0.25rem;
-}
-.brands .obs svg {
-	max-height: 5rem;
-}
-.brands .philips svg {
-	max-height: 2rem;
-}
-.brands .red-bull svg {
-	max-height: 4.5rem;
-}
-.brands .stanford svg {
-	max-height: 1.5rem;
-}
-.brands .ucla svg {
-	max-height: 3rem;
 }
