@@ -1,0 +1,18 @@
+Title: For designers
+----
+For: Designers
+----
+Description: Staying out of your way: Kirby provides timeless simplicity in design and code
+----
+Benefits:
+
+- Design without compromises
+- Clear separation between design and content
+- A fully customizable admin interface
+- White-labeled from the start
+- A fantastic prototyping companion
+
+----
+Thumbnail:
+  -
+  lead: The CMS built

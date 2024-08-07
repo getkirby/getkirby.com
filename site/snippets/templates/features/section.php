@@ -13,7 +13,27 @@
 	<?php endif ?>
 
 	<div class="features-section-figure">
-		<?php snippet($figure) ?>
+		<?php if (is_array($figure) === true): ?>
+			<figure>
+				<?= img($figure['image'], [
+					'alt' => $figure['alt'],
+					'class' => 'rounded',
+					'src' => [
+						'width' => 576,
+					],
+					'srcset' => [
+						300,
+						576,
+						750,
+						900,
+						1152,
+						1500,
+					]
+				]) ?>
+			</figure>
+		<?php else: ?>
+			<?php snippet($figure) ?>
+		<?php endif ?>
 	</div>
 
 	<?php if (empty($features) === false): ?>
