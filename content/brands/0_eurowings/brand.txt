@@ -6,4 +6,8 @@ Featured: true
 
 ----
 
+Tag: hospitality
+
+----
+
 Top: -0.5rem;
