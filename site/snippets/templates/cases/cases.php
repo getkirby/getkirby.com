@@ -1,4 +1,4 @@
-<ul class="cases columns mb-24" style="--columns-sm: 1; --columns-md: 2; --columns-lg: 3; --gap: var(--container-padding)">
+<ul class="cases columns mb-24" style="--columns-sm: 1; --columns-md: 2; --columns-lg: <?= $columns ?? 3 ?>; --gap: var(--container-padding)">
 	<?php foreach ($cases as $case): ?>
 	<li>
 		<article class="leading-tight color-white">
