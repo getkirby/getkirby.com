@@ -4,7 +4,7 @@
 		<hr class="hr mb-6">
 		<?php endif ?>
 
-		<div class="columns" style="--columns-sm: 1; --columns-md: 1; --columns: 2; --gap: var(--spacing-12)">
+		<div class="flex">
 			<div class="footer-info mb-6">
 				<p class="font-bold mb-1">Kirby</p>
 				<p class="mb-1">The CMS that adapts to any project. Made for developers, designers, creators and clients.</p>
@@ -30,7 +30,7 @@
 				</nav>
 			</div>
 			<nav aria-label="Footer menu" class="footer-menu">
-				<ul class="footer-menu-1 columns" style="--columns-sm: 2; --columns-md: 3; --columns: 3; --gap: var(--spacing-6)">
+				<ul class="footer-menu-1 columns" style="--columns-sm: 2; --columns-md: 3; --columns: 3; --column-gap: var(--spacing-8); --row-gap: var(--spacing-6)">
 					<li>
 						<p class="font-bold mb-1">The CMS</p>
 						<ul class="footer-menu-2">
@@ -40,6 +40,7 @@
 									'For designers'          => page('for/designers'),
 									'For content creators'   => page('for/creators'),
 									'For clients & agencies' => page('for/clients'),
+									'For education'          => page('for/education'),
 									'Showcase'               => page('love'),
 									'Releases'               => page('releases'),
 									'Feedback'               => 'https://feedback.getkirby.com',

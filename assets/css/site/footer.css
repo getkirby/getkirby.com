@@ -1,6 +1,17 @@
 .footer .container {
 	padding-top: var(--spacing-36);
 }
+.footer .flex {
+	justify-content: space-between;
+	gap: var(--spacing-12);
+}
+
+@media screen and (max-width: 50rem) {
+	.footer .flex {
+		flex-direction: column;
+	}
+}
+
 .footer-info {
 	max-width: 10rem;
 }
