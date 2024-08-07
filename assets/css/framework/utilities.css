@@ -83,7 +83,7 @@
 	display: inline-flex;
 }
 
-.inset-0	{
+.inset-0 {
 	top: 0;
 	right: 0;
 	bottom: 0;
@@ -156,6 +156,9 @@
 .mb-42 {
 	margin-bottom: var(--spacing-42);
 }
+.mb-56 {
+	margin-bottom: calc(var(--spacing-1) * 56);
+}
 
 .ml-auto {
 	margin-left: auto;
@@ -186,7 +189,6 @@
 	place-items: center;
 	align-content: center;
 }
-
 
 .p-container {
 	padding: var(--container-padding);
@@ -269,7 +271,7 @@
 	box-shadow: var(--shadow-xl);
 }
 
-.sr-only	{
+.sr-only {
 	position: absolute;
 	width: 1px;
 	height: 1px;

@@ -9,10 +9,6 @@
 }
 
 /** UTILITIES **/
-.mb-56 {
-	margin-bottom: calc(var(--spacing-1) * 56);
-}
-
 .playground .hr-h,
 .playground .hr-v {
 	display: block;
