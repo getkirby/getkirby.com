@@ -1,0 +1,18 @@
+Title: For clients & agencies
+----
+For: Clients
+----
+Description: From specialized to high-traffic: Kirby scales to match the popularity of any project
+----
+Thumbnail:
+  -
+  lead: The CMS built
+----
+Benefits:
+
+- Easy onboarding
+- Unrivalled performance
+- Secure and GDPR compliant
+- Backed by professional support
+- Run by a sustainable business since 2012
+- Trusted by 40k+ clients world-wide

@@ -4,27 +4,27 @@ return [
 	'panel' => [
 		'text' => 'The Panel',
 		'icon' => 'panel',
-		'link' => '/features/creators#panel'
+		'link' => '/for/creators#panel'
 	],
 	'field-blocks' => [
 		'text' => 'Blocks field',
 		'icon' => 'blocks',
-		'link' => '/features/creators#editing'
+		'link' => '/for/creators#editing'
 	],
 	'field-layout' => [
 		'text' => 'Layouts',
 		'icon' => 'blocks',
-		'link' => '/features/designers#layouts'
+		'link' => '/for/designers#layouts'
 	],
 	'plugins' => [
 		'text' => 'Plugins',
 		'icon' => 'box',
-		'link' => '/features/developers#plugins'
+		'link' => '/for/developers#plugins'
 	],
 	'languages' => [
 		'text' => 'Languages',
 		'icon' => 'translate',
-		'link' => '/features/creators#internationalisation'
+		'link' => '/for/creators#internationalisation'
 	],
 	'users' => [
 		'text' => 'Users',
@@ -34,22 +34,22 @@ return [
 	'files' => [
 		'text' => 'Just files & folders',
 		'icon' => 'tag',
-		'link' => '/features/developers#files-and-folders'
+		'link' => '/for/developers#files-and-folders'
 	],
 	'assets' => [
 		'text' => 'Assets',
 		'icon' => 'url',
-		'link' => '/features/creators#assets'
+		'link' => '/for/creators#assets'
 	],
 	'headless' => [
 		'text' => 'Go headless',
 		'icon' => 'cloud',
-		'link' => '/features/developers#headless'
+		'link' => '/for/developers#headless'
 	],
 	'templates' => [
 		'text' => 'Templating',
 		'icon' => 'dashboard',
-		'link' => '/features/developers#templating'
+		'link' => '/for/developers#templating'
 	],
 	'publish-workflow' => [
 		'text' => 'Publishing',

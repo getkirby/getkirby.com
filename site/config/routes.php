@@ -3,7 +3,6 @@
 use Kirby\Cms\Page;
 
 return [
-	...require dirname(__DIR__) . '/routes/brands.php',
 	...require dirname(__DIR__) . '/routes/buy.php',
 	...require dirname(__DIR__) . '/routes/docs.php',
 	...require dirname(__DIR__) . '/routes/legacy.php',
@@ -28,6 +27,18 @@ return [
 			}
 
 			go();
+		}
+	],
+	[
+		'pattern' => 'brands/(:all?)',
+		'action' => function () {
+			go('/');
+		}
+	],
+	[
+		'pattern' => 'features/(:any?)',
+		'action' => function (string $feature = '') {
+			go('/for/' . $feature);
 		}
 	],
 	[

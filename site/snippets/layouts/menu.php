@@ -6,14 +6,14 @@
 	<nav aria-label="Main menu">
 		<ul class="menu-1">
 			<li class="has-submenu">
-				<a href="<?= page('features/developers')->menuUrl() ?>">The CMS</a>
+				<a href="<?= page('for/developers')->menuUrl() ?>">The CMS</a>
 				<ul class="menu-2">
 					<?php snippet('layouts/menu-items', [
 						'items' => [
-							'For developers' => page('features/developers'),
-							'For designers' => page('features/designers'),
-							'For content creators' => page('features/creators'),
-							'For clients & agencies' => page('features/clients'),
+							'For developers'         => page('for/developers'),
+							'For designers'          => page('for/designers'),
+							'For content creators'   => page('for/creators'),
+							'For clients & agencies' => page('for/clients'),
 							'-',
 							'Showcase' => page('love'),
 							'Releases' => page('releases'),

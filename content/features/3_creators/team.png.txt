@@ -1,5 +1,0 @@
-Template: content-type
-----
-Caption: Team
-----
-Text: Introduce your team to the world on your site. Or keep an internal directory of your company with private information for each member. Everything’s possible.
