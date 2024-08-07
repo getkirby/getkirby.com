@@ -33,21 +33,20 @@
 					<?= img('panel.png', [
 						'alt' => 'Panel screenshot: ' . $page->title(),
 						'src' => [
-							'width' => 1520
+							'width' => 2400
 						],
 						'lazy' => false,
 						// sizes generated with https://ausi.github.io/respimagelint/
-						'sizes' => '(min-width: 1860px) 1520px, (min-width: 820px) calc(92.16vw - 176px), 100vw',
+						'sizes' => '(min-width: 1540px) 1248px, (min-width: 1160px) calc(77.78vw + 66px), (min-width: 480px) calc(100vw - 96px), 90vw',
 						'srcset' => [
 							400,
 							600,
 							800,
 							1000,
-							1200,
+							1248,
 							1520,
 							2000,
-							2400,
-							3040
+							2400
 						]
 					]) ?>
 				</section>
