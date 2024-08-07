@@ -15,7 +15,7 @@ extract([
 <section id="more" class="features-more mb-24">
 	<?php snippet('hgroup', [
 		'title'    => 'And so much more',
-		'subtitle' => 'Kirby is packed with features that empower you to build amazing sites.',
+		'subtitle' => $subtitle ?? 'Kirby is packed with features that empower you to build amazing sites.',
 		'mb'       => 6
 	]) ?>
 	<ul class="columns auto-rows-fr" style="--columns-sm: 2; --columns-md: 2; --columns-lg: 5;  --gap: var(--spacing-1)">

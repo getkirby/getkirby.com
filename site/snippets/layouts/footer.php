@@ -36,13 +36,13 @@
 						<ul class="footer-menu-2">
 							<?php snippet('layouts/menu-items', [
 								'items' => [
-									'For developers' => page('features/developers'),
-									'For designers' => page('features/designers'),
-									'For content creators' => page('features/creators'),
-									'For clients & agencies' => page('features/clients'),
-									'Showcase' => page('love'),
-									'Releases' => page('releases'),
-									'Feedback' => 'https://feedback.getkirby.com',
+									'For developers'         => page('for/developers'),
+									'For designers'          => page('for/designers'),
+									'For content creators'   => page('for/creators'),
+									'For clients & agencies' => page('for/clients'),
+									'Showcase'               => page('love'),
+									'Releases'               => page('releases'),
+									'Feedback'               => 'https://feedback.getkirby.com',
 								]
 							]) ?>
 						</ul>
@@ -52,13 +52,13 @@
 						<ul class="footer-menu-2">
 							<?php snippet('layouts/menu-items', [
 								'items' => [
-									'Guide' => page('docs/guide'),
-									'Reference' => page('docs/reference'),
-									'Cookbook' => page('docs/cookbook'),
-									'Quicktips' => page('docs/quicktips'),
+									'Guide'       => page('docs/guide'),
+									'Reference'   => page('docs/reference'),
+									'Cookbook'    => page('docs/cookbook'),
+									'Quicktips'   => page('docs/quicktips'),
 									'Screencasts' => 'https://www.youtube.com/kirbycasts',
-									'Glossary' => page('docs/glossary'),
-									'Archive' => page('docs/archive'),
+									'Glossary'    => page('docs/glossary'),
+									'Archive'     => page('docs/archive'),
 								]
 							]) ?>
 						</ul>
@@ -68,10 +68,10 @@
 						<ul class="footer-menu-2">
 							<?php snippet('layouts/menu-items', [
 								'items' => [
-									'Plugins' => 'https://plugins.getkirby.com',
-									'Themes' => page('themes'),
-									'Newsletter' => page('kosmos'),
-									'Buzz' => page('buzz'),
+									'Plugins'     => 'https://plugins.getkirby.com',
+									'Themes'      => page('themes'),
+									'Newsletter'  => page('kosmos'),
+									'Buzz'        => page('buzz'),
 									'License Hub' => 'https://hub.getkirby.com',
 								]
 							]) ?>
@@ -82,13 +82,13 @@
 						<ul class="footer-menu-2">
 							<?php snippet('layouts/menu-items', [
 								'items' => [
-									'Get together' => page('meet'),
+									'Get together'  => page('meet'),
 									'Support forum' => 'https://forum.getkirby.com',
-									'Discord chat' => 'https://chat.getkirby.com',
+									'Discord chat'  => 'https://chat.getkirby.com',
 									'Community map' => 'https://community.getkirby.com',
-									'Mastodon' => 'https://mastodon.social/@getkirby',
-									'LinkedIn' => 'https://www.linkedin.com/company/getkirby',
-									'Instagram' => 'https://instagram.com/getkirby',
+									'Mastodon'      => 'https://mastodon.social/@getkirby',
+									'LinkedIn'      => 'https://www.linkedin.com/company/getkirby',
+									'Instagram'     => 'https://instagram.com/getkirby',
 								]
 							]) ?>
 						</ul>
@@ -99,10 +99,10 @@
 							<?php snippet('layouts/menu-items', [
 								'items' => [
 									'Security' => page('security'),
-									'Privacy' => page('privacy'),
-									'License' => page('license'),
+									'Privacy'  => page('privacy'),
+									'License'  => page('license'),
 									'Presskit' => page('press'),
-									'Contact' => page('contact'),
+									'Contact'  => page('contact'),
 								]
 							]) ?>
 						</ul>

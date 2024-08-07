@@ -3,3 +3,7 @@ Title: Deutsche Bahn
 ----
 
 Featured: true
+
+----
+
+Tag: hospitality

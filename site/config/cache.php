@@ -19,6 +19,7 @@ return [
 			'love',
 			'meet',
 			'partners',
+			'scenario-education',
 			'themes',
 		]
 	],

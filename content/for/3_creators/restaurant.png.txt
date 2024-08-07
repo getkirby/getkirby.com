@@ -1,0 +1,5 @@
+Template: content-type
+----
+Caption: Restaurant
+----
+Text: Kirby provides the perfect interface for your restaurant. Edit your menu, change opening-hours and upload images of your dishes and interior.

@@ -1,0 +1,201 @@
+Title: For developers
+----
+For: Developers
+----
+Description: A powerful platform: Kirby is built with flexibility and extensibility in mind
+----
+Thumbnail:
+  -
+  lead: The CMS built
+----
+Benefits:
+
+- Battle-tested flat-file foundation
+- Reliable tech stack
+- Versatile templating
+- Headless or not – you decide
+- Powerful plugin platform
+- Extensive docs & great community
+- Built with security in mind
+
+----
+Filesystem:
+
+```filesystem
+content/
+    1_photography/
+        1_animals/
+        2_trees/
+        3_sky/
+        4_oceans/
+            album.txt
+            attention-sharks.jpg
+            island-from-above.jpg
+            jellyfish.jpg
+            nasty-rocks.jpg
+            smashed-by-waves.jpg
+        photography.txt
+    2_notes/
+      20190731_in-the-jungle-of-sumatra/
+      20190905_through-the-desert/
+      20190926_himalaya-and-back/
+      20191005_chasing-waterfalls/
+      20191031_exploring-the-universe/
+        notes.txt
+    3_about/
+        about.txt
+    home/
+        home.txt
+    error/
+        error.txt
+    site.txt
+```
+
+----
+phpTemplate:
+
+```php
+<?php snippet('header') ?>
+
+<article class="album">
+  <h1><?= $page->title() ?></h1>
+  <figure class="cover">
+    <?= $cover->resize(800, 600) ?>
+  </figure>
+  <div class="text">
+    <?= $page->text()->kirbytext() ?>
+  </div>
+  <ul class="gallery">
+    <?php foreach ($gallery as $image): ?>
+    <li><?= $image->crop(300) ?></li>
+    <?php endforeach ?>
+  </ul>
+</article>
+
+<?php snippet('footer') ?>
+```
+
+----
+twigTemplate:
+
+```php
+{% extends 'layout.twig' %}
+
+{% block content %}
+<article class="album">
+  <h1>{{ page.title }}</h1>
+  <figure class="cover">
+    {{ cover.resize(800, 600) }}
+  </figure>
+  <div class="text">
+    {{ page.text.kirbytext | raw }}
+  </div>
+  <ul class="gallery">
+    {% for image in gallery %}
+    <li>{{ image.crop(300) }}</li>
+    {% endfor %}
+  </ul>
+</article>
+{% endblock %}
+```
+
+----
+
+bladeTemplate:
+
+```php
+@extends('layouts.default')
+
+@section('content')
+<article class="album">
+  <h1>{{ $page->title() }}</h1>
+  <figure class="cover">
+    {!! $cover->resize(800, 600) !!}
+  </figure>
+  <div class="text">
+    {!! $page->text()->kirbytext() !!}
+  </div>
+  <ul class="gallery">
+    @foreach($gallery as $image)
+    <li>{!! $image->crop(300) !!}</li>
+    @endforeach
+  </ul>
+</article>
+@endsection
+```
+
+----
+Api:
+
+```yaml "/api/pages/notes/children"
+{
+    "code": 200,
+    "data": [
+        {
+            "id": "notes/across-the-ocean",
+            "num": 20180421,
+            "title": "Across the ocean",
+            "url": "/notes/across-the-ocean"
+        },
+        {
+            "id": "notes/a-night-in-the-forest",
+            "num": 20180625,
+            "title": "A night in the forest",
+            "url": "/notes/a-night-in-the-forest"
+        },
+        {
+            "id": "notes/in-the-jungle-of-sumatra",
+            "num": 20180731,
+            "title": "In the jungle of Sumatra",
+            "url": "/notes/in-the-jungle-of-sumatra"
+        },
+    ],
+    "pagination": {
+        "page": 1,
+        "total": 22,
+        "offset": 0,
+        "limit": 3
+    },
+    "status": "ok",
+}
+```
+
+----
+Users:
+
+```php
+if ($user = $kirby->user()) {
+  echo 'Welcome, ' . $user->name();
+  // your community starts here
+}
+```
+
+----
+Caching:
+
+```php
+return [
+  'cache' => [
+    'pages' => [
+      'active' => true,
+      'type' => 'memcached'
+    ]
+  ]
+];
+```
+----
+
+Assets:
+
+```php
+$image->srcset(
+  '1x' => [
+    'width' => 512,
+    'height' => 512,
+    'crop' => 'center'
+  ],
+  '2x' => [
+    'width' => 1024
+  ]
+]);
+```
