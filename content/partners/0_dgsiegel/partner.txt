@@ -1,0 +1,74 @@
+Title: Daniel G. Siegel
+
+----
+
+Subtitle: Good Strategy & Website for Good Organizations
+
+----
+
+Plan: regular
+
+----
+
+People: 1
+
+----
+
+Website: https://www.dgsiegel.net/
+
+----
+
+Location: Munich, Germany
+
+----
+
+Summary: 
+
+----
+
+Contactlink: https://www.dgsiegel.net
+
+----
+
+Pluginpage: https://plugins.getkirby.com/dgsiegel
+
+----
+
+Languages: English, German, Italian
+
+----
+
+Description:
+
+I’m an independent consultant, founder of Big Idea Initiative, public speaker, private airplane pilot, and 2nd Dan black belt in Taekwondo. I help companies and organizations that contribute to societal change through their strategy and website.
+
+## I can help you if…
+
+- you want to reach the people you want to serve
+- you want to future-proof your organization from coming changes
+- you need a website that represents you and your values
+- you need a website that tackles your technical and organizational challenges, no matter how complex
+
+## We can fix this together
+Ready to build a website that makes a real difference? Let's connect and discuss how we can make your vision a reality. I'd love to hear from you :)
+
+----
+
+Expertise:
+
+- Strategy
+- Website concept, design and development
+- Performance optimization
+- Custom Kirby CMS development
+- Integration with third-party apps
+- Plugin development
+- Multilingual websites
+- Accessibility
+
+----
+
+Region: Europe
+
+----
+
+Uuid: 25kUtAFUhkhhNoC0
