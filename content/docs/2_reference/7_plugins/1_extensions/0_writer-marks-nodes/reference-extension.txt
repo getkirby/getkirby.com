@@ -48,7 +48,7 @@ window.panel.plugin("your/plugin", {
 });
 ```
 
-You can also take a look at the (link: https://github.com/getkirby/kirby/blob/main/panel/src/components/Forms/Writer/Marks text: implementation of the default marks).
+You can also take a look at the (link: https://github.com/getkirby/kirby/blob/main/panel/src/components/Forms/Writer/Marks text: implementation of the default marks) as well as (link: https://prosemirror.net/docs/ref/#model.MarkSpec text: ProseMirror's mark docs).
 
 ## Custom nodes
 A node represents some structured content in ProseMirror's document tree. Often this is rather seen as blocks, where marks are rather inline. Our default marks include the normal text paragraph, unordered/ordered lists, headings etc.
@@ -93,8 +93,16 @@ window.panel.plugin("your/plugin", {
 });
 ```
 
-You can also take a look at the (link: https://github.com/getkirby/kirby/blob/main/panel/src/components/Forms/Writer/Nodes text: implementation of the default nodes).
+You can also take a look at the (link: https://github.com/getkirby/kirby/blob/main/panel/src/components/Forms/Writer/Nodes text: implementation of the default nodes) as well as (link: https://prosemirror.net/docs/ref/#model.NodeSpec text: ProseMirror's node docs).
 
 ## Using custom marks/nodes in your fields
 
 Learn how to (link: docs/reference/panel/fields/writer#choosing-available-marks text: activate your custom mark or node). This also works for blocks, when you extend or overwrite e.g. the (link: docs/reference/panel/blocks/text#default-files__blueprint text: text blocks' blueprint) to add the right options to the block's text field (which is a writer type field by default).
+
+## Troubleshooting
+
+### Competing with other nodes/mark
+
+When implementing a custom node/mark, your `parseDOM` rules might compete with rules from other nodes/marks. E.g. your custom node targets a `<p>` tag with a specific class, while the default paragraph node targets all `<p>` tags. This can lead to problems, when the broader `parseDOM` rule gets checked before the more specific one.
+
+If you run into issues here, you can use the (link: https://prosemirror.net/docs/ref/#model.GenericParseRule.priority text: `priority` option) and choose a value higher than 50 (which is the default) to ensure your `parseDOM` rule gets checked first.
