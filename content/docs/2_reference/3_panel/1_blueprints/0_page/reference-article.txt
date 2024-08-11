@@ -333,7 +333,7 @@ The `back` and `color` options for also support shorthands for the core CSS c
 image:
   back: "purple-400"
 ```
-Check out the (link: docs/reference/plugins/ui#colors text: list of our color properties) for available options.
+Check out the (link: https://lab.getkirby.com/public/lab/basics/design/colors text: list of our color properties) for available options.
 
 ```yaml
 image:

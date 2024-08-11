@@ -20,7 +20,7 @@ snippet('templates/features/section', [
 		[
 			'title' => 'CSS variables',
 			'text' => 'Every little detail of the Panel is now defined as a CSS variable. What’s great about that? You can overwrite our variables in your <code>panel.css</code>. Custom Panel themes just got so much easier.',
-			'link' => '/docs/reference/plugins/ui#css-properties'
+			'link' => 'https://lab.getkirby.com/public/lab/basics/design'
 		],
 		[
 			'title' => 'It’s all in the details',

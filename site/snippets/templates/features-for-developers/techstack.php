@@ -27,7 +27,7 @@
 			<figure class="mb-6">
 				<?= icon('vue') ?>
 			</figure>
-			<h3 class="font-bold"><a href="/docs/reference/plugins/ui">Admin interface framework &rarr;</a></h3>
+			<h3 class="font-bold"><a href="https://lab.getkirby.com">Admin interface framework &rarr;</a></h3>
 			<p class="color-gray-800">Our admin interface is built on Vue.js. It's a playground for your ideas. Extend it with plugins and make it your own with the full power of Vue and an incredibly powerful backend.</p>
 		</article>
 		<article class="p-6 bg-light">

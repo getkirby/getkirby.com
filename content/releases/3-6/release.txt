@@ -135,7 +135,7 @@ Webp:
 ImageSettingsIntro:
 
 - Support for Kirby's (link: docs/guide/blueprints/query-language text: query language)
-- Custom colors: `back` and `color` options now support shorthands for (link: docs/reference/plugins/ui#colors text: core CSS colors) as well as HEX codes or other native CSS color properties (e.g. even gradients)
+- Custom colors: `back` and `color` options now support shorthands for (link: https://lab.getkirby.com/public/lab/basics/design/colors text: core CSS colors) as well as HEX codes or other native CSS color properties (e.g. even gradients)
 - Per blueprint: The `image` options for pages, files and users can now be defined directly in their own blueprint. You can still set image settings in sections the good old way if needed.
 
 ----
@@ -315,7 +315,7 @@ info: "via {< site.myMethodWithHtml >}"
 | `k-browser-view` | - |
 | `k-custom-view` | - |
 
-- Removed `icon` prop from `k-card` and `k-list-item`. Pass data as part of the `image` prop instead to new (link: docs/reference/plugins/ui/item text: `k-item` component).
+- Removed `icon` prop from `k-card` and `k-list-item`. Pass data as part of the `image` prop instead to new (link: https://lab.getkirby.com/public/lab/docs/k-item text: `k-item` component).
 - If the `cover` option is not defined for a section, it is disabled by default.
 - The `<k-box text="..." />` property is now rendered as plain text by default instead of as HTML code. For the previous behavior use `<k-box text="..." :html="true" />`.
 

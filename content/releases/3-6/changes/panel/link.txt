@@ -22,7 +22,7 @@ Features:
 #### Blueprints
 - **Image options on steriods:**
   - Support for Kirby's (link: docs/guide/blueprints/query-language#querying-an-image-in-the-image-option text: query language)
-  - Custom colors: `back` and `color` options now support shorthands for (link: docs/reference/plugins/ui#colors text: core CSS colors) as well as HEX codes or other native CSS color properties (e.g. even gradients)
+  - Custom colors: `back` and `color` options now support shorthands for (link: https://lab.getkirby.com/public/lab/basics/design/colors text: core CSS colors) as well as HEX codes or other native CSS color properties (e.g. even gradients)
   - Per blueprint: The `image` options for pages, files and users can now be defined directly in their own blueprint. You can still set image settings in sections the good old way if needed.
 - **`navigation` option:** The previous/next item navigation in the Panel is a very effective way for editors to move between content. We've drastically improved the usability of the navigation for your users (link: docs/reference/panel/blueprints/page#navigation-option text: with additional options) to customize the links.
 - **`home` option for users:** When a user logs in to the Panel, they normally get redirected to the last view they were on before they were logged out, or the Site view. When you work with permissions, you might want to block the Site view or redirect the user to a completely different view instead. This is now possible with the (link: docs/reference/panel/blueprints/user#home-option text: new `home` option for user blueprints).

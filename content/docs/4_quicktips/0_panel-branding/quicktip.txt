@@ -92,5 +92,5 @@ Here you have some examples:
 (image: baylos.png)
 
 
-As you can see, it is a simple adaptation that adds a logo, and modifies the base colors but you can go much further thanks to Kirby's [UI Kit](https://getkirby.com/docs/reference/plugins/ui#colors)
+As you can see, it is a simple adaptation that adds a logo, and modifies the base colors but you can go much further thanks to Kirby's [UI Kit](https://lab.getkirby.com/public/lab/basics/design/colors)
 

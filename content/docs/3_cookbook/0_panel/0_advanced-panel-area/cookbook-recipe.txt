@@ -267,7 +267,7 @@ export default {
 
 Maybe worth mentioning is the `price` method which converts the price into a nicely formatted currency.
 
-The last table column contains the (link: docs/reference/plugins/ui/options-dropdown text: options dropdown) for the edit and delete buttons).
+The last table column contains the (link: https://lab.getkirby.com/public/lab/docs/k-options-dropdown text: options dropdown) for the edit and delete buttons).
 
 ```html
   <k-options-dropdown :options="'products/' + id" />
@@ -322,7 +322,7 @@ Each dialog has a `load` callback and a `submit` callback. You can read more abo
 
 ### Delete
 
-The `delete` dialog reuses Kirby's (link: docs/reference/plugins/ui/remove-dialog text: `k-remove-dialog` component), asks for confirmation, and on submit removes the product with the given `id` from the array and writes the remaining new array to file.
+The `delete` dialog reuses Kirby's (link: https://lab.getkirby.com/public/lab/docs/k-remove-dialog text: `k-remove-dialog` component), asks for confirmation, and on submit removes the product with the given `id` from the array and writes the remaining new array to file.
 
 ```php "/site/plugins/products/dialogs/delete.php"
 <?php
@@ -351,7 +351,7 @@ return [
 
 ### Update
 
-The update dialog uses Kirby's (link: docs/reference/plugins/ui/form-dialog text: `k-form-dialog` component), in which we define the fields the user can edit. Each field is an array with the same props you would usually define in the blueprint for the given field type. Here we use two text fields for `title` and `type`, a textarea field for the `description` and a number field for the `price`. As `value` we set the current product.
+The update dialog uses Kirby's (link: https://lab.getkirby.com/public/lab/docs/k-form-dialog text: `k-form-dialog` component), in which we define the fields the user can edit. Each field is an array with the same props you would usually define in the blueprint for the given field type. Here we use two text fields for `title` and `type`, a textarea field for the `description` and a number field for the `price`. As `value` we set the current product.
 
 ```php "/site/plugins/products/dialogs/update.php"
 <?php

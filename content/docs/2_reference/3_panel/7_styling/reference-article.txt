@@ -65,4 +65,4 @@ You can overwrite our default properties in your custom `panel.css`:
 }
 ```
 
-(link: docs/reference/plugins/ui#colors text: Get to know all CSS properties ›)
+(link: https://lab.getkirby.com/public/lab/basics/design/colors text: Get to know all CSS properties ›)
