@@ -41,6 +41,7 @@
 									'For content creators'   => page('for/creators'),
 									'For clients & agencies' => page('for/clients'),
 									'For education'          => page('for/education'),
+									'For hospitality'        => page('for/hospitality'),
 									'Showcase'               => page('love'),
 									'Releases'               => page('releases'),
 									'Feedback'               => 'https://feedback.getkirby.com',
