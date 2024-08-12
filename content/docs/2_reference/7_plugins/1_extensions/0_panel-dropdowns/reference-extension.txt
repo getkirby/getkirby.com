@@ -159,8 +159,7 @@ $dropdown[] = [
 	'icon'  => 'share',
 	'text'  => 'Publish on Netlify',
 	'click' => [
-		'key'     => 'myEvent'
-		'global'  => true,
+		'global'  => 'myEvent',
 		'payload' => [...]
 	]
 ];
