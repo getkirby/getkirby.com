@@ -63,7 +63,7 @@ Before we get started with the conditions of the Agreement, let's define the ter
 - The **"Source Code"** is defined as the contents of all files that are provided with Kirby and that make Kirby work. This includes (but is not limited to) all PHP, JavaScript, JSON, HTML and CSS files as well as all related image and other media files.
 - The **"Activation Date"** determines the included updates. It is defined like this:
 	- For a newly purchased license, it is the date when the license was first activated for use with a Public Site.
-	- When You upgrade an already activated license, it is the date on which the upgrade was performed in Our license hub. If the license is still within the Included Updates Period, the Activation Date of the upgrade license will be set to the end of the Included Updates Period of the existing license.
+	- When You upgrade an already activated license, it is the date on which the upgrade was performed in Our (link: https://licenses.getkirby.com text: license hub). If the license is still within the Included Updates Period, the Activation Date of the upgrade license will be set to the end of the Included Updates Period of the existing license.
 	- When You upgrade a license that had _not_ been activated before, the upgrade license adopts the unactivated state of the existing license. The Activation Date is set on first activation for use with a Public Site.
 - The **"Included Updates Period"** is the time span of three (3) years after the Activation Date.
 - Licensees (You), Clients and Websites are **"Qualified"** if they satisfy the purchase requirements from the ["Order Process" section](#order-process) of this Agreement.
@@ -72,7 +72,7 @@ Every time you see one of these capitalized terms in the following text, it has 
 
 ## Usage for a Public Site
 
-Installing Kirby on or using it for a Public Site requires a (link: buy text: paid license). Once a paid license is needed, the license must be immediately activated to the Public Site’s domain name and root directory via our license hub or the activation feature in the Kirby Panel.
+Installing Kirby on or using it for a Public Site requires a (link: buy text: paid license). Once a paid license is needed, the license must be immediately activated to the Public Site’s domain name and root directory via our (link: https://licenses.getkirby.com text: license hub) or the activation feature in the Kirby Panel.
 
 As Kirby is software and software is intangible, We don't sell it as such. Instead, this Agreement grants a license for each purchase to install and use a single instance of Kirby on a **specific Website**. Additional Kirby licenses must be purchased in order to install and use Kirby on **additional Websites**.
 
