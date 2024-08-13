@@ -1,6 +1,6 @@
 Title: I already have a license for Kirby 1-3. Can I upgrade?
 ----
-Text: Yes! You can upgrade your license to Kirby 4+ and the new licensing model via our (link: https://hub.getkirby.com text: license hub).
+Text: Yes! You can upgrade your license to Kirby 4+ and the new licensing model via our (link: https://licenses.getkirby.com text: license hub).
 
 All Kirby 3 licenses that had not been activated before Jan 1, 2023 can be upgraded for free.
 

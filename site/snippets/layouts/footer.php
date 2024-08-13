@@ -74,7 +74,7 @@
 									'Themes'      => page('themes'),
 									'Newsletter'  => page('kosmos'),
 									'Buzz'        => page('buzz'),
-									'License Hub' => 'https://hub.getkirby.com',
+									'License Hub' => 'https://licenses.getkirby.com',
 								]
 							]) ?>
 						</ul>
