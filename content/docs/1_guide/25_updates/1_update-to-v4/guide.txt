@@ -74,7 +74,7 @@ All Kirby 3 licenses not activated before Jan 1, 2023 can be upgraded to the new
 
 For everyone else, we offer an attractive upgrade price, no matter if you have a license for Kirby 1, Kirby 2 or Kirby 3.
 
-You can perform the upgrade directly from the Kirby 4 Panel of your site or via our (link: https://hub.getkirby.com text: license hub).
+You can perform the upgrade directly from the Kirby 4 Panel of your site or via our (link: https://licenses.getkirby.com text: license hub).
 
 ## For site developers
 

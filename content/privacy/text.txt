@@ -141,7 +141,7 @@ Please tell us first, so we have a chance to address your concerns. If we fail i
 
 ### License information
 
-Our license hub at <https://hub.getkirby.com> keeps the information about Kirby licenses. We only store the information that is necessary to enable license activations and upgrades and to check the license status of Kirby projects. Specifically we store the customer's email address, the order number(s), the license type(s) and license code(s), the dates of purchase and first activation, the activated website domain(s) and upgrade status.
+Our license hub at <https://licenses.getkirby.com> keeps the information about Kirby licenses. We only store the information that is necessary to enable license activations and upgrades and to check the license status of Kirby projects. Specifically we store the customer's email address, the order number(s), the license type(s) and license code(s), the dates of purchase and first activation, the activated website domain(s) and upgrade status.
 
 We collect this data during the checkout and activation processes. We delete the data as soon as it is no longer needed for the mentioned purposes (for example when a license is terminated).
 
