@@ -259,11 +259,11 @@ Check out the [field previews in our Lab](https://lab.getkirby.com/public/lab/co
 layout: table
 info: "{{ page.slug }}"
 columns:
-	title:
-		label: Custom title label
-	info:
-		label: Custom slug label
-		width: 10rem
+  title:
+    label: Custom title label
+  info:
+    label: Custom slug label
+    width: 10rem
 ```
 </since>
 
@@ -297,7 +297,7 @@ image:
   query: page.cover.toFile
   icon: 📝
   back: blue-700
-	color: white
+  color: white
   cover: true
 ```
 
@@ -335,15 +335,15 @@ otherPosts:
   type: pages
   label: Other posts
   query: page.childrenAndDrafts.filterBy('category', '!=', 'video')
-	template: article
+  template: article
 ```
 The query option cannot only be used in the context of a single page, but you can also query the complete site index if that makes sense, for example in `site.yml`:
 
 ```yaml
 siteIndex:
-	type: pages
-	query: site.index(true).notIn(['error'])
-	create: default
+  type: pages
+  query: site.index(true).notIn(['error'])
+  create: default
 ```
 </since>
 ### Status

@@ -50,14 +50,14 @@ In this example we use multiple (link: docs/reference/panel/sections/files text:
 title: My blueprint
 
 sections: # keyword that allows you to add multiple section types
-	drafts:
-		type: pages
-		label: Drafts
-		status: draft
-	published:
-		type: pages
-		label: Published pages
-		status: listed
+  drafts:
+    type: pages
+    label: Drafts
+    status: draft
+  published:
+    type: pages
+    label: Published pages
+    status: listed
 ```
 
 

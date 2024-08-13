@@ -25,17 +25,17 @@ sections:
   drafts:
     extends: sections/events
     label: Unpublished events
-		status: draft
+    status: draft
 
   unlisted:
     extends: sections/events
     label: Unlisted events
-		status: unlisted
+    status: unlisted
 
   listed:
     extends: sections/events
     label: Published events
-		status: listed
+    status: listed
 ```
 
 ### Predefined section for reusage

@@ -49,7 +49,7 @@ display: h.m.s a
 | `mm` | 00-59 | Minute, 2-digits
 | `s` | 0-59 | Second
 | `ss` | 00-59 | Second, 2-digits
-| `A` | AM PM	| |
+| `A` | AM PM | |
 | `a` | am pm | |
 
 The field will parse any input by matching it to the display format. `display: HH:ss` will match an input of `09:35`. It will also match partials or slight variations, e.g. `09`, `9`. The base for partials will be the current time.

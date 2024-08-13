@@ -138,9 +138,9 @@ The `permissions` option can be used to restrict access to certain actions for t
 
 ```yaml
 permissions:
-	access:
-		settings: false
-		users: false
+  access:
+    settings: false
+    users: false
 ```
 
 
@@ -158,8 +158,8 @@ permissions:
 
 ```yaml
 permissions:
-	files:
-	  delete: false
+  files:
+    delete: false
 ```
 
 ### `pages`
@@ -183,10 +183,10 @@ permissions:
 
 ```yaml
 permissions:
-	pages:
-		delete: false
-		create: false
-		changeTemplate: false
+  pages:
+    delete: false
+    create: false
+    changeTemplate: false
 ```
 
 ### `site`
@@ -221,12 +221,12 @@ It is also possible to set the `users` options individually.
 
 ```yaml
 permissions:
-	access:
-		users: true
-	users:
-		delete: false
-		create: false
-		changeRole: false
+  access:
+    users: true
+  users:
+    delete: false
+    create: false
+    changeRole: false
 ```
 
 ### `user`
@@ -251,12 +251,12 @@ This user can access the user management, but not edit other users. The user can
 
 ```yaml
 permissions:
-	access:
-		users: true
-	users: false
-	user:
-		delete: false
-		changeRole: false
+  access:
+    users: true
+  users: false
+  user:
+    delete: false
+    changeRole: false
 ```
 
 ### Using wildcards
@@ -264,7 +264,7 @@ It's also possible to restrict access to entire blocks by just passing `false` t
 
 ```yaml
 permissions:
-	pages: false
+  pages: false
 ```
 
 ## Examples

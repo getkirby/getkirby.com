@@ -40,8 +40,8 @@ The title can be translated by passing an array of translations with the matchin
 
 ```yaml
 title:
-	en: Article
-	de: Artikel
+  en: Article
+  de: Artikel
 ```
 
 ## Sorting
@@ -96,8 +96,8 @@ With the `status` option, you define the page statuses you want to allow for the
 
 ```yaml
 status:
-	draft: Draft
-	listed: Published
+  draft: Draft
+  listed: Published
 ```
 
 ### Extended example
@@ -256,8 +256,8 @@ Or when defining other options, set the `query` option to `false`:
 
 ```yaml
 image:
-	back: blue
-	query: false
+  back: blue
+  query: false
 ```
 
 To show no image or icon at all, you can set the `image` option to `false`:
