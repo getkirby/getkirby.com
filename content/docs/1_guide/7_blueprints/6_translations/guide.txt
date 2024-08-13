@@ -18,8 +18,8 @@ The title can be translated by passing an array of translations with the matchin
 
 ```yaml
 title:
-	en: Example Page
-	de: Beispiel Seite
+  en: Example Page
+  de: Beispiel Seite
 ```
 
 ## Section labels

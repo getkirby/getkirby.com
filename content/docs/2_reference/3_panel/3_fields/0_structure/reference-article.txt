@@ -107,26 +107,26 @@ You can define the columns that are shown in the table. This is especially usefu
 
 ```yaml
 fields:
-	holidays:
-		type: structure
-		columns:
-			title:
-				width: 1/4
-			images:
-				width: 1/2
-			price:
-				width: 1/4
-				align: right
-				after: "USD"
-		fields:
-			title:
-				type: text
-			images:
-				type: files
-			description:
-				type: textarea
-			price:
-				type: number
+  holidays:
+    type: structure
+    columns:
+      title:
+        width: 1/4
+      images:
+        width: 1/2
+      price:
+        width: 1/4
+        align: right
+        after: "USD"
+    fields:
+      title:
+        type: text
+      images:
+        type: files
+      description:
+        type: textarea
+      price:
+        type: number
 ```
 
 Structure columns can be set to any fraction and will be automatically calculated into the right width.
@@ -159,23 +159,23 @@ You can also define columns without additional options if you want to use the de
 
 ```yaml
 fields:
-	holidays:
-		type: structure
-		columns:
-			title: true
-			images: true
-			price:
-				align: right
-				after: "USD"
-		fields:
-			title:
-				type: text
-			images:
-				type: files
-			description:
-				type: textarea
-			price:
-				type: number
+  holidays:
+    type: structure
+    columns:
+      title: true
+      images: true
+      price:
+        align: right
+        after: "USD"
+    fields:
+      title:
+        type: text
+      images:
+        type: files
+      description:
+        type: textarea
+      price:
+        type: number
 ```
 
 ### Hide toggle field text in preview
