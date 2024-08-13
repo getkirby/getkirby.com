@@ -288,7 +288,7 @@ empty: No documents yet
 By default, the current page is being used as the parent to find files for the list. With this option, any page on your site can be the parent of the section.
 
 ```yaml
-parent: site.find("galleries").first
+parent: site.find("galleries")
 ```
 <since v="4.0.0">
 ### `query`
