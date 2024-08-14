@@ -6,15 +6,15 @@ Category: Next major version
 
 ----
 
-Intro: Get a very first glimpse at Kirby's next major release and help us polish it until the end of the year.
+Intro: Get a glimpse into the future at Kirby's next major release and help us polish it until the end of the year.
 
 ----
 
 Cta:
 
 -
-	text: Download v5.0-alpha.1
-	link: https://github.com/getkirby/kirby/archive/refs/tags/5.0.0-alpha.1.zip
+	text: Download v5.0-alpha.2
+	link: https://github.com/getkirby/kirby/archive/refs/tags/5.0.0-alpha.2.zip
 	icon: download
 
 ----
@@ -42,9 +42,9 @@ We recommend to not use this alpha version in a production project.
 
 Kirby 5 will be a **free upgrade** for everyone with a Kirby Basic or Enterprise license for Kirby 4. Our new licenses include three years of major updates.
 
-## 🎉 First few features
+## 🎉 Features
 
-### Turn off the Panel lights
+### Dark theme: Turn off the Panel lights
 
 As requested from many – whether as personal preference or for making the Panel more accessible with certain sight conditions – you are able to activate a dark theme for the Panel from your account view in v5. [#6299](https://github.com/getkirby/kirby/pull/6299)
 
@@ -54,13 +54,119 @@ As requested from many – whether as personal preference or for making the Pane
 
 We do expect to receive a lot of feedback on this feature and that the exact styling will be fine-tuned in the following pre-releases based on your feedback.
 
-### Put a button in that header
+<since v="Alpha 2">
+### Bring out the big files: Chunked uploads
 
-Kirby 5 adds a new extension that allows plugin developers to add custom view buttons to most views of the Panel (e.g. page, site, file, user, language). These buttons can be added alongside the default buttons, such as the preview button or settings dropdown button. [#6393](https://github.com/getkirby/kirby/pull/6393)
+Kirby 5 supports large Panel uploads. Uploads are no longer restricted by the server's `upload_max_filesize` limit but instead uploaded in chunks that are pieced back together on the server.
 
-To add such a custom view button, you will first need to add your view button Vue component in your plugin's JavaScript file:
+If you want to keep restricting the upload size to some limits, the file blueprint (link: docs/reference/panel/blueprints/file#accept text: `accept` `maxsize` option) is your friend.
 
-```js
+(video: chunked.mp4 controls: true autoplay: true loop: true class: video rounded shadow-xl bg-light)
+</since>
+
+### View buttons: Put your own button up there
+
+Kirby 5 adds new extensions that allow plugin developers to add custom view buttons to most views of the Panel (e.g. page, site, file, user, language). These buttons can be added alongside the default buttons, such as the preview button or settings dropdown button. [#6393](https://github.com/getkirby/kirby/pull/6393)
+
+(image: buttons.png)
+
+There are different ways to define a custom button: in a blueprint, in the `config.php`, in a Panel area or as a full custom Vue component.
+
+#### In a blueprint
+
+To select which buttons to show on a particular view you can set the `buttons` option in the corresponding blueprint:
+
+```yml "site/blueprints/pages/note.yml"
+buttons:
+  - preview
+  - settings
+```
+
+This way, you can reference existing buttons by name and decide which ones to include and in what order. You can however also define new custom buttons:
+
+```yml
+buttons:
+  - preview
+  - settings
+  myBytton:
+    text: My Button
+    link: https://getkirby.com
+    theme: positive
+```
+
+The available options are based on the (link: https://github.com/getkirby/kirby/blob/v5/develop/panel/src/components/View/Buttons/Button.vue text: `k-view-button` component) (better docs will follow until the final release).
+
+#### In the `config.php`
+
+Similarly to the blueprints, buttons can be defined in your config file. In this case, not for a specific template but in general for the different view types (page, file, site, user, system, ...):
+
+```php "site/config/config.php"
+'panel' => [
+  'viewButtons' => [
+    'site' => [
+      'preview',
+      'a' => [
+        'icon'   => 'heart',
+        'text'   => 'Kosmos',
+        'theme'  => 'purple-icon',
+        'target' => '_blank',
+        'link'   => 'https://getkirby.com'
+      ],
+      'b-dropdown' => [
+        'props' => [
+          'icon'     => 'info',
+          'text'     => 'Info',
+          'dropdown' => 'my/dropdown/route'
+        ]
+      ],
+      'c-component' => [
+        'component' => 'my-custom-component',
+        'props' => [
+          'foo' => 'bar'
+        ]
+      ]
+    ]
+  ]
+]
+```
+
+What you can see above are three different ways to define a custom button:
+- The first one directly defines the options. It's a shortcut that assumes these are the props for the `k-view-button` component.
+- In the second example, they are already wrapped inside the `props` key. But no `component` is defined, so `k-view-button` is used as well.
+- In the third example, we actually define a custom Vue component that should be used instead, alongside passing props to this component.
+
+#### In a Panel area
+
+If you do not want to define just one button via the config, but reuse it (or even ship it as part of your plugin), you can add them to the Panel area extension:
+
+```php "site/plugins/your-plugin/index.php"
+Kirby::plugin('custom/buttons', [
+  'areas' => [
+    'todos' => function () {
+      return [
+        'buttons' => [
+          'todos.add' => function () {
+            return [
+              'props' => [
+                'icon'   => 'add',
+                'dialog' => 'todos/create'
+              ]
+            ];
+          }
+        ]
+      ];
+    }
+  ]
+]);
+```
+
+You have the same options for your return  value: full `component`-`props` array or just props on top-level. In addition, you can also return directly a `Kirby\Panel\Ui\Button\ViewButton` object.
+
+#### A custom Vue component
+
+Some custom buttons might need more options, more interactivity, more glamour than `<k-view-button>` offers. Those can create their own Vue component in your plugin's JavaScript file:
+
+```js "site/plugins/your-plugin/index.js"
 panel.plugin("getkirby/custom-view-buttons", {
 	viewButtons: {
 		applause: {
@@ -75,28 +181,16 @@ panel.plugin("getkirby/custom-view-buttons", {
 });
 ```
 
-With this in place, your custom view button needs to be added to the specific view. Kirby will not automatically add buttons to views. This ensures that you can customize which buttons to show, to hide default ones and specify the order.
+You can then reference it by name in your blueprints or config file. Or if you want to pass props as well:
 
-You can configure this globally for a view type, e.g. adding our example `applause` button to all page views:
-
-```php "site/config/config.php"
-return [
-	'panel' => [
-		'viewButtons' => [
-			'page' => ['preview', 'settings', 'applause', 'status']
-		]
-	]
-}
-```
-
-Or you configure the view buttons per blueprint:
-
-```yaml "site/blueprints/page/note.yml"
+```yml
 buttons:
   - preview
   - settings
-  - applause
-  - status
+  applause:
+    component: k-applause-view-button
+    props:
+      foo: bar
 ```
 
 ## ✨ Enhancements
@@ -111,12 +205,36 @@ buttons:
 - Thumbnails don't need to be regenerated when page sorting changes [#6432](https://github.com/getkirby/kirby/pull/6432)
 - `<k-link>` (and subsequently `<k-button>` and `<k-dropdown-item>`) has a new `download` attribute to force direct download of a file
 
+<since v="Alpha 2">
+- New `files.sort` permission [#1969](https://github.com/getkirby/kirby/issues/1969)
+- UUIDs are fully lowercased now to avoid issues between filesystems handling casing differently [#6566](https://github.com/getkirby/kirby/pull/6566)
+- `<k-tag>`: new `element` and `theme` props [#6569](https://github.com/getkirby/kirby/pull/6569)
+- `<k-tags>`: new `element`, `element-tag` and `theme` props [#6569](https://github.com/getkirby/kirby/pull/6569)
+- New `<k-tags-field-preview>` component [#6569](https://github.com/getkirby/kirby/pull/6569)
+- New `<k-view-button>` component [#6540](https://github.com/getkirby/kirby/pull/6540)
+- New `uploadAsChunks` JS helper function [#6421](https://github.com/getkirby/kirby/pull/6421)
+- New `Panel\Panel::buttons()` method that collects all defined buttons from all Panel areas [#6541](https://github.com/getkirby/kirby/pull/6541)
+- New `Panel\Ui` namespace with basic `Panel\Ui\Component` and `Panel\Ui\Button` classes [#6539](https://github.com/getkirby/kirby/pull/6539)
+    - Each component renders as an array with a `component`, unique `key` and `props` entries
+- New `Panel\Ui\Buttons\ViewButtons` and `Panel\Ui\Buttons\ViewButton` classes [#6542](https://github.com/getkirby/kirby/pull/6542)
+    - responsible for gathering and transforming view buttons configured in blueprints, config files and/or Panel areas
+    - renders them as PHP array definitions that can be handed to the dedicated Vue frontend components
+    - Added `Panel\Model::model()` method
+- Backend classes for core view buttons [#6545](https://github.com/getkirby/kirby/pull/6545)
+</since>
+
 
 ## 🐛 Bug fixes
 
 - Headers with null as value are no longer added to JS API requests. [#6435](https://github.com/getkirby/kirby/pull/6435)
 - `$helper.object.clone` is no longer deprecated. Please use it instead of `structuredClone` as this might cause issues down the road with Vue 3. [#6479](https://github.com/getkirby/kirby/pull/6479)
 
+<since v="Alpha 2">
+- Fixed thumb issues resulting from EXIF orientation entry [#2695](https://github.com/getkirby/kirby/issues/2695)
+- Kirby is better at removing failed file uploads from the server tmp directory [#2476](https://github.com/getkirby/kirby/issues/2476)
+- Canceling the file upload dialog now also cancels ongoing uploads [#6421](https://github.com/getkirby/kirby/pull/6421)
+- `<k-header>`: fixed wrapping with many buttons in narrow screens [#6544](https://github.com/getkirby/kirby/pull/6544)
+</since>
 
 ## 🚨 Breaking changes
 
@@ -133,29 +251,49 @@ buttons:
 - `Str::camel()`, `Str::camelToKebab()`, `Str::float()`, `Str::kebab()`, `Str::kebabToCamel()`, `Str::length()`, `Str::lower()`, `Str::safeTemplate()`, `Str::short()`, `Str::slug()`, `Str::snake()`, `Str::studly()`, `Str::substr()`, `Str::template()`, `Str::ucfirst()`, `Str::ucwords()`, `Str::unhtml()`, `Str::upper()` and `Str::widont()` can no longer be called without a value argument (passing a `null` value still works) [#6401](https://github.com/getkirby/kirby/pull/6401)
 - All content storage methods must now use the `VersionId` instead of a simple string. [#6436](https://github.com/getkirby/kirby/pull/6436)
 
+<since v="Alpha 2">
+- Kirby requires the following browser versions to use the Panel (other browser requirements remain unchanged)
+    - Safari 16+
+    - Mobile Safari 16+
+    - Android Browser 126+
+    - Chrome for Android 126+
+- If file sorting was previously disabled via the `files.update` permission, the new `file.sort` permission has to be configured accordingly. [#6589](https://github.com/getkirby/kirby/pull/6589)
+- Panel uploads can exceed the `upload_max_filesize` limit [#6421](https://github.com/getkirby/kirby/pull/6421)
+    - If you want to restrict the upload size, please use the file blueprint (link: docs/reference/panel/blueprints/file#accept text: `accept` `maxsize` option)
+- Increased PHP type hinting: when you're extending core classes, you might have to add the same type hints to your code as added to our core classes.
+- `Image\Dimensions::forImage()` now receives an `Image\Image` object [#6591](https://github.com/getkirby/kirby/pull/6591)
+- `Image\Exif::read()` is now a static method that receives an absolute path to a file [#6591](https://github.com/getkirby/kirby/pull/6591)
+- Thumb driver `autoOrient` option has been removed and now is always applied [#6591](https://github.com/getkirby/kirby/pull/6591)
+</since>
+
 ### Removed deprecated
 
 | Removed | Use instead |
 | --- | --- |
-| `<k-dialog>`:  `disabled`, `icon` and `theme` props. | `submit-button` prop |
-| `<k-dropdown>` | `<k-dropdown-content>` as standalone |
-| `<k-upload>` | `$panel.upload module` |
 | `<k-aspect-ratio>`  | `<k-frame>` |
+| `<k-autocomplete>` | - |
 | `<k-bar>`: `left`, `right` and `center` slots  | default slot |
-| `<k-header>`: `left` and `right` slots | `buttons` slot  |
-| `<k-header>`: `tabs` prop |  standalone `<k-tabs>` |
-| `<k-view>` | - |
-| `<k-loader>` | `<k-icon type="loader" />`  |
-| `<k-progress>`: `set` method | `value` prop |
+| `<k-breadcrumb>`: `view prop` | Add as first entry to crumbs prop |
+| `<k-button>`: `tooltip` prop | `title` prop |
 | `<k-button-disabled>` | `<k-button :disabled="true">` |
 | `<k-button-link>`  | `<k-button link="...">` |
 | `<k-button-native>` | `<k-button>` |
+| `<k-dialog>`:  `disabled`, `icon` and `theme` props. | `submit-button` prop |
+| `<k-dropdown>` | `<k-dropdown-content>` as standalone |
+| `<k-grid>`: `gutter` prop | `style="gap: "` or `variant` prop |
+| `<k-header>`: `left` and `right` slots | `buttons` slot  |
+| `<k-header>`: `tabs` prop |  standalone `<k-tabs>` |
 | `<k-headline>`: `size` prop | `tag` prop |
 | `<k-headline>`: `theme` prop | - |
-| `<k-text>`: `theme` prop  | - |
+| `<k-icon>`: removed support for other viewBox than `0 0 24 24` |	Wrap icon in an `<svg>` element with corresponding viewBox attribute |
 | `<k-inside>` | `<k-panel-inside>` |
+| `<k-loader>` | `<k-icon type="loader" />`  |
 | `<k-outside>` | `<k-panel-outside>` |
 | `<k-plugin-view>`  | - |
+| `<k-progress>`: `set` method | `value` prop |
+| `<k-text>`: `theme` prop  | - |
+| `<k-upload>` | `$panel.upload module` |
+| `<k-view>` | - |
 | `$store.drawer`  | `$panel.drawer`  |
 | `$store.notification` | `$panel.notification` |
 | `$store.dialog()` | `$panel.dialog.open()` |
@@ -163,6 +301,11 @@ buttons:
 | `$store.fatal()` | `$panel.notification.fatal()` |
 | `$store.isLoading()` | `$panel.isLoading` |
 | `$store.navigate()` | - |
+| JS `$events.$on`, `$events.$off`, `$events.$emit` | `$events.on`, `$events.off`, `$events.emit` |
+| `Array.wrap()` | `this.$helper.array.wrap()` |
+| `Array.fromObject()` | `this.$helper.array.fromObject()` |
+| `myArray.split()` | `this.$helper.array.split(myArray, delimiter)` |
+| `myArray.sortBy()` | `this.$helper.array.sortBy(myArray, sortBy)` |
 | `Kirby\Cms\Model` | - |
 | `Kirby\Cms\Properties` trait | PHP native named properties |
 | `Kirby\Cms\File::contentFileDirectory()` | - |
@@ -181,6 +324,9 @@ buttons:
 - `<k-writer>` will be removed in a future version. Use `<k-writer-input></k-writer-input>` instead [#6172](https://github.com/getkirby/kirby/pull/6172)
 - `--color-backdrop` CSS property has been deprecated. Use `--overlay-color-back` instead [#6299](https://github.com/getkirby/kirby/pull/6299)
 
+<since v="Alpha 2">
+- `<k-bubble>`, `<k-bubbles>` and `<k-bubbles-field-preview>`. Use `<k-tag>`, `<k-tags>` and `<k-tag-field-preview>` instead. [#6569](https://github.com/getkirby/kirby/pull/6569)
+</since>
 
 ## ♻️ Refactored
 
@@ -210,8 +356,18 @@ buttons:
     - `str_starts_with()`
     - `str_ends_with()`
 
+<since v="Alpha 2">
+- New `Kirby\Api\Upload` class to handle file uploads via the REST API [#6421](https://github.com/getkirby/kirby/pull/6421)
+</since>
+
 ## 🧹 Housekeeping
 
 - Extended rule list for `php-cs-fixer` [#6398](https://github.com/getkirby/kirby/pull/6398)
 - Tests: DRY `$app` property [#6474](https://github.com/getkirby/kirby/pull/6474)
 - Replacing `get_class()` method with `::class` notation [#6475](https://github.com/getkirby/kirby/pull/6475)
+
+<since v="Alpha 2">
+- Vite: Make dev server by default `https://sandbox.test` instead of [`http://sandbox.test`](http://sandbox.test) [#6522](https://github.com/getkirby/kirby/pull/6522)
+- Turn `panel` JS modules fully reactive [#6529](https://github.com/getkirby/kirby/pull/6529)
+- The `::setUpSingleLanguage` and `::setUpMultiLanguage` helper test methods in global `TestCase` class. [#6561](https://github.com/getkirby/kirby/pull/6561)
+</since>
