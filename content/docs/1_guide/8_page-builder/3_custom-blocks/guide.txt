@@ -59,6 +59,7 @@ fields:
       - type: button
         name: Button
         preview: fields
+				wysiwyg: true
         icon: bolt
         fields:
           link:
@@ -66,6 +67,8 @@ fields:
           text:
             type: text
 ```
+
+Make sure to also set `wysiwyg: true`, so that the field are editable.
 
 (image: field-preview.png)
 
