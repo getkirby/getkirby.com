@@ -26,11 +26,11 @@ After our successful release of Kirby 3 on January 15, we are now happily back o
 
 For all of you who missed it, here are some important Kirby 3 links for you:
 
-- All of [Kirby 3's shiny new features](https://getkirby.com/v3) at a glance 
-- All you want to know about Kirby 2 and 3 in a nutshell, also called [the FAQ](https://forum.getkirby.com/t/kirby-3-is-here-faqs-and-more/12309) 
+- All of [Kirby 3's shiny new features](https://getkirby.com/v3) at a glance
+- All you want to know about Kirby 2 and 3 in a nutshell, also called [the FAQ](https://forum.getkirby.com/t/kirby-3-is-here-faqs-and-more/12309)
 - With over 850 upvotes we were [#1 on Product Hunt](https://www.producthunt.com/posts/kirby-3-0)
 - Upgrading from K2 to K3? [The guide](https://getkirby.com/docs/cookbook/migration/sites).
-- Find and [upgrade your old licenses](https://licenses.getkirby.com/)
+- Find and [upgrade your old licenses](https://hub.getkirby.com/)
 
 Important: For everyone who is still working on a Kirby 2 project and hasn't got a license yet, you can [buy Kirby 2 Pro licenses](https://getkirby.com/buy/#v2) until March 15, 2019.
 
@@ -65,7 +65,7 @@ Important: For everyone who is still working on a Kirby 2 project and hasn't got
 
 - I counted 13 themes newly created or updated for Kirby 3 on [https://getkirby-themes.com](https://www.getkirby-themes.com). Check them out and expect more to come soon.
 
-## JavaScript 
+## JavaScript
 
 - [JavaScript for impatient programmers](http://exploringjs.com/impatient-js/index.html) targets newcomers to JavaScript and intends to get them up and running with a focus on modern features.
 
@@ -79,7 +79,7 @@ Important: For everyone who is still working on a Kirby 2 project and hasn't got
 
 - Roman Komarov on [how he reimplemented his blog with CSS grid](https://www.kizu.ru/my-grid-layout/).
 
-## Design 
+## Design
 
 - [The Australian Government Design System](https://designsystem.gov.au) provides components, templates, and more to help designers build government products.
 
@@ -87,7 +87,7 @@ Important: For everyone who is still working on a Kirby 2 project and hasn't got
 
 - [Palette App](https://palettte.app) is a nicely made color palette tool with a focus on UI Design where you only need a few basic colors.
 
-- The [Snippet generator](https://pawelgrzybek.com/snippet-generator/) helps you create snippets for [Visual Studio Code](https://code.visualstudio.com/), [Sublime Text](https://www.sublimetext.com/) or [Atom](https://atom.io/). 
+- The [Snippet generator](https://pawelgrzybek.com/snippet-generator/) helps you create snippets for [Visual Studio Code](https://code.visualstudio.com/), [Sublime Text](https://www.sublimetext.com/) or [Atom](https://atom.io/).
 
 - [Uptimerobot](https://uptimerobot.com) and [HetrixTools](https://hetrixtools.com/pricing/uptime-monitor/) notify you when your website or service is down. Both come with a free tier.
 
@@ -95,9 +95,9 @@ Important: For everyone who is still working on a Kirby 2 project and hasn't got
 
 The [Web Authentication API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API) promises strong password-less authentication with public key cryptography. The [WebAuthn guide](https://webauthn.guide) has a short intro to get started.
 
-## Last Minute 
+## Last Minute
 
-- [Mark Zuckerberg’s Delusion of Consumer Consent](https://www.nytimes.com/2019/01/29/opinion/zuckerberg-facebook-ads.html) 
+- [Mark Zuckerberg’s Delusion of Consumer Consent](https://www.nytimes.com/2019/01/29/opinion/zuckerberg-facebook-ads.html)
 
 - [The Many Ways to Change an SVG Fill on Hover](https://css-tricks.com/the-many-ways-to-change-an-svg-fill-on-hover-and-when-to-use-them/)
 

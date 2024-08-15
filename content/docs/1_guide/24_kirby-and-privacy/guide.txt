@@ -62,7 +62,7 @@ To activate your license, the Kirby backend connects to our licensing server **o
 No other personal or site data is transmitted to our server.
 
 <info>
-If you don't want Kirby to connect to our server, you can activate your license manually and download license files directly on (link: https://licenses.getkirby.com text: licenses.getkirby.com).
+If you don't want Kirby to connect to our server, you can activate your license manually and download license files directly on (link: https://hub.getkirby.com text: hub.getkirby.com).
 </info>
 
 ### Update checks

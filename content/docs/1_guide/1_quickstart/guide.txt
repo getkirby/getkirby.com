@@ -146,7 +146,7 @@ Once you publish your website, you need to (link: buy text: purchase a Kirby lic
 
 If you don’t want the Panel to connect to our server, registration via the Panel fails, or you are not using the Panel at all, you can download your license files directly from our licenses website:
 
-1. Visit (link: https://licenses.getkirby.com).
+1. Visit (link: https://hub.getkirby.com).
 2. Log in with the email you used when you purchased the license and any order number.
 3. In the list of your licenses, click on the key you want to activate.
 4. Use the "Download license file" button to download the license file.

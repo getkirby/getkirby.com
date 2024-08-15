@@ -8,7 +8,7 @@ return [
 	'debug'      => false,
 	'features'   => require __DIR__ . '/features.php',
 	'github'     => ['url' => 'https://github.com/getkirby'],
-	'hub'        => ['url' => 'https://licenses.getkirby.com'],
+	'hub'        => ['url' => 'https://hub.getkirby.com'],
 	'keys'       => file_exists(__DIR__ . '/keys.php') ? require __DIR__ . '/keys.php' : require __DIR__ . '/keys.sample.php',
 	'meta'       => require __DIR__ . '/meta.php',
 	'newstroll'  => ['list' => 110866],
