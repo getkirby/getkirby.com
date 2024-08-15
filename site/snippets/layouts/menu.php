@@ -48,7 +48,7 @@
 							'Newsletter' => page('kosmos'),
 							'Buzz' => page('buzz'),
 							'-',
-							'License Hub' => 'https://licenses.getkirby.com',
+							'License Hub' => 'https://hub.getkirby.com',
 						]
 					]) ?>
 				</ul>
