@@ -82,6 +82,7 @@ buttons:
   - settings
 ```
 
+<since v="Alpha 2">
 This way, you can reference existing buttons by name and decide which ones to include and in what order. You can however also define new custom buttons:
 
 ```yml
@@ -161,6 +162,7 @@ Kirby::plugin('custom/buttons', [
 ```
 
 You have the same options for your return  value: full `component`-`props` array or just props on top-level. In addition, you can also return directly a `Kirby\Panel\Ui\Button\ViewButton` object.
+</since>
 
 #### A custom Vue component
 
