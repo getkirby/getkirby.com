@@ -2,6 +2,7 @@
 	--container: 90rem;
 	--container-padding: var(--spacing-4);
 
+	--spacing-20: 5rem;
 	--spacing-42: 10.5rem;
 
 	--leading-none: 1;
@@ -12,6 +13,9 @@
 	--leading-loose: 2;
 
 	--text-h1: var(--text-4xl);
+
+	--shadow-2xl: rgba(0, 0, 0, 0.025) 0 0 10px, rgba(0, 0, 0, 0.075) 0 5px 40px,
+		rgba(0, 0, 0, 0.075) 0 30px 100px;
 }
 
 @media screen and (min-width: 22rem) {
