@@ -12,7 +12,7 @@
 			</a>
 		</article>
 	</div>
-<?php elseif ($img = $entry->image()): ?>
+<?php elseif ($img = $entry->images()->findBy('name', 'cover') ?? $entry->image()): ?>
 	<a href="<?= $entry->url() ?>" class="buzz-entry">
 		<article>
 			<figure class="rounded overflow-hidden mb-6 shadow-lg" style="--aspect-ratio: 800/400">
