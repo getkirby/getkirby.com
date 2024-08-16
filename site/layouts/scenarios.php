@@ -29,7 +29,7 @@
 					</div>
 				</header>
 
-				<section class="rounded bg-light overflow-hidden mb-42">
+				<section class="rounded bg-light overflow-hidden mb-42 shadow-xl">
 					<?= img('panel.png', [
 						'alt' => 'Panel screenshot: ' . $page->title(),
 						'src' => [
