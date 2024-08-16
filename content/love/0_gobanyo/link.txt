@@ -6,4 +6,4 @@ Link: https://gobanyo.org
 
 ----
 
-Cause: true
+Tag: cause

@@ -6,4 +6,4 @@ Link: https://teteenlair.asso.fr
 
 ----
 
-Cause: true
+Tag: cause

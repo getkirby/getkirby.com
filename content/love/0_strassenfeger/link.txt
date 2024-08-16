@@ -6,4 +6,4 @@ Link: https://strassenfeger.org/
 
 ----
 
-Cause: true
+Tag: cause

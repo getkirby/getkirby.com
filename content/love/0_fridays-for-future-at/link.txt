@@ -6,4 +6,4 @@ Link: https://fridaysforfuture.at/
 
 ----
 
-Cause: true
+Tag: cause

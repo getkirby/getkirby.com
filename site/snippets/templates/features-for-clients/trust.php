@@ -11,7 +11,7 @@
 	<div>
 		<?php snippet('templates/features/intro', [
 			'title' => 'Trusted by brands world-wide',
-			'text'  => 'Tech, art, <a href="/for/education">education</a>,  <a href="/for/hospitality">hospitality</a>, energy, food, fashion, health: leading brands around the world use Kirby for their digital solutions. Editorial systems, intranet solutions, factory terminals, mobile apps or just good old websites. They are in good hands with Kirby.'
+			'text'  => 'Tech, art, <a href="/for/events">events</a>, <a href="/for/education">education</a>, <a href="/for/hospitality">hospitality</a>,  food, fashion, health: Leading brands use Kirby for their digital solutions. Editorial systems, intranet solutions, factory terminals, mobile apps, or just great websites – they are in good hands with Kirby.'
 		]) ?>
 
 		<ul class="columns" style="--columns-sm: 3; --columns: 3">

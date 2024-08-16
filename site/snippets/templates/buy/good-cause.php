@@ -18,7 +18,7 @@
 	</a>
 
 	<ul class="columns causes" style="--columns: 2; --gap: var(--spacing-12);">
-		<?php foreach (collection('causes')->shuffle()->limit(2) as $case): ?>
+		<?php foreach (collection('cases/causes')->shuffle()->limit(2) as $case): ?>
 			<li>
 				<a href="<?= $case->link()->toUrl() ?>">
 					<figure>

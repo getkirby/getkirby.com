@@ -6,4 +6,4 @@ Link: https://boysdocry.com.au
 
 ----
 
-Cause: true
+Tag: cause
