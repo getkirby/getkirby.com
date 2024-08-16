@@ -6,4 +6,4 @@ Link: https://www.natucate.com/
 
 ----
 
-Cause: true
+Tag: cause

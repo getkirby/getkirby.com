@@ -6,4 +6,4 @@ Link: https://nowar.help
 
 ----
 
-Cause: true
+Tag: cause

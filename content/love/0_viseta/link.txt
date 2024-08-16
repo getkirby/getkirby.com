@@ -6,4 +6,4 @@ Link: https://viseta.fr
 
 ----
 
-Cause: true
+Tag: cause

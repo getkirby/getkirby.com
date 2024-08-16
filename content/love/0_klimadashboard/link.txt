@@ -6,4 +6,4 @@ Link: https://klimadashboard.org/de
 
 ----
 
-Cause: true
+Tag: cause

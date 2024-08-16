@@ -6,4 +6,4 @@ Link: https://adunare.org
 
 ----
 
-Cause: true
+Tag: cause

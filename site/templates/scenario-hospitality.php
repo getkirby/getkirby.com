@@ -67,7 +67,8 @@ snippet('templates/features/section', [
 		],
 		[
 			'title' => 'Transparent pricing',
-			'text' => 'Kirby offers a one-time license fee, so there are no hidden costs. You get all the features you need at a price that fits your budget without compromising quality.'
+			'text' => 'Kirby offers a one-time license fee, so there are no hidden costs. You get all the features you need at a price that fits your budget without compromising quality.',
+			'link'  => '/buy'
 		],
 		[
 			'title' => 'Support for community initiatives',
