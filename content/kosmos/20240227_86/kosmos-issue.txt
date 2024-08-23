@@ -79,7 +79,7 @@ In [One minute installation with Laravel Herd](https://www.youtube.com/watch?v=M
 
 And we also have a new cookbook recipe:
 
-[Kirby meets DDEV,](https://getkirby.com/docs/cookbook/setup/ddevhttps://getkirby.com/docs/cookbook/setup/ddev "https://getkirby.com/docs/cookbook/setup/ddev") a Docker-based local development environment, also very easy to set up on Mac, Linux and Windows.
+[Kirby meets DDEV,](https://getkirby.com/docs/cookbook/development-deployment/ddev) a Docker-based local development environment, also very easy to set up on Mac, Linux and Windows.
 
 ## Kirby plugins
 
