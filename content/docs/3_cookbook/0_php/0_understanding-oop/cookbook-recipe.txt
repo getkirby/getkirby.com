@@ -37,7 +37,7 @@ No images, lots of text 😉. But at least some code to play with. So get some c
 
 If you want to code along with this recipe, you need the following:
 
-- A web server (ideally on your (link: docs/guide/development-environment text: local machine))
+- A web server (ideally on your (link: docs/guide/install-guide/development-environment text: local machine))
 - A current version of PHP
 - A code/text editor of your choice
 

@@ -30,7 +30,7 @@ This is a step-by-step guide for FTP-deployment to development, staging and prod
 
 ## Requirements and Prerequisites
 - **Local running Kirby project**
-    First of all, we need a running Kirby project on your local machine. If you need help setting up a local environment, I recommend Sonja's guide: (link: /docs/guide/development-environment text: Local development environment). I use (link:https://laravel.com/docs/valet text:Laravel valet) on my MacBook, but it's up to you to choose a solution that works best for you.
+    First of all, we need a running Kirby project on your local machine. If you need help setting up a local environment, I recommend Sonja's guide: (link: docs/guide/install-guide/development-environment text: Local development environment). I use (link: https://laravel.com/docs/valet text: Laravel valet) on my MacBook, but it's up to you to choose a solution that works best for you.
 - **Web server for staging**
     Second, we need a running web server for staging, e.g. *staging.example.com*. The requirements are very low. It can be a web hosting starter package with a hoster of your choice. Only FTP access is needed, and the FTP path should be the root directory of the web server. SSH is not required.
 - **Web server for production**

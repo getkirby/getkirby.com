@@ -22,7 +22,7 @@ Tags: deployment, development, webserver
 
 Text:
 
-In its [requirements](https://getkirby.com/docs/guide/quickstart), Kirby states that it is able to run on many different web servers. However, in reality it seems that most of the time it is used on Apache servers. Historically, Apache is pretty common among shared webhosting providers where many people host their Kirby sites. It's also very popular as a local development server because of [tools like LAMP/MAMP/WAMP](https://getkirby.com/docs/guide/development-environment), which make it very easy to install Apache and PHP on your local computer. Even though Nginx has been around for more than 15 years and is widely considered to be more modern and more performant than Apache, it's often still seen as more complicated or not as beginner-friendly.
+Based on its (link: docs/guide/quickstart text: requirements), Kirby is able to run on many different web servers. However, most of the time it is used on Apache servers. Historically, Apache is pretty common among shared webhosting providers where many people host their Kirby sites. It's also very popular as a local development server because of (link: docs/guide/install-guide/development-environment text: tools like LAMP/MAMP/WAMP), which make it very easy to install Apache and PHP on your local computer. Even though Nginx has been around for more than 15 years and is widely considered to be more modern and more performant than Apache, it's often still seen as more complicated or not as beginner-friendly.
 
 ## Nginx: No support for `.htaccess`
 

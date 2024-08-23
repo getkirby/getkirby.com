@@ -37,7 +37,7 @@ Combine Kirby's file-based architecture with content from any source and edit it
 
 Our cookbook also has some new tips and solutions, among them:
 
-- Popular options for setting up a [local development environment](https://getkirby.com/docs/guide/development-environment)
+- Popular options for setting up a (link: docs/guide/install-guide/development-environment text: local development environment)
 
 - [Paginating long posts](https://getkirby.com/docs/cookbook/navigation/paginating-posts)
 
