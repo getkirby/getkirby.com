@@ -63,7 +63,7 @@ return [
     'menu' => [
       'site'
       'notes' => [
-			  'icon'  => 'pen',
+        'icon'  => 'pen',
         'label' => 'Notes',
         'link'  => 'pages/notes',
       ]
@@ -78,9 +78,9 @@ Instead of a link, you can also add either a `dialog` or `drawer` which will the
 
 ```php
 'notes' => [
-	'icon'  => 'pen',
-	'label' => 'Notes'
-	'dialog' => 'my/custom/dialog'
+  'icon'  => 'pen',
+  'label' => 'Notes'
+  'dialog' => 'my/custom/dialog'
 ]
 ```
 
@@ -90,9 +90,9 @@ However, you can also use this to open core dialogs: We want to add a menu entry
 
 ```php
 'note' => [
-	'icon'   => 'add',
-	'label'  => 'New note',
-	'dialog' => 'pages/create?parent=/pages/notes&view=site&section=notes'
+  'icon'   => 'add',
+  'label'  => 'New note',
+  'dialog' => 'pages/create?parent=/pages/notes&view=site&section=notes'
 ]
 ```
 
@@ -119,13 +119,13 @@ The `current` callback can be used to add some logic for when your menu entry sh
 
 ```php
 'notes' => [
-	'icon'  => 'pen',
-	'label' => 'Notes',
-	'link'  => 'pages/notes',
-	'current' => function (string $current): bool {
-		$path = Kirby\Cms\App::instance()->path();
-		return Str::contains($path, 'pages/notes');
-	}
+  'icon'  => 'pen',
+  'label' => 'Notes',
+  'link'  => 'pages/notes',
+  'current' => function (string $current): bool {
+    $path = Kirby\Cms\App::instance()->path();
+    return Str::contains($path, 'pages/notes');
+  }
 ]
 ```
 
@@ -133,12 +133,14 @@ When you add a menu entry that links to a page or file, you probably also want t
 
 ```php
 'site' => [
-  'current' => function (): bool {
-		// the links of all your custom menu entries
-		$links = ['pages/notes', 'pages/albums'];
-
-		$path  = Kirby\Cms\App::instance()->path();
-		return A::every($links, fn ($link) => Str::contains($path, $link))
+  'current' => function (string $current): bool {
+    // the links of all your custom menu entries
+    $links = ['pages/notes', 'pages/albums'];
+    $path  = Kirby\Cms\App::instance()->path();
+    
+    return 
+      $current === 'site' && 
+      A::every($links, fn ($link) => Str::contains($path, $link) === false);
   },
 ],
 ```
