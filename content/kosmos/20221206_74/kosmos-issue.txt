@@ -103,10 +103,10 @@ In his article [The IndieWeb for Everyone](https://mxb.dev/blog/the-indieweb-for
 
 [Shell Script Best Practices](https://sharats.me/posts/shell-script-best-practices/): Some opinionated tips.
 
-[Do spellcheckers send sensitive data to servers](https://www.aaron-gustafso.com/notebook/spellcheckers-exfiltrating-pii_-not-so-fast/) ? Aaron Gustafson shares his test results.
+[Do spellcheckers send sensitive data to servers](https://www.aaron-gustafson.com/notebook/spellcheckers-exfiltrating-pii_-not-so-fast/) ? Aaron Gustafson shares his test results.
 
 [The Art of the Command Line](https://github.com/jlevy/the-art-of-command-line) is a multi-language one-page guide explaining important CLI commands worth knowing.
 
-Interesting read on [using the Wayback Machine to salvage rotten links](https://www.aaron-gustafso.com/notebook/salvaging-linkrot-with-the-wayback-machine/) by providing a link to the Wayback Machine URL as a fallback for failing links.
+Interesting read on [using the Wayback Machine to salvage rotten links](https://www.aaron-gustafson.com/notebook/salvaging-linkrot-with-the-wayback-machine/) by providing a link to the Wayback Machine URL as a fallback for failing links.
 
 The console is a powerful tool, not only for debugging but also for running scripts. [Dear console](https://christianheilmann.com/2022/09/29/dear-console/) collects a set of console scripts for copy & paste use or to extend upon.

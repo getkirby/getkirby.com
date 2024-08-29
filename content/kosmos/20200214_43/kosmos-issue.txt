@@ -161,4 +161,4 @@ Intopia's [WCAG 2.1 Map](https://intopia.digital/wp-content/uploads/2019/10/2019
 
 JetBrains released [Mono](https://www.jetbrains.com/lp/mono/), an open source typeface for developers.
 
-Marcus Herrmann writes about [improved accessible routing in Vue.js](https://marcus.io/blog/improved-accessible-routing-vuejs).
+Marcus Herrmann writes about [improved accessible routing in Vue.js](https://marcus.io/blog/20200127-improved-accessible-routing-vuejs).

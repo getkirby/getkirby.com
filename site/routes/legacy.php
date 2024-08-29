@@ -48,5 +48,9 @@ return [
 
 			$this->next();
 		}
-	]
+	],
+	[
+		'pattern' => 'made-with-kirby-and-love',
+		'action'  => fn () => go('/')
+	],
 ];
