@@ -21,9 +21,8 @@ Text:
 
 There are a lot more classes and objects at play within Kirby. You can find the most common ones in the Reference:
 
-- (link: docs/reference/objects text: Most important objects)
-- (link: docs/reference/@ text: Advanced: all classes)
-- (link: docs/reference/@/aliases text: Class aliases)
+- (link: docs/reference/objects text: All classes)
+- (link: docs/reference/objects/aliases text: Class aliases)
 
 ## Access to other pages
 
@@ -62,7 +61,7 @@ Many methods of Kirby objects do not return a string, integer or similar but a K
 However, it is important to know that most often Kirby's objects are immutable. That means, when you modify an object like `$page`, `$file` etc. using a method like `update()`, `changeTitle()` and so on, a new (cloned) object with changes applied is returned.
 
 Therefore, you have to store the returned object in a new variable to be able to further work with it. Or if you want to continue using the existing object with these new changes, you need to reassign the returned object to the existing variable:
- 
+
 
 ```php
 // $project would still have the old value

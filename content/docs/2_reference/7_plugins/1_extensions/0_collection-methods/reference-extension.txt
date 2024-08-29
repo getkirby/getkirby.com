@@ -13,7 +13,7 @@ They are used for all CMS collections (`Files`, `Pages` and `Users` as well as `
 
 ## Default collection methods
 
-**For a full (link: docs/reference/@/classes/cms/collection text: list of default collection methods), please check out the Reference.**
+**For a full (link: docs/reference/objects/cms/collection text: list of default collection methods), please check out the Reference.**
 
 <info>Be aware that you cannot override these default collection methods with any custom collection method.</info>
 

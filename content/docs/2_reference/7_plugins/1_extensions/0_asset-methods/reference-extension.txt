@@ -10,7 +10,7 @@ They are used for all `Kirby/Filesystem/Asset` objects returned by the `asset()`
 
 ## Default asset methods
 
-**For a full (link: docs/reference/@/classes/cms/asset text: list of default asset methods), please check out the Reference.**
+**For a full (link: docs/reference/objects/filesystem/asset text: list of default asset methods), please check out the Reference.**
 
 <info>Be aware that you cannot override these default asset methods with any custom asset method.</info>
 
