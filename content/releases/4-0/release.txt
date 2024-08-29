@@ -12,4 +12,4 @@ Docs: /docs
 ----
 Cover: - kirby-4-0.png
 ----
-Link: https://github.com/getkirby/kirby/archive/refs/tags/4.3.0.zip
+Link: https://github.com/getkirby/kirby/archive/refs/tags/4.3.1.zip
