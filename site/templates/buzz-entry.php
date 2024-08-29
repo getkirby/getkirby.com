@@ -1,7 +1,7 @@
 <?php layout() ?>
 
 <header class="mb-12 max-w-xl">
-	<div class="text-sm mb-1 color-gray-600">
+	<div class="text-base mb-1 color-gray-600">
 		<?= $page->category()->widont() ?>
 	</div>
 

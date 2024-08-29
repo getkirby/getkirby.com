@@ -6,9 +6,16 @@ Category: Podcast
 
 ----
 
-Text: Georg Obermayr talked about working with Kirby and its flexibility and customizability on the devslove.it podcast. 🎧  (in German)
+Intro: Georg Obermayr talked about working with Kirby and its flexibility and customizability on the devslove.it podcast. 🎧  (in German)
 
 ----
 
+Text:
 
-Link: https://rss.com/podcasts/devslove-it-der-podcast/1600171/
+
+- (link: https://rss.com/podcasts/devslove-it-der-podcast/1600171/ text: Part 1: Content modelling & clear CMS structure)
+- (link: https://rss.com/podcasts/devslove-it-der-podcast/1600172/ text: Part 2: Speed snack)
+- (link: https://rss.com/podcasts/devslove-it-der-podcast/1600173/ text: Part 3: Why the community is important for a CMS)
+
+
+(image: devsloveit.jpg)
