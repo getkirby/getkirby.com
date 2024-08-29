@@ -48,4 +48,4 @@ class ReviewsPage extends Page
 }
 ```
 
-Check out the default `Kirby\Cms\ContentLock` class (link: docs/reference/@/cms/contentlock text: documentation) as well as (link: https://github.com/getkirby/kirby/blob/main/src/Cms/ContentLock.php text: source code) to learn more about the methods required to be implemented by your custom content lock class.
+Check out the default `Kirby\Cms\ContentLock` class (link: docs/reference/objects/cms/content-lock text: documentation) as well as (link: https://github.com/getkirby/kirby/blob/main/src/Cms/ContentLock.php text: source code) to learn more about the methods required to be implemented by your custom content lock class.

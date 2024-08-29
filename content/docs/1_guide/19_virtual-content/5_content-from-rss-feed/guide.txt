@@ -29,7 +29,7 @@ Intro: This page lists articles from an RSS feed.
 
 ## Creating the virtual subpages
 
-To fetch the virtual children, we create a new `Rssfeed` page model which will read the RSS feed and create a virtual child page for each entry on the fly. The (link: docs/reference/@/http/remote text: `Remote`) class is our friend and helps us with handling this remote request.
+To fetch the virtual children, we create a new `Rssfeed` page model which will read the RSS feed and create a virtual child page for each entry on the fly. The (link: docs/reference/objects/http/remote text: `Remote`) class is our friend and helps us with handling this remote request.
 
 ```php "/site/models/rssfeed.php"
 <?php
