@@ -5,7 +5,7 @@
 			<a class="block" 	href="<?= $case->url() ?>">
 				<figure class="mb-3 shadow-2xl" style="--aspect-ratio: 3/4">
 					<?= img($image = $case->image(), [
-						'alt' => 'Screenshot of the ' . $image->alt() . ' website',
+						'alt' => 'Screenshot of the ' . $image->alt()->or($case->title()) . ' website',
 						'src' => [
 							'width' => 450
 						],
