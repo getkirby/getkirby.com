@@ -7,6 +7,14 @@
 <body>
 	<?php snippet('layouts/header') ?>
 
+	<style>
+	@media screen and (max-width: 40rem) {
+		.cta {
+			grid-template-columns: 1fr;
+		}
+	}
+	</style>
+
 	<main id="main" class="main">
 		<div class="container">
 			<article>
@@ -32,6 +40,7 @@
 				<section class="rounded bg-light overflow-hidden mb-42 shadow-xl">
 					<?= img('panel.png', [
 						'alt' => 'Panel screenshot: ' . $page->title(),
+						'lightbox' => 'panel',
 						'src' => [
 							'width' => 2400
 						],
