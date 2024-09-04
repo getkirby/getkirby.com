@@ -327,6 +327,6 @@ fields:
 
 ## Further reading
 
-- (link: docs/guide/page-builder/complex-custom-block text: Recipe: Creating a custom block type from scratch)
-- (link: docs/guide/page-builder/block-examples text: Recipe: Block factory: Creating your own blocks collection)
-- (link: docs/cookbook/content-structure/nested-blocks text: Recipe: Nested blocks)
+- (link: docs/guide/page-builder/complex-custom-block text: Creating a custom block type from scratch)
+- (link: docs/guide/page-builder/block-examples text: Block factory: Creating your own blocks collection)
+- (link: docs/cookbook/content-structure/nested-blocks text: Nested blocks)
