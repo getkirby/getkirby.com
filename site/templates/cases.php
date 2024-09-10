@@ -27,7 +27,7 @@ html {
 		<div class="text-xl leading-snug max-w-xl">
 			<p>
 				You built something with Kirby? Share it with <span class="color-white">#madeWithKirby</span> on social media or in our <a class="link" href="https://forum.getkirby.com/t/made-with-kirby-and-3/83">forum</a>.
-				Find more inspiring sites and Panel setups on <a class="link" href="https://kirbysites.com">kirbysites.com</a>.
+				Find more inspiring sites and Panel setups on <a class="link" href="https://kirbysites.com">kirbysites.com</a> and <a class="link" href="https://builtwithkirby.com/">builtwithkirby.com</a>.
 			</p>
 		</div>
 	</header>
