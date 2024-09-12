@@ -81,5 +81,6 @@ snippet('templates/features/section', [
 
 <?php snippet('templates/scenarios/brands', [
 	'title' => 'Trusted by universities world&#8209;wide',
-	'tag'   => 'education'
+	'tag'   => 'education',
+	'limit' => 15
 ]) ?>
