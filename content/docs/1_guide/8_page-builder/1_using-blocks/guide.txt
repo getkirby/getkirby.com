@@ -158,7 +158,7 @@ Shortcut | Description |
 | Ctrl + arrow up/down | Move focus up/down |
 | Ctrl + Shift + arrow up/down | Move blocks up/down |
 | Ctrl + Alt + arrow up/down | Extend selection up/down |
-| Ctrl + Enter | Split blocks |
+| Cmd/Ctrl + Enter | Split blocks |
 | Ctrl + J | Merge blocks |
 | Cmd/Ctrl + V | Import blocks/layouts from your clipboard |
 </since>
