@@ -44,15 +44,15 @@ Shortcuts:
 
 | Action | Shortcut |
 | - | - |
-| Remove block | `Meta + Backspace` |
-| Move focus up | `Meta + ↑` |
-| Move focus down | `Meta + ↓` |
-| Move block up | `Meta + Shift + ↑` |
-| Move block down | `Meta + Shift + ↓` |
-| Extend selection up | `Meta + Alt + ↑` |
-| Extend selection down | `Meta + Alt + ↓` |
-| Split block | `Meta + Enter` |
-| Merge block | `Meta + J` |
+| Remove block | `Ctrl + Backspace` |
+| Move focus up | `Ctrl + ↑` |
+| Move focus down | `Ctrl + ↓` |
+| Move block up | `Ctrl + Shift + ↑` |
+| Move block down | `Ctrl + Shift + ↓` |
+| Extend selection up | `Ctrl + Alt + ↑` |
+| Extend selection down | `Ctrl + Alt + ↓` |
+| Split block | `Ctrl + Enter` |
+| Merge block | `Ctrl + J` |
 
 ----
 

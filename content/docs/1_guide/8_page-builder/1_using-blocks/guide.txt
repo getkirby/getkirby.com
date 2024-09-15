@@ -82,8 +82,8 @@ To change the position of the active block,
 <since v="4.0.0">
 Or use the following keyboard shortcuts:
 
-To move the block up: Meta + Shift + arrow up
-To move the block down: Meta + Shift + arrow down
+To move the block up: Ctrl + Shift + arrow up
+To move the block down: Ctrl + Shift + arrow down
 </since>
 
 ## Hide block
@@ -150,16 +150,16 @@ To merge blocks
 <since v="4.0.0">
 ## Overview keyboard shortcuts
 
-Enhanced keyboard shortcuts that work with both Meta (Cmd) and Ctrl keys:
+Enhanced keyboard shortcuts:
 
 Shortcut | Description |
 | ---- | ---- |
-| Meta + Backspace | Remove selected block |
-| Meta + arrow up/down | Move focus up/down |
-| Meta + Shift + arrow up/down | Move blocks up/down |
-| Meta + Alt + arrow up/down | Extend selection up/down |
-| Meta + Enter | Split blocks |
-| Meta + J | Merge blocks |
-|Meta + V | Import blocks/layouts from your clipboard |
+| Ctrl + Backspace | Remove selected block |
+| Ctrl + arrow up/down | Move focus up/down |
+| Ctrl + Shift + arrow up/down | Move blocks up/down |
+| Ctrl + Alt + arrow up/down | Extend selection up/down |
+| Ctrl + Enter | Split blocks |
+| Ctrl + J | Merge blocks |
+| Cmd/Ctrl + V | Import blocks/layouts from your clipboard |
 </since>
 
