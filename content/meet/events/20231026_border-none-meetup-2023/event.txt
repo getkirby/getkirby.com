@@ -1,0 +1,9 @@
+start: 13:00:00
+----
+city: Nuremberg
+----
+country: Germany
+----
+conference: border:none
+----
+link: https://border-none.net/2023/

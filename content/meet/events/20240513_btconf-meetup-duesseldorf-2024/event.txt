@@ -1,0 +1,9 @@
+start: 18:00:00
+----
+city: Düsseldorf
+----
+country: Germany
+----
+conference: Beyond Tellerrand
+----
+link: https://beyondtellerrand.com/events/dusseldorf-2024

@@ -4,7 +4,9 @@ use Kirby\Cms\Page;
 
 return function (Page $page) {
 	return [
-		'events'  => $page->find('events')->children(),
-		'gallery' => $page->find('gallery')->images()->sortBy('sort'),
+		'events'   => $events = collection('events'),
+		'upcoming' => $events->filterBy('isUpcoming', true),
+		'past'     => $events->filterBy('isUpcoming', false),
+		'gallery'  => $events->images(),
 	];
 };

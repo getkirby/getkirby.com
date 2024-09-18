@@ -1,0 +1,9 @@
+start: 17:30:00
+----
+city: Düsseldorf
+----
+country: Germany
+----
+issue: 1
+----
+link: https://www.meetup.com/kirby-community-nrw/events/297043387/

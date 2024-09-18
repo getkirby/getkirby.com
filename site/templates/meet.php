@@ -1,4 +1,20 @@
 <?php layout() ?>
+<?php snippet('templates/meet/events.css') ?>
+
+<style>
+@media (max-width: 40rem) {
+	.events header {
+		flex-direction: column;
+		gap: 1rem;
+		align-items: flex-start;
+	}
+	.events ul a {
+		flex-direction: column;
+		gap: var(--spaccing-1);
+		align-items: flex-start;
+	}
+}
+</style>
 
 <article>
 	<header class="max-w-xl mb-24">
@@ -8,9 +24,11 @@
 		</p>
 	</header>
 
-	<?php snippet('templates/meet/events', ['events' => $events]) ?>
+	<?php snippet('templates/meet/upcoming', ['events' => $upcoming]) ?>
 	<?php snippet('templates/meet/map') ?>
 	<?php snippet('templates/meet/how-to') ?>
 	<?php snippet('templates/meet/gallery', ['gallery' => $gallery]) ?>
+	<?php snippet('templates/meet/past', ['events' => $past]) ?>
 </article>
 
+<?php snippet('templates/meet/events.js') ?>
