@@ -6,7 +6,7 @@ Subtitle: Development Agency
 
 ----
 
-Plan: regular
+Plan: certified
 
 ----
 
@@ -39,6 +39,10 @@ Description:
 Estd is the development offshoot of the Dublin-based design agency (link: https://www.poststudio.ie/ text: Post Studio). We are a collective of design-sensitive, detail-oriented designers and developers. We dovetail with companies and design agencies to offer efficient, effective and accessible website development services.
 
 We aim to listen to and understand each project's unique challenges and technical needs and provide practical and affordable digital solutions tailored to your project.
+
+----
+
+Summary: We are a collective of design-sensitive, detail-oriented designers and developers. We dovetail with companies and design agencies to offer efficient, effective and accessible website development services.
 
 ----
 
