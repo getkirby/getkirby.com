@@ -13,8 +13,8 @@ Intro: Get a glimpse into the future at Kirby's next major release and help us p
 Cta:
 
 -
-	text: Download v5.0-alpha.2
-	link: https://github.com/getkirby/kirby/archive/refs/tags/5.0.0-alpha.2.zip
+	text: Download v5.0-alpha.3
+	link: https://github.com/getkirby/kirby/archive/refs/tags/5.0.0-alpha.3.zip
 	icon: download
 
 ----
@@ -195,6 +195,97 @@ buttons:
       foo: bar
 ```
 
+<since v="Alpha 2">
+### File previews: your media at a glance
+
+With Kirby 5, we're opening up the preview part of the Panel's file view to more rich media previews that aren't just images.
+
+It starts with basic previews for video and audio files that now ship as part of the core:
+
+(image: file-preview-video.png)
+(image: file-preview-audio.png)
+
+But you can also add custom file previews as plugin extensions to customize the preview for these formats or create previews for other file formats.
+
+Custom file previews consist of two parts:
+- a PHP class defining what data is passed to the preview and what files this preview is used for
+- a Vue component to render the preview
+
+#### Custom `FieldPreview` class
+
+For a custom file preview, you need a new class that extends `Kirby\Panel\Ui\FieldPreview`. In this example, we're building a custom preview for `.glb` files that are used to display 3D data:
+
+```php
+class GlbFilePreview extends FilePreview
+{
+	public function __construct(
+		public File $file,
+		public string $component = 'k-glb-file-preview'
+	) {
+	}
+
+	public static function accepts(File $file): bool
+	{
+		return $file->extension() === 'glb';
+	}
+}
+```
+
+This is the minimal setup for a custom class. What it does:
+- It defines which Vue component to use, in this case `k-glb-file-preview` which we will create later. If no component is specified, `k-default-file-preview` will be used.
+- Something you must define is the `::accepts($file)` method. It is used to determine which preview class is used for a certain file. Kirby will loop through all available preview classes and use the first one that accepts the file.
+
+
+#### Register your preview class
+
+To use your custom file preview class, you need to register it as a plugin extension:
+
+```php
+Kirby::plugin('your/plugin', [
+	'filePreviews' => [
+		GlbFilePreview::class
+	]
+]);
+```
+
+#### Vue component
+
+Finally, we need to create the Vue component that is used to render the preview. As above listed, we have named it `k-glb-file-preview`.
+
+By default, file preview components will receive three default props:
+- `url` to the file
+- `details` array with basic file information (ideally used for `<k-file-preview-details>`)
+- `image` object with the thumb icon/image also used in sections etc. (we don't use it for this preview)
+
+We also use the `<k-file-preview-frame>` component as wrapper for our actual 3D model, which adds a pattern background.
+
+```js
+panel.plugin("getkirby/custom-file-preview", {
+	components: {
+		"k-glb-file-preview": {
+			template: `
+				<figure class="k-default-file-preview k-glb-file-preview">
+					<k-file-preview-frame>
+						<model-viewer :src="url" />
+					</k-file-preview-frame>
+
+					<k-file-preview-details :details="details" />
+				</figure>
+			`,
+			props: {
+				details: Array,
+				url: String,
+			},
+		},
+	}
+});
+```
+
+The `<model-viewer>` element is [from a library](https://modelviewer.dev) that helps to actually display the GLB file. I won't go into the details how to use it exactly (loading external script etc.). You can try the (link: https://github.com/getkirby/sandbox/pull/7 text: full custom file view).
+
+(video: file-preview-custom.mp4 controls: true autoplay: true loop: true class: video rounded shadow-xl bg-light)
+</since>
+
 ## ✨ Enhancements
 
 - Improved support for IDE autocompletion and type hints for collection items (`$pages`, `$files`...) [#6391](https://github.com/getkirby/kirby/pull/6391#pullrequestreview-1999690640)
@@ -224,7 +315,11 @@ buttons:
     - Added `Panel\Model::model()` method
 - Backend classes for core view buttons [#6545](https://github.com/getkirby/kirby/pull/6545)
 </since>
-
+<since v="Alpha 3">
+- Sections: improved title and info wrapping [#6447](https://github.com/getkirby/kirby/pull/6447)
+- Calendar input: first day of the week is chosen based on user language or `date.weekday` config option (`0` for Sunday ... `6` for Saturday) [#6635](https://github.com/getkirby/kirby/pull/6635)
+- Duplicating pages: All UUIDs within the copied page, its files and children that point to an object that got copied as - well will be replaced with the UUID of the copied version. If no copying files, any UUID pointing to a file within the copied page gets removed. [#6567](https://github.com/getkirby/kirby/pull/6567)
+</since>
 
 ## 🐛 Bug fixes
 
@@ -236,6 +331,9 @@ buttons:
 - Kirby is better at removing failed file uploads from the server tmp directory [#2476](https://github.com/getkirby/kirby/issues/2476)
 - Canceling the file upload dialog now also cancels ongoing uploads [#6421](https://github.com/getkirby/kirby/pull/6421)
 - `<k-header>`: fixed wrapping with many buttons in narrow screens [#6544](https://github.com/getkirby/kirby/pull/6544)
+</since>
+<since v="Alpha 3">
+- Model hooks for actions: multiple hooks don't overwrite each others' changes to the model [#6460](https://github.com/getkirby/kirby/pull/6460) [#2828](https://github.com/getkirby/kirby/pull/2828)
 </since>
 
 ## 🚨 Breaking changes
@@ -266,6 +364,15 @@ buttons:
 - `Image\Dimensions::forImage()` now receives an `Image\Image` object [#6591](https://github.com/getkirby/kirby/pull/6591)
 - `Image\Exif::read()` is now a static method that receives an absolute path to a file [#6591](https://github.com/getkirby/kirby/pull/6591)
 - Thumb driver `autoOrient` option has been removed and now is always applied [#6591](https://github.com/getkirby/kirby/pull/6591)
+</since>
+<since v="Alpha 3">
+- Model action `before` hooks: rules get applied after the hook runs
+- `<k-file-preview>` got fully refactored. If you were replacing or extending it, your code likely will break. Check out the new custom file preview feature if you want to provide previews for specific files. [#6578](https://github.com/getkirby/kirby/pull/6578)
+- Calendar dropdown input will show Sunday now as first day of the week (depending on the user's language). If you want to enforce Monday as first day of the week, you can set the `date.weekday` option to `1`. [#6635](https://github.com/getkirby/kirby/pull/6635)
+- All methods in `*Rules` classes are now marked to return void instead of a boolean [#6660](https://github.com/getkirby/kirby/pull/6660)
+- Users without a role in their credentials file will now receive the `default` role (if exists), not the `visitor` role anymore [#6656](https://github.com/getkirby/kirby/pull/6656)
+- `Site::changes` is now a new method to track changes across the site. The `changes` field is used as a storage for those changes and has thus become a reserved field for Kirby.
+- All methods in `*Rules` classes are now marked to return void instead of a boolean [#6660](https://github.com/getkirby/kirby/pull/6660)
 </since>
 
 ### Removed deprecated
@@ -329,6 +436,9 @@ buttons:
 <since v="Alpha 2">
 - `<k-bubble>`, `<k-bubbles>` and `<k-bubbles-field-preview>`. Use `<k-tag>`, `<k-tags>` and `<k-tag-field-preview>` instead. [#6569](https://github.com/getkirby/kirby/pull/6569)
 </since>
+<since v="Alpha 3">
+- Exception classes: passing $arg array will be removed in a future version. Use named arguments. [#6618](https://github.com/getkirby/kirby/pull/6618)
+</since>
 
 ## ♻️ Refactored
 
@@ -360,6 +470,11 @@ buttons:
 
 <since v="Alpha 2">
 - New `Kirby\Api\Upload` class to handle file uploads via the REST API [#6421](https://github.com/getkirby/kirby/pull/6421)
+</since>
+<since v="Alpha 3">
+- Refactor `LanguageRules` [#6659](https://github.com/getkirby/kirby/pull/6659)
+- Exception classes support named arguments [#6618](https://github.com/getkirby/kirby/pull/6618)
+- Improve code style `Collection::sort()` [#6626](https://github.com/getkirby/kirby/pull/6626)
 </since>
 
 ## 🧹 Housekeeping
