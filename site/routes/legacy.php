@@ -29,7 +29,6 @@ return [
 	[
 		'pattern' => [
 			'docs/cheatsheet/(:any)/(:any)',
-			'docs/reference/(:any)/(:any)',
 			'docs/reference/objects/(:any)/(:any)',
 			'docs/reference/tools/(:any)/(:any)'
 		],
