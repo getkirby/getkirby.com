@@ -195,7 +195,7 @@ buttons:
       foo: bar
 ```
 
-<since v="Alpha 2">
+<since v="Alpha 3">
 ### File previews: your media at a glance
 
 With Kirby 5, we're opening up the preview part of the Panel's file view to more rich media previews that aren't just images.
