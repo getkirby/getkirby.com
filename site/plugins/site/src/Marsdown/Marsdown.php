@@ -197,6 +197,7 @@ class Marsdown extends ParsedownExtra
 					'name' => 'details',
 					'rawHtml' => snippet('kirbytext/since', [
 						'text'    => $text,
+						'label'   => $attrs['label'] ?? null,
 						'version' => $attrs['v'] ?? null
 					], true),
 					'attributes' => [

@@ -54,7 +54,7 @@ As requested from many – whether as personal preference or for making the Pane
 
 We do expect to receive a lot of feedback on this feature and that the exact styling will be fine-tuned in the following pre-releases based on your feedback.
 
-<since v="Alpha 2">
+<since v="5.0.0-alpha.2" label="Alpha 2">
 ### Bring out the big files: Chunked uploads
 
 Kirby 5 supports large Panel uploads. Uploads are no longer restricted by the server's `upload_max_filesize` limit but instead uploaded in chunks that are pieced back together on the server.
@@ -82,7 +82,7 @@ buttons:
   - settings
 ```
 
-<since v="Alpha 2">
+<since v="5.0.0-alpha.2" label="Alpha 2">
 This way, you can reference existing buttons by name and decide which ones to include and in what order. You can however also define new custom buttons:
 
 ```yml
@@ -195,7 +195,7 @@ buttons:
       foo: bar
 ```
 
-<since v="Alpha 3">
+<since v="5.0.0-alpha.3" label="Alpha 3">
 ### File previews: your media at a glance
 
 With Kirby 5, we're opening up the preview part of the Panel's file view to more rich media previews that aren't just images.
@@ -298,7 +298,7 @@ The `<model-viewer>` element is [from a library](https://modelviewer.dev) that h
 - Thumbnails don't need to be regenerated when page sorting changes [#6432](https://github.com/getkirby/kirby/pull/6432)
 - `<k-link>` (and subsequently `<k-button>` and `<k-dropdown-item>`) has a new `download` attribute to force direct download of a file
 
-<since v="Alpha 2">
+<since v="5.0.0-alpha.2" label="Alpha 2">
 - New `files.sort` permission [#1969](https://github.com/getkirby/kirby/issues/1969)
 - UUIDs are fully lowercased now to avoid issues between filesystems handling casing differently [#6566](https://github.com/getkirby/kirby/pull/6566)
 - `<k-tag>`: new `element` and `theme` props [#6569](https://github.com/getkirby/kirby/pull/6569)
@@ -315,7 +315,7 @@ The `<model-viewer>` element is [from a library](https://modelviewer.dev) that h
     - Added `Panel\Model::model()` method
 - Backend classes for core view buttons [#6545](https://github.com/getkirby/kirby/pull/6545)
 </since>
-<since v="Alpha 3">
+<since v="5.0.0-alpha.3" label="Alpha 3">
 - Sections: improved title and info wrapping [#6447](https://github.com/getkirby/kirby/pull/6447)
 - Calendar input: first day of the week is chosen based on user language or `date.weekday` config option (`0` for Sunday ... `6` for Saturday) [#6635](https://github.com/getkirby/kirby/pull/6635)
 - Duplicating pages: All UUIDs within the copied page, its files and children that point to an object that got copied as - well will be replaced with the UUID of the copied version. If no copying files, any UUID pointing to a file within the copied page gets removed. [#6567](https://github.com/getkirby/kirby/pull/6567)
@@ -351,7 +351,7 @@ The `<model-viewer>` element is [from a library](https://modelviewer.dev) that h
 - `Str::camel()`, `Str::camelToKebab()`, `Str::float()`, `Str::kebab()`, `Str::kebabToCamel()`, `Str::length()`, `Str::lower()`, `Str::safeTemplate()`, `Str::short()`, `Str::slug()`, `Str::snake()`, `Str::studly()`, `Str::substr()`, `Str::template()`, `Str::ucfirst()`, `Str::ucwords()`, `Str::unhtml()`, `Str::upper()` and `Str::widont()` can no longer be called without a value argument (passing a `null` value still works) [#6401](https://github.com/getkirby/kirby/pull/6401)
 - All content storage methods must now use the `VersionId` instead of a simple string. [#6436](https://github.com/getkirby/kirby/pull/6436)
 
-<since v="Alpha 2">
+<since v="5.0.0-alpha.2" label="Alpha 2">
 - Kirby requires the following browser versions to use the Panel (other browser requirements remain unchanged)
     - Safari 16+
     - Mobile Safari 16+
@@ -365,7 +365,7 @@ The `<model-viewer>` element is [from a library](https://modelviewer.dev) that h
 - `Image\Exif::read()` is now a static method that receives an absolute path to a file [#6591](https://github.com/getkirby/kirby/pull/6591)
 - Thumb driver `autoOrient` option has been removed and now is always applied [#6591](https://github.com/getkirby/kirby/pull/6591)
 </since>
-<since v="Alpha 3">
+<since v="5.0.0-alpha.3" label="Alpha 3">
 - Model action `before` hooks: rules get applied after the hook runs
 - `<k-file-preview>` got fully refactored. If you were replacing or extending it, your code likely will break. Check out the new custom file preview feature if you want to provide previews for specific files. [#6578](https://github.com/getkirby/kirby/pull/6578)
 - Calendar dropdown input will show Sunday now as first day of the week (depending on the user's language). If you want to enforce Monday as first day of the week, you can set the `date.weekday` option to `1`. [#6635](https://github.com/getkirby/kirby/pull/6635)
@@ -433,10 +433,10 @@ The `<model-viewer>` element is [from a library](https://modelviewer.dev) that h
 - `<k-writer>` will be removed in a future version. Use `<k-writer-input></k-writer-input>` instead [#6172](https://github.com/getkirby/kirby/pull/6172)
 - `--color-backdrop` CSS property has been deprecated. Use `--overlay-color-back` instead [#6299](https://github.com/getkirby/kirby/pull/6299)
 
-<since v="Alpha 2">
+<since v="5.0.0-alpha.2" label="Alpha 2">
 - `<k-bubble>`, `<k-bubbles>` and `<k-bubbles-field-preview>`. Use `<k-tag>`, `<k-tags>` and `<k-tag-field-preview>` instead. [#6569](https://github.com/getkirby/kirby/pull/6569)
 </since>
-<since v="Alpha 3">
+<since v="5.0.0-alpha.3" label="Alpha 3">
 - Exception classes: passing $arg array will be removed in a future version. Use named arguments. [#6618](https://github.com/getkirby/kirby/pull/6618)
 </since>
 
@@ -468,10 +468,10 @@ The `<model-viewer>` element is [from a library](https://modelviewer.dev) that h
     - `str_starts_with()`
     - `str_ends_with()`
 
-<since v="Alpha 2">
+<since v="5.0.0-alpha.2" label="Alpha 2">
 - New `Kirby\Api\Upload` class to handle file uploads via the REST API [#6421](https://github.com/getkirby/kirby/pull/6421)
 </since>
-<since v="Alpha 3">
+<since v="5.0.0-alpha.3" label="Alpha 3">
 - Refactor `LanguageRules` [#6659](https://github.com/getkirby/kirby/pull/6659)
 - Exception classes support named arguments [#6618](https://github.com/getkirby/kirby/pull/6618)
 - Improve code style `Collection::sort()` [#6626](https://github.com/getkirby/kirby/pull/6626)
@@ -483,7 +483,7 @@ The `<model-viewer>` element is [from a library](https://modelviewer.dev) that h
 - Tests: DRY `$app` property [#6474](https://github.com/getkirby/kirby/pull/6474)
 - Replacing `get_class()` method with `::class` notation [#6475](https://github.com/getkirby/kirby/pull/6475)
 
-<since v="Alpha 2">
+<since v="5.0.0-alpha.2" label="Alpha 2">
 - Vite: Make dev server by default `https://sandbox.test` instead of [`http://sandbox.test`](http://sandbox.test) [#6522](https://github.com/getkirby/kirby/pull/6522)
 - Turn `panel` JS modules fully reactive [#6529](https://github.com/getkirby/kirby/pull/6529)
 - The `::setUpSingleLanguage` and `::setUpMultiLanguage` helper test methods in global `TestCase` class. [#6561](https://github.com/getkirby/kirby/pull/6561)
