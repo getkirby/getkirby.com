@@ -121,7 +121,7 @@ article[data-loading] .price[data-sale] {
 				<?php snippet('templates/buy/product', [
 					'product'     => $basic,
 					'description' => 'A discounted license for individuals and small teams with a',
-					'limit'       => 'total annual revenue of less than ' . $revenueLimit
+					'limit'       => 'total annual revenue/funding of less than ' . $revenueLimit
 				]) ?>
 				<?php snippet('templates/buy/product', [
 					'product'     => $enterprise,
