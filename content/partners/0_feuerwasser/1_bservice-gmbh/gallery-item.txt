@@ -2,7 +2,7 @@ Title: bservice.gmbh
 
 ----
 
-Info: Client: b S.ervice GmbH, Heidelberg
+Info: Client: b. Service GmbH, Heidelberg
 
 ----
 
