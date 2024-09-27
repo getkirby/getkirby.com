@@ -1,0 +1,17 @@
+Title: bservice.gmbh
+
+----
+
+Info: Client: b S.ervice GmbH, Heidelberg
+
+----
+
+Link: https://bservice.gmbh
+
+----
+
+Uuid:
+
+----
+
+Text:
