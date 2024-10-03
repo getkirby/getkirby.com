@@ -81,5 +81,6 @@ snippet('templates/features/section', [
 
 <?php snippet('templates/scenarios/brands', [
 	'title' => 'Trusted by hosts world&#8209;wide',
-	'tag'   => 'hospitality'
+	'tag'   => 'hospitality',
+	'limit' => 15
 ]) ?>

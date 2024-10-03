@@ -1,0 +1,13 @@
+Title: Vueve Clicquot
+
+----
+
+Featured: true
+
+----
+
+Tag: hospitality
+
+----
+
+Height: 2.25rem
