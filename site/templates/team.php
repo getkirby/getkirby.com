@@ -123,7 +123,7 @@
 				<figure>
 					<?= image('ahmet.png')->crop(250, 350) ?>
 					<figcaption>
-						<p><strong>Ahmet</strong>s Bora</p>
+						<p><strong>Ahmet</strong> Bora</p>
 						<p><a href="mailto:ahmet@getkirby.com">ahmet@getkirby.com</a></p>
 					</figcaption>
 				</figure>
@@ -137,13 +137,13 @@
 			<div class="box prose">
 				<h3>Est. 2012</h3>
 				<p>
-					Kirby started in <a href="/10" class="link">2012</a> as a side project by Bastian. Over the years, the team has grown from within our <a href="/meet" class="link">community</a>.
+					Kirby started in <a href="/10" class="link">2012</a> as Bastian’s side project. Over the years, the team has grown from within our <a href="/meet" class="link">community</a>.
 					Together, we move Kirby forward.
 				</p>
 			</div>
 			<div class="box prose">
 				<h3>Company form</h3>
-				<p>Kirby is maintained by the <a href="/contact">Content Folder GmbH & Co. KG.</a> Our company is entirely owned and operated by our team with no outside investment.</p>
+				<p>Kirby is maintained by the <a href="/contact">Content Folder GmbH & Co. KG</a>. Our company is entirely owned and operated by our team with no outside investment.</p>
 			</div>
 			<div class="box prose">
 				<h3>Kirby’s funding</h3>
@@ -166,7 +166,7 @@
 			</div>
 			<div class="box prose">
 				<h3>Longevity</h3>
-				<p>We have been around for more than a decade, and we plan to be around for years to come. We really believe in stability and longevity. We also truly love our long-term relationships with our customers. We have known many of you for many, many years - some of you since Kirby’s beta in 2011. That’s beautiful.</p>
+				<p>We have been around for more than a decade, and we plan to be around for years to come. We really believe in stability and longevity. We also truly love our long-term relationships with our customers. We have known many of you for many, many years – some of you since Kirby’s beta in 2011. That’s beautiful.</p>
 			</div>
 			<div class="box prose">
 				<h3>Community</h3>
@@ -174,7 +174,7 @@
 			</div>
 			<div class="box prose">
 				<h3>Responsibility</h3>
-				<p>We feel a personal responsibility to keep Kirby safe and thriving. But we also care about a better society and the future of our planet. We offer <a href="/buy#good-cause" class="link">free licenses</a> to students, selected educational projects, social and environmental organizations, charities and non-profits with insufficient funds. We also donate a substantial amount each year to the Amadeu Antonio Foundation to help protect our democracy.</p>
+				<p>We feel a personal responsibility to keep Kirby safe and thriving. But we also care about a better society and the future of our planet. We offer <a href="/buy#good-cause" class="link">free licenses</a> to students, selected educational projects, social and environmental organizations, charities and non-profits with insufficient funding. We also donate a substantial amount each year to the Amadeu Antonio Foundation to help protect our democracy.</p>
 			</div>
 		</div>
 	</section>
@@ -196,7 +196,7 @@
 			</div>
 			<div class="box prose">
 				<h3>Peers</h3>
-				<p>While we are constantly around on <a href="https://chat.getkirby.com">Discord</a>, <a href="https://github.com/getkirby">Github</a> and in our <a href="https://forum.getkirby.com">forum</a>, our community has turned into a really friendly, self-regulating little society. We are more than thankful for all the help and guidance that Kirby users provide for each other.</p>
+				<p>While we are constantly around on <a href="https://chat.getkirby.com">Discord</a>, <a href="https://github.com/getkirby">GitHub</a> and in our <a href="https://forum.getkirby.com">forum</a>, our community has turned into a really friendly, self-regulating little society. We are more than thankful for all the help and guidance that Kirby users provide for each other.</p>
 			</div>
 		</div>
 	</section>
