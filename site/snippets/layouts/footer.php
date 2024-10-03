@@ -105,6 +105,7 @@
 									'Privacy'  => page('privacy'),
 									'License'  => page('license'),
 									'Presskit' => page('press'),
+									'Team'     => page('team'),
 									'Contact'  => page('contact'),
 								]
 							]) ?>
