@@ -143,11 +143,11 @@
 			</div>
 			<div class="box prose">
 				<h3>Company form</h3>
-				<p>Kirby is maintained by the <a href="/contact">Content Folder GmbH & Co. KG.</a> Bastian, Sonja, Lukas and Nico are the owners. Ahmet is working as a freelancer for the company.</p>
+				<p>Kirby is maintained by the <a href="/contact">Content Folder GmbH & Co. KG.</a> Our company is entirely owned and operated by our team with no outside investment.</p>
 			</div>
 			<div class="box prose">
 				<h3>Kirby’s funding</h3>
-				<p>Kirby is 100% self-funded. We are profitable for more than a decade with our commercial license model. Since 2023, our partner network supports us with a secondary revenue stream. Our revenue is directly reinvested in the development of Kirby and its ecosystem.</p>
+				<p>Kirby is 100% self-funded. We have been profitable for over a decade with our commercial licensing model. Since 2023, our partner network has supported us with a secondary revenue stream. Our revenue is directly reinvested in the development of Kirby and its ecosystem.</p>
 			</div>
 			<div class="box prose">
 				<h3>Fully remote</h3>
@@ -162,19 +162,19 @@
 		<div class="team-info columns">
 			<div class="box prose">
 				<h3>Small & caring</h3>
-				<p>We are happy to be a small team. We are working together in the same formation for many years and believe in the power and efficiency of this small group. We are not just one anonymous corporate entity. We express our personal values through our actions as a company. We believe that tech is always political and that we need to be careful about our decisions and our impact.</p>
+				<p>We like to be a small team. We have been working together in the same formation for many years and believe in the power and efficiency of this small group. We are not just an anonymous company. We express our personal values through our actions as a company. We believe that technology is always political and that we need to be careful about our decisions and our impact.</p>
 			</div>
 			<div class="box prose">
 				<h3>Longevity</h3>
-				<p>We are around for more than a decade and we plan to be around for years to come. We really think that stability and longevity is a feature. We also truly love our long-term relationships with our customers. We know a lot of you for many, many years - some of you even since Kirby’s beta in 2011. That’s beautiful.</p>
+				<p>We have been around for more than a decade, and we plan to be around for years to come. We really believe in stability and longevity. We also truly love our long-term relationships with our customers. We have known many of you for many, many years - some of you since Kirby’s beta in 2011. That’s beautiful.</p>
 			</div>
 			<div class="box prose">
 				<h3>Community</h3>
-				<p>Kirby’s community is known for being open and welcoming and we are very proud of that. We know that this can't be taken for granted on the web and especially in tech. We want people to feel safe when they interact with us or our community and we will do everything we can to keep this place friendly and open for everyone.</p>
+				<p>The <a href="/meet" class="link">Kirby community</a> is known for being open and welcoming, and we take great pride in that. We know that’s not something that can be taken for granted on the web, and especially in the tech industry. We want people to feel safe when interacting with us or our community, and we will do everything we can to keep this place friendly and open for everyone.</p>
 			</div>
 			<div class="box prose">
 				<h3>Responsibility</h3>
-				<p>We feel personally responsible to keep Kirby save and thriving. But we also care about a better society and the future of our planet. We offer free licenses for students, selected educational projects, social and environmental organizations, charities and non-profits with insufficient funding. We also donate a substantial amount each year to the Amadeu Antonio foundation to help protect our democracy.</p>
+				<p>We feel a personal responsibility to keep Kirby safe and thriving. But we also care about a better society and the future of our planet. We offer <a href="/buy#good-cause" class="link">free licenses</a> to students, selected educational projects, social and environmental organizations, charities and non-profits with insufficient funds. We also donate a substantial amount each year to the Amadeu Antonio Foundation to help protect our democracy.</p>
 			</div>
 		</div>
 	</section>
@@ -188,14 +188,14 @@
 			</div>
 			<div class="box prose">
 				<h3>Contributors</h3>
-				<p>We have received hundreds of voluntary code contributions over the years from more than <a href="https://github.com/getkirby/kirby/graphs/contributors">60 contributors</a> in the community. Their help with issue reports and pull requests is invaluable for us as a team.</p>
+				<p>We have received hundreds of voluntary code contributions over the years from more than <a href="https://github.com/getkirby/kirby/graphs/contributors">60 contributors</a> in the community. Their help with issue reports and pull requests is invaluable to us as a team.</p>
 			</div>
 			<div class="box prose">
 				<h3>Translators</h3>
 				<p>Kirby’s interface is translated by an amazing team of <a href="https://translation.getkirby.com">community translators</a> from all over the world.</p>
 			</div>
 			<div class="box prose">
-				<h3>Moderators</h3>
+				<h3>Peers</h3>
 				<p>While we are constantly around on <a href="https://chat.getkirby.com">Discord</a>, <a href="https://github.com/getkirby">Github</a> and in our <a href="https://forum.getkirby.com">forum</a>, our community has turned into a really friendly, self-regulating little society. We are more than thankful for all the help and guidance that Kirby users provide for each other.</p>
 			</div>
 		</div>
