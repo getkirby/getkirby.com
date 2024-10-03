@@ -6,4 +6,4 @@ Tag: edu
 
 ----
 
-Height: 2.25rem
+Height: 2rem
