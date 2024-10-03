@@ -40,6 +40,7 @@
 									'For designers'          => page('for/designers'),
 									'For content creators'   => page('for/creators'),
 									'For clients & agencies' => page('for/clients'),
+									'For artists'            => page('for/artists'),
 									'For events'             => page('for/events'),
 									'For education'          => page('for/education'),
 									'For hospitality'        => page('for/hospitality'),
