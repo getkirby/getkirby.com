@@ -78,6 +78,40 @@ Organize content your way. Every page type or data entry can have the completely
 
 (link: docs/guide/content/fields text: Read more ›)
 
+## Use nested hierarchies to your advantage
+
+Another aspect of the content structure is the hierarchy. Hierarchies are naturally created from the URL structure of your site. Every nested URL corresponds to a nested folder structure in your `content` folder.
+
+Sometimes you will have pages with a lot of children, e.g. blog posts, events, product variants etc. To increase the overview and also Kirby's performance, it may make sense to add an extra nesting layer to such hierarchies. Let's take a blog as an example:
+
+```filesystem "/content/blog"
+blog.txt
+1_through-the-desert/
+  post.txt
+2_chasing-waterfalls/
+  post.txt
+3_a-night-in-the-forest/
+  post.txt
+...
+```
+
+If you can already foresee that this blog will have several hundreds or thousands of subpages, you can help Kirby to keep your site fast by reducing the size of each subtree. Here we'll add a nesting layer with the publish year of the blog post:
+
+```filesystem "/content/blog"
+blog.txt
+2023/
+  1_through-the-desert/
+    post.txt
+  2_chasing-waterfalls/
+    post.txt
+2024/
+  1_a-night-in-the-forest/
+    post.txt
+...
+```
+
+This allows Kirby to traverse the page tree more quickly as it doesn't have to read every single directory even for requests that only need to access one or a few pages. However, note that premature optimization isn't great either. If you don't expect hundreds or thousands of subpages, there is no need to do this.
+
 ## Media files
 
 Kirby stores media files in the same folder as the page content instead of putting everything into a huge media library. In addition, you can store media files in the `site` object, i.e. directly in the `content` folder.
