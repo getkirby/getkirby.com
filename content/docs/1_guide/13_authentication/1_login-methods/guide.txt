@@ -10,7 +10,7 @@ Text:
 
 ## Available login methods
 
-Kirby comes with three login methods. If you don't configure anything, login via password is the default. Passwordless login needs to be enabled explicitely.
+Kirby comes with three login methods. If you don't configure anything, login via password is the default. Passwordless login needs to be enabled explicitly.
 
 The login methods are defined in the `config.php` file. Learn more in the (link: docs/reference/system/options/auth#login-methods text: reference).
 
