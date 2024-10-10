@@ -7,7 +7,9 @@ class EventPage extends Page
 {
 	public function date(): Field
 	{
-		return parent::date()->value($this->num() . ' ' . $this->start()->or('18:00:00'));
+		return parent::date()->value(
+			$this->num() . ' ' . $this->start() . ' ' . $this->timezone()
+		);
 	}
 
 	public function icon(): string
@@ -27,6 +29,16 @@ class EventPage extends Page
 	public function isUpcoming(): bool
 	{
 		return $this->date()->toTimestamp() >= time();
+	}
+
+	public function shortDate(): Field
+	{
+		$dt = new DateTime();
+		$tz = new DateTimeZone((string)$this->timezone());
+		$dt->setTimezone($tz);
+		$dt->setTimestamp($this->date()->toTimestamp());
+
+		return parent::shortDate()->value($dt->format('D, j M Y'));
 	}
 
 	public function shortTitle(): Field
@@ -50,6 +62,16 @@ class EventPage extends Page
 		}
 
 		return parent::shortTitle()->value(implode(' ', $title));
+	}
+
+	public function start(): Field
+	{
+		return parent::start()->or('18:00:00');
+	}
+
+	public function timezone(): Field
+	{
+		return parent::timezone()->or('Europe/Berlin');
 	}
 
 	public function title(): Field

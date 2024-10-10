@@ -2,8 +2,8 @@
 	<h3><?= $event->icon() ?> <?= $event->shortTitle() ?></h3>
 
 	<?php if ($event->isUpcoming() === true): ?>
-	<localized-datetime date="<?= $event->date()->toDate('Y-m-d H:i:s') ?>"><?= $event->date()->toDate('D, j M Y, H:i T') ?></localized-datetime>
+	<localized-datetime date="<?= $event->date()->toDate('Y-m-d H:i:s T') ?>"><?= $event->date()->toDate('D, j M Y, H:i T') ?></localized-datetime>
 	<?php else: ?>
-	<time date="<?= $event->date()->toDate('Y-m-d H:i:s') ?>"><?= $event->date()->toDate('D, j M Y') ?></time>
+	<time date="<?= $event->date()->toDate('Y-m-d\TH:i:sT') ?>"><?= $event->shortDate() ?></time>
 	<?php endif ?>
 </a>
