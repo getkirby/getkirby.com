@@ -10,6 +10,20 @@ class EventPage extends Page
 		return parent::date()->value($this->num() . ' ' . $this->start()->or('18:00:00'));
 	}
 
+	public function icon(): string
+	{
+		if ($this->isMeetup() === true) {
+			return '📍';
+		}
+
+		return '🗓️';
+	}
+
+	public function isMeetup(): bool
+	{
+		return $this->city()->isNotEmpty() === true;
+	}
+
 	public function isUpcoming(): bool
 	{
 		return $this->date()->toTimestamp() >= time();
@@ -17,24 +31,34 @@ class EventPage extends Page
 
 	public function shortTitle(): Field
 	{
-		$title = [
-			(string)$this->city()
-		];
+		$title = [];
+
+		if ($this->content()->get('title')->isNotEmpty()) {
+			$title[] = (string)parent::title();
+		}
+
+		if ($this->city()->isNotEmpty()) {
+			$title[] = 'Kirby Meetup ' . $this->city();
+		}
 
 		if ($this->conference()->isNotEmpty()) {
 			$title[] = '@ ' . $this->conference();
 		}
 
 		if ($this->issue()->isNotEmpty()) {
-			$title[] = '№' . $this->issue();
+			$title[] = '• №' . $this->issue();
 		}
 
-		return parent::shortTitle()->value(implode(' • ', $title));
+		return parent::shortTitle()->value(implode(' ', $title));
 	}
 
 	public function title(): Field
 	{
-		return parent::title()->value('Kirby Community Meetup • ' . $this->shortTitle());
+		if ($this->isMeetup() === true) {
+			return parent::title()->value('Kirby Community Meetup • ' . $this->shortTitle());
+		}
+
+		return parent::title();
 	}
 
 }
