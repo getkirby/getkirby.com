@@ -4,7 +4,7 @@
 		<?php foreach ($gallery as $image): ?>
 		<li>
 			<figure class="img rounded-xl overflow-hidden" style="--w:<?= $image->width() ?>;--h:<?= $image->height() ?>">
-				<img src="<?= $image->resize(800)->url() ?>" alt="<?= $image->title()->esc() ?>" loading="lazy">
+				<img src="<?= $image->resize(800)->url() ?>" alt="Meetup <?= $image->page()->city()->esc() ?> - <?= $image->page()->date()->toDate('M Y') ?>" loading="lazy">
 			</figure>
 		</li>
 		<?php endforeach ?>
