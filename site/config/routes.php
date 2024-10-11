@@ -21,7 +21,6 @@ return [
 
 			if (empty($key) === false && get('key') === $key) {
 				kirby()->cache('diffs')->flush();
-				kirby()->cache('meet')->flush();
 				kirby()->cache('pages')->flush();
 				kirby()->cache('reference')->flush();
 			}
