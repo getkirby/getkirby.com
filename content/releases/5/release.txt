@@ -1,0 +1,15 @@
+title: Kirby 5
+----
+Subtitle: Time for changes
+----
+Version: 5
+----
+ogimage: opengraph.png
+----
+Description: Kirby 5 is all about a new editing experience for users, with a brand new, stunning Panel design.
+----
+Docs: /docs
+----
+Cover: - kirby-5-0.png
+----
+Link: https://github.com/getkirby/kirby/archive/refs/tags/5.0.0.zip

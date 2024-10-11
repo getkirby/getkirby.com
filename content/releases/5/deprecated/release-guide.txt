@@ -1,0 +1,13 @@
+Title: Deprecated
+
+----
+
+Text:
+
+#### Core
+
+-
+
+#### Panel
+
+-

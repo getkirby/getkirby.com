@@ -1,0 +1,17 @@
+Title: Breaking changes
+
+----
+
+Text:
+
+#### Core
+
+-
+
+#### Panel
+
+-
+
+#### Removed deprecated code
+
+-

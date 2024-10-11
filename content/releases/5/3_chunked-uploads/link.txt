@@ -1,0 +1,10 @@
+Title: Chunked uploads
+----
+
+Subtitle: Moving the mountain pebble by pebble
+
+----
+
+Teaser:
+
+With Kirby 5, handling large file uploads is smoother and more reliable than ever. The new chunked upload feature breaks down big files into smaller parts, uploading them piece by piece. Whether you’re working with high-resolution media or other hefty files, Kirby’s improved file handling ensures a seamless experience for everyone.
