@@ -1,12 +1,6 @@
 <?php
 
 return [
-	'cache' => [
-		'meet' => [
-			'active' => true,
-			'type'   => 'file'
-		],
-	],
 	'debug' => true,
 	'email' => [
 		'transport' => [

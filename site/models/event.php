@@ -35,7 +35,7 @@ class EventPage extends Page
 
 	public function isUpcoming(): bool
 	{
-		return $this->date()->toTimestamp() >= time();
+		return $this->datetime()->getTimestamp() >= time();
 	}
 
 	public function shortTitle(): Field
