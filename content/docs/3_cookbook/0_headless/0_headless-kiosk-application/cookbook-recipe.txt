@@ -2,7 +2,7 @@ Title: Headless kiosk app
 
 ----
 
-Description: Use Kirby and 11ty to generate a headless kiosk application hat works offline.
+Description: Use Kirby and 11ty to generate a headless kiosk application that works offline.
 
 ----
 
