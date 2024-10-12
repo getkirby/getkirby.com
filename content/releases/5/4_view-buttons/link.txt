@@ -3,3 +3,43 @@ Title: Custom Panel view buttons
 
 Subtitle: La la la
 
+----
+
+Teaser:
+
+
+
+----
+
+BlueprintConfig:
+
+```yml "site/blueprints/pages/note.yml"
+buttons:
+  - preview
+  - settings
+  myBytton:
+    text: My Button
+    link: https://getkirby.com
+    theme: positive
+```
+
+----
+
+Config:
+
+```php "site/config/config.php"
+'panel' => [
+  'viewButtons' => [
+    'site' => [
+      'preview',
+      'a' => [
+        'icon'   => 'heart',
+        'text'   => 'Kosmos',
+        'theme'  => 'purple-icon',
+        'target' => '_blank',
+        'link'   => 'https://getkirby.com'
+      ]
+    ]
+  ]
+]
+```

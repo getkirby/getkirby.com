@@ -1,4 +1,4 @@
-title: Kirby 5
+title: Kirby 5 – Takutea
 ----
 Subtitle: Time for changes
 ----

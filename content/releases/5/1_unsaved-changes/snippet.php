@@ -37,7 +37,7 @@
 	<figure class="release-box bg-light" style="grid-area: dialog">
 		<?= $section->image('dialog.png')->resize(700) ?>
 	</figure>
-	<figure class="release-text-box" style="grid-area: outlook">
+	<figure class="release-code-box" style="grid-area: outlook">
 		<?= $section->filesystem()->kt() ?>
 	</figure>
 </div>
