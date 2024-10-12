@@ -4,9 +4,25 @@ Title: Core improvements
 
 Text:
 
-#### ...
+- `site` controller data will now always be merged as default data with data from page template specific controllers.https://feedback.getkirby.com/422
+- New `files.sort` permission [#1969](https://github.com/getkirby/kirby/issues/1969)
 
+#### IDE support
 
-### More improvements
+- Improved IDE autocompletion and type hints for collection items (`$pages`, `$files`, `$users`...) [#6391](https://github.com/getkirby/kirby/pull/6391#pullrequestreview-1999690640)
 
--
+#### UUIDs
+- Duplicating pages: All UUIDs within the copied page, its files and children that point to an object that got copied as - well will be replaced with the UUID of the copied version. If no copying files, any UUID pointing to a file within the copied page gets removed. [#6567](https://github.com/getkirby/kirby/pull/6567)
+- UUIDs are fully lowercased now to avoid issues between filesystems handling casing differently [#6566](https://github.com/getkirby/kirby/pull/6566)
+
+#### More improvements
+
+- Thumbnails don't need to be regenerated when page sorting changes [#6432](https://github.com/getkirby/kirby/pull/6432)
+- New `Kirby\Panel\Panel::buttons()` method that collects all defined buttons from all Panel areas [#6541](https://github.com/getkirby/kirby/pull/6541)
+- New `Kirby\Panel\Ui` namespace with basic `Kirby\Panel\Ui\Component` and `Kirby\Panel\Ui\Button` classes [#6539](https://github.com/getkirby/kirby/pull/6539)
+	- Each component renders as an array with a `component`, unique `key` and `props` entries
+- New `Kirby\Panel\Ui\Buttons\ViewButtons` and `Kirby\Panel\Ui\Buttons\ViewButton` classes [#6542](https://github.com/getkirby/kirby/pull/6542)
+	- Responsible for gathering and transforming view buttons configured in blueprints, config files and/or Panel areas
+	- Renders them as PHP array definitions that can be handed to the dedicated Vue frontend components
+	- Added `Panel\Model::model()` method
+- Backend classes for core view buttons [#6545](https://github.com/getkirby/kirby/pull/6545)

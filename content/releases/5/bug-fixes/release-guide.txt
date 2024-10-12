@@ -4,4 +4,10 @@ Title: Bug fixes
 
 Text:
 
--
+- Fixed thumb issues resulting from EXIF orientation entry [#2695](https://github.com/getkirby/kirby/issues/2695)
+- Model hooks for actions: multiple hooks don't overwrite each others' changes to the model [#6460](https://github.com/getkirby/kirby/pull/6460) [#2828](https://github.com/getkirby/kirby/pull/2828)
+- Headers with null as value are no longer added to JS API requests. [#6435](https://github.com/getkirby/kirby/pull/6435)
+- `$helper.object.clone` is no longer deprecated. Please use it instead of `structuredClone` as this might cause issues down the road with Vue 3. [#6479](https://github.com/getkirby/kirby/pull/6479)
+- Kirby is better at removing failed file uploads from the server tmp directory [#2476](https://github.com/getkirby/kirby/issues/2476)
+- Canceling the file upload dialog now also cancels ongoing uploads [#6421](https://github.com/getkirby/kirby/pull/6421)
+- `<k-header>`: fixed wrapping with many buttons in narrow screens [#6544](https://github.com/getkirby/kirby/pull/6544)

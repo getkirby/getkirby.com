@@ -6,8 +6,30 @@ Text:
 
 #### Core
 
--
+- Exception classes support named arguments [#6618](https://github.com/getkirby/kirby/pull/6618)
+- New `Kirby\Api\Upload` class to handle file uploads via the REST API [#6421](https://github.com/getkirby/kirby/pull/6421)
+- Refactored `Kirby\Cms\LanguageRules` [#6659](https://github.com/getkirby/kirby/pull/6659)
+- Improved class typing by adding `Stringable` interface to relevant classes [#6433](https://github.com/getkirby/kirby/pull/6433)
+- New `Kirby\Content\VersionId` class to represent versions [#6436](https://github.com/getkirby/kirby/pull/6436)
+- Refactored all content storage classes and models [#6436](https://github.com/getkirby/kirby/pull/6436)
+- New `Language::single()` method to create a Language placeholder object in single language installations [#6448](https://github.com/getkirby/kirby/pull/6448)
+- Use "new" functions from PHP 8.0 [#6476](https://github.com/getkirby/kirby/pull/6476)
+	- `str_contains()`
+	- `str_starts_with()`
+	- `str_ends_with()`
+- Improve code style `Kirby\Toolkit\Collection::sort()` [#6626](https://github.com/getkirby/kirby/pull/6626)
 
 #### Panel
 
--
+- Preparations for a move to Vue 3 in v6
+	- `<k-draggable>` is directly built on top of SortableJS now [#6387](https://github.com/getkirby/kirby/pull/6387)
+	- Replace Vue `$listeners` [#6107](https://github.com/getkirby/kirby/pull/6107)
+	- Use strict CSS selectors for boolean (data) attributes [#6109](https://github.com/getkirby/kirby/pull/6109)
+	- Explicitly added `$attrs.class` to components that disable inheriting attributes [#6332](https://github.com/getkirby/kirby/pull/6332)
+	- Use more modern PHP syntax and PHPUnit assertions where applicable [#6401](https://github.com/getkirby/kirby/pull/6401)
+- Streamlined input validation
+	- Use `<k-string-input>` for all text inputs [#6103](https://github.com/getkirby/kirby/pull/6103)
+	- `<k-slug-input>` is now built on top of `<k-string-input>` [#6320](https://github.com/getkirby/kirby/pull/6320)
+	- Stricter native URL validation for `<k-url-input>` [#6320](https://github.com/getkirby/kirby/pull/6320)
+	- Removed `vuelidate` library [#6099](https://github.com/getkirby/kirby/pull/6099)
+- `<k-writer>` has been merged into `<k-writer-input>` [#6172](https://github.com/getkirby/kirby/pull/6172)

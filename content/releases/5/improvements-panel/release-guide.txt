@@ -4,10 +4,23 @@ Title: Panel improvements
 
 Text:
 
-#### ...
+- Sections: improved title and info wrapping [#6447](https://github.com/getkirby/kirby/pull/6447)
+- Calendar input: first day of the week is chosen based on user language or `date.weekday` config option (`0` for Sunday … `6` for Saturday) [#6635](https://github.com/getkirby/kirby/pull/6635)
+
+#### Native field validation
+
+- Relying front-end validation on native HTML invalid states [#6099](https://github.com/getkirby/kirby/pull/6099) [#6320](https://github.com/getkirby/kirby/pull/6320)
+    - Choice input: unselected choices get disabled when max is reached [#6343](https://github.com/getkirby/kirby/pull/6343)
+    - Added `<k-input-validator>` helper element to provide native form validation for complex/group inputs and fields [#6321](https://github.com/getkirby/kirby/pull/6321)
 
 
+#### More improvements
 
-### More improvements
-
--
+- Radio and select fields: `default` option now supports Kirby queries [#6459](https://github.com/getkirby/kirby/pull/6459)
+- New `--color-l-min` and `--color-l-max` CSS properties [#6299](https://github.com/getkirby/kirby/pull/6299)
+- `<k-link>` (and subsequently `<k-button>` and `<k-dropdown-item>`) has a new `download` attribute to force direct download of a file
+- `<k-tag>`: new `element` and `theme` props [#6569](https://github.com/getkirby/kirby/pull/6569)
+- `<k-tags>`: new `element`, `element-tag` and `theme` props [#6569](https://github.com/getkirby/kirby/pull/6569)
+- New `<k-tags-field-preview>` component [#6569](https://github.com/getkirby/kirby/pull/6569)
+- New `<k-view-button>` component [#6540](https://github.com/getkirby/kirby/pull/6540)
+- New `uploadAsChunks` JS helper function [#6421](https://github.com/getkirby/kirby/pull/6421)
