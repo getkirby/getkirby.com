@@ -5,11 +5,11 @@ Text:
 
 ## Brute-force protection
 
-The following options configure how fast Kirby's (link: docs/guide/security#passwords text: login brute-force protection) gets activated and how long it takes until the triggered protection is disabled again.
+The following options configure how fast Kirby's (link: docs/guide/security#use-good-passwords text: login brute-force protection) gets activated and how long it takes until the triggered protection is disabled again.
 
 ### Number of trials
 
-You can set the number of wrong trials per timeout period (see below) before login gets blocked for the current IP address and user. The default setting is 10.
+You can set the number of wrong trials and login challenges (e.g. password reset, two-factor auth) per timeout period (see below) before login gets blocked for the current IP address and user. The default setting is 10.
 
 ```php
 return [
