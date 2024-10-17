@@ -17,6 +17,29 @@ $tags['snippet'] = [
 ];
 
 /**
+ * (quote: Lorem Ipsum author: Homer Simpson)
+ */
+$tags['quote'] = [
+	'attr' => [
+		'author',
+		'link'
+	],
+	'html' => function ($tag) {
+		$html = '<blockquote><p class="mb-1">' . $tag->value() . '</p>';
+
+		if ($author = $tag->author()) {
+			if ($link = $tag->link()) {
+				$author = '<a href="' . $link .'" class="link">' . $author . '</a>';
+			}
+
+			$html .= '<footer>– ' . $author . '</footer>';
+		}
+
+		return $html. '</blockquote>';
+	}
+];
+
+/**
  * (icon: icon-name)
  */
 $tags['icon'] = [

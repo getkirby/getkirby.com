@@ -60,19 +60,9 @@ If exporting in the right format for Kirby is no option, but you have the data f
 - (link: /docs/reference/api/pages/children-create text: Creating pages via REST API)
 - (link: /docs/reference/objects/data/data text: Parsing data)
 
-### Existing plugins/scripts
-Here are some plugins and/or scripts that could help kickstart your migration project. While they are likely not a ready-made solution, they can server as a great starting point for your custom migration:
-
-(tabs…)
-=== WordPress
-- (link: https://github.com/florianziegler/haptiq-kirby-exporter/ text: Haptiq Kirby Exporter)
-- (link: https://github.com/splorp/wordpress-xml-to-kirby text: Wordpress XML to Kirby)
-- (link: https://github.com/WebMechanic/WxrKirby text: WxrKirby)
-- (link: https://github.com/mirthe/kirby_wordpressimport text: Kirby Wordpressimport (archived))
-(…tabs)
-
-
 ### Migration tutorials
+
+Learn from others who have already migrated their sites to Kirby and gain valuable tips for your own migration:
 
 - (link: https://danburzo.ro/toolbox/kirby/ text: "Notes on Kirby CMS")
 
@@ -83,6 +73,7 @@ Here are some plugins and/or scripts that could help kickstart your migration pr
 - (link: http://stayregular.net/blog/from-wordpress-to-kirby-part-1-designing-the-cms text: "From Wordpress to Kirby: Part 1")
 - (link: http://stayregular.net/blog/from-wordpress-to-kirby-part-2-migrating-data text: "From Wordpress to Kirby: Part 2")
 - (link: https://webrocker.de/2019/02/10/syndicate-some-blogposts-from-wordpress-to-kirby-with-the-rest-api-revisited/ text: "Syndicate some blogposts from Wordpress to Kirby with the REST API revisited")
+
 
 === Webflow
 - (link: https://www.lkhrs.com/blog/2024/webflow-to-kirby/ text: "Migrating from Webflow to Kirby")
@@ -102,14 +93,28 @@ Here are some plugins and/or scripts that could help kickstart your migration pr
 
 (…tabs)
 
+### Existing plugins/scripts
+Here are some plugins and/or scripts that could help kickstart your migration project. While they are likely not a ready-made solution, they can server as a great starting point for your custom migration:
+
+(tabs…)
+=== WordPress
+- (link: https://github.com/florianziegler/haptiq-kirby-exporter/ text: Haptiq Kirby Exporter)
+- (link: https://github.com/splorp/wordpress-xml-to-kirby text: Wordpress XML to Kirby)
+- (link: https://github.com/WebMechanic/WxrKirby text: WxrKirby)
+- (link: https://github.com/mirthe/kirby_wordpressimport text: Kirby Wordpressimport (archived))
+(…tabs)
+
 
 ## Why others choose Kirby
 
 ### As their favourite CMS
 
-- (link: https://juno-hamburg.com/en/ideas/kirby-cms text: "Kirby CMS")
-- (link: https://careful.digital/commons/blog/why-we-love-kirby text: "Why do we like Kirby so much?")
-- (link: https://reinorange.com/de/blog/warum-kirby-unser-lieblings-cms-ist text: "Warum Kirby unser Lieblings-CMS ist")
+(quote: With Kirby, we found a CMS that’s easy for clients to use, gives our designers freedom, and is fun for developers. author: JUNO link: https://juno-hamburg.com/en/ideas/kirby-cms)
+
+(quote: Kirby will be a vital part of our business in the future and we can't wait to create some new Kirby websites. author: Careful Digital link: https://careful.digital/commons/blog/why-we-love-kirby)
+
+(quote: Kirby ist kein einfacher Hammer, sondern eher ein gut durchdachter Werkzeugkasten mit hochwertigen Werkzeugen. author: Reinorange link: https://reinorange.com/de/blog/warum-kirby-unser-lieblings-cms-ist)
+
 
 ### As an alternative to…
 
