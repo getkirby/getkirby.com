@@ -104,6 +104,9 @@ Here are some plugins and/or scripts that could help kickstart your migration pr
 - (link: https://github.com/mirthe/kirby_wordpressimport text: Kirby Wordpressimport (archived))
 (…tabs)
 
+## Hosting
+
+Kirby is a lightweight CMS that doesn't require a database, making it compatible with a wide range of hosting environments. Any server that supports PHP 8.0 or higher will run Kirby, and if your current host can run WordPress, it will most likely be able to run Kirby. Popular hosting providers for Kirby include (link: https://www.hetzner.com text: Hetzner), (link: https://uberspace.de/en/ text: Uberspace), (link: https://www.infomaniak.com text: Infomaniak) and (link: https://krystal.io/ text: Krystal). These hosters offer excellent compatibility with Kirby, reliable performance, and good customer support, making them ideal choices for hosting your Kirby site.
 
 ## Why others choose Kirby
 
@@ -146,10 +149,13 @@ Here are some plugins and/or scripts that could help kickstart your migration pr
 - (link: https://blog.notmyhostna.me/posts/from-hugo-to-kirby/ text: "From Hugo to Kirby")
 (…tabs)
 
-## The Kirby ecosystem
 
+## The Kirby ecosystem
 
 - **Plugin directory:** The Kirby (link: https://plugins.getkirby.com text: plugin directory) has many options to extend functionality.
 - **Themes:** Browse Kirby's (link: /themes text: available themes) to get a quick start.
 - **Community:** Join the Kirby (link: https://forum.getkirby.com text: forum), (link: https://cat.getkirby.com text: Discord server), or explore the (link: /meet text: community map) to find fellow Kirby enthusiasts near you.
 
+## Ready to migrate?
+
+Migrating from your existing CMS to Kirby may feel like a big step, but the flexibility and simplicity that Kirby offers is well worth it. With the resources provided here, you'll have a clear path to making Kirby your new home.
