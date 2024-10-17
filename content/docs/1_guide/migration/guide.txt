@@ -22,7 +22,7 @@ If you're moving from another platform or CMS, this guide will help you understa
 
 Before diving into the migration, it's important to familiarize yourself with Kirby's unique features:
 
-- Take out (link: docs/guide/tour text: Starterkit tour) to better understand what Kirby is all about.
+- Take ou (link: docs/guide/tour text: Starterkit tour) to better understand what Kirby is all about.
 - Watch our (link: https://videos.getkirby.com text: screencast series) for step-by-step video tutorials that explain basic to advanced features.
 
 (screencast: https://www.youtube.com/watch?v=lLQZd64uvPs poster: youtube-tour.jpg title: Feel at home in your Kirby installation text: Getting started with Kirby? Let's explore our Starterkit and see where to find stuff.)
@@ -30,7 +30,7 @@ Before diving into the migration, it's important to familiarize yourself with Ki
 Kirby has some incredibly simple yet powerful concepts to tackle features you might seek:
 
 - **Custom fields:** Kirby's (link: /docs/guide/content/fields text: content fields) are incredibly flexible. They are custom by default: Easily define any you need to create a tailored editing experience.
-- **Custom posts/page types:** Kirby uses (link: /docs/guide/templates/basics text: templates) and (link: /docs/guide/blueprints/introduction text: blueprints) to creating page types that have a specific look and functionality in the frontend as well as in the Panel, giving you full control over each content type.
+- **Custom posts/page types:** Kirby uses (link: /docs/guide/templates/basics text: templates) and (link: /docs/guide/blueprints/introduction text: blueprints) to page types that have a specific look and functionality in the frontend as well as in the Panel, giving you full control over each content type.
 - **Editor experience:** Kirby’s Panel interface makes editing easy without needing to touch the filesystem. Content is saved in flat files using a lightweight syntax, but editors do not need to worry about Markdown if they don't want to — the Panel takes care of it.
 
 ## Prepare your Kirby setup
@@ -38,7 +38,7 @@ Kirby has some incredibly simple yet powerful concepts to tackle features you mi
 
 2. **Create your templates:** Convert your existing templates into Kirby templates. You'll use PHP, and Kirby offers flexibility to replicate the look and structure of your old site.
 
-3. **Set up blueprints:** In Kirby, blueprints define how pages, files and users are displayed in the backend Panel. What fields they have, what types these fields are, how they should be layouted. This is where you can model your content structure as it existed in your previous CMS or take the opportunity to improve it.
+3. **Set up blueprints:** In Kirby, blueprints define how pages, files and users are displayed in the backend Panel. What fields they have, what types these fields are, how they should be laid out. This is where you can model your content structure as it existed in your previous CMS or take the opportunity to improve it.
 
 ## Migrate your content and data
 
@@ -97,7 +97,7 @@ Learn from others who have already migrated their sites to Kirby and gain valuab
 (…tabs)
 
 ### Existing plugins/scripts
-Here are some plugins and/or scripts that could help kickstart your migration project. While they are likely not a ready-made solution, they can server as a great starting point for your custom migration:
+Here are some plugins and/or scripts that could help kickstart your migration project. While they are likely not a ready-made solution, they can serve as a great starting point for your custom migration:
 
 (tabs…)
 === WordPress
