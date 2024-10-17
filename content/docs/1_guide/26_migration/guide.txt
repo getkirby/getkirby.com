@@ -106,7 +106,9 @@ Here are some plugins and/or scripts that could help kickstart your migration pr
 
 ## Hosting
 
-Kirby is a lightweight CMS that doesn't require a database, making it compatible with a wide range of hosting environments. Any server that supports PHP 8.0 or higher will run Kirby, and if your current host can run WordPress, it will most likely be able to run Kirby. Popular hosting providers for Kirby include (link: https://www.hetzner.com text: Hetzner), (link: https://uberspace.de/en/ text: Uberspace), (link: https://www.infomaniak.com text: Infomaniak) and (link: https://krystal.io/ text: Krystal). These hosters offer excellent compatibility with Kirby, reliable performance, and good customer support, making them ideal choices for hosting your Kirby site.
+Kirby is a lightweight CMS that doesn't require a database, making it compatible with a wide range of hosting environments. If your current host can run WordPress, it will most likely be able to run Kirby too. Check out our list of (link: /docs/reference/system/requirements text: requirements) for more details.
+
+Popular hosting providers for Kirby include (link: https://www.hetzner.com text: Hetzner), (link: https://uberspace.de/en/ text: Uberspace), (link: https://www.infomaniak.com text: Infomaniak) and (link: https://krystal.io/ text: Krystal). These hosters offer excellent compatibility with Kirby, reliable performance, and good customer support, making them ideal choices for hosting your Kirby site.
 
 ## Why others choose Kirby
 
