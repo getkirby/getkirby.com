@@ -6,7 +6,7 @@ Description: This guide helps you transition from another platform to Kirby, wit
 
 ----
 
-Ogimage: opengraph.png
+Ogimage: opengraph.jpg
 
 ----
 
