@@ -1,0 +1,164 @@
+Title: Migrating to Kirby
+
+----
+
+Description: This guide helps you transition from another platform to Kirby, with key info, relevant docs, and tips to make setting up your new site as smooth as possible.
+
+----
+
+Ogimage: opengraph.png
+
+----
+
+Category: Preparing the stage
+
+----
+
+Text:
+
+If you're moving from another platform or CMS, this guide will help you understand the essentials, give your pointers to relevant documentation and resources, and smooth the process of setting up your new Kirby site to make the transition as seamless as possible.
+
+## Understanding Kirby
+
+Before diving into the migration, it's important to familiarize yourself with Kirby's unique features:
+
+- Take out (link: docs/guide/tour text: Starterkit tour) to better understand what Kirby is all about.
+- Watch our (link: https://videos.getkirby.com text: screencast series) for step-by-step video tutorials that explain basic to advanced features.
+
+(screencast: https://www.youtube.com/watch?v=lLQZd64uvPs poster: youtube-tour.jpg title: Feel at home in your Kirby installation text: Getting started with Kirby? Let's explore our Starterkit and see where to find stuff.)
+
+Kirby has some incredibly simple yet powerful concepts to tackle features you might seek:
+
+- **Custom fields:** Kirby's (link: /docs/guide/content/fields text: content fields) are incredibly flexible. They are custom by default: Easily define any you need to create a tailored editing experience.
+- **Custom posts/page types:** Kirby uses (link: /docs/guide/templates/basics text: templates) and (link: /docs/guide/blueprints/introduction text: blueprints) to creating page types that have a specific look and functionality in the frontend as well as in the Panel, giving you full control over each content type.
+- **Editor experience:** Kirby’s Panel interface makes editing easy without needing to touch the filesystem. Content is saved in flat files using a lightweight syntax, but editors do not need to worry about Markdown if they don't want to — the Panel takes care of it.
+
+## Prepare your Kirby setup
+1. **Install Kirby:** Start by (link: /docs/guide/quickstart text: installing Kirby) locally or on your server to get comfortable.
+
+2. **Create your templates:** Convert your existing templates into Kirby templates. You'll use PHP, and Kirby offers flexibility to replicate the look and structure of your old site.
+
+3. **Set up blueprints:** In Kirby, blueprints define how pages, files and users are displayed in the backend Panel. What fields they have, what types these fields are, how they should be layouted. This is where you can model your content structure as it existed in your previous CMS or take the opportunity to improve it.
+
+## Migrate your content and data
+
+The crucial step in your migration is to move all your content and data – pages, media files etc. – to your new Kirby site. There are two approaches to this
+
+### Exporting data
+
+If you are very familiar with your previous system, you could set up a script, plugin or similar that exports the data already in the (link: /docs/guide/content text: right format for Kirby): a folder per page with a text file that has the name of the corresponding template and contains all your page fields, as well as media files alongside of the text file that belong to the page.
+
+(screencast: https://www.youtube.com/watch?v=zUPqqrhbcR8 poster: youtube-content.jpg title: The content folder text: The heart and soul of your Kirby installation: Let's learn how to create pages and add content with simple text files and folders. )
+
+### Importing data
+If exporting in the right format for Kirby is no option, but you have the data from your old CMS in a structured format of any kind, you can turn it into Kirby pages, users or files by parsing the data and creating the Kirby content from it:
+
+(screencast: https://www.youtube.com/watch?v=nWa_cmbuxLw poster: youtube-import.jpg title: How to import data into Kirby text: In this video you will learn how to use the Kirby CLI to create pages from a dataset. No matter if you are importing data from an existing CMS, a JSON API, an Excel sheet or any other source – this tutorial will provide a good foundation.)
+
+#### Related docs
+
+- (link: /docs/reference/objects/cms/page/create-child text: Creating pages via PHP)
+- (link: /docs/reference/objects/cms/page/create-file text: Creating files via PHP)
+- (link: /docs/reference/objects/cms/user/create text: Creating users via PHP)
+- (link: /docs/reference/api/pages/children-create text: Creating pages via REST API)
+- (link: /docs/reference/objects/data/data text: Parsing data)
+
+### Migration tutorials
+
+Learn from others who have already migrated their sites to Kirby and gain valuable tips for your own migration:
+
+- (link: https://danburzo.ro/toolbox/kirby/ text: "Notes on Kirby CMS")
+
+(tabs…)
+=== WordPress
+- (link: https://forum.getkirby.com/t/migrating-existing-wordpress-content-to-a-new-kirby-site/18409 text: "Migrating existing Wordpress content to a new Kirby site")
+- (link: https://florianziegler.com/journal/i-replaced-wordpress-with-kirby/ text: "I replaced Wordpress with Kirby")
+- (link: http://stayregular.net/blog/from-wordpress-to-kirby-part-1-designing-the-cms text: "From Wordpress to Kirby: Part 1")
+- (link: http://stayregular.net/blog/from-wordpress-to-kirby-part-2-migrating-data text: "From Wordpress to Kirby: Part 2")
+- (link: https://webrocker.de/2019/02/10/syndicate-some-blogposts-from-wordpress-to-kirby-with-the-rest-api-revisited/ text: "Syndicate some blogposts from Wordpress to Kirby with the REST API revisited")
+
+
+=== Webflow
+- (link: https://www.lkhrs.com/blog/2024/webflow-to-kirby/ text: "Migrating from Webflow to Kirby")
+
+=== Eleventy
+- (link: https://levimcg.com/blog/migrating-from-eleventy-to-kirby/ text: "Migrating from Eleventy to Kirby")
+
+=== Ghost
+- (link: https://forum.getkirby.com/t/migrating-from-ghost-cms-to-kirby/21720/9 text: "Migrating from Ghost CMS to Kirby")
+- (link: https://www.peleke.de/en/blog/migration-from-ghost-cms-to-kirby-cms text: "Migration from Ghost CMS to Kirby CMS")
+
+=== Perch
+- (link: https://forum.getkirby.com/t/importing-into-kirby-from-perch-cms/24056/2 text: "Importing into Kirby from Perch CMS")
+
+=== Grav
+- (link: https://assbach.de/blog/von-grav-zu-kirby text: "Von Grav zu Kirby")
+
+(…tabs)
+
+### Existing plugins/scripts
+Here are some plugins and/or scripts that could help kickstart your migration project. While they are likely not a ready-made solution, they can server as a great starting point for your custom migration:
+
+(tabs…)
+=== WordPress
+- (link: https://github.com/florianziegler/haptiq-kirby-exporter/ text: Haptiq Kirby Exporter)
+- (link: https://github.com/splorp/wordpress-xml-to-kirby text: Wordpress XML to Kirby)
+- (link: https://github.com/WebMechanic/WxrKirby text: WxrKirby)
+- (link: https://github.com/mirthe/kirby_wordpressimport text: Kirby Wordpressimport (archived))
+(…tabs)
+
+## Hosting
+
+Kirby is a lightweight CMS that doesn't require a database, making it compatible with a wide range of hosting environments. If your current host can run WordPress, it will most likely be able to run Kirby too. Check out our list of (link: /docs/reference/system/requirements text: requirements) for more details.
+
+Popular hosting providers for Kirby include (link: https://www.hetzner.com text: Hetzner), (link: https://uberspace.de/en/ text: Uberspace), (link: https://www.infomaniak.com text: Infomaniak) and (link: https://krystal.io/ text: Krystal). These hosters offer excellent compatibility with Kirby, reliable performance, and good customer support, making them ideal choices for hosting your Kirby site.
+
+## Why others choose Kirby
+
+(quote: With Kirby, we found a CMS that’s easy for clients to use, gives our designers freedom, and is fun for developers. author: JUNO link: https://juno-hamburg.com/en/ideas/kirby-cms)
+
+(quote: Kirby will be a vital part of our business in the future and we can't wait to create some new Kirby websites. author: Careful Digital link: https://careful.digital/commons/blog/why-we-love-kirby)
+
+(quote: Kirby isn't just a simple hammer; it's more like a well-thought-out toolbox with high-quality tools. author: Reinorange link: https://reinorange.com/de/blog/warum-kirby-unser-lieblings-cms-ist)
+
+
+### As an alternative to…
+
+(tabs…)
+=== WordPress
+- (link: https://florianziegler.com/journal/i-replaced-wordpress-with-kirby/ text: "I replaced Wordpress with Kirby")
+- (link: https://www.netmagnet.cz/en/blog/why-were-switching-from-wordpress-to-kirby-cms/ text: "Why we’re switching from WordPress to Kirby CMS")
+- (link: https://internet.com.pub/kirby-4-the-flexible-cms-alternative-to-wordpress/ text: "Kirby 4: The flexible CMS alternative to Wordpress")
+- (link: https://buschfeuerdesign.de/blog/warum-wir-standardmaessig-kirby-einsetzen-statt-wordpress text: "Warum wir standardmäßig Kirby einsetzen statt Wordpress")
+- (link: https://www.schaffrath.de/magazin/detail/wordpress-alternative-gesucht-die-antwort-ist-vielleicht-kirby text: "Wordpress-Alternative gesucht? Die Antwort ist vielleicht Kirby")
+
+=== Blot
+- (link: https://kevquirk.com/blog/migrating-this-blog-to-kirby text: "Migrating this blog to Kirby")
+
+=== Astro
+- (link: https://marcel.io/posts/goodbye-astro text: "Goodbye Astro")
+
+=== Webflow
+- (link: https://www.lkhrs.com/blog/2023/initial-thoughts-kirby-cms/ text: "Initial thoughts on Kirby CMS")
+
+=== Perch
+- (link: https://fatbuddhadesigns.co.uk/journal/the-move-to-kirby-cms/ text: "The move to Kirby CMS")
+- (link: https://deploi.ca/blog/kirby-vs-perch-a-comprehensive-comparison-of-two-powerful-content-management-systems text: "Kirby vs Perch: A comprehensive comparison of two powerful content management systems")
+
+=== Grav
+- (link: https://assbach.de/blog/von-grav-zu-kirby text: "Von Grav zu Kirby")
+
+=== Hugo
+- (link: https://blog.notmyhostna.me/posts/from-hugo-to-kirby/ text: "From Hugo to Kirby")
+(…tabs)
+
+
+## The Kirby ecosystem
+
+- **Plugin directory:** The Kirby (link: https://plugins.getkirby.com text: plugin directory) has many options to extend functionality.
+- **Themes:** Browse Kirby's (link: /themes text: available themes) to get a quick start.
+- **Community:** Join the Kirby (link: https://forum.getkirby.com text: forum), (link: https://cat.getkirby.com text: Discord server), or explore the (link: /meet text: community map) to find fellow Kirby enthusiasts near you.
+
+## Ready to migrate?
+
+Migrating from your existing CMS to Kirby may feel like a big step, but the flexibility and simplicity that Kirby offers is well worth it. With the resources provided here, you'll have a clear path to making Kirby your new home.
