@@ -162,3 +162,7 @@ Popular hosting providers for Kirby include (link: https://www.hetzner.com text:
 ## Ready to migrate?
 
 Migrating from your existing CMS to Kirby may feel like a big step, but the flexibility and simplicity that Kirby offers is well worth it. With the resources provided here, you'll have a clear path to making Kirby your new home.
+
+## Take your time
+
+You can explore Kirby for free for as long as you need. Complete your migration and decide if it's the perfect new home. Test your Kirby site in a local environment or on a staging server. When you're ready, it's (link: buy text: time to get your Kirby license)—but we want to make sure you're happy first.
