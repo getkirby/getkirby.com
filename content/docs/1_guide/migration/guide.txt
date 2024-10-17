@@ -4,6 +4,9 @@ Title: Migrating to Kirby
 
 Description: This guide helps you transition from another platform to Kirby, with key info, relevant docs, and tips to make setting up your new site as smooth as possible.
 
+----
+
+Ogimage: opengraph.png
 
 ----
 
