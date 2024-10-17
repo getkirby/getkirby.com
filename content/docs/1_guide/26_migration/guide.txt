@@ -26,12 +26,12 @@ Before diving into the migration, it's important to familiarize yourself with Ki
 
 Kirby has some incredibly simple yet powerful concepts to tackle features you might seek:
 
-- **Custom fields:** Kirby's content fields are incredibly flexible. They are custom by default: Easily define any you need to create a tailored editing experience.
-- **Custom posts/page types:** Kirby uses templates and blueprints to creating page types that have a specific look and functionality in the frontend as well as in the Panel, giving you full control over each content type.
+- **Custom fields:** Kirby's (link: /docs/guide/content/fields text: content fields) are incredibly flexible. They are custom by default: Easily define any you need to create a tailored editing experience.
+- **Custom posts/page types:** Kirby uses (link: /docs/guide/templates/basics text: templates) and (link: /docs/guide/blueprints/introduction text: blueprints) to creating page types that have a specific look and functionality in the frontend as well as in the Panel, giving you full control over each content type.
 - **Editor experience:** Kirby’s Panel interface makes editing easy without needing to touch the filesystem. Content is saved in flat files using a lightweight syntax, but editors do not need to worry about Markdown if they don't want to — the Panel takes care of it.
 
 ## Prepare your Kirby setup
-1. **Install Kirby:** Start by installing Kirby locally or on your server to get comfortable.
+1. **Install Kirby:** Start by (link: /docs/guide/quickstart text: installing Kirby) locally or on your server to get comfortable.
 
 2. **Create your templates:** Convert your existing templates into Kirby templates. You'll use PHP, and Kirby offers flexibility to replicate the look and structure of your old site.
 
@@ -43,7 +43,9 @@ The crucial step in your migration is to move all your content and data – page
 
 ### Exporting data
 
-If you are very familiar with your previous system, you could set up a script, plugin or similar that exports the data already in the right format for Kirby: a folder per page with a text file that has the name of the corresponding template and contains all your page fields, as well as media files alongside of the text file that belong to the page.
+If you are very familiar with your previous system, you could set up a script, plugin or similar that exports the data already in the (link: /docs/guide/content text: right format for Kirby): a folder per page with a text file that has the name of the corresponding template and contains all your page fields, as well as media files alongside of the text file that belong to the page.
+
+(screencast: https://www.youtube.com/watch?v=zUPqqrhbcR8 poster: youtube-content.jpg title: The content folder text: The heart and soul of your Kirby installation: Let's learn how to create pages and add content with simple text files and folders. )
 
 ### Importing data
 If exporting in the right format for Kirby is no option, but you have the data from your old CMS in a structured format of any kind, you can turn it into Kirby pages, users or files by parsing the data and creating the Kirby content from it:
@@ -109,7 +111,7 @@ Here are some plugins and/or scripts that could help kickstart your migration pr
 - (link: https://careful.digital/commons/blog/why-we-love-kirby text: "Why do we like Kirby so much?")
 - (link: https://reinorange.com/de/blog/warum-kirby-unser-lieblings-cms-ist text: "Warum Kirby unser Lieblings-CMS ist")
 
-### As an alternative to
+### As an alternative to…
 
 (tabs…)
 === WordPress
@@ -139,4 +141,10 @@ Here are some plugins and/or scripts that could help kickstart your migration pr
 - (link: https://blog.notmyhostna.me/posts/from-hugo-to-kirby/ text: "From Hugo to Kirby")
 (…tabs)
 
+## The Kirby ecosystem
+
+
+- **Plugin directory:** The Kirby (link: https://plugins.getkirby.com text: plugin directory) has many options to extend functionality.
+- **Themes:** Browse Kirby's (link: /themes text: available themes) to get a quick start.
+- **Community:** Join the Kirby (link: https://forum.getkirby.com text: forum), (link: https://cat.getkirby.com text: Discord server), or explore the (link: /meet text: community map) to find fellow Kirby enthusiasts near you.
 
