@@ -1,0 +1,101 @@
+Title: Migration
+
+----
+
+Description:
+
+
+----
+
+Category: Preparing the stage
+
+----
+
+Text: 
+
+## Importing data
+
+If you have the data from your old CMS in a structured format of any kind, you can turn it into Kirby pages, users or files. 
+
+(screencast: https://www.youtube.com/watch?v=nWa_cmbuxLw poster: screencast.jpg title: How to import data into Kirby text: In this video you will learn how to use the Kirby CLI to create pages from a dataset. No matter if you are importing data from an existing CMS, a JSON API, an Excel sheet or any other source – this tutorial will provide a good foundation.)
+
+### Related docs
+
+- (link: /docs/reference/objects/cms/page/create-child text: Creating pages via PHP)
+- (link: /docs/reference/objects/cms/page/create-file text: Creating files via PHP)
+- (link: /docs/reference/objects/cms/user/create text: Creating users via PHP)
+- (link: /docs/reference/api/pages/children-create text: Creating pages via REST API)
+- (link: /docs/reference/objects/data/data text: Parsing data)
+
+## Migration plugins
+
+Those might not be a ready-made solution but can serve as a great starting point for your custom migration 
+
+- (link: https://github.com/florianziegler/haptiq-kirby-exporter/ text: Haptiq Kirby Exporter)
+- (link: https://github.com/splorp/wordpress-xml-to-kirby text: Wordpress XML to Kirby)
+- (link: https://github.com/WebMechanic/WxrKirby text: WxrKirby)
+- (link: https://github.com/mirthe/kirby_wordpressimport text: Kirby Wordpressimport (archived))
+
+## Migration tutorials
+
+### From Wordpress to Kirby
+- (link: https://forum.getkirby.com/t/migrating-existing-wordpress-content-to-a-new-kirby-site/18409 text: "Migrating existing Wordpress content to a new Kirby site")
+- (link: https://florianziegler.com/journal/i-replaced-wordpress-with-kirby/ text: "I replaced Wordpress with Kirby")
+- (link: http://stayregular.net/blog/from-wordpress-to-kirby-part-1-designing-the-cms text: "From Wordpress to Kirby: Part 1")
+- (link: http://stayregular.net/blog/from-wordpress-to-kirby-part-2-migrating-data text: "From Wordpress to Kirby: Part 2")
+- (link: https://webrocker.de/2019/02/10/syndicate-some-blogposts-from-wordpress-to-kirby-with-the-rest-api-revisited/ text: "Syndicate some blogposts from Wordpress to Kirby with the REST API revisited")
+
+### From Webflow to Kirby 
+- (link: https://www.lkhrs.com/blog/2024/webflow-to-kirby/ text: "Migrating from Webflow to Kirby")
+
+### From Eleventy to Kirby
+- (link: https://levimcg.com/blog/migrating-from-eleventy-to-kirby/ text: "Migrating from Eleventy to Kirby")
+
+### From Ghost to Kirby
+- (link: https://forum.getkirby.com/t/migrating-from-ghost-cms-to-kirby/21720/9 text: "Migrating from Ghost CMS to Kirby")
+- (link: https://www.peleke.de/en/blog/migration-from-ghost-cms-to-kirby-cms text: "Migration from Ghost CMS to Kirby CMS")
+
+### From Perch to Kirby
+- (link: https://forum.getkirby.com/t/importing-into-kirby-from-perch-cms/24056/2 text: "Importing into Kirby from Perch CMS")
+
+### From Grav to Kirby
+- (link: https://assbach.de/blog/von-grav-zu-kirby text: "Von Grav zu Kirby")
+
+### General advice for beginners
+- (link: https://danburzo.ro/toolbox/kirby/ text: "Notes on Kirby CMS")
+
+## Why others choose Kirby
+
+### As their favourite CMS
+
+- (link: https://juno-hamburg.com/en/ideas/kirby-cms text: "Kirby CMS")
+- (link: https://careful.digital/commons/blog/why-we-love-kirby text: "Why do we like Kirby so much?")
+- (link: https://reinorange.com/de/blog/warum-kirby-unser-lieblings-cms-ist text: "Warum Kirby unser Lieblings-CMS ist")
+
+### As a Wordpress alternative
+- (link: https://florianziegler.com/journal/i-replaced-wordpress-with-kirby/ text: "I replaced Wordpress with Kirby")
+- (link: https://www.netmagnet.cz/en/blog/why-were-switching-from-wordpress-to-kirby-cms/ text: "Why we’re switching from WordPress to Kirby CMS")
+- (link: https://internet.com.pub/kirby-4-the-flexible-cms-alternative-to-wordpress/ text: "Kirby 4: The flexible CMS alternative to Wordpress")    
+- (link: https://buschfeuerdesign.de/blog/warum-wir-standardmaessig-kirby-einsetzen-statt-wordpress text: "Warum wir standardmäßig Kirby einsetzen statt Wordpress")
+- (link: https://www.schaffrath.de/magazin/detail/wordpress-alternative-gesucht-die-antwort-ist-vielleicht-kirby text: "Wordpress-Alternative gesucht? Die Antwort ist vielleicht Kirby")
+
+### As a Blot alternative
+- (link: https://kevquirk.com/blog/migrating-this-blog-to-kirby text: "Migrating this blog to Kirby")
+
+### As an Astro alternative
+- (link: https://marcel.io/posts/goodbye-astro text: "Goodbye Astro")
+
+### As a Webflow alternative
+- (link: https://www.lkhrs.com/blog/2023/initial-thoughts-kirby-cms/ text: "Initial thoughts on Kirby CMS")
+
+### As a Perch alternative
+- (link: https://fatbuddhadesigns.co.uk/journal/the-move-to-kirby-cms/ text: "The move to Kirby CMS")
+- (link: https://deploi.ca/blog/kirby-vs-perch-a-comprehensive-comparison-of-two-powerful-content-management-systems text: "Kirby vs Perch: A comprehensive comparison of two powerful content management systems")
+
+### As a Grav alternative
+- (link: https://assbach.de/blog/von-grav-zu-kirby text: "Von Grav zu Kirby")
+
+### As a Hugo alternative
+- (link: https://blog.notmyhostna.me/posts/from-hugo-to-kirby/ text: "From Hugo to Kirby")
+
+
