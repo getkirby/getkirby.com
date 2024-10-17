@@ -2,7 +2,7 @@ Title: Migrating to Kirby
 
 ----
 
-Description:
+Description: This guide helps you transition from another platform to Kirby, with key info, relevant docs, and tips to make setting up your new site as smooth as possible.
 
 
 ----
@@ -110,13 +110,11 @@ Kirby is a lightweight CMS that doesn't require a database, making it compatible
 
 ## Why others choose Kirby
 
-### As their favourite CMS
-
 (quote: With Kirby, we found a CMS that’s easy for clients to use, gives our designers freedom, and is fun for developers. author: JUNO link: https://juno-hamburg.com/en/ideas/kirby-cms)
 
 (quote: Kirby will be a vital part of our business in the future and we can't wait to create some new Kirby websites. author: Careful Digital link: https://careful.digital/commons/blog/why-we-love-kirby)
 
-(quote: Kirby ist kein einfacher Hammer, sondern eher ein gut durchdachter Werkzeugkasten mit hochwertigen Werkzeugen. author: Reinorange link: https://reinorange.com/de/blog/warum-kirby-unser-lieblings-cms-ist)
+(quote: Kirby isn't just a simple hammer; it's more like a well-thought-out toolbox with high-quality tools. author: Reinorange link: https://reinorange.com/de/blog/warum-kirby-unser-lieblings-cms-ist)
 
 
 ### As an alternative to…
