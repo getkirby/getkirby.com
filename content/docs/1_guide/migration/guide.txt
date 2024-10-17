@@ -16,7 +16,7 @@ Category: Preparing the stage
 
 Text:
 
-If you're moving from another platform or CMS, this guide will help you understand the essentials, give your pointers to relevant documentation and resources, and smooth the process of setting up your new Kirby site to make the transition as seamless as possible.
+If you're moving from another platform or CMS, this guide will help you understand the essentials, give you pointers to relevant documentation and resources, and smooth the process of setting up your new Kirby site to make the transition as seamless as possible.
 
 ## Understanding Kirby
 
@@ -30,13 +30,13 @@ Before diving into the migration, it's important to familiarize yourself with Ki
 Kirby has some incredibly simple yet powerful concepts to tackle features you might seek:
 
 - **Custom fields:** Kirby's (link: /docs/guide/content/fields text: content fields) are incredibly flexible. They are custom by default: Easily define any you need to create a tailored editing experience.
-- **Custom posts/page types:** Kirby uses (link: /docs/guide/templates/basics text: templates) and (link: /docs/guide/blueprints/introduction text: blueprints) to page types that have a specific look and functionality in the frontend as well as in the Panel, giving you full control over each content type.
+- **Custom posts/page types:** Kirby uses (link: /docs/guide/templates/basics text: templates) and (link: /docs/guide/blueprints/introduction text: blueprints) to create page types that have a specific look and functionality in the frontend as well as in the Panel, giving you full control over each content type.
 - **Editor experience:** Kirby’s Panel interface makes editing easy without needing to touch the filesystem. Content is saved in flat files using a lightweight syntax, but editors do not need to worry about Markdown if they don't want to — the Panel takes care of it.
 
 ## Prepare your Kirby setup
 1. **Install Kirby:** Start by (link: /docs/guide/quickstart text: installing Kirby) locally or on your server to get comfortable.
 
-2. **Create your templates:** Convert your existing templates into Kirby templates. You'll use PHP, and Kirby offers flexibility to replicate the look and structure of your old site.
+2. **Create your templates:** Convert your existing templates into Kirby templates. You'll use HTML and PHP, and Kirby offers flexibility to replicate the look and structure of your old site.
 
 3. **Set up blueprints:** In Kirby, blueprints define how pages, files and users are displayed in the backend Panel. What fields they have, what types these fields are, how they should be laid out. This is where you can model your content structure as it existed in your previous CMS or take the opportunity to improve it.
 
@@ -46,12 +46,12 @@ The crucial step in your migration is to move all your content and data – page
 
 ### Exporting data
 
-If you are very familiar with your previous system, you could set up a script, plugin or similar that exports the data already in the (link: /docs/guide/content text: right format for Kirby): a folder per page with a text file that has the name of the corresponding template and contains all your page fields, as well as media files alongside of the text file that belong to the page.
+If you are very familiar with your existing CMS, you could set up a script, plugin or similar that exports the data already in the (link: /docs/guide/content text: right format for Kirby): a folder per page with a text file that has the name of the corresponding template and contains all your page fields, as well as media files alongside of the text file that belong to the page.
 
 (screencast: https://www.youtube.com/watch?v=zUPqqrhbcR8 poster: youtube-content.jpg title: The content folder text: The heart and soul of your Kirby installation: Let's learn how to create pages and add content with simple text files and folders. )
 
 ### Importing data
-If exporting in the right format for Kirby is no option, but you have the data from your old CMS in a structured format of any kind, you can turn it into Kirby pages, users or files by parsing the data and creating the Kirby content from it:
+If exporting in the right format for Kirby is not an option, but you have the data from your old CMS in a structured format of any kind, you can turn it into Kirby pages, users or files by parsing the data and creating the Kirby content from it:
 
 (screencast: https://www.youtube.com/watch?v=nWa_cmbuxLw poster: youtube-import.jpg title: How to import data into Kirby text: In this video you will learn how to use the Kirby CLI to create pages from a dataset. No matter if you are importing data from an existing CMS, a JSON API, an Excel sheet or any other source – this tutorial will provide a good foundation.)
 
