@@ -22,7 +22,7 @@ If you're moving from another platform or CMS, this guide will help you understa
 
 Before diving into the migration, it's important to familiarize yourself with Kirby's unique features:
 
-- Take ou (link: docs/guide/tour text: Starterkit tour) to better understand what Kirby is all about.
+- Take our (link: docs/guide/tour text: Starterkit tour) to better understand what Kirby is all about.
 - Watch our (link: https://videos.getkirby.com text: screencast series) for step-by-step video tutorials that explain basic to advanced features.
 
 (screencast: https://www.youtube.com/watch?v=lLQZd64uvPs poster: youtube-tour.jpg title: Feel at home in your Kirby installation text: Getting started with Kirby? Let's explore our Starterkit and see where to find stuff.)
