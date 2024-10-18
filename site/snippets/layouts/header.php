@@ -1,10 +1,10 @@
 <div class="container">
 	<?php snippet('layouts/topbar', [
-		'icon'   => '🚀',
-		'title'  => 'A new era: Kirby 4',
-		'button' => 'Get to know',
-		'link'   => '/releases/4.0',
-		'active' => $page->is('releases/4-0')
+		'icon'   => '🚚',
+		'title'  => 'How to migrate to Kirby',
+		'button' => 'Tips & tutorials',
+		'link'   => '/docs/guide/migration',
+		'active' => $page->is('docs/guide/migration')
 	]) ?>
 </div>
 
