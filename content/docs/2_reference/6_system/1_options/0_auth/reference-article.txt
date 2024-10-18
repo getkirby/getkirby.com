@@ -169,7 +169,7 @@ return [
 ```
 
 <info>
-If you want to customize the emails even more, take a look how to (link: docs/guide/authentication/login-methods#email-templates text: customize the email templates) in the guide.
+If you want to customize the emails even more, take a look how to (link: docs/guide/authentication/login-methods#email-templates text: customize the email templates) in the guide. Note also that this configuration is also used for the password-reset emails.
 </info>
 
 ### Challenge priority
