@@ -117,7 +117,7 @@ class Paddle
 
 			return static::$visitor = Visitor::create(
 				country: $response['customer_country'],
-				countryIsDetected: $country === null,
+				countryIsDetected: $country === null || $country === $detectedCountry,
 				currency: $paddleProduct['currency'],
 
 				// calculate conversion rate from the EUR price;
