@@ -19,4 +19,9 @@ return array(
     'Kirby\\ComposerInstaller\\Installer' => $vendorDir . '/getkirby/composer-installer/src/ComposerInstaller/Installer.php',
     'Kirby\\ComposerInstaller\\Plugin' => $vendorDir . '/getkirby/composer-installer/src/ComposerInstaller/Plugin.php',
     'Kirby\\ComposerInstaller\\PluginInstaller' => $vendorDir . '/getkirby/composer-installer/src/ComposerInstaller/PluginInstaller.php',
+    'MaxMind\\Db\\Reader' => $vendorDir . '/maxmind-db/reader/src/MaxMind/Db/Reader.php',
+    'MaxMind\\Db\\Reader\\Decoder' => $vendorDir . '/maxmind-db/reader/src/MaxMind/Db/Reader/Decoder.php',
+    'MaxMind\\Db\\Reader\\InvalidDatabaseException' => $vendorDir . '/maxmind-db/reader/src/MaxMind/Db/Reader/InvalidDatabaseException.php',
+    'MaxMind\\Db\\Reader\\Metadata' => $vendorDir . '/maxmind-db/reader/src/MaxMind/Db/Reader/Metadata.php',
+    'MaxMind\\Db\\Reader\\Util' => $vendorDir . '/maxmind-db/reader/src/MaxMind/Db/Reader/Util.php',
 );

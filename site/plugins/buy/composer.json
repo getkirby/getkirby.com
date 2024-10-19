@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "getkirby/composer-installer": "^1.1"
+        "getkirby/composer-installer": "^1.1",
+        "maxmind-db/reader": "^1.11"
     },
     "autoload": {
         "psr-4": {

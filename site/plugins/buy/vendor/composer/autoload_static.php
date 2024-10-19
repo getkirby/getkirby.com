@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInita859f2d2dfe8ca8f08832a211f59fd27
 {
     public static $prefixLengthsPsr4 = array (
+        'M' => 
+        array (
+            'MaxMind\\Db\\' => 11,
+        ),
         'K' => 
         array (
             'Kirby\\' => 6,
@@ -18,6 +22,10 @@ class ComposerStaticInita859f2d2dfe8ca8f08832a211f59fd27
     );
 
     public static $prefixDirsPsr4 = array (
+        'MaxMind\\Db\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db',
+        ),
         'Kirby\\' => 
         array (
             0 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
@@ -42,6 +50,11 @@ class ComposerStaticInita859f2d2dfe8ca8f08832a211f59fd27
         'Kirby\\ComposerInstaller\\Installer' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Installer.php',
         'Kirby\\ComposerInstaller\\Plugin' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Plugin.php',
         'Kirby\\ComposerInstaller\\PluginInstaller' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/PluginInstaller.php',
+        'MaxMind\\Db\\Reader' => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db/Reader.php',
+        'MaxMind\\Db\\Reader\\Decoder' => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db/Reader/Decoder.php',
+        'MaxMind\\Db\\Reader\\InvalidDatabaseException' => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db/Reader/InvalidDatabaseException.php',
+        'MaxMind\\Db\\Reader\\Metadata' => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db/Reader/Metadata.php',
+        'MaxMind\\Db\\Reader\\Util' => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db/Reader/Util.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
