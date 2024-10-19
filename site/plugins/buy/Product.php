@@ -10,6 +10,18 @@ enum Product: string
 	case PartnerRegular   = 'partner-regular';
 
 	/**
+	 * Checks whether the product is eligible
+	 * for PPP price adjustment
+	 */
+	public function adjustForPPP(): bool
+	{
+		return match ($this) {
+			static::Enterprise => false,
+			default            => true
+		};
+	}
+
+	/**
 	 * Generates a checkout link for the product
 	 */
 	public function checkout(

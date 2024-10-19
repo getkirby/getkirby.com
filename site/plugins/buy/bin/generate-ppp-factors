@@ -1,0 +1,56 @@
+#!/usr/bin/env php
+<?php
+
+use Kirby\Data\PHP;
+use Kirby\Http\Remote;
+
+/**
+ * Usage: generate-ppp-factors [out-filename]
+ *
+ * `out-filename`: Optional PHP file path to write the generated factors to
+ *                 (otherwise printed to stdout as a PHP array)
+ */
+
+require_once dirname(__DIR__, 4) . '/kirby/bootstrap.php';
+
+[$meta, $data] = Remote::get(
+	'https://api.worldbank.org/v2/country/all/indicator/PA.NUS.PPPC.RF?format=json&mrnev=1&per_page=500',
+	['timeout' => 20]
+)->json();
+
+// a page size of 500 should be enough; if it isn't, something is going wrong
+if ($meta['pages'] > 1) {
+	throw new Exception('Too many results: ' . $meta['total']);
+}
+
+// convert the API response to a simple associative array (country -> value)
+$rawFactors = [];
+foreach ($data as $entry) {
+	// filter out data points older than 3 years
+	if ((int)$entry['date'] < (int)date('Y') - 3) {
+		continue;
+	}
+
+	$rawFactors[$entry['country']['id']] = $entry['value'];
+}
+
+// sort by country code
+ksort($rawFactors);
+
+// convert raw values to factors relative to German prices
+// and only keep the lowest-PPP countries
+$filteredFactors = [];
+foreach ($rawFactors as $country => $rawValue) {
+	$factor = $rawValue / $rawFactors['DE'];
+
+	if ($factor < 0.4) {
+		$filteredFactors[$country] = $factor;
+	}
+}
+
+// export to a PHP array
+if (empty($argv[1]) === false) {
+	PHP::write($argv[1], $filteredFactors);
+} else {
+	echo PHP::encode($filteredFactors);
+}

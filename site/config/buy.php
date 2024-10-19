@@ -19,6 +19,7 @@ return [
 			'regular' => 99,
 		],
 	],
+	'pppFactors' => (@include __DIR__ . '/buy.ppp.php') ?: [],
 	'revenueLimit' => 1000000,
 	'sale' => [
 		'start'    => '2024-09-23',

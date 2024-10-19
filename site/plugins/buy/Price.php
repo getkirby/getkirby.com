@@ -9,6 +9,7 @@ class Price
 {
 	public readonly string $currency;
 	public readonly float $rate;
+	public readonly float $rateAdjusted;
 
 	public function __construct(
 		public readonly Product $product,
@@ -35,27 +36,31 @@ class Price
 		}
 
 		// dynamically determine from Paddle
+		// (only in this case can there be a PPP-adjusted rate)
 		if ($rate === null) {
 			$visitor = Paddle::visitor();
 
-			$currency = $visitor->currency();
-			$rate     = $visitor->rate();
+			$currency     = $visitor->currency();
+			$rate         = $visitor->rate();
+			$rateAdjusted = $visitor->rateAdjusted();
 		}
 
-		$this->currency = $currency;
-		$this->rate     = $rate;
+		$this->currency     = $currency;
+		$this->rate         = $rate;
+		$this->rateAdjusted = $rateAdjusted ?? $rate;
 	}
 
 	/**
 	 * Converts a price from EUR to the given currency
 	 * and rounds it to the nearest pretty price
 	 *
-	 * @param bool $charm Whether prices will end in 5/9 (when true) 
+	 * @param bool $charm Whether prices will end in 5/9 (when true)
 	 *                    or 0/5 (when false)
+	 * @param bool $adjust Whether to perform PPP adjustment to the generated price
 	 */
-	public function convert(int $price, bool $charm = true): int
+	public function convert(int $price, bool $charm = true, bool $adjust = false): int
 	{
-		$price *= $this->rate;
+		$price *= $adjust ? $this->rateAdjusted : $this->rate;
 		return $this->round($price, $charm);
 	}
 
@@ -127,17 +132,18 @@ class Price
 	public function regular(int $multiplier = 1): int
 	{
 		$rawPrice = $this->product->rawPrice();
+		$adjust   = $this->product->adjustForPPP();
 
 		if ($multiplier > 1) {
 			// first use the base price without 9 ending
 			// (avoids jumps between 5 and 9 for multiplied prices)
-			$price = $multiplier * $this->convert($rawPrice, false);
+			$price = $multiplier * $this->convert($rawPrice, charm: false, adjust: $adjust);
 
 			// now round the final sum to the nearest pretty price
 			return $this->round($price);
 		}
 
-		return $this->convert($rawPrice);
+		return $this->convert($rawPrice, adjust: $adjust);
 	}
 
 	/**

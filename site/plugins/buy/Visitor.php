@@ -48,6 +48,7 @@ class Visitor
 		public readonly float $rate,
 		public readonly float|null $vatRate = null,
 		public readonly string|null $country = null,
+		public readonly bool $countryIsDetected = false,
 		public readonly string|null $error = null
 	) {
 	}
@@ -59,6 +60,7 @@ class Visitor
 	 * @param float $rate Currency conversion rate from EUR
 	 * @param float|null $vatRate VAT rate for the country on top of the net price if available
 	 * @param string|null $country Two-character ISO country code if available
+	 * @param bool $countryIsDetected Whether the country code was detected from visitor IP address
 	 * @param string|null $error Error message if an error occurred during currency detection
 	 */
 	public static function create(
@@ -66,6 +68,7 @@ class Visitor
 		float $rate,
 		float|null $vatRate = null,
 		string|null $country = null,
+		bool $countryIsDetected = false,
 		string|null $error = null
 	): static {
 		// fall back to EUR if the detected visitor currency is not supported
@@ -81,7 +84,7 @@ class Visitor
 			$error = 'Invalid conversion rate "' . $rate . '" for currency EUR';
 		}
 
-		return new static($currency, $rate, $vatRate, $country, $error);
+		return new static($currency, $rate, $vatRate, $country, $countryIsDetected, $error);
 	}
 
 	/**
@@ -162,6 +165,32 @@ class Visitor
 	public function rate(): float
 	{
 		return $this->rate;
+	}
+
+	/**
+	 * Returns the dynamic conversion rate from EUR based
+	 * on the user currency adjusted with PPP information
+	 */
+	public function rateAdjusted(): float
+	{
+		$baseRate = $this->rate();
+		$country  = $this->country();
+
+		// we can't adjust if we don't know the target country
+		if ($country === null) {
+			return $baseRate;
+		}
+
+		$pppFactor = option('buy.pppFactors')[$country] ?? 1.0;
+
+		// only adjust the rate if we got the country code from the user IP
+		// except if the PPP factor is greater than 1 in a high-GDP country
+		// (in which case circumventing the factor should not be possible)
+		if ($this->countryIsDetected === false && $pppFactor < 1) {
+			return $baseRate;
+		}
+
+		return $baseRate * $pppFactor;
 	}
 
 	/**

@@ -15,7 +15,8 @@ class Upgrade
 	public function min(): int
 	{
 		return $this->price->convert(
-			option('buy.products.' . $this->price->product->value . '.min')
+			option('buy.products.' . $this->price->product->value . '.min'),
+			adjust: $this->price->product->adjustForPPP()
 		);
 	}
 
@@ -25,7 +26,8 @@ class Upgrade
 	public function default(): int
 	{
 		return $this->price->convert(
-			option('buy.products.' . $this->price->product->value . '.nudge')
+			option('buy.products.' . $this->price->product->value . '.nudge'),
+			adjust: $this->price->product->adjustForPPP()
 		);
 	}
 

@@ -12,6 +12,7 @@ Icon
 /media/*
 !/media/index.html
 /node_modules/
+/site/config/buy.ppp.php
 
 # Editors
 # ---------------

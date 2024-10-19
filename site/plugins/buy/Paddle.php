@@ -75,7 +75,7 @@ class Paddle
 	 * Determines the country, currency and conversion rate information
 	 * for the visitor via the Paddle price API
 	 *
-	 * @param string|null $country Override for a country code (used for testing)
+	 * @param string|null $country Override for a country code
 	 */
 	public static function visitor(string|null $country = null): Visitor
 	{
@@ -121,6 +121,7 @@ class Paddle
 
 			return static::$visitor = Visitor::create(
 				country: $response['customer_country'],
+				countryIsDetected: $country === null,
 				currency: $paddleProduct['currency'],
 
 				// calculate conversion rate from the EUR price;
