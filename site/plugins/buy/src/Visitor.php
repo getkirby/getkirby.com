@@ -4,9 +4,12 @@ namespace Buy;
 
 use Kirby\Cms\App;
 use Kirby\Toolkit\Str;
+use MaxMind\Db\Reader;
 
 class Visitor
 {
+	protected static string $ipCountry;
+
 	/**
 	 * Supported currencies with their currency sign (prefixed to the amount);
 	 * currencies not listed here will automatically fall back to EUR
@@ -156,6 +159,34 @@ class Visitor
 		}
 
 		return $ip;
+	}
+
+	/**
+	 * Determines the user country by their IP address
+	 * @internal
+	 */
+	public static function ipCountry(): string|null
+	{
+		if (isset(static::$ipCountry) === true) {
+			return static::$ipCountry;
+		}
+
+		$ip = static::ip();
+		if ($ip === null) {
+			return null;
+		}
+
+		$database = '/usr/share/GeoIP/GeoLite2-Country.mmdb';
+		if (is_file($database) !== true) {
+			return null;
+		}
+
+		try {
+			$reader = new Reader($database);
+			return static::$ipCountry = $reader->get($ip)['country']['iso_code'];
+		} catch (\Throwable) {
+			return null;
+		}
 	}
 
 	/**

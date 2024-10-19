@@ -84,31 +84,27 @@ class Paddle
 			return static::$visitor;
 		}
 
+		$detectedCountry = Visitor::ipCountry();
+		$queryCountry    = $country ?? $detectedCountry;
+
+		// if we only have a local IP or something went wrong,
+		// don't bother requesting localized pricing from Paddle
+		if ($queryCountry === null) {
+			return static::$visitor = Visitor::createFromError('No visitor country detected');
+		}
+
 		try {
 			$product = Product::Basic;
 
 			$options = [
 				'data' => [
-					'product_ids' => $product->productId()
+					'customer_country' => $queryCountry,
+					'product_ids'      => $product->productId()
 				],
 
 				// fast timeout to avoid letting the user wait too long
 				'timeout' => 1
 			];
-
-			if ($country !== null) {
-				$options['data']['customer_country'] = $country;
-			} else {
-				$ip = Visitor::ip();
-
-				// if we only have a local IP, don't bother
-				// requesting dynamic information from Paddle
-				if ($ip === null) {
-					return static::$visitor = Visitor::createFromError('No visitor IP available');
-				}
-
-				$options['data']['customer_ip'] = $ip;
-			}
 
 			$response = static::request(
 				endpoint: 'prices',
