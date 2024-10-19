@@ -87,7 +87,29 @@ class Visitor
 			$error = 'Invalid conversion rate "' . $rate . '" for currency EUR';
 		}
 
+		// cache the country info for 6 hours
+		if ($error === null) {
+			App::instance()->cache('getkirby.buy')->set('country/' . $country, compact('currency', 'rate', 'vatRate'), 360);
+		}
+
 		return new static($currency, $rate, $vatRate, $country, $countryIsDetected, $error);
+	}
+
+	/**
+	 * Tries to retrieve visitor information for a country from cache
+	 */
+	public static function createFromCache(string $country, bool $countryIsDetected): static|null
+	{
+		$cache = App::instance()->cache('getkirby.buy')->get('country/' . $country);
+
+		if (is_array($cache) === true) {
+			$cache['country']           = $country;
+			$cache['countryIsDetected'] = $countryIsDetected;
+
+			return static::create(...$cache);
+		}
+
+		return null;
 	}
 
 	/**

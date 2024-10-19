@@ -84,13 +84,19 @@ class Paddle
 			return static::$visitor;
 		}
 
-		$detectedCountry = Visitor::ipCountry();
-		$queryCountry    = $country ?? $detectedCountry;
+		$detectedCountry   = Visitor::ipCountry();
+		$queryCountry      = $country ?? $detectedCountry;
+		$countryIsDetected = $country === null || $country === $detectedCountry;
 
 		// if we only have a local IP or something went wrong,
 		// don't bother requesting localized pricing from Paddle
 		if ($queryCountry === null) {
 			return static::$visitor = Visitor::createFromError('No visitor country detected');
+		}
+
+		// try to load from persistent cache
+		if ($cache = Visitor::createFromCache($queryCountry, $countryIsDetected)) {
+			return static::$visitor = $cache;
 		}
 
 		try {
@@ -117,7 +123,7 @@ class Paddle
 
 			return static::$visitor = Visitor::create(
 				country: $response['customer_country'],
-				countryIsDetected: $country === null || $country === $detectedCountry,
+				countryIsDetected: $countryIsDetected,
 				currency: $paddleProduct['currency'],
 
 				// calculate conversion rate from the EUR price;
