@@ -1,0 +1,25 @@
+{
+    "name": "getkirby/buy",
+    "license": "proprietary",
+    "type": "kirby-plugin",
+    "authors": [
+        {
+            "name": "Lukas Bestle",
+            "email": "lukas@getkirby.com"
+        }
+    ],
+    "require": {
+        "getkirby/composer-installer": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Buy\\": "src/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "getkirby/composer-installer": true
+        }
+    }
+}
