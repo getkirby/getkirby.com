@@ -1,9 +1,12 @@
 <?php
 
+use Kirby\Buy\Product;
+use Kirby\Buy\RevenueLimit;
+use Kirby\Buy\Sale;
 use Kirby\Cms\Page;
 
 return function (Page $page) {
-	$sale = new Buy\Sale();
+	$sale = new Sale();
 
 	// expire the cache when the sale banner/prices change
 	$sale->expires();
@@ -13,14 +16,14 @@ return function (Page $page) {
 	krsort($discountsReversed);
 
 	return [
-		'basic'             => Buy\Product::Basic,
+		'basic'             => Product::Basic,
 		'countries'         => option('countries'),
 		'discounts'         => $discounts,
 		'discountsReversed' => $discountsReversed,
 		'donation'          => option('buy.donation'),
-		'enterprise'        => Buy\Product::Enterprise,
+		'enterprise'        => Product::Enterprise,
 		'sale'              => $sale,
 		'questions'         => $page->find('answers')->children(),
-		'revenueLimit'      => Buy\RevenueLimit::approximation(verbose: true),
+		'revenueLimit'      => RevenueLimit::approximation(verbose: true),
 	];
 };

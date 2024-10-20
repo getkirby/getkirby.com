@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Buy\\": "src/"
+            "Kirby\\Buy\\": "src/"
         }
     },
     "config": {

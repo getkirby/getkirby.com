@@ -1,7 +1,7 @@
 <?php
 
-use Buy\Paddle;
-use Buy\Product;
+use Kirby\Buy\Paddle;
+use Kirby\Buy\Product;
 use Kirby\Honey\Time;
 use Kirby\Http\Response;
 

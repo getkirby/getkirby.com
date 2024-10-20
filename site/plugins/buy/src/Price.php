@@ -1,6 +1,6 @@
 <?php
 
-namespace Buy;
+namespace Kirby\Buy;
 
 use Exception;
 use Kirby\Toolkit\A;

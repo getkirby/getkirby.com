@@ -1,6 +1,6 @@
 <?php
 
-namespace Buy;
+namespace Kirby\Buy;
 
 use Kirby\Cms\App;
 use Kirby\Toolkit\Str;

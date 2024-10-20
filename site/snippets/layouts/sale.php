@@ -1,5 +1,5 @@
 <?php
-$sale = new Buy\Sale();
+$sale = new Kirby\Buy\Sale();
 ?>
 
 <?php if ($page->id() !== 'buy' && $sale->isActive() === true): ?>

@@ -1,8 +1,8 @@
 <?php
 
-use Buy\Paddle;
-use Buy\Passthrough;
-use Buy\Product;
+use Kirby\Buy\Paddle;
+use Kirby\Buy\Passthrough;
+use Kirby\Buy\Product;
 use Kirby\Http\Response;
 
 return [

@@ -3,7 +3,7 @@
         'name' => 'getkirby/buy',
         'pretty_version' => 'dev-develop',
         'version' => 'dev-develop',
-        'reference' => '4f3641a2bd4d4f422f464e9cb7797114877abf5d',
+        'reference' => '5e80eb4dd91ec531a6d9373a74fe4da28c2738d1',
         'type' => 'kirby-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'getkirby/buy' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '4f3641a2bd4d4f422f464e9cb7797114877abf5d',
+            'reference' => '5e80eb4dd91ec531a6d9373a74fe4da28c2738d1',
             'type' => 'kirby-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -13,11 +13,8 @@ class ComposerStaticInita859f2d2dfe8ca8f08832a211f59fd27
         ),
         'K' => 
         array (
+            'Kirby\\Buy\\' => 10,
             'Kirby\\' => 6,
-        ),
-        'B' => 
-        array (
-            'Buy\\' => 4,
         ),
     );
 
@@ -26,30 +23,26 @@ class ComposerStaticInita859f2d2dfe8ca8f08832a211f59fd27
         array (
             0 => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db',
         ),
+        'Kirby\\Buy\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
         'Kirby\\' => 
         array (
             0 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
         ),
-        'Buy\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
     );
 
     public static $classMap = array (
-        'Buy\\Paddle' => __DIR__ . '/../..' . '/src/Paddle.php',
-        'Buy\\Passthrough' => __DIR__ . '/../..' . '/src/Passthrough.php',
-        'Buy\\Price' => __DIR__ . '/../..' . '/src/Price.php',
-        'Buy\\Product' => __DIR__ . '/../..' . '/src/Product.php',
-        'Buy\\RevenueLimit' => __DIR__ . '/../..' . '/src/RevenueLimit.php',
-        'Buy\\Sale' => __DIR__ . '/../..' . '/src/Sale.php',
-        'Buy\\Upgrade' => __DIR__ . '/../..' . '/src/Upgrade.php',
-        'Buy\\Visitor' => __DIR__ . '/../..' . '/src/Visitor.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Kirby\\ComposerInstaller\\CmsInstaller' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/CmsInstaller.php',
-        'Kirby\\ComposerInstaller\\Installer' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Installer.php',
-        'Kirby\\ComposerInstaller\\Plugin' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Plugin.php',
-        'Kirby\\ComposerInstaller\\PluginInstaller' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/PluginInstaller.php',
+        'Kirby\\Buy\\Paddle' => __DIR__ . '/../..' . '/src/Paddle.php',
+        'Kirby\\Buy\\Passthrough' => __DIR__ . '/../..' . '/src/Passthrough.php',
+        'Kirby\\Buy\\Price' => __DIR__ . '/../..' . '/src/Price.php',
+        'Kirby\\Buy\\Product' => __DIR__ . '/../..' . '/src/Product.php',
+        'Kirby\\Buy\\RevenueLimit' => __DIR__ . '/../..' . '/src/RevenueLimit.php',
+        'Kirby\\Buy\\Sale' => __DIR__ . '/../..' . '/src/Sale.php',
+        'Kirby\\Buy\\Upgrade' => __DIR__ . '/../..' . '/src/Upgrade.php',
+        'Kirby\\Buy\\Visitor' => __DIR__ . '/../..' . '/src/Visitor.php',
         'MaxMind\\Db\\Reader' => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db/Reader.php',
         'MaxMind\\Db\\Reader\\Decoder' => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db/Reader/Decoder.php',
         'MaxMind\\Db\\Reader\\InvalidDatabaseException' => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db/Reader/InvalidDatabaseException.php',

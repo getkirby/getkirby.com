@@ -7,6 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'MaxMind\\Db\\' => array($vendorDir . '/maxmind-db/reader/src/MaxMind/Db'),
+    'Kirby\\Buy\\' => array($baseDir . '/src'),
     'Kirby\\' => array($vendorDir . '/getkirby/composer-installer/src'),
-    'Buy\\' => array($baseDir . '/src'),
 );

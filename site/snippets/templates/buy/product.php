@@ -19,7 +19,7 @@
 			per site
 		</a>
 
-		<?php if ($product === Buy\Product::Basic): ?>
+		<?php if ($product === Kirby\Buy\Product::Basic): ?>
 		<details class="revenue text-sm color-gray-700">
 			<summary><?= $description ?> <mark><?= $limit ?> &rarr;</mark></summary>
 			<div>
