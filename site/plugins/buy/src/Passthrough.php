@@ -12,7 +12,8 @@ class Passthrough
 		public int $multiplier = 1,
 		public string|null $partner = null,
 		public int $customerDonation = 0,
-		public int $teamDonation = 0
+		public int $teamDonation = 0,
+		public string|null $donationOrg = null,
 	) {
 	}
 
@@ -58,6 +59,7 @@ class Passthrough
 			'partner'          => $this->partner,
 			'customerDonation' => $this->customerDonation,
 			'teamDonation'     => $this->teamDonation,
+			'donationOrg'      => $this->donationOrg,
 		]);
 	}
 }

@@ -68,6 +68,7 @@ return [
 				$price       = $product->price();
 				$message     = $product->revenueLimit();
 				$passthrough = new Passthrough(
+					donationOrg:  option('buy.donation.charity'),
 					teamDonation: option('buy.donation.teamAmount') * $quantity
 				);
 
@@ -120,7 +121,10 @@ return [
 			try {
 				$product     = Product::from($productId);
 				$price       = $product->price();
-				$passthrough = new Passthrough(teamDonation: option('buy.donation.teamAmount'));
+				$passthrough = new Passthrough(
+					donationOrg:  option('buy.donation.charity'),
+					teamDonation: option('buy.donation.teamAmount')
+				);
 
 				$eurPrice       = $product->price('EUR')->sale();
 				$localizedPrice = $price->sale();
@@ -147,7 +151,10 @@ return [
 			try {
 				$product     = Product::from($productId);
 				$price       = $product->price();
-				$passthrough = new Passthrough(teamDonation: option('buy.donation.teamAmount') * $quantity);
+				$passthrough = new Passthrough(
+					donationOrg:  option('buy.donation.charity'),
+					teamDonation: option('buy.donation.teamAmount') * $quantity
+				);
 
 				$eurPrice       = $product->price('EUR')->volume($quantity);
 				$localizedPrice = $price->volume($quantity);
@@ -172,6 +179,7 @@ return [
 				$product     = Product::from($productId);
 				$price       = $product->price();
 				$passthrough = new Passthrough(
+					donationOrg:  option('buy.donation.charity'),
 					teamDonation: option('buy.donation.teamAmount') * $quantity
 				);
 
