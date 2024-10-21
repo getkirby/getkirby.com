@@ -86,7 +86,7 @@ class Paddle
 
 		$detectedCountry   = Visitor::ipCountry();
 		$queryCountry      = $country ?? $detectedCountry;
-		$countryIsDetected = $country === null || $country === $detectedCountry;
+		$countryIsDetected = $detectedCountry !== null && ($country === null || $country === $detectedCountry);
 
 		// if we only have a local IP or something went wrong,
 		// don't bother requesting localized pricing from Paddle
