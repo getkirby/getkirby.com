@@ -300,12 +300,12 @@ images:
   type: files
   label: Images
   query: page.images
-  uploads: image
+  template: image
 documents:
   type: files
   label: Documents
   query: page.documents
-  uploads: document
+  template: document
 ```
 
 </since>
