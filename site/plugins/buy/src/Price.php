@@ -74,6 +74,26 @@ class Price
 	}
 
 	/**
+	 * Returns a summary of all applied discounts
+	 */
+	public function discounts(): string
+	{
+		$discounts = [];
+
+		if ($this->rateAdjusted !== $this->rate) {
+			$pppPercentage = number_format(100 * (1 - $this->rateAdjusted / $this->rate), 2, '.');
+			$discounts[]   = 'PPP (' . $pppPercentage . '%)';
+		}
+
+		$sale = new Sale();
+		if ($sale->isActive()) {
+			$discounts[] = 'Sale (' . $sale->discount() . '%)';
+		}
+
+		return implode(', ', $discounts);
+	}
+
+	/**
 	 * Gets the team donation amount
 	 * per license in the customer currency
 	 */

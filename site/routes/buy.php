@@ -68,6 +68,7 @@ return [
 				$price       = $product->price();
 				$message     = $product->revenueLimit();
 				$passthrough = new Passthrough(
+					discounts:    $price->discounts(),
 					donationOrg:  option('buy.donation.charity'),
 					teamDonation: option('buy.donation.teamAmount') * $quantity
 				);
@@ -122,6 +123,7 @@ return [
 				$product     = Product::from($productId);
 				$price       = $product->price();
 				$passthrough = new Passthrough(
+					discounts:    $price->discounts(),
 					donationOrg:  option('buy.donation.charity'),
 					teamDonation: option('buy.donation.teamAmount')
 				);
@@ -152,6 +154,7 @@ return [
 				$product     = Product::from($productId);
 				$price       = $product->price();
 				$passthrough = new Passthrough(
+					discounts:    $price->discounts(),
 					donationOrg:  option('buy.donation.charity'),
 					teamDonation: option('buy.donation.teamAmount') * $quantity
 				);
@@ -179,6 +182,7 @@ return [
 				$product     = Product::from($productId);
 				$price       = $product->price();
 				$passthrough = new Passthrough(
+					discounts:    $price->discounts(),
 					donationOrg:  option('buy.donation.charity'),
 					teamDonation: option('buy.donation.teamAmount') * $quantity
 				);
