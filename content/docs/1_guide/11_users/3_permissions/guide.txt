@@ -61,7 +61,7 @@ permissions:
     update: true
   site:
     changeTitle: true
-		preview: true
+    preview: true
     update: true
   user:
     changeEmail: true
