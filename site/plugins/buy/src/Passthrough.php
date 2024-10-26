@@ -8,7 +8,7 @@ class Passthrough
 {
 	public function __construct(
 		public string|null $license = null,
-		public string $discounts = '',
+		public array $discounts = [],
 		public bool $gratitude = false,
 		public int $multiplier = 1,
 		public string|null $partner = null,

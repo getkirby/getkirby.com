@@ -76,7 +76,7 @@ class Price
 	/**
 	 * Returns a summary of all applied discounts
 	 */
-	public function discounts(): string
+	public function discounts(): array
 	{
 		$discounts = [];
 
@@ -90,7 +90,7 @@ class Price
 			$discounts[] = 'Sale (' . $sale->discount() . '%)';
 		}
 
-		return implode(', ', $discounts);
+		return $discounts;
 	}
 
 	/**
