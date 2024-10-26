@@ -81,7 +81,7 @@ class Price
 		$discounts = [];
 
 		if ($this->rateAdjusted !== $this->rate) {
-			$pppPercentage = number_format(100 * (1 - $this->rateAdjusted / $this->rate), 2, '.');
+			$pppPercentage = sprintf('%+1.2F', 100 * (1 - $this->rateAdjusted / $this->rate));
 			$discounts[]   = 'PPP (' . $pppPercentage . '%)';
 		}
 
