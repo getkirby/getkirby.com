@@ -82,32 +82,12 @@ permissions:
     update: true
 ```
 
-### Access to language view
-In a multi-language installation, you can control access to the language view by role with the new access permissions:
-
-```yaml
-# users/editor.yml
-title: Editor
-permissions:
-  access:
-    languages: false
-```
-
-### Access to system view
-
-To control access to the system view by role, use the system access permissions:
-
-```yaml
-# users/editor.yml
-title: Editor
-permissions:
-  access:
-    system: false
-```
-
-
 <info>
-The `user` permission only applies to the user itself, while the `users` permissions sets these permissions for all users.
+There are different types of permissions and permission categories:
+
+- The `access.panel` permission controls access to the Panel and the REST API in general. If it is disabled, the user is a pure frontend user.
+- The remaining `access` permissions control access to individual Panel areas.
+- The other permission categories belong to different model types (e.g. page, file, user) and control access to the different actions one can perform with a model. There is one special case: The `user` permission category applies to the current user (access of a user to themselves), while the `users` permission category applies to other users.
 </info>
 
 You don't have to set all permissions for each role. Each permission is set to `true` by default, if not specified otherwise.
@@ -137,6 +117,8 @@ user:
   *: false
   changeName: true
 ```
+
+The wildcard only controls the permissions you can find in the full list above. It is the same as setting all available permissions manually.
 
 ## Visitors without Panel access
 
