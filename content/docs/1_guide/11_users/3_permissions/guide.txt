@@ -17,9 +17,9 @@ Permissions in Kirby can be defined in two places:
 
 ## Role based permissions in user blueprints
 
-Each role can have its own blueprint with custom fields for users with that role and optional user permissions. User blueprints are stored in `/site/blueprints/users` and get the name of each role (i.e `/site/blueprints/users/editor.yml`).
+Each role can have its own blueprint with custom fields for users with that role and optional user permissions. User blueprints are stored in `/site/blueprints/users` and get the name of each role (e.g. `/site/blueprints/users/editor.yml`).
 
-Permissions are only valid for custom roles. The admin role does not obey to those settings and can always do anything.
+Permissions are only valid for custom roles. The `admin` role does not obey to those settings and can always do anything.
 
 Here is an overview of all available permissions:
 
@@ -85,14 +85,14 @@ permissions:
 <info>
 There are different types of permissions and permission categories:
 
-- The `access.panel` permission controls access to the Panel and the REST API in general. If it is disabled, the user is a pure frontend user.
+- The `access.panel` permission controls access to the Panel and the REST API in general. If it is disabled, the user will be a pure frontend user/visitor.
 - The remaining `access` permissions control access to individual Panel areas.
-- The other permission categories belong to different model types (e.g. page, file, user) and control access to the different actions one can perform with a model. There is one special case: The `user` permission category applies to the current user (access of a user to themselves), while the `users` permission category applies to other users.
+- The other permission categories belong to different model types (e.g. page, file, user) and control access to the different actions one can perform with a model. There is a special case: The `user` permission category applies to the current user (access of a user to themselves), while the `users` permission category applies to other users.
 </info>
 
-You don't have to set all permissions for each role. Each permission is set to `true` by default, if not specified otherwise.
+You don't have to set all possible permissions for each role. Each permission is set to `true` by default, if not specified otherwise.
 
-You can also enable or disable entire permission sections by passing `true` or `false` instead of an array of definitions for each action. A more simple permission setup for an editor, who should not be allowed to edit other users, could look like this:
+You can also enable or disable entire permission categories by passing `true` or `false` instead of an array of definitions for each action. A more simple permission setup for an editor, who should not be allowed to edit other users, could look like this:
 
 ```yaml "/site/blueprints/users/editor.yml"
 title: Editor
@@ -108,9 +108,11 @@ permissions:
 
 This would prevent the editor from editing other users (`users: false`), from changing their own role, from deleting pages and from updating the site settings.
 
+The category permission only controls the permissions you can find in the full list above. Setting a category to `true` or `false` is the same as setting all available permissions of that category manually.
+
 ## The `*` wildcard
 
-For permission types with many actions with the same setting, you can use the * wildcard as first argument. Afterwards you can still override specific actions, for example to whitelist actions:
+For permission types with many actions with the same setting, you can use the `*` wildcard as first argument. Afterwards you can still override specific actions, for example to allowlist some actions but disable the others:
 
 ```yaml
 user:
@@ -118,7 +120,7 @@ user:
   changeName: true
 ```
 
-The wildcard only controls the permissions you can find in the full list above. It is the same as setting all available permissions manually.
+The `*` wildcard only controls the permissions you can find in the full list above. It is the same as setting all available permissions (except those that are overridden explicitly by another rule) manually.
 
 ## Visitors without Panel access
 
@@ -131,14 +133,15 @@ permissions:
     panel: false
 ```
 
-If you use any of Kirby's (link: docs/guide/templates/php-api text: PHP APIs) in the frontend to modify pages, files, the site or users, you should set the permissions like above to control what a visitor can do in your frontend. You can also have multiple frontend user roles without access to the Panel but with different access rights to the PHP APIs. Our (link: docs/guide/api/authentication text: REST API) follows the same rules.
+With this permission setup, the Panel and REST API are no longer available to users of that role.
+
+However the model-based permissions are independent of this. If you use any of Kirby's (link: docs/guide/templates/php-api text: PHP APIs) in the site frontend to modify pages, files, the site, languages or users, you should set the permissions like above to control what a visitor can do in your frontend. You can also have multiple frontend user roles without access to the Panel but with different access rights to the PHP APIs.
 
 ## Specific permissions in page, file, user or site options
 
 You can keep all permissions in the role files, but you can also overwrite them individually per page, file, user or the site in the corresponding blueprints. Those specific permission settings will always override the role settings.
 
 ### Page options
-
 
 ```yaml "/site/blueprints/pages/project.yml"
 title: Project
@@ -167,7 +170,6 @@ options:
     *: false
     editor: true
 ```
-
 
 ## Controlling permissions with hooks
 
@@ -233,7 +235,6 @@ $result = $kirby->impersonate('kirby', function () {
 ```
 
 The impersonation automatically gets reset to the previous value after the callback returns.
-
 
 #### Disable all permissions
 
