@@ -9,11 +9,17 @@
 				<p class="font-bold mb-1">Kirby</p>
 				<p class="mb-1">The CMS that adapts to any project. Made for developers, designers, creators and clients.</p>
 				<nav aria-label="Kirby on the web" class="social">
+					<a title="GitHub" rel="me" href="https://github.com/getkirby">
+						<?= icon('github') ?>
+					</a>
 					<a title="Mastodon" rel="me" href="https://mastodon.social/@getkirby">
 						<?= icon('mastodon') ?>
 					</a>
-					<a title="GitHub" rel="me" href="https://github.com/getkirby">
-						<?= icon('github') ?>
+					<a title="Bluesky" rel="me" href="https://bsky.app/profile/getkirby.com">
+						<?= icon('bluesky') ?>
+					</a>
+					<a title="LinkedIn" rel="me" href="https://linkedin.com/company/getkirby">
+						<?= icon('linkedin') ?>
 					</a>
 					<a title="Instagram" rel="me" href="https://instagram.com/getkirby">
 						<?= icon('instagram') ?>
@@ -23,9 +29,6 @@
 					</a>
 					<a title="Discord" rel="me" href="https://chat.getkirby.com">
 						<?= icon('discord') ?>
-					</a>
-					<a title="LinkedIn" rel="me" href="https://linkedin.com/company/getkirby">
-						<?= icon('linkedin') ?>
 					</a>
 				</nav>
 			</div>
