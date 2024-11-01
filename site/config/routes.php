@@ -14,6 +14,10 @@ return [
 		'action'  => fn () => go('security.txt')
 	],
 	[
+		'pattern' => '.well-known/atproto-did',
+		'action'  => fn () => 'did:plc:saf6ox5ysclcv6ic44xd6rsz'
+	],
+	[
 		'pattern' => 'hooks/clean',
 		'method'  => 'GET|POST',
 		'action'  => function () {
