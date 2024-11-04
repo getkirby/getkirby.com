@@ -9,7 +9,7 @@ class Time
 	public static function get(): string
 	{
 		$time = time();
-		$time .= ':' . hash_hmac('sha256', $time, 'kirby');
+		$time .= ':' . hash_hmac('sha256', $time, 'kirby-2');
 		return $time;
 	}
 
@@ -24,7 +24,7 @@ class Time
 			throw new Exception('To protect against spam, we block submissions faster than 1 minute. Please try again, sorry for the inconvenience.');
 		}
 
-		$hash = hash_hmac('sha256', $time[0], 'kirby');
+		$hash = hash_hmac('sha256', $time[0], 'kirby-2');
 
 		if (hash_equals($hash, $time[1]) !== true) {
 			throw new Exception('Spam protection hash was manipulated');
