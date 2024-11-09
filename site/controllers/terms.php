@@ -22,16 +22,12 @@ return function (App $kirby, Page $page) {
 		if (!$diff) {
 			$diff = [];
 
-			// keep heading IDs for TOC links
-			$config = HTMLPurifier_Config::createDefault();
-			$config->set('Attr.EnableID', true);
-
 			$introDiffObj = new HtmlDiff($page->prev()->intro()->kt(), $page->intro()->kt());
-			$introDiffObj->setHTMLPurifierConfig(clone $config);
+			$introDiffObj->getConfig()->setPurifierEnabled(false)->setKeepNewLines(true);
 			$diff['intro'] = $introDiffObj->build();
 
 			$textDiffObj = new HtmlDiff($page->prev()->text()->kt(), $page->text()->kt());
-			$textDiffObj->setHTMLPurifierConfig(clone $config);
+			$textDiffObj->getConfig()->setPurifierEnabled(false)->setKeepNewLines(true);
 			$diff['text'] = $textDiffObj->build();
 
 			$cache->set($cacheKey, $diff);

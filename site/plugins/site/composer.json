@@ -9,6 +9,9 @@
 		"phpdocumentor/reflection-docblock": "^5.3.0",
 		"caxy/php-htmldiff": "^0.1.15"
 	},
+	"replace": {
+		"ezyang/htmlpurifier": "*"
+	},
 	"config": {
 		"optimize-autoloader": true
 	}
