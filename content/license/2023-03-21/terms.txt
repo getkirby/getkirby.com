@@ -60,7 +60,7 @@ On request, We will **transfer** a license to anyone who is also allowed to buy 
 We will also **reassign** a license to another Website domain and root directory of Your choice, provided that You confirm that the previous Website is no longer in operation and will not be operated with the same license in the future.
 
 <info>
-If you need to transfer your Kirby license to another individual or company (for example to your client or a new agency) or reassign it to a different project, please get in touch directly at (email: support@getkirby.com).
+If you need to transfer your Kirby license to another individual or company (for example to your client or a new agency) or reassign it to a different project, please get in touch directly at <support@getkirby.com>.
 </info>
 
 A license is valid for all Updates of the same major Kirby release. We reserve the right to charge an **upgrade fee for Upgrade releases**. Whether a release is an Update or Upgrade is at Our sole discretion.
@@ -207,7 +207,7 @@ We reserve the right to **limit technical support for free licenses**.
 We offer a **14-day**, money back refund policy if Kirby didn't work out for Your project.
 
 <info>
-If you need a refund, please get in touch directly at (email: support@getkirby.com).
+If you need a refund, please get in touch directly at <support@getkirby.com>.
 </info>
 
 ## No Warranty
@@ -240,9 +240,9 @@ Bastian Allgeier **owns all rights**, title and interest to Kirby (including all
 
 ## Applicable Law & Place of Jurisdiction
 
-1. For all disputes arising out of or in connection with this Agreement, the courts competent for Neckargemünd, Germany, shall have exclusive jurisdiction. However, We shall have the choice to file lawsuits against You before the courts competent for Your place of business. 
+1. For all disputes arising out of or in connection with this Agreement, the courts competent for Neckargemünd, Germany, shall have exclusive jurisdiction. However, We shall have the choice to file lawsuits against You before the courts competent for Your place of business.
 2. If You reside in Germany, para. 1 shall only apply if You are a merchant, a legal entity under public law or a special fund under public law.
-3. If You don't reside in Germany, but in a different member state of the European Union, para. 1 shall only apply if You are not a consumer under Art. 17 of the regulation (EU) No. 1215/2012. In that case, You shall be entitled to file actions against Us either at Our place of business or at the courts competent at the place where You usually reside. We, on the other hand, are only entitled to bring proceedings against You in the courts of the Member State in which You are domiciled. 
+3. If You don't reside in Germany, but in a different member state of the European Union, para. 1 shall only apply if You are not a consumer under Art. 17 of the regulation (EU) No. 1215/2012. In that case, You shall be entitled to file actions against Us either at Our place of business or at the courts competent at the place where You usually reside. We, on the other hand, are only entitled to bring proceedings against You in the courts of the Member State in which You are domiciled.
 4. If You neither reside in Germany nor in a member state of the EU, the applicability of para. 1 remains unaffected.
 
 ## Severability Clause
@@ -253,4 +253,4 @@ Should any provision of this Agreement be or become invalid, void or unenforceab
 
 Due to Kirby's flexibility, you may have special use cases or requirements that don't fit this Agreement.
 
-If that's the case or if you have any questions, feel free to (email: support@getkirby.com text: get in touch). We are happy to think outside the box and find custom license solutions for your creative application of Kirby.
+If that's the case or if you have any questions, feel free to [get in touch](mailto:support@getkirby.com). We are happy to think outside the box and find custom license solutions for your creative application of Kirby.

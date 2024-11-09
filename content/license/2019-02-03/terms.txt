@@ -54,7 +54,7 @@ As Kirby is software and software is intangible, we don't sell it as such. Inste
 The license is **non-exclusive** (meaning that You are not the only one who We will issue a license) and **generally non-transferable** (meaning that the one who purchases the license is the licensee).
 
 <info>
-If you need to **transfer** your Kirby license to another individual or company, please get in touch directly at (email: support@getkirby.com).
+If you need to **transfer** your Kirby license to another individual or company, please get in touch directly at <support@getkirby.com>.
 </info>
 
 A license is valid for all Updates of the same major Kirby release. We reserve the right to charge an **upgrade fee for Upgrade releases**.
@@ -130,7 +130,7 @@ We reserve the right to **limit technical support for free licenses**.
 We offer a **14-day**, money back refund policy if Kirby didn't work out for Your project.
 
 <info>
-If you need a refund, please get in touch directly at (email: support@getkirby.com).
+If you need a refund, please get in touch directly at <support@getkirby.com>.
 </info>
 
 ## No Warranty
@@ -157,4 +157,4 @@ We **own all rights**, title and interest to Kirby (including all intellectual p
 
 ## Questions?
 
-If you have questions or special requirements, feel free to (email: support@getkirby.com text: get in touch).
+If you have questions or special requirements, feel free to [get in touch](mailto:support@getkirby.com).
