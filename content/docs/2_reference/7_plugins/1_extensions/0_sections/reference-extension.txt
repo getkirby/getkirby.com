@@ -242,11 +242,10 @@ panel.plugin('yourname/modified', {
           text: null
         }
       },
-      created: function() {
-        this.load().then(response => {
-          this.label = response.label;
-          this.text  = response.text;
-        });
+      created: async function() {
+        const response = await this.load();
+        this.label = response.label;
+        this.text  = response.text;
       }
     }
   }
@@ -269,11 +268,10 @@ panel.plugin('yourname/modified', {
           text: null
         }
       },
-      created: function() {
-        this.load().then(response => {
-          this.label = response.label;
-          this.text  = response.text;
-        });
+      created: async function() {
+        const response = await this.load();
+        this.label = response.label;
+        this.text  = response.text;
       },
       template: `
         <section class="k-modified-section">
