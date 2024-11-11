@@ -8,6 +8,18 @@ use Throwable;
 
 class Paddle
 {
+	public const CONVERSION_FEES = [
+		'USD' => 0.02,
+		'GBP' => 0.02,
+		'CZK' => 0.025,
+		'DKK' => 0.025,
+		'NOK' => 0.025,
+		'THB' => 0.025,
+
+		// all other currencies
+		'...' => 0.03
+	];
+
 	// cache
 	protected static Visitor $visitor;
 

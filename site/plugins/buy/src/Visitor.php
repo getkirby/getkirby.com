@@ -126,6 +126,18 @@ class Visitor
 	}
 
 	/**
+	 * Returns the Paddle currency conversion fee for the current currency
+	 */
+	public function conversionFee(): float
+	{
+		if ($this->currency() === 'EUR') {
+			return 0;
+		}
+
+		return Paddle::CONVERSION_FEES[$this->currency()] ?? Paddle::CONVERSION_FEES['...'];
+	}
+
+	/**
 	 * Returns the user's two-character ISO country code if available
 	 */
 	public function country(): string|null
