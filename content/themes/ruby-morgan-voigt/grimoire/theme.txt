@@ -1,0 +1,6 @@
+Title: Grimoire
+
+----
+
+Link: https://github.com/1612elphi/kirby-grimoire
+
