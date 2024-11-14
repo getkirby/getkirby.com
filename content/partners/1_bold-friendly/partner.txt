@@ -1,0 +1,61 @@
+Title: bold & friendly
+
+----
+
+Subtitle: Design Studio
+
+
+----
+
+Plan: regular
+
+----
+
+People: 2
+
+----
+
+Website: https://boldandfriendly.de/
+
+----
+
+Location: Cologne
+
+----
+
+Languages: German, English
+
+----
+
+Description:
+
+We are bold & friendly, a design agency based in Cologne, Germany. We design identities, develop websites and implement digital and analog communication solutions that explain, sell and make products and services look better.
+
+We support our clients throughout the entire process - from strategic planning to successful implementation.
+
+As an agency, we are intentionally small. We have organized our agency with a permanent core of two people so that we can be personally involved in every project. For us, this means more flexibility in our work - and you can always expect a fixed contact person.
+
+We draw on an extensive network of experts with whom we have worked successfully in the past. For each new project, we put together the right team to meet your specific needs.
+
+We work for corporations, associations, institutions, clubs, and small and medium-sized businesses in a wide range of industries.
+
+Whenever possible and the scope of the project allows, we use Kirby as the basis for web projects - hardly any other CMS is so versatile and can be used for so many different requirements.
+
+----
+
+Expertise:
+
+- Kirby websites
+- Kirby retro-fitting
+- Corporate Design
+- Webdesign
+- UX/UI Design
+- Corporate Communication
+
+----
+
+Region: Europe
+
+----
+
+Uuid: 8K6MlSvCcYI84oOr
