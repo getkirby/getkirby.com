@@ -59,7 +59,7 @@ You can install Kirby in a few quick steps in different ways. More instructions 
 
 2. Extract the contents of the ZIP file into your server's (glossary: document-root)
 3. Visit your new Kirby site in your browser at `yourdomain.com`
-4. Visit the (glossary: Panel) at `yourdomain.com/panel`
+4. Visit the (glossary: Panel) at `yourdomain.com/panel` to (link: #create-your-first-account text: create your first account)
 
 
 === Kirby CLI
@@ -128,7 +128,7 @@ When copying files to a remote server via (S)FTP, make sure to copy the `.htacce
 Kirby's control panel (aka. the Panel) comes without any pre-installed accounts. Open `http://yourdomain.com/panel` in the browser to start the installer and create the first account.
 
 <warning>
-For security reasons, you cannot install the Panel on a public server by default. To allow this, you can enable the (link: docs/reference/system/options/panel#allow-the-panel-to-be-installed-on-a-remote-server text: `panel.install` option):
+For security reasons, you cannot install the Panel on a public server by default. To allow this, you can enable the (link: docs/reference/system/options/panel#allow-the-panel-to-be-installed-on-a-remote-server text: `panel.install` option).
 </warning>
 
 ## Purchase license & activate your installation
