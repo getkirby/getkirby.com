@@ -226,7 +226,6 @@ $tags['helper'] = [
 	}
 ];
 
-
 // @todo All the following should be refactored, but this requires
 // content file changes, so we wait
 

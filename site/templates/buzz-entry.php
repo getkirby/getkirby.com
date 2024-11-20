@@ -17,6 +17,8 @@
 			'center'  => false
 		]) ?>
 	<?php endif ?>
+
+	<?php snippet('toc') ?>
 </header>
 
 <?php if ($page->video()->isNotEmpty()): ?>
