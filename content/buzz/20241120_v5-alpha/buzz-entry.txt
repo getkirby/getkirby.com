@@ -55,37 +55,37 @@ Kirby 5 will be a **free upgrade** for everyone with a Kirby Basic or Enterprise
 
 ## 🔥 Highlights
 
-The change log is getting longer and longer. Here are the highlights of this upcoming release:
+The changelog is getting longer and longer. Here are the highlights of this upcoming release:
 
 ### Versions: Preview your changes
 
 (video: changes.mp4 controls: true autoplay: true loop: true class: video rounded shadow-xl bg-light)
 
-Editors can now make changes and get a full, rendered preview right from the panel before they save them. (link: #features__versions-preview-your-changes text: Learn more)
+Editors can now make changes and get a full, rendered preview right from the Panel before they save them. (link: #features__versions-preview-your-changes text: Learn more ›)
 
 ### Dark theme: Turn off the Panel lights
 
 (image: dark-mode1.png)
 
-As requested from many – whether as personal preference or for making the Panel more accessible with certain sight conditions – you are able to activate a dark theme for the Panel. (link: #features__dark-theme-turn-off-the-panel-lights text: Learn more)
+As requested from many – whether as personal preference or for making the Panel more accessible with certain sight conditions – you are able to activate a dark theme for the Panel. (link: #features__dark-theme-turn-off-the-panel-lights text: Learn more ›)
 
 ### View buttons: Put your own button up there
 
 (image: buttons.png)
 
-Kirby 5 adds new extensions that allow plugin developers to add custom view buttons to most views of the Panel (e.g. page, site, file, user, language). (link: #features__view-buttons-put-your-own-button-up-there text: Learn more)
+Kirby 5 adds new extensions that allow plugin developers to add custom view buttons to most views of the Panel (e.g. page, site, file, user, language). (link: #features__view-buttons-put-your-own-button-up-there text: Learn more ›)
 
 ### Chunked uploads: Bring out the big files
 
 (video: chunked.mp4 controls: true autoplay: true loop: true class: video rounded shadow-xl bg-light)
 
-Kirby 5 supports large Panel uploads. Uploads are no longer restricted by the server's `upload_max_filesize` limit (link: #features__bring-out-the-big-files-chunked-uploads text: Learn more)
+Kirby 5 supports large Panel uploads. Uploads are no longer restricted by the server's `upload_max_filesize` limit. (link: #features__bring-out-the-big-files-chunked-uploads text: Learn more ›)
 
 ### File previews: Your media at a glance
 
 (video: file-preview-custom.mp4 controls: true autoplay: true loop: true class: video rounded shadow-xl bg-light)
 
-We're opening up the preview part of the Panel's file view to more rich media previews that aren't just images. (link: #features__file-previews-your-media-at-a-glance text: Learn more)
+We're opening up the preview part of the Panel's file view to more rich media previews that aren't just images. (link: #features__file-previews-your-media-at-a-glance text: Learn more ›)
 
 <hr class="hr" style="margin-block: 3rem">
 
@@ -352,13 +352,13 @@ The `<model-viewer>` element is [from a library](https://modelviewer.dev) that h
 
 ### Versions: Preview your changes
 
-We are finally able to release one of the (link: https://kirby.nolt.io/135 text: most requested features) on Nolt. Editors can now make changes and get a full, rendered preview right from the panel before they save them. They can share the URL for the preview of the unpublished changes with other editors and people in their team to get feedback.
+We are finally able to release a big foundational part for one of the (link: https://feedback.getkirby.com/135 text: most requested features) on our feedback platform. Editors can now make changes and get a full, rendered preview right from the Panel before they save them. They can share the URL for the preview of the unpublished changes with other editors and people in their team to get feedback.
 
 The brand new changes view lets you switch between a comparison mode or a full-width preview of the changed version and the latest published version.
 
 (video: changes.mp4 controls: true autoplay: true class: video rounded shadow-xl bg-light)
 
-The new preview view for pages and the site is located at `/panel/pages/(:any)/changes/(changes|latest|compare)` and `/panel/site/changes/(changes|latest|compare)`
+The new preview view for pages and the site is located at `/panel/pages/(:any)/changes/(changes|latest|compare)` and `/panel/site/changes/(changes|latest|compare)`.
 
 It can be accessed with the new preview dropdown for the site and pages.
 
@@ -376,13 +376,19 @@ This dropdown will also show more information when the content is locked because
 
 (image: changes-info-dropdown-locked.png class: screenshot-sm)
 
-All changes by everyone in the team - not just the current editor - are now listed in the Changes dialog (accessible via the “Changes” menu item in the sidebar) and grouped by type (page, user, file). Now everyone in the team can directly use the dialog to jump to changes by other team members and preview them directly on the fly, while the team member is still working on them.
+All changes by everyone in the team - not just the current editor - are now listed in the Changes dialog (accessible via the “Changes” menu item in the sidebar) and grouped by type (page, user, file). Now everyone in the team can directly use the dialog to jump to changes by other team members and preview them directly on the fly, even while someone else is still actively working on them.
 
 (image: changes-dialog.png class: screenshot-md)
 
 We’ve also improved the language dropdown to highlight changes in different translations.
 
 (image: languages-dropdown.png class: screenshot-sm)
+
+With all of those features built on top of our new content version architecture, Kirby 5 starts a path to full revision support in the future. We have already laid the foundations and are looking forward to extending the feature set over time.
+
+<alert>
+Kirby 5 alpha 4 does not cover all special cases in regards to the handling of unsaved changes yet. For example it can not yet handle or migrate existing unsaved changes in the `localStorage` of individual editors' browsers that were created in Kirby 4 or Kirby 5 alphas 1 to 3. This fine-tuning will follow in future pre-releases. So we again recommend not to use Kirby 5 in production already, especially if any of the site's content currently has any unsaved changes.
+</alert>
 
 ### New Plugin License handling
 
