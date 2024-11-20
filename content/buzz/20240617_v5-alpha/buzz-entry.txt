@@ -356,7 +356,7 @@ We are finally able to release one of the (link: https://kirby.nolt.io/135 text:
 
 The brand new changes view lets you switch between a comparison mode or a full-width preview of the changed version and the latest published version.
 
-(video: changes.mp4 controls: true autoplay: true loop: true class: video rounded shadow-xl bg-light)
+(video: changes.mp4 controls: true autoplay: true class: video rounded shadow-xl bg-light)
 
 The new preview view for pages and the site is located at `/panel/pages/(:any)/changes/(changes|latest|compare)` and `/panel/site/changes/(changes|latest|compare)`
 
