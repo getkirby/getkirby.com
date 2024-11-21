@@ -174,7 +174,7 @@
 			</div>
 			<div class="box prose">
 				<h3>Responsibility</h3>
-				<p>We feel a personal responsibility to keep Kirby safe and thriving. But we also care about a better society and the future of our planet. We offer <a href="/buy#good-cause" class="link">free licenses</a> to students, selected educational projects, social and environmental organizations, charities and non-profits with insufficient funding. We also donate a substantial amount each year to the Amadeu Antonio Foundation to help protect our democracy.</p>
+				<p>We feel a personal responsibility to keep Kirby safe and thriving. But we also care about a better society and the future of our planet. We offer <a href="/buy#good-cause" class="link">free licenses</a> to students, selected educational projects, social and environmental organizations, charities and non-profits with insufficient funding. We also donate a significant amount each year to a variety of causes, such as protecting people from malaria and protecting our democracy.</p>
 			</div>
 		</div>
 	</section>

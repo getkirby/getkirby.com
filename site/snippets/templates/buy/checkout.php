@@ -203,8 +203,8 @@
 				<div>
 					<h2 class="font-bold">Support a good cause</h2>
 					<p class="mb-3 help">
-						For every purchased license we donate <span class="whitespace-nowrap">€<?= $donation['teamAmount'] ?></span><span class="whitespace-nowrap" v-if="locale.currency !== '€'" v-text="' (~ ' + locale.currency + locale.prices.donation.team + ')'"></span> to
-						<a class="underline" rel="noopener noreferrer" target="_blank" href="<?= $donation['link'] ?>"><?= $donation['charity'] ?></a> <?= $donation['purpose'] ?>.
+						For every license purchased, we donate <span class="whitespace-nowrap">€<?= $donation['teamAmount'] ?></span><span class="whitespace-nowrap" v-if="locale.currency !== '€'" v-text="' (~ ' + locale.currency + locale.prices.donation.team + ')'"></span> to
+						<a class="underline" rel="noopener noreferrer" target="_blank" href="<?= $donation['link'] ?>"><?= $donation['charity'] ?></a> <?= $donation['purpose'] ?>. Join us and contribute as well.
 					</p>
 					<label class="checkbox donation">
 						<input id="donate" type="checkbox" name="donate" v-model="form.donate">
