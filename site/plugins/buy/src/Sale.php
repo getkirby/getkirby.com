@@ -20,9 +20,10 @@ class Sale
 		// same timestamp to avoid off-by-one errors in the second of a date change
 		static::$time ??= time();
 
-		// calculate timestamps in UTC, even if the server uses a different timezone
+		// calculate timestamps in UTC,
+		// even if the server uses a different timezone
 		$this->start    = strtotime(($options['start'] ?? '1970-01-01') . ' 00:00Z');
-		$this->end      = strtotime(($options['end'] ?? '9999-01-01') . ' 24:00Z');
+		$this->end      = strtotime(($options['end'] ?? '1970-01-01') . ' 24:00Z');
 		$this->discount = $options['discount'] ?? 0;
 	}
 
