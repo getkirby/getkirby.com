@@ -38,8 +38,8 @@ return [
 	'donation' => [
 		'teamAmount'     => 1,
 		'customerAmount' => 1,
-		'charity' => 'Amadeu Antonio Foundation',
-		'purpose' => 'for their work on reinforcing a democratic civil society',
-		'link'    => 'https://www.amadeu-antonio-stiftung.de/en/'
+		'charity' => 'Against Malaria Foundation',
+		'purpose' => 'to help fund anti-malaria nets and protect people worldwide from malaria',
+		'link'    => 'https://www.againstmalaria.com'
 	]
 ];
