@@ -308,7 +308,7 @@ fields:
 
 (image: field.png)
 
-## Kirby Ui Kit
+## Kirby UI Kit
 
 It's a good idea as a next step to check out our (link: docs/reference/plugins/ui text: UI component library). All of our components can be used in your field plugin. You should always try that first before implementing your own interface elements.
 
