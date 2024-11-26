@@ -80,7 +80,7 @@ Kirby::plugin('yourname/todos', [
 
 ### `submit` callback
 
-The `submit` function is called once the dialog is submitted and defines the actions triggered by the event byt also the response the Panel will receive.
+The `submit` function is called once the dialog is submitted and defines the actions triggered by the event but also the response the Panel will receive.
 
 ```php
 Kirby::plugin('yourname/todos', [
