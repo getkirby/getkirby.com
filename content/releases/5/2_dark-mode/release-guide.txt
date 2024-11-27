@@ -1,0 +1,31 @@
+Title: Dark mode
+----
+
+Subtitle: Turn off the Panel lights
+
+----
+
+Teaser:
+
+Say hello to our new dark theme for the Panel! With v5, you can now work comfortably no matter the hour or lighting conditions. The dark theme makes the Panel easier on your eyes and improves accessibility for users with visual impairments. Effortlessly switch between light and dark themes to match your environment, while enjoying all the power of Kirby in a sleek new look.
+
+----
+
+Intro:
+
+As requested from many – whether as personal preference or for making the Panel more accessible with certain sight conditions – you are able to activate a dark theme for the Panel from your account view in Kirby 5.
+
+----
+
+Text:
+
+(image: dark-mode1.png)
+(image: dark-mode2.png)
+
+We do expect to receive a lot of feedback on this feature over the upcoming weeks and will improve it further in upcoming v5 releases.
+
+## Enable/disable dark theme
+
+Each Panel user can set their Panel theme from the theme dropdown in the account view: whether to always run that Panel with a light or dark theme - or to follow the OS setting.
+
+(image: dark-mode-dropdown.png)

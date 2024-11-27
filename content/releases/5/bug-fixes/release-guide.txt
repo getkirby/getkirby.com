@@ -11,3 +11,8 @@ Text:
 - Kirby is better at removing failed file uploads from the server tmp directory [#2476](https://github.com/getkirby/kirby/issues/2476)
 - Canceling the file upload dialog now also cancels ongoing uploads [#6421](https://github.com/getkirby/kirby/pull/6421)
 - `<k-header>`: fixed wrapping with many buttons in narrow screens [#6544](https://github.com/getkirby/kirby/pull/6544)
+- Fixed query support for default values in fields [#2814](https://github.com/getkirby/kirby/issues/2814) [#2815](https://github.com/getkirby/kirby/pull/2815)
+- Panel search now also considers site files [#6710](https://github.com/getkirby/kirby/pull/6710)
+- The lock state is properly passed to `k-file-preview` components to make sure that file previews can lock their state (e.g. for the focus point for image previews)
+- Fixed badge position in model tabs and improved CSS for button badges in general
+- Fixed background CSS for the `k-progress` component

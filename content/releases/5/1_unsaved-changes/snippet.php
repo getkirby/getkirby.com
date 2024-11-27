@@ -7,7 +7,7 @@
 		"teaser"
 		"dropdown"
 		"dialog"
-		"outlook"
+		"filesystem"
 }
 
 @media screen and (min-width: 32rem) {
@@ -17,7 +17,7 @@
 		grid-template-areas:
 			"preview preview preview preview preview"
 			"teaser teaser teaser dropdown dropdown"
-			"dialog dialog outlook outlook outlook"
+			"dialog dialog filesystem filesystem filesystem"
 	}
 }
 </style>
@@ -25,19 +25,19 @@
 <div class="v5-unsaved-changes">
 	<figure class="release-box bg-light grid place-items-center" style="grid-area: preview">
 		<video controls autoplay muted loop class="rounded shadow-xl" style="width: 100%; --span: 2">
-			<source src="<?= $section->file('preview.mp4')->url() ?>" type="video/mp4">
+			<source src="<?= $section->file('changes.mp4')->url() ?>" type="video/mp4">
 		</video>
 	</figure>
 	<div class="release-text-box" style="grid-area: teaser">
 		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-box bg-light" style="grid-area: dropdown">
-		<?= $section->image('dropdown.png')->resize(700) ?>
+		<?= $section->image('changes-info-dropdown.png')->resize(700) ?>
 	</figure>
 	<figure class="release-box bg-light" style="grid-area: dialog">
-		<?= $section->image('dialog.png')->resize(700) ?>
+		<?= $section->image('changes-dialog.png')->resize(700) ?>
 	</figure>
-	<figure class="release-code-box" style="grid-area: outlook">
+	<figure class="release-code-box" style="grid-area: filesystem">
 		<?= $section->filesystem()->kt() ?>
 	</figure>
 </div>

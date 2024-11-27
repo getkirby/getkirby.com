@@ -18,6 +18,89 @@ Text:
 	- `str_starts_with()`
 	- `str_ends_with()`
 - Improve code style `Kirby\Toolkit\Collection::sort()` [#6626](https://github.com/getkirby/kirby/pull/6626)
+- Drastically simplified `Kirby\Panel\ChangesDialog` class, which reads changed models directly on the backend with the new `Kirby\Content\Changes` class and sends the required data for each model directly to the frontend. We no longer need an additional async request.
+- Refactored `Kirby\Panel\Model` classes
+	- Removed `Kirby\Panel\Model::lock()` method
+	- New `Kirby\Panel\Model::originals()` method
+	- New top-level props in `Kirby\Panel\Model::props()`
+		- `api`
+		- `id`
+		- `link`
+		- `originals`
+		- `uuid`
+	- New top-level props in `Kirby\Panel\File::props()`
+		- `extension`
+		- `filename`
+		- `mime`
+		- `preview`
+		- `type`
+		- `url`
+	- New top-level props in `Kirby\Panel\Page::props()`
+		- `title`
+	- New top-level props in `Kirby\Panel\Site::props()`
+		- `title`
+	- New top-level props in `Kirby\Panel\User::props()`
+		- `avatar`
+		- `email`
+		- `language`
+		- `name`
+		- `role`
+		- `username`
+- Use `ModelWithContent::version()` in the core where it makes sense [#6455](https://github.com/getkirby/kirby/pull/6455)
+- `Page::__construct` calls `parent::__construct` after setting the props [#6499](https://github.com/getkirby/kirby/pull/6499)
+- `Site::__construct` calls `parent::__construct` after setting the props [#6499](https://github.com/getkirby/kirby/pull/6499)
+- `User::__construct` calls `parent::__construct` after setting the props [#6499](https://github.com/getkirby/kirby/pull/6499)
+- `File::__construct` calls `parent::__construct` after setting the props [#6499](https://github.com/getkirby/kirby/pull/6499)
+- Simplify `ModelWithContent::writeContent` by using the new `Version::save()` method. [#6505](https://github.com/getkirby/kirby/pull/6505)
+- Simplify `ModelWithContent::content` by using `Language::ensure()` and `Version::content()` [#6505](https://github.com/getkirby/kirby/pull/6505)
+- `Kirby\Form\Field` class improvements
+	- New `Field::fill($value)` method
+	- New `Field::toFormValue()` method
+	- New `Field::toStoredValue()` method
+- `Kirby\Form\FieldClass` class improvements
+	- New `FieldClass::fill($value)` method
+	- New `FieldClass::toFormValue()` method
+	- New `FieldClass::toStoredValue()` method
+- `Kirby\Form\Fields` class improvements
+	- You can now pass the parent model as second argument to the Fields collection to inject it into any of the given fields.
+			```php
+			use Kirby\Form\Fields;
+
+			$fields = new Fields(
+				fields: [
+					'text' => [
+						'label' => 'Text',
+						'type'  => 'text'
+					]
+				],
+				model: page('blog/hello-world')
+			);
+			```
+	- New `Fields::defaults()` method to return all default values for all fields.
+	- New `Fields::errors()` method to run validation on all fields and return an array with all errors
+	- New `Fields::fill($values)` method to set the value for each field in the array
+	- New `Fields::findByKey()` and `Fields::findByKeyRecursive()` to find fields within fields with `Fields::find('parent-field+child-field')` (e.g. a field in a structure field) This has been handled by the `Form::field()` method before, but it's the wrong place to do that. With the new collection methods, this is handled in a very similar fashion as we do for pages.
+	- Improved `Fields::toArray()` method. You can now provide a proper map function to return custom values for each field in the collection.
+	- New `Fields::toFormValues()` to return all values for all fields in the collection that can be passed to a frontend form.
+	- New `Fields::toStoredValues()` to return all values for all fields in a format that can be stored in our text files.
+- `Kirby\Form\Form` class improvements
+	- The Form class now always passes the injected model to the Fields collection
+	- The Form class now uses `Field::isSaveable` instead of `Field::save` consistently.
+	- `Form::errors()` is now an alias for `$form->fields()->errors()`
+	- `Form::field($name)` is now an alias for `$form->fields()->find($name)`
+	- New `Form::toFormValues()` to return all values for all fields in the collection that can be passed to a frontend form.
+	- New `Form::toStoredValues()` to return all values for all fields in a format that can be stored in our text files.
+	- Removed an unnecessary check for a blueprint method in the `Form::for` method. ModelWithContent has a blueprint method by default and we
+	already check for ModelWithContent child classes with the argument type.
+- New Form Field Trait classes to help reduced code redundancy between `Kirby\Form\Field` and `Kirby\Form\FieldClass`
+	- `Kirby\Form\Mixin\Api`
+	- `Kirby\Form\Mixin\Model`
+	- `Kirby\Form\Mixin\Translatable`
+	- `Kirby\Form\Mixin\Validation`
+	- `Kirby\Form\Mixin\Value`
+	- `Kirby\Form\Mixin\When`
+- New `Kirby\Plugin` namespace [#6737](https://github.com/getkirby/kirby/pull/6737)
+- New `Kirby\Toolkit\Component::applyProp()` method to allow resetting single props and also improves prop unsetting in custom components.
 
 #### Panel
 
@@ -33,3 +116,9 @@ Text:
 	- Stricter native URL validation for `<k-url-input>` [#6320](https://github.com/getkirby/kirby/pull/6320)
 	- Removed `vuelidate` library [#6099](https://github.com/getkirby/kirby/pull/6099)
 - `<k-writer>` has been merged into `<k-writer-input>` [#6172](https://github.com/getkirby/kirby/pull/6172)
+- `<k-languages-dropdown>` now receives Fiber dropdown endpoint instead of array of options [#6762](https://github.com/getkirby/kirby/pull/6762#pullrequestreview-2378165526)
+- New `Kirby\Panel\Controller\Search` class [#6710](https://github.com/getkirby/kirby/pull/6710)
+- Removed unnecessary generic signature key for each form field. [#6712](https://github.com/getkirby/kirby/pull/6712)
+- New `this.$panel.content` module to access and alter the current model content (unsaved changes) [#6513](https://github.com/getkirby/kirby/pull/6513)
+- `<k-user-avatar>` component has been refactored to use individual props for `api`, `avatar`, `id` and `isLocked` instead of going through the `model` object. The `model` prop has been removed.
+- The `<k-user-profile>` component has been refactored to use individual props for `api`, `avatar`, `email`, `id`, `language` and `role` instead of going through the `model` object. The `model` object prop has been removed as well as the already deprecated `permissions` prop.

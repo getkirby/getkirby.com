@@ -7,6 +7,16 @@ Text:
 #### Core
 
 - Exception classes: passing $arg array will be removed in a future version. Use named arguments. [#6618](https://github.com/getkirby/kirby/pull/6618)
+ `Kirby\Cms\Plugin` is deprecated. Use `Kirby\Plugin\Plugin` instead
+- `Kirby\Cms\PluginAsset` is deprecated. Use `Kirby\Plugin\Asset` instead
+- `Kirby\Cms\PluginAssets` is deprecated. Use `Kirby\Plugin\Assets` instead
+- `Kirby\Form\Field::formFields()` is deprecated. Use `::siblings()` instead
+- `Kirby\Form\Field::data()` is deprecated. Use `::toStoredValue()` instead
+- `Kirby\Form\Field::save()` is deprecated. Use `::isSaveable()` instead
+- `Kirby\Form\Field::value()` is deprecated. Use `::toFormValue()` instead
+- `Kirby\Form\FieldClass::data()` is deprecated. Use `::toStoredValue()` instead
+- `Kirby\Form\FieldClass::save()` is deprecated. Use `::isSaveable()` instead
+- `Kirby\Form\FieldClass::value()` is deprecated. Use `::toFormValue()` instead
 
 #### Panel
 

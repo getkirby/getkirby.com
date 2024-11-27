@@ -17,6 +17,16 @@ Text:
 #### More improvements
 
 - Radio and select fields: `default` option now supports Kirby queries [#6459](https://github.com/getkirby/kirby/pull/6459)
+- New icons
+	- `asterisk`
+	- `collapse-horizontal`
+	- `expand-horizontal`
+	- `layout-columns`
+	- `layout-right`
+	- `layout-left`
+	- `window`
+- New `badge` prop for `<k-button>` (value: `{ text, theme }`) [#6755](https://github.com/getkirby/kirby/pull/6755)
+
 - New `--color-l-min` and `--color-l-max` CSS properties [#6299](https://github.com/getkirby/kirby/pull/6299)
 - `<k-link>` (and subsequently `<k-button>` and `<k-dropdown-item>`) has a new `download` attribute to force direct download of a file
 - `<k-tag>`: new `element` and `theme` props [#6569](https://github.com/getkirby/kirby/pull/6569)
@@ -24,3 +34,30 @@ Text:
 - New `<k-tags-field-preview>` component [#6569](https://github.com/getkirby/kirby/pull/6569)
 - New `<k-view-button>` component [#6540](https://github.com/getkirby/kirby/pull/6540)
 - New `uploadAsChunks` JS helper function [#6421](https://github.com/getkirby/kirby/pull/6421)
+- New `<k-form-controls>` component [#6512](https://github.com/getkirby/kirby/pull/6512) with a new dropdown to give information about the author and last modification of the page, site, user or file.
+- New `<k-languages-dropdown>` component
+- New `this.$helper.throttle` JS helper [#6708](https://github.com/getkirby/kirby/pull/6708)
+- New `options` argument for `this.$helper.debounce` JS helper to control leading/trailing behavior [#6708](https://github.com/getkirby/kirby/pull/6708)
+- New `clipboard.write`  event, which can be triggered globally to write something to the clipboard. This is especially useful if you want to fire a copy event from the backend (e.g. from a dropdown option)
+    ```php
+    this.$panel.events.emit("clipboard.write", "Add me to the clipboard");
+    ```
+- `<k-dropdown-content>` exposes `items` in scoped default slot and  has new `item` scoped slot
+- The fields section submits all values on input of any field now (similar to on submit) instead of updating the one field [#6517](https://github.com/getkirby/kirby/pull/6517)
+- `beforeunload` is now available as a global event, which you can listen to
+     ```php
+    this.$panel.events.on("beforeunload", () => {
+      // do something before the window/tab closes.
+    });
+    ```
+
+### Translations
+- New strings
+	- `copy.success`
+	- `copy.url`
+	- `lock.unsaved.files`
+	- `lock.unsaved.pages`
+	- `lock.unsaved.users`
+	- `version.changes`
+	- `version.compare`
+	- `view`

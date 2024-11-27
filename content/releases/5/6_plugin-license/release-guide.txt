@@ -1,0 +1,85 @@
+Title: Plugin License handling
+----
+
+Subtitle: A Custom license for your plugin
+
+----
+
+Text:
+
+Plugin licenses are now shown in the plugins table with an additional icon and theme to indicate their status. Licenses can now have an additional link to their license document or a custom license shop. [#6738](https://github.com/getkirby/kirby/pull/6738)
+
+(image: plugin-licenses.png)
+
+- New `Kirby\Plugin\License` class
+- New `Kirby\Plugin\LicenseStatus` class
+- New `k-table-license-cell` component in the system view
+
+**Defining a plugin license as simple array**
+
+This is great if you want to point to your own license document.
+
+```php
+App::plugin(
+  name: 'my/plugin',
+  extends: [...],
+  license: [
+    'name' => 'Custom license',
+    'link' => '<https://mylicenseshop.com>',
+    'status' => 'active',
+  ]
+);
+```
+
+**Setting a custom status**
+
+```php
+App::plugin(
+  name: 'my/plugin',
+  extends: [...],
+  license: [
+    'name' => 'Custom license',
+    'link' => 'https://mylicenseshop.com',
+    'status' => [
+      'value' => 'missing',
+      'theme' => 'negative',
+      'label' => 'Get a license please',
+      'icon' => 'alert'
+    ]
+  ]
+);
+```
+
+**A Custom license for your plugin**
+
+You can also pass a license object. Extend our `Kirby\Plugin\License` class to return a custom status, them, icon and label, depending on the state of your plugin’s license. This is great if you are working with a proprietary license for your plugin, which might still need to purchased/activated by the user.
+
+```php
+use Kirby\Plugin\License;
+use Kirby\Plugin\LicenseStatus;
+use Kirby\Plugin\Plugin;
+
+class MyCustomLicense extends License
+{
+  public function __construct(
+    protected Plugin $plugin
+  ){
+    $this->name = 'My Custom License';
+    $this->link = '<https://mylicenseshop.com>';
+    $this->status = LicenseStatus(
+      value: 'missing',
+      theme: 'negative',
+      label: 'Get a license please',
+      icon: 'alert'
+    )
+  }
+}
+
+App::plugin(
+  name: 'my/plugin',
+  extends: [...],
+  license: function (Plugin $plugin) {
+    return new MyCustomLicense($plugin)
+  }
+);
+```

@@ -7,6 +7,26 @@ Text:
 - `site` controller data will now always be merged as default data with data from page template specific controllers.https://feedback.getkirby.com/422
 - New `files.sort` permission [#1969](https://github.com/getkirby/kirby/issues/1969)
 
+#### New Redis Cache Driver
+
+Redis is one of the most used cache types. We’ve added a brand new Redis cache driver to the core. You can now use it out of the box by setting up the Redis server connection in your config. [#6736](https://github.com/getkirby/kirby/pull/6736)
+
+```php
+<?php
+
+return [
+    'cache' => [
+        'pages' => [
+            'active' => true,
+            'type'   => 'redis',
+            'host'   => '127.0.0.1', // default host address
+            'port'   => 6379, // default port number
+            'auth'   => ['user', 'password'], // optional
+        ]
+    ]
+];
+```
+
 #### IDE support
 
 - Improved IDE autocompletion and type hints for collection items (`$pages`, `$files`, `$users`...) [#6391](https://github.com/getkirby/kirby/pull/6391#pullrequestreview-1999690640)
@@ -14,6 +34,14 @@ Text:
 #### UUIDs
 - Duplicating pages: All UUIDs within the copied page, its files and children that point to an object that got copied as - well will be replaced with the UUID of the copied version. If no copying files, any UUID pointing to a file within the copied page gets removed. [#6567](https://github.com/getkirby/kirby/pull/6567)
 - UUIDs are fully lowercased now to avoid issues between filesystems handling casing differently [#6566](https://github.com/getkirby/kirby/pull/6566)
+
+### Api
+
+- New API Routes for saving, publishing and discarding of changes:
+	- POST: `/api/(:lock)/changes/discard`
+	- POST: `/api/(:lock)/changes/publish`
+	- POST:  `/api/(:lock)/changes/save`
+
 
 #### More improvements
 
@@ -26,3 +54,102 @@ Text:
 	- Renders them as PHP array definitions that can be handed to the dedicated Vue frontend components
 	- Added `Panel\Model::model()` method
 - Backend classes for core view buttons [#6545](https://github.com/getkirby/kirby/pull/6545)
+  - New `Kirby\Panel\Ui\LanguagesDropdown` class
+	- New `Kirby\Panel\Ui\PreviewDropdownButton` class to show a dropdown with opening and preview options for pages and the site. (see features above)
+- New `ModelWithContent::version()` method to directly access content versions [#6455](https://github.com/getkirby/kirby/pull/6455)
+
+  ```php
+  // Accessing different versions
+  $page->version('latest');
+  $page->version('changes');
+
+  // Version method examples
+  $page->version('changes')->content();
+  $page->version('changes')->save([...]);
+  $page->version('changes')->publish();
+  $page->version('changes')->delete();
+  ```
+
+- `Page::previewUrl()` and `Site::previewUrl()` now accept a version id to specify which version you want to preview.
+
+  ```php
+  $page->previewUrl('latest') // default
+  $page->previewUrl('changes')
+  ```
+
+- The `ModelWithContent::lock` method returns the new, improved `Kirby\Content\Lock` class, which replaces `Kirby\Cms\ContentLock`
+
+  ```php
+  // examples
+  $page->lock()->isLocked()
+  $page->lock()->modified()
+  $page->lock()->modified('d.m.Y')
+  $page->lock()->user()?->username()
+  ```
+
+	- New third `$fail` argument for `Data::read()` and `Data::decode()`. By default, `Data::read()` and `Data::decode()` will throw an exception if the file does not exist or the data cannot be decoded. By setting `$fail` to false, you can block the exception and return an empty array instead. We’ve refactored our parts of the code where we used a try/catch block to achieve the same.
+
+  ```php
+  use Kirby\Data\Data;
+
+  $data = Data::read(__DIR__ . '/missing-file.yml', fail: false);
+  $data = Data::decode($brokenData, type: 'json', fail: false);
+  ```
+
+- New `$pretty` argument for `Json::encode()`
+
+  ```php
+  use Kirby\Data\Json;
+
+  $prettyJson = Json::encode($data, pretty: true);
+  ```
+
+- New `Kirby\Content\Changes` class replaces `Kirby\Cms\ContentLocks` to track all unsaved changes across all users and models. This class is mostly internal, but you can use it to get access to changed pages, files and users on the backend.
+
+  ```php
+  use Kirby\Content\Changes;
+
+  $changes = new Changes();
+
+  // collection of changed pages
+  $changes->pages();
+  // collection of changed files
+  $changes->files();
+  // collection of changed users
+  $changes->users();
+  ```
+
+- New default `changes` cache, which is active by default. This cache is internally used to store all changes that have not been published yet. You can change the cache settings in your config:
+
+  ```php
+  // /site/config/config.php
+  return [
+      'cache' => [
+          'changes' => [
+              'type' => 'redis'
+          ]
+      ]
+  ];
+  ```
+
+- New `Language::ensure()` and `Languages::ensure()` methods to get language(s) objects even in single-language mode. Note that these methods are marked as internal and may be changed in a future version. [#6483](https://github.com/getkirby/kirby/pull/6483)
+
+  ```php
+  use Kirby\Cms\Language;
+  use Kirby\Cms\Languages;
+
+  // for a single language
+  echo Language::ensure('default')->code();
+
+  // for all languages
+  foreach (Languages::ensure() as $language) {
+    echo $language->code();
+  }
+  ```
+
+### More internal enhancements
+
+- New `Kirby\Content\MemoryStorage` for internal use [#6457](https://github.com/getkirby/kirby/pull/6457)
+- New `Kirby\Content\ImmutableMemoryStorage` to keep outdated model information in memory but avoid any mutations. [#6570](https://github.com/getkirby/kirby/pull/6570)
+- New `Kirby\Content\Translation` class (to eventually replace `Kirby\Content\ContentTranslation`)
+- New `Kirby\Content\Translations` class to help in `ModelWithContent::translations()` later and to provide a more type-safe collection for all translations.

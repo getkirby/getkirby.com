@@ -769,7 +769,7 @@ return [
 ### Panel
 
 - Vuex and the Vuex content module have been removed.
-- The following dialogs no longer send dispatch evens via the backend. Dispatch events relied on Vuex.
+- The following dialogs no longer send dispatch events via the backend. Dispatch events relied on Vuex.
     - `page.changeTitle`
     - `page.delete`
     - `page.move`
@@ -802,8 +802,7 @@ return [
 - The `$formField` argument in `Kirby\Form\Field::factory()` has been renamed to `$siblings`
 - You can no longer pass a value to `Kirby\Form\Field::isEmpty()` Use `Kirby\Form\Field::isEmptyValue($value)` instead.
 - `Kirby\Form\Form::fields()` does no longer return null but an empty Fields collection if there are no fields.
-- `Kirby\Form\Field::validate()` returns an array of errors instead of void. The validate method is protected and this should not really qualify as a public breaking change, but it's
-still worth noting it here.
+- `Kirby\Form\Field::validate()` returns an array of errors instead of void.
 </since>
 
 ### Removed deprecated

@@ -18,6 +18,32 @@ Text:
 - `Str::camel()`, `Str::camelToKebab()`, `Str::float()`, `Str::kebab()`, `Str::kebabToCamel()`, `Str::length()`, `Str::lower()`, `Str::safeTemplate()`, `Str::short()`, `Str::slug()`, `Str::snake()`, `Str::studly()`, `Str::substr()`, `Str::template()`, `Str::ucfirst()`, `Str::ucwords()`, `Str::unhtml()`, `Str::upper()` and `Str::widont()` can no longer be called without a value argument (passing a `null` value still works) [#6401](https://github.com/getkirby/kirby/pull/6401)
 - All content storage methods must now use the `VersionId` instead of a simple string. [#6436](https://github.com/getkirby/kirby/pull/6436)
 - All methods in `*Rules` classes are now marked to return void instead of a boolean [#6660](https://github.com/getkirby/kirby/pull/6660)
+- `signature` is longer available as field property when loading fields from the Panel backend [#6712](https://github.com/getkirby/kirby/pull/6712)
+- `Kirby\Plugin\Plugin::license()` now returns the License object instead of a simple string
+- `Kirby\Plugin\Plugin::toArray()` includes the full license info as child array instead of a string
+- `ModelWithContent::version()` is now a reserved keyword. If you've used a field with this name, you need to use `$model->content()->get('version')` instead to work with the field.
+- `ModelWithContent::lock()` will now always return a `Kirby\Content\Lock` object, even if the model is not currently locked. You can check for that case with `ModelWithContent::lock()->isLocked()`
+- Removed `Kirby\Cms\ContentLock` and `Kirby\Cms\ContentLocks` as well as `Kirby\Cms\App::locks()`
+- `Page::modified()`, `File::modifiedContent()` and `User::modified()` now use the current language instead of the default language.
+- `panel.view.isLocked` no longer exists. Use `panel.content.isLocked()` instead [#6515](https://github.com/getkirby/kirby/pull/6515)
+- `Kirby\Form\Field::$formFields` has been renamed to `Kirby\Form\Field::$siblings`
+- The `$formField` argument in `Kirby\Form\Field::factory()` has been renamed to `$siblings`
+- You can no longer pass a value to `Kirby\Form\Field::isEmpty()` Use `Kirby\Form\Field::isEmptyValue($value)` instead.
+- `Kirby\Form\Form::fields()` does no longer return null but an empty Fields collection if there are no fields.
+- `Kirby\Form\Field::validate()` returns an array of errors instead of void.
+
+#### API
+
+- Removed API routes:
+	- `GET`: `/api/(:all)/lock`
+	- `PATCH`: `/api/(:all)/lock`
+	- `DELETE`: `/api/(:all)/lock`
+	- `PATCH`: `/api/(:all)/unlock`
+	- `DELETE`: `/api/(:all)/unlock`
+
+#### Translations
+
+- `copy.success` has been moved to `copy.success.multiple`
 
 #### Panel
 
@@ -28,6 +54,12 @@ Text:
     - Chrome for Android 126+
 - Panel uploads can exceed the `upload_max_filesize` limit [#6421](https://github.com/getkirby/kirby/pull/6421)
     - If you want to restrict the upload size, please use the file blueprint (link: docs/reference/panel/blueprints/file#accept text: `accept` `maxsize` option)
+- Vuex and the Vuex content module have been removed.
+- The following dialogs no longer send dispatch events via the backend. Dispatch events relied on Vuex.
+    - `page.changeTitle`
+    - `page.delete`
+    - `page.move`
+    - `user.delete`
 - Calendar dropdown input will show Sunday now as first day of the week (depending on the user's language). If you want to enforce Monday as first day of the week, you can set the `date.weekday` option to `1`. [#6635](https://github.com/getkirby/kirby/pull/6635)
 - `<k-form>` and `<k-fieldset>` as well as many fields and inputs don't emit an `invalid` event anymore. Use native HTML invalid state of elements instead. [#6099](https://github.com/getkirby/kirby/pull/6099)
 - `novalidate` prop has been removed from all elements but `<k-form>` [#6099](https://github.com/getkirby/kirby/pull/6099)
@@ -90,3 +122,7 @@ Text:
 | `Kirby\Cms\Page::contentFileName()` | - |
 | `Kirby\Cms\Site::contentFileName()` | - |
 | `Kirby\Cms\User::contentFileName()` | - |
+| `Kirby\Form\FieldClass::valueFromJson()` | `Kirby\Data\Json::decode()` |
+| `Kirby\Form\FieldClass::valueFromYaml()` | `Kirby\Data\Yaml::decode()` |
+| `Kirby\Form\FieldClass::valueToJson()` | `Kirby\Data\Json::encode()` |
+| `Kirby\Form\FieldClass::valueToYaml()` | `Kirby\Data\Yaml::encode()` |
