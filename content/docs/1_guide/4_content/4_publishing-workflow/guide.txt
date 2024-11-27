@@ -27,7 +27,7 @@ When you edit pages, files or user accounts in the Panel, you will see an "unsav
 (image: changes.png)
 
 ## Page states
-Kirby's page states give you full control over your publishing workflow. They allows you to define access to content, to filter content by status criteria and much more.
+Kirby's page states give you full control over your publishing workflow. This allows you to define access to content, to filter content by status criteria and much more.
 
 Let's look at what the three states mean again before we go into details:
 
