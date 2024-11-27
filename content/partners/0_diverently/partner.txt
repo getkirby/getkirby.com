@@ -1,12 +1,12 @@
-Title: Diverently
+Title: Diverently GmbH
 
 ----
 
-Subtitle: GmbH
+Subtitle: Digital Agency
 
 ----
 
-Plan: regular
+Plan: certified
 
 ----
 
@@ -31,6 +31,11 @@ Languages: German, English
 ----
 
 Description: Diverently is an advertising agency from Hamburg with a focus on websites, digitization, branding and campaigns. Also available in Luxembourg.
+
+----
+Summary:
+
+Diverently is an advertising agency from Hamburg with a focus on websites, digitization, branding and campaigns.
 
 ----
 
