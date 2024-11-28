@@ -1,0 +1,15 @@
+Text:
+
+## Viewable image types
+
+By default, the following image formats can be shown in the file preview of the Panel:
+
+- `avif`
+-	`jpg`
+-	`jpeg`
+-	`gif`
+-	`png`
+- `svg`
+-	`webp`
+
+The viewable image types are defined in the `Kirby\Image\Image` class in the public static `::$viewableTypes` property.
