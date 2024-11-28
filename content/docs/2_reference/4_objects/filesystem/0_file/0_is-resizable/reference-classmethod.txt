@@ -1,0 +1,14 @@
+Text:
+
+## Resizable image types
+
+By default, the following image formats can be resized by Kirby:
+
+- `avif`
+-	`jpg`
+-	`jpeg`
+-	`gif`
+-	`png`
+-	`webp`
+
+The resizable image types are defined in the `Kirby\Image\Image` class in the public static `::$resizableTypes` property.
