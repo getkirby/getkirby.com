@@ -71,6 +71,46 @@ category:
     value: "{{ page.slug }}"
 ```
 
+<?php if ($field === 'toggles'): ?>
+<since v="4.5.0">
+### Custom icons
+
+You can also fetch custom icons with queries.
+
+```yaml
+category:
+  label: Category
+  type: <?= $field . PHP_EOL ?>
+  options:
+    type: query
+    query: site.children.published
+    text: "{{ page.year }} - {{ page.title.upper }}"
+    value: "{{ page.slug }}"
+    icon: "{{ page.customIcon }}"
+```
+</since>
+<?php endif ?>
+
+<?php if ($field === 'radio' || $field === 'checkboxes'): ?>
+<since v="4.5.0">
+### Custom info text
+
+You can also fetch custom info text with queries.
+
+```yaml
+category:
+  label: Category
+  type: <?= $field . PHP_EOL ?>
+  options:
+    type: query
+    query: site.children.published
+    text: "{{ page.year }} - {{ page.title.upper }}"
+    value: "{{ page.slug }}"
+    info: "{{ page.description }}"
+```
+</since>
+<?php endif ?>
+
 ### Numeric keys
 
 If you want to store numeric keys as values, you have to use the long notation with `value` and `text`:
