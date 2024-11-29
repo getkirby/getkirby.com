@@ -6,5 +6,9 @@ Subtitle: As PHP evolves, so do we
 
 ----
 
+Upcoming: true
+
+----
+
 Link: https://www.php.net/releases/8.4/en.php
 
