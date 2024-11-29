@@ -54,7 +54,7 @@
 
 <div class="checkout-field field mb-6">
 	<label class="label" for="references">
-		Reference links <abbr title="Required" aria-hidden="">*</abbr>
+		Client reference links <abbr title="Required" aria-hidden="">*</abbr>
 	</label>
 	<textarea
 		id="references"
