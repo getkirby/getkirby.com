@@ -210,9 +210,16 @@ In addition to all the features listed separately on the (link: /releases/5 text
 
 ## Breaking changes
 
+- Kirby 5 requires at least PHP 8.2
+- Kirby 5 raises browser version requirements for the Panel
+  - Safari 16+
+  - Mobile Safari 16+
+  - Android Browser 126+
+  - Chrome for Android 126+
+  -	(other browsers remain unchanged)
+
 ### Core
 
-- Kirby requires at least PHP 8.2
 - Data/variables from your `site` controller will now be passed to all templates [#6412](https://github.com/getkirby/kirby/pull/6412)
 - Users without a role in their credentials file will now receive the `default` role (if exists), not the `visitor` role anymore [#6656](https://github.com/getkirby/kirby/pull/6656)
 - Model action `before` hooks: rules get applied after the hook runs
@@ -240,11 +247,6 @@ In addition to all the features listed separately on the (link: /releases/5 text
 
 ### Panel
 
-- Kirby 5 requires the following browser versions to use the Panel (other browser requirements remain unchanged)
-    - Safari 16+
-    - Mobile Safari 16+
-    - Android Browser 126+
-    - Chrome for Android 126+
 - Panel uploads can exceed the `upload_max_filesize` limit [#6421](https://github.com/getkirby/kirby/pull/6421)
     - If you want to restrict the upload size, please use the file blueprint (link: docs/reference/panel/blueprints/file#accept text: `accept` `maxsize` option)
 - Vuex and the Vuex content module have been removed.
