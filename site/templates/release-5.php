@@ -20,7 +20,6 @@
 		], ['section' => $section]) ?>
 	<?php endforeach ?>
 
-	<?php snippet('templates/release-5/changes') ?>
 	<?php snippet('templates/release-5/migration') ?>
 </article>
 
