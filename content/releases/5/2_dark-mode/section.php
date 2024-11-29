@@ -44,6 +44,9 @@
 	background: var(--color-black);
 	color: var(--color-white)
 }
+.v5-dark-mode-teaser a {
+	color: var(--color-white)
+}
 .v5-dark-mode figure img {
 	box-shadow: var(--shadow-xl);
 	border-radius: .5rem;

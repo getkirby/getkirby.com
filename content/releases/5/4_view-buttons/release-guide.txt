@@ -1,7 +1,7 @@
-Title: Custom Panel view buttons
+Title: Panel view buttons
 ----
 
-Subtitle: La la la
+Subtitle: Customization at your fingertips
 
 ----
 

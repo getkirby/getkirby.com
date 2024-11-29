@@ -1,13 +1,13 @@
-Title: Unsaved changes 2.0
+Title: A version of your changes
 ----
 
-Subtitle: Setting up new levels of editing UX
+Subtitle: A whole new editing UX
 
 ----
 
 Teaser:
 
-In Kirby 5, your unsaved changes aren't just stored locally in your browser anymore. Instead, we securely store them on the server. This server-side storage enables several powerful new features: you can now seamlessly share your unsaved changes with others, preview them across devices, and even collaborate without having to publish anything. This makes it easier to work in teams, as colleagues can review or contribute to draft changes without disrupting the live content.You can pick up right where you or others left off, no matter where you are.
+In Kirby 5, your changes to published content aren't just stored locally in your browser anymore. Instead, we securely store them on the server. This server-side storage enables several powerful new features: you can now seamlessly share your changes with others, preview them across devices, and even collaborate without having to publish anything. This makes it easier to work in teams, as colleagues can review or contribute to draft changes without disrupting the live content. You can pick up right where you or others left off, no matter where you are.
 
 ----
 
@@ -15,7 +15,7 @@ Filesystem:
 
 ```filesystem
 content/
-  1_notes/
+  1_reflections-on-humanity/
     _changes/
       note.txt
       photo.jpg.txt
@@ -23,6 +23,7 @@ content/
     photo.jpg
     photo.jpg.txt
   2_portfolio/
+    projects.txt
 ```
 
 ----

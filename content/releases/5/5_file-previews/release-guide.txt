@@ -1,4 +1,4 @@
-Title: Custom Panel file previews
+Title: Panel file previews
 ----
 
 Subtitle: No more blind dates with your files
