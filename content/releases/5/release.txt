@@ -8,7 +8,7 @@ ogimage: opengraph.png
 ----
 Description: Kirby 5 is all about a new editing experience for users, with a brand new, stunning Panel design.
 ----
-Docs: /docs
+Docs: /releases/5/changes
 ----
 Cover: - kirby-5-0.png
 ----

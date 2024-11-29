@@ -1,7 +1,8 @@
 <style>
   .v5-php84 > a {
     display: block;
-	width: 30rem;
+	width: 100%;
+	max-width: 30rem;
   }
   .v5-php84 svg {
 	width: 100%;
