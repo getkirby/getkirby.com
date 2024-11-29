@@ -92,11 +92,11 @@
 	>
 		<li>
 			<span class="icon"><?= icon('check') ?></span>
-			4 completed Kirby projects
+			4 completed Kirby client projects
 		</li>
 		<li>
 			<span class="icon"><?= icon('check') ?></span>
-			1 reviewed project
+			1 reviewed client project
 		</li>
 	</ul>
 	<ul
@@ -106,7 +106,7 @@
 	>
 		<li>
 			<span class="icon"><?= icon('check') ?></span>
-			2 completed Kirby projects
+			2 completed Kirby client projects
 		</li>
 	</ul>
 </section>
