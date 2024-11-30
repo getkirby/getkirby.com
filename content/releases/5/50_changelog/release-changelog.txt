@@ -2,21 +2,22 @@ Title: Changelog
 
 ----
 
-
 Text:
 
 In addition to all the features listed separately on the (link: /releases/5 text: Kirby 5 release page), there are a lot more enhancements, deprecations and breaking changes in the fineprint:
 
-## Enhancements
+----
 
-### Core
-#### Permissions
+Enhancements:
+
+## Core
+### Permissions
 - New `files.sort` permission [#1969](https://github.com/getkirby/kirby/issues/1969)
 
-#### Media
+### Media
 - Thumbnails don't need to be regenerated when page sorting changes [#6432](https://github.com/getkirby/kirby/pull/6432)
 
-#### Versions
+### Versions
 - New `ModelWithContent::version()` method to directly access content versions [#6455](https://github.com/getkirby/kirby/pull/6455)
 
   ```php
@@ -81,7 +82,7 @@ In addition to all the features listed separately on the (link: /releases/5 text
 - New `Kirby\Content\Translations` class to help in `ModelWithContent::translations()` later and to provide a more type-safe collection for all translations.
 
 
-#### View buttons
+### View buttons
 - New `Kirby\Panel\Panel::buttons()` method that collects all defined buttons from all Panel areas [#6541](https://github.com/getkirby/kirby/pull/6541)
 - New `Kirby\Panel\Ui` namespace with basic `Kirby\Panel\Ui\Component` and `Kirby\Panel\Ui\Button` classes [#6539](https://github.com/getkirby/kirby/pull/6539)
 	- Each component renders as an array with a `component`, unique `key` and `props` entries
@@ -93,7 +94,7 @@ In addition to all the features listed separately on the (link: /releases/5 text
 	- New `Kirby\Panel\Ui\PreviewDropdownButton` class to show a dropdown with opening and preview options for pages and the site. (see features above)
 
 
-#### Other
+### Other
 - New third `$fail` argument for `Data::read()` and `Data::decode()`. By default, `Data::read()` and `Data::decode()` will throw an exception if the file does not exist or the data cannot be decoded. By setting `$fail` to false, you can block the exception and return an empty array instead. We’ve refactored our parts of the code where we used a try/catch block to achieve the same.
 
   ```php
@@ -129,7 +130,7 @@ In addition to all the features listed separately on the (link: /releases/5 text
   ```
 
 
-### Panel
+## Panel
 - Sections: improved title and info wrapping [#6447](https://github.com/getkirby/kirby/pull/6447)
 - Radio and select fields: `default` option now supports Kirby queries [#6459](https://github.com/getkirby/kirby/pull/6459)
 - New icons
@@ -142,7 +143,7 @@ In addition to all the features listed separately on the (link: /releases/5 text
 	- `window`
 - The fields section submits all values on input of any field now (similar to on submit) instead of updating the one field [#6517](https://github.com/getkirby/kirby/pull/6517)
 
-#### Components
+### Components
 - New `badge` prop for `<k-button>` (value: `{ text, theme }`) [#6755](https://github.com/getkirby/kirby/pull/6755)
 - `<k-link>` (and subsequently `<k-button>` and `<k-dropdown-item>`) has a new `download` attribute to force direct download of a file
 - `<k-tag>`: new `element` and `theme` props [#6569](https://github.com/getkirby/kirby/pull/6569)
@@ -153,14 +154,14 @@ In addition to all the features listed separately on the (link: /releases/5 text
 - New `<k-languages-dropdown>` component
 - `<k-dropdown-content>` exposes `items` in scoped default slot and  has new `item` scoped slot
 
-#### Events
+### Events
 - `beforeunload` is now available as a global event, which you can listen to
      ```php
     this.$panel.events.on("beforeunload", () => {
       // do something before the window/tab closes.
     });
     ```
-#### Helpers
+### Helpers
 - New `uploadAsChunks` JS helper function [#6421](https://github.com/getkirby/kirby/pull/6421)
 - New `this.$helper.throttle` JS helper [#6708](https://github.com/getkirby/kirby/pull/6708)
 - New `options` argument for `this.$helper.debounce` JS helper to control leading/trailing behavior [#6708](https://github.com/getkirby/kirby/pull/6708)
@@ -169,11 +170,11 @@ In addition to all the features listed separately on the (link: /releases/5 text
     this.$panel.events.emit("clipboard.write", "Add me to the clipboard");
     ```
 
-#### Styling
+### Styling
 - New `--color-l-min` and `--color-l-max` CSS properties [#6299](https://github.com/getkirby/kirby/pull/6299)
 
 
-### Translations
+## Translations
 - New strings
 	- `copy.success`
 	- `copy.url`
@@ -184,14 +185,16 @@ In addition to all the features listed separately on the (link: /releases/5 text
 	- `version.compare`
 	- `view`
 
-### API
+## API
 - New API Routes for saving, publishing and discarding of changes:
 	- POST: `/api/(:lock)/changes/discard`
 	- POST: `/api/(:lock)/changes/publish`
 	- POST:  `/api/(:lock)/changes/save`
 
+----
 
-## Bug fixes
+Bugfixes:
+
 - Fixed thumb issues resulting from EXIF orientation entry [#2695](https://github.com/getkirby/kirby/issues/2695)
 - Model hooks for actions: multiple hooks don't overwrite each others' changes to the model [#6460](https://github.com/getkirby/kirby/pull/6460) [#2828](https://github.com/getkirby/kirby/pull/2828)
 - Headers with null as value are no longer added to JS API requests. [#6435](https://github.com/getkirby/kirby/pull/6435)
@@ -205,10 +208,9 @@ In addition to all the features listed separately on the (link: /releases/5 text
 - Fixed badge position in model tabs and improved CSS for button badges in general
 - Fixed background CSS for the `k-progress` component
 
+----
 
-
-
-## Breaking changes
+Breaking:
 
 - Kirby 5 requires at least PHP 8.2
 - Kirby 5 raises browser version requirements for the Panel
@@ -218,7 +220,7 @@ In addition to all the features listed separately on the (link: /releases/5 text
   - Chrome for Android 126+
   -	(other browsers remain unchanged)
 
-### Core
+## Core
 
 - Data/variables from your `site` controller will now be passed to all templates [#6412](https://github.com/getkirby/kirby/pull/6412)
 - Users without a role in their credentials file will now receive the `default` role (if exists), not the `visitor` role anymore [#6656](https://github.com/getkirby/kirby/pull/6656)
@@ -245,7 +247,7 @@ In addition to all the features listed separately on the (link: /releases/5 text
 - `Kirby\Form\Form::fields()` does no longer return null but an empty Fields collection if there are no fields.
 - `Kirby\Form\Field::validate()` returns an array of errors instead of void.
 
-### Panel
+## Panel
 
 - Panel uploads can exceed the `upload_max_filesize` limit [#6421](https://github.com/getkirby/kirby/pull/6421)
     - If you want to restrict the upload size, please use the file blueprint (link: docs/reference/panel/blueprints/file#accept text: `accept` `maxsize` option)
@@ -265,7 +267,7 @@ In addition to all the features listed separately on the (link: /releases/5 text
 - `<k-draggable>`: the `move` callback function is receiving an event with an altered data structure
 - CSS attribute selectors must be written fully qualified (e.g. `[data-hidden="true"]` as only `[data-hidden]` can start matching also elements where that attribute is `false`) [#6109](https://github.com/getkirby/kirby/pull/6109)
 
-### API
+## API
 
 - Removed API routes:
 	- `GET`: `/api/(:all)/lock`
@@ -274,11 +276,11 @@ In addition to all the features listed separately on the (link: /releases/5 text
 	- `PATCH`: `/api/(:all)/unlock`
 	- `DELETE`: `/api/(:all)/unlock`
 
-### Translations
+## Translations
 
 - `copy.success` has been renamed to `copy.success.multiple`
 
-### Removed deprecated code
+## Removed deprecated code
 
 | Removed | Use instead |
 | --- | --- |
@@ -335,9 +337,11 @@ In addition to all the features listed separately on the (link: /releases/5 text
 | `Kirby\Form\FieldClass::valueToJson()` | `Kirby\Data\Json::encode()` |
 | `Kirby\Form\FieldClass::valueToYaml()` | `Kirby\Data\Yaml::encode()` |
 
+----
 
-## Deprecated
-#### Core
+Deprecated:
+
+## Core
 
 - Exception classes: passing $arg array will be removed in a future version. Use named arguments. [#6618](https://github.com/getkirby/kirby/pull/6618)
  `Kirby\Cms\Plugin` is deprecated. Use `Kirby\Plugin\Plugin` instead
@@ -351,15 +355,16 @@ In addition to all the features listed separately on the (link: /releases/5 text
 - `Kirby\Form\FieldClass::save()` is deprecated. Use `::isSaveable()` instead
 - `Kirby\Form\FieldClass::value()` is deprecated. Use `::toFormValue()` instead
 
-#### Panel
+## Panel
 
 - `<k-writer>` will be removed in a future version. Use `<k-writer-input></k-writer-input>` instead [#6172](https://github.com/getkirby/kirby/pull/6172)
 - `<k-bubble>`, `<k-bubbles>` and `<k-bubbles-field-preview>`. Use `<k-tag>`, `<k-tags>` and `<k-tag-field-preview>` instead. [#6569](https://github.com/getkirby/kirby/pull/6569)
 - `--color-backdrop` CSS property has been deprecated. Use `--overlay-color-back` instead [#6299](https://github.com/getkirby/kirby/pull/6299)
 
+----
 
-## Refactored
-#### Core
+Refactored:
+## Core
 
 - Exception classes support named arguments [#6618](https://github.com/getkirby/kirby/pull/6618)
 - New `Kirby\Api\Upload` class to handle file uploads via the REST API [#6421](https://github.com/getkirby/kirby/pull/6421)
@@ -457,7 +462,7 @@ In addition to all the features listed separately on the (link: /releases/5 text
 - New `Kirby\Plugin` namespace [#6737](https://github.com/getkirby/kirby/pull/6737)
 - New `Kirby\Toolkit\Component::applyProp()` method to allow resetting single props and also improves prop unsetting in custom components.
 
-#### Panel
+## Panel
 
 - Preparations for a move to Vue 3 in v6
 	- `<k-draggable>` is directly built on top of SortableJS now [#6387](https://github.com/getkirby/kirby/pull/6387)
