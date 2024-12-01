@@ -239,7 +239,7 @@
 
 <?= js('assets/js/libraries/download.js') ?>
 <script type="module">
-	import * as htmlToImage from '<?= url('assets/js/libraries/html-to-image.js') ?>';
+	import { toPng } from '<?= url('assets/js/libraries/html-to-image.js') ?>';
 
 	import {
 		createApp,
@@ -501,17 +501,11 @@
 		settings,
 		isExporting: false,
 		async exportImage() {
-
 			this.isExporting = true;
-
 			const canvas = document.querySelector(".editor-canvas");
-
-			htmlToImage.toPng(canvas)
-				.then(dataUrl => {
-					download(dataUrl, "pixels.png");
-					this.isExporting = false;
-				});
-
+			const dataUrl = await toPng(canvas);
+			download(dataUrl, "pixels.png");
+			this.isExporting = false;
 		},
 		onDrop(event) {
 			if (!event.dataTransfer.files || event.dataTransfer.files.length === 0) {
@@ -549,9 +543,9 @@
 				...presets[event.target.value],
 			};
 
-			Object.keys(newSettings).forEach(key => {
+			for (const key in newSettings) {
 				this.settings[key] = newSettings[key];
-			});
+			}
 		}
 	}).mount();
 </script>
