@@ -6,7 +6,7 @@ Version: 5
 ----
 ogimage: opengraph.png
 ----
-Description: Kirby 5 is all about a new editing experience for users, with a brand new, stunning Panel design.
+Description: Kirby 5 is taking existing features to new levels: collaborate on changes and preview them, turn the Panel dark, upload large files or customize the Panel views.
 ----
 Docs: /releases/5/changes
 ----

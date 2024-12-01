@@ -213,4 +213,16 @@ return [
 			'4.4.0',
 		]
 	],
+	'5' => [
+		'title'       => 'Kirby 5',
+		'hasDocs'     => false,
+		'mainVersion' => '5',
+		'since'       => 'Jan 2025',
+		'description' => 'is the next version of Kirby.',
+		'link'        => 'https://getkirby.com/docs',
+		'repo'        => 'https://github.com/getkirby',
+		'subreleases' => [
+
+		]
+	],
 ];
