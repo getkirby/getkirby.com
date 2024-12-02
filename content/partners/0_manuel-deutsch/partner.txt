@@ -30,16 +30,25 @@ Languages: German, English
 
 ----
 
-Description: As a freelance web developer and web designer I support agencies and companies in the implementation of **unique** websites.
+Description: Hi, I’m Manuel – a freelance web developer with over 10 years of experience. I specialize in creating **unique** websites for agencies and businesses – professional and dependable.
+
+When building Kirby websites, I prioritize accessibility, fast loading times, and search engine optimization as a standard.
+
+I’m passionate about the little details that make websites stand out and bring animations to life in a subtle, thoughtful, and practical way.
+
+Feel free to visit my (link: https://www.manuel-deutsch.de/?likes=kirby text: website) to learn more about my services and see some of my past projects.
 
 ----
 
 Expertise:
 
-- Websites
-- Frontend
-- SEO
-- UX
+- Unique Kirby Websites
+- Lovely Micro-Animations
+- Search Engine Optimized
+- Lightning-Fast Load Times
+- UX Design Enhancements
+- Trusted Partner for Agencies
+- Long-Term Support
 
 ----
 
