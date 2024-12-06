@@ -19,8 +19,14 @@ As requested from many – whether as personal preference or for making the Pane
 
 Text:
 
-(image: dark-mode1.png)
-(image: dark-mode2.png)
+(image: dark-mode-1.webp)
+(image: dark-mode-2.webp)
+(image: dark-mode-3.webp)
+(image: dark-mode-4.webp)
+(image: dark-mode-5.webp)
+(image: dark-mode-6.webp)
+(image: dark-mode-7.webp)
+(image: dark-mode-8.webp)
 
 We do expect to receive a lot of feedback on this feature over the upcoming weeks and will improve it further in upcoming v5 releases.
 
@@ -28,4 +34,4 @@ We do expect to receive a lot of feedback on this feature over the upcoming week
 
 Each Panel user can set their Panel theme from the theme dropdown in the account view: whether to always run that Panel with a light or dark theme - or to follow the OS setting.
 
-(image: dark-mode-dropdown.png)
+(image: dark-mode-dropdown.webp)

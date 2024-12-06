@@ -41,7 +41,7 @@
 }
 
 .v5-dark-mode-teaser {
-	background: #212121;
+	background: #1f1f1f;
 	color: var(--color-white)
 }
 .v5-dark-mode-teaser a {
@@ -63,16 +63,16 @@
 
 		<div class="v5-dark-mode-columns">
 			<figure class="release-box" style="grid-area: screen1">
-				<?= $section->image('dark-mode-2.webp')->resize(1400) ?>
+				<?= $section->image('dark-mode-1.webp')->resize(1400) ?>
 			</figure>
 			<figure class="release-box" style="grid-area: screen2">
-				<?= $section->image('dark-mode-3.webp')->resize(1400) ?>
+				<?= $section->image('dark-mode-2.webp')->resize(1400) ?>
 			</figure>
 			<div class="v5-dark-mode-teaser release-text-box" style="grid-area: teaser">
 				<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 			</div>
 			<figure class="release-box" style="grid-area: dropdown">
-				<?= $section->image('dark-mode-dropdown.png')->resize(700) ?>
+				<?= $section->image('dark-mode-dropdown.webp')->resize(700) ?>
 			</figure>
 		</div>
 
