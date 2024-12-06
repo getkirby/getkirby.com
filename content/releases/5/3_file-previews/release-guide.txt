@@ -44,8 +44,8 @@ Text:
 
 It starts with basic previews for video and audio files that now ship as part of the core:
 
-(image: file-preview-video.png)
-(image: file-preview-audio.png)
+(video: file-previews.mp4 controls: true autoplay: true class: video rounded shadow-xl bg-light)
+
 
 But you can also add custom file previews as plugin extensions to customize the preview for these formats or create previews for other file formats.
 
@@ -124,5 +124,3 @@ panel.plugin("getkirby/custom-file-preview", {
 ```
 
 The `<model-viewer>` element is [from a library](https://modelviewer.dev) that helps to actually display the GLB file. I won't go into the details how to use it exactly (loading external script etc.). You can try the (link: https://github.com/getkirby/sandbox/pull/7 text: full custom file view).
-
-(video: file-preview-custom.mp4 controls: true autoplay: true loop: true class: video rounded shadow-xl bg-light)

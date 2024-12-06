@@ -107,10 +107,11 @@ Building upon the foundation from Alpha 1, you can now also define new custom bu
 buttons:
   - preview
   - settings
-  myBytton:
-    text: My Button
-    link: https://getkirby.com
-    theme: positive
+  analytics:
+    icon: chart
+    text: Analytics
+    link: https://my-analytics.com/for/this/page
+    theme: aqua-icon
 ```
 
 You can also pass custom Vue component and its props.
@@ -119,10 +120,10 @@ You can also pass custom Vue component and its props.
 buttons:
   - preview
   - settings
-  applause:
-    component: k-applause-view-button
+  analytics:
+    component: k-analytics-view-button
     props:
-      foo: bar
+      funnel: cpc
 ```
 
 The available options are based on the (link: https://github.com/getkirby/kirby/blob/v5/develop/panel/src/components/View/Buttons/Button.vue text: `k-view-button` component) (better docs will follow until the final release).
@@ -136,24 +137,24 @@ Similarly to the blueprints, buttons can now be defined in your config file. In 
   'viewButtons' => [
     'site' => [
       'preview',
-      'a' => [
+      'newsletter' => [
         'icon'   => 'heart',
         'text'   => 'Kosmos',
         'theme'  => 'purple-icon',
         'target' => '_blank',
         'link'   => 'https://getkirby.com'
       ],
-      'b-dropdown' => [
+      'analytics-dropdown' => [
         'props' => [
-          'icon'     => 'info',
-          'text'     => 'Info',
-          'dropdown' => 'my/dropdown/route'
+          'icon'     => 'chart',
+          'text'     => 'Analytics',
+          'dropdown' => 'my/analytics/dropdown/route'
         ]
       ],
-      'c-component' => [
+      'promote-component' => [
         'component' => 'my-custom-component',
         'props' => [
-          'foo' => 'bar'
+          'channel' => 'instagram'
         ]
       ]
     ]
