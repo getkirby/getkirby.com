@@ -19,7 +19,7 @@ Kirby's chunked uploads in the Panel break down big files into smaller parts, up
 
 Text:
 
-(video: chunked.mp4 controls: true autoplay: true loop: true class: video rounded shadow-xl bg-light)
+(video: chunked.mp4 controls: true loop: true class: video rounded shadow-xl bg-light)
 
 ## Restricting file upload size
 

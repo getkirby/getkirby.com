@@ -40,7 +40,7 @@ Kirby 5 introduces a part of one of the (link: https://feedback.getkirby.com/135
 
 The brand new changes view lets you switch between a comparison mode or a full-width preview of the changed version and the latest published version.
 
-(video: changes.mp4 controls: true autoplay: true class: video rounded shadow-xl bg-light)
+(video: changes.mp4 controls: true class: video rounded shadow-xl bg-light)
 
 The new preview view for pages and the site is located at `/panel/pages/(:any)/changes/(changes|latest|compare)` and `/panel/site/changes/(changes|latest|compare)`.
 

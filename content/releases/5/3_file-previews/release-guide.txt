@@ -44,8 +44,7 @@ Text:
 
 It starts with basic previews for video and audio files that now ship as part of the core:
 
-(video: file-previews.mp4 controls: true autoplay: true class: video rounded shadow-xl bg-light)
-
+(video: file-previews.mp4 controls: true class: video rounded shadow-xl bg-light)
 
 But you can also add custom file previews as plugin extensions to customize the preview for these formats or create previews for other file formats.
 
