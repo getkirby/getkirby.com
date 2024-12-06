@@ -7,7 +7,7 @@ Subtitle: Moving the mountain, pebble by pebble
 
 Teaser:
 
-Handling large files just got easier in Kirby 5. With chunked uploads, big files are split into smaller pieces and uploaded step by step. Whether it's high-resolution media or other large assets, this feature ensures smoother uploads and a hassle-free experience, even with hefty files.
+Handling large files just got easier in Kirby 5. With chunked uploads, big files are split into smaller pieces and uploaded step by step. Whether it's high-resolution media or other large assets, this feature ensures smoother uploads, even with hefty files.
 
 ----
 

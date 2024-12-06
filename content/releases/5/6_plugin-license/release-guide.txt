@@ -1,7 +1,29 @@
-Title: Plugin License handling
+Title: Plugin licenses
 ----
 
-Subtitle: A Custom license for your plugin
+Subtitle: Your custom license in the Panel
+
+----
+
+Teaser:
+
+Kirby 5 empowers plugin developers to better manage and display their license. Add custom license details, link to your license shop or even fully implement your license validation—everything is integrated into the plugins table for seamless handling.
+
+----
+
+Plugin:
+
+```php
+App::plugin(
+  name: 'my/plugin',
+  extends: [...],
+  license: [
+    'name' => 'Custom license',
+    'link' => '<https://mylicenseshop.com>',
+    'status' => 'active',
+  ]
+);
+```
 
 ----
 
@@ -78,8 +100,6 @@ class MyCustomLicense extends License
 App::plugin(
   name: 'my/plugin',
   extends: [...],
-  license: function (Plugin $plugin) {
-    return new MyCustomLicense($plugin)
-  }
+  license: fn (Plugin $plugin) => new MyCustomLicense($plugin)
 );
 ```

@@ -5,11 +5,22 @@
 	grid-template-areas:
 		"teaser"
 		"buttons"
-		"blueprint",
+		"blueprint"
 		"config"
 }
 
-@media screen and (min-width: 32rem) {
+@media screen and (min-width: 42rem) {
+	.v5-view-buttons {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr auto auto;
+		grid-template-areas:
+			"teaser teaser"
+			"buttons buttons"
+			"blueprint config"
+	}
+}
+
+@media screen and (min-width: 64rem) {
 	.v5-view-buttons {
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 		grid-template-rows: 1fr auto;
