@@ -1,0 +1,128 @@
+Title: Panel file previews
+----
+
+Subtitle: See your files at a glance
+
+----
+
+Teaser:
+
+
+No more guessing games—Kirby 5 introduces custom file previews in the Panel. Configure previews for your unique file formats, from key documents to 3D objects, so editors always know what they’re working with.
+
+Plus, built-in previews for video and audio files come ready to use.
+
+----
+
+Class:
+
+```php
+class PdfFilePreview extends FilePreview
+{
+    public function __construct(
+        public File $file,
+        public string $component = 'k-pdf-file-preview'
+    ) {
+    }
+
+    public static function accepts(File $file): bool
+    {
+        return $file->extension() === 'pdf';
+    }
+}
+```
+
+----
+
+Intro:
+
+With Kirby 5, we're opening up the preview part of the Panel's file view to more rich media previews that aren't just images.
+
+----
+
+Text:
+
+It starts with basic previews for video and audio files that now ship as part of the core:
+
+(image: file-preview-video.png)
+(image: file-preview-audio.png)
+
+But you can also add custom file previews as plugin extensions to customize the preview for these formats or create previews for other file formats.
+
+Custom file previews consist of two parts:
+- a PHP class defining what data is passed to the preview and what files this preview is used for
+- a Vue component to render the preview
+
+### Custom `FieldPreview` class
+
+For a custom file preview, you need a new class that extends `Kirby\Panel\Ui\FieldPreview`. In this example, we're building a custom preview for `.glb` files that are used to display 3D data:
+
+```php
+class GlbFilePreview extends FilePreview
+{
+  public function __construct(
+    public File $file,
+    public string $component = 'k-glb-file-preview'
+  ) {
+  }
+
+  public static function accepts(File $file): bool
+  {
+    return $file->extension() === 'glb';
+  }
+}
+```
+
+This is the minimal setup for a custom class. What it does:
+- It defines which Vue component to use, in this case `k-glb-file-preview` which we will create later. If no component is specified, `k-default-file-preview` will be used.
+- Something you must define is the `::accepts($file)` method. It is used to determine which preview class is used for a certain file. Kirby will loop through all available preview classes and use the first one that accepts the file.
+
+
+### Register your preview class
+
+To use your custom file preview class, you need to register it as a plugin extension:
+
+```php
+Kirby::plugin('your/plugin', [
+  'filePreviews' => [
+    GlbFilePreview::class
+  ]
+]);
+```
+
+### Vue component
+
+Finally, we need to create the Vue component that is used to render the preview. As above listed, we have named it `k-glb-file-preview`.
+
+By default, file preview components will receive three default props:
+- `url` to the file
+- `details` array with basic file information (ideally used for `<k-file-preview-details>`)
+- `image` object with the thumb icon/image also used in sections etc. (we don't use it for this preview)
+
+We also use the `<k-file-preview-frame>` component as wrapper for our actual 3D model, which adds a pattern background.
+
+```js
+panel.plugin("getkirby/custom-file-preview", {
+  components: {
+    "k-glb-file-preview": {
+      template: `
+        <figure class="k-default-file-preview k-glb-file-preview">
+          <k-file-preview-frame>
+            <model-viewer :src="url" />
+          </k-file-preview-frame>
+
+          <k-file-preview-details :details="details" />
+        </figure>
+      `,
+      props: {
+        details: Array,
+        url: String,
+      },
+    },
+  }
+});
+```
+
+The `<model-viewer>` element is [from a library](https://modelviewer.dev) that helps to actually display the GLB file. I won't go into the details how to use it exactly (loading external script etc.). You can try the (link: https://github.com/getkirby/sandbox/pull/7 text: full custom file view).
+
+(video: file-preview-custom.mp4 controls: true autoplay: true loop: true class: video rounded shadow-xl bg-light)
