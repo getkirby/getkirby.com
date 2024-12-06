@@ -23,6 +23,8 @@
 	<?php snippet('templates/release-5/migration') ?>
 </article>
 
-<?php snippet('templates/releases/get-started') ?>
+<?php snippet('templates/releases/get-started', slots: true) ?>
+<p class="text-center mb-12">Kirby 5 is a <strong>free upgrade</strong> for anyone with a <a href="/buy" class="link">valid Kirby Basic or Enterprise license</a>.</p>
+<?php endsnippet() ?>
 
 <?= js('assets/js/templates/release.js') ?>
