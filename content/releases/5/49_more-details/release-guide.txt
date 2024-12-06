@@ -8,23 +8,15 @@ Subtitle: Details that deliver
 
 Features:
 -
-  icon: menu
-	headline: Improved IDE support
-	text: Your editor now understands Kirby a whole lot better, enabling it to make smarter autocomplete suggestions and provide type hints for collections.
--
-  icon: calendar
-	headline: Choose first day of week
-	text: Set Sunday to be the first day of the week in the Panel dropdown calendar – a much requested featured for all our international users.
-	link: "/releases/5/more-details#first-day-of-the-week"
--
   icon: globe
 	headline: Site controller
 	text: Define a global controller for your site that gets merged into all page-specific controllers. Great for shared data.
 	link: "/releases/5/more-details#site-controller"
 -
-  icon: image
-	headline: Improved rotation detection
-	text: Thumbnails work better with photos from smartphones, adapting to the EXIF rotation data.
+  icon: calendar
+	headline: Choose first day of week
+	text: Set Sunday to be the first day of the week in the Panel dropdown calendar – a much requested featured for all our international users.
+	link: "/releases/5/more-details#first-day-of-the-week"
 -
   icon: database
 	headline: Redis cache
@@ -34,15 +26,27 @@ Features:
 -
   icon: lock
 	headline: `files.sort` permission
--
-  icon: fingerprint
-	headline: Native Panel validation
--
-  icon: save
-	headline: "Duplicate page: updated UUIDs"
+	text: A new dedicated user permission to control who can change the sort order of files.
 -
   icon: plugin
-	headline: "Hooks: modify model"
+	headline: Alter page/file/user in a hook
+	text: Most page/file/user action hooks now allow you to return a modified object, supporting consecutive hooks to apply multiple changes that don't overwrite each other.
+-
+  icon: save
+	headline: Improved UUID handling
+	text: When duplicating pages, references to files or children pages that also were duplicated are now updated correctly.
+-
+  icon: menu
+	headline: Improved IDE support
+	text: Your editor now understands Kirby a whole lot better, enabling it to make smarter autocomplete suggestions and provide type hints for collections.
+-
+  icon: image
+	headline: Improved rotation detection
+	text: Thumbnails work better with photos from smartphones, adapting to the EXIF rotation data.
+-
+  icon: fingerprint
+	headline: Improved Panel input validation
+	text: Panel inputs are now built on top of native HTML form validation instead of third-party libraries.
 
 ----
 
