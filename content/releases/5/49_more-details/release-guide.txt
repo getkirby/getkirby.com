@@ -35,10 +35,12 @@ Features:
   icon: save
 	headline: Improved UUID handling
 	text: When duplicating pages, references to files or children pages that also were duplicated are now updated correctly.
+	link: "/releases/5/more-details#improved-uuid-handling"
 -
   icon: menu
 	headline: Improved IDE support
 	text: Your editor now understands Kirby a whole lot better, enabling it to make smarter autocomplete suggestions and provide type hints for collections.
+	link: "/releases/5/more-details#improved-ide-support"
 -
   icon: image
 	headline: Improved rotation detection
@@ -47,6 +49,7 @@ Features:
   icon: fingerprint
 	headline: Improved Panel input validation
 	text: Panel inputs are now built on top of native HTML form validation instead of third-party libraries.
+	link: "/releases/5/more-details#improved-panel-input-validation"
 
 ----
 
@@ -112,10 +115,31 @@ return [
 
 
 ## Improved UUID handling
-When duplicating a page, all UUIDs within the copied page, its files and children that point to an object that got copied as - well will be replaced with the UUID of the copied version. If not copying files, any UUID pointing to a file within the copied page gets removed. [#6567](https://github.com/getkirby/kirby/pull/6567)
+When duplicating a page, all UUIDs within the copied page, its files and children that point to an object that got copied as - well will be replaced with the UUID of the copied version.
+
+If not copying files, any UUID pointing to a file within the copied page gets removed. [#6567](https://github.com/getkirby/kirby/pull/6567)
 
 ## Improved IDE support
-Improved IDE autocompletion and type hints for collection items (`$pages`, `$files`, `$users`...) [#6391](https://github.com/getkirby/kirby/pull/6391#pullrequestreview-1999690640)
+Improved IDE autocompletion and type hints for collection items (`$pages`, `$files`, `$users`...) [#6391](https://github.com/getkirby/kirby/pull/6391#pullrequestreview-1999690640):
+
+```php "site/templates/blog.php"
+<?php
+/**
+ * @var Kirby\Cms\App $kirby
+ * @var Kirby\Cms\Site $site
+ * @var Kirby\Cms\Page $page
+ */
+?>
+
+<ul>
+  <?php foreach ($page->children() as $child): ?>
+    <?php
+    // your IDE now understands that $child
+    // is a `Kirby\Cms\Page` object
+    ?>
+  <?php endforeach ?>
+</ul>
+```
 
 ## Improved Panel input validation
 The Panel now relies on native HTML form invalid states for its input valiation [#6099](https://github.com/getkirby/kirby/pull/6099) [#6320](https://github.com/getkirby/kirby/pull/6320)
