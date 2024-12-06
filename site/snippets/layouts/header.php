@@ -1,6 +1,6 @@
 <div class="container">
 	<?php snippet('layouts/topbar', [
-		'icon'   => '🚀',
+		'icon'   => '👀',
 		'title'  => 'Get a glimpse of Kirby 5 – Beta 1 is here!',
 		'button' => 'Learn more',
 		'link'   => '/releases/5',
