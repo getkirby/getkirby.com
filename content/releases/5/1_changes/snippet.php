@@ -10,7 +10,7 @@
 		"filesystem"
 }
 
-@media screen and (min-width: 32rem) {
+@media screen and (min-width: 52rem) {
 	.v5-unsaved-changes {
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 		grid-template-rows: 1fr auto;
