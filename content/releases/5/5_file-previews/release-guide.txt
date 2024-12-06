@@ -1,15 +1,16 @@
 Title: Panel file previews
 ----
 
-Subtitle: No more blind dates with your files
+Subtitle: See your files at a glance
 
 ----
 
 Teaser:
 
-Say goodbye to mystery files! With Kirby's new custom Panel file previews, you can set up the Panel to preview your custom file formats. Whether it's a crucial document or 3D animation, your editor will know exactly what they're dealing with.
 
-Kirby 5 also ships with default basic previews for video and audio files.
+No more guessing games—Kirby 5 introduces custom file previews in the Panel. Configure previews for your unique file formats, from key documents to 3D objects, so editors always know what they’re working with.
+
+Plus, built-in previews for video and audio files come ready to use.
 
 ----
 

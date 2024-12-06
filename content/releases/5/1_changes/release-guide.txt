@@ -7,7 +7,9 @@ Subtitle: A whole new editing UX
 
 Teaser:
 
-In Kirby 5, your changes to published content aren't just stored locally in your browser anymore. Instead, we securely store them on the server. This server-side storage enables several powerful new features: you can now seamlessly share your changes with others, preview them across devices, and even collaborate without having to publish anything. This makes it easier to work in teams, as colleagues can review or contribute to draft changes without disrupting the live content. You can pick up right where you or others left off, no matter where you are.
+In Kirby 5, so-called unsaved changes are no longer limited to your browser. Instead, they're immediately stored on the server, unlocking new possibilities: share your changes with others, preview your changes before publishing them, and start collaborating. This makes teamwork smoother—colleagues can review or edit changes without affecting live content. Whether you're at your desk or on the go, you can pick up right where you or your team left off.
+
+The new Panel preview view allows you to compare your published page and new changes side-by-side. Or share a link with others to preview any changes before they are published.
 
 ----
 

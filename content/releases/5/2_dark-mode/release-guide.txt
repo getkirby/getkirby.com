@@ -7,7 +7,7 @@ Subtitle: Turn off the Panel lights
 
 Teaser:
 
-Say hello to our new dark theme for the Panel! With v5, you can now work comfortably no matter the hour or lighting conditions. The dark theme makes the Panel easier on your eyes and improves accessibility for users with visual impairments. Effortlessly switch between light and dark themes to match your environment, while enjoying all the power of Kirby in a sleek new look.
+Kirby 5 introduces a dark theme for the Panel, designed for comfort in any lighting. Whether you're working late or prefer a darker interface, the new theme reduces eye strain and improves accessibility for users with visual impairments. You can switch between light and dark themes to suit your environment, all while enjoying the same powerful tools in a refined, modern look.
 
 ----
 
