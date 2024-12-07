@@ -19,8 +19,6 @@
 			'templates/release-5/section'
 		], ['section' => $section]) ?>
 	<?php endforeach ?>
-
-	<?php snippet('templates/release-5/migration') ?>
 </article>
 
 <?php snippet('templates/releases/get-started', slots: true) ?>
@@ -28,5 +26,7 @@
 	Kirby 5 is a <strong>free upgrade</strong> for anyone with a <a href="/buy" class="link">valid Kirby Basic or Enterprise license</a>.
 </p>
 <?php endsnippet() ?>
+
+<?php snippet('templates/release-5/migration') ?>
 
 <?= js('assets/js/templates/release.js') ?>
