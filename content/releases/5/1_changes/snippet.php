@@ -32,10 +32,40 @@
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-box bg-light" style="grid-area: dropdown">
-		<?= $section->image('changes-info-dropdown.png')->resize(700) ?>
+		<?= img($section->image('changes-info-dropdown.png'), [
+			'alt' => 'A screenshot of the info dropdown for unsaved changes, showing the current editor, modification timestamp and a preview button',
+			'src' => [
+				'width' => 485
+			],
+			'lazy' => false,
+			// sizes generated with https://ausi.github.io/respimagelint/
+			'sizes' => '(min-width: 1520px) 485px, (min-width: 1160px) 32.94vw, (min-width: 840px) calc(40vw - 53px), (min-width: 480px) calc(100vw - 96px), 90vw',
+			'srcset' => [
+				485,
+				740,
+				970,
+				1200,
+				1480,
+			]
+		]) ?>
 	</figure>
 	<figure class="release-box bg-light" style="grid-area: dialog">
-		<?= $section->image('changes-dialog.png')->resize(700) ?>
+		<?= img($section->image('changes-dialog.png'), [
+			'alt' => 'A screenshot of the changes dialog with all unsaved pages, files and accounts',
+			'src' => [
+				'width' => 485
+			],
+			'lazy' => false,
+			// sizes generated with https://ausi.github.io/respimagelint/
+			'sizes' => '(min-width: 1520px) 485px, (min-width: 1160px) 32.94vw, (min-width: 840px) calc(40vw - 53px), (min-width: 480px) calc(100vw - 96px), 90vw',
+			'srcset' => [
+				485,
+				740,
+				970,
+				1200,
+				1480,
+			]
+		]) ?>
 	</figure>
 	<figure class="release-code-box" style="grid-area: filesystem">
 		<?= $section->filesystem()->kt() ?>

@@ -36,7 +36,22 @@
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-box bg-light" style="grid-area: buttons">
-		<?= $section->image('buttons.png') ?>
+		<?= img($section->image('buttons.png'), [
+			'alt' => 'A screenshot of a Panel header with custom view buttons labelled Analytics and Promote',
+			'src' => [
+				'width' => 485
+			],
+			'lazy' => true,
+			// sizes generated with https://ausi.github.io/respimagelint/
+			'sizes' => '(min-width: 1520px) 485px, (min-width: 1160px) 32.94vw, (min-width: 1040px) calc(40vw - 53px), (min-width: 480px) calc(100vw - 96px), 90vw',
+			'srcset' => [
+				485,
+				740,
+				970,
+				1200,
+				1480,
+			]
+		]) ?>
 	</figure>
 	<figure class="release-code-box" style="grid-area: blueprint">
 		<?= $section->blueprintConfig()->kt() ?>

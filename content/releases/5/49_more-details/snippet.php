@@ -27,7 +27,7 @@
 	flex-direction: column;
 	gap: var(--spacing-3);
 }
-.v5-design-features h4 {
+.v5-design-features h3 {
 	font-family: var(--font-mono);
 }
 
@@ -46,7 +46,7 @@
 	<?php endif ?>
 
     <?= icon($feature->icon()) ?>
-    <h4><?= $feature->headline()->kti() ?></h4>
+    <h3><?= $feature->headline()->kti() ?></h3>
     <p>
 		<?= $feature->text()->kti() ?>
 		<?= e($link, '&rarr;') ?>
