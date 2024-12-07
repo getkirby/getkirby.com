@@ -122,4 +122,4 @@ panel.plugin("getkirby/custom-file-preview", {
 });
 ```
 
-The `<model-viewer>` element is [from a library](https://modelviewer.dev) that helps to actually display the GLB file. I won't go into the details how to use it exactly (loading external script etc.). You can try the (link: https://github.com/getkirby/sandbox/pull/7 text: full custom file view).
+The `<model-viewer>` element is [from a library](https://modelviewer.dev) that helps to actually display the GLB file. I won't go into the details how to use it exactly (loading external script etc.). You can try the (link: https://github.com/getkirby/sandbox/tree/main/environments/lab/site/plugins/custom-file-preview text: full custom file view).
