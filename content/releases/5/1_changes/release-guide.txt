@@ -32,11 +32,16 @@ content/
 
 ----
 
-Text:
-
-## Versions: Preview your changes
+Intro:
 
 Kirby 5 introduces a part of one of the (link: https://feedback.getkirby.com/135 text: most requested features) on our feedback platform. Editors can now make changes and get a full, rendered preview right from the Panel before they save them. They can share the URL for the preview of the unpublished changes with other editors and people in their team to get feedback.
+
+
+----
+
+Text:
+
+## Changes view
 
 The brand new changes view lets you switch between a comparison mode or a full-width preview of the changed version and the latest published version.
 
@@ -60,12 +65,18 @@ This dropdown will also show more information when the content is locked because
 
 (image: changes-info-dropdown-locked.png class: screenshot-sm)
 
+## Changes dialog
+
 All changes by everyone in the team - not just the current editor - are now listed in the Changes dialog (accessible via the “Changes” menu item in the sidebar) and grouped by type (page, user, file). Now everyone in the team can directly use the dialog to jump to changes by other team members and preview them directly on the fly, even while someone else is still actively working on them.
 
 (image: changes-dialog.png class: screenshot-md)
 
+## Languages dropdown
+
 We’ve also improved the language dropdown to highlight changes in different translations.
 
 (image: languages-dropdown.png class: screenshot-sm)
+
+## Outlook
 
 With all of those features built on top of our new content version architecture, Kirby 5 starts a path to full revision support in the future. We have already laid the foundations and are looking forward to extending the feature set over time.
