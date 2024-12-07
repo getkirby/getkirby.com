@@ -10,7 +10,12 @@
 			<li>
 				<a href="<?= $release->releasePage()->or($release->url()) ?>" class="block mb-1">
 					<header class="mb-3">
-						<h2 class="h2"><?= $release->version() ?></h2>
+						<h2 class="h2">
+							<?= $release->version() ?>
+							<?php if ($release->prerelease()->isNotEmpty()): ?>
+								<span class="color-gray-600">Beta</span>
+							<?php endif ?>
+						</h2>
 					</header>
 
 					<?php if ($cover = $release->cover()->toFile()): ?>
