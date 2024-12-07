@@ -22,7 +22,7 @@ Location: Hornberg, Germany
 
 ----
 
-Summary: Baker's son turned web developer, kneading pixels and code for 15+ years. I specialise in creating websites which are both highly accessible, yet engagingly fun to use.
+Summary: Baker's son turned web developer, crafting websites with precision and creativity. I specialize in creating accessible experiences that stay true to design intentions while ensuring everyone can enjoy them.
 
 ----
 
@@ -47,9 +47,11 @@ Expertise:
 
 Description:
 
-Growing up as a baker's son in Germany, I was exposed to the art of crafting and creating at a young age. Over 15 years ago, I began exploring the world of website design and development, combining my creative flair with effective functionality.
+Growing up in a German bakery, I learned that craftsmanship requires both precision and creativity. Today, I apply these same principles to web development.
 
-In 2013, I discovered Kirby and instantly fell in love. After working at several advertising agencies, I finally dared to take the step into self-employment. In fact, Kirby 2 was the main reason I started freelancing because I was confident that I could build any project with it — no matter how complex.
+I create websites where creativity and accessibility work together. As a certified Kirby Partner, I build individual, easy-to-edit websites that stay true to design intentions. My work focuses on thoughtful interactions while ensuring every user can access and enjoy the experience.
+
+My journey from designer to developer gives me a unique perspective: I understand both the creative vision and the technical requirements needed to bring it to life. This makes me an ideal partner for designers who want their work brought to life exactly as they imagined.
 
 ----
 
