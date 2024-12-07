@@ -76,7 +76,7 @@ Enhancements:
 - New `Kirby\Content\MemoryStorage` [#6457](https://github.com/getkirby/kirby/pull/6457) as well as `Kirby\Content\ImmutableMemoryStorage` to keep outdated model information in memory but avoid any mutations. [#6570](https://github.com/getkirby/kirby/pull/6570)
 - New `Kirby\Content\Translation` class (to eventually replace `Kirby\Content\ContentTranslation`)
 - New `Kirby\Content\Translations` class to provide a more type-safe collection for all translations (returned by `Kirby\Cms\ModelWithContent::translations()`).
-
+- New `Kirby\Content\VersionId::render()` method to atomically set the render version during a render operation
 
 #### View buttons
 - New (class: Kirby\Panel\Panel method: buttons) method that returns all defined buttons from all Panel areas [#6541](https://github.com/getkirby/kirby/pull/6541)
@@ -192,7 +192,8 @@ Bugfixes:
 - The lock state is properly passed to `k-file-preview` components to make sure that file previews can lock their state (e.g. for the focus point for image previews)
 - Fixed badge position in model tabs and improved CSS for button badges in general
 - Fixed background CSS for the `k-progress` component
-
+- Fix PHP error when `null` is passed as model to `$kirby->contentToken()` [#6822](https://github.com/getkirby/kirby/pull/6822)
+- Fixed footer margin in dialogs if the `cancelButton` property is a string or object instead of a boolean. [#6833](https://github.com/getkirby/kirby/pull/6833)
 ----
 
 Breaking:
@@ -231,6 +232,12 @@ Breaking:
 - You can no longer pass a value to `Kirby\Form\Field::isEmpty()` Use `Kirby\Form\Field::isEmptyValue($value)` instead.
 - `Kirby\Form\Form::fields()` does no longer return null but an empty Fields collection if there are no fields.
 - `Kirby\Form\Field::validate()` returns an array of errors instead of void.
+- Passing a single space as value to `Xml::attr()` won't render an empty value anymore but a single space. To render an empty value, please pass an empty string. [#6803](https://github.com/getkirby/kirby/pull/6803)
+- `$kirby->contentToken()` only accepts `object|null` for the `$model` parameter instead of `mixed`. [#6822](https://github.com/getkirby/kirby/pull/6822)
+- Renamed `token` query param for preview URLs to `_token` [#6823](https://github.com/getkirby/kirby/pull/6823)
+- Cache IDs in the pages cache now include a part for the version ID. Currently this is always `.latest`, e.g. `home.latest.html`. [#6827](https://github.com/getkirby/kirby/pull/6827?new_mergebox=true)
+- Removed internal `$page->isVerified()` method in favor of internal `$page->renderVersionFromRequest()` [#6829](https://github.com/getkirby/kirby/pull/6829)
+- Closures defined for the `content.salt` option will no longer receive a model when generating a salt for preview authentication tokens of drafts and versions as those tokens are now only based on the URI. The salt callback instead receives `null`  and is expected to return a fixed model-independent salt in this case. When generating a salt for a file media token, the file object is still passed as model. [#6836](https://github.com/getkirby/kirby/pull/6836)
 
 ## Panel
 
