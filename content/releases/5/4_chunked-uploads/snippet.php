@@ -25,6 +25,6 @@
 
 
 	<div class="v5-uploads-teaser release-text-box" style="grid-area: teaser">
-		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
+		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 </div>

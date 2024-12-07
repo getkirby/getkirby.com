@@ -5,7 +5,7 @@
 		</video>
 	</figure>
 	<div class="release-text-box" style="--span: 2">
-		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
+		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-code-box text-lg" style="--span: 3">
 		<?= $section->class()->kt() ?>

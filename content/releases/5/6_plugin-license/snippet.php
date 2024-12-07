@@ -21,7 +21,7 @@
 
 <div class="v5-plugin-license">
 	<div class="release-text-box" style="grid-area: teaser">
-		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
+		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-code-box" style="grid-area: plugin">
 		<?= $section->plugin()->kt() ?>

@@ -10,4 +10,4 @@ Text: We are currently working on Kirby 4. Here's everything you need to know ab
 
 ----
 
-Link: releases/4.0
+Link: releases/4

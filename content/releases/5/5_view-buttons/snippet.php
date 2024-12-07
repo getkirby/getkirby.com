@@ -33,7 +33,7 @@
 
 <div class="v5-view-buttons">
 	<div class="release-text-box" style="grid-area: teaser">
-		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
+		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-box bg-light" style="grid-area: buttons">
 		<?= $section->image('buttons.png') ?>

@@ -192,7 +192,7 @@ return [
 			'3.10.1.1',
 		]
 	],
-	'4.0' => [
+	'4' => [
 		'title'       => 'Kirby 4.0',
 		'hasDocs'     => true,
 		'mainVersion' => '4',

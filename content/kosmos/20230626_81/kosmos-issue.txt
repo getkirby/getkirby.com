@@ -29,7 +29,7 @@ While we are working hard on the next big Kirby 4 release [(Kirby 4 Alpha
 
 ## Summer Sale: Save 20% on all licenses
 
-Summer is here and so is our sale. From today until July 9th, 2023, you get a 20% discount on all our Kirby licenses, including volume packages. All licenses you buy now are valid for [Kirby 4](https://getkirby.com/releases/4.0), planned to be released in late summer.
+Summer is here and so is our sale. From today until July 9th, 2023, you get a 20% discount on all our Kirby licenses, including volume packages. All licenses you buy now are valid for [Kirby 4](https://getkirby.com/releases/4), planned to be released in late summer.
 
 [Buy your license(s) now!](https://getkirby.com/buy)
 

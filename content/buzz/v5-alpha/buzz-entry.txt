@@ -48,7 +48,7 @@ We recommend to not use this alpha version in a production project.
 
 === What to expect?
 
-As we have (link: releases/4.0#versioning text: switched to a new versioning scheme) with Kirby 4, the next major release of Kirby will be v5 and is expected for the beginning of 2025. v5 behaves to v4 a lot more than e.g. 3.8 to 3.7. It won't be such a massive step as v3 to v4 and therefore even easier to upgrade.
+As we have (link: releases/4#versioning text: switched to a new versioning scheme) with Kirby 4, the next major release of Kirby will be v5 and is expected for the beginning of 2025. v5 behaves to v4 a lot more than e.g. 3.8 to 3.7. It won't be such a massive step as v3 to v4 and therefore even easier to upgrade.
 
 We are sharing a the latest alpha with you. But please treat it for what it is: an alpha state. This means that this version is far from complete. More features will be added over the next few months, and other parts will change again.
 

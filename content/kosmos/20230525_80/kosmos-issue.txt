@@ -197,7 +197,7 @@ The larger your website, the more important becomes search. With Kirby's new sea
 
 There are so many new features, we cannot list them all here. For a full list of all new features and enhancement, visit our release page.
 
-[Learn more about Kirby 4](https://getkirby.com/releases/4.0)
+[Learn more about Kirby 4](https://getkirby.com/releases/4)
 
 
 ## Kirby plugins

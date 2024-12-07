@@ -29,7 +29,7 @@
 		</video>
 	</figure>
 	<div class="release-text-box" style="grid-area: teaser">
-		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
+		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-box bg-light" style="grid-area: dropdown">
 		<?= $section->image('changes-info-dropdown.png')->resize(700) ?>

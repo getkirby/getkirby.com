@@ -69,7 +69,7 @@
 				<?= $section->image('dark-mode-2.webp')->resize(1400) ?>
 			</figure>
 			<div class="v5-dark-mode-teaser release-text-box" style="grid-area: teaser">
-				<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
+				<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 			</div>
 			<figure class="release-box" style="grid-area: dropdown">
 				<?= $section->image('dark-mode-dropdown.webp')->resize(700) ?>
