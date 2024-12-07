@@ -1,4 +1,4 @@
-Title: A version of your changes
+Title: Preview your changes
 ----
 
 Subtitle: A whole new editing UX

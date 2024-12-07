@@ -1,6 +1,6 @@
-title: Kirby 5 – Beta
+title: Kirby 5
 ----
-Subtitle: Time for changes
+Subtitle: Beta
 ----
 Version: 5
 ----
