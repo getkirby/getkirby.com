@@ -10,6 +10,10 @@ Intro: Get a glimpse into the future at Kirby's next major release.
 
 ----
 
+Link: /releases/5
+
+----
+
 Cta:
 
 -

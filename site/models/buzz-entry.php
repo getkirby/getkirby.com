@@ -18,9 +18,8 @@ class BuzzEntryPage extends DefaultPage
 
 	public function isExternalLink(): bool
 	{
-		return
-			($url = $this->link()->toUrl()) &&
-			Str::startsWith($url, $this->site()->url()) === false;
+		$url = $this->link()->toUrl();
+		return $url && Str::startsWith($url, $this->site()->url()) === false;
 	}
 
 	public function metadata(): array

@@ -7,7 +7,10 @@
 
 	<div class="auto-fill mb-36" style="--min: 20rem; --gap: var(--spacing-12)">
 		<?php foreach ($entries = $page->children()->listed()->flip() as $entry): ?>
-			<?php snippet('templates/buzz/entry', ['entry' => $entry, 'lazy' => $entries->indexOf($entry) > 2]) ?>
+			<?php snippet('templates/buzz/entry', [
+				'entry' => $entry,
+				'lazy'  => $entries->indexOf($entry) > 2
+			]) ?>
 		<?php endforeach ?>
 	</div>
 
