@@ -23,7 +23,7 @@
 
 <?php snippet('templates/releases/get-started', slots: true) ?>
 <p class="text-lg text-center mb-12">
-	Kirby 5 is a <strong>free upgrade</strong> for anyone with a <a href="/buy" class="link">valid Kirby Basic or Enterprise license</a>.
+	Kirby 5 is a <strong>free upgrade</strong> for everyone with a <a href="/buy" class="link">valid Kirby Basic or Enterprise license</a>.
 </p>
 <?php endsnippet() ?>
 
