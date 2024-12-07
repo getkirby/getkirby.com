@@ -36,7 +36,7 @@
 		<?php snippet('templates/release-40/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-box bg-light" style="grid-area: buttons">
-		<?= $section->image('buttons.png')->resize(700) ?>
+		<?= $section->image('buttons.png') ?>
 	</figure>
 	<figure class="release-code-box" style="grid-area: blueprint">
 		<?= $section->blueprintConfig()->kt() ?>
