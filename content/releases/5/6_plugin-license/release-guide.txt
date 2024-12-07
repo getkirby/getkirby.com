@@ -15,11 +15,11 @@ Plugin:
 
 ```php
 App::plugin(
-  name: 'my/plugin',
+  name: 'plugin-factory/plugin-a',
   extends: [...],
   license: [
-    'name' => 'Custom license',
-    'link' => '<https://mylicenseshop.com>',
+    'name' => 'Custom proprietary license',
+    'link' => 'https://mylicenseshop.com',
     'status' => 'active',
   ]
 );
