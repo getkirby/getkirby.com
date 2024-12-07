@@ -143,6 +143,7 @@ Enhancements:
 - Sections: improved title and info wrapping [#6447](https://github.com/getkirby/kirby/pull/6447)
 - New icons: `asterisk`, `collapse-horizontal`, `expand-horizontal`, `layout-columns`, `layout-right`, `layout-left`, `window`
 - The fields section now passes all values on input of any field instead of updating just the one field (similar to on submit) [#6517](https://github.com/getkirby/kirby/pull/6517)
+- Improved contrast for some theme colors (e.g. `aqua-icon` theme)
 
 #### Components
 - New `badge` prop for `<k-button>` (value: `{ text, theme }`) [#6755](https://github.com/getkirby/kirby/pull/6755)
