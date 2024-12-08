@@ -7,7 +7,7 @@ Subtitle: A whole new editing UX
 
 Teaser:
 
-Kirby 5 redefines collaboration with powerful new preview and change-tracking tools. Editors can now see fully rendered previews of their changes before saving and share preview links with their team for instant feedback.
+Kirby 5 redefines collaboration with powerful new preview and change-tracking tools. Editors can now see fully rendered previews of their changes before saving, and share preview links with their team for instant feedback.
 
 The new preview view offers side-by-side comparisons or full-width previews of unsaved changes vs. published content. Now, it's easy to track all edits shared with the whole team through the “Changes” dialog. All enabled by storing changes now directly on the server instead of your local browser.
 

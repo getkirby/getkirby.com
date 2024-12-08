@@ -21,7 +21,7 @@ Features:
   icon: database
 	headline: Redis cache
 	text: >
-		A brand new cache driver for one of the most used cache types: connect to your Redis server out of the box.
+		A brand-new cache driver for one of the most used cache types: connect to your Redis server out of the box.
 	link: "/releases/5/more-details#first-day-of-the-week__redis-cache-driver"
 -
   icon: lock
