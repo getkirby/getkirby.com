@@ -12,12 +12,12 @@ Default parameters:
 
 ## Examples
 
-In this example, we make a GET request to the free placekitten API, and write the content of the requested image to file:
+In this example, we make a GET request to the picsum API, and write the content of the requested image to file:
 
 ```php
 <?php
 $targetPage = page('home');
-$response    = Remote::get('http://placekitten.com/200/300');
+$response    = Remote::get('https://picsum.photos/200/300');
 if ($response->code() === 200) {
 	F::write($targetPage->root() . '/kitten.jpg', $response->content());
 }

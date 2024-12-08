@@ -4,7 +4,7 @@ Text:
 
 ```php
 <?php
-$response = Remote::get('http://placekitten.com/200/300');
+$response = Remote::get('https://picsum.photos/200/300');
 
 // Do stuff depending on http code
 // Codes and how you want to handle them depends on the API you are querying
