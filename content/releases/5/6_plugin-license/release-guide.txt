@@ -7,7 +7,7 @@ Subtitle: Your custom license in the Panel
 
 Teaser:
 
-Kirby 5 empowers plugin developers to better manage and display their license. Add custom license details, link to your license shop or even fully implement your license validation—everything is integrated into the plugins table for seamless handling.
+Kirby 5 empowers plugin developers to better manage and display their licenses. Add custom license details, link to your license shop or even implement full license validation—everything is integrated into the plugins table for seamless handling.
 
 ----
 

@@ -7,7 +7,7 @@ Subtitle: Customization at your fingertips
 
 Teaser:
 
-Kirby 5 gives developers more control with custom view buttons in the Panel. Add tailored options alongside defaults like preview and settings, enhancing workflows for pages, files, users, and more.
+Kirby 5 gives developers more control with custom view buttons in the Panel. Add tailored options alongside defaults like preview and settings, and improve workflows for pages, files, users, and more.
 
 ----
 
