@@ -1,0 +1,135 @@
+Title: Kosmos Episode 90
+
+----
+
+Date: 18.06.2024
+
+----
+
+Tags:
+
+----
+
+Comments: off
+
+----
+
+Kosmos-Subscription: on
+
+----
+
+
+Text:
+
+
+In our part of the world, summer hasn't really started yet, at least the temperatures haven't risen above 30 degrees Celsius yet. Good for people like me, who feel most comfortable in temperatures between 20 and a maximum of 25 degrees.
+
+
+Nevertheless, we have some hot news for you in this issue, and it's not just about the sales...
+
+
+## Summer deal: Save 20% on all new licenses
+
+Start into the holidays with our special deal: From today until July 2nd, 2024, save 20% on all new Kirby licenses (Basic, Enterprise and volume packages).
+
+[Get your license(s) now!](https://getkirby.com/buy)
+
+
+
+## Kirby 5 alpha
+
+
+(image: cover.png link: https://getkirby.com/buzz/v5-alpha)
+
+Today we are sharing the very first alpha version of our new major version, Kirby 5 with you. As an alpha, this version is **far from complete** yet, so **things will still change**, and we will also **add new features** until the release at the end of this year.
+
+Here is an overview of the very first new features:
+
+### Dark mode: turn off the lights
+
+The most notable change is a dark mode for the Panel, a feature requested by many of you. Users can now activate a dark theme for the Panel from their account view.
+
+(image: dark-mode1.png)
+
+### More features
+
+*   Custom view button extension for the Panel header
+
+*   Improved support for IDE autocompletion
+*   The \`default\` prop of radio and select fields now supports Kirby queries
+*   \`site\` controller data will now always be merged as default data with data from page template specific controllers
+*   …
+
+Check out our [blog article](https://getkirby.com/buzz/v5-alpha) which summarizes all current features, enhancement, and breaking changes.
+
+And [download](https://github.com/getkirby/kirby/archive/refs/tags/5.0.0-alpha.1.zip) the Kirby 5 alpha for testing and playing around.
+
+As always, we are looking forward to your feedback to fix any issues.
+
+
+
+## Kirby 4.3.0 is here
+
+Next to our work on Kirby 5, we continue with minor releases for Kirby 4.
+
+Last week, we released Kirby 4.3.0 with quite useful new features, enhancements and fixes, for example:
+
+*   The system view now has a button to copy relevant system information.
+*   We removed the hard-coded restriction of supported servers, so no additional settings needed anymore if you are not on Apache or nginx.
+*   The plugin registration now accepts named arguments that are merged with info from composer.json, so you can set the version number in the plugin definition.
+
+Check out the full changelog under: [https://github.com/getkirby/kirby/releases/tag/4.3.0](https://github.com/getkirby/kirby/releases/tag/4.3.0)
+
+
+
+## Kirby plugins
+
+The new [Kirby CSV field plugin](https://github.com/distantnative/kirby-csv-field) provides a Panel field to upload and display a single CSV file.
+
+
+[Kirby Policy](https://plugins.getkirby.com/beebmx/policy) allows you to show different fields in the Panel, depending on user role.
+
+
+
+## Kirby in the wild
+
+
+(image: poweredbyroots.png)
+
+[Roots](https://poweredbyroots.org/)
+
+
+
+## Kirby learning
+
+Basti recorded a new screencast about [Routing](https://www.youtube.com/embed/5u7IF2j8UZ0): Learn how to use Kirby's built-in router to create custom routes for redirects, stable URLs, short links, custom API endpoints or even full virtual pages.
+
+
+
+## This & That
+
+
+Chris Coyier and Michelle Barker look into using the Popover API for tooltips:[](https://frontendmasters.com/blog/using-the-popover-api-for-html-tooltips/)
+
+*   [Using the Popover API](https://frontendmasters.com/blog/using-the-popover-api-for-html-tooltips/) for tooltips
+*   [Progressively Enhanced Popover Toggletips](https://css-irl.info/progressively-enhanced-popover-toggletips/)
+
+
+
+[Baseline progressive enhancement](https://adactio.com/journal/21128): Current Baseline doesn't indicate if a feature can be used as progressive enhancement, or if it can break your site in browsers that don't support it.
+
+Ahmad Shadeed shows how he applied the [CSS cap unit](https://ishadeed.com/article/css-cap-unit/) to solve a design alignment problem.
+
+"Avoid excessive DOM size" is a warning you might have seen in Lighthouse reports. Large DOM sizes can negatively affect the user experience. But there is a second interesting parameter, Maximum DOM Depth, that Maxi Ferreira looks into in [How deep is your DOM](https://frontendatscale.com/blog/how-deep-is-your-dom/).
+
+Joachim Viide explains [why your API shouldn't redirect from http to https](https://jviide.iki.fi/http-redirects).
+
+If you use Algolia to power your site's search, then using their recommendations feature might be interesting to find related content, for example, related articles. Raymond Camden's [article looks into this feature.](https://www.raymondcamden.com/2024/05/27/adding-recommendations-to-my-blog-with-algolia)
+
+
+[Piko](https://github.com/andydunstall/piko) is an open-source alternative to Ngrok, designed to serve production traffic and be simple to host.
+
+[How to commit like a pro](https://dev.to/andrews1022/git-commit-m-is-a-lie-how-to-commit-like-a-pro-l1) provides some tips and tricks how to writer better commit messages, especially if your commits are supposed to be reviewed by your team mates.
+
+[Ophiuchi](https://github.com/apilylabs/ophiuchi-desktop) is an open-source local HTTPS proxy server using Docker as backend that allows you to set up SSL for localhost environments quickly.
+

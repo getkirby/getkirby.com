@@ -1,0 +1,192 @@
+Title: Kosmos Episode 91
+
+----
+
+Date: 23.09.2024
+
+----
+
+Tags:
+
+----
+
+Comments: off
+
+----
+
+Kosmos-Subscription: on
+
+----
+
+
+Text:
+
+Sonja is currently on vacation and we are filling in for her, so please bear with us if the tone of this Kosmos issue sounds a bit different 😊.
+
+## Autumn sale
+
+Kirby is currently on sale until October 7th. Use the chance and save 20% on all licenses, including our volume packages. [https://getkirby.com/buy](https://getkirby.com/buy)
+
+## Releases
+
+We are returning from the ominous “summer hole” with a bunch of releases:
+
+### Kirby 4.4
+
+[Kirby 4.4](https://github.com/getkirby/kirby/releases/tag/4.4.0) comes with tons of new enhancements and bug fixes.
+
+Unfortunately, we also managed to sneak in a few smaller bugs and there’s already a [patch release](https://github.com/getkirby/kirby/releases/tag/4.4.1) available for those.
+
+### Kirby 5.0.0-alpha.3
+
+While Kirby 5 is still months away, we want to make development as public as possible and get you involved early. Today we are releasing [Kirby 5.0.0-alpha.3](https://github.com/getkirby/kirby/releases/tag/5.0.0-alpha.3), which brings custom file previews, a configurable first day of the week, and many other improvements. This release is rough around the edges and far from complete. Don't use it in production.
+
+### KQL 2.2.0
+
+Our Kirby Query Language plugin is a fantastic way to use Kirby as a headless CMS. We released [KQL 2.2.0](https://github.com/getkirby/kql/releases/tag/2.2.0) a few weeks ago and it now fully supports PHP 8.3 (but drops support for PHP 8.0).
+
+
+
+## New plugins
+
+
+We are really excited to welcome a few fantastic new plugins to our plugin directory …
+
+*   [Index Block](https://plugins.getkirby.com/swiegmann/index-block)
+*   [Typo and Paste](https://plugins.getkirby.com/philippoehrlein/typo-and-paste)
+*   [Photo Stats](https://plugins.getkirby.com/florianziegler/photo-stats)
+*   [Field Composer](https://plugins.getkirby.com/trych/field-composer)
+*   [Courier](https://plugins.getkirby.com/beebmx/courier)
+*   [Khulan Kirby MongoDB](https://plugins.getkirby.com/bnomei/khulan-kirby-mongodb)
+
+*   [Panel Buttons](https://plugins.getkirby.com/jakub-pelak/panel-buttons)
+*   [Middleware](https://plugins.getkirby.com/beebmx/middleware)
+*   [Patrol](https://plugins.getkirby.com/beebmx/patrol)
+*   [Devkit](https://plugins.getkirby.com/animaux/devkit)
+*   [Content Translator](https://plugins.getkirby.com/johannschopplich/content-translator)
+
+
+## Meetups
+
+
+The meetup wave this year is really blowing us away and it just keeps on coming.
+
+### Upcoming meetups
+
+*   [Kirby Meetup Karlsruhe • №1](https://kirby-ka.carrd.co/)  
+    Thu, October 10, 2024 at 19:00 GMT+2
+*   [Kirby Meetup Düsseldorf • №2](https://www.meetup.com/kirby-community-nrw/events/302570495/?eventOrigin=group_events_list)  
+    Tue, October 8, 2024 at 18:00 GMT+2
+*   [Kirby Meetup Bremen • №2](https://bremen.design/event/kirby-get-together-2)  
+    Thu, September 26, 2024 at 18:00 GMT+2
+
+### Recent meetups
+
+
+*   [Kirby Meetup Berlin • №4 11 • Sep 2024](https://discord.com/channels/525634039965679616/761500420509925396/1283787123123683358)  
+    The community in Berlin managed to already host 4 meetups this year 🤯 Felix wrote a really nice little [wrap up post on Discord](https://discord.com/channels/525634039965679616/761500420509925396/1283787123123683358) about the latest issue. More meetups will follow. Stay tuned for updates.
+
+*   [Kirby Meetup Mainz • №1 • 31 Jul 2024](https://www.linkedin.com/posts/3st-kommunikation_kirby-x-3st-activity-7231298877507710976-eWL7/)
+
+    The nice folks from 3st digital hosted the first community meetup in Mainz. Sonja and Bastian joined a really lovely crowd who shared their experience, building projects with Kirby. [Read more about the evening on LinkedIn.](https://www.linkedin.com/posts/3st-kommunikation_kirby-x-3st-activity-7231298877507710976-eWL7/)
+
+### List of past events
+
+The meetups are really bringing the community closer together, and we wanted to remember the past ones in a good way. There’s now a new list of past events on [our “Meet” page](https://getkirby.com/meet). If you managed to take pictures at one of the meetups, please let us know. We’d love to keep those moments well documented and extend our gallery.
+
+## Podcasts
+Alex & Dominik from the (German) [devslove.it](http://devslove.it/) podcast invited Georg Obermayr to their show. You may remember Georg from the infamous [Stay Curious](https://www.youtube.com/watch?v=-zrgqExDS68) webinar years ago where he talked about the mindblowing headless setup that he built.
+
+Together they recorded three really interesting episodes talking about Kirby and content management in general. The episodes turned out great and are well worth your time.
+
+1.  [Content Modelling & klarer CMS-Aufbau](https://rss.com/podcasts/devslove-it-der-podcast/1600171/)
+2.  [Speed Snack](https://rss.com/podcasts/devslove-it-der-podcast/1600172/)
+3.  [Warum die Community für ein CMS wichtig ist](https://rss.com/podcasts/devslove-it-der-podcast/1600173/)
+
+
+## Made with Kirby
+
+(image: 1-made-with-kirby.png)
+
+Bruno has launched a brand new directory of sites, built with Kirby: [builtwithkirby.com](https://builtwithkirby.com/) for his new [Performance Audit Service](https://audit.bnomei.com/).
+
+Together with Thomas’ [Kirby Sites](https://kirbysites.com/) project and our own [showcase](https://getkirby.com/love) there are now three fantastic ways to get inspired by all your wonderful Kirby sites out there.
+
+## New themes
+
+While Kirby isn’t your typical theme-oriented CMS, there are a bunch of [fantastic theme options](https://getkirby.com/themes) available. Jakub Pelák has recently updated his great Tablook and Tablog themes. Be sure to check them out:
+
+*   [Tablook](https://www.tablo.me/themes/tablook)
+*   [Tablog](https://www.tablo.me/themes/tablog)
+
+## Articles
+
+*   Conrad Dreyer has collected [4 time-saving code blocks for effective work with Kirby](https://conraddreyer.com/blog/4-time-saving-code-blocks-for-effective-work-with-kirby-cms).
+*   [“11ty but dynamic and powered by PHP”](https://gomakethings.com/a-modern-cms/) Chris Ferdinandi shares his first impressions of Kirby on his blog.
+*   Matt Stein built his own little self-hosted PaaS with [Coolify](https://coolify.io/). He shares his installation steps together with some really useful tips [how to get Kirby up and running with this setup](https://mattstein.com/thoughts/diving-into-coolify/).
+*   Dominic Pratt migrated from Wordpress to Kirby and has [posted about his experience](https://pratt.de/blog/wordpress-to-kirby) with the migration (German).
+*   Zentral Norden wrote a [lovely little post](https://www.zentralnorden.com/de/blog/kirby-unser-neues-lieblings-cms), why they choose Kirby (German).
+
+
+
+## Kirby is made for …
+
+Need to convince your customers that Kirby is the right tool for them? We help you with our new "Kirby for..." pages, which highlight Kirby's versatility and features for a particular type of project. We've started with three types of projects and will be adding more over time.
+
+<div class="columns mb-12" style="--columns: 3">
+<div>
+(image: scenario-event.webp)
+(link: https://getkirby.com/for/events text: For events)
+
+</div>
+
+<div>
+
+(image: scenario-education.webp)
+(link: https://getkirby.com/for/education text: For education)
+</div>
+
+<div>
+
+(image: scenario-hospitality.webp)
+(link: https://getkirby.com/for/hospitality text: For hospitality)
+
+</div>
+</div>
+
+
+## Certified partners
+
+We truly believe that our partner program is all about building a strong network of reliable agencies and freelancers for Kirby. Starting today, we will be highlighting three of our certified partners in each issue. Let's start with …
+
+<div class="columns mb-12" style="--columns: 3">
+<div>
+(image: estd.png)
+(link: https://estd.dev text: ESTD)
+
+</div>
+
+<div>
+
+(image: helllicht.jpg)
+(link: https://helllicht.com/ text: Helllicht)
+</div>
+
+<div>
+
+(image: wyler.jpg)
+(link: https://matthiaswyler.com/ text: Matthias Wyler)
+
+</div>
+</div>
+[![](https://d15k2d11r6t6rl.cloudfront.net/pub/n5cd/uuv5sr8u/pn0/y56/3kw/estd.png)](https://estd.dev/)
+
+If you would like to join our partner network, please submit your application using our [new application form](https://getkirby.com/partners/join).
+
+
+## Tools
+
+The indie developer community needs to stick together and today we want to send you a recommendation for a fantastic little invoicing tool called [CakeDesk](https://cakedesk.app/). We know of a number of freelancers in our community who are happy CakeDesk users. The biggest selling point is probably the HTML based template system for invoices. Be sure to check it out if you are in the market for a new invoicing tool.
+
+
+
