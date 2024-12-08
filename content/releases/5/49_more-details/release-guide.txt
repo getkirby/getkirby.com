@@ -22,7 +22,7 @@ Features:
 	headline: Redis cache
 	text: >
 		A brand-new cache driver for one of the most used cache types: connect to your Redis server out of the box.
-	link: "/releases/5/more-details#first-day-of-the-week__redis-cache-driver"
+	link: "/releases/5/more-details#redis-cache-driver"
 -
   icon: lock
 	headline: `files.sort` permission
@@ -34,7 +34,7 @@ Features:
 -
   icon: save
 	headline: Improved UUID handling
-	text: When duplicating pages, references to files or children pages that also were duplicated are now updated correctly.
+	text: When duplicating pages, references to files or children pages that were also duplicated are now updated correctly.
 	link: "/releases/5/more-details#improved-uuid-handling"
 -
   icon: menu

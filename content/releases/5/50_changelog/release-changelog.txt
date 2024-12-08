@@ -60,7 +60,7 @@ Enhancements:
   $changes->users();
   ```
 
-- New default `changes` cache, which is active by default. This cache is internally used to store all changes that have not been published yet. You can change the cache settings in your config:
+- New default `changes` cache, which is active by default. This cache is internally used to keep track of all models with changes that have not been published yet. You can change the cache settings in your config:
 
   ```php
   // /site/config/config.php
@@ -81,7 +81,7 @@ Enhancements:
 #### View buttons
 - New (class: Kirby\Panel\Panel method: buttons) method that returns all defined buttons from all Panel areas [#6541](https://github.com/getkirby/kirby/pull/6541)
 - New `Kirby\Panel\Ui` namespace with basic `Kirby\Panel\Ui\Component` and `Kirby\Panel\Ui\Button` classes [#6539](https://github.com/getkirby/kirby/pull/6539). Each component renders as an array with a `component`, unique `key` and `props` entries
-- New `Kirby\Panel\Ui\Buttons\ViewButtons` and `Kirby\Panel\Ui\Buttons\ViewButton` classes [#6542](https://github.com/getkirby/kirby/pull/6542) responsible for gathering and transforming view buttons configured in blueprints, config files and/or Panel areas
+- New `Kirby\Panel\Ui\Buttons\ViewButtons` and `Kirby\Panel\Ui\Buttons\ViewButton` classes [#6542](https://github.com/getkirby/kirby/pull/6542), responsible for gathering and transforming view buttons configured in blueprints, config files and/or Panel areas
 - New classes for core view buttons [#6545](https://github.com/getkirby/kirby/pull/6545): `Kirby\Panel\Ui\LanguagesDropdown` and `Kirby\Panel\Ui\PreviewDropdownButton`.
 
 
@@ -95,7 +95,7 @@ Enhancements:
   $data = Data::decode($brokenData, type: 'json', fail: false);
   ```
 
-- New `$pretty` argument for `Json::encode()`
+- New `$pretty` argument for `Json::encode()`:
 
   ```php
   use Kirby\Data\Json;
@@ -103,7 +103,7 @@ Enhancements:
   $prettyJson = Json::encode($data, pretty: true);
   ```
 
-- UUIDs are fully lowercased now to avoid issues between filesystems handling casing differently [#6566](https://github.com/getkirby/kirby/pull/6566)
+- New UUIDs are fully lowercased now to avoid issues between filesystems handling casing differently [#6566](https://github.com/getkirby/kirby/pull/6566)
 
 #### Languages
 - New (class: Kirby\Cms\Language method: ensure) and (class: Kirby\Cms\Languages method: ensure)  methods to get language(s) objects even in single-language mode. Note that these methods are marked as internal and may be changed in a future version. [#6483](https://github.com/getkirby/kirby/pull/6483)
@@ -157,7 +157,7 @@ Enhancements:
 - `<k-dropdown-content>` exposes `items` in scoped default slot and  has new `item` scoped slot
 
 #### Events
-- `beforeunload` is now available as a global event, which you can listen to
+- `beforeunload` is now available as a global event, which you can listen to:
 	```php
   this.$panel.events.on("beforeunload", () => {
     // do something before the window/tab closes.
@@ -167,7 +167,7 @@ Enhancements:
 #### Helpers
 - New `this.$helper.throttle` JS helper [#6708](https://github.com/getkirby/kirby/pull/6708)
 - New `options` argument for `this.$helper.debounce` JS helper to control leading/trailing behavior [#6708](https://github.com/getkirby/kirby/pull/6708)
-- New `clipboard.write`  event, which can be triggered globally to write something to the clipboard. This is especially useful if you want to fire a copy event from the backend (e.g. from a dropdown option)
+- New `clipboard.write`  event, which can be triggered globally to write something to the clipboard. This is especially useful if you want to fire a copy event from the backend (e.g. from a dropdown option):
 	```php
   this.$panel.events.emit("clipboard.write", "Add me to the clipboard");
 	```
@@ -199,8 +199,10 @@ Bugfixes:
 
 Breaking:
 
+## Requirements
+
 - Kirby 5 requires at least PHP 8.2
-- Kirby 5 raises browser version requirements for the Panel
+- Kirby 5 raises browser version requirements for the Panel:
   - Safari 16+
   - Mobile Safari 16+
   - Android Browser 126+
@@ -221,7 +223,7 @@ Breaking:
 - All content storage methods must now use the `VersionId` instead of a simple string. [#6436](https://github.com/getkirby/kirby/pull/6436)
 - All methods in `*Rules` classes are now marked to return void instead of a boolean [#6660](https://github.com/getkirby/kirby/pull/6660)
 - `signature` is longer available as field property when loading fields from the Panel backend [#6712](https://github.com/getkirby/kirby/pull/6712)
-- `Kirby\Plugin\Plugin::license()` now returns the License object instead of a simple string
+- `Kirby\Plugin\Plugin::license()` now returns the `License` object instead of a simple string
 - `Kirby\Plugin\Plugin::toArray()` includes the full license info as child array instead of a string
 - `ModelWithContent::version()` is now a reserved keyword. If you've used a field with this name, you need to use `$model->content()->get('version')` instead to work with the field.
 - `ModelWithContent::lock()` will now always return a `Kirby\Content\Lock` object, even if the model is not currently locked. You can check for that case with `ModelWithContent::lock()->isLocked()`
@@ -231,7 +233,7 @@ Breaking:
 - `Kirby\Form\Field::$formFields` has been renamed to `Kirby\Form\Field::$siblings`
 - The `$formField` argument in `Kirby\Form\Field::factory()` has been renamed to `$siblings`
 - You can no longer pass a value to `Kirby\Form\Field::isEmpty()` Use `Kirby\Form\Field::isEmptyValue($value)` instead.
-- `Kirby\Form\Form::fields()` does no longer return null but an empty Fields collection if there are no fields.
+- `Kirby\Form\Form::fields()` does no longer return null but an empty `Fields` collection if there are no fields.
 - `Kirby\Form\Field::validate()` returns an array of errors instead of void.
 - Passing a single space as value to `Xml::attr()` won't render an empty value anymore but a single space. To render an empty value, please pass an empty string. [#6803](https://github.com/getkirby/kirby/pull/6803)
 - `$kirby->contentToken()` only accepts `object|null` for the `$model` parameter instead of `mixed`. [#6822](https://github.com/getkirby/kirby/pull/6822)
@@ -367,7 +369,7 @@ Deprecated:
 ## Core
 
 - Exception classes: passing $arg array will be removed in a future version. Use named arguments. [#6618](https://github.com/getkirby/kirby/pull/6618)
- `Kirby\Cms\Plugin` is deprecated. Use `Kirby\Plugin\Plugin` instead
+- `Kirby\Cms\Plugin` is deprecated. Use `Kirby\Plugin\Plugin` instead
 - `Kirby\Cms\PluginAsset` is deprecated. Use `Kirby\Plugin\Asset` instead
 - `Kirby\Cms\PluginAssets` is deprecated. Use `Kirby\Plugin\Assets` instead
 - `Kirby\Form\Field::formFields()` is deprecated. Use `::siblings()` instead

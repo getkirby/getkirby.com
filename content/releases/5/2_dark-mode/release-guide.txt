@@ -28,8 +28,6 @@ Text:
 (image: dark-mode-7.webp)
 (image: dark-mode-8.webp)
 
-We do expect to receive a lot of feedback on this feature over the upcoming weeks and will improve it further in upcoming v5 releases.
-
 ## Enable/disable dark theme
 
 Each Panel user can set their Panel theme from the theme dropdown in the account view: whether to always run that Panel with a light or dark theme - or to follow the OS setting.
