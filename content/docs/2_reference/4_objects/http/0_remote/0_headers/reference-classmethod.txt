@@ -4,29 +4,39 @@ Text:
 
 ```php
 <?php
-$response = Remote::get('http://placekitten.com/200/300');
+$response = Remote::get('https://picsum.photos/200/300');
 
 dump($response->headers());
 
 /** Example dump result
-^ array:16 [▼
-"Date" => "Sun, 16 Apr 2023 14:30:18 GMT"
-"Content-Length" => "9339"
-"Connection" => "keep-alive"
-"Cache-Control" => "public, max-age=86400"
-"Expires" => "Thu, 31 Dec 2020 20:00:00 GMT"
-"Vary" => "User-Agent, Accept-Encoding"
-"Access-Control-Allow-Origin" => "*"
-"Last-Modified" => "Sat, 15 Apr 2023 06:23:28 GMT"
-"CF-Cache-Status" => "HIT"
-"Age" => "33423"
-"Accept-Ranges" => "bytes"
-"Report-To" => "{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=4vZQgs2oxA3eVVzIxTcmlUEIx7YIzwpzV1cfKjATuOXeGaE3Qn%2B1xz4sacdDLaGMzdz3lI46%2Be2FthD%2F%2B4Cww ▶"
-"NEL" => "{"success_fraction":0,"report_to":"cf-nel","max_age":604800}"
-"Server" => "cloudflare"
-"CF-RAY" => "7b8d201da8023663-FRA"
-"alt-svc" => "h3=":443"; ma=86400, h3-29=":443"; ma=86400"
-]
+Array
+(
+	[date] => Sun, 08 Dec 2024 14:51:41 GMT
+	[location] => https://fastly.picsum.photos/id/122/200/300.jpg?hmac=OfQ8cObBgD7BOhMjqNrjqHDjO-rXiNQ4KvSd8QRAuIA
+	[cache-control] => public, max-age=2592000, stale-while-revalidate=60, stale-if-error=43200, immutable
+	[vary] => Origin
+	[cf-cache-status] => DYNAMIC
+	[report-to] => {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=qk209aXgTNMdqTg60OQLoE7MfAak3r5fVnkQIgutWnjv%2BHTfppun9WNEyNmhECjN%2B%2FvqP4MYwrXyl3TM%2FmqXw%2BuJlT0qsx8JM3kBrvItORnL75ik%2FB9HQyThynpfHHo%3D"}],"group":"cf-nel","max_age":604800}
+	[nel] => {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+	[strict-transport-security] => max-age=15552000
+	[x-content-type-options] => nosniff
+	[server] => nginx
+	[cf-ray] => 8eed932c4ac9e532-TXL
+	[alt-svc] => h3=":443"; ma=86400
+	[server-timing] => cfL4;desc="?proto=TCP&rtt=17481&min_rtt=17081&rtt_var=5380&sent=5&recv=8&lost=0&retrans=0&sent_bytes=3407&recv_bytes=755&delivery_rate=148894&cwnd=192&unsent_bytes=0&cid=e9a40de35697703a&ts=77&x=0"
+	[content-type] => image/jpeg
+	[content-disposition] => inline; filename="122-200x300.jpg"
+	[picsum-id] => 122
+	[timing-allow-origin] => *
+	[accept-ranges] => bytes
+	[via] => 1.1 varnish
+	[age] => 1666153
+	[x-served-by] => cache-ams21055-AMS
+	[x-cache] => HIT
+	[x-cache-hits] => 3
+	[x-timer] => S1733669501.064267,VS0,VE0
+	[content-length] => 8346
+)
 */
 ```
 

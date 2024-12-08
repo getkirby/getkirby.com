@@ -40,7 +40,7 @@ You can even use KirbyTags in your templates with the (helper: kirbytag) helper,
 
 ### Extending KirbyText
 
-You'd love to have a special tag for embedding cat pictures from [http://placekitten.com/](http://placekitten.com/) or you need some other tags for your next client project?
+You'd love to have a special tag for embedding pictures from [https://picsum.photos](https://picsum.photos) or you need some other tags for your next client project?
 
 (link: docs/reference/text/kirbytags text: KirbyText is extensible), so you can actually build in all the great features you need.
 
