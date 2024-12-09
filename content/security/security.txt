@@ -217,18 +217,18 @@ Urls:
 {{ releasePages }}:
     changes: https://getkirby.com/releases/{{ version }}
     download: https://github.com/getkirby/kirby/archive/refs/tags/{{ version }}.zip
-    upgrade: https://getkirby.com/releases/{{ latestMajor }}.0
+    upgrade: https://getkirby.com/releases/{{ latestMajor }}
 ">=3.0.0":
     changes: https://github.com/getkirby/kirby/releases/tag/{{ version }}
     download: https://github.com/getkirby/kirby/archive/refs/tags/{{ version }}.zip
-    upgrade: https://getkirby.com/releases/{{ latestMajor }}.0
+    upgrade: https://getkirby.com/releases/{{ latestMajor }}
 2.*:
     changes: https://github.com/getkirby-v2/kirby/releases/tag/{{ version }}
     download: https://github.com/getkirby-v2/kirby/archive/refs/tags/{{ version }}.zip
-    upgrade: https://getkirby.com/releases/{{ latestMajor }}.0
+    upgrade: https://getkirby.com/releases/{{ latestMajor }}
 1.*:
     changes: https://github.com/getkirby-v1/starterkit/releases/tag/{{ version }}
-    upgrade: https://getkirby.com/releases/{{ latestMajor }}.0
+    upgrade: https://getkirby.com/releases/{{ latestMajor }}
 
 ----
 

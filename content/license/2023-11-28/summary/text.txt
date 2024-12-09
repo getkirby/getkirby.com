@@ -16,7 +16,7 @@ Text:
 
 ## New licensing model
 
-Together with Kirby 4, we introduced a new (link: releases/4.0#versioning text: yearly major release schedule) to bring continuity and planning security.
+Together with Kirby 4, we introduced a new (link: releases/4#versioning text: yearly major release schedule) to bring continuity and planning security.
 
 To avoid yearly upgrades or subscriptions, we have decided on a new licensing model that includes **free feature updates for at least three years** from the initial activation of the license. During this time, new major versions are no longer bound to a paid upgrade.
 

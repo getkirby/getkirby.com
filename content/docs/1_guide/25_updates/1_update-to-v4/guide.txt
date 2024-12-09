@@ -2,7 +2,7 @@ Title: Update to Kirby 4
 
 ----
 
-Intro: Learn how to upgrade a Kirby 3 project to (link: releases/4.0 text: Kirby 4).
+Intro: Learn how to upgrade a Kirby 3 project to (link: releases/4 text: Kirby 4).
 
 ----
 
@@ -78,7 +78,7 @@ You can perform the upgrade directly from the Kirby 4 Panel of your site or via 
 
 ## For site developers
 
-This guide highlights some key changes required when upgrading to Kirby 4. There might be further smaller breaking changes affecting your specific project. Please have a look at the (link: releases/4.0/#breaking-changes text: full list of breaking changes).
+This guide highlights some key changes required when upgrading to Kirby 4. There might be further smaller breaking changes affecting your specific project. Please have a look at the (link: releases/4#breaking-changes text: full list of breaking changes).
 
 We try to avoid breaking changes as much as we can. But we also put a lot of effort in keeping our technical debt in Kirby as low as possible. Sometimes such breaking changes are necessary to move forward with a clean code base.
 
@@ -171,7 +171,7 @@ Once your site code and plugins have been updated, you can update Kirby itself. 
 
 ## For plugin developers
 
-This guide highlights some key changes required to add support for Kirby 4 to your plugin and gives you pointers to our new resources for those developing Panel plugins. Please also have a look at the list of (link: releases/4.0/#breaking-changes text: breaking changes) and (link: releases/4.0/#changes-deprecated text: deprecations).
+This guide highlights some key changes required to add support for Kirby 4 to your plugin and gives you pointers to our new resources for those developing Panel plugins. Please also have a look at the list of (link: releases/4#breaking-changes text: breaking changes) and (link: releases/4#changes-deprecated text: deprecations).
 
 We try to avoid breaking changes as much as we can. But we also put a lot of effort in keeping our technical debt in Kirby as low as possible. Sometimes such breaking changes are necessary to move forward with a clean code base.
 

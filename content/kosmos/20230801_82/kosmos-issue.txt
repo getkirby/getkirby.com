@@ -52,7 +52,7 @@ We also provide patch releases for 3.8, 3.7, 3.6 and 3.5:
 With the fifth alpha of Kirby 4, we add the most substantial visual
 changes to Kirby since version 3, with the new sidebar probably being the
 most notable change, but check out all the features of the cool new
-design yourself on our [Kirby 4 release page](https://getkirby.com/releases/4.0).
+design yourself on our [Kirby 4 release page](https://getkirby.com/releases/4).
 
 (image: 1_kirby-4.png)
 

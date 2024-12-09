@@ -1,0 +1,35 @@
+Title: Chunked uploads
+----
+
+Subtitle: Moving the mountain, pebble by pebble
+
+----
+
+Teaser:
+
+Handling large files just got easier in Kirby 5. With chunked uploads, big files are split into smaller pieces and uploaded step by step. Whether it's high-resolution media or other large assets, this feature ensures smoother uploads, even with hefty files.
+
+----
+
+Intro:
+
+Kirby's chunked uploads in the Panel break down big files into smaller parts, uploading them piece by piece, allowing your editors to upload files of any size.
+
+----
+
+Text:
+
+(video: chunked.mp4 controls: true loop: true class: video rounded shadow-xl bg-light)
+
+## Restricting file upload size
+
+Uploads are no longer restricted by the server's `upload_max_filesize` limit but instead uploaded in chunks that are pieced back together on the server.
+
+If you want to keep restricting the upload size to some limits, the file blueprint (link: docs/reference/panel/blueprints/file#accept text: `accept` `maxsize` option) is your friend:
+
+
+```yml "site/blueprints/files/cover.yml"
+accept:
+  maxsize: 500000
+```
+

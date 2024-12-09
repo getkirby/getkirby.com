@@ -1,0 +1,82 @@
+Title: Preview your changes
+----
+
+Subtitle: A whole new editing experience
+
+----
+
+Teaser:
+
+Kirby 5 redefines collaboration with powerful new preview and change-tracking tools. Editors can now see fully rendered previews of content changes before saving, even if the changes were made by another user. Sharing the preview links with their team or externals for instant feedback is a breeze.
+
+The new preview view offers side-by-side comparisons or full-width previews of unsaved changes vs. published content. Now, it's easy to track all edits shared with the whole team through the “Changes” dialog. All enabled by storing changes directly on the server instead of your local browser.
+
+Plus, the enhanced form controls dropdown provides status updates, including when content is locked by another editor, keeping everyone on the same page.
+
+----
+
+Filesystem:
+
+```filesystem
+content/
+  1_reflections-on-humanity/
+    _changes/
+      note.txt
+      photo.jpg.txt
+    note.txt
+    photo.jpg
+    photo.jpg.txt
+  2_portfolio/
+    projects.txt
+```
+
+----
+
+Intro:
+
+Kirby 5 introduces a part of one of the (link: https://feedback.getkirby.com/135 text: most requested features) on our feedback platform. Editors can now make changes and get a full, rendered preview right from the Panel before they save them. They can share the URL for the preview of the unpublished changes with other editors and people in their team to get feedback.
+
+
+----
+
+Text:
+
+## Changes view
+
+The brand new changes view lets you switch between a comparison mode or a full-width preview of the changed version and the latest published version.
+
+(video: changes.mp4 controls: true class: video rounded shadow-xl bg-light)
+
+The new preview view for pages and the site is located at `/panel/pages/(:any)/changes/(changes|latest|compare)` and `/panel/site/changes/(changes|latest|compare)`.
+
+It can be accessed with the new preview dropdown for the site and pages.
+
+(image: preview-dropdown.png class: screenshot-sm)
+
+… or through the page context menu …
+
+(image: page-menu.png class: screenshot-sm)
+
+Get more details about the changes for the current page, file or user, by accessing the new info dropdown next to the form buttons:
+
+(image: changes-info-dropdown.png class: screenshot-sm)
+
+This dropdown will also show more information when the content is locked because another editor is currently working on it.
+
+(image: changes-info-dropdown-locked.png class: screenshot-sm)
+
+## Changes dialog
+
+All changes by everyone in the team - not just the current editor - are now listed in the Changes dialog (accessible via the “Changes” menu item in the sidebar) and grouped by type (page, user, file). Now everyone in the team can directly use the dialog to jump to changes by other team members and preview them directly on the fly, even while someone else is still actively working on them.
+
+(image: changes-dialog.png class: screenshot-md)
+
+## Languages dropdown
+
+We’ve also improved the language dropdown to highlight changes in different translations.
+
+(image: languages-dropdown.png class: screenshot-sm)
+
+## Outlook
+
+With all of those features built on top of our new content version architecture, Kirby 5 starts a path to full revision support in the future. We have already laid the foundations and are looking forward to extending the feature set over time.

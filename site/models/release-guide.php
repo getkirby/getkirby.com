@@ -1,14 +1,9 @@
 <?php
 
-class ReleaseGuidePage extends DefaultPage
+class ReleaseGuidePage extends ReleaseChangelogPage
 {
 	public function menuUrl(): string
 	{
 		return $this->link()->toUrl() ?? $this->url();
-	}
-
-	public function release()
-	{
-		return $this->parents()->not('releases')->last();
 	}
 }

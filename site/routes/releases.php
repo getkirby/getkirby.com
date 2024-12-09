@@ -2,6 +2,12 @@
 
 return [
 	[
+		'pattern' => 'releases/(:num)',
+		'action'  => fn ($major) =>
+			page('releases/' . $major) ??
+			go('releases/' . $major . '.0')
+	],
+	[
 		'pattern' => 'releases/(:num)\-(:any)',
 		'action'  => fn ($generation, $major) =>
 			go('releases/' . $generation . '.' . $major)
@@ -9,7 +15,8 @@ return [
 	[
 		'pattern' => 'releases/(:num)\.(:any)',
 		'action'  => fn ($generation, $major) =>
-			page('releases/' . $generation . '-' . $major)
+			page('releases/' . $generation . '-' . $major) ??
+			($major === '0' ? go('releases/' . $generation) : null)
 	],
 	[
 		'pattern' => 'releases/(:num)\.(:any)/(:all?)',

@@ -40,18 +40,22 @@
 						</header>
 					<?php endif ?>
 
-					<?php if ($toc = $slots->toc()): ?>
-						<?= $toc ?>
+					<?php if ($content = $slots->content()): ?>
+						<?= $content ?>
 					<?php else: ?>
-						<?php snippet('toc') ?>
+						<?php if ($toc = $slots->toc()): ?>
+							<?= $toc ?>
+						<?php else: ?>
+							<?php snippet('toc') ?>
+						<?php endif ?>
+
+						<div class="prose mb-24">
+							<?= $slot ?? $page->text()->kt() ?>
+						</div>
 					<?php endif ?>
 
-					<div class="prose mb-24">
-						<?= $slot ?? $page->text()->kt() ?>
-					</div>
-
 					<?php if ($footer = $slots->footer()): ?>
-						<?= $toc ?>
+						<?= $footer ?>
 					<?php else: ?>
 						<footer>
 							<?php snippet('layouts/github-edit') ?>

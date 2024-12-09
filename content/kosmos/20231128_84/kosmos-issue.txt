@@ -42,13 +42,13 @@ Almost another year gone by. Looking back, it has been an exciting year full of 
 
 (image: company-1600x.png alt: Screenshot of the new Kirby 4 Panel)
 
-After many months of hard work, we proudly present: [**Kirby 4**](https://getkirby.com/releases/4.0) !
+After many months of hard work, we proudly present: [**Kirby 4**](https://getkirby.com/releases/4) !
 It wouldn't have been possible without you, our loyal community who helped so much with testing and your feedback, and the more adventurous ones of you and your clients, who already battle tested it in production.
 Thank you!
 
 Kirby 4 is all about a new editing experience for users. With new field types and views, a way to move pages, customizable page create dialogs, query support for sections, options and enhancements for the textarea, writer, blocks and layout fields, and cool image editing improvements, using the Panel is now more impressive than ever.
 
-[Check out all the new features!](https://getkirby.com/releases/4.0)
+[Check out all the new features!](https://getkirby.com/releases/4)
 
 
 ## Save 20% during our Kirby 4 launch sale

@@ -1,0 +1,105 @@
+Title: Plugin licenses
+----
+
+Subtitle: Your custom license in the Panel
+
+----
+
+Teaser:
+
+Kirby 5 empowers plugin developers to better manage and display their licenses. Add custom license details, link to your license shop or even implement full license validation—everything is integrated into the plugins table for seamless handling.
+
+----
+
+Plugin:
+
+```php
+App::plugin(
+  name: 'plugin-factory/plugin-a',
+  extends: [...],
+  license: [
+    'name' => 'Custom proprietary license',
+    'link' => 'https://mylicenseshop.com',
+    'status' => 'active',
+  ]
+);
+```
+
+----
+
+Text:
+
+Plugin licenses are now shown in the plugins table with an additional icon and theme to indicate their status. Licenses can now have an additional link to their license document or a custom license shop. [#6738](https://github.com/getkirby/kirby/pull/6738)
+
+(image: plugin-licenses.png)
+
+- New `Kirby\Plugin\License` class
+- New `Kirby\Plugin\LicenseStatus` class
+- New `k-table-license-cell` component in the system view
+
+**Defining a plugin license as simple array**
+
+This is great if you want to point to your own license document.
+
+```php
+App::plugin(
+  name: 'my/plugin',
+  extends: [...],
+  license: [
+    'name' => 'Custom license',
+    'link' => '<https://mylicenseshop.com>',
+    'status' => 'active',
+  ]
+);
+```
+
+**Setting a custom status**
+
+```php
+App::plugin(
+  name: 'my/plugin',
+  extends: [...],
+  license: [
+    'name' => 'Custom license',
+    'link' => 'https://mylicenseshop.com',
+    'status' => [
+      'value' => 'missing',
+      'theme' => 'negative',
+      'label' => 'Get a license please',
+      'icon' => 'alert'
+    ]
+  ]
+);
+```
+
+**A Custom license for your plugin**
+
+You can also pass a license object. Extend our `Kirby\Plugin\License` class to return a custom status, them, icon and label, depending on the state of your plugin’s license. This is great if you are working with a proprietary license for your plugin, which might still need to purchased/activated by the user.
+
+```php
+use Kirby\Plugin\License;
+use Kirby\Plugin\LicenseStatus;
+use Kirby\Plugin\Plugin;
+
+class MyCustomLicense extends License
+{
+  public function __construct(
+    protected Plugin $plugin
+  ){
+    $this->name = 'My Custom License';
+    $this->link = '<https://mylicenseshop.com>';
+    $this->status = LicenseStatus(
+      value: 'missing',
+      theme: 'negative',
+      label: 'Get a license please',
+      icon: 'alert'
+    )
+  }
+}
+
+App::plugin(
+  name: 'my/plugin',
+  extends: [...],
+  license: fn (Plugin $plugin) => new MyCustomLicense($plugin)
+);
+```

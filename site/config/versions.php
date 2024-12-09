@@ -192,7 +192,7 @@ return [
 			'3.10.1.1',
 		]
 	],
-	'4.0' => [
+	'4' => [
 		'title'       => 'Kirby 4.0',
 		'hasDocs'     => true,
 		'mainVersion' => '4',
@@ -211,6 +211,18 @@ return [
 			'4.3.0',
 			'4.3.1',
 			'4.4.0',
+		]
+	],
+	'5' => [
+		'title'       => 'Kirby 5',
+		'hasDocs'     => false,
+		'mainVersion' => '5',
+		'since'       => 'Jan 2025',
+		'description' => 'is the next version of Kirby.',
+		'link'        => 'https://getkirby.com/docs',
+		'repo'        => 'https://github.com/getkirby',
+		'subreleases' => [
+
 		]
 	],
 ];
