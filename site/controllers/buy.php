@@ -20,8 +20,6 @@ return function (Page $page) {
 
 	if ($nextVersion > Str::before(kirby()->version(), '.')) {
 		$versionIncluded = 'Kirby ' . $nextVersion . ' included';
-	} else {
-		$versionIncluded = null;
 	}
 
 	return [
@@ -34,6 +32,6 @@ return function (Page $page) {
 		'sale'              => $sale,
 		'questions'         => $page->find('answers')->children(),
 		'revenueLimit'      => RevenueLimit::approximation(verbose: true),
-		'versionIncluded'   => $versionIncluded
+		'versionIncluded'   => $versionIncluded ?? null
 	];
 };
