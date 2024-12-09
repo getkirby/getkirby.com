@@ -18,7 +18,7 @@
 
 <div class="v5-uploads-columns">
 	<figure class="release-box bg-light grid place-items-center" style="grid-area: video">
-		<video controls muted loop preload="metadata" class="rounded shadow-xl" style="width: 100%; --span: 2">
+		<video controls muted loop preload="metadata" class="rounded shadow-xl" style="width: 100%; --span: 2" poster="<?= $section->image('chunked-poster.jpg')->url() ?>">
 			<source src="<?= $section->file('chunked.mp4')->url() ?>" type="video/mp4">
 		</video>
 	</figure>
