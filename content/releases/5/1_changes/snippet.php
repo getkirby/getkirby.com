@@ -24,7 +24,7 @@
 
 <div class="v5-unsaved-changes">
 	<figure class="release-box bg-light grid place-items-center" style="grid-area: preview">
-		<video autoplay muted loop class="rounded shadow-xl" style="width: 100%; --span: 2" poster="<?= $section->image('changes-poster.jpg')->url() ?>">
+		<video autoplay playsinline muted loop class="rounded shadow-xl" style="width: 100%; --span: 2" poster="<?= $section->image('changes-poster.jpg')->url() ?>">
 			<source src="<?= $section->file('changes.mp4')->url() ?>" type="video/mp4">
 		</video>
 	</figure>
