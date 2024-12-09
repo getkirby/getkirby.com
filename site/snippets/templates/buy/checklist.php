@@ -1,4 +1,10 @@
 <ul class="checklist mb-6">
+	<?php if ($versionIncluded !== null): ?>
+	<li>
+		<?= icon('check') ?>
+		<?= $versionIncluded ?>
+	</li>
+	<?php endif ?>
 	<li>
 		<?= icon('check') ?>
 		3 years of feature updates
