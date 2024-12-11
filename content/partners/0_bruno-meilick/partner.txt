@@ -93,8 +93,7 @@ Expertise:
 - PHP, Alpine.js, Tailwind CSS
 - CI/CD
 - Setups with 2000+ content pages
-- Setups with 500+ user accounts
-- Multi-developer support possible
+- Setups with 500+ users
 
 ----
 
