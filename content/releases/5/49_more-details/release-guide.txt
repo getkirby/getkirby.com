@@ -103,16 +103,18 @@ Redis is one of the most used cache types. We’ve added a brand new Redis cache
 return [
     'cache' => [
         'pages' => [
-            'active' => true,
-            'type'   => 'redis',
-            'host'   => '127.0.0.1', // default host address
-            'port'   => 6379, // default port number
-            'auth'   => ['user', 'password'], // optional
+            'active'   => true,
+            'type'     => 'redis',
+            'host'     => '127.0.0.1', // default host address
+            'port'     => 6379, // default port number
+            'auth'     => ['user', 'password'], // optional
+            'database' => 0 // optional, but recommended for multiple caches
         ]
     ]
 ];
 ```
 
+Redis supports multiple logical databases per Redis instance. If you store multiple caches in Redis, it is strongly recommended to choose a unique `database` number for each. This ensures that each cache gets its own independent namespace and can be flushed independently. You can read more about the concept of Redis databases in the [Redis documentation for the `SELECT` command](https://redis.io/docs/latest/commands/select/).
 
 ## Improved UUID handling
 When duplicating a page, all UUIDs within the copied page, its files and children that point to an object that got copied as - well will be replaced with the UUID of the copied version.
