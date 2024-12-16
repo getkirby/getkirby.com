@@ -8,6 +8,8 @@ return function (App $kirby, Page $page) {
 	// submitted form
 	if ($kirby->request()->is('POST') === true) {
 		try {
+			throw new Exception('The form is currently not available. Please, try again later.');
+
 			// spam protection
 			Time::validate(get('timestamp'));
 
