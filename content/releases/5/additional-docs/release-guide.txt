@@ -1,0 +1,64 @@
+Title: Additional docs
+
+----
+
+Text:
+
+<info>
+Everything else that will need to be changed or added throughout the docs
+</info>
+
+## Guide/Reference
+
+### Permissions
+
+- Update <https://getkirby.com/docs/guide/users/permissions#role-based-permissions-in-user-blueprints> and <https://getkirby.com/docs/reference/panel/blueprints/user#permissions> with current set of permissions
+
+### Page rendering
+
+- New `$versionId` argument for the `Page::render()` method [#6825](https://github.com/getkirby/kirby/pull/6825#issuecomment-2511532556)
+  - <https://getkirby.com/docs/guide/routing>
+  - <https://getkirby.com/docs/reference/objects/cms/page/render>
+
+### Content tokens
+
+*Replacing <https://getkirby.com/docs/reference/system/options/content#salt-for-drafts-and-media-files>:* [#6836](https://github.com/getkirby/kirby/pull/6836)
+
+```
+### Salt for page previews and media files
+
+URLs of page previews and media files contain a hashed token that should be hard to guess. The tokens are based on the page URI or file ID and are authenticated with a salt value. In the way Kirby uses this salt value, it should ideally be a secret. By default, Kirby uses the filesystem path of the content folder. You can define your own salt that will be used instead:
+
+\```php
+return [
+  'content' => [
+    'salt' => '...'
+  ]
+];
+\```
+
+You can also dynamically generate a salt based on the model that needs a token:
+
+\```php
+return [
+  'content' => [
+    'salt' => function ($model) {
+      return '...';
+    }
+  ]
+];
+\```
+
+<since v="5.0.0">
+The `$model` value is set to the `File` object when generating a media token for a file. For page preview tokens, `$model` is always passed as `null`. Your callback should return a fixed model-independent salt in this case.
+</since>
+```
+
+## Cookbook
+
+- New site controller logic replaces the need for <https://getkirby.com/docs/cookbook/development-deployment/shared-controllers>.
+
+## Global changes
+
+- Update examples of how to register a plugin throughout getkirby.com to use named arguments
+- Check where "Duplicating page: replace UUIDs with new ones [#6567](https://github.com/getkirby/kirby/pull/6567)" could/should be mentioned in the docs
