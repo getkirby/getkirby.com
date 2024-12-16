@@ -8,6 +8,12 @@ return [
 			go('releases/' . $major . '.0')
 	],
 	[
+		'pattern' => 'releases/(:num)/(:all?)',
+		'action'  => fn ($major, $path) =>
+			page('releases/' . $major . '/' . $path) ??
+			go('releases/' . $major . '.0/' . $path)
+	],
+	[
 		'pattern' => 'releases/(:num)\-(:any)',
 		'action'  => fn ($generation, $major) =>
 			go('releases/' . $generation . '.' . $major)
@@ -21,7 +27,8 @@ return [
 	[
 		'pattern' => 'releases/(:num)\.(:any)/(:all?)',
 		'action'  => fn ($generation, $major, $path) =>
-			page('releases/' . $generation . '-' . $major . '/' . $path)
+			page('releases/' . $generation . '-' . $major . '/' . $path) ??
+			($major === '0' ? go('releases/' . $generation . '/' . $path) : null)
 	],
 	[
 		'pattern' => 'releases.rss',
