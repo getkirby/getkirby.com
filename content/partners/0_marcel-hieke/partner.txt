@@ -1,0 +1,87 @@
+Title: Marcel Hieke
+
+----
+
+Subtitle: Freelance Fullstack Web-Developer
+
+----
+
+Plan: regular
+
+----
+
+People: 1
+
+----
+
+Website: https://www.marcelhieke.com
+
+----
+
+Location: München, Germany
+
+----
+
+Summary: I am a curious code guru, dedicated to bringing digital worlds to life with meticulous precision and creative flair—a web developer on a mission to conquer the internet!
+
+----
+
+Contactlink: https://www.marcelhieke.com/contact
+
+----
+
+Pluginpage: https://plugins.getkirby.com/nerdcel
+
+----
+
+Discordhandle: nerdcel
+
+----
+
+Languages: German, English
+
+----
+
+Description:
+
+With over 15 years of experience in the web industry, I have cultivated a diverse skill set and a deep understanding of various domains. Throughout my career, I have successfully developed custom applications and websites tailored to meet the unique needs of a wide range of clients. My expertise extends beyond standard technologies such as **HTML**, **CSS**, and **JavaScript**; I am also proficient in frameworks like Kirby and **Laravel**, and I utilize **Vue.js** to create dynamic, state-driven, and highly interactive front-end experiences.
+
+My primary focus lies in crafting robust PHP-based web applications and websites. For several years, I have had the privilege of assisting companies and NGOs in their digital transformation journeys, helping them streamline work processes and enhance their internal structures through effective technology solutions.
+
+I am a passionate advocate for open-source software and believe in the power of community collaboration. I actively seek opportunities to contribute to open-source projects, particularly those related to Kirby, as I value the innovation and shared knowledge that arise from such efforts.
+
+I invite you to reach out if you would like to learn more about my work or discuss potential collaborations. I look forward to connecting!
+
+----
+
+Expertise:
+
+- PHP-based web applications
+- Relational Databases/SQL
+- Kirby based Websites
+- Frontend development
+- Backend development
+- Kirby plugins
+- Laravel
+- Vue.js
+- React
+- Alpine.js
+- Typo3
+- CI/CD
+
+----
+
+Region: Europe
+
+----
+
+Uuid: buV5ikAEqXnvAJaE
+
+----
+Plugindeveloper: nerdcel
+
+
+----
+Plugins:
+- responsive-images
+- impersonate
