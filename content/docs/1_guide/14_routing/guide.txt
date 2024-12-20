@@ -24,7 +24,7 @@ Text:
 
 When you create a new page in Kirby's content folder, this folder creates a new URL, for example, the page `/content/projects/project-a` will be available at `https://yourdomain.com/projects/project-a`. So when the user types that URL into the browser's address bar, the project page will be rendered.
 
-Sometimes however, you may want to provide content under URLs that do not exist as pages in your content folder, for example:
+Sometimes however, you may want to redirect outdated links, or provide content under URLs that do not exist as pages in your content folder, for example:
 
 - to create virtual utility pages like a sitemap or an RSS feed,
 - to redirect to other parts of your installation or to remove parts of a page URL to make pages available at a shorter URL (for example, leave out the blog folder when accessing posts that would otherwise be available at `https://yourdomain.com/blog/my-super-post`),
@@ -234,6 +234,42 @@ By default routes are only available for `GET` requests. You can define addition
   'method' => 'GET|POST|DELETE'
 ]
 ```
+## Simple redirects with `go()`
+
+This is probably one of the most used use-cases for routes, a redirect from a path in your Kirby project to some other location.
+
+```php
+return [
+    'routes' => [
+        [
+            'pattern' => 'some-pattern',
+            'action' => function () {
+
+                return go('https://example.com');
+            }
+        ],
+    ]
+];
+```
+This pattern will listen to `my.domain/some-pattern` and redirect to the new location, in this example an external URL `https://example.com`.
+
+Here is an example to redirect from the path of a non-existing-page in your Kirby project to a new location:
+
+```php
+return [
+    'routes' => [
+        [
+            'pattern' => 'notes/does-not-exist-anymore',
+            'action' => function () {
+
+                return go('notes/does-exist');
+            }
+        ],
+    ]
+];
+```
+
+Note that the (link: docs/reference/templates/helpers/go text: `go()`) helper accepts a HTTP response code as a second argument, the default is `302`. You might prefer a `301` is the redirect is permanent.
 
 ## Multi-language setup
 
