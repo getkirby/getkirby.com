@@ -1,0 +1,9 @@
+start: 16:00:00
+----
+city: Hamburg
+----
+country: Germany
+----
+conference: 38C3
+----
+link: https://events.ccc.de/congress/2024/hub/de/event/kirby-cms-user-meetup/
