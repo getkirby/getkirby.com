@@ -24,7 +24,6 @@ return function (Page $page) {
 
 	return [
 		'basic'             => Product::Basic,
-		'countries'         => option('countries'),
 		'discounts'         => $discounts,
 		'discountsReversed' => $discountsReversed,
 		'donation'          => option('buy.donation'),

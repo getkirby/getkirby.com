@@ -162,18 +162,7 @@ document.addEventListener("click", (event) => {
 });
 
 // countries which require a postal code
-const postalCodeCountries = [
-	"AU",
-	"CA",
-	"FR",
-	"DE",
-	"IN",
-	"IT",
-	"NL",
-	"ES",
-	"GB",
-	"US"
-];
+const postalCodeCountries = <?= json_encode(Kirby\Buy\Paddle::COUNTRIES_WITH_POSTAL_CODE) ?>;
 
 createApp({
 	// props dynamically populated by the backend

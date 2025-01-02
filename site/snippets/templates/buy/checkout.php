@@ -231,7 +231,7 @@
 								<div class="field">
 									<label class="label" for="country">Country <abbr title="Required" aria-hidden>*</abbr></label>
 									<select id="country" name="country" required autocomplete="country" class="input" v-model="form.country" @change="changeCountry">
-										<?php foreach ($countries as $countryCode => $countryName): ?>
+										<?php foreach (Kirby\Buy\Paddle::COUNTRIES as $countryCode => $countryName): ?>
 										<option value="<?= $countryCode ?>"><?= $countryName ?></option>
 										<?php endforeach ?>
 									</select>

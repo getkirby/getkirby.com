@@ -10,42 +10,6 @@ class Visitor
 {
 	protected static string $ipCountry;
 
-	/**
-	 * Supported currencies with their currency sign (prefixed to the amount);
-	 * currencies not listed here will automatically fall back to EUR
-	 */
-	public const CURRENCIES = [
-		'ARS' => 'ARS ',
-		'AUD' => 'A$',
-		'BRL' => 'R$',
-		'CAD' => 'CA$',
-		'CHF' => 'CHF ',
-		'CNY' => 'CN¥',
-		'COP' => 'COP ',
-		'CZK' => 'Kč ',
-		'DKK' => 'kr ',
-		'EUR' => '€',
-		'GBP' => '£',
-		'HKD' => 'HK$',
-		'HUF' => 'Ft ',
-		'ILS' => '₪',
-		'INR' => '₹',
-		'JPY' => '¥',
-		'KRW' => '₩',
-		'MXN' => 'MX$',
-		'NOK' => 'kr ',
-		'NZD' => 'NZ$',
-		'PLN' => 'zł ',
-		'SEK' => 'kr ',
-		'SGD' => 'SGD ',
-		'THB' => '฿',
-		'TRY' => '₺',
-		'TWD' => 'NT$',
-		'UAH' => '₴',
-		'USD' => '$',
-		'ZAR' => 'R ',
-	];
-
 	protected function __construct(
 		public readonly string $currency,
 		public readonly float $rate,
@@ -75,7 +39,7 @@ class Visitor
 		string|null $error = null
 	): static {
 		// fall back to EUR if the detected visitor currency is not supported
-		if (isset(static::CURRENCIES[$currency]) !== true) {
+		if (isset(Paddle::CURRENCIES[$currency]) !== true) {
 			$error    = 'Invalid currency "' . $currency . '"';
 			$currency = 'EUR';
 			$rate     = 1.0;
@@ -158,7 +122,7 @@ class Visitor
 	 */
 	public function currencySign(): string
 	{
-		return static::CURRENCIES[$this->currency];
+		return Paddle::CURRENCIES[$this->currency];
 	}
 
 	/**
