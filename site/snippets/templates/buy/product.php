@@ -5,7 +5,7 @@
 
 			<?php if ($sale->isActive()): ?>
 			<span class="price px-1" data-regular>
-				<span v-text="locale.currency">€</span>
+				<span v-text="locale.currencySign">€</span>
 				<span class="amount" v-text="amountDisplay(locale.prices.<?= $product->value() ?>.regular)"><?= $product->price('EUR')->regular() ?></span>
 			</span>
 			<?php endif ?>
@@ -13,7 +13,7 @@
 
 		<a href="/buy/basic" @click.prevent="openCheckout('<?= $product->value() ?>', 1)" target="_blank" class="h2 block mb-3">
 			<span class="price" data-sale>
-				<span class="currency-sign" v-text="locale.currency.trim()">€</span>
+				<span class="currency-sign" v-text="locale.currencySign.trim()">€</span>
 				<span class="amount" v-text="amountDisplay(locale.prices.<?= $product->value() ?>.sale)"><?= $product->price('EUR')->sale() ?></span>
 			</span>
 			per site

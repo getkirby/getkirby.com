@@ -168,7 +168,8 @@ createApp({
 	// props dynamically populated by the backend
 	locale: {
 		country: "",
-		currency: "€",
+		currency: "EUR",
+		currencySign: "€",
 		prices: {
 			basic: {
 				regular: <?= $basic->price('EUR')->regular() ?>,
@@ -224,7 +225,7 @@ createApp({
 		return this.netLicenseAmount * factor * -1;
 	},
 	get donationText() {
-		return "Donate an additional " + this.locale.currency + this.locale.prices.donation.customer + " per license 💛";
+		return "Donate an additional " + this.locale.currencySign + this.locale.prices.donation.customer + " per license 💛";
 	},
 	get donationAmount() {
 		return this.form.donate ? (this.locale.prices.donation.customer * this.quantity) : 0;
@@ -259,7 +260,7 @@ createApp({
 				minimumFractionDigits: 2,
 				maximumFractionDigits: 2,
 			});
-			return this.locale.currency + formatter.format(amount);
+			return this.locale.currencySign + formatter.format(amount);
 		}
 	},
 	amountDisplay(amount) {

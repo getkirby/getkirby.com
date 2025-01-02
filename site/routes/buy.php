@@ -14,9 +14,10 @@ return [
 			$visitor    = Paddle::visitor(country: get('country'));
 
 			$json = json_encode([
-				'status'   => $visitor->error() ?? 'OK',
-				'country'  => $visitor->country(),
-				'currency' => $visitor->currencySign(),
+				'status'       => $visitor->error() ?? 'OK',
+				'country'      => $visitor->country(),
+				'currency'     => $visitor->currency(),
+				'currencySign' => $visitor->currencySign(),
 				'prices' => [
 					'basic' => [
 						'regular' => $basic->price()->regular(),
