@@ -186,7 +186,7 @@
 						</tr>
 						<tr v-if="locale.vatRate > 0">
 							<th>
-								VAT ({{ vatIdExists ? 0 : locale.vatRate * 100 }}%)
+								VAT ({{ vatRate * 100 }}%)
 							</th>
 							<td>{{ amount(vatAmount) }}</td>
 						</tr>

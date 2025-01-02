@@ -162,6 +162,7 @@ document.addEventListener("click", (event) => {
 });
 
 // hardcoded Paddle config that is needed for dynamic frontend logic
+const b2bVatCountries         = <?= json_encode(Kirby\Buy\Paddle::COUNTRIES_WITH_B2B_VAT) ?>;
 const postalCodeCountries     = <?= json_encode(Kirby\Buy\Paddle::COUNTRIES_WITH_POSTAL_CODE) ?>;
 const customDecimalCurrencies = <?= json_encode(Kirby\Buy\Paddle::CURRENCIES_WITH_CUSTOM_DECIMALS) ?>;
 
@@ -258,8 +259,14 @@ createApp({
 		return this.subtotal + this.vatAmount;
 	},
 	get vatAmount() {
-		const rate = this.vatIdExists ? 0 : this.locale.vatRate;
-		return +(this.subtotal * rate).toFixed(this.decimals);
+		return +(this.subtotal * this.vatRate).toFixed(this.decimals);
+	},
+	get vatRate() {
+		if (this.vatIdExists === true && b2bVatCountries.includes(this.form.country) === false) {
+			return 0;
+		}
+
+		return this.locale.vatRate;
 	},
 	get vatIdExists() {
 		return this.locale.vatRate > 0 && this.form.vatId?.length > 0;

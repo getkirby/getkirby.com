@@ -263,6 +263,32 @@ class Paddle
 	];
 
 	/**
+	 * Countries in which Paddle charges VAT even to B2B customers
+	 * https://www.paddle.com/help/sell/tax/which-countries-does-paddle-charge-sales-tax-or-vat-for
+	 */
+	public const COUNTRIES_WITH_B2B_VAT = [
+		'BS', // Bahamas
+		'BA', // Bosnia & Herzegovina
+		'CM', // Cameroon
+		'IS', // Iceland
+		'ID', // Indonesia
+		'IM', // Isle of Man
+		'JP', // Japan
+		'KE', // Kenya
+		'LI', // Liechtenstein
+		'MY', // Malaysia
+		'MX', // Mexico
+		'NG', // Nigeria
+		'OM', // Oman
+		'PR', // Puerto Rico
+		'ZA', // South Africa
+		'CH', // Switzerland
+		'GB', // United Kingdom
+		'UY', // Uruguay
+		'VN', // Vietnam
+	];
+
+	/**
 	 * Countries that require a postal code
 	 * https://developer.paddle.com/classic/reference/29717a4e58630-supported-countries#countries-requiring-postcode
 	 */
