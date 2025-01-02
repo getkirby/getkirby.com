@@ -317,6 +317,15 @@ class Paddle
 		'ZAR' => 'R ',
 	];
 
+	/**
+	 * Currencies that don't use 2 decimal places but a different number
+	 * https://developer.paddle.com/classic/reference/08d5d797e10ae-supported-currencies
+	 */
+	public const CURRENCIES_WITH_CUSTOM_DECIMALS = [
+		'JPY' => 0,
+		'KRW' => 0,
+	];
+
 	// cache
 	protected static Visitor $visitor;
 

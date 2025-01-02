@@ -161,8 +161,9 @@ document.addEventListener("click", (event) => {
 	}
 });
 
-// countries which require a postal code
-const postalCodeCountries = <?= json_encode(Kirby\Buy\Paddle::COUNTRIES_WITH_POSTAL_CODE) ?>;
+// hardcoded Paddle config that is needed for dynamic frontend logic
+const postalCodeCountries     = <?= json_encode(Kirby\Buy\Paddle::COUNTRIES_WITH_POSTAL_CODE) ?>;
+const customDecimalCurrencies = <?= json_encode(Kirby\Buy\Paddle::CURRENCIES_WITH_CUSTOM_DECIMALS) ?>;
 
 createApp({
 	// props dynamically populated by the backend
@@ -211,6 +212,9 @@ createApp({
 	quantity: 1,
 
 	// computed
+	get decimals() {
+		return customDecimalCurrencies[this.locale.currency] ?? 2;
+	},
 	get discountRate() {
 		<?php foreach ($discountsReversed as $minimum => $rate): ?>
 		if (this.quantity >= <?= $minimum ?>) {
@@ -221,8 +225,16 @@ createApp({
 		return 0;
 	},
 	get discountAmount() {
-		const factor = this.discountRate / 100;
-		return this.netLicenseAmount * factor * -1;
+		// discount cannot be calculated on the total sum to avoid rounding errors
+		// (backend calculates price per license)
+		return this.discountedPrice * this.quantity - this.netLicenseAmount;
+	},
+	get discountedPrice() {
+		const factor = 1 - this.discountRate / 100;
+		const price  = this.price * factor;
+
+		// round to a fixed number of decimals and convert back to `Number`
+		return +(price).toFixed(this.decimals);
 	},
 	get donationText() {
 		return "Donate an additional " + this.locale.currencySign + this.locale.prices.donation.customer + " per license 💛";
@@ -240,14 +252,14 @@ createApp({
 		return this.locale.prices[this.product].sale;
 	},
 	get subtotal() {
-		return this.netLicenseAmount + this.donationAmount + this.discountAmount;
+		return this.discountedPrice * this.quantity + this.donationAmount;
 	},
 	get totalAmount() {
 		return this.subtotal + this.vatAmount;
 	},
 	get vatAmount() {
 		const rate = this.vatIdExists ? 0 : this.locale.vatRate;
-		return this.subtotal * rate;
+		return +(this.subtotal * rate).toFixed(this.decimals);
 	},
 	get vatIdExists() {
 		return this.locale.vatRate > 0 && this.form.vatId?.length > 0;
@@ -257,8 +269,8 @@ createApp({
 	amount(amount) {
 		if (Number.isFinite(amount) === true) {
 			const formatter = new Intl.NumberFormat("en", {
-				minimumFractionDigits: 2,
-				maximumFractionDigits: 2,
+				minimumFractionDigits: this.decimals,
+				maximumFractionDigits: this.decimals,
 			});
 			return this.locale.currencySign + formatter.format(amount);
 		}

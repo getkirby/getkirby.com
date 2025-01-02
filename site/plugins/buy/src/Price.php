@@ -227,6 +227,6 @@ class Price
 
 		$price *= 1 - $discount / 100;
 
-		return round($price, 2);
+		return round($price, Paddle::CURRENCIES_WITH_CUSTOM_DECIMALS[$this->currency] ?? 2);
 	}
 }
