@@ -10,7 +10,7 @@ Kirby **{{ latest }}** is the latest Kirby release.
 
 There are no known vulnerabilities in all releases since **{{ noVulnerabilities }}**. Previous major releases have received backported fixes for known vulnerabilities, [see below](#past-security-incidents).
 
-In the following table, you can find all major releases with their support status:
+In the following table and calendar, you can find all major releases with their current support status:
 
 {{ versions }}
 
