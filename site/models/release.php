@@ -32,7 +32,24 @@ class ReleasePage extends DefaultPage
 		return $releases;
 	}
 
-	public function subreleases(bool $stable = true): array
+	public function latestRelease(): string|null
+	{
+		// first try the latest stable release
+		$releases = $this->releases(stable: true);
+		if (count($releases) > 0) {
+			return end($releases);
+		}
+
+		// if there is none, use the latest preview release
+		$releases = $this->releases(stable: false);
+		if (count($releases) > 0) {
+			return end($releases);
+		}
+
+		return null;
+	}
+
+	public function releases(bool $stable = true): array
 	{
 		return array_filter(
 			$this->allReleases(),
@@ -42,6 +59,21 @@ class ReleasePage extends DefaultPage
 					return false;
 				}
 
+				// filter out alphas, betas and RCs
+				if ($stable === true && Str::contains($release, '-') === true) {
+					return false;
+				}
+
+				return true;
+			}
+		);
+	}
+
+	public function subreleases(bool $stable = true): array
+	{
+		return array_filter(
+			$this->releases($stable),
+			function ($release) {
 				// filter out the .0 version and its previews
 				if (
 					$release === $this->version()->value() . '.0' ||
@@ -49,11 +81,6 @@ class ReleasePage extends DefaultPage
 					Str::startsWith($release, $this->version() . '.0-') === true ||
 					Str::startsWith($release, $this->version() . '.0.0-') === true
 				) {
-					return false;
-				}
-
-				// filter out alphas, betas and RCs
-				if ($stable === true && Str::contains($release, '-') === true) {
 					return false;
 				}
 

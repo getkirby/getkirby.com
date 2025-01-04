@@ -102,7 +102,7 @@ class SecurityPage extends DefaultPage
 				'initialRelease'     => $initialRelease,
 				'endOfActiveSupport' => $nextRelease,
 				'endOfLife'          => date('Y-m-d', strtotime($initialRelease . ' + 3 years')),
-				'latest'             => $this->kirby()->version() // TODO: Determine per major version
+				'latest'             => page('releases/' . $major)->latestRelease()
 			];
 		}
 
