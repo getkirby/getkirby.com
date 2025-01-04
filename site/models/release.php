@@ -23,9 +23,14 @@ class ReleasePage extends DefaultPage
 			return $entry['releases'];
 		}
 
-		$releases = [];
-		foreach (Github::request('getkirby/kirby', 'git/refs/tags')->json() as $release) {
-			$releases[] = Str::after($release['ref'], 'refs/tags/');
+		try {
+			$releases = [];
+			foreach (Github::request('getkirby/kirby', 'git/refs/tags')->json() as $release) {
+				$releases[] = Str::after($release['ref'], 'refs/tags/');
+			}
+		} catch (InvalidArgumentException) {
+			// no GitHub API key is available
+			return [];
 		}
 
 		$cache->set('releases', ['currentVersion' => $kirby->version(), 'releases' => $releases], 10080);
