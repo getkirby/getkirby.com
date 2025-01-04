@@ -43,11 +43,6 @@ $calendarText = function(DateTime|string|null $date = null) use($normalizeTimest
 
 $calendarHeight = 30 * count($filteredVersions) + 30;
 $calendarWidth  = $calendarPosition($maxDate) + 45;
-
-// expire the cache daily at midnight to refresh the "today" marker
-$expiryTime = strtotime('tomorrow 0:00Z');
-$kirby->response()->expires($expiryTime);
-$kirby->response()->header('Expires', gmdate('D, d M Y H:i:s T', $expiryTime));
 ?>
 <style>
 .security-versions-table {
