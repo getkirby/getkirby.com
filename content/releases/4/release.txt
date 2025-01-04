@@ -11,5 +11,3 @@ Description: Kirby 4 is all about a new editing experience for users, with a bra
 Docs: /docs
 ----
 Cover: - kirby-4-0.png
-----
-Link: https://github.com/getkirby/kirby/archive/refs/tags/4.3.1.zip

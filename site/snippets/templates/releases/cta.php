@@ -10,7 +10,7 @@ snippet('cta', [
 		],
 		[
 			'text' => 'Try now',
-			'link' => $page->link(),
+			'link' => $page->tryLink()->or('/try'),
 			'icon' => 'download'
 		],
 	],

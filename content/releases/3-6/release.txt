@@ -8,8 +8,6 @@ Description: Improvements all over: New way to present your content, an improved
 ----
 Cover: kirby-3-6.png
 ----
-Link: https://github.com/getkirby/kirby/releases/tag/3.6.0
-----
 Area:
 
 ```php

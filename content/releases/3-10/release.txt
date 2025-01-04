@@ -6,8 +6,6 @@ Version: 3.10
 ----
 ogimage: opengraph.png
 ----
-Link: https://github.com/getkirby/kirby/releases/tag/3.10.0
-----
 Cover: - kirby-3-10.png
 ----
 

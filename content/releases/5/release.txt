@@ -13,5 +13,3 @@ Description: Kirby 5 is taking existing features to new levels: collaborate on c
 Docs: /releases/5/changes
 ----
 Cover: - kirby-5-0.png
-----
-Link: https://github.com/getkirby/kirby/archive/refs/tags/5.0.0-beta.1.zip

@@ -1,5 +1,6 @@
 <?php
 
+use Kirby\Content\Field;
 use Kirby\Github\Github;
 use Kirby\Template\Template;
 use Kirby\Toolkit\Str;
@@ -95,6 +96,19 @@ class ReleasePage extends DefaultPage
 		$template ??= 'release-' . $this->content()->version();
 
 		return $this->template ??= $this->kirby()->template($template);
+	}
+
+	public function tryLink(): Field
+	{
+		$field = parent::tryLink();
+
+		// never link to downloads of previous major releases
+		if (Str::before($this->kirby()->version(), '.') > $this->version()) {
+			return $field;
+		}
+
+		$url = 'https://github.com/getkirby/kirby/archive/refs/tags/' . $this->latestRelease() . '.zip';
+		return $field->or($url);
 	}
 
 	public function url($options = null): string

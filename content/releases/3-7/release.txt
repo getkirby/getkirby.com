@@ -6,8 +6,6 @@ Version: 3.7
 ----
 ogimage: opengraph.png
 ----
-Link: https://github.com/getkirby/kirby/releases/tag/3.7.0
-----
 Description: The Panel is in the focus of this new release with a fresh look, a stats section that turns your dashboard into a smart report, a new table layout, and a new system view that gives you an overview about everything regarding your installation.
 
 ----
