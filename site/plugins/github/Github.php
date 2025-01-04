@@ -86,7 +86,7 @@ class Github
 	): Remote {
 		$key = option('keys.github');
 
-		if ($key === null) {
+		if ($key === null || $key === '') {
 			throw new InvalidArgumentException('Missing GitHub API token');
 		}
 
