@@ -6,6 +6,12 @@ Text:
 
 ## Supported Versions
 
+Kirby **{{ latest }}** is the latest Kirby release.
+
+There are no known vulnerabilities in all releases since **{{ noVulnerabilities }}**. Previous major releases have received backported fixes for known vulnerabilities, [see below](#past-security-incidents).
+
+In the following table, you can find all major releases with their support status:
+
 {{ versions }}
 
 <info>
@@ -51,6 +57,18 @@ Version constraints use [Composer's version constraint syntax](https://getcompos
 
 The `Versions` field allows to find the support status of a particular version and enables update checks (is a new version available, is it an update or upgrade and what is its version number?).
 
+### In this content file
+
+Each entry MUST have a key with a Composer version constraint and the following fields:
+
+- `shortName` contains a human-readable string of the release version.
+- `initialRelease` marks the day (in a date format parseable by PHP) of the initial license-relevant release of the major version.
+- `endOfActiveSupport` marks the day (in a date format parseable by PHP) when the following major version was released (can be `null`, which marks the current major release).
+- `endOfLife` marks the day (in a date format parseable by PHP) when the version reached end-of-life.
+- `latest` is the latest version that can be updated to for free from any version in the version range.
+
+### In `security.json`
+
 Each entry MUST have a key with a Composer version constraint, a `status` field (see below) and a human-readable `description` field.
 
 Each Kirby version ever released MUST match at least one of the entries' keys.
@@ -61,22 +79,22 @@ There MUST be a separate entry with the `status` value `active-support`, `securi
 There MUST be exactly one entry with the `status` value `latest`. It MUST be the first entry in the list.
 There SHOULD be exactly one entry with the `status` value `no-vulnerabilities`. It MUST be the second entry in the list.
 
-### Possible `status` values
+#### Possible `status` values
 
-#### `latest`
+##### `latest`
 
 This is a "fast path" that skips both the update check and the check for known vulnerabilities using the incident list.
 
 The `latest` entry SHOULD be left untouched as it's auto-populated with the Kirby version of the getkirby.com site.
 
-#### `no-vulnerabilities`
+##### `no-vulnerabilities`
 
 This is a "fast path" that skips the check for known vulnerabilities using the incident list.
 During the update check, this entry is skipped and the next matching entry is used.
 
 The `no-vulnerabilities` entry SHOULD be left untouched as it's auto-populated with the latest `fixed` version from the incident list.
 
-#### `active-support`
+##### `active-support`
 
 This marks a version range that receives functionality updates, enhancements and bug fixes.
 
@@ -84,7 +102,7 @@ The `latest` field of the `active-support` entry MUST be set to the latest versi
 
 The `initialRelease` field of the `active-support` entry SHOULD be set to a date value parseable by PHP that marks the date of initial license-relevant release of the major version if the major version follows the Kirby 4+ license model.
 
-#### `security-support`
+##### `security-support`
 
 This marks a version range that only receives security updates.
 
@@ -94,7 +112,7 @@ The `initialRelease` field of the `security-support` entry SHOULD be set to a da
 
 `security-support` entries MAY also have a `status-link` field that points to an URL with more information on the support status of this version range. The status link defaults to an empty value (no link).
 
-#### `end-of-life`
+##### `end-of-life`
 
 This marks a version range that receives no updates whatsoever.
 
@@ -160,46 +178,44 @@ Each message entry MAY have the following fields (required fields are marked wit
 
 Versions:
 
-# Static placeholders (filled by getkirby.com):
-# - `{{ latest }} `: Version number of latest release
-# - `{{ latestMajor }}`: Version number of latest release (major part only)
-# - `{{ noVulnerabilities }}`: Minimum version number without vulnerabilities
+# Only v3 and older need to be managed here, v4+ are determined automatically
 
-{{ latest }}:
-    status: latest
-    description: Latest Kirby release
->={{ noVulnerabilities }}:
-    status: no-vulnerabilities
-    description: No known vulnerabilities
-4.*:
-    status: active-support
-    description: Actively supported
-    latest: {{ latest }}
-    initialRelease: 2023-11-28
-3.10.*:
-    status: security-support
-    description: Security support until December 1, 2025
-    latest: 3.10.1
-3.9.*:
-    status: security-support
-    description: Security support until December 1, 2025
+1.*:
+    shortName: v1
+    initialRelease: 2012-01-09
+    endOfActiveSupport: 2014-10-07
+    endOfLife: 2016-02-01
+    latest: 1.1.2
+2.*:
+    shortName: v2
+    initialRelease: 2014-10-07
+    endOfActiveSupport: 2019-02-05
+    endOfLife: 2021-01-01
+    latest: 2.5.14
+3.* <3.8:
+    shortName: v3
+    initialRelease: 2019-02-05
+    endOfActiveSupport: 2022-10-06
+    endOfLife: 2024-06-27
     latest: 3.10.1
 3.8.*:
-    status: end-of-life
-    description: Not supported (end of life) since December 2, 2024
+    shortName: v3.8
+    initialRelease: 2022-10-06
+    endOfActiveSupport: 2023-01-17
+    endOfLife: 2024-12-02
     latest: 3.10.1
-3.* <3.8:
-    status: end-of-life
-    description: Not supported (end of life) since June 27, 2024
+3.9.*:
+    shortName: v3.9
+    initialRelease: 2023-01-17
+    endOfActiveSupport: 2023-11-28
+    endOfLife: 2025-12-01
     latest: 3.10.1
-2.*:
-    status: end-of-life
-    description: Not supported (end of life) since January 1, 2021
-    latest: 2.5.14
-1.*:
-    status: end-of-life
-    description: Not supported (end of life) since February 1, 2016
-    latest: 1.1.2
+3.10.*:
+    shortName: v3.10
+    initialRelease: 2023-12-19
+    endOfActiveSupport: 2023-12-19
+    endOfLife: 2025-12-01
+    latest: 3.10.1
 
 ----
 

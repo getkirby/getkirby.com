@@ -14,22 +14,32 @@
 <div class="security-versions table">
 	<table>
 		<tr>
-			<th>Kirby Version</th>
-			<th>Supported</th>
-			<th class="w-100%">Support Status</th>
+			<th style="width: 1px">Kirby Version</th>
+			<th style="width: 1px">Supported</th>
+			<th>Initial Release</th>
+			<th>Feature Updates Until</th>
+			<th>Security Updates Until</th>
 		</tr>
-		<?php foreach ($versions as $version => $entry): ?>
+		<?php foreach ($versions as $entry): ?>
 		<tr>
-			<td><?= esc($version) ?></td>
-			<td>
+			<td style="width: 1px"><?= esc($entry['shortName']) ?></td>
+			<td style="width: 1px">
 				<?= match ($entry['status']) {
-					'latest', 'no-vulnerabilities', 'active-support' => '✅',
-					'security-support' => '⚠️',
-					'end-of-life' => '❌',
-					default => '❓️'
+					'active-support'   => '<span title="Actively supported">✅</span>',
+					'security-support' => '<span title="Supported with security updates only">⚠️</span>',
+					'end-of-life'      => '<span title="Version has reached its end of life">❌</span>',
+					default            => '<span title="Unknown">❓️</span>'
 				} ?>
 			</td>
-			<td class="w-100%"><?= $entry['description'] ?></td>
+			<td><?= date('F j, Y', strtotime($entry['initialRelease'])) ?></td>
+			<td>
+				<?php if ($entry['endOfActiveSupport'] !== null): ?>
+				<?= date('F j, Y', strtotime($entry['endOfActiveSupport'])) ?>
+				<?php else: ?>
+				<em>Next major release</em>
+				<?php endif ?>
+			</td>
+			<td><?= date('F j, Y', strtotime($entry['endOfLife'])) ?></td>
 		</tr>
 		<?php endforeach ?>
 	</table>
