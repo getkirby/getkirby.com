@@ -48,10 +48,7 @@
 						New in <?= $release->version() ?>
 					</a>
 				</div>
-				<?php
-				$subreleases = $kirby->option('versions')[$release->version()->value()]['subreleases'];
-			if (count($subreleases) > 0):
-				?>
+				<?php if (count($subreleases = $release->subreleases()) > 0): ?>
 				<div class="prose">
 					<div class="h5 mb-4 color-black">Further releases</div>
 					<span class="text-base">
