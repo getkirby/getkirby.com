@@ -6,7 +6,10 @@ class ReleasePage extends DefaultPage
 {
 	public function template(): Template
 	{
-		return $this->template ??= $this->kirby()->template('release-' . $this->content()->version());
+		$template   = $this->content()->get('template')->value();
+		$template ??= 'release-' . $this->content()->version();
+
+		return $this->template ??= $this->kirby()->template($template);
 	}
 
 	public function url($options = null): string

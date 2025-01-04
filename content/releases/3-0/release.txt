@@ -2,6 +2,10 @@ Title: Introducing Kirby 3
 
 ----
 
+Template: default
+
+----
+
 Version: 3.0
 
 ----

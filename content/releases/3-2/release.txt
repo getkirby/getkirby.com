@@ -2,6 +2,10 @@ Title: Kirby 3.2
 
 ----
 
+Template: link
+
+----
+
 Version: 3.2
 
 ----
