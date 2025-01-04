@@ -476,7 +476,7 @@ class Paddle
 				rate: $paddleProduct['list_price']['net'] / $product->rawPrice(),
 
 				// calculate VAT rate, rounded to four decimal places to avoid float mishaps
-				vatRate: round($paddleProduct['list_price']['tax'] / $paddleProduct['list_price']['net'] * 10000) / 10000,
+				vatRate: round($paddleProduct['list_price']['tax'] / $paddleProduct['list_price']['net'], 4),
 			);
 		} catch (Throwable $e) {
 			// on any kind of error, use the EUR prices as a fallback
