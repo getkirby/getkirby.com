@@ -43,8 +43,8 @@ class SecurityPage extends DefaultPage
 		// extract the part before the first dot
 		preg_match('/^(\w+)\./', $latest, $matches);
 
-		$versions = page('releases')->children()->pluck('version');
-		$releasePages = implode(' || ', array_map(fn ($version) => $version . '.0', $versions));
+		$versions = page('releases')->children()->filterBy('template', '!=', 'link')->pluck('version');
+		$releasePages = implode(' || ', array_map(fn ($version) => $version . str_repeat('.0', 2 - substr_count($version, '.')), $versions));
 
 		$data = [
 			'latest'            => $latest,
