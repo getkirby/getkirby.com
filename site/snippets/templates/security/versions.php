@@ -61,8 +61,20 @@ $kirby->response()->header('Expires', gmdate('D, d M Y H:i:s T', $expiryTime));
 .security-versions-table th {
 	font-size: var(--text-sm);
 }
-.security-versions-table td:nth-child(2) {
+.security-versions-table .symbol {
 	text-align: center;
+	vertical-align: middle;
+	width: 1px;
+}
+
+.security-versions-table .status-end-of-life {
+	background: var(--color-red);
+}
+.security-versions-table .status-security-support {
+	background: var(--color-yellow);
+}
+.security-versions-table .status-active-support {
+	background: var(--color-green);
 }
 
 .security-versions-calendar {
@@ -134,7 +146,7 @@ $kirby->response()->header('Expires', gmdate('D, d M Y H:i:s T', $expiryTime));
 		<?php foreach ($versions as $entry): ?>
 		<tr>
 			<td style="width: 1px"><?= esc($entry['shortName']) ?></td>
-			<td style="width: 1px">
+			<td class="symbol">
 				<?= match ($entry['status']) {
 					'active-support'   => '<span title="Actively supported">✅</span>',
 					'security-support' => '<span title="Supported with security updates only">⚠️</span>',
@@ -196,4 +208,21 @@ $kirby->response()->header('Expires', gmdate('D, d M Y H:i:s T', $expiryTime));
 			<text x="<?= $calendarPosition() ?>" y="<?= $calendarHeight + 20 ?>">Today: <?= $calendarText() ?></text>
 		</g>
 	</svg>
+</div>
+
+<div class="security-versions-table table">
+	<table>
+		<tr>
+			<td class="status-active-support symbol">✅</td>
+			<td>This marks the major release with <strong>active support</strong>. This release receives functionality updates, improvements and bug fixes.</td>
+		</tr>
+		<tr>
+			<td class="status-security-support symbol">⚠️</td>
+			<td>Releases with this symbol <em>only</em> receive <strong>security updates</strong>. <a href="<?= url('license#technical-support') ?>">Read more ›</a></td>
+		</tr>
+		<tr>
+			<td class="status-end-of-life symbol">❌</td>
+			<td>Releases with this symbol have reached their <strong>end of life</strong> and should <em>not</em> be used in production any longer. <a href="<?= url('security/end-of-life') ?>">Read more ›</a></td>
+		</tr>
+	</table>
 </div>
