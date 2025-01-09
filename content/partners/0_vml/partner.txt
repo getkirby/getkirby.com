@@ -1,0 +1,63 @@
+Title: VML
+
+----
+
+Subtitle: 
+
+----
+
+Plan: certified
+
+----
+
+People: 4+
+
+----
+
+Website: https://vml.com
+
+----
+
+Location: Antwerp, Belgium
+
+----
+
+Summary: VML is a global creative company specializing in brand experience, customer experience, and commerce, seamlessly integrating creativity, data, and technology to drive business transformation.
+
+----
+
+Contactlink: https://www.vml.com/contact-us?region=EUR&office=belgium
+
+----
+
+Discordhandle: samzzi
+
+----
+
+Languages: Dutch, English, French
+
+----
+
+Description: 
+
+VML excels in blending technology and creativity, offering expertise in platform engineering, AI-driven data analytics, customer experience (CX) technology, and e-commerce development. They deliver scalable cloud-native architectures, personalized digital ecosystems, and innovative solutions like automation and emerging technologies (e.g. blockchain, IoT). 
+
+With a focus on modernizing enterprise IT and securing digital operations, VML ensures seamless integration of creativity, data, and technology to drive business transformation.
+----
+
+Expertise:
+
+- Enterprise solutions
+- Consulting
+- Customer Experience (CX)
+- Commerce Technology
+- Technology and Innovation
+- Web development
+
+----
+
+Region: Europe
+
+----
+
+Uuid: J7Z5aup7qPwbZmmX
