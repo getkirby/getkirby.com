@@ -3,6 +3,7 @@
 namespace Kirby\Search;
 
 use Kirby\Cms\App;
+use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 
 /**
@@ -16,11 +17,9 @@ use Kirby\Cms\Pages;
 class Index
 {
 	protected Pages $entries;
-	public $index;
 
 	public function __construct(protected Search $search)
 	{
-		$this->index = $search->algolia->initIndex($search->options['index']);
 	}
 
 	/**
@@ -28,11 +27,13 @@ class Index
 	 */
 	protected function entries(): Pages
 	{
-		return $this->entries ??= App::instance()->site()->index()->map(
-			fn ($page) => new Entry($page, $this->search)
-		)->filter(
-			fn ($entry) => $entry->isIndexable()
-		);
+		return $this->entries ??= App::instance()
+			->site()
+			->index()
+			// inject the plugins from the collection that fetches from plugins.getkirby.com
+			->merge(App::instance()->collection('plugins'))
+			->map(fn (Page $page) => new Entry($page, $this->search))
+			->filter(fn (Entry $entry) => $entry->isIndexable());
 	}
 
 	/**
@@ -42,8 +43,8 @@ class Index
 	 */
 	public function generate(): void
 	{
-		$objects = $this->entries()->map(fn ($entry) => $entry->toData());
-		$this->index->replaceAllObjects($objects);
+		$entries = $this->entries()->map(fn ($entry) => $entry->toData());
+		$this->search->algolia->replaceAllObjects($this->search->options['index'], $entries);
 	}
 
 	/**

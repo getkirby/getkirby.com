@@ -4,21 +4,21 @@ use Kirby\Toolkit\Str;
 
 return [
 	'algolia' => [
-		'app'   => 'S7OGBIAJTV',
-		'index' => 'getkirby-3',
-		'fields' => [
+		'app'       => 'S7OGBIAJTV',
+		'index'     => 'getkirby-4',
+		'fields'    => [
 			'title',
 			'keywords',
-			'byline' =>
+			'byline'   =>
 				fn ($page) => strip_tags($page->searchbyline()->kti()),
-			'intro' => function ($page) {
+			'intro'    => function ($page) {
 				$html = $page->description()->or($page->intro())->kti();
 				return strip_tags($html);
 			},
-			'text' => function ($page) {
+			'text'     => function ($page) {
 				return strip_tags($page->text()->kti());
 			},
-			'area' => function ($page) {
+			'area'     => function ($page) {
 				if (Str::startsWith($page->id(), 'docs/reference') === true) {
 					return 'reference';
 				}
@@ -31,10 +31,10 @@ return [
 					default           => null
 				};
 			},
-			'weight' => function ($page) {
+			'weight'   => function ($page) {
 				return match ($page->intendedTemplate()->name()) {
 					'guide',
-					'cookbook-recipe'        => 2,
+					'cookbook-recipe'     => 2,
 					'reference-classmethod',
 					'reference-component',
 					'reference-endpoint',
@@ -42,11 +42,11 @@ return [
 					'reference-helper',
 					'reference-hook',
 					'reference-kirbytag',
-					'reference-validator'    => 0.5,
+					'reference-validator' => 0.5,
 					'referece-icon',
 					'reference-root',
-					'reference-url'          => 0.25,
-					default                  => 1
+					'reference-url'       => 0.25,
+					default               => 1
 				};
 			}
 		],
@@ -82,7 +82,7 @@ return [
 			'release-35'
 		]
 	],
-	'areas' => [
+	'areas'   => [
 		'all'       => 'All pages',
 		'guide'     => 'Guide',
 		'reference' => 'Reference',
