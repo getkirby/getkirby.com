@@ -8,7 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
-    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src', $vendorDir . '/psr/http-factory/src'),
     'Kirby\\Search\\' => array($baseDir . '/src'),
-    'Algolia\\AlgoliaSearch\\' => array($vendorDir . '/algolia/algoliasearch-client-php/src'),
+    'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
+    'Algolia\\AlgoliaSearch\\' => array($vendorDir . '/algolia/algoliasearch-client-php/lib'),
 );

@@ -2,7 +2,7 @@
 
 namespace Kirby\Search;
 
-use Algolia\AlgoliaSearch\SearchClient as Algolia;
+use Algolia\AlgoliaSearch\Api\SearchClient as Algolia;
 use Exception;
 use Kirby\Cms\App;
 
@@ -16,10 +16,10 @@ use Kirby\Cms\App;
  */
 class Search
 {
-	public Algolia $algolia;
+	public Algolia       $algolia;
 	public static Search $instance;
-	public Index $index;
-	public array $options = [];
+	public Index         $index;
+	public array         $options = [];
 
 	public function __construct()
 	{
@@ -55,19 +55,20 @@ class Search
 	 * Sends a search query to Algolia and returns
 	 * a paginated collection of results
 	 *
-	 * @param string $query Search query
+	 * @param string|null $query Search query
 	 * @param int $page Pagination page to return (starts at 1, not 0!)
 	 * @param array $options Search parameters to override the default settings
 	 *                       See https://www.algolia.com/doc/api-client/methods/search/
 	 */
 	public function query(
 		string $query = null,
-		int $page = 1,
-		array $options = []
+		int    $page = 1,
+		array  $options = []
 	): Results {
 		$options = [
 			...$this->options['options'] ?? [],
-			...$options
+			...$options,
+			'query' => $query
 		];
 
 		// Set the page parameter
@@ -76,7 +77,10 @@ class Search
 		$options['page'] = $page ? $page - 1 : 0;
 
 		// Get results response
-		$response = $this->index()->index->search($query, $options);
+		$response = $this->algolia->searchSingleIndex(
+			$this->options['index'],
+			$options
+		);
 
 		// Return collection of the results
 		return Results::from($response);

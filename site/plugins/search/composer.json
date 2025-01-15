@@ -1,14 +1,14 @@
 {
-  "name": "getkirby/search",
-  "autoload": {
-    "psr-4": {
-      "Kirby\\Search\\": "src/"
-    }
-  },
-  "require": {
-    "algolia/algoliasearch-client-php": "^3.3.2"
-  },
-  "config": {
-    "optimize-autoloader": true
-  }
+	"name": "getkirby/search",
+	"autoload": {
+		"psr-4": {
+			"Kirby\\Search\\": "src/"
+		}
+	},
+	"require": {
+		"algolia/algoliasearch-client-php": "^4.0"
+	},
+	"config": {
+		"optimize-autoloader": true
+	}
 }

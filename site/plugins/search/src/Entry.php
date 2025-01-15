@@ -16,7 +16,7 @@ use Kirby\Content\Field;
 class Entry
 {
 	public function __construct(
-		protected Page $page,
+		protected Page   $page,
 		protected Search $search
 	) {
 	}
@@ -51,8 +51,8 @@ class Entry
 	{
 		$result = [];
 
-		foreach($fields as $name => $props) {
-			if(is_int($name) === true) {
+		foreach ($fields as $name => $props) {
+			if (is_int($name) === true) {
 				$name  = $props;
 				$props = null;
 			}
@@ -128,7 +128,11 @@ class Entry
 	 */
 	public function toData(): array
 	{
-		$data = ['objectID' => $this->page->id()];
+		$data             = [];
+		$data['objectID'] = match ($this->template()) {
+			'plugin' => $this->page->url(),
+			default  => $this->page->id()
+		};
 
 		// loop through field definitions and generate
 		// actual field data to put into the index
@@ -136,10 +140,10 @@ class Entry
 			$data[$name] = match (true) {
 				// custom function
 				is_callable($method)
-					=> $method($this->page),
+				=> $method($this->page),
 				// field method with/without parameters
 				is_string($method) || is_array($method)
-					=> $this->toDataFromFieldMethod($name, $method),
+				=> $this->toDataFromFieldMethod($name, $method),
 				// no or invalid operation, convert to string
 				default
 				=> (string)$this->page->$name()
@@ -154,7 +158,7 @@ class Entry
 	 * to be included in the index for the field
 	 */
 	protected function toDataFromFieldMethod(
-		string $name,
+		string       $name,
 		string|array $method
 	): string {
 		$field = $this->page->$name();

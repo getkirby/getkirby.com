@@ -4,7 +4,7 @@
 	"type": "project",
 	"homepage": "https://getkirby.com",
 	"require": {
-		"php": ">=8.1.0",
+		"php": ">=8.2.0",
 		"getkirby/cms": "^4.0"
 	},
 	"scripts": {
