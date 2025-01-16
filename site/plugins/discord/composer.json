@@ -1,0 +1,42 @@
+{
+	"name": "getkirby/discord",
+	"description": "Simple Discord webhook wrapper",
+	"license": "MIT",
+	"type": "kirby-plugin",
+	"keywords": [
+		"kirby",
+		"kirby4",
+		"kirby5",
+		"cms",
+		"webhook",
+		"discord",
+		"notification"
+	],
+	"authors": [
+		{
+			"name": "Kirby Team",
+			"email": "mail@getkirby.com"
+		}
+	],
+	"homepage": "https://getkirby.com",
+	"support": {
+		"email": "support@getkirby.com",
+		"issues": "https://github.com/getkirby/discord/issues",
+		"forum": "https://forum.getkirby.com",
+		"source": "https://github.com/getkirby/discord"
+	},
+	"require": {
+		"php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
+		"getkirby/cms": "^4.0.0",
+		"getkirby/composer-installer": "^1.2.1"
+	},
+	"config": {
+		"allow-plugins": {
+			"getkirby/composer-installer": true
+		},
+		"optimize-autoloader": true
+	},
+	"extra": {
+		"installer-name": "discord"
+	}
+}
