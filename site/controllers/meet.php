@@ -8,7 +8,7 @@ return function (App $kirby) {
 
 	// expire the cache 2h after the next upcoming event starts
 	if ($next = $upcoming->sortBy('date', 'asc')->first()) {
-		$time = $next->datetime()->getTimestamp() + (60 * 60 * 2);
+		$time = $next->expiryTime();
 		$kirby->response()->expires($time);
 		$kirby->response()->header('Expires', gmdate('D, d M Y H:i:s T', $time));
 	}

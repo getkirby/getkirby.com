@@ -20,6 +20,12 @@ class EventPage extends Page
 		);
 	}
 
+	public function expiryTime(): int
+	{
+		// expire each event two hours after it started
+		return $this->datetime()->getTimestamp() + (60 * 60 * 2);
+	}
+
 	public function icon(): string
 	{
 		return parent::icon()->or(match (true) {
@@ -35,7 +41,7 @@ class EventPage extends Page
 
 	public function isUpcoming(): bool
 	{
-		return $this->datetime()->getTimestamp() >= time();
+		return $this->expiryTime() >= time();
 	}
 
 	public function shortTitle(): Field
