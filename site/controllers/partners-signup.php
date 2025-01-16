@@ -5,6 +5,7 @@ use Kirby\Buy\Passthrough;
 use Kirby\Buy\Product;
 use Kirby\Cms\App;
 use Kirby\Cms\Page;
+use Kirby\Discord\Discord;
 use Kirby\Honey\Time;
 use Kirby\Http\Remote;
 
@@ -105,6 +106,38 @@ return function (App $kirby, Page $page) {
 			if (isset($response['error']) === true) {
 				throw new Exception($response['error']['message'] . '(' . $response['error']['type'] . ')');
 			}
+
+			// Send a Discord webhook on success
+			Discord::submit(
+				username: 'getkirby.com/partners',
+				webhook: option('keys.discord.hooks.partners'),
+				title: '🦹 New Partner Application',
+				color: '#ebc747',
+				description: $website,
+				author: [
+					'name' => $name,
+					'url'  => $website,
+					'icon' => gravatar($email, 'retro')
+				],
+				fields: [
+					[
+						'name'  => 'Business Type',
+						'value' => $businessName
+					],
+					[
+						'name'  => 'Location',
+						'value' => $location
+					],
+					[
+						'name'  => 'Plan',
+						'value' => $plan
+					],
+					[
+						'name'  => 'People',
+						'value' => $people
+					],
+				],
+			);
 
 			go('partners/join/success');
 		} catch (Throwable $e) {
