@@ -5,7 +5,10 @@ return [
 	'airtable'  => '',
 	'discord'   => [
 		'bot'   => '',
-		'guild' => ''
+		'guild' => '',
+		'hooks' => [
+			'partners' => ''
+		]
 	],
 	'fastmail'  => '',
 	'github'    => '',
