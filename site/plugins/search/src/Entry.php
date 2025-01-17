@@ -128,11 +128,7 @@ class Entry
 	 */
 	public function toData(): array
 	{
-		$data             = [];
-		$data['objectID'] = match ($this->template()) {
-			'plugin' => $this->page->url(),
-			default  => $this->page->id()
-		};
+		$data = ['objectID' => $this->page->id()];
 
 		// loop through field definitions and generate
 		// actual field data to put into the index
