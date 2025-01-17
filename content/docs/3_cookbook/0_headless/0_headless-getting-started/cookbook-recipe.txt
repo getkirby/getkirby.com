@@ -27,13 +27,13 @@ Using Kirby headless can have many benefits, from security & performance to inte
 
 This guide will explain how to set Kirby up for headless use on a basic level. This is a pre-cursor guide before you move on to pulling data into another system.
 
-## Assumptions
+## Prerequisites
 
-We will start out with a fresh copy of the Starter Kit installed using Composer. You can find instructions for this in the [Kirby meets Composer](https://getkirby.com/docs/guide/install-guide/composer) guide.
+- A fresh copy of the Starter Kit installed using Composer. You can find instructions for this in the [Kirby meets Composer](https://getkirby.com/docs/guide/install-guide/composer) guide.
 
-To work locally, you will also need a local web server capable of using SSL such as Laraval Valet or MAMP.
+- To work locally, you will also need a local web server capable of using SSL such as Laraval Valet or MAMP.
 
-We will also be working with the [KQL Plugin](https://github.com/getkirby/kql), giving us a lot of flexability in fetching data from Kirby. Please ensure you have this installed before proceeding.
+- Make sure to install the [KQL Plugin](https://github.com/getkirby/kql). This gives us a lot of flexability in fetching data from Kirby.
 
 ## Enabling BasicAuth
 
