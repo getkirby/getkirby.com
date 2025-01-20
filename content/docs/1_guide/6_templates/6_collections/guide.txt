@@ -61,9 +61,9 @@ return function ($site) {
 Collections can be used in templates and snippets like this:
 
 ```php
-$kirby->collection("articles");
-$kirby->collection("admins");
-$kirby->collection("project-covers");
+$kirby->collection('articles');
+$kirby->collection('admins');
+$kirby->collection('project-covers');
 ```
 
 You can loop through the collections like through any collection like this:
@@ -94,7 +94,7 @@ return function ($site) {
 ```
 
 ```php
-$kirby->collection("articles/latest");
+$kirby->collection('articles/latest');
 ```
 
 ## Best practices
