@@ -11,29 +11,27 @@ namespace Kirby\Discord;
  */
 class Field
 {
-    public function __construct(
-        public string $name,
-        public mixed $value,
+	public function __construct(
+		public string $name,
+		public mixed $value,
 		public bool $inline = false
-    ) {
-    }
+	) {
+	}
 
 	public static function from(self|array $field): static|null
 	{
 		return match (true) {
-			is_array($field)
-				=> new static(...$field),
-			default
-				=> $field
+			is_array($field) => new static(...$field),
+			default          => $field
 		};
 	}
 
-    public function toArray(): array
-    {
-        return [
+	public function toArray(): array
+	{
+		return [
 			'name'   => $this->name,
 			'value'  => $this->value,
 			'inline' => $this->inline
-        ];
-    }
+		];
+	}
 }
