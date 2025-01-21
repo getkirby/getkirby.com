@@ -108,36 +108,36 @@ return function (App $kirby, Page $page) {
 			}
 
 			// Send a Discord webhook on success
-			Discord::submit(
-				username: 'getkirby.com/partners',
-				webhook: option('keys.discord.hooks.partners'),
-				title: '🦹 New Partner Application',
-				color: '#ebc747',
-				description: $website,
-				author: [
-					'name' => $name,
-					'url'  => $website,
-					'icon' => gravatar($email, 'retro')
-				],
-				fields: [
-					[
-						'name'  => 'Business Type',
-						'value' => $businessName
-					],
-					[
-						'name'  => 'Location',
-						'value' => $location
-					],
-					[
-						'name'  => 'Plan',
-						'value' => $plan
-					],
-					[
-						'name'  => 'People',
-						'value' => $people
-					],
-				],
-			);
+			// Discord::submit(
+			// 	username: 'getkirby.com/partners',
+			// 	webhook: option('keys.discord.hooks.partners'),
+			// 	title: '🦹 New Partner Application',
+			// 	color: '#ebc747',
+			// 	description: $website,
+			// 	author: [
+			// 		'name' => $name,
+			// 		'url'  => $website,
+			// 		'icon' => gravatar($email, 'retro')
+			// 	],
+			// 	fields: [
+			// 		[
+			// 			'name'  => 'Business Type',
+			// 			'value' => $businessName
+			// 		],
+			// 		[
+			// 			'name'  => 'Location',
+			// 			'value' => $location
+			// 		],
+			// 		[
+			// 			'name'  => 'Plan',
+			// 			'value' => $plan
+			// 		],
+			// 		[
+			// 			'name'  => 'People',
+			// 			'value' => $people
+			// 		],
+			// 	],
+			// );
 
 			go('partners/join/success');
 		} catch (Throwable $e) {
