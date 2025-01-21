@@ -3,6 +3,8 @@
 name: Update Algolia index
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [update-algolia]
   push:
     branches:
       - main
