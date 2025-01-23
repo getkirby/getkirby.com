@@ -405,6 +405,7 @@ Deprecated:
 - `<k-writer>` will be removed in a future version. Use `<k-writer-input></k-writer-input>` instead [#6172](https://github.com/getkirby/kirby/pull/6172)
 - `<k-bubble>`, `<k-bubbles>` and `<k-bubbles-field-preview>`. Use `<k-tag>`, `<k-tags>` and `<k-tag-field-preview>` instead. [#6569](https://github.com/getkirby/kirby/pull/6569)
 - `--color-backdrop` CSS property has been deprecated. Use `--overlay-color-back` instead [#6299](https://github.com/getkirby/kirby/pull/6299)
+- `panel.favicon` option throws deprecation warnings for `url` option (use `href` instead) and for `rel` key (use `rel`option instead)
 
 ----
 
