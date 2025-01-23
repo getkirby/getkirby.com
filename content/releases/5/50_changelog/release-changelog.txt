@@ -250,6 +250,8 @@ Breaking:
 - Cache IDs in the pages cache now include a part for the version ID. Currently this is always `.latest`, e.g. `home.latest.html`. [#6827](https://github.com/getkirby/kirby/pull/6827?new_mergebox=true)
 - Removed internal `$page->isVerified()` method in favor of internal `$page->renderVersionFromRequest()` [#6829](https://github.com/getkirby/kirby/pull/6829)
 - Closures defined for the `content.salt` option will no longer receive a model when generating a salt for preview authentication tokens of drafts and versions as those tokens are now only based on the URI. The salt callback instead receives `null`  and is expected to return a fixed model-independent salt in this case. When generating a salt for a file media token, the file object is still passed as model. [#6836](https://github.com/getkirby/kirby/pull/6836)
+- The `Str::ucfirst()` method no longer lowercases all but the first letter of the text, it only capitalizes the first letter. [#6860](https://github.com/getkirby/kirby/pull/6860)
+- Classes extending `ModelPermissions` need to set their category with the `const CATEGORY` or `static function category()` instead of `protected string $category` and use the static `user()` method instead of `$user` and `$permissions` properties [#6880](https://github.com/getkirby/kirby/pull/6880)
 
 ## Panel
 
@@ -270,6 +272,15 @@ Breaking:
 - While `<k-writer>` is still included as alias for <`k-writer-input`>, some use cases where you accessed the `<k-writer>` component via the `$refs` of `<k-writer-input>` have to be adapted [#6172](https://github.com/getkirby/kirby/pull/6172)
 - `<k-draggable>`: the `move` callback function is receiving an event with an altered data structure
 - CSS attribute selectors must be written fully qualified (e.g. `[data-hidden="true"]` as only `[data-hidden]` can start matching also elements where that attribute is `false`) [#6109](https://github.com/getkirby/kirby/pull/6109)
+- `required: true` on checkbox and toggle fields now enforces that these fields need to be checked/toggles (active state)
+- `<k-item>`: Removed `data-only-option` attributes
+- `<k-dialog>`: Removed `data-has-footer` attribute
+- `<k-toggles-input>`: Removed `data-disabled` attribute
+- `<k-writer-input>`: Removed `data-toolbar-inline` attribute
+- `<k-bubble>`: Removed `data-has-text` attribute
+- `<k-header>`: Removed `data-has-buttons` attribute
+- `<k-tag>`: Removed `data-has-image` and `data-has-toggle` attributes
+- `<k-tree>`: Removed `data-has-subtree` attribute
 
 ## API
 
