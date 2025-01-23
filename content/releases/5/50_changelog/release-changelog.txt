@@ -195,6 +195,15 @@ Bugfixes:
 - Fixed background CSS for the `k-progress` component
 - Fix PHP error when `null` is passed as model to `$kirby->contentToken()` [#6822](https://github.com/getkirby/kirby/pull/6822)
 - Fixed footer margin in dialogs if the `cancelButton` property is a string or object instead of a boolean. [#6833](https://github.com/getkirby/kirby/pull/6833)
+- Fixed `Str::ucfirst()` behavior, now behaves like PHP default [#6834](https://github.com/getkirby/kirby/issues/6834)
+- Writer field: inline toolbar is hidden when no nodes and marks are available [#6804](https://github.com/getkirby/kirby/issues/6804)
+- Page dropdown: fix disabling preview item [#6891](https://github.com/getkirby/kirby/issues/6891)
+- File preview: fix aspect ratio for medium viewports [#6891](https://github.com/getkirby/kirby/issues/6891)
+- Page section w/ table layout: fix flag column [#6866](https://github.com/getkirby/kirby/issues/6866)
+- Range/Number field: fix `isEmpty()` usage [#6898](https://github.com/getkirby/kirby/pull/6898)
+- Custom writer nodes: fixed active state detection for nodes that include paragraph child nodes [#6902](https://github.com/getkirby/kirby/pull/6902)
+- Permissions are now always correctly determined if the active user changes during the request [#6880](https://github.com/getkirby/kirby/pull/6880)
+
 ----
 
 Breaking:
