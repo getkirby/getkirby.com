@@ -507,6 +507,9 @@ Refactored:
 	- `Kirby\Form\Mixin\When`
 - New `Kirby\Plugin` namespace [#6737](https://github.com/getkirby/kirby/pull/6737)
 - New `Kirby\Toolkit\Component::applyProp()` method to allow resetting single props and also improves prop unsetting in custom components.
+- `ModelPermissions` now also supports `Language` objects as quasi models [#6876](https://github.com/getkirby/kirby/pull/6876)
+- New `LanguagePermissions` class that inherits the existing logic from `LanguageRules` for consistency with other models [#6876](https://github.com/getkirby/kirby/pull/6876)
+- Globally cache `access` and `list` permissions per permission category, model type and user role to reduce code duplication [#6881](https://github.com/getkirby/kirby/pull/6881)
 
 ## Panel
 
