@@ -13,6 +13,7 @@ Enhancements:
 ## Core
 - Thumbnails will not any longer be regenerated when page sorting changes [#6432](https://github.com/getkirby/kirby/pull/6432)
 - New `files.sort` permission [#1969](https://github.com/getkirby/kirby/issues/1969)
+- New `$app->role()` method that works like `$app->user()` to return a specific role or the role of the current user. [#6874](https://github.com/getkirby/kirby/pull/6874)
 
 #### Versions
 - New (class: Kirby\Cms\ModelWithContent method: version) method to directly access different content versions [#6455](https://github.com/getkirby/kirby/pull/6455)
@@ -144,6 +145,8 @@ Enhancements:
 - New icons: `asterisk`, `collapse-horizontal`, `expand-horizontal`, `layout-columns`, `layout-right`, `layout-left`, `window`
 - The fields section now passes all values on input of any field instead of updating just the one field (similar to on submit) [#6517](https://github.com/getkirby/kirby/pull/6517)
 - Improved contrast for some theme colors (e.g. `aqua-icon` theme)
+- Writer: nodes with `inline: true` in their button definition are displayed as inline buttons in toolbar (instead inside the dropdown) [#6902](https://github.com/getkirby/kirby/pull/6902)
+- Page status button uses custom status labels for `title` [#6911](https://github.com/getkirby/kirby/pull/6911)
 
 #### Components
 - New `badge` prop for `<k-button>` (value: `{ text, theme }`) [#6755](https://github.com/getkirby/kirby/pull/6755)
@@ -172,6 +175,7 @@ Enhancements:
   this.$panel.events.emit("clipboard.write", "Add me to the clipboard");
 	```
 - New `uploadAsChunks` JS helper function [#6421](https://github.com/getkirby/kirby/pull/6421)
+- New `this.$helper.object.filter(object, predicate)`. [#6902](https://github.com/getkirby/kirby/pull/6902)
 
 #### Styling
 - New `--color-l-min` and `--color-l-max` CSS properties [#6299](https://github.com/getkirby/kirby/pull/6299)
