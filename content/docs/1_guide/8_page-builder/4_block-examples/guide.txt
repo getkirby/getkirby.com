@@ -378,6 +378,12 @@ panel.plugin("cookbook/block-factory", {
         },
         headingField() {
           return this.field("heading");
+        },
+				faqQuestionField() {
+          return this.field('faq').fields.question;
+        },
+				faqAnswerField() {
+          return this.field('faq').fields.answer;
         }
       },
       methods: {
@@ -407,7 +413,7 @@ panel.plugin("cookbook/block-factory", {
                 <k-writer
                   ref="question"
                   :inline="true"
-                  :marks="false"
+                  :marks="faqQuestionField.marks"
                   :value="item.question"
                   @input="updateItem(content, index, 'question', $event)"
                 />
@@ -415,7 +421,7 @@ panel.plugin("cookbook/block-factory", {
               <k-writer
                 class="label"
                 ref="answer"
-                :marks="true"
+                :marks="faqAnswerField.marks"
                 :value="item.answer"
                 @input="updateItem(content, index, 'answer', $event)"
               />
