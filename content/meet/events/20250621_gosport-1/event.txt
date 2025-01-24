@@ -1,0 +1,9 @@
+start: 18:00:00
+----
+city: Gosport
+----
+country: UK
+----
+issue: 1
+----
+link: https://www.oddcircles.com/events/0fa09261-fa78-4e70-a4ba-834b701d0874/undefined

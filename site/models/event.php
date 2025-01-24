@@ -53,7 +53,7 @@ class EventPage extends Page
 		}
 
 		if ($this->city()->isNotEmpty()) {
-			$title[] = 'Kirby Meetup ' . $this->city();
+			$title[] = 'Kirby Meetup ' . $this->city() . ', ' . $this->country();
 		}
 
 		if ($this->conference()->isNotEmpty()) {
