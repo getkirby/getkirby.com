@@ -10,8 +10,4 @@ Text: Blimey, Kirby has come on a lot since I last used it. A fantastic CMS.
 
 ----
 
-Link: https://twitter.com/piccalilli_/status/1191815150178897924
-
-----
-
 Bio: Developer & author

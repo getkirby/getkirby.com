@@ -3,7 +3,7 @@
 		<?= $voice->text()->widont() ?>
 	</p>
 	<footer>
-		<a href="<?= $voice->website()->or($voice->tweet()) ?>">
+		<a href="<?= $voice->website() ?>">
 			<figure class="flex items-center">
 				<?php if($image = $voice->image()): ?>
 				<div class="flex-shrink-0 mr-3" style="width: var(--spacing-12); --aspect-ratio: 1/1">

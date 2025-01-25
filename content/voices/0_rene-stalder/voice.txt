@@ -10,8 +10,4 @@ Website: https://renestalder.me/en/
 
 ----
 
-Link: https://twitter.com/renestalder/status/1362077174581391364
-
-----
-
 Bio: Front-end-developer & accessibility consultant

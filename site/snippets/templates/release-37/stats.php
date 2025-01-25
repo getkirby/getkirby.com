@@ -55,7 +55,7 @@
 		<div class="release-text-box" style="grid-area: box1">
 			<h3>Easy as 1-2-3</h3>
 			<div class="prose">
-				Show beautiful stats for your site or shop. Revenues, transactions, Instagram likes, page views… it’s totally up to you. Add as many reports to a <a href="/docs/reference/panel/sections/stats">stats section</a> as you need. Customize reports using our query syntax, and easily integrate into page models or site methods.
+				Show beautiful stats for your site or shop. Revenues, transactions, Social media engagement, page views… it’s totally up to you. Add as many reports to a <a href="/docs/reference/panel/sections/stats">stats section</a> as you need. Customize reports using our query syntax, and easily integrate into page models or site methods.
 			</div>
 		</div>
 

@@ -307,7 +307,7 @@ The `k-users-view` component uses the `k-inside` component as a basic wrapper. T
 
 In this example, the list of users is just a basic unordered list, but of course, this could be anything. A big table, custom cards, or whatever you need to show your users appropriately.
 
-The backend part of your overwritten view is now sending exactly what your component needs. If you find out that you want to send your users in alphabetical groups or every user object should also contain the Instagram follower count, go for it.
+The backend part of your overwritten view is now sending exactly what your component needs. If you find out that you want to send your users in alphabetical groups or every user object should also contain the Mastodon follower count, go for it.
 
 ```php
 Kirby::plugin('custom/users', [

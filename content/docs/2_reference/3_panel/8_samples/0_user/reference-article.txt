@@ -39,15 +39,15 @@ columns:
       website:
         label: Website
         type: url
-      fediverse:
-        label: Fediverse URL
+      mastodon:
+        label: Mastodon
         type: url
         icon: mastodon
         placeholder: https://example.com/@username
-      instagram:
-        label: Instagram
+      bluesky:
+        label: Bluesky
         type: text
-        icon: instagram
+        icon: bluesky
         placeholder: username
 ```
 
@@ -72,10 +72,10 @@ sections:
         icon: mastodon
         placeholder: https://example.com/@username
         width: 1/3
-      instagram:
-        label: Instagram
+      bluesky:
+        label: Bluesky
         type: text
-        icon: instagram
+        icon: bluesky
         placeholder: username
         width: 1/3
   documents:

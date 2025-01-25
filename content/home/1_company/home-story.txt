@@ -32,7 +32,7 @@ Mastodon: @h-and-c@h-and-c.social
 
 &minus;---
 
-Instagram: @h-and-c
+Bluesky: @h-and-c.com
 
 ----
 
@@ -57,7 +57,7 @@ Api:
 ```json
 {
   "site": {
-    "title": "H&C", "mastodon": "@h-and-c@h-and-c.social", "instagram": "@h-and-c"
+    "title": "H&C", "mastodon": "@h-and-c@h-and-c.social", "bluesky": "@h-and-c.com"
   },
   "projects": [
     { "title": "Creatious Labs.", "url": "/projects/creatious-labs" },
