@@ -66,7 +66,6 @@
 							'-',
 							'Mastodon' => 'https://mastodon.social/@getkirby',
 							'LinkedIn' => 'https://www.linkedin.com/company/getkirby',
-							'Instagram' => 'https://instagram.com/getkirby',
 						]
 					]) ?>
 				</ul>

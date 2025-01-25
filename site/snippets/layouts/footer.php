@@ -21,9 +21,6 @@
 					<a title="LinkedIn" rel="me" href="https://linkedin.com/company/getkirby">
 						<?= icon('linkedin') ?>
 					</a>
-					<a title="Instagram" rel="me" href="https://instagram.com/getkirby">
-						<?= icon('instagram') ?>
-					</a>
 					<a title="Youtube" rel="me" href="https://videos.getkirby.com">
 						<?= icon('youtube') ?>
 					</a>
@@ -96,7 +93,6 @@
 									'Community map' => 'https://community.getkirby.com',
 									'Mastodon'      => 'https://mastodon.social/@getkirby',
 									'LinkedIn'      => 'https://www.linkedin.com/company/getkirby',
-									'Instagram'     => 'https://instagram.com/getkirby',
 								]
 							]) ?>
 						</ul>

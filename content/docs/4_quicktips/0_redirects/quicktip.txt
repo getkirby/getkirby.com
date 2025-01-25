@@ -94,7 +94,7 @@ This template doesn't display anything to the visitor but redirects directly to 
 
 Now whenever someone visits `https://yourclientsdomain.com/blog`, they will be redirected to `https://ourawesomeproduct.tumblr.com`. And whenever someone visits `https://yourclientsdomain.com/support`, they will be redirected to `https://zendesk.com/ourawesomeproduct`. The menu is 100% editable from the Panel and you don't need to hack anything. Another side effect is that your client now has those nice branded URLs for their external support platform and blog.
 
-Once you've installed the `link.php` template, you can also use it to create more custom shortened links for your client. By adding invisible folders to the main content folder, you could also create redirects like `http://yourclientsdomain.com/facebook` or `http://yourclientsdomain.com/someothershortenedlink`
+Once you've installed the `link.php` template, you can also use it to create more custom shortened links for your client. By adding invisible folders to the main content folder, you could also create redirects like `http://yourclientsdomain.com/mastodon` or `http://yourclientsdomain.com/someothershortenedlink`
 
 
 ## Route instead of template

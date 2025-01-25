@@ -10,8 +10,4 @@ Text: Working with Kirby is such a joy!
 
 ----
 
-Link: https://twitter.com/m_ott/status/1235134616023031808
-
-----
-
 Bio: UX designer, UI engineer, teacher, speaker

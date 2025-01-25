@@ -2,8 +2,6 @@ Title: Simon Collison
 ----
 Username: colly
 ----
-Link: https://twitter.com/colly/status/1214864770035322880
-----
 Text: Switching my sites to Kirby has transformed how I feel about them. I've rediscovered the ”designers who hack” spirit … I feel like I can build anything.
 ----
 Website: https://colly.com

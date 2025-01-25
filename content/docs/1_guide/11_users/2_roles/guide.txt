@@ -54,7 +54,7 @@ tabs:
 
   info:
     label: Additional info
-    icon: instagram
+    icon: mastodon
     sections:
       info:
         type: fields
@@ -63,10 +63,10 @@ tabs:
             label: Website
             type: url
             width: 1/2
-          instagram:
-            label: Instagram
+          mastodon:
+            label: Mastodon
             type: text
-            icon: instagram
+            icon: mastodon
             width: 1/2
           bio:
             label: Bio

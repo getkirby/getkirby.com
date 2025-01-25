@@ -10,8 +10,4 @@ Text: Kirby is the best CMS I’ve ever worked with in 15-ish years of building 
 
 ----
 
-Link: https://twitter.com/nigel/status/1215731478996377600
-
-----
-
 Bio: Interdisciplinary designer

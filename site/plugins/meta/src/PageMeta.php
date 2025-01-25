@@ -71,7 +71,8 @@ class PageMeta
 					'logo'   => url('/assets/images/kirby-signet.svg'),
 					'sameAs' => [
 						'https://mastodon.social/@getkirby',
-						'https://instagram.com/getkirby',
+						'https://bsky.app/profile/getkirby.com',
+						'https://www.linkedin.com/company/getkirby'
 					],
 				],
 				[
@@ -140,12 +141,9 @@ class PageMeta
 		$og['og:type']      = 'website';
 		$og['og:title']     = $this->get('ogtitle')->or($this->page->title());
 
-		// other platforms than Twitter also rely on this to display
-		// large preview images, e.g. Discord
-		$meta['twitter:card'] = 'summary_large_image';
-
 		// Meta and OpenGraph description
 		$description = $this->get('description', true);
+
 		if ($description->isNotEmpty()) {
 			$og['og:description'] = $description->excerpt(200);
 			$meta['description']  = $description->excerpt(160);
@@ -158,8 +156,6 @@ class PageMeta
 			if ($thumbnail->alt()->isNotEmpty()) {
 				$og['og:image:alt'] = $thumbnail->alt()->value();
 			}
-		} else if ($meta['twitter:card'] === 'summary_large_image') {
-			$meta['twitter:card'] = 'summary';
 		}
 
 		return Tpl::load(

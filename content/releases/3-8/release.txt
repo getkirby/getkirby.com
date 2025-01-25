@@ -231,7 +231,7 @@ options:
   type: query
   query: site.contactoptions.toStructure
   text: "{< item.nameWithHtml >}"
-  value: "{{ item.twitter }}"
+  value: "{{ item.mastodon }}"
 ```
 
 **Core**

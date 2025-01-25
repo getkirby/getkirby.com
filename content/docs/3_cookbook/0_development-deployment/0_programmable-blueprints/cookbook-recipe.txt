@@ -588,8 +588,8 @@ $basicBlueprint = Data::read(__DIR__ . '/seo-basic.yml', 'yaml');
 $basicBlueprint['label'] = 'SEO';
 $fields = $basicBlueprint['sections']['basicMeta']['fields'];
 $basicBlueprint['sections']['basicMeta']['fields'] = array_merge($fields, [
-    'twitterHandle' => [
-        'label' => 'Twitter handle',
+    'mastodonHandle' => [
+        'label' => 'Mastodon handle',
         'type' => 'text',
     ]
 ]);
@@ -599,7 +599,7 @@ return $basicBlueprint;
 
 First, we read the file we want to extend into an array with `Data::read()`.
 
-Then we change the tab label and add a new field in the `basicMeta` section by merging the original fields array with the new `twitterHandle` field.
+Then we change the tab label and add a new field in the `basicMeta` section by merging the original fields array with the new `mastodonHandle` field.
 
 We can now add this tab in our page blueprints:
 

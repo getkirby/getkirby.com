@@ -87,10 +87,10 @@
 			</a>
 		</li>
 		<li class="bg-dark p-6">
-			<a class="block" href="https://twitter.com/getkirby">
+			<div class="block">
 				<span class="block text-2xl" style="color: var(--color-blue-400)">5,827</span>
 				<span class="font-mono text-xs"> Twitter followers</span>
-			</a>
+			</div>
 		</li>
 		<li class="bg-dark p-6">
 			<a class="block" href="https://videos.getkirby.com">
