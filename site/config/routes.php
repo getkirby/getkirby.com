@@ -46,13 +46,9 @@ return [
 	],
 	[
 		'pattern' => 'pixels',
-		'action'  => fn () => new Page([
-			'slug'     => 'pixels',
-			'template' => 'pixels',
-			'content'  => [
-				'title' => 'Pixels'
-			]
-		])
+		'action'  => function () {
+			go('https://pixels.getkirby.com');
+		}
 	],
 	[
 		// blocks all requests to *.html and returns 404
