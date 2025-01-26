@@ -79,6 +79,7 @@
 									'Themes'      => page('themes'),
 									'Newsletter'  => page('kosmos'),
 									'Buzz'        => page('buzz'),
+									'Pixels'      => 'https://pixels.getkirby.com',
 									'License Hub' => 'https://hub.getkirby.com',
 								]
 							]) ?>

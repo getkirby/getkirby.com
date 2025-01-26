@@ -27,12 +27,12 @@
 				<ul class="menu-2">
 					<?php snippet('layouts/menu-items', [
 						'items' => [
-							'Guide' => page('docs/guide'),
-							'Reference' => page('docs/reference'),
-							'Cookbook' => page('docs/cookbook'),
-							'Quicktips' => page('docs/quicktips'),
+							'Guide'       => page('docs/guide'),
+							'Reference'   => page('docs/reference'),
+							'Cookbook'    => page('docs/cookbook'),
+							'Quicktips'   => page('docs/quicktips'),
 							'Screencasts' => 'https://www.youtube.com/kirbycasts',
-							'Glossary' => page('docs/glossary'),
+							'Glossary'    => page('docs/glossary'),
 						]
 					]) ?>
 				</ul>
@@ -43,10 +43,10 @@
 					<?php snippet('layouts/menu-items', [
 						'items' => [
 							'Plugins' => 'https://plugins.getkirby.com',
-							'Themes' => page('themes'),
+							'Themes'  => page('themes'),
 							'-',
 							'Newsletter' => page('kosmos'),
-							'Buzz' => page('buzz'),
+							'Buzz'       => page('buzz'),
 							'-',
 							'License Hub' => 'https://hub.getkirby.com',
 						]
