@@ -177,9 +177,6 @@ Enhancements:
 - New `uploadAsChunks` JS helper function [#6421](https://github.com/getkirby/kirby/pull/6421)
 - New `this.$helper.object.filter(object, predicate)`. [#6902](https://github.com/getkirby/kirby/pull/6902)
 
-#### Styling
-- New `--color-l-min` and `--color-l-max` CSS properties [#6299](https://github.com/getkirby/kirby/pull/6299)
-
 
 ----
 
