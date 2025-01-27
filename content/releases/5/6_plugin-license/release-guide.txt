@@ -18,8 +18,8 @@ App::plugin(
   name: 'plugin-factory/plugin-a',
   extends: [...],
   license: [
-    'name' => 'Custom proprietary license',
-    'link' => 'https://mylicenseshop.com',
+    'name'   => 'Custom license',
+    'link'   => 'https://mylicenseshop.com',
     'status' => 'active',
   ]
 );
@@ -29,15 +29,15 @@ App::plugin(
 
 Text:
 
-Plugin licenses are now shown in the plugins table with an additional icon and theme to indicate their status. Licenses can now have an additional link to their license document or a custom license shop. [#6738](https://github.com/getkirby/kirby/pull/6738)
+Plugin licenses are now shown in the plugins table with an additional column to indicate their status. Licenses can link to their license document, a custom license shop or open a custom dialog to activate the license. [#6738](https://github.com/getkirby/kirby/pull/6738)
 
 (image: plugin-licenses.png)
 
 - New `Kirby\Plugin\License` class
 - New `Kirby\Plugin\LicenseStatus` class
-- New `k-table-license-cell` component in the system view
+- New `k-table-license-cell` and `k-table-license-status-cell` components
 
-**Defining a plugin license as simple array**
+### Defining a plugin license as simple array
 
 This is great if you want to point to your own license document.
 
@@ -46,14 +46,14 @@ App::plugin(
   name: 'my/plugin',
   extends: [...],
   license: [
-    'name' => 'Custom license',
-    'link' => '<https://mylicenseshop.com>',
+    'name'   => 'Custom license',
+    'link'   => 'https://mylicenseshop.com',
     'status' => 'active',
   ]
 );
 ```
 
-**Setting a custom status**
+### Setting a custom status
 
 ```php
 App::plugin(
@@ -61,20 +61,20 @@ App::plugin(
   extends: [...],
   license: [
     'name' => 'Custom license',
-    'link' => 'https://mylicenseshop.com',
     'status' => [
       'value' => 'missing',
       'theme' => 'negative',
       'label' => 'Get a license please',
-      'icon' => 'alert'
+      'icon'  => 'alert'
+      'link'  => 'https://mylicenseshop.com',
     ]
   ]
 );
 ```
 
-**A Custom license for your plugin**
+### A Custom license for your plugin
 
-You can also pass a license object. Extend our `Kirby\Plugin\License` class to return a custom status, them, icon and label, depending on the state of your plugin’s license. This is great if you are working with a proprietary license for your plugin, which might still need to purchased/activated by the user.
+You can also pass a license object. Extend our `Kirby\Plugin\License` class to return a custom status, theme, icon and label, depending on the state of your plugin’s license. You can also set a link or your custom dialog's/drawer's endpoint. This is great if you are working with a proprietary license for your plugin, which might still need to purchased/activated by the user.
 
 ```php
 use Kirby\Plugin\License;
@@ -92,7 +92,8 @@ class MyCustomLicense extends License
       value: 'missing',
       theme: 'negative',
       label: 'Get a license please',
-      icon: 'alert'
+      icon: 'alert',
+      dialog: 'my/dialog/endpoint'
     )
   }
 }
