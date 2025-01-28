@@ -55,7 +55,7 @@ Besides adding more CSS selectors, we are also using data attributes to allow fo
 
 ## CSS properties
 
-We use CSS properties for the most important parameters in the Panel. This is useful for customising the look of the Panel but als for plugin developers to create UIs that seamlessly integrate with the rest of the Panel.
+We use CSS properties for the most important parameters in the Panel. This is useful for customising the look of the Panel but also for plugin developers to create UIs that seamlessly integrate with the rest of the Panel.
 
 You can overwrite our default properties in your custom `panel.css`:
 
