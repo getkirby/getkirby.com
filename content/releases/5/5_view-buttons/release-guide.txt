@@ -105,6 +105,12 @@ buttons:
 
 Query support is available for the `dialog`, `drawer`, `icon`, `link`, `text` and `theme` options.
 
+### Disable all buttons
+
+```yml
+buttons: false
+```
+
 
 ## In the `config.php`
 

@@ -16,6 +16,7 @@ Enhancements:
 - New `$app->role()` method that works like `$app->user()` to return a specific role or the role of the current user. [#6874](https://github.com/getkirby/kirby/pull/6874)
 
 #### Versions
+- New `storage` core component which returns the default storage handler for a model [#6867](https://github.com/getkirby/kirby/pull/6867)
 - New (class: Kirby\Cms\ModelWithContent method: version) method to directly access different content versions [#6455](https://github.com/getkirby/kirby/pull/6455)
 
   ```php
