@@ -86,7 +86,7 @@ buttons:
     theme: purple-icon
 ```
 
-The available options are based on the (link: https://github.com/getkirby/kirby/blob/v5/develop/panel/src/components/View/Buttons/Button.vue text: `<k-view-button>` component).
+The available options are based on the (link: https://github.com/getkirby/kirby/blob/v5/develop/panel/src/components/View/Buttons/Button.vue text: `k-view-button` component).
 
 ### Query support
 
@@ -202,7 +202,7 @@ On a user view, `$user` will represent the object of the view. On these, you wou
 
 ## Custom Vue component
 
-By default, custom view buttons are rendered with the (link: https://github.com/getkirby/kirby/blob/v5/develop/panel/src/components/View/Buttons/Button.vue text: `<k-view-button>` component).
+By default, custom view buttons are rendered with the (link: https://github.com/getkirby/kirby/blob/v5/develop/panel/src/components/View/Buttons/Button.vue text: `k-view-button` component).
 
 Some custom buttons might need more options, more interactivity, more glamour than `<k-view-button>` offers. Those can create their own Vue component in your plugin's JavaScript file:
 
