@@ -1,0 +1,54 @@
+Title: Add custom HTML to your panel
+
+----
+
+Description: Add custom HTML to your kirby panel with a simple info field.
+
+----
+
+Authors:
+
+- authors/dominik-laube
+
+----
+
+Tags: panel, fields
+
+----
+
+Text:
+
+Summary: Use the (link: docs/reference/panel/fields/info text: info field) in a blueprint to display HTML in the panel.
+
+## Customize the info field
+
+First, use the option `theme: none` in order to disable the info field styling. Second, remove the label from the field with `label: ""`. Now, add your html to the `text` option. You can add multiline HTML content by using the `|` character.
+
+### Blueprint example
+```yml
+info:
+  label: ""
+  type: info
+  theme: none
+  text: |
+    <h2>How to install Kirby in 5 minutes</h2>
+    <div style="aspect-ratio: 16/9;"><iframe style="object-fit: cover;" src="https://www.youtube.com/embed/EDVYjxWMecc?list=PLTep5U-3mg9EfgnQ08XDRs4vSOmhw2JWz" title="How to install Kirby in 5 minutes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+```
+
+## More ideas
+
+You could even use the (link: docs/guide/blueprints/query-language text: Kirby Query Language) in order to show dynamic HTML content. For example you could welcome every user with a personal message on the panel dashboard.
+
+### Blueprint example
+```yml
+info:
+  label: ""
+  type: info
+  theme: none
+  text: |
+    <h2>Nice to see you, {{ user.name }}</h2>
+```
+
+<warning>
+Please do not overdo it with custom HTML. You will need to maintain it and maybe customize it if the design of the panel changes. Keep the look of the panel consistent with the rest, and try to use Kirby’s default HTML and styling whenever possible. Be careful about the kind of HTML you include in the panel to avoid potential security risks.
+</warning>
