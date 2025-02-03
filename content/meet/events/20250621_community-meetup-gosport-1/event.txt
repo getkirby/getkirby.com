@@ -2,6 +2,8 @@ start: 18:00:00
 ----
 city: Gosport
 ----
+timezone: Europe/London
+----
 country: UK
 ----
 issue: 1
