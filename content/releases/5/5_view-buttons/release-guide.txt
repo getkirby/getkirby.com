@@ -209,10 +209,10 @@ Some custom buttons might need more options, more interactivity, more glamour th
 ```js "site/plugins/your-plugin/index.js"
 panel.plugin("getkirby/custom-view-buttons", {
   viewButtons: {
-		props: {
-			praise: String
-		},
     applause: {
+      props: {
+        praise: String
+      },
       template: `
         <k-button
           icon="heart"
