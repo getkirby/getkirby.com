@@ -48,10 +48,12 @@
 
 <div v-scope id="lead" class="lead bg-white rounded" @mounted="mounted">
 	<form
+		v-if="sent === false"
 		action="<?= $kirby->request()->url() ?>"
 		method="POST"
 		class="columns dialog-form"
 		style="--columns: 2; --columns-md: 1; gap: 0"
+		@change="input"
 		@submit="submit"
 	>
 		<input type="hidden" name="timestamp" :value="timestamp">
@@ -67,6 +69,7 @@
 						<input
 							id="name"
 							name="name"
+							maxlength="100"
 							class="input"
 							type="text"
 							v-model="form.name"
@@ -115,6 +118,7 @@
 						<input
 							id="company"
 							name="company"
+							maxlength="100"
 							class="input"
 							type="text"
 							v-model="form.company"
@@ -137,6 +141,7 @@
 					name="contact"
 					class="input"
 					rows="2"
+					maxlength="360"
 					v-model="form.contact"
 				></textarea>
 				<span class="help">
@@ -152,6 +157,7 @@
 					id="language"
 					name="language"
 					class="input"
+					maxlength="100"
 					type="text"
 					v-model="form.language"
 				>
@@ -175,6 +181,8 @@
 							name="project"
 							class="input"
 							rows="4"
+							minlength="40"
+							maxlength="1000"
 							v-model="form.project"
 							placeholder="What are you building? What do you expect to be delivered? Are there any deadlines? The more details, the better."
 							required
@@ -217,6 +225,7 @@
 							<input
 								id="budget_available"
 								name="budget_available"
+								maxlength="100"
 								class="input"
 								type="text"
 								v-model="form.budget_available"
@@ -241,6 +250,7 @@
 						name="partner"
 						class="input"
 						type="text"
+						maxlength="100"
 						v-model="form.partner"
 					>
 					<span class="help">
@@ -260,6 +270,9 @@
 			</button>
 		</div>
 	</form>
+	<div class="p-12 bg-white text text-lg" v-else>
+		Thank you for your request. Please get in contact if you have additional questions: <a class="link" href="mailto:partners@getkirby.com">partners@getkirby.com</a>
+	</div>
 </div>
 
 <script type="module">
@@ -268,10 +281,20 @@ import {
 	reactive
 } from '<?= url('assets/js/libraries/petite-vue.js') ?>';
 
+const session = sessionStorage.getItem("kirby.partners.lead");
+const sent = session === "true";
+let input = {};
+
+try {
+	input = sent === true ? {} : JSON.parse(session);
+} catch {
+	// no valid input
+}
+
 createApp({
 	isProcessing: false,
 	timestamp: "<?= $timestamp ?>",
-
+	sent: sent,
 	form: {
 		name: "",
 		email: "",
@@ -283,7 +306,12 @@ createApp({
 		partner: "",
 		budget: "",
 		budget_available: "",
-		language: ""
+		language: "",
+		...input
+	},
+
+	input() {
+		sessionStorage.setItem("kirby.partners.lead", JSON.stringify(this.form));
 	},
 
 	get isBusiness() {
