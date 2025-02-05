@@ -8,3 +8,7 @@
 		<?= $page->text()->kt() ?>
 	</div>
 </article>
+
+<script>
+sessionStorage.setItem("kirby.partners.lead", "true");
+</script>
