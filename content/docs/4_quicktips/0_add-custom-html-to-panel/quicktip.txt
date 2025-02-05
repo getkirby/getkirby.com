@@ -1,8 +1,8 @@
-Title: Add custom HTML to your panel
+Title: Add custom HTML to your Panel
 
 ----
 
-Description: Add custom HTML to your kirby panel with a simple info field.
+Description: Add custom HTML to your Kirby Panel with a simple info field.
 
 ----
 
@@ -18,11 +18,11 @@ Tags: panel, fields
 
 Text:
 
-Summary: Use the (link: docs/reference/panel/fields/info text: info field) in a blueprint to display HTML in the panel.
+Summary: Use the (link: docs/reference/panel/fields/info text: info field) in a blueprint to display HTML in the Panel.
 
 ## Customize the info field
 
-First, use the option `theme: none` in order to disable the info field styling. Second, remove the label from the field with `label: ""`. Now, add your html to the `text` option. You can add multiline HTML content by using the `|` character.
+First, use the option `theme: none` in order to disable the info field's styling. Second, remove the label from the field with `label: ""`. Now, add your html to the `text` option. You can add multiline HTML content by using the `|` character.
 
 ### Blueprint example
 ```yml
@@ -37,7 +37,7 @@ info:
 
 ## More ideas
 
-You could even use the (link: docs/guide/blueprints/query-language text: Kirby Query Language) in order to show dynamic HTML content. For example you could welcome every user with a personal message on the panel dashboard.
+You could even use the (link: docs/guide/blueprints/query-language text: Kirby Query Language) in order to show dynamic HTML content. For example you could welcome every user with a personal message on the Panel dashboard.
 
 ### Blueprint example
 ```yml
@@ -50,5 +50,5 @@ info:
 ```
 
 <warning>
-Please do not overdo it with custom HTML. You will need to maintain it and maybe customize it if the design of the panel changes. Keep the look of the panel consistent with the rest, and try to use Kirby’s default HTML and styling whenever possible. Be careful about the kind of HTML you include in the panel to avoid potential security risks.
+Please do not overdo it with custom HTML. You will need to maintain it and maybe customize it if the design of the Panel changes. Keep the look of the Panel consistent with the rest, and try to use Kirby’s default HTML and styling whenever possible. Be careful about the kind of HTML you include in the Panel to avoid potential security risks.
 </warning>
