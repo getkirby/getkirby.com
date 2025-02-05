@@ -37,18 +37,18 @@ The following setup was tested on Linux OS (Ubuntu 18.04 and Debian 9) together 
 The proposed filesystem layout in (link: /docs/guide/configuration/multisite-setup text: the above-mentioned recipe) looks like this:
 
 ```filesystem
-  kirby/
-  my-site.com/
-    content/
-    media/
-    site/
-    assets/
-  my-shop.com/
-    content/
-    media/
-    site/
-    assets/
-  index.php
+kirby/
+my-site.com/
+  content/
+  media/
+  site/
+  assets/
+my-shop.com/
+  content/
+  media/
+  site/
+  assets/
+index.php
 ```
 Looking at it from a higher directory level, it could be seen as follows…
 
