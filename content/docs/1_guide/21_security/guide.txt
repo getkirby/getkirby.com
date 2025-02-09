@@ -193,6 +193,16 @@ Use very long passwords for the connection to your server and for your Panel log
 
 The Panel also has a built-in **brute-force protection** for the Panel login. It will delay requests with invalid credentials and also block access to the Panel by IP address and by user after 10 login failures within an hour. You can change these defaults with the (link: docs/reference/system/options/auth text: auth options). Please note that Kirby can't protect your SFTP/SSH accounts, also brute-force attacks are only hindered and not prevented entirely. So it's always important to use strong passwords.
 
+## Disable the Vue template compiler
+
+We are in the active process of migrating the Kirby Panel to Vue 3 (with the plan to ship Vue 3 in Kirby 6.0). Until this process is complete, sites with increased security requirements should use the Vue 2 runtime version, which omits the vulnerable Vue template compiler.
+
+In its default configuration, Kirby enables the template compiler, as it is needed for all Panel plugins that have not been precompiled. It is also used for the examples in the Panel lab environment.
+
+<since v="4.7">
+Kirby 4.7 introduces a new `panel.vue.compiler` option that can be set to `false` to disable the template compiler and switch to the Vue 2 runtime version. We recommend to set this option to `false` if your site and the installed plugins do not rely on the Vue template compiler. Should you require the template compiler and are not affected by its [known vulnerabilities](https://www.herodevs.com/vulnerability-directory?framework=Vue+2), you can set the option to `true` to make the warning in the Panel go away. Do this at your own risk!
+</since>
+
 ## Secure data in Git repositories
 
 ### `.gitignore /site/accounts`
