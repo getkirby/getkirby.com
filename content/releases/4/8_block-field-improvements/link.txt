@@ -45,8 +45,6 @@ Shortcuts:
 | Action | Shortcut |
 | - | - |
 | Remove block | `Ctrl + Backspace` |
-| Move focus up | `Ctrl + ↑` |
-| Move focus down | `Ctrl + ↓` |
 | Move block up | `Ctrl + Shift + ↑` |
 | Move block down | `Ctrl + Shift + ↓` |
 | Extend selection up | `Ctrl + Alt + ↑` |
