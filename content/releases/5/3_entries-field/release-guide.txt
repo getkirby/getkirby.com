@@ -1,0 +1,66 @@
+Title: Entries field
+
+----
+
+Subtitle: When one just isn't enough
+
+----
+
+Teaser: The Entries field allows you to create and manage multiple entries for the same field. It is a powerful tool for creating and managing content in a structured way.
+
+----
+
+Example:
+
+```yaml
+entries:
+  type: entries
+  min: 2
+  max: 4
+  required: true
+  field:
+    type: select
+    options:
+      design: Design
+      architecture: Architecture
+      photography: Photography
+      3d: 3D
+      web: Web
+```
+
+----
+
+Intro: The entries field is a powerful tool for creating and managing content in a structured way.
+
+----
+
+Text:
+
+The entries field allows you to create and manage multiple entries for the same field. It offers editors a flexible alternative to the (link: /docs/reference/panel/fields/structure text: structure field) for when they need to handle a list of content that only consists of one field.
+
+```yaml
+entries:
+  type: entries
+  min: 2
+  max: 4
+  required: true
+  field:
+    type: select
+    options:
+      design: Design
+      architecture: Architecture
+      photography: Photography
+      3d: 3D
+      web: Web
+```
+
+```php
+<ul>
+    <?php foreach($page->entries()->yaml() as $entry): ?>
+        <li><?= $entry ?></li>
+    <?php endforeach ?>
+</ul>
+```
+
+(image: entries-field.png)
+
