@@ -113,9 +113,9 @@
 						</ul>
 					</li>
 					<li>
-						<p class="font-bold mb-1">With support of</p>
+						<p class="font-bold mb-3">With support of</p>
 						<ul class="footer-menu-2 footer-menu-partners">
-							<li class="mb-1">
+							<li class="mb-3">
 								<a href="https://keycdn.com">
 									<?= icon('keycdn') ?>
 								</a>
