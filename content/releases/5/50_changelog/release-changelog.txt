@@ -14,6 +14,8 @@ Enhancements:
 - Thumbnails will not any longer be regenerated when page sorting changes [#6432](https://github.com/getkirby/kirby/pull/6432)
 - New `files.sort` permission [#1969](https://github.com/getkirby/kirby/issues/1969)
 - New `$app->role()` method that works like `$app->user()` to return a specific role or the role of the current user. [#6874](https://github.com/getkirby/kirby/pull/6874)
+- Support for content representation specific site controllers, e.g. `site.rss.php` [#6950](https://github.com/getkirby/kirby/pull/6950)
+- New `Kirby\Cms\Pages::delete(array $ids)` and `Kirby\Cms\Files::delete(array $ids)` methods to handle batch delete for multiple files in a collection.
 
 #### Versions
 - New `storage` core component which returns the default storage handler for a model [#6867](https://github.com/getkirby/kirby/pull/6867)
@@ -138,7 +140,7 @@ Enhancements:
 	- POST: `/api/(:lock)/changes/discard`
 	- POST: `/api/(:lock)/changes/publish`
 	- POST:  `/api/(:lock)/changes/save`
-
+- The `files` and `pages` sections introduce new `delete` API endpoints. Those endpoints can take a set of page or file ids and will delete each one. Errors will be caught and sent back in the details array of the final thrown exception.
 
 ## Panel
 - Radio and select fields: `default` option now supports Kirby queries [#6459](https://github.com/getkirby/kirby/pull/6459)
@@ -183,7 +185,10 @@ Enhancements:
 
 Bugfixes:
 
+- Fix Drag & Drop between block fields [#5290](https://github.com/getkirby/kirby/issues/5290)
 - Fixed thumb issues resulting from EXIF orientation data [#2695](https://github.com/getkirby/kirby/issues/2695)
+- Select, radio and toggles field: values that include a comma will not be split into two tags in the structure field preview anymore [#5800](https://github.com/getkirby/kirby/issues/5800)
+- Drawers + Fields block: collapse tabs in header correctly into dropdown for narrow columns [#6914](https://github.com/getkirby/kirby/pull/6914)
 - Model hooks for actions: multiple hooks don't overwrite each others' changes to the model [#6460](https://github.com/getkirby/kirby/pull/6460) [#2828](https://github.com/getkirby/kirby/pull/2828)
 - Headers with null as value are no longer added to JS API requests. [#6435](https://github.com/getkirby/kirby/pull/6435)
 - `$helper.object.clone` is no longer deprecated. Please use it instead of `structuredClone` as this might cause issues down the road with Vue 3. [#6479](https://github.com/getkirby/kirby/pull/6479)
@@ -205,6 +210,7 @@ Bugfixes:
 - Range/Number field: fix `isEmpty()` usage [#6898](https://github.com/getkirby/kirby/pull/6898)
 - Custom writer nodes: fixed active state detection for nodes that include paragraph child nodes [#6902](https://github.com/getkirby/kirby/pull/6902)
 - Permissions are now always correctly determined if the active user changes during the request [#6880](https://github.com/getkirby/kirby/pull/6880)
+- Blocks field: fix empty display [#6951](https://github.com/getkirby/kirby/pull/6951)
 
 ----
 
@@ -254,6 +260,7 @@ Breaking:
 - Closures defined for the `content.salt` option will no longer receive a model when generating a salt for preview authentication tokens of drafts and versions as those tokens are now only based on the URI. The salt callback instead receives `null`  and is expected to return a fixed model-independent salt in this case. When generating a salt for a file media token, the file object is still passed as model. [#6836](https://github.com/getkirby/kirby/pull/6836)
 - The `Str::ucfirst()` method no longer lowercases all but the first letter of the text, it only capitalizes the first letter. [#6860](https://github.com/getkirby/kirby/pull/6860)
 - Classes extending `ModelPermissions` need to set their category with the `const CATEGORY` or `static function category()` instead of `protected string $category` and use the static `user()` method instead of `$user` and `$permissions` properties [#6880](https://github.com/getkirby/kirby/pull/6880)
+- File drag texts in the Panel always use the file UUID, if UUIDs are not disabled [#6948](https://github.com/getkirby/kirby/pull/6948)
 
 ## Panel
 
@@ -401,6 +408,7 @@ Deprecated:
 - `Kirby\Form\FieldClass::data()` is deprecated. Use `::toStoredValue()` instead
 - `Kirby\Form\FieldClass::save()` is deprecated. Use `::isSaveable()` instead
 - `Kirby\Form\FieldClass::value()` is deprecated. Use `::toFormValue()` instead
+- Color field: the `text => value` notation for options has been deprecated and will be removed in Kirby 6. Please rewrite your options as `value => text`. [#6913](https://github.com/getkirby/kirby/pull/6913)
 
 ## Panel
 
