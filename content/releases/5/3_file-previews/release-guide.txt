@@ -10,24 +10,24 @@ Teaser:
 
 No more guessing games—Kirby 5 introduces custom file previews in the Panel. Configure previews for your unique file formats, from key documents to 3D objects, so editors always know what they’re working with.
 
-Plus, built-in previews for video and audio files come ready to use.
+Plus, built-in previews for video, audio and PDF files come ready to use.
 
 ----
 
 Class:
 
 ```php
-class PdfFilePreview extends FilePreview
+class CsvFilePreview extends FilePreview
 {
     public function __construct(
         public File $file,
-        public string $component = 'k-pdf-file-preview'
+        public string $component = 'k-csv-file-preview'
     ) {
     }
 
     public static function accepts(File $file): bool
     {
-        return $file->extension() === 'pdf';
+        return $file->extension() === 'csv';
     }
 }
 ```
@@ -42,7 +42,7 @@ With Kirby 5, we're opening up the preview part of the Panel's file view to more
 
 Text:
 
-It starts with basic previews for video and audio files that now ship as part of the core:
+It starts with basic previews for video, audio and PDF files that now ship as part of the core:
 
 (video: file-previews.mp4 controls: true class: video rounded shadow-xl bg-light)
 
