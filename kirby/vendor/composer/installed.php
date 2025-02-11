@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
         'name' => 'getkirby/cms',
-        'pretty_version' => '4.6.1',
-        'version' => '4.6.1.0',
+        'pretty_version' => '5.0.0-beta.3',
+        'version' => '5.0.0.0-beta3',
         'reference' => null,
         'type' => 'kirby-cms',
         'install_path' => __DIR__ . '/../../',
@@ -47,8 +47,8 @@
             'dev_requirement' => false,
         ),
         'getkirby/cms' => array(
-            'pretty_version' => '4.6.1',
-            'version' => '4.6.1.0',
+            'pretty_version' => '5.0.0-beta.3',
+            'version' => '5.0.0.0-beta3',
             'reference' => null,
             'type' => 'kirby-cms',
             'install_path' => __DIR__ . '/../../',
@@ -167,9 +167,9 @@
             ),
         ),
         'symfony/yaml' => array(
-            'pretty_version' => 'v6.4.18',
-            'version' => '6.4.18.0',
-            'reference' => 'bf598c9d9bb4a22f495a4e26e4c4fce2f8ecefc5',
+            'pretty_version' => 'v7.2.3',
+            'version' => '7.2.3.0',
+            'reference' => 'ac238f173df0c9c1120f862d0f599e17535a87ec',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/yaml',
             'aliases' => array(),

@@ -6,6 +6,7 @@ use Kirby\Content\Content;
 use Kirby\Content\Field;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Toolkit\Str;
+use Stringable;
 use Throwable;
 
 /**
@@ -19,8 +20,10 @@ use Throwable;
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ *
+ * @extends \Kirby\Cms\Item<\Kirby\Cms\Blocks>
  */
-class Block extends Item
+class Block extends Item implements Stringable
 {
 	use HasMethods;
 
@@ -65,7 +68,9 @@ class Block extends Item
 		// @codeCoverageIgnoreEnd
 
 		if (isset($params['type']) === false) {
-			throw new InvalidArgumentException('The block type is missing');
+			throw new InvalidArgumentException(
+				message: 'The block type is missing'
+			);
 		}
 
 		// make sure the content is always defined as array to keep

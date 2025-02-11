@@ -156,13 +156,13 @@ class Environment
 		array|null $options = null,
 		array|null $info = null
 	): array {
-		$defaults = [
+		$options = [
 			'cli'     => null,
-			'allowed' => null
+			'allowed' => null,
+			...$options ?? []
 		];
 
-		$info  ??= $_SERVER;
-		$options = array_merge($defaults, $options ?? []);
+		$info ??= $_SERVER;
 
 		$this->info          = static::sanitize($info);
 		$this->cli           = $this->detectCli($options['cli']);
@@ -178,11 +178,11 @@ class Environment
 		if ($options['allowed'] === '*' || $options['allowed'] === ['*']) {
 			$this->detectAuto(true);
 
-			// fixed environments
+		// fixed environments
 		} elseif (empty($options['allowed']) === false) {
 			$this->detectAllowed($options['allowed']);
 
-			// secure auto-detection
+		// secure auto-detection
 		} else {
 			$this->detectAuto();
 		}
@@ -211,7 +211,9 @@ class Environment
 			$baseUrl = A::first($allowed);
 
 			if (is_string($baseUrl) === false) {
-				throw new InvalidArgumentException('Invalid allow list setup for base URLs');
+				throw new InvalidArgumentException(
+					message: 'Invalid allow list setup for base URLs'
+				);
 			}
 
 			$uri = new Uri($baseUrl, ['slash' => false]);
@@ -248,7 +250,9 @@ class Environment
 			}
 		}
 
-		throw new InvalidArgumentException('The environment is not allowed');
+		throw new InvalidArgumentException(
+			message: 'The environment is not allowed'
+		);
 	}
 
 	/**
@@ -330,7 +334,7 @@ class Environment
 		$term = getenv('TERM');
 
 		if (
-			substr($sapi, 0, 3) === 'cgi' &&
+			str_starts_with($sapi, 'cgi') === true &&
 			$term &&
 			$term !== 'unknown'
 		) {
@@ -529,7 +533,7 @@ class Environment
 
 		$protocols = ['https', 'https, http'];
 
-		return in_array(strtolower($protocol), $protocols) === true;
+		return in_array(strtolower($protocol), $protocols, true) === true;
 	}
 
 	/**
@@ -771,13 +775,13 @@ class Environment
 		$ips = array_unique(array_filter($ips));
 
 		// no known ip? Better not assume it's local
-		if (empty($ips) === true) {
+		if ($ips === []) {
 			return false;
 		}
 
 		// stop as soon as a non-local ip is found
 		foreach ($ips as $ip) {
-			if (in_array($ip, ['::1', '127.0.0.1']) === false) {
+			if (in_array($ip, ['::1', '127.0.0.1'], true) === false) {
 				return false;
 			}
 		}

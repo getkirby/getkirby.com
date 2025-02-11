@@ -14,6 +14,8 @@ use Kirby\Toolkit\Collection;
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
+ *
+ * @extends \Kirby\Toolkit\Collection<\Kirby\Query\Segment>
  */
 class Segments extends Collection
 {
@@ -37,7 +39,7 @@ class Segments extends Collection
 			$segments,
 			function ($segment) use (&$position) {
 				// leave connectors as they are
-				if (in_array($segment, ['.', '?.']) === true) {
+				if (in_array($segment, ['.', '?.'], true) === true) {
 					return $segment;
 				}
 

@@ -8,6 +8,7 @@ use Kirby\Cms\Blocks as BlocksCollection;
 use Kirby\Cms\Fieldset;
 use Kirby\Cms\Fieldsets;
 use Kirby\Cms\ModelWithContent;
+use Kirby\Data\Json;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Form\FieldClass;
@@ -101,14 +102,15 @@ class BlocksField extends FieldClass
 	public function fieldsetGroups(): array|null
 	{
 		$groups = $this->fieldsets()->groups();
-		return empty($groups) === true ? null : $groups;
+		return $groups === [] ? null : $groups;
 	}
 
 	public function fill(mixed $value = null): void
 	{
 		$value  = BlocksCollection::parse($value);
 		$blocks = BlocksCollection::factory($value)->toArray();
-		$this->value = $this->blocksToValues($blocks);
+		$this->value  = $this->blocksToValues($blocks);
+		$this->errors = null;
 	}
 
 	public function form(array $fields, array $input = []): Form
@@ -221,10 +223,10 @@ class BlocksField extends FieldClass
 
 					$fieldApi = $this->clone([
 						'routes' => $field->api(),
-						'data'   => array_merge(
-							$this->data(),
-							['field' => $field]
-						)
+						'data'   => [
+							...$this->data(),
+							'field' => $field
+						]
 					]);
 
 					return $fieldApi->call(
@@ -235,19 +237,6 @@ class BlocksField extends FieldClass
 				}
 			],
 		];
-	}
-
-	public function store(mixed $value): mixed
-	{
-		$blocks = $this->blocksToValues((array)$value, 'content');
-
-		// returns empty string to avoid storing empty array as string `[]`
-		// and to consistency work with `$field->isEmpty()`
-		if (empty($blocks) === true) {
-			return '';
-		}
-
-		return $this->valueToJson($blocks, $this->pretty());
 	}
 
 	protected function setDefault(mixed $default = null): void
@@ -286,26 +275,42 @@ class BlocksField extends FieldClass
 		$this->pretty = $pretty;
 	}
 
+	public function toStoredValue(bool $default = false): mixed
+	{
+		$value  = $this->toFormValue($default);
+		$blocks = $this->blocksToValues((array)$value, 'content');
+
+		// returns empty string to avoid storing empty array as string `[]`
+		// and to consistency work with `$field->isEmpty()`
+		if ($blocks === []) {
+			return '';
+		}
+
+		return Json::encode($blocks, pretty: $this->pretty());
+	}
+
 	public function validations(): array
 	{
 		return [
 			'blocks' => function ($value) {
 				if ($this->min && count($value) < $this->min) {
-					throw new InvalidArgumentException([
-						'key'  => 'blocks.min.' . ($this->min === 1 ? 'singular' : 'plural'),
-						'data' => [
-							'min' => $this->min
-						]
-					]);
+					throw new InvalidArgumentException(
+						key: match ($this->min) {
+							1       => 'blocks.min.singular',
+							default => 'blocks.min.plural'
+						},
+						data: ['min' => $this->min]
+					);
 				}
 
 				if ($this->max && count($value) > $this->max) {
-					throw new InvalidArgumentException([
-						'key'  => 'blocks.max.' . ($this->max === 1 ? 'singular' : 'plural'),
-						'data' => [
-							'max' => $this->max
-						]
-					]);
+					throw new InvalidArgumentException(
+						key: match ($this->max) {
+							1       => 'blocks.max.singular',
+							default => 'blocks.max.plural'
+						},
+						data: ['max' => $this->max]
+					);
 				}
 
 				$fields = [];
@@ -332,15 +337,15 @@ class BlocksField extends FieldClass
 						$errors = $field->errors();
 
 						// rough first validation
-						if (empty($errors) === false) {
-							throw new InvalidArgumentException([
-								'key' => 'blocks.validation',
-								'data' => [
+						if (count($errors) > 0) {
+							throw new InvalidArgumentException(
+								key:'blocks.validation',
+								data: [
 									'field'    => $field->label(),
 									'fieldset' => $fieldset->name(),
 									'index'    => $index
 								]
-							]);
+							);
 						}
 					}
 				}

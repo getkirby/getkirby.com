@@ -57,7 +57,7 @@ class A
 	 */
 	public static function average(array $array, int $decimals = 0): float|null
 	{
-		if (empty($array) === true) {
+		if ($array === []) {
 			return null;
 		}
 
@@ -289,7 +289,7 @@ class A
 		}
 
 		// extract data from nested array structures using the dot notation
-		if (strpos($key, '.') !== false) {
+		if (str_contains($key, '.') === true) {
 			$keys     = explode('.', $key);
 			$firstKey = array_shift($keys);
 
@@ -433,7 +433,9 @@ class A
 			static::pluck($array, $keyBy);
 
 		if (count($keys) !== count($array)) {
-			throw new InvalidArgumentException('The "key by" argument must be a valid key or a callable');
+			throw new InvalidArgumentException(
+				message: 'The "key by" argument must be a valid key or a callable'
+			);
 		}
 
 		return array_combine($keys, $array);
@@ -508,7 +510,7 @@ class A
 				) {
 					$merged[] = $value;
 
-					// recursively merge the two array values
+				// recursively merge the two array values
 				} elseif (
 					is_array($value) === true &&
 					isset($merged[$key]) === true &&
@@ -516,7 +518,7 @@ class A
 				) {
 					$merged[$key] = static::merge($merged[$key], $value, $mode);
 
-					// simply overwrite with the value from the second array
+				// simply overwrite with the value from the second array
 				} else {
 					$merged[$key] = $value;
 				}
@@ -533,7 +535,7 @@ class A
 
 		// if more than two arrays need to be merged, add the result
 		// as first array and the mode to the end and call the method again
-		if (count($arrays) > 0) {
+		if ($arrays !== []) {
 			array_unshift($arrays, $merged);
 			array_push($arrays, $mode);
 			return static::merge(...$arrays);
@@ -641,11 +643,11 @@ class A
 		$total = count($array);
 
 		if ($from >= $total || $from < 0) {
-			throw new Exception('Invalid "from" index');
+			throw new Exception(message: 'Invalid "from" index');
 		}
 
 		if ($to >= $total || $to < 0) {
-			throw new Exception('Invalid "to" index');
+			throw new Exception(message: 'Invalid "to" index');
 		}
 
 		// remove the item from the array
@@ -687,7 +689,7 @@ class A
 			}
 
 			// untangle elements where the key uses dot notation
-			if (count($subKeys) > 0) {
+			if ($subKeys !== []) {
 				$value = static::nestByKeys($value, $subKeys);
 			}
 
@@ -747,7 +749,9 @@ class A
 		bool $shuffle = false
 	): array {
 		if ($count > count($array)) {
-			throw new InvalidArgumentException('$count is larger than available array items');
+			throw new InvalidArgumentException(
+				message: '$count is larger than available array items'
+			);
 		}
 
 		if ($shuffle === true) {

@@ -76,18 +76,16 @@ trait FileActions
 			}
 
 			if ($newFile->exists() === true) {
-				throw new LogicException('The new file exists and cannot be overwritten');
+				throw new LogicException(
+					message: 'The new file exists and cannot be overwritten'
+				);
 			}
 
 			// rename the main file
 			F::move($oldFile->root(), $newFile->root());
 
 			// move the content storage versions
-			foreach ($oldFile->storage()->all() as $version => $lang) {
-				$content = $oldFile->storage()->read($version, $lang);
-				$oldFile->storage()->delete($version, $lang);
-				$newFile->storage()->create($version, $lang, $content);
-			}
+			$oldFile->storage()->moveAll(to: $newFile->storage());
 
 			// update collections
 			$newFile->parent()->files()->remove($oldFile->id());
@@ -150,10 +148,10 @@ trait FileActions
 	/**
 	 * Commits a file action, by following these steps
 	 *
-	 * 1. checks the action rules
-	 * 2. sends the before hook
+	 * 1. applies the `before` hook
+	 * 2. checks the action rules
 	 * 3. commits the store action
-	 * 4. sends the after hook
+	 * 4. applies the `after` hook
 	 * 5. returns the result
 	 */
 	protected function commit(
@@ -161,24 +159,48 @@ trait FileActions
 		array $arguments,
 		Closure $callback
 	): mixed {
-		$old            = $this->hardcopy();
-		$kirby          = $this->kirby();
-		$argumentValues = array_values($arguments);
+		$kirby = $this->kirby();
 
-		$this->rules()->$action(...$argumentValues);
-		$kirby->trigger('file.' . $action . ':before', $arguments);
+		// store copy of the model to be passed
+		// to the `after` hook for comparison
+		$old = $this->hardcopy();
 
-		$result = $callback(...$argumentValues);
+		// check file rules
+		$this->rules()->$action(...array_values($arguments));
 
+		// run `before` hook and pass all arguments;
+		// the very first argument (which should be the model)
+		// is modified by the return value from the hook (if any returned)
+		$appliedTo = array_key_first($arguments);
+		$arguments[$appliedTo] = $kirby->apply(
+			'file.' . $action . ':before',
+			$arguments,
+			$appliedTo
+		);
+
+		// check file rules again, after the hook got applied
+		$this->rules()->$action(...array_values($arguments));
+
+		// run the main action closure
+		$result = $callback(...array_values($arguments));
+
+		// determine arguments for `after` hook depending on the action
 		$argumentsAfter = match ($action) {
 			'create' => ['file' => $result],
 			'delete' => ['status' => $result, 'file' => $old],
 			default  => ['newFile' => $result, 'oldFile' => $old]
 		};
 
-		$kirby->trigger('file.' . $action . ':after', $argumentsAfter);
+		// run `after` hook and apply return to action result
+		// (first argument, usually the new model) if anything returned
+		$result = $kirby->apply(
+			'file.' . $action . ':after',
+			$argumentsAfter,
+			array_key_first($argumentsAfter)
+		);
 
 		$kirby->cache('pages')->flush();
+
 		return $result;
 	}
 
@@ -191,10 +213,7 @@ trait FileActions
 		F::copy($this->root(), $page->root() . '/' . $this->filename());
 		$copy = $page->clone()->file($this->filename());
 
-		foreach ($this->storage()->all() as $version => $lang) {
-			$content = $this->storage()->read($version, $lang);
-			$copy->storage()->create($version, $lang, $content);
-		}
+		$this->storage()->copyAll(to: $copy->storage());
 
 		// ensure the content is re-read after copying it
 		// @todo find a more elegant way
@@ -221,11 +240,14 @@ trait FileActions
 	public static function create(array $props, bool $move = false): File
 	{
 		if (isset($props['source'], $props['parent']) === false) {
-			throw new InvalidArgumentException('Please provide the "source" and "parent" props for the File');
+			throw new InvalidArgumentException(
+				message: 'Please provide the "source" and "parent" props for the File'
+			);
 		}
 
 		// prefer the filename from the props
-		$props['filename'] = F::safeName($props['filename'] ?? basename($props['source']));
+		$props['filename'] ??= basename($props['source']);
+		$props['filename']   = F::safeName($props['filename']);
 
 		$props['model'] = strtolower($props['template'] ?? 'default');
 
@@ -280,7 +302,9 @@ trait FileActions
 
 			// overwrite the original
 			if (F::$method($upload->root(), $file->root(), true) !== true) {
-				throw new LogicException('The file could not be created');
+				throw new LogicException(
+					message: 'The file could not be created'
+				);
 			}
 
 			// resize the file on upload if configured
@@ -387,7 +411,9 @@ trait FileActions
 
 			// overwrite the original
 			if (F::$method($upload->root(), $file->root(), true) !== true) {
-				throw new LogicException('The file could not be created');
+				throw new LogicException(
+					message: 'The file could not be created'
+				);
 			}
 
 			// apply the resizing/crop options from the blueprint
@@ -427,9 +453,6 @@ trait FileActions
 		Media::unpublish($this->parent()->mediaRoot(), $this);
 
 		if ($onlyMedia !== true) {
-			// remove the lock
-			$this->lock()?->remove();
-
 			// clear UUID cache
 			$this->uuid()?->clear();
 		}

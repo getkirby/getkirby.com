@@ -4,6 +4,7 @@ namespace Kirby\Cms;
 
 use Exception;
 use IntlDateFormatter;
+use Kirby\Content\VersionId;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Filesystem\F;
 use Kirby\Filesystem\IsFile;
@@ -35,6 +36,9 @@ class File extends ModelWithContent
 	use FileActions;
 	use FileModifications;
 	use HasMethods;
+	/**
+	 * @use \Kirby\Cms\HasSiblings<\Kirby\Cms\Files>
+	 */
 	use HasSiblings;
 	use IsFile;
 
@@ -77,10 +81,10 @@ class File extends ModelWithContent
 	 */
 	public function __construct(array $props)
 	{
-		parent::__construct($props);
-
 		if (isset($props['filename'], $props['parent']) === false) {
-			throw new InvalidArgumentException('The filename and parent are required');
+			throw new InvalidArgumentException(
+				message: 'The filename and parent are required'
+			);
 		}
 
 		$this->filename = $props['filename'];
@@ -90,6 +94,8 @@ class File extends ModelWithContent
 		// auto root detection
 		$this->root     = null;
 		$this->url      = $props['url'] ?? null;
+
+		parent::__construct($props);
 
 		$this->setBlueprint($props['blueprint'] ?? null);
 	}
@@ -124,10 +130,11 @@ class File extends ModelWithContent
 	 */
 	public function __debugInfo(): array
 	{
-		return array_merge($this->toArray(), [
+		return [
+			...$this->toArray(),
 			'content'  => $this->content(),
 			'siblings' => $this->siblings(),
-		]);
+		];
 	}
 
 	/**
@@ -242,33 +249,6 @@ class File extends ModelWithContent
 	}
 
 	/**
-	 * Returns the directory in which
-	 * the content file is located
-	 * @internal
-	 * @deprecated 4.0.0
-	 * @todo Remove in v5
-	 * @codeCoverageIgnore
-	 */
-	public function contentFileDirectory(): string
-	{
-		Helpers::deprecated('The internal $model->contentFileDirectory() method has been deprecated. Please let us know via a GitHub issue if you need this method and tell us your use case.', 'model-content-file');
-		return dirname($this->root());
-	}
-
-	/**
-	 * Filename for the content file
-	 * @internal
-	 * @deprecated 4.0.0
-	 * @todo Remove in v5
-	 * @codeCoverageIgnore
-	 */
-	public function contentFileName(): string
-	{
-		Helpers::deprecated('The internal $model->contentFileName() method has been deprecated. Please let us know via a GitHub issue if you need this method and tell us your use case.', 'model-content-file');
-		return $this->filename();
-	}
-
-	/**
 	 * Constructs a File object
 	 * @internal
 	 */
@@ -298,10 +278,10 @@ class File extends ModelWithContent
 	 */
 	public function html(array $attr = []): string
 	{
-		return $this->asset()->html(array_merge(
-			['alt' => $this->alt()],
-			$attr
-		));
+		return $this->asset()->html([
+			'alt' => $this->alt(),
+			...$attr
+		]);
 	}
 
 	/**
@@ -328,31 +308,26 @@ class File extends ModelWithContent
 	}
 
 	/**
-	 * Checks if the files is accessible.
-	 * This permission depends on the `read` option until v5
+	 * Checks if the file is accessible to the current user
+	 * This permission depends on the `read` option until v6
 	 */
 	public function isAccessible(): bool
 	{
-		// TODO: remove this check when `read` option deprecated in v5
+		// TODO: remove this check when `read` option deprecated in v6
 		if ($this->isReadable() === false) {
 			return false;
 		}
 
-		static $accessible   = [];
-		$role                = $this->kirby()->user()?->role()->id() ?? '__none__';
-		$template            = $this->template() ?? '__none__';
-		$accessible[$role] ??= [];
-
-		return $accessible[$role][$template] ??= $this->permissions()->can('access');
+		return FilePermissions::canFromCache($this, 'access');
 	}
 
 	/**
 	 * Check if the file can be listable by the current user
-	 * This permission depends on the `read` option until v5
+	 * This permission depends on the `read` option until v6
 	 */
 	public function isListable(): bool
 	{
-		// TODO: remove this check when `read` option deprecated in v5
+		// TODO: remove this check when `read` option deprecated in v6
 		if ($this->isReadable() === false) {
 			return false;
 		}
@@ -362,23 +337,18 @@ class File extends ModelWithContent
 			return false;
 		}
 
-		static $listable   = [];
-		$role              = $this->kirby()->user()?->role()->id() ?? '__none__';
-		$template          = $this->template() ?? '__none__';
-		$listable[$role] ??= [];
-
-		return $listable[$role][$template] ??= $this->permissions()->can('list');
+		return FilePermissions::canFromCache($this, 'list');
 	}
 
 	/**
 	 * Check if the file can be read by the current user
 	 *
-	 * @todo Deprecate `read` option in v5 and make the necessary changes for `access` and `list` options.
+	 * @todo Deprecate `read` option in v6 and make the necessary changes for `access` and `list` options.
 	 */
 	public function isReadable(): bool
 	{
 		static $readable   = [];
-		$role              = $this->kirby()->user()?->role()->id() ?? '__none__';
+		$role              = $this->kirby()->role()?->id() ?? '__none__';
 		$template          = $this->template() ?? '__none__';
 		$readable[$role] ??= [];
 
@@ -445,7 +415,7 @@ class File extends ModelWithContent
 	 */
 	protected function modifiedContent(string|null $languageCode = null): int
 	{
-		return $this->storage()->modified('published', $languageCode) ?? 0;
+		return $this->version(VersionId::latest())->modified($languageCode ?? 'current') ?? 0;
 	}
 
 	/**
@@ -560,7 +530,6 @@ class File extends ModelWithContent
 
 	/**
 	 * Returns the parent Files collection
-	 * @internal
 	 */
 	protected function siblingsCollection(): Files
 	{
@@ -602,10 +571,12 @@ class File extends ModelWithContent
 	 */
 	public function toArray(): array
 	{
-		return array_merge(parent::toArray(), $this->asset()->toArray(), [
+		return [
+			...parent::toArray(),
+			...$this->asset()->toArray(),
 			'id'       => $this->id(),
 			'template' => $this->template(),
-		]);
+		];
 	}
 
 	/**

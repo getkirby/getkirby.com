@@ -35,13 +35,8 @@ trait UserActions
 		$email = trim($email);
 
 		return $this->commit('changeEmail', ['user' => $this, 'email' => Idn::decodeEmail($email)], function ($user, $email) {
-			$user = $user->clone([
-				'email' => $email
-			]);
-
-			$user->updateCredentials([
-				'email' => $email
-			]);
+			$user = $user->clone(['email' => $email]);
+			$user->updateCredentials(['email' => $email]);
 
 			// update the users collection
 			$user->kirby()->users()->set($user->id(), $user);
@@ -56,13 +51,8 @@ trait UserActions
 	public function changeLanguage(string $language): static
 	{
 		return $this->commit('changeLanguage', ['user' => $this, 'language' => $language], function ($user, $language) {
-			$user = $user->clone([
-				'language' => $language,
-			]);
-
-			$user->updateCredentials([
-				'language' => $language
-			]);
+			$user = $user->clone(['language' => $language]);
+			$user->updateCredentials(['language' => $language]);
 
 			// update the users collection
 			$user->kirby()->users()->set($user->id(), $user);
@@ -79,13 +69,8 @@ trait UserActions
 		$name = trim($name);
 
 		return $this->commit('changeName', ['user' => $this, 'name' => $name], function ($user, $name) {
-			$user = $user->clone([
-				'name' => $name
-			]);
-
-			$user->updateCredentials([
-				'name' => $name
-			]);
+			$user = $user->clone(['name' => $name]);
+			$user->updateCredentials(['name' => $name]);
 
 			// update the users collection
 			$user->kirby()->users()->set($user->id(), $user);
@@ -96,6 +81,9 @@ trait UserActions
 
 	/**
 	 * Changes the user password
+	 *
+	 * If this method is used with user input, it is recommended to also
+	 * confirm the current password by the user via `::validatePassword()`
 	 */
 	public function changePassword(
 		#[SensitiveParameter]
@@ -128,13 +116,8 @@ trait UserActions
 	public function changeRole(string $role): static
 	{
 		return $this->commit('changeRole', ['user' => $this, 'role' => $role], function ($user, $role) {
-			$user = $user->clone([
-				'role' => $role,
-			]);
-
-			$user->updateCredentials([
-				'role' => $role
-			]);
+			$user = $user->clone(['role' => $role]);
+			$user->updateCredentials(['role' => $role]);
 
 			// update the users collection
 			$user->kirby()->users()->set($user->id(), $user);
@@ -168,10 +151,10 @@ trait UserActions
 	/**
 	 * Commits a user action, by following these steps
 	 *
-	 * 1. checks the action rules
-	 * 2. sends the before hook
+	 * 1. applies the `before` hook
+	 * 2. checks the action rules
 	 * 3. commits the action
-	 * 4. sends the after hook
+	 * 4. applies the `after` hook
 	 * 5. returns the result
 	 *
 	 * @throws \Kirby\Exception\PermissionException
@@ -182,27 +165,53 @@ trait UserActions
 		Closure $callback
 	): mixed {
 		if ($this->isKirby() === true) {
-			throw new PermissionException('The Kirby user cannot be changed');
+			throw new PermissionException(
+				message: 'The Kirby user cannot be changed'
+			);
 		}
 
-		$old            = $this->hardcopy();
-		$kirby          = $this->kirby();
-		$argumentValues = array_values($arguments);
+		$kirby = $this->kirby();
 
-		$this->rules()->$action(...$argumentValues);
-		$kirby->trigger('user.' . $action . ':before', $arguments);
+		// store copy of the model to be passed
+		// to the `after` hook for comparison
+		$old = $this->hardcopy();
 
-		$result = $callback(...$argumentValues);
+		// check user rules
+		$this->rules()->$action(...array_values($arguments));
 
+		// run `before` hook and pass all arguments;
+		// the very first argument (which should be the model)
+		// is modified by the return value from the hook (if any returned)
+		$appliedTo = array_key_first($arguments);
+		$arguments[$appliedTo] = $kirby->apply(
+			'user.' . $action . ':before',
+			$arguments,
+			$appliedTo
+		);
+
+		// check user rules again, after the hook got applied
+		$this->rules()->$action(...array_values($arguments));
+
+		// run closure
+		$result = $callback(...array_values($arguments));
+
+		// determine arguments for `after` hook depending on the action
 		$argumentsAfter = match ($action) {
 			'create' => ['user' => $result],
 			'delete' => ['status' => $result, 'user' => $old],
 			default  => ['newUser' => $result, 'oldUser' => $old]
 		};
 
-		$kirby->trigger('user.' . $action . ':after', $argumentsAfter);
+		// run `after` hook and apply return to action result
+		// (first argument, usually the new model) if anything returned
+		$result = $kirby->apply(
+			'user.' . $action . ':after',
+			$argumentsAfter,
+			array_key_first($argumentsAfter)
+		);
 
 		$kirby->cache('pages')->flush();
+
 		return $result;
 	}
 
@@ -221,7 +230,8 @@ trait UserActions
 			$data['password'] = User::hashPassword($props['password']);
 		}
 
-		$props['role'] = $props['model'] = strtolower($props['role'] ?? 'default');
+		$props['role'] ??= 'default';
+		$props['role']   = $props['model'] = strtolower($props['role']);
 
 		$user = User::factory($data);
 
@@ -245,11 +255,10 @@ trait UserActions
 			$user->writePassword($user->password());
 
 			// always create users in the default language
-			if ($user->kirby()->multilang() === true) {
-				$languageCode = $user->kirby()->defaultLanguage()->code();
-			} else {
-				$languageCode = null;
-			}
+			$languageCode = match ($user->kirby()->multilang()) {
+				true  => $user->kirby()->defaultLanguage()->code(),
+				false => null
+			};
 
 			// add the user to users collection
 			$user->kirby()->users()->add($user);
@@ -269,9 +278,8 @@ trait UserActions
 		do {
 			try {
 				$id = Str::random($length);
-				if (UserRules::validId($this, $id) === true) {
-					return $id;
-				}
+				UserRules::validId($this, $id);
+				return $id;
 
 				// we can't really test for a random match
 				// @codeCoverageIgnoreStart
@@ -299,7 +307,9 @@ trait UserActions
 
 			// delete the user directory
 			if (Dir::remove($user->root()) !== true) {
-				throw new LogicException('The user directory for "' . $user->email() . '" could not be deleted');
+				throw new LogicException(
+					message: 'The user directory for "' . $user->email() . '" could not be deleted'
+				);
 			}
 
 			// remove the user from users collection
@@ -392,7 +402,10 @@ trait UserActions
 			$credentials['email'] = Str::lower(trim($credentials['email']));
 		}
 
-		return $this->writeCredentials(array_merge($this->credentials(), $credentials));
+		return $this->writeCredentials([
+			...$this->credentials(),
+			...$credentials
+		]);
 	}
 
 	/**

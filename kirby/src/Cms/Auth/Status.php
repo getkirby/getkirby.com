@@ -5,7 +5,7 @@ namespace Kirby\Cms\Auth;
 use Kirby\Cms\App;
 use Kirby\Cms\User;
 use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Properties;
+use Stringable;
 
 /**
  * Information container for the
@@ -18,7 +18,7 @@ use Kirby\Toolkit\Properties;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
-class Status
+class Status implements Stringable
 {
 	/**
 	 * Type of the active challenge
@@ -49,18 +49,16 @@ class Status
 
 	/**
 	 * Class constructor
-	 *
-	 * @param array $props
 	 */
 	public function __construct(array $props)
 	{
-		if (in_array($props['status'], ['active', 'impersonated', 'pending', 'inactive']) !== true) {
-			throw new InvalidArgumentException([
-				'data' => [
+		if (in_array($props['status'], ['active', 'impersonated', 'pending', 'inactive'], true) !== true) {
+			throw new InvalidArgumentException(
+				data: [
 					'argument' => '$props[\'status\']',
 					'method'   => 'Status::__construct'
 				]
-			]);
+			);
 		}
 
 		$this->kirby 		 	 = $props['kirby'];
@@ -151,7 +149,7 @@ class Status
 	{
 		// for security, only return the user if they are
 		// already logged in
-		if (in_array($this->status(), ['active', 'impersonated']) !== true) {
+		if (in_array($this->status(), ['active', 'impersonated'], true) !== true) {
 			return null;
 		}
 

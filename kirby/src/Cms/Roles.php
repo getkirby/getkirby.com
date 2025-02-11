@@ -15,6 +15,8 @@ namespace Kirby\Cms;
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ *
+ * @extends \Kirby\Cms\Collection<\Kirby\Cms\Role>
  */
 class Roles extends Collection
 {
@@ -102,8 +104,8 @@ class Roles extends Collection
 		$roles = new static();
 
 		// load roles from plugins
-		foreach ($kirby->extensions('blueprints') as $blueprintName => $blueprint) {
-			if (substr($blueprintName, 0, 6) !== 'users/') {
+		foreach ($kirby->extensions('blueprints') as $name => $blueprint) {
+			if (str_starts_with($name, 'users/') === false) {
 				continue;
 			}
 
@@ -112,11 +114,10 @@ class Roles extends Collection
 				$blueprint = $blueprint($kirby);
 			}
 
-			if (is_array($blueprint) === true) {
-				$role = Role::factory($blueprint, $inject);
-			} else {
-				$role = Role::load($blueprint, $inject);
-			}
+			$role = match (is_array($blueprint)) {
+				true  => Role::factory($blueprint, $inject),
+				false => Role::load($blueprint, $inject)
+			};
 
 			$roles->set($role->id(), $role);
 		}

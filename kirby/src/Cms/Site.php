@@ -2,6 +2,7 @@
 
 namespace Kirby\Cms;
 
+use Kirby\Content\VersionId;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
 use Kirby\Filesystem\Dir;
@@ -81,12 +82,12 @@ class Site extends ModelWithContent
 	 */
 	public function __construct(array $props = [])
 	{
-		parent::__construct($props);
-
 		$this->errorPageId = $props['errorPageId'] ?? 'error';
 		$this->homePageId  = $props['homePageId'] ?? 'home';
 		$this->page        = $props['page'] ?? null;
 		$this->url         = $props['url'] ?? null;
+
+		parent::__construct($props);
 
 		$this->setBlueprint($props['blueprint'] ?? null);
 		$this->setChildren($props['children'] ?? null);
@@ -120,11 +121,12 @@ class Site extends ModelWithContent
 	 */
 	public function __debugInfo(): array
 	{
-		return array_merge($this->toArray(), [
+		return [
+			...$this->toArray(),
 			'content'  => $this->content(),
 			'children' => $this->children(),
 			'files'    => $this->files(),
-		]);
+		];
 	}
 
 	/**
@@ -187,19 +189,6 @@ class Site extends ModelWithContent
 		string|null $languageCode = null
 	): array {
 		return A::prepend($data, ['title' => $data['title'] ?? null]);
-	}
-
-	/**
-	 * Filename for the content file
-	 * @internal
-	 * @deprecated 4.0.0
-	 * @todo Remove in v5
-	 * @codeCoverageIgnore
-	 */
-	public function contentFileName(): string
-	{
-		Helpers::deprecated('The internal $model->contentFileName() method has been deprecated. Please let us know via a GitHub issue if you need this method and tell us your use case.', 'model-content-file');
-		return 'site';
 	}
 
 	/**
@@ -267,8 +256,6 @@ class Site extends ModelWithContent
 
 	/**
 	 * Compares the current object with the given site object
-	 *
-	 * @param mixed $site
 	 */
 	public function is($site): bool
 	{
@@ -362,24 +349,12 @@ class Site extends ModelWithContent
 	}
 
 	/**
-	 * Preview Url
+	 * Returns the preview URL with authentication for drafts and versions
 	 * @internal
 	 */
-	public function previewUrl(): string|null
+	public function previewUrl(VersionId|string $versionId = 'latest'): string|null
 	{
-		$preview = $this->blueprint()->preview();
-
-		if ($preview === false) {
-			return null;
-		}
-
-		if ($preview === true) {
-			$url = $this->url();
-		} else {
-			$url = $preview;
-		}
-
-		return $url;
+		return $this->version($versionId)->url();
 	}
 
 	/**
@@ -403,8 +378,10 @@ class Site extends ModelWithContent
 	/**
 	 * Search all pages in the site
 	 */
-	public function search(string|null $query = null, string|array $params = []): Pages
-	{
+	public function search(
+		string|null $query = null,
+		string|array $params = []
+	): Pages {
 		return $this->index()->search($query, $params);
 	}
 
@@ -416,8 +393,10 @@ class Site extends ModelWithContent
 	protected function setBlueprint(array|null $blueprint = null): static
 	{
 		if ($blueprint !== null) {
-			$blueprint['model'] = $this;
-			$this->blueprint = new SiteBlueprint($blueprint);
+			$this->blueprint = new SiteBlueprint([
+				'model' => $this,
+				...$blueprint
+			]);
 		}
 
 		return $this;
@@ -429,7 +408,8 @@ class Site extends ModelWithContent
 	 */
 	public function toArray(): array
 	{
-		return array_merge(parent::toArray(), [
+		return [
+			...parent::toArray(),
 			'children'   => $this->children()->keys(),
 			'errorPage'  => $this->errorPage()?->id() ?? false,
 			'files'      => $this->files()->keys(),
@@ -437,7 +417,7 @@ class Site extends ModelWithContent
 			'page'       => $this->page()?->id() ?? false,
 			'title'      => $this->title()->value(),
 			'url'        => $this->url(),
-		]);
+		];
 	}
 
 	/**
@@ -460,11 +440,9 @@ class Site extends ModelWithContent
 		string|null $languageCode = null,
 		array|null $options = null
 	): string {
-		if ($language = $this->kirby()->language($languageCode)) {
-			return $language->url();
-		}
-
-		return $this->kirby()->url();
+		return
+			$this->kirby()->language($languageCode)?->url() ??
+			$this->kirby()->url();
 	}
 
 	/**
@@ -489,7 +467,7 @@ class Site extends ModelWithContent
 
 		// handle invalid pages
 		if ($page instanceof Page === false) {
-			throw new InvalidArgumentException('Invalid page object');
+			throw new InvalidArgumentException(message: 'Invalid page object');
 		}
 
 		// set and return the current active page

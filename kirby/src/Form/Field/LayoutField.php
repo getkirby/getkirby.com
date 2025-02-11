@@ -7,6 +7,8 @@ use Kirby\Cms\Blueprint;
 use Kirby\Cms\Fieldset;
 use Kirby\Cms\Layout;
 use Kirby\Cms\Layouts;
+use Kirby\Data\Data;
+use Kirby\Data\Json;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Form\Form;
 use Kirby\Toolkit\Str;
@@ -30,7 +32,7 @@ class LayoutField extends BlocksField
 
 	public function fill(mixed $value = null): void
 	{
-		$value   = $this->valueFromJson($value);
+		$value   = Data::decode($value, type: 'json', fail: false);
 		$layouts = Layouts::factory($value, ['parent' => $this->model])->toArray();
 
 		foreach ($layouts as $layoutIndex => $layout) {
@@ -43,7 +45,8 @@ class LayoutField extends BlocksField
 			}
 		}
 
-		$this->value = $layouts;
+		$this->value  = $layouts;
+		$this->errors = null;
 	}
 
 	public function attrsForm(array $input = []): Form
@@ -96,7 +99,7 @@ class LayoutField extends BlocksField
 
 			// remove the row if layout not available for the pasted layout field
 			$columns = array_column($layout['columns'], 'width');
-			if (in_array($columns, $this->layouts()) === false) {
+			if (in_array($columns, $this->layouts(), true) === false) {
 				unset($layouts[$layoutIndex]);
 				continue;
 			}
@@ -122,13 +125,12 @@ class LayoutField extends BlocksField
 
 	public function props(): array
 	{
-		$settings = $this->settings();
-
-		return array_merge(parent::props(), [
+		return [
+			...parent::props(),
 			'layouts'  => $this->layouts(),
 			'selector' => $this->selector(),
-			'settings' => $settings?->toArray()
-		]);
+			'settings' => $this->settings()?->toArray()
+		];
 	}
 
 	public function routes(): array
@@ -182,10 +184,10 @@ class LayoutField extends BlocksField
 
 				$fieldApi = $this->clone([
 					'routes' => $field->api(),
-					'data'   => array_merge(
-						$this->data(),
-						['field' => $field]
-					)
+					'data'   => [
+						...$this->data(),
+						'field' => $field
+					]
 				]);
 
 				return $fieldApi->call(
@@ -267,13 +269,14 @@ class LayoutField extends BlocksField
 		return $this->settings;
 	}
 
-	public function store(mixed $value): mixed
+	public function toStoredValue(bool $default = false): mixed
 	{
+		$value = $this->toFormValue($default);
 		$value = Layouts::factory($value, ['parent' => $this->model])->toArray();
 
 		// returns empty string to avoid storing empty array as string `[]`
 		// and to consistency work with `$field->isEmpty()`
-		if (empty($value) === true) {
+		if ($value === []) {
 			return '';
 		}
 
@@ -287,7 +290,7 @@ class LayoutField extends BlocksField
 			}
 		}
 
-		return $this->valueToJson($value, $this->pretty());
+		return Json::encode($value, pretty: $this->pretty());
 	}
 
 	public function validations(): array
@@ -306,13 +309,11 @@ class LayoutField extends BlocksField
 					foreach ($form->fields() as $field) {
 						$errors = $field->errors();
 
-						if (empty($errors) === false) {
-							throw new InvalidArgumentException([
-								'key' => 'layout.validation.settings',
-								'data' => [
-									'index' => $layoutIndex
-								]
-							]);
+						if (count($errors) > 0) {
+							throw new InvalidArgumentException(
+								key:'layout.validation.settings',
+								data: ['index' => $layoutIndex]
+							);
 						}
 					}
 
@@ -342,16 +343,16 @@ class LayoutField extends BlocksField
 								$errors = $field->errors();
 
 								// rough first validation
-								if (empty($errors) === false) {
-									throw new InvalidArgumentException([
-										'key' => 'layout.validation.block',
-										'data' => [
+								if (count($errors) > 0) {
+									throw new InvalidArgumentException(
+										key: 'layout.validation.block',
+										data: [
 											'blockIndex'  => $blockIndex,
 											'field'       => $field->label(),
 											'fieldset'    => $fieldset->name(),
 											'layoutIndex' => $layoutIndex
 										]
-									]);
+									);
 								}
 							}
 						}

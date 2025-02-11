@@ -16,6 +16,8 @@ use Kirby\Toolkit\Str;
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ *
+ * @extends \Kirby\Cms\Item<\Kirby\Cms\Fieldsets>
  */
 class Fieldset extends Item
 {
@@ -40,7 +42,9 @@ class Fieldset extends Item
 	public function __construct(array $params = [])
 	{
 		if (empty($params['type']) === true) {
-			throw new InvalidArgumentException('The fieldset type is missing');
+			throw new InvalidArgumentException(
+				message: 'The fieldset type is missing'
+			);
 		}
 
 		$this->type = $params['id'] = $params['type'];
@@ -76,7 +80,7 @@ class Fieldset extends Item
 		$fields = $this->form($fields)->fields()->toArray();
 
 		// collect all fields
-		$this->fields = array_merge($this->fields, $fields);
+		$this->fields = [...$this->fields, ...$fields];
 
 		return $fields;
 	}
@@ -136,7 +140,7 @@ class Fieldset extends Item
 			return false;
 		}
 
-		if (count($this->fields) === 0) {
+		if ($this->fields === []) {
 			return false;
 		}
 

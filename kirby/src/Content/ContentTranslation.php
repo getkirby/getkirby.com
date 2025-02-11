@@ -71,10 +71,10 @@ class ContentTranslation
 			$this->isDefault() === false &&
 			$defaultLanguage = $parent->kirby()->defaultLanguage()
 		) {
-			$content = array_merge(
-				$parent->translation($defaultLanguage->code())?->content() ?? [],
-				$content
-			);
+			$content = [
+				...$parent->translation($defaultLanguage->code())?->content() ?? [],
+				...$content
+			];
 		}
 
 		return $content;
@@ -85,16 +85,7 @@ class ContentTranslation
 	 */
 	public function contentFile(): string
 	{
-		// temporary compatibility change (TODO: take this from the parent `ModelVersion` object)
-		$identifier = $this->parent::CLASS_ALIAS === 'page' && $this->parent->isDraft() === true ?
-			'changes' :
-			'published';
-
-		return $this->contentFile = $this->parent->storage()->contentFile(
-			$identifier,
-			$this->code,
-			true
-		);
+		return $this->contentFile = $this->parent->version()->contentFile($this->code);
 	}
 
 	/**
@@ -151,7 +142,7 @@ class ContentTranslation
 
 		$this->content = match ($overwrite) {
 			true    => $data,
-			default => array_merge($this->content(), $data)
+			default => [...$this->content(), ...$data]
 		};
 
 		return $this;

@@ -4,17 +4,19 @@ namespace Kirby\Cms;
 
 use Closure;
 use Kirby\Content\Content;
-use Kirby\Content\ContentStorage;
 use Kirby\Content\ContentTranslation;
-use Kirby\Content\PlainTextContentStorageHandler;
+use Kirby\Content\Lock;
+use Kirby\Content\Storage;
+use Kirby\Content\Version;
+use Kirby\Content\VersionId;
 use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
 use Kirby\Form\Form;
 use Kirby\Panel\Model;
 use Kirby\Toolkit\Str;
 use Kirby\Uuid\Identifiable;
 use Kirby\Uuid\Uuid;
 use Kirby\Uuid\Uuids;
+use Stringable;
 use Throwable;
 
 /**
@@ -26,7 +28,7 @@ use Throwable;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
-abstract class ModelWithContent implements Identifiable
+abstract class ModelWithContent implements Identifiable, Stringable
 {
 	/**
 	 * Each model must define a CLASS_ALIAS
@@ -45,7 +47,7 @@ abstract class ModelWithContent implements Identifiable
 	public Content|null $content;
 	public static App $kirby;
 	protected Site|null $site;
-	protected ContentStorage $storage;
+	protected Storage $storage;
 	public Collection|null $translations = null;
 
 	/**
@@ -74,7 +76,7 @@ abstract class ModelWithContent implements Identifiable
 	public function blueprints(string|null $inSection = null): array
 	{
 		// helper function
-		$toBlueprints = function (array $sections): array {
+		$toBlueprints = static function (array $sections): array {
 			$blueprints = [];
 
 			foreach ($sections as $section) {
@@ -127,22 +129,23 @@ abstract class ModelWithContent implements Identifiable
 	 */
 	public function content(string|null $languageCode = null): Content
 	{
-		// single language support
-		if ($this->kirby()->multilang() === false) {
-			if ($this->content instanceof Content) {
-				return $this->content;
-			}
+		// get the targeted language
+		$language = Language::ensure($languageCode);
 
-			// don't normalize field keys (already handled by the `Data` class)
-			return $this->content = new Content($this->readContent(), $this, false);
+		// fetch a specific version in preview render mode
+		// @todo this entire block can be radically simplified as soon
+		// as the models use the versions exclusively.
+		if (VersionId::$render ?? null) {
+			$version = $this->version(VersionId::$render);
+
+			if ($version->exists($language) === true) {
+				return $version->content($language);
+			}
 		}
 
-		// get the targeted language
-		$language = $this->kirby()->language($languageCode);
-
-		// stop if the language does not exist
-		if ($language === null) {
-			throw new InvalidArgumentException('Invalid language: ' . $languageCode);
+		// single language support
+		if ($this->kirby()->multilang() === false) {
+			return $this->content ??= $this->version()->content($language);
 		}
 
 		// only fetch from cache for the current language
@@ -165,47 +168,6 @@ abstract class ModelWithContent implements Identifiable
 	}
 
 	/**
-	 * Returns the absolute path to the content file;
-	 * NOTE: only supports the published content file
-	 * (use `$model->storage()->contentFile()` for other versions)
-	 * @internal
-	 * @deprecated 4.0.0
-	 * @todo Remove in v5
-	 * @codeCoverageIgnore
-	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the language for the given code does not exist
-	 */
-	public function contentFile(
-		string|null $languageCode = null,
-		bool $force = false
-	): string {
-		Helpers::deprecated('The internal $model->contentFile() method has been deprecated. You can use $model->storage()->contentFile() instead, however please note that this method is also internal and may be removed in the future.', 'model-content-file');
-
-		return $this->storage()->contentFile(
-			$this->storage()->defaultVersion(),
-			$languageCode,
-			$force
-		);
-	}
-
-	/**
-	 * Returns an array with all content files;
-	 * NOTE: only supports the published content file
-	 * (use `$model->storage()->contentFiles()` for other versions)
-	 * @deprecated 4.0.0
-	 * @todo Remove in v5
-	 * @codeCoverageIgnore
-	 */
-	public function contentFiles(): array
-	{
-		Helpers::deprecated('The internal $model->contentFiles() method has been deprecated. You can use $model->storage()->contentFiles() instead, however please note that this method is also internal and may be removed in the future.', 'model-content-file');
-
-		return $this->storage()->contentFiles(
-			$this->storage()->defaultVersion()
-		);
-	}
-
-	/**
 	 * Prepares the content that should be written
 	 * to the text file
 	 * @internal
@@ -218,43 +180,6 @@ abstract class ModelWithContent implements Identifiable
 	}
 
 	/**
-	 * Returns the absolute path to the
-	 * folder in which the content file is
-	 * located
-	 * @internal
-	 * @deprecated 4.0.0
-	 * @todo Remove in v5
-	 * @codeCoverageIgnore
-	 */
-	public function contentFileDirectory(): string|null
-	{
-		Helpers::deprecated('The internal $model->contentFileDirectory() method has been deprecated. Please let us know via a GitHub issue if you need this method and tell us your use case.', 'model-content-file');
-		return $this->root();
-	}
-
-	/**
-	 * Returns the extension of the content file
-	 * @internal
-	 * @deprecated 4.0.0
-	 * @todo Remove in v5
-	 * @codeCoverageIgnore
-	 */
-	public function contentFileExtension(): string
-	{
-		Helpers::deprecated('The internal $model->contentFileName() method has been deprecated. Please let us know via a GitHub issue if you need this method and tell us your use case.', 'model-content-file');
-		return $this->kirby()->contentExtension();
-	}
-
-	/**
-	 * Needs to be declared by the final model
-	 * @internal
-	 * @deprecated 4.0.0
-	 * @todo Remove in v5
-	 * @codeCoverageIgnore
-	 */
-	abstract public function contentFileName(): string;
-
-	/**
 	 * Converts model to new blueprint
 	 * incl. its content for all translations
 	 */
@@ -263,8 +188,8 @@ abstract class ModelWithContent implements Identifiable
 		// first close object with new blueprint as template
 		$new = $this->clone(['template' => $blueprint]);
 
-		// temporary compatibility change (TODO: also convert changes)
-		$identifier = $this->storage()->defaultVersion();
+		// get version (only handling latest version)
+		$version = $new->version(VersionId::latest());
 
 		// for multilang, we go through all translations and
 		// covnert the content for each of them, remove the content file
@@ -277,10 +202,7 @@ abstract class ModelWithContent implements Identifiable
 					$content = $this->content($code)->convertTo($blueprint);
 
 					// delete the old text file
-					$this->storage()->delete(
-						$identifier,
-						$code
-					);
+					$version->delete($code);
 
 					// save to re-create the translation content file
 					// with the converted/updated content
@@ -304,7 +226,7 @@ abstract class ModelWithContent implements Identifiable
 		$content = $this->content()->convertTo($blueprint);
 
 		// delete the old text file
-		$this->storage()->delete($identifier, 'default');
+		$version->delete('default');
 
 		return $new->save($content);
 	}
@@ -334,7 +256,7 @@ abstract class ModelWithContent implements Identifiable
 		$errors = [];
 
 		foreach ($this->blueprint()->sections() as $section) {
-			$errors = array_merge($errors, $section->errors());
+			$errors = [...$errors, ...$section->errors()];
 		}
 
 		return $errors;
@@ -384,11 +306,11 @@ abstract class ModelWithContent implements Identifiable
 
 	/**
 	 * Checks if the model is locked for the current user
+	 * @deprecated 5.0.0 Use `->lock()->isLocked()` instead
 	 */
 	public function isLocked(): bool
 	{
-		$lock = $this->lock();
-		return $lock && $lock->isLocked() === true;
+		return $this->lock()->isLocked() === true;
 	}
 
 	/**
@@ -408,28 +330,11 @@ abstract class ModelWithContent implements Identifiable
 	}
 
 	/**
-	 * Returns the lock object for this model
-	 *
-	 * Only if a content directory exists,
-	 * virtual pages will need to overwrite this method
+	 * Returns lock for the model
 	 */
-	public function lock(): ContentLock|null
+	public function lock(): Lock
 	{
-		$dir = $this->root();
-
-		if ($this::CLASS_ALIAS === 'file') {
-			$dir = dirname($dir);
-		}
-
-		if (
-			$this->kirby()->option('content.locking', true) &&
-			is_string($dir) === true &&
-			file_exists($dir) === true
-		) {
-			return new ContentLock($this);
-		}
-
-		return null;
+		return $this->version(VersionId::changes())->lock('*');
 	}
 
 	/**
@@ -493,17 +398,7 @@ abstract class ModelWithContent implements Identifiable
 	 */
 	public function readContent(string|null $languageCode = null): array
 	{
-		try {
-			return $this->storage()->read(
-				$this->storage()->defaultVersion(),
-				$languageCode
-			);
-		} catch (NotFoundException) {
-			// only if the content file really does not exist, it's ok
-			// to return empty content. Otherwise this could lead to
-			// content loss in case of file reading issues
-			return [];
-		}
+		return $this->version()->read($languageCode ?? 'default') ?? [];
 	}
 
 	/**
@@ -563,7 +458,9 @@ abstract class ModelWithContent implements Identifiable
 		$translation = $clone->translation($languageCode);
 
 		if ($translation === null) {
-			throw new InvalidArgumentException('Invalid language: ' . $languageCode);
+			throw new InvalidArgumentException(
+				message: 'Invalid language: ' . $languageCode
+			);
 		}
 
 		// get the content to store
@@ -647,12 +544,9 @@ abstract class ModelWithContent implements Identifiable
 	 * Returns the content storage handler
 	 * @internal
 	 */
-	public function storage(): ContentStorage
+	public function storage(): Storage
 	{
-		return $this->storage ??= new ContentStorage(
-			model:   $this,
-			handler: PlainTextContentStorageHandler::class
-		);
+		return $this->storage ??= $this->kirby()->storage($this);
 	}
 
 	/**
@@ -701,7 +595,7 @@ abstract class ModelWithContent implements Identifiable
 		}
 
 		if ($handler !== 'template' && $handler !== 'safeTemplate') {
-			throw new InvalidArgumentException('Invalid toString handler'); // @codeCoverageIgnore
+			throw new InvalidArgumentException(message: 'Invalid toString handler'); // @codeCoverageIgnore
 		}
 
 		$result = Str::$handler($template, array_replace([
@@ -720,21 +614,20 @@ abstract class ModelWithContent implements Identifiable
 	 */
 	public function __toString(): string
 	{
-		return $this->id();
+		return (string)$this->id();
 	}
 
 	/**
 	 * Returns a single translation by language code
 	 * If no code is specified the current translation is returned
+	 *
+	 * @throws \Kirby\Exception\NotFoundException If the language does not exist
 	 */
 	public function translation(
 		string|null $languageCode = null
 	): ContentTranslation|null {
-		if ($language = $this->kirby()->language($languageCode)) {
-			return $this->translations()->find($language->code());
-		}
-
-		return null;
+		$language = Language::ensure($languageCode ?? 'current');
+		return $this->translations()->find($language->code());
 	}
 
 	/**
@@ -778,10 +671,10 @@ abstract class ModelWithContent implements Identifiable
 
 		// validate the input
 		if ($validate === true && $form->isInvalid() === true) {
-			throw new InvalidArgumentException([
-				'fallback' => 'Invalid form with errors',
-				'details'  => $form->errors()
-			]);
+			throw new InvalidArgumentException(
+				fallback: 'Invalid form with errors',
+				details: $form->errors()
+			);
 		}
 
 		return $this->commit(
@@ -807,23 +700,25 @@ abstract class ModelWithContent implements Identifiable
 	}
 
 	/**
+	 * Returns a content version instance
+	 * @since 5.0.0
+	 */
+	public function version(VersionId|string|null $versionId = null): Version
+	{
+		return new Version(
+			model: $this,
+			id: VersionId::from($versionId ?? VersionId::latest())
+		);
+	}
+
+	/**
 	 * Low level data writer method
 	 * to store the given data on disk or anywhere else
 	 * @internal
 	 */
 	public function writeContent(array $data, string|null $languageCode = null): bool
 	{
-		$data = $this->contentFileData($data, $languageCode);
-		$id   = $this->storage()->defaultVersion();
-
-		try {
-			// we can only update if the version already exists
-			$this->storage()->update($id, $languageCode, $data);
-		} catch (NotFoundException) {
-			// otherwise create a new version
-			$this->storage()->create($id, $languageCode, $data);
-		}
-
+		$this->version()->save($data, $languageCode ?? 'default', true);
 		return true;
 	}
 }

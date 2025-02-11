@@ -5,6 +5,7 @@ namespace Kirby\Cms;
 use Closure;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Toolkit\Controller;
+use Stringable;
 
 /**
  * The Event object is created whenever the `$kirby->trigger()`
@@ -19,7 +20,7 @@ use Kirby\Toolkit\Controller;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
-class Event
+class Event implements Stringable
 {
 	/**
 	 * The full event name
@@ -131,7 +132,7 @@ class Event
 	public function call(object|null $bind, Closure $hook): mixed
 	{
 		// collect the list of possible hook arguments
-		$data = $this->arguments();
+		$data          = $this->arguments();
 		$data['event'] = $this;
 
 		// magically call the hook with the arguments it requested
@@ -245,7 +246,9 @@ class Event
 	public function updateArgument(string $name, $value): void
 	{
 		if (array_key_exists($name, $this->arguments) !== true) {
-			throw new InvalidArgumentException('The argument ' . $name . ' does not exist');
+			throw new InvalidArgumentException(
+				message: 'The argument ' . $name . ' does not exist'
+			);
 		}
 
 		$this->arguments[$name] = $value;

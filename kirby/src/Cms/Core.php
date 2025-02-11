@@ -6,10 +6,16 @@ use Kirby\Cache\ApcuCache;
 use Kirby\Cache\FileCache;
 use Kirby\Cache\MemCached;
 use Kirby\Cache\MemoryCache;
+use Kirby\Cache\RedisCache;
 use Kirby\Cms\Auth\EmailChallenge;
 use Kirby\Cms\Auth\TotpChallenge;
 use Kirby\Form\Field\BlocksField;
+use Kirby\Form\Field\EntriesField;
 use Kirby\Form\Field\LayoutField;
+use Kirby\Panel\Ui\FilePreviews\AudioFilePreview;
+use Kirby\Panel\Ui\FilePreviews\ImageFilePreview;
+use Kirby\Panel\Ui\FilePreviews\PdfFilePreview;
+use Kirby\Panel\Ui\FilePreviews\VideoFilePreview;
 
 /**
  * The Core class lists all parts of Kirby
@@ -147,6 +153,7 @@ class Core
 	public function caches(): array
 	{
 		return [
+			'changes' => true,
 			'updates' => true,
 			'uuid'    => true,
 		];
@@ -162,6 +169,7 @@ class Core
 			'file'      => FileCache::class,
 			'memcached' => MemCached::class,
 			'memory'    => MemoryCache::class,
+			'redis'     => RedisCache::class
 		];
 	}
 
@@ -244,6 +252,7 @@ class Core
 			'color'       => $this->root . '/fields/color.php',
 			'date'        => $this->root . '/fields/date.php',
 			'email'       => $this->root . '/fields/email.php',
+			'entries'     => EntriesField::class,
 			'files'       => $this->root . '/fields/files.php',
 			'gap'         => $this->root . '/fields/gap.php',
 			'headline'    => $this->root . '/fields/headline.php',
@@ -272,6 +281,19 @@ class Core
 			'url'         => $this->root . '/fields/url.php',
 			'users'       => $this->root . '/fields/users.php',
 			'writer'      => $this->root . '/fields/writer.php'
+		];
+	}
+
+	/**
+	 * Returns a map of all default file preview handlers
+	 */
+	public function filePreviews(): array
+	{
+		return [
+			AudioFilePreview::class,
+			ImageFilePreview::class,
+			PdfFilePreview::class,
+			VideoFilePreview::class,
 		];
 	}
 
@@ -388,6 +410,7 @@ class Core
 	public function sectionMixins(): array
 	{
 		return [
+			'batch'      => $this->root . '/sections/mixins/batch.php',
 			'details'    => $this->root . '/sections/mixins/details.php',
 			'empty'      => $this->root . '/sections/mixins/empty.php',
 			'headline'   => $this->root . '/sections/mixins/headline.php',

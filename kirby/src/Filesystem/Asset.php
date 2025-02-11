@@ -27,7 +27,7 @@ class Asset
 	/**
 	 * Relative file path
 	 */
-	protected string|null $path;
+	protected string $path;
 
 
 	/**
@@ -38,8 +38,12 @@ class Asset
 		$this->root = $this->kirby()->root('index') . '/' . $path;
 		$this->url  = $this->kirby()->url('base') . '/' . $path;
 
-		$path = dirname($path);
-		$this->path = $path === '.' ? '' : $path;
+		// set relative file path
+		$this->path = dirname($path);
+
+		if ($this->path === '.') {
+			$this->path = '';
+		}
 	}
 
 	/**
@@ -64,7 +68,9 @@ class Asset
 			return $this->callMethod($method, $arguments);
 		}
 
-		throw new BadMethodCallException('The method: "' . $method . '" does not exist');
+		throw new BadMethodCallException(
+			message: 'The method: "' . $method . '" does not exist'
+		);
 	}
 
 	/**

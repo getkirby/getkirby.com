@@ -4,16 +4,21 @@ use Kirby\Cms\App;
 use Kirby\Cms\Collection;
 use Kirby\Cms\File;
 use Kirby\Cms\FileVersion;
+use Kirby\Cms\ModelWithContent;
 use Kirby\Cms\Page;
 use Kirby\Cms\User;
+use Kirby\Content\PlainTextStorage;
+use Kirby\Content\Storage;
 use Kirby\Data\Data;
 use Kirby\Email\PHPMailer as Emailer;
 use Kirby\Exception\NotFoundException;
+use Kirby\Filesystem\Asset;
 use Kirby\Filesystem\F;
 use Kirby\Filesystem\Filename;
 use Kirby\Http\Uri;
 use Kirby\Http\Url;
 use Kirby\Image\Darkroom;
+use Kirby\Session\SessionStore;
 use Kirby\Template\Snippet;
 use Kirby\Template\Template;
 use Kirby\Text\Markdown;
@@ -58,15 +63,13 @@ return [
 	/**
 	 * Adapt file characteristics
 	 *
-	 * @param \Kirby\Cms\File|\Kirby\Filesystem\Asset $file The file object
 	 * @param array $options All thumb options (width, height, crop, blur, grayscale)
-	 * @return \Kirby\Cms\File|\Kirby\Cms\FileVersion|\Kirby\Filesystem\Asset
 	 */
 	'file::version' => function (
 		App $kirby,
-		$file,
+		File|Asset $file,
 		array $options = []
-	) {
+	): File|Asset|FileVersion {
 		// if file is not resizable, return
 		if ($file->isResizable() === false) {
 			return $file;
@@ -84,9 +87,10 @@ return [
 			$job = $mediaRoot . '/.jobs/' . $thumbName . '.json';
 
 			try {
-				Data::write($job, array_merge($options, [
-					'filename' => $file->filename()
-				]));
+				Data::write(
+					$job,
+					[...$options, 'filename' => $file->filename()]
+				);
 			} catch (Throwable) {
 				// if thumb doesn't exist yet and job file cannot
 				// be created, return
@@ -149,16 +153,15 @@ return [
 			$params = ['fields' => Str::split($params, '|')];
 		}
 
-		$defaults = [
+		$collection = clone $collection;
+		$query      = trim($query ?? '');
+		$options    = [
 			'fields'    => [],
 			'minlength' => 2,
 			'score'     => [],
 			'words'     => false,
+			...$params
 		];
-
-		$collection  = clone $collection;
-		$options     = array_merge($defaults, $params);
-		$query       = trim($query ?? '');
 
 		// empty or too short search query
 		if (Str::length($query) < $options['minlength']) {
@@ -203,10 +206,11 @@ return [
 				$keys[] = 'role';
 			} elseif ($item instanceof Page) {
 				// apply the default score for pages
-				$options['score'] = array_merge(
-					['id' => 64, 'title' => 64],
-					$options['score']
-				);
+				$options['score'] = [
+					'id'    => 64,
+					'title' => 64,
+					...$options['score']
+				];
 			}
 
 			if (empty($options['fields']) === false) {
@@ -230,7 +234,7 @@ return [
 					$scoring['score'] += 16 * $score;
 					$scoring['hits']  += 1;
 
-					// check for exact beginning matches
+				// check for exact beginning matches
 				} elseif (
 					$options['words'] === false &&
 					Str::startsWith($lowerValue, $query) === true
@@ -238,7 +242,7 @@ return [
 					$scoring['score'] += 8 * $score;
 					$scoring['hits']  += 1;
 
-					// check for exact query matches
+				// check for exact query matches
 				} elseif ($matches = preg_match_all('!' . $exact . '!ui', $value, $r)) {
 					$scoring['score'] += 2 * $score;
 					$scoring['hits']  += $matches;
@@ -260,6 +264,13 @@ return [
 			fn ($item) => $scores[$item->id()]['score'],
 			'desc'
 		);
+	},
+
+	/**
+	 * Add your own session store
+	 */
+	'session::store' => function (App $kirby): string|SessionStore {
+		return $kirby->root('sessions');
 	},
 
 	/**
@@ -302,6 +313,16 @@ return [
 	},
 
 	/**
+	 * Create a new storage object for the given model
+	 */
+	'storage' => function (
+		App $kirby,
+		ModelWithContent $model
+	): Storage {
+		return new PlainTextStorage(model: $model);
+	},
+
+	/**
 	 * Add your own template engine
 	 *
 	 * @param string $name Template name
@@ -324,7 +345,6 @@ return [
 	 * @param string $src Root of the original file
 	 * @param string $dst Template string for the root to the desired destination
 	 * @param array $options All thumb options that should be applied: `width`, `height`, `crop`, `blur`, `grayscale`
-	 * @return string
 	 */
 	'thumb' => function (
 		App $kirby,
@@ -393,7 +413,7 @@ return [
 		// keep relative urls
 		if (
 			$path !== null &&
-			(substr($path, 0, 2) === './' || substr($path, 0, 3) === '../')
+			(str_starts_with($path, './')  || str_starts_with($path, '../'))
 		) {
 			return $path;
 		}
@@ -409,7 +429,9 @@ return [
 			$model = Uuid::for($path)->model();
 
 			if ($model === null) {
-				throw new NotFoundException('The model could not be found for "' . $path . '" uuid');
+				throw new NotFoundException(
+					message: 'The model could not be found for "' . $path . '" uuid'
+				);
 			}
 
 			$path = $model->url();

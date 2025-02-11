@@ -115,11 +115,15 @@ class Media
 			$options = Data::read($job);
 		} catch (Throwable) {
 			// send a customized error message to make clearer what happened here
-			throw new NotFoundException('The thumbnail configuration could not be found');
+			throw new NotFoundException(
+				message: 'The thumbnail configuration could not be found'
+			);
 		}
 
 		if (empty($options['filename']) === true) {
-			throw new InvalidArgumentException('Incomplete thumbnail configuration');
+			throw new InvalidArgumentException(
+				message: 'Incomplete thumbnail configuration'
+			);
 		}
 
 		try {
@@ -161,10 +165,10 @@ class Media
 		}
 
 		// get both old and new versions (pre and post Kirby 3.4.0)
-		$versions = array_merge(
-			glob($directory . '/' . crc32($file->filename()) . '-*', GLOB_ONLYDIR),
-			glob($directory . '/' . $file->mediaToken() . '-*', GLOB_ONLYDIR)
-		);
+		$versions = [
+			...glob($directory . '/' . crc32($file->filename()) . '-*', GLOB_ONLYDIR),
+			...glob($directory . '/' . $file->mediaToken() . '-*', GLOB_ONLYDIR)
+		];
 
 		// delete all versions of the file
 		foreach ($versions as $version) {

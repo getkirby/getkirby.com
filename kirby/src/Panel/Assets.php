@@ -3,6 +3,7 @@
 namespace Kirby\Panel;
 
 use Kirby\Cms\App;
+use Kirby\Cms\Helpers;
 use Kirby\Cms\Url;
 use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
@@ -116,11 +117,7 @@ class Assets
 	}
 
 	/**
-	 * Returns array of favicon icons
-	 * based on config option
-	 *
-	 * @todo Deprecate `url` option in v5, use `href` option instead
-	 * @todo Deprecate `rel` usage as array key in v5, use `rel` option instead
+	 * Returns array of favicon icons based on config option
 	 *
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
@@ -161,12 +158,16 @@ class Assets
 			foreach ($icons as $rel => &$icon) {
 				// TODO: remove this backward compatibility check in v6
 				if (isset($icon['url']) === true) {
+					Helpers::deprecated('`panel.favicon` option: use `href` instead of `url` attribute');
+
 					$icon['href'] = $icon['url'];
 					unset($icon['url']);
 				}
 
 				// TODO: remove this backward compatibility check in v6
 				if (is_string($rel) === true && isset($icon['rel']) === false) {
+					Helpers::deprecated('`panel.favicon` option: use `rel` attribute instead of passing string as key');
+
 					$icon['rel'] = $rel;
 				}
 
@@ -189,7 +190,9 @@ class Assets
 			];
 		}
 
-		throw new InvalidArgumentException('Invalid panel.favicon option');
+		throw new InvalidArgumentException(
+			message: 'Invalid panel.favicon option'
+		);
 	}
 
 	/**
@@ -214,7 +217,7 @@ class Assets
 		$js = [
 			'vue' => [
 				'nonce' => $this->nonce,
-				'src'   => $this->url . '/js/vue.min.js'
+				'src'   => $this->vue(),
 			],
 			'vendor' => [
 				'nonce' => $this->nonce,
@@ -252,7 +255,7 @@ class Assets
 			//  development version of Vue
 			$js['vendor']['src'] = null;
 			$js['index']['src']  = $this->url . '/src/index.js';
-			$js['vue']['src']    = $this->url . '/node_modules/vue/dist/vue.js';
+			$js['vue']['src']    = $this->vue(production: false);
 
 			// add vite dev client
 			$js['vite'] = [
@@ -291,7 +294,9 @@ class Assets
 
 		// copy assets to the dist folder
 		if (Dir::copy($panelRoot, $versionRoot) !== true) {
-			throw new Exception('Panel assets could not be linked');
+			throw new Exception(
+				message: 'Panel assets could not be linked'
+			);
 		}
 
 		return true;
@@ -320,5 +325,20 @@ class Assets
 			'params' => null,
 			'query'  => null
 		])->toString(), '/');
+	}
+
+	/**
+	 * Get the correct Vue script URL depending on dev mode
+	 * and the enabled/disabled template compiler
+	 */
+	public function vue(bool $production = true): string
+	{
+		$script = $this->kirby->option('panel.vue.compiler', true) === true ? 'vue' : 'vue.runtime';
+
+		if ($production === false) {
+			return $this->url . '/node_modules/vue/dist/' . $script . '.js';
+		}
+
+		return $this->url . '/js/' . $script . '.min.js';
 	}
 }
