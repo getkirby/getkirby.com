@@ -81,6 +81,16 @@ Both are available:
 <?= $brand ?>: <?= $testimonial ?>
 ```
 
+You can also set a site controller for all content representations of a certain type:
+
+```php "site/controller/site.rss.php"
+return function () {
+	return [
+		'generator' => 'Kirby RSS Feed Generator'
+	];
+};
+```
+
 ## First day of the week
 
 first day of the week is chosen based on user language or `date.weekday` config option (`0` for Sunday … `6` for Saturday):
