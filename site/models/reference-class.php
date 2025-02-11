@@ -150,9 +150,13 @@ class ReferenceClassPage extends SectionPage
 	{
 		if ($short !== true) {
 			// get class name as defined in content file
-			return
-				$this->class()->value() ??
+			$class = $this->class()->value();
+
+			if ($class === null) {
 				throw new Exception('Content file of "' . $this->id() . '" needs to define a "class" field');
+			}
+
+			return $class;
 		}
 
 		// prefer content field `name`

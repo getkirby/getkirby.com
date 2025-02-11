@@ -2,6 +2,10 @@ Title: Remote
 
 ----
 
+Class: Kirby\Http\Remote
+
+----
+
 Text:
 
 ## How to get a `$remote` object
