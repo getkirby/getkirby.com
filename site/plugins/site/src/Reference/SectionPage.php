@@ -7,11 +7,6 @@ use Kirby\Template\Template;
 
 abstract class SectionPage extends ReflectionPage
 {
-	public function children(): Pages
-	{
-		return parent::children()->filterBy('isInternal', false);
-	}
-
 	/**
 	 * Flag that this page should not show
 	 * the secondary entries sidebar

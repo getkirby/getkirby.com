@@ -3,26 +3,18 @@
 use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
-use Kirby\Reference\DocBlock;
 use Kirby\Reference\SectionPage;
-use Kirby\Reference\Types;
-use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 use ReferenceClassMethodPage as ReferenceClassMethod;
 
 class ReferenceClassPage extends SectionPage
 {
-	protected static array $aliases;
-
-	protected $props = null;
-
 	public function alias(): Field
 	{
-		static::$aliases ??= require $this->kirby()->root('kirby') . '/config/aliases.php';
+		static $aliases = require $this->kirby()->root('kirby') . '/config/aliases.php';
 
-		$alias = array_search($this->name(), static::$aliases);
-		$value = $alias !== false ? $alias : null;
-		return new Field($this, 'alias', $value);
+		$alias = array_search($this->name(), $aliases);
+		return new Field($this, 'alias', $alias ?: null);
 	}
 
 	public function children(): Pages
@@ -64,9 +56,7 @@ class ReferenceClassPage extends SectionPage
 		}
 
 		// Create the actual class methods as children pages collection
-		$children = Pages::factory($children, $this)
-			->filterBy('exists', true)
-			->filterBy('isInternal', false);
+		$children = Pages::factory($children, $this)->filterBy('exists', true);
 
 		// If the class is flagged as proxying another class,
 		// get the proxied methods that are not covered by an

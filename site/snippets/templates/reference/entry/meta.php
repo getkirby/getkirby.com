@@ -83,3 +83,14 @@ extract([
 	</div>
 </div>
 <?php endif ?>
+
+<?php if ($page->isInternal() === true): ?>
+<div class="prose">
+	<div class="box box--warning">
+		<?php snippet('kirbytext/box', [
+			'type' => 'alert',
+			'text' => '`' . $page->title() . '` has been marked as internal. It might be changed in a future Kirby major or minor release without being considered a breaking change. Use with caution.'
+		]) ?>
+	</div>
+</div>
+<?php endif ?>

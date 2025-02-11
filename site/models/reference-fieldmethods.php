@@ -30,9 +30,7 @@ class ReferenceFieldMethodsPage extends SectionPage
 			];
 		}
 
-		return $this->children = Pages::factory($children, $this)
-			->filterBy('isInternal', false)
-			->sortBy('title', 'asc');
+		return $this->children = Pages::factory($children, $this)->sortBy('title', 'asc');
 	}
 
 	protected function getDynamicMethods(): array
