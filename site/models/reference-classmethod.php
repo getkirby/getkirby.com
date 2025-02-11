@@ -171,4 +171,14 @@ class ReferenceClassMethodPage extends ReflectionPage
 		);
 	}
 
+	public function typeTemplates(): array
+	{
+		$tags = $this->parent()->typeTemplates();
+
+		foreach ($this->docBlock()?->getTagsByName('template') as $tag) {
+			$tags[$tag->getTemplateName()] = (string)$tag->getBound();
+		}
+
+		return $tags;
+	}
 }

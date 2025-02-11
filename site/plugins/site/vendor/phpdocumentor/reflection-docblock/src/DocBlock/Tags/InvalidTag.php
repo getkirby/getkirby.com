@@ -27,19 +27,16 @@ use function sprintf;
  * we cannot simply throw exceptions at all time because the exceptions will break the creation of a
  * docklock. Just silently ignore the exceptions is not an option because the user as an issue to fix.
  *
- * This tag holds that error information until a using application is able to display it. The object wil just behave
+ * This tag holds that error information until a using application is able to display it. The object will just behave
  * like any normal tag. So the normal application flow will not break.
  */
 final class InvalidTag implements Tag
 {
-    /** @var string */
-    private $name;
+    private string $name;
 
-    /** @var string */
-    private $body;
+    private string $body;
 
-    /** @var Throwable|null */
-    private $throwable;
+    private ?Throwable $throwable = null;
 
     private function __construct(string $name, string $body)
     {
