@@ -261,6 +261,7 @@ Breaking:
 - The `Str::ucfirst()` method no longer lowercases all but the first letter of the text, it only capitalizes the first letter. [#6860](https://github.com/getkirby/kirby/pull/6860)
 - Classes extending `ModelPermissions` need to set their category with the `const CATEGORY` or `static function category()` instead of `protected string $category` and use the static `user()` method instead of `$user` and `$permissions` properties [#6880](https://github.com/getkirby/kirby/pull/6880)
 - File drag texts in the Panel always use the file UUID, if UUIDs are not disabled [#6948](https://github.com/getkirby/kirby/pull/6948)
+- The `api.methodOverwrite` option has been renamed to `api.methodOverride`
 
 ## Panel
 
