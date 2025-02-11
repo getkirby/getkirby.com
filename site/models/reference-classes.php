@@ -102,7 +102,7 @@ class ReferenceClassesPage extends SectionPage
 	}
 
 	/**
-	 * Creates an array of page properties for all class files in the
+	 * Creates an array of page props for all class files in the
 	 * provided root, assigning them to a provided namespace
 	 */
 	protected function childrenForClasses(

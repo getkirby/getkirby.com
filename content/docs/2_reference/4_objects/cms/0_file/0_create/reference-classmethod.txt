@@ -4,10 +4,6 @@ Auth: files.create
 
 Text:
 
-## `$props` parameter
-
-(docs: props/file-create)
-
 ## Example
 
 ```php

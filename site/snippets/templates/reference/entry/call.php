@@ -12,6 +12,5 @@ extract([
 <?php endif ?>
 
 <?php snippet('templates/reference/entry/parameters') ?>
-<?php snippet('templates/reference/entry/properties') ?>
 <?php snippet('templates/reference/entry/returns') ?>
 <?php snippet('templates/reference/entry/throws') ?>

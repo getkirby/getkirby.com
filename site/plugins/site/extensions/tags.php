@@ -119,42 +119,6 @@ $tags['reference'] = [
 ];
 
 /**
- * Used to render automatic $props array table
- */
-$tags['properties'] = [
-	'attr' => [
-		'class',
-		'title',
-		'intro',
-		'rows',
-		'additional'
-	],
-	'html' => function ($tag) {
-		if ($tag->class) {
-			$page = ReferenceClassPage::findByName($tag->class);
-		} else {
-			$page = $tag->parent();
-		}
-
-		$rows = $tag->attr('rows') ?? $page->properties();
-
-		if ($additional = $tag->attr('additional')) {
-			$rows = [...$rows, ...$additional];
-			array_multisort(array_column($rows, 'name'), SORT_ASC, $rows);
-		}
-
-		if ($page) {
-			return snippet('templates/reference/entry/parameters', [
-				'title'    => $tag->title ?? false,
-				'intro'    => $tag->intro ?? false,
-				'rows'     => $rows,
-				'defaults' => false
-			], true);
-		}
-	}
-];
-
-/**
  * Used for replacing nested glossary tags
  */
 $tags['plain'] = [

@@ -51,19 +51,6 @@ class ReferenceClassPage extends SectionPage
 			// while other magic methods remain unlisted
 			if ($slug === '__construct') {
 				$num = 0;
-
-				// Automatially activate $props support for
-				// constructur classmethod pages
-				if ($parameter = ($method->getParameters()[0] ?? null)) {
-					if ($type = $parameter->getType()) {
-						if (
-							$type instanceof ReflectionUnionType === false &&
-							$type->getName() === 'array'
-						) {
-							$content['properties'] ??= '$' . $parameter->getName();
-						}
-					}
-				}
 			}
 
 			$children[] = [
@@ -172,92 +159,6 @@ class ReferenceClassPage extends SectionPage
 		return
 			$this->content()->get('name')->value() ??
 			$this->reflection()->getShortName();
-	}
-
-	public function properties(): array
-	{
-		if ($this->props !== null) {
-			return $this->props;
-		}
-
-		$reflection = $this->reflection();
-
-		if (!$reflection) {
-			return $this->props = [];
-		}
-
-		$traits = [];
-		$getTraits = function ($class) use (&$getTraits, &$traits) {
-			if ($class->getParentClass() !== false) {
-				$getTraits($class->getParentClass());
-			}
-
-			$traits = [...$traits, ...$class->getTraitNames()];
-		};
-		$getTraits($reflection);
-
-		if (in_array('Kirby\\Toolkit\\Properties', $traits) === false) {
-			return $this->props = [];
-		}
-
-		$properties = array_filter(
-			$reflection->getProperties(),
-			fn ($prop) =>
-				$prop->getName() !== 'propertyData' &&
-				$prop->isStatic() === false &&
-				$reflection->hasMethod('set' . $prop->getName()) === true
-		);
-
-		$data = [];
-
-		foreach ($properties as $prop) {
-			$name        = $prop->getName();
-			$description = null;
-			$type        = null;
-			$required    = false;
-
-			if ($method = $reflection->getMethod('set' . $name)) {
-				$required  = $method->getNumberOfRequiredParameters() > 0;
-				$parameter = $method->getParameters()[0];
-
-				try {
-					$doc         = new DocBlock($method->getDocComment());
-					$description = (string)$doc->getSummary();
-				} catch (Throwable) {
-					$doc = null;
-				}
-
-				if ($doc?->getTag('internal')) {
-					continue;
-				}
-
-				if ($type = $parameter->getType()) {
-					if ($type instanceof ReflectionUnionType) {
-						$type = $type->getTypes();
-					}
-					$type = A::map(A::wrap($type), fn ($t) => $t->getName());
-					$type = implode('|', $type);
-
-				} elseif ($doc) {
-					$type = (string)$doc->getParameters()[0]->getType();
-				}
-
-				if ($parameter->isOptional()) {
-					$type = Str::rtrim($type, '|null');
-				}
-			}
-
-			$type   = Types::factory($type ?? 'mixed', $this);
-			$data[] = compact('name', 'required', 'type', 'description');
-		}
-
-		// remove line breaks from description
-		$description = str_replace("\n", ' ', $description);
-
-		// sort by the name of the prop
-		array_multisort(array_column($data, 'name'), SORT_ASC, $data);
-
-		return $this->props = $data;
 	}
 
 	public function onGitHub(string $path = ''): Field
