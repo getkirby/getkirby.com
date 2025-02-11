@@ -8,6 +8,6 @@ return function (Page $page) {
 			->children()
 			->listed()
 			->filterBy('isDeprecated', false)
-			->sortBy('title')
+			->sortBy('num', 'slug')
 	];
 };

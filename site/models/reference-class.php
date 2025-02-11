@@ -44,7 +44,7 @@ class ReferenceClassPage extends SectionPage
 
 			$slug    = Str::kebab($method->getName());
 			$isMagic = substr($slug, 0, 1) === '_';
-			$num     = $isMagic ? null : 0;
+			$num     = $isMagic ? null : 1;
 			$content = $pages->find($slug)?->content()->toArray() ?? [];
 
 			// Ensure that constructor method is listed,
