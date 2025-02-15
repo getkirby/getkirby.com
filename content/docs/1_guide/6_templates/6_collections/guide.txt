@@ -81,6 +81,12 @@ Or store the collection in a variable for further use:
 $articles = $kirby->collection('articles');
 ```
 
+You can also use the (link: docs/reference/templates/helpers/collection text: `collection()`) helper function instead of the more verbose `$kirby->collection()`.
+
+```php
+collection('articles');
+```
+
 ### Nested collections
 
 If you have a lot of collections, it might come handy to organize them in subfolders. Kirby can handle this:
