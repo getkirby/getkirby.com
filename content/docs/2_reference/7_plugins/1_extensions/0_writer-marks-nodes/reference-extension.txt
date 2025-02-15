@@ -103,7 +103,7 @@ Learn how to (link: docs/reference/panel/fields/writer#choosing-available-marks 
 
 ### HTML tags/attributes gets removed when saving
 
-If you run into issues where HTML tags/attributes get removed when saving, it is likely due to them now being allowed by our HTML sanitizer by default.
+If you run into issues where HTML tags/attributes get removed when saving, it is likely due to them not being allowed by our HTML sanitizer by default.
 
 To allow your specific tags/attributes, you can modify the list of allowed tags/attributes in the [`Kirby\Sane\Html` class](https://github.com/getkirby/kirby/blob/main/src/Sane/Html.php), e.g.
 
