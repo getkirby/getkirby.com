@@ -1,21 +1,10 @@
 <?php
 
-use Kirby\Content\Field;
-use Kirby\Reference\ReflectionPage;
-use Kirby\Toolkit\V;
+use Kirby\Reference\ReferencePage;
+use Kirby\Reference\Reflectable\ReflectableValidator;
 
-class ReferenceValidatorPage extends ReflectionPage
+class ReferenceValidatorPage extends ReferencePage
 {
-	public function call(): string
-	{
-		return 'V::' . parent::call();
-	}
-
-	public function exists(): bool
-	{
-		return isset(V::$validators[$this->name()]);
-	}
-
 	public function metadata(): array
 	{
 		return array_replace_recursive(parent::metadata(), [
@@ -25,13 +14,8 @@ class ReferenceValidatorPage extends ReflectionPage
 		]);
 	}
 
-	public function onGitHub(string $path = ''): Field
+	public function reflection(): ReflectableValidator
 	{
-		return parent::onGitHub('src/Toolkit/V.php');
-	}
-
-	protected function reflection(): ReflectionFunction
-	{
-		return $this->reflection ??= new ReflectionFunction(V::$validators[$this->name()]);
+		return new ReflectableValidator(name: $this->name());
 	}
 }

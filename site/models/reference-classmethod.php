@@ -3,30 +3,14 @@
 use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
-use Kirby\Reference\ReflectionPage;
-use Kirby\Reference\Types;
+use Kirby\Reference\ReferencePage;
+use Kirby\Reference\Reflectable\ReflectableClassMethod;
 use Kirby\Toolkit\Str;
 use ReferenceClassPage as ReferenceClass;
 
-class ReferenceClassMethodPage extends ReflectionPage
+class ReferenceClassMethodPage extends ReferencePage
 {
 	protected string|null $inherited;
-
-	public function call(string $call = null): string
-	{
-		$call ??= parent::call();
-		$class  = $this->class(true);
-
-		if ($this->name() === '__construct') {
-			return 'new ' . $class . Str::after($call, $this->slug());
-		}
-
-		if ($this->isStatic() === true) {
-			return  $class . '::' . $call;
-		}
-
-		return '$' . strtolower($class) . '->' . $call;
-	}
 
 	public function class(bool $short = false): string
 	{
@@ -65,41 +49,9 @@ class ReferenceClassMethodPage extends ReflectionPage
 		return $page;
 	}
 
-	public function inheritedFrom(): string|null
-	{
-		if (isset($this->inherited) === true) {
-			return $this->inherited;
-		}
-
-		if ($parent = $this->reflection()->getDeclaringClass()) {
-			if ($parent->getName() === $this->parent()->name()) {
-				return $this->inherited = null;
-			}
-
-			if ($page = ReferenceClass::findByName($parent->getName())) {
-				return $this->inherited = $page->name();
-			}
-
-			return $this->inherited = $parent->getName();
-		}
-
-		return $this->inherited = null;
-	}
-
-	/**
-	 * Checks if this is a magic method
-	 */
 	public function isMagic(): bool
 	{
-		return substr($this->slug(), 0, 2) === '__';
-	}
-
-	/**
-	 * Checks if this is static
-	 */
-	public function isStatic(): bool
-	{
-		return $this->reflection()?->isStatic() === true;
+		return $this->reflection()->isMagic();
 	}
 
 	public function metadata(): array
@@ -109,30 +61,6 @@ class ReferenceClassMethodPage extends ReflectionPage
 				'lead'  => 'Reference / Method'
 			]
 		]);
-	}
-
-	public function onGitHub(string $path = ''): Field
-	{
-		if ($reflection = $this->reflection()) {
-			$file = $reflection->getFileName();
-			$path = Str::from($file, 'src/');
-			return parent::onGitHub($path);
-		}
-	}
-
-	public function parameters(): array
-	{
-		if (isset($this->parameters) === true) {
-			return $this->parameters;
-		}
-
-		$parameters = parent::parameters();
-
-		foreach ($parameters as $key => $parameter) {
-			$parameters[$key]['type'] = Types::factory($parameter['type'], $this);
-		}
-
-		return $this->parameters = $parameters;
 	}
 
 	/**
@@ -160,15 +88,14 @@ class ReferenceClassMethodPage extends ReflectionPage
 
 	public function title(): Field
 	{
-		return parent::title()->value($this->call($this->name() . '()'));
+		return parent::title()->value($this->reflection()->name() . '()');
 	}
 
-	protected function reflection(): ReflectionMethod
+	public function reflection(): ReflectableClassMethod
 	{
-		return $this->reflection ??= new ReflectionMethod(
-			$this->parent()->name(),
+		return new ReflectableClassMethod(
+			$this->parent()->name(short: false),
 			$this->name()
 		);
 	}
-
 }

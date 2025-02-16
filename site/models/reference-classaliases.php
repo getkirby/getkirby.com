@@ -1,10 +1,10 @@
 <?php
 
 use Kirby\Cms\Pages;
-use Kirby\Reference\SectionPage;
+use Kirby\Reference\ReferenceSectionPage;
 use Kirby\Toolkit\Str;
 
-class ReferenceClassAliasesPage extends SectionPage
+class ReferenceClassAliasesPage extends ReferenceSectionPage
 {
 	protected static array $aliases;
 
@@ -61,5 +61,4 @@ class ReferenceClassAliasesPage extends SectionPage
 		return static::aliases()[Str::lower($name)] ?? $name;
 
 	}
-
 }

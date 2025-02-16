@@ -1,11 +1,11 @@
 <?php
 
 use Kirby\Cms\Pages;
-use Kirby\Reference\SectionPage;
+use Kirby\Reference\ReferenceSectionPage;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\V;
 
-class ReferenceValidatorsPage extends SectionPage
+class ReferenceValidatorsPage extends ReferenceSectionPage
 {
 	public function children(): Pages
 	{

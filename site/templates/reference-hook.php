@@ -3,8 +3,7 @@
 <div class="prose">
 	<?= $page->example()->kt() ?>
 
-	<?php $arguments = $page->arguments()->split() ?>
-	<?php if (count($arguments) > 0): ?>
+	<?php if ($page->parameters()->count() > 0): ?>
 	<h2 id="parameters"><a href="#parameters">Parameters</a></h2>
 	<div class="table">
 		<table>
@@ -12,11 +11,10 @@
 				<th>Parameter</th>
 				<th>Type</th>
 			</thead>
-			<?php foreach ($arguments as $argument): ?>
-			<?php $argument = Types::parameter($argument) ?>
+			<?php foreach ($page->parameters()->toArray() as $parameter): ?>
 			<tr>
-				<td><?= $argument['variable'] ?></td>
-				<td><?= $argument['type'] ?></td>
+				<td><?= $parameter->name() ?></td>
+				<td><?= $parameter->types()->toHtml(fallback: 'mixed') ?></td>
 			</tr>
 			<?php endforeach ?>
 		</table>

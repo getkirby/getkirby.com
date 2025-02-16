@@ -1,10 +1,8 @@
 <?php
-extract([
-	'throws' => $throws ?? $page->throws()
-]);
+$reflection = $page->reflection();
 ?>
 
-<?php if (count($throws) > 0): ?>
+<?php if ($throws = $reflection->throws()): ?>
 <h2 id="exceptions"><a href="#exceptions">Exceptions</a></h2>
 <div class="table">
 	<table>
@@ -15,10 +13,10 @@ extract([
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($throws as $throw): ?>
+			<?php foreach ($throws->toArray() as $exception): ?>
 			<tr>
-				<td><?= Types::format($throw['type']) ?></td>
-				<td class="text"><?= kti($throw['description']) ?></td>
+				<td><?= $exception->types()->toHtml() ?></td>
+				<td class="text"><?= kti($exception->description()) ?></td>
 			</tr>
 			<?php endforeach ?>
 		</tbody>

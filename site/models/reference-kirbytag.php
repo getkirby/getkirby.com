@@ -1,38 +1,11 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Reference\ReflectionPage;
+use Kirby\Reference\ReferencePage;
+use Kirby\Reference\Reflectable\ReflectableKirbytag;
 
-class ReferenceKirbytagPage extends ReflectionPage
+class ReferenceKirbytagPage extends ReferencePage
 {
-	public function attributes(): array
-	{
-		return $this->tag()['attr'];
-	}
-
-	public function exists(): bool
-	{
-		return $this->tag() !== null;
-	}
-
-	public function line(): int|null
-	{
-		if ($reflection = $this->reflection()) {
-			$line = $reflection->getStartLine();
-			$line -= 2;
-
-			$attributes = $this->attributes();
-
-			if (count($attributes) > 0) {
-				$line -= count($attributes) + 1;
-			}
-
-			return $line;
-		}
-
-		return null;
-	}
-
 	public function metadata(): array
 	{
 		return array_replace_recursive(parent::metadata(), [
@@ -43,28 +16,13 @@ class ReferenceKirbytagPage extends ReflectionPage
 		]);
 	}
 
-	public function onGitHub(string $path = ''): Field
-	{
-		return parent::onGitHub('config/tags.php');
-	}
-
-	protected function tag(): array|null
-	{
-		return static::tags()[$this->name()] ?? null;
-	}
-
-	protected static function tags(): array
-	{
-		return static::$kirby->core()->kirbyTags();
-	}
-
 	public function title(): Field
 	{
 		return new Field($this, 'title', '&#40;' . $this->name() . ': …&#41;');
 	}
 
-	protected function reflection(): ReflectionFunction
+	public function reflection(): ReflectableKirbytag
 	{
-		return $this->reflection ??= new ReflectionFunction($this->tag()['html']);
+		return new ReflectableKirbytag(name: $this->name());
 	}
 }

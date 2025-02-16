@@ -1,21 +1,18 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Reference\ReflectionPage;
+use Kirby\Reference\ReferencePage;
+use Kirby\Reference\Reflectable\ReflectableHelperFunction;
 use Kirby\Toolkit\Str;
 
-class ReferenceHelperPage extends ReflectionPage
+class ReferenceHelperPage extends ReferencePage
 {
-	public function exists(): bool
-	{
-		return function_exists($this->slug());
-	}
-
-	public static function findByName(string $name): ReferenceHelperPage|null
+	public static function findByName(string $name): static|null
 	{
 		$helpers = page('docs/reference/templates/helpers');
 		return $helpers->find(Str::kebab($name));
 	}
+
 	public function metadata(): array
 	{
 		return array_replace_recursive(parent::metadata(), [
@@ -25,19 +22,14 @@ class ReferenceHelperPage extends ReflectionPage
 		]);
 	}
 
-	public function onGitHub(string $path = ''): Field
-	{
-		return parent::onGitHub('config/helpers.php');
-	}
-
 	public function title(): Field
 	{
 		return parent::title()->value($this->name() . '()');
 	}
 
-	protected function reflection(): ReflectionFunction
+	public function reflection(): ReflectableHelperFunction
 	{
-		return $this->reflection ??= new ReflectionFunction($this->slug());
+		return new ReflectableHelperFunction(name: $this->slug());
 	}
 
 }

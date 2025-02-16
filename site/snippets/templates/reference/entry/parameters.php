@@ -1,18 +1,15 @@
 <?php
-extract([
-	'title' => $title ?? 'Parameters',
-	'intro' => $intro ?? null,
-	'rows'  => $rows ?? $page->parameters()
-]);
 
-extract([
-	'hasDefaults'     => $defaults ?? true,
-	'hasDescriptions' => count(array_filter(array_column($rows, 'description'))) > 0
-]);
+use Kirby\Toolkit\Str;
+
+$title         ??= 'Parameters';
+$intro         ??= null;
+$reflection      = $page->reflection();
+$parameters      = $reflection?->parameters()->toArray() ?? [];
+$hasDescriptions = $reflection?->parameters()->hasDescriptions() ?? false;
 ?>
 
-<?php if (count($rows) > 0): ?>
-
+<?php if (count($parameters) > 0): ?>
 <?php if ($title): ?>
 <h2 id="<?= Str::slug($title) ?>">
 	<a href="#<?= Str::slug($title) ?>"><?= $title ?></a>
@@ -29,10 +26,7 @@ extract([
 			<tr>
 				<th>Name</th>
 				<th>Type</th>
-
-				<?php if ($hasDefaults): ?>
 				<th>Default</th>
-				<?php endif ?>
 
 				<?php if ($hasDescriptions): ?>
 				<th>Description</th>
@@ -40,21 +34,25 @@ extract([
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($rows as $row): ?>
+			<?php foreach ($parameters as $parameter): ?>
 			<tr>
 				<td>
-					<?= ($row['variadic'] ?? false) ? '...' : null ?>
-					<?= $row['name'] ?>
-					<?= Types::required($row['required']) ?>
+					<?= $parameter->isVariadic() ? '...' : null ?>
+					<?= $parameter->name() ?>
+					<?= required($parameter->isRequired()) ?>
 				</td>
-				<td><?= Types::format($row['type']) ?></td>
+				<td><?= $parameter->types()->toHtml(fallback: 'mixed') ?></td>
 
-				<?php if ($hasDefaults): ?>
-				<td data-label="Default:"><?= Types::default($row['default']) ?></td>
-				<?php endif ?>
+				<td data-label="Default:">
+					<?php if ($default = $parameter->default()): ?>
+					<code><?= $default ?></code>
+					<?php else: ?>
+					<span>–</span>
+					<?php endif ?>
+				</td>
 
 				<?php if ($hasDescriptions): ?>
-				<td><?= kti($row['description']) ?></td>
+				<td><?= kti($parameter->description()) ?></td>
 				<?php endif ?>
 			</tr>
 			<?php endforeach ?>

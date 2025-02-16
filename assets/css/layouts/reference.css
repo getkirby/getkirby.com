@@ -167,6 +167,8 @@ html {
 	display: flex;
 	flex-wrap: wrap;
 	font-size: var(--text-sm);
+}
+.reference-meta:has(:first-child) {
 	margin-bottom: var(--spacing-6);
 }
 .reference-meta li {
