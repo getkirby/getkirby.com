@@ -1,13 +1,10 @@
 <?php
-extract([
-	'call'     => $call ?? (string)$page->call(),
-	'language' => 'php'
-]);
+$reflection = $page->reflection();
 ?>
 
-<?php if (empty($call) == false): ?>
+<?php if ($call = $reflection->call()): ?>
 <figure class="code">
-	<pre><code class="language-<?= $language ?>"><?= $call ?></code></pre>
+	<pre><code class="language-php"><?= $call ?></code></pre>
 </figure>
 <?php endif ?>
 

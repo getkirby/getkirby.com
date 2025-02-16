@@ -1,24 +1,10 @@
 <?php
 
-use Kirby\Content\Field;
-use Kirby\Reference\ReflectionPage;
+use Kirby\Reference\ReferencePage;
+use Kirby\Reference\Reflectable\ReflectableCoreComponent;
 
-class ReferenceComponentPage extends ReflectionPage
+class ReferenceComponentPage extends ReferencePage
 {
-	protected static array $components;
-
-	protected function component(): Closure|null
-	{
-		static::$components ??= require $this->kirby()->root('kirby') . '/config/components.php';
-
-		return static::$components[$this->name()] ?? null;
-	}
-
-	public function exists(): bool
-	{
-		return $this->component() !== null;
-	}
-
 	public function metadata(): array
 	{
 		return array_replace_recursive(parent::metadata(), [
@@ -33,17 +19,8 @@ class ReferenceComponentPage extends ReflectionPage
 		return $this->content()->get('name')->or($this->slug());
 	}
 
-	public function onGitHub(string $path = ''): Field
+	public function reflection(): ReflectableCoreComponent
 	{
-		return parent::onGitHub('config/components.php');
-	}
-
-	protected function reflection(): ReflectionFunction|null
-	{
-		if ($component = $this->component()) {
-			return $this->reflection ??= new ReflectionFunction($component);
-		}
-
-		return null;
+		return new ReflectableCoreComponent(name: $this->name());
 	}
 }

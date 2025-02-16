@@ -5,7 +5,7 @@ namespace Kirby\Reference;
 use Kirby\Cms\Pages;
 use Kirby\Template\Template;
 
-abstract class SectionPage extends ReflectionPage
+abstract class ReferenceSectionPage extends ReferencePage
 {
 	/**
 	 * Flag that this page should not show

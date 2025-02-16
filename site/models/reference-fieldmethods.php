@@ -1,10 +1,11 @@
 <?php
 
 use Kirby\Cms\Pages;
-use Kirby\Reference\SectionPage;
+use Kirby\Content\Field;
+use Kirby\Reference\ReferenceSectionPage;
 use Kirby\Toolkit\Str;
 
-class ReferenceFieldMethodsPage extends SectionPage
+class ReferenceFieldMethodsPage extends ReferenceSectionPage
 {
 	public function children(): Pages
 	{

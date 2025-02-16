@@ -32,9 +32,9 @@ class ComposerStaticInit7735eedf59144eaf4d78690a66d8bbdf
     public static $prefixDirsPsr4 = array (
         'phpDocumentor\\Reflection\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -50,7 +50,7 @@ class ComposerStaticInit7735eedf59144eaf4d78690a66d8bbdf
         ),
         'Doctrine\\Deprecations\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrine/deprecations/lib/Doctrine/Deprecations',
+            0 => __DIR__ . '/..' . '/doctrine/deprecations/src',
         ),
     );
 
@@ -88,16 +88,33 @@ class ComposerStaticInit7735eedf59144eaf4d78690a66d8bbdf
         'Caxy\\HtmlDiff\\Table\\TableRow' => __DIR__ . '/..' . '/caxy/php-htmldiff/lib/Caxy/HtmlDiff/Table/TableRow.php',
         'Caxy\\HtmlDiff\\Util\\MbStringUtil' => __DIR__ . '/..' . '/caxy/php-htmldiff/lib/Caxy/HtmlDiff/Util/MbStringUtil.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Doctrine\\Deprecations\\Deprecation' => __DIR__ . '/..' . '/doctrine/deprecations/lib/Doctrine/Deprecations/Deprecation.php',
-        'Doctrine\\Deprecations\\PHPUnit\\VerifyDeprecations' => __DIR__ . '/..' . '/doctrine/deprecations/lib/Doctrine/Deprecations/PHPUnit/VerifyDeprecations.php',
         'Kirby\\Marsdown\\FileSystem' => __DIR__ . '/../..' . '/src/Marsdown/FileSystem.php',
         'Kirby\\Marsdown\\Marsdown' => __DIR__ . '/../..' . '/src/Marsdown/Marsdown.php',
-        'Kirby\\Reference\\DocBlock' => __DIR__ . '/../..' . '/src/Reference/DocBlock.php',
+        'Kirby\\Reference\\ReferencePage' => __DIR__ . '/../..' . '/src/Reference/ReferencePage.php',
+        'Kirby\\Reference\\ReferenceSectionPage' => __DIR__ . '/../..' . '/src/Reference/ReferenceSectionPage.php',
+        'Kirby\\Reference\\Reflectable\\Reflectable' => __DIR__ . '/../..' . '/src/Reference/Reflectable/Reflectable.php',
+        'Kirby\\Reference\\Reflectable\\ReflectableClass' => __DIR__ . '/../..' . '/src/Reference/Reflectable/ReflectableClass.php',
+        'Kirby\\Reference\\Reflectable\\ReflectableClassMethod' => __DIR__ . '/../..' . '/src/Reference/Reflectable/ReflectableClassMethod.php',
+        'Kirby\\Reference\\Reflectable\\ReflectableCoreComponent' => __DIR__ . '/../..' . '/src/Reference/Reflectable/ReflectableCoreComponent.php',
+        'Kirby\\Reference\\Reflectable\\ReflectableFieldMethod' => __DIR__ . '/../..' . '/src/Reference/Reflectable/ReflectableFieldMethod.php',
+        'Kirby\\Reference\\Reflectable\\ReflectableFunction' => __DIR__ . '/../..' . '/src/Reference/Reflectable/ReflectableFunction.php',
+        'Kirby\\Reference\\Reflectable\\ReflectableHelperFunction' => __DIR__ . '/../..' . '/src/Reference/Reflectable/ReflectableHelperFunction.php',
+        'Kirby\\Reference\\Reflectable\\ReflectableKirbytag' => __DIR__ . '/../..' . '/src/Reference/Reflectable/ReflectableKirbytag.php',
+        'Kirby\\Reference\\Reflectable\\ReflectableValidator' => __DIR__ . '/../..' . '/src/Reference/Reflectable/ReflectableValidator.php',
+        'Kirby\\Reference\\Reflectable\\Tags\\Deprecated' => __DIR__ . '/../..' . '/src/Reference/Reflectable/Tags/Deprecated.php',
+        'Kirby\\Reference\\Reflectable\\Tags\\Exception' => __DIR__ . '/../..' . '/src/Reference/Reflectable/Tags/Exception.php',
+        'Kirby\\Reference\\Reflectable\\Tags\\Parameter' => __DIR__ . '/../..' . '/src/Reference/Reflectable/Tags/Parameter.php',
+        'Kirby\\Reference\\Reflectable\\Tags\\Parameters' => __DIR__ . '/../..' . '/src/Reference/Reflectable/Tags/Parameters.php',
+        'Kirby\\Reference\\Reflectable\\Tags\\Returns' => __DIR__ . '/../..' . '/src/Reference/Reflectable/Tags/Returns.php',
+        'Kirby\\Reference\\Reflectable\\Tags\\Since' => __DIR__ . '/../..' . '/src/Reference/Reflectable/Tags/Since.php',
+        'Kirby\\Reference\\Reflectable\\Tags\\Throws' => __DIR__ . '/../..' . '/src/Reference/Reflectable/Tags/Throws.php',
         'Kirby\\Reference\\ReflectionPage' => __DIR__ . '/../..' . '/src/Reference/ReflectionPage.php',
-        'Kirby\\Reference\\SectionPage' => __DIR__ . '/../..' . '/src/Reference/SectionPage.php',
-        'Kirby\\Reference\\Types' => __DIR__ . '/../..' . '/src/Reference/Types.php',
+        'Kirby\\Reference\\Types\\Identifier' => __DIR__ . '/../..' . '/src/Reference/Types/Identifier.php',
+        'Kirby\\Reference\\Types\\Type' => __DIR__ . '/../..' . '/src/Reference/Types/Type.php',
+        'Kirby\\Reference\\Types\\Types' => __DIR__ . '/../..' . '/src/Reference/Types/Types.php',
         'PHPStan\\PhpDocParser\\Ast\\AbstractNodeVisitor' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/AbstractNodeVisitor.php',
         'PHPStan\\PhpDocParser\\Ast\\Attribute' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Attribute.php',
+        'PHPStan\\PhpDocParser\\Ast\\Comment' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Comment.php',
         'PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprArrayItemNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprArrayItemNode.php',
         'PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprArrayNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprArrayNode.php',
         'PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprFalseNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprFalseNode.php',
@@ -168,6 +185,7 @@ class ComposerStaticInit7735eedf59144eaf4d78690a66d8bbdf
         'PHPStan\\PhpDocParser\\Ast\\Type\\TypeNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/TypeNode.php',
         'PHPStan\\PhpDocParser\\Ast\\Type\\UnionTypeNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/Type/UnionTypeNode.php',
         'PHPStan\\PhpDocParser\\Lexer\\Lexer' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Lexer/Lexer.php',
+        'PHPStan\\PhpDocParser\\ParserConfig' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/ParserConfig.php',
         'PHPStan\\PhpDocParser\\Parser\\ConstExprParser' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Parser/ConstExprParser.php',
         'PHPStan\\PhpDocParser\\Parser\\ParserException' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Parser/ParserException.php',
         'PHPStan\\PhpDocParser\\Parser\\PhpDocParser' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Parser/PhpDocParser.php',

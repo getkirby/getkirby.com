@@ -3,7 +3,7 @@
 namespace Kirby\Marsdown;
 
 use DomDocument;
-use Kirby\Reference\Types;
+use Kirby\Reference\Types\Types;
 use Kirby\Toolkit\Str;
 use ParsedownExtra;
 
@@ -437,9 +437,8 @@ class Marsdown extends ParsedownExtra
 	{
 		return [
 			[
-				'rawHtml' => Types::format(
-					$text,
-					count(array_intersect(['Url', 'Link'], $nonNestables)) === 0
+				'rawHtml' => Types::factory($text)->toHtml(
+					linked: count(array_intersect(['Url', 'Link'], $nonNestables)) === 0
 				)
 			]
 		];
