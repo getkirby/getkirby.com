@@ -2,8 +2,7 @@ Title: IFLA World Congress
 
 ----
 
-Link: https://ifla2025.com
-
+Tag: event
 ----
 
-Tag: event
+Height: 2.5rem

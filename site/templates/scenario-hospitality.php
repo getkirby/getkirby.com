@@ -79,8 +79,12 @@ snippet('templates/features/section', [
 ]);
 ?>
 
-<?php snippet('templates/scenarios/brands', [
+<?php snippet('templates/scenarios/cases', [
 	'title' => 'Trusted by hosts world&#8209;wide',
+	'cases' => $kirby->collection('cases/hospitality'),
+]) ?>
+
+<?php snippet('templates/scenarios/brands', [
 	'tag'   => 'hospitality',
 	'limit' => 15
 ]) ?>

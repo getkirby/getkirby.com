@@ -81,5 +81,10 @@ snippet('templates/features/section', [
 
 <?php snippet('templates/scenarios/cases', [
 	'title' => 'Trusted by events of all sizes',
-	'cases' => $kirby->collection('cases/events')
+	'cases' => $kirby->collection('cases/events'),
+	'limit' => 8
+]) ?>
+
+<?php snippet('templates/scenarios/brands', [
+	'tag' => 'event'
 ]) ?>
