@@ -101,6 +101,19 @@ Learn how to (link: docs/reference/panel/fields/writer#choosing-available-marks 
 
 ## Troubleshooting
 
+### HTML tags/attributes gets removed when saving
+
+If you run into issues where HTML tags/attributes get removed when saving, it is likely due to them not being allowed by our HTML sanitizer by default.
+
+To allow your specific tags/attributes, you can modify the list of allowed tags/attributes in the [`Kirby\Sane\Html` class](https://github.com/getkirby/kirby/blob/main/src/Sane/Html.php), e.g.
+
+```php "/site/config/config.php"
+use Kirby\Sane\Html;
+
+Html::$allowedTags['span'] = ['title', 'class'];
+```
+
+
 ### Competing with other nodes/mark
 
 When implementing a custom node/mark, your `parseDOM` rules might compete with rules from other nodes/marks. E.g. your custom node targets a `<p>` tag with a specific class, while the default paragraph node targets all `<p>` tags. This can lead to problems, when the broader `parseDOM` rule gets checked before the more specific one.

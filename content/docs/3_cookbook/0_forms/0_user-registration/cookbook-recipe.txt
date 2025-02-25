@@ -464,7 +464,7 @@ The first step is to add the current page id as parameter to the navigation link
 
     <?php if (!$kirby->user()): ?>
     <?php foreach($site->children()->find('registration', 'login') as $item): ?>
-        <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url(['params' => ['cookbook.referrer' => $page->id()]]) ?>"><?= $item->title()->html() ?></a>
+        <a <?php e($item->isOpen(), 'aria-current ') ?> href="<?= $item->url(['params' => ['referrer' => $page->id()]]) ?>"><?= $item->title()->html() ?></a>
     <?php endforeach ?>
     <?php endif ?>
 

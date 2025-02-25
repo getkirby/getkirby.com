@@ -25,7 +25,7 @@ return [
   'panel' => [
     'menu' => [
       'site',
-      '-'
+      '-',
       'users'
     ]
   ]
@@ -46,7 +46,7 @@ return [
   'panel' => [
     'menu' => [
       'site' => [
-        'label' => 'Overview'
+        'label' => 'Overview',
       ]
     ]
   ]
@@ -79,8 +79,8 @@ Instead of a link, you can also add either a `dialog` or `drawer` which will the
 ```php
 'notes' => [
   'icon'  => 'pen',
-  'label' => 'Notes'
-  'dialog' => 'my/custom/dialog'
+  'label' => 'Notes',
+  'dialog' => 'my/custom/dialog',
 ]
 ```
 
@@ -92,7 +92,7 @@ However, you can also use this to open core dialogs: We want to add a menu entry
 'note' => [
   'icon'   => 'add',
   'label'  => 'New note',
-  'dialog' => 'pages/create?parent=/pages/notes&view=site&section=notes'
+  'dialog' => 'pages/create?parent=/pages/notes&view=site&section=notes',
 ]
 ```
 

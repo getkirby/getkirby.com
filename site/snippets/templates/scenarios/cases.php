@@ -2,7 +2,7 @@
 	<h2 class="h2 mb-12"><?= $title ?></h2>
 	<?php snippet('templates/cases/cases', [
 		'cases'   => $cases->shuffle()->limit($limit ?? 12),
-		'columns' => 4
+		'columns' => $columns ?? 4
 	]) ?>
 </section>
 <style>

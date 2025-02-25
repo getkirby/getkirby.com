@@ -38,7 +38,7 @@ Just printing the phone number:
 ```php
 <?php if ($page->phone()->isNotEmpty()): ?>
   <dt>Phone</dt>
-  <dd>$page->phone() ?></dd>
+  <dd><?= $page->phone() ?></dd>
 <?php endif ?>
 ```
 

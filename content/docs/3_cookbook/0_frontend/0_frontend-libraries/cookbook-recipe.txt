@@ -97,7 +97,7 @@ Open the `site/snippets/footer.php` snippet. Right before the closing `/body` ta
 <?php endif ?>
 ```
 
-This will creat the following `script` tag when rendered:
+This will create the following `script` tag when rendered:
 
 ```html
 <script src="https://yourdomain/assets/js/Glider.js-master/glider.js"></script>

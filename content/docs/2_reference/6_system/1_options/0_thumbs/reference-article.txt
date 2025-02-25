@@ -54,7 +54,7 @@ return [
 
 ## Quality
 
-The default JPEG compression quality for all thumbnails
+The default compression quality for all thumbnails
 
 ```php
 return [
@@ -63,6 +63,8 @@ return [
   ]
 ];
 ```
+
+Depending on your thumbnail driver, this is supported for JPG, WEBP and AVIF images (`gd` driver) or JPEG, PNG, HEIC, AVIF and WebP images (`im` driver).
 
 ## Format
 
