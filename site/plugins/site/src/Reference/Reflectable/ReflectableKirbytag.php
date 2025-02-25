@@ -22,6 +22,11 @@ class ReflectableKirbytag extends ReflectableFunction
 		parent::__construct($tag['html']);
 	}
 
+	public function attributes(): array
+	{
+		return $this->attributes;
+	}
+
 	public function call(): string
 	{
 		return 'V::' . parent::call();
