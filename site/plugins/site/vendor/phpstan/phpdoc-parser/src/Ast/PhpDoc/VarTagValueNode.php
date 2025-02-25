@@ -11,13 +11,14 @@ class VarTagValueNode implements PhpDocTagValueNode
 
 	use NodeAttributes;
 
-	public TypeNode $type;
+	/** @var TypeNode */
+	public $type;
 
 	/** @var string (may be empty) */
-	public string $variableName;
+	public $variableName;
 
 	/** @var string (may be empty) */
-	public string $description;
+	public $description;
 
 	public function __construct(TypeNode $type, string $variableName, string $description)
 	{

@@ -9,7 +9,8 @@ class ArrayTypeNode implements TypeNode
 
 	use NodeAttributes;
 
-	public TypeNode $type;
+	/** @var TypeNode */
+	public $type;
 
 	public function __construct(TypeNode $type)
 	{

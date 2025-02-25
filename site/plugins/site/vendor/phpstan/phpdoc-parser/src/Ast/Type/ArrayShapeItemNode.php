@@ -4,11 +4,10 @@ namespace PHPStan\PhpDocParser\Ast\Type;
 
 use PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprIntegerNode;
 use PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode;
-use PHPStan\PhpDocParser\Ast\Node;
 use PHPStan\PhpDocParser\Ast\NodeAttributes;
 use function sprintf;
 
-class ArrayShapeItemNode implements Node
+class ArrayShapeItemNode implements TypeNode
 {
 
 	use NodeAttributes;
@@ -16,9 +15,11 @@ class ArrayShapeItemNode implements Node
 	/** @var ConstExprIntegerNode|ConstExprStringNode|IdentifierTypeNode|null */
 	public $keyName;
 
-	public bool $optional;
+	/** @var bool */
+	public $optional;
 
-	public TypeNode $valueType;
+	/** @var TypeNode */
+	public $valueType;
 
 	/**
 	 * @param ConstExprIntegerNode|ConstExprStringNode|IdentifierTypeNode|null $keyName
@@ -38,7 +39,7 @@ class ArrayShapeItemNode implements Node
 				'%s%s: %s',
 				(string) $this->keyName,
 				$this->optional ? '?' : '',
-				(string) $this->valueType,
+				(string) $this->valueType
 			);
 		}
 

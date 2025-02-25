@@ -12,7 +12,7 @@ class IntersectionTypeNode implements TypeNode
 	use NodeAttributes;
 
 	/** @var TypeNode[] */
-	public array $types;
+	public $types;
 
 	/**
 	 * @param TypeNode[] $types

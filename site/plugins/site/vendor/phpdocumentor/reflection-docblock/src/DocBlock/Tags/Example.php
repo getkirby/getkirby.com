@@ -29,19 +29,22 @@ use function trim;
 final class Example implements Tag, Factory\StaticMethod
 {
     /** @var string Path to a file to use as an example. May also be an absolute URI. */
-    private string $filePath;
+    private $filePath;
 
     /**
      * @var bool Whether the file path component represents an URI. This determines how the file portion
      *     appears at {@link getContent()}.
      */
-    private bool $isURI;
+    private $isURI;
 
-    private int $startingLine;
+    /** @var int */
+    private $startingLine;
 
-    private int $lineCount;
+    /** @var int */
+    private $lineCount;
 
-    private ?string $content = null;
+    /** @var string|null */
+    private $content;
 
     public function __construct(
         string $filePath,
@@ -94,10 +97,10 @@ final class Example implements Tag, Factory\StaticMethod
 
         $filePath = null;
         $fileUri  = null;
-        if (array_key_exists(1, $matches) && $matches[1] !== '') {
+        if ($matches[1] !== '') {
             $filePath = $matches[1];
         } else {
-            $fileUri = array_key_exists(2, $matches) ? $matches[2] : '';
+            $fileUri = $matches[2];
         }
 
         $startingLine = 1;

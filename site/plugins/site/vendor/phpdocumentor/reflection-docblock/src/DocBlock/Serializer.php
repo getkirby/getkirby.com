@@ -29,20 +29,21 @@ use function wordwrap;
 class Serializer
 {
     /** @var string The string to indent the comment with. */
-    protected string $indentString = ' ';
+    protected $indentString = ' ';
 
     /** @var int The number of times the indent string is repeated. */
-    protected int $indent = 0;
+    protected $indent = 0;
 
     /** @var bool Whether to indent the first line with the given indent amount and string. */
-    protected bool $isFirstLineIndented = true;
+    protected $isFirstLineIndented = true;
 
     /** @var int|null The max length of a line. */
-    protected ?int $lineLength = null;
+    protected $lineLength;
 
     /** @var Formatter A custom tag formatter. */
-    protected Formatter $tagFormatter;
-    private string $lineEnding;
+    protected $tagFormatter;
+    /** @var string */
+    private $lineEnding;
 
     /**
      * Create a Serializer instance.
@@ -82,7 +83,7 @@ class Serializer
         $indent      = str_repeat($this->indentString, $this->indent);
         $firstIndent = $this->isFirstLineIndented ? $indent : '';
         // 3 === strlen(' * ')
-        $wrapLength = $this->lineLength !== null ? $this->lineLength - strlen($indent) - 3 : null;
+        $wrapLength = $this->lineLength ? $this->lineLength - strlen($indent) - 3 : null;
 
         $text = $this->removeTrailingSpaces(
             $indent,

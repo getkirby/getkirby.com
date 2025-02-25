@@ -15,17 +15,19 @@ class TokenIterator
 {
 
 	/** @var list<array{string, int, int}> */
-	private array $tokens;
+	private $tokens;
 
-	private int $index;
+	/** @var int */
+	private $index;
 
 	/** @var int[] */
-	private array $savePoints = [];
+	private $savePoints = [];
 
 	/** @var list<int> */
-	private array $skippedTokenTypes = [Lexer::TOKEN_HORIZONTAL_WS];
+	private $skippedTokenTypes = [Lexer::TOKEN_HORIZONTAL_WS];
 
-	private ?string $newline = null;
+	/** @var string|null */
+	private $newline = null;
 
 	/**
 	 * @param list<array{string, int, int}> $tokens
@@ -309,7 +311,7 @@ class TokenIterator
 			$this->currentTokenOffset(),
 			$expectedTokenType,
 			$expectedTokenValue,
-			$this->currentTokenLine(),
+			$this->currentTokenLine()
 		);
 	}
 

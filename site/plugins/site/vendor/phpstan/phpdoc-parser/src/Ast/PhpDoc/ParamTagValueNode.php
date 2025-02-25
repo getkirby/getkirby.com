@@ -11,18 +11,22 @@ class ParamTagValueNode implements PhpDocTagValueNode
 
 	use NodeAttributes;
 
-	public TypeNode $type;
+	/** @var TypeNode */
+	public $type;
 
-	public bool $isReference;
+	/** @var bool */
+	public $isReference;
 
-	public bool $isVariadic;
+	/** @var bool */
+	public $isVariadic;
 
-	public string $parameterName;
+	/** @var string */
+	public $parameterName;
 
 	/** @var string (may be empty) */
-	public string $description;
+	public $description;
 
-	public function __construct(TypeNode $type, bool $isVariadic, string $parameterName, string $description, bool $isReference)
+	public function __construct(TypeNode $type, bool $isVariadic, string $parameterName, string $description, bool $isReference = false)
 	{
 		$this->type = $type;
 		$this->isReference = $isReference;

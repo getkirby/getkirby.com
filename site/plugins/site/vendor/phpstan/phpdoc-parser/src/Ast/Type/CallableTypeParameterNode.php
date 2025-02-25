@@ -11,16 +11,20 @@ class CallableTypeParameterNode implements Node
 
 	use NodeAttributes;
 
-	public TypeNode $type;
+	/** @var TypeNode */
+	public $type;
 
-	public bool $isReference;
+	/** @var bool */
+	public $isReference;
 
-	public bool $isVariadic;
+	/** @var bool */
+	public $isVariadic;
 
 	/** @var string (may be empty) */
-	public string $parameterName;
+	public $parameterName;
 
-	public bool $isOptional;
+	/** @var bool */
+	public $isOptional;
 
 	public function __construct(TypeNode $type, bool $isReference, bool $isVariadic, string $parameterName, bool $isOptional)
 	{

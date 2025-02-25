@@ -7,7 +7,6 @@ use Kirby\Cms\App;
 use Kirby\Content\Field;
 use Kirby\Template\Template;
 use Kirby\Toolkit\A;
-use phpDocumentor\Reflection\Types\AggregatedType;
 use ReflectionClass;
 use ReflectionFunctionAbstract;
 use ReflectionUnionType;
@@ -48,7 +47,7 @@ abstract class ReflectionPage extends DefaultPage
 	public function deprecated(): Field
 	{
 		if ($tag = $this->docBlock()?->getTag('deprecated')) {
-			$value = $tag->getVersion() . '|' . $tag->getDescription()?->getBodyTemplate();
+			$value = $tag->getVersion() . '|' . $tag->getDescription();
 			return new Field($this, 'deprecated', $value);
 		}
 
@@ -202,9 +201,9 @@ abstract class ReflectionPage extends DefaultPage
 				$doc  = $this->docBlock()?->getParameter($name);
 
 				if ($type = $parameter->getType()) {
-					$type = $this->typeName($type);
+					$this->typeName($type);
 				} elseif ($doc) {
-					$type = $this->typeName($doc->getType());
+					$type = (string)$doc->getType();
 				}
 
 				$export = '$' . $name;
@@ -234,7 +233,7 @@ abstract class ReflectionPage extends DefaultPage
 				return [
 					'name'        => '$' . $name,
 					'default'     => $default,
-					'description' => (string)$doc?->getDescription()?->getBodyTemplate(),
+					'description' => (string)$doc?->getDescription(),
 					'export'      => $export,
 					'required'    => $optional === false,
 					'type'        => Types::factory($type ?? 'mixed', $this),
@@ -252,27 +251,26 @@ abstract class ReflectionPage extends DefaultPage
 		return null;
 	}
 
-	/**
-	 * Returns the raw return type string
-	 */
+	public function typeName($type): string
+	{
+		if ($type instanceof ReflectionUnionType) {
+			return implode(
+				'|',
+				A::map($type->getTypes(), fn ($type) => $type->getName())
+			);
+		}
+
+		return $type->getName();
+	}
+
 	public function returns(): string|null
 	{
 		if (isset($this->returns) === true) {
 			return $this->returns;
 		}
 
-		// First, try to get return type from reflection
-		$returns = $this->returnsFromReflection();
-
-		// Otherwise, check DocBlock for return type
-		$returns ??= $this->returnsFromDocBlock();
-
-		return $this->returns = $returns;
-	}
-
-	protected function returnsFromReflection(): string|null
-	{
 		if ($reflection = $this->reflection()) {
+			// First, try to get return type from reflection
 			if (
 				$reflection instanceof ReflectionFunctionAbstract &&
 				$reflection->hasReturnType() === true
@@ -284,23 +282,21 @@ abstract class ReflectionPage extends DefaultPage
 					$name .= '|null';
 				}
 
-				return $name;
+				return $this->returns = $name;
+			}
+
+			// Otherwise, check DocBlock for return type
+			if ($type = $this->docBlock()?->getReturnType()) {
+				return $this->returns = trim((string)$type->getType());
 			}
 		}
 
-		return null;
+		return $this->returns = null;
 	}
 
-	protected function returnsFromDocBlock(): string|null
-	{
-		if ($type = $this->docBlock()?->getReturnType()) {
-			return $this->typeName($type->getType());
-		}
 
-		return null;
-	}
 	/**
-	 * Returns a formatted return types
+	 * Returns a string of all return types
 	 */
 	public function returnType(): string|null
 	{
@@ -317,6 +313,7 @@ abstract class ReflectionPage extends DefaultPage
 	 */
 	public function since(): Field
 	{
+
 		if ($tag = $this->docBlock()?->getTag('since')) {
 			$since   = $tag->getVersion();
 			$current = $this->kirby()->version();
@@ -355,37 +352,5 @@ abstract class ReflectionPage extends DefaultPage
 				'type'        => ltrim($doc->getType(), '\\'),
 			]
 		);
-	}
-
-	/**
-	 * Returns the type name and takes type templates into account
-	 */
-	public function typeName($type): string
-	{
-		if ($type instanceof ReflectionUnionType) {
-			$type = $type->getTypes();
-		}
-
-		if ($type instanceof AggregatedType) {
-			$type = iterator_to_array($type->getIterator());
-		}
-
-		if (is_array($type) === true) {
-			return implode(
-				'|',
-				A::map($type, fn ($type) => $this->typeName($type))
-			);
-		}
-
-		$name = (string)$type;
-
-		// If a type template exists,
-		// try resolving the type name from a template
-		if (method_exists($this, 'typeTemplates')) {
-			$templates = $this->typeTemplates();
-			$name      = $templates[ltrim($name, '\\')] ?? $name;
-		}
-
-		return $name;
 	}
 }

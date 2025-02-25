@@ -10,9 +10,11 @@ class ConstExprArrayItemNode implements ConstExprNode
 
 	use NodeAttributes;
 
-	public ?ConstExprNode $key = null;
+	/** @var ConstExprNode|null */
+	public $key;
 
-	public ConstExprNode $value;
+	/** @var ConstExprNode */
+	public $value;
 
 	public function __construct(?ConstExprNode $key, ConstExprNode $value)
 	{

@@ -11,7 +11,7 @@ class InvalidTypeNode implements TypeNode
 	use NodeAttributes;
 
 	/** @var mixed[] */
-	private array $exceptionArgs;
+	private $exceptionArgs;
 
 	public function __construct(ParserException $exception)
 	{

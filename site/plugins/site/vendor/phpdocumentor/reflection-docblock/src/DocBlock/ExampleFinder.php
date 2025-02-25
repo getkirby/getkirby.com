@@ -31,10 +31,11 @@ use const DIRECTORY_SEPARATOR;
  */
 class ExampleFinder
 {
-    private string $sourceDirectory = '';
+    /** @var string */
+    private $sourceDirectory = '';
 
     /** @var string[] */
-    private array $exampleDirectories = [];
+    private $exampleDirectories = [];
 
     /**
      * Attempts to find the example contents for the given descriptor.
@@ -44,7 +45,7 @@ class ExampleFinder
         $filename = $example->getFilePath();
 
         $file = $this->getExampleFileContents($filename);
-        if ($file === null) {
+        if (!$file) {
             return sprintf('** File not found : %s **', $filename);
         }
 
@@ -112,7 +113,7 @@ class ExampleFinder
             }
         }
 
-        if ($normalizedPath === null) {
+        if (!$normalizedPath) {
             if (is_readable($this->getExamplePathFromSource($filename))) {
                 $normalizedPath = $this->getExamplePathFromSource($filename);
             } elseif (is_readable($this->getExamplePathFromExampleDirectory($filename))) {
@@ -122,7 +123,7 @@ class ExampleFinder
             }
         }
 
-        $lines = $normalizedPath !== null && is_readable($normalizedPath) ? file($normalizedPath) : false;
+        $lines = $normalizedPath && is_readable($normalizedPath) ? file($normalizedPath) : false;
 
         return $lines !== false ? $lines : null;
     }

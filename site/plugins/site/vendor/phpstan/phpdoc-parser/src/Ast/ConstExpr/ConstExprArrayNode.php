@@ -11,7 +11,7 @@ class ConstExprArrayNode implements ConstExprNode
 	use NodeAttributes;
 
 	/** @var ConstExprArrayItemNode[] */
-	public array $items;
+	public $items;
 
 	/**
 	 * @param ConstExprArrayItemNode[] $items

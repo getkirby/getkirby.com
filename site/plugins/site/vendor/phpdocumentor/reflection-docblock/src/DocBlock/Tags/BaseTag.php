@@ -22,10 +22,10 @@ use phpDocumentor\Reflection\DocBlock\Description;
 abstract class BaseTag implements DocBlock\Tag
 {
     /** @var string Name of the tag */
-    protected string $name = '';
+    protected $name = '';
 
     /** @var Description|null Description of the tag. */
-    protected ?Description $description = null;
+    protected $description;
 
     /**
      * Gets the name of this tag.

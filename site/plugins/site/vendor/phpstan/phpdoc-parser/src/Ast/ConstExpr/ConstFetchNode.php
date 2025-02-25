@@ -10,9 +10,10 @@ class ConstFetchNode implements ConstExprNode
 	use NodeAttributes;
 
 	/** @var string class name for class constants or empty string for non-class constants */
-	public string $className;
+	public $className;
 
-	public string $name;
+	/** @var string */
+	public $name;
 
 	public function __construct(string $className, string $name)
 	{

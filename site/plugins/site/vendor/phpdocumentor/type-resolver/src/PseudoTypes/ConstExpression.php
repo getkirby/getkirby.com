@@ -22,10 +22,8 @@ use function sprintf;
 /** @psalm-immutable */
 final class ConstExpression implements PseudoType
 {
-    /** @var Type */
-    private $owner;
-    /** @var string */
-    private $expression;
+    private Type $owner;
+    private string $expression;
 
     public function __construct(Type $owner, string $expression)
     {

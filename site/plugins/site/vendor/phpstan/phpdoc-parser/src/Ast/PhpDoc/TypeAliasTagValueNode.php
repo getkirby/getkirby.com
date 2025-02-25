@@ -11,9 +11,11 @@ class TypeAliasTagValueNode implements PhpDocTagValueNode
 
 	use NodeAttributes;
 
-	public string $alias;
+	/** @var string */
+	public $alias;
 
-	public TypeNode $type;
+	/** @var TypeNode */
+	public $type;
 
 	public function __construct(string $alias, TypeNode $type)
 	{

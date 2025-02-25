@@ -12,15 +12,20 @@ class MethodTagValueParameterNode implements Node
 
 	use NodeAttributes;
 
-	public ?TypeNode $type = null;
+	/** @var TypeNode|null */
+	public $type;
 
-	public bool $isReference;
+	/** @var bool */
+	public $isReference;
 
-	public bool $isVariadic;
+	/** @var bool */
+	public $isVariadic;
 
-	public string $parameterName;
+	/** @var string */
+	public $parameterName;
 
-	public ?ConstExprNode $defaultValue = null;
+	/** @var ConstExprNode|null */
+	public $defaultValue;
 
 	public function __construct(?TypeNode $type, bool $isReference, bool $isVariadic, string $parameterName, ?ConstExprNode $defaultValue)
 	{

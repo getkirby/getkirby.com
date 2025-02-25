@@ -8,7 +8,7 @@ trait NodeAttributes
 {
 
 	/** @var array<string, mixed> */
-	private array $attributes = [];
+	private $attributes = [];
 
 	/**
 	 * @param mixed $value

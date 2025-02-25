@@ -25,19 +25,11 @@ use function implode;
 class ArrayShape implements PseudoType
 {
     /** @var ArrayShapeItem[] */
-    private $items;
+    private array $items;
 
     public function __construct(ArrayShapeItem ...$items)
     {
         $this->items = $items;
-    }
-
-    /**
-     * @return ArrayShapeItem[]
-     */
-    public function getItems(): array
-    {
-        return $this->items;
     }
 
     public function underlyingType(): Type

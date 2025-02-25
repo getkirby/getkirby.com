@@ -184,14 +184,4 @@ class ReferenceClassPage extends SectionPage
 		return $this->reflection ??= new ReflectionClass($this->name());
 	}
 
-	public function typeTemplates(): array
-	{
-		$tags = [];
-
-		foreach ($this->docBlock()?->getTagsByName('template') as $tag) {
-			$tags[$tag->getTemplateName()] = (string)$tag->getBound();
-		}
-
-		return $tags;
-	}
 }

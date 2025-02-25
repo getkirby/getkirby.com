@@ -29,9 +29,11 @@ use function explode;
  */
 final class Covers extends BaseTag implements Factory\StaticMethod
 {
-    protected string $name = 'covers';
+    /** @var string */
+    protected $name = 'covers';
 
-    private Fqsen $refers;
+    /** @var Fqsen */
+    private $refers;
 
     /**
      * Initializes this tag.

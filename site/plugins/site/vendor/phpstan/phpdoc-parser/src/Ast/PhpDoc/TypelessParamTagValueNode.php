@@ -10,16 +10,19 @@ class TypelessParamTagValueNode implements PhpDocTagValueNode
 
 	use NodeAttributes;
 
-	public bool $isReference;
+	/** @var bool */
+	public $isReference;
 
-	public bool $isVariadic;
+	/** @var bool */
+	public $isVariadic;
 
-	public string $parameterName;
+	/** @var string */
+	public $parameterName;
 
 	/** @var string (may be empty) */
-	public string $description;
+	public $description;
 
-	public function __construct(bool $isVariadic, string $parameterName, string $description, bool $isReference)
+	public function __construct(bool $isVariadic, string $parameterName, string $description, bool $isReference = false)
 	{
 		$this->isReference = $isReference;
 		$this->isVariadic = $isVariadic;

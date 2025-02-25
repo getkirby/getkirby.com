@@ -20,8 +20,7 @@ use phpDocumentor\Reflection\Types\Integer;
 /** @psalm-immutable */
 final class IntegerValue implements PseudoType
 {
-    /** @var int */
-    private $value;
+    private int $value;
 
     public function __construct(int $value)
     {

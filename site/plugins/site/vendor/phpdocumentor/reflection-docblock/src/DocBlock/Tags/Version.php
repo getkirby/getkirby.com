@@ -25,7 +25,8 @@ use function preg_match;
  */
 final class Version extends BaseTag implements Factory\StaticMethod
 {
-    protected string $name = 'version';
+    /** @var string */
+    protected $name = 'version';
 
     /**
      * PCRE regular expression matching a version vector.
@@ -44,7 +45,7 @@ final class Version extends BaseTag implements Factory\StaticMethod
     )';
 
     /** @var string|null The version vector. */
-    private ?string $version = null;
+    private $version;
 
     public function __construct(?string $version = null, ?Description $description = null)
     {
@@ -59,7 +60,7 @@ final class Version extends BaseTag implements Factory\StaticMethod
         ?DescriptionFactory $descriptionFactory = null,
         ?TypeContext $context = null
     ): ?self {
-        if ($body === null || $body === '') {
+        if (empty($body)) {
             return new static();
         }
 

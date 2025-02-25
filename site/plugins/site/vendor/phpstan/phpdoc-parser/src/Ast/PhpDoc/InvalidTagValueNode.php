@@ -17,10 +17,10 @@ class InvalidTagValueNode implements PhpDocTagValueNode
 	use NodeAttributes;
 
 	/** @var string (may be empty) */
-	public string $value;
+	public $value;
 
 	/** @var mixed[] */
-	private array $exceptionArgs;
+	private $exceptionArgs;
 
 	public function __construct(string $value, ParserException $exception)
 	{

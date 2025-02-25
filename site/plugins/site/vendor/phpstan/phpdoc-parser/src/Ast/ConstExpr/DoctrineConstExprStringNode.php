@@ -13,11 +13,12 @@ class DoctrineConstExprStringNode extends ConstExprStringNode
 
 	use NodeAttributes;
 
-	public string $value;
+	/** @var string */
+	public $value;
 
 	public function __construct(string $value)
 	{
-		parent::__construct($value, self::DOUBLE_QUOTED);
+		parent::__construct($value);
 		$this->value = $value;
 	}
 

@@ -33,9 +33,11 @@ use function preg_match;
  */
 final class See extends BaseTag implements Factory\StaticMethod
 {
-    protected string $name = 'see';
+    /** @var string */
+    protected $name = 'see';
 
-    protected Reference $refers;
+    /** @var Reference */
+    protected $refers;
 
     /**
      * Initializes this tag.

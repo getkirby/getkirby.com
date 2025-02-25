@@ -20,25 +20,25 @@ use Webmozart\Assert\Assert;
 final class DocBlock
 {
     /** @var string The opening line for this docblock. */
-    private string $summary;
+    private $summary;
 
     /** @var DocBlock\Description The actual description for this docblock. */
-    private DocBlock\Description $description;
+    private $description;
 
     /** @var Tag[] An array containing all the tags in this docblock; except inline. */
-    private array $tags = [];
+    private $tags = [];
 
     /** @var Types\Context|null Information about the context of this DocBlock. */
-    private ?Types\Context $context = null;
+    private $context;
 
     /** @var Location|null Information about the location of this DocBlock. */
-    private ?Location $location = null;
+    private $location;
 
     /** @var bool Is this DocBlock (the start of) a template? */
-    private bool $isTemplateStart;
+    private $isTemplateStart;
 
     /** @var bool Does this DocBlock signify the end of a DocBlock template? */
-    private bool $isTemplateEnd;
+    private $isTemplateEnd;
 
     /**
      * @param DocBlock\Tag[] $tags

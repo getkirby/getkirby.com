@@ -11,9 +11,11 @@ class PhpDocTagNode implements PhpDocChildNode
 
 	use NodeAttributes;
 
-	public string $name;
+	/** @var string */
+	public $name;
 
-	public PhpDocTagValueNode $value;
+	/** @var PhpDocTagValueNode */
+	public $value;
 
 	public function __construct(string $name, PhpDocTagValueNode $value)
 	{

@@ -45,15 +45,14 @@ use const T_NAME_QUALIFIED;
 use const T_NAMESPACE;
 use const T_NS_SEPARATOR;
 use const T_STRING;
-use const T_TRAIT;
 use const T_USE;
 
 if (!defined('T_NAME_QUALIFIED')) {
-    define('T_NAME_QUALIFIED', 10001);
+    define('T_NAME_QUALIFIED', 'T_NAME_QUALIFIED');
 }
 
 if (!defined('T_NAME_FULLY_QUALIFIED')) {
-    define('T_NAME_FULLY_QUALIFIED', 10002);
+    define('T_NAME_FULLY_QUALIFIED', 'T_NAME_FULLY_QUALIFIED');
 }
 
 /**
