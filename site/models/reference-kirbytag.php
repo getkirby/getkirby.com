@@ -23,6 +23,8 @@ class ReferenceKirbytagPage extends ReferencePage
 
 	public function reflection(): ReflectableKirbytag
 	{
-		return new ReflectableKirbytag(name: $this->name());
+		return $this->reflection ??= new ReflectableKirbytag(
+			name: $this->name()
+		);
 	}
 }

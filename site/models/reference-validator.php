@@ -16,6 +16,8 @@ class ReferenceValidatorPage extends ReferencePage
 
 	public function reflection(): ReflectableValidator
 	{
-		return new ReflectableValidator(name: $this->name());
+		return $this->reflection ??= new ReflectableValidator(
+			name: $this->name()
+		);
 	}
 }

@@ -16,6 +16,10 @@ abstract class Reflectable
 	public DocBlock $doc;
 	public Reflector $reflection;
 
+	protected Deprecated|null $deprecated = null;
+	protected Since|null $since = null;
+	protected Throws|null $throws = null;
+
 	public function alias(): string|null
 	{
 		return null;
@@ -23,7 +27,7 @@ abstract class Reflectable
 
 	public function deprecated(): Deprecated|null
 	{
-		return Deprecated::factory($this);
+		return $this->deprecated ??= Deprecated::factory($this);
 	}
 
 	public function isDeprecated(): bool
@@ -62,7 +66,7 @@ abstract class Reflectable
 
 	public function since(): Since|null
 	{
-		return Since::factory($this);
+		return $this->since ??= Since::factory($this);
 	}
 
 	public function source(): string
@@ -81,6 +85,6 @@ abstract class Reflectable
 
 	public function throws(): Throws|null
 	{
-		return Throws::factory($this);
+		return $this->throws ??= Throws::factory($this);
 	}
 }

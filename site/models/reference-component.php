@@ -21,6 +21,8 @@ class ReferenceComponentPage extends ReferencePage
 
 	public function reflection(): ReflectableCoreComponent
 	{
-		return new ReflectableCoreComponent(name: $this->name());
+		return $this->reflection ??= new ReflectableCoreComponent(
+			name: $this->name()
+		);
 	}
 }

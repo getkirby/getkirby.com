@@ -93,7 +93,7 @@ class ReferenceClassMethodPage extends ReferencePage
 
 	public function reflection(): ReflectableClassMethod
 	{
-		return new ReflectableClassMethod(
+		return $this->reflection ??= new ReflectableClassMethod(
 			$this->parent()->name(short: false),
 			$this->name()
 		);

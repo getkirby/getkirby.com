@@ -5,10 +5,11 @@ namespace Kirby\Reference;
 use DefaultPage;
 use Kirby\Content\Field;
 use Kirby\Template\Template;
-use Reflector;
 
 abstract class ReferencePage extends DefaultPage
 {
+	protected $reflection = null;
+
 	public function intro(): Field
 	{
 		// prefer intro defined in content file

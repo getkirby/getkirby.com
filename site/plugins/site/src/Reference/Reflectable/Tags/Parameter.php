@@ -37,26 +37,43 @@ class Parameter
 		$types ??= $doc?->getType();
 		$types   = Types::factory($types);
 
-		if ($parameter->isOptional() === true) {
-			if ($parameter->isDefaultValueAvailable()) {
-				$default = $parameter->getDefaultValue();
-				$default = var_export($default, true);
-				$default = str_replace('NULL', 'null', $default);
-				$default = str_replace('array (' . PHP_EOL . ')', '[ ]', $default);
-			}
-		}
-
 		return new static(
 			name:        $name,
 			types:       $types,
-			default:     match ($default ?? null) {
-				'null', null  => null,
-				default       => $default
-			},
+			default:     static::factoryDefault($parameter),
 			description: $doc?->getDescription()?->getBodyTemplate(),
 			isRequired:  $parameter->isOptional() === false,
 			isVariadic:  $parameter->isVariadic()
 		);
+	}
+
+	/**
+	 * Returns the default value of the parameter
+	 */
+	protected static function factoryDefault(
+		ReflectionParameter $parameter
+	): string|null {
+		// if the parameter is not optional, there is no default value
+		if ($parameter->isOptional() === false) {
+			return null;
+		}
+
+		// if the parameter does not have a default value, return null
+		if ($parameter->isDefaultValueAvailable() === false) {
+			return null;
+		}
+
+		// get the default value and clean it up
+		$default = $parameter->getDefaultValue();
+		$default = var_export($default, true);
+		$default = str_replace('NULL', 'null', $default);
+		$default = str_replace('array (' . PHP_EOL . ')', '[ ]', $default);
+
+		if ($default === null || $default === 'null') {
+			return null;
+		}
+
+		return $default;
 	}
 
 	public function hasDescription(): bool
@@ -87,8 +104,10 @@ class Parameter
 			$string = '...' . $string;
 		}
 
+		// combine the types and the name
 		$string = trim($this->types->toString() . ' ' . $string);
 
+		// if there is a default value, add it
 		if ($this->default !== null) {
 			$string .= ' = ' . $this->default;
 		}
