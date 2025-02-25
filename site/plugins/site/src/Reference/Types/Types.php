@@ -90,7 +90,7 @@ class Types
 			return Type::factory($fallback)->toHtml(linked: $linked);
 		}
 
-		return implode('<span class="px-1">|</span>', $types);
+		return implode('<span class="px-1 color-gray-400">|</span>', $types);
 	}
 
 	public function toString(): string
