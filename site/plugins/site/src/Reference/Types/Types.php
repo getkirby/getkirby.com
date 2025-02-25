@@ -43,13 +43,25 @@ class Types
 			$types = iterator_to_array($types->getIterator());
 		}
 
-		$types    = A::wrap($types);
-		$nullable = A::filter(
-			$types,
-			fn ($type) => method_exists($type, 'allowsNull') && $type->allowsNull()
-		);
+		// ensure types is an array
+		$types = A::wrap($types);
 
-		if (count($nullable) > 0) {
+		// check if we need to add `null` to the types
+		foreach ($types as $type) {
+			// if there is a mixed type, we don't need to add null
+			if ((string)$type === 'mixed') {
+				$null = false;
+				break;
+			}
+
+			// if the type allows null, we need to add it
+			if (method_exists($type, 'allowsNull') && $type->allowsNull()) {
+				$null = true;
+			}
+		}
+
+		// if there is a nullable type, add it
+		if ($null ?? false === true) {
 			$types[] = 'null';
 		}
 
