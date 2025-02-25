@@ -133,6 +133,10 @@ class ReferenceClassPage extends ReferenceSectionPage
 
 	public function reflection(): ReflectableClass
 	{
+		if ($this->reflection !== null) {
+			return $this->reflection;
+		}
+
 		// get class name as defined in content file
 		$class = $this->class()->value();
 
@@ -140,6 +144,6 @@ class ReferenceClassPage extends ReferenceSectionPage
 			throw new Exception('Content file of "' . $this->id() . '" needs to define a "class" field');
 		}
 
-		return new ReflectableClass($class);
+		return $this->reflection = new ReflectableClass($class);
 	}
 }

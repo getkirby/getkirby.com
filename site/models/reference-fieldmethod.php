@@ -33,7 +33,9 @@ class ReferenceFieldMethodPage extends ReferencePage
 
 	public function reflection(): ReflectableFieldMethod
 	{
-		return new ReflectableFieldMethod(name: $this->name());
+		return $this->reflection ??= new ReflectableFieldMethod(
+			name: $this->name()
+		);
 	}
 
 	public function title(): Field

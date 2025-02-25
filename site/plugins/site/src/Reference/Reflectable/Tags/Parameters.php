@@ -25,11 +25,14 @@ class Parameters
 		$parameters = [];
 		$docs       = $reflectable->doc->getTagsByName('param');
 
+		// iterate over all parameters
 		foreach ($reflectable->reflection->getParameters() as $parameter) {
+			// get the name
 			$name = $parameter->getName();
+			// find the matching doc block parameter
 			$doc = A::find(
 				$docs,
-				fn ($d) => strtolower($d->getVariableName()) === strtolower($name)
+				fn ($p) => strtolower($p->getVariableName()) === strtolower($name)
 			);
 			$parameters[] = Parameter::factory($parameter, $doc);
 		}
@@ -46,6 +49,8 @@ class Parameters
 	}
 
 	/**
+	 * Removes a parameter by name
+	 *
 	 * @return $this
 	 */
 	public function not(string $name): static

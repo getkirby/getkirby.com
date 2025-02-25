@@ -29,7 +29,9 @@ class ReferenceHelperPage extends ReferencePage
 
 	public function reflection(): ReflectableHelperFunction
 	{
-		return new ReflectableHelperFunction(name: $this->slug());
+		return $this->reflection ??= new ReflectableHelperFunction(
+			name: $this->slug()
+		);
 	}
 
 }

@@ -16,14 +16,10 @@ class Returns
 		ReflectableFunction $reflectable
 	): static|null {
 		$types   = $reflectable->reflection->getReturnType();
+		$tag     = $reflectable->doc->getTagsByName('return')[0] ?? null;
+		$types ??= $tag?->getType();
 
 		if ($types === null) {
-			$tags  = $reflectable->doc->getTagsByName('return');
-			$tag   = $tags[0] ?? null;
-			$types = $tag?->getType();
-		}
-
-		if ($types == null) {
 			return null;
 		}
 
