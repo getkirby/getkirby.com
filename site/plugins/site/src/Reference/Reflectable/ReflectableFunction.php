@@ -9,7 +9,7 @@ use ReflectionFunction;
 use ReflectionMethod;
 use Reflector;
 
-abstract class ReflectableFunction extends Reflectable
+class ReflectableFunction extends Reflectable
 {
 	/**
 	 * @var \ReflectionMethod
@@ -60,5 +60,10 @@ abstract class ReflectableFunction extends Reflectable
 	protected function sourceLine(): int|null
 	{
 		return $this->reflection->getStartLine();
+	}
+
+	protected function sourcePath(): string
+	{
+		return $this->reflection->getFileName();
 	}
 }
