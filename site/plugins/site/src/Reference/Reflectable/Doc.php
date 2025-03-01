@@ -19,6 +19,10 @@ use PHPStan\PhpDocParser\ParserConfig;
 use Reflector;
 use Throwable;
 
+/**
+ * Extended PHPStan PhpDocNode class
+ * with some helper methods
+ */
 class Doc extends PhpDocNode
 {
 	public function getExtends(): GenericTypeNode|null
@@ -78,6 +82,17 @@ class Doc extends PhpDocNode
 			$this->children,
 			fn (Node $node) => $node instanceof PhpDocTextNode
 		);
+	}
+
+	public function getUses(): GenericTypeNode|null
+	{
+		$tags = $this->getUsesTagValues();
+
+		if (count($tags) === 0) {
+			return null;
+		}
+
+		return $tags[array_key_first($tags)]->type;
 	}
 
 	public static function factory(Reflector $reflection): PhpDocNode

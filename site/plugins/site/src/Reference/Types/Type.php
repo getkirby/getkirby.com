@@ -3,6 +3,7 @@
 namespace Kirby\Reference\Types;
 
 use Kirby\Cms\Html;
+use Kirby\Reference\Reflectable\Reflectable;
 
 class Type
 {
@@ -35,23 +36,14 @@ class Type
 	) {
 	}
 
-	public static function factory(
-		string $type,
-		string|null $context = null
-	): static {
-		// resolve type templates from class context
-		if ($context) {
-			$context = new Context($context);
-			$type    = $context->resolve($type);
-		}
-
+	public static function factory(string $type): static {
 		// generic simple types
 		if (in_array($type, array_keys(static::$types), true) === true) {
 			return new static($type);
 		}
 
 		// identifier types (class names, interfaces, traits)
-		return new Identifier($type, $context);
+		return new Identifier($type);
 	}
 
 	public function toHtml(

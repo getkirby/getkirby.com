@@ -44,9 +44,10 @@ class ReflectableFieldMethod extends ReflectableFunction
 
 	protected function sourcePath(): string
 	{
-		return match (true) {
-			$this->reflection instanceof ReflectionMethod => 'src/Content/Field.php',
-			default                                       => 'config/methods.php',
-		};
+		if ($this->reflection instanceof ReflectionMethod) {
+			return 'src/Content/Field.php';
+		}
+
+		return 'config/methods.php';
 	}
 }

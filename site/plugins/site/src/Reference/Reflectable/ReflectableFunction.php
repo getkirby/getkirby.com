@@ -9,7 +9,7 @@ use ReflectionFunction;
 use ReflectionMethod;
 use Reflector;
 
-class ReflectableFunction extends Reflectable
+abstract class ReflectableFunction extends Reflectable
 {
 	/**
 	 * @var \ReflectionMethod

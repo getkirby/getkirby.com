@@ -2,6 +2,7 @@
 
 namespace Kirby\Reference\Reflectable\Tags;
 
+use Kirby\Reference\Reflectable\Reflectable;
 use Kirby\Reference\Types\Types;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode;
 use ReflectionParameter;
@@ -31,7 +32,7 @@ class Parameter
 	public static function factory(
 		ReflectionParameter $parameter,
 		ParamTagValueNode|null $doc = null,
-		string|null $context = null
+		Reflectable|null $context = null
 	): static {
 		$name    = $parameter->getName();
 		$types   = $doc?->type;
