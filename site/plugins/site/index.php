@@ -11,8 +11,6 @@ require_once __DIR__ . '/helpers/reference.php';
 // TODO: Remove when https://github.com/getkirby/kirby/issues/5968 is implemented
 require_once __DIR__ . '/../../models/default.php';
 
-class_alias('Kirby\\Reference\\Types\\Types', 'Types');
-
 App::plugin('getkirby/site', [
 	'components'   => include __DIR__ . '/extensions/components.php',
 	'fieldMethods' => include __DIR__ . '/extensions/fieldMethods.php',

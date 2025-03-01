@@ -10,6 +10,9 @@ use ReferenceFieldMethodPage;
 use ReferenceHelperPage;
 use ReflectionClass;
 
+/**
+ * A type that can be resolved to a class, method, field or helper
+ */
 class Identifier extends Type
 {
 	public function __construct(
@@ -73,7 +76,7 @@ class Identifier extends Type
 				$tag = Html::tag('code', $text, [
 					'class' => 'type type-' . match (true) {
 						$page instanceof ReferenceClassMethodPage => 'method',
-						default                                   => 'object'
+						default                                   => 'class'
 					}
 				]);
 

@@ -8,6 +8,9 @@ use Kirby\Reference\Reflectable\Tags\Parameters;
 use ReflectionFunction;
 use ReflectionMethod;
 
+/**
+ * Reflectable for a field method
+ */
 class ReflectableFieldMethod extends ReflectableFunction
 {
 	public function __construct(

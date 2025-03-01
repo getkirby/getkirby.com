@@ -9,6 +9,9 @@ use ReflectionFunction;
 use ReflectionMethod;
 use Reflector;
 
+/**
+ * Reflectable abstract for functions
+ */
 abstract class ReflectableFunction extends Reflectable
 {
 	/**

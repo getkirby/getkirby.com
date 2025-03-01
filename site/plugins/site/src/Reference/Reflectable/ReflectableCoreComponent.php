@@ -5,6 +5,9 @@ namespace Kirby\Reference\Reflectable;
 use Exception;
 use Kirby\Cms\App;
 
+/**
+ * Reflectable for a Kirby core component
+ */
 class ReflectableCoreComponent extends ReflectableFunction
 {
 	public function __construct(

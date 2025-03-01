@@ -4,6 +4,9 @@ namespace Kirby\Reference\Types;
 
 use Kirby\Cms\Html;
 
+/**
+ * A single type
+ */
 class Type
 {
 	protected static array $types = [
@@ -26,7 +29,7 @@ class Type
 		'resource'  => 'object',
 		'null'      => 'null',
 		'void'      => 'void',
-		'callable'  => 'mixed',
+		'callable'  => 'callable',
 		'mixed'     => 'mixed'
 	];
 
@@ -45,9 +48,14 @@ class Type
 		return new Identifier($type);
 	}
 
+	/**
+	 * Get the generic type of a type
+	 */
 	public static function generic(string $type): string|null
 	{
-		$generic = static::$types[$type] ?? null;
+		if ($generic = static::$types[$type] ?? null) {
+			return $generic;
+		};
 
 		if (
 			(
@@ -59,12 +67,22 @@ class Type
 				str_ends_with($type, '"') === true
 			)
 		) {
-			$generic ??= 'string';
+			return 'string';
 		}
 
-		return $generic;
+		if (
+			str_starts_with($type, '[') === true &&
+			str_ends_with($type, ']') === true
+		) {
+			return 'array';
+		}
+
+		return null;
 	}
 
+	/**
+	 * Return the type as an HTML code tag
+	 */
 	public function toHtml(
 		string|null $text = null,
 		bool $linked = true
@@ -77,6 +95,9 @@ class Type
 		]);
 	}
 
+	/**
+	 * Return the type as a string
+	 */
 	public function toString(): string
 	{
 		return $this->type;

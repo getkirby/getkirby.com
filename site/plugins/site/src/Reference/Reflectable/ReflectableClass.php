@@ -6,6 +6,9 @@ use Kirby\Cms\App;
 use ReflectionClass;
 use Reflector;
 
+/**
+ * Reflectable for a class
+ */
 class ReflectableClass extends Reflectable
 {
 	/**
