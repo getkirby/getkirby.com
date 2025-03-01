@@ -57,8 +57,12 @@ abstract class Reflectable
 		return $this->since ??= Since::factory($this);
 	}
 
-	public function source(): string
+	public function source(): string|null
 	{
+		if (method_exists($this, 'sourcePath') === false) {
+			return null;
+		}
+
 		$url  = option('github.url') . '/kirby/tree/' . App::version();
 		$url .= '/' . $this->sourcePath();
 
@@ -68,8 +72,6 @@ abstract class Reflectable
 
 		return $url;
 	}
-
-	abstract protected function sourcePath(): string;
 
 	public function throws(): Throws|null
 	{

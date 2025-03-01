@@ -61,9 +61,4 @@ class ReflectableFunction extends Reflectable
 	{
 		return $this->reflection->getStartLine();
 	}
-
-	protected function sourcePath(): string
-	{
-		return $this->reflection->getFileName();
-	}
 }
