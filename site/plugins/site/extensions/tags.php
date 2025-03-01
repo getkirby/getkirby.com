@@ -3,9 +3,7 @@
 use Kirby\Cms\Html;
 use Kirby\Cms\Section;
 use Kirby\Form\Field;
-use Kirby\Reference\Reflectable\ReflectableFunction;
-use Kirby\Reference\Reflectable\Tags\Parameter;
-use Kirby\Reference\Reflectable\Tags\Parameters;
+use Kirby\Reference\Reflectable\ReflectableOptions;
 use Kirby\Reference\Types\Identifier;
 use Kirby\Toolkit\Str;
 
@@ -192,53 +190,6 @@ $tags['helper'] = [
 	}
 ];
 
-// @todo All the following should be refactored, but this requires
-// content file changes, so we wait
-
-/**
- * Fetch prop definitions from Fields and Sections
- * and create an parameters table for it.
- *
- * @param array $definition
- * @return array
- * @todo refactor/deprecate
- */
-function toParameters(array $props)
-{
-	$parameters = [];
-
-	foreach ($props as $attr => $prop) {
-		if ($attr === 'value') {
-			continue;
-		}
-
-		if (is_callable($prop) === false) {
-			continue;
-		}
-
-		$reflectable = new ReflectableFunction($prop);
-		$parameter   = $reflectable->parameters()->toArray()[0] ?? null;
-
-		if ($parameter !== null) {
-			$types      = $parameter->types();
-			$isRequired = $types->has('null') === false;
-			$types->remove('null');
-			$parameters[$attr] = new Parameter(
-				name:        $attr,
-				types:       $types,
-				default:     $parameter->default(),
-				description: $reflectable->summary(),
-				isRequired:  $parameter->isRequired()
-			);
-		}
-	}
-
-	ksort($parameters);
-
-	return new Parameters($parameters);
-
-}
-
 $tags['api-fields'] = [
 	'html' => function ($tag) {
 		$models = $tag->kirby()->api()->models();
@@ -258,31 +209,23 @@ $tags['api-fields'] = [
 ];
 
 $tags['field-options'] = [
-	'html' => function ($tag) {
-		$type       = $tag->value;
-		$definition = Field::setup($type);
-		$props      = $definition['props'] ?? [];
-		$parameters = toParameters($props);
-
-		return snippet('templates/reference/entry/parameters', [
-			'title'      => false,
-			'parameters' => $parameters
-		], true);
-	}
+	'html' => fn ($tag) => snippet('templates/reference/entry/parameters', [
+		'title'       => false,
+		'reflectable' => ReflectableOptions::factory(
+			type: Field::class,
+			name: $tag->value
+		)
+	], true)
 ];
 
 $tags['section-options'] = [
-	'html' => function ($tag) {
-		$type       = $tag->value;
-		$definition = Section::setup($type);
-		$props      = $definition['props'] ?? [];
-		$parameters = toParameters($props);
-
-		return snippet('templates/reference/entry/parameters', [
-			'title'      => false,
-			'parameters' => $parameters
-		], true);
-	}
+	'html' => fn ($tag) => snippet('templates/reference/entry/parameters', [
+		'title'       => false,
+		'reflectable' => ReflectableOptions::factory(
+			type: Section::class,
+			name: $tag->value
+		)
+	], true)
 ];
 
 $tags['video'] = [

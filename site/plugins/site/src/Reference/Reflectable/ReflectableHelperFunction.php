@@ -16,13 +16,8 @@ class ReflectableHelperFunction extends ReflectableFunction
 		parent::__construct($name);
 	}
 
-	public function call(): string
-	{
-		return 'V::' . parent::call();
-	}
-
 	protected function sourcePath(): string
 	{
-		return 'src/Toolkit/V.php';
+		return 'config/helpers.php';
 	}
 }

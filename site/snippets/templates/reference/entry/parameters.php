@@ -4,7 +4,8 @@ use Kirby\Toolkit\Str;
 
 $title         ??= 'Parameters';
 $intro         ??= null;
-$parameters    ??= $page->reflection()?->parameters();
+$reflectable   ??= $page->reflection();
+$parameters    ??= $reflectable?->parameters();
 $hasDescriptions = $parameters?->hasDescriptions() ?? false;
 $parameters      = $parameters?->toArray() ?? [];
 ?>
