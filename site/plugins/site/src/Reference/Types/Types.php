@@ -75,6 +75,14 @@ class Types
 		return strpos($this->toString(), $type) !== false;
 	}
 
+	public function remove(string $type): void
+	{
+		$this->types = A::filter(
+			$this->types,
+			fn (Type $t) => $t->type !== $type
+		);
+	}
+
 	public function toHtml(
 		bool $linked = true,
 		string|null $fallback = null

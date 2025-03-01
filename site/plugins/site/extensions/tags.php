@@ -3,8 +3,10 @@
 use Kirby\Cms\Html;
 use Kirby\Cms\Section;
 use Kirby\Form\Field;
-use Kirby\Reference\DocBlock;
-use Kirby\Reference\Types;
+use Kirby\Reference\Reflectable\ReflectableFunction;
+use Kirby\Reference\Reflectable\Tags\Parameter;
+use Kirby\Reference\Reflectable\Tags\Parameters;
+use Kirby\Reference\Types\Identifier;
 use Kirby\Toolkit\Str;
 
 $tags = [];
@@ -152,7 +154,6 @@ $tags['docs'] = [
 	}
 ];
 
-
 /**
  * Enhanced link tag with support for automatic
  * linking to Reference pages
@@ -179,7 +180,8 @@ $tags['class'] = $tags['method'] = [
 
 		$text ??= $type . '()';
 
-		return Types::format($type, true, trim($text));
+		$type = new Identifier($type);
+		return $type->toHtml(text: $text, linked: true);
 	}
 ];
 
@@ -195,18 +197,17 @@ $tags['helper'] = [
 
 /**
  * Fetch prop definitions from Fields and Sections
- * and create an options table for it.
+ * and create an parameters table for it.
  *
  * @param array $definition
  * @return array
  * @todo refactor/deprecate
  */
-function toOptions(array $props)
+function toParameters(array $props)
 {
-	$table = [];
+	$parameters = [];
 
 	foreach ($props as $attr => $prop) {
-
 		if ($attr === 'value') {
 			continue;
 		}
@@ -215,71 +216,26 @@ function toOptions(array $props)
 			continue;
 		}
 
-		$reflection = new ReflectionFunction($prop);
-		$parameter  = $reflection->getParameters()[0] ?? null;
-		$comment    = null;
+		$reflectable = new ReflectableFunction($prop);
+		$parameter   = $reflectable->parameters()->toArray()[0] ?? null;
 
-		try {
-			$default = $parameter->getDefaultValue();
-		} catch (Exception $e) {
-			$default = null;
+		if ($parameter !== null) {
+			$types      = $parameter->types();
+			$isRequired = $types->has('null') === false;
+			$types->remove('null');
+			$parameters[$attr] = new Parameter(
+				name:        $attr,
+				types:       $types,
+				default:     $parameter->default(),
+				description: $reflectable->summary(),
+				isRequired:  $parameter->isRequired()
+			);
 		}
-
-		if ($docComment = $reflection->getDocComment()) {
-			try {
-				$docBlock = new DocBlock($docComment);
-				$comment  = trim($docBlock->getSummary());
-				$comment  = str_replace(PHP_EOL, ' ', $comment);
-
-				if ($comment === '/') {
-					$comment = null;
-				}
-
-			} catch (Throwable $e) {
-			}
-		}
-
-		if (is_array($default) === true) {
-			$default = '[]';
-		}
-
-		if ($default === true) {
-			$default = 'true';
-		}
-
-		if ($default === false) {
-			$default = 'false';
-		}
-
-		$type = $parameter->getType();
-		$parameterType = null;
-
-		if ($type) {
-			if ($type instanceof ReflectionUnionType) {
-				$parameterTypes = [];
-
-				foreach ($type->getTypes() as $unionType) {
-					$parameterTypes[] = $unionType->getName();
-				}
-
-				$parameterType = join('|', $parameterTypes);
-			} else {
-				$parameterType = $type->getName();
-			}
-		}
-
-		$table[$attr] = [
-			'name'        => $attr,
-			'required'    => $parameter->isOptional() !== true,
-			'type'        => $parameterType,
-			'default'     => $default,
-			'description' => $comment,
-		];
 	}
 
-	ksort($table);
+	ksort($parameters);
 
-	return $table;
+	return new Parameters($parameters);
 
 }
 
@@ -306,11 +262,11 @@ $tags['field-options'] = [
 		$type       = $tag->value;
 		$definition = Field::setup($type);
 		$props      = $definition['props'] ?? [];
-		$table      = toOptions($props);
+		$parameters = toParameters($props);
 
 		return snippet('templates/reference/entry/parameters', [
-			'title' => false,
-			'rows'  => $table
+			'title'      => false,
+			'parameters' => $parameters
 		], true);
 	}
 ];
@@ -320,11 +276,11 @@ $tags['section-options'] = [
 		$type       = $tag->value;
 		$definition = Section::setup($type);
 		$props      = $definition['props'] ?? [];
-		$table      = toOptions($props);
+		$parameters = toParameters($props);
 
 		return snippet('templates/reference/entry/parameters', [
-			'title' => false,
-			'rows' => $table
+			'title'      => false,
+			'parameters' => $parameters
 		], true);
 	}
 ];

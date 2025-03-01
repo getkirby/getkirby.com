@@ -4,9 +4,9 @@ use Kirby\Toolkit\Str;
 
 $title         ??= 'Parameters';
 $intro         ??= null;
-$reflection      = $page->reflection();
-$parameters      = $reflection?->parameters()->toArray() ?? [];
-$hasDescriptions = $reflection?->parameters()->hasDescriptions() ?? false;
+$parameters    ??= $page->reflection()?->parameters();
+$hasDescriptions = $parameters?->hasDescriptions() ?? false;
+$parameters      = $parameters?->toArray() ?? [];
 ?>
 
 <?php if (count($parameters) > 0): ?>
