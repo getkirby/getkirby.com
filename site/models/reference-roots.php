@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Reference\SectionPage;
+use Kirby\Reference\ReferenceSectionPage;
 
-class ReferenceRootsPage extends SectionPage
+class ReferenceRootsPage extends ReferenceSectionPage
 {
 }

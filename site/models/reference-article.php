@@ -11,4 +11,13 @@ class ReferenceArticlePage extends DefaultPage
 			]
 		];
 	}
+
+	/**
+	 * Prevents snippets that are based of a reflection
+	 * to be displayed on this page
+	 */
+	public function reflection(): null
+	{
+		return null;
+	}
 }

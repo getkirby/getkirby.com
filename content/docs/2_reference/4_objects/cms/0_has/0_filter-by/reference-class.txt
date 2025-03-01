@@ -1,9 +1,0 @@
-Text:
-
-## Example
-
-Filter blocks by type:
-
-```php
-$textBlocks = $page->text()->toBlocks()->filterBy('type', 'text');
-```

@@ -18,7 +18,8 @@
 .type.type-boolean {
 	background: var(--color-purple-400);
 }
-.type.type-array {
+.type.type-array,
+.type.type-callable {
 	background: var(--color-aqua-400);
 }
 .type.type-object,

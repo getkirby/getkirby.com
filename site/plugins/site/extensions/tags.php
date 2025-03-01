@@ -3,8 +3,8 @@
 use Kirby\Cms\Html;
 use Kirby\Cms\Section;
 use Kirby\Form\Field;
-use Kirby\Reference\DocBlock;
-use Kirby\Reference\Types;
+use Kirby\Reference\Reflectable\ReflectableOptions;
+use Kirby\Reference\Types\Identifier;
 use Kirby\Toolkit\Str;
 
 $tags = [];
@@ -152,7 +152,6 @@ $tags['docs'] = [
 	}
 ];
 
-
 /**
  * Enhanced link tag with support for automatic
  * linking to Reference pages
@@ -179,7 +178,8 @@ $tags['class'] = $tags['method'] = [
 
 		$text ??= $type . '()';
 
-		return Types::format($type, true, trim($text));
+		$type = new Identifier($type);
+		return $type->toHtml(text: $text, linked: true);
 	}
 ];
 
@@ -189,99 +189,6 @@ $tags['helper'] = [
 		return kirbytag('method', 'Helper::' . $tag->value, ['text' => $tag->value . '()']);
 	}
 ];
-
-// @todo All the following should be refactored, but this requires
-// content file changes, so we wait
-
-/**
- * Fetch prop definitions from Fields and Sections
- * and create an options table for it.
- *
- * @param array $definition
- * @return array
- * @todo refactor/deprecate
- */
-function toOptions(array $props)
-{
-	$table = [];
-
-	foreach ($props as $attr => $prop) {
-
-		if ($attr === 'value') {
-			continue;
-		}
-
-		if (is_callable($prop) === false) {
-			continue;
-		}
-
-		$reflection = new ReflectionFunction($prop);
-		$parameter  = $reflection->getParameters()[0] ?? null;
-		$comment    = null;
-
-		try {
-			$default = $parameter->getDefaultValue();
-		} catch (Exception $e) {
-			$default = null;
-		}
-
-		if ($docComment = $reflection->getDocComment()) {
-			try {
-				$docBlock = new DocBlock($docComment);
-				$comment  = trim($docBlock->getSummary());
-				$comment  = str_replace(PHP_EOL, ' ', $comment);
-
-				if ($comment === '/') {
-					$comment = null;
-				}
-
-			} catch (Throwable $e) {
-			}
-		}
-
-		if (is_array($default) === true) {
-			$default = '[]';
-		}
-
-		if ($default === true) {
-			$default = 'true';
-		}
-
-		if ($default === false) {
-			$default = 'false';
-		}
-
-		$type = $parameter->getType();
-		$parameterType = null;
-
-		if ($type) {
-			if ($type instanceof ReflectionUnionType) {
-				$parameterTypes = [];
-
-				foreach ($type->getTypes() as $unionType) {
-					$parameterTypes[] = $unionType->getName();
-				}
-
-				$parameterType = join('|', $parameterTypes);
-			} else {
-				$parameterType = $type->getName();
-			}
-		}
-
-		$table[$attr] = [
-			'name'        => $attr,
-			'required'    => $parameter->isOptional() !== true,
-			'type'        => $parameterType,
-			'default'     => $default,
-			'description' => $comment,
-		];
-	}
-
-	ksort($table);
-
-	return $table;
-
-}
 
 $tags['api-fields'] = [
 	'html' => function ($tag) {
@@ -302,31 +209,23 @@ $tags['api-fields'] = [
 ];
 
 $tags['field-options'] = [
-	'html' => function ($tag) {
-		$type       = $tag->value;
-		$definition = Field::setup($type);
-		$props      = $definition['props'] ?? [];
-		$table      = toOptions($props);
-
-		return snippet('templates/reference/entry/parameters', [
-			'title' => false,
-			'rows'  => $table
-		], true);
-	}
+	'html' => fn ($tag) => snippet('templates/reference/entry/parameters', [
+		'title'       => false,
+		'reflectable' => ReflectableOptions::factory(
+			type: Field::class,
+			name: $tag->value
+		)
+	], true)
 ];
 
 $tags['section-options'] = [
-	'html' => function ($tag) {
-		$type       = $tag->value;
-		$definition = Section::setup($type);
-		$props      = $definition['props'] ?? [];
-		$table      = toOptions($props);
-
-		return snippet('templates/reference/entry/parameters', [
-			'title' => false,
-			'rows' => $table
-		], true);
-	}
+	'html' => fn ($tag) => snippet('templates/reference/entry/parameters', [
+		'title'       => false,
+		'reflectable' => ReflectableOptions::factory(
+			type: Section::class,
+			name: $tag->value
+		)
+	], true)
 ];
 
 $tags['video'] = [

@@ -3,20 +3,13 @@
 use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
-use Kirby\Reference\SectionPage;
+use Kirby\Reference\ReferenceSectionPage;
+use Kirby\Reference\Reflectable\ReflectableClass;
 use Kirby\Toolkit\Str;
 use ReferenceClassMethodPage as ReferenceClassMethod;
 
-class ReferenceClassPage extends SectionPage
+class ReferenceClassPage extends ReferenceSectionPage
 {
-	public function alias(): Field
-	{
-		static $aliases = require $this->kirby()->root('kirby') . '/config/aliases.php';
-
-		$alias = array_search($this->name(), $aliases);
-		return new Field($this, 'alias', $alias ?: null);
-	}
-
 	public function children(): Pages
 	{
 		if ($this->children !== null) {
@@ -25,8 +18,7 @@ class ReferenceClassPage extends SectionPage
 
 		$children   = [];
 		$pages      = parent::children();
-		$reflection = $this->reflection();
-		$methods    = $reflection->getMethods();
+		$methods    = $this->reflection()->methods();
 
 		foreach ($methods as $method) {
 			// Don't include protected or private methods
@@ -79,13 +71,6 @@ class ReferenceClassPage extends SectionPage
 		);
 	}
 
-	public function exists(): bool
-	{
-		return class_exists($this->name()) === true ||
-			   trait_exists($this->name()) === true;
-
-	}
-
 	public static function findByName(string $class): Page|null
 	{
 		$class = ltrim($class, '\\');
@@ -116,16 +101,6 @@ class ReferenceClassPage extends SectionPage
 		return null;
 	}
 
-	public function isStatic(): bool
-	{
-		return method_exists($this->name(), '__construct') === false;
-	}
-
-	public function isTrait(): bool
-	{
-		return $this->reflection()?->isTrait();
-	}
-
 	public function metadata(): array
 	{
 		return array_replace_recursive(parent::metadata(), [
@@ -138,28 +113,13 @@ class ReferenceClassPage extends SectionPage
 
 	public function name(bool $short = false): string
 	{
-		if ($short !== true) {
-			// get class name as defined in content file
-			$class = $this->class()->value();
+		$name = $this->content()->get('name');
 
-			if ($class === null) {
-				throw new Exception('Content file of "' . $this->id() . '" needs to define a "class" field');
-			}
-
-			return $class;
+		if ($short === true && $name->isNotEmpty()) {
+			return $name->value();
 		}
 
-		// prefer content field `name`
-		return
-			$this->content()->get('name')->value() ??
-			$this->reflection()->getShortName();
-	}
-
-	public function onGitHub(string $path = ''): Field
-	{
-		$path = str_replace('Kirby\\', '', $this->name());
-		$path = str_replace('\\', '/', $path);
-		return parent::onGitHub('src/' . $path . '.php');
+		return $this->reflection()->name(short: $short);
 	}
 
 	public function searchbyline(): Field
@@ -171,17 +131,28 @@ class ReferenceClassPage extends SectionPage
 
 	public function title(): Field
 	{
-		if ($this->content()->has('title')) {
-			return parent::title();
+		$name = $this->name(short: true);
+
+		if ($this->content()->get('name')->isNotEmpty()) {
+			$name = '$' . strtolower($name);
 		}
 
-		$title = $this->name(true);
-		return parent::title()->value($title);
+		return parent::title()->value($name);
 	}
 
-	protected function reflection(): ReflectionClass
+	public function reflection(): ReflectableClass
 	{
-		return $this->reflection ??= new ReflectionClass($this->name());
-	}
+		if ($this->reflection !== null) {
+			return $this->reflection;
+		}
 
+		// get class name as defined in content file
+		$class = $this->class()->value();
+
+		if ($class === null) {
+			throw new Exception('Content file of "' . $this->id() . '" needs to define a "class" field');
+		}
+
+		return $this->reflection = new ReflectableClass($class);
+	}
 }

@@ -1,9 +1,13 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Reference\ReflectionPage;
+use Kirby\Reference\ReferencePage;
+use Kirby\Reference\Reflectable\Tags\Parameter;
+use Kirby\Reference\Reflectable\Tags\Parameters;
+use Kirby\Reference\Types\Types;
+use Kirby\Toolkit\A;
 
-class ReferenceHookPage extends ReflectionPage
+class ReferenceHookPage extends ReferencePage
 {
 	public function example(): Field
 	{
@@ -37,5 +41,21 @@ class ReferenceHookPage extends ReflectionPage
 				'lead'  => 'Reference / Hooks'
 			]
 		]);
+	}
+
+	public function parameters(): Parameters
+	{
+		$parameters = $this->arguments()->split();
+		$parameters = A::map($parameters, function ($parameter) {
+			$parameter = explode('=', $parameter);
+			$parameter = explode(' ', trim($parameter[0]));
+
+			return new Parameter(
+				name: ltrim($parameter[count($parameter) - 1], '$'),
+				types: Types::factory($parameter[count($parameter) - 2] ?? 'null')
+			);
+		});
+
+		return new Parameters($parameters);
 	}
 }

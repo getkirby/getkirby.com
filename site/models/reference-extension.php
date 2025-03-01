@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Reference\ReflectionPage;
+use Kirby\Reference\ReferencePage;
 
-class ReferenceExtensionPage extends ReflectionPage
+class ReferenceExtensionPage extends ReferencePage
 {
 	public function metadata(): array
 	{

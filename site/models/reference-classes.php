@@ -3,11 +3,10 @@
 use Kirby\Cms\Pages;
 use Kirby\Data\Data;
 use Kirby\Filesystem\Dir;
-use Kirby\Reference\SectionPage;
-use Kirby\Toolkit\A;
+use Kirby\Reference\ReferenceSectionPage;
 use Kirby\Toolkit\Str;
 
-class ReferenceClassesPage extends SectionPage
+class ReferenceClassesPage extends ReferenceSectionPage
 {
 	/**
 	 * Creates children collection by parsing the `src/` folder of
@@ -48,12 +47,12 @@ class ReferenceClassesPage extends SectionPage
 			],
 			[
 				'slug'     => 'all',
-				'model'    => 'link',
-				'template' => 'link',
+				'model'    => 'reference-classoverview',
+				'template' => 'reference-classoverview',
 				'num'      => 1,
 				'content'  => [
-					'title' => 'All classes',
-					'link'  => url('docs/reference/objects')
+					'title'  => 'All classes',
+					'link'   => url('docs/reference/objects')
 				]
 			],
 			[
