@@ -59,6 +59,5 @@ class ReferenceClassAliasesPage extends ReferenceSectionPage
 	public static function resolve(string $name): string
 	{
 		return static::aliases()[Str::lower($name)] ?? $name;
-
 	}
 }

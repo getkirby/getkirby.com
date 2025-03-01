@@ -47,12 +47,12 @@ class ReferenceClassesPage extends ReferenceSectionPage
 			],
 			[
 				'slug'     => 'all',
-				'model'    => 'link',
-				'template' => 'link',
+				'model'    => 'reference-classoverview',
+				'template' => 'reference-classoverview',
 				'num'      => 1,
 				'content'  => [
-					'title' => 'All classes',
-					'link'  => url('docs/reference/objects')
+					'title'  => 'All classes',
+					'link'   => url('docs/reference/objects')
 				]
 			],
 			[
