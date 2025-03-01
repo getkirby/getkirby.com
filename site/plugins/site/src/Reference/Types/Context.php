@@ -8,10 +8,10 @@ use Kirby\Reference\Reflectable\ReflectableClass;
 use Kirby\Reference\Reflectable\ReflectableClassMethod;
 use Kirby\Reference\Reflectable\ReflectableFunction;
 use Kirby\Toolkit\A;
+use Kirby\Toolkit\Str;
 use PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
 use ReflectionClass;
 use ReflectionFunctionAbstract;
-use Reflector;
 
 /**
  * Resolves all type templates/generics
@@ -19,7 +19,6 @@ use Reflector;
  */
 class Context
 {
-	public Doc $doc;
 	public array $types = [];
 
 	public static $cache = [];
@@ -48,6 +47,22 @@ class Context
 
 		// cache the resolved type templates
 		static::$cache[$key] = $this->types;
+	}
+
+	protected function addPayload(array $payload): void
+	{
+		foreach ($payload as $key => $type) {
+			if ($key = array_keys($this->types)[$key] ?? null) {
+				$this->types[$key] = $type;
+			}
+		}
+	}
+
+	protected function addTemplates(Doc $doc): void
+	{
+		foreach ($doc->getTemplates() as $template) {
+			$this->types[$template->name] ??= $template->bound;
+		}
 	}
 
 	public static function factory(
@@ -83,20 +98,37 @@ class Context
 	{
 		$doc = Doc::factory($this->function);
 
-		foreach ($doc->getTemplates() as $template) {
-			$this->types[$template->name] = $template->bound;
-		}
+		$this->addTemplates($doc);
 
 		$params = $this->function->getParameters();
 
-		foreach ($doc->getParamTagValues() as $param) {
-			if (array_key_exists($param->type->name, $this->types)) {
-				$native = A::find(
-					$params,
-					fn ($p) => $p->getName() === ltrim($param->parameterName, '$')
-				);
+		foreach ($doc->getParamTagValues() as $tag) {
+			$types = $tag->type;
+			$types = trim($types, '()');
+			$types = Str::split($types, '|');
 
-				$this->types[$param->type->name] = Types::factory($native->getType())->toString();
+			foreach ($types as $name) {
+				if (array_key_exists($name, $this->types)) {
+					$native = A::find(
+						$params,
+						fn ($p) => $p->getName() === ltrim($tag->parameterName, '$')
+					);
+
+					$type = $native->getType() ?? 'mixed';
+					$this->types[$name] ??= Types::factory($type)->toString();
+				}
+			}
+		}
+
+		if ($return = $doc->getReturnNode()?->type) {
+			$return = trim($return, '()');
+			$return = Str::split($return, '|');
+
+			foreach ($return as $name) {
+				if (array_key_exists($name, $this->types)) {
+					$type = $this->function->getReturnType() ?? 'mixed';
+					$this->types[$name] ??= Types::factory($type)->toString();
+				}
 			}
 		}
 	}
@@ -105,28 +137,22 @@ class Context
 	 * Iterate though parent classes and traits
 	 * using generics to build a complete template => type map
 	 */
-	public function resolveClass(array $fill = []): array
+	public function resolveClass(array $payload = []): array
 	{
-		$this->doc = Doc::factory($this->class);
+		$doc = Doc::factory($this->class);
 
 		// add all types from the class' docblock
-		foreach ($this->doc->getTemplates() as $template) {
-			$this->types[$template->name] = $template->bound;
-		}
+		$this->addTemplates($doc);
 
-		// fill in types passed from the child context
-		foreach ($fill as $key => $type) {
-			$key = array_keys($this->types)[$key];
-			$this->types[$key] = $type;
-		}
+		$this->addPayload($payload);
 
 		// resolve all parent classes
-		if ($extends = $this->doc->getExtends()) {
+		if ($extends = $doc->getExtends()) {
 			$this->resolveParent($extends);
 		}
 
 		// resolve all used traits
-		if ($uses = $this->doc->getUses()) {
+		if ($uses = $doc->getUses()) {
 			$this->resolveParent($uses);
 		}
 
@@ -137,16 +163,16 @@ class Context
 	 * Resolve a single parent class or trait
 	 * to extend the template => type map
 	 */
-	public function resolveParent(GenericTypeNode $reference): void
+	protected function resolveParent(GenericTypeNode $reference): void
 	{
-		$fill = A::map(
+		$payload = A::map(
 			$reference->genericTypes,
 			fn ($type) => $this->types[$type->name] ?? $type->name
 		);
 
-		$reflection  = new ReflectionClass($reference->type);
-		$context     = new Context($reflection);
-		$types       = $context->resolveClass($fill);
+		$reflection  = new ReflectionClass($reference->type->name);
+		$context     = new Context(class: $reflection);
+		$types       = $context->resolveClass($payload);
 		$this->types = [...$this->types, ...$types];
 	}
 }

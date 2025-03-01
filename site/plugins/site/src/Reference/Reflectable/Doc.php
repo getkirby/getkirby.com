@@ -95,7 +95,7 @@ class Doc extends PhpDocNode
 		return $tags[array_key_first($tags)]->type;
 	}
 
-	public static function factory(Reflector $reflection): PhpDocNode
+	public static function factory(Reflector $reflection): static
 	{
 		try {
 			$docblock  = $reflection->getDocComment();
