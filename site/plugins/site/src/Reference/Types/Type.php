@@ -3,7 +3,6 @@
 namespace Kirby\Reference\Types;
 
 use Kirby\Cms\Html;
-use Kirby\Reference\Reflectable\Reflectable;
 
 class Type
 {

@@ -2,7 +2,10 @@
 
 namespace Kirby\Reference\Types;
 
+use Kirby\Cms\Html;
 use Kirby\Reference\Reflectable\Reflectable;
+use Kirby\Reference\Reflectable\ReflectableClass;
+use Kirby\Reference\Reflectable\ReflectableClassMethod;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
@@ -20,7 +23,8 @@ class Types
 	 * @param array<Type> $types
 	 */
 	public function __construct(
-		public array $types
+		public array $types,
+		public Reflectable|null $reflectable = null
 	) {
 	}
 
@@ -32,7 +36,7 @@ class Types
 	 */
 	public static function factory(
 		ReflectionType|TypeNode|string|null $types = null,
-		Reflectable|null $context = null
+		Reflectable|null $reflectable = null
 	): static {
 		$types ??= [];
 
@@ -62,8 +66,8 @@ class Types
 		$types = A::map($types, fn ($type) => ltrim($type, '?'));
 
 		// resolve type templates if a context is provided
-		if ($context) {
-			$context = Context::factory($context);
+		if ($reflectable !== null) {
+			$context = Context::factory($reflectable);
 			$types   = A::map(
 				$types,
 				fn ($type) => Str::split($context->resolve($type), '|')
@@ -75,7 +79,7 @@ class Types
 		$types = array_unique($types);
 		$types = A::map($types, fn ($type) => Type::factory($type));
 
-		return new static($types);
+		return new static($types, $reflectable);
 	}
 
 	/**
@@ -120,6 +124,39 @@ class Types
 	}
 
 	/**
+	 * Replace the self/static/$this types with the actual class name
+	 */
+	protected function replaceSelf(string $string, bool $html = false): string
+	{
+		if ($this->reflectable === null) {
+			return $string;
+		}
+
+		// get the class name
+		if ($this->reflectable instanceof ReflectableClass) {
+			$type = $this->reflectable->name(short: false);
+		} else if ($this->reflectable instanceof ReflectableClassMethod) {
+			$type = $this->reflectable->class;
+		}
+
+		$method  = $html ? 'toHtml' : 'toString';
+		$type    = Type::factory($type ?? 'static');
+		$needles = ['static', 'self', '$this'];
+
+		// if HTML is requested, wrap the needles in code tags
+		if ($html === true) {
+			$needles = A::map(
+				$needles,
+				fn ($needle) => Html::tag('code', $needle, [
+					'class' => 'type type-object'
+				])
+			);
+		}
+
+		return str_replace($needles, $type->$method(), $string);
+	}
+
+	/**
 	 * Convert the types to HTML
 	 * with links to the reference page for objects
 	 */
@@ -131,14 +168,14 @@ class Types
 			$this->types,
 			fn (Type $type) => $type->toHtml(linked: $linked)
 		);
-		$types = array_unique($types);
 
 		// if there are no types, use the fallback (as type HTML itself)
 		if (count($types) === 0 && $fallback !== null) {
 			return Type::factory($fallback)->toHtml(linked: $linked);
 		}
 
-		return implode('<span class="px-1 color-gray-400">|</span>', $types);
+		$html = implode('<span class="px-1 color-gray-400">|</span>', $types);
+		return $this->replaceSelf($html, html: true);
 	}
 
 	/**
@@ -146,8 +183,8 @@ class Types
 	 */
 	public function toString(): string
 	{
-		$types = A::map($this->types, fn (Type $type) => $type->toString());
-		$types = array_unique($types);
-		return implode('|', $types);
+		$types  = A::map($this->types, fn (Type $type) => $type->toString());
+		$string = implode('|', $types);
+		return $this->replaceSelf($string);
 	}
 }
