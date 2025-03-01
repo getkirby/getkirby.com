@@ -16,8 +16,8 @@ class Returns
 		ReflectableFunction $reflectable,
 		string|null $context = null
 	): static|null {
-		$types   = $reflectable->reflection->getReturnType();
-		$types ??= $reflectable->doc()->getReturnNode()?->type;
+		$types   = $reflectable->doc()->getReturnNode()?->type;
+		$types ??= $reflectable->reflection->getReturnType();
 
 		if ($types === null) {
 			return null;
