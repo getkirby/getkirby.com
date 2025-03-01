@@ -4,6 +4,9 @@ namespace Kirby\Reference\Reflectable;
 
 use Exception;
 
+/**
+ * Reflectable for a helper function
+ */
 class ReflectableHelperFunction extends ReflectableFunction
 {
 	public function __construct(

@@ -126,8 +126,11 @@ class Types
 	/**
 	 * Replace the self/static/$this types with the actual class name
 	 */
-	protected function replaceSelf(string $string, bool $html = false): string
-	{
+	protected function replaceSelf(
+		string $string,
+		bool $html = false,
+		bool $linked = true
+	): string {
 		if ($this->reflectable === null) {
 			return $string;
 		}
@@ -139,7 +142,6 @@ class Types
 			$type = $this->reflectable->class;
 		}
 
-		$method  = $html ? 'toHtml' : 'toString';
 		$type    = Type::factory($type ?? 'static');
 		$needles = ['static', 'self', '$this'];
 
@@ -153,7 +155,12 @@ class Types
 			);
 		}
 
-		return str_replace($needles, $type->$method(), $string);
+		$result = match ($html) {
+			true  => $type->toHtml(linked: $linked),
+			false => $type->toString()
+		};
+
+		return str_replace($needles, $result, $string);
 	}
 
 	/**
@@ -175,7 +182,7 @@ class Types
 		}
 
 		$html = implode('<span class="px-1 color-gray-400">|</span>', $types);
-		return $this->replaceSelf($html, html: true);
+		return $this->replaceSelf($html, html: true, linked: $linked);
 	}
 
 	/**

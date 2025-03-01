@@ -10,6 +10,9 @@ use ReflectionClass;
 use ReflectionMethod;
 use Reflector;
 
+/**
+ * Reflectable for a class method
+ */
 class ReflectableClassMethod extends ReflectableFunction
 {
 	/**

@@ -2,6 +2,7 @@
 
 namespace Kirby\Reference\Types;
 
+use Exception;
 use Kirby\Reference\Reflectable\Doc;
 use Kirby\Reference\Reflectable\Reflectable;
 use Kirby\Reference\Reflectable\ReflectableClass;
@@ -15,13 +16,12 @@ use ReflectionFunctionAbstract;
 
 /**
  * Resolves all type templates/generics
- * from a class and its parents
+ * from a class and/or function (incl. parents and traits)
  */
 class Context
 {
+	public static array $cache = [];
 	public array $types = [];
-
-	public static $cache = [];
 
 	public function __construct(
 		public ReflectionClass|null $class = null,
@@ -49,6 +49,9 @@ class Context
 		static::$cache[$key] = $this->types;
 	}
 
+	/**
+	 * Update type map from array of already resolved types
+	 */
 	protected function addPayload(array $payload): void
 	{
 		foreach ($payload as $key => $type) {
@@ -58,6 +61,9 @@ class Context
 		}
 	}
 
+	/**
+	 * Add all templates from the docblock to the type map
+	 */
 	protected function addTemplates(Doc $doc): void
 	{
 		foreach ($doc->getTemplates() as $template) {
@@ -67,7 +73,7 @@ class Context
 
 	public static function factory(
 		Reflectable $reflectable
-	): static|null {
+	): static {
 		if ($reflectable instanceof ReflectableClass) {
 			return new static(class: $reflectable->reflection);
 		}
@@ -83,7 +89,7 @@ class Context
 			return new static(function: $reflectable->reflection);
 		}
 
-		return null;
+		throw new Exception('Invalid reflectable for creating context');
 	}
 
 	/**
@@ -94,12 +100,21 @@ class Context
 		return $this->types[$name] ?? $name;
 	}
 
+	/**
+	 * Resolve the templates from a function's docblock by
+	 * mapping param and return tags to their native PHP type hints
+	 */
 	public function resolveFunction(): void
 	{
 		$doc = Doc::factory($this->function);
 
+		// collect all templates from the docblock
 		$this->addTemplates($doc);
 
+		// loop though all docblock param tags to see
+		// if the templates are used here; if so,
+		// map the template to the native PHP type hint
+		// for the given parameter
 		$params = $this->function->getParameters();
 
 		foreach ($doc->getParamTagValues() as $tag) {
@@ -120,6 +135,9 @@ class Context
 			}
 		}
 
+		// check the docblock return tag to see
+		// if the templates are used here; if so,
+		// map the template to the native return PHP type hint
 		if ($return = $doc->getReturnNode()?->type) {
 			$return = trim($return, '()');
 			$return = Str::split($return, '|');
@@ -141,17 +159,18 @@ class Context
 	{
 		$doc = Doc::factory($this->class);
 
-		// add all types from the class' docblock
+		// add all types from the class'/trait's docblock
 		$this->addTemplates($doc);
 
+		// inject already resolved types
 		$this->addPayload($payload);
 
-		// resolve all parent classes
+		// recursively resolve all parent classes
 		if ($extends = $doc->getExtends()) {
 			$this->resolveParent($extends);
 		}
 
-		// resolve all used traits
+		// recursively resolve all used traits
 		if ($uses = $doc->getUses()) {
 			$this->resolveParent($uses);
 		}

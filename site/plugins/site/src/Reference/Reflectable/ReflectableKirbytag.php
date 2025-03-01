@@ -5,6 +5,9 @@ namespace Kirby\Reference\Reflectable;
 use Exception;
 use Kirby\Cms\App;
 
+/**
+ * Reflectable for a Kirbytag
+ */
 class ReflectableKirbytag extends ReflectableFunction
 {
 	protected array $attributes;
@@ -25,11 +28,6 @@ class ReflectableKirbytag extends ReflectableFunction
 	public function attributes(): array
 	{
 		return $this->attributes;
-	}
-
-	public function call(): string
-	{
-		return 'V::' . parent::call();
 	}
 
 	protected function sourceLine(): int|null

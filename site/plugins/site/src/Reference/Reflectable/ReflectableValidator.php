@@ -5,6 +5,9 @@ namespace Kirby\Reference\Reflectable;
 use Exception;
 use Kirby\Toolkit\V;
 
+/**
+ * Reflectable for a validator
+ */
 class ReflectableValidator extends ReflectableFunction
 {
 	public function __construct(
