@@ -1,4 +1,4 @@
-Title: $site
+Name: Site
 
 ----
 

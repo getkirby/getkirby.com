@@ -1,7 +1,5 @@
-Title: $block
+Name: Block
 
 ----
 
 Class: Kirby\Cms\Block
-
-----

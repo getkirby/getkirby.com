@@ -88,7 +88,9 @@ class ReferenceClassMethodPage extends ReferencePage
 
 	public function title(): Field
 	{
-		return parent::title()->value($this->reflection()->name() . '()');
+		$class = $this->parent()->content()->get('name')->value();
+		$name  = $this->reflection()->name(class: $class);
+		return parent::title()->value($name . '()');
 	}
 
 	public function reflection(): ReflectableClassMethod
