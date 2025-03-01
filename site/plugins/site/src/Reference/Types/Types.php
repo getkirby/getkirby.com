@@ -4,8 +4,8 @@ namespace Kirby\Reference\Types;
 
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
-use phpDocumentor\Reflection\Type as DocumentorType;
-use phpDocumentor\Reflection\Types\AggregatedType;
+use PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use ReflectionType;
 use ReflectionUnionType;
 
@@ -25,7 +25,7 @@ class Types
 	}
 
 	public static function factory(
-		ReflectionType|DocumentorType|string|null $types = null
+		ReflectionType|TypeNode|string|null $types = null
 	): static {
 		$types ??= [];
 
@@ -39,8 +39,8 @@ class Types
 			$types = $types->getTypes();
 		}
 
-		if ($types instanceof AggregatedType) {
-			$types = iterator_to_array($types->getIterator());
+		if ($types instanceof UnionTypeNode) {
+			$types = $types->types;
 		}
 
 		// ensure types is an array

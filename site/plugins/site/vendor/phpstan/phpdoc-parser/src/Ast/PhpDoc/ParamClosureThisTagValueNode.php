@@ -6,7 +6,7 @@ use PHPStan\PhpDocParser\Ast\NodeAttributes;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use function trim;
 
-class ParamOutTagValueNode implements PhpDocTagValueNode
+class ParamClosureThisTagValueNode implements PhpDocTagValueNode
 {
 
 	use NodeAttributes;

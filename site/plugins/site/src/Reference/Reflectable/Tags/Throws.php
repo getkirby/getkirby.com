@@ -17,7 +17,7 @@ class Throws
 
 	public static function factory(Reflectable $reflection): static|null
 	{
-		$throws = $reflection->doc->getTagsByName('throws');
+		$throws = $reflection->doc()->getThrowsTagValues();
 
 		if (count($throws) === 0) {
 			return null;

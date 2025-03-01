@@ -6,8 +6,8 @@
 		}
 	},
 	"require": {
-		"phpdocumentor/reflection-docblock": "^5.3.0",
-		"caxy/php-htmldiff": "^0.1.15"
+		"caxy/php-htmldiff": "^0.1.15",
+		"phpstan/phpdoc-parser": "^2.1.0"
 	},
 	"replace": {
 		"ezyang/htmlpurifier": "*"

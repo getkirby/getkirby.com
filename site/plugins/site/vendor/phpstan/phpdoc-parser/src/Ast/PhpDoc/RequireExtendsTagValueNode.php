@@ -3,20 +3,20 @@
 namespace PHPStan\PhpDocParser\Ast\PhpDoc;
 
 use PHPStan\PhpDocParser\Ast\NodeAttributes;
-use PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use function trim;
 
-class ImplementsTagValueNode implements PhpDocTagValueNode
+class RequireExtendsTagValueNode implements PhpDocTagValueNode
 {
 
 	use NodeAttributes;
 
-	public GenericTypeNode $type;
+	public TypeNode $type;
 
 	/** @var string (may be empty) */
 	public string $description;
 
-	public function __construct(GenericTypeNode $type, string $description)
+	public function __construct(TypeNode $type, string $description)
 	{
 		$this->type = $type;
 		$this->description = $description;

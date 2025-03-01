@@ -17,17 +17,11 @@ class ReflectableFieldMethod extends ReflectableFunction
 
 		if ($method = Field::$methods[$name] ?? null) {
 			$this->reflection = new ReflectionFunction($method);
-		}
-
-		if (method_exists(Field::class, $name) === true) {
+		} else if (method_exists(Field::class, $name) === true) {
 			$this->reflection = new ReflectionMethod(Field::class, $name);
-		}
-
-		if (isset($this->reflection) === false) {
+		} else {
 			throw new Exception('Field method "' . $name . '" not found');
 		}
-
-		$this->setDoc();
 	}
 
 	public function aliases(): array

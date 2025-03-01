@@ -23,7 +23,6 @@ abstract class ReflectableFunction extends Reflectable
 		public string|Closure $function
 	) {
 		$this->reflection = new ReflectionFunction($function);
-		$this->setDoc();
 	}
 
 	public function call(): string
