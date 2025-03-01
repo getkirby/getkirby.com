@@ -30,12 +30,13 @@ class Parameter
 
 	public static function factory(
 		ReflectionParameter $parameter,
-		ParamTagValueNode|null $doc = null
+		ParamTagValueNode|null $doc = null,
+		string|null $context = null
 	): static {
 		$name    = $parameter->getName();
 		$types   = $parameter->getType();
 		$types ??= $doc?->type;
-		$types   = Types::factory($types);
+		$types   = Types::factory($types, $context);
 
 		return new static(
 			name:        $name,

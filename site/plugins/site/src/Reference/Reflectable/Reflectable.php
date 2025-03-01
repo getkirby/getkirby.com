@@ -29,7 +29,7 @@ abstract class Reflectable
 
 	public function doc(): Doc
 	{
-		return $this->doc ??= Doc::factory($this);
+		return $this->doc ??= Doc::factory($this->reflection);
 	}
 
 	public function isDeprecated(): bool
