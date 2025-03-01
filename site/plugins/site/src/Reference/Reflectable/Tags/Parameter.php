@@ -34,8 +34,8 @@ class Parameter
 		string|null $context = null
 	): static {
 		$name    = $parameter->getName();
-		$types   = $parameter->getType();
-		$types ??= $doc?->type;
+		$types   = $doc?->type;
+		$types ??= $parameter->getType();
 		$types   = Types::factory($types, $context);
 
 		return new static(
