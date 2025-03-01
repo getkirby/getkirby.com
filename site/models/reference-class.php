@@ -113,9 +113,13 @@ class ReferenceClassPage extends ReferenceSectionPage
 
 	public function name(bool $short = false): string
 	{
-		return
-			$this->content()->get('name')->value() ??
-			$this->reflection()->name(short: $short);
+		$name = $this->content()->get('name');
+
+		if ($short === true && $name->isNotEmpty()) {
+			return $name->value();
+		}
+
+		return $this->reflection()->name(short: $short);
 	}
 
 	public function searchbyline(): Field
@@ -127,8 +131,13 @@ class ReferenceClassPage extends ReferenceSectionPage
 
 	public function title(): Field
 	{
-		$title = $this->name(short: true);
-		return parent::title()->value($title);
+		$name = $this->name(short: true);
+
+		if ($this->content()->get('name')->isNotEmpty()) {
+			$name = '$' . strtolower($name);
+		}
+
+		return parent::title()->value($name);
 	}
 
 	public function reflection(): ReflectableClass

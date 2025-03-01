@@ -1,7 +1,3 @@
-Title: $kirby
-
-----
-
 Name: Kirby
 
 ----

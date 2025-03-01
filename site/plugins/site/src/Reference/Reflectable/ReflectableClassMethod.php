@@ -55,17 +55,19 @@ class ReflectableClassMethod extends ReflectableFunction
 		return substr($this->method, 0, 2) === '__';
 	}
 
-	public function name(): string
+	public function name(string|null $class = null): string
 	{
+		$class ??= $this->class(true);
+
 		if ($this->method === '__construct') {
-			return 'new ' . $this->class(true);
+			return 'new ' . $class;
 		}
 
 		if ($this->isStatic() === true) {
-			return $this->class(true) . '::' . $this->method;
+			return $class . '::' . $this->method;
 		}
 
-		return '$' . strtolower($this->class(true)) . '->' . $this->method;
+		return '$' . strtolower($class) . '->' . $this->method;
 	}
 
 	protected function sourcePath(): string

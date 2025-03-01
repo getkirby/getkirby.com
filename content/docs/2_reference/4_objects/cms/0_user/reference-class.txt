@@ -1,4 +1,4 @@
-Title: $user
+Name: User
 
 ----
 

@@ -1,4 +1,4 @@
-Title: $responder
+Name: Responder
 
 ----
 
