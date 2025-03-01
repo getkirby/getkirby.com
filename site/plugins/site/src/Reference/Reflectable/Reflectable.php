@@ -8,6 +8,9 @@ use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Reference\Reflectable\Tags\Throws;
 use Reflector;
 
+/**
+ * Base class for all reflectable entities
+ */
 abstract class Reflectable
 {
 	public Doc $doc;
@@ -57,6 +60,10 @@ abstract class Reflectable
 		return $this->since ??= Since::factory($this);
 	}
 
+	/**
+	 * Get the URL to the source code on GitHub
+	 * incl. line number if available
+	 */
 	public function source(): string|null
 	{
 		if (method_exists($this, 'sourcePath') === false) {

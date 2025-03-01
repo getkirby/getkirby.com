@@ -22,15 +22,17 @@ class Parameters
 
 	public static function factory(
 		ReflectableFunction $reflectable,
-		string|null $context = null
 	): static {
 		$parameters = [];
 
 		// iterate over all parameters
 		foreach ($reflectable->reflection->getParameters() as $parameter) {
-			$name = $parameter->getName();
-			$doc  = $reflectable->doc()->getParamNode($name);
-			$parameters[] = Parameter::factory($parameter, $doc, $context);
+			$name         = $parameter->getName();
+			$parameters[] = Parameter::factory(
+				parameter: $parameter,
+				doc:       $reflectable->doc()->getParamNode($name),
+				context:   $reflectable
+			);
 		}
 
 		return new static($parameters);

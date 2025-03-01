@@ -74,12 +74,12 @@ class ReflectableClassMethod extends ReflectableFunction
 
 	public function parameters(): Parameters
 	{
-		return $this->parameters ??= Parameters::factory($this, context: $this->class);
+		return $this->parameters ??= Parameters::factory($this);
 	}
 
 	public function returns(): Returns|null
 	{
-		return $this->returns ??= Returns::factory($this, context: $this->class);
+		return $this->returns ??= Returns::factory($this);
 	}
 
 	protected function sourcePath(): string

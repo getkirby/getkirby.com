@@ -20,12 +20,14 @@ class Deprecated
 
 	public static function factory(Reflectable $reflectable): static|null
 	{
+		// get docblock tag
 		$deprecated = $reflectable->doc()->getDeprecatedTagValues();
 
 		if (count($deprecated) === 0) {
 			return null;
 		}
 
+		// split into version and description
 		$tag     = $deprecated[array_key_first($deprecated)];
 		$tag     = Str::split($tag->description, ' ');
 		$version = array_shift($tag);
