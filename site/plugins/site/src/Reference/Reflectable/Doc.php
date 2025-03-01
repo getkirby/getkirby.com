@@ -31,20 +31,27 @@ class Doc extends PhpDocNode
 			fn ($param) => strtolower($param->parameterName) === $name
 		);
 	}
+
 	public function getReturnNode(): ReturnTagValueNode|null
 	{
-		return $this->getTagByName('@return');
+		$tags = $this->getReturnTagValues();
+
+		if (count($tags) === 0) {
+			return null;
+		}
+
+		return $tags[array_key_first($tags)];
 	}
 
 	public function getTagByName(string $name): PhpDocTagNode|null
 	{
-		$tag = $this->getTagsByName($name);
+		$tags = $this->getTagsByName($name);
 
-		if (count($tag) === 0) {
+		if (count($tags) === 0) {
 			return null;
 		}
 
-		return $tag[array_key_first($tag)];
+		return $tags[array_key_first($tags)];
 	}
 
 	public function getTextNodes(): array
