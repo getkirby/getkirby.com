@@ -13,7 +13,8 @@ class Returns
 	}
 
 	public static function factory(
-		ReflectableFunction $reflectable
+		ReflectableFunction $reflectable,
+		string|null $context = null
 	): static|null {
 		$types   = $reflectable->reflection->getReturnType();
 		$types ??= $reflectable->doc()->getReturnNode()?->type;
@@ -22,7 +23,7 @@ class Returns
 			return null;
 		}
 
-		return new static(types: Types::factory($types));
+		return new static(types: Types::factory($types, $context));
 	}
 
 	public function isMutable(): bool

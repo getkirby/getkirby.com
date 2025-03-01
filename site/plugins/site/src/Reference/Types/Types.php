@@ -2,6 +2,7 @@
 
 namespace Kirby\Reference\Types;
 
+use Kirby\Reference\Reflectable\ReflectableClass;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
@@ -25,7 +26,8 @@ class Types
 	}
 
 	public static function factory(
-		ReflectionType|TypeNode|string|null $types = null
+		ReflectionType|TypeNode|string|null $types = null,
+		string|null $context = null
 	): static {
 		$types ??= [];
 
@@ -65,7 +67,10 @@ class Types
 			$types[] = 'null';
 		}
 
-		$types = A::map($types, fn ($type) => Type::factory(ltrim($type, '?')));
+		$types = A::map($types, fn ($type) => Type::factory(
+			type:    ltrim($type, '?'),
+			context: $context
+		));
 
 		return new static($types);
 	}

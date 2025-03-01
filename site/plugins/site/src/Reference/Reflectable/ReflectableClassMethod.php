@@ -2,6 +2,8 @@
 
 namespace Kirby\Reference\Reflectable;
 
+use Kirby\Reference\Reflectable\Tags\Parameters;
+use Kirby\Reference\Reflectable\Tags\Returns;
 use Kirby\Reference\Types\Identifier;
 use Kirby\Toolkit\Str;
 use ReflectionClass;
@@ -68,6 +70,16 @@ class ReflectableClassMethod extends ReflectableFunction
 		}
 
 		return '$' . strtolower($class) . '->' . $this->method;
+	}
+
+	public function parameters(): Parameters
+	{
+		return $this->parameters ??= Parameters::factory($this, context: $this->class);
+	}
+
+	public function returns(): Returns|null
+	{
+		return $this->returns ??= Returns::factory($this, context: $this->class);
 	}
 
 	protected function sourcePath(): string

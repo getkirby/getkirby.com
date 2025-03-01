@@ -9,16 +9,29 @@ use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ReturnTagValueNode;
+use PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
 use PHPStan\PhpDocParser\Lexer\Lexer;
 use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
 use PHPStan\PhpDocParser\ParserConfig;
+use Reflector;
 use Throwable;
 
 class Doc extends PhpDocNode
 {
+	public function getExtends(): GenericTypeNode|null
+	{
+		$tags = $this->getExtendsTagValues();
+
+		if (count($tags) === 0) {
+			return null;
+		}
+
+		return $tags[array_key_first($tags)]->type;
+	}
+
 	public function getParamNode(string $name): ParamTagValueNode|null
 	{
 		// PHPStan uses names with a $ prefix
@@ -54,6 +67,11 @@ class Doc extends PhpDocNode
 		return $tags[array_key_first($tags)];
 	}
 
+	public function getTemplates(): array
+	{
+		return $this->getTemplateTagValues();
+	}
+
 	public function getTextNodes(): array
 	{
 		return array_filter(
@@ -62,10 +80,10 @@ class Doc extends PhpDocNode
 		);
 	}
 
-	public static function factory(Reflectable $reflection): PhpDocNode
+	public static function factory(Reflector $reflection): PhpDocNode
 	{
 		try {
-			$docblock  = $reflection->reflection->getDocComment();
+			$docblock  = $reflection->getDocComment();
 			$config    = new ParserConfig(usedAttributes: []);
 			$lexer     = new Lexer($config);
 			$constExpr = new ConstExprParser($config);

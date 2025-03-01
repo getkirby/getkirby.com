@@ -42,6 +42,7 @@ return array(
     'Kirby\\Reference\\Reflectable\\ReflectableFunction' => $baseDir . '/src/Reference/Reflectable/ReflectableFunction.php',
     'Kirby\\Reference\\Reflectable\\ReflectableHelperFunction' => $baseDir . '/src/Reference/Reflectable/ReflectableHelperFunction.php',
     'Kirby\\Reference\\Reflectable\\ReflectableKirbytag' => $baseDir . '/src/Reference/Reflectable/ReflectableKirbytag.php',
+    'Kirby\\Reference\\Reflectable\\ReflectableOptions' => $baseDir . '/src/Reference/Reflectable/ReflectableOptions.php',
     'Kirby\\Reference\\Reflectable\\ReflectableValidator' => $baseDir . '/src/Reference/Reflectable/ReflectableValidator.php',
     'Kirby\\Reference\\Reflectable\\Tags\\Deprecated' => $baseDir . '/src/Reference/Reflectable/Tags/Deprecated.php',
     'Kirby\\Reference\\Reflectable\\Tags\\Exception' => $baseDir . '/src/Reference/Reflectable/Tags/Exception.php',

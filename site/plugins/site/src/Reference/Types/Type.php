@@ -35,13 +35,23 @@ class Type
 	) {
 	}
 
-	public static function factory(string $type): static
-	{
+	public static function factory(
+		string $type,
+		string|null $context = null
+	): static {
+		// resolve type templates from class context
+		if ($context) {
+			$context = new Context($context);
+			$type    = $context->resolve($type);
+		}
+
+		// generic simple types
 		if (in_array($type, array_keys(static::$types), true) === true) {
 			return new static($type);
 		}
 
-		return new Identifier($type);
+		// identifier types (class names, interfaces, traits)
+		return new Identifier($type, $context);
 	}
 
 	public function toHtml(

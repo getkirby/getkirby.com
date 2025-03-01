@@ -20,15 +20,17 @@ class Parameters
 		return count($this->parameters);
 	}
 
-	public static function factory(ReflectableFunction $reflectable): static
-	{
+	public static function factory(
+		ReflectableFunction $reflectable,
+		string|null $context = null
+	): static {
 		$parameters = [];
 
 		// iterate over all parameters
 		foreach ($reflectable->reflection->getParameters() as $parameter) {
 			$name = $parameter->getName();
 			$doc  = $reflectable->doc()->getParamNode($name);
-			$parameters[] = Parameter::factory($parameter, $doc);
+			$parameters[] = Parameter::factory($parameter, $doc, $context);
 		}
 
 		return new static($parameters);

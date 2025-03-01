@@ -75,6 +75,7 @@ class ComposerStaticInit7735eedf59144eaf4d78690a66d8bbdf
         'Kirby\\Reference\\Reflectable\\ReflectableFunction' => __DIR__ . '/../..' . '/src/Reference/Reflectable/ReflectableFunction.php',
         'Kirby\\Reference\\Reflectable\\ReflectableHelperFunction' => __DIR__ . '/../..' . '/src/Reference/Reflectable/ReflectableHelperFunction.php',
         'Kirby\\Reference\\Reflectable\\ReflectableKirbytag' => __DIR__ . '/../..' . '/src/Reference/Reflectable/ReflectableKirbytag.php',
+        'Kirby\\Reference\\Reflectable\\ReflectableOptions' => __DIR__ . '/../..' . '/src/Reference/Reflectable/ReflectableOptions.php',
         'Kirby\\Reference\\Reflectable\\ReflectableValidator' => __DIR__ . '/../..' . '/src/Reference/Reflectable/ReflectableValidator.php',
         'Kirby\\Reference\\Reflectable\\Tags\\Deprecated' => __DIR__ . '/../..' . '/src/Reference/Reflectable/Tags/Deprecated.php',
         'Kirby\\Reference\\Reflectable\\Tags\\Exception' => __DIR__ . '/../..' . '/src/Reference/Reflectable/Tags/Exception.php',

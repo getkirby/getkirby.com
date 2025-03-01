@@ -13,8 +13,9 @@ use ReflectionClass;
 class Identifier extends Type
 {
 	public function __construct(
-		public string $type
+		public string $type,
 	) {
+		$this->type = ltrim($this->type, '\\');
 	}
 
 	protected function page(): ReferenceClassPage|ReferenceClassMethodPage|ReferenceFieldMethodPage|ReferenceHelperPage|null
