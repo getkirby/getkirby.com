@@ -22,7 +22,7 @@ class Returns
 			return null;
 		}
 
-		$types = Types::factory($types, context: $reflectable);
+		$types = Types::factory($types, $reflectable);
 		return new static($types);
 	}
 
