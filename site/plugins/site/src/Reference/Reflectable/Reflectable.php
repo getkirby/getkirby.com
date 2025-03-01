@@ -6,14 +6,11 @@ use Kirby\Cms\App;
 use Kirby\Reference\Reflectable\Tags\Deprecated;
 use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Reference\Reflectable\Tags\Throws;
-use phpDocumentor\Reflection\DocBlock;
-use phpDocumentor\Reflection\DocBlockFactory;
 use Reflector;
-use Throwable;
 
 abstract class Reflectable
 {
-	public DocBlock $doc;
+	public Doc $doc;
 	public Reflector $reflection;
 
 	protected Deprecated|null $deprecated = null;
@@ -30,6 +27,11 @@ abstract class Reflectable
 		return $this->deprecated ??= Deprecated::factory($this);
 	}
 
+	public function doc(): Doc
+	{
+		return $this->doc ??= Doc::factory($this);
+	}
+
 	public function isDeprecated(): bool
 	{
 		return $this->deprecated() !== null;
@@ -37,33 +39,19 @@ abstract class Reflectable
 
 	public function isInternal(): bool
 	{
-		$tag = $this->doc->getTagsByName('internal')[0] ?? null;
-		return $tag !== null;
+		return $this->doc()->getTagByName('@internal') !== null;
 	}
 
 	public function summary(): string|null
 	{
-		$summary = $this->doc->getSummary();
-		$summary = trim($summary);
-		$summary = str_replace(PHP_EOL, ' ', $summary);
+		$nodes = $this->doc()->getTextNodes();
+		$nodes = array_map(
+			fn ($node) => str_replace(PHP_EOL, ' ', $node->text),
+			$nodes
+		);
 
-		if ($summary === '/') {
-			$summary = null;
-		}
-
-		return $summary;
+		return implode(PHP_EOL . PHP_EOL, $nodes);
 	}
-
-	protected function setDoc(): void
-	{
-		try {
-			$comment   = $this->reflection->getDocComment();
-			$this->doc = DocBlockFactory::createInstance()->create($comment);
-		} catch (Throwable) {
-			$this->doc = new DocBlock();
-		}
-	}
-
 	public function since(): Since|null
 	{
 		return $this->since ??= Since::factory($this);

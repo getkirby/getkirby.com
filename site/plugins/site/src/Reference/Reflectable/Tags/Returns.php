@@ -16,8 +16,7 @@ class Returns
 		ReflectableFunction $reflectable
 	): static|null {
 		$types   = $reflectable->reflection->getReturnType();
-		$tag     = $reflectable->doc->getTagsByName('return')[0] ?? null;
-		$types ??= $tag?->getType();
+		$types ??= $reflectable->doc()->getReturnNode()?->type;
 
 		if ($types === null) {
 			return null;

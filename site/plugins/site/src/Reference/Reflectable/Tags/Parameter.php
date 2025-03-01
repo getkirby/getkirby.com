@@ -3,7 +3,7 @@
 namespace Kirby\Reference\Reflectable\Tags;
 
 use Kirby\Reference\Types\Types;
-use phpDocumentor\Reflection\DocBlock\Tags\Param;
+use PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode;
 use ReflectionParameter;
 
 class Parameter
@@ -30,18 +30,18 @@ class Parameter
 
 	public static function factory(
 		ReflectionParameter $parameter,
-		Param|null $doc = null
+		ParamTagValueNode|null $doc = null
 	): static {
 		$name    = $parameter->getName();
 		$types   = $parameter->getType();
-		$types ??= $doc?->getType();
+		$types ??= $doc?->type;
 		$types   = Types::factory($types);
 
 		return new static(
 			name:        $name,
 			types:       $types,
 			default:     static::factoryDefault($parameter),
-			description: $doc?->getDescription()?->getBodyTemplate(),
+			description: $doc?->description,
 			isRequired:  $parameter->isOptional() === false,
 			isVariadic:  $parameter->isVariadic()
 		);

@@ -23,17 +23,11 @@ class Parameters
 	public static function factory(ReflectableFunction $reflectable): static
 	{
 		$parameters = [];
-		$docs       = $reflectable->doc->getTagsByName('param');
 
 		// iterate over all parameters
 		foreach ($reflectable->reflection->getParameters() as $parameter) {
-			// get the name
 			$name = $parameter->getName();
-			// find the matching doc block parameter
-			$doc = A::find(
-				$docs,
-				fn ($p) => strtolower($p->getVariableName()) === strtolower($name)
-			);
+			$doc  = $reflectable->doc()->getParamNode($name);
 			$parameters[] = Parameter::factory($parameter, $doc);
 		}
 

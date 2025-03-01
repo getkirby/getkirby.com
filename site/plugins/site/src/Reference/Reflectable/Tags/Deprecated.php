@@ -3,6 +3,7 @@
 namespace Kirby\Reference\Reflectable\Tags;
 
 use Kirby\Reference\Reflectable\Reflectable;
+use Kirby\Toolkit\Str;
 
 class Deprecated
 {
@@ -19,18 +20,23 @@ class Deprecated
 
 	public static function factory(Reflectable $reflectable): static|null
 	{
-		/**
-		 * @var \phpDocumentor\Reflection\DocBlock\Tags\Deprecated|null
-		 */
-		$tag = $reflectable->doc->getTagsByName('deprecated')[0] ?? null;
+		$deprecated = $reflectable->doc()->getDeprecatedTagValues();
 
-		if ($tag === null) {
+		if (count($deprecated) === 0) {
 			return null;
 		}
 
+		$tag     = $deprecated[array_key_first($deprecated)];
+		$tag     = Str::split($tag->description, ' ');
+		$version = array_shift($tag);
+
+		if (count($tag) > 0) {
+			$description = implode(' ', $tag);
+		}
+
 		return new static(
-			version:     $tag->getVersion(),
-			description: $tag->getDescription()?->getBodyTemplate()
+			version:     $version,
+			description: $description ?? null
 		);
 	}
 

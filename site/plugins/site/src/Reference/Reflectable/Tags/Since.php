@@ -15,16 +15,13 @@ class Since
 
 	public static function factory(Reflectable $reflection): static|null
 	{
-		/**
-		 * @var \phpDocumentor\Reflection\DocBlock\Tags\Since|null
-		 */
-		$tag = $reflection->doc->getTagsByName('since')[0] ?? null;
+		$tag = $reflection->doc()->getTagByName('@since');
 
 		if ($tag === null) {
 			return null;
 		}
 
-		$since   = $tag->getVersion();
+		$since   = $tag->value->value;
 		$current = App::instance()->version();
 
 		// ignore any versions but the current major version

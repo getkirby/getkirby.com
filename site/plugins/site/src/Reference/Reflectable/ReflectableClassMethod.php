@@ -20,7 +20,6 @@ class ReflectableClassMethod extends ReflectableFunction
 		public string $method
 	) {
 		$this->reflection = new ReflectionMethod($class, $method);
-		$this->setDoc();
 	}
 
 	public function class(

@@ -17,7 +17,6 @@ class ReflectableClass extends Reflectable
 		public string $name
 	) {
 		$this->reflection = new ReflectionClass($name);
-		$this->setDoc();
 	}
 
 	public function alias(): string|null

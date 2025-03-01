@@ -3,7 +3,7 @@
 namespace Kirby\Reference\Reflectable\Tags;
 
 use Kirby\Reference\Types\Types;
-use phpDocumentor\Reflection\DocBlock\Tags\Throws;
+use PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode;
 
 class Exception
 {
@@ -18,11 +18,11 @@ class Exception
 		return $this->description;
 	}
 
-	public static function factory(Throws $tag): static|null
+	public static function factory(ThrowsTagValueNode $tag): static|null
 	{
 		return new static(
-			types:       Types::factory($tag->getType()),
-			description: $tag->getDescription()
+			types:       Types::factory($tag->type),
+			description: $tag->description
 		);
 	}
 
