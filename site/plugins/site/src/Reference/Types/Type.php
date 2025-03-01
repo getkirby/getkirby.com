@@ -37,12 +37,32 @@ class Type
 
 	public static function factory(string $type): static {
 		// generic simple types
-		if (in_array($type, array_keys(static::$types), true) === true) {
+		if (static::generic($type) !== null) {
 			return new static($type);
 		}
 
 		// identifier types (class names, interfaces, traits)
 		return new Identifier($type);
+	}
+
+	public static function generic(string $type): string|null
+	{
+		$generic = static::$types[$type] ?? null;
+
+		if (
+			(
+				str_starts_with($type, '\'') === true &&
+				str_ends_with($type, '\'') === true
+			) ||
+			(
+				str_starts_with($type, '"') === true &&
+				str_ends_with($type, '"') === true
+			)
+		) {
+			$generic ??= 'string';
+		}
+
+		return $generic;
 	}
 
 	public function toHtml(
@@ -53,7 +73,7 @@ class Type
 		$text ??= $this->toString();
 
 		return Html::tag('code', $text, [
-			'class' => 'type type-' . static::$types[$this->type] ?? 'mixed'
+			'class' => 'type type-' . static::generic($this->type) ?? null
 		]);
 	}
 
