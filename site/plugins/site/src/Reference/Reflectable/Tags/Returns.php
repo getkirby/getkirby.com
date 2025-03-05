@@ -8,22 +8,31 @@ use Kirby\Reference\Types\Types;
 class Returns
 {
 	public function __construct(
-		public Types $types
+		public Types $types,
+		public string|null $description = null
 	) {
+	}
+
+	public function description(): string|null
+	{
+		return $this->description;
 	}
 
 	public static function factory(
 		ReflectableFunction $reflectable
 	): static|null {
-		$types   = $reflectable->doc()->getReturnNode()?->type;
+		$tag     = $reflectable->doc()->getReturnNode();
+		$types   = $tag?->type;
 		$types ??= $reflectable->reflection->getReturnType();
 
 		if ($types === null) {
 			return null;
 		}
 
-		$types = Types::factory($types, $reflectable);
-		return new static($types);
+		$types       = Types::factory($types, $reflectable);
+		$description = $tag?->description;
+
+		return new static($types, $description);
 	}
 
 	public function isMutable(): bool
@@ -42,13 +51,8 @@ class Returns
 		return $this->types->has('void');
 	}
 
-	public function toHtml(): string
+	public function types(): Types
 	{
-		return $this->types->toHtml();
-	}
-
-	public function toString(): string
-	{
-		return $this->types->toString();
+		return $this->types;
 	}
 }
