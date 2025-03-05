@@ -22,7 +22,8 @@ class ReflectableClassMethod extends ReflectableFunction
 
 	public function __construct(
 		public string $class,
-		public string $method
+		public string $method,
+		public string|null $classalias = null
 	) {
 		$this->reflection = new ReflectionMethod($class, $method);
 	}
@@ -60,9 +61,9 @@ class ReflectableClassMethod extends ReflectableFunction
 		return substr($this->method, 0, 2) === '__';
 	}
 
-	public function name(string|null $class = null): string
+	public function name(): string
 	{
-		$class ??= $this->class(true);
+		$class = $this->classalias ?? $this->class(true);
 
 		if ($this->method === '__construct') {
 			return 'new ' . $class;
