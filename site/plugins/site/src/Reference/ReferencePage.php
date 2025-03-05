@@ -4,6 +4,7 @@ namespace Kirby\Reference;
 
 use DefaultPage;
 use Kirby\Content\Field;
+use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Template\Template;
 
 abstract class ReferencePage extends DefaultPage
@@ -42,6 +43,23 @@ abstract class ReferencePage extends DefaultPage
 
 	public function reflection()
 	{
+		return null;
+	}
+
+	/**
+	 * Get the since tag either from the
+	 * content field or the reflection
+	 */
+	public function since(): Since|null
+	{
+		if ($since = $this->content()->get('since')->value()) {
+			return new Since($since);
+		}
+
+		if ($reflection = $this->reflection()) {
+			return $reflection->since();
+		}
+
 		return null;
 	}
 

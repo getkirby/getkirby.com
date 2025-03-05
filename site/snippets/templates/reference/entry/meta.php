@@ -1,15 +1,22 @@
 <?php
 
 use Kirby\Cms\App;
+use Kirby\Content\Field;
 use Kirby\Reference\Reflectable\ReflectableClass;
+use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Toolkit\Str;
 
 $reflection = $page->reflection();
+$since      = $page->since();
+
+if ($since instanceof Field && $version = $since->value()) {
+	$since = new Since($version);
+}
 ?>
 
 <!-- Meta list -->
 <ul class="reference-meta">
-	<?php if ($since = $reflection?->since()): ?>
+	<?php if ($since instanceof Since): ?>
 	<li class="since">Since <?= $since->toHtml() ?></li>
 	<?php endif ?>
 
