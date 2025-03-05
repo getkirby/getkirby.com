@@ -9,8 +9,14 @@ use Kirby\Toolkit\Str;
 $reflection = $page->reflection();
 $since      = $page->since();
 
+// consider content field as since tag
 if ($since instanceof Field && $version = $since->value()) {
 	$since = new Since($version);
+}
+
+// prevent false positives from empty content fields
+if ($reflection instanceof Field) {
+	$reflection = null;
 }
 ?>
 
