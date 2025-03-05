@@ -12,7 +12,7 @@ use Reflector;
 /**
  * Reflectable abstract for functions
  */
-abstract class ReflectableFunction extends Reflectable
+class ReflectableFunction extends Reflectable
 {
 	/**
 	 * @var \ReflectionMethod
