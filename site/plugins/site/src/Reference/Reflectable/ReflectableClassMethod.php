@@ -73,7 +73,7 @@ class ReflectableClassMethod extends ReflectableFunction
 			return $class . '::' . $this->method;
 		}
 
-		return '$' . strtolower($class) . '->' . $this->method;
+		return '$' . Str::camel($class) . '->' . $this->method;
 	}
 
 	public function parameters(): Parameters
