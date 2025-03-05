@@ -33,8 +33,8 @@ class ReflectableFunction extends Reflectable
 		$parameters = $this->parameters()->toString();
 		$call       = $this->name() . '(' . $parameters . ')';
 
-		if ($return = $this->returns()) {
-			$call .= ': ' . $return->toString();
+		if ($returns = $this->returns()) {
+			$call .= ': ' . $returns->types()->toString();
 		}
 
 		return $call;
