@@ -88,16 +88,16 @@ class ReferenceClassMethodPage extends ReferencePage
 
 	public function title(): Field
 	{
-		$class = $this->parent()->content()->get('name')->value();
-		$name  = $this->reflection()->name(class: $class);
+		$name = $this->reflection()->name();
 		return parent::title()->value($name . '()');
 	}
 
 	public function reflection(): ReflectableClassMethod
 	{
 		return $this->reflection ??= new ReflectableClassMethod(
-			$this->parent()->name(short: false),
-			$this->name()
+			class: $this->class(short: false),
+			method: $this->name(),
+			classalias: $this->parent()->content()->get('name')->value()
 		);
 	}
 }
