@@ -10,13 +10,17 @@ $returns    = $reflection->returns();
 	$reflection instanceof ReflectableFunction &&
 	$returns?->isVoid() === false
 ): ?>
-	<h2 id="returns"><a href="#returns">Return type</a></h2>
+	<h2 id="returns">
+		<a href="#returns">
+			Return <?= $returns->types()->count() > 1 ? 'types' : 'type' ?>
+		</a>
+	</h2>
+
 	<p><?= $returns->types()->toHtml() ?></p>
 
 	<?php if ($description = $returns->description()): ?>
 	<p><?= $description ?></p>
 	<?php endif ?>
-
 
 	<?php if ($reflection->isStatic() === false): ?>
 		<?php if ($returns->isImmutable()): ?>

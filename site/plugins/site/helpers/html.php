@@ -114,11 +114,13 @@ function json(array $data, bool $pretty = true): string|false
 	return json_encode($data);
 }
 
-function required(bool $required): string|null
-{
+function required(
+	bool $required,
+	string|null $text = null
+): string|null {
 	return match ($required) {
-		true    => '<span class="required-mark">*</span>',
-		default => null
+		true    => '<span class="required-mark">' . $text . '<span aria-hidden="true" title="required">*</span><span class="sr-only">required</span></span>',
+		default => $text
 	};
 }
 

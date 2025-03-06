@@ -294,7 +294,7 @@ html {
 	}
 }
 
-.required-mark {
+.required-mark > span {
 	padding-left: 0.2rem;
 	color: var(--color-blue-600);
 }
