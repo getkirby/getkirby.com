@@ -89,8 +89,8 @@ if ($reflection instanceof Field) {
 <div class="prose">
 	<div class="box box--warning">
 		<?php snippet('kirbytext/box', [
-			'type' => 'alert',
-			'text' => '`' . $page->title() . '` has been marked as internal. It might be changed in a future Kirby major or minor release without being considered a breaking change. Use with caution.'
+			'type' => 'lab',
+			'text' => '`' . $page->title() . '` has been <b>marked as internal</b>. It might be changed in a future Kirby major or minor release without being considered a breaking change. Use with caution.'
 		]) ?>
 	</div>
 </div>
@@ -99,10 +99,10 @@ if ($reflection instanceof Field) {
 <!-- Advanced notice -->
 <?php if ($page->isAdvanced() === true): ?>
 <div class="prose">
-	<div class="box box--warning">
+	<div class="box box--info">
 		<?php snippet('kirbytext/box', [
-			'type' => 'info',
-			'text' => '`' . $page->title() . '` has been marked as advanced. You should only use it if you know what you are doing.'
+			'icon' => 'lab',
+			'text' => '`' . $page->title() . '` has been <b>marked as advanced</b>. You should only make use of it if you are well familiar with Kirby and  know what you are doing. We might not be able to offer meaningful support.'
 		]) ?>
 	</div>
 </div>
