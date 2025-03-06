@@ -2,7 +2,6 @@
 
 namespace Kirby\Reference;
 
-use Kirby\Cms\Pages;
 use Kirby\Template\Template;
 
 abstract class ReferenceSectionPage extends ReferencePage

@@ -7,7 +7,6 @@ return function (Page $page) {
 		'entries' => $page
 			->children()
 			->listed()
-			->filterBy('isDeprecated', false)
-			->filterBy('isInternal', false)
+			->filterBy('isEntry', true)
 	];
 };

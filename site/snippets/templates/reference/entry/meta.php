@@ -1,28 +1,16 @@
 <?php
 
 use Kirby\Cms\App;
-use Kirby\Content\Field;
 use Kirby\Reference\Reflectable\ReflectableClass;
-use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Toolkit\Str;
 
 $reflection = $page->reflection();
 $since      = $page->since();
-
-// consider content field as since tag
-if ($since instanceof Field && $version = $since->value()) {
-	$since = new Since($version);
-}
-
-// prevent false positives from empty content fields
-if ($reflection instanceof Field) {
-	$reflection = null;
-}
 ?>
 
 <!-- Meta list -->
 <ul class="reference-meta">
-	<?php if ($since instanceof Since): ?>
+	<?php if ($since): ?>
 	<li class="since">Since <?= $since->toHtml() ?></li>
 	<?php endif ?>
 
@@ -91,18 +79,6 @@ if ($reflection instanceof Field) {
 		<?php snippet('kirbytext/box', [
 			'type' => 'lab',
 			'text' => '`' . $page->title() . '` has been <b>marked as internal</b>. It might be changed in a future Kirby major or minor release without being considered a breaking change. Use with caution.'
-		]) ?>
-	</div>
-</div>
-<?php endif ?>
-
-<!-- Advanced notice -->
-<?php if ($page->isAdvanced() === true): ?>
-<div class="prose">
-	<div class="box box--info">
-		<?php snippet('kirbytext/box', [
-			'icon' => 'lab',
-			'text' => '`' . $page->title() . '` has been <b>marked as advanced</b>. You should only make use of it if you are well familiar with Kirby and  know what you are doing. We might not be able to offer meaningful support.'
 		]) ?>
 	</div>
 </div>

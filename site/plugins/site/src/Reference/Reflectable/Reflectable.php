@@ -35,15 +35,6 @@ abstract class Reflectable
 		return $this->doc ??= Doc::factory($this->reflection);
 	}
 
-	/**
-	 * Object has been marked as advanced.
-	 * Used to display a warning on the entry.
-	 */
-	public function isAdvanced(): bool
-	{
-		return $this->doc()->getTagByName('@advanced') !== null;
-	}
-
 	public function isDeprecated(): bool
 	{
 		return $this->deprecated() !== null;
