@@ -1,5 +1,5 @@
 <?php
-$icon = match ($type) {
+$icon ??= match ($type) {
 	'success' => 'smile',
 	default   => $type
 };
