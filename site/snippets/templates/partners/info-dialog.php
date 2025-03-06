@@ -65,5 +65,5 @@
 			</ul>
 		</div>
 	</form>
-	<button form="infoDialogForm" class="info-dialog-cancel-button"><?= icon('cancel-small') ?></button>
+	<button form="infoDialogForm" class="info-dialog-cancel-button" aria-label="Close dialog"><?= icon('cancel-small') ?></button>
 </dialog>
