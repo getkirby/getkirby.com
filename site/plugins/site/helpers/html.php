@@ -60,11 +60,11 @@ function icon(
 
 	if ($title) {
 		$id   = Str::uuid();
-		$svg->addAttribute('role', 'img');
-		$svg->addAttribute('aria-labelledby', $id);
+		$svg['role'] = 'img';
+		$svg['aria-labelledby'] = $id;
 		$svg->prependChild('title', $title)->addAttribute('id', $id);
 	} elseif (isset($svg->title) === false) {
-		$svg->addAttribute('aria-hidden', 'true');
+		$svg['aria-hidden'] = 'true';
 	}
 
 	return $svg->asXML();
