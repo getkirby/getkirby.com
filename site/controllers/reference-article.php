@@ -7,7 +7,7 @@ return function (Page $page) {
 	// use the siblings of the parent article for entries list
 	if ($page->depth() > 5) {
 		$entry   = $page->parents()->flip()->nth(4);
-		$entries = $entry->siblings()->listed()->filterBy('isDeprecated', false)->filterBy('isInternal', false);
+		$entries = $entry->siblings()->listed();
 	}
 
 	return [

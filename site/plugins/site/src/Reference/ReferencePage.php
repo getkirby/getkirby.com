@@ -3,6 +3,7 @@
 namespace Kirby\Reference;
 
 use DefaultPage;
+use Kirby\Cms\Pages;
 use Kirby\Content\Field;
 use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Template\Template;
@@ -22,14 +23,14 @@ abstract class ReferencePage extends DefaultPage
 		return new Field($this, 'intro', $this->reflection()?->summary());
 	}
 
-	public function isAdvanced(): bool
-	{
-		return $this->reflection()?->isAdvanced() ?? false;
-	}
-
 	public function isDeprecated(): bool
 	{
 		return $this->reflection()?->isDeprecated() ?? false;
+	}
+
+	public function isEntry(): bool
+	{
+		return $this->isDeprecated() === false && $this->isInternal() === false;
 	}
 
 	public function isInternal(): bool
