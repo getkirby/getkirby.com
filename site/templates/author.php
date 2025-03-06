@@ -17,7 +17,7 @@
 	</span>
 
 	<a href="<?= $page->website() ?>" class="pill">
-		<span class="mr-3"><?= icon('globe') ?></span>
+		<span class="mr-3"><?= icon('globe', 'Website') ?></span>
 		<span class="link"><?= $page->website()->shortUrl() ?></span>
 	</a>
 </div>

@@ -9,7 +9,7 @@
 							<?= $recipe->parent()->title() ?>
 							<?php if ($recipe->isNew()): ?>
 								<span style="color: var(--color-yellow-500)">
-									<?= icon('bolt') ?>
+									<?= icon('bolt', '(New recipe)') ?>
 								</span>
 							<?php endif ?>
 						</p>
