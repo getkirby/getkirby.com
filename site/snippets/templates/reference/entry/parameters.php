@@ -38,9 +38,7 @@ $parameters      = $parameters?->toArray() ?? [];
 			<?php foreach ($parameters as $parameter): ?>
 			<tr>
 				<td>
-					<?= $parameter->isVariadic() ? '...' : null ?>
-					<?= $parameter->name() ?>
-					<?= required($parameter->isRequired()) ?>
+					<?= required($parameter->isRequired(), $parameter->name()) ?>
 				</td>
 				<td><?= $parameter->types()->toHtml(fallback: 'mixed') ?></td>
 
@@ -48,7 +46,8 @@ $parameters      = $parameters?->toArray() ?? [];
 					<?php if ($default = $parameter->default()): ?>
 					<code><?= $default ?></code>
 					<?php else: ?>
-					<span>–</span>
+					<span aria-hidden="true">–</span>
+					<span class="sr-only">no default value</span>
 					<?php endif ?>
 				</td>
 

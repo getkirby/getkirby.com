@@ -95,16 +95,18 @@ class Parameter
 
 	public function name(): string
 	{
-		return '$' . $this->name;
+		$name = '$' . $this->name;
+
+		if ($this->isVariadic() === true) {
+			$name = '...' . $name;
+		}
+
+		return $name;
 	}
 
 	public function toString(): string
 	{
 		$string = $this->name();
-
-		if ($this->isVariadic === true) {
-			$string = '...' . $string;
-		}
 
 		// combine the types and the name
 		$string = trim($this->types->toString() . ' ' . $string);

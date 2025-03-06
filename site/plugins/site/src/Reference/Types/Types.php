@@ -28,6 +28,11 @@ class Types
 	) {
 	}
 
+	public function count(): int
+	{
+		return count($this->types);
+	}
+
 	/**
 	 * Create a new Types instance from either a PHP reflection type,
 	 * a PHPStan type node or a simple string.
@@ -181,7 +186,7 @@ class Types
 			return Type::factory($fallback)->toHtml(linked: $linked);
 		}
 
-		$html = implode('<span class="px-1 color-gray-400">|</span>', $types);
+		$html = implode('<span class="px-1 color-gray-400" aria-hidden="true">|</span><span class="sr-only">or</span>', $types);
 		return $this->replaceSelf($html, html: true, linked: $linked);
 	}
 
