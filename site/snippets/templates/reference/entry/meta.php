@@ -85,12 +85,24 @@ if ($reflection instanceof Field) {
 <?php endif ?>
 
 <!-- Internal notice -->
-<?php if ($reflection?->isInternal() === true): ?>
+<?php if ($page->isInternal() === true): ?>
 <div class="prose">
 	<div class="box box--warning">
 		<?php snippet('kirbytext/box', [
 			'type' => 'alert',
 			'text' => '`' . $page->title() . '` has been marked as internal. It might be changed in a future Kirby major or minor release without being considered a breaking change. Use with caution.'
+		]) ?>
+	</div>
+</div>
+<?php endif ?>
+
+<!-- Advanced notice -->
+<?php if ($page->isAdvanced() === true): ?>
+<div class="prose">
+	<div class="box box--warning">
+		<?php snippet('kirbytext/box', [
+			'type' => 'info',
+			'text' => '`' . $page->title() . '` has been marked as advanced. You should only use it if you know what you are doing.'
 		]) ?>
 	</div>
 </div>

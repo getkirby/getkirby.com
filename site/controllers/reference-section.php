@@ -8,5 +8,6 @@ return function (Page $page) {
 			->children()
 			->listed()
 			->filterBy('isDeprecated', false)
+			->filterBy('isInternal', false)
 	];
 };
