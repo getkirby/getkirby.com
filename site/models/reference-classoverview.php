@@ -11,14 +11,15 @@ class ReferenceClassOverviewPage extends LinkPage
 	 */
 	public function isOpen(): bool
 	{
-		$current  = $this->site()->page();
-		$featured = [
+		$current = $this->site()->page()->id();
+		$ignore  = [
 			...page('docs/reference/objects')->menu()->yaml(),
-			...page('docs/reference/tools')->menu()->yaml()
+			...page('docs/reference/tools')->menu()->yaml(),
+			'docs/reference/objects/aliases'
 		];
 
-		foreach ($featured as $id) {
-			if (Str::contains($current->id(), $id) === true) {
+		foreach ($ignore as $id) {
+			if (Str::contains($current, $id) === true) {
 				return false;
 			}
 		}
