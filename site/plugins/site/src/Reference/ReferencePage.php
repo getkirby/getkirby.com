@@ -22,6 +22,21 @@ abstract class ReferencePage extends DefaultPage
 		return new Field($this, 'intro', $this->reflection()?->summary());
 	}
 
+	public function isAdvanced(): bool
+	{
+		return $this->reflection()?->isAdvanced() ?? false;
+	}
+
+	public function isDeprecated(): bool
+	{
+		return $this->reflection()?->isDeprecated() ?? false;
+	}
+
+	public function isInternal(): bool
+	{
+		return $this->reflection()?->isInternal() ?? false;
+	}
+
 	public function metadata(): array
 	{
 		return [
