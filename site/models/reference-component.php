@@ -16,7 +16,7 @@ class ReferenceComponentPage extends ReferencePage
 
 	public function name(): string
 	{
-		return $this->content()->get('name')->or($this->slug());
+		return $this->content()->get('methodName')->or($this->slug());
 	}
 
 	public function reflection(): ReflectableCoreComponent
