@@ -10,23 +10,17 @@ use ReferenceClassPage as ReferenceClass;
 
 class ReferenceClassMethodPage extends ReferencePage
 {
-	protected string|null $inherited;
-
-	public function class(bool $short = false): string
-	{
-		return $this->parent()->name($short);
-	}
-
-	public function exists(): bool
-	{
-		return method_exists($this->class(), $this->name());
-	}
-
-	public static function findByNames($page, array $methods): Page|null
-	{
-		// Until we reach end of methods chain
+	/**
+	 * Find a method page from a class
+	 * following a chain of method names
+	 */
+	public static function findByNames(
+		ReferenceClass $page,
+		array $methods
+	): ReferenceClassMethodPage|null {
+		// until we reach end of methods chain
 		while (count($methods) > 0) {
-			// Try to find method page
+			// try to find method page
 			$method = array_shift($methods);
 			$page   = $page->find(Str::kebab($method));
 
@@ -34,11 +28,12 @@ class ReferenceClassMethodPage extends ReferencePage
 				break;
 			}
 
-			// If has subsequent methods in the chain,
+			// if there are subsequent methods in the chain,
 			// get return value and turn into class page
 			if (count($methods) > 0) {
-				$return = explode('|', $page->returnType())[0];
-				$page   = ReferenceClass::findByName($return);
+				$returns = $page->reflection()->returns();
+				$returns = explode('|', $returns->toString())[0];
+				$page    = ReferenceClass::findByName($returns);
 
 				if ($page === null) {
 					break;
@@ -95,9 +90,9 @@ class ReferenceClassMethodPage extends ReferencePage
 	public function reflection(): ReflectableClassMethod
 	{
 		return $this->reflection ??= new ReflectableClassMethod(
-			class: $this->class(short: false),
-			method: $this->name(),
-			classalias: $this->parent()->content()->get('name')->value()
+			class:      $this->parent()->name(short: false),
+			classalias: $this->parent()->content()->get('name')->value(),
+			method:     $this->name()
 		);
 	}
 }
