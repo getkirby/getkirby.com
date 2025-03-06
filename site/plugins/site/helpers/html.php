@@ -13,32 +13,61 @@ function ariaCurrent(
 	return $condition ? $prefix . attr(['aria-current' => $type]) : null;
 }
 
-function icon(string $name): string|false
-{
+function icon(
+	string $name,
+	string|null $title = null
+): string|false {
+	$svg = null;
 	// prefer custom icon files from assets folder
-	if ($svg = svg('assets/icons/' . $name . '.svg')) {
-		return $svg;
-	}
+	$svg = svg('assets/icons/' . $name . '.svg');
 
 	// fall back to Panel icons
-	static $panel;
-	$panel ??= svg('kirby/panel/dist/img/icons.svg');
+	if ($svg === false) {
+		static $panel = svg('kirby/panel/dist/img/icons.svg');
 
-	if ($panel) {
-		// find the icon in the Panel sprite
-		if (preg_match('/<symbol[^>]*id="icon-' . $name . '"[^>]*viewBox="(.*?)"[^>]*>(.*?)<\/symbol>/s', $panel, $matches)) {
+		if ($panel) {
+			// find the icon in the Panel sprite
+			if (preg_match('/<symbol[^>]*id="icon-' . $name . '"[^>]*viewBox="(.*?)"[^>]*>(.*?)<\/symbol>/s', $panel, $matches)) {
 
-			//  resolve <use> tags to full inline SVG
-			if (preg_match('/<use href="#icon-(.*?)"[^>]*?>/s', $matches[2], $use)) {
-				return icon($use[1]);
+				//  resolve <use> tags to full inline SVG
+				if (preg_match('/<use href="#icon-(.*?)"[^>]*?>/s', $matches[2], $use)) {
+					return icon($use[1], $title);
+				}
+
+				// return the icon with the correct viewBox
+				$svg = '<svg data-type="' . $name . '" xmlns="http://www.w3.org/2000/svg" viewBox="' . $matches[1] . '">' . $matches[2] . '</svg>';
 			}
-
-			// return the icon with the correct viewBox
-			return '<svg data-type="' . $name . '" xmlns="http://www.w3.org/2000/svg" viewBox="' . $matches[1] . '">' . $matches[2] . '</svg>';
 		}
 	}
 
-	return false;
+	if ($svg === false) {
+		return false;
+	}
+
+	$svg = new class($svg) extends SimpleXMLElement {
+		public function prependChild(
+			string $name,
+			string $value
+		): SimpleXMLElement|null {
+			$dom = dom_import_simplexml($this);
+			$new = $dom->insertBefore(
+				$dom->ownerDocument->createElement($name, $value),
+				$dom->firstChild
+			);
+			return simplexml_import_dom($new, $this::class);
+		}
+	};
+
+	if ($title) {
+		$id   = Str::uuid();
+		$svg->addAttribute('role', 'img');
+		$svg->addAttribute('aria-labelledby', $id);
+		$svg->prependChild('title', $title)->addAttribute('id', $id);
+	} elseif (isset($svg->title) === false) {
+		$svg->addAttribute('aria-hidden', 'true');
+	}
+
+	return $svg->asXML();
 }
 
 function img($file, array $props = [])
