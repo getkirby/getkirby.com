@@ -36,7 +36,7 @@ class ReferenceFieldMethodsPage extends ReferenceSectionPage
 
 	protected function getDynamicMethods(): array
 	{
-		$methods = (include $this->kirby()->root('kirby') . '/config/methods.php')($this->kirby());
+		static $methods = (include $this->kirby()->root('kirby') . '/config/methods.php')($this->kirby());
 
 		foreach ($methods as $key => $function) {
 			$methods[$key] = new ReflectionFunction($function);

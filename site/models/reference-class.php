@@ -16,9 +16,9 @@ class ReferenceClassPage extends ReferenceSectionPage
 			return $this->children;
 		}
 
-		$children   = [];
-		$pages      = parent::children();
-		$methods    = $this->reflection()->methods();
+		$children = [];
+		$pages    = parent::children();
+		$methods  = $this->reflection()->methods();
 
 		foreach ($methods as $method) {
 			// Don't include protected or private methods
@@ -48,7 +48,7 @@ class ReferenceClassPage extends ReferenceSectionPage
 		}
 
 		// Create the actual class methods as children pages collection
-		$children = Pages::factory($children, $this)->filterBy('exists', true);
+		$children = Pages::factory($children, $this);
 
 		// If the class is flagged as proxying another class,
 		// get the proxied methods that are not covered by an
