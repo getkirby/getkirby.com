@@ -57,10 +57,10 @@
 			<ul class="certified-checklist text-base">
 				<li><?= icon('verified') ?> Code quality</li>
 				<li><?= icon('verified') ?> Performance</li>
-				<li><?= icon('verified') ?> Privacy & Security</li>
-				<li><?= icon('verified') ?> Semantics & Accessibility</li>
-				<li><?= icon('verified') ?> Panel layout & Usability</li>
-				<li><?= icon('verified') ?> Responsiveness & Modularity</li>
+				<li><?= icon('verified') ?> Privacy &amp; Security</li>
+				<li><?= icon('verified') ?> Semantics &amp; Accessibility</li>
+				<li><?= icon('verified') ?> Panel layout &amp; Usability</li>
+				<li><?= icon('verified') ?> Responsiveness &amp; Modularity</li>
 				<li><?= icon('verified') ?> Code documentation</li>
 			</ul>
 		</div>
