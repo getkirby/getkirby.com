@@ -18,7 +18,8 @@ function icon(
 	string $name,
 	string|null $title = null
 ): string|null {
-	return (new Icon($name, $title))->toString();
+	$icon = new Icon($name, $title);
+	return $icon->render();
 }
 
 function img($file, array $props = [])

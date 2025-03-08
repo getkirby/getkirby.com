@@ -6,6 +6,24 @@ use SimpleXMLElement as BaseSimpleXmlElement;
 
 class SimpleXmlElement extends BaseSimpleXmlElement
 {
+	/**
+	 * Returns the inner XML of the element
+	 */
+	public function innerXml(): string
+	{
+		$dom      = dom_import_simplexml($this);
+		$innerXML = '';
+
+		foreach ($dom->childNodes as $child) {
+			$innerXML .= $child->ownerDocument->saveXML($child);
+		}
+
+		return trim($innerXML);
+	}
+
+	/**
+	 * Prepends a child to the element
+	 */
 	public function prependChild(
 		string $name,
 		string $value
