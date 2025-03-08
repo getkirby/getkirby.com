@@ -2,7 +2,7 @@
 	<div class="p-6 bg-light">
 		<h3>
 			<a href="https://download.getkirby.com" class="btn btn--filled">
-				<?= icon('download') ?> Starterkit
+				<?= icon('download', 'Download') ?> Starterkit
 			</a>
 		</h3>
 		<p class="color-gray-800">
@@ -12,7 +12,7 @@
 	<div class="p-6 bg-light">
 		<h3>
 			<a href="https://github.com/getkirby/plainkit/archive/main.zip" class="btn btn--filled">
-				<?= icon('download') ?> Plainkit
+				<?= icon('download', 'Download') ?> Plainkit
 			</a>
 		</h3>
 		<p class="color-gray-800">

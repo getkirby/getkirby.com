@@ -20,6 +20,7 @@
 							</div>
 							<div class="pt-3">
 								<p class="h6 mb-3"><?= $page->title() ?></p>
+								<p class="sr-only">Features:</p>
 								<ul class="features-checklist">
 									<?php foreach ($page->benefits()->yaml() as $item): ?>
 									<li>

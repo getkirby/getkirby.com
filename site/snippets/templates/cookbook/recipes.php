@@ -8,7 +8,9 @@
 						<p class="text-xs font-mono mb-1 flex align-center justify-between">
 							<?= $recipe->parent()->title() ?>
 							<?php if ($recipe->isNew()): ?>
-								<span aria-hidden="true" style="color: var(--color-yellow-500)"><?= icon('bolt') ?></span>
+								<span style="color: var(--color-yellow-500)">
+									<?= icon('bolt', '(New recipe)') ?>
+								</span>
 							<?php endif ?>
 						</p>
 						<h2 class="h3 border-top pt-3">

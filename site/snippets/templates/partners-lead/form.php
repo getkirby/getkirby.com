@@ -264,7 +264,7 @@
 				type="submit"
 				class="btn btn--filled"
 			>
-				<span v-if="isProcessing" v-cloak><?= icon('loader') ?></span>
+				<span v-if="isProcessing" v-cloak><?= icon('loader', 'Currently processing') ?></span>
 				<span v-else><?= icon('email') ?></span>
 				Post project
 			</button>

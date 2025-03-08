@@ -1,3 +1,4 @@
+<p class="sr-only">Your advantages:</p>
 <ul class="checklist mb-6">
 	<?php if ($versionIncluded !== null): ?>
 	<li>

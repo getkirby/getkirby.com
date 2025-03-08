@@ -25,7 +25,7 @@
 	<section class="w-full p-container bg-dark">
 		<header class="flex items-baseline justify-center color-white mb-24">
 			<h2 class="h2 mr-1">Past episodes</h2>
-			<p><a rel="alternate" type="application/rss+xml" title="Kosmos RSS Feed" class="relative flex p-3 justify-center color-gray-400" style="top: 1px;" href="/kosmos.rss"><?= icon('rss') ?></a></p>
+			<p><a rel="alternate" type="application/rss+xml" title="Kosmos RSS Feed" class="relative flex p-3 justify-center color-gray-400" style="top: 1px;" href="/kosmos.rss"><?= icon('rss', 'RSS feed') ?></a></p>
 		</header>
 		<ul class="issues auto-fill">
 			<?php foreach ($page->children()->flip() as $issue): ?>

@@ -35,9 +35,9 @@ extract([
 
 	<?php if ($auth->isNotEmpty()): ?>
 	<li>
-		<a href='<?= url('docs/guide/users/permissions') ?>'>
+		<a href="<?= url('docs/guide/users/permissions') ?>">
 			<?= icon('lock') ?>
-		 <?= $auth ?>
+			<?= $auth ?>
 		</a>
 	</li>
 	<?php endif ?>

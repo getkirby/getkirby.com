@@ -7,10 +7,10 @@
 
 <?php if (F::exists($page->root() . '/' . $page->intendedTemplate() . '.txt')): ?>
 <a href="<?= option('github.url') ?>/getkirby.com/edit/main/content/<?= $page->diruri() ?>/<?= $page->intendedTemplate() ?>.txt" class="btn btn--outlined mb-3">
-	<?= icon('github') ?> Edit this page
+	<?= icon('github') ?> Edit this page <span class="sr-only">on GitHub</span>
 </a>
 <?php else: ?>
 <a href="<?= option('github.url') ?>/getkirby.com/issues/new?template=reference.md" class="btn btn--outlined mb-3">
-	<?= icon('github') ?> Report an issue on this page
+	<?= icon('github') ?> Report an issue on this page <span class="sr-only">on GitHub</span>
 </a>
 <?php endif ?>
