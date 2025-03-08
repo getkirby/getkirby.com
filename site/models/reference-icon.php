@@ -1,8 +1,6 @@
 <?php
 
-use Kirby\Reference\ReflectionPage;
-
-class ReferenceIconPage extends ReflectionPage
+class ReferenceIconPage extends ReferenceArticlePage
 {
 	public function metadata(): array
 	{

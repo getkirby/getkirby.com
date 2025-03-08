@@ -1,7 +1,5 @@
 <?php
-extract([
-	'aliases' => $aliases ?? $page->aliases()
-]);
+$aliases = $page->reflection()->aliases();
 ?>
 <?php if (count($aliases) > 0): ?>
 <h2 id="aliases"><a href="#aliases">Aliases</a></h2>

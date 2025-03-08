@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\File;
+use Kirby\Reference\Types\Type;
 use Kirby\Toolkit\Html;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Xml;
@@ -111,6 +112,21 @@ function json(array $data, bool $pretty = true): string|false
 	}
 
 	return json_encode($data);
+}
+
+function required(
+	bool $required,
+	string|null $text = null
+): string|null {
+	return match ($required) {
+		true    => '<span class="required-mark">' . $text . '<span aria-hidden="true" title="required">*</span><span class="sr-only">required</span></span>',
+		default => $text
+	};
+}
+
+function type(string $type): string
+{
+	return (new Type($type))->toHtml();
 }
 
 function version(string $version, string $format = '%s'): string

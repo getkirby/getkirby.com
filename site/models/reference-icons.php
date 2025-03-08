@@ -2,9 +2,8 @@
 
 use Kirby\Cms\Pages;
 use Kirby\Filesystem\F;
-use Kirby\Reference\SectionPage;
 
-class ReferenceIconsPage extends SectionPage
+class ReferenceIconsPage extends ReferenceSectionPage
 {
 	public function children(): Pages
 	{

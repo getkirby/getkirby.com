@@ -1,6 +1,6 @@
 <nav class="reference-entries reference-panel">
 	<ul>
-		<?php foreach ($entries as $entry): ?>
+		<?php foreach ($entries->filterBy('isEntry', true) as $entry): ?>
 			<li data-id="<?= $entry->id() ?>">
 				<a
 					<?= ariaCurrent($entry->isOpen(), 'page') ?>

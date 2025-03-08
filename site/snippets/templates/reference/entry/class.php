@@ -1,15 +1,17 @@
 <?php
-extract([
-	'parent'    => $page->class() ?? null,
-	'inherited' => $page->inheritedFrom() ?? null
-]);
+
+use Kirby\Reference\Reflectable\ReflectableClassMethod;
+
+$reflection = $page->reflection();
 ?>
-<?php if ($parent): ?>
+
+<?php if ($reflection instanceof ReflectableClassMethod): ?>
 <h2 id="class"><a href="#class">Parent class</a></h2>
 <p>
-	<?= Types::format($parent) ?>
-	<?php if ($inherited): ?>
-	inherited from <?= Types::format(is_a($inherited, Page::class) ? $inherited->class() : $inherited) ?>
+	<?= $reflection->class(typed: true)->toHtml() ?>
+
+	<?php if ($inherited = $reflection->inheritedFrom()): ?>
+	inherited from <?= $inherited->toHtml() ?>
 	<?php endif ?>
 </p>
 <?php endif ?>

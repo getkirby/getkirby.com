@@ -1,9 +1,8 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Reference\SectionPage;
 
-class ReferenceEndpointsPage extends SectionPage
+class ReferenceEndpointsPage extends ReferenceSectionPage
 {
 	public function intro(): Field
 	{

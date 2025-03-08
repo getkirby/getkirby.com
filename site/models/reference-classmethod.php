@@ -1,48 +1,24 @@
 <?php
 
-use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
-use Kirby\Reference\ReflectionPage;
-use Kirby\Reference\Types;
+use Kirby\Reference\Reflectable\ReflectableClassMethod;
 use Kirby\Toolkit\Str;
 use ReferenceClassPage as ReferenceClass;
 
-class ReferenceClassMethodPage extends ReflectionPage
+class ReferenceClassMethodPage extends ReferenceArticlePage
 {
-	protected string|null $inherited;
-
-	public function call(string $call = null): string
-	{
-		$call ??= parent::call();
-		$class  = $this->class(true);
-
-		if ($this->name() === '__construct') {
-			return 'new ' . $class . Str::after($call, $this->slug());
-		}
-
-		if ($this->isStatic() === true) {
-			return  $class . '::' . $call;
-		}
-
-		return '$' . strtolower($class) . '->' . $call;
-	}
-
-	public function class(bool $short = false): string
-	{
-		return $this->parent()->name($short);
-	}
-
-	public function exists(): bool
-	{
-		return method_exists($this->class(), $this->name());
-	}
-
-	public static function findByNames($page, array $methods): Page|null
-	{
-		// Until we reach end of methods chain
+	/**
+	 * Find a method page from a class
+	 * following a chain of method names
+	 */
+	public static function findByNames(
+		ReferenceClass $page,
+		array $methods
+	): ReferenceClassMethodPage|null {
+		// until we reach end of methods chain
 		while (count($methods) > 0) {
-			// Try to find method page
+			// try to find method page
 			$method = array_shift($methods);
 			$page   = $page->find(Str::kebab($method));
 
@@ -50,11 +26,12 @@ class ReferenceClassMethodPage extends ReflectionPage
 				break;
 			}
 
-			// If has subsequent methods in the chain,
+			// if there are subsequent methods in the chain,
 			// get return value and turn into class page
 			if (count($methods) > 0) {
-				$return = explode('|', $page->returnType())[0];
-				$page   = ReferenceClass::findByName($return);
+				$returns = $page->reflection()->returns();
+				$returns = explode('|', $returns->toString())[0];
+				$page    = ReferenceClass::findByName($returns);
 
 				if ($page === null) {
 					break;
@@ -65,41 +42,9 @@ class ReferenceClassMethodPage extends ReflectionPage
 		return $page;
 	}
 
-	public function inheritedFrom(): string|null
-	{
-		if (isset($this->inherited) === true) {
-			return $this->inherited;
-		}
-
-		if ($parent = $this->reflection()->getDeclaringClass()) {
-			if ($parent->getName() === $this->parent()->name()) {
-				return $this->inherited = null;
-			}
-
-			if ($page = ReferenceClass::findByName($parent->getName())) {
-				return $this->inherited = $page->name();
-			}
-
-			return $this->inherited = $parent->getName();
-		}
-
-		return $this->inherited = null;
-	}
-
-	/**
-	 * Checks if this is a magic method
-	 */
 	public function isMagic(): bool
 	{
-		return substr($this->slug(), 0, 2) === '__';
-	}
-
-	/**
-	 * Checks if this is static
-	 */
-	public function isStatic(): bool
-	{
-		return $this->reflection()?->isStatic() === true;
+		return $this->reflection()->isMagic();
 	}
 
 	public function metadata(): array
@@ -109,30 +54,6 @@ class ReferenceClassMethodPage extends ReflectionPage
 				'lead'  => 'Reference / Method'
 			]
 		]);
-	}
-
-	public function onGitHub(string $path = ''): Field
-	{
-		if ($reflection = $this->reflection()) {
-			$file = $reflection->getFileName();
-			$path = Str::from($file, 'src/');
-			return parent::onGitHub($path);
-		}
-	}
-
-	public function parameters(): array
-	{
-		if (isset($this->parameters) === true) {
-			return $this->parameters;
-		}
-
-		$parameters = parent::parameters();
-
-		foreach ($parameters as $key => $parameter) {
-			$parameters[$key]['type'] = Types::factory($parameter['type'], $this);
-		}
-
-		return $this->parameters = $parameters;
 	}
 
 	/**
@@ -160,15 +81,16 @@ class ReferenceClassMethodPage extends ReflectionPage
 
 	public function title(): Field
 	{
-		return parent::title()->value($this->call($this->name() . '()'));
+		$name = $this->reflection()->name();
+		return parent::title()->value($name . '()');
 	}
 
-	protected function reflection(): ReflectionMethod
+	public function reflection(): ReflectableClassMethod
 	{
-		return $this->reflection ??= new ReflectionMethod(
-			$this->parent()->name(),
-			$this->name()
+		return $this->reflection ??= new ReflectableClassMethod(
+			class:      $this->parent()->name(short: false),
+			classalias: $this->parent()->content()->get('name')->value(),
+			method:     $this->name()
 		);
 	}
-
 }

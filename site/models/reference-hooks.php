@@ -1,10 +1,9 @@
 <?php
 
 use Kirby\Cms\Pages;
-use Kirby\Reference\SectionPage;
 use Kirby\Toolkit\Str;
 
-class ReferenceHooksPage extends SectionPage
+class ReferenceHooksPage extends ReferenceSectionPage
 {
 	public function children(): Pages
 	{

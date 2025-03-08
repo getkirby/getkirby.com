@@ -1,9 +1,8 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Reference\ReflectionPage;
 
-class ReferenceEndpointPage extends ReflectionPage
+class ReferenceEndpointPage extends ReferenceArticlePage
 {
 	public function request(): string
 	{

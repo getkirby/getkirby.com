@@ -1,69 +1,57 @@
 <?php
-extract([
-	'since'    => $page->since(),
-	'alias'    => $page->alias(),
-	'auth'     => $page->auth(),
-	'guide'    => $page->guide(),
-	'source'   => $source ?? $page->onGitHub(),
-	'hasClass' => $page instanceof ReferenceClassPage || (
-		$page instanceof ReferenceClassmethodPage &&
-		$page->name() === '__construct'
-	),
-]);
+
+use Kirby\Cms\App;
+use Kirby\Reference\Reflectable\ReflectableClass;
+use Kirby\Toolkit\Str;
+
+$reflection = $page->reflection();
+$since      = $page->since();
 ?>
 
-<?php if(
-	$since->isNotEmpty() ||
-	$hasClass ||
-	$alias->isNotEmpty() ||
-	$auth->isNotEmpty() ||
-	$guide->isNotEmpty() ||
-	$source->isNotEmpty()
-): ?>
+<!-- Meta list -->
 <ul class="reference-meta">
-	<?php if ($since->isNotEmpty()): ?>
-	<li class="since">Since <?= version($since) ?></li>
+	<?php if ($since): ?>
+	<li class="since">Since <?= $since->toHtml() ?></li>
 	<?php endif ?>
 
-	<?php if ($hasClass): ?>
-	<li>Full class name: <code><?= $page->class() ?></code></li>
+	<?php if ($reflection instanceof ReflectableClass): ?>
+	<li>Full class name: <code><?= $reflection->name(short: false) ?></code></li>
 	<?php endif ?>
 
-	<?php if ($alias->isNotEmpty()): ?>
-	<li>Alias: <code><?= ucfirst($alias) ?></code></li>
+	<?php if ($alias = $reflection?->alias()): ?>
+	<li>Alias: <code><?= $alias ?></code></li>
 	<?php endif ?>
 
-	<?php if ($auth->isNotEmpty()): ?>
+	<?php if ($page->auth()->isNotEmpty()): ?>
 	<li>
 		<a href='<?= url('docs/guide/users/permissions') ?>'>
 			<?= icon('lock') ?>
-		 <?= $auth ?>
+		 <?= $page->auth() ?>
 		</a>
 	</li>
 	<?php endif ?>
 
-	<?php if ($guide->isNotEmpty()): ?>
+	<?php if ($page->guide()->isNotEmpty()): ?>
 	<li>
-		<a href="<?= url('docs/guide/' . $guide) ?>">
+		<a href="<?= url('docs/guide/' . $page->guide()) ?>">
 			<?= icon('book') ?>
 			Read the guide
 		</a>
 	</li>
 	<?php endif ?>
 
-	<?php if ($source->isNotEmpty()): ?>
+	<?php if ($source = $page->source()): ?>
 	<li>
 		<a href="<?= $source ?>">
 			<?= icon('code') ?>
-			kirby/<?= Str::after($source, 'tree/' . Kirby::version() . '/') ?>
+			kirby/<?= Str::after($source, 'tree/' . App::version() . '/') ?>
 		</a>
 	</li>
 	<?php endif ?>
 </ul>
-<?php endif ?>
 
-<?php if ($page->deprecated()->isNotEmpty()): ?>
-<?php $deprecated = $page->deprecated()->split('|') ?>
+<!-- Deprecation notice -->
+<?php if ($deprecated = $page->deprecated()): ?>
 <div class="prose">
 	<div class="box box--alert">
 		<figure class="box-icon iconbox bg-black color-white">
@@ -72,24 +60,25 @@ extract([
 		<div class="box-text">
 			<div class="font-bold">
 				Deprecated
-				<?php if ($version = $deprecated[0] ?? null): ?>
+				<?php if ($version = $deprecated->version()): ?>
 				in <?= version($version, '%s') ?>
 				<?php endif ?>
 			</div>
-			<?php if (count($deprecated) > 1): ?>
-			<?= kti($deprecated[1]) ?>
+			<?php if ($description = $deprecated->description()): ?>
+			<?= kti($description) ?>
 			<?php endif ?>
 		</div>
 	</div>
 </div>
 <?php endif ?>
 
+<!-- Internal notice -->
 <?php if ($page->isInternal() === true): ?>
 <div class="prose">
 	<div class="box box--warning">
 		<?php snippet('kirbytext/box', [
-			'type' => 'alert',
-			'text' => '`' . $page->title() . '` has been marked as internal. It might be changed in a future Kirby major or minor release without being considered a breaking change. Use with caution.'
+			'type' => 'lab',
+			'text' => '`' . $page->title() . '` has been <b>marked as internal</b>. It might be changed in a future Kirby major or minor release without being considered a breaking change. Use with caution.'
 		]) ?>
 	</div>
 </div>

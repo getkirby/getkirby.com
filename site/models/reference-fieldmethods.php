@@ -1,10 +1,10 @@
 <?php
 
 use Kirby\Cms\Pages;
-use Kirby\Reference\SectionPage;
+use Kirby\Content\Field;
 use Kirby\Toolkit\Str;
 
-class ReferenceFieldMethodsPage extends SectionPage
+class ReferenceFieldMethodsPage extends ReferenceSectionPage
 {
 	public function children(): Pages
 	{
@@ -35,7 +35,7 @@ class ReferenceFieldMethodsPage extends SectionPage
 
 	protected function getDynamicMethods(): array
 	{
-		$methods = (include $this->kirby()->root('kirby') . '/config/methods.php')($this->kirby());
+		static $methods = (include $this->kirby()->root('kirby') . '/config/methods.php')($this->kirby());
 
 		foreach ($methods as $key => $function) {
 			$methods[$key] = new ReflectionFunction($function);
