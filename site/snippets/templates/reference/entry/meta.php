@@ -40,7 +40,7 @@ $since      = $page->since();
 	</li>
 	<?php endif ?>
 
-	<?php if ($source = $reflection?->source()): ?>
+	<?php if ($source = $page->source()): ?>
 	<li>
 		<a href="<?= $source ?>">
 			<?= icon('code') ?>

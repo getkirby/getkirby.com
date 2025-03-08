@@ -107,6 +107,18 @@ abstract class ReferencePage extends DefaultPage
 	}
 
 	/**
+	 * Get the source code URL
+	 */
+	public function source(): string|null
+	{
+		if ($reflection = $this->reflection()) {
+			return $reflection->source();
+		}
+
+		return null;
+	}
+
+	/**
 	 * If a dedicated template exist, use it.
 	 * Otherwise fall back to `reference-article` template.
 	 */
