@@ -51,7 +51,7 @@ $since      = $page->since();
 </ul>
 
 <!-- Deprecation notice -->
-<?php if ($deprecated = $reflection?->deprecated()): ?>
+<?php if ($deprecated = $page->deprecated()): ?>
 <div class="prose">
 	<div class="box box--alert">
 		<figure class="box-icon iconbox bg-black color-white">
