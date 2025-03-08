@@ -3,14 +3,36 @@
 namespace Kirby\Reference;
 
 use DefaultPage;
-use Kirby\Cms\Pages;
 use Kirby\Content\Field;
+use Kirby\Reference\Reflectable\Tags\Deprecated;
 use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Template\Template;
+use Kirby\Toolkit\Str;
 
 abstract class ReferencePage extends DefaultPage
 {
 	protected $reflection = null;
+
+	/**
+	 * Get the deprecated tag either from the
+	 * content field or the reflection
+	 */
+	public function deprecated(): Deprecated|null
+	{
+		if ($deprecated = $this->content()->get('deprecated')->value()) {
+			$deprecated = Str::split($deprecated, '|');
+			return new Deprecated(
+				version: $deprecated[0] ?? null,
+				description: $deprecated[1] ?? null
+			);
+		}
+
+		if ($reflection = $this->reflection()) {
+			return $reflection->deprecated();
+		}
+
+		return null;
+	}
 
 	public function intro(): Field
 	{
@@ -25,7 +47,7 @@ abstract class ReferencePage extends DefaultPage
 
 	public function isDeprecated(): bool
 	{
-		return $this->reflection()?->isDeprecated() ?? false;
+		return $this->deprecated() !== null;
 	}
 
 	public function isEntry(): bool
