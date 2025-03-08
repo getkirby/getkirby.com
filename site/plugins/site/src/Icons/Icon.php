@@ -2,8 +2,6 @@
 
 namespace Kirby\Icons;
 
-use DOMDocument;
-use DOMXPath;
 use Kirby\Cms\App;
 use Kirby\Toolkit\Str;
 
@@ -13,6 +11,8 @@ use Kirby\Toolkit\Str;
  */
 class Icon
 {
+	protected static SimpleXmlElement $panel;
+
 	public function __construct(
 		public string $name,
 		public string|null $title = null
@@ -20,39 +20,9 @@ class Icon
 	}
 
 	/**
-	 * Adds necessary attributes to the SVG markup
-	 * for accessibility
-	 */
-	protected function normalize(string $svg): string
-	{
-		$svg = new SimpleXmlElement($svg);
-
-		if ($this->title) {
-			$id   = Str::uuid();
-			$svg['role'] = 'img';
-			$svg['aria-labelledby'] = $id;
-			$svg->prependChild('title', $this->title)->addAttribute('id', $id);
-		} elseif (isset($svg->title) === false) {
-			$svg['aria-hidden'] = 'true';
-		}
-
-		return $svg->asXML();
-	}
-
-	/**
-	 * Returns the SVG string for the icon
-	 */
-	public function svg(): string|null
-	{
-		$svg   = $this->svgFromLocal();
-		$svg ??= $this->svgFromPanel();
-		return $svg;
-	}
-
-	/**
 	 * Returns the SVG string from a local file in `assets/icons`
 	 */
-	protected function svgFromLocal(): string|null
+	public function getFromLocal(): SimpleXmlElement|null
 	{
 		$svg = svg('assets/icons/' . $this->name . '.svg');
 
@@ -60,57 +30,75 @@ class Icon
 			return null;
 		}
 
-		return $svg;
+		return new SimpleXmlElement($svg);
 	}
 
 	/**
 	 * Returns the SVG string from the Kirby Panel SVG sprite
 	 */
-	protected function svgFromPanel(): string|null
+	public function getFromPanel(): SimpleXmlElement|null
 	{
-		$root  = App::instance()->root() . '/kirby/panel/dist/img/icons.svg';
-		$dom   = new DOMDocument();
-		$dom->load(realpath($root));
-		$xpath = new DOMXPath($dom);
-		$xpath->registerNamespace('svg', 'http://www.w3.org/2000/svg');
-		$panel = $xpath->query('//svg:symbol[@id="icon-' . $this->name . '"]');
+		// load the Panel SVG sprite
+		if (isset(static::$panel) === false) {
+			$root  = App::instance()->root();
+			$root .= '/kirby/panel/dist/img/icons.svg';
+			$panel = new SimpleXmlElement(svg($root));
+			$panel->registerXPathNamespace('svg', 'http://www.w3.org/2000/svg');
+			static::$panel = $panel;
+		}
 
-		if ($panel->count() === 0) {
+		// find the icon with the correct id
+		$svgs = static::$panel->xpath('//svg:symbol[@id="icon-' . $this->name . '"]');
+		$svg  = $svgs[0] ?? null;
+
+		// if the icon is not found, return null
+		if ($svg === null) {
 			return null;
 		}
 
-		/**
-		 * @var \DOMElement $icon
-		 */
-		$icon = $panel->item(0);
-
-		if ($use = $icon->getElementsByTagName('use')->item(0)) {
-			$name = $use->getAttribute('href');
-			$name = Str::after($name, '#icon-');
-			return (new Icon($name, $this->title))->svg();
+		// if the symbol references another icon, return the SVG of that icon
+		if ($use = $svg->use) {
+			$name = Str::after($use['href'], '#icon-');
+			$icon = new Icon($name, $this->title);
+			return $icon->getFromPanel();
 		}
 
-		$viewBox = $icon->getAttribute('viewBox');
-		$content = '';
-		foreach ($icon->childNodes as $child) {
-			$content .= $child->ownerDocument->saveXML($child);
+		return new SimpleXmlElement('<svg data-type="' . $this->name . '" xmlns="http://www.w3.org/2000/svg" viewBox="' . $svg['viewBox'] . '">' . $svg->innerXml() . '</svg>');
+	}
+
+	/**
+	 * Adds necessary attributes to the SVG markup
+	 * for accessibility
+	 */
+	protected function normalize(SimpleXmlElement $svg): SimpleXmlElement
+	{
+		if ($this->title) {
+			$id = Str::uuid();
+			$svg['role'] = 'img';
+			$svg['aria-labelledby'] = $id;
+			$svg->prependChild('title', $this->title)->addAttribute('id', $id);
 		}
 
-		return '<svg data-type="' . $this->name . '" xmlns="http://www.w3.org/2000/svg" viewBox="' . $viewBox . '">' . trim($content) . '</svg>';
+		if (isset($svg->title) === false) {
+			$svg['aria-hidden'] = 'true';
+		}
+
+		return $svg;
 	}
 
 	/**
 	 * Returns the SVG markup for the icon
 	 */
-	public function toString(): string|null
+	public function render(): string|null
 	{
-		$svg = $this->svg();
+		$svg   = $this->getFromLocal();
+		$svg ??= $this->getFromPanel();
 
 		if ($svg === null) {
 			return null;
 		}
 
-		return $this->normalize($svg);
+		return $this->normalize($svg)->asXML();
 	}
 }
 
