@@ -19,7 +19,7 @@ $since      = $page->since();
 	<?php endif ?>
 
 	<?php if ($alias = $reflection?->alias()): ?>
-	<li>Alias: <code><?= ucfirst($alias) ?></code></li>
+	<li>Alias: <code><?= $alias ?></code></li>
 	<?php endif ?>
 
 	<?php if ($page->auth()->isNotEmpty()): ?>

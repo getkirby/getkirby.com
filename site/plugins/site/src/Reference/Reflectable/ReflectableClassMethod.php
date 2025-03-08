@@ -86,6 +86,29 @@ class ReflectableClassMethod extends ReflectableFunction
 		return $this->returns ??= Returns::factory($this);
 	}
 
+	/**
+	 * Get `@see` tag value which references
+	 * another class method to refer to for more information
+	 */
+	public function see(): string|null
+	{
+		$see = parent::see();
+
+		if ($see === null) {
+			return null;
+		}
+
+		// remove self:: or static:: prefix
+		$see = preg_replace('/^(self|static)::/', '::', $see);
+
+		// add class name if missing
+		if (str_starts_with($see, '::') === true) {
+			$see = $this->class(short: false) . $see;
+		}
+
+		return $see;
+	}
+
 	protected function sourcePath(): string
 	{
 		$file = $this->reflection->getFileName();
