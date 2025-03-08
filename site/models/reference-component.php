@@ -1,9 +1,8 @@
 <?php
 
-use Kirby\Reference\ReferencePage;
 use Kirby\Reference\Reflectable\ReflectableCoreComponent;
 
-class ReferenceComponentPage extends ReferencePage
+class ReferenceComponentPage extends ReferenceArticlePage
 {
 	public function metadata(): array
 	{

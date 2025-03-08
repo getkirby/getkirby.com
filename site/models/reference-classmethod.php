@@ -1,14 +1,12 @@
 <?php
 
-use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
-use Kirby\Reference\ReferencePage;
 use Kirby\Reference\Reflectable\ReflectableClassMethod;
 use Kirby\Toolkit\Str;
 use ReferenceClassPage as ReferenceClass;
 
-class ReferenceClassMethodPage extends ReferencePage
+class ReferenceClassMethodPage extends ReferenceArticlePage
 {
 	/**
 	 * Find a method page from a class

@@ -1,7 +1,6 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Reference\ReferenceSectionPage;
 
 class ReferenceEndpointsPage extends ReferenceSectionPage
 {

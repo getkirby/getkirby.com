@@ -1,8 +1,6 @@
 <?php
 
-use Kirby\Reference\ReferencePage;
-
-class ReferenceExtensionPage extends ReferencePage
+class ReferenceExtensionPage extends ReferenceArticlePage
 {
 	public function metadata(): array
 	{

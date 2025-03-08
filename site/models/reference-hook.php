@@ -1,13 +1,12 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Reference\ReferencePage;
 use Kirby\Reference\Reflectable\Tags\Parameter;
 use Kirby\Reference\Reflectable\Tags\Parameters;
 use Kirby\Reference\Types\Types;
 use Kirby\Toolkit\A;
 
-class ReferenceHookPage extends ReferencePage
+class ReferenceHookPage extends ReferenceArticlePage
 {
 	public function example(): Field
 	{

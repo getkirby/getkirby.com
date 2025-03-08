@@ -1,11 +1,10 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Reference\ReferencePage;
 use Kirby\Reference\Reflectable\ReflectableFieldMethod;
 use Kirby\Toolkit\Str;
 
-class ReferenceFieldMethodPage extends ReferencePage
+class ReferenceFieldMethodPage extends ReferenceArticlePage
 {
 	public function class(bool $short = false): string
 	{

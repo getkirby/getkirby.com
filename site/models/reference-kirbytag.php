@@ -1,10 +1,9 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Reference\ReferencePage;
 use Kirby\Reference\Reflectable\ReflectableKirbytag;
 
-class ReferenceKirbytagPage extends ReferencePage
+class ReferenceKirbytagPage extends ReferenceArticlePage
 {
 	public function metadata(): array
 	{

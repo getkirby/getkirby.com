@@ -1,7 +1,6 @@
 <?php
 
 use Kirby\Cms\Pages;
-use Kirby\Reference\ReferenceSectionPage;
 use Kirby\Toolkit\Str;
 
 class ReferenceHooksPage extends ReferenceSectionPage

@@ -1,10 +1,9 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Reference\ReferencePage;
 use Kirby\Template\Template;
 
-class ReferenceRootPage extends ReferencePage
+class ReferenceRootPage extends ReferenceArticlePage
 {
 	public function example(): Field
 	{
