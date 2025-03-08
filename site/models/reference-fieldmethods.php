@@ -2,7 +2,6 @@
 
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
-use Kirby\Reference\ReferenceSectionPage;
 use Kirby\Toolkit\Str;
 
 class ReferenceFieldMethodsPage extends ReferenceSectionPage

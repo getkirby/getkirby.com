@@ -1,11 +1,10 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Reference\ReferencePage;
 use Kirby\Reference\Reflectable\ReflectableHelperFunction;
 use Kirby\Toolkit\Str;
 
-class ReferenceHelperPage extends ReferencePage
+class ReferenceHelperPage extends ReferenceArticlePage
 {
 	public static function findByName(string $name): static|null
 	{

@@ -3,7 +3,6 @@
 use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
-use Kirby\Reference\ReferenceSectionPage;
 use Kirby\Reference\Reflectable\ReflectableClass;
 use Kirby\Toolkit\Str;
 use ReferenceClassMethodPage as ReferenceClassMethod;

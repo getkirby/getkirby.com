@@ -2,7 +2,6 @@
 
 use Kirby\Cms\Pages;
 use Kirby\Filesystem\F;
-use Kirby\Reference\ReferenceSectionPage;
 
 class ReferenceIconsPage extends ReferenceSectionPage
 {

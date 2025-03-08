@@ -1,9 +1,8 @@
 <?php
 
-use Kirby\Reference\ReferencePage;
 use Kirby\Reference\Reflectable\ReflectableValidator;
 
-class ReferenceValidatorPage extends ReferencePage
+class ReferenceValidatorPage extends ReferenceArticlePage
 {
 	public function metadata(): array
 	{
