@@ -6,6 +6,8 @@ use Kirby\Cms\App;
 use Kirby\Reference\Reflectable\Tags\Deprecated;
 use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Reference\Reflectable\Tags\Throws;
+use Kirby\Toolkit\Str;
+use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode;
 use Reflector;
 
 /**
@@ -49,19 +51,31 @@ abstract class Reflectable
 		return $this->doc()->getTagByName('@internal') !== null;
 	}
 
-	public function summary(): string|null
+	/**
+	 * Get `@see` tag value which references
+	 * another object to refer to for more information
+	 */
+	public function see(): string|null
 	{
-		$nodes = $this->doc()->getTextNodes();
-		$nodes = array_map(
-			fn ($node) => str_replace(PHP_EOL, ' ', $node->text),
-			$nodes
-		);
-
-		return implode(PHP_EOL . PHP_EOL, $nodes);
+		return $this->doc()->getTagByName('@see')?->value;
 	}
+
 	public function since(): Since|null
 	{
 		return $this->since ??= Since::factory($this);
+	}
+
+	public function summary(): string|null
+	{
+		$node = $this->doc()->getTextNodes()[0] ?? null;
+
+		if ($node instanceof PhpDocTextNode) {
+			$text = explode(PHP_EOL . PHP_EOL, $node->text)[0];
+			$text = str_replace(PHP_EOL, ' ', $text);
+			return trim($text);
+		}
+
+		return null;
 	}
 
 	/**

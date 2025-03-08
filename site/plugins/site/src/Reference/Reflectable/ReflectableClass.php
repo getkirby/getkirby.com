@@ -25,7 +25,14 @@ class ReflectableClass extends Reflectable
 	public function alias(): string|null
 	{
 		static $aliases = require App::instance()->root('kirby') . '/config/aliases.php';
-		return array_search($this->name(), $aliases) ?: null;
+
+		$alias = array_search($this->name(), $aliases) ?: null;
+
+		if ($alias === null) {
+			return null;
+		}
+
+		return ucfirst($alias);
 	}
 
 	public function isStatic(): bool

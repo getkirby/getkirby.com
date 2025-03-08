@@ -37,12 +37,17 @@ abstract class ReferencePage extends DefaultPage
 	public function intro(): Field
 	{
 		// prefer intro defined in content file
-		if ($this->content()->has('intro')) {
-			return $this->content()->get('intro');
-		}
+		$intro = $this->content()->get('intro')->value();
 
 		// otherwise try to get summary from DocBlock in code
-		return new Field($this, 'intro', $this->reflection()?->summary());
+		$intro ??= $this->reflection()?->summary();
+
+		// add alias reference
+		if ($see = $this->reflection()?->see()) {
+			$intro .= PHP_EOL . PHP_EOL . 'Alias for `' . $see . '`';
+		}
+
+		return new Field($this, 'intro', $intro);
 	}
 
 	public function isDeprecated(): bool
