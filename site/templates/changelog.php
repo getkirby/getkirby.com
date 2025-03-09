@@ -9,7 +9,7 @@
 			<?php foreach ($releases as $release): ?>
 				<li>
 					<a
-						href="<?= 'changelog#version-' . $release->version()->slug() ?>" <?= ariaCurrent($release->slug() === 'changelog') ?>>
+						href="<?= 'changelog#version-' . $release->versionField()->slug() ?>" <?= ariaCurrent($release->slug() === 'changelog') ?>>
 						<?= $release->title() ?>
 					</a>
 				</li>
@@ -25,38 +25,35 @@
 	<?php foreach ($releases as $release): ?>
 		<article class="mb-12" style="--span: 12">
 			<header class="mb-6">
-				<h2 class="h2" id="<?= 'version-' . $release->version()->slug() ?>"
-						class="h2">Kirby <?= $release->version() ?></h2>
+				<h2 class="h2" id="<?= 'version-' . $release->versionField()->slug() ?>"
+						class="h2">Kirby <?= $release->versionField() ?></h2>
 			</header>
+
+			<?php if ($release->changelogBreaking()->isNotEmpty()): ?>
 			<div class="mb-12">
 				<h3 class="h3 mb-6">Breaking</h3>
 				<div class="prose text-sm">
-					<?= (new Kirby\Cms\Field(
-						$release,
-						'breaking',
-						str_replace(
-							'(docs: releases/breaking-changes vars: version=' . substr($release->version()->value(), 2, 1) . ')',
-							'',
-							$release->breaking()
-						)
-					))->kt() ?>
+					<?= $release->changelogBreaking()->kt() ?>
 				</div>
 			</div>
-			<?php if ($release->deprecated()->isNotEmpty()): ?>
-				<div class="mb-12">
-					<h3 class="h3 mb-6">Deprecated</h3>
-					<div class="prose text-sm">
-						<?= $release->deprecated()->kt() ?>
-					</div>
-				</div>
 			<?php endif ?>
+
+			<?php if ($release->changelogDeprecated()->isNotEmpty()): ?>
+			<div class="mb-12">
+				<h3 class="h3 mb-6">Deprecated</h3>
+				<div class="prose text-sm">
+					<?= $release->changelogDeprecated()->kt() ?>
+				</div>
+			</div>
+			<?php endif ?>
+
 			<?php if ($release->migrationGuides()->isNotEmpty()): ?>
 			<div class="mb-12">
 				<h3 class="h3 mb-6">Migration Guides</h3>
 				<ul>
-				 <?php foreach ($release->migrationGuides()->toPages() as $link): ?>
-						<li><a href="<?= $link->url() ?>"><?= $link->title() ?></a></li>
-				 <?php endforeach ?>
+					<?php foreach ($release->migrationGuides()->toPages() as $link): ?>
+					<li><a href="<?= $link->url() ?>"><?= $link->title() ?></a></li>
+					<?php endforeach ?>
 				</ul>
 			</div>
 			<?php endif ?>

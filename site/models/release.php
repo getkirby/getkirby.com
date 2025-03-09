@@ -1,53 +1,57 @@
 <?php
 
 use Kirby\Content\Field;
-use Kirby\Github\Github;
 use Kirby\Template\Template;
 use Kirby\Toolkit\Str;
 
 class ReleasePage extends DefaultPage
 {
-	/**
-	 * Returns all tags in the `getkirby/kirby` GitHub repo
-	 */
-	protected function allReleases(): array
+	public function changelogBreaking(): Field
 	{
-		$kirby = $this->kirby();
-		$cache = $kirby->cache('github');
-
-		$entry = $cache->get('releases');
-		if (
-			$entry !== null &&
-			$entry['currentVersion'] === $kirby->version()
-		) {
-			return $entry['releases'];
+		if ($breaking = $this->find('breaking-changes')) {
+			return $breaking->text();
 		}
 
-		try {
-			$releases = [];
-			foreach (Github::request('getkirby/kirby', 'git/refs/tags')->json() as $release) {
-				$releases[] = Str::after($release['ref'], 'refs/tags/');
-			}
-		} catch (InvalidArgumentException) {
-			// no GitHub API key is available
-			return [];
+		if ($changelog = $this->find('changelog')) {
+			return $changelog->breaking();
 		}
 
-		$cache->set('releases', ['currentVersion' => $kirby->version(), 'releases' => $releases], 10080);
+		return new Field(
+			$this,
+			'breaking',
+			str_replace(
+				'(docs: releases/breaking-changes vars: version=' . substr($this->versionField(), 2, 1) . ')',
+				'',
+				$this->breaking()
+			)
+		);
+	}
 
-		return $releases;
+	public function changelogDeprecated(): Field
+	{
+		if ($deprecated = $this->find('deprecated')) {
+			return $deprecated->text();
+		}
+
+		if ($changelog = $this->find('changelog')) {
+			return $changelog->deprecated();
+		}
+
+		return $this->deprecated();
 	}
 
 	public function latestRelease(): string|null
 	{
 		// first try the latest stable release
 		$releases = $this->releases(stable: true);
+
 		if (count($releases) > 0) {
 			return end($releases);
 		}
 
 		// if there is none, use the latest preview release
 		$releases = $this->releases(stable: false);
+
 		if (count($releases) > 0) {
 			return end($releases);
 		}
@@ -57,11 +61,11 @@ class ReleasePage extends DefaultPage
 
 	public function releases(bool $stable = true): array
 	{
-		return array_filter(
-			$this->allReleases(),
-			function ($release) use ($stable) {
-				$version = $this->content()->get('version');
+		$version = $this->versionField();
 
+		return array_filter(
+			ReleasesPage::allTags(),
+			function ($release) use ($stable, $version) {
 				// filter by the current version
 				if (Str::startsWith($release, $version . '.') === false) {
 					return false;
@@ -79,15 +83,17 @@ class ReleasePage extends DefaultPage
 
 	public function subreleases(bool $stable = true): array
 	{
+		$version = $this->versionField();
+
 		return array_filter(
 			$this->releases($stable),
-			function ($release) {
+			function ($release) use ($version) {
 				// filter out the .0 version and its previews
 				if (
-					$release === $this->version()->value() . '.0' ||
-					$release === $this->version()->value() . '.0.0' ||
-					Str::startsWith($release, $this->version() . '.0-') === true ||
-					Str::startsWith($release, $this->version() . '.0.0-') === true
+					$release === $version . '.0' ||
+					$release === $version . '.0.0' ||
+					Str::startsWith($release, $version . '.0-') === true ||
+					Str::startsWith($release, $version . '.0.0-') === true
 				) {
 					return false;
 				}
@@ -100,26 +106,38 @@ class ReleasePage extends DefaultPage
 	public function template(): Template
 	{
 		$template   = $this->content()->get('template')->value();
-		$template ??= 'release-' . $this->content()->version();
+		$template ??= 'release-' . $this->versionField();
 
 		return $this->template ??= $this->kirby()->template($template);
 	}
 
 	public function tryLink(): Field
 	{
-		$field = parent::tryLink();
+		$field   = parent::tryLink();
+		$version = $this->versionField();
 
 		// never link to downloads of previous major releases
-		if (Str::before($this->kirby()->version(), '.') > $this->version()) {
+		if (Str::before($this->kirby()->version(), '.') > $version) {
 			return $field;
 		}
 
-		$url = 'https://github.com/getkirby/kirby/archive/refs/tags/' . $this->latestRelease() . '.zip';
+		$url  = 'https://github.com/getkirby/kirby/archive/refs/tags/';
+		$url .= $this->latestRelease() . '.zip';
 		return $field->or($url);
 	}
 
 	public function url($options = null): string
 	{
-		return $this->parent()->url() . '/' . str_replace('-', '.', $this->slug());
+		if ($this->releasePage()->isNotEmpty()) {
+			return $this->releasePage()->toUrl();
+		}
+
+		$slug = str_replace('-', '.', $this->slug());
+		return $this->parent()->url() . '/' . $slug;
+	}
+
+	public function versionField(): Field
+	{
+		return $this->content()->get('version');
 	}
 }

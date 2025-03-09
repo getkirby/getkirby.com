@@ -6,7 +6,7 @@ return function () {
 			->children()
 			->flip()
 			->filter(
-				fn ($release) => $release->breaking()->isNotEmpty()
+				fn ($release) => $release->changelogBreaking()->isNotEmpty()
 			),
 	];
 };
