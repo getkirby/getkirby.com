@@ -22,7 +22,7 @@
 						<?= icon('linkedin', 'LinkedIn') ?>
 					</a>
 					<a rel="me" href="https://videos.getkirby.com">
-						<?= icon('youtube', 'Youtube') ?>
+						<?= icon('youtube', 'YouTube') ?>
 					</a>
 					<a rel="me" href="https://chat.getkirby.com">
 						<?= icon('discord', 'Discord') ?>
