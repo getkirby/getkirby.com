@@ -297,13 +297,13 @@
 				</div>
 				<div class="buttons">
 					<button type="submit" class="btn btn--filled" :disabled="isProcessing">
-						<span v-if="isProcessing"><?= icon('loader', 'Currently processing') ?></span><span v-else><?= icon('cart') ?></span> Checkout
+						<span v-if="isProcessing"><?= icon('loader') ?></span><span v-else><?= icon('cart') ?></span> Checkout
 					</button>
 				</div>
 			</div>
 
 			<p class="checkout-loader" v-if="isFetchingPrices">
-				<?= icon('loader', 'Currently loading') ?>
+				<?= icon('loader') ?>
 			</p>
 		</form>
 
