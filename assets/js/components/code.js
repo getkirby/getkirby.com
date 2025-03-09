@@ -48,7 +48,7 @@ export default class {
 			const button = document.createElement("button");
 			button.insertAdjacentHTML(
 				"beforeend",
-				'<svg viewBox="0 0 16 16" class="icon"><path d="M10,4H2C1.4,4,1,4.4,1,5v10c0,0.6,0.4,1,1,1h8c0.6,0,1-0.4,1-1V5C11,4.4,10.6,4,10,4z"></path> <path data-color="color-2" d="M14,0H4v2h9v11h2V1C15,0.4,14.6,0,14,0z"></path></svg>'
+				'<svg viewBox="0 0 16 16" class="icon" ara-hidden="true"><path d="M10,4H2C1.4,4,1,4.4,1,5v10c0,0.6,0.4,1,1,1h8c0.6,0,1-0.4,1-1V5C11,4.4,10.6,4,10,4z"></path> <path data-color="color-2" d="M14,0H4v2h9v11h2V1C15,0.4,14.6,0,14,0z"></path></svg>'
 			);
 
 			const text = document.createElement("span");
