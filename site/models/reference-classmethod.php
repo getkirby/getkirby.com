@@ -30,7 +30,7 @@ class ReferenceClassMethodPage extends ReferenceArticlePage
 			// get return value and turn into class page
 			if (count($methods) > 0) {
 				$returns = $page->reflection()->returns();
-				$returns = explode('|', $returns->toString())[0];
+				$returns = explode('|', $returns->types()->toString())[0];
 				$page    = ReferenceClass::findByName($returns);
 
 				if ($page === null) {
