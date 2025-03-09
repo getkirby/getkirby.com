@@ -72,7 +72,6 @@ category:
 ```
 
 <?php if ($field === 'toggles'): ?>
-<since v="4.5.0">
 ### Custom icons
 
 You can also fetch custom icons with queries.
@@ -88,11 +87,9 @@ category:
     value: "{{ page.slug }}"
     icon: "{{ page.customIcon }}"
 ```
-</since>
 <?php endif ?>
 
 <?php if ($field === 'radio' || $field === 'checkboxes'): ?>
-<since v="4.5.0">
 ### Custom info text
 
 You can also fetch custom info text with queries.
@@ -108,7 +105,6 @@ category:
     value: "{{ page.slug }}"
     info: "{{ page.description }}"
 ```
-</since>
 <?php endif ?>
 
 ### Numeric keys

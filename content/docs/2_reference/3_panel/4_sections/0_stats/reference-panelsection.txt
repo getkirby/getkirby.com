@@ -103,7 +103,6 @@ stats:
       link: /revenue
 ```
 
-<since v="4.1.0">
 ### Icons
 
 You can add an (link: docs/reference/panel/icons text: icon) for each report:
@@ -116,7 +115,6 @@ stats:
       value: €29,682
       icon: store
 ```
-</since>
 
 ### Themes
 

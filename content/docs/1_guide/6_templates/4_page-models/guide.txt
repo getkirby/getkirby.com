@@ -51,7 +51,6 @@ class MyTemplatePage extends Page {
 The filenames of the model files themselves will keep the dash or underscore.
 </info>
 
-<since v="4.0.0">
 ## Default page model
 
 If you want to extend all pages that don't have any specific model, you can define a `DefaultPage` class. This model will be loaded whenever no other model is defined for the current page type.
@@ -73,7 +72,6 @@ class DefaultPage extends Page
     }
 }
 ```
-</since>
 
 ## Page models in the wild
 

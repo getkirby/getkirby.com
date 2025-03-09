@@ -2,10 +2,6 @@ Title: Color
 
 ----
 
-Since: 4.0.0
-
-----
-
 Intro: The `color` field supports multiple color notations, a color picker, pre-defined colors, custom color names, and transparency.
 
 ----
@@ -91,7 +87,6 @@ color:
 
 (image: color-field-names.png)
 
-<since v="4.1.0">
 ### Dynamic options
 
 Our options (link: docs/guide/blueprints/query-language text: query syntax) offers a powerful way of adding automatically generated option lists to a color field.
@@ -189,5 +184,4 @@ By default, the API type expects that the JSON endpoint returns an option array 
 	"#ddd": "Color C"
 }
 ```
-</since>
 

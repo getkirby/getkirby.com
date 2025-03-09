@@ -153,7 +153,6 @@ Some examples:
 
 Meta data files follow the same scheme for fields like the main text files for pages. Like with pages, the number of fields is not limited. The possibilities to add meta data to files are endless.
 
-<since v="4.0.0">
 ## Setting a focus point
 
 Never cut off the most important part of your images again (link: docs/guide/files/resize-images-on-the-fly#shortcut-methods__cropping-images text: when cropping an image). Set a focus point and let your images shine in all their beauty.
@@ -167,7 +166,6 @@ Focus: 30.5% 70%
 Or you use the focus feature via the Panel:
 
 (image: image-focus.png alt: Screenshot of our focus point interface in the Panel)
-</since>
 
 ## Example meta data file
 

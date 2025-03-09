@@ -2,9 +2,6 @@ Title: Writer marks/nodes
 
 ----
 
-Since: 4.0.0
-
-----
 Text:
 
 The Writer is our rich-text editor powering the (link: docs/reference/panel/fields/writer text: writer field) and (link: docs/reference/panel/fields/list text: list field) but also the (link: docs/reference/panel/blocks/text text: text) and (link: docs/reference/panel/blocks/heading text: heading blocks), among others. In your plugin, you can add custom marks and nodes to enhance and customize the editing experience of those fields and blocks.

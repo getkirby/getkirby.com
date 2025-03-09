@@ -43,7 +43,6 @@ Note that if you unselect a file in a **files field**, this file is not deleted 
 
 Kirby will convert the filename of your uploaded file to ASCII characters. This ensures that the filename is URL-safe and can be accessed correctly. After the conversion, the file will be checked against Kirby's internal validation rules as well as against custom rules that were defined in the blueprint. If the file validates, it will be uploaded.
 
-<since v="4.0.0">
 ## Edit, preview and optimize files at upload
 
 The upload dialog allows you to preview and edit the filenames of the files to upload. This gives you the opportunity to gives your files useful names, which will make it easier to find the right file later.
@@ -51,7 +50,6 @@ The upload dialog allows you to preview and edit the filenames of the files to u
 (image: uploader.png)
 
 In your file blueprints, you can also set (link: docs/reference/panel/blueprints/file#optimize-uploaded-images-create text: options for optimizing uploaded files). These options will be applied directly after upload, and they are a great way to avoid huge original files in the content folder.
-</since>
 
 ## File blueprints
 
@@ -84,7 +82,6 @@ fields:
 
 For details of creating a file blueprint, see the (link: docs/reference/panel/blueprints/file text: file blueprint options)
 
-<since v="4.0.0">
 ## Change file template
 
 You can change the file template currently assigned to a file to any template that is available for files in the file parent (sections, fields, textareas)
@@ -94,4 +91,3 @@ You can change the file template currently assigned to a file to any template th
 <warning>
 Changing the file's template will remove content for fields that don't match in type. If the new template defines certain rules, e.g. image dimensions, those will also be applied irreversibly. Use with caution.
 </warning>
-</since>

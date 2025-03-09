@@ -6,10 +6,6 @@ Intro: Option to customize the Panel menu
 
 ----
 
-Since: 4.0.0
-
-----
-
 Text:
 
 To allow a very customized and intuitive Panel user interface for your editors, it can make sense to alter the entries displayed Panel menu. This can be done via the `panel.menu` config option.
@@ -137,9 +133,9 @@ When you add a menu entry that links to a page or file, you probably also want t
     // the links of all your custom menu entries
     $links = ['pages/notes', 'pages/albums'];
     $path  = Kirby\Cms\App::instance()->path();
-    
-    return 
-      $current === 'site' && 
+
+    return
+      $current === 'site' &&
       A::every($links, fn ($link) => Str::contains($path, $link) === false);
   },
 ],

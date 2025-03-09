@@ -125,7 +125,6 @@ return [
 ];
 ```
 
-<since v="4.2.0">
 #### `threads`
 
 If you are converting a lot of big images with ImageMagick it can get slow.
@@ -140,4 +139,3 @@ return [
   ]
 ];
 ```
-</since>

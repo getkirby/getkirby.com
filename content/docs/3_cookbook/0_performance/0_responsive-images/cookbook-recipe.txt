@@ -261,7 +261,6 @@ Note that the **order** of these rules is important, as the browser will apply t
 
 With this information, the browser is now ready to do its calculations: With a viewport of 1200px and a DPR of 2, the browser now chooses the 600px image (300px rendered image size multiplied by 2), while without the sizes attribute it would use the largest image we provide in this example, 1800px.
 
-<since v="4.0.0">
 ## Set a focus point
 
 When creating different sizes and ratios of your images, it can be important to make sure that the essential items of the images don't get cut off or stay in the center of the image.
@@ -287,7 +286,6 @@ However, often you might want to have more fine-grained control over where the f
   ]
 )?>
 ```
-</since>
 
 ## Testing screen sizes in the browser
 

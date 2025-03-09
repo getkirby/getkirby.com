@@ -290,7 +290,7 @@ By default, the current page is being used as the parent to find files for the l
 ```yaml
 parent: site.find("galleries")
 ```
-<since v="4.0.0">
+
 ### `query`
 
 The files section supports a query option to filter files using our (link: docs/guide/blueprints/introduction#query-language text: query string syntax). Manual sorting will be disabled for sections with a query.
@@ -307,8 +307,6 @@ documents:
   query: page.documents
   template: document
 ```
-
-</since>
 
 ### Template
 

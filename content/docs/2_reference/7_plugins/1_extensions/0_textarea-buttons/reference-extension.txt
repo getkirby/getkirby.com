@@ -2,10 +2,6 @@ Title: Textarea buttons
 
 ----
 
-Since: 4.0.0
-
-----
-
 Text:
 
 You can add your custom (link: docs/reference/panel/fields/textarea text: textarea) button in a plugin via the `textareaButtons` extension:

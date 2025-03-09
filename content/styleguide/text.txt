@@ -397,13 +397,13 @@ Tab content 3
 To signal that content refers to a specific Kirby version or that the feature was only added in a specific version, wrap the content in a `<since>` tag:
 
 <figure class="code">
-  <pre><code class="language-markdown">&lt;since v="4.0.0"&gt;
-A feature that got added in Kirby 4.0.0
+  <pre><code class="language-markdown">&lt;since v="5.0.0"&gt;
+A feature that got added in Kirby 5.0.0
 &lt;/since&gt;</code></pre>
 </figure>
 
 #### Example
 
-<since v="4.0.0">
-A feature that got added in Kirby 4.0.0
+<since v="5.0.0">
+A feature that got added in Kirby 5.0.0
 </since>

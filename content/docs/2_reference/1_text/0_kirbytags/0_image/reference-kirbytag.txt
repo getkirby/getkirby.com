@@ -126,7 +126,6 @@ You can customize the defaults of this tag's attributes via the (link: docs/refe
 ```kirbytext
 (\image: myawesomepicture.jpg width: 500 height: 300)
 ```
-<since v="4.4.0">
 Width and height can also be set to auto, which will automatically be replaced by the actual image dimensions.
 
 ```kirbytext
@@ -144,9 +143,6 @@ This behaviour can also be set as global default for all image kirbytags in your
 	]
 ];
 ```
-</since>
-
-<since v="4.0.0">
 ### Image with `srcset` with absolut sizes
 
 ```kirbytext
@@ -160,4 +156,3 @@ Use srcset defaults you defined in the (link: docs/reference/system/options/thum
 ```kirbytext
 (\image: foo.jpg srcset: album)
 ```
-</since>

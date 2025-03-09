@@ -42,7 +42,6 @@ return [
 
 Your Panel is now accessible at http://yourdomain.com/super-secret-admin-area
 
-<since v="4.0.0">
 ## Panel menu
 
 You can customize what entries the Panel menu is showing and even add your own. Learn about (link: docs/reference/system/options/panel/panel-menu text: all the options to customize the Panel menu).
@@ -65,7 +64,6 @@ return [
   ]
 ];
 ```
-</since>
 
 ## Panel search
 

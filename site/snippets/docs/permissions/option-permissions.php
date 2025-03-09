@@ -15,7 +15,7 @@ options:
     *: false
     editor: true
 ```
-<since v="4.0.0">
+
 Controlling accessibility for roles.
 
 ```yaml
@@ -28,4 +28,3 @@ options:
     *: false
     admin: true
 ```
-</since>

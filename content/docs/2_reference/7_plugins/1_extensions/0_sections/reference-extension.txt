@@ -174,7 +174,6 @@ modified: {
 }
 ```
 
-<since v="4.2.0">
 ### API endpoints
 
 You can set up custom API endpoints for your section, if needed, by adding an `api` entry with a callback function that returns an array of endpoint definitions:
@@ -201,7 +200,6 @@ const response = await this.$api.get('/pages/blog+article-a/sections/sectionName
 ```
 
 Note how the API pattern of your custom endpoint is prefixed by the path to the specific page it's used on as well as `/sections/` and the section name it is included in.
-</since>
 
 ## Vue component
 

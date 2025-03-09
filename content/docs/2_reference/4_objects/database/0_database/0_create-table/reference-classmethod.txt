@@ -11,7 +11,3 @@ $database->createTable('product', [
     'price'       => ['type' => 'decimal', 'precision' => 12, 'decimal_places' => 4]
 ]);
 ```
-
-<since v="4.2.0">
-Newly added options are the `unsigned` option for integers and `size` option for varchars as well as the `float` and `decimal` types.
-</since>

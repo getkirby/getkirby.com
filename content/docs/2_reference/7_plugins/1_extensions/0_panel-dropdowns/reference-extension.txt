@@ -149,7 +149,6 @@ Kirby::plugin('example/dropdown', [
 ]);
 ```
 
-<since v="4.3.0">
 #### Listen for dropdown event
 
 When you need to react to your added dropdown entry, there is no direct way that you could listen for the event on the Vue dropdown component, since you don't have access to it. Instead, you can pass the `click` handler in the following way:
@@ -171,7 +170,6 @@ With this you can listen for your event globally:
 ```js
 this.$events.on("myEvent", (payload) => {...});
 ```
-</since>
 
 ### Reusing core code
 

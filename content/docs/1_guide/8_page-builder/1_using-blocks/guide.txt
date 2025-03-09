@@ -79,12 +79,10 @@ To change the position of the active block,
 1. Click/tap and hold the button with the hand icon.
 2. Drag the block to its new position.
 
-<since v="4.0.0">
 Or use the following keyboard shortcuts:
 
 To move the block up: Ctrl + Shift + arrow up
 To move the block down: Ctrl + Shift + arrow down
-</since>
 
 ## Hide block
 
@@ -124,7 +122,6 @@ The duplicated block is inserted after the selected block.
 2. Select `Paste after`.
 
 
-<since v="4.0.0">
 ## Split & merge blocks
 
 To split an existing block into two blocks,
@@ -134,8 +131,6 @@ To split an existing block into two blocks,
 To merge blocks
 1. Select the blocks to merge.
 2. Merge with keyboard shortcut `Meta + J` or click/tap the `Merge` button.
-
-</since>
 
 ## Copy all blocks
 
@@ -147,7 +142,6 @@ To merge blocks
 1. Click/tap the `…` button above the blocks field.
 2. Select `Delete all`.
 
-<since v="4.0.0">
 ## Overview keyboard shortcuts
 
 Enhanced keyboard shortcuts:
@@ -161,5 +155,4 @@ Shortcut | Description |
 | Cmd/Ctrl + Enter | Split blocks |
 | Ctrl + J | Merge blocks |
 | Cmd/Ctrl + V | Import blocks/layouts from your clipboard |
-</since>
 

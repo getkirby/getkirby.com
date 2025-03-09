@@ -60,7 +60,6 @@ return [
   ]
 ];
 ```
-<since v="4.0.0">
 ## Language editor in the Panel
 
 Once you have added one or more languages, you can start adding translation variables via the Language editor. Visit the language you want to edit. You can now add language variables as key/value pairs. These variables will also be stored in the language definition files.
@@ -76,7 +75,6 @@ Language variables that you add in other languages than the default language wil
 If you stored your language variables in separate files as described in (link: docs/quicktips/language-variables text: this cookbook recipe) they will be read by the Panel, but then moved to the language definition files.
 
 **Core translation variables and translation variables from plugins are ignored and cannot be overwritten via the Panel.**
-</since>
 
 ## Using language variables in your template
 

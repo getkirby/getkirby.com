@@ -56,7 +56,6 @@ It is also used to identify your plugin during the update check. If you publish 
 
 **Example:** If your Composer package name is `superwoman/kirby-superplugin`, the plugin name you pass to `Kirby::plugin()` should be `superwoman/superplugin` as above.
 
-<since v="4.3.0">
 ### Named arguments
 
 ```php "/site/plugins/your-plugin/index.php"
@@ -66,7 +65,6 @@ Kirby::plugin(
 		…
 	]
 );
-</since>
 
 ## Extensions
 
@@ -156,7 +154,6 @@ The fields in the example `composer.json` above are just the basic metadata fiel
 
 Note that the `name` inside the `composer.json` file is only the name of the Composer package. If needed, it can differ from the name you give your plugin when registering it with `Kirby::plugin()`, which will be used when getting plugin data.
 
-<since v="4.3.0">
 ### Named arguments
 
 Instead of providing all the information in the `composer.json` file, you can pass the same information also as `info` argument:
@@ -184,7 +181,6 @@ Kirby::plugin(
 	version: '1.0.0'
 );
 ```
-</since>
 
 ## Recommended plugin folder structure
 

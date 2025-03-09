@@ -51,7 +51,6 @@ $image->srcset([
 ])
 ```
 
-<since v="4.0.0">
 ### Crop around focus point
 
 Instead of passing a general crop area like `'center'`, you can set the `crop` option to `true` and Kirby will use each (link: docs/guide/files/files#setting-a-focus-point text: image's focus point):
@@ -70,7 +69,6 @@ $image->srcset([
     ]
 ]);
 ```
-</since>
 
 ## Define presets
 

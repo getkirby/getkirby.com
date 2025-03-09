@@ -60,19 +60,17 @@ return [
 Please keep in mind that this option makes your Kirby installation less secure.
 </warning>
 
-## PATCH method overwrite
+## PATCH method override
 
-<since v="4.5.0">
-The `PATCH` method is not available in some shared hosting environments. Therefore, our API will accept `POST` requests instead of `PATCH` requests if the API request sends an `x-http-method-override` header. All Panel API requests will automatically use `POST` requests and the additional header by default to ensure the best possible compatibility with environments. You can check in the system view to see if your server supports native `PATCH` requests and disable method overwrites in your config.
+The `PATCH` method is not available in some shared hosting environments. Therefore, our API will accept `POST` requests instead of `PATCH` requests if the API request sends an `x-http-method-override` header. All Panel API requests will automatically use `POST` requests and the additional header by default to ensure the best possible compatibility with environments. You can check in the system view to see if your server supports native `PATCH` requests and disable method overrides in your config.
 
 ```php
 return [
   'api' => [
-    'methodOverwrite' => false
+    'methodOverride' => false
   ]
 ];
 ```
-</since>
 
 
 ## Custom API elements

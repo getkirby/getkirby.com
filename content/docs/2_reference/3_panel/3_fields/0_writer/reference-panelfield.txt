@@ -40,12 +40,9 @@ The writer field supports the following marks by default:
 - `code`
 - `link`
 - `email`
-
-<since v="4.0.0">
 - `sub`
 - `sup`
 - `clear`
-</since>
 
 The special mark `|` can be used to separate marks in the toolbar by a vertical line.
 
@@ -78,10 +75,7 @@ The writer field supports the following marks by default:
 - `orderedList`
 - `heading`
 - `horizontalRule`
-
-<since v="4.0.0">
 - `quote`
-</since>
 
 Unsupported formats will automatically be ignored when content is pasted and the toolbar will also not include the matching buttons.
 
@@ -101,7 +95,6 @@ fields:
 You can extend Kirby to (link: docs/reference/plugins/extensions/writer-marks-nodes text: include custom nodes).
 </info>
 
-<since v="4.0.0">
 ## Toolbar
 
 The `toolbar` option allows you to customize the writer's toolbar:
@@ -124,7 +117,6 @@ text:
 
 - `inline` attaches the toolbar to the top of the field (instead of the floating pill style)
 - `marks` and `nodes` control which marks and nodes are shown in the toolbar. Make sure that the ones you want to include are actually active and not excluded in the top-level `marks` and `nodes` options (see above). The top-level options define which ones are supported, the toolbar-level options what is shown as buttons in the toolbar. For example, you might want to support the code mark for pasting, but hide it from the toolbar.
-</since>
 
 ## Inline mode
 
@@ -139,7 +131,6 @@ fields:
 
 In `inline` mode, all nodes (see above) are disabled.
 
-<since v="4.0.0">
 ## Heading levels
 
 You can set the available heading levels in the writer field with the `headings` option:
@@ -153,7 +144,6 @@ fields:
       - 3
       - 4
 ```
-</since>
 
 ## How to use in templates/snippets
 

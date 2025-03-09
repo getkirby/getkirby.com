@@ -2,10 +2,6 @@ Title: Link
 
 ----
 
-Since: 4.0.0
-
-----
-
 Guide: blueprints/fields
 
 ----
@@ -40,11 +36,9 @@ fields:
 - `anchor`
 - `custom`
 
-<since v="4.1.1">
 <info>
 The `custom` link type is not enabled by default as it cannot validate the entered URL. See the (link: #custom-link-type text: section on the custom link type below) for more.
 </info>
-</since>
 
 ## Link to pages
 

@@ -66,7 +66,6 @@ The layout field supports up to 12 columns and all are listed below.
 - `11/12`
 - `12/12`
 
-<since v="4.0.0">
 
 ## Customizing the selector
 
@@ -87,7 +86,6 @@ fields:
 Available sizes: `small`, `medium` (default), `large`, `huge`
 Default columns: 3
 
-</since>
 
 ## Fieldsets
 

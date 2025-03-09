@@ -245,7 +245,6 @@ panel.plugin("your-project/button-block", {
 When using single file components, you store your CSS directly with the component. You can get rid of the index.css in that case.
 </info>
 
-<since v="4.0.0">
 ## Quick and easy: Fields preview
 
 Sometimes, you don't want to add a fully customised preview for a block, but would like the block to show more than just the headline in the list of blocks.
@@ -280,7 +279,6 @@ fields:
 ```
 
 (image: fields-preview.png class: screenshot)
-</since>
 
 ## Full block plugins
 

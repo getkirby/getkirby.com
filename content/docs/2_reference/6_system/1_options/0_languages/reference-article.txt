@@ -6,7 +6,7 @@ Text:
 
 ## Enable multi-lang feature in the Panel
 
-To allow users to define and switch languages from the Panel, you have to enable the feature: 
+To allow users to define and switch languages from the Panel, you have to enable the feature:
 
 ```php
 return [
@@ -30,7 +30,6 @@ return [
 Using the [root URL for the default language](#language-specific-urls) will disable automatic language detection.
 </warning>
 
-<since v="4.0.0">
 ## Disable language variable editing in Panel
 
 By default, users can add and edit language variables via the Panel. To prevent this, you can disable this feature:
@@ -46,5 +45,4 @@ return [
 <info>
 To disable the feature based on user role, use this config setting within the (link: docs/reference/system/options/ready text: `ready` config option)
 </info>
-</since>
 

@@ -117,7 +117,6 @@ accept:
 Please only allow all uploads if all Panel users can be trusted completely as it will be possible to upload files that could be used to attack the server or the visitors' browsers.
 </warning>
 
-<since v="4.0.0">
 ## En-/disable setting focus in Panel
 
 By default, setting the focus point in the Panel is enabled for all viewable images with a Panel preview and disabled for all other files.
@@ -129,9 +128,7 @@ You can change this via the `focus` option in the file's blueprint:
 ```yaml "site/blueprints/files/image.yml"
 focus: false
 ```
-</since>
 
-<since v="4.0.0">
 ## Optimize uploaded images: `create`
 
 In your file blueprints you can set resize and crop settings, which will be applied directly after the upload. This is great to avoid huge original files in the content folder.
@@ -154,7 +151,6 @@ create:
 ```
 
 If the file blueprint also accept non-image files, those will be skipped and their format/extension left untouched.
-</since>
 
 
 ## `image` options
@@ -261,7 +257,7 @@ With options, you can control all the file actions that should or should not be 
 | Option | Value |
 | ------ | ----- |
 | `changeName` | `true`/`false` |
-| `changeTemplate` | `true`/`false` since v4.0.0 |
+| `changeTemplate` | `true`/`false` |
 | `delete` | `true`/`false` |
 | `read` | `true`/`false` |
 | `replace` | `true`/`false` |

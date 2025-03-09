@@ -114,7 +114,7 @@ status:
     label: Published
     text: The article is online and listed in the blog
 ```
-<since v="4.0.0">
+
 ## Page creation dialog
 
 You can customize the page creation dialog that pops up when you create a new page. You can add fields, change the label of the title field, disable the automatic redirect to the new page and set its status.
@@ -137,8 +137,7 @@ The button label changes depending on the status option set:
 (image: page-creation-status.png)
 
 (screencast: https://youtu.be/rC9Up05WVnI title: Page creation dialog text: An example how to customize the page creation dialog for building a bookmark tool.)
-</since>
-<since v="4.1.0">
+
 ### Automatic title and slug
 
 The page create dialog also allows you to automatically generate title and/or slug instead of allowing the user to edit them manually. To do so, define the `title` and/or `slug` suboption as a string template:
@@ -179,7 +178,6 @@ Kirby::plugin('getkirby/custom-methods', [
 
 ```
 If title and slug are generated automatically, and no custom fields are defined for the page creation dialog, the dialog will be skipped and the page is created immediately.
-</since>
 
 ### Supported field types
 
@@ -188,8 +186,6 @@ Currently, the list of supported field types in the dialog is limited to checkbo
 ```php
 Kirby\Panel\PageCreateDialog::$fieldTypes[] = 'yourFieldType'
 ```
-</since>
-
 
 
 ## Options
@@ -199,7 +195,7 @@ With options, you can control all the page actions that should or should not be 
 
 | Option | Value | Description
 |----    | ---- | ---- |
-| `access`| `true`/`false` | page is not accessible and not listed (since v4.0.0)
+| `access`| `true`/`false` | page is not accessible and not listed
 | `changeSlug` | `true`/`false` |
 | `changeStatus` | `true`/`false` |
 | `changeTemplate` | `false` or list of allowed template |
@@ -207,8 +203,8 @@ With options, you can control all the page actions that should or should not be 
 | `create` | `true`/`false` |
 | `delete` | `true`/`false` |
 | `duplicate` | `true`/`false` |
-| `list`| `true`/`false` | page is accessible but not listed (since v4.0.0)
-| `move`| `true`/`false` | since v4.0.0
+| `list`| `true`/`false` | page is accessible but not listed
+| `move`| `true`/`false` |
 | `preview` | `true`/`false`/template string (see below) |
 | `read` | `true`/`false` | page is not accessible and not listed (will be deprecated in Kirby 5)
 | `sort` | `true`/`false` |

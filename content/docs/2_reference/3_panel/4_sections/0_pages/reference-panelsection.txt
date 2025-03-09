@@ -252,7 +252,6 @@ To display different content, you can use column types to improve the preview of
 
 Check out the [field previews in our Lab](https://lab.getkirby.com/public/lab/components/fieldpreviews/array) to get an overview of the various previews that can be used as column types.
 
-<since v="4.2.0">
 ##### Customizing default columns
 
 ```yaml
@@ -265,7 +264,6 @@ columns:
     label: Custom slug label
     width: 10rem
 ```
-</since>
 
 ## Page information
 
@@ -319,7 +317,7 @@ By default, the current page is being used as the parent to find children for th
 ```yaml
 parent: site.find("blog")
 ```
-<since v="4.0.0">
+
 ### `query`
 
 The pages section supports a query option to filter the pages that are shown in a section using our (link: docs/guide/blueprints/introduction#query-language text: query string syntax). Manual sorting will be disabled for sections with a query.
@@ -345,7 +343,7 @@ siteIndex:
   query: site.index(true).notIn(['error'])
   create: default
 ```
-</since>
+
 ### Status
 
 You can filter the list of pages by their status. The available status values are

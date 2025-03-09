@@ -130,7 +130,6 @@ If you publish pages that are only intended as data containers but should not be
 </info>
 
 
-<since v="4.0.0">
 ## Moving pages
 
 Use the move dialog to pick a new parent page for your page. Kirby will make sure that the page can only be moved if the page type is allowed in the new parent.
@@ -138,4 +137,3 @@ Use the move dialog to pick a new parent page for your page. Kirby will make sur
 To do so, select "Settings" > "Move page". In the move dialog, select the parent you want to move the page to. Unavailable parents are greyed out. When done, confirm with the "Move" button. By default, Kirby adds "copy" to title and slug.
 
 (image: move-pages.png)
-</since>
