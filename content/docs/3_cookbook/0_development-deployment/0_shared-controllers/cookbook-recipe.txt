@@ -39,11 +39,11 @@ We'll use the `<title>` and `<meta name="description">` tags as an example. The 
 <html>
 <head>
 
-  <!-- The title tag shows the title of our site and the title of the current page -->
-  <title><?= $site->title() ?> | <?= $page->title() ?></title>
-  
-  <!-- The meta description shows an excerpt of the main text -->
-  <meta name="description" content="<?= $page->text()->excerpt(120) ?>">
+  <!-- The title tag shows the title of our site and the title of the current page -->
+  <title><?= $site->title() ?> | <?= $page->title() ?></title>
+
+  <!-- The meta description shows an excerpt of the main text -->
+  <meta name="description" content="<?= $page->text()->excerpt(120) ?>">
 </head>
 ```
 
@@ -54,11 +54,11 @@ That's a perfectly fine and reasonable solution. But what if we want to show a s
 <html>
 <head>
 
-  <!-- The title tag shows the title of our site and the title of the current page -->
-  <title><?php e($page->isHomePage() , $site->title() . "|" . $site->tagline() , $site->title() . "|" . $page->title()) ?></title>
-  
-  <!-- The meta description shows an excerpt of the main text -->
-  <meta name="description" content="<?= $page->text()->excerpt(120) ?>">  
+  <!-- The title tag shows the title of our site and the title of the current page -->
+  <title><?php e($page->isHomePage() , $site->title() . "|" . $site->tagline() , $site->title() . "|" . $page->title()) ?></title>
+
+  <!-- The meta description shows an excerpt of the main text -->
+  <meta name="description" content="<?= $page->text()->excerpt(120) ?>">  
 
 </head>
 ```
@@ -75,13 +75,13 @@ The first thing we need to do is set up our default controller. To do that we'll
 <?php
 
 return function ($page, $pages, $site, $kirby) {
-    
-  # Fetch and store the content for the title tag and the meta description
-  $titleTag        = $site->title() . " | " . $page->title();
-  $metaDescription = $page->text()->excerpt(120);
-    
-  # Return an array containing the data that we want to pass to the template
-  return compact('titleTag' , 'metaDescription');
+
+  # Fetch and store the content for the title tag and the meta description
+  $titleTag        = $site->title() . " | " . $page->title();
+  $metaDescription = $page->text()->excerpt(120);
+
+  # Return an array containing the data that we want to pass to the template
+  return compact('titleTag' , 'metaDescription');
 
 };
 ```
@@ -92,12 +92,12 @@ Now that the logic to fetch the correct data has been moved inside the controlle
 <!DOCTYPE html>
 <html>
 <head>
-    
-  <!-- The title tag we show the title of our site and the title of the current page -->
-  <title><?= $titleTag ?></title>
 
-  <!-- The meta description shows an excerpt of the main text -->
-  <meta name="description" content="<?= $metaDescription ?>">
+  <!-- The title tag we show the title of our site and the title of the current page -->
+  <title><?= $titleTag ?></title>
+
+  <!-- The meta description shows an excerpt of the main text -->
+  <meta name="description" content="<?= $metaDescription ?>">
 
 </head>
 <body>
@@ -109,12 +109,12 @@ Excellent, this is already looking a lot cleaner. Now we need to implement the d
 <?php
 
 return function ($page, $pages, $site, $kirby) {
-    
+
   # Store the content for the different title tag
-  $titleTag = $site->title() . " | " . $site->tagline();
-    
+  $titleTag = $site->title() . " | " . $site->tagline();
+
   # Return the array containing the data that we want to pass to the template
-  return compact('titleTag');
+  return compact('titleTag');
 
 };
 ```
@@ -164,15 +164,15 @@ The final `home.php` controller will look like this:
 <?php
 
 return function ($page, $pages, $site, $kirby) {
-    
+
   # Grab the data from the default controller
-  $shared = $kirby->controller('site' , compact('page', 'pages', 'site', 'kirby'));
+  $shared = $kirby->controller('site' , compact('page', 'pages', 'site', 'kirby'));
 
   # Fetch and store the content for the different title tag
-  $titleTag = $site->title() . " | " . $site->tagline();
-    
+  $titleTag = $site->title() . " | " . $site->tagline();
+
   # Return the array containing the data that we want to pass to the template
-  return A::merge($shared , compact('titleTag'));
+  return A::merge($shared , compact('titleTag'));
 
 };
 ```
@@ -201,15 +201,15 @@ To do that you need to pass the correct controller name to the `controller()` fu
 <?php
 
 return function ($page, $pages, $site, $kirby) {
-    
+
   # Grab the data from the post.php controller
-  $post = $kirby->controller('post' , compact('page', 'pages', 'site', 'kirby'));
+  $post = $kirby->controller('post' , compact('page', 'pages', 'site', 'kirby'));
 
   # Custom content for the video post
-  $video = $page->videourl();
-    
+  $video = $page->videourl();
+
   # Return the array containing the data that we want to pass to the template
-  return A::merge($post , compact('video'));
+  return A::merge($post , compact('video'));
 
 };
 ```
