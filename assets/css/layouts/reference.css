@@ -169,9 +169,6 @@ html {
 	font-size: var(--text-sm);
 	margin-bottom: var(--spacing-6);
 }
-.reference-meta:not(:has(:first-child)) {
-	display: none;
-}
 .reference-meta li {
 	margin-bottom: var(--spacing-2);
 }

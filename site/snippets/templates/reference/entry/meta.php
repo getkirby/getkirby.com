@@ -6,9 +6,21 @@ use Kirby\Toolkit\Str;
 
 $reflection = $page->reflection();
 $since      = $page->since();
+$alias      = $reflection?->alias();
+$auth       = $page->auth()->value();
+$guide      = $page->guide()->value();
+$source     = $page->source()
 ?>
 
 <!-- Meta list -->
+<?php if (
+	$since ||
+	$reflection instanceof ReflectableClass ||
+	$alias ||
+	$auth ||
+	$guide ||
+	$source
+): ?>
 <ul class="reference-meta">
 	<?php if ($since): ?>
 	<li class="since">Since <?= $since->toHtml() ?></li>
@@ -18,29 +30,29 @@ $since      = $page->since();
 	<li>Full class name: <code><?= $reflection->name(short: false) ?></code></li>
 	<?php endif ?>
 
-	<?php if ($alias = $reflection?->alias()): ?>
+	<?php if ($alias): ?>
 	<li>Alias: <code><?= $alias ?></code></li>
 	<?php endif ?>
 
-	<?php if ($page->auth()->isNotEmpty()): ?>
+	<?php if ($auth): ?>
 	<li>
 		<a href='<?= url('docs/guide/users/permissions') ?>'>
 			<?= icon('lock') ?>
-		 <?= $page->auth() ?>
+		<?= $auth ?>
 		</a>
 	</li>
 	<?php endif ?>
 
-	<?php if ($page->guide()->isNotEmpty()): ?>
+	<?php if ($guide): ?>
 	<li>
-		<a href="<?= url('docs/guide/' . $page->guide()) ?>">
+		<a href="<?= url('docs/guide/' . $guide) ?>">
 			<?= icon('book') ?>
 			Read the guide
 		</a>
 	</li>
 	<?php endif ?>
 
-	<?php if ($source = $page->source()): ?>
+	<?php if ($source): ?>
 	<li>
 		<a href="<?= $source ?>">
 			<?= icon('code') ?>
@@ -49,7 +61,7 @@ $since      = $page->since();
 	</li>
 	<?php endif ?>
 </ul>
-
+<?php endif ?>
 <!-- Deprecation notice -->
 <?php if ($deprecated = $page->deprecated()): ?>
 <div class="prose">
