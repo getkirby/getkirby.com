@@ -60,8 +60,10 @@ class ReleasePage extends DefaultPage
 		return array_filter(
 			$this->allReleases(),
 			function ($release) use ($stable) {
+				$version = $this->content()->get('version');
+
 				// filter by the current version
-				if (Str::startsWith($release, $this->version() . '.') === false) {
+				if (Str::startsWith($release, $version . '.') === false) {
 					return false;
 				}
 
