@@ -11,3 +11,6 @@ Description: Kirby 4 is all about a new editing experience for users, with a bra
 Docs: /docs
 ----
 Cover: - kirby-4-0.png
+----
+MigrationGuides:
+- docs/guide/updates/update-to-v4
