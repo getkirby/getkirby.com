@@ -25,7 +25,7 @@ In a production environment, always log errors to your PHP error logs.
 
 To avoid accidentally enabling debugging in production, but to still be able to use it in certain situations, you have different options:
 
-- Disable `debug` in `config.php` and only enable it in in the config for your local/staging setup, see (link: text: docs/guide/configuration#the-config-php__using-multiple-config-files text: Multiple config files)
+- Disable `debug` in `config.php` and only enable it in in the config for your local/staging setup, see (link: docs/guide/configuration#the-config-php__using-multiple-config-files text: Multiple config files)
 - Use conditions for the `debug` option in `config.php`, e.g. based on server name or logged in users
     ```php
     'debug' => str_ends_with($_SERVER['SERVER_NAME'] ?? '', '.test') || @$_SERVER['SERVER_NAME'] === 'localhost', // enable debug for domains that end on ".test"
