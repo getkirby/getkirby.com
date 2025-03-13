@@ -35,7 +35,7 @@ return function (App $kirby, Page $page) {
 			true
 		);
 
-		sort($options, SORT_STRING);
+		sort($options, SORT_NATURAL);
 
 		$filters[$field]['options'] = $options;
 	}

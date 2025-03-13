@@ -23,6 +23,7 @@ button {
 	font-family: var(--font-mono);
 	white-space: nowrap;
 	background: none;
+	position: relative;
 }
 .btn svg {
 	margin-right: 0.75rem;
