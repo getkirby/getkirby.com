@@ -95,7 +95,7 @@
 							<?= icon('download') ?>
 							Download ZIP
 						</a>
-						<a aria-label="Install the Starterkit" class="btn btn--filled" href="https://herd.laravel.com/new/getkirby/plainkit>
+						<a aria-label="Install the Starterkit" class="btn btn--filled" href="https://herd.laravel.com/new/getkirby/plainkit">
 							<?= icon('bolt') ?>
 							Install with Herd
 						</a>
