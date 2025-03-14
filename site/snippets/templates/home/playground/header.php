@@ -26,6 +26,7 @@
 							'width' => 1520
 						],
 						'lazy' => false,
+						'fetchpriority' => 'high',
 						// sizes generated with https://ausi.github.io/respimagelint/
 						'sizes' => '(min-width: 1860px) 1520px, (min-width: 820px) calc(92.16vw - 176px), 100vw',
 						'srcset' => [
