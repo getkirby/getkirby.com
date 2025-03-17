@@ -56,13 +56,20 @@ entries:
       web: Web
 ```
 
+
+## In your templates
+
+To easily loop through your entries and retrieve each entry as field object, you can use the new `$field->toEntries()` method:
+
 ```php
 <ul>
-    <?php foreach($page->entries()->yaml() as $entry): ?>
-        <li><?= $entry ?></li>
-    <?php endforeach ?>
+  <?php foreach ($page->myEntries()->toEntries() as $entry): ?>
+    <li><?= $entry->upper() ?></li>
+  <?php endforeach ?>
 </ul>
 ```
+
+## Preview
 
 (image: entries-field.png)
 
