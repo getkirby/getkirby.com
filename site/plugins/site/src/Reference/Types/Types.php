@@ -45,7 +45,7 @@ class Types
 	): static {
 		$types ??= [];
 
-		// handle simple strings first;
+		// Handle simple strings first;
 		// expect a pipe-separated list of exact types
 		if (is_string($types) === true) {
 			$types = Str::split($types, '|');
@@ -59,18 +59,18 @@ class Types
 			$types = $types->types;
 		}
 
-		// ensure types is an array
+		// Ensure types is an array
 		$types = A::wrap($types);
 
-		// if there is a nullable type, add it
+		// If there is a nullable type, add it
 		if (static::needsNull($types) === true) {
 			$types[] = 'null';
 		}
 
-		// remove the optional `?` from the type strings
+		// Remove the optional `?` from the type strings
 		$types = A::map($types, fn ($type) => ltrim($type, '?'));
 
-		// resolve type templates if a context is provided
+		// Resolve type templates if a context is provided
 		if ($reflectable !== null) {
 			$context = Context::factory($reflectable);
 			$types   = A::map(
@@ -80,7 +80,7 @@ class Types
 			$types = array_merge(...$types);
 		}
 
-		// create a new Type instance for each type string
+		// Create a new Type instance for each type string
 		$types = array_unique($types);
 		$types = A::map($types, fn ($type) => Type::factory($type));
 
@@ -103,12 +103,12 @@ class Types
 		$needsNull = false;
 
 		foreach ($types as $type) {
-			// if there is a mixed type, we don't need to add null
+			// If there is a mixed type, we don't need to add null
 			if ((string)$type === 'mixed') {
 				return false;
 			}
 
-			// if the type allows null, we need to add it
+			// If the type allows null, we need to add it
 			if (method_exists($type, 'allowsNull') && $type->allowsNull()) {
 				$needsNull = true;
 			}
@@ -129,7 +129,7 @@ class Types
 	}
 
 	/**
-	 * Replace the self/static/$this types with the actual class name
+	 * Replace self/static/$this with the actual class name
 	 */
 	protected function replaceSelf(
 		string $string,
@@ -140,7 +140,7 @@ class Types
 			return $string;
 		}
 
-		// get the class name
+		// Get the class name
 		if ($this->reflectable instanceof ReflectableClass) {
 			$type = $this->reflectable->name(short: false);
 		} else if ($this->reflectable instanceof ReflectableClassMethod) {
@@ -150,7 +150,7 @@ class Types
 		$type    = Type::factory($type ?? 'static');
 		$needles = ['static', 'self', '$this'];
 
-		// if HTML is requested, wrap the needles in code tags
+		// If HTML is requested, wrap the needles in code tags
 		if ($html === true) {
 			$needles = A::map(
 				$needles,
@@ -176,18 +176,23 @@ class Types
 		bool $linked = true,
 		string|null $fallback = null
 	): string {
+		// Get HTML representation for each type
 		$types = A::map(
 			$this->types,
 			fn (Type $type) => $type->toHtml(linked: $linked)
 		);
 
-		// if there are no types, use the fallback (as type HTML itself)
+		// If there are no types, use the fallback (as type HTML itself)
 		if (count($types) === 0 && $fallback !== null) {
 			return Type::factory($fallback)->toHtml(linked: $linked);
 		}
 
-		$html = implode('<span class="px-1 color-gray-400" aria-hidden="true">|</span><span class="sr-only">or</span>', $types);
-		return $this->replaceSelf($html, html: true, linked: $linked);
+		// Replace self/static/$this with the actual class name
+		$types = A::map($types, fn ($type) => $this->replaceSelf($type,  html: true, linked: $linked));
+		// Remove duplicates
+		$types = array_unique($types);
+		// Combine into a single string
+		return implode('<span class="px-1 color-gray-400" aria-hidden="true">|</span><span class="sr-only">or</span>', $types);
 	}
 
 	/**
@@ -195,8 +200,13 @@ class Types
 	 */
 	public function toString(): string
 	{
-		$types  = A::map($this->types, fn (Type $type) => $type->toString());
-		$string = implode('|', $types);
-		return $this->replaceSelf($string);
+		// Get string representation for each type
+		$types = A::map($this->types, fn (Type $type) => $type->toString());
+		// Replace self/static/$this with the actual class name
+		$types = A::map($types, fn ($type) => $this->replaceSelf($type));
+		// Remove duplicates
+		$types = array_unique($types);
+		// Combine into a single string
+		return implode('|', $types);
 	}
 }
