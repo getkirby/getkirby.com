@@ -173,7 +173,7 @@ return [
 ];
 ```
 
-You can read more in the (link: reference/system/options/url text: reference).
+You can read more in the (link: docs/reference/system/options/url text: reference).
 
 ## Multi-environment setup
 
