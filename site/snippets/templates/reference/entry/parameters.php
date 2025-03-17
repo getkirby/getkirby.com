@@ -43,7 +43,8 @@ $parameters      = $parameters?->toArray() ?? [];
 				<td><?= $parameter->types()->toHtml(fallback: 'mixed') ?></td>
 
 				<td data-label="Default:">
-					<?php if ($default = $parameter->default()): ?>
+					<?php $default = $parameter->default() ?>
+					<?php if ($default !== null): ?>
 					<code><?= $default ?></code>
 					<?php else: ?>
 					<span aria-hidden="true">–</span>
