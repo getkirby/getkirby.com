@@ -188,7 +188,7 @@
 			</div>
 			<div class="box prose">
 				<h3>Contributors</h3>
-				<p>We have received hundreds of voluntary code contributions over the years from more than <a href="https://github.com/getkirby/kirby/graphs/contributors">60 contributors</a> in the community. Their help with issue reports and pull requests is invaluable to us as a team.</p>
+				<p>We have received hundreds of voluntary code contributions over the years from more than <a href="<?= option('github.url') ?>/kirby/graphs/contributors">60 contributors</a> in the community. Their help with issue reports and pull requests is invaluable to us as a team.</p>
 			</div>
 			<div class="box prose">
 				<h3>Translators</h3>
@@ -196,7 +196,7 @@
 			</div>
 			<div class="box prose">
 				<h3>Peers</h3>
-				<p>While we are constantly around on <a href="https://chat.getkirby.com">Discord</a>, <a href="https://github.com/getkirby">GitHub</a> and in our <a href="https://forum.getkirby.com">forum</a>, our community has turned into a really friendly, self-regulating little society. We are more than thankful for all the help and guidance that Kirby users provide for each other.</p>
+				<p>While we are constantly around on <a href="https://chat.getkirby.com">Discord</a>, <a href="<?= option('github.url') ?>">GitHub</a> and in our <a href="https://forum.getkirby.com">forum</a>, our community has turned into a really friendly, self-regulating little society. We are more than thankful for all the help and guidance that Kirby users provide for each other.</p>
 			</div>
 		</div>
 	</section>

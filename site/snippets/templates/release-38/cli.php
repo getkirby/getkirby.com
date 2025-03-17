@@ -35,7 +35,7 @@
 			<div class="prose">
 				<p>The revival of our command line interface is here and it’s better than ever before.
 					Install Kirby and its kits in seconds, make blueprints, templates, controllers and more or extend the CLI with your own commands. Managing your Kirby installations has never been easier. </p>
-				<p><a class="link" href="https://github.com/getkirby/cli">Give it a try &rarr;</a></p>
+				<p><a class="link" href="<?= option('github.url') ?>/cli">Give it a try &rarr;</a></p>
 			</div>
 		</div>
 	</div>

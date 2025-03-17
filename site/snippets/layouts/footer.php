@@ -9,7 +9,7 @@
 				<p class="font-bold mb-1">Kirby</p>
 				<p class="mb-1">The CMS that adapts to any project. Made for developers, designers, creators and clients.</p>
 				<nav aria-label="Kirby on the web" class="social">
-					<a rel="me" href="https://github.com/getkirby">
+					<a rel="me" href="<?= option('github.url') ?>">
 						<?= icon('github', 'GitHub') ?>
 					</a>
 					<a rel="me" href="https://mastodon.social/@getkirby">

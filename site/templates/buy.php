@@ -105,7 +105,7 @@ article[data-loading] .price[data-sale] {
 		<div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-3)">
 			<div>
 				<h1 class="h1 max-w-xl mb-12">
-					The transparency of <a href="https://github.com/getkirby">open&#8209;source</a> meets a fair pricing&nbsp;model
+					The transparency of <a href="<?= option('github.url') ?>">open&#8209;source</a> meets a fair pricing&nbsp;model
 				</h1>
 
 				<?php if ($sale->isActive()): ?>
