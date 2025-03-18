@@ -19,52 +19,7 @@ class SecurityPage extends DefaultPage
 		], true);
 	}
 
-	public function messages(): array
-	{
-		return array_reverse(parent::messages()->yaml());
-	}
-
-	public function messagesTable()
-	{
-		return snippet('templates/security/messages', [
-			'messages' => $this->messages()
-		], true);
-	}
-
-	public function php(): array
-	{
-		return parent::php()->yaml();
-	}
-
-	protected function replace(Field $field, array $data = []): Field
-	{
-		$latest = $this->kirby()->version();
-
-		// extract the part before the first dot
-		preg_match('/^(\w+)\./', $latest, $matches);
-
-		$versions = page('releases')->children()->filterBy('template', '!=', 'link')->pluck('version');
-		$releasePages = implode(' || ', array_map(fn ($version) => $version . str_repeat('.0', 2 - substr_count($version, '.')), $versions));
-
-		$data = [
-			'latest'            => $latest,
-			'latestMajor'       => $matches[1],
-			'noVulnerabilities' => $this->versionNoVulnerabilities(),
-			'releasePages'      => $releasePages,
-			...$data
-		];
-
-		$field->value = Str::template($field->value, $data);
-
-		return $field;
-	}
-
-	public function urls(): array
-	{
-		return $this->replace(parent::urls())->yaml();
-	}
-
-	protected function versionNoVulnerabilities(): string
+	protected function kirbyVersionNoVulnerabilities(): string
 	{
 		$noVulnerabilities = null;
 
@@ -84,9 +39,9 @@ class SecurityPage extends DefaultPage
 		return $noVulnerabilities;
 	}
 
-	public function versions(): array
+	public function kirbyVersions(): array
 	{
-		$versions = parent::versions()->yaml();
+		$versions = $this->content()->versions()->yaml();
 
 		// dynamically add v4+
 		foreach (License::HISTORY as $major => $initialRelease) {
@@ -118,20 +73,20 @@ class SecurityPage extends DefaultPage
 		return array_reverse($versions, true);
 	}
 
-	public function versionsForUpdateCheck(): array
+	public function kirbyVersionsForUpdateCheck(): array
 	{
 		$versions = [
 			$this->kirby()->version() => [
 				'status'      => 'latest',
 				'description' => 'Latest Kirby release',
 			],
-			'>=' . $this->versionNoVulnerabilities() => [
+			'>=' . $this->kirbyVersionNoVulnerabilities() => [
 				'status'      => 'no-vulnerabilities',
 				'description' => 'No known vulnerabilities',
 			]
 		];
 
-		foreach ($this->versions() as $constraint => $version) {
+		foreach ($this->kirbyVersions() as $constraint => $version) {
 			$description = match ($version['status']) {
 				'end-of-life'      => 'Not supported (end of life) since ' . date('F j, Y', strtotime($version['endOfLife'])),
 				'security-support' => 'Security support until ' . date('F j, Y', strtotime($version['endOfLife'])),
@@ -149,11 +104,56 @@ class SecurityPage extends DefaultPage
 		return $versions;
 	}
 
-	public function versionsTable()
+	public function kirbyVersionsTable()
 	{
 		return snippet('templates/security/versions', [
-			'versions' => new Collection($this->versions())
+			'versions' => new Collection($this->kirbyVersions())
 		], true);
+	}
+
+	public function messages(): array
+	{
+		return array_reverse(parent::messages()->yaml());
+	}
+
+	public function messagesTable()
+	{
+		return snippet('templates/security/messages', [
+			'messages' => $this->messages()
+		], true);
+	}
+
+	public function php(): array
+	{
+		return parent::php()->yaml();
+	}
+
+	protected function replace(Field $field, array $data = []): Field
+	{
+		$latest = $this->kirby()->version();
+
+		// extract the part before the first dot
+		preg_match('/^(\w+)\./', $latest, $matches);
+
+		$versions = page('releases')->children()->filterBy('template', '!=', 'link')->pluck('versionField');
+		$releasePages = implode(' || ', array_map(fn ($version) => $version . str_repeat('.0', 2 - substr_count($version, '.')), $versions));
+
+		$data = [
+			'latest'            => $latest,
+			'latestMajor'       => $matches[1],
+			'noVulnerabilities' => $this->kirbyVersionNoVulnerabilities(),
+			'releasePages'      => $releasePages,
+			...$data
+		];
+
+		$field->value = Str::template($field->value, $data);
+
+		return $field;
+	}
+
+	public function urls(): array
+	{
+		return $this->replace(parent::urls())->yaml();
 	}
 
 	public function text(): Field
@@ -161,7 +161,7 @@ class SecurityPage extends DefaultPage
 		return $this->replace(parent::text(), [
 			'incidents' => $this->incidentsTable(),
 			'messages'  => $this->messagesTable(),
-			'versions'  => $this->versionsTable()
+			'versions'  => $this->kirbyVersionsTable()
 		]);
 	}
 }

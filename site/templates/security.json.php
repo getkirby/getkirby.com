@@ -2,7 +2,7 @@
 
 $data = [
 	'latest'    => $kirby->version(),
-	'versions'  => $page->versionsForUpdateCheck(),
+	'versions'  => $page->kirbyVersionsForUpdateCheck(),
 	'urls'      => $page->urls(),
 	'php'       => $page->php(),
 	'incidents' => array_values($page->incidents()),
