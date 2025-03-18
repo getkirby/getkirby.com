@@ -4,5 +4,5 @@
 	['entry' => $entry]
 ) ?>
 
-<?= $entry->title() ?>
+<span><?= $entry->title() ?></span>
 </div>
