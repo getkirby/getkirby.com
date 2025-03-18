@@ -18,7 +18,9 @@ $pagination = $articles->pagination();
 ```
 This will give us  5 articles per pagination page.
 
-## Example
+----
+
+Examples:
 
 With the object in place, we can now use the methods to create our pagination navigation
 

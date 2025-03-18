@@ -1,6 +1,4 @@
-Text:
-
-## Examples
+Examples:
 
 ```php
 <p><?= esc('untrusted data') ?></p>

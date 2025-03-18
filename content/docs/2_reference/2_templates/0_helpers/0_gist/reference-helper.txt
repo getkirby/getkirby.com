@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 <?= gist('https://gist.github.com/bastianallgeier/b79615a9f7ca76c810b7') ?>

@@ -36,7 +36,9 @@ $files = $page->files();
 $files = $user->files();
 ```
 
-## Examples:
+----
+
+Examples:
 
 With the `$files` object defined, you can now do all sorts of things:
 
@@ -64,6 +66,3 @@ $firstFile = $files->first();
 ```php
 $files = $files->limit(3);
 ```
-
-
-

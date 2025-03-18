@@ -33,7 +33,9 @@ $pages = $site->find('blog', 'projects', 'contact');
 $pages = $page->find('article-a', 'article-b');
 ```
 
-## Examples
+----
+
+Examples:
 
 With the `$pages` object in place, we can start using the methods of this class to do many different things:
 
@@ -60,7 +62,6 @@ $files = $pages->files();
 $firstPage = $pages->first();
 $lastPage = $pages->last();
 ```
-
 
 ### Sort pages
 

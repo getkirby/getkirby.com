@@ -1,6 +1,4 @@
-Text:
-
-## Examples
+Examples:
 
 The `t()` helper returns a predefined translation string by key.
 

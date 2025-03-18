@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 The following example will print `odd`:
 

@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ### Creating a single script tag
 

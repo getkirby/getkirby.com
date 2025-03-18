@@ -35,7 +35,9 @@ Before calling any of the methods of the User class, verify that you have a vali
 </info>
 
 
-## Examples
+----
+
+Examples:
 
 With the `$user` object in place, you can use the methods of the user class to get information about the user or modify the user object.
 
@@ -68,7 +70,3 @@ $userFiles = $user->files();
 <info>
 To keep the examples short, we don't [check if the (user) object exists](docs/cookbook/php/php-templates#and-one-last-trick) in the examples above. In your code, you should always do that.
 </info>
-
-
-
-

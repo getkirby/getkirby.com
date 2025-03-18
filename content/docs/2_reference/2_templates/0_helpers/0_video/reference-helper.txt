@@ -1,6 +1,4 @@
-Text:
-
-## Examples
+Examples:
 
 ### Basic example
 
@@ -13,7 +11,7 @@ Text:
 You can add query parameters as arrays for the respective video type using the keys `youtube` or `vimeo`. In case you want to use both YouTube or Vimeo URLs, you can add options for both types.
 
 ```php
-<?= video('https://www.youtube.com/watch?v=QwjX8JAwBws', 
+<?= video('https://www.youtube.com/watch?v=QwjX8JAwBws',
   [
     'youtube' => [
       'autoplay' => 1,
@@ -29,14 +27,14 @@ You can add query parameters as arrays for the respective video type using the k
 You can add additional attributes as a third parameter:
 
 ```php
-<?= video('https://www.youtube.com/watch?v=QwjX8JAwBws', 
+<?= video('https://www.youtube.com/watch?v=QwjX8JAwBws',
   [
     'youtube' => [
       'autoplay' => 1,
       'controls' => 0,
       'mute'     => 1
     ],
-  ], 
+  ],
   [
     'class' => 'myvideo'
   ]

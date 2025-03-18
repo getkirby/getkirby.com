@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 ```php
 // Include the header snippet

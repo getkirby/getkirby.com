@@ -1,6 +1,4 @@
-Text:
-
-## Examples
+Examples:
 
 Besides with URL query variables, you can set parameters via URL in Kirby in a more human-readable way:
 

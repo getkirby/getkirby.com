@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 `load()` is a shortcut for `F::loadClasses()`:
 

@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 Given a translation with a placeholder. You can define the translation as an array for different counts.
 

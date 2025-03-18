@@ -45,7 +45,9 @@ You can get a `$file` object to use with these methods by fetching it from the `
 Note how we use an if statement here to check if we have a file object before we call the `url()` method to prevent errors in case the page doesn't have any files. Never forget to do this in your own code.
 </info>
 
-## Examples
+---
+
+Examples:
 
 ### Resizing a file
 

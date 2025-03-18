@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 The `router()` helper takes a set of routes and request data and directly executes the matching routing action.
 

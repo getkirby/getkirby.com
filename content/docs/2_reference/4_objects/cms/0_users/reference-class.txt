@@ -18,7 +18,9 @@ $users = $kirby->users();
 
 This will return a collection of all users of the site.
 
-## Examples
+----
+
+Examples:
 
 With the `$users` object in place, you can now use all the methods of the class, for example:
 
@@ -40,5 +42,3 @@ This will return an array with all the email adresses of all users.
 ```php
 $sorted = $users->sortBy('role');
 ```
-
-

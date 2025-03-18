@@ -1,6 +1,4 @@
-Text: 
-
-## Examples
+Examples:
 
 ```php
 $data = [
@@ -38,11 +36,11 @@ The syntax for the `$rules` array supports the following variants:
 
 - To use a validator without parameters, use the validator name as the array value: `['required']`
 - To pass additional parameters to a validator, use the validator's name as the array key, and the parameter(s) as the value.
-  - Scalar values can be passed directly:  
+  - Scalar values can be passed directly:
   `['maxLength' => 20]`
-  - You can pass multiple parameters to the validator as an array:  
+  - You can pass multiple parameters to the validator as an array:
   `['between' => [10, 100]]`
-  - To pass an array as a single parameter, use a nested array:  
+  - To pass an array as a single parameter, use a nested array:
   `['in' => [['foo', 'bar']]]`
 
 You can also separately define a message for each validation rule:

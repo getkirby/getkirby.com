@@ -1,6 +1,4 @@
-Text:
-
-## Examples
+Examples:
 
 Number of elements in array:
 

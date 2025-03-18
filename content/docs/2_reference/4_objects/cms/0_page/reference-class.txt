@@ -46,8 +46,9 @@ $page->your_field()
 You can not use the shorthand for fields with names that conflict with the default methods of the `$page` class (see above) or used by custom page methods.
 </info>
 
+----
 
-## Examples
+Examples:
 
 With the `$page` object defined, you can start using the methods of the class:
 

@@ -22,7 +22,9 @@ $site = $kirby->site();
 $site = site();
 ```
 
-## Examples
+----
+
+Examples:
 
 ### Get the site title
 
@@ -53,5 +55,3 @@ $pageIndex = $site->index();
 ```php
 $url = $site->url();
 ```
-
-

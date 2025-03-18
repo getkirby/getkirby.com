@@ -2,7 +2,9 @@ Text:
 
 This function is used internally by Kirby, but you can also use it in your plugins to trigger deprecation warnings.
 
-## Example:
+----
+
+Examples:
 
 ```php
 function someFunction()

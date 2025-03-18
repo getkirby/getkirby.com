@@ -2,9 +2,7 @@ Class: Kirby\Filesystem\Dir
 
 ----
 
-Text:
-
-## Examples
+Examples:
 
 ### Create a new directory
 

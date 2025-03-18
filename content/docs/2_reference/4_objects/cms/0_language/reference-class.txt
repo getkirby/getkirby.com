@@ -30,7 +30,9 @@ $language = $kirby->language();
 $language = $kirby->language('fr');
 ```
 
-## Examples
+----
+
+Examples:
 
 With the object in place, you can use it like this:
 
@@ -51,7 +53,3 @@ echo $language->name();
 ```php
 dump($language->translations());
 ```
-
-
-
-

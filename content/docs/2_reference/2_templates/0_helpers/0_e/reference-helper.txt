@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 ### With fallback if condition is false:
 

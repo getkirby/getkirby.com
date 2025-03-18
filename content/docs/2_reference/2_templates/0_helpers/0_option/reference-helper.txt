@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 Fetch an option by key from the config:
 

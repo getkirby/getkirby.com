@@ -16,7 +16,9 @@ The `$request` object is available via the `$kirby` object:
 $request = $kirby->request();
 ```
 
-## Examples
+----
+
+Examples:
 
 With the object in place, you have access to all the methods listed above.
 

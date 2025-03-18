@@ -1,11 +1,11 @@
-Text: 
+Read: docs/guide/templates/collections
 
-## Examples
+---
+
+Examples:
 
 ```php
 <?php
 $customCollection = collection('projects');
 dump($customCollection);
 ```
-
-See also: (link: docs/guide/templates/collections text: Defining collections)

@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 <?= youtube('https://www.youtube.com/watch?v=mbyzgeee2mg') ?>

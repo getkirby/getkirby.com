@@ -1,6 +1,4 @@
-Text:
-
-## Examples
+Examples:
 
 Generate a link to a page, e.g. search
 

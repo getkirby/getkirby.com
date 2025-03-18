@@ -1,6 +1,4 @@
-Text:
-
-## Example:
+Examples:
 
 ```php "/site/languages/en.php"
 return [
@@ -10,7 +8,7 @@ return [
   'locale' => 'en_US',
   'name' => 'English',
   'translations' => [
-    'alert' => 'Attention: { message }'  
+    'alert' => 'Attention: { message }'
   ]
 ];
 ```

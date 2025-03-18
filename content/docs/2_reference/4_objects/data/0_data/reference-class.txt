@@ -2,9 +2,7 @@ Class: Kirby\Data\Data
 
 ----
 
-Text:
-
-## Example
+Examples:
 
 ### Reading a `json` file
 

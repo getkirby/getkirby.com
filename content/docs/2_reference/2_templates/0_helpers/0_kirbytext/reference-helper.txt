@@ -4,7 +4,9 @@ Text:
 
 `kt()`
 
-## Example
+----
+
+Examples:
 
 ```php
 <?= kirbytext($page->text()) ?>

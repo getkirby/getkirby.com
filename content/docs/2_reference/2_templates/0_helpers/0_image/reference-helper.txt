@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 ### Fetching an image of the current page
 
