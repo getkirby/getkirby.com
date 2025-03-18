@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 ```php
 <?php foreach ($page->gallery()->toFiles() as $image): ?>

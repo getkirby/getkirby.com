@@ -1,6 +1,4 @@
-Text:
-
-## Examples
+Examples:
 
 ### To a Unix timestamp
 ```php

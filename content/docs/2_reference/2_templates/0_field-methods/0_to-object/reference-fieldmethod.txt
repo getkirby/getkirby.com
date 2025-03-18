@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 This field method is intended for converting an `object` field to a content object.
 

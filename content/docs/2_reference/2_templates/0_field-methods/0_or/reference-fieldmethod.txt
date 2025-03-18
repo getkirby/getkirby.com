@@ -1,6 +1,4 @@
-Text:
-
-## Examples
+Examples:
 
 ### Replace an empty field with another field
 

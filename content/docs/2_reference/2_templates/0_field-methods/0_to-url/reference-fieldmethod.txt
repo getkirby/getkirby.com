@@ -1,7 +1,4 @@
-Text:
-
-
-## Example
+Examples:
 
 ### Text file
 

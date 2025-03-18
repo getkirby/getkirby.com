@@ -1,7 +1,4 @@
-Text:
-
-
-## Example
+Examples:
 
 ```php
 <ul class="authors">

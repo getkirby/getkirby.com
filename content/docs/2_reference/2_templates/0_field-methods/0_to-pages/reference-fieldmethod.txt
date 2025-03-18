@@ -4,7 +4,9 @@ Text:
 The `toPages()` field method only returns published (listed and unlisted) pages, not drafts.
 </info>
 
-## Example
+----
+
+Examples:
 
 ### Text file
 

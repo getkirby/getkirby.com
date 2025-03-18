@@ -4,7 +4,9 @@ Text:
 
 For validators, see (link: docs/reference/system/validators text: list of available validators). In addition, you can use (link: docs/reference/plugins/extensions/validators text: custom validators).
 
-## Example
+----
+
+Examples:
 
 ```php
 <?php if ($page->email()->isValid('email')): ?>

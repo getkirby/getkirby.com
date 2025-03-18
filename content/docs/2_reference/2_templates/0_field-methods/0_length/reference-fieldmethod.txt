@@ -1,17 +1,13 @@
-Text:
-
-## Example
+Examples:
 
 ```php
 <?= $page->text()->kirbytext() ?>
 
 <dl class="text-stats">
-
   <dt>Characters</dt>
   <dd><?= $page->text()->length() ?></dd>
 
   <dt>Words</dt>
   <dd><?= $page->text()->words() ?></dd>
-
 </dl>
 ```

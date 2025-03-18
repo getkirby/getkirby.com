@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 ```php
 <h1><?= $page->title()->html() ?></h1>

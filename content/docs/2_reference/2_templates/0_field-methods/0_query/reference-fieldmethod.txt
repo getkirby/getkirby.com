@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 Assuming your text field value is `site.find('notes')` this query will return the `notes` page. With the `expect` parameter, you can optionally define the expected return type, in this case a `Kirby\Cms\Page` object.
 

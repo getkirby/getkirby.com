@@ -2,7 +2,9 @@ Text:
 
 While the (link: docs/reference/templates/field-methods/yaml text: `yaml` method) returns a simple associative PHP array for (link: docs/reference/panel/fields/structure text: structured field) content, the `toStructure` method gives you a full blown Kirby Collection which makes it possible to use Kirby's chaining syntax.
 
-## Example
+----
+
+Examples:
 
 ### Text file
 ```kirbycontent

@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 Given the field contains string templates, use this method to replace them with values:
 

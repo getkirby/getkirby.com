@@ -1,12 +1,6 @@
-Text:
-
-## Example
+Examples:
 
 ```php
 <?= $page->title()->key() . ': ' . $page->title()->value() ?>
-```
-This will return an output like this:
-
-```
-Title: Project A
+// Title: Project A
 ```

@@ -1,6 +1,4 @@
-Text:
-
-## Examples
+Examples:
 
 ```php
 <?= $page->createdAt()->toTimestamp() ?>

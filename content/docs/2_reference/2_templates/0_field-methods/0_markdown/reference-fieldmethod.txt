@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 ```php
 <?= $page->text()->markdown() ?>

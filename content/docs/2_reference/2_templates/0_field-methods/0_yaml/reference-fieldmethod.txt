@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 You can store structured data in fields with YAML. YAML is a simple structuring syntax.
 
