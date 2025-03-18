@@ -2,10 +2,6 @@ Auth: users.create
 
 ----
 
-Properties: $props
-
-----
-
 Examples:
 
 ```php

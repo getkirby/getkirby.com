@@ -1,1 +1,0 @@
-Properties: $pages|Kirby\Cms\Page|page

@@ -2,10 +2,6 @@ Auth: pages.create
 
 ----
 
-Properties: $props
-
-----
-
 Text:
 
 ## `$props` array
