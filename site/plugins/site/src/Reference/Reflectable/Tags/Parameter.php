@@ -30,13 +30,14 @@ class Parameter
 	}
 
 	public static function factory(
-		ReflectionParameter $parameter,
+		ReflectionParameter|null $parameter = null,
 		ParamTagValueNode|null $doc = null,
 		Reflectable|null $context = null
 	): static {
-		$name    = $parameter->getName();
+		$name    = $parameter?->getName();
+		$name  ??= ltrim($doc?->parameterName, '$');
 		$types   = $doc?->type;
-		$types ??= $parameter->getType();
+		$types ??= $parameter?->getType();
 		$types   = Types::factory($types, $context);
 
 		return new static(
@@ -44,8 +45,9 @@ class Parameter
 			types:       $types,
 			default:     static::factoryDefault($parameter),
 			description: $doc?->description,
-			isRequired:  $parameter->isOptional() === false,
-			isVariadic:  $parameter->isVariadic()
+			isRequired:  $parameter?->isOptional() !== true &&
+						 $types->has('null') !== true,
+			isVariadic:  $parameter?->isVariadic() ?? $doc?->isVariadic
 		);
 	}
 
@@ -53,8 +55,12 @@ class Parameter
 	 * Returns the default value of the parameter
 	 */
 	protected static function factoryDefault(
-		ReflectionParameter $parameter
+		ReflectionParameter|null $parameter = null
 	): string|null {
+		if ($parameter === null) {
+			return null;
+		}
+
 		// if the parameter is not optional, there is no default value
 		if ($parameter->isOptional() === false) {
 			return null;
