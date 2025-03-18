@@ -4,13 +4,7 @@ Text:
 
 Kirby considers the following file types as code:
 
-- js
-- css
-- scss
-- rb
-- xml
-- json
-- java
+(docs: file-types field: code vars: exclude=htm,html,php)
 
 Any html or php files cannot be uploaded to pages for security reasons.
 

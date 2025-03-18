@@ -4,18 +4,7 @@ Text:
 
 Kirby considers the following file types as video:
 
-- mov
-- movie
-- avi
-- ogg
-- ogv
-- webm
-- flv
-- swf
-- mp4
-- m4v
-- mpg
-- mpe
+(docs: file-types field: video)
 
 ----
 

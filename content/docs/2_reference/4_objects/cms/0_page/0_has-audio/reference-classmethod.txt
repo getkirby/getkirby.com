@@ -4,12 +4,7 @@ Text:
 
 Kirby considers the following file types as audio files:
 
-- mp3
-- m4a
-- wav
-- aif
-- aiff
-- midi
+(docs: file-types field: audio)
 
 ----
 

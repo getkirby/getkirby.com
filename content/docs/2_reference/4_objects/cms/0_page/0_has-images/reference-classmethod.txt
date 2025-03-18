@@ -4,20 +4,7 @@ Text:
 
 Kirby considers the following file types as images:
 
-- jpeg
-- jpg
-- jpe
-- gif
-- png
-- svg
-- ico
-- tif
-- tiff
-- bmp
-- psd
-- ai
-- eps
-- ps
+(docs: file-types field: image)
 
 ----
 
