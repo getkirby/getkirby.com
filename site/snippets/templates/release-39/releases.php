@@ -35,7 +35,7 @@
 		<div class="columns" style="--columns: 3">
 			<div class="release-text-box">
 				<div class="prose">
-					The Kirby Command Line Interface is <a class="link" href="https://github.com/getkirby/cli/releases/tag/1.1.0">getting a big update</a>. Kirby plugins can now define their own commands for the CLI, you can register your installation without going to the Panel and more …
+					The Kirby Command Line Interface is <a class="link" href="<?= option('github.url') ?>/cli/releases/tag/1.1.0">getting a big update</a>. Kirby plugins can now define their own commands for the CLI, you can register your installation without going to the Panel and more …
 				</div>
 			</div>
 			<div style="--span: 2">
@@ -67,7 +67,7 @@
 			</div>
 			<div class="release-text-box">
 				<div class="prose">
-					<a class="link" href="https://github.com/getkirby/kql/releases/tag/2.0.0">KQL 2.0.0</a> comes with all the new query syntax improvements from Kirby 3.8.3 and a fully refactored code base.
+					<a class="link" href="<?= option('github.url') ?>/kql/releases/tag/2.0.0">KQL 2.0.0</a> comes with all the new query syntax improvements from Kirby 3.8.3 and a fully refactored code base.
 				</div>
 			</div>
 			<div class="release-text-box">
@@ -85,7 +85,7 @@
 			<div class="release-text-box">
 				<div class="prose">
 					<p>Staticache is our alternative page cache plugin for Kirby that stores responses as fully static files. This helps you to increase your site performance even more.</p>
-					<p>With <a class="link" href="https://github.com/getkirby/staticache/releases/tag/1.0.0">version 1.0.0</a> it is finally ready for prime time for a lot of common site setups. It now comes with support for multi-language sites and content representations as well as with a new mode that caches custom HTTP response headers as well.</p>
+					<p>With <a class="link" href="<?= option('github.url') ?>/staticache/releases/tag/1.0.0">version 1.0.0</a> it is finally ready for prime time for a lot of common site setups. It now comes with support for multi-language sites and content representations as well as with a new mode that caches custom HTTP response headers as well.</p>
 				</div>
 			</div>
 			<div>

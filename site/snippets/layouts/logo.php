@@ -8,7 +8,7 @@
 	$page->parents()->has('docs/reference') === true
 ): ?>
 <p class="version <?php e(option('archived') === true, 'archived') ?>">
-	<a class="font-bold" href="<?= page('/releases/' . $kirby->version())?->url() ?? 'https://github.com/getkirby/kirby/releases/' . $kirby->version() ?>">
+	<a class="font-bold" href="<?= page('/releases/' . $kirby->version())?->url() ?? option('github.url') . '/kirby/releases/' . $kirby->version() ?>">
 		Kirby <span class="link tabular-nums"><?= $kirby->version() ?></span>
 	</a>
 </p>

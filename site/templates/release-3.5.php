@@ -36,7 +36,7 @@
 		]) ?>
 		<div class="prose text-lg mb-12">
 			<p>Our brand-new Blocks field is the perfect solution for complex single-column layouts and long-form text.</p>
-			<p>It brings the best of the <a href="https://github.com/getkirby/editor">Editor</a> and the <a href="https://github.com/TimOetting/kirby-builder">Builder</a> plugins into the core. Combining a great WYSIWYG editing experience with fully customizable blocks. <a href="<?= url('docs/reference/panel/fields/blocks') ?>">Learn more &rarr;</a></p>
+			<p>It brings the best of the <a href="<?= option('github.url') ?>/editor">Editor</a> and the <a href="https://github.com/TimOetting/kirby-builder">Builder</a> plugins into the core. Combining a great WYSIWYG editing experience with fully customizable blocks. <a href="<?= url('docs/reference/panel/fields/blocks') ?>">Learn more &rarr;</a></p>
 		</div>
 		<aside class="mb-12">
 			<h3 class="h3 mb-3">Highlights</h3>
@@ -223,7 +223,7 @@
 			'image' => $page->image('starterkit.jpg'),
 			'class' => 'shadow',
 			'text' => 'We completely overhauled Kirby’s Starterkit to feature a new design together with the new blocks and layout fields.',
-			'link' => 'https://github.com/getkirby/starterkit'
+			'link' => option('github.url') . '/starterkit'
 		]) ?>
 	</div>
 </section>

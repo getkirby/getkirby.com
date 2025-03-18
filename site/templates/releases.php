@@ -57,7 +57,7 @@
 					<span class="text-base">
 						<?= implode(', ', A::map(
 							array_reverse($subreleases),
-							fn ($subrelease) => '<a href="https://github.com/getkirby/kirby/releases/tag/' . $subrelease . '">' . $subrelease . '</a>'
+							fn ($subrelease) => '<a href="' . option('github.url') . '/kirby/releases/tag/' . $subrelease . '">' . $subrelease . '</a>'
 						)) ?>
 					</span>
 				</div>
@@ -68,7 +68,7 @@
 
 	<footer class="h2 max-w-xl">
 		<div class="mb-6">
-			Full list of <a href="https://github.com/getkirby/kirby/releases"><span class="link">all releases</span> &rarr;</a>
+			Full list of <a href="<?= option('github.url') ?>/kirby/releases"><span class="link">all releases</span> &rarr;</a>
 		</div>
 		<div class="h5">
 			All <a href="/changelog"><span class="link">breaking changes</span> since 3.0</a>

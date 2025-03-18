@@ -128,7 +128,7 @@
 			<span class="font-mono text-xs"> contributors</span>
 		</li>
 		<li class="bg-light p-6">
-			<a class="block" href="https://github.com/getkirby/kirby">
+			<a class="block" href="<?= option('github.url') ?>/kirby">
 				<span class="block text-2xl">612</span>
 				<span class="font-mono text-xs"> stars</span>
 			</a>
@@ -138,7 +138,7 @@
 	<ul class="mb-6 columns font-mono text-sm" style="--columns-sm: 2; --columns-md: 3; --columns: 5; --gap: var(--spacing-1)">
 		<?php foreach ($releases as $release): ?>
 		<li>
-			<a class="block bg-white p-3" href="https://github.com/getkirby/kirby/releases/tag/<?= $release['name'] ?>">
+			<a class="block bg-white p-3" href="<?= option('github.url') ?>/kirby/releases/tag/<?= $release['name'] ?>">
 				🚀 <?= $release['name'] ?>
 			</a>
 		</li>

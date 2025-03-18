@@ -121,7 +121,7 @@ class ReleasePage extends DefaultPage
 			return $field;
 		}
 
-		$url  = 'https://github.com/getkirby/kirby/archive/refs/tags/';
+		$url  = option('github.url') . '/kirby/archive/refs/tags/';
 		$url .= $this->latestRelease() . '.zip';
 		return $field->or($url);
 	}

@@ -57,6 +57,10 @@ Say Hi! to [hello@kozmoz.io](mailto:hello@kozmoz.io) for your next project idea 
 
 ----
 
+Plugindeveloper: kozmozio
+
+----
+
 Expertise:
 
 - Visual communication design

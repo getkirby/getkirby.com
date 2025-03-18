@@ -60,15 +60,16 @@ function img($file, array $props = [])
 	$height ??= $file->height();
 
 	$img = '<img ' . attr([
-		'alt'     => $props['alt'] ?? '',
-		'class'   => $props['class'] ?? null,
-		'style'   => $props['style'] ?? null,
-		'loading' => $loading ?? null,
-		'sizes'   => $sizes,
-		'src'     => $src,
-		'srcset'  => $srcset ?? null,
-		'width'   => $width,
-		'height'  => $height
+		'alt'           => $props['alt'] ?? '',
+		'class'         => $props['class'] ?? null,
+		'style'         => $props['style'] ?? null,
+		'loading'       => $loading ?? null,
+		'fetchpriority' => $props['fetchpriority'] ?? null,
+		'sizes'         => $sizes,
+		'src'           => $src,
+		'srcset'        => $srcset ?? null,
+		'width'         => $width,
+		'height'        => $height
 	]) . '>';
 
 	if (empty($props['lightbox']) === false && $props['lightbox'] !== false) {

@@ -25,7 +25,6 @@ Screencast:
 
 Text:
 
-
 Want to explore Kirby a bit without installing anything first? Check out our (link: /try text: instant online demo).
 
 ## Requirements
@@ -52,75 +51,34 @@ Kirby needs a pretty standard set of PHP extensions. See the full list of requir
 You can install Kirby in a few quick steps in different ways. More instructions on installing and updating Kirby can be found in our (link: docs/guide/install-guide text: detailed installation guides)
 
 (tabs…)
+
 === Manual
-1. We provide two downloadable kits for you to get started with.
 
-(docs: kits)
+(docs: installation/manual)
 
-2. Extract the contents of the ZIP file into your server's (glossary: document-root)
-3. Visit your new Kirby site in your browser at `yourdomain.com`
-4. Visit the (glossary: Panel) at `yourdomain.com/panel` to (link: #create-your-first-account text: create your first account)
+=== Herd
 
+(docs: installation/herd)
 
 === Kirby CLI
 
-You can install a Kirby Starterkit via the (link: https://github.com/getkirby/cli text: Kirby CLI) as follows:
-
-1. Starterkit
-```bash
-kirby install:kit Starterkit
-```
-
-2. Plainkit
-```bash
-kirby install:kit Plainkit
-```
-
-In both cases you will be prompted to specify a folder name to install into.
-
-More information about installing and updating Kirby via the CLI in our (link: docs/guide/install-guide/cli text: installation guide).
+(docs: installation/cli)
 
 === Composer
 
-(link: https://getcomposer.org text: Composer) is a dependency manager for PHP. If you have never used Composer before, follow the instruction on the (link: https://getcomposer.org/doc/00-intro.md text: Composer website).
-
-In a terminal window, navigate to the place where you want to install Kirby. Then run one of the following commands to create a new project based on the Starterkit or Plainkit.
-
-1. Installing the Starterkit
-```bash
-composer create-project getkirby/starterkit project-folder
-```
-
-1. Installing the Plainkit
-```bash
-composer create-project getkirby/plainkit project-folder
-```
-More information about installing and updating Kirby via Composer in our (link: docs/guide/install-guide/composer text: installation guide).
+(docs: installation/composer)
 
 === Git
 
-In a terminal window, navigate to the place where you want to install Kirby. Then run one of the following commands to create a new project based on the Starterkit or Plainkit.
-
-1. Installing the Starterkit
-```bash
-git clone https://github.com/getkirby/starterkit project-folder
-```
-
-1. Installing the Plainkit
-```bash
-git clone https://github.com/getkirby/plainkit project-folder
-```
-More information about installing and updating Kirby via Git in our (link: docs/guide/install-guide/git text: installation guide).
+(docs: installation/git)
 
 (…tabs)
 
 (image: starterkit.png)
 
-
 <info>
 When copying files to a remote server via (S)FTP, make sure to copy the `.htaccess` file as well. By default, files starting with a dot are invisible in the filesystem, so make sure enable the display of invisible files before copying.
 </info>
-
 
 
 ## Create your first account

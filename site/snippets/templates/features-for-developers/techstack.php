@@ -41,7 +41,7 @@
 			<figure class="mb-6">
 				<?= icon('github') ?>
 			</figure>
-			<h3 class="font-bold"><a href="https://github.com/getkirby">Sustainable open-source &rarr;</a></h3>
+			<h3 class="font-bold"><a href="<?= option('github.url') ?>">Sustainable open-source &rarr;</a></h3>
 			<p class="color-gray-800">Yes, Kirby has a commercial license that's been keeping us running since 2012. But we believe in the transparency of open-source. Kirby's complete code base is available on GitHub, not hidden behind a paywall. No obfuscation, no secrets. You only need to pay when you're actually going live with a Kirby project.</p>
 		</article>
 	</div>

@@ -71,23 +71,35 @@
 				evaluate it as long as you need. How? <a class="color-black link" href="/docs/guide/quickstart">Get up and running …</a>
 			</p>
 
-			<div class="columns shadow-2xl bg-light overflow-hidden rounded" style="--columns: 1; --columns-lg: 2; --gap: var(--spacing-2px)">
-				<article class="p-6 bg-white">
+			<div class="columns" style="--columns: 1; --columns-lg: 1; --gap: var(--spacing-6)">
+				<article class="p-6 bg-white shadow-2xl rounded">
 					<h2 class="font-bold mb-1">Starterkit</h2>
 					<p class="mb-6">Fully annotated sample site for everyone who wants to learn about Kirby's capabilities. </p>
-					<a aria-label="Download the Starterkit" class="btn btn--filled" href="https://github.com/getkirby/starterkit/archive/main.zip">
-						<?= icon('download') ?>
-						Download
-					</a>
+					<p class="flex" style="--gap: var(--spacing-3)">
+						<a aria-label="Download the Starterkit" class="btn btn--filled" href="<?= option('github.url') ?>/starterkit/archive/main.zip">
+							<?= icon('download') ?>
+							Download ZIP
+						</a>
+						<a aria-label="Install the Starterkit" class="btn btn--filled" href="https://herd.laravel.com/new/getkirby/starterkit">
+							<?= icon('bolt') ?>
+							Install with Herd
+						</a>
+					</p>
 				</article>
 
-				<article class="p-6 bg-white">
+				<article class="p-6 bg-white shadow-2xl rounded">
 					<h2 class="font-bold mb-1">Plainkit</h2>
 					<p class="mb-6">No templates, no content, no styles – just you, Kirby and your imagination.</p>
-					<a aria-label="Download the Plainkit" class="btn btn--filled" href="https://github.com/getkirby/plainkit/archive/main.zip">
-						<?= icon('download') ?>
-						Download
-					</a>
+					<p class="flex" style="--gap: var(--spacing-3)">
+						<a aria-label="Download the Plainkit" class="btn btn--filled" href="<?= option('github.url') ?>/plainkit/archive/main.zip">
+							<?= icon('download') ?>
+							Download ZIP
+						</a>
+						<a aria-label="Install the Starterkit" class="btn btn--filled" href="https://herd.laravel.com/new/getkirby/plainkit">
+							<?= icon('bolt') ?>
+							Install with Herd
+						</a>
+					</p>
 				</article>
 			</div>
 		</section>

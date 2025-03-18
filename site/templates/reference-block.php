@@ -37,5 +37,5 @@
 	<?php endif ?>
 
 	<h3 id="default-files__vue-component"><a href="#default-files__vue-component">Vue component</a></h3>
-	<p><a href="https://github.com/getkirby/kirby/blob/main/panel/src/components/Forms/Blocks/Types/<?= ucfirst($page->title()) ?>.vue"><code>kirby/src/components/Forms/Blocks/Types/<?= ucfirst($page->title()) ?>.vue</code></a></p>
+	<p><a href="<?= option('github.url') ?>/kirby/blob/main/panel/src/components/Forms/Blocks/Types/<?= ucfirst($page->title()) ?>.vue"><code>kirby/src/components/Forms/Blocks/Types/<?= ucfirst($page->title()) ?>.vue</code></a></p>
 </div>
