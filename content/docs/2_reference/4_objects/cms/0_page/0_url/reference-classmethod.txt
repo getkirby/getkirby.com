@@ -1,13 +1,10 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 <?= $page->url() ?>
 ```
 
-
-## Language specific URLs
+### Language specific URLs
 
 On multi-language sites you can get the URL of a page for a different language, by passing the language code.
 

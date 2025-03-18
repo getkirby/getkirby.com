@@ -1,20 +1,8 @@
-Text: 
-
-## Example
-
-```php
-<?php
-echo $page->hasAudio(); //will echo 1 if true, nothing if false
-
-if($page->hasAudio()) {
-  $audio = $page->audio();
-}
-?>
-```
+Text:
 
 ## What is an audio file?
 
-Kirby considers the following file types as audio files: 
+Kirby considers the following file types as audio files:
 
 - mp3
 - m4a
@@ -22,3 +10,15 @@ Kirby considers the following file types as audio files:
 - aif
 - aiff
 - midi
+
+----
+
+Examples:
+
+```php
+echo $page->hasAudio(); //will echo 1 if true, nothing if false
+
+if($page->hasAudio()) {
+  $audio = $page->audio();
+}
+```

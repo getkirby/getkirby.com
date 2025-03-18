@@ -1,8 +1,10 @@
-Text: 
+Text:
 
 The inventory array contains a list of all inventory items of the page, like the content files, children, files, meta files, etc.
 
-## Example
+----
+
+Examples:
 
 ```php
 <?php

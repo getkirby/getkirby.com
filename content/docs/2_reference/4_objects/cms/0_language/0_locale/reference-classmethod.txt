@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 <?= $kirby->language('en')->locale(LC_ALL) ?>

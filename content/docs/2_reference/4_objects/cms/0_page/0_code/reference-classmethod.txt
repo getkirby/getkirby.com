@@ -1,16 +1,8 @@
-Text: 
-
-## Example
-
-```php
-<?php foreach($page->code()->filterBy('extension', 'css') as $css): ?>
-<?= css($css->url()) ?>
-<?php endforeach ?>
-```
+Text:
 
 ## What is a code file?
 
-Kirby considers the following file types as code: 
+Kirby considers the following file types as code:
 
 - js
 - css
@@ -21,3 +13,13 @@ Kirby considers the following file types as code:
 - java
 
 Any html or php files cannot be uploaded to pages for security reasons.
+
+----
+
+Examples:
+
+```php
+<?php foreach($page->code()->filterBy('extension', 'css') as $css): ?>
+<?= css($css->url()) ?>
+<?php endforeach ?>
+```

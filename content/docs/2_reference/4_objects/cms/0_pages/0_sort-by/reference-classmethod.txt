@@ -1,6 +1,8 @@
-Text:
+Read: docs/cookbook/collections/sorting
 
-## Example
+----
+
+Examples:
 
 ```php
 <ul>
@@ -13,6 +15,7 @@ Text:
   <?php endforeach ?>
 </ul>
 ```
+
 It's also possible to sort by more than one field:
 
 ```php

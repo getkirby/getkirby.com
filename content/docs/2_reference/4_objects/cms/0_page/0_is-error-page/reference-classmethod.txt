@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ### A custom css file for the error page
 

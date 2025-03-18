@@ -1,16 +1,4 @@
-Text: 
-
-## Example
-
-```php
-<?php
-echo $page->hasDocuments(); //returns the number of documents in the folder
-
-if($page->hasDocuments()) {
-  $documents = $page->documents();
-}
-?>
-```
+Text:
 
 ## What is a document file?
 
@@ -34,3 +22,15 @@ Kirby considers the following file types as document:
 - csv
 - rtf
 - rtx
+
+----
+
+Examples:
+
+```php
+echo $page->hasDocuments(); //returns the number of documents in the folder
+
+if($page->hasDocuments()) {
+  $documents = $page->documents();
+}
+```

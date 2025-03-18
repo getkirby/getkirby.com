@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 This page is a subpage of:

@@ -1,10 +1,6 @@
-Text:
-
-## Example
+Examples:
 
 ```php
-<?php
-
 return function ($kirby, $page) {
   $random = null;
   if ($page->randomize()->toBool()) {

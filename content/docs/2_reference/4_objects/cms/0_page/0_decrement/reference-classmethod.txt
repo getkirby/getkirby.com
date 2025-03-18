@@ -2,9 +2,7 @@ Auth: pages.update
 
 ----
 
-Text:
-
-## Example
+Examples:
 
 (docs: immutable-objects)
 

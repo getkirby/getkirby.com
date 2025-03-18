@@ -1,3 +1,7 @@
+Read: docs/cookbook/collections/search
+
+----
+
 Text:
 
 ## Parameter options
@@ -10,8 +14,9 @@ Text:
 | `score` | `['id' => 64,'title' => 64]` | Score per field
 | `stopwords`| `[]` | Array of words to exclude from search
 
-## Example
+----
 
+Examples:
 
 ```php
 // search the entire site
@@ -32,7 +37,3 @@ $results = $site->search('my awesome->search', ['words' => true]);
 // feed the search with a get parameter -> http://yourdomain.com/?q=awesome
 $results = $site->search(get('q'));
 ```
-
-## More information
-
-(link: docs/cookbook/collections/search text: Setting up a search page)

@@ -1,6 +1,16 @@
+Read: docs/cookbook/collections/filtering
+
+----
+
 Text:
 
-## Example
+## Available filter methods
+
+(docs: filters)
+
+----
+
+Examples:
 
 ```php
 // fetch children with a field 'draft', which has the value 'yes'
@@ -28,11 +38,3 @@ $items = $page->children()->filterBy('tag', 'development', ',');
 // fetch children that have the tag 'development' from a tags field with separator ';'
 $items = $page->children()->filterBy('tag', 'development', ';');
 ```
-
-## Available filter methods
-
-(docs: filters)
-
-## More information
-
-(link: docs/cookbook/collections/filtering text: Filtering compendium)

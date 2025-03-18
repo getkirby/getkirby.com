@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 Filter all articles for the current author page:
 

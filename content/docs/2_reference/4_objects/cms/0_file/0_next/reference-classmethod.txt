@@ -1,9 +1,7 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
-if(($file = $page->file('my-file.pdf')) && $next = $file->next()):
+if (($file = $page->file('my-file.pdf')) && $next = $file->next()):
     echo 'Next file: ' . $next->filename();
 endif;
 ```

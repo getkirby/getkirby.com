@@ -1,20 +1,8 @@
-Text: 
-
-## Example
-
-```php
-<?php
-echo $page->hasCode(); //will echo 1 if true, nothing if false
-
-if($page->hasCode()) {
-  $codeFiles = $page->code();
-}
-?>
-```
+Text:
 
 ## What is a code file?
 
-Kirby considers the following file types as code: 
+Kirby considers the following file types as code:
 
 - js
 - css
@@ -25,3 +13,16 @@ Kirby considers the following file types as code:
 - java
 
 Any html or php files cannot be uploaded to pages for security reasons.
+
+----
+
+Examples:
+
+```php
+echo $page->hasCode(); //will echo 1 if true, nothing if false
+
+if ($page->hasCode()) {
+  $codeFiles = $page->code();
+}
+```
+

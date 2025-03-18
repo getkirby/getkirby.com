@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 ```php
 <?php
@@ -55,7 +53,3 @@ Array
 )
  */
 ```
-
-
-
-

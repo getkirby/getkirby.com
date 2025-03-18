@@ -2,11 +2,9 @@ Read: docs/guide/emails
 
 ----
 
-Text:
+Examples:
 
-## Examples
-
-## Basic example
+### Basic example
 
 ```php
 try {
@@ -90,7 +88,7 @@ $kirby->email([
 ]);
 ```
 
-### Multiple recipients with name
+#### Multiple recipients with name
 
 ```php
 'to' => [

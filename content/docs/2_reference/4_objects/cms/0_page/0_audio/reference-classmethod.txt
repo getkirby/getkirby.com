@@ -1,19 +1,8 @@
-Text: 
-
-## Example
-
-```php
-<h2>Songs</h2>
-<?php foreach($page->audio() as $audio): ?>
-<audio controls>
-  <source src="<?= $audio->url() ?>" type="<?= $audio->mime() ?>">
-</audio>
-<?php endforeach ?>
-```
+Text:
 
 ## What is an audio file?
 
-Kirby considers the following file types as audio files: 
+Kirby considers the following file types as audio files:
 
 - mp3
 - m4a
@@ -21,3 +10,17 @@ Kirby considers the following file types as audio files:
 - aif
 - aiff
 - midi
+
+----
+
+Examples:
+
+```php
+<h2>Songs</h2>
+
+<?php foreach($page->audio() as $audio): ?>
+<audio controls>
+  <source src="<?= $audio->url() ?>" type="<?= $audio->mime() ?>">
+</audio>
+<?php endforeach ?>
+```

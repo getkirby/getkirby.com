@@ -10,10 +10,11 @@ Text:
 |`children` | `bool`
 |`files` | `bool`
 
-## Example
+----
+
+Examples:
 
 ```php
-
 $copy = $page->copy(
     [
         'slug'     => $page->slug() . '-' . time(),
@@ -25,6 +26,5 @@ $copy = $page->copy(
 
 dump($copy);
 ```
-
 
 Passing no parent or passing `null` as value for `parent` will copy the page as child of `$site`.

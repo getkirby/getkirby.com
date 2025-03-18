@@ -1,16 +1,4 @@
-Text: 
-
-## Example
-
-```php
-<h2>Videos</h2>
-<?php foreach($page->videos() as $video): ?>
-<video width="300" height="200" controls>
-  <source src="<?= $video->url() ?>" type="<?= $video->mime() ?>">
-</video>
-<?php endforeach ?>
-```
-
+Text:
 
 ## What is a video file?
 
@@ -28,3 +16,16 @@ Kirby considers the following file types as video:
 - m4v
 - mpg
 - mpe
+
+----
+
+Examples:
+
+```php
+<h2>Videos</h2>
+<?php foreach($page->videos() as $video): ?>
+<video width="300" height="200" controls>
+  <source src="<?= $video->url() ?>" type="<?= $video->mime() ?>">
+</video>
+<?php endforeach ?>
+```

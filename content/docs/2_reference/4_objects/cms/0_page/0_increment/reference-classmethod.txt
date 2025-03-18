@@ -2,9 +2,7 @@ Auth: pages.update
 
 ----
 
-Text:
-
-## Example
+Examples:
 
 (docs: immutable-objects)
 
@@ -12,6 +10,6 @@ Text:
 <?php $page->increment('likes') ?>
 ```
 
-## Notice
-
+<notice>
 The increment method will only work reliably with field values that PHP can parse into a valid integer. Otherwise the field value will be evaluated as zero and incremented to 1 or whatever $by value you pass.
+</notice>

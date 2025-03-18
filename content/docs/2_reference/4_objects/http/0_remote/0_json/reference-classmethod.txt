@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 If the respons content is a JSON response, you can use the `$remote->json()` method to covert the content to an array or object.
 
@@ -41,8 +39,3 @@ if ($response->code() === 200):
 
 <?php endif ?>
 ```
-
-
-
-
-

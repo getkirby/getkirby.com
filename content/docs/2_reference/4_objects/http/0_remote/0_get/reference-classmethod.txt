@@ -4,13 +4,13 @@ Text:
 
 ## Params array
 
-
 Default parameters:
 
 (docs: remote-class-default-params)
 
+----
 
-## Examples
+Examples:
 
 In this example, we make a GET request to the picsum API, and write the content of the requested image to file:
 

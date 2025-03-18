@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 This example will return a pages collection when the page has children:
 

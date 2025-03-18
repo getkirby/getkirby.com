@@ -1,10 +1,6 @@
-Text:
-
-## Example
+Examples:
 
 ```php
-<?php
-
 return function ($kirby) {
   $results = yourApi();
 

@@ -1,3 +1,7 @@
+Read: docs/guide/templates/basics
+
+----
+
 Text:
 
 ## Details
@@ -8,7 +12,9 @@ Assuming you have a content file `article.txt`, then `$page->intendedTemplate()-
 
 This method is therefore particularly useful to fetch or filter pages that don't have a corresponding template in the `templates` folder.
 
-## Examples
+----
+
+Examples:
 
 ### Basic usuage
 
@@ -25,7 +31,3 @@ echo $page->intendedTemplate();
 $filtered = $page->children()->filterby('intendedTemplate', 'article');
 ?>
 ```
-
-## Further Reading
-
-- (link: docs/guide/templates/basics text: Templates)

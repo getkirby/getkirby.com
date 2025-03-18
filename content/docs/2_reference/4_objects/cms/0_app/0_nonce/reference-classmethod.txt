@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 The method generates a nonce that you can use in your inline scripts in conjuction with the Content Security Policy of your website.
 

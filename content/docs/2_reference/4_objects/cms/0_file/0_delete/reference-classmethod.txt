@@ -2,12 +2,10 @@ Auth: files.delete
 
 ----
 
-Text:
-
-## Example
+Examples:
 
 ```php
-if($file = $page->file('old-file.pdf')) {
+if ($file = $page->file('old-file.pdf')) {
     try {
         $file->delete();
         echo 'The file has been deleted';

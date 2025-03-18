@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 ```php
 $blocks = $page->text()->toBlocks()->filter(

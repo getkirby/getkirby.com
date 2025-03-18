@@ -2,9 +2,7 @@ Read: docs/guide/configuration
 
 ----
 
-Text:
-
-## Example
+Examples:
 
 ```php "site/config/config.php"
 

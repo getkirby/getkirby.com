@@ -1,26 +1,10 @@
 Text:
 
-## Example
-
-```php
-if($image = $page->image()):
-    // crop into a square of 300 x 300
-    echo $image->crop(300);
-
-    // crop by height as well
-    echo $image->crop(300, 200);
-
-    // adjust the quality
-    echo $image->crop(300, 200, 70);
-endif;
-```
-
-### Crop positions
+## Crop positions
 
 <info>
 If a (link: docs/reference/panel/blueprints/file text: focal point) is set, this focal point will automatically be used when cropping an image. If you use one of the following focal points when cropping, this will overwrite the focal point set in the file metadata.
 </info>
-
 
 You can define from which side or corner a file should be cropped. The following crop options are available:
 
@@ -47,3 +31,19 @@ $image->crop(100, 200, [
 ]);
 ```
 
+----
+
+Examples:
+
+```php
+if ($image = $page->image()) {
+    // crop into a square of 300 x 300
+    echo $image->crop(300);
+
+    // crop by height as well
+    echo $image->crop(300, 200);
+
+    // adjust the quality
+    echo $image->crop(300, 200, 70);
+}
+```

@@ -1,13 +1,9 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 <?php
-
 $subpages   = $page->children()->paginate(10);
 $pagination = $subpages->pagination();
-
 ?>
 
 <!-- foreach loop with subpages -->
@@ -23,5 +19,4 @@ $pagination = $subpages->pagination();
   next (<?= $pagination->nextPage() ?>)
 </a>
 <?php endif ?>
-
 ```

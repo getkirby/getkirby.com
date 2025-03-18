@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 <?= $site->language('en')->url() ?>

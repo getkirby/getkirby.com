@@ -1,21 +1,4 @@
-Text: 
-
-## Example
-
-```php
-<h2>Available PDFs</h2>
-<ul>
-  <?php foreach($page->documents()->filterBy('extension', 'pdf') as $pdf): ?>
-  <li>
-    <a href="<?= $pdf->url() ?>">
-      <?= $pdf->filename() ?>
-      (<?= $pdf->niceSize() ?>)
-    </a>
-  </li>
-  <?php endforeach ?>
-</ul>
-```
-
+Text:
 
 ## What is a document file?
 
@@ -39,3 +22,21 @@ Kirby considers the following file types as document:
 - csv
 - rtf
 - rtx
+
+----
+
+Examples:
+
+```php
+<h2>Available PDFs</h2>
+<ul>
+  <?php foreach($page->documents()->filterBy('extension', 'pdf') as $pdf): ?>
+  <li>
+    <a href="<?= $pdf->url() ?>">
+      <?= $pdf->filename() ?>
+      (<?= $pdf->niceSize() ?>)
+    </a>
+  </li>
+  <?php endforeach ?>
+</ul>
+```

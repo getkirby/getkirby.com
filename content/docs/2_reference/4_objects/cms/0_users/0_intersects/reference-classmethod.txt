@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 ```php
 $users1 = $kirby->users()->role('admin');

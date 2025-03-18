@@ -2,9 +2,7 @@ Auth: pages.update
 
 ----
 
-Text:
-
-## Example
+Examples:
 
 (docs: immutable-objects)
 
@@ -55,5 +53,4 @@ try {
   echo $e->getMessage();
 
 }
-
 ```

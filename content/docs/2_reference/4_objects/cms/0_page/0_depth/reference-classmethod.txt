@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 <select onchange="window.location.href = this.value">

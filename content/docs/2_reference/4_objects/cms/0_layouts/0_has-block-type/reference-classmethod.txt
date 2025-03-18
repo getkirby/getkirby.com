@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 Useful if you want to include scripts etc. depending on block types in layout field.
 

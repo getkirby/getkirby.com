@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 // search the entire site
@@ -23,5 +21,4 @@ $results = $page->search('my awesome->search', ['words' => true]);
 
 // feed the search with a get parameter -> http://yourdomain.com/?q=awesome
 $results = $page->search(get('q'));
-
 ```

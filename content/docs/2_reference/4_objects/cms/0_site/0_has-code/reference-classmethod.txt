@@ -1,9 +1,7 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
-<?php if($site->hasCode()): ?>
+<?php if ($site->hasCode()): ?>
 The /content folder contains code files.
 <?php endif ?>
 ```

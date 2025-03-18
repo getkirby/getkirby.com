@@ -1,6 +1,8 @@
-Text:
+Read: docs/cookbook/collections/random-content
 
-## Example
+----
+
+Examples:
 
 ```php
 <h2>Random subpages</h2>
@@ -14,7 +16,3 @@ Text:
   <?php endforeach ?>
 </ul>
 ```
-
-## More information
-
-(link: docs/cookbook/collections/random-content text: Random content)

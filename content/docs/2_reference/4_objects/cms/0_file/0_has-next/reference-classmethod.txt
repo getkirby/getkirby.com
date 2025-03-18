@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 $file = $page->file('myfile.pdf');

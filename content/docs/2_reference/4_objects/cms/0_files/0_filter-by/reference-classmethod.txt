@@ -1,11 +1,20 @@
+Read: docs/cookbook/collections/filtering
+
+----
+
 Text:
 
 ## Values for `$args`
 
 `$args` can be a string, `true`, `false` or a combination of a filter method and an argument. In case of the `in` or `not in` filters, the third argument must be an array.
 
+## Available filter methods
 
-## Examples
+(docs: filters)
+
+----
+
+Examples:
 
 ```php
 // filter by extension
@@ -23,11 +32,3 @@ $files = $page->files()->filterBy('type', '!=', 'document');
 // filter all files that have a template assigned
 $files = $page->files()->filterBy('template', true);
 ```
-
-## Available filter methods
-
-(docs: filters)
-
-## More information
-
-(link: docs/cookbook/collections/filtering text: Filtering compendium)

@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 // simple login form submission example

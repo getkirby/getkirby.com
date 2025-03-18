@@ -1,11 +1,7 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
-
-<?php
-if($file = $page->files()->findBy('filename', 'myfile.jpg')) {
+if ($file = $page->files()->findBy('filename', 'myfile.jpg')) {
   echo $file->url();
-?>
+}
 ```

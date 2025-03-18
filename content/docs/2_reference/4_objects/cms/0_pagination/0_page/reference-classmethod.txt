@@ -1,14 +1,8 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
-<?php
-
 $subpages   = $page->children()->paginate(10);
 $pagination = $subpages->pagination();
 
 echo 'The current page is ' . $pagination->page();
-
-?>
 ```

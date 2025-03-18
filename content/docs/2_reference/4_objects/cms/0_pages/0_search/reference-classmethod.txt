@@ -1,4 +1,4 @@
-Text: 
+Text:
 
 ## Parameter options
 
@@ -10,8 +10,9 @@ Text:
 | `score` | `['id' => 64,'title' => 64]` | Score per field
 | `stopwords`| `[]` | Array of words to exclude from search
 
+----
 
-## Examples
+Examples:
 
 ```php
 // search all pages and descendants

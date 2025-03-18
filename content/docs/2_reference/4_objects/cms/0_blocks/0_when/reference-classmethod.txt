@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 Filter by type if type is given:
 

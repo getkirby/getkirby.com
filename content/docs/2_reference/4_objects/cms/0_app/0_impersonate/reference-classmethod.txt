@@ -12,7 +12,9 @@ There are four options for the `$who` parameter:
 - `'nobody'` (disables the currently logged in user)
 - `null` (resets the impersonation)
 
-## Example
+----
+
+Examples:
 
 ```php
 <?php
@@ -29,7 +31,7 @@ page('notes/a-great-article')->update([
 The impersonation will be active for all code that runs in the current request after the call to `$kirby->impersonate()`. If you want to limit the impact to a single operation, call the method with a callback (see below).
 </warning>
 
-## With callback
+### With callback
 
 If you only want a single operation to run with different privileges, use a callback:
 

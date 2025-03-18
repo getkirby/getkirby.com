@@ -8,19 +8,6 @@ Properties: $props
 
 Text:
 
-## Example
-
-```php
-$page = Page::create([
-  'slug'     => 'a-new-article',
-  'template' => 'article',
-  'content' => [
-    'title'  => 'A new article',
-    'author' => 'Homer Simpson'
-  ]
-]);
-```
-
 ## `$props` array
 
 | Prop          | Value                              | Description                                               |
@@ -46,5 +33,20 @@ $page = Page::create([
         'title'  => 'A new note',
         'author' => 'Homer Simpson'
     ]
+]);
+```
+
+----
+
+Examples:
+
+```php
+$page = Page::create([
+  'slug'     => 'a-new-article',
+  'template' => 'article',
+  'content' => [
+    'title'  => 'A new article',
+    'author' => 'Homer Simpson'
+  ]
 ]);
 ```

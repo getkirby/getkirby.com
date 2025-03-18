@@ -5,13 +5,10 @@ Auth: files.create
 Properties: $props|Kirby\Cms\File
 
 ----
-Text:
 
-## Example
+Examples:
 
 ```php
-<?php
-
 $kirby->impersonate('kirby');
 
 $newPage = $site->createFile(

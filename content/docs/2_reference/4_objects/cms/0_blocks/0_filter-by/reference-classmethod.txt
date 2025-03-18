@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 Filter blocks by attribute, e.g. type:
 

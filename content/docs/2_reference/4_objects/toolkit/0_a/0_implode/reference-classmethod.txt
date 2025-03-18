@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 ```php
 $array = ['a', 'b', ['cc', 'dd']];

@@ -1,22 +1,17 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
-<?php
 if ($page->hasNextListed()) {
   echo $page->nextListed()->url();
 }
-?>
 ```
 
 ### With collection as argument
 
 ```php
-<?php
 $collection = $page->siblings()->listed()->sortBy('date', 'desc');
+
 if ($page->hasNextListed($collection)) {
   echo $page->nextListed($collection)->url();
 }
-?>
 ```

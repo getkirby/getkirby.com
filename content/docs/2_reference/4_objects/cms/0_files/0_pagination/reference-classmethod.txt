@@ -1,13 +1,10 @@
-Text: 
+Read: docs/reference#pagination
 
-## Example
+----
+
+Examples:
 
 ```php
 $files      = $page->files()->paginate(10);
 $pagination = $files->pagination();
-
 ```
-
-## Related
-
-Check out the (link: docs/reference#pagination text: docs for the $pagination object)

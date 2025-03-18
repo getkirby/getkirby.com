@@ -1,12 +1,8 @@
-Text: 
-
-## Example
+Examples:
 
 Programmatically create a new page as child of the `$site` object.
 
 ```php
-<?php
-
 $kirby->impersonate('kirby');
 
 $newPage = $site->createChild(

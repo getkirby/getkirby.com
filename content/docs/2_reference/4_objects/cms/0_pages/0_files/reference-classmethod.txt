@@ -1,6 +1,4 @@
-Text:
-
-## Examples
+Examples:
 
 ```php
 <?php foreach($pages->files() as $file): ?>

@@ -1,9 +1,10 @@
-Text: 
+Text:
 
 If a $lang parameter is specified (multi-language site only), the specific language URL is returned.
 
-## Example
+----
 
+Examples:
 
 ### Fetching the base URL for a language
 

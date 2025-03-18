@@ -1,5 +1,3 @@
-Text:
-
-## Example
+Examples:
 
 See (link: docs/cookbook/development-deployment/shared-controllers#setting-up-the-shared-controller text: Shared controllers)

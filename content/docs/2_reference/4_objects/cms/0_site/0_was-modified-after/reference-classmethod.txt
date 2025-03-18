@@ -1,8 +1,10 @@
-Text: 
+Text:
 
 This is mainly used to auto-update the cache.
 
-## Example
+----
+
+Examples:
 
 ```php
 <?php if($site->wasModifiedAfter(strtotime('2016-01-01' ))): ?>

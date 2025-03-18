@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 Response content can be in different formats depending on what what is returned from the endpoint.
 

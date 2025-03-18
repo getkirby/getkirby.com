@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 echo $page->files()->count();

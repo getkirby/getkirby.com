@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 The method makes it easy to filter blocks from layouts:
 

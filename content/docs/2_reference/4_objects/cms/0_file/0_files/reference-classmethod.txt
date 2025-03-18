@@ -1,10 +1,7 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
-if($file = $page->files()->first()) {
+if ($file = $page->files()->first()) {
     echo 'The first file in the collection is: ' . $file->title();
 }
-
 ```

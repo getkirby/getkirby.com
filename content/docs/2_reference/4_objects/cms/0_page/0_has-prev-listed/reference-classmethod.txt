@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 if ($page->hasPrevListed()) {
@@ -12,6 +10,7 @@ if ($page->hasPrevListed()) {
 
 ```php
 $collection = $page->siblings()->listed()->sortBy('date', 'desc');
+
 if ($page->hasPrevListed($collection)) {
   echo $page->prevListed($collection)->url();
 }

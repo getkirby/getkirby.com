@@ -1,27 +1,27 @@
 Auth: files.changeName
 
 ----
+
 Text:
 
 ## Details
 
 (docs: immutable-objects)
 
-## Example
+----
+
+Examples:
+
 
 ```php
-if($file = $page->file('file-with-old-name.pdf')):
-
+if ($file = $page->file('file-with-old-name.pdf')) {
     try {
-
       $newFile = $file->changeName('new-name.pdf');
       echo 'The file has been renamed';
 
     } catch(Exception $e) {
-
       echo 'The file could not be renamed';
       // optional reason: echo $e->getMessage();
-
     }
-endif;
+}
 ```

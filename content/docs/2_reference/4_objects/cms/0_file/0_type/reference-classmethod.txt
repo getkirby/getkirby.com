@@ -1,6 +1,19 @@
 Text:
 
-## Example
+## All file types
+
+Type      | Extensions
+-         | -
+image     | jpg, gif, png, svg, ico, tiff, bmp, psd, ai, webp
+document  | md, pdf, doc, docx, xls, xlsx, ppt, csv, rtf
+archive   | zip, tar, gz, gzip, tgz
+code      | js, css, html, xml, json
+video     | mov, avi, ogg, ogv, webm, flv, swf, mp4, mv4
+audio     | mp3, m4a, wav, aiff, midi
+
+---
+
+Examples:
 
 ```php
 if($file = $page->file('myimage.jpg')):
@@ -36,18 +49,4 @@ if($file = $page->file('styles.css')):
     echo $file->type();
     // code
 endif;
-
-
-
 ```
-
-## All file types
-
-Type      | Extensions
--         | -
-image     | jpg, gif, png, svg, ico, tiff, bmp, psd, ai, webp
-document  | md, pdf, doc, docx, xls, xlsx, ppt, csv, rtf
-archive   | zip, tar, gz, gzip, tgz
-code      | js, css, html, xml, json
-video     | mov, avi, ogg, ogv, webm, flv, swf, mp4, mv4
-audio     | mp3, m4a, wav, aiff, midi

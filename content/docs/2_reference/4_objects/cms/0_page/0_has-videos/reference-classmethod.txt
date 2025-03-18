@@ -1,16 +1,4 @@
-Text: 
-
-## Example
-
-```php
-<?php
-echo $page->hasVideos(); //will echo 1 if true, nothing if false
-
-if($page->hasImages()) {
-  $videos = $page->videos();
-}
-?>
-```
+Text:
 
 ## What is a video file?
 
@@ -28,3 +16,17 @@ Kirby considers the following file types as video:
 - m4v
 - mpg
 - mpe
+
+----
+
+Examples:
+
+```php
+<?php
+echo $page->hasVideos(); // will echo 1 if true, nothing if false
+
+if($page->hasImages()) {
+  $videos = $page->videos();
+}
+?>
+```

@@ -6,9 +6,7 @@ Properties: $props
 
 ----
 
-Text:
-
-## Example
+Examples:
 
 ```php
 $newUser = User::create([

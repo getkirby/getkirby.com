@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 // simple login form submission example
@@ -12,11 +10,11 @@ if($username = get('username') && $password = get('password')) {
     // verify access with a different method like
     // OAuth, IndieAuth, email or SMS token etc.
     myCustomAuthProvider();
-  
+
     // now that that succeeded, log the user in without checking the provided password
     // NOTE: Only use this if you have verified access in other ways like in this example!
     $user->loginPasswordless();
-    
+
     // redirect to the homepage
     // or any other page
     go();

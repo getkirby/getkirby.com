@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 if ($page->hasNextUnlisted()) {
@@ -12,6 +10,7 @@ if ($page->hasNextUnlisted()) {
 
 ```php
 $collection = $page->siblings()->unlisted()->sortBy('date', 'desc');
+
 if ($page->hasNextUnlisted($collection)) {
   echo $page->nextUnlisted($collection)->url();
 }

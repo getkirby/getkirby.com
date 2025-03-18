@@ -1,11 +1,10 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 <?php
 $siblings = $page->siblings();
-foreach($siblings as $sibling): ?>
+foreach($siblings as $sibling):
+?>
   <h1><?= $sibling->title()->html() ?></h1>
 <?php endforeach ?>
 ```

@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 Last update: <?= $site->modified('d/m/Y H:i') ?>

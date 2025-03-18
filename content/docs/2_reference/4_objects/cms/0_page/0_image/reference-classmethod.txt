@@ -1,23 +1,5 @@
 Text:
 
-## Example
-
-### Fetching the first image
-
-```php
-<?php if($image = $page->image()): ?>
-<img src="<?= $image->url() ?>" alt="">
-<?php endif ?>
-```
-
-### Fetching a specific image
-
-```php
-<?php if($image = $page->image('myimage.jpg')): ?>
-<img src="<?= $image->url() ?>" alt="">
-<?php endif ?>
-```
-
 ## What is an image file?
 
 Kirby considers the following file types as images:
@@ -37,3 +19,23 @@ Kirby considers the following file types as images:
 - eps
 - ps
 - webp
+
+----
+
+Examples:
+
+### Fetching the first image
+
+```php
+<?php if($image = $page->image()): ?>
+<img src="<?= $image->url() ?>" alt="">
+<?php endif ?>
+```
+
+### Fetching a specific image
+
+```php
+<?php if($image = $page->image('myimage.jpg')): ?>
+<img src="<?= $image->url() ?>" alt="">
+<?php endif ?>
+```

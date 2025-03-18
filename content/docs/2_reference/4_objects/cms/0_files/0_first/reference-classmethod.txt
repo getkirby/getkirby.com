@@ -1,9 +1,7 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
-<?php if($file = $page->files()->first()) {
+if ($file = $page->files()->first()) {
   echo $file->filename();
 } ?>
 ```

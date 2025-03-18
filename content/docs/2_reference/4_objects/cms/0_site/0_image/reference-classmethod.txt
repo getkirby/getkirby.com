@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ### Fetching the first image
 

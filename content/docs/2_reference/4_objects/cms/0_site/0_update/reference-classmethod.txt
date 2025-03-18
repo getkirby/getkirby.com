@@ -2,13 +2,10 @@ Auth: site.update
 
 ----
 
-Text:
-
-## Example
+Examples:
 
 ```php
 try {
-
   $site->update([
     'title'       => 'My Site',
     'description' => 'it is really nice',
@@ -17,9 +14,7 @@ try {
   echo 'The site info has been updated';
 
 } catch(Exception $e) {
-
   echo $e->getMessage();
 
 }
-
 ```

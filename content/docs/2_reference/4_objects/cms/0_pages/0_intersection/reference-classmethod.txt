@@ -1,6 +1,4 @@
-Text:
-
-## Example
+Examples:
 
 ```php
 $articles1 = $page->children()->filterBy('tags', 'water', ',');

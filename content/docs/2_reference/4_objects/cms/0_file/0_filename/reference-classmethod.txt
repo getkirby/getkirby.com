@@ -1,9 +1,7 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
-if($file = $page->file()) {
+if ($file = $page->file()) {
     echo $file->filename();
 }
 ```

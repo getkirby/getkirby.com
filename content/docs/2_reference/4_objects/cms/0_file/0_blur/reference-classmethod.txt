@@ -1,14 +1,4 @@
-Text: 
-
-## Example
-
-```php
-if($image = $page->image()):
-    echo $image->blur();
-endif;
-```
-
-
+Text:
 
 ## Blur Amount
 
@@ -16,4 +6,14 @@ You can modify the strength of the blur effect by passing an integer. The defaul
 
 ```php
 echo $image->blur(30);
+```
+
+----
+
+Examples:
+
+```php
+if ($image = $page->image()) {
+    echo $image->blur();
+}
 ```

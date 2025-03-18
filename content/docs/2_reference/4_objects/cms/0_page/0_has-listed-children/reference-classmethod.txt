@@ -1,11 +1,9 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
-echo $page->hasListedChildren(); //will echo 1 if true, nothing if false
+echo $page->hasListedChildren(); // will echo 1 if true, nothing if false
 
-if($page->hasListedChildren()) {
+if ($page->hasListedChildren()) {
   $children = $page->children()->listed();
 }
 ```

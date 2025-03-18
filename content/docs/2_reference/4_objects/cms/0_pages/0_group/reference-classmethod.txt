@@ -1,6 +1,8 @@
-Text:
+Read: docs/cookbook/collections/grouping-collections
 
-## Example
+----
+
+Examples:
 
 ```php
 // return collection of pages grouped by the first character of their title field
@@ -8,7 +10,3 @@ $groups = $page->children()->sortBy('title', 'asc')->group(function($item) {
     return Str::substr($item->title()->value(), 0, 1);
 });
 ```
-
-## More information
-
-(link: docs/cookbook/collections/grouping-collections text: Grouping collections)

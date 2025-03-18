@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 <?php foreach ($site->childrenAndDrafts() as $item) {

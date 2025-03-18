@@ -2,20 +2,15 @@ Auth: pages.delete
 
 ----
 
-Text:
-
-## Example
+Examples:
 
 ```php
 try {
-
   page('blog/old-article')->delete();
   echo 'The page has been deleted';
 
 } catch(Exception $e) {
-
   echo $e->getMessage();
 
 }
-
 ```

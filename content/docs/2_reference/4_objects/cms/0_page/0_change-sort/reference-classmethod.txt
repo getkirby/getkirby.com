@@ -2,20 +2,15 @@ Auth: pages.sort
 
 ----
 
-Text:
-
-## Example
+Examples:
 
 ```php
 try {
-
   page('invisible-page')->changeSort(12);
   echo 'The page is now visible and has the sorting number 12';
 
 } catch(Exception $e) {
-
   echo $e->getMessage();
 
 }
-
 ```

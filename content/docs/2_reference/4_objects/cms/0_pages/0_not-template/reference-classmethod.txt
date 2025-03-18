@@ -1,6 +1,4 @@
-Text:
-
-## Examples
+Examples:
 
 ### Using a string parameter to exclude a single template:
 

@@ -1,9 +1,8 @@
 Read: docs/guide/templates/collections
 
 ----
-Text:
 
-## Example
+Examples:
 
 Call a predefined collection by key:
 

@@ -1,6 +1,8 @@
-Text:
+Read: docs/cookbook/collections/filtering
 
-## Example
+----
+
+Examples:
 
 ```php
 // fetch children with a title starting with 'Project'
@@ -18,7 +20,3 @@ $items = $page->children()->listed()->filter(
 	fn ($child) => $child->hasListedChildren()
 );
 ```
-
-## More information
-
-(link: docs/cookbook/collections/filtering text: Filtering compendium)

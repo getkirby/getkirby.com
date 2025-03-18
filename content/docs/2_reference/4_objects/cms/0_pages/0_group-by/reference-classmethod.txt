@@ -1,6 +1,8 @@
-Text:
+Read: docs/cookbook/collections/grouping-collections
 
-## Example:
+----
+
+Examples:
 
 ```php
 <?php
@@ -14,7 +16,3 @@ foreach($years as $year => $items): ?>
     </ul>
 <?php endforeach ?>
 ```
-
-## More information
-
-(link: docs/cookbook/collections/grouping-collections text: Grouping collections)

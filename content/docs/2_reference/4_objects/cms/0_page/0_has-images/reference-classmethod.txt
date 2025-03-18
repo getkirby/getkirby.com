@@ -1,17 +1,4 @@
-Text: 
-
-## Example
-
-```php
-<?php
-echo $page->hasImages(); //will echo 1 if true, nothing if false
-
-if($page->hasImages()) {
-  $images = $page->images();
-}
-?>
-```
-
+Text:
 
 ## What is an image file?
 
@@ -31,3 +18,17 @@ Kirby considers the following file types as images:
 - ai
 - eps
 - ps
+
+----
+
+Examples:
+
+```php
+<?php
+echo $page->hasImages(); // will echo 1 if true, nothing if false
+
+if ($page->hasImages()) {
+  $images = $page->images();
+}
+?>
+```

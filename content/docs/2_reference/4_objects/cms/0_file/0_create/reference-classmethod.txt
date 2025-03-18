@@ -2,9 +2,7 @@ Auth: files.create
 
 ----
 
-Text:
-
-## Example
+Examples:
 
 ```php
 $file = File::create([

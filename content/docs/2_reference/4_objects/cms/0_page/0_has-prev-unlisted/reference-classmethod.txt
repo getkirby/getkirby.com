@@ -1,22 +1,17 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
-<?php
 if ($page->hasPrevUnlisted()) {
   echo $page->prevUnlisted()->url();
 }
-?>
 ```
 
 ### With collection as argument
 
 ```php
-<?php
 $collection = $page->siblings()->unlisted()->sortBy('date', 'desc');
+
 if ($page->hasPrevUnlisted($collection)) {
   echo $page->prevUnlisted($collection)->url();
 }
-?>
 ```

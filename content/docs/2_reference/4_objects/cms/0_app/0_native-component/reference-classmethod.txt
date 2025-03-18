@@ -1,5 +1,3 @@
-Text:
-
-## Example
+Examples:
 
 See (link:docs/cookbook/performance/kirby-loves-cdn text: Kirby loves CDN)

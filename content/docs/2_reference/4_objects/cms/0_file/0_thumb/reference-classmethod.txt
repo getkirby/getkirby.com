@@ -42,10 +42,12 @@ $options = [
 
 You can define presets of options in your `config.php`. (link: docs/reference/system/options/thumbs#presets text: Learn more ›)
 
-## Examples
+----
+
+Examples:
 
 ```php
-if($image = $page->image()):
+if ($image = $page->image()):
     echo $image->thumb([
       'width'   => 300,
       'height'  => 200,
@@ -55,7 +57,7 @@ endif;
 ```
 
 ```php
-if($image = $page->image()):
+if ($image = $page->image()):
     echo $image->thumb([
       'width'   => 300,
       'height'  => 200,

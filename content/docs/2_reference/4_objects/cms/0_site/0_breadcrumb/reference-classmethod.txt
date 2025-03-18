@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 <nav class="breadcrumb" aria-label="breadcrumb">

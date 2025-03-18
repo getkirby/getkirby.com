@@ -1,9 +1,7 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
-if($image = $page->image()):
+if ($image = $page->image()):
     var_dump($image->toArray());
 endif;
 ```

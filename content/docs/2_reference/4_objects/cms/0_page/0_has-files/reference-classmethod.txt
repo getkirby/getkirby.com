@@ -1,13 +1,9 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
-<?php
 echo $page->hasFiles(); //will echo 1 if true, nothing if false
 
-if($page->hasFiles()) {
+if ($page->hasFiles()) {
   $files = $page->files()
 }
-?>
 ```

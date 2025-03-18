@@ -1,12 +1,7 @@
-Text: 
-
-## Example:
-
+Examples:
 
 ```php
-<?php
-$collection1 = page('exhibitions')->children()->listed();
-$collection2 = page('news')->children()->listed();
+$collection1   = page('exhibitions')->children()->listed();
+$collection2   = page('news')->children()->listed();
 $newCollection = $collection1->merge($collection2);
-?>
 ```

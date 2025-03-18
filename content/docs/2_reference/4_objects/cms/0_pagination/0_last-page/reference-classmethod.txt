@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 $subpages   = $page->children()->paginate(10);

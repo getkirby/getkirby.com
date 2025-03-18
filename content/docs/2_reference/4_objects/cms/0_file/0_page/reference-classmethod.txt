@@ -1,6 +1,4 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
 echo 'Document of: ' . $file->page()->title();

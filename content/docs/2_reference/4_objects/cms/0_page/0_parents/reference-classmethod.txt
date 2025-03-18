@@ -1,10 +1,8 @@
-Text: 
-
-## Example
+Examples:
 
 ```php
-<?php
 $parents = $page->parents();
+
 foreach($parents as $parent): ?>
   <h1><?= $parent->title()->html() ?></h1>
 <?php endforeach ?>

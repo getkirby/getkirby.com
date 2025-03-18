@@ -1,6 +1,8 @@
-Text: 
+Read:  docs/reference#pagination
 
-## Examples
+----
+
+Examples:
 
 ### `$arguments` is an option array
 
@@ -35,8 +37,3 @@ $articles = $page->children()->paginate(10, 2);
 ```php
 $articles = $page->children()->paginate(10, […]);
 ```
-
-
-## Related
-
-Check out the (link: docs/reference#pagination text: docs for the $pagination object)
