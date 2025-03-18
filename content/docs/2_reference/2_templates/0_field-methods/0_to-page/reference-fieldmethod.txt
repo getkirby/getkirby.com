@@ -1,7 +1,7 @@
 Examples:
 
 ```php
-<?php if($related = $page->related()->toPage()): ?>
+<?php if ($related = $page->related()->toPage()): ?>
   <p><a href="<?= $related->url() ?>">Read more…</a></p>
 <?php endif ?>
 ```

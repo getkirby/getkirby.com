@@ -1,7 +1,7 @@
-Text: 
+Text:
 
 ```php
-<?php if(page('projects')->children()->has('projects/project-a')): ?>
+<?php if (page('projects')->children()->has('projects/project-a')): ?>
   There exists a subpage with the uid `some-page`
 <?php endif ?>
 ```

@@ -2,11 +2,11 @@ Examples:
 
 ```php
 // simple login form submission example
-if($username = get('username') and $password = get('password')) {
+if ($username = get('username') and $password = get('password')) {
 
   $user = $kirby->user($username);
 
-  if($user and $user->login($password)) {
+  if ($user and $user->login($password)) {
     // redirect to the homepage
     // or any other page
     go();

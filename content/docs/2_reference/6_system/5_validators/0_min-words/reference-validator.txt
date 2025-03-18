@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::minWords('Lorem ipsum dolor sit amet.', 5)) {
+if (V::minWords('Lorem ipsum dolor sit amet.', 5)) {
   echo 'Yay, valid!';
 }
 ```

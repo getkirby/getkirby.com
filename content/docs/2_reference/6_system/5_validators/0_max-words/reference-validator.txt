@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::maxWords('Lorem ipsum dolor sit amet.', 10)) {
+if (V::maxWords('Lorem ipsum dolor sit amet.', 10)) {
   echo 'Yay, valid!';
 }
 ```

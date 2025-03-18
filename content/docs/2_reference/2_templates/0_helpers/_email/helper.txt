@@ -32,7 +32,7 @@ $email = email([
   'body'    => 'Hey! This was really pretty straightforward!'
 ]);
 
-if($email->send()) {
+if ($email->send()) {
   echo 'The email has been sent';
 } else {
   echo $email->error();

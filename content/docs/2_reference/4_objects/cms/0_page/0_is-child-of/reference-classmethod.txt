@@ -1,7 +1,7 @@
 Examples:
 
 ```php
-<?php if($page->isChildOf('some-parent-page')): ?>
+<?php if ($page->isChildOf('some-parent-page')): ?>
 This page is a child of it's parent!
 <?php endif ?>
 ```

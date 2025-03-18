@@ -162,7 +162,7 @@ return function ($page) {
         <figcaption>
           <div>
             <h1><?= $page->headline()->or($page->title()) ?></h1>
-            <?php if($page->intro()->isNotEmpty()): ?>
+            <?php if ($page->intro()->isNotEmpty()): ?>
             <div class="text">
               <?= $page->intro()->kt() ?>
             </div>

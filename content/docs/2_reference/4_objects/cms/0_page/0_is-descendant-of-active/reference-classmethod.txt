@@ -1,7 +1,7 @@
 Examples:
 
 ```php
-<?php if($page->isDescendantOfActive()): ?>
+<?php if ($page->isDescendantOfActive()): ?>
 This page is a descendant of the currently active page.
 <?php endif ?>
 ```

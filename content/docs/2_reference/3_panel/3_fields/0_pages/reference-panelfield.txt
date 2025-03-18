@@ -239,7 +239,7 @@ info: "{{ page.tags }}"
 To convert a single page to a page object, use the [`toPage()`](/docs/reference/templates/field-methods/to-page) method:
 
 ```php
-<?php if($relatedPage = $page->related()->toPage()): ?>
+<?php if ($relatedPage = $page->related()->toPage()): ?>
   <?= $relatedPage->title() ?>
 <?php endif ?>
 ```

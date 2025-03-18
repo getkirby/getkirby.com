@@ -57,9 +57,9 @@ In addition to this basic setup, you can also add additional fields that would a
 The table block doesn’t come with a default snippet, but you have to create it yourself depending on the setup of your table blueprint.
 
 ```php "/site/snippets/blocks/table.php"
-<?php 
+<?php
 $rows = $block->rows()->toStructure();
-if($rows->isNotEmpty()):
+if ($rows->isNotEmpty()):
 ?>
 <table class="block-table">
   <tr>

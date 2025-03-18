@@ -45,7 +45,7 @@ Our `contact.php` template contains the form and will display error messages if 
     <main class="main">
         <h1><?= $page->title()->html() ?></h1>
 
-        <?php if($success): ?>
+        <?php if ($success): ?>
         <div class="alert success">
             <p><?= $success ?></p>
         </div>
@@ -110,10 +110,10 @@ return function($kirby, $pages, $page) {
 
     $alert = null;
 
-    if($kirby->request()->is('POST') && get('submit')) {
+    if ($kirby->request()->is('POST') && get('submit')) {
 
         // check the honeypot
-        if(empty(get('website')) === false) {
+        if (empty(get('website')) === false) {
             go($page->url());
             exit;
         }
@@ -137,7 +137,7 @@ return function($kirby, $pages, $page) {
         ];
 
         // some of the data is invalid
-        if($invalid = invalid($data, $rules, $messages)) {
+        if ($invalid = invalid($data, $rules, $messages)) {
             $alert = $invalid;
 
             // the data is fine, let's send the email
@@ -156,7 +156,7 @@ return function($kirby, $pages, $page) {
                 ]);
 
             } catch (Exception $error) {
-                if(option('debug')):
+                if (option('debug')):
                     $alert['error'] = 'The form could not be sent: <strong>' . $error->getMessage() . '</strong>';
                 else:
                     $alert['error'] = 'The form could not be sent!';

@@ -99,7 +99,7 @@ Kirby provides many ways to render files in your templates. Here are some exampl
 ### Fetching a single file
 
 ```php
-<?php if($file = $page->file()): ?>
+<?php if ($file = $page->file()): ?>
 <?= $file->filename() ?>
 <?php endif ?>
 ```
@@ -188,7 +188,7 @@ When you delete a file manually from the file system, be sure to delete its meta
 Meta data is available from each (class: Kirby\Cms\File text: $file) object in your templates and snippets.
 
 ```php "project.php"
-<?php if($file = $page->image('lake.jpg')): ?>
+<?php if ($file = $page->image('lake.jpg')): ?>
   <figure>
     <img src="<?= $file->url() ?>" alt="<?= $file->title() ?>">
     <figcaption>

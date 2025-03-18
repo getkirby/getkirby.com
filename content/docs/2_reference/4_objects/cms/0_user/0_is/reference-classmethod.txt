@@ -1,7 +1,7 @@
 Examples:
 
 ```php
-<?php if($kirby->user()->is($kirby->user('bastian@example.com'))): ?>
+<?php if ($kirby->user()->is($kirby->user('bastian@example.com'))): ?>
 Put some message here.
 <?php endif ?>
 ```

@@ -1,7 +1,7 @@
 Examples:
 
 ```php
-<?php if($site->hasUnlistedChildren()): ?>
+<?php if ($site->hasUnlistedChildren()): ?>
 There are unlisted (published, but not listed) children in /content.
 <?php endif ?>
 ```

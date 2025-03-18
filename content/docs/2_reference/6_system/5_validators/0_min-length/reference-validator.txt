@@ -5,7 +5,7 @@ This validator works like (sheet: validators/min) but it always checks for strin
 ## In your code
 
 ```php
-if(V::minLength('Lorem ipsum dolor sit amet.', 10)) {
+if (V::minLength('Lorem ipsum dolor sit amet.', 10)) {
   echo 'Yay, valid!';
 }
 ```

@@ -3,7 +3,7 @@ Examples:
 ```php
 <?php
 
-if($user = $kirby->user()) {
+if ($user = $kirby->user()) {
   $user->logout();
 }
 

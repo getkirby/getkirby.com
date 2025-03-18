@@ -7,7 +7,7 @@ The URL validation may lead to incorrect results (= a valid URL being marked as 
 ## In your code
 
 ```php
-if(V::url('https://getkirby.com')) {
+if (V::url('https://getkirby.com')) {
   echo 'Yay, valid!';
 }
 ```

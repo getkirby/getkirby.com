@@ -3,7 +3,7 @@ Examples:
 ### Fetching the first file
 
 ```php
-<?php if($file = $site->file()): ?>
+<?php if ($file = $site->file()): ?>
 <a href="<?= $file->url() ?>">
   <?= html($file->filename()) ?>
 </a>
@@ -13,7 +13,7 @@ Examples:
 ### Fetching a specific file
 
 ```php
-<?php if($file = $site->file('myfile.pdf')): ?>
+<?php if ($file = $site->file('myfile.pdf')): ?>
 <a href="<?= $file->url() ?>">
   <?= html($file->filename()) ?>
 </a>

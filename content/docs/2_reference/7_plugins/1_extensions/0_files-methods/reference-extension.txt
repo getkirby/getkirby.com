@@ -36,7 +36,7 @@ This example shows the basic architecture of a files method. You define the meth
 In some cases it might be helpful to be able to pass arguments to the method:
 
 ```php
-<?php if($files->moreThan($num)): ?>
+<?php if ($files->moreThan($num)): ?>
   Page has more then $num files.
 <?php endif ?>
 ```

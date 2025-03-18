@@ -10,7 +10,7 @@ Avatars can be jpg, gif or png files and must be called `profile`
 Examples:
 
 ```php
-<?php if($avatar = $kirby->user('bastian@example.com')->avatar()): ?>
+<?php if ($avatar = $kirby->user('bastian@example.com')->avatar()): ?>
 <img src="<?= $avatar->url() ?>" alt="Bastian's avatar">
 <?php endif ?>
 ```

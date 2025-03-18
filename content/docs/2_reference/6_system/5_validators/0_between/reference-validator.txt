@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::between($input, 5, 20)) {
+if (V::between($input, 5, 20)) {
   echo 'Yay, valid!';
 }
 ```

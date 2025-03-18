@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::ip('127.0.0.1')) {
+if (V::ip('127.0.0.1')) {
   echo 'Yay, valid!';
 }
 ```

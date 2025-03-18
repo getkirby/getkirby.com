@@ -3,7 +3,7 @@ Examples:
 ```php
 echo $page->hasUnlistedChildren(); // will echo 1 if true, nothing if false
 
-if($page->hasUnlistedChildren()) {
+if ($page->hasUnlistedChildren()) {
   $unlistedChildren = $page->children()->unlisted();
 }
 ```

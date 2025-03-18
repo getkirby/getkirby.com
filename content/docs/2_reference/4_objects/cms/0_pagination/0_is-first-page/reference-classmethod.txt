@@ -4,7 +4,7 @@ Examples:
 $subpages   = $page->children()->paginate(10);
 $pagination = $subpages->pagination();
 
-if($pagination->isFirstPage()) {
+if ($pagination->isFirstPage()) {
   echo 'This is the first page';
 }
 

@@ -190,11 +190,11 @@ return [
   'panel' => [
     'kirbytext' => [
       'fileDragText' => function(\Kirby\Cms\File $file, $url) {
-        if($file->extension() === 'jpg') {
+        if ($file->extension() === 'jpg') {
           return sprintf('(\screenshot: %s)', $url);
         }
 
-        if($file->type() === 'video') {
+        if ($file->type() === 'video') {
           return sprintf('(\video: %s loop: true)', $url);
         }
 

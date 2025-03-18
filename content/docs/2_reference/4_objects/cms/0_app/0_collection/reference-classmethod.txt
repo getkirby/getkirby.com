@@ -10,3 +10,15 @@ Call a predefined collection by key:
 $articles = $kirby->collection('blog');
 dump($articles);
 ```
+
+### Pass additional options
+
+```php "site/collections/blog-category.php"
+return function (string $category) {
+  return page('blog')->children()->filterBy('category', $category);
+}
+```
+
+```php
+$articles = $kirby->collection('blog-category', ['category' => 'food']);
+```

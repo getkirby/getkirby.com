@@ -1,7 +1,7 @@
-Text: 
+Text:
 
 ```php
-<?php if($kirby->users()->has('someone')): ?>
+<?php if ($kirby->users()->has('someone')): ?>
 There exists a user with the username `someone`
 <?php endif ?>
 ```

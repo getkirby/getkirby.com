@@ -8,7 +8,7 @@ $pagination = $subpages->pagination();
 
 <!-- foreach loop with subpages -->
 
-<?php if($pagination->hasPages()): ?>
+<?php if ($pagination->hasPages()): ?>
 
 <!-- put pagination here -->
 

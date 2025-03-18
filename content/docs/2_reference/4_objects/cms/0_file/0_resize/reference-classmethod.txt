@@ -1,7 +1,7 @@
 Examples:
 
 ```php
-if($image = $page->image()):
+if ($image = $page->image()):
     // resize by width and height and echo the url
     echo $image->resize(300, 200);
 

@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::match($value, '/[a-z0-9]+/')) {
+if (V::match($value, '/[a-z0-9]+/')) {
   echo 'Yay, valid!';
 }
 ```

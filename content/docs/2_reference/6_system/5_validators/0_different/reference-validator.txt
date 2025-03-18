@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::different('A', 'B')) {
+if (V::different('A', 'B')) {
   echo 'Yay, valid!';
 }
 ```

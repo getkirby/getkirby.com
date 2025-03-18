@@ -4,7 +4,7 @@ Examples:
 $subpages   = $page->children()->paginate(10);
 $pagination = $subpages->pagination();
 
-if($pagination->isLastPage()) {
+if ($pagination->isLastPage()) {
   echo 'This is the last page';
 }
 ```

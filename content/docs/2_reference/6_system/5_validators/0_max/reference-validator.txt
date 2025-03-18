@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::max(5, 10)) {
+if (V::max(5, 10)) {
   echo 'Yay, valid!';
 }
 ```

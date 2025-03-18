@@ -1,7 +1,7 @@
 Examples:
 
 ```php
-<?php if($site->hasAudio()): ?>
+<?php if ($site->hasAudio()): ?>
 The /content folder contains audio files.
 <?php endif ?>
 ```

@@ -78,7 +78,7 @@ Page methods can also be used to make if clauses easier.
 #### Example
 
 ```php
-<?php if($page->has5Siblings()): ?>
+<?php if ($page->has5Siblings()): ?>
 The page has 5 siblings.
 <?php endif ?>
 ```

@@ -189,7 +189,7 @@ To upload additional file types, you could (link: docs/reference/plugins/extensi
 To convert a single file to a file object, use the [`toFile()`](/docs/reference/templates/field-methods/to-file) method:
 
 ```php
-<?php if($image = $page->cover()->toFile()): ?>
+<?php if ($image = $page->cover()->toFile()): ?>
   <img src="<?= $image->url() ?>" alt="">
 <?php endif ?>
 ```

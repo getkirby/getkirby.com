@@ -1,7 +1,7 @@
 Examples:
 
 ```php
-$blocks = new \Kirby\Cms\Blocks();
+$blocks = new Kirby\Cms\Blocks();
 
 $newBlock = new Kirby\Cms\Block([
     'content' => [

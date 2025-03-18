@@ -3,7 +3,7 @@ Examples:
 ### A custom css file for the error page
 
 ```php
-<?php if($page->isErrorPage()): ?>
+<?php if ($page->isErrorPage()): ?>
 <?= css('assets/css/error.css') ?>
 <?php endif ?>
 ```

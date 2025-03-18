@@ -1,7 +1,7 @@
 Examples:
 
 ```php
-<?php if($prev = $page->prevUnlisted()): ?>
+<?php if ($prev = $page->prevUnlisted()): ?>
 <a href="<?= $prev->url() ?>">previous unlisted page</a>
 <?php endif ?>
 ```
@@ -11,7 +11,7 @@ Examples:
 ```php
 <?php
 $collection = $page->siblings()->unlisted()->sortBy('date', 'desc');
-if($prev = $page->prevUnlisted($collection)): ?>
+if ($prev = $page->prevUnlisted($collection)): ?>
 <a href="<?= $prev->url() ?>">previous unlisted page</a>
 <?php endif ?>
 ```

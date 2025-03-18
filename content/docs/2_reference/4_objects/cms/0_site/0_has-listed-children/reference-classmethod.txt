@@ -1,7 +1,7 @@
 Examples:
 
 ```php
-<?php if($site->hasListedChildren()): ?>
+<?php if ($site->hasListedChildren()): ?>
     <nav>
     <?php foreach ($site->children()->listed() as $child): ?>
         <a href="<?= $child->url() ?>"><?= $child->title() ?></a>

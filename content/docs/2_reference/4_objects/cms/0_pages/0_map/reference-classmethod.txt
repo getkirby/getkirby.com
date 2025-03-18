@@ -2,7 +2,7 @@ Examples:
 
 ```php
 function changeDate($page)  {
-  if($page->year() == '2015') {
+  if ($page->year() == '2015') {
     $page->update([
     'year' => '2016',
   ]);

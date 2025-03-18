@@ -216,7 +216,7 @@ foreach($collection as $page) {
     foreach($files as $file) {
 
         // check if this file can and needs to be resized
-        if($file->isResizable() && $file->width() > 2000) {
+        if ($file->isResizable() && $file->width() > 2000) {
 
             // good to catch errors when working with files
             try {

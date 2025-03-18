@@ -1,8 +1,6 @@
 Examples:
 
 ```php
-<?php
-
 if ($p = $kirby->page('in-the-jungle-of-sumatra', page('notes'))) {
     echo 'Pages exists and has status ' . $p->status();
 }

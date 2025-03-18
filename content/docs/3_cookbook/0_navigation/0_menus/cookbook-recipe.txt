@@ -13,7 +13,7 @@ Text:
 $items = $pages->listed();
 
 // only show the menu if items are available
-if($items->isNotEmpty()):
+if ($items->isNotEmpty()):
 
 ?>
 <nav>
@@ -37,14 +37,14 @@ if($items->isNotEmpty()):
 $items = false;
 
 // get the open item on the first level
-if($root = $pages->findOpen()) {
+if ($root = $pages->findOpen()) {
 
   // get visible children for the root item
   $items = $root->children()->listed();
 }
 
 // only show the menu if items are available
-if($items and $items->isNotEmpty()):
+if ($items and $items->isNotEmpty()):
 
 ?>
 <nav>
@@ -66,10 +66,10 @@ if($items and $items->isNotEmpty()):
 $items = false;
 
 // get the open item on the first level
-if($root1 = $pages->findBy('isOpen', true)) {
+if ($root1 = $pages->findBy('isOpen', true)) {
 
   // get the open item on the second level
-  if($root2 = $root1->children()->findOpen()) {
+  if ($root2 = $root1->children()->findOpen()) {
 
     // get visible children of the second level item
     $items = $root2->children()->listed();
@@ -77,7 +77,7 @@ if($root1 = $pages->findBy('isOpen', true)) {
 }
 
 // only show the menu if items are available
-if($items and $items->isNotEmpty()):
+if ($items and $items->isNotEmpty()):
 
 ?>
 <nav>
@@ -96,12 +96,12 @@ if($items and $items->isNotEmpty()):
 The recursive `treemenu` snippet renders a menu of all your site's pages and subpages.
 
 ```php
-<?php if(!isset($subpages)) $subpages = $site->children() ?>
+<?php if (!isset($subpages)) $subpages = $site->children() ?>
 <ul>
   <?php foreach($subpages->listed() as $p): ?>
   <li class="depth-<?= $p->depth() ?>">
     <a<?php e($p->isActive(), ' class="active"') ?> href="<?= $p->url() ?>"><?= $p->title()->html() ?></a>
-    <?php if($p->hasChildren()): ?>
+    <?php if ($p->hasChildren()): ?>
     <?php snippet('treemenu', ['subpages' => $p->children()]) ?>
     <?php endif ?>
   </li>
@@ -142,7 +142,7 @@ snippet('treemenu', ['subpages' => $subpages]);
 $items = $pages->listed();
 
 // only show the menu if items are available
-if($items->isNotEmpty()):
+if ($items->isNotEmpty()):
 
 ?>
 <nav>
@@ -157,7 +157,7 @@ if($items->isNotEmpty()):
       $children = $item->children()->listed();
 
       // display the submenu if children are available
-      if($children->isNotEmpty()):
+      if ($children->isNotEmpty()):
 
       ?>
       <ul>
@@ -184,7 +184,7 @@ if($items->isNotEmpty()):
 
 $items = $pages->find('terms-of-service', 'faq', 'support');
 
-if($items and $items->isNotEmpty()):
+if ($items and $items->isNotEmpty()):
 
 ?>
 <nav>
@@ -207,7 +207,7 @@ if($items and $items->isNotEmpty()):
 $items = $pages->listed();
 
 // only show the menu if items are available
-if($items->isNotEmpty()):
+if ($items->isNotEmpty()):
 
 ?>
 <select onchange="window.location.href = this.value">

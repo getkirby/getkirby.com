@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::notIn('A', ['B', 'C', 'D'])) {
+if (V::notIn('A', ['B', 'C', 'D'])) {
   echo 'Yay, valid!';
 }
 ```

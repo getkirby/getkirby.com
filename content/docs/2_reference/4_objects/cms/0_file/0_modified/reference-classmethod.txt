@@ -2,7 +2,7 @@ Examples:
 
 ```php
 
-if($file = $page->file()) {
+if ($file = $page->file()) {
     // unix timestamp
     echo $file->modified();
 

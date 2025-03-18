@@ -14,7 +14,7 @@ Examples:
 <?php
 echo $page->hasVideos(); // will echo 1 if true, nothing if false
 
-if($page->hasImages()) {
+if ($page->hasImages()) {
   $videos = $page->videos();
 }
 ?>

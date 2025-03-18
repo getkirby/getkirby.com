@@ -10,7 +10,7 @@ Examples:
 
 ```php
 $token = get('csrf');
-if(csrf($token) === true) {
+if (csrf($token) === true) {
   // Success
 } else {
   // Token doesn't match

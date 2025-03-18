@@ -1,7 +1,7 @@
 Examples:
 
 ```php
-if($file = $page->file()):
+if ($file = $page->file()):
     echo $file->root();
     // i.e. /var/www/yourdomain.com/html/content/some-page/some-file.jpg
 endif;

@@ -13,7 +13,7 @@ Examples:
 ### Fetching the first image
 
 ```php
-<?php if($image = $page->image()): ?>
+<?php if ($image = $page->image()): ?>
 <img src="<?= $image->url() ?>" alt="">
 <?php endif ?>
 ```
@@ -21,7 +21,7 @@ Examples:
 ### Fetching a specific image
 
 ```php
-<?php if($image = $page->image('myimage.jpg')): ?>
+<?php if ($image = $page->image('myimage.jpg')): ?>
 <img src="<?= $image->url() ?>" alt="">
 <?php endif ?>
 ```

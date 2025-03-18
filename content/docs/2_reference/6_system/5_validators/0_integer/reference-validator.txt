@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::integer(12)) {
+if (V::integer(12)) {
   echo 'Yay, valid!';
 }
 ```

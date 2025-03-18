@@ -2,11 +2,11 @@ Examples:
 
 ```php
 // simple login form submission example
-if($username = get('username') && $password = get('password')) {
+if ($username = get('username') && $password = get('password')) {
 
   $user = $kirby->user($username);
 
-  if($user) {
+  if ($user) {
     // verify access with a different method like
     // OAuth, IndieAuth, email or SMS token etc.
     myCustomAuthProvider();

@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::num(1.0)) {
+if (V::num(1.0)) {
   echo 'Yay, valid!';
 }
 ```

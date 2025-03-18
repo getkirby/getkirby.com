@@ -115,7 +115,7 @@ In the login template, create the login form and a container for the error messa
 
 <h1><?= $page->title()->html() ?></h1>
 
-<?php if($error): ?>
+<?php if ($error): ?>
 <div class="alert"><?= $page->alert()->html() ?></div>
 <?php endif ?>
 

@@ -104,12 +104,12 @@ You can now fetch the author data in the article template. This is just a basic 
   <time><?= $page->date()->toDate('d.m.Y') ?></time>
   <?= $page->text()->kirbytext() ?>
 
-  <?php if($author = $page->author()->toUser()): ?>
+  <?php if ($author = $page->author()->toUser()): ?>
     <aside class="author">
 
       <h1><?= $author->name() ?></h1>
 
-      <?php if($avatar = $author->avatar()): ?>
+      <?php if ($avatar = $author->avatar()): ?>
         <figure>
           <img src="<?= $avatar->url() ?>">
         </figure>
@@ -162,7 +162,7 @@ In that template you can fetch all authors from the articles and build a list ou
 <?php foreach($authors as $author): ?>
   <article class="author">
     <h1><?= $author->name() ?></h1>
-    <?php if($avatar = $author->avatar()): ?>
+    <?php if ($avatar = $author->avatar()): ?>
       <figure>
         <img src="<?= $avatar->url() ?>">
       </figure>

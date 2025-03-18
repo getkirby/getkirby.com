@@ -1,9 +1,9 @@
-Text: 
+Text:
 
 ##Example
 
 ```php
-<?php if($kirby->user('bastian@example.com')->exists()) {
+<?php if ($kirby->user('bastian@example.com')->exists()) {
 	echo $kirby->user('bastian@example.com')->role();
 }
 ?>

@@ -19,7 +19,7 @@ In your templates, you can now check if the value is in the given array of green
 
 ```php "/site/templates/default.php"
 $input = 'lightgreen';
-if(V::isGreen($input)) {
+if (V::isGreen($input)) {
   echo 'Yay, valid!';
 } else {
   echo 'Oh no, not valid';

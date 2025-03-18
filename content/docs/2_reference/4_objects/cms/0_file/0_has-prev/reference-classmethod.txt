@@ -3,7 +3,7 @@ Examples:
 ```php
 $file = $page->file('myfile.pdf');
 
-if($file && $file->hasPrev()) {
+if ($file && $file->hasPrev()) {
     echo 'Previous file: ' . $file->prev()->filename();
 }
 ```

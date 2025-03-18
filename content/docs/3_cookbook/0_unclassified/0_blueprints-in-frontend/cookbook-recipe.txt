@@ -106,7 +106,7 @@ return [
   'hooks' => [
     'page.create:after' => function ($page) {
       $autoPublish = $page->blueprint()->options()['autoPublish'] ?? false;
-      if($autoPublish) {
+      if ($autoPublish) {
         $page->changeStatus('listed');
       }
     }
@@ -129,7 +129,7 @@ return [
   'hooks' => [
     'page.create:after' => function ($page) {
       $autoPublish = $page->blueprint()->options()['autoPublish'] ?? false;
-      if($autoPublish) {
+      if ($autoPublish) {
         $page->changeStatus($autoPublish);
       }
     }

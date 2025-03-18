@@ -264,13 +264,13 @@ The general procedure is therefore the same as in our first example above.
 
 <article>
     <div class="text">
-        <?php if($error): ?>
+        <?php if ($error): ?>
         <div class="alert"><?= $error ?></div>
         <?php endif ?>
 
         <form method="post" action="<?= $page->url() ?>">
             <input type="hidden" name="csrf" value="<?= csrf() ?>">
-            <?php if($status === 'inactive'): ?>
+            <?php if ($status === 'inactive'): ?>
             <div>
                 <label for="email">Email:</label>
                 <input id="email" name="email" required type="email"  value="<?= esc($email, 'attr') ?>">

@@ -100,7 +100,7 @@ $last  = $items->last();
 <nav>
  <ul>
    <?php foreach($items as $item): ?>
-   <li<?php if($item == $last) echo ' class="last"' ?>><a href="<?= $item->url() ?>"><?= html($item->title()) ?></a></li>
+   <li<?php if ($item == $last) echo ' class="last"' ?>><a href="<?= $item->url() ?>"><?= html($item->title()) ?></a></li>
    <?php endforeach ?>
  </ul>
 </nav>
@@ -119,7 +119,7 @@ $first = $items->first();
 <nav>
  <ul>
    <?php foreach($items as $item): ?>
-   <li<?php if($item == $first) echo ' class="first"' ?>><a href="<?= $item->url() ?>"><?= html($item->title()) ?></a></li>
+   <li<?php if ($item == $first) echo ' class="first"' ?>><a href="<?= $item->url() ?>"><?= html($item->title()) ?></a></li>
    <?php endforeach ?>
  </ul>
 </nav>
@@ -155,7 +155,7 @@ $needle = $items->findBy('title', 'Contact');
 <nav>
  <ul>
    <?php foreach($items as $item): ?>
-   <li<?php if($item == $needle) echo ' class="special-item"' ?>><a href="<?= $item->url() ?>"><?= html($item->title()) ?></a></li>
+   <li<?php if ($item == $needle) echo ' class="special-item"' ?>><a href="<?= $item->url() ?>"><?= html($item->title()) ?></a></li>
    <?php endforeach ?>
  </ul>
 </nav>

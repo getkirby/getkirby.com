@@ -102,7 +102,7 @@ fields:
 To convert a single user to a user object, use the [`toUser()`](/docs/reference/templates/field-methods/to-user) method:
 
 ```php
-<?php if($user = $page->author()->toUser()): ?>
+<?php if ($user = $page->author()->toUser()): ?>
   <?= $user->username() ?>
 <?php endif ?>
 ```

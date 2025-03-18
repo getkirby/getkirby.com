@@ -9,7 +9,7 @@ Text:
 (docs: immutable-objects)
 
 ```php
-if($file = $page->file('myimage.jpg')) {
+if ($file = $page->file('myimage.jpg')) {
 
   try {
 
@@ -35,13 +35,13 @@ if($file = $page->file('myimage.jpg')) {
 In a multi-language installation, you can pass the language of the meta data you want to update as a second argument:
 
 ```php
-if($file = $page->file('some-file.jpg')) {
+if ($file = $page->file('some-file.jpg')) {
   $newFile = $file->update([
     'some_field' => 'new value'
   ], 'en');
 }
 
-if($file = $page->file('some-file.jpg')) {
+if ($file = $page->file('some-file.jpg')) {
   $newFile = $file->update([
     'some_field' => 'new value'
   ], site()->language()->code());

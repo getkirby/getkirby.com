@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::min(10, 5)) {
+if (V::min(10, 5)) {
   echo 'Yay, valid!';
 }
 ```

@@ -3,7 +3,7 @@ Examples:
 ### A custom title for the homepage
 
 ```php
-<?php if($page->isHomePage()): ?>
+<?php if ($page->isHomePage()): ?>
 <title>Welcome to my website</title>
 <?php else: ?>
 <title><?= html($page->title() . ' / ' . $site->title()) ?></title>

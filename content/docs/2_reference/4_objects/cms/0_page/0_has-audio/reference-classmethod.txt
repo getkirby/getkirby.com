@@ -13,7 +13,7 @@ Examples:
 ```php
 echo $page->hasAudio(); //will echo 1 if true, nothing if false
 
-if($page->hasAudio()) {
+if ($page->hasAudio()) {
   $audio = $page->audio();
 }
 ```

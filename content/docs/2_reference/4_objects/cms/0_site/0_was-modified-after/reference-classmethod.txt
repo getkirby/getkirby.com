@@ -7,7 +7,7 @@ This is mainly used to auto-update the cache.
 Examples:
 
 ```php
-<?php if($site->wasModifiedAfter(strtotime('2016-01-01' ))): ?>
+<?php if ($site->wasModifiedAfter(strtotime('2016-01-01' ))): ?>
 The site was modified after 2016/01/01.
 <?php endif ?>
 ```

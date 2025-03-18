@@ -1,7 +1,7 @@
-Text: 
+Text:
 
 ```php
-<?php if($page->files()->has('myimage.jpg')): ?>
+<?php if ($page->files()->has('myimage.jpg')): ?>
 There exists a file with the filename `myimage.jpg`
 <?php endif ?>
 ```

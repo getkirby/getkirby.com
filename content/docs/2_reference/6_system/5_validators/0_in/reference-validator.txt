@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::in('A', ['A', 'B', 'C'])) {
+if (V::in('A', ['A', 'B', 'C'])) {
   echo 'Yay, valid!';
 }
 ```

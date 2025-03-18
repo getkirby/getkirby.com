@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::same('A', 'A')) {
+if (V::same('A', 'A')) {
   echo 'Yay, valid!';
 }
 ```

@@ -143,7 +143,7 @@ return function ($kirby, $page) {
     if ($kirby->request()->is('POST') && get('register')) {
 
         // check the honeypot and exit if is has been filled in
-        if(empty(get('website')) === false) {
+        if (empty(get('website')) === false) {
             go($page->url());
             exit;
         }

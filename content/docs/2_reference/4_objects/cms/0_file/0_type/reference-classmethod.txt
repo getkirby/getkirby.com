@@ -16,36 +16,36 @@ audio     | mp3, m4a, wav, aiff, midi
 Examples:
 
 ```php
-if($file = $page->file('myimage.jpg')):
+if ($file = $page->file('myimage.jpg')):
     echo $file->type();
     // image
 endif;
 
 
-if($file = $page->file('terms.pdf')):
+if ($file = $page->file('terms.pdf')):
     echo $file->type();
     // document
 endif;
 
-if($file = $page->file('numbers.xls')):
+if ($file = $page->file('numbers.xls')):
     echo $file->type();
     // document
 endif;
 
 
-if($file = $page->file('software-1.0.0.zip')):
+if ($file = $page->file('software-1.0.0.zip')):
     echo $file->type();
     // archive
 endif;
 
 
-if($file = $page->file('some-movie.mov')):
+if ($file = $page->file('some-movie.mov')):
     echo $file->type();
     // video
 endif;
 
 
-if($file = $page->file('styles.css')):
+if ($file = $page->file('styles.css')):
     echo $file->type();
     // code
 endif;

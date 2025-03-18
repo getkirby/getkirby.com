@@ -13,7 +13,7 @@ Examples:
 ```php
 echo $page->hasDocuments(); //returns the number of documents in the folder
 
-if($page->hasDocuments()) {
+if ($page->hasDocuments()) {
   $documents = $page->documents();
 }
 ```

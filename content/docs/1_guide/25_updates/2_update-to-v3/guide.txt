@@ -166,11 +166,11 @@ In your `config.php`:
 'hooks' => [
   'page.create:after' => function ($page) {
     $builder = $page->blueprint()->subpage_builder();
-    if(!empty($builder)) {
+    if (!empty($builder)) {
 
       foreach($builder as $build) {
         $missing = A::missing($build, array('title', 'template', 'uid'));
-        if(!empty($missing)) continue;
+        if (!empty($missing)) continue;
           try {
             $subPage = $page->createChild([
               'content'  => ['title' => $build['title']],
@@ -181,9 +181,9 @@ In your `config.php`:
           } catch (Exception $error) {
             throw new Exception($error);
           }
-          if($subPage) {
+          if ($subPage) {
             $subPage->publish();
-            if(isset($build['num'])) $subPage->changeSort($build['num']);
+            if (isset($build['num'])) $subPage->changeSort($build['num']);
           }
 
          }

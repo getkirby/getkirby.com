@@ -86,7 +86,7 @@ This implementation registers blueprints in a plugin, for example, a custom `hom
 ```php "/site/plugins/role-blueprints/index.php"
 <?php
 
-if(($user = kirby()->user()) && $user->role()->name() === 'client') {
+if (($user = kirby()->user()) && $user->role()->name() === 'client') {
     $dir = __DIR__ . '/blueprints/pages/client/home.yml';
 } else {
     $dir = __DIR__ . '/blueprints/pages/home.yml';

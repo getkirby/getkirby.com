@@ -133,7 +133,7 @@ fields:
 ### Snippet
 
 ```php "/site/plugins/block-factory/snippets/blocks/box.php"
-<?php if($block->text()->isNotEmpty()): ?>
+<?php if ($block->text()->isNotEmpty()): ?>
   <div class="box box-<?= $block->boxType() ?>">
     <?= $block->text() ?>
   </div>
@@ -220,7 +220,7 @@ fields:
 ### Snippet
 
 ```php "/site/plugins/block-factory/snippets/blocks/accordion.php"
-<?php if($block->summary()->isNotEmpty()): ?>
+<?php if ($block->summary()->isNotEmpty()): ?>
   <details class="accordion-details">
     <summary class="accordion-summary"><?= $block->summary() ?></summary>
     <div class="accordion-text"><?= $block->details() ?></div>
@@ -330,7 +330,7 @@ fields:
 
 ```php "/site/plugins/block-factory/snippets/blocks/faq.php"
 <?php $faqItems = $block->faq()->toStructure(); ?>
-<?php if($faqItems->isNotEmpty()): ?>
+<?php if ($faqItems->isNotEmpty()): ?>
   <h2><?= $block->heading() ?></h2>
     <?php foreach($faqItems as $item): ?>
       <details>
@@ -468,7 +468,7 @@ fields:
 ```php "/site/plugins/block-factory/snippets/blocks/faq2.php"
 <?php $faqItems = $block->faq()->toBlocks(); ?>
 <div class="faq-section">
-  <?php if($faqItems->isNotEmpty()): ?>
+  <?php if ($faqItems->isNotEmpty()): ?>
     <h2><?= $block->heading() ?></h2>
     <?= $faqItems ?>
   <?php endif; ?>
@@ -634,12 +634,12 @@ $image    = $cardType === 'page' && $page ? $page->cover() : $block->image()->to
 $text     = $cardType === 'manual' ? $block->text() : ($page ? $page->text() : '');
 ?>
 
-<?php if($block->isNotEmpty()): ?>
+<?php if ($block->isNotEmpty()): ?>
 <div class="card">
-  <?php if(!empty($link)): ?>
+  <?php if (!empty($link)): ?>
     <a href="<?= $link ?>">
   <?php endif; ?>
-    <?php if($image): ?>
+    <?php if ($image): ?>
       <figure>
         <img src="<?= $image->crop(500,500)->url() ?>" alt="<?= $image->alt() ?>">
       </figure>
@@ -647,7 +647,7 @@ $text     = $cardType === 'manual' ? $block->text() : ($page ? $page->text() : '
     <div>
       <?= $text ?>
     </div>
-  <?php if(!empty($link)): ?>
+  <?php if (!empty($link)): ?>
   </a>
   <?php endif; ?>
 </div>
@@ -679,7 +679,7 @@ panel.plugin("cookbook/block-factory", {
           return (this.cardType === 'manual') ? this.content.heading : this.page.text;
         },
         image() {
-          if(this.cardType === 'manual') {
+          if (this.cardType === 'manual') {
             return this.content.image[0] || {};
           } else {
             return this.page.image || {}
@@ -695,11 +695,11 @@ panel.plugin("cookbook/block-factory", {
       watch: {
         "cardType": {
           handler (value) {
-           if(value === 'page' && this.pageId) {
+           if (value === 'page' && this.pageId) {
             this.$api.get('pages/' + this.pageId.replaceAll('/', '+')).then(page => {
               this.text = page.content.text.replace(/(<([^>]+)>)/gi, "") || this.text;
             });
-           } else if(value === 'manual') {
+           } else if (value === 'manual') {
              this.text = this.content.text || this.text;
            }
 
@@ -708,11 +708,11 @@ panel.plugin("cookbook/block-factory", {
         },
         "page": {
           handler (value) {
-           if(this.cardType === 'page' && this.pageId) {
+           if (this.cardType === 'page' && this.pageId) {
             this.$api.get('pages/' + this.pageId.replaceAll('/', '+')).then(page => {
               this.text = page.content.text.replace(/(<([^>]+)>)/gi, "") || this.text;
             });
-           } else if(value === 'manual') {
+           } else if (value === 'manual') {
              this.text = this.content.text || this.text;
            }
           },
@@ -781,14 +781,14 @@ fields:
 ### Snippet
 
 ```php "/site/plugins/block-factory/snippets/blocks/testimonial.php"
-<?php if($block->quote()->isNotEmpty()): ?>
+<?php if ($block->quote()->isNotEmpty()): ?>
   <blockquote class="testimonial">
     <p class="quote-text">
       <?= $block->quote() ?>
     </p>
     <footer>
         <figure class="flex items-center">
-          <?php if($image = $block->image()->toFile()): ?>
+          <?php if ($image = $block->image()->toFile()): ?>
             <div class="testimonial-image">
               <img src="<?= $image->crop(50, 50)->url() ?>" alt="<?= $image->alt() ?>">
             </div>

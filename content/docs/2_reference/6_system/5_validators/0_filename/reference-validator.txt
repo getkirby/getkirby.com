@@ -3,7 +3,7 @@ Text:
 ## In your code
 
 ```php
-if(V::filename('myfile.jpg')) {
+if (V::filename('myfile.jpg')) {
   echo 'Yay, valid!';
 }
 ```

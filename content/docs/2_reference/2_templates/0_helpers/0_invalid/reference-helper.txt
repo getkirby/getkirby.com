@@ -23,7 +23,7 @@ $messages = [
   'email' => 'Please enter a valid email address'
 ];
 
-if($invalid = invalid($data, $rules, $messages)) {
+if ($invalid = invalid($data, $rules, $messages)) {
   dump($invalid);
 } else {
   dump('Nice data!');

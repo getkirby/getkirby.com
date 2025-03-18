@@ -89,9 +89,9 @@ Here is another interesting example that allows us to group by points in time or
 ```php
 <?php
 $groups = $page->children()->listed()->group(function($article) {
-  if($article->date()->toDate('Y-m-d') == date('Y-m-d')) return 'today';
-  if($article->date()->toDate() > strtotime('-7 day'))   return 'this week';
-  if($article->date()->toDate() > strtotime('-1 month')) return 'this month';
+  if ($article->date()->toDate('Y-m-d') == date('Y-m-d')) return 'today';
+  if ($article->date()->toDate() > strtotime('-7 day'))   return 'this week';
+  if ($article->date()->toDate() > strtotime('-1 month')) return 'this month';
   return 'older articles';
 });
 ?>
@@ -157,7 +157,7 @@ The `group()`with callback example works in the same way as with pages collectio
 ```php
 <?php
 $callback = function($f) {
-  if($f->date() && $f->date()->isNotEmpty()) {
+  if ($f->date() && $f->date()->isNotEmpty()) {
     return $f->date()->toDate('Y');
   } else {
     return 'undated';
