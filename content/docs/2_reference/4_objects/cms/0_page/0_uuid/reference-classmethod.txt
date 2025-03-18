@@ -1,7 +1,3 @@
-Read: docs/guide/uuids
-
-----
-
 Intro:
 
 Returns the page's Unique ID.

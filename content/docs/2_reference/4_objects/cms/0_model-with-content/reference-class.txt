@@ -1,0 +1,1 @@
+Class: Kirby\Cms\ModelWithContent
