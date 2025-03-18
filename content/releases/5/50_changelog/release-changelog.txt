@@ -33,6 +33,8 @@ Enhancements:
   $page->version('changes')->delete();
   ```
 
+- New (class: Kirby\Cms\ModelWithContent method: versions) method to get a collection of all versions (currently `changes` and `latest`) [#7059](https://github.com/getkirby/kirby/pull/7059)
+
 - (class: Kirby\Cms\Page method: previewUrl) and (class: Kirby\Cms\Site method: previewUrl) now accept a version id to specify which version you want to preview.
 
   ```php
@@ -78,7 +80,8 @@ Enhancements:
   ```
 
 - New `Kirby\Content\MemoryStorage` [#6457](https://github.com/getkirby/kirby/pull/6457) as well as `Kirby\Content\ImmutableMemoryStorage` to keep outdated model information in memory but avoid any mutations. [#6570](https://github.com/getkirby/kirby/pull/6570)
-- New `Kirby\Content\Translation` class (to eventually replace `Kirby\Content\ContentTranslation`)
+- The (class: Kirby\Cms\ModelWithContent method: changeStorage) method to move (or copy) the model's storage to a different storage type
+- New `Kirby\Content\Translation` class (replacing `Kirby\Content\ContentTranslation`)
 - New `Kirby\Content\Translations` class to provide a more type-safe collection for all translations (returned by `Kirby\Cms\ModelWithContent::translations()`).
 - New `Kirby\Content\VersionId::render()` method to atomically set the render version during a render operation
 
@@ -125,6 +128,7 @@ Enhancements:
   }
   ```
 
+- New (class: Kirby\Cms\Language method: is) method to compare language objects
 - New i18n strings
 	- `copy.success`
 	- `copy.url`
@@ -145,11 +149,31 @@ Enhancements:
 ## Panel
 - Radio and select fields: `default` option now supports Kirby queries [#6459](https://github.com/getkirby/kirby/pull/6459)
 - Sections: improved title and info wrapping [#6447](https://github.com/getkirby/kirby/pull/6447)
-- New icons: `asterisk`, `collapse-horizontal`, `expand-horizontal`, `layout-columns`, `layout-right`, `layout-left`, `window`
+
 - The fields section now passes all values on input of any field instead of updating just the one field (similar to on submit) [#6517](https://github.com/getkirby/kirby/pull/6517)
 - Improved contrast for some theme colors (e.g. `aqua-icon` theme)
 - Writer: nodes with `inline: true` in their button definition are displayed as inline buttons in toolbar (instead inside the dropdown) [#6902](https://github.com/getkirby/kirby/pull/6902)
 - Page status button uses custom status labels for `title` [#6911](https://github.com/getkirby/kirby/pull/6911)
+
+#### icons
+- `accessibility`
+- `ai`
+- `asterisk`
+- `cloud`
+- `collapse-horizontal`
+- `expand-horizontal`
+- `info-card`
+- `kirby`
+- `layout-columns`
+- `layout-right`
+- `layout-left`
+- `rocket`
+- `rss`
+- `shield`
+- `shut-down`
+- `terminal`
+- `wallet`
+- `window`
 
 #### Components
 - New `badge` prop for `<k-button>` (value: `{ text, theme }`) [#6755](https://github.com/getkirby/kirby/pull/6755)
@@ -211,6 +235,7 @@ Bugfixes:
 - Custom writer nodes: fixed active state detection for nodes that include paragraph child nodes [#6902](https://github.com/getkirby/kirby/pull/6902)
 - Permissions are now always correctly determined if the active user changes during the request [#6880](https://github.com/getkirby/kirby/pull/6880)
 - Blocks field: fix empty display [#6951](https://github.com/getkirby/kirby/pull/6951)
+- `User::delete()` will now properly call `file.delete` hooks for deleted user files
 
 ----
 
@@ -228,10 +253,13 @@ Breaking:
 
 ## Core
 
+- Working with old model instances (objects thar already were e.g. updated and returned a new working copy), the models can no longer overwrite their content. This will now throw an exception if you try. Use the new model instances instead.
 - Data/variables from your `site` controller will now be passed to all templates [#6412](https://github.com/getkirby/kirby/pull/6412)
 - Users without a role in their credentials file will now receive the `default` role (if exists), not the `visitor` role anymore [#6656](https://github.com/getkirby/kirby/pull/6656)
 - Model action `before` hooks: rules get applied before and after the hook runs
 - If file sorting was previously disabled via the `files.update` permission, the new `file.sort` permission has to be configured accordingly. [#6589](https://github.com/getkirby/kirby/pull/6589)
+- `ModelWithContent::version()` and `ModelWithContent::versions()` are no longer available as direct field accessor. You need to use `$model->content()->version()`/`$model->content()->versions()` instead if you are using a field with the name `version`/`versions`.
+- `$page::translation()` returns a single translation in single language mode. It now always returns a `Kirby\Content\Translation` object. This is also included in the `$page::toArray()` method.
 - PHP type hints have been added to many collection methods. If you are extending Core classes, you might need to add the same to your own classes and methods.
 - `Image\Dimensions::forImage()` now receives an `Image\Image` object [#6591](https://github.com/getkirby/kirby/pull/6591)
 - `Image\Exif::read()` is now a static method that receives an absolute path to a file [#6591](https://github.com/getkirby/kirby/pull/6591)
@@ -262,6 +290,11 @@ Breaking:
 - Classes extending `ModelPermissions` need to set their category with the `const CATEGORY` or `static function category()` instead of `protected string $category` and use the static `user()` method instead of `$user` and `$permissions` properties [#6880](https://github.com/getkirby/kirby/pull/6880)
 - File drag texts in the Panel always use the file UUID, if UUIDs are not disabled [#6948](https://github.com/getkirby/kirby/pull/6948)
 - The `api.methodOverwrite` option has been renamed to `api.methodOverride`
+- `Kirby\Content\Content::update()` is actively deprecated and must no longer be used. It will throw an exception to find usage early on.
+- `User::create()` does no longer accept null as argument.
+- Setting a `name` field in `User::update()` does no longer have any effect. Use `User::changeName()` instead.
+- `HasMethods::hasMethod()` and `HasMethods::callMethod()` are now protected methods
+
 
 ## Panel
 
@@ -375,7 +408,10 @@ Breaking:
 | `Array.fromObject()` | `this.$helper.array.fromObject()` |
 | `myArray.split()` | `this.$helper.array.split(myArray, delimiter)` |
 | `myArray.sortBy()` | `this.$helper.array.sortBy(myArray, sortBy)` |
+| `Kirby\Content\ContentTranslation` | `Kirby\Content\Translation` |
 | `Kirby\Cms\Model` | - |
+| `Kirby\Cms\ModelWithContent::readContent()` | `$model->version()->read()` |
+| `Kirby\Cms\ModelWithContent::writeContent()` | `$model->version()->write()` |
 | `Kirby\Cms\Properties` trait | PHP native named properties |
 | `Kirby\Cms\File::contentFileDirectory()` | - |
 | `Kirby\Cms\File::contentFileName()` | - |
@@ -423,10 +459,25 @@ Deprecated:
 Refactored:
 ## Core
 
+- Model improvements
+  - Template in `Page::factory()` method is always lowercase
+  - Model name in `Page::model()` is always lowercase
+  - Template name is always lowercase in the `Page::setTemplate()` method
+  - Call `::setBlueprint()` in constructors before setting content
+  - Use `Page::updateParentCollections()` in the `::commit()` method and remove redundant calls.
+  - Add `::updateParentCollection()` methods to `FileActions` and `UserActions` and use them in their commit methods
+  - Remove `::hardcopy()` from `::commit()` in model actions
+  - New `Kirby\Cms\HasModels` trait
+	- New `Kirby\Cms\ModelCommit` and `Kirby\Cms\ModelState` classes
+  - `App::setSite()` is now public and can be used to overwrite the current site instance
+  - New `Page::normalizeProps()`, `File::normalizeProps()` and `User::normalizeProps()`
+  - Unit tests for Models have been reorganized and cleaned up
 - Exception classes support named arguments [#6618](https://github.com/getkirby/kirby/pull/6618)
+- New `Kirby\Cms\Events` class that handles low-level hook execution
 - New `Kirby\Api\Upload` class to handle file uploads via the REST API [#6421](https://github.com/getkirby/kirby/pull/6421)
 - Refactored `Kirby\Cms\LanguageRules` [#6659](https://github.com/getkirby/kirby/pull/6659)
 - Improved class typing by adding `Stringable` interface to relevant classes [#6433](https://github.com/getkirby/kirby/pull/6433)
+- New `Kirby\Cms\Collection::update($object)` method
 - New `Kirby\Content\VersionId` class to represent versions [#6436](https://github.com/getkirby/kirby/pull/6436)
 - Refactored all content storage classes and models [#6436](https://github.com/getkirby/kirby/pull/6436)
 - New `Language::single()` method to create a Language placeholder object in single language installations [#6448](https://github.com/getkirby/kirby/pull/6448)
