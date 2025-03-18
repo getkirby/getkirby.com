@@ -2,7 +2,7 @@
 	<a class="bg-black block leading-tight rounded overflow-hidden" href="<?= $issue->url() ?>">
 		<figure>
 			<p class="bg-black" style="--aspect-ratio: 16/9">
-				<?= img($issue->image(), [
+				<?= img($issue->cover(), [
 					'alt' => 'A preview of ' . $issue->title(),
 					'src' => [
 						'width' => 450
