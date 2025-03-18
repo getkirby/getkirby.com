@@ -38,9 +38,7 @@
 .flex {
 	--gap: 0;
 	display: flex;
-}
-.flex > * + * {
-	margin-left: var(--gap);
+	gap: var(--gap);
 }
 .flex-wrap {
 	flex-wrap: wrap;
