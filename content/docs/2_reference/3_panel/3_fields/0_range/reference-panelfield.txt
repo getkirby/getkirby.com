@@ -6,10 +6,6 @@ Intro: A handy slider
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The range field creates a flexible slider, that can be used to display numbered values in a more visual and intuitive way.

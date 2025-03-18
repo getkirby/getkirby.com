@@ -8,10 +8,6 @@ A simple WYSIWYG editor field for ordered and unordered lists
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 (image: list.png)

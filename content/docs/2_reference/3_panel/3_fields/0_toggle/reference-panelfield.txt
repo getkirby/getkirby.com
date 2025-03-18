@@ -6,10 +6,6 @@ Intro: Yes/no or on/off toggle
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The toggle field is perfect for simple on/off or yes/no states.

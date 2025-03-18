@@ -8,10 +8,6 @@ Draws a horizontal line to separate fields
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 Sometimes it can be helpful to visually seperate the form into different sections. The line field is perfect here. It will draw a horizontal rule with enough white space around it to separate sets of fields nicely.

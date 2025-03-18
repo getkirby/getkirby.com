@@ -2,7 +2,7 @@ Intro: Options for the (glossary: Markdown) parser
 
 ----
 
-Guide: content/text-formatting#markdown
+Read: docs/guide/content/text-formatting#markdown
 
 ----
 

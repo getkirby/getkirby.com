@@ -2,7 +2,7 @@ Title: Pages
 
 ----
 
-Guide: blueprints/presets#available-presets__group-of-pages-pages
+Read: docs/guide/blueprints/presets#available-presets__group-of-pages-pages
 
 ----
 

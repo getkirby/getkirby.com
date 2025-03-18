@@ -2,7 +2,7 @@ Title: Page models
 
 ----
 
-Guide: templates/page-models
+Read: docs/guide/templates/page-models
 
 ----
 

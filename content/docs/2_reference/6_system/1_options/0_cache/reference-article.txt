@@ -2,7 +2,7 @@ Intro: Enables/disables Kirby's cache and sets cache options
 
 ----
 
-Guide: cache
+Read: docs/guide/cache
 
 ----
 

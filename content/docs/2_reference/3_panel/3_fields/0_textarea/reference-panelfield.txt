@@ -8,10 +8,6 @@ A textarea field, which auto-resizes and has built-in format buttons.
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The textarea field creates a textarea for longer texts with automatic resizing and optional format buttons.

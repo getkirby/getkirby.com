@@ -1,4 +1,4 @@
-Guide: uuids
+Read: docs/guide/uuids
 
 ----
 

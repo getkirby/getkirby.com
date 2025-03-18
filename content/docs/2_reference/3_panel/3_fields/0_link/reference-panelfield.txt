@@ -2,10 +2,6 @@ Title: Link
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Intro: Use the link field to create links to external URLs, internal pages, files, email addresses and telephone numbers. The link field is also used in the link dialogs of the writer and textarea fields.
 
 ----

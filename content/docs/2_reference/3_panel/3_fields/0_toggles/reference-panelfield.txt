@@ -6,10 +6,6 @@ Intro: Toggle between different states
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The toggles field lets you select between different states.

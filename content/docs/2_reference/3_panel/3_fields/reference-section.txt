@@ -2,7 +2,7 @@ Title: Fields
 
 ----
 
-Guide: blueprints/fields
+Read: docs/guide/blueprints/fields
 
 ----
 

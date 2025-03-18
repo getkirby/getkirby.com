@@ -2,7 +2,7 @@ Title: Presets
 
 ----
 
-Guide: blueprints/presets
+Read: docs/guide/blueprints/presets
 
 ----
 

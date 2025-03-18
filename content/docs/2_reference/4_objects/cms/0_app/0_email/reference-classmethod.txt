@@ -1,4 +1,4 @@
-Guide: emails
+Read: docs/guide/emails
 
 ----
 

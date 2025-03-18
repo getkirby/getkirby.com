@@ -2,7 +2,7 @@ Title: Page
 
 ----
 
-Guide: blueprints/presets#available-presets__single-page-page
+Read: docs/guide/blueprints/presets#available-presets__single-page-page
 
 ----
 

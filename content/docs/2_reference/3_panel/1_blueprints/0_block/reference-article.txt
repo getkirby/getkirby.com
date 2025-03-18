@@ -6,7 +6,7 @@ Intro: Block blueprints are located in `/site/blueprints/blocks` and control the
 
 ----
 
-Guide: blueprints/introduction
+Read: docs/guide/blueprints/introduction
 
 ----
 

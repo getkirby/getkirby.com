@@ -6,10 +6,6 @@ Intro: A list of radio buttons
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The radiobuttons field displays any number of radio buttons in a list. This is perfect if you have a predefined number of options, from which the user can just choose one.

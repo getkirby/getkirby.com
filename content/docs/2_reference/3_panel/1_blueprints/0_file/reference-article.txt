@@ -6,7 +6,7 @@ Intro: File blueprints are located in `/site/blueprints/files` and control the P
 
 ----
 
-Guide: blueprints/introduction
+Read: docs/guide/blueprints/introduction
 
 ----
 

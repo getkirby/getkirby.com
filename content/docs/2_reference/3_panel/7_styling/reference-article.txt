@@ -7,7 +7,7 @@ Intro: Learn how you can customise the Panel look via CSS.
 
 ----
 
-Guide: ../cookbook/panel/customizing-panel
+Read: docs/guide/panel/customizing-panel
 
 ----
 

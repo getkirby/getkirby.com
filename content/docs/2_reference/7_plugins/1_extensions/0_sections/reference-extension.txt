@@ -2,7 +2,7 @@ Title: Sections
 
 ----
 
-Guide: blueprints/layout
+Read: docs/guide/blueprints/layout
 
 ----
 

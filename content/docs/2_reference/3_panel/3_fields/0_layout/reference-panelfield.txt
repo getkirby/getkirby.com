@@ -8,10 +8,6 @@ A visual editor for complex multi-column layouts
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 (image: layout.png)

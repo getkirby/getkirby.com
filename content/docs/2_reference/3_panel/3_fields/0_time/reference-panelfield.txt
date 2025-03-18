@@ -6,10 +6,6 @@ Intro: A time picker field
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The time field is perfect for events or any other kind of time-based field content. It creates a select box with all available times of the date defined by certain interval.

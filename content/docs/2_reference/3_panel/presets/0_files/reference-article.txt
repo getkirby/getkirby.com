@@ -2,7 +2,7 @@ Title: Files
 
 ----
 
-Guide: blueprints/presets#available-presets__group-of-files-files
+Read: docs/guide/blueprints/presets#available-presets__group-of-files-files
 
 ----
 

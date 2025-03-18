@@ -2,7 +2,7 @@ Title: Options
 
 ----
 
-Guide: configuration
+Read: docs/guide/configuration
 
 ----
 

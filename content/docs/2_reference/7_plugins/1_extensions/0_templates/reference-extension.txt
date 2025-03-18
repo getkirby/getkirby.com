@@ -2,7 +2,7 @@ Title: Templates
 
 ----
 
-Guide: templates/basics
+Read: docs/guide/templates/basics
 
 ----
 

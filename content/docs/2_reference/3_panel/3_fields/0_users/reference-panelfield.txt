@@ -8,7 +8,7 @@ A user select field that allows to select one or multiple users
 
 ----
 
-Guide: blueprints/fields
+Read: docs/guide/blueprints/fields
 
 ----
 

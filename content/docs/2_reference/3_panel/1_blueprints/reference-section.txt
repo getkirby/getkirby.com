@@ -2,7 +2,7 @@ Title: Blueprints
 
 ----
 
-Guide: blueprints
+Read: docs/guide/blueprints
 
 ----
 Intro:

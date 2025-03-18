@@ -2,10 +2,6 @@ Title: Collection filters
 
 ----
 
-Guide:
-
-----
-
 Text:
 
 Collection filters are registered with the `collectionFilters` extension.
@@ -25,7 +21,7 @@ Kirby::plugin('your/plugin', [
                 }
                 unset($collection->$key);
             }
-            
+
             return $collection;
         }
     ]
@@ -37,7 +33,7 @@ Kirby::plugin('your/plugin', [
 In your templates, you can now use the new filter like this:
 
 ```php "/site/templates/notes.php"
-<?php 
+<?php
 $notes = $page->children()->filterBy('date', 'datebefore', '2018-09-07');
 foreach ($notes as $note) {
     echo $note->title();

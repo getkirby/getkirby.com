@@ -2,7 +2,7 @@ Title: Pages methods
 
 ----
 
-Guide: templates/php-api#pages
+Read: docs/guide/templates/php-api#pages
 
 ----
 

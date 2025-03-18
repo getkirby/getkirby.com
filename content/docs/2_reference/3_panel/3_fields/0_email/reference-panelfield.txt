@@ -8,10 +8,6 @@ An email input field with validation
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The email field provides the most comfortable way to insert email addresses and has built-in validation for entered addresses.

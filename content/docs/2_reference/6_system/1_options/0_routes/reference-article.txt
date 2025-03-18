@@ -2,7 +2,7 @@ Intro: Additional route setup for Kirby's internal router
 
 ----
 
-Guide: routing
+Read: docs/guide/routing
 
 ----
 

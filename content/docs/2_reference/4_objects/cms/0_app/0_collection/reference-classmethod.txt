@@ -1,4 +1,4 @@
-Guide: templates/collections
+Read: docs/guide/templates/collections
 
 ----
 Text:

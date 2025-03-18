@@ -8,10 +8,6 @@ A standard, single-line input field
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The text field creates a standard text input

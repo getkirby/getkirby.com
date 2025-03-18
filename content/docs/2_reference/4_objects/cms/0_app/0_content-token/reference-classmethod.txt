@@ -1,4 +1,4 @@
-Guide: files/resize-images-on-the-fly#thumbnail-storage
+Read: docs/guide/files/resize-images-on-the-fly#thumbnail-storage
 
 ----
 

@@ -2,7 +2,7 @@ Title: Cache driver
 
 ----
 
-Guide: cache
+Read: docs/guide/cache
 
 ----
 

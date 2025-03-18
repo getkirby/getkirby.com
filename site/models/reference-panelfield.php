@@ -1,9 +1,15 @@
 <?php
 
 use Kirby\Cms\App;
+use Kirby\Content\Field;
 
 class ReferencePanelFieldPage extends ReferenceArticlePage
 {
+	public function read(): Field
+	{
+		return parent::read()->or('docs/guide/blueprints/fields');
+	}
+
 	public function source(): string|null
 	{
 		$root  = App::instance()->root('kirby');

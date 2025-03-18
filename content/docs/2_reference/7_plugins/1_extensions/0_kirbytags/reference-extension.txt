@@ -2,7 +2,7 @@ Title: KirbyTags
 
 ----
 
- Guide: content/text-formatting#kirbytext
+ Read: docs/guide/content/text-formatting#kirbytext
 
 ----
 
@@ -10,7 +10,7 @@ Text:
 
 ## Default KirbyTags
 
-Kirby comes with a set of default KirbyTags for things like including images, links, dates or videos into text fields. **See (link: docs/reference/#kirbytags text: the full list of included KirbyTags)**.  
+Kirby comes with a set of default KirbyTags for things like including images, links, dates or videos into text fields. **See (link: docs/reference/#kirbytags text: the full list of included KirbyTags)**.
 
 ## How to use your own KirbyTag
 

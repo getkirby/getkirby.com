@@ -8,10 +8,6 @@ Structured object input, which stores properties as YAML.
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The object field allows to create data objects. This is handy for more complex settings, isolated entities or nested data.

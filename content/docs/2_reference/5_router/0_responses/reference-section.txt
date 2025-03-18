@@ -2,7 +2,7 @@ Title: Response types
 
 ----
 
-Guide: routing
+Read: docs/guide/routing
 
 ----
 

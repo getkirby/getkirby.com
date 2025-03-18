@@ -2,7 +2,7 @@ Title: API
 
 ----
 
-Guide: api
+Read: docs/guide/api
 
 ----
 

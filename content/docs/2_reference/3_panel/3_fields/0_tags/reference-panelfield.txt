@@ -8,10 +8,6 @@ An interactive tags input field with autocompletion
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The tags field is perfect for multiple variable options, which should be stored in a single field. It comes with built-in autocompletion for options and an intuitive interface for adding and removing multiple tags.

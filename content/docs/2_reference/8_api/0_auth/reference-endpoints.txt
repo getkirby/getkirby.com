@@ -2,4 +2,4 @@ Title: Authentication
 
 ----
 
-Guide: api/authentication
+Read: docs/guide/api/authentication

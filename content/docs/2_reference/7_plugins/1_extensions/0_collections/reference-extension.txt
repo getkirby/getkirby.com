@@ -2,7 +2,7 @@ Title: Collections
 
 ----
 
-Guide: templates/collections
+Read: docs/guide/templates/collections
 
 ----
 

@@ -8,7 +8,7 @@ A visual editor for long-form text and modular pages
 
 ----
 
-Guide: page-builder
+Read: docs/guide/page-builder
 
 ----
 

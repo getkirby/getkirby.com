@@ -8,10 +8,6 @@ A number input field with validation
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The number field generates an HTML 5 number input, which is great when you need a comfortable way to enter any numeric values. The number field also comes with built-in validation for numeric data.

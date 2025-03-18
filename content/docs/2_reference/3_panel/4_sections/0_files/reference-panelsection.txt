@@ -8,7 +8,7 @@ List, edit and upload files
 
 ----
 
-Guide: content/files
+Read: docs/guide/content/files
 
 ----
 

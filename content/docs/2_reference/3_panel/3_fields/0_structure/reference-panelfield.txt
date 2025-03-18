@@ -8,10 +8,6 @@ Structured data input, which stores data as YAML.
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The structure field makes it possible to add multiple complex entries to a field, which will be stored as (glossary: YAML). A typical use case would be a list of addresses, team members or a restaurant menu.

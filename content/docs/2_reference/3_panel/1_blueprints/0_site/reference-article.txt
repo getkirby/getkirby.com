@@ -6,7 +6,7 @@ Intro: The Site blueprint is located in `/site/blueprints` and controls the Pane
 
 ----
 
-Guide: blueprints/introduction
+Read: docs/guide/blueprints/introduction
 
 ----
 

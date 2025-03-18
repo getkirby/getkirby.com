@@ -2,7 +2,7 @@ Title: Controllers
 
 ----
 
-Guide: templates/controllers
+Read: docs/guide/templates/controllers
 
 ----
 

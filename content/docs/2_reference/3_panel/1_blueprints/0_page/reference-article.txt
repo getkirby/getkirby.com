@@ -6,7 +6,7 @@ Intro: Page blueprints are located in `/site/blueprints/pages` and control the P
 
 ----
 
-Guide: blueprints/introduction
+Read: docs/guide/blueprints/introduction
 
 ----
 

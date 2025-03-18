@@ -8,10 +8,6 @@ A list of checkbox fields
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The checkboxes field displays any number of checkboxes in a list. This is perfect if you have a predefined number of options a user can select from.

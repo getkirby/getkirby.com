@@ -2,7 +2,7 @@ Title: KirbyText
 
 ----
 
-Guide: content/text-formatting#kirbytext
+Read: docs/guide/content/text-formatting#kirbytext
 
 ----
 Intro: KirbyText can be used in your content in addition to (glossary: Markdown) tags to simplify common tasks like inserting links, emails, images, etc. You can also create your own (glossary: kirbytag text: KirbyTags) with our plugin API.

@@ -8,10 +8,6 @@ A phone number input field
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The phone field creates a text input with the type `tel` and a custom phone icon.

@@ -8,8 +8,8 @@ $reflection = $page->reflection();
 $since      = $page->since();
 $alias      = $reflection?->alias();
 $auth       = $page->auth()->value();
-$guide      = $page->guide()->value();
-$source     = $page->source()
+$read       = $page->read()->value();
+$source     = $page->source();
 ?>
 
 <!-- Meta list -->
@@ -18,7 +18,7 @@ $source     = $page->source()
 	$reflection instanceof ReflectableClass ||
 	$alias ||
 	$auth ||
-	$guide ||
+	$read ||
 	$source
 ): ?>
 <ul class="reference-meta">
@@ -43,11 +43,11 @@ $source     = $page->source()
 	</li>
 	<?php endif ?>
 
-	<?php if ($guide): ?>
+	<?php if ($read): ?>
 	<li>
-		<a href="<?= url('docs/guide/' . $guide) ?>">
+		<a href="<?= url($read) ?>">
 			<?= icon('book') ?>
-			Read the guide
+			Read more
 		</a>
 	</li>
 	<?php endif ?>

@@ -8,10 +8,6 @@ Creates a hidden field
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The hidden field allows storing values in the content file that are not visible to users in the Panel. This can be useful to store additional information for a page, which is only available to the developer or editors who have access to the filesystem. Such a `hidden` field can be edited only either directly in the filesystem or programmatically via a script.

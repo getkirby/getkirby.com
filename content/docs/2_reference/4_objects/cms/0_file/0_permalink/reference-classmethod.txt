@@ -1,1 +1,1 @@
-Guide: uuids#permanent-urls
+Read: docs/guide/uuids#permanent-urls

@@ -8,10 +8,6 @@ A simple selectbox field
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The select field displays any number of options in a dropdown selectbox. This is perfect if you have lots of options, from which the user can just choose one.

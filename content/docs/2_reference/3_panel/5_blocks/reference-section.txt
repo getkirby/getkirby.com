@@ -2,7 +2,7 @@ Title: Blocks
 
 ----
 
-Guide: page-builder
+Read: docs/guide/page-builder
 
 ----
 

@@ -8,10 +8,6 @@ A pages select field that allows to select one or multiple related pages
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 ## What is the pages field?

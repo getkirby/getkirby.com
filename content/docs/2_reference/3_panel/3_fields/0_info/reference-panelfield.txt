@@ -8,10 +8,6 @@ A plain HTML field for user instructions
 
 ----
 
-Guide: blueprints/fields
-
-----
-
 Text:
 
 The info field is a great way to provide inline help or information for your users. You can put any kind of text in this field and it will be displayed as plain text. For better formatting you can use (glossary: Markdown) and (glossary: KirbyText).

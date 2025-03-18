@@ -2,7 +2,7 @@ Title: Snippets
 
 ----
 
-Guide: templates/snippets
+Read: docs/guide/templates/snippets
 
 ----
 
