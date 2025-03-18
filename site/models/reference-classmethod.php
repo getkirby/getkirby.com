@@ -8,6 +8,12 @@ use ReferenceClassPage as ReferenceClass;
 
 class ReferenceClassMethodPage extends ReferenceArticlePage
 {
+	public function examples(): Field
+	{
+		// use content field from original class method as fallback
+		return parent::examples()->or($this->originalPage()?->examples());
+	}
+
 	/**
 	 * Find a method page from a class
 	 * following a chain of method names

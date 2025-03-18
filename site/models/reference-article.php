@@ -128,4 +128,25 @@ class ReferenceArticlePage extends DefaultPage
 
 		return $this->kirby()->template('reference-article');
 	}
+
+	/**
+	 * Get the text of the page, with examples appended, if available
+	 */
+	public function text(): Field
+	{
+		$text       = parent::text()->value();
+		$examples   = $this->examples()->value();
+		$examples ??= $this->reflection()?->examples();
+
+		if ($examples) {
+			$text .= PHP_EOL . PHP_EOL . '## Examples';
+			$text .= PHP_EOL . PHP_EOL . $examples;
+		}
+
+		if ($text !== null) {
+			return parent::text()->value($text);
+		}
+
+		return parent::text();
+	}
 }
