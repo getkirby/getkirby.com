@@ -57,6 +57,16 @@ class ReferenceClassMethodPage extends ReferenceArticlePage
 	}
 
 	/**
+	 * Returns the original method page from the class
+	 * that this method was inherited from
+	 */
+	protected function originalPage(): ReferenceClassMethodPage|null
+	{
+		$originalParent = $this->reflection()->inheritedFrom()?->page();
+		return $originalParent?->children()->find($this->name());
+	}
+
+	/**
 	 * Returns all methods of the proxied
 	 * class that are not already part
 	 * of the methods collection
@@ -83,6 +93,12 @@ class ReferenceClassMethodPage extends ReferenceArticlePage
 	{
 		$name = $this->reflection()->name();
 		return parent::title()->value($name . '()');
+	}
+
+	public function read(): Field
+	{
+		// use content field from original class method as fallback
+		return parent::read()->or($this->originalPage()?->read());
 	}
 
 	public function reflection(): ReflectableClassMethod

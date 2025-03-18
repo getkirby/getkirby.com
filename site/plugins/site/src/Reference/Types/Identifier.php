@@ -21,7 +21,7 @@ class Identifier extends Type
 		$this->type = ltrim($this->type, '\\');
 	}
 
-	protected function page(): ReferenceClassPage|ReferenceClassMethodPage|ReferenceFieldMethodPage|ReferenceHelperPage|null
+	public function page(): ReferenceClassPage|ReferenceClassMethodPage|ReferenceFieldMethodPage|ReferenceHelperPage|null
 	{
 		//:: or -> separating class and method
 		$chain  = preg_split('/::|->/', $this->type);
