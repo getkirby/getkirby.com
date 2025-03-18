@@ -1,0 +1,5 @@
+Title: Vue template compiler
+
+----
+
+Link: docs/guide/security#disable-the-vue-template-compiler
