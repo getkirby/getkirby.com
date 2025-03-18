@@ -6,6 +6,7 @@ use Kirby\Cms\App;
 use Kirby\Reference\Reflectable\Tags\Deprecated;
 use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Reference\Reflectable\Tags\Throws;
+use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode;
 use Reflector;
@@ -35,6 +36,23 @@ abstract class Reflectable
 	public function doc(): Doc
 	{
 		return $this->doc ??= Doc::factory($this->reflection);
+	}
+
+	public function examples(): string|null
+	{
+		$node = $this->doc()->getTextNodes()[0] ?? null;
+
+		if ($node instanceof PhpDocTextNode) {
+			$blocks   = explode(PHP_EOL . PHP_EOL, $node->text);
+			$examples = A::filter(
+				$blocks,
+				fn ($block) => Str::startsWith($block, '```')
+			);
+
+			return implode(PHP_EOL . PHP_EOL, $examples);
+		}
+
+		return null;
 	}
 
 	public function isDeprecated(): bool
