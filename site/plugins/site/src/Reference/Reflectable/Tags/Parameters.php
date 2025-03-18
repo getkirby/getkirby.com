@@ -25,17 +25,33 @@ class Parameters
 	): static {
 		$parameters = [];
 
-		// iterate over all parameters
+		// Collect all native parameters
 		foreach ($reflectable->reflection->getParameters() as $parameter) {
-			$name         = $parameter->getName();
-			$parameters[] = Parameter::factory(
+			$name              = $parameter->getName();
+			$parameters[$name] = Parameter::factory(
 				parameter: $parameter,
 				doc:       $reflectable->doc()->getParamNode($name),
 				context:   $reflectable
 			);
 		}
 
-		return new static($parameters);
+		// Collect all parameters from the doc block and add them
+		// if they haven't been added as native parameters yet
+		foreach ($reflectable->doc()->getParamTagValues() as $doc) {
+			$name                = ltrim($doc?->parameterName, '$');
+			$parameters[$name] ??= Parameter::factory(
+				doc:     $doc,
+				context: $reflectable
+			);
+		}
+
+		// Remove the `args` parameter if
+		// parameters have been documented in the doc block
+		if (count($parameters) > 1) {
+			unset($parameters['args']);
+		}
+
+		return new static(array_values($parameters));
 	}
 
 	public function hasDescriptions(): bool
