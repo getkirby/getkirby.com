@@ -32,7 +32,7 @@
 				</span>
 			</td>
 			<td>
-				<?= $incident['description'] ?>
+				<?= markdown($incident['description'], ['inline' => true]) ?>
 
 				<?php if (empty($incident['link']) === false): ?>
 				<a class="whitespace-nowrap" href="<?= $incident['link'] ?>">Read more ›</a>
