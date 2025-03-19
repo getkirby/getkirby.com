@@ -40,7 +40,7 @@
 			</td>
 			<td class="whitespace-nowrap">
 				<?php if (empty($incident['cvss']) === false): ?>
-				<a href="https://www.first.org/cvss/calculator/3.1#<?= $incident['cvss'] ?>"><?= $incident['severity'] ?></a>
+				<a href="https://www.first.org/cvss/calculator/<?= str_replace('.', '-', Str::between($incident['cvss'], ':', '/')) ?>#<?= $incident['cvss'] ?>"><?= $incident['severity'] ?></a>
 				<?php else: ?>
 				<?= $incident['severity'] ?>
 				<?php endif ?>
