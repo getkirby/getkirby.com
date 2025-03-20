@@ -11,5 +11,3 @@
 <div class="prose">
 	<?= $page->text()->kt() ?>
 </div>
-
-<?= js('assets/js/templates/reference-section.js') ?>
