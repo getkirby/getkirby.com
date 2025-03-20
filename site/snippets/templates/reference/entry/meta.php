@@ -10,6 +10,7 @@ $alias      = $reflection?->alias();
 $auth       = $page->auth()->value();
 $read       = $page->read()->value();
 $source     = $page->source();
+$filter   ??= false;
 ?>
 
 <!-- Meta list -->
@@ -60,8 +61,18 @@ $source     = $page->source();
 		</a>
 	</li>
 	<?php endif ?>
+
+	<?php if ($filter): ?>
+	<li>
+		<a href="javascript:void(0)" id="search-filter-toggle">
+			<?= icon('filter') ?>
+			Filter
+		</a>
+	</li>
+	<?php endif ?>
 </ul>
 <?php endif ?>
+
 <!-- Deprecation notice -->
 <?php if ($deprecated = $page->deprecated()): ?>
 <div class="prose">
