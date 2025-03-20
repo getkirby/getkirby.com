@@ -22,6 +22,11 @@ return function (App $kirby, Page $page) {
 		if (!$diff) {
 			$diff = [];
 
+			// swallow libxml warnings during HTML parsing with `DomDocument`;
+			// this is because libxml does not support HTML5 and thus warns
+			// about tags such as `<figure>`
+			$previousUseErrors = libxml_use_internal_errors(true);
+
 			$introDiffObj = new HtmlDiff($page->prev()->intro()->kt(), $page->intro()->kt());
 			$introDiffObj->getConfig()->setPurifierEnabled(false)->setKeepNewLines(true);
 			$diff['intro'] = $introDiffObj->build();
@@ -29,6 +34,9 @@ return function (App $kirby, Page $page) {
 			$textDiffObj = new HtmlDiff($page->prev()->text()->kt(), $page->text()->kt());
 			$textDiffObj->getConfig()->setPurifierEnabled(false)->setKeepNewLines(true);
 			$diff['text'] = $textDiffObj->build();
+
+			libxml_clear_errors();
+			libxml_use_internal_errors($previousUseErrors);
 
 			$cache->set($cacheKey, $diff);
 		}

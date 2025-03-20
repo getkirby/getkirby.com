@@ -2,6 +2,11 @@
 
 class KosmosIssuePage extends DefaultPage
 {
+	public function cover(): Kirby\Cms\File|null
+	{
+		return parent::cover()->toFile() ?? $this->image();
+	}
+
 	public function metadata(): array
 	{
 		return [

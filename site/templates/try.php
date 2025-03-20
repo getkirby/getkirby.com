@@ -75,7 +75,7 @@
 				<article class="p-6 bg-white shadow-2xl rounded">
 					<h2 class="font-bold mb-1">Starterkit</h2>
 					<p class="mb-6">Fully annotated sample site for everyone who wants to learn about Kirby's capabilities. </p>
-					<p class="flex" style="--gap: var(--spacing-3)">
+					<p class="flex flex-wrap" style="--gap: var(--spacing-3)">
 						<a aria-label="Download the Starterkit" class="btn btn--filled" href="<?= option('github.url') ?>/starterkit/archive/main.zip">
 							<?= icon('download') ?>
 							Download ZIP
@@ -90,7 +90,7 @@
 				<article class="p-6 bg-white shadow-2xl rounded">
 					<h2 class="font-bold mb-1">Plainkit</h2>
 					<p class="mb-6">No templates, no content, no styles – just you, Kirby and your imagination.</p>
-					<p class="flex" style="--gap: var(--spacing-3)">
+					<p class="flex flex-wrap" style="--gap: var(--spacing-3)">
 						<a aria-label="Download the Plainkit" class="btn btn--filled" href="<?= option('github.url') ?>/plainkit/archive/main.zip">
 							<?= icon('download') ?>
 							Download ZIP

@@ -1,0 +1,153 @@
+Title: Kosmos Episode 93
+
+----
+
+Date: 09.12.2024
+
+----
+
+Tags:
+
+----
+
+Comments: off
+
+----
+
+Kosmos-Subscription: on
+
+----
+
+Cover: kirby-5.png
+
+----
+
+Text:
+
+Here we are with the last issue of our newsletter in 2024. But before the year comes to an end, we want to update you with the latest news on Kirby 5, and you will get a last chance for this year to buy new licenses at a big discount.
+
+On that note, enjoy the festive season🎄. The entire Kirby team wishes you and your loved ones a safe, healthy, and happy new year✨. See you on the other side.
+
+## 🚀 Kirby 5 — Beta: A whole new editing experience
+
+(image: kirby-5.png alt: A screenshot of Kirby 5's new dark mode for the Panel link: https://getkirby.com/releases/5)
+
+While we had planned to release Kirby 5 by the end of 2024, we decided to postpone it a bit to give it some more love, and instead present a first beta before the holidays. You can expect the final release early next year.
+
+From previewing your unsaved changes to dark mode, from chunked uploads of large files to custom file previews, Kirby 5 brings a whole new editing experience to the Panel.
+
+Check out [all the new features](https://getkirby.com/releases/5) and the preliminary [docs](https://getkirby.com/releases/5/changes).
+
+Kirby 5 is a free upgrade for everyone with a valid [Kirby Basic or Enterprise license](https://getkirby.com/buy).
+
+*Note that as a major release, Kirby 5 might require some changes to existing sites.*
+
+## 🤝 For a good cause: new charity
+
+This year, we started donating €1 to a good cause for every license sold – and your matching contributions have made a big difference!
+
+Since November 21, our donations go to the Against Malaria Foundation, which provides bed nets to prevent malaria. This disease claims 625,000 lives each year, mostly children under five – but it's preventable. Nets have already reduced cases by two-thirds.
+
+With every license sold (and your match) we can fund one net to protect people: <https://www.againstmalaria.com/>
+
+## 🛠️ Kirby 4.5.0
+
+We also released Kirby 4.5.0, which comes with some nice enhancements and fixes.
+
+Get it here: <https://github.com/getkirby/kirby/releases/tag/4.5.0>
+
+Note that while PHP 8.4 was released a short while ago, we couldn't add support for it in 4.5.0 yet because we are waiting for updates of some dependencies. You can, however, expect PHP 8.4 support to come to Kirby 4.6.
+
+## 🔌 New plugins
+
+Our plugin directory grows with every issue, check out these new plugins:
+
+- Enhance your site's social media presence with the [OG Image plugin](https://plugins.getkirby.com/mauricerenck/og-image). Dynamically generate [#OpenGraph](https://mastodon.social/tags/OpenGraph) images using customizable templates, ensuring each page has a unique and visually appealing preview.
+- [Navigation Groups](https://github.com/philippoehrlein/kirby-navigation-groups) by Philipp Oehrlein is here to simplify navigation management in Kirby CMS. Easily group and organize menu items for complex sites, all within the Kirby Panel.
+
+- The Kirby [Admin Bar plugin](https://github.com/Pechente/kirby-admin-bar) adds a handy toolbar to Kirby CMS, allowing quick access to common actions like page editing, navigating panels, and previewing pages, streamlining the workflow for developers and editors.
+- [Kirby Grimoire](https://github.com/1612elphi/kirby-grimoire) is a web publishing tool/theme for Kirby, batteries included.
+- [Kirbyuse](https://github.com/johannschopplich/kirbyuse) is a collection of Vue Composition utilities and typed `window.panel` for Kirby.
+
+## 📍 Meetups
+
+The meetup wave spills over into the new year and starts in January. Save the dates:
+
+- **[Kirby Meetup Berlin](https://www.meetup.com/de-DE/kirby-cms-community-berlin/events/304633029/)**
+*Wed, January 8, 2025 at 19:00 CET*
+Learn how to manage Kirby plugins with Composer from Ove Numrich, listen to Alex Tolar's "Show & Tell" session, check out Felix Niklas' boilerplate and learn from Jamie Hunter what he does with layouts and blocks.
+
+- **[Kirby Meetup Munich](https://www.meetup.com/de-DE/kirby-cms-community-munchen/events/304542769/)**
+*Thu, January 16, 2025 at 18:00 CET*
+Join them for an insightful session with Georg Obermayr, Technical Evangelist and Full-Stack Developer at schalk&friends, who will showcase an impressive Kirby project for a MedTech company.
+- **Kirby Meetup Mainz**
+*Wed, January 22, 2025 at 18:00 CET*
+We'll meet for the 2nd edition of the Kirby Mainz Meetup at the 3st offices. With Bastian Allgeier and a deep dive into Kirby 5.
+
+### Past meetups
+
+With 16 events, 2024 has been an incredible Kirby meetup year. We want to send a huge thank-you to all the organisers and attendees. We truly appreciate your support and can't wait to meet again in 2025.
+
+(image: meetups.jpg link: meet)
+
+## 👷‍♀️ Made with Kirby
+
+(image: amsterdam-bereikbaar.png link: https://www.amsterdambereikbaar.nl/ caption: Amsterdam Bereikbaar)
+
+## 📝 Articles
+
+Thom Wadamire from Brandsistency explains why they [prefer Kirby CMS for building websites](https://brandsistency.com/blog/why-kirby-cms), highlighting its flexibility, lightweight performance, robust security, and ease of use for developers and editors.
+
+Chris Tattum does a deep dive into deploying Kirby websites with GitHub actions in a 2 series article. Check out [part 1](ttps://www.christattum.com/deploying-kirby-cms-with-github-actions-pt-1/) and [part 2](https://www.christattum.com/deploying-kirby-cms-with-github-actions-pt-2/) of his article.
+
+Thomas Günther shares how he builds [modular websites with Kirby](https://medienbaecker.com/articles/modular-kirby-websites) and the blocks field.
+
+Nicolas Paries and Elisa Ribeiro Soares explain [how they use Kirby to keep things simple. And why they fell in love.](https://heylow.world/blog/kirby-mon-amour)
+
+## 🦹 Certified partners
+
+We truly believe that our partner program is all about building a strong network of reliable agencies and freelancers for Kirby. In each Kosmos edition, we will be highlighting three of our certified partners. Today ...
+
+<div class="columns mb-12" style="--columns: 3">
+<div>
+(image: tobias-moeritz.jpg)
+(link: /partners/tobias-moeritz text: Tobias Möritz) 
+</div>
+
+<div>
+(image: diverently.png)
+(link: /partners/diverently text: Diverently GmbH)
+</div>
+
+<div>
+(image: thomas-guenther.png)
+(link: partners/thomas-guenther text: Thomas Günther)
+</div>
+</div>
+
+If you would like to join our partner network, please submit your application using our [application form](https://getkirby.com/partners/join).
+
+In recent months, we have already organized three 'Office Hours' events with our certified partners. These events have always met with great interest and everyone has benefited from them.
+
+## 🛠️ This & That
+
+Josh W. Comeau's article breaks down [how to decide whether to use modern CSS features](https://www.joshwcomeau.com/css/browser-support/) by weighing browser support against potential fallbacks or tradeoffs. It's a practical guide to confidently embracing cutting-edge CSS while ensuring a good experience for all users.
+
+This step-by-step guide shows [how to set up a PHP development environment in VS Code](https://dev.to/mdarifulhaque/how-to-set-up-a-php-development-environment-in-vs-code-with-docker-desktop-a-step-by-step-guide-12ia) using Docker Desktop. It covers everything from installing tools to debugging PHP applications, offering a streamlined approach for consistent and efficient development.
+
+Alex MacArthur argues that [implementing a Content Security Policy](https://macarthur.me/posts/csp/) (CSP) is an easy and cost-effective way to boost your website's security against vulnerabilities like malicious code injections and supply chain attacks. He emphasizes its value as a simple "insurance policy" for protecting even basic, static sites.
+
+PHP 8.4 was released on November 21. Here's a [roundup of what to expect](https://thephp.foundation/blog/2024/11/21/php-core-roundup-20-php84/).
+
+[Harry Roberts' article](https://csswizardry.com/2024/11/designing-and-evolving-a-new-performance-score/) discusses the creation and evolution of a new performance scoring system aimed at providing actionable insights for improving web performance. Read more [here](https://csswizardry.com/2024/11/designing-and-evolving-a-new-performance-score/).
+
+[Cap](https://cap.so/free-screen-recorder) is an open-source free screen recording app available for macOS and web (currently in public beta).
+
+[html-to-markdown](https://html-to-markdown.com) converts HTML snippets or even entire websites to Markdown. Note that the tool is AI powered, so be careful of what you feed into it.
+
+Julia Evens explains how to [import JavaScript libraries without a build system](https://jvns.ca/blog/2024/11/18/how-to-import-a-javascript-library/).
+
+That's it for today. Get in touch with us [on Discord](https://chat.getkirby.com/), the [forum](https://forum.getkirby.com), in the [fediverse](https://mastodon.social/@getkirby), on [Bluesky](https://bsky.app/profile/getkirby.com) or on [YouTube](https://www.youtube.com/kirbycasts). Or share this newsletter with your friends and colleagues.
+
+Cheers,
+Sonja from Kirby team

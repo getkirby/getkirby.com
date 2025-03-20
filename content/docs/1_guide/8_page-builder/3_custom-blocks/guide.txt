@@ -59,7 +59,7 @@ fields:
       - type: button
         name: Button
         preview: fields
-				wysiwyg: true
+        wysiwyg: true
         icon: bolt
         fields:
           link:

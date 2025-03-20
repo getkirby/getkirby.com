@@ -38,6 +38,7 @@ article[data-loading] .price[data-sale] {
 	padding: 1rem;
 	border-radius: var(--rounded);
 	box-shadow: var(--shadow-xl);
+	z-index: 1;
 }
 .revenue div::after {
 	position: absolute;
