@@ -4,7 +4,7 @@ $areas = option('search.areas');
 ?>
 
 <style>
-.search-input figure svg:last-child {
+.search-input figure svg:nth-child(2) {
 	animation: Spin .9s linear infinite;
 }
 @keyframes Spin {

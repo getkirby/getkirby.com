@@ -295,3 +295,16 @@ html {
 	padding-left: 0.2rem;
 	color: var(--color-blue-600);
 }
+
+/* search filter */
+#search-reference {
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.5s ease, visibility 0s 0.5s;
+}
+
+#search-reference.show {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 0.5s ease, visibility 0s;
+}
