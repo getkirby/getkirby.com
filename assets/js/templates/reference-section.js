@@ -1,50 +1,43 @@
-window.addEventListener('DOMContentLoaded', () => {
-	let searchInput = document.getElementById("search-reference-input");
-	let searchToggleButton = document.getElementById("search-filter-toggle");
-	let searchWrapper = document.getElementById("search-reference");
+window.addEventListener("DOMContentLoaded", () => {
+	const filter = document.querySelector(".reference-section-filter");
+	const input = filter.querySelector("input");
+	const empty = filter.querySelector(".empty");
+	const section = document.querySelector(".reference-section");
+	const entries = section.querySelectorAll("li");
 
-	// search filter process
-	searchInput.addEventListener('input', function () {
-		let searchValue = this.value.toLowerCase().trim();
-		let list = document.querySelector('.reference-section');
-		let items = list.querySelectorAll('li');
-		let emptyResults = document.getElementById('empty-results');
+	// handle input for reference section filter
+	input.addEventListener("input", function () {
+		const query = this.value.toLowerCase().trim();
 
 		let hasVisibleItems = false;
 
-		items.forEach(item => {
-			let slug = item.getAttribute('data-slug') || '';
-			let keywords = item.getAttribute('data-keywords') || '';
-			let fullText = (slug + ',' + keywords).toLowerCase();
+		for (const entry of entries) {
+			const slug = entry.getAttribute("data-slug") || "";
+			const keywords = entry.getAttribute("data-keywords") || "";
+			const text = (slug + "," + keywords).toLowerCase();
 
-			if (fullText.includes(searchValue)) {
-				item.style.removeProperty('display');
+			if (text.includes(query)) {
+				entry.style.removeProperty("display");
 				hasVisibleItems = true;
 			} else {
-				item.style.display = 'none';
+				entry.style.display = "none";
 			}
-		});
+		}
 
 		if (hasVisibleItems) {
-			list.style.removeProperty('display');
-			emptyResults.style.display = 'none';
+			section.style.removeProperty("display");
+			empty.style.display = "none";
 		} else {
-			list.style.display = 'none';
-			emptyResults.style.display = 'block'
+			section.style.display = "none";
+			empty.style.display = "block";
 		}
 	});
 
-	// toggle search filter
-	searchToggleButton.addEventListener("click", function () {
-		searchWrapper.classList.toggle("show");
-		
-		if (searchWrapper.classList.contains("show")) {
-			searchInput.focus();
-		} else {
-			// clear the search input when the search filter is closed
-			searchInput.value = "";
-			let event = new Event("input");
-			searchInput.dispatchEvent(event);
+	input.addEventListener("keydown", function (e) {
+		if (e.key === "Escape") {
+			this.value = "";
+			this.dispatchEvent(new Event("input", { bubbles: true }));
+			this.blur();
 		}
 	});
 });

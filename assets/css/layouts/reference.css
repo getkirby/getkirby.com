@@ -121,6 +121,34 @@ html {
 	overflow: hidden;
 }
 
+/* Section filter */
+.reference-section-filter .filter-input {
+	position: relative;
+	font-size: var(--text-sm);
+	margin-bottom: var(--spacing-2);
+}
+.reference-section-filter .filter-input > label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1.75rem;
+	height: 1.75rem;
+}
+.reference-section-filter .filter-input > label svg {
+	width: 15px;
+	height: 15px;
+}
+.reference-section-filter .filter-input input {
+	padding: var(--spacing-1) var(--spacing-2) var(--spacing-1) 1.75rem;
+	width: 100%;
+	background: none;
+	border-radius: var(--rounded);
+}
+.reference-section-filter .filter-input input:focus {
+	outline-offset: -2px;
+	background: var(--color-light);
+}
+
 /* Mobile menu */
 .reference-menu {
 	display: flex;
@@ -294,17 +322,4 @@ html {
 .required-mark > span {
 	padding-left: 0.2rem;
 	color: var(--color-blue-600);
-}
-
-/* search filter */
-#search-reference {
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 0.5s ease, visibility 0s 0.5s;
-}
-
-#search-reference.show {
-	opacity: 1;
-	visibility: visible;
-	transition: opacity 0.5s ease, visibility 0s;
 }
