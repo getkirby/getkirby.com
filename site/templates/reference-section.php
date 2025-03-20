@@ -1,6 +1,6 @@
 <?php layout('reference') ?>
 
-<?php snippet('templates/reference/search') ?>
+<?php snippet('templates/reference/section-filter') ?>
 
 <div class="mb-24">
 	<?php snippet('templates/reference/section', $entries) ?>

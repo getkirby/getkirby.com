@@ -47,9 +47,7 @@
 					</div>
 				</div>
 				<?php endif ?>
-				<?php snippet('templates/reference/entry/meta', [
-					'filter' => $filter ?? false
-				]) ?>
+				<?php snippet('templates/reference/entry/meta') ?>
 			</header>
 
 			<?php if ($toc = $slots->toc()): ?>

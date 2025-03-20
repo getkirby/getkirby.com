@@ -10,7 +10,6 @@ $alias      = $reflection?->alias();
 $auth       = $page->auth()->value();
 $read       = $page->read()->value();
 $source     = $page->source();
-$filter   ??= false;
 ?>
 
 <!-- Meta list -->
@@ -20,8 +19,7 @@ $filter   ??= false;
 	$alias ||
 	$auth ||
 	$read ||
-	$source ||
-	$filter
+	$source
 ): ?>
 <ul class="reference-meta">
 	<?php if ($since): ?>
@@ -59,15 +57,6 @@ $filter   ??= false;
 		<a href="<?= $source ?>">
 			<?= icon('code') ?>
 			kirby/<?= Str::after($source, 'tree/' . App::version() . '/') ?>
-		</a>
-	</li>
-	<?php endif ?>
-
-	<?php if ($filter): ?>
-	<li>
-		<a href="javascript:void(0)" id="search-filter-toggle">
-			<?= icon('filter') ?>
-			Filter
 		</a>
 	</li>
 	<?php endif ?>
