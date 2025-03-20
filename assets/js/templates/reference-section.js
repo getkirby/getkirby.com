@@ -37,9 +37,11 @@ window.addEventListener('DOMContentLoaded', () => {
 	// toggle search filter
 	searchToggleButton.addEventListener("click", function () {
 		searchWrapper.classList.toggle("show");
-
-		// clear the search input when the search filter is closed
-		if (!searchWrapper.classList.contains("show")) {
+		
+		if (searchWrapper.classList.contains("show")) {
+			searchInput.focus();
+		} else {
+			// clear the search input when the search filter is closed
 			searchInput.value = "";
 			let event = new Event("input");
 			searchInput.dispatchEvent(event);

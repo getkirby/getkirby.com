@@ -7,6 +7,7 @@ return function (Page $page) {
 		'entries' => $page
 			->children()
 			->listed()
-			->filterBy('isEntry', true)
+			->filterBy('isEntry', true),
+		'filter' => true
 	];
 };

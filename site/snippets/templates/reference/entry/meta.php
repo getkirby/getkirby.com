@@ -20,7 +20,8 @@ $filter   ??= false;
 	$alias ||
 	$auth ||
 	$read ||
-	$source
+	$source ||
+	$filter
 ): ?>
 <ul class="reference-meta">
 	<?php if ($since): ?>
