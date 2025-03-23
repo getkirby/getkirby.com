@@ -12,7 +12,7 @@ class SecurityPage extends DefaultPage
 	/**
 	 * Returns all security advisories in the `getkirby/kirby` GitHub repo
 	 */
-	protected function incidents(): array
+	public function incidents(): array
 	{
 		$kirby = $this->kirby();
 		$cache = $kirby->cache('github');
