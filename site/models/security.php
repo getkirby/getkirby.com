@@ -29,7 +29,7 @@ class SecurityPage extends DefaultPage
 			$incidents = [];
 			foreach (Github::request('getkirby/kirby', 'security-advisories')->json() as $advisory) {
 				$incidents[] = [
-					'affected'    => Str::replace($advisory['vulnerabilities'][0]['vulnerable_version_range'], ', ', ' || '),
+					'affected'    => Str::replace($advisory['vulnerabilities'][0]['vulnerable_version_range'], [', ', '-'], [' || ', ' - ']),
 					'fixed'       => $advisory['vulnerabilities'][0]['patched_versions'],
 					'description' => $advisory['summary'],
 					'link'        => $advisory['html_url'],
