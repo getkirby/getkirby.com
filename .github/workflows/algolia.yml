@@ -40,3 +40,4 @@ jobs:
         run: scripts/algolia-index
         env:
           ALGOLIA_KEY: ${{ secrets.ALGOLIA_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
