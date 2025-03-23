@@ -84,7 +84,7 @@ class Github
 		string $method = 'get',
 		array $payload = []
 	): Remote {
-		$key = option('keys.github') ?? $_ENV['GITHUB_TOKEN'];
+		$key = option('keys.github') ?: getenv('GITHUB_TOKEN');
 
 		if ($key === null || $key === '') {
 			throw new InvalidArgumentException('Missing GitHub API token');
