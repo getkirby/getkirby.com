@@ -7,8 +7,8 @@
 		<div class="flex">
 			<div class="footer-info mb-6">
 				<p class="font-bold mb-1">Kirby</p>
-				<p class="mb-1">The CMS that adapts to any project. Made for developers, designers, creators and clients.</p>
-				<nav aria-label="Kirby on the web" class="social">
+				<p class="mb-3">The CMS that adapts to any project. Made for developers, designers, creators and clients.</p>
+				<nav aria-label="Kirby on the web" class="social mb-3">
 					<a rel="me" href="<?= option('github.url') ?>">
 						<?= icon('github', 'GitHub') ?>
 					</a>
@@ -28,6 +28,9 @@
 						<?= icon('discord', 'Discord') ?>
 					</a>
 				</nav>
+				<p class="mb-3 color-gray-700 flex items-center">
+					🇪🇺 Made in Europe
+				</p>
 			</div>
 			<nav aria-label="Footer menu" class="footer-menu">
 				<ul class="footer-menu-1 columns" style="--columns-sm: 2; --columns-md: 3; --columns: 3; --column-gap: var(--spacing-8); --row-gap: var(--spacing-6)">
