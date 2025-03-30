@@ -137,7 +137,7 @@ These files are in fact tied together by their filenames. The content in `about.
 
 Whenever you upload a file to a page via the Panel, the file is uploaded to the content folder. However, as soon as the URL of the file is called in the browser, the file is copied to the media folder.
 
-Also, all thumbnails are created on the fly and stored in the media folder. Therefore, this folder needs to be publicly accessible within the document root. This setup was chosen because it has some real advantages, like providing consistent image URLs or being able to move the content folder (and most other folders) above the document root for better security (see [custom folder setup](/docs/guide/configuration#custom-folder-setup)).
+Also, all thumbnails are created on the fly and stored in the media folder. Therefore, this folder needs to be publicly accessible within the document root. This setup was chosen because it has some real advantages, like providing consistent image URLs or being able to move the content folder (and most other folders) above the document root for better security (see [custom folder setup](/docs/guide/configuration/custom-folder-setup)).
 
 In addition to files and thumbs, the Panel also stores its assets in this folder. The `media` folder is generated automatically when removed and you should leave it untouched, i.e. do not use it to store files there, and do not deploy this folder to your remote server.
 
