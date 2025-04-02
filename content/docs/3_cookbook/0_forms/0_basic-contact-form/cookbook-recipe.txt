@@ -115,7 +115,6 @@ return function($kirby, $pages, $page) {
         // check the honeypot
         if(empty(get('website')) === false) {
             go($page->url());
-            exit;
         }
 
         $data = [
