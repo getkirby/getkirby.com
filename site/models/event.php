@@ -2,6 +2,7 @@
 
 use Kirby\Cms\Page;
 use Kirby\Content\Field;
+use Kirby\Toolkit\Str;
 
 class EventPage extends Page
 {
@@ -24,6 +25,37 @@ class EventPage extends Page
 	{
 		// expire each event two hours after it started
 		return $this->datetime()->getTimestamp() + (60 * 60 * 2);
+	}
+
+	/**
+	 * This method folds the title into multiple lines
+	 * and lines of text shouldn't be longer than 75 octets
+	 * https://icalendar.org/iCalendar-RFC-5545/3-1-content-lines.html
+	 */
+	public function fold($string, $maxLength = 50): string
+	{
+		$length    = Str::length($string);
+		$lines     = [];
+
+		for ($i = 0; $i < $length; $i += $maxLength) {
+			$chunk   = Str::substr($string, $i, $maxLength);
+			// add a space to the beginning of the line if it's not the first line
+			$lines[] = ($i > 0 ? ' ' : '') . $chunk;
+		}
+
+		return implode("\r\n", $lines);
+	}
+
+	public function foldTitle(): Field
+	{
+		$title = $this->fold($this->title()->value());
+		return parent::title()->value($title);
+	}
+
+	public function foldLink(): Field
+	{
+		$link = $this->fold($this->link()->value());
+		return parent::link()->value($link);
 	}
 
 	public function icon(): string

@@ -4,6 +4,13 @@
 			<h2 class="h2">Upcoming events</h2>
 			<a
 				class="btn btn--filled"
+				href="<?= $page->url() ?>.ical"
+			>
+				<?= icon('bell') ?>
+				Subscribe to calendar
+			</a>
+			<a
+				class="btn btn--filled"
 				href="mailto:mail@getkirby.com"
 			>
 				<?= icon('calendar') ?>
