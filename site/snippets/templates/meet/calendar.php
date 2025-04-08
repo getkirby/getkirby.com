@@ -2,7 +2,7 @@
 BEGIN:VEVENT
 UID:meetup-<?= $event->slug() . "\r\n" ?>
 SUMMARY:<?= $event->foldTitle() . "\r\n" ?>
-DTSTART:<?= $event->datetime()->format('Ymd\THis\Z') . "\r\n" ?>
+DTSTART:<?= $event->datetimeUtc()->format('Ymd\THis\Z') . "\r\n" ?>
 DTSTAMP:<?= $event->modified('Ymd\THis\Z') . "\r\n" ?>
 <?php if ($event->city()->isNotEmpty()): ?>
 LOCATION:<?= $event->city() ?>,<?= $event->country() . "\r\n" ?>

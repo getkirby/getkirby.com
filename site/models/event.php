@@ -21,6 +21,14 @@ class EventPage extends Page
 		);
 	}
 
+	/**
+	 * Returns the UTC datetime of the event
+	 */
+	function datetimeUtc(): DateTime
+	{
+		return $this->datetime()->setTimezone(new DateTimeZone('UTC'));
+	}
+
 	public function expiryTime(): int
 	{
 		// expire each event two hours after it started
@@ -117,5 +125,4 @@ class EventPage extends Page
 
 		return parent::title();
 	}
-
 }
