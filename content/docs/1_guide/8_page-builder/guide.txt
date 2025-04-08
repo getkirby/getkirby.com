@@ -52,9 +52,9 @@ Add `blocks` and `layout` fields to your blueprints like any other field type. C
 Our community of Kirby developers have created cool blocks field plugins, so make sure to check them out:
 
 - (link: plugins/lukasbestle/downloads text: Downloads block)
-- (link: plugins/microman/map text: Map-Suite: A geolocation field & map block)
-- (link: plugins/microman/formblock text: Form block: Create forms easily from building blocks)
-- (link: plugins/microman/grid-block text: Grid block: Use layouts right within any blocks field)
+- (link: plugins/plain-solutions/map text: Map-Suite: A geolocation field & map block)
+- (link: plugins/plain-solutions/formblock text: Form block: Create forms easily from building blocks)
+- (link: plugins/plain-solutions/grid-block text: Grid block: Use layouts right within any blocks field)
 - (link: plugins/jongacnik/fields-block text: Fields block: Kirby block preview plugin to directly render block fields, allowing for inline editing)
 - (link: plugins/johannschopplich/highlighter text: Highlighter: Syntax highlighting for code)
 
