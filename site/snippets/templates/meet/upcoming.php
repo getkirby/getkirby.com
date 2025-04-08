@@ -3,10 +3,10 @@
 		<header class="flex justify-between items-center mb-6">
 			<h2 class="h2">Upcoming events</h2>
 
-			<nav class="flex" style="gap: var(--spacing-3)"> 
+			<nav class="flex" style="gap: var(--spacing-3)">
 				<a
 					class="btn btn--outlined"
-					href="<?= $page->url() ?>.ical"
+					href="<?= $page->webcalUrl() ?>"
 				>
 					<?= icon('calendar') ?>
 					Subscribe
