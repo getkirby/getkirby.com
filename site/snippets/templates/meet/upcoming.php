@@ -2,20 +2,23 @@
 	<section class="events mb-24">
 		<header class="flex justify-between items-center mb-6">
 			<h2 class="h2">Upcoming events</h2>
-			<a
-				class="btn btn--filled"
-				href="<?= $page->url() ?>.ical"
-			>
-				<?= icon('bell') ?>
-				Subscribe to calendar
-			</a>
-			<a
-				class="btn btn--filled"
-				href="mailto:mail@getkirby.com"
-			>
-				<?= icon('calendar') ?>
-				Submit an event
-			</a>
+
+			<nav class="flex" style="gap: var(--spacing-3)"> 
+				<a
+					class="btn btn--outlined"
+					href="<?= $page->url() ?>.ical"
+				>
+					<?= icon('calendar') ?>
+					Subscribe
+				</a>
+				<a
+					class="btn btn--filled"
+					href="mailto:mail@getkirby.com"
+				>
+					<?= icon('add') ?>
+					Add event
+				</a>
+			</nav>
 		</header>
 		<?php snippet('templates/meet/events', ['events' => $events]) ?>
 	</section>
