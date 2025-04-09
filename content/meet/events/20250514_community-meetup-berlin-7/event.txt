@@ -1,5 +1,7 @@
 start: 19:00:00
 ----
+end: 22:00:00
+----
 city: Berlin
 ----
 country: Germany

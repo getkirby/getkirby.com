@@ -1,5 +1,7 @@
 start: 18:00:00
 ----
+end: 23:00:00
+----
 city: Gosport
 ----
 timezone: Europe/London
