@@ -1,32 +1,37 @@
 <?php
 
-use Kirby\Cms\Page;
 use Kirby\Content\Field;
 use Kirby\Toolkit\Str;
 
-class EventPage extends Page
+class EventPage extends DefaultPage
 {
-	public function date(): Field
+	public function date(string $time = 'start'): Field
 	{
 		return parent::date()->value(
-			$this->num() . ' ' . $this->start() . ' ' . $this->timezone()
+			$this->num() . ' ' . $this->{$time}() . ' ' . $this->timezone()
 		);
 	}
 
-	public function datetime(): DateTime
-	{
+	public function datetime(
+		string|null $timezone = null,
+		string $time = 'start',
+	): DateTime {
 		return new DateTime(
-			(string)$this->date(),
-			new DateTimeZone((string)$this->timezone())
+			datetime: $this->date($time),
+			timezone: new DateTimeZone($timezone ?? $this->timezone())
 		);
 	}
 
-	/**
-	 * Returns the UTC datetime of the event
-	 */
-	function datetimeUtc(): DateTime
+	public function end(): Field
 	{
-		return $this->datetime()->setTimezone(new DateTimeZone('UTC'));
+		if (parent::end()->isNotEmpty()) {
+			return parent::end();
+		}
+
+		$start = $this->start();
+		$dt    = DateTime::createFromFormat('H:i:s', $start);
+		$dt->modify('+2 hours');
+		return parent::end()->value($dt->format('H:i:s'));
 	}
 
 	public function expiryTime(): int
