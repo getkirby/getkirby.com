@@ -1,8 +1,6 @@
 <?php
 
-use Kirby\Cms\Page;
-
-class MeetPage extends Page
+class MeetPage extends DefaultPage
 {
 	/**
 	 * Returns the URL to the iCalendar file for this page
