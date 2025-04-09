@@ -56,7 +56,7 @@ class EventPage extends Page
 
 	public function foldTitle(): Field
 	{
-		$title = $this->fold($this->title()->value());
+		$title = $this->fold($this->shortTitle()->value());
 		return parent::title()->value($title);
 	}
 
