@@ -9,7 +9,7 @@
 					href="<?= $page->webcalUrl() ?>"
 				>
 					<?= icon('calendar') ?>
-					Subscribe
+					Add to calendar
 				</a>
 				<a
 					class="btn btn--filled"
