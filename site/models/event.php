@@ -16,10 +16,16 @@ class EventPage extends DefaultPage
 		string|null $timezone = null,
 		string $time = 'start',
 	): DateTime {
-		return new DateTime(
+		$dt = new DateTime(
 			datetime: $this->date($time),
-			timezone: new DateTimeZone($timezone ?? $this->timezone())
+			timezone: new DateTimeZone($this->timezone())
 		);
+
+		if ($timezone !== null) {
+			$dt->setTimezone(new DateTimeZone($timezone));
+		}
+
+		return $dt;
 	}
 
 	public function end(): Field
