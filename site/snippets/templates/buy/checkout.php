@@ -274,6 +274,14 @@
 						</div>
 					</fieldset>
 
+					<div class="field">
+						<label class="font-bold flex items-center" style="gap: var(--spacing-2)">
+							<input id="newsletter" type="checkbox" name="newsletter" v-model="form.newsletter">
+							Subscribe to our Kosmos newsletter
+						</label>
+						<p class="help">We won't ever spam you! You can unsubscribe at any time. <a class="underline" target="_blank" href="<?= url('kosmos') ?>">Learn more about Kosmos…</a></p>
+					</div>
+
 					<div v-if="product === '<?= $basic->value() ?>'" class="field">
 						<label class="font-bold flex items-center" style="gap: var(--spacing-2)">
 							<input id="limit" type="checkbox" name="limit" required>
