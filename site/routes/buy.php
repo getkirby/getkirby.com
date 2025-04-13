@@ -70,6 +70,7 @@ return [
 				$message     = $product->revenueLimit();
 				$passthrough = new Passthrough(
 					discounts:    $price->discounts(),
+					newsletter:   $newsletter,
 					donationOrg:  option('buy.donation.charity'),
 					teamDonation: option('buy.donation.teamAmount') * $quantity
 				);
