@@ -19,7 +19,7 @@ Icon: spaceship
 
 Screencast:
 
-(screencast: https://www.youtube.com/watch?v=Mb_-bo77IPc title: One minute installation with Laravel Herd text: Using Laravel Herd as local development environment to install Kirby in no time.)
+(screencast: https://www.youtube.com/watch?v=us4hwvMJbzs title: How to install Kirby in minutes text: Using Laravel Herd as local development environment to install Kirby in no time.)
 
 ----
 
