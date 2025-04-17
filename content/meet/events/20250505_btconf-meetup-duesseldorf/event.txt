@@ -6,4 +6,4 @@ country: Germany
 ----
 conference: Beyond Tellerrand
 ----
-link: https://beyondtellerrand.com/events/dusseldorf-2025/
+link: https://www.meetup.com/kirby-community-nrw/events/307333098
