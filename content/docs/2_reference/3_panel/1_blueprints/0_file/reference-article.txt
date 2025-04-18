@@ -159,7 +159,7 @@ If the file blueprint also accept non-image files, those will be skipped and the
 
 ## `image` options
 
-The (preview) `image` blueprint option defines how any page with this blueprint will be presented, e.g. in a files section.
+The (preview) `image` blueprint option defines how any file with this blueprint will be presented, e.g. in a files section.
 
 ### `back`
 
@@ -168,7 +168,6 @@ Sets the image background.
 ```yaml
 
 image:
-  query: page.image.findBy("name", "cover")
   cover: true
   ratio: 1/1
   back: black
@@ -253,6 +252,19 @@ image:
 <info>
 You are not limited to the example ratios above. In fact, Kirby calculates the ratio for you as long as you enter it in the format **`a/b`**
 </info>
+
+### `query`
+
+Query an image to show as preview, for example, another version of the image, or a preview image for a PDF or video file.
+
+```yaml
+
+image:
+  query: page.images.findBy("name", "preview")
+  cover: true
+  ratio: 1/1
+  back: black
+```
 
 ## Options
 
