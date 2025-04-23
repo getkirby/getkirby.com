@@ -1,0 +1,66 @@
+Title: Studio Dier
+
+----
+
+Subtitle: Design Studio
+
+----
+
+Plan: regular
+
+----
+
+People: 1
+
+----
+
+Website: https://studiodier.com/
+
+----
+
+Location: Gent, België
+
+----
+
+Contactlink: mailto:contact@studiodier.com
+
+----
+
+Languages: English, Dutch
+
+----
+
+Description:
+
+We are a web and graphic design studio based in Ghent (Be). DIER mainly (but not solely) operates in the field of webdesign, creative coding, identity design & branding, book design and other printed matter. We have a genuine passion for collaborating with our clients, aiming to create clever designs that not only meet your needs but also reflect the client's vision.
+
+## Web Services
+We specialize in crafting tailored solutions to meet a wide range of your web-based requirements.
+
+At the core of our expertise lies Kirby CMS, providing a robust, easy-to-use and extensible foundation. On the frontend, we offer more flexibility, employing technologies and frameworks such as Vue.js, Nuxt.js and whatever necessary to build your dream project :)
+
+Our meticulous attention to detail, coupled with a commitment to innovative design principles, ensures a seamless and cutting-edge web experience.
+
+----
+
+Expertise:
+
+- Webdesign (UI/UX)
+- Content-first design principles
+- Component-based architecture
+- Multilingual websites
+- Performant, SEO-friendly websites
+- Not shy to think outside the box
+- Not shy to be creative with code
+
+----
+
+Region: Europe
+
+----
+
+Uuid: V0XXkTt5M3Cqtn3T
+
+----
+
+Text:
