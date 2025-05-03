@@ -30,7 +30,7 @@
 					If the website is for a client, the limit applies to the client's total revenue/funding.
 				</p>
 				<p style="color: var(--color-gray-400)">
-					See the frequently asked questions below for more information.
+					See the <a class="underline" href="#revenue-limit">frequently asked questions below</a> for more information.
 				</p>
 			</div>
 		</details>
