@@ -32,9 +32,12 @@ With Kirby's architecture you can combine native, file-based pages with pages fr
 We refer to any page that does not exist in the content folder as "virtual&nbsp;page".
 </info>
 
-All virtual pages are seamlessly integrated in Kirby. Routing works out of the box, they are included in API requests and they are even manageable in the panel!
+All virtual pages are seamlessly integrated in Kirby. Routing works out of the box, they are included in API requests and they are even manageable in the Panel!
+
+<warning>
+If you use virtual content with dynamic and especially external data, please ensure that the data is clean to ensure reliability and prevent attacks. With great power comes great responsibility. You can read more about this in our (link: docs/guide/security#filter-and-sanitize-inputs__filter-and-sanitize-properties-of-virtual-content text: security guide).
+</warning>
 
 ----
 
 Subpages: true
-
