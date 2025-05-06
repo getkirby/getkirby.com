@@ -154,6 +154,20 @@ create:
 ```
 
 If the file blueprint also accept non-image files, those will be skipped and their format/extension left untouched.
+
+### Strip image metadata
+
+Image files can (and often do) carry so called EXIF metadata such as the date and time the image was taken, the camera make and model and the GPS geolocation. Especially the geolocation can be considered personal data and can be a risk to vulnerable individuals when published online.
+
+If the `create` option is enabled with any configuration, all newly uploaded images are passed through Kirby's thumb engine, which strips all metadata by default. If you only need the metadata stripping, you can enable it like so:
+
+```yaml "site/blueprints/files/image.yml"
+create:
+  strip: true
+```
+<info>
+Please keep in mind that it is *not* possible to disable the stripping by setting the option to `false`. We will add this option in the future to add more control e.g. for use cases where you intend to work with the EXIF data on the site but still want to set other options to convert the format or reduce the image dimensions.
+</info>
 </since>
 
 

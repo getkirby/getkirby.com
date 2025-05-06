@@ -29,7 +29,9 @@ We are not responsible how you handle data privacy on your own Kirby-powered web
 
 ## Privacy by design
 
-Kirby and the (glossary: Panel) are designed with privacy in mind, which is why the Kirby core and the Panel do not communicate with third-party services or our own servers in any form (only exceptions: licensing and update checks, see below). There are no trackers, no analytics and no cookies except those related to sessions and user management. We have no access to your Panel, to your data, to your server or to your users. We also do not use external services to provide web fonts, JavaScript libraries or any other assets for the Panel. Everything runs on your server and stays under your control.
+Kirby and the (glossary: Panel) are designed with privacy in mind, which is why the Kirby core and the Panel do not communicate with third-party services or our own servers in any form (only exceptions: licensing and update checks, see below).
+
+There are no trackers, no analytics and no cookies except those related to sessions and user management. We have no access to your Panel, to your data, to your server or to your users. We also do not use external services to provide web fonts, JavaScript libraries or any other assets for the Panel. Everything runs on your server and stays under your control.
 
 ## Features with privacy implications
 
@@ -78,6 +80,14 @@ No personal information or other site data is transmitted to our CDN. Kirby expl
 <info>
 If you don't want Kirby to connect to our CDN, you can (link: docs/reference/system/options/updates text: disable the update check or set a custom checking endpoint).
 </info>
+
+## Your own data and content
+
+Content you and your users upload, edit and publish via your Kirby installation may also include personal data. While this is rather obvious for text content about a person or an (internal) database of contact information, sometimes personal data can be hidden in content.
+
+One such case is the metadata in uploaded files. Many file formats (such as document and image formats) store metadata like the name of the author or the GPS geolocation where an image was taken. Often this is not a problem, but you should think about such types of metadata, possible risks and how you can reduce the stored data to a minimum.
+
+For example for image files, Kirby provides an option to (link: docs/reference/panel/blueprints/file#optimize-uploaded-images-create text: automatically strip metadata on upload).
 
 ## Other data handlers
 
