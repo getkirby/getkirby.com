@@ -26,7 +26,7 @@ With the thumb method, you can perform multiple image manipulations at once: res
         'format'    => 'webp',
         'grayscale' => true,
         'blur'      => 300,
-				'sharpen'   => 50,
+        'sharpen'   => 50,
         'quality'   => 70,
     ]
 )->url() ?>" alt="">
