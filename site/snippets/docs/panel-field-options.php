@@ -31,7 +31,7 @@ You can start at the `site`, current `page`, `users` collection or the `kirby` i
 You can use array syntax and nested queries in Kirby's query syntax.
 
 ```yaml
-query: site.index.filterBy("template", "in", ["note", "album"]);
+query: site.index.filterBy("template", "in", ["note", "album"])
 query: kirby.collection("some-collection").not(kirby.collection("excluded-collection"))
 ```
 
