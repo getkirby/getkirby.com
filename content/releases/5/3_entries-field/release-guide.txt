@@ -6,14 +6,14 @@ Subtitle: When one just isn't enough
 
 ----
 
-Teaser: The Entries field allows you to create and manage multiple entries for the same field. It is a powerful tool for creating and managing content in a structured way.
+Teaser: The Entries field allows you to create and manage multiple entries for the same field. It is a powerful tool for creating and managing content in a structured way. Let's call ours `myEntries`:
 
 ----
 
 Example:
 
 ```yaml
-entries:
+myEntries:
   type: entries
   min: 2
   max: 4
@@ -41,7 +41,7 @@ The entries field allows you to create and manage multiple entries for the same 
 It supports the `color`, `date`, `email`, `number`, `select`, `slug`, `tel`, `text`, `time`, `url` field types.
 
 ```yaml
-entries:
+myEntries:
   type: entries
   min: 2
   max: 4
