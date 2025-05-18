@@ -230,6 +230,24 @@ $articles = page('blog')
   ->filter(fn ($page) => $page->date()->toDate('Y') === $year);
 ```
 
+You can also use date strings like `now`, `yesterday`, `2 days ago`, `now - 1 week` etc.:
+
+```php
+$collection = page('blog')
+  ->children()
+  ->published()
+  ->filterBy('date', 'date >', 'now')
+```
+
+```php
+$collection = page('blog')
+  ->children()
+  ->published()
+  ->filterBy('date', 'date >', 'now - 1 week')
+```
+
+Basically, the date field can be anything PHP can parse as a date.
+
 ### Multiple date fields
 
 Events often have `startdate` and `enddate` date fields. To filter events that either end or begin in the future, you can use a filter with a callback:
