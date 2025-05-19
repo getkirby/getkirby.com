@@ -49,7 +49,7 @@ The brand new changes view lets you switch between a comparison mode or a full-w
 
 The new preview view for pages and the site is located at `/panel/pages/(:any)/changes/(changes|latest|compare)` and `/panel/site/changes/(changes|latest|compare)`.
 
-It can be accessed with the new preview dropdown for the site and pages.
+It can be accessed with the new preview button for the site and pages.
 
 (image: preview-dropdown.png class: screenshot-sm)
 
