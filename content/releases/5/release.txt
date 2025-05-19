@@ -4,7 +4,7 @@ Subtitle: RC.1
 ----
 Version: 5
 ----
-Prerelease: rc
+Prerelease: RC
 ----
 ogimage: opengraph.png
 ----
