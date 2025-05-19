@@ -1,6 +1,6 @@
 title: Kirby 5
 ----
-Subtitle: RC.1
+Subtitle: Release Candidate
 ----
 Version: 5
 ----
