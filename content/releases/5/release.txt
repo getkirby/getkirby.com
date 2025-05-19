@@ -1,10 +1,10 @@
 title: Kirby 5
 ----
-Subtitle: Beta
+Subtitle: RC.1
 ----
 Version: 5
 ----
-Prerelease: beta
+Prerelease: rc
 ----
 ogimage: opengraph.png
 ----

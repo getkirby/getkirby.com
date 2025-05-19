@@ -17,7 +17,7 @@ Enhancements:
 - Support for content representation specific site controllers, e.g. `site.rss.php` [#6950](https://github.com/getkirby/kirby/pull/6950)
 - New `Kirby\Cms\Pages::delete(array $ids)` and `Kirby\Cms\Files::delete(array $ids)` methods to handle batch delete for multiple files in a collection.
 
-#### Versions
+### Versions
 - New `storage` core component which returns the default storage handler for a model [#6867](https://github.com/getkirby/kirby/pull/6867)
 - New (class: Kirby\Cms\ModelWithContent method: version) method to directly access different content versions [#6455](https://github.com/getkirby/kirby/pull/6455)
 
@@ -83,16 +83,15 @@ Enhancements:
 - The (class: Kirby\Cms\ModelWithContent method: changeStorage) method to move (or copy) the model's storage to a different storage type
 - New `Kirby\Content\Translation` class (replacing `Kirby\Content\ContentTranslation`)
 - New `Kirby\Content\Translations` class to provide a more type-safe collection for all translations (returned by `Kirby\Cms\ModelWithContent::translations()`).
-- New `Kirby\Content\VersionId::render()` method to atomically set the render version during a render operation
+- New `Kirby\Content\VersionId` class to represent versions [#6436](https://github.com/getkirby/kirby/pull/6436)
 
-#### View buttons
+### View buttons
 - New (class: Kirby\Panel\Panel method: buttons) method that returns all defined buttons from all Panel areas [#6541](https://github.com/getkirby/kirby/pull/6541)
 - New `Kirby\Panel\Ui` namespace with basic `Kirby\Panel\Ui\Component` and `Kirby\Panel\Ui\Button` classes [#6539](https://github.com/getkirby/kirby/pull/6539). Each component renders as an array with a `component`, unique `key` and `props` entries
 - New `Kirby\Panel\Ui\Buttons\ViewButtons` and `Kirby\Panel\Ui\Buttons\ViewButton` classes [#6542](https://github.com/getkirby/kirby/pull/6542), responsible for gathering and transforming view buttons configured in blueprints, config files and/or Panel areas
 - New classes for core view buttons [#6545](https://github.com/getkirby/kirby/pull/6545): `Kirby\Panel\Ui\LanguagesDropdown` and `Kirby\Panel\Ui\PreviewDropdownButton`.
 
-
-#### Data
+### Data
 - New third `$fail` argument for `Data::read()` and `Data::decode()`. By default, `Data::read()` and `Data::decode()` will throw an exception if the file does not exist or the data cannot be decoded. By setting `$fail` to false, you can block the exception and return an empty array instead. We’ve refactored our parts of the code where we used a try/catch block to achieve the same.
 
   ```php
@@ -112,7 +111,7 @@ Enhancements:
 
 - New UUIDs are fully lowercased now to avoid issues between filesystems handling casing differently [#6566](https://github.com/getkirby/kirby/pull/6566)
 
-#### Languages
+### Languages
 - New (class: Kirby\Cms\Language method: ensure) and (class: Kirby\Cms\Languages method: ensure)  methods to get language(s) objects even in single-language mode. Note that these methods are marked as internal and may be changed in a future version. [#6483](https://github.com/getkirby/kirby/pull/6483)
 
   ```php
@@ -139,7 +138,7 @@ Enhancements:
 	- `version.compare`
 	- `view`
 
-#### API
+### API
 - New API Routes for saving, publishing and discarding of changes:
 	- POST: `/api/(:lock)/changes/discard`
 	- POST: `/api/(:lock)/changes/publish`
@@ -155,7 +154,10 @@ Enhancements:
 - Writer: nodes with `inline: true` in their button definition are displayed as inline buttons in toolbar (instead inside the dropdown) [#6902](https://github.com/getkirby/kirby/pull/6902)
 - Page status button uses custom status labels for `title` [#6911](https://github.com/getkirby/kirby/pull/6911)
 
-#### icons
+### Icons
+
+We’ve added the following new icons:
+
 - `accessibility`
 - `ai`
 - `asterisk`
@@ -175,7 +177,7 @@ Enhancements:
 - `wallet`
 - `window`
 
-#### Components
+### Vue Components
 - New `badge` prop for `<k-button>` (value: `{ text, theme }`) [#6755](https://github.com/getkirby/kirby/pull/6755)
 - `<k-link>` (and subsequently `<k-button>` and `<k-dropdown-item>`) has a new `download` attribute to force direct download of a file
 - `<k-tag>`: new `element` and `theme` props [#6569](https://github.com/getkirby/kirby/pull/6569)
@@ -186,7 +188,7 @@ Enhancements:
 - New `<k-languages-dropdown>` component
 - `<k-dropdown-content>` exposes `items` in scoped default slot and  has new `item` scoped slot
 
-#### Events
+### Events
 - `beforeunload` is now available as a global event, which you can listen to:
 	```php
   this.$panel.events.on("beforeunload", () => {
@@ -194,7 +196,7 @@ Enhancements:
   });
 	```
 
-#### Helpers
+### Helpers
 - New `this.$helper.throttle` JS helper [#6708](https://github.com/getkirby/kirby/pull/6708)
 - New `options` argument for `this.$helper.debounce` JS helper to control leading/trailing behavior [#6708](https://github.com/getkirby/kirby/pull/6708)
 - New `clipboard.write`  event, which can be triggered globally to write something to the clipboard. This is especially useful if you want to fire a copy event from the backend (e.g. from a dropdown option):
@@ -204,38 +206,61 @@ Enhancements:
 - New `uploadAsChunks` JS helper function [#6421](https://github.com/getkirby/kirby/pull/6421)
 - New `this.$helper.object.filter(object, predicate)`. [#6902](https://github.com/getkirby/kirby/pull/6902)
 
-
 ----
 
 Bugfixes:
 
-- Fix Drag & Drop between block fields [#5290](https://github.com/getkirby/kirby/issues/5290)
+## Core
+
 - Fixed thumb issues resulting from EXIF orientation data [#2695](https://github.com/getkirby/kirby/issues/2695)
-- Select, radio and toggles field: values that include a comma will not be split into two tags in the structure field preview anymore [#5800](https://github.com/getkirby/kirby/issues/5800)
-- Drawers + Fields block: collapse tabs in header correctly into dropdown for narrow columns [#6914](https://github.com/getkirby/kirby/pull/6914)
 - Model hooks for actions: multiple hooks don't overwrite each others' changes to the model [#6460](https://github.com/getkirby/kirby/pull/6460) [#2828](https://github.com/getkirby/kirby/pull/2828)
-- Headers with null as value are no longer added to JS API requests. [#6435](https://github.com/getkirby/kirby/pull/6435)
-- `$helper.object.clone` is no longer deprecated. Please use it instead of `structuredClone` as this might cause issues down the road with Vue 3. [#6479](https://github.com/getkirby/kirby/pull/6479)
+- Fix PHP error when `null` is passed as model to `$kirby->contentToken()` [#6822](https://github.com/getkirby/kirby/pull/6822)
+- Fixed `Str::ucfirst()` behavior, now behaves like PHP default [#6834](https://github.com/getkirby/kirby/issues/6834)
+- Permissions are now always correctly determined if the active user changes during the request [#6880](https://github.com/getkirby/kirby/pull/6880)
+- `User::delete()` will now properly call `file.delete` hooks for deleted user files
+- Fixed invalid parent query in `Kirby\Cms\FileBlueprint` tests [#7167](https://github.com/getkirby/kirby/pull/7167)
+- URLs like `https://example.com/some-invalid-page/some-site-file.pdf` are no longer resolved to an existing site file [#7217](https://github.com/getkirby/kirby/pull/7217)
+
+## Panel
+
+### Fields
+
+- All fields: Fixed query support for default values in fields [#2814](https://github.com/getkirby/kirby/issues/2814) [#2815](https://github.com/getkirby/kirby/pull/2815)
+- Select, radio and toggles fields: Values that include a comma will not be split into two tags in the structure field preview anymore [#5800](https://github.com/getkirby/kirby/issues/5800)
+- Writer field: Inline toolbar is hidden when no nodes and marks are available [#6804](https://github.com/getkirby/kirby/issues/6804)
+- Range/Number field: Fix `isEmpty()` usage [#6898](https://github.com/getkirby/kirby/pull/6898)
+- Blocks field: Fix Drag & Drop between block fields [#5290](https://github.com/getkirby/kirby/issues/5290)
+- Blocks field: fix empty display [#6951](https://github.com/getkirby/kirby/pull/6951)
+
+### Sections
+
+- Page section: Fixed flag column for page sections with table layout [#6866](https://github.com/getkirby/kirby/issues/6866)
+
+### Uploads
+
 - Kirby is better at removing failed file uploads from the server tmp directory [#2476](https://github.com/getkirby/kirby/issues/2476)
 - Canceling the file upload dialog now also cancels ongoing uploads [#6421](https://github.com/getkirby/kirby/pull/6421)
-- `<k-header>`: fixed wrapping with many buttons in narrow screens [#6544](https://github.com/getkirby/kirby/pull/6544)
-- Fixed query support for default values in fields [#2814](https://github.com/getkirby/kirby/issues/2814) [#2815](https://github.com/getkirby/kirby/pull/2815)
+
+### Search 
+
 - Panel search now also considers site files [#6710](https://github.com/getkirby/kirby/pull/6710)
-- The lock state is properly passed to `k-file-preview` components to make sure that file previews can lock their state (e.g. for the focus point for image previews)
-- Fixed badge position in model tabs and improved CSS for button badges in general
-- Fixed background CSS for the `k-progress` component
-- Fix PHP error when `null` is passed as model to `$kirby->contentToken()` [#6822](https://github.com/getkirby/kirby/pull/6822)
-- Fixed footer margin in dialogs if the `cancelButton` property is a string or object instead of a boolean. [#6833](https://github.com/getkirby/kirby/pull/6833)
-- Fixed `Str::ucfirst()` behavior, now behaves like PHP default [#6834](https://github.com/getkirby/kirby/issues/6834)
-- Writer field: inline toolbar is hidden when no nodes and marks are available [#6804](https://github.com/getkirby/kirby/issues/6804)
+
+### Vue components
+
+- Drawers + Fields block: collapse tabs in header correctly into dropdown for narrow columns [#6914](https://github.com/getkirby/kirby/pull/6914)
+- `<k-header>`: fixed wrapping with many buttons in narrow screens [#6544](https://github.com/getkirby/kirby/pull/6544)
+- The lock state is properly passed to `<k-file-preview>` components to make sure that file previews can lock their state (e.g. for the focus point for image previews)
+- Fixed badge position in `<k-model-tabs>` and improved CSS for button badges in general
 - Page dropdown: fix disabling preview item [#6891](https://github.com/getkirby/kirby/issues/6891)
 - File preview: fix aspect ratio for medium viewports [#6891](https://github.com/getkirby/kirby/issues/6891)
-- Page section w/ table layout: fix flag column [#6866](https://github.com/getkirby/kirby/issues/6866)
-- Range/Number field: fix `isEmpty()` usage [#6898](https://github.com/getkirby/kirby/pull/6898)
+- Fixed background CSS for the `<k-progress>` component
+- Fixed footer margin in dialogs if the `cancelButton` property is a string or object instead of a boolean. [#6833](https://github.com/getkirby/kirby/pull/6833)
 - Custom writer nodes: fixed active state detection for nodes that include paragraph child nodes [#6902](https://github.com/getkirby/kirby/pull/6902)
-- Permissions are now always correctly determined if the active user changes during the request [#6880](https://github.com/getkirby/kirby/pull/6880)
-- Blocks field: fix empty display [#6951](https://github.com/getkirby/kirby/pull/6951)
-- `User::delete()` will now properly call `file.delete` hooks for deleted user files
+
+### JS Panel API
+
+- Headers with null as value are no longer added to JS API requests. [#6435](https://github.com/getkirby/kirby/pull/6435)
+- `$helper.object.clone` is no longer deprecated. Please use it instead of `structuredClone` as this might cause issues down the road with Vue 3. [#6479](https://github.com/getkirby/kirby/pull/6479)
 
 ----
 
@@ -253,69 +278,123 @@ Breaking:
 
 ## Core
 
-- Working with old model instances (objects thar already were e.g. updated and returned a new working copy), the models can no longer overwrite their content. This will now throw an exception if you try. Use the new model instances instead.
+### Config options
+
+- Closures defined for the `content.salt` option will no longer receive a model when generating a salt for preview authentication tokens of drafts and versions as those tokens are now only based on the URI. The salt callback instead receives `null`  and is expected to return a fixed model-independent salt in this case. When generating a salt for a file media token, the file object is still passed as model. [#6836](https://github.com/getkirby/kirby/pull/6836)
+- The `api.methodOverwrite` option has been renamed to `api.methodOverride`
+- The `content.fileRedirects` option is now set to `false` by default. This protects uploaded file originals from unauthorized downloads. If you rely on the `https://example.com/some/page/file.pdf` or `https://example.com/some-site-file.pdf` routes, you can set the option to `true` or to a closure to control access dynamically per file. [#7216](https://github.com/getkirby/kirby/pull/7216)
+
+### Controllers
+
 - Data/variables from your `site` controller will now be passed to all templates [#6412](https://github.com/getkirby/kirby/pull/6412)
-- Users without a role in their credentials file will now receive the `default` role (if exists), not the `visitor` role anymore [#6656](https://github.com/getkirby/kirby/pull/6656)
+
+### Hooks
+
 - Model action `before` hooks: rules get applied before and after the hook runs
-- If file sorting was previously disabled via the `files.update` permission, the new `file.sort` permission has to be configured accordingly. [#6589](https://github.com/getkirby/kirby/pull/6589)
-- `ModelWithContent::version()` and `ModelWithContent::versions()` are no longer available as direct field accessor. You need to use `$model->content()->version()`/`$model->content()->versions()` instead if you are using a field with the name `version`/`versions`.
-- `$page::translation()` returns a single translation in single language mode. It now always returns a `Kirby\Content\Translation` object. This is also included in the `$page::toArray()` method.
+
+### Collections
+
 - PHP type hints have been added to many collection methods. If you are extending Core classes, you might need to add the same to your own classes and methods.
-- `Image\Dimensions::forImage()` now receives an `Image\Image` object [#6591](https://github.com/getkirby/kirby/pull/6591)
-- `Image\Exif::read()` is now a static method that receives an absolute path to a file [#6591](https://github.com/getkirby/kirby/pull/6591)
-- Thumb driver `autoOrient` option has been removed and now is always applied [#6591](https://github.com/getkirby/kirby/pull/6591)
-- `Str::camel()`, `Str::camelToKebab()`, `Str::float()`, `Str::kebab()`, `Str::kebabToCamel()`, `Str::length()`, `Str::lower()`, `Str::safeTemplate()`, `Str::short()`, `Str::slug()`, `Str::snake()`, `Str::studly()`, `Str::substr()`, `Str::template()`, `Str::ucfirst()`, `Str::ucwords()`, `Str::unhtml()`, `Str::upper()` and `Str::widont()` can no longer be called without a value argument (passing a `null` value still works) [#6401](https://github.com/getkirby/kirby/pull/6401)
-- All content storage methods must now use the `VersionId` instead of a simple string. [#6436](https://github.com/getkirby/kirby/pull/6436)
+
+### Models
+
+- `Kirby\Cms\HasMethods::hasMethod()` and `Kirby\Cms\HasMethods::callMethod()` are now protected methods
+- `Kirby\Cms\ModelWithContent::lock()` will now always return a `Kirby\Content\Lock` object, even if the model is not currently locked. You can check for that case with `ModelWithContent::lock()->isLocked()`
+- `Kirby\Cms\ModelWithContent::version()` and `Kirby\Cms\ModelWithContent::versions()` are no longer available as direct field accessor. You need to use `$model->content()->version()`/`$model->content()->versions()` instead if you are using a field with the name `version`/`versions`.
+- `Kirby\Cms\Page::modified()`, `Kirby\Cms\File::modifiedContent()` and `Kirby\Cms\User::modified()` now use the current language instead of the default language.
+- Working with old model instances (objects thar already were e.g. updated and returned a new working copy), the models can no longer overwrite their content. This will now throw an exception if you try. Use the new model instances instead.
 - All methods in `*Rules` classes are now marked to return void instead of a boolean [#6660](https://github.com/getkirby/kirby/pull/6660)
-- `signature` is longer available as field property when loading fields from the Panel backend [#6712](https://github.com/getkirby/kirby/pull/6712)
+
+### Content & Locking
+
+- Removed `Kirby\Cms\ContentLock` and `Kirby\Cms\ContentLocks` as well as `Kirby\Cms\App::locks()`
+- `$kirby->contentToken()` only accepts `object|null` for the `$model` parameter instead of `mixed`. [#6822](https://github.com/getkirby/kirby/pull/6822)
+- Renamed `token` query param for preview URLs to `_token` [#6823](https://github.com/getkirby/kirby/pull/6823)
+- `Kirby\Content\Content::update()` is actively deprecated and must no longer be used. It will throw an exception to find usage early on.
+
+### Pages
+
+- `$page::translation()` returns a single translation in single language mode. It now always returns a `Kirby\Content\Translation` object. This is also included in the `$page::toArray()` method.
+- Cache IDs in the pages cache now include a part for the version ID. Currently this is always `.latest`, e.g. `home.latest.html`. [#6827](https://github.com/getkirby/kirby/pull/6827?new_mergebox=true)
+- Removed internal `$page->isVerified()` method in favor of internal `$page->renderVersionFromRequest()` [#6829](https://github.com/getkirby/kirby/pull/6829)
+
+### Users 
+
+- `User::create()` does no longer accept null as argument.
+- Users without a role in their credentials file will now receive the `default` role (if exists), not the `visitor` role anymore [#6656](https://github.com/getkirby/kirby/pull/6656)
+- Setting a `name` field in `User::update()` does no longer have any effect. Use `User::changeName()` instead.
+
+### Roles and Permissions
+
+- If file sorting was previously disabled via the `files.update` permission, the new `file.sort` permission has to be configured accordingly. [#6589](https://github.com/getkirby/kirby/pull/6589)
+- `Kirby\Cms\Role::admin()` has been renamed to `Kirby\Cms\Role::defaultAdmin()` [#7187](https://github.com/getkirby/kirby/pull/7187)
+- `Kirby\Cms\Role::nobody()` has been renamed to `Kirby\Cms\Role::defaultNobody()` [#7187](https://github.com/getkirby/kirby/pull/7187)
+- Classes extending `Kirby\Cms\ModelPermissions` need to set their category with the `const CATEGORY` or `static function category()` instead of `protected string $category` and use the static `user()` method instead of `$user` and `$permissions` properties [#6880](https://github.com/getkirby/kirby/pull/6880)
+
+### Media & Thumbnail generation
+
+- `Kirby\Image\Dimensions::forImage()` now receives an `Kirby\Image\Image` object [#6591](https://github.com/getkirby/kirby/pull/6591)
+- `Kirby\Image\Exif::read()` is now a static method that receives an absolute path to a file [#6591](https://github.com/getkirby/kirby/pull/6591)
+- Thumb driver `autoOrient` option has been removed and now is always applied [#6591](https://github.com/getkirby/kirby/pull/6591)
+
+### Plugins
+
 - `Kirby\Plugin\Plugin::license()` now returns the `License` object instead of a simple string
 - `Kirby\Plugin\Plugin::toArray()` includes the full license info as child array instead of a string
-- `ModelWithContent::version()` is now a reserved keyword. If you've used a field with this name, you need to use `$model->content()->get('version')` instead to work with the field.
-- `ModelWithContent::lock()` will now always return a `Kirby\Content\Lock` object, even if the model is not currently locked. You can check for that case with `ModelWithContent::lock()->isLocked()`
-- Removed `Kirby\Cms\ContentLock` and `Kirby\Cms\ContentLocks` as well as `Kirby\Cms\App::locks()`
-- `Page::modified()`, `File::modifiedContent()` and `User::modified()` now use the current language instead of the default language.
-- `panel.view.isLocked` no longer exists. Use `panel.content.isLocked()` instead [#6515](https://github.com/getkirby/kirby/pull/6515)
+
+### Forms
+
 - `Kirby\Form\Field::$formFields` has been renamed to `Kirby\Form\Field::$siblings`
 - The `$formField` argument in `Kirby\Form\Field::factory()` has been renamed to `$siblings`
 - You can no longer pass a value to `Kirby\Form\Field::isEmpty()` Use `Kirby\Form\Field::isEmptyValue($value)` instead.
-- `Kirby\Form\Form::fields()` does no longer return null but an empty `Fields` collection if there are no fields.
+- `Kirby\Form\Form::fields()` does no longer return null but an empty `Kirby\Form\Fields` collection if there are no fields.
 - `Kirby\Form\Field::validate()` returns an array of errors instead of void.
-- Passing a single space as value to `Xml::attr()` won't render an empty value anymore but a single space. To render an empty value, please pass an empty string. [#6803](https://github.com/getkirby/kirby/pull/6803)
-- `$kirby->contentToken()` only accepts `object|null` for the `$model` parameter instead of `mixed`. [#6822](https://github.com/getkirby/kirby/pull/6822)
-- Renamed `token` query param for preview URLs to `_token` [#6823](https://github.com/getkirby/kirby/pull/6823)
-- Cache IDs in the pages cache now include a part for the version ID. Currently this is always `.latest`, e.g. `home.latest.html`. [#6827](https://github.com/getkirby/kirby/pull/6827?new_mergebox=true)
-- Removed internal `$page->isVerified()` method in favor of internal `$page->renderVersionFromRequest()` [#6829](https://github.com/getkirby/kirby/pull/6829)
-- Closures defined for the `content.salt` option will no longer receive a model when generating a salt for preview authentication tokens of drafts and versions as those tokens are now only based on the URI. The salt callback instead receives `null`  and is expected to return a fixed model-independent salt in this case. When generating a salt for a file media token, the file object is still passed as model. [#6836](https://github.com/getkirby/kirby/pull/6836)
+- Removed protected `Kirby\Form\Fields::$errors`, `Kirby\Form\Field::$errors` and `Kirby\Form\FieldClass::$errors` properties [#7131](https://github.com/getkirby/kirby/pull/7131)
+- The language argument in the protected internal `Kirby\Form\Form::prepareForLanguage()` method is no longer optional and must be a Language object. [#7132](https://github.com/getkirby/kirby/pull/7132)
+- The `Kirby\Form\Form` class does no longer swallow errors in field classes on construction. This could be considered a breaking change or an debugging enhancement. [#7167](https://github.com/getkirby/kirby/pull/7167)
+- When using the `Kirby\Form\Form` class, the disabled state of fields will no longer be overwritten on construction for secondary languages. Use `Kirby\Form\Form::toProps()` instead, to get the correct disabled state for each field. When using `Kirby\Form\Form::toProps()`, permissions will also be honored when the model cannot be updated by the user role. [#7166](https://github.com/getkirby/kirby/pull/7166)
+- `Kirby\Form\Form::$values` has been removed [#7166](https://github.com/getkirby/kirby/pull/7166)
+- `Kirby\Form\Form::prepareFieldsForLanguage()` has been removed [#7166](https://github.com/getkirby/kirby/pull/7166)
+- The structure field `::form` method does no longer have a `$values` parameter. Use `$field->form()->fill()` or `$field->form()->submit()` instead if you want to add values to the form. [#7170](https://github.com/getkirby/kirby/pull/7170)
+
+### Filesystem
+
+- `F::read()` no longer supports requesting URLs with protocols such as `http://` and `https://`. Please use the `Remote` class for this purpose. [#7099](https://github.com/getkirby/kirby/pull/7099)
+- `F::read()` no longer silently returns `false` when the file exists but is not readable. Instead it triggers a PHP "Permission denied" warning. [#7099](https://github.com/getkirby/kirby/pull/7099)
+
+### Toolkit 
+
 - The `Str::ucfirst()` method no longer lowercases all but the first letter of the text, it only capitalizes the first letter. [#6860](https://github.com/getkirby/kirby/pull/6860)
-- Classes extending `ModelPermissions` need to set their category with the `const CATEGORY` or `static function category()` instead of `protected string $category` and use the static `user()` method instead of `$user` and `$permissions` properties [#6880](https://github.com/getkirby/kirby/pull/6880)
-- File drag texts in the Panel always use the file UUID, if UUIDs are not disabled [#6948](https://github.com/getkirby/kirby/pull/6948)
-- The `api.methodOverwrite` option has been renamed to `api.methodOverride`
-- `Kirby\Content\Content::update()` is actively deprecated and must no longer be used. It will throw an exception to find usage early on.
-- `User::create()` does no longer accept null as argument.
-- Setting a `name` field in `User::update()` does no longer have any effect. Use `User::changeName()` instead.
-- `HasMethods::hasMethod()` and `HasMethods::callMethod()` are now protected methods
+- `Str::camel()`, `Str::camelToKebab()`, `Str::float()`, `Str::kebab()`, `Str::kebabToCamel()`, `Str::length()`, `Str::lower()`, `Str::safeTemplate()`, `Str::short()`, `Str::slug()`, `Str::snake()`, `Str::studly()`, `Str::substr()`, `Str::template()`, `Str::ucfirst()`, `Str::ucwords()`, `Str::unhtml()`, `Str::upper()` and `Str::widont()` can no longer be called without a value argument (passing a `null` value still works) [#6401](https://github.com/getkirby/kirby/pull/6401)
+- Passing a single space as value to `Xml::attr()` won't render an empty value anymore but a single space. To render an empty value, please pass an empty string. [#6803](https://github.com/getkirby/kirby/pull/6803)
 
 
 ## Panel
 
-- Panel uploads can exceed the `upload_max_filesize` limit [#6421](https://github.com/getkirby/kirby/pull/6421)
-    - If you want to restrict the upload size, please use the file blueprint (link: docs/reference/panel/blueprints/file#accept text: `accept` `maxsize` option)
-- Vuex and the Vuex content module have been removed.
-- The following dialogs no longer send dispatch events via the backend. Dispatch events relied on Vuex.
-    - `page.changeTitle`
-    - `page.delete`
-    - `page.move`
-    - `user.delete`
-- Calendar dropdown input will show Sunday now as first day of the week (depending on the user's language). If you want to enforce Monday as first day of the week, you can set the `date.weekday` option to `1`. [#6635](https://github.com/getkirby/kirby/pull/6635)
+### Uploads
+
+- Panel uploads can exceed PHP’s `upload_max_filesize` limit [#6421](https://github.com/getkirby/kirby/pull/6421). If you want to restrict the upload size, please use the file blueprint (link: docs/reference/panel/blueprints/file#accept text: `accept` `maxsize` option)
+
+### Fields
+
+- All fields: `signature` is longer available as field property when loading fields from the Panel backend [#6712](https://github.com/getkirby/kirby/pull/6712)
+- Textarea field: File drag texts in the Panel always use the file UUID, if UUIDs are not disabled [#6948](https://github.com/getkirby/kirby/pull/6948)
+- Date field: Calendar dropdown input will show Sunday now as first day of the week (depending on the user's language). If you want to enforce Monday as first day of the week, you can set the `date.weekday` option to `1`. [#6635](https://github.com/getkirby/kirby/pull/6635)
+- Select field: `empty` prop was removed. Use combination of `required`, `placeholder` and `default` to replicate functionality [#6459](https://github.com/getkirby/kirby/pull/6459)
+- Checkbox and Toggle fields: `required: true` now enforces that these fields need to be checked/toggles (active state)
+
+### Custom Panel CSS
+
+- CSS attribute selectors must be written fully qualified (e.g. `[data-hidden="true"]` as only `[data-hidden]` can start matching also elements where that attribute is `false`) [#6109](https://github.com/getkirby/kirby/pull/6109)
+
+### Vue Components
+
 - `<k-form>` and `<k-fieldset>` as well as many fields and inputs don't emit an `invalid` event anymore. Use native HTML invalid state of elements instead. [#6099](https://github.com/getkirby/kirby/pull/6099)
 - `novalidate` prop has been removed from all elements but `<k-form>` [#6099](https://github.com/getkirby/kirby/pull/6099)
-- Removed `hasErorrs` methods of `k-fieldset` [#6173](https://github.com/getkirby/kirby/pull/6173)
+- Removed `hasErrors` methods of `<k-fieldset>` [#6173](https://github.com/getkirby/kirby/pull/6173)
 - `<k-file-preview>` got fully refactored. If you were replacing or extending it, your code likely will break. Check out the new custom file preview feature if you want to provide previews for specific files. [#6578](https://github.com/getkirby/kirby/pull/6578)
-- Select field: `empty` prop was removed. Use combination of `required`, `placeholder` and `default` to replicate functionality [#6459](https://github.com/getkirby/kirby/pull/6459)
-- While `<k-writer>` is still included as alias for <`k-writer-input`>, some use cases where you accessed the `<k-writer>` component via the `$refs` of `<k-writer-input>` have to be adapted [#6172](https://github.com/getkirby/kirby/pull/6172)
 - `<k-draggable>`: the `move` callback function is receiving an event with an altered data structure
-- CSS attribute selectors must be written fully qualified (e.g. `[data-hidden="true"]` as only `[data-hidden]` can start matching also elements where that attribute is `false`) [#6109](https://github.com/getkirby/kirby/pull/6109)
-- `required: true` on checkbox and toggle fields now enforces that these fields need to be checked/toggles (active state)
+- While `<k-writer>` is still included as alias for <`k-writer-input`>, some use cases where you accessed the `<k-writer>` component via the `$refs` of `<k-writer-input>` have to be adapted [#6172](https://github.com/getkirby/kirby/pull/6172)
 - `<k-item>`: Removed `data-only-option` attributes
 - `<k-dialog>`: Removed `data-has-footer` attribute
 - `<k-toggles-input>`: Removed `data-disabled` attribute
@@ -325,8 +404,21 @@ Breaking:
 - `<k-tag>`: Removed `data-has-image` and `data-has-toggle` attributes
 - `<k-tree>`: Removed `data-has-subtree` attribute
 
+### Panel JS API
+
+- `panel.view.isLocked` no longer exists. Use `panel.content.isLocked()` instead [#6515](https://github.com/getkirby/kirby/pull/6515)
+- Vuex and the Vuex content module have been removed.
+- The following dialogs no longer send dispatch events via the backend. Dispatch events relied on Vuex.
+    - `page.changeTitle`
+    - `page.delete`
+    - `page.move`
+    - `user.delete`
+- The `panel.api.users.changePassword()` method now receives three arguments for the user ID, the current password of the acting user (new) and the new password to set [#7186](https://github.com/getkirby/kirby/pull/7186)
+
+
 ## API
 
+- The `PATCH`: `account/password` and `PATCH`: `users/$user/password` API routes require an additional `currentPassword`parameter with the password of the acting user unless in password reset mode of the current user [#7186](https://github.com/getkirby/kirby/pull/7186)
 - Removed API routes:
 	- `GET`: `/api/(:all)/lock`
 	- `PATCH`: `/api/(:all)/lock`
@@ -434,10 +526,18 @@ Deprecated:
 
 ## Core
 
-- Exception classes: passing $arg array will be removed in a future version. Use named arguments. [#6618](https://github.com/getkirby/kirby/pull/6618)
+### Models
+
+- `Kirby\Panel\Model::content()` is deprecated. Use `Kirby\Panel\Model::versions()['changes']` instead. [#7153](https://github.com/getkirby/kirby/pull/7153)
+
+### Plugins
+
 - `Kirby\Cms\Plugin` is deprecated. Use `Kirby\Plugin\Plugin` instead
 - `Kirby\Cms\PluginAsset` is deprecated. Use `Kirby\Plugin\Asset` instead
 - `Kirby\Cms\PluginAssets` is deprecated. Use `Kirby\Plugin\Assets` instead
+
+### Forms
+
 - `Kirby\Form\Field::formFields()` is deprecated. Use `::siblings()` instead
 - `Kirby\Form\Field::data()` is deprecated. Use `::toStoredValue()` instead
 - `Kirby\Form\Field::save()` is deprecated. Use `::isSaveable()` instead
@@ -445,75 +545,61 @@ Deprecated:
 - `Kirby\Form\FieldClass::data()` is deprecated. Use `::toStoredValue()` instead
 - `Kirby\Form\FieldClass::save()` is deprecated. Use `::isSaveable()` instead
 - `Kirby\Form\FieldClass::value()` is deprecated. Use `::toFormValue()` instead
-- Color field: the `text => value` notation for options has been deprecated and will be removed in Kirby 6. Please rewrite your options as `value => text`. [#6913](https://github.com/getkirby/kirby/pull/6913)
+- `Kirby\Form\Form::content()` is deprecated. Use `::toStoredValues()` instead. [#7166](https://github.com/getkirby/kirby/pull/7166)
+- `Kirby\Form\Form::data()` is deprecated. Use `::toStoredValues()` instead. [#7166](https://github.com/getkirby/kirby/pull/7166)
+- `Kirby\Form\Form::strings()` is deprecated. Use `::toStoredValues()` instead. [#7166](https://github.com/getkirby/kirby/pull/7166)
+- `Kirby\Form\Form::values()` is deprecated. Use `::toFormValues()` instead. [#7166](https://github.com/getkirby/kirby/pull/7166)
+
+### Exceptions
+
+- Exception classes: passing `$arg` array will be removed in a future version. Use named arguments. [#6618](https://github.com/getkirby/kirby/pull/6618)
+
 
 ## Panel
 
+### Config options
+
+- `panel.favicon` option throws deprecation warnings for `url` option (use `href` instead) and for `rel` key (use `rel`option instead)
+
+### Fields
+
+- Color field: the `text => value` notation for options has been deprecated and will be removed in Kirby 6. Please rewrite your options as `value => text`. [#6913](https://github.com/getkirby/kirby/pull/6913)
+
+### Custom Panel CSS
+
+- `--color-backdrop` CSS property has been deprecated. Use `--overlay-color-back` instead [#6299](https://github.com/getkirby/kirby/pull/6299)
+
+### Vue components
 - `<k-writer>` will be removed in a future version. Use `<k-writer-input></k-writer-input>` instead [#6172](https://github.com/getkirby/kirby/pull/6172)
 - `<k-bubble>`, `<k-bubbles>` and `<k-bubbles-field-preview>`. Use `<k-tag>`, `<k-tags>` and `<k-tag-field-preview>` instead. [#6569](https://github.com/getkirby/kirby/pull/6569)
-- `--color-backdrop` CSS property has been deprecated. Use `--overlay-color-back` instead [#6299](https://github.com/getkirby/kirby/pull/6299)
-- `panel.favicon` option throws deprecation warnings for `url` option (use `href` instead) and for `rel` key (use `rel`option instead)
 
 ----
 
 Refactored:
 ## Core
 
-- Model improvements
-  - Template in `Page::factory()` method is always lowercase
-  - Model name in `Page::model()` is always lowercase
-  - Template name is always lowercase in the `Page::setTemplate()` method
-  - Call `::setBlueprint()` in constructors before setting content
-  - Use `Page::updateParentCollections()` in the `::commit()` method and remove redundant calls.
-  - Add `::updateParentCollection()` methods to `FileActions` and `UserActions` and use them in their commit methods
-  - Remove `::hardcopy()` from `::commit()` in model actions
-  - New `Kirby\Cms\HasModels` trait
-	- New `Kirby\Cms\ModelCommit` and `Kirby\Cms\ModelState` classes
-  - `App::setSite()` is now public and can be used to overwrite the current site instance
-  - New `Page::normalizeProps()`, `File::normalizeProps()` and `User::normalizeProps()`
-  - Unit tests for Models have been reorganized and cleaned up
-- Exception classes support named arguments [#6618](https://github.com/getkirby/kirby/pull/6618)
-- New `Kirby\Cms\Events` class that handles low-level hook execution
-- New `Kirby\Api\Upload` class to handle file uploads via the REST API [#6421](https://github.com/getkirby/kirby/pull/6421)
-- Refactored `Kirby\Cms\LanguageRules` [#6659](https://github.com/getkirby/kirby/pull/6659)
+### General
+
+- Use more modern PHP syntax and PHPUnit assertions where applicable [#6401](https://github.com/getkirby/kirby/pull/6401)
 - Improved class typing by adding `Stringable` interface to relevant classes [#6433](https://github.com/getkirby/kirby/pull/6433)
-- New `Kirby\Cms\Collection::update($object)` method
-- New `Kirby\Content\VersionId` class to represent versions [#6436](https://github.com/getkirby/kirby/pull/6436)
-- Refactored all content storage classes and models [#6436](https://github.com/getkirby/kirby/pull/6436)
-- New `Language::single()` method to create a Language placeholder object in single language installations [#6448](https://github.com/getkirby/kirby/pull/6448)
 - Use "new" functions from PHP 8.0 [#6476](https://github.com/getkirby/kirby/pull/6476)
 	- `str_contains()`
 	- `str_starts_with()`
 	- `str_ends_with()`
-- Improve code style `Kirby\Toolkit\Collection::sort()` [#6626](https://github.com/getkirby/kirby/pull/6626)
-- Drastically simplified `Kirby\Panel\ChangesDialog` class, which reads changed models directly on the backend with the new `Kirby\Content\Changes` class and sends the required data for each model directly to the frontend. We no longer need an additional async request.
-- Refactored `Kirby\Panel\Model` classes
-	- Removed `Kirby\Panel\Model::lock()` method
-	- New `Kirby\Panel\Model::originals()` method
-	- New top-level props in `Kirby\Panel\Model::props()`
-		- `api`
-		- `id`
-		- `link`
-		- `originals`
-		- `uuid`
-	- New top-level props in `Kirby\Panel\File::props()`
-		- `extension`
-		- `filename`
-		- `mime`
-		- `preview`
-		- `type`
-		- `url`
-	- New top-level props in `Kirby\Panel\Page::props()`
-		- `title`
-	- New top-level props in `Kirby\Panel\Site::props()`
-		- `title`
-	- New top-level props in `Kirby\Panel\User::props()`
-		- `avatar`
-		- `email`
-		- `language`
-		- `name`
-		- `role`
-		- `username`
+
+### Model improvements
+
+#### All models
+
+- Use the new improved Form code in `Kirby\Cms\ModelWithContent::update()` [#7169](https://github.com/getkirby/kirby/pull/7169)
+- Call `::setBlueprint()` in constructors before setting content
+- Add `::updateParentCollection()` methods to `FileActions` and `UserActions` and use them in their commit methods
+- Remove `::hardcopy()` from `::commit()` in model actions
+- New `Kirby\Cms\HasModels` trait
+- New `Kirby\Cms\ModelCommit` and `Kirby\Cms\ModelState` classes
+- `App::setSite()` is now public and can be used to overwrite the current site instance
+- New `Page::normalizeProps()`, `File::normalizeProps()` and `User::normalizeProps()`
+- Unit tests for Models have been reorganized and cleaned up
 - Use `ModelWithContent::version()` in the core where it makes sense [#6455](https://github.com/getkirby/kirby/pull/6455)
 - `Page::__construct` calls `parent::__construct` after setting the props [#6499](https://github.com/getkirby/kirby/pull/6499)
 - `Site::__construct` calls `parent::__construct` after setting the props [#6499](https://github.com/getkirby/kirby/pull/6499)
@@ -521,75 +607,175 @@ Refactored:
 - `File::__construct` calls `parent::__construct` after setting the props [#6499](https://github.com/getkirby/kirby/pull/6499)
 - Simplify `ModelWithContent::writeContent` by using the new `Version::save()` method. [#6505](https://github.com/getkirby/kirby/pull/6505)
 - Simplify `ModelWithContent::content` by using `Language::ensure()` and `Version::content()` [#6505](https://github.com/getkirby/kirby/pull/6505)
-- `Kirby\Form\Field` class improvements
-	- New `Field::fill($value)` method
-	- New `Field::toFormValue()` method
-	- New `Field::toStoredValue()` method
-- `Kirby\Form\FieldClass` class improvements
-	- New `FieldClass::fill($value)` method
-	- New `FieldClass::toFormValue()` method
-	- New `FieldClass::toStoredValue()` method
-- `Kirby\Form\Fields` class improvements
-	- You can now pass the parent model as second argument to the Fields collection to inject it into any of the given fields.
-			```php
-			use Kirby\Form\Fields;
 
-			$fields = new Fields(
-				fields: [
-					'text' => [
-						'label' => 'Text',
-						'type'  => 'text'
-					]
-				],
-				model: page('blog/hello-world')
-			);
-			```
-	- New `Fields::defaults()` method to return all default values for all fields.
-	- New `Fields::errors()` method to run validation on all fields and return an array with all errors
-	- New `Fields::fill($values)` method to set the value for each field in the array
-	- New `Fields::findByKey()` and `Fields::findByKeyRecursive()` to find fields within fields with `Fields::find('parent-field+child-field')` (e.g. a field in a structure field) This has been handled by the `Form::field()` method before, but it's the wrong place to do that. With the new collection methods, this is handled in a very similar fashion as we do for pages.
-	- Improved `Fields::toArray()` method. You can now provide a proper map function to return custom values for each field in the collection.
-	- New `Fields::toFormValues()` to return all values for all fields in the collection that can be passed to a frontend form.
-	- New `Fields::toStoredValues()` to return all values for all fields in a format that can be stored in our text files.
-- `Kirby\Form\Form` class improvements
-	- The Form class now always passes the injected model to the Fields collection
-	- The Form class now uses `Field::isSaveable` instead of `Field::save` consistently.
-	- `Form::errors()` is now an alias for `$form->fields()->errors()`
-	- `Form::field($name)` is now an alias for `$form->fields()->find($name)`
-	- New `Form::toFormValues()` to return all values for all fields in the collection that can be passed to a frontend form.
-	- New `Form::toStoredValues()` to return all values for all fields in a format that can be stored in our text files.
-	- Removed an unnecessary check for a blueprint method in the `Form::for` method. ModelWithContent has a blueprint method by default and we
-	already check for ModelWithContent child classes with the argument type.
-- New Form Field Trait classes to help reduced code redundancy between `Kirby\Form\Field` and `Kirby\Form\FieldClass`
-	- `Kirby\Form\Mixin\Api`
-	- `Kirby\Form\Mixin\Model`
-	- `Kirby\Form\Mixin\Translatable`
-	- `Kirby\Form\Mixin\Validation`
-	- `Kirby\Form\Mixin\Value`
-	- `Kirby\Form\Mixin\When`
-- New `Kirby\Plugin` namespace [#6737](https://github.com/getkirby/kirby/pull/6737)
-- New `Kirby\Toolkit\Component::applyProp()` method to allow resetting single props and also improves prop unsetting in custom components.
-- `ModelPermissions` now also supports `Language` objects as quasi models [#6876](https://github.com/getkirby/kirby/pull/6876)
-- New `LanguagePermissions` class that inherits the existing logic from `LanguageRules` for consistency with other models [#6876](https://github.com/getkirby/kirby/pull/6876)
+#### Pages
+- Template name is always lowercase in the `Page::setTemplate()` method
+- Model name in `Page::model()` is always lowercase
+- Template in `Page::factory()` method is always lowercase
+- Use `Page::updateParentCollections()` in the `::commit()` method and remove redundant calls.
+
+#### Files
+
+- Simplify `Kirby\Cms\FileActions::create` when the same file is uploaded [#7149](https://github.com/getkirby/kirby/pull/7149)
+
+### Roles & Permissions
+
+- `Kirby\Cms\ModelPermissions` now also supports `Kirby\Cms\Language` objects as quasi models [#6876](https://github.com/getkirby/kirby/pull/6876)
+- New `Kirby\Cms\LanguagePermissions` class that inherits the existing logic from `Kirby\Cms\LanguageRules` for consistency with other models [#6876](https://github.com/getkirby/kirby/pull/6876)
 - Globally cache `access` and `list` permissions per permission category, model type and user role to reduce code duplication [#6881](https://github.com/getkirby/kirby/pull/6881)
+- Remove dead code from role shortcut methods for the default `admin` and `nobody` roles [#7187](https://github.com/getkirby/kirby/pull/7187)
+
+### Languages
+
+- Refactored `Kirby\Cms\LanguageRules` [#6659](https://github.com/getkirby/kirby/pull/6659)
+- New `Language::single()` method to create a Language placeholder object in single language installations [#6448](https://github.com/getkirby/kirby/pull/6448)
+
+### Forms
+
+#### `Kirby\Form\Form` class improvements
+
+- New `Kirby\Form\Form::toFormValues()` to return all values for all fields in the collection that can be passed to a frontend form.
+- New `Kirby\Form\Form::toStoredValues()` to return all values for all fields in a format that can be stored in our text files.
+- The Form class now always passes the injected model to the Fields collection
+- The Form class now uses `Kirby\Form\Field::isSaveable` instead of `Kirby\Form\Field::save` consistently.
+- `Kirby\Form\Form::errors()` is now an alias for `$form->fields()->errors()` 
+- `Kirby\Form\Form::field($name)` is now an alias for `$form->fields()->find($name)`
+- Removed an unnecessary check for a blueprint method in the `Form::for` method. `Kirby\Cms\ModelWithContent` has a blueprint method by default and we
+already check for `Kirby\Cms\ModelWithContent` child classes with the argument type.
+- Refactored language handling in the `Kirby\Form\Form` class with the new `Kirby\Cms\Language::ensure()` method. #7132
+- Use named parameters for Form construction throughout our entire code base [#7174](https://github.com/getkirby/kirby/pull/7174)
+
+#### `Kirby\Form\Field` class improvements
+- New `Kirby\Form\Field::fill($value)` method
+- New `Kirby\Form\Field::toFormValue()` method
+- New `Kirby\Form\Field::toStoredValue()` method
+
+#### `Kirby\Form\FieldClass` class improvements
+- New `Kirby\Form\FieldClass::toFormValue()` method
+- New `Kirby\Form\FieldClass::toStoredValue()` method
+
+#### `Kirby\Form\Fields` class improvements
+- You can now pass the parent model as second argument to the Fields collection to inject it into any of the given fields.
+		```php
+		use Kirby\Form\Fields;
+
+		$fields = new Fields(
+			fields: [
+				'text' => [
+					'label' => 'Text',
+					'type'  => 'text'
+				]
+			],
+			model: page('blog/hello-world')
+		);
+		```
+- New `Kirby\Form\Fields::defaults()` method to return all default values for all fields.
+- New `Kirby\Form\Fields::errors()` method to run validation on all fields and return an array with all errors
+- New `Kirby\Form\Fields::fill($values)` method to set the value for each field in the array
+- New `Kirby\Form\Fields::findByKey()` and `Kirby\Form\Fields::findByKeyRecursive()` to find fields within fields with `Kirby\Form\Fields::find('parent-field+child-field')` (e.g. a field in a structure field) This has been handled by the `Kirby\Form\Form::field()` method before, but it's the wrong place to do that. With the new collection methods, this is handled in a very similar fashion as we do for pages.
+- New `Kirby\Form\Fields::toFormValues()` to return all values for all fields in the collection that can be passed to a frontend form.
+- New `Kirby\Form\Fields::toStoredValues()` to return all values for all fields in a format that can be stored in our text files.
+- Improved `Kirby\Form\Fields::toArray()` method. You can now provide a proper map function to return custom values for each field in the collection.
+
+#### New Form Field Trait classes
+
+The new trait classes help reduce code redundancy between `Kirby\Form\Field` and `Kirby\Form\FieldClass`
+- `Kirby\Form\Mixin\Api`
+- `Kirby\Form\Mixin\Model`
+- `Kirby\Form\Mixin\Translatable`
+- `Kirby\Form\Mixin\Validation`
+- `Kirby\Form\Mixin\Value`
+- `Kirby\Form\Mixin\When`
+
+### Collections
+
+- New `Kirby\Cms\Collection::update($object)` method
+- Improve code style `Kirby\Toolkit\Collection::sort()` [#6626](https://github.com/getkirby/kirby/pull/6626)
+
+### Plugins
+
+- New `Kirby\Plugin` namespace [#6737](https://github.com/getkirby/kirby/pull/6737)
+
+### Exceptions
+
+- Exception classes support named arguments [#6618](https://github.com/getkirby/kirby/pull/6618)
+
+### Hooks 
+
+- New `Kirby\Cms\Events` class that handles low-level hook execution
+
+### API
+
+- New `Kirby\Api\Upload` class to handle file uploads via the REST API [#6421](https://github.com/getkirby/kirby/pull/6421)
+
+### Toolkit
+
+- New `Kirby\Toolkit\Component::applyProp()` method to allow resetting single props and also improves prop unsetting in custom components.
+
+#### Unit tests
+
+- Switched to PHPUnit Attributes in various test classes. This is work in progress and will happen in more test classes in the future.
 
 ## Panel
 
-- Preparations for a move to Vue 3 in v6
-	- `<k-draggable>` is directly built on top of SortableJS now [#6387](https://github.com/getkirby/kirby/pull/6387)
-	- Replace Vue `$listeners` [#6107](https://github.com/getkirby/kirby/pull/6107)
-	- Use strict CSS selectors for boolean (data) attributes [#6109](https://github.com/getkirby/kirby/pull/6109)
-	- Explicitly added `$attrs.class` to components that disable inheriting attributes [#6332](https://github.com/getkirby/kirby/pull/6332)
-	- Use more modern PHP syntax and PHPUnit assertions where applicable [#6401](https://github.com/getkirby/kirby/pull/6401)
-- Streamlined input validation
-	- Use `<k-string-input>` for all text inputs [#6103](https://github.com/getkirby/kirby/pull/6103)
-	- `<k-slug-input>` is now built on top of `<k-string-input>` [#6320](https://github.com/getkirby/kirby/pull/6320)
-	- Stricter native URL validation for `<k-url-input>` [#6320](https://github.com/getkirby/kirby/pull/6320)
-	- Removed `vuelidate` library [#6099](https://github.com/getkirby/kirby/pull/6099)
-- `<k-writer>` has been merged into `<k-writer-input>` [#6172](https://github.com/getkirby/kirby/pull/6172)
-- `<k-languages-dropdown>` now receives Fiber dropdown endpoint instead of array of options [#6762](https://github.com/getkirby/kirby/pull/6762#pullrequestreview-2378165526)
+### Preparations for a move to Vue 3 in v6
+- `<k-draggable>` is directly built on top of SortableJS now [#6387](https://github.com/getkirby/kirby/pull/6387)
+- Replace Vue `$listeners` [#6107](https://github.com/getkirby/kirby/pull/6107)
+- Use strict CSS selectors for boolean (data) attributes [#6109](https://github.com/getkirby/kirby/pull/6109)
+- Explicitly added `$attrs.class` to components that disable inheriting attributes [#6332](https://github.com/getkirby/kirby/pull/6332)
+
+### Streamlined input validation
+- Use `<k-string-input>` for all text inputs [#6103](https://github.com/getkirby/kirby/pull/6103)
+- `<k-slug-input>` is now built on top of `<k-string-input>` [#6320](https://github.com/getkirby/kirby/pull/6320)
+- Stricter native URL validation for `<k-url-input>` [#6320](https://github.com/getkirby/kirby/pull/6320)
+- Removed `vuelidate` library [#6099](https://github.com/getkirby/kirby/pull/6099)
+
+### Panel Models
+
+- Removed `Kirby\Panel\Model::lock()` method
+- New `Kirby\Panel\Model::versions()` method
+- New top-level props in `Kirby\Panel\Model::props()`
+	- `api`
+	- `id`
+	- `link`
+	- `uuid`
+	- `versions`
+- New top-level props in `Kirby\Panel\File::props()`
+	- `extension`
+	- `filename`
+	- `mime`
+	- `preview`
+	- `type`
+	- `url`
+- New top-level props in `Kirby\Panel\Page::props()`
+	- `title`
+- New top-level props in `Kirby\Panel\Site::props()`
+	- `title`
+- New top-level props in `Kirby\Panel\User::props()`
+	- `avatar`
+	- `email`
+	- `language`
+	- `name`
+	- `role`
+	- `username`
+
+### Panel UI Backend
+
+- Drastically simplified `Kirby\Panel\ChangesDialog` class, which reads changed models directly on the backend with the new `Kirby\Content\Changes` class and sends the required data for each model directly to the frontend. We no longer need an additional async request.
+- Simplified the fields section backend code with the refactored `Kirby\Cms\Form` class [#7168](https://github.com/getkirby/kirby/pull/7168)
 - New `Kirby\Panel\Controller\Search` class [#6710](https://github.com/getkirby/kirby/pull/6710)
 - Removed unnecessary generic signature key for each form field. [#6712](https://github.com/getkirby/kirby/pull/6712)
-- New `this.$panel.content` module to access and alter the current model content (unsaved changes) [#6513](https://github.com/getkirby/kirby/pull/6513)
+
+### Vue Components
+- `<k-writer>` has been merged into `<k-writer-input>` [#6172](https://github.com/getkirby/kirby/pull/6172)
+- `<k-languages-dropdown>` now receives Fiber dropdown endpoint instead of array of options [#6762](https://github.com/getkirby/kirby/pull/6762#pullrequestreview-2378165526)
 - `<k-user-avatar>` component has been refactored to use individual props for `api`, `avatar`, `id` and `isLocked` instead of going through the `model` object. The `model` prop has been removed.
 - The `<k-user-profile>` component has been refactored to use individual props for `api`, `avatar`, `email`, `id`, `language` and `role` instead of going through the `model` object. The `model` object prop has been removed as well as the already deprecated `permissions` prop.
+
+### Panel JS API
+
+- New `this.$panel.content` module to access and alter the current model content (unsaved changes) [#6513](https://github.com/getkirby/kirby/pull/6513)
+- Clean up `panel/plugins.js`
+	- Moves some refactoring/clean up changes from [#7104](https://github.com/getkirby/kirby/pull/7104) up to v5
+    - Renames some helper functions to `resolve*`
+    - Exposes these for kirbyup and other tools
