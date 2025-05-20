@@ -282,7 +282,6 @@ Breaking:
 
 - Closures defined for the `content.salt` option will no longer receive a model when generating a salt for preview authentication tokens of drafts and versions as those tokens are now only based on the URI. The salt callback instead receives `null`  and is expected to return a fixed model-independent salt in this case. When generating a salt for a file media token, the file object is still passed as model. [#6836](https://github.com/getkirby/kirby/pull/6836)
 - The `api.methodOverwrite` option has been renamed to `api.methodOverride`
-- The `content.fileRedirects` option is now set to `false` by default. This protects uploaded file originals from unauthorized downloads. If you rely on the `https://example.com/some/page/file.pdf` or `https://example.com/some-site-file.pdf` routes, you can set the option to `true` or to a closure to control access dynamically per file. [#7216](https://github.com/getkirby/kirby/pull/7216)
 
 ### Controllers
 
