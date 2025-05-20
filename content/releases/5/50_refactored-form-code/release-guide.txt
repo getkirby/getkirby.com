@@ -179,6 +179,74 @@ $form->submit([
 ]);
 ```
 
+### Fill vs. Submit
+
+While `::fill()` is all about providing initial form values, the `::submit()` method is used to handle submit requests. Here's a typical form setup in a controller.
+
+```php 
+use Kirby\Cms\App;
+use Kirby\Form\Form;
+
+return function (App $kirby) {
+
+    // create a new form with some custom fields
+    $form = new Form(
+        fields: [
+            'name' => [
+                'label' => 'Name',
+                'type'  => 'text'
+            ],
+            'email' => [
+                'label' => 'Email',
+                'type'  => 'email'
+            ],
+            'message' => [
+                'label' => 'Message',
+                'type'  => 'textarea'
+            ]
+        ]
+    );
+
+    // provide initial values, e.g. from a model, session
+    // or any other data source.
+    $form->fill([
+        'name'  => 'Peter Griffin',
+        'email' => 'mail@example.com'
+    ]);
+
+    // fetch the request object
+    $request = $kirby->request();
+
+    // submit new values in a POST request
+    if ($request->is('POST')) {
+        $form->submit($request->data());
+
+        try {
+            $form->validate();
+
+            // store the data, send a message or do anything else here. 
+            // E.g. by using `$form->toStoredValues()`. This will include 
+            // the initial values and the submitted values. 
+
+            // Redirect on success
+            go('/somewhere');
+        } catch (Exception $e) {
+            return [
+                'form'  => $form,
+                'error' => $e->getMessage()
+            ];
+        }
+    }
+
+    return [
+        'form'  => $form,
+        'error' => null
+    ];
+
+}
+```
+
+
 ### Submitting closure values
 
 ```php
