@@ -307,7 +307,7 @@ $form->field('does-not-exist')
 
 ## Accessing values
 
-We've already used the `::toFormValues()` method a couple times in the example above. This will give you an array of values that can be used to create the HTML output for each field with the correct value. We use this in the Panel to set the value for each Vue field component. Attention: Some or our core field types (e.g. the blocks field, the files field, the structure field, etc.) might extend the value with additional info that is needed for the Panel. 
+We've already used the `::toFormValues()` method a couple times in the example above. This will give you an array of values that can be used to create the HTML output for each field with the correct value. We use this in the Panel to set the value for each Vue field component. Attention: Some of our core field types (e.g. the blocks field, the files field, the structure field, etc.) might extend the value with additional info that is needed for the Panel. 
 
 ```php
 use Kirby\Form\Form;
