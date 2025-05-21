@@ -39,7 +39,7 @@ class SecurityPage extends DefaultPage
 					'cvss'        => $advisory['cvss']['vector_string']
 				];
 			}
-		} catch (InvalidArgumentException) {
+		} catch (Throwable) {
 			// no GitHub API key is available
 			return [];
 		}
