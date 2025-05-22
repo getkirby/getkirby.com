@@ -376,7 +376,7 @@ Breaking:
 
 ### Fields
 
-- All fields: `signature` is longer available as field property when loading fields from the Panel backend [#6712](https://github.com/getkirby/kirby/pull/6712)
+- All fields: `signature` is no longer available as field property when loading fields from the Panel backend [#6712](https://github.com/getkirby/kirby/pull/6712)
 - Textarea field: File drag texts in the Panel always use the file UUID, if UUIDs are not disabled [#6948](https://github.com/getkirby/kirby/pull/6948)
 - Date field: Calendar dropdown input will show Sunday now as first day of the week (depending on the user's language). If you want to enforce Monday as first day of the week, you can set the `date.weekday` option to `1`. [#6635](https://github.com/getkirby/kirby/pull/6635)
 - Select field: `empty` prop was removed. Use combination of `required`, `placeholder` and `default` to replicate functionality [#6459](https://github.com/getkirby/kirby/pull/6459)
