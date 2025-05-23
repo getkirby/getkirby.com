@@ -28,7 +28,7 @@ class ReleasePage extends DefaultPage
 			foreach (Github::request('getkirby/kirby', 'git/refs/tags')->json() as $release) {
 				$releases[] = Str::after($release['ref'], 'refs/tags/');
 			}
-		} catch (InvalidArgumentException) {
+		} catch (Throwable) {
 			// no GitHub API key is available
 			return [];
 		}

@@ -11,7 +11,7 @@ In addition to all the features listed separately on the (link: /releases/5 text
 Enhancements:
 
 ## Core
-- Thumbnails will not any longer be regenerated when page sorting changes [#6432](https://github.com/getkirby/kirby/pull/6432)
+- Thumbnails will no longer be regenerated when page sorting changes [#6432](https://github.com/getkirby/kirby/pull/6432)
 - New `files.sort` permission [#1969](https://github.com/getkirby/kirby/issues/1969)
 - New `$app->role()` method that works like `$app->user()` to return a specific role or the role of the current user. [#6874](https://github.com/getkirby/kirby/pull/6874)
 - Support for content representation specific site controllers, e.g. `site.rss.php` [#6950](https://github.com/getkirby/kirby/pull/6950)
@@ -376,7 +376,7 @@ Breaking:
 
 ### Fields
 
-- All fields: `signature` is longer available as field property when loading fields from the Panel backend [#6712](https://github.com/getkirby/kirby/pull/6712)
+- All fields: `signature` is no longer available as field property when loading fields from the Panel backend [#6712](https://github.com/getkirby/kirby/pull/6712)
 - Textarea field: File drag texts in the Panel always use the file UUID, if UUIDs are not disabled [#6948](https://github.com/getkirby/kirby/pull/6948)
 - Date field: Calendar dropdown input will show Sunday now as first day of the week (depending on the user's language). If you want to enforce Monday as first day of the week, you can set the `date.weekday` option to `1`. [#6635](https://github.com/getkirby/kirby/pull/6635)
 - Select field: `empty` prop was removed. Use combination of `required`, `placeholder` and `default` to replicate functionality [#6459](https://github.com/getkirby/kirby/pull/6459)
