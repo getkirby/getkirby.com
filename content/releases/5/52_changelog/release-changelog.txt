@@ -11,7 +11,7 @@ In addition to all the features listed separately on the (link: /releases/5 text
 Enhancements:
 
 ## Core
-- Thumbnails will not any longer be regenerated when page sorting changes [#6432](https://github.com/getkirby/kirby/pull/6432)
+- Thumbnails will no longer be regenerated when page sorting changes [#6432](https://github.com/getkirby/kirby/pull/6432)
 - New `files.sort` permission [#1969](https://github.com/getkirby/kirby/issues/1969)
 - New `$app->role()` method that works like `$app->user()` to return a specific role or the role of the current user. [#6874](https://github.com/getkirby/kirby/pull/6874)
 - Support for content representation specific site controllers, e.g. `site.rss.php` [#6950](https://github.com/getkirby/kirby/pull/6950)
