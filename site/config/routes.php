@@ -55,4 +55,23 @@ return [
 			go('https://pixels.getkirby.com');
 		}
 	],
+	[
+		'pattern' => 'llms.txt',
+		'action'  => function () {
+			$ignore   = [];
+			$sections = [
+				'guide',
+				'reference',
+				'cookbook',
+				'quicktips'
+			];
+			$docs     = page('docs')
+				->children()
+				->find(...$sections)
+				->listed();
+
+			snippet('docs/llms/index', compact('docs', 'ignore'));
+			exit;
+		}
+	],
 ];
