@@ -1,8 +1,13 @@
 <?php
 
-use Kirby\Cms\Page;
-
 return [
+	[
+		// blocks all requests to *.html and returns 404
+		'pattern' => '(:all)\.html',
+		'action'  => function () {
+			return false;
+		}
+	],
 	...require dirname(__DIR__) . '/routes/buy.php',
 	...require dirname(__DIR__) . '/routes/docs.php',
 	...require dirname(__DIR__) . '/routes/legacy.php',
@@ -50,11 +55,4 @@ return [
 			go('https://pixels.getkirby.com');
 		}
 	],
-	[
-		// blocks all requests to *.html and returns 404
-		'pattern' => '(:all)\.html',
-		'action'  => function ($all) {
-			return false;
-		}
-	]
 ];
