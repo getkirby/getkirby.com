@@ -1,30 +1,17 @@
 <?php
 
-use Kirby\Cms\Page;
-
 return [
 	[
 		'pattern' => 'docs/(:all).md',
 		'action'  => function ($path) {
 			$page = page('docs/' . $path);
 
-			if (!$page) {
+			if ($page === null) {
 				return page('error');
 			}
-
-			$page->kirby()->response()->type('text/plain');
-
-			return new Page([
-				'slug'     => $page->slug(),
-				'parent'   => $page->parent(),
-				'template' => 'llms.md',
-				'content'  => [
-					'title'       => $page->title()->value(),
-					'intro'       => $page->intro()->value(),
-					'description' => $page->description()->value(),
-					'text'        => $page->text()->value(),
-				]
-			]);
+			
+			snippet('docs/llms/page-content-md', compact('page'));
+			exit;
 		}
 	],
 	[
