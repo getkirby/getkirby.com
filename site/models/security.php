@@ -28,15 +28,21 @@ class SecurityPage extends DefaultPage
 		try {
 			$incidents = [];
 			foreach (Github::request('getkirby/kirby', 'security-advisories')->json() as $advisory) {
+				$cvss = match (true) {
+					$advisory['cvss_severities']['cvss_v4']['score'] !== null => $advisory['cvss_severities']['cvss_v4'],
+					$advisory['cvss_severities']['cvss_v3']['score'] !== null => $advisory['cvss_severities']['cvss_v3'],
+					default => $advisory['cvss']
+				};
+
 				$incidents[] = [
 					'affected'    => Str::replace($advisory['vulnerabilities'][0]['vulnerable_version_range'], [', ', '-'], [' || ', ' - ']),
 					'fixed'       => $advisory['vulnerabilities'][0]['patched_versions'],
 					'description' => $advisory['summary'],
 					'link'        => $advisory['html_url'],
 					'severity'    => $advisory['severity'],
-					'score'       => $advisory['cvss']['score'],
+					'score'       => $cvss['score'],
 					'cve'         => $advisory['cve_id'],
-					'cvss'        => $advisory['cvss']['vector_string']
+					'cvss'        => $cvss['vector_string']
 				];
 			}
 		} catch (Throwable) {
