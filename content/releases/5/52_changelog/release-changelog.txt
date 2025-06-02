@@ -92,7 +92,7 @@ Enhancements:
 - New classes for core view buttons [#6545](https://github.com/getkirby/kirby/pull/6545): `Kirby\Panel\Ui\LanguagesDropdown` and `Kirby\Panel\Ui\PreviewDropdownButton`.
 
 ### Data
-- New third `$fail` argument for `Data::read()` and `Data::decode()`. By default, `Data::read()` and `Data::decode()` will throw an exception if the file does not exist or the data cannot be decoded. By setting `$fail` to false, you can block the exception and return an empty array instead. We’ve refactored our parts of the code where we used a try/catch block to achieve the same.
+- New third `$fail` argument for `Data::read()` and `Data::decode()`. By default, `Data::read()` and `Data::decode()` will throw an exception if the file does not exist or the data cannot be decoded. By setting `$fail` to false, you can circumvent the exception and return an empty array instead. We’ve refactored our parts of the code where we used a try/catch block to achieve the same.
 
   ```php
   use Kirby\Data\Data;
@@ -143,7 +143,7 @@ Enhancements:
 	- POST: `/api/(:lock)/changes/discard`
 	- POST: `/api/(:lock)/changes/publish`
 	- POST:  `/api/(:lock)/changes/save`
-- The `files` and `pages` sections introduce new `delete` API endpoints. Those endpoints can take a set of page or file ids and will delete each one. Errors will be caught and sent back in the details array of the final thrown exception.
+- The `files` and `pages` sections introduce new `delete` API endpoints. Those endpoints can take a set of page or file IDs and will delete each one. Errors will be caught and sent back in the details array of the final thrown exception.
 
 ## Panel
 - Radio and select fields: `default` option now supports Kirby queries [#6459](https://github.com/getkirby/kirby/pull/6459)
@@ -204,7 +204,7 @@ We’ve added the following new icons:
   this.$panel.events.emit("clipboard.write", "Add me to the clipboard");
 	```
 - New `uploadAsChunks` JS helper function [#6421](https://github.com/getkirby/kirby/pull/6421)
-- New `this.$helper.object.filter(object, predicate)`. [#6902](https://github.com/getkirby/kirby/pull/6902)
+- New `this.$helper.object.filter(object, predicate)` [#6902](https://github.com/getkirby/kirby/pull/6902)
 
 ----
 
@@ -301,8 +301,8 @@ Breaking:
 - `Kirby\Cms\ModelWithContent::lock()` will now always return a `Kirby\Content\Lock` object, even if the model is not currently locked. You can check for that case with `ModelWithContent::lock()->isLocked()`
 - `Kirby\Cms\ModelWithContent::version()` and `Kirby\Cms\ModelWithContent::versions()` are no longer available as direct field accessor. You need to use `$model->content()->version()`/`$model->content()->versions()` instead if you are using a field with the name `version`/`versions`.
 - `Kirby\Cms\Page::modified()`, `Kirby\Cms\File::modifiedContent()` and `Kirby\Cms\User::modified()` now use the current language instead of the default language.
-- Working with old model instances (objects thar already were e.g. updated and returned a new working copy), the models can no longer overwrite their content. This will now throw an exception if you try. Use the new model instances instead.
-- All methods in `*Rules` classes are now marked to return void instead of a boolean [#6660](https://github.com/getkirby/kirby/pull/6660)
+- Old model instances (objects that already were e.g. updated and returned a new model instance) can no longer modify their content. Calling actions on these old model instances will throw an exception. Use the new model instances instead.
+- All methods in `*Rules` classes are now marked to return `void` instead of a `bool` [#6660](https://github.com/getkirby/kirby/pull/6660)
 
 ### Content & Locking
 
@@ -412,12 +412,12 @@ Breaking:
     - `page.delete`
     - `page.move`
     - `user.delete`
-- The `panel.api.users.changePassword()` method now receives three arguments for the user ID, the current password of the acting user (new) and the new password to set [#7186](https://github.com/getkirby/kirby/pull/7186)
+- The `panel.api.users.changePassword()` method now receives three arguments for the user ID, the new password to set and the current password of the acting user (new) [#7186](https://github.com/getkirby/kirby/pull/7186)
 
 
 ## API
 
-- The `PATCH`: `account/password` and `PATCH`: `users/$user/password` API routes require an additional `currentPassword`parameter with the password of the acting user unless in password reset mode of the current user [#7186](https://github.com/getkirby/kirby/pull/7186)
+- The `PATCH`: `account/password` and `PATCH`: `users/$user/password` API routes require an additional `currentPassword` parameter with the password of the acting user unless in password reset mode of the current user [#7186](https://github.com/getkirby/kirby/pull/7186)
 - Removed API routes:
 	- `GET`: `/api/(:all)/lock`
 	- `PATCH`: `/api/(:all)/lock`
@@ -558,7 +558,7 @@ Deprecated:
 
 ### Config options
 
-- `panel.favicon` option throws deprecation warnings for `url` option (use `href` instead) and for `rel` key (use `rel`option instead)
+- `panel.favicon` option throws deprecation warnings for `url` option (use `href` instead) and for `rel` key (use `rel` option instead)
 
 ### Fields
 
