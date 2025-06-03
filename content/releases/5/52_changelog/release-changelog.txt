@@ -126,8 +126,10 @@ Enhancements:
     echo $language->code();
   }
   ```
-
 - New (class: Kirby\Cms\Language method: is) method to compare language objects
+
+### Translations
+- New Taiwanese translation (thanks to Ralph)
 - New i18n strings
 	- `copy.success`
 	- `copy.url`
@@ -148,7 +150,6 @@ Enhancements:
 ## Panel
 - Radio and select fields: `default` option now supports Kirby queries [#6459](https://github.com/getkirby/kirby/pull/6459)
 - Sections: improved title and info wrapping [#6447](https://github.com/getkirby/kirby/pull/6447)
-
 - The fields section now passes all values on input of any field instead of updating just the one field (similar to on submit) [#6517](https://github.com/getkirby/kirby/pull/6517)
 - Improved contrast for some theme colors (e.g. `aqua-icon` theme)
 - Writer: nodes with `inline: true` in their button definition are displayed as inline buttons in toolbar (instead inside the dropdown) [#6902](https://github.com/getkirby/kirby/pull/6902)
@@ -220,6 +221,7 @@ Bugfixes:
 - `User::delete()` will now properly call `file.delete` hooks for deleted user files
 - Fixed invalid parent query in `Kirby\Cms\FileBlueprint` tests [#7167](https://github.com/getkirby/kirby/pull/7167)
 - URLs like `https://example.com/some-invalid-page/some-site-file.pdf` are no longer resolved to an existing site file [#7217](https://github.com/getkirby/kirby/pull/7217)
+- The `Kirby\Http\Uri` class now properly serializes URIs of the form /subfolder/. [#7255](https://github.com/getkirby/kirby/pull/7255)
 
 ## Panel
 
@@ -282,6 +284,7 @@ Breaking:
 
 - Closures defined for the `content.salt` option will no longer receive a model when generating a salt for preview authentication tokens of drafts and versions as those tokens are now only based on the URI. The salt callback instead receives `null`  and is expected to return a fixed model-independent salt in this case. When generating a salt for a file media token, the file object is still passed as model. [#6836](https://github.com/getkirby/kirby/pull/6836)
 - The `api.methodOverwrite` option has been renamed to `api.methodOverride`
+- The `content.fileRedirects` option is now set to `false` by default to secure all original files in your content folder. 
 
 ### Controllers
 
@@ -585,6 +588,7 @@ Refactored:
 	- `str_contains()`
 	- `str_starts_with()`
 	- `str_ends_with()`
+- Normalize timezone during unit tests [#7248](https://github.com/getkirby/kirby/pull/7248)
 
 ### Model improvements
 
