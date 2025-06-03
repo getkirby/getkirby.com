@@ -6,17 +6,14 @@
 		}
 	},
 	"require": {
+		"phpdocumentor/reflection-docblock": "^5.3.0",
 		"caxy/php-htmldiff": "^0.1.15",
-		"phpstan/phpdoc-parser": "^2.1.0"
+		"league/html-to-markdown": "^5.1.1"
 	},
 	"replace": {
 		"ezyang/htmlpurifier": "*"
 	},
 	"config": {
 		"optimize-autoloader": true
-	},
-	"scripts": {
-		"test": "phpunit",
-		"test:coverage": "XDEBUG_MODE=coverage phpunit --coverage-html=tests/coverage"
 	}
 }
